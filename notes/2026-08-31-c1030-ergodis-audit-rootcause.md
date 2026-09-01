@@ -307,6 +307,38 @@ countermeasure to the round-1 fabrication.
 Items 1 through 4 and 6 are mechanical or near-mechanical. Item 5 needs a decision before anything
 is written. Items 7 through 9 are real work whose scope depends on that decision.
 
+### Disposition of recommendation 1
+
+Both claims were re-examined after repair, rather than merely re-running their
+old controls.
+
+- **Finding 20 reverses the isolated performance claim.** Commits `8b7dc358f`
+  and `2b2b3e39d` replace the vacuous `[I|R]` input with a seeded, guaranteed
+  full-rank non-RREF fixture and assert that both implementations mutate it.
+  The corrected equivalence gate passes 256 matrices at each extension degree
+  3 through 8. Seven seed rotations show that the specialized binary reducer
+  is faster, not slower: table/binary is 1.009912x cycles (`t=7.47`) at `4 x
+  5` and 1.054166x (`t=23.44`) at `8 x 9`, with corresponding instruction
+  ratios 1.081415x and 1.133774x. The old isolated result is withdrawn. The
+  application decision remains a rejection for a different, independently
+  measured reason: elimination received no sample at the 0.01% threshold in
+  the full PRS profile, so specializing it cannot materially accelerate that
+  workload.
+- **Finding 21 narrows but does not overturn the recorded BB288 result.** Commit
+  `8d71c3b51` makes each anchor's positional frontier independent of
+  shard-local incumbents, which are now applied only after assignment. A
+  post-fix three-way radius-2 replay visits exactly 10 candidates per shard and
+  reproduces the 30-candidate no-witness aggregate. Inspection of the old run
+  establishes that it was also witness-free, hence its incumbent never changed
+  and its actual frontier did not diverge. Its numeric result survives; the old
+  generic `complete-compatible-cover` rationale does not. Seven interleaved
+  parent/candidate counter pairs show no significant operational regression:
+  instructions are 0.9999997x at 1T (`t=-1.08`) and 0.9999599x at 12T
+  (`t=-1.40`), while 12T cycles are 1.002252x (`t=1.57`). A cold frontier
+  commitment is still required before the ledger verdict itself constitutes a
+  general cover certificate, and odd requested maxima currently expose a
+  separate parity-normalization false-rejection foot-gun.
+
 A general test worth adopting alongside these, since it would have caught findings 20, 21, 29, and
 33 as a class: for every check, assertion, and verdict in the evidence path, construct the input
 that should make it fail and confirm that it does.

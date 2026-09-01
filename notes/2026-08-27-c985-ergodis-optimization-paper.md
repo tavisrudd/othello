@@ -381,6 +381,19 @@ files are disposable and may be deleted at any time.
    candidates and a complete no-witness conclusion.  The earlier BB288 result
    was also in the benign witness-free regime, so its frontier never diverged;
    the result survives, while the former generic coverage wording did not.
+   Seven interleaved counter pairs against parent `9e7073401` find the repair
+   operationally neutral on the unsharded BB288 weight-16 control.  At 1T the
+   parent/candidate geometric ratios are 0.9999997x instructions (`t=-1.08`),
+   0.9999996x branches (`t=-0.90`), and 1.001481x branch misses (`t=0.72`);
+   cycles are frequency/preemption-noisy at 0.93794x (`t=-1.55`).  At 12T they
+   are 0.9999599x instructions (`t=-1.40`), 0.9999378x branches (`t=-1.39`),
+   0.998323x branch misses (`t=-0.83`), and 1.002252x cycles (`t=1.57`).  No
+   counter moves significantly and the stable-frontier repair adds no
+   measurable hot-path cost.  This does not yet upgrade the ledger itself to a
+   mathematical cover certificate: the next schema must commit the common
+   per-anchor frontier, and the current parity-normalized searched maximum can
+   falsely reject an otherwise consistent ledger when an odd requested maximum
+   is recorded above an even completed radius.
    missing, duplicate, mixed-identity, interrupted, and malformed-witness
    controls fail closed.  Items (b)--(d) have also landed: a planted weight-two
    logical witness is recovered from every position of a verified eight-cycle;
