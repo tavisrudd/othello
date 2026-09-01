@@ -1018,6 +1018,25 @@ files are disposable and may be deleted at any time.
    scan. This prevents one live-only state from poisoning a later refresh and
    failing an otherwise valid evolution job. Strict clippy and the complete
    all-target/all-feature test and doc-test suite pass.
+
+   Commit `e1f8555a6` lands the first private operational publisher on the
+   alignment-attachment adapter. Its auxiliary watcher samples the already
+   published coarse heartbeat once per second or after a real controller
+   notification; the search thread gains no check, store, allocation, lock, or
+   I/O. Roots group by `(root_orbit, root_initial_packing, root_sized)` with
+   absolute observed root count and maximum root-state cost. Runtime-configured
+   branch/packing thresholds choose numeric- or structural-first routing, so
+   experiments require no recompilation. Only changed observations cross the
+   socket, active evolution receives a coalesced refresh request, and live-only
+   tuples become counted rejections rather than job failures. Pure controls
+   verify idempotence, retry, aggregation, and strategy selection; an actual
+   campaign-server control verifies the complete publisher-to-accumulator
+   protocol. The owned binary tests pass and direct `rustc -D warnings` is
+   clean. Package-wide private clippy is temporarily blocked by unrelated
+   in-flight exact-tablebase signature changes, which this tranche does not
+   touch. Next run balanced/routed paired campaigns on a frozen held-out
+   alignment corpus and compare perfect-hit candidate ordinal, semantic-op
+   rows, operator mix, and evidence bytes.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
