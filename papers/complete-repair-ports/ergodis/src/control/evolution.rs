@@ -586,6 +586,12 @@ impl EvolutionTargetAccumulator {
         &self.fields
     }
 
+    pub(super) fn contains(&self, values: &[i64]) -> Result<bool, ControlError> {
+        Ok(self
+            .nodes
+            .contains_key(&TargetKey::from_values(values, self.fields.len())?))
+    }
+
     pub(super) fn nodes(&self) -> usize {
         self.nodes.len()
     }

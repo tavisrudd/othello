@@ -255,7 +255,9 @@ observation, with optional `--strategy balanced|numeric|structural`;
 `target-profile-status` reports the bounded occupancy. Repeating an
 identical observation or edge is idempotent. Nodes and edges canonicalize by
 their exact tuples, so message order does not change the snapshot bytes or
-hash. `evolve-start --target-profile-current` takes an owned snapshot before
+hash. A first-seen tuple absent from the frozen feature batch is rejected at
+the observation boundary rather than poisoning a later evolution refresh.
+`evolve-start --target-profile-current` takes an owned snapshot before
 starting the worker. `evolve-profile-refresh` queues the current snapshot for
 the next generation boundary of the active job. Only the latest pending
 snapshot is retained, and the response reports whether it replaced an older

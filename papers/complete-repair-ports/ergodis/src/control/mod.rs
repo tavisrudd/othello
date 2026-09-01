@@ -1156,6 +1156,36 @@ impl Campaign {
         };
         let profile = self
             .target_profile
+            .as_ref()
+            .ok_or_else(|| ControlError::Invalid("target profile has not been reset".into()))?;
+        if !profile.contains(&values)? {
+            let field_indices = profile
+                .fields()
+                .iter()
+                .map(|field| {
+                    self.batch
+                        .fields
+                        .iter()
+                        .position(|candidate| candidate == field)
+                        .ok_or_else(|| {
+                            ControlError::Invalid("target profile lost a frozen field".into())
+                        })
+                })
+                .collect::<Result<Vec<_>, _>>()?;
+            let present = (0..self.batch.rows()).any(|row| {
+                field_indices
+                    .iter()
+                    .zip(&values)
+                    .all(|(&field, &value)| self.batch.row(row)[field] == value)
+            });
+            if !present {
+                return Err(ControlError::Invalid(
+                    "target-profile-observe tuple is absent from the frozen batch".into(),
+                ));
+            }
+        }
+        let profile = self
+            .target_profile
             .as_mut()
             .ok_or_else(|| ControlError::Invalid("target profile has not been reset".into()))?;
         let changed = profile.observe(&values, mass, unit_cost, strategy)?;
@@ -2658,6 +2688,13 @@ mod tests {
             .unwrap_err()
             .to_string()
             .contains("balanced, numeric, or structural"));
+        assert!(campaign
+            .target_profile_observe(&json!({
+                "values": [98, 1], "mass": 1, "unit_cost": 4
+            }))
+            .unwrap_err()
+            .to_string()
+            .contains("absent from the frozen batch"));
         assert!(campaign
             .target_profile_observe(&json!({
                 "values": [99, 1], "mass": 1, "unit_cost": 4
