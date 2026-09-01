@@ -49,7 +49,7 @@ problem has already been compiled into exact finite observables.
 | Proposal breadth | AlphaEvolve evolves whole files with an LLM ensemble; CodeEvolve adds inspirations, meta-prompts, and depth refinement | bounded hand-written mutations over a typed VM | large autonomy gap, but a much smaller and safer search space |
 | Diversity | AlphaEvolve uses MAP-Elites/islands; open CodeEvolve uses CVT-MAP-Elites, islands, and migration | exact outcome classes plus failure/operator/cost niches and bounded resumable elites | add genuinely independent operator-prior islands only after measured niche use |
 | Evaluation economy | AlphaEvolve uses cascades and parallel evaluators | exact monotone cascade, failure targeting, bitmap premise screening, and bounded full replay | add operational shadow stages and profile-directed batches |
-| Target selection | TTT-Discover uses maximum-oriented PUCT; runtime CodeEvolve profiles weighted component graphs | deterministic best-impact-per-cost heap plus a live bounded target graph, one-slot exploration floor, evidenced refresh, and explicit non-pruning numeric/structural mutation routing | connect domain publishers and measure discovery efficiency on held-out campaigns |
+| Target selection | TTT-Discover uses maximum-oriented PUCT; runtime CodeEvolve profiles weighted component graphs | deterministic best-impact-per-cost heap plus a live bounded target graph, one-slot exploration floor, evidenced refresh, explicit non-pruning numeric/structural mutation routing, and exact source-target attribution | add a bounded target-local learner that abstains when theorem-derived repair already dominates |
 | Learning from a campaign | TTT-Discover updates the model at test time; HTPS trains online from proof search | no learned proposal policy | defer weight updates until exact archives and rewards are calibrated |
 | Learning from failure | Minimo hindsight-relabels failed proof trees into achieved theorems and proofs | typed proper subexpressions are retained only after zero-false-positive replay, with explicit no-authority obligations | extend from frozen feature rows to intermediate solver states and proof handles |
 | Cumulative theory | Minimo identifies lemma accumulation and premise selection as necessary for depth | bounded OR-composition DAG, exact domain equality, marginal-coverage/cost premise rank, and cross-campaign replay | extend obligations to solver states and import kernel proof handles |
@@ -237,8 +237,7 @@ and a strict bounded profile can now attach measured mass/unit cost and
 dependency/continuation edges. Its cycle-safe transitive closure sums reachable
 work once and guides only surplus expansion quota after the one-slot
 exploration floor. Semantic evaluation and authority do not consume profile
-weights. Automatic aggregation from live solver publications remains open. The
-generic watcher-side accumulator is now landed:
+weights. The generic watcher-side accumulator is now landed:
 campaign-local absolute observations and edges canonicalize independently of
 message order, snapshot directly into `evolve-start`, and persist the complete
 profile plus verified hash in evidence. Thus private/application producers no
@@ -254,9 +253,11 @@ finite candidate set, and changed routes selectively reset stale continuation
 cursors. Thus the profile can route proposal effort without gaining pruning or
 proof authority.
 
-Next, connect existing root progress, debt ledgers, exceptional-state counts,
-and perf counters to the landed watcher accumulator, then compare balanced and
-routed discovery per exact candidate and semantic-op row on held-out campaigns.
+Root progress is connected; debt ledgers, exceptional-state counts, and perf
+counters remain application-publisher frontiers. A child now carries its
+source target class into evidence, including when it repairs that target and
+has no remaining mismatch, so target-local operator value is attributable
+without inference from the child's next failure.
 
 The first operational adapter is now landed privately for alignment search. It
 groups the existing coarse heartbeat by exact root orbit, initial packing, and
@@ -264,17 +265,29 @@ sizing status, publishes changed absolute root-count/maximum-cost observations,
 and selects numeric- or structural-first routing from runtime-configured shape
 thresholds. All sampling, aggregation, serialization, and socket work stays in
 the auxiliary watcher; the search publication and safe-point paths are
-unchanged. The remaining gate is empirical: balanced versus routed held-out
-campaigns must improve perfect-hit ordinal or semantic-op rows before the
-heuristic is treated as useful rather than merely operational.
+unchanged.
+
+The first application gate is now measured on exact alignment root-cost
+corpora. Numeric routing reaches the exact 39/56 observable-interface ceiling
+on the development corpus in 32 candidates / 5,376 semantic-op rows versus 49
+/ 8,232 balanced, a 1.53x gain. On the separately frozen held-out corpus, every
+route reaches its exact 20/35 interface ceiling at candidate 2 / 210 rows
+because the counterexample-threshold theorem fires before generic ordering.
+Numeric routing is neutral on discovery there and only reduces completed work
+and evidence bytes by about 5%. This rejects unconditional routing while
+supporting a contextual policy with a built-in-theorem abstention rule.
 
 ### P2 — learned proposer or test-time training
 
-Only after the above archives are stable, train or adapt a proposer on exact
-campaign transitions. The first useful learned object is likely operator and
-target selection, not arbitrary Rust generation. TTT-style weight adaptation
-is expensive and optimizes a less transparent state; an offline contextual
-bandit over typed mutations should be the first learned baseline.
+The archives and source-target attribution are now sufficient for the first
+bounded learner. The useful learned object remains operator-family and target
+selection, not arbitrary Rust generation. TTT-style weight adaptation is
+expensive and optimizes a less transparent state; an offline contextual bandit
+over typed mutations remains the first baseline. It must use exact improvement
+per semantic-op row, preserve the one-slot exploration floor and complete
+finite mutation set, and abstain whenever the failure-derived repair has
+already supplied an improving child for that source target. A frozen replay
+must reproduce every policy update and chosen route from the evidence stream.
 
 ## Near-term acceptance tests
 

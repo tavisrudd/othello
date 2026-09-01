@@ -1049,10 +1049,8 @@ files are disposable and may be deleted at any time.
    inputs, two seeds, six streamed evidence files, hashes, a create-only replay
    harness, and a compact interpretation memo; ephemeral manifests and control
    credentials are excluded. These deliberately shaped controls validate
-   routing, not end-to-end C880 or general synthesis speed. The remaining
-   application gate is a balanced/routed comparison on a frozen held-out
-   campaign corpus, measuring perfect-hit ordinal, semantic-op rows, operator
-   mix, and evidence bytes.
+   routing, not end-to-end C880 or general synthesis speed. The application
+   gate and its evidence attribution are recorded below.
 
    Commit `032a5b0de` closes an attribution hole exposed while designing that
    gate. A child now carries its parent's compact target-class ID through the
@@ -1065,8 +1063,35 @@ files are disposable and may be deleted at any time.
    changes. The refreshed-profile control now proves an exact child records
    source target `[1]`, no remaining target, and full weighted correctness.
    Strict all-target/all-feature clippy, the complete suite, and doc tests pass.
-   This is the evidence substrate for a bounded target-local routing learner;
-   the learner remains gated on the held-out comparison above.
+   This is the evidence substrate for a bounded target-local routing learner.
+
+   Commits `5e39e4798` and `a7ad5c471` close the first application gate with
+   exact alignment root-cost corpora. The generator forces every root, copies
+   one initialized progress point into preallocated diagnostic state, and
+   serializes only after search. Each controlled result must match a second
+   ordinary uncontrolled solve in answer and exact state, duplicate, and
+   infeasible counters. Median-cost labels collapse to five observable feature
+   classes on the 56-row 8-point/budget-8 development corpus and four classes
+   on the separately frozen 35-row 7-point/budget-7 held-out corpus. Summing
+   each class majority proves exact interface ceilings of 39/56 and 20/35;
+   every strategy's best plan attains its respective ceiling.
+
+   On development, numeric routing reaches that certified ceiling at trial 32
+   / 5,376 semantic-op rows versus trial 49 / 8,232 for balanced and structural,
+   a 1.53x discovery-efficiency gain. It tests 106 rather than 124 candidates
+   and emits 150,376 rather than 178,332/178,358 evidence bytes. On the frozen
+   held-out corpus all routes reach the ceiling at trial 2 / 210 semantic-op
+   rows: the theorem-derived counterexample-threshold repair fires before
+   generic ordering can matter. Numeric routing neither delays that repair nor
+   improves it; it merely exhausts at 118 versus 124 candidates and emits
+   168,011 versus 177,017/177,043 bytes. This is the desired abstention signal:
+   a target-local learner may exploit family evidence only when the exact
+   counterexample repair has not already dominated. Reports now verify their
+   streamed byte counts against stable footer summaries, and the audit uses
+   short PID-isolated socket paths so durable evidence names cannot exceed the
+   Unix-domain limit. The next evolution tranche is therefore a bounded
+   target-local learner with a cold-start/built-in-theorem abstention rule, not
+   unconditional automatic routing.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
