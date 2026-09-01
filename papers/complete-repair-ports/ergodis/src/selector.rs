@@ -348,7 +348,11 @@ impl<F: FiniteField> SparseSelector<F> {
                 continue;
             }
             if let Some(last) = canonical.last_mut().filter(|last| last.index() == index) {
-                last.set_coefficient(F::add(last.coefficient(), coefficient));
+                last.set_coefficient(
+                    (FieldElement::<F>::from_canonical(last.coefficient())
+                        + FieldElement::from_canonical(coefficient))
+                    .value(),
+                );
             } else {
                 canonical.push(SparseTerm::new(index, coefficient));
             }
@@ -432,23 +436,25 @@ impl<F: FiniteField> SparseSelector<F> {
                 };
                 workspace.powers[0] = 1;
                 for exponent in 1..=usize::from(degree) {
-                    workspace.powers[exponent] = F::mul(workspace.powers[exponent - 1], value);
+                    workspace.powers[exponent] =
+                        (FieldElement::<F>::from_canonical(workspace.powers[exponent - 1])
+                            * FieldElement::from_canonical(value))
+                        .value();
                 }
                 let mut output = 0;
                 let mut cursor = 0;
                 while cursor < source.len() {
                     let tail = source[cursor].index() / width;
-                    let mut result = 0_u8;
+                    let mut result = FieldElement::<F>::from_canonical(0);
                     while cursor < source.len() && source[cursor].index() / width == tail {
                         let exponent = (source[cursor].index() % width) as usize;
-                        result = F::add(
-                            result,
-                            F::mul(source[cursor].coefficient(), workspace.powers[exponent]),
-                        );
+                        result = result
+                            + FieldElement::from_canonical(source[cursor].coefficient())
+                                * FieldElement::from_canonical(workspace.powers[exponent]);
                         cursor += 1;
                     }
-                    if result != 0 {
-                        target[output] = SparseTerm::new(tail, result);
+                    if result.value() != 0 {
+                        target[output] = SparseTerm::new(tail, result.value());
                         output += 1;
                     }
                 }
@@ -483,21 +489,21 @@ impl<F: FiniteField> SparseSelector<F> {
         {
             return Err(SelectorError::Shape);
         }
-        let mut result = 0_u8;
+        let mut result = FieldElement::<F>::from_canonical(0);
         for term in &self.terms {
             let mut index = term.index();
-            let mut monomial = term.coefficient();
+            let mut monomial = FieldElement::<F>::from_canonical(term.coefficient());
             for (&degree, &coordinate) in self.degrees.iter().zip(assignment) {
                 let width = u64::from(degree) + 1;
                 let exponent = index % width;
                 index /= width;
                 for _ in 0..exponent {
-                    monomial = F::mul(monomial, coordinate);
+                    monomial = monomial * FieldElement::from_canonical(coordinate);
                 }
             }
-            result = F::add(result, monomial);
+            result = result + monomial;
         }
-        Ok(result)
+        Ok(result.value())
     }
 }
 
