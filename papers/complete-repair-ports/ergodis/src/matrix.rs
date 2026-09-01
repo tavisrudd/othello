@@ -213,8 +213,8 @@ impl Matrix {
         if self.cols() != candidate.cols() {
             return Err(MatrixError::Shape);
         }
-        let rank = self.rows();
-        let mut joined = self.clone();
+        let mut joined = self.canonical_row_basis_field::<F>()?;
+        let rank = joined.rows();
         for row in 0..candidate.rows() {
             joined = joined.append_row_field::<F>(candidate.row(row))?;
         }
@@ -363,6 +363,15 @@ mod tests {
         assert_eq!(basis.rows(), 1);
         assert_eq!(basis.as_slice(), &[1, 2, 0]);
         assert_eq!(basis.canonical_row_basis::<3>().unwrap(), basis);
+    }
+
+    #[test]
+    fn row_space_containment_uses_rank_not_presented_row_count() {
+        let redundant = Matrix::new::<2>(2, 2, vec![1, 0, 1, 0]).unwrap();
+        let inside = Matrix::new::<2>(1, 2, vec![1, 0]).unwrap();
+        let outside = Matrix::new::<2>(1, 2, vec![0, 1]).unwrap();
+        assert!(redundant.row_space_contains::<2>(&inside).unwrap());
+        assert!(!redundant.row_space_contains::<2>(&outside).unwrap());
     }
 
     #[test]
