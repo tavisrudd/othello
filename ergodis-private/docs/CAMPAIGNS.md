@@ -96,6 +96,13 @@ including cumulative semantic-op rows. The committed development and held-out
 alignment controls, hashes, replay commands, and bounded interpretation are in
 `evidence/alignment-root-cost-routing-README.md`.
 
+`routing_policy_audit` is the first cold archive-trained routing layer. It
+verifies every input and evidence hash, groups only exact target tuples, and
+learns a non-balanced route only after the configured number of matched audits
+show at least one win and no semantic-op-row regression. Otherwise it emits an
+explicit balanced/abstain decision. It does not run in the campaign daemon or
+solver.
+
 When `--socket` is omitted, a private endpoint is derived under
 `$XDG_RUNTIME_DIR/ergodis/<uid>/`. There is no `/tmp` fallback. The durable
 manifest is mode 0600 inside a mode-0700 run directory and binds the full run

@@ -45,6 +45,22 @@ corpus it is 15.7% smaller.
 This is evidence for conditional routing, not a claim that numeric ordering
 universally improves alignment search.
 
+## Conservative archive-trained policy
+
+`routing_policy_audit` independently verifies every audit input, streamed
+evidence hash, and evidence byte count before grouping matched runs by exact
+target tuple. A non-balanced route is learned only when all routes reached the
+same best score, the candidate route never used more semantic-op rows than
+balanced on any training corpus, it won at least once, and the configured
+minimum number of matched reports is present.
+
+On these two corpora it recommends numeric routing: aggregate work to the same
+certified ceilings is 5,586 semantic-op rows versus 8,442 balanced, a 1.51x
+gain, with one win and one tie. The adjacent minimum-three-reports control
+returns balanced with `insufficient-matched-reports`. These are cold archive
+decisions; they do not prune mutations, change proof authority, or run in the
+solve loop.
+
 Machine-readable corpus reports, evolution reports, and all referenced
 streamed JSONL evidence are retained in this directory.  Each report carries
 the SHA-256 hashes of its inputs and evidence.  Ephemeral manifests, ledgers,
@@ -71,3 +87,14 @@ CARGO_TARGET_DIR=../rust/target-c985-private-profile \
 
 Replace `8` by `7` in the corpus paths and use `--points 7 --budget 7` to
 replay the held-out corpus with otherwise identical evolution settings.
+
+The conservative policy replay is:
+
+```sh
+CARGO_TARGET_DIR=../rust/target-c985-private-profile \
+  cargo run --release --bin routing_policy_audit -- \
+  --report evidence/alignment-root-cost-routing-report.json \
+  evidence/alignment-root-cost-routing-heldout-report.json \
+  --package-root . --minimum-reports 2 \
+  --output evidence/replay-alignment-root-cost-routing-policy.json
+```
