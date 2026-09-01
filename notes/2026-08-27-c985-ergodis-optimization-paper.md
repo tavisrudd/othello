@@ -868,9 +868,25 @@ files are disposable and may be deleted at any time.
    the shared 64-node ledger, and all counters are footer-visible.  The result
    remains explicitly untrusted pending its compatible-batch replay
    obligation.  Strict all-target/all-feature clippy and the complete suite
-   pass.  Next persist and replay the accumulated fragment DAG across
-   compatible campaigns, then add counterexample-separating premise selection;
-   do not import a learned proposer before those exact controls.
+   pass.
+
+   Commit `ee72e11da` persists that DAG across compatible campaigns.
+   `resume_evidence` imports at most 64 distinct hindsight nodes across its
+   eight-archive bound, independently of the 32 ordinary seed slots.  Every
+   archive record is validated even after retention capacity is full: identity,
+   predicate output, structural semantic hash, compiled-plan hash, and fresh
+   compilation must all agree.  The daemon then replays each node on the
+   current frozen batch before ledger admission; a new false positive or zero
+   positive coverage rejects it.  Accepted nodes are streamed as
+   `hindsight-replay` records with source archive, current exact coverage, and
+   the unchanged no-authority obligation.  The end-to-end control loads both
+   primitive fragments and their composition, replays all three, and verifies
+   their three durable records; a changed negative row separately invalidates
+   the formerly sound `x > 0` node in one row.  Replay acceptance, rejection,
+   and row counters are footer-visible.  Strict all-target/all-feature clippy
+   and the complete suite pass.  Next add counterexample-separating premise
+   selection and explicit domain-overlap scoring; do not import a learned
+   proposer before those exact controls.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
