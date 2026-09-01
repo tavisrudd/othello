@@ -614,7 +614,7 @@ fn scan_state(
                     collector.metrics.ancestral_secant_edges += edges;
                     collector.metrics.ancestral_secant_zero_degree_defects += zero_degree;
 
-                    let next_support = old_support - consumed_count + created_count;
+                    let next_support = next_defects.count();
                     let successor_legal = successor.legal(grid);
                     let next_omega = successor.omega(grid, successor_legal);
                     if (next_support, next_omega) >= (old_support, old_omega) {
@@ -834,9 +834,12 @@ struct Summary {
     q: u16,
     mode: &'static str,
     states_requested: usize,
-    seed: u64,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    seed: Option<u64>,
     threads: usize,
     grundy_cap: usize,
+    candidate_cap: usize,
+    admission_candidates_truncated: bool,
     full_admission: bool,
     #[serde(skip_serializing_if = "Option::is_none")]
     elapsed_seconds: Option<f64>,
@@ -943,7 +946,7 @@ fn main() -> anyhow::Result<()> {
 
     let collector = shared.into_inner().expect("collector mutex");
     let summary = Summary {
-        schema: "c80-hall-rematch/v1",
+        schema: "c80-hall-rematch/v2",
         q: arguments.q,
         mode: if arguments.exhaustive {
             "exhaustive-size-four"
@@ -955,9 +958,12 @@ fn main() -> anyhow::Result<()> {
         } else {
             arguments.states
         },
-        seed: arguments.seed,
+        seed: (!arguments.exhaustive).then_some(arguments.seed),
         threads: arguments.threads,
         grundy_cap: arguments.grundy_cap,
+        candidate_cap: arguments.candidate_cap,
+        admission_candidates_truncated: collector.metrics.failures_admission_candidates
+            > collector.candidates.len() as u64,
         full_admission: arguments.full_admission,
         elapsed_seconds: if arguments.deterministic {
             None
