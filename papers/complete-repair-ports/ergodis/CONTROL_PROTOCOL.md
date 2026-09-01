@@ -73,6 +73,30 @@ a caller-bounded top set. The daemon stops before the first record that would
 cross `max_evidence_bytes` and reports `truncated: true`; it never silently
 writes beyond the configured campaign trace limit.
 
+## Textual plan authoring
+
+Single plans passed to `ergodisctl try` and `ergodisctl apply` may use the
+bounded textual syntax instead of hand-authored JSON:
+
+```text
+plan "rigid-order" {
+  role ordering;
+  output score;
+  scope root.kind 0x0000000000000005;
+  expr select((rigid == 1) && !(debt > 3), max(score * 4, abs(slack)), -7);
+}
+```
+
+The parser accepts ordinary arithmetic, comparisons, Boolean connectives, and
+the bounded `abs`, `min`, `max`, and `select` forms. Quoted names allow field
+names outside the identifier grammar. Text and expression-JSON decode to the
+same typed AST and use the same lowering and type checker; canonical formatting
+has parse/format/parse identity, and equivalent text and JSON lower to identical
+serialized bytecode. Input bytes, tokens, expression nodes, and depth are all
+bounded before a plan can enter the daemon. JSON and JSONL remain the protocol,
+persistence, bulk-batch, and diagnostic encodings; text is the human authoring
+surface only.
+
 ## Proof authority
 
 The daemon currently advertises `proof_authority: false`. Plans may diagnose

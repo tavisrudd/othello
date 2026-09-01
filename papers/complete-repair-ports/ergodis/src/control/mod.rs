@@ -20,11 +20,16 @@ use std::time::Duration;
 mod client;
 mod evolution;
 mod synthesis;
+mod text;
 mod vm;
 
 pub use client::PlanArena;
 use evolution::{run_evolution, EvolutionBounds, EvolutionProgress};
 use synthesis::learn_decision_tree;
+pub use text::{
+    format_expression_plan, parse_and_lower_plan, parse_expression_plan, MAX_PLAN_TEXT_BYTES,
+    MAX_PLAN_TEXT_TOKENS,
+};
 pub use vm::{
     evaluate_plan, CompiledPlan, Evaluation, ExpressionPlanSpec, FeatureBatch,
     FeatureGeneratorProvenance, PlanDocument, PlanExpr, PlanOp, PlanOutput, PlanRole, PlanScope,

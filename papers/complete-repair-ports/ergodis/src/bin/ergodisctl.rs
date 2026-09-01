@@ -1,12 +1,13 @@
 use anyhow::{bail, Context, Result};
 use clap::{Parser, Subcommand};
 use ergodis::control::{
-    read_manifest, send_request, PlanDocument, PlanOp, PlanOutput, PlanRole, PlanScope, PlanSpec,
+    parse_and_lower_plan, read_manifest, send_request, PlanDocument, PlanOp, PlanOutput, PlanRole,
+    PlanScope, PlanSpec, MAX_PLAN_TEXT_BYTES,
 };
 use serde_json::{json, Value};
 use std::collections::BTreeSet;
 use std::fs::{File, OpenOptions};
-use std::io::{BufRead, BufReader, BufWriter, Write};
+use std::io::{BufRead, BufReader, BufWriter, Read, Write};
 use std::os::unix::fs::OpenOptionsExt;
 use std::path::PathBuf;
 use std::thread;
@@ -187,13 +188,24 @@ enum Command {
 }
 
 fn read_plan(path: &PathBuf) -> Result<PlanSpec> {
-    let document: PlanDocument = serde_json::from_reader(BufReader::new(
-        File::open(path).with_context(|| format!("cannot open plan {}", path.display()))?,
-    ))
-    .with_context(|| format!("invalid plan {}", path.display()))?;
-    document
-        .lower()
-        .with_context(|| format!("cannot lower plan {}", path.display()))
+    let file = File::open(path).with_context(|| format!("cannot open plan {}", path.display()))?;
+    let mut text = String::new();
+    file.take((MAX_PLAN_TEXT_BYTES + 1) as u64)
+        .read_to_string(&mut text)
+        .with_context(|| format!("cannot read plan {}", path.display()))?;
+    if text.len() > MAX_PLAN_TEXT_BYTES {
+        bail!("plan {} exceeds byte limit", path.display());
+    }
+    if text.trim_start().starts_with('{') {
+        let document: PlanDocument = serde_json::from_str(&text)
+            .with_context(|| format!("invalid JSON plan {}", path.display()))?;
+        document
+            .lower()
+            .with_context(|| format!("cannot lower plan {}", path.display()))
+    } else {
+        parse_and_lower_plan(&text)
+            .with_context(|| format!("invalid textual plan {}", path.display()))
+    }
 }
 
 fn main() -> Result<()> {
@@ -1137,6 +1149,38 @@ fn signed(value: &Value, key: &str) -> i64 {
 mod probation_tests {
     use super::*;
     use std::io::Cursor;
+
+    #[test]
+    fn single_plan_reader_accepts_text_and_json_with_identical_lowering() {
+        let directory = tempfile::tempdir().unwrap();
+        let text_path = directory.path().join("plan.ergo");
+        let json_path = directory.path().join("plan.json");
+        std::fs::write(
+            &text_path,
+            "plan parity { role diagnostic; output predicate; expr debt <= 3; }",
+        )
+        .unwrap();
+        std::fs::write(
+            &json_path,
+            serde_json::to_vec(&serde_json::json!({
+                "schema": ergodis::control::PLAN_SCHEMA,
+                "name": "parity",
+                "role": "diagnostic",
+                "output": "predicate",
+                "expr": {
+                    "op": "le",
+                    "left": {"op": "field", "name": "debt"},
+                    "right": {"op": "const", "value": 3}
+                }
+            }))
+            .unwrap(),
+        )
+        .unwrap();
+        assert_eq!(
+            serde_json::to_value(read_plan(&text_path).unwrap()).unwrap(),
+            serde_json::to_value(read_plan(&json_path).unwrap()).unwrap()
+        );
+    }
 
     #[test]
     fn windows_filter_epochs_and_measure_cumulative_rate() {
