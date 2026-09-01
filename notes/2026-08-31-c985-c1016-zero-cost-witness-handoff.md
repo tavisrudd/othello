@@ -27,10 +27,11 @@ tests.
 | 2 | `ShiftPack<MASK>` | q1/q2/q3/q6/q9 residual tests | eliminate active-shift dispatch and fuse updates |
 | 3 | `PackedProfile<Layout>` and `Residue<M>` | quotient keys, mod-7/mod-49 profiles, pair fibres | make width/range invariants travel with packed values |
 | 4 | `ActivePrefix<N>` / `KernelShape<N>` | quotient-prefix and low-dimensional loops | remove length checks and dynamic loop bounds after one cold dispatch |
-| 5 | `ValidatedRegistry` typestate | Horn derive/replay and promoted theorem programs | move registry validation out of repeated calls while preserving compact code |
+| 5 | `ValidatedRegistry` typestate | evolved/runtime theorem programs | validate once at promotion rather than once per evaluation |
 
-The first four can affect solve-time kernels. The fifth is worthwhile only if
-campaign counters show that theorem closure/evaluation is invoked frequently.
+The first four can affect solve-time kernels. The fifth is specifically for
+the evolve daemon's runtime programs; current sealed adapters already receive
+compiler specialization through the ordinary closure API.
 
 ## 1. Seven-residual aggregation
 
@@ -111,18 +112,32 @@ the smallest solve separately.
 
 ## 5. Validated theorem registries
 
-Prefer a compact typestate witness first:
+For evolved/runtime registries, prefer a compact typestate witness:
 
 ```rust
 struct UncheckedRegistry<'a>(&'a [RuleSpec]);
 struct ValidatedRegistry<'a>(&'a [RuleSpec]);
 ```
 
-Only the validator can construct the second type. Derive/replay then omit
-identity uniqueness, conclusion range, and self-premise checks. If the rule
-count matters, test `ValidatedRegistry<'a, const N: usize>(&'a [RuleSpec; N])`
-as a separate encoding. A sealed zero-sized `Validated<Program>` is the final
-option, not the default, because full specialization can worsen code shape.
+Only the validator can construct the second type. Promotion from candidate to
+executable theorem program performs identity uniqueness, conclusion range,
+self-premise, and budget checks once. Derive/replay then consume only the
+validated type. The representation is still just a two-word slice and should
+be passed by reference.
+
+Do **not** apply this to the current fixed adapter registries for speed. The
+compiler already sees their static rule arrays through
+`derive_horn_closure_into` and emits specialized straight-line code. A compact
+runtime-slice witness was about 1.84x slower than that static control. The type
+may still clarify authority, but it has no performance case there.
+
+For genuinely runtime rules, the boundary reverses. A 15-pair disposable
+diagnostic comparing the current validation-on-every-call path with a compact
+validate-once witness found runtime/witness ratios of 2.648x cycles
+(`t=53.48`), 2.415x instructions, 2.957x branches, and 2.524x wall
+(`t=12.74`). This is not retained C1016 evidence, but it is strong enough to
+make the evolved-program path the proper target for a durable A/B after the
+live edit window closes.
 
 ## What not to force into phantoms
 
@@ -214,29 +229,29 @@ This is the same small-solve/code-shape hazard already observed elsewhere in
 Ergodis: monomorphization is useful only when the eliminated work exceeds the
 I-cache, front-end, and scheduling cost of the expanded kernel.
 
-## Recommended Horn witness sequence
+## Recommended theorem-registry sequence
 
-Try these in order, retaining the existing implementation as the A/B control:
+For runtime evolved programs, try these in order:
 
 1. `ValidatedRegistry<'a>(&'a [RuleSpec])`: a private constructor performs
    registry validation once; the hot closure keeps the current compact loop
    and receives the witness by reference. The witness is a two-word slice,
    but no per-rule or per-call validation remains.
-2. `ValidatedRegistry<'a, const N: usize>(&'a [RuleSpec; N])`: one pointer
-   rather than a fat pointer. Prevent full unrolling initially with an explicit
-   non-inlined compact kernel; measure code size as well as counters.
-3. Only if those win, consider a sealed ZST `Validated<Program>` for adapters
-   whose complete program is compile-time data. Gate every program size
-   separately; do not infer the seven-rule result from smaller registries.
-4. If initial facts and the goal are also fixed and derivation is invoked
+2. When a runtime program is promoted into a sealed reusable theorem, test
+   `ValidatedRegistry<'a, const N: usize>(&'a [RuleSpec; N])` separately. One
+   pointer replaces the fat pointer, but monomorphization/code-size gates are
+   mandatory.
+3. Do not replace existing static adapters with a ZST wrapper for performance;
+   the ordinary API already specializes them. A ZST remains useful only as an
+   authority token or API boundary.
+4. If initial facts and the goal are fixed and derivation is invoked
    repeatedly, test a validated immutable transcript template. Copying seven
    16-byte records or returning a borrowed transcript may dominate recomputing
    an identical closure. This is valid only when the adapter semantics prove
    the transcript is invariant.
 
-Do not optimize this kernel merely because its isolated benchmark is easy to
-run. First count real campaign invocations. If closure generation is cold, the
-seven-residual search kernels have much higher EV.
+Count real evolve-campaign evaluations before promotion. If runtime registry
+evaluation is cold, the seven-residual search kernels still have higher EV.
 
 ## Safety and performance rules
 
@@ -259,7 +274,9 @@ seven-residual search kernels have much higher EV.
 ## Suggested first experiment
 
 After the live C1016 edit window closes, add a private-only
-`ValidatedRegistry<'a>` beside the existing closure API. Benchmark all ten
-adapters in `proof-synthesis-perf`, not q29 alone, and record actual campaign
-call counts. In parallel, build a separate `N=7` residual-aggregation A/B;
-that is the more likely solve-time win.
+`ValidatedRegistry<'a>` at the evolved-program promotion boundary. Benchmark
+runtime candidate evaluation before/after validation and record actual
+campaign call counts. Leave the ten fixed adapters unchanged unless an
+authority/API argument independently justifies migration. In parallel, build
+a separate `N=7` residual-aggregation A/B; that remains the most likely
+solve-time win.

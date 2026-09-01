@@ -912,10 +912,15 @@ files are disposable and may be deleted at any time.
    to four stores instead of the control's two wide stores. Whole-record
    assignment repairs that artifact: cycles become unresolved, but the ZST
    form still uses 2.86% more instructions while saving 4.00% branches, so it
-   has no admission case. The next type-level gate is a compact validated-slice
-   witness that retains the existing loop shape, followed by a separate
-   fixed-seven residual-aggregation A/B. The full C1016 optimization shortlist
-   and counter interpretation are in
+   has no admission case. A compact validated-slice witness is also wrong for
+   the fixed adapters: the ordinary generic API already specializes their
+   static arrays, and preserving a runtime slice loses about 1.84x. For
+   genuinely evolved runtime registries, however, validate-once typestate is
+   diagnostically 2.648x faster in cycles and removes 58.6% of instructions
+   versus validation on every evaluation. That is now an evolve-system target,
+   while a separate fixed-seven residual-aggregation A/B remains the highest-
+   EV search-kernel target. The full C1016 optimization shortlist and counter
+   interpretation are in
    `2026-08-31-c985-c1016-zero-cost-witness-handoff.md`.
 
 ## Gurobi boundary and semantic-symmetry spike, 2026-08-29
