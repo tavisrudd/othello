@@ -22,6 +22,13 @@ pub enum FieldError {
 
 mod private {
     pub trait Sealed {}
+
+    pub trait FieldOps {
+        fn add(left: u8, right: u8) -> u8;
+        fn sub(left: u8, right: u8) -> u8;
+        fn mul(left: u8, right: u8) -> u8;
+        fn inverse(value: u8) -> Result<u8, super::FieldError>;
+    }
 }
 
 /// Exact identity of a finite-field presentation and its byte encoding.
@@ -51,24 +58,25 @@ impl FieldPresentation {
     }
 }
 
-/// Monomorphized arithmetic over a finite field whose elements fit in one byte.
+/// Marker for a monomorphized finite field whose elements fit in one byte.
 ///
 /// Implementations use a canonical integer encoding in `0..ORDER`. CLI field
-/// dispatch happens before client loops, so arithmetic carries no runtime tag.
-pub trait FiniteField: private::Sealed + Copy + Send + Sync + 'static {
+/// dispatch happens before client loops. Public arithmetic is deliberately
+/// available only through [`FieldElement`], which validates raw bytes once and
+/// then carries no runtime tag.
+///
+/// Raw-byte arithmetic is not part of this trait's public surface:
+///
+/// ```compile_fail
+/// use ergodis::{FiniteField, Prime};
+/// let _ = <Prime<5> as FiniteField>::mul(2, 3);
+/// ```
+pub trait FiniteField: private::Sealed + private::FieldOps + Copy + Send + Sync + 'static {
     const ORDER: u8;
     const CHARACTERISTIC: u8;
     const PRESENTATION: FieldPresentation;
 
     fn validate() -> Result<(), FieldError>;
-
-    fn add(left: u8, right: u8) -> u8;
-
-    fn sub(left: u8, right: u8) -> u8;
-
-    fn mul(left: u8, right: u8) -> u8;
-
-    fn inverse(value: u8) -> Result<u8, FieldError>;
 }
 
 /// Canonically encoded element branded by its exact static field.
@@ -158,8 +166,8 @@ impl<F: FiniteField> Mul for FieldElement<F> {
 /// instantiated into arithmetic:
 ///
 /// ```compile_fail
-/// use ergodis::Prime;
-/// let _ = Prime::<9>::mul(2, 3);
+/// use ergodis::{FieldElement, Prime};
+/// let _ = FieldElement::<Prime<9>>::new(2);
 /// ```
 #[derive(Debug, Clone, Copy, Default)]
 pub struct Prime<const P: u8>;
@@ -182,25 +190,25 @@ impl<const P: u8> Prime<P> {
     }
 
     #[inline(always)]
-    pub fn add(left: u8, right: u8) -> u8 {
+    pub(crate) fn add(left: u8, right: u8) -> u8 {
         Self::require_valid_modulus();
         let sum = left as u16 + right as u16;
         (sum % P as u16) as u8
     }
 
     #[inline(always)]
-    pub fn sub(left: u8, right: u8) -> u8 {
+    pub(crate) fn sub(left: u8, right: u8) -> u8 {
         Self::require_valid_modulus();
         ((left as u16 + P as u16 - right as u16) % P as u16) as u8
     }
 
     #[inline(always)]
-    pub fn mul(left: u8, right: u8) -> u8 {
+    pub(crate) fn mul(left: u8, right: u8) -> u8 {
         Self::require_valid_modulus();
         ((left as u16 * right as u16) % P as u16) as u8
     }
 
-    pub fn inverse(value: u8) -> Result<u8, FieldError> {
+    pub(crate) fn inverse(value: u8) -> Result<u8, FieldError> {
         Self::require_valid_modulus();
         if value == 0 {
             return Err(FieldError::ZeroInverse);
@@ -209,7 +217,7 @@ impl<const P: u8> Prime<P> {
     }
 
     #[inline]
-    pub fn pow(mut base: u8, mut exponent: u16) -> u8 {
+    pub(crate) fn pow(mut base: u8, mut exponent: u16) -> u8 {
         Self::require_valid_modulus();
         let mut result = 1u8;
         while exponent != 0 {
@@ -224,7 +232,10 @@ impl<const P: u8> Prime<P> {
 }
 
 impl<const P: u8> FiniteField for Prime<P> {
-    const ORDER: u8 = P;
+    const ORDER: u8 = {
+        let () = Self::VALID_MODULUS;
+        P
+    };
     const CHARACTERISTIC: u8 = P;
     const PRESENTATION: FieldPresentation = FieldPresentation::new(P, 1, 0);
 
@@ -232,7 +243,9 @@ impl<const P: u8> FiniteField for Prime<P> {
     fn validate() -> Result<(), FieldError> {
         Self::validate()
     }
+}
 
+impl<const P: u8> private::FieldOps for Prime<P> {
     #[inline(always)]
     fn add(left: u8, right: u8) -> u8 {
         Self::add(left, right)
@@ -273,7 +286,9 @@ impl FiniteField for Gf4 {
     fn validate() -> Result<(), FieldError> {
         Ok(())
     }
+}
 
+impl private::FieldOps for Gf4 {
     #[inline(always)]
     fn add(left: u8, right: u8) -> u8 {
         left ^ right
@@ -305,6 +320,29 @@ impl FiniteField for Gf4 {
             3 => Ok(2),
             _ => Err(FieldError::InvalidElement),
         }
+    }
+}
+
+#[cfg(test)]
+impl Gf4 {
+    #[inline(always)]
+    pub(crate) fn add(left: u8, right: u8) -> u8 {
+        <Self as private::FieldOps>::add(left, right)
+    }
+
+    #[inline(always)]
+    pub(crate) fn sub(left: u8, right: u8) -> u8 {
+        <Self as private::FieldOps>::sub(left, right)
+    }
+
+    #[inline(always)]
+    pub(crate) fn mul(left: u8, right: u8) -> u8 {
+        <Self as private::FieldOps>::mul(left, right)
+    }
+
+    #[inline]
+    pub(crate) fn inverse(value: u8) -> Result<u8, FieldError> {
+        <Self as private::FieldOps>::inverse(value)
     }
 }
 

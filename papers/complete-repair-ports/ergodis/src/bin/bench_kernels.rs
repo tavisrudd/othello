@@ -21,7 +21,7 @@ use ergodis::{
     ternary_orbit_syndrome_meet_in_middle_unreserved, ternary_orbit_syndrome_search,
     ternary_orbit_syndrome_search_correlated, BinarySupportCandidate, CephXorLayer,
     CompiledBinaryLinearCode, CompositionTower, ContextStrategy, DenseHallGraph, DenseSelector,
-    ExplicitBinarySupportProblem, FieldElement, FiniteField, FinitePermutationAction, Gf4,
+    ExplicitBinarySupportProblem, FieldElement, FinitePermutationAction, Gf4,
     GpuCheckpointCapacities, HallWorkspace, IntegerMomentProblem, IntegerMomentWorkspace, Matrix,
     OrbitOption, Prime, PrimePolynomialRecurrence, PrimeQuadraticCharacter, QcLdpcCode,
     RankOneProbeCache, RepairTask, SparseSelector, TowerLevel,
@@ -601,9 +601,12 @@ fn jin_fu_outer_dual_basis() -> Matrix {
             continue;
         };
         rows.swap(pivot_row, found);
-        let inverse = Gf4::inverse(rows[pivot_row][column]).unwrap();
+        let inverse = FieldElement::<Gf4>::new(rows[pivot_row][column])
+            .unwrap()
+            .inverse()
+            .unwrap();
         for entry in &mut rows[pivot_row][column..] {
-            *entry = Gf4::mul(inverse, *entry);
+            *entry = (inverse * FieldElement::<Gf4>::new(*entry).unwrap()).value();
         }
         let normalized = rows[pivot_row].clone();
         for (row_index, row) in rows.iter_mut().enumerate() {
@@ -612,7 +615,10 @@ fn jin_fu_outer_dual_basis() -> Matrix {
             }
             let factor = row[column];
             for (entry, &pivot_entry) in row[column..].iter_mut().zip(&normalized[column..]) {
-                *entry = Gf4::sub(*entry, Gf4::mul(factor, pivot_entry));
+                let entry_element = FieldElement::<Gf4>::new(*entry).unwrap();
+                let factor_element = FieldElement::<Gf4>::new(factor).unwrap();
+                let pivot_element = FieldElement::<Gf4>::new(pivot_entry).unwrap();
+                *entry = (entry_element - factor_element * pivot_element).value();
             }
         }
         pivots.push(column);
@@ -1371,7 +1377,7 @@ fn main() {
             let mut value = black_box(1_u8);
             for _ in 0..repetitions {
                 for &operand in operands {
-                    value = Prime::<7>::add(Prime::<7>::mul(value, 3), operand);
+                    value = ((u16::from(value) * 3 + u16::from(operand)) % 7) as u8;
                 }
                 checksum = checksum.wrapping_mul(17).wrapping_add(u64::from(value));
             }
@@ -2297,14 +2303,13 @@ mod tests {
         for packed in 1..4usize.pow(dimension as u32) {
             let mut weight = 0;
             for column in 0..basis.cols() {
-                let mut value = 0;
+                let mut value = FieldElement::<Gf4>::new(0).unwrap();
                 for row in 0..dimension {
-                    value = Gf4::add(
-                        value,
-                        Gf4::mul((packed >> (2 * row)) as u8 & 3, basis.row(row)[column]),
-                    );
+                    let factor = FieldElement::<Gf4>::new((packed >> (2 * row)) as u8 & 3).unwrap();
+                    let entry = FieldElement::<Gf4>::new(basis.row(row)[column]).unwrap();
+                    value = value + factor * entry;
                 }
-                weight += usize::from(value != 0);
+                weight += usize::from(value.value() != 0);
             }
             assert_eq!(weight, 64);
         }

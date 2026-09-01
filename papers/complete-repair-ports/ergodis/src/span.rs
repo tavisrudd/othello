@@ -1,5 +1,5 @@
 use crate::arena::{FlatMatrixArena, MatrixId};
-use crate::field::Prime;
+use crate::field::{FieldElement, Prime};
 use crate::matrix::{canonicalize_rows_in_place, Matrix, MatrixError};
 use crate::witness::{WitnessArena, WitnessId};
 use rustc_hash::{FxHashMap, FxHasher};
@@ -321,10 +321,12 @@ fn projective_columns<const P: u8>(
         let Some(pivot) = column.iter().copied().find(|&entry| entry != 0) else {
             continue;
         };
-        let inverse = Prime::<P>::inverse(pivot).map_err(MatrixError::from)?;
+        let inverse = FieldElement::<Prime<P>>::from_canonical(pivot)
+            .inverse()
+            .map_err(MatrixError::from)?;
         let normalized: Box<[u8]> = column
             .iter()
-            .map(|&entry| Prime::<P>::mul(entry, inverse))
+            .map(|&entry| (FieldElement::<Prime<P>>::from_canonical(entry) * inverse).value())
             .collect::<Vec<_>>()
             .into_boxed_slice();
         let hash = byte_hash(&normalized);
@@ -346,7 +348,7 @@ fn projective_columns<const P: u8>(
         result.push(ColumnRep {
             values: normalized,
             coordinate: u32::try_from(coordinate).map_err(|_| SpanError::CoordinateOverflow)?,
-            inverse_scale: inverse,
+            inverse_scale: inverse.value(),
         });
     }
     Ok((result, retained_matrix_bytes))

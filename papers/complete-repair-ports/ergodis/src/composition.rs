@@ -1317,7 +1317,7 @@ mod tests {
 
     #[test]
     fn gf4_scalar_composition_matches_exhaustive_two_block_oracle() {
-        use crate::field::{FiniteField, Gf4};
+        use crate::field::Gf4;
 
         for costs in [[0, 3, 1, 2], [4, 0, 4, 1], [2, 2, 2, 2]] {
             let inner = CostTable::from_entries_field::<Gf4>(

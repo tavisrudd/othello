@@ -726,7 +726,7 @@ mod tests {
 
     #[test]
     fn packed_pair_bases_match_matrix_elimination_for_all_three_column_encoders() {
-        use crate::field::{FiniteField, Gf4};
+        use crate::field::Gf4;
 
         for encoded in 0u8..64 {
             let columns = [encoded & 3, (encoded >> 2) & 3, (encoded >> 4) & 3];

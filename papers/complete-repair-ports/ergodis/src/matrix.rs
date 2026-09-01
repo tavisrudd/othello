@@ -415,7 +415,7 @@ mod tests {
 
     #[test]
     fn gf4_two_by_two_ranks_match_exhaustive_determinants() {
-        use crate::field::{FiniteField, Gf4};
+        use crate::field::Gf4;
 
         for encoded in 0u16..256 {
             let mut value = encoded;
