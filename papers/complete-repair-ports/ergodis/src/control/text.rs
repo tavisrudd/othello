@@ -25,6 +25,7 @@ pub enum PlanTextTokenKind {
     Minus,
     Star,
     Bang,
+    Assign,
     Eq,
     Ne,
     Lt,
@@ -209,6 +210,7 @@ fn lex(text: &str) -> Result<Vec<Token>, ControlError> {
             b'-' => single(&mut out, &mut at, Kind::Minus)?,
             b'*' => single(&mut out, &mut at, Kind::Star)?,
             b'!' => single(&mut out, &mut at, Kind::Bang)?,
+            b'=' => single(&mut out, &mut at, Kind::Assign)?,
             b'<' => single(&mut out, &mut at, Kind::Lt)?,
             b'>' => single(&mut out, &mut at, Kind::Gt)?,
             _ => return invalid_at(at, "unexpected character"),
@@ -727,5 +729,13 @@ plan "rigid-order" {
         );
         assert_eq!(format_plan_name("field-name").unwrap(), r#""field-name""#);
         assert_eq!(parse_plan_u64_literal("0xffff_0000").unwrap(), 0xffff_0000);
+        let arguments = lex_plan_text("affine(rank=2, metric=max_overlap)").unwrap();
+        assert_eq!(
+            arguments
+                .iter()
+                .filter(|token| token.kind == PlanTextTokenKind::Assign)
+                .count(),
+            2
+        );
     }
 }
