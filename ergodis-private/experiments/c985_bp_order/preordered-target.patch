@@ -1,0 +1,166 @@
+diff --git a/papers/complete-repair-ports/ergodis/src/binary_kernel_search.rs b/papers/complete-repair-ports/ergodis/src/binary_kernel_search.rs
+index c8f7d001e..da184d984 100644
+--- a/papers/complete-repair-ports/ergodis/src/binary_kernel_search.rs
++++ b/papers/complete-repair-ports/ergodis/src/binary_kernel_search.rs
+@@ -29,6 +29,10 @@ pub enum BinaryKernelSearchError {
+     PhysicalViolation,
+     #[error("a support has zero logical observation")]
+     TrivialSupport,
++    #[error("a preordered trial must provide one permutation of every column")]
++    InvalidColumnOrder,
++    #[error("a targeted trial must provide one nonzero canonical logical signature")]
++    InvalidLogicalTarget,
+ }
+ 
+ #[repr(C)]
+@@ -340,6 +344,65 @@ impl BinaryKernelSearchWorkspace {
+         self.search::<true>(compiled, trials, options)
+     }
+ 
++    pub fn evaluate_preordered_target(
++        &mut self,
++        compiled: &CompiledBinaryKernelSearch,
++        column_order: &[u16],
++        logical_target: &[u64],
++        options: BinaryKernelTrialOptions,
++    ) -> Result<BinaryKernelSearchSummary, BinaryKernelSearchError> {
++        options.validate()?;
++        self.check_layout(compiled)?;
++        if column_order.len() != usize::from(self.columns) {
++            return Err(BinaryKernelSearchError::InvalidColumnOrder);
++        }
++        self.pivot_marker.fill(0);
++        for &column in column_order {
++            let column = usize::from(column);
++            if column >= self.order.len() || self.pivot_marker[column] != 0 {
++                return Err(BinaryKernelSearchError::InvalidColumnOrder);
++            }
++            self.pivot_marker[column] = 1;
++        }
++        let logical_words = usize::from(self.logical_words);
++        if logical_target.len() != logical_words || logical_target.iter().all(|&word| word == 0) {
++            return Err(BinaryKernelSearchError::InvalidLogicalTarget);
++        }
++        let logical_tail = usize::from(compiled.logical_count) % 64;
++        if logical_tail != 0 && logical_target[logical_words - 1] >> logical_tail != 0 {
++            return Err(BinaryKernelSearchError::InvalidLogicalTarget);
++        }
++        self.order.copy_from_slice(column_order);
++        self.witness.clear();
++        let spec = TrialSpec {
++            base: &compiled.basis,
++            logical_columns: &compiled.logical_columns,
++            words: usize::from(compiled.words),
++            rank: usize::from(compiled.rank),
++            logical_words,
++            osd_order: options.osd_order,
++            osd_window: usize::from(options.osd_window),
++        };
++        #[cfg(test)]
++        let _allocation_guard = HotLoopAllocationGuard::enter();
++        let found = self.trial::<false, true, true>(
++            spec,
++            logical_target,
++            usize::from(options.target_weight) + 1,
++        );
++        let has_witness = !self.witness.is_empty();
++        Ok(BinaryKernelSearchSummary {
++            completed_trials: 1,
++            best_weight: if has_witness {
++                self.witness.len() as u16
++            } else {
++                u16::MAX
++            },
++            target_hit: u8::from(found.is_some()),
++            _padding: [0; 5],
++        })
++    }
++
+     fn search<const RETAIN_BEST: bool>(
+         &mut self,
+         compiled: &CompiledBinaryKernelSearch,
+@@ -368,7 +431,7 @@ impl BinaryKernelSearchWorkspace {
+             } else {
+                 usize::from(options.target_weight) + 1
+             };
+-            let found = self.trial::<RETAIN_BEST>(spec, incumbent);
++            let found = self.trial::<RETAIN_BEST, false, false>(spec, &[], incumbent);
+             completed += 1;
+             if let Some(weight) = found {
+                 best_weight = weight;
+@@ -416,9 +479,10 @@ impl BinaryKernelSearchWorkspace {
+         }
+     }
+ 
+-    fn trial<const RETAIN_BEST: bool>(
++    fn trial<const RETAIN_BEST: bool, const PREORDERED: bool, const TARGETED: bool>(
+         &mut self,
+         spec: TrialSpec<'_>,
++        logical_target: &[u64],
+         incumbent_weight: usize,
+     ) -> Option<usize> {
+         let TrialSpec {
+@@ -432,7 +496,9 @@ impl BinaryKernelSearchWorkspace {
+         } = spec;
+         let columns = self.order.len();
+         self.work.copy_from_slice(base);
+-        self.shuffle();
++        if !PREORDERED {
++            self.shuffle();
++        }
+         self.pivot_marker.fill(0);
+         let mut pivot_count = 0usize;
+         for &column in &self.order {
+@@ -498,7 +564,9 @@ impl BinaryKernelSearchWorkspace {
+             let weight = kernel.iter().map(|word| word.count_ones() as u16).sum();
+             self.kernel_weights[kernel_count] = weight;
+             self.kernel_order[kernel_count] = kernel_count as u16;
+-            if usize::from(weight) < best_weight && logical.iter().any(|&word| word != 0) {
++            if usize::from(weight) < best_weight
++                && logical_matches::<TARGETED>(logical, logical_target)
++            {
+                 write_support(kernel, columns, &mut self.witness);
+                 best_weight = usize::from(weight);
+                 if !RETAIN_BEST {
+@@ -532,10 +600,7 @@ impl BinaryKernelSearchWorkspace {
+                     }
+                     let right_logical =
+                         &self.kernel_logicals[right * logical_words..(right + 1) * logical_words];
+-                    if !left_logical
+-                        .iter()
+-                        .zip(right_logical)
+-                        .any(|(&left, &right)| left ^ right != 0)
++                    if !xor_logical_matches::<TARGETED>(left_logical, right_logical, logical_target)
+                     {
+                         continue;
+                     }
+@@ -552,6 +617,29 @@ impl BinaryKernelSearchWorkspace {
+     }
+ }
+ 
++#[inline(always)]
++fn logical_matches<const TARGETED: bool>(logical: &[u64], target: &[u64]) -> bool {
++    if TARGETED {
++        logical == target
++    } else {
++        logical.iter().any(|&word| word != 0)
++    }
++}
++
++#[inline(always)]
++fn xor_logical_matches<const TARGETED: bool>(left: &[u64], right: &[u64], target: &[u64]) -> bool {
++    if TARGETED {
++        left.iter()
++            .zip(right)
++            .zip(target)
++            .all(|((&left, &right), &target)| left ^ right == target)
++    } else {
++        left.iter()
++            .zip(right)
++            .any(|(&left, &right)| left ^ right != 0)
++    }
++}
++
+ #[derive(Clone, Copy)]
+ struct XorShift64(u64);
+ 

@@ -1,0 +1,21 @@
+{
+  "schema": "c985-bp-reliability-order-probe-v1",
+  "base_commit": "4a846af33b129d6e9f216a7c98d634a87d6b4110",
+  "input": {"label": "BB(21,18) hx-gz", "sha256": "83bd1eaf7787cd367f4c6da060658abff902f6404545e42c0902ce12cd198fe2"},
+  "software": {"ldpc": "2.4.1", "numpy": "2.5.1"},
+  "generator": {"trials": 2048, "seed": 1018003, "error_rate": 0.002, "max_iter": 300, "bp_method": "minimum_sum", "ms_scaling_factor": 0.625, "schedule": "parallel", "osd_method": "osd_e", "osd_order": 10},
+  "order_artifacts": {"llr_desc_sha256": "43c1a3e3d5952b96e6ab168bfa830d91b084f21f92ddd1e378d6b4cc40fa1ae8", "random_sha256": "aa0f4c57a056ad0e5a20ea044d25f87bed474f04949f35c64fe23c9f09330cb6"},
+  "probe": {"osd_order": 2, "osd_window": 96, "same_nonzero_logical_targets": true, "bp_best_weight": 56, "llr_desc": {"target_hits": 8, "best_weight": 108}, "random": {"target_hits": 26, "best_weight": 112}},
+  "default_path_ab": {
+    "protocol": {"pairs": 5, "cpu": 2, "trials_per_arm": 2000, "threads": 1, "seed": 1018003, "target_weight": 32, "osd_order": 2, "osd_window": 96, "best_effort": true, "alternating_order": true},
+    "baseline_over_candidate": {"cycles": 0.925497, "cycles_t": -1.49, "instructions": 0.950160, "instructions_t": -8653113.20, "branches": 1.020147, "branches_t": 802372.28, "branch_misses": 0.992363, "branch_misses_t": -9.18},
+    "raw_pairs": {
+      "cycles": [[9502282213,10640915182],[10000651764,10078151943],[8870472899,10945220044],[9270648454,10556077533],[10649670089,9892070303]],
+      "instructions": [[26341599528,27723332073],[26341600018,27723332779],[26341599534,27723332485],[26341599224,27723332397],[26341599965,27723332197]],
+      "branches": [[5835692242,5720443329],[5835692538,5720443792],[5835692184,5720443529],[5835692161,5720443406],[5835692738,5720443289]],
+      "branch_misses": [[182065911,183389407],[182137262,183184800],[181575464,183470069],[181783430,183362991],[182186462,183341478]]
+    }
+  },
+  "replay_sources": {"patch_sha256": "289cef605a33ac54a7bcb000a85bd4397453e586b8b91ab2d1834942812dddd4", "generator_sha256": "8d5a67645d2390fbdb7fca897d179f2780eb49f7c8016a4e17f9c0140faf8d65", "runner_sha256": "000770af6d44459acb6a5a755dda2e6ff379b55851e53bd340a068c1943e3d30", "lock_sha256": "a3048b7564095db03d3dee11c03d468db88c3c89b2c8ed4163fc6f4469c9c8e0"},
+  "decision": "Reject reliability-order-only integration. Signed LLR ordering slightly improved the best order-two target witness (108 versus 112) but reduced target coverage from 26 to 8 and remained far behind BP-OSD's weight 56 on identical targets. The const-generic adapter also raised default-path instructions by 5.24 percent, so its code shape is rejected independently. A future bridge must carry an affine BP hard decision or residual, not just a permutation, and must isolate codegen from the random kernel."
+}

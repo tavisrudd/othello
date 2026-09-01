@@ -1492,6 +1492,26 @@ files are disposable and may be deleted at any time.
    the exact builds and raw pairs are in
    `ergodis-private/evidence/c985-bb756-native-codegen-ab.json`.
 
+   The remaining BP-order half of step (1) is now closed as a measured
+   negative.  On 2,048 identical nonzero BB756 logical targets, `ldpc` 2.4.1
+   BP-OSD reached weight 56.  Feeding only each posterior signed-LLR column
+   order into an exact Ergodis order-two/window-96 target trial slightly
+   improved the best Ergodis witness from 112 to 108, but reduced target
+   coverage from 26/2,048 under matched random permutations to 8/2,048.  The
+   absolute-LLR directions had already failed the 256-target pilot.  The
+   order-only abstraction is therefore wrong: it discards the BP affine hard
+   decision and asks homogeneous unit/pair kernel rows to rediscover it.
+   Moreover, the first const-generic adapter perturbed the untouched random
+   path by +5.24% instructions (five exact-work pairs; candidate/base), so its
+   code shape is independently rejected.  Public source is restored exactly.
+   The retained private replay, adapter patch, generated-order hashes, raw
+   default-path counter pairs, and compact decision are in
+   `ergodis-private/experiments/c985_bp_order/` and
+   `ergodis-private/evidence/c985-bp-reliability-order-probe.json`.  A future
+   bridge must carry an affine BP hard decision/residual and isolate its code
+   generation from random search; reliability permutations alone receive no
+   further work.
+
    Step (6) is now closed as a measured negative for the motivating PRS
    client.  A source-attributed one-thread profile of the complete
    `q=64,r=5` census (17,043,521 projective points, 10,059 sampled cycle
