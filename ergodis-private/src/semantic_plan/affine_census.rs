@@ -468,7 +468,10 @@ mod tests {
         let mut runtime = AffineCensusRuntime::try_new(&registry).unwrap();
         execute_prepared(&plan, &mut runtime).unwrap();
         let first = runtime.result().unwrap();
-        execute_prepared(&plan, &mut runtime).unwrap();
+        let (replay, allocations) =
+            crate::allocation_test::tracked_allocations(|| execute_prepared(&plan, &mut runtime));
+        replay.unwrap();
+        assert_eq!(allocations, 0);
         assert_eq!(runtime.result().unwrap(), first);
     }
 }
