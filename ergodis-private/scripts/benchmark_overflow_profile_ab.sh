@@ -116,8 +116,8 @@ jq -n \
   --argjson solve_rounds "$solve_rounds" \
   --arg cpu "$cpu" \
   --arg result_sha256 "$reference" \
-  '{$schema,input,input_sha256,artifact,artifact_sha256,release_sha256,
-    campaign_sha256,pairs,threads,solve_rounds,cpu,result_sha256}' \
+  '{$schema,$input,$input_sha256,$artifact,$artifact_sha256,$release_sha256,
+    $campaign_sha256,$pairs,$threads,$solve_rounds,$cpu,$result_sha256}' \
   >"$out/metadata.json"
 
 rm "$out"/release-*.perf "$out"/campaign-*.perf \
