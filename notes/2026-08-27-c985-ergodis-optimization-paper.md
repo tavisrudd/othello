@@ -388,12 +388,24 @@ files are disposable and may be deleted at any time.
    `c985-c1018-subset-zeta-q64-wall.tsv`, and
    `c985-c1018-subset-zeta-q32-control.tsv`.
 
-   Current next target is the exact diagonal projective-action theorem: a
-   diagonal map preserves the projective pivot, so precompiled coefficient
-   ratios can map the canonical suffix directly and remove image construction,
-   pivot scanning, inversion, and the second multiplication pass.  Keep the
-   same immutable-build and small-control gates; do not return to rejected
-   generic inlining or hash-table/container shortcuts.
+   The exact diagonal-action theorem was prototyped and rejected in two code
+   shapes.  A diagonal map does preserve the projective pivot, and precompiled
+   coefficient ratios remove 14.3% of instructions and 19.1% of branches in
+   the mixed three-action kernel.  The inline realization nevertheless takes
+   1.324x as many cycles (`t=31.70`): its serial suffix dependency and enlarged
+   inlined state destroy IPC.  Outlining the 220-byte helper is worse, taking
+   1.358x as many cycles and 1.251x as many instructions.  The source was
+   restored; these disposable controls are diagnostic and make no retained
+   performance claim.  A future diagonal attempt needs a separate typed runner
+   or pre-shifted contribution table, not another complex branch inside the
+   mixed hot action loop.
+
+   Current next target is cheaper and more general: for a nonzero packed byte-
+   lane point, `trailing_zeros(point) / 8` is exactly its projective pivot.
+   Replace the byte-at-a-time pivot scan in `packed_index` with that single
+   hardware operation, retaining the canonical-leading-one shortcut and the
+   same immutable-build/small-control gates.  Do not return to rejected generic
+   inlining or hash-table/container shortcuts.
    Keep tactical plane completion in
    `ergodis-private`; do not specialize the public core for C1018.
    The smaller linear-code gap is also closed: a compiled binary row-space
