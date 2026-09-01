@@ -38,13 +38,31 @@ run_arm() {
       >"$out/$label-$round.json"
 }
 
+run_rss() {
+  local label=$1
+  local binary=$2
+  local round=$3
+  /usr/bin/time -f '%M' -o "$out/$label-$round.rss" \
+    taskset -c "$cpu" "$binary" \
+      --input "$input" \
+      --maximum-weight 16 \
+      --threads "$threads" \
+      --rounds "$solve_rounds" \
+      --compiled-in "$artifact" \
+      >/dev/null
+}
+
 for ((round = 1; round <= pairs; round++)); do
   if ((round % 2 == 1)); then
     run_arm release "$release_bin" "$round"
+    run_rss release "$release_bin" "$round"
     run_arm campaign "$campaign_bin" "$round"
+    run_rss campaign "$campaign_bin" "$round"
   else
     run_arm campaign "$campaign_bin" "$round"
+    run_rss campaign "$campaign_bin" "$round"
     run_arm release "$release_bin" "$round"
+    run_rss release "$release_bin" "$round"
   fi
 done
 
@@ -58,7 +76,7 @@ for result in "$out"/*.json; do
 done
 
 printf '%s\n' \
-  'round,release_cycles,campaign_cycles,release_instructions,campaign_instructions,release_branches,campaign_branches,release_branch_misses,campaign_branch_misses,release_search_seconds,campaign_search_seconds' \
+  'round,release_cycles,campaign_cycles,release_instructions,campaign_instructions,release_branches,campaign_branches,release_branch_misses,campaign_branch_misses,release_search_seconds,campaign_search_seconds,release_rss_kib,campaign_rss_kib' \
   >"$out/pairs.csv"
 for ((round = 1; round <= pairs; round++)); do
   metric() {
@@ -68,7 +86,7 @@ for ((round = 1; round <= pairs; round++)); do
   campaign_perf="$out/campaign-$round.perf"
   release_seconds=$(jq -r '[.search_seconds[]] | add' "$out/release-$round.json")
   campaign_seconds=$(jq -r '[.search_seconds[]] | add' "$out/campaign-$round.json")
-  printf '%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n' \
+  printf '%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n' \
     "$round" \
     "$(metric "$release_perf" cycles:u)" \
     "$(metric "$campaign_perf" cycles:u)" \
@@ -80,6 +98,8 @@ for ((round = 1; round <= pairs; round++)); do
     "$(metric "$campaign_perf" branch-misses:u)" \
     "$release_seconds" \
     "$campaign_seconds" \
+    "$(<"$out/release-$round.rss")" \
+    "$(<"$out/campaign-$round.rss")" \
     >>"$out/pairs.csv"
 done
 
@@ -101,4 +121,5 @@ jq -n \
   >"$out/metadata.json"
 
 rm "$out"/release-*.perf "$out"/campaign-*.perf \
-  "$out"/release-*.json "$out"/campaign-*.json
+  "$out"/release-*.json "$out"/campaign-*.json \
+  "$out"/release-*.rss "$out"/campaign-*.rss
