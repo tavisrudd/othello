@@ -746,7 +746,8 @@ files are disposable and may be deleted at any time.
    for certificate soundness or memory safety; “verified” must state whether it
    means replay, independent recomputation, or proof checking.  A later broad
    capability-layer refactor is gated on the tactical fixes and ADR, not mixed
-   into them.
+   into them.  The accepted incremental safeguard architecture is recorded in
+   `2026-08-31-c1030-ergodis-correctness-safeguards-adr.md`.
 
    Treat C1016's “Public-core enhancement ledger” as a recurring evolve input,
    not as campaign authority.  Its three current reusable requests are a
