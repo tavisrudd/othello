@@ -13,7 +13,42 @@ pub enum SpanError {
     CoordinateOverflow,
     #[error("canonical target image uses field order {actual}, expected {expected}")]
     ImageField { expected: u8, actual: u8 },
+    #[error("generated-span compilation exhausted its {0:?} limit")]
+    ResourceLimit(SpanResource),
+    #[error("generated-span compilation limits must all be positive")]
+    InvalidLimits,
 }
+
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum SpanResource {
+    ProjectiveColumns,
+    States,
+    BasisBytes,
+    Transitions,
+}
+
+const _: () = assert!(std::mem::size_of::<SpanResource>() == 1);
+const _: () = assert!(std::mem::align_of::<SpanResource>() == 1);
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct SpanBuildLimits {
+    pub max_transitions: u64,
+    pub max_projective_columns: usize,
+    pub max_states: usize,
+    pub max_matrix_payload_bytes: usize,
+}
+
+const _: () = assert!(std::mem::size_of::<SpanBuildLimits>() == 32);
+const _: () = assert!(std::mem::align_of::<SpanBuildLimits>() == 8);
+
+pub const DEFAULT_SPAN_BUILD_LIMITS: SpanBuildLimits = SpanBuildLimits {
+    max_transitions: 50_000_000,
+    max_projective_columns: 1 << 20,
+    max_states: 1 << 18,
+    max_matrix_payload_bytes: 128 << 20,
+};
 
 #[repr(C)]
 #[derive(Clone, Copy, Debug)]
@@ -67,8 +102,32 @@ pub struct GeneratedSpanTable {
 
 impl GeneratedSpanTable {
     pub fn build<const P: u8>(generator: &Matrix) -> Result<Self, SpanError> {
+        Self::build_bounded::<P>(generator, DEFAULT_SPAN_BUILD_LIMITS)
+    }
+
+    pub fn build_bounded<const P: u8>(
+        generator: &Matrix,
+        limits: SpanBuildLimits,
+    ) -> Result<Self, SpanError> {
+        if limits.max_transitions == 0
+            || limits.max_projective_columns == 0
+            || limits.max_states == 0
+            || limits.max_matrix_payload_bytes == 0
+        {
+            return Err(SpanError::InvalidLimits);
+        }
         Prime::<P>::validate().map_err(MatrixError::from)?;
-        let columns = projective_columns::<P>(generator)?;
+        if generator.cols() > u32::MAX as usize {
+            return Err(SpanError::CoordinateOverflow);
+        }
+        if generator.rows() > u16::MAX as usize {
+            return Err(SpanError::ResourceLimit(SpanResource::BasisBytes));
+        }
+        let (columns, mut retained_matrix_bytes) = projective_columns::<P>(
+            generator,
+            limits.max_projective_columns,
+            limits.max_matrix_payload_bytes,
+        )?;
         let ambient = generator.rows();
         let mut bases = FlatMatrixArena::default();
         let zero_id = bases.push(0, ambient, &[]);
@@ -83,12 +142,22 @@ impl GeneratedSpanTable {
         }];
         let mut witnesses = WitnessArena::default();
         let mut transitions = 0u64;
-        let mut scratch = Vec::new();
+        let scratch_capacity = ambient
+            .checked_add(1)
+            .and_then(|rows| rows.checked_mul(ambient))
+            .filter(|&cells| cells <= limits.max_matrix_payload_bytes)
+            .ok_or(SpanError::ResourceLimit(SpanResource::BasisBytes))?;
+        let mut scratch = Vec::with_capacity(scratch_capacity);
+        let mut arena_basis_bytes = 0_usize;
 
         for column in columns {
             let old_len = states.len();
+            transitions = u64::try_from(old_len)
+                .ok()
+                .and_then(|count| transitions.checked_add(count))
+                .filter(|&count| count <= limits.max_transitions)
+                .ok_or(SpanError::ResourceLimit(SpanResource::Transitions))?;
             for state_index in 0..old_len {
-                transitions += 1;
                 let state = states[state_index];
                 let basis = bases.get(state.basis);
                 debug_assert_eq!(basis.cols, ambient);
@@ -104,6 +173,19 @@ impl GeneratedSpanTable {
                 if index.contains_key(scratch.as_slice()) {
                     continue;
                 }
+                if states.len() >= limits.max_states || states.len() >= u32::MAX as usize {
+                    return Err(SpanError::ResourceLimit(SpanResource::States));
+                }
+                arena_basis_bytes = arena_basis_bytes
+                    .checked_add(scratch.len())
+                    .filter(|&bytes| bytes <= u32::MAX as usize)
+                    .ok_or(SpanError::ResourceLimit(SpanResource::BasisBytes))?;
+                retained_matrix_bytes = scratch
+                    .len()
+                    .checked_mul(2)
+                    .and_then(|bytes| retained_matrix_bytes.checked_add(bytes))
+                    .filter(|&bytes| bytes <= limits.max_matrix_payload_bytes)
+                    .ok_or(SpanError::ResourceLimit(SpanResource::BasisBytes))?;
                 let basis_id = bases.push(candidate_rank, ambient, &scratch);
                 let witness =
                     witnesses.push(state.witness, column.coordinate, column.inverse_scale);
@@ -195,9 +277,14 @@ impl GeneratedSpanTable {
     }
 }
 
-fn projective_columns<const P: u8>(generator: &Matrix) -> Result<Vec<ColumnRep>, SpanError> {
+fn projective_columns<const P: u8>(
+    generator: &Matrix,
+    maximum_columns: usize,
+    maximum_matrix_payload_bytes: usize,
+) -> Result<(Vec<ColumnRep>, usize), SpanError> {
     let mut representatives: FxHashMap<Box<[u8]>, ()> = FxHashMap::default();
     let mut result = Vec::new();
+    let mut retained_matrix_bytes = 0_usize;
     for coordinate in 0..generator.cols() {
         let column = generator.column(coordinate);
         let Some(pivot) = column.iter().copied().find(|&entry| entry != 0) else {
@@ -209,7 +296,19 @@ fn projective_columns<const P: u8>(generator: &Matrix) -> Result<Vec<ColumnRep>,
             .map(|&entry| Prime::<P>::mul(entry, inverse))
             .collect::<Vec<_>>()
             .into_boxed_slice();
+        if result.len() >= maximum_columns {
+            if representatives.contains_key(normalized.as_ref()) {
+                continue;
+            }
+            return Err(SpanError::ResourceLimit(SpanResource::ProjectiveColumns));
+        }
         if representatives.insert(normalized.clone(), ()).is_none() {
+            retained_matrix_bytes = normalized
+                .len()
+                .checked_mul(2)
+                .and_then(|bytes| retained_matrix_bytes.checked_add(bytes))
+                .filter(|&bytes| bytes <= maximum_matrix_payload_bytes)
+                .ok_or(SpanError::ResourceLimit(SpanResource::BasisBytes))?;
             result.push(ColumnRep {
                 values: normalized,
                 coordinate: u32::try_from(coordinate).map_err(|_| SpanError::CoordinateOverflow)?,
@@ -217,7 +316,7 @@ fn projective_columns<const P: u8>(generator: &Matrix) -> Result<Vec<ColumnRep>,
             });
         }
     }
-    Ok(result)
+    Ok((result, retained_matrix_bytes))
 }
 
 #[cfg(test)]
@@ -233,6 +332,46 @@ mod tests {
         let full = Matrix::new::<2>(2, 2, vec![1, 0, 0, 1]).unwrap();
         assert_eq!(table.query::<2>(&one).unwrap().unwrap().cost, 1);
         assert_eq!(table.query::<2>(&full).unwrap().unwrap().cost, 2);
+    }
+
+    #[test]
+    fn bounded_span_compilation_fails_before_each_resource_can_grow() {
+        let generator = Matrix::new::<2>(2, 3, vec![1, 0, 1, 0, 1, 1]).unwrap();
+
+        let mut limits = DEFAULT_SPAN_BUILD_LIMITS;
+        limits.max_projective_columns = 2;
+        assert!(matches!(
+            GeneratedSpanTable::build_bounded::<2>(&generator, limits),
+            Err(SpanError::ResourceLimit(SpanResource::ProjectiveColumns))
+        ));
+
+        let mut limits = DEFAULT_SPAN_BUILD_LIMITS;
+        limits.max_states = 4;
+        assert!(matches!(
+            GeneratedSpanTable::build_bounded::<2>(&generator, limits),
+            Err(SpanError::ResourceLimit(SpanResource::States))
+        ));
+
+        let mut limits = DEFAULT_SPAN_BUILD_LIMITS;
+        limits.max_transitions = 1;
+        assert!(matches!(
+            GeneratedSpanTable::build_bounded::<2>(&generator, limits),
+            Err(SpanError::ResourceLimit(SpanResource::Transitions))
+        ));
+
+        let mut limits = DEFAULT_SPAN_BUILD_LIMITS;
+        limits.max_matrix_payload_bytes = 3;
+        assert!(matches!(
+            GeneratedSpanTable::build_bounded::<2>(&generator, limits),
+            Err(SpanError::ResourceLimit(SpanResource::BasisBytes))
+        ));
+
+        let mut limits = DEFAULT_SPAN_BUILD_LIMITS;
+        limits.max_states = 0;
+        assert!(matches!(
+            GeneratedSpanTable::build_bounded::<2>(&generator, limits),
+            Err(SpanError::InvalidLimits)
+        ));
     }
 
     #[test]

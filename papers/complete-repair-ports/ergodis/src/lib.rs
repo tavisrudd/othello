@@ -240,7 +240,10 @@ pub use semantic_symmetry::{
     ExplicitBinarySupportError, ExplicitBinarySupportProblem, ExplicitSupportSymmetryError,
     NonemptySupportOrbitCover, SemanticModelFingerprint, VerifiedExplicitBinarySupportProblem,
 };
-pub use span::{CanonicalTargetImage, GeneratedSpanTable, SpanAnswer, SpanError};
+pub use span::{
+    CanonicalTargetImage, GeneratedSpanTable, SpanAnswer, SpanBuildLimits, SpanError, SpanResource,
+    DEFAULT_SPAN_BUILD_LIMITS,
+};
 pub use theorem_search::{
     evolve_implications, evolve_implications_streaming, CandidateTrial, EvolutionConfig,
     EvolutionError, EvolutionResult, EvolutionRunError, EvolutionSummary, ImplicationScore,
