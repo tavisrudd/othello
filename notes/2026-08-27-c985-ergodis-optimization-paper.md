@@ -1010,6 +1010,14 @@ files are disposable and may be deleted at any time.
    This remains daemon-only. Next connect a private root/debt/exceptional-state
    publisher and measure whether routed proposals improve discovery per exact
    candidate and semantic-op row on held-out campaigns.
+
+   Commit `109953b40` hardens that live bridge before the first domain
+   publisher: each first-seen observation tuple must occur in the frozen batch
+   and is rejected immediately otherwise. Existing-node absolute replacements
+   remain constant-time, while at most 64 new nodes pay a cold bounded row
+   scan. This prevents one live-only state from poisoning a later refresh and
+   failing an otherwise valid evolution job. Strict clippy and the complete
+   all-target/all-feature test and doc-test suite pass.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
