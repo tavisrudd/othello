@@ -859,12 +859,33 @@ Three statements, in decreasing order of how well the data pin them.
 > see the `k` hypothesis note.
 > → [C1025](2026-08-31-c1025-prs1-falsification.md)
 
+> **RESTATED 2026-08-31 (C1026).**  The two clauses `q ≥ 16` and `k ≥ 4` are
+> the two branches of one inequality, since `k = q+1-r ≥ 4 ⟺ q ≥ r+3`:
+>
+> > **For every redundancy `r ≥ 6` and every prime power
+> > `q ≥ max(16, r+3)`, the deep holes of `PRS_{q+1-r}(q)` are exactly
+> > `P_r ∪ M^max_{r,p}`.**
+>
+> The crossover is at `r = 13`: below it the constant branch binds, above it the
+> linear one.  Both branches are **attained**, so neither can be dropped —
+> `(r,q) = (9,13)` violates only the constant branch and fires, `(15,17)`
+> violates only the linear branch and fires.  C1026 also shows the linear branch
+> is *not tight*: `(23,25)` is clean at `k = 3`, so the true boundary curve lies
+> somewhere between `(18,19)` firing and `(23,25)` clean and is undetermined.
+> → [C1026](2026-08-31-c1026-prs1-hypothesis-separation.md)
+
 **For every redundancy `r ≥ 6` and every prime power `q ≥ 16` with dimension
-`k = q+1-r ≥ 6`, the deep holes of `PRS_k(q)` are exactly `P_r ∪ M^max_{r,p}`,
+`k = q+1-r ≥ 4`, the deep holes of `PRS_k(q)` are exactly `P_r ∪ M^max_{r,p}`,
 of deep size `q(q+1)^2/2` plus the modular carrier's deep part.**
 
-Equivalently, away from the near-degenerate boundary,
-`X(r) ⊆ {7,8,9,11,13}` for every `r ≥ 6`: the exceptional set is contained in
+Equivalently — and the restriction is essential, not decorative, since
+`X(15) ∋ 16, 17` (C1025, C1026) —
+
+```text
+X(r) ∩ { q : q ≥ r+3 }  ⊆  {7,8,9,11,13}     for every r ≥ 6.
+```
+
+The exceptional set inside the scope is contained in
 the prime powers of the interval `[7,13]`, and the threshold is the **constant
 16** rather than the linearly growing proved threshold
 `Q*_r = 6r-16+⌊2√(6r-18)⌋` (which is 29, 37, 43, 53, 59 at `r = 6,…,10`).
