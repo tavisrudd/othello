@@ -319,7 +319,8 @@ pub fn run() -> Result<AffineCensusResult, ControlError> {
     runtime.result()
 }
 
-fn affine_subspaces(rank: usize) -> Vec<u64> {
+#[must_use]
+pub fn affine_subspaces(rank: usize) -> Vec<u64> {
     let mut linear = Vec::new();
     if rank == 1 {
         for first in 1..27_u8 {

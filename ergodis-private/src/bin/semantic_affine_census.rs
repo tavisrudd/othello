@@ -3,10 +3,8 @@ use std::io::Write;
 use std::path::PathBuf;
 
 use clap::Parser;
-use ergodis_private::semantic_plan::{CanonicalizationGate, LabelContract};
-use ergodis_private::semantic_sets::{
-    for_each_k_subset, orbit_closure, TernaryPartitionMaxOverlapProfiler,
-};
+use ergodis_private::semantic_plan::affine_census::{affine_subspaces, run};
+use ergodis_private::semantic_sets::TernaryPartitionMaxOverlapProfiler;
 use serde::Serialize;
 
 #[derive(Parser)]
@@ -40,109 +38,6 @@ struct ResultEnvelope {
     labelled_objects: Option<u64>,
     labelled_maximum_plane_overlap_histogram: Option<Vec<u64>>,
     labelled_in_minimum_stratum: Option<u64>,
-}
-
-#[inline]
-fn add(left: u8, right: u8) -> u8 {
-    let mut result = 0_u8;
-    let mut place = 1_u8;
-    let mut a = left;
-    let mut b = right;
-    for _ in 0..3 {
-        result += ((a % 3 + b % 3) % 3) * place;
-        a /= 3;
-        b /= 3;
-        place *= 3;
-    }
-    result
-}
-
-#[inline]
-fn scale(value: u8, scalar: u8) -> u8 {
-    match scalar {
-        0 => 0,
-        1 => value,
-        2 => add(value, value),
-        _ => unreachable!(),
-    }
-}
-
-fn affine_subspaces(rank: usize) -> Vec<u64> {
-    let mut linear = Vec::new();
-    if rank == 1 {
-        for a in 1..27_u8 {
-            linear.push((1_u64 << 0) | (1_u64 << a) | (1_u64 << scale(a, 2)));
-        }
-    } else {
-        for a in 1..27_u8 {
-            for b in (a + 1)..27_u8 {
-                if b == scale(a, 2) {
-                    continue;
-                }
-                let mut mask = 0_u64;
-                for i in 0..3_u8 {
-                    for j in 0..3_u8 {
-                        mask |= 1_u64 << add(scale(a, i), scale(b, j));
-                    }
-                }
-                linear.push(mask);
-            }
-        }
-    }
-    linear.sort_unstable();
-    linear.dedup();
-    let mut affine = Vec::with_capacity(linear.len() * 27);
-    for mask in linear {
-        for translation in 0..27_u8 {
-            let mut translated = 0_u64;
-            let mut points = mask;
-            while points != 0 {
-                let point = points.trailing_zeros() as u8;
-                translated |= 1_u64 << add(point, translation);
-                points &= points - 1;
-            }
-            affine.push(translated);
-        }
-    }
-    affine.sort_unstable();
-    affine.dedup();
-    affine
-}
-
-fn transform_point(point: u8, matrix: &[u8; 9], translation: u8) -> u8 {
-    let vector = [point % 3, (point / 3) % 3, (point / 9) % 3];
-    let shift = [
-        translation % 3,
-        (translation / 3) % 3,
-        (translation / 9) % 3,
-    ];
-    let mut result = 0_u8;
-    let mut place = 1_u8;
-    for row in 0..3 {
-        let coordinate = (shift[row]
-            + matrix[3 * row] * vector[0]
-            + matrix[3 * row + 1] * vector[1]
-            + matrix[3 * row + 2] * vector[2])
-            % 3;
-        result += coordinate * place;
-        place *= 3;
-    }
-    result
-}
-
-/// Compare equal-cardinality masks by their increasing element tuples.
-#[inline]
-fn subset_lexicographically_precedes(mut left: u64, mut right: u64) -> bool {
-    while left != 0 {
-        let left_point = left.trailing_zeros();
-        let right_point = right.trailing_zeros();
-        if left_point != right_point {
-            return left_point < right_point;
-        }
-        left &= left - 1;
-        right &= right - 1;
-    }
-    false
 }
 
 fn profile_labelled(path: &PathBuf, planes: Vec<u64>) -> anyhow::Result<(u64, Vec<u64>)> {
@@ -190,65 +85,12 @@ fn profile_labelled(path: &PathBuf, planes: Vec<u64>) -> anyhow::Result<(u64, Ve
 
 fn main() -> anyhow::Result<()> {
     let args = Args::parse();
+    let census = run()?;
     let planes = affine_subspaces(2);
     let lines = affine_subspaces(1);
     assert_eq!(planes.len(), 39);
     assert_eq!(lines.len(), 117);
 
-    let mut profiler =
-        TernaryPartitionMaxOverlapProfiler::try_new(planes.clone(), (1_u64 << 27) - 1, 9)
-            .map_err(anyhow::Error::msg)?;
-    assert_eq!(profiler.partitions(), 13);
-    let mut ambient_subsets = 0_u64;
-    let mut minimum = 9_u32;
-    let mut minimum_count = 0_u64;
-    let mut minimum_all_caps = true;
-    let mut representative = 0_u64;
-    for_each_k_subset(27, 9, |mask| {
-        ambient_subsets += 1;
-        let overlap = profiler.observe(mask, 1);
-        if overlap < minimum {
-            minimum = overlap;
-            minimum_count = 0;
-            minimum_all_caps = true;
-            representative = mask;
-        }
-        if overlap == minimum {
-            minimum_count += 1;
-            minimum_all_caps &= lines.iter().all(|line| (mask & line).count_ones() <= 2);
-            if subset_lexicographically_precedes(mask, representative) {
-                representative = mask;
-            }
-        }
-    });
-
-    let generators = [
-        ([1, 0, 0, 0, 1, 0, 0, 0, 1], 1),
-        ([0, 1, 0, 1, 0, 0, 0, 0, 1], 0),
-        ([1, 0, 0, 0, 0, 1, 0, 1, 0], 0),
-        ([1, 1, 0, 0, 1, 0, 0, 0, 1], 0),
-    ];
-    let orbit = orbit_closure(
-        representative,
-        generators.len(),
-        minimum_count as usize,
-        |object, generator| {
-            let (matrix, translation) = &generators[generator];
-            let mut transformed = 0_u64;
-            let mut points = object;
-            while points != 0 {
-                let point = points.trailing_zeros() as u8;
-                transformed |= 1_u64 << transform_point(point, matrix, *translation);
-                points &= points - 1;
-            }
-            transformed
-        },
-    );
-    let affine_group_order = 27 * (27 - 1) * (27 - 3) * (27 - 9);
-    let canonicalization_gate = CanonicalizationGate {
-        label_contract: LabelContract::Diagnostic,
-        action_verified: true,
-    };
     let labelled = args
         .labelled_tsv
         .as_ref()
@@ -256,26 +98,26 @@ fn main() -> anyhow::Result<()> {
         .transpose()?;
     let labelled_in_minimum_stratum = labelled
         .as_ref()
-        .map(|(_, histogram)| histogram[minimum as usize]);
+        .map(|(_, histogram)| histogram[census.minimum as usize]);
     let result = ResultEnvelope {
         schema: "ergodis.semantic-affine-census.v1",
         universe: "AG(3,3)",
         subset_size: 9,
         affine_planes: planes.len(),
         affine_lines: lines.len(),
-        ambient_subsets,
-        maximum_plane_overlap_histogram: profiler.histogram().to_vec(),
-        minimum_maximum_plane_overlap: minimum as usize,
-        minimum_stratum_size: minimum_count,
-        minimum_stratum_all_caps: minimum_all_caps,
-        affine_group_order,
-        minimum_stratum_orbit_size: orbit.len(),
-        stabilizer_order: affine_group_order / orbit.len(),
-        single_affine_orbit: orbit.len() as u64 == minimum_count,
+        ambient_subsets: census.ambient_subsets,
+        maximum_plane_overlap_histogram: census.histogram.to_vec(),
+        minimum_maximum_plane_overlap: census.minimum as usize,
+        minimum_stratum_size: census.minimum_count,
+        minimum_stratum_all_caps: census.minimum_all_caps,
+        affine_group_order: census.affine_group_order,
+        minimum_stratum_orbit_size: census.orbit_size,
+        stabilizer_order: census.stabilizer_order(),
+        single_affine_orbit: census.is_single_minimum_orbit(),
         canonicalization_label_contract: "diagnostic",
-        canonicalization_proof_eligible: canonicalization_gate.proof_eligible(),
+        canonicalization_proof_eligible: false,
         representative: (0..27_u8)
-            .filter(|point| representative & (1_u64 << point) != 0)
+            .filter(|point| census.representative & (1_u64 << point) != 0)
             .collect(),
         labelled_objects: labelled.as_ref().map(|(total, _)| *total),
         labelled_maximum_plane_overlap_histogram: labelled
