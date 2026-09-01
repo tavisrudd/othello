@@ -670,6 +670,46 @@ files are disposable and may be deleted at any time.
    characteristic-zero, infinite-family
    certificate product and a stepping stone toward theorem composition; it is
    not a request to put a generic sieve or CAS in the solve core.
+10. **In progress — C1030 tactical correctness and root-cause safeguards.**
+   Treat the independently vetted register in
+   `2026-08-31-c1030-ergodis-audit-rootcause.md` as the authoritative defect
+   input, while retaining its warning that a single audit pass produces leads,
+   not results.  The execution order is fixed:
+
+   1. finish and commit the reusable binary-kernel/OSD extraction already in
+      flight, but admit it only with kernel-owned input/layout bounds, an
+      independent exhaustive small-model oracle, independent sparse witness
+      replay, deterministic worker-local reduction, and allocation gates that
+      observe actual worker threads rather than only the caller;
+   2. repair every confirmed SEV1/SEV2 item tactically: fail closed on unchecked
+      `certdist` witnesses and toolchain mismatch; make the load-bearing
+      `certiis` schema strict and reproducible; correct rank-deficient matrix
+      containment; correct and restore-through-error the g53 same-block repair
+      join; make the private source/evidence chain commit-addressable without
+      absorbing unrelated working-tree ownership; widen/check the square-sum
+      kernel; retain all relevant fibre representatives in the q29 scout; and
+      make certificate creation atomic/create-only with surfaced directory
+      errors;
+   3. revisit the register by root cause rather than file.  Add narrow
+      capability-owned safeguards now—shared allocation instrumentation that
+      propagates measurement identity to workers, checked representation
+      constructors with adjacent bounds, strict evidence schemas and
+      create-only writers, typed error distinctions, and structurally
+      independent small-model/differential verifiers.  Record the larger
+      capability-layer and verifier-independence choices as ADRs, but do not
+      reorganize the private crate or rewrite all sealed proofs in this tranche;
+   4. require formatting, strict all-target/all-feature clippy, full public and
+      affected-private tests, malformed-input/corruption tests, and durable Git
+      SHAs for each coherent commit.  Benchmark only changes that reach a hot
+      loop, with exact-work one-thread and parallel counter A/B.
+
+   Architectural direction: campaign modules may consume shared capability
+   kernels, but must not own copied trust primitives.  Preconditions travel
+   with constructors/representations; `debug_assert!` is never the sole guard
+   for certificate soundness or memory safety; “verified” must state whether it
+   means replay, independent recomputation, or proof checking.  A later broad
+   capability-layer refactor is gated on the tactical fixes and ADR, not mixed
+   into them.
 
 ## Gurobi boundary and semantic-symmetry spike, 2026-08-29
 

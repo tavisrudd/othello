@@ -8,6 +8,7 @@ pub mod applications;
 mod arena;
 pub mod automata;
 pub mod balanced;
+pub mod binary_kernel_search;
 pub mod bitset;
 pub mod character_sum;
 pub mod coherent_closure;
@@ -79,6 +80,10 @@ pub use applications::{
     RepairDagAnswer, RepairTask,
 };
 pub use automata::{ExplicitMataDfa, ExplicitMataError};
+pub use binary_kernel_search::{
+    BinaryKernelSearchError, BinaryKernelSearchSummary, BinaryKernelSearchWorkspace,
+    BinaryKernelTrialOptions, CompiledBinaryKernelSearch,
+};
 pub use character_sum::{
     CharacterCensus, CharacterSumError, CyclotomicCensus, PolynomialDegeneracy,
     PrimeMultiplicativeCharacter, PrimeQuadraticCharacter, RootOfUnityCensus,
