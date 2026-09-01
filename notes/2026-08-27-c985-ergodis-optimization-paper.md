@@ -1152,6 +1152,29 @@ files are disposable and may be deleted at any time.
    evolution tranche is a bounded, fully replayed clause-growth mutation whose
    finite clauses are derived from the frozen batch; this report is its exact
    before-A/B gate.
+
+   Commit `0ba1ca615` closes that candidate-language gap in the public evolution
+   compiler. It derives a bounded set of typed single-field clauses from at
+   most 16 fields and 4,096 evenly sampled rows, quotients them by exact sampled
+   semantics, and retains at most 16. A second bounded pass composes pairs with
+   `and`/`or`, quotients those semantics again, and retains at most eight. The
+   three target strategies enumerate the same finite mutation set and differ
+   only in ordering; unit coverage proves that invariant and compiles every
+   emitted predicate. All profiling, allocation, and plan construction remain
+   in the low-priority evolution job, outside solver threads and safe points.
+
+   The exact 128-candidate after-control closes both frozen gates. On held-out
+   p7/b7, every route now reaches the 24/35 interface ceiling: structural at
+   trial 13 / 1,505 semantic-op rows and balanced/numeric at trial 28 / 3,080,
+   all through `clause-pair`. The recovered predicate is
+   `(root_initial_branches == 7) and (root_candidate != 1)`. On development
+   p8/b8, the 39/56 ceiling is preserved and structural reaches it in 2,744
+   semantic-op rows, 1.96x below the previous 5,376-row best and 3.00x below
+   the original 8,232-row balanced route. The committed reports are
+   `ergodis-private/evidence/alignment-root-sized-clause-growth-final-heldout-report.json`
+   and `ergodis-private/evidence/alignment-root-sized-clause-growth-final-development-report.json`;
+   their six streamed evidence files identify `0ba1ca615` and are retained
+   without runtime manifests or control ledgers.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a

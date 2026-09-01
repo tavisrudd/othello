@@ -9,13 +9,15 @@
 
 Ergodis is not yet competitive with the leading evolutionary coding systems as
 an autonomous proposal engine: it still lacks broad proposal generation,
-independent islands, profile-driven target graphs, and a learned policy.  Since
-the original audit, however, the deterministic P0 selector and bounded P1
-substrate have landed: impact/cost scorecards, exploration-floor allocation,
-semantic niches, resumable elite mutation, exact hindsight fragments,
-type-compatible theorem-DAG composition, mandatory cross-campaign replay, and
-explicit frozen-field error strata.  Root/debt/exceptional-state target graphs
-and broad proposal generation remain open.
+independent islands, and a learned generative policy. Since the original audit,
+however, the deterministic P0 selector and bounded P1 substrate have landed:
+impact/cost scorecards, exploration-floor allocation, semantic niches,
+resumable elite mutation, exact hindsight fragments, type-compatible
+theorem-DAG composition, mandatory cross-campaign replay, explicit frozen-field
+error strata, live bounded target graphs, exact source-target attribution, and
+a conservative archive-trained routing policy with held-out validation and
+cold injection. Root strata are operational; debt/exceptional-state publishers,
+bounded aggregation, and broad proposal generation remain open.
 
 It is already stronger than those systems in a different and important layer:
 the exact experimental substrate. Candidate plans are typed and compiled,
@@ -46,15 +48,15 @@ problem has already been compiled into exact finite observables.
 
 | Capability | Relevant SOTA | Ergodis now | Consequence |
 |---|---|---|---|
-| Proposal breadth | AlphaEvolve evolves whole files with an LLM ensemble; CodeEvolve adds inspirations, meta-prompts, and depth refinement | bounded hand-written mutations over a typed VM | large autonomy gap, but a much smaller and safer search space |
+| Proposal breadth | AlphaEvolve evolves whole files with an LLM ensemble; CodeEvolve adds inspirations, meta-prompts, and depth refinement | bounded typed-VM mutations plus batch-derived, semantics-quotiented one- and two-clause predicates | large autonomy gap; next add bounded aggregation/composition without sacrificing replayability |
 | Diversity | AlphaEvolve uses MAP-Elites/islands; open CodeEvolve uses CVT-MAP-Elites, islands, and migration | exact outcome classes plus failure/operator/cost niches and bounded resumable elites | add genuinely independent operator-prior islands only after measured niche use |
 | Evaluation economy | AlphaEvolve uses cascades and parallel evaluators | exact monotone cascade, failure targeting, bitmap premise screening, and bounded full replay | add operational shadow stages and profile-directed batches |
-| Target selection | TTT-Discover uses maximum-oriented PUCT; runtime CodeEvolve profiles weighted component graphs | deterministic best-impact-per-cost heap plus a live bounded target graph, one-slot exploration floor, evidenced refresh, explicit non-pruning numeric/structural mutation routing, and exact source-target attribution | add a bounded target-local learner that abstains when theorem-derived repair already dominates |
-| Learning from a campaign | TTT-Discover updates the model at test time; HTPS trains online from proof search | no learned proposal policy | defer weight updates until exact archives and rewards are calibrated |
+| Target selection | TTT-Discover uses maximum-oriented PUCT; runtime CodeEvolve profiles weighted component graphs | deterministic best-impact-per-cost heap plus a live bounded target graph, one-slot exploration floor, evidenced refresh, explicit non-pruning numeric/structural mutation routing, exact source-target attribution, and a no-regression archive-trained route learner | extend the same measured contract to debt and exceptional-state publishers |
+| Learning from a campaign | TTT-Discover updates the model at test time; HTPS trains online from proof search | conservative target-local route learning with minimum-evidence, equal-ceiling, and per-corpus no-regression gates; no learned proposal generator | preserve the exact abstention contract while learning richer proposal priors |
 | Learning from failure | Minimo hindsight-relabels failed proof trees into achieved theorems and proofs | typed proper subexpressions are retained only after zero-false-positive replay, with explicit no-authority obligations | extend from frozen feature rows to intermediate solver states and proof handles |
 | Cumulative theory | Minimo identifies lemma accumulation and premise selection as necessary for depth | bounded OR-composition DAG, exact domain equality, marginal-coverage/cost premise rank, and cross-campaign replay | extend obligations to solver states and import kernel proof handles |
 | Trace diagnosis | EvoTrace/EvoReplay retain source, lineage, prompts, evaluation metadata, replay interventions, and cycling tests | bounded event ledger and streamed trials, but incomplete lineage/replay schema and no cycling diagnostic | make every candidate replayable and detect equivalent reversions before evaluation |
-| Runtime focus | runtime CodeEvolve selects profiled hot components and prunes context | campaign-local measured profiles can be refreshed without authority; the first private alignment watcher now publishes exact root strata and observed cost | measure held-out utility, then add debt/exceptional-state publishers only where counters already exist |
+| Runtime focus | runtime CodeEvolve selects profiled hot components and prunes context | campaign-local profiles refresh without authority; alignment publishes exact root strata, validates routing held out, and cold-injects only unambiguous learned selectors | add debt/exceptional-state publishers only where counters already exist |
 | Exactness boundary | most systems rely on task evaluators and may overfit them | explicit `proof_authority: false`, hostile replay, exact witnesses/counterexamples | retain this as the non-negotiable architectural edge |
 
 AlphaEvolve's published ablations support evolution, rich context, meta-prompt
