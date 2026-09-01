@@ -835,8 +835,26 @@ files are disposable and may be deleted at any time.
    recreating the earlier deterministic-prefix pathology.  Footer/status
    counters expose retained elite slots; strict all-target/all-feature clippy
    and the complete suite pass.  Archive replay can consume the durable niche
-   records without live duplication.  Do not import a learned proposer before
-   the bounded exact hindsight/theorem-accumulation layer has an exact control.
+   records without live duplication.
+
+   Commit `9eeee985a` lands the first bounded exact-hindsight layer.  For each
+   selected beam parent, a typed postfix pass identifies only proper Boolean
+   subexpressions before compilation, eliminating invalid numeric-fragment
+   probes.  Longest fragments are tried first under hard bounds of 16 distinct
+   semantics per parent, four accepted fragments per parent, 256 examined
+   semantics, and 64 accepted fragments per campaign.  A fragment survives
+   only when it has positive weighted coverage and zero false positives on
+   every row of the frozen batch.  The asymmetric control rejects `y > 0` on
+   its negative counterexample and retains only `x > 0`; the accepted fragment
+   is then exercised through the complete evidence writer.  Each record carries
+   its source dependency edge, structural semantic hash, compiled-plan hash,
+   exact coverage and row count, full typed plan, `trusted: false`, and an
+   explicit compatible-batch replay obligation.  Evidence exhaustion rejects
+   only the fragment rather than truncating candidate search, and all fragment
+   and rejection work is footer-visible.  Strict all-target/all-feature clippy
+   and the complete suite pass.  Next add bounded type-compatible fragment
+   composition and counterexample-set replay; do not import a learned proposer
+   before that accumulation layer has an exact control.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
