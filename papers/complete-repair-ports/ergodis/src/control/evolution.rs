@@ -1876,6 +1876,7 @@ pub(super) fn run_evolution(
             .min(MAX_HINDSIGHT_COMPOSITION_PROBES_PER_GENERATION);
         if hindsight_ledger.len() >= 2
             && hindsight_semantics.len() < MAX_HINDSIGHT_FRAGMENTS
+            && hindsight_seen.len() < MAX_HINDSIGHT_SEMANTICS
             && composition_probe_limit != 0
         {
             let extraction = compose_hindsight_fragments(
@@ -2971,6 +2972,25 @@ mod tests {
         };
         let archive = load_evolution_archive(&evidence_path, &replay_identity, 4, 64).unwrap();
         assert_eq!(archive.fragments.len(), 3);
+        let corrupt_path = temporary.path().join("corrupt-composition.jsonl");
+        let mut corrupted = Vec::new();
+        let mut changed = false;
+        for line in std::fs::read_to_string(&evidence_path).unwrap().lines() {
+            let mut record = serde_json::from_str::<Value>(line).unwrap();
+            if !changed && record["type"] == "hindsight-fragment" {
+                record["semantic_hash"] = Value::String("0".repeat(64));
+                changed = true;
+            }
+            corrupted.push(serde_json::to_string(&record).unwrap());
+        }
+        std::fs::write(&corrupt_path, format!("{}\n", corrupted.join("\n"))).unwrap();
+        let corruption = match load_evolution_archive(&corrupt_path, &replay_identity, 4, 64) {
+            Ok(_) => panic!("corrupted hindsight archive was accepted"),
+            Err(error) => error,
+        };
+        assert!(corruption
+            .to_string()
+            .contains("hindsight semantic hash does not match"));
         let rejection_batch = FeatureBatch {
             presentation: "changed".into(),
             problem: "sound-union".into(),
