@@ -54,7 +54,7 @@ problem has already been compiled into exact finite observables.
 | Learning from failure | Minimo hindsight-relabels failed proof trees into achieved theorems and proofs | typed proper subexpressions are retained only after zero-false-positive replay, with explicit no-authority obligations | extend from frozen feature rows to intermediate solver states and proof handles |
 | Cumulative theory | Minimo identifies lemma accumulation and premise selection as necessary for depth | bounded OR-composition DAG, exact domain equality, marginal-coverage/cost premise rank, and cross-campaign replay | extend obligations to solver states and import kernel proof handles |
 | Trace diagnosis | EvoTrace/EvoReplay retain source, lineage, prompts, evaluation metadata, replay interventions, and cycling tests | bounded event ledger and streamed trials, but incomplete lineage/replay schema and no cycling diagnostic | make every candidate replayable and detect equivalent reversions before evaluation |
-| Runtime focus | runtime CodeEvolve selects profiled hot components and prunes context | campaign-local measured target profiles can now be updated during evolution without changing semantic authority | publish theorem cost, state mass, exceptional roots, and debt automatically from domain adapters |
+| Runtime focus | runtime CodeEvolve selects profiled hot components and prunes context | campaign-local measured profiles can be refreshed without authority; the first private alignment watcher now publishes exact root strata and observed cost | measure held-out utility, then add debt/exceptional-state publishers only where counters already exist |
 | Exactness boundary | most systems rely on task evaluators and may overfit them | explicit `proof_authority: false`, hostile replay, exact witnesses/counterexamples | retain this as the non-negotiable architectural edge |
 
 AlphaEvolve's published ablations support evolution, rich context, meta-prompt
@@ -257,6 +257,16 @@ proof authority.
 Next, connect existing root progress, debt ledgers, exceptional-state counts,
 and perf counters to the landed watcher accumulator, then compare balanced and
 routed discovery per exact candidate and semantic-op row on held-out campaigns.
+
+The first operational adapter is now landed privately for alignment search. It
+groups the existing coarse heartbeat by exact root orbit, initial packing, and
+sizing status, publishes changed absolute root-count/maximum-cost observations,
+and selects numeric- or structural-first routing from runtime-configured shape
+thresholds. All sampling, aggregation, serialization, and socket work stays in
+the auxiliary watcher; the search publication and safe-point paths are
+unchanged. The remaining gate is empirical: balanced versus routed held-out
+campaigns must improve perfect-hit ordinal or semantic-op rows before the
+heuristic is treated as useful rather than merely operational.
 
 ### P2 — learned proposer or test-time training
 
