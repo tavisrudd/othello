@@ -160,8 +160,65 @@ pub(crate) fn measure_allocations<T>(operation: impl FnOnce() -> T) -> (T, Alloc
     (result, events)
 }
 
+/// Measure one caller-thread region with the same panic-safe guard used by
+/// instrumented solve kernels. Worker threads must receive the measurement
+/// identity explicitly through [`current_measurement`] and
+/// [`HotLoopAllocationGuard::enter_for`]; this helper deliberately does not
+/// pretend that thread-local state propagates automatically.
+pub(crate) fn measure_current_thread_allocations<T>(
+    operation: impl FnOnce() -> T,
+) -> (T, AllocationEvents) {
+    measure_allocations(|| {
+        let _guard = HotLoopAllocationGuard::enter();
+        operation()
+    })
+}
+
 fn lock_measurement() -> MutexGuard<'static, ()> {
     MEASUREMENT_LOCK
         .lock()
         .unwrap_or_else(std::sync::PoisonError::into_inner)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn worker_events_require_and_obey_explicit_measurement_propagation() {
+        let (_, unpropagated) = measure_allocations(|| {
+            std::thread::scope(|scope| {
+                scope
+                    .spawn(|| std::hint::black_box(Box::new(7_u64)))
+                    .join()
+                    .unwrap();
+            });
+        });
+        assert_eq!(unpropagated, AllocationEvents::default());
+
+        let (_, propagated) = measure_allocations(|| {
+            let measurement = current_measurement();
+            std::thread::scope(|scope| {
+                scope
+                    .spawn(move || {
+                        let _guard = HotLoopAllocationGuard::enter_for(measurement);
+                        std::hint::black_box(Box::new(7_u64));
+                    })
+                    .join()
+                    .unwrap();
+            });
+        });
+        assert!(propagated.allocations > 0);
+        assert!(propagated.deallocations > 0);
+    }
+
+    #[test]
+    fn panicking_measurement_restores_the_allocator_state() {
+        let failure = std::panic::catch_unwind(|| {
+            measure_current_thread_allocations(|| panic!("intentional measurement failure"));
+        });
+        assert!(failure.is_err());
+        let (_, events) = measure_current_thread_allocations(|| {});
+        assert_eq!(events, AllocationEvents::default());
+    }
 }
