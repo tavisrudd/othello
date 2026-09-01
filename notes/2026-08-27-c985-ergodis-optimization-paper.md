@@ -895,6 +895,47 @@ files are disposable and may be deleted at any time.
    Raw negative evidence is
    `c985-c1018-hot-worker-cold-annotation-rejected.tsv`. The next substantive
    target must come from a fresh post-dense profile.
+
+   Commit `fba3eaa31` resolves that profile's matrix-action branch by compiling
+   sparse binary generators into two flat tapes. The three q=64 application
+   generators contain only 21 nonzero entries: 17 unit coefficients become
+   direct XOR terms and four weighted coefficients retain multiplication-table
+   lookups, versus 75 multiply-add positions in the dense `5 x 5 x 3` pack.
+   A first row-plan prototype reduced retired instructions but lost cycles to
+   nested interpreter branches; the admitted layout instead stores one range
+   per action over flat two-byte unit and four-byte weighted terms. The
+   validate-once public pack retains exact matrix-presentation, shape, and
+   full-rank checks. Its 88-byte pack and 16-byte runner have asserted layouts,
+   the runner allocates nothing, and exhaustive `PG(2,8)` comparison agrees
+   with the dense binary pack. Singular generators and out-of-range points fail
+   closed. Strict all-target/all-feature clippy and all 421 public library tests
+   pass.
+
+   Fifteen rotated public-kernel pairs perform 29.97 million transitions per
+   arm with identical nonzero checksum. Dense/sparse is 1.234812x cycles
+   (`t=4.04`), 1.357422x instructions, and 1.234257x task-clock (`t=3.95`).
+   The sparse tape executes 12.1% more branches and 32.5% more branch misses,
+   but removing 54 multiplication positions dominates. The private application
+   uses a compile-time `c1018-sparse-action` gate so the default binary contains
+   no sparse monomorph and preserves the small worker's code placement. Seven
+   16-solve q=32 default-control pairs are instruction- and branch-exact;
+   cycles are neutral at 0.998953x (`t=-0.15`) and task-clock at 1.004313x
+   (`t=1.41`).
+
+   Seven complete q=64 pairs preserve one exact output digest per thread mode.
+   Default/sparse at 1T is 1.176617x cycles (`t=7.25`), 1.934516x
+   instructions, 1.725070x branches, and 1.194441x wall (`t=6.40`). At 12T it
+   is 1.262534x cycles (`t=3.87`), 1.966170x instructions, 1.749540x branches,
+   and 1.150135x wall (`t=10.19`). Branch misses also improve
+   1.034851x/1.037649x. Median RSS moves from 8,604 to 8,952 KiB at 1T and
+   51,932 to 52,572 KiB at 12T; the small absolute increase is accepted for the
+   large-only path. Raw tables are
+   `c985-binary-sparse-action-kernel-ab.tsv`,
+   `c985-c1018-sparse-action-default-q32-control.tsv`,
+   `c985-c1018-sparse-action-q64-counters.tsv`, and
+   `c985-c1018-sparse-action-q64-wall.tsv`. The next substantive target must
+   come from a fresh post-sparse endpoint profile rather than another matrix
+   micro-optimization chosen in isolation.
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
