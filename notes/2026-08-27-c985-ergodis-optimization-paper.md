@@ -856,8 +856,27 @@ files are disposable and may be deleted at any time.
    candidate/parent ratios are 0.99999999x instructions (`t=-0.80`),
    0.99999997x branches (`t=-1.13`), and 0.99928x cycles (`t=-0.10`): no
    measurable operational cost. This resolves finding 9's unbounded/abort
-   failure mode while leaving duplicate retained basis storage explicitly
-   open.
+   failure mode. Commit `2e4246ebf` closes the remaining duplicate-storage
+   half: both projective-column and canonical-basis dictionaries now hash into
+   dense collision chains whose IDs resolve against the one arena-owned byte
+   payload. Full byte equality is replayed on every collision, including a
+   forced-collision regression, so the change does not trust a fingerprint.
+   The matrix-payload limit now counts each unique payload once; an exact
+   two-byte boundary test fails at one byte and succeeds at two.
+
+   On the existing `application:vector:rust:8:4` compiler path, seven
+   interleaved parent `cf87ea07b` / candidate `2e4246ebf` pairs with 20,000
+   fresh compilations per arm preserve exactly 300,000 transitions, 16 peak
+   states, and checksum 80,000. Parent/candidate is 1.026680x wall (`t=7.15`)
+   and 1.029399x cycles (`t=8.80`), with instruction and branch ratios
+   indistinguishable from one. Branch misses are tiny and unresolved; the
+   roughly 2.9% cycle win therefore comes from avoiding duplicate allocation
+   and payload traffic rather than executing less arithmetic. Process RSS at
+   this small control is baseline-dominated and is not claimed as a measured
+   reduction. The exact structural saving is one full transient copy of every
+   unique column and basis payload, replaced by one four-byte collision link.
+   Raw pairs are tracked at
+   `ergodis-private/evidence/c985-span-dedup-vector-20k.tsv`.
 
    Treat C1016's “Public-core enhancement ledger” as a recurring evolve input,
    not as campaign authority.  Its three current reusable requests are a
