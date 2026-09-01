@@ -346,6 +346,23 @@ separate evaluator, so these are the generating rules rather than selection arte
 is that each conjunct alone scores at the majority baseline, so a fitness-ranked beam has no reason
 to keep it and the behaviour archive does not distinguish it either.
 
+### 2026-09-01 02:00 — stopped at the user's deadline; exploration closed
+
+Work stopped at the 02:00 boundary the user set. Everything is committed: the design documents, the
+survey, the data-model note, the architecture recommendation, and the task report on `main`; the
+console, its live server, its browser gate, and the four probe and screening tools on branch
+`c1031-ergodis-viz` in the worktree `/home/tavis/.cache/c1031-ergodis-viz`. Both trees are clean.
+
+The final block's work is recorded in the report and does not need repeating here. In one line: the
+console, once it carried baselines, showed that the Ergodis evolution cannot alter a plan's
+structure, so a corpus whose answer needs a conjunction is unreachable from single-clause seeds no
+matter the budget — and that seeding with a compound shape recovers an exact solution with no code
+change.
+
+**The C-task row is still open in the queue.** Its stated deliverables are met several times over,
+but closing it is the user's call and was never given, so the row has been left alone rather than
+archived. Ask before archiving.
+
 **Next step on resume**: the exploration deliverables are complete and the console runs against real
 data at 10^5-candidate scale. Three things are worth raising with the user rather than starting
 unasked. First, the conjunction blind spot is a defect in the search and belongs to whoever owns
