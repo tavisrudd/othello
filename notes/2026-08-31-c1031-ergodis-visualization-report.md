@@ -241,24 +241,61 @@ sampled.
 | corpus-01, 04–12 | 36 | various `eq` pairs | −0.1 to +0.0 |
 | corpus-13 | 55 | `f000 eq f003` | +0.1 |
 
-Two conclusions follow, and they point in opposite directions from the earlier guess.
+On all fourteen corpora the evolutionary search's best plan matches this exhaustive optimum to within
+a tenth of a point. Within the family of single two-field relations the search is exact: where a
+solving relation exists it is found within a few thousand candidates, and where none exists it
+correctly returns nothing.
 
-**The search is not at fault, and this validates it.** On all fourteen corpora the evolutionary
-search's best plan matches the exhaustive two-field optimum to within a tenth of a point. Where a
-solving relation exists it is found, within a few thousand candidates; where none exists the search
-correctly returns nothing. Whatever else is wrong with the 36- and 55-field campaigns, the mutation
-operators are not failing to reach a reachable answer.
+The three solved corpora are each solved by a single field equality — the whole apparatus of beam
+search and behaviour archives was, where it succeeded, finding `f003 == f020`.
 
-**The wider corpora have no two-field answer to find.** No relation over any pair of fields beats the
-majority baseline by more than 0.2 points on held-out data, on any of the eleven. So spending more
-candidates on them is pointless, and so is enriching the mutation operators, as long as the target
-shape stays a two-field relation. Progress there needs either richer plan shapes — arithmetic
-combinations, three-field terms, conjunctions — or different features altogether. That is a question
-for whoever owns C1016, not for this task.
+### Every corpus is solvable, and the search misses eleven of them
 
-The three solved corpora are each solved by a single field equality, which is worth stating plainly:
-the whole apparatus of beam search, behaviour archives, and 3,595-class populations was, on the
-corpora where it succeeded, finding `f003 == f020`.
+The paragraph that used to stand here concluded that the wider corpora have no answer to find. **That
+was wrong**, and the mistake was mine: I searched one shape, found nothing, and generalized from it.
+The next shape up settles it.
+
+`tools/c1031-viz/conjunction_probe.py` enumerates every conjunction and disjunction of two two-field
+relations. Each candidate is held as one integer used as a bitset over the objects, so a combination
+costs two integer operations and a popcount; the 55-field corpus takes 434,940 combinations and runs
+in seconds.
+
+**All fourteen corpora are solved exactly, at 100%.** The three narrow ones by a single equality, and
+**every one of the eleven others by a conjunction of exactly two field equalities**:
+
+| corpus | fields | baseline | solving expression | lift |
+|---|---|---|---|---|
+| corpus-01 | 36 | 75.0% | `(f000 eq f020) and (f015 eq f026)` | +25.0 |
+| corpus-04 | 36 | 75.0% | `(f000 eq f013) and (f008 eq f029)` | +25.0 |
+| corpus-05 | 36 | 75.0% | `(f000 eq f010) and (f012 eq f031)` | +25.0 |
+| corpus-06 | 36 | 75.0% | `(f000 eq f029) and (f001 eq f015)` | +25.0 |
+| corpus-07 | 36 | 75.0% | `(f000 eq f001) and (f015 eq f034)` | +25.0 |
+| corpus-08 | 36 | 75.0% | `(f001 eq f029) and (f002 eq f028)` | +25.0 |
+| corpus-09 | 36 | 75.0% | `(f001 eq f003) and (f002 eq f019)` | +25.0 |
+| corpus-10 | 36 | 75.0% | `(f000 eq f019) and (f001 eq f026)` | +25.0 |
+| corpus-11 | 36 | 75.0% | `(f000 eq f032) and (f007 eq f023)` | +25.0 |
+| corpus-12 | 36 | 75.0% | `(f000 eq f010) and (f002 eq f029)` | +25.0 |
+| corpus-13 | 55 | 80.0% | `(f003 eq f004) and (f024 eq f049)` | +20.0 |
+
+So this is a **search failure, not a data limitation**. The 55-field campaign tested 99,966
+candidates, and a second seeded campaign tested another 99,948, and neither found a two-clause
+conjunction that a laptop enumerates in seconds. Every one of these expressions is well inside the
+plan grammar — the bytecode limit is 128 operations and these need seven.
+
+**The mechanism is visible in the data and it is structural.** Each conjunct on its own scores at the
+majority baseline: `f000 eq f020` alone classifies no better than answering the same way every time.
+So a beam ranked by weighted-correct sees no reason to keep either half, and the behaviour archive
+does not help either, because a clause that is useless alone is not behaviourally distinguished
+enough to earn an expansion slot ahead of thousands of competitors. The search has no gradient toward
+a conjunction whose parts are individually worthless, and the quality-diversity expansion spends its
+budget on behaviours that are merely different rather than on ones that compose.
+
+That is an actionable defect with an obvious class of remedy — crossover between surviving plans,
+retaining clauses by coverage of the positive class rather than by overall accuracy, or an explicit
+conjunction-building operator — and it belongs to whoever owns the search rather than to this task.
+It also reframes every earlier conclusion in this report about those corpora: the archives of 3,595
+behaviours were not evidence of a hard problem, they were a search wandering in a space whose answer
+needed one `and`.
 
 ### The exact ceiling is not a measure of learnability
 
