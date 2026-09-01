@@ -3082,6 +3082,18 @@ mod tests {
         assert!(classes
             .compile_profile(&duplicate_edge, &["root", "debt"])
             .is_err());
+        let mut cycle = profile.clone();
+        cycle.edges = vec![
+            profile.edges[0],
+            EvolutionTargetEdge {
+                from: 1,
+                to: 0,
+                kind: EvolutionTargetEdgeKind::Dependency,
+            },
+        ]
+        .into_boxed_slice();
+        let cycle = classes.compile_profile(&cycle, &["root", "debt"]).unwrap();
+        assert_eq!(cycle.class_priorities.as_ref(), &[12, 12]);
 
         let mut low = selector_parent("low", "scope");
         low.niche.target_class = Some(0);
