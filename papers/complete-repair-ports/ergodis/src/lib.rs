@@ -116,8 +116,9 @@ pub use continuation::{
     ContinuationLevel,
 };
 pub use css_distance::{
-    BoundedCssDistanceResult, CompiledCssDistance, CompiledExtraWideCssDistance,
-    CompiledWideCssDistance, ConnectedSearchStats, CssDistanceArtifactError, CssDistanceError,
+    verify_css_anchor_transversal, BoundedCssDistanceResult, CompiledCssDistance,
+    CompiledExtraWideCssDistance, CompiledWideCssDistance, ConnectedSearchStats,
+    CssAnchorOrbitCertificate, CssAnchorOrbitError, CssDistanceArtifactError, CssDistanceError,
     CssSearchShard,
 };
 #[cfg(feature = "large-css")]
@@ -141,8 +142,9 @@ pub use group_action::{
     compile_permutation_orbits_with_deferred_verification, quotient_presentation_by_binary_gl_rref,
     quotient_presentation_by_orbits, verify_binary_gl_rref, verify_permutation_orbits,
     BinaryGlPresentationError, BinaryGlProbeAction, BinaryGlProbeError, BinaryGlRrefQuotient,
-    BinaryRightLinearMap, FinitePermutationAction, GeneratorClosure, GeneratorClosureWorkspace,
-    OrbitCompileError, OrbitPartition, OrbitQuotientError, OrbitStorage,
+    BinaryRightLinearMap, ExplicitPermutationAction, ExplicitPermutationError,
+    FinitePermutationAction, GeneratorClosure, GeneratorClosureWorkspace, OrbitCompileError,
+    OrbitPartition, OrbitQuotientError, OrbitStorage,
 };
 pub use hall::{
     solve_hall, verify_hall_certificate, verify_hall_result, DenseHallGraph, HallError,

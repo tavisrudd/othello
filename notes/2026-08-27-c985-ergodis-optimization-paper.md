@@ -411,6 +411,25 @@ as each coherent tranche lands.
    code was reverted rather than allowing a plausible partial exhaustion into
    core.
 
+   Orbit-verified anchors are now implemented as the first positive C1027
+   import. A reusable flat permutation action is range/bijection checked by the
+   existing orbit compiler. The CSS verifier independently checks preservation
+   of `rowspan(H)` and `rowspan(H)+rowspan(L)`, then requires exactly one input
+   anchor per computed coordinate orbit; it does not assume free or uniform
+   orbits. `css_distance_native` accepts optional `coordinate_generators` and
+   records whether anchors remain trusted input or are a verified transversal.
+   On the checked-in BB288 presentation, the two bivariate translation
+   generators verify exactly two uniform 144-point orbits represented by
+   anchors 0 and 144. Thus the 144x anchor reduction in that application is now
+   checked rather than asserted, with no change to the solve hot loop. Evidence
+   is under `/home/tavis/.cache/ergodis-perf/c1027-anchor-verification`.
+
+   C1027's four missing general APIs are also now reconciled as already landed:
+   runtime small prime-power fields, binary/runtime null spaces, generic
+   `PG(d,q)` rank/unrank, and seeded allocation-free generator closure. Their
+   survey entries remain useful provenance, but no duplicate implementation is
+   planned.
+
 ## Gurobi boundary and semantic-symmetry spike, 2026-08-29
 
 The product boundary is now explicit in

@@ -1,11 +1,11 @@
 use anyhow::{bail, Context, Result};
 use clap::Parser;
+use ergodis::{
+    verify_css_anchor_transversal, CompiledCssDistance, CompiledExtraWideCssDistance,
+    CompiledWideCssDistance, CssSearchShard, Matrix,
+};
 #[cfg(feature = "large-css")]
 use ergodis::{CompiledColossalCssDistance, CompiledHugeCssDistance, CompiledLargeCssDistance};
-use ergodis::{
-    CompiledCssDistance, CompiledExtraWideCssDistance, CompiledWideCssDistance, CssSearchShard,
-    Matrix,
-};
 use serde::{Deserialize, Serialize};
 use std::fmt::Write as _;
 use std::fs::{File, OpenOptions};
@@ -62,6 +62,8 @@ struct SparseProblem {
     maximum_weight: u16,
     #[serde(default)]
     incumbent_support: Vec<u16>,
+    #[serde(default)]
+    coordinate_generators: Vec<Vec<u16>>,
 }
 
 #[derive(Debug, Serialize)]
@@ -72,6 +74,11 @@ struct RunRecord<'a> {
     physical_checks: usize,
     logical_observations: usize,
     anchors: &'a [u16],
+    anchor_verification: &'static str,
+    coordinate_generators: usize,
+    coordinate_orbits: Option<usize>,
+    minimum_orbit_size: Option<u32>,
+    maximum_orbit_size: Option<u32>,
     maximum_weight: u16,
     mode: &'static str,
     preparation_mode: &'static str,
@@ -214,6 +221,25 @@ fn main() -> Result<()> {
     let maximum_weight = args.maximum_weight.unwrap_or(problem.maximum_weight);
     let physical = dense_matrix(&problem.physical_checks, columns)?;
     let logical = dense_matrix(&problem.logical_observations, columns)?;
+    let anchor_certificate = if problem.coordinate_generators.is_empty() {
+        None
+    } else {
+        let mut images =
+            Vec::with_capacity(problem.coordinate_generators.len().saturating_mul(columns));
+        for (generator, row) in problem.coordinate_generators.iter().enumerate() {
+            if row.len() != columns {
+                bail!(
+                    "coordinate generator {generator} has {} images, expected {columns}",
+                    row.len()
+                );
+            }
+            images.extend(row.iter().map(|&image| u32::from(image)));
+        }
+        Some(
+            verify_css_anchor_transversal(&physical, &logical, images, &problem.anchors)
+                .context("verifying coordinate generators and anchor transversal")?,
+        )
+    };
     let physical_rank = binary_rank(&problem.physical_checks, columns);
     // Deep searches benefit overwhelmingly from syndrome-driven fail-first
     // branching even when the compact coordinate representation would fit.
@@ -700,6 +726,21 @@ fn main() -> Result<()> {
         physical_checks: problem.physical_checks.len(),
         logical_observations: problem.logical_observations.len(),
         anchors: &problem.anchors,
+        anchor_verification: if anchor_certificate.is_some() {
+            "verified-orbit-transversal"
+        } else {
+            "trusted-input"
+        },
+        coordinate_generators: problem.coordinate_generators.len(),
+        coordinate_orbits: anchor_certificate
+            .as_ref()
+            .map(|certificate| certificate.partition().representatives().len()),
+        minimum_orbit_size: anchor_certificate
+            .as_ref()
+            .map(|certificate| certificate.minimum_orbit_size()),
+        maximum_orbit_size: anchor_certificate
+            .as_ref()
+            .map(|certificate| certificate.maximum_orbit_size()),
         maximum_weight,
         mode,
         preparation_mode,

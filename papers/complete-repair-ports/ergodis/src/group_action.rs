@@ -13,6 +13,75 @@ pub trait FinitePermutationAction {
 }
 
 #[derive(Clone, Copy, Debug, Error, PartialEq, Eq)]
+pub enum ExplicitPermutationError {
+    #[error("the explicit action has zero points or a malformed generator table")]
+    Shape,
+    #[error("the explicit action point or generator is out of range")]
+    Index,
+}
+
+/// Flat, reusable presentation of permutations on `0..point_count`.
+///
+/// Construction checks the table shape. The orbit compiler performs the
+/// independent bijectivity and range checks needed for a certificate.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct ExplicitPermutationAction {
+    point_count: u32,
+    generator_count: u32,
+    images: Box<[u32]>,
+}
+
+impl ExplicitPermutationAction {
+    pub fn new(
+        point_count: usize,
+        images: impl Into<Box<[u32]>>,
+    ) -> Result<Self, ExplicitPermutationError> {
+        let point_count =
+            u32::try_from(point_count).map_err(|_| ExplicitPermutationError::Shape)?;
+        let images = images.into();
+        if point_count == 0 || images.len() % point_count as usize != 0 {
+            return Err(ExplicitPermutationError::Shape);
+        }
+        let generator_count = u32::try_from(images.len() / point_count as usize)
+            .map_err(|_| ExplicitPermutationError::Shape)?;
+        Ok(Self {
+            point_count,
+            generator_count,
+            images,
+        })
+    }
+
+    pub fn images(&self, generator: u32) -> Option<&[u32]> {
+        let start = (generator as usize).checked_mul(self.point_count as usize)?;
+        self.images
+            .get(start..start.checked_add(self.point_count as usize)?)
+    }
+}
+
+impl FinitePermutationAction for ExplicitPermutationAction {
+    type Error = ExplicitPermutationError;
+
+    fn point_count(&self) -> u32 {
+        self.point_count
+    }
+
+    fn generator_count(&self) -> u32 {
+        self.generator_count
+    }
+
+    #[inline]
+    fn apply(&self, generator: u32, point: u32) -> Result<u32, Self::Error> {
+        if point >= self.point_count {
+            return Err(ExplicitPermutationError::Index);
+        }
+        self.images(generator)
+            .and_then(|images| images.get(point as usize))
+            .copied()
+            .ok_or(ExplicitPermutationError::Index)
+    }
+}
+
+#[derive(Clone, Copy, Debug, Error, PartialEq, Eq)]
 pub enum BinaryGlProbeError {
     #[error("binary GL probe dimensions must be positive and use fewer than 32 bits")]
     Shape,

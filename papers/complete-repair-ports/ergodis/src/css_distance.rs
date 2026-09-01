@@ -7,7 +7,11 @@
 //! component has a nonzero observation and no greater weight.  The search
 //! below therefore enumerates only connected supports.
 
-use crate::matrix::Matrix;
+use crate::group_action::{
+    compile_permutation_orbits, ExplicitPermutationAction, ExplicitPermutationError,
+    FinitePermutationAction, OrbitCompileError, OrbitPartition,
+};
+use crate::matrix::{Matrix, MatrixError};
 #[cfg(all(test, feature = "parallel"))]
 use crate::test_alloc::{measure_allocations, HotLoopAllocationGuard};
 use serde::Serialize;
@@ -108,6 +112,141 @@ pub enum CssDistanceError {
     IncumbentPhysicalSyndrome,
     #[error("incumbent support has zero logical observation")]
     IncumbentLogicalObservation,
+}
+
+#[derive(Debug, Error)]
+pub enum CssAnchorOrbitError {
+    #[error("CSS symmetry matrices or generator tables have incompatible shapes")]
+    Shape,
+    #[error("a coordinate generator does not preserve the CSS search predicate")]
+    NotAutomorphism,
+    #[error("the proposed anchors are not exactly one representative per coordinate orbit")]
+    NotTransversal,
+    #[error(transparent)]
+    Matrix(#[from] MatrixError),
+    #[error(transparent)]
+    Orbit(#[from] OrbitCompileError<ExplicitPermutationError>),
+    #[error(transparent)]
+    Action(#[from] ExplicitPermutationError),
+}
+
+/// Independently checkable coordinate-orbit reduction for CSS search anchors.
+#[derive(Clone, Debug)]
+pub struct CssAnchorOrbitCertificate {
+    partition: OrbitPartition,
+    anchors: Box<[u16]>,
+    minimum_orbit_size: u32,
+    maximum_orbit_size: u32,
+}
+
+impl CssAnchorOrbitCertificate {
+    pub fn partition(&self) -> &OrbitPartition {
+        &self.partition
+    }
+
+    pub fn anchors(&self) -> &[u16] {
+        &self.anchors
+    }
+
+    pub fn minimum_orbit_size(&self) -> u32 {
+        self.minimum_orbit_size
+    }
+
+    pub fn maximum_orbit_size(&self) -> u32 {
+        self.maximum_orbit_size
+    }
+}
+
+/// Verify that coordinate generators preserve the CSS search predicate and
+/// that `anchors` contains exactly one point from every resulting orbit.
+///
+/// Preserving both `rowspan(physical)` and
+/// `rowspan(physical) + rowspan(logical)` preserves, respectively, the
+/// zero-syndrome condition and whether a zero-syndrome support has a nonzero
+/// logical observation. No freeness or uniform-orbit assumption is needed.
+pub fn verify_css_anchor_transversal(
+    physical: &Matrix,
+    logical: &Matrix,
+    generator_images: impl Into<Box<[u32]>>,
+    anchors: &[u16],
+) -> Result<CssAnchorOrbitCertificate, CssAnchorOrbitError> {
+    let coordinates = physical.cols();
+    if coordinates == 0
+        || logical.cols() != coordinates
+        || logical.rows() == 0
+        || physical.as_slice().iter().any(|&entry| entry > 1)
+        || logical.as_slice().iter().any(|&entry| entry > 1)
+    {
+        return Err(CssAnchorOrbitError::Shape);
+    }
+    let action = ExplicitPermutationAction::new(coordinates, generator_images)?;
+    let partition = compile_permutation_orbits(&action)?;
+    let physical_basis = physical.canonical_row_basis::<2>()?;
+    let combined = joined_binary_rows(physical, logical)?;
+    let combined_basis = combined.canonical_row_basis::<2>()?;
+    for generator in 0..action.generator_count() {
+        let images = action.images(generator).ok_or(CssAnchorOrbitError::Shape)?;
+        let permuted_physical = permute_binary_columns(physical, images)?;
+        if permuted_physical.canonical_row_basis::<2>()? != physical_basis {
+            return Err(CssAnchorOrbitError::NotAutomorphism);
+        }
+        let permuted_combined = permute_binary_columns(&combined, images)?;
+        if permuted_combined.canonical_row_basis::<2>()? != combined_basis {
+            return Err(CssAnchorOrbitError::NotAutomorphism);
+        }
+    }
+
+    let mut seen = vec![false; partition.representatives().len()];
+    for &anchor in anchors {
+        let Some(orbit) = partition.orbit(u32::from(anchor)) else {
+            return Err(CssAnchorOrbitError::NotTransversal);
+        };
+        let slot = &mut seen[orbit as usize];
+        if *slot {
+            return Err(CssAnchorOrbitError::NotTransversal);
+        }
+        *slot = true;
+    }
+    if seen.iter().any(|&covered| !covered) {
+        return Err(CssAnchorOrbitError::NotTransversal);
+    }
+    let mut orbit_sizes = vec![0_u32; seen.len()];
+    for point in 0..coordinates as u32 {
+        orbit_sizes[partition.orbit(point).ok_or(CssAnchorOrbitError::Shape)? as usize] += 1;
+    }
+    Ok(CssAnchorOrbitCertificate {
+        partition,
+        anchors: anchors.to_vec().into_boxed_slice(),
+        minimum_orbit_size: orbit_sizes.iter().copied().min().unwrap_or(0),
+        maximum_orbit_size: orbit_sizes.iter().copied().max().unwrap_or(0),
+    })
+}
+
+fn joined_binary_rows(left: &Matrix, right: &Matrix) -> Result<Matrix, MatrixError> {
+    if left.cols() != right.cols() {
+        return Err(MatrixError::Shape);
+    }
+    let mut data = Vec::with_capacity(left.as_slice().len() + right.as_slice().len());
+    data.extend_from_slice(left.as_slice());
+    data.extend_from_slice(right.as_slice());
+    Matrix::new::<2>(left.rows() + right.rows(), left.cols(), data)
+}
+
+fn permute_binary_columns(matrix: &Matrix, images: &[u32]) -> Result<Matrix, MatrixError> {
+    if matrix.cols() != images.len() {
+        return Err(MatrixError::Shape);
+    }
+    let mut data = vec![0_u8; matrix.as_slice().len()];
+    for row in 0..matrix.rows() {
+        for (source, &target) in images.iter().enumerate() {
+            let target = target as usize;
+            if target >= matrix.cols() {
+                return Err(MatrixError::Shape);
+            }
+            data[row * matrix.cols() + target] = matrix.row(row)[source];
+        }
+    }
+    Matrix::new::<2>(matrix.rows(), matrix.cols(), data)
 }
 
 #[derive(Debug, Error)]
@@ -4477,6 +4616,43 @@ impl CompiledCssDistance {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn css_anchor_orbits_verify_predicate_and_transversal() {
+        let physical = Matrix::new::<2>(1, 4, vec![1, 1, 1, 1]).unwrap();
+        let logical = Matrix::new::<2>(1, 4, vec![1, 0, 1, 0]).unwrap();
+        let certificate =
+            verify_css_anchor_transversal(&physical, &logical, vec![1, 2, 3, 0], &[2]).unwrap();
+        assert_eq!(certificate.anchors(), &[2]);
+        assert_eq!(certificate.partition().representatives(), &[0]);
+        assert_eq!(certificate.minimum_orbit_size(), 4);
+        assert_eq!(certificate.maximum_orbit_size(), 4);
+
+        assert!(matches!(
+            verify_css_anchor_transversal(&physical, &logical, vec![1, 0, 3, 2], &[0]),
+            Err(CssAnchorOrbitError::NotTransversal)
+        ));
+        assert!(
+            verify_css_anchor_transversal(&physical, &logical, vec![1, 0, 3, 2], &[0, 2]).is_ok()
+        );
+    }
+
+    #[test]
+    fn css_anchor_orbits_reject_non_symmetries_and_non_permutations() {
+        let physical = Matrix::new::<2>(1, 4, vec![1, 1, 1, 1]).unwrap();
+        let asymmetric_logical = Matrix::new::<2>(1, 4, vec![1, 1, 0, 0]).unwrap();
+        assert!(matches!(
+            verify_css_anchor_transversal(&physical, &asymmetric_logical, vec![1, 2, 3, 0], &[0]),
+            Err(CssAnchorOrbitError::NotAutomorphism)
+        ));
+        let logical = Matrix::new::<2>(1, 4, vec![1, 0, 1, 0]).unwrap();
+        assert!(matches!(
+            verify_css_anchor_transversal(&physical, &logical, vec![0, 0, 2, 3], &[0, 2, 3]),
+            Err(CssAnchorOrbitError::Orbit(
+                OrbitCompileError::NotPermutation { .. }
+            ))
+        ));
+    }
 
     fn subset_xors(keys: &[u128], size: usize) -> Vec<u128> {
         let mut output = Vec::new();
