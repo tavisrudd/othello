@@ -288,7 +288,10 @@ impl<'a, const H: u8> BinarySmallField<'a, H> {
 
     #[inline(always)]
     pub fn add(self, left: u8, right: u8) -> u8 {
-        debug_assert!(u16::from(left) < self.order() && u16::from(right) < self.order());
+        assert!(
+            u16::from(left) < self.order() && u16::from(right) < self.order(),
+            "field element is not reduced"
+        );
         left ^ right
     }
 
@@ -299,6 +302,15 @@ impl<'a, const H: u8> BinarySmallField<'a, H> {
 
     #[inline(always)]
     pub fn mul(self, left: u8, right: u8) -> u8 {
+        assert!(
+            u16::from(left) < self.order() && u16::from(right) < self.order(),
+            "field element is not reduced"
+        );
+        self.mul_canonical(left, right)
+    }
+
+    #[inline(always)]
+    pub(crate) fn mul_canonical(self, left: u8, right: u8) -> u8 {
         debug_assert!(u16::from(left) < self.order() && u16::from(right) < self.order());
         self.0.multiply[(usize::from(left) << H) | usize::from(right)]
     }
@@ -752,6 +764,16 @@ mod tests {
             SmallField::new(2, 3).unwrap().binary_extension::<4>(),
             Err(FieldError::BinaryExtensionMismatch)
         ));
+    }
+
+    #[test]
+    fn binary_extension_public_arithmetic_rejects_unreduced_operands() {
+        let field = SmallField::new(2, 3).unwrap();
+        let binary = field.binary_extension::<3>().unwrap();
+        assert!(std::panic::catch_unwind(|| binary.add(8, 0)).is_err());
+        assert!(std::panic::catch_unwind(|| binary.sub(0, 8)).is_err());
+        assert!(std::panic::catch_unwind(|| binary.mul(8, 1)).is_err());
+        assert_eq!(binary.inverse(8), Err(FieldError::InvalidElement));
     }
 
     #[test]

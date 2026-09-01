@@ -205,7 +205,7 @@ impl<'a, const H: u8> BinaryProjectiveIndex<'a, H> {
         let inverse = self.field.inverse_nonzero(coordinates[pivot]);
         let mut suffix = 0_u64;
         for &coordinate in &coordinates[pivot + 1..] {
-            suffix = (suffix << H) | u64::from(self.field.mul(coordinate, inverse));
+            suffix = (suffix << H) | u64::from(self.field.mul_canonical(coordinate, inverse));
         }
         Ok(self.offsets[pivot] + suffix)
     }
