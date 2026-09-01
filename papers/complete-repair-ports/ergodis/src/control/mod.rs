@@ -2397,6 +2397,7 @@ mod tests {
                 + completed["summary"]["global_elite_slots"].as_u64().unwrap(),
             2
         );
+        assert_eq!(completed["summary"]["retained_elite_slots"], 0);
         let relative = completed["path"].as_str().unwrap();
         let evidence = fs::read_to_string(campaign.manifest.run_dir.join(relative)).unwrap();
         assert_eq!(evidence.lines().count(), 6);

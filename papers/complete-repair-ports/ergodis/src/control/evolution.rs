@@ -132,6 +132,41 @@ struct MutationContext<'a> {
     field_index: &'a BTreeMap<&'a str, u16>,
 }
 
+struct MutationEmitter<'a> {
+    parent_hash: &'a str,
+    output: &'a mut Vec<PendingCandidate>,
+    limit: usize,
+    cursor: usize,
+    ordinal: usize,
+}
+
+impl MutationEmitter<'_> {
+    fn emit(&mut self, operator: &'static str, make_plan: impl FnOnce() -> PlanSpec) -> bool {
+        if self.ordinal < self.cursor {
+            self.ordinal += 1;
+            return false;
+        }
+        if self.output.len() == self.limit {
+            return true;
+        }
+        self.ordinal += 1;
+        self.output.push(PendingCandidate {
+            plan: make_plan(),
+            parent_hash: Some(self.parent_hash.into()),
+            source_hash: None,
+            source_evidence: None,
+            operator,
+        });
+        false
+    }
+}
+
+#[derive(Clone, Copy)]
+struct MutationBatch {
+    next_cursor: usize,
+    exhausted: bool,
+}
+
 #[derive(Clone, Copy, Default)]
 struct FailureProbe {
     field: u16,
@@ -154,12 +189,16 @@ struct PendingCandidate {
     operator: &'static str,
 }
 
+#[derive(Clone)]
 struct ExpansionParent {
     hash: String,
+    outcome_hash: String,
     plan: PlanSpec,
     first_mismatch: Option<usize>,
     score: CandidateScore,
     operator: &'static str,
+    niche: SemanticNiche,
+    mutation_cursor: usize,
 }
 
 #[derive(Clone, Copy)]
@@ -215,16 +254,35 @@ struct RankedCandidate {
     first_mismatch: Option<usize>,
     operator: &'static str,
     niche: SemanticNiche,
+    mutation_cursor: usize,
+    retained: bool,
 }
 
 impl RankedCandidate {
+    fn from_parent(parent: &ExpansionParent) -> Self {
+        Self {
+            score: parent.score,
+            outcome_hash: parent.outcome_hash.clone(),
+            hash: parent.hash.clone(),
+            plan: parent.plan.clone(),
+            first_mismatch: parent.first_mismatch,
+            operator: parent.operator,
+            niche: parent.niche,
+            mutation_cursor: parent.mutation_cursor,
+            retained: true,
+        }
+    }
+
     fn to_parent(&self) -> ExpansionParent {
         ExpansionParent {
             hash: self.hash.clone(),
+            outcome_hash: self.outcome_hash.clone(),
             plan: self.plan.clone(),
             first_mismatch: self.first_mismatch,
             score: self.score,
             operator: self.operator,
+            niche: self.niche,
+            mutation_cursor: self.mutation_cursor,
         }
     }
 }
@@ -233,6 +291,7 @@ struct EliteSelection {
     parents: Vec<ExpansionParent>,
     niche_slots: usize,
     global_slots: usize,
+    retained_slots: usize,
     outcome_rejections: usize,
 }
 
@@ -519,10 +578,9 @@ fn candidate_impact(child: CandidateScore, parent: CandidateScore) -> CandidateI
 }
 
 fn ranked_candidate_cmp(left: &RankedCandidate, right: &RankedCandidate) -> std::cmp::Ordering {
-    right
-        .score
-        .correct
-        .cmp(&left.score.correct)
+    left.retained
+        .cmp(&right.retained)
+        .then_with(|| right.score.correct.cmp(&left.score.correct))
         .then_with(|| left.score.false_positive.cmp(&right.score.false_positive))
         .then_with(|| left.score.complexity.cmp(&right.score.complexity))
         .then_with(|| left.plan.name.cmp(&right.plan.name))
@@ -531,16 +589,19 @@ fn ranked_candidate_cmp(left: &RankedCandidate, right: &RankedCandidate) -> std:
 
 fn select_semantic_elites(
     mut ranked: Vec<RankedCandidate>,
+    retained: &[ExpansionParent],
     beam: usize,
     capacity: usize,
 ) -> EliteSelection {
     let limit = beam.min(capacity);
+    ranked.extend(retained.iter().map(RankedCandidate::from_parent));
     ranked.sort_unstable_by(ranked_candidate_cmp);
     let mut parents = Vec::with_capacity(limit);
     let mut selected = vec![false; ranked.len()];
     let mut selected_hashes = BTreeSet::new();
     let mut selected_outcomes = BTreeSet::new();
     let mut selected_niches = BTreeSet::new();
+    let mut retained_slots = 0;
 
     for (index, candidate) in ranked.iter().enumerate() {
         if parents.len() == limit {
@@ -556,6 +617,7 @@ fn select_semantic_elites(
         selected_outcomes.insert(candidate.outcome_hash.clone());
         selected_hashes.insert(candidate.hash.clone());
         selected[index] = true;
+        retained_slots += usize::from(candidate.retained);
         parents.push(candidate.to_parent());
     }
     let niche_slots = parents.len();
@@ -572,12 +634,14 @@ fn select_semantic_elites(
             continue;
         }
         selected_hashes.insert(candidate.hash.clone());
+        retained_slots += usize::from(candidate.retained);
         parents.push(candidate.to_parent());
     }
     EliteSelection {
         global_slots: parents.len() - niche_slots,
         parents,
         niche_slots,
+        retained_slots,
         outcome_rejections,
     }
 }
@@ -773,7 +837,9 @@ pub(super) fn run_evolution(
     let mut selection_balanced_slots = 0_u64;
     let mut semantic_niche_slots = 0_u64;
     let mut global_elite_slots = 0_u64;
+    let mut retained_elite_slots = 0_u64;
     let mut prior_parent_scores = BTreeMap::<String, CandidateScore>::new();
+    let mut retained_elites = Vec::<ExpansionParent>::new();
     let mut operator_scorecards = BTreeMap::<&'static str, OperatorScorecard>::new();
     let mut best: Option<(u64, u64, usize, PlanSpec)> = None;
     let mut truncated = false;
@@ -1034,6 +1100,8 @@ pub(super) fn run_evolution(
                 first_mismatch: evaluation.first_mismatch,
                 operator: pending.operator,
                 niche,
+                mutation_cursor: 0,
+                retained: false,
             });
             progress.tested.store(tested as u64, Ordering::Relaxed);
             progress.perfect.store(perfect as u64, Ordering::Relaxed);
@@ -1042,7 +1110,8 @@ pub(super) fn run_evolution(
             break;
         }
         let expansion_capacity = bounds.max_candidates.saturating_sub(tested);
-        let selection = select_semantic_elites(ranked, bounds.beam, expansion_capacity);
+        let selection =
+            select_semantic_elites(ranked, &retained_elites, bounds.beam, expansion_capacity);
         checked_counter_add(
             &mut semantic_niche_slots,
             selection.niche_slots as u64,
@@ -1052,6 +1121,11 @@ pub(super) fn run_evolution(
             &mut global_elite_slots,
             selection.global_slots as u64,
             "global elite slot",
+        )?;
+        checked_counter_add(
+            &mut retained_elite_slots,
+            selection.retained_slots as u64,
+            "retained elite slot",
         )?;
         outcome_expansion_rejections = outcome_expansion_rejections
             .checked_add(selection.outcome_rejections)
@@ -1077,25 +1151,32 @@ pub(super) fn run_evolution(
         )?;
         let quotas = maximum_oriented_quotas(&parents, expansion_capacity, &operator_scorecards);
         let mut next_parent_scores = BTreeMap::new();
+        let mut next_retained_elites = Vec::with_capacity(parents.len());
         let mut carry = 0_usize;
-        for (parent, quota) in parents.into_iter().zip(quotas) {
+        for (mut parent, quota) in parents.into_iter().zip(quotas) {
             next_parent_scores.insert(parent.hash.clone(), parent.score);
             let quota = quota.saturating_add(carry);
             let before = current.len();
             let limit = before.saturating_add(quota).min(expansion_capacity);
             let failure_shape =
                 failure_shape(&batch, &parent.plan, parent.first_mismatch, &field_index);
-            mutate_plan(
+            let mutation = mutate_plan(
                 &parent.plan,
                 &parent.hash,
                 &mutation_context,
                 &failure_shape,
                 &mut current,
                 limit,
+                parent.mutation_cursor,
             );
+            parent.mutation_cursor = mutation.next_cursor;
+            if !mutation.exhausted {
+                next_retained_elites.push(parent);
+            }
             carry = quota.saturating_sub(current.len().saturating_sub(before));
         }
         prior_parent_scores = next_parent_scores;
+        retained_elites = next_retained_elites;
     }
     let candidate_bytes = bytes;
     let mut footer_summary = json!({
@@ -1111,6 +1192,7 @@ pub(super) fn run_evolution(
         "selection_balanced_slots": selection_balanced_slots,
         "semantic_niche_slots": semantic_niche_slots,
         "global_elite_slots": global_elite_slots,
+        "retained_elite_slots": retained_elite_slots,
         "operator_scorecards": &operator_scorecards,
         "bytes": bytes,
         "truncated": truncated,
@@ -1161,6 +1243,7 @@ pub(super) fn run_evolution(
         "selection_balanced_slots": selection_balanced_slots,
         "semantic_niche_slots": semantic_niche_slots,
         "global_elite_slots": global_elite_slots,
+        "retained_elite_slots": retained_elite_slots,
         "operator_scorecards": operator_scorecards,
         "bytes": bytes,
         "truncated": truncated,
@@ -1291,29 +1374,22 @@ fn scope_profiles(batch: &FeatureBatch) -> Result<Vec<ScopeMutationProfile>, Con
 
 fn push_scoped_child(
     parent: &PlanSpec,
-    parent_hash: &str,
     field: &str,
     mask: u64,
     operator: &'static str,
-    output: &mut Vec<PendingCandidate>,
-    limit: usize,
+    emitter: &mut MutationEmitter<'_>,
 ) -> bool {
-    if mask == 0 || output.len() == limit {
-        return output.len() == limit;
+    if mask == 0 {
+        return false;
     }
-    let mut child = parent.clone();
-    child.scope = Some(PlanScope {
-        field: field.to_owned(),
-        mask,
-    });
-    output.push(PendingCandidate {
-        plan: child,
-        parent_hash: Some(parent_hash.into()),
-        source_hash: None,
-        source_evidence: None,
-        operator,
-    });
-    output.len() == limit
+    emitter.emit(operator, || {
+        let mut child = parent.clone();
+        child.scope = Some(PlanScope {
+            field: field.to_owned(),
+            mask,
+        });
+        child
+    })
 }
 
 fn mutate_plan(
@@ -1323,17 +1399,20 @@ fn mutate_plan(
     failure_shape: &FailureShape,
     output: &mut Vec<PendingCandidate>,
     limit: usize,
-) {
-    mutate_thresholds_from_failure(
-        parent,
+    cursor: usize,
+) -> MutationBatch {
+    let mut emitter = MutationEmitter {
         parent_hash,
-        context.field_index,
-        failure_shape,
         output,
-        limit.min(output.len().saturating_add(MAX_TARGETED_MUTATIONS)),
-    );
-    if output.len() == limit {
-        return;
+        limit,
+        cursor,
+        ordinal: 0,
+    };
+    if mutate_thresholds_from_failure(parent, context.field_index, failure_shape, &mut emitter) {
+        return MutationBatch {
+            next_cursor: emitter.ordinal,
+            exhausted: false,
+        };
     }
     for profile in context.scope_profiles {
         if parent
@@ -1348,14 +1427,15 @@ fn mutate_plan(
                 bits ^= bit;
                 if push_scoped_child(
                     parent,
-                    parent_hash,
                     &profile.field,
                     current_mask ^ bit,
                     "scope-toggle",
-                    output,
-                    limit,
+                    &mut emitter,
                 ) {
-                    return;
+                    return MutationBatch {
+                        next_cursor: emitter.ordinal,
+                        exhausted: false,
+                    };
                 }
             }
         } else {
@@ -1365,28 +1445,30 @@ fn mutate_plan(
                 bits ^= bit;
                 if push_scoped_child(
                     parent,
-                    parent_hash,
                     &profile.field,
                     bit,
                     "scope-initialize",
-                    output,
-                    limit,
+                    &mut emitter,
                 ) {
-                    return;
+                    return MutationBatch {
+                        next_cursor: emitter.ordinal,
+                        exhausted: false,
+                    };
                 }
             }
             if profile.positive_majority_mask != profile.observed_mask
                 && push_scoped_child(
                     parent,
-                    parent_hash,
                     &profile.field,
                     profile.positive_majority_mask,
                     "scope-majority",
-                    output,
-                    limit,
+                    &mut emitter,
                 )
             {
-                return;
+                return MutationBatch {
+                    next_cursor: emitter.ordinal,
+                    exhausted: false,
+                };
             }
         }
     }
@@ -1425,34 +1507,35 @@ fn mutate_plan(
             _ => ("none", Vec::new()),
         };
         for replacement in replacements {
-            if output.len() == limit {
-                return;
+            if emitter.emit(operator, || {
+                let mut child = parent.clone();
+                child.program[index] = replacement;
+                child
+            }) {
+                return MutationBatch {
+                    next_cursor: emitter.ordinal,
+                    exhausted: false,
+                };
             }
-            let mut child = parent.clone();
-            child.program[index] = replacement;
-            output.push(PendingCandidate {
-                plan: child,
-                parent_hash: Some(parent_hash.into()),
-                source_hash: None,
-                source_evidence: None,
-                operator,
-            });
         }
+    }
+    MutationBatch {
+        next_cursor: emitter.ordinal,
+        exhausted: true,
     }
 }
 
 fn mutate_thresholds_from_failure(
     parent: &PlanSpec,
-    parent_hash: &str,
     field_index: &BTreeMap<&str, u16>,
     failure_shape: &FailureShape,
-    output: &mut Vec<PendingCandidate>,
-    limit: usize,
-) {
+    emitter: &mut MutationEmitter<'_>,
+) -> bool {
     if failure_shape.first_mismatch.is_none() {
-        return;
+        return false;
     }
-    for index in 0..parent.program.len().saturating_sub(2) {
+    let mut targeted = 0_usize;
+    'targets: for index in 0..parent.program.len().saturating_sub(2) {
         let (field, constant, comparison) = match (
             &parent.program[index],
             &parent.program[index + 1],
@@ -1476,29 +1559,29 @@ fn mutate_thresholds_from_failure(
             continue;
         };
         let Some(expected) = failure_shape.expected else {
-            return;
+            return false;
         };
         for replacement in threshold_replacements(comparison, expected, value)
             .into_iter()
             .flatten()
         {
-            if output.len() == limit {
-                return;
-            }
             if replacement == constant {
                 continue;
             }
-            let mut child = parent.clone();
-            child.program[index + 1] = PlanOp::Const { value: replacement };
-            output.push(PendingCandidate {
-                plan: child,
-                parent_hash: Some(parent_hash.into()),
-                source_hash: None,
-                source_evidence: None,
-                operator: "counterexample-threshold",
-            });
+            if targeted == MAX_TARGETED_MUTATIONS {
+                break 'targets;
+            }
+            targeted += 1;
+            if emitter.emit("counterexample-threshold", || {
+                let mut child = parent.clone();
+                child.program[index + 1] = PlanOp::Const { value: replacement };
+                child
+            }) {
+                return true;
+            }
         }
     }
+    false
 }
 
 fn threshold_replacements(comparison: &PlanOp, expected: bool, value: i64) -> [Option<i64>; 2] {
@@ -1624,6 +1707,7 @@ mod tests {
     fn selector_parent(hash: &str, operator: &'static str) -> ExpansionParent {
         ExpansionParent {
             hash: hash.into(),
+            outcome_hash: format!("outcome-{hash}"),
             plan: PlanSpec {
                 schema: String::new(),
                 name: String::new(),
@@ -1639,6 +1723,8 @@ mod tests {
                 complexity: 1,
             },
             operator,
+            niche: SemanticNiche::new(operator, 0, 1, 8),
+            mutation_cursor: 0,
         }
     }
 
@@ -1667,6 +1753,8 @@ mod tests {
             first_mismatch: parent.first_mismatch,
             operator,
             niche: SemanticNiche::new(operator, false_positive, false_negative, cost),
+            mutation_cursor: 0,
+            retained: false,
         }
     }
 
@@ -1677,7 +1765,7 @@ mod tests {
             niche_candidate("second-a", 9, "constant-delta", Some(true), 8),
             niche_candidate("best-b", 8, "scope", Some(false), 64),
         ];
-        let selection = select_semantic_elites(current, 2, 2);
+        let selection = select_semantic_elites(current, &[], 2, 2);
         assert_eq!(selection.niche_slots, 2);
         assert_eq!(selection.global_slots, 0);
         assert_eq!(selection.parents[0].hash, "best-a");
@@ -1687,11 +1775,123 @@ mod tests {
             niche_candidate("best-a", 10, "constant-delta", Some(true), 8),
             niche_candidate("second-a", 9, "constant-delta", Some(true), 8),
         ];
-        let selection = select_semantic_elites(current, 2, 2);
+        let selection = select_semantic_elites(current, &[], 2, 2);
         assert_eq!(selection.niche_slots, 1);
         assert_eq!(selection.global_slots, 1);
         assert_eq!(selection.parents[0].hash, "best-a");
         assert_eq!(selection.parents[1].hash, "second-a");
+
+        let mut retained = selector_parent("retained-b", "scope");
+        retained.score.correct = 8;
+        retained.mutation_cursor = 7;
+        let current = vec![
+            niche_candidate("best-a", 10, "constant-delta", Some(true), 8),
+            niche_candidate("second-a", 9, "constant-delta", Some(true), 8),
+        ];
+        let selection = select_semantic_elites(current, &[retained], 2, 2);
+        assert_eq!(selection.retained_slots, 1);
+        let retained = selection
+            .parents
+            .iter()
+            .find(|parent| parent.hash == "retained-b")
+            .unwrap();
+        assert_eq!(retained.mutation_cursor, 7);
+
+        let mut same_niche = selector_parent("retained-a", "constant-delta");
+        same_niche.score.correct = 20;
+        same_niche.mutation_cursor = 5;
+        let current = vec![
+            niche_candidate("best-a", 10, "constant-delta", Some(true), 8),
+            niche_candidate("second-a", 9, "constant-delta", Some(true), 8),
+        ];
+        let selection = select_semantic_elites(current, &[same_niche], 2, 2);
+        assert_eq!(selection.retained_slots, 0);
+        assert_eq!(selection.parents[0].hash, "best-a");
+        assert_eq!(selection.parents[1].hash, "second-a");
+    }
+
+    #[test]
+    fn mutation_cursor_resumes_without_duplicate_offspring() {
+        let parent = PlanSpec {
+            schema: String::new(),
+            name: "cursor-parent".into(),
+            role: super::super::PlanRole::Diagnostic,
+            output: super::super::PlanOutput::Predicate,
+            scope: None,
+            program: vec![PlanOp::Const { value: 0 }],
+        };
+        let fields = Vec::new();
+        let scopes = Vec::new();
+        let field_index = BTreeMap::new();
+        let context = MutationContext {
+            fields: &fields,
+            scope_profiles: &scopes,
+            field_index: &field_index,
+        };
+        let failure = FailureShape {
+            first_mismatch: None,
+            expected: None,
+            probes: [FailureProbe::default(); MAX_FAILURE_PROBES],
+            probe_count: 0,
+        };
+        let mut cursor = 0;
+        let mut resumed = Vec::new();
+        let mut exhaustion = Vec::new();
+        for _ in 0..3 {
+            let mut batch_output = Vec::new();
+            let batch = mutate_plan(
+                &parent,
+                "parent",
+                &context,
+                &failure,
+                &mut batch_output,
+                2,
+                cursor,
+            );
+            cursor = batch.next_cursor;
+            exhaustion.push(batch.exhausted);
+            resumed.extend(
+                batch_output
+                    .into_iter()
+                    .map(|candidate| candidate.plan.program),
+            );
+        }
+        assert_eq!(exhaustion, [false, false, true]);
+        let mut exhausted_output = Vec::new();
+        let exhausted = mutate_plan(
+            &parent,
+            "parent",
+            &context,
+            &failure,
+            &mut exhausted_output,
+            2,
+            cursor,
+        );
+        assert!(exhausted.exhausted);
+        assert!(exhausted_output.is_empty());
+
+        let mut complete = Vec::new();
+        let complete_batch = mutate_plan(
+            &parent,
+            "parent",
+            &context,
+            &failure,
+            &mut complete,
+            usize::MAX,
+            0,
+        );
+        assert!(complete_batch.exhausted);
+        assert_eq!(resumed.len(), 6);
+        assert_eq!(
+            serde_json::to_value(&resumed).unwrap(),
+            serde_json::to_value(
+                complete
+                    .into_iter()
+                    .map(|candidate| candidate.plan.program)
+                    .collect::<Vec<_>>()
+            )
+            .unwrap()
+        );
     }
 
     #[test]

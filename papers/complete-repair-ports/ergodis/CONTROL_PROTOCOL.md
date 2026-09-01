@@ -192,9 +192,14 @@ and the base-two bucket of semantic-operation rows.  It admits the best
 outcome-distinct candidate from each niche in global score order, up to the
 beam bound, then fills remaining beam positions by the ordinary global order.
 Every evidence record carries its niche and the summary counts niche and global
-elite positions.  Elites are not re-expanded after their deterministic
-mutation prefix has already been consumed; durable archives preserve them for
-later replay without introducing repeated live work.
+elite positions.  A selected elite with an unconsumed deterministic mutation
+suffix carries a bounded ordinal cursor into the next generation.  Resumption
+skips the consumed prefix, emits only new offspring, and drops the elite after
+the finite stream is exhausted.  Fresh candidates precede retained cursors
+within the same niche, so resumption cannot displace a newly reached stepping
+stone; the summary counts retained positions.
+Durable archives preserve the candidate itself for later campaign replay, where
+mutation starts afresh under the new campaign identity.
 
 Socket I/O, JSON, evidence serialization, and plan compilation happen outside
 worker hot loops.  Uncontrolled solves compile without the control-plane
