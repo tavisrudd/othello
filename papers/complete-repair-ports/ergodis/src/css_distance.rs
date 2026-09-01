@@ -4784,6 +4784,37 @@ mod tests {
         }
     }
 
+    #[test]
+    fn syndrome_and_budget_are_not_a_complete_transposition_key() {
+        let physical = Matrix::new::<2>(1, 3, vec![1, 1, 1]).unwrap();
+        let logical = Matrix::new::<2>(1, 3, vec![0, 1, 0]).unwrap();
+        let compiled = CompiledWideCssDistance::compile(&physical, &logical).unwrap();
+
+        let left_support = PackedSupport::singleton(0);
+        let right_support = PackedSupport::singleton(1);
+        let syndrome = compiled.columns[0].syndrome;
+        assert_eq!(syndrome, compiled.columns[1].syndrome);
+
+        let left_options =
+            compiled.syndrome_branch_options(syndrome, left_support, PackedSupport::default());
+        let right_options =
+            compiled.syndrome_branch_options(syndrome, right_support, PackedSupport::default());
+        assert_ne!(left_options, right_options);
+
+        let common_completion = compiled.columns[2];
+        let mut completed_syndrome = syndrome;
+        completed_syndrome.toggle(common_completion.syndrome);
+        assert!(completed_syndrome.is_zero());
+        let left_logical = compiled.columns[0].logical ^ common_completion.logical;
+        let right_logical = compiled.columns[1].logical ^ common_completion.logical;
+        let mut left_completed = left_support;
+        left_completed.insert(2);
+        let mut right_completed = right_support;
+        right_completed.insert(2);
+        assert!(!compiled.logical_is_nonzero(left_completed, left_logical));
+        assert!(compiled.logical_is_nonzero(right_completed, right_logical));
+    }
+
     #[cfg(feature = "parallel")]
     #[test]
     fn randomized_small_serial_parallel_and_sharded_searches_match_brute_force() {

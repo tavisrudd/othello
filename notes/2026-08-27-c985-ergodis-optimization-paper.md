@@ -540,10 +540,19 @@ as each coherent tranche lands.
    starting with the shard ledger and parity-functional premise check because
    they protect every expensive lower-bound run without touching the hot loop;
    (3) implement Brouwer--Zimmermann only in `linear_code`, with a rank/rate
-   crossover and Gray enumeration retained as the small-rank control; (4) take
-   the cheap fixed-depth syndrome-multiplicity histogram before considering a
-   bounded direct-mapped transposition cache, and reject the cache unless its
-   hit-rate/save-depth model clears the measured probe cost; (5) add
+   crossover and Gray enumeration retained as the small-rank control; this is
+   now landed in `0c86ef654`; (4) reject the proposed CSS subtree transposition
+   cache before profiling: `(syndrome, budget)` is only sufficient for the pure
+   completion bounds, not for the remaining search.  Branch options also depend
+   on support and forbidden coordinates, while terminal acceptance depends on
+   the logical observation.  A regression constructs equal-syndrome,
+   equal-budget states with different option sets and a common zero-syndrome
+   completion that is trivial from one state and nontrivial from the other.
+   Full-state keys erase the hoped-for compression because canonical search
+   already generates each support once.  A histogram of syndrome multiplicity
+   therefore cannot justify subtree memoization; only memoization of a proven
+   pure bound predicate remains sound, and its probe must beat the existing
+   packed arithmetic/filter lookup before implementation; (5) add
    capacity-scaled Hall only when a real client accepts the corresponding
    min-cut/deficiency certificate; and (6) profile extension-field elimination
    before a bit-sliced `GF(2^e)` backend.  Look-ahead cubing remains behind the
