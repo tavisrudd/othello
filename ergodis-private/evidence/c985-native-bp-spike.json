@@ -1,0 +1,28 @@
+{
+  "schema": "c985-native-bp-spike-report-v1",
+  "date": "2026-09-01",
+  "host_protocol": "same host, sequential five-round samples, 128 retained BB756 targets per round, 300 normalized-min-sum iterations, scale 0.625, OSD-0",
+  "input": {
+    "path": "target-c985-bb756/hx-gz.json",
+    "sha256": "83bd1eaf7787cd367f4c6da060658abff902f6404545e42c0902ce12cd198fe2",
+    "target_stream_sha256": "6237b62007972ef6152b9b4f347923f41d368b08544dafb24d523c5300139644"
+  },
+  "native_ns": [1003355777, 1001785704, 1008057113, 999816157, 1007032686],
+  "ldpc_2_4_1_ns": [2882604922, 2877363696, 2894687861, 2881368111, 2893415280],
+  "native_mean_ms": 1004.0094874,
+  "ldpc_mean_ms": 2885.887974,
+  "mean_speedup": 2.8743632507630426,
+  "welch_t": 497.2594570462958,
+  "native_valid": 128,
+  "ldpc_valid": 128,
+  "native_best_weight": 102,
+  "ldpc_best_weight": 88,
+  "native_perf_128": {
+    "cycles": 3305558141,
+    "instructions": 11638447254,
+    "branches": 2650534512,
+    "branch_misses": 43394355,
+    "cache_misses": 16583
+  },
+  "decision": "retain private spike; speed gate passes, exact syndrome gate passes, quality replacement gate fails"
+}

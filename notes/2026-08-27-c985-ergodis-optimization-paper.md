@@ -3865,3 +3865,32 @@ This establishes a specialized exact-quantum-distance result, not a generic
 SAT or MIP claim.  The highest-EV scientific successor is an algebraically
 prefiltered weight-six code search whose exact stage admits only Pareto
 survivors capable of exceeding `k d^2 / n = 19.2`.
+
+### 2026-09-01 native BP+OSD spike
+
+The rejected reliability-order bridge has now served its intended purpose as
+a stepping stone.  A private, reusable native spike implements sparse GF(2)
+normalized min-sum BP with pre-sized CSR workspaces, no allocation in the
+iteration loop, retained hard-decision/posterior affine state, and a pre-sized
+signed-reliability OSD-0 solve.  It contains no BB756-specific theorem or
+layout.  Every OSD result is independently checked against the stacked
+physical/logical syndrome.
+
+On the identical retained 128-target BB756 stream, five sequential rounds at
+300 iterations and scale 0.625 measured 1.0040 s native versus 2.8859 s for
+`ldpc` 2.4.1: 2.874x by means, Welch t=497.26.  Both paths returned 128/128
+valid affine solutions.  Native's best weight was 102 versus `ldpc`'s 88, so
+this passes the architecture, exactness, and speed gates but fails the quality
+gate for replacement.  It remains private while the next tranche reproduces
+the reference long-loop trajectory more closely and adds bounded higher-order
+OSD.  Raw rounds, hashes, counters, and the admission decision are in
+`ergodis-private/evidence/c985-native-bp-spike.json`.
+
+Implementation attribution: the comparison used the released `ldpc==2.4.1`
+binary package.  The BP parallel/min-sum and OSD-0 mechanics were checked at
+partial read depth (`src_cpp/bp.hpp` lines 192--321, `src_cpp/osd.hpp` lines
+108--166, and `src_cpp/sort.hpp` lines 25--61) in the official
+`quantumgizmos/ldpc` repository at commit
+`d3429964cd4ffe1abfc041c6ec8b8425cb174f40`; this source checkout is newer than
+the measured package and is used for architectural attribution, not asserted
+as byte-identical source provenance for 2.4.1.
