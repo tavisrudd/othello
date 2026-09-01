@@ -390,7 +390,7 @@ fn scout_root(game: C80Game, state: C80Bits, worker: &mut C80Worker) -> C80Scout
                         if matches!(hall, HallOutcome::Deficient { .. }) {
                             metrics.ancestral_secant_hall_failures += 1;
                         }
-                        let next_support = old_support - consumed_count + created_count;
+                        let next_support = next_defects.count();
                         let next_legal = game.legal(successor);
                         let next_omega = game.omega(successor, next_legal);
                         if (next_support, next_omega) >= (old_support, old_omega) {

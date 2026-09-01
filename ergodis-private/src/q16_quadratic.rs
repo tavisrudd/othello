@@ -27,6 +27,7 @@ pub struct QuadraticCensus {
     pub leaves: u32,
     pub structural: u32,
     pub full_rank_fallback: u32,
+    pub underdetermined: u32,
     pub forced_hit: u32,
     pub exceptions: [ExceptionalLeaf; 3],
     pub exception_count: u8,
@@ -172,6 +173,7 @@ fn merge_census(mut left: QuadraticCensus, right: QuadraticCensus) -> QuadraticC
     left.leaves += right.leaves;
     left.structural += right.structural;
     left.full_rank_fallback += right.full_rank_fallback;
+    left.underdetermined += right.underdetermined;
     left.forced_hit += right.forced_hit;
     for index in 0..right.exception_count as usize {
         left.exceptions[left.exception_count as usize] = right.exceptions[index];
@@ -335,6 +337,13 @@ impl RootKernel for QuadraticKernel<'_> {
                 ..QuadraticCensus::default()
             };
         }
+        let Some(kernel) = kernel else {
+            return QuadraticCensus {
+                leaves: 1,
+                underdetermined: 1,
+                ..QuadraticCensus::default()
+            };
+        };
         let selected_zeros = arc
             .iter()
             .filter(|&&point| dot6(self.geometry.monomials[point as usize], kernel) == 0)
@@ -358,7 +367,7 @@ impl RootKernel for QuadraticKernel<'_> {
     }
 }
 
-fn quadratic_rank_kernel(monomials: &[[u8; 6]], points: [u64; WORDS]) -> (u8, [u8; 6]) {
+fn quadratic_rank_kernel(monomials: &[[u8; 6]], points: [u64; WORDS]) -> (u8, Option<[u8; 6]>) {
     let mut basis = [[0_u8; 6]; 6];
     let mut rank = 0_u8;
     for point in SetBits::new(points) {
@@ -387,17 +396,18 @@ fn quadratic_rank_kernel(monomials: &[[u8; 6]], points: [u64; WORDS]) -> (u8, [u
             break;
         }
     }
+    if rank != 5 {
+        return (rank, None);
+    }
     let mut kernel = [0_u8; 6];
-    if rank == 5 {
-        let free = (0..6).find(|&column| basis[column][column] == 0).unwrap();
-        kernel[free] = 1;
-        for pivot in 0..6 {
-            if basis[pivot][pivot] != 0 {
-                kernel[pivot] = basis[pivot][free];
-            }
+    let free = (0..6).find(|&column| basis[column][column] == 0).unwrap();
+    kernel[free] = 1;
+    for pivot in 0..6 {
+        if basis[pivot][pivot] != 0 {
+            kernel[pivot] = basis[pivot][free];
         }
     }
-    (rank, kernel)
+    (rank, Some(kernel))
 }
 
 #[inline]
@@ -570,5 +580,13 @@ mod tests {
             assert_eq!(result.exceptions[0].kernel, expected_kernel);
             assert_eq!(result.exceptions[0].selected_zeros, expected_zeros);
         }
+    }
+
+    #[test]
+    fn rank_below_five_has_no_spurious_kernel() {
+        let geometry = Geometry::build();
+        let (rank, kernel) = quadratic_rank_kernel(&geometry.monomials, [0; WORDS]);
+        assert_eq!(rank, 0);
+        assert_eq!(kernel, None);
     }
 }

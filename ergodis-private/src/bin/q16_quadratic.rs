@@ -35,11 +35,12 @@ fn main() -> Result<()> {
     let census = analyze_quadratic_obstructions(&arcs, arguments.threads)?;
     let analyzed = analyzed_started.elapsed();
     println!(
-        "threads={} leaves={} structural={} full_rank_fallback={} forced_hit={} exceptions={} parse_seconds={:.6} analyze_seconds={:.6}",
+        "threads={} leaves={} structural={} full_rank_fallback={} underdetermined={} forced_hit={} exceptions={} parse_seconds={:.6} analyze_seconds={:.6}",
         arguments.threads,
         census.leaves,
         census.structural,
         census.full_rank_fallback,
+        census.underdetermined,
         census.forced_hit,
         census.exception_count,
         parsed.as_secs_f64(),

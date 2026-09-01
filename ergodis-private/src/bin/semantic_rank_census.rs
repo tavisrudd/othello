@@ -203,8 +203,8 @@ fn main() -> anyhow::Result<()> {
         rank_replay_speedup: raw_rank_replay_ns as f64 / core_rank_replay_ns as f64,
         raw_workspace_payload_bytes,
         core_workspace_payload_bytes,
-        workspace_payload_reduction: (system.row_count() * system.columns()) as f64
-            / raw_workspace_payload_bytes as f64,
+        workspace_payload_reduction: raw_workspace_payload_bytes as f64
+            / core_workspace_payload_bytes as f64,
         landed_channel_controls,
         boundary: "bounded GF(9) finite certificate; not an all-field theorem",
     };
