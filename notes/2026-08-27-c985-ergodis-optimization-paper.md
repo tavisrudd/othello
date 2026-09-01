@@ -543,13 +543,35 @@ files are disposable and may be deleted at any time.
    1.01516x cycles at 1T (`t=11.60`), and 1.03928x cycles at 12T (`t=1.91`,
    noisy).  Five wall/RSS pairs give 1.02002x at 1T (`t=6.51`, 2,328/2,344 KiB
    median RSS) and 1.01365x at 12T (`t=2.09`, 2,580/2,724 KiB).  Thus the
-   contention removal is accepted; reusable library extraction of the still
-   binary-local engine remains the next code boundary.  The implementation,
-   durable evidence schema, and recorded comparisons are in commit
-   `ff987c3b3`.
+   contention removal is accepted.  The implementation, durable evidence
+   schema, and recorded comparisons are in commit `ff987c3b3`.
 
-   Revised next order after reconciling both 2026-08-31 inputs: (1) finish and
-   measure the reusable upper-bound extraction, then compare BP reliability
+   The reusable public extraction is now commit `648b8e7e3`.  It compiles
+   packed physical constraints and logical observations once, exposes
+   presized worker workspaces, performs allocation-free systematic-kernel
+   order-1/order-2 trials, replays returned supports, and keeps parallel
+   scheduling outside the core so workers share no mutable search state.  The
+   CLI independently replays a support against the original sparse input.
+   Best-effort now exhausts every assigned trial; the former shared stop bit
+   could silently truncate that mode when another worker hit the target.
+   Small free-dimension problems agree with an independent exhaustive oracle
+   across 384 generated cases, and a measurement-ID gate observes two actual
+   worker threads with zero allocation, reallocation, or deallocation.
+
+   The first cross-crate build failed the performance gate: moving the formerly
+   local worker behind a non-inlined public function added 11.7% instructions
+   on identical BB756 no-hit work.  Commit `9abc56b0c` restores a flat
+   slice/`usize` trial specification and marks the public entry points for
+   cross-crate specialization.  Seven interleaved commit-pinned counter pairs
+   against parent `ab69132af` now preserve exact work and null result.  At 1T,
+   baseline/candidate is 1.036665x instructions, 1.066248x branches, and
+   1.102489x cycles (`t=2.38`, noisy cycles).  At 12T it is 1.036667x
+   instructions (`t=47330.98`), 1.066293x branches (`t=88954.28`), and
+   1.052232x cycles (`t=19.69`).  Branch misses are effectively neutral at 1T
+   and 0.17% worse at 12T.  This closes the extraction without hurting the
+   existing application path.
+
+   Revised next order after reconciling both 2026-08-31 inputs: (1) compare BP reliability
    ordering against random systematic OSD on identical class/trial budgets;
    add a Stern/Dumer collision stage only if that profile says elimination is
    no longer dominant; (2) land the negative-claim assurance floor above,
