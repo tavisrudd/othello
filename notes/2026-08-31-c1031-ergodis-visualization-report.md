@@ -150,6 +150,17 @@ What the real data changed, beyond the schema facts recorded in the data-model n
   survivors, and exclusions, so the cascade view now leads with the loaded run's real reduction and
   keeps the g=41 quotient compilation below it as a named worked reference.
 
+- **A held-out check is now available and it is cheap.** The C1016 semantic corpora come in matched
+  train and holdout halves over an identical field list, 1,024 objects each, and the campaigns were
+  evolved against the train half only. Because the console already evaluates plans itself, running
+  the same evaluator over the disjoint half costs nothing extra and answers the question the C1016
+  negative control was about: whether a learned predicate describes the problem or was fitted to the
+  corpus. On the 55-feature corpus the best plan, `evolve-g7-c37533`, scores 822 of 1,024 on the
+  training half and 819 of 1,024 on the held-out half — a gap of 0.3 percentage points, so it
+  generalizes. The console also re-ranks the whole archive by held-out score and separately lists
+  the classes that fall furthest from their training score, which is the ordering an operator should
+  act on.
+
 Two findings in the search itself, worth their own attention:
 
 - On the g=133 excluded-cells campaign the best plan is `evolve-g0-c6`, a **generation-zero seed**,
@@ -159,6 +170,31 @@ Two findings in the search itself, worth their own attention:
   15,724,800 roots, which is why that campaign's label is constant and why it reports 1,173 perfect
   classifiers. A console that showed the perfect count without the exclusion share would read this
   degenerate run as the most successful of the five.
+
+## A continuation experiment, run with the console rather than shown by it
+
+The 55-feature semantic campaign stopped at 99,966 of a 100,000-candidate budget at generation 23 of
+32, with its behaviour-discovery curve still climbing. That is a budget-limited run, not a converged
+one, and the obvious question is whether more budget keeps paying.
+
+A second campaign was created on the same corpus and seeded with the best plan of each of the first
+run's behaviour classes — its 32 highest-scoring representatives, scope stripped. It tested 99,948
+candidates and produced:
+
+- **3,798 further distinct behaviour classes**, against the first run's 3,595, so the behaviour space
+  on this corpus is nowhere near exhausted after 200,000 candidates;
+- a best score of **823 of 1,024** against the first run's 822, a gain of one object;
+- zero perfect classifiers, as before.
+
+The reading is that a second budget buys a comparable haul of new behaviours and almost nothing in
+score. On this corpus the search is not stuck for lack of budget; it is limited by what the feature
+set can express, which is the situation the exact `ceiling` response describes and the reason the
+behaviour-space ceiling belongs on screen next to the count. Both runs are published side by side so
+the two discovery curves can be compared directly.
+
+Reproduction is the ordinary cycle in the tooling README, with the seed file built from the parent
+run's lineage by taking the lowest `(−weighted_correct, false_positive, complexity)` plan per
+outcome hash.
 
 ## Recommended next move
 
