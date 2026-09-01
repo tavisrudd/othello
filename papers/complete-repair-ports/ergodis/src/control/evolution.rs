@@ -22,6 +22,9 @@ const MAX_CLAUSE_PROFILE_VALUES: usize = 8;
 const MAX_CLAUSE_PROFILE_ROWS: usize = 4_096;
 const MAX_CLAUSE_PROFILES: usize = 16;
 const MAX_CLAUSE_PAIR_PROFILES: usize = 8;
+const MAX_RELATIONAL_PROFILE_FIELDS: usize = 32;
+const MAX_RELATIONAL_PROFILE_VALUES: usize = 8;
+const MAX_RELATIONAL_PROFILES: usize = 24;
 const MAX_HINDSIGHT_FRAGMENTS: usize = 64;
 const MAX_HINDSIGHT_SEMANTICS: usize = 256;
 const MAX_HINDSIGHT_PROBES_PER_PARENT: usize = 16;
@@ -617,6 +620,7 @@ struct MutationContext<'a> {
     scope_profiles: &'a [ScopeMutationProfile],
     clause_profiles: &'a [ClauseMutationProfile],
     clause_pair_profiles: &'a [ClausePairMutationProfile],
+    relational_profiles: &'a [RelationalMutationProfile],
     field_index: &'a BTreeMap<&'a str, u16>,
 }
 
@@ -637,6 +641,26 @@ struct ClausePairMutationProfile {
     weighted_correct: u64,
     weighted_false_positive: u64,
 }
+
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
+enum RelationalTransform {
+    Direct,
+    Add,
+    Sub,
+}
+
+#[derive(Clone)]
+struct RelationalMutationProfile {
+    left: String,
+    right: String,
+    transform: RelationalTransform,
+    value: i64,
+    comparison: PlanOp,
+    weighted_correct: u64,
+    weighted_false_positive: u64,
+}
+
+type RelationalSemanticProfile = (Box<[u64]>, RelationalMutationProfile);
 
 struct MutationEmitter<'a> {
     parent_hash: &'a str,
@@ -1990,6 +2014,7 @@ pub(super) fn run_evolution(
     let scope_profiles = scope_profiles(&batch)?;
     let clause_profiles = clause_profiles(&batch)?;
     let clause_pair_profiles = clause_pair_profiles(&batch, &clause_profiles)?;
+    let relational_profiles = relational_profiles(&batch)?;
     let field_index = batch
         .fields
         .iter()
@@ -2001,6 +2026,7 @@ pub(super) fn run_evolution(
         scope_profiles: &scope_profiles,
         clause_profiles: &clause_profiles,
         clause_pair_profiles: &clause_pair_profiles,
+        relational_profiles: &relational_profiles,
         field_index: &field_index,
     };
     let mut writer = BufWriter::new(output);
@@ -2749,6 +2775,7 @@ pub(super) fn run_evolution(
         "target_profile": &target_profile_summary,
         "clause_profiles": clause_profiles.len(),
         "clause_pair_profiles": clause_pair_profiles.len(),
+        "relational_profiles": relational_profiles.len(),
         "clause_profile_rows": batch.rows().min(MAX_CLAUSE_PROFILE_ROWS),
         "operator_scorecards": &operator_scorecards,
         "bytes": bytes,
@@ -3079,6 +3106,200 @@ fn clause_profiles(batch: &FeatureBatch) -> Result<Vec<ClauseMutationProfile>, C
     Ok(profiles)
 }
 
+fn relational_profile_cmp(
+    left: &RelationalMutationProfile,
+    right: &RelationalMutationProfile,
+) -> std::cmp::Ordering {
+    right
+        .weighted_correct
+        .cmp(&left.weighted_correct)
+        .then_with(|| {
+            left.weighted_false_positive
+                .cmp(&right.weighted_false_positive)
+        })
+        .then_with(|| left.transform.cmp(&right.transform))
+        .then_with(|| left.left.cmp(&right.left))
+        .then_with(|| left.right.cmp(&right.right))
+        .then_with(|| left.value.cmp(&right.value))
+        .then_with(|| {
+            clause_comparison_rank(&left.comparison).cmp(&clause_comparison_rank(&right.comparison))
+        })
+}
+
+fn relational_value(transform: RelationalTransform, left: i64, right: i64) -> Option<i64> {
+    match transform {
+        RelationalTransform::Direct => unreachable!(),
+        RelationalTransform::Add => left.checked_add(right),
+        RelationalTransform::Sub => left.checked_sub(right),
+    }
+}
+
+fn relational_profile_values(
+    batch: &FeatureBatch,
+    left: usize,
+    right: usize,
+    transform: RelationalTransform,
+) -> Result<Option<Vec<i64>>, ControlError> {
+    let mut counts = BTreeMap::<i64, u64>::new();
+    let mut minimum = i64::MAX;
+    let mut maximum = i64::MIN;
+    for row in clause_profile_rows(batch.rows()) {
+        let values = batch.row(row);
+        let Some(value) = relational_value(transform, values[left], values[right]) else {
+            return Ok(None);
+        };
+        minimum = minimum.min(value);
+        maximum = maximum.max(value);
+        let entry = counts.entry(value).or_default();
+        *entry = entry
+            .checked_add(batch.weights[row])
+            .ok_or_else(|| ControlError::Invalid("relational value weight overflow".into()))?;
+    }
+    let mut ranked = counts.into_iter().collect::<Vec<_>>();
+    ranked.sort_unstable_by(|(left_value, left_weight), (right_value, right_weight)| {
+        right_weight
+            .cmp(left_weight)
+            .then_with(|| left_value.cmp(right_value))
+    });
+    ranked.truncate(MAX_RELATIONAL_PROFILE_VALUES.saturating_sub(2));
+    let mut values = ranked
+        .into_iter()
+        .map(|(value, _)| value)
+        .collect::<Vec<_>>();
+    if minimum != i64::MAX {
+        values.push(minimum);
+        values.push(maximum);
+    }
+    values.sort_unstable();
+    values.dedup();
+    Ok(Some(values))
+}
+
+fn relational_profile(
+    batch: &FeatureBatch,
+    left: usize,
+    right: usize,
+    transform: RelationalTransform,
+    value: i64,
+    comparison: PlanOp,
+) -> Result<Option<RelationalSemanticProfile>, ControlError> {
+    let sampled = batch.rows().min(MAX_CLAUSE_PROFILE_ROWS);
+    let mut outcomes = vec![0_u64; sampled.div_ceil(64)];
+    let mut true_rows = 0_usize;
+    let mut weighted_correct = 0_u64;
+    let mut weighted_false_positive = 0_u64;
+    for (sample, row) in clause_profile_rows(batch.rows()).enumerate() {
+        let fields = batch.row(row);
+        let prediction = if transform == RelationalTransform::Direct {
+            clause_prediction(&comparison, fields[left], fields[right])
+        } else {
+            let Some(observed) = relational_value(transform, fields[left], fields[right]) else {
+                return Ok(None);
+            };
+            clause_prediction(&comparison, observed, value)
+        };
+        if prediction {
+            outcomes[sample / 64] |= 1_u64 << (sample % 64);
+            true_rows += 1;
+        }
+        let weight = batch.weights[row];
+        if prediction == batch.expected(row) {
+            weighted_correct = weighted_correct
+                .checked_add(weight)
+                .ok_or_else(|| ControlError::Invalid("relational score overflow".into()))?;
+        }
+        if prediction && !batch.expected(row) {
+            weighted_false_positive =
+                weighted_false_positive.checked_add(weight).ok_or_else(|| {
+                    ControlError::Invalid("relational false-positive overflow".into())
+                })?;
+        }
+    }
+    if true_rows == 0 || true_rows == sampled {
+        return Ok(None);
+    }
+    Ok(Some((
+        outcomes.into_boxed_slice(),
+        RelationalMutationProfile {
+            left: batch.fields[left].clone(),
+            right: batch.fields[right].clone(),
+            transform,
+            value,
+            comparison,
+            weighted_correct,
+            weighted_false_positive,
+        },
+    )))
+}
+
+fn relational_profiles(
+    batch: &FeatureBatch,
+) -> Result<Vec<RelationalMutationProfile>, ControlError> {
+    let sampled = batch.rows().min(MAX_CLAUSE_PROFILE_ROWS);
+    let fields = batch.fields.len().min(MAX_RELATIONAL_PROFILE_FIELDS);
+    if sampled == 0 || fields < 2 {
+        return Ok(Vec::new());
+    }
+    let mut semantics = BTreeMap::<Box<[u64]>, RelationalMutationProfile>::new();
+    let mut retain = |profile: Option<(Box<[u64]>, RelationalMutationProfile)>| {
+        let Some((outcomes, profile)) = profile else {
+            return;
+        };
+        match semantics.entry(outcomes) {
+            std::collections::btree_map::Entry::Vacant(entry) => {
+                entry.insert(profile);
+            }
+            std::collections::btree_map::Entry::Occupied(mut entry) => {
+                if relational_profile_cmp(&profile, entry.get()).is_lt() {
+                    entry.insert(profile);
+                }
+            }
+        }
+    };
+    for left in 0..fields {
+        for right in left + 1..fields {
+            for comparison in [PlanOp::Eq, PlanOp::Ne, PlanOp::Gt] {
+                retain(relational_profile(
+                    batch,
+                    left,
+                    right,
+                    RelationalTransform::Direct,
+                    0,
+                    comparison,
+                )?);
+            }
+            retain(relational_profile(
+                batch,
+                right,
+                left,
+                RelationalTransform::Direct,
+                0,
+                PlanOp::Gt,
+            )?);
+            for (lhs, rhs, transform) in [
+                (left, right, RelationalTransform::Add),
+                (left, right, RelationalTransform::Sub),
+                (right, left, RelationalTransform::Sub),
+            ] {
+                let Some(values) = relational_profile_values(batch, lhs, rhs, transform)? else {
+                    continue;
+                };
+                for value in values {
+                    for comparison in [PlanOp::Eq, PlanOp::Ne, PlanOp::Gt] {
+                        retain(relational_profile(
+                            batch, lhs, rhs, transform, value, comparison,
+                        )?);
+                    }
+                }
+            }
+        }
+    }
+    let mut profiles = semantics.into_values().collect::<Vec<_>>();
+    profiles.sort_by(relational_profile_cmp);
+    profiles.truncate(MAX_RELATIONAL_PROFILES);
+    Ok(profiles)
+}
+
 fn clause_pair_profile_cmp(
     left: &ClausePairMutationProfile,
     right: &ClausePairMutationProfile,
@@ -3305,6 +3526,66 @@ fn mutate_clauses(
     false
 }
 
+fn relational_program(profile: &RelationalMutationProfile) -> Vec<PlanOp> {
+    let mut program = vec![
+        PlanOp::Field {
+            name: profile.left.clone(),
+        },
+        PlanOp::Field {
+            name: profile.right.clone(),
+        },
+    ];
+    match profile.transform {
+        RelationalTransform::Direct => {}
+        RelationalTransform::Add => {
+            program.push(PlanOp::Add);
+            program.push(PlanOp::Const {
+                value: profile.value,
+            });
+        }
+        RelationalTransform::Sub => {
+            program.push(PlanOp::Sub);
+            program.push(PlanOp::Const {
+                value: profile.value,
+            });
+        }
+    }
+    program.push(profile.comparison.clone());
+    program
+}
+
+fn mutate_relations(
+    parent: &PlanSpec,
+    context: &MutationContext<'_>,
+    emitter: &mut MutationEmitter<'_>,
+) -> bool {
+    for profile in context.relational_profiles {
+        let relation = relational_program(profile);
+        if emitter.emit("relation", || {
+            let mut child = parent.clone();
+            child.scope = None;
+            child.program = relation.clone();
+            child
+        }) {
+            return true;
+        }
+        if parent.program.len().saturating_add(relation.len() + 1) > MAX_PLAN_OPS {
+            continue;
+        }
+        for (connector, operator) in [(PlanOp::And, "relation-and"), (PlanOp::Or, "relation-or")] {
+            if emitter.emit(operator, || {
+                let mut child = parent.clone();
+                child.program.extend(relation.iter().cloned());
+                child.program.push(connector);
+                child
+            }) {
+                return true;
+            }
+        }
+    }
+    false
+}
+
 fn mutate_clause_pairs(
     parent: &PlanSpec,
     context: &MutationContext<'_>,
@@ -3470,11 +3751,13 @@ fn mutate_plan(
         EvolutionTargetStrategy::Balanced => {
             mutate_scopes(parent, context, &mut emitter)
                 || mutate_program(parent, context, None, &mut emitter)
+                || mutate_relations(parent, context, &mut emitter)
                 || mutate_clause_pairs(parent, context, &mut emitter)
                 || mutate_clauses(parent, context, &mut emitter)
         }
         EvolutionTargetStrategy::Numeric => {
             mutate_program(parent, context, Some(MutationFamily::Numeric), &mut emitter)
+                || mutate_relations(parent, context, &mut emitter)
                 || mutate_scopes(parent, context, &mut emitter)
                 || mutate_program(
                     parent,
@@ -3487,6 +3770,7 @@ fn mutate_plan(
         }
         EvolutionTargetStrategy::Structural => {
             mutate_scopes(parent, context, &mut emitter)
+                || mutate_relations(parent, context, &mut emitter)
                 || mutate_clause_pairs(parent, context, &mut emitter)
                 || mutate_clauses(parent, context, &mut emitter)
                 || mutate_program(
@@ -4135,6 +4419,7 @@ mod tests {
             scope_profiles: &scopes,
             clause_profiles: &[],
             clause_pair_profiles: &[],
+            relational_profiles: &[],
             field_index: &field_index,
         };
         let failure = FailureShape {
@@ -4237,6 +4522,7 @@ mod tests {
             scope_profiles: &scopes,
             clause_profiles: &[],
             clause_pair_profiles: &[],
+            relational_profiles: &[],
             field_index: &field_index,
         };
         let failure = FailureShape {
@@ -4361,6 +4647,7 @@ mod tests {
             scope_profiles: &scopes,
             clause_profiles: &profiles,
             clause_pair_profiles: &pairs,
+            relational_profiles: &[],
             field_index: &field_index,
         };
         let failure = FailureShape {
@@ -4439,6 +4726,115 @@ mod tests {
         assert_eq!(output.len(), 2);
         assert_eq!(output[0].operator, "clause-and");
         assert_eq!(output[1].operator, "clause-or");
+    }
+
+    #[test]
+    fn relational_profiles_grow_exact_field_arithmetic() {
+        let batch = FeatureBatch {
+            presentation: "relations".into(),
+            problem: "sum".into(),
+            fields: vec!["left".into(), "right".into()].into_boxed_slice(),
+            generator: None,
+            row_ids: (0..6).collect::<Vec<_>>().into_boxed_slice(),
+            weights: vec![1; 6].into_boxed_slice(),
+            expected: vec![0b00_0111].into_boxed_slice(),
+            values: vec![1, 9, 2, 8, 3, 7, 1, 8, 2, 9, 4, 7].into_boxed_slice(),
+        };
+        let profiles = relational_profiles(&batch).unwrap();
+        assert!(profiles.len() <= MAX_RELATIONAL_PROFILES);
+        let sum = profiles
+            .iter()
+            .find(|profile| {
+                profile.left == "left"
+                    && profile.right == "right"
+                    && profile.transform == RelationalTransform::Add
+                    && profile.value == 10
+                    && matches!(profile.comparison, PlanOp::Eq)
+            })
+            .unwrap();
+        assert_eq!(sum.weighted_correct, 6);
+        assert_eq!(sum.weighted_false_positive, 0);
+
+        let parent = PlanSpec {
+            schema: super::super::PLAN_SCHEMA.into(),
+            name: "relation-parent".into(),
+            role: super::super::PlanRole::Diagnostic,
+            output: super::super::PlanOutput::Predicate,
+            scope: None,
+            program: vec![PlanOp::Bool { value: true }],
+        };
+        let scopes = Vec::new();
+        let clauses = Vec::new();
+        let pairs = Vec::new();
+        let field_index = BTreeMap::new();
+        let context = MutationContext {
+            fields: &batch.fields,
+            scope_profiles: &scopes,
+            clause_profiles: &clauses,
+            clause_pair_profiles: &pairs,
+            relational_profiles: &profiles,
+            field_index: &field_index,
+        };
+        let failure = FailureShape {
+            first_mismatch: None,
+            expected: None,
+            probes: [FailureProbe::default(); MAX_FAILURE_PROBES],
+            probe_count: 0,
+        };
+        let mut output = Vec::new();
+        mutate_plan(
+            &parent,
+            "parent",
+            &context,
+            MutationRequest {
+                failure_shape: &failure,
+                strategy: EvolutionTargetStrategy::Structural,
+                source_target_class: None,
+                cursor: 0,
+            },
+            &mut output,
+            1,
+        );
+        assert_eq!(output[0].operator, "relation");
+        let compiled = CompiledPlan::compile(&output[0].plan, &batch.fields).unwrap();
+        for row in 0..batch.rows() {
+            assert_eq!(
+                compiled.evaluate_row(batch.row(row)).unwrap() != 0,
+                batch.expected(row)
+            );
+        }
+    }
+
+    #[test]
+    fn relational_profiles_reach_late_campaign_fields() {
+        let fields = (0..30)
+            .map(|field| format!("field-{field:02}"))
+            .collect::<Vec<_>>()
+            .into_boxed_slice();
+        let mut values = vec![0_i64; 8 * fields.len()];
+        for row in 0..8 {
+            values[row * fields.len() + 28] = row as i64;
+            values[row * fields.len() + 29] = if row < 4 { row as i64 } else { row as i64 + 1 };
+        }
+        let batch = FeatureBatch {
+            presentation: "late-relations".into(),
+            problem: "field reach".into(),
+            fields,
+            generator: None,
+            row_ids: (0..8).collect::<Vec<_>>().into_boxed_slice(),
+            weights: vec![1; 8].into_boxed_slice(),
+            expected: vec![0b1111_0000].into_boxed_slice(),
+            values: values.into_boxed_slice(),
+        };
+        let profiles = relational_profiles(&batch).unwrap();
+        assert!(profiles.iter().any(|profile| {
+            profile.left == "field-28"
+                && profile.right == "field-29"
+                && profile.transform == RelationalTransform::Direct
+                && matches!(profile.comparison, PlanOp::Ne)
+                && profile.weighted_correct == 8
+                && profile.weighted_false_positive == 0
+        }));
     }
 
     #[test]
