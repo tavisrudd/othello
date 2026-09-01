@@ -36,3 +36,11 @@ targets, exhaustive-10 recovers best weight 56 and the same candidate checksum
 in 26.00 s versus 68.48 s, a 2.633x full-run speedup.  The test binary's
 thread-local allocator gate observes zero allocation, reallocation, or
 deallocation in the actual BP and higher-order OSD regions.
+
+The same unmodified kernel also reproduces complete reference streams on
+BB288 and the C997 Gross [[144,12,12]] code.  Five-pair OSD-0 means improve
+`ldpc` by 1.450x (`t=5.64`) and 1.308x (`t=6.22`), respectively.  C997 first
+failed the no-small-regression gate; replacing branchy first/second-minimum
+selection by an equivalent min/max network preserved every binary64 posterior
+while turning the regression into a measured win.  `generate_targets.py`
+creates deterministic neutral target streams for additional matrices.

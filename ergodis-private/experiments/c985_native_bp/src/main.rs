@@ -352,21 +352,17 @@ impl MinSum {
                 let mut sign = syndrome[check] != 0;
                 let mut minimum = f64::INFINITY;
                 let mut second = f64::INFINITY;
-                let mut minimum_edge = usize::MAX;
                 for edge in start..end {
                     let message = self.v2c[edge];
                     sign ^= message <= 0.0;
                     let magnitude = message.abs();
-                    if magnitude < minimum {
-                        second = minimum;
-                        minimum = magnitude;
-                        minimum_edge = edge;
-                    } else if magnitude < second {
-                        second = magnitude;
-                    }
+                    let lower = minimum.min(magnitude);
+                    let upper = minimum.max(magnitude);
+                    minimum = lower;
+                    second = second.min(upper);
                 }
                 for edge in start..end {
-                    let magnitude = if edge == minimum_edge {
+                    let magnitude = if self.v2c[edge].abs() == minimum {
                         second
                     } else {
                         minimum

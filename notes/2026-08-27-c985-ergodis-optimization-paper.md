@@ -1328,8 +1328,13 @@ files are disposable and may be deleted at any time.
    streams while improving the 128-target means 3.235x (`t=18.80`) and 3.710x
    (`t=8.64`).  A full 2,048-target exhaustive replay recovers best weight 56
    and the identical stream checksum in 26.00 s versus 68.48 s (2.633x).
-   The item (d) next gate is therefore a reusable public API plus cross-instance
-   validation, not more work on an ordering-only bridge.
+   Cross-instance validation now passes too: complete OSD-0 candidate streams
+   match on BB288 and C997 Gross [[144,12,12]], with five-pair mean speedups of
+   1.450x (`t=5.64`) and 1.308x (`t=6.22`).  C997 initially failed the
+   no-small-regression gate; a branchless min/second-min check aggregation
+   preserves every binary64 posterior while converting that regression into a
+   win.  The item (d) next gate is therefore a reusable public API, not more
+   work on an ordering-only bridge.
 
    Current-tree reconciliation changes that order slightly. Static and dynamic
    incumbent fan-out are already present as worker-local relaxed mailboxes plus
@@ -3912,9 +3917,16 @@ respectively.  The full 2,048-target exhaustive replay recovers best weight 56,
 weight sum 269,742, and the identical checksum in 26.00 s versus 68.48 s, a
 2.633x speedup.  A test-only thread-local allocator gate observes zero
 allocation, reallocation, or deallocation in actual BP and higher-order OSD
-regions.  The spike remains private while its API is generalized and validated
-on another sparse-code family.  Raw rounds, hashes, counters, and the admission
-decision are in `ergodis-private/evidence/c985-native-bp-spike.json`.
+regions.  The cross-instance gate now passes on BB288 and C997 Gross
+[[144,12,12]]: both complete OSD-0 candidate streams match, with
+five-pair mean speedups of 1.450x (`t=5.64`) and 1.308x (`t=6.22`).  C997 first
+measured about 1.32x slower; replacing branchy first/second-min selection with
+an equivalent min/max network preserved binary64 posterior identity and
+converted the small-instance rejection into a win.  The spike remains private;
+the remaining admission work is API separation and public-core review, not
+algorithmic fidelity.  Raw
+rounds, hashes, counters, and the admission decision are in
+`ergodis-private/evidence/c985-native-bp-spike.json`.
 
 Implementation attribution: the comparison used the released `ldpc==2.4.1`
 binary package.  The BP parallel/min-sum and OSD-0 mechanics were checked at

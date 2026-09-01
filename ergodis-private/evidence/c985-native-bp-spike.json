@@ -70,6 +70,37 @@
     "weight_sum_each": 269742,
     "candidate_checksum_each": 9350158086529496185
   },
+  "cross_instance_osd0": {
+    "c997_gross_144": {
+      "input_sha256": "4ca7670cb86ab54f15da19b7448d4eada813053325f837a4290d8243a7f34868",
+      "target_stream_sha256": "f247a7ec2de2565d0287fef9a9c22391002734421a9d533f7b35d6da01c1ac58",
+      "native_ns": [122059283, 119063224, 123076768, 130946009, 118025292],
+      "ldpc_2_4_1_ns": [149381735, 165551552, 166589795, 150803523, 169971432],
+      "native_mean_ms": 122.6341152,
+      "ldpc_mean_ms": 160.4596074,
+      "mean_speedup": 1.3084418404969256,
+      "paired_t": 6.218692940296735,
+      "valid_each": 128,
+      "best_weight_each": 18,
+      "weight_sum_each": 4154,
+      "candidate_checksum_each": 17995255431389209041
+    },
+    "bb288": {
+      "input_sha256": "ef5d9264c92e72a949ce6776b78e896047a096112579ea49a1d5ee1c7a977955",
+      "target_stream_sha256": "73a72f5bdd5afb5bd319b99cc9b21b1c09c0808c852ca7f80c102a5304a12ac1",
+      "native_ns": [284525754, 259798654, 263712021, 333254697, 238375876],
+      "ldpc_2_4_1_ns": [414674656, 399780323, 409845415, 372506832, 404083817],
+      "native_mean_ms": 275.9334004,
+      "ldpc_mean_ms": 400.1782086,
+      "mean_speedup": 1.450271000248218,
+      "paired_t": 5.640339582830324,
+      "valid_each": 128,
+      "best_weight_each": 32,
+      "weight_sum_each": 7220,
+      "candidate_checksum_each": 16161318057804447069
+    }
+  },
+  "small_graph_repair": "branchless min/second-min check aggregation preserves binary64 posterior equality while changing the C997 gate from about 1.32x slower to 1.308x faster than ldpc",
   "allocation_gate": "test-only thread-local allocator observes zero alloc/realloc/dealloc events in actual BP and higher-order OSD regions",
-  "decision": "retain private spike; BP, OSD-0, OSD-CS-10, and exhaustive-10 pass speed, exact syndrome, reference-fidelity, quality, and zero-allocation gates; next gate is reusable public API and cross-instance validation"
+  "decision": "retain private spike; BP, OSD-0, OSD-CS-10, and exhaustive-10 pass speed, exact syndrome, reference-fidelity, quality, zero-allocation, small-instance, and cross-instance gates; next gate is a reusable API"
 }
