@@ -640,12 +640,17 @@ files are disposable and may be deleted at any time.
    Commits `8b7dc358f` and `2b2b3e39d` replace it with a guaranteed-full-rank
    non-RREF fixture, assert that both reducers actually mutate it, and bind the
    seed into every record.  The corrected 256-matrix-per-degree equivalence
-   gate passes for degrees 3--8.  Seven seed-rotated `GF(64)` counter pairs
-   reverse the isolated result: table/binary is 1.009912x cycles (`t=7.47`),
-   1.010642x wall (`t=2.59`), 1.081415x instructions, and 1.528112x branches at
-   `4 x 5`; at `8 x 9` it is 1.054166x cycles (`t=23.44`), 1.055951x wall
-   (`t=10.50`), 1.133774x instructions, and 1.707273x branches.  Thus the
-   specialized characteristic-two reducer wins in isolation.  It remains
+   gate passes for degrees 3--8.  A source-current seven-pair replay with ten
+   million reductions per arm retains the direction but supersedes the earlier
+   unretained point estimates: table/binary is 1.007614x cycles (`t=6.86`),
+   1.072487x instructions, and 1.510076x branches at `4 x 5`, while wall time
+   is unresolved (`1.001148x`, `t=0.83`); at `8 x 9` it is 1.028575x cycles
+   (`t=19.10`), 1.021086x wall (`t=12.64`), 1.142832x instructions, and
+   1.703581x branches.  The raw seed-rotated pairs are tracked at
+   `ergodis-private/evidence/c1030-extension-field-elimination-rerun.tsv`.
+   Thus the specialized characteristic-two reducer has a robust isolated win
+   on the larger fixture, while the tiny wall result is deliberately left
+   unresolved.  It remains
    rejected for the motivating PRS application only because the independent
    end-to-end profile assigns elimination no sample at the 0.01% threshold;
    the old argument that its isolated upper bound also lost is invalid.  The

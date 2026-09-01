@@ -43,7 +43,7 @@ commit.
 | 12 | 4 | Generic `ProjectiveIndex::new` computes one block past the last it pushes, spuriously rejecting the largest representable geometry — PG(7,256) errors although its point count fits in `u64`, while the binary sibling accepts it. The grounded residue of the refuted finding below. **Resolved in `f6ac64c4f`:** multiplication now occurs only when another stored block is required; PG(7,256) constructs and PG(8,256) still rejects. | `projective.rs:44-50` | RC1 |
 | 13 | 4 | `xor_sumset_256_into` claims a saturated sumset when one operand is empty; the nonempty precondition is re-established independently at each of four call sites. *(Found independently by two agents; severity settled at 4 by the call-site audit.)* | `bitset_sumset.rs` | RC1 |
 | 14 | 4 | The g53 sparse-dual projection/rotation sumset kernels silently cap at 64 residue states, with the guard living in one caller; the next parameter step wraps shifts in release and corrupts exclusion certificates | `g53_sparse_dual.rs:394`, `:308-331`, `:345-376` | RC1, RC2 |
-| 15 | 4 | The zero-allocation gate rests on four diverged copies of a thread-local counting allocator; two lack the panic guard, and any rayon-ified measured kernel passes the gate vacuously | `src/lib.rs:92-98`, `tests/proof_synthesis_allocations.rs:69`, and two guarded copies | RC1, RC2 |
+| 15 | 4 | The zero-allocation gate rests on four diverged copies of a thread-local counting allocator; two lack the panic guard, and any rayon-ified measured kernel passes the gate vacuously. **Partially resolved in `b7a05ab43`:** the public integration tests now reuse the worker-aware, panic-safe core harness; explicit measurement propagation and panic restoration have direct regressions. Private copies remain to migrate without absorbing their owners' in-flight work. | `src/lib.rs:92-98`, `tests/proof_synthesis_allocations.rs:69`, and two guarded copies | RC1, RC2 |
 | 16 | 4 | `Matrix` carries no field tag, so identical bytes silently reinterpret under a different field; it derives `Serialize`/`Deserialize` with no field context, and the reduced-entry check is the only residual guard. `span.rs`'s `CanonicalTargetImage` already implements the guard `Matrix` lacks | `matrix.rs:18-62` | RC1 |
 | 17 | 4 | `Prime<P>` arithmetic is public and unvalidated — `validate()` is advisory, so `Prime::<9>::inverse(3)` returns `Ok(0)` and `Prime::<0>::add` divides by zero. Includes the `assert!` vs `debug_assert!` split between `SmallField` and `BinarySmallField` for the identical misuse. **Partially resolved in `38f6fa673`:** invalid prime moduli now fail at arithmetic instantiation with no runtime hot branch; canonical-element checking and the binary/runtime assertion split remain open. | `field.rs:50-93` | RC1, RC2 |
 | 18 | 4 | The `LiftProfile` signature width is implicit in `lift_bits`, which `EnergyDomain` does not record; four width-divergent unpackers exist (`as u8` at three sites, `as u16` at one) | `g133_sparse_defect.rs:255-265`, `:1213`, `:1358`, `:3779`, `:3808` | RC1 |
@@ -323,7 +323,20 @@ old controls.
   application decision remains a rejection for a different, independently
   measured reason: elimination received no sample at the 0.01% threshold in
   the full PRS profile, so specializing it cannot materially accelerate that
-  workload.
+  workload. A fresh source-current replay after the audit retains the direction
+  but not the old point estimates. Seven seed-rotated pairs with ten million
+  reductions per arm give table/binary `1.007614x` cycles (`t=6.86`) at
+  `4 x 5` and `1.028575x` (`t=19.10`) at `8 x 9`; wall time is unresolved at
+  `4 x 5` (`1.001148x`, `t=0.83`) and favors binary at `8 x 9`
+  (`1.021086x`, `t=12.64`). Instructions remain exact-shape wins of
+  `1.072487x` and `1.142832x`; binary pays more, but still tiny, branch-miss
+  counts. The tracked raw pairs are
+  `ergodis-private/evidence/c1030-extension-field-elimination-rerun.tsv`, run
+  on CPU 2 with `perf 7.0.11`, Rust `1.93.1`, source `b7a05ab43`, and binary
+  SHA-256 `a8c12f3b7fc47cd68c6299c99ad0b67069a1b9002c0bf975adc884354a49512c`.
+  Therefore the robust claim is qualitative and bounded: the binary reducer
+  saves instructions and is faster on the larger isolated fixture, but the
+  earlier exact ratios are superseded and no PRS application speedup follows.
 - **Finding 21 narrows but does not overturn the recorded BB288 result.** Commit
   `8d71c3b51` makes each anchor's positional frontier independent of
   shard-local incumbents, which are now applied only after assignment. A
@@ -345,6 +358,13 @@ old controls.
   effective maxima, admits only the one-step odd-to-even normalization, and
   mutation-tests both invalid and cross-shard-inconsistent effective maxima;
   this closes the adjacent parity-normalization false-rejection foot-gun.
+
+The source-current focused gates were rerun after the shared allocation-harness
+repair: the non-RREF elimination fixture/equivalence tests, compact and wide
+frontier reconstruction, and the shard-ledger mutation suite all pass. Thus
+finding 20 changes an isolated microbenchmark conclusion but not the PRS
+application choice, while finding 21 changes the generic coverage rationale
+but not the old witness-free BB288 numeric result.
 
 A general test worth adopting alongside these, since it would have caught findings 20, 21, 29, and
 33 as a class: for every check, assertion, and verdict in the evidence path, construct the input
