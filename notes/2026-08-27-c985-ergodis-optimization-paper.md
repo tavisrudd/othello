@@ -311,8 +311,16 @@ files are disposable and may be deleted at any time.
    9/63/1 weight histogram. The closure engine now also offers a reusable
    pre-sized BFS workspace whose monomorphized callbacks reuse campaign-owned
    label/debt arrays as discovery state; the C1018 orbit census has migrated to
-   it and remains byte-for-byte stable on the q=8,r=3 result shape. Next:
-   counter/profile a larger orbit-closure wave.
+   it and remains byte-for-byte stable on the q=8,r=3 result shape. Commit
+   `a357e1d21` closes the larger orbit-action profile with a reusable compressed
+   algebraic action rather than an explicit point permutation. A
+   `ProjectiveLinearActionPack<G>` consumes exact field-tagged full-rank
+   matrices, flattens them once, and creates a validate-once runner whose
+   successor loop is allocation-free and uses canonical table arithmetic. The
+   C1018 q=64,r=5 client replaces nested generator rows with the fixed
+   three-generator pack; private vocabulary remains outside core. The current
+   next profile is the residual orbit ownership/hash path, not another field or
+   rank/unrank specialization.
    Keep tactical plane completion in
    `ergodis-private`; do not specialize the public core for C1018.
    The smaller linear-code gap is also closed: a compiled binary row-space
@@ -683,9 +691,34 @@ files are disposable and may be deleted at any time.
    (`t=-4.14`) and 0.957078x instructions.  The adapter refactor is therefore
    rejected and the C1018 source restored byte-for-byte.  Existing clients
    cannot regress; the public specialization is available only to a caller
-   whose own end-to-end gate wins.  The next PRS optimization must reduce the
-   orbit/hash critical path or compile a fused validated action without
-   perturbing the generic worker, not merely delete arithmetic instructions.
+   whose own end-to-end gate wins.
+
+   Commit `a357e1d21` takes the fused-action branch of that gate. The new
+   projective action pack validates exact matrix presentation and invertibility
+   once, stores all generators in one flat arena, and returns a fixed successor
+   array without allocation, pointer-chasing rows, or repeated canonical-byte
+   checks. A same-binary public dense-action control over 450 million exact
+   transitions (15 rotated pairs) preserves work and checksum while legacy/flat
+   is 1.080873x instructions and 1.511289x branches. Cycles and wall point in
+   the same direction but remain frequency-noisy (`1.043078x`, `t=1.06`;
+   `1.033932x`, `t=0.81`); flat incurs 1.093x branch misses. Thus the reusable
+   claim is structural, not a dense-kernel timing claim.
+
+   The full C1018 q=64,r=5 census is decisively positive where the three
+   projective generators dominate. Seven final rotated pairs preserve
+   byte-identical output in each thread mode. Parent/flat wall is 1.096024x at
+   1T (`t=2.39`) and 1.324202x at 12T (`t=17.40`); 12T cycles improve 1.328056x
+   (`t=22.46`), instructions 1.140806x, and branches 1.761942x. Median RSS moves
+   12,784 -> 13,248 KiB at 1T and 100,488 -> 101,032 KiB at 12T. The application
+   control source is the old committed C1018 worker plus a temporary overlay of
+   its currently untracked private-library dependencies, so the application
+   samples are durable diagnostics rather than a fully commit-replayable claim;
+   the same-binary public kernel control has no such caveat. Raw tables are
+   `c985-projective-action-kernel-ab.tsv`,
+   `c985-projective-action-application-counters.tsv`, and
+   `c985-projective-action-application-wall.tsv`. The next PRS frontier is now
+   the stamped orbit set and visited-bit ownership path, selected only after a
+   source-current profile.
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
