@@ -260,9 +260,15 @@ bound procedure; exactness still comes from `css_distance_native` exhaustion.
 `binary_linear_distance` is the corresponding exact small-rank row-space mode.
 Its sparse JSON input contains `label`, `coordinate_count`, and `generators`;
 the output gives the minimum nonzero weight and a replayable support. It uses a
-canonical GF(2) basis and allocation-free packed Gray-code enumeration, and
-defaults to `--maximum-rank 30` rather than silently launching an infeasible
-span; informed callers may raise the budget up to the hard rank-63 limit.
+canonical GF(2) basis and allocation-free packed Gray-code enumeration for
+small spans.  At rank 24 and above, compilation also seeks disjoint systematic
+information sets; a conservative candidate-cost model selects an exact
+Brouwer--Zimmermann fixed-weight enumeration only when its proved lower bound
+is predicted to beat Gray by at least 8x.  Both hot kernels dispatch once to a
+POPCNT/AVX2/BMI implementation when the host supports it.  The evidence names
+the selected method and information-set count.  The CLI defaults to
+`--maximum-rank 30` rather than silently launching an infeasible span; informed
+callers may raise the budget up to the hard rank-63 limit.
 
 Inputs with 257--320 coordinates dispatch to a separately monomorphized wide
 backend. It preserves exact three-word syndromes, removes redundant check rows

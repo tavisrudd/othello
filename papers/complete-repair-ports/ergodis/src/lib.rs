@@ -160,8 +160,8 @@ pub use interface::{
     VerifiedParetoWitnesses, WitnessedParetoPresentation,
 };
 pub use linear_code::{
-    BinaryLinearCodeError, BinaryLinearCodeWorkspace, BinaryLinearWeightResult,
-    BinaryLinearWeightSummary, CompiledBinaryLinearCode,
+    BinaryLinearAlgorithm, BinaryLinearCodeError, BinaryLinearCodeWorkspace,
+    BinaryLinearWeightResult, BinaryLinearWeightSummary, CompiledBinaryLinearCode,
 };
 pub use matrix::{Matrix, MatrixError};
 pub use modular_power::{

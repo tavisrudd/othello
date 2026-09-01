@@ -37,7 +37,8 @@ struct Evidence<'a> {
     input_sha256: String,
     compile_seconds: f64,
     search_seconds: f64,
-    method: &'static str,
+    method: ergodis::BinaryLinearAlgorithm,
+    information_sets: usize,
     result: ergodis::BinaryLinearWeightResult,
 }
 
@@ -76,18 +77,20 @@ fn main() -> Result<()> {
         );
     }
     let compile_seconds = compile_start.elapsed().as_secs_f64();
+    let method = compiled.recommended_algorithm();
     let search_start = Instant::now();
     let result = compiled.minimum_nonzero_weight();
     let search_seconds = search_start.elapsed().as_secs_f64();
     let evidence = Evidence {
-        schema: "ergodis-binary-linear-distance-v1",
+        schema: "ergodis-binary-linear-distance-v2",
         label: &code.label,
         coordinate_count: code.coordinate_count,
         rank: compiled.rank(),
         input_sha256: format!("{:x}", Sha256::digest(&input)),
         compile_seconds,
         search_seconds,
-        method: "canonical GF(2) row basis; reflected Gray-code span; packed POPCNT",
+        method,
+        information_sets: compiled.information_set_count(),
         result,
     };
     serde_json::to_writer(std::io::stdout().lock(), &evidence)?;

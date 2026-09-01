@@ -973,7 +973,22 @@ fn main() {
         for _ in 0..repetitions {
             let (weight, candidates) = match backend {
                 "gray" => {
-                    let summary = compiled.minimum_nonzero_weight_scan(&mut workspace);
+                    let summary = compiled.minimum_nonzero_weight_gray_scan(&mut workspace);
+                    (
+                        summary.weight.expect("positive-rank fixture has a word"),
+                        summary.candidates,
+                    )
+                }
+                "bz" => {
+                    let summary =
+                        compiled.minimum_nonzero_weight_brouwer_zimmermann_scan(&mut workspace);
+                    (
+                        summary.weight.expect("positive-rank fixture has a word"),
+                        summary.candidates,
+                    )
+                }
+                "auto" => {
+                    let summary = compiled.minimum_nonzero_weight_auto_scan(&mut workspace);
                     (
                         summary.weight.expect("positive-rank fixture has a word"),
                         summary.candidates,

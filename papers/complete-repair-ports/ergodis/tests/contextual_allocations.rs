@@ -135,6 +135,25 @@ fn binary_linear_weight_scan_allocates_nothing_after_compilation() {
     assert_eq!(allocations, 0);
 }
 
+#[test]
+fn binary_linear_brouwer_zimmermann_allocates_nothing_after_compilation() {
+    let rank = 24;
+    let coordinates = rank * 2;
+    let mut entries = vec![0_u8; rank * coordinates];
+    for row in 0..rank {
+        entries[row * coordinates + row] = 1;
+        entries[row * coordinates + rank + row] = 1;
+    }
+    let generator = Matrix::new::<2>(rank, coordinates, entries).unwrap();
+    let compiled = CompiledBinaryLinearCode::compile(&generator).unwrap();
+    let mut workspace = compiled.workspace();
+    let (summary, allocations) =
+        tracked_allocations(|| compiled.minimum_nonzero_weight_auto_scan(&mut workspace));
+    assert_eq!(summary.weight, Some(2));
+    assert_eq!(summary.candidates, 48);
+    assert_eq!(allocations, 0);
+}
+
 #[cfg(feature = "control-plane")]
 #[test]
 fn campaign_vm_evaluation_allocates_nothing() {

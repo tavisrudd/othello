@@ -319,7 +319,31 @@ as each coherent tranche lands.
    zero-allocation scan gate, and replaces the C1018 transversal driver's
    materialized `2^k` span when computing minimum nonzero check weight. The
    create-only `binary_linear_distance` evidence CLI makes this a first-class
-   public mode rather than only a library primitive.
+   public mode rather than only a library primitive.  Its next exact backend is
+   now implemented: ranks at least 24 compile disjoint systematic information
+   sets (with an 8 MiB packed-basis cap), and a conservative candidate model
+   selects fixed-weight Brouwer--Zimmermann only at a predicted 8x advantage.
+   Gosper masks update the running word by their XOR delta and replace the
+   power-of-two division by a trailing-zero shift, so the hot loop is
+   iterative, pre-sized, and allocation-free.  Deterministic ranks 4--10 agree
+   with Gray enumeration; a rank-24 doubled-identity gate closes at weight two
+   after 48 candidates; and both auto and explicit paths retain witnesses.
+   Hardware dispatch is outside the loop and selects POPCNT/AVX2/BMI kernels.
+   On the deterministic rank-24, length-72 fixture, BZ checks 38,850 candidates
+   per solve versus Gray's 16,777,215.  Seven CPU-2 interleaved counter rounds
+   over ten solves put optimized-Gray/BZ at 66.500x wall (`t=111.13`), 73.603x
+   cycles (`t=122.42`), 163.152x instructions, and 139.899x branches in BZ's
+   favour, with the same minimum 15.  BZ incurs 3.90x as many branch misses,
+   but only about 50,349 across ten solves.  The rank-20 control does not pay
+   for the larger compiler path; versus retained commit `c97892222`, seven
+   paired 100-solve rounds put baseline/candidate at 1.276x wall (`t=6.73`),
+   1.287x cycles (`t=7.42`), 1.210x instructions, and 1.286x branches.  Branch
+   misses are statistically unresolved (0.990x, `t=-1.94`).  An earlier
+   popcount-only dispatch changed Gray code generation and failed that gate; it
+   was rejected before the full AVX2/BMI target restored and improved the
+   control.  Raw binaries and measurements are under
+   `/home/tavis/.cache/ergodis-perf/c985-bz/final-ab`; binaries are under that
+   tree and `/home/tavis/.cache/ergodis-target-c985-bz`.
    The random CSS upper-bound backend now adds pre-sized OSD-2 combinations.
    On a diagnostic BB756 run at target 36, OSD-2 found an independently replayed
    weight-36 logical support in 0.621 s after 1,406 completed trials; the same
@@ -538,6 +562,28 @@ as each coherent tranche lands.
    expander-unfriendly treewidth/ZDD methods, block Wiedemann at current sizes,
    and Hopcroft--Karp in the tiny in-loop Hall regime remain explicit
    non-imports.
+9. **Queued — parametric certificate verifier.** C1029 demonstrates a genuine
+   reach gap rather than a faster version of an existing kernel: Ergodis had no
+   usable path for exact identities in `Z[t]`, finite congruence coverings, and
+   their composition with a hash-bound residual witness layer.  Its private
+   Erdős--Straus instrument certifies `2 <= n <= 10^8` with 540 exact families
+   and 685 residual witnesses; an independent checker rejects ten targeted
+   corruptions.  Import the reusable trust boundary, not the problem: a
+   resource-bounded exact polynomial identity checker over `BigInt`, typed
+   parameter/class declarations, finite cover verification, payload digests,
+   and an explicit composition DAG.  Feed this through the planned typed
+   plan/theorem AST so text and protocol encodings lower to one verifier.
+   Generator heuristics, prime sieves, factorization policy, and the C1029
+   family catalogue remain in `ergodis-private`.  The first public positivity
+   rule may deliberately be coefficientwise non-negativity plus a checked
+   threshold; richer half-line positivity requires a separately certified
+   root/Sturm kernel.  Add certificate-size, degree, coefficient-bit-length,
+   modulus, and evaluation limits before accepting untrusted input.  Pair the
+   Rust checker with an implementation-independent replay, and later discharge
+   composition lemmas such as scaling in Lean rather than silently trusting
+   prose.  This becomes the first characteristic-zero, infinite-family
+   certificate product and a stepping stone toward theorem composition; it is
+   not a request to put a generic sieve or CAS in the solve core.
 
 ## Gurobi boundary and semantic-symmetry spike, 2026-08-29
 
