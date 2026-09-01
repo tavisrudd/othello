@@ -236,16 +236,21 @@ different machines, and survive session boundaries independently. Maintainers
 can compile every supported CSS feature combination and replay the compact/wide
 shard-union regression with `scripts/check-css-feature-matrix.sh`.
 
-Version-5 shard evidence additionally records a completion marker plus BLAKE3
-fingerprints of the exact input and executable. The cold-path
+Version-6 shard evidence additionally records a completion marker plus BLAKE3
+fingerprints of the exact input and executable. Each shard also recomputes a
+cold, per-anchor commitment to the common deterministic prefix frontier. Its
+selected bucket carries a branch count and independent additive/XOR
+accumulators over BLAKE3 branch identities. The cold-path
 `css_distance_shard_ledger` tool accepts one record per shard and emits a
 create-only compact coverage manifest only when every index is present exactly
 once and the schema, input, executable, compiled artifact, search kernel,
 requested and effective search maxima, completed rounds, and final-round
-counters agree.  The v2 manifest records both maxima because a search may
-normalize an odd requested maximum down by one; the cover verdict is scoped to
-the recorded effective maximum. Missing, duplicate, interrupted, or mixed
-records fail closed:
+counters agree. The v3 ledger reconstructs every full anchor-partition digest
+from the selected buckets, so executable identity is no longer the only
+evidence that the shards name the same frontier. It records both maxima because
+a search may normalize an odd requested maximum down by one; the cover verdict
+is scoped to the recorded effective maximum. Missing, duplicate, interrupted,
+mutated, cross-anchor, or mixed records fail closed:
 
 ```sh
 cargo run --release --bin css_distance_shard_ledger -- \

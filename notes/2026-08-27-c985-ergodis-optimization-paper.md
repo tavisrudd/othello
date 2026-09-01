@@ -794,10 +794,20 @@ files are disposable and may be deleted at any time.
    exhaustive oracle check coverage, uniqueness, and key membership. Repeated
    fibre queries are allocation-free. The private mod-49 client may migrate
    only after its source chain is committed by its owner; until then finding 24
-   remains open rather than being papered over by the public primitive. The
-   next owned safeguard is a cold per-anchor shard-frontier commitment so a
-   manifest can establish the cover it names without relying only on executable
-   identity.  The adjacent constructor-bound sweep has also started: commit
+   remains open rather than being papered over by the public primitive. Commit
+   `2c2bfc293` lands the next owned safeguard: v6 shard evidence records a cold
+   per-anchor prefix-partition commitment plus the selected bucket's branch
+   count and additive/XOR BLAKE3 accumulators; the v3 ledger reconstructs every
+   full partition digest from all shard records. The builder is the same
+   theorem-preserving prefix routine used by search, parameterized only to omit
+   unused counters on the cold replay. On BB288 at radius 16, the three-way
+   end-to-end ledger reconstructs nonempty 123- and 124-branch frontiers split
+   `41/41/41` and `42/41/41`, and accepts the 21,826,939-candidate aggregate.
+   Seven interleaved parent/candidate pairs put the opt-in evidence cost at
+   1.000587x instructions at 1T and 1.000615x at 12T; cycles do not regress
+   significantly (`t=-0.98`, `t=-1.31`). Unsharded search remains within
+   0.0085% instructions in the worst measured mode with no cycle regression.
+   The adjacent constructor-bound sweep has also started: commit
    `f6ac64c4f` removes `ProjectiveIndex`'s unnecessary multiplication one power
    beyond its largest stored block. `PG(7,256)`, whose full point count fits in
    `u64`, now constructs and round-trips its terminal point, while `PG(8,256)`

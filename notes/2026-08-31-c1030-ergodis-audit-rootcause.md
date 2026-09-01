@@ -334,9 +334,14 @@ old controls.
   generic `complete-compatible-cover` rationale does not. Seven interleaved
   parent/candidate counter pairs show no significant operational regression:
   instructions are 0.9999997x at 1T (`t=-1.08`) and 0.9999599x at 12T
-  (`t=-1.40`), while 12T cycles are 1.002252x (`t=1.57`). A cold frontier
-  commitment is still required before the ledger verdict itself constitutes a
-  general cover certificate. The v2 manifest separately binds requested and
+  (`t=-1.40`), while 12T cycles are 1.002252x (`t=1.57`). Commit `2c2bfc293`
+  closes the remaining ledger gap: v6 evidence commits each anchor's common
+  deterministic prefix frontier and its selected shard bucket, while the v3
+  ledger reconstructs the full partition digest from all buckets. The prefix
+  builder is shared with search rather than copied, and mutations of a bucket,
+  partition digest, or anchor fail closed. The manifest therefore establishes
+  the named prefix cover rather than relying only on executable identity. The
+  preceding v2 manifest separately bound requested and
   effective maxima, admits only the one-step odd-to-even normalization, and
   mutation-tests both invalid and cross-shard-inconsistent effective maxima;
   this closes the adjacent parity-normalization false-rejection foot-gun.
