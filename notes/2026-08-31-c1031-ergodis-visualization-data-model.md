@@ -206,6 +206,91 @@ teaching view needs to animate a single evaluation through the expression tree.
 forward results verbatim without reimplementing the protocol. That is the fastest credible path to a
 working web UI and it requires no core changes at all.
 
+## The reduction cascade, the compilation, and the quotient tablebase
+
+Added after the user pointed at three further things to visualize: the C1016 evolution feature graph
+and its progress, the compilation itself, and the quotient DAG or tablebase. All three turn out to
+be the same shape of object, and the C1016 record already contains the numbers.
+
+The relevant private sources are `ergodis-private/src/feature_synthesis.rs` — which supplies
+`AffineModularSeparator`, `ScopedAffineFeature`, `PairedPointScope`,
+`synthesize_categorical_scope_tree_into`, `minimize_categorical_scope_tree_into`, and
+`evaluate_categorical_scope_tablebase` — together with `raw_feature_evolve.rs`,
+`quotient_paf_proof.rs`, `g41_joint_quotient_search.rs`, and `g41_quotient_filter_proof.rs`. The
+narrative record is `notes/2026-08-30-c1016-ergodis-hadamard-quotient-synthesis.md` and the
+committed evidence is `ergodis-private/evidence/c1016-hadamard-quotient-pilot.json`.
+
+**A compilation is a staged reduction with a root count at every stage, and that is a DAG.** The
+g41 case is the clearest instance. A six-digit bounded compiler takes 262,144 modulo-two roots down
+to 9,216 roots at q0 and then to 4,608 exact roots at q1. Exact per-shift filters retain 1,536,
+2,304, 2,304, and 4,608 roots at q2, q3, q6, and q9 respectively, and the canonical intersection of
+their necessary sets contains 768 roots — a 341.3-fold reduction from the modulo-two shell. Each
+stage also carries its own domain sizes: 234,033 row-and-q0 configurations, 66,233 energy-and-q1
+profiles, and per-shift domains of 93,303, 157,699, 107,715, and 146,739. Independent flat oracles
+enumerate all 207,360,000 raw assignments and reproduce every one of those counts.
+
+That structure is exactly a directed acyclic graph whose nodes are compilation stages, whose node
+weight is a surviving root count, whose edges are reductions, and whose fan-in at the intersection
+node is the meet of several exact per-shift filters. It is the single most explanatory picture
+available of what Ergodis does, and it is far more legible than the candidate lineage graph, because
+each node has a number a person can hold onto.
+
+Two things must be drawn carefully or the picture will mislead:
+
+- **The counts span too many orders of magnitude for a linear axis.** The g53 joint reduction goes
+  from roughly 5.7 × 10^44 baseline assignments to 4.9 × 10^41 joint assignments; the evidence file
+  records these as base-two logarithms, 148.68 and 138.48, precisely because the raw integers are
+  unreadable. Any reduction display has to be logarithmic and should label the ratio, which is the
+  quantity a person actually reasons about — 1,179-fold there, 341-fold for g41.
+- **Reduction authority is not uniform across the graph.** Some stages are exact filters; the 768
+  roots are only necessary-filter survivors, and the sealed proof over them is marked
+  `exact-computational` rather than `proved-structural`, authorizing exclusions outside the set but
+  granting no witness authority inside it. A view that draws every edge the same way erases the
+  distinction between a proved reduction and a computed one, which is the distinction the whole
+  research programme is organized around. **Edge style must encode reduction authority.**
+
+## Performance counters do exist, in the evidence files
+
+This corrects the earlier reading that no machine-level data is available. There is no *live* perf
+stream, and the ledger still has no timestamps, but completed C1016 compilations have real counters
+recorded under a stated protocol
+(`perf stat -x, -r 7 -e instructions,cycles ... --repeat 100`), including instructions and cycles for
+a profiles-only run against a profiles-and-multiplier-strata run, and, elsewhere in the same record,
+peak resident set, branches and branch misses, and cache references and cache misses.
+
+Concrete figures from the g41 work: the composed filter uses 386,487,762,653 instructions,
+137,615,669,947 cycles, and 138 MiB peak resident set; generation together with verification uses
+978,896,150,468 instructions, 323,268,152,250 cycles, and 139 MiB; the grouped meet-in-the-middle
+common-witness search uses 611,840,641,105 instructions, 183,853,612,811 cycles, and 145 MiB, and it
+examines 1,493,362,944 left candidates against only 2,980,608 right candidates. On the retained
+exact-q2 workload, separately enabled counter groups record 3,482,296,382 branches against 7,590,908
+misses and 236,243,728 cache references against 17,975,996 misses. A fixed-workspace q2 compiler is
+recorded as improving on a sort-all-products control from 36.37 billion instructions and 9.65
+billion cycles to 26.14 billion and 7.46 billion.
+
+So the replay-and-performance view the user asked for — the csysdig or sysdig-explorer treatment,
+where a recorded trace is scrubbed and the system's own events are read against machine behaviour —
+has a real substrate for *completed* work: stage-by-stage cost in instructions, cycles, and resident
+set, set beside the reduction each stage bought. The natural display is cost per root eliminated,
+which makes an expensive stage that removes little immediately visible, and it can be built today
+from committed evidence. What is missing for a *live* scrub is only the time axis.
+
+## The C1016 evolution run, as a second worked example
+
+The C1016 record also contains a complete `ergodisctl evolve` result worth reusing as a teaching
+case, because it is a negative control rather than a success. Against 315 canonical g=91 order-29
+energy quartets containing two positives, the evolution tested 2,368 scoped plans, found 84
+observational classes, and produced 17 plans that classify the corpus perfectly. Its best plan was
+`constant_sum == 2092 && radical_abs <= 2`, which is observationally equivalent on that corpus but
+strictly weaker than the theorem's exact `radical_sum == 0`.
+
+That is the sharpest available illustration of why the behaviour archive must be presented as
+behaviour on the available evidence and never as truth: seventeen plans were perfect on the corpus
+and none of them earned pruning authority. A console that showed "17 perfect classifiers" without
+showing the corpus size and the gap to the exact theorem would actively mislead an operator. The
+fix is a display rule — **a perfect-classifier count is never shown without the size of the evidence
+it is perfect on** — and it should be treated as a requirement, not a nicety.
+
 ## Constraint that bounds every design
 
 The control plane is feature-gated behind `control-plane` in `ergodis/Cargo.toml` and is documented

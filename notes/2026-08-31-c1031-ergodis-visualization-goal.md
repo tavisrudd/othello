@@ -78,10 +78,23 @@ Concrete substrate already present in the tree. Confirmed by inspection on 2026-
 The four object families the dashboard must cover, in the user's words: **results, certificates,
 traces, and live solves or evolve campaigns.**
 
-Added by the user on 2026-08-31 as an explicit further requirement: the dashboard must also show
-**the search state spaces and how they are reduced** — by theorems that were provided and by
-theorems the system learned — together with **root counts**, the reductions themselves, and
-**estimates of completion time**. These are first-class deliverables, not extras.
+Added by the user on 2026-08-31 as explicit further requirements, all first-class deliverables
+rather than extras:
+
+- **The search state spaces and how they are reduced**, by theorems that were provided and by
+  theorems the system learned, together with **root counts**, the reductions themselves, and
+  **estimates of completion time**.
+- **A replay and performance view**, in the manner of the csysdig and sysdig explorer views over a
+  recorded trace: Ergodis's own events scrubbed against machine performance data — counters, CPU,
+  resident set — wherever that data is available.
+- **The C1016 evolution feature graph and its progress display**, as a source of ideas.
+- **The compilation itself**, visualized as its own object.
+- **The quotient DAG and tablebase.**
+
+The last three turn out to be one shape of object — a staged reduction cascade with a surviving root
+count at every node — and the C1016 record already holds the numbers, including real `perf stat`
+instruction, cycle, and resident-set counters for completed compilations. The companion note works
+this through.
 
 The companion note `notes/2026-08-31-c1031-ergodis-visualization-data-model.md` records what the
 system actually emits, established by reading the control plane and by running a real campaign end
