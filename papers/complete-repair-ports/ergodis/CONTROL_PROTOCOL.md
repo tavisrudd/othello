@@ -231,9 +231,21 @@ contribute reachability. For each node, the daemon sums the direct
 with diminishing quota when assigning surplus expansion slots. Every parent
 still receives its exploration slot first, and candidate correctness,
 perfection, replay, and proof authority are unchanged. The canonical profile
-hash is bound in the evidence header; the summary reports its node/edge counts
-and profiled surplus slots. Thus measured profiles can guide discovery but can
-never suppress a semantic counterexample or authorize pruning.
+and its independently checked hash are bound in the evidence header; the
+summary reports its node/edge counts and profiled surplus slots. Thus measured
+profiles can guide discovery but can never suppress a semantic counterexample
+or authorize pruning.
+
+The watcher may assemble the same profile incrementally without a temporary
+file. `target-profile-reset --field NAME ...` creates campaign-local storage;
+`target-profile-observe --value N ... --mass M --unit-cost C` sets one absolute
+observation; `target-profile-edge --from A,... --to B,... --kind KIND` adds one
+edge; and `target-profile-status` reports the bounded occupancy. Repeating an
+identical observation or edge is idempotent. Nodes and edges canonicalize by
+their exact tuples, so message order does not change the snapshot bytes or
+hash. `evolve-start --target-profile-current` takes an owned snapshot before
+starting the worker. Campaigns on different socket/run paths share no profile
+state, and later watcher updates cannot mutate an evolution already in flight.
 Every evidence record carries its niche and the summary counts niche and global
 elite positions.  A selected elite with an unconsumed deterministic mutation
 suffix carries a bounded ordinal cursor into the next generation.  Resumption

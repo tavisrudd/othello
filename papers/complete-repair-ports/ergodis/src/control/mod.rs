@@ -26,7 +26,7 @@ mod vm;
 pub use client::PlanArena;
 use evolution::{
     load_evolution_archive, run_evolution, EvolutionBounds, EvolutionIdentity, EvolutionProgress,
-    EvolutionSeed, EvolutionTargetProfile, MAX_EVOLUTION_TARGET_FIELDS,
+    EvolutionSeed, EvolutionTargetAccumulator, EvolutionTargetProfile, MAX_EVOLUTION_TARGET_FIELDS,
 };
 use synthesis::learn_decision_tree;
 pub use text::{
@@ -162,6 +162,19 @@ struct EvolutionJob {
     handle: JoinHandle<Result<Value, ControlError>>,
 }
 
+fn request_i64_array(value: Option<&Value>, label: &'static str) -> Result<Vec<i64>, ControlError> {
+    value
+        .and_then(Value::as_array)
+        .ok_or_else(|| ControlError::Invalid(format!("{label} must be an array")))?
+        .iter()
+        .map(|value| {
+            value
+                .as_i64()
+                .ok_or_else(|| ControlError::Invalid(format!("{label} must contain integers")))
+        })
+        .collect()
+}
+
 pub struct Campaign {
     manifest: Manifest,
     batch: Arc<FeatureBatch>,
@@ -178,6 +191,7 @@ pub struct Campaign {
     trace_limit: u64,
     evolution: Option<EvolutionJob>,
     last_evolution: Option<Value>,
+    target_profile: Option<EvolutionTargetAccumulator>,
 }
 
 impl Campaign {
@@ -243,6 +257,7 @@ impl Campaign {
             trace_limit,
             evolution: None,
             last_evolution: None,
+            target_profile: None,
         })
     }
 
@@ -320,6 +335,10 @@ impl Campaign {
             "synthesize-tree" => self.synthesize_tree(&request.args),
             "candidate-try" => self.candidate_try(&request.args, false),
             "candidate-batch" => self.candidate_batch(&request.args),
+            "target-profile-reset" => self.target_profile_reset(&request.args),
+            "target-profile-observe" => self.target_profile_observe(&request.args),
+            "target-profile-edge" => self.target_profile_edge(&request.args),
+            "target-profile-status" => self.target_profile_status(),
             "evolve-start" => self.evolution_start(&request.args),
             "evolve-status" => self.evolution_status(),
             "evolve-cancel" => self.evolution_cancel(),
@@ -363,6 +382,8 @@ impl Campaign {
                 "group-compile",
                 "candidate-try", "candidate-apply", "candidate-deactivate",
                 "candidate-batch",
+                "target-profile-reset", "target-profile-observe",
+                "target-profile-edge", "target-profile-status",
                 "evolve-start", "evolve-status", "evolve-cancel",
                 "obstruction-first", "exceptional", "trace", "note", "noop",
                 "shutdown"
@@ -386,6 +407,11 @@ impl Campaign {
             "health": "ready",
             "solver": self.solver_status,
             "watchers": self.watchers.len(),
+            "target_profile": self.target_profile.as_ref().map(|profile| json!({
+                "fields": profile.fields(),
+                "nodes": profile.nodes(),
+                "edges": profile.edges(),
+            })),
             "evolution": self.evolution.as_ref().map(|job| json!({
                 "id": job.id,
                 "path": job.relative_path,
@@ -1071,6 +1097,94 @@ impl Campaign {
         Ok(())
     }
 
+    fn target_profile_reset(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let fields = args
+            .get("fields")
+            .and_then(Value::as_array)
+            .ok_or_else(|| {
+                ControlError::Invalid("target-profile-reset fields must be an array".into())
+            })?
+            .iter()
+            .map(|value| {
+                value.as_str().map(str::to_owned).ok_or_else(|| {
+                    ControlError::Invalid("target-profile-reset fields must contain strings".into())
+                })
+            })
+            .collect::<Result<Box<[_]>, _>>()?;
+        if fields
+            .iter()
+            .any(|field| !self.batch.fields.iter().any(|candidate| candidate == field))
+        {
+            return Err(ControlError::Invalid(
+                "target-profile-reset names an unknown field".into(),
+            ));
+        }
+        self.target_profile = Some(EvolutionTargetAccumulator::new(fields)?);
+        self.record(
+            "target-profile-reset",
+            "operational target profile reset",
+            None,
+        )?;
+        self.target_profile_status()
+    }
+
+    fn target_profile_observe(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let values = request_i64_array(args.get("values"), "target-profile-observe values")?;
+        let mass = args
+            .get("mass")
+            .and_then(Value::as_u64)
+            .ok_or_else(|| ControlError::Invalid("target-profile-observe requires mass".into()))?;
+        let unit_cost = args
+            .get("unit_cost")
+            .and_then(Value::as_u64)
+            .ok_or_else(|| {
+                ControlError::Invalid("target-profile-observe requires unit_cost".into())
+            })?;
+        let profile = self
+            .target_profile
+            .as_mut()
+            .ok_or_else(|| ControlError::Invalid("target profile has not been reset".into()))?;
+        let changed = profile.observe(&values, mass, unit_cost)?;
+        Ok(json!({
+            "changed": changed,
+            "nodes": profile.nodes(),
+            "edges": profile.edges(),
+        }))
+    }
+
+    fn target_profile_edge(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let from = request_i64_array(args.get("from"), "target-profile-edge from")?;
+        let to = request_i64_array(args.get("to"), "target-profile-edge to")?;
+        let kind = args
+            .get("kind")
+            .and_then(Value::as_str)
+            .ok_or_else(|| ControlError::Invalid("target-profile-edge requires kind".into()))?;
+        let profile = self
+            .target_profile
+            .as_mut()
+            .ok_or_else(|| ControlError::Invalid("target profile has not been reset".into()))?;
+        let changed = profile.connect(&from, &to, kind)?;
+        Ok(json!({
+            "changed": changed,
+            "nodes": profile.nodes(),
+            "edges": profile.edges(),
+        }))
+    }
+
+    fn target_profile_status(&self) -> Result<Value, ControlError> {
+        Ok(self.target_profile.as_ref().map_or_else(
+            || json!({"configured": false}),
+            |profile| {
+                json!({
+                    "configured": true,
+                    "fields": profile.fields(),
+                    "nodes": profile.nodes(),
+                    "edges": profile.edges(),
+                })
+            },
+        ))
+    }
+
     fn evolution_start(&mut self, args: &Value) -> Result<Value, ControlError> {
         self.reap_evolution()?;
         if self.evolution.is_some() {
@@ -1175,6 +1289,22 @@ impl Campaign {
             (target_field_names.len() == 1).then(|| target_field_names[0].clone());
         let target_profile = match args.get("target_profile") {
             None | Some(Value::Null) => None,
+            Some(Value::String(mode)) if mode == "current" => {
+                let profile = self.target_profile.as_ref().ok_or_else(|| {
+                    ControlError::Invalid("target profile has not been reset".into())
+                })?;
+                if profile.fields() != target_field_names {
+                    return Err(ControlError::Invalid(
+                        "current target profile fields do not match target_fields".into(),
+                    ));
+                }
+                Some(profile.snapshot()?)
+            }
+            Some(Value::String(_)) => {
+                return Err(ControlError::Invalid(
+                    "evolve-start target_profile string must be \"current\"".into(),
+                ));
+            }
             Some(value) => Some(
                 serde_json::from_value::<EvolutionTargetProfile>(value.clone()).map_err(
                     |error| {
@@ -2439,6 +2569,50 @@ mod tests {
             .unwrap_err()
             .to_string()
             .contains("target_profile is invalid"));
+        let isolated = Campaign::create(
+            &data,
+            &temporary.path().join("isolated-run"),
+            Some(temporary.path().join("isolated.sock")),
+            16_384,
+            8_192,
+            16_384,
+        )
+        .unwrap();
+        assert_eq!(
+            isolated.target_profile_status().unwrap()["configured"],
+            false
+        );
+        assert_eq!(
+            campaign
+                .target_profile_reset(&json!({"fields": ["x", "root"]}))
+                .unwrap()["nodes"],
+            0
+        );
+        assert!(campaign
+            .target_profile_observe(&json!({
+                "values": [99, 1], "mass": 1, "unit_cost": 4
+            }))
+            .unwrap()["changed"]
+            .as_bool()
+            .unwrap());
+        assert!(!campaign
+            .target_profile_observe(&json!({
+                "values": [99, 1], "mass": 1, "unit_cost": 4
+            }))
+            .unwrap()["changed"]
+            .as_bool()
+            .unwrap());
+        campaign
+            .target_profile_observe(&json!({
+                "values": [0, 1], "mass": 10, "unit_cost": 2
+            }))
+            .unwrap();
+        campaign
+            .target_profile_edge(&json!({
+                "from": [99, 1], "to": [0, 1], "kind": "continuation"
+            }))
+            .unwrap();
+        assert_eq!(campaign.target_profile_status().unwrap()["edges"], 1);
         let seed = json!({
             "schema": PLAN_SCHEMA,
             "name": "threshold",
@@ -2469,17 +2643,7 @@ mod tests {
                 "beam": 2,
                 "max_candidates": 4,
                 "target_fields": ["x", "root"],
-                "target_profile": {
-                    "schema": "ergodis-evolution-target-profile-v0",
-                    "fields": ["x", "root"],
-                    "nodes": [
-                        {"values": [99, 1], "mass": 1, "unit_cost": 4},
-                        {"values": [0, 1], "mass": 10, "unit_cost": 2}
-                    ],
-                    "edges": [
-                        {"from": 0, "to": 1, "kind": "continuation"}
-                    ]
-                },
+                "target_profile": "current",
             }))
             .unwrap();
         assert_eq!(started["state"], "running");
@@ -2578,6 +2742,13 @@ mod tests {
         assert_eq!(
             records[0]["target_profile_hash"],
             completed["summary"]["target_profile"]["hash"]
+        );
+        assert_eq!(
+            records[0]["target_profile"]["nodes"]
+                .as_array()
+                .unwrap()
+                .len(),
+            2
         );
         assert_eq!(records[1]["target_values"], json!([99, 1]));
         assert!(records[1]["parent_hash"].is_null());

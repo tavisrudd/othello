@@ -53,6 +53,8 @@ struct EvolutionEvidenceHeader {
     target_fields: Box<[String]>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     target_profile_hash: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    target_profile: Option<EvolutionTargetProfile>,
 }
 
 fn target_fields_empty(fields: &[String]) -> bool {
@@ -71,6 +73,7 @@ impl From<&EvolutionIdentity> for EvolutionEvidenceHeader {
             generator: identity.generator.clone(),
             target_fields: Box::new([]),
             target_profile_hash: None,
+            target_profile: None,
         }
     }
 }
@@ -192,6 +195,11 @@ struct CompiledTargetProfile {
     class_priorities: Box<[u64]>,
     nodes: usize,
     edges: usize,
+}
+
+fn target_profile_hash(profile: &EvolutionTargetProfile) -> Result<String, ControlError> {
+    let encoded = serde_json::to_vec(profile)?;
+    Ok(blake3::hash(&encoded).to_hex().to_string())
 }
 
 #[repr(C)]
@@ -382,13 +390,153 @@ impl TargetClasses {
             }
             class_priorities[class] = priority;
         }
-        let encoded = serde_json::to_vec(profile)?;
         Ok(CompiledTargetProfile {
-            hash: blake3::hash(&encoded).to_hex().to_string(),
+            hash: target_profile_hash(profile)?,
             class_priorities: class_priorities.into_boxed_slice(),
             nodes: profile.nodes.len(),
             edges: profile.edges.len(),
         })
+    }
+}
+
+pub(super) struct EvolutionTargetAccumulator {
+    fields: Box<[String]>,
+    nodes: BTreeMap<TargetKey, (u64, u64)>,
+    edges: BTreeSet<(TargetKey, TargetKey, EvolutionTargetEdgeKind)>,
+}
+
+impl EvolutionTargetAccumulator {
+    pub(super) fn new(fields: Box<[String]>) -> Result<Self, ControlError> {
+        if fields.is_empty()
+            || fields.len() > MAX_EVOLUTION_TARGET_FIELDS
+            || fields.iter().collect::<BTreeSet<_>>().len() != fields.len()
+        {
+            return Err(ControlError::Invalid(
+                "target profile fields must be distinct and bounded".into(),
+            ));
+        }
+        Ok(Self {
+            fields,
+            nodes: BTreeMap::new(),
+            edges: BTreeSet::new(),
+        })
+    }
+
+    pub(super) fn observe(
+        &mut self,
+        values: &[i64],
+        mass: u64,
+        unit_cost: u64,
+    ) -> Result<bool, ControlError> {
+        let key = TargetKey::from_values(values, self.fields.len())?;
+        if mass == 0 || unit_cost == 0 || mass.checked_mul(unit_cost).is_none() {
+            return Err(ControlError::Invalid(
+                "target observation work must be positive and fit u64".into(),
+            ));
+        }
+        if !self.nodes.contains_key(&key) && self.nodes.len() == MAX_EVOLUTION_TARGET_NODES {
+            return Err(ControlError::Invalid(
+                "target profile node arena is full".into(),
+            ));
+        }
+        Ok(self.nodes.insert(key, (mass, unit_cost)) != Some((mass, unit_cost)))
+    }
+
+    pub(super) fn connect(
+        &mut self,
+        from: &[i64],
+        to: &[i64],
+        kind: &str,
+    ) -> Result<bool, ControlError> {
+        let from = TargetKey::from_values(from, self.fields.len())?;
+        let to = TargetKey::from_values(to, self.fields.len())?;
+        let kind = match kind {
+            "dependency" => EvolutionTargetEdgeKind::Dependency,
+            "continuation" => EvolutionTargetEdgeKind::Continuation,
+            _ => {
+                return Err(ControlError::Invalid(
+                    "target profile edge kind must be dependency or continuation".into(),
+                ));
+            }
+        };
+        if from == to || !self.nodes.contains_key(&from) || !self.nodes.contains_key(&to) {
+            return Err(ControlError::Invalid(
+                "target profile edges require distinct existing nodes".into(),
+            ));
+        }
+        if let Some((_, _, existing_kind)) = self
+            .edges
+            .iter()
+            .find(|(existing_from, existing_to, _)| *existing_from == from && *existing_to == to)
+        {
+            if *existing_kind == kind {
+                return Ok(false);
+            }
+            return Err(ControlError::Invalid(
+                "target profile edge endpoints already have a different kind".into(),
+            ));
+        }
+        let edge = (from, to, kind);
+        if self.edges.len() == MAX_EVOLUTION_TARGET_EDGES {
+            return Err(ControlError::Invalid(
+                "target profile edge arena is full".into(),
+            ));
+        }
+        self.edges.insert(edge);
+        Ok(true)
+    }
+
+    pub(super) fn snapshot(&self) -> Result<EvolutionTargetProfile, ControlError> {
+        if self.nodes.is_empty() {
+            return Err(ControlError::Invalid(
+                "target profile has no observations".into(),
+            ));
+        }
+        let mut index = BTreeMap::<TargetKey, u16>::new();
+        let mut nodes = Vec::with_capacity(self.nodes.len());
+        for (key, &(mass, unit_cost)) in &self.nodes {
+            let node = u16::try_from(nodes.len())
+                .map_err(|_| ControlError::Invalid("target node index overflow".into()))?;
+            index.insert(*key, node);
+            nodes.push(EvolutionTargetNode {
+                values: key.values().to_vec().into_boxed_slice(),
+                mass,
+                unit_cost,
+            });
+        }
+        let edges = self
+            .edges
+            .iter()
+            .map(|&(from, to, kind)| {
+                Ok(EvolutionTargetEdge {
+                    from: *index.get(&from).ok_or_else(|| {
+                        ControlError::Invalid("target edge lost its source node".into())
+                    })?,
+                    to: *index.get(&to).ok_or_else(|| {
+                        ControlError::Invalid("target edge lost its destination node".into())
+                    })?,
+                    kind,
+                })
+            })
+            .collect::<Result<Vec<_>, ControlError>>()?;
+        Ok(EvolutionTargetProfile {
+            schema: EVOLUTION_TARGET_PROFILE_SCHEMA.into(),
+            fields: self.fields.clone(),
+            nodes: nodes.into_boxed_slice(),
+            edges: edges.into_boxed_slice(),
+        })
+    }
+
+    pub(super) fn fields(&self) -> &[String] {
+        &self.fields
+    }
+
+    pub(super) fn nodes(&self) -> usize {
+        self.nodes.len()
+    }
+
+    pub(super) fn edges(&self) -> usize {
+        self.edges.len()
     }
 }
 
@@ -1521,6 +1669,13 @@ pub(super) fn load_evolution_archive(
         ));
     }
     let header: EvolutionEvidenceHeader = serde_json::from_str(&header_line)?;
+    let target_profile_valid = match (&header.target_profile_hash, &header.target_profile) {
+        (None, None) | (Some(_), None) => true,
+        (Some(expected_hash), Some(profile)) => {
+            target_profile_hash(profile).is_ok_and(|hash| hash == *expected_hash)
+        }
+        (None, Some(_)) => false,
+    };
     if header.schema != EVOLUTION_EVIDENCE_SCHEMA
         || header.presentation_hash.len() != 64
         || !header
@@ -1531,6 +1686,7 @@ pub(super) fn load_evolution_archive(
         || header.fields != expected.fields
         || header.generator != expected.generator
         || (header.generator.is_none() && header.presentation_hash != expected.presentation_hash)
+        || !target_profile_valid
     {
         return Err(ControlError::Invalid(
             "evolution evidence is incompatible with this feature batch".into(),
@@ -1740,6 +1896,7 @@ pub(super) fn run_evolution(
         .collect();
     evidence_header.target_profile_hash =
         target_profile.as_ref().map(|profile| profile.hash.clone());
+    evidence_header.target_profile = bounds.target_profile.clone();
     let mut header = serde_json::to_vec(&evidence_header)?;
     header.push(b'\n');
     if header.len() as u64 > bounds.byte_limit {
@@ -3162,6 +3319,53 @@ mod tests {
         profile.edges = Box::new([]);
         profile.schema = "wrong-schema".into();
         assert!(classes.compile_profile(&profile, &["root"]).is_err());
+    }
+
+    #[test]
+    fn target_accumulator_is_idempotent_and_order_canonical() {
+        let fields = vec!["root".into(), "debt".into()].into_boxed_slice();
+        let mut left = EvolutionTargetAccumulator::new(fields.clone()).unwrap();
+        assert!(left.observe(&[2, 3], 7, 11).unwrap());
+        assert!(!left.observe(&[2, 3], 7, 11).unwrap());
+        assert!(left.observe(&[1, 4], 5, 13).unwrap());
+        assert!(left.connect(&[1, 4], &[2, 3], "dependency").unwrap());
+        assert!(!left.connect(&[1, 4], &[2, 3], "dependency").unwrap());
+        assert!(left.connect(&[1, 4], &[2, 3], "continuation").is_err());
+
+        let mut right = EvolutionTargetAccumulator::new(fields).unwrap();
+        right.observe(&[1, 4], 5, 13).unwrap();
+        right.observe(&[2, 3], 7, 11).unwrap();
+        right.connect(&[1, 4], &[2, 3], "dependency").unwrap();
+        let left = left.snapshot().unwrap();
+        let right = right.snapshot().unwrap();
+        assert_eq!(
+            serde_json::to_vec(&left).unwrap(),
+            serde_json::to_vec(&right).unwrap()
+        );
+        assert_eq!(
+            target_profile_hash(&left).unwrap(),
+            target_profile_hash(&right).unwrap()
+        );
+
+        let identity = EvolutionIdentity {
+            code_commit: "profile-test".into(),
+            presentation_hash: "1".repeat(64),
+            presentation: "profile".into(),
+            problem: "profile".into(),
+            fields: vec!["root".into(), "debt".into()].into_boxed_slice(),
+            generator: None,
+        };
+        let mut header = EvolutionEvidenceHeader::from(&identity);
+        header.target_profile = Some(left);
+        header.target_profile_hash = Some("0".repeat(64));
+        let temporary = tempfile::tempdir().unwrap();
+        let path = temporary.path().join("corrupt-profile.jsonl");
+        std::fs::write(
+            &path,
+            format!("{}\n", serde_json::to_string(&header).unwrap()),
+        )
+        .unwrap();
+        assert!(load_evolution_archive(&path, &identity, 1, 1).is_err());
     }
 
     #[test]

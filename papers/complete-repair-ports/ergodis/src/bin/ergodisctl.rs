@@ -151,9 +151,37 @@ enum Command {
         /// Bounded operational target graph used only for expansion priority.
         #[arg(long)]
         target_profile: Option<PathBuf>,
+        /// Snapshot the campaign-local watcher profile instead of reading a file.
+        #[arg(long, conflicts_with = "target_profile")]
+        target_profile_current: bool,
         #[arg(long)]
         max_evidence_bytes: Option<u64>,
     },
+    /// Reset the campaign-local operational target profile.
+    TargetProfileReset {
+        #[arg(long = "field", required = true)]
+        fields: Vec<String>,
+    },
+    /// Set one absolute mass/cost observation in the current target profile.
+    TargetProfileObserve {
+        #[arg(long = "value", required = true, allow_hyphen_values = true)]
+        values: Vec<i64>,
+        #[arg(long)]
+        mass: u64,
+        #[arg(long)]
+        unit_cost: u64,
+    },
+    /// Add one dependency or continuation edge between existing target tuples.
+    TargetProfileEdge {
+        #[arg(long, value_delimiter = ',', allow_hyphen_values = true)]
+        from: Vec<i64>,
+        #[arg(long, value_delimiter = ',', allow_hyphen_values = true)]
+        to: Vec<i64>,
+        #[arg(long)]
+        kind: String,
+    },
+    /// Inspect the campaign-local operational target profile.
+    TargetProfileStatus,
     /// Query the active or most recently completed daemon evolution job.
     EvolveStatus,
     /// Request cancellation of the active daemon evolution job.
@@ -268,6 +296,7 @@ fn main() -> Result<()> {
         max_candidates,
         target_fields,
         target_profile,
+        target_profile_current,
         max_evidence_bytes,
     } = &cli.command
     {
@@ -276,7 +305,11 @@ fn main() -> Result<()> {
             .map(|path| read_plan_jsonl(path, 32))
             .transpose()?
             .unwrap_or_default();
-        let target_profile = target_profile.as_ref().map(read_json_value).transpose()?;
+        let target_profile = if *target_profile_current {
+            Some(Value::String("current".into()))
+        } else {
+            target_profile.as_ref().map(read_json_value).transpose()?
+        };
         let response = send_request(
             &manifest,
             "evolve-start",
@@ -384,6 +417,22 @@ fn main() -> Result<()> {
         Command::Batch { .. } => unreachable!(),
         Command::Evolve { .. } => unreachable!(),
         Command::EvolveStart { .. } => unreachable!(),
+        Command::TargetProfileReset { fields } => {
+            ("target-profile-reset", json!({"fields": fields}))
+        }
+        Command::TargetProfileObserve {
+            values,
+            mass,
+            unit_cost,
+        } => (
+            "target-profile-observe",
+            json!({"values": values, "mass": mass, "unit_cost": unit_cost}),
+        ),
+        Command::TargetProfileEdge { from, to, kind } => (
+            "target-profile-edge",
+            json!({"from": from, "to": to, "kind": kind}),
+        ),
+        Command::TargetProfileStatus => ("target-profile-status", json!({})),
         Command::EvolveStatus => ("evolve-status", json!({})),
         Command::EvolveCancel => ("evolve-cancel", json!({})),
         Command::Apply { plan, expect_epoch } => (
@@ -1148,7 +1197,13 @@ fn render_compact(op: &str, result: &Value, epoch: u64) -> Result<()> {
             number(result, "records")
         ),
         "note" => println!("epoch={epoch} event={}", number(result, "event")),
-        "evolve-start" | "evolve-status" | "evolve-cancel" => println!(
+        "evolve-start"
+        | "evolve-status"
+        | "evolve-cancel"
+        | "target-profile-reset"
+        | "target-profile-observe"
+        | "target-profile-edge"
+        | "target-profile-status" => println!(
             "epoch={epoch} evolution={} state={} tested={} perfect={} path={}",
             text(result, "id"),
             text(result, "state"),
