@@ -819,14 +819,24 @@ files are disposable and may be deleted at any time.
    control preserves a weaker second niche over a stronger duplicate niche and
    separately verifies global fill when only one niche exists.  Niche identity
    is durable in every evidence record and footer counters distinguish niche
-   from global elite slots.  The implementation deliberately does not
-   re-expand old elites: deterministic mutation would regenerate the same
-   prefix and recreate the repeat-work pathology.  Cross-generation elite
-   expansion therefore remains gated on a resumable mutation cursor, while
-   archive replay can consume the durable records without live duplication.
-   Strict all-target/all-feature clippy and the complete suite pass.  Do not
-   import a learned proposer before resumable niche replay or the bounded exact
-   hindsight/theorem-accumulation layer has an exact control.
+   from global elite slots.
+
+   Commit `33a077b7c` closes the repeat-work gate with a resumable ordinal
+   mutation cursor.  Every selected parent retains its next unconsumed position
+   in the finite deterministic mutation stream; later generations scan past
+   the consumed prefix without constructing plans, emit only the suffix, and
+   drop the parent at exact exhaustion.  The six-child control consumed in
+   three two-child batches is byte-identical to one full enumeration, produces
+   no duplicate offspring, and recognizes exhaustion on the final batch.
+   Retained cursors preserve their ordinal through niche selection, but fresh
+   candidates sort first: even an artificially stronger retained parent cannot
+   displace a newly reached stepping stone in the same niche.  Retention
+   therefore uses diverse or otherwise unused beam capacity rather than
+   recreating the earlier deterministic-prefix pathology.  Footer/status
+   counters expose retained elite slots; strict all-target/all-feature clippy
+   and the complete suite pass.  Archive replay can consume the durable niche
+   records without live duplication.  Do not import a learned proposer before
+   the bounded exact hindsight/theorem-accumulation layer has an exact control.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
