@@ -1,8 +1,8 @@
 //! Zero-materialization execution schedule for prepared semantic runtimes.
 //!
 //! Dispatch occurs once per compiled stage. A `match` stream is never exposed
-//! as an artifact: it must be immediately fused with its sole reducer, whose
-//! implementation owns the allocation-free per-record loop.
+//! as an artifact: it must be immediately fused with its bounded reducer bank,
+//! whose implementation owns the allocation-free per-record loop.
 
 use super::dataflow::{CompiledRecipe, CompiledRecipeOp};
 use super::OpKind;
@@ -18,16 +18,52 @@ pub enum ExecutionStageKind {
 
 #[repr(C)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct ReducerLane {
+    retention: u64,
+    memory_bytes: u64,
+    signature: u16,
+    output_slot: u16,
+    _pad: [u8; 4],
+}
+
+impl ReducerLane {
+    #[must_use]
+    pub const fn retention(self) -> u64 {
+        self.retention
+    }
+
+    #[must_use]
+    pub const fn memory_bytes(self) -> u64 {
+        self.memory_bytes
+    }
+
+    #[must_use]
+    pub const fn signature(self) -> u16 {
+        self.signature
+    }
+
+    #[must_use]
+    pub const fn output_slot(self) -> u16 {
+        self.output_slot
+    }
+}
+
+const _: () = assert!(std::mem::size_of::<ReducerLane>() == 24);
+const _: () = assert!(std::mem::align_of::<ReducerLane>() == 8);
+
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct ExecutionStage {
     retention: u64,
     memory_bytes: u64,
     primary_signature: u16,
-    secondary_signature: u16,
     input_slot: u16,
     output_slot: u16,
+    lane_start: u16,
+    lane_count: u16,
     kind: ExecutionStageKind,
     flags: u8,
-    _pad: [u8; 6],
+    _pad: [u8; 4],
 }
 
 impl ExecutionStage {
@@ -47,15 +83,6 @@ impl ExecutionStage {
     }
 
     #[must_use]
-    pub const fn secondary_signature(self) -> Option<u16> {
-        if self.secondary_signature == u16::MAX {
-            None
-        } else {
-            Some(self.secondary_signature)
-        }
-    }
-
-    #[must_use]
     pub const fn input_slot(self) -> u16 {
         self.input_slot
     }
@@ -68,6 +95,11 @@ impl ExecutionStage {
     #[must_use]
     pub const fn kind(self) -> ExecutionStageKind {
         self.kind
+    }
+
+    #[must_use]
+    pub const fn reducer_lane_count(self) -> u16 {
+        self.lane_count
     }
 
     #[must_use]
@@ -84,7 +116,9 @@ pub struct ExecutionPlan {
     source_signature: u16,
     slots: u16,
     output_slot: u16,
+    sink_slots: Box<[u16]>,
     stages: Box<[ExecutionStage]>,
+    reducer_lanes: Box<[ReducerLane]>,
 }
 
 impl ExecutionPlan {
@@ -104,8 +138,23 @@ impl ExecutionPlan {
     }
 
     #[must_use]
+    pub fn sink_slots(&self) -> &[u16] {
+        &self.sink_slots
+    }
+
+    #[must_use]
     pub fn stages(&self) -> &[ExecutionStage] {
         &self.stages
+    }
+
+    #[must_use]
+    pub fn reducer_lanes(&self) -> &[ReducerLane] {
+        &self.reducer_lanes
+    }
+
+    fn stage_reducer_lanes(&self, stage: ExecutionStage) -> &[ReducerLane] {
+        let start = stage.lane_start as usize;
+        &self.reducer_lanes[start..start + stage.lane_count as usize]
     }
 }
 
@@ -121,45 +170,83 @@ pub fn compile_execution_plan(compiled: &CompiledRecipe) -> Result<ExecutionPlan
     for operation in operations {
         if consumers[operation.output_slot() as usize] == 0
             && operation.output_slot() != compiled.output_slot()
+            && !compiled.sink_slots().contains(&operation.output_slot())
         {
             return invalid("semantic execution plan contains a dead output");
         }
     }
 
     let mut stages = Vec::with_capacity(operations.len());
+    let mut reducer_lanes = Vec::new();
     let mut at = 0;
     while at < operations.len() {
         let operation = operations[at];
         match operation.kind() {
             OpKind::Match => {
-                let reducer = operations.get(at + 1).copied().ok_or_else(|| {
+                let first_reducer = operations.get(at + 1).copied().ok_or_else(|| {
                     ControlError::Invalid("semantic match has no adjacent reducer".into())
                 })?;
-                if consumers[operation.output_slot() as usize] != 1
-                    || reducer.kind() != OpKind::Reduce
-                    || reducer.input_slot() != operation.output_slot()
+                if first_reducer.kind() != OpKind::Reduce
+                    || first_reducer.input_slot() != operation.output_slot()
                 {
                     return invalid(
-                        "semantic match must feed exactly one immediately adjacent reducer",
+                        "semantic match must feed an immediately adjacent reducer bank",
                     );
                 }
-                stages.push(ExecutionStage {
-                    retention: reducer.retention(),
-                    memory_bytes: operation
-                        .memory_bytes()
+                let lane_start = reducer_lanes.len();
+                let mut next = at + 1;
+                let mut retention = 0_u64;
+                let mut memory_bytes = operation.memory_bytes();
+                while let Some(reducer) = operations.get(next).copied() {
+                    if reducer.kind() != OpKind::Reduce
+                        || reducer.input_slot() != operation.output_slot()
+                    {
+                        break;
+                    }
+                    retention = retention.checked_add(reducer.retention()).ok_or_else(|| {
+                        ControlError::Invalid("fused reducer retention overflow".into())
+                    })?;
+                    memory_bytes = memory_bytes
                         .checked_add(reducer.memory_bytes())
                         .ok_or_else(|| {
                             ControlError::Invalid("fused semantic stage memory overflow".into())
-                        })?,
+                        })?;
+                    reducer_lanes.push(ReducerLane {
+                        retention: reducer.retention(),
+                        memory_bytes: reducer.memory_bytes(),
+                        signature: reducer.signature(),
+                        output_slot: reducer.output_slot(),
+                        _pad: [0; 4],
+                    });
+                    next += 1;
+                }
+                let lane_count = reducer_lanes.len() - lane_start;
+                if usize::from(consumers[operation.output_slot() as usize]) != lane_count {
+                    return invalid(
+                        "semantic match consumers must all be adjacent reducers in one bank",
+                    );
+                }
+                stages.push(ExecutionStage {
+                    retention,
+                    memory_bytes,
                     primary_signature: operation.signature(),
-                    secondary_signature: reducer.signature(),
                     input_slot: operation.input_slot(),
-                    output_slot: reducer.output_slot(),
+                    output_slot: if lane_count == 1 {
+                        reducer_lanes[lane_start].output_slot
+                    } else {
+                        u16::MAX
+                    },
+                    lane_start: u16::try_from(lane_start).map_err(|_| {
+                        ControlError::Invalid("too many semantic reducer lanes".into())
+                    })?,
+                    lane_count: u16::try_from(lane_count).map_err(|_| {
+                        ControlError::Invalid("too many semantic reducer lanes".into())
+                    })?,
                     kind: ExecutionStageKind::FusedMatchReduce,
                     flags: 0,
-                    _pad: [0; 6],
+                    _pad: [0; 4],
                 });
-                at += 2;
+                at = next;
             }
             OpKind::Reduce => {
                 stages.push(single_stage(operation, ExecutionStageKind::Reduce));
@@ -175,7 +262,9 @@ pub fn compile_execution_plan(compiled: &CompiledRecipe) -> Result<ExecutionPlan
         source_signature: compiled.source_signature(),
         slots: compiled.slots(),
         output_slot: compiled.output_slot(),
+        sink_slots: compiled.sink_slots().into(),
         stages: stages.into_boxed_slice(),
+        reducer_lanes: reducer_lanes.into_boxed_slice(),
     })
 }
 
@@ -184,16 +273,17 @@ fn single_stage(operation: CompiledRecipeOp, kind: ExecutionStageKind) -> Execut
         retention: operation.retention(),
         memory_bytes: operation.memory_bytes(),
         primary_signature: operation.signature(),
-        secondary_signature: u16::MAX,
         input_slot: operation.input_slot(),
         output_slot: operation.output_slot(),
+        lane_start: 0,
+        lane_count: 0,
         kind,
         flags: if operation.uses_streamed_partition() {
             CompiledRecipeOp::STREAMED_PARTITION
         } else {
             0
         },
-        _pad: [0; 6],
+        _pad: [0; 4],
     }
 }
 
@@ -202,7 +292,11 @@ fn single_stage(operation: CompiledRecipeOp, kind: ExecutionStageKind) -> Execut
 /// dispatch from these methods; the feature/search loop stays inside the
 /// selected fused adapter.
 pub trait PreparedSemanticRuntime {
-    fn run_fused_match_reduce(&mut self, stage: ExecutionStage) -> Result<(), ControlError>;
+    fn run_fused_match_reduce(
+        &mut self,
+        stage: ExecutionStage,
+        reducers: &[ReducerLane],
+    ) -> Result<(), ControlError>;
     fn run_reduce(&mut self, stage: ExecutionStage) -> Result<(), ControlError>;
     fn run_canonicalize(&mut self, stage: ExecutionStage) -> Result<(), ControlError>;
 }
@@ -215,7 +309,9 @@ pub fn execute_prepared(
 ) -> Result<(), ControlError> {
     for &stage in plan.stages() {
         match stage.kind() {
-            ExecutionStageKind::FusedMatchReduce => runtime.run_fused_match_reduce(stage)?,
+            ExecutionStageKind::FusedMatchReduce => {
+                runtime.run_fused_match_reduce(stage, plan.stage_reducer_lanes(stage))?
+            }
             ExecutionStageKind::Reduce => runtime.run_reduce(stage)?,
             ExecutionStageKind::Canonicalize => runtime.run_canonicalize(stage)?,
         }
@@ -249,44 +345,64 @@ recipe affine_caps {
 "#;
 
     fn registry() -> AdapterRegistry {
-        registry_with("retained_set", false)
+        registry_with_options("retained_set", false, false)
     }
 
     fn registry_with(canonical_input_sort: &str, streamed: bool) -> AdapterRegistry {
+        registry_with_options(canonical_input_sort, streamed, false)
+    }
+
+    fn registry_with_options(
+        canonical_input_sort: &str,
+        streamed: bool,
+        fanout: bool,
+    ) -> AdapterRegistry {
+        let mut operations = vec![
+            OperationSignature {
+                name: "affine_subspace".into(),
+                kind: OpKind::Match,
+                input_sort: "nine_set_stream".into(),
+                output_sort: "feature_row".into(),
+                max_retention: 1,
+                max_memory_bytes: 4096,
+                allows_streamed_partition: false,
+            },
+            OperationSignature {
+                name: "overlap_histogram".into(),
+                kind: OpKind::Reduce,
+                input_sort: "feature_row".into(),
+                output_sort: "retained_set".into(),
+                max_retention: 2106,
+                max_memory_bytes: 131072,
+                allows_streamed_partition: false,
+            },
+            OperationSignature {
+                name: "affine_generators".into(),
+                kind: OpKind::Canonicalize,
+                input_sort: canonical_input_sort.into(),
+                output_sort: "orbit_summary".into(),
+                max_retention: 2106,
+                max_memory_bytes: 131072,
+                allows_streamed_partition: streamed,
+            },
+        ];
+        if fanout {
+            operations.push(OperationSignature {
+                name: "parity_histogram".into(),
+                kind: OpKind::Reduce,
+                input_sort: "feature_row".into(),
+                output_sort: "parity_summary".into(),
+                max_retention: 2,
+                max_memory_bytes: 64,
+                allows_streamed_partition: false,
+            });
+        }
         AdapterRegistry::try_new(
             vec![SourceSignature {
                 name: "split_nine_sets".into(),
                 output_sort: "nine_set_stream".into(),
             }],
-            vec![
-                OperationSignature {
-                    name: "affine_subspace".into(),
-                    kind: OpKind::Match,
-                    input_sort: "nine_set_stream".into(),
-                    output_sort: "feature_row".into(),
-                    max_retention: 1,
-                    max_memory_bytes: 4096,
-                    allows_streamed_partition: false,
-                },
-                OperationSignature {
-                    name: "overlap_histogram".into(),
-                    kind: OpKind::Reduce,
-                    input_sort: "feature_row".into(),
-                    output_sort: "retained_set".into(),
-                    max_retention: 2106,
-                    max_memory_bytes: 131072,
-                    allows_streamed_partition: false,
-                },
-                OperationSignature {
-                    name: "affine_generators".into(),
-                    kind: OpKind::Canonicalize,
-                    input_sort: canonical_input_sort.into(),
-                    output_sort: "orbit_summary".into(),
-                    max_retention: 2106,
-                    max_memory_bytes: 131072,
-                    allows_streamed_partition: streamed,
-                },
-            ],
+            operations,
         )
         .unwrap()
     }
@@ -318,8 +434,13 @@ recipe affine_caps {
     }
 
     impl PreparedSemanticRuntime for CountingRuntime {
-        fn run_fused_match_reduce(&mut self, stage: ExecutionStage) -> Result<(), ControlError> {
-            assert_eq!(stage.secondary_signature(), Some(1));
+        fn run_fused_match_reduce(
+            &mut self,
+            stage: ExecutionStage,
+            reducers: &[ReducerLane],
+        ) -> Result<(), ControlError> {
+            assert_eq!(reducers.len(), 1);
+            assert_eq!(reducers[0].signature(), 1);
             assert_eq!(stage.memory_bytes(), 135_168);
             self.push(1);
             Ok(())
@@ -353,6 +474,71 @@ recipe affine_caps {
         let mut runtime = CountingRuntime::default();
         execute_prepared(&plan, &mut runtime).unwrap();
         assert_eq!(&runtime.calls[..runtime.len], &[1, 3]);
+    }
+
+    #[derive(Default)]
+    struct FanoutRuntime {
+        sum_of_squares: u64,
+        even_squares: u64,
+        canonicalized: bool,
+    }
+
+    impl PreparedSemanticRuntime for FanoutRuntime {
+        fn run_fused_match_reduce(
+            &mut self,
+            stage: ExecutionStage,
+            reducers: &[ReducerLane],
+        ) -> Result<(), ControlError> {
+            assert_eq!(stage.reducer_lane_count(), 2);
+            assert_eq!(reducers.len(), 2);
+            assert_eq!(reducers[0].signature(), 1);
+            assert_eq!(reducers[1].signature(), 3);
+            for value in 0..64_u64 {
+                let feature = value * value;
+                self.sum_of_squares += feature;
+                self.even_squares += u64::from(feature & 1 == 0);
+            }
+            Ok(())
+        }
+
+        fn run_reduce(&mut self, _stage: ExecutionStage) -> Result<(), ControlError> {
+            unreachable!("the feature stream is fused into both reducers")
+        }
+
+        fn run_canonicalize(&mut self, _stage: ExecutionStage) -> Result<(), ControlError> {
+            self.canonicalized = true;
+            Ok(())
+        }
+    }
+
+    #[test]
+    fn one_match_dispatches_a_fixed_reducer_bank() {
+        let fanout = TEXT
+            .replace(
+                "  reduce overlap_histogram from plane as extrema sort retained_set retain 2106 memory 131072;\n",
+                "  reduce overlap_histogram from plane as extrema sort retained_set retain 2106 memory 131072;\n  reduce parity_histogram from plane as parity sort parity_summary retain 2 memory 64;\n",
+            )
+            .replace("  emit cap_orbit;", "  emit cap_orbit;\n  sink parity;");
+        let recipe = parse_semantic_recipe(&fanout).unwrap();
+        let compiled = compile_recipe(
+            &recipe,
+            &registry_with_options("retained_set", false, true),
+            DataflowBudget {
+                max_total_retention: 5000,
+                max_total_memory_bytes: 300_000,
+            },
+        )
+        .unwrap();
+        let plan = compile_execution_plan(&compiled).unwrap();
+        assert_eq!(plan.stages().len(), 2);
+        assert_eq!(plan.reducer_lanes().len(), 2);
+        assert_eq!(plan.sink_slots(), &[3]);
+        assert_eq!(plan.stages()[0].output_slot(), u16::MAX);
+        let mut runtime = FanoutRuntime::default();
+        execute_prepared(&plan, &mut runtime).unwrap();
+        assert_eq!(runtime.sum_of_squares, 85_344);
+        assert_eq!(runtime.even_squares, 32);
+        assert!(runtime.canonicalized);
     }
 
     #[test]
@@ -453,8 +639,13 @@ recipe affine_caps {
     }
 
     impl PreparedSemanticRuntime for AffineCensusRuntime {
-        fn run_fused_match_reduce(&mut self, stage: ExecutionStage) -> Result<(), ControlError> {
+        fn run_fused_match_reduce(
+            &mut self,
+            stage: ExecutionStage,
+            reducers: &[ReducerLane],
+        ) -> Result<(), ControlError> {
             assert_eq!(stage.kind(), ExecutionStageKind::FusedMatchReduce);
+            assert_eq!(reducers.len(), 1);
             let low = (1_u64 << 9) - 1;
             let last = low << (27 - 9);
             let mut mask = low;

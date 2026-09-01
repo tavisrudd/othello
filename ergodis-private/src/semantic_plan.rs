@@ -141,6 +141,8 @@ pub struct SemanticRecipe {
     pub provenance: String,
     pub steps: Box<[RecipeStep]>,
     pub emit_binding: String,
+    #[serde(default)]
+    pub sinks: Box<[String]>,
     pub gates: Box<[String]>,
 }
 
@@ -173,8 +175,12 @@ impl SemanticRecipe {
             return invalid("semantic recipe has an invalid verification-gate count");
         }
         validate_plan_name(&self.emit_binding)?;
+        if self.sinks.len() > MAX_PLAN_OPS {
+            return invalid("semantic recipe has too many sinks");
+        }
         let mut bindings = BTreeSet::from([self.source_binding.as_str()]);
         let mut reduced_bindings = BTreeSet::new();
+        let mut bounded_bindings = BTreeSet::new();
         for step in &self.steps {
             let binding = step.binding();
             let input = step.input();
@@ -196,6 +202,7 @@ impl SemanticRecipe {
                 RecipeStep::Reduce { reducer, .. } => {
                     validate_plan_name(reducer)?;
                     reduced_bindings.insert(binding);
+                    bounded_bindings.insert(binding);
                 }
                 RecipeStep::Canonicalize {
                     action,
@@ -208,6 +215,7 @@ impl SemanticRecipe {
                             "canonicalization requires a reducer output or streamed partition",
                         );
                     }
+                    bounded_bindings.insert(binding);
                 }
             }
         }
@@ -216,6 +224,25 @@ impl SemanticRecipe {
         }
         if !bindings.contains(self.emit_binding.as_str()) {
             return invalid("semantic recipe emits an unknown binding");
+        }
+        if !bounded_bindings.contains(self.emit_binding.as_str()) {
+            return invalid("semantic recipe output must be a bounded artifact");
+        }
+        let mut sinks = BTreeSet::new();
+        for sink in &self.sinks {
+            validate_plan_name(sink)?;
+            if sink == &self.emit_binding {
+                return invalid("semantic recipe sink duplicates its emitted binding");
+            }
+            if !bindings.contains(sink.as_str()) {
+                return invalid("semantic recipe sinks an unknown binding");
+            }
+            if !bounded_bindings.contains(sink.as_str()) {
+                return invalid("semantic recipe sink must be a bounded artifact");
+            }
+            if !sinks.insert(sink) {
+                return invalid("semantic recipe contains a duplicate sink");
+            }
         }
         Ok(())
     }
@@ -312,6 +339,9 @@ pub fn format_semantic_recipe(recipe: &SemanticRecipe) -> Result<String, Control
         "  emit {};\n",
         format_plan_name(&recipe.emit_binding)?
     ));
+    for sink in &recipe.sinks {
+        text.push_str(&format!("  sink {};\n", format_plan_name(sink)?));
+    }
     for gate in &recipe.gates {
         text.push_str(&format!("  verify {};\n", format_plan_name(gate)?));
     }
@@ -350,6 +380,7 @@ impl<'a> RecipeParser<'a> {
             (None, None, None, None, None, None);
         let mut steps = Vec::new();
         let mut emit_binding = None;
+        let mut sinks = Vec::new();
         let mut gates = Vec::new();
         while !self.consume(&PlanTextTokenKind::RBrace) {
             match self.word()?.as_str() {
@@ -457,6 +488,7 @@ impl<'a> RecipeParser<'a> {
                     });
                 }
                 "emit" if emit_binding.is_none() => emit_binding = Some(self.name()?),
+                "sink" => sinks.push(self.name()?),
                 "verify" => gates.push(self.name()?),
                 "source" | "label" | "scope" | "provenance" | "emit" => {
                     return self.error("duplicate semantic recipe declaration");
@@ -487,6 +519,7 @@ impl<'a> RecipeParser<'a> {
             emit_binding: emit_binding.ok_or_else(|| {
                 ControlError::Invalid("semantic recipe omits output binding".into())
             })?,
+            sinks: sinks.into_boxed_slice(),
             gates: gates.into_boxed_slice(),
         };
         recipe.validate()?;
@@ -689,6 +722,10 @@ recipe affine_caps {
         .is_err());
         assert!(parse_semantic_recipe(
             "recipe x { source s as rows sort stream; label a == 1; provenance p; match m from missing as y sort feature retain 1 memory 1; emit y; verify replay; }"
+        )
+        .is_err());
+        assert!(parse_semantic_recipe(
+            "recipe x { source s as rows sort stream; label a == 1; provenance p; match m from rows as y sort feature retain 1 memory 1; emit y; verify replay; }"
         )
         .is_err());
     }

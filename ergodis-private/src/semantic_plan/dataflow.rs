@@ -155,6 +155,7 @@ pub struct CompiledRecipe {
     source_signature: u16,
     slots: u16,
     output_slot: u16,
+    sink_slots: Box<[u16]>,
     total_retention: u64,
     total_memory_bytes: u64,
     operations: Box<[CompiledRecipeOp]>,
@@ -175,6 +176,11 @@ impl CompiledRecipe {
     #[must_use]
     pub const fn output_slot(&self) -> u16 {
         self.output_slot
+    }
+
+    #[must_use]
+    pub fn sink_slots(&self) -> &[u16] {
+        &self.sink_slots
     }
 
     #[must_use]
@@ -331,11 +337,23 @@ pub fn compile_recipe(
         .get(recipe.emit_binding.as_str())
         .ok_or_else(|| ControlError::Invalid("semantic recipe output slot is not defined".into()))?
         .id;
+    let sink_slots = recipe
+        .sinks
+        .iter()
+        .map(|sink| {
+            slots
+                .get(sink.as_str())
+                .map(|slot| slot.id)
+                .ok_or_else(|| ControlError::Invalid("semantic sink slot is not defined".into()))
+        })
+        .collect::<Result<Vec<_>, _>>()?
+        .into_boxed_slice();
     Ok(CompiledRecipe {
         source_signature,
         slots: u16::try_from(slots.len())
             .map_err(|_| ControlError::Invalid("semantic recipe has too many slots".into()))?,
         output_slot,
+        sink_slots,
         total_retention,
         total_memory_bytes,
         operations: operations.into_boxed_slice(),
