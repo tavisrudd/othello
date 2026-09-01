@@ -831,6 +831,19 @@ files are disposable and may be deleted at any time.
    checked-versus-debug-checked `SmallField`/`BinarySmallField` boundary remain
    open rather than being conflated with modulus validity.
 
+   Commit `f69380676` closes finding 16's matrix-reinterpretation path without
+   hashing or enlarging the cold matrix record. `FieldPresentation` packs the
+   characteristic, extension degree, and complete lower monic-modulus
+   encoding exactly; the supported order-at-most-256 boundary makes the latter
+   fit in 16 bits. `Matrix` uses the former reserved eight bytes, remains 32
+   bytes, serializes the identity, and checks it before transpose, elimination,
+   null-space, row append, or containment. Canonical static/runtime GF(4)
+   presentations agree, while equal-order GF(8) bases, cross-field row-space
+   queries, and a forged serialized tag fail closed. Full public tests and
+   strict all-target/all-feature clippy pass. This is a cold ownership and
+   arithmetic-boundary safeguard, not a solve-loop change; the raw-element
+   canonicality split in finding 17 remains the next field-layer question.
+
    Commit `8bd0969a6` makes the generated-span compiler fail closed under explicit projective-
    column, state, retained-matrix-byte, and transition limits. Transition
    accounting is exact but occurs once per input column rather than in the
