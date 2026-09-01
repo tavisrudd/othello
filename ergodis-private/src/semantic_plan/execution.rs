@@ -23,7 +23,8 @@ pub struct ReducerLane {
     memory_bytes: u64,
     signature: u16,
     output_slot: u16,
-    _pad: [u8; 4],
+    argument_start: u16,
+    argument_count: u16,
 }
 
 impl ReducerLane {
@@ -46,6 +47,12 @@ impl ReducerLane {
     pub const fn output_slot(self) -> u16 {
         self.output_slot
     }
+
+    #[must_use]
+    pub fn arguments<'a>(self, pool: &'a [i64]) -> Option<&'a [i64]> {
+        let start = self.argument_start as usize;
+        pool.get(start..start + self.argument_count as usize)
+    }
 }
 
 const _: () = assert!(std::mem::size_of::<ReducerLane>() == 24);
@@ -63,7 +70,8 @@ pub struct ExecutionStage {
     lane_count: u16,
     kind: ExecutionStageKind,
     flags: u8,
-    _pad: [u8; 4],
+    argument_start: u16,
+    argument_count: u16,
 }
 
 impl ExecutionStage {
@@ -103,6 +111,12 @@ impl ExecutionStage {
     }
 
     #[must_use]
+    pub fn arguments<'a>(self, pool: &'a [i64]) -> Option<&'a [i64]> {
+        let start = self.argument_start as usize;
+        pool.get(start..start + self.argument_count as usize)
+    }
+
+    #[must_use]
     pub const fn uses_streamed_partition(self) -> bool {
         self.flags & CompiledRecipeOp::STREAMED_PARTITION != 0
     }
@@ -119,6 +133,8 @@ pub struct ExecutionPlan {
     sink_slots: Box<[u16]>,
     stages: Box<[ExecutionStage]>,
     reducer_lanes: Box<[ReducerLane]>,
+    arguments: Box<[i64]>,
+    registry_canonical: Box<[u8]>,
 }
 
 impl ExecutionPlan {
@@ -150,6 +166,16 @@ impl ExecutionPlan {
     #[must_use]
     pub fn reducer_lanes(&self) -> &[ReducerLane] {
         &self.reducer_lanes
+    }
+
+    #[must_use]
+    pub fn arguments(&self) -> &[i64] {
+        &self.arguments
+    }
+
+    #[must_use]
+    pub fn registry_canonical(&self) -> &[u8] {
+        &self.registry_canonical
     }
 
     fn stage_reducer_lanes(&self, stage: ExecutionStage) -> &[ReducerLane] {
@@ -216,7 +242,8 @@ pub fn compile_execution_plan(compiled: &CompiledRecipe) -> Result<ExecutionPlan
                         memory_bytes: reducer.memory_bytes(),
                         signature: reducer.signature(),
                         output_slot: reducer.output_slot(),
-                        _pad: [0; 4],
+                        argument_start: compiled.operation_argument_range(next).0,
+                        argument_count: compiled.operation_argument_range(next).1,
                     });
                     next += 1;
                 }
@@ -244,16 +271,25 @@ pub fn compile_execution_plan(compiled: &CompiledRecipe) -> Result<ExecutionPlan
                     })?,
                     kind: ExecutionStageKind::FusedMatchReduce,
                     flags: 0,
-                    _pad: [0; 4],
+                    argument_start: compiled.operation_argument_range(at).0,
+                    argument_count: compiled.operation_argument_range(at).1,
                 });
                 at = next;
             }
             OpKind::Reduce => {
-                stages.push(single_stage(operation, ExecutionStageKind::Reduce));
+                stages.push(single_stage(
+                    operation,
+                    ExecutionStageKind::Reduce,
+                    compiled.operation_argument_range(at),
+                ));
                 at += 1;
             }
             OpKind::Canonicalize => {
-                stages.push(single_stage(operation, ExecutionStageKind::Canonicalize));
+                stages.push(single_stage(
+                    operation,
+                    ExecutionStageKind::Canonicalize,
+                    compiled.operation_argument_range(at),
+                ));
                 at += 1;
             }
         }
@@ -265,10 +301,16 @@ pub fn compile_execution_plan(compiled: &CompiledRecipe) -> Result<ExecutionPlan
         sink_slots: compiled.sink_slots().into(),
         stages: stages.into_boxed_slice(),
         reducer_lanes: reducer_lanes.into_boxed_slice(),
+        arguments: compiled.arguments().into(),
+        registry_canonical: compiled.registry_canonical().into(),
     })
 }
 
-fn single_stage(operation: CompiledRecipeOp, kind: ExecutionStageKind) -> ExecutionStage {
+fn single_stage(
+    operation: CompiledRecipeOp,
+    kind: ExecutionStageKind,
+    arguments: (u16, u16),
+) -> ExecutionStage {
     ExecutionStage {
         retention: operation.retention(),
         memory_bytes: operation.memory_bytes(),
@@ -283,7 +325,8 @@ fn single_stage(operation: CompiledRecipeOp, kind: ExecutionStageKind) -> Execut
         } else {
             0
         },
-        _pad: [0; 4],
+        argument_start: arguments.0,
+        argument_count: arguments.1,
     }
 }
 
@@ -292,13 +335,20 @@ fn single_stage(operation: CompiledRecipeOp, kind: ExecutionStageKind) -> Execut
 /// dispatch from these methods; the feature/search loop stays inside the
 /// selected fused adapter.
 pub trait PreparedSemanticRuntime {
+    fn registry_canonical(&self) -> &[u8];
+
     fn run_fused_match_reduce(
         &mut self,
         stage: ExecutionStage,
         reducers: &[ReducerLane],
+        arguments: &[i64],
     ) -> Result<(), ControlError>;
-    fn run_reduce(&mut self, stage: ExecutionStage) -> Result<(), ControlError>;
-    fn run_canonicalize(&mut self, stage: ExecutionStage) -> Result<(), ControlError>;
+    fn run_reduce(&mut self, stage: ExecutionStage, arguments: &[i64]) -> Result<(), ControlError>;
+    fn run_canonicalize(
+        &mut self,
+        stage: ExecutionStage,
+        arguments: &[i64],
+    ) -> Result<(), ControlError>;
 }
 
 /// Execute one already-prepared plan. This loop itself allocates nothing and
@@ -307,13 +357,20 @@ pub fn execute_prepared(
     plan: &ExecutionPlan,
     runtime: &mut impl PreparedSemanticRuntime,
 ) -> Result<(), ControlError> {
+    if runtime.registry_canonical() != plan.registry_canonical() {
+        return invalid("prepared semantic runtime uses a different adapter registry");
+    }
     for &stage in plan.stages() {
         match stage.kind() {
-            ExecutionStageKind::FusedMatchReduce => {
-                runtime.run_fused_match_reduce(stage, plan.stage_reducer_lanes(stage))?
+            ExecutionStageKind::FusedMatchReduce => runtime.run_fused_match_reduce(
+                stage,
+                plan.stage_reducer_lanes(stage),
+                plan.arguments(),
+            )?,
+            ExecutionStageKind::Reduce => runtime.run_reduce(stage, plan.arguments())?,
+            ExecutionStageKind::Canonicalize => {
+                runtime.run_canonicalize(stage, plan.arguments())?
             }
-            ExecutionStageKind::Reduce => runtime.run_reduce(stage)?,
-            ExecutionStageKind::Canonicalize => runtime.run_canonicalize(stage)?,
         }
     }
     Ok(())
@@ -327,7 +384,8 @@ fn invalid<T>(message: &str) -> Result<T, ControlError> {
 mod tests {
     use super::*;
     use crate::semantic_plan::dataflow::{
-        compile_recipe, AdapterRegistry, DataflowBudget, OperationSignature, SourceSignature,
+        compile_recipe, AdapterRegistry, ArgumentDomain, DataflowBudget, OperationSignature,
+        ParameterSignature, SourceSignature,
     };
     use crate::semantic_plan::parse_semantic_recipe;
 
@@ -336,9 +394,9 @@ recipe affine_caps {
   source split_nine_sets as objects sort nine_set_stream;
   label (g2 == 0) && (g3 == 0);
   provenance "sha256:fixture";
-  match affine_subspace from objects as plane sort feature_row retain 1 memory 4096;
-  reduce overlap_histogram from plane as extrema sort retained_set retain 2106 memory 131072;
-  canonicalize affine_generators from extrema as cap_orbit sort orbit_summary retain 2106 memory 131072 streamed false contract diagnostic verified true;
+  match affine_subspace(rank=2, metric=max_overlap) from objects as plane sort feature_row retain 1 memory 4096;
+  reduce overlap_histogram(weighted=true) from plane as extrema sort retained_set retain 2106 memory 131072;
+  canonicalize affine_generators(count=4) from extrema as cap_orbit sort orbit_summary retain 2106 memory 131072 streamed false contract diagnostic verified true;
   emit cap_orbit;
   verify replay;
 }
@@ -363,6 +421,21 @@ recipe affine_caps {
                 kind: OpKind::Match,
                 input_sort: "nine_set_stream".into(),
                 output_sort: "feature_row".into(),
+                parameters: Box::new([
+                    ParameterSignature {
+                        name: "rank".into(),
+                        domain: ArgumentDomain::Integer {
+                            minimum: 1,
+                            maximum: 3,
+                        },
+                    },
+                    ParameterSignature {
+                        name: "metric".into(),
+                        domain: ArgumentDomain::Name {
+                            choices: Box::new(["max_overlap".into(), "incidence".into()]),
+                        },
+                    },
+                ]),
                 max_retention: 1,
                 max_memory_bytes: 4096,
                 allows_streamed_partition: false,
@@ -372,6 +445,10 @@ recipe affine_caps {
                 kind: OpKind::Reduce,
                 input_sort: "feature_row".into(),
                 output_sort: "retained_set".into(),
+                parameters: Box::new([ParameterSignature {
+                    name: "weighted".into(),
+                    domain: ArgumentDomain::Boolean,
+                }]),
                 max_retention: 2106,
                 max_memory_bytes: 131072,
                 allows_streamed_partition: false,
@@ -381,6 +458,13 @@ recipe affine_caps {
                 kind: OpKind::Canonicalize,
                 input_sort: canonical_input_sort.into(),
                 output_sort: "orbit_summary".into(),
+                parameters: Box::new([ParameterSignature {
+                    name: "count".into(),
+                    domain: ArgumentDomain::Integer {
+                        minimum: 1,
+                        maximum: 16,
+                    },
+                }]),
                 max_retention: 2106,
                 max_memory_bytes: 131072,
                 allows_streamed_partition: streamed,
@@ -392,6 +476,7 @@ recipe affine_caps {
                 kind: OpKind::Reduce,
                 input_sort: "feature_row".into(),
                 output_sort: "parity_summary".into(),
+                parameters: Box::new([]),
                 max_retention: 2,
                 max_memory_bytes: 64,
                 allows_streamed_partition: false,
@@ -420,13 +505,21 @@ recipe affine_caps {
         compile_execution_plan(&compiled)
     }
 
-    #[derive(Default)]
     struct CountingRuntime {
+        registry_canonical: Box<[u8]>,
         calls: [u8; 8],
         len: usize,
     }
 
     impl CountingRuntime {
+        fn new(registry: &AdapterRegistry) -> Self {
+            Self {
+                registry_canonical: registry.canonical_json().unwrap().into_boxed_slice(),
+                calls: [0; 8],
+                len: 0,
+            }
+        }
+
         fn push(&mut self, value: u8) {
             self.calls[self.len] = value;
             self.len += 1;
@@ -434,26 +527,42 @@ recipe affine_caps {
     }
 
     impl PreparedSemanticRuntime for CountingRuntime {
+        fn registry_canonical(&self) -> &[u8] {
+            &self.registry_canonical
+        }
+
         fn run_fused_match_reduce(
             &mut self,
             stage: ExecutionStage,
             reducers: &[ReducerLane],
+            arguments: &[i64],
         ) -> Result<(), ControlError> {
             assert_eq!(reducers.len(), 1);
             assert_eq!(reducers[0].signature(), 1);
+            assert_eq!(stage.arguments(arguments), Some(&[2, 0][..]));
+            assert_eq!(reducers[0].arguments(arguments), Some(&[1][..]));
             assert_eq!(stage.memory_bytes(), 135_168);
             self.push(1);
             Ok(())
         }
 
-        fn run_reduce(&mut self, _stage: ExecutionStage) -> Result<(), ControlError> {
+        fn run_reduce(
+            &mut self,
+            _stage: ExecutionStage,
+            _arguments: &[i64],
+        ) -> Result<(), ControlError> {
             self.push(2);
             Ok(())
         }
 
-        fn run_canonicalize(&mut self, stage: ExecutionStage) -> Result<(), ControlError> {
+        fn run_canonicalize(
+            &mut self,
+            stage: ExecutionStage,
+            arguments: &[i64],
+        ) -> Result<(), ControlError> {
             assert_eq!(stage.input_slot(), 2);
             assert_eq!(stage.output_slot(), 3);
+            assert_eq!(stage.arguments(arguments), Some(&[4][..]));
             self.push(3);
             Ok(())
         }
@@ -461,6 +570,7 @@ recipe affine_caps {
 
     #[test]
     fn schedule_fuses_streaming_match_and_reduce() {
+        let registry = registry();
         let plan = plan(TEXT).unwrap();
         assert_eq!(plan.source_signature(), 0);
         assert_eq!(plan.slots(), 4);
@@ -471,28 +581,51 @@ recipe affine_caps {
             ExecutionStageKind::FusedMatchReduce
         );
         assert_eq!(plan.stages()[1].kind(), ExecutionStageKind::Canonicalize);
-        let mut runtime = CountingRuntime::default();
+        let mut runtime = CountingRuntime::new(&registry);
         execute_prepared(&plan, &mut runtime).unwrap();
         assert_eq!(&runtime.calls[..runtime.len], &[1, 3]);
+        let wrong_registry = registry_with("feature_row", true);
+        let mut wrong_runtime = CountingRuntime::new(&wrong_registry);
+        assert!(execute_prepared(&plan, &mut wrong_runtime).is_err());
+        assert_eq!(wrong_runtime.len, 0);
     }
 
-    #[derive(Default)]
     struct FanoutRuntime {
+        registry_canonical: Box<[u8]>,
         sum_of_squares: u64,
         even_squares: u64,
         canonicalized: bool,
     }
 
+    impl FanoutRuntime {
+        fn new(registry: &AdapterRegistry) -> Self {
+            Self {
+                registry_canonical: registry.canonical_json().unwrap().into_boxed_slice(),
+                sum_of_squares: 0,
+                even_squares: 0,
+                canonicalized: false,
+            }
+        }
+    }
+
     impl PreparedSemanticRuntime for FanoutRuntime {
+        fn registry_canonical(&self) -> &[u8] {
+            &self.registry_canonical
+        }
+
         fn run_fused_match_reduce(
             &mut self,
             stage: ExecutionStage,
             reducers: &[ReducerLane],
+            arguments: &[i64],
         ) -> Result<(), ControlError> {
             assert_eq!(stage.reducer_lane_count(), 2);
             assert_eq!(reducers.len(), 2);
             assert_eq!(reducers[0].signature(), 1);
             assert_eq!(reducers[1].signature(), 3);
+            assert_eq!(stage.arguments(arguments), Some(&[2, 0][..]));
+            assert_eq!(reducers[0].arguments(arguments), Some(&[1][..]));
+            assert_eq!(reducers[1].arguments(arguments), Some(&[][..]));
             for value in 0..64_u64 {
                 let feature = value * value;
                 self.sum_of_squares += feature;
@@ -501,11 +634,19 @@ recipe affine_caps {
             Ok(())
         }
 
-        fn run_reduce(&mut self, _stage: ExecutionStage) -> Result<(), ControlError> {
+        fn run_reduce(
+            &mut self,
+            _stage: ExecutionStage,
+            _arguments: &[i64],
+        ) -> Result<(), ControlError> {
             unreachable!("the feature stream is fused into both reducers")
         }
 
-        fn run_canonicalize(&mut self, _stage: ExecutionStage) -> Result<(), ControlError> {
+        fn run_canonicalize(
+            &mut self,
+            _stage: ExecutionStage,
+            _arguments: &[i64],
+        ) -> Result<(), ControlError> {
             self.canonicalized = true;
             Ok(())
         }
@@ -515,14 +656,15 @@ recipe affine_caps {
     fn one_match_dispatches_a_fixed_reducer_bank() {
         let fanout = TEXT
             .replace(
-                "  reduce overlap_histogram from plane as extrema sort retained_set retain 2106 memory 131072;\n",
-                "  reduce overlap_histogram from plane as extrema sort retained_set retain 2106 memory 131072;\n  reduce parity_histogram from plane as parity sort parity_summary retain 2 memory 64;\n",
+                "  reduce overlap_histogram(weighted=true) from plane as extrema sort retained_set retain 2106 memory 131072;\n",
+                "  reduce overlap_histogram(weighted=true) from plane as extrema sort retained_set retain 2106 memory 131072;\n  reduce parity_histogram from plane as parity sort parity_summary retain 2 memory 64;\n",
             )
             .replace("  emit cap_orbit;", "  emit cap_orbit;\n  sink parity;");
         let recipe = parse_semantic_recipe(&fanout).unwrap();
+        let registry = registry_with_options("retained_set", false, true);
         let compiled = compile_recipe(
             &recipe,
-            &registry_with_options("retained_set", false, true),
+            &registry,
             DataflowBudget {
                 max_total_retention: 5000,
                 max_total_memory_bytes: 300_000,
@@ -534,7 +676,7 @@ recipe affine_caps {
         assert_eq!(plan.reducer_lanes().len(), 2);
         assert_eq!(plan.sink_slots(), &[3]);
         assert_eq!(plan.stages()[0].output_slot(), u16::MAX);
-        let mut runtime = FanoutRuntime::default();
+        let mut runtime = FanoutRuntime::new(&registry);
         execute_prepared(&plan, &mut runtime).unwrap();
         assert_eq!(runtime.sum_of_squares, 85_344);
         assert_eq!(runtime.even_squares, 32);
@@ -545,7 +687,7 @@ recipe affine_caps {
     fn schedule_rejects_unmaterialized_match_outputs() {
         let unfused = TEXT
             .replace(
-                "  reduce overlap_histogram from plane as extrema sort retained_set retain 2106 memory 131072;\n",
+                "  reduce overlap_histogram(weighted=true) from plane as extrema sort retained_set retain 2106 memory 131072;\n",
                 "",
             )
             .replace("from extrema as cap_orbit", "from plane as cap_orbit")
@@ -564,6 +706,7 @@ recipe affine_caps {
     }
 
     struct AffineCensusRuntime {
+        registry_canonical: Box<[u8]>,
         planes: [u64; 39],
         lines: [u64; 117],
         histogram: [u64; 10],
@@ -578,8 +721,9 @@ recipe affine_caps {
     }
 
     impl AffineCensusRuntime {
-        fn new() -> Self {
+        fn new(registry: &AdapterRegistry) -> Self {
             Self {
+                registry_canonical: registry.canonical_json().unwrap().into_boxed_slice(),
                 planes: affine_subspaces::<39>(2),
                 lines: affine_subspaces::<117>(1),
                 histogram: [0; 10],
@@ -639,13 +783,20 @@ recipe affine_caps {
     }
 
     impl PreparedSemanticRuntime for AffineCensusRuntime {
+        fn registry_canonical(&self) -> &[u8] {
+            &self.registry_canonical
+        }
+
         fn run_fused_match_reduce(
             &mut self,
             stage: ExecutionStage,
             reducers: &[ReducerLane],
+            arguments: &[i64],
         ) -> Result<(), ControlError> {
             assert_eq!(stage.kind(), ExecutionStageKind::FusedMatchReduce);
             assert_eq!(reducers.len(), 1);
+            assert_eq!(stage.arguments(arguments), Some(&[2, 0][..]));
+            assert_eq!(reducers[0].arguments(arguments), Some(&[1][..]));
             let low = (1_u64 << 9) - 1;
             let last = low << (27 - 9);
             let mut mask = low;
@@ -661,12 +812,21 @@ recipe affine_caps {
             Ok(())
         }
 
-        fn run_reduce(&mut self, _stage: ExecutionStage) -> Result<(), ControlError> {
+        fn run_reduce(
+            &mut self,
+            _stage: ExecutionStage,
+            _arguments: &[i64],
+        ) -> Result<(), ControlError> {
             unreachable!("the affine plan fuses its match and reducer")
         }
 
-        fn run_canonicalize(&mut self, stage: ExecutionStage) -> Result<(), ControlError> {
+        fn run_canonicalize(
+            &mut self,
+            stage: ExecutionStage,
+            arguments: &[i64],
+        ) -> Result<(), ControlError> {
             assert_eq!(stage.kind(), ExecutionStageKind::Canonicalize);
+            assert_eq!(stage.arguments(arguments), Some(&[4][..]));
             let generators = [
                 ([1, 0, 0, 0, 1, 0, 0, 0, 1], 1),
                 ([0, 1, 0, 1, 0, 0, 0, 0, 1], 0),
@@ -697,8 +857,9 @@ recipe affine_caps {
 
     #[test]
     fn prepared_pipeline_replays_the_full_affine_census() {
+        let registry = registry();
         let plan = plan(TEXT).unwrap();
-        let mut runtime = AffineCensusRuntime::new();
+        let mut runtime = AffineCensusRuntime::new(&registry);
         assert!(std::mem::size_of_val(&runtime) <= 300_000);
         execute_prepared(&plan, &mut runtime).unwrap();
         assert_eq!(runtime.ambient_subsets, 4_686_825);

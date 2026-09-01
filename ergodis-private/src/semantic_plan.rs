@@ -6,8 +6,9 @@ pub mod theorem;
 
 use ergodis::control::{
     format_plan_expression, format_plan_name, lex_plan_text, parse_plan_expression,
-    parse_plan_u64_literal, validate_plan_name, ControlError, ExpressionPlanSpec, PlanExpr,
-    PlanOutput, PlanRole, PlanScope, PlanTextToken, PlanTextTokenKind, MAX_PLAN_OPS, PLAN_SCHEMA,
+    parse_plan_i64_literal, parse_plan_u64_literal, validate_plan_name, ControlError,
+    ExpressionPlanSpec, PlanExpr, PlanOutput, PlanRole, PlanScope, PlanTextToken,
+    PlanTextTokenKind, MAX_PLAN_OPS, PLAN_SCHEMA,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeSet;
@@ -42,10 +43,31 @@ pub struct CanonicalizationGate {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(
+    tag = "type",
+    content = "value",
+    rename_all = "kebab-case",
+    deny_unknown_fields
+)]
+pub enum OperationArgumentValue {
+    Integer(i64),
+    Name(String),
+    Boolean(bool),
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct OperationArgument {
+    pub name: String,
+    pub value: OperationArgumentValue,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(tag = "op", rename_all = "kebab-case", deny_unknown_fields)]
 pub enum RecipeStep {
     Match {
         adapter: String,
+        arguments: Box<[OperationArgument]>,
         input: String,
         binding: String,
         output_sort: String,
@@ -54,6 +76,7 @@ pub enum RecipeStep {
     },
     Reduce {
         reducer: String,
+        arguments: Box<[OperationArgument]>,
         input: String,
         binding: String,
         output_sort: String,
@@ -62,6 +85,7 @@ pub enum RecipeStep {
     },
     Canonicalize {
         action: String,
+        arguments: Box<[OperationArgument]>,
         input: String,
         binding: String,
         output_sort: String,
@@ -123,6 +147,14 @@ impl RecipeStep {
                 memory_bytes,
                 ..
             } => (*retention, *memory_bytes),
+        }
+    }
+
+    fn arguments(&self) -> &[OperationArgument] {
+        match self {
+            Self::Match { arguments, .. }
+            | Self::Reduce { arguments, .. }
+            | Self::Canonicalize { arguments, .. } => arguments,
         }
     }
 }
@@ -196,6 +228,19 @@ impl SemanticRecipe {
             let (retention, memory_bytes) = step.resources();
             if retention == 0 || memory_bytes == 0 {
                 return invalid("semantic operation requires positive retention and memory bounds");
+            }
+            if step.arguments().len() > MAX_PLAN_OPS {
+                return invalid("semantic operation has too many arguments");
+            }
+            let mut argument_names = BTreeSet::new();
+            for argument in step.arguments() {
+                validate_plan_name(&argument.name)?;
+                if let OperationArgumentValue::Name(value) = &argument.value {
+                    validate_plan_name(value)?;
+                }
+                if !argument_names.insert(argument.name.as_str()) {
+                    return invalid("semantic operation contains a duplicate argument");
+                }
             }
             match step {
                 RecipeStep::Match { adapter, .. } => validate_plan_name(adapter)?,
@@ -282,6 +327,7 @@ pub fn format_semantic_recipe(recipe: &SemanticRecipe) -> Result<String, Control
         match step {
             RecipeStep::Match {
                 adapter,
+                arguments,
                 input,
                 binding,
                 output_sort,
@@ -289,7 +335,7 @@ pub fn format_semantic_recipe(recipe: &SemanticRecipe) -> Result<String, Control
                 memory_bytes,
             } => text.push_str(&format!(
                 "  match {} from {} as {} sort {} retain {} memory {};\n",
-                format_plan_name(adapter)?,
+                format_operation(adapter, arguments)?,
                 format_plan_name(input)?,
                 format_plan_name(binding)?,
                 format_plan_name(output_sort)?,
@@ -298,6 +344,7 @@ pub fn format_semantic_recipe(recipe: &SemanticRecipe) -> Result<String, Control
             )),
             RecipeStep::Reduce {
                 reducer,
+                arguments,
                 input,
                 binding,
                 output_sort,
@@ -305,7 +352,7 @@ pub fn format_semantic_recipe(recipe: &SemanticRecipe) -> Result<String, Control
                 memory_bytes,
             } => text.push_str(&format!(
                 "  reduce {} from {} as {} sort {} retain {} memory {};\n",
-                format_plan_name(reducer)?,
+                format_operation(reducer, arguments)?,
                 format_plan_name(input)?,
                 format_plan_name(binding)?,
                 format_plan_name(output_sort)?,
@@ -314,6 +361,7 @@ pub fn format_semantic_recipe(recipe: &SemanticRecipe) -> Result<String, Control
             )),
             RecipeStep::Canonicalize {
                 action,
+                arguments,
                 input,
                 binding,
                 output_sort,
@@ -323,7 +371,7 @@ pub fn format_semantic_recipe(recipe: &SemanticRecipe) -> Result<String, Control
                 gate,
             } => text.push_str(&format!(
                 "  canonicalize {} from {} as {} sort {} retain {} memory {} streamed {} contract {} verified {};\n",
-                format_plan_name(action)?,
+                format_operation(action, arguments)?,
                 format_plan_name(input)?,
                 format_plan_name(binding)?,
                 format_plan_name(output_sort)?,
@@ -355,6 +403,30 @@ fn contract_name(contract: LabelContract) -> &'static str {
         LabelContract::Transports => "transports",
         LabelContract::Diagnostic => "diagnostic",
     }
+}
+
+fn format_operation(name: &str, arguments: &[OperationArgument]) -> Result<String, ControlError> {
+    let mut text = format_plan_name(name)?;
+    if arguments.is_empty() {
+        return Ok(text);
+    }
+    text.push('(');
+    for (index, argument) in arguments.iter().enumerate() {
+        if index != 0 {
+            text.push_str(", ");
+        }
+        text.push_str(&format_plan_name(&argument.name)?);
+        text.push('=');
+        match &argument.value {
+            OperationArgumentValue::Integer(value) => text.push_str(&value.to_string()),
+            OperationArgumentValue::Name(value) => text.push_str(&format_plan_name(value)?),
+            OperationArgumentValue::Boolean(value) => {
+                text.push_str(if *value { "true" } else { "false" })
+            }
+        }
+    }
+    text.push(')');
+    Ok(text)
 }
 
 struct RecipeParser<'a> {
@@ -403,7 +475,7 @@ impl<'a> RecipeParser<'a> {
                 }
                 "provenance" if provenance.is_none() => provenance = Some(self.name()?),
                 "match" => {
-                    let adapter = self.name()?;
+                    let (adapter, arguments) = self.operation()?;
                     self.expect_word("from")?;
                     let input = self.name()?;
                     self.expect_word("as")?;
@@ -415,6 +487,7 @@ impl<'a> RecipeParser<'a> {
                     self.expect_word("memory")?;
                     steps.push(RecipeStep::Match {
                         adapter,
+                        arguments,
                         input,
                         binding,
                         output_sort,
@@ -423,7 +496,7 @@ impl<'a> RecipeParser<'a> {
                     });
                 }
                 "reduce" => {
-                    let reducer = self.name()?;
+                    let (reducer, arguments) = self.operation()?;
                     self.expect_word("from")?;
                     let input = self.name()?;
                     self.expect_word("as")?;
@@ -435,6 +508,7 @@ impl<'a> RecipeParser<'a> {
                     self.expect_word("memory")?;
                     steps.push(RecipeStep::Reduce {
                         reducer,
+                        arguments,
                         input,
                         binding,
                         output_sort,
@@ -443,7 +517,7 @@ impl<'a> RecipeParser<'a> {
                     });
                 }
                 "canonicalize" => {
-                    let action = self.name()?;
+                    let (action, arguments) = self.operation()?;
                     self.expect_word("from")?;
                     let input = self.name()?;
                     self.expect_word("as")?;
@@ -475,6 +549,7 @@ impl<'a> RecipeParser<'a> {
                     };
                     steps.push(RecipeStep::Canonicalize {
                         action,
+                        arguments,
                         input,
                         binding,
                         output_sort,
@@ -553,6 +628,54 @@ impl<'a> RecipeParser<'a> {
             .ok_or_else(|| ControlError::Invalid("unexpected end of semantic recipe".into()))?;
         self.at += 1;
         Ok(token)
+    }
+
+    fn operation(&mut self) -> Result<(String, Box<[OperationArgument]>), ControlError> {
+        let name = self.name()?;
+        if !self.consume(&PlanTextTokenKind::LParen) {
+            return Ok((name, Box::new([])));
+        }
+        let mut arguments = Vec::new();
+        if self.consume(&PlanTextTokenKind::RParen) {
+            return Ok((name, arguments.into_boxed_slice()));
+        }
+        loop {
+            let argument = self.name()?;
+            self.expect(PlanTextTokenKind::Assign)?;
+            arguments.push(OperationArgument {
+                name: argument,
+                value: self.argument_value()?,
+            });
+            if self.consume(&PlanTextTokenKind::RParen) {
+                break;
+            }
+            self.expect(PlanTextTokenKind::Comma)?;
+        }
+        Ok((name, arguments.into_boxed_slice()))
+    }
+
+    fn argument_value(&mut self) -> Result<OperationArgumentValue, ControlError> {
+        let token = self.take()?;
+        match token.kind {
+            PlanTextTokenKind::Number(value) => Ok(OperationArgumentValue::Integer(
+                parse_plan_i64_literal(&value)?,
+            )),
+            PlanTextTokenKind::Minus => {
+                let magnitude = self.number()?;
+                Ok(OperationArgumentValue::Integer(parse_plan_i64_literal(
+                    &format!("-{magnitude}"),
+                )?))
+            }
+            PlanTextTokenKind::Quoted(value) => Ok(OperationArgumentValue::Name(value)),
+            PlanTextTokenKind::Word(value) if value == "true" => {
+                Ok(OperationArgumentValue::Boolean(true))
+            }
+            PlanTextTokenKind::Word(value) if value == "false" => {
+                Ok(OperationArgumentValue::Boolean(false))
+            }
+            PlanTextTokenKind::Word(value) => Ok(OperationArgumentValue::Name(value)),
+            _ => invalid_at(token.offset, "expected operation argument value"),
+        }
     }
 
     fn name(&mut self) -> Result<String, ControlError> {
@@ -645,9 +768,9 @@ recipe affine_caps {
   label (g2 == 0) && (g3 == 0);
   scope root.kind 0x0000000000000005;
   provenance "sha256:fixture";
-  match affine_subspace from objects as plane sort feature_row retain 1 memory 4096;
-  reduce overlap_histogram from plane as extrema sort retained_set retain 2106 memory 131072;
-  canonicalize affine_generators from extrema as cap_orbit sort orbit_summary retain 2106 memory 65536 streamed false contract diagnostic verified true;
+  match affine_subspace(rank=2, metric=max_overlap) from objects as plane sort feature_row retain 1 memory 4096;
+  reduce overlap_histogram(weighted=true) from plane as extrema sort retained_set retain 2106 memory 131072;
+  canonicalize affine_generators(count=4) from extrema as cap_orbit sort orbit_summary retain 2106 memory 65536 streamed false contract diagnostic verified true;
   emit cap_orbit;
   verify replay_label;
   verify source_hash;
@@ -683,6 +806,7 @@ recipe affine_caps {
         assert_eq!(parsed.steps[0].kind(), OpKind::Match);
         assert_eq!(parsed.steps[1].kind(), OpKind::Reduce);
         assert_eq!(parsed.steps[2].kind(), OpKind::Canonicalize);
+        assert_eq!(parsed.steps[0].arguments().len(), 2);
         let formatted = format_semantic_recipe(&parsed).unwrap();
         let reparsed = parse_semantic_recipe(&formatted).unwrap();
         assert_eq!(

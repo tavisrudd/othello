@@ -1,7 +1,7 @@
 //! Cold compiler from semantic recipes to bounded typed dataflow slots.
 
 use super::theorem::{FragmentStatus, TheoremFragment};
-use super::{OpKind, RecipeStep, SemanticRecipe};
+use super::{OpKind, OperationArgument, OperationArgumentValue, RecipeStep, SemanticRecipe};
 use ergodis::control::{validate_plan_name, ControlError, MAX_PLAN_OPS};
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet};
@@ -20,13 +20,31 @@ pub struct OperationSignature {
     pub kind: OpKind,
     pub input_sort: String,
     pub output_sort: String,
+    #[serde(default)]
+    pub parameters: Box<[ParameterSignature]>,
     pub max_retention: u64,
     pub max_memory_bytes: u64,
     #[serde(default)]
     pub allows_streamed_partition: bool,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(tag = "type", rename_all = "kebab-case", deny_unknown_fields)]
+pub enum ArgumentDomain {
+    Integer { minimum: i64, maximum: i64 },
+    Name { choices: Box<[String]> },
+    Boolean,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct ParameterSignature {
+    pub name: String,
+    pub domain: ArgumentDomain,
+}
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(deny_unknown_fields)]
 pub struct AdapterRegistry {
     sources: Box<[SourceSignature]>,
     operations: Box<[OperationSignature]>,
@@ -60,6 +78,34 @@ impl AdapterRegistry {
             if operation.max_retention == 0 || operation.max_memory_bytes == 0 {
                 return invalid("semantic operation signature has a zero resource bound");
             }
+            if operation.parameters.len() > MAX_PLAN_OPS {
+                return invalid("semantic operation signature has too many parameters");
+            }
+            let mut parameter_names = BTreeSet::new();
+            for parameter in &operation.parameters {
+                validate_plan_name(&parameter.name)?;
+                if !parameter_names.insert(parameter.name.as_str()) {
+                    return invalid("semantic operation signature has duplicate parameters");
+                }
+                match &parameter.domain {
+                    ArgumentDomain::Integer { minimum, maximum } if minimum > maximum => {
+                        return invalid("semantic integer parameter has an empty domain");
+                    }
+                    ArgumentDomain::Name { choices } => {
+                        if choices.is_empty() || choices.len() > MAX_PLAN_OPS {
+                            return invalid("semantic name parameter has an invalid domain");
+                        }
+                        let mut unique = BTreeSet::new();
+                        for choice in choices {
+                            validate_plan_name(choice)?;
+                            if !unique.insert(choice.as_str()) {
+                                return invalid("semantic name parameter has duplicate choices");
+                            }
+                        }
+                    }
+                    ArgumentDomain::Integer { .. } | ArgumentDomain::Boolean => {}
+                }
+            }
             if operation.allows_streamed_partition && operation.kind != OpKind::Canonicalize {
                 return invalid("only canonicalizers may accept a streamed partition");
             }
@@ -87,6 +133,10 @@ impl AdapterRegistry {
             .enumerate()
             .find(|(_, operation)| operation.name == name)
             .map(|(index, operation)| (index as u16, operation))
+    }
+
+    pub fn canonical_json(&self) -> Result<Vec<u8>, ControlError> {
+        serde_json::to_vec(self).map_err(ControlError::Json)
     }
 }
 
@@ -159,7 +209,10 @@ pub struct CompiledRecipe {
     total_retention: u64,
     total_memory_bytes: u64,
     operations: Box<[CompiledRecipeOp]>,
+    argument_offsets: Box<[u16]>,
+    arguments: Box<[i64]>,
     recipe_canonical: Box<[u8]>,
+    registry_canonical: Box<[u8]>,
 }
 
 impl CompiledRecipe {
@@ -197,6 +250,22 @@ impl CompiledRecipe {
     pub fn operations(&self) -> &[CompiledRecipeOp] {
         &self.operations
     }
+
+    pub(crate) fn operation_argument_range(&self, operation: usize) -> (u16, u16) {
+        let start = self.argument_offsets[operation];
+        let end = self.argument_offsets[operation + 1];
+        (start, end - start)
+    }
+
+    #[must_use]
+    pub fn arguments(&self) -> &[i64] {
+        &self.arguments
+    }
+
+    #[must_use]
+    pub fn registry_canonical(&self) -> &[u8] {
+        &self.registry_canonical
+    }
 }
 
 #[repr(C)]
@@ -233,6 +302,7 @@ pub fn compile_recipe(
 ) -> Result<CompiledRecipe, ControlError> {
     recipe.validate()?;
     let recipe_canonical = recipe.canonical_json()?.into_boxed_slice();
+    let registry_canonical = registry.canonical_json()?.into_boxed_slice();
     if budget.max_total_retention == 0 || budget.max_total_memory_bytes == 0 {
         return invalid("semantic dataflow budget must be positive");
     }
@@ -253,6 +323,9 @@ pub fn compile_recipe(
         },
     );
     let mut operations = Vec::with_capacity(recipe.steps.len());
+    let mut argument_offsets = Vec::with_capacity(recipe.steps.len() + 1);
+    let mut arguments = Vec::new();
+    argument_offsets.push(0);
     let mut total_retention = 0_u64;
     let mut total_memory_bytes = 0_u64;
     for step in &recipe.steps {
@@ -272,6 +345,13 @@ pub fn compile_recipe(
         if step.output_sort() != signature.output_sort {
             return invalid("semantic recipe output sort does not match its signature");
         }
+        encode_arguments(step.arguments(), &signature.parameters, &mut arguments)?;
+        if arguments.len() > MAX_PLAN_OPS {
+            return invalid("semantic recipe exceeds the compiled argument bound");
+        }
+        argument_offsets.push(u16::try_from(arguments.len()).map_err(|_| {
+            ControlError::Invalid("semantic compiled argument offset overflow".into())
+        })?);
         let (retention, memory_bytes) = step.resources();
         if retention > signature.max_retention || memory_bytes > signature.max_memory_bytes {
             return invalid("semantic recipe exceeds an operation signature resource bound");
@@ -357,7 +437,10 @@ pub fn compile_recipe(
         total_retention,
         total_memory_bytes,
         operations: operations.into_boxed_slice(),
+        argument_offsets: argument_offsets.into_boxed_slice(),
+        arguments: arguments.into_boxed_slice(),
         recipe_canonical,
+        registry_canonical,
     })
 }
 
@@ -392,10 +475,16 @@ pub fn compile_fragment_emission(
             .iter()
             .find(|step| step.binding() == binding)
             .ok_or_else(|| ControlError::Invalid("semantic output lineage is incomplete".into()))?;
-        if let RecipeStep::Canonicalize { action, gate, .. } = step {
+        if let RecipeStep::Canonicalize {
+            action,
+            arguments,
+            gate,
+            ..
+        } = step
+        {
             if lineage_actions
-                .insert(action.as_str(), *gate)
-                .is_some_and(|earlier| earlier != *gate)
+                .insert(action.as_str(), (*gate, arguments.as_ref()))
+                .is_some_and(|earlier| earlier != (*gate, arguments.as_ref()))
             {
                 return invalid("semantic output lineage uses conflicting action contracts");
             }
@@ -406,7 +495,9 @@ pub fn compile_fragment_emission(
         return invalid("theorem fragment actions do not match its recipe lineage");
     }
     for action in &fragment.actions {
-        if lineage_actions.get(action.name.as_str()) != Some(&action.gate) {
+        if lineage_actions.get(action.name.as_str())
+            != Some(&(action.gate, action.arguments.as_ref()))
+        {
             return invalid("theorem fragment action contract differs from its recipe lineage");
         }
     }
@@ -466,6 +557,41 @@ fn operation_name(step: &RecipeStep) -> &str {
     }
 }
 
+fn encode_arguments(
+    arguments: &[OperationArgument],
+    parameters: &[ParameterSignature],
+    output: &mut Vec<i64>,
+) -> Result<(), ControlError> {
+    if arguments.len() != parameters.len() {
+        return invalid("semantic operation argument set does not match its signature");
+    }
+    for parameter in parameters {
+        let argument = arguments
+            .iter()
+            .find(|argument| argument.name == parameter.name)
+            .ok_or_else(|| {
+                ControlError::Invalid("semantic operation omits a required argument".into())
+            })?;
+        let encoded = match (&argument.value, &parameter.domain) {
+            (
+                OperationArgumentValue::Integer(value),
+                ArgumentDomain::Integer { minimum, maximum },
+            ) if value >= minimum && value <= maximum => *value,
+            (OperationArgumentValue::Name(value), ArgumentDomain::Name { choices }) => choices
+                .iter()
+                .position(|choice| choice == value)
+                .map(|index| index as i64)
+                .ok_or_else(|| {
+                    ControlError::Invalid("semantic name argument is outside its domain".into())
+                })?,
+            (OperationArgumentValue::Boolean(value), ArgumentDomain::Boolean) => i64::from(*value),
+            _ => return invalid("semantic operation argument has the wrong type or value"),
+        };
+        output.push(encoded);
+    }
+    Ok(())
+}
+
 fn invalid<T>(message: &str) -> Result<T, ControlError> {
     Err(ControlError::Invalid(message.into()))
 }
@@ -480,9 +606,9 @@ recipe affine_caps {
   source split_nine_sets as objects sort nine_set_stream;
   label (g2 == 0) && (g3 == 0);
   provenance "sha256:fixture";
-  match affine_subspace from objects as plane sort feature_row retain 1 memory 4096;
-  reduce overlap_histogram from plane as extrema sort retained_set retain 2106 memory 131072;
-  canonicalize affine_generators from extrema as cap_orbit sort orbit_summary retain 2106 memory 65536 streamed false contract diagnostic verified true;
+  match affine_subspace(rank=2, metric=max_overlap) from objects as plane sort feature_row retain 1 memory 4096;
+  reduce overlap_histogram(weighted=true) from plane as extrema sort retained_set retain 2106 memory 131072;
+  canonicalize affine_generators(count=4) from extrema as cap_orbit sort orbit_summary retain 2106 memory 65536 streamed false contract diagnostic verified true;
   emit cap_orbit;
   verify replay_label;
   verify replay_hankel;
@@ -498,7 +624,7 @@ theorem cap_geometry {
   hypothesis labelled g2 == 0;
   conclusion g3 == 0;
   observable cap_overlap contract diagnostic;
-  action affine_generators contract diagnostic verified true;
+  action affine_generators(count=4) contract diagnostic verified true;
   provenance "sha256:fixture";
   status candidate;
 }
@@ -516,6 +642,21 @@ theorem cap_geometry {
                     kind: OpKind::Match,
                     input_sort: "nine_set_stream".into(),
                     output_sort: "feature_row".into(),
+                    parameters: Box::new([
+                        ParameterSignature {
+                            name: "rank".into(),
+                            domain: ArgumentDomain::Integer {
+                                minimum: 1,
+                                maximum: 3,
+                            },
+                        },
+                        ParameterSignature {
+                            name: "metric".into(),
+                            domain: ArgumentDomain::Name {
+                                choices: Box::new(["max_overlap".into(), "incidence".into()]),
+                            },
+                        },
+                    ]),
                     max_retention: 1,
                     max_memory_bytes: 4096,
                     allows_streamed_partition: false,
@@ -525,6 +666,10 @@ theorem cap_geometry {
                     kind: OpKind::Reduce,
                     input_sort: "feature_row".into(),
                     output_sort: "retained_set".into(),
+                    parameters: Box::new([ParameterSignature {
+                        name: "weighted".into(),
+                        domain: ArgumentDomain::Boolean,
+                    }]),
                     max_retention: 2106,
                     max_memory_bytes: 131072,
                     allows_streamed_partition: false,
@@ -534,6 +679,13 @@ theorem cap_geometry {
                     kind: OpKind::Canonicalize,
                     input_sort: "retained_set".into(),
                     output_sort: "orbit_summary".into(),
+                    parameters: Box::new([ParameterSignature {
+                        name: "count".into(),
+                        domain: ArgumentDomain::Integer {
+                            minimum: 1,
+                            maximum: 16,
+                        },
+                    }]),
                     max_retention: 2106,
                     max_memory_bytes: 65536,
                     allows_streamed_partition: streamed,
@@ -563,6 +715,7 @@ theorem cap_geometry {
         assert_eq!(compiled.operations[2].output_slot, 3);
         assert_eq!(compiled.total_retention, 4213);
         assert_eq!(compiled.total_memory_bytes, 200_704);
+        assert_eq!(compiled.arguments(), &[2, 0, 1, 4]);
         assert!(!compiled.operations[2].uses_streamed_partition());
     }
 
@@ -586,13 +739,31 @@ theorem cap_geometry {
             }
         )
         .is_err());
+
+        for malformed in [
+            TEXT.replace("rank=2", "rank=4"),
+            TEXT.replace("metric=max_overlap", "metric=unknown"),
+            TEXT.replace("weighted=true", "weighted=wrong"),
+            TEXT.replace("count=4", "other=4"),
+        ] {
+            let malformed = parse_semantic_recipe(&malformed).unwrap();
+            assert!(compile_recipe(
+                &malformed,
+                &registry(false),
+                DataflowBudget {
+                    max_total_retention: 5000,
+                    max_total_memory_bytes: 300_000,
+                }
+            )
+            .is_err());
+        }
     }
 
     #[test]
     fn streamed_partition_requires_explicit_recipe_and_signature_gates() {
         let streamed_text = TEXT
             .replace(
-                "reduce overlap_histogram from plane as extrema sort retained_set retain 2106 memory 131072;\n",
+                "reduce overlap_histogram(weighted=true) from plane as extrema sort retained_set retain 2106 memory 131072;\n",
                 "",
             )
             .replace(
@@ -652,6 +823,10 @@ theorem cap_geometry {
         let fragment =
             crate::semantic_plan::theorem::parse_theorem_fragment(&wrong_action).unwrap();
         assert!(compile_fragment_emission(&recipe, &compiled, &fragment).is_err());
+        let wrong_action_argument = FRAGMENT_TEXT.replace("count=4", "count=5");
+        let fragment =
+            crate::semantic_plan::theorem::parse_theorem_fragment(&wrong_action_argument).unwrap();
+        assert!(compile_fragment_emission(&recipe, &compiled, &fragment).is_err());
         let wrong_provenance = FRAGMENT_TEXT.replace("sha256:fixture", "sha256:other");
         let fragment =
             crate::semantic_plan::theorem::parse_theorem_fragment(&wrong_provenance).unwrap();
@@ -677,8 +852,8 @@ theorem cap_geometry {
         let certified = FRAGMENT_TEXT
             .replace("contract diagnostic", "contract exact")
             .replace(
-                "action affine_generators contract exact verified true",
-                "action affine_generators contract transports verified true",
+                "action affine_generators(count=4) contract exact verified true",
+                "action affine_generators(count=4) contract transports verified true",
             )
             .replace(
                 "status candidate;",

@@ -1,6 +1,9 @@
 //! Typed authoring contract for injected theorem fragments.
 
-use super::{CanonicalizationGate, LabelContract};
+use super::{
+    format_operation, CanonicalizationGate, LabelContract, OperationArgument,
+    OperationArgumentValue,
+};
 use ergodis::control::{
     format_plan_expression, format_plan_name, lex_plan_text, parse_plan_expression,
     validate_plan_name, ControlError, ExpressionPlanSpec, PlanExpr, PlanOutput, PlanRole,
@@ -68,6 +71,7 @@ pub struct ObservableDeclaration {
 #[serde(deny_unknown_fields)]
 pub struct ActionDeclaration {
     pub name: String,
+    pub arguments: Box<[OperationArgument]>,
     pub gate: CanonicalizationGate,
 }
 
@@ -155,6 +159,16 @@ impl TheoremFragment {
         let mut action_names = BTreeSet::new();
         for action in &self.actions {
             validate_plan_name(&action.name)?;
+            let mut arguments = BTreeSet::new();
+            for argument in &action.arguments {
+                validate_plan_name(&argument.name)?;
+                if let OperationArgumentValue::Name(value) = &argument.value {
+                    validate_plan_name(value)?;
+                }
+                if !arguments.insert(argument.name.as_str()) {
+                    return invalid("theorem action contains a duplicate argument");
+                }
+            }
             if !action_names.insert(action.name.as_str()) {
                 return invalid("theorem fragment contains a duplicate action");
             }
@@ -255,7 +269,7 @@ pub fn format_theorem_fragment(fragment: &TheoremFragment) -> Result<String, Con
     for action in &fragment.actions {
         text.push_str(&format!(
             "  action {} contract {} verified {};\n",
-            format_plan_name(&action.name)?,
+            format_operation(&action.name, &action.arguments)?,
             label_contract_name(action.gate.label_contract),
             action.gate.action_verified
         ));
@@ -459,7 +473,7 @@ impl<'a> FragmentParser<'a> {
                     observables.push(ObservableDeclaration { name, contract });
                 }
                 "action" => {
-                    let name = self.name()?;
+                    let (name, arguments) = self.operation()?;
                     self.expect_word("contract")?;
                     let label_contract = match self.word()?.as_str() {
                         "preserves" => LabelContract::Preserves,
@@ -471,6 +485,7 @@ impl<'a> FragmentParser<'a> {
                     let action_verified = self.boolean()?;
                     actions.push(ActionDeclaration {
                         name,
+                        arguments,
                         gate: CanonicalizationGate {
                             label_contract,
                             action_verified,
@@ -555,6 +570,54 @@ impl<'a> FragmentParser<'a> {
             })?;
         self.at += 1;
         Ok(token)
+    }
+
+    fn operation(&mut self) -> Result<(String, Box<[OperationArgument]>), ControlError> {
+        let name = self.name()?;
+        if !self.consume(&PlanTextTokenKind::LParen) {
+            return Ok((name, Box::new([])));
+        }
+        let mut arguments = Vec::new();
+        if self.consume(&PlanTextTokenKind::RParen) {
+            return Ok((name, arguments.into_boxed_slice()));
+        }
+        loop {
+            let argument = self.name()?;
+            self.expect(PlanTextTokenKind::Assign)?;
+            arguments.push(OperationArgument {
+                name: argument,
+                value: self.argument_value()?,
+            });
+            if self.consume(&PlanTextTokenKind::RParen) {
+                break;
+            }
+            self.expect(PlanTextTokenKind::Comma)?;
+        }
+        Ok((name, arguments.into_boxed_slice()))
+    }
+
+    fn argument_value(&mut self) -> Result<OperationArgumentValue, ControlError> {
+        let token = self.take()?;
+        match token.kind {
+            PlanTextTokenKind::Number(value) => Ok(OperationArgumentValue::Integer(
+                ergodis::control::parse_plan_i64_literal(&value)?,
+            )),
+            PlanTextTokenKind::Minus => {
+                let magnitude = self.number()?;
+                Ok(OperationArgumentValue::Integer(
+                    ergodis::control::parse_plan_i64_literal(&format!("-{magnitude}"))?,
+                ))
+            }
+            PlanTextTokenKind::Quoted(value) => Ok(OperationArgumentValue::Name(value)),
+            PlanTextTokenKind::Word(value) if value == "true" => {
+                Ok(OperationArgumentValue::Boolean(true))
+            }
+            PlanTextTokenKind::Word(value) if value == "false" => {
+                Ok(OperationArgumentValue::Boolean(false))
+            }
+            PlanTextTokenKind::Word(value) => Ok(OperationArgumentValue::Name(value)),
+            _ => invalid_at(token.offset, "expected operation argument value"),
+        }
     }
 
     fn name(&mut self) -> Result<String, ControlError> {
