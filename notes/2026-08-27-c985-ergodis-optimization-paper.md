@@ -792,6 +792,44 @@ files are disposable and may be deleted at any time.
    is below the complexity threshold. The next high-value target is the
    13--21% projective point decoder, approached through a power-of-two/radix
    theorem specialization rather than repeating the rejected generic inlining.
+
+   Commit `dfdfe64d4` closes that target with a fused binary-field action pack.
+   `BinaryProjectiveLinearActionPack<H, G>` validates the runtime `GF(2^H)`
+   presentation, generator shapes, and invertibility once, then combines
+   shift/mask projective decoding, XOR addition, canonical multiplication-table
+   lookup, and shift/mask ranking in one allocation-free runner. The existing
+   generic pack is unchanged. The 56-byte pack and 16-byte runner have exact
+   layout assertions; malformed fields, singular matrices, wrong workspaces,
+   and out-of-range points fail closed. Exhaustive `PG(2,8)` comparison and the
+   full 419-test all-feature library suite pass, including the worker-thread
+   allocation gates.
+
+   Fifteen rotated public-kernel pairs perform 29.97 million transitions per
+   arm with identical nonzero checksums. Generic/binary is 2.873738x cycles
+   (`t=40.96`), 2.685284x instructions, 3.647666x branches, and 2.863881x
+   task-clock (`t=40.79`). A concrete private `q=64` adapter avoids the generic
+   trait refactor that previously erased the isolated win. Seven complete
+   `q=64,r=5` census pairs preserve byte-identical output: parent/binary is
+   1.247989x cycles (`t=43.21`) and 1.246711x wall (`t=32.49`) at 1T, and
+   1.165339x cycles (`t=10.34`) and 1.134444x wall (`t=9.78`) at 12T.
+   Instructions improve 1.276222x/1.282490x and branches improve
+   1.189113x/1.194608x at 1T/12T. Median RSS moves 10,400 -> 10,820 KiB at 1T
+   and 76,996 -> 77,340 KiB at 12T.
+
+   Merely adding the large monomorph initially perturbed default-worker code
+   generation and produced a statistically adverse q=32 cycle control. Giving
+   the original hot worker a stable non-inlined external identity removes that
+   pathology without marking it cold. The final 15-pair control, with 16 full
+   q=32 solves per arm, is unresolved in cycles and task-clock
+   (`1.016041x`, `t=0.72`; `1.040942x`, `t=0.96`) while instructions improve
+   1.004873x; branch misses rise 13.8% but cause no measured cycle cost. q=8
+   and q=32 results are byte-identical at both 1T and 12T. Raw tables are
+   `c985-binary-projective-action-kernel-ab.tsv`,
+   `c985-binary-projective-action-application-q32-control.tsv`,
+   `c985-binary-projective-action-application-q64-counters.tsv`, and
+   `c985-binary-projective-action-application-q64-wall.tsv`. The next profile
+   should now target the remaining matrix multiply-add and rank-analysis
+   clusters rather than the retired projective decoder.
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
