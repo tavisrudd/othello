@@ -27,7 +27,9 @@ pub use client::PlanArena;
 use evolution::{run_evolution, EvolutionBounds, EvolutionProgress};
 use synthesis::learn_decision_tree;
 pub use text::{
-    format_expression_plan, parse_and_lower_plan, parse_expression_plan, MAX_PLAN_TEXT_BYTES,
+    format_expression_plan, format_plan_expression, format_plan_name, lex_plan_text,
+    parse_and_lower_plan, parse_expression_plan, parse_plan_expression, parse_plan_u64_literal,
+    validate_plan_name, PlanTextToken, PlanTextTokenKind, MAX_PLAN_TEXT_BYTES,
     MAX_PLAN_TEXT_TOKENS,
 };
 pub use vm::{

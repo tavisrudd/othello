@@ -11,7 +11,7 @@ const MAX_PLAN_TEXT_DEPTH: usize = 32;
 const MAX_NAME_BYTES: usize = 256;
 
 #[derive(Clone, Debug, PartialEq, Eq)]
-enum Kind {
+pub enum PlanTextTokenKind {
     Word(String),
     Quoted(String),
     Number(String),
@@ -36,17 +36,64 @@ enum Kind {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
-struct Token {
-    kind: Kind,
-    offset: usize,
+pub struct PlanTextToken {
+    pub kind: PlanTextTokenKind,
+    pub offset: usize,
 }
+
+type Kind = PlanTextTokenKind;
+type Token = PlanTextToken;
 
 /// Parse a bounded textual plan into the same typed AST used by JSON plans.
 pub fn parse_expression_plan(text: &str) -> Result<ExpressionPlanSpec, ControlError> {
+    Parser::new(lex_plan_text(text)?).parse_plan()
+}
+
+/// Tokenize a bounded plan-language document.
+///
+/// Recipe and theorem front ends use this same lexer so identifiers, quoted
+/// names, integers, comments, operators, and resource limits cannot drift
+/// from scalar steering plans.
+pub fn lex_plan_text(text: &str) -> Result<Vec<PlanTextToken>, ControlError> {
     if text.len() > MAX_PLAN_TEXT_BYTES {
         return invalid("text plan exceeds byte limit");
     }
-    Parser::new(lex(text)?).parse_plan()
+    lex(text)
+}
+
+/// Parse one bounded scalar expression using the plan-language grammar.
+pub fn parse_plan_expression(text: &str) -> Result<PlanExpr, ControlError> {
+    let mut parser = Parser::new(lex_plan_text(text)?);
+    let expr = parser.expr(0, 1)?;
+    if parser.at != parser.tokens.len() {
+        return parser.error("trailing tokens after expression");
+    }
+    Ok(expr)
+}
+
+/// Canonically format one scalar expression.
+pub fn format_plan_expression(expr: &PlanExpr) -> Result<String, ControlError> {
+    let mut text = String::new();
+    format_expr(expr, &mut text, 1)?;
+    if text.len() > MAX_PLAN_TEXT_BYTES {
+        return invalid("formatted expression exceeds byte limit");
+    }
+    Ok(text)
+}
+
+/// Apply the common bounded-name contract used by all plan documents.
+pub fn validate_plan_name(name: &str) -> Result<(), ControlError> {
+    validate_name(name)
+}
+
+/// Canonically format a plan-language name, quoting it when required.
+pub fn format_plan_name(name: &str) -> Result<String, ControlError> {
+    format_name(name)
+}
+
+/// Parse the unsigned integer syntax shared by masks and bounded resources.
+pub fn parse_plan_u64_literal(number: &str) -> Result<u64, ControlError> {
+    parse_u64(number)
 }
 
 /// Parse and lower a textual plan to the existing VM bytecode schema.
@@ -662,5 +709,23 @@ plan "rigid-order" {
             serde_json::to_value(parsed).unwrap(),
             serde_json::to_value(parse_expression_plan(&formatted).unwrap()).unwrap()
         );
+    }
+
+    #[test]
+    fn shared_lexer_and_expression_fragments_preserve_scalar_semantics() {
+        let source = r#"select((rigid == 1) && !(debt > 3), "field-name", -7)"#;
+        let tokens = lex_plan_text(source).unwrap();
+        assert!(tokens
+            .iter()
+            .any(|token| token.kind == PlanTextTokenKind::And));
+        let parsed = parse_plan_expression(source).unwrap();
+        let formatted = format_plan_expression(&parsed).unwrap();
+        let reparsed = parse_plan_expression(&formatted).unwrap();
+        assert_eq!(
+            serde_json::to_value(parsed).unwrap(),
+            serde_json::to_value(reparsed).unwrap()
+        );
+        assert_eq!(format_plan_name("field-name").unwrap(), r#""field-name""#);
+        assert_eq!(parse_plan_u64_literal("0xffff_0000").unwrap(), 0xffff_0000);
     }
 }
