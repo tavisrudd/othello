@@ -6,7 +6,7 @@ use std::io::{BufWriter, Read, Write};
 use std::path::{Path, PathBuf};
 
 const MAX_RECORD_BYTES: u64 = 4 * 1024 * 1024;
-const EXPECTED_SCHEMA: &str = "ergodis-css-distance-native-v5";
+const EXPECTED_SCHEMA: &str = "ergodis-css-distance-native-v6";
 
 #[derive(Debug, Parser)]
 #[command(about = "Verify complete, compatible CSS distance shard evidence")]
@@ -55,9 +55,21 @@ struct ShardRecord {
     mode: String,
     result_scope: String,
     search_shard: Option<Shard>,
+    shard_frontiers: Option<Vec<ShardFrontierRecord>>,
     search_seconds: Vec<f64>,
     round_stats: Vec<RoundStats>,
     result: ShardResult,
+}
+
+#[derive(Clone, Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct ShardFrontierRecord {
+    anchor: u16,
+    frontier_branches: u64,
+    partition_blake3: String,
+    shard_branches: u64,
+    shard_sum_le: String,
+    shard_xor_le: String,
 }
 
 #[derive(Debug, Serialize)]
@@ -65,6 +77,22 @@ struct ManifestShard {
     index: u32,
     evidence_blake3: String,
     round_candidates: Vec<u64>,
+    frontier_buckets: Vec<ManifestFrontierBucket>,
+}
+
+#[derive(Debug, Serialize)]
+struct ManifestFrontierBucket {
+    anchor: u16,
+    branches: u64,
+    sum_le: String,
+    xor_le: String,
+}
+
+#[derive(Debug, Serialize)]
+struct ManifestFrontier {
+    anchor: u16,
+    branches: u64,
+    partition_blake3: String,
 }
 
 #[derive(Debug, Serialize)]
@@ -82,6 +110,7 @@ struct CoverageManifest {
     aggregate_distance: Option<u16>,
     aggregate_witness: Vec<u16>,
     total_candidates: u64,
+    frontiers: Vec<ManifestFrontier>,
     shards: Vec<ManifestShard>,
 }
 
@@ -116,6 +145,63 @@ fn valid_digest(digest: &str) -> bool {
             .all(|byte| byte.is_ascii_digit() || (b'a'..=b'f').contains(&byte))
 }
 
+fn decode_hex_32(encoded: &str) -> Result<[u8; 32]> {
+    if !valid_digest(encoded) {
+        bail!("invalid 256-bit lowercase hexadecimal value");
+    }
+    let mut bytes = [0_u8; 32];
+    for (output, pair) in bytes.iter_mut().zip(encoded.as_bytes().chunks_exact(2)) {
+        let digit = |byte: u8| match byte {
+            b'0'..=b'9' => byte - b'0',
+            b'a'..=b'f' => byte - b'a' + 10,
+            _ => unreachable!("valid_digest checked lowercase hexadecimal"),
+        };
+        *output = digit(pair[0]) << 4 | digit(pair[1]);
+    }
+    Ok(bytes)
+}
+
+fn decode_lanes(encoded: &str) -> Result<[u64; 4]> {
+    let bytes = decode_hex_32(encoded)?;
+    let mut lanes = [0_u64; 4];
+    for (lane, chunk) in lanes.iter_mut().zip(bytes.chunks_exact(8)) {
+        *lane = u64::from_le_bytes(chunk.try_into().expect("eight-byte lane"));
+    }
+    Ok(lanes)
+}
+
+fn reconstruct_frontier_digest(
+    anchor: u16,
+    shard_count: u32,
+    buckets: &[ShardFrontierRecord],
+) -> Result<([u8; 32], u64)> {
+    if buckets.len() != shard_count as usize {
+        bail!("frontier bucket count does not match shard count");
+    }
+    let mut partition = blake3::Hasher::new();
+    partition.update(b"ergodis-css-shard-frontier-v1\0");
+    partition.update(&anchor.to_le_bytes());
+    partition.update(&shard_count.to_le_bytes());
+    let mut total = 0_u64;
+    for (index, bucket) in buckets.iter().enumerate() {
+        if bucket.anchor != anchor {
+            bail!("frontier bucket anchor mismatch");
+        }
+        total = total
+            .checked_add(bucket.shard_branches)
+            .context("frontier branch count overflow")?;
+        partition.update(&(index as u32).to_le_bytes());
+        partition.update(&bucket.shard_branches.to_le_bytes());
+        for word in decode_lanes(&bucket.shard_sum_le)?
+            .into_iter()
+            .chain(decode_lanes(&bucket.shard_xor_le)?)
+        {
+            partition.update(&word.to_le_bytes());
+        }
+    }
+    Ok((*partition.finalize().as_bytes(), total))
+}
+
 fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
     let Some(first) = records.first() else {
         bail!("at least one shard record is required");
@@ -126,6 +212,33 @@ fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
         .context("record is missing search_shard")?;
     if first_shard.count == 0 || first_shard.count > 4096 {
         bail!("invalid shard count {}", first_shard.count);
+    }
+    let first_frontiers = first_record
+        .shard_frontiers
+        .as_ref()
+        .context("record is missing shard_frontiers")?;
+    if first_frontiers.is_empty() {
+        bail!("record has no anchor frontier commitments");
+    }
+    let mut frontier_identities = Vec::with_capacity(first_frontiers.len());
+    for frontier in first_frontiers {
+        if frontier_identities
+            .iter()
+            .any(|(anchor, _, _): &(u16, u64, String)| *anchor == frontier.anchor)
+        {
+            bail!(
+                "duplicate anchor {} in frontier commitments",
+                frontier.anchor
+            );
+        }
+        decode_hex_32(&frontier.partition_blake3)?;
+        decode_lanes(&frontier.shard_sum_le)?;
+        decode_lanes(&frontier.shard_xor_le)?;
+        frontier_identities.push((
+            frontier.anchor,
+            frontier.frontier_branches,
+            frontier.partition_blake3.clone(),
+        ));
     }
     let artifact_payload_blake3 = first_record.artifact_payload_blake3.clone();
     let input_blake3 = first_record.input_blake3.clone();
@@ -156,6 +269,9 @@ fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
 
     let mut by_index = Vec::with_capacity(records.len());
     let mut seen = vec![false; first_shard.count as usize];
+    let mut frontier_buckets = (0..frontier_identities.len())
+        .map(|_| vec![None; first_shard.count as usize])
+        .collect::<Vec<Vec<Option<ShardFrontierRecord>>>>();
     let mut total_candidates = 0_u64;
     let mut aggregate: Option<(u16, Vec<u16>)> = None;
     for loaded in records {
@@ -165,7 +281,7 @@ fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
             || record.mode != "bounded-search-shard"
             || record.result_scope != "partial-shard"
         {
-            bail!("record is not a completed v5 bounded-search shard");
+            bail!("record is not a completed v6 bounded-search shard");
         }
         let shard = record
             .search_shard
@@ -184,6 +300,28 @@ fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
             || record.result.searched_maximum_weight != searched_maximum_weight
         {
             bail!("record belongs to a different search identity");
+        }
+        let frontiers = record
+            .shard_frontiers
+            .as_ref()
+            .context("record is missing shard_frontiers")?;
+        if frontiers.len() != frontier_identities.len() {
+            bail!("record has a different anchor frontier count");
+        }
+        for (position, (frontier, identity)) in
+            frontiers.iter().zip(frontier_identities.iter()).enumerate()
+        {
+            if (
+                frontier.anchor,
+                frontier.frontier_branches,
+                &frontier.partition_blake3,
+            ) != (identity.0, identity.1, &identity.2)
+            {
+                bail!("record belongs to a different anchor frontier partition");
+            }
+            decode_lanes(&frontier.shard_sum_le)?;
+            decode_lanes(&frontier.shard_xor_le)?;
+            frontier_buckets[position][shard.index as usize] = Some(frontier.clone());
         }
         if record.search_seconds.is_empty()
             || record.search_seconds.len() != record.round_stats.len()
@@ -233,17 +371,47 @@ fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
             index: shard.index,
             evidence_blake3: loaded.evidence_blake3,
             round_candidates,
+            frontier_buckets: frontiers
+                .iter()
+                .map(|frontier| ManifestFrontierBucket {
+                    anchor: frontier.anchor,
+                    branches: frontier.shard_branches,
+                    sum_le: frontier.shard_sum_le.clone(),
+                    xor_le: frontier.shard_xor_le.clone(),
+                })
+                .collect(),
         });
     }
     if let Some(missing) = seen.iter().position(|present| !present) {
         bail!("missing shard index {missing}");
     }
     by_index.sort_unstable_by_key(|entry| entry.index);
+    let mut manifest_frontiers = Vec::with_capacity(frontier_identities.len());
+    for ((anchor, expected_branches, expected_digest), buckets) in
+        frontier_identities.into_iter().zip(frontier_buckets)
+    {
+        let buckets = buckets
+            .into_iter()
+            .collect::<Option<Vec<_>>>()
+            .context("missing frontier bucket")?;
+        let (reconstructed_digest, reconstructed_branches) =
+            reconstruct_frontier_digest(anchor, first_shard.count, &buckets)?;
+        if reconstructed_branches != expected_branches
+            || reconstructed_digest != decode_hex_32(&expected_digest)?
+        {
+            bail!("frontier buckets do not reconstruct their partition commitment");
+        }
+        manifest_frontiers.push(ManifestFrontier {
+            anchor,
+            branches: expected_branches,
+            partition_blake3: expected_digest,
+        });
+    }
     let (aggregate_distance, aggregate_witness) = aggregate
         .map(|(distance, witness)| (Some(distance), witness))
         .unwrap_or((None, Vec::new()));
     Ok(CoverageManifest {
-        schema: "ergodis-css-distance-shard-coverage-v2",
+        schema: "ergodis-css-distance-shard-coverage-v3",
         verdict: "complete-compatible-cover",
         input_blake3,
         executable_blake3,
@@ -256,6 +424,7 @@ fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
         aggregate_distance,
         aggregate_witness,
         total_candidates,
+        frontiers: manifest_frontiers,
         shards: by_index,
     })
 }
@@ -292,6 +461,38 @@ fn main() -> Result<()> {
 mod tests {
     use super::*;
 
+    fn encode_hex(bytes: [u8; 32]) -> String {
+        bytes.iter().map(|byte| format!("{byte:02x}")).collect()
+    }
+
+    fn encode_lanes(lanes: [u64; 4]) -> String {
+        let mut bytes = [0_u8; 32];
+        for (chunk, lane) in bytes.chunks_exact_mut(8).zip(lanes) {
+            chunk.copy_from_slice(&lane.to_le_bytes());
+        }
+        encode_hex(bytes)
+    }
+
+    fn frontier(index: u32, count: u32) -> ShardFrontierRecord {
+        let mut buckets = (0..count)
+            .map(|bucket| ShardFrontierRecord {
+                anchor: 7,
+                frontier_branches: u64::from(count) * 3,
+                partition_blake3: String::new(),
+                shard_branches: 3,
+                shard_sum_le: encode_lanes([u64::from(bucket) + 1, 2, 3, 4]),
+                shard_xor_le: encode_lanes([5, 6, 7, u64::from(bucket) + 8]),
+            })
+            .collect::<Vec<_>>();
+        let (digest, branches) = reconstruct_frontier_digest(7, count, &buckets).unwrap();
+        let digest = encode_hex(digest);
+        for bucket in &mut buckets {
+            bucket.frontier_branches = branches;
+            bucket.partition_blake3.clone_from(&digest);
+        }
+        buckets[index as usize].clone()
+    }
+
     fn loaded(index: u32, count: u32) -> LoadedRecord {
         LoadedRecord {
             evidence_blake3: format!("{:064x}", index + 1),
@@ -306,6 +507,7 @@ mod tests {
                 mode: "bounded-search-shard".to_owned(),
                 result_scope: "partial-shard".to_owned(),
                 search_shard: Some(Shard { index, count }),
+                shard_frontiers: Some(vec![frontier(index, count)]),
                 search_seconds: vec![1.0],
                 round_stats: vec![RoundStats {
                     candidates: u64::from(index) + 10,
@@ -329,6 +531,9 @@ mod tests {
         assert_eq!(manifest.aggregate_distance, Some(3));
         assert_eq!(manifest.aggregate_witness, vec![0, 2, 4]);
         assert_eq!(manifest.total_candidates, 33);
+        assert_eq!(manifest.frontiers.len(), 1);
+        assert_eq!(manifest.frontiers[0].anchor, 7);
+        assert_eq!(manifest.frontiers[0].branches, 9);
         assert_eq!(
             manifest
                 .shards
@@ -383,5 +588,20 @@ mod tests {
         skipped_two.record.maximum_weight = 9;
         skipped_two.record.result.searched_maximum_weight = 7;
         assert!(verify(vec![skipped_two]).is_err());
+    }
+
+    #[test]
+    fn mutated_or_cross_anchor_frontier_buckets_fail_closed() {
+        let mut bad_bucket = loaded(1, 2);
+        bad_bucket.record.shard_frontiers.as_mut().unwrap()[0].shard_sum_le = "f".repeat(64);
+        assert!(verify(vec![loaded(0, 2), bad_bucket]).is_err());
+
+        let mut bad_partition = loaded(1, 2);
+        bad_partition.record.shard_frontiers.as_mut().unwrap()[0].partition_blake3 = "a".repeat(64);
+        assert!(verify(vec![loaded(0, 2), bad_partition]).is_err());
+
+        let mut wrong_anchor = loaded(1, 2);
+        wrong_anchor.record.shard_frontiers.as_mut().unwrap()[0].anchor = 8;
+        assert!(verify(vec![loaded(0, 2), wrong_anchor]).is_err());
     }
 }

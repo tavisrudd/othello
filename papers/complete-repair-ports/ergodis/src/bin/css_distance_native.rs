@@ -94,9 +94,37 @@ struct RunRecord<'a> {
     pulse_interval: u64,
     result_scope: &'static str,
     search_shard: Option<CssSearchShard>,
+    shard_frontiers: Option<&'a [ShardFrontierRecord]>,
     search_seconds: &'a [f64],
     round_stats: &'a [ergodis::ConnectedSearchStats],
     result: &'a ergodis::BoundedCssDistanceResult,
+}
+
+#[derive(Debug, Serialize)]
+struct ShardFrontierRecord {
+    anchor: u16,
+    frontier_branches: u64,
+    partition_blake3: String,
+    shard_branches: u64,
+    shard_sum_le: String,
+    shard_xor_le: String,
+}
+
+fn hex_bytes(bytes: &[u8]) -> String {
+    let mut encoded = String::with_capacity(bytes.len() * 2);
+    for byte in bytes {
+        write!(&mut encoded, "{byte:02x}").expect("writing to a String cannot fail");
+    }
+    encoded
+}
+
+#[cfg(feature = "parallel")]
+fn hex_lanes(lanes: [u64; 4]) -> String {
+    let mut bytes = [0_u8; 32];
+    for (chunk, lane) in bytes.chunks_exact_mut(8).zip(lanes) {
+        chunk.copy_from_slice(&lane.to_le_bytes());
+    }
+    hex_bytes(&bytes)
 }
 
 fn blake3_file(path: &Path) -> Result<String> {
@@ -447,13 +475,50 @@ fn main() -> Result<()> {
         #[cfg(feature = "large-css")]
         Backend::Colossal(compiled) => compiled.artifact_payload_blake3(),
     }
-    .map(|digest| {
-        let mut encoded = String::with_capacity(64);
-        for byte in digest {
-            write!(&mut encoded, "{byte:02x}").expect("writing to a String cannot fail");
-        }
-        encoded
-    });
+    .map(|digest| hex_bytes(&digest));
+    #[cfg(feature = "parallel")]
+    let shard_frontiers = if let Some(shard) = search_shard {
+        let commitments = match &compiled {
+            Backend::Compact(compiled) => {
+                compiled.shard_frontier_commitments(&problem.anchors, maximum_weight, shard)?
+            }
+            Backend::Wide(compiled) => {
+                compiled.shard_frontier_commitments(&problem.anchors, maximum_weight, shard)?
+            }
+            Backend::ExtraWide(compiled) => {
+                compiled.shard_frontier_commitments(&problem.anchors, maximum_weight, shard)?
+            }
+            #[cfg(feature = "large-css")]
+            Backend::Large(compiled) => {
+                compiled.shard_frontier_commitments(&problem.anchors, maximum_weight, shard)?
+            }
+            #[cfg(feature = "large-css")]
+            Backend::Huge(compiled) => {
+                compiled.shard_frontier_commitments(&problem.anchors, maximum_weight, shard)?
+            }
+            #[cfg(feature = "large-css")]
+            Backend::Colossal(compiled) => {
+                compiled.shard_frontier_commitments(&problem.anchors, maximum_weight, shard)?
+            }
+        };
+        Some(
+            commitments
+                .iter()
+                .map(|commitment| ShardFrontierRecord {
+                    anchor: commitment.anchor(),
+                    frontier_branches: commitment.frontier_branches(),
+                    partition_blake3: hex_bytes(&commitment.partition_blake3()),
+                    shard_branches: commitment.shard_branches(),
+                    shard_sum_le: hex_lanes(commitment.shard_sum()),
+                    shard_xor_le: hex_lanes(commitment.shard_xor()),
+                })
+                .collect::<Vec<_>>(),
+        )
+    } else {
+        None
+    };
+    #[cfg(not(feature = "parallel"))]
+    let shard_frontiers: Option<Vec<ShardFrontierRecord>> = None;
     if args.rounds == 0 {
         bail!("round count must be positive");
     }
@@ -749,7 +814,7 @@ fn main() -> Result<()> {
     }
     let result = result.expect("positive round count checked above");
     let record = RunRecord {
-        schema: "ergodis-css-distance-native-v5",
+        schema: "ergodis-css-distance-native-v6",
         completion_status: "complete",
         input_blake3: shard_fingerprints.as_ref().map(|(input, _)| input.as_str()),
         executable_blake3: shard_fingerprints
@@ -791,6 +856,7 @@ fn main() -> Result<()> {
             "global"
         },
         search_shard,
+        shard_frontiers: shard_frontiers.as_deref(),
         search_seconds: &search_seconds,
         round_stats: &round_stats,
         result: &result,

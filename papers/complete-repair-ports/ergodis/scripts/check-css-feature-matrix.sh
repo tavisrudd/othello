@@ -19,3 +19,5 @@ done
 
 "$cargo_cmd" test --lib --no-default-features --features large-css,parallel \
   deterministic_search_shards_cover_compact_and_wide_searches -- --nocapture
+"$cargo_cmd" test --lib --no-default-features --features large-css,parallel \
+  cold_frontier_commitments_reconstruct_compact_and_wide_partitions -- --nocapture

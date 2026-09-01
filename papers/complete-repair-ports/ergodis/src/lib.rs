@@ -126,7 +126,7 @@ pub use css_distance::{
     verify_css_anchor_transversal, BoundedCssDistanceResult, CompiledCssDistance,
     CompiledExtraWideCssDistance, CompiledWideCssDistance, ConnectedSearchStats,
     CssAnchorOrbitCertificate, CssAnchorOrbitError, CssDistanceArtifactError, CssDistanceError,
-    CssSearchShard,
+    CssSearchShard, CssShardFrontierCommitment,
 };
 #[cfg(feature = "large-css")]
 pub use css_distance::{

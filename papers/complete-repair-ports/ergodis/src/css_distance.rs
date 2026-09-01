@@ -2206,19 +2206,15 @@ where
     PackedSyndrome<CHECK_WORDS>: WideSyndrome,
 {
     #[cfg(feature = "parallel")]
-    fn search_syndrome_anchor_parallel(
+    #[inline(always)]
+    fn build_syndrome_anchor_frontier<const RETAIN_STATS: bool>(
         &self,
         anchor: u16,
         searched_maximum_weight: u16,
         initial_bound: u16,
-        pulse_interval: u64,
-        shard: Option<CssSearchShard>,
-    ) -> CachePaddedWideBranchResult<SUPPORT_WORDS>
-    where
-        Self: WidePartitionKernel<SUPPORT_WORDS, CHECK_WORDS>,
-    {
-        use rayon::prelude::*;
-
+        target_branches: usize,
+        sharded: bool,
+    ) -> WideAnchorFrontier<SUPPORT_WORDS, CHECK_WORDS> {
         let root = usize::from(anchor);
         let root_support = PackedSupport::<SUPPORT_WORDS>::singleton(root);
         let mut branches = vec![WideRootBranch {
@@ -2228,19 +2224,11 @@ where
             forbidden: PackedSupport::<SUPPORT_WORDS>::default(),
             weight: 1,
         }];
-        let target_branches = shard.map_or_else(
-            || rayon::current_num_threads().saturating_mul(4),
-            |shard| usize::try_from(shard.count()).unwrap().saturating_mul(16),
-        );
-        let mut prefix_stats = ConnectedSearchStats::default();
-        let mut prefix_best_weight = searched_maximum_weight.saturating_add(1);
-        let mut prefix_best_support = PackedSupport::<SUPPORT_WORDS>::default();
-        // A positional shard is sound only when every invocation partitions
-        // the same prefix frontier.  A shard-local incumbent may prune its
-        // assigned deep branches, but must not change or renumber that shared
-        // frontier across anchors.
+        let mut stats = ConnectedSearchStats::default();
+        let mut best_weight = searched_maximum_weight.saturating_add(1);
+        let mut best_support = PackedSupport::<SUPPORT_WORDS>::default();
         let mut active_bound =
-            wide_prefix_initial_bound(searched_maximum_weight, initial_bound, shard.is_some());
+            wide_prefix_initial_bound(searched_maximum_weight, initial_bound, sharded);
         while branches.len() < target_branches {
             let mut next = Vec::with_capacity(branches.len().saturating_mul(5));
             for branch in branches {
@@ -2257,16 +2245,24 @@ where
                     child_syndrome.toggle(self.columns[added].syndrome);
                     let child_logical = branch.logical ^ self.columns[added].logical;
                     let child_weight = branch.weight + 1;
-                    prefix_stats.candidates += 1;
-                    prefix_stats.connected_supports += 1;
-                    prefix_stats.maximum_depth = prefix_stats.maximum_depth.max(child_weight);
+                    if RETAIN_STATS {
+                        stats.candidates += 1;
+                        stats.connected_supports += 1;
+                        stats.maximum_depth = stats.maximum_depth.max(child_weight);
+                    }
                     if child_syndrome.is_zero() {
-                        prefix_stats.kernel_supports += 1;
+                        if RETAIN_STATS {
+                            stats.kernel_supports += 1;
+                        }
                         if self.logical_is_nonzero(child_support, child_logical) {
-                            prefix_stats.nontrivial_supports += 1;
-                            if child_weight < prefix_best_weight {
-                                prefix_best_weight = child_weight;
-                                prefix_best_support = child_support;
+                            if RETAIN_STATS {
+                                stats.nontrivial_supports += 1;
+                            }
+                            if child_weight < best_weight {
+                                best_weight = child_weight;
+                                if RETAIN_STATS {
+                                    best_support = child_support;
+                                }
                                 active_bound = active_bound.min(child_weight);
                             }
                         }
@@ -2276,7 +2272,9 @@ where
                     if child_weight >= searched_maximum_weight
                         || self.completion_lower_bound_exceeds(child_syndrome, improvement_budget)
                     {
-                        prefix_stats.syndrome_bound_prunes += 1;
+                        if RETAIN_STATS {
+                            stats.syndrome_bound_prunes += 1;
+                        }
                         continue;
                     }
                     let four_completion_reject =
@@ -2285,8 +2283,10 @@ where
                         && !self.has_short_completion(child_syndrome, improvement_budget))
                         || four_completion_reject
                     {
-                        prefix_stats.syndrome_bound_prunes += 1;
-                        prefix_stats.four_completion_prunes += u64::from(four_completion_reject);
+                        if RETAIN_STATS {
+                            stats.syndrome_bound_prunes += 1;
+                            stats.four_completion_prunes += u64::from(four_completion_reject);
+                        }
                         continue;
                     }
                     next.push(WideRootBranch {
@@ -2304,6 +2304,47 @@ where
             }
             branches = next;
         }
+        WideAnchorFrontier {
+            branches,
+            best_weight,
+            best_support,
+            stats,
+        }
+    }
+
+    #[cfg(feature = "parallel")]
+    fn search_syndrome_anchor_parallel(
+        &self,
+        anchor: u16,
+        searched_maximum_weight: u16,
+        initial_bound: u16,
+        pulse_interval: u64,
+        shard: Option<CssSearchShard>,
+    ) -> CachePaddedWideBranchResult<SUPPORT_WORDS>
+    where
+        Self: WidePartitionKernel<SUPPORT_WORDS, CHECK_WORDS>,
+    {
+        use rayon::prelude::*;
+
+        let target_branches = shard.map_or_else(
+            || rayon::current_num_threads().saturating_mul(4),
+            |shard| usize::try_from(shard.count()).unwrap().saturating_mul(16),
+        );
+        // A positional shard is sound only when every invocation partitions
+        // the same prefix frontier.  A shard-local incumbent may prune its
+        // assigned deep branches, but must not change or renumber that shared
+        // frontier across anchors.
+        let frontier = self.build_syndrome_anchor_frontier::<true>(
+            anchor,
+            searched_maximum_weight,
+            initial_bound,
+            target_branches,
+            shard.is_some(),
+        );
+        let mut branches = frontier.branches;
+        let prefix_best_weight = frontier.best_weight;
+        let prefix_best_support = frontier.best_support;
+        let prefix_stats = frontier.stats;
         if let Some(shard) = shard {
             let count = usize::try_from(shard.count()).unwrap();
             let index = usize::try_from(shard.index()).unwrap();
@@ -2728,6 +2769,47 @@ where
             searched_maximum_weight,
             stats,
         })
+    }
+
+    /// Recompute the deterministic cold prefix partition used by sharded
+    /// syndrome search and return one composable commitment per anchor.
+    #[cfg(feature = "parallel")]
+    pub fn shard_frontier_commitments(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+        shard: CssSearchShard,
+    ) -> Result<Box<[CssShardFrontierCommitment]>, CssDistanceError> {
+        if maximum_weight == 0 || usize::from(maximum_weight) > self.coordinate_count() {
+            return Err(CssDistanceError::InvalidMaximumWeight);
+        }
+        for &anchor in anchors {
+            if usize::from(anchor) >= self.coordinate_count() {
+                return Err(CssDistanceError::AnchorOutOfRange { anchor });
+            }
+        }
+        let searched_maximum_weight = if self.kernel_weights_even && maximum_weight & 1 == 1 {
+            maximum_weight - 1
+        } else {
+            maximum_weight
+        };
+        let target_branches = (shard.count() as usize).saturating_mul(16);
+        let mut commitments = Vec::with_capacity(anchors.len());
+        for &anchor in anchors {
+            let frontier = self.build_syndrome_anchor_frontier::<false>(
+                anchor,
+                searched_maximum_weight,
+                searched_maximum_weight.saturating_add(1),
+                target_branches,
+                true,
+            );
+            let mut buckets = vec![FrontierAccumulator::default(); shard.count() as usize];
+            for (ordinal, branch) in frontier.branches.iter().enumerate() {
+                absorb_wide_frontier(&mut buckets, ordinal, branch);
+            }
+            commitments.push(finish_frontier_commitment(anchor, shard, &buckets));
+        }
+        Ok(commitments.into_boxed_slice())
     }
 
     #[inline]
@@ -3174,6 +3256,100 @@ impl CssSearchShard {
     }
 }
 
+/// Cold-path commitment to one anchor's deterministic shard frontier.
+///
+/// The selected shard accumulator is composable: a verifier can collect every
+/// shard index, reconstruct `partition_blake3`, and thereby establish that the
+/// records name one common complete prefix partition. This is evidence
+/// metadata; it is never consulted by the solve hot loop.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct CssShardFrontierCommitment {
+    anchor: u16,
+    frontier_branches: u64,
+    partition_blake3: [u8; 32],
+    shard_branches: u64,
+    shard_sum: [u64; 4],
+    shard_xor: [u64; 4],
+}
+
+impl CssShardFrontierCommitment {
+    pub const fn anchor(&self) -> u16 {
+        self.anchor
+    }
+
+    pub const fn frontier_branches(&self) -> u64 {
+        self.frontier_branches
+    }
+
+    pub const fn partition_blake3(&self) -> [u8; 32] {
+        self.partition_blake3
+    }
+
+    pub const fn shard_branches(&self) -> u64 {
+        self.shard_branches
+    }
+
+    pub const fn shard_sum(&self) -> [u64; 4] {
+        self.shard_sum
+    }
+
+    pub const fn shard_xor(&self) -> [u64; 4] {
+        self.shard_xor
+    }
+}
+
+#[cfg(feature = "parallel")]
+#[derive(Clone, Copy, Default)]
+struct FrontierAccumulator {
+    count: u64,
+    sum: [u64; 4],
+    xor: [u64; 4],
+}
+
+#[cfg(feature = "parallel")]
+impl FrontierAccumulator {
+    fn absorb(&mut self, digest: [u8; 32]) {
+        self.count += 1;
+        for (lane, chunk) in digest.chunks_exact(8).enumerate() {
+            let word = u64::from_le_bytes(chunk.try_into().expect("eight-byte digest lane"));
+            self.sum[lane] = self.sum[lane].wrapping_add(word);
+            self.xor[lane] ^= word;
+        }
+    }
+}
+
+#[cfg(feature = "parallel")]
+fn finish_frontier_commitment(
+    anchor: u16,
+    shard: CssSearchShard,
+    buckets: &[FrontierAccumulator],
+) -> CssShardFrontierCommitment {
+    let mut partition = blake3::Hasher::new();
+    partition.update(b"ergodis-css-shard-frontier-v1\0");
+    partition.update(&anchor.to_le_bytes());
+    partition.update(&shard.count().to_le_bytes());
+    let mut frontier_branches = 0_u64;
+    for (index, bucket) in buckets.iter().enumerate() {
+        frontier_branches = frontier_branches
+            .checked_add(bucket.count)
+            .expect("frontier branch count fits u64");
+        partition.update(&(index as u32).to_le_bytes());
+        partition.update(&bucket.count.to_le_bytes());
+        for word in bucket.sum.iter().chain(bucket.xor.iter()) {
+            partition.update(&word.to_le_bytes());
+        }
+    }
+    let selected = buckets[shard.index() as usize];
+    CssShardFrontierCommitment {
+        anchor,
+        frontier_branches,
+        partition_blake3: *partition.finalize().as_bytes(),
+        shard_branches: selected.count,
+        shard_sum: selected.sum,
+        shard_xor: selected.xor,
+    }
+}
+
 #[cfg(feature = "parallel")]
 #[repr(C)]
 #[derive(Clone, Copy)]
@@ -3453,6 +3629,48 @@ struct WideRootBranch<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize> {
 }
 
 #[cfg(feature = "parallel")]
+fn absorb_compact_frontier(
+    buckets: &mut [FrontierAccumulator],
+    ordinal: usize,
+    branch: &RootBranch,
+) {
+    let mut hasher = blake3::Hasher::new();
+    hasher.update(b"ergodis-css-compact-root-branch-v1\0");
+    hasher.update(&(ordinal as u64).to_le_bytes());
+    hasher.update(&branch.root.to_le_bytes());
+    hasher.update(&branch.added.to_le_bytes());
+    for word in branch.remaining_root_candidates.words {
+        hasher.update(&word.to_le_bytes());
+    }
+    buckets[ordinal % buckets.len()].absorb(*hasher.finalize().as_bytes());
+}
+
+#[cfg(feature = "parallel")]
+fn absorb_wide_frontier<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize>(
+    buckets: &mut [FrontierAccumulator],
+    ordinal: usize,
+    branch: &WideRootBranch<SUPPORT_WORDS, CHECK_WORDS>,
+) {
+    let mut hasher = blake3::Hasher::new();
+    hasher.update(b"ergodis-css-wide-root-branch-v1\0");
+    hasher.update(&(SUPPORT_WORDS as u64).to_le_bytes());
+    hasher.update(&(CHECK_WORDS as u64).to_le_bytes());
+    hasher.update(&(ordinal as u64).to_le_bytes());
+    for word in branch.support.words {
+        hasher.update(&word.to_le_bytes());
+    }
+    for word in branch.syndrome.words {
+        hasher.update(&word.to_le_bytes());
+    }
+    hasher.update(&branch.logical.to_le_bytes());
+    for word in branch.forbidden.words {
+        hasher.update(&word.to_le_bytes());
+    }
+    hasher.update(&branch.weight.to_le_bytes());
+    buckets[ordinal % buckets.len()].absorb(*hasher.finalize().as_bytes());
+}
+
+#[cfg(feature = "parallel")]
 const _: () = assert!(
     std::mem::size_of::<WideRootBranch<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>>() == 120
         && std::mem::align_of::<WideRootBranch<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>>() == 8
@@ -3467,6 +3685,14 @@ const _: () = assert!(
 #[cfg(feature = "parallel")]
 #[repr(C, align(128))]
 struct CachePaddedWideBranchResult<const SUPPORT_WORDS: usize> {
+    best_weight: u16,
+    best_support: PackedSupport<SUPPORT_WORDS>,
+    stats: ConnectedSearchStats,
+}
+
+#[cfg(feature = "parallel")]
+struct WideAnchorFrontier<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize> {
+    branches: Vec<WideRootBranch<SUPPORT_WORDS, CHECK_WORDS>>,
     best_weight: u16,
     best_support: PackedSupport<SUPPORT_WORDS>,
     stats: ConnectedSearchStats,
@@ -4423,6 +4649,43 @@ impl CompiledCssDistance {
             searched_maximum_weight,
             stats,
         }
+    }
+
+    /// Recompute the deterministic root-edge partition used by compact
+    /// sharded search and return one composable commitment per anchor.
+    #[cfg(feature = "parallel")]
+    pub fn shard_frontier_commitments(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+        shard: CssSearchShard,
+    ) -> Result<Box<[CssShardFrontierCommitment]>, CssDistanceError> {
+        if maximum_weight == 0 || usize::from(maximum_weight) > self.coordinate_count() {
+            return Err(CssDistanceError::InvalidMaximumWeight);
+        }
+        for &anchor in anchors {
+            if usize::from(anchor) >= self.coordinate_count() {
+                return Err(CssDistanceError::AnchorOutOfRange { anchor });
+            }
+        }
+        let mut commitments = Vec::with_capacity(anchors.len());
+        for &anchor in anchors {
+            let root = usize::from(anchor);
+            let mut remaining = self.neighbors[root];
+            let mut buckets = vec![FrontierAccumulator::default(); shard.count() as usize];
+            let mut ordinal = 0_usize;
+            while let Some(added) = remaining.pop_lowest() {
+                let branch = RootBranch {
+                    root: anchor,
+                    added: added as u16,
+                    remaining_root_candidates: remaining,
+                };
+                absorb_compact_frontier(&mut buckets, ordinal, &branch);
+                ordinal += 1;
+            }
+            commitments.push(finish_frontier_commitment(anchor, shard, &buckets));
+        }
+        Ok(commitments.into_boxed_slice())
     }
 
     /// Search static anchor partitions with a 16384-candidate bound-pulse interval.
@@ -5510,6 +5773,58 @@ mod tests {
             })
             .min();
         assert_eq!(wide_shard_best, wide_reference.distance);
+    }
+
+    #[cfg(feature = "parallel")]
+    #[test]
+    fn cold_frontier_commitments_reconstruct_compact_and_wide_partitions() {
+        fn check(per_shard: &[Box<[CssShardFrontierCommitment]>]) {
+            for anchor_index in 0..per_shard[0].len() {
+                let reference = &per_shard[0][anchor_index];
+                let buckets = per_shard
+                    .iter()
+                    .map(|commitments| {
+                        let commitment = &commitments[anchor_index];
+                        assert_eq!(commitment.anchor, reference.anchor);
+                        assert_eq!(commitment.frontier_branches, reference.frontier_branches);
+                        assert_eq!(commitment.partition_blake3, reference.partition_blake3);
+                        FrontierAccumulator {
+                            count: commitment.shard_branches,
+                            sum: commitment.shard_sum,
+                            xor: commitment.shard_xor,
+                        }
+                    })
+                    .collect::<Vec<_>>();
+                let reconstructed = finish_frontier_commitment(
+                    reference.anchor,
+                    CssSearchShard::new(0, buckets.len() as u32).unwrap(),
+                    &buckets,
+                );
+                assert_eq!(reconstructed.frontier_branches, reference.frontier_branches);
+                assert_eq!(reconstructed.partition_blake3, reference.partition_blake3);
+            }
+        }
+
+        let (physical, logical) = artifact_problem();
+        let anchors = [0, 1, 2, 3, 4];
+        let compact = CompiledCssDistance::compile(&physical, &logical).unwrap();
+        let compact_commitments = (0..3)
+            .map(|index| {
+                compact
+                    .shard_frontier_commitments(&anchors, 5, CssSearchShard::new(index, 3).unwrap())
+                    .unwrap()
+            })
+            .collect::<Vec<_>>();
+        check(&compact_commitments);
+
+        let wide = CompiledWideCssDistance::compile(&physical, &logical).unwrap();
+        let wide_commitments = (0..3)
+            .map(|index| {
+                wide.shard_frontier_commitments(&anchors, 5, CssSearchShard::new(index, 3).unwrap())
+                    .unwrap()
+            })
+            .collect::<Vec<_>>();
+        check(&wide_commitments);
     }
 
     #[cfg(feature = "parallel")]
