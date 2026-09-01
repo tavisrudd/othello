@@ -570,10 +570,21 @@ files are disposable and may be deleted at any time.
    timeouts, or unviables. The compact replay record is
    `ergodis-private/evidence/c985-css-terminal-prefix-mutation-report.json`.
    Together the two tranches mutation-gate 31 targeted high-risk mutants at
-   31/31, without modifying production or hot-loop code. The next assurance
-   slice should target branch-option admissibility and the terminal
-   zero-syndrome/witness handoff; only after those pass should this be called a
-   CSS-kernel-wide floor.
+   31/31, without modifying production or hot-loop code.
+   The branch-option and terminal-witness slice is now measured at commit
+   `2843a3a7d`: six of seven targeted mutants are caught by the unchanged full
+   CSS test filter, with no timeout or unviable mutant. The sole survivor changes
+   `child_weight < best_weight` to `<=`; it can replace a retained witness only
+   with a later, equally weighted valid witness. It cannot change the optimum,
+   pruning budget, exhaustion result, negative claim, or witness validity, so it
+   is classified as an acceptable tie-policy survivor rather than justification
+   for a hot-loop mutation-score edit. The canonical set, six caught mutants,
+   survivor, hashes, and replay command are in
+   `ergodis-private/evidence/c985-css-branch-terminal-mutation-report.json`.
+   Across these three slices, all 37 authority-relevant mutants are caught and
+   the only survivor among 38 targeted mutants is observationally confined to
+   witness tie choice. This establishes the current bounded CSS-kernel floor;
+   it does not substitute for statement-level independent verification.
    Premise certificates and independent statement-level re-derivations are the
    near-term architecture.  SAT/PB/VIPR proof pipelines are reserved for
    flagship frozen claims where their encoding is independently justified;

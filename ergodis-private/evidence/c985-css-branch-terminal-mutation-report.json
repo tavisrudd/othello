@@ -1,0 +1,33 @@
+{
+  "schema": "ergodis-private-css-branch-terminal-mutation-report-v0",
+  "tool": "cargo-mutants 25.3.1",
+  "commit": "2843a3a7d",
+  "target_regex": "PackedSupport<WORDS>::difference_assign|src/css_distance.rs:1518:41",
+  "mutants": 7,
+  "mutants_file": "ergodis-private/evidence/c985-css-branch-terminal-mutants.json",
+  "mutants_sha256": "3a68bafe4e0e8f1f60c0fc0a43e323ef7750ee6fdd226cf8a10833735dce99e2",
+  "profile": "campaign",
+  "features": "all",
+  "jobs": 2,
+  "test_filter": "css_distance::tests",
+  "caught": 6,
+  "survived": 1,
+  "timeout": 0,
+  "unviable": 0,
+  "elapsed": "6m 41s",
+  "caught_file": "ergodis-private/evidence/c985-css-branch-terminal-mutants-caught.txt",
+  "caught_sha256": "bf688e289735a8f7d601898752e89561b0623d41dce26700445c85c30f9ebdb6",
+  "survivor_file": "ergodis-private/evidence/c985-css-branch-terminal-mutants-survivor.txt",
+  "survivor_sha256": "ef0357f85840818c4a7312c09964877f9ffca4280c801441f7816d28a443d8bf",
+  "survivor_classification": {
+    "mutation": "child_weight < best_weight becomes child_weight <= best_weight",
+    "effect": "May replace the retained witness by a later equal-weight valid witness. It cannot change the best weight, subsequent pruning budget, exhaustion result, or witness validity.",
+    "authority": "No effect on a negative claim or distance certificate; observable witness bytes may differ, so this is an acceptable tie-policy survivor rather than strict observational equivalence."
+  },
+  "replay": {
+    "scratch_requirement": "Use an executable disk-backed target-c985 scratch directory; /tmp is tmpfs and /tmp/persistent is noexec.",
+    "copy_target": false,
+    "command_template": "TMPDIR=<disk-backed-target-c985-scratch> nix shell nixpkgs#cargo-mutants --command cargo mutants --profile campaign --all-features --baseline skip --copy-target false -j 2 -F 'PackedSupport<WORDS>::difference_assign|src/css_distance.rs:1518:41' -C=--lib -C=css_distance::tests -o <output-dir>"
+  },
+  "conclusion": "All six authority-relevant branch-set and terminal mutations are caught. The only survivor changes equal-weight witness tie policy and is intentionally not forced into the hot loop as a mutation-score optimization."
+}
