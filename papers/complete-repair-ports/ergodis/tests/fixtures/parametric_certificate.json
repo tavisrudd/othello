@@ -1,0 +1,78 @@
+{
+  "cover": {
+    "claim_minimum": 2,
+    "exceptional_residues": [
+      1,
+      3,
+      5
+    ],
+    "modulus": 6
+  },
+  "expected": {
+    "composition_nodes": 4,
+    "family_count": 1,
+    "identity_coefficients": [
+      "0"
+    ],
+    "payload_count": 1
+  },
+  "family": {
+    "class_node": 0,
+    "identity_roots": [
+      6
+    ],
+    "modulus": 2,
+    "name": "even-scaled",
+    "nodes": [
+      {
+        "coefficients": [
+          "0",
+          "2"
+        ],
+        "op": "literal"
+      },
+      {
+        "coefficients": [
+          "0",
+          "1208925819614629174706176"
+        ],
+        "op": "literal"
+      },
+      {
+        "coefficients": [
+          "1208925819614629174706176"
+        ],
+        "op": "literal"
+      },
+      {
+        "left": 0,
+        "op": "multiply",
+        "right": 2
+      },
+      {
+        "coefficients": [
+          "2"
+        ],
+        "op": "literal"
+      },
+      {
+        "left": 1,
+        "op": "multiply",
+        "right": 4
+      },
+      {
+        "left": 3,
+        "op": "subtract",
+        "right": 5
+      }
+    ],
+    "parameter_minimum": 1,
+    "positive_roots": [
+      1
+    ],
+    "residue": 0
+  },
+  "payload_hex": "696e646570656e64656e7420626f756e64656420706f6c796e6f6d69616c20666978747572650a",
+  "payload_sha256": "e59c868981523691beb950ed4d2e01b49086318624fd3b290f476fe73a43bf4a",
+  "schema": "ergodis-parametric-certificate-v1"
+}

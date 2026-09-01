@@ -39,6 +39,7 @@ pub mod orbit;
 pub mod orbit_compile;
 pub mod ordered_resource;
 pub mod packed_ternary;
+pub mod parametric_certificate;
 pub mod prime_polynomial;
 pub mod projective;
 pub mod provenance;
@@ -191,6 +192,12 @@ pub use ordered_resource::{
     ParetoObservationTable, ParetoResponseDictionary, ParetoWitness, ParetoWitnessError,
     ParetoWorkspace, ValidatedParetoObjective, ValidatedTransitionParetoObjective,
     WitnessedParetoFront, WitnessedParetoWorkspace,
+};
+pub use parametric_certificate::{
+    verify_parametric_certificate, verify_payload, ParametricCertificate,
+    ParametricCertificateError, ParametricCompositionDag, ParametricCompositionNode,
+    ParametricCover, ParametricFamily, ParametricVerificationLimits, PayloadDigest,
+    PayloadDigestAlgorithm, PolynomialOp, PolynomialProgram, VerifiedParametricCertificate,
 };
 pub use prime_polynomial::{
     reduce_prime_polynomial_function, PrimePolynomialError, PrimePolynomialRecurrence,
