@@ -157,6 +157,32 @@ seeded list; the task should extend it, not restart it.
   long campaign is large and exploratory, which points at Sigma.js. If both views are wanted, that
   is an argument for two renderers rather than one compromise.
 
+- **Alectryon**, with **LeanInk** as its Lean 4 adapter, is the reference answer to the question of
+  how a machine-checked object is made readable without asking anyone to read the whole object. It
+  processes Rocq and Lean snippets embedded in ordinary prose and shows the goal state and the
+  messages for each input sentence, so the proof is presented as a document with the machine's
+  intermediate state available on demand rather than as a listing. Its interaction grammar is worth
+  copying wholesale: interactive fragments are marked with bubbles, hovering reveals detail, tapping
+  pins it open, and keyboard navigation moves between fragments. The lesson for Ergodis is that the
+  narrative stays primary and the machine state is progressively disclosed underneath it — which is
+  exactly the shape the teaching goal needs for a plan and its evaluation.
+  <https://github.com/cpitclaudel/alectryon> and <https://github.com/leanprover/LeanInk>
+- **Layered DAG layout engines.** The current picture is that `d3-dag` is a small bundle against
+  elkjs's roughly 500 KB of transpiled Java, offers layering, coordinate-assignment, and
+  crossing-minimization strategies that dagre does not — including an integer-programming-optimal
+  crossing minimization and the Zherebko and Grid layouts — and its fast quality preset runs about
+  four times faster than dagre version 3 while its medium preset is about twice as slow with better
+  output. ELK is the layer-based engine to reach for when nodes have ports and an inherent
+  direction. Cytoscape.js can drive dagre, elkjs, or webcola behind one interface, which is a
+  reasonable hedge. No published benchmark compares all three head to head on a graph like ours, so
+  the choice should be settled by testing on a real lineage graph.
+  <https://github.com/erikbrinkman/d3-dag> and <https://arxiv.org/pdf/2311.00533>
+
+  In the event the prototype needed none of them: a generation-layered lineage graph and a staged
+  compilation cascade both have a known layer assignment, so the only real work is ordering within a
+  layer, which a parent-position sort handles well enough at this scale. Reach for a layout library
+  when a view appears whose layering is not already given by the data.
+
 ### Still to survey
 
 - **Remaining experiment-tracking dashboards**: Weights & Biases, Aim, TensorBoard, Ray Dashboard,
@@ -166,18 +192,14 @@ seeded list; the task should extend it, not restart it.
 - **Proof and certificate presentation**: the Lean infoview, Alectryon, Why3's IDE, Isabelle/jEdit,
   proof-object and dependency-graph browsers. The question to answer: how do these make a
   machine-checked object legible without asking the reader to read the whole object?
-- **DAG layout engines**, which the library survey above did not settle: ELK, dagre, d3-dag, and
-  Sugiyama-style layered layout generally. Layout cost was named as a dominant performance factor,
-  so this is the open half of the rendering question. Also check GPU-accelerated large-graph
-  renderers such as Cosmograph.
 - **Provenance and workflow-DAG UIs**: Airflow, Prefect, Dagster, Nextflow Tower, and the W3C PROV
   visual conventions. These solve "show a large DAG of completed and running work to an operator"
   and their affordances are worth copying rather than reinventing.
 - **Program-synthesis and genetic-programming lineage tools**, and MAP-Elites archive
   visualizations specifically, since the archive-class structure in the control plane
   (`MAX_ARCHIVE_CLASSES`) is quality-diversity shaped.
-- **Rust TUI**: `ratatui` as the low-cost path, plus what a Rust web backend would look like
-  (`axum` + server-sent events or WebSocket over the existing Unix socket).
+- **GPU-accelerated large-graph renderers** such as Cosmograph, which matter only if a campaign's
+  lineage grows past the tens of thousands of nodes that plain SVG stops handling comfortably.
 
 ### Search hygiene
 
