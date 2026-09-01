@@ -621,26 +621,42 @@ files are disposable and may be deleted at any time.
    whose own end-to-end gate wins.  The next PRS optimization must reduce the
    orbit/hash critical path or compile a fused validated action without
    perturbing the generic worker, not merely delete arithmetic instructions.
-9. **Queued — parametric certificate verifier.** C1029 demonstrates a genuine
-   reach gap rather than a faster version of an existing kernel: Ergodis had no
+9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
+   genuine reach gap rather than a faster version of an existing kernel:
+   Ergodis had no
    usable path for exact identities in `Z[t]`, finite congruence coverings, and
    their composition with a hash-bound residual witness layer.  Its private
    Erdős--Straus instrument certifies `2 <= n <= 10^8` with 540 exact families
    and 685 residual witnesses; an independent checker rejects ten targeted
-   corruptions.  Import the reusable trust boundary, not the problem: a
-   resource-bounded exact polynomial identity checker over `BigInt`, typed
-   parameter/class declarations, finite cover verification, payload digests,
-   and an explicit composition DAG.  Feed this through the planned typed
-   plan/theorem AST so text and protocol encodings lower to one verifier.
+   corruptions.  The reusable trust boundary is now commit `d0cf99bad`: a flat,
+   iterative polynomial-expression DAG evaluates exact identities in `Z[t]`
+   over `BigInt`; every family binds an exact `modulus*t + residue` class,
+   coefficientwise half-line positivity is checked at its threshold, and a
+   finite congruence cover is verified in
+   `O(M + sum_family M / m_family)` marks rather than an `O(MF)` cross-product.
+   SHA-256 and BLAKE3 payloads stream through a fixed 64 KiB buffer, and an
+   explicit topological composition DAG requires exactly one typed leaf for
+   every declared family and payload.  Aggregate limits cover polynomial
+   nodes, coefficient slots, coefficient bits, algebra work, cover marks, and
+   total payload bytes, so individually bounded objects cannot combine into an
+   unbounded-memory certificate.  Malformed composition is rejected before
+   bulk payload I/O.  The generator-backed Python differential fixture uses a
+   coefficient above `i64`; exact acceptance, a broad fail-closed
+   mutation/resource corpus, the full all-feature test suite, strict
+   all-target/all-feature clippy, formatting, and public documentation all
+   pass.
+
+   The verifier intentionally assigns no authority to a domain-specific
+   residual or scaling rule: it verifies the declared algebra, cover, payload
+   binding, and composition shape only.  Feed this through the planned typed
+   plan/theorem AST so text and protocol encodings lower to the same verifier.
    Generator heuristics, prime sieves, factorization policy, and the C1029
    family catalogue remain in `ergodis-private`.  The first public positivity
-   rule may deliberately be coefficientwise non-negativity plus a checked
+   rule is deliberately coefficientwise non-negativity plus a checked
    threshold; richer half-line positivity requires a separately certified
-   root/Sturm kernel.  Add certificate-size, degree, coefficient-bit-length,
-   modulus, and evaluation limits before accepting untrusted input.  Pair the
-   Rust checker with an implementation-independent replay, and later discharge
-   composition lemmas such as scaling in Lean rather than silently trusting
-   prose.  This becomes the first characteristic-zero, infinite-family
+   root/Sturm kernel.  Later, discharge composition lemmas such as scaling in
+   Lean rather than silently trusting prose.  This is the first
+   characteristic-zero, infinite-family
    certificate product and a stepping stone toward theorem composition; it is
    not a request to put a generic sieve or CAS in the solve core.
 
