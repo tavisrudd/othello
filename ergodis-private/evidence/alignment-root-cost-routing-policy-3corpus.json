@@ -1,0 +1,155 @@
+{
+  "schema": "ergodis-private-routing-policy-v0",
+  "minimum_reports": 3,
+  "decisions": [
+    {
+      "target_fields": [
+        "root_sized"
+      ],
+      "target_values": [
+        0
+      ],
+      "reports": [
+        {
+          "report": "evidence/alignment-root-cost-routing-report.json",
+          "report_sha256": "5c6b670c28e5d728fe877c52e87bf697516133c5cf2a93b52805b9caa83667b2",
+          "data_sha256": "02183d834a358f4be0c55376950bee3d6724c923d62e8f2c3f98d89d116d4e8a",
+          "seeds_sha256": "a63f8a177a74f7c037e1a173d04d7e4f62eadfc1f7f32a4328cc24790455a71d",
+          "strategies": [
+            {
+              "strategy": "balanced",
+              "best_weighted_correct": 39,
+              "weighted_rows": 56,
+              "first_best_trial": 49,
+              "first_best_semantic_op_rows": 8232,
+              "tested": 124,
+              "evidence_bytes": 178332
+            },
+            {
+              "strategy": "numeric",
+              "best_weighted_correct": 39,
+              "weighted_rows": 56,
+              "first_best_trial": 32,
+              "first_best_semantic_op_rows": 5376,
+              "tested": 106,
+              "evidence_bytes": 150376
+            },
+            {
+              "strategy": "structural",
+              "best_weighted_correct": 39,
+              "weighted_rows": 56,
+              "first_best_trial": 49,
+              "first_best_semantic_op_rows": 8232,
+              "tested": 124,
+              "evidence_bytes": 178358
+            }
+          ]
+        },
+        {
+          "report": "evidence/alignment-root-cost-routing-heldout-report.json",
+          "report_sha256": "b80172d98483f4bd80a33830fd2025ade4983ac6e0fa0c025dfe8edcaebe6145",
+          "data_sha256": "5e5fd8e621532831bcb60db31016c3bd4f6e23ce192f1e42aadf555e3aa1d5c0",
+          "seeds_sha256": "a63f8a177a74f7c037e1a173d04d7e4f62eadfc1f7f32a4328cc24790455a71d",
+          "strategies": [
+            {
+              "strategy": "balanced",
+              "best_weighted_correct": 20,
+              "weighted_rows": 35,
+              "first_best_trial": 2,
+              "first_best_semantic_op_rows": 210,
+              "tested": 124,
+              "evidence_bytes": 177017
+            },
+            {
+              "strategy": "numeric",
+              "best_weighted_correct": 20,
+              "weighted_rows": 35,
+              "first_best_trial": 2,
+              "first_best_semantic_op_rows": 210,
+              "tested": 118,
+              "evidence_bytes": 168011
+            },
+            {
+              "strategy": "structural",
+              "best_weighted_correct": 20,
+              "weighted_rows": 35,
+              "first_best_trial": 2,
+              "first_best_semantic_op_rows": 210,
+              "tested": 124,
+              "evidence_bytes": 177043
+            }
+          ]
+        },
+        {
+          "report": "evidence/alignment-root-cost-routing-fresh-report.json",
+          "report_sha256": "53c1c480fe8874ab4b7a1c8ebbd9678562dd2df1856cb033ed1edc9e23d53c3c",
+          "data_sha256": "28d4e5a5543b967d4ad77964b71eac96fba19ab0fc96ed423583aa495378972b",
+          "seeds_sha256": "a63f8a177a74f7c037e1a173d04d7e4f62eadfc1f7f32a4328cc24790455a71d",
+          "strategies": [
+            {
+              "strategy": "balanced",
+              "best_weighted_correct": 13,
+              "weighted_rows": 20,
+              "first_best_trial": 41,
+              "first_best_semantic_op_rows": 2460,
+              "tested": 117,
+              "evidence_bytes": 166565
+            },
+            {
+              "strategy": "numeric",
+              "best_weighted_correct": 13,
+              "weighted_rows": 20,
+              "first_best_trial": 28,
+              "first_best_semantic_op_rows": 1680,
+              "tested": 109,
+              "evidence_bytes": 154535
+            },
+            {
+              "strategy": "structural",
+              "best_weighted_correct": 13,
+              "weighted_rows": 20,
+              "first_best_trial": 41,
+              "first_best_semantic_op_rows": 2460,
+              "tested": 117,
+              "evidence_bytes": 166591
+            }
+          ]
+        }
+      ],
+      "aggregates": [
+        {
+          "strategy": "balanced",
+          "safe": true,
+          "wins": 0,
+          "ties": 3,
+          "losses": 0,
+          "total_first_best_semantic_op_rows": 10902,
+          "total_evidence_bytes": 521914
+        },
+        {
+          "strategy": "numeric",
+          "safe": true,
+          "wins": 2,
+          "ties": 1,
+          "losses": 0,
+          "total_first_best_semantic_op_rows": 7266,
+          "total_evidence_bytes": 472922
+        },
+        {
+          "strategy": "structural",
+          "safe": true,
+          "wins": 0,
+          "ties": 3,
+          "losses": 0,
+          "total_first_best_semantic_op_rows": 10902,
+          "total_evidence_bytes": 521992
+        }
+      ],
+      "recommended_strategy": "numeric",
+      "learned": true,
+      "reason": "non-regressing-matched-audit-win",
+      "balanced_cost": 10902,
+      "recommended_cost": 7266
+    }
+  ]
+}

@@ -20,11 +20,13 @@ possible plan over this interface.
 |---|---:|---:|---:|
 | Development: points 8, budget 8 | 56 | 5 | 39/56 |
 | Held out: points 7, budget 7 | 35 | 4 | 20/35 |
+| Fresh validation: points 6, budget 6 | 20 | 3 | 13/20 |
 
-Both corpora use the same frozen seed, `root_orbit > 3`, target class
+All three corpora use the same frozen seed, `root_orbit > 3`, target class
 `root_sized = 0`, four generations, beam 8, and a 128-candidate cap.  The
 held-out configuration and all evolution settings were fixed before its
-corpus was generated.
+corpus was generated; the fresh configuration was fixed after the two-corpus
+policy was frozen and before its corpus was generated.
 
 | Corpus / strategy | First ceiling trial | Semantic-op rows to ceiling | Total tested | Evidence bytes |
 |---|---:|---:|---:|---:|
@@ -34,6 +36,9 @@ corpus was generated.
 | Held out / balanced | **2** | **210** | 124 | 177,017 |
 | Held out / numeric | **2** | **210** | **118** | **168,011** |
 | Held out / structural | **2** | **210** | 124 | 177,043 |
+| Fresh / balanced | 41 | 2,460 | 117 | 166,565 |
+| Fresh / numeric | **28** | **1,680** | **109** | **154,535** |
+| Fresh / structural | 41 | 2,460 | 117 | 166,591 |
 
 Numeric ordering therefore reaches the exact observable ceiling 1.53x sooner
 on the development application corpus.  It is neutral on held-out discovery:
@@ -41,7 +46,8 @@ the theorem-derived `counterexample-threshold` repair reaches the ceiling at
 trial 2 before generic family ordering can matter.  Numeric routing does not
 delay that repair and exhausts the bounded search with 4.8% fewer candidates.
 Its evidence stream is correspondingly 5.1% smaller; on the development
-corpus it is 15.7% smaller.
+corpus it is 15.7% smaller. The fresh corpus independently reproduces a 1.46x
+numeric discovery gain and attains its exact observable ceiling.
 This is evidence for conditional routing, not a claim that numeric ordering
 universally improves alignment search.
 
@@ -54,12 +60,14 @@ same best score, the candidate route never used more semantic-op rows than
 balanced on any training corpus, it won at least once, and the configured
 minimum number of matched reports is present.
 
-On these two corpora it recommends numeric routing: aggregate work to the same
+On the first two corpora it recommends numeric routing: aggregate work to the same
 certified ceilings is 5,586 semantic-op rows versus 8,442 balanced, a 1.51x
 gain, with one win and one tie. The adjacent minimum-three-reports control
-returns balanced with `insufficient-matched-reports`. These are cold archive
-decisions; they do not prune mutations, change proof authority, or run in the
-solve loop.
+returns balanced with `insufficient-matched-reports`. Adding the fresh
+validation without changing the rule promotes the three-report policy: numeric
+has two wins, one tie, no losses, and 7,266 aggregate rows versus 10,902
+balanced (1.50x). These are cold archive decisions; they do not prune
+mutations, change proof authority, or run in the solve loop.
 
 Machine-readable corpus reports, evolution reports, and all referenced
 streamed JSONL evidence are retained in this directory.  Each report carries

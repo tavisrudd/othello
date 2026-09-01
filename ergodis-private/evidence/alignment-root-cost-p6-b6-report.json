@@ -1,0 +1,324 @@
+{
+  "budget": 6,
+  "fields": [
+    "root_candidate",
+    "root_orbit",
+    "root_sized",
+    "root_initial_unresolved",
+    "root_initial_packing",
+    "root_initial_branches"
+  ],
+  "median_states": 178,
+  "observable_classes": 3,
+  "observable_optimum": 13,
+  "output": "examples/data/alignment-root-cost-p6-b6.jsonl",
+  "output_sha256": "28d4e5a5543b967d4ad77964b71eac96fba19ab0fc96ed423583aa495378972b",
+  "points": 6,
+  "positives": 10,
+  "rows": 20,
+  "samples": [
+    {
+      "duplicates": 31,
+      "expected": false,
+      "infeasible": 83,
+      "initial": 0,
+      "states": 116,
+      "values": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 33,
+      "expected": false,
+      "infeasible": 81,
+      "initial": 1,
+      "states": 114,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 35,
+      "expected": false,
+      "infeasible": 79,
+      "initial": 2,
+      "states": 112,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 37,
+      "expected": false,
+      "infeasible": 77,
+      "initial": 3,
+      "states": 110,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 43,
+      "expected": true,
+      "infeasible": 133,
+      "initial": 4,
+      "states": 180,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 45,
+      "expected": true,
+      "infeasible": 131,
+      "initial": 5,
+      "states": 178,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 47,
+      "expected": false,
+      "infeasible": 129,
+      "initial": 6,
+      "states": 176,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 52,
+      "expected": true,
+      "infeasible": 175,
+      "initial": 7,
+      "states": 233,
+      "values": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 54,
+      "expected": true,
+      "infeasible": 173,
+      "initial": 8,
+      "states": 231,
+      "values": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 54,
+      "expected": true,
+      "infeasible": 194,
+      "initial": 9,
+      "states": 255,
+      "values": [
+        2,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 39,
+      "expected": false,
+      "infeasible": 93,
+      "initial": 10,
+      "states": 130,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 39,
+      "expected": false,
+      "infeasible": 93,
+      "initial": 11,
+      "states": 130,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 39,
+      "expected": false,
+      "infeasible": 93,
+      "initial": 12,
+      "states": 130,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 37,
+      "expected": false,
+      "infeasible": 126,
+      "initial": 13,
+      "states": 170,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 37,
+      "expected": false,
+      "infeasible": 126,
+      "initial": 14,
+      "states": 170,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 35,
+      "expected": true,
+      "infeasible": 141,
+      "initial": 15,
+      "states": 188,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 38,
+      "expected": true,
+      "infeasible": 136,
+      "initial": 16,
+      "states": 183,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 37,
+      "expected": true,
+      "infeasible": 134,
+      "initial": 17,
+      "states": 180,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 35,
+      "expected": true,
+      "infeasible": 149,
+      "initial": 18,
+      "states": 198,
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "duplicates": 42,
+      "expected": true,
+      "infeasible": 170,
+      "initial": 19,
+      "states": 225,
+      "values": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "schema": "ergodis-private-alignment-root-corpus-v0",
+  "seen_capacity": 4194304,
+  "uncontrolled_baseline_verified": true
+}
