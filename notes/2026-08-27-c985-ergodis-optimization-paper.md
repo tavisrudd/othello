@@ -1092,6 +1092,21 @@ files are disposable and may be deleted at any time.
    Unix-domain limit. The next evolution tranche is therefore a bounded
    target-local learner with a cold-start/built-in-theorem abstention rule, not
    unconditional automatic routing.
+
+   Commit `5f0a9c1d1` lands that first conservative archive-trained layer
+   privately. It verifies the audit, frozen input, seed, streamed-evidence
+   hashes, and evidence lengths before grouping only identical target tuples.
+   A non-balanced route is eligible only when every matched strategy reached
+   the same best score, the route never used more semantic-op rows than
+   balanced on any corpus, it won at least once, and the configured minimum
+   report count is met. On the two alignment corpora it learns numeric with an
+   aggregate 5,586 rows to the certified ceilings versus 8,442 balanced (1.51x),
+   comprising one win and one tie. A minimum-three-report control emits
+   balanced with `insufficient-matched-reports`. Unit controls separately reject
+   any route with one regression. The learner is cold, replayable, and has no
+   daemon, solver, pruning, or authority effect. Next emit its decision as an
+   optional initial profile policy and require a fresh-corpus no-regression
+   replay before allowing live refreshes to learn from it.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a

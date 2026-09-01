@@ -279,15 +279,20 @@ supporting a contextual policy with a built-in-theorem abstention rule.
 
 ### P2 — learned proposer or test-time training
 
-The archives and source-target attribution are now sufficient for the first
-bounded learner. The useful learned object remains operator-family and target
-selection, not arbitrary Rust generation. TTT-style weight adaptation is
-expensive and optimizes a less transparent state; an offline contextual bandit
-over typed mutations remains the first baseline. It must use exact improvement
-per semantic-op row, preserve the one-slot exploration floor and complete
-finite mutation set, and abstain whenever the failure-derived repair has
-already supplied an improving child for that source target. A frozen replay
-must reproduce every policy update and chosen route from the evidence stream.
+The first bounded archive learner is now landed privately. It verifies all
+input/evidence hashes and learns only within exact target tuples from matched
+strategy audits that reached the same best score. A route must have at least
+one semantic-op-row win, no regression, and the configured minimum report
+count; otherwise the result is balanced/abstain. On the development plus
+held-out alignment pair it chooses numeric at 5,586 aggregate rows versus 8,442
+balanced (one win, one tie), while a three-report minimum correctly abstains.
+This is a conservative empirical policy rather than online test-time training.
+The useful learned object remains operator-family and target selection, not
+arbitrary Rust generation. Next expose the replayed decision as an optional
+initial profile policy, then add live adaptation only after a fresh-corpus
+no-regression gate. Any online version must preserve the exploration floor and
+complete finite mutation set and must not assign family credit to the shared
+counterexample-threshold prefix.
 
 ## Near-term acceptance tests
 
