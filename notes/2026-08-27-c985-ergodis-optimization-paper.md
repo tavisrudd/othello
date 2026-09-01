@@ -777,10 +777,28 @@ files are disposable and may be deleted at any time.
    population per parent.  The exact two-parent/two-slot control records one
    child from each source hash; exhaustive small integer tests prove that the
    share function covers the full budget without starvation.  Strict clippy and
-   the full all-target/all-feature suite pass.  The next evolve frontier is the
-   SOTA audit's P0 maximum-oriented selection: attach bounded cost/impact
-   scorecards to parent/operator pairs before importing semantic islands or any
-   learned proposer.
+   the full all-target/all-feature suite pass.
+
+   Commit `fa2d8f935` lands the bounded scorecard prerequisite for the SOTA
+   audit's P0 selector.  Every evaluated child records its exact gain/loss
+   against the selected parent under the actual beam order, together with rows,
+   semantic operations, and their checked product as a deterministic cost
+   proxy.  Missing parent-score lineage now fails closed.  A beam-bounded map
+   retains only the prior expanded parents, while the finite operator ledger
+   accumulates checked trials, completions, cascades, parent comparisons,
+   improvements, perfect hits, rows, and semantic-operation rows.  Direct and
+   replay roots do not dilute parent-relative improvement rates.
+
+   A 4 KiB footer reserve is removed from candidate capacity before the first
+   record is admitted.  Completed, cancelled, and candidate-truncated archives
+   therefore persist the aggregate scorecards; the footer's stabilized byte
+   count exactly equals both file length and daemon status.  A too-small limit
+   fails before writing even a partial header.  The exact two-parent control
+   checks both impact joins, operator aggregates, footer/status equality, and
+   the empty failed artifact.  Strict clippy and the complete public suite pass.
+   Next use these scorecards in a deterministic maximum-oriented selector with
+   an explicit exploration floor; do not import semantic islands or a learned
+   proposer before that selector has an exact synthetic control.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
