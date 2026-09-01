@@ -6,6 +6,8 @@ use ergodis::control::{validate_plan_name, ControlError, MAX_PLAN_OPS};
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet};
 
+const MAX_COMPILED_INPUTS: usize = MAX_PLAN_OPS * MAX_PLAN_OPS;
+
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct SourceSignature {
@@ -18,7 +20,7 @@ pub struct SourceSignature {
 pub struct OperationSignature {
     pub name: String,
     pub kind: OpKind,
-    pub input_sort: String,
+    pub input_sorts: Box<[String]>,
     pub output_sort: String,
     #[serde(default)]
     pub parameters: Box<[ParameterSignature]>,
@@ -73,7 +75,15 @@ impl AdapterRegistry {
         names.clear();
         for operation in &operations {
             validate_plan_name(&operation.name)?;
-            validate_plan_name(&operation.input_sort)?;
+            if operation.input_sorts.is_empty() || operation.input_sorts.len() > MAX_PLAN_OPS {
+                return invalid("semantic operation signature has an invalid input count");
+            }
+            if operation.kind == OpKind::Match && operation.input_sorts.len() != 1 {
+                return invalid("semantic match signature requires exactly one input sort");
+            }
+            for input_sort in &operation.input_sorts {
+                validate_plan_name(input_sort)?;
+            }
             validate_plan_name(&operation.output_sort)?;
             if operation.max_retention == 0 || operation.max_memory_bytes == 0 {
                 return invalid("semantic operation signature has a zero resource bound");
@@ -152,18 +162,19 @@ pub struct CompiledRecipeOp {
     retention: u64,
     memory_bytes: u64,
     signature: u16,
-    input_slot: u16,
+    input_start: u16,
     output_slot: u16,
-    kind: OpKind,
-    flags: u8,
+    kind_flags: u8,
+    input_count: u8,
 }
 
 impl CompiledRecipeOp {
-    pub const STREAMED_PARTITION: u8 = 1;
+    pub const STREAMED_PARTITION: u8 = 1 << 7;
+    const KIND_MASK: u8 = 0b11;
 
     #[must_use]
     pub const fn uses_streamed_partition(self) -> bool {
-        self.flags & Self::STREAMED_PARTITION != 0
+        self.kind_flags & Self::STREAMED_PARTITION != 0
     }
 
     #[must_use]
@@ -182,8 +193,13 @@ impl CompiledRecipeOp {
     }
 
     #[must_use]
-    pub const fn input_slot(self) -> u16 {
-        self.input_slot
+    pub const fn input_start(self) -> u16 {
+        self.input_start
+    }
+
+    #[must_use]
+    pub const fn input_count(self) -> u8 {
+        self.input_count
     }
 
     #[must_use]
@@ -193,7 +209,12 @@ impl CompiledRecipeOp {
 
     #[must_use]
     pub const fn kind(self) -> OpKind {
-        self.kind
+        match self.kind_flags & Self::KIND_MASK {
+            0 => OpKind::Match,
+            1 => OpKind::Reduce,
+            2 => OpKind::Canonicalize,
+            _ => unreachable!(),
+        }
     }
 }
 
@@ -209,6 +230,7 @@ pub struct CompiledRecipe {
     total_retention: u64,
     total_memory_bytes: u64,
     operations: Box<[CompiledRecipeOp]>,
+    input_slots: Box<[u16]>,
     argument_offsets: Box<[u16]>,
     arguments: Box<[i64]>,
     recipe_canonical: Box<[u8]>,
@@ -249,6 +271,15 @@ impl CompiledRecipe {
     #[must_use]
     pub fn operations(&self) -> &[CompiledRecipeOp] {
         &self.operations
+    }
+
+    pub(crate) fn operation_inputs(&self, operation: CompiledRecipeOp) -> &[u16] {
+        let start = operation.input_start as usize;
+        &self.input_slots[start..start + operation.input_count as usize]
+    }
+
+    pub(crate) fn input_slots(&self) -> &[u16] {
+        &self.input_slots
     }
 
     pub(crate) fn operation_argument_range(&self, operation: usize) -> (u16, u16) {
@@ -323,6 +354,7 @@ pub fn compile_recipe(
         },
     );
     let mut operations = Vec::with_capacity(recipe.steps.len());
+    let mut input_slots = Vec::new();
     let mut argument_offsets = Vec::with_capacity(recipe.steps.len() + 1);
     let mut arguments = Vec::new();
     argument_offsets.push(0);
@@ -336,11 +368,24 @@ pub fn compile_recipe(
         if signature.kind != step.kind() {
             return invalid("semantic recipe operation kind does not match its signature");
         }
-        let input = slots.get(step.input()).ok_or_else(|| {
-            ControlError::Invalid("semantic recipe input slot is not defined".into())
-        })?;
-        if input.sort != signature.input_sort {
-            return invalid("semantic recipe input sort does not match its signature");
+        if step.inputs().len() != signature.input_sorts.len() {
+            return invalid("semantic recipe input count does not match its signature");
+        }
+        let input_start = u16::try_from(input_slots.len())
+            .map_err(|_| ControlError::Invalid("semantic input-slot offset overflow".into()))?;
+        let mut all_inputs_are_reducers = true;
+        for (input_name, input_sort) in step.inputs().iter().zip(&signature.input_sorts) {
+            let input = slots.get(input_name.as_str()).ok_or_else(|| {
+                ControlError::Invalid("semantic recipe input slot is not defined".into())
+            })?;
+            if input.sort != input_sort {
+                return invalid("semantic recipe input sort does not match its signature");
+            }
+            all_inputs_are_reducers &= input.producer == Producer::Reduce;
+            input_slots.push(input.id);
+        }
+        if input_slots.len() > MAX_COMPILED_INPUTS {
+            return invalid("semantic recipe exceeds the compiled input-slot bound");
         }
         if step.output_sort() != signature.output_sort {
             return invalid("semantic recipe output sort does not match its signature");
@@ -366,11 +411,8 @@ pub fn compile_recipe(
         if streamed_partition && !signature.allows_streamed_partition {
             return invalid("semantic canonicalizer does not admit a streamed partition");
         }
-        if step.kind() == OpKind::Canonicalize
-            && !streamed_partition
-            && input.producer != Producer::Reduce
-        {
-            return invalid("semantic canonicalizer input is not a reducer output");
+        if step.kind() == OpKind::Canonicalize && !streamed_partition && !all_inputs_are_reducers {
+            return invalid("semantic canonicalizer inputs are not reducer outputs");
         }
 
         total_retention = total_retention
@@ -391,14 +433,17 @@ pub fn compile_recipe(
             retention,
             memory_bytes,
             signature: signature_id,
-            input_slot: input.id,
+            input_start,
             output_slot,
-            kind: step.kind(),
-            flags: if streamed_partition {
-                CompiledRecipeOp::STREAMED_PARTITION
-            } else {
-                0
-            },
+            kind_flags: step.kind() as u8
+                | if streamed_partition {
+                    CompiledRecipeOp::STREAMED_PARTITION
+                } else {
+                    0
+                },
+            input_count: u8::try_from(step.inputs().len()).map_err(|_| {
+                ControlError::Invalid("semantic operation input count overflow".into())
+            })?,
         });
         slots.insert(
             step.binding(),
@@ -437,6 +482,7 @@ pub fn compile_recipe(
         total_retention,
         total_memory_bytes,
         operations: operations.into_boxed_slice(),
+        input_slots: input_slots.into_boxed_slice(),
         argument_offsets: argument_offsets.into_boxed_slice(),
         arguments: arguments.into_boxed_slice(),
         recipe_canonical,
@@ -468,8 +514,12 @@ pub fn compile_fragment_emission(
     }
 
     let mut lineage_actions = BTreeMap::new();
-    let mut binding = recipe.emit_binding.as_str();
-    while binding != recipe.source_binding {
+    let mut pending = vec![recipe.emit_binding.as_str()];
+    let mut visited = BTreeSet::new();
+    while let Some(binding) = pending.pop() {
+        if binding == recipe.source_binding || !visited.insert(binding) {
+            continue;
+        }
         let step = recipe
             .steps
             .iter()
@@ -489,7 +539,7 @@ pub fn compile_fragment_emission(
                 return invalid("semantic output lineage uses conflicting action contracts");
             }
         }
-        binding = step.input();
+        pending.extend(step.inputs().iter().map(String::as_str));
     }
     if lineage_actions.len() != fragment.actions.len() {
         return invalid("theorem fragment actions do not match its recipe lineage");
@@ -640,7 +690,7 @@ theorem cap_geometry {
                 OperationSignature {
                     name: "affine_subspace".into(),
                     kind: OpKind::Match,
-                    input_sort: "nine_set_stream".into(),
+                    input_sorts: Box::new(["nine_set_stream".into()]),
                     output_sort: "feature_row".into(),
                     parameters: Box::new([
                         ParameterSignature {
@@ -664,7 +714,7 @@ theorem cap_geometry {
                 OperationSignature {
                     name: "overlap_histogram".into(),
                     kind: OpKind::Reduce,
-                    input_sort: "feature_row".into(),
+                    input_sorts: Box::new(["feature_row".into()]),
                     output_sort: "retained_set".into(),
                     parameters: Box::new([ParameterSignature {
                         name: "weighted".into(),
@@ -677,7 +727,7 @@ theorem cap_geometry {
                 OperationSignature {
                     name: "affine_generators".into(),
                     kind: OpKind::Canonicalize,
-                    input_sort: "retained_set".into(),
+                    input_sorts: Box::new(["retained_set".into()]),
                     output_sort: "orbit_summary".into(),
                     parameters: Box::new([ParameterSignature {
                         name: "count".into(),
@@ -711,7 +761,7 @@ theorem cap_geometry {
         assert_eq!(compiled.slots, 4);
         assert_eq!(compiled.output_slot, 3);
         assert_eq!(compiled.operations.len(), 3);
-        assert_eq!(compiled.operations[2].input_slot, 2);
+        assert_eq!(compiled.operation_inputs(compiled.operations[2]), &[2]);
         assert_eq!(compiled.operations[2].output_slot, 3);
         assert_eq!(compiled.total_retention, 4213);
         assert_eq!(compiled.total_memory_bytes, 200_704);
@@ -729,7 +779,7 @@ theorem cap_geometry {
         assert!(compile_recipe(&recipe, &registry(false), tight).is_err());
 
         let mut wrong = registry(false);
-        wrong.operations[1].input_sort = "wrong".into();
+        wrong.operations[1].input_sorts = Box::new(["wrong".into()]);
         assert!(compile_recipe(
             &recipe,
             &wrong,
@@ -773,7 +823,7 @@ theorem cap_geometry {
             .replace("streamed false", "streamed true");
         let recipe = parse_semantic_recipe(&streamed_text).unwrap();
         let mut denied = registry(false);
-        denied.operations[2].input_sort = "feature_row".into();
+        denied.operations[2].input_sorts = Box::new(["feature_row".into()]);
         assert!(compile_recipe(
             &recipe,
             &denied,
@@ -784,7 +834,7 @@ theorem cap_geometry {
         )
         .is_err());
         let mut admitted = registry(true);
-        admitted.operations[2].input_sort = "feature_row".into();
+        admitted.operations[2].input_sorts = Box::new(["feature_row".into()]);
         let compiled = compile_recipe(
             &recipe,
             &admitted,

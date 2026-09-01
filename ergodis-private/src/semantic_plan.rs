@@ -68,7 +68,7 @@ pub enum RecipeStep {
     Match {
         adapter: String,
         arguments: Box<[OperationArgument]>,
-        input: String,
+        inputs: Box<[String]>,
         binding: String,
         output_sort: String,
         retention: u64,
@@ -77,7 +77,7 @@ pub enum RecipeStep {
     Reduce {
         reducer: String,
         arguments: Box<[OperationArgument]>,
-        input: String,
+        inputs: Box<[String]>,
         binding: String,
         output_sort: String,
         retention: u64,
@@ -86,7 +86,7 @@ pub enum RecipeStep {
     Canonicalize {
         action: String,
         arguments: Box<[OperationArgument]>,
-        input: String,
+        inputs: Box<[String]>,
         binding: String,
         output_sort: String,
         retention: u64,
@@ -114,11 +114,11 @@ impl RecipeStep {
         }
     }
 
-    fn input(&self) -> &str {
+    fn inputs(&self) -> &[String] {
         match self {
-            Self::Match { input, .. }
-            | Self::Reduce { input, .. }
-            | Self::Canonicalize { input, .. } => input,
+            Self::Match { inputs, .. }
+            | Self::Reduce { inputs, .. }
+            | Self::Canonicalize { inputs, .. } => inputs,
         }
     }
 
@@ -215,12 +215,24 @@ impl SemanticRecipe {
         let mut bounded_bindings = BTreeSet::new();
         for step in &self.steps {
             let binding = step.binding();
-            let input = step.input();
             validate_plan_name(binding)?;
-            validate_plan_name(input)?;
             validate_plan_name(step.output_sort())?;
-            if !bindings.contains(input) {
-                return invalid("semantic recipe step references an unknown input binding");
+            let inputs = step.inputs();
+            if inputs.is_empty() || inputs.len() > MAX_PLAN_OPS {
+                return invalid("semantic recipe operation has an invalid input count");
+            }
+            if step.kind() == OpKind::Match && inputs.len() != 1 {
+                return invalid("semantic match operations require exactly one input");
+            }
+            let mut unique_inputs = BTreeSet::new();
+            for input in inputs {
+                validate_plan_name(input)?;
+                if !bindings.contains(input.as_str()) {
+                    return invalid("semantic recipe step references an unknown input binding");
+                }
+                if !unique_inputs.insert(input.as_str()) {
+                    return invalid("semantic recipe operation repeats an input binding");
+                }
             }
             if !bindings.insert(binding) {
                 return invalid("semantic recipe contains a duplicate binding");
@@ -246,6 +258,13 @@ impl SemanticRecipe {
                 RecipeStep::Match { adapter, .. } => validate_plan_name(adapter)?,
                 RecipeStep::Reduce { reducer, .. } => {
                     validate_plan_name(reducer)?;
+                    if inputs.len() > 1
+                        && !inputs
+                            .iter()
+                            .all(|input| bounded_bindings.contains(input.as_str()))
+                    {
+                        return invalid("multi-input reducers require bounded input artifacts");
+                    }
                     reduced_bindings.insert(binding);
                     bounded_bindings.insert(binding);
                 }
@@ -255,9 +274,18 @@ impl SemanticRecipe {
                     ..
                 } => {
                     validate_plan_name(action)?;
-                    if !reduced_bindings.contains(input) && !streamed_partition {
+                    if *streamed_partition && inputs.len() != 1 {
                         return invalid(
-                            "canonicalization requires a reducer output or streamed partition",
+                            "streamed canonicalization requires exactly one input partition",
+                        );
+                    }
+                    if !streamed_partition
+                        && !inputs
+                            .iter()
+                            .all(|input| reduced_bindings.contains(input.as_str()))
+                    {
+                        return invalid(
+                            "canonicalization requires reducer outputs or a streamed partition",
                         );
                     }
                     bounded_bindings.insert(binding);
@@ -328,7 +356,7 @@ pub fn format_semantic_recipe(recipe: &SemanticRecipe) -> Result<String, Control
             RecipeStep::Match {
                 adapter,
                 arguments,
-                input,
+                inputs,
                 binding,
                 output_sort,
                 retention,
@@ -336,7 +364,7 @@ pub fn format_semantic_recipe(recipe: &SemanticRecipe) -> Result<String, Control
             } => text.push_str(&format!(
                 "  match {} from {} as {} sort {} retain {} memory {};\n",
                 format_operation(adapter, arguments)?,
-                format_plan_name(input)?,
+                format_inputs(inputs)?,
                 format_plan_name(binding)?,
                 format_plan_name(output_sort)?,
                 retention,
@@ -345,7 +373,7 @@ pub fn format_semantic_recipe(recipe: &SemanticRecipe) -> Result<String, Control
             RecipeStep::Reduce {
                 reducer,
                 arguments,
-                input,
+                inputs,
                 binding,
                 output_sort,
                 retention,
@@ -353,7 +381,7 @@ pub fn format_semantic_recipe(recipe: &SemanticRecipe) -> Result<String, Control
             } => text.push_str(&format!(
                 "  reduce {} from {} as {} sort {} retain {} memory {};\n",
                 format_operation(reducer, arguments)?,
-                format_plan_name(input)?,
+                format_inputs(inputs)?,
                 format_plan_name(binding)?,
                 format_plan_name(output_sort)?,
                 retention,
@@ -362,7 +390,7 @@ pub fn format_semantic_recipe(recipe: &SemanticRecipe) -> Result<String, Control
             RecipeStep::Canonicalize {
                 action,
                 arguments,
-                input,
+                inputs,
                 binding,
                 output_sort,
                 retention,
@@ -372,7 +400,7 @@ pub fn format_semantic_recipe(recipe: &SemanticRecipe) -> Result<String, Control
             } => text.push_str(&format!(
                 "  canonicalize {} from {} as {} sort {} retain {} memory {} streamed {} contract {} verified {};\n",
                 format_operation(action, arguments)?,
-                format_plan_name(input)?,
+                format_inputs(inputs)?,
                 format_plan_name(binding)?,
                 format_plan_name(output_sort)?,
                 retention,
@@ -429,6 +457,17 @@ fn format_operation(name: &str, arguments: &[OperationArgument]) -> Result<Strin
     Ok(text)
 }
 
+fn format_inputs(inputs: &[String]) -> Result<String, ControlError> {
+    let mut text = String::new();
+    for (index, input) in inputs.iter().enumerate() {
+        if index != 0 {
+            text.push_str(", ");
+        }
+        text.push_str(&format_plan_name(input)?);
+    }
+    Ok(text)
+}
+
 struct RecipeParser<'a> {
     text: &'a str,
     tokens: Vec<PlanTextToken>,
@@ -477,8 +516,7 @@ impl<'a> RecipeParser<'a> {
                 "match" => {
                     let (adapter, arguments) = self.operation()?;
                     self.expect_word("from")?;
-                    let input = self.name()?;
-                    self.expect_word("as")?;
+                    let inputs = self.inputs()?;
                     let binding = self.name()?;
                     self.expect_word("sort")?;
                     let output_sort = self.name()?;
@@ -488,7 +526,7 @@ impl<'a> RecipeParser<'a> {
                     steps.push(RecipeStep::Match {
                         adapter,
                         arguments,
-                        input,
+                        inputs,
                         binding,
                         output_sort,
                         retention,
@@ -498,8 +536,7 @@ impl<'a> RecipeParser<'a> {
                 "reduce" => {
                     let (reducer, arguments) = self.operation()?;
                     self.expect_word("from")?;
-                    let input = self.name()?;
-                    self.expect_word("as")?;
+                    let inputs = self.inputs()?;
                     let binding = self.name()?;
                     self.expect_word("sort")?;
                     let output_sort = self.name()?;
@@ -509,7 +546,7 @@ impl<'a> RecipeParser<'a> {
                     steps.push(RecipeStep::Reduce {
                         reducer,
                         arguments,
-                        input,
+                        inputs,
                         binding,
                         output_sort,
                         retention,
@@ -519,8 +556,7 @@ impl<'a> RecipeParser<'a> {
                 "canonicalize" => {
                     let (action, arguments) = self.operation()?;
                     self.expect_word("from")?;
-                    let input = self.name()?;
-                    self.expect_word("as")?;
+                    let inputs = self.inputs()?;
                     let binding = self.name()?;
                     self.expect_word("sort")?;
                     let output_sort = self.name()?;
@@ -550,7 +586,7 @@ impl<'a> RecipeParser<'a> {
                     steps.push(RecipeStep::Canonicalize {
                         action,
                         arguments,
-                        input,
+                        inputs,
                         binding,
                         output_sort,
                         retention,
@@ -599,6 +635,18 @@ impl<'a> RecipeParser<'a> {
         };
         recipe.validate()?;
         Ok(recipe)
+    }
+
+    fn inputs(&mut self) -> Result<Box<[String]>, ControlError> {
+        let mut inputs = Vec::new();
+        loop {
+            inputs.push(self.name()?);
+            if !self.consume(&PlanTextTokenKind::Comma) {
+                break;
+            }
+        }
+        self.expect_word("as")?;
+        Ok(inputs.into_boxed_slice())
     }
 
     fn expression_until_semicolon(&mut self) -> Result<PlanExpr, ControlError> {
