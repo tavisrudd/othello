@@ -2390,6 +2390,13 @@ mod tests {
         assert_eq!(completed["summary"]["selection_exploration_slots"], 2);
         assert_eq!(completed["summary"]["selection_guided_slots"], 0);
         assert_eq!(completed["summary"]["selection_balanced_slots"], 0);
+        assert_eq!(
+            completed["summary"]["semantic_niche_slots"]
+                .as_u64()
+                .unwrap()
+                + completed["summary"]["global_elite_slots"].as_u64().unwrap(),
+            2
+        );
         let relative = completed["path"].as_str().unwrap();
         let evidence = fs::read_to_string(campaign.manifest.run_dir.join(relative)).unwrap();
         assert_eq!(evidence.lines().count(), 6);
@@ -2400,6 +2407,8 @@ mod tests {
         assert_eq!(records[0]["schema"], "ergodis-evolution-evidence-v0");
         assert_eq!(records[0]["problem"], "threshold");
         assert_eq!(records[1]["operator"], "seed");
+        assert_eq!(records[1]["semantic_niche"]["operator"], "seed");
+        assert_eq!(records[1]["semantic_niche"]["failure"], "false-positive");
         assert!(records[1]["parent_hash"].is_null());
         assert_eq!(records[1]["failure_shape"]["kind"], "false-positive");
         assert_eq!(records[1]["failure_shape"]["first_mismatch_id"], 1);

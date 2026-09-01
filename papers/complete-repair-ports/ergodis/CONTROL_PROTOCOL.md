@@ -186,6 +186,16 @@ never combined.  With no parent-relative evidence, allocation falls back to
 the balanced shares above.  The summary separately counts exploration,
 scorecard-guided, and no-signal balanced slots.
 
+Before assigning those slots, the daemon forms bounded semantic niches from
+the mutation operator, the complete false-positive/false-negative error class,
+and the base-two bucket of semantic-operation rows.  It admits the best
+outcome-distinct candidate from each niche in global score order, up to the
+beam bound, then fills remaining beam positions by the ordinary global order.
+Every evidence record carries its niche and the summary counts niche and global
+elite positions.  Elites are not re-expanded after their deterministic
+mutation prefix has already been consumed; durable archives preserve them for
+later replay without introducing repeated live work.
+
 Socket I/O, JSON, evidence serialization, and plan compilation happen outside
 worker hot loops.  Uncontrolled solves compile without the control-plane
 feature.  Controlled workers retain only the existing coarse safe-point flag;

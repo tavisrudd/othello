@@ -169,6 +169,73 @@ struct CandidateScore {
     complexity: usize,
 }
 
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd, Serialize)]
+#[serde(rename_all = "kebab-case")]
+enum FailureNiche {
+    Perfect,
+    FalsePositive,
+    FalseNegative,
+    Mixed,
+}
+
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd, Serialize)]
+struct SemanticNiche {
+    operator: &'static str,
+    failure: FailureNiche,
+    semantic_op_row_log2: u8,
+}
+
+impl SemanticNiche {
+    fn new(
+        operator: &'static str,
+        false_positive: u64,
+        false_negative: u64,
+        semantic_op_rows: u64,
+    ) -> Self {
+        let failure = match (false_positive != 0, false_negative != 0) {
+            (false, false) => FailureNiche::Perfect,
+            (true, false) => FailureNiche::FalsePositive,
+            (false, true) => FailureNiche::FalseNegative,
+            (true, true) => FailureNiche::Mixed,
+        };
+        Self {
+            operator,
+            failure,
+            semantic_op_row_log2: semantic_op_rows.checked_ilog2().unwrap_or(0) as u8,
+        }
+    }
+}
+
+#[derive(Clone)]
+struct RankedCandidate {
+    score: CandidateScore,
+    outcome_hash: String,
+    hash: String,
+    plan: PlanSpec,
+    first_mismatch: Option<usize>,
+    operator: &'static str,
+    niche: SemanticNiche,
+}
+
+impl RankedCandidate {
+    fn to_parent(&self) -> ExpansionParent {
+        ExpansionParent {
+            hash: self.hash.clone(),
+            plan: self.plan.clone(),
+            first_mismatch: self.first_mismatch,
+            score: self.score,
+            operator: self.operator,
+        }
+    }
+}
+
+struct EliteSelection {
+    parents: Vec<ExpansionParent>,
+    niche_slots: usize,
+    global_slots: usize,
+    outcome_rejections: usize,
+}
+
 #[derive(Clone, Copy)]
 struct ParentSelectionProfile {
     score: CandidateScore,
@@ -451,6 +518,70 @@ fn candidate_impact(child: CandidateScore, parent: CandidateScore) -> CandidateI
     }
 }
 
+fn ranked_candidate_cmp(left: &RankedCandidate, right: &RankedCandidate) -> std::cmp::Ordering {
+    right
+        .score
+        .correct
+        .cmp(&left.score.correct)
+        .then_with(|| left.score.false_positive.cmp(&right.score.false_positive))
+        .then_with(|| left.score.complexity.cmp(&right.score.complexity))
+        .then_with(|| left.plan.name.cmp(&right.plan.name))
+        .then_with(|| left.hash.cmp(&right.hash))
+}
+
+fn select_semantic_elites(
+    mut ranked: Vec<RankedCandidate>,
+    beam: usize,
+    capacity: usize,
+) -> EliteSelection {
+    let limit = beam.min(capacity);
+    ranked.sort_unstable_by(ranked_candidate_cmp);
+    let mut parents = Vec::with_capacity(limit);
+    let mut selected = vec![false; ranked.len()];
+    let mut selected_hashes = BTreeSet::new();
+    let mut selected_outcomes = BTreeSet::new();
+    let mut selected_niches = BTreeSet::new();
+
+    for (index, candidate) in ranked.iter().enumerate() {
+        if parents.len() == limit {
+            break;
+        }
+        if selected_niches.contains(&candidate.niche)
+            || selected_outcomes.contains(&candidate.outcome_hash)
+            || selected_hashes.contains(&candidate.hash)
+        {
+            continue;
+        }
+        selected_niches.insert(candidate.niche);
+        selected_outcomes.insert(candidate.outcome_hash.clone());
+        selected_hashes.insert(candidate.hash.clone());
+        selected[index] = true;
+        parents.push(candidate.to_parent());
+    }
+    let niche_slots = parents.len();
+    let mut outcome_rejections = 0;
+    for (index, candidate) in ranked.iter().enumerate() {
+        if parents.len() == limit {
+            break;
+        }
+        if selected[index] || selected_hashes.contains(&candidate.hash) {
+            continue;
+        }
+        if !selected_outcomes.insert(candidate.outcome_hash.clone()) {
+            outcome_rejections += 1;
+            continue;
+        }
+        selected_hashes.insert(candidate.hash.clone());
+        parents.push(candidate.to_parent());
+    }
+    EliteSelection {
+        global_slots: parents.len() - niche_slots,
+        parents,
+        niche_slots,
+        outcome_rejections,
+    }
+}
+
 fn imported_candidate_cmp(
     left: &ImportedCandidate,
     right: &ImportedCandidate,
@@ -640,6 +771,8 @@ pub(super) fn run_evolution(
     let mut selection_exploration_slots = 0_u64;
     let mut selection_guided_slots = 0_u64;
     let mut selection_balanced_slots = 0_u64;
+    let mut semantic_niche_slots = 0_u64;
+    let mut global_elite_slots = 0_u64;
     let mut prior_parent_scores = BTreeMap::<String, CandidateScore>::new();
     let mut operator_scorecards = BTreeMap::<&'static str, OperatorScorecard>::new();
     let mut best: Option<(u64, u64, usize, PlanSpec)> = None;
@@ -826,6 +959,12 @@ pub(super) fn run_evolution(
             }
             let failure_shape =
                 failure_shape(&batch, &plan, evaluation.first_mismatch, &field_index);
+            let niche = SemanticNiche::new(
+                pending.operator,
+                evaluation.weighted_false_positive,
+                evaluation.weighted_false_negative,
+                semantic_op_rows,
+            );
             let failure_record = failure_shape_record(&batch, &failure_shape, &evaluation);
             outcome_classes
                 .entry(evaluation.outcome_hash.clone())
@@ -836,6 +975,7 @@ pub(super) fn run_evolution(
                 "source_hash": pending.source_hash,
                 "source_evidence": pending.source_evidence,
                 "operator": pending.operator,
+                "semantic_niche": niche,
                 "plan": &plan,
                 "hash": &compiled.hash,
                 "equivalent_to": equivalent_to,
@@ -886,63 +1026,37 @@ pub(super) fn run_evolution(
             ));
             survivor_keys.sort_unstable();
             survivor_keys.truncate(bounds.beam);
-            ranked.push((
-                evaluation.weighted_correct,
-                evaluation.weighted_false_positive,
-                plan.program.len(),
-                evaluation.outcome_hash,
-                compiled.hash,
+            ranked.push(RankedCandidate {
+                score,
+                outcome_hash: evaluation.outcome_hash,
+                hash: compiled.hash,
                 plan,
-                evaluation.first_mismatch,
-                pending.operator,
-            ));
+                first_mismatch: evaluation.first_mismatch,
+                operator: pending.operator,
+                niche,
+            });
             progress.tested.store(tested as u64, Ordering::Relaxed);
             progress.perfect.store(perfect as u64, Ordering::Relaxed);
         }
         if tested == bounds.max_candidates || generation + 1 == bounds.generations {
             break;
         }
-        ranked.sort_unstable_by(|left, right| {
-            right
-                .0
-                .cmp(&left.0)
-                .then_with(|| left.1.cmp(&right.1))
-                .then_with(|| left.2.cmp(&right.2))
-                .then_with(|| left.5.name.cmp(&right.5.name))
-        });
-        let mut expanded_outcomes = BTreeSet::new();
         let expansion_capacity = bounds.max_candidates.saturating_sub(tested);
-        let mut parents = Vec::with_capacity(bounds.beam.min(expansion_capacity));
-        for (
-            correct,
-            false_positive,
-            complexity,
-            outcome_hash,
-            parent_hash,
-            parent,
-            first_mismatch,
-            operator,
-        ) in ranked
-        {
-            if parents.len() == bounds.beam || parents.len() == expansion_capacity {
-                break;
-            }
-            if !expanded_outcomes.insert(outcome_hash) {
-                outcome_expansion_rejections += 1;
-                continue;
-            }
-            parents.push(ExpansionParent {
-                hash: parent_hash,
-                plan: parent,
-                first_mismatch,
-                score: CandidateScore {
-                    correct,
-                    false_positive,
-                    complexity,
-                },
-                operator,
-            });
-        }
+        let selection = select_semantic_elites(ranked, bounds.beam, expansion_capacity);
+        checked_counter_add(
+            &mut semantic_niche_slots,
+            selection.niche_slots as u64,
+            "semantic niche slot",
+        )?;
+        checked_counter_add(
+            &mut global_elite_slots,
+            selection.global_slots as u64,
+            "global elite slot",
+        )?;
+        outcome_expansion_rejections = outcome_expansion_rejections
+            .checked_add(selection.outcome_rejections)
+            .ok_or_else(|| ControlError::Invalid("outcome rejection counter overflow".into()))?;
+        let parents = selection.parents;
         if parents.is_empty() {
             break;
         }
@@ -995,6 +1109,8 @@ pub(super) fn run_evolution(
         "selection_exploration_slots": selection_exploration_slots,
         "selection_guided_slots": selection_guided_slots,
         "selection_balanced_slots": selection_balanced_slots,
+        "semantic_niche_slots": semantic_niche_slots,
+        "global_elite_slots": global_elite_slots,
         "operator_scorecards": &operator_scorecards,
         "bytes": bytes,
         "truncated": truncated,
@@ -1043,6 +1159,8 @@ pub(super) fn run_evolution(
         "selection_exploration_slots": selection_exploration_slots,
         "selection_guided_slots": selection_guided_slots,
         "selection_balanced_slots": selection_balanced_slots,
+        "semantic_niche_slots": semantic_niche_slots,
+        "global_elite_slots": global_elite_slots,
         "operator_scorecards": operator_scorecards,
         "bytes": bytes,
         "truncated": truncated,
@@ -1522,6 +1640,58 @@ mod tests {
             },
             operator,
         }
+    }
+
+    fn niche_candidate(
+        name: &str,
+        correct: u64,
+        operator: &'static str,
+        expected: Option<bool>,
+        cost: u64,
+    ) -> RankedCandidate {
+        let parent = selector_parent(name, operator);
+        let (false_positive, false_negative) = match expected {
+            None => (0, 0),
+            Some(false) => (1, 0),
+            Some(true) => (0, 1),
+        };
+        RankedCandidate {
+            score: CandidateScore {
+                correct,
+                false_positive: 0,
+                complexity: 1,
+            },
+            outcome_hash: format!("outcome-{name}"),
+            hash: parent.hash,
+            plan: parent.plan,
+            first_mismatch: parent.first_mismatch,
+            operator,
+            niche: SemanticNiche::new(operator, false_positive, false_negative, cost),
+        }
+    }
+
+    #[test]
+    fn semantic_niches_preserve_diverse_elites_before_global_fill() {
+        let current = vec![
+            niche_candidate("best-a", 10, "constant-delta", Some(true), 8),
+            niche_candidate("second-a", 9, "constant-delta", Some(true), 8),
+            niche_candidate("best-b", 8, "scope", Some(false), 64),
+        ];
+        let selection = select_semantic_elites(current, 2, 2);
+        assert_eq!(selection.niche_slots, 2);
+        assert_eq!(selection.global_slots, 0);
+        assert_eq!(selection.parents[0].hash, "best-a");
+        assert_eq!(selection.parents[1].hash, "best-b");
+
+        let current = vec![
+            niche_candidate("best-a", 10, "constant-delta", Some(true), 8),
+            niche_candidate("second-a", 9, "constant-delta", Some(true), 8),
+        ];
+        let selection = select_semantic_elites(current, 2, 2);
+        assert_eq!(selection.niche_slots, 1);
+        assert_eq!(selection.global_slots, 1);
+        assert_eq!(selection.parents[0].hash, "best-a");
+        assert_eq!(selection.parents[1].hash, "second-a");
     }
 
     #[test]
