@@ -1470,6 +1470,15 @@ files are disposable and may be deleted at any time.
    the wrong objective here. The replayable patch and seven raw pairs are in
    `ergodis-private/evidence/c985-bb756-pivot-word-buckets-rejected.json`, and
    production remains restored.
+   Whole-kernel hardware cloning is also rejected. An indirect outer dispatch
+   to AVX2/BMI/POPCNT-specialized targeted and best-effort loops preserves
+   exact work/output but adds 32.50% instructions, 16.15% cycles
+   (`t=-17.11`), and 14.46% wall time (`t=-6.51`). The clone/inlining code shape
+   overwhelms any vector opportunity. Future SIMD work must isolate a narrow
+   primitive with its own admission gate rather than multiversion the search
+   machine. The replayable patch and raw pairs are in
+   `ergodis-private/evidence/c985-bb756-whole-kernel-multiversion-rejected.json`;
+   production is again unchanged.
 
    Step (6) is now closed as a measured negative for the motivating PRS
    client.  A source-attributed one-thread profile of the complete

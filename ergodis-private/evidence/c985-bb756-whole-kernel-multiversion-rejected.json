@@ -1,0 +1,44 @@
+{
+  "schema": "ergodis-private-rejected-kernel-ab-v0",
+  "baseline_commit": "071e21687",
+  "candidate_patch": "ergodis-private/evidence/c985-bb756-whole-kernel-multiversion-rejected.patch",
+  "candidate_patch_sha256": "6d8d7aeb55f50b4abed2cb7f140163f4c7bc62322545e45bb2f6f9e8979fe27c",
+  "input_sha256": "83bd1eaf7787cd367f4c6da060658abff902f6404545e42c0902ce12cd198fe2",
+  "build": "release --all-features",
+  "protocol": {
+    "pairs": 7,
+    "cpu": 2,
+    "threads": 1,
+    "trials_per_arm": 2000,
+    "seed": 1018003,
+    "target_weight": 32,
+    "osd_order": 2,
+    "osd_window": 96,
+    "best_effort": true,
+    "alternated_order": true,
+    "exact_result_parity": true
+  },
+  "round_value_order": ["cycles", "instructions", "branches", "branch_misses", "duration_time_ns"],
+  "rounds": [
+    {"round": 1, "baseline": [11428249466,26343934116,5835751251,183577171,2689007847], "candidate": [13145768129,34904666367,5880125064,183600322,2866055943]},
+    {"round": 2, "baseline": [11334408116,26343933210,5835750815,183640283,2495356304], "candidate": [13634516329,34904666607,5880125439,183572218,3073294956]},
+    {"round": 3, "baseline": [11542960310,26343933056,5835750792,183747701,2585139906], "candidate": [13337097863,34904667037,5880125401,183391673,2948214173]},
+    {"round": 4, "baseline": [11519657746,26343933712,5835751131,183673887,2594509181], "candidate": [13168797573,34904666078,5880124988,183450133,2893353758]},
+    {"round": 5, "baseline": [11315166309,26343933297,5835751103,183593907,2469135950], "candidate": [13560099839,34904666784,5880125665,183598583,3049379738]},
+    {"round": 6, "baseline": [11591952108,26343933862,5835750987,183897990,2594198102], "candidate": [13243357650,34904666228,5880125078,183337416,2907061641]},
+    {"round": 7, "baseline": [11482217157,26343932611,5835750696,183692671,2559750192], "candidate": [13085342102,34904665532,5880124788,183300988,2852284879]}
+  ],
+  "geometric_baseline_over_candidate": {
+    "cycles": 0.860965,
+    "cycles_t": -17.11,
+    "instructions": 0.754740,
+    "instructions_t": -32578353.06,
+    "branches": 0.992454,
+    "branches_t": -330315.80,
+    "branch_misses": 1.001224,
+    "branch_misses_t": 2.67,
+    "duration": 0.873633,
+    "duration_t": -6.51
+  },
+  "decision": "Rejected and removed. Whole-kernel indirect AVX2/BMI/POPCNT multiversioning increases instructions 32.50 percent, cycles 16.15 percent, and wall time 14.46 percent. Any retained SIMD import must instead isolate a narrow primitive whose dispatch and code shape are measured independently."
+}
