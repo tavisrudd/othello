@@ -1086,6 +1086,27 @@ files are disposable and may be deleted at any time.
    another agent's uncommitted private support modules, so the commit-clean
    public control remains the independent admission basis. The next target
    must come from a fresh profile of the byte-lane endpoint.
+
+   That endpoint profile makes the dense-orbit membership bitmap the largest
+   remaining local cluster, but three direct substitutions are measured
+   rejections. Batching three distinct-word insertions into one helper adds
+   1.5% instructions and 4.0% branches and loses 8.3% cycles at 1T
+   (`t=-2.19`); its 12T cycle point is unresolved (`1.022376x`, `t=0.46`). An
+   x86 non-atomic `bts` test-and-set preserves instruction count and removes
+   2.4% of branches at 1T, but raises branch misses 9.2% and loses 8.3% cycles
+   (`t=-3.62`); at 12T it loses 9.9% cycles (`t=-5.06`). Finally, replacing
+   checked bitmap indexing with a private validate-once unchecked primitive
+   removes 1.7% of instructions and 2.4% of branches at 1T, but the 5.8%
+   cycle point is unresolved (`t=1.15`) and the 12T point is slightly adverse
+   and unresolved (`0.989419x`, `t=-0.61`). Exact output digests agree in all
+   modes. Commits `9c358554a` and `16f5a69b3` retain the first two raw
+   controls; the unchecked-index control is
+   `c985-c1018-dense-orbit-unchecked-index-rejected.tsv`. None of the three
+   source designs remains. The next bitmap-adjacent experiment must remove a
+   larger structural cost than a single bounds check or instruction
+   substitution; the profile-visible `Vec` append/capacity path is the next
+   candidate, conditional on an orbit-size proof and a presized fixed buffer.
+
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
