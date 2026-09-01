@@ -649,6 +649,10 @@ files are disposable and may be deleted at any time.
    and output-path checks run before the state-changing request. This remains
    entirely outside solve threads and carries no proof authority. The full
    all-target/all-feature suite, strict clippy, and doc tests pass.
+   Commit `a0c41f948` adds the permanent socket-level gate: a fresh campaign
+   compiles grouped evidence, reopens it, synthesizes/evaluates the plan,
+   verifies both create-only artifacts, proves that an existing output blocks
+   the request before any second evidence side effect, and shuts down cleanly.
    Commit `aed0d7a89` exposes that parser's bounded lexer, token locations,
    name/literal contracts, and scalar expression parser/formatter as one
    domain-neutral cold control-plane substrate.  The complete public
