@@ -137,6 +137,7 @@ pub(super) struct EvolutionBounds {
     pub beam: usize,
     pub max_candidates: usize,
     pub byte_limit: u64,
+    pub target_field: Option<usize>,
 }
 
 struct ScopeMutationProfile {
@@ -241,6 +242,7 @@ struct SemanticNiche {
     operator: &'static str,
     failure: FailureNiche,
     semantic_op_row_log2: u8,
+    target_value: Option<i64>,
 }
 
 impl SemanticNiche {
@@ -249,6 +251,7 @@ impl SemanticNiche {
         false_positive: u64,
         false_negative: u64,
         semantic_op_rows: u64,
+        target_value: Option<i64>,
     ) -> Self {
         let failure = match (false_positive != 0, false_negative != 0) {
             (false, false) => FailureNiche::Perfect,
@@ -260,6 +263,7 @@ impl SemanticNiche {
             operator,
             failure,
             semantic_op_row_log2: semantic_op_rows.checked_ilog2().unwrap_or(0) as u8,
+            target_value,
         }
     }
 }
@@ -1406,6 +1410,14 @@ pub(super) fn run_evolution(
     bounds: EvolutionBounds,
     progress: Arc<EvolutionProgress>,
 ) -> Result<Value, ControlError> {
+    if bounds
+        .target_field
+        .is_some_and(|field| field >= batch.fields.len())
+    {
+        return Err(ControlError::Invalid(
+            "evolution target field is out of range".into(),
+        ));
+    }
     // SAFETY: setpriority has no pointer arguments; `who = 0` selects only the
     // calling Linux task. Failure is reported in the job summary.
     let low_priority = unsafe { libc::setpriority(libc::PRIO_PROCESS, 0, 10) } == 0;
@@ -1465,6 +1477,8 @@ pub(super) fn run_evolution(
     let mut hindsight_replayed = 0_u64;
     let mut hindsight_replay_rejections = 0_u64;
     let mut hindsight_replay_rows = 0_u64;
+    let mut target_selection_slots = BTreeMap::<i64, u64>::new();
+    let mut target_selection_overflow = 0_u64;
     let mut prior_parent_scores = BTreeMap::<String, CandidateScore>::new();
     let mut retained_elites = Vec::<ExpansionParent>::new();
     let mut hindsight_semantics = BTreeSet::<String>::new();
@@ -1707,11 +1721,15 @@ pub(super) fn run_evolution(
             }
             let failure_shape =
                 failure_shape(&batch, &plan, evaluation.first_mismatch, &field_index);
+            let target_value = bounds
+                .target_field
+                .and_then(|field| evaluation.first_mismatch.map(|row| batch.row(row)[field]));
             let niche = SemanticNiche::new(
                 pending.operator,
                 evaluation.weighted_false_positive,
                 evaluation.weighted_false_negative,
                 semantic_op_rows,
+                target_value,
             );
             let failure_record = failure_shape_record(&batch, &failure_shape, &evaluation);
             outcome_classes
@@ -1815,6 +1833,22 @@ pub(super) fn run_evolution(
         let parents = selection.parents;
         if parents.is_empty() {
             break;
+        }
+        for parent in &parents {
+            let Some(value) = parent.niche.target_value else {
+                continue;
+            };
+            if let Some(count) = target_selection_slots.get_mut(&value) {
+                checked_counter_add(count, 1, "target selection slot")?;
+            } else if target_selection_slots.len() < 64 {
+                target_selection_slots.insert(value, 1);
+            } else {
+                checked_counter_add(
+                    &mut target_selection_overflow,
+                    1,
+                    "target selection overflow",
+                )?;
+            }
         }
         for parent in &parents {
             if hindsight_semantics.len() == MAX_HINDSIGHT_FRAGMENTS
@@ -2007,6 +2041,9 @@ pub(super) fn run_evolution(
         "hindsight_replayed": hindsight_replayed,
         "hindsight_replay_rejections": hindsight_replay_rejections,
         "hindsight_replay_rows": hindsight_replay_rows,
+        "target_field": bounds.target_field.map(|field| batch.fields[field].as_str()),
+        "target_selection_slots": &target_selection_slots,
+        "target_selection_overflow": target_selection_overflow,
         "operator_scorecards": &operator_scorecards,
         "bytes": bytes,
         "truncated": truncated,
@@ -2070,6 +2107,9 @@ pub(super) fn run_evolution(
         "hindsight_replayed": hindsight_replayed,
         "hindsight_replay_rejections": hindsight_replay_rejections,
         "hindsight_replay_rows": hindsight_replay_rows,
+        "target_field": bounds.target_field.map(|field| batch.fields[field].as_str()),
+        "target_selection_slots": target_selection_slots,
+        "target_selection_overflow": target_selection_overflow,
         "operator_scorecards": operator_scorecards,
         "bytes": bytes,
         "truncated": truncated,
@@ -2549,7 +2589,7 @@ mod tests {
                 complexity: 1,
             },
             operator,
-            niche: SemanticNiche::new(operator, 0, 1, 8),
+            niche: SemanticNiche::new(operator, 0, 1, 8, None),
             mutation_cursor: 0,
         }
     }
@@ -2578,7 +2618,7 @@ mod tests {
             plan: parent.plan,
             first_mismatch: parent.first_mismatch,
             operator,
-            niche: SemanticNiche::new(operator, false_positive, false_negative, cost),
+            niche: SemanticNiche::new(operator, false_positive, false_negative, cost, None),
             mutation_cursor: 0,
             retained: false,
         }
@@ -2606,6 +2646,16 @@ mod tests {
         assert_eq!(selection.global_slots, 1);
         assert_eq!(selection.parents[0].hash, "best-a");
         assert_eq!(selection.parents[1].hash, "second-a");
+
+        let mut target_zero = niche_candidate("target-zero", 10, "scope", Some(true), 8);
+        target_zero.niche.target_value = Some(0);
+        let mut target_one = niche_candidate("target-one", 100, "scope", Some(true), 8);
+        target_one.niche.target_value = Some(1);
+        let selection = select_semantic_elites(vec![target_zero, target_one], &[], 2, 2);
+        assert_eq!(selection.niche_slots, 2);
+        assert_eq!(selection.global_slots, 0);
+        assert_eq!(selection.parents[0].hash, "target-one");
+        assert_eq!(selection.parents[1].hash, "target-zero");
 
         let mut retained = selector_parent("retained-b", "scope");
         retained.score.correct = 8;
@@ -2759,7 +2809,7 @@ mod tests {
                 complexity: 7,
             },
             operator: "seed",
-            niche: SemanticNiche::new("seed", 0, 1, 28),
+            niche: SemanticNiche::new("seed", 0, 1, 28, None),
             mutation_cursor: 0,
         };
         let extraction =
@@ -2804,6 +2854,7 @@ mod tests {
                 beam: 1,
                 max_candidates: 2,
                 byte_limit: 64 * 1024,
+                target_field: None,
             },
             Arc::new(EvolutionProgress::new()),
         )
@@ -2863,7 +2914,7 @@ mod tests {
                 complexity: 7,
             },
             operator: "seed",
-            niche: SemanticNiche::new("seed", 0, 0, 21),
+            niche: SemanticNiche::new("seed", 0, 0, 21, None),
             mutation_cursor: 0,
         };
         let mut seen = BTreeSet::new();
@@ -2928,6 +2979,7 @@ mod tests {
                 beam: 1,
                 max_candidates: 2,
                 byte_limit: 64 * 1024,
+                target_field: None,
             },
             Arc::new(EvolutionProgress::new()),
         )
@@ -3016,6 +3068,7 @@ mod tests {
                 beam: 1,
                 max_candidates: 1,
                 byte_limit: 64 * 1024,
+                target_field: None,
             },
             Arc::new(EvolutionProgress::new()),
         )

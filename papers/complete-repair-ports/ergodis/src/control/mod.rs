@@ -1113,6 +1113,31 @@ impl Campaign {
             });
         }
         let direct_seeds = lowered.len();
+        let target_field_name = match args.get("target_field") {
+            None | Some(Value::Null) => None,
+            Some(value) => Some(
+                value
+                    .as_str()
+                    .ok_or_else(|| {
+                        ControlError::Invalid("evolve-start target_field must be a string".into())
+                    })?
+                    .to_owned(),
+            ),
+        };
+        let target_field = target_field_name
+            .as_ref()
+            .map(|name| {
+                self.batch
+                    .fields
+                    .iter()
+                    .position(|field| field == name)
+                    .ok_or_else(|| {
+                        ControlError::Invalid(format!(
+                            "evolve-start target_field {name:?} is unknown"
+                        ))
+                    })
+            })
+            .transpose()?;
         let identity = EvolutionIdentity {
             code_commit: self.manifest.code_commit.clone(),
             presentation_hash: self.manifest.presentation_hash.clone(),
@@ -1252,6 +1277,7 @@ impl Campaign {
             beam,
             max_candidates,
             byte_limit,
+            target_field,
         };
         let handle = thread::Builder::new()
             .name(format!("ergodis-evolve-{}", &id[..8]))
@@ -1285,6 +1311,7 @@ impl Campaign {
             "direct_seeds": direct_seeds,
             "replayed_seeds": replayed_seeds,
             "replayed_fragments": replayed_fragments,
+            "target_field": target_field_name,
         }))
     }
 
@@ -2325,6 +2352,16 @@ mod tests {
             .unwrap_err()
             .to_string()
             .contains("resume_evidence must be an array"));
+        assert!(campaign
+            .evolution_start(&json!({"seeds": [], "target_field": "missing"}))
+            .unwrap_err()
+            .to_string()
+            .contains("target_field \"missing\" is unknown"));
+        assert!(campaign
+            .evolution_start(&json!({"seeds": [], "target_field": 0}))
+            .unwrap_err()
+            .to_string()
+            .contains("target_field must be a string"));
         let seed = json!({
             "schema": PLAN_SCHEMA,
             "name": "threshold",
@@ -2354,9 +2391,11 @@ mod tests {
                 "generations": 4,
                 "beam": 2,
                 "max_candidates": 4,
+                "target_field": "x",
             }))
             .unwrap();
         assert_eq!(started["state"], "running");
+        assert_eq!(started["target_field"], "x");
         let completed = loop {
             let status = campaign.evolution_status().unwrap();
             if status["state"] != "running" {
@@ -2411,6 +2450,11 @@ mod tests {
         assert_eq!(completed["summary"]["selection_exploration_slots"], 2);
         assert_eq!(completed["summary"]["selection_guided_slots"], 0);
         assert_eq!(completed["summary"]["selection_balanced_slots"], 0);
+        assert_eq!(completed["summary"]["target_field"], "x");
+        assert_eq!(completed["summary"]["target_selection_overflow"], 0);
+        assert!(completed["summary"]["target_selection_slots"]
+            .as_object()
+            .is_some_and(|slots| !slots.is_empty()));
         assert_eq!(
             completed["summary"]["semantic_niche_slots"]
                 .as_u64()
@@ -2431,6 +2475,7 @@ mod tests {
         assert_eq!(records[1]["operator"], "seed");
         assert_eq!(records[1]["semantic_niche"]["operator"], "seed");
         assert_eq!(records[1]["semantic_niche"]["failure"], "false-positive");
+        assert_eq!(records[1]["semantic_niche"]["target_value"], 99);
         assert!(records[1]["parent_hash"].is_null());
         assert_eq!(records[1]["failure_shape"]["kind"], "false-positive");
         assert_eq!(records[1]["failure_shape"]["first_mismatch_id"], 1);
@@ -2461,6 +2506,7 @@ mod tests {
             .skip(3)
             .all(|record| record["operator"] != "seed"));
         assert_eq!(records[5]["type"], "summary");
+        assert_eq!(records[5]["summary"]["target_field"], "x");
         assert_eq!(records[5]["summary"]["bytes"], evidence.len() as u64);
         assert_eq!(
             records[5]["summary"]["bytes"],

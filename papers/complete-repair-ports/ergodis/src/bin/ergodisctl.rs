@@ -145,6 +145,9 @@ enum Command {
         beam: usize,
         #[arg(long, default_value_t = 1000)]
         max_candidates: usize,
+        /// Feature whose first-mismatch value defines an additional semantic niche.
+        #[arg(long)]
+        target_field: Option<String>,
         #[arg(long)]
         max_evidence_bytes: Option<u64>,
     },
@@ -248,6 +251,7 @@ fn main() -> Result<()> {
         generations,
         beam,
         max_candidates,
+        target_field,
         max_evidence_bytes,
     } = &cli.command
     {
@@ -266,6 +270,7 @@ fn main() -> Result<()> {
                 "generations": generations,
                 "beam": beam,
                 "max_candidates": max_candidates,
+                "target_field": target_field,
                 "max_evidence_bytes": max_evidence_bytes,
             }),
             cli.max_bytes,
