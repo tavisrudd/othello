@@ -222,11 +222,43 @@ within a few thousand candidates, and no 36-field or 55-field corpus is solved a
 one of the eleven falling inside ±0.2 points of its baseline on held-out data. The three successes
 are found early and cheaply — 2,638, 2,640 and 2,646 candidates — so this is not a budget question.
 
-Two readings are available and the screen does not separate them. Either the property is genuinely
-not expressible in the plan grammar over the wider feature sets, or it is expressible but unreachable
-by the available mutation operators from these seeds. The distinction matters and is testable: hand
-the 36-field corpora a seed that already encodes the shape which works at 21 fields and see whether
-the search can extend it.
+Two readings were available and the screen did not separate them: either the property is not
+expressible over the wider feature sets, or it is expressible and the mutation operators never reach
+it. **That has now been settled by exhaustive enumeration, and it is the first reading.**
+
+### Every two-field relation, enumerated
+
+`tools/c1031-viz/pairwise_probe.py` scores every ordered pair of fields under each of `eq`, `ne`,
+`lt`, `le`, `gt`, and `ge` — 3,780 predicates on a 36-field corpus, 8,910 on the 55-field one — on
+the training batch, then re-scores the winner on the held-out batch. The results are exact, not
+sampled.
+
+| corpus | fields | best two-field relation | held-out lift |
+|---|---|---|---|
+| corpus-00 | 21 | `f003 eq f020` | **+33.4** |
+| corpus-02 | 21 | `f011 eq f013` | **+33.4** |
+| corpus-03 | 21 | `f001 eq f010` | **+33.4** |
+| corpus-01, 04–12 | 36 | various `eq` pairs | −0.1 to +0.0 |
+| corpus-13 | 55 | `f000 eq f003` | +0.1 |
+
+Two conclusions follow, and they point in opposite directions from the earlier guess.
+
+**The search is not at fault, and this validates it.** On all fourteen corpora the evolutionary
+search's best plan matches the exhaustive two-field optimum to within a tenth of a point. Where a
+solving relation exists it is found, within a few thousand candidates; where none exists the search
+correctly returns nothing. Whatever else is wrong with the 36- and 55-field campaigns, the mutation
+operators are not failing to reach a reachable answer.
+
+**The wider corpora have no two-field answer to find.** No relation over any pair of fields beats the
+majority baseline by more than 0.2 points on held-out data, on any of the eleven. So spending more
+candidates on them is pointless, and so is enriching the mutation operators, as long as the target
+shape stays a two-field relation. Progress there needs either richer plan shapes — arithmetic
+combinations, three-field terms, conjunctions — or different features altogether. That is a question
+for whoever owns C1016, not for this task.
+
+The three solved corpora are each solved by a single field equality, which is worth stating plainly:
+the whole apparatus of beam search, behaviour archives, and 3,595-class populations was, on the
+corpora where it succeeded, finding `f003 == f020`.
 
 ### The exact ceiling is not a measure of learnability
 
