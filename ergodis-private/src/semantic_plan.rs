@@ -1,5 +1,7 @@
 //! Typed, bounded `match / reduce / canonicalize` recipe contracts.
 
+pub mod theorem;
+
 use ergodis::control::{
     format_plan_expression, format_plan_name, lex_plan_text, parse_plan_expression,
     parse_plan_u64_literal, validate_plan_name, ControlError, ExpressionPlanSpec, PlanExpr,
