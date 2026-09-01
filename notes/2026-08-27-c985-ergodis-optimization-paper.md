@@ -789,16 +789,27 @@ files are disposable and may be deleted at any time.
    improvements, perfect hits, rows, and semantic-operation rows.  Direct and
    replay roots do not dilute parent-relative improvement rates.
 
-   A 4 KiB footer reserve is removed from candidate capacity before the first
-   record is admitted.  Completed, cancelled, and candidate-truncated archives
-   therefore persist the aggregate scorecards; the footer's stabilized byte
-   count exactly equals both file length and daemon status.  A too-small limit
-   fails before writing even a partial header.  The exact two-parent control
-   checks both impact joins, operator aggregates, footer/status equality, and
-   the empty failed artifact.  Strict clippy and the complete public suite pass.
-   Next use these scorecards in a deterministic maximum-oriented selector with
-   an explicit exploration floor; do not import semantic islands or a learned
-   proposer before that selector has an exact synthetic control.
+   The initial scorecard commit reserves 4 KiB before admitting candidate
+   records.  Commit `6cb5e5e3a` expands that bound to 8 KiB for the paired
+   efficiency fields and completes the deterministic maximum-oriented P0
+   selector.  Every outcome-distinct parent receives one exploration slot;
+   surplus is assigned by an exact max-heap using correctness gain per
+   semantic-op row, false-positive reduction per semantic-op row,
+   parent-relative improvement rate, diminishing quota, and exact candidate
+   rank.  Absolute maxima and gain-per-cost extrema are independent, and each
+   efficiency numerator remains paired with the cost of the same trial.
+   Continued-fraction ratio comparison avoids cross-product overflow even at
+   maximum counters.  With no parent-relative signal the prior balanced shares
+   remain exact; an empty survivor beam terminates without claiming unassigned
+   slots.  Controls give `[5,5]` without scorecards, `[9,1]` for equal gain at a
+   tenfold cost difference, and no starvation or imbalance across 256 equal
+   parents and 100,000 slots.  The footer separately reports exploration,
+   guided, and balanced slots.  Completed, cancelled, and candidate-truncated
+   archives persist the aggregate scorecards; the stabilized byte count equals
+   both file length and daemon status, and a too-small limit leaves an empty
+   artifact.  Strict all-target/all-feature clippy and the complete
+   all-target/all-feature suite pass.  Do not import a learned proposer before
+   a bounded persistent semantic-niche/elite layer has an exact control.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
