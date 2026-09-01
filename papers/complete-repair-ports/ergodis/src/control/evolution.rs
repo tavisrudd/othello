@@ -71,6 +71,26 @@ struct PendingCandidate {
     operator: &'static str,
 }
 
+type EvolutionRankKey = (std::cmp::Reverse<u64>, u64, usize);
+
+#[inline]
+fn evolution_rank_key(correct: u64, false_positive: u64, complexity: usize) -> EvolutionRankKey {
+    (std::cmp::Reverse(correct), false_positive, complexity)
+}
+
+#[inline]
+fn can_enter_beam(
+    survivor_keys: &[EvolutionRankKey],
+    beam: usize,
+    maximum_correct: u64,
+    false_positive: u64,
+    complexity: usize,
+) -> bool {
+    survivor_keys.len() < beam
+        || evolution_rank_key(maximum_correct, false_positive, complexity)
+            <= survivor_keys[survivor_keys.len() - 1]
+}
+
 pub(super) fn run_evolution(
     batch: Arc<FeatureBatch>,
     current: Vec<PlanSpec>,
@@ -108,7 +128,7 @@ pub(super) fn run_evolution(
             .generation
             .store(generation as u64, Ordering::Relaxed);
         let mut ranked = Vec::new();
-        let mut survivor_keys = Vec::<(u64, std::cmp::Reverse<u64>, usize)>::new();
+        let mut survivor_keys = Vec::<EvolutionRankKey>::new();
         for pending in current.drain(..) {
             if tested == bounds.max_candidates || progress.cancelled.load(Ordering::Acquire) {
                 break 'generations;
@@ -125,12 +145,13 @@ pub(super) fn run_evolution(
             plan.name = format!("evolve-g{generation}-c{tested}");
             let compiled = CompiledPlan::compile(&plan, &batch.fields)?;
             let can_enter = |false_positive: u64, maximum_correct: u64| {
-                if survivor_keys.len() < bounds.beam {
-                    return true;
-                }
-                let worst = survivor_keys[survivor_keys.len() - 1];
-                false_positive < worst.0
-                    || (false_positive == worst.0 && maximum_correct >= worst.1 .0)
+                can_enter_beam(
+                    &survivor_keys,
+                    bounds.beam,
+                    maximum_correct,
+                    false_positive,
+                    plan.program.len(),
+                )
             };
             let (evaluation, examined) =
                 evaluate_plan_cascaded(&batch, &compiled, Some(&can_enter))?;
@@ -202,9 +223,9 @@ pub(super) fn run_evolution(
                     plan.clone(),
                 ));
             }
-            survivor_keys.push((
+            survivor_keys.push(evolution_rank_key(
+                evaluation.weighted_correct,
                 evaluation.weighted_false_positive,
-                std::cmp::Reverse(evaluation.weighted_correct),
                 plan.program.len(),
             ));
             survivor_keys.sort_unstable();
@@ -448,5 +469,23 @@ fn mutate_plan(
                 operator,
             });
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn cascade_gate_uses_the_reported_beam_order() {
+        let mut survivors = vec![evolution_rank_key(90, 20, 4), evolution_rank_key(80, 0, 4)];
+        survivors.sort_unstable();
+
+        // More correct candidates beat a lower-false-positive survivor under
+        // the published ordering; the old false-positive-first gate rejected
+        // this candidate before its score could be observed.
+        assert!(can_enter_beam(&survivors, 2, 85, 10, 4));
+        assert!(!can_enter_beam(&survivors, 2, 79, 0, 1));
+        assert!(can_enter_beam(&survivors, 2, 80, 0, 3));
     }
 }

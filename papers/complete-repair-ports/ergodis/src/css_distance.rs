@@ -2239,11 +2239,8 @@ where
         // the same prefix frontier.  A shard-local incumbent may prune its
         // assigned deep branches, but must not change or renumber that shared
         // frontier across anchors.
-        let mut active_bound = wide_prefix_initial_bound(
-            searched_maximum_weight,
-            initial_bound,
-            shard.is_some(),
-        );
+        let mut active_bound =
+            wide_prefix_initial_bound(searched_maximum_weight, initial_bound, shard.is_some());
         while branches.len() < target_branches {
             let mut next = Vec::with_capacity(branches.len().saturating_mul(5));
             for branch in branches {
@@ -5450,8 +5447,14 @@ mod tests {
         let searched = 12;
         let expected = searched + 1;
         for incumbent in 1..=expected {
-            assert_eq!(wide_prefix_initial_bound(searched, incumbent, true), expected);
-            assert_eq!(wide_prefix_initial_bound(searched, incumbent, false), incumbent);
+            assert_eq!(
+                wide_prefix_initial_bound(searched, incumbent, true),
+                expected
+            );
+            assert_eq!(
+                wide_prefix_initial_bound(searched, incumbent, false),
+                incumbent
+            );
         }
     }
 
