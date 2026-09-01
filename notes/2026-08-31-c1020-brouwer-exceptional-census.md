@@ -313,10 +313,22 @@ work under the previous core would have needed a hand-written `GF(p^h)` in the d
   the "look outside the searched range" reading recorded before. Residual gap, genuinely open: this
   rules out a third member of *this* family, not a different constant-size figure meeting `(q+1)/2`
   at some other `q`. Owning successor: unallocated.
-- **Whether ten is the global maximum Brianchon count for a six-arc in `PG(2,q)` is unknown.**
-  Settled by this pass only *within* the exceptional configurations: the spectrum tops out at ten,
-  reached at `q = 11` and `q = 31` and never at `q = 19, 23, 27`. Not settled over all six-arcs, which
-  would need a separate census. Evidence gap: no run over unrestricted six-arcs.
+- **SETTLED 2026-08-31 — ten *is* the global maximum, and the census this entry asked for must not
+  be run.** Recorded here as open ("not settled over all six-arcs, which would need a separate
+  census"), it is already answered inside this repository, which is why the entry is a
+  cross-repository consistency failure rather than a mathematical gap. The portfolio results
+  snapshot (`notes/2026-07-31-results-summary-snapshot.md`) states the bound of ten
+  triple-concurrence points as a theorem over every field in which two is invertible, proved from
+  scratch and machine-checked in Lean, together with a rigid equality case: attaining ten forces
+  every chord into exactly one non-concurrent matching, gives five such matchings one-factorizing
+  the fifteen chords, and puts the arc in the golden normal form, so equality forces a golden root
+  into the ground field. The snapshot's priority boundary also records Dye 1991 as the prior source
+  of the bound and the `A₅` stabiliser. So the unrestricted six-arc census would recompute a
+  machine-checked theorem — do not run it. Flagged by the campaign design
+  (`notes/2026-08-31-clebsch-hexagon-campaign-design.md`) and verified against the snapshot here.
+  Residual, genuinely open: this pass's own observation that the spectrum *within* the exceptional
+  configurations tops out at ten and is never approached at `q = 19, 23, 27` is a statement about
+  the exceptional census, not about six-arcs generally, and no source covers it.
 - **Settled by this pass.** That the `q = 31` Petersen and the `q = 11` Brianchon–Petersen are the
   same structure — they are. That C193's null holds — it does not. That "complete exterior set" can
   be read as maximal-under-inclusion — it cannot, because sub-maximum maximal sets exist from `q = 9`
