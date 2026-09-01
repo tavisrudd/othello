@@ -1317,6 +1317,20 @@ files are disposable and may be deleted at any time.
    kernels, treewidth/ZDD search on expander-like instances, block Wiedemann at
    current dimensions, and Hopcroft--Karp in the nanosecond-scale Hall loop.
 
+   BP-OSD import status: a private native normalized-min-sum plus OSD-0 spike
+   now passes the exactness, reference-fidelity, quality, and performance
+   gates.  On 128 retained BB756 targets its 756 binary64 posteriors are
+   bit-identical to `ldpc` 2.4.1 through 300 iterations, and the complete OSD-0
+   candidate stream has the same best weight, weight sum, and checksum.  Five
+   alternating pairs measure 0.8018 s native versus 2.0178 s reference, a
+   2.516x ratio (`t=192.64`).  Bounded higher-order OSD is now complete too:
+   CS-10 and exhaustive-10 reproduce their complete reference candidate
+   streams while improving the 128-target means 3.235x (`t=18.80`) and 3.710x
+   (`t=8.64`).  A full 2,048-target exhaustive replay recovers best weight 56
+   and the identical stream checksum in 26.00 s versus 68.48 s (2.633x).
+   The item (d) next gate is therefore a reusable public API plus cross-instance
+   validation, not more work on an ordering-only bridge.
+
    Current-tree reconciliation changes that order slightly. Static and dynamic
    incumbent fan-out are already present as worker-local relaxed mailboxes plus
    controller fan-out, with the guarded 4,096-candidate pulse; C1027's item
@@ -3876,15 +3890,31 @@ signed-reliability OSD-0 solve.  It contains no BB756-specific theorem or
 layout.  Every OSD result is independently checked against the stacked
 physical/logical syndrome.
 
-On the identical retained 128-target BB756 stream, five sequential rounds at
-300 iterations and scale 0.625 measured 1.0040 s native versus 2.8859 s for
-`ldpc` 2.4.1: 2.874x by means, Welch t=497.26.  Both paths returned 128/128
-valid affine solutions.  Native's best weight was 102 versus `ldpc`'s 88, so
-this passes the architecture, exactness, and speed gates but fails the quality
-gate for replacement.  It remains private while the next tranche reproduces
-the reference long-loop trajectory more closely and adds bounded higher-order
-OSD.  Raw rounds, hashes, counters, and the admission decision are in
-`ergodis-private/evidence/c985-native-bp-spike.json`.
+On the identical retained 128-target BB756 stream, five alternating pairs at
+300 iterations and scale 0.625 measured 0.8018 s native versus 2.0178 s for
+`ldpc` 2.4.1: 2.516x by means, paired t=192.64.  Both paths returned 128/128
+valid affine solutions.  Their complete candidate streams are identical:
+best weight 88, weight sum 17,536, and FNV-1a checksum
+17,365,681,124,003,376,817.  On the first retained target, all 756 binary64
+posterior values agree after iterations 1, 2, 16, and 300.
+
+The initial quality miss was an instructive floating-point pathology.  The
+first implementation formed an extrinsic message as the algebraically
+equivalent `posterior - incoming`; restoring the reference prefix/suffix
+accumulator association makes the entire 300-iteration trajectory
+bit-identical.  Feeding retained reference orders into native OSD-0 also
+produced the identical 128-candidate checksum, independently localizing the
+old mismatch to BP.  The spike now passes architecture, exactness, fidelity,
+OSD-0 quality, and speed gates.  Bounded combination-sweep and exhaustive
+OSD-10 now pass the same candidate-stream fidelity gate.  On 128 targets they
+improve the reference mean 3.235x (`t=18.80`) and 3.710x (`t=8.64`),
+respectively.  The full 2,048-target exhaustive replay recovers best weight 56,
+weight sum 269,742, and the identical checksum in 26.00 s versus 68.48 s, a
+2.633x speedup.  A test-only thread-local allocator gate observes zero
+allocation, reallocation, or deallocation in actual BP and higher-order OSD
+regions.  The spike remains private while its API is generalized and validated
+on another sparse-code family.  Raw rounds, hashes, counters, and the admission
+decision are in `ergodis-private/evidence/c985-native-bp-spike.json`.
 
 Implementation attribution: the comparison used the released `ldpc==2.4.1`
 binary package.  The BP parallel/min-sum and OSD-0 mechanics were checked at

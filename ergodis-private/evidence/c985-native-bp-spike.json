@@ -1,28 +1,75 @@
 {
   "schema": "c985-native-bp-spike-report-v1",
   "date": "2026-09-01",
-  "host_protocol": "same host, sequential five-round samples, 128 retained BB756 targets per round, 300 normalized-min-sum iterations, scale 0.625, OSD-0",
+  "host_protocol": "same host, alternating five-pair 128-target samples plus one full 2048-target replay, 300 normalized-min-sum iterations, scale 0.625",
   "input": {
     "path": "target-c985-bb756/hx-gz.json",
     "sha256": "83bd1eaf7787cd367f4c6da060658abff902f6404545e42c0902ce12cd198fe2",
-    "target_stream_sha256": "6237b62007972ef6152b9b4f347923f41d368b08544dafb24d523c5300139644"
+    "target_stream_256_sha256": "6237b62007972ef6152b9b4f347923f41d368b08544dafb24d523c5300139644",
+    "target_stream_2048_sha256": "054e73d6375ee340416682ca690e4e5cb84e7b499ceabd2f67cef5415a52a361"
   },
-  "native_ns": [1003355777, 1001785704, 1008057113, 999816157, 1007032686],
-  "ldpc_2_4_1_ns": [2882604922, 2877363696, 2894687861, 2881368111, 2893415280],
-  "native_mean_ms": 1004.0094874,
-  "ldpc_mean_ms": 2885.887974,
-  "mean_speedup": 2.8743632507630426,
-  "welch_t": 497.2594570462958,
+  "native_ns": [834648873, 797939700, 816750462, 766850453, 792968653],
+  "ldpc_2_4_1_ns": [2067379508, 2006528375, 2012610694, 1987534566, 2014835930],
+  "native_mean_ms": 801.8316282,
+  "ldpc_mean_ms": 2017.7778146,
+  "mean_speedup": 2.5164607426744054,
+  "paired_t": 192.6432214618872,
   "native_valid": 128,
   "ldpc_valid": 128,
-  "native_best_weight": 102,
+  "native_best_weight": 88,
   "ldpc_best_weight": 88,
+  "native_weight_sum": 17536,
+  "ldpc_weight_sum": 17536,
+  "native_candidate_checksum": 17365681124003376817,
+  "ldpc_candidate_checksum": 17365681124003376817,
+  "posterior_fidelity": "all 756 binary64 posterior values equal after iterations 1, 2, 16, and 300 on the first retained target",
   "native_perf_128": {
-    "cycles": 3305558141,
-    "instructions": 11638447254,
-    "branches": 2650534512,
-    "branch_misses": 43394355,
-    "cache_misses": 16583
+    "cycles": 3763499951,
+    "instructions": 12353755461,
+    "branches": 2650957759,
+    "branch_misses": 44866945,
+    "cache_misses": 41847
   },
-  "decision": "retain private spike; speed gate passes, exact syndrome gate passes, quality replacement gate fails"
+  "osd_cs_10_128": {
+    "native_ns": [1389882411, 1231990875, 1312159617, 1311626435, 944424791],
+    "ldpc_2_4_1_ns": [4052079945, 4081616185, 4371277797, 3561092378, 3960830360],
+    "native_mean_ms": 1238.0168258,
+    "ldpc_mean_ms": 4005.379333,
+    "mean_speedup": 3.235318979135639,
+    "paired_t": 18.803690187476658,
+    "valid_each": 128,
+    "best_weight_each": 74,
+    "weight_sum_each": 13608,
+    "candidate_checksum_each": 5507724776045710765
+  },
+  "osd_exhaustive_10_128": {
+    "native_ns": [1367546888, 1396497056, 1443234439, 1680984395, 1530882584],
+    "ldpc_2_4_1_ns": [3854860301, 5677294580, 5550427312, 7070302649, 5368823422],
+    "native_mean_ms": 1483.8290724,
+    "ldpc_mean_ms": 5504.3416528,
+    "mean_speedup": 3.709552370406838,
+    "paired_t": 8.637855733507989,
+    "valid_each": 128,
+    "best_weight_each": 84,
+    "weight_sum_each": 16680,
+    "candidate_checksum_each": 17243165247854309665,
+    "native_perf": {
+      "cycles": 4071731763,
+      "instructions": 14800871266,
+      "branches": 3508462492,
+      "branch_misses": 46139731,
+      "cache_misses": 21051
+    }
+  },
+  "osd_exhaustive_10_2048": {
+    "native_ns": 26004704049,
+    "ldpc_2_4_1_ns": 68476259109,
+    "speedup": 2.6332258571361526,
+    "valid_each": 2048,
+    "best_weight_each": 56,
+    "weight_sum_each": 269742,
+    "candidate_checksum_each": 9350158086529496185
+  },
+  "allocation_gate": "test-only thread-local allocator observes zero alloc/realloc/dealloc events in actual BP and higher-order OSD regions",
+  "decision": "retain private spike; BP, OSD-0, OSD-CS-10, and exhaustive-10 pass speed, exact syndrome, reference-fidelity, quality, and zero-allocation gates; next gate is reusable public API and cross-instance validation"
 }

@@ -1,8 +1,63 @@
 use serde::Deserialize;
 use std::fs::File;
-use std::io::{self, BufReader, Read};
+use std::io::{self, BufReader, BufWriter, Read, Write};
 use std::path::Path;
 use std::time::Instant;
+
+#[cfg(test)]
+use std::alloc::{GlobalAlloc, Layout, System};
+#[cfg(test)]
+use std::cell::Cell;
+
+#[cfg(test)]
+struct CountingAllocator;
+
+#[cfg(test)]
+thread_local! {
+    static COUNT_ALLOCATIONS: Cell<bool> = const { Cell::new(false) };
+    static ALLOCATION_EVENTS: Cell<usize> = const { Cell::new(0) };
+}
+
+#[cfg(test)]
+fn count_allocation_event() {
+    COUNT_ALLOCATIONS.with(|enabled| {
+        if enabled.get() {
+            ALLOCATION_EVENTS.with(|events| events.set(events.get() + 1));
+        }
+    });
+}
+
+#[cfg(test)]
+unsafe impl GlobalAlloc for CountingAllocator {
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+        count_allocation_event();
+        unsafe { System.alloc(layout) }
+    }
+
+    unsafe fn dealloc(&self, pointer: *mut u8, layout: Layout) {
+        count_allocation_event();
+        unsafe { System.dealloc(pointer, layout) }
+    }
+
+    unsafe fn realloc(&self, pointer: *mut u8, layout: Layout, size: usize) -> *mut u8 {
+        count_allocation_event();
+        unsafe { System.realloc(pointer, layout, size) }
+    }
+}
+
+#[cfg(test)]
+#[global_allocator]
+static TEST_ALLOCATOR: CountingAllocator = CountingAllocator;
+
+#[cfg(test)]
+fn measured_allocations<T>(operation: impl FnOnce() -> T) -> (T, usize) {
+    ALLOCATION_EVENTS.with(|events| events.set(0));
+    COUNT_ALLOCATIONS.with(|enabled| enabled.set(true));
+    let result = operation();
+    COUNT_ALLOCATIONS.with(|enabled| enabled.set(false));
+    let events = ALLOCATION_EVENTS.with(Cell::get);
+    (result, events)
+}
 
 #[derive(Deserialize)]
 struct Instance {
@@ -79,7 +134,11 @@ struct Osd0 {
     template: Vec<u64>,
     order: Vec<usize>,
     pivot_columns: Vec<usize>,
+    free_columns: Vec<usize>,
+    pivot_mask: Vec<bool>,
     candidate: Vec<u8>,
+    baseline: Vec<u8>,
+    trial: Vec<u8>,
     words: usize,
 }
 
@@ -97,23 +156,42 @@ impl Osd0 {
             template,
             order: (0..graph.bits).collect(),
             pivot_columns: vec![0; graph.checks],
+            free_columns: Vec::with_capacity(graph.bits),
+            pivot_mask: vec![false; graph.bits],
             candidate: vec![0; graph.bits],
+            baseline: vec![0; graph.bits],
+            trial: vec![0; graph.bits],
             words,
         }
     }
 
-    fn solve(&mut self, graph: &TannerGraph, syndrome: &[u8], posterior: &[f64]) -> bool {
+    fn solve(
+        &mut self,
+        graph: &TannerGraph,
+        syndrome: &[u8],
+        posterior: &[f64],
+        provided_order: Option<&[u16]>,
+        combination_sweep_order: Option<usize>,
+        exhaustive_order: Option<usize>,
+    ) -> bool {
         self.rows.copy_from_slice(&self.template);
         self.candidate.fill(0);
         for (check, &value) in syndrome.iter().enumerate() {
             self.rows[check * self.words + graph.bits / 64] |=
                 u64::from(value) << (graph.bits % 64);
         }
-        self.order.sort_unstable_by(|&left, &right| {
-            posterior[left]
-                .total_cmp(&posterior[right])
-                .then_with(|| left.cmp(&right))
-        });
+        if let Some(order) = provided_order {
+            assert_eq!(order.len(), graph.bits);
+            for (destination, &source) in self.order.iter_mut().zip(order) {
+                *destination = usize::from(source);
+            }
+        } else {
+            self.order.sort_unstable_by(|&left, &right| {
+                posterior[left]
+                    .total_cmp(&posterior[right])
+                    .then_with(|| left.cmp(&right))
+            });
+        }
 
         let mut rank = 0usize;
         for &column in &self.order {
@@ -155,7 +233,91 @@ impl Osd0 {
             self.candidate[self.pivot_columns[row]] =
                 u8::from(self.rows[row * self.words + rhs_word] & rhs_mask != 0);
         }
+        if let Some(order) = combination_sweep_order {
+            self.combination_sweep(rank, order);
+        } else if let Some(order) = exhaustive_order {
+            self.exhaustive(rank, order);
+        }
         true
+    }
+
+    fn prepare_free_columns(&mut self, rank: usize) {
+        self.baseline.copy_from_slice(&self.candidate);
+        self.pivot_mask.fill(false);
+        for &column in &self.pivot_columns[..rank] {
+            self.pivot_mask[column] = true;
+        }
+        self.free_columns.clear();
+        for &column in &self.order {
+            if !self.pivot_mask[column] {
+                self.free_columns.push(column);
+            }
+        }
+    }
+
+    fn combination_sweep(&mut self, rank: usize, order: usize) {
+        self.prepare_free_columns(rank);
+
+        let mut best_weight: usize = self.candidate.iter().map(|&value| usize::from(value)).sum();
+        for free_index in 0..self.free_columns.len() {
+            self.trial.copy_from_slice(&self.baseline);
+            self.apply_free_delta(rank, free_index);
+            let weight: usize = self.trial.iter().map(|&value| usize::from(value)).sum();
+            if weight < best_weight {
+                best_weight = weight;
+                self.candidate.copy_from_slice(&self.trial);
+            }
+        }
+
+        let pair_limit = order.min(self.free_columns.len());
+        for left in 0..pair_limit {
+            for right in (left + 1)..pair_limit {
+                self.trial.copy_from_slice(&self.baseline);
+                self.apply_free_delta(rank, left);
+                self.apply_free_delta(rank, right);
+                let weight: usize = self.trial.iter().map(|&value| usize::from(value)).sum();
+                if weight < best_weight {
+                    best_weight = weight;
+                    self.candidate.copy_from_slice(&self.trial);
+                }
+            }
+        }
+    }
+
+    fn exhaustive(&mut self, rank: usize, order: usize) {
+        self.prepare_free_columns(rank);
+        let order = order.min(self.free_columns.len());
+        assert!(
+            order <= 20,
+            "private spike bounds exhaustive OSD at order 20"
+        );
+        let mut best_weight: usize = self.candidate.iter().map(|&value| usize::from(value)).sum();
+        for mask in 1usize..(1usize << order) {
+            self.trial.copy_from_slice(&self.baseline);
+            let mut remaining = mask;
+            while remaining != 0 {
+                let bit = remaining.trailing_zeros() as usize;
+                self.apply_free_delta(rank, bit);
+                remaining &= remaining - 1;
+            }
+            let weight: usize = self.trial.iter().map(|&value| usize::from(value)).sum();
+            if weight < best_weight {
+                best_weight = weight;
+                self.candidate.copy_from_slice(&self.trial);
+            }
+        }
+    }
+
+    fn apply_free_delta(&mut self, rank: usize, free_index: usize) {
+        let column = self.free_columns[free_index];
+        self.trial[column] ^= 1;
+        let word = column / 64;
+        let mask = 1u64 << (column % 64);
+        for row in 0..rank {
+            if self.rows[row * self.words + word] & mask != 0 {
+                self.trial[self.pivot_columns[row]] ^= 1;
+            }
+        }
     }
 }
 
@@ -216,11 +378,13 @@ impl MinSum {
 
             self.observed.fill(0);
             for bit in 0..graph.bits {
-                let mut llr = channel_llr;
                 let start = graph.col_offsets[bit];
                 let end = graph.col_offsets[bit + 1];
+                let mut llr = channel_llr;
                 for slot in start..end {
-                    llr += self.c2v[graph.col_edges[slot]];
+                    let edge = graph.col_edges[slot];
+                    self.v2c[edge] = llr;
+                    llr += self.c2v[edge];
                 }
                 self.posterior[bit] = llr;
                 self.hard[bit] = u8::from(llr <= 0.0);
@@ -230,9 +394,11 @@ impl MinSum {
                         self.observed[graph.edge_checks[edge]] ^= 1;
                     }
                 }
-                for slot in start..end {
+                let mut suffix = 0.0;
+                for slot in (start..end).rev() {
                     let edge = graph.col_edges[slot];
-                    self.v2c[edge] = llr - self.c2v[edge];
+                    self.v2c[edge] += suffix;
+                    suffix += self.c2v[edge];
                 }
             }
 
@@ -258,7 +424,13 @@ impl MinSum {
     }
 }
 
-fn read_targets(path: &Path, limit: usize) -> io::Result<Vec<u64>> {
+struct TargetBatch {
+    words: Vec<u64>,
+    orders: Vec<u16>,
+    bits: usize,
+}
+
+fn read_targets(path: &Path, limit: usize, retain_orders: bool) -> io::Result<TargetBatch> {
     let mut reader = BufReader::new(File::open(path)?);
     let mut header = [0u8; 16];
     reader.read_exact(&mut header)?;
@@ -266,15 +438,27 @@ fn read_targets(path: &Path, limit: usize) -> io::Result<Vec<u64>> {
     let bits = usize::from(u16::from_le_bytes([header[8], header[9]]));
     let encoded = usize::try_from(u32::from_le_bytes(header[12..16].try_into().unwrap())).unwrap();
     let count = encoded.min(limit);
-    let mut targets = Vec::with_capacity(count);
+    let mut words = Vec::with_capacity(count);
+    let mut orders = Vec::with_capacity(if retain_orders { count * bits } else { 0 });
     let mut target = [0u8; 8];
-    let mut skipped_order = vec![0u8; bits * 2];
+    let mut encoded_order = vec![0u8; bits * 2];
     for _ in 0..count {
         reader.read_exact(&mut target)?;
-        targets.push(u64::from_le_bytes(target));
-        reader.read_exact(&mut skipped_order)?;
+        words.push(u64::from_le_bytes(target));
+        reader.read_exact(&mut encoded_order)?;
+        if retain_orders {
+            orders.extend(
+                encoded_order
+                    .chunks_exact(2)
+                    .map(|pair| u16::from_le_bytes([pair[0], pair[1]])),
+            );
+        }
     }
-    Ok(targets)
+    Ok(TargetBatch {
+        words,
+        orders,
+        bits,
+    })
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -293,7 +477,22 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .map(|v| v.to_string_lossy().parse())
         .transpose()?
         .unwrap_or(300);
-    let run_osd0 = args.next().is_some_and(|value| value == "osd0");
+    let mode = args.next().unwrap_or_default();
+    let mode_text = mode.to_string_lossy();
+    let dump_posterior = args.next();
+    let combination_sweep_order = mode_text
+        .strip_prefix("osdcs")
+        .map(str::parse::<usize>)
+        .transpose()?;
+    let exhaustive_order = mode_text
+        .strip_prefix("osde")
+        .map(str::parse::<usize>)
+        .transpose()?;
+    let run_osd0 = mode_text == "osd0"
+        || mode_text == "osd0-provided"
+        || combination_sweep_order.is_some()
+        || exhaustive_order.is_some();
+    let provided_order = mode_text == "osd0-provided";
     let instance: Instance = serde_json::from_reader(BufReader::new(File::open(input)?))?;
     assert!(instance.logical_observations.len() <= 64);
     let physical_count = instance.physical_checks.len();
@@ -305,7 +504,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             .into_iter()
             .chain(instance.logical_observations),
     );
-    let targets = read_targets(Path::new(&targets_path), trials)?;
+    let targets = read_targets(Path::new(&targets_path), trials, provided_order)?;
     let mut syndrome = vec![0u8; graph.checks];
     let mut decoder = MinSum::new(&graph);
     let mut osd0 = Osd0::new(&graph);
@@ -316,7 +515,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut best_weight = graph.bits + 1;
     let mut osd0_solved = 0usize;
     let mut osd0_best_weight = graph.bits + 1;
-    for target in targets.iter().copied() {
+    let mut osd0_weight_sum = 0usize;
+    let mut osd0_checksum = 0xcbf2_9ce4_8422_2325u64;
+    for (trial, target) in targets.words.iter().copied().enumerate() {
         syndrome.fill(0);
         for bit in 0..logical_count {
             syndrome[physical_count + bit] = ((target >> bit) & 1) as u8;
@@ -328,15 +529,40 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             iterations_total += used;
             best_weight = best_weight.min(decoder.hard.iter().map(|&v| usize::from(v)).sum());
         }
-        if run_osd0 && osd0.solve(&graph, &syndrome, &decoder.posterior) {
+        let order = provided_order
+            .then(|| &targets.orders[trial * targets.bits..(trial + 1) * targets.bits]);
+        if run_osd0
+            && osd0.solve(
+                &graph,
+                &syndrome,
+                &decoder.posterior,
+                order,
+                combination_sweep_order,
+                exhaustive_order,
+            )
+        {
             decoder.hard.copy_from_slice(&osd0.candidate);
             assert!(decoder.satisfies(&graph, &syndrome));
             osd0_solved += 1;
-            osd0_best_weight =
-                osd0_best_weight.min(osd0.candidate.iter().map(|&value| usize::from(value)).sum());
+            let weight = osd0.candidate.iter().map(|&value| usize::from(value)).sum();
+            osd0_best_weight = osd0_best_weight.min(weight);
+            osd0_weight_sum += weight;
+            for &value in &osd0.candidate {
+                osd0_checksum ^= u64::from(value);
+                osd0_checksum = osd0_checksum.wrapping_mul(0x100_0000_01b3);
+            }
+            osd0_checksum ^= 0xff;
+            osd0_checksum = osd0_checksum.wrapping_mul(0x100_0000_01b3);
         }
     }
     let elapsed = start.elapsed();
+    if let Some(path) = dump_posterior {
+        let mut output = BufWriter::new(File::create(path)?);
+        for &value in &decoder.posterior {
+            output.write_all(&value.to_le_bytes())?;
+        }
+        output.flush()?;
+    }
     decoder.satisfies(&graph, &syndrome);
     let residual_weight = decoder
         .observed
@@ -357,13 +583,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .fold(f64::NEG_INFINITY, f64::max);
     let posterior_sum: f64 = decoder.posterior.iter().sum();
     println!(
-        "{{\"schema\":\"c985-native-bp-spike-v1\",\"trials\":{},\"converged\":{},\"iterations_total\":{},\"best_weight\":{},\"osd0_solved\":{},\"osd0_best_weight\":{},\"elapsed_ns\":{},\"edges\":{},\"last_hard_weight\":{},\"last_residual_weight\":{},\"last_posterior_min\":{},\"last_posterior_max\":{},\"last_posterior_sum\":{}}}",
-        targets.len(),
+        "{{\"schema\":\"c985-native-bp-spike-v1\",\"trials\":{},\"converged\":{},\"iterations_total\":{},\"best_weight\":{},\"osd0_solved\":{},\"osd0_best_weight\":{},\"osd0_weight_sum\":{},\"osd0_checksum\":{},\"elapsed_ns\":{},\"edges\":{},\"last_hard_weight\":{},\"last_residual_weight\":{},\"last_posterior_min\":{},\"last_posterior_max\":{},\"last_posterior_sum\":{}}}",
+        targets.words.len(),
         converged,
         iterations_total,
         best_weight,
         osd0_solved,
         osd0_best_weight,
+        osd0_weight_sum,
+        osd0_checksum,
         elapsed.as_nanos(),
         graph.edge_bits.len(),
         hard_weight,
@@ -387,5 +615,29 @@ mod tests {
         assert!(used > 0);
         assert!(decoder.satisfies(&graph, &[1, 0]));
         assert_eq!(decoder.hard.iter().copied().sum::<u8>(), 1);
+    }
+
+    #[test]
+    fn osd0_returns_an_exact_affine_solution() {
+        let graph = TannerGraph::from_rows(3, [vec![0, 1], vec![1, 2]].into_iter());
+        let mut osd = Osd0::new(&graph);
+        assert!(osd.solve(&graph, &[1, 0], &[-1.0, 2.0, 3.0], None, None, None));
+        let mut decoder = MinSum::new(&graph);
+        decoder.hard.copy_from_slice(&osd.candidate);
+        assert!(decoder.satisfies(&graph, &[1, 0]));
+    }
+
+    #[test]
+    fn bp_and_higher_order_osd_regions_allocate_nothing() {
+        let graph = TannerGraph::from_rows(4, [vec![0, 1, 3], vec![1, 2]].into_iter());
+        let mut decoder = MinSum::new(&graph);
+        let mut osd = Osd0::new(&graph);
+        let (solved, bp_events) =
+            measured_allocations(|| decoder.decode(&graph, &[1, 0], 2.0, 0.625, 8));
+        let (_, osd_events) = measured_allocations(|| {
+            osd.solve(&graph, &[1, 0], &decoder.posterior, None, Some(2), None)
+        });
+        assert_eq!(bp_events, 0, "BP event count after result {solved}");
+        assert_eq!(osd_events, 0);
     }
 }

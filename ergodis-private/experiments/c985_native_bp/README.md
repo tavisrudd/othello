@@ -15,8 +15,24 @@ Build with an isolated target directory, then compare the Rust binary with
 gate is exact syndrome validity.  Similar long-loop BP quality and higher-order
 OSD are still required before this can replace `ldpc`.
 
-The first five-round BB756 sample measured 1.0040 s mean for native versus
-2.8859 s for `ldpc` 2.4.1 (2.874x, Welch t=497.26).  Both returned 128/128 valid
-affine solutions.  Native best weight was 102 versus 88, so the speed gate
-passes but the replacement-quality gate fails.  The durable raw sample and
-counter snapshot are in `../../evidence/c985-native-bp-spike.json`.
+The corrected five-pair BB756 sample measured 0.8018 s mean for native versus
+2.0178 s for `ldpc` 2.4.1 (2.516x, paired t=192.64).  Both returned 128/128
+valid affine solutions, and their complete candidate streams match: best
+weight 88, weight sum 17,536, and FNV-1a checksum
+17,365,681,124,003,376,817.  The durable raw sample and counter snapshot are
+in `../../evidence/c985-native-bp-spike.json`.
+
+The key fidelity constraint is floating-point association.  The variable
+update must use the reference prefix/suffix accumulators; replacing it with
+the algebraically equivalent `posterior - incoming` expression changes later
+loopy-BP trajectories.  `osd0-provided` remains as a diagnostic mode that can
+consume a retained external order and isolate BP from elimination.
+
+Bounded higher-order modes are `osdcs10` (combination sweep) and `osde10`
+(exhaustive over the first ten non-pivot columns).  On the 128-target sample,
+both reproduce the complete `ldpc` candidate stream.  CS-10 is 3.235x faster
+(`t=18.80`); exhaustive-10 is 3.710x faster (`t=8.64`).  On all 2,048 retained
+targets, exhaustive-10 recovers best weight 56 and the same candidate checksum
+in 26.00 s versus 68.48 s, a 2.633x full-run speedup.  The test binary's
+thread-local allocator gate observes zero allocation, reallocation, or
+deallocation in the actual BP and higher-order OSD regions.
