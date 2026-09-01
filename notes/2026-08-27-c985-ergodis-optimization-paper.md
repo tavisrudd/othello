@@ -905,13 +905,15 @@ files are disposable and may be deleted at any time.
    general contracts; C1016-specific quotient fields, targets, and conclusions
    remain private.
 
-   A disposable C1016-shaped side prototype identifies zero-sized validated
-   theorem-program witnesses as the highest-value next type-level kernel: a
-   sealed program marker can attest a cold-validated fixed Horn registry while
-   carrying zero bytes into repeated closure calls. An off-tree diagnostic was
-   strongly positive, but it is not retained evidence and no live C1016 source
-   was changed. The proper gate is a standalone private A/B against the real
-   closure API after the owning C1016 edit window closes.
+   A disposable C1016-shaped side prototype tested zero-sized validated
+   theorem-program witnesses without changing live C1016 source. The
+   synthetic control was misleadingly positive; the real seven-rule closure
+   API reduced instructions 2.94% and branches 8.00% but regressed cycles
+   about 11% across seven pairs, so that fully specialized encoding is
+   rejected. The next type-level gate is a compact validated-slice witness
+   that retains the existing loop shape, followed by a separate fixed-seven
+   residual-aggregation A/B. The full handoff and counter interpretation are
+   in `2026-08-31-c985-c1016-zero-cost-witness-handoff.md`.
 
 ## Gurobi boundary and semantic-symmetry spike, 2026-08-29
 
