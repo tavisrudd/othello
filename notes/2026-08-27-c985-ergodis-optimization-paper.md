@@ -544,7 +544,7 @@ files are disposable and may be deleted at any time.
    C1028 driver and ring-specific research in `ergodis-private`; only the
    algebra-neutral interfaces and independently verified kernels qualify for
    public core.
-5. **In progress — typed plan/theorem authoring language.** Commit `824a947a8`
+5. **Done for current tranche — typed plan/theorem authoring language.** Commit `824a947a8`
    lands the first complete vertical slice for scalar steering plans.  A
    bounded textual parser accepts ordinary infix arithmetic, comparisons and
    Boolean connectives plus `abs`, `min`, `max`, and `select`; it lowers through
@@ -701,10 +701,27 @@ files are disposable and may be deleted at any time.
    Twenty-nine scoped library tests, the application target, and strict clippy
    pass in a clean worktree.
 
-   Remaining execution acceptance is to express one C80 and one C896 packet
-   through the same engine before
-   stabilizing or publishing the private grammar.  Do not create a second mini-
-   language.  The accepted algebra and constraints remain
+   Commits `83f28644a`, `db2df56d1`, and `d50bf55c0` close the two required
+   cross-domain acceptance packets.  The bounded GF(9) intertwiner packet
+   starts from the prepared semantic rank core, reduces the four generator
+   marginals, and canonicalizes an independent-row certificate.  Its prepared
+   execution independently replays rank 29 in 30 variables, Hom dimension 1,
+   all three minimum three-generator cores, the Weyl-only unit rank loss, and
+   the 29-row basis; its finite-certified theorem fragment is bound to the
+   exact source digest and `expected_rank=29`.  The q=11 cap-game packet binds
+   the frozen hostile-exchange digest, reduces the equal-support/Omega profile,
+   and replays the exact two-left/one-neighbour Hall-deficient set under the
+   rejected direct/deletion-secant charge law.  It certifies that finite
+   obstruction only, not the surviving existential P-reply statement or a
+   uniform field theorem.  Both packets reject action-parameter drift, replay
+   identically on reuse, and record zero allocator events during prepared
+   execution.  Twenty-four scoped semantic-plan tests and strict clippy pass
+   in a clean worktree.  The private grammar has now expressed the affine
+   census, cap-game obstruction, and finite-group rank certificate without a
+   second mini-language; keep it private and iterate from campaign use before
+   any stabilization or publication.
+
+   The accepted algebra and constraints remain
    `2026-08-30-ergodis-semantic-mining-engine-adr.md`.
 6. **In progress — daemon-owned evolve.** Retain bounded streamed evidence,
    lineage/outcome deduplication, and exact cascades; next add durable replay,
