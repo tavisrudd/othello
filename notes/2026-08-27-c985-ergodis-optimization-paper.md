@@ -1053,6 +1053,20 @@ files are disposable and may be deleted at any time.
    application gate is a balanced/routed comparison on a frozen held-out
    campaign corpus, measuring perfect-hit ordinal, semantic-op rows, operator
    mix, and evidence bytes.
+
+   Commit `032a5b0de` closes an attribution hole exposed while designing that
+   gate. A child now carries its parent's compact target-class ID through the
+   cold mutation queue, and every completed or cascade-rejected evidence row
+   records `source_target_values`. An exact repair therefore retains the
+   obligation it solved even though its own remaining `target_values` is null;
+   a controller can aggregate operator value per source target without guessing
+   from the child's next mismatch. The class ID is copied only in daemon-owned
+   evolution state; no solver worker, safe point, or application hot structure
+   changes. The refreshed-profile control now proves an exact child records
+   source target `[1]`, no remaining target, and full weighted correctness.
+   Strict all-target/all-feature clippy, the complete suite, and doc tests pass.
+   This is the evidence substrate for a bounded target-local routing learner;
+   the learner remains gated on the held-out comparison above.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
