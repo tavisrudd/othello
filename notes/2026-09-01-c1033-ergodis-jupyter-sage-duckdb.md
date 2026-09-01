@@ -8,10 +8,8 @@ evidence and no change to any existing evidence file.
 
 ## Status
 
-Two sessions. The DuckDB layer and the Jupyter integration are both implemented and run
-end to end against the real private evidence tree and a real controlled search. Sage is
-assessed and its entry point pinned, but it was not built or executed; everything said
-about Sage below is design and availability, not a measured result.
+Three sessions. All three integrations -- DuckDB, Jupyter, and Sage -- are implemented and run end to end
+against committed artifacts and a real controlled search.
 
 ## What was built: a SQL catalog over the private evidence tree
 
@@ -160,24 +158,76 @@ one-shot workflow surface, and the notebook is the control plane. What they shar
 request/response discipline, which is worth keeping aligned -- a payload accepted by `run_json`
 here is the payload the browser adapter takes.
 
-## Sage: assessed, not built
+## What was built: Sage as an independent oracle
 
-Sage 10.7 is in nixpkgs. Sage's value to this lane is as an **independent oracle**, not as a
-compute engine — Ergodis is already the fast path, and the reproducibility convention asks for an
-independent replay of computational claims wherever one exists. Sage supplies exactly the objects
-the private work manipulates: finite fields and their extensions, cyclotomic and multiplier-orbit
-algebras, integer linear algebra and Smith normal form, permutation and matrix groups, and linear
-codes with their weight enumerators. Each of those has been hand-rolled as a Python oracle at least
-once in this lane's history.
+Sage 10.7 comes from nixpkgs as a pure cache fetch -- 604 paths, about 1.09 GiB downloaded and
+3.25 GiB unpacked, with nothing built locally. `analysis/ergodis-sage` runs a script inside
+`nix shell nixpkgs#sage`, so nothing is installed into the profile and later runs start in seconds.
 
-The concrete first target is the class of oracle that C1016 keeps rebuilding: multiplier-orbit and
-quotient-shift computations over `Z/18` and its relatives, currently checked by bespoke flat
-enumeration. A Sage oracle for those is shorter, independently maintained, and genuinely independent
-of the Rust implementation in a way that a Python script written alongside it is not.
+Sage's value here is that it is a genuinely different implementation, not a faster one. Ergodis is
+already the fast path, and the reproducibility convention asks for an independent replay wherever
+one exists. Sage supplies natively exactly the objects this work manipulates -- finite fields and
+their extensions, permutation and matrix groups, integer and GF(2) linear algebra, linear codes --
+each of which has been hand-rolled as a Python oracle at least once in this lane's history.
 
-The cost is that Sage is a heavy closure and slow to start, so it belongs in an explicitly invoked
-oracle script, not in any hot path or default check. Nothing in this session tested that closure's
-build time on this host, which is the first thing to measure before committing to the route.
+### The target, and why it changed
+
+The plan named the C1016 multiplier-orbit and quotient-shift computations over `Z/18`. That target
+was dropped: the C1016 kernels, corpora, and their Python checks are currently **uncommitted work
+belonging to another session**, and an oracle is worth nothing if it is written against files that
+can change underneath it. The retarget keeps the same shape -- an orbit computation over a finite
+group with an existing independent Python check -- while using committed artifacts.
+
+### What the oracle checks
+
+`analysis/sage/check_qldpc_certificate.py` re-verifies the six committed C1018 quantum LDPC
+exact-distance certificates in `evidence/`. Each certificate is self-describing: it publishes its
+group, the two protographs of the lifted product, both check ranks, the dimension, the
+automorphism and coordinate-orbit counts, and any logical witness. The oracle rebuilds each code
+from that data alone and checks, against the published numbers:
+
+* the group is the one named -- right order, and isomorphic to Sage's own construction of it;
+* the coordinate count and the check-row weights;
+* the CSS commutation `Hx Hz^T = 0`;
+* both check ranks, and the dimension as `n - rank(Hx) - rank(Hz)`;
+* the even-weight-kernel claim, which holds exactly when the all-ones vector lies in that side's
+  row space, since the pairing of a word with all-ones is its weight modulo two;
+* the combined support component count, through a Sage graph;
+* that right translation by each element centralizing the B entries really is a code automorphism,
+  and that the verified translations and the coordinate orbits they induce match the anchor notes;
+  and
+* each published logical witness -- zero physical syndrome, outside the stabilizer row space, and at
+  the certified weight.
+
+The construction is assembled as block matrices of left- and right-regular representation matrices
+over GF(2), which is a different formulation from the existing checker's integer-bitmask loops.
+
+### Result
+
+All 102 checks pass across all six certificates, with the replay command
+
+    analysis/ergodis-sage analysis/sage/check_qldpc_certificate.py
+
+The independently recomputed parameters are `[[1428,186,18]]`, `[[1496,198,16]]`,
+`[[1496,192,16]]`, `[[1496,198,14]]`, `[[1500,81,18]]`, and `[[1500,76,20]]`. Sage confirms the two
+non-abelian cases are the dicyclic group `Dic_11`, which it independently identifies as `C11 : C4`,
+and confirms the automorphism and orbit structure that the exact searches relied on to reduce their
+anchor sets: 42 of 42 translations giving 34 orbits of 1428 coordinates for the first code, 2 of 44
+giving 748 of 1496 for the dicyclic pair, and 60 of 60 giving 25 of 1500 for the last two. The two
+published logical witnesses, at weights 16 and 14, are independently confirmed to be genuine
+logicals.
+
+This is a check of the published certificates, not a new distance claim: the exhaustive
+enumeration that establishes each distance is not reproduced here, and the oracle says nothing
+about it.
+
+### One correction the work forced
+
+Sage reads a bare tuple of points as a **cycle**, not as a one-line image list. Building the regular
+representation from image lists silently produced a different group -- the order was wrong and the
+isomorphism check failed, which is how it was caught. The generators are now converted through
+`Permutation(images).cycle_tuples()`. Anyone building a permutation group from a multiplication
+table in Sage hits the same trap.
 
 ## What is deliberately not here
 
@@ -188,28 +238,29 @@ a content hash, not a checked-in Parquet mirror.
 
 ## Next steps
 
-1. Measure the Sage closure build on this host, then write one multiplier-orbit oracle against a
-   reduction that already has an independent Python check, and confirm the two agree. This is the
-   only one of the three integrations still entirely on paper.
-2. Drive a real long campaign from the notebook rather than a half-minute control: the evolution
+1. Drive a real long campaign from the notebook rather than a half-minute control: the evolution
    path (`evolve-start`, `evolve-status`) has a full parent-child lineage graph with labelled
    mutation operators that nothing in the notebook currently renders, and lineage is the natural
    next view.
-3. Decide whether `certificate_index` should be widened. Only 6 of the 33 JSON documents in
+2. Decide whether `certificate_index` should be widened. Only 6 of the 33 JSON documents in
    `evidence/` share the exact-distance certificate shape; the rest are unrelated schemas, and the
    question is whether a second index view for the pilot/instrument documents earns its place.
+3. Point the Sage oracle at the C1016 multiplier-orbit reductions once that work is committed. The
+   original target is still the right one; it was only blocked on the files being another session's
+   uncommitted work.
 4. Raise with the core owner: the ledger synopsis for an activated **ordering** plan reads
    "diagnostic plan activated". The event is correct and carries the plan name; only the wording is
    wrong. Not touched here, since it is a core-side string.
 
 ## Vibe check
 
-Better than expected. Two of the three integrations are done and verified against real runs, and
-live steering from a notebook cell works on the first controlled search it was pointed at -- the
-control plane needed no changes, only a client. The three sharp edges found along the way (socket
-path length, bytecode-only plans, the epoch compare-and-swap) are all now either guarded in code or
-written down. Sage is the only part still on paper.
+Good, and complete for what the task set out to do. All three integrations are done and verified
+against real artifacts: SQL over the whole evidence tree, a notebook that launches, watches, and
+steers a live search, and a Sage oracle that independently reproduces every published parameter of
+six quantum LDPC certificates. Nothing needed a change to the Ergodis core. The sharp edges found
+along the way -- socket path length, bytecode-only plans, the epoch compare-and-swap, and Sage's
+cycle-versus-image reading -- are all guarded in code or written down.
 
 ---
 
-`go C1033 complete-ports write the Sage oracle for a banked multiplier-orbit reduction and check it against the existing Python oracle`
+`go C1033 complete-ports drive a long evolution campaign from the notebook and render its lineage graph`

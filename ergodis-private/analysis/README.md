@@ -60,6 +60,33 @@ Run the whole path without a notebook:
 
     uv run --with duckdb python3 analysis/check_notebook_integration.py
 
+## Sage as an independent oracle
+
+    analysis/ergodis-sage analysis/sage/check_qldpc_certificate.py
+
+Re-verifies every `c1018-qldpc-*-certificate.json` in `evidence/` from scratch,
+using Sage's own named groups and its own GF(2) linear algebra. Pass a
+certificate path to check just one. Sage comes from nixpkgs through `nix shell`;
+the closure is about 1 GiB fetched once, and later runs start in seconds.
+
+Sage earns its place here by being a genuinely different implementation, not a
+faster one. Ergodis is already the fast path. What the existing Python checker in
+`notes/2026-08-31-c1018-qldpc-helper.py` does by hand -- the group law, and the
+linear algebra as integer bitmasks -- Sage does natively, so an agreement between
+the two is agreement between independent implementations rather than between two
+runs of one idea.
+
+The oracle rebuilds each lifted-product code from the group and protographs the
+certificate publishes, then checks the coordinate count, the check-row weights,
+the CSS commutation, both check ranks, the dimension as `n - rank(Hx) -
+rank(Hz)`, the even-weight-kernel claim, the combined support component count,
+the verified right-translation automorphisms and the coordinate orbits they
+induce, and each published logical witness -- zero physical syndrome, outside the
+stabilizer row space, and at the certified weight.
+
+Because Sage is a heavy closure and slow to start, an oracle belongs in an
+explicitly invoked script like this one, never in a hot path or a default check.
+
 ## Three things that bite
 
 **Run directories must be short.** A controlled search binds its watcher
