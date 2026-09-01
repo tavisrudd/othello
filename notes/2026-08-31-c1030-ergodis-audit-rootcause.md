@@ -14,8 +14,43 @@
 
 Twenty findings were raised across the four pass-1 reports. The pass-2 vetting confirmed
 thirteen sibling findings against the code, refuted one outright, corrected three severities
-downward by one notch, and added two new findings. This document does not repeat the findings;
-it asks what generates them.
+downward by one notch, and added two new findings. The register below lists every one with its
+post-vetting severity; the sections after it ask what generates them.
+
+## Findings register
+
+Severity is the post-vetting value. Two pass-1 findings were raised independently by two agents
+and appear once here. Locations are working-tree paths; see RC4 on why most cannot be pinned to a
+commit.
+
+| # | SEV | Finding | Location | Cause |
+|---|-----|---------|----------|-------|
+| 1 | 1 | `certdist verify` reports "certificate verified" with every witness unchecked: `--input` is optional, the `None` arm pushes nothing into `failures`, the bracket is "recomputed" by calling the prover's own `build_bracket`, and a toolchain mismatch is a `println!` only | `certdist.rs:1470-1478`, `:2028-2032`, `:2260-2262`, `:1299`/`:2144`, `:2176-2180` | RC3 |
+| 2 | 1 | `certiis` instance fields default to a load-bearing value (`demand`/`capacity` = 1, `couplings` = `[]`) with no `deny_unknown_fields`; verify re-reads through the same deserializer and the raw-bytes digest still matches, so a misspelled container key silently causes a regime misclassification that hashes correctly | `certiis.rs:39`, `:53`, `:107-108` | RC3 |
+| 3 | 2 | `Matrix::row_space_contains_field` uses the row count as the rank, so a rank-deficient matrix returns `true` for a candidate outside its row space (and a redundant-row matrix returns `false` for one inside). Both public variants affected; every existing caller canonicalizes first, including one in `c1028_chain_ring.rs:889-892` that pass 1 missed | `matrix.rs:216`, `:205-206`, `:221` | own |
+| 4 | 2 | The additive delta join in the g53 multi-move repairs is wrong for same-block moves: `repair_moves_compatible` returns `true` for same-block moves with disjoint orbit sets, but disjoint support kills only the shift-0 cross term. `finish_q4_repair` then returns `Err` without restoring the shell, aborting the whole q4 selection repair and discarding genuine repairs later in the enumeration | `g53_search.rs:2081-2101`, `:726-748`, `:822-834`, `:2149-2153` | own |
+| 5 | 2 | The committed tree does not build: 9 of 20 modules declared at HEAD exist only as untracked files, and committed notes cite replay binaries buildable from no commit | `ergodis-private/src/`, `Cargo.toml` | RC4 |
+| 6 | 2 | `solve_sorted_square_sum` sums squares in unchecked `u32`, so release-mode wraparound can forge a solution for targets above `2^32/8`; `integer_square_root(u32::MAX)` loops forever. Its sibling `solve_bounded_linear_combination` in the same file uses `checked_add`, and prover and verifier share the defective kernel. *(Found independently by two agents.)* | `proof_synthesis.rs`; `reduction_proof.rs:342`, `:511` | RC1, RC2, RC3 |
+| 7 | 2 | `scout_g41_q29_seed_power` rescores one arbitrary preimage per modular state: `insert_with_value` keeps the first value per state, the right-hand scan breaks on first match, and `exact_residual`/`full_paf_hit` are then computed from that single arbitrary fibre member | `g41_q29_evolve.rs:370-387`, `:2321-2335`, `:2353-2356` | own |
+| 8 | 2 | `certiis` writes wall-clock timings into the certificate (making it irreproducible byte-for-byte) and overwrites evidence in place via unconditional `fs::write` with a swallowed `create_dir_all` error | `certiis.rs:508-510`, `:718-736`, `:1699-1706` | RC1 |
+| 9 | 3 | `GeneratedSpanTable::build` enumerates subspaces with no cap, stores each state twice, and fails by process abort rather than an error under `panic = "abort"` | `span.rs:88-119`, `arena.rs:37-39` | RC2 |
+| 10 | 3 | Mod-16 dense pair keys are 8,200 bytes each, retained per class, against a 255-signature `u8` wall | `g133_sparse_defect.rs:224-226`, `:1499-1501` | RC2 |
+| 11 | 3 | The q23 Hall evidence has no recorded hashes, no replay command, and no graph-to-certificate binding: `evidence/SHA256SUMS` has 13 rows, none matching the 7 q23 files present | `ergodis-private/evidence/` | RC4 |
+| 12 | 4 | Generic `ProjectiveIndex::new` computes one block past the last it pushes, spuriously rejecting the largest representable geometry — PG(7,256) errors although its point count fits in `u64`, while the binary sibling accepts it. The grounded residue of the refuted finding below | `projective.rs:44-50` | RC1 |
+| 13 | 4 | `xor_sumset_256_into` claims a saturated sumset when one operand is empty; the nonempty precondition is re-established independently at each of four call sites. *(Found independently by two agents; severity settled at 4 by the call-site audit.)* | `bitset_sumset.rs` | RC1 |
+| 14 | 4 | The g53 sparse-dual projection/rotation sumset kernels silently cap at 64 residue states, with the guard living in one caller; the next parameter step wraps shifts in release and corrupts exclusion certificates | `g53_sparse_dual.rs:394`, `:308-331`, `:345-376` | RC1, RC2 |
+| 15 | 4 | The zero-allocation gate rests on four diverged copies of a thread-local counting allocator; two lack the panic guard, and any rayon-ified measured kernel passes the gate vacuously | `src/lib.rs:92-98`, `tests/proof_synthesis_allocations.rs:69`, and two guarded copies | RC1, RC2 |
+| 16 | 4 | `Matrix` carries no field tag, so identical bytes silently reinterpret under a different field; it derives `Serialize`/`Deserialize` with no field context, and the reduced-entry check is the only residual guard. `span.rs`'s `CanonicalTargetImage` already implements the guard `Matrix` lacks | `matrix.rs:18-62` | RC1 |
+| 17 | 4 | `Prime<P>` arithmetic is public and unvalidated — `validate()` is advisory, so `Prime::<9>::inverse(3)` returns `Ok(0)` and `Prime::<0>::add` divides by zero. Includes the `assert!` vs `debug_assert!` split between `SmallField` and `BinarySmallField` for the identical misuse | `field.rs:50-93` | RC1, RC2 |
+| 18 | 4 | The `LiftProfile` signature width is implicit in `lift_bits`, which `EnergyDomain` does not record; four width-divergent unpackers exist (`as u8` at three sites, `as u16` at one) | `g133_sparse_defect.rs:255-265`, `:1213`, `:1358`, `:3779`, `:3808` | RC1 |
+| 19 | 5 | `Hadamard2092Error::FixedField` is an overloaded catch-all across 54 uses spanning budget exhaustion, conversion overflow, replay mismatch, and invariant violation; the q7 path reports the same budget condition as `StateBudget`. It directly worsened diagnosis of finding 4 | `g53_search.rs`, e.g. `:2111-2113`, `:1700`, `:2149-2153` | RC1 |
+| — | — | **Refuted.** `BinaryProjectiveIndex::new`'s `checked_shl` guard was reported as failing open; the quoted ascending loop exists in no revision, the real constructor shifts the literal `1_u64` (exact), and the claimed trigger correctly returns `Err(DimensionOverflow)` | `projective.rs:144-165` | see RC4 |
+
+Cross-cutting shapes counted in the pass-2 sweep, beyond the individual findings above: the
+guard-in-caller shape at seven sites, copy-and-diverge at six, verification-by-re-execution across
+seven sealed-proof modules plus both certificate tools, implicit width caps at four, and
+passing-value deserialization defaults at two dangerous sites (the second being
+`control/mod.rs:662`, where an absent control-plane parameter selects the permissive branch).
 
 ## Two claims verified independently in the main session
 
