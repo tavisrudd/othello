@@ -861,16 +861,29 @@ impl<'pack, 'workspace, 'field, const H: u8, const GENERATORS: usize>
             self.workspace.image.fill(0);
             for term in &self.pack.unit_terms[action.unit_start as usize..action.unit_end as usize]
             {
-                self.workspace.image[usize::from(term.output)] ^=
-                    self.workspace.point[usize::from(term.input)];
+                let output = usize::from(term.output);
+                let input = usize::from(term.input);
+                // SAFETY: construction records terms only while enumerating a
+                // validated square matrix whose dimension is the workspace
+                // dimension checked by `runner`.
+                unsafe {
+                    *self.workspace.image.get_unchecked_mut(output) ^=
+                        *self.workspace.point.get_unchecked(input);
+                }
             }
             for term in &self.pack.weighted_terms
                 [action.weighted_start as usize..action.weighted_end as usize]
             {
-                self.workspace.image[usize::from(term.output)] ^= field.mul_canonical(
-                    term.coefficient,
-                    self.workspace.point[usize::from(term.input)],
-                );
+                let output = usize::from(term.output);
+                let input = usize::from(term.input);
+                // SAFETY: the same validate-once matrix/workspace invariant as
+                // the unit tape applies to both indices.
+                unsafe {
+                    *self.workspace.image.get_unchecked_mut(output) ^= field.mul_canonical(
+                        term.coefficient,
+                        *self.workspace.point.get_unchecked(input),
+                    );
+                }
             }
             *successor = self
                 .pack
@@ -1382,23 +1395,39 @@ mod tests {
         assert_eq!(dense.point_count(), sparse.point_count());
         let mut dense_workspace = dense.workspace();
         let mut sparse_workspace = sparse.workspace();
-        let mut dense_runner = dense.runner(&mut dense_workspace).unwrap();
-        let mut sparse_runner = sparse.runner(&mut sparse_workspace).unwrap();
-        for point in 0..dense.point_count() {
+        {
+            let mut dense_runner = dense.runner(&mut dense_workspace).unwrap();
+            let mut sparse_runner = sparse.runner(&mut sparse_workspace).unwrap();
+            for point in 0..dense.point_count() {
+                assert_eq!(
+                    dense_runner.successors(point).unwrap(),
+                    sparse_runner.successors(point).unwrap()
+                );
+            }
             assert_eq!(
-                dense_runner.successors(point).unwrap(),
-                sparse_runner.successors(point).unwrap()
+                sparse_runner.successors(sparse.point_count()),
+                Err(ProjectiveError::PointOutOfRange)
             );
         }
-        assert_eq!(
-            sparse_runner.successors(sparse.point_count()),
-            Err(ProjectiveError::PointOutOfRange)
-        );
 
         let singular =
             std::array::from_fn(|_| Matrix::new_with_field(&field, 3, 3, vec![0; 9]).unwrap());
         assert!(matches!(
             BinarySparseProjectiveLinearActionPack::<3, 3>::new(&field, 2, singular),
+            Err(ProjectiveError::InvalidLinearAction)
+        ));
+
+        let smaller = BinarySparseProjectiveLinearActionPack::<3, 3>::new(
+            &field,
+            1,
+            std::array::from_fn(|_| {
+                Matrix::new_with_field(&field, 2, 2, vec![1, 0, 0, 1]).unwrap()
+            }),
+        )
+        .unwrap();
+        let mut wrong_workspace = smaller.workspace();
+        assert!(matches!(
+            sparse.runner(&mut wrong_workspace),
             Err(ProjectiveError::InvalidLinearAction)
         ));
     }
