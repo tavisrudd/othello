@@ -357,6 +357,20 @@ impl<'a, const H: u8> BinaryProjectiveIndex<'a, H> {
         self.point_count
     }
 
+    /// Locate the canonical chart containing a validated point index.
+    ///
+    /// The leading affine chart contains `(q - 1) / q` of `PG(d, q)`, so a
+    /// direct first-chart test avoids binary search for at least half of all
+    /// indices and for 63/64 of `PG(d, 64)`.
+    #[inline(always)]
+    fn pivot_for_validated_index(&self, index: u64) -> usize {
+        if index < self.offsets[1] {
+            0
+        } else {
+            1 + self.offsets[2..].partition_point(|&end| end <= index)
+        }
+    }
+
     /// Rank a nonzero homogeneous vector with canonical `GF(2^H)` entries.
     #[inline(always)]
     pub fn index(&self, coordinates: &[u8]) -> Result<u64, ProjectiveError> {
@@ -410,7 +424,7 @@ impl<'a, const H: u8> BinaryProjectiveIndex<'a, H> {
             return Err(ProjectiveError::PointOutOfRange);
         }
         output.fill(0);
-        let pivot = self.offsets[1..].partition_point(|&end| end <= index);
+        let pivot = self.pivot_for_validated_index(index);
         output[pivot] = 1;
         let mut suffix = index - self.offsets[pivot];
         let mask = (1_u64 << H) - 1;
@@ -433,7 +447,7 @@ impl<'a, const H: u8> BinaryProjectiveIndex<'a, H> {
             return Err(ProjectiveError::PointOutOfRange);
         }
         output.fill(self.field.zero());
-        let pivot = self.offsets[1..].partition_point(|&end| end <= index);
+        let pivot = self.pivot_for_validated_index(index);
         output[pivot] = self.field.one();
         let mut suffix = index - self.offsets[pivot];
         let mask = (1_u64 << H) - 1;
@@ -449,7 +463,7 @@ impl<'a, const H: u8> BinaryProjectiveIndex<'a, H> {
         debug_assert!(index < self.point_count);
         debug_assert_eq!(output.len(), usize::from(self.vector_dimension));
         output.fill(0);
-        let pivot = self.offsets[1..].partition_point(|&end| end <= index);
+        let pivot = self.pivot_for_validated_index(index);
         output[pivot] = 1;
         let mut suffix = index - self.offsets[pivot];
         let mask = (1_u64 << H) - 1;
