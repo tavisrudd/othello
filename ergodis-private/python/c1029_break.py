@@ -128,7 +128,8 @@ def build_mutants(cert: Path, out: Path) -> list[tuple[str, str, Path]]:
     tmp.write_text("".join(f"{l}\n" for l in w))
     emit("bad-witness", "layer 2: witness equation", refresh_witness_binding(m, tmp), w)
 
-    # 6. a missing witness, with count and hash honestly updated
+    # 6. a missing witness, with count and hash updated to match, so that the completeness
+    #    check is what fires rather than the hash binding
     m = list(base)
     w = wit_lines[1:]
     tmp.write_text("".join(f"{l}\n" for l in w))

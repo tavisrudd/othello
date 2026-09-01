@@ -774,6 +774,7 @@ fn main() {
     let t_wit = std::time::Instant::now();
     let mut witnesses: Vec<(u64, u64, u128)> = Vec::new();
     let mut ladder_absorbed = 0usize;
+    let mut deep_path = 0usize;
     let mut failures: Vec<u64> = Vec::new();
     for &p in &resid {
         if t2
@@ -783,15 +784,19 @@ fn main() {
             ladder_absorbed += 1;
             continue;
         }
-        match find_witness(p, &base, witness_s_max, 1)
-            .or_else(|| find_witness(p, &base, witness_s_max, 2))
-        {
+        match find_witness(p, &base, witness_s_max, 1) {
             Some((s, d)) => witnesses.push((p, s, d)),
-            None => failures.push(p),
+            None => match find_witness(p, &base, witness_s_max, 2) {
+                Some((s, d)) => {
+                    deep_path += 1;
+                    witnesses.push((p, s, d));
+                }
+                None => failures.push(p),
+            },
         }
     }
     eprintln!(
-        "witnesses: {} found, {} absorbed by ladder, {} FAILURES ({:.1}s)",
+        "witnesses: {} found ({deep_path} needed d | M^2), {} absorbed by ladder, {} FAILURES ({:.1}s)",
         witnesses.len(),
         ladder_absorbed,
         failures.len(),
