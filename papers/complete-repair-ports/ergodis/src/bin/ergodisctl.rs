@@ -1475,6 +1475,87 @@ mod probation_tests {
     }
 
     #[test]
+    fn group_synthesize_composes_create_only_artifacts_end_to_end() {
+        let temporary = tempfile::tempdir().unwrap();
+        let data = temporary.path().join("data.jsonl");
+        std::fs::write(
+            &data,
+            concat!(
+                "{\"schema\":\"ergodis-campaign-data-v0\",\"presentation\":\"groups\",\"problem\":\"fixture\",\"fields\":[\"group\",\"value\"],\"rows\":4}\n",
+                "{\"id\":0,\"expected\":false,\"values\":[0,0]}\n",
+                "{\"id\":1,\"expected\":false,\"values\":[0,0]}\n",
+                "{\"id\":2,\"expected\":true,\"values\":[1,1]}\n",
+                "{\"id\":3,\"expected\":true,\"values\":[1,1]}\n"
+            ),
+        )
+        .unwrap();
+        let run_dir = temporary.path().join("run");
+        let campaign = ergodis::control::Campaign::create(
+            &data,
+            &run_dir,
+            Some(temporary.path().join("control.sock")),
+            4096,
+            16 * 1024,
+            4096,
+        )
+        .unwrap();
+        let manifest = campaign.manifest().clone();
+        let server = thread::spawn(move || campaign.serve().unwrap());
+        for _ in 0..100 {
+            if manifest.socket.exists() {
+                break;
+            }
+            thread::sleep(Duration::from_millis(2));
+        }
+        assert!(manifest.socket.exists());
+
+        let output = temporary.path().join("plan.json");
+        run_group_synthesize(
+            &manifest,
+            "group",
+            true,
+            &["value".into()],
+            &[],
+            &[],
+            "parents",
+            &output,
+            16,
+            64,
+            7,
+            3,
+            None,
+            None,
+            16 * 1024,
+        )
+        .unwrap();
+        assert!(run_dir.join("evidence/parents.data.jsonl").is_file());
+        let plan: PlanSpec = serde_json::from_slice(&std::fs::read(&output).unwrap()).unwrap();
+        assert_eq!(plan.output, PlanOutput::Predicate);
+        assert!(run_group_synthesize(
+            &manifest,
+            "group",
+            true,
+            &["value".into()],
+            &[],
+            &[],
+            "must-not-exist",
+            &output,
+            16,
+            64,
+            7,
+            3,
+            None,
+            None,
+            16 * 1024,
+        )
+        .is_err());
+        assert!(!run_dir.join("evidence/must-not-exist.data.jsonl").exists());
+
+        send_request(&manifest, "shutdown", json!({}), 4096).unwrap();
+        server.join().unwrap();
+    }
+
+    #[test]
     fn windows_filter_epochs_and_measure_cumulative_rate() {
         let data = concat!(
             "{\"elapsed_ms\":1000,\"applied_epoch\":1,\"solver\":{\"states\":100,\"root_done\":0}}\n",
