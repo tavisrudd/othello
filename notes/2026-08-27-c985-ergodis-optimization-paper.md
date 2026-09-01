@@ -674,9 +674,35 @@ files are disposable and may be deleted at any time.
    branch.  Eighteen focused tests, the full 4,686,825-object C973 replay, fixed
    record-size assertions, and strict clippy pass in a clean worktree.
 
-   Remaining execution work is durable registration of the optimized C973
-   adapter once its private kernel module is available for this tranche.  Then
-   require the same engine to express one C80 and one C896 packet before
+   Commits `cbbdc11cb`, `7d7233d33`, and `314c08f05` complete durable
+   registration of the optimized affine-census adapter.  Preparation compiles
+   the recipe and exact registry, the 39 affine planes into 13 ternary
+   partitions, the 117 lines, the bounded orbit hash table, and all retained
+   storage.  The prepared matcher uses the retained two-POPCNT-per-partition
+   kernel; the reducer and iterative four-generator closure reuse that storage
+   with no allocation.  A fallible `FixedMaskSet::try_insert` now lets a
+   prepared runtime report retention overflow without weakening the existing
+   fast insertion API.  The runtime is reusable: two consecutive executions
+   reproduce the same full census without leaked histogram or orbit state.
+   The `semantic_affine_census` application now invokes this registered plan;
+   174 lines of duplicated enumeration, affine arithmetic, minimum tracking,
+   and orbit closure were deleted.  Its release JSON still reports exactly
+   4,686,825 objects, histogram
+   `0,0,0,0,2106,2070198,2393352,214812,6318,39`, minimum 4, 2,106 minimum
+   objects in one orbit, stabilizer 144, the same canonical representative,
+   and diagnostic proof authority.  A 15-repeat counter control against the
+   preceding standalone binary gives new/old ratios 0.998x cycles, 0.996x
+   instructions, 1.001x branches, and 1.202x branch misses; 30-repeat task
+   clock is 49.87 ms versus 49.22 ms with 3.85%/2.29% relative variation, so
+   the application gate is operationally neutral rather than a speed claim.
+   Pulling the private parser/registry into this small binary raises ELF text
+   from 866,462 to 1,082,540 bytes; retain that explicit cold-control cost for
+   later linker/feature work rather than trading away runtime plan injection.
+   Twenty-nine scoped library tests, the application target, and strict clippy
+   pass in a clean worktree.
+
+   Remaining execution acceptance is to express one C80 and one C896 packet
+   through the same engine before
    stabilizing or publishing the private grammar.  Do not create a second mini-
    language.  The accepted algebra and constraints remain
    `2026-08-30-ergodis-semantic-mining-engine-adr.md`.
