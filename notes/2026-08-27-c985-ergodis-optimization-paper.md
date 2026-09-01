@@ -656,9 +656,26 @@ files are disposable and may be deleted at any time.
    sixteen focused tests and strict clean-worktree clippy pass; the full C973
    replay exercises the compiled arguments while retaining the exact census.
 
-   Remaining execution work is typed multi-input joins and durable registration
-   of the optimized C973
-   adapter once its currently untracked private kernel module is landed.  Then
+   Commits `0ec1e3f9d` and `2800b7fbc` add bounded typed multi-input
+   composition without weakening the streaming boundary.  Recipes may write
+   `reduce join from left, right`, but every input of a multi-input reducer must
+   already be a bounded retained artifact; a `match` still has exactly one
+   input and every consumer of its unbounded feature stream must remain in one
+   adjacent fused reducer bank.  Operation signatures declare the ordered
+   input-sort vector.  Cold compilation resolves it into a bounded flat `u16`
+   slot pool; 24-byte compiled ops and 32-byte execution stages retain fixed
+   size by carrying only offset/count spans.  Execution slices those spans and
+   dispatches once per stage, with no allocation, serialization, string lookup,
+   or per-record generic dispatch.  The exact control fuses two reducers and
+   then observes input slots `[2,3]` in one typed join stage; an attempted join
+   involving an unbounded source/feature stream fails before compilation.
+   Theorem-fragment lineage now traverses the complete input DAG, deduplicates
+   shared ancestors, and requires every canonical action on every emitted
+   branch.  Eighteen focused tests, the full 4,686,825-object C973 replay, fixed
+   record-size assertions, and strict clippy pass in a clean worktree.
+
+   Remaining execution work is durable registration of the optimized C973
+   adapter once its private kernel module is available for this tranche.  Then
    require the same engine to express one C80 and one C896 packet before
    stabilizing or publishing the private grammar.  Do not create a second mini-
    language.  The accepted algebra and constraints remain
