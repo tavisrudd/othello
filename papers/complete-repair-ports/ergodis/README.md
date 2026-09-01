@@ -235,8 +235,11 @@ fingerprints of the exact input and executable. The cold-path
 `css_distance_shard_ledger` tool accepts one record per shard and emits a
 create-only compact coverage manifest only when every index is present exactly
 once and the schema, input, executable, compiled artifact, search kernel,
-radius, completed rounds, and final-round counters agree. Missing, duplicate,
-interrupted, or mixed records fail closed:
+requested and effective search maxima, completed rounds, and final-round
+counters agree.  The v2 manifest records both maxima because a search may
+normalize an odd requested maximum down by one; the cover verdict is scoped to
+the recorded effective maximum. Missing, duplicate, interrupted, or mixed
+records fail closed:
 
 ```sh
 cargo run --release --bin css_distance_shard_ledger -- \

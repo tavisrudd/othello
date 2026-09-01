@@ -76,6 +76,7 @@ struct CoverageManifest {
     artifact_payload_blake3: Option<String>,
     search_kernel: String,
     maximum_weight: u16,
+    searched_maximum_weight: u16,
     shard_count: u32,
     completed_shards: u32,
     aggregate_distance: Option<u16>,
@@ -131,6 +132,13 @@ fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
     let executable_blake3 = first_record.executable_blake3.clone();
     let search_kernel = first_record.search_kernel.clone();
     let maximum_weight = first_record.maximum_weight;
+    let searched_maximum_weight = first_record.result.searched_maximum_weight;
+    if searched_maximum_weight > maximum_weight
+        || maximum_weight - searched_maximum_weight > 1
+        || (searched_maximum_weight != maximum_weight && maximum_weight & 1 == 0)
+    {
+        bail!("record has an invalid effective search maximum");
+    }
     for (name, digest) in [
         ("input", first_record.input_blake3.as_str()),
         ("executable", first_record.executable_blake3.as_str()),
@@ -173,6 +181,7 @@ fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
             || record.artifact_payload_blake3.as_deref() != artifact_payload_blake3.as_deref()
             || record.search_kernel != search_kernel
             || record.maximum_weight != maximum_weight
+            || record.result.searched_maximum_weight != searched_maximum_weight
         {
             bail!("record belongs to a different search identity");
         }
@@ -185,13 +194,12 @@ fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
         {
             bail!("record has incomplete or invalid round evidence");
         }
-        if record.result.searched_maximum_weight != record.maximum_weight
-            || record.result.stats.candidates
-                != record
-                    .round_stats
-                    .last()
-                    .expect("nonempty rounds checked above")
-                    .candidates
+        if record.result.stats.candidates
+            != record
+                .round_stats
+                .last()
+                .expect("nonempty rounds checked above")
+                .candidates
         {
             bail!("record result does not replay its final search round");
         }
@@ -235,13 +243,14 @@ fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
         .map(|(distance, witness)| (Some(distance), witness))
         .unwrap_or((None, Vec::new()));
     Ok(CoverageManifest {
-        schema: "ergodis-css-distance-shard-coverage-v1",
+        schema: "ergodis-css-distance-shard-coverage-v2",
         verdict: "complete-compatible-cover",
         input_blake3,
         executable_blake3,
         artifact_payload_blake3,
         search_kernel,
         maximum_weight,
+        searched_maximum_weight,
         shard_count: first_shard.count,
         completed_shards: first_shard.count,
         aggregate_distance,
@@ -347,5 +356,32 @@ mod tests {
         let mut bad_witness = loaded(1, 2);
         bad_witness.record.result.witness.pop();
         assert!(verify(vec![loaded(0, 2), bad_witness]).is_err());
+    }
+
+    #[test]
+    fn odd_requested_maximum_accepts_one_step_parity_normalization() {
+        let mut left = loaded(0, 2);
+        let mut right = loaded(1, 2);
+        left.record.maximum_weight = 9;
+        right.record.maximum_weight = 9;
+        let manifest = verify(vec![left, right]).unwrap();
+        assert_eq!(manifest.maximum_weight, 9);
+        assert_eq!(manifest.searched_maximum_weight, 8);
+    }
+
+    #[test]
+    fn incompatible_or_invalid_effective_maxima_fail_closed() {
+        let mut mixed = loaded(1, 2);
+        mixed.record.result.searched_maximum_weight = 6;
+        assert!(verify(vec![loaded(0, 2), mixed]).is_err());
+
+        let mut skipped_even = loaded(0, 1);
+        skipped_even.record.result.searched_maximum_weight = 7;
+        assert!(verify(vec![skipped_even]).is_err());
+
+        let mut skipped_two = loaded(0, 1);
+        skipped_two.record.maximum_weight = 9;
+        skipped_two.record.result.searched_maximum_weight = 7;
+        assert!(verify(vec![skipped_two]).is_err());
     }
 }

@@ -87,7 +87,10 @@ algorithm-semantics version, anchor order, frontier depth, frontier length, and
 a deterministic frontier commitment per anchor.  The ledger may emit
 `CompleteCover` only when these descriptors agree and all partition indices are
 present.  This is additive cold evidence; it does not add hashing or I/O to the
-solve loop.
+solve loop.  The first incremental schema step is landed: v2 records both the
+requested and effective search maxima, admits only a one-step odd-to-even
+normalization, scopes the cover to the effective maximum, and requires every
+shard to agree on it.
 
 ### 4. Reduction operators declare and test their algebra
 
@@ -166,4 +169,3 @@ evidence schemas are invalidated when their semantics were ambiguous.  Solve
 throughput should not move.  In return, claims become mutation-tested,
 coverage-aware, reproducible from Git, and clear about the independence their
 verification actually provides.
-

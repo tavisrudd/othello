@@ -336,8 +336,10 @@ old controls.
   instructions are 0.9999997x at 1T (`t=-1.08`) and 0.9999599x at 12T
   (`t=-1.40`), while 12T cycles are 1.002252x (`t=1.57`). A cold frontier
   commitment is still required before the ledger verdict itself constitutes a
-  general cover certificate, and odd requested maxima currently expose a
-  separate parity-normalization false-rejection foot-gun.
+  general cover certificate. The v2 manifest separately binds requested and
+  effective maxima, admits only the one-step odd-to-even normalization, and
+  mutation-tests both invalid and cross-shard-inconsistent effective maxima;
+  this closes the adjacent parity-normalization false-rejection foot-gun.
 
 A general test worth adopting alongside these, since it would have caught findings 20, 21, 29, and
 33 as a class: for every check, assertion, and verdict in the evidence path, construct the input

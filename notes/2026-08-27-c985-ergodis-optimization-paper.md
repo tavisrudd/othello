@@ -391,9 +391,12 @@ files are disposable and may be deleted at any time.
    counter moves significantly and the stable-frontier repair adds no
    measurable hot-path cost.  This does not yet upgrade the ledger itself to a
    mathematical cover certificate: the next schema must commit the common
-   per-anchor frontier, and the current parity-normalized searched maximum can
-   falsely reject an otherwise consistent ledger when an odd requested maximum
-   is recorded above an even completed radius.
+   per-anchor frontier.  The adjacent v2 manifest now records requested and
+   effective search maxima separately, accepts only the one-step odd-to-even
+   normalization emitted by the search, scopes its cover verdict to the
+   effective maximum, and rejects inconsistent effective maxima across shards;
+   this removes the parity-normalization false rejection without silently
+   promoting the requested radius.
    missing, duplicate, mixed-identity, interrupted, and malformed-witness
    controls fail closed.  Items (b)--(d) have also landed: a planted weight-two
    logical witness is recovered from every position of a verified eight-cycle;
