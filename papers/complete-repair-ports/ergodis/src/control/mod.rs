@@ -2315,13 +2315,24 @@ mod tests {
                 {"op": "gt"}
             ],
         });
+        let second_seed = json!({
+            "schema": PLAN_SCHEMA,
+            "name": "reverse-threshold",
+            "role": "diagnostic",
+            "output": "predicate",
+            "program": [
+                {"op": "field", "name": "x"},
+                {"op": "const", "value": 101},
+                {"op": "lt"}
+            ],
+        });
         let started = campaign
             .evolution_start(&json!({
-                "seeds": [seed],
+                "seeds": [seed, second_seed],
                 "evidence_name": "evolution-control",
                 "generations": 4,
                 "beam": 2,
-                "max_candidates": 16,
+                "max_candidates": 4,
             }))
             .unwrap();
         assert_eq!(started["state"], "running");
@@ -2337,7 +2348,7 @@ mod tests {
         assert!(completed["summary"]["perfect"].as_u64().unwrap() >= 1);
         let relative = completed["path"].as_str().unwrap();
         let evidence = fs::read_to_string(campaign.manifest.run_dir.join(relative)).unwrap();
-        assert!(evidence.lines().count() >= 2);
+        assert_eq!(evidence.lines().count(), 5);
         let records = evidence
             .lines()
             .map(|line| serde_json::from_str::<Value>(line).unwrap())
@@ -2350,17 +2361,23 @@ mod tests {
         assert_eq!(records[1]["failure_shape"]["first_mismatch_id"], 1);
         assert_eq!(records[1]["failure_shape"]["probes"][0]["field"], "x");
         assert_eq!(records[1]["failure_shape"]["probes"][0]["value"], 99);
+        assert_eq!(records[2]["operator"], "seed");
+        let seed_hashes = [&records[1]["hash"], &records[2]["hash"]]
+            .into_iter()
+            .map(|value| value.as_str().unwrap())
+            .collect::<BTreeSet<_>>();
+        let parent_hashes = records[3..]
+            .iter()
+            .map(|record| record["parent_hash"].as_str().unwrap())
+            .collect::<BTreeSet<_>>();
+        assert_eq!(parent_hashes, seed_hashes);
         assert!(records
             .iter()
-            .skip(2)
-            .any(|record| record["parent_hash"].as_str().is_some()));
-        assert!(records
-            .iter()
-            .skip(2)
+            .skip(3)
             .any(|record| record["operator"] == "counterexample-threshold"));
         assert!(records
             .iter()
-            .skip(2)
+            .skip(3)
             .all(|record| record["operator"] != "seed"));
     }
 

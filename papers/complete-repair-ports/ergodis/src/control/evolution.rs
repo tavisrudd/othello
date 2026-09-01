@@ -153,6 +153,12 @@ struct PendingCandidate {
     operator: &'static str,
 }
 
+struct ExpansionParent {
+    hash: String,
+    plan: PlanSpec,
+    first_mismatch: Option<usize>,
+}
+
 type EvolutionRankKey = (std::cmp::Reverse<u64>, u64, usize);
 
 #[inline]
@@ -171,6 +177,12 @@ fn can_enter_beam(
     survivor_keys.len() < beam
         || evolution_rank_key(maximum_correct, false_positive, complexity)
             <= survivor_keys[survivor_keys.len() - 1]
+}
+
+#[inline]
+fn fair_share(total: usize, index: usize, count: usize) -> usize {
+    debug_assert!(count != 0 && index < count);
+    total / count + usize::from(index < total % count)
 }
 
 fn imported_candidate_cmp(
@@ -490,28 +502,39 @@ pub(super) fn run_evolution(
                 .then_with(|| left.5.name.cmp(&right.5.name))
         });
         let mut expanded_outcomes = BTreeSet::new();
-        let mut expanded = 0_usize;
+        let expansion_capacity = bounds.max_candidates.saturating_sub(tested);
+        let mut parents = Vec::with_capacity(bounds.beam.min(expansion_capacity));
         for (_, _, _, outcome_hash, parent_hash, parent, first_mismatch) in ranked {
-            if expanded == bounds.beam {
+            if parents.len() == bounds.beam || parents.len() == expansion_capacity {
                 break;
             }
             if !expanded_outcomes.insert(outcome_hash) {
                 outcome_expansion_rejections += 1;
                 continue;
             }
-            let failure_shape = failure_shape(&batch, &parent, first_mismatch, &field_index);
+            parents.push(ExpansionParent {
+                hash: parent_hash,
+                plan: parent,
+                first_mismatch,
+            });
+        }
+        let parent_count = parents.len();
+        let mut carry = 0_usize;
+        for (index, parent) in parents.into_iter().enumerate() {
+            let quota = fair_share(expansion_capacity, index, parent_count).saturating_add(carry);
+            let before = current.len();
+            let limit = before.saturating_add(quota).min(expansion_capacity);
+            let failure_shape =
+                failure_shape(&batch, &parent.plan, parent.first_mismatch, &field_index);
             mutate_plan(
-                &parent,
-                &parent_hash,
+                &parent.plan,
+                &parent.hash,
                 &mutation_context,
                 &failure_shape,
                 &mut current,
-                bounds.max_candidates.saturating_sub(tested),
+                limit,
             );
-            expanded += 1;
-            if current.len() >= bounds.max_candidates.saturating_sub(tested) {
-                break;
-            }
+            carry = quota.saturating_sub(current.len().saturating_sub(before));
         }
     }
     writer.flush()?;
@@ -923,6 +946,20 @@ mod tests {
                         assert_eq!(observed, expected);
                     }
                 }
+            }
+        }
+    }
+
+    #[test]
+    fn fair_parent_shares_cover_the_budget_without_starvation() {
+        for total in 1..100 {
+            for count in 1..=total.min(16) {
+                let shares = (0..count)
+                    .map(|index| fair_share(total, index, count))
+                    .collect::<Vec<_>>();
+                assert_eq!(shares.iter().sum::<usize>(), total);
+                assert!(shares.iter().all(|&share| share != 0));
+                assert!(shares.iter().max().unwrap() - shares.iter().min().unwrap() <= 1);
             }
         }
     }

@@ -153,6 +153,13 @@ no candidate.  Evidence serialization happens immediately.  Ranked candidates
 retain only the mismatch-row index, and feature probes are reconstructed only
 for the bounded beam selected for expansion.
 
+Expansion first selects outcome-distinct parents, then divides the remaining
+candidate budget across them with shares differing by at most one.  An earlier
+parent cannot consume a later parent's share; unused capacity carries forward
+when a parent has fewer mutations.  This preserves beam diversity without
+building a candidate list per parent or increasing the configured global
+candidate bound.
+
 Socket I/O, JSON, evidence serialization, and plan compilation happen outside
 worker hot loops.  Uncontrolled solves compile without the control-plane
 feature.  Controlled workers retain only the existing coarse safe-point flag;
