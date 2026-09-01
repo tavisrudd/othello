@@ -1479,6 +1479,14 @@ files are disposable and may be deleted at any time.
    machine. The replayable patch and raw pairs are in
    `ergodis-private/evidence/c985-bb756-whole-kernel-multiversion-rejected.json`;
    production is again unchanged.
+   A same-source native-codegen ceiling closes the SIMD question for this pass.
+   Seven alternating portable/`-C target-cpu=native` pairs are instruction-
+   and branch-identical; portable/native is 0.997420x cycles (`t=-0.36`) and
+   1.002280x wall (`t=0.11`). Thus LLVM is not leaving a measurable host-
+   feature gain on the table in the current shape. Custom intrinsics are
+   deferred until a narrower primitive has an independent algorithmic reason;
+   the exact builds and raw pairs are in
+   `ergodis-private/evidence/c985-bb756-native-codegen-ab.json`.
 
    Step (6) is now closed as a measured negative for the motivating PRS
    client.  A source-attributed one-thread profile of the complete
