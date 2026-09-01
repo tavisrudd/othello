@@ -97,6 +97,15 @@ pub fn parse_plan_u64_literal(number: &str) -> Result<u64, ControlError> {
     parse_u64(number)
 }
 
+/// Parse the signed integer syntax shared by scalar and operation arguments.
+pub fn parse_plan_i64_literal(number: &str) -> Result<i64, ControlError> {
+    if let Some(magnitude) = number.strip_prefix('-') {
+        parse_negative(magnitude)
+    } else {
+        parse_i64(number)
+    }
+}
+
 /// Parse and lower a textual plan to the existing VM bytecode schema.
 pub fn parse_and_lower_plan(text: &str) -> Result<PlanSpec, ControlError> {
     parse_expression_plan(text)?.lower()
@@ -729,6 +738,7 @@ plan "rigid-order" {
         );
         assert_eq!(format_plan_name("field-name").unwrap(), r#""field-name""#);
         assert_eq!(parse_plan_u64_literal("0xffff_0000").unwrap(), 0xffff_0000);
+        assert_eq!(parse_plan_i64_literal("-0x8000").unwrap(), -0x8000);
         let arguments = lex_plan_text("affine(rank=2, metric=max_overlap)").unwrap();
         assert_eq!(
             arguments
