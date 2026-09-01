@@ -6,7 +6,7 @@
 use crate::multiset::{MultisetBounds, MultisetStatistic};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
-use std::collections::{BTreeMap, VecDeque};
+use std::collections::{BTreeMap, BTreeSet, VecDeque};
 use std::fs::{self, File, OpenOptions};
 use std::io::{self, BufReader, BufWriter, Read, Write};
 use std::os::unix::fs::{FileTypeExt, OpenOptionsExt, PermissionsExt};
@@ -24,7 +24,10 @@ mod text;
 mod vm;
 
 pub use client::PlanArena;
-use evolution::{run_evolution, EvolutionBounds, EvolutionProgress};
+use evolution::{
+    load_evolution_seeds, run_evolution, EvolutionBounds, EvolutionIdentity, EvolutionProgress,
+    EvolutionSeed,
+};
 use synthesis::learn_decision_tree;
 pub use text::{
     format_expression_plan, format_plan_expression, format_plan_name, lex_plan_text,
@@ -1075,25 +1078,117 @@ impl Campaign {
                 "an evolution job is already active".into(),
             ));
         }
-        let seeds = args
-            .get("seeds")
-            .and_then(Value::as_array)
-            .ok_or_else(|| ControlError::Invalid("evolve-start requires seeds".into()))?;
-        if seeds.is_empty() || seeds.len() > 32 {
+        let seeds = match args.get("seeds") {
+            None | Some(Value::Null) => None,
+            Some(value) => Some(value.as_array().ok_or_else(|| {
+                ControlError::Invalid("evolve-start seeds must be an array".into())
+            })?),
+        };
+        if seeds.is_some_and(|seeds| seeds.len() > 32) {
             return Err(ControlError::Invalid(
-                "evolve-start requires 1..=32 seeds".into(),
+                "evolve-start accepts at most 32 direct seeds".into(),
             ));
         }
-        let mut lowered = Vec::with_capacity(seeds.len());
-        for seed in seeds {
+        let mut lowered = Vec::with_capacity(32);
+        let mut seed_hashes = BTreeSet::new();
+        for seed in seeds.into_iter().flatten() {
             let spec: PlanSpec = serde_json::from_value(seed.clone())?;
             if spec.output != PlanOutput::Predicate {
                 return Err(ControlError::Invalid(
                     "evolve-start accepts predicate seeds only".into(),
                 ));
             }
-            CompiledPlan::compile(&spec, &self.batch.fields)?;
-            lowered.push(spec);
+            let compiled = CompiledPlan::compile(&spec, &self.batch.fields)?;
+            if !seed_hashes.insert(compiled.hash) {
+                return Err(ControlError::Invalid(
+                    "evolve-start contains duplicate direct seeds".into(),
+                ));
+            }
+            lowered.push(EvolutionSeed {
+                plan: spec,
+                parent_hash: None,
+                source_hash: None,
+                source_evidence: None,
+                operator: "seed",
+            });
+        }
+        let direct_seeds = lowered.len();
+        let identity = EvolutionIdentity {
+            code_commit: self.manifest.code_commit.clone(),
+            presentation_hash: self.manifest.presentation_hash.clone(),
+            presentation: self.batch.presentation.clone(),
+            problem: self.batch.problem.clone(),
+            fields: self.batch.fields.clone(),
+            generator: self.batch.generator.clone(),
+        };
+        let resume = match args.get("resume_evidence") {
+            None | Some(Value::Null) => None,
+            Some(value) => Some(value.as_array().ok_or_else(|| {
+                ControlError::Invalid("evolve-start resume_evidence must be an array".into())
+            })?),
+        };
+        if resume.is_some_and(|paths| paths.len() > 8) {
+            return Err(ControlError::Invalid(
+                "evolve-start accepts at most eight replay archives".into(),
+            ));
+        }
+        let resume_paths = resume
+            .into_iter()
+            .flatten()
+            .map(|path| {
+                path.as_str()
+                    .ok_or_else(|| {
+                        ControlError::Invalid("resume_evidence entries must be paths".into())
+                    })
+                    .and_then(|path| absolute_path(Path::new(path)))
+            })
+            .collect::<Result<Vec<_>, _>>()?;
+        let replay_capacity = 32_usize.saturating_sub(lowered.len());
+        if replay_capacity == 0 && !resume_paths.is_empty() {
+            return Err(ControlError::Invalid(
+                "evolve-start has no capacity for replay archives".into(),
+            ));
+        }
+        let mut replay_archives = resume_paths
+            .iter()
+            .map(|path| load_evolution_seeds(path, &identity, replay_capacity).map(Vec::into_iter))
+            .collect::<Result<Vec<_>, _>>()?;
+        while lowered.len() < 32 {
+            let mut observed = false;
+            for archive in &mut replay_archives {
+                for seed in archive.by_ref() {
+                    observed = true;
+                    let hash = seed.source_hash.as_ref().ok_or_else(|| {
+                        ControlError::Invalid(
+                            "replayed evolution seed omits its verified plan hash".into(),
+                        )
+                    })?;
+                    if seed_hashes.insert(hash.clone()) {
+                        lowered.push(seed);
+                        break;
+                    }
+                }
+                if lowered.len() == 32 {
+                    break;
+                }
+            }
+            if !observed {
+                break;
+            }
+        }
+        let replayed_seeds = lowered.len() - direct_seeds;
+        if lowered.is_empty() {
+            return Err(ControlError::Invalid(
+                "evolve-start requires a direct or replayed seed".into(),
+            ));
+        }
+        for seed in &lowered[direct_seeds..] {
+            if seed.plan.output != PlanOutput::Predicate {
+                return Err(ControlError::Invalid(
+                    "replayed evolution evidence contains a non-predicate plan".into(),
+                ));
+            }
+            CompiledPlan::compile(&seed.plan, &self.batch.fields)?;
         }
         let generations = args.get("generations").and_then(Value::as_u64).unwrap_or(3) as usize;
         let beam = args.get("beam").and_then(Value::as_u64).unwrap_or(16) as usize;
@@ -1148,7 +1243,9 @@ impl Campaign {
         };
         let handle = thread::Builder::new()
             .name(format!("ergodis-evolve-{}", &id[..8]))
-            .spawn(move || run_evolution(batch, lowered, output, bounds, worker_progress))?;
+            .spawn(move || {
+                run_evolution(batch, identity, lowered, output, bounds, worker_progress)
+            })?;
         self.evolution = Some(EvolutionJob {
             id: id.clone(),
             relative_path: relative_path.clone(),
@@ -1165,6 +1262,8 @@ impl Campaign {
             "beam": beam,
             "max_candidates": max_candidates,
             "max_evidence_bytes": byte_limit,
+            "direct_seeds": direct_seeds,
+            "replayed_seeds": replayed_seeds,
         }))
     }
 
@@ -2195,6 +2294,16 @@ mod tests {
             16_384,
         )
         .unwrap();
+        assert!(campaign
+            .evolution_start(&json!({"seeds": {}}))
+            .unwrap_err()
+            .to_string()
+            .contains("seeds must be an array"));
+        assert!(campaign
+            .evolution_start(&json!({"resume_evidence": "archive.jsonl"}))
+            .unwrap_err()
+            .to_string()
+            .contains("resume_evidence must be an array"));
         let seed = json!({
             "schema": PLAN_SCHEMA,
             "name": "threshold",
@@ -2233,16 +2342,181 @@ mod tests {
             .lines()
             .map(|line| serde_json::from_str::<Value>(line).unwrap())
             .collect::<Vec<_>>();
-        assert_eq!(records[0]["operator"], "seed");
-        assert!(records[0]["parent_hash"].is_null());
+        assert_eq!(records[0]["schema"], "ergodis-evolution-evidence-v0");
+        assert_eq!(records[0]["problem"], "threshold");
+        assert_eq!(records[1]["operator"], "seed");
+        assert!(records[1]["parent_hash"].is_null());
         assert!(records
             .iter()
-            .skip(1)
+            .skip(2)
             .any(|record| record["parent_hash"].as_str().is_some()));
         assert!(records
             .iter()
-            .skip(1)
+            .skip(2)
             .all(|record| record["operator"] != "seed"));
+    }
+
+    #[test]
+    fn daemon_evolution_replays_compatible_cross_campaign_seeds() {
+        let temporary = tempfile::tempdir().unwrap();
+        let digest = "0".repeat(64);
+        let first_data = temporary.path().join("first.jsonl");
+        let second_data = temporary.path().join("second.jsonl");
+        fs::write(
+            &first_data,
+            format!(
+                "{{\"schema\":\"ergodis-campaign-data-v0\",\"presentation\":\"train\",\"problem\":\"threshold\",\"fields\":[\"x\"],\"rows\":2,\"generator\":{{\"name\":\"fixture\",\"version\":\"1\",\"digest\":\"{digest}\"}}}}\n{{\"id\":0,\"expected\":false,\"values\":[0]}}\n{{\"id\":1,\"expected\":true,\"values\":[2]}}\n"
+            ),
+        )
+        .unwrap();
+        fs::write(
+            &second_data,
+            format!(
+                "{{\"schema\":\"ergodis-campaign-data-v0\",\"presentation\":\"holdout\",\"problem\":\"threshold\",\"fields\":[\"x\"],\"rows\":2,\"generator\":{{\"name\":\"fixture\",\"version\":\"1\",\"digest\":\"{digest}\"}}}}\n{{\"id\":2,\"expected\":true,\"values\":[3]}}\n{{\"id\":3,\"expected\":false,\"values\":[1]}}\n"
+            ),
+        )
+        .unwrap();
+
+        let mut first = Campaign::create(
+            &first_data,
+            &temporary.path().join("first-run"),
+            Some(temporary.path().join("first.sock")),
+            16_384,
+            8_192,
+            16_384,
+        )
+        .unwrap();
+        let seed = json!({
+            "schema": PLAN_SCHEMA,
+            "name": "threshold",
+            "role": "diagnostic",
+            "output": "predicate",
+            "program": [
+                {"op": "field", "name": "x"},
+                {"op": "const", "value": 1},
+                {"op": "gt"}
+            ],
+        });
+        let started = first
+            .evolution_start(&json!({
+                "seeds": [seed],
+                "evidence_name": "train",
+                "generations": 1,
+                "beam": 1,
+                "max_candidates": 1,
+            }))
+            .unwrap();
+        let first_evidence = first
+            .manifest
+            .run_dir
+            .join(started["path"].as_str().unwrap());
+        while first.evolution_status().unwrap()["state"] == "running" {
+            thread::yield_now();
+        }
+
+        let mut second = Campaign::create(
+            &second_data,
+            &temporary.path().join("second-run"),
+            Some(temporary.path().join("second.sock")),
+            16_384,
+            8_192,
+            16_384,
+        )
+        .unwrap();
+        let started = second
+            .evolution_start(&json!({
+                "resume_evidence": [first_evidence.clone(), first_evidence.clone()],
+                "evidence_name": "holdout",
+                "generations": 1,
+                "beam": 1,
+                "max_candidates": 1,
+            }))
+            .unwrap();
+        assert_eq!(started["direct_seeds"], 0);
+        assert_eq!(started["replayed_seeds"], 1);
+        let completed = loop {
+            let status = second.evolution_status().unwrap();
+            if status["state"] != "running" {
+                break status;
+            }
+            thread::yield_now();
+        };
+        assert_eq!(completed["state"], "complete");
+        let evidence = fs::read_to_string(
+            second
+                .manifest
+                .run_dir
+                .join(completed["path"].as_str().unwrap()),
+        )
+        .unwrap();
+        let records = evidence
+            .lines()
+            .map(|line| serde_json::from_str::<Value>(line).unwrap())
+            .collect::<Vec<_>>();
+        assert_eq!(records[0]["presentation"], "holdout");
+        assert_eq!(records[0]["code_commit"], second.manifest.code_commit);
+        assert_eq!(records[1]["operator"], "replay");
+        assert!(records[1]["parent_hash"].is_null());
+        let source = fs::read_to_string(&first_evidence).unwrap();
+        let mut source_records = source
+            .lines()
+            .map(|line| serde_json::from_str::<Value>(line).unwrap())
+            .collect::<Vec<_>>();
+        assert_eq!(records[1]["source_hash"], source_records[1]["hash"]);
+        assert_eq!(
+            records[1]["source_evidence"].as_str(),
+            first_evidence.to_str()
+        );
+
+        let tampered_evidence = temporary.path().join("tampered-evidence.jsonl");
+        source_records[1]["hash"] = Value::String("f".repeat(64));
+        let mut tampered = source_records
+            .iter()
+            .map(serde_json::to_string)
+            .collect::<Result<Vec<_>, _>>()
+            .unwrap()
+            .join("\n");
+        tampered.push('\n');
+        fs::write(&tampered_evidence, tampered).unwrap();
+        let error = second
+            .evolution_start(&json!({
+                "resume_evidence": [tampered_evidence],
+                "evidence_name": "tampered",
+                "generations": 1,
+                "beam": 1,
+                "max_candidates": 1,
+            }))
+            .unwrap_err();
+        assert!(error.to_string().contains("hash does not match"));
+
+        let incompatible_data = temporary.path().join("incompatible.jsonl");
+        fs::write(
+            &incompatible_data,
+            format!(
+                "{{\"schema\":\"ergodis-campaign-data-v0\",\"presentation\":\"other\",\"problem\":\"threshold\",\"fields\":[\"x\"],\"rows\":1,\"generator\":{{\"name\":\"fixture\",\"version\":\"1\",\"digest\":\"{}\"}}}}\n{{\"id\":4,\"expected\":true,\"values\":[4]}}\n",
+                "1".repeat(64)
+            ),
+        )
+        .unwrap();
+        let mut incompatible = Campaign::create(
+            &incompatible_data,
+            &temporary.path().join("incompatible-run"),
+            Some(temporary.path().join("incompatible.sock")),
+            16_384,
+            8_192,
+            16_384,
+        )
+        .unwrap();
+        let error = incompatible
+            .evolution_start(&json!({
+                "resume_evidence": [first_evidence],
+                "evidence_name": "incompatible",
+                "generations": 1,
+                "beam": 1,
+                "max_candidates": 1,
+            }))
+            .unwrap_err();
+        assert!(error.to_string().contains("incompatible"));
     }
 
     #[test]

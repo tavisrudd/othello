@@ -130,6 +130,19 @@ snapshots, performs isolated bounded probes, and sends compact scorecards throug
 the watcher. Search workers do not run evolution, probe workspaces, or protocol
 code.
 
+`ergodisctl evolve-start` accepts an optional direct seed JSONL file and up to
+eight repeated `--resume-evidence` paths.  A replay archive must match the
+problem, ordered feature schema, and exact feature-generator provenance.  When
+no generator provenance exists, its complete presentation hash must also
+match.  The daemon recomputes every archived plan hash, ranks candidates within
+each archive, interleaves archives in request order, removes structural
+duplicates, and admits at most 32 direct-plus-replayed seeds.  Replayed plans
+are compiled and evaluated again on the current frozen batch; archived scores
+are selection evidence, never current results.  Each output header records the
+current presentation and producing code commit, while replay roots record a
+separate source hash and archive path rather than creating a false parent edge
+in the mutation lineage.
+
 Socket I/O, JSON, evidence serialization, and plan compilation happen outside
 worker hot loops.  Uncontrolled solves compile without the control-plane
 feature.  Controlled workers retain only the existing coarse safe-point flag;

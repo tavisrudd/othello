@@ -132,7 +132,11 @@ enum Command {
     },
     /// Start daemon-owned low-priority evolution with streamed evidence.
     EvolveStart {
-        seeds: PathBuf,
+        /// Optional JSONL seed population. May be omitted when replaying evidence.
+        seeds: Option<PathBuf>,
+        /// Compatible prior evolution archives to rank and re-evaluate as seeds.
+        #[arg(long = "resume-evidence")]
+        resume_evidence: Vec<PathBuf>,
         #[arg(long)]
         evidence_name: String,
         #[arg(long, default_value_t = 3)]
@@ -239,6 +243,7 @@ fn main() -> Result<()> {
     }
     if let Command::EvolveStart {
         seeds,
+        resume_evidence,
         evidence_name,
         generations,
         beam,
@@ -246,12 +251,17 @@ fn main() -> Result<()> {
         max_evidence_bytes,
     } = &cli.command
     {
-        let seeds = read_plan_jsonl(seeds, 32)?;
+        let seeds = seeds
+            .as_ref()
+            .map(|path| read_plan_jsonl(path, 32))
+            .transpose()?
+            .unwrap_or_default();
         let response = send_request(
             &manifest,
             "evolve-start",
             json!({
                 "seeds": seeds,
+                "resume_evidence": resume_evidence,
                 "evidence_name": evidence_name,
                 "generations": generations,
                 "beam": beam,

@@ -1,13 +1,71 @@
 use super::{
-    vm::evaluate_plan_cascaded, CompiledPlan, ControlError, FeatureBatch, PlanOp, PlanScope,
-    PlanSpec,
+    vm::evaluate_plan_cascaded, CompiledPlan, ControlError, FeatureBatch,
+    FeatureGeneratorProvenance, PlanOp, PlanScope, PlanSpec,
 };
+use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::collections::{BTreeMap, BTreeSet};
 use std::fs::File;
-use std::io::{BufWriter, Write};
+use std::io::{BufRead, BufReader, BufWriter, Write};
+use std::path::Path;
 use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
 use std::sync::Arc;
+
+const EVOLUTION_EVIDENCE_SCHEMA: &str = "ergodis-evolution-evidence-v0";
+const MAX_EVOLUTION_IMPORT_BYTES: u64 = 16 * 1024 * 1024;
+const MAX_EVOLUTION_RECORD_BYTES: usize = 256 * 1024;
+
+#[derive(Clone)]
+pub(super) struct EvolutionIdentity {
+    pub code_commit: String,
+    pub presentation_hash: String,
+    pub presentation: String,
+    pub problem: String,
+    pub fields: Box<[String]>,
+    pub generator: Option<FeatureGeneratorProvenance>,
+}
+
+#[derive(Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct EvolutionEvidenceHeader {
+    schema: String,
+    code_commit: String,
+    presentation_hash: String,
+    presentation: String,
+    problem: String,
+    fields: Box<[String]>,
+    generator: Option<FeatureGeneratorProvenance>,
+}
+
+impl From<&EvolutionIdentity> for EvolutionEvidenceHeader {
+    fn from(identity: &EvolutionIdentity) -> Self {
+        Self {
+            schema: EVOLUTION_EVIDENCE_SCHEMA.into(),
+            code_commit: identity.code_commit.clone(),
+            presentation_hash: identity.presentation_hash.clone(),
+            presentation: identity.presentation.clone(),
+            problem: identity.problem.clone(),
+            fields: identity.fields.clone(),
+            generator: identity.generator.clone(),
+        }
+    }
+}
+
+pub(super) struct EvolutionSeed {
+    pub plan: PlanSpec,
+    pub parent_hash: Option<String>,
+    pub source_hash: Option<String>,
+    pub source_evidence: Option<String>,
+    pub operator: &'static str,
+}
+
+struct ImportedCandidate {
+    seed: EvolutionSeed,
+    incorrect: u64,
+    weighted_rows: u64,
+    false_positive: u64,
+    complexity: usize,
+}
 
 #[repr(C, align(64))]
 pub(super) struct EvolutionProgress {
@@ -68,6 +126,8 @@ struct ScopeMutationProfile {
 struct PendingCandidate {
     plan: PlanSpec,
     parent_hash: Option<String>,
+    source_hash: Option<String>,
+    source_evidence: Option<String>,
     operator: &'static str,
 }
 
@@ -91,9 +151,134 @@ fn can_enter_beam(
             <= survivor_keys[survivor_keys.len() - 1]
 }
 
+fn imported_candidate_cmp(
+    left: &ImportedCandidate,
+    right: &ImportedCandidate,
+) -> std::cmp::Ordering {
+    let left_error = u128::from(left.incorrect) * u128::from(right.weighted_rows);
+    let right_error = u128::from(right.incorrect) * u128::from(left.weighted_rows);
+    left_error
+        .cmp(&right_error)
+        .then_with(|| {
+            (u128::from(left.false_positive) * u128::from(right.weighted_rows))
+                .cmp(&(u128::from(right.false_positive) * u128::from(left.weighted_rows)))
+        })
+        .then_with(|| left.complexity.cmp(&right.complexity))
+        .then_with(|| left.seed.source_hash.cmp(&right.seed.source_hash))
+}
+
+pub(super) fn load_evolution_seeds(
+    path: &Path,
+    expected: &EvolutionIdentity,
+    limit: usize,
+) -> Result<Vec<EvolutionSeed>, ControlError> {
+    if limit == 0 {
+        return Ok(Vec::new());
+    }
+    let file = File::open(path)?;
+    if file.metadata()?.len() > MAX_EVOLUTION_IMPORT_BYTES {
+        return Err(ControlError::Invalid(
+            "evolution evidence exceeds the import byte bound".into(),
+        ));
+    }
+    let mut lines = BufReader::new(file).lines();
+    let header_line = lines
+        .next()
+        .ok_or_else(|| ControlError::Invalid("empty evolution evidence".into()))??;
+    if header_line.len() > MAX_EVOLUTION_RECORD_BYTES {
+        return Err(ControlError::Invalid(
+            "evolution evidence header exceeds the record bound".into(),
+        ));
+    }
+    let header: EvolutionEvidenceHeader = serde_json::from_str(&header_line)?;
+    if header.schema != EVOLUTION_EVIDENCE_SCHEMA
+        || header.presentation_hash.len() != 64
+        || !header
+            .presentation_hash
+            .bytes()
+            .all(|byte| byte.is_ascii_hexdigit())
+        || header.problem != expected.problem
+        || header.fields != expected.fields
+        || header.generator != expected.generator
+        || (header.generator.is_none() && header.presentation_hash != expected.presentation_hash)
+    {
+        return Err(ControlError::Invalid(
+            "evolution evidence is incompatible with this feature batch".into(),
+        ));
+    }
+
+    let mut selected = Vec::<ImportedCandidate>::with_capacity(limit);
+    for line in lines {
+        let line = line?;
+        if line.len() > MAX_EVOLUTION_RECORD_BYTES {
+            return Err(ControlError::Invalid(
+                "evolution evidence record exceeds the record bound".into(),
+            ));
+        }
+        let value: Value = serde_json::from_str(&line)?;
+        let Some(evaluation) = value.get("evaluation").and_then(Value::as_object) else {
+            continue;
+        };
+        let weighted_rows = required_u64(evaluation, "weighted_rows")?;
+        let weighted_correct = required_u64(evaluation, "weighted_correct")?;
+        let false_positive = required_u64(evaluation, "weighted_false_positive")?;
+        if weighted_rows == 0 || weighted_correct > weighted_rows || false_positive > weighted_rows
+        {
+            return Err(ControlError::Invalid(
+                "evolution evidence contains an invalid score".into(),
+            ));
+        }
+        let plan: PlanSpec = serde_json::from_value(
+            value
+                .get("plan")
+                .cloned()
+                .ok_or_else(|| ControlError::Invalid("evolution record omits plan".into()))?,
+        )?;
+        let parent_hash = value
+            .get("hash")
+            .and_then(Value::as_str)
+            .filter(|hash| hash.len() == 64 && hash.bytes().all(|byte| byte.is_ascii_hexdigit()))
+            .map(str::to_owned)
+            .ok_or_else(|| ControlError::Invalid("evolution record has an invalid hash".into()))?;
+        let compiled = CompiledPlan::compile(&plan, &expected.fields)?;
+        if compiled.hash != parent_hash {
+            return Err(ControlError::Invalid(
+                "evolution record hash does not match its plan".into(),
+            ));
+        }
+        selected.push(ImportedCandidate {
+            incorrect: weighted_rows - weighted_correct,
+            weighted_rows,
+            false_positive,
+            complexity: plan.program.len(),
+            seed: EvolutionSeed {
+                plan,
+                parent_hash: None,
+                source_hash: Some(parent_hash),
+                source_evidence: Some(path.to_string_lossy().into_owned()),
+                operator: "replay",
+            },
+        });
+        selected.sort_unstable_by(imported_candidate_cmp);
+        selected.truncate(limit);
+    }
+    Ok(selected
+        .into_iter()
+        .map(|candidate| candidate.seed)
+        .collect())
+}
+
+fn required_u64(object: &serde_json::Map<String, Value>, field: &str) -> Result<u64, ControlError> {
+    object
+        .get(field)
+        .and_then(Value::as_u64)
+        .ok_or_else(|| ControlError::Invalid(format!("evolution score omits {field}")))
+}
+
 pub(super) fn run_evolution(
     batch: Arc<FeatureBatch>,
-    current: Vec<PlanSpec>,
+    identity: EvolutionIdentity,
+    current: Vec<EvolutionSeed>,
     output: File,
     bounds: EvolutionBounds,
     progress: Arc<EvolutionProgress>,
@@ -103,7 +288,15 @@ pub(super) fn run_evolution(
     let low_priority = unsafe { libc::setpriority(libc::PRIO_PROCESS, 0, 10) } == 0;
     let scope_profiles = scope_profiles(&batch)?;
     let mut writer = BufWriter::new(output);
-    let mut bytes = 0_u64;
+    let mut header = serde_json::to_vec(&EvolutionEvidenceHeader::from(&identity))?;
+    header.push(b'\n');
+    if header.len() as u64 > bounds.byte_limit {
+        return Err(ControlError::Invalid(
+            "evolution evidence limit cannot hold its identity header".into(),
+        ));
+    }
+    writer.write_all(&header)?;
+    let mut bytes = header.len() as u64;
     let mut structural = BTreeSet::new();
     let mut outcome_classes = BTreeMap::new();
     let mut tested = 0_usize;
@@ -116,10 +309,12 @@ pub(super) fn run_evolution(
     let mut truncated = false;
     let mut current = current
         .into_iter()
-        .map(|plan| PendingCandidate {
-            plan,
-            parent_hash: None,
-            operator: "seed",
+        .map(|seed| PendingCandidate {
+            plan: seed.plan,
+            parent_hash: seed.parent_hash,
+            source_hash: seed.source_hash,
+            source_evidence: seed.source_evidence,
+            operator: seed.operator,
         })
         .collect::<Vec<_>>();
 
@@ -160,6 +355,8 @@ pub(super) fn run_evolution(
                 let record = json!({
                     "generation": generation,
                     "parent_hash": pending.parent_hash,
+                    "source_hash": pending.source_hash,
+                    "source_evidence": pending.source_evidence,
                     "operator": pending.operator,
                     "plan": &plan,
                     "hash": &compiled.hash,
@@ -186,6 +383,8 @@ pub(super) fn run_evolution(
             let record = json!({
                 "generation": generation,
                 "parent_hash": pending.parent_hash,
+                "source_hash": pending.source_hash,
+                "source_evidence": pending.source_evidence,
                 "operator": pending.operator,
                 "plan": &plan,
                 "hash": &compiled.hash,
@@ -356,6 +555,8 @@ fn push_scoped_child(
     output.push(PendingCandidate {
         plan: child,
         parent_hash: Some(parent_hash.into()),
+        source_hash: None,
+        source_evidence: None,
         operator,
     });
     output.len() == limit
@@ -466,6 +667,8 @@ fn mutate_plan(
             output.push(PendingCandidate {
                 plan: child,
                 parent_hash: Some(parent_hash.into()),
+                source_hash: None,
+                source_evidence: None,
                 operator,
             });
         }
