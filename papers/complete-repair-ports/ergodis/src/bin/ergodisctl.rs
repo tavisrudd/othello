@@ -754,18 +754,20 @@ fn read_plan_jsonl(path: &PathBuf, limit: usize) -> Result<Vec<PlanSpec>> {
         if plans.len() == limit {
             bail!("seed population exceeds limit {limit}");
         }
-        let document: PlanDocument = serde_json::from_str(&line)
-            .with_context(|| format!("invalid plan at line {}", line_number + 1))?;
-        plans.push(
-            document
-                .lower()
-                .with_context(|| format!("cannot lower plan at line {}", line_number + 1))?,
-        );
+        plans.push(parse_plan_json_line(&line, line_number + 1)?);
     }
     if plans.is_empty() {
         bail!("seed population is empty");
     }
     Ok(plans)
+}
+
+fn parse_plan_json_line(line: &str, line_number: usize) -> Result<PlanSpec> {
+    let document: PlanDocument = serde_json::from_str(line)
+        .with_context(|| format!("invalid plan at line {line_number}"))?;
+    document
+        .lower()
+        .with_context(|| format!("cannot lower plan at line {line_number}"))
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -1070,8 +1072,7 @@ fn run_batch(
         if line.trim().is_empty() {
             continue;
         }
-        let plan: PlanSpec = serde_json::from_str(&line)
-            .with_context(|| format!("invalid plan at line {}", line_number + 1))?;
+        let plan = parse_plan_json_line(&line, line_number + 1)?;
         let response = send_request(manifest, "candidate-try", json!({"plan": plan}), max_bytes)?;
         if !response.ok {
             bail!(
@@ -1290,6 +1291,30 @@ mod probation_tests {
         assert_eq!(
             serde_json::to_value(read_plan(&text_path).unwrap()).unwrap(),
             serde_json::to_value(read_plan(&json_path).unwrap()).unwrap()
+        );
+    }
+
+    #[test]
+    fn population_reader_accepts_expression_and_bytecode_documents() {
+        let expression = serde_json::json!({
+            "schema": ergodis::control::PLAN_SCHEMA,
+            "name": "parity",
+            "role": "diagnostic",
+            "output": "predicate",
+            "expr": {
+                "op": "le",
+                "left": {"op": "field", "name": "debt"},
+                "right": {"op": "const", "value": 3}
+            }
+        });
+        let lowered = PlanDocument::Expression(serde_json::from_value(expression.clone()).unwrap())
+            .lower()
+            .unwrap();
+        let bytecode = serde_json::to_string(&lowered).unwrap();
+        assert_eq!(
+            serde_json::to_value(parse_plan_json_line(&expression.to_string(), 7).unwrap())
+                .unwrap(),
+            serde_json::to_value(parse_plan_json_line(&bytecode, 8).unwrap()).unwrap()
         );
     }
 

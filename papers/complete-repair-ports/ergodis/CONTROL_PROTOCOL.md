@@ -73,6 +73,13 @@ a caller-bounded top set. The daemon stops before the first record that would
 cross `max_evidence_bytes` and reports `truncated: true`; it never silently
 writes beyond the configured campaign trace limit.
 
+The streaming `ergodisctl batch` client accepts one JSON plan document per
+line. Each document may contain either validated bytecode or the high-level
+typed `expr` form; the client lowers both through the same bounded compiler
+used by `try` before sending one candidate at a time. This keeps the wire
+surface bytecode-only while avoiding a separate manual-lowering step for
+candidate populations.
+
 ## Textual plan authoring
 
 Single plans passed to `ergodisctl try` and `ergodisctl apply` may use the
@@ -94,8 +101,9 @@ same typed AST and use the same lowering and type checker; canonical formatting
 has parse/format/parse identity, and equivalent text and JSON lower to identical
 serialized bytecode. Input bytes, tokens, expression nodes, and depth are all
 bounded before a plan can enter the daemon. JSON and JSONL remain the protocol,
-persistence, bulk-batch, and diagnostic encodings; text is the human authoring
-surface only.
+persistence, bulk-batch, and diagnostic encodings; expression JSON is accepted
+by both single-plan and streaming batch clients, while text is the single-plan
+human authoring surface only.
 
 ## Proof authority
 
