@@ -219,6 +219,8 @@ struct SidonCertificate {
     normalization: &'static str,
     nodes: u64,
     solutions: usize,
+    cap: usize,
+    exhaustive: bool,
     examples: Vec<Vec<usize>>,
     hall_verified: usize,
     hall_failures: usize,
@@ -546,7 +548,7 @@ fn orbit_matrix_search(n: usize, cap: usize) -> OrbitCertificate {
     let type_list: Vec<Vec<usize>> = types.clone();
 
     OrbitCertificate {
-        schema: "c1018.plane12.orbit.v1",
+        schema: "c1018.plane12.orbit.v2",
         n,
         p: n + 1,
         dimension: dim,
@@ -558,10 +560,14 @@ fn orbit_matrix_search(n: usize, cap: usize) -> OrbitCertificate {
         candidate_rows: rows.len(),
         nodes,
         solutions: count,
+        cap,
+        exhaustive: cap == 0 || count < cap,
         type_profiles: profiles,
         examples,
         verdict: if count == 0 {
             format!("eliminated: no orbit matrix for an order-{} collineation", n + 1)
+        } else if cap > 0 && count >= cap {
+            format!("at least {count} normalized orbit matrices survive (cap reached)")
         } else {
             format!("{count} normalized orbit matrices survive")
         },
