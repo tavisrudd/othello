@@ -373,6 +373,53 @@ impl PositiveCoverage {
             }
         }
     }
+
+    fn contains(&self, row: usize) -> bool {
+        match self {
+            Self::Sparse(rows) => rows.binary_search(&row).is_ok(),
+            Self::Dense(words) => words
+                .get(row / 64)
+                .is_some_and(|word| word >> (row % 64) & 1 != 0),
+        }
+    }
+
+    fn try_for_each_row(
+        &self,
+        mut visit: impl FnMut(usize) -> Result<(), ControlError>,
+    ) -> Result<(), ControlError> {
+        match self {
+            Self::Sparse(rows) => {
+                for &row in rows.iter() {
+                    visit(row)?;
+                }
+            }
+            Self::Dense(words) => {
+                for (word_index, &word) in words.iter().enumerate() {
+                    let mut bits = word;
+                    while bits != 0 {
+                        let bit = bits.trailing_zeros() as usize;
+                        bits &= bits - 1;
+                        visit(word_index * 64 + bit)?;
+                    }
+                }
+            }
+        }
+        Ok(())
+    }
+
+    fn union_dense(&self, other: &Self, words: usize) -> Result<Vec<u64>, ControlError> {
+        let mut union = self.to_dense(words)?;
+        other.try_for_each_row(|row| {
+            let Some(word) = union.get_mut(row / 64) else {
+                return Err(ControlError::Invalid(
+                    "hindsight union row is out of range".into(),
+                ));
+            };
+            *word |= 1_u64 << (row % 64);
+            Ok(())
+        })?;
+        Ok(union)
+    }
 }
 
 struct HindsightComposition {
@@ -392,6 +439,30 @@ struct CompositionExtraction {
     compositions: Vec<HindsightComposition>,
     probes: usize,
     rows_evaluated: u64,
+}
+
+struct PremisePair {
+    left: usize,
+    right: usize,
+    weighted_union: u64,
+    marginal_gain: u64,
+    semantic_ops: usize,
+}
+
+fn premise_pair_cmp(left: &PremisePair, right: &PremisePair) -> std::cmp::Ordering {
+    diminishing_ratio_cmp(
+        left.marginal_gain,
+        left.semantic_ops as u64,
+        1,
+        right.marginal_gain,
+        right.semantic_ops as u64,
+        1,
+    )
+    .reverse()
+    .then_with(|| right.weighted_union.cmp(&left.weighted_union))
+    .then_with(|| left.semantic_ops.cmp(&right.semantic_ops))
+    .then_with(|| left.left.cmp(&right.left))
+    .then_with(|| left.right.cmp(&right.right))
 }
 
 struct ReplayExtraction {
@@ -941,14 +1012,9 @@ fn compose_hindsight_fragments(
     let mut compositions = Vec::new();
     let mut probes = 0;
     let mut rows_evaluated = 0_u64;
-    'pairs: for left_index in 0..ledger.len() {
+    let mut premise_pairs = Vec::new();
+    for left_index in 0..ledger.len() {
         for right_index in left_index + 1..ledger.len() {
-            if probes == probe_limit
-                || compositions.len() == MAX_HINDSIGHT_COMPOSITIONS_PER_GENERATION
-                || seen.len() == MAX_HINDSIGHT_SEMANTICS
-            {
-                break 'pairs;
-            }
             let left = &ledger[left_index];
             let right = &ledger[right_index];
             if left.plan.role != right.plan.role
@@ -957,10 +1023,7 @@ fn compose_hindsight_fragments(
             {
                 continue;
             }
-            let coverage_words = batch.rows().div_ceil(64);
-            let left_coverage = left.coverage.to_dense(coverage_words)?;
-            let right_coverage = right.coverage.to_dense(coverage_words)?;
-            let Some(program_len) = left
+            let Some(semantic_ops) = left
                 .plan
                 .program
                 .len()
@@ -969,100 +1032,111 @@ fn compose_hindsight_fragments(
             else {
                 continue;
             };
-            let mut program = Vec::with_capacity(program_len);
-            program.extend(left.plan.program.iter().cloned());
-            program.extend(right.plan.program.iter().cloned());
-            program.push(PlanOp::Or);
-            let plan = PlanSpec {
-                schema: left.plan.schema.clone(),
-                name: format!(
-                    "hindsight-or-{}-{}",
-                    left.semantic_hash.get(..8).unwrap_or(&left.semantic_hash),
-                    right.semantic_hash.get(..8).unwrap_or(&right.semantic_hash)
-                ),
-                role: left.plan.role,
-                output: left.plan.output,
-                scope: left.plan.scope.clone(),
-                program,
-            };
-            let semantic_hash = semantic_plan_hash(&plan)?;
-            if !seen.insert(semantic_hash.clone()) {
-                continue;
+            let mut weighted_union = left.weighted_true_positive;
+            right.coverage.try_for_each_row(|row| {
+                if !left.coverage.contains(row) {
+                    let weight = batch.weights.get(row).copied().ok_or_else(|| {
+                        ControlError::Invalid("hindsight premise row is out of range".into())
+                    })?;
+                    weighted_union = weighted_union.checked_add(weight).ok_or_else(|| {
+                        ControlError::Invalid("hindsight premise coverage overflow".into())
+                    })?;
+                }
+                Ok(())
+            })?;
+            let marginal_gain = weighted_union.saturating_sub(
+                left.weighted_true_positive
+                    .max(right.weighted_true_positive),
+            );
+            if marginal_gain != 0 {
+                premise_pairs.push(PremisePair {
+                    left: left_index,
+                    right: right_index,
+                    weighted_union,
+                    marginal_gain,
+                    semantic_ops,
+                });
             }
-            probes += 1;
+        }
+    }
+    premise_pairs.sort_unstable_by(premise_pair_cmp);
 
-            let mut coverage = Vec::with_capacity(coverage_words);
-            let mut weighted_true_positive = 0_u64;
-            for (word_index, (&left_word, &right_word)) in
-                left_coverage.iter().zip(&right_coverage).enumerate()
-            {
-                let union = left_word | right_word;
-                coverage.push(union);
-                let mut bits = union;
-                while bits != 0 {
-                    let bit = bits.trailing_zeros() as usize;
-                    bits &= bits - 1;
-                    let row = word_index * 64 + bit;
-                    weighted_true_positive = weighted_true_positive
-                        .checked_add(batch.weights[row])
-                        .ok_or_else(|| {
-                            ControlError::Invalid("hindsight union coverage overflow".into())
-                        })?;
-                }
-            }
-            if weighted_true_positive
-                <= left
-                    .weighted_true_positive
-                    .max(right.weighted_true_positive)
-            {
-                continue;
-            }
-            let Ok(compiled) = CompiledPlan::compile(&plan, &batch.fields) else {
-                continue;
-            };
-            let mut replay_coverage = vec![0_u64; coverage.len()];
-            let mut replay_weight = 0_u64;
-            for row in 0..batch.rows() {
-                rows_evaluated = rows_evaluated.checked_add(1).ok_or_else(|| {
-                    ControlError::Invalid("hindsight composition row overflow".into())
-                })?;
-                let observed = compiled.evaluate_value_untraced(batch.row(row))? != 0;
-                if observed && !batch.expected(row) {
-                    return Err(ControlError::Invalid(
-                        "zero-false-positive composition failed exact replay".into(),
-                    ));
-                }
-                if observed {
-                    replay_coverage[row / 64] |= 1_u64 << (row % 64);
-                    replay_weight =
-                        replay_weight
-                            .checked_add(batch.weights[row])
-                            .ok_or_else(|| {
-                                ControlError::Invalid(
-                                    "hindsight composition coverage overflow".into(),
-                                )
-                            })?;
-                }
-            }
-            if replay_coverage != coverage || replay_weight != weighted_true_positive {
+    for premise in premise_pairs {
+        if probes == probe_limit
+            || compositions.len() == MAX_HINDSIGHT_COMPOSITIONS_PER_GENERATION
+            || seen.len() == MAX_HINDSIGHT_SEMANTICS
+        {
+            break;
+        }
+        let left = &ledger[premise.left];
+        let right = &ledger[premise.right];
+        let mut program = Vec::with_capacity(premise.semantic_ops);
+        program.extend(left.plan.program.iter().cloned());
+        program.extend(right.plan.program.iter().cloned());
+        program.push(PlanOp::Or);
+        let plan = PlanSpec {
+            schema: left.plan.schema.clone(),
+            name: format!(
+                "hindsight-or-{}-{}",
+                left.semantic_hash.get(..8).unwrap_or(&left.semantic_hash),
+                right.semantic_hash.get(..8).unwrap_or(&right.semantic_hash)
+            ),
+            role: left.plan.role,
+            output: left.plan.output,
+            scope: left.plan.scope.clone(),
+            program,
+        };
+        let semantic_hash = semantic_plan_hash(&plan)?;
+        if !seen.insert(semantic_hash.clone()) {
+            continue;
+        }
+        probes += 1;
+        let coverage = left
+            .coverage
+            .union_dense(&right.coverage, batch.rows().div_ceil(64))?;
+        let weighted_true_positive = premise.weighted_union;
+        let Ok(compiled) = CompiledPlan::compile(&plan, &batch.fields) else {
+            continue;
+        };
+        let mut replay_coverage = vec![0_u64; coverage.len()];
+        let mut replay_weight = 0_u64;
+        for row in 0..batch.rows() {
+            rows_evaluated = rows_evaluated.checked_add(1).ok_or_else(|| {
+                ControlError::Invalid("hindsight composition row overflow".into())
+            })?;
+            let observed = compiled.evaluate_value_untraced(batch.row(row))? != 0;
+            if observed && !batch.expected(row) {
                 return Err(ControlError::Invalid(
-                    "hindsight composition bitmap replay mismatch".into(),
+                    "zero-false-positive composition failed exact replay".into(),
                 ));
             }
-            compositions.push(HindsightComposition {
-                fragment: HindsightFragment {
-                    semantic_hash,
-                    source_hash: None,
-                    compiled_hash: compiled.hash,
-                    weighted_true_positive,
-                    rows_evaluated: batch.rows() as u64,
-                    coverage: PositiveCoverage::from_dense(coverage),
-                    plan,
-                },
-                left_semantic_hash: left.semantic_hash.clone(),
-                right_semantic_hash: right.semantic_hash.clone(),
-            });
+            if observed {
+                replay_coverage[row / 64] |= 1_u64 << (row % 64);
+                replay_weight = replay_weight
+                    .checked_add(batch.weights[row])
+                    .ok_or_else(|| {
+                        ControlError::Invalid("hindsight composition coverage overflow".into())
+                    })?;
+            }
         }
+        if replay_coverage != coverage || replay_weight != weighted_true_positive {
+            return Err(ControlError::Invalid(
+                "hindsight composition bitmap replay mismatch".into(),
+            ));
+        }
+        compositions.push(HindsightComposition {
+            fragment: HindsightFragment {
+                semantic_hash,
+                source_hash: None,
+                compiled_hash: compiled.hash,
+                weighted_true_positive,
+                rows_evaluated: batch.rows() as u64,
+                coverage: PositiveCoverage::from_dense(coverage),
+                plan,
+            },
+            left_semantic_hash: left.semantic_hash.clone(),
+            right_semantic_hash: right.semantic_hash.clone(),
+        });
     }
     Ok(CompositionExtraction {
         compositions,
@@ -2988,5 +3062,27 @@ mod tests {
         assert_eq!(quotas.iter().sum::<usize>(), 100_000);
         assert!(quotas.iter().all(|&quota| quota != 0));
         assert!(quotas.iter().max().unwrap() - quotas.iter().min().unwrap() <= 1);
+    }
+
+    #[test]
+    fn premise_pairs_rank_marginal_coverage_per_semantic_cost() {
+        let mut pairs = [
+            PremisePair {
+                left: 0,
+                right: 1,
+                weighted_union: 20,
+                marginal_gain: 10,
+                semantic_ops: 100,
+            },
+            PremisePair {
+                left: 0,
+                right: 2,
+                weighted_union: 12,
+                marginal_gain: 2,
+                semantic_ops: 4,
+            },
+        ];
+        pairs.sort_unstable_by(premise_pair_cmp);
+        assert_eq!((pairs[0].left, pairs[0].right), (0, 2));
     }
 }

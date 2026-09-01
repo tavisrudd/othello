@@ -218,7 +218,9 @@ Compatible zero-false-positive fragments may be joined by the exact OR rule.
 Composition requires identical role, output type, and scope.  Coverage is kept
 in an adaptive sparse-index or dense-bitmap representation.  A bounded bitmap
 union first rejects pairs that add no weighted positive coverage; only useful
-unions are compiled and replayed on the full batch, where any negative hit or
+unions are ranked by exact marginal positive coverage per combined semantic
+operation before compilation.  Selected unions are replayed on the full batch,
+where any negative hit or
 bitmap/weight mismatch fails closed.  The daemon attempts at most 16 new pairs
 per generation and 64 per campaign, accepting at most eight per generation
 within the shared 64-fragment ledger.  A `hindsight-composition` record names
