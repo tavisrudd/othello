@@ -588,6 +588,12 @@ impl SmallField {
     }
 
     #[inline(always)]
+    pub(crate) fn add_canonical(&self, left: u8, right: u8) -> u8 {
+        debug_assert!(u16::from(left) < self.order && u16::from(right) < self.order);
+        self.add[usize::from(left) * usize::from(self.order) + usize::from(right)]
+    }
+
+    #[inline(always)]
     pub fn sub(&self, left: u8, right: u8) -> u8 {
         self.subtract[self.table_index(left, right)]
     }
@@ -595,6 +601,12 @@ impl SmallField {
     #[inline(always)]
     pub fn mul(&self, left: u8, right: u8) -> u8 {
         self.multiply[self.table_index(left, right)]
+    }
+
+    #[inline(always)]
+    pub(crate) fn mul_canonical(&self, left: u8, right: u8) -> u8 {
+        debug_assert!(u16::from(left) < self.order && u16::from(right) < self.order);
+        self.multiply[usize::from(left) * usize::from(self.order) + usize::from(right)]
     }
 
     #[inline]
@@ -606,6 +618,12 @@ impl SmallField {
             .get(usize::from(value))
             .copied()
             .ok_or(FieldError::InvalidElement)
+    }
+
+    #[inline(always)]
+    pub(crate) fn inverse_nonzero_canonical(&self, value: u8) -> u8 {
+        debug_assert!(value != 0 && u16::from(value) < self.order);
+        self.inverse[usize::from(value)]
     }
 
     #[inline]

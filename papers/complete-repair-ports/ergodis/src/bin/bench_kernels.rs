@@ -4,6 +4,8 @@ use std::time::Instant;
 
 #[cfg(feature = "control-plane")]
 use ergodis::control::{CompiledPlan, PlanOp, PlanOutput, PlanRole, PlanSpec, PLAN_SCHEMA};
+use ergodis::field::SmallField;
+use ergodis::projective::{ProjectiveIndex, ProjectiveLinearActionPack};
 use ergodis::root_execution::{reduce_roots, RootKernel, RootOrdinal};
 use ergodis::{
     azure_lrc_12_2_2_counted, ceph_xor_repair_family, ceph_xor_repair_supports,
@@ -287,6 +289,51 @@ fn character_sum_spec(variant: &str) -> Option<(&str, u32, usize, u64)> {
         .next()
         .is_none()
         .then_some((backend, modulus, degree, seed))
+}
+
+fn projective_action_spec(variant: &str) -> Option<(&str, usize)> {
+    let mut fields = variant.split(':');
+    if fields.next()? != "projective-action" {
+        return None;
+    }
+    let backend = fields.next()?;
+    let points = fields.next()?.parse().ok()?;
+    fields.next().is_none().then_some((backend, points))
+}
+
+fn dense_projective_generators(field: &SmallField, dimension: usize) -> Vec<u8> {
+    let mut generators = Vec::with_capacity(3 * dimension * dimension);
+    let mut state = 0xC985_10A6_7A11_5EED_u64;
+    for _ in 0..3 {
+        let mut lower = vec![0_u8; dimension * dimension];
+        let mut upper = vec![0_u8; dimension * dimension];
+        for row in 0..dimension {
+            lower[row * dimension + row] = 1;
+            upper[row * dimension + row] = 1;
+            for column in 0..row {
+                lower[row * dimension + column] =
+                    (next_u32(&mut state) % u32::from(field.order())) as u8;
+                upper[column * dimension + row] =
+                    (next_u32(&mut state) % u32::from(field.order())) as u8;
+            }
+        }
+        for row in 0..dimension {
+            for column in 0..dimension {
+                let mut value = 0_u8;
+                for middle in 0..dimension {
+                    value = field.add(
+                        value,
+                        field.mul(
+                            lower[row * dimension + middle],
+                            upper[middle * dimension + column],
+                        ),
+                    );
+                }
+                generators.push(value);
+            }
+        }
+    }
+    generators
 }
 
 fn selector_spec(variant: &str) -> Option<(&str, usize)> {
@@ -975,6 +1022,82 @@ fn main() {
     let mut work = 0u64;
     let mut peak_states = 0u64;
     let mut checksum = 0u64;
+    if let Some((backend, points)) = projective_action_spec(&variant) {
+        let field = SmallField::new(2, 6).unwrap();
+        let dimension = 5usize;
+        let matrices = dense_projective_generators(&field, dimension);
+        let index = ProjectiveIndex::new(&field, (dimension - 1) as u8).unwrap();
+        assert!(points <= index.point_count() as usize);
+        let elapsed_ns = match backend {
+            "legacy" => {
+                let nested: Vec<Vec<Vec<u8>>> = matrices
+                    .chunks_exact(dimension * dimension)
+                    .map(|matrix| matrix.chunks_exact(dimension).map(<[u8]>::to_vec).collect())
+                    .collect();
+                let mut point = vec![0_u8; dimension];
+                let mut image = vec![0_u8; dimension];
+                let started = Instant::now();
+                for _ in 0..repetitions {
+                    for point_index in 0..points as u64 {
+                        index.point(point_index, &mut point).unwrap();
+                        for generator in &nested {
+                            for (row, output) in image.iter_mut().enumerate() {
+                                let mut value = 0_u8;
+                                for (column, &coordinate) in point.iter().enumerate() {
+                                    let coefficient = generator[row][column];
+                                    if coefficient != 0 && coordinate != 0 {
+                                        value =
+                                            field.add(value, field.mul(coefficient, coordinate));
+                                    }
+                                }
+                                *output = value;
+                            }
+                            let successor = index.index(&image).unwrap();
+                            checksum = checksum.rotate_left(7) ^ successor;
+                            work += 1;
+                        }
+                    }
+                }
+                started.elapsed().as_nanos()
+            }
+            "flat" => {
+                let matrix_len = dimension * dimension;
+                let matrix_records = std::array::from_fn(|generator| {
+                    Matrix::new_with_field(
+                        &field,
+                        dimension,
+                        dimension,
+                        matrices[generator * matrix_len..(generator + 1) * matrix_len].to_vec(),
+                    )
+                    .unwrap()
+                });
+                let pack = ProjectiveLinearActionPack::<3>::new(
+                    &field,
+                    (dimension - 1) as u8,
+                    matrix_records,
+                )
+                .unwrap();
+                let mut workspace = pack.workspace();
+                let mut runner = pack.runner(&mut workspace).unwrap();
+                let started = Instant::now();
+                for _ in 0..repetitions {
+                    for point_index in 0..points as u64 {
+                        for successor in runner.successors(point_index).unwrap() {
+                            checksum = checksum.rotate_left(7) ^ successor;
+                            work += 1;
+                        }
+                    }
+                }
+                started.elapsed().as_nanos()
+            }
+            _ => panic!("unknown projective-action backend"),
+        };
+        println!(
+            "{{\"variant\":\"{variant}\",\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"work\":{work},\"peak_states\":{peak_states},\"peak_rss_kib\":{},\"checksum\":{checksum}}}",
+            peak_rss_kib()
+        );
+        return;
+    }
     if let Some((backend, rank, coordinates, seed)) = linear_span_spec(&variant) {
         let (compiled, basis_words, word_count) = linear_span_fixture(rank, coordinates, seed);
         let mut workspace = compiled.workspace();

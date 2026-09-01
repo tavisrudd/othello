@@ -43,7 +43,8 @@ use std::sync::atomic::{AtomicU64, AtomicUsize, Ordering};
 use anyhow::{bail, Context, Result};
 use clap::{Parser, ValueEnum};
 use ergodis::field::SmallField;
-use ergodis::projective::ProjectiveIndex;
+use ergodis::matrix::Matrix;
+use ergodis::projective::{ProjectiveIndex, ProjectiveLinearActionPack};
 
 const _: Option<DefaultHasher> = None;
 
@@ -224,20 +225,6 @@ fn sym_power(f: &Field, d: usize, a: u8, b: u8, c: u8, e: u8) -> Vec<Vec<u8>> {
         }
     }
     s
-}
-
-#[inline]
-fn apply(f: &Field, s: &[Vec<u8>], v: &[u8], out: &mut [u8]) {
-    for (i, o) in out.iter_mut().enumerate() {
-        let mut acc = 0u8;
-        for (j, &vj) in v.iter().enumerate() {
-            let sij = s[i][j];
-            if sij != 0 && vj != 0 {
-                acc = f.a(acc, f.m(sij, vj));
-            }
-        }
-        *o = acc;
-    }
 }
 
 // ---------------------------------------------------------------------------
@@ -667,8 +654,7 @@ const CHUNK: u64 = 8192;
 fn worker(
     f: &Field,
     d: usize,
-    proj: &ProjectiveIndex<'_>,
-    gens: &[Vec<Vec<u8>>],
+    actions: &ProjectiveLinearActionPack<'_, 3>,
     n: u64,
     visited: &[AtomicU64],
     cursor: &AtomicU64,
@@ -679,10 +665,11 @@ fn worker(
     let mut total_orbits = 0u64;
     let mut records: Vec<OrbitRecord> = Vec::new();
     let mut buf = vec![0u8; d + 1];
-    let mut img = vec![0u8; d + 1];
     let mut orbit: Vec<u64> = Vec::with_capacity(max_orbit);
     let mut seen = StampSet::new(max_orbit.max(16));
     let mut sc = RankScratch::new(d);
+    let mut action_workspace = actions.workspace();
+    let mut action_runner = actions.runner(&mut action_workspace)?;
 
     loop {
         let lo = cursor.fetch_add(CHUNK, Ordering::Relaxed);
@@ -703,10 +690,7 @@ fn worker(
             while head < orbit.len() {
                 let cur = orbit[head];
                 head += 1;
-                proj.point(cur, &mut buf)?;
-                for gen in gens {
-                    apply(f, gen, &buf, &mut img);
-                    let idx = proj.index(&img)?;
+                for idx in action_runner.successors(cur)? {
                     if seen.insert(idx) {
                         orbit.push(idx);
                     }
@@ -723,7 +707,7 @@ fn worker(
                 let b = 1u64 << (pt % 64);
                 visited[w].fetch_or(b, Ordering::Relaxed);
             }
-            proj.point(owner, &mut buf)?;
+            actions.point(owner, &mut buf)?;
             let info = analyse(f, d, &buf, mode, &mut sc);
             hist[info.w] += orbit.len() as u64;
             total_orbits += 1;
@@ -1271,18 +1255,30 @@ fn main() -> Result<()> {
             args.out.as_deref(),
         );
     }
-    let proj = ProjectiveIndex::new(
-        &f.inner,
-        u8::try_from(d).context("projective dimension exceeds u8")?,
-    )?;
-    let n = proj.point_count();
-
     let g = f.primitive();
     let gens: Vec<Vec<Vec<u8>>> = vec![
         sym_power(&f, d, 1, 0, 1, 1), // a -> a+1
         sym_power(&f, d, 1, 0, 0, g), // a -> g a
         sym_power(&f, d, 0, 1, 1, 0), // a -> 1/a
     ];
+    let actions = ProjectiveLinearActionPack::<3>::new(
+        &f.inner,
+        u8::try_from(d).context("projective dimension exceeds u8")?,
+        gens.into_iter()
+            .map(|rows| {
+                Matrix::new_with_field(
+                    &f.inner,
+                    d + 1,
+                    d + 1,
+                    rows.into_iter().flatten().collect::<Vec<_>>(),
+                )
+                .map_err(anyhow::Error::from)
+            })
+            .collect::<Result<Vec<_>>>()?
+            .try_into()
+            .map_err(|_| anyhow::anyhow!("expected exactly three projective generators"))?,
+    )?;
+    let n = actions.point_count();
 
     let words = ((n + 63) / 64) as usize;
     let visited: Vec<AtomicU64> = std::iter::repeat_with(|| AtomicU64::new(0))
@@ -1300,23 +1296,12 @@ fn main() -> Result<()> {
         let mut handles = Vec::new();
         for _ in 0..threads {
             let f = &f;
-            let proj = &proj;
-            let gens = &gens;
+            let actions = &actions;
             let visited = &visited;
             let cursor = &cursor;
             let failures = &failures;
             handles.push(scope.spawn(move || {
-                match worker(
-                    f,
-                    d,
-                    proj,
-                    gens,
-                    n,
-                    visited,
-                    cursor,
-                    args.rank_mode,
-                    max_orbit,
-                ) {
+                match worker(f, d, actions, n, visited, cursor, args.rank_mode, max_orbit) {
                     Ok(v) => v,
                     Err(_) => {
                         failures.fetch_add(1, Ordering::Relaxed);

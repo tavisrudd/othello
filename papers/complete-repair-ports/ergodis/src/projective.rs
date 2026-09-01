@@ -1,4 +1,6 @@
 use crate::field::{BinaryElement, BinarySmallField, SmallField};
+use crate::matrix::Matrix;
+use std::marker::PhantomData;
 use thiserror::Error;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Error)]
@@ -13,6 +15,8 @@ pub enum ProjectiveError {
     InvalidPoint,
     #[error("projective point index is out of range")]
     PointOutOfRange,
+    #[error("projective linear action is empty, malformed, singular, or over the wrong field")]
+    InvalidLinearAction,
 }
 
 /// Allocation-free rank/unrank operations for canonical points of `PG(d,q)`.
@@ -121,6 +125,175 @@ impl<'a> ProjectiveIndex<'a> {
         let mut point = vec![0; usize::from(self.vector_dimension)];
         self.point(index, &mut point)?;
         Ok(point.into_boxed_slice())
+    }
+
+    #[inline(always)]
+    fn index_canonical_nonzero(&self, coordinates: &[u8]) -> Result<u64, ProjectiveError> {
+        debug_assert_eq!(coordinates.len(), usize::from(self.vector_dimension));
+        debug_assert!(coordinates
+            .iter()
+            .all(|&coordinate| u16::from(coordinate) < self.field.order()));
+        let pivot = coordinates
+            .iter()
+            .position(|&coordinate| coordinate != 0)
+            .ok_or(ProjectiveError::InvalidLinearAction)?;
+        let inverse = self.field.inverse_nonzero_canonical(coordinates[pivot]);
+        let mut suffix = 0_u64;
+        for &coordinate in &coordinates[pivot + 1..] {
+            suffix = suffix * u64::from(self.field.order())
+                + u64::from(self.field.mul_canonical(coordinate, inverse));
+        }
+        Ok(self.offsets[pivot] + suffix)
+    }
+}
+
+/// A validated, flat pack of invertible projective linear generators.
+///
+/// Construction checks the matrix field presentation, shape, and full rank
+/// full rank once. The runner then applies every generator through one flat
+/// matrix arena and omits repeated element-range validation. It is intended
+/// for orbit traversals whose explicit permutation tables would be too large.
+#[derive(Clone, Debug)]
+pub struct ProjectiveLinearActionPack<'a, const GENERATORS: usize> {
+    index: ProjectiveIndex<'a>,
+    matrices: Box<[u8]>,
+    _generators: PhantomData<[(); GENERATORS]>,
+}
+
+impl<'a, const GENERATORS: usize> ProjectiveLinearActionPack<'a, GENERATORS> {
+    pub fn new(
+        field: &'a SmallField,
+        projective_dimension: u8,
+        matrices: [Matrix; GENERATORS],
+    ) -> Result<Self, ProjectiveError> {
+        if GENERATORS == 0 {
+            return Err(ProjectiveError::InvalidLinearAction);
+        }
+        let index = ProjectiveIndex::new(field, projective_dimension)?;
+        let dimension = usize::from(projective_dimension) + 1;
+        let matrix_len = dimension
+            .checked_mul(dimension)
+            .ok_or(ProjectiveError::DimensionOverflow)?;
+        let total_len = matrix_len
+            .checked_mul(GENERATORS)
+            .ok_or(ProjectiveError::DimensionOverflow)?;
+        let mut flat = Vec::with_capacity(total_len);
+        for matrix in matrices {
+            if matrix.rows() != dimension
+                || matrix.cols() != dimension
+                || matrix.field_presentation() != field.presentation()
+            {
+                return Err(ProjectiveError::InvalidLinearAction);
+            }
+            let rank = matrix
+                .canonical_row_basis_with(field)
+                .map_err(|_| ProjectiveError::InvalidLinearAction)?
+                .rows();
+            if rank != dimension {
+                return Err(ProjectiveError::InvalidLinearAction);
+            }
+            flat.extend_from_slice(matrix.as_slice());
+        }
+        Ok(Self {
+            index,
+            matrices: flat.into_boxed_slice(),
+            _generators: PhantomData,
+        })
+    }
+
+    #[inline]
+    pub const fn projective_dimension(&self) -> u8 {
+        self.index.projective_dimension()
+    }
+
+    #[inline]
+    pub const fn point_count(&self) -> u64 {
+        self.index.point_count()
+    }
+
+    /// Write the canonical representative of a projective point.
+    #[inline(always)]
+    pub fn point(&self, index: u64, output: &mut [u8]) -> Result<(), ProjectiveError> {
+        self.index.point(index, output)
+    }
+
+    pub fn workspace(&self) -> ProjectiveActionWorkspace<GENERATORS> {
+        let dimension = usize::from(self.index.vector_dimension);
+        ProjectiveActionWorkspace {
+            point: vec![0; dimension].into_boxed_slice(),
+            image: vec![0; dimension].into_boxed_slice(),
+            vector_dimension: self.index.vector_dimension,
+            _pad: [0; 7],
+            _generators: PhantomData,
+        }
+    }
+
+    pub fn runner<'pack, 'workspace>(
+        &'pack self,
+        workspace: &'workspace mut ProjectiveActionWorkspace<GENERATORS>,
+    ) -> Result<ProjectiveActionRunner<'pack, 'workspace, 'a, GENERATORS>, ProjectiveError> {
+        if workspace.vector_dimension != self.index.vector_dimension
+            || workspace.point.len() != usize::from(self.index.vector_dimension)
+            || workspace.image.len() != usize::from(self.index.vector_dimension)
+        {
+            return Err(ProjectiveError::InvalidLinearAction);
+        }
+        Ok(ProjectiveActionRunner {
+            pack: self,
+            workspace,
+        })
+    }
+}
+
+/// Caller-owned fixed-capacity storage for projective action traversal.
+#[repr(C)]
+#[derive(Debug)]
+pub struct ProjectiveActionWorkspace<const GENERATORS: usize> {
+    point: Box<[u8]>,
+    image: Box<[u8]>,
+    vector_dimension: u8,
+    _pad: [u8; 7],
+    _generators: PhantomData<[(); GENERATORS]>,
+}
+
+const _: () = assert!(std::mem::size_of::<ProjectiveActionWorkspace<1>>() == 40);
+const _: () = assert!(std::mem::align_of::<ProjectiveActionWorkspace<1>>() == 8);
+
+/// Validate-once view whose successor operation allocates nothing.
+pub struct ProjectiveActionRunner<'pack, 'workspace, 'field, const GENERATORS: usize> {
+    pack: &'pack ProjectiveLinearActionPack<'field, GENERATORS>,
+    workspace: &'workspace mut ProjectiveActionWorkspace<GENERATORS>,
+}
+
+impl<'pack, 'workspace, 'field, const GENERATORS: usize>
+    ProjectiveActionRunner<'pack, 'workspace, 'field, GENERATORS>
+{
+    #[inline(always)]
+    pub fn successors(&mut self, index: u64) -> Result<[u64; GENERATORS], ProjectiveError> {
+        self.pack.index.point(index, &mut self.workspace.point)?;
+        let dimension = usize::from(self.pack.index.vector_dimension);
+        let matrix_len = dimension * dimension;
+        let field = self.pack.index.field;
+        let mut successors = [0_u64; GENERATORS];
+        for (generator, successor) in successors.iter_mut().enumerate() {
+            let matrix = &self.pack.matrices[generator * matrix_len..(generator + 1) * matrix_len];
+            for (row, output) in self.workspace.image.iter_mut().enumerate() {
+                let mut sum = 0_u8;
+                let row = &matrix[row * dimension..(row + 1) * dimension];
+                for (&coefficient, &coordinate) in row.iter().zip(self.workspace.point.iter()) {
+                    if coefficient != 0 && coordinate != 0 {
+                        sum =
+                            field.add_canonical(sum, field.mul_canonical(coefficient, coordinate));
+                    }
+                }
+                *output = sum;
+            }
+            *successor = self
+                .pack
+                .index
+                .index_canonical_nonzero(&self.workspace.image)?;
+        }
+        Ok(successors)
     }
 }
 
@@ -587,6 +760,102 @@ mod tests {
             checksum
         });
         assert_eq!(checksum, 0);
+        assert_eq!(events, crate::test_alloc::AllocationEvents::default());
+    }
+
+    fn three_projective_generator_bytes() -> Box<[u8]> {
+        [
+            // Identity.
+            1, 0, 0, 0, 1, 0, 0, 0, 1, // Swap the first two coordinates.
+            0, 1, 0, 1, 0, 0, 0, 0, 1, // Shear the first coordinate by the second.
+            1, 1, 0, 0, 1, 0, 0, 0, 1,
+        ]
+        .into()
+    }
+
+    fn three_projective_generators(field: &SmallField) -> [Matrix; 3] {
+        let bytes = three_projective_generator_bytes();
+        std::array::from_fn(|generator| {
+            Matrix::new_with_field(
+                field,
+                3,
+                3,
+                bytes[generator * 9..(generator + 1) * 9].to_vec(),
+            )
+            .unwrap()
+        })
+    }
+
+    #[test]
+    fn projective_action_pack_matches_independent_matrix_application() {
+        let field = SmallField::new(2, 3).unwrap();
+        let pack =
+            ProjectiveLinearActionPack::<3>::new(&field, 2, three_projective_generators(&field))
+                .unwrap();
+        let index = ProjectiveIndex::new(&field, 2).unwrap();
+        let matrices = three_projective_generator_bytes();
+        let mut point = [0_u8; 3];
+        let mut image = [0_u8; 3];
+        let mut workspace = pack.workspace();
+        let mut runner = pack.runner(&mut workspace).unwrap();
+        for point_index in 0..pack.point_count() {
+            index.point(point_index, &mut point).unwrap();
+            let actual = runner.successors(point_index).unwrap();
+            for generator in 0..3 {
+                let matrix = &matrices[generator * 9..(generator + 1) * 9];
+                for row in 0..3 {
+                    image[row] = (0..3).fold(0_u8, |sum, column| {
+                        field.add(sum, field.mul(matrix[row * 3 + column], point[column]))
+                    });
+                }
+                assert_eq!(actual[generator], index.index(&image).unwrap());
+            }
+        }
+
+        let malformed = Matrix::new_with_field(&field, 2, 2, vec![1, 0, 0, 1]).unwrap();
+        assert!(matches!(
+            ProjectiveLinearActionPack::<1>::new(&field, 2, [malformed]),
+            Err(ProjectiveError::InvalidLinearAction)
+        ));
+        let singular = Matrix::new_with_field(&field, 3, 3, vec![0_u8; 9]).unwrap();
+        assert!(matches!(
+            ProjectiveLinearActionPack::<1>::new(&field, 2, [singular]),
+            Err(ProjectiveError::InvalidLinearAction)
+        ));
+        let other_modulus = if field.modulus() == [1, 0, 1, 1] {
+            [1, 1, 0, 1]
+        } else {
+            [1, 0, 1, 1]
+        };
+        let other = SmallField::from_modulus(2, &other_modulus).unwrap();
+        let wrong_field = three_projective_generators(&other)
+            .into_iter()
+            .next()
+            .unwrap();
+        assert!(matches!(
+            ProjectiveLinearActionPack::<1>::new(&field, 2, [wrong_field]),
+            Err(ProjectiveError::InvalidLinearAction)
+        ));
+    }
+
+    #[test]
+    fn projective_action_runner_allocates_nothing() {
+        let field = SmallField::new(2, 3).unwrap();
+        let pack =
+            ProjectiveLinearActionPack::<3>::new(&field, 2, three_projective_generators(&field))
+                .unwrap();
+        let mut workspace = pack.workspace();
+        let mut runner = pack.runner(&mut workspace).unwrap();
+        let (checksum, events) = crate::test_alloc::measure_allocations(|| {
+            let _guard = crate::test_alloc::HotLoopAllocationGuard::enter();
+            let mut checksum = 0_u64;
+            for round in 0..10_000_u64 {
+                let successors = runner.successors(round % pack.point_count()).unwrap();
+                checksum ^= successors.into_iter().fold(0, u64::wrapping_add);
+            }
+            checksum
+        });
+        assert_ne!(checksum, 0);
         assert_eq!(events, crate::test_alloc::AllocationEvents::default());
     }
 
