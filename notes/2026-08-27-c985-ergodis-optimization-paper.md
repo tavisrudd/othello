@@ -557,9 +557,23 @@ files are disposable and may be deleted at any time.
    and is rejected from the replay protocol. The canonical mutant set,
    before/after classifications, commands, hashes, and assurance boundary are
    in `ergodis-private/evidence/c985-css-completion-mutation-report.json`.
-   Next extend the same two-layer mutation gate to the prefix/frontier and
-   terminal logical-nontriviality predicates before treating mutation testing
-   as a CSS-kernel-wide assurance floor.
+   The next two predicates are now covered as well. The exact 12-mutant set for
+   `logical_is_nonzero` and `wide_prefix_initial_bound` scores 9 caught / 3
+   missed against the pre-existing CSS suite at `12778e3ff`. The misses are
+   precisely multiword logical-accumulator hazards: XOR changed to OR, a bad
+   coordinate/word stride, and inversion of the final nonzero test. Commits
+   `9f9a538e0` and `61ef12f9b` add an original-matrix oracle over all 16
+   supports, then a controlled compiled table that forces extra-word XOR
+   cancellation and stride distinctions; the same test exhausts sharded,
+   unsharded, and saturated prefix bounds. Under the identical full CSS test
+   filter and campaign profile, all 12 mutants are now caught with zero misses,
+   timeouts, or unviables. The compact replay record is
+   `ergodis-private/evidence/c985-css-terminal-prefix-mutation-report.json`.
+   Together the two tranches mutation-gate 31 targeted high-risk mutants at
+   31/31, without modifying production or hot-loop code. The next assurance
+   slice should target branch-option admissibility and the terminal
+   zero-syndrome/witness handoff; only after those pass should this be called a
+   CSS-kernel-wide floor.
    Premise certificates and independent statement-level re-derivations are the
    near-term architecture.  SAT/PB/VIPR proof pipelines are reserved for
    flagship frozen claims where their encoding is independently justified;

@@ -1,0 +1,41 @@
+{
+  "schema": "ergodis-private-css-terminal-prefix-mutation-report-v0",
+  "tool": "cargo-mutants 25.3.1",
+  "target_regex": "logical_is_nonzero|wide_prefix_initial_bound",
+  "mutants": 12,
+  "mutants_file": "ergodis-private/evidence/c985-css-terminal-prefix-mutants.json",
+  "mutants_sha256": "819b43f92cac67f4cba1e969fa99cd05a55ad97db870c18870b1362fdceaa960",
+  "profile": "campaign",
+  "features": "all",
+  "jobs": 2,
+  "test_filter": "css_distance::tests",
+  "baseline": {
+    "commit": "12778e3ff",
+    "caught": 9,
+    "missed": 3,
+    "timeout": 0,
+    "unviable": 0,
+    "elapsed": "9m 54s",
+    "caught_file": "ergodis-private/evidence/c985-css-terminal-prefix-mutants-before-caught.txt",
+    "caught_sha256": "625c9adeb84be326c24a21a0b6e88e29c83a8a3b19eb0543509803b0a08f7704",
+    "missed_file": "ergodis-private/evidence/c985-css-terminal-prefix-mutants-before-missed.txt",
+    "missed_sha256": "211ada7f586c6a87c884b949c38537fb04e5098aab3f109ce2a2ad645fe6abb8"
+  },
+  "candidate": {
+    "commit": "61ef12f9b",
+    "oracle_commits": ["9f9a538e0", "61ef12f9b"],
+    "caught": 12,
+    "missed": 0,
+    "timeout": 0,
+    "unviable": 0,
+    "elapsed": "9m 31s",
+    "caught_file": "ergodis-private/evidence/c985-css-terminal-prefix-mutants-after-caught.txt",
+    "caught_sha256": "670e040843e89717859d866c36ea04fbefe46dcefc2736b07d06f276ced0f705"
+  },
+  "replay": {
+    "scratch_requirement": "Use an executable disk-backed target-c985 scratch directory; /tmp is tmpfs and /tmp/persistent is noexec.",
+    "copy_target": false,
+    "command_template": "TMPDIR=<disk-backed-target-c985-scratch> nix shell nixpkgs#cargo-mutants --command cargo mutants --profile campaign --all-features --baseline skip --copy-target false -j 2 -F 'logical_is_nonzero|wide_prefix_initial_bound' -C=--lib -C=css_distance::tests -o <output-dir>"
+  },
+  "assurance_boundary": "The matrix oracle independently recomputes every logical observation for all supports; a controlled compiled table separately forces multiword xor cancellation and index-stride coverage. The prefix table exhausts sharded, unsharded, and saturation cases. These tests protect implementation semantics but do not prove the external CSS model or the shard-cover theorem."
+}
