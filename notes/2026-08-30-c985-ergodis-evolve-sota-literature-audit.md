@@ -227,12 +227,13 @@ trusted.
 
 ### P1 — profile-driven campaign targeting
 
-The first bounded stratum is landed: an explicitly named frozen-batch field can
-partition semantic niches by its value on the candidate's first mismatching
-row, while row weights retain global impact priority.  The daemon persists a
-bounded selected-value histogram.  This is useful for precomputed root or debt
-classes already present as features, but it does not yet ingest live solver
-profiles or dependency structure.
+The bounded static stratum is landed: up to four explicitly named frozen-batch
+fields can partition semantic niches by their exact tuple on the candidate's
+first mismatching row, while row weights retain global impact priority. Tuples
+are interned once per row into compact class IDs and the daemon persists a
+bounded selected-class histogram with exact values. This directly supports
+precomputed combinations of root, debt, rank, and exceptional-state classes,
+but it does not yet ingest live solver profiles or dependency structure.
 
 Aggregate existing root progress, debt ledgers, exceptional-state counts, and
 perf counters outside the search path into a weighted target graph. Nodes are

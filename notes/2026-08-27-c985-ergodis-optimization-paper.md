@@ -917,6 +917,22 @@ files are disposable and may be deleted at any time.
    strict all-target/all-feature suite pass.  This remains cold daemon work and
    changes no solver safe point.  Root/debt/exceptional-state profiles remain
    the next operational-target extension.
+
+   Commit `c048dccb6` generalizes that bridge from one value to an exact tuple
+   of up to four explicitly named frozen fields.  This can represent combined
+   root, debt, rank, and exceptional-state strata without recompilation or
+   feature-name conventions.  The daemon interns tuples once per row into
+   compact `u32` classes; each ranked candidate retains only the class of its
+   first mismatch, while streamed evidence carries the exact values.  The
+   ordered field list is bound in the archive header, completion retains at
+   most 64 class histograms with checked overflow, and footer reservation
+   scales with the frozen class bound.  Singular requests and summaries remain
+   compatible projections.  Duplicate, unknown, mistyped, and over-width
+   target lists fail closed; exact interning/reuse, niche ranking, evidence,
+   and legacy request controls pass.  Strict all-target/all-feature clippy,
+   the full public suite, and doc tests pass.  This remains entirely off the
+   solve path.  Live profile ingestion and dependency/continuation edges—not
+   target representation—are now the remaining target-graph work.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
@@ -1823,7 +1839,9 @@ files are disposable and may be deleted at any time.
    bytes through typed elements. Runtime `SmallField`/`BinarySmallField` raw
    entry points retain their release-mode bounds checks; only crate-private
    canonical helpers may elide them after a validated representation boundary.
-   Full strict public tests and doc tests pass.
+   Follow-up `bbbdb4f38` keeps invalid-modulus runtime dispatch coverage on
+   `Prime::validate` while the typed invalid-modulus case remains a compile-fail
+   contract. Full strict public tests and doc tests pass.
 
    Seven commit-pinned, rotated pairs compare parent `47c928c89` with the
    accepted tree over 409.6 million typed GF(7) updates per arm. Exact work and
