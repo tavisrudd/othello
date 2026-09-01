@@ -57,6 +57,32 @@ for result in "$out"/*.json; do
   fi
 done
 
+printf '%s\n' \
+  'round,release_cycles,campaign_cycles,release_instructions,campaign_instructions,release_branches,campaign_branches,release_branch_misses,campaign_branch_misses,release_search_seconds,campaign_search_seconds' \
+  >"$out/pairs.csv"
+for ((round = 1; round <= pairs; round++)); do
+  metric() {
+    awk -F, -v event="$2" '$3 == event { print $1; exit }' "$1"
+  }
+  release_perf="$out/release-$round.perf"
+  campaign_perf="$out/campaign-$round.perf"
+  release_seconds=$(jq -r '[.search_seconds[]] | add' "$out/release-$round.json")
+  campaign_seconds=$(jq -r '[.search_seconds[]] | add' "$out/campaign-$round.json")
+  printf '%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n' \
+    "$round" \
+    "$(metric "$release_perf" cycles:u)" \
+    "$(metric "$campaign_perf" cycles:u)" \
+    "$(metric "$release_perf" instructions:u)" \
+    "$(metric "$campaign_perf" instructions:u)" \
+    "$(metric "$release_perf" branches:u)" \
+    "$(metric "$campaign_perf" branches:u)" \
+    "$(metric "$release_perf" branch-misses:u)" \
+    "$(metric "$campaign_perf" branch-misses:u)" \
+    "$release_seconds" \
+    "$campaign_seconds" \
+    >>"$out/pairs.csv"
+done
+
 jq -n \
   --arg schema ergodis-private-overflow-profile-ab-v0 \
   --arg input "$input" \
@@ -73,3 +99,6 @@ jq -n \
   '{$schema,input,input_sha256,artifact,artifact_sha256,release_sha256,
     campaign_sha256,pairs,threads,solve_rounds,cpu,result_sha256}' \
   >"$out/metadata.json"
+
+rm "$out"/release-*.perf "$out"/campaign-*.perf \
+  "$out"/release-*.json "$out"/campaign-*.json
