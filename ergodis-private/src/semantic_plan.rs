@@ -1,5 +1,6 @@
 //! Typed, bounded `match / reduce / canonicalize` recipe contracts.
 
+pub mod affine_census;
 pub mod dataflow;
 pub mod execution;
 pub mod theorem;

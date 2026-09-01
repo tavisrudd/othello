@@ -51,24 +51,40 @@ impl FixedMaskSet {
     /// nothing and fails closed if the declared item bound is exceeded.
     #[inline]
     pub fn insert(&mut self, value: u64) -> bool {
-        assert_ne!(value, u64::MAX, "u64::MAX is the empty sentinel");
+        self.try_insert(value)
+            .expect("fixed mask set insert failed")
+    }
+
+    /// Fallible insertion for prepared runtimes that must report a violated
+    /// retention contract instead of panicking. The success path allocates
+    /// nothing.
+    #[inline]
+    pub fn try_insert(&mut self, value: u64) -> Result<bool, &'static str> {
+        if value == u64::MAX {
+            return Err("u64::MAX is the empty sentinel");
+        }
         let mut slot = self.initial_slot(value);
         loop {
             let stored = self.slots[slot];
             if stored == value {
-                return false;
+                return Ok(false);
             }
             if stored == u64::MAX {
-                assert!(
-                    self.len < self.max_items,
-                    "fixed mask set item bound exceeded"
-                );
+                if self.len >= self.max_items {
+                    return Err("fixed mask set item bound exceeded");
+                }
                 self.slots[slot] = value;
                 self.len += 1;
-                return true;
+                return Ok(true);
             }
             slot = (slot + 1) & self.mask;
         }
+    }
+
+    /// Reuse the pre-sized table without allocating.
+    pub fn clear(&mut self) {
+        self.slots.fill(u64::MAX);
+        self.len = 0;
     }
 
     #[must_use]
