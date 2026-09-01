@@ -236,14 +236,14 @@ mod tests {
     use crate::semantic_plan::parse_semantic_recipe;
 
     const TEXT: &str = r#"
-recipe small_pipeline {
-  source rows as input sort row_stream;
-  label target == 1;
-  provenance fixture;
-  match feature from input as features sort feature_stream retain 1 memory 64;
-  reduce extrema from features as retained sort retained_set retain 8 memory 128;
-  canonicalize orbit from retained as summary sort orbit_summary retain 8 memory 256 streamed false contract diagnostic verified true;
-  emit summary;
+recipe affine_caps {
+  source split_nine_sets as objects sort nine_set_stream;
+  label (g2 == 0) && (g3 == 0);
+  provenance "sha256:fixture";
+  match affine_subspace from objects as plane sort feature_row retain 1 memory 4096;
+  reduce overlap_histogram from plane as extrema sort retained_set retain 2106 memory 131072;
+  canonicalize affine_generators from extrema as cap_orbit sort orbit_summary retain 2106 memory 131072 streamed false contract diagnostic verified true;
+  emit cap_orbit;
   verify replay;
 }
 "#;
@@ -255,35 +255,35 @@ recipe small_pipeline {
     fn registry_with(canonical_input_sort: &str, streamed: bool) -> AdapterRegistry {
         AdapterRegistry::try_new(
             vec![SourceSignature {
-                name: "rows".into(),
-                output_sort: "row_stream".into(),
+                name: "split_nine_sets".into(),
+                output_sort: "nine_set_stream".into(),
             }],
             vec![
                 OperationSignature {
-                    name: "feature".into(),
+                    name: "affine_subspace".into(),
                     kind: OpKind::Match,
-                    input_sort: "row_stream".into(),
-                    output_sort: "feature_stream".into(),
+                    input_sort: "nine_set_stream".into(),
+                    output_sort: "feature_row".into(),
                     max_retention: 1,
-                    max_memory_bytes: 64,
+                    max_memory_bytes: 4096,
                     allows_streamed_partition: false,
                 },
                 OperationSignature {
-                    name: "extrema".into(),
+                    name: "overlap_histogram".into(),
                     kind: OpKind::Reduce,
-                    input_sort: "feature_stream".into(),
+                    input_sort: "feature_row".into(),
                     output_sort: "retained_set".into(),
-                    max_retention: 8,
-                    max_memory_bytes: 128,
+                    max_retention: 2106,
+                    max_memory_bytes: 131072,
                     allows_streamed_partition: false,
                 },
                 OperationSignature {
-                    name: "orbit".into(),
+                    name: "affine_generators".into(),
                     kind: OpKind::Canonicalize,
                     input_sort: canonical_input_sort.into(),
                     output_sort: "orbit_summary".into(),
-                    max_retention: 8,
-                    max_memory_bytes: 256,
+                    max_retention: 2106,
+                    max_memory_bytes: 131072,
                     allows_streamed_partition: streamed,
                 },
             ],
@@ -297,8 +297,8 @@ recipe small_pipeline {
             &recipe,
             &registry(),
             DataflowBudget {
-                max_total_retention: 32,
-                max_total_memory_bytes: 1024,
+                max_total_retention: 5000,
+                max_total_memory_bytes: 300_000,
             },
         )?;
         compile_execution_plan(&compiled)
@@ -320,7 +320,7 @@ recipe small_pipeline {
     impl PreparedSemanticRuntime for CountingRuntime {
         fn run_fused_match_reduce(&mut self, stage: ExecutionStage) -> Result<(), ControlError> {
             assert_eq!(stage.secondary_signature(), Some(1));
-            assert_eq!(stage.memory_bytes(), 192);
+            assert_eq!(stage.memory_bytes(), 135_168);
             self.push(1);
             Ok(())
         }
@@ -359,21 +359,272 @@ recipe small_pipeline {
     fn schedule_rejects_unmaterialized_match_outputs() {
         let unfused = TEXT
             .replace(
-                "  reduce extrema from features as retained sort retained_set retain 8 memory 128;\n",
+                "  reduce overlap_histogram from plane as extrema sort retained_set retain 2106 memory 131072;\n",
                 "",
             )
-            .replace("from retained as summary", "from features as summary")
+            .replace("from extrema as cap_orbit", "from plane as cap_orbit")
             .replace("streamed false", "streamed true");
         let recipe = parse_semantic_recipe(&unfused).unwrap();
         let compiled = compile_recipe(
             &recipe,
-            &registry_with("feature_stream", true),
+            &registry_with("feature_row", true),
             DataflowBudget {
-                max_total_retention: 32,
-                max_total_memory_bytes: 1024,
+                max_total_retention: 5000,
+                max_total_memory_bytes: 300_000,
             },
         )
         .unwrap();
         assert!(compile_execution_plan(&compiled).is_err());
+    }
+
+    struct AffineCensusRuntime {
+        planes: [u64; 39],
+        lines: [u64; 117],
+        histogram: [u64; 10],
+        representative: u64,
+        minimum: u32,
+        minimum_count: u64,
+        minimum_all_caps: bool,
+        ambient_subsets: u64,
+        orbit_slots: [u64; 8192],
+        orbit_objects: [u64; 2106],
+        orbit_len: usize,
+    }
+
+    impl AffineCensusRuntime {
+        fn new() -> Self {
+            Self {
+                planes: affine_subspaces::<39>(2),
+                lines: affine_subspaces::<117>(1),
+                histogram: [0; 10],
+                representative: 0,
+                minimum: 9,
+                minimum_count: 0,
+                minimum_all_caps: true,
+                ambient_subsets: 0,
+                orbit_slots: [u64::MAX; 8192],
+                orbit_objects: [0; 2106],
+                orbit_len: 0,
+            }
+        }
+
+        fn observe(&mut self, mask: u64) {
+            let mut maximum = 0;
+            for plane in self.planes {
+                maximum = maximum.max((mask & plane).count_ones());
+            }
+            self.histogram[maximum as usize] += 1;
+            self.ambient_subsets += 1;
+            if maximum < self.minimum {
+                self.minimum = maximum;
+                self.minimum_count = 0;
+                self.minimum_all_caps = true;
+                self.representative = mask;
+            }
+            if maximum == self.minimum {
+                self.minimum_count += 1;
+                self.minimum_all_caps &= self
+                    .lines
+                    .iter()
+                    .all(|line| (mask & line).count_ones() <= 2);
+                if subset_lexicographically_precedes(mask, self.representative) {
+                    self.representative = mask;
+                }
+            }
+        }
+
+        fn insert_orbit(&mut self, value: u64) -> bool {
+            let mut slot = (value.wrapping_mul(0x9e37_79b9_7f4a_7c15) >> (64 - 13)) as usize;
+            loop {
+                let stored = self.orbit_slots[slot];
+                if stored == value {
+                    return false;
+                }
+                if stored == u64::MAX {
+                    assert!(self.orbit_len < self.orbit_objects.len());
+                    self.orbit_slots[slot] = value;
+                    self.orbit_objects[self.orbit_len] = value;
+                    self.orbit_len += 1;
+                    return true;
+                }
+                slot = (slot + 1) & (self.orbit_slots.len() - 1);
+            }
+        }
+    }
+
+    impl PreparedSemanticRuntime for AffineCensusRuntime {
+        fn run_fused_match_reduce(&mut self, stage: ExecutionStage) -> Result<(), ControlError> {
+            assert_eq!(stage.kind(), ExecutionStageKind::FusedMatchReduce);
+            let low = (1_u64 << 9) - 1;
+            let last = low << (27 - 9);
+            let mut mask = low;
+            loop {
+                self.observe(mask);
+                if mask == last {
+                    break;
+                }
+                let lowest = mask & mask.wrapping_neg();
+                let incremented = mask + lowest;
+                mask = incremented | (((incremented ^ mask) >> 2) >> lowest.trailing_zeros());
+            }
+            Ok(())
+        }
+
+        fn run_reduce(&mut self, _stage: ExecutionStage) -> Result<(), ControlError> {
+            unreachable!("the affine plan fuses its match and reducer")
+        }
+
+        fn run_canonicalize(&mut self, stage: ExecutionStage) -> Result<(), ControlError> {
+            assert_eq!(stage.kind(), ExecutionStageKind::Canonicalize);
+            let generators = [
+                ([1, 0, 0, 0, 1, 0, 0, 0, 1], 1),
+                ([0, 1, 0, 1, 0, 0, 0, 0, 1], 0),
+                ([1, 0, 0, 0, 0, 1, 0, 1, 0], 0),
+                ([1, 1, 0, 0, 1, 0, 0, 0, 1], 0),
+            ];
+            self.orbit_slots.fill(u64::MAX);
+            self.orbit_len = 0;
+            self.insert_orbit(self.representative);
+            let mut cursor = 0;
+            while cursor < self.orbit_len {
+                let object = self.orbit_objects[cursor];
+                cursor += 1;
+                for (matrix, translation) in generators {
+                    let mut transformed = 0;
+                    let mut points = object;
+                    while points != 0 {
+                        let point = points.trailing_zeros() as u8;
+                        transformed |= 1_u64 << transform_point(point, &matrix, translation);
+                        points &= points - 1;
+                    }
+                    self.insert_orbit(transformed);
+                }
+            }
+            Ok(())
+        }
+    }
+
+    #[test]
+    fn prepared_pipeline_replays_the_full_affine_census() {
+        let plan = plan(TEXT).unwrap();
+        let mut runtime = AffineCensusRuntime::new();
+        assert!(std::mem::size_of_val(&runtime) <= 300_000);
+        execute_prepared(&plan, &mut runtime).unwrap();
+        assert_eq!(runtime.ambient_subsets, 4_686_825);
+        assert_eq!(runtime.minimum, 4);
+        assert_eq!(runtime.minimum_count, 2106);
+        assert!(runtime.minimum_all_caps);
+        assert_eq!(
+            runtime.histogram,
+            [0, 0, 0, 0, 2106, 2_070_198, 2_393_352, 214_812, 6318, 39]
+        );
+        assert_eq!(runtime.orbit_len, 2106);
+        assert_eq!(
+            runtime.representative,
+            [0_u8, 1, 3, 4, 9, 10, 14, 17, 23]
+                .into_iter()
+                .fold(0_u64, |mask, point| mask | (1_u64 << point))
+        );
+    }
+
+    fn affine_subspaces<const N: usize>(rank: usize) -> [u64; N] {
+        let mut linear = Vec::new();
+        if rank == 1 {
+            for first in 1..27_u8 {
+                linear.push((1_u64 << 0) | (1_u64 << first) | (1_u64 << scale(first, 2)));
+            }
+        } else {
+            for first in 1..27_u8 {
+                for second in (first + 1)..27_u8 {
+                    if second == scale(first, 2) {
+                        continue;
+                    }
+                    let mut mask = 0;
+                    for left in 0..3_u8 {
+                        for right in 0..3_u8 {
+                            mask |= 1_u64 << add(scale(first, left), scale(second, right));
+                        }
+                    }
+                    linear.push(mask);
+                }
+            }
+        }
+        linear.sort_unstable();
+        linear.dedup();
+        let mut affine = Vec::with_capacity(linear.len() * 27);
+        for mask in linear {
+            for translation in 0..27_u8 {
+                let mut translated = 0;
+                let mut points = mask;
+                while points != 0 {
+                    let point = points.trailing_zeros() as u8;
+                    translated |= 1_u64 << add(point, translation);
+                    points &= points - 1;
+                }
+                affine.push(translated);
+            }
+        }
+        affine.sort_unstable();
+        affine.dedup();
+        affine.try_into().unwrap_or_else(|values: Vec<u64>| {
+            panic!("expected {N} affine subspaces, got {}", values.len())
+        })
+    }
+
+    #[inline]
+    fn add(mut left: u8, mut right: u8) -> u8 {
+        let mut result = 0;
+        let mut place = 1;
+        for _ in 0..3 {
+            result += ((left % 3 + right % 3) % 3) * place;
+            left /= 3;
+            right /= 3;
+            place *= 3;
+        }
+        result
+    }
+
+    #[inline]
+    fn scale(value: u8, scalar: u8) -> u8 {
+        match scalar {
+            0 => 0,
+            1 => value,
+            2 => add(value, value),
+            _ => unreachable!(),
+        }
+    }
+
+    fn transform_point(point: u8, matrix: &[u8; 9], translation: u8) -> u8 {
+        let vector = [point % 3, (point / 3) % 3, (point / 9) % 3];
+        let shift = [
+            translation % 3,
+            (translation / 3) % 3,
+            (translation / 9) % 3,
+        ];
+        let mut result = 0;
+        let mut place = 1;
+        for row in 0..3 {
+            let coordinate = (shift[row]
+                + matrix[3 * row] * vector[0]
+                + matrix[3 * row + 1] * vector[1]
+                + matrix[3 * row + 2] * vector[2])
+                % 3;
+            result += coordinate * place;
+            place *= 3;
+        }
+        result
+    }
+
+    fn subset_lexicographically_precedes(mut left: u64, mut right: u64) -> bool {
+        while left != 0 {
+            let left_point = left.trailing_zeros();
+            let right_point = right.trailing_zeros();
+            if left_point != right_point {
+                return left_point < right_point;
+            }
+            left &= left - 1;
+            right &= right - 1;
+        }
+        false
     }
 }
