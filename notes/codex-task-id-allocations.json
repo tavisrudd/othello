@@ -4067,8 +4067,17 @@
       "last": 1031,
       "purpose": "ergodis campaign/cert/trace visualization dashboard exploration",
       "sequence": 452
+    },
+    {
+      "count": 1,
+      "first": 1032,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1032,
+      "purpose": "browser WebAssembly Ergodis prototype with worker demo and parity gate",
+      "sequence": 453
     }
   ],
-  "next_id": 1032,
+  "next_id": 1033,
   "schema": "codex-task-id-allocations-v1"
 }
