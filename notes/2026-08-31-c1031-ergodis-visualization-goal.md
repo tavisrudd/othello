@@ -363,6 +363,28 @@ change.
 but closing it is the user's call and was never given, so the row has been left alone rather than
 archived. Ask before archiving.
 
+### 2026-09-01, sixth block — a two-hour red-team and test pass on the console
+
+The user asked for two more hours: refine it, red team it, test it. The console was attacked rather
+than extended, and three silent defects and two display defects were found and fixed, each now
+covered by a test that fails without the fix. Report:
+`notes/2026-09-01-c1031-console-red-team.md`.
+
+The load-bearing one: the console's in-page plan evaluator did not implement the `bool` operation,
+and an unimplemented operation fell through to the binary case, which pops two operands and pushes
+zero. Every plan `ergodisctl synthesize` produces contains `bool` and `select`, so every decision
+tree the system learns was scored wrong — 819 against the Rust virtual machine's 829 on a real one,
+which is exactly the majority-class answer. Established by differential testing the extracted
+in-page evaluator against `ergodisctl batch` over the whole plan grammar.
+
+Also: the reader crashed on the half-written final line that is the normal state of a file a live
+campaign is appending to; the live server never filled the cross-corpus screen placeholder, so the
+served page threw and half its views never rendered; and the served page reloaded itself every two
+seconds during a running campaign, which is the one situation it exists for.
+
+Three gates now exist and are documented in `tools/c1031-viz/README.md`: the browser gate
+`smoke.mjs`, the evaluator differential test `difftest.mjs`, and the data-layer test `datatest.py`.
+
 **Next step on resume**: the exploration deliverables are complete and the console runs against real
 data at 10^5-candidate scale. Three things are worth raising with the user rather than starting
 unasked. First, the conjunction blind spot is a defect in the search and belongs to whoever owns
