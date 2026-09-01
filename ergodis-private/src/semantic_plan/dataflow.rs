@@ -884,6 +884,72 @@ theorem cap_geometry {
     }
 
     #[test]
+    fn fragment_emission_traverses_every_multi_input_lineage() {
+        let recipe_text = TEXT
+            .replace(
+                "  canonicalize affine_generators(count=4) from extrema as cap_orbit sort orbit_summary retain 2106 memory 65536 streamed false contract diagnostic verified true;\n",
+                "  canonicalize affine_generators(count=4) from extrema as orbit_a sort orbit_summary retain 2106 memory 65536 streamed false contract diagnostic verified true;\n  canonicalize affine_generators_b(count=4) from extrema as orbit_b sort orbit_summary retain 2106 memory 65536 streamed false contract diagnostic verified true;\n  reduce join_orbits from orbit_a, orbit_b as joined sort joined_summary retain 1 memory 64;\n",
+            )
+            .replace("  emit cap_orbit;", "  emit joined;");
+        let recipe = parse_semantic_recipe(&recipe_text).unwrap();
+        let base = registry(false);
+        let mut operations = base.operations.to_vec();
+        operations.push(OperationSignature {
+            name: "affine_generators_b".into(),
+            kind: OpKind::Canonicalize,
+            input_sorts: Box::new(["retained_set".into()]),
+            output_sort: "orbit_summary".into(),
+            parameters: Box::new([ParameterSignature {
+                name: "count".into(),
+                domain: ArgumentDomain::Integer {
+                    minimum: 1,
+                    maximum: 16,
+                },
+            }]),
+            max_retention: 2106,
+            max_memory_bytes: 65536,
+            allows_streamed_partition: false,
+        });
+        operations.push(OperationSignature {
+            name: "join_orbits".into(),
+            kind: OpKind::Reduce,
+            input_sorts: Box::new(["orbit_summary".into(), "orbit_summary".into()]),
+            output_sort: "joined_summary".into(),
+            parameters: Box::new([]),
+            max_retention: 1,
+            max_memory_bytes: 64,
+            allows_streamed_partition: false,
+        });
+        let registry = AdapterRegistry::try_new(base.sources.to_vec(), operations).unwrap();
+        let compiled = compile_recipe(
+            &recipe,
+            &registry,
+            DataflowBudget {
+                max_total_retention: 7000,
+                max_total_memory_bytes: 400_000,
+            },
+        )
+        .unwrap();
+        let fragment_text = FRAGMENT_TEXT
+            .replace("evidence orbit_summary", "evidence joined_summary")
+            .replace(
+                "  action affine_generators(count=4) contract diagnostic verified true;",
+                "  action affine_generators(count=4) contract diagnostic verified true;\n  action affine_generators_b(count=4) contract diagnostic verified true;",
+            );
+        let fragment =
+            crate::semantic_plan::theorem::parse_theorem_fragment(&fragment_text).unwrap();
+        let emission = compile_fragment_emission(&recipe, &compiled, &fragment).unwrap();
+        assert_eq!(emission.action_count, 2);
+
+        let incomplete = fragment_text.replace(
+            "\n  action affine_generators_b(count=4) contract diagnostic verified true;",
+            "",
+        );
+        let fragment = crate::semantic_plan::theorem::parse_theorem_fragment(&incomplete).unwrap();
+        assert!(compile_fragment_emission(&recipe, &compiled, &fragment).is_err());
+    }
+
+    #[test]
     fn certified_fragment_verifier_must_be_a_recipe_gate() {
         let recipe = parse_semantic_recipe(&TEXT.replace(
             "contract diagnostic verified true",
