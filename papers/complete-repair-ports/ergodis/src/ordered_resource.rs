@@ -371,6 +371,8 @@ pub enum FrozenParetoError {
     Resource(#[from] OrderedResourceError),
     #[error("the frozen quotient and edge-front table have different generator counts")]
     EdgeFrontCount,
+    #[error("the frozen quotient and transition-front table have different transition counts")]
+    TransitionFrontCount,
     #[error("the frozen quotient output has no supplied Pareto interpretation")]
     Output,
     #[error("a supplied Pareto objective front is not canonical for its bound ordered monoid")]
@@ -557,10 +559,11 @@ impl WitnessedParetoWorkspace {
 /// The caller owns the pre-sized composition workspace, so the evaluator never
 /// grows scratch storage in its class/generator loops.
 pub struct FrozenParetoPlan<'a> {
-    frozen: &'a FrozenObservation,
-    offsets: Box<[usize]>,
-    outgoing: Box<[u32]>,
+    pub(crate) frozen: &'a FrozenObservation,
+    pub(crate) offsets: Box<[usize]>,
+    pub(crate) outgoing: Box<[u32]>,
     generator_targets: Box<[u32]>,
+    pub(crate) transition_sort_offsets: Box<[usize]>,
 }
 
 /// Immutable objective tables checked once against one exact ordered monoid
@@ -570,6 +573,19 @@ pub struct ValidatedParetoObjective<'plan, 'frozen, 'objective, M> {
     monoid: &'objective M,
     output_fronts: &'objective [WitnessedParetoFront],
     edge_fronts: &'objective [WitnessedParetoFront],
+}
+
+/// Immutable class-local transition objective checked once against one plan.
+///
+/// This is the exact state-dependent-cost analogue of
+/// [`ValidatedParetoObjective`]. The adapter must include every distinction
+/// affecting a transition front in the observations used to build the frozen
+/// quotient.
+pub struct ValidatedTransitionParetoObjective<'plan, 'frozen, 'objective, M> {
+    plan: &'plan FrozenParetoPlan<'frozen>,
+    monoid: &'objective M,
+    output_fronts: &'objective [WitnessedParetoFront],
+    transition_fronts: &'objective [WitnessedParetoFront],
 }
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -627,12 +643,61 @@ impl<'a> FrozenParetoPlan<'a> {
             outgoing[cursor[source]] = generator as u32;
             cursor[source] += 1;
         }
+        let mut transition_sort_offsets = vec![0_usize; sort_count + 1];
+        let mut transition_count = 0_usize;
+        for sort in 0..sort_count {
+            let range = frozen
+                .class_range(sort as u32)
+                .ok_or(FrozenParetoError::Artifact)?;
+            let degree = offsets[sort + 1] - offsets[sort];
+            transition_count = transition_count
+                .checked_add(
+                    (range.len as usize)
+                        .checked_mul(degree)
+                        .ok_or(FrozenParetoError::Artifact)?,
+                )
+                .ok_or(FrozenParetoError::Artifact)?;
+            transition_sort_offsets[sort + 1] = transition_count;
+        }
         Ok(Self {
             frozen,
             offsets: offsets.into_boxed_slice(),
             outgoing: outgoing.into_boxed_slice(),
             generator_targets: generator_targets.into_boxed_slice(),
+            transition_sort_offsets: transition_sort_offsets.into_boxed_slice(),
         })
+    }
+
+    /// Number of class-local transition fronts accepted by this plan.
+    pub fn transition_front_count(&self) -> usize {
+        *self.transition_sort_offsets.last().unwrap_or(&0)
+    }
+
+    /// Contiguous objective-table range for all outgoing transitions of one
+    /// quotient class, in [`Self::outgoing_generators`] order.
+    pub fn transition_front_range(&self, class: u32) -> Option<std::ops::Range<usize>> {
+        let sort = self.sort_for_class(class)?;
+        let range = self.frozen.class_range(sort as u32)?;
+        let degree = self.offsets[sort + 1] - self.offsets[sort];
+        let start = self.transition_sort_offsets[sort]
+            .checked_add(((class - range.start) as usize).checked_mul(degree)?)?;
+        Some(start..start.checked_add(degree)?)
+    }
+
+    /// Generator IDs corresponding to a class transition-front range.
+    pub fn outgoing_generators(&self, sort: u32) -> Option<&[u32]> {
+        let sort = sort as usize;
+        Some(&self.outgoing[*self.offsets.get(sort)?..*self.offsets.get(sort + 1)?])
+    }
+
+    /// Stable index of the objective front for `(class, generator)`.
+    pub fn transition_front_index(&self, class: u32, generator: u32) -> Option<usize> {
+        let sort = self.sort_for_class(class)?;
+        let outgoing = &self.outgoing[self.offsets[sort]..self.offsets[sort + 1]];
+        let local = outgoing
+            .iter()
+            .position(|&candidate| candidate == generator)?;
+        self.transition_front_range(class)?.start.checked_add(local)
     }
 
     pub fn validate_objective<'plan, 'objective, M: FiniteOrderedMonoid>(
@@ -667,6 +732,45 @@ impl<'a> FrozenParetoPlan<'a> {
             monoid,
             output_fronts,
             edge_fronts,
+        })
+    }
+
+    /// Validate one edge front per quotient-class transition.
+    ///
+    /// Use [`Self::transition_front_index`] to populate the stable flat table.
+    pub fn validate_transition_objective<'plan, 'objective, M: FiniteOrderedMonoid>(
+        &'plan self,
+        monoid: &'objective M,
+        output_fronts: &'objective [WitnessedParetoFront],
+        transition_fronts: &'objective [WitnessedParetoFront],
+    ) -> Result<ValidatedTransitionParetoObjective<'plan, 'a, 'objective, M>, FrozenParetoError>
+    {
+        if transition_fronts.len() != self.transition_front_count() {
+            return Err(FrozenParetoError::TransitionFrontCount);
+        }
+        for sort in 0..self.frozen.sort_count() {
+            let range = self
+                .frozen
+                .class_range(sort as u32)
+                .ok_or(FrozenParetoError::Artifact)?;
+            for class in range.start..range.start + range.len {
+                let output = self
+                    .frozen
+                    .output(class)
+                    .ok_or(FrozenParetoError::Artifact)? as usize;
+                if output >= output_fronts.len() {
+                    return Err(FrozenParetoError::Output);
+                }
+            }
+        }
+        for front in output_fronts.iter().chain(transition_fronts) {
+            validate_objective_front(monoid, front)?;
+        }
+        Ok(ValidatedTransitionParetoObjective {
+            plan: self,
+            monoid,
+            output_fronts,
+            transition_fronts,
         })
     }
 
@@ -934,7 +1038,7 @@ impl FrozenParetoQueryPlan<'_, '_> {
         workspace: &mut WitnessedParetoWorkspace,
         compose_witness: impl FnMut(u32, u32, u32) -> u32,
     ) -> Result<(Vec<WitnessedParetoFront>, FrozenParetoEvaluationMetrics), FrozenParetoError> {
-        self.evaluate_impl::<false, M>(
+        self.evaluate_legacy_impl::<false, M>(
             monoid,
             output_fronts,
             edge_fronts,
@@ -954,7 +1058,7 @@ impl FrozenParetoQueryPlan<'_, '_> {
         if !std::ptr::eq(self.plan, objective.plan) {
             return Err(FrozenParetoError::Artifact);
         }
-        self.evaluate_impl::<true, M>(
+        self.evaluate_legacy_impl::<true, M>(
             objective.monoid,
             objective.output_fronts,
             objective.edge_fronts,
@@ -963,7 +1067,48 @@ impl FrozenParetoQueryPlan<'_, '_> {
         )
     }
 
-    fn evaluate_impl<const VALIDATED: bool, M: FiniteOrderedMonoid>(
+    /// Evaluate class-local transition fronts after checking them in this call.
+    pub fn evaluate_transitions<M: FiniteOrderedMonoid>(
+        &self,
+        monoid: &M,
+        output_fronts: &[WitnessedParetoFront],
+        transition_fronts: &[WitnessedParetoFront],
+        workspace: &mut WitnessedParetoWorkspace,
+        compose_witness: impl FnMut(u32, u32, u32) -> u32,
+    ) -> Result<(Vec<WitnessedParetoFront>, FrozenParetoEvaluationMetrics), FrozenParetoError> {
+        self.evaluate_impl::<false, true, M>(
+            monoid,
+            output_fronts,
+            transition_fronts,
+            workspace,
+            compose_witness,
+        )
+    }
+
+    /// Evaluate a once-validated class-local transition objective.
+    pub fn evaluate_transitions_validated<M: FiniteOrderedMonoid>(
+        &self,
+        objective: &ValidatedTransitionParetoObjective<'_, '_, '_, M>,
+        workspace: &mut WitnessedParetoWorkspace,
+        compose_witness: impl FnMut(u32, u32, u32) -> u32,
+    ) -> Result<(Vec<WitnessedParetoFront>, FrozenParetoEvaluationMetrics), FrozenParetoError> {
+        if !std::ptr::eq(self.plan, objective.plan) {
+            return Err(FrozenParetoError::Artifact);
+        }
+        self.evaluate_impl::<true, true, M>(
+            objective.monoid,
+            objective.output_fronts,
+            objective.transition_fronts,
+            workspace,
+            compose_witness,
+        )
+    }
+
+    // Keep the generator-wide specialization separate from the richer
+    // transition objective. This is deliberately the original evaluator:
+    // adding state-local indexing must not add instructions to existing
+    // applications.
+    fn evaluate_legacy_impl<const VALIDATED: bool, M: FiniteOrderedMonoid>(
         &self,
         monoid: &M,
         output_fronts: &[WitnessedParetoFront],
@@ -1078,6 +1223,297 @@ impl FrozenParetoQueryPlan<'_, '_> {
                                 resource,
                                 || compose_witness(generator, edge.witness, suffix.witness),
                             )?;
+                        }
+                    }
+                }
+                accumulator.sort_unstable_by_key(|entry| entry.resource);
+                let current = &mut slabs[slab as usize];
+                let span = make_front_span(current.len(), accumulator.len())?;
+                current.extend_from_slice(accumulator);
+                let spans = &mut slab_spans[slab as usize];
+                debug_assert_eq!(spans.len(), class_local);
+                spans.push(span);
+            }
+
+            let local_for_index = |index: usize| -> Result<usize, FrozenParetoError> {
+                reachable_classes
+                    .binary_search(&self.entry_classes[index])
+                    .map_err(|_| FrozenParetoError::Artifact)
+            };
+            let mut removed_single_entries = 0_usize;
+            let mut removed_single_class = 0_usize;
+            match self.single_sort {
+                Some(selected_sort) if selected_sort == sort => {
+                    let local = local_for_index(0)?;
+                    let span = slab_spans[slab as usize][local];
+                    let start = span.start as usize;
+                    let end = start + span.len as usize;
+                    let retained = make_front_span(retained_entries.len(), span.len as usize)?;
+                    retained_entries.extend_from_slice(
+                        slabs[slab as usize]
+                            .get(start..end)
+                            .ok_or(FrozenParetoError::Artifact)?,
+                    );
+                    retained_spans[0] = retained;
+                    metrics.retained_entries = span.len as usize;
+                    removed_single_entries = span.len as usize;
+                    removed_single_class = 1;
+                    slab_spans[slab as usize][local].len = 0;
+                }
+                Some(_) => {}
+                None => {
+                    for &index in &self.selected_indices
+                        [self.selected_counts[sort]..self.selected_counts[sort + 1]]
+                    {
+                        let local = local_for_index(index)?;
+                        let span = slab_spans[slab as usize][local];
+                        let start = span.start as usize;
+                        let end = start + span.len as usize;
+                        let retained = make_front_span(retained_entries.len(), span.len as usize)?;
+                        retained_entries.extend_from_slice(
+                            slabs[slab as usize]
+                                .get(start..end)
+                                .ok_or(FrozenParetoError::Artifact)?,
+                        );
+                        retained_spans[index] = retained;
+                        metrics.retained_entries += span.len as usize;
+                    }
+                }
+            }
+            sort_live_classes[sort] = reachable_classes.len() - removed_single_class;
+            sort_live_entries[sort] = if slab == NO_SLAB {
+                0
+            } else {
+                slabs[slab as usize].len() - removed_single_entries
+            };
+            sort_capacity_hints[sort] = if slab == NO_SLAB {
+                0
+            } else {
+                sort_capacity_hints[sort].max(slabs[slab as usize].len())
+            };
+            live_classes += sort_live_classes[sort];
+            live_entries += sort_live_entries[sort];
+            metrics.peak_live_classes = metrics.peak_live_classes.max(live_classes);
+            metrics.peak_live_entries = metrics.peak_live_entries.max(live_entries);
+
+            for &target in
+                &self.release_targets[self.release_offsets[sort]..self.release_offsets[sort + 1]]
+            {
+                let target = target as usize;
+                let target_slab = live_slabs[target];
+                if target_slab != NO_SLAB {
+                    live_classes -= sort_live_classes[target];
+                    live_entries -= sort_live_entries[target];
+                    slabs[target_slab as usize].clear();
+                    slab_spans[target_slab as usize].clear();
+                    live_slabs[target] = NO_SLAB;
+                }
+            }
+        }
+
+        #[cfg(test)]
+        drop(_allocation_guard);
+
+        let mut retained = Vec::with_capacity(retained_spans.len());
+        for &span in retained_spans.iter() {
+            let start = span.start as usize;
+            let end = start + span.len as usize;
+            retained.push(WitnessedParetoFront {
+                entries: retained_entries
+                    .get(start..end)
+                    .ok_or(FrozenParetoError::Artifact)?
+                    .into(),
+            });
+        }
+        Ok((retained, metrics))
+    }
+
+    fn evaluate_impl<
+        const VALIDATED: bool,
+        const TRANSITION_FRONTS: bool,
+        M: FiniteOrderedMonoid,
+    >(
+        &self,
+        monoid: &M,
+        output_fronts: &[WitnessedParetoFront],
+        edge_fronts: &[WitnessedParetoFront],
+        workspace: &mut WitnessedParetoWorkspace,
+        mut compose_witness: impl FnMut(u32, u32, u32) -> u32,
+    ) -> Result<(Vec<WitnessedParetoFront>, FrozenParetoEvaluationMetrics), FrozenParetoError> {
+        let expected_fronts = if TRANSITION_FRONTS {
+            self.plan.transition_front_count()
+        } else {
+            self.plan.frozen.generator_count()
+        };
+        if edge_fronts.len() != expected_fronts {
+            return Err(if TRANSITION_FRONTS {
+                FrozenParetoError::TransitionFrontCount
+            } else {
+                FrozenParetoError::EdgeFrontCount
+            });
+        }
+        if self.entry_classes.is_empty() {
+            return Ok((Vec::new(), FrozenParetoEvaluationMetrics::default()));
+        }
+        workspace.prepare_frozen(self)?;
+        let sort_count = self.plan.frozen.sort_count();
+        let capacity = workspace.capacity();
+        let WitnessedParetoWorkspace {
+            entries: accumulator,
+            slabs,
+            planned_slabs,
+            live_slabs,
+            planning_live: _,
+            free_slabs: _,
+            slab_spans,
+            retained_entries,
+            retained_spans,
+            sort_capacity_hints,
+            sort_live_classes,
+            sort_live_entries,
+        } = workspace;
+        let mut metrics = FrozenParetoEvaluationMetrics {
+            reachable_classes: self.reachable_classes,
+            ..FrozenParetoEvaluationMetrics::default()
+        };
+        let mut live_classes = 0_usize;
+        let mut live_entries = 0_usize;
+
+        #[cfg(test)]
+        let _allocation_guard = crate::test_alloc::HotLoopAllocationGuard::enter();
+
+        for sort in (0..sort_count).rev() {
+            let sort_class_start = if TRANSITION_FRONTS {
+                self.plan
+                    .frozen
+                    .class_range(sort as u32)
+                    .ok_or(FrozenParetoError::Artifact)?
+                    .start
+            } else {
+                0
+            };
+            let sort_degree = self.plan.offsets[sort + 1] - self.plan.offsets[sort];
+            let reachable_classes = &self.reachable_class_ids
+                [self.reachable_offsets[sort]..self.reachable_offsets[sort + 1]];
+            let slab = planned_slabs[sort];
+            if !reachable_classes.is_empty() {
+                if slab == NO_SLAB
+                    || live_slabs.contains(&slab)
+                    || !slabs[slab as usize].is_empty()
+                    || !slab_spans[slab as usize].is_empty()
+                {
+                    return Err(FrozenParetoError::Artifact);
+                }
+                live_slabs[sort] = slab;
+            }
+            for (class_local, &class) in reachable_classes.iter().enumerate() {
+                let transition_front_base = if TRANSITION_FRONTS {
+                    self.plan.transition_sort_offsets[sort]
+                        + (class - sort_class_start) as usize * sort_degree
+                } else {
+                    0
+                };
+                let output = self
+                    .plan
+                    .frozen
+                    .output(class)
+                    .ok_or(FrozenParetoError::Artifact)? as usize;
+                let output_front = output_fronts.get(output).ok_or(FrozenParetoError::Output)?;
+                if output_front.entries.len() > capacity {
+                    return Err(OrderedResourceError::WorkspaceCapacity {
+                        required: output_front.entries.len(),
+                        capacity,
+                    }
+                    .into());
+                }
+                if !VALIDATED {
+                    for entry in &output_front.entries {
+                        validate_element(monoid.element_count(), entry.resource)?;
+                    }
+                }
+                accumulator.clear();
+                accumulator.extend_from_slice(&output_front.entries);
+                let global_local = self.reachable_offsets[sort] + class_local;
+                let target_locals = &self.target_locals
+                    [self.target_offsets[global_local]..self.target_offsets[global_local + 1]];
+                if TRANSITION_FRONTS {
+                    for (edge_local, &generator) in self.plan.outgoing
+                        [self.plan.offsets[sort]..self.plan.offsets[sort + 1]]
+                        .iter()
+                        .enumerate()
+                    {
+                        let target_sort = self.plan.generator_targets[generator as usize] as usize;
+                        let target_local = target_locals[edge_local] as usize;
+                        let target_slab = live_slabs[target_sort];
+                        if target_slab == NO_SLAB {
+                            return Err(FrozenParetoError::Artifact);
+                        }
+                        let child_span = slab_spans[target_slab as usize]
+                            .get(target_local)
+                            .copied()
+                            .ok_or(FrozenParetoError::Artifact)?;
+                        let child_start = child_span.start as usize;
+                        let child_end = child_start + child_span.len as usize;
+                        let child = slabs[target_slab as usize]
+                            .get(child_start..child_end)
+                            .ok_or(FrozenParetoError::Artifact)?;
+                        for &edge in &edge_fronts[transition_front_base + edge_local].entries {
+                            if !VALIDATED {
+                                validate_element(monoid.element_count(), edge.resource)?;
+                            }
+                            for &suffix in child {
+                                let resource = monoid.combine(edge.resource, suffix.resource);
+                                if !VALIDATED {
+                                    validate_element(monoid.element_count(), resource)?;
+                                }
+                                insert_witnessed_bounded(
+                                    monoid,
+                                    accumulator,
+                                    capacity,
+                                    resource,
+                                    || compose_witness(generator, edge.witness, suffix.witness),
+                                )?;
+                            }
+                        }
+                    }
+                } else {
+                    for (edge_local, &generator) in self.plan.outgoing
+                        [self.plan.offsets[sort]..self.plan.offsets[sort + 1]]
+                        .iter()
+                        .enumerate()
+                    {
+                        let target_sort = self.plan.generator_targets[generator as usize] as usize;
+                        let target_local = target_locals[edge_local] as usize;
+                        let target_slab = live_slabs[target_sort];
+                        if target_slab == NO_SLAB {
+                            return Err(FrozenParetoError::Artifact);
+                        }
+                        let child_span = slab_spans[target_slab as usize]
+                            .get(target_local)
+                            .copied()
+                            .ok_or(FrozenParetoError::Artifact)?;
+                        let child_start = child_span.start as usize;
+                        let child_end = child_start + child_span.len as usize;
+                        let child = slabs[target_slab as usize]
+                            .get(child_start..child_end)
+                            .ok_or(FrozenParetoError::Artifact)?;
+                        for &edge in &edge_fronts[generator as usize].entries {
+                            if !VALIDATED {
+                                validate_element(monoid.element_count(), edge.resource)?;
+                            }
+                            for &suffix in child {
+                                let resource = monoid.combine(edge.resource, suffix.resource);
+                                if !VALIDATED {
+                                    validate_element(monoid.element_count(), resource)?;
+                                }
+                                insert_witnessed_bounded(
+                                    monoid,
+                                    accumulator,
+                                    capacity,
+                                    resource,
+                                    || compose_witness(generator, edge.witness, suffix.witness),
+                                )?;
+                            }
                         }
                     }
                 }
@@ -1856,6 +2292,24 @@ mod tests {
             .map(|state| frozen.entry_class(0, state).unwrap())
             .collect();
         let selected_query = plan.query(&selected_classes).unwrap();
+        let first_transition = plan.transition_front_index(selected_classes[0], 0).unwrap();
+        let second_transition = plan.transition_front_index(selected_classes[2], 0).unwrap();
+        assert_ne!(first_transition, second_transition);
+        assert_eq!(plan.transition_front_count(), 2);
+        assert_eq!(plan.outgoing_generators(0), Some(&[0][..]));
+        assert_eq!(plan.outgoing_generators(1), Some(&[][..]));
+        assert_eq!(plan.outgoing_generators(2), None);
+        assert_eq!(
+            plan.transition_front_range(selected_classes[0]),
+            Some(first_transition..first_transition + 1)
+        );
+        assert_eq!(
+            plan.transition_front_range(selected_classes[2]),
+            Some(second_transition..second_transition + 1)
+        );
+        assert!(plan
+            .transition_front_index(frozen.class_range(1).unwrap().start, 0)
+            .is_none());
         let mixed_classes = [
             selected_classes[0],
             frozen.class_range(1).unwrap().start,
@@ -1919,6 +2373,30 @@ mod tests {
                     .unwrap();
                 assert_eq!(validated_selected, selected);
                 assert_eq!(validated_metrics, selected_metrics);
+                let transition_edges = vec![edges[0].clone(); plan.transition_front_count()];
+                let (transition_selected, transition_metrics) = selected_query
+                    .evaluate_transitions(
+                        &monoid,
+                        &outputs,
+                        &transition_edges,
+                        &mut workspace,
+                        |_, edge, child| edge | (child << 1),
+                    )
+                    .unwrap();
+                let transition_objective = plan
+                    .validate_transition_objective(&monoid, &outputs, &transition_edges)
+                    .unwrap();
+                let (validated_transition_selected, validated_transition_metrics) = selected_query
+                    .evaluate_transitions_validated(
+                        &transition_objective,
+                        &mut workspace,
+                        |_, edge, child| edge | (child << 1),
+                    )
+                    .unwrap();
+                assert_eq!(transition_selected, selected);
+                assert_eq!(transition_metrics, selected_metrics);
+                assert_eq!(validated_transition_selected, transition_selected);
+                assert_eq!(validated_transition_metrics, transition_metrics);
                 let (mixed, _) = mixed_query
                     .evaluate(
                         &monoid,
@@ -1971,6 +2449,41 @@ mod tests {
                 }
             }
         }
+
+        let outputs = [empty.clone(), identity.clone(), identity.clone()];
+        let mut transition_edges = vec![empty.clone(); plan.transition_front_count()];
+        transition_edges[first_transition] = WitnessedParetoFront::new(
+            &monoid,
+            [ParetoWitness {
+                resource: monoid.identity(),
+                witness: 1,
+            }],
+        )
+        .unwrap();
+        transition_edges[second_transition] = WitnessedParetoFront::new(
+            &monoid,
+            [ParetoWitness {
+                resource: monoid.encode(&[1]).unwrap(),
+                witness: 2,
+            }],
+        )
+        .unwrap();
+        let objective = plan
+            .validate_transition_objective(&monoid, &outputs, &transition_edges)
+            .unwrap();
+        let mut workspace = WitnessedParetoWorkspace::with_capacity(2);
+        let (selected, _) = selected_query
+            .evaluate_transitions_validated(&objective, &mut workspace, |_, edge, child| {
+                edge | (child << 2)
+            })
+            .unwrap();
+        assert_eq!(selected[0].resources().collect::<Vec<_>>(), [0]);
+        assert_eq!(selected[1], selected[0]);
+        assert_eq!(selected[2].resources().collect::<Vec<_>>(), [1]);
+        assert!(matches!(
+            plan.validate_transition_objective(&monoid, &outputs, &transition_edges[..1]),
+            Err(FrozenParetoError::TransitionFrontCount)
+        ));
 
         let mut workspace = WitnessedParetoWorkspace::with_capacity(2);
         assert_eq!(
@@ -2067,6 +2580,10 @@ mod tests {
             }],
         )
         .unwrap()];
+        let transition_edges = vec![edges[0].clone(); plan.transition_front_count()];
+        let transition_objective = plan
+            .validate_transition_objective(&monoid, &outputs, &transition_edges)
+            .unwrap();
         let mut workspace = WitnessedParetoWorkspace::with_capacity(8);
         let expected = query
             .evaluate(
@@ -2083,6 +2600,25 @@ mod tests {
                     &monoid,
                     &outputs,
                     &edges,
+                    &mut workspace,
+                    |_, edge, child| edge ^ child,
+                )
+                .unwrap()
+        });
+        assert_eq!(answer, expected);
+        assert_eq!(events, Default::default());
+
+        let expected = query
+            .evaluate_transitions_validated(
+                &transition_objective,
+                &mut workspace,
+                |_, edge, child| edge ^ child,
+            )
+            .unwrap();
+        let (answer, events) = crate::test_alloc::measure_allocations(|| {
+            query
+                .evaluate_transitions_validated::<CappedAdditiveMonoid>(
+                    &transition_objective,
                     &mut workspace,
                     |_, edge, child| edge ^ child,
                 )

@@ -23,6 +23,7 @@ pub mod cyclic_action;
 pub mod defect;
 pub mod family_response;
 pub mod field;
+pub mod frozen_shortest_path;
 pub mod graph_obstruction;
 pub mod group_action;
 pub mod hall;
@@ -129,6 +130,11 @@ pub use family_response::{
     FamilyResponseTable,
 };
 pub use field::{FieldError, FiniteField, Gf4, Prime, SmallField};
+pub use frozen_shortest_path::{
+    FrozenShortestPathError, FrozenShortestPathMetrics, FrozenShortestPathPlan,
+    FrozenShortestPathResult, FrozenShortestPathWorkspace, ValidatedFrozenShortestPathObjective,
+    ABSENT_SHORTEST_PATH_COST,
+};
 pub use graph_obstruction::{cluster_graph_census, ClusterGraphCensus, GraphObstructionError};
 pub use group_action::{
     compile_binary_gl_rref, compile_generator_closure, compile_permutation_orbits,
@@ -181,7 +187,8 @@ pub use ordered_resource::{
     FiniteOrderedMonoid, FrozenParetoError, FrozenParetoEvaluationMetrics, FrozenParetoPlan,
     FrozenParetoQueryPlan, OrderedMonoidCertificate, OrderedResourceError, ParetoFront,
     ParetoObservationTable, ParetoResponseDictionary, ParetoWitness, ParetoWitnessError,
-    ParetoWorkspace, ValidatedParetoObjective, WitnessedParetoFront, WitnessedParetoWorkspace,
+    ParetoWorkspace, ValidatedParetoObjective, ValidatedTransitionParetoObjective,
+    WitnessedParetoFront, WitnessedParetoWorkspace,
 };
 pub use prime_polynomial::{
     reduce_prime_polynomial_function, PrimePolynomialError, PrimePolynomialRecurrence,

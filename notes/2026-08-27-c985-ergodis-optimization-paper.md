@@ -350,6 +350,46 @@ as each coherent tranche lands.
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
    new evolution mechanism changes the comparison.
+8. **In progress — solver-SOTA imports and application translation.** Integrate
+   the ranked, gated import survey in
+   `2026-08-31-c1027-solver-sota-import-survey.md` without turning Ergodis into
+   a generic solver or weakening its certificate product. The current public
+   application gate is the official OR-Library RCSP family. Its first K=1
+   instance exposed zero-resource cycles; exact zero-resource shortest closure
+   now supplies positive-resource macro-transitions, and the class-local
+   objective returns cost 131 with an independently replayed four-arc witness.
+   The generic reverse Pareto evaluator scans 500,354 transitions in about
+   1.9 ms, while an expanded-state Dijkstra reaches the same certified result
+   in about 9 us. The resulting indexed forward backend is now implemented:
+   its worker-owned binary heap, distances, predecessors, and replay arena are
+   presized; the guarded search loop allocates nothing; and an independent
+   verifier replays every generator and the terminal output cost. On `rcsp1`,
+   a long warm run takes 4.72 us per solve versus 1.21 ms for reverse Pareto,
+   a 256.6x gain. Seven counter pairs put forward/direct at 3.12x cycles,
+   2.94x instructions, and 4.03x branches; the direct control's long-run wall
+   time is about 2.23 us.
+   All twelve official K=1 instances return the same cost and replayed path as
+   the direct solver. Across those instances the quotient has no state
+   compression and 10,000-solve forward/direct wall-time ratios range from
+   1.34x to 7.42x;
+   thus this remains an honest negative application gate, but a successful
+   reusable algorithm-selection import. Next use counters to price the
+   remaining gap and retain the example as a documented boundary/control, not
+   as an Ergodis application-speed claim. Raw suite and counter evidence is
+   under `/home/tavis/.cache/ergodis-perf/c985-rcsp-forward`.
+
+   After that gate, import C1027's highest measured or cheapest exact items in
+   this order: (a) CSS option-count histograms and an order-independence proof
+   before MRV branching; (b) multi-order greedy packing, which is sound by
+   construction; (c) a verified static incumbent support for shards before
+   any dynamic fan-out; and (d) BP-OSD logical-class breadth before a deeper
+   ISD mechanism. Then price Brouwer--Zimmermann only for the small-code
+   `linear_code` regime, orbit-verified anchors, and capacitated Hall/min-cut
+   certificates. Canonical augmentation, a bounded syndrome transposition
+   cache, and bit-sliced extension-field elimination remain measurement-gated.
+   Explicit non-imports are full CDCL, generic MIP/CP backends for certificate
+   kernels, treewidth/ZDD search on expander-like instances, block Wiedemann at
+   current dimensions, and Hopcroft--Karp in the nanosecond-scale Hall loop.
 
 ## Gurobi boundary and semantic-symmetry spike, 2026-08-29
 
