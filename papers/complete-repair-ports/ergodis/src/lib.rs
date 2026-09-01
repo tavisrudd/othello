@@ -142,8 +142,8 @@ pub use fibre::{
     ExhaustiveFibre, FibreRepresentative,
 };
 pub use field::{
-    BinaryElement, BinarySmallField, FieldError, FieldPresentation, FiniteField, Gf4, Prime,
-    SmallField,
+    BinaryElement, BinarySmallField, FieldElement, FieldError, FieldPresentation, FiniteField, Gf4,
+    Prime, SmallField,
 };
 pub use frozen_shortest_path::{
     FrozenShortestPathError, FrozenShortestPathMetrics, FrozenShortestPathPlan,

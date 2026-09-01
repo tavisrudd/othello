@@ -1,4 +1,5 @@
 use std::marker::PhantomData;
+use std::ops::{Add, Mul, Sub};
 
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
@@ -68,6 +69,86 @@ pub trait FiniteField: private::Sealed + Copy + Send + Sync + 'static {
     fn mul(left: u8, right: u8) -> u8;
 
     fn inverse(value: u8) -> Result<u8, FieldError>;
+}
+
+/// Canonically encoded element branded by its exact static field.
+///
+/// Raw bytes are checked once by [`FieldElement::new`]. Arithmetic between
+/// branded values then needs no repeated range or presentation test. The
+/// marker occupies no storage.
+///
+/// Elements of distinct fields cannot be mixed:
+///
+/// ```compile_fail
+/// use ergodis::{FieldElement, Prime};
+/// let left = FieldElement::<Prime<5>>::new(1).unwrap();
+/// let right = FieldElement::<Prime<7>>::new(1).unwrap();
+/// let _ = left + right;
+/// ```
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+pub struct FieldElement<F: FiniteField> {
+    value: u8,
+    _field: PhantomData<fn() -> F>,
+}
+
+const _: () = assert!(std::mem::size_of::<FieldElement<Prime<2>>>() == 1);
+const _: () = assert!(std::mem::align_of::<FieldElement<Prime<2>>>() == 1);
+
+impl<F: FiniteField> FieldElement<F> {
+    #[inline]
+    pub fn new(value: u8) -> Result<Self, FieldError> {
+        F::validate()?;
+        if value >= F::ORDER {
+            return Err(FieldError::InvalidElement);
+        }
+        Ok(Self::from_canonical(value))
+    }
+
+    #[inline(always)]
+    pub const fn value(self) -> u8 {
+        self.value
+    }
+
+    #[inline]
+    pub fn inverse(self) -> Result<Self, FieldError> {
+        F::inverse(self.value).map(Self::from_canonical)
+    }
+
+    #[inline(always)]
+    pub(crate) const fn from_canonical(value: u8) -> Self {
+        Self {
+            value,
+            _field: PhantomData,
+        }
+    }
+}
+
+impl<F: FiniteField> Add for FieldElement<F> {
+    type Output = Self;
+
+    #[inline(always)]
+    fn add(self, right: Self) -> Self {
+        Self::from_canonical(F::add(self.value, right.value))
+    }
+}
+
+impl<F: FiniteField> Sub for FieldElement<F> {
+    type Output = Self;
+
+    #[inline(always)]
+    fn sub(self, right: Self) -> Self {
+        Self::from_canonical(F::sub(self.value, right.value))
+    }
+}
+
+impl<F: FiniteField> Mul for FieldElement<F> {
+    type Output = Self;
+
+    #[inline(always)]
+    fn mul(self, right: Self) -> Self {
+        Self::from_canonical(F::mul(self.value, right.value))
+    }
 }
 
 /// Monomorphized arithmetic for a small prime field.
@@ -723,6 +804,60 @@ const fn is_prime(value: u8) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    fn typed_elements_agree<F: FiniteField>() {
+        F::validate().unwrap();
+        for left in 0..F::ORDER {
+            let typed_left = FieldElement::<F>::new(left).unwrap();
+            assert_eq!(typed_left.value(), left);
+            if left != 0 {
+                assert_eq!(
+                    typed_left.inverse().unwrap().value(),
+                    F::inverse(left).unwrap()
+                );
+            }
+            for right in 0..F::ORDER {
+                let typed_right = FieldElement::<F>::new(right).unwrap();
+                assert_eq!((typed_left + typed_right).value(), F::add(left, right));
+                assert_eq!((typed_left - typed_right).value(), F::sub(left, right));
+                assert_eq!((typed_left * typed_right).value(), F::mul(left, right));
+            }
+        }
+        assert!(matches!(
+            FieldElement::<F>::new(F::ORDER),
+            Err(FieldError::InvalidElement)
+        ));
+    }
+
+    #[test]
+    fn static_field_elements_are_checked_once_and_exactly_branded() {
+        typed_elements_agree::<Prime<2>>();
+        typed_elements_agree::<Prime<7>>();
+        typed_elements_agree::<Prime<251>>();
+        typed_elements_agree::<Gf4>();
+        assert!(matches!(
+            FieldElement::<Prime<9>>::new(0),
+            Err(FieldError::InvalidModulus)
+        ));
+    }
+
+    #[test]
+    fn static_field_element_hot_arithmetic_allocates_nothing() {
+        let multiplier = FieldElement::<Prime<7>>::new(3).unwrap();
+        let addend = FieldElement::<Prime<7>>::new(5).unwrap();
+        let mut value = FieldElement::<Prime<7>>::new(1).unwrap();
+        let (checksum, events) = crate::test_alloc::measure_allocations(|| {
+            let _guard = crate::test_alloc::HotLoopAllocationGuard::enter();
+            let mut checksum = 0_u8;
+            for _ in 0..100_000 {
+                value = value * multiplier + addend;
+                checksum ^= value.value();
+            }
+            checksum
+        });
+        assert_eq!(checksum, 0);
+        assert_eq!(events, crate::test_alloc::AllocationEvents::default());
+    }
 
     #[test]
     fn inverses_replay_for_small_primes() {

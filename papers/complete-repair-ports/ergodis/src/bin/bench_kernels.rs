@@ -16,7 +16,7 @@ use ergodis::{
     ternary_orbit_syndrome_meet_in_middle_unreserved, ternary_orbit_syndrome_search,
     ternary_orbit_syndrome_search_correlated, BinarySupportCandidate, CephXorLayer,
     CompiledBinaryLinearCode, CompositionTower, ContextStrategy, DenseHallGraph, DenseSelector,
-    ExplicitBinarySupportProblem, FiniteField, FinitePermutationAction, Gf4,
+    ExplicitBinarySupportProblem, FieldElement, FiniteField, FinitePermutationAction, Gf4,
     GpuCheckpointCapacities, HallWorkspace, IntegerMomentProblem, IntegerMomentWorkspace, Matrix,
     OrbitOption, Prime, PrimePolynomialRecurrence, PrimeQuadraticCharacter, QcLdpcCode,
     RankOneProbeCache, RepairTask, SparseSelector, TowerLevel,
@@ -1122,22 +1122,42 @@ fn main() {
         return;
     }
     if let Some(backend) = prime_arithmetic_spec(&variant) {
-        assert_eq!(backend, "gf7");
+        assert!(matches!(backend, "gf7" | "gf7-typed"));
         let mut state = 0xC103_0000_0000_0017_u64;
         let mut operands = [0_u8; 4096];
         for operand in &mut operands {
             *operand = (next_u32(&mut state) % 7) as u8;
         }
-        let operands = black_box(&operands);
-        let mut value = black_box(1_u8);
-        for _ in 0..repetitions {
-            for &operand in operands {
-                value = Prime::<7>::add(Prime::<7>::mul(value, 3), operand);
+        if backend == "gf7" {
+            let operands = black_box(&operands);
+            let mut value = black_box(1_u8);
+            for _ in 0..repetitions {
+                for &operand in operands {
+                    value = Prime::<7>::add(Prime::<7>::mul(value, 3), operand);
+                }
+                checksum = checksum.wrapping_mul(17).wrapping_add(u64::from(value));
             }
-            checksum = checksum.wrapping_mul(17).wrapping_add(u64::from(value));
+            black_box(value);
+        } else {
+            let zero = FieldElement::<Prime<7>>::new(0).unwrap();
+            let multiplier = FieldElement::<Prime<7>>::new(3).unwrap();
+            let mut typed_operands = [zero; 4096];
+            for (typed, &raw) in typed_operands.iter_mut().zip(&operands) {
+                *typed = FieldElement::new(raw).unwrap();
+            }
+            let operands = black_box(&typed_operands);
+            let mut value = black_box(FieldElement::<Prime<7>>::new(1).unwrap());
+            for _ in 0..repetitions {
+                for &operand in operands {
+                    value = value * multiplier + operand;
+                }
+                checksum = checksum
+                    .wrapping_mul(17)
+                    .wrapping_add(u64::from(value.value()));
+            }
+            black_box(value);
         }
         work = u64::from(repetitions) * operands.len() as u64;
-        black_box(value);
         let elapsed_ns = started.elapsed().as_nanos();
         println!(
             "{{\"variant\":\"{variant}\",\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"work\":{work},\"peak_states\":{peak_states},\"peak_rss_kib\":{},\"checksum\":{checksum}}}",
