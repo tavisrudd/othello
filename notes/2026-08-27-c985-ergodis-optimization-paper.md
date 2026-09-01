@@ -430,6 +430,18 @@ as each coherent tranche lands.
    survey entries remain useful provenance, but no duplicate implementation is
    planned.
 
+   Revised next order after these measurements: (1) make logical-class breadth
+   a measured cold/upper-bound experiment around the existing BP-OSD-first
+   campaign, not a solve-loop change; if positive, extract the current binary-
+   local OSD machinery into a reusable public upper-bound module; (2) implement
+   Brouwer--Zimmermann only in `linear_code` and gate dispatch by rank/rate,
+   retaining Gray enumeration as the small-rank control; (3) add capacitated
+   Hall only when a client accepts the corresponding min-cut certificate; and
+   (4) treat bit-sliced extension-field elimination as a profile-gated matrix
+   backend. Canonical augmentation remains private until its canonical-parent
+   theorem is proved, and the MRV result above raises that proof gate rather
+   than lowering it.
+
 ## Gurobi boundary and semantic-symmetry spike, 2026-08-29
 
 The product boundary is now explicit in
