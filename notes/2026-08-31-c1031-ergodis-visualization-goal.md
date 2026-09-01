@@ -78,6 +78,17 @@ Concrete substrate already present in the tree. Confirmed by inspection on 2026-
 The four object families the dashboard must cover, in the user's words: **results, certificates,
 traces, and live solves or evolve campaigns.**
 
+Added by the user on 2026-08-31 as an explicit further requirement: the dashboard must also show
+**the search state spaces and how they are reduced** — by theorems that were provided and by
+theorems the system learned — together with **root counts**, the reductions themselves, and
+**estimates of completion time**. These are first-class deliverables, not extras.
+
+The companion note `notes/2026-08-31-c1031-ergodis-visualization-data-model.md` records what the
+system actually emits, established by reading the control plane and by running a real campaign end
+to end. It maps each of the requirements above onto data that already exists, and it identifies the
+one real gap: the client-side `evolve` path emits no parent or operator fields, so lineage views
+must be built on the daemon-owned `evolve-start` path instead. Read it before designing any view.
+
 ## State of the art to survey
 
 A partial survey was done in the chartering session before quota cut it off. What follows is the
@@ -195,6 +206,13 @@ Check the shared literature cache at `/tmp/persistent/tavis/lit-search/` before 
 
 ## Scope and constraints
 
+- **Working-tree rule, set by the user on 2026-08-31 and binding for the whole task.** In this main
+  tree the task is design only: notes, surveys, and design documents. No Rust changes to the Ergodis
+  core here at all. Any prototype code — Rust or otherwise — goes in a separate git worktree.
+  Reading the core, and building or running it to produce sample data, is fine; editing it here is
+  not. This is not much of a constraint in practice, because the lineage and ledger artifacts
+  described below are already written to disk by the existing code, so a viewer needs no core
+  changes to have real data.
 - **Owned paths**: `ergodis-private/` for adapters, fixtures, and any prototype that depends on
   private research identifiers; `papers/complete-repair-ports/ergodis/` only for changes that are
   genuinely reusable and public-surface-safe. This task is exploration — prefer writing the
@@ -224,7 +242,25 @@ comparison to the survey. A recurring in-session cron job was registered to re-e
 whenever the REPL is idle and quota permits; it is session-only and expires after seven days, so a
 cold session must be resumed by hand from this file.
 
-**Next step on resume**: read OpenEvolve's `scripts/visualizer.py` as actual code — it is the
+### 2026-08-31 — budget clock started 22:28 local; first working block
+
+The user authorized starting, then set the working-tree rule recorded under Scope and constraints,
+then added the search-state-space, reduction, root-count, and completion-estimate requirement.
+
+Created the prototype worktree `/home/tavis/.cache/c1031-ergodis-viz` on branch
+`c1031-ergodis-viz`. Built the Ergodis control-plane binaries there and ran a real campaign against
+the C880 live-ordering fixture, then ran both evolution entry points. This produced a real 257-node
+lineage graph with 253 parent edges, six named mutation operators, and four outcome classes, plus a
+735-candidate population log. Wrote the findings up as
+`notes/2026-08-31-c1031-ergodis-visualization-data-model.md`.
+
+The load-bearing result is that no core instrumentation is needed: a run directory is already a
+complete self-describing record, and `ergodisctl --json` already speaks a stable response envelope
+that a backend can forward verbatim.
+
+**Next step on resume**: build the vertical-slice viewer in the worktree against
+`/home/tavis/.cache/c1031-runs/run1`, starting with the lineage graph from the `evolve-start`
+evidence file. Then read OpenEvolve's `scripts/visualizer.py` as actual code — it is the
 closest existing thing to the evolve-campaign view and will either be adaptable or will show why
 not. Then settle the DAG layout-engine question left open above. Then read
 `ergodis/src/control/vm.rs` and `ergodis/src/bin/ergodisctl.rs` in full to fix the real data model
