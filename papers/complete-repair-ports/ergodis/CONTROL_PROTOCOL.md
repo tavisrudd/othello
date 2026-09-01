@@ -170,11 +170,21 @@ improvements, perfect candidates, rows, and semantic-operation rows by the
 finite built-in mutation operator label.  Direct and replay roots therefore do
 not dilute an operator's parent-relative improvement rate.  Only the previous
 generation's bounded expanded-parent scores are retained for lineage joins.
-The archive reserves 4 KiB before admitting candidate records and always ends
+The archive reserves 8 KiB before admitting candidate records and always ends
 with a compact summary footer, including on cancellation or candidate
 truncation.  Its recorded byte count includes the footer and equals the status
 response.  A limit too small for the identity header plus this reserve fails
 before writing a partial header.
+
+When parent-relative scorecards exist, every outcome-distinct parent first
+receives one exploration slot.  Remaining slots are assigned by a deterministic
+max-heap using, in order, the best observed correctness gain per semantic-op
+row, false-positive reduction per semantic-op row, parent-relative improvement
+rate, diminishing quota, and the exact candidate rank.  Each gain remains
+paired with the cost of the trial that achieved it; unrelated extrema are
+never combined.  With no parent-relative evidence, allocation falls back to
+the balanced shares above.  The summary separately counts exploration,
+scorecard-guided, and no-signal balanced slots.
 
 Socket I/O, JSON, evidence serialization, and plan compilation happen outside
 worker hot loops.  Uncontrolled solves compile without the control-plane

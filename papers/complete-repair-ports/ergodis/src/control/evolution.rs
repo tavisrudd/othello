@@ -4,7 +4,7 @@ use super::{
 };
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
-use std::collections::{BTreeMap, BTreeSet};
+use std::collections::{BTreeMap, BTreeSet, BinaryHeap};
 use std::fs::File;
 use std::io::{BufRead, BufReader, BufWriter, Write};
 use std::path::Path;
@@ -14,7 +14,7 @@ use std::sync::Arc;
 const EVOLUTION_EVIDENCE_SCHEMA: &str = "ergodis-evolution-evidence-v0";
 const MAX_EVOLUTION_IMPORT_BYTES: u64 = 16 * 1024 * 1024;
 const MAX_EVOLUTION_RECORD_BYTES: usize = 256 * 1024;
-const MAX_EVOLUTION_FOOTER_BYTES: u64 = 4 * 1024;
+const MAX_EVOLUTION_FOOTER_BYTES: u64 = 8 * 1024;
 const MAX_FAILURE_PROBES: usize = 8;
 const MAX_TARGETED_MUTATIONS: usize = 24;
 
@@ -159,6 +159,7 @@ struct ExpansionParent {
     plan: PlanSpec,
     first_mismatch: Option<usize>,
     score: CandidateScore,
+    operator: &'static str,
 }
 
 #[derive(Clone, Copy)]
@@ -166,6 +167,46 @@ struct CandidateScore {
     correct: u64,
     false_positive: u64,
     complexity: usize,
+}
+
+#[derive(Clone, Copy)]
+struct ParentSelectionProfile {
+    score: CandidateScore,
+    correct_gain_numerator: u64,
+    false_positive_reduction_numerator: u64,
+    correct_gain_cost: u64,
+    false_positive_reduction_cost: u64,
+    improved: u64,
+    compared_to_parent: u64,
+}
+
+struct SelectionEntry<'a> {
+    index: usize,
+    quota: usize,
+    profile: ParentSelectionProfile,
+    hash: &'a str,
+}
+
+impl PartialEq for SelectionEntry<'_> {
+    fn eq(&self, other: &Self) -> bool {
+        self.index == other.index && self.quota == other.quota
+    }
+}
+
+impl Eq for SelectionEntry<'_> {}
+
+impl PartialOrd for SelectionEntry<'_> {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for SelectionEntry<'_> {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        parent_selection_cmp(self.profile, self.quota, other.profile, other.quota)
+            .then_with(|| other.hash.cmp(self.hash))
+            .then_with(|| other.index.cmp(&self.index))
+    }
 }
 
 #[derive(Serialize)]
@@ -187,6 +228,13 @@ struct OperatorScorecard {
     perfect: u64,
     rows_evaluated: u64,
     semantic_op_rows: u64,
+    best_correct_gain: u64,
+    best_false_positive_reduction: u64,
+    best_correct_gain_per_cost_numerator: u64,
+    best_false_positive_reduction_per_cost_numerator: u64,
+    best_correct_gain_per_cost_denominator: Option<u64>,
+    best_false_positive_reduction_per_cost_denominator: Option<u64>,
+    minimum_improving_semantic_op_rows: Option<u64>,
 }
 
 type EvolutionRankKey = (std::cmp::Reverse<u64>, u64, usize);
@@ -213,6 +261,183 @@ fn can_enter_beam(
 fn fair_share(total: usize, index: usize, count: usize) -> usize {
     debug_assert!(count != 0 && index < count);
     total / count + usize::from(index < total % count)
+}
+
+fn diminishing_ratio_cmp(
+    left_numerator: u64,
+    left_cost: u64,
+    left_quota: usize,
+    right_numerator: u64,
+    right_cost: u64,
+    right_quota: usize,
+) -> std::cmp::Ordering {
+    let left_denominator = u128::from(left_cost.max(1)) * left_quota as u128;
+    let right_denominator = u128::from(right_cost.max(1)) * right_quota as u128;
+    positive_ratio_cmp(
+        u128::from(left_numerator),
+        left_denominator,
+        u128::from(right_numerator),
+        right_denominator,
+    )
+}
+
+fn positive_ratio_cmp(
+    mut left_numerator: u128,
+    mut left_denominator: u128,
+    mut right_numerator: u128,
+    mut right_denominator: u128,
+) -> std::cmp::Ordering {
+    debug_assert!(left_denominator != 0 && right_denominator != 0);
+    let mut reversed = false;
+    loop {
+        let left_quotient = left_numerator / left_denominator;
+        let right_quotient = right_numerator / right_denominator;
+        if left_quotient != right_quotient {
+            let ordering = left_quotient.cmp(&right_quotient);
+            return if reversed {
+                ordering.reverse()
+            } else {
+                ordering
+            };
+        }
+        let left_remainder = left_numerator % left_denominator;
+        let right_remainder = right_numerator % right_denominator;
+        if left_remainder == 0 || right_remainder == 0 {
+            let ordering = left_remainder.cmp(&right_remainder);
+            return if reversed {
+                ordering.reverse()
+            } else {
+                ordering
+            };
+        }
+        left_numerator = left_denominator;
+        left_denominator = left_remainder;
+        right_numerator = right_denominator;
+        right_denominator = right_remainder;
+        reversed = !reversed;
+    }
+}
+
+fn parent_selection_cmp(
+    left: ParentSelectionProfile,
+    left_quota: usize,
+    right: ParentSelectionProfile,
+    right_quota: usize,
+) -> std::cmp::Ordering {
+    diminishing_ratio_cmp(
+        left.correct_gain_numerator,
+        left.correct_gain_cost,
+        left_quota,
+        right.correct_gain_numerator,
+        right.correct_gain_cost,
+        right_quota,
+    )
+    .then_with(|| {
+        diminishing_ratio_cmp(
+            left.false_positive_reduction_numerator,
+            left.false_positive_reduction_cost,
+            left_quota,
+            right.false_positive_reduction_numerator,
+            right.false_positive_reduction_cost,
+            right_quota,
+        )
+    })
+    .then_with(|| {
+        diminishing_ratio_cmp(
+            left.improved,
+            left.compared_to_parent,
+            left_quota,
+            right.improved,
+            right.compared_to_parent,
+            right_quota,
+        )
+    })
+    .then_with(|| right_quota.cmp(&left_quota))
+    .then_with(|| {
+        evolution_rank_key(
+            right.score.correct,
+            right.score.false_positive,
+            right.score.complexity,
+        )
+        .cmp(&evolution_rank_key(
+            left.score.correct,
+            left.score.false_positive,
+            left.score.complexity,
+        ))
+    })
+}
+
+fn maximum_oriented_quotas(
+    parents: &[ExpansionParent],
+    total: usize,
+    scorecards: &BTreeMap<&'static str, OperatorScorecard>,
+) -> Vec<usize> {
+    if parents.is_empty() {
+        return Vec::new();
+    }
+    debug_assert!(total >= parents.len());
+    if parents.len() == 1 {
+        return vec![total];
+    }
+    if total == parents.len() {
+        return vec![1; parents.len()];
+    }
+    if !selection_has_signal(parents, scorecards) {
+        return (0..parents.len())
+            .map(|index| fair_share(total, index, parents.len()))
+            .collect();
+    }
+    let mut quotas = vec![1_usize; parents.len()];
+    let mut heap = parents
+        .iter()
+        .enumerate()
+        .map(|(index, parent)| {
+            let scorecard = scorecards.get(parent.operator);
+            SelectionEntry {
+                index,
+                quota: 1,
+                profile: ParentSelectionProfile {
+                    score: parent.score,
+                    correct_gain_numerator: scorecard
+                        .map_or(0, |score| score.best_correct_gain_per_cost_numerator),
+                    false_positive_reduction_numerator: scorecard.map_or(0, |score| {
+                        score.best_false_positive_reduction_per_cost_numerator
+                    }),
+                    correct_gain_cost: scorecard
+                        .and_then(|score| score.best_correct_gain_per_cost_denominator)
+                        .unwrap_or(1),
+                    false_positive_reduction_cost: scorecard
+                        .and_then(|score| score.best_false_positive_reduction_per_cost_denominator)
+                        .unwrap_or(1),
+                    improved: scorecard.map_or(0, |score| score.improved),
+                    compared_to_parent: scorecard.map_or(0, |score| score.compared_to_parent),
+                },
+                hash: &parent.hash,
+            }
+        })
+        .collect::<BinaryHeap<_>>();
+    for _ in parents.len()..total {
+        let Some(mut selected) = heap.pop() else {
+            return (0..parents.len())
+                .map(|index| fair_share(total, index, parents.len()))
+                .collect();
+        };
+        quotas[selected.index] += 1;
+        selected.quota += 1;
+        heap.push(selected);
+    }
+    quotas
+}
+
+fn selection_has_signal(
+    parents: &[ExpansionParent],
+    scorecards: &BTreeMap<&'static str, OperatorScorecard>,
+) -> bool {
+    parents.iter().any(|parent| {
+        scorecards
+            .get(parent.operator)
+            .is_some_and(|score| score.compared_to_parent != 0)
+    })
 }
 
 fn candidate_impact(child: CandidateScore, parent: CandidateScore) -> CandidateImpact {
@@ -412,6 +637,9 @@ pub(super) fn run_evolution(
     let mut outcome_expansion_rejections = 0_usize;
     let mut cascade_rejections = 0_usize;
     let mut rows_evaluated = 0_u64;
+    let mut selection_exploration_slots = 0_u64;
+    let mut selection_guided_slots = 0_u64;
+    let mut selection_balanced_slots = 0_u64;
     let mut prior_parent_scores = BTreeMap::<String, CandidateScore>::new();
     let mut operator_scorecards = BTreeMap::<&'static str, OperatorScorecard>::new();
     let mut best: Option<(u64, u64, usize, PlanSpec)> = None;
@@ -544,6 +772,53 @@ pub(super) fn run_evolution(
                         1,
                         "operator improvement",
                     )?;
+                    operator_scorecard.best_correct_gain = operator_scorecard
+                        .best_correct_gain
+                        .max(impact.correct_gain);
+                    operator_scorecard.best_false_positive_reduction = operator_scorecard
+                        .best_false_positive_reduction
+                        .max(impact.false_positive_reduction);
+                    if operator_scorecard
+                        .best_correct_gain_per_cost_denominator
+                        .is_none_or(|cost| {
+                            diminishing_ratio_cmp(
+                                impact.correct_gain,
+                                semantic_op_rows,
+                                1,
+                                operator_scorecard.best_correct_gain_per_cost_numerator,
+                                cost,
+                                1,
+                            ) == std::cmp::Ordering::Greater
+                        })
+                    {
+                        operator_scorecard.best_correct_gain_per_cost_numerator =
+                            impact.correct_gain;
+                        operator_scorecard.best_correct_gain_per_cost_denominator =
+                            Some(semantic_op_rows);
+                    }
+                    if operator_scorecard
+                        .best_false_positive_reduction_per_cost_denominator
+                        .is_none_or(|cost| {
+                            diminishing_ratio_cmp(
+                                impact.false_positive_reduction,
+                                semantic_op_rows,
+                                1,
+                                operator_scorecard.best_false_positive_reduction_per_cost_numerator,
+                                cost,
+                                1,
+                            ) == std::cmp::Ordering::Greater
+                        })
+                    {
+                        operator_scorecard.best_false_positive_reduction_per_cost_numerator =
+                            impact.false_positive_reduction;
+                        operator_scorecard.best_false_positive_reduction_per_cost_denominator =
+                            Some(semantic_op_rows);
+                    }
+                    operator_scorecard.minimum_improving_semantic_op_rows = Some(
+                        operator_scorecard
+                            .minimum_improving_semantic_op_rows
+                            .map_or(semantic_op_rows, |minimum| minimum.min(semantic_op_rows)),
+                    );
                 }
             }
             if evaluation.weighted_correct == evaluation.weighted_rows {
@@ -619,6 +894,7 @@ pub(super) fn run_evolution(
                 compiled.hash,
                 plan,
                 evaluation.first_mismatch,
+                pending.operator,
             ));
             progress.tested.store(tested as u64, Ordering::Relaxed);
             progress.perfect.store(perfect as u64, Ordering::Relaxed);
@@ -645,6 +921,7 @@ pub(super) fn run_evolution(
             parent_hash,
             parent,
             first_mismatch,
+            operator,
         ) in ranked
         {
             if parents.len() == bounds.beam || parents.len() == expansion_capacity {
@@ -663,14 +940,33 @@ pub(super) fn run_evolution(
                     false_positive,
                     complexity,
                 },
+                operator,
             });
         }
-        let parent_count = parents.len();
+        if parents.is_empty() {
+            break;
+        }
+        let guided_selection = selection_has_signal(&parents, &operator_scorecards);
+        checked_counter_add(
+            &mut selection_exploration_slots,
+            parents.len() as u64,
+            "selection exploration slot",
+        )?;
+        checked_counter_add(
+            if guided_selection {
+                &mut selection_guided_slots
+            } else {
+                &mut selection_balanced_slots
+            },
+            expansion_capacity.saturating_sub(parents.len()) as u64,
+            "selection surplus slot",
+        )?;
+        let quotas = maximum_oriented_quotas(&parents, expansion_capacity, &operator_scorecards);
         let mut next_parent_scores = BTreeMap::new();
         let mut carry = 0_usize;
-        for (index, parent) in parents.into_iter().enumerate() {
+        for (parent, quota) in parents.into_iter().zip(quotas) {
             next_parent_scores.insert(parent.hash.clone(), parent.score);
-            let quota = fair_share(expansion_capacity, index, parent_count).saturating_add(carry);
+            let quota = quota.saturating_add(carry);
             let before = current.len();
             let limit = before.saturating_add(quota).min(expansion_capacity);
             let failure_shape =
@@ -696,6 +992,9 @@ pub(super) fn run_evolution(
         "outcome_expansion_rejections": outcome_expansion_rejections,
         "cascade_rejections": cascade_rejections,
         "rows_evaluated": rows_evaluated,
+        "selection_exploration_slots": selection_exploration_slots,
+        "selection_guided_slots": selection_guided_slots,
+        "selection_balanced_slots": selection_balanced_slots,
         "operator_scorecards": &operator_scorecards,
         "bytes": bytes,
         "truncated": truncated,
@@ -741,6 +1040,9 @@ pub(super) fn run_evolution(
         "outcome_expansion_rejections": outcome_expansion_rejections,
         "cascade_rejections": cascade_rejections,
         "rows_evaluated": rows_evaluated,
+        "selection_exploration_slots": selection_exploration_slots,
+        "selection_guided_slots": selection_guided_slots,
+        "selection_balanced_slots": selection_balanced_slots,
         "operator_scorecards": operator_scorecards,
         "bytes": bytes,
         "truncated": truncated,
@@ -1199,5 +1501,77 @@ mod tests {
         assert!(!worse.improved);
         assert_eq!(worse.correct_loss, 1);
         assert_eq!(worse.false_positive_reduction, 1);
+    }
+
+    fn selector_parent(hash: &str, operator: &'static str) -> ExpansionParent {
+        ExpansionParent {
+            hash: hash.into(),
+            plan: PlanSpec {
+                schema: String::new(),
+                name: String::new(),
+                role: super::super::PlanRole::Diagnostic,
+                output: super::super::PlanOutput::Predicate,
+                scope: None,
+                program: Vec::new(),
+            },
+            first_mismatch: None,
+            score: CandidateScore {
+                correct: 10,
+                false_positive: 0,
+                complexity: 1,
+            },
+            operator,
+        }
+    }
+
+    #[test]
+    fn maximum_oriented_quotas_keep_exploration_and_price_cost() {
+        assert_eq!(
+            diminishing_ratio_cmp(u64::MAX, u64::MAX, 100_000, u64::MAX - 1, u64::MAX, 100_000,),
+            std::cmp::Ordering::Greater
+        );
+        assert_eq!(
+            diminishing_ratio_cmp(3, 2, 7, 9, 6, 7),
+            std::cmp::Ordering::Equal
+        );
+        let parents = [selector_parent("a", "fast"), selector_parent("b", "slow")];
+        let empty = BTreeMap::new();
+        assert_eq!(maximum_oriented_quotas(&parents, 10, &empty), [5, 5]);
+
+        let mut scorecards = BTreeMap::new();
+        scorecards.insert(
+            "fast",
+            OperatorScorecard {
+                improved: 1,
+                compared_to_parent: 1,
+                best_correct_gain: 8,
+                best_correct_gain_per_cost_numerator: 8,
+                best_correct_gain_per_cost_denominator: Some(8),
+                minimum_improving_semantic_op_rows: Some(8),
+                ..OperatorScorecard::default()
+            },
+        );
+        scorecards.insert(
+            "slow",
+            OperatorScorecard {
+                improved: 1,
+                compared_to_parent: 1,
+                best_correct_gain: 8,
+                best_correct_gain_per_cost_numerator: 8,
+                best_correct_gain_per_cost_denominator: Some(80),
+                minimum_improving_semantic_op_rows: Some(80),
+                ..OperatorScorecard::default()
+            },
+        );
+        let quotas = maximum_oriented_quotas(&parents, 10, &scorecards);
+        assert_eq!(quotas, [9, 1]);
+
+        let many = (0..256)
+            .map(|index| selector_parent(&format!("{index:064x}"), "fast"))
+            .collect::<Vec<_>>();
+        let quotas = maximum_oriented_quotas(&many, 100_000, &scorecards);
+        assert_eq!(quotas.iter().sum::<usize>(), 100_000);
+        assert!(quotas.iter().all(|&quota| quota != 0));
+        assert!(quotas.iter().max().unwrap() - quotas.iter().min().unwrap() <= 1);
     }
 }

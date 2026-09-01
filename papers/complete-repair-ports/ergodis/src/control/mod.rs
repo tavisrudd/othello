@@ -2369,9 +2369,27 @@ mod tests {
             24
         );
         assert_eq!(
+            completed["summary"]["operator_scorecards"]["counterexample-threshold"]
+                ["best_correct_gain"],
+            1
+        );
+        assert_eq!(
+            completed["summary"]["operator_scorecards"]["counterexample-threshold"]
+                ["best_correct_gain_per_cost_numerator"],
+            1
+        );
+        assert_eq!(
+            completed["summary"]["operator_scorecards"]["counterexample-threshold"]
+                ["best_correct_gain_per_cost_denominator"],
+            12
+        );
+        assert_eq!(
             completed["summary"]["operator_scorecards"]["seed"]["compared_to_parent"],
             0
         );
+        assert_eq!(completed["summary"]["selection_exploration_slots"], 2);
+        assert_eq!(completed["summary"]["selection_guided_slots"], 0);
+        assert_eq!(completed["summary"]["selection_balanced_slots"], 0);
         let relative = completed["path"].as_str().unwrap();
         let evidence = fs::read_to_string(campaign.manifest.run_dir.join(relative)).unwrap();
         assert_eq!(evidence.lines().count(), 6);
