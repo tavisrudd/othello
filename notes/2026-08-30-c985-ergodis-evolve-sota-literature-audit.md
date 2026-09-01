@@ -2,14 +2,18 @@
 
 **Lane:** `complete-ports`  
 **Date:** 2026-08-30  
+**Implementation status refreshed:** 2026-09-01
 **Scope:** optional theorem-discovery/campaign layer, not solver authority
 
 ## Verdict
 
 Ergodis is not yet competitive with the leading evolutionary coding systems as
-an autonomous proposal engine. It has a narrow deterministic beam mutator, no
-islands or quality-diversity archive, no staged evaluator, no learned proposal
-policy, and no persistent cross-campaign population.
+an autonomous proposal engine: it still lacks broad proposal generation,
+independent islands, profile-driven target graphs, and a learned policy.  Since
+the original audit, however, the deterministic P0 selector and bounded P1
+substrate have landed: impact/cost scorecards, exploration-floor allocation,
+semantic niches, resumable elite mutation, exact hindsight fragments,
+type-compatible theorem-DAG composition, and mandatory cross-campaign replay.
 
 It is already stronger than those systems in a different and important layer:
 the exact experimental substrate. Candidate plans are typed and compiled,
@@ -41,12 +45,12 @@ problem has already been compiled into exact finite observables.
 | Capability | Relevant SOTA | Ergodis now | Consequence |
 |---|---|---|---|
 | Proposal breadth | AlphaEvolve evolves whole files with an LLM ensemble; CodeEvolve adds inspirations, meta-prompts, and depth refinement | bounded hand-written mutations over a typed VM | large autonomy gap, but a much smaller and safer search space |
-| Diversity | AlphaEvolve uses MAP-Elites/islands; open CodeEvolve uses CVT-MAP-Elites, islands, and migration | exact structural deduplication and outcome-class hashing inside one run | add semantic niches and multiple populations before scaling proposal volume |
-| Evaluation economy | AlphaEvolve uses cascades and parallel evaluators | every candidate sees the full frozen batch | add exact successive gates; most bad plans should die on permanent falsifiers |
-| Target selection | TTT-Discover uses maximum-oriented PUCT; runtime CodeEvolve profiles weighted component graphs | static beam rank; humans currently redirect campaigns from live evidence | compile solver/root cost and uncertainty into a max-oriented selection policy |
+| Diversity | AlphaEvolve uses MAP-Elites/islands; open CodeEvolve uses CVT-MAP-Elites, islands, and migration | exact outcome classes plus failure/operator/cost niches and bounded resumable elites | add genuinely independent operator-prior islands only after measured niche use |
+| Evaluation economy | AlphaEvolve uses cascades and parallel evaluators | exact monotone cascade, failure targeting, bitmap premise screening, and bounded full replay | add operational shadow stages and profile-directed batches |
+| Target selection | TTT-Discover uses maximum-oriented PUCT; runtime CodeEvolve profiles weighted component graphs | deterministic best-impact-per-cost heap with one-slot exploration floor | next import root/profile target graphs, not a learned policy |
 | Learning from a campaign | TTT-Discover updates the model at test time; HTPS trains online from proof search | no learned proposal policy | defer weight updates until exact archives and rewards are calibrated |
-| Learning from failure | Minimo hindsight-relabels failed proof trees into achieved theorems and proofs | permanent counterexamples, but no systematic extraction of valid sublemmas from failed attacks | add exact hindsight extraction over intermediate plan/search states |
-| Cumulative theory | Minimo identifies lemma accumulation and premise selection as necessary for depth | theorem kernels exist, but evolve does not yet compose or retrieve them as a growing library | add theorem dependency DAG, utility, and premise/kernel selection |
+| Learning from failure | Minimo hindsight-relabels failed proof trees into achieved theorems and proofs | typed proper subexpressions are retained only after zero-false-positive replay, with explicit no-authority obligations | extend from frozen feature rows to intermediate solver states and proof handles |
+| Cumulative theory | Minimo identifies lemma accumulation and premise selection as necessary for depth | bounded OR-composition DAG with adaptive coverage and cross-campaign replay | add counterexample-separating premise selection, domain overlap, and kernel handles |
 | Trace diagnosis | EvoTrace/EvoReplay retain source, lineage, prompts, evaluation metadata, replay interventions, and cycling tests | bounded event ledger and streamed trials, but incomplete lineage/replay schema and no cycling diagnostic | make every candidate replayable and detect equivalent reversions before evaluation |
 | Runtime focus | runtime CodeEvolve selects profiled hot components and prunes context | Ergodis has perf counters and rich root metrics but target choice is mostly manual | use measured theorem cost, state mass, exceptional roots, and debt as target weights |
 | Exactness boundary | most systems rely on task evaluators and may overfit them | explicit `proof_authority: false`, hostile replay, exact witnesses/counterexamples | retain this as the non-negotiable architectural edge |
@@ -149,10 +153,16 @@ summary counters report rejected candidates and total rows evaluated. A
 perfect survivor. Multiple semantic strata and operational shadow stages remain
 open.
 
-### P0 — maximum-oriented target selection
+### P0 — maximum-oriented target selection — landed
 
-Replace static beam truncation with a deterministic PUCT-like selector over
-candidate/root pairs:
+Status 2026-09-01: exact parent-relative impact/cost scorecards feed a
+deterministic diminishing-return max-heap.  Every parent receives one
+exploration slot; no-signal campaigns retain balanced allocation.  Paired
+gain/cost extrema, overflow-free rational comparison, and synthetic
+cost-asymmetry/no-starvation controls close this item.
+
+The landed selector replaces static beam truncation with the following
+deterministic PUCT-like order over candidate/root pairs:
 
 ```text
 best descendant impact
@@ -162,11 +172,17 @@ best descendant impact
 ```
 
 The primary value is exceptional descendant states or instructions avoided,
-not mean predicate accuracy. The initial implementation needs no neural model:
-the persistent scorecards and reliability statistics in the existing ADR are
-enough.
+not mean predicate accuracy.  The current implementation deliberately needs no
+neural model: persistent scorecards and exact reliability statistics supply the
+signal.
 
-### P1 — semantic islands and quality-diversity niches
+### P1 — semantic islands and quality-diversity niches — niche substrate landed
+
+Status 2026-09-01: failure class, operator family, and logarithmic evaluation
+cost define bounded semantic niches; exact output remains an independent
+class.  Fresh niche elites precede global fill, while resumable mutation
+cursors let retained parents consume only untried offspring.  Independent
+operator-prior populations and measured migration remain open.
 
 Use a small fixed island count with different operator priors: obstruction
 repair, scope mutation, expression structure, theorem-kernel composition, and
@@ -182,7 +198,15 @@ numeric tuning. Define niches from semantics rather than code shape:
 Migration should copy compact elites, not mutable shared state. A global
 append-only counterexample set is shared by every island.
 
-### P1 — exact hindsight and theorem accumulation
+### P1 — exact hindsight and theorem accumulation — first DAG landed
+
+Status 2026-09-01: typed proper Boolean subexpressions with positive coverage
+and zero frozen-batch false positives enter a bounded, explicitly untrusted
+ledger.  Compatible nodes compose under the exact OR rule after adaptive
+coverage screening and full replay.  Archives persist and revalidate the DAG
+across compatible campaigns.  Counterexample-separating premise selection,
+domain-overlap scoring, solver-state invariants, and kernel proof handles remain
+open.
 
 When a candidate fails, inspect its opcode trace and the exact search states it
 did settle. Extract:
