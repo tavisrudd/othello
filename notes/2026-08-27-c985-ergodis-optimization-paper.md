@@ -620,6 +620,13 @@ files are disposable and may be deleted at any time.
    JSON/JSONL remain the protocol, persistence, bulk-batch, and diagnostic
    representations.  Full all-feature tests, strict all-target/all-feature
    clippy, formatting, and documentation pass, and no solve-loop code changed.
+   Commit `cc7a6bd4d` closes the C1015 bulk-authoring asymmetry: the streaming
+   `ergodisctl batch` reader now accepts either lowered bytecode or the same
+   high-level typed expression JSON accepted by `try`, and lowers both through
+   one bounded helper before sending candidates. The daemon wire format remains
+   lowered bytecode, JSONL remains streaming/create-only, and no solver or
+   daemon hot path changes. A focused expression/bytecode identity control plus
+   the full all-target/all-feature suite, strict clippy, and doc tests pass.
    Commit `aed0d7a89` exposes that parser's bounded lexer, token locations,
    name/literal contracts, and scalar expression parser/formatter as one
    domain-neutral cold control-plane substrate.  The complete public
