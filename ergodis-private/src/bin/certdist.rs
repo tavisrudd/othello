@@ -1247,6 +1247,124 @@ fn build_bracket(code: &CodeIdentity, levels: &[LevelRecord], upper: &[UpperReco
     }
 }
 
+#[derive(Debug, PartialEq, Eq)]
+struct VerifiedBracketShape {
+    lower: u16,
+    upper: Option<u16>,
+    exact: bool,
+    admissible_values: Vec<u16>,
+}
+
+/// Derive only the numeric bracket claims from the source input and records.
+/// This intentionally does not call the producer's `build_bracket` routine or
+/// trust its cached witness checks/provenance strings.
+fn independently_verify_bracket(
+    code: &CodeIdentity,
+    levels: &[LevelRecord],
+    upper_records: &[UpperRecord],
+    problem: &SparseProblem,
+) -> Result<VerifiedBracketShape> {
+    let mut lower = 1_u16;
+    let mut exact_from_exhaustion: Option<u16> = None;
+    let mut upper: Option<u16> = None;
+
+    for level in levels {
+        match (level.minimum_witness_weight, level.minimum_witness.is_empty()) {
+            (Some(_), true) | (None, false) => bail!(
+                "radius {} has inconsistent witness presence and weight",
+                level.requested_radius
+            ),
+            (Some(weight), false) => {
+                let check = classify_support(problem, &level.minimum_witness)?;
+                if !check.is_logical_operator || check.weight != usize::from(weight) {
+                    bail!(
+                        "radius {} witness does not independently replay at weight {weight}",
+                        level.requested_radius
+                    );
+                }
+                upper = Some(upper.map_or(weight, |prior| prior.min(weight)));
+                if level.coverage_complete {
+                    exact_from_exhaustion = Some(
+                        exact_from_exhaustion.map_or(weight, |prior| prior.min(weight)),
+                    );
+                }
+            }
+            (None, true) if level.coverage_complete => {
+                let mut candidate = level
+                    .searched_maximum_weight
+                    .checked_add(1)
+                    .context("lower-bound radius overflows u16")?;
+                if code.all_ones_in_physical_row_space && candidate % 2 == 1 {
+                    candidate = candidate
+                        .checked_add(1)
+                        .context("parity-adjusted lower bound overflows u16")?;
+                }
+                lower = lower.max(candidate);
+            }
+            (None, true) => {}
+        }
+    }
+
+    for record in upper_records {
+        match (record.weight, record.witness.is_empty()) {
+            (Some(_), true) | (None, false) => bail!(
+                "upper record {} has inconsistent witness presence and weight",
+                record.source
+            ),
+            (Some(weight), false) => {
+                let check = classify_support(problem, &record.witness)?;
+                if !check.is_logical_operator || check.weight != usize::from(weight) {
+                    bail!(
+                        "upper record {} does not independently replay at weight {weight}",
+                        record.source
+                    );
+                }
+                upper = Some(upper.map_or(weight, |prior| prior.min(weight)));
+            }
+            (None, true) => {}
+        }
+    }
+
+    if let Some(exact) = exact_from_exhaustion {
+        return Ok(VerifiedBracketShape {
+            lower: exact,
+            upper: Some(exact),
+            exact: true,
+            admissible_values: vec![exact],
+        });
+    }
+    if upper.is_some_and(|value| value < lower) {
+        bail!("independently replayed upper bound is below the exhausted lower bound");
+    }
+    let mut admissible_values = Vec::new();
+    if let Some(upper) = upper {
+        let step = if code.all_ones_in_physical_row_space {
+            2_u16
+        } else {
+            1_u16
+        };
+        let mut value = lower;
+        loop {
+            admissible_values.push(value);
+            if value == upper {
+                break;
+            }
+            value = value
+                .checked_add(step)
+                .context("admissible bracket values overflow u16")?;
+            if value > upper {
+                break;
+            }
+        }
+    }
+    Ok(VerifiedBracketShape {
+        lower,
+        upper,
+        exact: upper == Some(lower),
+        admissible_values,
+    })
+}
+
 fn load_upper_records(job: &Path) -> Result<Vec<UpperRecord>> {
     let dir = job.join("upper");
     let mut records = Vec::new();
@@ -1439,7 +1557,7 @@ enum Job {
         #[arg(long)]
         certificate: PathBuf,
         #[arg(long)]
-        input: Option<PathBuf>,
+        input: PathBuf,
         /// Re-run this many shards of the deepest complete level and compare bit-for-bit.
         #[arg(long, default_value_t = 0)]
         recheck_shards: u32,
@@ -1928,7 +2046,7 @@ fn cmd_combine(certificates: Vec<PathBuf>, label: String, out: Option<PathBuf>) 
 
 fn cmd_verify(
     certificate: PathBuf,
-    input: Option<PathBuf>,
+    input: PathBuf,
     recheck_shards: u32,
     job: Option<PathBuf>,
     threads: usize,
@@ -1951,24 +2069,15 @@ fn cmd_verify(
     let mut failures: Vec<String> = Vec::new();
     let mut checks = 0usize;
 
-    // 1. Code identity re-derived from the input.
-    let problem = match &input {
-        Some(path) => {
-            let (problem, raw) = load_problem(path)?;
-            let derived = CodeIdentity::derive(&problem, &raw);
-            checks += 1;
-            if derived != parsed.code {
-                failures.push("code identity re-derived from the input does not match the certificate".to_string());
-            } else {
-                println!("[ok] code identity, rank, kernel dimension, parity gate and input sha256 all re-derived from the input");
-            }
-            Some(problem)
-        }
-        None => {
-            println!("[--] no --input given; code identity and witnesses are NOT re-derived");
-            None
-        }
-    };
+    // 1. Code identity re-derived from the required input.
+    let (problem, raw) = load_problem(&input)?;
+    let derived = CodeIdentity::derive(&problem, &raw);
+    checks += 1;
+    if derived != parsed.code {
+        failures.push("code identity re-derived from the input does not match the certificate".to_string());
+    } else {
+        println!("[ok] code identity, rank, kernel dimension, parity gate and input sha256 all re-derived from the input");
+    }
 
     // 2. Shard cover completeness and internal consistency.
     for level in &parsed.levels {
@@ -2033,54 +2142,59 @@ fn cmd_verify(
     }
 
     // 3. Every witness is re-verified from the input over GF(2).
-    if let Some(problem) = &problem {
-        for level in &parsed.levels {
-            if level.minimum_witness.is_empty() {
-                continue;
-            }
-            checks += 1;
-            let check = classify_support(problem, &level.minimum_witness)?;
-            if !check.is_logical_operator
-                || Some(check.weight as u16) != level.minimum_witness_weight
-            {
-                failures.push(format!(
-                    "radius {}: enumeration witness is not a logical operator of the claimed weight",
-                    level.requested_radius
-                ));
-            } else {
-                println!(
-                    "[ok] radius {:3}: witness of weight {} re-verified (0 physical violations, {} logical observations triggered)",
-                    level.requested_radius, check.weight, check.logical_observations_triggered
-                );
-            }
+    for level in &parsed.levels {
+        if level.minimum_witness.is_empty() {
+            continue;
         }
-        for record in &parsed.upper_bounds {
-            if record.witness.is_empty() {
-                continue;
-            }
-            checks += 1;
-            let check = classify_support(problem, &record.witness)?;
-            if !check.is_logical_operator {
-                failures.push(format!("upper-bound witness from {} is not a logical operator", record.source));
-            } else {
-                println!(
-                    "[ok] upper-bound witness from {} has weight {} and is a genuine logical operator",
-                    record.source, check.weight
-                );
-            }
+        checks += 1;
+        let check = classify_support(&problem, &level.minimum_witness)?;
+        if !check.is_logical_operator || Some(check.weight as u16) != level.minimum_witness_weight {
+            failures.push(format!(
+                "radius {}: enumeration witness is not a logical operator of the claimed weight",
+                level.requested_radius
+            ));
+        } else {
+            println!(
+                "[ok] radius {:3}: witness of weight {} re-verified (0 physical violations, {} logical observations triggered)",
+                level.requested_radius, check.weight, check.logical_observations_triggered
+            );
+        }
+    }
+    for record in &parsed.upper_bounds {
+        if record.witness.is_empty() {
+            continue;
+        }
+        checks += 1;
+        let check = classify_support(&problem, &record.witness)?;
+        if !check.is_logical_operator || Some(check.weight as u16) != record.weight {
+            failures.push(format!(
+                "upper-bound witness from {} is not a logical operator of the claimed weight",
+                record.source
+            ));
+        } else {
+            println!(
+                "[ok] upper-bound witness from {} has weight {} and is a genuine logical operator",
+                record.source, check.weight
+            );
         }
     }
 
-    // 4. The bracket is recomputed from the records, not trusted.
+    // 4. The numeric bracket is independently derived from replayed witnesses
+    // and complete-exhaustion records, not through the producer's builder.
     checks += 1;
-    let recomputed = build_bracket(&parsed.code, &parsed.levels, &parsed.upper_bounds);
-    if recomputed.lower != parsed.bracket.lower
-        || recomputed.upper != parsed.bracket.upper
-        || recomputed.exact != parsed.bracket.exact
+    let independently_verified =
+        independently_verify_bracket(&derived, &parsed.levels, &parsed.upper_bounds, &problem)?;
+    if independently_verified.lower != parsed.bracket.lower
+        || independently_verified.upper != parsed.bracket.upper
+        || independently_verified.exact != parsed.bracket.exact
+        || independently_verified.admissible_values != parsed.bracket.admissible_values
     {
-        failures.push("the bracket recomputed from the records disagrees with the certificate".to_string());
+        failures.push(
+            "the bracket independently derived from the input and records disagrees with the certificate"
+                .to_string(),
+        );
     } else {
-        println!("[ok] bracket recomputed from the shard and witness records");
+        println!("[ok] bracket independently derived from replayed witnesses and shard cover");
     }
 
     let structural_seconds = start.elapsed().as_secs_f64();
@@ -2092,7 +2206,6 @@ fn cmd_verify(
     // 5. Optional: re-run shards. This is the only check that re-does search.
     if recheck_shards > 0 {
         let job = job.context("--recheck-shards requires --job")?;
-        let input = input.context("--recheck-shards requires --input")?;
         let Some(level) = parsed
             .levels
             .iter()
@@ -2102,13 +2215,17 @@ fn cmd_verify(
             bail!("no complete level to re-check");
         };
         let native = binaries.native();
-        let native_sha = fs::read(&native).ok().map(|bytes| hex_digest(&bytes));
-        if let (Some(recorded), Some(current)) = (&parsed.toolchain.native_sha256, &native_sha) {
-            if recorded != current {
-                println!(
-                    "[!!] the enumerator on the command line ({current}) is not the one that produced the certificate ({recorded}); candidate counts are not comparable across core revisions"
-                );
-            }
+        let current = hex_digest(
+            &fs::read(&native)
+                .with_context(|| format!("reading recheck enumerator {}", native.display()))?,
+        );
+        let recorded = parsed.toolchain.native_sha256.as_deref().context(
+            "certificate does not record the enumerator digest required for shard replay",
+        )?;
+        if recorded != current {
+            bail!(
+                "recheck enumerator digest {current} does not match certificate digest {recorded}"
+            );
         }
         let temp = job.join("recheck");
         fs::create_dir_all(&temp)?;
@@ -2263,5 +2380,86 @@ fn main() -> Result<()> {
             threads,
             binaries,
         } => cmd_verify(certificate, input, recheck_shards, job, threads, binaries),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn problem() -> SparseProblem {
+        SparseProblem {
+            label: "fixture".into(),
+            coordinate_count: 3,
+            physical_checks: vec![vec![0, 1]],
+            logical_observations: vec![vec![2]],
+            anchors: vec![0, 1, 2],
+            maximum_weight: 3,
+            incumbent_support: Vec::new(),
+            metadata: None,
+        }
+    }
+
+    fn empty_level(searched: u16) -> LevelRecord {
+        LevelRecord {
+            requested_radius: searched,
+            searched_maximum_weight: searched,
+            shard_count: 1,
+            shards_present: 1,
+            coverage_complete: true,
+            total_candidates: 0,
+            total_kernel_supports: 0,
+            total_nontrivial_supports: 0,
+            minimum_witness_weight: None,
+            minimum_witness: Vec::new(),
+            shards: Vec::new(),
+        }
+    }
+
+    #[test]
+    fn independent_bracket_ignores_cached_checks_and_replays_supports() {
+        let problem = problem();
+        let raw = serde_json::to_vec(&problem).unwrap();
+        let code = CodeIdentity::derive(&problem, &raw);
+        let mut upper = UpperRecord {
+            source: "fixture".into(),
+            parameters: String::new(),
+            requested_trials: 1,
+            completed_trials: 1,
+            seed: 0,
+            threads: 1,
+            weight: Some(1),
+            witness: vec![2],
+            witness_check: Some(SupportCheck {
+                weight: 99,
+                physical_checks_violated: 99,
+                logical_observations_triggered: 0,
+                is_logical_operator: false,
+            }),
+        };
+        let shape = independently_verify_bracket(&code, &[], &[upper.clone()], &problem).unwrap();
+        assert_eq!(
+            shape,
+            VerifiedBracketShape {
+                lower: 1,
+                upper: Some(1),
+                exact: true,
+                admissible_values: vec![1],
+            }
+        );
+        upper.witness = vec![0];
+        assert!(independently_verify_bracket(&code, &[], &[upper], &problem).is_err());
+    }
+
+    #[test]
+    fn independent_bracket_checks_overflow_and_presence_consistency() {
+        let problem = problem();
+        let raw = serde_json::to_vec(&problem).unwrap();
+        let code = CodeIdentity::derive(&problem, &raw);
+        let mut level = empty_level(u16::MAX);
+        assert!(independently_verify_bracket(&code, &[level.clone()], &[], &problem).is_err());
+        level.searched_maximum_weight = 1;
+        level.minimum_witness_weight = Some(1);
+        assert!(independently_verify_bracket(&code, &[level], &[], &problem).is_err());
     }
 }
