@@ -321,7 +321,7 @@ files are disposable and may be deleted at any time.
    three-generator pack; private vocabulary remains outside core. The stamped
    orbit set is now size-gated and packed for large workspaces, and one-worker
    orbit publication no longer uses locked read-modify-write operations. The
-   The first power-of-two action specialization is now accepted in commit
+   first power-of-two action specialization is now accepted in commit
    `91abb7d0b`.  The compiler recognizes an exact unit anti-diagonal matrix and
    records an otherwise-invalid tape sentinel in the existing 16-byte action
    record; the runner evaluates that generator by one byte swap and constant
@@ -350,9 +350,49 @@ files are disposable and may be deleted at any time.
    `c985-c1018-unit-reversal-q32-control.tsv`.  The public kernel comparison is
    the durable admission basis; the application runs use the explicitly
    foreign private C1018 adapter only as end-to-end translation evidence.
-   Current next target is a fresh whole-worker profile of this endpoint,
-   followed by a reusable characteristic-two/Pascal action reduction if the
-   lower-triangular generator remains material; do not return to rejected
+   The characteristic-two Pascal successor is accepted in commit `8b19e8f45`.
+   Lucas' theorem identifies its lower-triangular matrix with the Boolean
+   subset-zeta transform: entry `(i,j)` is one exactly when the bit set of `j`
+   is contained in that of `i`.  The validate-once compiler recognizes that
+   exact matrix and records a second sentinel in the unchanged 16-byte action;
+   the hot runner replaces five lane-tape terms by three fixed packed
+   shift/mask/XOR stages.  Exhaustive `PG(4,8)` comparison with the generic
+   matrix action passes on all 4,681 points, and the measured loop allocates
+   zero times.  Against the commit `f13145bae` endpoint, fifteen immutable,
+   pinned public-kernel pairs over 29,970,000 transitions improve cycles
+   1.194x (`t=55.89`), instructions 1.185x, branches 1.281x, and task clock
+   1.193x (`t=54.63`) with exact work/checksum.  Fair fresh builds add 1,043
+   text bytes and 24 data bytes but remove 1,096 BSS bytes, for 29 fewer loaded
+   text/data/BSS bytes overall; the application executable differs by only 64
+   file bytes and seven fewer loaded bytes.
+
+   The immutable full C1018 control is deliberately narrower.  At one thread,
+   instructions and branches are equal within one part per million and cycles
+   are unresolved (1.022x, `t=0.82`); five wall pairs have a favourable 1.047x
+   point result (`t=2.97`).  At twelve threads, cycles/task clock improve
+   1.068x/1.064x (`t=4.71/4.76`) and five wall pairs improve 1.085x
+   (`t=2.62`), but instructions and branches are unresolved because worker
+   scheduling changes repeat work.  Those timing gains are retained as
+   translation evidence, not attributed to instruction removal.  Median RSS
+   is 8,460/9,052 KiB at one thread and 52,212/53,396 KiB at twelve.  The q=32
+   small gate preserves output and exact instruction/branch counts while
+   improving cycles 1.015x (`t=7.79`); no small regression is hidden.  An
+   earlier cross-build comparison was discarded after unrelated private-crate
+   edits changed fat-codegen shape and tripled both arms' downstream rank
+   work.  The retained controls rebuild both public arms from commit
+   `f13145bae` with one immutable private snapshot.  Fresh all-feature clippy,
+   424 library tests, every binary/integration target, Python parity, and doc
+   tests pass.  Raw evidence is
+   `ergodis-private/evidence/c985-binary-lane-subset-zeta-kernel-ab.tsv`,
+   `c985-c1018-subset-zeta-q64-counters.tsv`,
+   `c985-c1018-subset-zeta-q64-wall.tsv`, and
+   `c985-c1018-subset-zeta-q32-control.tsv`.
+
+   Current next target is the exact diagonal projective-action theorem: a
+   diagonal map preserves the projective pivot, so precompiled coefficient
+   ratios can map the canonical suffix directly and remove image construction,
+   pivot scanning, inversion, and the second multiplication pass.  Keep the
+   same immutable-build and small-control gates; do not return to rejected
    generic inlining or hash-table/container shortcuts.
    Keep tactical plane completion in
    `ergodis-private`; do not specialize the public core for C1018.
