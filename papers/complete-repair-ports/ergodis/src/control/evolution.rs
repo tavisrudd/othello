@@ -14,7 +14,7 @@ use std::sync::Arc;
 const EVOLUTION_EVIDENCE_SCHEMA: &str = "ergodis-evolution-evidence-v0";
 const MAX_EVOLUTION_IMPORT_BYTES: u64 = 16 * 1024 * 1024;
 const MAX_EVOLUTION_RECORD_BYTES: usize = 256 * 1024;
-const MAX_EVOLUTION_FOOTER_BYTES: u64 = 8 * 1024;
+const BASE_EVOLUTION_FOOTER_BYTES: u64 = 8 * 1024;
 const MAX_FAILURE_PROBES: usize = 8;
 const MAX_TARGETED_MUTATIONS: usize = 24;
 const MAX_HINDSIGHT_FRAGMENTS: usize = 64;
@@ -24,6 +24,7 @@ const MAX_HINDSIGHT_FRAGMENTS_PER_PARENT: usize = 4;
 const MAX_HINDSIGHT_COMPOSITION_PROBES: usize = 64;
 const MAX_HINDSIGHT_COMPOSITION_PROBES_PER_GENERATION: usize = 16;
 const MAX_HINDSIGHT_COMPOSITIONS_PER_GENERATION: usize = 8;
+pub(super) const MAX_EVOLUTION_TARGET_FIELDS: usize = 4;
 
 #[derive(Clone)]
 pub(super) struct EvolutionIdentity {
@@ -45,6 +46,12 @@ struct EvolutionEvidenceHeader {
     problem: String,
     fields: Box<[String]>,
     generator: Option<FeatureGeneratorProvenance>,
+    #[serde(default, skip_serializing_if = "target_fields_empty")]
+    target_fields: Box<[String]>,
+}
+
+fn target_fields_empty(fields: &[String]) -> bool {
+    fields.is_empty()
 }
 
 impl From<&EvolutionIdentity> for EvolutionEvidenceHeader {
@@ -57,6 +64,7 @@ impl From<&EvolutionIdentity> for EvolutionEvidenceHeader {
             problem: identity.problem.clone(),
             fields: identity.fields.clone(),
             generator: identity.generator.clone(),
+            target_fields: Box::new([]),
         }
     }
 }
@@ -131,13 +139,91 @@ impl EvolutionProgress {
     }
 }
 
-#[derive(Clone, Copy)]
 pub(super) struct EvolutionBounds {
     pub generations: usize,
     pub beam: usize,
     pub max_candidates: usize,
     pub byte_limit: u64,
-    pub target_field: Option<usize>,
+    pub target_fields: Box<[usize]>,
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
+struct TargetKey {
+    values: [i64; MAX_EVOLUTION_TARGET_FIELDS],
+    len: u8,
+    _pad: [u8; 7],
+}
+
+const _: () = assert!(std::mem::size_of::<TargetKey>() == 40);
+const _: () = assert!(std::mem::align_of::<TargetKey>() == 8);
+
+impl TargetKey {
+    fn from_row(row: &[i64], fields: &[usize]) -> Self {
+        let mut values = [0_i64; MAX_EVOLUTION_TARGET_FIELDS];
+        for (slot, &field) in fields.iter().enumerate() {
+            values[slot] = row[field];
+        }
+        Self {
+            values,
+            len: fields.len() as u8,
+            _pad: [0; 7],
+        }
+    }
+
+    fn values(&self) -> &[i64] {
+        &self.values[..usize::from(self.len)]
+    }
+}
+
+struct TargetClasses {
+    row_classes: Box<[u32]>,
+    keys: Box<[TargetKey]>,
+}
+
+impl TargetClasses {
+    fn compile(batch: &FeatureBatch, fields: &[usize]) -> Result<Self, ControlError> {
+        if fields.is_empty() {
+            return Ok(Self {
+                row_classes: Box::new([]),
+                keys: Box::new([]),
+            });
+        }
+        let mut classes = BTreeMap::<TargetKey, u32>::new();
+        let mut keys = Vec::<TargetKey>::new();
+        let mut row_classes = Vec::with_capacity(batch.weights.len());
+        for row in 0..batch.weights.len() {
+            let key = TargetKey::from_row(batch.row(row), fields);
+            let class = if let Some(&class) = classes.get(&key) {
+                class
+            } else {
+                let class = u32::try_from(keys.len()).map_err(|_| {
+                    ControlError::Invalid("too many evolution target classes".into())
+                })?;
+                keys.push(key);
+                classes.insert(key, class);
+                class
+            };
+            row_classes.push(class);
+        }
+        Ok(Self {
+            row_classes: row_classes.into_boxed_slice(),
+            keys: keys.into_boxed_slice(),
+        })
+    }
+
+    fn class(&self, row: usize) -> Option<u32> {
+        self.row_classes.get(row).copied()
+    }
+
+    fn values(&self, class: u32) -> &[i64] {
+        self.keys[class as usize].values()
+    }
+
+    fn footer_reserve(&self, target_fields: usize) -> u64 {
+        let retained_classes = self.keys.len().min(64) as u64;
+        BASE_EVOLUTION_FOOTER_BYTES + retained_classes * (64 + 24 * target_fields as u64)
+    }
 }
 
 struct ScopeMutationProfile {
@@ -242,7 +328,7 @@ struct SemanticNiche {
     operator: &'static str,
     failure: FailureNiche,
     semantic_op_row_log2: u8,
-    target_value: Option<i64>,
+    target_class: Option<u32>,
 }
 
 impl SemanticNiche {
@@ -251,7 +337,7 @@ impl SemanticNiche {
         false_positive: u64,
         false_negative: u64,
         semantic_op_rows: u64,
-        target_value: Option<i64>,
+        target_class: Option<u32>,
     ) -> Self {
         let failure = match (false_positive != 0, false_negative != 0) {
             (false, false) => FailureNiche::Perfect,
@@ -263,7 +349,7 @@ impl SemanticNiche {
             operator,
             failure,
             semantic_op_row_log2: semantic_op_rows.checked_ilog2().unwrap_or(0) as u8,
-            target_value,
+            target_class,
         }
     }
 }
@@ -1410,14 +1496,24 @@ pub(super) fn run_evolution(
     bounds: EvolutionBounds,
     progress: Arc<EvolutionProgress>,
 ) -> Result<Value, ControlError> {
-    if bounds
-        .target_field
-        .is_some_and(|field| field >= batch.fields.len())
+    if bounds.target_fields.len() > MAX_EVOLUTION_TARGET_FIELDS
+        || bounds
+            .target_fields
+            .iter()
+            .any(|&field| field >= batch.fields.len())
+        || bounds
+            .target_fields
+            .iter()
+            .copied()
+            .collect::<BTreeSet<_>>()
+            .len()
+            != bounds.target_fields.len()
     {
         return Err(ControlError::Invalid(
-            "evolution target field is out of range".into(),
+            "evolution target fields are invalid".into(),
         ));
     }
+    let target_classes = TargetClasses::compile(&batch, &bounds.target_fields)?;
     // SAFETY: setpriority has no pointer arguments; `who = 0` selects only the
     // calling Linux task. Failure is reported in the job summary.
     let low_priority = unsafe { libc::setpriority(libc::PRIO_PROCESS, 0, 10) } == 0;
@@ -1434,7 +1530,13 @@ pub(super) fn run_evolution(
         field_index: &field_index,
     };
     let mut writer = BufWriter::new(output);
-    let mut header = serde_json::to_vec(&EvolutionEvidenceHeader::from(&identity))?;
+    let mut evidence_header = EvolutionEvidenceHeader::from(&identity);
+    evidence_header.target_fields = bounds
+        .target_fields
+        .iter()
+        .map(|&field| batch.fields[field].clone())
+        .collect();
+    let mut header = serde_json::to_vec(&evidence_header)?;
     header.push(b'\n');
     if header.len() as u64 > bounds.byte_limit {
         return Err(ControlError::Invalid(
@@ -1442,9 +1544,10 @@ pub(super) fn run_evolution(
         ));
     }
     let header_bytes = header.len() as u64;
+    let footer_reserve = target_classes.footer_reserve(bounds.target_fields.len());
     let candidate_byte_limit = bounds
         .byte_limit
-        .checked_sub(MAX_EVOLUTION_FOOTER_BYTES)
+        .checked_sub(footer_reserve)
         .filter(|limit| *limit >= header_bytes)
         .ok_or_else(|| {
             ControlError::Invalid(
@@ -1477,7 +1580,7 @@ pub(super) fn run_evolution(
     let mut hindsight_replayed = 0_u64;
     let mut hindsight_replay_rejections = 0_u64;
     let mut hindsight_replay_rows = 0_u64;
-    let mut target_selection_slots = BTreeMap::<i64, u64>::new();
+    let mut target_selection_slots = BTreeMap::<u32, u64>::new();
     let mut target_selection_overflow = 0_u64;
     let mut prior_parent_scores = BTreeMap::<String, CandidateScore>::new();
     let mut retained_elites = Vec::<ExpansionParent>::new();
@@ -1721,15 +1824,16 @@ pub(super) fn run_evolution(
             }
             let failure_shape =
                 failure_shape(&batch, &plan, evaluation.first_mismatch, &field_index);
-            let target_value = bounds
-                .target_field
-                .and_then(|field| evaluation.first_mismatch.map(|row| batch.row(row)[field]));
+            let target_class = evaluation
+                .first_mismatch
+                .and_then(|row| target_classes.class(row));
+            let target_values = target_class.map(|class| target_classes.values(class));
             let niche = SemanticNiche::new(
                 pending.operator,
                 evaluation.weighted_false_positive,
                 evaluation.weighted_false_negative,
                 semantic_op_rows,
-                target_value,
+                target_class,
             );
             let failure_record = failure_shape_record(&batch, &failure_shape, &evaluation);
             outcome_classes
@@ -1742,6 +1846,7 @@ pub(super) fn run_evolution(
                 "source_evidence": pending.source_evidence,
                 "operator": pending.operator,
                 "semantic_niche": niche,
+                "target_values": target_values,
                 "plan": &plan,
                 "hash": &compiled.hash,
                 "equivalent_to": equivalent_to,
@@ -1835,13 +1940,13 @@ pub(super) fn run_evolution(
             break;
         }
         for parent in &parents {
-            let Some(value) = parent.niche.target_value else {
+            let Some(class) = parent.niche.target_class else {
                 continue;
             };
-            if let Some(count) = target_selection_slots.get_mut(&value) {
+            if let Some(count) = target_selection_slots.get_mut(&class) {
                 checked_counter_add(count, 1, "target selection slot")?;
             } else if target_selection_slots.len() < 64 {
-                target_selection_slots.insert(value, 1);
+                target_selection_slots.insert(class, 1);
             } else {
                 checked_counter_add(
                     &mut target_selection_overflow,
@@ -2015,6 +2120,30 @@ pub(super) fn run_evolution(
         retained_elites = next_retained_elites;
     }
     let candidate_bytes = bytes;
+    let target_fields = bounds
+        .target_fields
+        .iter()
+        .map(|&field| batch.fields[field].as_str())
+        .collect::<Vec<_>>();
+    let target_field = (target_fields.len() == 1).then(|| target_fields[0]);
+    let target_selection_classes = target_selection_slots
+        .iter()
+        .map(|(&class, &slots)| {
+            json!({
+                "class": class,
+                "values": target_classes.values(class),
+                "slots": slots,
+            })
+        })
+        .collect::<Vec<_>>();
+    let target_selection_values = if target_fields.len() == 1 {
+        target_selection_slots
+            .iter()
+            .map(|(&class, &slots)| (target_classes.values(class)[0], slots))
+            .collect::<BTreeMap<_, _>>()
+    } else {
+        BTreeMap::new()
+    };
     let mut footer_summary = json!({
         "tested": tested,
         "perfect": perfect,
@@ -2041,8 +2170,10 @@ pub(super) fn run_evolution(
         "hindsight_replayed": hindsight_replayed,
         "hindsight_replay_rejections": hindsight_replay_rejections,
         "hindsight_replay_rows": hindsight_replay_rows,
-        "target_field": bounds.target_field.map(|field| batch.fields[field].as_str()),
-        "target_selection_slots": &target_selection_slots,
+        "target_field": target_field,
+        "target_fields": &target_fields,
+        "target_selection_slots": &target_selection_values,
+        "target_selection_classes": &target_selection_classes,
         "target_selection_overflow": target_selection_overflow,
         "operator_scorecards": &operator_scorecards,
         "bytes": bytes,
@@ -2072,7 +2203,7 @@ pub(super) fn run_evolution(
             "evolution summary byte count did not stabilize".into(),
         ));
     }
-    if footer.len() as u64 > MAX_EVOLUTION_FOOTER_BYTES {
+    if footer.len() as u64 > footer_reserve {
         return Err(ControlError::Invalid(
             "evolution summary exceeds its reserved evidence bound".into(),
         ));
@@ -2107,8 +2238,10 @@ pub(super) fn run_evolution(
         "hindsight_replayed": hindsight_replayed,
         "hindsight_replay_rejections": hindsight_replay_rejections,
         "hindsight_replay_rows": hindsight_replay_rows,
-        "target_field": bounds.target_field.map(|field| batch.fields[field].as_str()),
-        "target_selection_slots": target_selection_slots,
+        "target_field": target_field,
+        "target_fields": target_fields,
+        "target_selection_slots": target_selection_values,
+        "target_selection_classes": target_selection_classes,
         "target_selection_overflow": target_selection_overflow,
         "operator_scorecards": operator_scorecards,
         "bytes": bytes,
@@ -2648,9 +2781,9 @@ mod tests {
         assert_eq!(selection.parents[1].hash, "second-a");
 
         let mut target_zero = niche_candidate("target-zero", 10, "scope", Some(true), 8);
-        target_zero.niche.target_value = Some(0);
+        target_zero.niche.target_class = Some(0);
         let mut target_one = niche_candidate("target-one", 100, "scope", Some(true), 8);
-        target_one.niche.target_value = Some(1);
+        target_one.niche.target_class = Some(1);
         let selection = select_semantic_elites(vec![target_zero, target_one], &[], 2, 2);
         assert_eq!(selection.niche_slots, 2);
         assert_eq!(selection.global_slots, 0);
@@ -2684,6 +2817,28 @@ mod tests {
         assert_eq!(selection.retained_slots, 0);
         assert_eq!(selection.parents[0].hash, "best-a");
         assert_eq!(selection.parents[1].hash, "second-a");
+    }
+
+    #[test]
+    fn target_classes_intern_exact_multi_field_tuples() {
+        let batch = FeatureBatch {
+            presentation: "targets".into(),
+            problem: "classes".into(),
+            fields: vec!["root".into(), "debt".into()].into_boxed_slice(),
+            generator: None,
+            row_ids: vec![0, 1, 2].into_boxed_slice(),
+            weights: vec![1, 1, 1].into_boxed_slice(),
+            expected: vec![0].into_boxed_slice(),
+            values: vec![1, 2, 1, 2, 1, 3].into_boxed_slice(),
+        };
+        let classes = TargetClasses::compile(&batch, &[0, 1]).unwrap();
+        assert_eq!(classes.row_classes.as_ref(), &[0, 0, 1]);
+        assert_eq!(classes.values(0), &[1, 2]);
+        assert_eq!(classes.values(1), &[1, 3]);
+
+        let disabled = TargetClasses::compile(&batch, &[]).unwrap();
+        assert_eq!(disabled.class(0), None);
+        assert!(disabled.keys.is_empty());
     }
 
     #[test]
@@ -2854,7 +3009,7 @@ mod tests {
                 beam: 1,
                 max_candidates: 2,
                 byte_limit: 64 * 1024,
-                target_field: None,
+                target_fields: Box::new([]),
             },
             Arc::new(EvolutionProgress::new()),
         )
@@ -2979,7 +3134,7 @@ mod tests {
                 beam: 1,
                 max_candidates: 2,
                 byte_limit: 64 * 1024,
-                target_field: None,
+                target_fields: Box::new([]),
             },
             Arc::new(EvolutionProgress::new()),
         )
@@ -3068,7 +3223,7 @@ mod tests {
                 beam: 1,
                 max_candidates: 1,
                 byte_limit: 64 * 1024,
-                target_field: None,
+                target_fields: Box::new([]),
             },
             Arc::new(EvolutionProgress::new()),
         )

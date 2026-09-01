@@ -191,15 +191,21 @@ the mutation operator, the complete false-positive/false-negative error class,
 and the base-two bucket of semantic-operation rows.  It admits the best
 outcome-distinct candidate from each niche in global score order, up to the
 beam bound, then fills remaining beam positions by the ordinary global order.
-An optional `evolve-start --target-field NAME` adds the named feature's value
-on the candidate's first mismatching row to that niche.  The field must be
-named explicitly and must exist in the frozen batch; no feature-name inference
-is performed.  This preserves at least one elite from each admitted target
+Up to four repeated `evolve-start --target-field NAME` options add the exact
+tuple of those named features on the candidate's first mismatching row to that
+niche. Fields must be distinct and present in the frozen batch; no feature-name
+inference is performed. Tuples are interned once per frozen row into compact
+`u32` class IDs, so ranked candidates carry one class rather than repeated
+feature vectors. This preserves at least one elite from each admitted target
 error stratum while the ordinary weighted evaluation score still orders
-high-mass strata globally.  Perfect candidates, which have no mismatching row,
-occupy the target-independent stratum.  The completion summary names the
-target field and records up to 64 selected values plus a checked overflow
-count; the feature is daemon-only and changes no solve-worker safe point.
+high-mass strata globally. Perfect candidates, which have no mismatching row,
+occupy the target-independent stratum. The evidence header records the ordered
+target fields, each candidate record carries its exact target values, and the
+completion summary records up to 64 selected classes plus a checked overflow
+count. The former singular `target_field` request and summary fields remain a
+compatibility projection when exactly one target is present. Footer reservation
+scales with the frozen class bound. The feature is daemon-only and changes no
+solve-worker safe point.
 Every evidence record carries its niche and the summary counts niche and global
 elite positions.  A selected elite with an unconsumed deterministic mutation
 suffix carries a bounded ordinal cursor into the next generation.  Resumption

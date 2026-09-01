@@ -26,7 +26,7 @@ mod vm;
 pub use client::PlanArena;
 use evolution::{
     load_evolution_archive, run_evolution, EvolutionBounds, EvolutionIdentity, EvolutionProgress,
-    EvolutionSeed,
+    EvolutionSeed, MAX_EVOLUTION_TARGET_FIELDS,
 };
 use synthesis::learn_decision_tree;
 pub use text::{
@@ -1113,9 +1113,10 @@ impl Campaign {
             });
         }
         let direct_seeds = lowered.len();
-        let target_field_name = match args.get("target_field") {
-            None | Some(Value::Null) => None,
-            Some(value) => Some(
+        let mut target_field_names = Vec::<String>::new();
+        match args.get("target_field") {
+            None | Some(Value::Null) => {}
+            Some(value) => target_field_names.push(
                 value
                     .as_str()
                     .ok_or_else(|| {
@@ -1123,9 +1124,41 @@ impl Campaign {
                     })?
                     .to_owned(),
             ),
-        };
-        let target_field = target_field_name
-            .as_ref()
+        }
+        match args.get("target_fields") {
+            None | Some(Value::Null) => {}
+            Some(Value::Array(values)) => {
+                for value in values {
+                    target_field_names.push(
+                        value
+                            .as_str()
+                            .ok_or_else(|| {
+                                ControlError::Invalid(
+                                    "evolve-start target_fields must contain strings".into(),
+                                )
+                            })?
+                            .to_owned(),
+                    );
+                }
+            }
+            Some(_) => {
+                return Err(ControlError::Invalid(
+                    "evolve-start target_fields must be an array".into(),
+                ));
+            }
+        }
+        if target_field_names.len() > MAX_EVOLUTION_TARGET_FIELDS {
+            return Err(ControlError::Invalid(format!(
+                "evolve-start accepts at most {MAX_EVOLUTION_TARGET_FIELDS} target fields"
+            )));
+        }
+        if target_field_names.iter().collect::<BTreeSet<_>>().len() != target_field_names.len() {
+            return Err(ControlError::Invalid(
+                "evolve-start target fields must be distinct".into(),
+            ));
+        }
+        let target_fields = target_field_names
+            .iter()
             .map(|name| {
                 self.batch
                     .fields
@@ -1137,7 +1170,9 @@ impl Campaign {
                         ))
                     })
             })
-            .transpose()?;
+            .collect::<Result<Vec<_>, _>>()?;
+        let target_field_name =
+            (target_field_names.len() == 1).then(|| target_field_names[0].clone());
         let identity = EvolutionIdentity {
             code_commit: self.manifest.code_commit.clone(),
             presentation_hash: self.manifest.presentation_hash.clone(),
@@ -1277,7 +1312,7 @@ impl Campaign {
             beam,
             max_candidates,
             byte_limit,
-            target_field,
+            target_fields: target_fields.into_boxed_slice(),
         };
         let handle = thread::Builder::new()
             .name(format!("ergodis-evolve-{}", &id[..8]))
@@ -1312,6 +1347,7 @@ impl Campaign {
             "replayed_seeds": replayed_seeds,
             "replayed_fragments": replayed_fragments,
             "target_field": target_field_name,
+            "target_fields": target_field_names,
         }))
     }
 
@@ -2325,11 +2361,11 @@ mod tests {
         fs::write(
             &data,
             concat!(
-                "{\"schema\":\"ergodis-campaign-data-v0\",\"presentation\":\"evolve\",\"problem\":\"threshold\",\"fields\":[\"x\"],\"rows\":4}\n",
-                "{\"id\":0,\"expected\":false,\"values\":[0]}\n",
-                "{\"id\":1,\"expected\":false,\"values\":[99]}\n",
-                "{\"id\":2,\"expected\":true,\"values\":[100]}\n",
-                "{\"id\":3,\"expected\":true,\"values\":[101]}\n"
+                "{\"schema\":\"ergodis-campaign-data-v0\",\"presentation\":\"evolve\",\"problem\":\"threshold\",\"fields\":[\"x\",\"root\"],\"rows\":4}\n",
+                "{\"id\":0,\"expected\":false,\"values\":[0,1]}\n",
+                "{\"id\":1,\"expected\":false,\"values\":[99,1]}\n",
+                "{\"id\":2,\"expected\":true,\"values\":[100,2]}\n",
+                "{\"id\":3,\"expected\":true,\"values\":[101,2]}\n"
             ),
         )
         .unwrap();
@@ -2362,6 +2398,29 @@ mod tests {
             .unwrap_err()
             .to_string()
             .contains("target_field must be a string"));
+        assert!(campaign
+            .evolution_start(&json!({"seeds": [], "target_fields": "x"}))
+            .unwrap_err()
+            .to_string()
+            .contains("target_fields must be an array"));
+        assert!(campaign
+            .evolution_start(&json!({"seeds": [], "target_fields": ["x", "x"]}))
+            .unwrap_err()
+            .to_string()
+            .contains("target fields must be distinct"));
+        assert!(campaign
+            .evolution_start(&json!({"seeds": [], "target_fields": ["x", 1]}))
+            .unwrap_err()
+            .to_string()
+            .contains("target_fields must contain strings"));
+        assert!(campaign
+            .evolution_start(&json!({
+                "seeds": [],
+                "target_fields": ["a", "b", "c", "d", "e"]
+            }))
+            .unwrap_err()
+            .to_string()
+            .contains("at most 4 target fields"));
         let seed = json!({
             "schema": PLAN_SCHEMA,
             "name": "threshold",
@@ -2391,11 +2450,12 @@ mod tests {
                 "generations": 4,
                 "beam": 2,
                 "max_candidates": 4,
-                "target_field": "x",
+                "target_fields": ["x", "root"],
             }))
             .unwrap();
         assert_eq!(started["state"], "running");
-        assert_eq!(started["target_field"], "x");
+        assert!(started["target_field"].is_null());
+        assert_eq!(started["target_fields"], json!(["x", "root"]));
         let completed = loop {
             let status = campaign.evolution_status().unwrap();
             if status["state"] != "running" {
@@ -2403,7 +2463,7 @@ mod tests {
             }
             thread::yield_now();
         };
-        assert_eq!(completed["state"], "complete");
+        assert_eq!(completed["state"], "complete", "{completed}");
         assert!(completed["summary"]["tested"].as_u64().unwrap() >= 2);
         assert!(completed["summary"]["perfect"].as_u64().unwrap() >= 1);
         assert_eq!(
@@ -2450,11 +2510,13 @@ mod tests {
         assert_eq!(completed["summary"]["selection_exploration_slots"], 2);
         assert_eq!(completed["summary"]["selection_guided_slots"], 0);
         assert_eq!(completed["summary"]["selection_balanced_slots"], 0);
-        assert_eq!(completed["summary"]["target_field"], "x");
+        assert!(completed["summary"]["target_field"].is_null());
+        assert_eq!(completed["summary"]["target_fields"], json!(["x", "root"]));
         assert_eq!(completed["summary"]["target_selection_overflow"], 0);
-        assert!(completed["summary"]["target_selection_slots"]
-            .as_object()
-            .is_some_and(|slots| !slots.is_empty()));
+        assert_eq!(completed["summary"]["target_selection_slots"], json!({}));
+        assert!(completed["summary"]["target_selection_classes"]
+            .as_array()
+            .is_some_and(|classes| !classes.is_empty()));
         assert_eq!(
             completed["summary"]["semantic_niche_slots"]
                 .as_u64()
@@ -2475,7 +2537,8 @@ mod tests {
         assert_eq!(records[1]["operator"], "seed");
         assert_eq!(records[1]["semantic_niche"]["operator"], "seed");
         assert_eq!(records[1]["semantic_niche"]["failure"], "false-positive");
-        assert_eq!(records[1]["semantic_niche"]["target_value"], 99);
+        assert_eq!(records[0]["target_fields"], json!(["x", "root"]));
+        assert_eq!(records[1]["target_values"], json!([99, 1]));
         assert!(records[1]["parent_hash"].is_null());
         assert_eq!(records[1]["failure_shape"]["kind"], "false-positive");
         assert_eq!(records[1]["failure_shape"]["first_mismatch_id"], 1);
@@ -2506,7 +2569,7 @@ mod tests {
             .skip(3)
             .all(|record| record["operator"] != "seed"));
         assert_eq!(records[5]["type"], "summary");
-        assert_eq!(records[5]["summary"]["target_field"], "x");
+        assert_eq!(records[5]["summary"]["target_fields"], json!(["x", "root"]));
         assert_eq!(records[5]["summary"]["bytes"], evidence.len() as u64);
         assert_eq!(
             records[5]["summary"]["bytes"],
