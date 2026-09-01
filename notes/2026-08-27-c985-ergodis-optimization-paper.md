@@ -2306,6 +2306,27 @@ files are disposable and may be deleted at any time.
    general contracts; C1016-specific quotient fields, targets, and conclusions
    remain private.
 
+   Commit `dbccdfa00` closes the first relational layer.  Daemon-owned evolve
+   now profiles exact field--field equality, inequality, and order plus bounded
+   checked add/subtract-to-constant predicates across up to 32 fields and
+   4,096 deterministically sampled rows.  It retains at most eight exact
+   weighted values per arithmetic pair, quotient-deduplicates candidates by
+   their complete sampled truth table, and exposes only the best 24 semantics
+   to mutation.  This reaches the motivating late-field shape: a neutral
+   30-field gate discovers an exact relation between fields 28 and 29 rather
+   than silently profiling only the first few coordinates.  From a constant
+   seed, the real daemon loop synthesized `left + right == 10` in generation
+   one, scored it perfect on all 12 training rows, and independently replayed
+   it at 8/8 on negative and out-of-training-range operands.  A 4,096-row by
+   32-field bound run retained 24 profiles while the whole daemon used 0.43
+   user-seconds and 6,552 KiB maximum RSS.  The path is cold, low-priority, and
+   does not touch solver loops.  Full all-target/all-feature tests, strict
+   clippy, and doc tests pass; compact evidence is
+   `ergodis-private/evidence/c985-relational-evolution-report.json`.
+   Provenance-bound presentation transitions, persistent promoted feature
+   DAGs, and typed set/subset-sum theorem templates remain separate authority
+   gates rather than being inferred from this scalar relational result.
+
    A disposable C1016-shaped side prototype tested zero-sized validated
    theorem-program witnesses without changing live C1016 source. The
    synthetic control was misleadingly positive. The first real seven-rule
