@@ -391,6 +391,26 @@ as each coherent tranche lands.
    kernels, treewidth/ZDD search on expander-like instances, block Wiedemann at
    current dimensions, and Hopcroft--Karp in the nanosecond-scale Hall loop.
 
+   Current-tree reconciliation changes that order slightly. Static and dynamic
+   incumbent fan-out are already present as worker-local relaxed mailboxes plus
+   controller fan-out, with the guarded 4,096-candidate pulse; C1027's item
+   2.1.2 is therefore an audit/documentation item, not new implementation. The
+   first isolated experiment was the sound-by-construction second greedy
+   packing order, measured against the checked-in BB288 input. At radius 16,
+   forward-plus-reverse greedy removes 22.3% of candidates but regresses warm
+   wall time by about 10%; reverse alone adds 6.4% candidates and is about 11%
+   slower. Both variants are therefore rejected and the production loop is
+   unchanged. A conflict-degree-sorted single order remains a distinct cold-
+   compile experiment rather than justification for paying twice per bound.
+   The subsequent full-MRV probe falsified C1027's tentative canonicity
+   argument: on BB288 at radius 16 it visits 4,021 zero-syndrome supports where
+   the production order visits 4,115, despite both returning no nontrivial
+   witness. The coordinate-forbidden state is therefore not invariant under a
+   dynamically changing check order. MRV is theorem-blocked until a richer
+   canonical state or a disjoint decomposition is proved; the experimental
+   code was reverted rather than allowing a plausible partial exhaustion into
+   core.
+
 ## Gurobi boundary and semantic-symmetry spike, 2026-08-29
 
 The product boundary is now explicit in
