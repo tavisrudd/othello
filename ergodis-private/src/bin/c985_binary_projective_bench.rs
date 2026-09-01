@@ -41,7 +41,9 @@ fn apply_binary<const H: u8>(
             let coefficient = matrix[row * dimension + col];
             let value = input[col];
             if coefficient != 0 && value != 0 {
-                sum = field.add(sum, field.mul(coefficient, value));
+                // SAFETY: the generator fixture, projective decoder, and field
+                // operations all produce canonical `GF(2^H)` encodings.
+                sum = unsafe { field.add_unchecked(sum, field.mul_unchecked(coefficient, value)) };
             }
         }
         output[row] = sum;

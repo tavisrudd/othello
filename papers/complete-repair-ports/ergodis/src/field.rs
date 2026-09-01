@@ -295,6 +295,16 @@ impl<'a, const H: u8> BinarySmallField<'a, H> {
         left ^ right
     }
 
+    /// Add two canonical field encodings without checking their range.
+    ///
+    /// # Safety
+    /// Both operands must be strictly smaller than `self.order()`.
+    #[inline(always)]
+    pub unsafe fn add_unchecked(self, left: u8, right: u8) -> u8 {
+        debug_assert!(u16::from(left) < self.order() && u16::from(right) < self.order());
+        left ^ right
+    }
+
     #[inline(always)]
     pub fn sub(self, left: u8, right: u8) -> u8 {
         self.add(left, right)
@@ -306,11 +316,16 @@ impl<'a, const H: u8> BinarySmallField<'a, H> {
             u16::from(left) < self.order() && u16::from(right) < self.order(),
             "field element is not reduced"
         );
-        self.mul_canonical(left, right)
+        // SAFETY: the range check immediately above establishes both operands.
+        unsafe { self.mul_unchecked(left, right) }
     }
 
+    /// Multiply two canonical field encodings without checking their range.
+    ///
+    /// # Safety
+    /// Both operands must be strictly smaller than `self.order()`.
     #[inline(always)]
-    pub(crate) fn mul_canonical(self, left: u8, right: u8) -> u8 {
+    pub unsafe fn mul_unchecked(self, left: u8, right: u8) -> u8 {
         debug_assert!(u16::from(left) < self.order() && u16::from(right) < self.order());
         self.0.multiply[(usize::from(left) << H) | usize::from(right)]
     }

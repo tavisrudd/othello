@@ -205,7 +205,10 @@ impl<'a, const H: u8> BinaryProjectiveIndex<'a, H> {
         let inverse = self.field.inverse_nonzero(coordinates[pivot]);
         let mut suffix = 0_u64;
         for &coordinate in &coordinates[pivot + 1..] {
-            suffix = (suffix << H) | u64::from(self.field.mul_canonical(coordinate, inverse));
+            // SAFETY: the full input slice was range-checked above, and the
+            // inverse table returns a canonical field element.
+            let normalized = unsafe { self.field.mul_unchecked(coordinate, inverse) };
+            suffix = (suffix << H) | u64::from(normalized);
         }
         Ok(self.offsets[pivot] + suffix)
     }
