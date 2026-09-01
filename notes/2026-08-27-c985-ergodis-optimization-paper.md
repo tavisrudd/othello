@@ -1434,6 +1434,24 @@ files are disposable and may be deleted at any time.
    and Hopcroft--Karp in the tiny in-loop Hall regime remain explicit
    non-imports.
 
+   The first half of step (1) is now source-profiled at commit `a5124985f` on
+   the byte-reproduced BB756 input. A release+debug-info build with frame
+   pointers yields 4,883 samples over 5,000 exact best-effort trials. Named
+   elimination and systematic-kernel construction lines account for at least
+   60.31% of samples; the OSD-2 pair-popcount line accounts for 0.76%.
+   Five CPU-2 alternating 2,000-trial pairs price order 2 at a deterministic
+   8.56% instruction and 3.78% branch premium over order 1. Cycle and duration
+   ratios are frequency-noisy (`order1/order2 = 0.976769x`, `t=-0.37`, and
+   `0.979892x`, `t=-0.31`). Order 2 remains accepted because its established
+   witness-quality gain dominates that small instruction premium. The
+   Stern/Dumer admission premise is false on this kernel: deeper pair work is
+   not the current cost center, so no collision stage is added. BP-derived
+   reliability remains a distinct trial-quality experiment rather than a
+   wholesale replacement—the current broad-class Rust search already found
+   weight 34 where the retained external BP-OSD probe reached 44. Raw paired
+   counters and source percentages are compacted in
+   `ergodis-private/evidence/c985-bb756-osd-stage-profile.json`.
+
    Step (6) is now closed as a measured negative for the motivating PRS
    client.  A source-attributed one-thread profile of the complete
    `q=64,r=5` census (17,043,521 projective points, 10,059 sampled cycle

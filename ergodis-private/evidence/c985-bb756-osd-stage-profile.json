@@ -1,0 +1,92 @@
+{
+  "schema": "ergodis-private-binary-kernel-stage-profile-v0",
+  "commit": "a5124985f",
+  "input": "regenerated BB(21,18) hx-gz native input",
+  "input_sha256": "83bd1eaf7787cd367f4c6da060658abff902f6404545e42c0902ce12cd198fe2",
+  "profile_build": {
+    "cargo_profile": "release",
+    "all_features": true,
+    "debug_info": 2,
+    "rustflags": "-C force-frame-pointers=yes"
+  },
+  "sample_run": {
+    "trials": 5000,
+    "threads": 1,
+    "seed": 1018003,
+    "target_weight": 32,
+    "osd_order": 2,
+    "osd_window": 96,
+    "best_effort": true,
+    "samples": 4883
+  },
+  "source_samples_percent": {
+    "elimination_row_test_line_450": 7.69,
+    "elimination_xor_loop_line_452": 0.55,
+    "elimination_xor_line_453": 17.28,
+    "kernel_logical_copy_line_484": 1.80,
+    "kernel_row_test_line_485": 7.42,
+    "kernel_pivot_lookup_line_488": 16.08,
+    "kernel_bit_set_line_489": 5.38,
+    "kernel_logical_lookup_line_490": 4.11,
+    "order_two_pair_popcount_line_525": 0.76,
+    "unattributed_inline_line_zero": 8.87
+  },
+  "paired_counter_protocol": {
+    "pairs": 5,
+    "trials_per_arm": 2000,
+    "cpu": 2,
+    "threads": 1,
+    "seed": 1018003,
+    "target_weight": 32,
+    "osd_window": 96,
+    "best_effort": true,
+    "alternated_order": true
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "order1": [9990010648, 25807029797, 5512301950, 181434469, 2102286298],
+      "order2": [9176840425, 28017176851, 5720506355, 183638192, 1914553705]
+    },
+    {
+      "round": 2,
+      "order1": [10304006009, 25807029929, 5512302125, 181525948, 2162665127],
+      "order2": [9198055716, 28017176876, 5720506365, 183556375, 1918885983]
+    },
+    {
+      "round": 3,
+      "order1": [9462251162, 25807029377, 5512301791, 181501213, 1975727335],
+      "order2": [9537466540, 28017177602, 5720506652, 183745072, 1991781154]
+    },
+    {
+      "round": 4,
+      "order1": [9040651682, 25807028955, 5512301571, 181088908, 1894216329],
+      "order2": [11566655758, 28017177736, 5720507002, 184336191, 2420115945]
+    },
+    {
+      "round": 5,
+      "order1": [8703402770, 25807029204, 5512301624, 180952726, 1816402690],
+      "order2": [9256908987, 28017177082, 5720506437, 183591715, 1931813060]
+    }
+  ],
+  "round_value_order": [
+    "cycles",
+    "instructions",
+    "branches",
+    "branch_misses",
+    "duration_time_ns"
+  ],
+  "geometric_order1_over_order2": {
+    "cycles": 0.976769,
+    "cycles_t": -0.37,
+    "instructions": 0.921115,
+    "instructions_t": -6334852.18,
+    "branches": 0.963604,
+    "branches_t": -1006185.66,
+    "branch_misses": 0.986544,
+    "branch_misses_t": -11.38,
+    "duration": 0.979892,
+    "duration_t": -0.31
+  },
+  "decision": "Retain order two: its deterministic 8.56 percent instruction premium is small relative to its established witness-quality gain. Reject a Stern/Dumer stage for this tranche because elimination and systematic-kernel construction dominate while the existing pair-popcount line is below one percent; the live-plan admission premise is not met. BP-style reliability remains a distinct trial-quality experiment, not a replacement justified by this profile."
+}
