@@ -11,6 +11,10 @@
 | 1 | Certificate, evidence, and CLI plane | `notes/2026-08-31-c1030-ergodis-audit-certificates-io.md` |
 | 1 | Free choice — shared trust kernels, git visibility | `notes/2026-08-31-c1030-ergodis-audit-freehunt.md` |
 | 2 | Vetting of all pass-1 findings, shape sweep, generators | `notes/2026-08-31-c1030-ergodis-audit-freehunt-pass2.md` |
+| R2 | Reduction/quotient/modular-descent math | `notes/2026-08-31-c1030-round2-reduction-math.md` |
+| R2 | Core-crate remainder and unaudited private modules | `notes/2026-08-31-c1030-round2-core-remainder.md` |
+| R2 | Binaries, test suite, python checkers, replay commands | `notes/2026-08-31-c1030-round2-bins-tests-checkers.md` |
+| R2 | Free choice — engines lane, additive-composition sweep | `notes/2026-08-31-c1030-round2-freehunt.md` |
 
 Twenty findings were raised across the four pass-1 reports. The pass-2 vetting confirmed
 thirteen sibling findings against the code, refuted one outright, corrected three severities
@@ -45,6 +49,36 @@ commit.
 | 18 | 4 | The `LiftProfile` signature width is implicit in `lift_bits`, which `EnergyDomain` does not record; four width-divergent unpackers exist (`as u8` at three sites, `as u16` at one) | `g133_sparse_defect.rs:255-265`, `:1213`, `:1358`, `:3779`, `:3808` | RC1 |
 | 19 | 5 | `Hadamard2092Error::FixedField` is an overloaded catch-all across 54 uses spanning budget exhaustion, conversion overflow, replay mismatch, and invariant violation; the q7 path reports the same budget condition as `StateBudget`. It directly worsened diagnosis of finding 4 | `g53_search.rs`, e.g. `:2111-2113`, `:1700`, `:2149-2153` | RC1 |
 | — | — | **Refuted.** `BinaryProjectiveIndex::new`'s `checked_shl` guard was reported as failing open; the quoted ascending loop exists in no revision, the real constructor shifts the literal `1_u64` (exact), and the claimed trigger correctly returns `Err(DimensionOverflow)` | `projective.rs:144-165` | see RC4 |
+
+## Round 2 findings register
+
+Round 2 restricted reporting to SEV1 and SEV2 only, across four areas round 1 under-covered:
+the reduction/quotient math, the core-crate remainder, the binary/test/checker layer, and a free
+pass over the engines. It returned two SEV1 and twelve SEV2. Numbering continues from the round-1
+register.
+
+| # | SEV | Finding | Location | Cause |
+|---|-----|---------|----------|-------|
+| 20 | 1 | The extension-field elimination benchmark's fixture is built with the identity in its first `rows` columns, so it is already in reduced row echelon form: both reducers return `rows` and modify nothing, the equivalence assertion compares two untouched copies, and the `sub`-versus-`^=` divergence the benchmark exists to exercise never executes. This empties both the "agree byte-for-byte" claim and the timing numbers cited to close the extension-field elimination gate. *(Fixture and assertion re-verified in the main session.)* | `bin/c985_extension_field_elimination_bench.rs:122-140`, `:209-213`; claim at `notes/2026-08-27-c985-ergodis-optimization-paper.md:592-599` | RC3, RC5 |
+| 21 | 1 | The sharded wide CSS-distance search filters branches positionally (`branch_index % count == index`) out of a list whose contents depend on the incumbent weight bound, and that bound differs per shard after the first anchor — so the shards do not cover the branch set, while the ledger stamps the aggregate `verdict: "complete-compatible-cover"` unconditionally. Both committed inputs carry two anchors. The compact sharded path builds its list bound-independently and is a genuine partition. *(Filter and verdict stamp re-verified in the main session.)* | `css_distance.rs:2195-2298`, `:2423-2453`, filter at `:2295`; `bin/css_distance_shard_ledger.rs:239` | RC3, RC5 |
+| 22 | 2 | Witness-annihilating merge: `Option<u32>` compared with a raw `<`, where `None < Some`, so the parallel fold's identity element (witness fields `None`) wins unconditionally and both engines emit `first_witness: null` on every run — including reports that count replay-verified hits in the same breath. A third copy carries the correct `is_some()` guard. Violates the documented identity contract of `reduce_roots`. *(Found independently by two agents.)* | `g41_joint_quotient_search.rs:936-939`; `g53_sparse_defect.rs:465-481`; correct copy at `g41_q29_evolve.rs:1960-1965` | RC1 |
+| 23 | 2 | The sealed g41 quotient-filter source-semantics string and `REPRESENTATIVE_SHIFTS` claim a necessary-filter intersection over six shift-orbit representatives (q0, q1, q2, q3, q6, q9), but the census intersects only q2, q3, q6, q9. The 768-root exclusion stays sound — a weaker filter yields a superset — but the method the certificate describes is not the method that ran | `g41_quotient_filter_proof.rs:25-30`; `g41_defect_scout.rs:1450` | RC5 |
+| 24 | 2 | The exact-q0 test in the mod-49 lift compiler is applied to one arbitrary preimage per mod-49 signature, but exact q0 is not a function of that signature (it is pinned only mod 49), so the search runs over a strict subset of candidates. False negatives only, and the failure is a loud `Err` | `g53_mod49_high_scout.rs:222-227`, `:547-556` | own |
+| 25 | 2 | The control-plane cascade prune is keyed on `(false_positive, Reverse(correct))` while `best` and the expansion set are keyed on `(correct, false_positive)`, so `evolve-start` can report a plan strictly worse than one it silently discarded. Would be SEV1 if any manuscript cited an evolve-start `best`; none found | `control/evolution.rs:111`, `:127-136`, `:205-233`; gate at `vm.rs:1238-1246` | own |
+| 26 | 2 | `next_support = old_support - consumed + created` is not the successor defect count, because `created` also subtracts `half_defects`; it undercounts by `\|(next_defects ∩ half_defects) \\ old_defects\|` and is then compared against a fully counted `old_support`. The same expression is serialized to committed evidence as `charged_support` | `projective_grid.rs:369-371`, `:393`; `bin/c80_hall_rematch.rs:617`, serialized at `:711` | RC1 |
+| 27 | 2 | `kernel` is populated only when `rank == 5`, so any leaf with rank ≤ 4 tests against the all-zero vector and is counted `forced_hit`. Very likely unreached with the frozen 2,633-row input | `q16_quadratic.rs:330-344`, `:390-399` | own |
+| 28 | 2 | `candidate_cap` truncates `admission_candidates` but is not a `Summary` field, so committed hashed evidence holds 8 records against a `failures_admission_candidates` metric of 1,984,400, with the cap recorded only in a note's prose | `bin/c80_hall_rematch.rs:816-817`; `evidence/c80-hall-rematch-q11-exhaustive.json` | RC5 |
+| 29 | 2 | `certiis verify` recomputes demand and capacity but never checks `certificate.deficit`, the certificate's headline number; the one tamper test rejects on the irreducibility check instead, so the gap is invisible | `certiis.rs:1037-1055`; tamper test at `:2220-2242` | RC3 |
+| 30 | 2 | The q7 repair provenance string "q0-q6 repaired and independently replayed" is a fixed literal emitted regardless of `--exact-input-prefix` / `--target-prefix`, and neither flag is a `Report` field | `g53_q7_repair.rs:40-41` | RC5 |
+| 31 | 2 | `orbit13 --cap` aborts the enumeration while `OrbitCertificate` has no `cap` field, so a partial count is written as "N normalized orbit matrices survive" | `bin/c1018_plane12.rs:626-628` | RC5 |
+| 32 | 2 | `workspace_payload_reduction` is matrix cells over the raw workspace's own byte total; `core_workspace_payload_bytes` is serialized but never enters the ratio | `bin/semantic_rank_census.rs:204-207` | own |
+| 33 | 2 | Both byte-identity `diff`s sit on the left of `&&`, which `set -e` exempts, so the replay script exits 0 when the regenerated certificate differs from committed evidence. *(Reproduced empirically by the auditing agent.)* | `python/c1029_replay.sh:41-46` | RC3 |
+
+Round 2 also closed two negatives with evidence rather than leaving them open. No second instance
+of the round-1 additive-join shape exists: every other join composes across blocks where the target
+is a block-diagonal sum, which is exact — established independently by the math agent and the free
+agent. And `hall_core.rs`'s matching, König deficiency extraction, and saturation test are sound,
+with the neighbourhood recomputed rather than self-reported, confirmed by two independent reads.
 
 Cross-cutting shapes counted in the pass-2 sweep, beyond the individual findings above: the
 guard-in-caller shape at seven sites, copy-and-diverge at six, verification-by-re-execution across
@@ -156,6 +190,22 @@ This needs a decision rather than a patch: what independence do the paper-facing
 require, and which certificates must be checkable by an argument structurally different from and
 cheaper than the search that produced them?
 
+**Round 2 broadens this cause.** Re-execution turns out to be one instance of a wider pattern:
+checks that are structurally incapable of failing. Four more forms appeared, and none of them
+involves re-execution at all. The extension-field elimination benchmark's fixture is already in
+reduced row echelon form, so the assertion comparing the two reducers compares two untouched
+copies and the divergence it exists to catch cannot execute (finding 20). The sharded CSS-distance
+ledger stamps `verdict: "complete-compatible-cover"` unconditionally, with nothing computing
+whether the shards actually cover (finding 21). `certiis verify` omits the certificate's headline
+number from what it checks, and the single tamper test happens to reject on a different check, so
+the omission is invisible (finding 29). The C1029 replay script places both byte-identity `diff`s
+to the left of `&&`, where `set -e` does not apply, so it exits 0 on a mismatch (finding 33).
+
+The unifying property is that each of these passes with probability 1 regardless of the state of
+the world it purports to check. That is a stronger and more testable statement than "verification
+re-runs the prover", and it suggests a concrete audit any check can be put through: construct the
+input that should make it fail, and confirm that it does.
+
 ### RC4 — The evidence chain is not in git, which makes the audit itself unpinnable
 
 The modules holding the most consequential findings are untracked. Committed notes cite replay
@@ -170,38 +220,96 @@ hash in seconds.
 Committing the tree is the precondition for any of this work becoming durable evidence, and it is
 the cheapest item on the list.
 
+### RC5 — The emitted artifact records the request, not the run
+
+This cause is new in round 2, and it produced more findings than any other single cause in that
+round. A binary accepts a parameter that constrains what the computation actually covers — a cap,
+a prefix, a shard index, a filter set — and the record it writes describes the intended
+computation rather than the constrained one. The parameter is not a field of the emitted
+structure, so nothing downstream can tell the difference.
+
+The instances are strikingly uniform. `candidate_cap` truncates the admission candidates but is
+not a `Summary` field, so committed hashed evidence holds 8 records against a metric reporting
+1,984,400 (finding 28). `orbit13 --cap` aborts the enumeration, but `OrbitCertificate` has no
+`cap` field, so a partial count is written with the language of a complete one (finding 31). The
+q7 repair emits a fixed provenance literal claiming independent replay regardless of the prefix
+flags actually passed, neither of which is a `Report` field (finding 30). The sealed g41
+quotient-filter semantics string names six shift-orbit representatives where the census intersects
+four (finding 23) — the same defect with the divergence frozen into a sealed constant rather than
+arising at run time.
+
+Findings 20 and 21 sit at the intersection of this cause and RC3: a verdict or a timing number is
+recorded for a computation that did not happen as described. The distinction from RC3 is worth
+keeping, though, because the fix differs. RC3 asks what a check must do to be capable of failing.
+RC5 asks a narrower and more mechanical question: does every parameter that can change what a run
+covers appear in the record that run emits? That question can be answered by inspection, one
+binary at a time, and it is the cheapest systematic sweep available from this audit.
+
 ## What the audit says about auditing
 
 One finding in twenty quoted code that does not exist, and three more were one severity notch
 high. The single-pass reports were confidently wrong at a rate that matters, and the cross-check
-pass is what corrected them. Two findings — the unchecked `u32` square sum and the
-`xor_sumset_256_into` empty-operand saturation — were reached independently by two agents, which is
-the signal that held up best. Treat an unvetted single-agent finding as a lead, not a result.
+pass is what corrected them. Three findings were reached independently by two agents each — the
+unchecked `u32` square sum, the `xor_sumset_256_into` empty-operand saturation, and the
+`Option`-ordering witness merge — and independent agreement is the signal that has held up best.
+Treat an unvetted single-agent finding as a lead, not a result.
+
+Round 2 changed two things about the method and both are worth keeping. Reporting was restricted
+to SEV1 and SEV2 with **no target count**, and agents were told that finding nothing at that
+severity was an acceptable result. Round 1 asked for five findings per agent and got padding at
+the bottom of the range plus one fabrication; round 2 removed the quota and returned two SEV1 and
+twelve SEV2 with no fabrications, along with two negatives closed on evidence (no second
+additive-join instance; `hall_core` sound). A quota buys coverage at the cost of precision, and
+precision is what an audit is for. Second, every brief carried an explicit evidence standard —
+re-read and confirm each quoted snippet immediately before writing it up — which is the direct
+countermeasure to the round-1 fabrication.
 
 ## Ordered recommendation
 
-1. **Commit the untracked `ergodis-private` sources.** Cheapest item, and it is the precondition
+1. **Re-examine the two claims resting on findings 20 and 21**, ahead of everything else, because
+   these are the only items where something already recorded may be wrong rather than merely
+   unguarded. The extension-field elimination gate was closed on a benchmark whose fixture makes
+   the compared paths identical and untouched, so the byte-for-byte agreement and the timings need
+   a fixture with a genuine non-identity prefix before either can be cited. The sharded
+   CSS-distance runs need their cover property established or the `complete-compatible-cover`
+   verdict withdrawn from the affected inputs; note that the compact sharded path is a genuine
+   partition, so the fix may be to use it or to make the wide path's branch list bound-independent
+   in the same way.
+2. **Commit the untracked `ergodis-private` sources.** Cheapest item, and it is the precondition
    for every other item becoming citable evidence. Addresses RC4.
-2. **Fix `certdist verify` to fail when witnesses are unchecked**, and add `deny_unknown_fields`
-   plus required (rather than defaulted) `demand`/`capacity`/`couplings` to `certiis`. These are
-   small, local, and they are the two places where a wrong result passes the advertised verifier
-   today. Addresses the RC3 instances that do not need an architecture decision.
-3. **Decide the verification-independence question.** Which claims need a verifier that does not
-   re-run the prover? This is a design call, not a defect fix, and it governs how much the word
-   "verified" is allowed to carry in the manuscripts. Addresses RC3.
-4. **Fix the g53 same-block additive delta join**, or rename the repair to match the predicate it
+3. **Fix the checks that cannot fail.** `certdist verify` should fail when witnesses are unchecked;
+   `certiis` needs `deny_unknown_fields`, required rather than defaulted `demand`/`capacity`/
+   `couplings`, and a check of `deficit`; the C1029 replay script needs its `diff`s moved out of
+   the `&&` left position. All are small and local, and each closes a path by which a wrong result
+   passes an advertised check today. Addresses the RC3 instances needing no architecture decision.
+4. **Sweep every evidence-emitting binary for RC5**: does each parameter that can change what a run
+   covers appear in the record that run emits? This is answerable by inspection, one binary at a
+   time, and four known findings (23, 28, 30, 31) are instances. Fixing the emitters matters more
+   than fixing the four, since committed artifacts inherit the property.
+5. **Decide the verification-independence question.** Which claims need a verifier that does not
+   re-run the prover? A design call, not a defect fix, and it governs how much the word "verified"
+   is allowed to carry in the manuscripts. Addresses RC3.
+6. **Fix the `Option`-ordering witness merge** (finding 22). Small, and the correct implementation
+   already exists in a sibling copy — the `is_some()` guard in `g41_q29_evolve` — so this is a
+   mechanical alignment rather than a design question. Every affected run has been emitting a null
+   witness.
+7. **Fix the g53 same-block additive delta join**, or rename the repair to match the predicate it
    actually implements (cross-block-additive combinations, not exact four-move repair). The q7
    negative is already hedged in its emitted provenance and the q4 failure is loud, so nothing
    published is wrong — but the name overclaims and the q4 path discards genuine repairs found later
    in the enumeration.
-5. **Give the shared kernels a home** — one allocation-counting harness, one certificate writer, one
-   sumset kernel — with each precondition asserted adjacent to the representation it protects.
-   Addresses RC1 and, where the assertion survives release, RC2.
-6. **Assert the structural bounds that are currently load-bearing and invisible**, or run the
+8. **Give the shared kernels a home** — one allocation-counting harness, one certificate writer, one
+   sumset kernel, one witness-merge — with each precondition asserted adjacent to the representation
+   it protects. Addresses RC1 and, where the assertion survives release, RC2.
+9. **Assert the structural bounds that are currently load-bearing and invisible**, or run the
    campaign kernels on small parameters under a debug/overflow-checked build in CI. Addresses RC2.
 
-Items 1 and 2 are mechanical. Item 3 needs a decision before anything is written. Items 4 through 6
-are real work whose scope depends on that decision.
+Items 1 through 4 and 6 are mechanical or near-mechanical. Item 5 needs a decision before anything
+is written. Items 7 through 9 are real work whose scope depends on that decision.
+
+A general test worth adopting alongside these, since it would have caught findings 20, 21, 29, and
+33 as a class: for every check, assertion, and verdict in the evidence path, construct the input
+that should make it fail and confirm that it does.
 
 ## Mystery ledger
 
@@ -217,3 +325,17 @@ are real work whose scope depends on that decision.
   one-line reordering whose absence suggests the ordering was never considered.
 - No genuine mystery remains in the core library findings: all five were traced to explicit code
   and every reachable caller was accounted for.
+- **Why the elimination benchmark's fixture was written with an identity prefix.** The generator
+  deliberately emits `1` on the diagonal and `0` below the row count, which reads as intentional
+  structure rather than an accident — but that structure is exactly what makes the benchmark
+  vacuous. Whether a non-identity prefix was tried and rejected for some reason is not recorded.
+  Settled by neither round; owning successor is recommendation 1.
+- **Whether any sharded CSS-distance run in committed evidence used a single anchor.** The cover
+  defect requires two or more anchors, and both committed inputs carry two. Whether a single-anchor
+  run exists elsewhere, which would be unaffected, was not enumerated. Gate: recommendation 1.
+- **How long the null witness has been emitted.** Finding 22 makes every affected run emit
+  `first_witness: null`, including runs whose reports count replay-verified hits in the same
+  breath. No pass established when the divergence from the correct sibling copy occurred, and the
+  untracked sources (RC4) make that history unrecoverable for the files that are not in git.
+- Resolved from the round-1 ledger: the additive-join shape has no second instance, established
+  independently by two round-2 agents.
