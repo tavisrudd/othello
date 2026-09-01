@@ -201,6 +201,19 @@ stone; the summary counts retained positions.
 Durable archives preserve the candidate itself for later campaign replay, where
 mutation starts afresh under the new campaign identity.
 
+For selected beam parents, the daemon also performs bounded exact hindsight on
+proper postfix subexpressions.  It examines longest fragments first, compiles
+at most 16 typed predicate fragments per parent, retains at most four with
+positive weighted coverage and zero false positives on the complete frozen
+batch, examines at most 256 distinct semantics, and records at most 64 accepted
+fragments per campaign.  Each
+`hindsight-fragment` record contains its source edge, structural semantic hash,
+compiled hash, plan, exact coverage, and rows examined.  Such a fragment is an
+empirical theorem candidate, not proof authority: records set `trusted` to
+false and carry an explicit compatible-batch replay obligation.  Fragment
+records consume the ordinary bounded evidence allowance; lack of room rejects
+the fragment without truncating candidate search.
+
 Socket I/O, JSON, evidence serialization, and plan compilation happen outside
 worker hot loops.  Uncontrolled solves compile without the control-plane
 feature.  Controlled workers retain only the existing coarse safe-point flag;
