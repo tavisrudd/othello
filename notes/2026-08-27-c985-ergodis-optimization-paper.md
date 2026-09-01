@@ -1120,6 +1120,24 @@ files are disposable and may be deleted at any time.
    step may therefore expose this replayed decision as an explicitly supplied
    initial publisher policy; online learning and mid-job policy changes remain
    gated.
+
+   Commit `3dc8d8ba0` lands that optional private injection layer. A policy file
+   loads only learned numeric/structural decisions, compiles fields against the
+   alignment publisher's exact target schema, canonicalizes selector order,
+   rejects malformed/duplicate selectors and conflicting equal-specificity
+   overlaps, and applies the most-specific matching rule before the existing
+   threshold fallback. Matching occurs entirely in the auxiliary watcher;
+   solver publication, safe points, allocation behavior, and proof authority
+   are unchanged. Final control JSON counts accepted policy-routed profile
+   updates. Five owned tests cover override, unavailable fields, ambiguity,
+   fallback, and the real campaign accumulator; strict warning compilation
+   passes in an isolated owned-target build. A live integration control records
+   two accepted updates and two policy matches, while the promoted
+   `root_sized=0` policy correctly makes zero matches against later sized-root
+   observations rather than silently generalizing. The corpus generator now
+   has a baseline-verified `--capture-sized` mode to build the exact operational
+   target domain needed for the next policy. Package-wide private validation is
+   temporarily blocked by an unrelated in-flight exact-energy module.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a

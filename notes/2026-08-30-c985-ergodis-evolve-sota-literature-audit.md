@@ -301,6 +301,14 @@ three-report policy now has two wins, one tie, no losses, and a 7,266/10,902
 aggregate (1.50x). This clears optional initial-policy injection, but not online
 adaptation or mid-generation policy changes.
 
+An optional private initial-policy adapter is now landed. It applies only
+learned exact-coordinate selectors in the watcher, rejects ambiguous
+equal-specificity rules, reports policy matches, and otherwise retains the
+runtime threshold fallback. A first live probe importantly refused to transfer
+the validated `root_sized=0` rule onto later sized roots. The next empirical
+step is therefore a baseline-verified first-sized-root corpus and policy, not a
+broader selector or online generalization.
+
 ## Near-term acceptance tests
 
 1. Replaying a campaign from its durable graph produces identical semantic and
