@@ -1,6 +1,7 @@
 //! Typed, bounded `match / reduce / canonicalize` recipe contracts.
 
 pub mod dataflow;
+pub mod execution;
 pub mod theorem;
 
 use ergodis::control::{

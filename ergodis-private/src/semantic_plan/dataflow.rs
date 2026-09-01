@@ -99,13 +99,13 @@ pub struct DataflowBudget {
 #[repr(C)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct CompiledRecipeOp {
-    pub retention: u64,
-    pub memory_bytes: u64,
-    pub signature: u16,
-    pub input_slot: u16,
-    pub output_slot: u16,
-    pub kind: OpKind,
-    pub flags: u8,
+    retention: u64,
+    memory_bytes: u64,
+    signature: u16,
+    input_slot: u16,
+    output_slot: u16,
+    kind: OpKind,
+    flags: u8,
 }
 
 impl CompiledRecipeOp {
@@ -115,6 +115,36 @@ impl CompiledRecipeOp {
     pub const fn uses_streamed_partition(self) -> bool {
         self.flags & Self::STREAMED_PARTITION != 0
     }
+
+    #[must_use]
+    pub const fn retention(self) -> u64 {
+        self.retention
+    }
+
+    #[must_use]
+    pub const fn memory_bytes(self) -> u64 {
+        self.memory_bytes
+    }
+
+    #[must_use]
+    pub const fn signature(self) -> u16 {
+        self.signature
+    }
+
+    #[must_use]
+    pub const fn input_slot(self) -> u16 {
+        self.input_slot
+    }
+
+    #[must_use]
+    pub const fn output_slot(self) -> u16 {
+        self.output_slot
+    }
+
+    #[must_use]
+    pub const fn kind(self) -> OpKind {
+        self.kind
+    }
 }
 
 const _: () = assert!(std::mem::size_of::<CompiledRecipeOp>() == 24);
@@ -122,13 +152,45 @@ const _: () = assert!(std::mem::align_of::<CompiledRecipeOp>() == 8);
 
 #[derive(Debug, Clone)]
 pub struct CompiledRecipe {
-    pub source_signature: u16,
-    pub slots: u16,
-    pub output_slot: u16,
-    pub total_retention: u64,
-    pub total_memory_bytes: u64,
-    pub operations: Box<[CompiledRecipeOp]>,
+    source_signature: u16,
+    slots: u16,
+    output_slot: u16,
+    total_retention: u64,
+    total_memory_bytes: u64,
+    operations: Box<[CompiledRecipeOp]>,
     recipe_canonical: Box<[u8]>,
+}
+
+impl CompiledRecipe {
+    #[must_use]
+    pub const fn source_signature(&self) -> u16 {
+        self.source_signature
+    }
+
+    #[must_use]
+    pub const fn slots(&self) -> u16 {
+        self.slots
+    }
+
+    #[must_use]
+    pub const fn output_slot(&self) -> u16 {
+        self.output_slot
+    }
+
+    #[must_use]
+    pub const fn total_retention(&self) -> u64 {
+        self.total_retention
+    }
+
+    #[must_use]
+    pub const fn total_memory_bytes(&self) -> u64 {
+        self.total_memory_bytes
+    }
+
+    #[must_use]
+    pub fn operations(&self) -> &[CompiledRecipeOp] {
+        &self.operations
+    }
 }
 
 #[repr(C)]
