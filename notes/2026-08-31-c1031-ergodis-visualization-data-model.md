@@ -217,6 +217,42 @@ teaching view needs to animate a single evaluation through the expression tree.
 forward results verbatim without reimplementing the protocol. That is the fastest credible path to a
 working web UI and it requires no core changes at all.
 
+## What only real corpora revealed
+
+Everything above was established against a two-row smoke fixture. Running five campaigns on genuine
+research corpora — the C1016 banked semantic systems at 1,024 objects over 21 and 55 features, and
+g=133 order-2092 exact-shift cell sets at 225 and 325 objects over 30 features — exposed four facts
+that the fixture could never have shown, three of which would have been console bugs.
+
+**A cascade-abandoned candidate has `evaluation: null`.** The lineage record instead carries a
+`cascade` block of the form `{rejected: true, rows_evaluated: n}`. Such a candidate was never fully
+evaluated: it has no outcome hash, no weighted counts, no scores at all. On the fixture this never
+occurred, because `cascade_rejections` was zero. On the g=133 excluded-cells campaign it is 4,196 of
+9,638 records, and on the 55-feature semantic corpus it is 15,707 of 99,966. Any reader that assumes
+`evaluation` is present crashes on the first real file, and any aggregate that does not exclude
+these candidates silently miscounts. They are real search work and belong in the lineage, drawn as a
+distinct kind, but they must be excluded from every score-derived quantity.
+
+**Weight and object count diverge by orders of magnitude.** On the g=133 corpora, 225 objects carry
+a `weighted_rows` of 15,724,800 — nearly five orders of magnitude apart. On the opaque semantic
+corpora the two coincide exactly at 1,024. A console developed only against corpora where they
+coincide will conflate them and be wrong everywhere else, so both must be named and neither may
+stand in for the other. Scientific notation is not optional at this range.
+
+**The scope mutation operators cannot fire on most corpora.** `scope-initialize` and `scope-toggle`
+build their profiles from the field names `root_orbit` and `root_candidate`, hard-coded in
+`scope_profiles`. On any corpus without those exact field names — which is every corpus except the
+C880 branch-ordering fixture — no scoped plan is ever proposed, and the evolution runs with four
+operators instead of six. This looks like a defect rather than a design choice and deserves its own
+item; it also means the scope-handling rules recorded above, while correct, are currently exercised
+by exactly one corpus.
+
+**The evolution evidence budget is silently clamped by the campaign's trace limit.**
+`--max-evidence-bytes` on `evolve-start` is bounded by the campaign's `--trace-max-bytes`, which
+defaults to 1 MiB and truncates a lineage at roughly 1,600 candidates. Reaching real scale requires
+raising the campaign-level limit at creation time, not the evolution-level one. The hard ceilings
+are 32 generations, a beam of 256, and 100,000 candidates.
+
 ## The beam expands one representative per behaviour class, not the fittest candidates
 
 Found by the terminal-interface work and verified independently against the lineage records. In the
