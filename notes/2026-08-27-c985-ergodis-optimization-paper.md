@@ -565,6 +565,27 @@ as each coherent tranche lands.
    expander-unfriendly treewidth/ZDD methods, block Wiedemann at current sizes,
    and Hopcroft--Karp in the tiny in-loop Hall regime remain explicit
    non-imports.
+
+   Step (6) is now closed as a measured negative for the motivating PRS
+   client.  A source-attributed one-thread profile of the complete
+   `q=64,r=5` census (17,043,521 projective points, 10,059 sampled cycle
+   events) assigns no sample at the 0.01% reporting threshold to the
+   Hankel/RREF source region.  Projective point rank/unrank accounts for
+   23.76% of cycles, while the four runtime-field table/index source lines
+   account for 20.62%; the latter cost is in repeated orbit matrix--vector
+   action, not elimination.  Commit `9305f95e6` adds a private exact
+   elimination control rather than changing core: 256 deterministic matrices
+   at each degree 3--8 agree byte-for-byte between the table backend and a
+   monomorphized characteristic-two backend.  On seven rotated `GF(64)`
+   counter pairs the existing table backend is 1.071x faster in cycles on the
+   actual `4 x 5` Hankel shape (`table/binary = 0.933595x`, `t=-30.48`) and
+   1.039x faster on an `8 x 9` stress shape (`0.962630x`, `t=-3.43`), despite
+   the candidate executing 0.7--4.4% fewer instructions and about 15.9% fewer
+   branches.  Bit-sliced/specialized elimination is therefore rejected for
+   this application: even its isolated upper bound loses, and end-to-end
+   leverage is below the sampling resolution.  The next measured C1018
+   frontier is orbit action plus projective rank/unrank on a larger closure
+   wave, not linear elimination.
 9. **Queued — parametric certificate verifier.** C1029 demonstrates a genuine
    reach gap rather than a faster version of an existing kernel: Ergodis had no
    usable path for exact identities in `Z[t]`, finite congruence coverings, and
