@@ -723,9 +723,35 @@ files are disposable and may be deleted at any time.
 
    The accepted algebra and constraints remain
    `2026-08-30-ergodis-semantic-mining-engine-adr.md`.
-6. **In progress — daemon-owned evolve.** Retain bounded streamed evidence,
-   lineage/outcome deduplication, and exact cascades; next add durable replay,
-   selection, and cross-campaign learning without entering solve workers.
+6. **Done for current tranche — daemon-owned evolve replay and cross-campaign
+   selection.** Commit `74a6cef70` makes bounded streamed evolution evidence a
+   reusable seed archive without entering solve workers.  Every evidence file
+   begins with the exact presentation, problem, ordered fields, feature-
+   generator provenance, and producing code commit.  `evolve-start` accepts an
+   optional direct seed file plus at most eight replay archives and 32 combined
+   seeds.  Replay requires exact problem/field/generator identity; presentations
+   may differ only when both campaigns carry the same generator provenance,
+   providing the intended train/holdout boundary.  Without generator
+   provenance, the complete presentation hash must match.
+
+   Archive scores rank candidates only within their source archive.  The
+   controller interleaves archives in request order, removes structural
+   duplicates against direct and replayed seeds, recompiles every plan, checks
+   that its semantic BLAKE3 hash matches the archived record, and evaluates it
+   again on the current frozen batch.  Malformed headers, score ranges, plan
+   hashes, request container types, and capacity overflows fail closed.  Replay
+   roots carry separate `source_hash` and `source_evidence` fields; their
+   mutation `parent_hash` remains null, avoiding the self-parent cycle that
+   would result from treating the identical source-plan hash as ancestry.
+   Existing run-local structural and outcome deduplication and exact cascade
+   pruning remain unchanged.  The protocol document records the public
+   contract.  The exact post-review tree passes strict all-target/all-feature
+   clippy and the full all-target/all-feature test suite.  No solve worker,
+   search safe point, or hot-loop type changed.
+
+   The next evolve tranche is evidence-driven candidate targeting: persist a
+   bounded failure-shape summary and use it to choose mutation families, while
+   keeping archive parsing, scoring, and mutation construction in the daemon.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
