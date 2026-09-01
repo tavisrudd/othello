@@ -1,0 +1,14 @@
+{
+  "schema": "ergodis-private-overflow-profile-ab-v0",
+  "input": "../papers/complete-repair-ports/ergodis/evidence/c985-bb288-native-input.json",
+  "input_sha256": "ef5d9264c92e72a949ce6776b78e896047a096112579ea49a1d5ee1c7a977955",
+  "artifact": "../ergodis-private/evidence/c985-overflow-profile-bb288.ergocsl",
+  "artifact_sha256": "8565556dae89111cbdc9023dea50040f9b0f507e860c98f4fe4043c42aafad14",
+  "release_sha256": "954e486dd9fc76383c1253f995d7c7f867f5922d9e55de089efde0139d248ff4",
+  "campaign_sha256": "061587d45f88a074afc26ae6f15554871c9bd987db033e1506efb6127e4abfb7",
+  "pairs": 9,
+  "threads": 12,
+  "solve_rounds": 4,
+  "cpu": "0-11",
+  "result_sha256": "273ccbee52e2b775399fe754d9bd60f3a541bdb3591077f45b5bddd8814f26de"
+}

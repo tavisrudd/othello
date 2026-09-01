@@ -1,0 +1,52 @@
+{
+  "schema": "ergodis-private-overflow-profile-report-v0",
+  "profile_commit": "3dc141836",
+  "collector_commit": "81d572d3d",
+  "input": "papers/complete-repair-ports/ergodis/evidence/c985-bb288-native-input.json",
+  "input_sha256": "ef5d9264c92e72a949ce6776b78e896047a096112579ea49a1d5ee1c7a977955",
+  "compiled_artifact": "ergodis-private/evidence/c985-overflow-profile-bb288.ergocsl",
+  "compiled_artifact_sha256": "8565556dae89111cbdc9023dea50040f9b0f507e860c98f4fe4043c42aafad14",
+  "compiled_artifact_retained": false,
+  "compiled_artifact_generation": "css_distance_native --input papers/complete-repair-ports/ergodis/evidence/c985-bb288-native-input.json --maximum-weight 16 --threads 1 --rounds 1 --compiled-out ergodis-private/evidence/c985-overflow-profile-bb288.ergocsl",
+  "ratio_orientation": "release/campaign",
+  "paired_statistic": "Student t on paired natural-log ratios",
+  "controls": [
+    {
+      "threads": 1,
+      "solve_rounds": 1,
+      "pairs": 9,
+      "cpu_set": "2",
+      "result_sha256": "f1f29fed3b5c5673570d31b3c21bff7736473f5ce5ed999f54c756cc23665677",
+      "pairs_csv": "ergodis-private/evidence/c985-overflow-profile-bb288-final-evidence-1t/pairs.csv",
+      "pairs_csv_sha256": "a288c77c5a1e1021c110bb70fdf774d2de9e758063982c786e92f7d2841dccb0",
+      "metadata_sha256": "1be10a972d5edad0b74368870165b734a9879e273f5b1c9c454b022621d2f742",
+      "release_over_campaign": {
+        "cycles": {"ratio": 0.952771, "t": -1.53},
+        "instructions": {"ratio": 0.928208, "t": -2435353.08},
+        "branches": {"ratio": 0.782287, "t": -3260363.91},
+        "branch_misses": {"ratio": 0.959584, "t": -16.52},
+        "search_wall": {"ratio": 0.959359, "t": -1.29}
+      },
+      "median_rss_kib": {"release": 7344, "campaign": 7320}
+    },
+    {
+      "threads": 12,
+      "solve_rounds": 4,
+      "pairs": 9,
+      "cpu_set": "0-11",
+      "result_sha256": "273ccbee52e2b775399fe754d9bd60f3a541bdb3591077f45b5bddd8814f26de",
+      "pairs_csv": "ergodis-private/evidence/c985-overflow-profile-bb288-final-evidence-12t/pairs.csv",
+      "pairs_csv_sha256": "f28e883919e7ffa258685cff94d44923153f42dc7d03f2e20ba7fe80cbf495e8",
+      "metadata_sha256": "10454b41495a1275fbe2ae010e78709b5570ccf6b13ac528bd5742daa2592fa7",
+      "release_over_campaign": {
+        "cycles": {"ratio": 1.046673, "t": 10.46},
+        "instructions": {"ratio": 0.949618, "t": -2494.47},
+        "branches": {"ratio": 0.772569, "t": -9240.18},
+        "branch_misses": {"ratio": 1.011901, "t": 7.58},
+        "search_wall": {"ratio": 1.013010, "t": 0.99}
+      },
+      "median_rss_kib": {"release": 7808, "campaign": 7776}
+    }
+  ],
+  "conclusion": "Accept only as an opt-in proof-campaign profile. Checked arithmetic deterministically adds 7.73% instructions at one thread and 5.31% at twelve threads; timing is frequency-sensitive and does not support a general slowdown or speedup claim. Exact result and work parity hold in every pair, and median RSS is neutral."
+}

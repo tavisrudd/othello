@@ -518,9 +518,28 @@ files are disposable and may be deleted at any time.
    0.999998x at 1T and 1.000029x at 12T versus the prior release code; timing
    moved noisily in opposite directions, so the hot implementation is accepted
    as operationally neutral.  The accepted fix and recorded comparison are in
-   commit `c97892222`.  Next is (e), a measured
-   campaign release profile with overflow checks rather than silently assuming
-   its cost, followed by targeted pruning-predicate mutation controls.
+   commit `c97892222`.
+
+   Item (e) is now measured and accepted as opt-in only. Commit `3dc141836`
+   adds a `campaign` Cargo profile that inherits full release optimization but
+   enables integer overflow checks; ordinary release binaries are unchanged.
+   The create-only paired collector in `81d572d3d` verifies exact result and
+   per-round work parity, alternates arm order, records counters/search time/RSS,
+   and compacts each run to one CSV plus bound metadata. On the BB288
+   radius-16 no-witness control, every arm examines exactly 21,826,325
+   candidates. At 1T, release/campaign is 0.928208x instructions and 0.782287x
+   branches; cycles and wall are noisy point costs at 0.952771x (`t=-1.53`)
+   and 0.959359x (`t=-1.29`). At 12T, release/campaign is 0.949618x
+   instructions and 0.772569x branches, while cycles favor the checked build
+   at 1.046673x (`t=10.46`) and wall is unresolved at 1.013010x (`t=0.99`).
+   Median RSS is neutral: 7,344/7,320 KiB at 1T and 7,808/7,776 KiB at 12T
+   for release/campaign. The stable conclusion is therefore a deterministic
+   7.73% instruction premium at 1T and 5.31% at 12T, not a general timing
+   claim. Long negative-proof campaigns may choose that bounded premium;
+   performance runs and ordinary applications remain on `release`. Compact
+   raw pairs and hashes are in
+   `ergodis-private/evidence/c985-overflow-profile-bb288-report.json`. Next is
+   targeted pruning-predicate mutation under the checked profile.
    Premise certificates and independent statement-level re-derivations are the
    near-term architecture.  SAT/PB/VIPR proof pipelines are reserved for
    flagship frozen claims where their encoding is independently justified;
