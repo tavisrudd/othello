@@ -588,12 +588,28 @@ files are disposable and may be deleted at any time.
    certified authority.  The combined recipe/fragment module passes all seven
    focused tests and strict clippy in a clean disposable worktree.
 
-   This is syntax and authority-contract plumbing, not yet the complete typed
-   dataflow executor: function arguments, input/output sorts, explicit memory
-   budgets, streamed-partition exceptions, sinks, and recipe dependency edges
-   remain open.  Next join recipes and fragments through one typed dataflow IR,
-   including exact operation signatures and resource contracts; do not create
-   a second mini-language.  The accepted algebra and constraints remain
+   Commits `3d91e4e2d` and `22e0aeeae` replace the name-only recipe DTO with a
+   cold typed dataflow compiler.  Every source and transform now declares an
+   input binding, output sort, worst-case retained cardinality, and memory
+   ceiling.  A validated adapter registry supplies exact operation kind and
+   sort signatures plus hard per-adapter resource maxima.  Compilation resolves
+   names once into fixed 24-byte numeric op records, enforces topological
+   single-input edges, sort compatibility, checked aggregate campaign budgets,
+   and the reducer-before-canonicalizer rule.  The streamed-partition exception
+   needs independent opt-in from both recipe and canonicalizer signature.
+   Recipe output is explicit.  Fragment emission is bound to the exact
+   canonical recipe bytes, output slot and evidence sort, scope, provenance,
+   canonicalization lineage/contracts, and a declared verifier gate; a compiled
+   dataflow from another recipe cannot be substituted.  Twelve focused tests
+   and strict clippy pass in a clean disposable worktree.  This is all cold
+   compile/control-plane work and changes no solve worker.
+
+   The remaining execution slice is argument-bearing operation signatures,
+   typed multi-input/fan-out edges, sinks and actual adapter dispatch.  Land it
+   first against the existing C973 affine census, then require the same engine
+   to express one C80 and one C896 packet before stabilizing or publishing the
+   private grammar.  Do not create a second mini-language.  The accepted
+   algebra and constraints remain
    `2026-08-30-ergodis-semantic-mining-engine-adr.md`.
 6. **In progress — daemon-owned evolve.** Retain bounded streamed evidence,
    lineage/outcome deduplication, and exact cascades; next add durable replay,
