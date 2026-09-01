@@ -39,6 +39,10 @@ criterion = { version = "0.7", default-features = false, features = ["cargo_benc
 proptest = "1"
 tempfile = "3"
 
+[profile.campaign]
+inherits = "release"
+overflow-checks = true
+
 [[bin]]
 name = "ergodis"
 path = "src/bin/ergodis.rs"

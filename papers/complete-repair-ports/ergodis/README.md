@@ -225,6 +225,16 @@ for their evidence runs:
 cargo build --release --features large-css,parallel --bin css_distance_native
 ```
 
+For multi-hour proof campaigns, the opt-in `campaign` profile retains release
+optimization while enabling integer overflow checks:
+
+```sh
+cargo build --profile campaign --features large-css,parallel --bin css_distance_native
+```
+
+Ordinary application and benchmark builds continue to use `release`; campaign
+evidence should record which profile produced the executable.
+
 Without `large-css`, the binary rejects instances above 384 coordinates or
 physical rank 192; without `parallel`, `--threads` cannot exceed one. Long
 exhaustions can be split into deterministic, thread-count-independent pieces
