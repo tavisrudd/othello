@@ -84,6 +84,22 @@ Each of these is either built in the prototype or specified from data confirmed 
    eliminated as the headline column. Built from committed C1016 evidence; a live version needs the
    timestamp gap closed first.
 
+## The console is an instrument, not an explainer
+
+Set by the user on 2026-08-31 and binding on everything above. Every element must be one that could
+exist in a running system: generic, computed from data the campaign emits, and correct for any run.
+No prose written about a particular run, no narrative panels, no editorial reading of the numbers.
+Where a caption is needed it explains the encoding — what node area means, what a dashed edge means
+— never what this run happened to do.
+
+Two practical consequences. Large numbers are shown in scientific notation, because root counts and
+instruction counts span too many orders of magnitude for grouped digits to be comparable at a
+glance. And a panel that would otherwise be commentary becomes a data panel instead: rather than a
+paragraph saying that timestamps are missing, the console carries a signal-availability list that
+reports, per telemetry channel, whether this run has it — event stream, lineage edges, evaluator
+traces, search counters, cost counters, timestamps. That list is generic, it is true of whatever run
+is loaded, and it tells an operator exactly which views will be populated.
+
 ## Three findings that constrain any design
 
 **Scope must be on screen next to the formula.** The best plan this exploration's run produced is

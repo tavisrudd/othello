@@ -90,6 +90,10 @@ rather than extras:
 - **The C1016 evolution feature graph and its progress display**, as a source of ideas.
 - **The compilation itself**, visualized as its own object.
 - **The quotient DAG and tablebase.**
+- **A live operator surface, not a static infographic.** Every element on screen must be one that
+  could realistically exist in a running system: generic, driven only by data a campaign emits, and
+  correct for any run rather than written about one. Case-specific narrative prose is out. Large
+  numbers are shown in scientific notation.
 
 The last three turn out to be one shape of object — a staged reduction cascade with a surviving root
 count at every node — and the C1016 record already holds the numbers, including real `perf stat`
