@@ -271,7 +271,23 @@ The load-bearing result is that no core instrumentation is needed: a run directo
 complete self-describing record, and `ergodisctl --json` already speaks a stable response envelope
 that a backend can forward verbatim.
 
-**Next step on resume**: build the vertical-slice viewer in the worktree against
+### 2026-08-31, second block — roughly 50 minutes of budget consumed in total
+
+Built and published the vertical-slice console. It has five views over the real run: the reduction
+cascade, the candidate lineage, the behaviour archive, the object space and its reduction, and the
+step-by-step evaluation replay. Source lives in the worktree under `tools/c1031-viz`, committed
+there as `0beac8b29`.
+
+The user pointed at the C1032 browser-WebAssembly prototype, which changes the architecture
+recommendation: the sequential Ergodis library runs in a browser Web Worker with native parity, so
+the console can re-evaluate plans in the page rather than only replaying recorded output. Wrote the
+recommendation up as `notes/2026-08-31-c1031-ergodis-visualization-architecture.md`.
+
+**Next step on resume**: run the `ej` plus `tt` closeout pass the workspace guide requires for a
+substantial C-item, add the Mystery ledger to the task report, and then ask the user whether a
+production build should be its own task and its own lane.
+
+**Superseded next step from the first block**: build the vertical-slice viewer in the worktree against
 `/home/tavis/.cache/c1031-runs/run1`, starting with the lineage graph from the `evolve-start`
 evidence file. Then read OpenEvolve's `scripts/visualizer.py` as actual code — it is the
 closest existing thing to the evolve-campaign view and will either be adaptable or will show why
