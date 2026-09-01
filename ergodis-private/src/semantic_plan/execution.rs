@@ -49,7 +49,7 @@ impl ReducerLane {
     }
 
     #[must_use]
-    pub fn arguments<'a>(self, pool: &'a [i64]) -> Option<&'a [i64]> {
+    pub fn arguments(self, pool: &[i64]) -> Option<&[i64]> {
         let start = self.argument_start as usize;
         pool.get(start..start + self.argument_count as usize)
     }
@@ -111,7 +111,7 @@ impl ExecutionStage {
     }
 
     #[must_use]
-    pub fn arguments<'a>(self, pool: &'a [i64]) -> Option<&'a [i64]> {
+    pub fn arguments(self, pool: &[i64]) -> Option<&[i64]> {
         let start = self.argument_start as usize;
         pool.get(start..start + self.argument_count as usize)
     }
