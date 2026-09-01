@@ -1,0 +1,1 @@
+{"schema":"ergodis-attack-plan-v0","name":"high-root-orbit","role":"diagnostic","output":"predicate","program":[{"op":"field","name":"root_orbit"},{"op":"const","value":3},{"op":"gt"}]}

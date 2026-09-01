@@ -46,6 +46,11 @@ struct StrategyAudit {
     first_perfect_trial: Option<u64>,
     first_perfect_semantic_op_rows: Option<u64>,
     first_perfect_operator: Option<String>,
+    best_weighted_correct: u64,
+    weighted_rows: u64,
+    first_best_trial: Option<u64>,
+    first_best_semantic_op_rows: Option<u64>,
+    first_best_operator: Option<String>,
     operator_scorecards: Value,
     target_profile: Value,
     best_plan: Value,
@@ -66,6 +71,18 @@ struct AuditReport {
     beam: usize,
     max_candidates: usize,
     strategies: Vec<StrategyAudit>,
+}
+
+#[derive(Default)]
+struct EvidenceMilestones {
+    first_perfect_trial: Option<u64>,
+    first_perfect_semantic_op_rows: Option<u64>,
+    first_perfect_operator: Option<String>,
+    best_weighted_correct: u64,
+    weighted_rows: u64,
+    first_best_trial: Option<u64>,
+    first_best_semantic_op_rows: Option<u64>,
+    first_best_operator: Option<String>,
 }
 
 fn require_ok(response: Response) -> Result<Value> {
@@ -137,10 +154,11 @@ fn sha256(path: &Path) -> Result<String> {
     Ok(format!("{:x}", digest.finalize()))
 }
 
-fn inspect_evidence(path: &Path) -> Result<(Option<u64>, Option<u64>, Option<String>)> {
+fn inspect_evidence(path: &Path) -> Result<EvidenceMilestones> {
     let file = File::open(path)?;
     let mut trial = 0_u64;
     let mut semantic_op_rows = 0_u64;
+    let mut milestones = EvidenceMilestones::default();
     for line in BufReader::new(file).lines() {
         let record: Value = serde_json::from_str(&line?)?;
         if record.get("generation").is_none() || record.get("operator").is_none() {
@@ -153,17 +171,26 @@ fn inspect_evidence(path: &Path) -> Result<(Option<u64>, Option<u64>, Option<Str
             .checked_add(record["cost"]["semantic_op_rows"].as_u64().unwrap_or(0))
             .context("candidate semantic-op row count overflow")?;
         let evaluation = &record["evaluation"];
-        if evaluation["weighted_correct"].as_u64().is_some()
-            && evaluation["weighted_correct"] == evaluation["weighted_rows"]
-        {
-            return Ok((
-                Some(trial),
-                Some(semantic_op_rows),
-                record["operator"].as_str().map(str::to_owned),
-            ));
+        let Some(weighted_correct) = evaluation["weighted_correct"].as_u64() else {
+            continue;
+        };
+        let weighted_rows = evaluation["weighted_rows"]
+            .as_u64()
+            .context("candidate evaluation omitted weighted row count")?;
+        milestones.weighted_rows = milestones.weighted_rows.max(weighted_rows);
+        if weighted_correct > milestones.best_weighted_correct {
+            milestones.best_weighted_correct = weighted_correct;
+            milestones.first_best_trial = Some(trial);
+            milestones.first_best_semantic_op_rows = Some(semantic_op_rows);
+            milestones.first_best_operator = record["operator"].as_str().map(str::to_owned);
+        }
+        if weighted_correct == weighted_rows && milestones.first_perfect_trial.is_none() {
+            milestones.first_perfect_trial = Some(trial);
+            milestones.first_perfect_semantic_op_rows = Some(semantic_op_rows);
+            milestones.first_perfect_operator = record["operator"].as_str().map(str::to_owned);
         }
     }
-    Ok((None, None, None))
+    Ok(milestones)
 }
 
 fn run_strategy(args: &Args, seeds: &[Value], strategy: &'static str) -> Result<StrategyAudit> {
@@ -231,17 +258,21 @@ fn run_strategy(args: &Args, seeds: &[Value], strategy: &'static str) -> Result<
         .as_str()
         .context("completed evolution omitted evidence path")?;
     let evidence_path = run_dir.join(relative);
-    let (first_perfect_trial, first_perfect_semantic_op_rows, first_perfect_operator) =
-        inspect_evidence(&evidence_path)?;
+    let milestones = inspect_evidence(&evidence_path)?;
     let summary = &completed["summary"];
     Ok(StrategyAudit {
         strategy,
         tested: summary["tested"].as_u64().unwrap_or(0),
         perfect: summary["perfect"].as_u64().unwrap_or(0),
         rows_evaluated: summary["rows_evaluated"].as_u64().unwrap_or(0),
-        first_perfect_trial,
-        first_perfect_semantic_op_rows,
-        first_perfect_operator,
+        first_perfect_trial: milestones.first_perfect_trial,
+        first_perfect_semantic_op_rows: milestones.first_perfect_semantic_op_rows,
+        first_perfect_operator: milestones.first_perfect_operator,
+        best_weighted_correct: milestones.best_weighted_correct,
+        weighted_rows: milestones.weighted_rows,
+        first_best_trial: milestones.first_best_trial,
+        first_best_semantic_op_rows: milestones.first_best_semantic_op_rows,
+        first_best_operator: milestones.first_best_operator,
         operator_scorecards: summary["operator_scorecards"].clone(),
         target_profile: summary["target_profile"].clone(),
         best_plan: summary["best"]["plan"].clone(),
@@ -287,4 +318,40 @@ fn main() -> Result<()> {
     writer.flush()?;
     println!("{}", serde_json::to_string(&report)?);
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn evidence_milestones_keep_first_final_best_and_perfect() {
+        let path = std::env::temp_dir().join(format!(
+            "ergodis-target-strategy-evidence-{}.jsonl",
+            std::process::id()
+        ));
+        let mut file = OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(&path)
+            .unwrap();
+        for record in [
+            json!({"generation": 0, "operator": "seed", "cost": {"semantic_op_rows": 10}, "evaluation": {"weighted_correct": 4, "weighted_rows": 10}}),
+            json!({"generation": 0, "operator": "numeric", "cost": {"semantic_op_rows": 20}, "evaluation": {"weighted_correct": 7, "weighted_rows": 10}}),
+            json!({"generation": 1, "operator": "exact", "cost": {"semantic_op_rows": 30}, "evaluation": {"weighted_correct": 10, "weighted_rows": 10}}),
+            json!({"generation": 1, "operator": "duplicate", "cost": {"semantic_op_rows": 40}, "evaluation": {"weighted_correct": 10, "weighted_rows": 10}}),
+        ] {
+            writeln!(file, "{}", serde_json::to_string(&record).unwrap()).unwrap();
+        }
+        let milestones = inspect_evidence(&path).unwrap();
+        assert_eq!(milestones.best_weighted_correct, 10);
+        assert_eq!(milestones.weighted_rows, 10);
+        assert_eq!(milestones.first_best_trial, Some(3));
+        assert_eq!(milestones.first_best_semantic_op_rows, Some(60));
+        assert_eq!(milestones.first_best_operator.as_deref(), Some("exact"));
+        assert_eq!(milestones.first_perfect_trial, Some(3));
+        assert_eq!(milestones.first_perfect_semantic_op_rows, Some(60));
+        assert_eq!(milestones.first_perfect_operator.as_deref(), Some("exact"));
+        std::fs::remove_file(path).unwrap();
+    }
 }

@@ -80,6 +80,22 @@ lock, I/O, or publication: it still performs only the existing coarse
 heartbeat stores and steering-safe-point protocol. Final JSON reports profile
 updates, rejected live-only tuples, and queued refreshes.
 
+### Root-cost routing audit
+
+`alignment_root_corpus` builds an application-derived evolution corpus by
+forcing each alignment root and recording its exact exhaustive search cost.
+The diagnostic control copies only the first initialized root point into
+preallocated state; it performs no serialization in the search path. Every
+controlled solve must then match an ordinary uncontrolled solve in answer and
+all search counters. The report also computes the exact observational ceiling
+obtained by quotienting rows with identical exposed feature vectors.
+
+`target_strategy_audit` runs matched balanced, numeric, and structural
+evolution jobs and reports both time-to-first-perfect and time-to-final-best,
+including cumulative semantic-op rows. The committed development and held-out
+alignment controls, hashes, replay commands, and bounded interpretation are in
+`evidence/alignment-root-cost-routing-README.md`.
+
 When `--socket` is omitted, a private endpoint is derived under
 `$XDG_RUNTIME_DIR/ergodis/<uid>/`. There is no `/tmp` fallback. The durable
 manifest is mode 0600 inside a mode-0700 run directory and binds the full run
