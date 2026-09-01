@@ -319,9 +319,10 @@ files are disposable and may be deleted at any time.
    successor loop is allocation-free and uses canonical table arithmetic. The
    C1018 q=64,r=5 client replaces nested generator rows with the fixed
    three-generator pack; private vocabulary remains outside core. The stamped
-   orbit set is now size-gated and packed for large workspaces; the current
-   next profile is the residual visited-bit ownership path, not another field,
-   rank/unrank, or hash-table specialization.
+   orbit set is now size-gated and packed for large workspaces, and one-worker
+   orbit publication no longer uses locked read-modify-write operations. The
+   current next target is a power-of-two/radix projective decoder, not another
+   generic inlining or hash-table specialization.
    Keep tactical plane completion in
    `ergodis-private`; do not specialize the public core for C1018.
    The smaller linear-code gap is also closed: a compiled binary row-space
@@ -765,6 +766,32 @@ files are disposable and may be deleted at any time.
    `c985-c1018-packed-stamps-q64-counters.tsv`, and
    `c985-c1018-packed-stamps-q64-wall.tsv`. The next exact-stage profile is the
    per-orbit atomic visited publication/ownership path.
+
+   That profile rejects a complex parallel publication subsystem but admits a
+   one-worker theorem specialization. Complete orbit publication maintains the
+   invariant that every point of each previously accepted orbit is marked.
+   Since group orbits partition the point set, in a one-worker solve an
+   unvisited start implies that its entire orbit is unowned. The packed worker
+   can therefore omit the canonical-owner locked claim and publish with relaxed
+   load/store operations; the parallel branch retains the existing owner
+   `fetch_or` and atomic publication unchanged. The mode branch occurs once per
+   completed orbit, not in either publication loop.
+
+   Seven rotated q=64,r=5 pairs give parent/specialized 1T wall of 1.209671x
+   (`t=2.30`) and task-clock of 1.136956x (`t=2.61`); cycles point in the same
+   direction at 1.060768x but remain unresolved (`t=1.20`). Instructions move
+   by only 0.05%. The unchanged 12T path is unresolved at 1.024667x wall
+   (`t=0.79`) and 0.989958x cycles (`t=-0.65`). Seven rotated 16-solve q=32
+   batches retain exactly the same instructions and branches; cycles are
+   unresolved at 1.023948x (`t=0.54`). q=8 and q=32 replays are byte-identical
+   at 1T and 12T, as are all q=64 measurement outputs. Raw tables are
+   `c985-c1018-single-worker-visited-q32-control.tsv`,
+   `c985-c1018-single-worker-visited-q64-counters.tsv`, and
+   `c985-c1018-single-worker-visited-q64-wall.tsv`. Sampling caps parallel
+   atomic publication near 2% of q=64 cycles, so pulse/private-bitmap machinery
+   is below the complexity threshold. The next high-value target is the
+   13--21% projective point decoder, approached through a power-of-two/radix
+   theorem specialization rather than repeating the rejected generic inlining.
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no

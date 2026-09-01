@@ -846,6 +846,7 @@ fn worker_packed(
     cursor: &AtomicU64,
     mode: RankMode,
     max_orbit: usize,
+    single_worker: bool,
 ) -> Result<(Vec<u64>, u64, Vec<OrbitRecord>)> {
     let mut hist = vec![0u64; d + 2];
     let mut total_orbits = 0u64;
@@ -883,15 +884,26 @@ fn worker_packed(
                 }
             }
             let owner = *orbit.iter().min().expect("orbit is nonempty");
-            let word = (owner / 64) as usize;
-            let bit = 1u64 << (owner % 64);
-            if visited[word].fetch_or(bit, Ordering::AcqRel) & bit != 0 {
-                continue; // another thread owns this orbit
-            }
-            for &pt in orbit.iter() {
-                let w = (pt / 64) as usize;
-                let b = 1u64 << (pt % 64);
-                visited[w].fetch_or(b, Ordering::Relaxed);
+            if single_worker {
+                // Orbit classes partition the projective points. With one
+                // worker, an unvisited `start` therefore implies that this
+                // entire orbit is unowned; no atomic claim is necessary.
+                for &pt in orbit.iter() {
+                    let word = &visited[(pt / 64) as usize];
+                    let bit = 1u64 << (pt % 64);
+                    word.store(word.load(Ordering::Relaxed) | bit, Ordering::Relaxed);
+                }
+            } else {
+                let word = (owner / 64) as usize;
+                let bit = 1u64 << (owner % 64);
+                if visited[word].fetch_or(bit, Ordering::AcqRel) & bit != 0 {
+                    continue; // another thread owns this orbit
+                }
+                for &pt in orbit.iter() {
+                    let w = (pt / 64) as usize;
+                    let b = 1u64 << (pt % 64);
+                    visited[w].fetch_or(b, Ordering::Relaxed);
+                }
             }
             actions.point(owner, &mut buf)?;
             let info = analyse(f, d, &buf, mode, &mut sc);
@@ -1490,7 +1502,17 @@ fn main() -> Result<()> {
             let failures = &failures;
             handles.push(scope.spawn(move || {
                 let result = if packed_stamps {
-                    worker_packed(f, d, actions, n, visited, cursor, args.rank_mode, max_orbit)
+                    worker_packed(
+                        f,
+                        d,
+                        actions,
+                        n,
+                        visited,
+                        cursor,
+                        args.rank_mode,
+                        max_orbit,
+                        threads == 1,
+                    )
                 } else {
                     worker(f, d, actions, n, visited, cursor, args.rank_mode, max_orbit)
                 };
