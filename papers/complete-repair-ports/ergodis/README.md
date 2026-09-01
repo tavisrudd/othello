@@ -107,6 +107,12 @@ cargo doc --all-features --open
 
 The crate is at version 0.1.0; lower-level interfaces may still evolve.
 
+Generated-span compilation is resource-bounded by default. Use
+`GeneratedSpanTable::build_bounded` with `SpanBuildLimits` when an application
+needs a different projective-column, state, retained-matrix, or transition
+budget. Exhausting a budget returns a typed `SpanError::ResourceLimit`; it does
+not rely on allocation failure or panic as flow control.
+
 ## Build and use the CLI
 
 ergodis requires Rust 1.87 or later.

@@ -816,6 +816,17 @@ files are disposable and may be deleted at any time.
    checked-versus-debug-checked `SmallField`/`BinarySmallField` boundary remain
    open rather than being conflated with modulus validity.
 
+   Commit `8bd0969a6` makes the generated-span compiler fail closed under explicit projective-
+   column, state, retained-matrix-byte, and transition limits. Transition
+   accounting is exact but occurs once per input column rather than in the
+   inner state loop. On the existing vector application control (seven
+   interleaved parent/candidate pairs, 100,000 repetitions per arm), the
+   candidate/parent ratios are 0.99999999x instructions (`t=-0.80`),
+   0.99999997x branches (`t=-1.13`), and 0.99928x cycles (`t=-0.10`): no
+   measurable operational cost. This resolves finding 9's unbounded/abort
+   failure mode while leaving duplicate retained basis storage explicitly
+   open.
+
    Treat C1016's “Public-core enhancement ledger” as a recurring evolve input,
    not as campaign authority.  Its three current reusable requests are a
    relational evolution grammar, provenance-bound counterexample-guided
