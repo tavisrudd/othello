@@ -884,9 +884,21 @@ files are disposable and may be deleted at any time.
    their three durable records; a changed negative row separately invalidates
    the formerly sound `x > 0` node in one row.  Replay acceptance, rejection,
    and row counters are footer-visible.  Strict all-target/all-feature clippy
-   and the complete suite pass.  Next add counterexample-separating premise
-   selection and explicit domain-overlap scoring; do not import a learned
-   proposer before those exact controls.
+   and the complete suite pass.
+
+   Commit `dc5363d51` removes archive-order bias from premise selection.
+   Compatible domains are exact equality of role, output type, and scope.
+   Within a domain, adaptive coverage sets compute each pair's exact marginal
+   uncovered-positive weight without materializing candidate plans.  Pairs
+   with zero separation gain disappear; the remainder sort by marginal gain
+   per combined semantic operation, then total coverage and deterministic
+   structural ties, before the existing bounded compile/full-replay gate.  The
+   synthetic control prefers gain `2` at cost `4` over gain `10` at cost `100`,
+   confirming that a larger absolute premise does not crowd out a fivefold
+   better efficiency.  Strict all-target/all-feature clippy and the complete
+   suite pass.  Next extend the exact target graph from frozen-row obligations
+   to solver root/debt/exceptional-state profiles; a learned proposer remains
+   gated on that measured operational bridge.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a

@@ -50,7 +50,7 @@ problem has already been compiled into exact finite observables.
 | Target selection | TTT-Discover uses maximum-oriented PUCT; runtime CodeEvolve profiles weighted component graphs | deterministic best-impact-per-cost heap with one-slot exploration floor | next import root/profile target graphs, not a learned policy |
 | Learning from a campaign | TTT-Discover updates the model at test time; HTPS trains online from proof search | no learned proposal policy | defer weight updates until exact archives and rewards are calibrated |
 | Learning from failure | Minimo hindsight-relabels failed proof trees into achieved theorems and proofs | typed proper subexpressions are retained only after zero-false-positive replay, with explicit no-authority obligations | extend from frozen feature rows to intermediate solver states and proof handles |
-| Cumulative theory | Minimo identifies lemma accumulation and premise selection as necessary for depth | bounded OR-composition DAG with adaptive coverage and cross-campaign replay | add counterexample-separating premise selection, domain overlap, and kernel handles |
+| Cumulative theory | Minimo identifies lemma accumulation and premise selection as necessary for depth | bounded OR-composition DAG, exact domain equality, marginal-coverage/cost premise rank, and cross-campaign replay | extend obligations to solver states and import kernel proof handles |
 | Trace diagnosis | EvoTrace/EvoReplay retain source, lineage, prompts, evaluation metadata, replay interventions, and cycling tests | bounded event ledger and streamed trials, but incomplete lineage/replay schema and no cycling diagnostic | make every candidate replayable and detect equivalent reversions before evaluation |
 | Runtime focus | runtime CodeEvolve selects profiled hot components and prunes context | Ergodis has perf counters and rich root metrics but target choice is mostly manual | use measured theorem cost, state mass, exceptional roots, and debt as target weights |
 | Exactness boundary | most systems rely on task evaluators and may overfit them | explicit `proof_authority: false`, hostile replay, exact witnesses/counterexamples | retain this as the non-negotiable architectural edge |
@@ -204,9 +204,10 @@ Status 2026-09-01: typed proper Boolean subexpressions with positive coverage
 and zero frozen-batch false positives enter a bounded, explicitly untrusted
 ledger.  Compatible nodes compose under the exact OR rule after adaptive
 coverage screening and full replay.  Archives persist and revalidate the DAG
-across compatible campaigns.  Counterexample-separating premise selection,
-domain-overlap scoring, solver-state invariants, and kernel proof handles remain
-open.
+across compatible campaigns.  Exact domain equality and marginal
+counterexample-separation per semantic cost now rank premise pairs.
+Solver-state invariants, richer partial domain overlap, and kernel proof handles
+remain open.
 
 When a candidate fails, inspect its opcode trace and the exact search states it
 did settle. Extract:
