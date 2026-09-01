@@ -165,71 +165,31 @@ Reject an encoding when it improves isolated instruction count but loses
 cycles or harms the small control. Dispatch must remain outside the solve
 loop.
 
-## Horn witness cautionary experiment
+## Type experiments C1016 should run
 
-Use types to make cold-established invariants travel into hot kernels, but do
-not assume that a zero-sized witness is automatically the fastest encoding.
-The first real-API Horn prototype removed instructions and branches yet made
-cycles worse because its field-by-field transcript construction prevented wide
-stores.
+Run the candidates in this order, keeping each as a private, independently
+revertible A/B:
 
-The best immediate C1016 targets are the seven-residual aggregation and fixed
-quotient-shift kernels, where type-level dimensions can remove genuinely hot
-loop work. The Horn proof compiler should first try a compact validated-slice
-witness rather than a fully monomorphized ZST program.
+1. `ResidualTuple<T, 7>` and `MatchingFamily<Spec>`: fuse the seven residual
+   matching calculations and their bounded multiset/group aggregates. Compare
+   a compact scalar loop, explicit unrolling, and the best applicable SIMD
+   shape.
+2. `ShiftPack<MASK>`: specialize the dominant q-shift families once outside
+   search, reuse common loads and partial sums, and retain a runtime-mask
+   fallback.
+3. `PackedProfile<Layout>` plus `Residue<M>`: prevalidate packing and modular
+   domains, then replace repeated extraction/range work with constant
+   shifts/masks and canonical-width arithmetic.
+4. `ActivePrefix<N>` or `KernelShape<N>`: specialize only the measured hot
+   low-dimensional cases, with one cold dispatch and an unspecialized fallback.
+5. `ValidatedRegistry`: move validation out of repeated evolved-program
+   evaluation while preserving the compact loop representation.
 
-## What was measured
+The first two have the strongest solve-time case because they can fuse work
+that C1016 currently repeats. The fifth primarily accelerates theorem
+generation/testing in the daemon.
 
-A disposable side prototype included the current
-`ergodis-private/src/proof_synthesis.rs` implementation without editing it. It
-compared:
-
-1. the real `derive_horn_closure_into` over the seven registered q29 rules;
-2. a zero-byte `Validated<Q29>` marker whose associated program supplied the
-   same rules after a cold validation pass.
-
-Both paths produced byte-identical eight-slot workspaces and identical
-`(facts, used)` results. Seven order-rotated pairs of 20 million derivations
-gave baseline/ZST ratios:
-
-- instructions: `1.029407910x` in the ZST version's favour;
-- branches: `1.086943402x` in the ZST version's favour;
-- cycles: `0.898931773x`, `t=-3.64`, a material ZST regression;
-- wall: `1.004776176x`, `t=0.10`, unresolved.
-
-The witness itself was exactly zero bytes. Assembly then exposed an accidental
-store-shape difference: the control used two eight-byte stores per transcript
-record, while the prototype used 8+4+2+1-byte stores. Reconstructing a local
-record and assigning it whole restored the paired wide stores. In the corrected
-diagnostic, ZST cycles became unresolved rather than regressing, but it used
-2.86% more instructions while saving 4.00% branches. It still has no admission
-case. The compact validated-slice variant is the next proper experiment.
-
-An earlier synthetic control reported a much larger ZST win, but it had
-artificially hidden the dynamic rule slice from the optimizer. It was not
-representative of the real closure API and must not be cited as expected C1016
-speedup.
-
-## Why the first encoding lost
-
-The first prototype filled the public transcript fields through a mutable
-reference. LLVM emitted four stores per 16-byte record: 8+4+2+1 bytes. The
-existing kernel constructs the record as a value and emits two eight-byte
-stores. Seven repetitions of the narrower store sequence created enough store-
-port and dependency pressure to lose cycles despite retiring fewer total
-instructions.
-
-Constructing `RuleApplication::EMPTY` locally, filling it, and assigning the
-whole record restored paired wide stores. The corrected ZST body is 640 bytes
-versus 658 bytes for the baseline, and the cycle regression disappears. This
-is a code-generation lesson, not evidence that ZSTs inherently damage the
-front end.
-
-This is the same small-solve/code-shape hazard already observed elsewhere in
-Ergodis: monomorphization is useful only when the eliminated work exceeds the
-I-cache, front-end, and scheduling cost of the expanded kernel.
-
-## Recommended theorem-registry sequence
+## Validated-registry experiment
 
 For runtime evolved programs, try these in order:
 
@@ -253,6 +213,24 @@ For runtime evolved programs, try these in order:
 Count real evolve-campaign evaluations before promotion. If runtime registry
 evaluation is cold, the seven-residual search kernels still have higher EV.
 
+## Measurement-derived constraints
+
+A disposable real-API prototype established two constraints for these type
+experiments:
+
+- Existing fixed Horn adapters are already compiler-specialized through the
+  ordinary API. Wrapping them in a ZST does not itself remove work.
+- Construct hot transcript records as complete values. Field-by-field mutation
+  changed two wide stores into 8+4+2+1-byte stores and caused an approximately
+  11% cycle regression despite fewer instructions and branches. Whole-record
+  assignment removed that regression.
+
+The useful lesson for C1016 is narrow: inspect generated code and counters for
+every typed representation. A zero-byte marker is free in layout, but the
+surrounding source shape can still worsen stores, scheduling, code size, or
+front-end pressure. Admit a type-level specialization only when it eliminates
+measured hot work in the real kernel.
+
 ## Safety and performance rules
 
 - A phantom is evidence only when all constructors are private and the cold
@@ -273,10 +251,9 @@ evaluation is cold, the seven-residual search kernels still have higher EV.
 
 ## Suggested first experiment
 
-After the live C1016 edit window closes, add a private-only
-`ValidatedRegistry<'a>` at the evolved-program promotion boundary. Benchmark
-runtime candidate evaluation before/after validation and record actual
-campaign call counts. Leave the ten fixed adapters unchanged unless an
-authority/API argument independently justifies migration. In parallel, build
-a separate `N=7` residual-aggregation A/B; that remains the most likely
-solve-time win.
+After the live C1016 edit window closes, start with the private `N=7`
+residual-aggregation A/B because it has the best chance to remove solve-time
+work. Then add `ValidatedRegistry<'a>` at the evolved-program promotion
+boundary and measure it on real candidate-evaluation traffic. Leave the fixed
+adapters unchanged unless an authority/API argument independently justifies a
+migration.
