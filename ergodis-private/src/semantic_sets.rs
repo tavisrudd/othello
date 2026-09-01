@@ -320,7 +320,7 @@ impl TernaryPartitionMaxOverlapProfiler {
         universe: u64,
         object_size: usize,
     ) -> Result<Self, &'static str> {
-        if family.is_empty() || family.len() % 3 != 0 {
+        if family.is_empty() || !family.len().is_multiple_of(3) {
             return Err("ternary family size must be positive and divisible by three");
         }
         if object_size > universe.count_ones() as usize {
