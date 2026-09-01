@@ -2279,9 +2279,9 @@ mod tests {
             concat!(
                 "{\"schema\":\"ergodis-campaign-data-v0\",\"presentation\":\"evolve\",\"problem\":\"threshold\",\"fields\":[\"x\"],\"rows\":4}\n",
                 "{\"id\":0,\"expected\":false,\"values\":[0]}\n",
-                "{\"id\":1,\"expected\":false,\"values\":[1]}\n",
-                "{\"id\":2,\"expected\":true,\"values\":[2]}\n",
-                "{\"id\":3,\"expected\":true,\"values\":[3]}\n"
+                "{\"id\":1,\"expected\":false,\"values\":[99]}\n",
+                "{\"id\":2,\"expected\":true,\"values\":[100]}\n",
+                "{\"id\":3,\"expected\":true,\"values\":[101]}\n"
             ),
         )
         .unwrap();
@@ -2346,10 +2346,18 @@ mod tests {
         assert_eq!(records[0]["problem"], "threshold");
         assert_eq!(records[1]["operator"], "seed");
         assert!(records[1]["parent_hash"].is_null());
+        assert_eq!(records[1]["failure_shape"]["kind"], "false-positive");
+        assert_eq!(records[1]["failure_shape"]["first_mismatch_id"], 1);
+        assert_eq!(records[1]["failure_shape"]["probes"][0]["field"], "x");
+        assert_eq!(records[1]["failure_shape"]["probes"][0]["value"], 99);
         assert!(records
             .iter()
             .skip(2)
             .any(|record| record["parent_hash"].as_str().is_some()));
+        assert!(records
+            .iter()
+            .skip(2)
+            .any(|record| record["operator"] == "counterexample-threshold"));
         assert!(records
             .iter()
             .skip(2)

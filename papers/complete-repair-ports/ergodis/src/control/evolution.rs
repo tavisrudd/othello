@@ -14,6 +14,8 @@ use std::sync::Arc;
 const EVOLUTION_EVIDENCE_SCHEMA: &str = "ergodis-evolution-evidence-v0";
 const MAX_EVOLUTION_IMPORT_BYTES: u64 = 16 * 1024 * 1024;
 const MAX_EVOLUTION_RECORD_BYTES: usize = 256 * 1024;
+const MAX_FAILURE_PROBES: usize = 8;
+const MAX_TARGETED_MUTATIONS: usize = 24;
 
 #[derive(Clone)]
 pub(super) struct EvolutionIdentity {
@@ -121,6 +123,26 @@ struct ScopeMutationProfile {
     field: String,
     observed_mask: u64,
     positive_majority_mask: u64,
+}
+
+struct MutationContext<'a> {
+    fields: &'a [String],
+    scope_profiles: &'a [ScopeMutationProfile],
+    field_index: &'a BTreeMap<&'a str, u16>,
+}
+
+#[derive(Clone, Copy, Default)]
+struct FailureProbe {
+    field: u16,
+    value: i64,
+}
+
+#[derive(Clone)]
+struct FailureShape {
+    first_mismatch: Option<usize>,
+    expected: Option<bool>,
+    probes: [FailureProbe; MAX_FAILURE_PROBES],
+    probe_count: u8,
 }
 
 struct PendingCandidate {
@@ -287,6 +309,17 @@ pub(super) fn run_evolution(
     // calling Linux task. Failure is reported in the job summary.
     let low_priority = unsafe { libc::setpriority(libc::PRIO_PROCESS, 0, 10) } == 0;
     let scope_profiles = scope_profiles(&batch)?;
+    let field_index = batch
+        .fields
+        .iter()
+        .enumerate()
+        .map(|(index, name)| (name.as_str(), index as u16))
+        .collect::<BTreeMap<_, _>>();
+    let mutation_context = MutationContext {
+        fields: &batch.fields,
+        scope_profiles: &scope_profiles,
+        field_index: &field_index,
+    };
     let mut writer = BufWriter::new(output);
     let mut header = serde_json::to_vec(&EvolutionEvidenceHeader::from(&identity))?;
     header.push(b'\n');
@@ -377,6 +410,9 @@ pub(super) fn run_evolution(
                 continue;
             };
             let equivalent_to = outcome_classes.get(&evaluation.outcome_hash).cloned();
+            let failure_shape =
+                failure_shape(&batch, &plan, evaluation.first_mismatch, &field_index);
+            let failure_record = failure_shape_record(&batch, &failure_shape, &evaluation);
             outcome_classes
                 .entry(evaluation.outcome_hash.clone())
                 .or_insert_with(|| plan.name.clone());
@@ -390,6 +426,7 @@ pub(super) fn run_evolution(
                 "hash": &compiled.hash,
                 "equivalent_to": equivalent_to,
                 "evaluation": &evaluation,
+                "failure_shape": failure_record,
             });
             let mut encoded = serde_json::to_vec(&record)?;
             encoded.push(b'\n');
@@ -436,6 +473,7 @@ pub(super) fn run_evolution(
                 evaluation.outcome_hash,
                 compiled.hash,
                 plan,
+                evaluation.first_mismatch,
             ));
             progress.tested.store(tested as u64, Ordering::Relaxed);
             progress.perfect.store(perfect as u64, Ordering::Relaxed);
@@ -453,7 +491,7 @@ pub(super) fn run_evolution(
         });
         let mut expanded_outcomes = BTreeSet::new();
         let mut expanded = 0_usize;
-        for (_, _, _, outcome_hash, parent_hash, parent) in ranked {
+        for (_, _, _, outcome_hash, parent_hash, parent, first_mismatch) in ranked {
             if expanded == bounds.beam {
                 break;
             }
@@ -461,11 +499,12 @@ pub(super) fn run_evolution(
                 outcome_expansion_rejections += 1;
                 continue;
             }
+            let failure_shape = failure_shape(&batch, &parent, first_mismatch, &field_index);
             mutate_plan(
                 &parent,
                 &parent_hash,
-                &batch.fields,
-                &scope_profiles,
+                &mutation_context,
+                &failure_shape,
                 &mut current,
                 bounds.max_candidates.saturating_sub(tested),
             );
@@ -496,6 +535,83 @@ pub(super) fn run_evolution(
             "plan": plan,
         })),
     }))
+}
+
+fn failure_shape(
+    batch: &FeatureBatch,
+    plan: &PlanSpec,
+    first_mismatch: Option<usize>,
+    field_index: &BTreeMap<&str, u16>,
+) -> FailureShape {
+    let mut shape = FailureShape {
+        first_mismatch,
+        expected: first_mismatch.map(|row| batch.expected(row)),
+        probes: [FailureProbe::default(); MAX_FAILURE_PROBES],
+        probe_count: 0,
+    };
+    let Some(row) = first_mismatch else {
+        return shape;
+    };
+    let mut add_field = |name: &str| {
+        let Some(&field) = field_index.get(name) else {
+            return;
+        };
+        if shape.probes[..shape.probe_count as usize]
+            .iter()
+            .any(|probe| probe.field == field)
+            || shape.probe_count as usize == MAX_FAILURE_PROBES
+        {
+            return;
+        }
+        shape.probes[shape.probe_count as usize] = FailureProbe {
+            field,
+            value: batch.row(row)[field as usize],
+        };
+        shape.probe_count += 1;
+    };
+    if let Some(scope) = &plan.scope {
+        add_field(&scope.field);
+    }
+    for op in &plan.program {
+        if let PlanOp::Field { name } = op {
+            add_field(name);
+        }
+    }
+    shape
+}
+
+fn failure_shape_record(
+    batch: &FeatureBatch,
+    shape: &FailureShape,
+    evaluation: &super::Evaluation,
+) -> Value {
+    let kind = match (
+        evaluation.weighted_false_positive != 0,
+        evaluation.weighted_false_negative != 0,
+    ) {
+        (false, false) => "none",
+        (true, false) => "false-positive",
+        (false, true) => "false-negative",
+        (true, true) => "mixed",
+    };
+    let probes = shape.probes[..shape.probe_count as usize]
+        .iter()
+        .map(|probe| {
+            json!({
+                "field": &batch.fields[probe.field as usize],
+                "value": probe.value,
+            })
+        })
+        .collect::<Vec<_>>();
+    json!({
+        "kind": kind,
+        "first_mismatch_row": shape.first_mismatch,
+        "first_mismatch_id": shape.first_mismatch.map(|row| batch.row_ids[row]),
+        "first_mismatch_expected": shape.expected,
+        "weighted_false_positive": evaluation.weighted_false_positive,
+        "weighted_false_negative": evaluation.weighted_false_negative,
+        "probes": probes,
+    })
 }
 
 fn scope_profiles(batch: &FeatureBatch) -> Result<Vec<ScopeMutationProfile>, ControlError> {
@@ -565,12 +681,23 @@ fn push_scoped_child(
 fn mutate_plan(
     parent: &PlanSpec,
     parent_hash: &str,
-    fields: &[String],
-    scope_profiles: &[ScopeMutationProfile],
+    context: &MutationContext<'_>,
+    failure_shape: &FailureShape,
     output: &mut Vec<PendingCandidate>,
     limit: usize,
 ) {
-    for profile in scope_profiles {
+    mutate_thresholds_from_failure(
+        parent,
+        parent_hash,
+        context.field_index,
+        failure_shape,
+        output,
+        limit.min(output.len().saturating_add(MAX_TARGETED_MUTATIONS)),
+    );
+    if output.len() == limit {
+        return;
+    }
+    for profile in context.scope_profiles {
         if parent
             .scope
             .as_ref()
@@ -637,7 +764,8 @@ fn mutate_plan(
             ),
             PlanOp::Field { name } => (
                 "field-substitute",
-                fields
+                context
+                    .fields
                     .iter()
                     .filter(|field| *field != name)
                     .map(|name| PlanOp::Field { name: name.clone() })
@@ -675,6 +803,80 @@ fn mutate_plan(
     }
 }
 
+fn mutate_thresholds_from_failure(
+    parent: &PlanSpec,
+    parent_hash: &str,
+    field_index: &BTreeMap<&str, u16>,
+    failure_shape: &FailureShape,
+    output: &mut Vec<PendingCandidate>,
+    limit: usize,
+) {
+    if failure_shape.first_mismatch.is_none() {
+        return;
+    }
+    for index in 0..parent.program.len().saturating_sub(2) {
+        let (field, constant, comparison) = match (
+            &parent.program[index],
+            &parent.program[index + 1],
+            &parent.program[index + 2],
+        ) {
+            (
+                PlanOp::Field { name },
+                PlanOp::Const { value },
+                PlanOp::Eq | PlanOp::Ne | PlanOp::Lt | PlanOp::Le | PlanOp::Gt | PlanOp::Ge,
+            ) => (name, *value, &parent.program[index + 2]),
+            _ => continue,
+        };
+        let Some(&field) = field_index.get(field.as_str()) else {
+            continue;
+        };
+        let Some(value) = failure_shape.probes[..failure_shape.probe_count as usize]
+            .iter()
+            .find(|probe| probe.field == field)
+            .map(|probe| probe.value)
+        else {
+            continue;
+        };
+        let Some(expected) = failure_shape.expected else {
+            return;
+        };
+        for replacement in threshold_replacements(comparison, expected, value)
+            .into_iter()
+            .flatten()
+        {
+            if output.len() == limit {
+                return;
+            }
+            if replacement == constant {
+                continue;
+            }
+            let mut child = parent.clone();
+            child.program[index + 1] = PlanOp::Const { value: replacement };
+            output.push(PendingCandidate {
+                plan: child,
+                parent_hash: Some(parent_hash.into()),
+                source_hash: None,
+                source_evidence: None,
+                operator: "counterexample-threshold",
+            });
+        }
+    }
+}
+
+fn threshold_replacements(comparison: &PlanOp, expected: bool, value: i64) -> [Option<i64>; 2] {
+    match (comparison, expected) {
+        (PlanOp::Eq, true) | (PlanOp::Ne, false) => [Some(value), None],
+        (PlanOp::Eq, false) | (PlanOp::Ne, true) => [value.checked_sub(1), value.checked_add(1)],
+        (PlanOp::Lt, true) => [value.checked_add(1), None],
+        (PlanOp::Lt, false) | (PlanOp::Le, true) | (PlanOp::Gt, false) | (PlanOp::Ge, true) => {
+            [Some(value), None]
+        }
+        (PlanOp::Le, false) | (PlanOp::Gt, true) => [value.checked_sub(1), None],
+        (PlanOp::Ge, false) => [value.checked_add(1), None],
+        _ => [None, None],
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -690,5 +892,38 @@ mod tests {
         assert!(can_enter_beam(&survivors, 2, 85, 10, 4));
         assert!(!can_enter_beam(&survivors, 2, 79, 0, 1));
         assert!(can_enter_beam(&survivors, 2, 80, 0, 3));
+    }
+
+    #[test]
+    fn counterexample_thresholds_satisfy_the_requested_label() {
+        let comparisons = [
+            PlanOp::Eq,
+            PlanOp::Ne,
+            PlanOp::Lt,
+            PlanOp::Le,
+            PlanOp::Gt,
+            PlanOp::Ge,
+        ];
+        for comparison in &comparisons {
+            for expected in [false, true] {
+                for value in [i64::MIN, -1, 0, 1, i64::MAX] {
+                    for replacement in threshold_replacements(comparison, expected, value)
+                        .into_iter()
+                        .flatten()
+                    {
+                        let observed = match comparison {
+                            PlanOp::Eq => value == replacement,
+                            PlanOp::Ne => value != replacement,
+                            PlanOp::Lt => value < replacement,
+                            PlanOp::Le => value <= replacement,
+                            PlanOp::Gt => value > replacement,
+                            PlanOp::Ge => value >= replacement,
+                            _ => unreachable!(),
+                        };
+                        assert_eq!(observed, expected);
+                    }
+                }
+            }
+        }
     }
 }

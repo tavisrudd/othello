@@ -143,6 +143,16 @@ current presentation and producing code commit, while replay roots record a
 separate source hash and archive path rather than creating a false parent edge
 in the mutation lineage.
 
+Completed predicate evaluations also persist a bounded failure shape: the
+false-positive/false-negative class, first mismatching row identity and label,
+and at most eight values for fields referenced by the candidate.  The daemon
+uses that counterexample to target simple ordered-comparison thresholds before
+trying the generic mutation family.  The generated constant is the nearest
+integer boundary that gives the requested label on that row; overflow yields
+no candidate.  Evidence serialization happens immediately.  Ranked candidates
+retain only the mismatch-row index, and feature probes are reconstructed only
+for the bounded beam selected for expansion.
+
 Socket I/O, JSON, evidence serialization, and plan compilation happen outside
 worker hot loops.  Uncontrolled solves compile without the control-plane
 feature.  Controlled workers retain only the existing coarse safe-point flag;
