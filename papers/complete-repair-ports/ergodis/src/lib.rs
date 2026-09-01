@@ -141,7 +141,9 @@ pub use fibre::{
     compile_dense_fibres, verify_dense_fibres, DenseFibreBounds, DenseFibreError, DenseFibreIndex,
     ExhaustiveFibre, FibreRepresentative,
 };
-pub use field::{BinarySmallField, FieldError, FiniteField, Gf4, Prime, SmallField};
+pub use field::{
+    BinarySmallField, FieldError, FieldPresentation, FiniteField, Gf4, Prime, SmallField,
+};
 pub use frozen_shortest_path::{
     FrozenShortestPathError, FrozenShortestPathMetrics, FrozenShortestPathPlan,
     FrozenShortestPathResult, FrozenShortestPathWorkspace, ValidatedFrozenShortestPathObjective,

@@ -1,4 +1,4 @@
-use crate::field::{FieldError, FiniteField, Prime, SmallField};
+use crate::field::{FieldError, FieldPresentation, FiniteField, Prime, SmallField};
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
@@ -12,6 +12,8 @@ pub enum MatrixError {
     Shape,
     #[error("matrix entries must be reduced modulo the field order")]
     UnreducedEntry,
+    #[error("matrix field presentation does not match the requested arithmetic")]
+    FieldMismatch,
 }
 
 /// Cold owning matrix. Hot DP records use integer IDs into contiguous pools.
@@ -22,7 +24,7 @@ pub struct Matrix {
     rows: u16,
     cols: u16,
     _pad: u32,
-    _reserved: u64,
+    field: FieldPresentation,
 }
 
 const _: () = assert!(std::mem::size_of::<Matrix>() == 32);
@@ -57,7 +59,7 @@ impl Matrix {
             rows,
             cols,
             _pad: 0,
-            _reserved: 0,
+            field: F::PRESENTATION,
         })
     }
 
@@ -82,7 +84,7 @@ impl Matrix {
             rows,
             cols,
             _pad: 0,
-            _reserved: 0,
+            field: field.presentation(),
         })
     }
 
@@ -110,6 +112,11 @@ impl Matrix {
     }
 
     #[inline]
+    pub const fn field_presentation(&self) -> FieldPresentation {
+        self.field
+    }
+
+    #[inline]
     pub fn row(&self, row: usize) -> &[u8] {
         let start = row * self.cols();
         &self.data[start..start + self.cols()]
@@ -127,6 +134,7 @@ impl Matrix {
     }
 
     pub fn transpose_field<F: FiniteField>(&self) -> Result<Self, MatrixError> {
+        self.ensure_field::<F>()?;
         let mut data = vec![0; self.data.len()];
         for row in 0..self.rows() {
             for col in 0..self.cols() {
@@ -142,6 +150,7 @@ impl Matrix {
 
     pub fn canonical_row_basis_field<F: FiniteField>(&self) -> Result<Self, MatrixError> {
         F::validate()?;
+        self.ensure_field::<F>()?;
         if self.data.iter().any(|&entry| entry >= F::ORDER) {
             return Err(MatrixError::UnreducedEntry);
         }
@@ -154,6 +163,7 @@ impl Matrix {
     }
 
     pub fn canonical_row_basis_with(&self, field: &SmallField) -> Result<Self, MatrixError> {
+        self.ensure_field_with(field)?;
         if self
             .data
             .iter()
@@ -193,6 +203,7 @@ impl Matrix {
     }
 
     pub fn append_row_field<F: FiniteField>(&self, row: &[u8]) -> Result<Self, MatrixError> {
+        self.ensure_field::<F>()?;
         if row.len() != self.cols() {
             return Err(MatrixError::Shape);
         }
@@ -213,12 +224,30 @@ impl Matrix {
         if self.cols() != candidate.cols() {
             return Err(MatrixError::Shape);
         }
+        self.ensure_field::<F>()?;
+        candidate.ensure_field::<F>()?;
         let mut joined = self.canonical_row_basis_field::<F>()?;
         let rank = joined.rows();
         for row in 0..candidate.rows() {
             joined = joined.append_row_field::<F>(candidate.row(row))?;
         }
         Ok(joined.canonical_row_basis_field::<F>()?.rows() == rank)
+    }
+
+    #[inline]
+    fn ensure_field<F: FiniteField>(&self) -> Result<(), MatrixError> {
+        if self.field != F::PRESENTATION {
+            return Err(MatrixError::FieldMismatch);
+        }
+        Ok(())
+    }
+
+    #[inline]
+    fn ensure_field_with(&self, field: &SmallField) -> Result<(), MatrixError> {
+        if self.field != field.presentation() {
+            return Err(MatrixError::FieldMismatch);
+        }
+        Ok(())
     }
 }
 
@@ -469,5 +498,65 @@ mod tests {
                 "encoded matrix {encoded}"
             );
         }
+    }
+
+    #[test]
+    fn algebra_rejects_a_different_field_presentation() {
+        use crate::field::Gf4;
+
+        let binary = Matrix::new::<2>(1, 2, vec![1, 1]).unwrap();
+        assert_eq!(
+            binary.canonical_row_basis_field::<Gf4>(),
+            Err(MatrixError::FieldMismatch)
+        );
+        assert_eq!(
+            binary.transpose_field::<Gf4>(),
+            Err(MatrixError::FieldMismatch)
+        );
+        assert_eq!(
+            binary.append_row_field::<Gf4>(&[1, 0]),
+            Err(MatrixError::FieldMismatch)
+        );
+
+        let quaternary = Matrix::new_field::<Gf4>(1, 2, vec![1, 1]).unwrap();
+        assert_eq!(
+            binary.row_space_contains::<2>(&quaternary),
+            Err(MatrixError::FieldMismatch)
+        );
+    }
+
+    #[test]
+    fn runtime_basis_identity_rejects_equal_order_reinterpretation() {
+        let first = SmallField::from_modulus(2, &[1, 1, 0, 1]).unwrap();
+        let second = SmallField::from_modulus(2, &[1, 0, 1, 1]).unwrap();
+        let matrix = Matrix::new_with_field(&first, 1, 2, vec![2, 4]).unwrap();
+        assert_eq!(
+            matrix.canonical_row_basis_with(&second),
+            Err(MatrixError::FieldMismatch)
+        );
+        assert_eq!(
+            matrix.null_space_with(&second),
+            Err(MatrixError::FieldMismatch)
+        );
+    }
+
+    #[test]
+    fn serialized_matrix_retains_its_field_identity() {
+        let matrix = Matrix::new::<3>(1, 2, vec![1, 2]).unwrap();
+        let encoded = serde_json::to_vec(&matrix).unwrap();
+        let decoded: Matrix = serde_json::from_slice(&encoded).unwrap();
+        assert_eq!(decoded, matrix);
+        assert_eq!(
+            decoded.canonical_row_basis::<2>(),
+            Err(MatrixError::FieldMismatch)
+        );
+
+        let mut forged = serde_json::to_value(&matrix).unwrap();
+        forged["field"] = serde_json::json!(0);
+        let forged: Matrix = serde_json::from_value(forged).unwrap();
+        assert_eq!(
+            forged.canonical_row_basis::<3>(),
+            Err(MatrixError::FieldMismatch)
+        );
     }
 }

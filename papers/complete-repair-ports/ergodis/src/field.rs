@@ -1,3 +1,4 @@
+use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Error)]
@@ -20,6 +21,33 @@ mod private {
     pub trait Sealed {}
 }
 
+/// Exact identity of a finite-field presentation and its byte encoding.
+///
+/// Finite fields of the same order are abstractly isomorphic, but matrices of
+/// encoded bytes cannot be silently moved across different polynomial bases.
+/// The lower coefficients encode `a_0 + a_1 p + ...`; the monic leading
+/// coefficient is implicit. All supported fields have order at most 256, so
+/// this representation is exact rather than hashed.
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct FieldPresentation(u64);
+
+const _: () = assert!(std::mem::size_of::<FieldPresentation>() == 8);
+const _: () = assert!(std::mem::align_of::<FieldPresentation>() == 8);
+
+const FIELD_PRESENTATION_MAGIC: u64 = 0x4552_4746_0000_0000;
+
+impl FieldPresentation {
+    const fn new(characteristic: u8, degree: u8, lower_modulus: u16) -> Self {
+        Self(
+            FIELD_PRESENTATION_MAGIC
+                | ((characteristic as u64) << 24)
+                | ((degree as u64) << 16)
+                | lower_modulus as u64,
+        )
+    }
+}
+
 /// Monomorphized arithmetic over a finite field whose elements fit in one byte.
 ///
 /// Implementations use a canonical integer encoding in `0..ORDER`. CLI field
@@ -27,6 +55,7 @@ mod private {
 pub trait FiniteField: private::Sealed + Copy + Send + Sync + 'static {
     const ORDER: u8;
     const CHARACTERISTIC: u8;
+    const PRESENTATION: FieldPresentation;
 
     fn validate() -> Result<(), FieldError>;
 
@@ -114,6 +143,7 @@ impl<const P: u8> Prime<P> {
 impl<const P: u8> FiniteField for Prime<P> {
     const ORDER: u8 = P;
     const CHARACTERISTIC: u8 = P;
+    const PRESENTATION: FieldPresentation = FieldPresentation::new(P, 1, 0);
 
     #[inline]
     fn validate() -> Result<(), FieldError> {
@@ -154,6 +184,7 @@ impl private::Sealed for Gf4 {}
 impl FiniteField for Gf4 {
     const ORDER: u8 = 4;
     const CHARACTERISTIC: u8 = 2;
+    const PRESENTATION: FieldPresentation = FieldPresentation::new(2, 2, 3);
 
     #[inline]
     fn validate() -> Result<(), FieldError> {
@@ -377,6 +408,19 @@ impl SmallField {
     #[inline]
     pub fn modulus(&self) -> &[u8] {
         &self.modulus
+    }
+
+    /// Return the exact characteristic, degree, and polynomial-basis identity.
+    pub fn presentation(&self) -> FieldPresentation {
+        let characteristic = u16::from(self.characteristic);
+        let mut place = 1_u16;
+        let mut lower_modulus = 0_u16;
+        for &coefficient in &self.modulus[..usize::from(self.degree)] {
+            lower_modulus += u16::from(coefficient) * place;
+            place *= characteristic;
+        }
+        debug_assert_eq!(place, self.order);
+        FieldPresentation::new(self.characteristic, self.degree, lower_modulus)
     }
 
     #[inline(always)]
@@ -727,5 +771,20 @@ mod tests {
         let largest = SmallField::new(2, 8).unwrap();
         assert_eq!(largest.order(), 256);
         assert_eq!(largest.mul(255, largest.inverse(255).unwrap()), 1);
+    }
+
+    #[test]
+    fn presentation_identity_is_exact_and_encoding_sensitive() {
+        let canonical_gf4 = SmallField::new(2, 2).unwrap();
+        assert_eq!(canonical_gf4.presentation(), Gf4::PRESENTATION);
+        assert_eq!(
+            SmallField::new(7, 1).unwrap().presentation(),
+            Prime::<7>::PRESENTATION
+        );
+
+        let first_gf8 = SmallField::from_modulus(2, &[1, 1, 0, 1]).unwrap();
+        let second_gf8 = SmallField::from_modulus(2, &[1, 0, 1, 1]).unwrap();
+        assert_eq!(first_gf8.order(), second_gf8.order());
+        assert_ne!(first_gf8.presentation(), second_gf8.presentation());
     }
 }
