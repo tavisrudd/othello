@@ -139,6 +139,7 @@ pub struct SemanticRecipe {
     pub scope: Option<PlanScope>,
     pub provenance: String,
     pub steps: Box<[RecipeStep]>,
+    pub emit_binding: String,
     pub gates: Box<[String]>,
 }
 
@@ -170,6 +171,7 @@ impl SemanticRecipe {
         if self.gates.is_empty() || self.gates.len() > MAX_PLAN_OPS {
             return invalid("semantic recipe has an invalid verification-gate count");
         }
+        validate_plan_name(&self.emit_binding)?;
         let mut bindings = BTreeSet::from([self.source_binding.as_str()]);
         let mut reduced_bindings = BTreeSet::new();
         for step in &self.steps {
@@ -210,6 +212,9 @@ impl SemanticRecipe {
         }
         for gate in &self.gates {
             validate_plan_name(gate)?;
+        }
+        if !bindings.contains(self.emit_binding.as_str()) {
+            return invalid("semantic recipe emits an unknown binding");
         }
         Ok(())
     }
@@ -302,6 +307,10 @@ pub fn format_semantic_recipe(recipe: &SemanticRecipe) -> Result<String, Control
             )),
         }
     }
+    text.push_str(&format!(
+        "  emit {};\n",
+        format_plan_name(&recipe.emit_binding)?
+    ));
     for gate in &recipe.gates {
         text.push_str(&format!("  verify {};\n", format_plan_name(gate)?));
     }
@@ -339,6 +348,7 @@ impl<'a> RecipeParser<'a> {
         let (mut source, mut source_binding, mut source_sort, mut label, mut scope, mut provenance) =
             (None, None, None, None, None, None);
         let mut steps = Vec::new();
+        let mut emit_binding = None;
         let mut gates = Vec::new();
         while !self.consume(&PlanTextTokenKind::RBrace) {
             match self.word()?.as_str() {
@@ -445,8 +455,9 @@ impl<'a> RecipeParser<'a> {
                         },
                     });
                 }
+                "emit" if emit_binding.is_none() => emit_binding = Some(self.name()?),
                 "verify" => gates.push(self.name()?),
-                "source" | "label" | "scope" | "provenance" => {
+                "source" | "label" | "scope" | "provenance" | "emit" => {
                     return self.error("duplicate semantic recipe declaration");
                 }
                 _ => return self.error("unknown semantic recipe declaration"),
@@ -472,6 +483,9 @@ impl<'a> RecipeParser<'a> {
             provenance: provenance
                 .ok_or_else(|| ControlError::Invalid("semantic recipe omits provenance".into()))?,
             steps: steps.into_boxed_slice(),
+            emit_binding: emit_binding.ok_or_else(|| {
+                ControlError::Invalid("semantic recipe omits output binding".into())
+            })?,
             gates: gates.into_boxed_slice(),
         };
         recipe.validate()?;
@@ -600,6 +614,7 @@ recipe affine_caps {
   match affine_subspace from objects as plane sort feature_row retain 1 memory 4096;
   reduce overlap_histogram from plane as extrema sort retained_set retain 2106 memory 131072;
   canonicalize affine_generators from extrema as cap_orbit sort orbit_summary retain 2106 memory 65536 streamed false contract diagnostic verified true;
+  emit cap_orbit;
   verify replay_label;
   verify source_hash;
 }
@@ -656,23 +671,23 @@ recipe affine_caps {
     #[test]
     fn recipes_fail_closed_on_unbounded_or_unsafe_structure() {
         assert!(parse_semantic_recipe(
-            "recipe x { source s as rows sort stream; label a == 1; provenance p; canonicalize g from rows as q sort orbit retain 1 memory 1 streamed false contract preserves verified true; verify replay; }"
+            "recipe x { source s as rows sort stream; label a == 1; provenance p; canonicalize g from rows as q sort orbit retain 1 memory 1 streamed false contract preserves verified true; emit q; verify replay; }"
         )
         .is_err());
         assert!(parse_semantic_recipe(
-            "recipe x { source s as rows sort stream; label a == 1; provenance p; match m from rows as x sort feature retain 1 memory 1; reduce r from x as x sort set retain 1 memory 1; verify replay; }"
+            "recipe x { source s as rows sort stream; label a == 1; provenance p; match m from rows as x sort feature retain 1 memory 1; reduce r from x as x sort set retain 1 memory 1; emit x; verify replay; }"
         )
         .is_err());
         assert!(parse_semantic_recipe(
-            "recipe x { source s as rows sort stream; label a == 1; provenance p; match m from rows as y sort feature retain 1 memory 1; reduce r from y as q sort set retain 0 memory 1; verify replay; }"
+            "recipe x { source s as rows sort stream; label a == 1; provenance p; match m from rows as y sort feature retain 1 memory 1; reduce r from y as q sort set retain 0 memory 1; emit q; verify replay; }"
         )
         .is_err());
         assert!(parse_semantic_recipe(
-            "recipe x { source s as rows sort stream; label a == 1; provenance p; match m from rows as y sort feature retain 1 memory 1; reduce r from y as q sort set retain 1 memory 1; }"
+            "recipe x { source s as rows sort stream; label a == 1; provenance p; match m from rows as y sort feature retain 1 memory 1; reduce r from y as q sort set retain 1 memory 1; emit q; }"
         )
         .is_err());
         assert!(parse_semantic_recipe(
-            "recipe x { source s as rows sort stream; label a == 1; provenance p; match m from missing as y sort feature retain 1 memory 1; verify replay; }"
+            "recipe x { source s as rows sort stream; label a == 1; provenance p; match m from missing as y sort feature retain 1 memory 1; emit y; verify replay; }"
         )
         .is_err());
     }

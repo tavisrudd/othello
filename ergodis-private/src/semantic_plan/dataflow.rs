@@ -1,5 +1,6 @@
 //! Cold compiler from semantic recipes to bounded typed dataflow slots.
 
+use super::theorem::{FragmentStatus, TheoremFragment};
 use super::{OpKind, RecipeStep, SemanticRecipe};
 use ergodis::control::{validate_plan_name, ControlError, MAX_PLAN_OPS};
 use serde::{Deserialize, Serialize};
@@ -123,10 +124,25 @@ const _: () = assert!(std::mem::align_of::<CompiledRecipeOp>() == 8);
 pub struct CompiledRecipe {
     pub source_signature: u16,
     pub slots: u16,
+    pub output_slot: u16,
     pub total_retention: u64,
     pub total_memory_bytes: u64,
     pub operations: Box<[CompiledRecipeOp]>,
+    recipe_canonical: Box<[u8]>,
 }
+
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CompiledFragmentEmission {
+    pub output_slot: u16,
+    pub verifier_gate: u16,
+    pub action_count: u16,
+    pub status: FragmentStatus,
+    pub _pad: u8,
+}
+
+const _: () = assert!(std::mem::size_of::<CompiledFragmentEmission>() == 8);
+const _: () = assert!(std::mem::align_of::<CompiledFragmentEmission>() == 2);
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 enum Producer {
@@ -148,6 +164,7 @@ pub fn compile_recipe(
     budget: DataflowBudget,
 ) -> Result<CompiledRecipe, ControlError> {
     recipe.validate()?;
+    let recipe_canonical = recipe.canonical_json()?.into_boxed_slice();
     if budget.max_total_retention == 0 || budget.max_total_memory_bytes == 0 {
         return invalid("semantic dataflow budget must be positive");
     }
@@ -248,14 +265,117 @@ pub fn compile_recipe(
             },
         );
     }
+    let output_slot = slots
+        .get(recipe.emit_binding.as_str())
+        .ok_or_else(|| ControlError::Invalid("semantic recipe output slot is not defined".into()))?
+        .id;
     Ok(CompiledRecipe {
         source_signature,
         slots: u16::try_from(slots.len())
             .map_err(|_| ControlError::Invalid("semantic recipe has too many slots".into()))?,
+        output_slot,
         total_retention,
         total_memory_bytes,
         operations: operations.into_boxed_slice(),
+        recipe_canonical,
     })
+}
+
+pub fn compile_fragment_emission(
+    recipe: &SemanticRecipe,
+    compiled: &CompiledRecipe,
+    fragment: &TheoremFragment,
+) -> Result<CompiledFragmentEmission, ControlError> {
+    recipe.validate()?;
+    fragment.validate()?;
+    if compiled.recipe_canonical.as_ref() != recipe.canonical_json()?.as_slice() {
+        return invalid("compiled semantic dataflow belongs to a different recipe");
+    }
+    let emitted_sort = binding_sort(recipe, &recipe.emit_binding).ok_or_else(|| {
+        ControlError::Invalid("semantic recipe output binding has no declared sort".into())
+    })?;
+    if emitted_sort != fragment.evidence_sort {
+        return invalid("theorem fragment evidence sort does not match the recipe output");
+    }
+    if recipe.provenance != fragment.provenance {
+        return invalid("theorem fragment provenance does not match the recipe");
+    }
+    if !same_scope(recipe.scope.as_ref(), fragment.scope.as_ref()) {
+        return invalid("theorem fragment scope does not match the recipe");
+    }
+
+    let mut lineage_actions = BTreeMap::new();
+    let mut binding = recipe.emit_binding.as_str();
+    while binding != recipe.source_binding {
+        let step = recipe
+            .steps
+            .iter()
+            .find(|step| step.binding() == binding)
+            .ok_or_else(|| ControlError::Invalid("semantic output lineage is incomplete".into()))?;
+        if let RecipeStep::Canonicalize { action, gate, .. } = step {
+            if lineage_actions
+                .insert(action.as_str(), *gate)
+                .is_some_and(|earlier| earlier != *gate)
+            {
+                return invalid("semantic output lineage uses conflicting action contracts");
+            }
+        }
+        binding = step.input();
+    }
+    if lineage_actions.len() != fragment.actions.len() {
+        return invalid("theorem fragment actions do not match its recipe lineage");
+    }
+    for action in &fragment.actions {
+        if lineage_actions.get(action.name.as_str()) != Some(&action.gate) {
+            return invalid("theorem fragment action contract differs from its recipe lineage");
+        }
+    }
+
+    let verifier_gate = if let Some(certificate) = &fragment.certificate {
+        recipe
+            .gates
+            .iter()
+            .position(|gate| gate == &certificate.verifier)
+            .map(|index| index as u16)
+            .ok_or_else(|| {
+                ControlError::Invalid(
+                    "theorem fragment verifier is not a declared recipe gate".into(),
+                )
+            })?
+    } else {
+        u16::MAX
+    };
+    Ok(CompiledFragmentEmission {
+        output_slot: compiled.output_slot,
+        verifier_gate,
+        action_count: u16::try_from(lineage_actions.len())
+            .map_err(|_| ControlError::Invalid("too many theorem actions".into()))?,
+        status: fragment.status,
+        _pad: 0,
+    })
+}
+
+fn binding_sort<'a>(recipe: &'a SemanticRecipe, binding: &str) -> Option<&'a str> {
+    if binding == recipe.source_binding {
+        Some(&recipe.source_sort)
+    } else {
+        recipe
+            .steps
+            .iter()
+            .find(|step| step.binding() == binding)
+            .map(RecipeStep::output_sort)
+    }
+}
+
+fn same_scope(
+    left: Option<&ergodis::control::PlanScope>,
+    right: Option<&ergodis::control::PlanScope>,
+) -> bool {
+    match (left, right) {
+        (None, None) => true,
+        (Some(left), Some(right)) => left.field == right.field && left.mask == right.mask,
+        (None, Some(_)) | (Some(_), None) => false,
+    }
 }
 
 fn operation_name(step: &RecipeStep) -> &str {
@@ -283,7 +403,24 @@ recipe affine_caps {
   match affine_subspace from objects as plane sort feature_row retain 1 memory 4096;
   reduce overlap_histogram from plane as extrema sort retained_set retain 2106 memory 131072;
   canonicalize affine_generators from extrema as cap_orbit sort orbit_summary retain 2106 memory 65536 streamed false contract diagnostic verified true;
+  emit cap_orbit;
   verify replay_label;
+  verify replay_hankel;
+}
+"#;
+
+    const FRAGMENT_TEXT: &str = r#"
+theorem cap_geometry {
+  domain gf27_nine_set;
+  evidence orbit_summary;
+  parameter g2 scalar;
+  parameter g3 scalar;
+  hypothesis labelled g2 == 0;
+  conclusion g3 == 0;
+  observable cap_overlap contract diagnostic;
+  action affine_generators contract diagnostic verified true;
+  provenance "sha256:fixture";
+  status candidate;
 }
 "#;
 
@@ -340,6 +477,7 @@ recipe affine_caps {
         .unwrap();
         assert_eq!(compiled.source_signature, 0);
         assert_eq!(compiled.slots, 4);
+        assert_eq!(compiled.output_slot, 3);
         assert_eq!(compiled.operations.len(), 3);
         assert_eq!(compiled.operations[2].input_slot, 2);
         assert_eq!(compiled.operations[2].output_slot, 3);
@@ -406,5 +544,72 @@ recipe affine_caps {
         )
         .unwrap();
         assert!(compiled.operations[1].uses_streamed_partition());
+    }
+
+    #[test]
+    fn fragment_emission_binds_output_sort_lineage_and_provenance() {
+        let recipe = parse_semantic_recipe(TEXT).unwrap();
+        let compiled = compile_recipe(
+            &recipe,
+            &registry(false),
+            DataflowBudget {
+                max_total_retention: 5000,
+                max_total_memory_bytes: 300_000,
+            },
+        )
+        .unwrap();
+        let fragment =
+            crate::semantic_plan::theorem::parse_theorem_fragment(FRAGMENT_TEXT).unwrap();
+        let emission = compile_fragment_emission(&recipe, &compiled, &fragment).unwrap();
+        assert_eq!(emission.output_slot, 3);
+        assert_eq!(emission.verifier_gate, u16::MAX);
+        assert_eq!(emission.action_count, 1);
+
+        let wrong_sort = FRAGMENT_TEXT.replace("evidence orbit_summary", "evidence retained_set");
+        let fragment = crate::semantic_plan::theorem::parse_theorem_fragment(&wrong_sort).unwrap();
+        assert!(compile_fragment_emission(&recipe, &compiled, &fragment).is_err());
+        let wrong_action = FRAGMENT_TEXT.replace("affine_generators", "other_action");
+        let fragment =
+            crate::semantic_plan::theorem::parse_theorem_fragment(&wrong_action).unwrap();
+        assert!(compile_fragment_emission(&recipe, &compiled, &fragment).is_err());
+        let wrong_provenance = FRAGMENT_TEXT.replace("sha256:fixture", "sha256:other");
+        let fragment =
+            crate::semantic_plan::theorem::parse_theorem_fragment(&wrong_provenance).unwrap();
+        assert!(compile_fragment_emission(&recipe, &compiled, &fragment).is_err());
+    }
+
+    #[test]
+    fn certified_fragment_verifier_must_be_a_recipe_gate() {
+        let recipe = parse_semantic_recipe(&TEXT.replace(
+            "contract diagnostic verified true",
+            "contract transports verified true",
+        ))
+        .unwrap();
+        let compiled = compile_recipe(
+            &recipe,
+            &registry(false),
+            DataflowBudget {
+                max_total_retention: 5000,
+                max_total_memory_bytes: 300_000,
+            },
+        )
+        .unwrap();
+        let certified = FRAGMENT_TEXT
+            .replace("contract diagnostic", "contract exact")
+            .replace(
+                "action affine_generators contract exact verified true",
+                "action affine_generators contract transports verified true",
+            )
+            .replace(
+                "status candidate;",
+                "status finite_certified;\n  certificate replay_hankel \"sha256:packet\";",
+            );
+        let fragment = crate::semantic_plan::theorem::parse_theorem_fragment(&certified).unwrap();
+        let emission = compile_fragment_emission(&recipe, &compiled, &fragment).unwrap();
+        assert_eq!(emission.verifier_gate, 1);
+
+        let missing = certified.replace("replay_hankel", "unknown_verifier");
+        let fragment = crate::semantic_plan::theorem::parse_theorem_fragment(&missing).unwrap();
+        assert!(compile_fragment_emission(&recipe, &compiled, &fragment).is_err());
     }
 }

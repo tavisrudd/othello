@@ -20,6 +20,7 @@ pub enum Quantifier {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
+#[repr(u8)]
 pub enum FragmentStatus {
     Candidate,
     FiniteCertified,
@@ -83,6 +84,7 @@ pub struct TheoremFragment {
     pub schema: String,
     pub name: String,
     pub domain: String,
+    pub evidence_sort: String,
     pub parameters: Box<[TypedBinding]>,
     pub variables: Box<[QuantifiedBinding]>,
     pub hypotheses: Box<[NamedPredicate]>,
@@ -105,6 +107,7 @@ impl TheoremFragment {
         }
         validate_plan_name(&self.name)?;
         validate_plan_name(&self.domain)?;
+        validate_plan_name(&self.evidence_sort)?;
         validate_plan_name(&self.provenance)?;
         if let Some(scope) = &self.scope {
             validate_plan_name(&scope.field)?;
@@ -211,9 +214,10 @@ pub fn parse_theorem_fragment(text: &str) -> Result<TheoremFragment, ControlErro
 pub fn format_theorem_fragment(fragment: &TheoremFragment) -> Result<String, ControlError> {
     fragment.validate()?;
     let mut text = format!(
-        "theorem {} {{\n  domain {};\n",
+        "theorem {} {{\n  domain {};\n  evidence {};\n",
         format_plan_name(&fragment.name)?,
-        format_plan_name(&fragment.domain)?
+        format_plan_name(&fragment.domain)?,
+        format_plan_name(&fragment.evidence_sort)?
     );
     for parameter in &fragment.parameters {
         text.push_str(&format!(
@@ -398,8 +402,15 @@ impl<'a> FragmentParser<'a> {
         self.expect_word("theorem")?;
         let name = self.name()?;
         self.expect(PlanTextTokenKind::LBrace)?;
-        let (mut domain, mut conclusion, mut scope, mut provenance, mut status, mut certificate) =
-            (None, None, None, None, None, None);
+        let (
+            mut domain,
+            mut evidence_sort,
+            mut conclusion,
+            mut scope,
+            mut provenance,
+            mut status,
+            mut certificate,
+        ) = (None, None, None, None, None, None, None);
         let mut parameters = Vec::new();
         let mut variables = Vec::new();
         let mut hypotheses = Vec::new();
@@ -409,6 +420,7 @@ impl<'a> FragmentParser<'a> {
         while !self.consume(&PlanTextTokenKind::RBrace) {
             match self.word()?.as_str() {
                 "domain" if domain.is_none() => domain = Some(self.name()?),
+                "evidence" if evidence_sort.is_none() => evidence_sort = Some(self.name()?),
                 "parameter" => parameters.push(TypedBinding {
                     name: self.name()?,
                     sort: self.name()?,
@@ -487,9 +499,8 @@ impl<'a> FragmentParser<'a> {
                         reference: self.name()?,
                     });
                 }
-                "domain" | "conclusion" | "scope" | "provenance" | "status" | "certificate" => {
-                    return self.error("duplicate theorem fragment declaration")
-                }
+                "domain" | "evidence" | "conclusion" | "scope" | "provenance" | "status"
+                | "certificate" => return self.error("duplicate theorem fragment declaration"),
                 _ => return self.error("unknown theorem fragment declaration"),
             }
             self.expect(PlanTextTokenKind::Semi)?;
@@ -501,6 +512,7 @@ impl<'a> FragmentParser<'a> {
             schema: THEOREM_FRAGMENT_SCHEMA.into(),
             name,
             domain: required(domain, "theorem fragment omits domain")?,
+            evidence_sort: required(evidence_sort, "theorem fragment omits evidence sort")?,
             parameters: parameters.into_boxed_slice(),
             variables: variables.into_boxed_slice(),
             hypotheses: hypotheses.into_boxed_slice(),
@@ -634,6 +646,7 @@ mod tests {
     const TEXT: &str = r#"
 theorem cap_label_exclusion {
   domain gf27_nine_set;
+  evidence orbit_summary;
   parameter g2 scalar;
   parameter g3 scalar;
   forall cap nine_set;
