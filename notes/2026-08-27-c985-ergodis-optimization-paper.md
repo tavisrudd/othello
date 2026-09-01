@@ -1451,6 +1451,16 @@ files are disposable and may be deleted at any time.
    weight 34 where the retained external BP-OSD probe reached 44. Raw paired
    counters and source percentages are compacted in
    `ergodis-private/evidence/c985-bb756-osd-stage-profile.json`.
+   The first profile-directed micro-optimization is also resolved as a
+   negative. A worker-local 16-byte pivot descriptor hoisted repeated
+   `(word, bit, logical offset)` decoding out of every free-row construction.
+   On seven alternating normal-release CPU-2 pairs it preserved exact work and
+   output and removed 1.85% of instructions plus 1.68% of branches, but
+   regressed cycles by 2.24% (`t=-5.71`) and wall time by 2.43% (`t=-6.17`).
+   The source is restored. The reproducible rejected patch, raw pairs, and
+   interpretation are retained in
+   `ergodis-private/evidence/c985-bb756-pivot-descriptor-rejected.json`; no
+   cached executable is part of the evidence.
 
    Step (6) is now closed as a measured negative for the motivating PRS
    client.  A source-attributed one-thread profile of the complete

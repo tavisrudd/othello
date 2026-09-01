@@ -1,0 +1,79 @@
+diff --git a/papers/complete-repair-ports/ergodis/src/binary_kernel_search.rs b/papers/complete-repair-ports/ergodis/src/binary_kernel_search.rs
+index c8f7d001e..c6e354338 100644
+--- a/papers/complete-repair-ports/ergodis/src/binary_kernel_search.rs
++++ b/papers/complete-repair-ports/ergodis/src/binary_kernel_search.rs
+@@ -246,6 +246,7 @@ pub struct BinaryKernelSearchWorkspace {
+     work: Box<[u64]>,
+     order: Box<[u16]>,
+     pivots: Box<[u16]>,
++    pivot_descriptors: Box<[PivotDescriptor]>,
+     pivot_marker: Box<[u8]>,
+     kernel_rows: Box<[u64]>,
+     kernel_logicals: Box<[u64]>,
+@@ -265,6 +266,18 @@ struct TrialSpec<'a> {
+     osd_window: usize,
+ }
+ 
++#[repr(C)]
++#[derive(Clone, Copy, Default)]
++struct PivotDescriptor {
++    bit: u64,
++    logical_start: u32,
++    word: u16,
++    _padding: u16,
++}
++
++const _: () = assert!(std::mem::size_of::<PivotDescriptor>() == 16);
++const _: () = assert!(std::mem::align_of::<PivotDescriptor>() == 8);
++
+ impl BinaryKernelSearchWorkspace {
+     fn new(
+         compiled: &CompiledBinaryKernelSearch,
+@@ -287,7 +300,9 @@ impl BinaryKernelSearchWorkspace {
+         let bytes = u64_entries
+             .checked_mul(std::mem::size_of::<u64>())
+             .and_then(|value| value.checked_add(columns.checked_mul(5)?))
+-            .and_then(|value| value.checked_add(rank.checked_mul(2)?))
++            .and_then(|value| {
++                value.checked_add(rank.checked_mul(2 + std::mem::size_of::<PivotDescriptor>())?)
++            })
+             .and_then(|value| value.checked_add(free.checked_mul(4)?))
+             .ok_or(BinaryKernelSearchError::WorkspaceLimit)?;
+         if bytes > MAX_BINARY_KERNEL_WORKSPACE_BYTES {
+@@ -302,6 +317,7 @@ impl BinaryKernelSearchWorkspace {
+             work: vec![0; compiled.basis.len()].into_boxed_slice(),
+             order: (0..compiled.columns).collect::<Vec<_>>().into_boxed_slice(),
+             pivots: vec![0; rank].into_boxed_slice(),
++            pivot_descriptors: vec![PivotDescriptor::default(); rank].into_boxed_slice(),
+             pivot_marker: vec![0; columns].into_boxed_slice(),
+             kernel_rows: vec![0; free * words].into_boxed_slice(),
+             kernel_logicals: vec![0; free * logical_words].into_boxed_slice(),
+@@ -462,6 +478,15 @@ impl BinaryKernelSearchWorkspace {
+             }
+         }
+         debug_assert_eq!(pivot_count, rank);
++        for (row, &pivot) in self.pivots[..rank].iter().enumerate() {
++            let pivot = usize::from(pivot);
++            self.pivot_descriptors[row] = PivotDescriptor {
++                bit: 1_u64 << (pivot % 64),
++                logical_start: (pivot * logical_words) as u32,
++                word: (pivot / 64) as u16,
++                _padding: 0,
++            };
++        }
+ 
+         let mut kernel_count = 0usize;
+         let mut best_weight = incumbent_weight;
+@@ -485,9 +510,9 @@ impl BinaryKernelSearchWorkspace {
+                 if self.work[row * words + word] & bit == 0 {
+                     continue;
+                 }
+-                let pivot = usize::from(self.pivots[row]);
+-                kernel[pivot / 64] |= 1_u64 << (pivot % 64);
+-                let start = pivot * logical_words;
++                let descriptor = self.pivot_descriptors[row];
++                kernel[usize::from(descriptor.word)] |= descriptor.bit;
++                let start = descriptor.logical_start as usize;
+                 for (left, &right) in logical
+                     .iter_mut()
+                     .zip(&logical_columns[start..start + logical_words])
