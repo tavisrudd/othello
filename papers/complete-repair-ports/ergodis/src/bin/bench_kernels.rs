@@ -5,7 +5,9 @@ use std::time::Instant;
 #[cfg(feature = "control-plane")]
 use ergodis::control::{CompiledPlan, PlanOp, PlanOutput, PlanRole, PlanSpec, PLAN_SCHEMA};
 use ergodis::field::SmallField;
-use ergodis::projective::{ProjectiveIndex, ProjectiveLinearActionPack};
+use ergodis::projective::{
+    BinaryProjectiveLinearActionPack, ProjectiveIndex, ProjectiveLinearActionPack,
+};
 use ergodis::root_execution::{reduce_roots, RootKernel, RootOrdinal};
 use ergodis::{
     azure_lrc_12_2_2_counted, ceph_xor_repair_family, ceph_xor_repair_supports,
@@ -1072,6 +1074,36 @@ fn main() {
                     .unwrap()
                 });
                 let pack = ProjectiveLinearActionPack::<3>::new(
+                    &field,
+                    (dimension - 1) as u8,
+                    matrix_records,
+                )
+                .unwrap();
+                let mut workspace = pack.workspace();
+                let mut runner = pack.runner(&mut workspace).unwrap();
+                let started = Instant::now();
+                for _ in 0..repetitions {
+                    for point_index in 0..points as u64 {
+                        for successor in runner.successors(point_index).unwrap() {
+                            checksum = checksum.rotate_left(7) ^ successor;
+                            work += 1;
+                        }
+                    }
+                }
+                started.elapsed().as_nanos()
+            }
+            "binary-flat" => {
+                let matrix_len = dimension * dimension;
+                let matrix_records = std::array::from_fn(|generator| {
+                    Matrix::new_with_field(
+                        &field,
+                        dimension,
+                        dimension,
+                        matrices[generator * matrix_len..(generator + 1) * matrix_len].to_vec(),
+                    )
+                    .unwrap()
+                });
+                let pack = BinaryProjectiveLinearActionPack::<6, 3>::new(
                     &field,
                     (dimension - 1) as u8,
                     matrix_records,

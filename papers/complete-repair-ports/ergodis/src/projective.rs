@@ -443,6 +443,197 @@ impl<'a, const H: u8> BinaryProjectiveIndex<'a, H> {
         }
         Ok(())
     }
+
+    #[inline(always)]
+    fn point_into_validated_workspace(&self, index: u64, output: &mut [u8]) {
+        debug_assert!(index < self.point_count);
+        debug_assert_eq!(output.len(), usize::from(self.vector_dimension));
+        output.fill(0);
+        let pivot = self.offsets[1..].partition_point(|&end| end <= index);
+        output[pivot] = 1;
+        let mut suffix = index - self.offsets[pivot];
+        let mask = (1_u64 << H) - 1;
+        for coordinate in output[pivot + 1..].iter_mut().rev() {
+            *coordinate = (suffix & mask) as u8;
+            suffix >>= H;
+        }
+        debug_assert_eq!(suffix, 0);
+    }
+
+    #[inline(always)]
+    fn index_canonical_nonzero(&self, coordinates: &[u8]) -> Result<u64, ProjectiveError> {
+        debug_assert_eq!(coordinates.len(), usize::from(self.vector_dimension));
+        debug_assert!(coordinates
+            .iter()
+            .all(|&coordinate| u16::from(coordinate) < self.field.order()));
+        let pivot = coordinates
+            .iter()
+            .position(|&coordinate| coordinate != 0)
+            .ok_or(ProjectiveError::InvalidLinearAction)?;
+        let inverse = self.field.inverse_nonzero(coordinates[pivot]);
+        let mut suffix = 0_u64;
+        for &coordinate in &coordinates[pivot + 1..] {
+            suffix = (suffix << H) | u64::from(self.field.mul_canonical(coordinate, inverse));
+        }
+        Ok(self.offsets[pivot] + suffix)
+    }
+}
+
+/// A validate-once projective action pack specialized for `GF(2^H)`.
+///
+/// This is the fused-action counterpart of [`BinaryProjectiveIndex`]. It keeps
+/// the generic action pack untouched while replacing projective radix division
+/// with shifts, field addition with XOR, and the matrix inner-loop branches
+/// with canonical multiplication-table lookups. Construction validates the
+/// field presentation, matrix shape, and invertibility once.
+#[repr(C)]
+#[derive(Clone, Debug)]
+pub struct BinaryProjectiveLinearActionPack<'a, const H: u8, const GENERATORS: usize> {
+    index: BinaryProjectiveIndex<'a, H>,
+    matrices: Box<[u8]>,
+    _generators: PhantomData<[(); GENERATORS]>,
+}
+
+const _: () = assert!(std::mem::size_of::<BinaryProjectiveLinearActionPack<'static, 1, 1>>() == 56);
+const _: () = assert!(std::mem::align_of::<BinaryProjectiveLinearActionPack<'static, 1, 1>>() == 8);
+
+impl<'a, const H: u8, const GENERATORS: usize> BinaryProjectiveLinearActionPack<'a, H, GENERATORS> {
+    pub fn new(
+        field: &'a SmallField,
+        projective_dimension: u8,
+        matrices: [Matrix; GENERATORS],
+    ) -> Result<Self, ProjectiveError> {
+        if GENERATORS == 0 {
+            return Err(ProjectiveError::InvalidLinearAction);
+        }
+        let index = BinaryProjectiveIndex::<H>::new(field, projective_dimension)?;
+        let dimension = usize::from(projective_dimension) + 1;
+        let matrix_len = dimension
+            .checked_mul(dimension)
+            .ok_or(ProjectiveError::DimensionOverflow)?;
+        let total_len = matrix_len
+            .checked_mul(GENERATORS)
+            .ok_or(ProjectiveError::DimensionOverflow)?;
+        let mut flat = Vec::with_capacity(total_len);
+        for matrix in matrices {
+            if matrix.rows() != dimension
+                || matrix.cols() != dimension
+                || matrix.field_presentation() != field.presentation()
+            {
+                return Err(ProjectiveError::InvalidLinearAction);
+            }
+            let rank = matrix
+                .canonical_row_basis_with(field)
+                .map_err(|_| ProjectiveError::InvalidLinearAction)?
+                .rows();
+            if rank != dimension {
+                return Err(ProjectiveError::InvalidLinearAction);
+            }
+            flat.extend_from_slice(matrix.as_slice());
+        }
+        Ok(Self {
+            index,
+            matrices: flat.into_boxed_slice(),
+            _generators: PhantomData,
+        })
+    }
+
+    #[inline]
+    pub const fn projective_dimension(&self) -> u8 {
+        self.index.projective_dimension()
+    }
+
+    #[inline]
+    pub const fn point_count(&self) -> u64 {
+        self.index.point_count()
+    }
+
+    #[inline(always)]
+    pub fn point(&self, index: u64, output: &mut [u8]) -> Result<(), ProjectiveError> {
+        self.index.point(index, output)
+    }
+
+    pub fn workspace(&self) -> ProjectiveActionWorkspace<GENERATORS> {
+        let dimension = usize::from(self.index.vector_dimension);
+        ProjectiveActionWorkspace {
+            point: vec![0; dimension].into_boxed_slice(),
+            image: vec![0; dimension].into_boxed_slice(),
+            vector_dimension: self.index.vector_dimension,
+            _pad: [0; 7],
+            _generators: PhantomData,
+        }
+    }
+
+    pub fn runner<'pack, 'workspace>(
+        &'pack self,
+        workspace: &'workspace mut ProjectiveActionWorkspace<GENERATORS>,
+    ) -> Result<BinaryProjectiveActionRunner<'pack, 'workspace, 'a, H, GENERATORS>, ProjectiveError>
+    {
+        if workspace.vector_dimension != self.index.vector_dimension
+            || workspace.point.len() != usize::from(self.index.vector_dimension)
+            || workspace.image.len() != usize::from(self.index.vector_dimension)
+        {
+            return Err(ProjectiveError::InvalidLinearAction);
+        }
+        Ok(BinaryProjectiveActionRunner {
+            pack: self,
+            workspace,
+        })
+    }
+}
+
+/// Validate-once, allocation-free runner for a binary projective action pack.
+#[repr(C)]
+pub struct BinaryProjectiveActionRunner<
+    'pack,
+    'workspace,
+    'field,
+    const H: u8,
+    const GENERATORS: usize,
+> {
+    pack: &'pack BinaryProjectiveLinearActionPack<'field, H, GENERATORS>,
+    workspace: &'workspace mut ProjectiveActionWorkspace<GENERATORS>,
+}
+
+const _: () = assert!(
+    std::mem::size_of::<BinaryProjectiveActionRunner<'static, 'static, 'static, 1, 1>>() == 16
+);
+const _: () = assert!(
+    std::mem::align_of::<BinaryProjectiveActionRunner<'static, 'static, 'static, 1, 1>>() == 8
+);
+
+impl<'pack, 'workspace, 'field, const H: u8, const GENERATORS: usize>
+    BinaryProjectiveActionRunner<'pack, 'workspace, 'field, H, GENERATORS>
+{
+    #[inline(always)]
+    pub fn successors(&mut self, index: u64) -> Result<[u64; GENERATORS], ProjectiveError> {
+        if index >= self.pack.index.point_count {
+            return Err(ProjectiveError::PointOutOfRange);
+        }
+        self.pack
+            .index
+            .point_into_validated_workspace(index, &mut self.workspace.point);
+        let dimension = usize::from(self.pack.index.vector_dimension);
+        let matrix_len = dimension * dimension;
+        let field = self.pack.index.field;
+        let mut successors = [0_u64; GENERATORS];
+        for (generator, successor) in successors.iter_mut().enumerate() {
+            let matrix = &self.pack.matrices[generator * matrix_len..(generator + 1) * matrix_len];
+            for (row, output) in self.workspace.image.iter_mut().enumerate() {
+                let row = &matrix[row * dimension..(row + 1) * dimension];
+                let mut sum = 0_u8;
+                for (&coefficient, &coordinate) in row.iter().zip(self.workspace.point.iter()) {
+                    sum ^= field.mul_canonical(coefficient, coordinate);
+                }
+                *output = sum;
+            }
+            *successor = self
+                .pack
+                .index
+                .index_canonical_nonzero(&self.workspace.image)?;
+        }
+        Ok(successors)
+    }
 }
 
 #[repr(C)]
@@ -844,6 +1035,75 @@ mod tests {
         let pack =
             ProjectiveLinearActionPack::<3>::new(&field, 2, three_projective_generators(&field))
                 .unwrap();
+        let mut workspace = pack.workspace();
+        let mut runner = pack.runner(&mut workspace).unwrap();
+        let (checksum, events) = crate::test_alloc::measure_allocations(|| {
+            let _guard = crate::test_alloc::HotLoopAllocationGuard::enter();
+            let mut checksum = 0_u64;
+            for round in 0..10_000_u64 {
+                let successors = runner.successors(round % pack.point_count()).unwrap();
+                checksum ^= successors.into_iter().fold(0, u64::wrapping_add);
+            }
+            checksum
+        });
+        assert_ne!(checksum, 0);
+        assert_eq!(events, crate::test_alloc::AllocationEvents::default());
+    }
+
+    #[test]
+    fn binary_projective_action_pack_matches_generic_and_fails_closed() {
+        let field = SmallField::new(2, 3).unwrap();
+        let generic =
+            ProjectiveLinearActionPack::<3>::new(&field, 2, three_projective_generators(&field))
+                .unwrap();
+        let binary = BinaryProjectiveLinearActionPack::<3, 3>::new(
+            &field,
+            2,
+            three_projective_generators(&field),
+        )
+        .unwrap();
+        assert_eq!(generic.point_count(), binary.point_count());
+        let mut generic_workspace = generic.workspace();
+        let mut binary_workspace = binary.workspace();
+        let point_count = binary.point_count();
+        let mut generic_runner = generic.runner(&mut generic_workspace).unwrap();
+        let mut binary_runner = binary.runner(&mut binary_workspace).unwrap();
+        for point in 0..generic.point_count() {
+            assert_eq!(
+                generic_runner.successors(point).unwrap(),
+                binary_runner.successors(point).unwrap()
+            );
+        }
+        assert_eq!(
+            binary_runner.successors(point_count),
+            Err(ProjectiveError::PointOutOfRange)
+        );
+
+        let wrong_degree = BinaryProjectiveLinearActionPack::<4, 3>::new(
+            &field,
+            2,
+            three_projective_generators(&field),
+        );
+        assert!(matches!(
+            wrong_degree,
+            Err(ProjectiveError::UnsupportedOrder)
+        ));
+        let singular = Matrix::new_with_field(&field, 3, 3, vec![0_u8; 9]).unwrap();
+        assert!(matches!(
+            BinaryProjectiveLinearActionPack::<3, 1>::new(&field, 2, [singular]),
+            Err(ProjectiveError::InvalidLinearAction)
+        ));
+    }
+
+    #[test]
+    fn binary_projective_action_runner_allocates_nothing() {
+        let field = SmallField::new(2, 3).unwrap();
+        let pack = BinaryProjectiveLinearActionPack::<3, 3>::new(
+            &field,
+            2,
+            three_projective_generators(&field),
+        )
+        .unwrap();
         let mut workspace = pack.workspace();
         let mut runner = pack.runner(&mut workspace).unwrap();
         let (checksum, events) = crate::test_alloc::measure_allocations(|| {

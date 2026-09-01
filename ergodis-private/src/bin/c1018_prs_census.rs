@@ -44,7 +44,9 @@ use anyhow::{bail, Context, Result};
 use clap::{Parser, ValueEnum};
 use ergodis::field::SmallField;
 use ergodis::matrix::Matrix;
-use ergodis::projective::{ProjectiveIndex, ProjectiveLinearActionPack};
+use ergodis::projective::{
+    BinaryProjectiveLinearActionPack, ProjectiveIndex, ProjectiveLinearActionPack,
+};
 
 const _: Option<DefaultHasher> = None;
 
@@ -745,6 +747,11 @@ const CHUNK: u64 = 8192;
 // q=64 scale in the C1018 census. Keep smaller solves on the original layout.
 const PACKED_STAMP_THRESHOLD: usize = 1 << 18;
 
+// Keep the default small-census worker's optimization and placement independent
+// of optional large-only monomorphs in this binary.  This is a hot function;
+// unlike the large-only workers below it must not be marked `cold`.
+#[inline(never)]
+#[unsafe(export_name = "ergodis_private_default_stamp_worker")]
 #[allow(clippy::too_many_arguments)]
 fn worker(
     f: &Field,
@@ -913,6 +920,99 @@ fn worker_packed(
             // always, and every cell computed in this campaign has `ρ ≥ d`.
             // The histogram is exact regardless of this filter; `main` bails if
             // `ρ < d` so a missing representative list can never pass silently.
+            if info.w >= d {
+                records.push(OrbitRecord {
+                    weight: info.w,
+                    size: orbit.len() as u64,
+                    rep: buf.clone(),
+                    rep_index: owner,
+                    apolar_degree: info.apolar_degree,
+                    apolar_kernel_dim: info.apolar_kernel_dim,
+                    apolar_type: info.apolar_type,
+                    roots: info.roots,
+                });
+            }
+        }
+    }
+    Ok((hist, total_orbits, records))
+}
+
+// The binary action pack is intentionally hosted by its own concrete worker.
+// A trait-shared worker previously erased the isolated radix win and perturbed
+// the generic control under fat LTO.
+#[cold]
+#[inline(never)]
+#[unsafe(export_name = "ergodis_private_binary_packed_stamp_worker")]
+#[allow(clippy::too_many_arguments)]
+fn worker_binary_packed(
+    f: &Field,
+    d: usize,
+    actions: &BinaryProjectiveLinearActionPack<'_, 6, 3>,
+    n: u64,
+    visited: &[AtomicU64],
+    cursor: &AtomicU64,
+    mode: RankMode,
+    max_orbit: usize,
+    single_worker: bool,
+) -> Result<(Vec<u64>, u64, Vec<OrbitRecord>)> {
+    let mut hist = vec![0u64; d + 2];
+    let mut total_orbits = 0u64;
+    let mut records: Vec<OrbitRecord> = Vec::new();
+    let mut buf = vec![0u8; d + 1];
+    let mut orbit: Vec<u64> = Vec::with_capacity(max_orbit);
+    let mut seen = PackedStampSet::new(max_orbit.max(16), n.saturating_sub(1))?;
+    let mut sc = RankScratch::new(d);
+    let mut action_workspace = actions.workspace();
+    let mut action_runner = actions.runner(&mut action_workspace)?;
+
+    loop {
+        let lo = cursor.fetch_add(CHUNK, Ordering::Relaxed);
+        if lo >= n {
+            break;
+        }
+        let hi = (lo + CHUNK).min(n);
+        for start in lo..hi {
+            if visited[(start / 64) as usize].load(Ordering::Relaxed) & (1u64 << (start % 64)) != 0
+            {
+                continue;
+            }
+            orbit.clear();
+            seen.reset();
+            seen.insert(start);
+            orbit.push(start);
+            let mut head = 0usize;
+            while head < orbit.len() {
+                let cur = orbit[head];
+                head += 1;
+                for idx in action_runner.successors(cur)? {
+                    if seen.insert(idx) {
+                        orbit.push(idx);
+                    }
+                }
+            }
+            let owner = *orbit.iter().min().expect("orbit is nonempty");
+            if single_worker {
+                for &pt in orbit.iter() {
+                    let word = &visited[(pt / 64) as usize];
+                    let bit = 1u64 << (pt % 64);
+                    word.store(word.load(Ordering::Relaxed) | bit, Ordering::Relaxed);
+                }
+            } else {
+                let word = (owner / 64) as usize;
+                let bit = 1u64 << (owner % 64);
+                if visited[word].fetch_or(bit, Ordering::AcqRel) & bit != 0 {
+                    continue;
+                }
+                for &pt in orbit.iter() {
+                    let w = (pt / 64) as usize;
+                    let b = 1u64 << (pt % 64);
+                    visited[w].fetch_or(b, Ordering::Relaxed);
+                }
+            }
+            actions.point(owner, &mut buf)?;
+            let info = analyse(f, d, &buf, mode, &mut sc);
+            hist[info.w] += orbit.len() as u64;
+            total_orbits += 1;
             if info.w >= d {
                 records.push(OrbitRecord {
                     weight: info.w,
@@ -1459,23 +1559,32 @@ fn main() -> Result<()> {
         sym_power(&f, d, 1, 0, 0, g), // a -> g a
         sym_power(&f, d, 0, 1, 1, 0), // a -> 1/a
     ];
-    let actions = ProjectiveLinearActionPack::<3>::new(
-        &f.inner,
-        u8::try_from(d).context("projective dimension exceeds u8")?,
-        gens.into_iter()
-            .map(|rows| {
-                Matrix::new_with_field(
-                    &f.inner,
-                    d + 1,
-                    d + 1,
-                    rows.into_iter().flatten().collect::<Vec<_>>(),
-                )
-                .map_err(anyhow::Error::from)
-            })
-            .collect::<Result<Vec<_>>>()?
-            .try_into()
-            .map_err(|_| anyhow::anyhow!("expected exactly three projective generators"))?,
-    )?;
+    let projective_dimension = u8::try_from(d).context("projective dimension exceeds u8")?;
+    let matrix_records: [Matrix; 3] = gens
+        .into_iter()
+        .map(|rows| {
+            Matrix::new_with_field(
+                &f.inner,
+                d + 1,
+                d + 1,
+                rows.into_iter().flatten().collect::<Vec<_>>(),
+            )
+            .map_err(anyhow::Error::from)
+        })
+        .collect::<Result<Vec<_>>>()?
+        .try_into()
+        .map_err(|_| anyhow::anyhow!("expected exactly three projective generators"))?;
+    let binary_actions = if q == 64 {
+        Some(BinaryProjectiveLinearActionPack::<6, 3>::new(
+            &f.inner,
+            projective_dimension,
+            matrix_records.clone(),
+        )?)
+    } else {
+        None
+    };
+    let actions =
+        ProjectiveLinearActionPack::<3>::new(&f.inner, projective_dimension, matrix_records)?;
     let n = actions.point_count();
 
     let words = ((n + 63) / 64) as usize;
@@ -1486,6 +1595,7 @@ fn main() -> Result<()> {
     let max_orbit = q * q * q; // |PGL(2,q)| = q^3 - q
     let packed_stamps =
         max_orbit >= PACKED_STAMP_THRESHOLD && n.saturating_sub(1) <= PackedStampSet::KEY_MASK;
+    let binary_packed_actions = packed_stamps && binary_actions.is_some();
     let failures = AtomicUsize::new(0);
 
     let mut hist = vec![0u64; d + 2];
@@ -1497,11 +1607,24 @@ fn main() -> Result<()> {
         for _ in 0..threads {
             let f = &f;
             let actions = &actions;
+            let binary_actions = &binary_actions;
             let visited = &visited;
             let cursor = &cursor;
             let failures = &failures;
             handles.push(scope.spawn(move || {
-                let result = if packed_stamps {
+                let result = if binary_packed_actions {
+                    worker_binary_packed(
+                        f,
+                        d,
+                        binary_actions.as_ref().expect("binary action pack exists"),
+                        n,
+                        visited,
+                        cursor,
+                        args.rank_mode,
+                        max_orbit,
+                        threads == 1,
+                    )
+                } else if packed_stamps {
                     worker_packed(
                         f,
                         d,
