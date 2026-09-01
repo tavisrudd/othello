@@ -991,9 +991,25 @@ files are disposable and may be deleted at any time.
    final graph and exact refresh count. A deterministic direct control verifies
    one refresh record, generation, full profile, hash, and footer state; strict
    all-target/all-feature clippy, the complete suite, and doc tests pass. The
-   mailbox is daemon-only and touches no solve worker or safe point. Next wire
-   private domain publishers into the accumulator and use target shape to route
-   operator families, not only expansion quotas.
+   mailbox is daemon-only and touches no solve worker or safe point.
+
+   Commit `63574459e` lets the same measured target graph route finite mutation
+   families as well as expansion quota. Each node may explicitly request the
+   backward-compatible `balanced` order, a `numeric` order that tries constants
+   and comparisons first, or a `structural` order that tries scope, field, and
+   Boolean changes first. Failure-derived exact thresholds remain first, and
+   all strategies enumerate the same complete finite mutation set: routing
+   reorders but never prunes. A changed refreshed strategy resets only affected
+   retained cursors, so a new order cannot silently skip its prefix. Default
+   strategy omission preserves old serialized profile bytes and hashes; invalid
+   protocol types and names fail closed. The refactor also removes temporary
+   replacement-vector allocations from proposal generation. Exact controls
+   prove first-family ordering, complete-set equality, selective cursor reset,
+   graph compilation, accumulator canonicalization, and end-to-end evidence.
+   Strict all-target/all-feature clippy, the complete suite, and doc tests pass.
+   This remains daemon-only. Next connect a private root/debt/exceptional-state
+   publisher and measure whether routed proposals improve discovery per exact
+   candidate and semantic-op row on held-out campaigns.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
