@@ -309,9 +309,19 @@ recommendation: the sequential Ergodis library runs in a browser Web Worker with
 the console can re-evaluate plans in the page rather than only replaying recorded output. Wrote the
 recommendation up as `notes/2026-08-31-c1031-ergodis-visualization-architecture.md`.
 
-**Next step on resume**: run the `ej` plus `tt` closeout pass the workspace guide requires for a
-substantial C-item, add the Mystery ledger to the task report, and then ask the user whether a
-production build should be its own task and its own lane.
+### 2026-08-31, third block — roughly 1 hour 20 minutes of budget consumed in total
+
+The user set the binding constraint that the console must be a live operator surface rather than a
+static explainer: every element generic and data-driven, no case-specific narrative, scientific
+notation for large numbers. Reworked the console accordingly and added the controls a live surface
+needs. Ran the `ej` plus `tt` closeout, which found and fixed two real defects, and proved the
+pipeline generic against a second independently created run. Task report with the Mystery ledger is
+`notes/2026-08-31-c1031-ergodis-visualization-report.md`.
+
+**Next step on resume**: the exploration deliverables are complete. Remaining budget is best spent
+on whichever of these the user chooses — folding in the delegated terminal interface once it lands,
+or hardening the console against a larger feature batch than the two-object smoke fixture. Ask
+before starting a production build; it is not allocated.
 
 **Superseded next step from the first block**: build the vertical-slice viewer in the worktree against
 `/home/tavis/.cache/c1031-runs/run1`, starting with the lineage graph from the `evolve-start`
