@@ -4031,8 +4031,26 @@
       "last": 1027,
       "purpose": "read the current Ergodis state, then survey SAT/SMT/dynamic-programming state of the art and our specialized kernels for importable algorithmic and performance techniques",
       "sequence": 448
+    },
+    {
+      "count": 1,
+      "first": 1028,
+      "kind": "reservation",
+      "lane": "gem-mining",
+      "last": 1028,
+      "purpose": "instrument test: arcs and codes over the finite chain ring Z4 / projective Hjelmslev planes, probing where the Ergodis core abstractions break, no core changes",
+      "sequence": 449
+    },
+    {
+      "count": 1,
+      "first": 1029,
+      "kind": "reservation",
+      "lane": "gem-mining",
+      "last": 1029,
+      "purpose": "instrument test: parametric residue-class certificates on a unit-fraction range extension, exercising the certificate shape covering infinitely many cases",
+      "sequence": 450
     }
   ],
-  "next_id": 1028,
+  "next_id": 1030,
   "schema": "codex-task-id-allocations-v1"
 }
