@@ -868,6 +868,22 @@ files are disposable and may be deleted at any time.
    canonical-element contract, so finding 17 remains partially open until
    public consumers migrate or that boundary becomes checked.
 
+   Commit `ec0e50206` supplies the first real consumer migration without an
+   API or layout refactor. `DenseSelector` already validates all coefficients,
+   assignments, and workspace values at its public boundaries; its
+   specialization and replay arithmetic now reify those established bytes as
+   `FieldElement<F>` locally. Stored tensors and scratch buffers remain byte
+   arrays, but raw field operations no longer appear in the dense hot kernel.
+   Seven interleaved parent/candidate pairs over 100,000 complete dense solves
+   preserve exactly 500,000 partial tests and the result checksum.
+   Parent/candidate is 1.000000003x instructions, 1.000000049x branches,
+   1.005790x cycles (`t=0.66`), and 1.007231x wall (`t=0.44`): operationally
+   identical. Raw pairs are tracked at
+   `ergodis-private/evidence/c985-dense-selector-field-element-ab.tsv`.
+   This validates the incremental migration pattern; sparse packed terms and
+   broad matrix workspaces should move only with their own representation and
+   application gates.
+
    Commits `f69380676` and `aca704d3d` close finding 16's
    matrix-reinterpretation path without hashing or enlarging the cold matrix
    record. `FieldPresentation` packs the
