@@ -254,6 +254,17 @@ pub struct BinaryKernelSearchWorkspace {
     witness: Vec<u16>,
 }
 
+#[derive(Clone, Copy)]
+struct TrialSpec<'a> {
+    base: &'a [u64],
+    logical_columns: &'a [u64],
+    words: usize,
+    rank: usize,
+    logical_words: usize,
+    osd_order: u8,
+    osd_window: usize,
+}
+
 impl BinaryKernelSearchWorkspace {
     fn new(
         compiled: &CompiledBinaryKernelSearch,
@@ -309,6 +320,7 @@ impl BinaryKernelSearchWorkspace {
         &self.witness
     }
 
+    #[inline]
     pub fn search_targeted(
         &mut self,
         compiled: &CompiledBinaryKernelSearch,
@@ -318,6 +330,7 @@ impl BinaryKernelSearchWorkspace {
         self.search::<false>(compiled, trials, options)
     }
 
+    #[inline]
     pub fn search_best_effort(
         &mut self,
         compiled: &CompiledBinaryKernelSearch,
@@ -338,6 +351,15 @@ impl BinaryKernelSearchWorkspace {
         self.witness.clear();
         let mut completed = 0_u64;
         let mut best_weight = usize::from(self.columns) + 1;
+        let spec = TrialSpec {
+            base: &compiled.basis,
+            logical_columns: &compiled.logical_columns,
+            words: usize::from(compiled.words),
+            rank: usize::from(compiled.rank),
+            logical_words: usize::from(compiled.logical_words),
+            osd_order: options.osd_order,
+            osd_window: usize::from(options.osd_window),
+        };
         #[cfg(test)]
         let _allocation_guard = HotLoopAllocationGuard::enter();
         for _ in 0..trials {
@@ -346,7 +368,7 @@ impl BinaryKernelSearchWorkspace {
             } else {
                 usize::from(options.target_weight) + 1
             };
-            let found = self.trial::<RETAIN_BEST>(compiled, options, incumbent);
+            let found = self.trial::<RETAIN_BEST>(spec, incumbent);
             completed += 1;
             if let Some(weight) = found {
                 best_weight = weight;
@@ -396,15 +418,20 @@ impl BinaryKernelSearchWorkspace {
 
     fn trial<const RETAIN_BEST: bool>(
         &mut self,
-        compiled: &CompiledBinaryKernelSearch,
-        options: BinaryKernelTrialOptions,
+        spec: TrialSpec<'_>,
         incumbent_weight: usize,
     ) -> Option<usize> {
-        let columns = usize::from(self.columns);
-        let rank = usize::from(self.rank);
-        let words = usize::from(self.words);
-        let logical_words = usize::from(self.logical_words);
-        self.work.copy_from_slice(&compiled.basis);
+        let TrialSpec {
+            base,
+            logical_columns,
+            words,
+            rank,
+            logical_words,
+            osd_order,
+            osd_window,
+        } = spec;
+        let columns = self.order.len();
+        self.work.copy_from_slice(base);
         self.shuffle();
         self.pivot_marker.fill(0);
         let mut pivot_count = 0usize;
@@ -453,9 +480,7 @@ impl BinaryKernelSearchWorkspace {
                 [kernel_count * logical_words..(kernel_count + 1) * logical_words];
             logical.fill(0);
             let free_logical = free * logical_words;
-            logical.copy_from_slice(
-                &compiled.logical_columns[free_logical..free_logical + logical_words],
-            );
+            logical.copy_from_slice(&logical_columns[free_logical..free_logical + logical_words]);
             for row in 0..rank {
                 if self.work[row * words + word] & bit == 0 {
                     continue;
@@ -465,7 +490,7 @@ impl BinaryKernelSearchWorkspace {
                 let start = pivot * logical_words;
                 for (left, &right) in logical
                     .iter_mut()
-                    .zip(&compiled.logical_columns[start..start + logical_words])
+                    .zip(&logical_columns[start..start + logical_words])
                 {
                     *left ^= right;
                 }
@@ -483,10 +508,10 @@ impl BinaryKernelSearchWorkspace {
             }
             kernel_count += 1;
         }
-        if options.osd_order == 2 {
+        if osd_order == 2 {
             self.kernel_order[..kernel_count]
                 .sort_unstable_by_key(|&index| self.kernel_weights[index as usize]);
-            let window = kernel_count.min(usize::from(options.osd_window));
+            let window = kernel_count.min(osd_window);
             for left_position in 0..window {
                 let left = usize::from(self.kernel_order[left_position]);
                 let left_words = &self.kernel_rows[left * words..(left + 1) * words];
