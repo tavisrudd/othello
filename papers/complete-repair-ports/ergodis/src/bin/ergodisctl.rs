@@ -1387,12 +1387,8 @@ fn render_compact(op: &str, result: &Value, epoch: u64) -> Result<()> {
             "epoch={epoch} evolution={} state={} tested={} perfect={} path={}",
             text(result, "id"),
             text(result, "state"),
-            result
-                .get("progress")
-                .map_or(0, |progress| number(progress, "tested")),
-            result
-                .get("progress")
-                .map_or(0, |progress| number(progress, "perfect")),
+            evolution_count(result, "tested"),
+            evolution_count(result, "perfect"),
             text(result, "path")
         ),
         "shutdown" => println!("epoch={epoch} stopping"),
@@ -1409,6 +1405,13 @@ fn number(value: &Value, key: &str) -> u64 {
     value.get(key).and_then(Value::as_u64).unwrap_or(0)
 }
 
+fn evolution_count(result: &Value, key: &str) -> u64 {
+    result
+        .get("progress")
+        .or_else(|| result.get("summary"))
+        .map_or(0, |counters| number(counters, key))
+}
+
 fn signed(value: &Value, key: &str) -> i64 {
     value.get(key).and_then(Value::as_i64).unwrap_or(0)
 }
@@ -1417,6 +1420,16 @@ fn signed(value: &Value, key: &str) -> i64 {
 mod probation_tests {
     use super::*;
     use std::io::Cursor;
+
+    #[test]
+    fn evolution_counts_survive_completion_reaping() {
+        let running = json!({"progress": {"tested": 7, "perfect": 1}});
+        let complete = json!({"state": "complete", "summary": {"tested": 101, "perfect": 3}});
+        assert_eq!(evolution_count(&running, "tested"), 7);
+        assert_eq!(evolution_count(&running, "perfect"), 1);
+        assert_eq!(evolution_count(&complete, "tested"), 101);
+        assert_eq!(evolution_count(&complete, "perfect"), 3);
+    }
 
     #[test]
     fn single_plan_reader_accepts_text_and_json_with_identical_lowering() {
