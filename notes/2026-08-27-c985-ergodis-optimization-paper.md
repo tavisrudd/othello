@@ -1107,6 +1107,19 @@ files are disposable and may be deleted at any time.
    daemon, solver, pruning, or authority effect. Next emit its decision as an
    optional initial profile policy and require a fresh-corpus no-regression
    replay before allowing live refreshes to learn from it.
+
+   Commit `45282e926` passes that fresh-corpus gate without changing the seed,
+   target, beam, generation count, or candidate cap. On the independently
+   generated 20-root 6-point/budget-6 corpus, three observable classes prove an
+   exact 13/20 interface ceiling. Numeric reaches it at trial 28 / 1,680
+   semantic-op rows versus trial 41 / 2,460 for balanced and structural, a
+   1.46x gain, and emits 154,535 versus 166,565/166,591 bytes. The original
+   two-corpus policy had already selected numeric; after this validation the
+   previously abstaining three-report gate promotes it with two wins, one tie,
+   no losses, and 7,266 aggregate rows versus 10,902 balanced (1.50x). The next
+   step may therefore expose this replayed decision as an explicitly supplied
+   initial publisher policy; online learning and mid-job policy changes remain
+   gated.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a

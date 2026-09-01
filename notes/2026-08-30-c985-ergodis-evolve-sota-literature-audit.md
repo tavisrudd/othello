@@ -294,6 +294,13 @@ no-regression gate. Any online version must preserve the exploration floor and
 complete finite mutation set and must not assign family credit to the shared
 counterexample-threshold prefix.
 
+Status 2026-09-01: the frozen two-corpus policy passes its fresh third-corpus
+gate. Numeric reaches the independently certified 13/20 interface ceiling in
+1,680 semantic-op rows versus 2,460 balanced, with no setting change. The
+three-report policy now has two wins, one tie, no losses, and a 7,266/10,902
+aggregate (1.50x). This clears optional initial-policy injection, but not online
+adaptation or mid-generation policy changes.
+
 ## Near-term acceptance tests
 
 1. Replaying a campaign from its durable graph produces identical semantic and
