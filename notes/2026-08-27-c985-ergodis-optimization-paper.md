@@ -1461,6 +1461,15 @@ files are disposable and may be deleted at any time.
    interpretation are retained in
    `ergodis-private/evidence/c985-bb756-pivot-descriptor-rejected.json`; no
    cached executable is part of the evidence.
+   A second ILP-aware attempt is rejected more strongly. Counting-sort buckets
+   grouped pivot rows by output word, accumulated each word in a register, and
+   published it once. It removes 2.65% of instructions and 4.01% of branches,
+   but raises branch misses 3.30%, cycles 11.32% (`t=-17.69`), and wall time
+   10.21% (`t=-6.38`). The apparently wasteful original random-word stores are
+   exposing useful instruction-level parallelism; instruction count alone is
+   the wrong objective here. The replayable patch and seven raw pairs are in
+   `ergodis-private/evidence/c985-bb756-pivot-word-buckets-rejected.json`, and
+   production remains restored.
 
    Step (6) is now closed as a measured negative for the motivating PRS
    client.  A source-attributed one-thread profile of the complete
