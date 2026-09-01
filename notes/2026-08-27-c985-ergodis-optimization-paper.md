@@ -556,11 +556,34 @@ files are disposable and may be deleted at any time.
    JSON/JSONL remain the protocol, persistence, bulk-batch, and diagnostic
    representations.  Full all-feature tests, strict all-target/all-feature
    clippy, formatting, and documentation pass, and no solve-loop code changed.
-   Next extend the same lexer, names, scalar expressions, scopes, canonical
-   formatter, and provenance syntax to `match / reduce / canonicalize` recipes
-   and injected theorem fragments.  Do not create a second mini-language.  The
-   accepted algebra and constraints remain
-   `2026-08-30-ergodis-semantic-mining-engine-adr.md`.
+   Commit `aed0d7a89` exposes that parser's bounded lexer, token locations,
+   name/literal contracts, and scalar expression parser/formatter as one
+   domain-neutral cold control-plane substrate.  The complete public
+   all-target/all-feature suite (425 library tests plus every application and
+   integration group) and strict all-target/all-feature clippy pass; no solve-
+   loop code changed.  Commit `e93fc598e` adds the first private semantic-
+   recipe vertical slice on that substrate: `match / reduce / canonicalize`
+   steps, exact labels and optional scopes, provenance, named bindings,
+   positive declared retention, action label contracts, and mandatory replay
+   gates share one canonical text/JSON representation.  Canonicalization is
+   rejected before a reducer; duplicate bindings, zero retention, missing
+   gates, unknown schema fields, and diagnostic proof promotion fail closed.
+   Parse/format/parse and text/JSON canonical-byte identity pass four focused
+   tests and strict clippy in a disposable clean worktree.  The broader private
+   crate cannot currently provide a clean-checkout gate because its tracked
+   lib root names nine campaign modules that remain untracked; the live private
+   build is independently blocked by an in-flight G41 record-layout migration,
+   so neither condition is attributed to this recipe tranche.
+
+   This is syntax and authority-contract plumbing, not yet the complete typed
+   dataflow executor: function arguments, input/output sorts, explicit memory
+   budgets, streamed-partition exceptions, sinks, and dependency edges remain
+   open.  Next add injected theorem fragments using the same lexer, names,
+   scalar AST, scopes, formatter, and provenance representation, with
+   normalized quantifiers, hypotheses, conclusions, status, and certificate
+   references.  Then join recipes and fragments through one typed dataflow IR;
+   do not create a second mini-language.  The accepted algebra and constraints
+   remain `2026-08-30-ergodis-semantic-mining-engine-adr.md`.
 6. **In progress — daemon-owned evolve.** Retain bounded streamed evidence,
    lineage/outcome deduplication, and exact cascades; next add durable replay,
    selection, and cross-campaign learning without entering solve workers.
