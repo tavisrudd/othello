@@ -976,9 +976,24 @@ files are disposable and may be deleted at any time.
    corrupt-profile replay, campaign isolation, bounded CLI input, and daemon
    snapshot execution. Strict all-target/all-feature clippy, the full suite,
    and doc tests pass. No solve worker or safe point changed. Domain adapters
-   still need to publish their root/debt/exceptional counters, and an explicit
-   between-generation refresh policy remains open; generic accumulation,
-   isolation, persistence, and snapshotting are landed.
+   still need to publish their root/debt/exceptional counters; generic
+   accumulation, isolation, persistence, and snapshotting are landed.
+
+   Commit `41c0a7a17` lands the explicit bounded between-generation refresh
+   policy. `evolve-profile-refresh` takes the accumulator's current canonical
+   snapshot and coalesces it into a one-slot mailbox owned by the active job;
+   a newer pending snapshot replaces the older one, and status exposes whether
+   one is pending. At the next generation boundary the worker validates the
+   exact target-field schema and graph against the frozen batch, then streams
+   the complete profile and canonical hash before changing expansion priority.
+   If cancellation is already visible or the bounded evidence file cannot hold
+   the refresh record, the profile is not applied. The summary records the
+   final graph and exact refresh count. A deterministic direct control verifies
+   one refresh record, generation, full profile, hash, and footer state; strict
+   all-target/all-feature clippy, the complete suite, and doc tests pass. The
+   mailbox is daemon-only and touches no solve worker or safe point. Next wire
+   private domain publishers into the accumulator and use target shape to route
+   operator families, not only expansion quotas.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a

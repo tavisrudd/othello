@@ -49,12 +49,12 @@ problem has already been compiled into exact finite observables.
 | Proposal breadth | AlphaEvolve evolves whole files with an LLM ensemble; CodeEvolve adds inspirations, meta-prompts, and depth refinement | bounded hand-written mutations over a typed VM | large autonomy gap, but a much smaller and safer search space |
 | Diversity | AlphaEvolve uses MAP-Elites/islands; open CodeEvolve uses CVT-MAP-Elites, islands, and migration | exact outcome classes plus failure/operator/cost niches and bounded resumable elites | add genuinely independent operator-prior islands only after measured niche use |
 | Evaluation economy | AlphaEvolve uses cascades and parallel evaluators | exact monotone cascade, failure targeting, bitmap premise screening, and bounded full replay | add operational shadow stages and profile-directed batches |
-| Target selection | TTT-Discover uses maximum-oriented PUCT; runtime CodeEvolve profiles weighted component graphs | deterministic best-impact-per-cost heap with one-slot exploration floor | next import root/profile target graphs, not a learned policy |
+| Target selection | TTT-Discover uses maximum-oriented PUCT; runtime CodeEvolve profiles weighted component graphs | deterministic best-impact-per-cost heap plus a live bounded target graph, one-slot exploration floor, and evidenced generation-boundary refresh | connect domain publishers and route operator families from exact target shape |
 | Learning from a campaign | TTT-Discover updates the model at test time; HTPS trains online from proof search | no learned proposal policy | defer weight updates until exact archives and rewards are calibrated |
 | Learning from failure | Minimo hindsight-relabels failed proof trees into achieved theorems and proofs | typed proper subexpressions are retained only after zero-false-positive replay, with explicit no-authority obligations | extend from frozen feature rows to intermediate solver states and proof handles |
 | Cumulative theory | Minimo identifies lemma accumulation and premise selection as necessary for depth | bounded OR-composition DAG, exact domain equality, marginal-coverage/cost premise rank, and cross-campaign replay | extend obligations to solver states and import kernel proof handles |
 | Trace diagnosis | EvoTrace/EvoReplay retain source, lineage, prompts, evaluation metadata, replay interventions, and cycling tests | bounded event ledger and streamed trials, but incomplete lineage/replay schema and no cycling diagnostic | make every candidate replayable and detect equivalent reversions before evaluation |
-| Runtime focus | runtime CodeEvolve selects profiled hot components and prunes context | Ergodis has perf counters and rich root metrics but target choice is mostly manual | use measured theorem cost, state mass, exceptional roots, and debt as target weights |
+| Runtime focus | runtime CodeEvolve selects profiled hot components and prunes context | campaign-local measured target profiles can now be updated during evolution without changing semantic authority | publish theorem cost, state mass, exceptional roots, and debt automatically from domain adapters |
 | Exactness boundary | most systems rely on task evaluators and may overfit them | explicit `proof_authority: false`, hostile replay, exact witnesses/counterexamples | retain this as the non-negotiable architectural edge |
 
 AlphaEvolve's published ablations support evolution, rich context, meta-prompt
@@ -237,19 +237,22 @@ and a strict bounded profile can now attach measured mass/unit cost and
 dependency/continuation edges. Its cycle-safe transitive closure sums reachable
 work once and guides only surplus expansion quota after the one-slot
 exploration floor. Semantic evaluation and authority do not consume profile
-weights. Automatic aggregation from live solver publications and mid-campaign
-refresh remain open. The generic watcher-side accumulator is now landed:
+weights. Automatic aggregation from live solver publications remains open. The
+generic watcher-side accumulator is now landed:
 campaign-local absolute observations and edges canonicalize independently of
 message order, snapshot directly into `evolve-start`, and persist the complete
 profile plus verified hash in evidence. Thus private/application producers no
 longer need to build a temporary graph file; they only need to publish their
-domain counters.
+domain counters. An explicit `evolve-profile-refresh` now coalesces the newest
+snapshot into a one-slot job mailbox. At the next generation boundary the
+worker validates it against the frozen batch and streams the full profile and
+hash before changing expansion priority. Cancellation and evidence exhaustion
+stop before application, and the footer reports the exact refresh count.
 
 Next, connect existing root progress, debt ledgers, exceptional-state counts,
-and perf counters to the landed watcher accumulator. Add an explicit bounded
-between-generation refresh policy and route operator family as well as
-expansion count: simple flat targets receive one-shot or numeric tuning, while
-structural targets get full evolution.
+and perf counters to the landed watcher accumulator. Route operator family as
+well as expansion count: simple flat targets receive one-shot or numeric
+tuning, while structural targets get full evolution.
 
 ### P2 — learned proposer or test-time training
 
