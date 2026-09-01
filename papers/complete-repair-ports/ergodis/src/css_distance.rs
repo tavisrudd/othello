@@ -5696,7 +5696,7 @@ mod tests {
             }
         }
         let logical = Matrix::new::<2>(194, 4, logical_data.clone()).unwrap();
-        let compiled = CompiledHugeCssDistance::compile(&physical, &logical).unwrap();
+        let mut compiled = CompiledHugeCssDistance::compile(&physical, &logical).unwrap();
 
         for mask in 0_u64..16 {
             let mut support = PackedSupport::<HUGE_SUPPORT_WORDS>::default();
@@ -5725,6 +5725,36 @@ mod tests {
                 compiled.logical_is_nonzero(support, first_word),
                 expected_nonzero,
                 "support mask={mask}",
+            );
+        }
+
+        let controlled_extra_words = [
+            1, 0, 1, // coordinate 0
+            1, 0, 1, // coordinate 1: cancels coordinate 0 under xor
+            0, 1, 1, // coordinate 2
+            1, 1, 0, // coordinate 3
+        ];
+        compiled.extra_logical_columns = controlled_extra_words.into();
+        for mask in 0_u64..16 {
+            let mut support = PackedSupport::<HUGE_SUPPORT_WORDS>::default();
+            for coordinate in 0..4 {
+                if mask & (1_u64 << coordinate) != 0 {
+                    support.insert(coordinate);
+                }
+            }
+            let expected_nonzero = (0..3).any(|word| {
+                let mut value = 0_u64;
+                for coordinate in 0..4 {
+                    if mask & (1_u64 << coordinate) != 0 {
+                        value ^= controlled_extra_words[coordinate * 3 + word];
+                    }
+                }
+                value != 0
+            });
+            assert_eq!(
+                compiled.logical_is_nonzero(support, 0),
+                expected_nonzero,
+                "controlled support mask={mask}",
             );
         }
 
