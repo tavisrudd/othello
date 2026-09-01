@@ -42,12 +42,26 @@ pub trait FiniteField: private::Sealed + Copy + Send + Sync + 'static {
 /// Monomorphized arithmetic for a small prime field.
 ///
 /// The modulus is resolved at the call site, not tested inside client loops.
+/// Invalid moduli remain inspectable through [`Prime::validate`], but cannot be
+/// instantiated into arithmetic:
+///
+/// ```compile_fail
+/// use ergodis::Prime;
+/// let _ = Prime::<9>::mul(2, 3);
+/// ```
 #[derive(Debug, Clone, Copy, Default)]
 pub struct Prime<const P: u8>;
 
 impl<const P: u8> private::Sealed for Prime<P> {}
 
 impl<const P: u8> Prime<P> {
+    const VALID_MODULUS: () = assert!(P >= 2 && is_prime(P));
+
+    #[inline(always)]
+    fn require_valid_modulus() {
+        let () = Self::VALID_MODULUS;
+    }
+
     pub fn validate() -> Result<(), FieldError> {
         if P < 2 || !is_prime(P) {
             return Err(FieldError::InvalidModulus);
@@ -57,21 +71,25 @@ impl<const P: u8> Prime<P> {
 
     #[inline(always)]
     pub fn add(left: u8, right: u8) -> u8 {
+        Self::require_valid_modulus();
         let sum = left as u16 + right as u16;
         (sum % P as u16) as u8
     }
 
     #[inline(always)]
     pub fn sub(left: u8, right: u8) -> u8 {
+        Self::require_valid_modulus();
         ((left as u16 + P as u16 - right as u16) % P as u16) as u8
     }
 
     #[inline(always)]
     pub fn mul(left: u8, right: u8) -> u8 {
+        Self::require_valid_modulus();
         ((left as u16 * right as u16) % P as u16) as u8
     }
 
     pub fn inverse(value: u8) -> Result<u8, FieldError> {
+        Self::require_valid_modulus();
         if value == 0 {
             return Err(FieldError::ZeroInverse);
         }
@@ -80,6 +98,7 @@ impl<const P: u8> Prime<P> {
 
     #[inline]
     pub fn pow(mut base: u8, mut exponent: u16) -> u8 {
+        Self::require_valid_modulus();
         let mut result = 1u8;
         while exponent != 0 {
             if exponent & 1 != 0 {
