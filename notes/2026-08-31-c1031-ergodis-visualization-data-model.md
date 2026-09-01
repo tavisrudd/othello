@@ -32,7 +32,9 @@ directory, mode 0700, containing exactly three things:
 - `ledger.jsonl` — the durable append-only event log, byte-capped, flushed on every append. Each
   record is `{seq, epoch, kind, synopsis, plan}`. The event kinds emitted are `started`,
   `group-compiled`, `tree-synthesized`, `candidate-tested`, `evolution-started`,
-  `evolution-finished`, `exceptional-query`, and `note`. `note` is operator-written annotation, so
+  `evolution-finished`, `exceptional-query`, `candidate-applied`, `trace-written`, and `note`. Treat
+  `kind` as an open string rather than a closed set; more kinds exist than any one run emits.
+  `note` is operator-written annotation, so
   the log already interleaves what the machine did with what a person observed — a timeline view
   gets human commentary for free.
 - `evidence/` — the bulk artifacts: batch evaluation results, synthesized decision-tree plans, and
@@ -70,7 +72,16 @@ A plan is a document under schema `ergodis-attack-plan-v0`, in either of two sur
 
 `ExpressionPlanSpec::lower` compiles the first into the second, bounded at 128 nodes and depth 32.
 Every plan carries a `role` of either `diagnostic` or `ordering` and an `output` of either
-`predicate` or `score`, plus an optional `scope` restricting it to a field and a bit mask.
+`predicate` or `score`, plus an optional `scope`.
+
+**The scope mask is a membership bitset indexed by the field's value, not a bitwise AND mask.**
+`CompiledPlan::applies` computes `(0..64).contains(&value) && scope_mask >> value & 1 != 0`, so
+`{field: "root_orbit", mask: 64}` means `root_orbit ∈ {6}` — bit 6 is set. Under the bitwise-AND
+reading it would mean the opposite, since `6 & 64 == 0`. This matters because the best plan in the
+exploration run carries exactly that scope, so the wrong reading inverts the headline result. A
+console must render a scope as an explicit set of admitted values and never as a bare mask integer.
+Credit for catching the ambiguity in an earlier draft of this note goes to the terminal-interface
+work, which read `applies` directly rather than trusting the prose.
 
 The consequence for visualization is direct: **the expression tree is the natural visual object for
 a single theorem, and the text form in `control/text.rs` is an equivalent serialization of the same
@@ -205,6 +216,63 @@ teaching view needs to animate a single evaluation through the expression tree.
 `{schema, request_id, run_id, epoch, ok, result}`, so a backend can shell out to `ergodisctl` and
 forward results verbatim without reimplementing the protocol. That is the fastest credible path to a
 working web UI and it requires no core changes at all.
+
+## The beam expands one representative per behaviour class, not the fittest candidates
+
+Found by the terminal-interface work and verified independently against the lineage records. In the
+exploration run, generations two and three each descend from exactly four distinct parents spanning
+exactly four outcome classes, with parent scores of 0, 1, 1, and 2. The best candidate in the whole
+run, scoring 2 of 2, has **zero children**.
+
+The mechanism is `expanded_outcomes.insert(outcome_hash)` in the parent-selection loop of
+`control/evolution.rs`: a survivor is declined as an expansion parent when its behaviour class has
+already been expanded this generation. So the beam deliberately spends its expansion budget on
+behavioural diversity rather than on fitness, which is quality-diversity search rather than a
+fitness-ranked beam.
+
+The display consequence is direct. A lineage view that colours or sizes by fitness will appear to
+show the search abandoning its own best result, and an operator will read that as a bug. The
+interface has to say that expansion is per behaviour class, or the graph is actively misleading.
+
+## The three rejection counters live in three different populations
+
+Their sum exceeds the number of candidates tested — 286 against 257 in the exploration run — which
+is what exposed the problem. Reading `control/evolution.rs`:
+
+- `structural_rejections` counts duplicate candidate *shapes* discarded before the `tested` counter
+  increments, so it is measured over proposed shapes, not over evaluated candidates.
+- `outcome_expansion_rejections` is counted in the parent-selection loop over survivors offered as
+  expansion parents — a different population again, and not a subset of the evaluated candidates.
+- `cascade_rejections` is the only one that is a subset of `tested`.
+
+They must not be drawn as a single funnel, and they must not be chained as nested subtractions
+either: subtracting the expansion refusals from the evaluated candidates conflates the survivor set
+with the candidate set. Group them by population, each against its own denominator.
+
+## A count of discovered things needs the size of the space it came from
+
+Two instances of one rule, both of which were got wrong before being caught.
+
+The behaviour count needs the behaviour-space ceiling. A predicate over the corpus can express at
+most one bit-vector per distinguishable object, so the ceiling is two raised to the number of
+**distinct feature vectors**, not the number of rows — objects with identical features cannot be
+separated by any plan over those features, and `ergodisctl ceiling` already reports
+`distinct_feature_vectors`. In the exploration run that ceiling is four and the search found four,
+so what looked like 64:1 redundancy was in fact a completely exhausted behaviour space.
+
+The perfect-classifier count needs the corpus size, for the reason recorded in the C1016 negative
+control above.
+
+## The private crate does not build from a clean checkout
+
+Noted here because it blocked generating real corpora and it belongs to another lane. The committed
+`ergodis-private/src/lib.rs` declares nine modules whose source files have never been committed:
+`g53_defect_profile_proof`, `g53_mod7_reduction`, `g53_reduction_proof`, `g53_search`,
+`hadamard_2092`, `proof_synthesis`, `quotient_paf_proof`, `reduction_proof`, and
+`subgroup_energy_proof`. They exist only as untracked working files in the main tree, so a fresh
+worktree of `main` fails to compile the crate. This is a reproducibility problem for whichever lane
+owns that work — every C1016 replay claim depends on code that is not in the repository — and it
+should be raised with its owner rather than repaired here.
 
 ## The reduction cascade, the compilation, and the quotient tablebase
 
