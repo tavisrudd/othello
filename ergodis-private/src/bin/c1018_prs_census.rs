@@ -44,9 +44,16 @@ use anyhow::{bail, Context, Result};
 use clap::{Parser, ValueEnum};
 use ergodis::field::SmallField;
 use ergodis::matrix::Matrix;
-use ergodis::projective::{
-    BinaryProjectiveLinearActionPack, ProjectiveIndex, ProjectiveLinearActionPack,
-};
+#[cfg(not(feature = "c1018-sparse-action"))]
+use ergodis::projective::BinaryProjectiveLinearActionPack;
+#[cfg(feature = "c1018-sparse-action")]
+use ergodis::projective::BinarySparseProjectiveLinearActionPack;
+use ergodis::projective::{ProjectiveIndex, ProjectiveLinearActionPack};
+
+#[cfg(not(feature = "c1018-sparse-action"))]
+type BinaryActionPack<'a> = BinaryProjectiveLinearActionPack<'a, 6, 3>;
+#[cfg(feature = "c1018-sparse-action")]
+type BinaryActionPack<'a> = BinarySparseProjectiveLinearActionPack<'a, 6, 3>;
 
 const _: Option<DefaultHasher> = None;
 
@@ -1007,7 +1014,7 @@ fn worker_packed(
 fn worker_binary_dense(
     f: &Field,
     d: usize,
-    actions: &BinaryProjectiveLinearActionPack<'_, 6, 3>,
+    actions: &BinaryActionPack<'_>,
     n: u64,
     visited: &[AtomicU64],
     cursor: &AtomicU64,
@@ -1635,7 +1642,7 @@ fn main() -> Result<()> {
         .try_into()
         .map_err(|_| anyhow::anyhow!("expected exactly three projective generators"))?;
     let binary_actions = if q == 64 {
-        Some(BinaryProjectiveLinearActionPack::<6, 3>::new(
+        Some(BinaryActionPack::new(
             &f.inner,
             projective_dimension,
             matrix_records.clone(),

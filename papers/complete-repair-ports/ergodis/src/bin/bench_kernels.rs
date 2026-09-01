@@ -6,7 +6,8 @@ use std::time::Instant;
 use ergodis::control::{CompiledPlan, PlanOp, PlanOutput, PlanRole, PlanSpec, PLAN_SCHEMA};
 use ergodis::field::SmallField;
 use ergodis::projective::{
-    BinaryProjectiveLinearActionPack, ProjectiveIndex, ProjectiveLinearActionPack,
+    BinaryProjectiveLinearActionPack, BinarySparseProjectiveLinearActionPack, ProjectiveIndex,
+    ProjectiveLinearActionPack,
 };
 use ergodis::root_execution::{reduce_roots, RootKernel, RootOrdinal};
 use ergodis::{
@@ -334,6 +335,21 @@ fn dense_projective_generators(field: &SmallField, dimension: usize) -> Vec<u8> 
                 generators.push(value);
             }
         }
+    }
+    generators
+}
+
+fn sparse_projective_generators(dimension: usize) -> Vec<u8> {
+    let matrix_len = dimension * dimension;
+    let mut generators = vec![0_u8; 3 * matrix_len];
+    for row in 0..dimension {
+        for column in 0..=row {
+            if column & !row == 0 {
+                generators[row * dimension + column] = 1;
+            }
+        }
+        generators[matrix_len + row * dimension + row] = (row + 1) as u8;
+        generators[2 * matrix_len + row * dimension + (dimension - 1 - row)] = 1;
     }
     generators
 }
@@ -1027,7 +1043,11 @@ fn main() {
     if let Some((backend, points)) = projective_action_spec(&variant) {
         let field = SmallField::new(2, 6).unwrap();
         let dimension = 5usize;
-        let matrices = dense_projective_generators(&field, dimension);
+        let matrices = if matches!(backend, "binary-flat-sparse-fixture" | "binary-sparse") {
+            sparse_projective_generators(dimension)
+        } else {
+            dense_projective_generators(&field, dimension)
+        };
         let index = ProjectiveIndex::new(&field, (dimension - 1) as u8).unwrap();
         assert!(points <= index.point_count() as usize);
         let elapsed_ns = match backend {
@@ -1092,7 +1112,7 @@ fn main() {
                 }
                 started.elapsed().as_nanos()
             }
-            "binary-flat" => {
+            "binary-flat" | "binary-flat-sparse-fixture" => {
                 let matrix_len = dimension * dimension;
                 let matrix_records = std::array::from_fn(|generator| {
                     Matrix::new_with_field(
@@ -1104,6 +1124,36 @@ fn main() {
                     .unwrap()
                 });
                 let pack = BinaryProjectiveLinearActionPack::<6, 3>::new(
+                    &field,
+                    (dimension - 1) as u8,
+                    matrix_records,
+                )
+                .unwrap();
+                let mut workspace = pack.workspace();
+                let mut runner = pack.runner(&mut workspace).unwrap();
+                let started = Instant::now();
+                for _ in 0..repetitions {
+                    for point_index in 0..points as u64 {
+                        for successor in runner.successors(point_index).unwrap() {
+                            checksum = checksum.rotate_left(7) ^ successor;
+                            work += 1;
+                        }
+                    }
+                }
+                started.elapsed().as_nanos()
+            }
+            "binary-sparse" => {
+                let matrix_len = dimension * dimension;
+                let matrix_records = std::array::from_fn(|generator| {
+                    Matrix::new_with_field(
+                        &field,
+                        dimension,
+                        dimension,
+                        matrices[generator * matrix_len..(generator + 1) * matrix_len].to_vec(),
+                    )
+                    .unwrap()
+                });
+                let pack = BinarySparseProjectiveLinearActionPack::<6, 3>::new(
                     &field,
                     (dimension - 1) as u8,
                     matrix_records,
