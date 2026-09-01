@@ -331,11 +331,28 @@ the scope mask is a membership bitset, the beam expands one representative per b
 rejection counters span three populations, and a time axis does exist by way of the launching
 harness. Details are in the report and the data-model note.
 
+### 2026-09-01, fifth block, to 02:00 — the console started producing findings
+
+Working to the user's 02:00 stop. The held-out check, the majority-class baseline, the corpus screen,
+and two exhaustive probes were added, and between them they overturned three conclusions this task
+had already recorded. All are corrected in the report; the corrections are the substance.
+
+The load-bearing one: **all fourteen C1016 banked semantic corpora are exactly solvable, and the
+search finds three of them.** Three need a single field equality and the search finds each within a
+few thousand candidates. The other eleven each need a conjunction of exactly two field equalities,
+and the search finds none of them, having tested 99,966 candidates on one and another 99,948 on a
+seeded continuation. Every solving expression is exact on held-out data as well, verified by a
+separate evaluator, so these are the generating rules rather than selection artefacts. The mechanism
+is that each conjunct alone scores at the majority baseline, so a fitness-ranked beam has no reason
+to keep it and the behaviour archive does not distinguish it either.
+
 **Next step on resume**: the exploration deliverables are complete and the console runs against real
-data at 10^5-candidate scale. Ask the user before starting a production build; it is not allocated.
-The two cheap core changes worth proposing are writing the launch bounds into the run directory so a
-run is self-describing, and a monotonic clock reading on each durable ledger event so the events
-between evolutions are timed.
+data at 10^5-candidate scale. Three things are worth raising with the user rather than starting
+unasked. First, the conjunction blind spot is a defect in the search and belongs to whoever owns
+C1016 — the console's job here is done, which was to make it visible. Second, a production build of
+the console is not allocated. Third, the two cheap core changes: writing the launch bounds into the
+run directory so a run is self-describing, and a monotonic clock reading on each durable ledger event
+so the events between evolutions are timed.
 
 **Superseded next step from the first block**: build the vertical-slice viewer in the worktree against
 `/home/tavis/.cache/c1031-runs/run1`, starting with the lineage graph from the `evolve-start`

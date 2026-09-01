@@ -277,6 +277,12 @@ in seconds.
 | corpus-12 | 36 | 75.0% | `(f000 eq f010) and (f002 eq f029)` | +25.0 |
 | corpus-13 | 55 | 80.0% | `(f003 eq f004) and (f024 eq f049)` | +20.0 |
 
+**Verified on held-out data.** The probe selects on the training batch, and choosing a 100% fit from
+93,330 combinations invites overfitting, so every one of the fourteen expressions was re-scored on
+the disjoint held-out batch by a separate parser and evaluator. All fourteen are exact on both halves
+— 100% train and 100% held-out — so these are the actual generating rules, not artefacts of
+selection.
+
 So this is a **search failure, not a data limitation**. The 55-field campaign tested 99,966
 candidates, and a second seeded campaign tested another 99,948, and neither found a two-clause
 conjunction that a laptop enumerates in seconds. Every one of these expressions is well inside the
