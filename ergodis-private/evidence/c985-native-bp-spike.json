@@ -101,6 +101,44 @@
     }
   },
   "small_graph_repair": "branchless min/second-min check aggregation preserves binary64 posterior equality while changing the C997 gate from about 1.32x slower to 1.308x faster than ldpc",
+  "typed_api_extraction": {
+    "baseline_commit": "87e17d535",
+    "candidate_commit": "eb0c6b554",
+    "architecture": "one immutable BinaryParityCheck shared by independent 64-byte-aligned NativeBpOsd worker workspaces; repr(u8) BinaryValue hot syndrome; checked byte-slice boundary",
+    "c997_osd0_counter_pair": {
+      "baseline_cycles": 394253416,
+      "candidate_cycles": 283585602,
+      "cycle_speedup": 1.390244826322318,
+      "baseline_instructions": 1770059355,
+      "candidate_instructions": 1705491176,
+      "instruction_speedup": 1.0378589932968378,
+      "baseline_branches": 298044636,
+      "candidate_branches": 370161216,
+      "baseline_branch_misses": 594056,
+      "candidate_branch_misses": 686006
+    },
+    "bb756_cs10_counter_pair": {
+      "baseline_cycles": 4208498773,
+      "candidate_cycles": 4109180471,
+      "cycle_speedup": 1.0241698564229353,
+      "baseline_instructions": 13683163154,
+      "candidate_instructions": 12823547962,
+      "instruction_speedup": 1.0670341152501084,
+      "baseline_branches": 2414301727,
+      "candidate_branches": 2917266564,
+      "baseline_branch_misses": 10980246,
+      "candidate_branch_misses": 11142810
+    },
+    "c997_seven_pair_wall": {
+      "baseline_mean_ms": 154.3951387142857,
+      "candidate_mean_ms": 126.600842,
+      "speedup": 1.2195427477037293,
+      "paired_t": 2.1409904834822857
+    },
+    "fidelity": "BB756 CS-10, BB288 OSD-0, and C997 OSD-0 retained candidate checksums unchanged",
+    "parallel_control": "four scoped independent workspaces over one shared immutable code return identical exact candidates",
+    "codegen_repair": "explicit x86-64 SSE2 ordered finite-message min/max prevents branchy compiler lowering after bin-to-lib extraction"
+  },
   "allocation_gate": "test-only thread-local allocator observes zero alloc/realloc/dealloc events in actual BP and higher-order OSD regions",
-  "decision": "retain private spike; BP, OSD-0, OSD-CS-10, and exhaustive-10 pass speed, exact syndrome, reference-fidelity, quality, zero-allocation, small-instance, and cross-instance gates; next gate is a reusable API"
+  "decision": "retain private spike; algorithmic, performance, typed-API, zero-allocation, small-instance, cross-instance, and independent-worker gates pass; next gate is public-core admission review"
 }

@@ -1333,8 +1333,16 @@ files are disposable and may be deleted at any time.
    1.450x (`t=5.64`) and 1.308x (`t=6.22`).  C997 initially failed the
    no-small-regression gate; a branchless min/second-min check aggregation
    preserves every binary64 posterior while converting that regression into a
-   win.  The item (d) next gate is therefore a reusable public API, not more
-   work on an ordering-only bridge.
+   win.  The typed reusable API now lands in `eb0c6b554`: immutable compiled
+   code is shared by independent 64-byte-aligned worker workspaces;
+   configuration is checked once; `repr(u8)` binary syndromes make the hot
+   call safe without rescanning; and ordinary byte slices have a separate
+   checked boundary.  Relative to `87e17d535`, C997 OSD-0 removes 3.65% of
+   instructions and 28.07% of sampled cycles; BB756 CS-10 removes 6.28% of
+   instructions and 2.36% of cycles, with all retained checksums unchanged.
+   Four concurrent workspaces over one immutable code agree exactly.  The item
+   (d) next gate is public-core admission review, not more work on an
+   ordering-only bridge.
 
    Current-tree reconciliation changes that order slightly. Static and dynamic
    incumbent fan-out are already present as worker-local relaxed mailboxes plus
@@ -3922,9 +3930,16 @@ regions.  The cross-instance gate now passes on BB288 and C997 Gross
 five-pair mean speedups of 1.450x (`t=5.64`) and 1.308x (`t=6.22`).  C997 first
 measured about 1.32x slower; replacing branchy first/second-min selection with
 an equivalent min/max network preserved binary64 posterior identity and
-converted the small-instance rejection into a win.  The spike remains private;
-the remaining admission work is API separation and public-core review, not
-algorithmic fidelity.  Raw
+converted the small-instance rejection into a win.  API separation now lands
+in `eb0c6b554`: one immutable compiled code feeds independent aligned worker
+workspaces, a typed binary syndrome removes hot rescans, and a checked byte
+boundary retains ordinary ergonomics.  Versus `87e17d535`, C997 OSD-0 removes
+3.65% of instructions and 28.07% of sampled cycles, while BB756 CS-10 removes
+6.28% of instructions and 2.36% of cycles.  All retained checksums are
+unchanged, the public hot API itself passes the zero-allocation gate, and four
+scoped workspaces over one immutable code agree exactly.  The spike remains
+private; the remaining admission work is public-core review, not algorithmic
+fidelity.  Raw
 rounds, hashes, counters, and the admission decision are in
 `ergodis-private/evidence/c985-native-bp-spike.json`.
 
