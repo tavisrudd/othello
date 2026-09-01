@@ -749,9 +749,27 @@ files are disposable and may be deleted at any time.
    clippy and the full all-target/all-feature test suite.  No solve worker,
    search safe point, or hot-loop type changed.
 
-   The next evolve tranche is evidence-driven candidate targeting: persist a
-   bounded failure-shape summary and use it to choose mutation families, while
-   keeping archive parsing, scoring, and mutation construction in the daemon.
+   Commit `89290300a` lands the first evidence-driven targeting tranche.  Every
+   completed predicate record now carries a bounded failure shape: error class,
+   first mismatching row identity and requested label, and at most eight values
+   for fields actually referenced by the candidate.  For a local
+   `field / constant / ordered-comparison` form, the daemon derives the nearest
+   overflow-checked integer boundary that gives the requested label on that
+   counterexample and tries it before generic deltas.  The exact control moves
+   from `x > 0` to the required `x > 99` in one generation from a mismatch at
+   99; the old `+-1,+-2,+-8` family cannot cross that gap in one step.  A
+   complete comparator/label/extreme-value test checks that every emitted
+   replacement satisfies its requested local truth value.
+
+   Evidence is serialized immediately.  Ranked candidates retain only the
+   mismatch-row index, not an eight-probe object; probes are reconstructed only
+   for the outcome-distinct beam survivors chosen for expansion.  Thus the
+   100,000-candidate bound gains one word per ranked candidate rather than
+   roughly 10 MB of retained failure records.  Strict all-target/all-feature
+   clippy and the full all-target/all-feature suite pass.  This remains entirely
+   in the daemon thread.  Next fix mutation-parent fairness: the current eager
+   generator can let the first selected parent consume the remaining candidate
+   budget even when the beam contains several outcome-distinct parents.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
