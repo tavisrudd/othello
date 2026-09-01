@@ -892,7 +892,7 @@ mod tests {
         typed_elements_agree::<Prime<251>>();
         typed_elements_agree::<Gf4>();
         assert!(matches!(
-            FieldElement::<Prime<9>>::new(0),
+            Prime::<9>::validate(),
             Err(FieldError::InvalidModulus)
         ));
     }
