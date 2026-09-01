@@ -1138,6 +1138,20 @@ files are disposable and may be deleted at any time.
    has a baseline-verified `--capture-sized` mode to build the exact operational
    target domain needed for the next policy. Package-wide private validation is
    temporarily blocked by an unrelated in-flight exact-energy module.
+
+   Commit `d32353718` freezes that operational-domain before-control. The
+   baseline-verified first-sized-root corpora expose the same stable sizing,
+   packing, branch, and unresolved fields sampled by the live watcher. On the
+   56-row development corpus, six observable classes retain the 39/56 ceiling
+   and numeric again reaches it in 32 / 5,376 versus 49 / 8,232. On the 35-row
+   held-out corpus, the additional initial-branch class raises the exact
+   interface ceiling from 20 to 24, but every current route stops at 20: the
+   shared threshold repair arrives at trial 2, and no mutation can grow the
+   predicate by composing a new field clause. This is a candidate-language
+   failure rather than an interface limit or routing failure. The next public
+   evolution tranche is a bounded, fully replayed clause-growth mutation whose
+   finite clauses are derived from the frozen batch; this report is its exact
+   before-A/B gate.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a

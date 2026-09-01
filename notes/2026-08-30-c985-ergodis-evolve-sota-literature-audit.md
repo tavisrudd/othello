@@ -309,6 +309,14 @@ the validated `root_sized=0` rule onto later sized roots. The next empirical
 step is therefore a baseline-verified first-sized-root corpus and policy, not a
 broader selector or online generalization.
 
+The first sized-root corpus sharpens the next proposer gap. Its held-out
+interface has an exact 24/35 observational ceiling, but all current routes stop
+at 20/35 because mutation can only alter existing fields/operators/constants;
+it cannot grow a predicate with a new field clause. A bounded clause-growth
+operator derived from frozen-batch simple predicates is therefore higher EV
+than online policy adaptation: it expands reachable theorem shape while
+remaining finite, typed, exactly replayed, and authority-free.
+
 ## Near-term acceptance tests
 
 1. Replaying a campaign from its durable graph produces identical semantic and
