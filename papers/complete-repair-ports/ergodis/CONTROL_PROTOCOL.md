@@ -118,10 +118,10 @@ byte-for-byte conformant with this socket path.
 The component topology and implementation-status matrix are authoritative in
 [DESIGN.md](DESIGN.md). In experimental v0, `ergodis-campaign` serves the serial
 control protocol, durable ledger, bulk candidate evaluator, and one optional
-low-priority evolution worker. `evolve-start`, `evolve-status`, and
-`evolve-cancel` manage that worker; `ergodisctl evolve` remains an offline
-staging path. The generic `theorem_search` engine also supports caller-owned
-streaming sinks.
+low-priority evolution worker. `evolve-start`, `evolve-profile-refresh`,
+`evolve-status`, and `evolve-cancel` manage that worker; `ergodisctl evolve`
+remains an offline staging path. The generic `theorem_search` engine also
+supports caller-owned streaming sinks.
 
 The daemon evolution worker shares only the immutable frozen feature batch,
 streams its audit to a bounded create-only file, and publishes progress through
@@ -244,8 +244,17 @@ edge; and `target-profile-status` reports the bounded occupancy. Repeating an
 identical observation or edge is idempotent. Nodes and edges canonicalize by
 their exact tuples, so message order does not change the snapshot bytes or
 hash. `evolve-start --target-profile-current` takes an owned snapshot before
-starting the worker. Campaigns on different socket/run paths share no profile
-state, and later watcher updates cannot mutate an evolution already in flight.
+starting the worker. `evolve-profile-refresh` queues the current snapshot for
+the next generation boundary of the active job. Only the latest pending
+snapshot is retained, and the response reports whether it replaced an older
+one. The worker compiles and streams the complete profile and canonical hash
+before using it; if the bounded evidence file cannot hold that record, it
+truncates before applying the refresh. Cancellation observed at the boundary
+also stops before consuming it. `evolve-status` reports whether a refresh is
+pending. Campaigns on different socket/run paths share no profile state, and
+completed jobs reject refresh requests. Refreshes change only expansion
+priority: correctness, counterexamples, replay, and proof authority remain
+unchanged.
 Every evidence record carries its niche and the summary counts niche and global
 elite positions.  A selected elite with an unconsumed deterministic mutation
 suffix carries a bounded ordinal cursor into the next generation.  Resumption

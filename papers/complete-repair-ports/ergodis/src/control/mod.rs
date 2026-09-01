@@ -13,7 +13,7 @@ use std::os::unix::fs::{FileTypeExt, OpenOptionsExt, PermissionsExt};
 use std::os::unix::net::{UnixDatagram, UnixListener, UnixStream};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
-use std::sync::Arc;
+use std::sync::{Arc, Mutex};
 use std::thread::{self, JoinHandle};
 use std::time::Duration;
 
@@ -160,6 +160,8 @@ struct EvolutionJob {
     relative_path: PathBuf,
     progress: Arc<EvolutionProgress>,
     handle: JoinHandle<Result<Value, ControlError>>,
+    target_profile_mailbox: Arc<Mutex<Option<EvolutionTargetProfile>>>,
+    target_fields: Box<[String]>,
 }
 
 fn request_i64_array(value: Option<&Value>, label: &'static str) -> Result<Vec<i64>, ControlError> {
@@ -340,6 +342,7 @@ impl Campaign {
             "target-profile-edge" => self.target_profile_edge(&request.args),
             "target-profile-status" => self.target_profile_status(),
             "evolve-start" => self.evolution_start(&request.args),
+            "evolve-profile-refresh" => self.evolution_profile_refresh(),
             "evolve-status" => self.evolution_status(),
             "evolve-cancel" => self.evolution_cancel(),
             "candidate-apply" => self.candidate_try(&request.args, true),
@@ -384,7 +387,8 @@ impl Campaign {
                 "candidate-batch",
                 "target-profile-reset", "target-profile-observe",
                 "target-profile-edge", "target-profile-status",
-                "evolve-start", "evolve-status", "evolve-cancel",
+                "evolve-start", "evolve-profile-refresh",
+                "evolve-status", "evolve-cancel",
                 "obstruction-first", "exceptional", "trace", "note", "noop",
                 "shutdown"
             ],
@@ -1449,6 +1453,7 @@ impl Campaign {
         let progress = Arc::new(EvolutionProgress::new());
         let worker_progress = Arc::clone(&progress);
         let batch = Arc::clone(&self.batch);
+        let target_profile_mailbox = Arc::new(Mutex::new(None));
         let bounds = EvolutionBounds {
             generations,
             beam,
@@ -1456,6 +1461,7 @@ impl Campaign {
             byte_limit,
             target_fields: target_fields.into_boxed_slice(),
             target_profile,
+            target_profile_mailbox: Arc::clone(&target_profile_mailbox),
         };
         let handle = thread::Builder::new()
             .name(format!("ergodis-evolve-{}", &id[..8]))
@@ -1475,6 +1481,8 @@ impl Campaign {
             relative_path: relative_path.clone(),
             progress,
             handle,
+            target_profile_mailbox,
+            target_fields: target_field_names.clone().into_boxed_slice(),
         });
         self.last_evolution = None;
         self.record("evolution-started", "low-priority evolution started", None)?;
@@ -1494,14 +1502,50 @@ impl Campaign {
         }))
     }
 
+    fn evolution_profile_refresh(&mut self) -> Result<Value, ControlError> {
+        self.reap_evolution()?;
+        let job = self
+            .evolution
+            .as_ref()
+            .ok_or_else(|| ControlError::Invalid("no evolution job is running".into()))?;
+        let profile = self
+            .target_profile
+            .as_ref()
+            .ok_or_else(|| ControlError::Invalid("target profile has not been reset".into()))?;
+        if profile.fields() != job.target_fields.as_ref() {
+            return Err(ControlError::Invalid(
+                "current target profile fields do not match the evolution job".into(),
+            ));
+        }
+        let snapshot = profile.snapshot()?;
+        let mailbox = Arc::clone(&job.target_profile_mailbox);
+        let replaced = mailbox
+            .lock()
+            .map_err(|_| ControlError::Invalid("target profile mailbox is poisoned".into()))?
+            .replace(snapshot)
+            .is_some();
+        self.record(
+            "evolution-profile-refresh",
+            "operational target profile refresh queued",
+            None,
+        )?;
+        Ok(json!({"queued": true, "replaced_pending": replaced}))
+    }
+
     fn evolution_status(&mut self) -> Result<Value, ControlError> {
         self.reap_evolution()?;
         if let Some(job) = &self.evolution {
+            let profile_refresh_pending = job
+                .target_profile_mailbox
+                .lock()
+                .map_err(|_| ControlError::Invalid("target profile mailbox is poisoned".into()))?
+                .is_some();
             return Ok(json!({
                 "id": job.id,
                 "path": job.relative_path,
                 "state": "running",
                 "progress": job.progress.snapshot(),
+                "profile_refresh_pending": profile_refresh_pending,
             }));
         }
         Ok(self

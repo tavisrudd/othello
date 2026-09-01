@@ -182,6 +182,8 @@ enum Command {
     },
     /// Inspect the campaign-local operational target profile.
     TargetProfileStatus,
+    /// Queue the current target profile for the next evolution generation.
+    EvolveProfileRefresh,
     /// Query the active or most recently completed daemon evolution job.
     EvolveStatus,
     /// Request cancellation of the active daemon evolution job.
@@ -433,6 +435,7 @@ fn main() -> Result<()> {
             json!({"from": from, "to": to, "kind": kind}),
         ),
         Command::TargetProfileStatus => ("target-profile-status", json!({})),
+        Command::EvolveProfileRefresh => ("evolve-profile-refresh", json!({})),
         Command::EvolveStatus => ("evolve-status", json!({})),
         Command::EvolveCancel => ("evolve-cancel", json!({})),
         Command::Apply { plan, expect_epoch } => (
@@ -1197,6 +1200,17 @@ fn render_compact(op: &str, result: &Value, epoch: u64) -> Result<()> {
             number(result, "records")
         ),
         "note" => println!("epoch={epoch} event={}", number(result, "event")),
+        "evolve-profile-refresh" => println!(
+            "epoch={epoch} queued={} replaced_pending={}",
+            result
+                .get("queued")
+                .and_then(Value::as_bool)
+                .unwrap_or(false),
+            result
+                .get("replaced_pending")
+                .and_then(Value::as_bool)
+                .unwrap_or(false)
+        ),
         "evolve-start"
         | "evolve-status"
         | "evolve-cancel"

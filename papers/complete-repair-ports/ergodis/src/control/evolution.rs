@@ -9,7 +9,7 @@ use std::fs::File;
 use std::io::{BufRead, BufReader, BufWriter, Write};
 use std::path::Path;
 use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
-use std::sync::Arc;
+use std::sync::{Arc, Mutex};
 
 const EVOLUTION_EVIDENCE_SCHEMA: &str = "ergodis-evolution-evidence-v0";
 const MAX_EVOLUTION_IMPORT_BYTES: u64 = 16 * 1024 * 1024;
@@ -155,6 +155,7 @@ pub(super) struct EvolutionBounds {
     pub byte_limit: u64,
     pub target_fields: Box<[usize]>,
     pub target_profile: Option<EvolutionTargetProfile>,
+    pub target_profile_mailbox: Arc<Mutex<Option<EvolutionTargetProfile>>>,
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -1864,14 +1865,11 @@ pub(super) fn run_evolution(
         .iter()
         .map(|&field| batch.fields[field].as_str())
         .collect::<Vec<_>>();
-    let target_profile = bounds
+    let mut target_profile = bounds
         .target_profile
         .as_ref()
         .map(|profile| target_classes.compile_profile(profile, &target_fields))
         .transpose()?;
-    let target_priorities = target_profile
-        .as_ref()
-        .map_or(&[][..], |profile| profile.class_priorities.as_ref());
     // SAFETY: setpriority has no pointer arguments; `who = 0` selects only the
     // calling Linux task. Failure is reported in the job summary.
     let low_priority = unsafe { libc::setpriority(libc::PRIO_PROCESS, 0, 10) } == 0;
@@ -1944,6 +1942,7 @@ pub(super) fn run_evolution(
     let mut target_selection_slots = BTreeMap::<u32, u64>::new();
     let mut target_selection_overflow = 0_u64;
     let mut target_profile_surplus_slots = 0_u64;
+    let mut target_profile_refreshes = 0_u64;
     let mut prior_parent_scores = BTreeMap::<String, CandidateScore>::new();
     let mut retained_elites = Vec::<ExpansionParent>::new();
     let mut hindsight_semantics = BTreeSet::<String>::new();
@@ -2016,9 +2015,41 @@ pub(super) fn run_evolution(
         .collect::<Vec<_>>();
 
     'generations: for generation in 0..bounds.generations {
+        if tested == bounds.max_candidates || progress.cancelled.load(Ordering::Acquire) {
+            break;
+        }
         progress
             .generation
             .store(generation as u64, Ordering::Relaxed);
+        let refreshed_profile = bounds
+            .target_profile_mailbox
+            .lock()
+            .map_err(|_| ControlError::Invalid("target profile mailbox is poisoned".into()))?
+            .take();
+        if let Some(profile) = refreshed_profile {
+            let compiled = target_classes.compile_profile(&profile, &target_fields)?;
+            let record = json!({
+                "type": "target-profile-refresh",
+                "generation": generation,
+                "target_profile_hash": &compiled.hash,
+                "target_profile": profile,
+            });
+            let mut encoded = serde_json::to_vec(&record)?;
+            encoded.push(b'\n');
+            if encoded.len() > MAX_EVOLUTION_RECORD_BYTES
+                || bytes.saturating_add(encoded.len() as u64) > candidate_byte_limit
+            {
+                truncated = true;
+                break 'generations;
+            }
+            writer.write_all(&encoded)?;
+            bytes += encoded.len() as u64;
+            target_profile = Some(compiled);
+            checked_counter_add(&mut target_profile_refreshes, 1, "target profile refresh")?;
+        }
+        let target_priorities = target_profile
+            .as_ref()
+            .map_or(&[][..], |profile| profile.class_priorities.as_ref());
         let mut ranked = Vec::new();
         let mut survivor_keys = Vec::<EvolutionRankKey>::new();
         for pending in current.drain(..) {
@@ -2526,6 +2557,7 @@ pub(super) fn run_evolution(
         "nodes": target_profile.as_ref().map_or(0, |profile| profile.nodes),
         "edges": target_profile.as_ref().map_or(0, |profile| profile.edges),
         "surplus_slots": target_profile_surplus_slots,
+        "refreshes": target_profile_refreshes,
     });
     let mut footer_summary = json!({
         "tested": tested,
@@ -3322,6 +3354,96 @@ mod tests {
     }
 
     #[test]
+    fn target_profile_refresh_is_evidenced_before_generation_use() {
+        let batch = FeatureBatch {
+            presentation: "targets".into(),
+            problem: "profile-refresh".into(),
+            fields: vec!["root".into()].into_boxed_slice(),
+            generator: None,
+            row_ids: vec![0, 1].into_boxed_slice(),
+            weights: vec![1, 1].into_boxed_slice(),
+            expected: vec![1].into_boxed_slice(),
+            values: vec![1, -1].into_boxed_slice(),
+        };
+        let profile = EvolutionTargetProfile {
+            schema: EVOLUTION_TARGET_PROFILE_SCHEMA.into(),
+            fields: vec!["root".into()].into_boxed_slice(),
+            nodes: vec![EvolutionTargetNode {
+                values: vec![1].into_boxed_slice(),
+                mass: 7,
+                unit_cost: 11,
+            }]
+            .into_boxed_slice(),
+            edges: Box::new([]),
+        };
+        let expected_hash = target_profile_hash(&profile).unwrap();
+        let mailbox = Arc::new(Mutex::new(Some(profile.clone())));
+        let identity = EvolutionIdentity {
+            code_commit: "profile-refresh-test".into(),
+            presentation_hash: "2".repeat(64),
+            presentation: batch.presentation.clone(),
+            problem: batch.problem.clone(),
+            fields: batch.fields.clone(),
+            generator: None,
+        };
+        let seed = PlanSpec {
+            schema: super::super::PLAN_SCHEMA.into(),
+            name: "root-positive".into(),
+            role: super::super::PlanRole::Diagnostic,
+            output: super::super::PlanOutput::Predicate,
+            scope: None,
+            program: vec![
+                PlanOp::Field {
+                    name: "root".into(),
+                },
+                PlanOp::Const { value: 0 },
+                PlanOp::Gt,
+            ],
+        };
+        let temporary = tempfile::tempdir().unwrap();
+        let evidence_path = temporary.path().join("profile-refresh.jsonl");
+        let summary = run_evolution(
+            Arc::new(batch),
+            identity,
+            vec![EvolutionSeed {
+                plan: seed,
+                parent_hash: None,
+                source_hash: None,
+                source_evidence: None,
+                operator: "seed",
+            }],
+            Vec::new(),
+            File::create(&evidence_path).unwrap(),
+            EvolutionBounds {
+                generations: 1,
+                beam: 1,
+                max_candidates: 1,
+                byte_limit: 64 * 1024,
+                target_fields: vec![0].into_boxed_slice(),
+                target_profile: None,
+                target_profile_mailbox: mailbox,
+            },
+            Arc::new(EvolutionProgress::new()),
+        )
+        .unwrap();
+        assert_eq!(summary["target_profile"]["refreshes"], 1);
+        assert_eq!(summary["target_profile"]["hash"], expected_hash);
+        let records = std::fs::read_to_string(evidence_path)
+            .unwrap()
+            .lines()
+            .map(|line| serde_json::from_str::<Value>(line).unwrap())
+            .collect::<Vec<_>>();
+        let refreshes = records
+            .iter()
+            .filter(|record| record["type"] == "target-profile-refresh")
+            .collect::<Vec<_>>();
+        assert_eq!(refreshes.len(), 1);
+        assert_eq!(refreshes[0]["generation"], 0);
+        assert_eq!(refreshes[0]["target_profile_hash"], expected_hash);
+        assert_eq!(refreshes[0]["target_profile"], json!(profile));
+    }
+
+    #[test]
     fn target_accumulator_is_idempotent_and_order_canonical() {
         let fields = vec!["root".into(), "debt".into()].into_boxed_slice();
         let mut left = EvolutionTargetAccumulator::new(fields.clone()).unwrap();
@@ -3538,6 +3660,7 @@ mod tests {
                 byte_limit: 64 * 1024,
                 target_fields: Box::new([]),
                 target_profile: None,
+                target_profile_mailbox: Arc::new(Mutex::new(None)),
             },
             Arc::new(EvolutionProgress::new()),
         )
@@ -3664,6 +3787,7 @@ mod tests {
                 byte_limit: 64 * 1024,
                 target_fields: Box::new([]),
                 target_profile: None,
+                target_profile_mailbox: Arc::new(Mutex::new(None)),
             },
             Arc::new(EvolutionProgress::new()),
         )
@@ -3754,6 +3878,7 @@ mod tests {
                 byte_limit: 64 * 1024,
                 target_fields: Box::new([]),
                 target_profile: None,
+                target_profile_mailbox: Arc::new(Mutex::new(None)),
             },
             Arc::new(EvolutionProgress::new()),
         )
