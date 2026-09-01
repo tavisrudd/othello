@@ -19,6 +19,7 @@
       "tested": 124,
       "perfect": 0,
       "rows_evaluated": 4340,
+      "evidence_bytes": 177017,
       "first_perfect_trial": null,
       "first_perfect_semantic_op_rows": null,
       "first_perfect_operator": null,
@@ -195,7 +196,7 @@
         "role": "diagnostic",
         "schema": "ergodis-attack-plan-v0"
       },
-      "evidence_path": "evidence/alignment-root-cost-routing-heldout-runs/balanced/evidence/target-strategy-balanced-a27ab688a7ae9f6265214a24.jsonl",
+      "evidence_path": "evidence/alignment-root-cost-routing-heldout-v4-runs/balanced/evidence/target-strategy-balanced-8285d4518dea62db24689fec.jsonl",
       "evidence_sha256": "21e3e9042b14bca35c86a0c21296113366ed70efaab998da3b2f786e272746ca"
     },
     {
@@ -203,6 +204,7 @@
       "tested": 118,
       "perfect": 0,
       "rows_evaluated": 4130,
+      "evidence_bytes": 168011,
       "first_perfect_trial": null,
       "first_perfect_semantic_op_rows": null,
       "first_perfect_operator": null,
@@ -362,7 +364,7 @@
         "role": "diagnostic",
         "schema": "ergodis-attack-plan-v0"
       },
-      "evidence_path": "evidence/alignment-root-cost-routing-heldout-runs/numeric/evidence/target-strategy-numeric-1d428a92f815904fcd6e9f08.jsonl",
+      "evidence_path": "evidence/alignment-root-cost-routing-heldout-v4-runs/numeric/evidence/target-strategy-numeric-67b6241ff55993584a9d01c2.jsonl",
       "evidence_sha256": "552a052f2323de5f7351ac430b98c7570b7aa1fadecfadee8289f04ad7df7e52"
     },
     {
@@ -370,6 +372,7 @@
       "tested": 124,
       "perfect": 0,
       "rows_evaluated": 4340,
+      "evidence_bytes": 177043,
       "first_perfect_trial": null,
       "first_perfect_semantic_op_rows": null,
       "first_perfect_operator": null,
@@ -546,7 +549,7 @@
         "role": "diagnostic",
         "schema": "ergodis-attack-plan-v0"
       },
-      "evidence_path": "evidence/alignment-root-cost-routing-heldout-runs/structural/evidence/target-strategy-structural-0550b7e34e75e99ee00a19cd.jsonl",
+      "evidence_path": "evidence/alignment-root-cost-routing-heldout-v4-runs/structural/evidence/target-strategy-structural-a13fbd8dc1c5d31b20351b86.jsonl",
       "evidence_sha256": "b23e9a2a9693f9f34993791e682e817b45b637b4e571dce0f35fd19b8dfa4fae"
     }
   ]

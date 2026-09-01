@@ -19,6 +19,7 @@
       "tested": 124,
       "perfect": 0,
       "rows_evaluated": 6944,
+      "evidence_bytes": 178332,
       "first_perfect_trial": null,
       "first_perfect_semantic_op_rows": null,
       "first_perfect_operator": null,
@@ -195,7 +196,7 @@
         "role": "diagnostic",
         "schema": "ergodis-attack-plan-v0"
       },
-      "evidence_path": "evidence/alignment-root-cost-routing-runs/balanced/evidence/target-strategy-balanced-162676b1913b4b86f9be7620.jsonl",
+      "evidence_path": "evidence/alignment-root-cost-routing-v2-runs/balanced/evidence/target-strategy-balanced-2779555a55ef97e75cde32c1.jsonl",
       "evidence_sha256": "a29ddbf87041673ec8498ba36318c8ae3467a7bc3f5def85b08753739af0bb6f"
     },
     {
@@ -203,6 +204,7 @@
       "tested": 106,
       "perfect": 0,
       "rows_evaluated": 5936,
+      "evidence_bytes": 150376,
       "first_perfect_trial": null,
       "first_perfect_semantic_op_rows": null,
       "first_perfect_operator": null,
@@ -362,7 +364,7 @@
         "role": "diagnostic",
         "schema": "ergodis-attack-plan-v0"
       },
-      "evidence_path": "evidence/alignment-root-cost-routing-runs/numeric/evidence/target-strategy-numeric-561660c592f0dfb221952a6f.jsonl",
+      "evidence_path": "evidence/alignment-root-cost-routing-v2-runs/numeric/evidence/target-strategy-numeric-c87a2bbe3d308703b9d0a20a.jsonl",
       "evidence_sha256": "e0d6d8ffe591a6cf105cc6a7e23a24c04971c260bbbe0dac85e691fb29713173"
     },
     {
@@ -370,6 +372,7 @@
       "tested": 124,
       "perfect": 0,
       "rows_evaluated": 6944,
+      "evidence_bytes": 178358,
       "first_perfect_trial": null,
       "first_perfect_semantic_op_rows": null,
       "first_perfect_operator": null,
@@ -546,7 +549,7 @@
         "role": "diagnostic",
         "schema": "ergodis-attack-plan-v0"
       },
-      "evidence_path": "evidence/alignment-root-cost-routing-runs/structural/evidence/target-strategy-structural-51691d062571c47ab878d23c.jsonl",
+      "evidence_path": "evidence/alignment-root-cost-routing-v2-runs/structural/evidence/target-strategy-structural-1bca05dbd001c789c95c2734.jsonl",
       "evidence_sha256": "b54c4418b5e84f9653f3af2a0b1ce80598f8b3ae6bc603e0cf21d978c567d445"
     }
   ]

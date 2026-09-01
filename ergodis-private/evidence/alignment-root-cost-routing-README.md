@@ -26,20 +26,22 @@ Both corpora use the same frozen seed, `root_orbit > 3`, target class
 held-out configuration and all evolution settings were fixed before its
 corpus was generated.
 
-| Corpus / strategy | First ceiling trial | Semantic-op rows to ceiling | Total tested |
-|---|---:|---:|---:|
-| Development / balanced | 49 | 8,232 | 124 |
-| Development / numeric | **32** | **5,376** | **106** |
-| Development / structural | 49 | 8,232 | 124 |
-| Held out / balanced | **2** | **210** | 124 |
-| Held out / numeric | **2** | **210** | **118** |
-| Held out / structural | **2** | **210** | 124 |
+| Corpus / strategy | First ceiling trial | Semantic-op rows to ceiling | Total tested | Evidence bytes |
+|---|---:|---:|---:|---:|
+| Development / balanced | 49 | 8,232 | 124 | 178,332 |
+| Development / numeric | **32** | **5,376** | **106** | **150,376** |
+| Development / structural | 49 | 8,232 | 124 | 178,358 |
+| Held out / balanced | **2** | **210** | 124 | 177,017 |
+| Held out / numeric | **2** | **210** | **118** | **168,011** |
+| Held out / structural | **2** | **210** | 124 | 177,043 |
 
 Numeric ordering therefore reaches the exact observable ceiling 1.53x sooner
 on the development application corpus.  It is neutral on held-out discovery:
 the theorem-derived `counterexample-threshold` repair reaches the ceiling at
 trial 2 before generic family ordering can matter.  Numeric routing does not
 delay that repair and exhausts the bounded search with 4.8% fewer candidates.
+Its evidence stream is correspondingly 5.1% smaller; on the development
+corpus it is 15.7% smaller.
 This is evidence for conditional routing, not a claim that numeric ordering
 universally improves alignment search.
 

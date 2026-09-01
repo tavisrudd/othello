@@ -43,6 +43,7 @@ struct StrategyAudit {
     tested: u64,
     perfect: u64,
     rows_evaluated: u64,
+    evidence_bytes: u64,
     first_perfect_trial: Option<u64>,
     first_perfect_semantic_op_rows: Option<u64>,
     first_perfect_operator: Option<String>,
@@ -195,10 +196,18 @@ fn inspect_evidence(path: &Path) -> Result<EvidenceMilestones> {
 
 fn run_strategy(args: &Args, seeds: &[Value], strategy: &'static str) -> Result<StrategyAudit> {
     let run_dir = args.run_root.join(strategy);
+    let socket_dir = args
+        .run_root
+        .parent()
+        .context("run root must have a parent directory")?;
+    let socket = socket_dir.join(format!(
+        ".target-strategy-{}-{strategy}.sock",
+        std::process::id()
+    ));
     let campaign = Campaign::create(
         &args.data,
         &run_dir,
-        Some(run_dir.with_extension("sock")),
+        Some(socket),
         CAMPAIGN_LIMIT,
         RESPONSE_LIMIT,
         CAMPAIGN_LIMIT,
@@ -260,11 +269,16 @@ fn run_strategy(args: &Args, seeds: &[Value], strategy: &'static str) -> Result<
     let evidence_path = run_dir.join(relative);
     let milestones = inspect_evidence(&evidence_path)?;
     let summary = &completed["summary"];
+    let evidence_bytes = std::fs::metadata(&evidence_path)?.len();
+    if summary["bytes"].as_u64() != Some(evidence_bytes) {
+        bail!("{strategy} evidence length disagrees with its stable summary");
+    }
     Ok(StrategyAudit {
         strategy,
         tested: summary["tested"].as_u64().unwrap_or(0),
         perfect: summary["perfect"].as_u64().unwrap_or(0),
         rows_evaluated: summary["rows_evaluated"].as_u64().unwrap_or(0),
+        evidence_bytes,
         first_perfect_trial: milestones.first_perfect_trial,
         first_perfect_semantic_op_rows: milestones.first_perfect_semantic_op_rows,
         first_perfect_operator: milestones.first_perfect_operator,
