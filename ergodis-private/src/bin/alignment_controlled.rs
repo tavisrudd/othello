@@ -10,7 +10,7 @@ use std::path::PathBuf;
 
 #[path = "../alignment_control.rs"]
 mod alignment_control;
-use alignment_control::AlignmentCampaignControl;
+use alignment_control::{AlignmentCampaignControl, AlignmentProfilePolicy};
 
 #[derive(Debug, Parser)]
 #[command(about = "Opt-in alignment-attachment search with campaign safe points")]
@@ -30,6 +30,13 @@ struct Cli {
     /// Stream coarse progress snapshots from the auxiliary watcher as JSONL.
     #[arg(long, conflicts_with = "baseline")]
     progress_file: Option<PathBuf>,
+    /// Publish bounded root-cost target profiles from the auxiliary watcher.
+    #[arg(long, conflicts_with = "baseline")]
+    evolution_profile: bool,
+    #[arg(long, default_value_t = 8, requires = "evolution_profile")]
+    profile_structural_branches: u64,
+    #[arg(long, default_value_t = 3, requires = "evolution_profile")]
+    profile_structural_packing: u64,
     #[arg(long)]
     symmetry: bool,
     #[arg(long)]
@@ -64,7 +71,19 @@ fn main() -> Result<()> {
         (answer, metrics, serde_json::Value::Null)
     } else {
         let manifest = read_manifest(&cli.run_dir).context("cannot read campaign manifest")?;
-        let mut control = AlignmentCampaignControl::new(manifest, 8192, cli.progress_file)?;
+        let mut control = if cli.evolution_profile {
+            AlignmentCampaignControl::new_profiled(
+                manifest,
+                8192,
+                cli.progress_file,
+                AlignmentProfilePolicy {
+                    structural_branches: cli.profile_structural_branches,
+                    structural_packing: cli.profile_structural_packing,
+                },
+            )?
+        } else {
+            AlignmentCampaignControl::new(manifest, 8192, cli.progress_file)?
+        };
         let (answer, metrics) = search_alignment_attachment_controlled(
             &problem,
             cli.budget,
@@ -79,6 +98,9 @@ fn main() -> Result<()> {
             json!({
                 "epoch": control.epoch(),
                 "notifications": control.notifications(),
+                "profile_updates": control.profile_updates(),
+                "profile_rejections": control.profile_rejections(),
+                "profile_refreshes": control.profile_refreshes(),
                 "group": group,
             }),
         )

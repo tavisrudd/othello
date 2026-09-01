@@ -1,10 +1,9 @@
-use ergodis::control::{
-    send_request, CompiledPlan, Manifest, PlanArena, PlanOutput, PlanRole,
-};
+use ergodis::control::{send_request, CompiledPlan, Manifest, PlanArena, PlanOutput, PlanRole};
 use ergodis::{
     AlignmentBranchFeatures, AlignmentError, AlignmentSearchControl, AlignmentSearchPoint,
 };
 use serde_json::json;
+use std::collections::BTreeMap;
 use std::fs::{self, OpenOptions};
 use std::io::{self, LineWriter, Write};
 use std::os::unix::fs::{OpenOptionsExt, PermissionsExt};
@@ -33,7 +32,100 @@ pub const ALIGNMENT_PLAN_FIELDS: [&str; 15] = [
     "root_initial_branches",
 ];
 
+const ALIGNMENT_TARGET_FIELDS: [&str; 3] = ["root_orbit", "root_initial_packing", "root_sized"];
+
 static WATCH_IDS: AtomicU64 = AtomicU64::new(0);
+
+#[derive(Clone, Copy, Eq, Ord, PartialEq, PartialOrd)]
+struct AlignmentTargetKey([i64; 3]);
+
+#[derive(Default)]
+struct AlignmentTargetStats {
+    root_states: BTreeMap<u32, u64>,
+    last_sent: Option<(u64, u64, &'static str)>,
+}
+
+struct AlignmentTargetPublisher {
+    targets: BTreeMap<AlignmentTargetKey, AlignmentTargetStats>,
+    policy: AlignmentProfilePolicy,
+}
+
+struct AlignmentTargetObservation {
+    values: [i64; 3],
+    mass: u64,
+    unit_cost: u64,
+    strategy: &'static str,
+}
+
+#[derive(Clone, Copy, Debug)]
+pub struct AlignmentProfilePolicy {
+    pub structural_branches: u64,
+    pub structural_packing: u64,
+}
+
+impl Default for AlignmentProfilePolicy {
+    fn default() -> Self {
+        Self {
+            structural_branches: 8,
+            structural_packing: 3,
+        }
+    }
+}
+
+impl AlignmentTargetPublisher {
+    fn new(policy: AlignmentProfilePolicy) -> Self {
+        Self {
+            targets: BTreeMap::new(),
+            policy,
+        }
+    }
+
+    fn update(&mut self, status: &serde_json::Value) -> Option<AlignmentTargetObservation> {
+        let root_orbit = status["root_orbit"].as_u64()?;
+        let root_ordinal = u32::try_from(status["root_ordinal"].as_u64()?).ok()?;
+        let root_states = status["root_states"].as_u64()?.max(1);
+        let root_initial_packing = status["root_initial_packing"].as_u64()?;
+        let root_sized = status["root_sized"].as_bool()?;
+        let key = AlignmentTargetKey([
+            i64::try_from(root_orbit).ok()?,
+            i64::try_from(root_initial_packing).ok()?,
+            i64::from(root_sized),
+        ]);
+        let strategy = if status["root_initial_branches"].as_u64()?
+            >= self.policy.structural_branches
+            || root_initial_packing >= self.policy.structural_packing
+        {
+            "structural"
+        } else {
+            "numeric"
+        };
+        let target = self.targets.entry(key).or_default();
+        target
+            .root_states
+            .entry(root_ordinal)
+            .and_modify(|states| *states = (*states).max(root_states))
+            .or_insert(root_states);
+        let mass = u64::try_from(target.root_states.len()).ok()?;
+        let unit_cost = target.root_states.values().copied().max()?;
+        let measurement = (mass, unit_cost, strategy);
+        if target.last_sent == Some(measurement) {
+            return None;
+        }
+        target.last_sent = Some(measurement);
+        Some(AlignmentTargetObservation {
+            values: key.0,
+            mass,
+            unit_cost,
+            strategy,
+        })
+    }
+
+    fn retry(&mut self, values: [i64; 3]) {
+        if let Some(target) = self.targets.get_mut(&AlignmentTargetKey(values)) {
+            target.last_sent = None;
+        }
+    }
+}
 
 #[repr(align(64))]
 struct PaddedFlag(AtomicBool);
@@ -180,6 +272,9 @@ struct SteeringWatcher {
     stop: Arc<PaddedFlag>,
     heartbeat: Arc<Heartbeat>,
     notifications: Arc<AtomicU64>,
+    profile_updates: Arc<AtomicU64>,
+    profile_rejections: Arc<AtomicU64>,
+    profile_refreshes: Arc<AtomicU64>,
     applied_epoch: Arc<AtomicU64>,
     exchange: Arc<Mutex<PlanExchange>>,
     endpoint: PathBuf,
@@ -199,12 +294,17 @@ impl SteeringWatcher {
         response_limit: usize,
         progress_path: Option<PathBuf>,
         fields: Arc<[String]>,
+        profile_policy: Option<AlignmentProfilePolicy>,
     ) -> Result<Self, AlignmentError> {
+        let publish_profile = profile_policy.is_some();
         let ready = Arc::new(PaddedFlag(AtomicBool::new(false)));
         let failed = Arc::new(PaddedFlag(AtomicBool::new(false)));
         let stop = Arc::new(PaddedFlag(AtomicBool::new(false)));
         let heartbeat = Arc::new(Heartbeat::new());
         let notifications = Arc::new(AtomicU64::new(0));
+        let profile_updates = Arc::new(AtomicU64::new(0));
+        let profile_rejections = Arc::new(AtomicU64::new(0));
+        let profile_refreshes = Arc::new(AtomicU64::new(0));
         let applied_epoch = Arc::new(AtomicU64::new(0));
         let exchange = Arc::new(Mutex::new(PlanExchange {
             prepared: None,
@@ -240,6 +340,24 @@ impl SteeringWatcher {
             unregister(&manifest, &endpoint, response_limit);
             return Err(AlignmentError::Control);
         };
+        if publish_profile {
+            let reset = match send_request(
+                &manifest,
+                "target-profile-reset",
+                json!({"fields": ALIGNMENT_TARGET_FIELDS}),
+                response_limit,
+            ) {
+                Ok(reset) => reset,
+                Err(_) => {
+                    unregister(&manifest, &endpoint, response_limit);
+                    return Err(AlignmentError::Control);
+                }
+            };
+            if !reset.ok {
+                unregister(&manifest, &endpoint, response_limit);
+                return Err(AlignmentError::Control);
+            }
+        }
         let mut progress = if let Some(path) = progress_path {
             if socket
                 .set_read_timeout(Some(Duration::from_secs(1)))
@@ -264,10 +382,21 @@ impl SteeringWatcher {
         } else {
             None
         };
+        if publish_profile
+            && socket
+                .set_read_timeout(Some(Duration::from_secs(1)))
+                .is_err()
+        {
+            unregister(&manifest, &endpoint, response_limit);
+            return Err(AlignmentError::Control);
+        }
         let thread_ready = Arc::clone(&ready);
         let thread_failed = Arc::clone(&failed);
         let thread_stop = Arc::clone(&stop);
         let thread_notifications = Arc::clone(&notifications);
+        let thread_profile_updates = Arc::clone(&profile_updates);
+        let thread_profile_rejections = Arc::clone(&profile_rejections);
+        let thread_profile_refreshes = Arc::clone(&profile_refreshes);
         let thread_heartbeat = Arc::clone(&heartbeat);
         let thread_applied_epoch = Arc::clone(&applied_epoch);
         let thread_exchange = Arc::clone(&exchange);
@@ -278,6 +407,8 @@ impl SteeringWatcher {
                 let mut epoch = [0_u8; 8];
                 let mut notified_epoch = registered_epoch;
                 let mut last_states = u64::MAX;
+                let mut profile_publisher =
+                    AlignmentTargetPublisher::new(profile_policy.unwrap_or_default());
                 let start = Instant::now();
                 let mut initial_refresh = registered_epoch != 0;
                 loop {
@@ -309,14 +440,27 @@ impl SteeringWatcher {
                                 thread_failed.0.store(true, Ordering::Release);
                                 break;
                             }
+                            if publish_profile {
+                                let status = thread_heartbeat.snapshot();
+                                publish_target_observation(
+                                    &thread_manifest,
+                                    response_limit,
+                                    &mut profile_publisher,
+                                    &status,
+                                    &thread_profile_updates,
+                                    &thread_profile_rejections,
+                                    &thread_profile_refreshes,
+                                );
+                            }
                             thread_ready.0.store(true, Ordering::Release);
                         }
                         Err(error)
                             if progress.is_some()
-                                && matches!(
-                                    error.kind(),
-                                    io::ErrorKind::WouldBlock | io::ErrorKind::TimedOut
-                                ) =>
+                                || publish_profile
+                                    && matches!(
+                                        error.kind(),
+                                        io::ErrorKind::WouldBlock | io::ErrorKind::TimedOut
+                                    ) =>
                         {
                             let status = thread_heartbeat.snapshot();
                             let states = status["states"].as_u64().unwrap_or(0);
@@ -331,6 +475,17 @@ impl SteeringWatcher {
                                     }),
                                     response_limit,
                                 );
+                                if publish_profile {
+                                    publish_target_observation(
+                                        &thread_manifest,
+                                        response_limit,
+                                        &mut profile_publisher,
+                                        &status,
+                                        &thread_profile_updates,
+                                        &thread_profile_rejections,
+                                        &thread_profile_refreshes,
+                                    );
+                                }
                                 let record = json!({
                                     "schema": "ergodis-progress-v0",
                                     "elapsed_ms": start.elapsed().as_millis(),
@@ -338,14 +493,13 @@ impl SteeringWatcher {
                                     "notified_epoch": notified_epoch,
                                     "solver": status,
                                 });
-                                let Some(writer) = progress.as_mut() else {
-                                    unreachable!()
-                                };
-                                if serde_json::to_writer(&mut *writer, &record).is_err()
-                                    || writer.write_all(b"\n").is_err()
-                                {
-                                    thread_failed.0.store(true, Ordering::Release);
-                                    break;
+                                if let Some(writer) = progress.as_mut() {
+                                    if serde_json::to_writer(&mut *writer, &record).is_err()
+                                        || writer.write_all(b"\n").is_err()
+                                    {
+                                        thread_failed.0.store(true, Ordering::Release);
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -366,6 +520,9 @@ impl SteeringWatcher {
             stop,
             heartbeat,
             notifications,
+            profile_updates,
+            profile_rejections,
+            profile_refreshes,
             applied_epoch,
             exchange,
             endpoint,
@@ -397,6 +554,51 @@ fn unregister(manifest: &Manifest, endpoint: &Path, response_limit: usize) {
         response_limit,
     );
     let _ = fs::remove_file(endpoint);
+}
+
+fn publish_target_observation(
+    manifest: &Manifest,
+    response_limit: usize,
+    publisher: &mut AlignmentTargetPublisher,
+    status: &serde_json::Value,
+    updates: &AtomicU64,
+    rejections: &AtomicU64,
+    refreshes: &AtomicU64,
+) {
+    let Some(observation) = publisher.update(status) else {
+        return;
+    };
+    let observed = send_request(
+        manifest,
+        "target-profile-observe",
+        json!({
+            "values": observation.values,
+            "mass": observation.mass,
+            "unit_cost": observation.unit_cost,
+            "strategy": observation.strategy,
+        }),
+        response_limit,
+    );
+    let Ok(observed) = observed else {
+        publisher.retry(observation.values);
+        rejections.fetch_add(1, Ordering::Relaxed);
+        return;
+    };
+    if !observed.ok {
+        rejections.fetch_add(1, Ordering::Relaxed);
+        return;
+    }
+    updates.fetch_add(1, Ordering::Relaxed);
+    if let Ok(refresh) = send_request(
+        manifest,
+        "evolve-profile-refresh",
+        json!({}),
+        response_limit,
+    ) {
+        if refresh.ok && refresh.result["queued"].as_bool() == Some(true) {
+            refreshes.fetch_add(1, Ordering::Relaxed);
+        }
+    }
 }
 
 fn prepare_latest(
@@ -439,14 +641,37 @@ impl AlignmentCampaignControl {
         response_limit: usize,
         progress_path: Option<PathBuf>,
     ) -> Result<Self, AlignmentError> {
+        Self::create(manifest, response_limit, progress_path, None)
+    }
+
+    pub fn new_profiled(
+        manifest: Manifest,
+        response_limit: usize,
+        progress_path: Option<PathBuf>,
+        policy: AlignmentProfilePolicy,
+    ) -> Result<Self, AlignmentError> {
+        Self::create(manifest, response_limit, progress_path, Some(policy))
+    }
+
+    fn create(
+        manifest: Manifest,
+        response_limit: usize,
+        progress_path: Option<PathBuf>,
+        profile_policy: Option<AlignmentProfilePolicy>,
+    ) -> Result<Self, AlignmentError> {
         let fields: Arc<[String]> = Arc::from(
             ALIGNMENT_PLAN_FIELDS
                 .iter()
                 .map(|field| (*field).into())
                 .collect::<Vec<String>>(),
         );
-        let watcher =
-            SteeringWatcher::spawn(manifest.clone(), response_limit, progress_path, fields)?;
+        let watcher = SteeringWatcher::spawn(
+            manifest.clone(),
+            response_limit,
+            progress_path,
+            fields,
+            profile_policy,
+        )?;
         Ok(Self {
             arena: PlanArena::new(response_limit),
             watcher,
@@ -460,6 +685,18 @@ impl AlignmentCampaignControl {
 
     pub fn notifications(&self) -> u64 {
         self.watcher.notifications.load(Ordering::Relaxed)
+    }
+
+    pub fn profile_updates(&self) -> u64 {
+        self.watcher.profile_updates.load(Ordering::Relaxed)
+    }
+
+    pub fn profile_rejections(&self) -> u64 {
+        self.watcher.profile_rejections.load(Ordering::Relaxed)
+    }
+
+    pub fn profile_refreshes(&self) -> u64 {
+        self.watcher.profile_refreshes.load(Ordering::Relaxed)
     }
 
     fn ordering_plan(&self) -> Option<&CompiledPlan> {
@@ -549,5 +786,114 @@ impl AlignmentSearchControl for AlignmentCampaignControl {
             i64::from(features.root_initial_branches),
         ])
         .map_err(|_| AlignmentError::Control)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn status(
+        root_ordinal: u64,
+        root_states: u64,
+        root_initial_packing: u64,
+        root_initial_branches: u64,
+    ) -> serde_json::Value {
+        json!({
+            "root_orbit": 3,
+            "root_ordinal": root_ordinal,
+            "root_states": root_states,
+            "root_initial_packing": root_initial_packing,
+            "root_initial_branches": root_initial_branches,
+            "root_sized": true,
+        })
+    }
+
+    #[test]
+    fn target_publisher_is_absolute_idempotent_and_shape_routed() {
+        let mut publisher = AlignmentTargetPublisher::new(AlignmentProfilePolicy::default());
+        let first = publisher.update(&status(1, 10, 1, 4)).unwrap();
+        assert_eq!(first.values, [3, 1, 1]);
+        assert_eq!((first.mass, first.unit_cost), (1, 10));
+        assert_eq!(first.strategy, "numeric");
+        assert!(publisher.update(&status(1, 10, 1, 4)).is_none());
+        publisher.retry(first.values);
+        assert!(publisher.update(&status(1, 10, 1, 4)).is_some());
+
+        let grown = publisher.update(&status(1, 12, 1, 4)).unwrap();
+        assert_eq!((grown.mass, grown.unit_cost), (1, 12));
+        let second_root = publisher.update(&status(2, 3, 1, 4)).unwrap();
+        assert_eq!((second_root.mass, second_root.unit_cost), (2, 12));
+
+        let structural = publisher.update(&status(3, 7, 3, 2)).unwrap();
+        assert_eq!(structural.values, [3, 3, 1]);
+        assert_eq!(structural.strategy, "structural");
+    }
+
+    #[test]
+    fn target_publisher_reaches_the_campaign_accumulator() {
+        let unique = WATCH_IDS.fetch_add(1, Ordering::Relaxed);
+        let root = std::env::temp_dir().join(format!(
+            "ergodis-alignment-profile-{}-{unique}",
+            std::process::id()
+        ));
+        std::fs::create_dir(&root).unwrap();
+        let data = root.join("features.jsonl");
+        std::fs::write(
+            &data,
+            concat!(
+                "{\"schema\":\"ergodis-campaign-data-v0\",\"presentation\":\"alignment-profile\",\"problem\":\"publisher\",\"fields\":[\"root_orbit\",\"root_initial_packing\",\"root_sized\"],\"rows\":1}\n",
+                "{\"id\":0,\"expected\":false,\"values\":[3,1,1]}\n"
+            ),
+        )
+        .unwrap();
+        let campaign = ergodis::control::Campaign::create(
+            &data,
+            &root.join("run"),
+            Some(root.join("control.sock")),
+            16_384,
+            8_192,
+            16_384,
+        )
+        .unwrap();
+        let manifest = campaign.manifest().clone();
+        let server = std::thread::spawn(move || campaign.serve());
+        for _ in 0..10_000 {
+            if send_request(&manifest, "capabilities", json!({}), 8_192).is_ok() {
+                break;
+            }
+            std::thread::yield_now();
+        }
+        let reset = send_request(
+            &manifest,
+            "target-profile-reset",
+            json!({"fields": ALIGNMENT_TARGET_FIELDS}),
+            8_192,
+        )
+        .unwrap();
+        assert!(reset.ok, "{}", reset.result);
+        let updates = AtomicU64::new(0);
+        let rejections = AtomicU64::new(0);
+        let refreshes = AtomicU64::new(0);
+        let mut publisher = AlignmentTargetPublisher::new(AlignmentProfilePolicy::default());
+        publish_target_observation(
+            &manifest,
+            8_192,
+            &mut publisher,
+            &status(1, 10, 1, 4),
+            &updates,
+            &rejections,
+            &refreshes,
+        );
+        assert_eq!(updates.load(Ordering::Relaxed), 1);
+        assert_eq!(rejections.load(Ordering::Relaxed), 0);
+        assert_eq!(refreshes.load(Ordering::Relaxed), 0);
+        let profile = send_request(&manifest, "target-profile-status", json!({}), 8_192).unwrap();
+        assert!(profile.ok, "{}", profile.result);
+        assert_eq!(profile.result["nodes"], 1);
+        let stopped = send_request(&manifest, "shutdown", json!({}), 8_192).unwrap();
+        assert!(stopped.ok, "{}", stopped.result);
+        server.join().unwrap().unwrap();
+        std::fs::remove_dir_all(root).unwrap();
     }
 }

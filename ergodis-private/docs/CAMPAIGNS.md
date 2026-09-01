@@ -56,6 +56,30 @@ ergodisctl --run-dir runs/q11-q13 status
 ergodisctl --run-dir runs/q11-q13 agent-brief --since 0 --top 8
 ```
 
+The private alignment adapter can also turn its already-published coarse root
+heartbeat into an operational evolution profile:
+
+```text
+alignment-controlled --run-dir RUN --points 8 --budget 6 \
+  --evolution-profile --pulse-interval 65536 \
+  --profile-structural-branches 8 --profile-structural-packing 3
+```
+
+This optional path runs entirely in the auxiliary watcher. Once per second—or
+after a genuine controller notification—it samples the existing heartbeat,
+groups roots by `(root_orbit, root_initial_packing, root_sized)`, and publishes
+absolute root count plus observed maximum root-state cost. Broad/high-packing
+targets request structural-first mutation ordering; the rest request
+numeric-first ordering; both thresholds are runtime options, so campaign
+steering requires no recompilation. Only changed absolute observations are
+sent. The watcher then requests a coalesced generation-boundary refresh if
+evolution is active. Live tuples absent from the frozen batch are counted as
+rejections and
+cannot poison the profile. The search thread gains no new check, allocation,
+lock, I/O, or publication: it still performs only the existing coarse
+heartbeat stores and steering-safe-point protocol. Final JSON reports profile
+updates, rejected live-only tuples, and queued refreshes.
+
 When `--socket` is omitted, a private endpoint is derived under
 `$XDG_RUNTIME_DIR/ergodis/<uid>/`. There is no `/tmp` fallback. The durable
 manifest is mode 0600 inside a mode-0700 run directory and binds the full run
