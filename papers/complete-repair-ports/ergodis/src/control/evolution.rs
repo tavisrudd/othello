@@ -3077,6 +3077,11 @@ mod tests {
             .compile_profile(&profile, &["root", "debt"])
             .unwrap();
         assert_eq!(compiled.class_priorities.as_ref(), &[12, 10]);
+        let mut duplicate_edge = profile.clone();
+        duplicate_edge.edges = vec![profile.edges[0], profile.edges[0]].into_boxed_slice();
+        assert!(classes
+            .compile_profile(&duplicate_edge, &["root", "debt"])
+            .is_err());
 
         let mut low = selector_parent("low", "scope");
         low.niche.target_class = Some(0);
@@ -3119,6 +3124,31 @@ mod tests {
             kind: EvolutionTargetEdgeKind::Dependency,
         }]
         .into_boxed_slice();
+        assert!(classes.compile_profile(&profile, &["root"]).is_err());
+
+        profile.edges = Box::new([]);
+        profile.nodes[0].mass = 0;
+        assert!(classes.compile_profile(&profile, &["root"]).is_err());
+        profile.nodes[0].mass = u64::MAX;
+        profile.nodes[0].unit_cost = 2;
+        assert!(classes.compile_profile(&profile, &["root"]).is_err());
+
+        profile.nodes[0].mass = 1;
+        profile.nodes[0].unit_cost = 1;
+        profile.nodes = vec![profile.nodes[0].clone(), profile.nodes[0].clone()].into_boxed_slice();
+        assert!(classes.compile_profile(&profile, &["root"]).is_err());
+
+        profile.nodes = vec![profile.nodes[0].clone()].into_boxed_slice();
+        profile.edges = vec![EvolutionTargetEdge {
+            from: 0,
+            to: 1,
+            kind: EvolutionTargetEdgeKind::Continuation,
+        }]
+        .into_boxed_slice();
+        assert!(classes.compile_profile(&profile, &["root"]).is_err());
+
+        profile.edges = Box::new([]);
+        profile.schema = "wrong-schema".into();
         assert!(classes.compile_profile(&profile, &["root"]).is_err());
     }
 
