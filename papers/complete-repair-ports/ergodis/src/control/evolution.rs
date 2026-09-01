@@ -21,6 +21,9 @@ const MAX_HINDSIGHT_FRAGMENTS: usize = 64;
 const MAX_HINDSIGHT_SEMANTICS: usize = 256;
 const MAX_HINDSIGHT_PROBES_PER_PARENT: usize = 16;
 const MAX_HINDSIGHT_FRAGMENTS_PER_PARENT: usize = 4;
+const MAX_HINDSIGHT_COMPOSITION_PROBES: usize = 64;
+const MAX_HINDSIGHT_COMPOSITION_PROBES_PER_GENERATION: usize = 16;
+const MAX_HINDSIGHT_COMPOSITIONS_PER_GENERATION: usize = 8;
 
 #[derive(Clone)]
 pub(super) struct EvolutionIdentity {
@@ -301,11 +304,69 @@ struct EliteSelection {
 
 struct HindsightFragment {
     semantic_hash: String,
-    source_hash: String,
+    source_hash: Option<String>,
     compiled_hash: String,
     weighted_true_positive: u64,
     rows_evaluated: u64,
+    coverage: PositiveCoverage,
     plan: PlanSpec,
+}
+
+enum PositiveCoverage {
+    Sparse(Box<[usize]>),
+    Dense(Box<[u64]>),
+}
+
+impl PositiveCoverage {
+    fn from_dense(words: Vec<u64>) -> Self {
+        let members = words
+            .iter()
+            .map(|word| word.count_ones() as usize)
+            .sum::<usize>();
+        if members.saturating_mul(std::mem::size_of::<usize>())
+            < words.len().saturating_mul(std::mem::size_of::<u64>())
+        {
+            let mut rows = Vec::with_capacity(members);
+            for (word_index, &word) in words.iter().enumerate() {
+                let mut bits = word;
+                while bits != 0 {
+                    let bit = bits.trailing_zeros() as usize;
+                    bits &= bits - 1;
+                    rows.push(word_index * 64 + bit);
+                }
+            }
+            Self::Sparse(rows.into_boxed_slice())
+        } else {
+            Self::Dense(words.into_boxed_slice())
+        }
+    }
+
+    fn to_dense(&self, words: usize) -> Result<Vec<u64>, ControlError> {
+        match self {
+            Self::Dense(dense) if dense.len() == words => Ok(dense.to_vec()),
+            Self::Dense(_) => Err(ControlError::Invalid(
+                "hindsight dense coverage width mismatch".into(),
+            )),
+            Self::Sparse(rows) => {
+                let mut dense = vec![0_u64; words];
+                for &row in rows.iter() {
+                    let Some(word) = dense.get_mut(row / 64) else {
+                        return Err(ControlError::Invalid(
+                            "hindsight sparse coverage row is out of range".into(),
+                        ));
+                    };
+                    *word |= 1_u64 << (row % 64);
+                }
+                Ok(dense)
+            }
+        }
+    }
+}
+
+struct HindsightComposition {
+    fragment: HindsightFragment,
+    left_semantic_hash: String,
+    right_semantic_hash: String,
 }
 
 struct HindsightExtraction {
@@ -313,6 +374,12 @@ struct HindsightExtraction {
     probes: usize,
     rows_evaluated: u64,
     false_positive_rejections: usize,
+}
+
+struct CompositionExtraction {
+    compositions: Vec<HindsightComposition>,
+    probes: usize,
+    rows_evaluated: u64,
 }
 
 #[derive(Clone, Copy)]
@@ -794,6 +861,7 @@ fn extract_hindsight_fragments(
         };
         let mut weighted_true_positive = 0_u64;
         let mut rows_evaluated = 0_u64;
+        let mut coverage = vec![0_u64; batch.rows().div_ceil(64)];
         let mut rejected = false;
         for row in 0..batch.rows() {
             rows_evaluated = rows_evaluated
@@ -809,6 +877,7 @@ fn extract_hindsight_fragments(
                 break;
             }
             if observed {
+                coverage[row / 64] |= 1_u64 << (row % 64);
                 weighted_true_positive = weighted_true_positive
                     .checked_add(batch.weights[row])
                     .ok_or_else(|| ControlError::Invalid("hindsight coverage overflow".into()))?;
@@ -819,10 +888,11 @@ fn extract_hindsight_fragments(
         }
         fragments.push(HindsightFragment {
             semantic_hash,
-            source_hash: parent.hash.clone(),
+            source_hash: Some(parent.hash.clone()),
             compiled_hash: compiled.hash,
             weighted_true_positive,
             rows_evaluated,
+            coverage: PositiveCoverage::from_dense(coverage),
             plan,
         });
     }
@@ -831,6 +901,159 @@ fn extract_hindsight_fragments(
         probes,
         rows_evaluated: total_rows_evaluated,
         false_positive_rejections,
+    })
+}
+
+fn same_plan_scope(left: Option<&PlanScope>, right: Option<&PlanScope>) -> bool {
+    match (left, right) {
+        (None, None) => true,
+        (Some(left), Some(right)) => left.field == right.field && left.mask == right.mask,
+        (None, Some(_)) | (Some(_), None) => false,
+    }
+}
+
+fn compose_hindsight_fragments(
+    ledger: &[HindsightFragment],
+    batch: &FeatureBatch,
+    seen: &mut BTreeSet<String>,
+    probe_limit: usize,
+) -> Result<CompositionExtraction, ControlError> {
+    let mut compositions = Vec::new();
+    let mut probes = 0;
+    let mut rows_evaluated = 0_u64;
+    'pairs: for left_index in 0..ledger.len() {
+        for right_index in left_index + 1..ledger.len() {
+            if probes == probe_limit
+                || compositions.len() == MAX_HINDSIGHT_COMPOSITIONS_PER_GENERATION
+                || seen.len() == MAX_HINDSIGHT_SEMANTICS
+            {
+                break 'pairs;
+            }
+            let left = &ledger[left_index];
+            let right = &ledger[right_index];
+            if left.plan.role != right.plan.role
+                || left.plan.output != right.plan.output
+                || !same_plan_scope(left.plan.scope.as_ref(), right.plan.scope.as_ref())
+            {
+                continue;
+            }
+            let coverage_words = batch.rows().div_ceil(64);
+            let left_coverage = left.coverage.to_dense(coverage_words)?;
+            let right_coverage = right.coverage.to_dense(coverage_words)?;
+            let Some(program_len) = left
+                .plan
+                .program
+                .len()
+                .checked_add(right.plan.program.len())
+                .and_then(|length| length.checked_add(1))
+            else {
+                continue;
+            };
+            let mut program = Vec::with_capacity(program_len);
+            program.extend(left.plan.program.iter().cloned());
+            program.extend(right.plan.program.iter().cloned());
+            program.push(PlanOp::Or);
+            let semantic_bytes = serde_json::to_vec(&json!({
+                "role": left.plan.role,
+                "output": left.plan.output,
+                "scope": &left.plan.scope,
+                "program": &program,
+            }))?;
+            let semantic_hash = blake3::hash(&semantic_bytes).to_hex().to_string();
+            if !seen.insert(semantic_hash.clone()) {
+                continue;
+            }
+            probes += 1;
+
+            let mut coverage = Vec::with_capacity(coverage_words);
+            let mut weighted_true_positive = 0_u64;
+            for (word_index, (&left_word, &right_word)) in
+                left_coverage.iter().zip(&right_coverage).enumerate()
+            {
+                let union = left_word | right_word;
+                coverage.push(union);
+                let mut bits = union;
+                while bits != 0 {
+                    let bit = bits.trailing_zeros() as usize;
+                    bits &= bits - 1;
+                    let row = word_index * 64 + bit;
+                    weighted_true_positive = weighted_true_positive
+                        .checked_add(batch.weights[row])
+                        .ok_or_else(|| {
+                            ControlError::Invalid("hindsight union coverage overflow".into())
+                        })?;
+                }
+            }
+            if weighted_true_positive
+                <= left
+                    .weighted_true_positive
+                    .max(right.weighted_true_positive)
+            {
+                continue;
+            }
+            let plan = PlanSpec {
+                schema: left.plan.schema.clone(),
+                name: format!(
+                    "hindsight-or-{}-{}",
+                    left.semantic_hash.get(..8).unwrap_or(&left.semantic_hash),
+                    right.semantic_hash.get(..8).unwrap_or(&right.semantic_hash)
+                ),
+                role: left.plan.role,
+                output: left.plan.output,
+                scope: left.plan.scope.clone(),
+                program,
+            };
+            let Ok(compiled) = CompiledPlan::compile(&plan, &batch.fields) else {
+                continue;
+            };
+            let mut replay_coverage = vec![0_u64; coverage.len()];
+            let mut replay_weight = 0_u64;
+            for row in 0..batch.rows() {
+                rows_evaluated = rows_evaluated.checked_add(1).ok_or_else(|| {
+                    ControlError::Invalid("hindsight composition row overflow".into())
+                })?;
+                let observed = compiled.evaluate_value_untraced(batch.row(row))? != 0;
+                if observed && !batch.expected(row) {
+                    return Err(ControlError::Invalid(
+                        "zero-false-positive composition failed exact replay".into(),
+                    ));
+                }
+                if observed {
+                    replay_coverage[row / 64] |= 1_u64 << (row % 64);
+                    replay_weight =
+                        replay_weight
+                            .checked_add(batch.weights[row])
+                            .ok_or_else(|| {
+                                ControlError::Invalid(
+                                    "hindsight composition coverage overflow".into(),
+                                )
+                            })?;
+                }
+            }
+            if replay_coverage != coverage || replay_weight != weighted_true_positive {
+                return Err(ControlError::Invalid(
+                    "hindsight composition bitmap replay mismatch".into(),
+                ));
+            }
+            compositions.push(HindsightComposition {
+                fragment: HindsightFragment {
+                    semantic_hash,
+                    source_hash: None,
+                    compiled_hash: compiled.hash,
+                    weighted_true_positive,
+                    rows_evaluated: batch.rows() as u64,
+                    coverage: PositiveCoverage::from_dense(coverage),
+                    plan,
+                },
+                left_semantic_hash: left.semantic_hash.clone(),
+                right_semantic_hash: right.semantic_hash.clone(),
+            });
+        }
+    }
+    Ok(CompositionExtraction {
+        compositions,
+        probes,
+        rows_evaluated,
     })
 }
 
@@ -1030,10 +1253,14 @@ pub(super) fn run_evolution(
     let mut hindsight_rows_evaluated = 0_u64;
     let mut hindsight_false_positive_rejections = 0_u64;
     let mut hindsight_byte_rejections = 0_u64;
+    let mut hindsight_composition_probes = 0_u64;
+    let mut hindsight_composition_rows = 0_u64;
+    let mut hindsight_compositions = 0_u64;
     let mut prior_parent_scores = BTreeMap::<String, CandidateScore>::new();
     let mut retained_elites = Vec::<ExpansionParent>::new();
     let mut hindsight_semantics = BTreeSet::<String>::new();
     let mut hindsight_seen = BTreeSet::<String>::new();
+    let mut hindsight_ledger = Vec::<HindsightFragment>::new();
     let mut operator_scorecards = BTreeMap::<&'static str, OperatorScorecard>::new();
     let mut best: Option<(u64, u64, usize, PlanSpec)> = None;
     let mut truncated = false;
@@ -1379,7 +1606,72 @@ pub(super) fn run_evolution(
                 }
                 writer.write_all(&encoded)?;
                 bytes += encoded.len() as u64;
-                hindsight_semantics.insert(fragment.semantic_hash);
+                hindsight_semantics.insert(fragment.semantic_hash.clone());
+                hindsight_ledger.push(fragment);
+            }
+        }
+        let composition_probe_limit = MAX_HINDSIGHT_COMPOSITION_PROBES
+            .saturating_sub(hindsight_composition_probes as usize)
+            .min(MAX_HINDSIGHT_COMPOSITION_PROBES_PER_GENERATION);
+        if hindsight_ledger.len() >= 2
+            && hindsight_semantics.len() < MAX_HINDSIGHT_FRAGMENTS
+            && composition_probe_limit != 0
+        {
+            let extraction = compose_hindsight_fragments(
+                &hindsight_ledger,
+                &batch,
+                &mut hindsight_seen,
+                composition_probe_limit,
+            )?;
+            checked_counter_add(
+                &mut hindsight_composition_probes,
+                extraction.probes as u64,
+                "hindsight composition probe",
+            )?;
+            checked_counter_add(
+                &mut hindsight_composition_rows,
+                extraction.rows_evaluated,
+                "hindsight composition row",
+            )?;
+            for composition in extraction.compositions {
+                if hindsight_semantics.len() == MAX_HINDSIGHT_FRAGMENTS {
+                    break;
+                }
+                let fragment = &composition.fragment;
+                let record = json!({
+                    "type": "hindsight-composition",
+                    "semantic_hash": &fragment.semantic_hash,
+                    "hash": &fragment.compiled_hash,
+                    "weighted_true_positive": fragment.weighted_true_positive,
+                    "rows_evaluated": fragment.rows_evaluated,
+                    "trusted": false,
+                    "replay_obligation": "compatible-feature-batch",
+                    "derivation": {
+                        "rule": "or-zero-false-positive",
+                        "parents": [
+                            &composition.left_semantic_hash,
+                            &composition.right_semantic_hash,
+                        ],
+                    },
+                    "plan": &fragment.plan,
+                });
+                let mut encoded = serde_json::to_vec(&record)?;
+                encoded.push(b'\n');
+                if encoded.len() > MAX_EVOLUTION_RECORD_BYTES
+                    || bytes.saturating_add(encoded.len() as u64) > candidate_byte_limit
+                {
+                    checked_counter_add(
+                        &mut hindsight_byte_rejections,
+                        1,
+                        "hindsight composition byte rejection",
+                    )?;
+                    continue;
+                }
+                writer.write_all(&encoded)?;
+                bytes += encoded.len() as u64;
+                hindsight_semantics.insert(fragment.semantic_hash.clone());
+                hindsight_ledger.push(composition.fragment);
+                checked_counter_add(&mut hindsight_compositions, 1, "hindsight composition")?;
             }
         }
         let guided_selection = selection_has_signal(&parents, &operator_scorecards);
@@ -1447,6 +1739,9 @@ pub(super) fn run_evolution(
         "hindsight_rows_evaluated": hindsight_rows_evaluated,
         "hindsight_false_positive_rejections": hindsight_false_positive_rejections,
         "hindsight_byte_rejections": hindsight_byte_rejections,
+        "hindsight_composition_probes": hindsight_composition_probes,
+        "hindsight_composition_rows": hindsight_composition_rows,
+        "hindsight_compositions": hindsight_compositions,
         "operator_scorecards": &operator_scorecards,
         "bytes": bytes,
         "truncated": truncated,
@@ -1504,6 +1799,9 @@ pub(super) fn run_evolution(
         "hindsight_rows_evaluated": hindsight_rows_evaluated,
         "hindsight_false_positive_rejections": hindsight_false_positive_rejections,
         "hindsight_byte_rejections": hindsight_byte_rejections,
+        "hindsight_composition_probes": hindsight_composition_probes,
+        "hindsight_composition_rows": hindsight_composition_rows,
+        "hindsight_compositions": hindsight_compositions,
         "operator_scorecards": operator_scorecards,
         "bytes": bytes,
         "truncated": truncated,
@@ -2255,6 +2553,134 @@ mod tests {
         assert_eq!(fragment["replay_obligation"], "compatible-feature-batch");
         assert_eq!(fragment["weighted_true_positive"], 2);
         assert_eq!(fragment["source_hash"], records[1]["hash"]);
+    }
+
+    #[test]
+    fn hindsight_composes_disjoint_sound_fragments_with_exact_replay() {
+        let batch = FeatureBatch {
+            presentation: "composition".into(),
+            problem: "sound-union".into(),
+            fields: vec!["x".into(), "y".into()].into_boxed_slice(),
+            generator: None,
+            row_ids: vec![0, 1, 2].into_boxed_slice(),
+            weights: vec![1, 1, 1].into_boxed_slice(),
+            expected: vec![0b0011].into_boxed_slice(),
+            values: vec![1, 0, 0, 1, -1, -1].into_boxed_slice(),
+        };
+        let plan = PlanSpec {
+            schema: super::super::PLAN_SCHEMA.into(),
+            name: "composition-parent".into(),
+            role: super::super::PlanRole::Diagnostic,
+            output: super::super::PlanOutput::Predicate,
+            scope: None,
+            program: vec![
+                PlanOp::Field { name: "x".into() },
+                PlanOp::Const { value: 0 },
+                PlanOp::Gt,
+                PlanOp::Field { name: "y".into() },
+                PlanOp::Const { value: 0 },
+                PlanOp::Gt,
+                PlanOp::Or,
+            ],
+        };
+        let parent = ExpansionParent {
+            hash: "fedcba9876543210".into(),
+            outcome_hash: "outcome".into(),
+            plan,
+            first_mismatch: None,
+            score: CandidateScore {
+                correct: 3,
+                false_positive: 0,
+                complexity: 7,
+            },
+            operator: "seed",
+            niche: SemanticNiche::new("seed", 0, 0, 21),
+            mutation_cursor: 0,
+        };
+        let mut seen = BTreeSet::new();
+        let extracted = extract_hindsight_fragments(&parent, &batch, &mut seen).unwrap();
+        assert_eq!(extracted.fragments.len(), 2);
+        let composed = compose_hindsight_fragments(
+            &extracted.fragments,
+            &batch,
+            &mut seen,
+            MAX_HINDSIGHT_COMPOSITION_PROBES,
+        )
+        .unwrap();
+        assert_eq!(composed.probes, 1);
+        assert_eq!(composed.rows_evaluated, 3);
+        assert_eq!(composed.compositions.len(), 1);
+        assert_eq!(composed.compositions[0].fragment.weighted_true_positive, 2);
+        assert_eq!(
+            composed.compositions[0].left_semantic_hash,
+            extracted.fragments[0].semantic_hash
+        );
+        assert_eq!(
+            composed.compositions[0].right_semantic_hash,
+            extracted.fragments[1].semantic_hash
+        );
+        assert_eq!(
+            serde_json::to_value(
+                composed.compositions[0]
+                    .fragment
+                    .plan
+                    .program
+                    .last()
+                    .unwrap()
+            )
+            .unwrap(),
+            json!({"op": "or"})
+        );
+
+        let temporary = tempfile::tempdir().unwrap();
+        let evidence_path = temporary.path().join("composition.jsonl");
+        let identity = EvolutionIdentity {
+            code_commit: "test".into(),
+            presentation_hash: "1".repeat(64),
+            presentation: batch.presentation.clone(),
+            problem: batch.problem.clone(),
+            fields: batch.fields.clone(),
+            generator: None,
+        };
+        let summary = run_evolution(
+            Arc::new(batch),
+            identity,
+            vec![EvolutionSeed {
+                plan: parent.plan,
+                parent_hash: None,
+                source_hash: None,
+                source_evidence: None,
+                operator: "seed",
+            }],
+            File::create(&evidence_path).unwrap(),
+            EvolutionBounds {
+                generations: 2,
+                beam: 1,
+                max_candidates: 2,
+                byte_limit: 64 * 1024,
+            },
+            Arc::new(EvolutionProgress::new()),
+        )
+        .unwrap();
+        assert_eq!(summary["hindsight_compositions"], 1);
+        let records = std::fs::read_to_string(evidence_path)
+            .unwrap()
+            .lines()
+            .map(|line| serde_json::from_str::<Value>(line).unwrap())
+            .collect::<Vec<_>>();
+        let composition = records
+            .iter()
+            .find(|record| record["type"] == "hindsight-composition")
+            .unwrap();
+        assert_eq!(composition["trusted"], false);
+        assert_eq!(composition["derivation"]["rule"], "or-zero-false-positive");
+        assert_eq!(
+            composition["derivation"]["parents"]
+                .as_array()
+                .unwrap()
+                .len(),
+            2
+        );
     }
 
     #[test]

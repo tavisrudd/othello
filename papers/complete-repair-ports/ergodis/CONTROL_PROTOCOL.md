@@ -214,6 +214,17 @@ false and carry an explicit compatible-batch replay obligation.  Fragment
 records consume the ordinary bounded evidence allowance; lack of room rejects
 the fragment without truncating candidate search.
 
+Compatible zero-false-positive fragments may be joined by the exact OR rule.
+Composition requires identical role, output type, and scope.  Coverage is kept
+in an adaptive sparse-index or dense-bitmap representation.  A bounded bitmap
+union first rejects pairs that add no weighted positive coverage; only useful
+unions are compiled and replayed on the full batch, where any negative hit or
+bitmap/weight mismatch fails closed.  The daemon attempts at most 16 new pairs
+per generation and 64 per campaign, accepting at most eight per generation
+within the shared 64-fragment ledger.  A `hindsight-composition` record names
+both semantic parents and the `or-zero-false-positive` derivation rule.  It
+remains untrusted pending its recorded replay obligation.
+
 Socket I/O, JSON, evidence serialization, and plan compilation happen outside
 worker hot loops.  Uncontrolled solves compile without the control-plane
 feature.  Controlled workers retain only the existing coarse safe-point flag;
