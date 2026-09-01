@@ -860,6 +860,37 @@ files are disposable and may be deleted at any time.
    `c985-binary-projective-affine-chart-q64-wall.tsv`. The next target must be
    chosen from a new post-chart profile; fixed-dimension typing remains an
    option only if dynamic shape work is still visible after this theorem.
+
+   The post-chart profile instead assigns the largest remaining cluster to the
+   local orbit-membership hash: every generated edge multiplies a 48-bit point
+   key, probes a 524,288-entry epoch table, and may follow a collision chain.
+   Commit `8d12bef86` applies the measured representation crossover. At
+   `q=64,r=5`, the entire 17,043,521-point universe occupies 266,306 `u64`
+   bitmap words (about 2.04 MiB), versus 4 MiB for each packed hash table. A
+   worker-local `DenseOrbitSet` therefore tests membership by one indexed word
+   and clears only the completed orbit's bits by replaying the already-owned
+   orbit vector. It has no generation array, hash multiply, probe chain,
+   hot-loop allocation, shared writes, or per-orbit whole-universe clear. The 16-byte
+   wrapper has exact layout assertions and its clear/reuse behavior is tested.
+   The packed hash remains the large generic fallback; the dense representation
+   is confined to the separately isolated binary q=64 worker, so small solves
+   do not instantiate it.
+
+   Seven final rotated `q=64,r=5` pairs preserve byte-identical results in both
+   thread modes. Packed/dense improves 1T cycles 1.141842x (`t=14.10`) and wall
+   1.506186x (`t=7.59`); at 12T it improves cycles 1.365120x (`t=10.30`) and
+   wall 1.351757x (`t=8.65`). Branch misses fall 1.787182x/1.859476x and cache
+   misses 1.035719x/1.030266x at 1T/12T. Median RSS falls 10,428 -> 8,992 KiB
+   at 1T and 76,700 -> 52,400 KiB at 12T. The seven-pair q=32 control is exact
+   in instructions and branches and neutral in cycles/task-clock
+   (`1.001191x`, `t=0.21`; `1.000808x`, `t=0.13`); q=8 and q=32 remain
+   byte-identical at 1T and 12T. Raw tables are
+   `c985-c1018-dense-orbit-q32-control.tsv`,
+   `c985-c1018-dense-orbit-q64-counters.tsv`, and
+   `c985-c1018-dense-orbit-q64-wall.tsv`. The next micro gate is removing the
+   inherited `cold` annotation from the now-dominant large worker; its call is
+   cold, but its body contains the entire hot solve loop and must not be
+   optimized as cold without a counter-backed justification.
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
