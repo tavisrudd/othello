@@ -288,20 +288,37 @@ candidates, and a second seeded campaign tested another 99,948, and neither foun
 conjunction that a laptop enumerates in seconds. Every one of these expressions is well inside the
 plan grammar — the bytecode limit is 128 operations and these need seven.
 
-**The mechanism is visible in the data and it is structural.** Each conjunct on its own scores at the
-majority baseline: `f000 eq f020` alone classifies no better than answering the same way every time.
-So a beam ranked by weighted-correct sees no reason to keep either half, and the behaviour archive
-does not help either, because a clause that is useless alone is not behaviourally distinguished
-enough to earn an expansion slot ahead of thousands of competitors. The search has no gradient toward
-a conjunction whose parts are individually worthless, and the quality-diversity expansion spends its
-budget on behaviours that are merely different rather than on ones that compose.
+### The mechanism: the evolution never changes a plan's structure
 
-That is an actionable defect with an obvious class of remedy — crossover between surviving plans,
-retaining clauses by coverage of the positive class rather than by overall accuracy, or an explicit
-conjunction-building operator — and it belongs to whoever owns the search rather than to this task.
-It also reframes every earlier conclusion in this report about those corpora: the archives of 3,595
-behaviours were not evidence of a hard problem, they were a search wandering in a space whose answer
-needed one `and`.
+Two direct tests pin this down, and the answer is sharper than a missing gradient.
+
+**Handed the answer in pieces, the search still cannot assemble it.** A campaign on corpus-01 was
+seeded with four equalities, two of which are exactly the conjuncts of its solving expression —
+`f000 eq f020` and `f015 eq f026`. The search tested 7,774 candidates and returned `f000 eq f002`
+at 769 of 1,024, one object above the 768 baseline. The answer was in its initial population, split
+across two seeds, and it never combined them.
+
+**It never combines anything, because it cannot.** Across the 99,966 candidates of the 55-field
+campaign there are only **30 distinct program shapes**, with operation counts of 3, 4, 5 and 6 — the
+shapes of the seeds. The dominant shape, 77,450 of the candidates, is
+`field field sub abs const eq`. Not one candidate in a hundred thousand contains `and` or `or`.
+
+The observed mutation operators are `field-substitute`, `comparison-substitute`, `constant-shift`,
+`scope-initialize` and `scope-toggle`. Every one of them rewrites a leaf or a comparison **inside a
+fixed skeleton**. None adds a node, and there is no crossover between surviving plans. So the entire
+search is confined for its whole run to the structural shapes present in its seeds.
+
+That is the finding, and it is a stronger statement than the earlier one about gradients. The eleven
+unsolved corpora are not hard, and their answers are not merely unlikely to be found — they are
+**unreachable in principle** from single-clause seeds, no matter the budget. It also explains the
+archives: 3,595 distinct behaviours, all of them one of thirty shapes, is a search exploring the
+substitution space of its own seeds very thoroughly and the space of expressions not at all.
+
+Three remedies suggest themselves, and choosing among them belongs to whoever owns the search rather
+than to this task: a crossover operator combining two survivors under `and` or `or`; a growth
+operator that wraps a plan in a connective; or, cheapest and requiring no code at all, **seeding with
+compound shapes**, since a seed of the form `(a eq b) and (c eq d)` would put the whole eleven-corpus
+family inside reach of field substitution alone.
 
 ### The exact ceiling is not a measure of learnability
 
