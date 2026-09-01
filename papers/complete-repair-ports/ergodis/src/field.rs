@@ -176,6 +176,12 @@ impl FiniteField for Gf4 {
 /// Table-backed arithmetic for a runtime-selected field `GF(p^h)` of order at
 /// most 256.
 ///
+/// This type is deliberately a finite *field*, not an arbitrary algebra with
+/// `p^h` elements.  In particular, `SmallField::new(2, 2)` constructs `GF(4)`;
+/// it does not describe `Z/4Z` or `F_2[u]/(u^2)`.  Elements are stored as raw
+/// bytes, so callers importing externally encoded algebra data must establish
+/// that field identity before using it with this type.
+///
 /// Elements use the polynomial-basis encoding
 /// `a_0 + a_1 x + ... + a_(h-1) x^(h-1) -> sum a_i p^i`. Construction is a
 /// cold operation: it locates or validates an irreducible monic modulus and
@@ -196,6 +202,10 @@ pub struct SmallField {
 impl SmallField {
     /// Construct the canonical field using the lexicographically first monic
     /// irreducible polynomial in polynomial-basis encoding.
+    ///
+    /// The arguments identify `GF(characteristic^degree)`, not merely an
+    /// algebra of that cardinality.  Equal-cardinality rings are not accepted
+    /// or inferred by this constructor.
     pub fn new(characteristic: u8, degree: u8) -> Result<Self, FieldError> {
         extension_order(characteristic, degree)?;
         let modulus =

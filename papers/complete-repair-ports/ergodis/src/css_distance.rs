@@ -112,6 +112,8 @@ pub enum CssDistanceError {
     IncumbentPhysicalSyndrome,
     #[error("incumbent support has zero logical observation")]
     IncumbentLogicalObservation,
+    #[error("computed kernel-parity functional failed direct column validation")]
+    InvalidKernelParityFunctional,
 }
 
 #[derive(Debug, Error)]
@@ -1058,6 +1060,15 @@ fn binary_all_ones_functional<const WORDS: usize>(
     target.iter().all(|&word| word == 0).then_some(functional)
 }
 
+fn validates_all_ones_functional<const WORDS: usize>(
+    functional: PackedSyndrome<WORDS>,
+    columns: &[PackedColumn<WORDS>],
+) -> bool {
+    columns
+        .iter()
+        .all(|column| packed_dot_parity(functional, column.syndrome) == 1)
+}
+
 fn compile_wide_structure<
     const SUPPORT_WORDS: usize,
     const CHECK_WORDS: usize,
@@ -1130,6 +1141,11 @@ where
     }
     let kernel_parity_functional =
         binary_all_ones_functional::<CHECK_WORDS>(physical, &basis, |position, _| position);
+    if kernel_parity_functional
+        .is_some_and(|functional| !validates_all_ones_functional(functional, &columns))
+    {
+        return Err(CssDistanceError::InvalidKernelParityFunctional);
+    }
     let mut maximum_column_check_weight = 0u8;
     for (coordinate, column) in columns.iter().enumerate() {
         neighbors[coordinate].remove(coordinate);
@@ -1380,7 +1396,11 @@ where
         let required_parity = packed_dot_parity(syndrome, self.kernel_parity_functional);
         let parity_adjustment =
             u32::from(self.kernel_weights_even) & ((u32::from(budget) ^ required_parity) & 1);
-        let maximum_permitted_lower_bound = u32::from(budget) - parity_adjustment;
+        // Only `(budget, parity_adjustment) == (0, 1)` wraps.  Returning a very
+        // loose optional bound in that terminal case can add work but cannot
+        // reject a valid completion; spelling it explicitly also keeps
+        // overflow-checked campaign builds from panicking.
+        let maximum_permitted_lower_bound = u32::from(budget).wrapping_sub(parity_adjustment);
         let degree = u32::from(self.maximum_column_check_weight);
         if degree == 0 {
             return syndrome_weight != 0 && budget != u16::MAX;
@@ -3591,8 +3611,8 @@ impl CompiledCssDistance {
         let mut neighbors = vec![PackedSupport::default(); coordinate_count];
         let mut maximum_column_check_weight = 0u8;
         let presented_rows = (0..physical.rows()).collect::<Vec<_>>();
-        let kernel_weights_even =
-            binary_all_ones_functional::<2>(physical, &presented_rows, |_, row| row).is_some();
+        let kernel_parity_functional =
+            binary_all_ones_functional::<2>(physical, &presented_rows, |_, row| row);
         for check in 0..physical.rows() {
             let row = physical.row(check);
             let mut support = PackedSupport::default();
@@ -3615,6 +3635,12 @@ impl CompiledCssDistance {
                 }
             }
         }
+        if kernel_parity_functional
+            .is_some_and(|functional| !validates_all_ones_functional(functional, &columns))
+        {
+            return Err(CssDistanceError::InvalidKernelParityFunctional);
+        }
+        let kernel_weights_even = kernel_parity_functional.is_some();
         for (coordinate, column) in columns.iter().enumerate() {
             neighbors[coordinate].remove(coordinate);
             maximum_column_check_weight = maximum_column_check_weight.max(
@@ -4728,6 +4754,137 @@ mod tests {
     }
 
     #[test]
+    fn verified_orbit_anchor_finds_planted_minimum_at_every_position() {
+        let coordinates = 8;
+        let physical = Matrix::new::<2>(1, coordinates, vec![1; coordinates]).unwrap();
+        let logical = Matrix::new::<2>(
+            1,
+            coordinates,
+            (0..coordinates)
+                .map(|index| (index & 1) as u8)
+                .collect::<Vec<_>>(),
+        )
+        .unwrap();
+        let cycle = (0..coordinates)
+            .map(|index| ((index + 1) % coordinates) as u32)
+            .collect::<Box<[_]>>();
+        let compiled = CompiledCssDistance::compile(&physical, &logical).unwrap();
+        let reference = compiled
+            .search_bounded(&(0..coordinates as u16).collect::<Vec<_>>(), 2)
+            .unwrap();
+        assert_eq!(reference.distance, Some(2));
+        for anchor in 0..coordinates as u16 {
+            let certificate =
+                verify_css_anchor_transversal(&physical, &logical, cycle.clone(), &[anchor])
+                    .unwrap();
+            assert_eq!(certificate.anchors(), &[anchor]);
+            let answer = compiled.search_bounded(&[anchor], 2).unwrap();
+            assert_eq!(answer.distance, reference.distance);
+            assert!(answer.witness.contains(&anchor));
+        }
+    }
+
+    #[cfg(feature = "parallel")]
+    #[test]
+    fn randomized_small_serial_parallel_and_sharded_searches_match_brute_force() {
+        fn next(seed: &mut u64) -> u64 {
+            *seed = seed
+                .wrapping_mul(6_364_136_223_846_793_005)
+                .wrapping_add(1_442_695_040_888_963_407);
+            *seed
+        }
+
+        let pool = rayon::ThreadPoolBuilder::new()
+            .num_threads(3)
+            .build()
+            .unwrap();
+        let mut seed = 0xc985_1027_5eed_u64;
+        for case in 0..64 {
+            let coordinates = 5 + case % 4;
+            let physical_rows = 1 + (next(&mut seed) as usize % 4);
+            let logical_rows = 1 + (next(&mut seed) as usize % 3);
+            let physical = Matrix::new::<2>(
+                physical_rows,
+                coordinates,
+                (0..physical_rows * coordinates)
+                    .map(|_| (next(&mut seed) >> 63) as u8)
+                    .collect::<Vec<_>>(),
+            )
+            .unwrap();
+            let mut logical_data = (0..logical_rows * coordinates)
+                .map(|_| (next(&mut seed) >> 63) as u8)
+                .collect::<Vec<_>>();
+            for row in 0..logical_rows {
+                if logical_data[row * coordinates..(row + 1) * coordinates]
+                    .iter()
+                    .all(|&entry| entry == 0)
+                {
+                    logical_data[row * coordinates + row % coordinates] = 1;
+                }
+            }
+            let logical = Matrix::new::<2>(logical_rows, coordinates, logical_data).unwrap();
+            let anchors = (0..coordinates as u16).collect::<Vec<_>>();
+            let expected = brute_force(&physical, &logical, coordinates as u16);
+            let compact = CompiledCssDistance::compile(&physical, &logical).unwrap();
+            let wide = CompiledWideCssDistance::compile(&physical, &logical).unwrap();
+            assert_eq!(
+                compact
+                    .search_bounded(&anchors, coordinates as u16)
+                    .unwrap()
+                    .distance,
+                expected
+            );
+            assert_eq!(
+                wide.search_bounded_syndrome_driven(&anchors, coordinates as u16)
+                    .unwrap()
+                    .distance,
+                expected
+            );
+            let compact_parallel = pool
+                .install(|| compact.search_bounded_parallel_pulsed(&anchors, coordinates as u16, 0))
+                .unwrap();
+            let wide_parallel = pool
+                .install(|| {
+                    wide.search_bounded_syndrome_parallel_pulsed(&anchors, coordinates as u16, 0)
+                })
+                .unwrap();
+            assert_eq!(compact_parallel.distance, expected);
+            assert_eq!(wide_parallel.distance, expected);
+
+            let compact_shards = (0..3)
+                .filter_map(|index| {
+                    pool.install(|| {
+                        compact.search_bounded_parallel_pulsed_shard(
+                            &anchors,
+                            coordinates as u16,
+                            0,
+                            CssSearchShard::new(index, 3).unwrap(),
+                        )
+                    })
+                    .unwrap()
+                    .distance
+                })
+                .min();
+            let wide_shards = (0..3)
+                .filter_map(|index| {
+                    pool.install(|| {
+                        wide.search_bounded_syndrome_parallel_pulsed_shard(
+                            &anchors,
+                            coordinates as u16,
+                            0,
+                            CssSearchShard::new(index, 3).unwrap(),
+                        )
+                    })
+                    .unwrap()
+                    .distance
+                })
+                .min();
+            assert_eq!(compact_shards, expected);
+            assert_eq!(wide_shards, expected);
+        }
+    }
+
+    #[test]
     fn bounded_search_reports_a_replayable_witness() {
         let physical = Matrix::new::<2>(2, 5, vec![1, 1, 0, 0, 0, 0, 1, 1, 1, 0]).unwrap();
         let logical = Matrix::new::<2>(1, 5, vec![1, 0, 1, 0, 1]).unwrap();
@@ -4769,6 +4926,7 @@ mod tests {
         let logical = Matrix::new::<2>(1, 5, vec![1, 0, 0, 0, 0]).unwrap();
         let compiled = CompiledWideCssDistance::compile(&physical, &logical).unwrap();
         assert!(compiled.kernel_weights_even());
+        assert!(!compiled.completion_lower_bound_exceeds(compiled.columns[0].syndrome, 0));
 
         for support in 0_u64..1 << 5 {
             let mut syndrome = PackedSyndrome::<3>::default();

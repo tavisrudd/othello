@@ -344,14 +344,33 @@ as each coherent tranche lands.
    generic projective/orbit APIs have also landed.  The remaining high-value
    assurance order is: (a) a checked shard-coverage ledger keyed by input,
    binary/schema, shard count/index, and completion status, with refusal to
-   promote an incomplete or mixed union; (b) planted logical witnesses in
-   randomized orbit positions plus reduced-instance agreement with and without
-   symmetry; (c) an independent cold validation of every parity functional and
-   exact candidate-count fingerprints whose drift must be attributed rather
-   than waived; (d) random small-instance differential agreement across
-   compact/wide, serial/parallel, and sharded/unsharded kernels, followed by
-   pruning-predicate mutation tests; and (e) a measured campaign release
-   profile with overflow checks rather than silently assuming its cost.
+   promote an incomplete or mixed union; this is now landed in v5 native
+   evidence plus `css_distance_shard_ledger`.  The ledger binds exact input and
+   executable BLAKE3 digests, optional compiled-artifact digest, selected
+   kernel, radius, completed rounds, result consistency, per-round candidate
+   fingerprints, and each source-record digest.  A real three-way BB288 split
+   aggregates exactly 30 candidates and a complete no-witness conclusion;
+   missing, duplicate, mixed-identity, interrupted, and malformed-witness
+   controls fail closed.  Items (b)--(d) have also landed: a planted weight-two
+   logical witness is recovered from every position of a verified eight-cycle;
+   every computed all-ones kernel-parity functional is replayed directly
+   against all packed columns during cold compilation; and 64 deterministic
+   small random instances agree with brute force across compact/wide,
+   serial/parallel, and three-way shard-union searches.  That differential test
+   exposed an overflow-check foot-gun in the optional parity-adjusted completion
+   lower bound at `(budget, adjustment) = (0, 1)`.  Release wrapping had only
+   made the bound loose (extra work, never an invalid prune), but checked builds
+   panicked.  The accepted repair spells out `wrapping_sub` with the one-sided
+   proof.  Saturating subtraction, algebraically moving the adjustment, and a
+   terminal early branch were correct but rejected after regressions of roughly
+   5--6%, 1.15% instructions, and 5% respectively.  Seven retained-binary
+   interleaved counter pairs for the accepted form show instruction ratios of
+   0.999998x at 1T and 1.000029x at 12T versus the prior release code; timing
+   moved noisily in opposite directions, so the hot implementation is accepted
+   as operationally neutral.  Raw evidence is under
+   `/home/tavis/.cache/ergodis-perf/c1027-parity-fix`.  Next is (e), a measured
+   campaign release profile with overflow checks rather than silently assuming
+   its cost, followed by targeted pruning-predicate mutation controls.
    Premise certificates and independent statement-level re-derivations are the
    near-term architecture.  SAT/PB/VIPR proof pipelines are reserved for
    flagship frozen claims where their encoding is independently justified;
@@ -359,6 +378,22 @@ as each coherent tranche lands.
    verification of the optimized Rust producer remain deferred.  Any future
    certificate schema should preserve a path to compositional leaf-coverage or
    VeriPB-style checking without imposing that cost on ordinary solves.
+   C1028's order-four chain-ring instrument test adds a separate API-assurance
+   boundary.  It reproduced the published `Z4` and `F2[u]/(u^2)` cells and then
+   demonstrated why equal cardinality is not an algebra identity: interpreting
+   either ring's byte encoding as `GF(4)` gives confident wrong row-module,
+   membership, projective, and distance answers.  The public implementations
+   are field-typed, but their byte-valued boundary cannot detect provenance, so
+   their documentation now states explicitly that `SmallField::new(2, 2)` is
+   only `GF(4)`.  Do not generalize Gaussian elimination by weakening the
+   `FiniteField` bound.  A real reusable ring tranche must instead introduce an
+   explicit algebra descriptor and unit/nonzero split, then Howell/Smith module
+   forms, unimodular Hjelmslev indexing with neighbour structure, a table-driven
+   weight functional, and module-word enumeration.  Test `Z4` and
+   `F2[u]/(u^2)` together so same-order substitution cannot pass.  Keep the
+   C1028 driver and ring-specific research in `ergodis-private`; only the
+   algebra-neutral interfaces and independently verified kernels qualify for
+   public core.
 5. **Pending — typed plan/theorem authoring language.** Replace hand-authored
    JSON AST/bytecode plans with a compact bounded textual language for recipes,
    steering plans, and injected theorem fragments. Text and JSON must share one

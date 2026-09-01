@@ -235,6 +235,10 @@ pub(crate) fn canonicalize_rows_in_place_field<F: FiniteField>(
     rows: usize,
     cols: usize,
 ) -> Result<usize, MatrixError> {
+    // This is Gaussian elimination over a field.  The `FiniteField` bound is
+    // semantically essential: pivot selection relies on every nonzero element
+    // being invertible.  Chain-ring modules require Howell/Smith machinery,
+    // not a different arithmetic implementation passed through this kernel.
     if data.len() != rows.saturating_mul(cols) {
         return Err(MatrixError::Shape);
     }

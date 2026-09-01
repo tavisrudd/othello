@@ -230,13 +230,28 @@ different machines, and survive session boundaries independently. Maintainers
 can compile every supported CSS feature combination and replay the compact/wide
 shard-union regression with `scripts/check-css-feature-matrix.sh`.
 
+Version-5 shard evidence additionally records a completion marker plus BLAKE3
+fingerprints of the exact input and executable. The cold-path
+`css_distance_shard_ledger` tool accepts one record per shard and emits a
+create-only compact coverage manifest only when every index is present exactly
+once and the schema, input, executable, compiled artifact, search kernel,
+radius, completed rounds, and final-round counters agree. Missing, duplicate,
+interrupted, or mixed records fail closed:
+
+```sh
+cargo run --release --bin css_distance_shard_ledger -- \
+  shard-*.json --output coverage.json
+```
+
 The `parallel`-gated `css_distance_random` companion searches for an upper
 certificate by random information sets. It row-reduces the physical parity
 checks under deterministic random coordinate orders, inspects the induced
 systematic kernel basis, and optionally combines pairs among the lightest rows
 with bounded order-2 OSD. Worker matrices, permutations, packed kernel rows,
 logical values, ordering arrays, pivot maps, and witness scratch are pre-sized;
-a trial allocates nothing unless it discovers a witness.
+a trial allocates nothing, including when it discovers a witness. The optional
+`--best-effort` mode exhausts its assigned trials and retains the lightest
+verified witness seen even when that witness is above `--target-weight`.
 `--seed`, `--trials`, `--threads`, `--osd-order`, and `--osd-window` are
 explicit, and `--evidence` writes one
 create-only, source-hashed JSON record. This is a witness finder, not a lower-

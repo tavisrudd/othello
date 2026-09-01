@@ -9,8 +9,8 @@ use ergodis::{CompiledColossalCssDistance, CompiledHugeCssDistance, CompiledLarg
 use serde::{Deserialize, Serialize};
 use std::fmt::Write as _;
 use std::fs::{File, OpenOptions};
-use std::io::{BufReader, BufWriter, Write};
-use std::path::PathBuf;
+use std::io::{BufReader, BufWriter, Read, Write};
+use std::path::{Path, PathBuf};
 #[cfg(feature = "parallel")]
 use std::sync::atomic::{AtomicBool, Ordering};
 #[cfg(feature = "parallel")]
@@ -69,6 +69,9 @@ struct SparseProblem {
 #[derive(Debug, Serialize)]
 struct RunRecord<'a> {
     schema: &'static str,
+    completion_status: &'static str,
+    input_blake3: Option<&'a str>,
+    executable_blake3: Option<&'a str>,
     label: &'a str,
     coordinate_count: u16,
     physical_checks: usize,
@@ -94,6 +97,24 @@ struct RunRecord<'a> {
     search_seconds: &'a [f64],
     round_stats: &'a [ergodis::ConnectedSearchStats],
     result: &'a ergodis::BoundedCssDistanceResult,
+}
+
+fn blake3_file(path: &Path) -> Result<String> {
+    let file =
+        File::open(path).with_context(|| format!("opening {} for hashing", path.display()))?;
+    let mut reader = BufReader::new(file);
+    let mut hasher = blake3::Hasher::new();
+    let mut buffer = [0_u8; 64 * 1024];
+    loop {
+        let read = reader
+            .read(&mut buffer)
+            .with_context(|| format!("hashing {}", path.display()))?;
+        if read == 0 {
+            break;
+        }
+        hasher.update(&buffer[..read]);
+    }
+    Ok(hasher.finalize().to_hex().to_string())
 }
 
 enum Backend {
@@ -208,6 +229,14 @@ fn main() -> Result<()> {
         (Some(index), Some(count)) => Some(CssSearchShard::new(index, count)?),
         (None, None) => None,
         _ => unreachable!("clap enforces paired shard arguments"),
+    };
+    let shard_fingerprints = if search_shard.is_some() {
+        let input_blake3 = blake3_file(&args.input)?;
+        let executable = std::env::current_exe().context("resolving current executable")?;
+        let executable_blake3 = blake3_file(&executable)?;
+        Some((input_blake3, executable_blake3))
+    } else {
+        None
     };
     #[cfg(not(feature = "parallel"))]
     if search_shard.is_some() {
@@ -720,7 +749,12 @@ fn main() -> Result<()> {
     }
     let result = result.expect("positive round count checked above");
     let record = RunRecord {
-        schema: "ergodis-css-distance-native-v4",
+        schema: "ergodis-css-distance-native-v5",
+        completion_status: "complete",
+        input_blake3: shard_fingerprints.as_ref().map(|(input, _)| input.as_str()),
+        executable_blake3: shard_fingerprints
+            .as_ref()
+            .map(|(_, executable)| executable.as_str()),
         label: &problem.label,
         coordinate_count: problem.coordinate_count,
         physical_checks: problem.physical_checks.len(),

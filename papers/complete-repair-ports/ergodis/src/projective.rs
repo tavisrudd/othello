@@ -17,6 +17,10 @@ pub enum ProjectiveError {
 
 /// Allocation-free rank/unrank operations for canonical points of `PG(d,q)`.
 ///
+/// This is projective space over the [`SmallField`] supplied at construction.
+/// It is not a projective-Hjelmslev-space indexer: raw coordinates originating
+/// in an equal-cardinality chain ring must not be passed through this API.
+///
 /// Points are ordered by their first nonzero coordinate. That coordinate is
 /// normalized to one, and the remaining suffix is a big-endian base-`q`
 /// number. The indexer borrows a runtime field and stores only `d + 2` block
