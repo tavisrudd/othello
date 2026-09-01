@@ -1,0 +1,429 @@
+{
+  "schema": "ergodis-private-target-strategy-audit-v0",
+  "data": "examples/data/campaign-c880-live-ordering.jsonl",
+  "data_sha256": "2781110348413e5a3bc9bc53fadc264d3efba7b7b2271164c354c20d3d75dd51",
+  "seeds": "examples/data/c985-target-strategy-seeds.jsonl",
+  "seeds_sha256": "642fc296434b0cdd620d4bb04f99cd877661e0266a75aed90efd42246c18e77e",
+  "target_fields": [
+    "root_orbit",
+    "root_initial_packing",
+    "root_sized"
+  ],
+  "target_values": [
+    6,
+    2,
+    1
+  ],
+  "generations": 3,
+  "beam": 4,
+  "max_candidates": 32,
+  "strategies": [
+    {
+      "strategy": "balanced",
+      "tested": 32,
+      "perfect": 4,
+      "rows_evaluated": 64,
+      "first_perfect_trial": 6,
+      "first_perfect_semantic_op_rows": 60,
+      "first_perfect_operator": "constant-shift",
+      "operator_scorecards": {
+        "constant-shift": {
+          "best_correct_gain": 1,
+          "best_correct_gain_per_cost_denominator": 10,
+          "best_correct_gain_per_cost_numerator": 1,
+          "best_false_positive_reduction": 0,
+          "best_false_positive_reduction_per_cost_denominator": 10,
+          "best_false_positive_reduction_per_cost_numerator": 0,
+          "cascade_rejected": 0,
+          "compared_to_parent": 11,
+          "completed": 11,
+          "improved": 3,
+          "minimum_improving_semantic_op_rows": 10,
+          "perfect": 3,
+          "rows_evaluated": 22,
+          "semantic_op_rows": 110,
+          "trials": 11
+        },
+        "field-substitute": {
+          "best_correct_gain": 1,
+          "best_correct_gain_per_cost_denominator": 10,
+          "best_correct_gain_per_cost_numerator": 1,
+          "best_false_positive_reduction": 0,
+          "best_false_positive_reduction_per_cost_denominator": 10,
+          "best_false_positive_reduction_per_cost_numerator": 0,
+          "cascade_rejected": 0,
+          "compared_to_parent": 14,
+          "completed": 14,
+          "improved": 1,
+          "minimum_improving_semantic_op_rows": 10,
+          "perfect": 1,
+          "rows_evaluated": 28,
+          "semantic_op_rows": 140,
+          "trials": 14
+        },
+        "scope-initialize": {
+          "best_correct_gain": 0,
+          "best_correct_gain_per_cost_denominator": null,
+          "best_correct_gain_per_cost_numerator": 0,
+          "best_false_positive_reduction": 0,
+          "best_false_positive_reduction_per_cost_denominator": null,
+          "best_false_positive_reduction_per_cost_numerator": 0,
+          "cascade_rejected": 0,
+          "compared_to_parent": 5,
+          "completed": 5,
+          "improved": 0,
+          "minimum_improving_semantic_op_rows": null,
+          "perfect": 0,
+          "rows_evaluated": 10,
+          "semantic_op_rows": 50,
+          "trials": 5
+        },
+        "scope-toggle": {
+          "best_correct_gain": 0,
+          "best_correct_gain_per_cost_denominator": null,
+          "best_correct_gain_per_cost_numerator": 0,
+          "best_false_positive_reduction": 0,
+          "best_false_positive_reduction_per_cost_denominator": null,
+          "best_false_positive_reduction_per_cost_numerator": 0,
+          "cascade_rejected": 0,
+          "compared_to_parent": 1,
+          "completed": 1,
+          "improved": 0,
+          "minimum_improving_semantic_op_rows": null,
+          "perfect": 0,
+          "rows_evaluated": 2,
+          "semantic_op_rows": 10,
+          "trials": 1
+        },
+        "seed": {
+          "best_correct_gain": 0,
+          "best_correct_gain_per_cost_denominator": null,
+          "best_correct_gain_per_cost_numerator": 0,
+          "best_false_positive_reduction": 0,
+          "best_false_positive_reduction_per_cost_denominator": null,
+          "best_false_positive_reduction_per_cost_numerator": 0,
+          "cascade_rejected": 0,
+          "compared_to_parent": 0,
+          "completed": 1,
+          "improved": 0,
+          "minimum_improving_semantic_op_rows": null,
+          "perfect": 0,
+          "rows_evaluated": 2,
+          "semantic_op_rows": 10,
+          "trials": 1
+        }
+      },
+      "target_profile": {
+        "edges": 0,
+        "hash": "e658141eda201b479945a91780942d5711b6aeaa95f165bda9643b58c86ae831",
+        "nodes": 1,
+        "refreshes": 0,
+        "strategy_cursor_resets": 0,
+        "strategy_parents": {
+          "balanced": 3
+        },
+        "surplus_slots": 30
+      },
+      "best_plan": {
+        "name": "evolve-g1-c5",
+        "output": "predicate",
+        "program": [
+          {
+            "op": "const",
+            "value": 1
+          },
+          {
+            "name": "depth",
+            "op": "field"
+          },
+          {
+            "op": "sub"
+          },
+          {
+            "op": "const",
+            "value": 0
+          },
+          {
+            "op": "lt"
+          }
+        ],
+        "role": "diagnostic",
+        "schema": "ergodis-attack-plan-v0"
+      },
+      "evidence_path": "evidence/c985-target-strategy-c880-runs/balanced/evidence/target-strategy-balanced-121b8b1d35077e0d5d9e38ff.jsonl",
+      "evidence_sha256": "22cd53630a3498752ffedba517d6fff9139d41af2a6432c591c8930179a4026e"
+    },
+    {
+      "strategy": "numeric",
+      "tested": 32,
+      "perfect": 6,
+      "rows_evaluated": 64,
+      "first_perfect_trial": 2,
+      "first_perfect_semantic_op_rows": 20,
+      "first_perfect_operator": "constant-shift",
+      "operator_scorecards": {
+        "comparison-substitute": {
+          "best_correct_gain": 0,
+          "best_correct_gain_per_cost_denominator": null,
+          "best_correct_gain_per_cost_numerator": 0,
+          "best_false_positive_reduction": 0,
+          "best_false_positive_reduction_per_cost_denominator": null,
+          "best_false_positive_reduction_per_cost_numerator": 0,
+          "cascade_rejected": 0,
+          "compared_to_parent": 5,
+          "completed": 5,
+          "improved": 0,
+          "minimum_improving_semantic_op_rows": null,
+          "perfect": 0,
+          "rows_evaluated": 10,
+          "semantic_op_rows": 50,
+          "trials": 5
+        },
+        "constant-shift": {
+          "best_correct_gain": 1,
+          "best_correct_gain_per_cost_denominator": 10,
+          "best_correct_gain_per_cost_numerator": 1,
+          "best_false_positive_reduction": 0,
+          "best_false_positive_reduction_per_cost_denominator": 10,
+          "best_false_positive_reduction_per_cost_numerator": 0,
+          "cascade_rejected": 0,
+          "compared_to_parent": 13,
+          "completed": 13,
+          "improved": 5,
+          "minimum_improving_semantic_op_rows": 10,
+          "perfect": 5,
+          "rows_evaluated": 26,
+          "semantic_op_rows": 130,
+          "trials": 13
+        },
+        "field-substitute": {
+          "best_correct_gain": 1,
+          "best_correct_gain_per_cost_denominator": 10,
+          "best_correct_gain_per_cost_numerator": 1,
+          "best_false_positive_reduction": 0,
+          "best_false_positive_reduction_per_cost_denominator": 10,
+          "best_false_positive_reduction_per_cost_numerator": 0,
+          "cascade_rejected": 0,
+          "compared_to_parent": 7,
+          "completed": 7,
+          "improved": 1,
+          "minimum_improving_semantic_op_rows": 10,
+          "perfect": 1,
+          "rows_evaluated": 14,
+          "semantic_op_rows": 70,
+          "trials": 7
+        },
+        "scope-initialize": {
+          "best_correct_gain": 0,
+          "best_correct_gain_per_cost_denominator": null,
+          "best_correct_gain_per_cost_numerator": 0,
+          "best_false_positive_reduction": 0,
+          "best_false_positive_reduction_per_cost_denominator": null,
+          "best_false_positive_reduction_per_cost_numerator": 0,
+          "cascade_rejected": 0,
+          "compared_to_parent": 6,
+          "completed": 6,
+          "improved": 0,
+          "minimum_improving_semantic_op_rows": null,
+          "perfect": 0,
+          "rows_evaluated": 12,
+          "semantic_op_rows": 60,
+          "trials": 6
+        },
+        "seed": {
+          "best_correct_gain": 0,
+          "best_correct_gain_per_cost_denominator": null,
+          "best_correct_gain_per_cost_numerator": 0,
+          "best_false_positive_reduction": 0,
+          "best_false_positive_reduction_per_cost_denominator": null,
+          "best_false_positive_reduction_per_cost_numerator": 0,
+          "cascade_rejected": 0,
+          "compared_to_parent": 0,
+          "completed": 1,
+          "improved": 0,
+          "minimum_improving_semantic_op_rows": null,
+          "perfect": 0,
+          "rows_evaluated": 2,
+          "semantic_op_rows": 10,
+          "trials": 1
+        }
+      },
+      "target_profile": {
+        "edges": 0,
+        "hash": "289c8d5f9a01a75a160fc2bf41c5a24edb565523865ce48e2b2aaf7ac0d80479",
+        "nodes": 1,
+        "refreshes": 0,
+        "strategy_cursor_resets": 0,
+        "strategy_parents": {
+          "balanced": 2,
+          "numeric": 2
+        },
+        "surplus_slots": 30
+      },
+      "best_plan": {
+        "name": "evolve-g1-c1",
+        "output": "predicate",
+        "program": [
+          {
+            "op": "const",
+            "value": 1
+          },
+          {
+            "name": "depth",
+            "op": "field"
+          },
+          {
+            "op": "sub"
+          },
+          {
+            "op": "const",
+            "value": 0
+          },
+          {
+            "op": "lt"
+          }
+        ],
+        "role": "diagnostic",
+        "schema": "ergodis-attack-plan-v0"
+      },
+      "evidence_path": "evidence/c985-target-strategy-c880-runs/numeric/evidence/target-strategy-numeric-c7dd7fa5eff5187664985f8c.jsonl",
+      "evidence_sha256": "8413337faeeeca106167619a895cd7d19b75655b220236d17ab5fab4b10e17f3"
+    },
+    {
+      "strategy": "structural",
+      "tested": 32,
+      "perfect": 4,
+      "rows_evaluated": 64,
+      "first_perfect_trial": 7,
+      "first_perfect_semantic_op_rows": 70,
+      "first_perfect_operator": "field-substitute",
+      "operator_scorecards": {
+        "constant-shift": {
+          "best_correct_gain": 1,
+          "best_correct_gain_per_cost_denominator": 10,
+          "best_correct_gain_per_cost_numerator": 1,
+          "best_false_positive_reduction": 0,
+          "best_false_positive_reduction_per_cost_denominator": 10,
+          "best_false_positive_reduction_per_cost_numerator": 0,
+          "cascade_rejected": 0,
+          "compared_to_parent": 11,
+          "completed": 11,
+          "improved": 3,
+          "minimum_improving_semantic_op_rows": 10,
+          "perfect": 3,
+          "rows_evaluated": 22,
+          "semantic_op_rows": 110,
+          "trials": 11
+        },
+        "field-substitute": {
+          "best_correct_gain": 1,
+          "best_correct_gain_per_cost_denominator": 10,
+          "best_correct_gain_per_cost_numerator": 1,
+          "best_false_positive_reduction": 0,
+          "best_false_positive_reduction_per_cost_denominator": 10,
+          "best_false_positive_reduction_per_cost_numerator": 0,
+          "cascade_rejected": 0,
+          "compared_to_parent": 14,
+          "completed": 14,
+          "improved": 1,
+          "minimum_improving_semantic_op_rows": 10,
+          "perfect": 1,
+          "rows_evaluated": 28,
+          "semantic_op_rows": 140,
+          "trials": 14
+        },
+        "scope-initialize": {
+          "best_correct_gain": 0,
+          "best_correct_gain_per_cost_denominator": null,
+          "best_correct_gain_per_cost_numerator": 0,
+          "best_false_positive_reduction": 0,
+          "best_false_positive_reduction_per_cost_denominator": null,
+          "best_false_positive_reduction_per_cost_numerator": 0,
+          "cascade_rejected": 0,
+          "compared_to_parent": 5,
+          "completed": 5,
+          "improved": 0,
+          "minimum_improving_semantic_op_rows": null,
+          "perfect": 0,
+          "rows_evaluated": 10,
+          "semantic_op_rows": 50,
+          "trials": 5
+        },
+        "scope-toggle": {
+          "best_correct_gain": 0,
+          "best_correct_gain_per_cost_denominator": null,
+          "best_correct_gain_per_cost_numerator": 0,
+          "best_false_positive_reduction": 0,
+          "best_false_positive_reduction_per_cost_denominator": null,
+          "best_false_positive_reduction_per_cost_numerator": 0,
+          "cascade_rejected": 0,
+          "compared_to_parent": 1,
+          "completed": 1,
+          "improved": 0,
+          "minimum_improving_semantic_op_rows": null,
+          "perfect": 0,
+          "rows_evaluated": 2,
+          "semantic_op_rows": 10,
+          "trials": 1
+        },
+        "seed": {
+          "best_correct_gain": 0,
+          "best_correct_gain_per_cost_denominator": null,
+          "best_correct_gain_per_cost_numerator": 0,
+          "best_false_positive_reduction": 0,
+          "best_false_positive_reduction_per_cost_denominator": null,
+          "best_false_positive_reduction_per_cost_numerator": 0,
+          "cascade_rejected": 0,
+          "compared_to_parent": 0,
+          "completed": 1,
+          "improved": 0,
+          "minimum_improving_semantic_op_rows": null,
+          "perfect": 0,
+          "rows_evaluated": 2,
+          "semantic_op_rows": 10,
+          "trials": 1
+        }
+      },
+      "target_profile": {
+        "edges": 0,
+        "hash": "71c01e8ce78dfe749b42c2fa79ee06c0a0e14b9e32b911955b0145933d4b8316",
+        "nodes": 1,
+        "refreshes": 0,
+        "strategy_cursor_resets": 0,
+        "strategy_parents": {
+          "balanced": 1,
+          "structural": 2
+        },
+        "surplus_slots": 30
+      },
+      "best_plan": {
+        "name": "evolve-g1-c6",
+        "output": "predicate",
+        "program": [
+          {
+            "op": "const",
+            "value": 9
+          },
+          {
+            "name": "candidate",
+            "op": "field"
+          },
+          {
+            "op": "sub"
+          },
+          {
+            "op": "const",
+            "value": 0
+          },
+          {
+            "op": "lt"
+          }
+        ],
+        "role": "diagnostic",
+        "schema": "ergodis-attack-plan-v0"
+      },
+      "evidence_path": "evidence/c985-target-strategy-c880-runs/structural/evidence/target-strategy-structural-3b15dbf9f0402bd15f501531.jsonl",
+      "evidence_sha256": "f7635447aad6b0eddd32aa1cb4dd547ce993635595ec009a8791b65c8434da5f"
+    }
+  ]
+}
