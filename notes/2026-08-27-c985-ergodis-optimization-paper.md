@@ -372,8 +372,15 @@ files are disposable and may be deleted at any time.
    evidence plus `css_distance_shard_ledger`.  The ledger binds exact input and
    executable BLAKE3 digests, optional compiled-artifact digest, selected
    kernel, radius, completed rounds, result consistency, per-round candidate
-   fingerprints, and each source-record digest.  A real three-way BB288 split
-   aggregates exactly 30 candidates and a complete no-witness conclusion;
+   fingerprints, and each source-record digest.  C1030 finding 21 later found
+   that the wide sharded frontier was incumbent-dependent across multiple
+   anchors, so presence of all shard indices was not by itself a general cover
+   proof.  Commit `8d71c3b51` makes the prefix bound shard-independent while
+   retaining a shard-local incumbent only after the positional partition.  A
+   post-fix three-way BB288 radius-2 replay again aggregates exactly 30
+   candidates and a complete no-witness conclusion.  The earlier BB288 result
+   was also in the benign witness-free regime, so its frontier never diverged;
+   the result survives, while the former generic coverage wording did not.
    missing, duplicate, mixed-identity, interrupted, and malformed-witness
    controls fail closed.  Items (b)--(d) have also landed: a planted weight-two
    logical witness is recovered from every position of a verified eight-cycle;
@@ -611,19 +618,23 @@ files are disposable and may be deleted at any time.
    Hankel/RREF source region.  Projective point rank/unrank accounts for
    23.76% of cycles, while the four runtime-field table/index source lines
    account for 20.62%; the latter cost is in repeated orbit matrix--vector
-   action, not elimination.  Commit `9305f95e6` adds a private exact
-   elimination control rather than changing core: 256 deterministic matrices
-   at each degree 3--8 agree byte-for-byte between the table backend and a
-   monomorphized characteristic-two backend.  On seven rotated `GF(64)`
-   counter pairs the existing table backend is 1.071x faster in cycles on the
-   actual `4 x 5` Hankel shape (`table/binary = 0.933595x`, `t=-30.48`) and
-   1.039x faster on an `8 x 9` stress shape (`0.962630x`, `t=-3.43`), despite
-   the candidate executing 0.7--4.4% fewer instructions and about 15.9% fewer
-   branches.  Bit-sliced/specialized elimination is therefore rejected for
-   this application: even its isolated upper bound loses, and end-to-end
-   leverage is below the sampling resolution.  The next measured C1018
-   frontier is orbit action plus projective rank/unrank on a larger closure
-   wave, not linear elimination.
+   action, not elimination.  C1030 finding 20 showed that commit `9305f95e6`'s
+   private fixture was already `[I|R]`, so neither reducer performed
+   elimination and the original equivalence/timing claim is withdrawn.
+   Commits `8b7dc358f` and `2b2b3e39d` replace it with a guaranteed-full-rank
+   non-RREF fixture, assert that both reducers actually mutate it, and bind the
+   seed into every record.  The corrected 256-matrix-per-degree equivalence
+   gate passes for degrees 3--8.  Seven seed-rotated `GF(64)` counter pairs
+   reverse the isolated result: table/binary is 1.009912x cycles (`t=7.47`),
+   1.010642x wall (`t=2.59`), 1.081415x instructions, and 1.528112x branches at
+   `4 x 5`; at `8 x 9` it is 1.054166x cycles (`t=23.44`), 1.055951x wall
+   (`t=10.50`), 1.133774x instructions, and 1.707273x branches.  Thus the
+   specialized characteristic-two reducer wins in isolation.  It remains
+   rejected for the motivating PRS application only because the independent
+   end-to-end profile assigns elimination no sample at the 0.01% threshold;
+   the old argument that its isolated upper bound also lost is invalid.  The
+   next measured C1018 frontier remains orbit action plus projective
+   rank/unrank.
 
    That next frontier is now resolved with a deliberately split admission
    result.  Commit `e3d03395a` adds the reusable opt-in core only:
@@ -695,8 +706,9 @@ files are disposable and may be deleted at any time.
 10. **In progress — C1030 tactical correctness and root-cause safeguards.**
    Treat the independently vetted register in
    `2026-08-31-c1030-ergodis-audit-rootcause.md` as the authoritative defect
-   input, while retaining its warning that a single audit pass produces leads,
-   not results.  The execution order is fixed:
+   input, including its round-2 findings 20--33, while retaining its warning
+   that a single audit pass produces leads, not results.  The execution order
+   is fixed:
 
    1. finish and commit the reusable binary-kernel/OSD extraction already in
       flight, but admit it only with kernel-owned input/layout bounds, an
@@ -711,7 +723,10 @@ files are disposable and may be deleted at any time.
       absorbing unrelated working-tree ownership; widen/check the square-sum
       kernel; retain all relevant fibre representatives in the q29 scout; and
       make certificate creation atomic/create-only with surfaced directory
-      errors;
+      errors; then fix the round-2 checks/claims that can pass vacuously,
+      starting with the extension-field control, wide-shard cover, null-witness
+      reductions, evolve beam ordering, certificate headline fields, and replay
+      scripts;
    3. revisit the register by root cause rather than file.  Add narrow
       capability-owned safeguards now—shared allocation instrumentation that
       propagates measurement identity to workers, checked representation
@@ -732,6 +747,14 @@ files are disposable and may be deleted at any time.
    means replay, independent recomputation, or proof checking.  A later broad
    capability-layer refactor is gated on the tactical fixes and ADR, not mixed
    into them.
+
+   Treat C1016's “Public-core enhancement ledger” as a recurring evolve input,
+   not as campaign authority.  Its three current reusable requests are a
+   relational evolution grammar, provenance-bound counterexample-guided
+   presentation transitions, and typed set-theorem templates with canonical
+   semantics plus independent witness reconstruction.  They enter core only as
+   general contracts; C1016-specific quotient fields, targets, and conclusions
+   remain private.
 
 ## Gurobi boundary and semantic-symmetry spike, 2026-08-29
 
