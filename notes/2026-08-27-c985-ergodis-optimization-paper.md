@@ -936,6 +936,48 @@ files are disposable and may be deleted at any time.
    `c985-c1018-sparse-action-q64-wall.tsv`. The next substantive target must
    come from a fresh post-sparse endpoint profile rather than another matrix
    micro-optimization chosen in isolation.
+
+   Commit `80db43d3f` takes the first result from that profile. A source-current
+   cycle sample assigns 26.31% of the large worker to the two-byte unit-term
+   tape loop; disassembly shows a point and image bounds guard for every term
+   even though construction records indices only while enumerating a validated
+   square matrix and `runner` separately proves both workspace lengths. The
+   private term representation cannot be forged through the public API, so the
+   consumer now uses that validate-once invariant for unchecked point/image
+   access. Range slicing, field multiplication, projective ranking, and all
+   external point checks remain checked. The exact dense/sparse comparison,
+   singular-generator rejection, wrong-workspace rejection, out-of-range point
+   rejection, and zero-allocation runner gate pass; strict all-target/all-
+   feature clippy and all 421 public library tests pass.
+
+   The commit-clean public control is deliberately longer than the exploratory
+   profile: seven rotated pairs perform 299.7 million transitions per arm with
+   identical work and nonzero checksum. Checked/validated-unchecked is
+   1.141292x cycles (`t=4.99`), 1.138952x task-clock (`t=4.95`), 1.166371x
+   instructions, and 1.433103x branches. Branch misses rise about 9.3% but are
+   sparse and do not erase the cycle win. Commit `33c2beb11` retains that raw
+   control as `c985-binary-sparse-unchecked-kernel-long-ab.tsv`; the earlier
+   short control remains as a frequency-noisy diagnostic.
+
+   The full application diagnostic preserves one exact q=64 result digest per
+   thread mode. Checked/validated-unchecked is 1.065601x cycles (`t=4.29`),
+   1.075233x task-clock (`t=4.66`), 1.149022x instructions, and 1.335790x
+   branches at 1T; at 12T it is 1.037378x cycles (`t=3.49`), 1.043668x
+   task-clock (`t=4.12`), 1.173516x instructions, and 1.366119x branches.
+   Wall measurements are unresolved (`0.992440x`, `t=-0.22`; `1.006940x`,
+   `t=0.38`) and support no claim. Median RSS is effectively unchanged at
+   9,180 -> 9,220 KiB and 52,728 -> 52,656 KiB. Seven 16-solve q=32 default-
+   build controls remain instruction- and branch-exact; cycles/task-clock are
+   unresolved positive points (`1.031780x`, `t=1.18`; `1.032039x`, `t=1.18`).
+   Those application tables are retained as
+   `c985-c1018-sparse-unchecked-q64-counters.tsv`,
+   `c985-c1018-sparse-unchecked-q64-wall.tsv`, and
+   `c985-c1018-sparse-unchecked-q32-control.tsv`, but the parent application
+   currently requires an explicit overlay of another agent's uncommitted
+   private support modules. They are therefore exact diagnostics, not the
+   independently replayable basis of the admitted claim; the public long
+   control and source commit are that basis. The next target must come from a
+   new profile of the validated-unchecked endpoint.
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
