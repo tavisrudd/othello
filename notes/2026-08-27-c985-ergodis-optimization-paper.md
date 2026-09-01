@@ -400,12 +400,22 @@ files are disposable and may be deleted at any time.
    or pre-shifted contribution table, not another complex branch inside the
    mixed hot action loop.
 
-   Current next target is cheaper and more general: for a nonzero packed byte-
-   lane point, `trailing_zeros(point) / 8` is exactly its projective pivot.
-   Replace the byte-at-a-time pivot scan in `packed_index` with that single
-   hardware operation, retaining the canonical-leading-one shortcut and the
-   same immutable-build/small-control gates.  Do not return to rejected generic
-   inlining or hash-table/container shortcuts.
+   The packed-pivot bit hack is exact but also rejected.  Replacing the short
+   byte scan by `trailing_zeros(point) / 8` removes 1.02% of instructions,
+   4.21% of branches, and 1.98% of branch misses over fifteen public-kernel
+   pairs, but its 1.005x cycle point improvement is unresolved (`t=0.73`).  Fair
+   one- and twelve-thread C1018 controls are neutral in counters and output.
+   This matches the earlier container-shortcut admission boundary, so the
+   source is restored rather than accumulating an unproved hot-loop change.
+
+   The C1018 public action frontier is closed for this pass: byte lanes, exact
+   reversal, and subset-zeta compilation are retained; diagonal direct ranking
+   and packed-pivot replacement are measured negatives.  The next live-plan
+   tranche is item 5's common typed authoring language for match/reduce/
+   canonicalize recipes and injected theorem fragments.  Reuse the existing
+   bounded lexer, expression AST, names, scopes, canonical formatter, and
+   provenance boundary rather than growing another JSON-only or parallel
+   evaluator surface.
    Keep tactical plane completion in
    `ergodis-private`; do not specialize the public core for C1018.
    The smaller linear-code gap is also closed: a compiled binary row-space
