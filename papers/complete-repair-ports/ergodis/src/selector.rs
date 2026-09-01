@@ -1,6 +1,6 @@
 //! Exact successive specialization of finite-field selector polynomials.
 
-use crate::field::FiniteField;
+use crate::field::{FieldElement, FiniteField};
 use std::convert::Infallible;
 use std::marker::PhantomData;
 use thiserror::Error;
@@ -246,19 +246,24 @@ impl<F: FiniteField> DenseSelector<F> {
                 };
                 workspace.powers[0] = 1;
                 for exponent in 1..width {
-                    workspace.powers[exponent] = F::mul(workspace.powers[exponent - 1], value);
+                    workspace.powers[exponent] =
+                        (FieldElement::<F>::from_canonical(workspace.powers[exponent - 1])
+                            * FieldElement::from_canonical(value))
+                        .value();
                 }
                 let mut residual_nonzero = false;
                 for tail in 0..residual_len {
                     let coefficients = &source[tail * width..(tail + 1) * width];
-                    let mut result = 0_u8;
+                    let mut result = FieldElement::<F>::from_canonical(0);
                     for (&coefficient, &power) in
                         coefficients.iter().zip(&workspace.powers[..width])
                     {
-                        result = F::add(result, F::mul(coefficient, power));
+                        result = result
+                            + FieldElement::from_canonical(coefficient)
+                                * FieldElement::from_canonical(power);
                     }
-                    target[tail] = result;
-                    residual_nonzero |= result != 0;
+                    target[tail] = result.value();
+                    residual_nonzero |= result.value() != 0;
                 }
                 sink(SelectorStep {
                     variable: variable as u32,
@@ -291,21 +296,21 @@ impl<F: FiniteField> DenseSelector<F> {
         {
             return Err(SelectorError::Shape);
         }
-        let mut value = 0_u8;
+        let mut value = FieldElement::<F>::from_canonical(0);
         for (index, &coefficient) in self.coefficients.iter().enumerate() {
             let mut remaining = index;
-            let mut monomial = coefficient;
+            let mut monomial = FieldElement::<F>::from_canonical(coefficient);
             for (&degree, &coordinate) in self.degrees.iter().zip(assignment) {
                 let width = usize::from(degree) + 1;
                 let exponent = remaining % width;
                 remaining /= width;
                 for _ in 0..exponent {
-                    monomial = F::mul(monomial, coordinate);
+                    monomial = monomial * FieldElement::from_canonical(coordinate);
                 }
             }
-            value = F::add(value, monomial);
+            value = value + monomial;
         }
-        Ok(value)
+        Ok(value.value())
     }
 }
 
