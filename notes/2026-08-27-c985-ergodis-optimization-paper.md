@@ -978,6 +978,58 @@ files are disposable and may be deleted at any time.
    independently replayable basis of the admitted claim; the public long
    control and source commit are that basis. The next target must come from a
    new profile of the validated-unchecked endpoint.
+
+   That profile closes the image-clear branch with three measured rejections.
+   A per-action monomial flag removes two of three clears but creates a
+   repeating general/monomial dispatch and duplicated loop bodies; it adds
+   5.3% instructions and loses 11.2% cycles (`t=-2.66`). Uniformly seeding
+   every output row before XORing its extra terms removes all clears but its
+   four tape frontiers add 14.8% instructions and lose 5.9% cycles
+   (`t=-1.50`). Partitioning general and monomial actions into two branch-free
+   outer loops still adds 7.5% instructions and loses 7.5% cycles
+   (`t=-2.14`). Commits `173313ffc`, `c615cf908`, and `2b52b8b0b` retain the
+   exact-work controls as `c985-sparse-monomial-action-rejected.tsv`,
+   `c985-sparse-seeded-rows-rejected.tsv`, and
+   `c985-sparse-partitioned-monomial-rejected.tsv`; none of the source designs
+   remains. The existing small `memset` is cheaper than the extra hot control
+   structure on this layout.
+
+   Commit `4cf9f3740` instead imports the stronger first-chart ranking theorem.
+   A canonical projective image whose leading coordinate is one is already
+   normalized in chart zero, whose offset is zero; its rank is exactly the
+   shift-packed suffix. `BinaryProjectiveIndex` now checks that case before
+   pivot search, inversion, and normalization. This is not generator-specific:
+   every binary action image in the leading chart can use it. In the q=64
+   application, the translation and diagonal generators preserve the leading
+   one on 63/64 of input points, so two of three successor ranks usually take
+   the direct path.
+
+   Seven rotated commit-clean public pairs perform 299.7 million transitions
+   per arm with identical work and nonzero checksum. Normalizing/direct-chart
+   is 1.159289x cycles (`t=2.86`), 1.163292x task-clock (`t=2.91`), 1.237212x
+   instructions, and 1.296202x branches. Branch misses rise but remain sparse
+   and unresolved (`0.795263x`, `t=-1.79`). The long control is
+   `c985-binary-leading-chart-rank-kernel-long-ab.tsv`; a 15-pair short control
+   independently points the same way.
+
+   With the same current private-source overlay on both application arms, 15
+   q=64 1T pairs are timing-neutral (`1.001179x` cycles, `t=0.04`;
+   `0.995183x` task-clock, `t=-0.16`) while removing 3.85% of instructions.
+   Seven 12T pairs improve cycles 1.066608x (`t=2.90`), task-clock 1.067378x
+   (`t=3.06`), instructions 1.064919x, and branches 1.016218x, with one exact
+   output digest per mode. Wall points are positive but unresolved
+   (`1.023401x`, `t=1.64`; `1.019535x`, `t=1.42`) and support no claim. Median
+   RSS moves 9,232 -> 8,700 KiB at 1T and 52,592 -> 52,208 KiB at 12T, but no
+   memory claim is made. Seven 16-solve default q=32 pairs remain instruction-
+   and branch-exact; the timing point is unresolved adverse
+   (`0.955145x` cycles, `t=-1.55`). Raw application tables are
+   `c985-c1018-leading-chart-rank-q64-counters.tsv`,
+   `c985-c1018-leading-chart-rank-q64-wall.tsv`, and
+   `c985-c1018-leading-chart-rank-q32-control.tsv`. Full public tests, strict
+   clippy, and both private adapter configurations pass. As above, the public
+   commit-clean control is the replayable admission basis while the private
+   application overlay remains diagnostic. The next target must come from a
+   fresh post-rank profile.
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
