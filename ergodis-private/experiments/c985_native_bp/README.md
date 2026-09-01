@@ -44,3 +44,33 @@ failed the no-small-regression gate; replacing branchy first/second-minimum
 selection by an equivalent min/max network preserved every binary64 posterior
 while turning the regression into a measured win.  `generate_targets.py`
 creates deterministic neutral target streams for additional matrices.
+
+## Typed Rust API
+
+The crate now separates one immutable `BinaryParityCheck` from any number of
+worker-owned `NativeBpOsd` workspaces.  Configuration and OSD bounds are
+validated once at workspace construction.  The hot method accepts
+`&[BinaryValue]`, a `repr(u8)` type that makes non-binary syndromes
+unrepresentable without rescanning values:
+
+```rust
+use c985_native_bp::{
+    BinaryParityCheck, BinaryValue, DecodeConfig, NativeBpOsd,
+    OrderedStatistics,
+};
+
+let code = BinaryParityCheck::from_rows(3, [vec![0, 1], vec![1, 2]])?;
+let mut workspace = NativeBpOsd::new(
+    &code,
+    DecodeConfig::default(),
+    OrderedStatistics::CombinationSweep { order: 10 },
+)?;
+let answer = workspace.decode(&code, &[BinaryValue::One, BinaryValue::Zero])?;
+assert!(answer.exact);
+```
+
+`decode_bytes` is a checked convenience boundary for ordinary byte slices;
+the typed `decode` call is the zero-rescan hot interface.  The replay binary is
+a one-function adapter over the library.  On x86-64, ordered finite-message
+min/max uses explicit mandatory-SSE2 scalar instructions so moving the kernel
+behind the library boundary cannot reintroduce the compiler's branchy lowering.
