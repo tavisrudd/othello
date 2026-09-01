@@ -13,7 +13,9 @@ independent islands, profile-driven target graphs, and a learned policy.  Since
 the original audit, however, the deterministic P0 selector and bounded P1
 substrate have landed: impact/cost scorecards, exploration-floor allocation,
 semantic niches, resumable elite mutation, exact hindsight fragments,
-type-compatible theorem-DAG composition, and mandatory cross-campaign replay.
+type-compatible theorem-DAG composition, mandatory cross-campaign replay, and
+explicit frozen-field error strata.  Root/debt/exceptional-state target graphs
+and broad proposal generation remain open.
 
 It is already stronger than those systems in a different and important layer:
 the exact experimental substrate. Candidate plans are typed and compiled,
@@ -224,6 +226,13 @@ uses observed utility, domain overlap, and cost; it does not make a theorem
 trusted.
 
 ### P1 — profile-driven campaign targeting
+
+The first bounded stratum is landed: an explicitly named frozen-batch field can
+partition semantic niches by its value on the candidate's first mismatching
+row, while row weights retain global impact priority.  The daemon persists a
+bounded selected-value histogram.  This is useful for precomputed root or debt
+classes already present as features, but it does not yet ingest live solver
+profiles or dependency structure.
 
 Aggregate existing root progress, debt ledgers, exceptional-state counts, and
 perf counters outside the search path into a weighted target graph. Nodes are

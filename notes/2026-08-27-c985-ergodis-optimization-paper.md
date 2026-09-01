@@ -903,6 +903,20 @@ files are disposable and may be deleted at any time.
    retained node's semantic hash is rejected before replay, and a saturated
    semantic-attempt ledger skips pair scoring entirely.  The full strict suite
    remains green.
+
+   Commit `ffb132fc2` adds the first explicit operational target stratum.
+   `evolve-start --target-field NAME` resolves one frozen-batch field before
+   the worker starts and adds its value on each candidate's first mismatching
+   row to the semantic niche.  No feature-name inference occurs; missing and
+   mistyped targets fail closed, and perfect candidates occupy the
+   target-independent stratum.  The ordinary exact weighted score still orders
+   high-mass errors globally, while the niche floor preserves a representative
+   from each admitted target value.  Evidence records carry the target value,
+   and the bounded completion histogram records at most 64 selected values
+   plus checked overflow.  Focused rank/niche and daemon controls and the full
+   strict all-target/all-feature suite pass.  This remains cold daemon work and
+   changes no solver safe point.  Root/debt/exceptional-state profiles remain
+   the next operational-target extension.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
