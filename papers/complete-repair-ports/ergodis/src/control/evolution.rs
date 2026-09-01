@@ -1,6 +1,6 @@
 use super::{
     vm::evaluate_plan_cascaded, CompiledPlan, ControlError, FeatureBatch,
-    FeatureGeneratorProvenance, PlanOp, PlanScope, PlanSpec,
+    FeatureGeneratorProvenance, PlanOp, PlanScope, PlanSpec, MAX_PLAN_OPS,
 };
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
@@ -17,6 +17,11 @@ const MAX_EVOLUTION_RECORD_BYTES: usize = 256 * 1024;
 const BASE_EVOLUTION_FOOTER_BYTES: u64 = 8 * 1024;
 const MAX_FAILURE_PROBES: usize = 8;
 const MAX_TARGETED_MUTATIONS: usize = 24;
+const MAX_CLAUSE_PROFILE_FIELDS: usize = 16;
+const MAX_CLAUSE_PROFILE_VALUES: usize = 8;
+const MAX_CLAUSE_PROFILE_ROWS: usize = 4_096;
+const MAX_CLAUSE_PROFILES: usize = 16;
+const MAX_CLAUSE_PAIR_PROFILES: usize = 8;
 const MAX_HINDSIGHT_FRAGMENTS: usize = 64;
 const MAX_HINDSIGHT_SEMANTICS: usize = 256;
 const MAX_HINDSIGHT_PROBES_PER_PARENT: usize = 16;
@@ -610,7 +615,27 @@ struct ScopeMutationProfile {
 struct MutationContext<'a> {
     fields: &'a [String],
     scope_profiles: &'a [ScopeMutationProfile],
+    clause_profiles: &'a [ClauseMutationProfile],
+    clause_pair_profiles: &'a [ClausePairMutationProfile],
     field_index: &'a BTreeMap<&'a str, u16>,
+}
+
+#[derive(Clone)]
+struct ClauseMutationProfile {
+    field_index: u16,
+    field: String,
+    value: i64,
+    comparison: PlanOp,
+    weighted_correct: u64,
+    weighted_false_positive: u64,
+}
+
+struct ClausePairMutationProfile {
+    left: u8,
+    right: u8,
+    connector: PlanOp,
+    weighted_correct: u64,
+    weighted_false_positive: u64,
 }
 
 struct MutationEmitter<'a> {
@@ -1963,6 +1988,8 @@ pub(super) fn run_evolution(
     // calling Linux task. Failure is reported in the job summary.
     let low_priority = unsafe { libc::setpriority(libc::PRIO_PROCESS, 0, 10) } == 0;
     let scope_profiles = scope_profiles(&batch)?;
+    let clause_profiles = clause_profiles(&batch)?;
+    let clause_pair_profiles = clause_pair_profiles(&batch, &clause_profiles)?;
     let field_index = batch
         .fields
         .iter()
@@ -1972,6 +1999,8 @@ pub(super) fn run_evolution(
     let mutation_context = MutationContext {
         fields: &batch.fields,
         scope_profiles: &scope_profiles,
+        clause_profiles: &clause_profiles,
+        clause_pair_profiles: &clause_pair_profiles,
         field_index: &field_index,
     };
     let mut writer = BufWriter::new(output);
@@ -2718,6 +2747,9 @@ pub(super) fn run_evolution(
         "target_selection_classes": &target_selection_classes,
         "target_selection_overflow": target_selection_overflow,
         "target_profile": &target_profile_summary,
+        "clause_profiles": clause_profiles.len(),
+        "clause_pair_profiles": clause_pair_profiles.len(),
+        "clause_profile_rows": batch.rows().min(MAX_CLAUSE_PROFILE_ROWS),
         "operator_scorecards": &operator_scorecards,
         "bytes": bytes,
         "truncated": truncated,
@@ -2883,6 +2915,275 @@ fn scope_profiles(batch: &FeatureBatch) -> Result<Vec<ScopeMutationProfile>, Con
     Ok(profiles)
 }
 
+fn clause_profile_cmp(
+    left: &ClauseMutationProfile,
+    right: &ClauseMutationProfile,
+) -> std::cmp::Ordering {
+    right
+        .weighted_correct
+        .cmp(&left.weighted_correct)
+        .then_with(|| {
+            left.weighted_false_positive
+                .cmp(&right.weighted_false_positive)
+        })
+        .then_with(|| left.field.cmp(&right.field))
+        .then_with(|| left.value.cmp(&right.value))
+        .then_with(|| {
+            clause_comparison_rank(&left.comparison).cmp(&clause_comparison_rank(&right.comparison))
+        })
+}
+
+fn clause_comparison_rank(comparison: &PlanOp) -> u8 {
+    match comparison {
+        PlanOp::Eq => 0,
+        PlanOp::Ne => 1,
+        PlanOp::Gt => 2,
+        _ => unreachable!(),
+    }
+}
+
+fn clause_prediction(comparison: &PlanOp, observed: i64, value: i64) -> bool {
+    match comparison {
+        PlanOp::Eq => observed == value,
+        PlanOp::Ne => observed != value,
+        PlanOp::Gt => observed > value,
+        _ => unreachable!(),
+    }
+}
+
+fn same_clause_comparison(left: &PlanOp, right: &PlanOp) -> bool {
+    matches!(
+        (left, right),
+        (PlanOp::Eq, PlanOp::Eq) | (PlanOp::Ne, PlanOp::Ne) | (PlanOp::Gt, PlanOp::Gt)
+    )
+}
+
+fn clause_profile_rows(rows: usize) -> impl Iterator<Item = usize> {
+    let sampled = rows.min(MAX_CLAUSE_PROFILE_ROWS);
+    (0..sampled)
+        .map(move |sample| ((sample as u128 * rows as u128) / sampled.max(1) as u128) as usize)
+}
+
+fn clause_profile_values(batch: &FeatureBatch, field: usize) -> Result<Vec<i64>, ControlError> {
+    let mut heavy = Vec::<(i64, u64)>::with_capacity(MAX_CLAUSE_PROFILE_VALUES - 2);
+    let mut minimum = i64::MAX;
+    let mut maximum = i64::MIN;
+    for row in clause_profile_rows(batch.rows()) {
+        let value = batch.row(row)[field];
+        minimum = minimum.min(value);
+        maximum = maximum.max(value);
+        let weight = batch.weights[row];
+        if let Some((_, count)) = heavy.iter_mut().find(|(candidate, _)| *candidate == value) {
+            *count = count
+                .checked_add(weight)
+                .ok_or_else(|| ControlError::Invalid("clause value weight overflow".into()))?;
+        } else if heavy.len() < MAX_CLAUSE_PROFILE_VALUES - 2 {
+            heavy.push((value, weight));
+        } else {
+            let replace = heavy
+                .iter()
+                .enumerate()
+                .min_by_key(|(_, (candidate, count))| (*count, *candidate))
+                .map(|(index, _)| index)
+                .unwrap();
+            heavy[replace] = (
+                value,
+                heavy[replace]
+                    .1
+                    .checked_add(weight)
+                    .ok_or_else(|| ControlError::Invalid("clause value weight overflow".into()))?,
+            );
+        }
+    }
+    let mut values = heavy
+        .into_iter()
+        .map(|(value, _)| value)
+        .collect::<Vec<_>>();
+    if minimum != i64::MAX {
+        values.push(minimum);
+        values.push(maximum);
+    }
+    values.sort_unstable();
+    values.dedup();
+    Ok(values)
+}
+
+fn clause_profiles(batch: &FeatureBatch) -> Result<Vec<ClauseMutationProfile>, ControlError> {
+    let sampled = batch.rows().min(MAX_CLAUSE_PROFILE_ROWS);
+    if sampled == 0 {
+        return Ok(Vec::new());
+    }
+    let words = sampled.div_ceil(64);
+    let mut semantics = BTreeMap::<Box<[u64]>, ClauseMutationProfile>::new();
+    for (field, field_name) in batch
+        .fields
+        .iter()
+        .take(MAX_CLAUSE_PROFILE_FIELDS)
+        .enumerate()
+    {
+        for value in clause_profile_values(batch, field)? {
+            for comparison in [PlanOp::Eq, PlanOp::Ne, PlanOp::Gt] {
+                let mut outcomes = vec![0_u64; words];
+                let mut true_rows = 0_usize;
+                let mut weighted_correct = 0_u64;
+                let mut weighted_false_positive = 0_u64;
+                for (sample, row) in clause_profile_rows(batch.rows()).enumerate() {
+                    let prediction = clause_prediction(&comparison, batch.row(row)[field], value);
+                    if prediction {
+                        outcomes[sample / 64] |= 1_u64 << (sample % 64);
+                        true_rows += 1;
+                    }
+                    let weight = batch.weights[row];
+                    if prediction == batch.expected(row) {
+                        weighted_correct =
+                            weighted_correct.checked_add(weight).ok_or_else(|| {
+                                ControlError::Invalid("clause profile score overflow".into())
+                            })?;
+                    }
+                    if prediction && !batch.expected(row) {
+                        weighted_false_positive =
+                            weighted_false_positive.checked_add(weight).ok_or_else(|| {
+                                ControlError::Invalid("clause false-positive overflow".into())
+                            })?;
+                    }
+                }
+                if true_rows == 0 || true_rows == sampled {
+                    continue;
+                }
+                let profile = ClauseMutationProfile {
+                    field_index: u16::try_from(field).map_err(|_| {
+                        ControlError::Invalid("clause field index exceeds u16".into())
+                    })?,
+                    field: field_name.clone(),
+                    value,
+                    comparison,
+                    weighted_correct,
+                    weighted_false_positive,
+                };
+                match semantics.entry(outcomes.into_boxed_slice()) {
+                    std::collections::btree_map::Entry::Vacant(entry) => {
+                        entry.insert(profile);
+                    }
+                    std::collections::btree_map::Entry::Occupied(mut entry) => {
+                        if clause_profile_cmp(&profile, entry.get()).is_lt() {
+                            entry.insert(profile);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    let mut profiles = semantics.into_values().collect::<Vec<_>>();
+    profiles.sort_by(clause_profile_cmp);
+    profiles.truncate(MAX_CLAUSE_PROFILES);
+    Ok(profiles)
+}
+
+fn clause_pair_profile_cmp(
+    left: &ClausePairMutationProfile,
+    right: &ClausePairMutationProfile,
+) -> std::cmp::Ordering {
+    right
+        .weighted_correct
+        .cmp(&left.weighted_correct)
+        .then_with(|| {
+            left.weighted_false_positive
+                .cmp(&right.weighted_false_positive)
+        })
+        .then_with(|| left.left.cmp(&right.left))
+        .then_with(|| left.right.cmp(&right.right))
+        .then_with(|| {
+            let rank = |connector: &PlanOp| u8::from(matches!(connector, PlanOp::Or));
+            rank(&left.connector).cmp(&rank(&right.connector))
+        })
+}
+
+fn clause_pair_profiles(
+    batch: &FeatureBatch,
+    clauses: &[ClauseMutationProfile],
+) -> Result<Vec<ClausePairMutationProfile>, ControlError> {
+    let sampled = batch.rows().min(MAX_CLAUSE_PROFILE_ROWS);
+    if sampled == 0 {
+        return Ok(Vec::new());
+    }
+    let words = sampled.div_ceil(64);
+    let mut semantics = BTreeMap::<Box<[u64]>, ClausePairMutationProfile>::new();
+    for left in 0..clauses.len() {
+        for right in left + 1..clauses.len() {
+            for connector in [PlanOp::And, PlanOp::Or] {
+                let mut outcomes = vec![0_u64; words];
+                let mut true_rows = 0_usize;
+                let mut weighted_correct = 0_u64;
+                let mut weighted_false_positive = 0_u64;
+                for (sample, row) in clause_profile_rows(batch.rows()).enumerate() {
+                    let left_clause = &clauses[left];
+                    let right_clause = &clauses[right];
+                    let left_prediction = clause_prediction(
+                        &left_clause.comparison,
+                        batch.row(row)[usize::from(left_clause.field_index)],
+                        left_clause.value,
+                    );
+                    let right_prediction = clause_prediction(
+                        &right_clause.comparison,
+                        batch.row(row)[usize::from(right_clause.field_index)],
+                        right_clause.value,
+                    );
+                    let prediction = if matches!(connector, PlanOp::And) {
+                        left_prediction && right_prediction
+                    } else {
+                        left_prediction || right_prediction
+                    };
+                    if prediction {
+                        outcomes[sample / 64] |= 1_u64 << (sample % 64);
+                        true_rows += 1;
+                    }
+                    let weight = batch.weights[row];
+                    if prediction == batch.expected(row) {
+                        weighted_correct =
+                            weighted_correct.checked_add(weight).ok_or_else(|| {
+                                ControlError::Invalid("clause-pair score overflow".into())
+                            })?;
+                    }
+                    if prediction && !batch.expected(row) {
+                        weighted_false_positive =
+                            weighted_false_positive.checked_add(weight).ok_or_else(|| {
+                                ControlError::Invalid("clause-pair false-positive overflow".into())
+                            })?;
+                    }
+                }
+                if true_rows == 0 || true_rows == sampled {
+                    continue;
+                }
+                let profile = ClausePairMutationProfile {
+                    left: u8::try_from(left).map_err(|_| {
+                        ControlError::Invalid("left clause index exceeds u8".into())
+                    })?,
+                    right: u8::try_from(right).map_err(|_| {
+                        ControlError::Invalid("right clause index exceeds u8".into())
+                    })?,
+                    connector,
+                    weighted_correct,
+                    weighted_false_positive,
+                };
+                match semantics.entry(outcomes.into_boxed_slice()) {
+                    std::collections::btree_map::Entry::Vacant(entry) => {
+                        entry.insert(profile);
+                    }
+                    std::collections::btree_map::Entry::Occupied(mut entry) => {
+                        if clause_pair_profile_cmp(&profile, entry.get()).is_lt() {
+                            entry.insert(profile);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    let mut profiles = semantics.into_values().collect::<Vec<_>>();
+    profiles.sort_by(clause_pair_profile_cmp);
+    profiles.truncate(MAX_CLAUSE_PAIR_PROFILES);
+    Ok(profiles)
+}
+
 fn push_scoped_child(
     parent: &PlanSpec,
     field: &str,
@@ -2955,6 +3256,103 @@ fn mutate_scopes(
             {
                 return true;
             }
+        }
+    }
+    false
+}
+
+fn plan_has_clause(parent: &PlanSpec, profile: &ClauseMutationProfile, connector: &PlanOp) -> bool {
+    parent.program.windows(4).any(|ops| {
+        matches!(&ops[0], PlanOp::Field { name } if name == &profile.field)
+            && matches!(ops[1], PlanOp::Const { value } if value == profile.value)
+            && same_clause_comparison(&ops[2], &profile.comparison)
+            && matches!(
+                (&ops[3], connector),
+                (PlanOp::And, PlanOp::And) | (PlanOp::Or, PlanOp::Or)
+            )
+    })
+}
+
+fn mutate_clauses(
+    parent: &PlanSpec,
+    context: &MutationContext<'_>,
+    emitter: &mut MutationEmitter<'_>,
+) -> bool {
+    if parent.program.len().saturating_add(4) > MAX_PLAN_OPS {
+        return false;
+    }
+    for profile in context.clause_profiles {
+        for (connector, operator) in [(PlanOp::And, "clause-and"), (PlanOp::Or, "clause-or")] {
+            if plan_has_clause(parent, profile, &connector) {
+                continue;
+            }
+            if emitter.emit(operator, || {
+                let mut child = parent.clone();
+                child.program.push(PlanOp::Field {
+                    name: profile.field.clone(),
+                });
+                child.program.push(PlanOp::Const {
+                    value: profile.value,
+                });
+                child.program.push(profile.comparison.clone());
+                child.program.push(connector);
+                child
+            }) {
+                return true;
+            }
+        }
+    }
+    false
+}
+
+fn mutate_clause_pairs(
+    parent: &PlanSpec,
+    context: &MutationContext<'_>,
+    emitter: &mut MutationEmitter<'_>,
+) -> bool {
+    for pair in context.clause_pair_profiles {
+        let left = &context.clause_profiles[usize::from(pair.left)];
+        let right = &context.clause_profiles[usize::from(pair.right)];
+        let same_program = parent.scope.is_none()
+            && matches!(parent.program.as_slice(), [
+                PlanOp::Field { name: left_name },
+                PlanOp::Const { value: left_value },
+                left_comparison,
+                PlanOp::Field { name: right_name },
+                PlanOp::Const { value: right_value },
+                right_comparison,
+                connector,
+            ] if left_name == &left.field
+                && *left_value == left.value
+                && same_clause_comparison(left_comparison, &left.comparison)
+                && right_name == &right.field
+                && *right_value == right.value
+                && same_clause_comparison(right_comparison, &right.comparison)
+                && matches!((connector, &pair.connector),
+                    (PlanOp::And, PlanOp::And) | (PlanOp::Or, PlanOp::Or)));
+        if same_program {
+            continue;
+        }
+        let program = vec![
+            PlanOp::Field {
+                name: left.field.clone(),
+            },
+            PlanOp::Const { value: left.value },
+            left.comparison.clone(),
+            PlanOp::Field {
+                name: right.field.clone(),
+            },
+            PlanOp::Const { value: right.value },
+            right.comparison.clone(),
+            pair.connector.clone(),
+        ];
+        if emitter.emit("clause-pair", || {
+            let mut child = parent.clone();
+            child.scope = None;
+            child.program = program;
+            child
+        }) {
+            return true;
         }
     }
     false
@@ -3072,6 +3470,8 @@ fn mutate_plan(
         EvolutionTargetStrategy::Balanced => {
             mutate_scopes(parent, context, &mut emitter)
                 || mutate_program(parent, context, None, &mut emitter)
+                || mutate_clause_pairs(parent, context, &mut emitter)
+                || mutate_clauses(parent, context, &mut emitter)
         }
         EvolutionTargetStrategy::Numeric => {
             mutate_program(parent, context, Some(MutationFamily::Numeric), &mut emitter)
@@ -3082,9 +3482,13 @@ fn mutate_plan(
                     Some(MutationFamily::Structural),
                     &mut emitter,
                 )
+                || mutate_clause_pairs(parent, context, &mut emitter)
+                || mutate_clauses(parent, context, &mut emitter)
         }
         EvolutionTargetStrategy::Structural => {
             mutate_scopes(parent, context, &mut emitter)
+                || mutate_clause_pairs(parent, context, &mut emitter)
+                || mutate_clauses(parent, context, &mut emitter)
                 || mutate_program(
                     parent,
                     context,
@@ -3729,6 +4133,8 @@ mod tests {
         let context = MutationContext {
             fields: &fields,
             scope_profiles: &scopes,
+            clause_profiles: &[],
+            clause_pair_profiles: &[],
             field_index: &field_index,
         };
         let failure = FailureShape {
@@ -3829,6 +4235,8 @@ mod tests {
         let context = MutationContext {
             fields: &fields,
             scope_profiles: &scopes,
+            clause_profiles: &[],
+            clause_pair_profiles: &[],
             field_index: &field_index,
         };
         let failure = FailureShape {
@@ -3904,6 +4312,133 @@ mod tests {
                 .collect::<BTreeSet<_>>()
         };
         assert_eq!(semantics(numeric), semantics(structural));
+    }
+
+    #[test]
+    fn clause_profiles_are_bounded_and_grow_typed_predicates() {
+        let batch = FeatureBatch {
+            presentation: "clauses".into(),
+            problem: "growth".into(),
+            fields: vec!["root_orbit".into(), "branches".into()].into_boxed_slice(),
+            generator: None,
+            row_ids: (0..5).collect::<Vec<_>>().into_boxed_slice(),
+            weights: vec![1; 5].into_boxed_slice(),
+            expected: vec![0b1_0011].into_boxed_slice(),
+            values: vec![0, 7, 0, 7, 0, 10, 1, 7, 2, 7].into_boxed_slice(),
+        };
+        let profiles = clause_profiles(&batch).unwrap();
+        let pairs = clause_pair_profiles(&batch, &profiles).unwrap();
+        assert!(profiles.len() <= MAX_CLAUSE_PROFILES);
+        assert!(pairs.len() <= MAX_CLAUSE_PAIR_PROFILES);
+        assert!(pairs
+            .iter()
+            .any(|pair| pair.weighted_correct == 5 && pair.weighted_false_positive == 0));
+        assert!(profiles.iter().any(|profile| {
+            profile.field == "branches"
+                && profile.value == 7
+                && matches!(profile.comparison, PlanOp::Eq)
+        }));
+
+        let parent = PlanSpec {
+            schema: super::super::PLAN_SCHEMA.into(),
+            name: "clause-parent".into(),
+            role: super::super::PlanRole::Diagnostic,
+            output: super::super::PlanOutput::Predicate,
+            scope: None,
+            program: vec![
+                PlanOp::Field {
+                    name: "root_orbit".into(),
+                },
+                PlanOp::Const { value: 1 },
+                PlanOp::Gt,
+            ],
+        };
+        let fields = vec!["root_orbit".into(), "branches".into()];
+        let scopes = Vec::new();
+        let field_index = BTreeMap::new();
+        let context = MutationContext {
+            fields: &fields,
+            scope_profiles: &scopes,
+            clause_profiles: &profiles,
+            clause_pair_profiles: &pairs,
+            field_index: &field_index,
+        };
+        let failure = FailureShape {
+            first_mismatch: None,
+            expected: None,
+            probes: [FailureProbe::default(); MAX_FAILURE_PROBES],
+            probe_count: 0,
+        };
+        let mut output = Vec::new();
+        mutate_plan(
+            &parent,
+            "parent",
+            &context,
+            MutationRequest {
+                failure_shape: &failure,
+                strategy: EvolutionTargetStrategy::Structural,
+                source_target_class: None,
+                cursor: 0,
+            },
+            &mut output,
+            1,
+        );
+        assert_eq!(output.len(), 1);
+        assert_eq!(output[0].operator, "clause-pair");
+        assert_eq!(output[0].plan.program.len(), 7);
+        CompiledPlan::compile(&output[0].plan, &fields).unwrap();
+
+        let strategy_semantics = |strategy| {
+            let mut candidates = Vec::new();
+            let batch = mutate_plan(
+                &parent,
+                "parent",
+                &context,
+                MutationRequest {
+                    failure_shape: &failure,
+                    strategy,
+                    source_target_class: None,
+                    cursor: 0,
+                },
+                &mut candidates,
+                usize::MAX,
+            );
+            assert!(batch.exhausted);
+            candidates
+                .into_iter()
+                .map(|candidate| format!("{:?}", candidate.plan.program))
+                .collect::<BTreeSet<_>>()
+        };
+        assert_eq!(
+            strategy_semantics(EvolutionTargetStrategy::Balanced),
+            strategy_semantics(EvolutionTargetStrategy::Numeric)
+        );
+        assert_eq!(
+            strategy_semantics(EvolutionTargetStrategy::Balanced),
+            strategy_semantics(EvolutionTargetStrategy::Structural)
+        );
+
+        let clause_only_context = MutationContext {
+            clause_pair_profiles: &[],
+            ..context
+        };
+        output.clear();
+        mutate_plan(
+            &parent,
+            "parent",
+            &clause_only_context,
+            MutationRequest {
+                failure_shape: &failure,
+                strategy: EvolutionTargetStrategy::Structural,
+                source_target_class: None,
+                cursor: 0,
+            },
+            &mut output,
+            2,
+        );
+        assert_eq!(output.len(), 2);
+        assert_eq!(output[0].operator, "clause-and");
+        assert_eq!(output[1].operator, "clause-or");
     }
 
     #[test]
