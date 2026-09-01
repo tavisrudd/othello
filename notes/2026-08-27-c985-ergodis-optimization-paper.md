@@ -11,6 +11,11 @@
 This is the authoritative checklist for the current C985 campaign; update it
 as each coherent tranche lands.
 
+Evidence references in this memo must be durable: identify the tracked patch
+or Git commit that reproduces a comparison.  Never cite a local cached
+executable (including anything under `~/.cache`) as a retained control; those
+files are disposable and may be deleted at any time.
+
 1. **Done — reusable theorem kernels.** Mine post-C1000 reports and import only
    cross-domain kernels with exact replay boundaries. Current inventory and
    validation: `2026-08-30-c985-post-c1000-ergodis-kernel-mining.md`.
@@ -18,7 +23,7 @@ as each coherent tranche lands.
    iterative traversal, Tiger layout, CSS publication/worker ownership, and
    one-/parallel-mode measurement gaps under C1017. CSS contention-free
    controller fan-out, separate pulse/no-pulse kernels, exact coalescence
-   controls, and retained-binary counter/RSS A/B are complete and accepted;
+   controls, and commit-pinned counter/RSS A/B are complete and accepted;
    the clean miss costs 0.50% cycles/candidate and 0.82% wall while removing
    2.20% of instructions. CSS workspaces/results are now preallocated in
    exclusive 16x coarse lanes before enumeration; the one-lane-per-thread
@@ -382,7 +387,7 @@ as each coherent tranche lands.
    panicked.  The accepted repair spells out `wrapping_sub` with the one-sided
    proof.  Saturating subtraction, algebraically moving the adjustment, and a
    terminal early branch were correct but rejected after regressions of roughly
-   5--6%, 1.15% instructions, and 5% respectively.  Seven retained-binary
+   5--6%, 1.15% instructions, and 5% respectively.  Seven commit-pinned
    interleaved counter pairs for the accepted form show instruction ratios of
    0.999998x at 1T and 1.000029x at 12T versus the prior release code; timing
    moved noisily in opposite directions, so the hot implementation is accepted
