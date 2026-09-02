@@ -14,10 +14,12 @@
     clippy::type_complexity
 )]
 
+pub mod arith;
 pub mod banked_rule_evolve;
 pub mod banked_semantic_evolve;
 pub mod binary_margin_lift;
 pub mod bitset_sumset;
+pub mod css_codes;
 pub mod cyclic_polynomial_moment_evolve;
 pub mod cyclic_quotient_defects;
 pub mod cyclic_residual_features;
@@ -78,6 +80,7 @@ pub mod g53_sparse_prefix;
 pub mod g53_sparse_q4_oracle;
 pub mod g53_sparse_q4_proof;
 pub mod g91_defect_obstruction;
+pub mod gf2_linalg;
 pub mod hadamard_2092;
 pub mod hall_core;
 pub mod landed_rank_adapter;
@@ -88,6 +91,7 @@ pub mod predicate_cover;
 pub mod projected_orbit_min_cost;
 pub mod projective_grid;
 pub mod proof_synthesis;
+pub mod prs;
 pub mod q16_quadratic;
 pub mod q18_energy_corpus;
 pub mod q18_energy_gate;
