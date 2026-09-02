@@ -497,6 +497,16 @@ or expiry releases only the matching lease. A hostile pass caught and repaired
 the otherwise permanent-lock failure of persisting only an unowned half-open
 Boolean; restore now requires lease/Boolean agreement.
 
+Provider throttling now gates the provider as well as the ticket. A first-seen
+`ProviderRateLimit` records the policy retry time or stronger provider
+`Retry-After` as a durable provider-wide lower bound. Sibling tickets are
+deferred at claim before backend work, the bound survives daemon restart, and a
+duplicate callback neither extends nor recharges it. This is deliberately
+separate from the health circuit: a valid throttle is not evidence that the
+backend is faulty, while an already-running sibling may still complete. The
+rate-store schema is versioned so an older snapshot cannot silently omit this
+fanout guard.
+
 That adapter now exists in the Python 3.14 binding. `ProviderRunner` invokes an
 arbitrary async backend exactly once per daemon-claimed attempt, enforces the
 ticket's absolute execution deadline with structured cancellation, translates

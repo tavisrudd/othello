@@ -12,7 +12,7 @@ use std::io::{self, Read, Write};
 use std::os::unix::fs::{OpenOptionsExt, PermissionsExt};
 use std::path::{Path, PathBuf};
 
-const SCHEMA: &str = "ergodis-proposal-rate-store-v3";
+const SCHEMA: &str = "ergodis-proposal-rate-store-v4";
 const SNAPSHOT_FILE: &str = "rates.json";
 const MAX_SNAPSHOT_BYTES: u64 = 256 * 1024;
 const MAX_STALE_TEMP_FILES: usize = 16;
@@ -44,6 +44,7 @@ struct ProviderRateSnapshot {
     bucket: TokenBucketSnapshot,
     circuit: CircuitBreakerSnapshot,
     half_open_ticket: Option<ProposalIdempotencyKey>,
+    rate_limited_until_ms: u64,
 }
 
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -83,6 +84,7 @@ struct ProviderState {
     bucket: TokenBucket,
     circuit: CircuitBreaker,
     half_open_ticket: Option<ProposalIdempotencyKey>,
+    rate_limited_until_ms: u64,
 }
 
 impl ProposalRateStore {
@@ -150,6 +152,7 @@ impl ProposalRateStore {
                         bucket,
                         circuit,
                         half_open_ticket: provider.half_open_ticket,
+                        rate_limited_until_ms: provider.rate_limited_until_ms,
                     },
                 )
                 .is_some()
@@ -217,6 +220,7 @@ impl ProposalRateStore {
                     circuit: CircuitBreaker::new(self.config.circuit)
                         .map_err(|error| ProposalRateStoreError::Rate(error.to_string()))?,
                     half_open_ticket: None,
+                    rate_limited_until_ms: 0,
                 }
             }
         };
@@ -241,11 +245,16 @@ impl ProposalRateStore {
         now_ms: u64,
     ) -> Result<CircuitPermit, ProposalRateStoreError> {
         self.ensure_healthy()?;
-        let mut circuit = self
+        let provider = self
             .providers
             .get(&provider_id)
-            .ok_or(ProposalRateStoreError::InvalidStore)?
-            .circuit;
+            .ok_or(ProposalRateStoreError::InvalidStore)?;
+        if now_ms < provider.rate_limited_until_ms {
+            return Ok(CircuitPermit::Denied {
+                retry_at_ms: provider.rate_limited_until_ms,
+            });
+        }
+        let mut circuit = provider.circuit;
         Ok(circuit.permit(now_ms))
     }
 
@@ -260,6 +269,11 @@ impl ProposalRateStore {
             .providers
             .get_mut(&provider_id)
             .ok_or(ProposalRateStoreError::InvalidStore)?;
+        if now_ms < provider.rate_limited_until_ms {
+            return Ok(CircuitPermit::Denied {
+                retry_at_ms: provider.rate_limited_until_ms,
+            });
+        }
         let before = provider.circuit.snapshot();
         let permit = provider.circuit.permit(now_ms);
         if permit == CircuitPermit::HalfOpenProbe {
@@ -272,6 +286,27 @@ impl ProposalRateStore {
             self.persist()?;
         }
         Ok(permit)
+    }
+
+    pub fn defer_provider_until(
+        &mut self,
+        provider_id: u16,
+        not_before_ms: u64,
+        now_ms: u64,
+    ) -> Result<(), ProposalRateStoreError> {
+        self.ensure_healthy()?;
+        if not_before_ms <= now_ms {
+            return Err(ProposalRateStoreError::InvalidStore);
+        }
+        let provider = self
+            .providers
+            .get_mut(&provider_id)
+            .ok_or(ProposalRateStoreError::InvalidStore)?;
+        if not_before_ms <= provider.rate_limited_until_ms {
+            return Ok(());
+        }
+        provider.rate_limited_until_ms = not_before_ms;
+        self.persist()
     }
 
     pub fn record_provider_failure(
@@ -353,6 +388,7 @@ impl ProposalRateStore {
                     bucket: provider.bucket.snapshot(),
                     circuit: provider.circuit.snapshot(),
                     half_open_ticket: provider.half_open_ticket,
+                    rate_limited_until_ms: provider.rate_limited_until_ms,
                 })
                 .collect(),
             sessions: self
@@ -648,6 +684,38 @@ mod tests {
         reopened.record_provider_success(3, ticket).unwrap();
         assert_eq!(
             reopened.claim_provider_permit(3, ticket, 110).unwrap(),
+            CircuitPermit::Normal
+        );
+    }
+
+    #[test]
+    fn provider_rate_limit_defers_sibling_tickets_across_reopen() {
+        let temporary = tempfile::tempdir().unwrap();
+        let root = temporary.path().join("rates");
+        let session = "0123456789abcdef0123456789abcdef";
+        let first = ProposalIdempotencyKey::new(session, 1, [3; 32]).unwrap();
+        let sibling = ProposalIdempotencyKey::new(session, 2, [4; 32]).unwrap();
+        let mut store = ProposalRateStore::create(&root, [7; 32], CONFIG, 10).unwrap();
+        store.register_session(session, 10).unwrap();
+        store.charge(session, 3, 10).unwrap();
+        store.defer_provider_until(3, 510, 10).unwrap();
+        assert_eq!(
+            store.preview_provider_permit(3, 509).unwrap(),
+            CircuitPermit::Denied { retry_at_ms: 510 }
+        );
+        assert_eq!(
+            store.claim_provider_permit(3, first, 509).unwrap(),
+            CircuitPermit::Denied { retry_at_ms: 510 }
+        );
+        drop(store);
+
+        let mut reopened = ProposalRateStore::open(&root, [7; 32], CONFIG, 509).unwrap();
+        assert_eq!(
+            reopened.claim_provider_permit(3, sibling, 509).unwrap(),
+            CircuitPermit::Denied { retry_at_ms: 510 }
+        );
+        assert_eq!(
+            reopened.claim_provider_permit(3, sibling, 510).unwrap(),
             CircuitPermit::Normal
         );
     }

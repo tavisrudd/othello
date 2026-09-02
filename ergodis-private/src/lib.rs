@@ -89,6 +89,7 @@ pub mod q29_mod3_norm;
 pub mod q29_mod9_generator;
 pub mod q29_mod9_lift;
 pub mod q29_parity_support;
+pub mod q29_pair_key_evolve;
 pub mod q29_psd_scope_proof;
 pub mod q29_transfer_anneal;
 pub mod quotient_paf_proof;

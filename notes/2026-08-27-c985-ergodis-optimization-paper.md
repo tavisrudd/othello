@@ -5004,3 +5004,12 @@ contiguous clears are cheaper than repeated narrow-slice setup and partial-word 
 on this compact range. Forward revert `969593b41` restores the accepted implementation;
 the raw negative is retained in
 `ergodis-private/evidence/c985-subset-sum-live-clear-ab.tsv` to prevent repetition.
+
+The external-proposer reliability boundary now propagates provider throttles across
+sibling tickets. A first-seen typed rate-limit failure records the policy retry time or
+stronger `Retry-After` in the durable provider store; every later claim against that
+provider returns a typed deferral before backend work until the bound expires. The
+cooldown survives reopen, duplicate callbacks do not extend it, and it remains distinct
+from the crash/protocol circuit breaker so throttling does not corrupt the proposer-quality
+estimate. Store and daemon controls cover sibling suppression and restart replay; this is
+cold controller work and does not touch a solve path.

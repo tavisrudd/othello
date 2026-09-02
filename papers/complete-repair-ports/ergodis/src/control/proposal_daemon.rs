@@ -683,23 +683,37 @@ impl ProposalDaemon {
                 .record_provider_failure(provider_id, key, request.failure, now_ms)
                 .map_err(invalid)?;
         }
-        let session = self.session_mut(&request.session_id)?;
-        let action = session
-            .store
-            .record_failure(
-                key,
-                ProposalFailureReport {
-                    attempt: request.attempt,
-                    failure: request.failure,
-                    retry_policy,
-                    observed_ms: now_ms,
-                    provider_retry_after_ms,
-                    jitter_word,
-                },
-                now_ms,
-            )
-            .map_err(invalid)?;
-        let view = view(key, &session.store)?;
+        let (action, view) = {
+            let session = self.session_mut(&request.session_id)?;
+            let action = session
+                .store
+                .record_failure(
+                    key,
+                    ProposalFailureReport {
+                        attempt: request.attempt,
+                        failure: request.failure,
+                        retry_policy,
+                        observed_ms: now_ms,
+                        provider_retry_after_ms,
+                        jitter_word,
+                    },
+                    now_ms,
+                )
+                .map_err(invalid)?;
+            let view = view(key, &session.store)?;
+            (action, view)
+        };
+        if new_failure && request.failure == ProposalFailureClass::ProviderRateLimit {
+            let not_before_ms = provider_retry_after_ms
+                .or(match action {
+                    RetryAction::RetryAt { not_before_ms } => Some(not_before_ms),
+                    _ => None,
+                })
+                .unwrap_or(add_deadline(now_ms, retry_policy.base_delay_ms)?);
+            self.rate_store
+                .defer_provider_until(provider_id, not_before_ms, now_ms)
+                .map_err(invalid)?;
+        }
         Ok(ProposalFailureAccepted {
             ticket_key: view.ticket_key,
             action,
@@ -1345,6 +1359,63 @@ mod tests {
                 .claim,
             ProposalTicketClaim::ProviderDeferred { .. }
         ));
+    }
+
+    #[test]
+    fn provider_retry_after_defers_sibling_ticket() {
+        let temporary = tempfile::tempdir().unwrap();
+        let mut daemon = ProposalDaemon::create(
+            &temporary.path().join("proposals"),
+            "run",
+            "nonce",
+            blake3::hash(b"source").to_hex().as_ref(),
+        )
+        .unwrap();
+        let opened = daemon.open_session(offer()).unwrap();
+        let first_request = submit(&opened.session_id);
+        stage_request(&daemon, &first_request, b"payload");
+        let first = daemon.submit(first_request).unwrap();
+        assert!(matches!(
+            daemon
+                .claim(ProposalTicketRequest {
+                    session_id: opened.session_id.clone(),
+                    ticket_key: first.ticket_key.clone(),
+                })
+                .unwrap()
+                .claim,
+            ProposalTicketClaim::Started { attempt: 0 }
+        ));
+        let failure = daemon
+            .report_failure(ProposalFailureRequest {
+                session_id: opened.session_id.clone(),
+                ticket_key: first.ticket_key,
+                attempt: 0,
+                failure: ProposalFailureClass::ProviderRateLimit,
+                provider_retry_after_ms: Some(500),
+            })
+            .unwrap();
+        let RetryAction::RetryAt { not_before_ms } = failure.action else {
+            panic!("provider throttle should schedule a bounded retry");
+        };
+
+        let mut sibling_request = submit(&opened.session_id);
+        sibling_request.request_id = 2;
+        sibling_request.canonical_payload_blake3 = blake3::hash(b"sibling").to_hex().to_string();
+        sibling_request.request_bytes = 7;
+        stage_request(&daemon, &sibling_request, b"sibling");
+        let sibling = daemon.submit(sibling_request).unwrap();
+        assert_eq!(
+            daemon
+                .claim(ProposalTicketRequest {
+                    session_id: opened.session_id,
+                    ticket_key: sibling.ticket_key,
+                })
+                .unwrap()
+                .claim,
+            ProposalTicketClaim::ProviderDeferred {
+                retry_at_ms: not_before_ms
+            }
+        );
     }
 
     #[test]
