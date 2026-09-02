@@ -4388,3 +4388,14 @@ Generalization, specialization, antichain replacement, no-failure, and
 capacity-rollback controls pass the full public gate.  This is an exact
 anti-cycling/search-space reduction on the replay corpus, not proof authority
 for any admitted theorem.
+
+Commit `66b9fc37a` adds conflict-driven feature synthesis.  Given one positive
+and one false-positive raw row, the DAG generates only exact or selected
+modular pairwise differences that evaluate to zero on the positive and
+nonzero on the conflict.  Input scopes and moduli remain runtime-selected;
+duplicate coordinates/moduli are canonicalized.  Candidate-count, row-width,
+input-index, and modulus bounds are checked before any node is added, so an
+over-large conflict surface leaves the DAG unchanged.  Exact replay confirms
+every emitted feature separates its inducing pair, and the preflight rollback
+control passes the full public gate.  This is the PIE/LoopInvGen-style targeted
+alternative to firing the quadratic difference expander globally.
