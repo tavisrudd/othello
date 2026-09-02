@@ -216,6 +216,15 @@ into a proof or pruning fact; promotion still requires its separately bound veri
 certificate artifact. Callers must bound serialized bytes before decoding untrusted
 storage.
 
+Presentation changes use the same rule. The implemented feature transition
+materializes every node of a bounded `FeatureDag` from an exact row-major source,
+hashes the source, canonical DAG snapshot, and derived target separately, and can
+replay every target cell independently. Its artifact also fixes
+`proof_authority: false`; it records an exact change of coordinates, not the truth
+of a candidate theorem. This gives counterexample-guided evolution a safe way to
+move to a richer presentation while preventing learned results from being silently
+reused against different source rows or feature semantics.
+
 ## Consequences
 
 ### Positive

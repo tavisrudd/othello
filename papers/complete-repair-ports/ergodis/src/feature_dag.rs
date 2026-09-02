@@ -9,6 +9,9 @@ use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
 pub const FEATURE_DAG_SNAPSHOT_VERSION: u16 = 1;
+pub const FEATURE_PRESENTATION_TRANSITION_VERSION: u16 = 1;
+pub const MAX_FEATURE_PRESENTATION_ROWS: usize = 4_096;
+pub const MAX_FEATURE_PRESENTATION_CELLS: usize = 1_048_576;
 
 #[repr(transparent)]
 #[derive(Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
@@ -86,6 +89,47 @@ pub struct FeatureDagSnapshot {
     pub input_count: u16,
     pub maximum_degree: u8,
     pub operations: Box<[FeatureOp]>,
+}
+
+/// Canonical identity of one bounded row-major integer presentation.
+#[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct FeaturePresentationBinding {
+    pub rows: u32,
+    pub columns: u32,
+    pub values_blake3: [u8; 32],
+}
+
+/// Independently replayable transition from source fields to all DAG nodes.
+///
+/// This artifact proves only that the deterministic feature computation was
+/// replayed exactly. It grants no theorem or pruning authority.
+#[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct FeaturePresentationTransition {
+    pub version: u16,
+    pub proof_authority: bool,
+    pub source: FeaturePresentationBinding,
+    pub feature_dag_blake3: [u8; 32],
+    pub target: FeaturePresentationBinding,
+}
+
+#[derive(Clone, Copy, Debug, Error, Eq, PartialEq)]
+pub enum FeaturePresentationTransitionError {
+    #[error("feature presentation bounds are invalid")]
+    Bounds,
+    #[error("feature presentation dimensions do not match its values")]
+    Shape,
+    #[error("feature presentation transition version is unsupported")]
+    Version,
+    #[error("feature presentation transition cannot carry proof authority")]
+    InvalidProofAuthority,
+    #[error("feature presentation transition binding does not match replay")]
+    Binding,
+    #[error("feature DAG snapshot could not be encoded canonically")]
+    Encoding,
+    #[error(transparent)]
+    Feature(#[from] FeatureDagError),
 }
 
 impl Default for RawFeatureExpansion<'static> {
@@ -875,6 +919,100 @@ impl FeatureDag {
         Ok(&workspace.values)
     }
 
+    /// Materialize the exact row-major values of every DAG node.
+    ///
+    /// This is a bounded cold-path operation for theorem evolution and replay;
+    /// it is not called by a solve worker.
+    pub fn derive_presentation_transition(
+        &self,
+        source: &[i64],
+        rows: usize,
+    ) -> Result<(Box<[i64]>, FeaturePresentationTransition), FeaturePresentationTransitionError>
+    {
+        let (source_cells, target_cells) = self.presentation_shapes(rows)?;
+        if source.len() != source_cells {
+            return Err(FeaturePresentationTransitionError::Shape);
+        }
+        let source_binding = presentation_binding(source, rows, self.input_count())?;
+        let mut target = Vec::with_capacity(target_cells);
+        let mut workspace = self.workspace();
+        for inputs in source.chunks_exact(self.input_count()) {
+            target.extend_from_slice(self.evaluate(inputs, &mut workspace)?);
+        }
+        let target = target.into_boxed_slice();
+        let transition = FeaturePresentationTransition {
+            version: FEATURE_PRESENTATION_TRANSITION_VERSION,
+            proof_authority: false,
+            source: source_binding,
+            feature_dag_blake3: self.presentation_digest()?,
+            target: presentation_binding(&target, rows, self.len())?,
+        };
+        Ok((target, transition))
+    }
+
+    /// Replay and verify a previously materialized presentation transition.
+    pub fn verify_presentation_transition(
+        &self,
+        source: &[i64],
+        target: &[i64],
+        transition: &FeaturePresentationTransition,
+    ) -> Result<(), FeaturePresentationTransitionError> {
+        if transition.version != FEATURE_PRESENTATION_TRANSITION_VERSION {
+            return Err(FeaturePresentationTransitionError::Version);
+        }
+        if transition.proof_authority {
+            return Err(FeaturePresentationTransitionError::InvalidProofAuthority);
+        }
+        let rows = transition.source.rows as usize;
+        let (source_cells, target_cells) = self.presentation_shapes(rows)?;
+        if source.len() != source_cells || target.len() != target_cells {
+            return Err(FeaturePresentationTransitionError::Shape);
+        }
+        if transition.source != presentation_binding(source, rows, self.input_count())?
+            || transition.target != presentation_binding(target, rows, self.len())?
+            || transition.feature_dag_blake3 != self.presentation_digest()?
+        {
+            return Err(FeaturePresentationTransitionError::Binding);
+        }
+        let mut workspace = self.workspace();
+        for (inputs, expected) in source
+            .chunks_exact(self.input_count())
+            .zip(target.chunks_exact(self.len()))
+        {
+            if self.evaluate(inputs, &mut workspace)? != expected {
+                return Err(FeaturePresentationTransitionError::Binding);
+            }
+        }
+        Ok(())
+    }
+
+    fn presentation_shapes(
+        &self,
+        rows: usize,
+    ) -> Result<(usize, usize), FeaturePresentationTransitionError> {
+        if rows == 0 || rows > MAX_FEATURE_PRESENTATION_ROWS || self.is_empty() {
+            return Err(FeaturePresentationTransitionError::Bounds);
+        }
+        let source_cells = rows
+            .checked_mul(self.input_count())
+            .ok_or(FeaturePresentationTransitionError::Bounds)?;
+        let target_cells = rows
+            .checked_mul(self.len())
+            .ok_or(FeaturePresentationTransitionError::Bounds)?;
+        if source_cells > MAX_FEATURE_PRESENTATION_CELLS
+            || target_cells > MAX_FEATURE_PRESENTATION_CELLS
+        {
+            return Err(FeaturePresentationTransitionError::Bounds);
+        }
+        Ok((source_cells, target_cells))
+    }
+
+    fn presentation_digest(&self) -> Result<[u8; 32], FeaturePresentationTransitionError> {
+        let bytes = serde_json::to_vec(&self.snapshot())
+            .map_err(|_| FeaturePresentationTransitionError::Encoding)?;
+        Ok(*blake3::hash(&bytes).as_bytes())
+    }
+
     fn require(&self, id: FeatureId) -> Result<FeatureNode, FeatureDagError> {
         self.node(id).copied().ok_or(FeatureDagError::UnknownNode)
     }
@@ -1011,6 +1149,27 @@ fn norm(left: i64, right: i64, eisenstein: bool) -> Result<i64, FeatureDagError>
     partial
         .and_then(|value| value.checked_add(right_square))
         .ok_or(FeatureDagError::ArithmeticOverflow)
+}
+
+fn presentation_binding(
+    values: &[i64],
+    rows: usize,
+    columns: usize,
+) -> Result<FeaturePresentationBinding, FeaturePresentationTransitionError> {
+    let rows = u32::try_from(rows).map_err(|_| FeaturePresentationTransitionError::Bounds)?;
+    let columns = u32::try_from(columns).map_err(|_| FeaturePresentationTransitionError::Bounds)?;
+    let mut hasher = blake3::Hasher::new();
+    hasher.update(b"ergodis-feature-presentation-v1\0");
+    hasher.update(&rows.to_le_bytes());
+    hasher.update(&columns.to_le_bytes());
+    for value in values {
+        hasher.update(&value.to_le_bytes());
+    }
+    Ok(FeaturePresentationBinding {
+        rows,
+        columns,
+        values_blake3: *hasher.finalize().as_bytes(),
+    })
 }
 
 #[cfg(test)]
@@ -1377,5 +1536,50 @@ mod tests {
             }
         });
         assert_eq!(events, crate::test_alloc::AllocationEvents::default());
+    }
+
+    #[test]
+    fn presentation_transition_round_trips_and_rejects_forgery() {
+        let mut dag = FeatureDag::new(2, 1, 8).unwrap();
+        let left = dag.input(0).unwrap();
+        let right = dag.input(1).unwrap();
+        dag.add(left, right).unwrap();
+        dag.sub(left, right).unwrap();
+        let source = [2, 3, -1, 4];
+
+        let (target, transition) = dag.derive_presentation_transition(&source, 2).unwrap();
+        assert_eq!(&*target, &[2, 3, 5, -1, -1, 4, 3, -5]);
+        dag.verify_presentation_transition(&source, &target, &transition)
+            .unwrap();
+        let encoded = serde_json::to_vec(&transition).unwrap();
+        let decoded: FeaturePresentationTransition = serde_json::from_slice(&encoded).unwrap();
+        assert_eq!(decoded, transition);
+
+        let mut forged_target = target.clone();
+        forged_target[7] = -4;
+        assert_eq!(
+            dag.verify_presentation_transition(&source, &forged_target, &transition),
+            Err(FeaturePresentationTransitionError::Binding)
+        );
+        let mut forged_authority = transition;
+        forged_authority.proof_authority = true;
+        assert_eq!(
+            dag.verify_presentation_transition(&source, &target, &forged_authority),
+            Err(FeaturePresentationTransitionError::InvalidProofAuthority)
+        );
+    }
+
+    #[test]
+    fn presentation_transition_enforces_cold_resource_bounds() {
+        let mut dag = FeatureDag::new(1, 1, 1).unwrap();
+        dag.input(0).unwrap();
+        assert_eq!(
+            dag.derive_presentation_transition(&[], 0),
+            Err(FeaturePresentationTransitionError::Bounds)
+        );
+        assert_eq!(
+            dag.derive_presentation_transition(&[], MAX_FEATURE_PRESENTATION_ROWS + 1),
+            Err(FeaturePresentationTransitionError::Bounds)
+        );
     }
 }

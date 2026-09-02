@@ -2590,9 +2590,10 @@ files are disposable and may be deleted at any time.
    does not touch solver loops.  Full all-target/all-feature tests, strict
    clippy, and doc tests pass; compact evidence is
    `ergodis-private/evidence/c985-relational-evolution-report.json`.
-   Provenance-bound presentation transitions, persistent promoted feature
-   DAGs, and typed set/subset-sum theorem templates remain separate authority
-   gates rather than being inferred from this scalar relational result.
+   Persistent promoted feature DAGs and typed set/subset-sum theorem templates
+   remain separate authority gates rather than being inferred from this scalar
+   relational result. The provenance-bound transition substrate is implemented
+   below.
 
    A disposable C1016-shaped side prototype tested zero-sized validated
    theorem-program witnesses without changing live C1016 source. The
@@ -4841,3 +4842,14 @@ The frontier is capped at 4,096 points so the cold pairwise canonicality audit h
 CPU and memory cost. Identical candidate submissions are idempotent; reusing an identity
 with different cost or semantics fails closed. This lands the semantic half of the ADR's
 split persistence model; proof promotion and performance priors remain separate stores.
+
+The provenance-bound presentation transition now closes the corresponding C1016-ledger
+substrate without importing campaign vocabulary. From a bounded row-major integer source,
+a `FeatureDag` materializes every node with one reused workspace and emits separate content
+bindings for source values, the canonical DAG snapshot, and derived target values. Replay
+re-evaluates every target cell and rejects altered data, DAGs, dimensions, versions, or a
+forged authority bit. Both rows (4,096) and aggregate source/target cells (1,048,576) have
+hard cold-path caps. This permits a counterexample-guided controller to change coordinates
+and then key its diagnostic archive to the resulting presentation exactly; the transition
+proves the computation of the new coordinates, never the candidate theorem that motivated
+them. No solve path, worker state, or hot evaluator changed.
