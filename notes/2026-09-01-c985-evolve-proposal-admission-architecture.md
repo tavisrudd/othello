@@ -388,6 +388,20 @@ idempotent ticket-ledger lookup, provider adapters, and asynchronous result deli
 remain the integration boundary. Search workers and existing socket operations
 are unchanged.
 
+The next quota layer is also implemented as a bounded, snapshot-replayable
+`ProposalSession`. It retains every logical query identity after completion or
+cancellation, so neither reconnect nor retry refunds the declared work/return
+reservation. The ledger enforces permitted authority roles, absolute session
+expiry, total queries, concurrent outstanding queries, total work, total
+returned-byte reservations, and distinct proposal revisions. Reusing the same
+identity or proposal digest is idempotent only when its role and declared
+resource envelope are identical. Restore reconstructs query counts, outstanding
+count, and charged totals instead of trusting serialized summaries. This state
+is not yet published durably or attached to the daemon; the next transaction
+boundary is session-reservation persistence followed by ticket creation, with
+reconciliation for the safe fail-closed case where a crash lands only the
+reservation.
+
 The next generic slice now implements the in-memory/persistable ticket state
 machine without adding wire operations. Its fixed ticket identity makes submit
 create-or-return-existing and rejects a conflicting normalized spec. Explicit

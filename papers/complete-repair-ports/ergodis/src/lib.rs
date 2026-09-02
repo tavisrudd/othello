@@ -3,6 +3,10 @@
 //! The crate is organized around compact state representations and replayable
 //! arena witnesses.  It intentionally does not mirror the Python module tree.
 
+// `is_multiple_of` is newer than the crate's Rust 1.87 MSRV. Keep the
+// equivalent remainder form until the MSRV advances.
+#![allow(clippy::manual_is_multiple_of)]
+
 pub mod alignment;
 pub mod applications;
 mod arena;

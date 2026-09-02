@@ -2635,6 +2635,16 @@ files are disposable and may be deleted at any time.
     reported as ordinary throttling, and rational score comparison uses checked
     cross products. This remains a feature-gated controller primitive; daemon
     ticket persistence and asynchronous provider adapters are the next layer.
+    A bounded session-quota ledger now closes the retry/reconnect accounting
+    gap before socket exposure: it binds every query identity to its role,
+    declared work, and maximum returned bytes; charges completed and cancelled
+    queries permanently; caps concurrent tickets and distinct proposal
+    revisions; rejects role, expiry, budget, and reversed-clock violations; and
+    recomputes every redundant counter during strict snapshot restore. Exact
+    duplicate queries and revisions are idempotent, while identity reuse with
+    changed work fails closed. Full all-target/all-feature tests and strict
+    clippy pass. The immediate next slice is durable per-session publication,
+    then atomic composition of a session reservation with ticket creation.
 
     The first new proposer family is accepted. A coloured-Tanner isomorphism
     proposal between the official LP1768 X/Z instances is independently
