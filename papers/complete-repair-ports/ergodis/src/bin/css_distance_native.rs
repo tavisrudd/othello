@@ -36,6 +36,17 @@ struct Args {
     /// Deterministically select an equivalent independent-check presentation.
     #[arg(long, conflicts_with = "compiled_in")]
     check_presentation_seed: Option<u64>,
+    /// Probe this many deterministic presentation seeds plus the default.
+    #[arg(
+        long,
+        default_value_t = 0,
+        value_parser = clap::value_parser!(u16).range(0..=64),
+        conflicts_with_all = ["compiled_in", "check_presentation_seed"]
+    )]
+    check_presentation_probes: u16,
+    /// Exact radius used only to score check-presentation probes.
+    #[arg(long, requires = "check_presentation_probes")]
+    check_presentation_probe_weight: Option<u16>,
     #[arg(long, default_value_t = 1)]
     rounds: u16,
     /// Static anchor-search worker count (requires the `parallel` feature above one).
@@ -89,6 +100,7 @@ struct RunRecord<'a> {
     mode: &'static str,
     preparation_mode: &'static str,
     check_presentation_seed: Option<u64>,
+    check_presentation_probe: Option<&'a CheckPresentationProbeRecord>,
     preparation_seconds: f64,
     artifact_write_seconds: Option<f64>,
     artifact_payload_blake3: Option<String>,
@@ -102,6 +114,22 @@ struct RunRecord<'a> {
     search_seconds: &'a [f64],
     round_stats: &'a [ergodis::ConnectedSearchStats],
     result: &'a ergodis::BoundedCssDistanceResult,
+}
+
+#[derive(Debug, Serialize)]
+struct CheckPresentationProbeRecord {
+    maximum_weight: u16,
+    selected_seed: Option<u64>,
+    candidates: Vec<CheckPresentationProbeCandidate>,
+}
+
+#[derive(Debug, Serialize)]
+struct CheckPresentationProbeCandidate {
+    seed: Option<u64>,
+    candidates: u64,
+    searched_maximum_weight: u16,
+    distance: Option<u16>,
+    search_seconds: f64,
 }
 
 #[derive(Debug, Serialize)]
@@ -161,6 +189,15 @@ enum Backend {
     Colossal(CompiledColossalCssDistance),
 }
 
+#[derive(Clone, Copy)]
+struct BackendShape {
+    wide: bool,
+    extra_wide: bool,
+    large: bool,
+    huge: bool,
+    colossal: bool,
+}
+
 impl Backend {
     fn check_presentation_seed(&self) -> Option<u64> {
         match self {
@@ -175,6 +212,205 @@ impl Backend {
             Self::Colossal(compiled) => compiled.check_presentation_seed(),
         }
     }
+
+    fn autotuned_preparation_mode(&self) -> &'static str {
+        match self {
+            Self::Compact(_) => "compile",
+            Self::Wide(_) => "wide-presentation-autotune",
+            Self::ExtraWide(_) => "extra-wide-presentation-autotune",
+            #[cfg(feature = "large-css")]
+            Self::Large(_) => "large-presentation-autotune",
+            #[cfg(feature = "large-css")]
+            Self::Huge(_) => "huge-presentation-autotune",
+            #[cfg(feature = "large-css")]
+            Self::Colossal(_) => "colossal-presentation-autotune",
+        }
+    }
+
+    #[cfg(feature = "parallel")]
+    fn search_presentation_probe_parallel(
+        &self,
+        pool: &rayon::ThreadPool,
+        anchors: &[u16],
+        maximum_weight: u16,
+        pulse_interval: u64,
+    ) -> Result<ergodis::BoundedCssDistanceResult> {
+        pool.install(|| match self {
+            Self::Compact(_) => bail!("presentation probes require a wide backend"),
+            Self::Wide(compiled) => Ok(compiled.search_bounded_syndrome_parallel_pulsed(
+                anchors,
+                maximum_weight,
+                pulse_interval,
+            )?),
+            Self::ExtraWide(compiled) => Ok(compiled.search_bounded_syndrome_parallel_pulsed(
+                anchors,
+                maximum_weight,
+                pulse_interval,
+            )?),
+            #[cfg(feature = "large-css")]
+            Self::Large(compiled) => Ok(compiled.search_bounded_syndrome_parallel_pulsed(
+                anchors,
+                maximum_weight,
+                pulse_interval,
+            )?),
+            #[cfg(feature = "large-css")]
+            Self::Huge(compiled) => Ok(compiled.search_bounded_syndrome_parallel_pulsed(
+                anchors,
+                maximum_weight,
+                pulse_interval,
+            )?),
+            #[cfg(feature = "large-css")]
+            Self::Colossal(compiled) => Ok(compiled.search_bounded_syndrome_parallel_pulsed(
+                anchors,
+                maximum_weight,
+                pulse_interval,
+            )?),
+        })
+    }
+
+    #[cfg(not(feature = "parallel"))]
+    fn search_presentation_probe_serial(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+    ) -> Result<ergodis::BoundedCssDistanceResult> {
+        match self {
+            Self::Compact(_) => bail!("presentation probes require a wide backend"),
+            Self::Wide(compiled) => {
+                Ok(compiled.search_bounded_syndrome_driven(anchors, maximum_weight)?)
+            }
+            Self::ExtraWide(compiled) => {
+                Ok(compiled.search_bounded_syndrome_driven(anchors, maximum_weight)?)
+            }
+            #[cfg(feature = "large-css")]
+            Self::Large(compiled) => {
+                Ok(compiled.search_bounded_syndrome_driven(anchors, maximum_weight)?)
+            }
+            #[cfg(feature = "large-css")]
+            Self::Huge(compiled) => {
+                Ok(compiled.search_bounded_syndrome_driven(anchors, maximum_weight)?)
+            }
+            #[cfg(feature = "large-css")]
+            Self::Colossal(compiled) => {
+                Ok(compiled.search_bounded_syndrome_driven(anchors, maximum_weight)?)
+            }
+        }
+    }
+}
+
+fn compile_backend(
+    physical: &Matrix,
+    logical: &Matrix,
+    shape: BackendShape,
+    check_presentation_seed: Option<u64>,
+) -> Result<(Backend, &'static str)> {
+    if shape.colossal {
+        #[cfg(feature = "large-css")]
+        {
+            return if let Some(seed) = check_presentation_seed {
+                Ok((
+                    Backend::Colossal(
+                        CompiledColossalCssDistance::compile_with_check_presentation_seed(
+                            physical, logical, seed,
+                        )?,
+                    ),
+                    "colossal-seeded-compile",
+                ))
+            } else {
+                Ok((
+                    Backend::Colossal(CompiledColossalCssDistance::compile(physical, logical)?),
+                    "colossal-compile",
+                ))
+            };
+        }
+        #[cfg(not(feature = "large-css"))]
+        bail!("colossal CSS instances require --features large-css");
+    }
+    if shape.huge {
+        #[cfg(feature = "large-css")]
+        {
+            return if let Some(seed) = check_presentation_seed {
+                Ok((
+                    Backend::Huge(
+                        CompiledHugeCssDistance::compile_with_check_presentation_seed(
+                            physical, logical, seed,
+                        )?,
+                    ),
+                    "huge-seeded-compile",
+                ))
+            } else {
+                Ok((
+                    Backend::Huge(CompiledHugeCssDistance::compile(physical, logical)?),
+                    "huge-compile",
+                ))
+            };
+        }
+        #[cfg(not(feature = "large-css"))]
+        bail!("huge CSS instances require --features large-css");
+    }
+    if shape.large {
+        #[cfg(feature = "large-css")]
+        {
+            return if let Some(seed) = check_presentation_seed {
+                Ok((
+                    Backend::Large(
+                        CompiledLargeCssDistance::compile_with_check_presentation_seed(
+                            physical, logical, seed,
+                        )?,
+                    ),
+                    "large-seeded-compile",
+                ))
+            } else {
+                Ok((
+                    Backend::Large(CompiledLargeCssDistance::compile(physical, logical)?),
+                    "large-compile",
+                ))
+            };
+        }
+        #[cfg(not(feature = "large-css"))]
+        bail!("instances above 384 coordinates or rank 192 require --features large-css");
+    }
+    if shape.extra_wide {
+        return if let Some(seed) = check_presentation_seed {
+            Ok((
+                Backend::ExtraWide(
+                    CompiledExtraWideCssDistance::compile_with_check_presentation_seed(
+                        physical, logical, seed,
+                    )?,
+                ),
+                "extra-wide-seeded-compile",
+            ))
+        } else {
+            Ok((
+                Backend::ExtraWide(CompiledExtraWideCssDistance::compile(physical, logical)?),
+                "extra-wide-compile",
+            ))
+        };
+    }
+    if shape.wide {
+        return if let Some(seed) = check_presentation_seed {
+            Ok((
+                Backend::Wide(
+                    CompiledWideCssDistance::compile_with_check_presentation_seed(
+                        physical, logical, seed,
+                    )?,
+                ),
+                "wide-seeded-compile",
+            ))
+        } else {
+            Ok((
+                Backend::Wide(CompiledWideCssDistance::compile(physical, logical)?),
+                "wide-compile",
+            ))
+        };
+    }
+    if check_presentation_seed.is_some() {
+        bail!("check presentation seeds require a syndrome-driven wide backend");
+    }
+    Ok((
+        Backend::Compact(CompiledCssDistance::compile(physical, logical)?),
+        "compile",
+    ))
 }
 
 fn search_kernel(wide: bool) -> &'static str {
@@ -206,6 +442,55 @@ fn pin_current_thread(cpu: usize) -> bool {
             std::ptr::addr_of!(set),
         ) == 0
     }
+}
+
+#[cfg(feature = "parallel")]
+fn build_thread_pool(args: &Args) -> Result<rayon::ThreadPool> {
+    if !args.worker_cpus.is_empty() && args.worker_cpus.len() != args.threads {
+        bail!(
+            "worker CPU count {} does not match thread count {}",
+            args.worker_cpus.len(),
+            args.threads
+        );
+    }
+    #[cfg(not(target_os = "linux"))]
+    if !args.worker_cpus.is_empty() {
+        bail!("worker CPU affinity is currently supported only on Linux");
+    }
+    let mut builder = rayon::ThreadPoolBuilder::new().num_threads(args.threads);
+    #[cfg(target_os = "linux")]
+    let affinity_failed = Arc::new(AtomicBool::new(false));
+    #[cfg(target_os = "linux")]
+    if !args.worker_cpus.is_empty() {
+        if args
+            .worker_cpus
+            .iter()
+            .any(|&cpu| cpu >= libc::CPU_SETSIZE as usize)
+        {
+            bail!("worker CPU ID exceeds the Linux cpu_set_t capacity");
+        }
+        let mut unique_cpus = args.worker_cpus.clone();
+        unique_cpus.sort_unstable();
+        if unique_cpus.windows(2).any(|pair| pair[0] == pair[1]) {
+            bail!("worker CPU IDs must be unique");
+        }
+        let worker_cpus = Arc::new(args.worker_cpus.clone());
+        let failed = Arc::clone(&affinity_failed);
+        builder = builder.start_handler(move |worker| {
+            if !pin_current_thread(worker_cpus[worker]) {
+                failed.store(true, Ordering::Relaxed);
+            }
+        });
+    }
+    let pool = builder.build()?;
+    #[cfg(target_os = "linux")]
+    if !args.worker_cpus.is_empty() {
+        pool.broadcast(|_| ());
+        if affinity_failed.load(Ordering::Relaxed) {
+            bail!("failed to pin one or more Rayon workers");
+        }
+    }
+    Ok(pool)
 }
 
 fn dense_matrix(rows: &[Vec<u16>], columns: usize) -> Result<Matrix> {
@@ -296,6 +581,9 @@ fn main() -> Result<()> {
         serde_json::from_reader(BufReader::new(file)).context("parsing sparse CSS problem")?;
     let columns = usize::from(problem.coordinate_count);
     let maximum_weight = args.maximum_weight.unwrap_or(problem.maximum_weight);
+    if maximum_weight == 0 {
+        bail!("maximum weight must be positive");
+    }
     let physical = dense_matrix(&problem.physical_checks, columns)?;
     let logical = dense_matrix(&problem.logical_observations, columns)?;
     let anchor_certificate = if problem.coordinate_generators.is_empty() {
@@ -329,11 +617,51 @@ fn main() -> Result<()> {
     let large_problem =
         !colossal_problem && !huge_problem && (columns > 384 || physical_rank > 192);
     let extra_wide_problem = !large_problem && columns > 320;
+    let backend_shape = BackendShape {
+        wide: wide_problem,
+        extra_wide: extra_wide_problem,
+        large: large_problem,
+        huge: huge_problem,
+        colossal: colossal_problem,
+    };
     if args.check_presentation_seed.is_some() && !wide_problem {
         bail!("--check-presentation-seed requires a syndrome-driven wide backend");
     }
+    if args.check_presentation_probes > 0 && !wide_problem {
+        bail!("--check-presentation-probes requires a syndrome-driven wide backend");
+    }
+    if args.check_presentation_probes > 0 && search_shard.is_some() {
+        bail!("autotune a presentation artifact before launching deterministic shards");
+    }
+    if args.check_presentation_probes == 0 && args.check_presentation_probe_weight.is_some() {
+        bail!("--check-presentation-probe-weight requires positive presentation probes");
+    }
+    if args
+        .check_presentation_probe_weight
+        .is_some_and(|weight| weight == 0 || weight > maximum_weight)
+    {
+        bail!("check-presentation probe weight must lie within the requested search radius");
+    }
+    if args.check_presentation_probes > 0
+        && args.maximum_weight.is_none()
+        && !problem.incumbent_support.is_empty()
+    {
+        bail!("check-presentation probes cannot be combined with incumbent certification");
+    }
+    if args.rounds == 0 {
+        bail!("round count must be positive");
+    }
+    if args.threads == 0 {
+        bail!("thread count must be positive");
+    }
+    #[cfg(not(feature = "parallel"))]
+    if args.threads != 1 {
+        bail!("thread counts above one require the `parallel` feature");
+    }
+    #[cfg(feature = "parallel")]
+    let thread_pool = build_thread_pool(&args)?;
     let preparation_start = Instant::now();
-    let (compiled, preparation_mode) = if let Some(path) = &args.compiled_in {
+    let (mut compiled, mut preparation_mode) = if let Some(path) = &args.compiled_in {
         let file = File::open(path)
             .with_context(|| format!("opening compiled artifact {}", path.display()))?;
         if colossal_problem {
@@ -412,113 +740,82 @@ fn main() -> Result<()> {
                 "artifact-load",
             )
         }
-    } else if colossal_problem {
-        #[cfg(feature = "large-css")]
-        {
-            if let Some(seed) = args.check_presentation_seed {
-                (
-                    Backend::Colossal(
-                        CompiledColossalCssDistance::compile_with_check_presentation_seed(
-                            &physical, &logical, seed,
-                        )?,
-                    ),
-                    "colossal-seeded-compile",
-                )
-            } else {
-                (
-                    Backend::Colossal(CompiledColossalCssDistance::compile(&physical, &logical)?),
-                    "colossal-compile",
-                )
-            }
-        }
-        #[cfg(not(feature = "large-css"))]
-        {
-            bail!("colossal CSS instances require --features large-css")
-        }
-    } else if huge_problem {
-        #[cfg(feature = "large-css")]
-        {
-            if let Some(seed) = args.check_presentation_seed {
-                (
-                    Backend::Huge(
-                        CompiledHugeCssDistance::compile_with_check_presentation_seed(
-                            &physical, &logical, seed,
-                        )?,
-                    ),
-                    "huge-seeded-compile",
-                )
-            } else {
-                (
-                    Backend::Huge(CompiledHugeCssDistance::compile(&physical, &logical)?),
-                    "huge-compile",
-                )
-            }
-        }
-        #[cfg(not(feature = "large-css"))]
-        {
-            bail!("huge CSS instances require --features large-css")
-        }
-    } else if large_problem {
-        #[cfg(feature = "large-css")]
-        {
-            if let Some(seed) = args.check_presentation_seed {
-                (
-                    Backend::Large(
-                        CompiledLargeCssDistance::compile_with_check_presentation_seed(
-                            &physical, &logical, seed,
-                        )?,
-                    ),
-                    "large-seeded-compile",
-                )
-            } else {
-                (
-                    Backend::Large(CompiledLargeCssDistance::compile(&physical, &logical)?),
-                    "large-compile",
-                )
-            }
-        }
-        #[cfg(not(feature = "large-css"))]
-        {
-            bail!("instances above 384 coordinates or rank 192 require --features large-css")
-        }
-    } else if extra_wide_problem {
-        if let Some(seed) = args.check_presentation_seed {
-            (
-                Backend::ExtraWide(
-                    CompiledExtraWideCssDistance::compile_with_check_presentation_seed(
-                        &physical, &logical, seed,
-                    )?,
-                ),
-                "extra-wide-seeded-compile",
-            )
-        } else {
-            (
-                Backend::ExtraWide(CompiledExtraWideCssDistance::compile(&physical, &logical)?),
-                "extra-wide-compile",
-            )
-        }
-    } else if wide_problem {
-        if let Some(seed) = args.check_presentation_seed {
-            (
-                Backend::Wide(
-                    CompiledWideCssDistance::compile_with_check_presentation_seed(
-                        &physical, &logical, seed,
-                    )?,
-                ),
-                "wide-seeded-compile",
-            )
-        } else {
-            (
-                Backend::Wide(CompiledWideCssDistance::compile(&physical, &logical)?),
-                "wide-compile",
-            )
-        }
     } else {
-        (
-            Backend::Compact(CompiledCssDistance::compile(&physical, &logical)?),
-            "compile",
-        )
+        compile_backend(
+            &physical,
+            &logical,
+            backend_shape,
+            args.check_presentation_seed,
+        )?
     };
+    let mut check_presentation_probe = None;
+    if args.check_presentation_probes > 0 {
+        let probe_weight = args
+            .check_presentation_probe_weight
+            .unwrap_or(maximum_weight.clamp(1, 15));
+        let mut candidates = Vec::with_capacity(usize::from(args.check_presentation_probes) + 1);
+        let search_start = Instant::now();
+        #[cfg(feature = "parallel")]
+        let baseline_result = compiled.search_presentation_probe_parallel(
+            &thread_pool,
+            &problem.anchors,
+            probe_weight,
+            args.pulse_interval,
+        )?;
+        #[cfg(not(feature = "parallel"))]
+        let baseline_result =
+            compiled.search_presentation_probe_serial(&problem.anchors, probe_weight)?;
+        let baseline_seconds = search_start.elapsed().as_secs_f64();
+        let reference_distance = baseline_result.distance;
+        let reference_searched_maximum = baseline_result.searched_maximum_weight;
+        let mut best_candidates = baseline_result.stats.candidates;
+        candidates.push(CheckPresentationProbeCandidate {
+            seed: None,
+            candidates: best_candidates,
+            searched_maximum_weight: reference_searched_maximum,
+            distance: reference_distance,
+            search_seconds: baseline_seconds,
+        });
+
+        for seed in 0..u64::from(args.check_presentation_probes) {
+            let (candidate, _) = compile_backend(&physical, &logical, backend_shape, Some(seed))?;
+            let search_start = Instant::now();
+            #[cfg(feature = "parallel")]
+            let result = candidate.search_presentation_probe_parallel(
+                &thread_pool,
+                &problem.anchors,
+                probe_weight,
+                args.pulse_interval,
+            )?;
+            #[cfg(not(feature = "parallel"))]
+            let result =
+                candidate.search_presentation_probe_serial(&problem.anchors, probe_weight)?;
+            let search_seconds = search_start.elapsed().as_secs_f64();
+            if result.distance != reference_distance
+                || result.searched_maximum_weight != reference_searched_maximum
+            {
+                bail!("equivalent check presentations returned incompatible exact probe results");
+            }
+            let candidate_count = result.stats.candidates;
+            candidates.push(CheckPresentationProbeCandidate {
+                seed: Some(seed),
+                candidates: candidate_count,
+                searched_maximum_weight: result.searched_maximum_weight,
+                distance: result.distance,
+                search_seconds,
+            });
+            if candidate_count < best_candidates {
+                best_candidates = candidate_count;
+                compiled = candidate;
+            }
+        }
+        preparation_mode = compiled.autotuned_preparation_mode();
+        check_presentation_probe = Some(CheckPresentationProbeRecord {
+            maximum_weight: probe_weight,
+            selected_seed: compiled.check_presentation_seed(),
+            candidates,
+        });
+    }
     let preparation_seconds = preparation_start.elapsed().as_secs_f64();
     let artifact_write_seconds = if let Some(path) = &args.compiled_out {
         let start = Instant::now();
@@ -597,64 +894,6 @@ fn main() -> Result<()> {
     };
     #[cfg(not(feature = "parallel"))]
     let shard_frontiers: Option<Vec<ShardFrontierRecord>> = None;
-    if args.rounds == 0 {
-        bail!("round count must be positive");
-    }
-    if args.threads == 0 {
-        bail!("thread count must be positive");
-    }
-    #[cfg(not(feature = "parallel"))]
-    if args.threads != 1 {
-        bail!("thread counts above one require the `parallel` feature");
-    }
-    #[cfg(feature = "parallel")]
-    let thread_pool = {
-        if !args.worker_cpus.is_empty() && args.worker_cpus.len() != args.threads {
-            bail!(
-                "worker CPU count {} does not match thread count {}",
-                args.worker_cpus.len(),
-                args.threads
-            );
-        }
-        #[cfg(not(target_os = "linux"))]
-        if !args.worker_cpus.is_empty() {
-            bail!("worker CPU affinity is currently supported only on Linux");
-        }
-        let mut builder = rayon::ThreadPoolBuilder::new().num_threads(args.threads);
-        #[cfg(target_os = "linux")]
-        let affinity_failed = Arc::new(AtomicBool::new(false));
-        #[cfg(target_os = "linux")]
-        if !args.worker_cpus.is_empty() {
-            if args
-                .worker_cpus
-                .iter()
-                .any(|&cpu| cpu >= libc::CPU_SETSIZE as usize)
-            {
-                bail!("worker CPU ID exceeds the Linux cpu_set_t capacity");
-            }
-            let mut unique_cpus = args.worker_cpus.clone();
-            unique_cpus.sort_unstable();
-            if unique_cpus.windows(2).any(|pair| pair[0] == pair[1]) {
-                bail!("worker CPU IDs must be unique");
-            }
-            let worker_cpus = Arc::new(args.worker_cpus.clone());
-            let failed = Arc::clone(&affinity_failed);
-            builder = builder.start_handler(move |worker| {
-                if !pin_current_thread(worker_cpus[worker]) {
-                    failed.store(true, Ordering::Relaxed);
-                }
-            });
-        }
-        let pool = builder.build()?;
-        #[cfg(target_os = "linux")]
-        if !args.worker_cpus.is_empty() {
-            pool.broadcast(|_| ());
-            if affinity_failed.load(Ordering::Relaxed) {
-                bail!("failed to pin one or more Rayon workers");
-            }
-        }
-        pool
-    };
     let certify_incumbent = args.maximum_weight.is_none() && !problem.incumbent_support.is_empty();
     if certify_incumbent && search_shard.is_some() {
         bail!("search shards cannot be combined with incumbent certification");
@@ -922,6 +1161,7 @@ fn main() -> Result<()> {
         mode,
         preparation_mode,
         check_presentation_seed: compiled.check_presentation_seed(),
+        check_presentation_probe: check_presentation_probe.as_ref(),
         preparation_seconds,
         artifact_write_seconds,
         artifact_payload_blake3,

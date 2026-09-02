@@ -229,6 +229,15 @@ default presentation byte-for-byte. Current wide artifacts include the
 optional seed; readers continue to accept the immediately preceding formats
 (and the older large-width migration format).
 
+For searches long enough to amortize compilation, `--check-presentation-probes
+N` tests the default plus seeds `0..N-1` at an exact shallow radius and retains
+the presentation visiting the fewest candidates. The default probe radius is
+`min(15, maximum_weight)` and `--check-presentation-probe-weight` can lower it.
+Selection is deterministic and the evidence contains every candidate count;
+elapsed probe times are diagnostic only. Use `--compiled-out` once, then
+`--compiled-in` for every long shard. Autotuning is intentionally rejected
+inside a shard invocation, and short solves should omit it.
+
 Coordinate symmetry discovery is optional and remains outside the solver.
 `css_automorphism_adapter` can invoke a `dreadnaut` executable on the sparse
 physical Tanner graph, or consume the same bounded backend-neutral proposal
