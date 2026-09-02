@@ -37,6 +37,32 @@ pub struct BoundedSubsetSumPlan {
     maximum_sum: i64,
     width: usize,
     bitmap_words: usize,
+    windows: Box<[SubsetSumWindow]>,
+    transition_bound: u64,
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+struct SubsetSumWindow {
+    start: u32,
+    end: u32,
+}
+
+const _: () = assert!(std::mem::size_of::<SubsetSumWindow>() == 8);
+const _: () = assert!(std::mem::align_of::<SubsetSumWindow>() == 4);
+
+impl SubsetSumWindow {
+    fn range(self) -> std::ops::Range<usize> {
+        self.start as usize..self.end as usize
+    }
+
+    fn contains(self, index: usize) -> bool {
+        self.start as usize <= index && index < self.end as usize
+    }
+
+    fn len(self) -> usize {
+        (self.end - self.start) as usize
+    }
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -114,10 +140,16 @@ impl BoundedSubsetSumPlan {
         let reachability_words = bitmap_words
             .checked_mul(weights.len() + 1)
             .ok_or(BoundedSubsetSumError::WorkLimit)?;
-        let transitions = u64::try_from(width)
-            .ok()
-            .and_then(|width| width.checked_mul(weights.len() as u64))
-            .ok_or(BoundedSubsetSumError::WorkLimit)?;
+        let windows = continuation_windows(weights, target, minimum_sum, maximum_sum)?;
+        let transitions = windows[..weights.len()]
+            .iter()
+            .try_fold(0_u64, |total, window| {
+                u64::try_from(window.len())
+                    .ok()
+                    .and_then(|width| width.checked_mul(2))
+                    .and_then(|width| total.checked_add(width))
+                    .ok_or(BoundedSubsetSumError::WorkLimit)
+            })?;
         if reachability_words > bounds.maximum_reachability_words
             || transitions > bounds.maximum_transitions
         {
@@ -130,6 +162,8 @@ impl BoundedSubsetSumPlan {
             maximum_sum,
             width,
             bitmap_words,
+            windows,
+            transition_bound: transitions,
         })
     }
 
@@ -163,6 +197,10 @@ impl BoundedSubsetSumPlan {
         self.weights.len().div_ceil(64)
     }
 
+    pub fn transition_bound(&self) -> u64 {
+        self.transition_bound
+    }
+
     pub fn solve_into(
         &self,
         workspace: &mut BoundedSubsetSumWorkspace,
@@ -180,33 +218,46 @@ impl BoundedSubsetSumPlan {
         workspace.counts.fill(0);
         workspace.reachability.fill(0);
         witness_words.fill(0);
+        if !self.windows[0].contains(self.index(0).expect("compiled range contains zero")) {
+            return Ok(0);
+        }
         let zero = self.index(0).expect("compiled range contains zero");
         workspace.counts[zero] = 1;
         set_bit(&mut workspace.reachability[..self.bitmap_words], zero);
 
         for (item, &weight) in self.weights.iter().enumerate() {
-            workspace.scratch.fill(0);
-            for index in 0..self.width {
+            let current = self.windows[item];
+            let next = self.windows[item + 1];
+            if next.start == next.end {
+                return Ok(0);
+            }
+            workspace.scratch[next.range()].fill(0);
+            for index in current.range() {
                 let count = workspace.counts[index];
                 if count == 0 {
                     continue;
                 }
-                workspace.scratch[index] = workspace.scratch[index]
-                    .checked_add(count)
-                    .ok_or(BoundedSubsetSumError::CountOverflow)?;
+                if next.contains(index) {
+                    workspace.scratch[index] = workspace.scratch[index]
+                        .checked_add(count)
+                        .ok_or(BoundedSubsetSumError::CountOverflow)?;
+                }
                 let sum = self.sum(index);
                 let included = sum
                     .checked_add(weight)
                     .and_then(|sum| self.index(sum))
                     .expect("compiled subset transition stays in the total range");
-                workspace.scratch[included] = workspace.scratch[included]
-                    .checked_add(count)
-                    .ok_or(BoundedSubsetSumError::CountOverflow)?;
+                if next.contains(included) {
+                    workspace.scratch[included] = workspace.scratch[included]
+                        .checked_add(count)
+                        .ok_or(BoundedSubsetSumError::CountOverflow)?;
+                }
             }
-            workspace.counts.copy_from_slice(&workspace.scratch);
+            std::mem::swap(&mut workspace.counts, &mut workspace.scratch);
             let row = &mut workspace.reachability
                 [(item + 1) * self.bitmap_words..(item + 2) * self.bitmap_words];
-            for (index, &count) in workspace.counts.iter().enumerate() {
+            for index in next.range() {
+                let count = workspace.counts[index];
                 if count != 0 {
                     set_bit(row, index);
                 }
@@ -312,6 +363,45 @@ impl BoundedSubsetSumPlan {
     }
 }
 
+fn continuation_windows(
+    weights: &[i64],
+    target: i64,
+    minimum_sum: i64,
+    maximum_sum: i64,
+) -> Result<Box<[SubsetSumWindow]>, BoundedSubsetSumError> {
+    let mut prefix_minimum = 0_i64;
+    let mut prefix_maximum = 0_i64;
+    let mut remaining_minimum = minimum_sum;
+    let mut remaining_maximum = maximum_sum;
+    let mut windows = Vec::with_capacity(weights.len() + 1);
+    for layer in 0..=weights.len() {
+        let lower =
+            i128::from(prefix_minimum).max(i128::from(target) - i128::from(remaining_maximum));
+        let upper =
+            i128::from(prefix_maximum).min(i128::from(target) - i128::from(remaining_minimum));
+        let window = if lower > upper {
+            SubsetSumWindow { start: 0, end: 0 }
+        } else {
+            let start = u32::try_from(lower - i128::from(minimum_sum))
+                .map_err(|_| BoundedSubsetSumError::SumRange)?;
+            let end = u32::try_from(upper - i128::from(minimum_sum) + 1)
+                .map_err(|_| BoundedSubsetSumError::SumRange)?;
+            SubsetSumWindow { start, end }
+        };
+        windows.push(window);
+        if let Some(&weight) = weights.get(layer) {
+            if weight < 0 {
+                prefix_minimum += weight;
+                remaining_minimum -= weight;
+            } else if weight > 0 {
+                prefix_maximum += weight;
+                remaining_maximum -= weight;
+            }
+        }
+    }
+    Ok(windows.into_boxed_slice())
+}
+
 fn validate_bounds(bounds: BoundedSubsetSumBounds) -> Result<(), BoundedSubsetSumError> {
     if bounds.maximum_items == 0
         || bounds.maximum_items > MAX_SUBSET_SUM_ITEMS
@@ -415,7 +505,7 @@ mod tests {
             maximum_items: 64,
             maximum_sum_width: 1,
             maximum_reachability_words: 65,
-            maximum_transitions: 64,
+            maximum_transitions: 128,
         };
         let overflow = BoundedSubsetSumPlan::compile(&zeros, 0, wide_bounds).unwrap();
         assert_eq!(

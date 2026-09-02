@@ -4894,3 +4894,14 @@ the anonymous seven-field group to its sum-of-squares coordinate lets the unchan
 small mechanism control rather than an application result, but it closes the specific
 “flat rows cannot see a bounded relation across seven objects” failure mode without any
 task-specific field names or conclusion in core.
+
+The first theorem-driven subset-sum sharpening compiles a continuation envelope for
+every prefix. A partial sum is retained after layer `i` only when it lies both in the
+prefix-achievable interval and in `target -` the remaining suffix interval. This is an
+exact one-sided reduction: every discarded partial sum is arithmetically unable to
+reach the fixed target, while every target witness remains. The plan stores each window
+as one asserted eight-byte record, charges the exact two-transition scan bound at
+compile time, and swaps its two presized count arrays instead of copying the full sum
+range after every item. Packed prefix reachability and deterministic witness replay are
+unchanged. Exhaustive signed controls preserve counts and witnesses; measured A/B is
+the acceptance gate before recording a speed claim.
