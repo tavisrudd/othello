@@ -2210,8 +2210,12 @@ files are disposable and may be deleted at any time.
    tranche gives an immediate exact performance control; aggregate-bound,
    decomposition, contextual-quotient, feature-DAG, incumbent, certificate-
    structure, and counterexample proposers follow behind distinct authority
-   contracts. The architecture must not collapse those roles into a generic
-   verified flag.
+   contracts. For LLM proposers the same memo specifies asynchronous,
+   source-bound sessions with a small typed query vocabulary, immutable
+   snapshots, hard query/trace/byte/work budgets, event-driven completion, and
+   compact counterexample feedback; search never blocks on or grants direct
+   state access to the LLM. The architecture must not collapse authority roles
+   into a generic verified flag.
 
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:

@@ -108,6 +108,132 @@ replays against the complete declared corpus and any direct-model holdout. For
 symmetry and semantic-equivalence candidates, sampling is useful only for
 ranking: exact admission always sees the full defining relations.
 
+## LLM proposer sessions and bounded queries
+
+An LLM proposer should receive a short-lived research session, not direct
+access to a solver process. The controller creates a `ProposalSession` bound to
+one run, source fingerprint, immutable observation snapshot, permitted proposal
+roles, typed grammar version, expiry, and hard query/byte/work budgets. The
+session may ask a limited number of pull-based questions before proposing.
+
+The logical protocol is request/response with explicit IDs:
+
+```text
+OpenSession
+  -> SessionOpened(session_id, snapshot_id, offer, limits)
+
+SubmitQuery(session_id, request_id, query)
+  -> QueryAccepted(ticket_id) | Rejected(reason)
+
+QueryCompleted(ticket_id, snapshot_id, compact_result_digest)
+FetchResult(ticket_id)
+  -> CompactResult | Pending | Expired
+
+SubmitProposal(session_id, proposal_id, role, typed_payload,
+               claimed_obligations, query_dependencies)
+  -> ProposalAcceptedForReplay(admission_ticket)
+
+AdmissionCompleted(admission_ticket)
+  -> Admitted(report) | Rejected(report, smallest_counterexample)
+```
+
+`QueryCompleted` is an optional notification. Polling is allowed at a bounded
+rate, but the preferred implementation is event-driven notification on the
+controller connection followed by one explicit fetch. Search workers never
+service requests or wait for results.
+
+The first query vocabulary should remain small and typed:
+
+- `GetProblemSummary`: dimensions, sorts, operators, exact invariants, current
+  bounds, and compact work histograms;
+- `GetGrammar`: permitted term/predicate/decomposition constructors and their
+  static costs;
+- `GetProposalLedger`: top admitted/rejected shapes and compact rejection
+  reasons, filtered by candidate family;
+- `ProbeCandidate`: compile a candidate into a disposable cold evaluator and
+  score it on declared probe roots/corpus partitions without admission;
+- `CompareCandidates`: same-snapshot paired work/cost/coverage delta;
+- `GetCounterexample`: retrieve the smallest retained falsifier for one exact
+  candidate or failure-core class;
+- `TraceExceptional`: request a bounded trace around a selected exceptional
+  state/root/property;
+- `SampleStates`: stratified fixed-count state summaries, never raw unbounded
+  state dumps;
+- `ExplainFeature`: return the typed derivation, dependencies, cost, and
+  observed coverage of one persisted feature ID;
+- `EstimateVerification`: a conservative resource estimate for replaying a
+  proposed obligation.
+
+No query grants shell access, arbitrary file reads, arbitrary code execution,
+mutable solver references, or raw memory inspection. The protocol accepts
+only validated IDs and typed expressions from the offered grammar.
+
+### Async execution
+
+Probe and trace work runs asynchronously in low-priority controller-owned jobs.
+It consumes immutable compiled state, frozen corpus views, or copied bounded
+snapshots. Long probes may use separate worker pools with CHOOM/resource caps;
+they do not occupy search-worker mailboxes or share mutable counters. A session
+may have several outstanding tickets, but deterministic concurrency and work
+caps are enforced per run. Cancellation discards a cold job and leaves the
+search untouched.
+
+Live traces require a stricter boundary. The controller posts a prevalidated
+trace request; at the existing guarded safe point, an eligible worker may copy
+one fixed-size record into its worker-owned publication slot. The controller
+collects and serializes it off-thread. If no eligible state appears before the
+request deadline, the result is `NoMatch`, not permission to add hot polling.
+
+Every result names the `snapshot_id` and exact probe domain. A proposal records
+the query IDs it used. Results from different epochs may inform a proposal, but
+they are never silently combined into one exact score. Admission always reruns
+against the current authoritative source fingerprint; a stale source produces
+an explicit rejection or rebase request.
+
+### Default budgets
+
+Budgets are campaign policy rather than protocol constants, but a conservative
+initial LLM offer is:
+
+- at most 16 queries and four outstanding tickets;
+- at most four candidate probes and two exceptional traces;
+- at most 64 KiB of total returned structured data;
+- at most 256 trace events or 128 sampled states per query;
+- one explicit wall/work allowance per probe and one session expiry;
+- at most eight submitted proposal revisions, each with a distinct canonical
+  payload digest.
+
+The controller reports remaining budgets after every response. It returns
+compact deltas, histograms, feature IDs, and smallest counterexamples rather
+than logs. A verbose trace is opt-in, localized, capped, persisted outside the
+conversation, and fetched by range or record ID. This makes an LLM session
+more token-efficient than repeatedly asking for global status.
+
+### Transport and API
+
+The Rust daemon should expose typed request/response enums over a length-
+prefixed local transport. A compact binary encoding is appropriate for the
+daemon; the Python 3.14+ client presents frozen typed dataclasses, enums,
+`async` methods, async iterators for completion notices, and structural pattern
+matching. An LLM tool adapter may project those methods to JSON Schema because
+tool-calling systems understand it, but JSON is transport glue only: theorem
+and plan payloads remain canonical typed source or typed binary IR.
+
+Unix socket paths include the run ID and an unguessable session nonce. Peer
+credentials, source/run binding, expiry, and per-session ledgers isolate
+concurrent campaigns. Reconnecting resumes persisted tickets and budgets; it
+does not reopen expired authority or expose another run.
+
+### Proposal timing
+
+The LLM need not wait for every ticket. It may submit an early proposal, amend
+it with a new digest after later results, or leave unused probes pending until
+session expiry. Admission tickets are also asynchronous. The controller may
+continue autonomous built-in evolution while the LLM thinks; when an admitted
+artifact arrives, normal plan activation policy decides whether and where to
+install it. This makes the LLM one opportunistic proposer among several rather
+than a synchronous dependency of the solve.
+
 ## Runtime and performance boundary
 
 Proposal generation, normalization, serialization, counterexample reduction,
