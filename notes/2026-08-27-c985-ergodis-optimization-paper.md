@@ -2085,10 +2085,23 @@ files are disposable and may be deleted at any time.
    QDistSAT reports zero completions among 46 configurations under its
    7,200-second limit. The source hashes, replay protocol, evidence hashes,
    trust boundary, and single-round comparison caveat are in
-   `2026-09-01-c985-qdist-lp714-exact-distance.md`. Next profile radius growth
-   on TN360 and use BP+OSD plus exact bounded search to establish a useful
-   incumbent/lower-bound pair before deciding whether its weak 180-orbit
-   quotient or LP1768's 34-orbit quotient has the better closure path.
+   `2026-09-01-c985-qdist-lp714-exact-distance.md`.
+
+   TN360 then exposed a limitation in selecting only one verified generator.
+   Its physical presentations have a pair-flip and a step-two block action;
+   neither alone exposes the full quotient. Commit `750799488` now gathers
+   exact row-space-preserving candidates and greedily retains a deterministic
+   set only when its generated action strictly reduces the orbit partition.
+   The public solver re-verifies every retained permutation and their joint
+   transversal. TN360 consequently drops from 180 size-two orbits to 36
+   size-ten orbits. At radius 14, X falls from 1,054,233,819 candidates / 3.786
+   seconds to 211,472,168 / 0.769, and Z from 1,002,920,619 / 3.691 to
+   211,772,296 / 0.744: about 5x less exact work and 4.9x wall time. Both
+   radius-16 searches are now complete misses in 8.37--8.73 seconds. Native
+   BP+OSD independently replays weight-28 incumbents in both directions, still
+   above QDistSAT's weight-25 upper bound. Next extend the exact TN frontier to
+   radius 18, then use the measured growth to choose between deeper sharded TN
+   exhaustion and LP1768's 34-orbit but much wider search.
 
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
