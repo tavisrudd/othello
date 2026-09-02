@@ -234,6 +234,132 @@ artifact arrives, normal plan activation policy decides whether and where to
 install it. This makes the LLM one opportunistic proposer among several rather
 than a synchronous dependency of the solve.
 
+## Proposer selection and operational policy
+
+A cold portfolio controller chooses which proposer receives budget. Correctness
+does not depend on this choice: a bad selection wastes bounded cold work but
+cannot bypass admission. Eligibility is deterministic—candidate family,
+problem schema, required context, authority role, and resource limits must
+match—then the scheduler ranks eligible proposers by a cost-aware contextual
+value estimate:
+
+```text
+P(admission | problem, history, current obstruction)
+  * expected exact work removed or reach gained
+  * expected cross-instance reuse
+  / (proposal + probe + verification + integration cost)
+  + bounded exploration bonus
+```
+
+Inputs are static problem descriptors, the current measured bottleneck,
+compact progress and rejection histograms, smallest failure cores, proposer
+history on structurally similar problems, interactions with admitted artifacts,
+and remaining campaign budgets. Cheap deterministic proposers run before an
+LLM unless the observed obstruction specifically calls for a new structural
+shape. A cost-aware contextual bandit or successive-halving portfolio may
+learn the estimates, while a fixed exploration reserve prevents permanent
+lock-in. User/agent overrides are explicit ledgered decisions, not hidden
+changes to the policy.
+
+Typical routing is: automorphism/decomposition for excessive roots;
+aggregate-bound or contextual-quotient proposals for excessive states;
+equivalent presentations for compilation/traversal cost; BP+OSD/ISD for weak
+incumbents; conflict-driven feature generation after repeated falsifiers;
+certificate-structure proposals for oversized evidence; and LLM/AlphaEvolve
+shape generation after cheaper grammars plateau.
+
+### Rate limits and quotas
+
+Limits are hierarchical and all must admit a request:
+
+- campaign-wide concurrent-job, CPU-work, returned-byte, and wall-time budgets;
+- per-proposer and per-provider token buckets, preventing one backend from
+  monopolizing the controller;
+- per-session query, trace, proposal-revision, outstanding-ticket, context-
+  byte, and returned-byte limits;
+- per-query-family weighted costs, so a trace or exact probe consumes more
+  units than a summary lookup;
+- per-root and per-snapshot sampling caps, preventing repeated extraction of
+  the same live region; and
+- separate admission/verifier capacity, reserved so a flood of speculative
+  probes cannot starve already-submitted exact checks.
+
+Every response reports the relevant remaining units and reset/expiry time.
+Provider `Retry-After` bounds are honored. Limits use monotone controller time
+and persist across daemon restart; reconnecting or changing a socket cannot
+mint a fresh campaign budget.
+
+Fairness is weighted across active campaigns, with a small reserved lane for
+interactive requests and a separate lane for exact admission. Priority may
+move queue order but never expand a request's declared resource envelope.
+
+### Timeouts and cancellation
+
+Each operation carries one absolute deadline propagated through queueing,
+execution, result storage, and delivery. Distinguish:
+
+- session expiry;
+- queue deadline, after which work that never started is dropped cheaply;
+- execution work and wall limits enforced by the cold worker;
+- result-retention expiry for an unfetched compact result; and
+- admission deadline, which may outlive the interactive LLM session but not
+  the owning campaign unless explicitly persisted.
+
+Timeouts are selected from recorded cost quantiles plus a safety margin, then
+clamped by hard campaign caps. A timeout result records exact completed work
+and scope; it is never reported as a completed negative. Cancellation is by
+ticket and idempotent. Cold jobs check cancellation at bounded coarse work
+boundaries. Search workers do not receive cancellation probes beyond their
+already-admitted safe-point mechanism.
+
+Orphaned provider calls and child processes are controller-owned, have process
+and memory caps, and are reaped after the deadline. A client disconnect does
+not automatically cancel useful work; the session policy says whether tickets
+persist for reconnect or are abandoned.
+
+### Error classes, retries, and backoff
+
+Errors are typed before retry policy is chosen:
+
+| Error class | Automatic action |
+|---|---|
+| Malformed, out-of-range, forbidden role, or failed semantic admission | no retry; return compact diagnostic/counterexample |
+| Stale source or snapshot | offer one explicit rebase against the new fingerprint; never silently replay as current |
+| Budget/resource limit | no identical retry; proposer may submit a smaller query or request a separately authorized budget change |
+| Deterministic backend failure | no retry for that payload/backend version; retain failure signature |
+| Transient transport/provider failure | bounded exponential backoff with full jitter and idempotent request ID |
+| Provider rate limit | honor `Retry-After`, debit no duplicate logical query, and allow another proposer to use the slot |
+| Queue or execution timeout | at most one policy-approved retry with a reduced scope or larger already-authorized deadline; never blindly repeat expensive work |
+| Backend crash or repeated protocol fault | open the backend circuit breaker and fail over when another eligible proposer exists |
+
+Backoff state is keyed narrowly by provider/proposer and error class, not by
+the whole campaign. A typical transient schedule is 250 ms, 500 ms, 1 s, 2 s,
+then capped at 30 s with full jitter and a small total retry count. Server-
+supplied lower bounds override it. Retry budgets are separate from query
+budgets but bounded, so failures cannot multiply spend indefinitely.
+
+Circuit breakers open after a small rolling threshold of attributable failures
+or timeouts. The open interval grows to a cap; one half-open health/probe call
+tests recovery. Successful exact traffic closes the breaker gradually. A
+semantic rejection is not a backend-health failure and must not trip the
+breaker.
+
+Every mutating request has an idempotency key derived from session, request ID,
+and canonical payload digest. The controller deduplicates accepted work and
+returns the original ticket/result on retry. Proposal revisions require new
+payload digests. Artifacts use create-only writes and atomic publication, so a
+timeout or crash cannot leave a partially authoritative object.
+
+### Overload behavior
+
+On overload, reject or defer cold speculative work first, then reduce proposer
+concurrency and trace/sample sizes. Never slow the solve hot loop, increase its
+safe-point frequency, allocate larger worker mailboxes, or turn on busy polling.
+The controller can keep autonomous cheap proposers running while an external
+LLM/provider is backed off. Operational telemetry is aggregated by proposer,
+query family, error class, latency bucket, and consumed budget; it is serialized
+off-thread and exposed as compact deltas rather than request logs.
+
 ## Runtime and performance boundary
 
 Proposal generation, normalization, serialization, counterexample reduction,

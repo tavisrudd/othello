@@ -2215,7 +2215,11 @@ files are disposable and may be deleted at any time.
    snapshots, hard query/trace/byte/work budgets, event-driven completion, and
    compact counterexample feedback; search never blocks on or grants direct
    state access to the LLM. The architecture must not collapse authority roles
-   into a generic verified flag.
+   into a generic verified flag. A cold portfolio controller selects proposers
+   by measured obstruction and expected admitted value; hierarchical
+   rate/work/byte limits, absolute deadlines, typed retry policy, idempotency,
+   full-jitter backoff, and per-backend circuit breakers contain operational
+   failure without touching the solve workers.
 
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
