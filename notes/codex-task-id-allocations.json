@@ -4076,8 +4076,17 @@
       "last": 1032,
       "purpose": "browser WebAssembly Ergodis prototype with worker demo and parity gate",
       "sequence": 453
+    },
+    {
+      "count": 1,
+      "first": 1033,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1033,
+      "purpose": "Ergodis integration with Jupyter, Sage, and DuckDB: analysis-surface exploration and vertical slice",
+      "sequence": 454
     }
   ],
-  "next_id": 1033,
+  "next_id": 1034,
   "schema": "codex-task-id-allocations-v1"
 }
