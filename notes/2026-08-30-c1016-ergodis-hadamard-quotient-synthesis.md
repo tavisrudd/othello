@@ -2862,6 +2862,19 @@ terminated during wrap-up after 20,032,815,753,860 cycles and
 9,873,595,469,771 instructions, before it emitted a semantic report, and
 consequently proves nothing.
 
+The proposed follow-on is an exact **per sampled fibre** finite search, not a
+new global theorem.  For each pair `(j,29-j)`, its two mod-nine residues admit
+only the bounded lifts congruent to them, hence at most six distinct integer
+antisymmetric differences.  An iterative fourteen-digit odometer supplies a
+chosen difference vector; rows one--three plus the complete-moment recurrence
+then derive row zero modulo 29, after which the carrier bound gives its unique
+integer lift.  The only retained candidates must independently satisfy the
+complete mod-nine row, row sum one, and the remaining row-energy budget before
+the existing parity and full q29 replay.  This is a compact witness-constructor
+boundary with zero implied negative authority: exhausting a sampled fibre
+cannot exclude another fibre, and even a q29 hit still needs the q58/q87 and
+length-522 replay path.
+
 The next exact q29 theorem family is complete rather than merely a two-moment
 gate.  For every even `k=2,4,...,26`, binomial expansion gives
 `sum_s s^k C_s=0 (mod 29)` at the exact target; at `k=28` the right side is
