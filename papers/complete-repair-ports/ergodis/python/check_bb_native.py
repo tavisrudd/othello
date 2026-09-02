@@ -68,15 +68,42 @@ def main() -> int:
         }
         print(json.dumps(output, separators=(",", ":"), sort_keys=True))
         return 0
-    if record["schema"] != "ergodis-css-distance-native-v3":
+    native_schema = record["schema"]
+    if native_schema not in {
+        "ergodis-css-distance-native-v3",
+        "ergodis-css-distance-native-v6",
+    }:
         raise RuntimeError("unknown evidence schema")
+    if native_schema == "ergodis-css-distance-native-v6":
+        if record.get("completion_status") != "complete":
+            raise RuntimeError("native evidence is not a completed search")
+        if record.get("result_scope") != "global":
+            raise RuntimeError("a shard-local result is not a global distance certificate")
+        verification = record.get("anchor_verification")
+        anchors = record["anchors"]
+        if verification == "verified-orbit-transversal":
+            if record.get("coordinate_orbits") != len(anchors):
+                raise RuntimeError("verified anchor/orbit counts disagree")
+        elif verification == "trusted-input":
+            if anchors != list(range(problem["coordinate_count"])):
+                raise RuntimeError("unverified anchors do not exhaust the coordinates")
+        else:
+            raise RuntimeError("unknown anchor verification mode")
     distance = result["distance"]
     witness = result["witness"]
     logical = replay_witness(problem, distance, witness)
     if record["coordinate_count"] != problem["coordinate_count"]:
         raise RuntimeError("evidence/input coordinate mismatch")
+    if record["label"] != problem["label"]:
+        raise RuntimeError("evidence/input label mismatch")
+    if record["physical_checks"] != len(problem["physical_checks"]):
+        raise RuntimeError("evidence/input physical-check count mismatch")
+    if record["logical_observations"] != len(problem["logical_observations"]):
+        raise RuntimeError("evidence/input logical-observation count mismatch")
     if result["searched_maximum_weight"] > problem["maximum_weight"]:
         raise RuntimeError("evidence exceeds the input's authorized search radius")
+    if result["searched_maximum_weight"] > record["maximum_weight"]:
+        raise RuntimeError("result exceeds the evidence search radius")
     if distance is not None and distance > result["searched_maximum_weight"]:
         raise RuntimeError("witness lies outside the searched radius")
     candidates = [stats["candidates"] for stats in record["round_stats"]]
