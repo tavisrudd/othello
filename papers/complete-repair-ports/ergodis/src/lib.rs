@@ -188,9 +188,10 @@ pub use group_action::{
 };
 pub use group_aggregation::{
     GroupAggregateOp, GroupAggregateSpec, GroupAggregationBounds, GroupAggregationError,
-    GroupAggregationPlan, GroupAggregationPlanSnapshot, GROUP_AGGREGATION_SNAPSHOT_VERSION,
-    MAX_AGGREGATION_GROUPS, MAX_AGGREGATION_INPUTS, MAX_AGGREGATION_MEMBERS,
-    MAX_AGGREGATION_OUTPUTS,
+    GroupAggregationPlan, GroupAggregationPlanSnapshot, GroupAggregationProposalBounds,
+    GROUP_AGGREGATION_SNAPSHOT_VERSION, MAX_AGGREGATION_GROUPS, MAX_AGGREGATION_INPUTS,
+    MAX_AGGREGATION_MEMBERS, MAX_AGGREGATION_OUTPUTS, MAX_AGGREGATION_PROPOSAL_ROWS,
+    MAX_AGGREGATION_PROPOSED_VALUES,
 };
 pub use hall::{
     solve_hall, verify_hall_certificate, verify_hall_result, DenseHallGraph, HallError,

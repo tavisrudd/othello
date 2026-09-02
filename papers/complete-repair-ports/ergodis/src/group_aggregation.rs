@@ -3,6 +3,8 @@
 //! Plans are compiled and validated off path. Repeated row evaluation writes
 //! into caller-owned storage without allocation or recursion.
 
+use std::collections::BTreeSet;
+
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
@@ -11,6 +13,8 @@ pub const MAX_AGGREGATION_GROUPS: usize = 64;
 pub const MAX_AGGREGATION_MEMBERS: usize = 256;
 pub const MAX_AGGREGATION_OUTPUTS: usize = 512;
 pub const GROUP_AGGREGATION_SNAPSHOT_VERSION: u16 = 1;
+pub const MAX_AGGREGATION_PROPOSAL_ROWS: usize = 4_096;
+pub const MAX_AGGREGATION_PROPOSED_VALUES: usize = 64;
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
 #[serde(tag = "op", rename_all = "kebab-case", deny_unknown_fields)]
@@ -36,6 +40,13 @@ pub struct GroupAggregationBounds {
     pub maximum_groups: usize,
     pub maximum_members_per_group: usize,
     pub maximum_outputs: usize,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct GroupAggregationProposalBounds {
+    pub plan: GroupAggregationBounds,
+    pub maximum_rows: usize,
+    pub maximum_count_values_per_group: usize,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -71,9 +82,88 @@ pub enum GroupAggregationError {
     ArithmeticOverflow,
     #[error("group aggregation snapshot version is unsupported")]
     SnapshotVersion,
+    #[error("group aggregation proposal corpus has the wrong shape or exceeds its bound")]
+    ProposalCorpus,
 }
 
 impl GroupAggregationPlan {
+    pub fn propose_from_rows(
+        input_width: usize,
+        scopes: &[Box<[u16]>],
+        rows: &[i64],
+        bounds: GroupAggregationProposalBounds,
+    ) -> Result<Self, GroupAggregationError> {
+        if input_width == 0
+            || input_width > MAX_AGGREGATION_INPUTS
+            || bounds.maximum_rows == 0
+            || bounds.maximum_rows > MAX_AGGREGATION_PROPOSAL_ROWS
+            || bounds.maximum_count_values_per_group > MAX_AGGREGATION_PROPOSED_VALUES
+            || bounds.plan.maximum_groups == 0
+            || bounds.plan.maximum_groups > MAX_AGGREGATION_GROUPS
+            || bounds.plan.maximum_members_per_group == 0
+            || bounds.plan.maximum_members_per_group > MAX_AGGREGATION_MEMBERS
+            || bounds.plan.maximum_outputs == 0
+            || bounds.plan.maximum_outputs > MAX_AGGREGATION_OUTPUTS
+            || rows.is_empty()
+            || rows.len() % input_width != 0
+            || rows.len() / input_width > bounds.maximum_rows
+        {
+            return Err(GroupAggregationError::ProposalCorpus);
+        }
+        if scopes.is_empty() || scopes.len() > bounds.plan.maximum_groups {
+            return Err(GroupAggregationError::InvalidSpecification);
+        }
+        let mut groups = Vec::with_capacity(scopes.len());
+        for scope in scopes {
+            if scope.is_empty()
+                || scope.len() > bounds.plan.maximum_members_per_group
+                || scope.windows(2).any(|pair| pair[0] >= pair[1])
+                || scope
+                    .last()
+                    .is_some_and(|&member| usize::from(member) >= input_width)
+            {
+                return Err(GroupAggregationError::InvalidMembers);
+            }
+            let mut observations = Vec::with_capacity(rows.len() / input_width * scope.len());
+            for row in rows.chunks_exact(input_width) {
+                for &member in scope.iter() {
+                    observations.push(row[usize::from(member)]);
+                }
+            }
+            observations.sort_unstable();
+            let mut values = BTreeSet::new();
+            let samples = bounds.maximum_count_values_per_group;
+            if samples == 1 {
+                values.insert(observations[observations.len() / 2]);
+            } else if samples > 1 {
+                for sample in 0..samples {
+                    let index = sample * (observations.len() - 1) / (samples - 1);
+                    values.insert(observations[index]);
+                }
+            }
+            let mut operations = vec![
+                GroupAggregateOp::Sum,
+                GroupAggregateOp::SumSquares,
+                GroupAggregateOp::Minimum,
+                GroupAggregateOp::Maximum,
+            ];
+            operations.extend(
+                values
+                    .into_iter()
+                    .map(|value| GroupAggregateOp::CountEqual { value }),
+            );
+            operations.extend([
+                GroupAggregateOp::EqualPairCount,
+                GroupAggregateOp::DistinctCount,
+            ]);
+            groups.push(GroupAggregateSpec {
+                members: scope.clone(),
+                operations: operations.into_boxed_slice(),
+            });
+        }
+        Self::compile(input_width, &groups, bounds.plan)
+    }
+
     pub fn compile(
         input_width: usize,
         groups: &[GroupAggregateSpec],
@@ -267,6 +357,12 @@ mod tests {
         maximum_outputs: 16,
     };
 
+    const PROPOSAL_BOUNDS: GroupAggregationProposalBounds = GroupAggregationProposalBounds {
+        plan: BOUNDS,
+        maximum_rows: 16,
+        maximum_count_values_per_group: 2,
+    };
+
     fn seven_member_plan() -> GroupAggregationPlan {
         GroupAggregationPlan::compile(
             7,
@@ -330,6 +426,36 @@ mod tests {
         assert_eq!(
             GroupAggregationPlan::compile(2, &[duplicate_operations], BOUNDS),
             Err(GroupAggregationError::InvalidOperations)
+        );
+    }
+
+    #[test]
+    fn proposal_profiles_bounded_values_without_a_conclusion() {
+        let scope = (0_u16..7).collect::<Vec<_>>().into_boxed_slice();
+        let plan = GroupAggregationPlan::propose_from_rows(
+            7,
+            &[scope],
+            &[2, -1, 2, 4, 0, -1, 3, 9, 8, 7, 6, 5, 4, 3],
+            PROPOSAL_BOUNDS,
+        )
+        .unwrap();
+        assert_eq!(
+            &*plan.groups()[0].operations,
+            &[
+                GroupAggregateOp::Sum,
+                GroupAggregateOp::SumSquares,
+                GroupAggregateOp::Minimum,
+                GroupAggregateOp::Maximum,
+                GroupAggregateOp::CountEqual { value: -1 },
+                GroupAggregateOp::CountEqual { value: 9 },
+                GroupAggregateOp::EqualPairCount,
+                GroupAggregateOp::DistinctCount,
+            ]
+        );
+        let scopes = [plan.groups()[0].members.clone()];
+        assert_eq!(
+            GroupAggregationPlan::propose_from_rows(7, &scopes, &[], PROPOSAL_BOUNDS),
+            Err(GroupAggregationError::ProposalCorpus)
         );
     }
 

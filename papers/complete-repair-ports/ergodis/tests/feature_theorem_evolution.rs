@@ -1,7 +1,7 @@
 use ergodis::{
     evolve_ranked_streaming, CensusReduction, EvolutionConfig, FeatureBankBounds, FeatureDag,
-    FeatureId, FeatureOp, FeatureZeroBank, GroupAggregateOp, GroupAggregateSpec,
-    GroupAggregationBounds, GroupAggregationPlan, RawFeatureExpansion,
+    FeatureId, FeatureOp, FeatureZeroBank, GroupAggregationBounds, GroupAggregationPlan,
+    GroupAggregationProposalBounds, RawFeatureExpansion,
 };
 
 #[derive(Clone, Copy)]
@@ -191,25 +191,28 @@ fn grouped_moment_exposes_a_relation_missing_from_flat_degree_two_terms() {
         .unwrap();
     assert_eq!(best_flat_survivors, 11);
 
-    let aggregate = GroupAggregationPlan::compile(
+    let scopes = [(0_u16..7).collect::<Vec<_>>().into_boxed_slice()];
+    let aggregate = GroupAggregationPlan::propose_from_rows(
         7,
-        &[GroupAggregateSpec {
-            members: (0_u16..7).collect::<Vec<_>>().into_boxed_slice(),
-            operations: vec![GroupAggregateOp::SumSquares].into_boxed_slice(),
-        }],
-        GroupAggregationBounds {
-            maximum_groups: 1,
-            maximum_members_per_group: 7,
-            maximum_outputs: 1,
+        &scopes,
+        &flat_rows,
+        GroupAggregationProposalBounds {
+            plan: GroupAggregationBounds {
+                maximum_groups: 1,
+                maximum_members_per_group: 7,
+                maximum_outputs: 6,
+            },
+            maximum_rows: rows.len(),
+            maximum_count_values_per_group: 0,
         },
     )
     .unwrap();
-    let mut aggregate_rows = vec![0_i64; rows.len()];
+    let mut aggregate_rows = vec![0_i64; rows.len() * aggregate.output_width()];
     aggregate
         .evaluate_rows(&flat_rows, rows.len(), &mut aggregate_rows)
         .unwrap();
-    let mut aggregate_dag = FeatureDag::new(1, 1, 4).unwrap();
-    let moment = aggregate_dag.input(0).unwrap();
+    let mut aggregate_dag = FeatureDag::new(6, 1, 8).unwrap();
+    let moment = aggregate_dag.input(1).unwrap();
     let aggregate_bank = FeatureZeroBank::compile(
         &aggregate_dag,
         &aggregate_rows,

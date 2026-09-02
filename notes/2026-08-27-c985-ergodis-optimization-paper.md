@@ -4895,6 +4895,16 @@ small mechanism control rather than an application result, but it closes the spe
 “flat rows cannot see a bounded relation across seven objects” failure mode without any
 task-specific field names or conclusion in core.
 
+The group adapter now has a bounded observational proposer rather than requiring the
+caller to name aggregate operations. Given only canonical field scopes and raw rows, it
+emits the six universal symmetric coordinates and optionally proposes value-multiplicity
+coordinates from deterministic empirical quantiles. Proposal profiling is capped at
+4,096 rows, 256 members per scope, and 64 sampled values; it uses one bounded contiguous
+observation buffer per scope, never an unbounded map. The reach control now enters
+through this proposer with no hand-selected sum-of-squares operation and still recovers
+the 1/15 survivor. Scope generation remains an adapter/controller responsibility because
+its semantics are domain-facing; coordinate generation and evaluation are reusable core.
+
 The first theorem-driven subset-sum sharpening compiles a continuation envelope for
 every prefix. A partial sum is retained after layer `i` only when it lies both in the
 prefix-achievable interval and in `target -` the remaining suffix interval. This is an
