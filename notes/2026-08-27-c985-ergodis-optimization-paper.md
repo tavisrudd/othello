@@ -1354,9 +1354,12 @@ files are disposable and may be deleted at any time.
    gate reaches weights 12, 18, and 34 on Gross144, BB288, and BB756 while
    improving over the 1,000-trial random-IS control by 6.253x--12.672x.  Thus
    item (d) is admitted as a fast incumbent oracle, never as lower-bound or
-   proof authority.  The next BP tranche is an automatic bounded parameter
-   portfolio followed, only if quality still demands it, by varied per-bit
-   priors; reliability ordering alone remains rejected.
+   proof authority.  The bounded iteration/error-rate/scale surface is now
+   measured: retaining weights 12, 18, and 34 needs 1, 1, and 192 iterations
+   and improves over the old 300-iteration setting by 1.23x--3.35x.  The next
+   BP tranche is a generic cost/target-driven checkpoint policy followed, only
+   if quality still demands it, by varied per-bit priors; reliability ordering
+   alone remains rejected.
 
    Current-tree reconciliation changes that order slightly. Static and dynamic
    incumbent fan-out are already present as worker-local relaxed mailboxes plus
@@ -4068,3 +4071,27 @@ worker-owned partition preserves both BB288 and BB756 checksums.  Against
 `7efc97147`, 30 paired BB756 rounds improve timed search 1.0790x (`t=4.02`);
 100 higher-power BB288 pairs show no small-instance regression (1.0376x,
 `t=1.02`).
+
+The subsequent BP performance pass is profile-directed.  Private commit
+`e5bc42495` adds a reusable `--rounds` harness without changing one-round
+work or candidate checksums.  A 134K-sample BB756 run loses no samples and
+assigns 61.31% of cycles to BP decode and 37.73% to OSD solve.  Four plausible
+micro-optimizations are measured rejections, retained as candidate/revert
+commit pairs rather than folklore: posterior integer keys (`dcdf476a7` /
+`431bcae2d`), a branch-free degree-six prefix (`68a0634af` / `823ce38e1`), a
+packed syndrome ledger (`00018b1ec` / `6c15f42f3`), and validated message
+slices (`9580c1f82` / `859ab5323`).  The degree-six form removed 6.07% of
+BB756 instructions but regressed Gross144 and BB288 wall time by 4.1% and
+4.5%; the other shapes either raised instructions or failed to move wall time.
+Production therefore remains restored exactly.
+
+Iteration count is the accepted performance lever.  A bounded sweep shows
+that candidate quality is non-monotone, so a universal lower cap is unsound as
+a quality policy.  Nevertheless, the same independently replayed best weights
+need only one iteration on Gross144 and BB288 and 192 on BB756.  Thirty paired
+rounds versus 300 iterations improve wall time 2.3653x (`t=2.44`), 3.3496x
+(`t=18.27`), and 1.2324x (`t=3.98`) respectively while retaining weights 12,
+18, and 34.  No benchmark identity or size threshold is baked into public
+core.  The next implementation gate is a generic cost/target-driven bounded
+checkpoint policy; it may stop only on an independently replayed target hit
+and must price extra OSD checkpoints against saved BP iterations.

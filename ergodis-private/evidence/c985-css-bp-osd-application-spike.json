@@ -28,6 +28,66 @@
       "paired_t": 1.02
     }
   },
+  "bp_profile_and_microoptimization": {
+    "profile_harness_commit": "e5bc42495",
+    "bb756_cycles": {
+      "bp_decode_percent": 61.31,
+      "osd_solve_percent": 37.73,
+      "samples": 134000,
+      "lost_samples": 0
+    },
+    "rejected": [
+      {
+        "candidate_commit": "dcdf476a7",
+        "revert_commit": "431bcae2d",
+        "change": "precompute integer posterior sort keys",
+        "reason": "only 0.009 percent fewer instructions, about 0.6 percent more branch misses, no resolved wall gain, and one extra per-bit buffer"
+      },
+      {
+        "candidate_commit": "68a0634af",
+        "revert_commit": "823ce38e1",
+        "change": "branch-free degree-six physical-check prefix",
+        "reason": "6.07 percent fewer BB756 instructions but Gross144 and BB288 wall regressions of 4.1 and 4.5 percent; BB756 wall neutral"
+      },
+      {
+        "candidate_commit": "00018b1ec",
+        "revert_commit": "6c15f42f3",
+        "change": "packed u64 observed-syndrome ledger",
+        "reason": "2.94 percent more instructions, 2.42 percent more cycles, and about 5 percent more cache misses on BB756"
+      },
+      {
+        "candidate_commit": "9580c1f82",
+        "revert_commit": "859ab5323",
+        "change": "validated per-check message slices",
+        "reason": "1.12 percent more instructions and no resolved wall improvement on any of the three controls"
+      }
+    ]
+  },
+  "iteration_surface": {
+    "method": "bounded iteration/error-rate/scale sweep; every retained result independently replayed",
+    "gross144": {
+      "baseline_iterations": 300,
+      "retained_iterations": 1,
+      "best_weight": 12,
+      "speedup": 2.3653,
+      "paired_t": 2.44
+    },
+    "bb288": {
+      "baseline_iterations": 300,
+      "retained_iterations": 1,
+      "best_weight": 18,
+      "speedup": 3.3496,
+      "paired_t": 18.27
+    },
+    "bb756": {
+      "baseline_iterations": 300,
+      "retained_iterations": 192,
+      "best_weight": 34,
+      "speedup": 1.2324,
+      "paired_t": 3.98
+    },
+    "decision": "iteration count is a high-value candidate-quality tuning dimension; do not hardcode code identities or a universal cap, and next implement a cost/target-driven bounded checkpoint policy"
+  },
   "gross144": {
     "input_sha256": "4ca7670cb86ab54f15da19b7448d4eada813053325f837a4290d8243a7f34868",
     "threads": 12,
