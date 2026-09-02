@@ -2924,6 +2924,27 @@ applications exhausts 115,584,315 multisets: 115,579,786 are bounded,
 exact.  One nonmultiplexed CHOOM census uses 503,042,829,127 instructions and
 112,749,455,048 cycles.  This closes the cheap radius-four trade-template
 attack but still says nothing about arbitrary repairs or the q29-to-522 lift.
+A RAM-for-compute compositional tablebase strengthens the same motif far more
+cheaply.  It compiles every net state of at most two translated/oriented trade
+applications per row, rescoring same-row combinations directly, then joins
+blocks `0+1` against `2+3`.  Its 32-byte keys contain energy and all fourteen
+independent correlations; witness indices live in a cold sibling array and
+full-key collision comparison makes one preimage sound.  The four row domains
+have `1770/1770/1556/1770` states, the left side has 3,031,081 distinct keys,
+and 2,754,120 right-side probes cover up to eight applications with at most two
+per row.  The exact scoped family misses, using 180,133,984 bytes,
+798,593,002 instructions, and 1,578,757,050 cycles with zero hot allocations.
+This is roughly two orders of magnitude less compute than brute-force four-
+application enumeration while covering a strictly larger compositional
+family.
+
+As a deliberately untrusted discovery control, bounded nonlinear SMT encoded
+all q29 equations and an L1 radius-six neighborhood.  The first form and a
+second form with explicit delta/cardinality bounds both timed out after 300
+seconds.  They consumed 5.585T/5.992T instructions and 1.447T/1.414T cycles.
+The second form is an instruction regression and the adapter is rejected and
+removed; neither timeout has negative authority.  Compact counter logs remain
+only as rejected-backend evidence.
 
 An additional exact cross-level gate projects each q174 class summary
 `(total,n0,n3)` to the complete set of compatible q18 row-degree energies via

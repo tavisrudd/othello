@@ -2,8 +2,9 @@ use std::{hint::black_box, thread};
 
 use ergodis_private::q29_even_moment_proof::{
     census_q29_single_swaps, census_q29_trade_quadruple_repairs, census_q29_trade_repairs,
-    census_q29_trade_triple_repairs, detect_q29_six_point_trade, extract_q29_even_moments,
-    extract_q29_residual, retained_q29_y6_root,
+    census_q29_trade_tablebase, census_q29_trade_triple_repairs, detect_q29_six_point_trade,
+    extract_q29_even_moments, extract_q29_residual, retained_q29_y6_root,
+    Q29TradeTablebaseWorkspace,
 };
 
 const ORDER: usize = 29;
@@ -17,6 +18,7 @@ enum Mode {
     Trade,
     TripleTrade,
     QuadrupleTrade,
+    TradeTablebase,
 }
 
 fn main() {
@@ -28,8 +30,9 @@ fn main() {
         Some("trade") => Mode::Trade,
         Some("triple-trade") => Mode::TripleTrade,
         Some("quadruple-trade") => Mode::QuadrupleTrade,
+        Some("trade-tablebase") => Mode::TradeTablebase,
         _ => {
-            panic!("usage: q29_even_moment_perf moment|direct|census|trade|triple-trade|quadruple-trade [iterations] [threads]")
+            panic!("usage: q29_even_moment_perf moment|direct|census|trade|triple-trade|quadruple-trade|trade-tablebase [iterations] [threads]")
         }
     };
     let iterations = args
@@ -109,6 +112,20 @@ fn main() {
                                 ^ u64::from(hit.is_some());
                         }
                     }
+                    Mode::TradeTablebase => {
+                        let mut workspace = Q29TradeTablebaseWorkspace::new();
+                        for _ in 0..iterations {
+                            let (report, hit) = black_box(census_q29_trade_tablebase(
+                                black_box(&rows),
+                                black_box(witness),
+                                &mut workspace,
+                            ))
+                            .expect("trade tablebase");
+                            local ^= u64::from(report.distinct_left_pair_keys)
+                                ^ report.right_pair_probes.rotate_left(17)
+                                ^ u64::from(hit.is_some());
+                        }
+                    }
                 }
                 local
             }));
@@ -127,6 +144,16 @@ fn main() {
         let (report, hit) = census_q29_trade_quadruple_repairs(&rows, witness)
             .expect("quadruple-trade census summary");
         eprintln!("quadruple_trade_report={report:?} hit={}", hit.is_some());
+    }
+    if matches!(mode, Mode::TradeTablebase) {
+        let mut workspace = Q29TradeTablebaseWorkspace::new();
+        let (report, hit) = census_q29_trade_tablebase(&rows, witness, &mut workspace)
+            .expect("trade-tablebase summary");
+        eprintln!(
+            "trade_tablebase_report={report:?} hit={} workspace_bytes={}",
+            hit.is_some(),
+            workspace.bytes()
+        );
     }
     println!(
         "iterations={iterations} threads={threads} total_operations={} digest={digest} provenance=ProvedStructural+ExactComputational(root=ObservedEvolved)",
