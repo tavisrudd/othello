@@ -1400,6 +1400,8 @@ fn plan_op_arity(op: &PlanOp) -> usize {
         | PlanOp::Mod
         | PlanOp::Div
         | PlanOp::Gcd
+        | PlanOp::GaussianNorm
+        | PlanOp::EisensteinNorm
         | PlanOp::Min
         | PlanOp::Max
         | PlanOp::Eq

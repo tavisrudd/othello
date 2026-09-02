@@ -1,4 +1,5 @@
 use super::{ControlError, DATA_SCHEMA, MAX_PLAN_OPS, MAX_PLAN_STACK, PLAN_SCHEMA};
+use crate::feature_dag::{FeatureDag, FeatureId, FeatureOp};
 use crate::multiset::{compile_bounded_multiset_aggregates, MultisetBounds, MultisetStatistic};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
@@ -385,6 +386,14 @@ pub enum PlanExpr {
         left: Box<Self>,
         right: Box<Self>,
     },
+    GaussianNorm {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
+    EisensteinNorm {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
     Min {
         left: Box<Self>,
         right: Box<Self>,
@@ -543,6 +552,8 @@ fn binary_parts(expr: &PlanExpr) -> Option<(&PlanExpr, &PlanExpr, PlanOp)> {
         PlanExpr::Mod { left, right } => (left, right, PlanOp::Mod),
         PlanExpr::Div { left, right } => (left, right, PlanOp::Div),
         PlanExpr::Gcd { left, right } => (left, right, PlanOp::Gcd),
+        PlanExpr::GaussianNorm { left, right } => (left, right, PlanOp::GaussianNorm),
+        PlanExpr::EisensteinNorm { left, right } => (left, right, PlanOp::EisensteinNorm),
         PlanExpr::Min { left, right } => (left, right, PlanOp::Min),
         PlanExpr::Max { left, right } => (left, right, PlanOp::Max),
         PlanExpr::Eq { left, right } => (left, right, PlanOp::Eq),
@@ -565,6 +576,89 @@ fn binary_parts(expr: &PlanExpr) -> Option<(&PlanExpr, &PlanExpr, PlanOp)> {
     Some((parts.0, parts.1, parts.2))
 }
 
+/// Lower one checked feature-DAG term to the plan VM without recursion.
+pub fn feature_term_program(
+    dag: &FeatureDag,
+    root: FeatureId,
+    fields: &[String],
+) -> Result<Vec<PlanOp>, ControlError> {
+    if fields.len() != dag.input_count() || dag.node(root).is_none() {
+        return Err(ControlError::Invalid(
+            "feature term and plan fields are incompatible".into(),
+        ));
+    }
+    enum Emit {
+        Node(FeatureId),
+        Op(PlanOp),
+    }
+    let mut work = vec![Emit::Node(root)];
+    let mut program = Vec::with_capacity(MAX_PLAN_OPS.min(dag.len()));
+    while let Some(item) = work.pop() {
+        match item {
+            Emit::Op(op) => program.push(op),
+            Emit::Node(id) => match dag
+                .node(id)
+                .ok_or_else(|| {
+                    ControlError::Invalid("feature term references unknown node".into())
+                })?
+                .op
+            {
+                FeatureOp::Input { index } => program.push(PlanOp::Field {
+                    name: fields[usize::from(index)].clone(),
+                }),
+                FeatureOp::Constant { value } => program.push(PlanOp::Const { value }),
+                FeatureOp::Abs { source } => {
+                    work.push(Emit::Op(PlanOp::Abs));
+                    work.push(Emit::Node(source));
+                }
+                FeatureOp::Mod { source, modulus } => {
+                    work.push(Emit::Op(PlanOp::Mod));
+                    work.push(Emit::Op(PlanOp::Const {
+                        value: i64::from(modulus),
+                    }));
+                    work.push(Emit::Node(source));
+                }
+                FeatureOp::Add { left, right } => {
+                    work.push(Emit::Op(PlanOp::Add));
+                    work.push(Emit::Node(right));
+                    work.push(Emit::Node(left));
+                }
+                FeatureOp::Sub { left, right } => {
+                    work.push(Emit::Op(PlanOp::Sub));
+                    work.push(Emit::Node(right));
+                    work.push(Emit::Node(left));
+                }
+                FeatureOp::Mul { left, right } => {
+                    work.push(Emit::Op(PlanOp::Mul));
+                    work.push(Emit::Node(right));
+                    work.push(Emit::Node(left));
+                }
+                FeatureOp::GaussianNorm { left, right } => {
+                    work.push(Emit::Op(PlanOp::GaussianNorm));
+                    work.push(Emit::Node(right));
+                    work.push(Emit::Node(left));
+                }
+                FeatureOp::EisensteinNorm { left, right } => {
+                    work.push(Emit::Op(PlanOp::EisensteinNorm));
+                    work.push(Emit::Node(right));
+                    work.push(Emit::Node(left));
+                }
+            },
+        }
+        if program.len().saturating_add(work.len()) > 3 * MAX_PLAN_OPS {
+            return Err(ControlError::Invalid(
+                "lowered feature term exceeds plan work limit".into(),
+            ));
+        }
+    }
+    if program.is_empty() || program.len() > MAX_PLAN_OPS {
+        return Err(ControlError::Invalid(
+            "lowered feature term exceeds plan operation limit".into(),
+        ));
+    }
+    Ok(program)
+}
+
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(tag = "op", rename_all = "kebab-case", deny_unknown_fields)]
 pub enum PlanOp {
@@ -577,6 +671,8 @@ pub enum PlanOp {
     Mod,
     Div,
     Gcd,
+    GaussianNorm,
+    EisensteinNorm,
     Min,
     Max,
     Eq,
@@ -606,6 +702,8 @@ enum OpCode {
     Mod,
     Div,
     Gcd,
+    GaussianNorm,
+    EisensteinNorm,
     Min,
     Max,
     Eq,
@@ -858,6 +956,26 @@ fn checked_gcd(left: i64, right: i64) -> Result<i64, ControlError> {
         .map_err(|_| ControlError::Invalid("gcd does not fit signed plan value".into()))
 }
 
+fn checked_quadratic_norm(left: i64, right: i64, eisenstein: bool) -> Result<i64, ControlError> {
+    let left_square = left
+        .checked_mul(left)
+        .ok_or_else(|| ControlError::Invalid("arithmetic overflow in plan".into()))?;
+    let right_square = right
+        .checked_mul(right)
+        .ok_or_else(|| ControlError::Invalid("arithmetic overflow in plan".into()))?;
+    let partial = if eisenstein {
+        left_square.checked_sub(
+            left.checked_mul(right)
+                .ok_or_else(|| ControlError::Invalid("arithmetic overflow in plan".into()))?,
+        )
+    } else {
+        Some(left_square)
+    };
+    partial
+        .and_then(|value| value.checked_add(right_square))
+        .ok_or_else(|| ControlError::Invalid("arithmetic overflow in plan".into()))
+}
+
 fn is_prime_u16(value: u16) -> bool {
     if value < 2 {
         return false;
@@ -971,6 +1089,8 @@ impl CompiledPlan {
                 PlanOp::Mod => (OpCode::Mod, 0, 0, 2),
                 PlanOp::Div => (OpCode::Div, 0, 0, 2),
                 PlanOp::Gcd => (OpCode::Gcd, 0, 0, 2),
+                PlanOp::GaussianNorm => (OpCode::GaussianNorm, 0, 0, 2),
+                PlanOp::EisensteinNorm => (OpCode::EisensteinNorm, 0, 0, 2),
                 PlanOp::Min => (OpCode::Min, 0, 0, 2),
                 PlanOp::Max => (OpCode::Max, 0, 0, 2),
                 PlanOp::Eq => (OpCode::Eq, 0, 0, 2),
@@ -1008,6 +1128,8 @@ impl CompiledPlan {
                 | OpCode::Mod
                 | OpCode::Div
                 | OpCode::Gcd
+                | OpCode::GaussianNorm
+                | OpCode::EisensteinNorm
                 | OpCode::Min
                 | OpCode::Max
                 | OpCode::Abs
@@ -1274,6 +1396,8 @@ impl CompiledPlan {
                             ControlError::Invalid("invalid integer division in plan".into())
                         })?,
                         OpCode::Gcd => checked_gcd(left, right)?,
+                        OpCode::GaussianNorm => checked_quadratic_norm(left, right, false)?,
+                        OpCode::EisensteinNorm => checked_quadratic_norm(left, right, true)?,
                         OpCode::Min => left.min(right),
                         OpCode::Max => left.max(right),
                         OpCode::Eq => i64::from(left == right),
@@ -1468,6 +1592,8 @@ mod tests {
             (PlanOp::Mod, 1),
             (PlanOp::Div, 2),
             (PlanOp::Gcd, 1),
+            (PlanOp::GaussianNorm, 58),
+            (PlanOp::EisensteinNorm, 37),
             (PlanOp::Min, 3),
             (PlanOp::Max, 7),
         ];
@@ -1644,6 +1770,37 @@ mod tests {
         let plan = CompiledPlan::compile(&spec.lower().unwrap(), &["x".to_owned()]).unwrap();
         assert_eq!(plan.evaluate_value_untraced(&[2]).unwrap(), 1);
         assert_eq!(plan.evaluate_value_untraced(&[3]).unwrap(), 0);
+    }
+
+    #[test]
+    fn feature_dag_term_lowers_to_equivalent_plan_iteratively() {
+        let mut dag = FeatureDag::new(2, 2, 32).unwrap();
+        let left = dag.input(0).unwrap();
+        let right = dag.input(1).unwrap();
+        let norm = dag.eisenstein_norm(left, right).unwrap();
+        let root = dag.modulo(norm, 7).unwrap();
+        let fields = ["x".to_owned(), "y".to_owned()];
+        let program = feature_term_program(&dag, root, &fields).unwrap();
+        let plan = CompiledPlan::compile(
+            &PlanSpec {
+                schema: PLAN_SCHEMA.to_owned(),
+                name: "lowered-feature".to_owned(),
+                role: PlanRole::Diagnostic,
+                output: PlanOutput::Score,
+                scope: None,
+                program,
+            },
+            &fields,
+        )
+        .unwrap();
+        let mut workspace = dag.workspace();
+        for left in -8_i64..=8 {
+            for right in -8_i64..=8 {
+                let row = [left, right];
+                let expected = dag.evaluate(&row, &mut workspace).unwrap()[root.index()];
+                assert_eq!(plan.evaluate_value_untraced(&row).unwrap(), expected);
+            }
+        }
     }
 
     #[test]

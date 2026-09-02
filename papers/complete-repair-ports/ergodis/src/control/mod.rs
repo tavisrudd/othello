@@ -37,9 +37,9 @@ pub use text::{
     MAX_PLAN_TEXT_BYTES, MAX_PLAN_TEXT_TOKENS,
 };
 pub use vm::{
-    evaluate_plan, CompiledPlan, Evaluation, ExpressionPlanSpec, FeatureBatch,
-    FeatureGeneratorProvenance, PlanDocument, PlanExpr, PlanOp, PlanOutput, PlanRole, PlanScope,
-    PlanSpec,
+    evaluate_plan, feature_term_program, CompiledPlan, Evaluation, ExpressionPlanSpec,
+    FeatureBatch, FeatureGeneratorProvenance, PlanDocument, PlanExpr, PlanOp, PlanOutput, PlanRole,
+    PlanScope, PlanSpec,
 };
 
 pub const SCHEMA: &str = "ergodis-control-experimental-v0";

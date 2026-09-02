@@ -364,19 +364,58 @@ impl Parser {
             "abs" => PlanExpr::Abs {
                 arg: Box::new(first),
             },
-            "min" | "max" => {
+            "popcount" => PlanExpr::PopCount {
+                arg: Box::new(first),
+            },
+            "parity" => PlanExpr::Parity {
+                arg: Box::new(first),
+            },
+            "min" | "max" | "mod" | "div" | "gcd" | "gaussian_norm" | "eisenstein_norm" => {
                 self.expect(Kind::Comma)?;
                 let second = self.expr(0, depth + 1)?;
-                if name == "min" {
-                    PlanExpr::Min {
+                match name {
+                    "min" => PlanExpr::Min {
                         left: Box::new(first),
                         right: Box::new(second),
-                    }
-                } else {
-                    PlanExpr::Max {
+                    },
+                    "max" => PlanExpr::Max {
                         left: Box::new(first),
                         right: Box::new(second),
-                    }
+                    },
+                    "mod" => PlanExpr::Mod {
+                        left: Box::new(first),
+                        right: Box::new(second),
+                    },
+                    "div" => PlanExpr::Div {
+                        left: Box::new(first),
+                        right: Box::new(second),
+                    },
+                    "gcd" => PlanExpr::Gcd {
+                        left: Box::new(first),
+                        right: Box::new(second),
+                    },
+                    "gaussian_norm" => PlanExpr::GaussianNorm {
+                        left: Box::new(first),
+                        right: Box::new(second),
+                    },
+                    "eisenstein_norm" => PlanExpr::EisensteinNorm {
+                        left: Box::new(first),
+                        right: Box::new(second),
+                    },
+                    _ => unreachable!(),
+                }
+            }
+            "legendre" => {
+                self.expect(Kind::Comma)?;
+                let modulus = self.expr(0, depth + 1)?;
+                let PlanExpr::Const { value } = modulus else {
+                    return self.error("Legendre modulus must be an integer literal");
+                };
+                let modulus = u16::try_from(value)
+                    .map_err(|_| ControlError::Invalid("Legendre modulus exceeds u16".into()))?;
+                PlanExpr::Legendre {
+                    arg: Box::new(first),
+                    modulus,
                 }
             }
             "select" => {
@@ -531,8 +570,26 @@ fn format_expr(expr: &PlanExpr, out: &mut String, depth: usize) -> Result<(), Co
             out.push(')');
         }
         PlanExpr::Abs { arg } => format_call("abs", &[arg], out, depth)?,
+        PlanExpr::PopCount { arg } => format_call("popcount", &[arg], out, depth)?,
+        PlanExpr::Parity { arg } => format_call("parity", &[arg], out, depth)?,
+        PlanExpr::Legendre { arg, modulus } => {
+            out.push_str("legendre(");
+            format_expr(arg, out, depth + 1)?;
+            out.push_str(", ");
+            out.push_str(&modulus.to_string());
+            out.push(')');
+        }
         PlanExpr::Min { left, right } => format_call("min", &[left, right], out, depth)?,
         PlanExpr::Max { left, right } => format_call("max", &[left, right], out, depth)?,
+        PlanExpr::Mod { left, right } => format_call("mod", &[left, right], out, depth)?,
+        PlanExpr::Div { left, right } => format_call("div", &[left, right], out, depth)?,
+        PlanExpr::Gcd { left, right } => format_call("gcd", &[left, right], out, depth)?,
+        PlanExpr::GaussianNorm { left, right } => {
+            format_call("gaussian_norm", &[left, right], out, depth)?
+        }
+        PlanExpr::EisensteinNorm { left, right } => {
+            format_call("eisenstein_norm", &[left, right], out, depth)?
+        }
         PlanExpr::Select {
             condition,
             then_value,
@@ -684,6 +741,24 @@ plan "rigid-order" {
             serde_json::to_vec(&reparsed.lower().unwrap()).unwrap()
         );
         assert_eq!(format_expression_plan(&parsed).unwrap(), formatted);
+    }
+
+    #[test]
+    fn number_theoretic_functions_round_trip_through_text() {
+        let source = r#"
+plan arithmetic {
+  role diagnostic;
+  output predicate;
+  expr legendre(mod(eisenstein_norm(x, y), 7), 7) == parity(gcd(x, y));
+}
+"#;
+        let parsed = parse_expression_plan(source).unwrap();
+        let formatted = format_expression_plan(&parsed).unwrap();
+        let reparsed = parse_expression_plan(&formatted).unwrap();
+        assert_eq!(
+            serde_json::to_value(parsed).unwrap(),
+            serde_json::to_value(reparsed).unwrap()
+        );
     }
 
     #[test]
