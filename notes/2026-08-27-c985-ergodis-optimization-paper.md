@@ -4191,8 +4191,24 @@ two/modulo-seven bank, and recovers the Eisenstein-norm residue pruner from
 labels under the shared ranked engine.
 
 This closes the reusable engine, raw-term representation, runtime generation,
-zero-allocation evaluation, and exact prune-ranking slices.  It does **not**
-yet close the C1016 raw-orbit claim: the next gate is a stable DAG snapshot and
-private adapter over train/holdout raw orbit rows, followed by parametric
-cross-shard replay.  No C1016 identifiers, private corpora, or campaign
-semantics are present in the public implementation.
+zero-allocation evaluation, and exact prune-ranking slices.  Commit
+`78ef49223` adds a versioned stable DAG snapshot.  Reload never deserializes
+unchecked executable state: it reconstructs every operation through the
+bounded constructors and rejects duplicate, non-topological, noncanonical,
+over-degree, and out-of-range node streams.  IDs and evaluated values survive
+the round trip exactly.
+
+Commit `9707bd1b3` supplies the first parametric-transfer gate.  Runtime
+expansion may opt into affine lifts of nonlinear terms, so a symbolic shard
+parameter multiplied by a raw count and added to another count remains a
+degree-two candidate.  Training on parameter values 2, 3, 5, and 7 recovers a
+zero predicate depending on the symbolic parameter; an independent exhaustive
+replay on held-out values 11 and 13 agrees exactly with `parameter*x + y = 0`.
+The parameter value is an input term, not a shard identity or compiled switch.
+
+The remaining C1016 raw-orbit gate is private adaptation over its real
+train/holdout orbit rows and cross-multiplier replay.  That adapter must wait
+for the current uncommitted private banked-corpus work to acquire a stable
+commit boundary; do not make a public commit depend on those dirty modules.
+No C1016 identifiers, private corpora, or campaign semantics are present in
+the public implementation.
