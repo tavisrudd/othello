@@ -261,7 +261,8 @@ pub use theorem_search::{
     CensusReductionError, DecisionListConfig, DecisionListError, DecisionListRule, EvolutionConfig,
     EvolutionError, EvolutionResult, EvolutionRunError, EvolutionSummary, ImplicationScore,
     RankedCandidateTrial, RankedEvolutionDriver, RankedEvolutionRunError, RankedEvolutionSummary,
-    SoundDecisionList,
+    SoundDecisionList, SoundTheoremArchive, SoundTheoremPoint, TheoremArchiveAdmission,
+    TheoremArchiveError,
 };
 pub use transfer::{
     compile_binary_inner_dual, compile_binary_rank_one, compile_binary_target_subspace,

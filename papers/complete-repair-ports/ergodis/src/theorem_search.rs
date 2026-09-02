@@ -339,6 +339,174 @@ pub enum DecisionListError {
     TooManyExamples,
 }
 
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct SoundTheoremPoint<C> {
+    pub candidate: C,
+    pub covered_true: u64,
+    pub evaluation_cost: u32,
+    coverage: Box<[u64]>,
+}
+
+impl<C> SoundTheoremPoint<C> {
+    pub fn coverage(&self) -> &[u64] {
+        &self.coverage
+    }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum TheoremArchiveAdmission {
+    Inserted { removed: usize, novel_rows: u64 },
+    RejectedUnsound { false_positives: u64 },
+    RejectedDominated,
+    RejectedNoNovelCoverage,
+    RejectedCapacity,
+}
+
+#[derive(Clone, Copy, Debug, Error, Eq, PartialEq)]
+pub enum TheoremArchiveError {
+    #[error("theorem archive bounds must be positive")]
+    EmptyBound,
+    #[error("theorem archive bitmap has the wrong width")]
+    BitmapWidth,
+    #[error("theorem archive bitmap sets bits beyond the row domain")]
+    BitmapTail,
+}
+
+/// Bounded exact archive of sound pruning theorems.
+///
+/// Coverage is stored as one bit per corpus row. Dominance requires coverage
+/// set inclusion and no greater evaluation cost, rather than comparing counts
+/// alone. This preserves complementary rules. Dalmatian admission requires a
+/// previously uncovered positive unless the new rule replaces dominated
+/// archive points.
+pub struct SoundTheoremArchive<C> {
+    rows: usize,
+    maximum_points: usize,
+    conclusion: Box<[u64]>,
+    covered_union: Box<[u64]>,
+    points: Vec<SoundTheoremPoint<C>>,
+}
+
+impl<C: Clone + Ord> SoundTheoremArchive<C> {
+    pub fn new(
+        rows: usize,
+        conclusion: &[u64],
+        maximum_points: usize,
+    ) -> Result<Self, TheoremArchiveError> {
+        if rows == 0 || maximum_points == 0 {
+            return Err(TheoremArchiveError::EmptyBound);
+        }
+        validate_archive_bitmap(rows, conclusion)?;
+        Ok(Self {
+            rows,
+            maximum_points,
+            conclusion: conclusion.into(),
+            covered_union: vec![0_u64; conclusion.len()].into_boxed_slice(),
+            points: Vec::with_capacity(maximum_points),
+        })
+    }
+
+    pub fn points(&self) -> &[SoundTheoremPoint<C>] {
+        &self.points
+    }
+
+    pub fn covered_union(&self) -> &[u64] {
+        &self.covered_union
+    }
+
+    pub fn admit(
+        &mut self,
+        candidate: C,
+        coverage: &[u64],
+        evaluation_cost: u32,
+    ) -> Result<TheoremArchiveAdmission, TheoremArchiveError> {
+        validate_archive_bitmap(self.rows, coverage)?;
+        let false_positives = coverage
+            .iter()
+            .zip(&self.conclusion)
+            .map(|(&coverage, &conclusion)| u64::from((coverage & !conclusion).count_ones()))
+            .sum();
+        if false_positives != 0 {
+            return Ok(TheoremArchiveAdmission::RejectedUnsound { false_positives });
+        }
+        if self.points.iter().any(|point| {
+            coverage_superset(point.coverage(), coverage)
+                && (point.evaluation_cost < evaluation_cost
+                    || (point.evaluation_cost == evaluation_cost && point.candidate <= candidate))
+        }) {
+            return Ok(TheoremArchiveAdmission::RejectedDominated);
+        }
+        let novel_rows = coverage
+            .iter()
+            .zip(&self.covered_union)
+            .map(|(&coverage, &covered)| u64::from((coverage & !covered).count_ones()))
+            .sum();
+        let removed = self
+            .points
+            .iter()
+            .filter(|point| {
+                coverage_superset(coverage, point.coverage())
+                    && (evaluation_cost < point.evaluation_cost
+                        || (evaluation_cost == point.evaluation_cost
+                            && candidate < point.candidate))
+            })
+            .count();
+        if novel_rows == 0 && removed == 0 {
+            return Ok(TheoremArchiveAdmission::RejectedNoNovelCoverage);
+        }
+        if self.points.len() - removed + 1 > self.maximum_points {
+            return Ok(TheoremArchiveAdmission::RejectedCapacity);
+        }
+        self.points.retain(|point| {
+            !(coverage_superset(coverage, point.coverage())
+                && (evaluation_cost < point.evaluation_cost
+                    || (evaluation_cost == point.evaluation_cost && candidate < point.candidate)))
+        });
+        let covered_true = coverage
+            .iter()
+            .map(|word| u64::from(word.count_ones()))
+            .sum();
+        self.points.push(SoundTheoremPoint {
+            candidate,
+            covered_true,
+            evaluation_cost,
+            coverage: coverage.into(),
+        });
+        self.points
+            .sort_unstable_by(|left, right| left.candidate.cmp(&right.candidate));
+        self.covered_union.fill(0);
+        for point in &self.points {
+            for (covered, &word) in self.covered_union.iter_mut().zip(point.coverage()) {
+                *covered |= word;
+            }
+        }
+        Ok(TheoremArchiveAdmission::Inserted {
+            removed,
+            novel_rows,
+        })
+    }
+}
+
+fn validate_archive_bitmap(rows: usize, bitmap: &[u64]) -> Result<(), TheoremArchiveError> {
+    if bitmap.len() != rows.div_ceil(64) {
+        return Err(TheoremArchiveError::BitmapWidth);
+    }
+    if rows % 64 != 0
+        && bitmap
+            .last()
+            .is_some_and(|&word| word & !((1_u64 << (rows % 64)) - 1) != 0)
+    {
+        return Err(TheoremArchiveError::BitmapTail);
+    }
+    Ok(())
+}
+
+fn coverage_superset(left: &[u64], right: &[u64]) -> bool {
+    left.iter()
+        .zip(right)
+        .all(|(&left, &right)| left & right == right)
+}
+
 /// Greedily assemble a deterministic cascade from independently sound rules.
 ///
 /// Candidate soundness is replayed against every example instead of trusted
@@ -937,6 +1105,76 @@ mod tests {
                 |_| 0,
             ),
             Err(DecisionListError::EmptyBound)
+        );
+    }
+
+    #[test]
+    fn theorem_archive_combines_dalmatian_novelty_with_exact_dominance() {
+        let mut archive = SoundTheoremArchive::new(5, &[0b0_0111], 3).unwrap();
+        assert_eq!(
+            archive.admit("first", &[0b0_0001], 3).unwrap(),
+            TheoremArchiveAdmission::Inserted {
+                removed: 0,
+                novel_rows: 1,
+            }
+        );
+        assert_eq!(
+            archive.admit("second", &[0b0_0010], 2).unwrap(),
+            TheoremArchiveAdmission::Inserted {
+                removed: 0,
+                novel_rows: 1,
+            }
+        );
+        assert_eq!(
+            archive.admit("unsound", &[0b1_0000], 1).unwrap(),
+            TheoremArchiveAdmission::RejectedUnsound { false_positives: 1 }
+        );
+        assert_eq!(
+            archive.admit("expensive-first", &[0b0_0001], 4).unwrap(),
+            TheoremArchiveAdmission::RejectedDominated
+        );
+        assert_eq!(
+            archive.admit("redundant-union", &[0b0_0011], 10).unwrap(),
+            TheoremArchiveAdmission::RejectedNoNovelCoverage
+        );
+        assert_eq!(
+            archive.admit("combined", &[0b0_0011], 1).unwrap(),
+            TheoremArchiveAdmission::Inserted {
+                removed: 2,
+                novel_rows: 0,
+            }
+        );
+        assert_eq!(
+            archive.admit("third", &[0b0_0100], 5).unwrap(),
+            TheoremArchiveAdmission::Inserted {
+                removed: 0,
+                novel_rows: 1,
+            }
+        );
+        assert_eq!(archive.covered_union(), &[0b0_0111]);
+        assert_eq!(archive.points().len(), 2);
+        assert_eq!(archive.points()[0].candidate, "combined");
+        assert_eq!(archive.points()[0].covered_true, 2);
+    }
+
+    #[test]
+    fn theorem_archive_preserves_complements_and_fails_closed_at_capacity() {
+        let mut archive = SoundTheoremArchive::new(3, &[0b111], 1).unwrap();
+        assert!(matches!(
+            archive.admit(0_u8, &[0b001], 1).unwrap(),
+            TheoremArchiveAdmission::Inserted { .. }
+        ));
+        assert_eq!(
+            archive.admit(1_u8, &[0b010], 1).unwrap(),
+            TheoremArchiveAdmission::RejectedCapacity
+        );
+        assert_eq!(archive.covered_union(), &[0b001]);
+        assert_eq!(archive.points().len(), 1);
+        assert_eq!(
+            SoundTheoremArchive::<u8>::new(3, &[1_u64 << 63], 1)
+                .err()
+                .unwrap(),
+            TheoremArchiveError::BitmapTail
         );
     }
 }
