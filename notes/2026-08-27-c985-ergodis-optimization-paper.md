@@ -4244,3 +4244,23 @@ existing fail-closed contracts.  These are cold derived columns consumed by
 the unchanged row VM, so variable child counts—including seven residual
 matchings—require no cross-row work or allocation in candidate evaluation.
 Applying the adapter to C1015's real corpus remains private campaign work.
+
+Commit `d313ff7c5` removes the next raw-evolution memory bottleneck.  A bounded
+`FeatureZeroBank` compiles predicates of the form `feature == 0` into
+column-major bitmaps, reducing retained candidate data from one `i64` per
+row-feature pair to one bit (64x smaller).  Necessary-condition scoring then
+uses wordwise POPCNT to return exact surviving and false-negative censuses,
+allocates nothing after compilation, rejects malformed label widths/tail bits,
+and preserves both end-to-end theorem-recovery controls.  Full all-feature
+tests and strict all-target clippy pass.
+
+Relative to Fable's A.3 ledger, items 1, 2 (first affine symbolic form), 3, 7,
+and 8 are now landed; the persistent typed representation and injection bridge
+underlying them are also complete.  Item 5's invariant-first ordering exists
+at the generic ranking/admission seam but is not yet the daemon default.  The
+highest-value uncovered reusable slices are therefore: (a) sound decision-list
+assembly over disjoint admitted predicates, (b) a daemon adapter over the one
+runner-neutral engine, (c) learned scope masks/zero conjunctions, and (d) the
+real raw-orbit and basin-obstruction private gates.  Broad file/module moves,
+API-facade cleanup, and private-bin consolidation remain architectural debt;
+they must not be mixed into these narrowly validated evolve commits.
