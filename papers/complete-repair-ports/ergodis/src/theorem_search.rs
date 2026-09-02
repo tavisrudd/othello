@@ -507,6 +507,194 @@ fn coverage_superset(left: &[u64], right: &[u64]) -> bool {
         .all(|(&left, &right)| left & right == right)
 }
 
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
+pub enum FailureCoreKind {
+    Unsound,
+    Incomplete,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct FailureCore<K> {
+    pub key: K,
+    pub kind: FailureCoreKind,
+    coverage: Box<[u64]>,
+}
+
+impl<K> FailureCore<K> {
+    pub fn coverage(&self) -> &[u64] {
+        &self.coverage
+    }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum FailureCoreAdmission {
+    Inserted {
+        inserted: usize,
+        removed: usize,
+        false_positives: u64,
+        false_negatives: u64,
+    },
+    RejectedNoFailure,
+    RejectedRedundant {
+        false_positives: u64,
+        false_negatives: u64,
+    },
+    RejectedCapacity,
+}
+
+/// Bounded antichain of exact corpus failures.
+///
+/// Keys should be canonical plan-normal-form hashes. Coverage inclusion is the
+/// checked weakening order: a generalization of an unsound core still covers
+/// its false positive, while a specialization of an incomplete core still
+/// misses its false negative. The bank contracts proposal space only; it does
+/// not grant proof authority to a retained theorem.
+pub struct FailureCoreBank<K> {
+    rows: usize,
+    maximum_cores: usize,
+    conclusion: Box<[u64]>,
+    cores: Vec<FailureCore<K>>,
+}
+
+impl<K: Clone + Ord> FailureCoreBank<K> {
+    pub fn new(
+        rows: usize,
+        conclusion: &[u64],
+        maximum_cores: usize,
+    ) -> Result<Self, TheoremArchiveError> {
+        if rows == 0 || maximum_cores == 0 {
+            return Err(TheoremArchiveError::EmptyBound);
+        }
+        validate_archive_bitmap(rows, conclusion)?;
+        Ok(Self {
+            rows,
+            maximum_cores,
+            conclusion: conclusion.into(),
+            cores: Vec::with_capacity(maximum_cores),
+        })
+    }
+
+    pub fn cores(&self) -> &[FailureCore<K>] {
+        &self.cores
+    }
+
+    pub fn blocking_core(
+        &self,
+        proposal_coverage: &[u64],
+    ) -> Result<Option<&FailureCore<K>>, TheoremArchiveError> {
+        validate_archive_bitmap(self.rows, proposal_coverage)?;
+        Ok(self.cores.iter().find(|core| match core.kind {
+            FailureCoreKind::Unsound => coverage_superset(proposal_coverage, core.coverage()),
+            FailureCoreKind::Incomplete => coverage_superset(core.coverage(), proposal_coverage),
+        }))
+    }
+
+    pub fn admit_failure(
+        &mut self,
+        key: K,
+        coverage: &[u64],
+    ) -> Result<FailureCoreAdmission, TheoremArchiveError> {
+        validate_archive_bitmap(self.rows, coverage)?;
+        let false_positives = coverage
+            .iter()
+            .zip(&self.conclusion)
+            .map(|(&coverage, &conclusion)| u64::from((coverage & !conclusion).count_ones()))
+            .sum();
+        let false_negatives = coverage
+            .iter()
+            .zip(&self.conclusion)
+            .map(|(&coverage, &conclusion)| u64::from((conclusion & !coverage).count_ones()))
+            .sum();
+        let mut kinds = [None, None];
+        if false_positives != 0 {
+            kinds[0] = Some(FailureCoreKind::Unsound);
+        }
+        if false_negatives != 0 {
+            kinds[1] = Some(FailureCoreKind::Incomplete);
+        }
+        if kinds.iter().all(Option::is_none) {
+            return Ok(FailureCoreAdmission::RejectedNoFailure);
+        }
+
+        let mut inserted = 0_usize;
+        let mut removed = 0_usize;
+        for kind in kinds.into_iter().flatten() {
+            let redundant = self.cores.iter().any(|core| {
+                core.kind == kind && core_subsumes_candidate(core, kind, &key, coverage)
+            });
+            if !redundant {
+                inserted += 1;
+                removed += self
+                    .cores
+                    .iter()
+                    .filter(|core| {
+                        core.kind == kind && candidate_subsumes_core(kind, &key, coverage, core)
+                    })
+                    .count();
+            }
+        }
+        if inserted == 0 {
+            return Ok(FailureCoreAdmission::RejectedRedundant {
+                false_positives,
+                false_negatives,
+            });
+        }
+        if self.cores.len() - removed + inserted > self.maximum_cores {
+            return Ok(FailureCoreAdmission::RejectedCapacity);
+        }
+        for kind in kinds.into_iter().flatten() {
+            if self.cores.iter().any(|core| {
+                core.kind == kind && core_subsumes_candidate(core, kind, &key, coverage)
+            }) {
+                continue;
+            }
+            self.cores.retain(|core| {
+                core.kind != kind || !candidate_subsumes_core(kind, &key, coverage, core)
+            });
+            self.cores.push(FailureCore {
+                key: key.clone(),
+                kind,
+                coverage: coverage.into(),
+            });
+        }
+        self.cores.sort_unstable_by(|left, right| {
+            left.kind.cmp(&right.kind).then(left.key.cmp(&right.key))
+        });
+        Ok(FailureCoreAdmission::Inserted {
+            inserted,
+            removed,
+            false_positives,
+            false_negatives,
+        })
+    }
+}
+
+fn core_subsumes_candidate<K: Ord>(
+    core: &FailureCore<K>,
+    kind: FailureCoreKind,
+    key: &K,
+    coverage: &[u64],
+) -> bool {
+    let inclusion = match kind {
+        FailureCoreKind::Unsound => coverage_superset(coverage, core.coverage()),
+        FailureCoreKind::Incomplete => coverage_superset(core.coverage(), coverage),
+    };
+    inclusion && (core.coverage() != coverage || &core.key <= key)
+}
+
+fn candidate_subsumes_core<K: Ord>(
+    kind: FailureCoreKind,
+    key: &K,
+    coverage: &[u64],
+    core: &FailureCore<K>,
+) -> bool {
+    let inclusion = match kind {
+        FailureCoreKind::Unsound => coverage_superset(core.coverage(), coverage),
+        FailureCoreKind::Incomplete => coverage_superset(coverage, core.coverage()),
+    };
+    inclusion && (core.coverage() != coverage || key < &core.key)
+}
+
 /// Greedily assemble a deterministic cascade from independently sound rules.
 ///
 /// Candidate soundness is replayed against every example instead of trusted
@@ -1176,5 +1364,72 @@ mod tests {
                 .unwrap(),
             TheoremArchiveError::BitmapTail
         );
+    }
+
+    #[test]
+    fn failure_cores_contract_generalizations_and_specializations() {
+        let mut bank = FailureCoreBank::new(4, &[0b0011], 4).unwrap();
+        assert_eq!(
+            bank.admit_failure("unsound", &[0b0111]).unwrap(),
+            FailureCoreAdmission::Inserted {
+                inserted: 1,
+                removed: 0,
+                false_positives: 1,
+                false_negatives: 0,
+            }
+        );
+        let blocker = bank.blocking_core(&[0b1111]).unwrap().unwrap();
+        assert_eq!(blocker.key, "unsound");
+        assert_eq!(blocker.kind, FailureCoreKind::Unsound);
+        assert_eq!(
+            bank.admit_failure("unsound-generalization", &[0b1111])
+                .unwrap(),
+            FailureCoreAdmission::RejectedRedundant {
+                false_positives: 2,
+                false_negatives: 0,
+            }
+        );
+
+        assert_eq!(
+            bank.admit_failure("incomplete", &[0b0001]).unwrap(),
+            FailureCoreAdmission::Inserted {
+                inserted: 1,
+                removed: 0,
+                false_positives: 0,
+                false_negatives: 1,
+            }
+        );
+        let blocker = bank.blocking_core(&[0]).unwrap().unwrap();
+        assert_eq!(blocker.key, "incomplete");
+        assert_eq!(blocker.kind, FailureCoreKind::Incomplete);
+        assert_eq!(
+            bank.admit_failure("complete", &[0b0011]).unwrap(),
+            FailureCoreAdmission::RejectedNoFailure
+        );
+        assert_eq!(bank.cores().len(), 2);
+    }
+
+    #[test]
+    fn failure_core_antichain_replaces_weaker_failures_atomically() {
+        let mut bank = FailureCoreBank::new(4, &[0b0011], 4).unwrap();
+        bank.admit_failure("broad-unsound", &[0b1111]).unwrap();
+        let admission = bank.admit_failure("narrow-unsound", &[0b0100]).unwrap();
+        assert_eq!(
+            admission,
+            FailureCoreAdmission::Inserted {
+                inserted: 2,
+                removed: 1,
+                false_positives: 1,
+                false_negatives: 2,
+            }
+        );
+        assert_eq!(bank.cores().len(), 2);
+
+        let mut capacity = FailureCoreBank::new(4, &[0b0011], 1).unwrap();
+        assert_eq!(
+            capacity.admit_failure("two-failures", &[0b0100]).unwrap(),
+            FailureCoreAdmission::RejectedCapacity
+        );
+        assert!(capacity.cores().is_empty());
     }
 }

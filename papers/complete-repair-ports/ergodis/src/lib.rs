@@ -259,10 +259,10 @@ pub use theorem_search::{
     assemble_sound_decision_list, drive_ranked_evolution_streaming, evolve_implications,
     evolve_implications_streaming, evolve_ranked_streaming, CandidateTrial, CensusReduction,
     CensusReductionError, DecisionListConfig, DecisionListError, DecisionListRule, EvolutionConfig,
-    EvolutionError, EvolutionResult, EvolutionRunError, EvolutionSummary, ImplicationScore,
-    RankedCandidateTrial, RankedEvolutionDriver, RankedEvolutionRunError, RankedEvolutionSummary,
-    SoundDecisionList, SoundTheoremArchive, SoundTheoremPoint, TheoremArchiveAdmission,
-    TheoremArchiveError,
+    EvolutionError, EvolutionResult, EvolutionRunError, EvolutionSummary, FailureCore,
+    FailureCoreAdmission, FailureCoreBank, FailureCoreKind, ImplicationScore, RankedCandidateTrial,
+    RankedEvolutionDriver, RankedEvolutionRunError, RankedEvolutionSummary, SoundDecisionList,
+    SoundTheoremArchive, SoundTheoremPoint, TheoremArchiveAdmission, TheoremArchiveError,
 };
 pub use transfer::{
     compile_binary_inner_dual, compile_binary_rank_one, compile_binary_target_subspace,
