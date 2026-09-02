@@ -439,11 +439,14 @@ The operational policy is deliberately split into three accounting layers.
 Logical query/revision/work/return-byte reservations are durable and never
 refunded by reconnect, cancellation, or retry. Attempt retries retain their
 typed action, exact `not_before` time, and owning deadline in the durable
-ticket. Admission-rate token buckets are currently process-local, although
-their exact remainder-bearing snapshot type is restart-validatable; persisting
-and reconciling campaign/provider/session bucket snapshots is the next
-durability slice. A real provider-neutral worker adapter must consume the
-ticket actions rather than invent a second timeout/backoff policy.
+ticket. Admission-rate token buckets are now published as one private source-
+bound campaign/provider/session snapshot after every all-or-none debit. Exact
+refill remainders and monotone timestamps survive reopen; duplicate entries,
+binding drift, loose permissions, capacity overflow, and reversed clocks fail
+closed, while ambiguous replacement poisons dispatch. Attaching restored
+proposal sessions to a resumed campaign remains separate from the now-durable
+rate store. A real provider-neutral worker adapter must consume the ticket
+actions rather than invent a second timeout/backoff policy.
 
 The next generic slice now implements the in-memory/persistable ticket state
 machine without adding wire operations. Its fixed ticket identity makes submit

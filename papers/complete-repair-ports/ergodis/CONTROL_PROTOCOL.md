@@ -232,9 +232,14 @@ re-hashes the retained file against the durable ticket before returning its
 run-relative path. Oversized, non-private, symlinked, missing, or changed files
 fail closed.
 
-Rate-bucket state is process-local until campaign resume is implemented.
-Provider SDK code and autonomous provider selection remain outside the generic
-layer.
+Campaign/provider/session rate state is published as one private, source-bound
+snapshot after each all-or-none debit. The snapshot preserves exact refill
+remainders and monotone timestamps, rejects duplicate provider/session entries,
+and fails closed on binding, permission, schema, capacity, or clock drift.
+Ambiguous replacement poisons dispatch. The durable store has an explicit
+reopen path; attaching restored proposal sessions to a resumed campaign remains
+the campaign-resume integration step. Provider SDK code and autonomous provider
+selection remain outside the generic layer.
 
 `ergodisctl evolve-start` accepts an optional direct seed JSONL file and up to
 eight repeated `--resume-evidence` paths.  A replay archive must match the

@@ -2679,9 +2679,14 @@ files are disposable and may be deleted at any time.
     payload never enters a JSON frame or whole-memory buffer, and result fetch
     revalidates it against durable ticket metadata. Symlink, path-escape,
     permissions, oversize, stale-attempt, and metadata-mismatch cases fail
-    closed. The next slice is durable rate snapshots and an actual
-    provider-neutral adapter; no provider SDK or autonomous adapter is claimed
-    yet.
+    closed. Hierarchical admission rates are now durable too: one private,
+    source-bound snapshot atomically records campaign/provider/session buckets,
+    including exact refill remainders and monotone timestamps, after every
+    accepted debit. Strict reopen retains exhausted capacity and rejects
+    duplicate entries, binding/permission/schema/capacity drift, or reversed
+    time; ambiguous replacement poisons dispatch. The next slice is an actual
+    provider-neutral adapter consuming the existing ticket actions; no provider
+    SDK or autonomous adapter is claimed yet.
 
     The first new proposer family is accepted. A coloured-Tanner isomorphism
     proposal between the official LP1768 X/Z instances is independently

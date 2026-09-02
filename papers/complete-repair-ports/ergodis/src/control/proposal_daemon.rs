@@ -1,11 +1,11 @@
 //! Typed campaign-daemon operations for bounded external proposers.
 
 use super::{
-    charge_token_buckets, random_hex, ControlError, ProposalArtifactStore, ProposalDeadlines,
-    ProposalFailureClass, ProposalFailureReport, ProposalIdempotencyKey, ProposalRole,
-    ProposalSession, ProposalSessionLimits, ProposalSessionUsage, ProposalSubmissionStore,
-    ProposalTicketClaim, ProposalTicketSnapshot, ProposalTicketSpec, ProposalTicketStatus,
-    ProposalTicketSubmission, RetryAction, RetryPolicy, TokenBucket, TokenBucketConfig,
+    random_hex, ControlError, ProposalArtifactStore, ProposalDeadlines, ProposalFailureClass,
+    ProposalFailureReport, ProposalIdempotencyKey, ProposalRateStore, ProposalRateStoreConfig,
+    ProposalRole, ProposalSession, ProposalSessionLimits, ProposalSessionUsage,
+    ProposalSubmissionStore, ProposalTicketClaim, ProposalTicketSnapshot, ProposalTicketSpec,
+    ProposalTicketStatus, ProposalTicketSubmission, RetryAction, RetryPolicy, TokenBucketConfig,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
@@ -38,6 +38,13 @@ const SESSION_RATE: TokenBucketConfig = TokenBucketConfig {
     capacity: 16,
     refill_units: 16,
     refill_period_ms: 60_000,
+};
+const RATE_STORE_CONFIG: ProposalRateStoreConfig = ProposalRateStoreConfig {
+    campaign: CAMPAIGN_RATE,
+    provider: PROVIDER_RATE,
+    session: SESSION_RATE,
+    maximum_providers: MAX_EXTERNAL_PROVIDERS,
+    maximum_sessions: MAX_EXTERNAL_PROPOSAL_SESSIONS,
 };
 
 #[derive(Clone, Copy, Debug, Deserialize)]
@@ -204,14 +211,12 @@ pub struct ProposalDaemon {
     clock: ControllerClock,
     retry_policy: RetryPolicy,
     artifacts: ProposalArtifactStore,
-    campaign_rate: TokenBucket,
-    providers: BTreeMap<u16, TokenBucket>,
+    rate_store: ProposalRateStore,
     sessions: BTreeMap<String, DaemonSession>,
 }
 
 struct DaemonSession {
     store: ProposalSubmissionStore,
-    rate: TokenBucket,
 }
 
 impl ProposalDaemon {
@@ -240,6 +245,11 @@ impl ProposalDaemon {
                 .join("proposal-artifacts"),
         )
         .map_err(invalid)?;
+        let rate_binding =
+            session_binding(run_id, nonce, "proposal-rate-store", source_fingerprint);
+        let rate_store =
+            ProposalRateStore::create(&root.join("rates"), rate_binding, RATE_STORE_CONFIG, now_ms)
+                .map_err(invalid)?;
         Ok(Self {
             root: root.to_path_buf(),
             run_id: run_id.into(),
@@ -252,8 +262,7 @@ impl ProposalDaemon {
                 maximum_delay_ms: 30_000,
             },
             artifacts,
-            campaign_rate: TokenBucket::full(CAMPAIGN_RATE, now_ms)?,
-            providers: BTreeMap::new(),
+            rate_store,
             sessions: BTreeMap::new(),
         })
     }
@@ -301,10 +310,10 @@ impl ProposalDaemon {
         )
         .map_err(invalid)?;
         let usage = store.session().map_err(invalid)?.usage();
-        let session = DaemonSession {
-            store,
-            rate: TokenBucket::full(SESSION_RATE, now_ms)?,
-        };
+        self.rate_store
+            .register_session(&session_id, now_ms)
+            .map_err(invalid)?;
+        let session = DaemonSession { store };
         if self.sessions.insert(session_id.clone(), session).is_some() {
             return Err(ControlError::Invalid(
                 "external proposer session identity collision".into(),
@@ -603,39 +612,9 @@ impl ProposalDaemon {
         provider_id: u16,
         now_ms: u64,
     ) -> Result<(), ControlError> {
-        if !self.providers.contains_key(&provider_id) {
-            if self.providers.len() == MAX_EXTERNAL_PROVIDERS {
-                return Err(ControlError::Invalid(
-                    "external proposer provider capacity is exhausted".into(),
-                ));
-            }
-            self.providers
-                .insert(provider_id, TokenBucket::full(PROVIDER_RATE, now_ms)?);
-        }
-        let mut buckets = [
-            self.campaign_rate.clone(),
-            self.providers
-                .get(&provider_id)
-                .ok_or_else(|| ControlError::Invalid("provider rate state disappeared".into()))?
-                .clone(),
-            self.sessions
-                .get(session_id)
-                .ok_or_else(|| ControlError::Invalid("unknown external proposer session".into()))?
-                .rate
-                .clone(),
-        ];
-        charge_token_buckets(&mut buckets, &[1, 1, 1], now_ms).map_err(invalid)?;
-        self.campaign_rate = buckets[0].clone();
-        *self
-            .providers
-            .get_mut(&provider_id)
-            .ok_or_else(|| ControlError::Invalid("provider rate state disappeared".into()))? =
-            buckets[1].clone();
-        self.sessions
-            .get_mut(session_id)
-            .ok_or_else(|| ControlError::Invalid("external proposer session disappeared".into()))?
-            .rate = buckets[2].clone();
-        Ok(())
+        self.rate_store
+            .charge(session_id, provider_id, now_ms)
+            .map_err(invalid)
     }
 
     fn session_mut(&mut self, session_id: &str) -> Result<&mut DaemonSession, ControlError> {

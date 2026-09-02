@@ -23,6 +23,7 @@ mod evolution;
 mod proposal_artifact;
 mod proposal_daemon;
 mod proposal_policy;
+mod proposal_rate_store;
 mod proposal_session;
 mod proposal_session_store;
 mod proposal_submission_store;
@@ -56,6 +57,7 @@ pub use proposal_policy::{
     RetryAction, RetryPolicy, TokenBucket, TokenBucketConfig, TokenBucketError,
     TokenBucketSnapshot,
 };
+pub use proposal_rate_store::{ProposalRateStore, ProposalRateStoreConfig, ProposalRateStoreError};
 pub use proposal_session::{
     ProposalRevisionReservation, ProposalSession, ProposalSessionError, ProposalSessionLimits,
     ProposalSessionQuery, ProposalSessionQueryStatus, ProposalSessionReservation,
