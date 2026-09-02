@@ -16,6 +16,25 @@ or Git commit that reproduces a comparison.  Never cite a local cached
 executable (including anything under `~/.cache`) as a retained control; those
 files are disposable and may be deleted at any time.
 
+### Current execution pointer, 2026-09-02
+
+- [x] Make provider `Retry-After` a durable provider-wide claim gate so sibling
+  tickets defer without teaching the proposer-quality model that throttling is
+  mathematical failure (`ac4621139`; foreign staged work was removed from the
+  branch tip by forward cleanup `6e19c183d`).
+- [ ] Compose the landed universal `FeatureDag` simplifier, exact observed-value
+  quotient, reachable-support projector, and Pareto selector into one bounded
+  diagnostic promotion pipeline with complete source-to-output provenance.
+- [ ] Prove the pipeline boundary by adversarial controls: every source feature
+  maps through simplification, training-only equivalence is split by holdout,
+  and non-dominated cost/coverage tradeoffs survive selection.
+- [ ] Measure simplify-first versus raw compilation/evaluation on a reusable
+  redundant-expression family; retain only a resolved exact-work or hardware-
+  counter advantage and record a negative otherwise.
+- [ ] After that tranche, choose between complete reachable-domain sealing and
+  treewidth extraction from measured graph width; neither is authority-bearing
+  before its exact replay gate.
+
 1. **Done — reusable theorem kernels.** Mine post-C1000 reports and import only
    cross-domain kernels with exact replay boundaries. Current inventory and
    validation: `2026-08-30-c985-post-c1000-ergodis-kernel-mining.md`.
