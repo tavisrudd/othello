@@ -2884,7 +2884,9 @@ extractor identity/version, parameters, canonical semantics, and the retained
 root commitment, recomputes the census, and rejects forged counts or source
 commitments.  One complete census plus evolve pass uses 77,859,635,828
 instructions and 19,485,696,192 cycles; the proof/census loop allocates zero
-times.
+times.  Raising the cosine scales from 32 to 64/96 excludes only one extra
+target while increasing instructions to 79.020B and cycles to 20.653B; that
+variant is rejected and the scale-32 cap is retained.
 The private wrapper now hands that bank directly to optional strided anneal
 tasks without serialization or theorem-specific external glue.  A current
 machine-protected (`choom -n 1000`) repeat plus eighteen 100,000-mutation
