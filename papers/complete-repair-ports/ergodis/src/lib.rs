@@ -255,11 +255,12 @@ pub use span::{
     DEFAULT_SPAN_BUILD_LIMITS,
 };
 pub use theorem_search::{
-    assemble_sound_decision_list, evolve_implications, evolve_implications_streaming,
-    evolve_ranked_streaming, CandidateTrial, CensusReduction, CensusReductionError,
-    DecisionListConfig, DecisionListError, DecisionListRule, EvolutionConfig, EvolutionError,
-    EvolutionResult, EvolutionRunError, EvolutionSummary, ImplicationScore, RankedCandidateTrial,
-    RankedEvolutionSummary, SoundDecisionList,
+    assemble_sound_decision_list, drive_ranked_evolution_streaming, evolve_implications,
+    evolve_implications_streaming, evolve_ranked_streaming, CandidateTrial, CensusReduction,
+    CensusReductionError, DecisionListConfig, DecisionListError, DecisionListRule, EvolutionConfig,
+    EvolutionError, EvolutionResult, EvolutionRunError, EvolutionSummary, ImplicationScore,
+    RankedCandidateTrial, RankedEvolutionDriver, RankedEvolutionRunError, RankedEvolutionSummary,
+    SoundDecisionList,
 };
 pub use transfer::{
     compile_binary_inner_dual, compile_binary_rank_one, compile_binary_target_subspace,

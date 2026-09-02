@@ -131,6 +131,10 @@ pub struct RankedEvolutionSummary<C, S> {
 pub enum EvolutionError {
     #[error("evolution bounds must all be positive")]
     EmptyBound,
+    #[error("evolution generation count exceeds u32")]
+    GenerationOverflow,
+    #[error("evolution driver selected more parents than the beam bound")]
+    ParentOverflow,
 }
 
 #[derive(Debug, Error)]
@@ -139,6 +143,161 @@ pub enum EvolutionRunError<E> {
     Evolution(#[from] EvolutionError),
     #[error("candidate evidence sink failed")]
     Sink(E),
+}
+
+#[derive(Debug, Error)]
+pub enum RankedEvolutionRunError<DriverError, SinkError> {
+    #[error(transparent)]
+    Evolution(#[from] EvolutionError),
+    #[error("evolution driver failed")]
+    Driver(DriverError),
+    #[error("candidate evidence sink failed")]
+    Sink(SinkError),
+}
+
+/// Policy hooks for the runner-neutral bounded evolution machine.
+///
+/// The runner owns generation/candidate bounds, structural deduplication,
+/// trial numbering, retained-best admission, and evidence streaming. A driver
+/// owns domain evaluation, parent selection, and mutation. This permits a
+/// daemon to retain multiple semantic niches without flattening them into one
+/// global beam score.
+pub trait RankedEvolutionDriver<C, S> {
+    type Error;
+
+    fn begin_generation(
+        &mut self,
+        _generation: u32,
+    ) -> Result<std::ops::ControlFlow<()>, Self::Error> {
+        Ok(std::ops::ControlFlow::Continue(()))
+    }
+
+    fn should_continue(
+        &mut self,
+        _generation: u32,
+        _completed_trials: usize,
+    ) -> Result<bool, Self::Error> {
+        Ok(true)
+    }
+
+    fn evaluate(&mut self, generation: u32, candidate: &C) -> Result<S, Self::Error>;
+
+    fn compare_scores(&self, left: &S, right: &S) -> std::cmp::Ordering;
+
+    fn admitted(&self, score: &S) -> bool;
+
+    fn select_parents(
+        &mut self,
+        generation: u32,
+        trials: &mut [RankedCandidateTrial<C, S>],
+        beam_width: usize,
+        output: &mut Vec<C>,
+    ) -> Result<(), Self::Error>;
+
+    fn mutate(
+        &mut self,
+        generation: u32,
+        parent: &C,
+        output: &mut Vec<C>,
+    ) -> Result<(), Self::Error>;
+}
+
+/// Drive bounded evolution with domain-specific generation selection.
+pub fn drive_ranked_evolution_streaming<C, S, Driver, Sink, SinkError>(
+    seeds: impl IntoIterator<Item = C>,
+    config: EvolutionConfig,
+    driver: &mut Driver,
+    mut sink: Sink,
+) -> Result<RankedEvolutionSummary<C, S>, RankedEvolutionRunError<Driver::Error, SinkError>>
+where
+    C: Clone + Ord,
+    S: Clone,
+    Driver: RankedEvolutionDriver<C, S>,
+    Sink: FnMut(&RankedCandidateTrial<C, S>) -> Result<(), SinkError>,
+{
+    if config.generations == 0 || config.beam_width == 0 || config.max_candidates == 0 {
+        return Err(EvolutionError::EmptyBound.into());
+    }
+    if config.generations > u32::MAX as usize {
+        return Err(EvolutionError::GenerationOverflow.into());
+    }
+    let mut seen = BTreeSet::new();
+    let mut current = seeds.into_iter().collect::<Vec<_>>();
+    let mut trial_count = 0_usize;
+    let mut best_admitted: Option<RankedCandidateTrial<C, S>> = None;
+    let mut parents = Vec::with_capacity(config.beam_width);
+    let mut mutations = Vec::new();
+
+    'generations: for generation in 0..config.generations {
+        let generation = generation as u32;
+        if driver
+            .begin_generation(generation)
+            .map_err(RankedEvolutionRunError::Driver)?
+            .is_break()
+        {
+            break;
+        }
+        current.sort_unstable();
+        current.dedup();
+        let mut ranked = Vec::new();
+        for candidate in current.drain(..) {
+            if trial_count == config.max_candidates
+                || !driver
+                    .should_continue(generation, trial_count)
+                    .map_err(RankedEvolutionRunError::Driver)?
+            {
+                break 'generations;
+            }
+            if !seen.insert(candidate.clone()) {
+                continue;
+            }
+            let trial = RankedCandidateTrial {
+                generation,
+                score: driver
+                    .evaluate(generation, &candidate)
+                    .map_err(RankedEvolutionRunError::Driver)?,
+                candidate,
+            };
+            if driver.admitted(&trial.score)
+                && best_admitted.as_ref().is_none_or(|best| {
+                    driver
+                        .compare_scores(&trial.score, &best.score)
+                        .then_with(|| trial.candidate.cmp(&best.candidate))
+                        .is_lt()
+                })
+            {
+                best_admitted = Some(trial.clone());
+            }
+            sink(&trial).map_err(RankedEvolutionRunError::Sink)?;
+            ranked.push(trial);
+            trial_count += 1;
+        }
+        if trial_count == config.max_candidates || generation as usize + 1 == config.generations {
+            break;
+        }
+        parents.clear();
+        driver
+            .select_parents(generation, &mut ranked, config.beam_width, &mut parents)
+            .map_err(RankedEvolutionRunError::Driver)?;
+        if parents.len() > config.beam_width {
+            return Err(EvolutionError::ParentOverflow.into());
+        }
+        for parent in &parents {
+            mutations.clear();
+            driver
+                .mutate(generation, parent, &mut mutations)
+                .map_err(RankedEvolutionRunError::Driver)?;
+            current.extend(
+                mutations
+                    .drain(..)
+                    .filter(|candidate| !seen.contains(candidate)),
+            );
+        }
+    }
+    Ok(RankedEvolutionSummary {
+        trials: trial_count,
+        best_admitted,
+    })
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -273,6 +432,69 @@ where
     })
 }
 
+/// Closure adapter for the default globally ranked beam policy.
+struct ClosureEvolutionDriver<C, S, Mutate, Evaluate, Compare, Admitted> {
+    mutate: Mutate,
+    evaluate: Evaluate,
+    compare_scores: Compare,
+    admitted: Admitted,
+    marker: std::marker::PhantomData<fn(C) -> S>,
+}
+
+impl<C, S, Mutate, Evaluate, Compare, Admitted> RankedEvolutionDriver<C, S>
+    for ClosureEvolutionDriver<C, S, Mutate, Evaluate, Compare, Admitted>
+where
+    C: Clone + Ord,
+    Mutate: Fn(&C, &mut Vec<C>),
+    Evaluate: Fn(&C) -> S,
+    Compare: Fn(&S, &S) -> std::cmp::Ordering,
+    Admitted: Fn(&S) -> bool,
+{
+    type Error = std::convert::Infallible;
+
+    fn evaluate(&mut self, _generation: u32, candidate: &C) -> Result<S, Self::Error> {
+        Ok((self.evaluate)(candidate))
+    }
+
+    fn compare_scores(&self, left: &S, right: &S) -> std::cmp::Ordering {
+        (self.compare_scores)(left, right)
+    }
+
+    fn admitted(&self, score: &S) -> bool {
+        (self.admitted)(score)
+    }
+
+    fn select_parents(
+        &mut self,
+        _generation: u32,
+        trials: &mut [RankedCandidateTrial<C, S>],
+        beam_width: usize,
+        output: &mut Vec<C>,
+    ) -> Result<(), Self::Error> {
+        trials.sort_unstable_by(|left, right| {
+            (self.compare_scores)(&left.score, &right.score)
+                .then_with(|| left.candidate.cmp(&right.candidate))
+        });
+        output.extend(
+            trials
+                .iter()
+                .take(beam_width)
+                .map(|trial| trial.candidate.clone()),
+        );
+        Ok(())
+    }
+
+    fn mutate(
+        &mut self,
+        _generation: u32,
+        parent: &C,
+        output: &mut Vec<C>,
+    ) -> Result<(), Self::Error> {
+        (self.mutate)(parent, output);
+        Ok(())
+    }
+}
+
 /// Evolve arbitrary ranked candidates while streaming every completed trial.
 ///
 /// `compare_scores` returns the preferred score first, as in a sorting
@@ -299,62 +521,19 @@ where
     Admitted: Fn(&S) -> bool,
     Sink: FnMut(&RankedCandidateTrial<C, S>) -> Result<(), SinkError>,
 {
-    if config.generations == 0 || config.beam_width == 0 || config.max_candidates == 0 {
-        return Err(EvolutionError::EmptyBound.into());
+    let mut driver = ClosureEvolutionDriver {
+        mutate,
+        evaluate,
+        compare_scores,
+        admitted,
+        marker: std::marker::PhantomData,
+    };
+    match drive_ranked_evolution_streaming(seeds, config, &mut driver, &mut sink) {
+        Ok(summary) => Ok(summary),
+        Err(RankedEvolutionRunError::Evolution(error)) => Err(error.into()),
+        Err(RankedEvolutionRunError::Driver(never)) => match never {},
+        Err(RankedEvolutionRunError::Sink(error)) => Err(EvolutionRunError::Sink(error)),
     }
-    let mut seen = BTreeSet::new();
-    let mut current = seeds.into_iter().collect::<Vec<_>>();
-    let mut trial_count = 0_usize;
-    let mut best_admitted: Option<RankedCandidateTrial<C, S>> = None;
-    let mut mutations = Vec::new();
-
-    for generation in 0..config.generations {
-        current.sort_unstable();
-        current.dedup();
-        let mut ranked = Vec::new();
-        for candidate in current.drain(..) {
-            if trial_count == config.max_candidates || !seen.insert(candidate.clone()) {
-                continue;
-            }
-            let trial = RankedCandidateTrial {
-                generation: generation as u32,
-                score: evaluate(&candidate),
-                candidate,
-            };
-            if admitted(&trial.score)
-                && best_admitted.as_ref().is_none_or(|best| {
-                    compare_scores(&trial.score, &best.score)
-                        .then_with(|| trial.candidate.cmp(&best.candidate))
-                        .is_lt()
-                })
-            {
-                best_admitted = Some(trial.clone());
-            }
-            sink(&trial).map_err(EvolutionRunError::Sink)?;
-            ranked.push(trial);
-            trial_count += 1;
-        }
-        if trial_count == config.max_candidates || generation + 1 == config.generations {
-            break;
-        }
-        ranked.sort_unstable_by(|left, right| {
-            compare_scores(&left.score, &right.score)
-                .then_with(|| left.candidate.cmp(&right.candidate))
-        });
-        for parent in ranked.iter().take(config.beam_width) {
-            mutations.clear();
-            mutate(&parent.candidate, &mut mutations);
-            current.extend(
-                mutations
-                    .drain(..)
-                    .filter(|candidate| !seen.contains(candidate)),
-            );
-        }
-    }
-    Ok(RankedEvolutionSummary {
-        trials: trial_count,
-        best_admitted,
-    })
 }
 
 pub fn evolve_implications<C, E, Mutate, Covers, Conclusion, Complexity>(
@@ -556,6 +735,140 @@ mod tests {
         .unwrap();
         assert_eq!(streamed, [0, 1, 2, 3]);
         assert_eq!(summary.best_admitted.unwrap().candidate, 3);
+    }
+
+    #[test]
+    fn generic_driver_can_select_multiple_semantic_niches() {
+        struct ParityNiches;
+
+        impl RankedEvolutionDriver<u8, u8> for ParityNiches {
+            type Error = std::convert::Infallible;
+
+            fn evaluate(&mut self, _generation: u32, candidate: &u8) -> Result<u8, Self::Error> {
+                Ok(*candidate)
+            }
+
+            fn compare_scores(&self, left: &u8, right: &u8) -> std::cmp::Ordering {
+                left.cmp(right)
+            }
+
+            fn admitted(&self, _score: &u8) -> bool {
+                true
+            }
+
+            fn select_parents(
+                &mut self,
+                _generation: u32,
+                trials: &mut [RankedCandidateTrial<u8, u8>],
+                _beam_width: usize,
+                output: &mut Vec<u8>,
+            ) -> Result<(), Self::Error> {
+                output.push(
+                    trials
+                        .iter()
+                        .filter(|trial| trial.candidate % 2 == 0)
+                        .map(|trial| trial.candidate)
+                        .min()
+                        .unwrap(),
+                );
+                output.push(
+                    trials
+                        .iter()
+                        .filter(|trial| trial.candidate % 2 == 1)
+                        .map(|trial| trial.candidate)
+                        .max()
+                        .unwrap(),
+                );
+                Ok(())
+            }
+
+            fn mutate(
+                &mut self,
+                _generation: u32,
+                parent: &u8,
+                output: &mut Vec<u8>,
+            ) -> Result<(), Self::Error> {
+                output.push(parent + 4);
+                Ok(())
+            }
+        }
+
+        let mut driver = ParityNiches;
+        let mut streamed = Vec::new();
+        let summary = drive_ranked_evolution_streaming(
+            [0_u8, 1, 2, 3],
+            EvolutionConfig {
+                generations: 2,
+                beam_width: 2,
+                max_candidates: 8,
+            },
+            &mut driver,
+            |trial| {
+                streamed.push(trial.candidate);
+                Ok::<_, std::convert::Infallible>(())
+            },
+        )
+        .unwrap();
+        assert_eq!(streamed, [0, 1, 2, 3, 4, 7]);
+        assert_eq!(summary.best_admitted.unwrap().candidate, 0);
+    }
+
+    #[test]
+    fn generic_driver_fails_closed_on_parent_overflow() {
+        struct TooManyParents;
+
+        impl RankedEvolutionDriver<u8, ()> for TooManyParents {
+            type Error = std::convert::Infallible;
+
+            fn evaluate(&mut self, _generation: u32, _candidate: &u8) -> Result<(), Self::Error> {
+                Ok(())
+            }
+
+            fn compare_scores(&self, _left: &(), _right: &()) -> std::cmp::Ordering {
+                std::cmp::Ordering::Equal
+            }
+
+            fn admitted(&self, _score: &()) -> bool {
+                true
+            }
+
+            fn select_parents(
+                &mut self,
+                _generation: u32,
+                _trials: &mut [RankedCandidateTrial<u8, ()>],
+                _beam_width: usize,
+                output: &mut Vec<u8>,
+            ) -> Result<(), Self::Error> {
+                output.extend([0, 1]);
+                Ok(())
+            }
+
+            fn mutate(
+                &mut self,
+                _generation: u32,
+                _parent: &u8,
+                _output: &mut Vec<u8>,
+            ) -> Result<(), Self::Error> {
+                Ok(())
+            }
+        }
+
+        let mut driver = TooManyParents;
+        assert!(matches!(
+            drive_ranked_evolution_streaming(
+                [0_u8],
+                EvolutionConfig {
+                    generations: 2,
+                    beam_width: 1,
+                    max_candidates: 2,
+                },
+                &mut driver,
+                |_| Ok::<_, std::convert::Infallible>(()),
+            ),
+            Err(RankedEvolutionRunError::Evolution(
+                EvolutionError::ParentOverflow
+            ))
+        ));
     }
 
     #[test]
