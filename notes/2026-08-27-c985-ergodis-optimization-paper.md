@@ -4912,3 +4912,13 @@ cycles 2.0294x (`t=460.80`), instructions 1.7403x, branches 1.6773x, and wall du
 are too small to explain the result. Process RSS is baseline-sized (1,516/1,688 KiB)
 and no memory claim is made. Binary hashes, toolchain, command, and all raw pairs are
 retained in `ergodis-private/evidence/c985-subset-sum-continuation-ab.tsv`.
+
+A second micro-optimization was rejected rather than folded into that win. Commit
+`86c7b5869` cleared only count/bitmap words intersecting the live continuation windows;
+nine rotated pairs against `4bc747950` made the candidate 1.0170x worse in cycles and
+1.0307x worse in instructions, while wall was unresolved (candidate/control 1.0060x,
+paired-log `t=1.06`). Branch misses rose about 1.88x. The likely mechanism is that full
+contiguous clears are cheaper than repeated narrow-slice setup and partial-word effects
+on this compact range. Forward revert `969593b41` restores the accepted implementation;
+the raw negative is retained in
+`ergodis-private/evidence/c985-subset-sum-live-clear-ab.tsv` to prevent repetition.
