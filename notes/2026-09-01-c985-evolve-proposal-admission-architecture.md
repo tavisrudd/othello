@@ -409,9 +409,17 @@ cancelled, and expired tickets into the corresponding session settlement, while
 completion and cancellation deliberately do not refund total budgets. Bounded
 crash temporaries are tolerated; malformed snapshots, swapped session/source
 bindings, reversed clocks, loose permissions, and ambiguous writes fail closed.
-The composed store is still not reachable from the campaign socket. The next
-boundary is typed submit/status/cancel/result daemon operations, followed by
-outer campaign/provider token charging and a provider-neutral worker adapter.
+The composed store is now reachable through typed bounded operations on the
+existing authenticated campaign socket: session open, submit, status, worker
+claim/failure/complete, cancel, ready-result metadata, and revision reservation.
+The daemon, not the provider, owns monotone timestamps, idempotency derivation,
+deadline construction, retry jitter, and the fixed bounded retry policy.
+Session and per-operation hard caps are validated before durable work, and a
+socket-level control replays the complete open/submit/claim/complete/fetch
+lifecycle. This remains protocol mechanics rather than a provider adapter:
+campaign/provider token buckets are not yet charged by the socket transaction,
+the ready result currently carries digest and size rather than a stored compact
+payload, and the Python/CLI typed projection is still pending.
 
 The next generic slice now implements the in-memory/persistable ticket state
 machine without adding wire operations. Its fixed ticket identity makes submit

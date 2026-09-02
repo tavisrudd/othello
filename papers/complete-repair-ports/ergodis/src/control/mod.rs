@@ -4,6 +4,7 @@
 //! filesystem traffic, atomics, or hot-loop branches.
 
 use crate::multiset::{MultisetBounds, MultisetStatistic};
+use serde::de::DeserializeOwned;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::collections::{BTreeMap, BTreeSet, VecDeque};
@@ -19,6 +20,7 @@ use std::time::Duration;
 
 mod client;
 mod evolution;
+mod proposal_daemon;
 mod proposal_policy;
 mod proposal_session;
 mod proposal_session_store;
@@ -34,6 +36,15 @@ use evolution::{
     load_evolution_archive, run_evolution, EvolutionBounds, EvolutionIdentity, EvolutionProgress,
     EvolutionSeed, EvolutionTargetAccumulator, EvolutionTargetProfile, EvolutionTargetStrategy,
     MAX_EVOLUTION_TARGET_FIELDS,
+};
+pub use proposal_daemon::{
+    ProposalClaimed, ProposalCompleteRequest, ProposalDaemon, ProposalFailureAccepted,
+    ProposalFailureRequest, ProposalRevisionRequest, ProposalSessionOpenRequest,
+    ProposalSessionOpened, ProposalSubmitRequest, ProposalSubmitted, ProposalTicketRequest,
+    ProposalTicketView, MAX_EXTERNAL_OPERATION_TTL_MS, MAX_EXTERNAL_PROPOSAL_SESSIONS,
+    MAX_EXTERNAL_SESSION_OUTSTANDING, MAX_EXTERNAL_SESSION_QUERIES,
+    MAX_EXTERNAL_SESSION_RETURN_BYTES, MAX_EXTERNAL_SESSION_REVISIONS, MAX_EXTERNAL_SESSION_TTL_MS,
+    MAX_EXTERNAL_SESSION_WORK_UNITS,
 };
 pub use proposal_policy::{
     charge_token_buckets, select_proposer, CircuitBreaker, CircuitBreakerConfig,
@@ -255,6 +266,10 @@ fn request_i64_array(value: Option<&Value>, label: &'static str) -> Result<Vec<i
         .collect()
 }
 
+fn decode_args<T: DeserializeOwned>(args: &Value) -> Result<T, ControlError> {
+    Ok(serde_json::from_value(args.clone())?)
+}
+
 pub struct Campaign {
     manifest: Manifest,
     batch: Arc<FeatureBatch>,
@@ -272,6 +287,7 @@ pub struct Campaign {
     evolution: Option<EvolutionJob>,
     last_evolution: Option<Value>,
     target_profile: Option<EvolutionTargetAccumulator>,
+    proposal_daemon: ProposalDaemon,
 }
 
 impl Campaign {
@@ -321,6 +337,12 @@ impl Campaign {
         };
         write_create_json(&run_dir.join("manifest.json"), &manifest)?;
         let ledger = Ledger::create(&run_dir.join("ledger.jsonl"), ledger_limit)?;
+        let proposal_daemon = ProposalDaemon::create(
+            &run_dir.join("proposals"),
+            &manifest.run_id,
+            &manifest.nonce,
+            &manifest.presentation_hash,
+        )?;
         Ok(Self {
             manifest,
             batch,
@@ -338,6 +360,7 @@ impl Campaign {
             evolution: None,
             last_evolution: None,
             target_profile: None,
+            proposal_daemon,
         })
     }
 
@@ -423,6 +446,15 @@ impl Campaign {
             "evolve-profile-refresh" => self.evolution_profile_refresh(),
             "evolve-status" => self.evolution_status(),
             "evolve-cancel" => self.evolution_cancel(),
+            "proposal-session-open" => self.proposal_session_open(&request.args),
+            "proposal-submit" => self.proposal_submit(&request.args),
+            "proposal-status" => self.proposal_status(&request.args),
+            "proposal-worker-claim" => self.proposal_worker_claim(&request.args),
+            "proposal-worker-failure" => self.proposal_worker_failure(&request.args),
+            "proposal-worker-complete" => self.proposal_worker_complete(&request.args),
+            "proposal-cancel" => self.proposal_cancel(&request.args),
+            "proposal-result" => self.proposal_result(&request.args),
+            "proposal-revision-reserve" => self.proposal_revision_reserve(&request.args),
             "candidate-apply" => self.candidate_try(&request.args, true),
             "candidate-deactivate" => self.candidate_deactivate(&request.args),
             "obstruction-first" => self.obstruction(&request.args),
@@ -448,6 +480,59 @@ impl Campaign {
         (response, stop)
     }
 
+    fn proposal_session_open(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let request = decode_args::<ProposalSessionOpenRequest>(args)?;
+        Ok(serde_json::to_value(
+            self.proposal_daemon.open_session(request)?,
+        )?)
+    }
+
+    fn proposal_submit(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let request = decode_args::<ProposalSubmitRequest>(args)?;
+        Ok(serde_json::to_value(self.proposal_daemon.submit(request)?)?)
+    }
+
+    fn proposal_status(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let request = decode_args::<ProposalTicketRequest>(args)?;
+        Ok(serde_json::to_value(self.proposal_daemon.status(request)?)?)
+    }
+
+    fn proposal_worker_claim(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let request = decode_args::<ProposalTicketRequest>(args)?;
+        Ok(serde_json::to_value(self.proposal_daemon.claim(request)?)?)
+    }
+
+    fn proposal_worker_failure(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let request = decode_args::<ProposalFailureRequest>(args)?;
+        Ok(serde_json::to_value(
+            self.proposal_daemon.report_failure(request)?,
+        )?)
+    }
+
+    fn proposal_worker_complete(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let request = decode_args::<ProposalCompleteRequest>(args)?;
+        Ok(serde_json::to_value(
+            self.proposal_daemon.complete(request)?,
+        )?)
+    }
+
+    fn proposal_cancel(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let request = decode_args::<ProposalTicketRequest>(args)?;
+        Ok(serde_json::to_value(self.proposal_daemon.cancel(request)?)?)
+    }
+
+    fn proposal_result(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let request = decode_args::<ProposalTicketRequest>(args)?;
+        Ok(serde_json::to_value(self.proposal_daemon.result(request)?)?)
+    }
+
+    fn proposal_revision_reserve(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let request = decode_args::<ProposalRevisionRequest>(args)?;
+        Ok(serde_json::to_value(
+            self.proposal_daemon.reserve_revision(request)?,
+        )?)
+    }
+
     fn capabilities(&self) -> Result<Value, ControlError> {
         Ok(json!({
             "schema": SCHEMA,
@@ -467,6 +552,10 @@ impl Campaign {
                 "target-profile-edge", "target-profile-status",
                 "evolve-start", "evolve-profile-refresh",
                 "evolve-status", "evolve-cancel",
+                "proposal-session-open", "proposal-submit", "proposal-status",
+                "proposal-worker-claim", "proposal-worker-failure",
+                "proposal-worker-complete", "proposal-cancel", "proposal-result",
+                "proposal-revision-reserve",
                 "obstruction-first", "exceptional", "trace", "note", "noop",
                 "shutdown"
             ],
@@ -478,6 +567,7 @@ impl Campaign {
             "problem": self.batch.problem,
             "presentation": self.batch.presentation,
             "presentation_hash": self.manifest.presentation_hash,
+            "proposal_sessions": self.proposal_daemon.session_count(),
             "feature_generator": self.manifest.feature_generator,
             "rows": self.batch.rows(),
             "fields": self.batch.fields,
@@ -3307,6 +3397,113 @@ mod tests {
         send_request(&manifest_b, "shutdown", json!({}), 4096).unwrap();
         thread_a.join().unwrap();
         thread_b.join().unwrap();
+    }
+
+    #[test]
+    fn proposal_lifecycle_round_trips_over_the_campaign_socket() {
+        let temporary = tempfile::tempdir().unwrap();
+        let data = temporary.path().join("data.jsonl");
+        fs::write(
+            &data,
+            concat!(
+                "{\"schema\":\"ergodis-campaign-data-v0\",\"presentation\":\"tiny\",\"problem\":\"fixture\",\"fields\":[\"x\"],\"rows\":1}\n",
+                "{\"id\":1,\"expected\":true,\"values\":[1]}\n"
+            ),
+        )
+        .unwrap();
+        let campaign = Campaign::create(
+            &data,
+            &temporary.path().join("run"),
+            Some(temporary.path().join("campaign.sock")),
+            4096,
+            16 * 1024,
+            4096,
+        )
+        .unwrap();
+        let manifest = campaign.manifest().clone();
+        let server = thread::spawn(move || campaign.serve().unwrap());
+        for _ in 0..100 {
+            if manifest.socket.exists() {
+                break;
+            }
+            thread::sleep(Duration::from_millis(2));
+        }
+        assert!(manifest.socket.exists());
+
+        let opened = send_request(
+            &manifest,
+            "proposal-session-open",
+            json!({
+                "allowed_roles": ProposalRole::Heuristic.mask(),
+                "ttl_ms": 60_000,
+                "maximum_queries": 4,
+                "maximum_outstanding": 2,
+                "maximum_revisions": 2,
+                "maximum_work_units": 40,
+                "maximum_return_bytes": 400,
+            }),
+            16 * 1024,
+        )
+        .unwrap();
+        assert!(opened.ok);
+        let session_id = opened.result["session_id"].as_str().unwrap();
+        let submitted = send_request(
+            &manifest,
+            "proposal-submit",
+            json!({
+                "session_id": session_id,
+                "request_id": 1,
+                "canonical_payload_blake3": blake3::hash(b"payload").to_hex().to_string(),
+                "proposer_id": 3,
+                "role": "heuristic",
+                "cost_units": 5,
+                "maximum_return_bytes": 50,
+                "queue_timeout_ms": 1_000,
+                "execution_timeout_ms": 2_000,
+                "admission_timeout_ms": 3_000,
+                "retention_timeout_ms": 4_000,
+            }),
+            16 * 1024,
+        )
+        .unwrap();
+        assert!(submitted.ok);
+        let ticket_key = submitted.result["ticket_key"].as_str().unwrap();
+        let claimed = send_request(
+            &manifest,
+            "proposal-worker-claim",
+            json!({"session_id": session_id, "ticket_key": ticket_key}),
+            16 * 1024,
+        )
+        .unwrap();
+        assert!(claimed.ok);
+        assert_eq!(claimed.result["claim"]["kind"], "started");
+        let completed = send_request(
+            &manifest,
+            "proposal-worker-complete",
+            json!({
+                "session_id": session_id,
+                "ticket_key": ticket_key,
+                "attempt": 0,
+                "result_blake3": blake3::hash(b"result").to_hex().to_string(),
+                "result_bytes": 12,
+            }),
+            16 * 1024,
+        )
+        .unwrap();
+        assert!(completed.ok);
+        assert_eq!(completed.result["usage"]["outstanding"], 0);
+        let fetched = send_request(
+            &manifest,
+            "proposal-result",
+            json!({"session_id": session_id, "ticket_key": ticket_key}),
+            16 * 1024,
+        )
+        .unwrap();
+        assert!(fetched.ok);
+        assert_eq!(fetched.result["ticket"]["status"]["state"], "ready");
+
+        send_request(&manifest, "shutdown", json!({}), 4096).unwrap();
+        server.join().unwrap();
     }
 
     #[test]

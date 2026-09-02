@@ -2650,9 +2650,16 @@ files are disposable and may be deleted at any time.
     rejects the impossible ticket-without-debit inverse, settles terminal and
     expired tickets back into session concurrency, pins run/source bindings,
     ignores bounded crash temporaries, and poisons after ambiguous I/O. Quotas
-    are never refunded by completion or cancellation. The immediate next slice
-    is attaching bounded submit/status/cancel/result operations to the daemon;
-    campaign/provider token charges remain an outer admission transaction.
+    are never refunded by completion or cancellation. Typed bounded operations
+    are now attached to the existing authenticated campaign socket: session
+    open, submit, status, worker claim/failure/complete, cancel, result metadata,
+    and proposal-revision reservation. The daemon owns monotone timestamps,
+    derives idempotency keys, validates relative deadline order and hard caps,
+    generates retry jitter, and exposes only compact ticket/usage records. An
+    end-to-end socket control covers open through result fetch. Search workers
+    and the safe-point protocol are unchanged. The next slice is CLI/Python
+    projection plus campaign/provider token charging and actual compact-result
+    artifact delivery; no provider SDK or autonomous adapter is claimed yet.
 
     The first new proposer family is accepted. A coloured-Tanner isomorphism
     proposal between the official LP1768 X/Z instances is independently

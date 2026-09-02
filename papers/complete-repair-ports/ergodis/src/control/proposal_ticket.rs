@@ -95,13 +95,15 @@ pub struct ProposalTicketLedgerSnapshot {
     pub tickets: Vec<ProposalTicketSnapshot>,
 }
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "kebab-case")]
 pub enum ProposalTicketSubmission {
     Created,
     Existing,
 }
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(tag = "kind", rename_all = "kebab-case")]
 pub enum ProposalTicketClaim {
     Started { attempt: u8 },
     Deferred { not_before_ms: u64 },
@@ -109,7 +111,7 @@ pub enum ProposalTicketClaim {
     Terminal { status: ProposalTicketStatus },
 }
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
 pub struct ProposalReadyResult {
     pub result_blake3: [u8; 32],
     pub result_bytes: u64,

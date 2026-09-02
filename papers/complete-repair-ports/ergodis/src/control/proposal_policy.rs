@@ -41,6 +41,12 @@ impl ProposalIdempotencyKey {
         self.0
     }
 
+    pub fn from_hex(encoded: &str) -> Result<Self, ControlError> {
+        let digest = blake3::Hash::from_hex(encoded)
+            .map_err(|_| ControlError::Invalid("invalid proposer ticket key".into()))?;
+        Ok(Self(*digest.as_bytes()))
+    }
+
     pub fn to_hex(self) -> String {
         blake3::Hash::from(self.0).to_hex().to_string()
     }
@@ -301,6 +307,7 @@ impl ProposalDeadlines {
     }
 }
 
+#[repr(u8)]
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum ProposalFailureClass {
