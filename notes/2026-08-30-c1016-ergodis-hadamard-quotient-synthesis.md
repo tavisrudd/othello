@@ -2702,7 +2702,28 @@ cycles).  The exact tested radius-four partitions, now including a
 double-plus-single-plus-single case whose same-block effect is recomputed
 directly rather than using the unsound additive delta, are empty as well
 (10.925 billion instructions and 3.077 billion cycles).  Both misses are
-strictly local/discovery evidence and grant no negative authority.  The next
+strictly local/discovery evidence and grant no negative authority.  A later
+exact full-delta tablebase closes the missing minimal `3+2` partition and
+repairs this same basin.  The q18 witness is now exact: the table key contains
+energy and all nine off-zero correlations, full-key collision comparison
+makes one retained preimage sound, and the positive independently replays the
+complete q18 reduction.  The run uses 11,255,647,890 instructions and
+3,815,609,603 cycles at 100% counter coverage; its 8,129,088-byte workspace
+and solve loop allocate zero times.  The source-bound witness is locked by a
+normal test rather than retained only as a local log.
+
+The exact q18 witness and the observed q29 residual-six root have labelled
+Gale--Ryser-compatible margins in all four blocks.  A new constructive
+Havel--Hakimi boundary returns one 18-by-29 binary matrix per block and
+independently replays both labelled margins with zero allocation.  Recombining
+those matrices by CRT gives row sums `(2,0,0,0)`, but direct replay of all 521
+original PAF equations has score 1,204,320 and is not exact.  This establishes
+the missing witness-handoff shape while demonstrating that margin feasibility
+alone is not a search-space reduction.  The q29 input remains explicitly
+`ObservedEvolved`, and neither the constructor nor this candidate grants
+negative or certificate authority.
+
+The next
 structural target is the q29 group-ring identity modulo 9: together with the
 proved parity identity it is the exact reduction
 `sum_i Y_i Y_i^* = 1` in `(Z/18)[C_29]`.  Since `ord_29(3)=28`, its nontrivial

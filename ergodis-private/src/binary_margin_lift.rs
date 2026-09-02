@@ -40,6 +40,29 @@ pub struct Q18Q29MarginWorkspace {
     _padding: [u8; 46],
 }
 
+#[repr(C, align(64))]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct Q18Q29ConstructWorkspace {
+    row_degrees: [u8; Q18_ROWS],
+    column_degrees: [u8; Q29_COLUMNS],
+    column_order: [u8; Q29_COLUMNS],
+    processed_rows: [u8; Q18_ROWS],
+    _padding: [u8; 34],
+}
+
+const _: () = assert!(std::mem::size_of::<Q18Q29ConstructWorkspace>() == 128);
+const _: () = assert!(std::mem::align_of::<Q18Q29ConstructWorkspace>() == 64);
+
+impl Q18Q29ConstructWorkspace {
+    pub const ZERO: Self = Self {
+        row_degrees: [0; Q18_ROWS],
+        column_degrees: [0; Q29_COLUMNS],
+        column_order: [0; Q29_COLUMNS],
+        processed_rows: [0; Q18_ROWS],
+        _padding: [0; 34],
+    };
+}
+
 const _: () = assert!(std::mem::size_of::<Q18Q29MarginWorkspace>() == 64);
 const _: () = assert!(std::mem::align_of::<Q18Q29MarginWorkspace>() == 64);
 
@@ -121,6 +144,65 @@ pub fn q18_q29_binary_margin_lift_exists(
         }
     }
     Ok(true)
+}
+
+/// Construct one canonical binary matrix with the supplied transverse
+/// margins. Rows are emitted as 29-bit words. This is a boundary constructor,
+/// not a claim that an arbitrary margin lift satisfies mixed CRT PAFs.
+pub fn construct_q18_q29_binary_margin_lift(
+    margins: &Q18Q29Margins,
+    workspace: &mut Q18Q29ConstructWorkspace,
+) -> Result<Option<[u32; Q18_ROWS]>, BinaryMarginLiftError> {
+    let mut decision_workspace = Q18Q29MarginWorkspace::ZERO;
+    if !q18_q29_binary_margin_lift_exists(margins, &mut decision_workspace)? {
+        return Ok(None);
+    }
+    workspace.processed_rows.fill(0);
+    for row in 0..Q18_ROWS {
+        workspace.row_degrees[row] = ((i16::from(margins.q18_signed[row]) + 29) / 2) as u8;
+    }
+    for column in 0..Q29_COLUMNS {
+        workspace.column_degrees[column] = ((i16::from(margins.q29_signed[column]) + 18) / 2) as u8;
+        workspace.column_order[column] = column as u8;
+    }
+    let mut matrix = [0_u32; Q18_ROWS];
+    for _ in 0..Q18_ROWS {
+        let mut selected_row = usize::MAX;
+        for row in 0..Q18_ROWS {
+            if workspace.processed_rows[row] == 0
+                && (selected_row == usize::MAX
+                    || workspace.row_degrees[row] > workspace.row_degrees[selected_row])
+            {
+                selected_row = row;
+            }
+        }
+        workspace.processed_rows[selected_row] = 1;
+        for index in 1..Q29_COLUMNS {
+            let column = workspace.column_order[index];
+            let mut cursor = index;
+            while cursor != 0
+                && workspace.column_degrees[usize::from(workspace.column_order[cursor - 1])]
+                    < workspace.column_degrees[usize::from(column)]
+            {
+                workspace.column_order[cursor] = workspace.column_order[cursor - 1];
+                cursor -= 1;
+            }
+            workspace.column_order[cursor] = column;
+        }
+        let degree = usize::from(workspace.row_degrees[selected_row]);
+        for &column in &workspace.column_order[..degree] {
+            let column = usize::from(column);
+            if workspace.column_degrees[column] == 0 {
+                return Ok(None);
+            }
+            workspace.column_degrees[column] -= 1;
+            matrix[selected_row] |= 1_u32 << column;
+        }
+    }
+    if workspace.column_degrees.iter().any(|&degree| degree != 0) {
+        return Ok(None);
+    }
+    Ok(Some(matrix))
 }
 
 #[cfg(test)]
@@ -239,6 +321,41 @@ mod tests {
             }
         });
         assert_eq!(allocations, 0);
+    }
+
+    #[test]
+    fn canonical_constructor_replays_both_labelled_margins_without_allocation() {
+        let mut q18 = [-29_i8; Q18_ROWS];
+        let mut q29 = [-18_i8; Q29_COLUMNS];
+        for row in 0..Q18_ROWS {
+            for column in 0..Q29_COLUMNS {
+                if (5 * row + 7 * column) % 11 < 4 {
+                    q18[row] += 2;
+                    q29[column] += 2;
+                }
+            }
+        }
+        let margins = Q18Q29Margins::new(q18, q29);
+        let mut workspace = Q18Q29ConstructWorkspace::ZERO;
+        let (matrix, allocations) = tracked_allocations(|| {
+            construct_q18_q29_binary_margin_lift(&margins, &mut workspace)
+                .unwrap()
+                .unwrap()
+        });
+        assert_eq!(allocations, 0);
+        for row in 0..Q18_ROWS {
+            assert_eq!(
+                2 * matrix[row].count_ones() as i16 - 29,
+                i16::from(q18[row])
+            );
+        }
+        for column in 0..Q29_COLUMNS {
+            let degree = matrix
+                .iter()
+                .filter(|&&row| row & (1_u32 << column) != 0)
+                .count();
+            assert_eq!(2 * degree as i16 - 18, i16::from(q29[column]));
+        }
     }
 
     #[test]

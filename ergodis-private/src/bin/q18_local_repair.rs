@@ -3,7 +3,8 @@ use std::{fs, process::ExitCode};
 use ergodis_private::{
     q18_local_repair::{
         repair_q18_across_distinct_blocks, repair_q18_one_double_one_single,
-        repair_q18_one_double_two_singles, repair_q18_two_doubles, Q18LocalRepairWorkspace,
+        repair_q18_one_double_two_singles, repair_q18_one_triple_one_double,
+        repair_q18_two_doubles, Q18LocalRepairWorkspace,
     },
     q18_pair_split::Q18Coefficients,
 };
@@ -43,10 +44,16 @@ fn main() -> ExitCode {
                         println!("{}", serde_json::to_string_pretty(&hit.blocks).unwrap());
                         ExitCode::SUCCESS
                     }
-                    None => {
-                        println!("no exact radius-four repair in the tested transfer partitions");
-                        ExitCode::from(1)
-                    }
+                    None => match repair_q18_one_triple_one_double(&base, &mut workspace) {
+                        Some(hit) => {
+                            println!("{}", serde_json::to_string_pretty(&hit.blocks).unwrap());
+                            ExitCode::SUCCESS
+                        }
+                        None => {
+                            println!("no exact repair in the tested radius-four union or minimal 3+2 family; negative authority is scoped to those partitions");
+                            ExitCode::from(1)
+                        }
+                    },
                 },
             },
         },

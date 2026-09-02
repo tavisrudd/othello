@@ -13,6 +13,7 @@ const ORDER: usize = 18;
 const SHIFTS: usize = 10;
 const MOVES: usize = 1 + ORDER * (ORDER - 1);
 const PAIRS: usize = MOVES * MOVES;
+const PAIR_TT_SLOTS: usize = 1 << 19;
 const TARGET: [i32; SHIFTS] = [1_976, -116, -116, -116, -116, -116, -116, -116, -116, -116];
 
 #[repr(C, align(64))]
@@ -55,18 +56,22 @@ const EMPTY_PAIR: PairRecord = PairRecord {
 
 pub struct Q18LocalRepairWorkspace {
     left_pairs: Box<[PairRecord]>,
+    pair_slots: Box<[u32]>,
 }
 
 impl Q18LocalRepairWorkspace {
     #[must_use]
     pub fn new() -> Self {
-        vec![EMPTY_PAIR; PAIRS].into_boxed_slice().into()
+        Self {
+            left_pairs: vec![EMPTY_PAIR; PAIRS].into_boxed_slice(),
+            pair_slots: vec![0; PAIR_TT_SLOTS].into_boxed_slice(),
+        }
     }
-}
 
-impl From<Box<[PairRecord]>> for Q18LocalRepairWorkspace {
-    fn from(left_pairs: Box<[PairRecord]>) -> Self {
-        Self { left_pairs }
+    #[must_use]
+    pub fn bytes(&self) -> usize {
+        self.left_pairs.len() * std::mem::size_of::<PairRecord>()
+            + self.pair_slots.len() * std::mem::size_of::<u32>()
     }
 }
 
@@ -370,6 +375,168 @@ pub fn repair_q18_one_double_two_singles(
     None
 }
 
+#[inline(always)]
+fn pair_delta_hash(delta: &[i32; SHIFTS]) -> usize {
+    let mut hash = 0x9e37_79b9_7f4a_7c15_u64;
+    for &value in delta {
+        hash ^= value as u32 as u64;
+        hash = hash.rotate_left(11).wrapping_mul(0xbf58_476d_1ce4_e5b9);
+    }
+    hash as usize
+}
+
+fn compile_double_tt(
+    coefficients: &[i8; ORDER],
+    moves: &[MoveRecord; MOVES],
+    move_count: usize,
+    workspace: &mut Q18LocalRepairWorkspace,
+) -> usize {
+    let count = compile_double_moves(coefficients, moves, move_count, &mut workspace.left_pairs);
+    workspace.pair_slots.fill(0);
+    for index in 0..count {
+        let delta = workspace.left_pairs[index].delta;
+        let mut slot = pair_delta_hash(&delta) & (PAIR_TT_SLOTS - 1);
+        loop {
+            let stored = workspace.pair_slots[slot];
+            if stored == 0 {
+                workspace.pair_slots[slot] = index as u32 + 1;
+                break;
+            }
+            if workspace.left_pairs[stored as usize - 1].delta == delta {
+                break;
+            }
+            slot = (slot + 1) & (PAIR_TT_SLOTS - 1);
+        }
+    }
+    count
+}
+
+#[inline(always)]
+fn lookup_double_tt(
+    wanted: &[i32; SHIFTS],
+    workspace: &Q18LocalRepairWorkspace,
+) -> Option<PairRecord> {
+    let mut slot = pair_delta_hash(wanted) & (PAIR_TT_SLOTS - 1);
+    loop {
+        let stored = workspace.pair_slots[slot];
+        if stored == 0 {
+            return None;
+        }
+        let pair = workspace.left_pairs[stored as usize - 1];
+        if pair.delta == *wanted {
+            return Some(pair);
+        }
+        slot = (slot + 1) & (PAIR_TT_SLOTS - 1);
+    }
+}
+
+#[inline(always)]
+fn apply_three_net_moves(
+    row: &[i8; ORDER],
+    donors: [usize; 3],
+    recipients: [usize; 3],
+) -> Option<[i8; ORDER]> {
+    let mut delta = [0_i8; ORDER];
+    for donor in donors {
+        delta[donor] -= 2;
+    }
+    for recipient in recipients {
+        delta[recipient] += 2;
+    }
+    let mut changed = *row;
+    for point in 0..ORDER {
+        changed[point] = changed[point].checked_add(delta[point])?;
+        if !(-29..=29).contains(&changed[point]) {
+            return None;
+        }
+        if delta[point] != 0 && donors.contains(&point) && recipients.contains(&point) {
+            return None;
+        }
+    }
+    Some(changed)
+}
+
+/// Exhaust every minimal three-transfer net change in one block together
+/// with at most two sequential transfers in a distinct block.  The TT key is
+/// the complete ten-coordinate q18 PAF delta, including energy, and hash
+/// collisions are resolved by full-key comparison.
+pub fn repair_q18_one_triple_one_double(
+    base: &Q18Coefficients,
+    workspace: &mut Q18LocalRepairWorkspace,
+) -> Option<Q18Coefficients> {
+    let base_paf = combined_paf(base);
+    let needed: [i32; SHIFTS] = std::array::from_fn(|shift| TARGET[shift] - base_paf[shift]);
+    let mut moves = [[NO_MOVE; MOVES]; BLOCKS];
+    let mut move_counts = [0_usize; BLOCKS];
+    for block in 0..BLOCKS {
+        move_counts[block] = compile_moves(&base.blocks[block], &mut moves[block]);
+    }
+    for double_block in 0..BLOCKS {
+        compile_double_tt(
+            &base.blocks[double_block],
+            &moves[double_block],
+            move_counts[double_block],
+            workspace,
+        );
+        for triple_block in 0..BLOCKS {
+            if triple_block == double_block {
+                continue;
+            }
+            let baseline = block_paf(&base.blocks[triple_block]);
+            for a in 0..ORDER {
+                for b in a..ORDER {
+                    for c in b..ORDER {
+                        let donors = [a, b, c];
+                        for d in 0..ORDER {
+                            for e in d..ORDER {
+                                for f in e..ORDER {
+                                    let recipients = [d, e, f];
+                                    let Some(changed) = apply_three_net_moves(
+                                        &base.blocks[triple_block],
+                                        donors,
+                                        recipients,
+                                    ) else {
+                                        continue;
+                                    };
+                                    let after = block_paf(&changed);
+                                    let wanted: [i32; SHIFTS] = std::array::from_fn(|shift| {
+                                        needed[shift] - (after[shift] - baseline[shift])
+                                    });
+                                    let Some(pair) = lookup_double_tt(&wanted, workspace) else {
+                                        continue;
+                                    };
+                                    let mut candidate = *base;
+                                    candidate.blocks[triple_block] = changed;
+                                    apply_move(
+                                        &mut candidate.blocks[double_block],
+                                        moves[double_block][usize::from(pair.first)],
+                                    );
+                                    apply_move(
+                                        &mut candidate.blocks[double_block],
+                                        moves[double_block][usize::from(pair.second)],
+                                    );
+                                    let mut split = Q18PairSplit::ZERO;
+                                    let mut projection = Q18DivisorProjection::ZERO;
+                                    if verify_q18_gs_reduction(
+                                        &candidate,
+                                        &mut split,
+                                        &mut projection,
+                                    )
+                                    .is_ok()
+                                    {
+                                        return Some(candidate);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    None
+}
+
 fn compile_double_moves(
     coefficients: &[i8; ORDER],
     moves: &[MoveRecord; MOVES],
@@ -464,6 +631,36 @@ mod tests {
     use super::*;
     use crate::allocation_test::tracked_allocations;
 
+    const RETAINED_RESIDUAL_32: [[i8; ORDER]; BLOCKS] = [
+        [
+            3, 9, 3, -7, -3, -1, 5, 9, 5, -7, 1, -5, -1, -5, -3, -1, -5, 5,
+        ],
+        [
+            1, -5, 5, -1, -1, 9, 7, -3, -1, -13, 9, -7, -7, -3, 5, 3, 1, 1,
+        ],
+        [
+            -1, 1, -3, 3, 5, -1, -1, -13, 15, 1, -1, 5, 1, -7, 5, 3, -9, -3,
+        ],
+        [
+            -3, -3, -3, 9, 5, 3, 1, 3, 7, -5, 1, -3, -3, -1, -1, -7, 1, -1,
+        ],
+    ];
+
+    const EXACT_RADIUS_FIVE: [[i8; ORDER]; BLOCKS] = [
+        [
+            3, 9, 3, -7, -3, -1, 5, 9, 5, -7, 1, -5, -1, -5, -3, -1, -5, 5,
+        ],
+        [
+            1, -5, 5, -3, -3, 9, 7, -3, -1, -11, 9, -7, -7, -3, 5, 3, 3, 1,
+        ],
+        [
+            -1, 1, -3, 3, 5, -1, -1, -13, 15, 1, -1, 5, 1, -7, 5, 3, -9, -3,
+        ],
+        [
+            -1, -1, -3, 11, 5, 3, 1, 3, 5, -5, 1, -5, -3, -1, -1, -7, 1, -3,
+        ],
+    ];
+
     #[test]
     fn compiled_move_deltas_match_direct_recomputation() {
         let base = Q18Coefficients {
@@ -530,5 +727,37 @@ mod tests {
             let _ = repair_q18_one_double_two_singles(&base, &mut workspace);
         });
         assert_eq!(allocations, 0);
+    }
+
+    #[test]
+    fn full_delta_double_tt_is_exact_and_allocation_free() {
+        let row = [-1_i8; ORDER];
+        let mut moves = [NO_MOVE; MOVES];
+        let move_count = compile_moves(&row, &mut moves);
+        let mut workspace = Q18LocalRepairWorkspace::new();
+        let (count, allocations) =
+            tracked_allocations(|| compile_double_tt(&row, &moves, move_count, &mut workspace));
+        assert_eq!(allocations, 0);
+        assert!(count > 0);
+        for pair in workspace.left_pairs[..count].iter().step_by(97) {
+            let replay = lookup_double_tt(&pair.delta, &workspace).unwrap();
+            assert_eq!(replay.delta, pair.delta);
+        }
+    }
+
+    #[test]
+    fn retained_residual_32_has_directly_replayed_radius_five_repair() {
+        let base = Q18Coefficients {
+            blocks: RETAINED_RESIDUAL_32,
+        };
+        let mut workspace = Q18LocalRepairWorkspace::new();
+        let (hit, allocations) = tracked_allocations(|| {
+            repair_q18_one_triple_one_double(&base, &mut workspace).unwrap()
+        });
+        assert_eq!(allocations, 0);
+        assert_eq!(hit.blocks, EXACT_RADIUS_FIVE);
+        let mut split = Q18PairSplit::ZERO;
+        let mut projection = Q18DivisorProjection::ZERO;
+        assert!(verify_q18_gs_reduction(&hit, &mut split, &mut projection).is_ok());
     }
 }
