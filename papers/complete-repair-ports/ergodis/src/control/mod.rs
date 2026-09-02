@@ -21,6 +21,8 @@ mod client;
 mod evolution;
 mod proposal_policy;
 mod proposal_session;
+mod proposal_session_store;
+mod proposal_submission_store;
 mod proposal_ticket;
 mod proposal_ticket_store;
 mod synthesis;
@@ -47,6 +49,8 @@ pub use proposal_session::{
     ProposalSessionRevision, ProposalSessionSnapshot, ProposalSessionUsage,
     MAX_PROPOSAL_SESSION_QUERIES, PROPOSAL_SESSION_SCHEMA,
 };
+pub use proposal_session_store::{ProposalSessionStore, ProposalSessionStoreError};
+pub use proposal_submission_store::{ProposalSubmissionStore, ProposalSubmissionStoreError};
 pub use proposal_ticket::{
     ProposalFailureReport, ProposalReadyResult, ProposalTicketClaim, ProposalTicketError,
     ProposalTicketLedger, ProposalTicketLedgerSnapshot, ProposalTicketSnapshot, ProposalTicketSpec,

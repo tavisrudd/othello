@@ -3,11 +3,11 @@
 //! This is controller-owned cold state. Query identities remain in the ledger
 //! after completion so reconnects and transport retries cannot mint budget.
 
-use super::{ProposalIdempotencyKey, ProposalRole};
+use super::{ProposalIdempotencyKey, ProposalRole, ProposalTicketSpec};
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-pub const PROPOSAL_SESSION_SCHEMA: &str = "ergodis-proposal-session-v1";
+pub const PROPOSAL_SESSION_SCHEMA: &str = "ergodis-proposal-session-v2";
 pub const MAX_PROPOSAL_SESSION_QUERIES: usize = 4_096;
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -26,17 +26,15 @@ pub struct ProposalSessionLimits {
 #[serde(rename_all = "kebab-case")]
 pub enum ProposalSessionQueryStatus {
     Outstanding,
-    Finished,
+    Settled,
     Cancelled,
 }
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct ProposalSessionQuery {
-    pub key: ProposalIdempotencyKey,
-    pub role: ProposalRole,
-    pub work_units: u64,
-    pub maximum_return_bytes: u64,
+    pub spec: ProposalTicketSpec,
+    pub reserved_ms: u64,
     pub status: ProposalSessionQueryStatus,
 }
 
@@ -51,6 +49,7 @@ pub struct ProposalSessionRevision {
 #[serde(deny_unknown_fields)]
 pub struct ProposalSessionSnapshot {
     pub schema: String,
+    pub session_binding: [u8; 32],
     pub source_fingerprint: [u8; 32],
     pub limits: ProposalSessionLimits,
     pub charged_work_units: u64,
@@ -117,6 +116,7 @@ pub enum ProposalSessionError {
 
 #[derive(Clone, Debug)]
 pub struct ProposalSession {
+    session_binding: [u8; 32],
     source_fingerprint: [u8; 32],
     limits: ProposalSessionLimits,
     charged_work_units: u64,
@@ -129,15 +129,20 @@ pub struct ProposalSession {
 
 impl ProposalSession {
     pub fn new(
+        session_binding: [u8; 32],
         source_fingerprint: [u8; 32],
         limits: ProposalSessionLimits,
         now_ms: u64,
     ) -> Result<Self, ProposalSessionError> {
         validate_limits(limits)?;
+        if session_binding == [0; 32] {
+            return Err(ProposalSessionError::InvalidLimits);
+        }
         if now_ms > limits.expires_ms {
             return Err(ProposalSessionError::Expired);
         }
         Ok(Self {
+            session_binding,
             source_fingerprint,
             limits,
             charged_work_units: 0,
@@ -157,7 +162,8 @@ impl ProposalSession {
             return Err(ProposalSessionError::InvalidSnapshot);
         }
         validate_limits(snapshot.limits)?;
-        if snapshot.updated_ms > now_ms
+        if snapshot.session_binding == [0; 32]
+            || snapshot.updated_ms > now_ms
             || snapshot.queries.len() > snapshot.limits.maximum_queries as usize
             || snapshot.queries.len() > MAX_PROPOSAL_SESSION_QUERIES
             || snapshot.revisions.len() > snapshot.limits.maximum_revisions as usize
@@ -171,21 +177,25 @@ impl ProposalSession {
         let mut outstanding = 0_u16;
         for query in snapshot.queries {
             validate_query(query).map_err(|_| ProposalSessionError::InvalidSnapshot)?;
-            if snapshot.limits.allowed_roles & query.role.mask() == 0 {
+            if query.reserved_ms > snapshot.updated_ms
+                || query.reserved_ms > snapshot.limits.expires_ms
+                || query.reserved_ms > query.spec.deadlines.queue_by_ms
+                || snapshot.limits.allowed_roles & query.spec.role.mask() == 0
+            {
                 return Err(ProposalSessionError::InvalidSnapshot);
             }
             charged_work_units = charged_work_units
-                .checked_add(query.work_units)
+                .checked_add(query.spec.cost_units)
                 .ok_or(ProposalSessionError::InvalidSnapshot)?;
             charged_return_bytes = charged_return_bytes
-                .checked_add(query.maximum_return_bytes)
+                .checked_add(query.spec.max_return_bytes)
                 .ok_or(ProposalSessionError::InvalidSnapshot)?;
             if query.status == ProposalSessionQueryStatus::Outstanding {
                 outstanding = outstanding
                     .checked_add(1)
                     .ok_or(ProposalSessionError::InvalidSnapshot)?;
             }
-            if queries.insert(query.key, query).is_some() {
+            if queries.insert(query.spec.key, query).is_some() {
                 return Err(ProposalSessionError::InvalidSnapshot);
             }
         }
@@ -210,6 +220,7 @@ impl ProposalSession {
             return Err(ProposalSessionError::InvalidSnapshot);
         }
         Ok(Self {
+            session_binding: snapshot.session_binding,
             source_fingerprint: snapshot.source_fingerprint,
             limits: snapshot.limits,
             charged_work_units,
@@ -224,6 +235,7 @@ impl ProposalSession {
     pub fn snapshot(&self) -> ProposalSessionSnapshot {
         ProposalSessionSnapshot {
             schema: PROPOSAL_SESSION_SCHEMA.into(),
+            session_binding: self.session_binding,
             source_fingerprint: self.source_fingerprint,
             limits: self.limits,
             charged_work_units: self.charged_work_units,
@@ -252,6 +264,10 @@ impl ProposalSession {
         self.source_fingerprint
     }
 
+    pub fn session_binding(&self) -> [u8; 32] {
+        self.session_binding
+    }
+
     pub fn limits(&self) -> ProposalSessionLimits {
         self.limits
     }
@@ -271,26 +287,18 @@ impl ProposalSession {
 
     pub fn reserve(
         &mut self,
-        key: ProposalIdempotencyKey,
-        role: ProposalRole,
-        work_units: u64,
-        maximum_return_bytes: u64,
+        spec: ProposalTicketSpec,
         now_ms: u64,
     ) -> Result<ProposalSessionReservation, ProposalSessionError> {
         self.check_time(now_ms)?;
         let proposed = ProposalSessionQuery {
-            key,
-            role,
-            work_units,
-            maximum_return_bytes,
+            spec,
+            reserved_ms: now_ms,
             status: ProposalSessionQueryStatus::Outstanding,
         };
         validate_query(proposed)?;
-        if let Some(existing) = self.queries.get(&key) {
-            return if existing.role == role
-                && existing.work_units == work_units
-                && existing.maximum_return_bytes == maximum_return_bytes
-            {
+        if let Some(existing) = self.queries.get(&spec.key) {
+            return if existing.spec == spec {
                 Ok(ProposalSessionReservation::Existing {
                     status: existing.status,
                 })
@@ -301,7 +309,10 @@ impl ProposalSession {
         if now_ms > self.limits.expires_ms {
             return Err(ProposalSessionError::Expired);
         }
-        if self.limits.allowed_roles & role.mask() == 0 {
+        if now_ms > spec.deadlines.queue_by_ms {
+            return Err(ProposalSessionError::Expired);
+        }
+        if self.limits.allowed_roles & spec.role.mask() == 0 {
             return Err(ProposalSessionError::ForbiddenRole);
         }
         if self.queries.len() == self.limits.maximum_queries as usize {
@@ -312,19 +323,19 @@ impl ProposalSession {
         }
         let charged_work_units = self
             .charged_work_units
-            .checked_add(work_units)
+            .checked_add(spec.cost_units)
             .ok_or(ProposalSessionError::WorkBudget)?;
         if charged_work_units > self.limits.maximum_work_units {
             return Err(ProposalSessionError::WorkBudget);
         }
         let charged_return_bytes = self
             .charged_return_bytes
-            .checked_add(maximum_return_bytes)
+            .checked_add(spec.max_return_bytes)
             .ok_or(ProposalSessionError::ReturnByteBudget)?;
         if charged_return_bytes > self.limits.maximum_return_bytes {
             return Err(ProposalSessionError::ReturnByteBudget);
         }
-        self.queries.insert(key, proposed);
+        self.queries.insert(spec.key, proposed);
         self.charged_work_units = charged_work_units;
         self.charged_return_bytes = charged_return_bytes;
         self.outstanding += 1;
@@ -332,12 +343,12 @@ impl ProposalSession {
         Ok(ProposalSessionReservation::Created)
     }
 
-    pub fn finish(
+    pub fn settle(
         &mut self,
         key: ProposalIdempotencyKey,
         now_ms: u64,
     ) -> Result<bool, ProposalSessionError> {
-        self.transition_terminal(key, ProposalSessionQueryStatus::Finished, now_ms)
+        self.transition_terminal(key, ProposalSessionQueryStatus::Settled, now_ms)
     }
 
     pub fn reserve_revision(
@@ -425,7 +436,7 @@ fn validate_limits(limits: ProposalSessionLimits) -> Result<(), ProposalSessionE
 }
 
 fn validate_query(query: ProposalSessionQuery) -> Result<(), ProposalSessionError> {
-    if query.key.as_bytes() == [0; 32] || query.work_units == 0 || query.maximum_return_bytes == 0 {
+    if query.spec.key.as_bytes() == [0; 32] || query.spec.validate().is_err() {
         return Err(ProposalSessionError::InvalidQuery);
     }
     Ok(())
@@ -434,6 +445,7 @@ fn validate_query(query: ProposalSessionQuery) -> Result<(), ProposalSessionErro
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::control::ProposalDeadlines;
 
     fn limits() -> ProposalSessionLimits {
         ProposalSessionLimits {
@@ -451,47 +463,63 @@ mod tests {
         ProposalIdempotencyKey::new("session", request, [request as u8; 32]).unwrap()
     }
 
+    fn spec(
+        request: u64,
+        role: ProposalRole,
+        cost_units: u64,
+        max_return_bytes: u64,
+    ) -> ProposalTicketSpec {
+        ProposalTicketSpec {
+            key: key(request),
+            proposer_id: 3,
+            role,
+            deadlines: ProposalDeadlines::new(100, 500, 900, 700).unwrap(),
+            cost_units,
+            max_return_bytes,
+        }
+    }
+
     #[test]
     fn reservations_are_idempotent_bounded_and_not_refunded() {
-        let mut session = ProposalSession::new([7; 32], limits(), 10).unwrap();
+        let mut session = ProposalSession::new([1; 32], [7; 32], limits(), 10).unwrap();
         assert_eq!(
-            session.reserve(key(1), ProposalRole::Heuristic, 5, 50, 11),
+            session.reserve(spec(1, ProposalRole::Heuristic, 5, 50), 11),
             Ok(ProposalSessionReservation::Created)
         );
         assert_eq!(
-            session.reserve(key(1), ProposalRole::Heuristic, 5, 50, 11),
+            session.reserve(spec(1, ProposalRole::Heuristic, 5, 50), 11),
             Ok(ProposalSessionReservation::Existing {
                 status: ProposalSessionQueryStatus::Outstanding
             })
         );
         assert_eq!(
-            session.reserve(key(1), ProposalRole::Heuristic, 6, 50, 11),
+            session.reserve(spec(1, ProposalRole::Heuristic, 6, 50), 11),
             Err(ProposalSessionError::IdentityConflict)
         );
         assert_eq!(
-            session.reserve(key(2), ProposalRole::Ordering, 1, 1, 12),
+            session.reserve(spec(2, ProposalRole::Ordering, 1, 1), 12),
             Err(ProposalSessionError::ForbiddenRole)
         );
         assert_eq!(
-            session.reserve(key(2), ProposalRole::NecessaryReduction, 6, 60, 12),
+            session.reserve(spec(2, ProposalRole::NecessaryReduction, 6, 60), 12),
             Ok(ProposalSessionReservation::Created)
         );
         assert_eq!(
-            session.reserve(key(3), ProposalRole::Heuristic, 1, 1, 13),
+            session.reserve(spec(3, ProposalRole::Heuristic, 1, 1), 13),
             Err(ProposalSessionError::OutstandingCapacity)
         );
-        assert_eq!(session.finish(key(1), 14), Ok(true));
-        assert_eq!(session.finish(key(1), 14), Ok(false));
+        assert_eq!(session.settle(key(1), 14), Ok(true));
+        assert_eq!(session.settle(key(1), 14), Ok(false));
         assert_eq!(
-            session.reserve(key(3), ProposalRole::Heuristic, 2, 10, 15),
+            session.reserve(spec(3, ProposalRole::Heuristic, 2, 10), 15),
             Err(ProposalSessionError::WorkBudget)
         );
         assert_eq!(
-            session.reserve(key(3), ProposalRole::Heuristic, 1, 11, 15),
+            session.reserve(spec(3, ProposalRole::Heuristic, 1, 11), 15),
             Err(ProposalSessionError::ReturnByteBudget)
         );
         assert_eq!(
-            session.reserve(key(3), ProposalRole::Heuristic, 1, 10, 15),
+            session.reserve(spec(3, ProposalRole::Heuristic, 1, 10), 15),
             Ok(ProposalSessionReservation::Created)
         );
         assert_eq!(session.snapshot().charged_work_units, 12);
@@ -499,13 +527,13 @@ mod tests {
 
     #[test]
     fn restore_recomputes_every_redundant_counter() {
-        let mut session = ProposalSession::new([9; 32], limits(), 10).unwrap();
+        let mut session = ProposalSession::new([1; 32], [9; 32], limits(), 10).unwrap();
         session
-            .reserve(key(1), ProposalRole::Heuristic, 5, 50, 11)
+            .reserve(spec(1, ProposalRole::Heuristic, 5, 50), 11)
             .unwrap();
-        session.finish(key(1), 12).unwrap();
+        session.settle(key(1), 12).unwrap();
         session
-            .reserve(key(2), ProposalRole::NecessaryReduction, 6, 60, 13)
+            .reserve(spec(2, ProposalRole::NecessaryReduction, 6, 60), 13)
             .unwrap();
         session
             .reserve_revision([3; 32], ProposalRole::NecessaryReduction, 13)
@@ -521,8 +549,8 @@ mod tests {
         );
         let mut duplicate = snapshot;
         duplicate.queries.push(duplicate.queries[0]);
-        duplicate.charged_work_units += duplicate.queries[0].work_units;
-        duplicate.charged_return_bytes += duplicate.queries[0].maximum_return_bytes;
+        duplicate.charged_work_units += duplicate.queries[0].spec.cost_units;
+        duplicate.charged_return_bytes += duplicate.queries[0].spec.max_return_bytes;
         assert_eq!(
             ProposalSession::restore(duplicate, 13).unwrap_err(),
             ProposalSessionError::InvalidSnapshot
@@ -532,23 +560,23 @@ mod tests {
     #[test]
     fn expiry_and_clock_reversal_fail_closed() {
         assert_eq!(
-            ProposalSession::new([0; 32], limits(), 1_001).unwrap_err(),
+            ProposalSession::new([1; 32], [0; 32], limits(), 1_001).unwrap_err(),
             ProposalSessionError::Expired
         );
-        let mut session = ProposalSession::new([0; 32], limits(), 10).unwrap();
+        let mut session = ProposalSession::new([1; 32], [0; 32], limits(), 10).unwrap();
         assert_eq!(
-            session.reserve(key(1), ProposalRole::Heuristic, 1, 1, 9),
+            session.reserve(spec(1, ProposalRole::Heuristic, 1, 1), 9),
             Err(ProposalSessionError::ClockReversed)
         );
         assert_eq!(
-            session.reserve(key(1), ProposalRole::Heuristic, 1, 1, 1_001),
+            session.reserve(spec(1, ProposalRole::Heuristic, 1, 1), 1_001),
             Err(ProposalSessionError::Expired)
         );
     }
 
     #[test]
     fn proposal_revisions_are_role_bound_and_idempotent() {
-        let mut session = ProposalSession::new([0; 32], limits(), 10).unwrap();
+        let mut session = ProposalSession::new([1; 32], [0; 32], limits(), 10).unwrap();
         assert_eq!(
             session.reserve_revision([1; 32], ProposalRole::Heuristic, 11),
             Ok(ProposalRevisionReservation::Created)

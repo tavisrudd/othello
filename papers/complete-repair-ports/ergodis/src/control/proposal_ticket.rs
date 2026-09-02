@@ -24,6 +24,12 @@ pub struct ProposalTicketSpec {
     pub max_return_bytes: u64,
 }
 
+impl ProposalTicketSpec {
+    pub fn validate(self) -> Result<(), ProposalTicketError> {
+        validate_ticket_spec(self)
+    }
+}
+
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(tag = "state", rename_all = "kebab-case", deny_unknown_fields)]
 pub enum ProposalTicketStatus {

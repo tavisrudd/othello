@@ -2643,8 +2643,16 @@ files are disposable and may be deleted at any time.
     recomputes every redundant counter during strict snapshot restore. Exact
     duplicate queries and revisions are idempotent, while identity reuse with
     changed work fails closed. Full all-target/all-feature tests and strict
-    clippy pass. The immediate next slice is durable per-session publication,
-    then atomic composition of a session reservation with ticket creation.
+    clippy pass. Durable per-session publication and its composition with the
+    ticket store now also pass the hostile gate. The exact ticket specification
+    and reservation time are stored in the session debit; publication orders
+    the debit before the ticket. Restart reconstructs a missing ticket exactly,
+    rejects the impossible ticket-without-debit inverse, settles terminal and
+    expired tickets back into session concurrency, pins run/source bindings,
+    ignores bounded crash temporaries, and poisons after ambiguous I/O. Quotas
+    are never refunded by completion or cancellation. The immediate next slice
+    is attaching bounded submit/status/cancel/result operations to the daemon;
+    campaign/provider token charges remain an outer admission transaction.
 
     The first new proposer family is accepted. A coloured-Tanner isomorphism
     proposal between the official LP1768 X/Z instances is independently

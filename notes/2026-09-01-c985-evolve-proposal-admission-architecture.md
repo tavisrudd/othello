@@ -396,11 +396,22 @@ expiry, total queries, concurrent outstanding queries, total work, total
 returned-byte reservations, and distinct proposal revisions. Reusing the same
 identity or proposal digest is idempotent only when its role and declared
 resource envelope are identical. Restore reconstructs query counts, outstanding
-count, and charged totals instead of trusting serialized summaries. This state
-is not yet published durably or attached to the daemon; the next transaction
-boundary is session-reservation persistence followed by ticket creation, with
-reconciliation for the safe fail-closed case where a crash lands only the
-reservation.
+count, and charged totals instead of trusting serialized summaries.
+
+Session state is now atomically published in a private, run/source-bound store
+and composed with the durable ticket store. The transaction order is quota
+reservation first and ticket publication second. Each reservation retains the
+exact ticket specification and its original controller timestamp, so restart
+can reconstruct a missing ticket without inventing provider, role, cost, byte,
+or deadline data. A ticket without a matching reservation is impossible under
+that order and fails closed. Reconciliation also converts ready, failed,
+cancelled, and expired tickets into the corresponding session settlement, while
+completion and cancellation deliberately do not refund total budgets. Bounded
+crash temporaries are tolerated; malformed snapshots, swapped session/source
+bindings, reversed clocks, loose permissions, and ambiguous writes fail closed.
+The composed store is still not reachable from the campaign socket. The next
+boundary is typed submit/status/cancel/result daemon operations, followed by
+outer campaign/provider token charging and a provider-neutral worker adapter.
 
 The next generic slice now implements the in-memory/persistable ticket state
 machine without adding wire operations. Its fixed ticket identity makes submit
