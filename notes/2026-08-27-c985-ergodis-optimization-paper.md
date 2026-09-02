@@ -4254,13 +4254,23 @@ allocates nothing after compilation, rejects malformed label widths/tail bits,
 and preserves both end-to-end theorem-recovery controls.  Full all-feature
 tests and strict all-target clippy pass.
 
+Commit `91f908987` adds deterministic sound decision-list assembly.  It
+replays every candidate against the labelled corpus rather than trusting
+evolution metadata, excludes any rule with a false positive, and greedily
+selects maximum new true coverage with complexity and structural tie-breaks.
+Although source predicates may overlap, each reported branch counts only rows
+not captured by an earlier rule, so the effective cascade branches are
+disjoint and every prefix remains a sound sufficient condition.  Rule and
+census bounds are explicit; complete and bounded-incomplete controls pass the
+full public gate.
+
 Relative to Fable's A.3 ledger, items 1, 2 (first affine symbolic form), 3, 7,
 and 8 are now landed; the persistent typed representation and injection bridge
 underlying them are also complete.  Item 5's invariant-first ordering exists
 at the generic ranking/admission seam but is not yet the daemon default.  The
-highest-value uncovered reusable slices are therefore: (a) sound decision-list
-assembly over disjoint admitted predicates, (b) a daemon adapter over the one
-runner-neutral engine, (c) learned scope masks/zero conjunctions, and (d) the
+highest-value uncovered reusable slices are therefore: (a) a daemon adapter
+over the one runner-neutral engine, (b) learned scope masks/zero conjunctions,
+and (c) the
 real raw-orbit and basin-obstruction private gates.  Broad file/module moves,
 API-facade cleanup, and private-bin consolidation remain architectural debt;
 they must not be mixed into these narrowly validated evolve commits.
