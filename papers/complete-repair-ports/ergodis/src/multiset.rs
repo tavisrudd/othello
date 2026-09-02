@@ -13,6 +13,8 @@ pub enum MultisetStatistic {
     Sum { field: usize },
     Minimum { field: usize },
     Maximum { field: usize },
+    AllNonzero { field: usize },
+    AnyNonzero { field: usize },
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -99,7 +101,9 @@ pub fn compile_bounded_multiset_aggregates(
             MultisetStatistic::Count => continue,
             MultisetStatistic::Sum { field }
             | MultisetStatistic::Minimum { field }
-            | MultisetStatistic::Maximum { field } => *field,
+            | MultisetStatistic::Maximum { field }
+            | MultisetStatistic::AllNonzero { field }
+            | MultisetStatistic::AnyNonzero { field } => *field,
         };
         if field >= row_width {
             return Err(MultisetAggregateError::InvalidField);
@@ -164,6 +168,16 @@ pub fn compile_bounded_multiset_aggregates(
                     }
                     maximum
                 }
+                MultisetStatistic::AllNonzero { field } => i64::from(
+                    order[start..end]
+                        .iter()
+                        .all(|&row| row_values[row as usize * row_width + field] != 0),
+                ),
+                MultisetStatistic::AnyNonzero { field } => i64::from(
+                    order[start..end]
+                        .iter()
+                        .any(|&row| row_values[row as usize * row_width + field] != 0),
+                ),
             };
             output.push(value);
         }
@@ -199,13 +213,15 @@ mod tests {
                 MultisetStatistic::Sum { field: 0 },
                 MultisetStatistic::Minimum { field: 1 },
                 MultisetStatistic::Maximum { field: 1 },
+                MultisetStatistic::AllNonzero { field: 1 },
+                MultisetStatistic::AnyNonzero { field: 1 },
             ],
             BOUNDS,
         )
         .unwrap();
         assert_eq!(table.group_keys(), &[3, 9]);
-        assert_eq!(table.row(0), &[2, 7, 0, 7]);
-        assert_eq!(table.row(1), &[3, 6, 6, 9]);
+        assert_eq!(table.row(0), &[2, 7, 0, 7, 0, 1]);
+        assert_eq!(table.row(1), &[3, 6, 6, 9, 1, 1]);
     }
 
     #[test]

@@ -226,6 +226,12 @@ impl FeatureBatch {
                 MultisetStatistic::Maximum { field } => {
                     format!("group-max:{}", self.fields[field])
                 }
+                MultisetStatistic::AllNonzero { field } => {
+                    format!("group-all-nonzero:{}", self.fields[field])
+                }
+                MultisetStatistic::AnyNonzero { field } => {
+                    format!("group-any-nonzero:{}", self.fields[field])
+                }
             });
         }
         let mut values = Vec::with_capacity(table.values().len());
