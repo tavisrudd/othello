@@ -44,6 +44,7 @@ fn ordered_max(left: f64, right: f64) -> f64 {
 struct TannerGraph {
     bits: usize,
     checks: usize,
+    degree_six_prefix: usize,
     row_offsets: Vec<usize>,
     edge_bits: Vec<usize>,
     edge_checks: Vec<usize>,
@@ -54,6 +55,7 @@ struct TannerGraph {
 impl TannerGraph {
     fn from_rows(bits: usize, rows: Vec<Vec<usize>>) -> Self {
         let checks = rows.len();
+        let degree_six_prefix = rows.iter().take_while(|row| row.len() == 6).count();
         let edge_count: usize = rows.iter().map(Vec::len).sum();
         let mut row_offsets = Vec::with_capacity(checks + 1);
         let mut edge_bits = Vec::with_capacity(edge_count);
@@ -83,6 +85,7 @@ impl TannerGraph {
         Self {
             bits,
             checks,
+            degree_six_prefix,
             row_offsets,
             edge_bits,
             edge_checks,
@@ -248,6 +251,57 @@ impl MinSumWorkspace {
     }
 
     #[inline(always)]
+    fn update_fixed_check<const DEGREE: usize>(&mut self, start: usize, syndrome: u8, scale: f64) {
+        let mut sign = syndrome != 0;
+        let mut minimum = f64::MAX;
+        let mut second = f64::MAX;
+        for offset in 0..DEGREE {
+            let message = self.v2c[start + offset];
+            sign ^= message <= 0.0;
+            let magnitude = message.abs();
+            let lower = ordered_min(minimum, magnitude);
+            let upper = ordered_max(minimum, magnitude);
+            minimum = lower;
+            second = ordered_min(second, upper);
+        }
+        for offset in 0..DEGREE {
+            let edge = start + offset;
+            let magnitude = if self.v2c[edge].abs() == minimum {
+                second
+            } else {
+                minimum
+            } * scale;
+            let negative = sign ^ (self.v2c[edge] <= 0.0);
+            self.c2v[edge] = if negative { -magnitude } else { magnitude };
+        }
+    }
+
+    #[inline(always)]
+    fn update_check(&mut self, start: usize, end: usize, syndrome: u8, scale: f64) {
+        let mut sign = syndrome != 0;
+        let mut minimum = f64::MAX;
+        let mut second = f64::MAX;
+        for edge in start..end {
+            let message = self.v2c[edge];
+            sign ^= message <= 0.0;
+            let magnitude = message.abs();
+            let lower = ordered_min(minimum, magnitude);
+            let upper = ordered_max(minimum, magnitude);
+            minimum = lower;
+            second = ordered_min(second, upper);
+        }
+        for edge in start..end {
+            let magnitude = if self.v2c[edge].abs() == minimum {
+                second
+            } else {
+                minimum
+            } * scale;
+            let negative = sign ^ (self.v2c[edge] <= 0.0);
+            self.c2v[edge] = if negative { -magnitude } else { magnitude };
+        }
+    }
+
+    #[inline(always)]
     fn decode(
         &mut self,
         graph: &TannerGraph,
@@ -260,30 +314,16 @@ impl MinSumWorkspace {
         self.c2v.fill(0.0);
         self.hard.fill(0);
         for iteration in 1..=maximum_iterations {
-            for (check, window) in graph.row_offsets.windows(2).enumerate() {
-                let start = window[0];
-                let end = window[1];
-                let mut sign = syndrome[check] != 0;
-                let mut minimum = f64::MAX;
-                let mut second = f64::MAX;
-                for edge in start..end {
-                    let message = self.v2c[edge];
-                    sign ^= message <= 0.0;
-                    let magnitude = message.abs();
-                    let lower = ordered_min(minimum, magnitude);
-                    let upper = ordered_max(minimum, magnitude);
-                    minimum = lower;
-                    second = ordered_min(second, upper);
-                }
-                for edge in start..end {
-                    let magnitude = if self.v2c[edge].abs() == minimum {
-                        second
-                    } else {
-                        minimum
-                    } * scale;
-                    let negative = sign ^ (self.v2c[edge] <= 0.0);
-                    self.c2v[edge] = if negative { -magnitude } else { magnitude };
-                }
+            for check in 0..graph.degree_six_prefix {
+                self.update_fixed_check::<6>(check * 6, syndrome[check], scale);
+            }
+            for check in graph.degree_six_prefix..graph.checks {
+                self.update_check(
+                    graph.row_offsets[check],
+                    graph.row_offsets[check + 1],
+                    syndrome[check],
+                    scale,
+                );
             }
 
             self.observed.fill(0);
