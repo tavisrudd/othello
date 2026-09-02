@@ -351,7 +351,7 @@ fn find_symmetry(
 ) -> Option<Symmetry> {
     let physical_pivots = pivot_lookup(physical_basis, columns);
     let observable_pivots = pivot_lookup(observable_basis, columns);
-    let mut best = None;
+    let mut candidates = Vec::new();
 
     for step in 1..columns {
         if columns % step != 0 {
@@ -359,7 +359,7 @@ fn find_symmetry(
         }
         let generator = global_shift(columns, step);
         consider_symmetry(
-            &mut best,
+            &mut candidates,
             "global-shift",
             vec![step],
             vec![generator],
@@ -375,18 +375,31 @@ fn find_symmetry(
         if columns % block_size != 0 {
             continue;
         }
-        let generator = cyclic_blocks(columns, block_size);
-        consider_symmetry(
-            &mut best,
-            "block-cyclic",
-            vec![block_size],
-            vec![generator],
-            physical_basis,
-            &physical_pivots,
-            observable_basis,
-            &observable_pivots,
-            columns,
-        );
+        for step in 1..block_size {
+            if block_size % step != 0 {
+                continue;
+            }
+            let generator = shift_blocks(columns, block_size, step);
+            consider_symmetry(
+                &mut candidates,
+                if step == 1 {
+                    "block-cyclic"
+                } else {
+                    "block-step"
+                },
+                if step == 1 {
+                    vec![block_size]
+                } else {
+                    vec![block_size, step]
+                },
+                vec![generator],
+                physical_basis,
+                &physical_pivots,
+                observable_basis,
+                &observable_pivots,
+                columns,
+            );
+        }
     }
 
     if columns % 2 == 0 {
@@ -404,7 +417,7 @@ fn find_symmetry(
                 torus_shift(columns, rows, cols, false),
             ];
             consider_symmetry(
-                &mut best,
+                &mut candidates,
                 "two-block-torus",
                 vec![rows, cols],
                 generators,
@@ -416,12 +429,12 @@ fn find_symmetry(
             );
         }
     }
-    best
+    combine_symmetries(candidates, columns)
 }
 
 #[allow(clippy::too_many_arguments)]
 fn consider_symmetry(
-    best: &mut Option<Symmetry>,
+    candidates: &mut Vec<Symmetry>,
     kind: &'static str,
     parameters: Vec<usize>,
     generators: Vec<Vec<u16>>,
@@ -437,30 +450,67 @@ fn consider_symmetry(
     }) {
         return;
     }
-    let candidate = Symmetry {
+    if candidates.iter().any(|candidate| {
+        candidate.generators.len() == generators.len()
+            && candidate
+                .generators
+                .iter()
+                .zip(&generators)
+                .all(|(left, right)| left == right)
+    }) {
+        return;
+    }
+    candidates.push(Symmetry {
         kind,
         parameters,
         anchors: orbit_anchors(&generators, columns),
         generators,
-    };
-    let candidate_key = (
-        candidate.anchors.len(),
-        candidate.generators.len(),
-        candidate.kind,
-        candidate.parameters.as_slice(),
-    );
-    let replace = best.as_ref().is_none_or(|prior| {
-        candidate_key
-            < (
-                prior.anchors.len(),
-                prior.generators.len(),
-                prior.kind,
-                prior.parameters.as_slice(),
-            )
     });
-    if replace {
-        *best = Some(candidate);
+}
+
+fn combine_symmetries(mut candidates: Vec<Symmetry>, columns: usize) -> Option<Symmetry> {
+    let mut generators = Vec::new();
+    let mut selected = Vec::new();
+    let mut orbit_count = columns;
+    loop {
+        let best = candidates
+            .iter()
+            .enumerate()
+            .filter_map(|(index, candidate)| {
+                let mut combined = generators.clone();
+                combined.extend(candidate.generators.iter().cloned());
+                let count = orbit_anchors(&combined, columns).len();
+                (count < orbit_count).then_some((
+                    count,
+                    candidate.generators.len(),
+                    candidate.kind,
+                    candidate.parameters.as_slice(),
+                    index,
+                ))
+            })
+            .min();
+        let Some((next_count, _, _, _, index)) = best else {
+            break;
+        };
+        let candidate = candidates.swap_remove(index);
+        orbit_count = next_count;
+        generators.extend(candidate.generators.iter().cloned());
+        selected.push(candidate);
     }
+    if generators.is_empty() {
+        return None;
+    }
+    let (kind, parameters) = if selected.len() == 1 {
+        (selected[0].kind, selected[0].parameters.clone())
+    } else {
+        ("combined-generated-action", vec![selected.len()])
+    };
+    Some(Symmetry {
+        kind,
+        parameters,
+        anchors: orbit_anchors(&generators, columns),
+        generators,
+    })
 }
 
 fn pivot_lookup<'a>(basis: &'a [Vec<u64>], columns: usize) -> Vec<Option<&'a [u64]>> {
@@ -518,12 +568,12 @@ fn global_shift(columns: usize, step: usize) -> Vec<u16> {
         .collect()
 }
 
-fn cyclic_blocks(columns: usize, block_size: usize) -> Vec<u16> {
+fn shift_blocks(columns: usize, block_size: usize, step: usize) -> Vec<u16> {
     (0..columns)
         .map(|coordinate| {
             let block = coordinate / block_size;
             let offset = coordinate % block_size;
-            (block * block_size + (offset + 1) % block_size) as u16
+            (block * block_size + (offset + step) % block_size) as u16
         })
         .collect()
 }
@@ -673,6 +723,33 @@ mod tests {
             &global_shift(8, 1),
             8
         ));
+    }
+
+    #[test]
+    fn combines_individually_verified_generators_when_orbits_sharpen() {
+        let pair_flip = shift_blocks(10, 2, 1);
+        let parity_cycle = shift_blocks(10, 10, 2);
+        let symmetry = combine_symmetries(
+            vec![
+                Symmetry {
+                    kind: "pair-flip",
+                    parameters: Vec::new(),
+                    anchors: orbit_anchors(std::slice::from_ref(&pair_flip), 10),
+                    generators: vec![pair_flip],
+                },
+                Symmetry {
+                    kind: "parity-cycle",
+                    parameters: Vec::new(),
+                    anchors: orbit_anchors(std::slice::from_ref(&parity_cycle), 10),
+                    generators: vec![parity_cycle],
+                },
+            ],
+            10,
+        )
+        .unwrap();
+        assert_eq!(symmetry.kind, "combined-generated-action");
+        assert_eq!(symmetry.generators.len(), 2);
+        assert_eq!(symmetry.anchors, [0]);
     }
 
     #[test]
