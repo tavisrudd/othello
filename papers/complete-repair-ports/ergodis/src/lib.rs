@@ -141,6 +141,7 @@ pub use family_response::{
 };
 pub use feature_dag::{
     FeatureDag, FeatureDagError, FeatureId, FeatureNode, FeatureOp, FeatureWorkspace,
+    RawFeatureExpansion,
 };
 pub use fibre::{
     compile_dense_fibres, verify_dense_fibres, DenseFibreBounds, DenseFibreError, DenseFibreIndex,

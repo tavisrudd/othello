@@ -37,6 +37,32 @@ pub struct FeatureNode {
     pub evaluation_cost: u32,
 }
 
+/// Runtime-selected degree-two expansion over raw scalar inputs.
+#[derive(Clone, Copy, Debug)]
+pub struct RawFeatureExpansion<'a> {
+    pub moduli: &'a [u16],
+    pub include_abs: bool,
+    pub include_sums: bool,
+    pub include_differences: bool,
+    pub include_products: bool,
+    pub include_gaussian_norms: bool,
+    pub include_eisenstein_norms: bool,
+}
+
+impl Default for RawFeatureExpansion<'static> {
+    fn default() -> Self {
+        Self {
+            moduli: &[],
+            include_abs: true,
+            include_sums: true,
+            include_differences: true,
+            include_products: true,
+            include_gaussian_norms: false,
+            include_eisenstein_norms: false,
+        }
+    }
+}
+
 #[derive(Clone, Copy, Debug, Error, Eq, PartialEq)]
 pub enum FeatureDagError {
     #[error("feature DAG bounds must be positive")]
@@ -174,6 +200,61 @@ impl FeatureDag {
         self.intern(FeatureOp::EisensteinNorm { left, right }, degree, cost)
     }
 
+    /// Expand raw inputs into a deterministic candidate feature bank.
+    ///
+    /// Every created term is also reduced modulo each requested modulus. The
+    /// configured DAG node bound stops an over-large runtime attack surface.
+    pub fn expand_raw_degree_two(
+        &mut self,
+        expansion: RawFeatureExpansion<'_>,
+    ) -> Result<Box<[FeatureId]>, FeatureDagError> {
+        if expansion.moduli.contains(&0) {
+            return Err(FeatureDagError::ZeroModulus);
+        }
+        let raw = (0..self.input_count)
+            .map(|index| self.input(index))
+            .collect::<Result<Vec<_>, _>>()?;
+        let mut candidates = raw.clone();
+        for &source in &raw {
+            if expansion.include_abs {
+                let term = self.abs(source)?;
+                self.push_with_residues(term, expansion.moduli, &mut candidates)?;
+            }
+            for &modulus in expansion.moduli {
+                candidates.push(self.modulo(source, modulus)?);
+            }
+        }
+        for (left_index, &left) in raw.iter().enumerate() {
+            for (right_index, &right) in raw.iter().enumerate().skip(left_index) {
+                if expansion.include_sums {
+                    let term = self.add(left, right)?;
+                    self.push_with_residues(term, expansion.moduli, &mut candidates)?;
+                }
+                if expansion.include_products {
+                    let term = self.mul(left, right)?;
+                    self.push_with_residues(term, expansion.moduli, &mut candidates)?;
+                }
+                if expansion.include_gaussian_norms {
+                    let term = self.gaussian_norm(left, right)?;
+                    self.push_with_residues(term, expansion.moduli, &mut candidates)?;
+                }
+                if expansion.include_eisenstein_norms {
+                    let term = self.eisenstein_norm(left, right)?;
+                    self.push_with_residues(term, expansion.moduli, &mut candidates)?;
+                }
+                if expansion.include_differences && left_index != right_index {
+                    for (minuend, subtrahend) in [(left, right), (right, left)] {
+                        let term = self.sub(minuend, subtrahend)?;
+                        self.push_with_residues(term, expansion.moduli, &mut candidates)?;
+                    }
+                }
+            }
+        }
+        candidates.sort_unstable();
+        candidates.dedup();
+        Ok(candidates.into_boxed_slice())
+    }
+
     pub fn workspace(&self) -> FeatureWorkspace {
         FeatureWorkspace {
             values: vec![0; self.nodes.len()],
@@ -219,6 +300,19 @@ impl FeatureDag {
 
     fn require(&self, id: FeatureId) -> Result<FeatureNode, FeatureDagError> {
         self.node(id).copied().ok_or(FeatureDagError::UnknownNode)
+    }
+
+    fn push_with_residues(
+        &mut self,
+        term: FeatureId,
+        moduli: &[u16],
+        output: &mut Vec<FeatureId>,
+    ) -> Result<(), FeatureDagError> {
+        output.push(term);
+        for &modulus in moduli {
+            output.push(self.modulo(term, modulus)?);
+        }
+        Ok(())
     }
 
     fn binary_metadata(
@@ -390,5 +484,28 @@ mod tests {
         });
         result.unwrap();
         assert_eq!(events, crate::test_alloc::AllocationEvents::default());
+    }
+
+    #[test]
+    fn runtime_expansion_builds_raw_degree_two_bank() {
+        let mut dag = FeatureDag::new(2, 2, 128).unwrap();
+        let candidates = dag
+            .expand_raw_degree_two(RawFeatureExpansion {
+                moduli: &[3, 7],
+                include_gaussian_norms: true,
+                include_eisenstein_norms: true,
+                ..RawFeatureExpansion::default()
+            })
+            .unwrap();
+        assert!(candidates.len() > 20);
+        assert!(dag
+            .nodes()
+            .iter()
+            .any(|node| matches!(node.op, FeatureOp::Mod { modulus: 7, .. })));
+        assert!(dag
+            .nodes()
+            .iter()
+            .any(|node| matches!(node.op, FeatureOp::EisensteinNorm { .. })));
+        assert!(dag.nodes().iter().all(|node| node.degree <= 2));
     }
 }
