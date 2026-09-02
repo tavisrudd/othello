@@ -21,6 +21,12 @@ struct Args {
     osd_order: usize,
     #[arg(long, default_value_t = 300)]
     iterations: usize,
+    #[arg(long, value_delimiter = ',')]
+    iteration_candidates: Vec<usize>,
+    #[arg(long)]
+    target_weight: Option<usize>,
+    #[arg(long)]
+    cost_filter_checkpoints: bool,
     #[arg(long, default_value_t = 0.002)]
     error_rate: f64,
     #[arg(long, default_value_t = 0.625)]
@@ -68,15 +74,15 @@ impl LocalResult {
     }
 }
 
-struct PreparedTarget {
+struct PreparedTarget<'code> {
     target: usize,
-    code: BinaryParityCheck,
+    code: &'code BinaryParityCheck,
     workspace: BpOsdWorkspace,
     syndrome: Vec<u8>,
 }
 
-struct WorkerJob {
-    targets: Vec<PreparedTarget>,
+struct WorkerJob<'code> {
+    targets: Vec<PreparedTarget<'code>>,
     result: LocalResult,
 }
 
@@ -89,6 +95,10 @@ struct Report<'a> {
     logical_observations: usize,
     threads: usize,
     rounds: usize,
+    iteration_candidates: Vec<usize>,
+    selected_iterations: usize,
+    target_weight: Option<usize>,
+    cost_filter_checkpoints: bool,
     method: &'static str,
     osd_order: usize,
     attempted: usize,
@@ -128,7 +138,7 @@ fn checksum(word: &[u8], target: usize) -> u64 {
 
 fn solve_chunk(
     problem: &SparseProblem,
-    targets: &mut [PreparedTarget],
+    targets: &mut [PreparedTarget<'_>],
     local: &mut LocalResult,
     rounds: usize,
 ) -> Result<()> {
@@ -179,6 +189,85 @@ fn merge(total: &mut LocalResult, local: LocalResult) {
     }
 }
 
+fn filter_checkpoints(
+    candidates: Vec<usize>,
+    bits: usize,
+    checks: usize,
+    edges: usize,
+) -> Vec<usize> {
+    if candidates.len() <= 2 {
+        return candidates;
+    }
+    let final_iterations = *candidates.last().unwrap();
+    let words = (bits + 1).div_ceil(64);
+    let osd_units = checks as u128 * checks as u128 * words as u128;
+    let always_keep_from = candidates.len() - 2;
+    candidates
+        .into_iter()
+        .enumerate()
+        .filter_map(|(index, candidate)| {
+            let saved_bp_units = (final_iterations - candidate) as u128 * edges as u128;
+            (index >= always_keep_from || osd_units <= saved_bp_units).then_some(candidate)
+        })
+        .collect()
+}
+
+fn run_wave(
+    problem: &SparseProblem,
+    codes: &[BinaryParityCheck],
+    config: BpOsdConfig,
+    method: OsdMethod,
+    threads: usize,
+    rounds: usize,
+) -> Result<(LocalResult, f64)> {
+    let bits = usize::from(problem.coordinate_count);
+    let workers = threads.min(codes.len());
+    let per_worker = codes.len().div_ceil(workers);
+    let mut jobs = (0..workers)
+        .map(|_| Vec::with_capacity(per_worker))
+        .collect::<Vec<_>>();
+    for (target, code) in codes.iter().enumerate() {
+        let workspace = BpOsdWorkspace::new(code, config, method)?;
+        let mut syndrome = vec![0_u8; code.check_count()];
+        *syndrome
+            .last_mut()
+            .context("logical target row is missing")? = 1;
+        jobs[target % workers].push(PreparedTarget {
+            target,
+            code,
+            workspace,
+            syndrome,
+        });
+    }
+    let jobs = jobs
+        .into_iter()
+        .map(|targets| WorkerJob {
+            targets,
+            result: LocalResult::new(bits),
+        })
+        .collect::<Vec<_>>();
+    let started = Instant::now();
+    let locals = std::thread::scope(|scope| {
+        let mut handles = Vec::with_capacity(workers);
+        for mut job in jobs {
+            handles.push(scope.spawn(move || {
+                solve_chunk(problem, &mut job.targets, &mut job.result, rounds)?;
+                Ok(job.result)
+            }));
+        }
+        handles
+            .into_iter()
+            .map(|handle| handle.join().expect("BP worker panicked"))
+            .collect::<Result<Vec<_>>>()
+    })?;
+    let elapsed = started.elapsed().as_secs_f64();
+    let mut total = LocalResult::new(bits);
+    for local in locals {
+        merge(&mut total, local);
+    }
+    Ok((total, elapsed))
+}
+
 fn main() -> Result<()> {
     let args = Args::parse();
     if args.threads == 0 || args.threads > 12 {
@@ -203,11 +292,6 @@ fn main() -> Result<()> {
             .map(|row| row.iter().map(|&column| usize::from(column)).collect());
         codes.push(BinaryParityCheck::from_rows(bits, rows)?);
     }
-    let config = BpOsdConfig {
-        error_rate: args.error_rate,
-        maximum_iterations: args.iterations,
-        min_sum_scale: args.min_sum_scale,
-    };
     let method = match args.method {
         Method::Disabled => OsdMethod::Disabled,
         Method::Zero => OsdMethod::Zero,
@@ -218,59 +302,72 @@ fn main() -> Result<()> {
             order: args.osd_order,
         },
     };
-    let workers = args.threads.min(codes.len());
-    let per_worker = codes.len().div_ceil(workers);
-    let mut jobs = (0..workers)
-        .map(|_| Vec::with_capacity(per_worker))
-        .collect::<Vec<_>>();
-    for (target, code) in codes.into_iter().enumerate() {
-        let workspace = BpOsdWorkspace::new(&code, config, method)?;
-        let mut syndrome = vec![0_u8; code.check_count()];
-        *syndrome
-            .last_mut()
-            .context("logical target row is missing")? = 1;
-        jobs[target % workers].push(PreparedTarget {
-            target,
-            code,
-            workspace,
-            syndrome,
-        });
-    }
-    let jobs = jobs
-        .into_iter()
-        .map(|targets| WorkerJob {
-            targets,
-            result: LocalResult::new(bits),
-        })
-        .collect::<Vec<_>>();
-    let started = Instant::now();
-    let locals = std::thread::scope(|scope| {
-        let problem_ref = &problem;
-        let mut handles = Vec::with_capacity(workers);
-        for mut job in jobs {
-            handles.push(scope.spawn(move || {
-                solve_chunk(problem_ref, &mut job.targets, &mut job.result, args.rounds)?;
-                Ok(job.result)
-            }));
+    let mut iteration_candidates = if args.iteration_candidates.is_empty() {
+        vec![args.iterations]
+    } else {
+        if args.rounds != 1 {
+            bail!("--rounds must be one when --iteration-candidates is used");
         }
-        handles
-            .into_iter()
-            .map(|handle| handle.join().expect("BP worker panicked"))
-            .collect::<Result<Vec<_>>>()
-    })?;
-    let elapsed_seconds = started.elapsed().as_secs_f64();
-    let mut total = LocalResult::new(bits);
-    for local in locals {
-        merge(&mut total, local);
+        let mut candidates = args.iteration_candidates.clone();
+        candidates.sort_unstable();
+        candidates.dedup();
+        if candidates.first() == Some(&0) {
+            bail!("iteration candidates must be positive");
+        }
+        candidates
+    };
+    if args.cost_filter_checkpoints && iteration_candidates.len() > 2 {
+        let checks = codes
+            .iter()
+            .map(BinaryParityCheck::check_count)
+            .max()
+            .unwrap();
+        let edges = codes
+            .iter()
+            .map(BinaryParityCheck::edge_count)
+            .max()
+            .unwrap();
+        iteration_candidates = filter_checkpoints(iteration_candidates, bits, checks, edges);
     }
+    let mut total = LocalResult::new(bits);
+    let mut elapsed_seconds = 0.0;
+    let mut selected_iterations = iteration_candidates[0];
+    for &maximum_iterations in &iteration_candidates {
+        let config = BpOsdConfig {
+            error_rate: args.error_rate,
+            maximum_iterations,
+            min_sum_scale: args.min_sum_scale,
+        };
+        let (wave, elapsed) =
+            run_wave(&problem, &codes, config, method, args.threads, args.rounds)?;
+        elapsed_seconds += elapsed;
+        if wave
+            .best_weight
+            .is_some_and(|weight| total.best_weight.is_none_or(|best| weight < best))
+        {
+            selected_iterations = maximum_iterations;
+        }
+        merge(&mut total, wave);
+        if args
+            .target_weight
+            .is_some_and(|target| total.best_weight.is_some_and(|weight| weight <= target))
+        {
+            break;
+        }
+    }
+    let workers = args.threads.min(codes.len());
     let report = Report {
-        schema: "ergodis-private-css-bp-osd-spike-v1",
+        schema: "ergodis-private-css-bp-osd-spike-v2",
         label: &problem.label,
         coordinate_count: problem.coordinate_count,
         physical_checks: problem.physical_checks.len(),
         logical_observations: problem.logical_observations.len(),
         threads: workers,
         rounds: args.rounds,
+        iteration_candidates,
+        selected_iterations,
+        target_weight: args.target_weight,
+        cost_filter_checkpoints: args.cost_filter_checkpoints,
         method: match args.method {
             Method::Disabled => "disabled",
             Method::Zero => "osd0",
@@ -324,6 +421,22 @@ mod tests {
     }
 
     #[test]
+    fn checkpoint_cost_filter_keeps_fallbacks_and_drops_expensive_early_probes() {
+        assert_eq!(
+            filter_checkpoints(vec![1, 8, 300], 288, 145, 900),
+            vec![1, 8, 300]
+        );
+        assert_eq!(
+            filter_checkpoints(vec![1, 192, 300], 756, 379, 2_500),
+            vec![192, 300]
+        );
+        assert_eq!(
+            filter_checkpoints(vec![4, 20], 10_000, 8_000, 1),
+            vec![4, 20]
+        );
+    }
+
+    #[test]
     fn prepared_solve_loop_allocates_nothing() {
         let problem = problem();
         let rows = problem
@@ -340,7 +453,7 @@ mod tests {
         .unwrap();
         let mut targets = [PreparedTarget {
             target: 0,
-            code,
+            code: &code,
             workspace,
             syndrome: vec![0, 0, 1],
         }];
