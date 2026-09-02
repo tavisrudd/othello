@@ -4264,13 +4264,22 @@ disjoint and every prefix remains a sound sufficient condition.  Rule and
 census bounds are explicit; complete and bounded-incomplete controls pass the
 full public gate.
 
+Commit `ada90f0f2` adds learned-scope support without recompilation.  Runtime
+raw expansion accepts a deduplicated checked subset of input coordinates, and
+a bounded `FeatureScopeBank` propagates exact transitive input dependencies
+through the topological DAG as packed bitmaps.  Scope size is a POPCNT over
+one bit per raw coordinate rather than a syntax-tree walk, so campaigns can
+rank pruning power against coordinate scope and cheaply retry promising
+subsets while the same binary remains live.  Multiword, duplicate-index,
+out-of-range, and transitive-union controls pass the full public gate.
+
 Relative to Fable's A.3 ledger, items 1, 2 (first affine symbolic form), 3, 7,
 and 8 are now landed; the persistent typed representation and injection bridge
 underlying them are also complete.  Item 5's invariant-first ordering exists
 at the generic ranking/admission seam but is not yet the daemon default.  The
 highest-value uncovered reusable slices are therefore: (a) a daemon adapter
-over the one runner-neutral engine, (b) learned scope masks/zero conjunctions,
-and (c) the
+over the one runner-neutral engine, (b) zero-conjunction proposals over the
+new scope bank, and (c) the
 real raw-orbit and basin-obstruction private gates.  Broad file/module moves,
 API-facade cleanup, and private-bin consolidation remain architectural debt;
 they must not be mixed into these narrowly validated evolve commits.
