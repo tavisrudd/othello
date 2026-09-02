@@ -70,6 +70,14 @@ pub struct RawFeatureExpansion<'a> {
     pub include_affine_lifts: bool,
 }
 
+/// Runtime-selected features aimed at one positive/false-positive conflict.
+#[derive(Clone, Copy, Debug)]
+pub struct ConflictFeatureExpansion<'a> {
+    pub input_indices: Option<&'a [u16]>,
+    pub moduli: &'a [u16],
+    pub maximum_candidates: usize,
+}
+
 /// Stable serialized form of a feature DAG.
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
@@ -108,6 +116,8 @@ pub enum FeatureDagError {
     DegreeExceeded,
     #[error("feature DAG reached its configured node bound")]
     NodeLimit,
+    #[error("conflict-derived feature expansion exceeds its candidate bound")]
+    CandidateLimit,
     #[error("feature evaluation cost overflowed")]
     CostOverflow,
     #[error("feature modulus must be positive")]
@@ -747,6 +757,81 @@ impl FeatureDag {
         Ok(candidates.into_boxed_slice())
     }
 
+    /// Generate differences that separate one labelled conflict.
+    ///
+    /// A proposed exact difference is zero on `positive` and nonzero on
+    /// `false_positive`. Modular differences satisfy the analogous congruence.
+    /// The candidate bound is checked before any node is added.
+    pub fn expand_conflict_differences(
+        &mut self,
+        positive: &[i64],
+        false_positive: &[i64],
+        expansion: ConflictFeatureExpansion<'_>,
+    ) -> Result<Box<[FeatureId]>, FeatureDagError> {
+        if positive.len() != self.input_count() || false_positive.len() != self.input_count() {
+            return Err(FeatureDagError::InputWidth);
+        }
+        if expansion.maximum_candidates == 0 {
+            return Err(FeatureDagError::CandidateLimit);
+        }
+        if expansion.moduli.contains(&0) {
+            return Err(FeatureDagError::ZeroModulus);
+        }
+        let mut input_indices = expansion.input_indices.map_or_else(
+            || (0..self.input_count).collect::<Vec<_>>(),
+            <[u16]>::to_vec,
+        );
+        input_indices.sort_unstable();
+        input_indices.dedup();
+        if input_indices.iter().any(|&index| index >= self.input_count) {
+            return Err(FeatureDagError::InputOutOfRange);
+        }
+        let mut moduli = expansion.moduli.to_vec();
+        moduli.sort_unstable();
+        moduli.dedup();
+        let mut proposals = Vec::<(u16, u16, Option<u16>)>::new();
+        for (left_position, &left) in input_indices.iter().enumerate() {
+            for &right in input_indices.iter().skip(left_position + 1) {
+                let positive_delta = i128::from(positive[usize::from(left)])
+                    - i128::from(positive[usize::from(right)]);
+                let negative_delta = i128::from(false_positive[usize::from(left)])
+                    - i128::from(false_positive[usize::from(right)]);
+                if positive_delta == 0 && negative_delta != 0 {
+                    push_conflict_proposal(
+                        &mut proposals,
+                        (left, right, None),
+                        expansion.maximum_candidates,
+                    )?;
+                }
+                for &modulus in &moduli {
+                    let modulus = i128::from(modulus);
+                    if positive_delta.rem_euclid(modulus) == 0
+                        && negative_delta.rem_euclid(modulus) != 0
+                    {
+                        push_conflict_proposal(
+                            &mut proposals,
+                            (left, right, Some(modulus as u16)),
+                            expansion.maximum_candidates,
+                        )?;
+                    }
+                }
+            }
+        }
+        let mut candidates = Vec::with_capacity(proposals.len());
+        for (left, right, modulus) in proposals {
+            let left = self.input(left)?;
+            let right = self.input(right)?;
+            let difference = self.sub(left, right)?;
+            candidates.push(match modulus {
+                Some(modulus) => self.modulo(difference, modulus)?,
+                None => difference,
+            });
+        }
+        candidates.sort_unstable();
+        candidates.dedup();
+        Ok(candidates.into_boxed_slice())
+    }
+
     pub fn workspace(&self) -> FeatureWorkspace {
         FeatureWorkspace {
             values: vec![0; self.nodes.len()],
@@ -892,6 +977,18 @@ fn ordered(left: FeatureId, right: FeatureId) -> (FeatureId, FeatureId) {
     }
 }
 
+fn push_conflict_proposal(
+    proposals: &mut Vec<(u16, u16, Option<u16>)>,
+    proposal: (u16, u16, Option<u16>),
+    maximum_candidates: usize,
+) -> Result<(), FeatureDagError> {
+    if proposals.len() == maximum_candidates {
+        return Err(FeatureDagError::CandidateLimit);
+    }
+    proposals.push(proposal);
+    Ok(())
+}
+
 fn plus(left: u32, right: u32) -> Result<u32, FeatureDagError> {
     left.checked_add(right).ok_or(FeatureDagError::CostOverflow)
 }
@@ -1022,6 +1119,53 @@ mod tests {
             }),
             Err(FeatureDagError::InputOutOfRange)
         );
+    }
+
+    #[test]
+    fn conflict_expansion_generates_only_separating_differences() {
+        let mut dag = FeatureDag::new(3, 2, 64).unwrap();
+        let positive = [3_i64, 3, 5];
+        let false_positive = [3_i64, 4, 8];
+        let candidates = dag
+            .expand_conflict_differences(
+                &positive,
+                &false_positive,
+                ConflictFeatureExpansion {
+                    input_indices: None,
+                    moduli: &[3, 2, 2],
+                    maximum_candidates: 8,
+                },
+            )
+            .unwrap();
+        assert!(!candidates.is_empty());
+        let mut workspace = dag.workspace();
+        let positive_values = dag.evaluate(&positive, &mut workspace).unwrap().to_vec();
+        let negative_values = dag
+            .evaluate(&false_positive, &mut workspace)
+            .unwrap()
+            .to_vec();
+        assert!(candidates.iter().all(|candidate| {
+            positive_values[candidate.index()] == 0 && negative_values[candidate.index()] != 0
+        }));
+    }
+
+    #[test]
+    fn conflict_expansion_preflights_its_candidate_bound() {
+        let mut dag = FeatureDag::new(3, 2, 64).unwrap();
+        let before = dag.len();
+        assert_eq!(
+            dag.expand_conflict_differences(
+                &[3, 3, 5],
+                &[3, 4, 8],
+                ConflictFeatureExpansion {
+                    input_indices: None,
+                    moduli: &[2, 3],
+                    maximum_candidates: 1,
+                },
+            ),
+            Err(FeatureDagError::CandidateLimit)
+        );
+        assert_eq!(dag.len(), before);
     }
 
     #[test]
