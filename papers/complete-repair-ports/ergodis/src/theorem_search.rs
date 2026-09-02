@@ -488,6 +488,27 @@ impl<C: Clone + Ord> SoundTheoremArchive<C> {
             novel_rows,
         })
     }
+
+    /// Admit `antecedent && condition` as a class-restricted theorem.
+    ///
+    /// The candidate key must carry the antecedent identity for replay. The
+    /// aggregate evaluation cost should include both predicates.
+    pub fn admit_restricted(
+        &mut self,
+        candidate: C,
+        antecedent: &[u64],
+        condition: &[u64],
+        evaluation_cost: u32,
+    ) -> Result<TheoremArchiveAdmission, TheoremArchiveError> {
+        validate_archive_bitmap(self.rows, antecedent)?;
+        validate_archive_bitmap(self.rows, condition)?;
+        let coverage = antecedent
+            .iter()
+            .zip(condition)
+            .map(|(&antecedent, &condition)| antecedent & condition)
+            .collect::<Vec<_>>();
+        self.admit(candidate, &coverage, evaluation_cost)
+    }
 }
 
 fn validate_archive_bitmap(rows: usize, bitmap: &[u64]) -> Result<(), TheoremArchiveError> {
@@ -1540,6 +1561,25 @@ mod tests {
                 .unwrap(),
             TheoremArchiveError::BitmapTail
         );
+    }
+
+    #[test]
+    fn theorem_archive_admits_a_condition_only_inside_its_sound_class() {
+        let mut archive = SoundTheoremArchive::new(4, &[0b0011], 2).unwrap();
+        assert_eq!(
+            archive.admit("global", &[0b0101], 1).unwrap(),
+            TheoremArchiveAdmission::RejectedUnsound { false_positives: 1 }
+        );
+        assert_eq!(
+            archive
+                .admit_restricted("class-a", &[0b0011], &[0b0101], 2)
+                .unwrap(),
+            TheoremArchiveAdmission::Inserted {
+                removed: 0,
+                novel_rows: 1,
+            }
+        );
+        assert_eq!(archive.points()[0].coverage(), &[0b0001]);
     }
 
     #[test]
