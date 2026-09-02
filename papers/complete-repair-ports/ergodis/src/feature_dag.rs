@@ -52,6 +52,7 @@ pub struct RawFeatureExpansion<'a> {
     pub include_products: bool,
     pub include_gaussian_norms: bool,
     pub include_eisenstein_norms: bool,
+    pub include_affine_lifts: bool,
 }
 
 /// Stable serialized form of a feature DAG.
@@ -74,6 +75,7 @@ impl Default for RawFeatureExpansion<'static> {
             include_products: true,
             include_gaussian_norms: false,
             include_eisenstein_norms: false,
+            include_affine_lifts: false,
         }
     }
 }
@@ -278,6 +280,7 @@ impl FeatureDag {
             .map(|index| self.input(index))
             .collect::<Result<Vec<_>, _>>()?;
         let mut candidates = raw.clone();
+        let mut nonlinear = Vec::new();
         for &source in &raw {
             if expansion.include_abs {
                 let term = self.abs(source)?;
@@ -295,20 +298,38 @@ impl FeatureDag {
                 }
                 if expansion.include_products {
                     let term = self.mul(left, right)?;
+                    nonlinear.push(term);
                     self.push_with_residues(term, expansion.moduli, &mut candidates)?;
                 }
                 if expansion.include_gaussian_norms {
                     let term = self.gaussian_norm(left, right)?;
+                    nonlinear.push(term);
                     self.push_with_residues(term, expansion.moduli, &mut candidates)?;
                 }
                 if expansion.include_eisenstein_norms {
                     let term = self.eisenstein_norm(left, right)?;
+                    nonlinear.push(term);
                     self.push_with_residues(term, expansion.moduli, &mut candidates)?;
                 }
                 if expansion.include_differences && left_index != right_index {
                     for (minuend, subtrahend) in [(left, right), (right, left)] {
                         let term = self.sub(minuend, subtrahend)?;
                         self.push_with_residues(term, expansion.moduli, &mut candidates)?;
+                    }
+                }
+            }
+        }
+        if expansion.include_affine_lifts {
+            nonlinear.sort_unstable();
+            nonlinear.dedup();
+            for term in nonlinear {
+                for &source in &raw {
+                    for lifted in [
+                        self.add(term, source)?,
+                        self.sub(term, source)?,
+                        self.sub(source, term)?,
+                    ] {
+                        self.push_with_residues(lifted, expansion.moduli, &mut candidates)?;
                     }
                 }
             }
