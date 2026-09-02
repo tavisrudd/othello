@@ -41,7 +41,7 @@ struct SparseProblem {
     logical_observations: Vec<Vec<u16>>,
 }
 
-#[derive(Debug, Default)]
+#[derive(Debug)]
 struct LocalResult {
     attempted: usize,
     satisfied: usize,
@@ -50,6 +50,32 @@ struct LocalResult {
     best_target: Option<usize>,
     best_support: Vec<usize>,
     candidate_checksum: u64,
+}
+
+impl LocalResult {
+    fn new(bits: usize) -> Self {
+        Self {
+            attempted: 0,
+            satisfied: 0,
+            replayed: 0,
+            best_weight: None,
+            best_target: None,
+            best_support: Vec::with_capacity(bits),
+            candidate_checksum: 0,
+        }
+    }
+}
+
+struct PreparedTarget {
+    target: usize,
+    code: BinaryParityCheck,
+    workspace: BpOsdWorkspace,
+    syndrome: Vec<u8>,
+}
+
+struct WorkerJob {
+    targets: Vec<PreparedTarget>,
+    result: LocalResult,
 }
 
 #[derive(Debug, Serialize)]
@@ -97,26 +123,18 @@ fn checksum(word: &[u8], target: usize) -> u64 {
     hash
 }
 
-fn solve_stride(
+fn solve_chunk(
     problem: &SparseProblem,
-    codes: &[BinaryParityCheck],
-    config: BpOsdConfig,
-    method: OsdMethod,
-    first: usize,
-    stride: usize,
-) -> Result<LocalResult> {
-    let mut local = LocalResult::default();
-    for target in (first..codes.len()).step_by(stride) {
-        let code = &codes[target];
-        let mut workspace = BpOsdWorkspace::new(code, config, method)?;
-        let mut syndrome = vec![0_u8; code.check_count()];
-        *syndrome
-            .last_mut()
-            .context("logical target row is missing")? = 1;
-        let result = workspace.decode_bytes(code, &syndrome)?;
+    targets: &mut [PreparedTarget],
+    local: &mut LocalResult,
+) -> Result<()> {
+    for prepared in targets {
+        let result = prepared
+            .workspace
+            .decode_bytes(&prepared.code, &prepared.syndrome)?;
         local.attempted += 1;
         local.satisfied += usize::from(result.syndrome_satisfied);
-        local.candidate_checksum ^= checksum(result.candidate, target);
+        local.candidate_checksum ^= checksum(result.candidate, prepared.target);
         if result.syndrome_satisfied && independently_replays(problem, result.candidate) {
             local.replayed += 1;
             if local
@@ -124,7 +142,7 @@ fn solve_stride(
                 .is_none_or(|weight| result.weight < weight)
             {
                 local.best_weight = Some(result.weight);
-                local.best_target = Some(target);
+                local.best_target = Some(prepared.target);
                 local.best_support.clear();
                 local.best_support.extend(
                     result
@@ -136,7 +154,7 @@ fn solve_stride(
             }
         }
     }
-    Ok(local)
+    Ok(())
 }
 
 fn merge(total: &mut LocalResult, local: LocalResult) {
@@ -190,15 +208,39 @@ fn main() -> Result<()> {
             order: args.osd_order,
         },
     };
-    let started = Instant::now();
     let workers = args.threads.min(codes.len());
+    let per_worker = codes.len().div_ceil(workers);
+    let mut jobs = (0..workers)
+        .map(|_| Vec::with_capacity(per_worker))
+        .collect::<Vec<_>>();
+    for (target, code) in codes.into_iter().enumerate() {
+        let workspace = BpOsdWorkspace::new(&code, config, method)?;
+        let mut syndrome = vec![0_u8; code.check_count()];
+        *syndrome
+            .last_mut()
+            .context("logical target row is missing")? = 1;
+        jobs[target % workers].push(PreparedTarget {
+            target,
+            code,
+            workspace,
+            syndrome,
+        });
+    }
+    let jobs = jobs
+        .into_iter()
+        .map(|targets| WorkerJob {
+            targets,
+            result: LocalResult::new(bits),
+        })
+        .collect::<Vec<_>>();
+    let started = Instant::now();
     let locals = std::thread::scope(|scope| {
         let problem_ref = &problem;
-        let codes_ref = &codes;
         let mut handles = Vec::with_capacity(workers);
-        for first in 0..workers {
+        for mut job in jobs {
             handles.push(scope.spawn(move || {
-                solve_stride(problem_ref, codes_ref, config, method, first, workers)
+                solve_chunk(problem_ref, &mut job.targets, &mut job.result)?;
+                Ok(job.result)
             }));
         }
         handles
@@ -206,7 +248,8 @@ fn main() -> Result<()> {
             .map(|handle| handle.join().expect("BP worker panicked"))
             .collect::<Result<Vec<_>>>()
     })?;
-    let mut total = LocalResult::default();
+    let elapsed_seconds = started.elapsed().as_secs_f64();
+    let mut total = LocalResult::new(bits);
     for local in locals {
         merge(&mut total, local);
     }
@@ -231,15 +274,20 @@ fn main() -> Result<()> {
         best_target: total.best_target,
         best_support: total.best_support,
         candidate_checksum: total.candidate_checksum,
-        elapsed_seconds: started.elapsed().as_secs_f64(),
+        elapsed_seconds,
     };
     println!("{}", serde_json::to_string(&report)?);
     Ok(())
 }
 
 #[cfg(test)]
+#[path = "../../../papers/complete-repair-ports/ergodis/src/test_alloc.rs"]
+mod test_alloc;
+
+#[cfg(test)]
 mod tests {
     use super::*;
+    use test_alloc::measure_current_thread_allocations;
 
     fn problem() -> SparseProblem {
         SparseProblem {
@@ -262,5 +310,36 @@ mod tests {
     fn checksum_binds_target_and_candidate() {
         assert_ne!(checksum(&[1, 0, 1], 0), checksum(&[1, 0, 1], 1));
         assert_ne!(checksum(&[1, 0, 1], 0), checksum(&[0, 1, 1], 0));
+    }
+
+    #[test]
+    fn prepared_solve_loop_allocates_nothing() {
+        let problem = problem();
+        let rows = problem
+            .physical_checks
+            .iter()
+            .chain(std::iter::once(&problem.logical_observations[0]))
+            .map(|row| row.iter().map(|&column| usize::from(column)).collect());
+        let code = BinaryParityCheck::from_rows(4, rows).unwrap();
+        let workspace = BpOsdWorkspace::new(
+            &code,
+            BpOsdConfig::default(),
+            OsdMethod::CombinationSweep { order: 2 },
+        )
+        .unwrap();
+        let mut targets = [PreparedTarget {
+            target: 0,
+            code,
+            workspace,
+            syndrome: vec![0, 0, 1],
+        }];
+        let mut local = LocalResult::new(4);
+        let (result, events) =
+            measure_current_thread_allocations(|| solve_chunk(&problem, &mut targets, &mut local));
+        result.unwrap();
+        assert_eq!(events.allocations, 0);
+        assert_eq!(events.reallocations, 0);
+        assert_eq!(events.deallocations, 0);
+        assert_eq!(local.replayed, 1);
     }
 }
