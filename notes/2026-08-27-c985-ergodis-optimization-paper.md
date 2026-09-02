@@ -4410,3 +4410,11 @@ growth, order count ties deterministically, and reject noncanonical,
 out-of-range, zero-count, future-version, and counter-overflow state.  The
 hard-row, one-call early-rejection, sparse round-trip, and malformed-order
 controls pass the full public gate.
+
+Commit `c014a08d8` adds exact class-restricted implication admission.  The
+archive intersects a replay-identified antecedent mask with the candidate
+condition before applying the unchanged soundness, novelty, dominance, and
+capacity gates; the declared cost includes both predicates.  A control rejects
+the condition globally for a witnessed false positive, then admits the same
+condition inside a class that excludes that row.  This supplies the
+TxGraffiti-style local-theorem path without weakening global theorem checks.
