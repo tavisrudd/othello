@@ -4291,3 +4291,29 @@ over the one runner-neutral engine and (b) the
 real raw-orbit and basin-obstruction private gates.  Broad file/module moves,
 API-facade cleanup, and private-bin consolidation remain architectural debt;
 they must not be mixed into these narrowly validated evolve commits.
+
+### Daemon unification seam after code review
+
+The control daemon cannot be faithfully routed through the current
+single-comparator/top-`beam_width` wrapper.  Its retained parents are a mixture
+of global elites, semantic niches, target classes, profile-surplus slots, and
+replayed hindsight fragments; flattening those into one score would silently
+change the search.  The narrow reusable seam is instead a pluggable
+generation selector beneath `evolve_ranked_streaming`:
+
+1. the runner owns deterministic structural deduplication, generation and
+   candidate bounds, trial numbering, admission replay, and streaming sinks;
+2. a driver hook observes the generation boundary (where the daemon consumes
+   profile refreshes), evaluates one candidate, and selects the bounded parent
+   set from completed trials;
+3. the existing public API supplies the default global-sort/top-beam selector,
+   preserving byte-for-byte candidate order and current controls;
+4. the daemon supplies its existing multi-niche selector and mutation context,
+   while evidence byte limits, cancellation, hindsight ledgers, and target
+   scorecards remain daemon-owned cold state.
+
+This is an extraction seam, not permission for a control-module rewrite.  The
+acceptance gate is identical trial/evidence hashes and parent selections on a
+fixed daemon replay corpus, followed by the full public feature matrix.  No
+daemon migration should begin while it would overlap another agent's dirty
+control files.
