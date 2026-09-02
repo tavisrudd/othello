@@ -10,7 +10,7 @@ readme = "README.md"
 repository = "https://github.com/tavisrudd/ergodis"
 keywords = ["coding-theory", "optimization", "storage", "recovery"]
 categories = ["algorithms", "mathematics", "science"]
-exclude = ["AGENTS.md", "PERFORMANCE.md", "evidence/", "proptest-regressions/"]
+exclude = [".cargo/", "AGENTS.md", "PERFORMANCE.md", "evidence/", "proptest-regressions/"]
 
 [features]
 default = []

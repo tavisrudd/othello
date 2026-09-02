@@ -9,8 +9,13 @@ fi
 run_dir=$1
 output=$2
 rounds=${3:-7}
-alignment=${4:-target/release/alignment-controlled}
-ctl=${5:-target/release/ergodisctl}
+script_dir=$(cd "$(dirname "$0")" && pwd)
+# shellcheck source=lib.sh
+. "$script_dir/lib.sh"
+core_root=$(cd "$script_dir/.." && pwd)
+
+alignment=${4:-$(ergodis_bin "$core_root" release alignment-controlled)}
+ctl=${5:-$(ergodis_bin "$core_root" release ergodisctl)}
 
 if [[ -e $output ]]; then
   echo "refusing to overwrite $output" >&2

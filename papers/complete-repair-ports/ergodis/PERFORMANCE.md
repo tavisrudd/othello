@@ -139,6 +139,24 @@ storage when possible.
 Do not put large build, profile, or evidence artifacts in `/tmp`; it is tmpfs
 on the development host. Use the designated persistent cache location.
 
+## Build artifacts
+
+Each crate builds into exactly one shared out-of-tree target directory,
+declared by its `.cargo/config.toml`: `~/.cache/ergodis/target/ergodis` for the
+public core and `~/.cache/ergodis/target/ergodis-private` for the private
+workspace. Never create a per-experiment, per-campaign, or per-A/B target
+directory, and never keep one as a baseline; scripts ask `ergodis_bin` in
+`scripts/lib.sh` for an executable path instead of hardcoding `target/release`.
+
+A baseline is a retained executable, not a build tree: produce it with
+`scripts/retain-bin.sh`, which stores a hashed, manifest-recorded copy under
+`~/.cache/ergodis/bin/`.
+
+Proof blobs — DRAT traces, transcripts, and other bulk search output — are
+hashed into their evidence file, then compressed or deleted; the hash, not the
+blob, is the durable record. Run `scripts/cache-gc.sh` at task close to list
+cache entries that no `evidence/*.json` names, and `--apply` to remove them.
+
 ## Hardware specialization
 
 Detect capabilities and dispatch outside the hot loop. Specialize whole
@@ -237,7 +255,14 @@ For timing claims:
 - protect heavy processes with `choom -n 1000` and use at most 12 workers unless
   the user explicitly authorizes more;
 - use deterministic inputs and interleaved or rotated A/B rounds;
-- compare saved binaries when diagnosing small deltas;
+- A/B against a retained executable, never against a rebuild of the baseline
+  and never against a preserved target directory. Produce the control with
+  `scripts/retain-bin.sh <crate-dir> <bin> [--profile P] [--features F]`, which
+  copies the executable to `~/.cache/ergodis/bin/` under a name carrying its
+  git revision, hashes it, and records revision, dirty state, rustc version,
+  profile, and features in `MANIFEST.tsv`. Cite the retained name and its
+  SHA-256 in the evidence file, and diagnose small deltas by rerunning both
+  retained executables rather than rebuilding either;
 - distinguish fresh-process cold, compiled-artifact load, and warm search;
 - include equal parsing, compilation, startup, solving, and output boundaries
   in end-to-end comparisons;

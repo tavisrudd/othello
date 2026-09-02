@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-root=$(cd "$(dirname "$0")/.." && pwd)
+script_dir=$(cd "$(dirname "$0")" && pwd)
+# shellcheck source=lib.sh
+. "$script_dir/lib.sh"
+
+root=$(cd "$script_dir/.." && pwd)
+vlsat_cert=$(ergodis_bin "$root" release examples/vlsat_clique_certificate)
 cache=${ERGODIS_VLSAT2_CACHE:-/home/tavis/.cache/ergodis-external/vlsat2}
 kissat=${ERGODIS_KISSAT:-/home/tavis/.cache/ergodis-external/kissat/build/kissat}
 kissat_revision=${ERGODIS_KISSAT_REVISION:-8af8e56f174b778aef3aa45af9f739b2a5f492c2}
@@ -22,7 +27,7 @@ cargo build --release --example vlsat_clique_certificate
 python3 python/run_vlsat2_prefix.py \
   --manifest "$manifest" \
   --cache-dir "$cache" \
-  --ergodis target/release/examples/vlsat_clique_certificate \
+  --ergodis "$vlsat_cert" \
   --kissat "$kissat" \
   --raw-jsonl "$raw" \
   --output "$output" \
@@ -36,5 +41,5 @@ python3 python/check_vlsat2_prefix.py "$output" \
   --manifest "$manifest" \
   --raw-jsonl "$raw" \
   --cache-dir "$cache" \
-  --ergodis target/release/examples/vlsat_clique_certificate \
+  --ergodis "$vlsat_cert" \
   --kissat "$kissat"

@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-root=$(cd "$(dirname "$0")/.." && pwd)
+script_dir=$(cd "$(dirname "$0")" && pwd)
+# shellcheck source=lib.sh
+. "$script_dir/lib.sh"
+
+root=$(cd "$script_dir/.." && pwd)
+vlsat_cert=$(ergodis_bin "$root" release examples/vlsat_clique_certificate)
 cache=${ERGODIS_VLSAT2_CACHE:-/home/tavis/.cache/ergodis-external/vlsat2}
 index=${ERGODIS_VLSAT2_INDEX:-$cache/index.html}
 cpu=${ERGODIS_BENCH_CPU:-3}
@@ -21,7 +26,7 @@ cargo build --release --example vlsat_clique_certificate
 python3 python/run_vlsat2_coverage.py \
   --manifest "$manifest" \
   --cache-dir "$cache" \
-  --ergodis target/release/examples/vlsat_clique_certificate \
+  --ergodis "$vlsat_cert" \
   --raw-jsonl "$raw" \
   --output "$output" \
   --timeout 120 \
@@ -30,4 +35,4 @@ python3 python/check_vlsat2_coverage.py "$output" \
   --manifest "$manifest" \
   --raw-jsonl "$raw" \
   --cache-dir "$cache" \
-  --ergodis target/release/examples/vlsat_clique_certificate
+  --ergodis "$vlsat_cert"

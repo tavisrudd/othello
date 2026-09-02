@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-root=$(cd "$(dirname "$0")/.." && pwd)
-cache_root=${ERGODIS_CACHE_ROOT:-/home/tavis/.cache/ergodis}
+script_dir=$(cd "$(dirname "$0")" && pwd)
+# shellcheck source=lib.sh
+. "$script_dir/lib.sh"
+
+root=$(cd "$script_dir/.." && pwd)
+cache_root=$(ergodis_cache_root)
+bench_kernels=$(ergodis_bin "$root" release bench_kernels)
 venv="$cache_root/application-ab-venv"
 mkdir -p "$cache_root"
 
@@ -14,7 +19,7 @@ nix shell nixpkgs#uv --command uv pip install --python "$venv/bin/python" \
   'pycryptosat==5.14.7'
 
 python3 "$root/python/run_application_readme_ab.py" \
-  --ergodis "$root/target/release/bench_kernels" \
+  --ergodis "$bench_kernels" \
   --python "$venv/bin/python" \
   --raw-jsonl "$root/evidence/c985-application-readme-ab.raw.jsonl" \
   --output "$root/evidence/c985-application-readme-ab.json" \
@@ -25,7 +30,7 @@ python3 "$root/python/run_application_readme_ab.py" \
 python3 "$root/python/check_application_readme_ab.py" \
   --raw-jsonl "$root/evidence/c985-application-readme-ab.raw.jsonl" \
   --summary "$root/evidence/c985-application-readme-ab.json" \
-  --ergodis "$root/target/release/bench_kernels" \
+  --ergodis "$bench_kernels" \
   --bench-source "$root/src/bin/bench_kernels.rs" \
   --python-source "$root/python/benchmark_python.py" \
   --runner "$root/python/run_application_readme_ab.py"

@@ -38,6 +38,16 @@ belong in one common `clap` struct in tier 1 rather than being copied. Each subc
 and a `pub fn run(args) -> anyhow::Result<()>`; the tier-2 `main.rs` contains
 nothing but the command tree and its dispatch.
 
+## Build artifacts
+
+This workspace builds into one shared out-of-tree target directory,
+`~/.cache/ergodis/target/ergodis-private`, declared by `.cargo/config.toml` and
+inherited by every member; never create a per-experiment target directory.
+A/B baselines are retained executables from
+`../papers/complete-repair-ports/ergodis/scripts/retain-bin.sh`, not preserved
+build trees. Hash proof blobs into their evidence file, then compress or delete
+them, and run `cache-gc.sh` at task close.
+
 Private solve adapters follow the same zero-allocation, iterative-search,
 Tiger-style hot-record, contention-free parallelism, and single-/parallel A/B
 counter discipline as the public core. Read the core `PERFORMANCE.md` in full

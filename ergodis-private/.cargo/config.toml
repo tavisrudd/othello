@@ -1,0 +1,9 @@
+# Shared out-of-tree build directory for the ergodis-private workspace.
+# Workspace members inherit this because cargo reads the configuration of the
+# invocation's working directory and its ancestors.
+#
+# One shared target directory per crate, never a per-experiment target
+# directory. See ../papers/complete-repair-ports/ergodis/PERFORMANCE.md,
+# "Build artifacts".
+[build]
+target-dir = "/home/tavis/.cache/ergodis/target/ergodis-private"

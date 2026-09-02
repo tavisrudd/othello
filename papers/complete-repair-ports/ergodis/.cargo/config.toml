@@ -1,0 +1,6 @@
+# Shared out-of-tree build directory for the Ergodis public core.
+#
+# One shared target directory per crate, never a per-experiment target
+# directory. See PERFORMANCE.md, "Build artifacts".
+[build]
+target-dir = "/home/tavis/.cache/ergodis/target/ergodis"

@@ -2,7 +2,9 @@
 set -euo pipefail
 
 if (($# != 1)); then
-  echo "usage: $0 target/release/deps/contextual_state-<hash>" >&2
+  echo "usage: $0 <shared-target-dir>/release/deps/contextual_state-<hash>" >&2
+  echo "  the bench binary lives in the crate's shared out-of-tree target" >&2
+  echo "  directory, not in an in-tree target/; see PERFORMANCE.md, \"Build artifacts\"" >&2
   exit 2
 fi
 bench_binary=$1
