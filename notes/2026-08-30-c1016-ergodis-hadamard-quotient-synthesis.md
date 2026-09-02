@@ -1867,6 +1867,12 @@ The Bloom target cache is therefore production for this phase. Its 16-thread
 resident footprint is small; thread count still passes through the live
 explicit RAM gate, and no swap fallback is allowed.
 
+The hash-only control was stopped as dominated after it had already consumed
+94,583,166,261,611 cycles and 40,892,146,402,442 instructions without
+finishing the same fixed workload. This is a partial rejected-design counter,
+not a throughput result; it establishes only that omitting the Bloom front end
+cannot beat the completed Bloom run on cycles.
+
 The first full participation attempt was deliberately stopped after an audit
 found a scheduler boundary race: with several workers, testing `shard == end`
 allows a lagging worker to fetch `end+1` after a peer has fetched and exited on
