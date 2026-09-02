@@ -2149,6 +2149,20 @@ files are disposable and may be deleted at any time.
    shards under this ordering while investigating a stronger pure syndrome
    lower bound off the hot path.
 
+   Commit `b89f00c45` also turns the one-off nauty diagnostic into an optional,
+   backend-neutral discovery boundary. `css_automorphism_adapter` invokes
+   `dreadnaut` or replays a bounded source-fingerprint-bound proposal, then
+   independently admits only permutations preserving the physical and
+   physical-plus-logical row spaces and strictly reducing the current orbit
+   partition. The final action and transversal are reverified. A stripped
+   LP1768 control rediscovers its one generator and reduces 1,768 singleton
+   anchors to 34 exact orbits; the original input admits no redundant
+   generator. Proposal replay is byte-identical and a one-byte source change
+   rejects the proposal. This adds no solve-loop work and gives future importers
+   a reusable route to nauty, Traces, bliss, saucy, or domain-specific proposers
+   without giving any backend proof authority. Design and controls are in
+   `2026-09-01-c985-css-automorphism-discovery-adapter.md`.
+
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
