@@ -81,7 +81,10 @@ class ProviderRunner:
             if kind == "deferred":
                 await self._sleep_until(_required_milliseconds(claim, "not_before_ms"))
                 continue
-            if kind in {"busy", "terminal"}:
+            if kind == "provider-deferred":
+                await self._sleep_until(_required_milliseconds(claim, "retry_at_ms"))
+                continue
+            if kind in {"busy", "provider-busy", "terminal"}:
                 return claimed
             if kind != "started":
                 raise ProtocolError("provider claim has an unknown state")

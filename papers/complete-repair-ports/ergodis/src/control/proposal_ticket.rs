@@ -107,6 +107,8 @@ pub enum ProposalTicketSubmission {
 pub enum ProposalTicketClaim {
     Started { attempt: u8 },
     Deferred { not_before_ms: u64 },
+    ProviderDeferred { retry_at_ms: u64 },
+    ProviderBusy,
     Busy { attempt: u8 },
     Terminal { status: ProposalTicketStatus },
 }

@@ -1,11 +1,12 @@
 //! Typed campaign-daemon operations for bounded external proposers.
 
 use super::{
-    random_hex, ControlError, ProposalArtifactStore, ProposalDeadlines, ProposalFailureClass,
-    ProposalFailureReport, ProposalIdempotencyKey, ProposalRateStore, ProposalRateStoreConfig,
-    ProposalRole, ProposalSession, ProposalSessionLimits, ProposalSessionUsage,
-    ProposalSubmissionStore, ProposalTicketClaim, ProposalTicketSnapshot, ProposalTicketSpec,
-    ProposalTicketStatus, ProposalTicketSubmission, RetryAction, RetryPolicy, TokenBucketConfig,
+    random_hex, CircuitBreakerConfig, CircuitPermit, ControlError, ProposalArtifactStore,
+    ProposalDeadlines, ProposalFailureClass, ProposalFailureReport, ProposalIdempotencyKey,
+    ProposalRateStore, ProposalRateStoreConfig, ProposalRole, ProposalSession,
+    ProposalSessionLimits, ProposalSessionUsage, ProposalSubmissionStore, ProposalTicketClaim,
+    ProposalTicketSnapshot, ProposalTicketSpec, ProposalTicketStatus, ProposalTicketSubmission,
+    RetryAction, RetryPolicy, TokenBucketConfig,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
@@ -43,6 +44,11 @@ const RATE_STORE_CONFIG: ProposalRateStoreConfig = ProposalRateStoreConfig {
     campaign: CAMPAIGN_RATE,
     provider: PROVIDER_RATE,
     session: SESSION_RATE,
+    circuit: CircuitBreakerConfig {
+        failure_threshold: 3,
+        base_open_ms: 1_000,
+        maximum_open_ms: 60_000,
+    },
     maximum_providers: MAX_EXTERNAL_PROVIDERS,
     maximum_sessions: MAX_EXTERNAL_PROPOSAL_SESSIONS,
 };
@@ -353,8 +359,8 @@ impl ProposalDaemon {
             .get(key)
             .is_some()
         {
+            self.expire_session(&request.session_id, now_ms)?;
             let session = self.session_mut(&request.session_id)?;
-            session.store.expire_due(now_ms).map_err(invalid)?;
             let ticket = session
                 .store
                 .tickets()
@@ -418,8 +424,8 @@ impl ProposalDaemon {
     ) -> Result<ProposalTicketView, ControlError> {
         let now_ms = self.clock.now_ms()?;
         let key = ProposalIdempotencyKey::from_hex(&request.ticket_key)?;
+        self.expire_session(&request.session_id, now_ms)?;
         let session = self.session_mut(&request.session_id)?;
-        session.store.expire_due(now_ms).map_err(invalid)?;
         view(key, &session.store)
     }
 
@@ -429,14 +435,69 @@ impl ProposalDaemon {
     ) -> Result<ProposalClaimed, ControlError> {
         let now_ms = self.clock.now_ms()?;
         let key = ProposalIdempotencyKey::from_hex(&request.ticket_key)?;
+        let (provider_id, status) = {
+            self.expire_session(&request.session_id, now_ms)?;
+            let session = self.session_mut(&request.session_id)?;
+            let ticket =
+                session.store.tickets().get(key).ok_or_else(|| {
+                    ControlError::Invalid("unknown external proposal ticket".into())
+                })?;
+            (ticket.spec.proposer_id, ticket.status)
+        };
+        let provider_permit = if status_needs_provider_permit(status, now_ms) {
+            let permit = self
+                .rate_store
+                .preview_provider_permit(provider_id, now_ms)
+                .map_err(invalid)?;
+            match permit {
+                CircuitPermit::Denied {
+                    retry_at_ms: u64::MAX,
+                } => {
+                    return self.provider_blocked_claim(
+                        &request.session_id,
+                        key,
+                        ProposalTicketClaim::ProviderBusy,
+                    );
+                }
+                CircuitPermit::Denied { retry_at_ms } => {
+                    return self.provider_blocked_claim(
+                        &request.session_id,
+                        key,
+                        ProposalTicketClaim::ProviderDeferred { retry_at_ms },
+                    );
+                }
+                CircuitPermit::Normal | CircuitPermit::HalfOpenProbe => Some(permit),
+            }
+        } else {
+            None
+        };
+        let claim = self
+            .session_mut(&request.session_id)?
+            .store
+            .claim(key, now_ms)
+            .map_err(invalid)?;
+        if matches!(claim, ProposalTicketClaim::Started { .. })
+            && provider_permit == Some(CircuitPermit::HalfOpenProbe)
+            && self
+                .rate_store
+                .claim_provider_permit(provider_id, key, now_ms)
+                .map_err(invalid)?
+                != CircuitPermit::HalfOpenProbe
+        {
+            return Err(ControlError::Invalid(
+                "provider half-open permit changed during claim".into(),
+            ));
+        }
         let session = self.session_mut(&request.session_id)?;
-        let claim = session.store.claim(key, now_ms).map_err(invalid)?;
         let view = view(key, &session.store)?;
         let attempt = match claim {
             ProposalTicketClaim::Started { attempt } | ProposalTicketClaim::Busy { attempt } => {
                 Some(attempt)
             }
-            ProposalTicketClaim::Deferred { .. } | ProposalTicketClaim::Terminal { .. } => None,
+            ProposalTicketClaim::Deferred { .. }
+            | ProposalTicketClaim::ProviderDeferred { .. }
+            | ProposalTicketClaim::ProviderBusy
+            | ProposalTicketClaim::Terminal { .. } => None,
         };
         let upload_relative_path = attempt
             .map(|attempt| {
@@ -452,6 +513,45 @@ impl ProposalDaemon {
             usage: view.usage,
             upload_relative_path,
         })
+    }
+
+    fn provider_blocked_claim(
+        &mut self,
+        session_id: &str,
+        key: ProposalIdempotencyKey,
+        claim: ProposalTicketClaim,
+    ) -> Result<ProposalClaimed, ControlError> {
+        let session = self.session_mut(session_id)?;
+        let view = view(key, &session.store)?;
+        Ok(ProposalClaimed {
+            ticket_key: view.ticket_key,
+            claim,
+            ticket: view.ticket,
+            usage: view.usage,
+            upload_relative_path: None,
+        })
+    }
+
+    fn expire_session(&mut self, session_id: &str, now_ms: u64) -> Result<(), ControlError> {
+        let terminal = {
+            let session = self.session_mut(session_id)?;
+            session.store.expire_due(now_ms).map_err(invalid)?;
+            session
+                .store
+                .tickets()
+                .snapshot()
+                .tickets
+                .into_iter()
+                .filter(|ticket| ticket.status.is_terminal())
+                .map(|ticket| (ticket.spec.proposer_id, ticket.spec.key))
+                .collect::<Vec<_>>()
+        };
+        for (provider_id, key) in terminal {
+            self.rate_store
+                .release_provider_ticket(provider_id, key)
+                .map_err(invalid)?;
+        }
+        Ok(())
     }
 
     pub fn report_failure(
@@ -474,6 +574,25 @@ impl ProposalDaemon {
             .transpose()?;
         let jitter_word = retry_jitter(key, request.attempt, request.failure, now_ms);
         let retry_policy = self.retry_policy;
+        let (provider_id, new_failure) =
+            {
+                let session = self.sessions.get(&request.session_id).ok_or_else(|| {
+                    ControlError::Invalid("unknown external proposer session".into())
+                })?;
+                let ticket = session.store.tickets().get(key).ok_or_else(|| {
+                    ControlError::Invalid("unknown external proposal ticket".into())
+                })?;
+                let new_failure = matches!(
+                    ticket.status,
+                    ProposalTicketStatus::Running { attempt, .. } if attempt == request.attempt
+                );
+                (ticket.spec.proposer_id, new_failure)
+            };
+        if new_failure {
+            self.rate_store
+                .record_provider_failure(provider_id, key, request.failure, now_ms)
+                .map_err(invalid)?;
+        }
         let session = self.session_mut(&request.session_id)?;
         let action = session
             .store
@@ -505,26 +624,30 @@ impl ProposalDaemon {
     ) -> Result<ProposalTicketView, ControlError> {
         let now_ms = self.clock.now_ms()?;
         let key = ProposalIdempotencyKey::from_hex(&request.ticket_key)?;
-        let maximum_bytes =
-            {
-                let session = self.sessions.get(&request.session_id).ok_or_else(|| {
-                    ControlError::Invalid("unknown external proposer session".into())
-                })?;
-                let ticket = session.store.tickets().get(key).ok_or_else(|| {
+        let (maximum_bytes, provider_id, new_completion) = {
+            let session = self
+                .sessions
+                .get(&request.session_id)
+                .ok_or_else(|| ControlError::Invalid("unknown external proposer session".into()))?;
+            let ticket =
+                session.store.tickets().get(key).ok_or_else(|| {
                     ControlError::Invalid("unknown external proposal ticket".into())
                 })?;
-                match ticket.status {
-                    ProposalTicketStatus::Running { attempt, .. }
-                    | ProposalTicketStatus::Ready { attempt, .. }
-                        if attempt == request.attempt => {}
-                    _ => {
-                        return Err(ControlError::Invalid(
-                            "proposal completion does not name the active attempt".into(),
-                        ));
-                    }
+            let new_completion = match ticket.status {
+                ProposalTicketStatus::Running { attempt, .. } if attempt == request.attempt => true,
+                ProposalTicketStatus::Ready { attempt, .. } if attempt == request.attempt => false,
+                _ => {
+                    return Err(ControlError::Invalid(
+                        "proposal completion does not name the active attempt".into(),
+                    ));
                 }
-                ticket.spec.max_return_bytes
             };
+            (
+                ticket.spec.max_return_bytes,
+                ticket.spec.proposer_id,
+                new_completion,
+            )
+        };
         let artifact = self
             .artifacts
             .publish(&request.session_id, key, request.attempt, maximum_bytes)
@@ -542,6 +665,11 @@ impl ProposalDaemon {
             .map_err(invalid)?;
         let mut view = view(key, &session.store)?;
         view.artifact = Some(artifact_view(artifact));
+        if new_completion {
+            self.rate_store
+                .record_provider_success(provider_id, key)
+                .map_err(invalid)?;
+        }
         Ok(view)
     }
 
@@ -551,9 +679,16 @@ impl ProposalDaemon {
     ) -> Result<ProposalTicketView, ControlError> {
         let now_ms = self.clock.now_ms()?;
         let key = ProposalIdempotencyKey::from_hex(&request.ticket_key)?;
-        let session = self.session_mut(&request.session_id)?;
-        session.store.cancel(key, now_ms).map_err(invalid)?;
-        view(key, &session.store)
+        let (provider_id, view) = {
+            let session = self.session_mut(&request.session_id)?;
+            session.store.cancel(key, now_ms).map_err(invalid)?;
+            let view = view(key, &session.store)?;
+            (view.ticket.spec.proposer_id, view)
+        };
+        self.rate_store
+            .release_provider_ticket(provider_id, key)
+            .map_err(invalid)?;
+        Ok(view)
     }
 
     pub fn result(
@@ -646,6 +781,14 @@ fn artifact_view(artifact: super::ProposalArtifact) -> ProposalArtifactView {
         blake3: blake3::Hash::from(artifact.blake3).to_hex().to_string(),
         bytes: artifact.bytes,
     }
+}
+
+fn status_needs_provider_permit(status: ProposalTicketStatus, now_ms: u64) -> bool {
+    matches!(status, ProposalTicketStatus::Queued)
+        || matches!(
+            status,
+            ProposalTicketStatus::RetryWait { not_before_ms, .. } if now_ms >= not_before_ms
+        )
 }
 
 fn same_logical_submission(
@@ -937,5 +1080,113 @@ mod tests {
             Err(ControlError::Invalid(message)) if message.contains("different resource envelope")
         ));
         assert_eq!(first.usage.charged_work_units, 5);
+    }
+
+    #[test]
+    fn repeated_backend_failures_open_provider_circuit_before_claim() {
+        let temporary = tempfile::tempdir().unwrap();
+        let mut daemon = ProposalDaemon::create(
+            &temporary.path().join("proposals"),
+            "run",
+            "nonce",
+            blake3::hash(b"source").to_hex().as_ref(),
+        )
+        .unwrap();
+        let mut generous = offer();
+        generous.maximum_queries = 8;
+        generous.maximum_outstanding = 4;
+        let opened = daemon.open_session(generous).unwrap();
+        for request_id in 1..=3 {
+            let mut request = submit(&opened.session_id);
+            request.request_id = request_id;
+            request.canonical_payload_blake3 =
+                blake3::hash(&request_id.to_le_bytes()).to_hex().to_string();
+            let submitted = daemon.submit(request).unwrap();
+            assert!(matches!(
+                daemon
+                    .claim(ProposalTicketRequest {
+                        session_id: opened.session_id.clone(),
+                        ticket_key: submitted.ticket_key.clone(),
+                    })
+                    .unwrap()
+                    .claim,
+                ProposalTicketClaim::Started { attempt: 0 }
+            ));
+            daemon
+                .report_failure(ProposalFailureRequest {
+                    session_id: opened.session_id.clone(),
+                    ticket_key: submitted.ticket_key,
+                    attempt: 0,
+                    failure: ProposalFailureClass::BackendCrash,
+                    provider_retry_after_ms: None,
+                })
+                .unwrap();
+        }
+        let mut request = submit(&opened.session_id);
+        request.request_id = 4;
+        request.canonical_payload_blake3 = blake3::hash(b"fourth").to_hex().to_string();
+        let submitted = daemon.submit(request).unwrap();
+        assert!(matches!(
+            daemon
+                .claim(ProposalTicketRequest {
+                    session_id: opened.session_id,
+                    ticket_key: submitted.ticket_key,
+                })
+                .unwrap()
+                .claim,
+            ProposalTicketClaim::ProviderDeferred { .. }
+        ));
+    }
+
+    #[test]
+    fn cancelling_half_open_probe_releases_exact_ticket_lease() {
+        let temporary = tempfile::tempdir().unwrap();
+        let mut daemon = ProposalDaemon::create(
+            &temporary.path().join("proposals"),
+            "run",
+            "nonce",
+            blake3::hash(b"source").to_hex().as_ref(),
+        )
+        .unwrap();
+        let opened = daemon.open_session(offer()).unwrap();
+        let first = daemon.submit(submit(&opened.session_id)).unwrap();
+        let first_key = ProposalIdempotencyKey::from_hex(&first.ticket_key).unwrap();
+        for _ in 0..3 {
+            daemon
+                .rate_store
+                .record_provider_failure(3, first_key, ProposalFailureClass::BackendCrash, 0)
+                .unwrap();
+        }
+        assert!(matches!(
+            daemon
+                .claim(ProposalTicketRequest {
+                    session_id: opened.session_id.clone(),
+                    ticket_key: first.ticket_key.clone(),
+                })
+                .unwrap()
+                .claim,
+            ProposalTicketClaim::Started { attempt: 0 }
+        ));
+        daemon
+            .cancel(ProposalTicketRequest {
+                session_id: opened.session_id.clone(),
+                ticket_key: first.ticket_key,
+            })
+            .unwrap();
+
+        let mut second_request = submit(&opened.session_id);
+        second_request.request_id = 2;
+        second_request.canonical_payload_blake3 = blake3::hash(b"second").to_hex().to_string();
+        let second = daemon.submit(second_request).unwrap();
+        assert!(matches!(
+            daemon
+                .claim(ProposalTicketRequest {
+                    session_id: opened.session_id,
+                    ticket_key: second.ticket_key,
+                })
+                .unwrap()
+                .claim,
+            ProposalTicketClaim::Started { attempt: 0 }
+        ));
     }
 }

@@ -2700,6 +2700,18 @@ files are disposable and may be deleted at any time.
     followed by an optional hosted SDK adapter; no autonomous SDK adapter is
     claimed yet.
 
+    Provider circuits are now authoritative rather than advisory. Each
+    provider's breaker snapshot lives beside its durable rate bucket; three
+    attributable failures gate new claims for a bounded exponential interval.
+    The elapsed circuit admits one half-open probe whose lease is durably bound
+    to the exact ticket key. Completion closes it, failure reopens it, and
+    cancellation/expiry release only that lease. Other tickets receive typed
+    provider-deferred/provider-busy claims, which the async runner handles with
+    one sleep or immediate return. The hostile pass rejected a bare persisted
+    half-open Boolean because cancellation could leave an unowned permanent
+    lock; schema v3 requires Boolean/lease agreement and restart/cancel controls
+    pass. Typed request/context artifacts remain next.
+
     The first new proposer family is accepted. A coloured-Tanner isomorphism
     proposal between the official LP1768 X/Z instances is independently
     admitted by equality of the transported physical and observable row

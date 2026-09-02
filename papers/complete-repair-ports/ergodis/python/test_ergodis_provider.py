@@ -77,6 +77,9 @@ class ProviderRunnerTest(unittest.IsolatedAsyncioTestCase):
         deferred = view(
             "retry-wait", claim={"kind": "deferred", "not_before_ms": 1_250}
         )
+        provider_deferred = view(
+            "queued", claim={"kind": "provider-deferred", "retry_at_ms": 1_500}
+        )
         terminal = view("terminal-failure", claim={"kind": "terminal"})
         sleeps = []
 
@@ -89,14 +92,14 @@ class ProviderRunnerTest(unittest.IsolatedAsyncioTestCase):
         with patch.object(
             ProposalTicket,
             "claim_async",
-            new=AsyncMock(side_effect=[deferred, terminal]),
+            new=AsyncMock(side_effect=[deferred, provider_deferred, terminal]),
         ) as claim:
             outcome = await ProviderRunner(clock_ms=lambda: 1_000, sleep=sleep).run(
                 proposal, unused
             )
         self.assertEqual(outcome, terminal)
-        self.assertEqual(sleeps, [0.25])
-        self.assertEqual(claim.await_count, 2)
+        self.assertEqual(sleeps, [0.25, 0.5])
+        self.assertEqual(claim.await_count, 3)
 
     async def test_provider_retry_after_is_reported_and_daemon_action_drives_loop(
         self,

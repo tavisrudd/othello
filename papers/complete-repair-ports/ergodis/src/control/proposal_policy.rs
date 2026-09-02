@@ -504,6 +504,10 @@ impl CircuitBreaker {
         self.half_open_claimed = false;
     }
 
+    pub fn release_half_open(&mut self) {
+        self.half_open_claimed = false;
+    }
+
     pub fn record_failure(&mut self, failure: ProposalFailureClass, now_ms: u64) {
         if !failure_counts_toward_circuit(failure) {
             return;

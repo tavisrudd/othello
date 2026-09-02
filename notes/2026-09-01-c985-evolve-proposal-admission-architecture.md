@@ -448,6 +448,16 @@ proposal sessions to a resumed campaign remains separate from the now-durable
 rate store. A real provider-neutral worker adapter must consume the ticket
 actions rather than invent a second timeout/backoff policy.
 
+Per-provider circuit state is now integrated into the same durable store and
+authoritatively gates claims. Attributable operational failures open bounded
+exponential intervals; non-health failures leave the circuit alone. Once the
+interval passes, a single persisted half-open lease is bound to the exact
+ticket key. Competing tickets receive typed deferral/busy responses. Success
+closes the circuit, another attributable failure reopens it, and cancellation
+or expiry releases only the matching lease. A hostile pass caught and repaired
+the otherwise permanent-lock failure of persisting only an unowned half-open
+Boolean; restore now requires lease/Boolean agreement.
+
 That adapter now exists in the Python 3.14 binding. `ProviderRunner` invokes an
 arbitrary async backend exactly once per daemon-claimed attempt, enforces the
 ticket's absolute execution deadline with structured cancellation, translates

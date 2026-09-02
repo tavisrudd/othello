@@ -241,6 +241,17 @@ reopen path; attaching restored proposal sessions to a resumed campaign remains
 the campaign-resume integration step. Provider SDK code and autonomous provider
 selection remain outside the generic layer.
 
+Provider circuit state is now part of that same durable snapshot and gates
+ticket claims. Three attributable transport/timeout/crash/protocol failures
+open a provider for a bounded exponential interval; semantic rejection,
+throttling, and controller delay do not. After expiry exactly one half-open
+claim is persisted and bound to its ticket key. Other tickets receive a finite
+provider deferral or a provider-busy result, never a polling instruction.
+Completion closes the circuit; typed failure updates it before ticket retry;
+cancellation or expiry releases only the matching half-open lease. Replay
+rejects a Boolean/lease mismatch, preventing an unowned half-open bit from
+deadlocking a provider after restart.
+
 The Python `ProviderRunner` supplies the first provider-neutral execution
 adapter. Its callback owns exactly one asynchronous attempt. The runner obtains
 the attempt number and absolute execution deadline from the durable ticket,
