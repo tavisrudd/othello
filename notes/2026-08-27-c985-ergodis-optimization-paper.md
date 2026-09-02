@@ -2129,6 +2129,26 @@ files are disposable and may be deleted at any time.
    incidence structure for non-affine block permutations or a stronger exact
    syndrome invariant before launching radius 20/22 shards.
 
+   That inspection is now complete. Nauty finds the full automorphism group of
+   each supplied LP1768 physical Tanner presentation has order 52 and one
+   generator, giving exactly Ergodis' existing 34 coordinate orbits. The next
+   positive theorem import is therefore syndrome-side. Commit `8eab39805`
+   orders independent checks by increasing conflict degree at colossal compile
+   time, making both fixed fail-first branching and the existing greedy packing
+   consume the stronger order with no new hot state or instruction. The
+   radius-14 X control falls from 141,949,946 to 109,046,916 candidates
+   (1.302x). Seven interleaved pairs show 1.229x fewer instructions, 1.065x
+   fewer 1T cycles (`t=3.07`), and 1.083x fewer 12T aggregate cycles
+   (`t=21.30`). The ungated form was rejected after a 1.605x BB288 state
+   regression; the admitted colossal-size gate leaves BB288 instructions and
+   branches identical, with cycles favoring the new build at both 1T and 12T.
+   All 486 public tests, all-target/all-feature benches, strict clippy, and the
+   real parallel zero-allocation search test pass. Colossal artifact version 2
+   rejects pre-ordering completion filters. The raw counter ledger and full
+   ratios are recorded in the LP1768 memo. Next launch deterministic radius-20
+   shards under this ordering while investigating a stronger pure syndrome
+   lower bound off the hot path.
+
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
