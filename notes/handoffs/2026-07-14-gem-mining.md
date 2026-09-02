@@ -21,7 +21,7 @@ classified, Lean-checked and cross-checked against this lane's length-333 census
 declined by the user; C1000's feasibility spike is reported with no stage approved.
 
 **2026-08-31 — routing for the Ergodis campaign and its successors.** Reported and archived:
-C1018 (eight-hour Ergodis hunt → [log](../2026-08-30-c1018-ergodis-hunt-log.md), with the punctured
+C1034 (gem-hunt crate: the C1018/C1020/C1025/C1028/C1029 binaries are now subcommands of one `gem-hunt` bin under `ergodis-private/tasks/gem-hunt`; old→new commands and digests → [report](../2026-09-02-c1034-gem-hunt-crate-consolidation.md)); C1018 (eight-hour Ergodis hunt → [log](../2026-08-30-c1018-ergodis-hunt-log.md), with the punctured
 Reed–Solomon wave extended to a fixed-locus classification →
 [report](../2026-08-31-c1018-prs-deephole-conjecture.md)); C1019 (commercial prototypes →
 [certified distance](../2026-08-31-certified-distance-prototype.md),
