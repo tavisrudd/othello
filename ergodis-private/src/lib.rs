@@ -1,5 +1,12 @@
 pub mod banked_semantic_evolve;
+pub mod bitset_sumset;
+pub mod cyclic_residual_features;
 pub mod feature_synthesis;
+pub mod g41_defect_scout;
+pub mod g41_digit_witness_cache;
+pub mod g41_joint_quotient_search;
+pub mod g41_q29_evolve;
+pub mod g41_q29_exact_tablebase;
 pub mod g53_defect_profile_proof;
 pub mod g53_mod7_reduction;
 pub mod g53_reduction_proof;
@@ -21,6 +28,8 @@ pub mod semantic_theorems;
 pub mod subgroup_energy_proof;
 pub mod symmetric_feature_evolve;
 pub mod tactical_completion;
+pub mod two_adic_autocorrelation;
+pub mod z2k_subgroup;
 
 #[cfg(test)]
 pub(crate) mod allocation_test {
