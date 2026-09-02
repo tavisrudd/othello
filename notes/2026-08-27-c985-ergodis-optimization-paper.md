@@ -2198,6 +2198,21 @@ files are disposable and may be deleted at any time.
    commit `d197f63b7`; the upgraded BB input runs directly in the public CSS
    solver.
 
+   The adapter also fixes the reusable Evolve architecture boundary. The
+   common pattern is untrusted proposal, bounded typed normalization, exact
+   role-specific replay, source-bound persistence, and compilation into an
+   allocation-free consumer. `RankedEvolutionDriver` already separates score
+   and parent selection from admission; the automorphism adapter supplies the
+   backend-neutral artifact/replay half. The resulting design, context
+   available at each lifecycle stage, and ranked proposer inventory are
+   recorded in `2026-09-01-c985-evolve-proposal-admission-architecture.md`.
+   Equivalent check presentations are the next adapter because the LP1768
+   tranche gives an immediate exact performance control; aggregate-bound,
+   decomposition, contextual-quotient, feature-DAG, incumbent, certificate-
+   structure, and counterexample proposers follow behind distinct authority
+   contracts. The architecture must not collapse those roles into a generic
+   verified flag.
+
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
