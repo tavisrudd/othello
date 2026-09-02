@@ -159,10 +159,13 @@ pub use feature_dag::{
     FeatureBankBounds, FeatureBankError, FeatureDag, FeatureDagError, FeatureDagSnapshot,
     FeatureId, FeatureNode, FeatureOp, FeaturePredicateCensus, FeaturePresentationBinding,
     FeaturePresentationTransition, FeaturePresentationTransitionError, FeatureScopeBank,
-    FeatureWorkspace, FeatureZeroBank, FeatureZeroClassMember, FeatureZeroConjunction,
-    FeatureZeroQuotient, RawFeatureExpansion, DIAGNOSTIC_FEATURE_DAG_BUNDLE_VERSION,
-    FEATURE_DAG_SNAPSHOT_VERSION, FEATURE_PRESENTATION_TRANSITION_VERSION,
-    MAX_FEATURE_PRESENTATION_CELLS, MAX_FEATURE_PRESENTATION_ROWS,
+    FeatureSupportScore, FeatureWorkspace, FeatureZeroBank, FeatureZeroClassMember,
+    FeatureZeroConjunction, FeatureZeroQuotient, ObservedFeatureSupportBank,
+    ObservedFeatureSupportBounds, ObservedFeatureSupportError, RawFeatureExpansion,
+    DIAGNOSTIC_FEATURE_DAG_BUNDLE_VERSION, FEATURE_DAG_SNAPSHOT_VERSION,
+    FEATURE_PRESENTATION_TRANSITION_VERSION, MAX_FEATURE_PRESENTATION_CELLS,
+    MAX_FEATURE_PRESENTATION_ROWS, MAX_OBSERVED_FEATURE_SUPPORT_CELLS,
+    MAX_OBSERVED_FEATURE_SUPPORT_ROWS, MAX_OBSERVED_FEATURE_SUPPORT_VALUES,
 };
 pub use fibre::{
     compile_dense_fibres, verify_dense_fibres, DenseFibreBounds, DenseFibreError, DenseFibreIndex,

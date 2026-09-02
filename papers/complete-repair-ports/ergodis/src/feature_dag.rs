@@ -13,6 +13,9 @@ pub const FEATURE_PRESENTATION_TRANSITION_VERSION: u16 = 1;
 pub const DIAGNOSTIC_FEATURE_DAG_BUNDLE_VERSION: u16 = 1;
 pub const MAX_FEATURE_PRESENTATION_ROWS: usize = 4_096;
 pub const MAX_FEATURE_PRESENTATION_CELLS: usize = 1_048_576;
+pub const MAX_OBSERVED_FEATURE_SUPPORT_ROWS: usize = 4_096;
+pub const MAX_OBSERVED_FEATURE_SUPPORT_CELLS: usize = 1_048_576;
+pub const MAX_OBSERVED_FEATURE_SUPPORT_VALUES: usize = 1_048_576;
 
 #[repr(transparent)]
 #[derive(Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
@@ -372,6 +375,225 @@ impl FeatureScopeBank {
                 .sum(),
         )
     }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ObservedFeatureSupportBounds {
+    pub maximum_rows: usize,
+    pub maximum_cells: usize,
+    pub maximum_values_per_feature: usize,
+    pub maximum_total_values: usize,
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+struct FeatureSupportRange {
+    start: u32,
+    length: u32,
+}
+
+const _: () = assert!(std::mem::size_of::<FeatureSupportRange>() == 8);
+const _: () = assert!(std::mem::align_of::<FeatureSupportRange>() == 4);
+
+pub struct ObservedFeatureSupportBank {
+    selected_rows: usize,
+    ranges: Box<[FeatureSupportRange]>,
+    values: Box<[i64]>,
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct FeatureSupportScore {
+    pub feature: FeatureId,
+    pub support_size: u32,
+    pub evaluation_cost: u32,
+    pub scope_size: u32,
+    pub downstream_compatibility: u32,
+}
+
+const _: () = assert!(std::mem::size_of::<FeatureSupportScore>() == 20);
+const _: () = assert!(std::mem::align_of::<FeatureSupportScore>() == 4);
+
+#[derive(Clone, Copy, Debug, Error, Eq, PartialEq)]
+pub enum ObservedFeatureSupportError {
+    #[error("observed feature-support bounds must be positive")]
+    InvalidBounds,
+    #[error("observed feature-support corpus or reachability bitmap has the wrong shape")]
+    Shape,
+    #[error("observed feature-support reachability bitmap has invalid tail bits")]
+    ReachabilityTail,
+    #[error("observed feature-support compilation exceeds its configured bound")]
+    TooLarge,
+    #[error("observed feature-support candidates are noncanonical")]
+    NonCanonicalCandidates,
+    #[error(transparent)]
+    Evaluation(#[from] FeatureDagError),
+}
+
+impl ObservedFeatureSupportBank {
+    pub fn compile(
+        dag: &FeatureDag,
+        rows: &[i64],
+        reachable: Option<&[u64]>,
+        bounds: ObservedFeatureSupportBounds,
+    ) -> Result<Self, ObservedFeatureSupportError> {
+        if bounds.maximum_rows == 0
+            || bounds.maximum_rows > MAX_OBSERVED_FEATURE_SUPPORT_ROWS
+            || bounds.maximum_cells == 0
+            || bounds.maximum_cells > MAX_OBSERVED_FEATURE_SUPPORT_CELLS
+            || bounds.maximum_values_per_feature == 0
+            || bounds.maximum_values_per_feature > MAX_OBSERVED_FEATURE_SUPPORT_VALUES
+            || bounds.maximum_total_values == 0
+            || bounds.maximum_total_values > MAX_OBSERVED_FEATURE_SUPPORT_VALUES
+        {
+            return Err(ObservedFeatureSupportError::InvalidBounds);
+        }
+        if dag.is_empty()
+            || rows.is_empty()
+            || rows.len() % dag.input_count() != 0
+            || rows.len() / dag.input_count() > bounds.maximum_rows
+        {
+            return Err(ObservedFeatureSupportError::Shape);
+        }
+        let row_count = rows.len() / dag.input_count();
+        let words = row_count.div_ceil(64);
+        if let Some(mask) = reachable {
+            if mask.len() != words {
+                return Err(ObservedFeatureSupportError::Shape);
+            }
+            if row_count % 64 != 0
+                && mask
+                    .last()
+                    .is_some_and(|&word| word & !((1_u64 << (row_count % 64)) - 1) != 0)
+            {
+                return Err(ObservedFeatureSupportError::ReachabilityTail);
+            }
+        }
+        let selected_rows = reachable.map_or(row_count, |mask| {
+            mask.iter().map(|word| word.count_ones() as usize).sum()
+        });
+        if selected_rows == 0 {
+            return Err(ObservedFeatureSupportError::Shape);
+        }
+        let cells = selected_rows
+            .checked_mul(dag.len())
+            .ok_or(ObservedFeatureSupportError::TooLarge)?;
+        if cells > bounds.maximum_cells {
+            return Err(ObservedFeatureSupportError::TooLarge);
+        }
+        let mut matrix = Vec::with_capacity(cells);
+        let mut workspace = dag.workspace();
+        for (row_index, inputs) in rows.chunks_exact(dag.input_count()).enumerate() {
+            let selected = reachable
+                .is_none_or(|mask| mask[row_index / 64] & (1_u64 << (row_index % 64)) != 0);
+            if selected {
+                matrix.extend_from_slice(dag.evaluate(inputs, &mut workspace)?);
+            }
+        }
+        let mut ranges = Vec::with_capacity(dag.len());
+        let mut values = Vec::new();
+        let mut scratch = Vec::with_capacity(selected_rows);
+        for feature in 0..dag.len() {
+            scratch.clear();
+            scratch.extend((0..selected_rows).map(|row| matrix[row * dag.len() + feature]));
+            scratch.sort_unstable();
+            scratch.dedup();
+            let total_values = values
+                .len()
+                .checked_add(scratch.len())
+                .ok_or(ObservedFeatureSupportError::TooLarge)?;
+            if scratch.len() > bounds.maximum_values_per_feature
+                || total_values > bounds.maximum_total_values
+            {
+                return Err(ObservedFeatureSupportError::TooLarge);
+            }
+            ranges.push(FeatureSupportRange {
+                start: u32::try_from(values.len())
+                    .map_err(|_| ObservedFeatureSupportError::TooLarge)?,
+                length: u32::try_from(scratch.len())
+                    .map_err(|_| ObservedFeatureSupportError::TooLarge)?,
+            });
+            values.extend_from_slice(&scratch);
+        }
+        Ok(Self {
+            selected_rows,
+            ranges: ranges.into_boxed_slice(),
+            values: values.into_boxed_slice(),
+        })
+    }
+
+    pub fn selected_rows(&self) -> usize {
+        self.selected_rows
+    }
+
+    pub fn support(&self, feature: FeatureId) -> Option<&[i64]> {
+        let range = *self.ranges.get(feature.index())?;
+        let start = range.start as usize;
+        Some(&self.values[start..start + range.length as usize])
+    }
+
+    pub fn pareto_frontier(
+        &self,
+        dag: &FeatureDag,
+        scopes: &FeatureScopeBank,
+        candidates: &[FeatureId],
+        downstream_compatibility: &[u32],
+        maximum_points: usize,
+    ) -> Result<Box<[FeatureSupportScore]>, ObservedFeatureSupportError> {
+        if maximum_points == 0 || candidates.len() != downstream_compatibility.len() {
+            return Err(ObservedFeatureSupportError::InvalidBounds);
+        }
+        if candidates.windows(2).any(|pair| pair[0] >= pair[1]) {
+            return Err(ObservedFeatureSupportError::NonCanonicalCandidates);
+        }
+        let mut scores = Vec::with_capacity(candidates.len().min(maximum_points));
+        for (&feature, &compatibility) in candidates.iter().zip(downstream_compatibility) {
+            let support = self
+                .support(feature)
+                .ok_or(ObservedFeatureSupportError::Shape)?;
+            let node = dag
+                .node(feature)
+                .ok_or(ObservedFeatureSupportError::Shape)?;
+            let scope_size = scopes
+                .scope_size(feature)
+                .ok_or(ObservedFeatureSupportError::Shape)?;
+            scores.push(FeatureSupportScore {
+                feature,
+                support_size: u32::try_from(support.len())
+                    .map_err(|_| ObservedFeatureSupportError::TooLarge)?,
+                evaluation_cost: node.evaluation_cost,
+                scope_size,
+                downstream_compatibility: compatibility,
+            });
+        }
+        let mut frontier = Vec::new();
+        for (index, &score) in scores.iter().enumerate() {
+            if scores
+                .iter()
+                .enumerate()
+                .any(|(other_index, &other)| other_index != index && dominates(other, score))
+            {
+                continue;
+            }
+            if frontier.len() == maximum_points {
+                return Err(ObservedFeatureSupportError::TooLarge);
+            }
+            frontier.push(score);
+        }
+        frontier.sort_unstable_by_key(|score| score.feature);
+        Ok(frontier.into_boxed_slice())
+    }
+}
+
+fn dominates(left: FeatureSupportScore, right: FeatureSupportScore) -> bool {
+    left.support_size <= right.support_size
+        && left.evaluation_cost <= right.evaluation_cost
+        && left.scope_size <= right.scope_size
+        && left.downstream_compatibility >= right.downstream_compatibility
+        && (left.support_size < right.support_size
+            || left.evaluation_cost < right.evaluation_cost
+            || left.scope_size < right.scope_size
+            || left.downstream_compatibility > right.downstream_compatibility)
 }
 
 fn copy_scope(scopes: &mut [u64], words: usize, destination: usize, source: usize) {
@@ -1406,6 +1628,64 @@ mod tests {
             Some(&[1_u64 << 1, 1_u64 << 1][..])
         );
         assert_eq!(bank.scope_size(shifted), Some(2));
+    }
+
+    #[test]
+    fn observed_support_projection_and_downstream_pareto_are_exact() {
+        let mut dag = FeatureDag::new(2, 2, 16).unwrap();
+        let left = dag.input(0).unwrap();
+        let right = dag.input(1).unwrap();
+        let sum = dag.add(left, right).unwrap();
+        let product = dag.mul(left, right).unwrap();
+        let rows = [0, 0, 1, 0, 0, 1, 1, 1];
+        let supports = ObservedFeatureSupportBank::compile(
+            &dag,
+            &rows,
+            Some(&[0b0111]),
+            ObservedFeatureSupportBounds {
+                maximum_rows: 4,
+                maximum_cells: 12,
+                maximum_values_per_feature: 4,
+                maximum_total_values: 8,
+            },
+        )
+        .unwrap();
+        assert_eq!(supports.selected_rows(), 3);
+        assert_eq!(supports.support(left), Some(&[0, 1][..]));
+        assert_eq!(supports.support(sum), Some(&[0, 1][..]));
+        assert_eq!(supports.support(product), Some(&[0][..]));
+        assert!(matches!(
+            ObservedFeatureSupportBank::compile(
+                &dag,
+                &rows,
+                Some(&[1_u64 << 4]),
+                ObservedFeatureSupportBounds {
+                    maximum_rows: 4,
+                    maximum_cells: 12,
+                    maximum_values_per_feature: 4,
+                    maximum_total_values: 8,
+                },
+            ),
+            Err(ObservedFeatureSupportError::ReachabilityTail)
+        ));
+
+        let scopes = FeatureScopeBank::compile(&dag, dag.len()).unwrap();
+        let frontier = supports
+            .pareto_frontier(
+                &dag,
+                &scopes,
+                &[left, right, sum, product],
+                &[0, 1, 5, 5],
+                4,
+            )
+            .unwrap();
+        assert_eq!(
+            frontier
+                .iter()
+                .map(|score| score.feature)
+                .collect::<Vec<_>>(),
+            vec![right, product]
+        );
     }
 
     #[test]

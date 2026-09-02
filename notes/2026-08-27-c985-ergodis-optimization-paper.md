@@ -4935,6 +4935,17 @@ certificate replays both counts and every derived aggregate. This is a reusable 
 lemma for a bounded group instance; promoting a corpus-wide conclusion still requires
 the separate theorem/certificate boundary.
 
+The ledger's existential-projection half is now generic too. Given a complete supplied
+reachable-row mask, `ObservedFeatureSupportBank` evaluates the typed DAG once, stores at
+most 1,048,576 selected cells, and transposes each feature through one reused sort buffer
+into a flat sorted support pool with eight-byte ranges. It therefore computes the exact
+attainable values on that supplied domain without per-feature maps. The downstream-aware
+selector retains the exact Pareto frontier across support size, evaluation cost,
+transitive input-scope size, and a caller-measured compatibility score; no scalarization
+silently discards a tradeoff. Candidate order, bitmap tails, feature identities, and all
+row/cell/value/frontier bounds fail closed. These are observational supports unless the
+caller separately proves the supplied reachable domain complete.
+
 The first theorem-driven subset-sum sharpening compiles a continuation envelope for
 every prefix. A partial sum is retained after layer `i` only when it lies both in the
 prefix-achievable interval and in `target -` the remaining suffix interval. This is an
