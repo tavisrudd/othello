@@ -225,6 +225,14 @@ of a candidate theorem. This gives counterexample-guided evolution a safe way to
 move to a richer presentation while preventing learned results from being silently
 reused against different source rows or feature semantics.
 
+The persisted unit is a diagnostic feature-DAG bundle: the canonical DAG snapshot
+and its exact presentation transition travel together. Restore reconstructs the DAG
+under the caller's configured node cap, then replays the supplied source and target
+matrices before returning it. Both the outer bundle and inner transition reject proof
+authority. The diagnostic theorem archive may therefore key itself to the restored
+target presentation, while any theorem promotion continues through a distinct
+certificate/verifier boundary.
+
 ## Consequences
 
 ### Positive

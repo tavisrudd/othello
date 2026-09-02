@@ -10,6 +10,7 @@ use thiserror::Error;
 
 pub const FEATURE_DAG_SNAPSHOT_VERSION: u16 = 1;
 pub const FEATURE_PRESENTATION_TRANSITION_VERSION: u16 = 1;
+pub const DIAGNOSTIC_FEATURE_DAG_BUNDLE_VERSION: u16 = 1;
 pub const MAX_FEATURE_PRESENTATION_ROWS: usize = 4_096;
 pub const MAX_FEATURE_PRESENTATION_CELLS: usize = 1_048_576;
 
@@ -114,6 +115,16 @@ pub struct FeaturePresentationTransition {
     pub target: FeaturePresentationBinding,
 }
 
+/// Restartable diagnostic feature program bound to an exact presentation transition.
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct DiagnosticFeatureDagBundle {
+    pub version: u16,
+    pub proof_authority: bool,
+    pub dag: FeatureDagSnapshot,
+    pub transition: FeaturePresentationTransition,
+}
+
 #[derive(Clone, Copy, Debug, Error, Eq, PartialEq)]
 pub enum FeaturePresentationTransitionError {
     #[error("feature presentation bounds are invalid")]
@@ -130,6 +141,20 @@ pub enum FeaturePresentationTransitionError {
     Encoding,
     #[error(transparent)]
     Feature(#[from] FeatureDagError),
+}
+
+#[derive(Clone, Copy, Debug, Error, Eq, PartialEq)]
+pub enum DiagnosticFeatureDagBundleError {
+    #[error("diagnostic feature DAG bundle version is unsupported")]
+    Version,
+    #[error("diagnostic feature DAG bundle cannot carry proof authority")]
+    InvalidProofAuthority,
+    #[error("diagnostic feature DAG bundle does not match its transition")]
+    Binding,
+    #[error(transparent)]
+    Feature(#[from] FeatureDagError),
+    #[error(transparent)]
+    Transition(#[from] FeaturePresentationTransitionError),
 }
 
 impl Default for RawFeatureExpansion<'static> {
@@ -643,6 +668,43 @@ impl FeatureDag {
                 return Err(FeatureDagError::NonCanonicalSnapshot);
             }
         }
+        Ok(dag)
+    }
+
+    pub fn diagnostic_bundle(
+        &self,
+        transition: FeaturePresentationTransition,
+    ) -> Result<DiagnosticFeatureDagBundle, DiagnosticFeatureDagBundleError> {
+        if transition.proof_authority {
+            return Err(DiagnosticFeatureDagBundleError::InvalidProofAuthority);
+        }
+        if transition.version != FEATURE_PRESENTATION_TRANSITION_VERSION
+            || transition.feature_dag_blake3 != self.presentation_digest()?
+        {
+            return Err(DiagnosticFeatureDagBundleError::Binding);
+        }
+        Ok(DiagnosticFeatureDagBundle {
+            version: DIAGNOSTIC_FEATURE_DAG_BUNDLE_VERSION,
+            proof_authority: false,
+            dag: self.snapshot(),
+            transition,
+        })
+    }
+
+    pub fn restore_diagnostic_bundle(
+        bundle: &DiagnosticFeatureDagBundle,
+        maximum_nodes: usize,
+        source: &[i64],
+        target: &[i64],
+    ) -> Result<Self, DiagnosticFeatureDagBundleError> {
+        if bundle.version != DIAGNOSTIC_FEATURE_DAG_BUNDLE_VERSION {
+            return Err(DiagnosticFeatureDagBundleError::Version);
+        }
+        if bundle.proof_authority || bundle.transition.proof_authority {
+            return Err(DiagnosticFeatureDagBundleError::InvalidProofAuthority);
+        }
+        let dag = Self::from_snapshot(&bundle.dag, maximum_nodes)?;
+        dag.verify_presentation_transition(source, target, &bundle.transition)?;
         Ok(dag)
     }
 
@@ -1555,6 +1617,13 @@ mod tests {
         let decoded: FeaturePresentationTransition = serde_json::from_slice(&encoded).unwrap();
         assert_eq!(decoded, transition);
 
+        let bundle = dag.diagnostic_bundle(transition).unwrap();
+        let restored = FeatureDag::restore_diagnostic_bundle(&bundle, 8, &source, &target).unwrap();
+        assert_eq!(restored.snapshot(), dag.snapshot());
+        let encoded = serde_json::to_vec(&bundle).unwrap();
+        let decoded: DiagnosticFeatureDagBundle = serde_json::from_slice(&encoded).unwrap();
+        assert_eq!(decoded, bundle);
+
         let mut forged_target = target.clone();
         forged_target[7] = -4;
         assert_eq!(
@@ -1567,6 +1636,12 @@ mod tests {
             dag.verify_presentation_transition(&source, &target, &forged_authority),
             Err(FeaturePresentationTransitionError::InvalidProofAuthority)
         );
+        let mut forged_bundle = bundle;
+        forged_bundle.proof_authority = true;
+        assert!(matches!(
+            FeatureDag::restore_diagnostic_bundle(&forged_bundle, 8, &source, &target),
+            Err(DiagnosticFeatureDagBundleError::InvalidProofAuthority)
+        ));
     }
 
     #[test]

@@ -146,13 +146,14 @@ pub use family_response::{
     FamilyResponseTable,
 };
 pub use feature_dag::{
-    ConflictFeatureExpansion, FeatureBankBounds, FeatureBankError, FeatureDag, FeatureDagError,
-    FeatureDagSnapshot, FeatureId, FeatureNode, FeatureOp, FeaturePredicateCensus,
-    FeaturePresentationBinding, FeaturePresentationTransition, FeaturePresentationTransitionError,
-    FeatureScopeBank, FeatureWorkspace, FeatureZeroBank, FeatureZeroClassMember,
-    FeatureZeroConjunction, FeatureZeroQuotient, RawFeatureExpansion, FEATURE_DAG_SNAPSHOT_VERSION,
-    FEATURE_PRESENTATION_TRANSITION_VERSION, MAX_FEATURE_PRESENTATION_CELLS,
-    MAX_FEATURE_PRESENTATION_ROWS,
+    ConflictFeatureExpansion, DiagnosticFeatureDagBundle, DiagnosticFeatureDagBundleError,
+    FeatureBankBounds, FeatureBankError, FeatureDag, FeatureDagError, FeatureDagSnapshot,
+    FeatureId, FeatureNode, FeatureOp, FeaturePredicateCensus, FeaturePresentationBinding,
+    FeaturePresentationTransition, FeaturePresentationTransitionError, FeatureScopeBank,
+    FeatureWorkspace, FeatureZeroBank, FeatureZeroClassMember, FeatureZeroConjunction,
+    FeatureZeroQuotient, RawFeatureExpansion, DIAGNOSTIC_FEATURE_DAG_BUNDLE_VERSION,
+    FEATURE_DAG_SNAPSHOT_VERSION, FEATURE_PRESENTATION_TRANSITION_VERSION,
+    MAX_FEATURE_PRESENTATION_CELLS, MAX_FEATURE_PRESENTATION_ROWS,
 };
 pub use fibre::{
     compile_dense_fibres, verify_dense_fibres, DenseFibreBounds, DenseFibreError, DenseFibreIndex,

@@ -4853,3 +4853,11 @@ hard cold-path caps. This permits a counterexample-guided controller to change c
 and then key its diagnostic archive to the resulting presentation exactly; the transition
 proves the computation of the new coordinates, never the candidate theorem that motivated
 them. No solve path, worker state, or hot evaluator changed.
+
+The promoted-feature persistence half is now present as a diagnostic bundle containing
+the canonical DAG snapshot and that exact transition. Restore rebuilds the DAG under the
+configured node cap and will not return it until the caller-supplied source and target
+matrices replay against the transition. Both nested layers forbid proof authority. This
+closes restartability for learned coordinate programs without conflating feature
+reproducibility with theorem soundness; the theorem archive, bundle, and eventual proof
+artifact retain separate identities and validation paths.
