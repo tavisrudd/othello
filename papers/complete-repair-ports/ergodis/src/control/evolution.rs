@@ -1390,11 +1390,16 @@ fn select_semantic_elites(
 fn plan_op_arity(op: &PlanOp) -> usize {
     match op {
         PlanOp::Field { .. } | PlanOp::Const { .. } | PlanOp::Bool { .. } => 0,
-        PlanOp::Not | PlanOp::Abs => 1,
+        PlanOp::Not | PlanOp::Abs | PlanOp::PopCount | PlanOp::Parity | PlanOp::Legendre { .. } => {
+            1
+        }
         PlanOp::Select => 3,
         PlanOp::Add
         | PlanOp::Sub
         | PlanOp::Mul
+        | PlanOp::Mod
+        | PlanOp::Div
+        | PlanOp::Gcd
         | PlanOp::Min
         | PlanOp::Max
         | PlanOp::Eq

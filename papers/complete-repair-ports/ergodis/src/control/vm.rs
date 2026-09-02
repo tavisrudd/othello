@@ -373,6 +373,18 @@ pub enum PlanExpr {
         left: Box<Self>,
         right: Box<Self>,
     },
+    Mod {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
+    Div {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
+    Gcd {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
     Min {
         left: Box<Self>,
         right: Box<Self>,
@@ -419,6 +431,16 @@ pub enum PlanExpr {
     Abs {
         arg: Box<Self>,
     },
+    PopCount {
+        arg: Box<Self>,
+    },
+    Parity {
+        arg: Box<Self>,
+    },
+    Legendre {
+        arg: Box<Self>,
+        modulus: u16,
+    },
     Select {
         condition: Box<Self>,
         #[serde(rename = "then")]
@@ -458,6 +480,18 @@ impl ExpressionPlanSpec {
                         }
                         PlanExpr::Abs { arg } => {
                             work.push(Emit::Op(PlanOp::Abs));
+                            work.push(Emit::Expr(arg, depth + 1));
+                        }
+                        PlanExpr::PopCount { arg } => {
+                            work.push(Emit::Op(PlanOp::PopCount));
+                            work.push(Emit::Expr(arg, depth + 1));
+                        }
+                        PlanExpr::Parity { arg } => {
+                            work.push(Emit::Op(PlanOp::Parity));
+                            work.push(Emit::Expr(arg, depth + 1));
+                        }
+                        PlanExpr::Legendre { arg, modulus } => {
+                            work.push(Emit::Op(PlanOp::Legendre { modulus: *modulus }));
                             work.push(Emit::Expr(arg, depth + 1));
                         }
                         PlanExpr::Select {
@@ -506,6 +540,9 @@ fn binary_parts(expr: &PlanExpr) -> Option<(&PlanExpr, &PlanExpr, PlanOp)> {
         PlanExpr::Add { left, right } => (left, right, PlanOp::Add),
         PlanExpr::Sub { left, right } => (left, right, PlanOp::Sub),
         PlanExpr::Mul { left, right } => (left, right, PlanOp::Mul),
+        PlanExpr::Mod { left, right } => (left, right, PlanOp::Mod),
+        PlanExpr::Div { left, right } => (left, right, PlanOp::Div),
+        PlanExpr::Gcd { left, right } => (left, right, PlanOp::Gcd),
         PlanExpr::Min { left, right } => (left, right, PlanOp::Min),
         PlanExpr::Max { left, right } => (left, right, PlanOp::Max),
         PlanExpr::Eq { left, right } => (left, right, PlanOp::Eq),
@@ -520,6 +557,9 @@ fn binary_parts(expr: &PlanExpr) -> Option<(&PlanExpr, &PlanExpr, PlanOp)> {
         | PlanExpr::Const { .. }
         | PlanExpr::Not { .. }
         | PlanExpr::Abs { .. }
+        | PlanExpr::PopCount { .. }
+        | PlanExpr::Parity { .. }
+        | PlanExpr::Legendre { .. }
         | PlanExpr::Select { .. } => return None,
     };
     Some((parts.0, parts.1, parts.2))
@@ -534,6 +574,9 @@ pub enum PlanOp {
     Add,
     Sub,
     Mul,
+    Mod,
+    Div,
+    Gcd,
     Min,
     Max,
     Eq,
@@ -546,6 +589,9 @@ pub enum PlanOp {
     Or,
     Not,
     Abs,
+    PopCount,
+    Parity,
+    Legendre { modulus: u16 },
     Select,
 }
 
@@ -557,6 +603,9 @@ enum OpCode {
     Add,
     Sub,
     Mul,
+    Mod,
+    Div,
+    Gcd,
     Min,
     Max,
     Eq,
@@ -569,6 +618,9 @@ enum OpCode {
     Or,
     Not,
     Abs,
+    PopCount,
+    Parity,
+    Legendre,
     Select,
     Bool,
     FieldEqConst,
@@ -796,6 +848,56 @@ pub struct CompiledPlan {
     pub hash: String,
 }
 
+fn checked_gcd(left: i64, right: i64) -> Result<i64, ControlError> {
+    let mut left = left.unsigned_abs();
+    let mut right = right.unsigned_abs();
+    while right != 0 {
+        (left, right) = (right, left % right);
+    }
+    i64::try_from(left)
+        .map_err(|_| ControlError::Invalid("gcd does not fit signed plan value".into()))
+}
+
+fn is_prime_u16(value: u16) -> bool {
+    if value < 2 {
+        return false;
+    }
+    if value % 2 == 0 {
+        return value == 2;
+    }
+    let mut divisor = 3_u32;
+    let value = u32::from(value);
+    while divisor * divisor <= value {
+        if value % divisor == 0 {
+            return false;
+        }
+        divisor += 2;
+    }
+    true
+}
+
+fn legendre_symbol(value: i64, modulus: u16) -> i64 {
+    let modulus = u64::from(modulus);
+    let mut base = value.rem_euclid(modulus as i64) as u64;
+    if base == 0 {
+        return 0;
+    }
+    let mut exponent = (modulus - 1) / 2;
+    let mut power = 1_u64;
+    while exponent != 0 {
+        if exponent & 1 != 0 {
+            power = power * base % modulus;
+        }
+        base = base * base % modulus;
+        exponent >>= 1;
+    }
+    if power == 1 {
+        1
+    } else {
+        -1
+    }
+}
+
 impl CompiledPlan {
     pub(super) fn op_count(&self) -> usize {
         self.ops.len()
@@ -866,6 +968,9 @@ impl CompiledPlan {
                 PlanOp::Add => (OpCode::Add, 0, 0, 2),
                 PlanOp::Sub => (OpCode::Sub, 0, 0, 2),
                 PlanOp::Mul => (OpCode::Mul, 0, 0, 2),
+                PlanOp::Mod => (OpCode::Mod, 0, 0, 2),
+                PlanOp::Div => (OpCode::Div, 0, 0, 2),
+                PlanOp::Gcd => (OpCode::Gcd, 0, 0, 2),
                 PlanOp::Min => (OpCode::Min, 0, 0, 2),
                 PlanOp::Max => (OpCode::Max, 0, 0, 2),
                 PlanOp::Eq => (OpCode::Eq, 0, 0, 2),
@@ -878,6 +983,16 @@ impl CompiledPlan {
                 PlanOp::Or => (OpCode::Or, 0, 0, 2),
                 PlanOp::Not => (OpCode::Not, 0, 0, 1),
                 PlanOp::Abs => (OpCode::Abs, 0, 0, 1),
+                PlanOp::PopCount => (OpCode::PopCount, 0, 0, 1),
+                PlanOp::Parity => (OpCode::Parity, 0, 0, 1),
+                PlanOp::Legendre { modulus } => {
+                    if !is_prime_u16(*modulus) || *modulus == 2 {
+                        return Err(ControlError::Invalid(
+                            "Legendre modulus must be an odd prime".into(),
+                        ));
+                    }
+                    (OpCode::Legendre, i64::from(*modulus), 0, 1)
+                }
                 PlanOp::Select => (OpCode::Select, 0, 0, 3),
             };
             if depth < inputs {
@@ -890,9 +1005,15 @@ impl CompiledPlan {
                 OpCode::Add
                 | OpCode::Sub
                 | OpCode::Mul
+                | OpCode::Mod
+                | OpCode::Div
+                | OpCode::Gcd
                 | OpCode::Min
                 | OpCode::Max
-                | OpCode::Abs => {
+                | OpCode::Abs
+                | OpCode::PopCount
+                | OpCode::Parity
+                | OpCode::Legendre => {
                     if kinds[base..depth]
                         .iter()
                         .any(|kind| *kind != ValueKind::Integer)
@@ -1078,6 +1199,47 @@ impl CompiledPlan {
                     }
                     continue;
                 }
+                OpCode::PopCount => {
+                    let result = i64::from(
+                        unsafe { read_plan_stack(&stack, depth - 1) }
+                            .unsigned_abs()
+                            .count_ones(),
+                    );
+                    stack[depth - 1].write(result);
+                    if TRACE {
+                        trace
+                            .as_deref_mut()
+                            .expect("traced evaluator has a trace sink")
+                            .push(result);
+                    }
+                    continue;
+                }
+                OpCode::Parity => {
+                    let result =
+                        (unsafe { read_plan_stack(&stack, depth - 1) }.unsigned_abs() & 1) as i64;
+                    stack[depth - 1].write(result);
+                    if TRACE {
+                        trace
+                            .as_deref_mut()
+                            .expect("traced evaluator has a trace sink")
+                            .push(result);
+                    }
+                    continue;
+                }
+                OpCode::Legendre => {
+                    let result = legendre_symbol(
+                        unsafe { read_plan_stack(&stack, depth - 1) },
+                        op.value as u16,
+                    );
+                    stack[depth - 1].write(result);
+                    if TRACE {
+                        trace
+                            .as_deref_mut()
+                            .expect("traced evaluator has a trace sink")
+                            .push(result);
+                    }
+                    continue;
+                }
                 OpCode::Select => {
                     // Compiled stack discipline proves all three slots initialized.
                     let otherwise = unsafe { read_plan_stack(&stack, depth - 1) };
@@ -1105,6 +1267,13 @@ impl CompiledPlan {
                         OpCode::Mul => left.checked_mul(right).ok_or_else(|| {
                             ControlError::Invalid("arithmetic overflow in plan".into())
                         })?,
+                        OpCode::Mod => left.checked_rem_euclid(right).ok_or_else(|| {
+                            ControlError::Invalid("invalid Euclidean remainder in plan".into())
+                        })?,
+                        OpCode::Div => left.checked_div(right).ok_or_else(|| {
+                            ControlError::Invalid("invalid integer division in plan".into())
+                        })?,
+                        OpCode::Gcd => checked_gcd(left, right)?,
                         OpCode::Min => left.min(right),
                         OpCode::Max => left.max(right),
                         OpCode::Eq => i64::from(left == right),
@@ -1120,6 +1289,9 @@ impl CompiledPlan {
                         | OpCode::Bool
                         | OpCode::Not
                         | OpCode::Abs
+                        | OpCode::PopCount
+                        | OpCode::Parity
+                        | OpCode::Legendre
                         | OpCode::Select
                         | OpCode::FieldEqConst
                         | OpCode::FieldNeConst
@@ -1293,6 +1465,9 @@ mod tests {
             (PlanOp::Add, 10),
             (PlanOp::Sub, 4),
             (PlanOp::Mul, 21),
+            (PlanOp::Mod, 1),
+            (PlanOp::Div, 2),
+            (PlanOp::Gcd, 1),
             (PlanOp::Min, 3),
             (PlanOp::Max, 7),
         ];
@@ -1347,6 +1522,24 @@ mod tests {
             7,
         );
         assert_traced_untraced(
+            vec![PlanOp::Const { value: -7 }, PlanOp::PopCount],
+            PlanOutput::Score,
+            &[11],
+            3,
+        );
+        assert_traced_untraced(
+            vec![PlanOp::Const { value: -7 }, PlanOp::Parity],
+            PlanOutput::Score,
+            &[11],
+            1,
+        );
+        assert_traced_untraced(
+            vec![PlanOp::Const { value: 3 }, PlanOp::Legendre { modulus: 7 }],
+            PlanOutput::Score,
+            &[11],
+            -1,
+        );
+        assert_traced_untraced(
             vec![
                 PlanOp::Bool { value: true },
                 PlanOp::Field {
@@ -1389,12 +1582,68 @@ mod tests {
                 PlanOp::Add,
             ],
             vec![PlanOp::Const { value: i64::MIN }, PlanOp::Abs],
+            vec![
+                PlanOp::Const { value: 1 },
+                PlanOp::Const { value: 0 },
+                PlanOp::Div,
+            ],
+            vec![
+                PlanOp::Const { value: 1 },
+                PlanOp::Const { value: 0 },
+                PlanOp::Mod,
+            ],
+            vec![
+                PlanOp::Const { value: i64::MIN },
+                PlanOp::Const { value: 0 },
+                PlanOp::Gcd,
+            ],
         ] {
             let plan = compile_test_plan(program, PlanOutput::Score);
             let mut trace = Vec::new();
             assert!(plan.evaluate_value(&[0], Some(&mut trace)).is_err());
             assert!(plan.evaluate_value_untraced(&[0]).is_err());
         }
+    }
+
+    #[test]
+    fn legendre_modulus_is_compile_time_validated() {
+        for modulus in [0, 1, 2, 9, 15] {
+            let result = CompiledPlan::compile(
+                &PlanSpec {
+                    schema: PLAN_SCHEMA.to_owned(),
+                    name: "invalid-legendre".to_owned(),
+                    role: PlanRole::Diagnostic,
+                    output: PlanOutput::Score,
+                    scope: None,
+                    program: vec![PlanOp::Const { value: 1 }, PlanOp::Legendre { modulus }],
+                },
+                &["x".to_owned()],
+            );
+            assert!(result.is_err());
+        }
+    }
+
+    #[test]
+    fn expression_language_lowers_number_theoretic_terms() {
+        let spec = ExpressionPlanSpec {
+            schema: PLAN_SCHEMA.to_owned(),
+            name: "quadratic-character-expression".to_owned(),
+            role: PlanRole::Diagnostic,
+            output: PlanOutput::Predicate,
+            scope: None,
+            expr: PlanExpr::Eq {
+                left: Box::new(PlanExpr::Legendre {
+                    arg: Box::new(PlanExpr::Field {
+                        name: "x".to_owned(),
+                    }),
+                    modulus: 7,
+                }),
+                right: Box::new(PlanExpr::Const { value: 1 }),
+            },
+        };
+        let plan = CompiledPlan::compile(&spec.lower().unwrap(), &["x".to_owned()]).unwrap();
+        assert_eq!(plan.evaluate_value_untraced(&[2]).unwrap(), 1);
+        assert_eq!(plan.evaluate_value_untraced(&[3]).unwrap(), 0);
     }
 
     #[test]
