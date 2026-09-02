@@ -26,6 +26,67 @@ pub struct ImplicationScore {
     pub complexity: u32,
 }
 
+/// Exact census reduction used to rank pruning theorems across shards.
+///
+/// Ordering should use [`CensusReduction::preferred_cmp`]. The floating-point
+/// bit count is deliberately reporting-only.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct CensusReduction {
+    initial: u64,
+    surviving: u64,
+}
+
+impl CensusReduction {
+    pub fn new(initial: u64, surviving: u64) -> Result<Self, CensusReductionError> {
+        if initial == 0 {
+            return Err(CensusReductionError::EmptyCensus);
+        }
+        if surviving > initial {
+            return Err(CensusReductionError::SurvivorOverflow);
+        }
+        Ok(Self { initial, surviving })
+    }
+
+    pub fn initial(self) -> u64 {
+        self.initial
+    }
+
+    pub fn surviving(self) -> u64 {
+        self.surviving
+    }
+
+    pub fn pruned(self) -> u64 {
+        self.initial - self.surviving
+    }
+
+    /// Compare with the stronger reduction first.
+    pub fn preferred_cmp(self, other: Self) -> std::cmp::Ordering {
+        match (self.surviving, other.surviving) {
+            (0, 0) => std::cmp::Ordering::Equal,
+            (0, _) => std::cmp::Ordering::Less,
+            (_, 0) => std::cmp::Ordering::Greater,
+            _ => ((other.initial as u128) * (self.surviving as u128))
+                .cmp(&((self.initial as u128) * (other.surviving as u128))),
+        }
+    }
+
+    pub fn reduction_bits(self) -> f64 {
+        if self.surviving == 0 {
+            f64::INFINITY
+        } else {
+            (self.initial as f64).log2() - (self.surviving as f64).log2()
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Error, PartialEq, Eq)]
+pub enum CensusReductionError {
+    #[error("census must contain at least one candidate")]
+    EmptyCensus,
+    #[error("surviving census exceeds its initial size")]
+    SurvivorOverflow,
+}
+
 impl ImplicationScore {
     pub fn sound(self) -> bool {
         self.false_positives == 0
@@ -363,5 +424,16 @@ mod tests {
         .unwrap();
         assert_eq!(streamed, [0, 1, 2, 3]);
         assert_eq!(summary.best_admitted.unwrap().candidate, 3);
+    }
+
+    #[test]
+    fn census_reduction_orders_exact_ratios_before_reporting_bits() {
+        let half = CensusReduction::new(u64::MAX - 1, (u64::MAX - 1) / 2).unwrap();
+        let quarter = CensusReduction::new(u64::MAX - 3, (u64::MAX - 3) / 4).unwrap();
+        let empty = CensusReduction::new(17, 0).unwrap();
+        assert!(quarter.preferred_cmp(half).is_lt());
+        assert!(empty.preferred_cmp(quarter).is_lt());
+        assert_eq!(CensusReduction::new(16, 8).unwrap().reduction_bits(), 1.0);
+        assert!(empty.reduction_bits().is_infinite());
     }
 }

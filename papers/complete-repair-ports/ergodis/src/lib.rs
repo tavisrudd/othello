@@ -254,8 +254,9 @@ pub use span::{
 };
 pub use theorem_search::{
     evolve_implications, evolve_implications_streaming, evolve_ranked_streaming, CandidateTrial,
-    EvolutionConfig, EvolutionError, EvolutionResult, EvolutionRunError, EvolutionSummary,
-    ImplicationScore, RankedCandidateTrial, RankedEvolutionSummary,
+    CensusReduction, CensusReductionError, EvolutionConfig, EvolutionError, EvolutionResult,
+    EvolutionRunError, EvolutionSummary, ImplicationScore, RankedCandidateTrial,
+    RankedEvolutionSummary,
 };
 pub use transfer::{
     compile_binary_inner_dual, compile_binary_rank_one, compile_binary_target_subspace,
