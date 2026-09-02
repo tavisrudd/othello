@@ -4374,3 +4374,17 @@ cost.  Complementary equal-count theorems therefore survive, while a cheaper
 union may replace several points even when it adds no row.  Capacity and tail
 errors leave the archive unchanged.  Unsound, dominated, non-novel,
 replacement, complementary, and capacity controls pass the full public gate.
+
+Commit `4d4a4c692` lands failure-derived monotone contraction without assuming
+a syntactic plan order.  A bounded antichain stores the caller's canonical
+plan hash plus its exact corpus coverage.  An unsound core blocks every
+coverage superset because its witnessed false positive remains covered; an
+incomplete core blocks every coverage subset because its witnessed false
+negative remains missed.  Stronger cores replace weaker ones in the correct
+direction, equal coverage resolves by canonical key, and a candidate that is
+both unsound and incomplete contributes both obligations atomically or not at
+all.  Malformed masks return an error rather than disabling contraction.
+Generalization, specialization, antichain replacement, no-failure, and
+capacity-rollback controls pass the full public gate.  This is an exact
+anti-cycling/search-space reduction on the replay corpus, not proof authority
+for any admitted theorem.
