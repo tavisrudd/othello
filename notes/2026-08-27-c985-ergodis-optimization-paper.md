@@ -4235,3 +4235,12 @@ Criterion targets.  Strict `cargo clippy --all-targets --all-features --
 -D warnings` passes.  The new focused coverage comprises seven feature-DAG
 unit tests, four theorem-search tests, two end-to-end feature-evolution tests,
 nine plan-VM tests, and six textual-language tests.
+
+Commit `7eb09ed40` closes the generic bounded-aggregation opcode gap reported
+by C1015.  The canonical multiset compiler now emits exact `all-nonzero` and
+`any-nonzero` columns alongside count, sum, minimum, and maximum; field bounds,
+group/output caps, permutation invariance, and uniform parent labels retain the
+existing fail-closed contracts.  These are cold derived columns consumed by
+the unchanged row VM, so variable child counts—including seven residual
+matchings—require no cross-row work or allocation in candidate evaluation.
+Applying the adapter to C1015's real corpus remains private campaign work.
