@@ -1,6 +1,7 @@
 use ergodis::{
     evolve_ranked_streaming, CensusReduction, EvolutionConfig, FeatureBankBounds, FeatureDag,
-    FeatureId, FeatureOp, FeatureZeroBank, RawFeatureExpansion,
+    FeatureId, FeatureOp, FeatureZeroBank, GroupAggregateOp, GroupAggregateSpec,
+    GroupAggregationBounds, GroupAggregationPlan, RawFeatureExpansion,
 };
 
 #[derive(Clone, Copy)]
@@ -150,6 +151,108 @@ fn affine_lift_transfers_a_symbolic_parameter_to_held_out_shards() {
             }
         }
     }
+}
+
+#[test]
+fn grouped_moment_exposes_a_relation_missing_from_flat_degree_two_terms() {
+    let mut rows = vec![[0_i64; 7]];
+    for index in 0..7 {
+        for value in [-1, 1] {
+            let mut row = [0_i64; 7];
+            row[index] = value;
+            rows.push(row);
+        }
+    }
+    let flat_rows = rows.iter().flatten().copied().collect::<Vec<_>>();
+    let expected_mask = label_mask(&(0..rows.len()).map(|index| index == 0).collect::<Vec<_>>());
+
+    let mut flat_dag = FeatureDag::new(7, 2, 512).unwrap();
+    let flat_candidates = flat_dag
+        .expand_raw_degree_two(RawFeatureExpansion::default())
+        .unwrap();
+    let flat_bank = FeatureZeroBank::compile(
+        &flat_dag,
+        &flat_rows,
+        FeatureBankBounds {
+            maximum_rows: rows.len(),
+            maximum_bitmap_words: flat_dag.len() * rows.len().div_ceil(64),
+        },
+    )
+    .unwrap();
+    let best_flat_survivors = flat_candidates
+        .iter()
+        .map(|&candidate| {
+            flat_bank
+                .score_necessary_zero(candidate, &expected_mask)
+                .unwrap()
+                .surviving
+        })
+        .min()
+        .unwrap();
+    assert_eq!(best_flat_survivors, 11);
+
+    let aggregate = GroupAggregationPlan::compile(
+        7,
+        &[GroupAggregateSpec {
+            members: (0_u16..7).collect::<Vec<_>>().into_boxed_slice(),
+            operations: vec![GroupAggregateOp::SumSquares].into_boxed_slice(),
+        }],
+        GroupAggregationBounds {
+            maximum_groups: 1,
+            maximum_members_per_group: 7,
+            maximum_outputs: 1,
+        },
+    )
+    .unwrap();
+    let mut aggregate_rows = vec![0_i64; rows.len()];
+    aggregate
+        .evaluate_rows(&flat_rows, rows.len(), &mut aggregate_rows)
+        .unwrap();
+    let mut aggregate_dag = FeatureDag::new(1, 1, 4).unwrap();
+    let moment = aggregate_dag.input(0).unwrap();
+    let aggregate_bank = FeatureZeroBank::compile(
+        &aggregate_dag,
+        &aggregate_rows,
+        FeatureBankBounds {
+            maximum_rows: rows.len(),
+            maximum_bitmap_words: aggregate_dag.len() * rows.len().div_ceil(64),
+        },
+    )
+    .unwrap();
+    let census = aggregate_bank
+        .score_necessary_zero(moment, &expected_mask)
+        .unwrap();
+    assert_eq!(census.false_negatives, 0);
+    assert_eq!(census.surviving, 1);
+    let summary = evolve_ranked_streaming(
+        [moment],
+        EvolutionConfig {
+            generations: 1,
+            beam_width: 1,
+            max_candidates: 1,
+        },
+        |_candidate, _output| {},
+        |candidate: &FeatureId| {
+            let census = aggregate_bank
+                .score_necessary_zero(*candidate, &expected_mask)
+                .unwrap();
+            Score {
+                false_negatives: u32::try_from(census.false_negatives).unwrap(),
+                reduction: CensusReduction::new(census.rows, census.surviving).unwrap(),
+                cost: aggregate_dag.node(*candidate).unwrap().evaluation_cost,
+            }
+        },
+        |left, right| {
+            left.false_negatives
+                .cmp(&right.false_negatives)
+                .then_with(|| left.reduction.preferred_cmp(right.reduction))
+                .then_with(|| left.cost.cmp(&right.cost))
+        },
+        |score| score.false_negatives == 0,
+        |_trial| Ok::<_, std::convert::Infallible>(()),
+    )
+    .unwrap();
+    assert_eq!(summary.best_admitted.unwrap().candidate, moment);
 }
 
 fn label_mask(labels: &[bool]) -> Vec<u64> {

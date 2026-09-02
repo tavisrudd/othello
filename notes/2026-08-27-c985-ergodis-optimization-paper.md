@@ -4885,3 +4885,12 @@ closed. The repeated solve section allocates zero times after the workspace is b
 This supplies an exact candidate/certificate primitive for bounded multiset identities
 while making the scope boundary explicit: large-width instances need a different
 algorithm, and a discovered predicate still passes the ordinary theorem-authority gate.
+
+The first reach control confirms that the new coordinates materially change what evolve
+can express. On a fifteen-row, seven-coordinate corpus consisting of zero and all signed
+unit vectors, the strongest flat degree-two scalar term leaves 11 rows alive. Compiling
+the anonymous seven-field group to its sum-of-squares coordinate lets the unchanged
+`FeatureZeroBank` and ranked evolve runner recover the exact one-row survivor. This is a
+small mechanism control rather than an application result, but it closes the specific
+“flat rows cannot see a bounded relation across seven objects” failure mode without any
+task-specific field names or conclusion in core.
