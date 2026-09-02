@@ -902,6 +902,14 @@ classifier (`ergodis/docs/ergodis-shape-classifier.md`); five of six rows landed
 the subset-sum crossover and the W3 repeated-interface quotient gap are open in its mystery
 ledger ([C1038 report](../2026-09-02-c1038-negative-control-benchmark-tier.md)).
 
+C1036 and C1037 are closed: `ergodis-private` is a library-only workspace root with three task
+crates (`tasks/tools`, `tasks/gem-hunt`, `tasks/hadamard-2092`), no `src/bin` anywhere, workspace
+clippy clean; builds go to `~/.cache/ergodis/target/`, A/B baselines are retained executables via
+`retain-bin.sh`, and `cache-gc.sh` runs at task close
+([C1036 phase 2](../2026-09-02-c1036-phase2-hadamard-crate.md), [C1037](../2026-09-02-c1037-ergodis-build-artifact-hygiene.md)).
+The C1016 cache under `~/.cache/ergodis/c1016/` is absent on this host, so cold end-to-end g41
+replays need it regenerated first.
+
 C1017 is queued to remediate the whole-core Ergodis performance-contract audit:
 allocation-counted hot loops, iterative traversal, complete Tiger layouts,
 contention-free worker ownership, one-/parallel-mode counter A/B gates, and the
