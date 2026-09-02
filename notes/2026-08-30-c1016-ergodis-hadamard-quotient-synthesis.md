@@ -2822,6 +2822,18 @@ cycles, versus 572,023,916,000 and 213,545,906,000 without the moment delta
 gate: 2.344x fewer cycles.  Two support-mask variants were measured and
 rejected.  Traversal is iterative, the hot loop allocates zero times, and the
 negative remains scoped to the enumerated repair families around this root.
+An exact radius-five `3+2` continuation uses the Queens-style RAM-for-compute
+trade: it compiles every legal sequential same-row double into a 50,622,584
+byte open-addressed tablebase, then scans the canonical minimal same-row
+triples in each distinct block.  The key contains energy and all fourteen
+independent q29 PAF coordinates; collisions receive full-key comparison, so
+one retained preimage is sufficient and the earlier arbitrary-modular-
+preimage defect cannot occur.  Every apparent hit is still replayed from the
+root.  The retained `y=6` root misses this exact scoped family after
+1,322,849,319,066 instructions and 336,384,144,140 cycles at 100% counter
+coverage.  Table compilation/search allocates zero times after workspace
+construction.  Other radius-five partitions and the length-522 lift remain
+uncovered.
 The private wrapper now hands that bank directly to optional strided anneal
 tasks without serialization or theorem-specific external glue.  A current
 machine-protected (`choom -n 1000`) repeat plus eighteen 100,000-mutation

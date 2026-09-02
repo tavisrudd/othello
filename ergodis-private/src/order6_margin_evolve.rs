@@ -191,6 +191,45 @@ impl Default for Order6Q29TripleBlockWorkspace {
     }
 }
 
+const Q29_TRIPLE_DOUBLE_TT_SLOTS: usize = 1 << 21;
+
+/// Cold exact-delta tablebase for the radius-five `3+2` repair slice.  The
+/// table key contains energy and every independent q29 PAF coordinate, so one
+/// retained preimage per key is sufficient.  Hash collisions are resolved by
+/// full-key comparison and therefore have no semantic authority.
+pub struct Order6Q29TripleDoubleWorkspace {
+    patterns: Vec<Q29TripleMultiset>,
+    raw_doubles: Vec<Q29LocalDelta>,
+    exact_deltas: Vec<[i16; 16]>,
+    slots: Vec<u32>,
+}
+
+impl Order6Q29TripleDoubleWorkspace {
+    #[must_use]
+    pub fn new() -> Self {
+        Self {
+            patterns: Order6Q29TripleBlockWorkspace::new().patterns,
+            raw_doubles: Vec::with_capacity(Q29_PAIR_MOVES),
+            exact_deltas: Vec::with_capacity(Q29_PAIR_MOVES),
+            slots: vec![0; Q29_TRIPLE_DOUBLE_TT_SLOTS],
+        }
+    }
+
+    #[must_use]
+    pub fn bytes(&self) -> usize {
+        self.patterns.capacity() * std::mem::size_of::<Q29TripleMultiset>()
+            + self.raw_doubles.capacity() * std::mem::size_of::<Q29LocalDelta>()
+            + self.exact_deltas.capacity() * std::mem::size_of::<[i16; 16]>()
+            + self.slots.capacity() * std::mem::size_of::<u32>()
+    }
+}
+
+impl Default for Order6Q29TripleDoubleWorkspace {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 /// Cold storage for the exact three-distinct-block repair kernel.  Allocation
 /// occurs only in construction; repeated repairs clear and reuse the buffer.
 pub struct Order6Q29ThreeMoveWorkspace {
@@ -1124,6 +1163,80 @@ fn compile_q29_radius_two_block(
 }
 
 #[inline(always)]
+fn q29_exact_delta_hash(delta: &[i16; 16]) -> usize {
+    let mut hash = 0x9e37_79b9_7f4a_7c15_u64;
+    for &value in delta {
+        hash ^= u64::from(value as u16).wrapping_add(0x9e37_79b9);
+        hash = hash.rotate_left(13).wrapping_mul(0xbf58_476d_1ce4_e5b9);
+    }
+    hash as usize
+}
+
+fn compile_q29_exact_double_table(
+    row: &[i8; Q29],
+    workspace: &mut Order6Q29TripleDoubleWorkspace,
+) -> Result<(), Order6Q29RepairError> {
+    let mut singles = [Q29LocalDelta {
+        delta: [0; Q29_SHIFTS - 1],
+        moves: 0,
+    }; Q29_BLOCK_MOVES];
+    compile_q29_radius_two_block(row, &mut singles, &mut workspace.raw_doubles)?;
+    workspace.exact_deltas.clear();
+    workspace.slots.fill(0);
+    let root_energy = row
+        .iter()
+        .map(|&value| i32::from(value) * i32::from(value))
+        .sum::<i32>();
+    for local in &workspace.raw_doubles {
+        let mut child = *row;
+        if !apply_q29_packed_moves(&mut child, local.moves, 2) {
+            return Err(Order6Q29RepairError::InputOutOfDomain);
+        }
+        let child_energy = child
+            .iter()
+            .map(|&value| i32::from(value) * i32::from(value))
+            .sum::<i32>();
+        let mut exact = [0_i16; 16];
+        exact[0] = (child_energy - root_energy) as i16;
+        exact[1..Q29_SHIFTS].copy_from_slice(&local.delta);
+        let index = workspace.exact_deltas.len();
+        workspace.exact_deltas.push(exact);
+        let mut slot = q29_exact_delta_hash(&exact) & (Q29_TRIPLE_DOUBLE_TT_SLOTS - 1);
+        loop {
+            let stored = workspace.slots[slot];
+            if stored == 0 {
+                workspace.slots[slot] = index as u32 + 1;
+                break;
+            }
+            if workspace.exact_deltas[stored as usize - 1] == exact {
+                break;
+            }
+            slot = (slot + 1) & (Q29_TRIPLE_DOUBLE_TT_SLOTS - 1);
+        }
+    }
+    Ok(())
+}
+
+#[inline(always)]
+fn lookup_q29_exact_double(
+    desired: &[i16; 16],
+    workspace: &Order6Q29TripleDoubleWorkspace,
+) -> Option<u32> {
+    let mut slot = q29_exact_delta_hash(desired) & (Q29_TRIPLE_DOUBLE_TT_SLOTS - 1);
+    loop {
+        let stored = workspace.slots[slot];
+        if stored == 0 {
+            return None;
+        }
+        let index = stored as usize - 1;
+        if workspace.exact_deltas[index] == *desired {
+            return Some(workspace.raw_doubles[index].moves);
+        }
+        slot = (slot + 1) & (Q29_TRIPLE_DOUBLE_TT_SLOTS - 1);
+    }
+}
+
+#[inline(always)]
 fn q29_matching_range(values: &[Q29LocalDelta], desired: [i16; Q29_SHIFTS - 1]) -> (usize, usize) {
     let start = values.partition_point(|value| value.delta < desired);
     let end = start + values[start..].partition_point(|value| value.delta == desired);
@@ -1821,6 +1934,98 @@ pub fn repair_q29_triple_block_plus_one_exact(
     Ok(None)
 }
 
+/// Exhaust the exact radius-five slice consisting of three minimal transfers
+/// in one row and two sequential transfers in a distinct row.  The double
+/// side is an exact PAF tablebase whose key includes the energy coordinate;
+/// retaining one preimage per identical full key is therefore sound.
+pub fn repair_q29_triple_plus_double_exact(
+    values: [[i8; Q29]; BLOCKS],
+    workspace: &mut Order6Q29TripleDoubleWorkspace,
+) -> Result<Option<[[i8; Q29]; BLOCKS]>, Order6Q29RepairError> {
+    const ROW_SUMS: [i32; BLOCKS] = [2, 0, 0, 0];
+    for block in 0..BLOCKS {
+        if values[block]
+            .iter()
+            .any(|&value| !(-18..=18).contains(&value) || value & 1 != 0)
+            || values[block]
+                .iter()
+                .map(|&value| i32::from(value))
+                .sum::<i32>()
+                != ROW_SUMS[block]
+        {
+            return Err(Order6Q29RepairError::InputOutOfDomain);
+        }
+    }
+    let root = Q29PhaseState::from_values(values);
+    if root.score == 0 {
+        return Ok(Some(values));
+    }
+    let residual: [i16; 16] = std::array::from_fn(|index| match index {
+        0 => (2_020 - root.combined_paf[0]) as i16,
+        1..Q29_SHIFTS => (-72 - root.combined_paf[index]) as i16,
+        _ => 0,
+    });
+    let mut sparse_delta = [0_i8; Q29];
+    for double_block in 0..BLOCKS {
+        compile_q29_exact_double_table(&root.values[double_block], workspace)?;
+        for triple_block in 0..BLOCKS {
+            if triple_block == double_block {
+                continue;
+            }
+            let row = &root.values[triple_block];
+            for donor_index in 0..workspace.patterns.len() {
+                let donors = workspace.patterns[donor_index];
+                if !q29_pattern_fits(row, donors, -1) {
+                    continue;
+                }
+                for recipient_index in 0..workspace.patterns.len() {
+                    let recipients = workspace.patterns[recipient_index];
+                    if !q29_patterns_disjoint(donors, recipients)
+                        || !q29_pattern_fits(row, recipients, 1)
+                    {
+                        continue;
+                    }
+                    sparse_delta.fill(0);
+                    for &position in &donors.positions {
+                        sparse_delta[usize::from(position)] -= 2;
+                    }
+                    for &position in &recipients.positions {
+                        sparse_delta[usize::from(position)] += 2;
+                    }
+                    let energy_delta = row
+                        .iter()
+                        .zip(&sparse_delta)
+                        .map(|(&value, &delta)| {
+                            2 * i32::from(value) * i32::from(delta)
+                                + i32::from(delta) * i32::from(delta)
+                        })
+                        .sum::<i32>();
+                    let triple_delta = q29_triple_paf_delta(row, &sparse_delta, donors, recipients);
+                    let mut desired = [0_i16; 16];
+                    desired[0] = residual[0] - energy_delta as i16;
+                    for shift in 1..Q29_SHIFTS {
+                        desired[shift] = residual[shift] - triple_delta[shift - 1];
+                    }
+                    let Some(double_moves) = lookup_q29_exact_double(&desired, workspace) else {
+                        continue;
+                    };
+                    let triple_moves = q29_triple_moves(donors, recipients);
+                    if let Some(hit) = replay_q29_local_candidate(
+                        &values,
+                        &[
+                            chosen(triple_block, 3, triple_moves),
+                            chosen(double_block, 2, double_moves),
+                        ],
+                    ) {
+                        return Ok(Some(hit));
+                    }
+                }
+            }
+        }
+    }
+    Ok(None)
+}
+
 fn lift_q29_values(values: &[[i8; Q29]; BLOCKS], random: &mut u64) -> [[u8; CELLS]; BLOCKS] {
     let mut counts = [[0_u8; CELLS]; BLOCKS];
     for block in 0..BLOCKS {
@@ -2394,5 +2599,48 @@ mod tests {
             repair_q29_triple_block_plus_one_exact(invalid, &workspace),
             Err(Order6Q29RepairError::InputOutOfDomain)
         );
+    }
+
+    #[test]
+    fn exact_double_table_retains_full_keys_without_allocation() {
+        let mut workspace = Order6Q29TripleDoubleWorkspace::new();
+        let row = [0_i8; Q29];
+        let (_, allocations) = tracked_allocations(|| {
+            compile_q29_exact_double_table(&row, &mut workspace).unwrap();
+        });
+        assert_eq!(allocations, 0);
+        assert!(!workspace.exact_deltas.is_empty());
+        for &key in workspace.exact_deltas.iter().step_by(257) {
+            let moves = lookup_q29_exact_double(&key, &workspace).unwrap();
+            let mut child = row;
+            assert!(apply_q29_packed_moves(&mut child, moves, 2));
+            let base = direct_paf::<1, Q29, Q29_SHIFTS>(&row);
+            let changed = direct_paf::<1, Q29, Q29_SHIFTS>(&child);
+            assert_eq!(key[0], (changed[0] - base[0]) as i16);
+            assert_eq!(&key[1..Q29_SHIFTS], &q29_delta_from_paf(&base, &changed));
+        }
+    }
+
+    #[test]
+    fn triple_plus_double_repair_fails_closed_outside_domain() {
+        let mut workspace = Order6Q29TripleDoubleWorkspace::new();
+        let mut invalid = [[0_i8; Q29]; BLOCKS];
+        invalid[0][0] = 1;
+        assert_eq!(
+            repair_q29_triple_plus_double_exact(invalid, &mut workspace),
+            Err(Order6Q29RepairError::InputOutOfDomain)
+        );
+    }
+
+    #[test]
+    fn retained_root_triple_plus_double_is_exact_and_allocation_free() {
+        let half = crate::q29_even_moment_proof::retained_q29_y6_root();
+        let values = half.map(|row| row.map(|value| value * 2));
+        let mut workspace = Order6Q29TripleDoubleWorkspace::new();
+        let (result, allocations) = tracked_allocations(|| {
+            repair_q29_triple_plus_double_exact(values, &mut workspace).unwrap()
+        });
+        assert_eq!(allocations, 0);
+        assert!(result.is_none());
     }
 }
