@@ -24,6 +24,7 @@ pub mod css_distance;
 pub mod cyclic_action;
 pub mod defect;
 pub mod family_response;
+pub mod feature_dag;
 pub mod fibre;
 pub mod field;
 pub mod frozen_shortest_path;
@@ -137,6 +138,9 @@ pub use cyclic_action::{CyclicOrbitLockError, CyclicOrbitLocks};
 pub use family_response::{
     compile_minima_family_responses, FamilyResponseDictionary, FamilyResponseError,
     FamilyResponseTable,
+};
+pub use feature_dag::{
+    FeatureDag, FeatureDagError, FeatureId, FeatureNode, FeatureOp, FeatureWorkspace,
 };
 pub use fibre::{
     compile_dense_fibres, verify_dense_fibres, DenseFibreBounds, DenseFibreError, DenseFibreIndex,
