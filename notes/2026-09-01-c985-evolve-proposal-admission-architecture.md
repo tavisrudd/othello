@@ -459,6 +459,17 @@ reuse bounded artifact completion. Concrete SDK translation, payload/context
 delivery, and reaping SDK operations that ignore cancellation remain explicit
 backend responsibilities rather than generic retry policy.
 
+The first concrete backend translation is deliberately provider-independent:
+an argv-only command adapter streams a bounded private request file to stdin,
+pumps stdout to a disk-backed anonymous file under a private run directory,
+caps stderr, maps configured temporary exits into typed transient failures, and
+kills/reaps the isolated process group on timeout cancellation. It invokes no
+shell and introduces no SDK dependency. Local LLMs, hosted-provider wrappers,
+SAT/MIP programs, or domain scripts can therefore share the same runner. The
+next transport gate is daemon-owned typed request/context artifacts so the
+callback need not obtain its immutable input out of band; a hosted SDK adapter
+then becomes a thin optional package rather than core policy.
+
 The next generic slice now implements the in-memory/persistable ticket state
 machine without adding wire operations. Its fixed ticket identity makes submit
 create-or-return-existing and rejects a conflicting normalized spec. Explicit

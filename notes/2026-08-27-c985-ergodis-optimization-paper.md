@@ -2690,8 +2690,14 @@ files are disposable and may be deleted at any time.
     `Retry-After` reporting, one exact deferred sleep with no polling, and
     streamed successful completion. Busy/terminal claims return immediately;
     unexpected failures cannot acquire retry authority outside the daemon. Four
-    deterministic async controls pass. The next slice is typed payload/context
-    delivery plus one concrete SDK translation; no autonomous SDK adapter is
+    deterministic async controls pass. The first concrete backend translation
+    is an argv-only command provider: no shell, bounded private request file,
+    streamed disk-backed stdout, bounded stderr, typed temporary exits, and
+    process-group kill/reap under cancellation. Three controls cover streaming,
+    output overflow/transient exit, and timeout cleanup. This already wraps
+    local LLMs, hosted-provider CLIs, solvers, and scripts without a core SDK
+    dependency. The next slice is daemon-owned typed payload/context delivery,
+    followed by an optional hosted SDK adapter; no autonomous SDK adapter is
     claimed yet.
 
     The first new proposer family is accepted. A coloured-Tanner isomorphism

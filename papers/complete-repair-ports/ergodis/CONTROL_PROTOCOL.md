@@ -253,6 +253,16 @@ stream that follows the bounded artifact path above. Concrete SDK adapters and
 event notifications remain provider-specific projections, not changes to the
 ticket state machine.
 
+The first concrete projection is an argv-only command provider. It accepts a
+bounded private request file, never invokes a shell, streams stdout into a
+disk-backed anonymous file under a private run directory, retains only bounded
+stderr, and reports temporary versus deterministic exits through the same
+failure vocabulary. Cancellation sends `SIGKILL` to the isolated process group
+and awaits the child, preventing an execution timeout from leaving an orphaned
+provider. This adapter can front local models or provider-specific wrappers;
+daemon-owned typed request artifacts and a hosted SDK adapter remain later
+transport layers.
+
 `ergodisctl evolve-start` accepts an optional direct seed JSONL file and up to
 eight repeated `--resume-evidence` paths.  A replay archive must match the
 problem, ordered feature schema, and exact feature-generator provenance.  When

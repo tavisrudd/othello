@@ -71,6 +71,15 @@ It never polls and does not implement a second retry policy. Provider SDK
 adapters remain small translations into this callback and are responsible for
 reaping any SDK work that ignores cancellation.
 
+`ergodis_command_provider.CommandProvider` is the first concrete translation.
+It executes an argv vector without a shell, streams one bounded private request
+file to stdin, pumps stdout to a disk-backed anonymous file under a private
+run-owned work directory, caps stderr, and maps configured temporary exit codes
+to typed transient failures. Timeout cancellation kills and reaps the entire
+child process group. This supports local LLMs, hosted-provider CLI wrappers,
+SAT/MIP tools, and research scripts without adding any provider dependency to
+Ergodis.
+
 The `recovery_algorithms` package implements direct finite-field and
 combinatorial formulations. Its simple representations make it useful for
 independent checking on bounded instances; they are not the high-performance

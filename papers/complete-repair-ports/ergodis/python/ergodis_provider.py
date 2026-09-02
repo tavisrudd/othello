@@ -34,6 +34,7 @@ class ProviderInvocation:
     attempt: int
     execute_by_ms: int
     remaining_ms: int
+    maximum_return_bytes: int
 
 
 class ProviderFailure(Exception):
@@ -99,6 +100,7 @@ class ProviderRunner:
                 attempt,
                 execute_by_ms,
                 remaining_ms,
+                _maximum_return_bytes(claimed),
             )
             try:
                 async with asyncio.timeout(remaining_ms / 1_000):
@@ -160,6 +162,14 @@ def _execution_deadline(view: ProposalTicketView) -> int:
     spec = _required_mapping(view.ticket.get("spec"), "provider ticket specification")
     deadlines = spec.get("deadlines")
     return _required_milliseconds(deadlines, "execute_by_ms")
+
+
+def _maximum_return_bytes(view: ProposalTicketView) -> int:
+    spec = _required_mapping(view.ticket.get("spec"), "provider ticket specification")
+    maximum = spec.get("max_return_bytes")
+    if isinstance(maximum, bool) or not isinstance(maximum, int) or maximum <= 0:
+        raise ProtocolError("provider ticket return-byte bound is invalid")
+    return maximum
 
 
 def _is_retry_wait(view: ProposalTicketView) -> bool:
