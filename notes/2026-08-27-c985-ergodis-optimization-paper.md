@@ -4080,7 +4080,10 @@ micro-optimizations are measured rejections, retained as candidate/revert
 commit pairs rather than folklore: posterior integer keys (`dcdf476a7` /
 `431bcae2d`), a branch-free degree-six prefix (`68a0634af` / `823ce38e1`), a
 packed syndrome ledger (`00018b1ec` / `6c15f42f3`), and validated message
-slices (`9580c1f82` / `859ab5323`).  The degree-six form removed 6.07% of
+slices (`9580c1f82` / `859ab5323`).  Safe sliced OSD Gaussian elimination is
+also rejected at `8ef5864f2` / `383aeff76`: it removes 4.98% of BB756
+instructions but regresses Gross144 wall time 9.1%.  The degree-six form
+removed 6.07% of
 BB756 instructions but regressed Gross144 and BB288 wall time by 4.1% and
 4.5%; the other shapes either raised instructions or failed to move wall time.
 Production therefore remains restored exactly.

@@ -60,6 +60,12 @@
         "revert_commit": "859ab5323",
         "change": "validated per-check message slices",
         "reason": "1.12 percent more instructions and no resolved wall improvement on any of the three controls"
+      },
+      {
+        "candidate_commit": "8ef5864f2",
+        "revert_commit": "383aeff76",
+        "change": "sliced OSD Gaussian row elimination",
+        "reason": "4.98 percent fewer BB756 instructions but a 9.1 percent Gross144 wall regression and unresolved BB288/BB756 wall results"
       }
     ]
   },
