@@ -2145,9 +2145,16 @@ files are disposable and may be deleted at any time.
    All 486 public tests, all-target/all-feature benches, strict clippy, and the
    real parallel zero-allocation search test pass. Colossal artifact version 2
    rejects pre-ordering completion filters. The raw counter ledger and full
-   ratios are recorded in the LP1768 memo. Next launch deterministic radius-20
-   shards under this ordering while investigating a stronger pure syndrome
-   lower bound off the hot path.
+   ratios are recorded in the LP1768 memo. The deterministic radius-20 tranche
+   is now complete as 32 independently ledgered shards per direction. X visits
+   133,615,602,821 candidates and Z 129,430,983,577; both ledgers report a
+   complete compatible cover with no nontrivial word. Together with the
+   validated even-kernel functional this raises the official interval to
+   `22 <= d_X,d_Z <= 24`. All 64 raw records, both coverage manifests, and a
+   SHA-256 manifest are retained under
+   `ergodis-private/evidence/c985-qdist-lp1768-w21-shards/`. The only remaining
+   exact weight is 22. Before radius 22, probe equivalent independent-check
+   presentations and a stronger pure syndrome lower bound off the hot path.
 
    Commit `b89f00c45` also turns the one-off nauty diagnostic into an optional,
    backend-neutral discovery boundary. `css_automorphism_adapter` invokes
