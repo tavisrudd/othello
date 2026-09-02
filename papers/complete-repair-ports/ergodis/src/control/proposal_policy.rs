@@ -10,7 +10,8 @@ const PARTS_PER_MILLION: u128 = 1_000_000;
 const MAX_SESSION_ID_BYTES: usize = 256;
 
 #[repr(transparent)]
-#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
+#[serde(transparent)]
 pub struct ProposalIdempotencyKey([u8; 32]);
 
 const _: () = assert!(std::mem::size_of::<ProposalIdempotencyKey>() == 32);
@@ -317,7 +318,8 @@ pub enum ProposalFailureClass {
     ProtocolFault,
 }
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "kebab-case")]
 pub enum RetryAction {
     DoNotRetry,
     RebaseRequired,
@@ -538,7 +540,8 @@ fn failure_counts_toward_circuit(failure: ProposalFailureClass) -> bool {
 }
 
 #[repr(u8)]
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "kebab-case")]
 pub enum ProposalRole {
     Ordering,
     Heuristic,

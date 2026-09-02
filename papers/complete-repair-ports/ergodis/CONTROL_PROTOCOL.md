@@ -177,6 +177,26 @@ identity for that integration. It binds a bounded session ID, nonzero request
 ID, and canonical payload BLAKE3 under a versioned domain separator; identical
 retries therefore share an identity while revisions necessarily do not.
 
+`ProposalTicketLedger` is the provider-neutral asynchronous state machine above
+that identity. Its bounded, serializable snapshot records queued, running,
+retry-wait, ready, terminal-failure, cancelled, and expired tickets. Submission
+is create-or-return-existing; reuse of one key for a different normalized spec
+fails closed. Every provider completion/failure carries the claimed attempt
+number, so a late response from an earlier attempt cannot complete a later one;
+identical duplicate callbacks return the already-recorded outcome. Restore
+requires the configured ticket cap to match the persisted cap, validates every
+transition timestamp and retry action, rejects duplicates, and immediately
+expires overdue work. Admission and result retrieval check their distinct
+absolute deadlines, allowing a diagnostic result to remain fetchable after its
+admission window closes but never after retention expiry. A restored running
+ticket remains running until the controller reaps or reconciles its orphan and
+records that exact attempt's outcome.
+
+This ledger is not yet exposed as a socket operation and its snapshot is not
+yet attached to the campaign's create-only files. That next integration must
+atomically publish state before provider dispatch and persist every transition
+before acknowledging it; provider SDK code remains outside this generic layer.
+
 `ergodisctl evolve-start` accepts an optional direct seed JSONL file and up to
 eight repeated `--resume-evidence` paths.  A replay archive must match the
 problem, ordered feature schema, and exact feature-generator provenance.  When

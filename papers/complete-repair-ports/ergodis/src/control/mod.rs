@@ -20,6 +20,7 @@ use std::time::Duration;
 mod client;
 mod evolution;
 mod proposal_policy;
+mod proposal_ticket;
 mod synthesis;
 mod text;
 mod vm;
@@ -37,6 +38,12 @@ pub use proposal_policy::{
     ProposalIdempotencyKey, ProposalRole, ProposalSelection, ProposalSelectionContext, RateLimit,
     RetryAction, RetryPolicy, TokenBucket, TokenBucketConfig, TokenBucketError,
     TokenBucketSnapshot,
+};
+pub use proposal_ticket::{
+    ProposalFailureReport, ProposalReadyResult, ProposalTicketClaim, ProposalTicketError,
+    ProposalTicketLedger, ProposalTicketLedgerSnapshot, ProposalTicketSnapshot, ProposalTicketSpec,
+    ProposalTicketStatus, ProposalTicketSubmission, MAX_PROPOSAL_TICKETS,
+    PROPOSAL_TICKET_LEDGER_SCHEMA,
 };
 use synthesis::learn_decision_tree;
 pub use text::{

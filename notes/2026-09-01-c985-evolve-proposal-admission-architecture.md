@@ -388,6 +388,25 @@ idempotent ticket-ledger lookup, provider adapters, and asynchronous result deli
 remain the integration boundary. Search workers and existing socket operations
 are unchanged.
 
+The next generic slice now implements the in-memory/persistable ticket state
+machine without adding wire operations. Its fixed ticket identity makes submit
+create-or-return-existing and rejects a conflicting normalized spec. Explicit
+attempt numbers prevent stale asynchronous callbacks from completing a later
+retry, while duplicate completion/failure callbacks return the recorded
+outcome. Retry-wait stores the typed action as well as the failure, so replay
+does not reroll jitter or reinterpret `Retry-After`. Snapshot restoration is
+strict: the configured cap must equal the persisted cap, IDs are unique,
+timestamps and retry transitions are revalidated, and overdue queue/execution/
+retention states expire at restore time. Admission expiry and result-retention
+expiry remain separate, preserving late diagnostic retrieval without permitting
+late theorem admission.
+
+The remaining daemon boundary is deliberately narrower: attach the snapshot to
+a bounded create-only/atomic campaign artifact, persist-before-dispatch and
+persist-before-acknowledgement, reconcile restored running attempts after
+orphan reaping, and then expose bounded submit/status/cancel/result operations.
+No provider-specific payload belongs in the generic ticket record.
+
 ## Runtime and performance boundary
 
 Proposal generation, normalization, serialization, counterexample reduction,
