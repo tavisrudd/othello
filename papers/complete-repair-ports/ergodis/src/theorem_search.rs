@@ -141,6 +141,138 @@ pub enum EvolutionRunError<E> {
     Sink(E),
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct DecisionListConfig {
+    pub maximum_rules: usize,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct DecisionListRule<C> {
+    pub candidate: C,
+    pub newly_covered: u32,
+    pub complexity: u32,
+}
+
+/// A cascade of independently sound sufficient conditions.
+///
+/// Rules may overlap syntactically, but `newly_covered` counts only examples
+/// not matched by an earlier rule. The effective branches of the cascade are
+/// therefore disjoint.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct SoundDecisionList<C> {
+    pub rules: Box<[DecisionListRule<C>]>,
+    pub examples: u32,
+    pub conclusion_true: u32,
+    pub covered_true: u32,
+}
+
+impl<C> SoundDecisionList<C> {
+    pub fn complete(&self) -> bool {
+        self.covered_true == self.conclusion_true
+    }
+}
+
+#[derive(Clone, Copy, Debug, Error, PartialEq, Eq)]
+pub enum DecisionListError {
+    #[error("decision-list rule bound must be positive")]
+    EmptyBound,
+    #[error("decision-list example census exceeds u32")]
+    TooManyExamples,
+}
+
+/// Greedily assemble a deterministic cascade from independently sound rules.
+///
+/// Candidate soundness is replayed against every example instead of trusted
+/// from prior evolution metadata. Each round chooses the rule covering the
+/// most previously uncovered true examples, then the lowest declared
+/// complexity and structural candidate order. Rules with any false positive
+/// are excluded, so every prefix and the final disjunction are sound.
+pub fn assemble_sound_decision_list<C, E, Covers, Conclusion, Complexity>(
+    candidates: impl IntoIterator<Item = C>,
+    examples: &[E],
+    config: DecisionListConfig,
+    covers: Covers,
+    conclusion: Conclusion,
+    complexity: Complexity,
+) -> Result<SoundDecisionList<C>, DecisionListError>
+where
+    C: Clone + Ord,
+    Covers: Fn(&C, &E) -> bool,
+    Conclusion: Fn(&E) -> bool,
+    Complexity: Fn(&C) -> u32,
+{
+    if config.maximum_rules == 0 {
+        return Err(DecisionListError::EmptyBound);
+    }
+    let example_count =
+        u32::try_from(examples.len()).map_err(|_| DecisionListError::TooManyExamples)?;
+    let labels = examples.iter().map(&conclusion).collect::<Vec<_>>();
+    let conclusion_true = u32::try_from(labels.iter().filter(|&&label| label).count())
+        .map_err(|_| DecisionListError::TooManyExamples)?;
+    let mut candidates = candidates.into_iter().collect::<Vec<_>>();
+    candidates.sort_unstable();
+    candidates.dedup();
+    let mut covered = vec![false; examples.len()];
+    let mut rules = Vec::with_capacity(config.maximum_rules.min(candidates.len()));
+
+    while rules.len() < config.maximum_rules {
+        let mut best: Option<(usize, u32, u32)> = None;
+        for (index, candidate) in candidates.iter().enumerate() {
+            let mut newly_covered = 0_u32;
+            let mut sound = true;
+            for ((example, &label), &already_covered) in examples.iter().zip(&labels).zip(&covered)
+            {
+                if covers(candidate, example) {
+                    if !label {
+                        sound = false;
+                        break;
+                    }
+                    newly_covered += u32::from(!already_covered);
+                }
+            }
+            if !sound || newly_covered == 0 {
+                continue;
+            }
+            let candidate_complexity = complexity(candidate);
+            if best
+                .as_ref()
+                .is_none_or(|&(best_index, best_gain, best_complexity)| {
+                    newly_covered
+                        .cmp(&best_gain)
+                        .reverse()
+                        .then_with(|| candidate_complexity.cmp(&best_complexity))
+                        .then_with(|| candidate.cmp(&candidates[best_index]))
+                        .is_lt()
+                })
+            {
+                best = Some((index, newly_covered, candidate_complexity));
+            }
+        }
+        let Some((index, newly_covered, candidate_complexity)) = best else {
+            break;
+        };
+        let candidate = candidates.remove(index);
+        for ((example, &label), covered) in examples.iter().zip(&labels).zip(&mut covered) {
+            *covered |= label && covers(&candidate, example);
+        }
+        rules.push(DecisionListRule {
+            candidate,
+            newly_covered,
+            complexity: candidate_complexity,
+        });
+        if rules.iter().map(|rule| rule.newly_covered).sum::<u32>() == conclusion_true {
+            break;
+        }
+    }
+    let covered_true = rules.iter().map(|rule| rule.newly_covered).sum();
+    Ok(SoundDecisionList {
+        rules: rules.into_boxed_slice(),
+        examples: example_count,
+        conclusion_true,
+        covered_true,
+    })
+}
+
 /// Evolve arbitrary ranked candidates while streaming every completed trial.
 ///
 /// `compare_scores` returns the preferred score first, as in a sorting
@@ -435,5 +567,63 @@ mod tests {
         assert!(empty.preferred_cmp(quarter).is_lt());
         assert_eq!(CensusReduction::new(16, 8).unwrap().reduction_bits(), 1.0);
         assert!(empty.reduction_bits().is_infinite());
+    }
+
+    #[test]
+    fn assembles_disjoint_effective_branches_from_sound_rules() {
+        let examples = [(0_u8, false), (1, true), (2, true), (3, true), (4, false)];
+        let rules = [(0_u8, 4_u8), (1, 2), (1, 3), (2, 4), (3, 4)];
+        let list = assemble_sound_decision_list(
+            rules,
+            &examples,
+            DecisionListConfig { maximum_rules: 3 },
+            |&(start, end), &(value, _)| start <= value && value < end,
+            |&(_, conclusion)| conclusion,
+            |&(start, end)| u32::from(end - start),
+        )
+        .unwrap();
+        assert!(list.complete());
+        assert_eq!(list.conclusion_true, 3);
+        assert_eq!(list.covered_true, 3);
+        assert_eq!(list.rules.len(), 2);
+        assert_eq!(list.rules[0].candidate, (1, 3));
+        assert_eq!(list.rules[0].newly_covered, 2);
+        assert_eq!(list.rules[1].newly_covered, 1);
+        assert_eq!(
+            list.rules
+                .iter()
+                .map(|rule| rule.newly_covered)
+                .sum::<u32>(),
+            3
+        );
+    }
+
+    #[test]
+    fn decision_list_respects_rule_bound_and_rejects_unsound_coverage() {
+        let examples = [(0_u8, false), (1, true), (2, true), (3, true)];
+        let list = assemble_sound_decision_list(
+            [(0_u8, 4_u8), (1, 2), (2, 3), (3, 4)],
+            &examples,
+            DecisionListConfig { maximum_rules: 2 },
+            |&(start, end), &(value, _)| start <= value && value < end,
+            |&(_, conclusion)| conclusion,
+            |_| 1,
+        )
+        .unwrap();
+        assert_eq!(list.rules.len(), 2);
+        assert_eq!(list.covered_true, 2);
+        assert!(!list.complete());
+        assert!(list.rules.iter().all(|rule| rule.candidate.0 != 0));
+        assert_eq!(
+            assemble_sound_decision_list(
+                [0_u8],
+                &examples,
+                DecisionListConfig { maximum_rules: 0 },
+                |_, _| false,
+                |&(_, conclusion)| conclusion,
+                |_| 0,
+            ),
+            Err(DecisionListError::EmptyBound)
+        );
     }
 }
