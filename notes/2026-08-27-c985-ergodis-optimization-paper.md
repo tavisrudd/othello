@@ -2720,6 +2720,12 @@ files are disposable and may be deleted at any time.
     the command backend. Both directions are fixed-buffer/file streamed; no
     payload enters JSON or a whole-memory byte string. The next slice is a
     typed request-schema registry and optional hosted SDK package.
+    Portfolio routing now separates theorem quality from provider health:
+    active `Retry-After` deferrals, concurrency/circuit gates, and calls whose
+    estimated wall time crosses the absolute deadline are ineligible, while a
+    bounded operational-success estimate discounts otherwise eligible calls.
+    Thus transient throttling can route work elsewhere without corrupting the
+    learned admission value of that proposer family.
 
     The first new proposer family is accepted. A coloured-Tanner isomorphism
     proposal between the official LP1768 X/Z instances is independently

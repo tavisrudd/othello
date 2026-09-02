@@ -572,6 +572,8 @@ pub struct ProposalCandidate {
     pub required_context: u64,
     pub supported_roles: u8,
     pub admission_probability_ppm: u32,
+    /// Provider/runtime success, kept separate from mathematical admission quality.
+    pub operational_success_probability_ppm: u32,
     pub expected_exact_work_gain: u64,
     pub cross_instance_reuse_ppm: u32,
     pub estimated_cost_units: u64,
@@ -580,6 +582,8 @@ pub struct ProposalCandidate {
     pub available_tokens: u64,
     pub in_flight: u16,
     pub concurrency_limit: u16,
+    pub retry_not_before_ms: u64,
+    pub estimated_wall_ms: u64,
     pub circuit_open_until_ms: u64,
 }
 
@@ -620,9 +624,11 @@ pub fn select_proposer(
     let mut best: Option<ProposalSelection> = None;
     for &candidate in candidates {
         if candidate.admission_probability_ppm > 1_000_000
+            || candidate.operational_success_probability_ppm > 1_000_000
             || candidate.cross_instance_reuse_ppm > 1_000_000
             || candidate.supported_roles & !0x0f != 0
             || candidate.estimated_cost_units == 0
+            || candidate.estimated_wall_ms == 0
             || candidate.concurrency_limit == 0
         {
             return Err(ControlError::Invalid(
@@ -635,16 +641,28 @@ pub fn select_proposer(
             || candidate.estimated_return_bytes > context.remaining_return_bytes
             || candidate.available_tokens < candidate.estimated_cost_units
             || candidate.in_flight >= candidate.concurrency_limit
+            || candidate.retry_not_before_ms > context.now_ms
             || candidate.circuit_open_until_ms > context.now_ms
         {
+            continue;
+        }
+        let completion_ms = context
+            .now_ms
+            .checked_add(candidate.estimated_wall_ms)
+            .ok_or_else(|| ControlError::Invalid("proposer completion estimate overflow".into()))?;
+        if completion_ms > context.deadline_ms {
             continue;
         }
         let expected = u128::from(candidate.admission_probability_ppm)
             .checked_mul(u128::from(candidate.expected_exact_work_gain))
             .and_then(|value| value.checked_mul(u128::from(candidate.cross_instance_reuse_ppm)))
+            .and_then(|value| {
+                value.checked_mul(u128::from(candidate.operational_success_probability_ppm))
+            })
             .ok_or_else(|| ControlError::Invalid("proposer value estimate overflow".into()))?;
         let exploration = u128::from(candidate.exploration_bonus)
             .checked_mul(PARTS_PER_MILLION * PARTS_PER_MILLION)
+            .and_then(|value| value.checked_mul(PARTS_PER_MILLION))
             .ok_or_else(|| {
                 ControlError::Invalid("proposer exploration estimate overflow".into())
             })?;
@@ -897,6 +915,7 @@ mod tests {
             required_context: 1,
             supported_roles: ProposalRole::ExactTransport.mask(),
             admission_probability_ppm: 500_000,
+            operational_success_probability_ppm: 1_000_000,
             expected_exact_work_gain: gain,
             cross_instance_reuse_ppm: 1_000_000,
             estimated_cost_units: cost,
@@ -905,6 +924,8 @@ mod tests {
             available_tokens: 1_000,
             in_flight: 0,
             concurrency_limit: 1,
+            retry_not_before_ms: 0,
+            estimated_wall_ms: 10,
             circuit_open_until_ms: 0,
         }
     }
@@ -932,6 +953,24 @@ mod tests {
         let mut blocked = cheap;
         blocked.circuit_open_until_ms = 101;
         assert_eq!(select_proposer(&[blocked], context).unwrap(), None);
+
+        let mut backed_off = cheap;
+        backed_off.retry_not_before_ms = 101;
+        assert_eq!(select_proposer(&[backed_off], context).unwrap(), None);
+
+        let mut too_slow = cheap;
+        too_slow.estimated_wall_ms = 101;
+        assert_eq!(select_proposer(&[too_slow], context).unwrap(), None);
+
+        let mut unreliable = cheap;
+        unreliable.operational_success_probability_ppm = 10_000;
+        assert_eq!(
+            select_proposer(&[unreliable, expensive], context)
+                .unwrap()
+                .unwrap()
+                .id,
+            1
+        );
 
         let mut exploratory = expensive;
         exploratory.exploration_bonus = 1_000;

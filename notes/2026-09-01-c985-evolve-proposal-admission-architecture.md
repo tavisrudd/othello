@@ -245,6 +245,7 @@ value estimate:
 
 ```text
 P(admission | problem, history, current obstruction)
+  * P(operational success before deadline | provider health)
   * expected exact work removed or reach gained
   * expected cross-instance reuse
   / (proposal + probe + verification + integration cost)
@@ -260,6 +261,16 @@ shape. A cost-aware contextual bandit or successive-halving portfolio may
 learn the estimates, while a fixed exploration reserve prevents permanent
 lock-in. User/agent overrides are explicit ledgered decisions, not hidden
 changes to the policy.
+
+Structural quality and operational health are separate estimates. A provider
+throttle, transient transport failure, or temporary latency spike must not
+teach the portfolio that the proposer generates bad mathematics. Immediate
+selection excludes a provider still under `Retry-After`, a saturated provider,
+and a call whose estimated completion lies beyond the absolute deadline. Among
+eligible choices, recent operational success discounts expected value while
+the admission estimate continues to describe proposal quality. This lets the
+controller fail over during backoff and recover the original ranking once the
+provider is healthy.
 
 Typical routing is: automorphism/decomposition for excessive roots;
 aggregate-bound or contextual-quotient proposals for excessive states;
@@ -375,6 +386,9 @@ deadlines; a single-probe half-open circuit breaker; and a deterministic
 portfolio selector. The selector gates context, authority role, tokens,
 concurrency, bytes, cost, circuit state, and deadline before comparing checked
 expected admitted work/reuse per cost plus a bounded exploration bonus.
+Operational success is priced separately from mathematical admission quality;
+active retry deferrals and estimates that cannot complete before the deadline
+are ineligible.
 Duplicate proposer IDs, invalid probability scales, and score/comparison
 overflow fail closed. Stable logical-request idempotency keys bind session,
 request number, and canonical payload digest. Selection is advisory. The
