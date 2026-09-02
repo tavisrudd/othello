@@ -2657,9 +2657,15 @@ files are disposable and may be deleted at any time.
     derives idempotency keys, validates relative deadline order and hard caps,
     generates retry jitter, and exposes only compact ticket/usage records. An
     end-to-end socket control covers open through result fetch. Search workers
-    and the safe-point protocol are unchanged. The next slice is CLI/Python
-    projection plus campaign/provider token charging and actual compact-result
-    artifact delivery; no provider SDK or autonomous adapter is claimed yet.
+    and the safe-point protocol are unchanged. New logical submissions now also
+    debit campaign/provider/session token buckets atomically; duplicates return
+    the original ticket without another debit, while reuse of the same identity
+    with a changed authority/resource/timeout envelope fails closed. A hostile
+    capacity test exhausts the session rate while proving the duplicate path
+    remains live. These rate buckets are process-local until campaign resume is
+    implemented. The next slice is CLI/Python projection plus durable rate
+    snapshots and actual compact-result artifact delivery; no provider SDK or
+    autonomous adapter is claimed yet.
 
     The first new proposer family is accepted. A coloured-Tanner isomorphism
     proposal between the official LP1768 X/Z instances is independently

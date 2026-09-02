@@ -1,10 +1,11 @@
 //! Typed campaign-daemon operations for bounded external proposers.
 
 use super::{
-    random_hex, ControlError, ProposalDeadlines, ProposalFailureClass, ProposalFailureReport,
-    ProposalIdempotencyKey, ProposalRole, ProposalSession, ProposalSessionLimits,
-    ProposalSessionUsage, ProposalSubmissionStore, ProposalTicketClaim, ProposalTicketSnapshot,
-    ProposalTicketSpec, ProposalTicketSubmission, RetryAction, RetryPolicy,
+    charge_token_buckets, random_hex, ControlError, ProposalDeadlines, ProposalFailureClass,
+    ProposalFailureReport, ProposalIdempotencyKey, ProposalRole, ProposalSession,
+    ProposalSessionLimits, ProposalSessionUsage, ProposalSubmissionStore, ProposalTicketClaim,
+    ProposalTicketSnapshot, ProposalTicketSpec, ProposalTicketSubmission, RetryAction, RetryPolicy,
+    TokenBucket, TokenBucketConfig,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
@@ -21,6 +22,23 @@ pub const MAX_EXTERNAL_SESSION_OUTSTANDING: u16 = 8;
 pub const MAX_EXTERNAL_SESSION_REVISIONS: u16 = 16;
 pub const MAX_EXTERNAL_SESSION_WORK_UNITS: u64 = 1_000_000_000;
 pub const MAX_EXTERNAL_SESSION_RETURN_BYTES: u64 = 1024 * 1024;
+pub const MAX_EXTERNAL_PROVIDERS: usize = 256;
+
+const CAMPAIGN_RATE: TokenBucketConfig = TokenBucketConfig {
+    capacity: 256,
+    refill_units: 256,
+    refill_period_ms: 60_000,
+};
+const PROVIDER_RATE: TokenBucketConfig = TokenBucketConfig {
+    capacity: 64,
+    refill_units: 64,
+    refill_period_ms: 60_000,
+};
+const SESSION_RATE: TokenBucketConfig = TokenBucketConfig {
+    capacity: 16,
+    refill_units: 16,
+    refill_period_ms: 60_000,
+};
 
 #[derive(Clone, Copy, Debug, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -176,7 +194,14 @@ pub struct ProposalDaemon {
     source_fingerprint: [u8; 32],
     clock: ControllerClock,
     retry_policy: RetryPolicy,
-    sessions: BTreeMap<String, ProposalSubmissionStore>,
+    campaign_rate: TokenBucket,
+    providers: BTreeMap<u16, TokenBucket>,
+    sessions: BTreeMap<String, DaemonSession>,
+}
+
+struct DaemonSession {
+    store: ProposalSubmissionStore,
+    rate: TokenBucket,
 }
 
 impl ProposalDaemon {
@@ -193,17 +218,21 @@ impl ProposalDaemon {
         if let Some(parent) = root.parent().filter(|path| !path.as_os_str().is_empty()) {
             File::open(parent)?.sync_all()?;
         }
+        let mut clock = ControllerClock::new()?;
+        let now_ms = clock.now_ms()?;
         Ok(Self {
             root: root.to_path_buf(),
             run_id: run_id.into(),
             nonce: nonce.into(),
             source_fingerprint,
-            clock: ControllerClock::new()?,
+            clock,
             retry_policy: RetryPolicy {
                 maximum_retries: 4,
                 base_delay_ms: 250,
                 maximum_delay_ms: 30_000,
             },
+            campaign_rate: TokenBucket::full(CAMPAIGN_RATE, now_ms)?,
+            providers: BTreeMap::new(),
             sessions: BTreeMap::new(),
         })
     }
@@ -248,7 +277,11 @@ impl ProposalDaemon {
         )
         .map_err(invalid)?;
         let usage = store.session().map_err(invalid)?.usage();
-        if self.sessions.insert(session_id.clone(), store).is_some() {
+        let session = DaemonSession {
+            store,
+            rate: TokenBucket::full(SESSION_RATE, now_ms)?,
+        };
+        if self.sessions.insert(session_id.clone(), session).is_some() {
             return Err(ControlError::Invalid(
                 "external proposer session identity collision".into(),
             ));
@@ -278,6 +311,34 @@ impl ProposalDaemon {
             "canonical payload digest",
         )?;
         let key = ProposalIdempotencyKey::new(&request.session_id, request.request_id, payload)?;
+        if self
+            .sessions
+            .get(&request.session_id)
+            .ok_or_else(|| ControlError::Invalid("unknown external proposer session".into()))?
+            .store
+            .tickets()
+            .get(key)
+            .is_some()
+        {
+            let session = self.session_mut(&request.session_id)?;
+            session.store.expire_due(now_ms).map_err(invalid)?;
+            let ticket = session
+                .store
+                .tickets()
+                .get(key)
+                .ok_or_else(|| ControlError::Invalid("submitted ticket disappeared".into()))?;
+            if !same_logical_submission(ticket, &request) {
+                return Err(ControlError::Invalid(
+                    "proposal idempotency identity names a different resource envelope".into(),
+                ));
+            }
+            return Ok(ProposalSubmitted {
+                ticket_key: key.to_hex(),
+                disposition: ProposalTicketSubmission::Existing,
+                ticket,
+                usage: session.store.session().map_err(invalid)?.usage(),
+            });
+        }
         let deadlines = ProposalDeadlines::new(
             add_deadline(now_ms, request.queue_timeout_ms)?,
             add_deadline(now_ms, request.execution_timeout_ms)?,
@@ -292,13 +353,24 @@ impl ProposalDaemon {
             cost_units: request.cost_units,
             max_return_bytes: request.maximum_return_bytes,
         };
-        let store = self.session_mut(&request.session_id)?;
-        let disposition = store.submit(spec, now_ms).map_err(invalid)?;
-        let ticket = store
+        let mut preview = self
+            .sessions
+            .get(&request.session_id)
+            .ok_or_else(|| ControlError::Invalid("unknown external proposer session".into()))?
+            .store
+            .session()
+            .map_err(invalid)?
+            .clone();
+        preview.reserve(spec, now_ms).map_err(invalid)?;
+        self.charge_submission_rates(&request.session_id, request.proposer_id, now_ms)?;
+        let session = self.session_mut(&request.session_id)?;
+        let disposition = session.store.submit(spec, now_ms).map_err(invalid)?;
+        let ticket = session
+            .store
             .tickets()
             .get(key)
             .ok_or_else(|| ControlError::Invalid("submitted ticket disappeared".into()))?;
-        let usage = store.session().map_err(invalid)?.usage();
+        let usage = session.store.session().map_err(invalid)?.usage();
         Ok(ProposalSubmitted {
             ticket_key: key.to_hex(),
             disposition,
@@ -313,9 +385,9 @@ impl ProposalDaemon {
     ) -> Result<ProposalTicketView, ControlError> {
         let now_ms = self.clock.now_ms()?;
         let key = ProposalIdempotencyKey::from_hex(&request.ticket_key)?;
-        let store = self.session_mut(&request.session_id)?;
-        store.expire_due(now_ms).map_err(invalid)?;
-        view(key, store)
+        let session = self.session_mut(&request.session_id)?;
+        session.store.expire_due(now_ms).map_err(invalid)?;
+        view(key, &session.store)
     }
 
     pub fn claim(
@@ -324,9 +396,9 @@ impl ProposalDaemon {
     ) -> Result<ProposalClaimed, ControlError> {
         let now_ms = self.clock.now_ms()?;
         let key = ProposalIdempotencyKey::from_hex(&request.ticket_key)?;
-        let store = self.session_mut(&request.session_id)?;
-        let claim = store.claim(key, now_ms).map_err(invalid)?;
-        let view = view(key, store)?;
+        let session = self.session_mut(&request.session_id)?;
+        let claim = session.store.claim(key, now_ms).map_err(invalid)?;
+        let view = view(key, &session.store)?;
         Ok(ProposalClaimed {
             ticket_key: view.ticket_key,
             claim,
@@ -355,8 +427,9 @@ impl ProposalDaemon {
             .transpose()?;
         let jitter_word = retry_jitter(key, request.attempt, request.failure, now_ms);
         let retry_policy = self.retry_policy;
-        let store = self.session_mut(&request.session_id)?;
-        let action = store
+        let session = self.session_mut(&request.session_id)?;
+        let action = session
+            .store
             .record_failure(
                 key,
                 ProposalFailureReport {
@@ -370,7 +443,7 @@ impl ProposalDaemon {
                 now_ms,
             )
             .map_err(invalid)?;
-        let view = view(key, store)?;
+        let view = view(key, &session.store)?;
         Ok(ProposalFailureAccepted {
             ticket_key: view.ticket_key,
             action,
@@ -386,11 +459,12 @@ impl ProposalDaemon {
         let now_ms = self.clock.now_ms()?;
         let key = ProposalIdempotencyKey::from_hex(&request.ticket_key)?;
         let digest = parse_digest(&request.result_blake3, "proposal result digest")?;
-        let store = self.session_mut(&request.session_id)?;
-        store
+        let session = self.session_mut(&request.session_id)?;
+        session
+            .store
             .complete(key, request.attempt, digest, request.result_bytes, now_ms)
             .map_err(invalid)?;
-        view(key, store)
+        view(key, &session.store)
     }
 
     pub fn cancel(
@@ -399,9 +473,9 @@ impl ProposalDaemon {
     ) -> Result<ProposalTicketView, ControlError> {
         let now_ms = self.clock.now_ms()?;
         let key = ProposalIdempotencyKey::from_hex(&request.ticket_key)?;
-        let store = self.session_mut(&request.session_id)?;
-        store.cancel(key, now_ms).map_err(invalid)?;
-        view(key, store)
+        let session = self.session_mut(&request.session_id)?;
+        session.store.cancel(key, now_ms).map_err(invalid)?;
+        view(key, &session.store)
     }
 
     pub fn result(
@@ -410,9 +484,9 @@ impl ProposalDaemon {
     ) -> Result<ProposalTicketView, ControlError> {
         let now_ms = self.clock.now_ms()?;
         let key = ProposalIdempotencyKey::from_hex(&request.ticket_key)?;
-        let store = self.session_mut(&request.session_id)?;
-        store.result(key, now_ms).map_err(invalid)?;
-        view(key, store)
+        let session = self.session_mut(&request.session_id)?;
+        session.store.result(key, now_ms).map_err(invalid)?;
+        view(key, &session.store)
     }
 
     pub fn reserve_revision(
@@ -424,17 +498,56 @@ impl ProposalDaemon {
             &request.canonical_payload_blake3,
             "proposal revision digest",
         )?;
-        let store = self.session_mut(&request.session_id)?;
-        store
+        let session = self.session_mut(&request.session_id)?;
+        session
+            .store
             .reserve_revision(digest, request.role, now_ms)
             .map_err(invalid)?;
-        Ok(store.session().map_err(invalid)?.usage())
+        Ok(session.store.session().map_err(invalid)?.usage())
     }
 
-    fn session_mut(
+    fn charge_submission_rates(
         &mut self,
         session_id: &str,
-    ) -> Result<&mut ProposalSubmissionStore, ControlError> {
+        provider_id: u16,
+        now_ms: u64,
+    ) -> Result<(), ControlError> {
+        if !self.providers.contains_key(&provider_id) {
+            if self.providers.len() == MAX_EXTERNAL_PROVIDERS {
+                return Err(ControlError::Invalid(
+                    "external proposer provider capacity is exhausted".into(),
+                ));
+            }
+            self.providers
+                .insert(provider_id, TokenBucket::full(PROVIDER_RATE, now_ms)?);
+        }
+        let mut buckets = [
+            self.campaign_rate.clone(),
+            self.providers
+                .get(&provider_id)
+                .ok_or_else(|| ControlError::Invalid("provider rate state disappeared".into()))?
+                .clone(),
+            self.sessions
+                .get(session_id)
+                .ok_or_else(|| ControlError::Invalid("unknown external proposer session".into()))?
+                .rate
+                .clone(),
+        ];
+        charge_token_buckets(&mut buckets, &[1, 1, 1], now_ms).map_err(invalid)?;
+        self.campaign_rate = buckets[0].clone();
+        *self
+            .providers
+            .get_mut(&provider_id)
+            .ok_or_else(|| ControlError::Invalid("provider rate state disappeared".into()))? =
+            buckets[1].clone();
+        self.sessions
+            .get_mut(session_id)
+            .ok_or_else(|| ControlError::Invalid("external proposer session disappeared".into()))?
+            .rate = buckets[2].clone();
+        Ok(())
+    }
+
+    fn session_mut(&mut self, session_id: &str) -> Result<&mut DaemonSession, ControlError> {
         self.sessions
             .get_mut(session_id)
             .ok_or_else(|| ControlError::Invalid("unknown external proposer session".into()))
@@ -454,6 +567,40 @@ fn view(
         ticket,
         usage: store.session().map_err(invalid)?.usage(),
     })
+}
+
+fn same_logical_submission(
+    ticket: ProposalTicketSnapshot,
+    request: &ProposalSubmitRequest,
+) -> bool {
+    ticket.spec.proposer_id == request.proposer_id
+        && ticket.spec.role == request.role
+        && ticket.spec.cost_units == request.cost_units
+        && ticket.spec.max_return_bytes == request.maximum_return_bytes
+        && ticket
+            .spec
+            .deadlines
+            .queue_by_ms
+            .checked_sub(ticket.created_ms)
+            == Some(request.queue_timeout_ms)
+        && ticket
+            .spec
+            .deadlines
+            .execute_by_ms
+            .checked_sub(ticket.created_ms)
+            == Some(request.execution_timeout_ms)
+        && ticket
+            .spec
+            .deadlines
+            .admit_by_ms
+            .checked_sub(ticket.created_ms)
+            == Some(request.admission_timeout_ms)
+        && ticket
+            .spec
+            .deadlines
+            .retain_until_ms
+            .checked_sub(ticket.created_ms)
+            == Some(request.retention_timeout_ms)
 }
 
 fn validate_offer(request: ProposalSessionOpenRequest) -> Result<(), ControlError> {
@@ -635,11 +782,68 @@ mod tests {
                 .sessions
                 .get(&opened.session_id)
                 .unwrap()
+                .store
                 .session()
                 .unwrap()
                 .usage()
                 .queries,
             0
         );
+    }
+
+    #[test]
+    fn hierarchical_rate_charge_is_atomic_and_duplicates_are_free() {
+        let temporary = tempfile::tempdir().unwrap();
+        let mut daemon = ProposalDaemon::create(
+            &temporary.path().join("proposals"),
+            "run",
+            "nonce",
+            blake3::hash(b"source").to_hex().as_ref(),
+        )
+        .unwrap();
+        let mut generous = offer();
+        generous.maximum_queries = 20;
+        generous.maximum_work_units = 200;
+        generous.maximum_return_bytes = 2_000;
+        let opened = daemon.open_session(generous).unwrap();
+        let mut first = None;
+        for request_id in 1..=16 {
+            let mut request = submit(&opened.session_id);
+            request.request_id = request_id;
+            request.canonical_payload_blake3 =
+                blake3::hash(&request_id.to_le_bytes()).to_hex().to_string();
+            let submitted = daemon.submit(request).unwrap();
+            first.get_or_insert(submitted.clone());
+            daemon
+                .cancel(ProposalTicketRequest {
+                    session_id: opened.session_id.clone(),
+                    ticket_key: submitted.ticket_key,
+                })
+                .unwrap();
+        }
+        let mut limited = submit(&opened.session_id);
+        limited.request_id = 17;
+        limited.canonical_payload_blake3 = blake3::hash(b"seventeenth").to_hex().to_string();
+        assert!(matches!(
+            daemon.submit(limited),
+            Err(ControlError::Invalid(message)) if message.contains("rate limited")
+        ));
+
+        let first = first.unwrap();
+        let mut duplicate = submit(&opened.session_id);
+        duplicate.canonical_payload_blake3 =
+            blake3::hash(&1_u64.to_le_bytes()).to_hex().to_string();
+        assert_eq!(
+            daemon.submit(duplicate).unwrap().disposition,
+            ProposalTicketSubmission::Existing
+        );
+        let mut changed = submit(&opened.session_id);
+        changed.canonical_payload_blake3 = blake3::hash(&1_u64.to_le_bytes()).to_hex().to_string();
+        changed.cost_units = 6;
+        assert!(matches!(
+            daemon.submit(changed),
+            Err(ControlError::Invalid(message)) if message.contains("different resource envelope")
+        ));
+        assert_eq!(first.usage.charged_work_units, 5);
     }
 }

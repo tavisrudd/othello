@@ -417,8 +417,13 @@ deadline construction, retry jitter, and the fixed bounded retry policy.
 Session and per-operation hard caps are validated before durable work, and a
 socket-level control replays the complete open/submit/claim/complete/fetch
 lifecycle. This remains protocol mechanics rather than a provider adapter:
-campaign/provider token buckets are not yet charged by the socket transaction,
-the ready result currently carries digest and size rather than a stored compact
+new socket submissions now atomically charge campaign/provider/session request-
+rate buckets, and exact duplicates bypass both rate and quota debit. Because
+absolute deadlines are server-derived from relative timeouts, duplicate
+recognition reconstructs the original durations from the persisted creation
+time; the same identity with a changed role, provider, work, bytes, or timeout
+envelope fails closed. The buckets are process-local until daemon resume lands.
+The ready result currently carries digest and size rather than a stored compact
 payload, and the Python/CLI typed projection is still pending.
 
 The next generic slice now implements the in-memory/persistable ticket state
