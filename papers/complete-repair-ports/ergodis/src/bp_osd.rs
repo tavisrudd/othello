@@ -339,6 +339,7 @@ struct OsdWorkspace {
     rows: Vec<u64>,
     template: Vec<u64>,
     order: Vec<usize>,
+    posterior_keys: Vec<i64>,
     pivot_columns: Vec<usize>,
     free_columns: Vec<usize>,
     pivot_mask: Vec<bool>,
@@ -361,6 +362,7 @@ impl OsdWorkspace {
             rows: template.clone(),
             template,
             order: (0..graph.bits).collect(),
+            posterior_keys: vec![0; graph.bits],
             pivot_columns: vec![0; graph.checks],
             free_columns: Vec::with_capacity(graph.bits),
             pivot_mask: vec![false; graph.bits],
@@ -385,9 +387,14 @@ impl OsdWorkspace {
             self.rows[check * self.words + graph.bits / 64] |=
                 u64::from(value) << (graph.bits % 64);
         }
+        for (key, &value) in self.posterior_keys.iter_mut().zip(posterior) {
+            let mut bits = value.to_bits() as i64;
+            bits ^= (((bits >> 63) as u64) >> 1) as i64;
+            *key = bits;
+        }
         self.order.sort_unstable_by(|&left, &right| {
-            posterior[left]
-                .total_cmp(&posterior[right])
+            self.posterior_keys[left]
+                .cmp(&self.posterior_keys[right])
                 .then_with(|| left.cmp(&right))
         });
 
