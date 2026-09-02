@@ -2853,8 +2853,16 @@ preimage defect cannot occur.  Every apparent hit is still replayed from the
 root.  The retained `y=6` root misses this exact scoped family after
 1,322,849,319,066 instructions and 336,384,144,140 cycles at 100% counter
 coverage.  Table compilation/search allocates zero times after workspace
-construction.  Other radius-five partitions and the length-522 lift remain
-uncovered.
+construction.  The same full-key representation closes two further
+cross-block radius-five partitions.  `3+1+1` misses; subtracting the retained
+prefix counters from the combined run gives 1.110T instructions and 317.874B
+cycles for that incremental slice.  For `2+2+1`, twelve independent labelled
+scopes run in parallel with worker-owned tables.  They exhaust 6,226,662,848
+probes in 937,687,898,949 instructions and 608,599,797,064 aggregate cycles,
+with 1,172,832 KiB peak RSS, no swap, and no hit.  An allocation-counted
+499,737,280-probe representative scope performs zero allocations.  The full
+radius-five boundary still lacks the same-row partitions `5`, `4+1`, and the
+cross-block `2+1+1+1`; the length-522 lift also remains uncovered.
 The private wrapper now hands that bank directly to optional strided anneal
 tasks without serialization or theorem-specific external glue.  A current
 machine-protected (`choom -n 1000`) repeat plus eighteen 100,000-mutation

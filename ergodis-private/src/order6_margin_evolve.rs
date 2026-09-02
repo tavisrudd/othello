@@ -1080,6 +1080,18 @@ pub enum Order6Q29RepairError {
     WorkspaceCapacity,
 }
 
+#[derive(Clone, Copy, Debug, serde::Serialize, PartialEq, Eq)]
+pub struct Q29DoubleDoubleSingleReport {
+    pub omitted_block: u8,
+    pub single_block: u8,
+    pub left_double_states: u32,
+    pub right_double_states: u32,
+    pub single_states: u32,
+    pub probes: u64,
+    pub exact_hit: bool,
+    pub provenance: &'static str,
+}
+
 #[inline(always)]
 fn pack_q29_move(from: usize, to: usize) -> u32 {
     (from as u32) | ((to as u32) << 5)
@@ -1212,6 +1224,71 @@ fn compile_q29_exact_double_table(
                 break;
             }
             slot = (slot + 1) & (Q29_TRIPLE_DOUBLE_TT_SLOTS - 1);
+        }
+    }
+    Ok(())
+}
+
+fn compile_q29_exact_pair_single_table(
+    root: &[[i8; Q29]; BLOCKS],
+    first_block: usize,
+    second_block: usize,
+    workspace: &mut Order6Q29TripleDoubleWorkspace,
+) -> Result<(), Order6Q29RepairError> {
+    let mut singles = [[Q29LocalDelta {
+        delta: [0; Q29_SHIFTS - 1],
+        moves: 0,
+    }; Q29_BLOCK_MOVES]; 2];
+    let first_count = compile_q29_single_block_sparse(&root[first_block], &mut singles[0]);
+    let second_count = compile_q29_single_block_sparse(&root[second_block], &mut singles[1]);
+    workspace.raw_doubles.clear();
+    workspace.exact_deltas.clear();
+    workspace.slots.fill(0);
+    let root_energy = root
+        .iter()
+        .flatten()
+        .map(|&value| i32::from(value) * i32::from(value))
+        .sum::<i32>();
+    for first in 0..first_count {
+        for second in 0..second_count {
+            let mut candidate = *root;
+            if !apply_q29_packed_moves(&mut candidate[first_block], singles[0][first].moves, 1)
+                || !apply_q29_packed_moves(
+                    &mut candidate[second_block],
+                    singles[1][second].moves,
+                    1,
+                )
+            {
+                continue;
+            }
+            let energy = candidate
+                .iter()
+                .flatten()
+                .map(|&value| i32::from(value) * i32::from(value))
+                .sum::<i32>();
+            let mut exact = [0_i16; 16];
+            exact[0] = (energy - root_energy) as i16;
+            for shift in 0..Q29_SHIFTS - 1 {
+                exact[shift + 1] = singles[0][first].delta[shift] + singles[1][second].delta[shift];
+            }
+            let index = workspace.exact_deltas.len();
+            workspace.exact_deltas.push(exact);
+            workspace.raw_doubles.push(Q29LocalDelta {
+                delta: std::array::from_fn(|shift| exact[shift + 1]),
+                moves: singles[0][first].moves | (singles[1][second].moves << 10),
+            });
+            let mut slot = q29_exact_delta_hash(&exact) & (Q29_TRIPLE_DOUBLE_TT_SLOTS - 1);
+            loop {
+                let stored = workspace.slots[slot];
+                if stored == 0 {
+                    workspace.slots[slot] = index as u32 + 1;
+                    break;
+                }
+                if workspace.exact_deltas[stored as usize - 1] == exact {
+                    break;
+                }
+                slot = (slot + 1) & (Q29_TRIPLE_DOUBLE_TT_SLOTS - 1);
+            }
         }
     }
     Ok(())
@@ -2026,6 +2103,238 @@ pub fn repair_q29_triple_plus_double_exact(
     Ok(None)
 }
 
+/// Exhaust the exact radius-five `3+1+1` slice. The two singles lie in
+/// distinct rows from the canonical minimal triple and from each other.
+pub fn repair_q29_triple_plus_two_singles_exact(
+    values: [[i8; Q29]; BLOCKS],
+    workspace: &mut Order6Q29TripleDoubleWorkspace,
+) -> Result<Option<[[i8; Q29]; BLOCKS]>, Order6Q29RepairError> {
+    const ROW_SUMS: [i32; BLOCKS] = [2, 0, 0, 0];
+    for block in 0..BLOCKS {
+        if values[block]
+            .iter()
+            .any(|&value| !(-18..=18).contains(&value) || value & 1 != 0)
+            || values[block]
+                .iter()
+                .map(|&value| i32::from(value))
+                .sum::<i32>()
+                != ROW_SUMS[block]
+        {
+            return Err(Order6Q29RepairError::InputOutOfDomain);
+        }
+    }
+    let root = Q29PhaseState::from_values(values);
+    if root.score == 0 {
+        return Ok(Some(values));
+    }
+    let residual: [i16; 16] = std::array::from_fn(|index| match index {
+        0 => (2_020 - root.combined_paf[0]) as i16,
+        1..Q29_SHIFTS => (-72 - root.combined_paf[index]) as i16,
+        _ => 0,
+    });
+    let mut sparse_delta = [0_i8; Q29];
+    for triple_block in 0..BLOCKS {
+        let mut others = [0_usize; 3];
+        let mut count = 0;
+        for block in 0..BLOCKS {
+            if block != triple_block {
+                others[count] = block;
+                count += 1;
+            }
+        }
+        for omitted in 0..3 {
+            let pair_blocks = [others[(omitted + 1) % 3], others[(omitted + 2) % 3]];
+            compile_q29_exact_pair_single_table(
+                &root.values,
+                pair_blocks[0],
+                pair_blocks[1],
+                workspace,
+            )?;
+            let mut permitted_first = [false; 4097];
+            for delta in &workspace.exact_deltas {
+                let index = i32::from(residual[1] - delta[1]) + 2_048;
+                if (0..4097).contains(&index) {
+                    permitted_first[index as usize] = true;
+                }
+            }
+            let row = &root.values[triple_block];
+            for donor_index in 0..workspace.patterns.len() {
+                let donors = workspace.patterns[donor_index];
+                if !q29_pattern_fits(row, donors, -1) {
+                    continue;
+                }
+                for recipient_index in 0..workspace.patterns.len() {
+                    let recipients = workspace.patterns[recipient_index];
+                    if !q29_patterns_disjoint(donors, recipients)
+                        || !q29_pattern_fits(row, recipients, 1)
+                    {
+                        continue;
+                    }
+                    sparse_delta.fill(0);
+                    for &position in &donors.positions {
+                        sparse_delta[usize::from(position)] -= 2;
+                    }
+                    for &position in &recipients.positions {
+                        sparse_delta[usize::from(position)] += 2;
+                    }
+                    let first =
+                        q29_triple_paf_delta_at_shift(row, &sparse_delta, donors, recipients, 1);
+                    let first_index = i32::from(first) + 2_048;
+                    if !(0..4097).contains(&first_index) || !permitted_first[first_index as usize] {
+                        continue;
+                    }
+                    let energy_delta = row
+                        .iter()
+                        .zip(&sparse_delta)
+                        .map(|(&value, &delta)| {
+                            2 * i32::from(value) * i32::from(delta)
+                                + i32::from(delta) * i32::from(delta)
+                        })
+                        .sum::<i32>();
+                    let triple_delta = q29_triple_paf_delta(row, &sparse_delta, donors, recipients);
+                    let mut desired = [0_i16; 16];
+                    desired[0] = residual[0] - energy_delta as i16;
+                    for shift in 1..Q29_SHIFTS {
+                        desired[shift] = residual[shift] - triple_delta[shift - 1];
+                    }
+                    let Some(pair_moves) = lookup_q29_exact_double(&desired, workspace) else {
+                        continue;
+                    };
+                    let triple_moves = q29_triple_moves(donors, recipients);
+                    if let Some(hit) = replay_q29_local_candidate(
+                        &values,
+                        &[
+                            chosen(triple_block, 3, triple_moves),
+                            chosen(pair_blocks[0], 1, pair_moves & 0x3ff),
+                            chosen(pair_blocks[1], 1, pair_moves >> 10),
+                        ],
+                    ) {
+                        return Ok(Some(hit));
+                    }
+                }
+            }
+        }
+    }
+    Ok(None)
+}
+
+/// Exhaust one scoped `2+2+1` radius-five partition. Two workspaces retain an
+/// exact full-PAF table and the independently compiled probe-side doubles.
+pub fn repair_q29_double_double_single_scope_exact(
+    values: [[i8; Q29]; BLOCKS],
+    omitted_block: usize,
+    single_block: usize,
+    left_workspace: &mut Order6Q29TripleDoubleWorkspace,
+    right_workspace: &mut Order6Q29TripleDoubleWorkspace,
+) -> Result<(Q29DoubleDoubleSingleReport, Option<[[i8; Q29]; BLOCKS]>), Order6Q29RepairError> {
+    if omitted_block >= BLOCKS || single_block >= BLOCKS || omitted_block == single_block {
+        return Err(Order6Q29RepairError::InputOutOfDomain);
+    }
+    const ROW_SUMS: [i32; BLOCKS] = [2, 0, 0, 0];
+    for block in 0..BLOCKS {
+        if values[block]
+            .iter()
+            .any(|&value| !(-18..=18).contains(&value) || value & 1 != 0)
+            || values[block]
+                .iter()
+                .map(|&value| i32::from(value))
+                .sum::<i32>()
+                != ROW_SUMS[block]
+        {
+            return Err(Order6Q29RepairError::InputOutOfDomain);
+        }
+    }
+    let mut doubles = [usize::MAX; 2];
+    let mut used = 0;
+    for block in 0..BLOCKS {
+        if block != omitted_block && block != single_block {
+            doubles[used] = block;
+            used += 1;
+        }
+    }
+    let root = Q29PhaseState::from_values(values);
+    compile_q29_exact_double_table(&root.values[doubles[0]], left_workspace)?;
+    compile_q29_exact_double_table(&root.values[doubles[1]], right_workspace)?;
+    let mut singles = [Q29LocalDelta {
+        delta: [0; Q29_SHIFTS - 1],
+        moves: 0,
+    }; Q29_BLOCK_MOVES];
+    let single_count = compile_q29_single_block_sparse(&root.values[single_block], &mut singles);
+    let root_energy = root
+        .values
+        .iter()
+        .flatten()
+        .map(|&value| i32::from(value).pow(2))
+        .sum::<i32>();
+    let residual: [i16; 16] = std::array::from_fn(|index| match index {
+        0 => (2_020 - root.combined_paf[0]) as i16,
+        1..Q29_SHIFTS => (-72 - root.combined_paf[index]) as i16,
+        _ => 0,
+    });
+    let mut single_exact = [[0_i16; 16]; Q29_BLOCK_MOVES];
+    for index in 0..single_count {
+        let mut candidate = root.values;
+        apply_q29_packed_moves(&mut candidate[single_block], singles[index].moves, 1);
+        let energy = candidate
+            .iter()
+            .flatten()
+            .map(|&value| i32::from(value).pow(2))
+            .sum::<i32>();
+        single_exact[index][0] = (energy - root_energy) as i16;
+        single_exact[index][1..Q29_SHIFTS].copy_from_slice(&singles[index].delta);
+    }
+    let mut probes = 0_u64;
+    for right in 0..right_workspace.exact_deltas.len() {
+        for single in 0..single_count {
+            probes += 1;
+            let desired = std::array::from_fn(|index| {
+                residual[index]
+                    - right_workspace.exact_deltas[right][index]
+                    - single_exact[single][index]
+            });
+            let Some(left_moves) = lookup_q29_exact_double(&desired, left_workspace) else {
+                continue;
+            };
+            let mut candidate = values;
+            let choices = [
+                chosen(doubles[0], 2, left_moves),
+                chosen(doubles[1], 2, right_workspace.raw_doubles[right].moves),
+                chosen(single_block, 1, singles[single].moves),
+            ];
+            if let Some(hit) = replay_q29_local_candidate(&candidate, &choices) {
+                candidate = hit;
+                return Ok((
+                    Q29DoubleDoubleSingleReport {
+                        omitted_block: omitted_block as u8,
+                        single_block: single_block as u8,
+                        left_double_states: left_workspace.exact_deltas.len() as u32,
+                        right_double_states: right_workspace.exact_deltas.len() as u32,
+                        single_states: single_count as u32,
+                        probes,
+                        exact_hit: true,
+                        provenance:
+                            "ExactComputational; root=ObservedEvolved; full-key direct replay",
+                    },
+                    Some(candidate),
+                ));
+            }
+        }
+    }
+    Ok((
+        Q29DoubleDoubleSingleReport {
+            omitted_block: omitted_block as u8,
+            single_block: single_block as u8,
+            left_double_states: left_workspace.exact_deltas.len() as u32,
+            right_double_states: right_workspace.exact_deltas.len() as u32,
+            single_states: single_count as u32,
+            probes,
+            exact_hit: false,
+            provenance: "ExactComputational; root=ObservedEvolved; scoped miss only",
+        },
+        None,
+    ))
+}
+
 fn lift_q29_values(values: &[[i8; Q29]; BLOCKS], random: &mut u64) -> [[u8; CELLS]; BLOCKS] {
     let mut counts = [[0_u8; CELLS]; BLOCKS];
     for block in 0..BLOCKS {
@@ -2642,5 +2951,33 @@ mod tests {
         });
         assert_eq!(allocations, 0);
         assert!(result.is_none());
+    }
+
+    #[test]
+    fn retained_root_triple_plus_two_singles_is_exact_and_allocation_free() {
+        let half = crate::q29_even_moment_proof::retained_q29_y6_root();
+        let values = half.map(|row| row.map(|value| value * 2));
+        let mut workspace = Order6Q29TripleDoubleWorkspace::new();
+        let (result, allocations) = tracked_allocations(|| {
+            repair_q29_triple_plus_two_singles_exact(values, &mut workspace).unwrap()
+        });
+        assert_eq!(allocations, 0);
+        assert!(result.is_none());
+    }
+
+    #[test]
+    fn retained_root_double_double_single_scope_is_allocation_free() {
+        let half = crate::q29_even_moment_proof::retained_q29_y6_root();
+        let values = half.map(|row| row.map(|value| value * 2));
+        let mut left = Order6Q29TripleDoubleWorkspace::new();
+        let mut right = Order6Q29TripleDoubleWorkspace::new();
+        let ((report, hit), allocations) = tracked_allocations(|| {
+            repair_q29_double_double_single_scope_exact(values, 0, 3, &mut left, &mut right)
+                .unwrap()
+        });
+        assert_eq!(allocations, 0);
+        assert_eq!(report.probes, 499_737_280);
+        assert!(!report.exact_hit);
+        assert!(hit.is_none());
     }
 }

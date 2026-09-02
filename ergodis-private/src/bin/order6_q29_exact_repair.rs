@@ -2,8 +2,8 @@ use std::fs::File;
 
 use ergodis_private::order6_margin_evolve::{
     repair_q29_radius_four_at_most_two_per_block_exact, repair_q29_triple_block_plus_one_exact,
-    repair_q29_triple_plus_double_exact, Order6Q29RadiusFourWorkspace,
-    Order6Q29TripleBlockWorkspace, Order6Q29TripleDoubleWorkspace,
+    repair_q29_triple_plus_double_exact, repair_q29_triple_plus_two_singles_exact,
+    Order6Q29RadiusFourWorkspace, Order6Q29TripleBlockWorkspace, Order6Q29TripleDoubleWorkspace,
 };
 use serde::Deserialize;
 
@@ -36,7 +36,18 @@ fn main() {
     } else {
         None
     };
-    let result = radius_four.or(triple_block_plus_one).or(triple_plus_double);
+    let triple_plus_two_singles =
+        if radius_four.is_none() && triple_block_plus_one.is_none() && triple_plus_double.is_none()
+        {
+            repair_q29_triple_plus_two_singles_exact(input.best_q29, &mut triple_double_workspace)
+                .expect("valid q29 triple-plus-two-singles repair domain")
+        } else {
+            None
+        };
+    let result = radius_four
+        .or(triple_block_plus_one)
+        .or(triple_plus_double)
+        .or(triple_plus_two_singles);
     println!(
         "{}",
         serde_json::to_string_pretty(&serde_json::json!({
@@ -45,7 +56,7 @@ fn main() {
             "radius_four_workspace_bytes": workspace.bytes(),
             "triple_block_workspace_bytes": triple_workspace.bytes(),
             "triple_double_workspace_bytes": triple_double_workspace.bytes(),
-            "provenance": "Exact union of the total-radius-at-most-four neighborhood with at most two transfers per block, every minimal three-transfer same-block state alone or plus one distinct-block transfer, and every minimal 3+2 state across distinct blocks; same-block states use net donor/recipient multisets equivalent to sequential transfers; the 3+2 tablebase key contains energy plus every independent q29 PAF coordinate and resolves collisions by full-key comparison; every hit gets direct whole-block q29 PAF replay; miss has no authority outside this scoped union"
+            "provenance": "Exact union of the total-radius-at-most-four neighborhood with at most two transfers per block, every minimal three-transfer same-block state alone or plus one or two distinct-block singles, and every minimal 3+2 state across distinct blocks; same-block states use net donor/recipient multisets equivalent to sequential transfers; tablebase keys contain energy plus every independent q29 PAF coordinate and resolve collisions by full-key comparison; every hit gets direct whole-block q29 PAF replay; miss has no authority outside this scoped union"
         }))
         .expect("serialize result")
     );
