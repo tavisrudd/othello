@@ -2665,9 +2665,16 @@ files are disposable and may be deleted at any time.
     remains live. These rate buckets are process-local until campaign resume is
     implemented. Typed `ergodisctl proposal-*` subcommands now cover the same
     lifecycle, with value-enum roles/failures and bounded defaults, so routine
-    use requires no hand-written transport JSON. The next slice is the Python
-    3.14+ projection plus durable rate snapshots and actual compact-result
-    artifact delivery; no provider SDK or autonomous adapter is claimed yet.
+    use requires no hand-written transport JSON. The dependency-free Python
+    binding now adds the same object lifecycle with frozen slotted dataclasses,
+    `StrEnum` roles/failures, local resource-envelope validation, synchronous
+    methods, and native `asyncio` Unix-socket methods. Its transport shares one
+    request builder and one strict response validator, retaining bounded frames
+    and monotone IDs. Twelve Python 3.14 tests, including a live async socket
+    handshake, Ruff check/format, and strict Pyright on the binding pass. The
+    next slice is durable rate snapshots and actual
+    compact-result artifact delivery; no provider SDK or autonomous adapter is
+    claimed yet.
 
     The first new proposer family is accepted. A coloured-Tanner isomorphism
     proposal between the official LP1768 X/Z instances is independently

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import asyncio
 import json
 from pathlib import Path
 import socket
@@ -13,6 +14,9 @@ from ergodis_client import (
     MAX_FRAME_BYTES,
     SCHEMA,
     ProtocolError,
+    ProposalRole,
+    ProposalSessionOffer,
+    ProposalTicket,
     RemoteError,
     Response,
     Session,
@@ -32,8 +36,71 @@ def recv_exact(connection: socket.socket, length: int) -> bytes:
 
 
 class ErgodisClientTest(unittest.TestCase):
+    def test_pythonic_proposer_objects_validate_and_route(self) -> None:
+        session = Session(Path.cwd(), Path("unused.sock"), "run", "nonce")
+        opened = {
+            "session_id": "session-1",
+            "source_fingerprint": "a" * 64,
+            "limits": {"maximum_queries": 16},
+            "usage": {"queries": 0},
+        }
+        submitted = {
+            "ticket_key": "b" * 64,
+            "ticket": {"status": {"state": "queued"}},
+            "usage": {"queries": 1, "outstanding": 1},
+        }
+        claimed = {
+            **submitted,
+            "ticket": {"status": {"state": "running"}},
+            "claim": {"kind": "started", "attempt": 0},
+        }
+        with patch.object(
+            session,
+            "request",
+            side_effect=[
+                Response(1, 0, opened),
+                Response(2, 0, submitted),
+                Response(3, 0, claimed),
+            ],
+        ) as request:
+            proposer = session.open_proposal_session(
+                ProposalSessionOffer(
+                    roles=frozenset(
+                        {ProposalRole.HEURISTIC, ProposalRole.NECESSARY_REDUCTION}
+                    )
+                )
+            )
+            ticket = proposer.submit(
+                request_id=1,
+                payload_blake3="c" * 64,
+                proposer_id=3,
+                role=ProposalRole.HEURISTIC,
+                cost_units=5,
+                maximum_return_bytes=50,
+            )
+            self.assertIsInstance(ticket, ProposalTicket)
+            self.assertEqual(ticket.claim().claim["kind"], "started")
+            self.assertEqual(request.call_args_list[0].args[0], "proposal-session-open")
+            self.assertEqual(request.call_args_list[1].args[0], "proposal-submit")
+            self.assertEqual(
+                request.call_args_list[1].args[1]["role"], ProposalRole.HEURISTIC.value
+            )
+        with self.assertRaises(ValueError):
+            proposer.submit(
+                request_id=2,
+                payload_blake3="not-a-digest",
+                proposer_id=3,
+                role=ProposalRole.HEURISTIC,
+                cost_units=5,
+                maximum_return_bytes=50,
+            )
+        with self.assertRaises(TypeError):
+            ticket.report_failure(0, "malformed")  # type: ignore[arg-type]
+
     def test_language_neutral_wire_fixture_is_exact(self) -> None:
-        fixture_path = Path(__file__).parents[1] / "tests/fixtures/control_protocol_v0.json"
+        fixture_path = (
+            Path(__file__).parents[1] / "tests/fixtures/control_protocol_v0.json"
+        )
         fixture = json.loads(fixture_path.read_text())
         for name in ("request_json", "response_json"):
             wire = fixture[name]
@@ -62,9 +129,13 @@ class ErgodisClientTest(unittest.TestCase):
             {"operations": ["status"]},
         ):
             capabilities = baseline | changed
-            with self.subTest(changed=changed), patch.object(
-                session, "request", return_value=Response(1, 0, capabilities)
-            ), self.assertRaises(ProtocolError):
+            with (
+                self.subTest(changed=changed),
+                patch.object(
+                    session, "request", return_value=Response(1, 0, capabilities)
+                ),
+                self.assertRaises(ProtocolError),
+            ):
                 session.capabilities()
 
     def test_manifest_ingestion_is_bounded_and_typed(self) -> None:
@@ -100,11 +171,14 @@ class ErgodisClientTest(unittest.TestCase):
         )
         for response in malformed:
             session = Session(Path.cwd(), Path("unused.sock"), "run", "nonce")
-            with self.subTest(response=response), patch(
-                "ergodis_client.socket.socket"
-            ) as socket_factory, patch("ergodis_client._write_frame"), patch(
-                "ergodis_client._read_frame",
-                return_value=json.dumps(response).encode(),
+            with (
+                self.subTest(response=response),
+                patch("ergodis_client.socket.socket") as socket_factory,
+                patch("ergodis_client._write_frame"),
+                patch(
+                    "ergodis_client._read_frame",
+                    return_value=json.dumps(response).encode(),
+                ),
             ):
                 connection = socket_factory.return_value.__enter__.return_value
                 connection.makefile.return_value.__enter__.return_value = object()
@@ -155,7 +229,9 @@ class ErgodisClientTest(unittest.TestCase):
                                 },
                                 separators=(",", ":"),
                             ).encode()
-                            connection.sendall(struct.pack("<I", len(response)) + response)
+                            connection.sendall(
+                                struct.pack("<I", len(response)) + response
+                            )
 
             server = threading.Thread(target=serve)
             server.start()
@@ -180,9 +256,7 @@ class ErgodisClientTest(unittest.TestCase):
             (root / "evidence" / "long.jsonl").write_bytes(b"123456789\n")
             with self.assertRaises(ProtocolError):
                 list(
-                    session.iter_evidence_lines(
-                        "evidence/long.jsonl", max_line_bytes=8
-                    )
+                    session.iter_evidence_lines("evidence/long.jsonl", max_line_bytes=8)
                 )
             (root / "evidence" / "invalid.jsonl").write_bytes(b'{"x":1}\n{bad\n')
             stream = session.iter_evidence_json("evidence/invalid.jsonl")
@@ -235,7 +309,10 @@ class ErgodisClientTest(unittest.TestCase):
 
     def test_remote_errors_and_cross_run_responses_fail_closed(self) -> None:
         for crossed, exception in ((False, RemoteError), (True, ProtocolError)):
-            with self.subTest(crossed=crossed), tempfile.TemporaryDirectory() as directory:
+            with (
+                self.subTest(crossed=crossed),
+                tempfile.TemporaryDirectory() as directory,
+            ):
                 root = Path(directory)
                 endpoint = root / "campaign.sock"
                 ready = threading.Event()
@@ -260,7 +337,9 @@ class ErgodisClientTest(unittest.TestCase):
                                 },
                                 separators=(",", ":"),
                             ).encode()
-                            connection.sendall(struct.pack("<I", len(response)) + response)
+                            connection.sendall(
+                                struct.pack("<I", len(response)) + response
+                            )
 
                 server = threading.Thread(target=serve)
                 server.start()
@@ -269,6 +348,42 @@ class ErgodisClientTest(unittest.TestCase):
                 with self.assertRaises(exception):
                     session.request("noop")
                 server.join()
+
+
+class ErgodisAsyncClientTest(unittest.IsolatedAsyncioTestCase):
+    async def test_native_async_transport_preserves_handshake(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            endpoint = Path(directory) / "campaign.sock"
+
+            async def handle(
+                reader: asyncio.StreamReader, writer: asyncio.StreamWriter
+            ) -> None:
+                length = struct.unpack("<I", await reader.readexactly(4))[0]
+                request = json.loads(await reader.readexactly(length))
+                response = json.dumps(
+                    {
+                        "schema": SCHEMA,
+                        "request_id": request["request_id"],
+                        "run_id": "run",
+                        "epoch": 7,
+                        "ok": True,
+                        "result": {"async": True},
+                    },
+                    separators=(",", ":"),
+                ).encode()
+                writer.write(struct.pack("<I", len(response)) + response)
+                await writer.drain()
+                writer.close()
+
+            server = await asyncio.start_unix_server(handle, str(endpoint))
+            try:
+                session = Session(Path(directory), endpoint, "run", "nonce")
+                response = await session.request_async("noop")
+                self.assertEqual(response.epoch, 7)
+                self.assertIs(response.result["async"], True)
+            finally:
+                server.close()
+                await server.wait_closed()
 
 
 if __name__ == "__main__":

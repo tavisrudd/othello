@@ -7,12 +7,16 @@ daemon instead of materializing them in memory.
 
 from __future__ import annotations
 
+import asyncio
 from dataclasses import dataclass
+from enum import StrEnum
+import io
 import json
 from pathlib import Path
 import socket
 import struct
-from typing import Any, BinaryIO, Iterator, Mapping
+from types import MappingProxyType
+from typing import Any, Iterator, Mapping, Self, cast
 
 
 SCHEMA = "ergodis-control-experimental-v0"
@@ -36,7 +40,7 @@ class Response:
     result: Mapping[str, Any]
 
 
-def _read_exact(stream: BinaryIO, length: int) -> bytearray:
+def _read_exact(stream: io.BufferedIOBase | io.RawIOBase, length: int) -> bytearray:
     chunks = bytearray(length)
     view = memoryview(chunks)
     offset = 0
@@ -48,14 +52,16 @@ def _read_exact(stream: BinaryIO, length: int) -> bytearray:
     return chunks
 
 
-def _read_frame(stream: BinaryIO, limit: int = MAX_FRAME_BYTES) -> bytearray:
+def _read_frame(
+    stream: io.BufferedIOBase | io.RawIOBase, limit: int = MAX_FRAME_BYTES
+) -> bytearray:
     length = _LENGTH.unpack(_read_exact(stream, _LENGTH.size))[0]
     if length > limit:
         raise ProtocolError(f"frame length {length} exceeds {limit}")
     return _read_exact(stream, length)
 
 
-def _write_frame(stream: BinaryIO, payload: bytes) -> None:
+def _write_frame(stream: io.BufferedIOBase | io.RawIOBase, payload: bytes) -> None:
     if len(payload) > MAX_FRAME_BYTES:
         raise ProtocolError(f"frame length {len(payload)} exceeds {MAX_FRAME_BYTES}")
     stream.write(_LENGTH.pack(len(payload)))
@@ -78,7 +84,7 @@ def _decode_object(payload: bytes | bytearray, description: str) -> Mapping[str,
     value = _decode_json(payload, description)
     if not isinstance(value, dict):
         raise ProtocolError(f"{description} is not an object")
-    return value
+    return cast(Mapping[str, Any], value)
 
 
 class Session:
@@ -136,11 +142,52 @@ class Session:
         *,
         max_bytes: int = 8192,
     ) -> Response:
-        if (
-            isinstance(max_bytes, bool)
-            or not isinstance(max_bytes, int)
-            or not 1 <= max_bytes <= MAX_FRAME_BYTES
-        ):
+        request_id, encoded = self._prepare_request(operation, arguments, max_bytes)
+        with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as connection:
+            connection.settimeout(self.timeout)
+            connection.connect(str(self.socket_path))
+            with connection.makefile("rwb", buffering=0) as stream:
+                _write_frame(stream, encoded)
+                payload = _read_frame(stream, max_bytes)
+        return self._accept_response(request_id, payload)
+
+    async def request_async(
+        self,
+        operation: str,
+        arguments: Mapping[str, Any] | None = None,
+        *,
+        max_bytes: int = 8192,
+    ) -> Response:
+        """Send one request without blocking the caller's event loop."""
+        request_id, encoded = self._prepare_request(operation, arguments, max_bytes)
+        writer: asyncio.StreamWriter | None = None
+        try:
+            async with asyncio.timeout(self.timeout):
+                reader, writer = await asyncio.open_unix_connection(
+                    str(self.socket_path)
+                )
+                writer.write(_LENGTH.pack(len(encoded)))
+                writer.write(encoded)
+                await writer.drain()
+                length = _LENGTH.unpack(await reader.readexactly(_LENGTH.size))[0]
+                if length > max_bytes:
+                    raise ProtocolError(f"frame length {length} exceeds {max_bytes}")
+                payload = await reader.readexactly(length)
+        except asyncio.IncompleteReadError as error:
+            raise ProtocolError("truncated frame") from error
+        finally:
+            if writer is not None:
+                writer.close()
+                await writer.wait_closed()
+        return self._accept_response(request_id, payload)
+
+    def _prepare_request(
+        self,
+        operation: str,
+        arguments: Mapping[str, Any] | None,
+        max_bytes: int,
+    ) -> tuple[int, bytes]:
+        if type(max_bytes) is not int or not 1 <= max_bytes <= MAX_FRAME_BYTES:
             raise ValueError(f"max_bytes must be in 1..={MAX_FRAME_BYTES}")
         request_id = self._next_request_id
         if request_id > _U64_MAX:
@@ -161,12 +208,10 @@ class Session:
             ).encode("utf-8")
         except (TypeError, ValueError, RecursionError) as error:
             raise ProtocolError("request is not finite JSON") from error
-        with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as connection:
-            connection.settimeout(self.timeout)
-            connection.connect(str(self.socket_path))
-            with connection.makefile("rwb", buffering=0) as stream:
-                _write_frame(stream, encoded)
-                response = _decode_object(_read_frame(stream, max_bytes), "response")
+        return request_id, encoded
+
+    def _accept_response(self, request_id: int, payload: bytes | bytearray) -> Response:
+        response = _decode_object(payload, "response")
         peer_request_id = response.get("request_id")
         if (
             response.get("schema") != SCHEMA
@@ -189,6 +234,7 @@ class Session:
             raise ProtocolError("response ok field is not Boolean")
         if not isinstance(result, dict):
             raise ProtocolError("response result is not an object")
+        result = cast(Mapping[str, Any], result)
         if not ok:
             raise RemoteError(str(result.get("error", "request rejected")))
         return Response(request_id, epoch, result)
@@ -217,24 +263,38 @@ class Session:
             raise ProtocolError("invalid peer socket timeout")
         if result.get("large_results") != "run-relative-create-only-files":
             raise ProtocolError("unsupported large-result policy")
-        operations = result.get("operations")
-        if (
-            not isinstance(operations, list)
-            or any(not isinstance(operation, str) for operation in operations)
-            or not {"capabilities", "status"}.issubset(operations)
-        ):
+        operations_value = result.get("operations")
+        if not isinstance(operations_value, list):
+            raise ProtocolError("invalid operation inventory")
+        operation_objects = cast(list[object], operations_value)
+        if any(not isinstance(operation, str) for operation in operation_objects):
+            raise ProtocolError("invalid operation inventory")
+        operations = cast(list[str], operations_value)
+        if not {"capabilities", "status"}.issubset(operations):
             raise ProtocolError("invalid operation inventory")
         return result
+
+    def open_proposal_session(
+        self, offer: ProposalSessionOffer | None = None
+    ) -> ExternalProposalSession:
+        offer = offer or ProposalSessionOffer()
+        result = self.request("proposal-session-open", offer.arguments()).result
+        return ExternalProposalSession.from_result(self, result)
+
+    async def open_proposal_session_async(
+        self, offer: ProposalSessionOffer | None = None
+    ) -> ExternalProposalSession:
+        offer = offer or ProposalSessionOffer()
+        result = (
+            await self.request_async("proposal-session-open", offer.arguments())
+        ).result
+        return ExternalProposalSession.from_result(self, result)
 
     def iter_evidence_lines(
         self, relative_path: Path | str, *, max_line_bytes: int = 1024 * 1024
     ) -> Iterator[bytes]:
         """Stream a daemon-returned run-relative file with bounded line memory."""
-        if (
-            isinstance(max_line_bytes, bool)
-            or not isinstance(max_line_bytes, int)
-            or max_line_bytes < 1
-        ):
+        if type(max_line_bytes) is not int or max_line_bytes < 1:
             raise ValueError("max_line_bytes must be positive")
         supplied = Path(relative_path)
         if supplied.is_absolute():
@@ -255,3 +315,425 @@ class Session:
             self.iter_evidence_lines(relative_path, max_line_bytes=max_line_bytes), 1
         ):
             yield _decode_json(line, f"evidence at line {line_number}")
+
+
+class ProposalRole(StrEnum):
+    ORDERING = "ordering"
+    HEURISTIC = "heuristic"
+    NECESSARY_REDUCTION = "necessary-reduction"
+    EXACT_TRANSPORT = "exact-transport"
+
+    @property
+    def mask(self) -> int:
+        return 1 << tuple(ProposalRole).index(self)
+
+
+class ProposalFailure(StrEnum):
+    MALFORMED = "malformed"
+    FORBIDDEN_ROLE = "forbidden-role"
+    SEMANTIC_REJECTION = "semantic-rejection"
+    STALE_SNAPSHOT = "stale-snapshot"
+    BUDGET_LIMIT = "budget-limit"
+    DETERMINISTIC_BACKEND = "deterministic-backend"
+    TRANSIENT_TRANSPORT = "transient-transport"
+    PROVIDER_RATE_LIMIT = "provider-rate-limit"
+    QUEUE_TIMEOUT = "queue-timeout"
+    EXECUTION_TIMEOUT = "execution-timeout"
+    BACKEND_CRASH = "backend-crash"
+    PROTOCOL_FAULT = "protocol-fault"
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class ProposalSessionOffer:
+    roles: frozenset[ProposalRole] = frozenset({ProposalRole.HEURISTIC})
+    ttl_ms: int = 15 * 60 * 1000
+    maximum_queries: int = 16
+    maximum_outstanding: int = 4
+    maximum_revisions: int = 8
+    maximum_work_units: int = 1_000_000
+    maximum_return_bytes: int = 64 * 1024
+
+    def __post_init__(self) -> None:
+        if not self.roles:
+            raise ValueError("roles must be a nonempty ProposalRole set")
+        for name in (
+            "ttl_ms",
+            "maximum_queries",
+            "maximum_outstanding",
+            "maximum_revisions",
+            "maximum_work_units",
+            "maximum_return_bytes",
+        ):
+            value = getattr(self, name)
+            if type(value) is not int or value <= 0:
+                raise ValueError(f"{name} must be a positive integer")
+        if self.maximum_outstanding > self.maximum_queries:
+            raise ValueError("maximum_outstanding exceeds maximum_queries")
+
+    def arguments(self) -> Mapping[str, Any]:
+        return {
+            "allowed_roles": sum(role.mask for role in self.roles),
+            "ttl_ms": self.ttl_ms,
+            "maximum_queries": self.maximum_queries,
+            "maximum_outstanding": self.maximum_outstanding,
+            "maximum_revisions": self.maximum_revisions,
+            "maximum_work_units": self.maximum_work_units,
+            "maximum_return_bytes": self.maximum_return_bytes,
+        }
+
+
+@dataclass(frozen=True, slots=True)
+class ProposalTicketView:
+    ticket_key: str
+    ticket: Mapping[str, Any]
+    usage: Mapping[str, Any]
+    claim: Mapping[str, Any] | None = None
+    action: Mapping[str, Any] | str | None = None
+
+    @classmethod
+    def from_result(cls, result: Mapping[str, Any]) -> Self:
+        ticket_key = _required_string(result, "ticket_key")
+        ticket = _required_mapping(result, "ticket")
+        usage = _required_mapping(result, "usage")
+        claim_value = result.get("claim")
+        if claim_value is not None and not isinstance(claim_value, dict):
+            raise ProtocolError("proposal claim is not an object")
+        claim = (
+            None
+            if claim_value is None
+            else MappingProxyType(dict(cast(Mapping[str, Any], claim_value)))
+        )
+        action_value = result.get("action")
+        if action_value is not None and not isinstance(action_value, (dict, str)):
+            raise ProtocolError("proposal retry action has an invalid shape")
+        action: Mapping[str, Any] | str | None = (
+            MappingProxyType(dict(cast(Mapping[str, Any], action_value)))
+            if isinstance(action_value, dict)
+            else action_value
+        )
+        return cls(
+            ticket_key,
+            MappingProxyType(dict(ticket)),
+            MappingProxyType(dict(usage)),
+            claim,
+            action,
+        )
+
+
+@dataclass(frozen=True, slots=True)
+class ExternalProposalSession:
+    client: Session
+    session_id: str
+    source_fingerprint: str
+    limits: Mapping[str, Any]
+    initial_usage: Mapping[str, Any]
+
+    @classmethod
+    def from_result(cls, client: Session, result: Mapping[str, Any]) -> Self:
+        return cls(
+            client,
+            _required_string(result, "session_id"),
+            _required_string(result, "source_fingerprint"),
+            MappingProxyType(dict(_required_mapping(result, "limits"))),
+            MappingProxyType(dict(_required_mapping(result, "usage"))),
+        )
+
+    def submit(
+        self,
+        *,
+        request_id: int,
+        payload_blake3: str,
+        proposer_id: int,
+        role: ProposalRole,
+        cost_units: int,
+        maximum_return_bytes: int,
+        queue_timeout_ms: int = 30_000,
+        execution_timeout_ms: int = 5 * 60 * 1000,
+        admission_timeout_ms: int = 10 * 60 * 1000,
+        retention_timeout_ms: int = 15 * 60 * 1000,
+    ) -> ProposalTicket:
+        result = self.client.request(
+            "proposal-submit",
+            self._submission_arguments(
+                request_id=request_id,
+                payload_blake3=payload_blake3,
+                proposer_id=proposer_id,
+                role=role,
+                cost_units=cost_units,
+                maximum_return_bytes=maximum_return_bytes,
+                queue_timeout_ms=queue_timeout_ms,
+                execution_timeout_ms=execution_timeout_ms,
+                admission_timeout_ms=admission_timeout_ms,
+                retention_timeout_ms=retention_timeout_ms,
+            ),
+        ).result
+        return ProposalTicket(self, ProposalTicketView.from_result(result))
+
+    async def submit_async(
+        self,
+        *,
+        request_id: int,
+        payload_blake3: str,
+        proposer_id: int,
+        role: ProposalRole,
+        cost_units: int,
+        maximum_return_bytes: int,
+        queue_timeout_ms: int = 30_000,
+        execution_timeout_ms: int = 5 * 60 * 1000,
+        admission_timeout_ms: int = 10 * 60 * 1000,
+        retention_timeout_ms: int = 15 * 60 * 1000,
+    ) -> ProposalTicket:
+        result = (
+            await self.client.request_async(
+                "proposal-submit",
+                self._submission_arguments(
+                    request_id=request_id,
+                    payload_blake3=payload_blake3,
+                    proposer_id=proposer_id,
+                    role=role,
+                    cost_units=cost_units,
+                    maximum_return_bytes=maximum_return_bytes,
+                    queue_timeout_ms=queue_timeout_ms,
+                    execution_timeout_ms=execution_timeout_ms,
+                    admission_timeout_ms=admission_timeout_ms,
+                    retention_timeout_ms=retention_timeout_ms,
+                ),
+            )
+        ).result
+        return ProposalTicket(self, ProposalTicketView.from_result(result))
+
+    def reserve_revision(
+        self, payload_blake3: str, role: ProposalRole
+    ) -> Mapping[str, Any]:
+        result = self.client.request(
+            "proposal-revision-reserve",
+            {
+                "session_id": self.session_id,
+                "canonical_payload_blake3": _validate_digest(payload_blake3),
+                "role": _validate_role(role).value,
+            },
+        ).result
+        return MappingProxyType(dict(result))
+
+    async def reserve_revision_async(
+        self, payload_blake3: str, role: ProposalRole
+    ) -> Mapping[str, Any]:
+        result = (
+            await self.client.request_async(
+                "proposal-revision-reserve",
+                {
+                    "session_id": self.session_id,
+                    "canonical_payload_blake3": _validate_digest(payload_blake3),
+                    "role": _validate_role(role).value,
+                },
+            )
+        ).result
+        return MappingProxyType(dict(result))
+
+    def _submission_arguments(self, **arguments: Any) -> Mapping[str, Any]:
+        request_id = _positive_int(arguments["request_id"], "request_id")
+        proposer_id = _bounded_int(
+            arguments["proposer_id"], "proposer_id", 0, (1 << 16) - 1
+        )
+        role = _validate_role(arguments["role"])
+        names = (
+            "cost_units",
+            "maximum_return_bytes",
+            "queue_timeout_ms",
+            "execution_timeout_ms",
+            "admission_timeout_ms",
+            "retention_timeout_ms",
+        )
+        checked = {name: _positive_int(arguments[name], name) for name in names}
+        if not (
+            checked["queue_timeout_ms"]
+            <= checked["execution_timeout_ms"]
+            <= checked["admission_timeout_ms"]
+            <= checked["retention_timeout_ms"]
+        ):
+            raise ValueError("proposal timeouts must be nondecreasing")
+        return {
+            "session_id": self.session_id,
+            "request_id": request_id,
+            "canonical_payload_blake3": _validate_digest(arguments["payload_blake3"]),
+            "proposer_id": proposer_id,
+            "role": role.value,
+            **checked,
+        }
+
+
+@dataclass(frozen=True, slots=True)
+class ProposalTicket:
+    session: ExternalProposalSession
+    view: ProposalTicketView
+
+    @property
+    def key(self) -> str:
+        return self.view.ticket_key
+
+    def status(self) -> ProposalTicketView:
+        return self._simple("proposal-status")
+
+    async def status_async(self) -> ProposalTicketView:
+        return await self._simple_async("proposal-status")
+
+    def claim(self) -> ProposalTicketView:
+        return self._simple("proposal-worker-claim")
+
+    async def claim_async(self) -> ProposalTicketView:
+        return await self._simple_async("proposal-worker-claim")
+
+    def cancel(self) -> ProposalTicketView:
+        return self._simple("proposal-cancel")
+
+    async def cancel_async(self) -> ProposalTicketView:
+        return await self._simple_async("proposal-cancel")
+
+    def result(self) -> ProposalTicketView:
+        return self._simple("proposal-result")
+
+    async def result_async(self) -> ProposalTicketView:
+        return await self._simple_async("proposal-result")
+
+    def report_failure(
+        self,
+        attempt: int,
+        failure: ProposalFailure,
+        *,
+        provider_retry_after_ms: int | None = None,
+    ) -> ProposalTicketView:
+        return ProposalTicketView.from_result(
+            self.session.client.request(
+                "proposal-worker-failure",
+                self._failure_arguments(attempt, failure, provider_retry_after_ms),
+            ).result
+        )
+
+    async def report_failure_async(
+        self,
+        attempt: int,
+        failure: ProposalFailure,
+        *,
+        provider_retry_after_ms: int | None = None,
+    ) -> ProposalTicketView:
+        return ProposalTicketView.from_result(
+            (
+                await self.session.client.request_async(
+                    "proposal-worker-failure",
+                    self._failure_arguments(attempt, failure, provider_retry_after_ms),
+                )
+            ).result
+        )
+
+    def complete(
+        self, attempt: int, result_blake3: str, result_bytes: int
+    ) -> ProposalTicketView:
+        return ProposalTicketView.from_result(
+            self.session.client.request(
+                "proposal-worker-complete",
+                self._completion_arguments(attempt, result_blake3, result_bytes),
+            ).result
+        )
+
+    async def complete_async(
+        self, attempt: int, result_blake3: str, result_bytes: int
+    ) -> ProposalTicketView:
+        return ProposalTicketView.from_result(
+            (
+                await self.session.client.request_async(
+                    "proposal-worker-complete",
+                    self._completion_arguments(attempt, result_blake3, result_bytes),
+                )
+            ).result
+        )
+
+    def _simple(self, operation: str) -> ProposalTicketView:
+        return ProposalTicketView.from_result(
+            self.session.client.request(operation, self._identity_arguments()).result
+        )
+
+    async def _simple_async(self, operation: str) -> ProposalTicketView:
+        return ProposalTicketView.from_result(
+            (
+                await self.session.client.request_async(
+                    operation, self._identity_arguments()
+                )
+            ).result
+        )
+
+    def _identity_arguments(self) -> Mapping[str, Any]:
+        return {"session_id": self.session.session_id, "ticket_key": self.key}
+
+    def _failure_arguments(
+        self,
+        attempt: int,
+        failure: object,
+        provider_retry_after_ms: int | None,
+    ) -> Mapping[str, Any]:
+        if not isinstance(failure, ProposalFailure):
+            raise TypeError("failure must be a ProposalFailure")
+        retry_after = None
+        if provider_retry_after_ms is not None:
+            retry_after = _positive_int(
+                provider_retry_after_ms, "provider_retry_after_ms"
+            )
+        return {
+            **self._identity_arguments(),
+            "attempt": _bounded_int(attempt, "attempt", 0, 255),
+            "failure": failure.value,
+            "provider_retry_after_ms": retry_after,
+        }
+
+    def _completion_arguments(
+        self, attempt: int, result_blake3: str, result_bytes: int
+    ) -> Mapping[str, Any]:
+        return {
+            **self._identity_arguments(),
+            "attempt": _bounded_int(attempt, "attempt", 0, 255),
+            "result_blake3": _validate_digest(result_blake3),
+            "result_bytes": _bounded_int(result_bytes, "result_bytes", 0, _U64_MAX),
+        }
+
+
+def _required_string(value: Mapping[str, Any], key: str) -> str:
+    result = value.get(key)
+    if not isinstance(result, str) or not result:
+        raise ProtocolError(f"proposal response omitted {key}")
+    return result
+
+
+def _required_mapping(value: Mapping[str, Any], key: str) -> Mapping[str, Any]:
+    result = value.get(key)
+    if not isinstance(result, dict):
+        raise ProtocolError(f"proposal response {key} is not an object")
+    return cast(Mapping[str, Any], result)
+
+
+def _positive_int(value: Any, name: str) -> int:
+    return _bounded_int(value, name, 1, _U64_MAX)
+
+
+def _bounded_int(value: Any, name: str, minimum: int, maximum: int) -> int:
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, int)
+        or not minimum <= value <= maximum
+    ):
+        raise ValueError(f"{name} must be in {minimum}..={maximum}")
+    return value
+
+
+def _validate_digest(value: Any) -> str:
+    if (
+        not isinstance(value, str)
+        or len(value) != 64
+        or any(character not in "0123456789abcdef" for character in value)
+    ):
+        raise ValueError("BLAKE3 digest must be 64 lowercase hexadecimal digits")
+    return value
+
+
+def _validate_role(value: Any) -> ProposalRole:
+    if not isinstance(value, ProposalRole):
+        raise TypeError("role must be a ProposalRole")
+    return value

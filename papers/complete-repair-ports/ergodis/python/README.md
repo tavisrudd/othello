@@ -31,6 +31,33 @@ binding for the optional, versioned local control protocol.  It sends bounded
 framed requests and streams run-relative evidence without buffering complete
 files.  See `../CONTROL_PROTOCOL.md`.
 
+Its Python 3.14+ proposer API uses frozen slotted dataclasses, `StrEnum` roles
+and failure classes, keyword-only resource envelopes, and native `asyncio` Unix
+socket I/O:
+
+```python
+from ergodis_client import ProposalRole, ProposalSessionOffer, Session
+
+campaign = Session.from_run_dir("run")
+proposer = await campaign.open_proposal_session_async(
+    ProposalSessionOffer(roles=frozenset({ProposalRole.HEURISTIC}))
+)
+ticket = await proposer.submit_async(
+    request_id=1,
+    payload_blake3=payload_digest,
+    proposer_id=3,
+    role=ProposalRole.HEURISTIC,
+    cost_units=20,
+    maximum_return_bytes=4096,
+)
+state = await ticket.status_async()
+```
+
+Equivalent synchronous methods omit the `_async` suffix. Ticket objects expose
+status, claim, typed failure reporting, completion, cancellation, and retained
+result metadata; exact retries continue to use the original server-side
+resource envelope.
+
 The `recovery_algorithms` package implements direct finite-field and
 combinatorial formulations. Its simple representations make it useful for
 independent checking on bounded instances; they are not the high-performance

@@ -425,7 +425,9 @@ time; the same identity with a changed role, provider, work, bytes, or timeout
 envelope fails closed. The buckets are process-local until daemon resume lands.
 The ready result currently carries digest and size rather than a stored compact
 payload. Typed `ergodisctl proposal-*` commands now project the full lifecycle;
-the Python 3.14+ API remains pending.
+the dependency-free Python 3.14+ binding now mirrors it with frozen slotted
+session/ticket objects, `StrEnum` roles and failures, validated keyword-only
+resource envelopes, and native synchronous/`asyncio` Unix-socket calls.
 
 The next generic slice now implements the in-memory/persistable ticket state
 machine without adding wire operations. Its fixed ticket identity makes submit
