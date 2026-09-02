@@ -349,24 +349,6 @@ struct OsdWorkspace {
 }
 
 impl OsdWorkspace {
-    #[inline(always)]
-    fn eliminate_rows(
-        rows: &mut [u64],
-        pivot: &[u64],
-        words: usize,
-        pivot_word: usize,
-        pivot_mask: u64,
-    ) {
-        for row in rows.chunks_exact_mut(words) {
-            if row[pivot_word] & pivot_mask == 0 {
-                continue;
-            }
-            for (output, &value) in row.iter_mut().zip(pivot) {
-                *output ^= value;
-            }
-        }
-    }
-
     fn new(graph: &TannerGraph) -> Self {
         let words = (graph.bits + 1).div_ceil(64);
         let mut template = vec![0u64; graph.checks * words];
@@ -423,10 +405,14 @@ impl OsdWorkspace {
                 left[rank * self.words..(rank + 1) * self.words]
                     .swap_with_slice(&mut right[..self.words]);
             }
-            let (before, pivot_and_after) = self.rows.split_at_mut(rank * self.words);
-            let (pivot_row, after) = pivot_and_after.split_at_mut(self.words);
-            Self::eliminate_rows(before, pivot_row, self.words, word, mask);
-            Self::eliminate_rows(after, pivot_row, self.words, word, mask);
+            for row in 0..graph.checks {
+                if row == rank || self.rows[row * self.words + word] & mask == 0 {
+                    continue;
+                }
+                for offset in 0..self.words {
+                    self.rows[row * self.words + offset] ^= self.rows[rank * self.words + offset];
+                }
+            }
             self.pivot_columns[rank] = column;
             rank += 1;
             if rank == graph.checks {
