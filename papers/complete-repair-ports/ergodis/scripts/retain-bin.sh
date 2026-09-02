@@ -3,7 +3,7 @@
 # copy as an A/B baseline. Retained executables are the only sanctioned way to
 # keep a control for an interleaved A/B; never keep a whole target directory.
 #
-# usage: retain-bin.sh <crate-dir> <bin> [--profile P] [--features F]
+# usage: retain-bin.sh <crate-dir> <bin> [--example] [--profile P] [--features F]
 set -euo pipefail
 
 script_dir=$(cd "$(dirname "$0")" && pwd)
@@ -12,7 +12,7 @@ script_dir=$(cd "$(dirname "$0")" && pwd)
 
 usage() {
   cat >&2 <<'USAGE'
-usage: retain-bin.sh <crate-dir> <bin> [--profile PROFILE] [--features FEATURES]
+usage: retain-bin.sh <crate-dir> <bin> [--example] [--profile PROFILE] [--features FEATURES]
 
 Builds <bin> from <crate-dir> into the crate's shared target directory, then
 copies it to $ERGODIS_CACHE_ROOT/bin/<bin>-<git-short-sha>[-<profile>][-<features>]
@@ -38,11 +38,13 @@ shift 2
 
 profile=release
 features=
+kind=bin
 
 while (( $# )); do
   case $1 in
     --profile) profile=${2:?--profile needs a value}; shift 2 ;;
     --features) features=${2:?--features needs a value}; shift 2 ;;
+    --example) kind=example; shift ;;
     --help|-h) usage; exit 0 ;;
     *) echo "retain-bin.sh: unknown argument: $1" >&2; usage; exit 2 ;;
   esac
@@ -59,7 +61,7 @@ bin_dir="$cache_root/bin"
 manifest="$bin_dir/MANIFEST.tsv"
 mkdir -p "$bin_dir"
 
-build_args=(build --bin "$bin")
+build_args=(build "--$kind" "$bin")
 case $profile in
   dev|debug) ;;
   release) build_args+=(--release) ;;
@@ -69,7 +71,11 @@ esac
 
 ( cd "$crate_dir" && cargo "${build_args[@]}" )
 
-built=$(ergodis_bin "$crate_dir" "$profile" "$bin")
+if [[ $kind == example ]]; then
+  built="$(dirname "$(ergodis_bin "$crate_dir" "$profile" "$bin")")/examples/$bin"
+else
+  built=$(ergodis_bin "$crate_dir" "$profile" "$bin")
+fi
 if [[ ! -x $built ]]; then
   echo "retain-bin.sh: expected executable not found: $built" >&2
   exit 1
