@@ -4112,17 +4112,20 @@ fallback checkpoints are always retained.  This drops the wasteful iteration-1
 probe on BB756 while retaining it on Gross144 and BB288.  Six release tests,
 including the allocation probe over the prepared solve loop, pass.
 
-The first 20-round checkpoint measurements are useful provisional A/B data,
-not yet durable performance claims.  They retained independently replayed
-weights 12, 18, and 34 and measured 300-iteration/controller ratios of 1.941x
-(`t=8.41`), 3.845x (`t=19.20`), and 1.298x (`t=3.47`) on Gross144, BB288, and
-BB756.  Against manually fixed winning iteration counts, the controller ratios
-were 0.982x (`t=0.24`), 0.954x (`t=0.62`), and 0.961x (`t=0.64`), so no
-controller overhead was resolved.  Fable's 2026-09-01 architecture review
-correctly identified that `ergodis-private` currently lacks the public crate's
-explicit release/profile settings.  These timings must therefore be rerun with
-`opt-level=3`, thin LTO, one codegen unit, and aborting panics before admission;
-earlier private ratios remain internal same-build evidence only.
+Fable's 2026-09-01 architecture review correctly identified that
+`ergodis-private` currently lacks the public crate's explicit release/profile
+settings, so the first short-arm measurements were demoted to diagnostic
+evidence.  Commit `a4c97c570` permits the benchmark harness to repeat a
+checkpoint wave, eliminating millisecond-scale process/thread noise without
+changing the production one-round path.  The admission rerun explicitly uses
+`opt-level=3`, thin LTO, one codegen unit, and aborting panics.  Rotated arms
+retain independently replayed weights 12, 18, and 34 and measure
+300-iteration/controller ratios of 2.274x (`t=10.81`), 5.649x (`t=11.72`), and
+1.347x (`t=5.85`) on Gross144, BB288, and BB756.  Long fixed-iteration controls
+resolve no controller overhead: Gross fixed/policy is 0.975x (`t=-0.54`),
+BB288 is 1.123x (`t=1.56`) over seven 1,000-round pairs, and BB756 is 0.999x
+(`t=-0.02`).  The controller is admitted; explicit private profile settings
+remain a build-hygiene requirement before future benchmark claims.
 
 ### Fable architecture/evolve review triage
 

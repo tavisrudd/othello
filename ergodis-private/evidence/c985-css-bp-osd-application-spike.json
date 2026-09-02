@@ -94,6 +94,65 @@
     },
     "decision": "iteration count is a high-value candidate-quality tuning dimension; do not hardcode code identities or a universal cap, and next implement a cost/target-driven bounded checkpoint policy"
   },
+  "checkpoint_controller": {
+    "implementation_commit": "fd491e476",
+    "repeat_harness_commit": "a4c97c570",
+    "build_profile": {
+      "opt_level": 3,
+      "lto": "thin",
+      "codegen_units": 1,
+      "panic": "abort",
+      "note": "set explicitly through Cargo profile environment overrides because the private manifest did not yet define the public release profile"
+    },
+    "protocol": "rotated three-arm comparisons; each timed arm repeats the identical prepared solve wave; every retained witness independently replayed",
+    "gross144": {
+      "pairs": 10,
+      "rounds_per_arm": 100,
+      "effective_checkpoints": [1, 8, 300],
+      "selected_iterations": 1,
+      "best_weight": 12,
+      "baseline_300_seconds": 0.2545400452,
+      "policy_seconds": 0.1119137965,
+      "baseline_over_policy": 2.2744295445,
+      "paired_t": 10.8102283332,
+      "fixed_1_over_policy": 0.9747262376,
+      "fixed_policy_paired_t": -0.5429234270
+    },
+    "bb288": {
+      "pairs": 10,
+      "rounds_per_arm": 100,
+      "effective_checkpoints": [1, 8, 300],
+      "selected_iterations": 1,
+      "best_weight": 18,
+      "baseline_300_seconds": 0.4907968325,
+      "policy_seconds": 0.0868880929,
+      "baseline_over_policy": 5.6486086427,
+      "paired_t": 11.7246369696,
+      "fixed_policy_long_control": {
+        "pairs": 7,
+        "rounds_per_arm": 1000,
+        "fixed_1_seconds": 0.6514360443,
+        "policy_seconds": 0.5799277981,
+        "fixed_1_over_policy": 1.1233054294,
+        "paired_t": 1.5572876784
+      }
+    },
+    "bb756": {
+      "pairs": 16,
+      "rounds_per_arm": 50,
+      "requested_checkpoints": [1, 192, 300],
+      "effective_checkpoints": [192, 300],
+      "selected_iterations": 192,
+      "best_weight": 34,
+      "baseline_300_seconds": 1.1794530096,
+      "policy_seconds": 0.8755094056,
+      "baseline_over_policy": 1.3471620088,
+      "paired_t": 5.8501138572,
+      "fixed_192_over_policy": 0.9988688947,
+      "fixed_policy_paired_t": -0.0155648606
+    },
+    "decision": "admit the generic target/cost-driven checkpoint controller; it preserves replayed incumbent quality, materially beats the 300-iteration baseline, and has no resolved overhead against the winning fixed iteration counts"
+  },
   "gross144": {
     "input_sha256": "4ca7670cb86ab54f15da19b7448d4eada813053325f837a4290d8243a7f34868",
     "threads": 12,
