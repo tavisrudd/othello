@@ -156,7 +156,8 @@ A/B tooling from the build-artifact hygiene work.
 
 **Negative-control benchmark tier for the Ergodis benchmark document** (lane: `complete-ports`).
 Goal: replace the assertion that Ergodis is not a general constraint-programming replacement with
-a measured boundary. Inputs: the existing six application scenarios and their controls in
+a measured boundary. That boundary is current positioning, not a ceiling: every predicted or
+measured loss is a candidate for absorption, as the ZDD and BP-OSD imports already were. Inputs: the existing six application scenarios and their controls in
 `papers/complete-repair-ports/ergodis/BENCHMARKS.md`; the corrected paired-round protocol already
 documented there; the retained-binary A/B tooling. Deliverables: a predeclared one-page
 classifier saying which instance shapes Ergodis claims (repeated interfaces, linear conservation,
@@ -220,3 +221,12 @@ notes as cited; no literature was searched and no computation was run for this r
 coverage matrix's "NEW" entries mean "absent from the notes read for this review", not "absent
 from the repository" and certainly not "novel in the field". Rankings and recommendations are one
 session's judgement.
+
+## 7. Scope framing (Tavis, 2026-09-02)
+
+"Ergodis is not a general-purpose constraint solver" is today's positioning, not a permanent
+limit. The aim is the fastest and best tool for the problems we target, and that aim has already
+absorbed and improved functionality the framing would exclude (ZDD family enumeration, BP-OSD).
+Classifiers and negative-control tiers are predictions for a run, not product boundaries; a loss
+is recorded as an absorption target, never as confirmation of a box.
+
