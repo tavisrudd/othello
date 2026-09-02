@@ -305,9 +305,6 @@ fn main() -> Result<()> {
     let mut iteration_candidates = if args.iteration_candidates.is_empty() {
         vec![args.iterations]
     } else {
-        if args.rounds != 1 {
-            bail!("--rounds must be one when --iteration-candidates is used");
-        }
         let mut candidates = args.iteration_candidates.clone();
         candidates.sort_unstable();
         candidates.dedup();
