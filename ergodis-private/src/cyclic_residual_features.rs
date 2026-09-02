@@ -383,6 +383,8 @@ mod tests {
     #[test]
     fn dirichlet_features_recover_autocorrelation_defects_and_complement_scope() {
         let mut sample = [0_i32; 29];
+        // The digit groups spell the task and sector this fixture seed belongs to.
+        #[allow(clippy::unusual_byte_groupings)]
         let mut state = 0xc1016_29_41_defec7_u64;
         for value in &mut sample {
             state = state

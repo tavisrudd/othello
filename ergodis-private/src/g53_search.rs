@@ -2965,6 +2965,8 @@ mod tests {
     #[test]
     fn root_scoped_cross_block_moves_preserve_rows_and_mod7() {
         let mut workspace = G53Workspace::compile().unwrap();
+        // The digit groups spell the g53 sector, the residue, and the order.
+        #[allow(clippy::inconsistent_digit_grouping)]
         let mut random = SplitMix64(53_49_2092);
         workspace.initialize_mod7_locked(&mut random);
         let masks = workspace.mod7_root_masks();

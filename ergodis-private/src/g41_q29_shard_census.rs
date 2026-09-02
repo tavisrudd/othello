@@ -260,7 +260,11 @@ mod tests {
         for modulus in [PRIME_FIRST, PRIME_SECOND] {
             let mut left = vec![0_u32; 64];
             let mut right = vec![0_u32; 64];
-            left[1 * 8 + 2] = 3;
+            // Indices are written as row * stride + column on a 8 x 8 grid.
+            #[allow(clippy::identity_op)]
+            {
+                left[1 * 8 + 2] = 3;
+            }
             left[4 * 8 + 7] = 5;
             right[2 * 8 + 3] = 7;
             right[6 * 8 + 4] = 11;

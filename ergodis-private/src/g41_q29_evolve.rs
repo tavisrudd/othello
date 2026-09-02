@@ -5075,6 +5075,8 @@ mod tests {
 
     #[test]
     fn seven_tuple_residual_matches_direct_oracle_without_allocation() {
+        // The digit groups spell the task and sector this fixture seed belongs to.
+        #[allow(clippy::unusual_byte_groupings)]
         let mut state = 0x41_29_c1016_d00d_u64;
         let (_, allocations) = tracked_allocations(|| {
             for _ in 0..100_000 {
@@ -5114,6 +5116,8 @@ mod tests {
 
     #[test]
     fn q29_defect_kernel_matches_full_correlation_without_allocation() {
+        // The digit groups spell the task and sector this fixture seed belongs to.
+        #[allow(clippy::unusual_byte_groupings)]
         let mut random = 0x29_41_c1016_defe_c7_u64;
         let (_, allocations) = tracked_allocations(|| {
             for _ in 0..100_000 {

@@ -828,7 +828,7 @@ mod tests {
         assert_eq!(found, 1);
         assert_eq!(output[0], [2, 1, -2, -1]);
         assert_eq!(allocations, 0);
-        let mut too_small = [[0_i8; 4]; 0];
+        let mut too_small: [[i8; 4]; 0] = [];
         assert_eq!(
             evolve_bounded_homogeneous_relations(&rows, 2, &mut too_small),
             Err(SynthesisError::SolutionBudget)

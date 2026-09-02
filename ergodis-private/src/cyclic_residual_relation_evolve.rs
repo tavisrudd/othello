@@ -284,9 +284,7 @@ mod tests {
         let mut exhaustive = [[0_i8; Q29_RELATION_FIELDS]; 8];
         let (_, found) =
             evolve_bounded_homogeneous_relations(&observations, 1, &mut exhaustive).unwrap();
-        assert!(exhaustive[..found]
-            .iter()
-            .any(|relation| *relation == [1; Q29_RELATION_FIELDS]));
+        assert!(exhaustive[..found].contains(&[1; Q29_RELATION_FIELDS]));
         assert_eq!(
             mine_permutation_orbit_relation(base, &permutations, 0)
                 .unwrap()
