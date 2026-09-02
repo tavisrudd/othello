@@ -4917,6 +4917,12 @@ proposer then emits the moment; the unchanged evolve runner reaches 1/15. Thus t
 control now begins from raw rows alone, without a supplied scope, aggregate operation,
 field name, or conclusion.
 
+The same learned scope and coordinate now replay on a disjoint held-out corpus in which
+the fourteen nonzero rows use signed magnitude two rather than one. It again leaves
+exactly the zero row with no false negative. This does not promote the predicate, but it
+separates coordinate discovery on the training presentation from a genuine transfer
+check and supplies the controller with the right persisted unit for future campaigns.
+
 The first theorem-driven subset-sum sharpening compiles a continuation envelope for
 every prefix. A partial sum is retained after layer `i` only when it lies both in the
 prefix-achievable interval and in `target -` the remaining suffix interval. This is an

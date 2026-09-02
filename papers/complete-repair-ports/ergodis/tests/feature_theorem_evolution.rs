@@ -268,6 +268,39 @@ fn grouped_moment_exposes_a_relation_missing_from_flat_degree_two_terms() {
     )
     .unwrap();
     assert_eq!(summary.best_admitted.unwrap().candidate, moment);
+
+    let mut heldout_rows = vec![[0_i64; 7]];
+    for index in 0..7 {
+        for value in [-2, 2] {
+            let mut row = [0_i64; 7];
+            row[index] = value;
+            heldout_rows.push(row);
+        }
+    }
+    let heldout_flat = heldout_rows.iter().flatten().copied().collect::<Vec<_>>();
+    let mut heldout_aggregates = vec![0_i64; heldout_rows.len() * aggregate.output_width()];
+    aggregate
+        .evaluate_rows(&heldout_flat, heldout_rows.len(), &mut heldout_aggregates)
+        .unwrap();
+    let heldout_bank = FeatureZeroBank::compile(
+        &aggregate_dag,
+        &heldout_aggregates,
+        FeatureBankBounds {
+            maximum_rows: heldout_rows.len(),
+            maximum_bitmap_words: aggregate_dag.len() * heldout_rows.len().div_ceil(64),
+        },
+    )
+    .unwrap();
+    let heldout_mask = label_mask(
+        &(0..heldout_rows.len())
+            .map(|index| index == 0)
+            .collect::<Vec<_>>(),
+    );
+    let heldout = heldout_bank
+        .score_necessary_zero(moment, &heldout_mask)
+        .unwrap();
+    assert_eq!(heldout.false_negatives, 0);
+    assert_eq!(heldout.surviving, 1);
 }
 
 fn label_mask(labels: &[bool]) -> Vec<u64> {
