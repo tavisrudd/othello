@@ -4317,3 +4317,38 @@ acceptance gate is identical trial/evidence hashes and parent selections on a
 fixed daemon replay corpus, followed by the full public feature matrix.  No
 daemon migration should begin while it would overlap another agent's dirty
 control files.
+
+Commit `a52db86a7` lands that public runner seam without migrating the daemon.
+`RankedEvolutionDriver` has explicit generation-boundary, cancellation,
+evaluation, admission, multi-niche parent-selection, and mutation hooks; the
+runner retains bounds, structural deduplication, trial numbering, best-rule
+admission, and streaming evidence ownership.  The old closure API is now the
+default global-sort/top-beam adapter and passes its unchanged controls.  A
+two-niche driver demonstrates non-global parent retention, and an over-wide
+selection fails closed instead of silently exceeding the beam.  Full
+all-feature tests and strict all-target clippy pass.
+
+### 2026-09-01 evolve SOTA synthesis update
+
+The new routed synthesis is
+`notes/2026-09-01-c985-evolve-sota-synthesis.md`.  It supersedes two target and
+engine priorities in the earlier Fable review:
+
+1. the next engine batch is failure-derived monotone search-space contraction,
+   observational subexpression deduplication, Dalmatian novel-coverage
+   admission, and a zero-false-positive coverage/cost Pareto archive; these
+   precede deeper daemon migration and MAP-Elites tuning;
+2. the recently announced constructions below order 2000 remove order 668 as
+   an existence target.  Order 2092 is retained only as certified exclusion of
+   a precisely stated multiplier/bordered-Goethals--Seidel class;
+3. the open QDistSAT instances and estimated BB/multivariate-bicycle table
+   entries become the highest-value application target, because they already
+   match Ergodis's exact certificate product and published incumbent timeout
+   boundary.
+
+The present raw DAG is syntactically hash-consed and zero-predicate values are
+bit-packed, but it does not yet quotient distinct syntax by observed corpus
+behaviour.  Implement that exact bitmap quotient first, then build the sound
+Pareto/Dalmatian archive on its representatives.  Failure-core contraction
+follows once the plan weakening relation has a checked directional contract;
+do not infer semantic weakening from syntax shape alone.
