@@ -380,8 +380,8 @@ impl MinSum {
                 let start = window[0];
                 let end = window[1];
                 let mut sign = syndrome[check] != 0;
-                let mut minimum = f64::INFINITY;
-                let mut second = f64::INFINITY;
+                let mut minimum = f64::MAX;
+                let mut second = f64::MAX;
                 for edge in start..end {
                     let message = self.v2c[edge];
                     sign ^= message <= 0.0;
@@ -527,7 +527,11 @@ pub enum BinaryValue {
 
 impl From<bool> for BinaryValue {
     fn from(value: bool) -> Self {
-        if value { Self::One } else { Self::Zero }
+        if value {
+            Self::One
+        } else {
+            Self::Zero
+        }
     }
 }
 
@@ -576,10 +580,11 @@ pub struct DecodeView<'decoder> {
     pub candidate: &'decoder [u8],
     pub posterior: &'decoder [f64],
     pub bp_iterations: usize,
-    pub exact: bool,
+    pub syndrome_satisfied: bool,
     pub weight: usize,
 }
 
+#[repr(C, align(64))]
 pub struct NativeBpOsd {
     bp: MinSum,
     osd: Osd0,
@@ -600,13 +605,16 @@ impl NativeBpOsd {
         if !(0.0 < config.error_rate && config.error_rate < 0.5) {
             return Err(DecodeError::InvalidErrorRate(config.error_rate));
         }
-        if !(config.min_sum_scale.is_finite() && config.min_sum_scale > 0.0) {
+        if !(config.min_sum_scale.is_finite()
+            && config.min_sum_scale > 0.0
+            && config.min_sum_scale <= 1.0)
+        {
             return Err(DecodeError::InvalidScale(config.min_sum_scale));
         }
-        if let OrderedStatistics::Exhaustive { order } = method
-            && order > 20
-        {
-            return Err(DecodeError::ExhaustiveOrderTooLarge(order));
+        if let OrderedStatistics::Exhaustive { order } = method {
+            if order > 20 {
+                return Err(DecodeError::ExhaustiveOrderTooLarge(order));
+            }
         }
         let (run_osd, combination_sweep, exhaustive) = match method {
             OrderedStatistics::Disabled => (false, None, None),
@@ -711,13 +719,13 @@ impl NativeBpOsd {
         {
             self.bp.hard.copy_from_slice(&self.osd.candidate);
         }
-        let exact = self.bp.satisfies(&code.graph, syndrome);
+        let syndrome_satisfied = self.bp.satisfies(&code.graph, syndrome);
         let weight = self.bp.hard.iter().map(|&value| usize::from(value)).sum();
         Ok(DecodeView {
             candidate: &self.bp.hard,
             posterior: &self.bp.posterior,
             bp_iterations,
-            exact,
+            syndrome_satisfied,
             weight,
         })
     }
@@ -841,12 +849,12 @@ pub fn run_cli() -> Result<(), Box<dyn std::error::Error>> {
             .decode_with_order(&code, binary_values_as_bytes(&syndrome), order)
             .expect("validated decoder request");
         if view.bp_iterations != 0 {
-            assert!(view.exact);
+            assert!(view.syndrome_satisfied);
             converged += 1;
             iterations_total += view.bp_iterations;
             best_weight = best_weight.min(view.weight);
         }
-        if run_osd0 && view.bp_iterations == 0 && view.exact {
+        if run_osd0 && view.bp_iterations == 0 && view.syndrome_satisfied {
             osd0_solved += 1;
             osd0_best_weight = osd0_best_weight.min(view.weight);
             osd0_weight_sum += view.weight;
@@ -951,8 +959,12 @@ mod tests {
         .unwrap();
         let syndrome = [BinaryValue::One, BinaryValue::Zero];
         let (_, bp_events) = measured_allocations(|| bp_decoder.decode(&bp_code, &syndrome));
-        let (solved, osd_events) =
-            measured_allocations(|| osd_decoder.decode(&osd_code, &syndrome).unwrap().exact);
+        let (solved, osd_events) = measured_allocations(|| {
+            osd_decoder
+                .decode(&osd_code, &syndrome)
+                .unwrap()
+                .syndrome_satisfied
+        });
         assert!(solved);
         assert_eq!(bp_events, 0);
         assert_eq!(osd_events, 0);
@@ -982,6 +994,24 @@ mod tests {
     }
 
     #[test]
+    fn degree_one_check_uses_finite_reference_message() {
+        let code = BinaryParityCheck::from_rows(1, [vec![0]]).unwrap();
+        let mut decoder = NativeBpOsd::new(
+            &code,
+            DecodeConfig {
+                maximum_iterations: 1,
+                ..DecodeConfig::default()
+            },
+            OrderedStatistics::Disabled,
+        )
+        .unwrap();
+        let result = decoder.decode(&code, &[BinaryValue::One]).unwrap();
+        assert!(result.syndrome_satisfied);
+        assert_eq!(result.candidate, &[1]);
+        assert!(result.posterior[0].is_finite());
+    }
+
+    #[test]
     fn immutable_code_supports_independent_worker_workspaces() {
         assert!(std::mem::align_of::<NativeBpOsd>() >= 64);
         let code = BinaryParityCheck::from_rows(4, [vec![0, 1, 3], vec![1, 2]]).unwrap();
@@ -1001,7 +1031,11 @@ mod tests {
                     let result = workspace
                         .decode(&code, &[BinaryValue::One, BinaryValue::Zero])
                         .unwrap();
-                    (result.exact, result.weight, result.candidate.to_vec())
+                    (
+                        result.syndrome_satisfied,
+                        result.weight,
+                        result.candidate.to_vec(),
+                    )
                 }));
             }
             let expected = workers.remove(0).join().unwrap();

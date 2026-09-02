@@ -66,7 +66,7 @@ let mut workspace = NativeBpOsd::new(
     OrderedStatistics::CombinationSweep { order: 10 },
 )?;
 let answer = workspace.decode(&code, &[BinaryValue::One, BinaryValue::Zero])?;
-assert!(answer.exact);
+assert!(answer.syndrome_satisfied);
 ```
 
 `decode_bytes` is a checked convenience boundary for ordinary byte slices;
