@@ -3110,7 +3110,8 @@ as a negative test against accidental QT-only promotion.
 The reusable mechanism is its exact `2+2` pair join.  Pair PAF signatures are
 additive, so one side is keyed by `PAF_A+PAF_B` and the other by its exact
 target complement; q29 needs only fourteen independent integer coordinates and
-q18 only nine.  Evolve may learn anonymous coordinate masks and key ordering,
+q18 only nine after exact pair energy is carried as the zero-shift coordinate
+(fifteen and ten total respectively).  Evolve may learn anonymous coordinate masks and key ordering,
 but learned masks are coarse buckets only: a hit receives complete exact-key
 comparison and direct replay.  PSD bounds and principal-minor flags are sound
 prefilters; rounded FFT/CPSD tolerances remain discovery accelerators rather
