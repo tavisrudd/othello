@@ -2858,6 +2858,21 @@ The unrestricted outer
 near miss remains much closer: its six unit residuals occur at shifts
 `1,3,5,11,12,13`, with signs `- + + + - -`; an exact three-distinct-block
 radius search around that root misses after direct replay.  A stronger exact
+
+An unrestricted private transfer anneal now accepts that arbitrary q29 root
+directly, rather than requiring its original six-class preimage.  Each move is
+a bounded within-row unit transfer, so row sums are invariant while magnitude
+inventories may change; exact energy and all fourteen independent PAFs are
+rescored and positives are replayed independently.  The 64-byte hot summary
+and 448-byte fixed workspace are iterative and allocate zero in the mutation
+loop.  An eighteen-worker, ten-million-mutation control starts at `y`-score 6
+and does not improve it or find an exact hit.  It costs 942,610,002,635
+instructions and 306,668,950,751 cycles for 180 million requested mutations,
+or about 5,237 instructions and 1,704 cycles per request.  This removes an
+adapter gap but rejects broader unguided transfer annealing as the immediate
+route; its miss has no negative authority.
+
+A stronger exact
 local kernel now exhausts total transfer radius at most four subject to at
 most two transfers per row.  It covers `2+2`, `2+1+1`, four distinct singles,
 and all smaller patterns; same-row pairs are applied sequentially and only
