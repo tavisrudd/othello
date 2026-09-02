@@ -2156,22 +2156,31 @@ files are disposable and may be deleted at any time.
    exact weight is 22. Before radius 22, probe equivalent independent-check
    presentations and a stronger pure syndrome lower bound off the hot path.
 
-   The first bounded presentation probe is positive and selects the next
-   compiler tranche. The physical input has 780 sparse checks of rank 772;
-   any 772-row basis defines the same zero-syndrome predicate, but the chosen
-   basis and static tie order change the fail-first traversal. Sixteen
-   deterministic row permutations were compiled without changing the kernel.
-   A radius-14 probe selected different winners for X and Z, so no seed may be
-   hard-coded globally. The winners remain best among the tested candidates at
-   radius 16. On radius-20 shard zero they reduce exact candidates from
-   4,280,955,058 to 3,741,881,433 on X (1.144x) and from 4,268,847,189 to
-   3,770,871,266 on Z (1.132x). Single diagnostic wall ratios are 1.009x and
-   1.079x; candidate reduction grows with depth, but per-state cost varies and
-   therefore needs counter modelling. The next implementation is an opt-in,
-   source-bound presentation-seed API followed by deterministic shallow
-   autotuning over a bounded seed bank. It must record the winner, preserve
-   artifact replay, add no hot state, and be selected per instance rather than
-   encoding either LP-specific seed.
+   The equivalent-presentation compiler tranche is now accepted in commits
+   `29fbb4dbf` and `bb7e5d646`. The physical input has 780 sparse checks of
+   rank 772; any 772-row basis defines the same zero-syndrome predicate, while
+   its fixed order changes fail-first traversal and greedy packing. Every wide
+   backend now has deterministic source-bound presentation seeds, artifact
+   replay records the seed, and `css_distance_native` can evaluate the default
+   plus a bounded seed bank at an exact shallow radius. Autotuning is rejected
+   inside a shard invocation: select and persist once, then load the same
+   artifact across the cover. No seed or LP identity is hard-coded.
+
+   Sixteen radius-14 probes select seed 2 for X and seed 14 for Z. At
+   radius-20 shard zero, X candidates fall `4,280,955,058 -> 3,576,297,029`
+   (1.1970x) and Z falls `4,268,847,189 -> 3,742,874,647` (1.1405x).
+   Instructions improve 1.1708x and 1.1307x. X cycles improve 1.0673x
+   (`t=39.75`), while its three-pair wall result is unresolved; Z cycle/wall
+   points remain unresolved after five pairs. Both directions increase branch
+   misses, so the deterministic work reduction is not reported as a universal
+   wall multiplier. Saved-binary controls against pre-feature commit
+   `ce182fe0b` preserve the default path's exact work and instructions: current
+   cycles improve 0.6% at 1T and 1.6% at 12T. Sixteen-probe peak RSS is 55,696
+   KiB versus 30,552 KiB default because only the current best and one
+   challenger coexist. The full protocol and retained SHA-bound evidence are
+   in `2026-09-01-c985-css-presentation-autotuning.md`. The next LP1768 gate is
+   a stronger pure syndrome lower bound followed by radius-22 shards using one
+   selected artifact per direction.
 
    Commit `b89f00c45` also turns the one-off nauty diagnostic into an optional,
    backend-neutral discovery boundary. `css_automorphism_adapter` invokes
