@@ -45,6 +45,7 @@ pub struct FeatureNode {
 /// Runtime-selected degree-two expansion over raw scalar inputs.
 #[derive(Clone, Copy, Debug)]
 pub struct RawFeatureExpansion<'a> {
+    pub input_indices: Option<&'a [u16]>,
     pub moduli: &'a [u16],
     pub include_abs: bool,
     pub include_sums: bool,
@@ -68,6 +69,7 @@ pub struct FeatureDagSnapshot {
 impl Default for RawFeatureExpansion<'static> {
     fn default() -> Self {
         Self {
+            input_indices: None,
             moduli: &[],
             include_abs: true,
             include_sums: true,
@@ -144,6 +146,98 @@ pub struct FeatureZeroBank {
     words: usize,
     features: usize,
     zero: Box<[u64]>,
+}
+
+/// Bit-packed raw-input dependencies for every feature node.
+pub struct FeatureScopeBank {
+    input_count: usize,
+    words: usize,
+    features: usize,
+    scopes: Box<[u64]>,
+}
+
+impl FeatureScopeBank {
+    pub fn compile(
+        dag: &FeatureDag,
+        maximum_bitmap_words: usize,
+    ) -> Result<Self, FeatureBankError> {
+        if maximum_bitmap_words == 0 {
+            return Err(FeatureBankError::EmptyBound);
+        }
+        let input_count = dag.input_count();
+        let words = input_count.div_ceil(64);
+        let bitmap_words = dag
+            .len()
+            .checked_mul(words)
+            .ok_or(FeatureBankError::TooLarge)?;
+        if bitmap_words > maximum_bitmap_words {
+            return Err(FeatureBankError::TooLarge);
+        }
+        let mut scopes = vec![0_u64; bitmap_words];
+        for (feature, node) in dag.nodes.iter().enumerate() {
+            let destination = feature * words;
+            match node.op {
+                FeatureOp::Input { index } => {
+                    let index = usize::from(index);
+                    scopes[destination + index / 64] |= 1_u64 << (index % 64);
+                }
+                FeatureOp::Constant { .. } => {}
+                FeatureOp::Mod { source, .. } | FeatureOp::Abs { source } => {
+                    copy_scope(&mut scopes, words, destination, source.index());
+                }
+                FeatureOp::Add { left, right }
+                | FeatureOp::Sub { left, right }
+                | FeatureOp::Mul { left, right }
+                | FeatureOp::GaussianNorm { left, right }
+                | FeatureOp::EisensteinNorm { left, right } => {
+                    union_scopes(&mut scopes, words, destination, left.index(), right.index());
+                }
+            }
+        }
+        Ok(Self {
+            input_count,
+            words,
+            features: dag.len(),
+            scopes: scopes.into_boxed_slice(),
+        })
+    }
+
+    pub fn input_count(&self) -> usize {
+        self.input_count
+    }
+
+    pub fn features(&self) -> usize {
+        self.features
+    }
+
+    pub fn bitmap_words(&self) -> usize {
+        self.scopes.len()
+    }
+
+    pub fn scope_mask(&self, feature: FeatureId) -> Option<&[u64]> {
+        (feature.index() < self.features)
+            .then(|| &self.scopes[feature.index() * self.words..(feature.index() + 1) * self.words])
+    }
+
+    pub fn scope_size(&self, feature: FeatureId) -> Option<u32> {
+        self.scope_mask(feature)
+            .map(|scope| scope.iter().map(|word| word.count_ones()).sum())
+    }
+}
+
+fn copy_scope(scopes: &mut [u64], words: usize, destination: usize, source: usize) {
+    let source = source * words;
+    for offset in 0..words {
+        scopes[destination + offset] = scopes[source + offset];
+    }
+}
+
+fn union_scopes(scopes: &mut [u64], words: usize, destination: usize, left: usize, right: usize) {
+    let left = left * words;
+    let right = right * words;
+    for offset in 0..words {
+        scopes[destination + offset] = scopes[left + offset] | scopes[right + offset];
+    }
 }
 
 impl FeatureZeroBank {
@@ -401,7 +495,17 @@ impl FeatureDag {
         if expansion.moduli.contains(&0) {
             return Err(FeatureDagError::ZeroModulus);
         }
-        let raw = (0..self.input_count)
+        let mut input_indices = expansion.input_indices.map_or_else(
+            || (0..self.input_count).collect::<Vec<_>>(),
+            <[u16]>::to_vec,
+        );
+        input_indices.sort_unstable();
+        input_indices.dedup();
+        if input_indices.iter().any(|&index| index >= self.input_count) {
+            return Err(FeatureDagError::InputOutOfRange);
+        }
+        let raw = input_indices
+            .into_iter()
             .map(|index| self.input(index))
             .collect::<Result<Vec<_>, _>>()?;
         let mut candidates = raw.clone();
@@ -716,6 +820,48 @@ mod tests {
             .iter()
             .any(|node| matches!(node.op, FeatureOp::EisensteinNorm { .. })));
         assert!(dag.nodes().iter().all(|node| node.degree <= 2));
+    }
+
+    #[test]
+    fn runtime_expansion_respects_selected_input_scope() {
+        let mut dag = FeatureDag::new(4, 2, 128).unwrap();
+        let candidates = dag
+            .expand_raw_degree_two(RawFeatureExpansion {
+                input_indices: Some(&[3, 1, 3]),
+                ..RawFeatureExpansion::default()
+            })
+            .unwrap();
+        let scopes = FeatureScopeBank::compile(&dag, dag.len()).unwrap();
+        assert!(candidates.iter().all(|&candidate| {
+            let mask = scopes.scope_mask(candidate).unwrap()[0];
+            mask != 0 && mask & !0b1010 == 0
+        }));
+        assert_eq!(
+            dag.expand_raw_degree_two(RawFeatureExpansion {
+                input_indices: Some(&[4]),
+                ..RawFeatureExpansion::default()
+            }),
+            Err(FeatureDagError::InputOutOfRange)
+        );
+    }
+
+    #[test]
+    fn scope_bank_tracks_transitive_dependencies_compactly() {
+        let mut dag = FeatureDag::new(70, 2, 128).unwrap();
+        let x = dag.input(1).unwrap();
+        let y = dag.input(65).unwrap();
+        let constant = dag.constant(7).unwrap();
+        let sum = dag.add(x, y).unwrap();
+        let shifted = dag.sub(sum, constant).unwrap();
+        let bank = FeatureScopeBank::compile(&dag, dag.len() * 2).unwrap();
+        assert_eq!(bank.input_count(), 70);
+        assert_eq!(bank.features(), dag.len());
+        assert_eq!(bank.scope_mask(constant), Some(&[0, 0][..]));
+        assert_eq!(
+            bank.scope_mask(shifted),
+            Some(&[1_u64 << 1, 1_u64 << 1][..])
+        );
+        assert_eq!(bank.scope_size(shifted), Some(2));
     }
 
     #[test]
