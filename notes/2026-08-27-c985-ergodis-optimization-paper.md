@@ -4399,3 +4399,14 @@ over-large conflict surface leaves the DAG unchanged.  Exact replay confirms
 every emitted feature separates its inducing pair, and the preflight rollback
 control passes the full public gate.  This is the PIE/LoopInvGen-style targeted
 alternative to firing the quadratic difference expander globally.
+
+Commit `5cd661f2c` adds the persistent ICE-style separating replay front.  It
+keeps a bounded hardest-first set of repeatedly misclassified row IDs with
+dense checked counters and a sparse, versioned snapshot.  A proposal mismatch
+on the front is a conclusive early rejection; passing it only reaches the
+mandatory full-corpus replay and never grants admission.  Updates and reloads
+preserve a fixed preallocated row capacity, replace the weakest row without
+growth, order count ties deterministically, and reject noncanonical,
+out-of-range, zero-count, future-version, and counter-overflow state.  The
+hard-row, one-call early-rejection, sparse round-trip, and malformed-order
+controls pass the full public gate.
