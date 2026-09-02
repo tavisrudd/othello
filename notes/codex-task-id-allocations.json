@@ -4112,8 +4112,17 @@
       "last": 1036,
       "purpose": "hadamard-2092 task crate: triage and consolidate C1016 bins",
       "sequence": 457
+    },
+    {
+      "count": 1,
+      "first": 1037,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1037,
+      "purpose": "ergodis build-artifact hygiene: shared target dirs, retained baseline binaries, cache GC",
+      "sequence": 458
     }
   ],
-  "next_id": 1037,
+  "next_id": 1038,
   "schema": "codex-task-id-allocations-v1"
 }
