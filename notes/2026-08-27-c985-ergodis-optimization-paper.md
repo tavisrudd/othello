@@ -4418,3 +4418,14 @@ capacity gates; the declared cost includes both predicates.  A control rejects
 the condition globally for a witnessed false positive, then admits the same
 condition inside a class that excludes that row.  This supplies the
 TxGraffiti-style local-theorem path without weakening global theorem checks.
+
+Commit `71c1b96e7` adds a deterministic PatternBoost/MAP-Elites selection
+primitive over the generic runner.  A checked schedule alternates global
+exploit generations with reseed generations that retain the best candidate in
+each caller-defined semantic niche, then fill unused beam slots globally.
+Scores and structural candidate order break every tie; selection clears and
+rebuilds a bounded parent output rather than depending on prior contents.
+Controls distinguish the global top-two from parity-niche winners and verify
+phase/error behavior under the full public gate.  C1016 can use field scope,
+VM cost, and activity bands as descriptors without putting those private axes
+in core.
