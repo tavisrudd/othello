@@ -4,13 +4,13 @@ use std::path::PathBuf;
 use std::time::Instant;
 
 use anyhow::Result;
-use clap::Parser;
+use clap::Args;
 use ergodis_private::q16_quadratic::{
     analyze_quadratic_obstructions, read_level8, synthesize_quadratic_theorem,
 };
 
-#[derive(Parser)]
-struct Arguments {
+#[derive(Args)]
+pub struct Arguments {
     #[arg(long)]
     levels: PathBuf,
     #[arg(long, default_value_t = 1)]
@@ -21,8 +21,7 @@ struct Arguments {
     theorem_log: Option<PathBuf>,
 }
 
-fn main() -> Result<()> {
-    let arguments = Arguments::parse();
+pub fn run(arguments: Arguments) -> Result<()> {
     let input: Box<dyn Read> = if arguments.levels.as_os_str() == "-" {
         Box::new(io::stdin().lock())
     } else {

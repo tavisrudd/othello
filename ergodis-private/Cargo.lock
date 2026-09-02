@@ -270,6 +270,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "ergodis-tools"
+version = "0.0.0"
+dependencies = [
+ "anyhow",
+ "clap",
+ "ergodis",
+ "ergodis-private",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "find-msvc-tools"
 version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"

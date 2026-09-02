@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# BINARY is the `ergodis-tools` executable; the scout subcommand is added here.
 binary=${1:?usage: benchmark_projective_grid_parallel.sh BINARY [ROUNDS] [STATES] [THREADS]}
 rounds=${2:-7}
 states=${3:-10000}
@@ -16,10 +17,10 @@ for ((round = 1; round <= rounds; round++)); do
         second=1
     fi
     first_output=$(
-        "$binary" --q 11 --states "$states" --threads "$first"
+        "$binary" projective-grid-scout --q 11 --states "$states" --threads "$first"
     )
     second_output=$(
-        "$binary" --q 11 --states "$states" --threads "$second"
+        "$binary" projective-grid-scout --q 11 --states "$states" --threads "$second"
     )
     first_seconds=$(sed -E 's/.*"elapsed_seconds":([^,]+).*/\1/' <<<"$first_output")
     second_seconds=$(sed -E 's/.*"elapsed_seconds":([^,]+).*/\1/' <<<"$second_output")

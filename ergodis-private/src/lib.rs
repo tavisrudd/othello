@@ -14,6 +14,7 @@
     clippy::type_complexity
 )]
 
+pub mod alignment_control;
 pub mod arith;
 pub mod banked_rule_evolve;
 pub mod banked_semantic_evolve;

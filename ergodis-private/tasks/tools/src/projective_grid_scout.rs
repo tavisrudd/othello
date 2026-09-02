@@ -1,5 +1,5 @@
 use anyhow::Result;
-use clap::Parser;
+use clap::Args;
 use serde_json::json;
 use std::fs::File;
 use std::io::{BufWriter, Write};
@@ -9,9 +9,8 @@ use std::time::Instant;
 
 use ergodis_private::projective_grid::scout;
 
-#[derive(Debug, Parser)]
-#[command(about = "Unpublished parallel projective grid-game scout")]
-struct Cli {
+#[derive(Debug, Args)]
+pub struct Cli {
     #[arg(long, default_value_t = 11)]
     q: u16,
     #[arg(long, default_value_t = 100)]
@@ -24,8 +23,7 @@ struct Cli {
     output: Option<PathBuf>,
 }
 
-fn main() -> Result<()> {
-    let cli = Cli::parse();
+pub fn run(cli: Cli) -> Result<()> {
     let start = Instant::now();
     let metrics = scout(cli.q, cli.states, cli.seed, cli.threads.get())?;
     let rendered = serde_json::to_string(&json!({

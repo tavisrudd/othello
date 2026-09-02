@@ -4,15 +4,15 @@ use std::path::PathBuf;
 use std::time::Instant;
 
 use anyhow::Result;
-use clap::Parser;
+use clap::Args;
 use ergodis_private::q25_pair_repair::{
     classify_minimum_residual_orbits, compile_q25_pair_repair, format_matrix_pattern,
     independently_verify, synthesize_residual_stabilizer_pattern, verify_certificate,
     verify_minimum_certificate, write_certificate, write_minimum_certificate,
 };
 
-#[derive(Parser)]
-struct Arguments {
+#[derive(Args)]
+pub struct Arguments {
     #[arg(long, default_value_t = 1)]
     threads: usize,
     #[arg(long)]
@@ -27,8 +27,7 @@ struct Arguments {
     stabilizer_log: Option<PathBuf>,
 }
 
-fn main() -> Result<()> {
-    let arguments = Arguments::parse();
+pub fn run(arguments: Arguments) -> Result<()> {
     let started = Instant::now();
     let census = compile_q25_pair_repair(arguments.threads)?;
     let compiled = started.elapsed();

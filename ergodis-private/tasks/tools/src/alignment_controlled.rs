@@ -1,5 +1,5 @@
 use anyhow::{bail, Context, Result};
-use clap::Parser;
+use clap::Args;
 use ergodis::control::read_manifest;
 use ergodis::{
     compile_alignment_attachment, search_alignment_attachment_controlled,
@@ -9,13 +9,12 @@ use serde_json::json;
 use std::fs::File;
 use std::path::PathBuf;
 
-#[path = "../alignment_control.rs"]
-mod alignment_control;
-use alignment_control::{AlignmentCampaignControl, AlignmentProfilePolicy, AlignmentRoutingPolicy};
+use ergodis_private::alignment_control::{
+    AlignmentCampaignControl, AlignmentProfilePolicy, AlignmentRoutingPolicy,
+};
 
-#[derive(Debug, Parser)]
-#[command(about = "Opt-in alignment-attachment search with campaign safe points")]
-struct Cli {
+#[derive(Debug, Args)]
+pub struct Cli {
     #[arg(long)]
     run_dir: PathBuf,
     #[arg(long)]
@@ -50,8 +49,7 @@ struct Cli {
     baseline: bool,
 }
 
-fn main() -> Result<()> {
-    let cli = Cli::parse();
+pub fn run(cli: Cli) -> Result<()> {
     let routing_policy_path = cli
         .routing_policy
         .as_ref()

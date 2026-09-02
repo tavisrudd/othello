@@ -1,5 +1,5 @@
 [workspace]
-members = [".", "tasks/gem-hunt"]
+members = [".", "tasks/gem-hunt", "tasks/tools"]
 
 [package]
 name = "ergodis-private"
@@ -10,8 +10,6 @@ publish = false
 
 [features]
 default = []
-c1018-sparse-action = []
-c1018-lane-action = []
 
 [dependencies]
 anyhow = "1"
@@ -22,27 +20,3 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 sha2 = "0.10"
 thiserror = "2"
-
-[[bin]]
-name = "projective-grid-scout"
-path = "src/bin/projective_grid_scout.rs"
-
-[[bin]]
-name = "alignment-controlled"
-path = "src/bin/alignment_controlled.rs"
-
-[[bin]]
-name = "hall-certify"
-path = "src/bin/hall_certify.rs"
-
-[[bin]]
-name = "q25-pair-repair"
-path = "src/bin/q25_pair_repair.rs"
-
-[[bin]]
-name = "q16-quadratic"
-path = "src/bin/q16_quadratic.rs"
-
-[[bin]]
-name = "q19-marked-polar"
-path = "src/bin/q19_marked_polar.rs"

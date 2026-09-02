@@ -3,12 +3,12 @@ use std::io::{BufReader, BufWriter};
 use std::path::PathBuf;
 
 use anyhow::Context;
-use clap::Parser;
+use clap::Args as ClapArgs;
 use ergodis_private::hall_core::{HallOutcome, HallWorkspace};
 use serde::{Deserialize, Serialize};
 
-#[derive(Parser)]
-struct Arguments {
+#[derive(ClapArgs)]
+pub struct Arguments {
     #[arg(long)]
     input: PathBuf,
     #[arg(long)]
@@ -70,8 +70,7 @@ fn solve(input: &GraphInput) -> anyhow::Result<GraphOutput> {
     })
 }
 
-fn main() -> anyhow::Result<()> {
-    let arguments = Arguments::parse();
+pub fn run(arguments: Arguments) -> anyhow::Result<()> {
     let input: GraphInput = serde_json::from_reader(BufReader::new(
         File::open(&arguments.input).context("open Hall graph")?,
     ))
