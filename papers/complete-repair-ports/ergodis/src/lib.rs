@@ -36,6 +36,7 @@ pub mod frozen_shortest_path;
 pub mod graph_obstruction;
 pub mod group_action;
 pub mod group_aggregation;
+pub mod group_histogram;
 pub mod hall;
 pub mod incidence;
 pub mod integer_moments;
@@ -193,6 +194,11 @@ pub use group_aggregation::{
     MAX_AGGREGATION_GROUPS, MAX_AGGREGATION_INPUTS, MAX_AGGREGATION_MEMBERS,
     MAX_AGGREGATION_OUTPUTS, MAX_AGGREGATION_PROPOSAL_CELLS, MAX_AGGREGATION_PROPOSAL_ROWS,
     MAX_AGGREGATION_PROPOSED_VALUES,
+};
+pub use group_histogram::{
+    GroupHistogramBounds, GroupHistogramCertificate, GroupHistogramError, GroupHistogramPlan,
+    GroupHistogramSnapshot, GroupHistogramSummary, GROUP_HISTOGRAM_SNAPSHOT_VERSION,
+    MAX_GROUP_HISTOGRAM_INPUTS, MAX_GROUP_HISTOGRAM_MEMBERS, MAX_GROUP_HISTOGRAM_VALUES,
 };
 pub use hall::{
     solve_hall, verify_hall_certificate, verify_hall_result, DenseHallGraph, HallError,

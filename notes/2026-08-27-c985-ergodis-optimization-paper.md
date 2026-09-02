@@ -4923,6 +4923,18 @@ exactly the zero row with no false negative. This does not promote the predicate
 separates coordinate discovery on the training presentation from a genuine transfer
 check and supplies the controller with the right persisted unit for future campaigns.
 
+The first structural-extraction kernel now sits below those coordinates. A canonical
+finite-value domain and field scope compile to an exact histogram plan. One pass produces
+the multiplicities, after which the universal identities
+`n = sum c_v`, `sum x = sum v c_v`, `sum x^2 = sum v^2 c_v`, and
+`equal_pairs = sum binom(c_v,2)` reconstruct member count, sum, second moment,
+equal-pair count, and distinct count. The 24-byte `repr(C)` summary has asserted layout;
+repeated evaluation writes into caller-owned `u16` counts and allocates zero times.
+Snapshots are validated, values outside the declared domain fail closed, and a compact
+certificate replays both counts and every derived aggregate. This is a reusable exact
+lemma for a bounded group instance; promoting a corpus-wide conclusion still requires
+the separate theorem/certificate boundary.
+
 The first theorem-driven subset-sum sharpening compiles a continuation envelope for
 every prefix. A partial sum is retained after layer `i` only when it lies both in the
 prefix-achievable interval and in `target -` the remaining suffix interval. This is an
