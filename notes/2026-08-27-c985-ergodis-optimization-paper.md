@@ -2163,6 +2163,17 @@ files are disposable and may be deleted at any time.
    without giving any backend proof authority. Design and controls are in
    `2026-09-01-c985-css-automorphism-discovery-adapter.md`.
 
+   The full ten-direction QDistSAT control then found a nontrivial payoff that
+   the hand-written families missed. Nauty proposes a third generator for both
+   BB288 and BB360 directions; exact admission retains it and joins their two
+   translation orbits into one. TN360 remains at 36 orbits and LP714/LP1768 at
+   34. At radius 16, the BB generator cuts deterministic one-thread candidate
+   counts by 1.919x--2.044x. Single debug-run wall ratios are 1.824x--2.131x but
+   overlapped another campaign and are diagnostic only. Dreadnaut's consecutive
+   generator framing on BB also supplied a parser regression, repaired in
+   commit `d197f63b7`; the upgraded BB input runs directly in the public CSS
+   solver.
+
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
