@@ -126,14 +126,10 @@ fn parse_dreadnaut_generators(output: &[u8], vertices: usize) -> Result<Vec<Vec<
         let trimmed = line.trim();
         if trimmed.starts_with("level ") {
             if !current.is_empty() {
-                if current.len() != vertices {
-                    bail!(
-                        "nauty generator has {} images, expected {vertices}",
-                        current.len()
-                    );
-                }
-                generators.push(std::mem::take(&mut current));
-                current.reserve(vertices);
+                bail!(
+                    "nauty generator has {} images, expected {vertices}",
+                    current.len()
+                );
             }
             continue;
         }
@@ -145,16 +141,22 @@ fn parse_dreadnaut_generators(output: &[u8], vertices: usize) -> Result<Vec<Vec<
             .map(str::parse::<usize>)
             .collect::<std::result::Result<Vec<_>, _>>();
         if let Ok(images) = parsed {
-            current.extend(images);
+            for image in images {
+                current.push(image);
+                if current.len() == vertices {
+                    generators.push(std::mem::take(&mut current));
+                    if generators.len() > MAX_PROPOSAL_GENERATORS {
+                        bail!("nauty returned too many generators");
+                    }
+                    current.reserve(vertices);
+                }
+            }
         } else if !current.is_empty() {
             bail!("unexpected text inside a wrapped nauty generator");
         }
     }
     if !current.is_empty() {
         bail!("unterminated nauty generator");
-    }
-    if generators.len() > MAX_PROPOSAL_GENERATORS {
-        bail!("nauty returned too many generators");
     }
     Ok(generators)
 }
@@ -394,7 +396,7 @@ mod tests {
 
     #[test]
     fn parses_full_image_generators_and_extracts_one_colour() {
-        let output = b"[fixing partition]\n 0 1\n 3 2\nlevel 2: test\n 1 0 2 3\nlevel 1: test\n";
+        let output = b"[fixing partition]\n 0 1\n 3 2\n 1 0\n 2 3\nlevel 1: test\n";
         let full = parse_dreadnaut_generators(output, 4).unwrap();
         assert_eq!(full, [vec![0, 1, 3, 2], vec![1, 0, 2, 3]]);
         let coordinates = coordinate_generators(full, 2, 2).unwrap();
