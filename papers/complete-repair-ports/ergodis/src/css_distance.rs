@@ -54,7 +54,7 @@ const LARGE_ARTIFACT_VERSION: u16 = 2;
 const HUGE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSH1";
 const HUGE_ARTIFACT_VERSION: u16 = 1;
 const COLOSSAL_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSC1";
-const COLOSSAL_ARTIFACT_VERSION: u16 = 1;
+const COLOSSAL_ARTIFACT_VERSION: u16 = 2;
 const MAX_ARTIFACT_BLOOM_WORDS: usize = FOUR_COMPLETION_BLOOM_BITS / 64;
 
 fn wide_artifact_identity<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize>(
@@ -1095,9 +1095,16 @@ where
     if coordinate_count == 0 || logical.rows() == 0 {
         return Err(CssDistanceError::EmptyProblem);
     }
-    let basis = independent_row_indices(physical);
+    let mut basis = independent_row_indices(physical);
     if basis.len() > maximum_wide_checks {
         return Err(CssDistanceError::TooManyChecks);
+    }
+    // The stronger static order pays on the colossal LP frontier but changes
+    // the canonical traversal adversely on smaller wide instances.  Keep the
+    // established kernels bit-for-bit unchanged below the same shape gate
+    // used by the CLI's colossal backend selection.
+    if coordinate_count > 1536 || basis.len() > 704 {
+        sort_basis_by_conflict_degree(physical, &mut basis);
     }
     let mut basis_positions = vec![u16::MAX; physical.rows()];
     for (position, &row) in basis.iter().enumerate() {
@@ -1174,6 +1181,46 @@ where
         check_conflicts: check_conflicts.into_boxed_slice(),
         check_neighbors: check_neighbors.into_boxed_slice(),
     })
+}
+
+/// Put low-conflict independent checks first once, so both fail-first
+/// branching and the existing lowest-bit greedy packing see the strongest
+/// static order without adding work or state to the solve loop.
+fn sort_basis_by_conflict_degree(physical: &Matrix, basis: &mut [usize]) {
+    if basis.len() < 2 {
+        return;
+    }
+    let check_words = basis.len().div_ceil(64);
+    let mut coordinate_checks = vec![0_u64; physical.cols() * check_words];
+    for (position, &row_index) in basis.iter().enumerate() {
+        for (coordinate, &entry) in physical.row(row_index).iter().enumerate() {
+            if entry != 0 {
+                coordinate_checks[coordinate * check_words + position / 64] |=
+                    1_u64 << (position % 64);
+            }
+        }
+    }
+    let mut conflicts = vec![0_u64; check_words];
+    let mut degrees = vec![0_usize; physical.rows()];
+    for &row_index in basis.iter() {
+        conflicts.fill(0);
+        for (coordinate, &entry) in physical.row(row_index).iter().enumerate() {
+            if entry == 0 {
+                continue;
+            }
+            let checks =
+                &coordinate_checks[coordinate * check_words..(coordinate + 1) * check_words];
+            for (conflicts, &checks) in conflicts.iter_mut().zip(checks) {
+                *conflicts |= checks;
+            }
+        }
+        degrees[row_index] = conflicts
+            .iter()
+            .map(|word| word.count_ones() as usize)
+            .sum::<usize>()
+            .saturating_sub(1);
+    }
+    basis.sort_unstable_by_key(|&row_index| (degrees[row_index], row_index));
 }
 
 #[allow(private_bounds)]
@@ -5524,6 +5571,14 @@ mod tests {
     }
 
     #[test]
+    fn static_check_order_prefers_fewer_conflicts() {
+        let physical = Matrix::new::<2>(3, 2, vec![1, 1, 1, 0, 0, 1]).unwrap();
+        let mut basis = vec![0, 1, 2];
+        sort_basis_by_conflict_degree(&physical, &mut basis);
+        assert_eq!(basis, [1, 2, 0]);
+    }
+
+    #[test]
     fn wide_compiler_reaches_the_official_bb288_shape() {
         let ell = 12;
         let m = 12;
@@ -5626,6 +5681,21 @@ mod tests {
             CompiledLargeCssDistance::read_artifact(&physical, &logical, &*artifact).unwrap();
         assert_eq!(loaded.coordinate_count(), physical.cols());
         assert_eq!(loaded.check_count(), compiled.check_count());
+    }
+
+    #[cfg(feature = "large-css")]
+    #[test]
+    fn colossal_artifacts_reject_the_pre_ordering_version() {
+        let (physical, logical) = artifact_problem();
+        let compiled = CompiledColossalCssDistance::compile(&physical, &logical).unwrap();
+        let mut artifact = Vec::new();
+        compiled.write_artifact(&mut artifact).unwrap();
+        assert_eq!(&artifact[8..10], &COLOSSAL_ARTIFACT_VERSION.to_le_bytes());
+        artifact[8..10].copy_from_slice(&1_u16.to_le_bytes());
+        assert!(matches!(
+            CompiledColossalCssDistance::read_artifact(&physical, &logical, &*artifact),
+            Err(CssDistanceArtifactError::Format)
+        ));
     }
 
     #[cfg(feature = "large-css")]
