@@ -45,9 +45,9 @@ pub use proposal_daemon::{
     ProposalFailureAccepted, ProposalFailureRequest, ProposalRevisionRequest,
     ProposalSessionOpenRequest, ProposalSessionOpened, ProposalSubmitRequest, ProposalSubmitted,
     ProposalTicketRequest, ProposalTicketView, MAX_EXTERNAL_OPERATION_TTL_MS,
-    MAX_EXTERNAL_PROPOSAL_SESSIONS, MAX_EXTERNAL_SESSION_OUTSTANDING, MAX_EXTERNAL_SESSION_QUERIES,
-    MAX_EXTERNAL_SESSION_RETURN_BYTES, MAX_EXTERNAL_SESSION_REVISIONS, MAX_EXTERNAL_SESSION_TTL_MS,
-    MAX_EXTERNAL_SESSION_WORK_UNITS,
+    MAX_EXTERNAL_PROPOSAL_SESSIONS, MAX_EXTERNAL_REQUEST_BYTES, MAX_EXTERNAL_SESSION_OUTSTANDING,
+    MAX_EXTERNAL_SESSION_QUERIES, MAX_EXTERNAL_SESSION_RETURN_BYTES,
+    MAX_EXTERNAL_SESSION_REVISIONS, MAX_EXTERNAL_SESSION_TTL_MS, MAX_EXTERNAL_SESSION_WORK_UNITS,
 };
 pub use proposal_policy::{
     charge_token_buckets, select_proposer, CircuitBreaker, CircuitBreakerConfig,
@@ -3451,6 +3451,18 @@ mod tests {
         .unwrap();
         assert!(opened.ok);
         let session_id = opened.result["session_id"].as_str().unwrap();
+        let request_upload = manifest
+            .run_dir
+            .join(opened.result["request_upload_directory"].as_str().unwrap())
+            .join("0000000000000001.upload");
+        let mut request_output = OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .mode(0o600)
+            .open(request_upload)
+            .unwrap();
+        request_output.write_all(b"payload").unwrap();
+        request_output.sync_all().unwrap();
         let submitted = send_request(
             &manifest,
             "proposal-submit",
@@ -3458,6 +3470,7 @@ mod tests {
                 "session_id": session_id,
                 "request_id": 1,
                 "canonical_payload_blake3": blake3::hash(b"payload").to_hex().to_string(),
+                "request_bytes": 7,
                 "proposer_id": 3,
                 "role": "heuristic",
                 "cost_units": 5,
@@ -3481,6 +3494,7 @@ mod tests {
         .unwrap();
         assert!(claimed.ok);
         assert_eq!(claimed.result["claim"]["kind"], "started");
+        assert_eq!(claimed.result["request_artifact"]["bytes"], 7);
         let upload = manifest
             .run_dir
             .join(claimed.result["upload_relative_path"].as_str().unwrap());

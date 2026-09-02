@@ -271,8 +271,18 @@ stderr, and reports temporary versus deterministic exits through the same
 failure vocabulary. Cancellation sends `SIGKILL` to the isolated process group
 and awaits the child, preventing an execution timeout from leaving an orphaned
 provider. This adapter can front local models or provider-specific wrappers;
-daemon-owned typed request artifacts and a hosted SDK adapter remain later
-transport layers.
+a hosted SDK adapter remains an optional later transport layer.
+
+Request/context delivery now mirrors result delivery. Opening a session returns
+a private run-relative upload directory. The client streams one nonempty,
+at-most-1-MiB request to its deterministic request-ID filename and submits only
+its canonical BLAKE3 plus measured byte count. After hierarchical rate debit,
+the daemon independently hashes, caps, fsyncs, and publishes it read-only; a
+mismatch creates no ticket. Digest and size live in the durable ticket schema.
+Every runnable claim re-hashes the request before returning its path, and the
+Python runner confines that path to the authenticated run directory before a
+backend sees it. Request and result payloads therefore never enter JSON frames
+or whole-memory buffers.
 
 `ergodisctl evolve-start` accepts an optional direct seed JSONL file and up to
 eight repeated `--resume-evidence` paths.  A replay archive must match the

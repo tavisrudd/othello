@@ -11,6 +11,7 @@ import asyncio
 from collections.abc import Awaitable, Callable, Mapping
 from dataclasses import dataclass
 import time
+from pathlib import Path
 from typing import BinaryIO, cast
 
 from ergodis_client import (
@@ -35,6 +36,7 @@ class ProviderInvocation:
     execute_by_ms: int
     remaining_ms: int
     maximum_return_bytes: int
+    request_path: Path
 
 
 class ProviderFailure(Exception):
@@ -104,6 +106,7 @@ class ProviderRunner:
                 execute_by_ms,
                 remaining_ms,
                 _maximum_return_bytes(claimed),
+                _request_path(ticket, claimed),
             )
             try:
                 async with asyncio.timeout(remaining_ms / 1_000):
@@ -173,6 +176,23 @@ def _maximum_return_bytes(view: ProposalTicketView) -> int:
     if isinstance(maximum, bool) or not isinstance(maximum, int) or maximum <= 0:
         raise ProtocolError("provider ticket return-byte bound is invalid")
     return maximum
+
+
+def _request_path(ticket: ProposalTicket, view: ProposalTicketView) -> Path:
+    artifact = view.request_artifact
+    if artifact is None:
+        raise ProtocolError("provider claim omitted its request artifact")
+    relative = artifact.get("relative_path")
+    if not isinstance(relative, str) or not relative:
+        raise ProtocolError("provider request artifact path is invalid")
+    supplied = Path(relative)
+    if supplied.is_absolute():
+        raise ProtocolError("provider request artifact path must be run-relative")
+    root = ticket.session.client.run_dir
+    resolved = (root / supplied).resolve()
+    if resolved != root and root not in resolved.parents:
+        raise ProtocolError("provider request artifact path escapes run directory")
+    return resolved
 
 
 def _is_retry_wait(view: ProposalTicketView) -> bool:

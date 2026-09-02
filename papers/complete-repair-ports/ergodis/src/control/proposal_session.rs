@@ -7,7 +7,7 @@ use super::{ProposalIdempotencyKey, ProposalRole, ProposalTicketSpec};
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-pub const PROPOSAL_SESSION_SCHEMA: &str = "ergodis-proposal-session-v2";
+pub const PROPOSAL_SESSION_SCHEMA: &str = "ergodis-proposal-session-v3";
 pub const MAX_PROPOSAL_SESSION_QUERIES: usize = 4_096;
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -471,6 +471,8 @@ mod tests {
     ) -> ProposalTicketSpec {
         ProposalTicketSpec {
             key: key(request),
+            request_blake3: [request as u8; 32],
+            request_bytes: 17,
             proposer_id: 3,
             role,
             deadlines: ProposalDeadlines::new(100, 500, 900, 700).unwrap(),

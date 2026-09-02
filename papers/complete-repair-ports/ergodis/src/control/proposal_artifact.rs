@@ -9,6 +9,8 @@ use std::path::{Path, PathBuf};
 
 const INCOMING_DIRECTORY: &str = "incoming";
 const RESULTS_DIRECTORY: &str = "results";
+const REQUEST_INCOMING_DIRECTORY: &str = "request-incoming";
+const REQUESTS_DIRECTORY: &str = "requests";
 const COPY_BUFFER_BYTES: usize = 64 * 1024;
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
@@ -36,6 +38,8 @@ pub struct ProposalArtifactStore {
     run_dir: PathBuf,
     incoming: PathBuf,
     results: PathBuf,
+    request_incoming: PathBuf,
+    requests: PathBuf,
     temp_sequence: u64,
     poisoned: bool,
 }
@@ -47,7 +51,9 @@ impl ProposalArtifactStore {
         fs::set_permissions(root, fs::Permissions::from_mode(0o700))?;
         let incoming = root.join(INCOMING_DIRECTORY);
         let results = root.join(RESULTS_DIRECTORY);
-        for directory in [&incoming, &results] {
+        let request_incoming = root.join(REQUEST_INCOMING_DIRECTORY);
+        let requests = root.join(REQUESTS_DIRECTORY);
+        for directory in [&incoming, &results, &request_incoming, &requests] {
             fs::create_dir(directory)?;
             fs::set_permissions(directory, fs::Permissions::from_mode(0o700))?;
             sync_directory(directory)?;
@@ -60,6 +66,8 @@ impl ProposalArtifactStore {
             run_dir,
             incoming,
             results,
+            request_incoming,
+            requests,
             temp_sequence: 1,
             poisoned: false,
         })
@@ -67,7 +75,12 @@ impl ProposalArtifactStore {
 
     pub fn create_session(&self, session_id: &str) -> Result<(), ProposalArtifactError> {
         validate_session_id(session_id)?;
-        for parent in [&self.incoming, &self.results] {
+        for parent in [
+            &self.incoming,
+            &self.results,
+            &self.request_incoming,
+            &self.requests,
+        ] {
             let directory = parent.join(session_id);
             fs::create_dir(&directory)?;
             fs::set_permissions(&directory, fs::Permissions::from_mode(0o700))?;
@@ -75,6 +88,79 @@ impl ProposalArtifactStore {
             sync_directory(parent)?;
         }
         Ok(())
+    }
+
+    pub fn request_upload_directory(
+        &self,
+        session_id: &str,
+    ) -> Result<PathBuf, ProposalArtifactError> {
+        validate_session_id(session_id)?;
+        self.relative(&self.request_incoming.join(session_id))
+    }
+
+    pub fn request_upload_relative_path(
+        &self,
+        session_id: &str,
+        request_id: u64,
+    ) -> Result<PathBuf, ProposalArtifactError> {
+        self.relative(&self.request_upload_path(session_id, request_id)?)
+    }
+
+    pub fn publish_request(
+        &mut self,
+        session_id: &str,
+        request_id: u64,
+        key: ProposalIdempotencyKey,
+        expected_blake3: [u8; 32],
+        expected_bytes: u64,
+    ) -> Result<ProposalArtifact, ProposalArtifactError> {
+        self.ensure_healthy()?;
+        if expected_bytes == 0 {
+            return Err(ProposalArtifactError::TooLarge);
+        }
+        let destination = self.request_path(session_id, key)?;
+        let expected = Some((expected_blake3, expected_bytes));
+        if destination.exists() {
+            return self.inspect_result_path(&destination, expected_bytes, expected);
+        }
+        let source = self.request_upload_path(session_id, request_id)?;
+        let mut input = open_private_regular(&source)?;
+        let sequence = self.next_temp_sequence()?;
+        let temporary = destination
+            .parent()
+            .ok_or(ProposalArtifactError::InvalidPath)?
+            .join(format!(".tmp-{}-{sequence:016x}", std::process::id()));
+        let result = self.copy_publish(
+            &mut input,
+            &temporary,
+            &destination,
+            expected_bytes,
+            expected,
+        );
+        if result.is_err() {
+            if matches!(&result, Err(ProposalArtifactError::Io(_))) {
+                self.poisoned = true;
+            }
+            let _ = fs::remove_file(&temporary);
+            return result;
+        }
+        fs::remove_file(source)?;
+        sync_directory(&self.request_incoming.join(session_id))?;
+        result
+    }
+
+    pub fn inspect_request(
+        &self,
+        session_id: &str,
+        key: ProposalIdempotencyKey,
+        expected_blake3: [u8; 32],
+        expected_bytes: u64,
+    ) -> Result<ProposalArtifact, ProposalArtifactError> {
+        self.inspect_result_path(
+            &self.request_path(session_id, key)?,
+            expected_bytes,
+            Some((expected_blake3, expected_bytes)),
+        )
     }
 
     pub fn upload_relative_path(
@@ -108,7 +194,7 @@ impl ProposalArtifactStore {
             .parent()
             .ok_or(ProposalArtifactError::InvalidPath)?
             .join(format!(".tmp-{}-{sequence:016x}", std::process::id()));
-        let result = self.copy_publish(&mut input, &temporary, &destination, maximum_bytes);
+        let result = self.copy_publish(&mut input, &temporary, &destination, maximum_bytes, None);
         if result.is_err() {
             if matches!(&result, Err(ProposalArtifactError::Io(_))) {
                 self.poisoned = true;
@@ -138,6 +224,7 @@ impl ProposalArtifactStore {
         temporary: &Path,
         destination: &Path,
         maximum_bytes: u64,
+        expected: Option<([u8; 32], u64)>,
     ) -> Result<ProposalArtifact, ProposalArtifactError> {
         let mut output = OpenOptions::new()
             .write(true)
@@ -162,6 +249,10 @@ impl ProposalArtifactStore {
             hasher.update(&buffer[..count]);
             output.write_all(&buffer[..count])?;
         }
+        let blake3 = *hasher.finalize().as_bytes();
+        if expected.is_some_and(|expected| expected != (blake3, bytes)) {
+            return Err(ProposalArtifactError::MetadataMismatch);
+        }
         output.sync_all()?;
         fs::hard_link(temporary, destination)?;
         fs::set_permissions(destination, fs::Permissions::from_mode(0o400))?;
@@ -173,7 +264,7 @@ impl ProposalArtifactStore {
         )?;
         Ok(ProposalArtifact {
             relative_path: self.relative(destination)?,
-            blake3: *hasher.finalize().as_bytes(),
+            blake3,
             bytes,
         })
     }
@@ -223,6 +314,33 @@ impl ProposalArtifactStore {
             .incoming
             .join(session_id)
             .join(format!("{}-{attempt:02x}.upload", key.to_hex())))
+    }
+
+    fn request_upload_path(
+        &self,
+        session_id: &str,
+        request_id: u64,
+    ) -> Result<PathBuf, ProposalArtifactError> {
+        validate_session_id(session_id)?;
+        if request_id == 0 {
+            return Err(ProposalArtifactError::InvalidPath);
+        }
+        Ok(self
+            .request_incoming
+            .join(session_id)
+            .join(format!("{request_id:016x}.upload")))
+    }
+
+    fn request_path(
+        &self,
+        session_id: &str,
+        key: ProposalIdempotencyKey,
+    ) -> Result<PathBuf, ProposalArtifactError> {
+        validate_session_id(session_id)?;
+        Ok(self
+            .requests
+            .join(session_id)
+            .join(format!("{}.request", key.to_hex())))
     }
 
     fn result_path(
@@ -333,6 +451,46 @@ mod tests {
             artifact
         );
         assert_eq!(store.publish(session, key(), 0, 1024).unwrap(), artifact);
+
+        let request_upload = run.join(store.request_upload_relative_path(session, 9).unwrap());
+        let request = b"typed request";
+        fs::write(&request_upload, request).unwrap();
+        fs::set_permissions(&request_upload, fs::Permissions::from_mode(0o600)).unwrap();
+        let request_artifact = store
+            .publish_request(
+                session,
+                9,
+                key(),
+                *blake3::hash(request).as_bytes(),
+                request.len() as u64,
+            )
+            .unwrap();
+        assert_eq!(request_artifact.bytes, request.len() as u64);
+        assert_eq!(
+            store
+                .inspect_request(
+                    session,
+                    key(),
+                    *blake3::hash(request).as_bytes(),
+                    request.len() as u64,
+                )
+                .unwrap(),
+            request_artifact
+        );
+
+        let rejected_key = ProposalIdempotencyKey::new("session", 2, [4; 32]).unwrap();
+        let rejected_upload = run.join(store.request_upload_relative_path(session, 10).unwrap());
+        fs::write(&rejected_upload, b"forged").unwrap();
+        fs::set_permissions(&rejected_upload, fs::Permissions::from_mode(0o600)).unwrap();
+        assert!(matches!(
+            store.publish_request(session, 10, rejected_key, [9; 32], 6),
+            Err(ProposalArtifactError::MetadataMismatch)
+        ));
+        assert!(!run
+            .join("artifacts/requests")
+            .join(session)
+            .join(format!("{}.request", rejected_key.to_hex()))
+            .exists());
     }
 
     #[test]

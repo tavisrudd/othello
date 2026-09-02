@@ -22,6 +22,7 @@ from typing import Any, BinaryIO, Iterator, Mapping, Self, cast
 
 SCHEMA = "ergodis-control-experimental-v0"
 MAX_FRAME_BYTES = 64 * 1024
+MAX_PROPOSAL_REQUEST_BYTES = 1024 * 1024
 _U64_MAX = (1 << 64) - 1
 _LENGTH = struct.Struct("<I")
 
@@ -392,6 +393,7 @@ class ProposalTicketView:
     action: Mapping[str, Any] | str | None = None
     upload_relative_path: Path | None = None
     artifact: Mapping[str, Any] | None = None
+    request_artifact: Mapping[str, Any] | None = None
 
     @classmethod
     def from_result(cls, result: Mapping[str, Any]) -> Self:
@@ -422,6 +424,11 @@ class ProposalTicketView:
         artifact_value = result.get("artifact")
         if artifact_value is not None and not isinstance(artifact_value, dict):
             raise ProtocolError("proposal artifact is not an object")
+        request_artifact_value = result.get("request_artifact")
+        if request_artifact_value is not None and not isinstance(
+            request_artifact_value, dict
+        ):
+            raise ProtocolError("proposal request artifact is not an object")
         return cls(
             ticket_key,
             MappingProxyType(dict(ticket)),
@@ -434,6 +441,13 @@ class ProposalTicketView:
                 if artifact_value is None
                 else MappingProxyType(dict(cast(Mapping[str, Any], artifact_value)))
             ),
+            (
+                None
+                if request_artifact_value is None
+                else MappingProxyType(
+                    dict(cast(Mapping[str, Any], request_artifact_value))
+                )
+            ),
         )
 
 
@@ -444,6 +458,7 @@ class ExternalProposalSession:
     source_fingerprint: str
     limits: Mapping[str, Any]
     initial_usage: Mapping[str, Any]
+    request_upload_directory: Path
 
     @classmethod
     def from_result(cls, client: Session, result: Mapping[str, Any]) -> Self:
@@ -453,6 +468,7 @@ class ExternalProposalSession:
             _required_string(result, "source_fingerprint"),
             MappingProxyType(dict(_required_mapping(result, "limits"))),
             MappingProxyType(dict(_required_mapping(result, "usage"))),
+            Path(_required_string(result, "request_upload_directory")),
         )
 
     def submit(
@@ -460,6 +476,7 @@ class ExternalProposalSession:
         *,
         request_id: int,
         payload_blake3: str,
+        payload: BinaryIO,
         proposer_id: int,
         role: ProposalRole,
         cost_units: int,
@@ -469,39 +486,9 @@ class ExternalProposalSession:
         admission_timeout_ms: int = 10 * 60 * 1000,
         retention_timeout_ms: int = 15 * 60 * 1000,
     ) -> ProposalTicket:
-        result = self.client.request(
-            "proposal-submit",
-            self._submission_arguments(
-                request_id=request_id,
-                payload_blake3=payload_blake3,
-                proposer_id=proposer_id,
-                role=role,
-                cost_units=cost_units,
-                maximum_return_bytes=maximum_return_bytes,
-                queue_timeout_ms=queue_timeout_ms,
-                execution_timeout_ms=execution_timeout_ms,
-                admission_timeout_ms=admission_timeout_ms,
-                retention_timeout_ms=retention_timeout_ms,
-            ),
-        ).result
-        return ProposalTicket(self, ProposalTicketView.from_result(result))
-
-    async def submit_async(
-        self,
-        *,
-        request_id: int,
-        payload_blake3: str,
-        proposer_id: int,
-        role: ProposalRole,
-        cost_units: int,
-        maximum_return_bytes: int,
-        queue_timeout_ms: int = 30_000,
-        execution_timeout_ms: int = 5 * 60 * 1000,
-        admission_timeout_ms: int = 10 * 60 * 1000,
-        retention_timeout_ms: int = 15 * 60 * 1000,
-    ) -> ProposalTicket:
-        result = (
-            await self.client.request_async(
+        upload, request_bytes = self._stage_request(request_id, payload)
+        try:
+            result = self.client.request(
                 "proposal-submit",
                 self._submission_arguments(
                     request_id=request_id,
@@ -510,13 +497,56 @@ class ExternalProposalSession:
                     role=role,
                     cost_units=cost_units,
                     maximum_return_bytes=maximum_return_bytes,
+                    request_bytes=request_bytes,
                     queue_timeout_ms=queue_timeout_ms,
                     execution_timeout_ms=execution_timeout_ms,
                     admission_timeout_ms=admission_timeout_ms,
                     retention_timeout_ms=retention_timeout_ms,
                 ),
-            )
-        ).result
+            ).result
+        finally:
+            upload.unlink(missing_ok=True)
+        return ProposalTicket(self, ProposalTicketView.from_result(result))
+
+    async def submit_async(
+        self,
+        *,
+        request_id: int,
+        payload_blake3: str,
+        payload: BinaryIO,
+        proposer_id: int,
+        role: ProposalRole,
+        cost_units: int,
+        maximum_return_bytes: int,
+        queue_timeout_ms: int = 30_000,
+        execution_timeout_ms: int = 5 * 60 * 1000,
+        admission_timeout_ms: int = 10 * 60 * 1000,
+        retention_timeout_ms: int = 15 * 60 * 1000,
+    ) -> ProposalTicket:
+        upload, request_bytes = await asyncio.to_thread(
+            self._stage_request, request_id, payload
+        )
+        try:
+            result = (
+                await self.client.request_async(
+                    "proposal-submit",
+                    self._submission_arguments(
+                        request_id=request_id,
+                        payload_blake3=payload_blake3,
+                        proposer_id=proposer_id,
+                        role=role,
+                        cost_units=cost_units,
+                        maximum_return_bytes=maximum_return_bytes,
+                        request_bytes=request_bytes,
+                        queue_timeout_ms=queue_timeout_ms,
+                        execution_timeout_ms=execution_timeout_ms,
+                        admission_timeout_ms=admission_timeout_ms,
+                        retention_timeout_ms=retention_timeout_ms,
+                    ),
+                )
+            ).result
+        finally:
+            upload.unlink(missing_ok=True)
         return ProposalTicket(self, ProposalTicketView.from_result(result))
 
     def reserve_revision(
@@ -555,6 +585,7 @@ class ExternalProposalSession:
         role = _validate_role(arguments["role"])
         names = (
             "cost_units",
+            "request_bytes",
             "maximum_return_bytes",
             "queue_timeout_ms",
             "execution_timeout_ms",
@@ -577,6 +608,34 @@ class ExternalProposalSession:
             "role": role.value,
             **checked,
         }
+
+    def _stage_request(self, request_id: int, source: BinaryIO) -> tuple[Path, int]:
+        request_id = _positive_int(request_id, "request_id")
+        directory = _confined_run_path(
+            self.client.run_dir, self.request_upload_directory
+        )
+        destination = directory / f"{request_id:016x}.upload"
+        descriptor = os.open(
+            destination,
+            os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
+            0o600,
+        )
+        total = 0
+        try:
+            with os.fdopen(descriptor, "wb", buffering=0) as output:
+                while chunk := source.read(64 * 1024):
+                    total += len(chunk)
+                    if total > MAX_PROPOSAL_REQUEST_BYTES:
+                        raise ProtocolError("proposal request exceeds byte bound")
+                    output.write(chunk)
+                if total == 0:
+                    raise ProtocolError("proposal request is empty")
+                output.flush()
+                os.fsync(output.fileno())
+        except BaseException:
+            destination.unlink(missing_ok=True)
+            raise
+        return destination, total
 
 
 @dataclass(frozen=True, slots=True)

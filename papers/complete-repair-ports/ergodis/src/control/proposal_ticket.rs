@@ -10,13 +10,15 @@ use super::{
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-pub const PROPOSAL_TICKET_LEDGER_SCHEMA: &str = "ergodis-proposal-ticket-ledger-v1";
+pub const PROPOSAL_TICKET_LEDGER_SCHEMA: &str = "ergodis-proposal-ticket-ledger-v2";
 pub const MAX_PROPOSAL_TICKETS: usize = 65_536;
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct ProposalTicketSpec {
     pub key: ProposalIdempotencyKey,
+    pub request_blake3: [u8; 32],
+    pub request_bytes: u64,
     pub proposer_id: u16,
     pub role: ProposalRole,
     pub deadlines: ProposalDeadlines,
@@ -557,7 +559,8 @@ fn validate_capacity(max_tickets: usize) -> Result<(), ProposalTicketError> {
 }
 
 fn validate_ticket_spec(spec: ProposalTicketSpec) -> Result<(), ProposalTicketError> {
-    if spec.cost_units == 0
+    if spec.request_bytes == 0
+        || spec.cost_units == 0
         || spec.max_return_bytes == 0
         || ProposalDeadlines::new(
             spec.deadlines.queue_by_ms,
@@ -700,6 +703,8 @@ mod tests {
                 *blake3::hash(b"canonical payload").as_bytes(),
             )
             .unwrap(),
+            request_blake3: *blake3::hash(b"canonical payload").as_bytes(),
+            request_bytes: 17,
             proposer_id,
             role: ProposalRole::ExactTransport,
             deadlines: ProposalDeadlines::new(100, 500, 900, 700).unwrap(),

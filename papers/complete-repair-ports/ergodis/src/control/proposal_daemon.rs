@@ -23,6 +23,7 @@ pub const MAX_EXTERNAL_SESSION_OUTSTANDING: u16 = 8;
 pub const MAX_EXTERNAL_SESSION_REVISIONS: u16 = 16;
 pub const MAX_EXTERNAL_SESSION_WORK_UNITS: u64 = 1_000_000_000;
 pub const MAX_EXTERNAL_SESSION_RETURN_BYTES: u64 = 1024 * 1024;
+pub const MAX_EXTERNAL_REQUEST_BYTES: u64 = 1024 * 1024;
 pub const MAX_EXTERNAL_PROVIDERS: usize = 256;
 
 const CAMPAIGN_RATE: TokenBucketConfig = TokenBucketConfig {
@@ -71,6 +72,7 @@ pub struct ProposalSessionOpened {
     pub source_fingerprint: String,
     pub limits: ProposalSessionLimits,
     pub usage: ProposalSessionUsage,
+    pub request_upload_directory: PathBuf,
 }
 
 #[derive(Clone, Debug, Deserialize)]
@@ -79,6 +81,7 @@ pub struct ProposalSubmitRequest {
     pub session_id: String,
     pub request_id: u64,
     pub canonical_payload_blake3: String,
+    pub request_bytes: u64,
     pub proposer_id: u16,
     pub role: ProposalRole,
     pub cost_units: u64,
@@ -163,6 +166,8 @@ pub struct ProposalClaimed {
     pub usage: ProposalSessionUsage,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub upload_relative_path: Option<PathBuf>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub request_artifact: Option<ProposalArtifactView>,
 }
 
 struct ControllerClock {
@@ -291,6 +296,10 @@ impl ProposalDaemon {
         self.artifacts
             .create_session(&session_id)
             .map_err(invalid)?;
+        let request_upload_directory = self
+            .artifacts
+            .request_upload_directory(&session_id)
+            .map_err(invalid)?;
         let session_binding = session_binding(
             &self.run_id,
             &self.nonce,
@@ -332,6 +341,7 @@ impl ProposalDaemon {
                 .to_string(),
             limits,
             usage,
+            request_upload_directory,
         })
     }
 
@@ -386,6 +396,8 @@ impl ProposalDaemon {
         )?;
         let spec = ProposalTicketSpec {
             key,
+            request_blake3: payload,
+            request_bytes: request.request_bytes,
             proposer_id: request.proposer_id,
             role: request.role,
             deadlines,
@@ -402,6 +414,15 @@ impl ProposalDaemon {
             .clone();
         preview.reserve(spec, now_ms).map_err(invalid)?;
         self.charge_submission_rates(&request.session_id, request.proposer_id, now_ms)?;
+        self.artifacts
+            .publish_request(
+                &request.session_id,
+                request.request_id,
+                key,
+                payload,
+                request.request_bytes,
+            )
+            .map_err(invalid)?;
         let session = self.session_mut(&request.session_id)?;
         let disposition = session.store.submit(spec, now_ms).map_err(invalid)?;
         let ticket = session
@@ -506,12 +527,25 @@ impl ProposalDaemon {
             })
             .transpose()
             .map_err(invalid)?;
+        let request_artifact = attempt
+            .map(|_| {
+                self.artifacts.inspect_request(
+                    &request.session_id,
+                    key,
+                    view.ticket.spec.request_blake3,
+                    view.ticket.spec.request_bytes,
+                )
+            })
+            .transpose()
+            .map_err(invalid)?
+            .map(artifact_view);
         Ok(ProposalClaimed {
             ticket_key: view.ticket_key,
             claim,
             ticket: view.ticket,
             usage: view.usage,
             upload_relative_path,
+            request_artifact,
         })
     }
 
@@ -529,6 +563,7 @@ impl ProposalDaemon {
             ticket: view.ticket,
             usage: view.usage,
             upload_relative_path: None,
+            request_artifact: None,
         })
     }
 
@@ -797,6 +832,12 @@ fn same_logical_submission(
 ) -> bool {
     ticket.spec.proposer_id == request.proposer_id
         && ticket.spec.role == request.role
+        && ticket.spec.request_blake3
+            == blake3::Hash::from_hex(&request.canonical_payload_blake3)
+                .ok()
+                .map(|digest| *digest.as_bytes())
+                .unwrap_or([0; 32])
+        && ticket.spec.request_bytes == request.request_bytes
         && ticket.spec.cost_units == request.cost_units
         && ticket.spec.max_return_bytes == request.maximum_return_bytes
         && ticket
@@ -848,6 +889,11 @@ fn validate_offer(request: ProposalSessionOpenRequest) -> Result<(), ControlErro
 }
 
 fn validate_operation_timeouts(request: &ProposalSubmitRequest) -> Result<(), ControlError> {
+    if request.request_bytes == 0 || request.request_bytes > MAX_EXTERNAL_REQUEST_BYTES {
+        return Err(ControlError::Invalid(
+            "proposal request bytes are outside the operation bound".into(),
+        ));
+    }
     if request.queue_timeout_ms == 0
         || request.queue_timeout_ms > request.execution_timeout_ms
         || request.execution_timeout_ms > request.admission_timeout_ms
@@ -931,6 +977,7 @@ mod tests {
             session_id: session_id.into(),
             request_id: 1,
             canonical_payload_blake3: blake3::hash(b"payload").to_hex().to_string(),
+            request_bytes: 7,
             proposer_id: 3,
             role: ProposalRole::Heuristic,
             cost_units: 5,
@@ -940,6 +987,22 @@ mod tests {
             admission_timeout_ms: 3_000,
             retention_timeout_ms: 4_000,
         }
+    }
+
+    fn stage_request(daemon: &ProposalDaemon, request: &ProposalSubmitRequest, payload: &[u8]) {
+        assert_eq!(
+            request.canonical_payload_blake3,
+            blake3::hash(payload).to_hex().to_string()
+        );
+        assert_eq!(request.request_bytes, payload.len() as u64);
+        let path = daemon.root.parent().unwrap().join(
+            daemon
+                .artifacts
+                .request_upload_relative_path(&request.session_id, request.request_id)
+                .unwrap(),
+        );
+        fs::write(&path, payload).unwrap();
+        fs::set_permissions(&path, fs::Permissions::from_mode(0o600)).unwrap();
     }
 
     #[test]
@@ -953,7 +1016,9 @@ mod tests {
         )
         .unwrap();
         let opened = daemon.open_session(offer()).unwrap();
-        let submitted = daemon.submit(submit(&opened.session_id)).unwrap();
+        let request = submit(&opened.session_id);
+        stage_request(&daemon, &request, b"payload");
+        let submitted = daemon.submit(request).unwrap();
         assert_eq!(submitted.disposition, ProposalTicketSubmission::Created);
         assert_eq!(
             daemon
@@ -1047,6 +1112,8 @@ mod tests {
             request.request_id = request_id;
             request.canonical_payload_blake3 =
                 blake3::hash(&request_id.to_le_bytes()).to_hex().to_string();
+            request.request_bytes = 8;
+            stage_request(&daemon, &request, &request_id.to_le_bytes());
             let submitted = daemon.submit(request).unwrap();
             first.get_or_insert(submitted.clone());
             daemon
@@ -1059,6 +1126,8 @@ mod tests {
         let mut limited = submit(&opened.session_id);
         limited.request_id = 17;
         limited.canonical_payload_blake3 = blake3::hash(b"seventeenth").to_hex().to_string();
+        limited.request_bytes = 11;
+        stage_request(&daemon, &limited, b"seventeenth");
         assert!(matches!(
             daemon.submit(limited),
             Err(ControlError::Invalid(message)) if message.contains("rate limited")
@@ -1068,12 +1137,14 @@ mod tests {
         let mut duplicate = submit(&opened.session_id);
         duplicate.canonical_payload_blake3 =
             blake3::hash(&1_u64.to_le_bytes()).to_hex().to_string();
+        duplicate.request_bytes = 8;
         assert_eq!(
             daemon.submit(duplicate).unwrap().disposition,
             ProposalTicketSubmission::Existing
         );
         let mut changed = submit(&opened.session_id);
         changed.canonical_payload_blake3 = blake3::hash(&1_u64.to_le_bytes()).to_hex().to_string();
+        changed.request_bytes = 8;
         changed.cost_units = 6;
         assert!(matches!(
             daemon.submit(changed),
@@ -1101,6 +1172,8 @@ mod tests {
             request.request_id = request_id;
             request.canonical_payload_blake3 =
                 blake3::hash(&request_id.to_le_bytes()).to_hex().to_string();
+            request.request_bytes = 8;
+            stage_request(&daemon, &request, &request_id.to_le_bytes());
             let submitted = daemon.submit(request).unwrap();
             assert!(matches!(
                 daemon
@@ -1125,6 +1198,8 @@ mod tests {
         let mut request = submit(&opened.session_id);
         request.request_id = 4;
         request.canonical_payload_blake3 = blake3::hash(b"fourth").to_hex().to_string();
+        request.request_bytes = 6;
+        stage_request(&daemon, &request, b"fourth");
         let submitted = daemon.submit(request).unwrap();
         assert!(matches!(
             daemon
@@ -1149,7 +1224,9 @@ mod tests {
         )
         .unwrap();
         let opened = daemon.open_session(offer()).unwrap();
-        let first = daemon.submit(submit(&opened.session_id)).unwrap();
+        let request = submit(&opened.session_id);
+        stage_request(&daemon, &request, b"payload");
+        let first = daemon.submit(request).unwrap();
         let first_key = ProposalIdempotencyKey::from_hex(&first.ticket_key).unwrap();
         for _ in 0..3 {
             daemon
@@ -1177,6 +1254,8 @@ mod tests {
         let mut second_request = submit(&opened.session_id);
         second_request.request_id = 2;
         second_request.canonical_payload_blake3 = blake3::hash(b"second").to_hex().to_string();
+        second_request.request_bytes = 6;
+        stage_request(&daemon, &second_request, b"second");
         let second = daemon.submit(second_request).unwrap();
         assert!(matches!(
             daemon

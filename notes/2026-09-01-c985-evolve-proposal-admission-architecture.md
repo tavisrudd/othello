@@ -480,6 +480,17 @@ next transport gate is daemon-owned typed request/context artifacts so the
 callback need not obtain its immutable input out of band; a hosted SDK adapter
 then becomes a thin optional package rather than core policy.
 
+That request gate is now implemented. A session exposes one private
+run-relative upload directory; Python streams a nonempty bounded request to a
+deterministic request-ID path. Submission carries only the canonical digest and
+measured length. The daemon independently verifies and atomically publishes a
+read-only request, persists digest/length in the ticket, and revalidates the
+artifact on every runnable claim. The runner confines the returned path to the
+authenticated run before constructing `ProviderInvocation`; the command
+adapter consumes it directly. No input or output payload is buffered in a JSON
+frame or one byte vector. Typed payload schemas above these opaque canonical
+bytes and an optional hosted SDK package remain the next layers.
+
 The next generic slice now implements the in-memory/persistable ticket state
 machine without adding wire operations. Its fixed ticket identity makes submit
 create-or-return-existing and rejects a conflicting normalized spec. Explicit

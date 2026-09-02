@@ -34,12 +34,19 @@ def view(
     }
     if claim is not None:
         result["claim"] = claim
+        result["request_artifact"] = {
+            "relative_path": "request",
+            "blake3": "c" * 64,
+            "bytes": 7,
+        }
     return ProposalTicketView.from_result(result)
 
 
 def ticket() -> ProposalTicket:
     client = Session(Path.cwd(), Path("unused.sock"), "run", "nonce")
-    session = ExternalProposalSession(client, "session", "a" * 64, {}, {})
+    session = ExternalProposalSession(
+        client, "session", "a" * 64, {}, {}, Path("unused")
+    )
     return ProposalTicket(session, view("queued"))
 
 

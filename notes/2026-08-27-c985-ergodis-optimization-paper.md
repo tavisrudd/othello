@@ -2710,7 +2710,16 @@ files are disposable and may be deleted at any time.
     one sleep or immediate return. The hostile pass rejected a bare persisted
     half-open Boolean because cancellation could leave an unowned permanent
     lock; schema v3 requires Boolean/lease agreement and restart/cancel controls
-    pass. Typed request/context artifacts remain next.
+    pass. Daemon-owned request/context artifacts now close the remaining
+    transport gap. Session open returns a private upload directory; Python
+    streams a nonempty request there, and submit carries only its canonical
+    digest and measured length. The daemon independently hashes, caps, fsyncs,
+    and publishes it read-only, binds digest/length into bumped durable ticket
+    and session schemas, and revalidates it on every runnable claim. The runner
+    confines the claim path to the authenticated run and passes it directly to
+    the command backend. Both directions are fixed-buffer/file streamed; no
+    payload enters JSON or a whole-memory byte string. The next slice is a
+    typed request-schema registry and optional hosted SDK package.
 
     The first new proposer family is accepted. A coloured-Tanner isomorphism
     proposal between the official LP1768 X/Z instances is independently

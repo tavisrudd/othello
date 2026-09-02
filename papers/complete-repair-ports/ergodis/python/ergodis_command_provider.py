@@ -28,7 +28,6 @@ class CommandProvider:
         self,
         argv: Sequence[str],
         *,
-        request_path: Path | str,
         work_dir: Path | str,
         environment: Mapping[str, str] | None = None,
         maximum_request_bytes: int = 1024 * 1024,
@@ -46,14 +45,7 @@ class CommandProvider:
         if any(not 1 <= code <= 255 for code in transient_exit_codes):
             raise ValueError("transient exit codes must be in 1..=255")
         self.argv = tuple(argv)
-        self.request_path = Path(request_path).resolve(strict=True)
-        request_metadata = self.request_path.stat()
-        if (
-            not self.request_path.is_file()
-            or request_metadata.st_size > maximum_request_bytes
-            or request_metadata.st_mode & 0o077
-        ):
-            raise ValueError("request_path is not a bounded private regular file")
+        self.maximum_request_bytes = maximum_request_bytes
         self.work_dir = Path(work_dir).resolve()
         self.work_dir.mkdir(mode=0o700, parents=True, exist_ok=True)
         if self.work_dir.stat().st_mode & 0o077:
@@ -63,10 +55,21 @@ class CommandProvider:
         self.transient_exit_codes = transient_exit_codes
 
     async def __call__(self, invocation: ProviderInvocation) -> BinaryIO:
+        request_path = invocation.request_path.resolve(strict=True)
+        request_metadata = request_path.stat()
+        if (
+            not request_path.is_file()
+            or request_metadata.st_size > self.maximum_request_bytes
+            or request_metadata.st_mode & 0o077
+        ):
+            raise ProviderFailure(
+                ProposalFailure.PROTOCOL_FAULT,
+                "request artifact is not a bounded private regular file",
+            )
         output = tempfile.TemporaryFile(mode="w+b", dir=self.work_dir)
         stderr = bytearray()
         try:
-            with self.request_path.open("rb") as request:
+            with request_path.open("rb") as request:
                 process = await asyncio.create_subprocess_exec(
                     *self.argv,
                     stdin=request,

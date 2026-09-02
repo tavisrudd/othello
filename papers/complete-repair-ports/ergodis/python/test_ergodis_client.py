@@ -40,12 +40,20 @@ def recv_exact(connection: socket.socket, length: int) -> bytes:
 
 class ErgodisClientTest(unittest.TestCase):
     def test_pythonic_proposer_objects_validate_and_route(self) -> None:
-        session = Session(Path.cwd(), Path("unused.sock"), "run", "nonce")
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name)
+        request_directory = root / "proposal-artifacts/request-incoming/session-1"
+        request_directory.mkdir(parents=True)
+        session = Session(root, root / "unused.sock", "run", "nonce")
         opened = {
             "session_id": "session-1",
             "source_fingerprint": "a" * 64,
             "limits": {"maximum_queries": 16},
             "usage": {"queries": 0},
+            "request_upload_directory": (
+                "proposal-artifacts/request-incoming/session-1"
+            ),
         }
         submitted = {
             "ticket_key": "b" * 64,
@@ -80,6 +88,7 @@ class ErgodisClientTest(unittest.TestCase):
             ticket = proposer.submit(
                 request_id=1,
                 payload_blake3="c" * 64,
+                payload=io.BytesIO(b"request"),
                 proposer_id=3,
                 role=ProposalRole.HEURISTIC,
                 cost_units=5,
@@ -92,10 +101,13 @@ class ErgodisClientTest(unittest.TestCase):
             self.assertEqual(
                 request.call_args_list[1].args[1]["role"], ProposalRole.HEURISTIC.value
             )
+            self.assertEqual(request.call_args_list[1].args[1]["request_bytes"], 7)
+            self.assertFalse((request_directory / "0000000000000001.upload").exists())
         with self.assertRaises(ValueError):
             proposer.submit(
                 request_id=2,
                 payload_blake3="not-a-digest",
+                payload=io.BytesIO(b"request"),
                 proposer_id=3,
                 role=ProposalRole.HEURISTIC,
                 cost_units=5,
@@ -148,6 +160,7 @@ class ErgodisClientTest(unittest.TestCase):
                     "a" * 64,
                     {},
                     {},
+                    Path("unused"),
                 ),
                 ProposalTicketView.from_result(submitted),
             )
@@ -169,7 +182,9 @@ class ErgodisClientTest(unittest.TestCase):
             incoming.mkdir(parents=True)
             session = Session(root, root / "unused.sock", "run", "nonce")
             ticket = ProposalTicket(
-                ExternalProposalSession(session, "session-1", "a" * 64, {}, {}),
+                ExternalProposalSession(
+                    session, "session-1", "a" * 64, {}, {}, Path("unused")
+                ),
                 ProposalTicketView.from_result(
                     {
                         "ticket_key": "b" * 64,

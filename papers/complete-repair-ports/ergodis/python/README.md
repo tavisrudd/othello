@@ -80,6 +80,15 @@ child process group. This supports local LLMs, hosted-provider CLI wrappers,
 SAT/MIP tools, and research scripts without adding any provider dependency to
 Ergodis.
 
+Submission input uses the same bounded artifact boundary as output. The session
+returns a private run-relative request-upload directory;
+`submit(..., payload=binary_stream, payload_blake3=...)` streams there in fixed
+chunks and sends only the declared digest and measured byte count. The daemon
+re-hashes and publishes a read-only request artifact, binds both fields into the
+durable ticket, and returns its verified path on claim. `ProviderRunner` passes
+that confined path to the backend invocation, so `CommandProvider` needs no
+out-of-band request filename.
+
 The `recovery_algorithms` package implements direct finite-field and
 combinatorial formulations. Its simple representations make it useful for
 independent checking on bounded instances; they are not the high-performance
