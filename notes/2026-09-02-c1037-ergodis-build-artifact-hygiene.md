@@ -180,3 +180,17 @@ Full table: `notes/2026-09-02-c1037-cache-gc-dry-run.txt` (produced without
 
 All changes are left in the working tree. No `git add`, commit, push, reset,
 checkout, restore, or stash was run.
+
+## Closeout (2026-09-02, reviewer)
+
+- The three in-tree target directories for the public core, `ergodis-private`, and `rust/` were
+  deleted after the shared target directories were verified; `sparse-shadow/target` and the GRS
+  paper's target directory belong to other lanes and were left.
+- `cache-gc.sh` gained `--min-age-days N`, which keeps unreferenced entries modified within the
+  last N days so a concurrent lane's live artifacts survive.
+- The 30 DRAT proof files were hashed into `evidence/c985-drat-proof-hashes.tsv` (file, bytes,
+  mtime, SHA-256) and deleted; a replay regenerates them.
+- `cache-gc.sh --apply --min-age-days 2` removed 271 unreferenced entries older than two days and
+  kept 72 younger ones; the cache went from about 32G to 15G, of which the shared target
+  directories are the bulk.
+

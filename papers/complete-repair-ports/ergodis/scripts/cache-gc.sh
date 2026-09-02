@@ -24,17 +24,25 @@ for dir in "$core_root/evidence" "$repo_root/ergodis-private/evidence"; do
 done
 
 apply=0
-case ${1:-} in
-  --apply) apply=1 ;;
-  --help|-h)
-    echo "usage: cache-gc.sh [--apply]" >&2
-    echo "  default: dry run, printing a table of cache entries and their references" >&2
-    echo "  --apply: rm -rf each UNREFERENCED entry, one exact named path at a time" >&2
-    exit 0
-    ;;
-  "") ;;
-  *) echo "cache-gc.sh: unknown argument: $1" >&2; exit 2 ;;
-esac
+min_age_days=0
+while (( $# )); do
+  case $1 in
+    --apply) apply=1 ;;
+    --min-age-days)
+      min_age_days=${2:?--min-age-days needs a value}
+      shift
+      ;;
+    --help|-h)
+      echo "usage: cache-gc.sh [--apply] [--min-age-days N]" >&2
+      echo "  default: dry run, printing a table of cache entries and their references" >&2
+      echo "  --apply: rm -rf each UNREFERENCED entry, one exact named path at a time" >&2
+      echo "  --min-age-days N: treat entries modified within the last N days as KEPT (in use)" >&2
+      exit 0
+      ;;
+    *) echo "cache-gc.sh: unknown argument: $1" >&2; exit 2 ;;
+  esac
+  shift
+done
 
 cache_root=$(ergodis_cache_root)
 if [[ ! -d $cache_root ]]; then
@@ -65,8 +73,12 @@ while IFS= read -r entry; do
   fi
 
   if [[ -z $refs ]]; then
-    refs=UNREFERENCED
-    unreferenced+=("$entry")
+    if (( age_days < min_age_days )); then
+      refs="KEPT (younger than ${min_age_days}d)"
+    else
+      refs=UNREFERENCED
+      unreferenced+=("$entry")
+    fi
   fi
 
   printf '%10s  %6dd  %-44s  %s\n' "$size" "$age_days" "$name" "$refs"
