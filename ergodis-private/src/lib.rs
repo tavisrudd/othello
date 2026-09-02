@@ -1,3 +1,5 @@
+pub mod banked_semantic_evolve;
+pub mod feature_synthesis;
 pub mod g53_defect_profile_proof;
 pub mod g53_mod7_reduction;
 pub mod g53_reduction_proof;
@@ -10,6 +12,7 @@ pub mod q16_quadratic;
 pub mod q19_marked_polar;
 pub mod q25_pair_repair;
 pub mod quotient_paf_proof;
+pub mod raw_feature_evolve;
 pub mod reduction_proof;
 pub mod semantic_plan;
 pub mod semantic_rank;
