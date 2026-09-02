@@ -10,6 +10,24 @@
     "random_baseline": "css_distance_random, 1000 trials, OSD order 2, window 96, best effort, default fixed seed",
     "bp_configuration": "one augmented physical-plus-logical-row solve per logical observation; 300 iterations; combination sweep; no shared mutable worker state"
   },
+  "hot_loop_repair": {
+    "commit": "2cafffaac",
+    "baseline_commit": "7efc97147",
+    "allocation_gate": "prepared decode, replay, checksum, and sparse best-support retention observe zero allocations, reallocations, and deallocations",
+    "partition": "worker-owned strided target jobs prepared before timing; an initial contiguous partition was rejected for target-cost imbalance",
+    "bb756_30_pairs": {
+      "baseline_seconds": 0.018067494,
+      "candidate_seconds": 0.016744312,
+      "speedup": 1.0790,
+      "paired_t": 4.02
+    },
+    "bb288_100_pairs": {
+      "baseline_seconds": 0.003306977,
+      "candidate_seconds": 0.003187264,
+      "speedup": 1.0376,
+      "paired_t": 1.02
+    }
+  },
   "gross144": {
     "input_sha256": "4ca7670cb86ab54f15da19b7448d4eada813053325f837a4290d8243a7f34868",
     "threads": 12,

@@ -1346,9 +1346,17 @@ files are disposable and may be deleted at any time.
    `syndrome_satisfied` rather than `exact`, and it carries no proof authority.
    Rust 1.87 tests, finite degree-one behavior, normalized-scale bounds,
    x86-64/non-x86 portability, independent-worker ownership, attribution, and
-   the private/public source boundary are explicit.  The item (d) next gate is
-   a dedicated reviewed public-core import of the reusable engine only, not
-   more work on an ordering-only bridge.
+   the private/public source boundary are explicit.  The reusable engine then
+   landed publicly at `b28d5640c`; Rust 1.87, strict all-target/all-feature
+   clippy, the full public suite, typed zero-allocation solves, and independent
+   multi-workspace controls all pass.  The private CSS adapter `7efc97147`
+   independently replays each physical and logical equation.  Its three-code
+   gate reaches weights 12, 18, and 34 on Gross144, BB288, and BB756 while
+   improving over the 1,000-trial random-IS control by 6.253x--12.672x.  Thus
+   item (d) is admitted as a fast incumbent oracle, never as lower-bound or
+   proof authority.  The next BP tranche is an automatic bounded parameter
+   portfolio followed, only if quality still demands it, by varied per-bit
+   priors; reliability ordering alone remains rejected.
 
    Current-tree reconciliation changes that order slightly. Static and dynamic
    incumbent fan-out are already present as worker-local relaxed mailboxes plus
@@ -4049,3 +4057,14 @@ fallback, and exhaustive Ergodis remains the sole lower-bound/proof-authority
 path.  Full commands, hashes, counters, RSS, and input-generator provenance are
 in `ergodis-private/evidence/c985-css-bp-osd-application-spike.json`; no durable
 claim depends on a cache or target-directory artifact.
+
+Commit `2cafffaac` closes the adapter's own hot-loop contract.  Graphs,
+syndromes, workspaces, strided worker jobs, and sparse result capacities are
+now all prepared before timing; the actual decode, replay, checksum, and best-
+support retention loop records zero allocations, reallocations, and
+deallocations.  An initially contiguous job partition was rejected after a
+16.5% BB756 regression exposed target-cost imbalance.  The retained strided
+worker-owned partition preserves both BB288 and BB756 checksums.  Against
+`7efc97147`, 30 paired BB756 rounds improve timed search 1.0790x (`t=4.02`);
+100 higher-power BB288 pairs show no small-instance regression (1.0376x,
+`t=1.02`).
