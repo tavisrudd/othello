@@ -263,11 +263,11 @@ impl MinSumWorkspace {
             for (check, window) in graph.row_offsets.windows(2).enumerate() {
                 let start = window[0];
                 let end = window[1];
+                let messages = &self.v2c[start..end];
                 let mut sign = syndrome[check] != 0;
                 let mut minimum = f64::MAX;
                 let mut second = f64::MAX;
-                for edge in start..end {
-                    let message = self.v2c[edge];
+                for &message in messages {
                     sign ^= message <= 0.0;
                     let magnitude = message.abs();
                     let lower = ordered_min(minimum, magnitude);
@@ -275,14 +275,14 @@ impl MinSumWorkspace {
                     minimum = lower;
                     second = ordered_min(second, upper);
                 }
-                for edge in start..end {
-                    let magnitude = if self.v2c[edge].abs() == minimum {
+                for (&message, output) in messages.iter().zip(&mut self.c2v[start..end]) {
+                    let magnitude = if message.abs() == minimum {
                         second
                     } else {
                         minimum
                     } * scale;
-                    let negative = sign ^ (self.v2c[edge] <= 0.0);
-                    self.c2v[edge] = if negative { -magnitude } else { magnitude };
+                    let negative = sign ^ (message <= 0.0);
+                    *output = if negative { -magnitude } else { magnitude };
                 }
             }
 
