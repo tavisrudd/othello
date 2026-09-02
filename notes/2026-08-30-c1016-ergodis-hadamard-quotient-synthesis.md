@@ -2847,6 +2847,21 @@ protected CHOOM repeat costs 338,952,216,281 instructions and
 123x more parity hits per CPU cycle.  Pool misses remain sampled discovery
 misses and grant no negative coverage.
 
+The first parallel parity-target campaign assigns disjoint seed intervals to
+eighteen worker-owned tables.  On 180,000 seeds with pool 512 it finds 1,828
+liftable fibres and 1,336 directly replayed parity shells, improving the best
+lattice level from 18 to 8 with no exact hit.  It retires
+6,102,139,096,898 instructions and 12,774,168,730,868 aggregate cycles, about
+91x the parity-hit efficiency of the comparable scaled blind campaign.
+Complete-moment reconstruction of row zero is bounded in none of the 1,336
+shells.  The next scoped hypothesis is therefore to search the fourteen
+antisymmetric row-zero lift choices and derive its symmetric half, rather than
+only enlarging the random row pool.  This pilot used neutral `choom -n 0`, so
+its counters are not protected-run evidence.  A tenfold follow-up was
+terminated during wrap-up after 20,032,815,753,860 cycles and
+9,873,595,469,771 instructions, before it emitted a semantic report, and
+consequently proves nothing.
+
 The next exact q29 theorem family is complete rather than merely a two-moment
 gate.  For every even `k=2,4,...,26`, binomial expansion gives
 `sum_s s^k C_s=0 (mod 29)` at the exact target; at `k=28` the right side is
@@ -2929,6 +2944,15 @@ combined 12-worker run costs 1,199,907,798,666 instructions and
 1,048,714,333,016 aggregate cycles.  The radius-five boundary now lacks only
 the same-row partitions `5` and `4+1`; the length-522 lift also remains
 uncovered.
+
+An initial full `4+1` census was interrupted after
+5,264,330,550,547 cycles and 23,912,229,628,053 instructions without a
+progress checkpoint or semantic output.  It has no negative authority.  The
+revised kernel now keys the compiled target table by exact changed-row energy
+before the moment coordinates; this necessary shift-zero test is much cheaper
+than complete moment extraction and passes a 100,000-state zero-allocation
+test.  It was not restarted during wrap-up, so its full pruning rate remains
+unmeasured.
 
 Those last partitions admit a structural rather than enumerative filter.  A
 candidate replacement-row autocorrelation must generate a positive-
