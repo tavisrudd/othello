@@ -232,8 +232,7 @@ struct MinSumWorkspace {
     c2v: Vec<f64>,
     posterior: Vec<f64>,
     hard: Vec<u8>,
-    observed_words: Vec<u64>,
-    syndrome_words: Vec<u64>,
+    observed: Vec<u8>,
 }
 
 impl MinSumWorkspace {
@@ -244,8 +243,7 @@ impl MinSumWorkspace {
             c2v: vec![0.0; edges],
             posterior: vec![0.0; graph.bits],
             hard: vec![0; graph.bits],
-            observed_words: vec![0; graph.checks.div_ceil(64)],
-            syndrome_words: vec![0; graph.checks.div_ceil(64)],
+            observed: vec![0; graph.checks],
         }
     }
 
@@ -258,10 +256,6 @@ impl MinSumWorkspace {
         scale: f64,
         maximum_iterations: usize,
     ) -> usize {
-        self.syndrome_words.fill(0);
-        for (check, &value) in syndrome.iter().enumerate() {
-            self.syndrome_words[check / 64] |= u64::from(value) << (check % 64);
-        }
         self.v2c.fill(channel_llr);
         self.c2v.fill(0.0);
         self.hard.fill(0);
@@ -292,7 +286,7 @@ impl MinSumWorkspace {
                 }
             }
 
-            self.observed_words.fill(0);
+            self.observed.fill(0);
             for bit in 0..graph.bits {
                 let start = graph.col_offsets[bit];
                 let end = graph.col_offsets[bit + 1];
@@ -307,8 +301,7 @@ impl MinSumWorkspace {
                 if llr <= 0.0 {
                     for slot in start..end {
                         let edge = graph.col_edges[slot];
-                        let check = graph.edge_checks[edge];
-                        self.observed_words[check / 64] ^= 1 << (check % 64);
+                        self.observed[graph.edge_checks[edge]] ^= 1;
                     }
                 }
                 let mut suffix = 0.0;
@@ -318,7 +311,7 @@ impl MinSumWorkspace {
                     suffix += self.c2v[edge];
                 }
             }
-            if self.observed_words == self.syndrome_words {
+            if self.observed == syndrome {
                 return iteration;
             }
         }
@@ -326,19 +319,18 @@ impl MinSumWorkspace {
     }
 
     #[inline(always)]
-    fn satisfies(&mut self, graph: &TannerGraph) -> bool {
-        self.observed_words.fill(0);
+    fn satisfies(&mut self, graph: &TannerGraph, syndrome: &[u8]) -> bool {
+        self.observed.fill(0);
         for bit in 0..graph.bits {
             if self.hard[bit] == 0 {
                 continue;
             }
             for slot in graph.col_offsets[bit]..graph.col_offsets[bit + 1] {
                 let edge = graph.col_edges[slot];
-                let check = graph.edge_checks[edge];
-                self.observed_words[check / 64] ^= 1 << (check % 64);
+                self.observed[graph.edge_checks[edge]] ^= 1;
             }
         }
-        self.observed_words == self.syndrome_words
+        self.observed == syndrome
     }
 }
 
@@ -631,7 +623,7 @@ impl BpOsdWorkspace {
         {
             self.bp.hard.copy_from_slice(&self.osd.candidate);
         }
-        let syndrome_satisfied = self.bp.satisfies(&code.graph);
+        let syndrome_satisfied = self.bp.satisfies(&code.graph, syndrome);
         let weight = self.bp.hard.iter().map(|&value| usize::from(value)).sum();
         Ok(BpOsdResult {
             candidate: &self.bp.hard,
