@@ -268,7 +268,7 @@ pairs from the directory. It recovered all fourteen reductions and classified
 all 14,336 disjoint holdout rows exactly. The CHOOM-protected,
 nonmultiplexed rerun used 7,743,068,062 instructions, 1,904,203,917 cycles,
 1,274,537,241 branches, and 10,754,080 branch misses. Evidence is under
-`/tmp/persistent/tavis/c1016/blind-opaque-v2/`; it remains discovery-only local
+`/home/tavis/.local/state/ergodis-private/c1016/blind-opaque-v2/`; it remains discovery-only local
 evidence, not a paper-facing certificate.
 
 For discovery only, fixed minus counts turn the bordered PAF equation into
@@ -294,7 +294,7 @@ core, the latter models 50 billion total mutations to about 8.8 hours. The
 first service attempt was CHOOM-killed during the deliberately heavy broad
 test at only 6.8 MiB peak RSS. Its restarted replacement completed 50 billion
 mutations without a witness. The persistent log
-`/tmp/persistent/tavis/c1016/g53-search-20260831T0025.log` records every worker
+`/home/tavis/.local/state/ergodis-private/c1016/g53-search-20260831T0025.log` records every worker
 at the full 10-quotient/2-subgroup/49-shift stage, 2,976,205,325,587,505 retired
 instructions, and 893,934,554,951,320 cycles: 59,524 instructions and 17,879
 cycles per mutation. This is a heuristic miss only. The next campaign uses an
