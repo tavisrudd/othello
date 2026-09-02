@@ -4903,5 +4903,12 @@ reach the fixed target, while every target witness remains. The plan stores each
 as one asserted eight-byte record, charges the exact two-transition scan bound at
 compile time, and swaps its two presized count arrays instead of copying the full sum
 range after every item. Packed prefix reachability and deterministic witness replay are
-unchanged. Exhaustive signed controls preserve counts and witnesses; measured A/B is
-the acceptance gate before recording a speed claim.
+unchanged. Exhaustive signed controls preserve counts and witnesses. Commit
+`4b6fb3a83` passes the measured gate against the byte-identical driver at control
+`ebca6cb66`: on a 28-item signed target, the exact transition bound falls from 92,344
+to 28,444 (3.2465x). Nine rotated single-core pairs of 5,001 solves improve hardware
+cycles 2.0294x (`t=460.80`), instructions 1.7403x, branches 1.6773x, and wall duration
+1.9090x (`t=34.76`) at identical counts/checksums. Branch misses improve 2.5115x but
+are too small to explain the result. Process RSS is baseline-sized (1,516/1,688 KiB)
+and no memory claim is made. Binary hashes, toolchain, command, and all raw pairs are
+retained in `ergodis-private/evidence/c985-subset-sum-continuation-ab.tsv`.
