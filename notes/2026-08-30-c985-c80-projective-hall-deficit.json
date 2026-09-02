@@ -1,12 +1,16 @@
 {
+  "continue_after_issue": false,
   "counts": {
     "complete_exchanges": 1,
+    "complete_relation_hall_failures": 0,
     "exchanges_with_new_defects": 1,
     "hall_failures": 1,
     "maximum_new_defects": 2,
     "new_defects": 2,
     "nondecreasing_exchanges": 1,
+    "omega_first_lex_failures": 0,
     "states": 100,
+    "support_first_lex_failures": 0,
     "uncovered_fibres": 0
   },
   "exchange_budget": 10000,
@@ -14,6 +18,10 @@
     "causal": [
       6,
       1
+    ],
+    "charged_support": [
+      2,
+      2
     ],
     "consumed": [
       [
@@ -162,6 +170,7 @@
       0,
       0
     ],
+    "omega_first_descends": true,
     "opponent": [
       4,
       9
@@ -185,6 +194,7 @@
       ]
     ],
     "successor_is_small_boundary": false,
+    "support_first_descends": true,
     "uncovered": []
   },
   "primary_replay": true,
