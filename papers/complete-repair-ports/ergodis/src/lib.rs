@@ -10,6 +10,7 @@ pub mod automata;
 pub mod balanced;
 pub mod binary_kernel_search;
 pub mod bitset;
+pub mod bp_osd;
 pub mod character_sum;
 pub mod coherent_closure;
 pub mod commutant;

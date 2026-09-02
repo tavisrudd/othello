@@ -281,6 +281,15 @@ explicit, and `--evidence` writes one
 create-only, source-hashed JSON record. This is a witness finder, not a lower-
 bound procedure; exactness still comes from `css_distance_native` exhaustion.
 
+The library-level `ergodis::bp_osd` module provides a second reusable candidate
+backend: sparse normalized-min-sum belief propagation followed by OSD-0,
+bounded combination sweep, or bounded exhaustive OSD. One immutable compiled
+parity-check matrix can be shared by independent aligned worker workspaces;
+typed solves allocate nothing after setup. A returned
+`syndrome_satisfied = true` certifies only the supplied binary equation. It is
+an upper-bound witness, never a minimum-distance or proof-authority claim, and
+applications must independently replay any additional logical observable.
+
 `binary_linear_distance` is the corresponding exact small-rank row-space mode.
 Its sparse JSON input contains `label`, `coordinate_count`, and `generators`;
 the output gives the minimum nonzero weight and a replayable support. It uses a
