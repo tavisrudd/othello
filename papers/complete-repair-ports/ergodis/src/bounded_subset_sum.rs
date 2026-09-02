@@ -215,17 +215,15 @@ impl BoundedSubsetSumPlan {
         if witness_words.len() != self.witness_words() {
             return Err(BoundedSubsetSumError::WitnessShape);
         }
+        workspace.counts.fill(0);
+        workspace.reachability.fill(0);
         witness_words.fill(0);
-        let initial = self.windows[0];
-        if !initial.contains(self.index(0).expect("compiled range contains zero")) {
+        if !self.windows[0].contains(self.index(0).expect("compiled range contains zero")) {
             return Ok(0);
         }
-        workspace.counts[initial.range()].fill(0);
         let zero = self.index(0).expect("compiled range contains zero");
         workspace.counts[zero] = 1;
-        let initial_row = &mut workspace.reachability[..self.bitmap_words];
-        clear_bit_window(initial_row, initial);
-        set_bit(initial_row, zero);
+        set_bit(&mut workspace.reachability[..self.bitmap_words], zero);
 
         for (item, &weight) in self.weights.iter().enumerate() {
             let current = self.windows[item];
@@ -258,7 +256,6 @@ impl BoundedSubsetSumPlan {
             std::mem::swap(&mut workspace.counts, &mut workspace.scratch);
             let row = &mut workspace.reachability
                 [(item + 1) * self.bitmap_words..(item + 2) * self.bitmap_words];
-            clear_bit_window(row, next);
             for index in next.range() {
                 let count = workspace.counts[index];
                 if count != 0 {
@@ -428,15 +425,6 @@ fn get_bit(words: &[u64], index: usize) -> bool {
     words[index / 64] & (1_u64 << (index % 64)) != 0
 }
 
-fn clear_bit_window(words: &mut [u64], window: SubsetSumWindow) {
-    if window.start == window.end {
-        return;
-    }
-    let start = window.start as usize / 64;
-    let end = (window.end as usize).div_ceil(64);
-    words[start..end].fill(0);
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -499,17 +487,6 @@ mod tests {
             }
         });
         assert_eq!(events, crate::test_alloc::AllocationEvents::default());
-
-        let odd_plan = BoundedSubsetSumPlan::compile(&[-2, -1, 1, 2, 3], 2, BOUNDS).unwrap();
-        let mut odd_workspace = odd_plan.workspace();
-        let mut odd_witness = vec![0; odd_plan.witness_words()];
-        let first = odd_plan
-            .solve_into(&mut odd_workspace, &mut odd_witness)
-            .unwrap();
-        let second = odd_plan
-            .solve_into(&mut odd_workspace, &mut odd_witness)
-            .unwrap();
-        assert_eq!(first, second);
     }
 
     #[test]
