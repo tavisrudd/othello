@@ -169,9 +169,9 @@ backoff, provider `Retry-After`, and the owning deadline. Timeouts request a
 smaller scope rather than silently repeating work. `CircuitBreaker` ignores
 semantic rejection, grows bounded open intervals after attributable operational
 failures, and admits at most one half-open probe. Expected provider throttling
-and controller queue delay do not count as backend-health failures. These primitives do not yet
-add proposer wire operations: daemon integration must persist their state and
-issue typed tickets without changing this protocol's search-path boundary.
+and controller queue delay do not count as backend-health failures. The campaign
+daemon uses these primitives for bounded proposer wire operations without
+changing this protocol's search-path boundary.
 `ProposalIdempotencyKey` already supplies the stable 32-byte logical-request
 identity for that integration. It binds a bounded session ID, nonzero request
 ID, and canonical payload BLAKE3 under a versioned domain separator; identical
@@ -192,9 +192,8 @@ admission window closes but never after retention expiry. A restored running
 ticket remains running until the controller reaps or reconciles its orphan and
 records that exact attempt's outcome.
 
-This ledger is not yet exposed as a socket operation and its snapshot is not
-yet attached to the campaign daemon. `ProposalTicketStore` now supplies the
-durable boundary it will use: private create-only store metadata pins the
+`ProposalTicketStore` supplies the durable boundary: private create-only store
+metadata pins the
 schema and configured cap; each bounded ticket occupies one key-named compact
 file; new tickets publish by fsynced temporary file plus atomic hard link, and
 updates by fsynced temporary file plus atomic rename. Directories are synced,
@@ -204,10 +203,29 @@ durability. Restore tolerates a bounded set of crash-leftover temporary files,
 avoids reusing their names, replays the ledger, persists deadline expirations,
 and never rewrites all tickets for one transition.
 
-The remaining integration must attach this store to a campaign run, persist
-the queued state before provider dispatch and every outcome before
-acknowledging it, reconcile restored running attempts, and expose bounded wire
-operations. Provider SDK code remains outside the generic layer.
+Each external session has a separate durable quota ledger bound to the run and
+source fingerprint. It retains exact ticket specifications and charges declared
+work/return budgets permanently, including after cancellation. The composed
+submission store publishes the session reservation before the ticket. Restart
+can therefore reconstruct a reservation-only partial commit exactly; the
+inverse ticket-without-reservation state fails closed. Terminal and expired
+tickets settle the session's outstanding count during reconciliation.
+
+The socket operations are `proposal-session-open`, `proposal-submit`,
+`proposal-status`, `proposal-worker-claim`, `proposal-worker-failure`,
+`proposal-worker-complete`, `proposal-cancel`, `proposal-result`, and
+`proposal-revision-reserve`. The daemon derives absolute deadlines and retry
+jitter from bounded typed requests. New submissions atomically debit
+campaign/provider/session request-rate buckets. Exact retries return the
+original ticket without another rate or quota debit; a changed provider, role,
+resource envelope, or relative timeout under the same identity fails closed.
+The corresponding `ergodisctl proposal-*` subcommands expose typed flags, so
+clients need not construct request JSON manually.
+
+The current ready result is compact metadata (digest and byte count), not a
+stored result payload. Rate-bucket state is process-local until campaign resume
+is implemented. Provider SDK code and autonomous provider selection remain
+outside the generic layer.
 
 `ergodisctl evolve-start` accepts an optional direct seed JSONL file and up to
 eight repeated `--resume-evidence` paths.  A replay archive must match the

@@ -2663,9 +2663,11 @@ files are disposable and may be deleted at any time.
     with a changed authority/resource/timeout envelope fails closed. A hostile
     capacity test exhausts the session rate while proving the duplicate path
     remains live. These rate buckets are process-local until campaign resume is
-    implemented. The next slice is CLI/Python projection plus durable rate
-    snapshots and actual compact-result artifact delivery; no provider SDK or
-    autonomous adapter is claimed yet.
+    implemented. Typed `ergodisctl proposal-*` subcommands now cover the same
+    lifecycle, with value-enum roles/failures and bounded defaults, so routine
+    use requires no hand-written transport JSON. The next slice is the Python
+    3.14+ projection plus durable rate snapshots and actual compact-result
+    artifact delivery; no provider SDK or autonomous adapter is claimed yet.
 
     The first new proposer family is accepted. A coloured-Tanner isomorphism
     proposal between the official LP1768 X/Z instances is independently

@@ -1,5 +1,5 @@
 use anyhow::{bail, Context, Result};
-use clap::{Parser, Subcommand};
+use clap::{Parser, Subcommand, ValueEnum};
 use ergodis::control::{
     evaluate_plan, parse_and_lower_plan, read_manifest, send_request, synthesize_decision_tree,
     CompiledPlan, FeatureBatch, PlanDocument, PlanOp, PlanOutput, PlanRole, PlanScope, PlanSpec,
@@ -31,6 +31,64 @@ struct Cli {
     max_bytes: usize,
     #[command(subcommand)]
     command: Command,
+}
+
+#[derive(Clone, Copy, Debug, ValueEnum)]
+enum CliProposalRole {
+    Ordering,
+    Heuristic,
+    NecessaryReduction,
+    ExactTransport,
+}
+
+impl CliProposalRole {
+    fn protocol_name(self) -> &'static str {
+        match self {
+            Self::Ordering => "ordering",
+            Self::Heuristic => "heuristic",
+            Self::NecessaryReduction => "necessary-reduction",
+            Self::ExactTransport => "exact-transport",
+        }
+    }
+
+    fn mask(self) -> u8 {
+        1 << self as u8
+    }
+}
+
+#[derive(Clone, Copy, Debug, ValueEnum)]
+enum CliProposalFailure {
+    Malformed,
+    ForbiddenRole,
+    SemanticRejection,
+    StaleSnapshot,
+    BudgetLimit,
+    DeterministicBackend,
+    TransientTransport,
+    ProviderRateLimit,
+    QueueTimeout,
+    ExecutionTimeout,
+    BackendCrash,
+    ProtocolFault,
+}
+
+impl CliProposalFailure {
+    fn protocol_name(self) -> &'static str {
+        match self {
+            Self::Malformed => "malformed",
+            Self::ForbiddenRole => "forbidden-role",
+            Self::SemanticRejection => "semantic-rejection",
+            Self::StaleSnapshot => "stale-snapshot",
+            Self::BudgetLimit => "budget-limit",
+            Self::DeterministicBackend => "deterministic-backend",
+            Self::TransientTransport => "transient-transport",
+            Self::ProviderRateLimit => "provider-rate-limit",
+            Self::QueueTimeout => "queue-timeout",
+            Self::ExecutionTimeout => "execution-timeout",
+            Self::BackendCrash => "backend-crash",
+            Self::ProtocolFault => "protocol-fault",
+        }
+    }
 }
 
 #[derive(Debug, Subcommand)]
@@ -255,6 +313,111 @@ enum Command {
     /// Append a short high-level research annotation.
     Note {
         text: String,
+    },
+    /// Open one bounded external-proposer session.
+    ProposalSessionOpen {
+        #[arg(long, value_enum, required = true)]
+        role: Vec<CliProposalRole>,
+        #[arg(long, default_value_t = 15 * 60 * 1_000)]
+        ttl_ms: u64,
+        #[arg(long, default_value_t = 16)]
+        maximum_queries: u32,
+        #[arg(long, default_value_t = 4)]
+        maximum_outstanding: u16,
+        #[arg(long, default_value_t = 8)]
+        maximum_revisions: u16,
+        #[arg(long, default_value_t = 1_000_000)]
+        maximum_work_units: u64,
+        #[arg(long, default_value_t = 64 * 1024)]
+        maximum_return_bytes: u64,
+    },
+    /// Submit one idempotent bounded query/proposal job.
+    ProposalSubmit {
+        #[arg(long)]
+        session: String,
+        #[arg(long)]
+        request_id: u64,
+        #[arg(long)]
+        payload_blake3: String,
+        #[arg(long)]
+        proposer_id: u16,
+        #[arg(long, value_enum)]
+        role: CliProposalRole,
+        #[arg(long)]
+        cost_units: u64,
+        #[arg(long)]
+        maximum_return_bytes: u64,
+        #[arg(long, default_value_t = 30_000)]
+        queue_timeout_ms: u64,
+        #[arg(long, default_value_t = 5 * 60 * 1_000)]
+        execution_timeout_ms: u64,
+        #[arg(long, default_value_t = 10 * 60 * 1_000)]
+        admission_timeout_ms: u64,
+        #[arg(long, default_value_t = 15 * 60 * 1_000)]
+        retention_timeout_ms: u64,
+    },
+    /// Inspect one proposal ticket and session usage.
+    ProposalStatus {
+        #[arg(long)]
+        session: String,
+        #[arg(long)]
+        ticket: String,
+    },
+    /// Claim one queued proposal ticket as a provider worker.
+    ProposalWorkerClaim {
+        #[arg(long)]
+        session: String,
+        #[arg(long)]
+        ticket: String,
+    },
+    /// Report one typed provider failure and receive retry policy.
+    ProposalWorkerFailure {
+        #[arg(long)]
+        session: String,
+        #[arg(long)]
+        ticket: String,
+        #[arg(long)]
+        attempt: u8,
+        #[arg(long, value_enum)]
+        failure: CliProposalFailure,
+        #[arg(long)]
+        provider_retry_after_ms: Option<u64>,
+    },
+    /// Publish compact result metadata for a claimed ticket.
+    ProposalWorkerComplete {
+        #[arg(long)]
+        session: String,
+        #[arg(long)]
+        ticket: String,
+        #[arg(long)]
+        attempt: u8,
+        #[arg(long)]
+        result_blake3: String,
+        #[arg(long)]
+        result_bytes: u64,
+    },
+    /// Cancel one proposal ticket idempotently.
+    ProposalCancel {
+        #[arg(long)]
+        session: String,
+        #[arg(long)]
+        ticket: String,
+    },
+    /// Fetch ready result metadata subject to retention expiry.
+    ProposalResult {
+        #[arg(long)]
+        session: String,
+        #[arg(long)]
+        ticket: String,
+    },
+    /// Charge one distinct proposal revision against session quota.
+    ProposalRevisionReserve {
+        #[arg(long)]
+        session: String,
+        #[arg(long)]
+        payload_blake3: String,
+        #[arg(long, value_enum)]
+        role: CliProposalRole,
     },
     Shutdown,
 }
@@ -537,6 +700,114 @@ fn main() -> Result<()> {
             json!({"plan": plan, "row": row, "max_records": max_records}),
         ),
         Command::Note { text } => ("note", json!({"text": text})),
+        Command::ProposalSessionOpen {
+            role,
+            ttl_ms,
+            maximum_queries,
+            maximum_outstanding,
+            maximum_revisions,
+            maximum_work_units,
+            maximum_return_bytes,
+        } => (
+            "proposal-session-open",
+            json!({
+                "allowed_roles": role.into_iter().fold(0_u8, |mask, role| mask | role.mask()),
+                "ttl_ms": ttl_ms,
+                "maximum_queries": maximum_queries,
+                "maximum_outstanding": maximum_outstanding,
+                "maximum_revisions": maximum_revisions,
+                "maximum_work_units": maximum_work_units,
+                "maximum_return_bytes": maximum_return_bytes,
+            }),
+        ),
+        Command::ProposalSubmit {
+            session,
+            request_id,
+            payload_blake3,
+            proposer_id,
+            role,
+            cost_units,
+            maximum_return_bytes,
+            queue_timeout_ms,
+            execution_timeout_ms,
+            admission_timeout_ms,
+            retention_timeout_ms,
+        } => (
+            "proposal-submit",
+            json!({
+                "session_id": session,
+                "request_id": request_id,
+                "canonical_payload_blake3": payload_blake3,
+                "proposer_id": proposer_id,
+                "role": role.protocol_name(),
+                "cost_units": cost_units,
+                "maximum_return_bytes": maximum_return_bytes,
+                "queue_timeout_ms": queue_timeout_ms,
+                "execution_timeout_ms": execution_timeout_ms,
+                "admission_timeout_ms": admission_timeout_ms,
+                "retention_timeout_ms": retention_timeout_ms,
+            }),
+        ),
+        Command::ProposalStatus { session, ticket } => (
+            "proposal-status",
+            json!({"session_id": session, "ticket_key": ticket}),
+        ),
+        Command::ProposalWorkerClaim { session, ticket } => (
+            "proposal-worker-claim",
+            json!({"session_id": session, "ticket_key": ticket}),
+        ),
+        Command::ProposalWorkerFailure {
+            session,
+            ticket,
+            attempt,
+            failure,
+            provider_retry_after_ms,
+        } => (
+            "proposal-worker-failure",
+            json!({
+                "session_id": session,
+                "ticket_key": ticket,
+                "attempt": attempt,
+                "failure": failure.protocol_name(),
+                "provider_retry_after_ms": provider_retry_after_ms,
+            }),
+        ),
+        Command::ProposalWorkerComplete {
+            session,
+            ticket,
+            attempt,
+            result_blake3,
+            result_bytes,
+        } => (
+            "proposal-worker-complete",
+            json!({
+                "session_id": session,
+                "ticket_key": ticket,
+                "attempt": attempt,
+                "result_blake3": result_blake3,
+                "result_bytes": result_bytes,
+            }),
+        ),
+        Command::ProposalCancel { session, ticket } => (
+            "proposal-cancel",
+            json!({"session_id": session, "ticket_key": ticket}),
+        ),
+        Command::ProposalResult { session, ticket } => (
+            "proposal-result",
+            json!({"session_id": session, "ticket_key": ticket}),
+        ),
+        Command::ProposalRevisionReserve {
+            session,
+            payload_blake3,
+            role,
+        } => (
+            "proposal-revision-reserve",
+            json!({
+                "session_id": session,
+                "canonical_payload_blake3": payload_blake3,
+                "role": role.protocol_name(),
+            }),
+        ),
         Command::Shutdown => ("shutdown", json!({})),
     };
     let response =
@@ -1420,6 +1691,43 @@ fn signed(value: &Value, key: &str) -> i64 {
 mod probation_tests {
     use super::*;
     use std::io::Cursor;
+
+    #[test]
+    fn proposer_commands_are_typed_by_clap() {
+        let cli = Cli::try_parse_from([
+            "ergodisctl",
+            "--run-dir",
+            "/tmp/example",
+            "proposal-session-open",
+            "--role",
+            "heuristic",
+            "--role",
+            "necessary-reduction",
+        ])
+        .unwrap();
+        let Command::ProposalSessionOpen { role, .. } = cli.command else {
+            panic!("wrong command");
+        };
+        assert_eq!(
+            role.into_iter().fold(0_u8, |mask, role| mask | role.mask()),
+            CliProposalRole::Heuristic.mask() | CliProposalRole::NecessaryReduction.mask()
+        );
+        assert!(Cli::try_parse_from([
+            "ergodisctl",
+            "--run-dir",
+            "/tmp/example",
+            "proposal-worker-failure",
+            "--session",
+            "s",
+            "--ticket",
+            "t",
+            "--attempt",
+            "0",
+            "--failure",
+            "not-a-failure",
+        ])
+        .is_err());
+    }
 
     #[test]
     fn evolution_counts_survive_completion_reaping() {

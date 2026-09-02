@@ -424,7 +424,8 @@ recognition reconstructs the original durations from the persisted creation
 time; the same identity with a changed role, provider, work, bytes, or timeout
 envelope fails closed. The buckets are process-local until daemon resume lands.
 The ready result currently carries digest and size rather than a stored compact
-payload, and the Python/CLI typed projection is still pending.
+payload. Typed `ergodisctl proposal-*` commands now project the full lifecycle;
+the Python 3.14+ API remains pending.
 
 The next generic slice now implements the in-memory/persistable ticket state
 machine without adding wire operations. Its fixed ticket identity makes submit
