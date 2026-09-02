@@ -194,7 +194,7 @@ pub fn compile_g53_diverse_q0_lifts() -> Result<Box<[G53Mod7Q0Lift]>, G53Q0Diver
                 scale_one_masks: *assignment,
                 scale_seven_digits: digits,
             };
-            if verify_lift(lift) && !lifts[assignment_begin..].iter().any(|prior| *prior == lift) {
+            if verify_lift(lift) && !lifts[assignment_begin..].contains(&lift) {
                 lifts.push(lift);
             }
             nonce = nonce

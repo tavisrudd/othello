@@ -316,21 +316,11 @@ struct Q29Swap {
 const _: () = assert!(std::mem::size_of::<Q29Swap>() == 4);
 
 #[repr(C, align(64))]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Default)]
 struct Q29DoubleMove {
     defects: [u32; 7],
     swaps: [Q29Swap; 2],
     _pad: [u8; 28],
-}
-
-impl Default for Q29DoubleMove {
-    fn default() -> Self {
-        Self {
-            defects: [0; 7],
-            swaps: [Q29Swap::default(); 2],
-            _pad: [0; 28],
-        }
-    }
 }
 
 const _: () = assert!(
@@ -340,21 +330,11 @@ const _: () = assert!(
 const MAX_Q29_DOUBLE_MOVES: usize = 1 << 15;
 
 #[repr(C, align(64))]
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Default)]
 struct Q29TripleMove {
     defects: [u32; 7],
     swaps: [Q29Swap; 3],
     _pad: [u8; 24],
-}
-
-impl Default for Q29TripleMove {
-    fn default() -> Self {
-        Self {
-            defects: [0; 7],
-            swaps: [Q29Swap::default(); 3],
-            _pad: [0; 24],
-        }
-    }
 }
 
 const _: () = assert!(
@@ -3897,10 +3877,7 @@ fn q174_summary(blocks: &[[u16; 87]; 4], coefficients: &[[u8; 174]; 4]) -> (u64,
     let mut minimum = u16::MAX;
     let mut maximum = 0_u16;
     for shift in 0..87 {
-        let combined = blocks
-            .iter()
-            .map(|block| u16::from(block[shift]))
-            .sum::<u16>();
+        let combined = blocks.iter().map(|block| block[shift]).sum::<u16>();
         sum += u64::from(combined);
         minimum = minimum.min(combined);
         maximum = maximum.max(combined);

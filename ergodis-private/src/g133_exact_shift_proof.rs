@@ -32,28 +32,28 @@ const FACT_DIRECT_REPLAY: u8 = 5;
 const FACT_NECESSARY_REDUCTION: u8 = 6;
 
 const RULES: [RuleSpec; 6] = [
-    RuleSpec::registered(0x63_30, 1 << FACT_REGISTERED, FACT_CANONICAL_ORBITS),
+    RuleSpec::registered(0x6330, 1 << FACT_REGISTERED, FACT_CANONICAL_ORBITS),
     RuleSpec::registered(
-        0x63_31,
+        0x6331,
         (1 << FACT_REGISTERED) | (1 << FACT_CANONICAL_ORBITS),
         FACT_EXACT_PRIMARY,
     ),
     RuleSpec::registered(
-        0x63_32,
+        0x6332,
         (1 << FACT_REGISTERED) | (1 << FACT_CANONICAL_ORBITS),
         FACT_INDEPENDENT_ORACLE,
     ),
     RuleSpec::registered(
-        0x63_33,
+        0x6333,
         (1 << FACT_EXACT_PRIMARY) | (1 << FACT_INDEPENDENT_ORACLE),
         FACT_GAP_MECHANISM,
     ),
     RuleSpec::registered(
-        0x63_34,
+        0x6334,
         (1 << FACT_EXACT_PRIMARY) | (1 << FACT_GAP_MECHANISM),
         FACT_DIRECT_REPLAY,
     ),
-    RuleSpec::registered(0x63_35, 1 << FACT_DIRECT_REPLAY, FACT_NECESSARY_REDUCTION),
+    RuleSpec::registered(0x6335, 1 << FACT_DIRECT_REPLAY, FACT_NECESSARY_REDUCTION),
 ];
 
 #[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]

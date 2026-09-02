@@ -381,7 +381,7 @@ fn compile_layout() -> Result<Q58Layout, G41Q58ExactTablebaseError> {
         }
         classes += 1;
     }
-    if classes != CLASSES || class_of.iter().any(|&class| class == u8::MAX) {
+    if classes != CLASSES || class_of.contains(&u8::MAX) {
         return Err(G41Q58ExactTablebaseError::SemanticMismatch);
     }
     Ok(Q58Layout {

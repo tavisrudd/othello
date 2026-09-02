@@ -1040,7 +1040,7 @@ fn compile_q87_layout() -> Result<Q87Layout, G41Q174JointError> {
             }
         }
     }
-    if lane_of.iter().any(|&lane| lane == u8::MAX) {
+    if lane_of.contains(&u8::MAX) {
         return Err(G41Q174JointError::SemanticMismatch);
     }
     let mut lane_weights = [0_u8; 24];
@@ -1991,10 +1991,7 @@ fn compile_side(
 ) -> Result<Vec<u128>, G41Q174JointError> {
     let mut current = vec![0_u128];
     for (stage, contributions) in slots.into_iter().enumerate() {
-        let raw = current
-            .len()
-            .checked_mul(contributions.len())
-            .unwrap_or(usize::MAX);
+        let raw = current.len().saturating_mul(contributions.len());
         let mut next = Vec::with_capacity(raw.min(maximum_states));
         for &left in &current {
             for &right in contributions {

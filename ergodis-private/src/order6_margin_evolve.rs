@@ -678,7 +678,7 @@ pub fn evolve_order6_margin_shell_outer_epochs(
         };
         accepted = accepted.saturating_add(report.accepted);
         phase_two_mutations = phase_two_mutations.saturating_add(report.phase_two_mutations);
-        let replace = best.as_ref().map_or(true, |current| {
+        let replace = best.as_ref().is_none_or(|current| {
             (report.best_score_components[0], report.best_score)
                 < (current.best_score_components[0], current.best_score)
         });
@@ -821,14 +821,12 @@ fn evolve_order6_margin_shell_from_state<const PARITY_SHELL: bool>(
                     break;
                 }
             }
+        } else if phase_two {
+            state.apply_transfer(block, to, from);
+            debug_assert_eq!(state.score_components(), old_components);
         } else {
-            if phase_two {
-                state.apply_transfer(block, to, from);
-                debug_assert_eq!(state.score_components(), old_components);
-            } else {
-                q29_state.apply_swap(block, to, from);
-                debug_assert_eq!(q29_state.score, old_metric);
-            }
+            q29_state.apply_swap(block, to, from);
+            debug_assert_eq!(q29_state.score, old_metric);
         }
     }
     if !phase_two {

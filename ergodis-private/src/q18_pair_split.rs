@@ -371,7 +371,7 @@ fn required_split_targets() -> (i32, i32, i32, i32) {
         (FULL_PAF_ZERO + FULL_PAF_OFF_ZERO) / 4,
         (FULL_PAF_ZERO - FULL_PAF_OFF_ZERO) / 4,
         (FULL_PAF_OFF_ZERO + FULL_PAF_OFF_ZERO) / 4,
-        (FULL_PAF_OFF_ZERO - FULL_PAF_OFF_ZERO) / 4,
+        0,
     )
 }
 

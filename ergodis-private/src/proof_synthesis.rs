@@ -89,9 +89,8 @@ pub fn evolve_unique_bounded_relation_modular<const FIELDS: usize>(
     if FIELDS == 0 || FIELDS > MAX_LINEAR_VARIABLES || rows.is_empty() || coefficient_bound <= 0 {
         return Err(SynthesisError::InvalidLinearDimensions);
     }
-    let mut primes_tested = 0_u8;
-    for modulus in PRIMES {
-        primes_tested += 1;
+    for (prime_index, modulus) in PRIMES.into_iter().enumerate() {
+        let primes_tested = (prime_index + 1) as u8;
         let mut basis = [[0_u8; FIELDS]; FIELDS];
         let mut pivots = [0_u8; FIELDS];
         let mut rank = 0_usize;

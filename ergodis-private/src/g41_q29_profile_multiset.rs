@@ -102,9 +102,9 @@ pub fn compile_g41_q29_profile_multiset_report(
             .checked_add(1)
             .ok_or(G41Q29ProfileMultisetError::CountOverflow)?;
     }
-    if multiset_edges.iter().any(|&count| count == 0)
-        || homogeneous_pairing_edges.iter().any(|&count| count == 0)
-        || crossed_pairing_edges.iter().any(|&count| count == 0)
+    if multiset_edges.contains(&0)
+        || homogeneous_pairing_edges.contains(&0)
+        || crossed_pairing_edges.contains(&0)
         || multiset_edges
             .iter()
             .map(|&count| usize::from(count))

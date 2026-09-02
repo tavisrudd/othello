@@ -1,3 +1,19 @@
+// Fixed-array kernels deliberately use indexed loops and flat, explicit APIs:
+// these shapes preserve bounded workspace, avoid iterator-state allocation, and
+// make exact replay state visible.  The remaining allowances are analogous
+// style diagnostics, not soundness or arithmetic diagnostics.
+#![allow(
+    clippy::double_must_use,
+    clippy::int_plus_one,
+    clippy::manual_is_multiple_of,
+    clippy::manual_range_contains,
+    clippy::mut_range_bound,
+    clippy::needless_borrow,
+    clippy::needless_range_loop,
+    clippy::too_many_arguments,
+    clippy::type_complexity
+)]
+
 pub mod banked_rule_evolve;
 pub mod banked_semantic_evolve;
 pub mod binary_margin_lift;
