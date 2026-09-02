@@ -13,6 +13,133 @@ use thiserror::Error;
 
 pub const SEPARATING_REPLAY_CORE_SNAPSHOT_VERSION: u16 = 1;
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct SeparabilityBounds {
+    pub maximum_rows: usize,
+    pub maximum_groups: usize,
+    pub maximum_projection_values: usize,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SeparabilityReport {
+    pub rows: u32,
+    pub positive_rows: u32,
+    pub projection_counts: Box<[u32]>,
+    pub counterexample_row: Option<u32>,
+}
+
+impl SeparabilityReport {
+    pub fn separable(&self) -> bool {
+        self.counterexample_row.is_none()
+    }
+}
+
+#[derive(Clone, Copy, Debug, Error, Eq, PartialEq)]
+pub enum SeparabilityError {
+    #[error("separability bounds must be positive")]
+    EmptyBound,
+    #[error("separability row matrix or label vector has the wrong shape")]
+    Shape,
+    #[error("separability field groups must be nonempty, disjoint, and in range")]
+    InvalidGroups,
+    #[error("separability corpus exceeds its configured bound")]
+    TooLarge,
+}
+
+/// Test exact factorization of a labelled corpus over disjoint field groups.
+///
+/// A positive relation is separable precisely when each corpus row is positive
+/// iff every grouped projection occurs in some positive row. The first
+/// disagreement is retained as a counterexample; no independent group search
+/// is justified when one exists.
+pub fn probe_structural_separability(
+    input_width: usize,
+    flat_rows: &[i64],
+    labels: &[bool],
+    groups: &[&[u16]],
+    bounds: SeparabilityBounds,
+) -> Result<SeparabilityReport, SeparabilityError> {
+    if input_width == 0
+        || bounds.maximum_rows == 0
+        || bounds.maximum_groups == 0
+        || bounds.maximum_projection_values == 0
+    {
+        return Err(SeparabilityError::EmptyBound);
+    }
+    if flat_rows.len() % input_width != 0 || flat_rows.len() / input_width != labels.len() {
+        return Err(SeparabilityError::Shape);
+    }
+    let rows = labels.len();
+    if rows > bounds.maximum_rows
+        || rows > u32::MAX as usize
+        || groups.len() > bounds.maximum_groups
+    {
+        return Err(SeparabilityError::TooLarge);
+    }
+    let mut seen_fields = vec![false; input_width];
+    if groups.is_empty()
+        || groups.iter().any(|group| {
+            group.is_empty()
+                || group.iter().any(|&field| {
+                    let field = usize::from(field);
+                    field >= input_width || std::mem::replace(&mut seen_fields[field], true)
+                })
+        })
+    {
+        return Err(SeparabilityError::InvalidGroups);
+    }
+
+    let mut projections = (0..groups.len())
+        .map(|_| std::collections::BTreeSet::<Box<[i64]>>::new())
+        .collect::<Vec<_>>();
+    let maximum_group_width = groups.iter().map(|group| group.len()).max().unwrap();
+    let mut scratch = Vec::with_capacity(maximum_group_width);
+    let mut projection_values = 0_usize;
+    for (row, &positive) in flat_rows.chunks_exact(input_width).zip(labels) {
+        if !positive {
+            continue;
+        }
+        for (group, values) in groups.iter().zip(&mut projections) {
+            project_row(row, group, &mut scratch);
+            if !values.contains(scratch.as_slice()) {
+                if projection_values == bounds.maximum_projection_values {
+                    return Err(SeparabilityError::TooLarge);
+                }
+                values.insert(scratch.clone().into_boxed_slice());
+                projection_values += 1;
+            }
+        }
+    }
+    let mut counterexample_row = None;
+    for (row_index, (row, &expected)) in flat_rows.chunks_exact(input_width).zip(labels).enumerate()
+    {
+        let predicted = groups.iter().zip(&projections).all(|(group, values)| {
+            project_row(row, group, &mut scratch);
+            values.contains(scratch.as_slice())
+        });
+        if predicted != expected {
+            counterexample_row = Some(row_index as u32);
+            break;
+        }
+    }
+    let projection_counts = projections
+        .iter()
+        .map(|values| values.len() as u32)
+        .collect::<Vec<_>>()
+        .into_boxed_slice();
+    Ok(SeparabilityReport {
+        rows: rows as u32,
+        positive_rows: labels.iter().filter(|&&label| label).count() as u32,
+        projection_counts,
+        counterexample_row,
+    })
+}
+
+fn project_row(row: &[i64], group: &[u16], output: &mut Vec<i64>) {
+    output.clear();
+    output.extend(group.iter().map(|&field| row[usize::from(field)]));
+}
+
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct EvolutionConfig {
     pub generations: usize,
@@ -1896,6 +2023,63 @@ mod tests {
                 .err()
                 .unwrap(),
             SeparatingReplayCoreError::NonCanonicalSnapshot
+        );
+    }
+
+    #[test]
+    fn separability_probe_accepts_products_and_returns_xor_counterexample() {
+        let rows = [0_i64, 0, 0, 1, 1, 0, 1, 1];
+        let groups = [&[0_u16][..], &[1_u16][..]];
+        let bounds = SeparabilityBounds {
+            maximum_rows: 4,
+            maximum_groups: 2,
+            maximum_projection_values: 4,
+        };
+        let product =
+            probe_structural_separability(2, &rows, &[false, false, false, true], &groups, bounds)
+                .unwrap();
+        assert!(product.separable());
+        assert_eq!(product.positive_rows, 1);
+        assert_eq!(product.projection_counts.as_ref(), [1, 1]);
+
+        let xor =
+            probe_structural_separability(2, &rows, &[false, true, true, false], &groups, bounds)
+                .unwrap();
+        assert!(!xor.separable());
+        assert_eq!(xor.counterexample_row, Some(0));
+        assert_eq!(xor.projection_counts.as_ref(), [2, 2]);
+    }
+
+    #[test]
+    fn separability_probe_rejects_overlapping_groups_and_storage_overflow() {
+        let rows = [0_i64, 0, 1, 1];
+        let bounds = SeparabilityBounds {
+            maximum_rows: 2,
+            maximum_groups: 2,
+            maximum_projection_values: 2,
+        };
+        assert_eq!(
+            probe_structural_separability(
+                2,
+                &rows,
+                &[true, true],
+                &[&[0_u16][..], &[0_u16, 1][..]],
+                bounds,
+            ),
+            Err(SeparabilityError::InvalidGroups)
+        );
+        assert_eq!(
+            probe_structural_separability(
+                2,
+                &rows,
+                &[true, true],
+                &[&[0_u16][..], &[1_u16][..]],
+                SeparabilityBounds {
+                    maximum_projection_values: 1,
+                    ..bounds
+                },
+            ),
+            Err(SeparabilityError::TooLarge)
         );
     }
 }

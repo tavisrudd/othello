@@ -257,15 +257,16 @@ pub use span::{
 };
 pub use theorem_search::{
     assemble_sound_decision_list, drive_ranked_evolution_streaming, evolve_implications,
-    evolve_implications_streaming, evolve_ranked_streaming, select_quality_diversity_parents,
-    CandidateTrial, CensusReduction, CensusReductionError, DecisionListConfig, DecisionListError,
-    DecisionListRule, EvolutionConfig, EvolutionError, EvolutionResult, EvolutionRunError,
-    EvolutionSelectionPhase, EvolutionSummary, FailureCore, FailureCoreAdmission, FailureCoreBank,
-    FailureCoreKind, ImplicationScore, QualityDiversityError, QualityDiversitySchedule,
-    RankedCandidateTrial, RankedEvolutionDriver, RankedEvolutionRunError, RankedEvolutionSummary,
-    ReplayRowCount, SeparatingReplayCore, SeparatingReplayCoreError, SeparatingReplayCoreSnapshot,
-    SoundDecisionList, SoundTheoremArchive, SoundTheoremPoint, TheoremArchiveAdmission,
-    TheoremArchiveError, SEPARATING_REPLAY_CORE_SNAPSHOT_VERSION,
+    evolve_implications_streaming, evolve_ranked_streaming, probe_structural_separability,
+    select_quality_diversity_parents, CandidateTrial, CensusReduction, CensusReductionError,
+    DecisionListConfig, DecisionListError, DecisionListRule, EvolutionConfig, EvolutionError,
+    EvolutionResult, EvolutionRunError, EvolutionSelectionPhase, EvolutionSummary, FailureCore,
+    FailureCoreAdmission, FailureCoreBank, FailureCoreKind, ImplicationScore,
+    QualityDiversityError, QualityDiversitySchedule, RankedCandidateTrial, RankedEvolutionDriver,
+    RankedEvolutionRunError, RankedEvolutionSummary, ReplayRowCount, SeparabilityBounds,
+    SeparabilityError, SeparabilityReport, SeparatingReplayCore, SeparatingReplayCoreError,
+    SeparatingReplayCoreSnapshot, SoundDecisionList, SoundTheoremArchive, SoundTheoremPoint,
+    TheoremArchiveAdmission, TheoremArchiveError, SEPARATING_REPLAY_CORE_SNAPSHOT_VERSION,
 };
 pub use transfer::{
     compile_binary_inner_dual, compile_binary_rank_one, compile_binary_target_subspace,
