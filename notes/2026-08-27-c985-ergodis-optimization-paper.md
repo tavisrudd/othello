@@ -25,6 +25,9 @@ files are disposable and may be deleted at any time.
 - [ ] Compose the landed universal `FeatureDag` simplifier, exact observed-value
   quotient, reachable-support projector, and Pareto selector into one bounded
   diagnostic promotion pipeline with complete source-to-output provenance.
+  The frozen design and acceptance gate are
+  `2026-09-02-c985-feature-promotion-pipeline-design.md`; implementation is
+  paused by user direction.
 - [ ] Prove the pipeline boundary by adversarial controls: every source feature
   maps through simplification, training-only equivalence is split by holdout,
   and non-dominated cost/coverage tradeoffs survive selection.
