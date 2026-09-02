@@ -832,6 +832,10 @@ mod tests {
                     std::hint::black_box(&rows),
                 ));
             }
+            assert!(replay_q29_moment_crt_sufficiency(&[0; ORDER]));
+            let reconstruction = reconstruct_q29_row0_mod29(&[[0; ORDER]; 3], &[0; 14])
+                .expect("bounded fixed reconstruction");
+            std::hint::black_box(reconstruction);
             (signature, retained_q29_single_swap_feature_census())
         });
         assert_eq!(allocations, 0);
