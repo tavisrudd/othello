@@ -338,6 +338,11 @@ fn validate_predicate(
             PlanExpr::Add { left, right }
             | PlanExpr::Sub { left, right }
             | PlanExpr::Mul { left, right }
+            | PlanExpr::Mod { left, right }
+            | PlanExpr::Div { left, right }
+            | PlanExpr::Gcd { left, right }
+            | PlanExpr::GaussianNorm { left, right }
+            | PlanExpr::EisensteinNorm { left, right }
             | PlanExpr::Min { left, right }
             | PlanExpr::Max { left, right }
             | PlanExpr::Eq { left, right }
@@ -351,7 +356,11 @@ fn validate_predicate(
                 work.push(right);
                 work.push(left);
             }
-            PlanExpr::Not { arg } | PlanExpr::Abs { arg } => work.push(arg),
+            PlanExpr::Not { arg }
+            | PlanExpr::Abs { arg }
+            | PlanExpr::PopCount { arg }
+            | PlanExpr::Parity { arg }
+            | PlanExpr::Legendre { arg, .. } => work.push(arg),
             PlanExpr::Select {
                 condition,
                 then_value,
