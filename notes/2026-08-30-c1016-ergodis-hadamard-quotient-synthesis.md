@@ -2861,8 +2861,30 @@ scopes run in parallel with worker-owned tables.  They exhaust 6,226,662,848
 probes in 937,687,898,949 instructions and 608,599,797,064 aggregate cycles,
 with 1,172,832 KiB peak RSS, no swap, and no hit.  An allocation-counted
 499,737,280-probe representative scope performs zero allocations.  The full
-radius-five boundary still lacks the same-row partitions `5`, `4+1`, and the
-cross-block `2+1+1+1`; the length-522 lift also remains uncovered.
+cross-block `2+1+1+1` join adds 2,086,164,416 probes and also misses.  The
+combined 12-worker run costs 1,199,907,798,666 instructions and
+1,048,714,333,016 aggregate cycles.  The radius-five boundary now lacks only
+the same-row partitions `5` and `4+1`; the length-522 lift also remains
+uncovered.
+
+Those last partitions admit a structural rather than enumerative filter.  A
+candidate replacement-row autocorrelation must generate a positive-
+semidefinite 29-by-29 circulant Gram matrix.  Exact negative principal minors
+of orders two through four exclude 2,190 of the 9,660 labelled `row+single`
+targets.  Machine-proposed cosine vectors are promoted only after exact
+integer quadratic replay; they exclude another 3,316 targets and one of the
+four same-row targets.  Thus compact PSD witnesses remove 5,505/9,660
+`4+1` scopes and 1/4 same-row scopes without enumerating any radius-four or
+radius-five row changes.  Ergodis-evolve, given all 56 anonymous
+frequency/scale templates, independently ranks frequency 10 at scale 32 as a
+zero-false-negative diagnostic excluding 2,100 of 9,664 targets.  The evolved
+template remains `ObservedEvolved`; authority comes from the stored integer
+vector and exact negative quadratic form.  A sealed private proof binds
+extractor identity/version, parameters, canonical semantics, and the retained
+root commitment, recomputes the census, and rejects forged counts or source
+commitments.  One complete census plus evolve pass uses 77,859,635,828
+instructions and 19,485,696,192 cycles; the proof/census loop allocates zero
+times.
 The private wrapper now hands that bank directly to optional strided anneal
 tasks without serialization or theorem-specific external glue.  A current
 machine-protected (`choom -n 1000`) repeat plus eighteen 100,000-mutation

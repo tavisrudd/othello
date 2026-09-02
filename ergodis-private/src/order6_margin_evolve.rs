@@ -1092,6 +1092,16 @@ pub struct Q29DoubleDoubleSingleReport {
     pub provenance: &'static str,
 }
 
+#[derive(Clone, Copy, Debug, serde::Serialize, PartialEq, Eq)]
+pub struct Q29DoubleThreeSinglesReport {
+    pub double_block: u8,
+    pub double_states: u32,
+    pub single_states: [u32; 3],
+    pub probes: u64,
+    pub exact_hit: bool,
+    pub provenance: &'static str,
+}
+
 #[inline(always)]
 fn pack_q29_move(from: usize, to: usize) -> u32 {
     (from as u32) | ((to as u32) << 5)
@@ -2335,6 +2345,126 @@ pub fn repair_q29_double_double_single_scope_exact(
     ))
 }
 
+/// Exhaust one labelled `2+1+1+1` radius-five scope using an exact same-row
+/// double table and three distinct-row single probes.
+pub fn repair_q29_double_three_singles_scope_exact(
+    values: [[i8; Q29]; BLOCKS],
+    double_block: usize,
+    workspace: &mut Order6Q29TripleDoubleWorkspace,
+) -> Result<(Q29DoubleThreeSinglesReport, Option<[[i8; Q29]; BLOCKS]>), Order6Q29RepairError> {
+    if double_block >= BLOCKS {
+        return Err(Order6Q29RepairError::InputOutOfDomain);
+    }
+    const ROW_SUMS: [i32; BLOCKS] = [2, 0, 0, 0];
+    for block in 0..BLOCKS {
+        if values[block]
+            .iter()
+            .any(|&value| !(-18..=18).contains(&value) || value & 1 != 0)
+            || values[block]
+                .iter()
+                .map(|&value| i32::from(value))
+                .sum::<i32>()
+                != ROW_SUMS[block]
+        {
+            return Err(Order6Q29RepairError::InputOutOfDomain);
+        }
+    }
+    let root = Q29PhaseState::from_values(values);
+    compile_q29_exact_double_table(&root.values[double_block], workspace)?;
+    let mut blocks = [0_usize; 3];
+    let mut used = 0;
+    for block in 0..BLOCKS {
+        if block != double_block {
+            blocks[used] = block;
+            used += 1;
+        }
+    }
+    let mut singles = [[Q29LocalDelta {
+        delta: [0; Q29_SHIFTS - 1],
+        moves: 0,
+    }; Q29_BLOCK_MOVES]; 3];
+    let counts = std::array::from_fn(|index| {
+        compile_q29_single_block_sparse(&root.values[blocks[index]], &mut singles[index])
+    });
+    let root_energy = root
+        .values
+        .iter()
+        .flatten()
+        .map(|&value| i32::from(value).pow(2))
+        .sum::<i32>();
+    let mut exact = [[[0_i16; 16]; Q29_BLOCK_MOVES]; 3];
+    for group in 0..3 {
+        for index in 0..counts[group] {
+            let mut candidate = root.values;
+            apply_q29_packed_moves(
+                &mut candidate[blocks[group]],
+                singles[group][index].moves,
+                1,
+            );
+            let energy = candidate
+                .iter()
+                .flatten()
+                .map(|&value| i32::from(value).pow(2))
+                .sum::<i32>();
+            exact[group][index][0] = (energy - root_energy) as i16;
+            exact[group][index][1..Q29_SHIFTS].copy_from_slice(&singles[group][index].delta);
+        }
+    }
+    let residual: [i16; 16] = std::array::from_fn(|index| match index {
+        0 => (2_020 - root.combined_paf[0]) as i16,
+        1..Q29_SHIFTS => (-72 - root.combined_paf[index]) as i16,
+        _ => 0,
+    });
+    let mut probes = 0_u64;
+    for first in 0..counts[0] {
+        for second in 0..counts[1] {
+            for third in 0..counts[2] {
+                probes += 1;
+                let desired = std::array::from_fn(|index| {
+                    residual[index]
+                        - exact[0][first][index]
+                        - exact[1][second][index]
+                        - exact[2][third][index]
+                });
+                let Some(double_moves) = lookup_q29_exact_double(&desired, workspace) else {
+                    continue;
+                };
+                let choices = [
+                    chosen(double_block, 2, double_moves),
+                    chosen(blocks[0], 1, singles[0][first].moves),
+                    chosen(blocks[1], 1, singles[1][second].moves),
+                    chosen(blocks[2], 1, singles[2][third].moves),
+                ];
+                if let Some(hit) = replay_q29_local_candidate(&values, &choices) {
+                    return Ok((
+                        Q29DoubleThreeSinglesReport {
+                            double_block: double_block as u8,
+                            double_states: workspace.exact_deltas.len() as u32,
+                            single_states: counts.map(|count| count as u32),
+                            probes,
+                            exact_hit: true,
+                            provenance:
+                                "ExactComputational; root=ObservedEvolved; full-key direct replay",
+                        },
+                        Some(hit),
+                    ));
+                }
+            }
+        }
+    }
+    Ok((
+        Q29DoubleThreeSinglesReport {
+            double_block: double_block as u8,
+            double_states: workspace.exact_deltas.len() as u32,
+            single_states: counts.map(|count| count as u32),
+            probes,
+            exact_hit: false,
+            provenance: "ExactComputational; root=ObservedEvolved; scoped miss only",
+        },
+        None,
+    ))
+}
+
 fn lift_q29_values(values: &[[i8; Q29]; BLOCKS], random: &mut u64) -> [[u8; CELLS]; BLOCKS] {
     let mut counts = [[0_u8; CELLS]; BLOCKS];
     for block in 0..BLOCKS {
@@ -2977,6 +3107,20 @@ mod tests {
         });
         assert_eq!(allocations, 0);
         assert_eq!(report.probes, 499_737_280);
+        assert!(!report.exact_hit);
+        assert!(hit.is_none());
+    }
+
+    #[test]
+    fn retained_root_double_three_singles_scope_is_allocation_free() {
+        let half = crate::q29_even_moment_proof::retained_q29_y6_root();
+        let values = half.map(|row| row.map(|value| value * 2));
+        let mut workspace = Order6Q29TripleDoubleWorkspace::new();
+        let ((report, hit), allocations) = tracked_allocations(|| {
+            repair_q29_double_three_singles_scope_exact(values, 0, &mut workspace).unwrap()
+        });
+        assert_eq!(allocations, 0);
+        assert_eq!(report.probes, 516_925_696);
         assert!(!report.exact_hit);
         assert!(hit.is_none());
     }
