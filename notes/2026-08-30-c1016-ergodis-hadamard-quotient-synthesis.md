@@ -2812,12 +2812,85 @@ and all smaller patterns; same-row pairs are applied sequentially and only
 distinct-row deltas are added.  The 105,495,040-byte iterative workspace has
 zero hot allocations.  The retained root still misses, with scope-only
 authority, after 13,398,226,056 cycles and 32,463,099,182 instructions.
+The next exact slice quotients path permutations and cancellations into 4,495
+canonical donor/recipient multisets and additionally exhausts every minimal
+same-row three-transfer state and every `3+1` state.  The shared typed q29
+moment extractor rejects by the proved degree-two/four identities before full
+PAF replay.  This slice also misses.  The retained v2 kernel uses 35,960 extra
+workspace bytes and costs 346,829,164,000 instructions and 91,105,850,000
+cycles, versus 572,023,916,000 and 213,545,906,000 without the moment delta
+gate: 2.344x fewer cycles.  Two support-mask variants were measured and
+rejected.  Traversal is iterative, the hot loop allocates zero times, and the
+negative remains scoped to the enumerated repair families around this root.
 The private wrapper now hands that bank directly to optional strided anneal
 tasks without serialization or theorem-specific external glue.  A current
 machine-protected (`choom -n 1000`) repeat plus eighteen 100,000-mutation
 tasks reports 1,914,971,598,999 cycles and 1,284,664,183,923 instructions at
 100% counter coverage.  The best annealed residual is `y=2,956`, with no exact
 hit; the handoff works, but it does not approach the outer `y=6` root.
+
+The level relation has also been fed back into the private evolution layer.
+Starting only from one directly extracted residual vector and the anonymous
+coordinate permutations induced by the unit action, the miner recovers
+`[1,1,...,1]` as the unique small homogeneous relation.  Promotion then
+independently re-extracts canonical PAFs and derives the same relation from
+the global PAF-sum identity; the compact proof is bound to its complete source
+rows and rejects forged coefficients or rows.  A generic modular-nullspace
+proposal followed by exact integer replay replaces the initial `3^14`
+enumeration.  On 100,000 complete mine/promote/replay iterations it uses
+2,457,049,434 cycles and 8,363,118,059 instructions at 100% counter coverage,
+versus 58,014,873,446 cycles and 117,865,102,533 instructions for only 100
+iterations of the exhaustive version: about 23,611x fewer cycles per
+iteration.  An exhaustive differential oracle still recovers the same q29
+relation, and the new modular kernel also agrees on independent nonuniform
+small relations with zero hot allocations.
+
+The outer `y=6` residual is not random noise.  Over `F_29`, write
+`M_j(i)=sum_a a^j y_i(a)`.  Binomial expansion of the cyclic correlation gives
+the necessary exact-target moments
+`T2=2M2(0)-2 sum_i M1(i)^2=0` and
+`T4=2M4(0)-8 sum_i M1(i)M3(i)+6 sum_i M2(i)^2=0` modulo 29.
+The retained root has `(T2,T4)=(1,16)`.  Among all 1,154 legal single swaps,
+only thirty attain the required T2 delta and none attain both deltas; the T2
+survivors occur only in blocks zero and one.  Thus two scalar structural
+features prove the radius-one miss and learn a useful per-root block scope.
+The typed extractor independently agrees with a full group-ring moment oracle,
+binds source/parameters/semantics, and allocates nothing.  One million
+extractions cost 4,111,859,119 cycles and 15,026,489,490 instructions versus
+5,900,761,068 cycles and 28,811,490,627 instructions for the direct full-PAF
+control, with all counters nonmultiplexed.
+
+A private generic blind-moment kernel now enumerates every exponent through a
+caller-supplied bound on anonymous target-relative cyclic signals, greedily
+selects zero-moment predicates, and learns categorical input/survivor scopes
+on deterministic train/holdout folds.  Its 64-byte Tiger records, caller-owned
+workspaces, iterative traversal, malformed-input gate, and zero-allocation
+test pass.  It is still discovery-only: the q29 adapter has not yet shown that
+this blind presentation recovers degrees two/four and scope `{0,1}`, and no
+structural promotion follows from the generic miner alone.
+
+There is also a compact exact trade identity for the full residual:
+`AA* - BB* = E`, where `A={0,1,2,7,18,21}` and
+`B={0,1,2,8,17,18}`.  An independent ordered-pair oracle replays it.  All 232
+translated/oriented one-row applications reduce to fourteen bounded,
+energy-preserving candidates and zero exact repairs.  This is a proved motif
+and an exact scoped negative census, not a global impossibility claim; it is
+now a candidate move template for the next evolve iteration.  Sequential
+same-row replay extends the exact census to all 26,106 pairs and 2,001,460
+triples with replacement among the 228 individually bounded applications.
+The pair family has 1,428 energy-preserving candidates and no repair.  The
+triple family has 2,001,440 bounded candidates, 73,419 energy-preserving
+candidates, only 51 survivors of the proved degree-two/degree-four moment
+gate, and no repair after direct q29 replay.  Ten complete triple censuses use
+76,028,665,780 instructions and 17,461,380,275 cycles at 100% counter coverage
+under CHOOM.  The allocation-counted hot census performs zero allocations;
+its negative authority is restricted to this translated/oriented trade
+family around the observed root.  Extending the same exact family through four
+applications exhausts 115,584,315 multisets: 115,579,786 are bounded,
+3,424,084 preserve energy, 4,604 also pass both moment identities, and none is
+exact.  One nonmultiplexed CHOOM census uses 503,042,829,127 instructions and
+112,749,455,048 cycles.  This closes the cheap radius-four trade-template
+attack but still says nothing about arbitrary repairs or the q29-to-522 lift.
 
 An additional exact cross-level gate projects each q174 class summary
 `(total,n0,n3)` to the complete set of compatible q18 row-degree energies via
@@ -2930,4 +3003,5 @@ worker sacrificial under memory pressure to protect the machine.
   runtime model must address the unassumed compressed search rather than quote
   the retired g41 fine-lift envelope.
 
-No C1016 change is approved or committed.
+C1016 changes are committed only in the private monorepo; no public Ergodis
+core change, publication, export, or external synchronization is approved.

@@ -24,6 +24,7 @@ const Q87_SHIFTS: usize = 44;
 const Q29_MOVES: usize = BLOCKS * Q29 * (Q29 - 1);
 const Q29_BLOCK_MOVES: usize = Q29 * (Q29 - 1);
 const Q29_PAIR_MOVES: usize = Q29_BLOCK_MOVES * Q29_BLOCK_MOVES;
+const Q29_TRIPLE_MULTISETS: usize = 4_495;
 
 #[repr(C)]
 #[derive(Clone, Copy)]
@@ -109,6 +110,86 @@ struct Q29ChosenLocal {
 
 const _: () = assert!(std::mem::size_of::<Q29ChosenLocal>() == 8);
 const _: () = assert!(std::mem::align_of::<Q29ChosenLocal>() == 4);
+
+#[inline(always)]
+fn q29_mod_power(value: usize, exponent: usize) -> i32 {
+    let mut result = 1_i32;
+    for _ in 0..exponent {
+        result = (result * value as i32) % Q29 as i32;
+    }
+    result
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+struct Q29EvenMomentDelta {
+    second: u8,
+    fourth: u8,
+}
+
+const _: () = assert!(std::mem::size_of::<Q29EvenMomentDelta>() == 2);
+const _: () = assert!(std::mem::align_of::<Q29EvenMomentDelta>() == 1);
+
+#[repr(C)]
+#[derive(Clone, Copy)]
+struct Q29TripleMultiset {
+    positions: [u8; 3],
+    power_sums: [u8; 4],
+    _padding: u8,
+}
+
+const _: () = assert!(std::mem::size_of::<Q29TripleMultiset>() == 8);
+const _: () = assert!(std::mem::align_of::<Q29TripleMultiset>() == 1);
+
+impl Q29TripleMultiset {
+    fn new(positions: [usize; 3]) -> Self {
+        Self {
+            positions: positions.map(|position| position as u8),
+            power_sums: std::array::from_fn(|power| {
+                positions
+                    .iter()
+                    .map(|&position| q29_mod_power(position, power + 1))
+                    .sum::<i32>()
+                    .rem_euclid(Q29 as i32) as u8
+            }),
+            _padding: 0,
+        }
+    }
+}
+
+/// Cold storage for the exact same-row radius-three repair kernel.  The
+/// universal size-three multisets are compiled once; the candidate loop only
+/// scans this fixed contiguous table.
+pub struct Order6Q29TripleBlockWorkspace {
+    patterns: Vec<Q29TripleMultiset>,
+}
+
+impl Order6Q29TripleBlockWorkspace {
+    #[must_use]
+    pub fn new() -> Self {
+        let mut patterns = Vec::with_capacity(Q29_TRIPLE_MULTISETS);
+        for first in 0..Q29 {
+            for second in first..Q29 {
+                for third in second..Q29 {
+                    patterns.push(Q29TripleMultiset::new([first, second, third]));
+                }
+            }
+        }
+        debug_assert_eq!(patterns.len(), Q29_TRIPLE_MULTISETS);
+        Self { patterns }
+    }
+
+    #[must_use]
+    pub fn bytes(&self) -> usize {
+        self.patterns.capacity() * std::mem::size_of::<Q29TripleMultiset>()
+    }
+}
+
+impl Default for Order6Q29TripleBlockWorkspace {
+    fn default() -> Self {
+        Self::new()
+    }
+}
 
 /// Cold storage for the exact three-distinct-block repair kernel.  Allocation
 /// occurs only in construction; repeated repairs clear and reuse the buffer.
@@ -1354,6 +1435,392 @@ pub fn repair_q29_radius_four_at_most_two_per_block_exact(
     Ok(None)
 }
 
+#[inline(always)]
+fn q29_sparse_paf_delta_at_shift(root: &[i8; Q29], delta: &[i8; Q29], shift: usize) -> i16 {
+    let mut value = 0_i32;
+    for position in 0..Q29 {
+        let change = i32::from(delta[position]);
+        if change != 0 {
+            let forward = (position + shift) % Q29;
+            let backward = (position + Q29 - shift) % Q29;
+            value += change
+                * (i32::from(root[forward])
+                    + i32::from(root[backward])
+                    + i32::from(delta[forward]));
+        }
+    }
+    debug_assert!(i16::try_from(value).is_ok());
+    value as i16
+}
+
+#[inline(always)]
+fn q29_sparse_paf_delta(root: &[i8; Q29], delta: &[i8; Q29]) -> [i16; Q29_SHIFTS - 1] {
+    std::array::from_fn(|index| q29_sparse_paf_delta_at_shift(root, delta, index + 1))
+}
+
+#[inline(always)]
+fn q29_triple_paf_delta_at_shift(
+    root: &[i8; Q29],
+    delta: &[i8; Q29],
+    donors: Q29TripleMultiset,
+    recipients: Q29TripleMultiset,
+    shift: usize,
+) -> i16 {
+    let mut value = 0_i32;
+    let donor_positions = donors.positions;
+    let recipient_positions = recipients.positions;
+    for (&position, direction) in donor_positions
+        .iter()
+        .zip([-2_i32; 3])
+        .chain(recipient_positions.iter().zip([2_i32; 3]))
+    {
+        let position = usize::from(position);
+        let forward = (position + shift) % Q29;
+        let backward = (position + Q29 - shift) % Q29;
+        value += direction
+            * (i32::from(root[forward]) + i32::from(root[backward]) + i32::from(delta[forward]));
+    }
+    debug_assert!(i16::try_from(value).is_ok());
+    value as i16
+}
+
+#[inline(always)]
+fn q29_triple_paf_delta(
+    root: &[i8; Q29],
+    delta: &[i8; Q29],
+    donors: Q29TripleMultiset,
+    recipients: Q29TripleMultiset,
+) -> [i16; Q29_SHIFTS - 1] {
+    std::array::from_fn(|index| {
+        q29_triple_paf_delta_at_shift(root, delta, donors, recipients, index + 1)
+    })
+}
+
+fn compile_q29_single_block_sparse(
+    root: &[i8; Q29],
+    singles: &mut [Q29LocalDelta; Q29_BLOCK_MOVES],
+) -> usize {
+    let mut count = 0;
+    for from in 0..Q29 {
+        if root[from] == -18 {
+            continue;
+        }
+        for to in 0..Q29 {
+            if from == to || root[to] == 18 {
+                continue;
+            }
+            let mut delta = [0_i8; Q29];
+            delta[from] = -2;
+            delta[to] = 2;
+            singles[count] = Q29LocalDelta {
+                delta: q29_sparse_paf_delta(root, &delta),
+                moves: pack_q29_move(from, to),
+            };
+            count += 1;
+        }
+    }
+    singles[..count].sort_unstable();
+    count
+}
+
+#[cfg(test)]
+fn q29_row_power_moments(root: &[i8; Q29]) -> [i32; 5] {
+    let mut moments = [0_i32; 5];
+    for (position, &twice_value) in root.iter().enumerate() {
+        let value = i32::from(twice_value) / 2;
+        let mut power = 1_i32;
+        for moment in &mut moments {
+            *moment = (*moment + value * power).rem_euclid(Q29 as i32);
+            power = (power * position as i32).rem_euclid(Q29 as i32);
+        }
+    }
+    moments
+}
+
+#[inline(always)]
+fn q29_even_moment_delta_from_power_delta(
+    root_moments: &[i32; 5],
+    power_delta: [i32; 4],
+) -> Q29EvenMomentDelta {
+    let [d1, d2, d3, d4] = power_delta;
+    let second =
+        (2 * root_moments[0] * d2 - 4 * root_moments[1] * d1 - 2 * d1 * d1).rem_euclid(Q29 as i32);
+    let fourth = (2 * root_moments[0] * d4
+        - 8 * (root_moments[1] * d3 + root_moments[3] * d1 + d1 * d3)
+        + 12 * root_moments[2] * d2
+        + 6 * d2 * d2)
+        .rem_euclid(Q29 as i32);
+    Q29EvenMomentDelta {
+        second: second as u8,
+        fourth: fourth as u8,
+    }
+}
+
+#[inline(always)]
+fn q29_triple_even_moment_delta(
+    root_moments: &[i32; 5],
+    donors: Q29TripleMultiset,
+    recipients: Q29TripleMultiset,
+) -> Q29EvenMomentDelta {
+    q29_even_moment_delta_from_power_delta(
+        root_moments,
+        std::array::from_fn(|power| {
+            (i32::from(recipients.power_sums[power]) - i32::from(donors.power_sums[power]))
+                .rem_euclid(Q29 as i32)
+        }),
+    )
+}
+
+#[inline(always)]
+fn q29_single_even_moment_delta(
+    root_moments: &[i32; 5],
+    movement: Q29LocalDelta,
+) -> Q29EvenMomentDelta {
+    let from = (movement.moves & 31) as usize;
+    let to = ((movement.moves >> 5) & 31) as usize;
+    q29_even_moment_delta_from_power_delta(
+        root_moments,
+        std::array::from_fn(|power| {
+            (q29_mod_power(to, power + 1) - q29_mod_power(from, power + 1)).rem_euclid(Q29 as i32)
+        }),
+    )
+}
+
+#[inline(always)]
+fn q29_moment_index(signature: Q29EvenMomentDelta) -> usize {
+    usize::from(signature.second) * Q29 + usize::from(signature.fourth)
+}
+
+#[inline(always)]
+fn q29_pattern_fits(root: &[i8; Q29], pattern: Q29TripleMultiset, direction: i8) -> bool {
+    let positions = pattern.positions;
+    let mut cursor = 0;
+    while cursor < positions.len() {
+        let position = usize::from(positions[cursor]);
+        let mut multiplicity = 1;
+        while cursor + multiplicity < positions.len()
+            && positions[cursor + multiplicity] == positions[cursor]
+        {
+            multiplicity += 1;
+        }
+        let value = root[position] + direction * 2 * multiplicity as i8;
+        if !(-18..=18).contains(&value) {
+            return false;
+        }
+        cursor += multiplicity;
+    }
+    true
+}
+
+#[inline(always)]
+fn q29_patterns_disjoint(left: Q29TripleMultiset, right: Q29TripleMultiset) -> bool {
+    for &left_position in &left.positions {
+        for &right_position in &right.positions {
+            if left_position == right_position {
+                return false;
+            }
+        }
+    }
+    true
+}
+
+#[cfg(test)]
+#[inline(always)]
+fn q29_triple_delta(
+    root: &[i8; Q29],
+    donors: Q29TripleMultiset,
+    recipients: Q29TripleMultiset,
+    delta: &mut [i8; Q29],
+) -> [i16; Q29_SHIFTS - 1] {
+    *delta = [0; Q29];
+    for &position in &donors.positions {
+        delta[usize::from(position)] -= 2;
+    }
+    for &position in &recipients.positions {
+        delta[usize::from(position)] += 2;
+    }
+    q29_triple_paf_delta(root, delta, donors, recipients)
+}
+
+#[inline(always)]
+fn q29_triple_moves(donors: Q29TripleMultiset, recipients: Q29TripleMultiset) -> u32 {
+    let donor_positions = donors.positions;
+    let recipient_positions = recipients.positions;
+    pack_q29_move(
+        usize::from(donor_positions[0]),
+        usize::from(recipient_positions[0]),
+    ) | (pack_q29_move(
+        usize::from(donor_positions[1]),
+        usize::from(recipient_positions[1]),
+    ) << 10)
+        | (pack_q29_move(
+            usize::from(donor_positions[2]),
+            usize::from(recipient_positions[2]),
+        ) << 20)
+}
+
+/// Exhaust the previously uncovered exact-radius-three neighborhood in one
+/// row, both alone and with one transfer in a distinct row.  A radius-three
+/// row is represented by disjoint donor and recipient size-three multisets;
+/// this is the unique net-change representation after cancelling transfers,
+/// so it covers every minimal three-transfer row without enumerating path
+/// permutations.  Cross-row deltas are additive.  Every apparent hit is
+/// independently replayed from the original rows and all q29 PAFs are
+/// recomputed.
+pub fn repair_q29_triple_block_plus_one_exact(
+    values: [[i8; Q29]; BLOCKS],
+    workspace: &Order6Q29TripleBlockWorkspace,
+) -> Result<Option<[[i8; Q29]; BLOCKS]>, Order6Q29RepairError> {
+    const ROW_SUMS: [i32; BLOCKS] = [2, 0, 0, 0];
+    for block in 0..BLOCKS {
+        if values[block]
+            .iter()
+            .any(|&value| !(-18..=18).contains(&value) || value & 1 != 0)
+            || values[block]
+                .iter()
+                .map(|&value| i32::from(value))
+                .sum::<i32>()
+                != ROW_SUMS[block]
+        {
+            return Err(Order6Q29RepairError::InputOutOfDomain);
+        }
+    }
+    let root = Q29PhaseState::from_values(values);
+    if root.score == 0 {
+        return Ok(Some(values));
+    }
+    let residual: [i16; Q29_SHIFTS - 1] =
+        std::array::from_fn(|index| (-72 - root.combined_paf[index + 1]) as i16);
+    let mut singles = [[Q29LocalDelta {
+        delta: [0; Q29_SHIFTS - 1],
+        moves: 0,
+    }; Q29_BLOCK_MOVES]; BLOCKS];
+    let mut single_lengths = [0_usize; BLOCKS];
+    for block in 0..BLOCKS {
+        single_lengths[block] =
+            compile_q29_single_block_sparse(&root.values[block], &mut singles[block]);
+    }
+    let half_values = root.values.map(|row| row.map(|value| value / 2));
+    let canonical_moments = crate::q29_even_moment_proof::extract_q29_even_moments(&half_values)
+        .map_err(|_| Order6Q29RepairError::InputOutOfDomain)?;
+    let row_moments = std::array::from_fn::<_, BLOCKS, _>(|block| {
+        let mut result = [0_i32; 5];
+        result[0] = i32::from(ROW_SUMS[block] as i8 / 2);
+        for degree in 1..=4 {
+            result[degree] = i32::from(
+                canonical_moments
+                    .row_moment(block, degree)
+                    .expect("fixed in-range canonical q29 moment"),
+            );
+        }
+        result
+    });
+    let required_moments = Q29EvenMomentDelta {
+        second: (Q29 as u8 - canonical_moments.t2()) % Q29 as u8,
+        fourth: (Q29 as u8 - canonical_moments.t4()) % Q29 as u8,
+    };
+
+    // A cheap exact first-coordinate image avoids constructing thirteen more
+    // PAF coordinates for triple deltas that cannot be completed by zero or
+    // one move outside this row.
+    const FIRST_BOUND: i32 = 2_048;
+    let mut permitted_first = [false; (2 * FIRST_BOUND + 1) as usize];
+    let mark_first = |value: i32, image: &mut [bool; (2 * FIRST_BOUND + 1) as usize]| {
+        if (-FIRST_BOUND..=FIRST_BOUND).contains(&value) {
+            image[(value + FIRST_BOUND) as usize] = true;
+        }
+    };
+    let mut sparse_delta = [0_i8; Q29];
+    let mut permitted_moments = [false; Q29 * Q29];
+    for triple_block in 0..BLOCKS {
+        permitted_first.fill(false);
+        permitted_moments.fill(false);
+        mark_first(i32::from(residual[0]), &mut permitted_first);
+        permitted_moments[q29_moment_index(required_moments)] = true;
+        for single_block in 0..BLOCKS {
+            if single_block == triple_block {
+                continue;
+            }
+            for single in &singles[single_block][..single_lengths[single_block]] {
+                mark_first(
+                    i32::from(residual[0]) - i32::from(single.delta[0]),
+                    &mut permitted_first,
+                );
+                let single_moments =
+                    q29_single_even_moment_delta(&row_moments[single_block], *single);
+                permitted_moments[q29_moment_index(Q29EvenMomentDelta {
+                    second: (required_moments.second + Q29 as u8 - single_moments.second)
+                        % Q29 as u8,
+                    fourth: (required_moments.fourth + Q29 as u8 - single_moments.fourth)
+                        % Q29 as u8,
+                })] = true;
+            }
+        }
+        let row = &root.values[triple_block];
+        for &donors in &workspace.patterns {
+            if !q29_pattern_fits(row, donors, -1) {
+                continue;
+            }
+            for &recipients in &workspace.patterns {
+                if !q29_patterns_disjoint(donors, recipients)
+                    || !q29_pattern_fits(row, recipients, 1)
+                {
+                    continue;
+                }
+                sparse_delta.fill(0);
+                for &position in &donors.positions {
+                    sparse_delta[usize::from(position)] -= 2;
+                }
+                for &position in &recipients.positions {
+                    sparse_delta[usize::from(position)] += 2;
+                }
+                let triple_moments =
+                    q29_triple_even_moment_delta(&row_moments[triple_block], donors, recipients);
+                if !permitted_moments[q29_moment_index(triple_moments)] {
+                    continue;
+                }
+                let first =
+                    q29_triple_paf_delta_at_shift(row, &sparse_delta, donors, recipients, 1);
+                let first_index = i32::from(first) + FIRST_BOUND;
+                if !(0..=2 * FIRST_BOUND).contains(&first_index)
+                    || !permitted_first[first_index as usize]
+                {
+                    continue;
+                }
+                let triple_delta = q29_triple_paf_delta(row, &sparse_delta, donors, recipients);
+                let moves = q29_triple_moves(donors, recipients);
+                if triple_delta == residual {
+                    if let Some(hit) =
+                        replay_q29_local_candidate(&values, &[chosen(triple_block, 3, moves)])
+                    {
+                        return Ok(Some(hit));
+                    }
+                }
+                for single_block in 0..BLOCKS {
+                    if single_block == triple_block {
+                        continue;
+                    }
+                    let desired = q29_residual_minus(&residual, &triple_delta);
+                    let (start, end) = q29_matching_range(
+                        &singles[single_block][..single_lengths[single_block]],
+                        desired,
+                    );
+                    for single in &singles[single_block][start..end] {
+                        let choices = [
+                            chosen(triple_block, 3, moves),
+                            chosen(single_block, 1, single.moves),
+                        ];
+                        if let Some(hit) = replay_q29_local_candidate(&values, &choices) {
+                            return Ok(Some(hit));
+                        }
+                    }
+                }
+            }
+        }
+    }
+    Ok(None)
+}
+
 fn lift_q29_values(values: &[[i8; Q29]; BLOCKS], random: &mut u64) -> [[u8; CELLS]; BLOCKS] {
     let mut counts = [[0_u8; CELLS]; BLOCKS];
     for block in 0..BLOCKS {
@@ -1805,6 +2272,126 @@ mod tests {
         invalid[0][0] = 1;
         assert_eq!(
             repair_q29_radius_four_at_most_two_per_block_exact(invalid, &mut workspace),
+            Err(Order6Q29RepairError::InputOutOfDomain)
+        );
+    }
+
+    #[test]
+    fn triple_multisets_are_complete_and_canonical() {
+        let workspace = Order6Q29TripleBlockWorkspace::new();
+        assert_eq!(workspace.patterns.len(), Q29_TRIPLE_MULTISETS);
+        assert_eq!(workspace.bytes(), Q29_TRIPLE_MULTISETS * 8);
+        assert_eq!(workspace.patterns[0].positions, [0, 0, 0]);
+        assert_eq!(
+            workspace.patterns[Q29_TRIPLE_MULTISETS - 1].positions,
+            [28, 28, 28]
+        );
+        for pair in workspace.patterns.windows(2) {
+            assert!(pair[0].positions < pair[1].positions);
+        }
+    }
+
+    #[test]
+    fn sparse_triple_delta_matches_independent_direct_paf() {
+        let workspace = Order6Q29TripleBlockWorkspace::new();
+        let mut random = 0x243f_6a88_85a3_08d3;
+        let mut checked = 0;
+        while checked < 2_048 {
+            let mut root = [0_i8; Q29];
+            for value in &mut root {
+                *value = 2 * ((next_random(&mut random) % 15) as i8 - 7);
+            }
+            let donors =
+                workspace.patterns[(next_random(&mut random) as usize) % workspace.patterns.len()];
+            let recipients =
+                workspace.patterns[(next_random(&mut random) as usize) % workspace.patterns.len()];
+            if !q29_patterns_disjoint(donors, recipients)
+                || !q29_pattern_fits(&root, donors, -1)
+                || !q29_pattern_fits(&root, recipients, 1)
+            {
+                continue;
+            }
+            let mut sparse = [0_i8; Q29];
+            let derived = q29_triple_delta(&root, donors, recipients, &mut sparse);
+            let mut child = root;
+            assert!(apply_q29_packed_moves(
+                &mut child,
+                q29_triple_moves(donors, recipients),
+                3
+            ));
+            let base_paf = direct_paf::<1, Q29, Q29_SHIFTS>(&root);
+            let child_paf = direct_paf::<1, Q29, Q29_SHIFTS>(&child);
+            assert_eq!(derived, q29_delta_from_paf(&base_paf, &child_paf));
+            checked += 1;
+        }
+    }
+
+    #[test]
+    fn even_moment_formula_matches_direct_cyclic_sum() {
+        let mut random = 0x1319_8a2e_0370_7344;
+        for _ in 0..1_024 {
+            let mut row = [0_i8; Q29];
+            for value in &mut row {
+                *value = 2 * ((next_random(&mut random) % 15) as i8 - 7);
+            }
+            let moments = q29_row_power_moments(&row);
+            let derived = Q29EvenMomentDelta {
+                second: (2 * moments[0] * moments[2] - 2 * moments[1] * moments[1])
+                    .rem_euclid(Q29 as i32) as u8,
+                fourth: (2 * moments[0] * moments[4] - 8 * moments[1] * moments[3]
+                    + 6 * moments[2] * moments[2])
+                    .rem_euclid(Q29 as i32) as u8,
+            };
+            let paf = direct_paf::<1, Q29, Q29_SHIFTS>(&row);
+            let mut direct = Q29EvenMomentDelta {
+                second: 0,
+                fourth: 0,
+            };
+            for shift in 1..Q29_SHIFTS {
+                let half_scale_paf = paf[shift] / 4;
+                direct.second = (i32::from(direct.second)
+                    + 2 * q29_mod_power(shift, 2) * half_scale_paf)
+                    .rem_euclid(Q29 as i32) as u8;
+                direct.fourth = (i32::from(direct.fourth)
+                    + 2 * q29_mod_power(shift, 4) * half_scale_paf)
+                    .rem_euclid(Q29 as i32) as u8;
+            }
+            assert_eq!(derived, direct);
+        }
+    }
+
+    #[test]
+    fn triple_inner_kernel_allocates_nothing() {
+        let workspace = Order6Q29TripleBlockWorkspace::new();
+        let root = [0_i8; Q29];
+        let (_, allocations) = tracked_allocations(|| {
+            let mut checksum = 0_i64;
+            let mut sparse = [0_i8; Q29];
+            for &donors in &workspace.patterns[..128] {
+                for &recipients in &workspace.patterns[..128] {
+                    if q29_patterns_disjoint(donors, recipients) {
+                        let delta = q29_triple_delta(
+                            std::hint::black_box(&root),
+                            donors,
+                            recipients,
+                            &mut sparse,
+                        );
+                        checksum += i64::from(delta[0]);
+                    }
+                }
+            }
+            std::hint::black_box(checksum)
+        });
+        assert_eq!(allocations, 0);
+    }
+
+    #[test]
+    fn triple_repair_fails_closed_outside_domain() {
+        let workspace = Order6Q29TripleBlockWorkspace::new();
+        let mut invalid = [[0_i8; Q29]; BLOCKS];
+        invalid[0][0] = 1;
+        assert_eq!(
+            repair_q29_triple_block_plus_one_exact(invalid, &workspace),
             Err(Order6Q29RepairError::InputOutOfDomain)
         );
     }

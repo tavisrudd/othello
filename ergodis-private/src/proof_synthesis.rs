@@ -70,6 +70,138 @@ pub fn evolve_bounded_homogeneous_relations<const FIELDS: usize, const CAPACITY:
     Ok((tested, found))
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct ModularNullspaceRelation<const FIELDS: usize> {
+    pub coefficients: [i8; FIELDS],
+    pub primes_tested: u8,
+    pub rows_replayed: u64,
+}
+
+/// Blind fast path for a unique small homogeneous relation.  Candidate
+/// coefficients come from one-dimensional nullspaces over small prime fields,
+/// then gain evidentiary status only after exact integer replay on every row.
+/// The bounded kernel is iterative and allocation-free.
+pub fn evolve_unique_bounded_relation_modular<const FIELDS: usize>(
+    rows: &[[i32; FIELDS]],
+    coefficient_bound: i8,
+) -> Result<Option<ModularNullspaceRelation<FIELDS>>, SynthesisError> {
+    const PRIMES: [u8; 11] = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31];
+    if FIELDS == 0 || FIELDS > MAX_LINEAR_VARIABLES || rows.is_empty() || coefficient_bound <= 0 {
+        return Err(SynthesisError::InvalidLinearDimensions);
+    }
+    let mut primes_tested = 0_u8;
+    for modulus in PRIMES {
+        primes_tested += 1;
+        let mut basis = [[0_u8; FIELDS]; FIELDS];
+        let mut pivots = [0_u8; FIELDS];
+        let mut rank = 0_usize;
+        for observation in rows {
+            let mut vector = observation.map(|value| value.rem_euclid(i32::from(modulus)) as u8);
+            for row in 0..rank {
+                let pivot = usize::from(pivots[row]);
+                let factor = vector[pivot];
+                if factor != 0 {
+                    for field in 0..FIELDS {
+                        vector[field] = (u16::from(vector[field]) + u16::from(modulus)
+                            - u16::from(factor) * u16::from(basis[row][field]) % u16::from(modulus))
+                            as u8
+                            % modulus;
+                    }
+                }
+            }
+            let Some(pivot) = vector.iter().position(|&value| value != 0) else {
+                continue;
+            };
+            let inverse = (1..modulus)
+                .find(|&candidate| {
+                    u16::from(candidate) * u16::from(vector[pivot]) % u16::from(modulus) == 1
+                })
+                .ok_or(SynthesisError::ArithmeticOverflow)?;
+            for value in &mut vector {
+                *value = (u16::from(*value) * u16::from(inverse) % u16::from(modulus)) as u8;
+            }
+            for row in 0..rank {
+                let factor = basis[row][pivot];
+                if factor != 0 {
+                    for field in 0..FIELDS {
+                        basis[row][field] = (u16::from(basis[row][field]) + u16::from(modulus)
+                            - u16::from(factor) * u16::from(vector[field]) % u16::from(modulus))
+                            as u8
+                            % modulus;
+                    }
+                }
+            }
+            basis[rank] = vector;
+            pivots[rank] = pivot as u8;
+            rank += 1;
+            if rank == FIELDS {
+                return Ok(None);
+            }
+        }
+        if rank + 1 != FIELDS {
+            continue;
+        }
+        let mut pivot_fields = [false; FIELDS];
+        for &pivot in &pivots[..rank] {
+            pivot_fields[usize::from(pivot)] = true;
+        }
+        let free = pivot_fields
+            .iter()
+            .position(|&is_pivot| !is_pivot)
+            .ok_or(SynthesisError::ArithmeticOverflow)?;
+        let mut null_vector = [0_u8; FIELDS];
+        null_vector[free] = 1;
+        for row in 0..rank {
+            let pivot = usize::from(pivots[row]);
+            null_vector[pivot] = (modulus - basis[row][free]) % modulus;
+        }
+        for scale in 1..modulus {
+            let mut coefficients = [0_i8; FIELDS];
+            let mut in_bounds = true;
+            for field in 0..FIELDS {
+                let residue =
+                    (u16::from(null_vector[field]) * u16::from(scale) % u16::from(modulus)) as i16;
+                let signed = if residue <= i16::from(modulus / 2) {
+                    residue
+                } else {
+                    residue - i16::from(modulus)
+                };
+                if signed.unsigned_abs() > coefficient_bound as u16 {
+                    in_bounds = false;
+                    break;
+                }
+                coefficients[field] = signed as i8;
+            }
+            let Some(first) = coefficients.iter().copied().find(|&value| value != 0) else {
+                continue;
+            };
+            if !in_bounds || coefficients_gcd(coefficients) != 1 {
+                continue;
+            }
+            if first < 0 {
+                for coefficient in &mut coefficients {
+                    *coefficient = -*coefficient;
+                }
+            }
+            let mut rows_replayed = 0_u64;
+            let exact = rows.iter().all(|observation| {
+                rows_replayed += 1;
+                (0..FIELDS).fold(0_i64, |sum, field| {
+                    sum + i64::from(coefficients[field]) * i64::from(observation[field])
+                }) == 0
+            });
+            if exact {
+                return Ok(Some(ModularNullspaceRelation {
+                    coefficients,
+                    primes_tested,
+                    rows_replayed,
+                }));
+            }
+        }
+    }
+    Ok(None)
+}
+
 fn coefficients_gcd<const FIELDS: usize>(coefficients: [i8; FIELDS]) -> u8 {
     let mut divisor = 0_u8;
     for coefficient in coefficients {
@@ -702,6 +834,70 @@ mod tests {
             evolve_bounded_homogeneous_relations(&rows, 2, &mut too_small),
             Err(SynthesisError::SolutionBudget)
         );
+    }
+
+    #[test]
+    fn modular_nullspace_fast_path_matches_exhaustive_relation_evolution() {
+        let rows = [[1, 2, 2, 0], [2, 0, 1, 2], [3, 4, 5, 0], [7, 2, 8, 0]];
+        let mut exhaustive = [[0_i8; 4]; 4];
+        let (_, found) = evolve_bounded_homogeneous_relations(&rows, 2, &mut exhaustive).unwrap();
+        assert_eq!(found, 1);
+        let fast = evolve_unique_bounded_relation_modular(&rows, 2)
+            .unwrap()
+            .unwrap();
+        assert_eq!(fast.coefficients, exhaustive[0]);
+        assert_eq!(fast.rows_replayed, rows.len() as u64);
+    }
+
+    #[test]
+    fn modular_nullspace_matches_exhaustive_on_independent_small_relations() {
+        let relations = [
+            [1_i8, 1, 1, 1],
+            [2, 1, -2, -1],
+            [1, -2, 1, 2],
+            [2, -1, 1, 1],
+            [1, 2, -2, 2],
+            [2, -2, 1, -1],
+        ];
+        for expected in relations {
+            let [a, b, c, d] = expected.map(i32::from);
+            let rows = [[d, 0, 0, -a], [0, d, 0, -b], [0, 0, d, -c]];
+            let mut exhaustive = [[0_i8; 4]; 4];
+            let (_, found) =
+                evolve_bounded_homogeneous_relations(&rows, 2, &mut exhaustive).unwrap();
+            assert_eq!(found, 1, "{expected:?}");
+            assert_eq!(exhaustive[0], expected);
+            assert_eq!(
+                evolve_unique_bounded_relation_modular(&rows, 2)
+                    .unwrap()
+                    .unwrap()
+                    .coefficients,
+                expected
+            );
+        }
+    }
+
+    #[test]
+    fn modular_nullspace_fails_closed_on_full_or_nonunique_rank() {
+        let full = [[1, 0], [0, 1]];
+        assert_eq!(
+            evolve_unique_bounded_relation_modular(&full, 1).unwrap(),
+            None
+        );
+        let nonunique = [[1, 0, 0]];
+        assert_eq!(
+            evolve_unique_bounded_relation_modular(&nonunique, 1).unwrap(),
+            None
+        );
+    }
+
+    #[test]
+    fn modular_nullspace_kernel_allocates_nothing() {
+        let rows = [[1, 2, 2, 0], [2, 0, 1, 2], [3, 4, 5, 0], [7, 2, 8, 0]];
+        let (relation, allocations) =
+            tracked_allocations(|| evolve_unique_bounded_relation_modular(&rows, 2));
+        assert_eq!(allocations, 0);
+        assert_eq!(relation.unwrap().unwrap().coefficients, [2, 1, -2, -1]);
     }
 
     #[test]
