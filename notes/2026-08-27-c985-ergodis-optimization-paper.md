@@ -4957,6 +4957,15 @@ Thus promoted features can be hash-consed by exact observed semantics rather tha
 their zero sets, while presentation binding and held-out/direct replay remain necessary
 before cross-instance reuse.
 
+The bounded extraction-SOTA refresh is
+`2026-09-02-c985-evolve-extraction-sota-update.md` (two primary preprints, both partial
+read depth; no novelty verdict). It rejects e-boost-style local-cost thresholding from
+the authority path because the source explicitly allows loss of the global optimum, but
+retains parallel heuristic scoring and warm starts for exploration. The exact import is
+lossless circuit/e-graph simplification before extraction, followed later—if measured
+width warrants it—by treewidth-parameterized exact DP. The immediate implementation gate
+is a universally valid `FeatureDag` simplifier with a complete old-to-new map.
+
 The first theorem-driven subset-sum sharpening compiles a continuation envelope for
 every prefix. A partial sum is retained after layer `i` only when it lies both in the
 prefix-achievable interval and in `target -` the remaining suffix interval. This is an
