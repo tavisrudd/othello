@@ -21,6 +21,20 @@ impl FeatureId {
     }
 }
 
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
+pub struct FeatureZeroConjunction {
+    pub left: FeatureId,
+    pub right: FeatureId,
+}
+
+impl FeatureZeroConjunction {
+    pub fn new(left: FeatureId, right: FeatureId) -> Self {
+        let (left, right) = ordered(left, right);
+        Self { left, right }
+    }
+}
+
 #[derive(Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
 #[serde(tag = "op", rename_all = "kebab-case", deny_unknown_fields)]
 pub enum FeatureOp {
@@ -223,6 +237,17 @@ impl FeatureScopeBank {
         self.scope_mask(feature)
             .map(|scope| scope.iter().map(|word| word.count_ones()).sum())
     }
+
+    pub fn conjunction_scope_size(&self, conjunction: FeatureZeroConjunction) -> Option<u32> {
+        let left = self.scope_mask(conjunction.left)?;
+        let right = self.scope_mask(conjunction.right)?;
+        Some(
+            left.iter()
+                .zip(right)
+                .map(|(&left, &right)| (left | right).count_ones())
+                .sum(),
+        )
+    }
 }
 
 fn copy_scope(scopes: &mut [u64], words: usize, destination: usize, source: usize) {
@@ -299,6 +324,51 @@ impl FeatureZeroBank {
         feature: FeatureId,
         expected: &[u64],
     ) -> Result<FeaturePredicateCensus, FeatureBankError> {
+        let expected_count = self.validate_expected(expected)?;
+        let selected = self.zero_mask(feature).ok_or(FeatureBankError::Shape)?;
+        let mut surviving = 0_u64;
+        let mut false_negatives = 0_u64;
+        for (&selected, &expected) in selected.iter().zip(expected) {
+            surviving += u64::from(selected.count_ones());
+            false_negatives += u64::from((expected & !selected).count_ones());
+        }
+        Ok(FeaturePredicateCensus {
+            rows: self.rows as u64,
+            expected: expected_count,
+            surviving,
+            false_negatives,
+        })
+    }
+
+    /// Score `(left == 0) && (right == 0)` without materializing its bitmap.
+    pub fn score_necessary_zero_conjunction(
+        &self,
+        conjunction: FeatureZeroConjunction,
+        expected: &[u64],
+    ) -> Result<FeaturePredicateCensus, FeatureBankError> {
+        let expected_count = self.validate_expected(expected)?;
+        let left = self
+            .zero_mask(conjunction.left)
+            .ok_or(FeatureBankError::Shape)?;
+        let right = self
+            .zero_mask(conjunction.right)
+            .ok_or(FeatureBankError::Shape)?;
+        let mut surviving = 0_u64;
+        let mut false_negatives = 0_u64;
+        for ((&left, &right), &expected) in left.iter().zip(right).zip(expected) {
+            let selected = left & right;
+            surviving += u64::from(selected.count_ones());
+            false_negatives += u64::from((expected & !selected).count_ones());
+        }
+        Ok(FeaturePredicateCensus {
+            rows: self.rows as u64,
+            expected: expected_count,
+            surviving,
+            false_negatives,
+        })
+    }
+
+    fn validate_expected(&self, expected: &[u64]) -> Result<u64, FeatureBankError> {
         if expected.len() != self.words {
             return Err(FeatureBankError::LabelWidth);
         }
@@ -309,21 +379,10 @@ impl FeatureZeroBank {
         {
             return Err(FeatureBankError::LabelTail);
         }
-        let selected = self.zero_mask(feature).ok_or(FeatureBankError::Shape)?;
-        let mut expected_count = 0_u64;
-        let mut surviving = 0_u64;
-        let mut false_negatives = 0_u64;
-        for (&selected, &expected) in selected.iter().zip(expected) {
-            expected_count += u64::from(expected.count_ones());
-            surviving += u64::from(selected.count_ones());
-            false_negatives += u64::from((expected & !selected).count_ones());
-        }
-        Ok(FeaturePredicateCensus {
-            rows: self.rows as u64,
-            expected: expected_count,
-            surviving,
-            false_negatives,
-        })
+        Ok(expected
+            .iter()
+            .map(|word| u64::from(word.count_ones()))
+            .sum())
     }
 }
 
@@ -943,6 +1002,36 @@ mod tests {
     }
 
     #[test]
+    fn zero_bank_scores_conjunctions_without_materializing_pairs() {
+        let mut dag = FeatureDag::new(2, 2, 8).unwrap();
+        let x = dag.input(0).unwrap();
+        let y = dag.input(1).unwrap();
+        let rows = [0_i64, 0, 0, 1, 1, 0, 1, 1];
+        let bank = FeatureZeroBank::compile(
+            &dag,
+            &rows,
+            FeatureBankBounds {
+                maximum_rows: 4,
+                maximum_bitmap_words: 2,
+            },
+        )
+        .unwrap();
+        let conjunction = FeatureZeroConjunction::new(y, x);
+        assert_eq!(conjunction, FeatureZeroConjunction { left: x, right: y });
+        assert_eq!(
+            bank.score_necessary_zero(x, &[0b0001]).unwrap().surviving,
+            2
+        );
+        let census = bank
+            .score_necessary_zero_conjunction(conjunction, &[0b0001])
+            .unwrap();
+        assert_eq!(census.surviving, 1);
+        assert_eq!(census.false_negatives, 0);
+        let scopes = FeatureScopeBank::compile(&dag, 2).unwrap();
+        assert_eq!(scopes.conjunction_scope_size(conjunction), Some(2));
+    }
+
+    #[test]
     fn zero_bank_rescoring_allocates_nothing() {
         let mut dag = FeatureDag::new(2, 2, 64).unwrap();
         let candidates = dag
@@ -967,6 +1056,13 @@ mod tests {
         let (_, events) = crate::test_alloc::measure_current_thread_allocations(|| {
             for &candidate in candidates.iter() {
                 std::hint::black_box(bank.score_necessary_zero(candidate, &expected).unwrap());
+            }
+            for pair in candidates.windows(2) {
+                let conjunction = FeatureZeroConjunction::new(pair[0], pair[1]);
+                std::hint::black_box(
+                    bank.score_necessary_zero_conjunction(conjunction, &expected)
+                        .unwrap(),
+                );
             }
         });
         assert_eq!(events, crate::test_alloc::AllocationEvents::default());
