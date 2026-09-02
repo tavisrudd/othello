@@ -4227,3 +4227,11 @@ format/parse round trips.  A lowered norm-residue term agrees with direct DAG
 evaluation exhaustively on the control grid.  Thus an evolved feature can now
 be persisted, reviewed as text, compiled, injected, and evaluated without
 recursive lowering or per-row allocation.
+
+Public admission validation is complete for this tranche.  Rust 1.87 runs 461
+all-feature library tests plus every integration test, binary, and example
+target with no failures; the full all-target invocation also exercised the
+Criterion targets.  Strict `cargo clippy --all-targets --all-features --
+-D warnings` passes.  The new focused coverage comprises seven feature-DAG
+unit tests, four theorem-search tests, two end-to-end feature-evolution tests,
+nine plan-VM tests, and six textual-language tests.
