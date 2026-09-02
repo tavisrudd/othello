@@ -891,6 +891,12 @@ rejected backend.  The full-solve launch remains gated on an exact q29 shell
 and a measured mixed-CRT reconstruction search; no two-day estimate is yet
 justified.
 
+C1035 is closed: `ergodis-private` is a Cargo workspace whose root package is library-only; the
+six named tools live in `tasks/tools` (`ergodis-tools`), gem-mining drivers in `tasks/gem-hunt`,
+and no new `src/bin` file is allowed (see `ergodis-private/AGENTS.md`). C1036 will triage the
+remaining C1016 bins into a `tasks/hadamard-2092` crate
+([C1035 report](../2026-09-02-c1035-ergodis-private-workspace-split.md)).
+
 C1017 is queued to remediate the whole-core Ergodis performance-contract audit:
 allocation-counted hot loops, iterative traversal, complete Tiger layouts,
 contention-free worker ownership, one-/parallel-mode counter A/B gates, and the
