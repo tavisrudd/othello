@@ -142,6 +142,8 @@ pub struct FeaturePredicateCensus {
 pub enum FeatureBankError {
     #[error("feature-bank bounds must be positive")]
     EmptyBound,
+    #[error("feature bank requires at least one corpus row")]
+    EmptyCorpus,
     #[error("feature-bank row matrix has the wrong size")]
     Shape,
     #[error("feature bank exceeds its configured row or bitmap bound")]
@@ -160,6 +162,49 @@ pub struct FeatureZeroBank {
     words: usize,
     features: usize,
     zero: Box<[u64]>,
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct FeatureZeroClassMember {
+    pub candidate: FeatureId,
+    pub representative: FeatureId,
+}
+
+/// Exact full-corpus equivalence classes for predicates `feature == 0`.
+pub struct FeatureZeroQuotient {
+    input_candidates: usize,
+    representatives: Box<[FeatureId]>,
+    members: Box<[FeatureZeroClassMember]>,
+}
+
+impl FeatureZeroQuotient {
+    pub fn input_candidates(&self) -> usize {
+        self.input_candidates
+    }
+
+    pub fn class_count(&self) -> usize {
+        self.representatives.len()
+    }
+
+    pub fn eliminated(&self) -> usize {
+        self.input_candidates - self.class_count()
+    }
+
+    pub fn representatives(&self) -> &[FeatureId] {
+        &self.representatives
+    }
+
+    pub fn members(&self) -> &[FeatureZeroClassMember] {
+        &self.members
+    }
+
+    pub fn representative(&self, candidate: FeatureId) -> Option<FeatureId> {
+        self.members
+            .binary_search_by_key(&candidate, |member| member.candidate)
+            .ok()
+            .map(|index| self.members[index].representative)
+    }
 }
 
 /// Bit-packed raw-input dependencies for every feature node.
@@ -278,6 +323,9 @@ impl FeatureZeroBank {
             return Err(FeatureBankError::Shape);
         }
         let rows = row_values.len() / dag.input_count();
+        if rows == 0 {
+            return Err(FeatureBankError::EmptyCorpus);
+        }
         let words = rows.div_ceil(64);
         let bitmap_words = dag
             .len()
@@ -317,6 +365,78 @@ impl FeatureZeroBank {
     pub fn zero_mask(&self, feature: FeatureId) -> Option<&[u64]> {
         (feature.index() < self.features)
             .then(|| &self.zero[feature.index() * self.words..(feature.index() + 1) * self.words])
+    }
+
+    /// Quotient candidates by exact equality of their full-corpus zero masks.
+    ///
+    /// Within one class the lowest evaluation-cost node is retained, followed
+    /// by degree and structural ID tie-breaks. No sample hash or collision
+    /// assumption is used.
+    pub fn quotient_zero_predicates(
+        &self,
+        dag: &FeatureDag,
+        candidates: &[FeatureId],
+        maximum_candidates: usize,
+    ) -> Result<FeatureZeroQuotient, FeatureBankError> {
+        if maximum_candidates == 0 {
+            return Err(FeatureBankError::EmptyBound);
+        }
+        if candidates.len() > maximum_candidates {
+            return Err(FeatureBankError::TooLarge);
+        }
+        if dag.len() != self.features {
+            return Err(FeatureBankError::Shape);
+        }
+        let mut candidates = candidates.to_vec();
+        candidates.sort_unstable();
+        candidates.dedup();
+        if candidates
+            .iter()
+            .any(|&candidate| self.zero_mask(candidate).is_none())
+        {
+            return Err(FeatureBankError::Shape);
+        }
+        candidates.sort_unstable_by(|&left, &right| {
+            self.zero_mask(left)
+                .unwrap()
+                .cmp(self.zero_mask(right).unwrap())
+                .then_with(|| {
+                    let left = dag.node(left).unwrap();
+                    let right = dag.node(right).unwrap();
+                    left.evaluation_cost
+                        .cmp(&right.evaluation_cost)
+                        .then_with(|| left.degree.cmp(&right.degree))
+                })
+                .then_with(|| left.cmp(&right))
+        });
+        let input_candidates = candidates.len();
+        let mut representatives = Vec::new();
+        let mut members = Vec::with_capacity(input_candidates);
+        let mut first = 0_usize;
+        while first < candidates.len() {
+            let representative = candidates[first];
+            let mut end = first + 1;
+            while end < candidates.len()
+                && self.zero_mask(candidates[end]) == self.zero_mask(representative)
+            {
+                end += 1;
+            }
+            representatives.push(representative);
+            members.extend(candidates[first..end].iter().map(|&candidate| {
+                FeatureZeroClassMember {
+                    candidate,
+                    representative,
+                }
+            }));
+            first = end;
+        }
+        representatives.sort_unstable();
+        members.sort_unstable_by_key(|member| member.candidate);
+        Ok(FeatureZeroQuotient {
+            input_candidates,
+            representatives: representatives.into_boxed_slice(),
+            members: members.into_boxed_slice(),
+        })
     }
 
     pub fn score_necessary_zero(
@@ -1029,6 +1149,53 @@ mod tests {
         assert_eq!(census.false_negatives, 0);
         let scopes = FeatureScopeBank::compile(&dag, 2).unwrap();
         assert_eq!(scopes.conjunction_scope_size(conjunction), Some(2));
+    }
+
+    #[test]
+    fn zero_quotient_keeps_cheapest_exact_observational_representative() {
+        let mut dag = FeatureDag::new(2, 2, 16).unwrap();
+        let x = dag.input(0).unwrap();
+        let y = dag.input(1).unwrap();
+        let absolute_x = dag.abs(x).unwrap();
+        let square_x = dag.mul(x, x).unwrap();
+        let rows = [-2_i64, 1, 0, 1, 3, 0, 0, 2];
+        let bank = FeatureZeroBank::compile(
+            &dag,
+            &rows,
+            FeatureBankBounds {
+                maximum_rows: 4,
+                maximum_bitmap_words: dag.len(),
+            },
+        )
+        .unwrap();
+        let quotient = bank
+            .quotient_zero_predicates(&dag, &[square_x, y, absolute_x, x, x], 5)
+            .unwrap();
+        assert_eq!(quotient.input_candidates(), 4);
+        assert_eq!(quotient.class_count(), 2);
+        assert_eq!(quotient.eliminated(), 2);
+        assert_eq!(quotient.representative(x), Some(x));
+        assert_eq!(quotient.representative(absolute_x), Some(x));
+        assert_eq!(quotient.representative(square_x), Some(x));
+        assert_eq!(quotient.representative(y), Some(y));
+    }
+
+    #[test]
+    fn zero_bank_rejects_an_empty_observation_corpus() {
+        let mut dag = FeatureDag::new(1, 1, 2).unwrap();
+        dag.input(0).unwrap();
+        assert_eq!(
+            FeatureZeroBank::compile(
+                &dag,
+                &[],
+                FeatureBankBounds {
+                    maximum_rows: 1,
+                    maximum_bitmap_words: 1,
+                },
+            )
+            .map(|_| ()),
+            Err(FeatureBankError::EmptyCorpus)
+        );
     }
 
     #[test]
