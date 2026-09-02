@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 760">
 <rect width="100%" height="100%" fill="white"/>
 <text x="120" y="42" font-family="sans-serif" font-size="28" font-weight="bold">Daily recorded API token volume</text>
-<text x="120" y="70" font-family="sans-serif" font-size="16" fill="#555">2026-06-01 through 2026-08-04; research activity record; input/context: 19,229,994,157; generated: 98,413,485; combined: 19,328,407,642; provider telemetry, not quota billing</text>
+<text x="120" y="70" font-family="sans-serif" font-size="16" fill="#555">2026-06-01 through 2026-09-03; projects: rust, othello; input/context: 31,515,871,043; generated: 155,965,463; combined: 31,671,836,506; provider telemetry, not quota billing</text>
 <line x1="120" y1="96" x2="144" y2="96" stroke="#2563eb" stroke-width="4"/>
 <text x="154" y="102" font-family="sans-serif" font-size="15">Input/context tokens (including cache reads/writes)</text>
 <line x1="720" y1="96" x2="744" y2="96" stroke="#9333ea" stroke-width="4"/>
@@ -24,126 +24,182 @@
 <text x="108" y="160.0" text-anchor="end" font-family="sans-serif" font-size="14">1200.0M</text>
 <line x1="120.0" y1="615" x2="120.0" y2="622" stroke="#6b7280"/>
 <text x="120.0" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 120.0 643)">06-14</text>
-<line x1="292.2" y1="615" x2="292.2" y2="622" stroke="#6b7280"/>
-<text x="292.2" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 292.2 643)">06-20</text>
-<line x1="464.4" y1="615" x2="464.4" y2="622" stroke="#6b7280"/>
-<text x="464.4" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 464.4 643)">06-26</text>
-<line x1="636.6" y1="615" x2="636.6" y2="622" stroke="#6b7280"/>
-<text x="636.6" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 636.6 643)">07-02</text>
-<line x1="808.8" y1="615" x2="808.8" y2="622" stroke="#6b7280"/>
-<text x="808.8" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 808.8 643)">07-08</text>
-<line x1="981.0" y1="615" x2="981.0" y2="622" stroke="#6b7280"/>
-<text x="981.0" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 981.0 643)">07-14</text>
-<line x1="1153.2" y1="615" x2="1153.2" y2="622" stroke="#6b7280"/>
-<text x="1153.2" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1153.2 643)">07-20</text>
-<line x1="1325.4" y1="615" x2="1325.4" y2="622" stroke="#6b7280"/>
-<text x="1325.4" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1325.4 643)">07-26</text>
-<line x1="1497.6" y1="615" x2="1497.6" y2="622" stroke="#6b7280"/>
-<text x="1497.6" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1497.6 643)">08-01</text>
+<line x1="285.6" y1="615" x2="285.6" y2="622" stroke="#6b7280"/>
+<text x="285.6" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 285.6 643)">06-23</text>
+<line x1="451.2" y1="615" x2="451.2" y2="622" stroke="#6b7280"/>
+<text x="451.2" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 451.2 643)">07-02</text>
+<line x1="616.7" y1="615" x2="616.7" y2="622" stroke="#6b7280"/>
+<text x="616.7" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 616.7 643)">07-11</text>
+<line x1="782.3" y1="615" x2="782.3" y2="622" stroke="#6b7280"/>
+<text x="782.3" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 782.3 643)">07-20</text>
+<line x1="947.9" y1="615" x2="947.9" y2="622" stroke="#6b7280"/>
+<text x="947.9" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 947.9 643)">07-29</text>
+<line x1="1113.5" y1="615" x2="1113.5" y2="622" stroke="#6b7280"/>
+<text x="1113.5" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1113.5 643)">08-07</text>
+<line x1="1279.0" y1="615" x2="1279.0" y2="622" stroke="#6b7280"/>
+<text x="1279.0" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1279.0 643)">08-16</text>
+<line x1="1444.6" y1="615" x2="1444.6" y2="622" stroke="#6b7280"/>
+<text x="1444.6" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1444.6 643)">08-25</text>
 <line x1="1555.0" y1="615" x2="1555.0" y2="622" stroke="#6b7280"/>
-<text x="1555.0" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1555.0 643)">08-03</text>
-<rect x="110.2" y="517.4" width="19.7" height="97.6" fill="#2563eb" fill-opacity=".78"><title>2026-06-14: Input/context tokens (including cache reads/writes): 254,731,999</title></rect>
-<rect x="110.2" y="516.8" width="19.7" height="0.5" fill="#9333ea" fill-opacity=".78"><title>2026-06-14: Generated tokens: 1,315,018</title></rect>
-<rect x="138.9" y="411.9" width="19.7" height="203.1" fill="#2563eb" fill-opacity=".78"><title>2026-06-15: Input/context tokens (including cache reads/writes): 529,857,498</title></rect>
-<rect x="138.9" y="410.8" width="19.7" height="1.1" fill="#9333ea" fill-opacity=".78"><title>2026-06-15: Generated tokens: 2,811,654</title></rect>
-<rect x="167.6" y="473.3" width="19.7" height="141.7" fill="#2563eb" fill-opacity=".78"><title>2026-06-16: Input/context tokens (including cache reads/writes): 369,577,171</title></rect>
-<rect x="167.6" y="472.4" width="19.7" height="0.9" fill="#9333ea" fill-opacity=".78"><title>2026-06-16: Generated tokens: 2,341,895</title></rect>
-<rect x="196.3" y="471.5" width="19.7" height="143.5" fill="#2563eb" fill-opacity=".78"><title>2026-06-17: Input/context tokens (including cache reads/writes): 374,342,912</title></rect>
-<rect x="196.3" y="470.5" width="19.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-06-17: Generated tokens: 2,658,451</title></rect>
-<rect x="225.0" y="453.9" width="19.7" height="161.1" fill="#2563eb" fill-opacity=".78"><title>2026-06-18: Input/context tokens (including cache reads/writes): 420,143,050</title></rect>
-<rect x="225.0" y="453.1" width="19.7" height="0.8" fill="#9333ea" fill-opacity=".78"><title>2026-06-18: Generated tokens: 2,103,427</title></rect>
-<rect x="253.7" y="433.1" width="19.7" height="181.9" fill="#2563eb" fill-opacity=".78"><title>2026-06-19: Input/context tokens (including cache reads/writes): 474,412,031</title></rect>
-<rect x="253.7" y="432.2" width="19.7" height="0.9" fill="#9333ea" fill-opacity=".78"><title>2026-06-19: Generated tokens: 2,407,389</title></rect>
-<rect x="282.4" y="467.0" width="19.7" height="148.0" fill="#2563eb" fill-opacity=".78"><title>2026-06-20: Input/context tokens (including cache reads/writes): 386,159,026</title></rect>
-<rect x="282.4" y="466.2" width="19.7" height="0.8" fill="#9333ea" fill-opacity=".78"><title>2026-06-20: Generated tokens: 1,967,389</title></rect>
-<rect x="311.1" y="351.7" width="19.7" height="263.3" fill="#2563eb" fill-opacity=".78"><title>2026-06-21: Input/context tokens (including cache reads/writes): 686,826,239</title></rect>
-<rect x="311.1" y="350.6" width="19.7" height="1.1" fill="#9333ea" fill-opacity=".78"><title>2026-06-21: Generated tokens: 2,894,886</title></rect>
-<rect x="339.8" y="434.5" width="19.7" height="180.5" fill="#2563eb" fill-opacity=".78"><title>2026-06-22: Input/context tokens (including cache reads/writes): 470,901,690</title></rect>
-<rect x="339.8" y="433.7" width="19.7" height="0.8" fill="#9333ea" fill-opacity=".78"><title>2026-06-22: Generated tokens: 2,081,599</title></rect>
-<rect x="368.5" y="504.8" width="19.7" height="110.2" fill="#2563eb" fill-opacity=".78"><title>2026-06-23: Input/context tokens (including cache reads/writes): 287,391,781</title></rect>
-<rect x="368.5" y="504.3" width="19.7" height="0.5" fill="#9333ea" fill-opacity=".78"><title>2026-06-23: Generated tokens: 1,429,634</title></rect>
-<rect x="397.2" y="436.2" width="19.7" height="178.8" fill="#2563eb" fill-opacity=".78"><title>2026-06-24: Input/context tokens (including cache reads/writes): 466,515,765</title></rect>
-<rect x="397.2" y="435.0" width="19.7" height="1.1" fill="#9333ea" fill-opacity=".78"><title>2026-06-24: Generated tokens: 2,993,729</title></rect>
-<rect x="425.9" y="601.8" width="19.7" height="13.2" fill="#2563eb" fill-opacity=".78"><title>2026-06-25: Input/context tokens (including cache reads/writes): 34,501,669</title></rect>
-<rect x="425.9" y="601.7" width="19.7" height="0.1" fill="#9333ea" fill-opacity=".78"><title>2026-06-25: Generated tokens: 136,991</title></rect>
-<rect x="454.6" y="554.2" width="19.7" height="60.8" fill="#2563eb" fill-opacity=".78"><title>2026-06-26: Input/context tokens (including cache reads/writes): 158,637,153</title></rect>
-<rect x="454.6" y="553.5" width="19.7" height="0.7" fill="#9333ea" fill-opacity=".78"><title>2026-06-26: Generated tokens: 1,697,726</title></rect>
-<rect x="483.3" y="609.7" width="19.7" height="5.3" fill="#2563eb" fill-opacity=".78"><title>2026-06-27: Input/context tokens (including cache reads/writes): 13,840,653</title></rect>
-<rect x="483.3" y="609.6" width="19.7" height="0.1" fill="#9333ea" fill-opacity=".78"><title>2026-06-27: Generated tokens: 186,733</title></rect>
-<rect x="512.0" y="611.9" width="19.7" height="3.1" fill="#2563eb" fill-opacity=".78"><title>2026-06-28: Input/context tokens (including cache reads/writes): 8,055,448</title></rect>
-<rect x="512.0" y="611.9" width="19.7" height="0.0" fill="#9333ea" fill-opacity=".78"><title>2026-06-28: Generated tokens: 25,916</title></rect>
-<rect x="540.7" y="615.0" width="19.7" height="0.0" fill="#2563eb" fill-opacity=".78"><title>2026-06-29: Input/context tokens (including cache reads/writes): 0</title></rect>
-<rect x="540.7" y="615.0" width="19.7" height="0.0" fill="#9333ea" fill-opacity=".78"><title>2026-06-29: Generated tokens: 0</title></rect>
-<rect x="569.4" y="615.0" width="19.7" height="0.0" fill="#2563eb" fill-opacity=".78"><title>2026-06-30: Input/context tokens (including cache reads/writes): 0</title></rect>
-<rect x="569.4" y="615.0" width="19.7" height="0.0" fill="#9333ea" fill-opacity=".78"><title>2026-06-30: Generated tokens: 0</title></rect>
-<rect x="598.1" y="554.0" width="19.7" height="61.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-01: Input/context tokens (including cache reads/writes): 159,240,785</title></rect>
-<rect x="598.1" y="553.7" width="19.7" height="0.3" fill="#9333ea" fill-opacity=".78"><title>2026-07-01: Generated tokens: 656,222</title></rect>
-<rect x="626.8" y="572.4" width="19.7" height="42.6" fill="#2563eb" fill-opacity=".78"><title>2026-07-02: Input/context tokens (including cache reads/writes): 111,125,588</title></rect>
-<rect x="626.8" y="572.1" width="19.7" height="0.3" fill="#9333ea" fill-opacity=".78"><title>2026-07-02: Generated tokens: 706,919</title></rect>
-<rect x="655.5" y="576.0" width="19.7" height="39.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-03: Input/context tokens (including cache reads/writes): 101,780,909</title></rect>
-<rect x="655.5" y="575.5" width="19.7" height="0.5" fill="#9333ea" fill-opacity=".78"><title>2026-07-03: Generated tokens: 1,186,394</title></rect>
-<rect x="684.2" y="526.8" width="19.7" height="88.2" fill="#2563eb" fill-opacity=".78"><title>2026-07-04: Input/context tokens (including cache reads/writes): 229,962,567</title></rect>
-<rect x="684.2" y="526.0" width="19.7" height="0.9" fill="#9333ea" fill-opacity=".78"><title>2026-07-04: Generated tokens: 2,229,461</title></rect>
-<rect x="712.9" y="521.2" width="19.7" height="93.8" fill="#2563eb" fill-opacity=".78"><title>2026-07-05: Input/context tokens (including cache reads/writes): 244,679,861</title></rect>
-<rect x="712.9" y="520.4" width="19.7" height="0.8" fill="#9333ea" fill-opacity=".78"><title>2026-07-05: Generated tokens: 2,025,816</title></rect>
-<rect x="741.6" y="490.3" width="19.7" height="124.7" fill="#2563eb" fill-opacity=".78"><title>2026-07-06: Input/context tokens (including cache reads/writes): 325,332,724</title></rect>
-<rect x="741.6" y="489.4" width="19.7" height="0.9" fill="#9333ea" fill-opacity=".78"><title>2026-07-06: Generated tokens: 2,311,657</title></rect>
-<rect x="770.3" y="418.8" width="19.7" height="196.2" fill="#2563eb" fill-opacity=".78"><title>2026-07-07: Input/context tokens (including cache reads/writes): 511,763,021</title></rect>
-<rect x="770.3" y="417.8" width="19.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-07: Generated tokens: 2,722,199</title></rect>
-<rect x="799.0" y="508.4" width="19.7" height="106.6" fill="#2563eb" fill-opacity=".78"><title>2026-07-08: Input/context tokens (including cache reads/writes): 278,069,082</title></rect>
-<rect x="799.0" y="508.0" width="19.7" height="0.4" fill="#9333ea" fill-opacity=".78"><title>2026-07-08: Generated tokens: 1,020,054</title></rect>
-<rect x="827.7" y="433.0" width="19.7" height="182.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-09: Input/context tokens (including cache reads/writes): 474,756,414</title></rect>
-<rect x="827.7" y="431.5" width="19.7" height="1.5" fill="#9333ea" fill-opacity=".78"><title>2026-07-09: Generated tokens: 3,837,353</title></rect>
-<rect x="856.4" y="477.0" width="19.7" height="138.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-10: Input/context tokens (including cache reads/writes): 359,944,680</title></rect>
-<rect x="856.4" y="476.0" width="19.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-10: Generated tokens: 2,541,947</title></rect>
-<rect x="885.1" y="505.0" width="19.7" height="110.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-11: Input/context tokens (including cache reads/writes): 286,848,688</title></rect>
-<rect x="885.1" y="504.3" width="19.7" height="0.7" fill="#9333ea" fill-opacity=".78"><title>2026-07-11: Generated tokens: 1,952,391</title></rect>
-<rect x="913.8" y="482.6" width="19.7" height="132.4" fill="#2563eb" fill-opacity=".78"><title>2026-07-12: Input/context tokens (including cache reads/writes): 345,437,652</title></rect>
-<rect x="913.8" y="481.9" width="19.7" height="0.6" fill="#9333ea" fill-opacity=".78"><title>2026-07-12: Generated tokens: 1,665,044</title></rect>
-<rect x="942.5" y="465.8" width="19.7" height="149.2" fill="#2563eb" fill-opacity=".78"><title>2026-07-13: Input/context tokens (including cache reads/writes): 389,130,638</title></rect>
-<rect x="942.5" y="465.1" width="19.7" height="0.7" fill="#9333ea" fill-opacity=".78"><title>2026-07-13: Generated tokens: 1,872,497</title></rect>
-<rect x="971.2" y="433.0" width="19.7" height="182.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-14: Input/context tokens (including cache reads/writes): 474,721,031</title></rect>
-<rect x="971.2" y="432.1" width="19.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-14: Generated tokens: 2,493,633</title></rect>
-<rect x="999.9" y="382.5" width="19.7" height="232.5" fill="#2563eb" fill-opacity=".78"><title>2026-07-15: Input/context tokens (including cache reads/writes): 606,410,406</title></rect>
-<rect x="999.9" y="381.9" width="19.7" height="0.7" fill="#9333ea" fill-opacity=".78"><title>2026-07-15: Generated tokens: 1,748,566</title></rect>
-<rect x="1028.6" y="551.0" width="19.7" height="64.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-16: Input/context tokens (including cache reads/writes): 167,068,293</title></rect>
-<rect x="1028.6" y="550.4" width="19.7" height="0.5" fill="#9333ea" fill-opacity=".78"><title>2026-07-16: Generated tokens: 1,344,632</title></rect>
-<rect x="1057.3" y="509.7" width="19.7" height="105.3" fill="#2563eb" fill-opacity=".78"><title>2026-07-17: Input/context tokens (including cache reads/writes): 274,586,959</title></rect>
-<rect x="1057.3" y="508.7" width="19.7" height="1.1" fill="#9333ea" fill-opacity=".78"><title>2026-07-17: Generated tokens: 2,836,513</title></rect>
-<rect x="1086.0" y="505.0" width="19.7" height="110.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-18: Input/context tokens (including cache reads/writes): 287,085,284</title></rect>
-<rect x="1086.0" y="504.0" width="19.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-18: Generated tokens: 2,522,794</title></rect>
-<rect x="1114.7" y="564.7" width="19.7" height="50.3" fill="#2563eb" fill-opacity=".78"><title>2026-07-19: Input/context tokens (including cache reads/writes): 131,136,893</title></rect>
-<rect x="1114.7" y="564.3" width="19.7" height="0.4" fill="#9333ea" fill-opacity=".78"><title>2026-07-19: Generated tokens: 1,167,712</title></rect>
-<rect x="1143.4" y="507.2" width="19.7" height="107.8" fill="#2563eb" fill-opacity=".78"><title>2026-07-20: Input/context tokens (including cache reads/writes): 281,293,137</title></rect>
-<rect x="1143.4" y="506.0" width="19.7" height="1.2" fill="#9333ea" fill-opacity=".78"><title>2026-07-20: Generated tokens: 3,177,554</title></rect>
-<rect x="1172.1" y="544.1" width="19.7" height="70.9" fill="#2563eb" fill-opacity=".78"><title>2026-07-21: Input/context tokens (including cache reads/writes): 184,880,978</title></rect>
-<rect x="1172.1" y="543.3" width="19.7" height="0.8" fill="#9333ea" fill-opacity=".78"><title>2026-07-21: Generated tokens: 2,154,877</title></rect>
-<rect x="1200.8" y="514.5" width="19.7" height="100.5" fill="#2563eb" fill-opacity=".78"><title>2026-07-22: Input/context tokens (including cache reads/writes): 262,051,115</title></rect>
-<rect x="1200.8" y="513.5" width="19.7" height="1.1" fill="#9333ea" fill-opacity=".78"><title>2026-07-22: Generated tokens: 2,790,411</title></rect>
-<rect x="1229.5" y="186.0" width="19.7" height="429.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-23: Input/context tokens (including cache reads/writes): 1,119,055,705</title></rect>
-<rect x="1229.5" y="184.5" width="19.7" height="1.6" fill="#9333ea" fill-opacity=".78"><title>2026-07-23: Generated tokens: 4,082,172</title></rect>
-<rect x="1258.2" y="263.4" width="19.7" height="351.6" fill="#2563eb" fill-opacity=".78"><title>2026-07-24: Input/context tokens (including cache reads/writes): 917,235,935</title></rect>
-<rect x="1258.2" y="262.2" width="19.7" height="1.2" fill="#9333ea" fill-opacity=".78"><title>2026-07-24: Generated tokens: 3,030,614</title></rect>
-<rect x="1286.9" y="156.7" width="19.7" height="458.3" fill="#2563eb" fill-opacity=".78"><title>2026-07-25: Input/context tokens (including cache reads/writes): 1,195,664,142</title></rect>
-<rect x="1286.9" y="155.6" width="19.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-25: Generated tokens: 2,685,541</title></rect>
-<rect x="1315.6" y="203.2" width="19.7" height="411.8" fill="#2563eb" fill-opacity=".78"><title>2026-07-26: Input/context tokens (including cache reads/writes): 1,074,230,848</title></rect>
-<rect x="1315.6" y="202.2" width="19.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-26: Generated tokens: 2,729,741</title></rect>
-<rect x="1344.3" y="615.0" width="19.7" height="0.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-27: Input/context tokens (including cache reads/writes): 0</title></rect>
-<rect x="1344.3" y="615.0" width="19.7" height="0.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-27: Generated tokens: 0</title></rect>
-<rect x="1373.0" y="615.0" width="19.7" height="0.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-28: Input/context tokens (including cache reads/writes): 0</title></rect>
-<rect x="1373.0" y="615.0" width="19.7" height="0.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-28: Generated tokens: 0</title></rect>
-<rect x="1401.7" y="615.0" width="19.7" height="0.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-29: Input/context tokens (including cache reads/writes): 0</title></rect>
-<rect x="1401.7" y="615.0" width="19.7" height="0.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-29: Generated tokens: 0</title></rect>
-<rect x="1430.4" y="615.0" width="19.7" height="0.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-30: Input/context tokens (including cache reads/writes): 0</title></rect>
-<rect x="1430.4" y="615.0" width="19.7" height="0.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-30: Generated tokens: 0</title></rect>
-<rect x="1459.1" y="615.0" width="19.7" height="0.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-31: Input/context tokens (including cache reads/writes): 0</title></rect>
-<rect x="1459.1" y="615.0" width="19.7" height="0.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-31: Generated tokens: 0</title></rect>
-<rect x="1487.8" y="615.0" width="19.7" height="0.0" fill="#2563eb" fill-opacity=".78"><title>2026-08-01: Input/context tokens (including cache reads/writes): 0</title></rect>
-<rect x="1487.8" y="615.0" width="19.7" height="0.0" fill="#9333ea" fill-opacity=".78"><title>2026-08-01: Generated tokens: 0</title></rect>
-<rect x="1516.5" y="259.1" width="19.7" height="355.9" fill="#2563eb" fill-opacity=".78"><title>2026-08-02: Input/context tokens (including cache reads/writes): 928,430,573</title></rect>
-<rect x="1516.5" y="257.5" width="19.7" height="1.6" fill="#9333ea" fill-opacity=".78"><title>2026-08-02: Generated tokens: 4,159,898</title></rect>
-<rect x="1545.2" y="412.7" width="19.7" height="202.3" fill="#2563eb" fill-opacity=".78"><title>2026-08-03: Input/context tokens (including cache reads/writes): 527,624,335</title></rect>
-<rect x="1545.2" y="411.8" width="19.7" height="0.9" fill="#9333ea" fill-opacity=".78"><title>2026-08-03: Generated tokens: 2,413,024</title></rect>
+<text x="1555.0" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1555.0 643)">08-31</text>
+<rect x="113.6" y="517.4" width="12.7" height="97.6" fill="#2563eb" fill-opacity=".78"><title>2026-06-14: Input/context tokens (including cache reads/writes): 254,731,999</title></rect>
+<rect x="113.6" y="516.8" width="12.7" height="0.5" fill="#9333ea" fill-opacity=".78"><title>2026-06-14: Generated tokens: 1,315,018</title></rect>
+<rect x="132.0" y="411.9" width="12.7" height="203.1" fill="#2563eb" fill-opacity=".78"><title>2026-06-15: Input/context tokens (including cache reads/writes): 529,857,498</title></rect>
+<rect x="132.0" y="410.8" width="12.7" height="1.1" fill="#9333ea" fill-opacity=".78"><title>2026-06-15: Generated tokens: 2,811,654</title></rect>
+<rect x="150.4" y="473.3" width="12.7" height="141.7" fill="#2563eb" fill-opacity=".78"><title>2026-06-16: Input/context tokens (including cache reads/writes): 369,577,171</title></rect>
+<rect x="150.4" y="472.4" width="12.7" height="0.9" fill="#9333ea" fill-opacity=".78"><title>2026-06-16: Generated tokens: 2,341,895</title></rect>
+<rect x="168.8" y="471.5" width="12.7" height="143.5" fill="#2563eb" fill-opacity=".78"><title>2026-06-17: Input/context tokens (including cache reads/writes): 374,342,912</title></rect>
+<rect x="168.8" y="470.5" width="12.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-06-17: Generated tokens: 2,658,451</title></rect>
+<rect x="187.2" y="453.9" width="12.7" height="161.1" fill="#2563eb" fill-opacity=".78"><title>2026-06-18: Input/context tokens (including cache reads/writes): 420,143,050</title></rect>
+<rect x="187.2" y="453.1" width="12.7" height="0.8" fill="#9333ea" fill-opacity=".78"><title>2026-06-18: Generated tokens: 2,103,427</title></rect>
+<rect x="205.6" y="433.1" width="12.7" height="181.9" fill="#2563eb" fill-opacity=".78"><title>2026-06-19: Input/context tokens (including cache reads/writes): 474,412,031</title></rect>
+<rect x="205.6" y="432.2" width="12.7" height="0.9" fill="#9333ea" fill-opacity=".78"><title>2026-06-19: Generated tokens: 2,407,389</title></rect>
+<rect x="224.0" y="467.0" width="12.7" height="148.0" fill="#2563eb" fill-opacity=".78"><title>2026-06-20: Input/context tokens (including cache reads/writes): 386,159,026</title></rect>
+<rect x="224.0" y="466.2" width="12.7" height="0.8" fill="#9333ea" fill-opacity=".78"><title>2026-06-20: Generated tokens: 1,967,389</title></rect>
+<rect x="242.4" y="351.7" width="12.7" height="263.3" fill="#2563eb" fill-opacity=".78"><title>2026-06-21: Input/context tokens (including cache reads/writes): 686,826,239</title></rect>
+<rect x="242.4" y="350.6" width="12.7" height="1.1" fill="#9333ea" fill-opacity=".78"><title>2026-06-21: Generated tokens: 2,894,886</title></rect>
+<rect x="260.8" y="434.5" width="12.7" height="180.5" fill="#2563eb" fill-opacity=".78"><title>2026-06-22: Input/context tokens (including cache reads/writes): 470,901,690</title></rect>
+<rect x="260.8" y="433.7" width="12.7" height="0.8" fill="#9333ea" fill-opacity=".78"><title>2026-06-22: Generated tokens: 2,081,599</title></rect>
+<rect x="279.2" y="504.8" width="12.7" height="110.2" fill="#2563eb" fill-opacity=".78"><title>2026-06-23: Input/context tokens (including cache reads/writes): 287,391,781</title></rect>
+<rect x="279.2" y="504.3" width="12.7" height="0.5" fill="#9333ea" fill-opacity=".78"><title>2026-06-23: Generated tokens: 1,429,634</title></rect>
+<rect x="297.6" y="436.2" width="12.7" height="178.8" fill="#2563eb" fill-opacity=".78"><title>2026-06-24: Input/context tokens (including cache reads/writes): 466,515,765</title></rect>
+<rect x="297.6" y="435.0" width="12.7" height="1.1" fill="#9333ea" fill-opacity=".78"><title>2026-06-24: Generated tokens: 2,993,729</title></rect>
+<rect x="316.0" y="601.8" width="12.7" height="13.2" fill="#2563eb" fill-opacity=".78"><title>2026-06-25: Input/context tokens (including cache reads/writes): 34,501,669</title></rect>
+<rect x="316.0" y="601.7" width="12.7" height="0.1" fill="#9333ea" fill-opacity=".78"><title>2026-06-25: Generated tokens: 136,991</title></rect>
+<rect x="334.4" y="554.2" width="12.7" height="60.8" fill="#2563eb" fill-opacity=".78"><title>2026-06-26: Input/context tokens (including cache reads/writes): 158,637,153</title></rect>
+<rect x="334.4" y="553.5" width="12.7" height="0.7" fill="#9333ea" fill-opacity=".78"><title>2026-06-26: Generated tokens: 1,697,726</title></rect>
+<rect x="352.8" y="609.7" width="12.7" height="5.3" fill="#2563eb" fill-opacity=".78"><title>2026-06-27: Input/context tokens (including cache reads/writes): 13,840,653</title></rect>
+<rect x="352.8" y="609.6" width="12.7" height="0.1" fill="#9333ea" fill-opacity=".78"><title>2026-06-27: Generated tokens: 186,733</title></rect>
+<rect x="371.2" y="611.9" width="12.7" height="3.1" fill="#2563eb" fill-opacity=".78"><title>2026-06-28: Input/context tokens (including cache reads/writes): 8,055,448</title></rect>
+<rect x="371.2" y="611.9" width="12.7" height="0.0" fill="#9333ea" fill-opacity=".78"><title>2026-06-28: Generated tokens: 25,916</title></rect>
+<rect x="389.6" y="615.0" width="12.7" height="0.0" fill="#2563eb" fill-opacity=".78"><title>2026-06-29: Input/context tokens (including cache reads/writes): 0</title></rect>
+<rect x="389.6" y="615.0" width="12.7" height="0.0" fill="#9333ea" fill-opacity=".78"><title>2026-06-29: Generated tokens: 0</title></rect>
+<rect x="408.0" y="615.0" width="12.7" height="0.0" fill="#2563eb" fill-opacity=".78"><title>2026-06-30: Input/context tokens (including cache reads/writes): 0</title></rect>
+<rect x="408.0" y="615.0" width="12.7" height="0.0" fill="#9333ea" fill-opacity=".78"><title>2026-06-30: Generated tokens: 0</title></rect>
+<rect x="426.4" y="554.0" width="12.7" height="61.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-01: Input/context tokens (including cache reads/writes): 159,240,785</title></rect>
+<rect x="426.4" y="553.7" width="12.7" height="0.3" fill="#9333ea" fill-opacity=".78"><title>2026-07-01: Generated tokens: 656,222</title></rect>
+<rect x="444.8" y="572.4" width="12.7" height="42.6" fill="#2563eb" fill-opacity=".78"><title>2026-07-02: Input/context tokens (including cache reads/writes): 111,125,588</title></rect>
+<rect x="444.8" y="572.1" width="12.7" height="0.3" fill="#9333ea" fill-opacity=".78"><title>2026-07-02: Generated tokens: 706,919</title></rect>
+<rect x="463.2" y="576.0" width="12.7" height="39.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-03: Input/context tokens (including cache reads/writes): 101,780,909</title></rect>
+<rect x="463.2" y="575.5" width="12.7" height="0.5" fill="#9333ea" fill-opacity=".78"><title>2026-07-03: Generated tokens: 1,186,394</title></rect>
+<rect x="481.6" y="526.8" width="12.7" height="88.2" fill="#2563eb" fill-opacity=".78"><title>2026-07-04: Input/context tokens (including cache reads/writes): 229,962,567</title></rect>
+<rect x="481.6" y="526.0" width="12.7" height="0.9" fill="#9333ea" fill-opacity=".78"><title>2026-07-04: Generated tokens: 2,229,461</title></rect>
+<rect x="500.0" y="521.2" width="12.7" height="93.8" fill="#2563eb" fill-opacity=".78"><title>2026-07-05: Input/context tokens (including cache reads/writes): 244,679,861</title></rect>
+<rect x="500.0" y="520.4" width="12.7" height="0.8" fill="#9333ea" fill-opacity=".78"><title>2026-07-05: Generated tokens: 2,025,816</title></rect>
+<rect x="518.4" y="490.3" width="12.7" height="124.7" fill="#2563eb" fill-opacity=".78"><title>2026-07-06: Input/context tokens (including cache reads/writes): 325,332,724</title></rect>
+<rect x="518.4" y="489.4" width="12.7" height="0.9" fill="#9333ea" fill-opacity=".78"><title>2026-07-06: Generated tokens: 2,311,657</title></rect>
+<rect x="536.8" y="418.8" width="12.7" height="196.2" fill="#2563eb" fill-opacity=".78"><title>2026-07-07: Input/context tokens (including cache reads/writes): 511,763,021</title></rect>
+<rect x="536.8" y="417.8" width="12.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-07: Generated tokens: 2,722,199</title></rect>
+<rect x="555.2" y="508.4" width="12.7" height="106.6" fill="#2563eb" fill-opacity=".78"><title>2026-07-08: Input/context tokens (including cache reads/writes): 278,069,082</title></rect>
+<rect x="555.2" y="508.0" width="12.7" height="0.4" fill="#9333ea" fill-opacity=".78"><title>2026-07-08: Generated tokens: 1,020,054</title></rect>
+<rect x="573.6" y="433.0" width="12.7" height="182.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-09: Input/context tokens (including cache reads/writes): 474,756,414</title></rect>
+<rect x="573.6" y="431.5" width="12.7" height="1.5" fill="#9333ea" fill-opacity=".78"><title>2026-07-09: Generated tokens: 3,837,353</title></rect>
+<rect x="592.0" y="477.0" width="12.7" height="138.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-10: Input/context tokens (including cache reads/writes): 359,944,680</title></rect>
+<rect x="592.0" y="476.0" width="12.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-10: Generated tokens: 2,541,947</title></rect>
+<rect x="610.4" y="505.0" width="12.7" height="110.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-11: Input/context tokens (including cache reads/writes): 286,848,688</title></rect>
+<rect x="610.4" y="504.3" width="12.7" height="0.7" fill="#9333ea" fill-opacity=".78"><title>2026-07-11: Generated tokens: 1,952,391</title></rect>
+<rect x="628.8" y="482.6" width="12.7" height="132.4" fill="#2563eb" fill-opacity=".78"><title>2026-07-12: Input/context tokens (including cache reads/writes): 345,437,652</title></rect>
+<rect x="628.8" y="481.9" width="12.7" height="0.6" fill="#9333ea" fill-opacity=".78"><title>2026-07-12: Generated tokens: 1,665,044</title></rect>
+<rect x="647.2" y="465.8" width="12.7" height="149.2" fill="#2563eb" fill-opacity=".78"><title>2026-07-13: Input/context tokens (including cache reads/writes): 389,130,638</title></rect>
+<rect x="647.2" y="465.1" width="12.7" height="0.7" fill="#9333ea" fill-opacity=".78"><title>2026-07-13: Generated tokens: 1,872,497</title></rect>
+<rect x="665.6" y="433.0" width="12.7" height="182.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-14: Input/context tokens (including cache reads/writes): 474,721,031</title></rect>
+<rect x="665.6" y="432.1" width="12.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-14: Generated tokens: 2,493,633</title></rect>
+<rect x="684.0" y="382.5" width="12.7" height="232.5" fill="#2563eb" fill-opacity=".78"><title>2026-07-15: Input/context tokens (including cache reads/writes): 606,410,406</title></rect>
+<rect x="684.0" y="381.9" width="12.7" height="0.7" fill="#9333ea" fill-opacity=".78"><title>2026-07-15: Generated tokens: 1,748,566</title></rect>
+<rect x="702.4" y="551.0" width="12.7" height="64.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-16: Input/context tokens (including cache reads/writes): 167,068,293</title></rect>
+<rect x="702.4" y="550.4" width="12.7" height="0.5" fill="#9333ea" fill-opacity=".78"><title>2026-07-16: Generated tokens: 1,344,632</title></rect>
+<rect x="720.8" y="509.7" width="12.7" height="105.3" fill="#2563eb" fill-opacity=".78"><title>2026-07-17: Input/context tokens (including cache reads/writes): 274,586,959</title></rect>
+<rect x="720.8" y="508.7" width="12.7" height="1.1" fill="#9333ea" fill-opacity=".78"><title>2026-07-17: Generated tokens: 2,836,513</title></rect>
+<rect x="739.2" y="505.0" width="12.7" height="110.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-18: Input/context tokens (including cache reads/writes): 287,085,284</title></rect>
+<rect x="739.2" y="504.0" width="12.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-18: Generated tokens: 2,522,794</title></rect>
+<rect x="757.6" y="564.7" width="12.7" height="50.3" fill="#2563eb" fill-opacity=".78"><title>2026-07-19: Input/context tokens (including cache reads/writes): 131,136,893</title></rect>
+<rect x="757.6" y="564.3" width="12.7" height="0.4" fill="#9333ea" fill-opacity=".78"><title>2026-07-19: Generated tokens: 1,167,712</title></rect>
+<rect x="776.0" y="507.2" width="12.7" height="107.8" fill="#2563eb" fill-opacity=".78"><title>2026-07-20: Input/context tokens (including cache reads/writes): 281,293,137</title></rect>
+<rect x="776.0" y="506.0" width="12.7" height="1.2" fill="#9333ea" fill-opacity=".78"><title>2026-07-20: Generated tokens: 3,177,554</title></rect>
+<rect x="794.3" y="544.1" width="12.7" height="70.9" fill="#2563eb" fill-opacity=".78"><title>2026-07-21: Input/context tokens (including cache reads/writes): 184,880,978</title></rect>
+<rect x="794.3" y="543.3" width="12.7" height="0.8" fill="#9333ea" fill-opacity=".78"><title>2026-07-21: Generated tokens: 2,154,877</title></rect>
+<rect x="812.7" y="514.5" width="12.7" height="100.5" fill="#2563eb" fill-opacity=".78"><title>2026-07-22: Input/context tokens (including cache reads/writes): 262,051,115</title></rect>
+<rect x="812.7" y="513.5" width="12.7" height="1.1" fill="#9333ea" fill-opacity=".78"><title>2026-07-22: Generated tokens: 2,790,411</title></rect>
+<rect x="831.1" y="186.0" width="12.7" height="429.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-23: Input/context tokens (including cache reads/writes): 1,119,055,705</title></rect>
+<rect x="831.1" y="184.5" width="12.7" height="1.6" fill="#9333ea" fill-opacity=".78"><title>2026-07-23: Generated tokens: 4,082,172</title></rect>
+<rect x="849.5" y="263.4" width="12.7" height="351.6" fill="#2563eb" fill-opacity=".78"><title>2026-07-24: Input/context tokens (including cache reads/writes): 917,235,935</title></rect>
+<rect x="849.5" y="262.2" width="12.7" height="1.2" fill="#9333ea" fill-opacity=".78"><title>2026-07-24: Generated tokens: 3,030,614</title></rect>
+<rect x="867.9" y="156.7" width="12.7" height="458.3" fill="#2563eb" fill-opacity=".78"><title>2026-07-25: Input/context tokens (including cache reads/writes): 1,195,664,142</title></rect>
+<rect x="867.9" y="155.6" width="12.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-25: Generated tokens: 2,685,541</title></rect>
+<rect x="886.3" y="203.2" width="12.7" height="411.8" fill="#2563eb" fill-opacity=".78"><title>2026-07-26: Input/context tokens (including cache reads/writes): 1,074,230,848</title></rect>
+<rect x="886.3" y="202.2" width="12.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-26: Generated tokens: 2,729,741</title></rect>
+<rect x="904.7" y="615.0" width="12.7" height="0.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-27: Input/context tokens (including cache reads/writes): 0</title></rect>
+<rect x="904.7" y="615.0" width="12.7" height="0.0" fill="#9333ea" fill-opacity=".78"><title>2026-07-27: Generated tokens: 0</title></rect>
+<rect x="923.1" y="442.0" width="12.7" height="173.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-28: Input/context tokens (including cache reads/writes): 451,408,328</title></rect>
+<rect x="923.1" y="441.5" width="12.7" height="0.5" fill="#9333ea" fill-opacity=".78"><title>2026-07-28: Generated tokens: 1,220,549</title></rect>
+<rect x="941.5" y="385.0" width="12.7" height="230.0" fill="#2563eb" fill-opacity=".78"><title>2026-07-29: Input/context tokens (including cache reads/writes): 599,896,713</title></rect>
+<rect x="941.5" y="384.3" width="12.7" height="0.7" fill="#9333ea" fill-opacity=".78"><title>2026-07-29: Generated tokens: 1,932,548</title></rect>
+<rect x="959.9" y="476.9" width="12.7" height="138.1" fill="#2563eb" fill-opacity=".78"><title>2026-07-30: Input/context tokens (including cache reads/writes): 360,374,451</title></rect>
+<rect x="959.9" y="476.4" width="12.7" height="0.4" fill="#9333ea" fill-opacity=".78"><title>2026-07-30: Generated tokens: 1,068,337</title></rect>
+<rect x="978.3" y="536.3" width="12.7" height="78.7" fill="#2563eb" fill-opacity=".78"><title>2026-07-31: Input/context tokens (including cache reads/writes): 205,252,236</title></rect>
+<rect x="978.3" y="535.9" width="12.7" height="0.4" fill="#9333ea" fill-opacity=".78"><title>2026-07-31: Generated tokens: 1,016,376</title></rect>
+<rect x="996.7" y="451.1" width="12.7" height="163.9" fill="#2563eb" fill-opacity=".78"><title>2026-08-01: Input/context tokens (including cache reads/writes): 427,620,101</title></rect>
+<rect x="996.7" y="450.3" width="12.7" height="0.8" fill="#9333ea" fill-opacity=".78"><title>2026-08-01: Generated tokens: 2,057,602</title></rect>
+<rect x="1015.1" y="259.1" width="12.7" height="355.9" fill="#2563eb" fill-opacity=".78"><title>2026-08-02: Input/context tokens (including cache reads/writes): 928,430,573</title></rect>
+<rect x="1015.1" y="257.5" width="12.7" height="1.6" fill="#9333ea" fill-opacity=".78"><title>2026-08-02: Generated tokens: 4,159,898</title></rect>
+<rect x="1033.5" y="217.2" width="12.7" height="397.8" fill="#2563eb" fill-opacity=".78"><title>2026-08-03: Input/context tokens (including cache reads/writes): 1,037,797,614</title></rect>
+<rect x="1033.5" y="215.7" width="12.7" height="1.5" fill="#9333ea" fill-opacity=".78"><title>2026-08-03: Generated tokens: 3,865,733</title></rect>
+<rect x="1051.9" y="341.4" width="12.7" height="273.6" fill="#2563eb" fill-opacity=".78"><title>2026-08-04: Input/context tokens (including cache reads/writes): 713,788,669</title></rect>
+<rect x="1051.9" y="340.3" width="12.7" height="1.1" fill="#9333ea" fill-opacity=".78"><title>2026-08-04: Generated tokens: 2,834,276</title></rect>
+<rect x="1070.3" y="452.9" width="12.7" height="162.1" fill="#2563eb" fill-opacity=".78"><title>2026-08-05: Input/context tokens (including cache reads/writes): 422,916,735</title></rect>
+<rect x="1070.3" y="452.2" width="12.7" height="0.6" fill="#9333ea" fill-opacity=".78"><title>2026-08-05: Generated tokens: 1,650,220</title></rect>
+<rect x="1088.7" y="347.7" width="12.7" height="267.3" fill="#2563eb" fill-opacity=".78"><title>2026-08-06: Input/context tokens (including cache reads/writes): 697,283,721</title></rect>
+<rect x="1088.7" y="346.8" width="12.7" height="0.9" fill="#9333ea" fill-opacity=".78"><title>2026-08-06: Generated tokens: 2,472,084</title></rect>
+<rect x="1107.1" y="352.4" width="12.7" height="262.6" fill="#2563eb" fill-opacity=".78"><title>2026-08-07: Input/context tokens (including cache reads/writes): 685,047,618</title></rect>
+<rect x="1107.1" y="351.0" width="12.7" height="1.4" fill="#9333ea" fill-opacity=".78"><title>2026-08-07: Generated tokens: 3,530,156</title></rect>
+<rect x="1125.5" y="467.4" width="12.7" height="147.6" fill="#2563eb" fill-opacity=".78"><title>2026-08-08: Input/context tokens (including cache reads/writes): 385,152,584</title></rect>
+<rect x="1125.5" y="467.1" width="12.7" height="0.3" fill="#9333ea" fill-opacity=".78"><title>2026-08-08: Generated tokens: 719,407</title></rect>
+<rect x="1143.9" y="461.3" width="12.7" height="153.7" fill="#2563eb" fill-opacity=".78"><title>2026-08-09: Input/context tokens (including cache reads/writes): 400,857,549</title></rect>
+<rect x="1143.9" y="460.9" width="12.7" height="0.5" fill="#9333ea" fill-opacity=".78"><title>2026-08-09: Generated tokens: 1,232,147</title></rect>
+<rect x="1162.3" y="510.6" width="12.7" height="104.4" fill="#2563eb" fill-opacity=".78"><title>2026-08-10: Input/context tokens (including cache reads/writes): 272,296,416</title></rect>
+<rect x="1162.3" y="510.2" width="12.7" height="0.4" fill="#9333ea" fill-opacity=".78"><title>2026-08-10: Generated tokens: 1,136,284</title></rect>
+<rect x="1180.7" y="363.1" width="12.7" height="251.9" fill="#2563eb" fill-opacity=".78"><title>2026-08-11: Input/context tokens (including cache reads/writes): 657,167,388</title></rect>
+<rect x="1180.7" y="361.6" width="12.7" height="1.5" fill="#9333ea" fill-opacity=".78"><title>2026-08-11: Generated tokens: 3,931,991</title></rect>
+<rect x="1199.1" y="453.0" width="12.7" height="162.0" fill="#2563eb" fill-opacity=".78"><title>2026-08-12: Input/context tokens (including cache reads/writes): 422,524,584</title></rect>
+<rect x="1199.1" y="452.0" width="12.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-08-12: Generated tokens: 2,576,501</title></rect>
+<rect x="1217.5" y="418.4" width="12.7" height="196.6" fill="#2563eb" fill-opacity=".78"><title>2026-08-13: Input/context tokens (including cache reads/writes): 512,985,878</title></rect>
+<rect x="1217.5" y="417.7" width="12.7" height="0.7" fill="#9333ea" fill-opacity=".78"><title>2026-08-13: Generated tokens: 1,783,068</title></rect>
+<rect x="1235.9" y="372.1" width="12.7" height="242.9" fill="#2563eb" fill-opacity=".78"><title>2026-08-14: Input/context tokens (including cache reads/writes): 633,540,353</title></rect>
+<rect x="1235.9" y="371.0" width="12.7" height="1.1" fill="#9333ea" fill-opacity=".78"><title>2026-08-14: Generated tokens: 2,878,377</title></rect>
+<rect x="1254.3" y="400.9" width="12.7" height="214.1" fill="#2563eb" fill-opacity=".78"><title>2026-08-15: Input/context tokens (including cache reads/writes): 558,422,640</title></rect>
+<rect x="1254.3" y="399.6" width="12.7" height="1.4" fill="#9333ea" fill-opacity=".78"><title>2026-08-15: Generated tokens: 3,584,610</title></rect>
+<rect x="1272.7" y="549.3" width="12.7" height="65.7" fill="#2563eb" fill-opacity=".78"><title>2026-08-16: Input/context tokens (including cache reads/writes): 171,483,714</title></rect>
+<rect x="1272.7" y="549.0" width="12.7" height="0.3" fill="#9333ea" fill-opacity=".78"><title>2026-08-16: Generated tokens: 705,730</title></rect>
+<rect x="1291.1" y="606.4" width="12.7" height="8.6" fill="#2563eb" fill-opacity=".78"><title>2026-08-17: Input/context tokens (including cache reads/writes): 22,407,015</title></rect>
+<rect x="1291.1" y="606.4" width="12.7" height="0.0" fill="#9333ea" fill-opacity=".78"><title>2026-08-17: Generated tokens: 88,484</title></rect>
+<rect x="1309.5" y="345.5" width="12.7" height="269.5" fill="#2563eb" fill-opacity=".78"><title>2026-08-18: Input/context tokens (including cache reads/writes): 702,970,312</title></rect>
+<rect x="1309.5" y="344.4" width="12.7" height="1.2" fill="#9333ea" fill-opacity=".78"><title>2026-08-18: Generated tokens: 3,051,212</title></rect>
+<rect x="1327.9" y="222.2" width="12.7" height="392.8" fill="#2563eb" fill-opacity=".78"><title>2026-08-19: Input/context tokens (including cache reads/writes): 1,024,712,966</title></rect>
+<rect x="1327.9" y="220.8" width="12.7" height="1.4" fill="#9333ea" fill-opacity=".78"><title>2026-08-19: Generated tokens: 3,564,043</title></rect>
+<rect x="1346.3" y="374.0" width="12.7" height="241.0" fill="#2563eb" fill-opacity=".78"><title>2026-08-20: Input/context tokens (including cache reads/writes): 628,809,575</title></rect>
+<rect x="1346.3" y="372.9" width="12.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-08-20: Generated tokens: 2,700,120</title></rect>
+<rect x="1364.7" y="531.7" width="12.7" height="83.3" fill="#2563eb" fill-opacity=".78"><title>2026-08-21: Input/context tokens (including cache reads/writes): 217,432,080</title></rect>
+<rect x="1364.7" y="531.1" width="12.7" height="0.6" fill="#9333ea" fill-opacity=".78"><title>2026-08-21: Generated tokens: 1,546,271</title></rect>
+<rect x="1383.1" y="540.6" width="12.7" height="74.4" fill="#2563eb" fill-opacity=".78"><title>2026-08-22: Input/context tokens (including cache reads/writes): 193,981,554</title></rect>
+<rect x="1383.1" y="540.2" width="12.7" height="0.5" fill="#9333ea" fill-opacity=".78"><title>2026-08-22: Generated tokens: 1,250,814</title></rect>
+<rect x="1401.5" y="556.3" width="12.7" height="58.7" fill="#2563eb" fill-opacity=".78"><title>2026-08-23: Input/context tokens (including cache reads/writes): 153,224,606</title></rect>
+<rect x="1401.5" y="555.8" width="12.7" height="0.5" fill="#9333ea" fill-opacity=".78"><title>2026-08-23: Generated tokens: 1,256,340</title></rect>
+<rect x="1419.9" y="573.3" width="12.7" height="41.7" fill="#2563eb" fill-opacity=".78"><title>2026-08-24: Input/context tokens (including cache reads/writes): 108,665,868</title></rect>
+<rect x="1419.9" y="573.1" width="12.7" height="0.3" fill="#9333ea" fill-opacity=".78"><title>2026-08-24: Generated tokens: 654,926</title></rect>
+<rect x="1438.3" y="541.7" width="12.7" height="73.3" fill="#2563eb" fill-opacity=".78"><title>2026-08-25: Input/context tokens (including cache reads/writes): 191,335,275</title></rect>
+<rect x="1438.3" y="541.1" width="12.7" height="0.5" fill="#9333ea" fill-opacity=".78"><title>2026-08-25: Generated tokens: 1,391,351</title></rect>
+<rect x="1456.7" y="547.9" width="12.7" height="67.1" fill="#2563eb" fill-opacity=".78"><title>2026-08-26: Input/context tokens (including cache reads/writes): 175,156,848</title></rect>
+<rect x="1456.7" y="547.5" width="12.7" height="0.4" fill="#9333ea" fill-opacity=".78"><title>2026-08-26: Generated tokens: 993,548</title></rect>
+<rect x="1475.1" y="543.4" width="12.7" height="71.6" fill="#2563eb" fill-opacity=".78"><title>2026-08-27: Input/context tokens (including cache reads/writes): 186,669,814</title></rect>
+<rect x="1475.1" y="543.0" width="12.7" height="0.5" fill="#9333ea" fill-opacity=".78"><title>2026-08-27: Generated tokens: 1,192,006</title></rect>
+<rect x="1493.5" y="493.7" width="12.7" height="121.3" fill="#2563eb" fill-opacity=".78"><title>2026-08-28: Input/context tokens (including cache reads/writes): 316,357,916</title></rect>
+<rect x="1493.5" y="492.8" width="12.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-08-28: Generated tokens: 2,478,347</title></rect>
+<rect x="1511.8" y="507.2" width="12.7" height="107.8" fill="#2563eb" fill-opacity=".78"><title>2026-08-29: Input/context tokens (including cache reads/writes): 281,241,877</title></rect>
+<rect x="1511.8" y="506.5" width="12.7" height="0.7" fill="#9333ea" fill-opacity=".78"><title>2026-08-29: Generated tokens: 1,754,145</title></rect>
+<rect x="1530.2" y="466.3" width="12.7" height="148.7" fill="#2563eb" fill-opacity=".78"><title>2026-08-30: Input/context tokens (including cache reads/writes): 387,830,722</title></rect>
+<rect x="1530.2" y="465.3" width="12.7" height="1.0" fill="#9333ea" fill-opacity=".78"><title>2026-08-30: Generated tokens: 2,695,068</title></rect>
+<rect x="1548.6" y="365.3" width="12.7" height="249.7" fill="#2563eb" fill-opacity=".78"><title>2026-08-31: Input/context tokens (including cache reads/writes): 651,439,330</title></rect>
+<rect x="1548.6" y="364.3" width="12.7" height="0.9" fill="#9333ea" fill-opacity=".78"><title>2026-08-31: Generated tokens: 2,447,743</title></rect>
 <text x="28" y="385.0" transform="rotate(-90 28 385.0)" text-anchor="middle" font-family="sans-serif" font-size="16">Tokens</text>
 <text x="837.5" y="735" text-anchor="middle" font-family="sans-serif" font-size="16">Local date (MM-DD, America/Los_Angeles)</text>
 </svg>

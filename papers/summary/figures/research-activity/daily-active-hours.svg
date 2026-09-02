@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 760">
 <rect width="100%" height="100%" fill="white"/>
 <text x="120" y="42" font-family="sans-serif" font-size="28" font-weight="bold">Daily active research hours</text>
-<text x="120" y="70" font-family="sans-serif" font-size="16" fill="#555">2026-06-01 through 2026-08-04; research activity record; total: 750 hours; peak: 23; an active hour has at least one user message</text>
+<text x="120" y="70" font-family="sans-serif" font-size="16" fill="#555">2026-06-01 through 2026-09-03; projects: rust, othello; total: 1,219 hours; peak: 24; an active hour has at least one user message</text>
 <line x1="120" y1="96" x2="144" y2="96" stroke="#2563eb" stroke-width="4"/>
 <text x="154" y="102" font-family="sans-serif" font-size="15">Active hours</text>
 <line x1="120" y1="615" x2="1555" y2="615" stroke="#6b7280"/>
@@ -20,75 +20,103 @@
 <text x="108" y="160.0" text-anchor="end" font-family="sans-serif" font-size="14">25</text>
 <line x1="120.0" y1="615" x2="120.0" y2="622" stroke="#6b7280"/>
 <text x="120.0" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 120.0 643)">06-14</text>
-<line x1="292.2" y1="615" x2="292.2" y2="622" stroke="#6b7280"/>
-<text x="292.2" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 292.2 643)">06-20</text>
-<line x1="464.4" y1="615" x2="464.4" y2="622" stroke="#6b7280"/>
-<text x="464.4" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 464.4 643)">06-26</text>
-<line x1="636.6" y1="615" x2="636.6" y2="622" stroke="#6b7280"/>
-<text x="636.6" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 636.6 643)">07-02</text>
-<line x1="808.8" y1="615" x2="808.8" y2="622" stroke="#6b7280"/>
-<text x="808.8" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 808.8 643)">07-08</text>
-<line x1="981.0" y1="615" x2="981.0" y2="622" stroke="#6b7280"/>
-<text x="981.0" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 981.0 643)">07-14</text>
-<line x1="1153.2" y1="615" x2="1153.2" y2="622" stroke="#6b7280"/>
-<text x="1153.2" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1153.2 643)">07-20</text>
-<line x1="1325.4" y1="615" x2="1325.4" y2="622" stroke="#6b7280"/>
-<text x="1325.4" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1325.4 643)">07-26</text>
-<line x1="1497.6" y1="615" x2="1497.6" y2="622" stroke="#6b7280"/>
-<text x="1497.6" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1497.6 643)">08-01</text>
+<line x1="285.6" y1="615" x2="285.6" y2="622" stroke="#6b7280"/>
+<text x="285.6" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 285.6 643)">06-23</text>
+<line x1="451.2" y1="615" x2="451.2" y2="622" stroke="#6b7280"/>
+<text x="451.2" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 451.2 643)">07-02</text>
+<line x1="616.7" y1="615" x2="616.7" y2="622" stroke="#6b7280"/>
+<text x="616.7" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 616.7 643)">07-11</text>
+<line x1="782.3" y1="615" x2="782.3" y2="622" stroke="#6b7280"/>
+<text x="782.3" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 782.3 643)">07-20</text>
+<line x1="947.9" y1="615" x2="947.9" y2="622" stroke="#6b7280"/>
+<text x="947.9" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 947.9 643)">07-29</text>
+<line x1="1113.5" y1="615" x2="1113.5" y2="622" stroke="#6b7280"/>
+<text x="1113.5" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1113.5 643)">08-07</text>
+<line x1="1279.0" y1="615" x2="1279.0" y2="622" stroke="#6b7280"/>
+<text x="1279.0" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1279.0 643)">08-16</text>
+<line x1="1444.6" y1="615" x2="1444.6" y2="622" stroke="#6b7280"/>
+<text x="1444.6" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1444.6 643)">08-25</text>
 <line x1="1555.0" y1="615" x2="1555.0" y2="622" stroke="#6b7280"/>
-<text x="1555.0" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1555.0 643)">08-03</text>
-<rect x="110.2" y="486.2" width="19.7" height="128.8" fill="#2563eb" fill-opacity=".75"><title>2026-06-14: Active hours: 7</title></rect>
-<rect x="138.9" y="302.2" width="19.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-06-15: Active hours: 17</title></rect>
-<rect x="167.6" y="283.8" width="19.7" height="331.2" fill="#2563eb" fill-opacity=".75"><title>2026-06-16: Active hours: 18</title></rect>
-<rect x="196.3" y="302.2" width="19.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-06-17: Active hours: 17</title></rect>
-<rect x="225.0" y="320.6" width="19.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-06-18: Active hours: 16</title></rect>
-<rect x="253.7" y="320.6" width="19.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-06-19: Active hours: 16</title></rect>
-<rect x="282.4" y="339.0" width="19.7" height="276.0" fill="#2563eb" fill-opacity=".75"><title>2026-06-20: Active hours: 15</title></rect>
-<rect x="311.1" y="265.4" width="19.7" height="349.6" fill="#2563eb" fill-opacity=".75"><title>2026-06-21: Active hours: 19</title></rect>
-<rect x="339.8" y="302.2" width="19.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-06-22: Active hours: 17</title></rect>
-<rect x="368.5" y="339.0" width="19.7" height="276.0" fill="#2563eb" fill-opacity=".75"><title>2026-06-23: Active hours: 15</title></rect>
-<rect x="397.2" y="302.2" width="19.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-06-24: Active hours: 17</title></rect>
-<rect x="425.9" y="504.6" width="19.7" height="110.4" fill="#2563eb" fill-opacity=".75"><title>2026-06-25: Active hours: 6</title></rect>
-<rect x="454.6" y="357.4" width="19.7" height="257.6" fill="#2563eb" fill-opacity=".75"><title>2026-06-26: Active hours: 14</title></rect>
-<rect x="483.3" y="559.8" width="19.7" height="55.2" fill="#2563eb" fill-opacity=".75"><title>2026-06-27: Active hours: 3</title></rect>
-<rect x="512.0" y="596.6" width="19.7" height="18.4" fill="#2563eb" fill-opacity=".75"><title>2026-06-28: Active hours: 1</title></rect>
-<rect x="540.7" y="615.0" width="19.7" height="0.0" fill="#2563eb" fill-opacity=".75"><title>2026-06-29: Active hours: 0</title></rect>
-<rect x="569.4" y="615.0" width="19.7" height="0.0" fill="#2563eb" fill-opacity=".75"><title>2026-06-30: Active hours: 0</title></rect>
-<rect x="598.1" y="412.6" width="19.7" height="202.4" fill="#2563eb" fill-opacity=".75"><title>2026-07-01: Active hours: 11</title></rect>
-<rect x="626.8" y="302.2" width="19.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-07-02: Active hours: 17</title></rect>
-<rect x="655.5" y="228.6" width="19.7" height="386.4" fill="#2563eb" fill-opacity=".75"><title>2026-07-03: Active hours: 21</title></rect>
-<rect x="684.2" y="320.6" width="19.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-07-04: Active hours: 16</title></rect>
-<rect x="712.9" y="302.2" width="19.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-07-05: Active hours: 17</title></rect>
-<rect x="741.6" y="265.4" width="19.7" height="349.6" fill="#2563eb" fill-opacity=".75"><title>2026-07-06: Active hours: 19</title></rect>
-<rect x="770.3" y="191.8" width="19.7" height="423.2" fill="#2563eb" fill-opacity=".75"><title>2026-07-07: Active hours: 23</title></rect>
-<rect x="799.0" y="339.0" width="19.7" height="276.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-08: Active hours: 15</title></rect>
-<rect x="827.7" y="302.2" width="19.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-07-09: Active hours: 17</title></rect>
-<rect x="856.4" y="247.0" width="19.7" height="368.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-10: Active hours: 20</title></rect>
-<rect x="885.1" y="320.6" width="19.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-07-11: Active hours: 16</title></rect>
-<rect x="913.8" y="320.6" width="19.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-07-12: Active hours: 16</title></rect>
-<rect x="942.5" y="339.0" width="19.7" height="276.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-13: Active hours: 15</title></rect>
-<rect x="971.2" y="302.2" width="19.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-07-14: Active hours: 17</title></rect>
-<rect x="999.9" y="247.0" width="19.7" height="368.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-15: Active hours: 20</title></rect>
-<rect x="1028.6" y="339.0" width="19.7" height="276.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-16: Active hours: 15</title></rect>
-<rect x="1057.3" y="302.2" width="19.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-07-17: Active hours: 17</title></rect>
-<rect x="1086.0" y="265.4" width="19.7" height="349.6" fill="#2563eb" fill-opacity=".75"><title>2026-07-18: Active hours: 19</title></rect>
-<rect x="1114.7" y="320.6" width="19.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-07-19: Active hours: 16</title></rect>
-<rect x="1143.4" y="247.0" width="19.7" height="368.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-20: Active hours: 20</title></rect>
-<rect x="1172.1" y="302.2" width="19.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-07-21: Active hours: 17</title></rect>
-<rect x="1200.8" y="265.4" width="19.7" height="349.6" fill="#2563eb" fill-opacity=".75"><title>2026-07-22: Active hours: 19</title></rect>
-<rect x="1229.5" y="265.4" width="19.7" height="349.6" fill="#2563eb" fill-opacity=".75"><title>2026-07-23: Active hours: 19</title></rect>
-<rect x="1258.2" y="375.8" width="19.7" height="239.2" fill="#2563eb" fill-opacity=".75"><title>2026-07-24: Active hours: 13</title></rect>
-<rect x="1286.9" y="302.2" width="19.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-07-25: Active hours: 17</title></rect>
-<rect x="1315.6" y="283.8" width="19.7" height="331.2" fill="#2563eb" fill-opacity=".75"><title>2026-07-26: Active hours: 18</title></rect>
-<rect x="1344.3" y="615.0" width="19.7" height="0.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-27: Active hours: 0</title></rect>
-<rect x="1373.0" y="615.0" width="19.7" height="0.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-28: Active hours: 0</title></rect>
-<rect x="1401.7" y="615.0" width="19.7" height="0.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-29: Active hours: 0</title></rect>
-<rect x="1430.4" y="615.0" width="19.7" height="0.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-30: Active hours: 0</title></rect>
-<rect x="1459.1" y="615.0" width="19.7" height="0.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-31: Active hours: 0</title></rect>
-<rect x="1487.8" y="615.0" width="19.7" height="0.0" fill="#2563eb" fill-opacity=".75"><title>2026-08-01: Active hours: 0</title></rect>
-<rect x="1516.5" y="320.6" width="19.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-08-02: Active hours: 16</title></rect>
-<rect x="1545.2" y="412.6" width="19.7" height="202.4" fill="#2563eb" fill-opacity=".75"><title>2026-08-03: Active hours: 11</title></rect>
+<text x="1555.0" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1555.0 643)">08-31</text>
+<rect x="113.6" y="486.2" width="12.7" height="128.8" fill="#2563eb" fill-opacity=".75"><title>2026-06-14: Active hours: 7</title></rect>
+<rect x="132.0" y="302.2" width="12.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-06-15: Active hours: 17</title></rect>
+<rect x="150.4" y="283.8" width="12.7" height="331.2" fill="#2563eb" fill-opacity=".75"><title>2026-06-16: Active hours: 18</title></rect>
+<rect x="168.8" y="302.2" width="12.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-06-17: Active hours: 17</title></rect>
+<rect x="187.2" y="320.6" width="12.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-06-18: Active hours: 16</title></rect>
+<rect x="205.6" y="320.6" width="12.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-06-19: Active hours: 16</title></rect>
+<rect x="224.0" y="339.0" width="12.7" height="276.0" fill="#2563eb" fill-opacity=".75"><title>2026-06-20: Active hours: 15</title></rect>
+<rect x="242.4" y="265.4" width="12.7" height="349.6" fill="#2563eb" fill-opacity=".75"><title>2026-06-21: Active hours: 19</title></rect>
+<rect x="260.8" y="302.2" width="12.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-06-22: Active hours: 17</title></rect>
+<rect x="279.2" y="339.0" width="12.7" height="276.0" fill="#2563eb" fill-opacity=".75"><title>2026-06-23: Active hours: 15</title></rect>
+<rect x="297.6" y="302.2" width="12.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-06-24: Active hours: 17</title></rect>
+<rect x="316.0" y="504.6" width="12.7" height="110.4" fill="#2563eb" fill-opacity=".75"><title>2026-06-25: Active hours: 6</title></rect>
+<rect x="334.4" y="357.4" width="12.7" height="257.6" fill="#2563eb" fill-opacity=".75"><title>2026-06-26: Active hours: 14</title></rect>
+<rect x="352.8" y="559.8" width="12.7" height="55.2" fill="#2563eb" fill-opacity=".75"><title>2026-06-27: Active hours: 3</title></rect>
+<rect x="371.2" y="596.6" width="12.7" height="18.4" fill="#2563eb" fill-opacity=".75"><title>2026-06-28: Active hours: 1</title></rect>
+<rect x="389.6" y="615.0" width="12.7" height="0.0" fill="#2563eb" fill-opacity=".75"><title>2026-06-29: Active hours: 0</title></rect>
+<rect x="408.0" y="615.0" width="12.7" height="0.0" fill="#2563eb" fill-opacity=".75"><title>2026-06-30: Active hours: 0</title></rect>
+<rect x="426.4" y="412.6" width="12.7" height="202.4" fill="#2563eb" fill-opacity=".75"><title>2026-07-01: Active hours: 11</title></rect>
+<rect x="444.8" y="302.2" width="12.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-07-02: Active hours: 17</title></rect>
+<rect x="463.2" y="228.6" width="12.7" height="386.4" fill="#2563eb" fill-opacity=".75"><title>2026-07-03: Active hours: 21</title></rect>
+<rect x="481.6" y="320.6" width="12.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-07-04: Active hours: 16</title></rect>
+<rect x="500.0" y="302.2" width="12.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-07-05: Active hours: 17</title></rect>
+<rect x="518.4" y="265.4" width="12.7" height="349.6" fill="#2563eb" fill-opacity=".75"><title>2026-07-06: Active hours: 19</title></rect>
+<rect x="536.8" y="191.8" width="12.7" height="423.2" fill="#2563eb" fill-opacity=".75"><title>2026-07-07: Active hours: 23</title></rect>
+<rect x="555.2" y="339.0" width="12.7" height="276.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-08: Active hours: 15</title></rect>
+<rect x="573.6" y="302.2" width="12.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-07-09: Active hours: 17</title></rect>
+<rect x="592.0" y="247.0" width="12.7" height="368.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-10: Active hours: 20</title></rect>
+<rect x="610.4" y="320.6" width="12.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-07-11: Active hours: 16</title></rect>
+<rect x="628.8" y="320.6" width="12.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-07-12: Active hours: 16</title></rect>
+<rect x="647.2" y="339.0" width="12.7" height="276.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-13: Active hours: 15</title></rect>
+<rect x="665.6" y="302.2" width="12.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-07-14: Active hours: 17</title></rect>
+<rect x="684.0" y="247.0" width="12.7" height="368.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-15: Active hours: 20</title></rect>
+<rect x="702.4" y="339.0" width="12.7" height="276.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-16: Active hours: 15</title></rect>
+<rect x="720.8" y="302.2" width="12.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-07-17: Active hours: 17</title></rect>
+<rect x="739.2" y="265.4" width="12.7" height="349.6" fill="#2563eb" fill-opacity=".75"><title>2026-07-18: Active hours: 19</title></rect>
+<rect x="757.6" y="320.6" width="12.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-07-19: Active hours: 16</title></rect>
+<rect x="776.0" y="247.0" width="12.7" height="368.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-20: Active hours: 20</title></rect>
+<rect x="794.3" y="302.2" width="12.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-07-21: Active hours: 17</title></rect>
+<rect x="812.7" y="265.4" width="12.7" height="349.6" fill="#2563eb" fill-opacity=".75"><title>2026-07-22: Active hours: 19</title></rect>
+<rect x="831.1" y="265.4" width="12.7" height="349.6" fill="#2563eb" fill-opacity=".75"><title>2026-07-23: Active hours: 19</title></rect>
+<rect x="849.5" y="375.8" width="12.7" height="239.2" fill="#2563eb" fill-opacity=".75"><title>2026-07-24: Active hours: 13</title></rect>
+<rect x="867.9" y="302.2" width="12.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-07-25: Active hours: 17</title></rect>
+<rect x="886.3" y="283.8" width="12.7" height="331.2" fill="#2563eb" fill-opacity=".75"><title>2026-07-26: Active hours: 18</title></rect>
+<rect x="904.7" y="615.0" width="12.7" height="0.0" fill="#2563eb" fill-opacity=".75"><title>2026-07-27: Active hours: 0</title></rect>
+<rect x="923.1" y="375.8" width="12.7" height="239.2" fill="#2563eb" fill-opacity=".75"><title>2026-07-28: Active hours: 13</title></rect>
+<rect x="941.5" y="320.6" width="12.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-07-29: Active hours: 16</title></rect>
+<rect x="959.9" y="357.4" width="12.7" height="257.6" fill="#2563eb" fill-opacity=".75"><title>2026-07-30: Active hours: 14</title></rect>
+<rect x="978.3" y="283.8" width="12.7" height="331.2" fill="#2563eb" fill-opacity=".75"><title>2026-07-31: Active hours: 18</title></rect>
+<rect x="996.7" y="302.2" width="12.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-08-01: Active hours: 17</title></rect>
+<rect x="1015.1" y="320.6" width="12.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-08-02: Active hours: 16</title></rect>
+<rect x="1033.5" y="283.8" width="12.7" height="331.2" fill="#2563eb" fill-opacity=".75"><title>2026-08-03: Active hours: 18</title></rect>
+<rect x="1051.9" y="283.8" width="12.7" height="331.2" fill="#2563eb" fill-opacity=".75"><title>2026-08-04: Active hours: 18</title></rect>
+<rect x="1070.3" y="320.6" width="12.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-08-05: Active hours: 16</title></rect>
+<rect x="1088.7" y="339.0" width="12.7" height="276.0" fill="#2563eb" fill-opacity=".75"><title>2026-08-06: Active hours: 15</title></rect>
+<rect x="1107.1" y="339.0" width="12.7" height="276.0" fill="#2563eb" fill-opacity=".75"><title>2026-08-07: Active hours: 15</title></rect>
+<rect x="1125.5" y="320.6" width="12.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-08-08: Active hours: 16</title></rect>
+<rect x="1143.9" y="283.8" width="12.7" height="331.2" fill="#2563eb" fill-opacity=".75"><title>2026-08-09: Active hours: 18</title></rect>
+<rect x="1162.3" y="283.8" width="12.7" height="331.2" fill="#2563eb" fill-opacity=".75"><title>2026-08-10: Active hours: 18</title></rect>
+<rect x="1180.7" y="173.4" width="12.7" height="441.6" fill="#2563eb" fill-opacity=".75"><title>2026-08-11: Active hours: 24</title></rect>
+<rect x="1199.1" y="302.2" width="12.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-08-12: Active hours: 17</title></rect>
+<rect x="1217.5" y="191.8" width="12.7" height="423.2" fill="#2563eb" fill-opacity=".75"><title>2026-08-13: Active hours: 23</title></rect>
+<rect x="1235.9" y="173.4" width="12.7" height="441.6" fill="#2563eb" fill-opacity=".75"><title>2026-08-14: Active hours: 24</title></rect>
+<rect x="1254.3" y="302.2" width="12.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-08-15: Active hours: 17</title></rect>
+<rect x="1272.7" y="449.4" width="12.7" height="165.6" fill="#2563eb" fill-opacity=".75"><title>2026-08-16: Active hours: 9</title></rect>
+<rect x="1291.1" y="559.8" width="12.7" height="55.2" fill="#2563eb" fill-opacity=".75"><title>2026-08-17: Active hours: 3</title></rect>
+<rect x="1309.5" y="339.0" width="12.7" height="276.0" fill="#2563eb" fill-opacity=".75"><title>2026-08-18: Active hours: 15</title></rect>
+<rect x="1327.9" y="283.8" width="12.7" height="331.2" fill="#2563eb" fill-opacity=".75"><title>2026-08-19: Active hours: 18</title></rect>
+<rect x="1346.3" y="339.0" width="12.7" height="276.0" fill="#2563eb" fill-opacity=".75"><title>2026-08-20: Active hours: 15</title></rect>
+<rect x="1364.7" y="302.2" width="12.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-08-21: Active hours: 17</title></rect>
+<rect x="1383.1" y="302.2" width="12.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-08-22: Active hours: 17</title></rect>
+<rect x="1401.5" y="431.0" width="12.7" height="184.0" fill="#2563eb" fill-opacity=".75"><title>2026-08-23: Active hours: 10</title></rect>
+<rect x="1419.9" y="320.6" width="12.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-08-24: Active hours: 16</title></rect>
+<rect x="1438.3" y="320.6" width="12.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-08-25: Active hours: 16</title></rect>
+<rect x="1456.7" y="265.4" width="12.7" height="349.6" fill="#2563eb" fill-opacity=".75"><title>2026-08-26: Active hours: 19</title></rect>
+<rect x="1475.1" y="283.8" width="12.7" height="331.2" fill="#2563eb" fill-opacity=".75"><title>2026-08-27: Active hours: 18</title></rect>
+<rect x="1493.5" y="320.6" width="12.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-08-28: Active hours: 16</title></rect>
+<rect x="1511.8" y="320.6" width="12.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-08-29: Active hours: 16</title></rect>
+<rect x="1530.2" y="302.2" width="12.7" height="312.8" fill="#2563eb" fill-opacity=".75"><title>2026-08-30: Active hours: 17</title></rect>
+<rect x="1548.6" y="320.6" width="12.7" height="294.4" fill="#2563eb" fill-opacity=".75"><title>2026-08-31: Active hours: 16</title></rect>
 <text x="28" y="385.0" transform="rotate(-90 28 385.0)" text-anchor="middle" font-family="sans-serif" font-size="16">Hours with user activity</text>
 <text x="837.5" y="735" text-anchor="middle" font-family="sans-serif" font-size="16">Local date (MM-DD, America/Los_Angeles)</text>
 </svg>

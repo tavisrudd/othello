@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 760">
 <rect width="100%" height="100%" fill="white"/>
 <text x="120" y="42" font-family="sans-serif" font-size="28" font-weight="bold">Daily conversation turns</text>
-<text x="120" y="70" font-family="sans-serif" font-size="16" fill="#555">2026-06-01 through 2026-08-04; research activity record; totals: 16,357 user, 151,973 agent turns</text>
+<text x="120" y="70" font-family="sans-serif" font-size="16" fill="#555">2026-06-01 through 2026-09-03; projects: rust, othello; totals: 22,714 user, 221,388 agent turns</text>
 <line x1="120" y1="96" x2="144" y2="96" stroke="#dc2626" stroke-width="4"/>
 <text x="154" y="102" font-family="sans-serif" font-size="15">User turns</text>
 <line x1="720" y1="96" x2="744" y2="96" stroke="#059669" stroke-width="4"/>
@@ -18,128 +18,184 @@
 <text x="108" y="160.0" text-anchor="end" font-family="sans-serif" font-size="14">15k</text>
 <line x1="120.0" y1="615" x2="120.0" y2="622" stroke="#6b7280"/>
 <text x="120.0" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 120.0 643)">06-14</text>
-<line x1="292.2" y1="615" x2="292.2" y2="622" stroke="#6b7280"/>
-<text x="292.2" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 292.2 643)">06-20</text>
-<line x1="464.4" y1="615" x2="464.4" y2="622" stroke="#6b7280"/>
-<text x="464.4" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 464.4 643)">06-26</text>
-<line x1="636.6" y1="615" x2="636.6" y2="622" stroke="#6b7280"/>
-<text x="636.6" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 636.6 643)">07-02</text>
-<line x1="808.8" y1="615" x2="808.8" y2="622" stroke="#6b7280"/>
-<text x="808.8" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 808.8 643)">07-08</text>
-<line x1="981.0" y1="615" x2="981.0" y2="622" stroke="#6b7280"/>
-<text x="981.0" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 981.0 643)">07-14</text>
-<line x1="1153.2" y1="615" x2="1153.2" y2="622" stroke="#6b7280"/>
-<text x="1153.2" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1153.2 643)">07-20</text>
-<line x1="1325.4" y1="615" x2="1325.4" y2="622" stroke="#6b7280"/>
-<text x="1325.4" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1325.4 643)">07-26</text>
-<line x1="1497.6" y1="615" x2="1497.6" y2="622" stroke="#6b7280"/>
-<text x="1497.6" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1497.6 643)">08-01</text>
+<line x1="285.6" y1="615" x2="285.6" y2="622" stroke="#6b7280"/>
+<text x="285.6" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 285.6 643)">06-23</text>
+<line x1="451.2" y1="615" x2="451.2" y2="622" stroke="#6b7280"/>
+<text x="451.2" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 451.2 643)">07-02</text>
+<line x1="616.7" y1="615" x2="616.7" y2="622" stroke="#6b7280"/>
+<text x="616.7" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 616.7 643)">07-11</text>
+<line x1="782.3" y1="615" x2="782.3" y2="622" stroke="#6b7280"/>
+<text x="782.3" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 782.3 643)">07-20</text>
+<line x1="947.9" y1="615" x2="947.9" y2="622" stroke="#6b7280"/>
+<text x="947.9" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 947.9 643)">07-29</text>
+<line x1="1113.5" y1="615" x2="1113.5" y2="622" stroke="#6b7280"/>
+<text x="1113.5" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1113.5 643)">08-07</text>
+<line x1="1279.0" y1="615" x2="1279.0" y2="622" stroke="#6b7280"/>
+<text x="1279.0" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1279.0 643)">08-16</text>
+<line x1="1444.6" y1="615" x2="1444.6" y2="622" stroke="#6b7280"/>
+<text x="1444.6" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1444.6 643)">08-25</text>
 <line x1="1555.0" y1="615" x2="1555.0" y2="622" stroke="#6b7280"/>
-<text x="1555.0" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1555.0 643)">08-03</text>
+<text x="1555.0" y="643" text-anchor="middle" font-family="sans-serif" font-size="13" transform="rotate(-35 1555.0 643)">08-31</text>
 <circle cx="120.0" cy="611.9" r="3.5" fill="#dc2626"><title>2026-06-14: User turns: 101</title></circle>
-<circle cx="148.7" cy="606.1" r="3.5" fill="#dc2626"><title>2026-06-15: User turns: 289</title></circle>
-<circle cx="177.4" cy="608.2" r="3.5" fill="#dc2626"><title>2026-06-16: User turns: 221</title></circle>
-<circle cx="206.1" cy="606.7" r="3.5" fill="#dc2626"><title>2026-06-17: User turns: 270</title></circle>
-<circle cx="234.8" cy="608.4" r="3.5" fill="#dc2626"><title>2026-06-18: User turns: 216</title></circle>
-<circle cx="263.5" cy="607.2" r="3.5" fill="#dc2626"><title>2026-06-19: User turns: 254</title></circle>
-<circle cx="292.2" cy="609.1" r="3.5" fill="#dc2626"><title>2026-06-20: User turns: 193</title></circle>
-<circle cx="320.9" cy="605.9" r="3.5" fill="#dc2626"><title>2026-06-21: User turns: 296</title></circle>
-<circle cx="349.6" cy="608.9" r="3.5" fill="#dc2626"><title>2026-06-22: User turns: 199</title></circle>
-<circle cx="378.3" cy="610.4" r="3.5" fill="#dc2626"><title>2026-06-23: User turns: 151</title></circle>
-<circle cx="407.0" cy="609.0" r="3.5" fill="#dc2626"><title>2026-06-24: User turns: 195</title></circle>
-<circle cx="435.7" cy="614.6" r="3.5" fill="#dc2626"><title>2026-06-25: User turns: 14</title></circle>
-<circle cx="464.4" cy="612.1" r="3.5" fill="#dc2626"><title>2026-06-26: User turns: 96</title></circle>
-<circle cx="493.1" cy="614.6" r="3.5" fill="#dc2626"><title>2026-06-27: User turns: 14</title></circle>
-<circle cx="521.8" cy="615.0" r="3.5" fill="#dc2626"><title>2026-06-28: User turns: 1</title></circle>
-<circle cx="550.5" cy="615.0" r="3.5" fill="#dc2626"><title>2026-06-29: User turns: 0</title></circle>
-<circle cx="579.2" cy="615.0" r="3.5" fill="#dc2626"><title>2026-06-30: User turns: 0</title></circle>
-<circle cx="607.9" cy="612.7" r="3.5" fill="#dc2626"><title>2026-07-01: User turns: 75</title></circle>
-<circle cx="636.6" cy="612.5" r="3.5" fill="#dc2626"><title>2026-07-02: User turns: 80</title></circle>
-<circle cx="665.3" cy="611.7" r="3.5" fill="#dc2626"><title>2026-07-03: User turns: 108</title></circle>
-<circle cx="694.0" cy="610.5" r="3.5" fill="#dc2626"><title>2026-07-04: User turns: 147</title></circle>
-<circle cx="722.7" cy="609.5" r="3.5" fill="#dc2626"><title>2026-07-05: User turns: 178</title></circle>
-<circle cx="751.4" cy="600.9" r="3.5" fill="#dc2626"><title>2026-07-06: User turns: 459</title></circle>
-<circle cx="780.1" cy="597.7" r="3.5" fill="#dc2626"><title>2026-07-07: User turns: 563</title></circle>
-<circle cx="808.8" cy="600.5" r="3.5" fill="#dc2626"><title>2026-07-08: User turns: 473</title></circle>
-<circle cx="837.5" cy="597.4" r="3.5" fill="#dc2626"><title>2026-07-09: User turns: 573</title></circle>
-<circle cx="866.2" cy="605.9" r="3.5" fill="#dc2626"><title>2026-07-10: User turns: 298</title></circle>
-<circle cx="894.9" cy="602.9" r="3.5" fill="#dc2626"><title>2026-07-11: User turns: 396</title></circle>
-<circle cx="923.6" cy="585.2" r="3.5" fill="#dc2626"><title>2026-07-12: User turns: 972</title></circle>
-<circle cx="952.3" cy="604.6" r="3.5" fill="#dc2626"><title>2026-07-13: User turns: 339</title></circle>
-<circle cx="981.0" cy="590.9" r="3.5" fill="#dc2626"><title>2026-07-14: User turns: 787</title></circle>
-<circle cx="1009.7" cy="561.9" r="3.5" fill="#dc2626"><title>2026-07-15: User turns: 1,732</title></circle>
-<circle cx="1038.4" cy="605.6" r="3.5" fill="#dc2626"><title>2026-07-16: User turns: 305</title></circle>
-<circle cx="1067.1" cy="600.7" r="3.5" fill="#dc2626"><title>2026-07-17: User turns: 466</title></circle>
-<circle cx="1095.8" cy="605.7" r="3.5" fill="#dc2626"><title>2026-07-18: User turns: 304</title></circle>
-<circle cx="1124.5" cy="607.1" r="3.5" fill="#dc2626"><title>2026-07-19: User turns: 259</title></circle>
-<circle cx="1153.2" cy="603.3" r="3.5" fill="#dc2626"><title>2026-07-20: User turns: 380</title></circle>
-<circle cx="1181.9" cy="604.0" r="3.5" fill="#dc2626"><title>2026-07-21: User turns: 359</title></circle>
-<circle cx="1210.6" cy="600.7" r="3.5" fill="#dc2626"><title>2026-07-22: User turns: 465</title></circle>
-<circle cx="1239.3" cy="596.7" r="3.5" fill="#dc2626"><title>2026-07-23: User turns: 598</title></circle>
-<circle cx="1268.0" cy="600.7" r="3.5" fill="#dc2626"><title>2026-07-24: User turns: 466</title></circle>
-<circle cx="1296.7" cy="601.6" r="3.5" fill="#dc2626"><title>2026-07-25: User turns: 436</title></circle>
-<circle cx="1325.4" cy="599.8" r="3.5" fill="#dc2626"><title>2026-07-26: User turns: 496</title></circle>
-<circle cx="1354.1" cy="615.0" r="3.5" fill="#dc2626"><title>2026-07-27: User turns: 0</title></circle>
-<circle cx="1382.8" cy="615.0" r="3.5" fill="#dc2626"><title>2026-07-28: User turns: 0</title></circle>
-<circle cx="1411.5" cy="615.0" r="3.5" fill="#dc2626"><title>2026-07-29: User turns: 0</title></circle>
-<circle cx="1440.2" cy="615.0" r="3.5" fill="#dc2626"><title>2026-07-30: User turns: 0</title></circle>
-<circle cx="1468.9" cy="615.0" r="3.5" fill="#dc2626"><title>2026-07-31: User turns: 0</title></circle>
-<circle cx="1497.6" cy="615.0" r="3.5" fill="#dc2626"><title>2026-08-01: User turns: 0</title></circle>
-<circle cx="1526.3" cy="594.3" r="3.5" fill="#dc2626"><title>2026-08-02: User turns: 676</title></circle>
-<circle cx="1555.0" cy="604.9" r="3.5" fill="#dc2626"><title>2026-08-03: User turns: 330</title></circle>
-<polyline points="120.0,611.9 148.7,606.1 177.4,608.2 206.1,606.7 234.8,608.4 263.5,607.2 292.2,609.1 320.9,605.9 349.6,608.9 378.3,610.4 407.0,609.0 435.7,614.6 464.4,612.1 493.1,614.6 521.8,615.0 550.5,615.0 579.2,615.0 607.9,612.7 636.6,612.5 665.3,611.7 694.0,610.5 722.7,609.5 751.4,600.9 780.1,597.7 808.8,600.5 837.5,597.4 866.2,605.9 894.9,602.9 923.6,585.2 952.3,604.6 981.0,590.9 1009.7,561.9 1038.4,605.6 1067.1,600.7 1095.8,605.7 1124.5,607.1 1153.2,603.3 1181.9,604.0 1210.6,600.7 1239.3,596.7 1268.0,600.7 1296.7,601.6 1325.4,599.8 1354.1,615.0 1382.8,615.0 1411.5,615.0 1440.2,615.0 1468.9,615.0 1497.6,615.0 1526.3,594.3 1555.0,604.9" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="138.4" cy="606.1" r="3.5" fill="#dc2626"><title>2026-06-15: User turns: 289</title></circle>
+<circle cx="156.8" cy="608.2" r="3.5" fill="#dc2626"><title>2026-06-16: User turns: 221</title></circle>
+<circle cx="175.2" cy="606.7" r="3.5" fill="#dc2626"><title>2026-06-17: User turns: 270</title></circle>
+<circle cx="193.6" cy="608.4" r="3.5" fill="#dc2626"><title>2026-06-18: User turns: 216</title></circle>
+<circle cx="212.0" cy="607.2" r="3.5" fill="#dc2626"><title>2026-06-19: User turns: 254</title></circle>
+<circle cx="230.4" cy="609.1" r="3.5" fill="#dc2626"><title>2026-06-20: User turns: 193</title></circle>
+<circle cx="248.8" cy="605.9" r="3.5" fill="#dc2626"><title>2026-06-21: User turns: 296</title></circle>
+<circle cx="267.2" cy="608.9" r="3.5" fill="#dc2626"><title>2026-06-22: User turns: 199</title></circle>
+<circle cx="285.6" cy="610.4" r="3.5" fill="#dc2626"><title>2026-06-23: User turns: 151</title></circle>
+<circle cx="304.0" cy="609.0" r="3.5" fill="#dc2626"><title>2026-06-24: User turns: 195</title></circle>
+<circle cx="322.4" cy="614.6" r="3.5" fill="#dc2626"><title>2026-06-25: User turns: 14</title></circle>
+<circle cx="340.8" cy="612.1" r="3.5" fill="#dc2626"><title>2026-06-26: User turns: 96</title></circle>
+<circle cx="359.2" cy="614.6" r="3.5" fill="#dc2626"><title>2026-06-27: User turns: 14</title></circle>
+<circle cx="377.6" cy="615.0" r="3.5" fill="#dc2626"><title>2026-06-28: User turns: 1</title></circle>
+<circle cx="396.0" cy="615.0" r="3.5" fill="#dc2626"><title>2026-06-29: User turns: 0</title></circle>
+<circle cx="414.4" cy="615.0" r="3.5" fill="#dc2626"><title>2026-06-30: User turns: 0</title></circle>
+<circle cx="432.8" cy="612.7" r="3.5" fill="#dc2626"><title>2026-07-01: User turns: 75</title></circle>
+<circle cx="451.2" cy="612.5" r="3.5" fill="#dc2626"><title>2026-07-02: User turns: 80</title></circle>
+<circle cx="469.6" cy="611.7" r="3.5" fill="#dc2626"><title>2026-07-03: User turns: 108</title></circle>
+<circle cx="487.9" cy="610.5" r="3.5" fill="#dc2626"><title>2026-07-04: User turns: 147</title></circle>
+<circle cx="506.3" cy="609.5" r="3.5" fill="#dc2626"><title>2026-07-05: User turns: 178</title></circle>
+<circle cx="524.7" cy="600.9" r="3.5" fill="#dc2626"><title>2026-07-06: User turns: 459</title></circle>
+<circle cx="543.1" cy="597.7" r="3.5" fill="#dc2626"><title>2026-07-07: User turns: 563</title></circle>
+<circle cx="561.5" cy="600.5" r="3.5" fill="#dc2626"><title>2026-07-08: User turns: 473</title></circle>
+<circle cx="579.9" cy="597.4" r="3.5" fill="#dc2626"><title>2026-07-09: User turns: 573</title></circle>
+<circle cx="598.3" cy="605.9" r="3.5" fill="#dc2626"><title>2026-07-10: User turns: 298</title></circle>
+<circle cx="616.7" cy="602.9" r="3.5" fill="#dc2626"><title>2026-07-11: User turns: 396</title></circle>
+<circle cx="635.1" cy="585.2" r="3.5" fill="#dc2626"><title>2026-07-12: User turns: 972</title></circle>
+<circle cx="653.5" cy="604.6" r="3.5" fill="#dc2626"><title>2026-07-13: User turns: 339</title></circle>
+<circle cx="671.9" cy="590.9" r="3.5" fill="#dc2626"><title>2026-07-14: User turns: 787</title></circle>
+<circle cx="690.3" cy="561.9" r="3.5" fill="#dc2626"><title>2026-07-15: User turns: 1,732</title></circle>
+<circle cx="708.7" cy="605.6" r="3.5" fill="#dc2626"><title>2026-07-16: User turns: 305</title></circle>
+<circle cx="727.1" cy="600.7" r="3.5" fill="#dc2626"><title>2026-07-17: User turns: 466</title></circle>
+<circle cx="745.5" cy="605.7" r="3.5" fill="#dc2626"><title>2026-07-18: User turns: 304</title></circle>
+<circle cx="763.9" cy="607.1" r="3.5" fill="#dc2626"><title>2026-07-19: User turns: 259</title></circle>
+<circle cx="782.3" cy="603.3" r="3.5" fill="#dc2626"><title>2026-07-20: User turns: 380</title></circle>
+<circle cx="800.7" cy="604.0" r="3.5" fill="#dc2626"><title>2026-07-21: User turns: 359</title></circle>
+<circle cx="819.1" cy="600.7" r="3.5" fill="#dc2626"><title>2026-07-22: User turns: 465</title></circle>
+<circle cx="837.5" cy="596.7" r="3.5" fill="#dc2626"><title>2026-07-23: User turns: 598</title></circle>
+<circle cx="855.9" cy="600.7" r="3.5" fill="#dc2626"><title>2026-07-24: User turns: 466</title></circle>
+<circle cx="874.3" cy="601.6" r="3.5" fill="#dc2626"><title>2026-07-25: User turns: 436</title></circle>
+<circle cx="892.7" cy="599.8" r="3.5" fill="#dc2626"><title>2026-07-26: User turns: 496</title></circle>
+<circle cx="911.1" cy="615.0" r="3.5" fill="#dc2626"><title>2026-07-27: User turns: 0</title></circle>
+<circle cx="929.5" cy="611.4" r="3.5" fill="#dc2626"><title>2026-07-28: User turns: 118</title></circle>
+<circle cx="947.9" cy="611.0" r="3.5" fill="#dc2626"><title>2026-07-29: User turns: 132</title></circle>
+<circle cx="966.3" cy="609.9" r="3.5" fill="#dc2626"><title>2026-07-30: User turns: 167</title></circle>
+<circle cx="984.7" cy="605.6" r="3.5" fill="#dc2626"><title>2026-07-31: User turns: 307</title></circle>
+<circle cx="1003.1" cy="602.6" r="3.5" fill="#dc2626"><title>2026-08-01: User turns: 403</title></circle>
+<circle cx="1021.5" cy="594.3" r="3.5" fill="#dc2626"><title>2026-08-02: User turns: 676</title></circle>
+<circle cx="1039.9" cy="598.1" r="3.5" fill="#dc2626"><title>2026-08-03: User turns: 550</title></circle>
+<circle cx="1058.3" cy="605.0" r="3.5" fill="#dc2626"><title>2026-08-04: User turns: 326</title></circle>
+<circle cx="1076.7" cy="610.3" r="3.5" fill="#dc2626"><title>2026-08-05: User turns: 153</title></circle>
+<circle cx="1095.1" cy="609.1" r="3.5" fill="#dc2626"><title>2026-08-06: User turns: 194</title></circle>
+<circle cx="1113.5" cy="609.8" r="3.5" fill="#dc2626"><title>2026-08-07: User turns: 169</title></circle>
+<circle cx="1131.9" cy="609.2" r="3.5" fill="#dc2626"><title>2026-08-08: User turns: 190</title></circle>
+<circle cx="1150.3" cy="604.4" r="3.5" fill="#dc2626"><title>2026-08-09: User turns: 347</title></circle>
+<circle cx="1168.7" cy="610.4" r="3.5" fill="#dc2626"><title>2026-08-10: User turns: 149</title></circle>
+<circle cx="1187.1" cy="606.1" r="3.5" fill="#dc2626"><title>2026-08-11: User turns: 289</title></circle>
+<circle cx="1205.4" cy="609.4" r="3.5" fill="#dc2626"><title>2026-08-12: User turns: 181</title></circle>
+<circle cx="1223.8" cy="606.1" r="3.5" fill="#dc2626"><title>2026-08-13: User turns: 289</title></circle>
+<circle cx="1242.2" cy="604.5" r="3.5" fill="#dc2626"><title>2026-08-14: User turns: 341</title></circle>
+<circle cx="1260.6" cy="608.1" r="3.5" fill="#dc2626"><title>2026-08-15: User turns: 224</title></circle>
+<circle cx="1279.0" cy="613.3" r="3.5" fill="#dc2626"><title>2026-08-16: User turns: 57</title></circle>
+<circle cx="1297.4" cy="614.7" r="3.5" fill="#dc2626"><title>2026-08-17: User turns: 11</title></circle>
+<circle cx="1315.8" cy="611.2" r="3.5" fill="#dc2626"><title>2026-08-18: User turns: 124</title></circle>
+<circle cx="1334.2" cy="608.3" r="3.5" fill="#dc2626"><title>2026-08-19: User turns: 219</title></circle>
+<circle cx="1352.6" cy="607.1" r="3.5" fill="#dc2626"><title>2026-08-20: User turns: 257</title></circle>
+<circle cx="1371.0" cy="603.6" r="3.5" fill="#dc2626"><title>2026-08-21: User turns: 372</title></circle>
+<circle cx="1389.4" cy="609.0" r="3.5" fill="#dc2626"><title>2026-08-22: User turns: 195</title></circle>
+<circle cx="1407.8" cy="613.2" r="3.5" fill="#dc2626"><title>2026-08-23: User turns: 59</title></circle>
+<circle cx="1426.2" cy="606.8" r="3.5" fill="#dc2626"><title>2026-08-24: User turns: 269</title></circle>
+<circle cx="1444.6" cy="605.5" r="3.5" fill="#dc2626"><title>2026-08-25: User turns: 310</title></circle>
+<circle cx="1463.0" cy="606.9" r="3.5" fill="#dc2626"><title>2026-08-26: User turns: 264</title></circle>
+<circle cx="1481.4" cy="607.5" r="3.5" fill="#dc2626"><title>2026-08-27: User turns: 246</title></circle>
+<circle cx="1499.8" cy="609.2" r="3.5" fill="#dc2626"><title>2026-08-28: User turns: 189</title></circle>
+<circle cx="1518.2" cy="609.3" r="3.5" fill="#dc2626"><title>2026-08-29: User turns: 187</title></circle>
+<circle cx="1536.6" cy="602.9" r="3.5" fill="#dc2626"><title>2026-08-30: User turns: 394</title></circle>
+<circle cx="1555.0" cy="611.0" r="3.5" fill="#dc2626"><title>2026-08-31: User turns: 132</title></circle>
+<polyline points="120.0,611.9 138.4,606.1 156.8,608.2 175.2,606.7 193.6,608.4 212.0,607.2 230.4,609.1 248.8,605.9 267.2,608.9 285.6,610.4 304.0,609.0 322.4,614.6 340.8,612.1 359.2,614.6 377.6,615.0 396.0,615.0 414.4,615.0 432.8,612.7 451.2,612.5 469.6,611.7 487.9,610.5 506.3,609.5 524.7,600.9 543.1,597.7 561.5,600.5 579.9,597.4 598.3,605.9 616.7,602.9 635.1,585.2 653.5,604.6 671.9,590.9 690.3,561.9 708.7,605.6 727.1,600.7 745.5,605.7 763.9,607.1 782.3,603.3 800.7,604.0 819.1,600.7 837.5,596.7 855.9,600.7 874.3,601.6 892.7,599.8 911.1,615.0 929.5,611.4 947.9,611.0 966.3,609.9 984.7,605.6 1003.1,602.6 1021.5,594.3 1039.9,598.1 1058.3,605.0 1076.7,610.3 1095.1,609.1 1113.5,609.8 1131.9,609.2 1150.3,604.4 1168.7,610.4 1187.1,606.1 1205.4,609.4 1223.8,606.1 1242.2,604.5 1260.6,608.1 1279.0,613.3 1297.4,614.7 1315.8,611.2 1334.2,608.3 1352.6,607.1 1371.0,603.6 1389.4,609.0 1407.8,613.2 1426.2,606.8 1444.6,605.5 1463.0,606.9 1481.4,607.5 1499.8,609.2 1518.2,609.3 1536.6,602.9 1555.0,611.0" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linejoin="round"/>
 <circle cx="120.0" cy="591.8" r="3.5" fill="#059669"><title>2026-06-14: Agent turns: 755</title></circle>
-<circle cx="148.7" cy="557.7" r="3.5" fill="#059669"><title>2026-06-15: Agent turns: 1,870</title></circle>
-<circle cx="177.4" cy="556.5" r="3.5" fill="#059669"><title>2026-06-16: Agent turns: 1,908</title></circle>
-<circle cx="206.1" cy="567.9" r="3.5" fill="#059669"><title>2026-06-17: Agent turns: 1,535</title></circle>
-<circle cx="234.8" cy="558.3" r="3.5" fill="#059669"><title>2026-06-18: Agent turns: 1,850</title></circle>
-<circle cx="263.5" cy="558.8" r="3.5" fill="#059669"><title>2026-06-19: Agent turns: 1,832</title></circle>
-<circle cx="292.2" cy="572.0" r="3.5" fill="#059669"><title>2026-06-20: Agent turns: 1,401</title></circle>
-<circle cx="320.9" cy="538.1" r="3.5" fill="#059669"><title>2026-06-21: Agent turns: 2,507</title></circle>
-<circle cx="349.6" cy="570.5" r="3.5" fill="#059669"><title>2026-06-22: Agent turns: 1,452</title></circle>
-<circle cx="378.3" cy="581.4" r="3.5" fill="#059669"><title>2026-06-23: Agent turns: 1,097</title></circle>
-<circle cx="407.0" cy="557.8" r="3.5" fill="#059669"><title>2026-06-24: Agent turns: 1,864</title></circle>
-<circle cx="435.7" cy="611.3" r="3.5" fill="#059669"><title>2026-06-25: Agent turns: 121</title></circle>
-<circle cx="464.4" cy="586.7" r="3.5" fill="#059669"><title>2026-06-26: Agent turns: 923</title></circle>
-<circle cx="493.1" cy="612.9" r="3.5" fill="#059669"><title>2026-06-27: Agent turns: 70</title></circle>
-<circle cx="521.8" cy="614.1" r="3.5" fill="#059669"><title>2026-06-28: Agent turns: 28</title></circle>
-<circle cx="550.5" cy="615.0" r="3.5" fill="#059669"><title>2026-06-29: Agent turns: 0</title></circle>
-<circle cx="579.2" cy="615.0" r="3.5" fill="#059669"><title>2026-06-30: Agent turns: 0</title></circle>
-<circle cx="607.9" cy="591.8" r="3.5" fill="#059669"><title>2026-07-01: Agent turns: 755</title></circle>
-<circle cx="636.6" cy="593.8" r="3.5" fill="#059669"><title>2026-07-02: Agent turns: 691</title></circle>
-<circle cx="665.3" cy="582.9" r="3.5" fill="#059669"><title>2026-07-03: Agent turns: 1,047</title></circle>
-<circle cx="694.0" cy="578.5" r="3.5" fill="#059669"><title>2026-07-04: Agent turns: 1,190</title></circle>
-<circle cx="722.7" cy="564.0" r="3.5" fill="#059669"><title>2026-07-05: Agent turns: 1,662</title></circle>
-<circle cx="751.4" cy="522.6" r="3.5" fill="#059669"><title>2026-07-06: Agent turns: 3,012</title></circle>
-<circle cx="780.1" cy="424.6" r="3.5" fill="#059669"><title>2026-07-07: Agent turns: 6,209</title></circle>
-<circle cx="808.8" cy="499.0" r="3.5" fill="#059669"><title>2026-07-08: Agent turns: 3,783</title></circle>
-<circle cx="837.5" cy="470.5" r="3.5" fill="#059669"><title>2026-07-09: Agent turns: 4,712</title></circle>
-<circle cx="866.2" cy="542.8" r="3.5" fill="#059669"><title>2026-07-10: Agent turns: 2,355</title></circle>
-<circle cx="894.9" cy="555.3" r="3.5" fill="#059669"><title>2026-07-11: Agent turns: 1,946</title></circle>
-<circle cx="923.6" cy="551.2" r="3.5" fill="#059669"><title>2026-07-12: Agent turns: 2,081</title></circle>
-<circle cx="952.3" cy="527.7" r="3.5" fill="#059669"><title>2026-07-13: Agent turns: 2,847</title></circle>
-<circle cx="981.0" cy="519.7" r="3.5" fill="#059669"><title>2026-07-14: Agent turns: 3,108</title></circle>
-<circle cx="1009.7" cy="481.8" r="3.5" fill="#059669"><title>2026-07-15: Agent turns: 4,345</title></circle>
-<circle cx="1038.4" cy="565.6" r="3.5" fill="#059669"><title>2026-07-16: Agent turns: 1,611</title></circle>
-<circle cx="1067.1" cy="533.9" r="3.5" fill="#059669"><title>2026-07-17: Agent turns: 2,644</title></circle>
-<circle cx="1095.8" cy="528.8" r="3.5" fill="#059669"><title>2026-07-18: Agent turns: 2,811</title></circle>
-<circle cx="1124.5" cy="572.8" r="3.5" fill="#059669"><title>2026-07-19: Agent turns: 1,375</title></circle>
-<circle cx="1153.2" cy="556.9" r="3.5" fill="#059669"><title>2026-07-20: Agent turns: 1,894</title></circle>
-<circle cx="1181.9" cy="557.6" r="3.5" fill="#059669"><title>2026-07-21: Agent turns: 1,872</title></circle>
-<circle cx="1210.6" cy="524.2" r="3.5" fill="#059669"><title>2026-07-22: Agent turns: 2,961</title></circle>
-<circle cx="1239.3" cy="253.8" r="3.5" fill="#059669"><title>2026-07-23: Agent turns: 11,778</title></circle>
-<circle cx="1268.0" cy="297.1" r="3.5" fill="#059669"><title>2026-07-24: Agent turns: 10,366</title></circle>
-<circle cx="1296.7" cy="159.9" r="3.5" fill="#059669"><title>2026-07-25: Agent turns: 14,839</title></circle>
-<circle cx="1325.4" cy="194.7" r="3.5" fill="#059669"><title>2026-07-26: Agent turns: 13,706</title></circle>
-<circle cx="1354.1" cy="615.0" r="3.5" fill="#059669"><title>2026-07-27: Agent turns: 0</title></circle>
-<circle cx="1382.8" cy="615.0" r="3.5" fill="#059669"><title>2026-07-28: Agent turns: 0</title></circle>
-<circle cx="1411.5" cy="615.0" r="3.5" fill="#059669"><title>2026-07-29: Agent turns: 0</title></circle>
-<circle cx="1440.2" cy="615.0" r="3.5" fill="#059669"><title>2026-07-30: Agent turns: 0</title></circle>
-<circle cx="1468.9" cy="615.0" r="3.5" fill="#059669"><title>2026-07-31: Agent turns: 0</title></circle>
-<circle cx="1497.6" cy="615.0" r="3.5" fill="#059669"><title>2026-08-01: Agent turns: 0</title></circle>
-<circle cx="1526.3" cy="438.5" r="3.5" fill="#059669"><title>2026-08-02: Agent turns: 5,754</title></circle>
-<circle cx="1555.0" cy="507.5" r="3.5" fill="#059669"><title>2026-08-03: Agent turns: 3,505</title></circle>
-<polyline points="120.0,591.8 148.7,557.7 177.4,556.5 206.1,567.9 234.8,558.3 263.5,558.8 292.2,572.0 320.9,538.1 349.6,570.5 378.3,581.4 407.0,557.8 435.7,611.3 464.4,586.7 493.1,612.9 521.8,614.1 550.5,615.0 579.2,615.0 607.9,591.8 636.6,593.8 665.3,582.9 694.0,578.5 722.7,564.0 751.4,522.6 780.1,424.6 808.8,499.0 837.5,470.5 866.2,542.8 894.9,555.3 923.6,551.2 952.3,527.7 981.0,519.7 1009.7,481.8 1038.4,565.6 1067.1,533.9 1095.8,528.8 1124.5,572.8 1153.2,556.9 1181.9,557.6 1210.6,524.2 1239.3,253.8 1268.0,297.1 1296.7,159.9 1325.4,194.7 1354.1,615.0 1382.8,615.0 1411.5,615.0 1440.2,615.0 1468.9,615.0 1497.6,615.0 1526.3,438.5 1555.0,507.5" fill="none" stroke="#059669" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="138.4" cy="557.7" r="3.5" fill="#059669"><title>2026-06-15: Agent turns: 1,870</title></circle>
+<circle cx="156.8" cy="556.5" r="3.5" fill="#059669"><title>2026-06-16: Agent turns: 1,908</title></circle>
+<circle cx="175.2" cy="567.9" r="3.5" fill="#059669"><title>2026-06-17: Agent turns: 1,535</title></circle>
+<circle cx="193.6" cy="558.3" r="3.5" fill="#059669"><title>2026-06-18: Agent turns: 1,850</title></circle>
+<circle cx="212.0" cy="558.8" r="3.5" fill="#059669"><title>2026-06-19: Agent turns: 1,832</title></circle>
+<circle cx="230.4" cy="572.0" r="3.5" fill="#059669"><title>2026-06-20: Agent turns: 1,401</title></circle>
+<circle cx="248.8" cy="538.1" r="3.5" fill="#059669"><title>2026-06-21: Agent turns: 2,507</title></circle>
+<circle cx="267.2" cy="570.5" r="3.5" fill="#059669"><title>2026-06-22: Agent turns: 1,452</title></circle>
+<circle cx="285.6" cy="581.4" r="3.5" fill="#059669"><title>2026-06-23: Agent turns: 1,097</title></circle>
+<circle cx="304.0" cy="557.8" r="3.5" fill="#059669"><title>2026-06-24: Agent turns: 1,864</title></circle>
+<circle cx="322.4" cy="611.3" r="3.5" fill="#059669"><title>2026-06-25: Agent turns: 121</title></circle>
+<circle cx="340.8" cy="586.7" r="3.5" fill="#059669"><title>2026-06-26: Agent turns: 923</title></circle>
+<circle cx="359.2" cy="612.9" r="3.5" fill="#059669"><title>2026-06-27: Agent turns: 70</title></circle>
+<circle cx="377.6" cy="614.1" r="3.5" fill="#059669"><title>2026-06-28: Agent turns: 28</title></circle>
+<circle cx="396.0" cy="615.0" r="3.5" fill="#059669"><title>2026-06-29: Agent turns: 0</title></circle>
+<circle cx="414.4" cy="615.0" r="3.5" fill="#059669"><title>2026-06-30: Agent turns: 0</title></circle>
+<circle cx="432.8" cy="591.8" r="3.5" fill="#059669"><title>2026-07-01: Agent turns: 755</title></circle>
+<circle cx="451.2" cy="593.8" r="3.5" fill="#059669"><title>2026-07-02: Agent turns: 691</title></circle>
+<circle cx="469.6" cy="582.9" r="3.5" fill="#059669"><title>2026-07-03: Agent turns: 1,047</title></circle>
+<circle cx="487.9" cy="578.5" r="3.5" fill="#059669"><title>2026-07-04: Agent turns: 1,190</title></circle>
+<circle cx="506.3" cy="564.0" r="3.5" fill="#059669"><title>2026-07-05: Agent turns: 1,662</title></circle>
+<circle cx="524.7" cy="522.6" r="3.5" fill="#059669"><title>2026-07-06: Agent turns: 3,012</title></circle>
+<circle cx="543.1" cy="424.6" r="3.5" fill="#059669"><title>2026-07-07: Agent turns: 6,209</title></circle>
+<circle cx="561.5" cy="499.0" r="3.5" fill="#059669"><title>2026-07-08: Agent turns: 3,783</title></circle>
+<circle cx="579.9" cy="470.5" r="3.5" fill="#059669"><title>2026-07-09: Agent turns: 4,712</title></circle>
+<circle cx="598.3" cy="542.8" r="3.5" fill="#059669"><title>2026-07-10: Agent turns: 2,355</title></circle>
+<circle cx="616.7" cy="555.3" r="3.5" fill="#059669"><title>2026-07-11: Agent turns: 1,946</title></circle>
+<circle cx="635.1" cy="551.2" r="3.5" fill="#059669"><title>2026-07-12: Agent turns: 2,081</title></circle>
+<circle cx="653.5" cy="527.7" r="3.5" fill="#059669"><title>2026-07-13: Agent turns: 2,847</title></circle>
+<circle cx="671.9" cy="519.7" r="3.5" fill="#059669"><title>2026-07-14: Agent turns: 3,108</title></circle>
+<circle cx="690.3" cy="481.8" r="3.5" fill="#059669"><title>2026-07-15: Agent turns: 4,345</title></circle>
+<circle cx="708.7" cy="565.6" r="3.5" fill="#059669"><title>2026-07-16: Agent turns: 1,611</title></circle>
+<circle cx="727.1" cy="533.9" r="3.5" fill="#059669"><title>2026-07-17: Agent turns: 2,644</title></circle>
+<circle cx="745.5" cy="528.8" r="3.5" fill="#059669"><title>2026-07-18: Agent turns: 2,811</title></circle>
+<circle cx="763.9" cy="572.8" r="3.5" fill="#059669"><title>2026-07-19: Agent turns: 1,375</title></circle>
+<circle cx="782.3" cy="556.9" r="3.5" fill="#059669"><title>2026-07-20: Agent turns: 1,894</title></circle>
+<circle cx="800.7" cy="557.6" r="3.5" fill="#059669"><title>2026-07-21: Agent turns: 1,872</title></circle>
+<circle cx="819.1" cy="524.2" r="3.5" fill="#059669"><title>2026-07-22: Agent turns: 2,961</title></circle>
+<circle cx="837.5" cy="253.8" r="3.5" fill="#059669"><title>2026-07-23: Agent turns: 11,778</title></circle>
+<circle cx="855.9" cy="297.1" r="3.5" fill="#059669"><title>2026-07-24: Agent turns: 10,366</title></circle>
+<circle cx="874.3" cy="159.9" r="3.5" fill="#059669"><title>2026-07-25: Agent turns: 14,839</title></circle>
+<circle cx="892.7" cy="194.7" r="3.5" fill="#059669"><title>2026-07-26: Agent turns: 13,706</title></circle>
+<circle cx="911.1" cy="615.0" r="3.5" fill="#059669"><title>2026-07-27: Agent turns: 0</title></circle>
+<circle cx="929.5" cy="479.1" r="3.5" fill="#059669"><title>2026-07-28: Agent turns: 4,431</title></circle>
+<circle cx="947.9" cy="447.9" r="3.5" fill="#059669"><title>2026-07-29: Agent turns: 5,449</title></circle>
+<circle cx="966.3" cy="514.5" r="3.5" fill="#059669"><title>2026-07-30: Agent turns: 3,278</title></circle>
+<circle cx="984.7" cy="565.5" r="3.5" fill="#059669"><title>2026-07-31: Agent turns: 1,613</title></circle>
+<circle cx="1003.1" cy="519.0" r="3.5" fill="#059669"><title>2026-08-01: Agent turns: 3,130</title></circle>
+<circle cx="1021.5" cy="438.5" r="3.5" fill="#059669"><title>2026-08-02: Agent turns: 5,754</title></circle>
+<circle cx="1039.9" cy="439.3" r="3.5" fill="#059669"><title>2026-08-03: Agent turns: 5,728</title></circle>
+<circle cx="1058.3" cy="508.7" r="3.5" fill="#059669"><title>2026-08-04: Agent turns: 3,465</title></circle>
+<circle cx="1076.7" cy="549.7" r="3.5" fill="#059669"><title>2026-08-05: Agent turns: 2,128</title></circle>
+<circle cx="1095.1" cy="523.6" r="3.5" fill="#059669"><title>2026-08-06: Agent turns: 2,982</title></circle>
+<circle cx="1113.5" cy="523.3" r="3.5" fill="#059669"><title>2026-08-07: Agent turns: 2,990</title></circle>
+<circle cx="1131.9" cy="525.7" r="3.5" fill="#059669"><title>2026-08-08: Agent turns: 2,911</title></circle>
+<circle cx="1150.3" cy="520.6" r="3.5" fill="#059669"><title>2026-08-09: Agent turns: 3,077</title></circle>
+<circle cx="1168.7" cy="550.8" r="3.5" fill="#059669"><title>2026-08-10: Agent turns: 2,094</title></circle>
+<circle cx="1187.1" cy="475.5" r="3.5" fill="#059669"><title>2026-08-11: Agent turns: 4,548</title></circle>
+<circle cx="1205.4" cy="516.9" r="3.5" fill="#059669"><title>2026-08-12: Agent turns: 3,199</title></circle>
+<circle cx="1223.8" cy="513.1" r="3.5" fill="#059669"><title>2026-08-13: Agent turns: 3,322</title></circle>
+<circle cx="1242.2" cy="507.4" r="3.5" fill="#059669"><title>2026-08-14: Agent turns: 3,510</title></circle>
+<circle cx="1260.6" cy="540.1" r="3.5" fill="#059669"><title>2026-08-15: Agent turns: 2,441</title></circle>
+<circle cx="1279.0" cy="589.9" r="3.5" fill="#059669"><title>2026-08-16: Agent turns: 817</title></circle>
+<circle cx="1297.4" cy="609.2" r="3.5" fill="#059669"><title>2026-08-17: Agent turns: 188</title></circle>
+<circle cx="1315.8" cy="524.9" r="3.5" fill="#059669"><title>2026-08-18: Agent turns: 2,937</title></circle>
+<circle cx="1334.2" cy="493.9" r="3.5" fill="#059669"><title>2026-08-19: Agent turns: 3,950</title></circle>
+<circle cx="1352.6" cy="512.9" r="3.5" fill="#059669"><title>2026-08-20: Agent turns: 3,328</title></circle>
+<circle cx="1371.0" cy="562.0" r="3.5" fill="#059669"><title>2026-08-21: Agent turns: 1,727</title></circle>
+<circle cx="1389.4" cy="574.3" r="3.5" fill="#059669"><title>2026-08-22: Agent turns: 1,326</title></circle>
+<circle cx="1407.8" cy="595.8" r="3.5" fill="#059669"><title>2026-08-23: Agent turns: 625</title></circle>
+<circle cx="1426.2" cy="586.9" r="3.5" fill="#059669"><title>2026-08-24: Agent turns: 915</title></circle>
+<circle cx="1444.6" cy="565.0" r="3.5" fill="#059669"><title>2026-08-25: Agent turns: 1,630</title></circle>
+<circle cx="1463.0" cy="569.6" r="3.5" fill="#059669"><title>2026-08-26: Agent turns: 1,482</title></circle>
+<circle cx="1481.4" cy="563.8" r="3.5" fill="#059669"><title>2026-08-27: Agent turns: 1,671</title></circle>
+<circle cx="1499.8" cy="545.8" r="3.5" fill="#059669"><title>2026-08-28: Agent turns: 2,255</title></circle>
+<circle cx="1518.2" cy="548.9" r="3.5" fill="#059669"><title>2026-08-29: Agent turns: 2,156</title></circle>
+<circle cx="1536.6" cy="534.7" r="3.5" fill="#059669"><title>2026-08-30: Agent turns: 2,617</title></circle>
+<circle cx="1555.0" cy="526.0" r="3.5" fill="#059669"><title>2026-08-31: Agent turns: 2,901</title></circle>
+<polyline points="120.0,591.8 138.4,557.7 156.8,556.5 175.2,567.9 193.6,558.3 212.0,558.8 230.4,572.0 248.8,538.1 267.2,570.5 285.6,581.4 304.0,557.8 322.4,611.3 340.8,586.7 359.2,612.9 377.6,614.1 396.0,615.0 414.4,615.0 432.8,591.8 451.2,593.8 469.6,582.9 487.9,578.5 506.3,564.0 524.7,522.6 543.1,424.6 561.5,499.0 579.9,470.5 598.3,542.8 616.7,555.3 635.1,551.2 653.5,527.7 671.9,519.7 690.3,481.8 708.7,565.6 727.1,533.9 745.5,528.8 763.9,572.8 782.3,556.9 800.7,557.6 819.1,524.2 837.5,253.8 855.9,297.1 874.3,159.9 892.7,194.7 911.1,615.0 929.5,479.1 947.9,447.9 966.3,514.5 984.7,565.5 1003.1,519.0 1021.5,438.5 1039.9,439.3 1058.3,508.7 1076.7,549.7 1095.1,523.6 1113.5,523.3 1131.9,525.7 1150.3,520.6 1168.7,550.8 1187.1,475.5 1205.4,516.9 1223.8,513.1 1242.2,507.4 1260.6,540.1 1279.0,589.9 1297.4,609.2 1315.8,524.9 1334.2,493.9 1352.6,512.9 1371.0,562.0 1389.4,574.3 1407.8,595.8 1426.2,586.9 1444.6,565.0 1463.0,569.6 1481.4,563.8 1499.8,545.8 1518.2,548.9 1536.6,534.7 1555.0,526.0" fill="none" stroke="#059669" stroke-width="2.5" stroke-linejoin="round"/>
 <text x="28" y="385.0" transform="rotate(-90 28 385.0)" text-anchor="middle" font-family="sans-serif" font-size="16">Turns</text>
 <text x="837.5" y="735" text-anchor="middle" font-family="sans-serif" font-size="16">Local date (MM-DD, America/Los_Angeles)</text>
 </svg>
