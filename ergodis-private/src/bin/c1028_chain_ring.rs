@@ -30,7 +30,7 @@ use std::fs;
 use std::path::PathBuf;
 use std::time::Instant;
 
-use ergodis::field::{FiniteField, Gf4, Prime, SmallField};
+use ergodis::field::{FieldElement, Gf4, Prime, SmallField};
 use ergodis::group_action::{
     compile_permutation_orbits, verify_permutation_orbits, ExplicitPermutationAction,
 };
@@ -157,7 +157,11 @@ impl Phg2 {
         let mut points = Vec::new();
         let mut index_of = [-1i16; 64];
         for code in 0..64usize {
-            let v = [(code & 3) as u8, ((code >> 2) & 3) as u8, ((code >> 4) & 3) as u8];
+            let v = [
+                (code & 3) as u8,
+                ((code >> 2) & 3) as u8,
+                ((code >> 4) & 3) as u8,
+            ];
             let Some(rep) = canonical(ring, v) else {
                 continue;
             };
@@ -397,16 +401,17 @@ fn mat_mul(ring: Ring4, a: &Mat3, b: &Mat3) -> Mat3 {
 }
 
 fn det3(ring: Ring4, m: &Mat3) -> u8 {
-    let term = |i: usize, j: usize, k: usize| {
-        ring.mul(ring.mul(m[i], m[3 + j]), m[6 + k])
-    };
+    let term = |i: usize, j: usize, k: usize| ring.mul(ring.mul(m[i], m[3 + j]), m[6 + k]);
     let positive = ring.add(ring.add(term(0, 1, 2), term(1, 2, 0)), term(2, 0, 1));
     let negative = ring.add(ring.add(term(0, 2, 1), term(1, 0, 2)), term(2, 1, 0));
     ring.add(positive, ring.neg(negative))
 }
 
 fn mat_encode(m: &Mat3) -> u32 {
-    m.iter().enumerate().map(|(i, &e)| (e as u32) << (2 * i)).sum()
+    m.iter()
+        .enumerate()
+        .map(|(i, &e)| (e as u32) << (2 * i))
+        .sum()
 }
 
 fn mat_decode(code: u32) -> Mat3 {
@@ -503,7 +508,10 @@ fn classify_arcs(
     arcs: &[u32],
     generators: &[Mat3],
 ) -> anyhow::Result<(usize, Vec<u32>, Vec<Vec<u32>>, bool)> {
-    let perms: Vec<Vec<u32>> = generators.iter().map(|g| point_permutation(plane, g)).collect();
+    let perms: Vec<Vec<u32>> = generators
+        .iter()
+        .map(|g| point_permutation(plane, g))
+        .collect();
     let mut images = Vec::with_capacity(perms.len() * arcs.len());
     for perm in &perms {
         for &arc in arcs {
@@ -539,11 +547,7 @@ fn classify_arcs(
     // Sort orbits canonically by (spectrum, size) so the two rings' lists are
     // directly comparable.
     let mut order: Vec<usize> = (0..representatives.len()).collect();
-    order.sort_by(|&a, &b| {
-        spectra[a]
-            .cmp(&spectra[b])
-            .then(sizes[a].cmp(&sizes[b]))
-    });
+    order.sort_by(|&a, &b| spectra[a].cmp(&spectra[b]).then(sizes[a].cmp(&sizes[b])));
     let sizes = order.iter().map(|&i| sizes[i]).collect();
     let spectra = order.iter().map(|&i| spectra[i].clone()).collect();
     Ok((representatives.len(), sizes, spectra, verified))
@@ -570,7 +574,11 @@ fn code_from_generator(ring: Ring4, generator: &[[u8; 3]]) -> CodeReport {
     let k = generator.len();
     let mut words: Vec<Vec<u8>> = Vec::with_capacity(64);
     for code in 0..64usize {
-        let a = [(code & 3) as u8, ((code >> 2) & 3) as u8, ((code >> 4) & 3) as u8];
+        let a = [
+            (code & 3) as u8,
+            ((code >> 2) & 3) as u8,
+            ((code >> 4) & 3) as u8,
+        ];
         let word: Vec<u8> = (0..k)
             .map(|i| {
                 let mut sum = 0u8;
@@ -728,7 +736,12 @@ fn octacode_candidate(ring: Ring4, g: &[u8; 4]) -> (usize, u32, u32, bool) {
     let linear = gd
         .iter()
         .all(|&x| gd.iter().all(|&y| gd.binary_search(&(x ^ y)).is_ok()));
-    (distinct.len(), min_hom, if min_d == u32::MAX { 0 } else { min_d }, linear)
+    (
+        distinct.len(),
+        min_hom,
+        if min_d == u32::MAX { 0 } else { min_d },
+        linear,
+    )
 }
 
 // ---------------------------------------------------------------------------
@@ -774,7 +787,9 @@ fn howell_basis(ring: Ring4, rows: &[Vec<u8>], cols: usize) -> Vec<Vec<u8>> {
         let pick = match unit {
             Some(w) => {
                 let scale = Ring4::unit_inverse(w[col]);
-                (0..cols).map(|c| ring.mul(w[c], scale)).collect::<Vec<u8>>()
+                (0..cols)
+                    .map(|c| ring.mul(w[c], scale))
+                    .collect::<Vec<u8>>()
             }
             None => candidates
                 .iter()
@@ -795,7 +810,9 @@ fn howell_basis(ring: Ring4, rows: &[Vec<u8>], cols: usize) -> Vec<Vec<u8>> {
 
 fn probe_no_entry_point() -> serde_json::Value {
     let prime4 = Prime::<4>::validate().err().map(|e| e.to_string());
-    let matrix4 = Matrix::new::<4>(1, 1, vec![2u8]).err().map(|e| e.to_string());
+    let matrix4 = Matrix::new::<4>(1, 1, vec![2u8])
+        .err()
+        .map(|e| e.to_string());
     let unreduced_binary = Matrix::new::<2>(1, 2, vec![2u8, 3u8])
         .err()
         .map(|e| e.to_string());
@@ -820,17 +837,32 @@ fn probe_order_four_arithmetic() -> serde_json::Value {
             for y in 0..4u8 {
                 if gf4.add(x, y) != ring.add(x, y) {
                     add_diff += 1;
-                    add_cells.push(format!("{x}+{y}: GF4={} {}={}", gf4.add(x, y), ring.name(), ring.add(x, y)));
+                    add_cells.push(format!(
+                        "{x}+{y}: GF4={} {}={}",
+                        gf4.add(x, y),
+                        ring.name(),
+                        ring.add(x, y)
+                    ));
                 }
                 if gf4.mul(x, y) != ring.mul(x, y) {
                     mul_diff += 1;
-                    mul_cells.push(format!("{x}*{y}: GF4={} {}={}", gf4.mul(x, y), ring.name(), ring.mul(x, y)));
+                    mul_cells.push(format!(
+                        "{x}*{y}: GF4={} {}={}",
+                        gf4.mul(x, y),
+                        ring.name(),
+                        ring.mul(x, y)
+                    ));
                 }
             }
         }
         // The static Gf4 must agree with the runtime SmallField(2,2).
         let static_matches = (0..4u8).all(|x| {
-            (0..4u8).all(|y| Gf4::add(x, y) == gf4.add(x, y) && Gf4::mul(x, y) == gf4.mul(x, y))
+            let x = FieldElement::<Gf4>::new(x).expect("canonical GF(4) element");
+            (0..4u8).all(|y| {
+                let y = FieldElement::<Gf4>::new(y).expect("canonical GF(4) element");
+                (x + y).value() == gf4.add(x.value(), y.value())
+                    && (x * y).value() == gf4.mul(x.value(), y.value())
+            })
         });
         rows.push(serde_json::json!({
             "ring": ring.name(),
@@ -873,7 +905,8 @@ fn probe_rank_oracle() -> serde_json::Value {
                 module_size_mismatch += 1;
                 if first_witness.is_none() {
                     let mut w = String::new();
-                    let _ = write!(
+                    let _ =
+                        write!(
                         w,
                         "[[{},{}],[{},{}]]: {} row module has {} elements, GF(4) rank {} claims {}",
                         entries[0], entries[1], entries[2], entries[3],
@@ -926,7 +959,11 @@ fn probe_projective_index(plane: &Phg2) -> serde_json::Value {
     let mut phantom = 0u32;
     let mut rejected = 0u32;
     for code in 0..64usize {
-        let v = [(code & 3) as u8, ((code >> 2) & 3) as u8, ((code >> 4) & 3) as u8];
+        let v = [
+            (code & 3) as u8,
+            ((code >> 2) & 3) as u8,
+            ((code >> 4) & 3) as u8,
+        ];
         let unimodular = v.iter().any(|&e| Ring4::is_unit(e));
         match indexer.index(&v) {
             Ok(i) => {
@@ -952,7 +989,11 @@ fn probe_projective_index(plane: &Phg2) -> serde_json::Value {
         let ring_points: Vec<usize> = members
             .iter()
             .map(|&code| {
-                let v = [(code & 3) as u8, ((code >> 2) & 3) as u8, ((code >> 4) & 3) as u8];
+                let v = [
+                    (code & 3) as u8,
+                    ((code >> 2) & 3) as u8,
+                    ((code >> 4) & 3) as u8,
+                ];
                 plane
                     .point_index(canonical(ring, v).expect("unimodular"))
                     .expect("indexed")
@@ -993,7 +1034,11 @@ fn probe_projective_index(plane: &Phg2) -> serde_json::Value {
     })
 }
 
-fn probe_distance_kernel(gray_words: &[u64], gray_length: usize, true_distance: u32) -> serde_json::Value {
+fn probe_distance_kernel(
+    gray_words: &[u64],
+    gray_length: usize,
+    true_distance: u32,
+) -> serde_json::Value {
     // The nearest available core path: take the F2-span of the Gray image and
     // ask the binary linear-code kernel for its minimum weight.
     let mut basis: Vec<u64> = Vec::new();
@@ -1048,7 +1093,11 @@ fn main() -> anyhow::Result<()> {
 
     let generators = gl3_generators();
     let mut rings_json = Vec::new();
-    let mut gap_json = vec![probe_no_entry_point(), probe_order_four_arithmetic(), probe_rank_oracle()];
+    let mut gap_json = vec![
+        probe_no_entry_point(),
+        probe_order_four_arithmetic(),
+        probe_rank_oracle(),
+    ];
     let mut distance_probe = serde_json::Value::Null;
 
     for ring in Ring4::ALL {
@@ -1092,7 +1141,11 @@ fn main() -> anyhow::Result<()> {
                 // Recompute the Gray image words for the distance probe.
                 let mut words = Vec::new();
                 for code in 0..64usize {
-                    let a = [(code & 3) as u8, ((code >> 2) & 3) as u8, ((code >> 4) & 3) as u8];
+                    let a = [
+                        (code & 3) as u8,
+                        ((code >> 2) & 3) as u8,
+                        ((code >> 4) & 3) as u8,
+                    ];
                     let mut bits = 0u64;
                     for (i, col) in columns.iter().enumerate() {
                         let mut sum = 0u8;
@@ -1136,7 +1189,10 @@ fn main() -> anyhow::Result<()> {
         }
 
         if ring == Ring4::Z4 {
-            let true_d = hyperoval_code.as_ref().map(|r| r.gray_min_distance).unwrap_or(0);
+            let true_d = hyperoval_code
+                .as_ref()
+                .map(|r| r.gray_min_distance)
+                .unwrap_or(0);
             distance_probe = probe_distance_kernel(&hyperoval_gray, 14, true_d);
             gap_json.push(probe_projective_index(&plane));
         }
