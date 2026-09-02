@@ -4966,6 +4966,17 @@ lossless circuit/e-graph simplification before extraction, followed later—if m
 width warrants it—by treewidth-parameterized exact DP. The immediate implementation gate
 is a universally valid `FeatureDag` simplifier with a complete old-to-new map.
 
+That exact simplifier is now implemented as an iterative source-to-source rebuild. It
+performs checked constant folding plus universal identities for zero/one arithmetic,
+self-subtraction, repeated absolute value/modulus, and Gaussian/Eisenstein norm special
+cases; no corpus value participates. Every source node receives a mapped simplified ID,
+so candidate/provenance records can be transferred rather than silently renumbered. A
+14-node adversarial control becomes eight nodes, and exhaustive `[-2,2]^2` replay checks
+the value of every original node through its mapping. Overflow, node capacity, degree,
+and malformed-topology failures retain the existing typed fail-closed paths. This is the
+lossless simplification import selected by the SOTA update; observational quotienting
+runs only after it.
+
 The first theorem-driven subset-sum sharpening compiles a continuation envelope for
 every prefix. A partial sum is retained after layer `i` only when it lies both in the
 prefix-achievable interval and in `target -` the remaining suffix interval. This is an

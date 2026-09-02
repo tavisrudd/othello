@@ -1006,6 +1006,25 @@ pub struct FeatureDag {
     interned: BTreeMap<FeatureOp, FeatureId>,
 }
 
+pub struct FeatureDagSimplification {
+    dag: FeatureDag,
+    source_to_simplified: Box<[FeatureId]>,
+}
+
+impl FeatureDagSimplification {
+    pub fn dag(&self) -> &FeatureDag {
+        &self.dag
+    }
+
+    pub fn source_to_simplified(&self) -> &[FeatureId] {
+        &self.source_to_simplified
+    }
+
+    pub fn into_parts(self) -> (FeatureDag, Box<[FeatureId]>) {
+        (self.dag, self.source_to_simplified)
+    }
+}
+
 impl FeatureDag {
     pub fn new(
         input_count: u16,
@@ -1082,6 +1101,26 @@ impl FeatureDag {
             }
         }
         Ok(dag)
+    }
+
+    /// Rebuild with checked constant folding and universal algebraic identities.
+    ///
+    /// The pass is iterative and returns a total old-to-new node map. It never
+    /// uses corpus observations, so every rewrite is presentation-independent.
+    pub fn simplify(
+        &self,
+        maximum_nodes: usize,
+    ) -> Result<FeatureDagSimplification, FeatureDagError> {
+        let mut simplified = Self::new(self.input_count, self.maximum_degree, maximum_nodes)?;
+        let mut mapping = Vec::with_capacity(self.len());
+        for node in &self.nodes {
+            let mapped = simplify_feature_op(node.op, &mapping, &mut simplified)?;
+            mapping.push(mapped);
+        }
+        Ok(FeatureDagSimplification {
+            dag: simplified,
+            source_to_simplified: mapping.into_boxed_slice(),
+        })
     }
 
     pub fn diagnostic_bundle(
@@ -1626,6 +1665,125 @@ fn norm(left: i64, right: i64, eisenstein: bool) -> Result<i64, FeatureDagError>
         .ok_or(FeatureDagError::ArithmeticOverflow)
 }
 
+fn simplify_feature_op(
+    op: FeatureOp,
+    mapping: &[FeatureId],
+    dag: &mut FeatureDag,
+) -> Result<FeatureId, FeatureDagError> {
+    let mapped = |source: FeatureId| {
+        mapping
+            .get(source.index())
+            .copied()
+            .ok_or(FeatureDagError::NonCanonicalSnapshot)
+    };
+    match op {
+        FeatureOp::Input { index } => dag.input(index),
+        FeatureOp::Constant { value } => dag.constant(value),
+        FeatureOp::Add { left, right } => {
+            let left = mapped(left)?;
+            let right = mapped(right)?;
+            match (constant_value(dag, left), constant_value(dag, right)) {
+                (Some(0), _) => Ok(right),
+                (_, Some(0)) => Ok(left),
+                (Some(left), Some(right)) => dag.constant(
+                    left.checked_add(right)
+                        .ok_or(FeatureDagError::ArithmeticOverflow)?,
+                ),
+                _ => dag.add(left, right),
+            }
+        }
+        FeatureOp::Sub { left, right } => {
+            let left = mapped(left)?;
+            let right = mapped(right)?;
+            if left == right {
+                return dag.constant(0);
+            }
+            match (constant_value(dag, left), constant_value(dag, right)) {
+                (_, Some(0)) => Ok(left),
+                (Some(left), Some(right)) => dag.constant(
+                    left.checked_sub(right)
+                        .ok_or(FeatureDagError::ArithmeticOverflow)?,
+                ),
+                _ => dag.sub(left, right),
+            }
+        }
+        FeatureOp::Mul { left, right } => {
+            let left = mapped(left)?;
+            let right = mapped(right)?;
+            match (constant_value(dag, left), constant_value(dag, right)) {
+                (Some(0), _) | (_, Some(0)) => dag.constant(0),
+                (Some(1), _) => Ok(right),
+                (_, Some(1)) => Ok(left),
+                (Some(left), Some(right)) => dag.constant(
+                    left.checked_mul(right)
+                        .ok_or(FeatureDagError::ArithmeticOverflow)?,
+                ),
+                _ => dag.mul(left, right),
+            }
+        }
+        FeatureOp::Mod { source, modulus } => {
+            let source = mapped(source)?;
+            if modulus == 1 {
+                return dag.constant(0);
+            }
+            if let Some(value) = constant_value(dag, source) {
+                return dag.constant(value.rem_euclid(i64::from(modulus)));
+            }
+            if dag.node(source).is_some_and(
+                |node| matches!(node.op, FeatureOp::Mod { modulus: inner, .. } if inner == modulus),
+            ) {
+                return Ok(source);
+            }
+            dag.modulo(source, modulus)
+        }
+        FeatureOp::Abs { source } => {
+            let source = mapped(source)?;
+            if let Some(value) = constant_value(dag, source) {
+                return dag.constant(
+                    value
+                        .checked_abs()
+                        .ok_or(FeatureDagError::ArithmeticOverflow)?,
+                );
+            }
+            if dag
+                .node(source)
+                .is_some_and(|node| matches!(node.op, FeatureOp::Abs { .. }))
+            {
+                return Ok(source);
+            }
+            dag.abs(source)
+        }
+        FeatureOp::GaussianNorm { left, right } | FeatureOp::EisensteinNorm { left, right } => {
+            let eisenstein = matches!(op, FeatureOp::EisensteinNorm { .. });
+            let left = mapped(left)?;
+            let right = mapped(right)?;
+            if let (Some(left), Some(right)) =
+                (constant_value(dag, left), constant_value(dag, right))
+            {
+                return dag.constant(norm(left, right, eisenstein)?);
+            }
+            if constant_value(dag, left) == Some(0) {
+                return dag.mul(right, right);
+            }
+            if constant_value(dag, right) == Some(0) || eisenstein && left == right {
+                return dag.mul(left, left);
+            }
+            if eisenstein {
+                dag.eisenstein_norm(left, right)
+            } else {
+                dag.gaussian_norm(left, right)
+            }
+        }
+    }
+}
+
+fn constant_value(dag: &FeatureDag, feature: FeatureId) -> Option<i64> {
+    match dag.node(feature)?.op {
+        FeatureOp::Constant { value } => Some(value),
+        _ => None,
+    }
+}
+
 fn presentation_binding(
     values: &[i64],
     rows: usize,
@@ -1905,6 +2063,50 @@ mod tests {
                 .unwrap();
         assert_eq!(heldout.representative(shifted), Some(left));
         assert_eq!(heldout.representative(square), Some(square));
+    }
+
+    #[test]
+    fn exact_simplifier_preserves_every_source_node() {
+        let mut source = FeatureDag::new(2, 2, 64).unwrap();
+        let left = source.input(0).unwrap();
+        let right = source.input(1).unwrap();
+        let zero = source.constant(0).unwrap();
+        let one = source.constant(1).unwrap();
+        let shifted = source.add(left, zero).unwrap();
+        let scaled = source.mul(shifted, one).unwrap();
+        source.mul(scaled, zero).unwrap();
+        source.sub(right, right).unwrap();
+        let absolute = source.abs(right).unwrap();
+        source.abs(absolute).unwrap();
+        let reduced = source.modulo(left, 5).unwrap();
+        source.modulo(reduced, 5).unwrap();
+        source.gaussian_norm(left, zero).unwrap();
+        source.eisenstein_norm(right, right).unwrap();
+        let source_len = source.len();
+
+        let simplification = source.simplify(64).unwrap();
+        assert_eq!((source_len, simplification.dag().len()), (14, 8));
+        assert_eq!(simplification.source_to_simplified().len(), source_len);
+        for left_value in -2..=2 {
+            for right_value in -2..=2 {
+                let inputs = [left_value, right_value];
+                let mut source_workspace = source.workspace();
+                let mut simplified_workspace = simplification.dag().workspace();
+                let source_values = source.evaluate(&inputs, &mut source_workspace).unwrap();
+                let simplified_values = simplification
+                    .dag()
+                    .evaluate(&inputs, &mut simplified_workspace)
+                    .unwrap();
+                for (source_id, &simplified_id) in
+                    simplification.source_to_simplified().iter().enumerate()
+                {
+                    assert_eq!(
+                        source_values[source_id],
+                        simplified_values[simplified_id.index()]
+                    );
+                }
+            }
+        }
     }
 
     #[test]
