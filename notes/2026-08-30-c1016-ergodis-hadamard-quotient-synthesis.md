@@ -2834,9 +2834,18 @@ directly replayed mod-eighteen shells.  The best generated shell remains level
 14,785,845,489,985 instructions and 21,671,396,501,441 cycles at full counter
 coverage, peaks near 571 MiB RSS, and finishes in 351.9 seconds on eighteen
 workers.  Thus scaling is healthy, but blind fibre sampling still spends about
-8,607 bounded samples per useful parity shell.  The next adapter targets that
-parity condition inside the fibre rather than treating it as a late rejection;
-the scale control remains discovery-only and grants no negative coverage.
+8,607 bounded samples per useful parity shell.  A new fixed-workspace adapter
+now targets that parity condition inside each fibre.  It samples exact row
+lifts and joins `(row0,row1)` against `(row2,row3)` in a generation-stamped
+direct-address table keyed by remaining energy and fourteen nonconstant binary
+autocorrelation bits; the constant bit follows from odd total energy.  With a
+512-row pool it obtains 84 directly replayed parity shells from 108 liftable
+fibres among the same first 10,000 generator seeds.  The 49,881,090-byte
+workspace is iterative and the repeated join allocates zero.  A properly
+protected CHOOM repeat costs 338,952,216,281 instructions and
+103,558,174,752 cycles.  Relative to the scaled blind control this is about
+123x more parity hits per CPU cycle.  Pool misses remain sampled discovery
+misses and grant no negative coverage.
 
 The next exact q29 theorem family is complete rather than merely a two-moment
 gate.  For every even `k=2,4,...,26`, binomial expansion gives
@@ -2851,13 +2860,22 @@ a compact structural endgame: fourteen row coordinates become derived state,
 not a searched certificate.  On a directly replayed mod-eighteen shell, the
 degree-zero identity plus degrees 2--26 force every symmetric residual to zero
 modulo 29; the energy bound and zero residual sum then promote the congruence
-to exact q29 equality.  The private typed implementation and independent
-oracles are in progress before this reduction receives pruning authority.
+to exact q29 equality.  The private typed implementation now independently
+replays that implication without a direct-equality shortcut, rejects forged
+source/semantic bindings, and passes randomized direct-PAF, extreme-value,
+malformed-hypothesis, and allocation oracles.  Blind mining over all anonymous
+degrees selects 2 then 4 and, after degree 2, learns survivor block mask
+`0b0011` on deterministic train/holdout folds; promotion is exclusively
+through the structural theorem.  Precomputed powers cut 100,000 complete
+extractions from 148,450 to 56,764 instructions and from 41,198 to 11,769
+cycles per extraction.  Row-zero reconstruction costs about 179,997
+instructions/70,055 cycles and complete structural CRT replay about
+120,949/59,329 per instance, both with zero hot allocation.
 
 The unrestricted outer
 near miss remains much closer: its six unit residuals occur at shifts
 `1,3,5,11,12,13`, with signs `- + + + - -`; an exact three-distinct-block
-radius search around that root misses after direct replay.  A stronger exact
+radius search around that root misses after direct replay.
 
 An unrestricted private transfer anneal now accepts that arbitrary q29 root
 directly, rather than requiring its original six-class preimage.  Each move is
@@ -2872,8 +2890,7 @@ or about 5,237 instructions and 1,704 cycles per request.  This removes an
 adapter gap but rejects broader unguided transfer annealing as the immediate
 route; its miss has no negative authority.
 
-A stronger exact
-local kernel now exhausts total transfer radius at most four subject to at
+A stronger exact local kernel now exhausts total transfer radius at most four subject to at
 most two transfers per row.  It covers `2+2`, `2+1+1`, four distinct singles,
 and all smaller patterns; same-row pairs are applied sequentially and only
 distinct-row deltas are added.  The 105,495,040-byte iterative workspace has
