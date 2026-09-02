@@ -205,6 +205,130 @@ pub trait RankedEvolutionDriver<C, S> {
     ) -> Result<(), Self::Error>;
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum EvolutionSelectionPhase {
+    Exploit,
+    Reseed,
+}
+
+#[derive(Clone, Copy, Debug, Error, Eq, PartialEq)]
+pub enum QualityDiversityError {
+    #[error("quality-diversity phase lengths must be positive")]
+    EmptyPhase,
+    #[error("quality-diversity phase period overflowed")]
+    PeriodOverflow,
+}
+
+/// Deterministic PatternBoost-style exploit/reseed cadence.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct QualityDiversitySchedule {
+    exploit_generations: u32,
+    reseed_generations: u32,
+    period: u32,
+}
+
+impl QualityDiversitySchedule {
+    pub fn new(
+        exploit_generations: u32,
+        reseed_generations: u32,
+    ) -> Result<Self, QualityDiversityError> {
+        if exploit_generations == 0 || reseed_generations == 0 {
+            return Err(QualityDiversityError::EmptyPhase);
+        }
+        let period = exploit_generations
+            .checked_add(reseed_generations)
+            .ok_or(QualityDiversityError::PeriodOverflow)?;
+        Ok(Self {
+            exploit_generations,
+            reseed_generations,
+            period,
+        })
+    }
+
+    pub fn phase(self, generation: u32) -> EvolutionSelectionPhase {
+        if generation % self.period < self.exploit_generations {
+            EvolutionSelectionPhase::Exploit
+        } else {
+            EvolutionSelectionPhase::Reseed
+        }
+    }
+
+    pub fn exploit_generations(self) -> u32 {
+        self.exploit_generations
+    }
+
+    pub fn reseed_generations(self) -> u32 {
+        self.reseed_generations
+    }
+}
+
+/// Select a global exploit beam or a deterministic best-per-niche reseed.
+pub fn select_quality_diversity_parents<C, S, N, Compare, Niche>(
+    generation: u32,
+    trials: &mut [RankedCandidateTrial<C, S>],
+    beam_width: usize,
+    schedule: QualityDiversitySchedule,
+    compare_scores: Compare,
+    niche: Niche,
+    output: &mut Vec<C>,
+) where
+    C: Clone + Ord,
+    N: Ord,
+    Compare: Fn(&S, &S) -> std::cmp::Ordering,
+    Niche: Fn(&C, &S) -> N,
+{
+    output.clear();
+    let preferred = |left: &RankedCandidateTrial<C, S>, right: &RankedCandidateTrial<C, S>| {
+        compare_scores(&left.score, &right.score).then_with(|| left.candidate.cmp(&right.candidate))
+    };
+    if schedule.phase(generation) == EvolutionSelectionPhase::Exploit {
+        trials.sort_unstable_by(preferred);
+        output.extend(
+            trials
+                .iter()
+                .take(beam_width)
+                .map(|trial| trial.candidate.clone()),
+        );
+        return;
+    }
+
+    let mut niche_winners = std::collections::BTreeMap::<N, usize>::new();
+    for (index, trial) in trials.iter().enumerate() {
+        let descriptor = niche(&trial.candidate, &trial.score);
+        match niche_winners.entry(descriptor) {
+            std::collections::btree_map::Entry::Vacant(entry) => {
+                entry.insert(index);
+            }
+            std::collections::btree_map::Entry::Occupied(mut entry) => {
+                if preferred(trial, &trials[*entry.get()]).is_lt() {
+                    entry.insert(index);
+                }
+            }
+        }
+    }
+    let mut winners = niche_winners.into_values().collect::<Vec<_>>();
+    winners.sort_unstable_by(|&left, &right| preferred(&trials[left], &trials[right]));
+    let mut selected = vec![false; trials.len()];
+    for index in winners.into_iter().take(beam_width) {
+        selected[index] = true;
+        output.push(trials[index].candidate.clone());
+    }
+    if output.len() < beam_width {
+        let mut remainder = selected
+            .iter()
+            .enumerate()
+            .filter_map(|(index, &selected)| (!selected).then_some(index))
+            .collect::<Vec<_>>();
+        remainder.sort_unstable_by(|&left, &right| preferred(&trials[left], &trials[right]));
+        output.extend(
+            remainder
+                .into_iter()
+                .take(beam_width - output.len())
+                .map(|index| trials[index].candidate.clone()),
+        );
+    }
+}
+
 /// Drive bounded evolution with domain-specific generation selection.
 pub fn drive_ranked_evolution_streaming<C, S, Driver, Sink, SinkError>(
     seeds: impl IntoIterator<Item = C>,
@@ -1422,6 +1546,65 @@ mod tests {
                 EvolutionError::ParentOverflow
             ))
         ));
+    }
+
+    #[test]
+    fn quality_diversity_alternates_global_exploit_and_niche_reseed() {
+        let schedule = QualityDiversitySchedule::new(1, 1).unwrap();
+        assert_eq!(schedule.phase(0), EvolutionSelectionPhase::Exploit);
+        assert_eq!(schedule.phase(1), EvolutionSelectionPhase::Reseed);
+        assert_eq!(schedule.exploit_generations(), 1);
+        assert_eq!(schedule.reseed_generations(), 1);
+        let original = [
+            RankedCandidateTrial {
+                generation: 0,
+                candidate: 0_u8,
+                score: 0_u8,
+            },
+            RankedCandidateTrial {
+                generation: 0,
+                candidate: 1,
+                score: 10,
+            },
+            RankedCandidateTrial {
+                generation: 0,
+                candidate: 2,
+                score: 1,
+            },
+            RankedCandidateTrial {
+                generation: 0,
+                candidate: 3,
+                score: 11,
+            },
+        ];
+        let mut output = Vec::new();
+        let mut trials = original.clone();
+        select_quality_diversity_parents(
+            0,
+            &mut trials,
+            2,
+            schedule,
+            u8::cmp,
+            |candidate, _| candidate % 2,
+            &mut output,
+        );
+        assert_eq!(output, [0, 2]);
+
+        trials = original;
+        select_quality_diversity_parents(
+            1,
+            &mut trials,
+            2,
+            schedule,
+            u8::cmp,
+            |candidate, _| candidate % 2,
+            &mut output,
+        );
+        assert_eq!(output, [0, 1]);
+        assert_eq!(
+            QualityDiversitySchedule::new(0, 1),
+            Err(QualityDiversityError::EmptyPhase)
+        );
     }
 
     #[test]

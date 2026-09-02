@@ -257,12 +257,13 @@ pub use span::{
 };
 pub use theorem_search::{
     assemble_sound_decision_list, drive_ranked_evolution_streaming, evolve_implications,
-    evolve_implications_streaming, evolve_ranked_streaming, CandidateTrial, CensusReduction,
-    CensusReductionError, DecisionListConfig, DecisionListError, DecisionListRule, EvolutionConfig,
-    EvolutionError, EvolutionResult, EvolutionRunError, EvolutionSummary, FailureCore,
-    FailureCoreAdmission, FailureCoreBank, FailureCoreKind, ImplicationScore, RankedCandidateTrial,
-    RankedEvolutionDriver, RankedEvolutionRunError, RankedEvolutionSummary, ReplayRowCount,
-    SeparatingReplayCore, SeparatingReplayCoreError, SeparatingReplayCoreSnapshot,
+    evolve_implications_streaming, evolve_ranked_streaming, select_quality_diversity_parents,
+    CandidateTrial, CensusReduction, CensusReductionError, DecisionListConfig, DecisionListError,
+    DecisionListRule, EvolutionConfig, EvolutionError, EvolutionResult, EvolutionRunError,
+    EvolutionSelectionPhase, EvolutionSummary, FailureCore, FailureCoreAdmission, FailureCoreBank,
+    FailureCoreKind, ImplicationScore, QualityDiversityError, QualityDiversitySchedule,
+    RankedCandidateTrial, RankedEvolutionDriver, RankedEvolutionRunError, RankedEvolutionSummary,
+    ReplayRowCount, SeparatingReplayCore, SeparatingReplayCoreError, SeparatingReplayCoreSnapshot,
     SoundDecisionList, SoundTheoremArchive, SoundTheoremPoint, TheoremArchiveAdmission,
     TheoremArchiveError, SEPARATING_REPLAY_CORE_SNAPSHOT_VERSION,
 };
