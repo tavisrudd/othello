@@ -2050,7 +2050,8 @@ files are disposable and may be deleted at any time.
    schema. It pins and records the upstream revision and four source SHA-256
    digests; checks rectangular binary input, common coordinate width,
    `Hx`--`Hz` commutation, both stabilizer ranks, encoded dimension, logical
-   rank and independence modulo the physical checks; row-reduces the output;
+   rank and independence modulo the physical checks; row-reduces the logical
+   observations while preserving the supplied sparse physical presentation;
    and emits all anchors without claiming an unproved symmetry. No GPL source
    or matrix data is copied into this repository. The official repository at
    revision `9fb224b0fa372161fb3933034016bc8dc423a5ab` contains 27 matrix
@@ -2063,6 +2064,31 @@ files are disposable and may be deleted at any time.
    five upstream unknown-distance stems, beginning with the shortest BB
    instance and retaining only committed certificates/results rather than
    disposable build or output paths.
+
+   That follow-on is now materially stronger. Commit `190909141` discovers
+   global, block-cyclic, and two-block torus coordinate actions, verifies that
+   every emitted generator preserves both the physical row space and the
+   physical-plus-logical observable row space, and emits the permutations so
+   the public solver independently re-verifies the orbit transversal. All 54
+   official directions pass. It recovers 2 orbits for BB288/BB360, 34 for
+   LP714/LP1768, and 180 for TN360. A regression now requires dependent sparse
+   physical rows to survive import: replacing them by an arbitrary algebraic
+   basis is exact but destroys the Tanner presentation, and made the BB288
+   control exceed 60 seconds instead of completing both directions in about
+   0.1 seconds each.
+
+   This theorem bridge immediately closes a second official open row. Commit
+   `455308cb1` certifies the supplied LP714 matrices as `[[714,100,16]]` in
+   both directions. The X and Z searches traverse 230,314,871 and 134,141,286
+   candidates in 1.767 and 0.978 seconds after preparation, with verified
+   34-orbit transversals and independently replayed weight-16 witnesses.
+   QDistSAT reports zero completions among 46 configurations under its
+   7,200-second limit. The source hashes, replay protocol, evidence hashes,
+   trust boundary, and single-round comparison caveat are in
+   `2026-09-01-c985-qdist-lp714-exact-distance.md`. Next profile radius growth
+   on TN360 and use BP+OSD plus exact bounded search to establish a useful
+   incumbent/lower-bound pair before deciding whether its weak 180-orbit
+   quotient or LP1768's 34-orbit quotient has the better closure path.
 
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
