@@ -261,8 +261,10 @@ pub use theorem_search::{
     CensusReductionError, DecisionListConfig, DecisionListError, DecisionListRule, EvolutionConfig,
     EvolutionError, EvolutionResult, EvolutionRunError, EvolutionSummary, FailureCore,
     FailureCoreAdmission, FailureCoreBank, FailureCoreKind, ImplicationScore, RankedCandidateTrial,
-    RankedEvolutionDriver, RankedEvolutionRunError, RankedEvolutionSummary, SoundDecisionList,
-    SoundTheoremArchive, SoundTheoremPoint, TheoremArchiveAdmission, TheoremArchiveError,
+    RankedEvolutionDriver, RankedEvolutionRunError, RankedEvolutionSummary, ReplayRowCount,
+    SeparatingReplayCore, SeparatingReplayCoreError, SeparatingReplayCoreSnapshot,
+    SoundDecisionList, SoundTheoremArchive, SoundTheoremPoint, TheoremArchiveAdmission,
+    TheoremArchiveError, SEPARATING_REPLAY_CORE_SNAPSHOT_VERSION,
 };
 pub use transfer::{
     compile_binary_inner_dual, compile_binary_rank_one, compile_binary_target_subspace,

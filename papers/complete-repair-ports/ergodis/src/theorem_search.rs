@@ -8,7 +8,10 @@
 
 use std::collections::BTreeSet;
 
+use serde::{Deserialize, Serialize};
 use thiserror::Error;
+
+pub const SEPARATING_REPLAY_CORE_SNAPSHOT_VERSION: u16 = 1;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct EvolutionConfig {
@@ -693,6 +696,179 @@ fn candidate_subsumes_core<K: Ord>(
         FailureCoreKind::Incomplete => coverage_superset(coverage, core.coverage()),
     };
     inclusion && (core.coverage() != coverage || key < &core.key)
+}
+
+#[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
+pub struct ReplayRowCount {
+    pub row: u32,
+    pub failures: u32,
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct SeparatingReplayCoreSnapshot {
+    pub version: u16,
+    pub row_count: u32,
+    pub maximum_rows: u32,
+    pub failure_counts: Box<[ReplayRowCount]>,
+}
+
+#[derive(Clone, Copy, Debug, Error, Eq, PartialEq)]
+pub enum SeparatingReplayCoreError {
+    #[error("separating replay-core bounds must be positive")]
+    EmptyBound,
+    #[error("separating replay corpus exceeds u32 row IDs")]
+    TooManyRows,
+    #[error("separating replay row is out of range")]
+    RowOutOfRange,
+    #[error("separating replay failure counter overflowed")]
+    CounterOverflow,
+    #[error("separating replay examples have the wrong width")]
+    ExampleWidth,
+    #[error("unsupported separating replay-core snapshot version")]
+    SnapshotVersion,
+    #[error("separating replay-core snapshot is not canonical")]
+    NonCanonicalSnapshot,
+}
+
+/// Persistent bounded front of repeatedly violated corpus rows.
+///
+/// The front is evaluated hardest-first. A mismatch is a conclusive rejection;
+/// a pass only permits the mandatory full-corpus replay and never grants
+/// theorem authority.
+pub struct SeparatingReplayCore {
+    row_count: usize,
+    maximum_rows: usize,
+    failure_counts: Box<[u32]>,
+    rows: Vec<u32>,
+}
+
+impl SeparatingReplayCore {
+    pub fn new(row_count: usize, maximum_rows: usize) -> Result<Self, SeparatingReplayCoreError> {
+        if row_count == 0 || maximum_rows == 0 {
+            return Err(SeparatingReplayCoreError::EmptyBound);
+        }
+        if row_count > u32::MAX as usize {
+            return Err(SeparatingReplayCoreError::TooManyRows);
+        }
+        let maximum_rows = maximum_rows.min(row_count);
+        Ok(Self {
+            row_count,
+            maximum_rows,
+            failure_counts: vec![0_u32; row_count].into_boxed_slice(),
+            rows: Vec::with_capacity(maximum_rows.min(row_count)),
+        })
+    }
+
+    pub fn rows(&self) -> &[u32] {
+        &self.rows
+    }
+
+    pub fn failure_count(&self, row: u32) -> Option<u32> {
+        self.failure_counts.get(row as usize).copied()
+    }
+
+    pub fn observe_failure(&mut self, row: u32) -> Result<(), SeparatingReplayCoreError> {
+        let count = self
+            .failure_counts
+            .get_mut(row as usize)
+            .ok_or(SeparatingReplayCoreError::RowOutOfRange)?;
+        *count = count
+            .checked_add(1)
+            .ok_or(SeparatingReplayCoreError::CounterOverflow)?;
+        if self.rows.contains(&row) {
+            sort_replay_rows(&mut self.rows, &self.failure_counts);
+        } else if self.rows.len() < self.maximum_rows {
+            self.rows.push(row);
+            sort_replay_rows(&mut self.rows, &self.failure_counts);
+        } else if replay_row_cmp(row, *self.rows.last().unwrap(), &self.failure_counts).is_lt() {
+            *self.rows.last_mut().unwrap() = row;
+            sort_replay_rows(&mut self.rows, &self.failure_counts);
+        }
+        Ok(())
+    }
+
+    pub fn first_mismatch<C, E, Predict, Expected>(
+        &self,
+        candidate: &C,
+        examples: &[E],
+        predict: Predict,
+        expected: Expected,
+    ) -> Result<Option<u32>, SeparatingReplayCoreError>
+    where
+        Predict: Fn(&C, &E) -> bool,
+        Expected: Fn(&E) -> bool,
+    {
+        if examples.len() != self.row_count {
+            return Err(SeparatingReplayCoreError::ExampleWidth);
+        }
+        Ok(self.rows.iter().copied().find(|&row| {
+            let example = &examples[row as usize];
+            predict(candidate, example) != expected(example)
+        }))
+    }
+
+    pub fn snapshot(&self) -> SeparatingReplayCoreSnapshot {
+        let failure_counts = self
+            .failure_counts
+            .iter()
+            .enumerate()
+            .filter(|(_, failures)| **failures != 0)
+            .map(|(row, &failures)| ReplayRowCount {
+                row: row as u32,
+                failures,
+            })
+            .collect::<Vec<_>>()
+            .into_boxed_slice();
+        SeparatingReplayCoreSnapshot {
+            version: SEPARATING_REPLAY_CORE_SNAPSHOT_VERSION,
+            row_count: self.row_count as u32,
+            maximum_rows: self.maximum_rows as u32,
+            failure_counts,
+        }
+    }
+
+    pub fn from_snapshot(
+        snapshot: &SeparatingReplayCoreSnapshot,
+    ) -> Result<Self, SeparatingReplayCoreError> {
+        if snapshot.version != SEPARATING_REPLAY_CORE_SNAPSHOT_VERSION {
+            return Err(SeparatingReplayCoreError::SnapshotVersion);
+        }
+        let mut core = Self::new(snapshot.row_count as usize, snapshot.maximum_rows as usize)?;
+        let mut previous = None;
+        for entry in snapshot.failure_counts.iter().copied() {
+            if entry.failures == 0
+                || entry.row >= snapshot.row_count
+                || previous.is_some_and(|previous| entry.row <= previous)
+            {
+                return Err(SeparatingReplayCoreError::NonCanonicalSnapshot);
+            }
+            core.failure_counts[entry.row as usize] = entry.failures;
+            previous = Some(entry.row);
+        }
+        for entry in snapshot.failure_counts.iter() {
+            if core.rows.len() < core.maximum_rows {
+                core.rows.push(entry.row);
+                sort_replay_rows(&mut core.rows, &core.failure_counts);
+            } else if replay_row_cmp(entry.row, *core.rows.last().unwrap(), &core.failure_counts)
+                .is_lt()
+            {
+                *core.rows.last_mut().unwrap() = entry.row;
+                sort_replay_rows(&mut core.rows, &core.failure_counts);
+            }
+        }
+        Ok(core)
+    }
+}
+
+fn sort_replay_rows(rows: &mut [u32], failure_counts: &[u32]) {
+    rows.sort_unstable_by(|&left, &right| replay_row_cmp(left, right, failure_counts));
+}
+
+fn replay_row_cmp(left: u32, right: u32, failure_counts: &[u32]) -> std::cmp::Ordering {
+    failure_counts[right as usize]
+        .cmp(&failure_counts[left as usize])
+        .then_with(|| left.cmp(&right))
 }
 
 /// Greedily assemble a deterministic cascade from independently sound rules.
@@ -1431,5 +1607,72 @@ mod tests {
             FailureCoreAdmission::RejectedCapacity
         );
         assert!(capacity.cores().is_empty());
+    }
+
+    #[test]
+    fn separating_replay_core_keeps_hard_rows_and_rejects_early() {
+        let mut core = SeparatingReplayCore::new(5, 2).unwrap();
+        core.observe_failure(3).unwrap();
+        core.observe_failure(1).unwrap();
+        core.observe_failure(3).unwrap();
+        core.observe_failure(4).unwrap();
+        assert_eq!(core.rows(), &[3, 1]);
+        assert_eq!(core.failure_count(3), Some(2));
+
+        let examples = [false, false, true, true, false];
+        let calls = std::cell::Cell::new(0_usize);
+        let mismatch = core
+            .first_mismatch(
+                &(),
+                &examples,
+                |_, expected| {
+                    calls.set(calls.get() + 1);
+                    !expected
+                },
+                |expected| *expected,
+            )
+            .unwrap();
+        assert_eq!(mismatch, Some(3));
+        assert_eq!(calls.get(), 1);
+    }
+
+    #[test]
+    fn separating_replay_core_snapshot_is_sparse_and_canonical() {
+        let mut core = SeparatingReplayCore::new(8, 2).unwrap();
+        for row in [6_u32, 2, 6, 4, 2, 6] {
+            core.observe_failure(row).unwrap();
+        }
+        let snapshot = core.snapshot();
+        assert_eq!(
+            snapshot.failure_counts.as_ref(),
+            [
+                ReplayRowCount {
+                    row: 2,
+                    failures: 2,
+                },
+                ReplayRowCount {
+                    row: 4,
+                    failures: 1,
+                },
+                ReplayRowCount {
+                    row: 6,
+                    failures: 3,
+                },
+            ]
+        );
+        let encoded = serde_json::to_vec(&snapshot).unwrap();
+        let decoded: SeparatingReplayCoreSnapshot = serde_json::from_slice(&encoded).unwrap();
+        let restored = SeparatingReplayCore::from_snapshot(&decoded).unwrap();
+        assert_eq!(restored.rows(), &[6, 2]);
+        assert_eq!(restored.failure_count(4), Some(1));
+
+        let mut noncanonical = decoded;
+        noncanonical.failure_counts.swap(0, 1);
+        assert_eq!(
+            SeparatingReplayCore::from_snapshot(&noncanonical)
+                .err()
+                .unwrap(),
+            SeparatingReplayCoreError::NonCanonicalSnapshot
+        );
     }
 }
