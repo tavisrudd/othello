@@ -897,6 +897,11 @@ and no new `src/bin` file is allowed (see `ergodis-private/AGENTS.md`). C1036 wi
 remaining C1016 bins into a `tasks/hadamard-2092` crate
 ([C1035 report](../2026-09-02-c1035-ergodis-private-workspace-split.md)).
 
+C1038 is closed: the negative-control benchmark tier landed with a predeclared shape
+classifier (`ergodis/docs/ergodis-shape-classifier.md`); five of six rows landed as predicted,
+the subset-sum crossover and the W3 repeated-interface quotient gap are open in its mystery
+ledger ([C1038 report](../2026-09-02-c1038-negative-control-benchmark-tier.md)).
+
 C1017 is queued to remediate the whole-core Ergodis performance-contract audit:
 allocation-counted hot loops, iterative traversal, complete Tiger layouts,
 contention-free worker ownership, one-/parallel-mode counter A/B gates, and the
