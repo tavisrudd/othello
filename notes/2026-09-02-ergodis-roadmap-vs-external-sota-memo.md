@@ -229,4 +229,9 @@ limit. The aim is the fastest and best tool for the problems we target, and that
 absorbed and improved functionality the framing would exclude (ZDD family enumeration, BP-OSD).
 Classifiers and negative-control tiers are predictions for a run, not product boundaries; a loss
 is recorded as an absorption target, never as confirmation of a box.
+The absorption principle compounds through Evolve: every fast, proof-carrying native primitive
+added to the core (ZDD enumeration, BP-OSD, exact enumeration kernels, a new quotient compiler)
+widens the typed vocabulary Evolve proposes from and the admission layer can certify. Breadth of
+the native toolset is therefore an Evolve capability lever, and the negative-control losses in
+C1038 and C1043 double as a ranked list of primitives to absorb (C1044 for ZDD is the first).
 
