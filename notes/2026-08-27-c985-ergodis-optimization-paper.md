@@ -4165,3 +4165,34 @@ and narrow commits; no large refactor should pre-empt the raw-orbit/evolve
 gate.  Campaign-specific public-boundary findings and undeclared binary feature
 gates remain correctness/export audits and should be handled before the next
 public mirror, independently of performance experimentation.
+
+The first evolve-architecture tranche is now landed.  Public commit
+`57b43e103` factors a generic deterministic bounded/streaming ranked-candidate
+engine beneath the existing implication API.  Candidate score order and
+admission are independent: unsound or otherwise inadmissible candidates can
+remain in the beam and generate mutations, while only admitted candidates can
+be retained as the result.  Existing `evolve_implications` callers and scores
+remain source-compatible and pass their original controls.  This is the seam
+the daemon can drive; migrating the daemon's richer niches, ledgers, and
+evidence must remain an adapter task rather than deleting those capabilities.
+
+Public commits `4eed8578e` and `785414438` add the raw-feature substrate.  A
+bounded typed DAG hash-conses scalar inputs, constants, sums, directed
+differences, products, absolute values, CRT residues, Gaussian norms, and
+Eisenstein norms; commutative terms are canonicalized, degree and evaluation
+cost are carried on every node, arithmetic is checked, and a pre-sized
+workspace evaluates a row with zero observed allocation.  The runtime
+expansion policy selects operations and moduli without recompilation and is
+guarded by the DAG node limit.  Commit `e2da47e87` adds exact rational census-
+reduction ordering across shards; `log2` pruning bits are derived only for
+reporting, never used for beam ordering.  The neutral end-to-end gate at
+`2e3bd222e` starts from two unnamed raw scalars, generates the runtime degree-
+two/modulo-seven bank, and recovers the Eisenstein-norm residue pruner from
+labels under the shared ranked engine.
+
+This closes the reusable engine, raw-term representation, runtime generation,
+zero-allocation evaluation, and exact prune-ranking slices.  It does **not**
+yet close the C1016 raw-orbit claim: the next gate is a stable DAG snapshot and
+private adapter over train/holdout raw orbit rows, followed by parametric
+cross-shard replay.  No C1016 identifiers, private corpora, or campaign
+semantics are present in the public implementation.
