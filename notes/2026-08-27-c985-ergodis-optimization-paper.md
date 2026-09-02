@@ -4946,6 +4946,17 @@ silently discards a tradeoff. Candidate order, bitmap tails, feature identities,
 row/cell/value/frontier bounds fail closed. These are observational supports unless the
 caller separately proves the supplied reachable domain complete.
 
+Full multi-valued feature quotienting now complements the older `feature == 0`
+quotient. For canonical candidates and an optional reachable-row mask, it evaluates
+one bounded column-major matrix, digest-buckets columns, exact-compares every merge,
+and chooses the lowest evaluation-cost/lowest-ID representative of each complete
+row-value class. Eight-byte member records map every candidate back to its terminal.
+A Boolean training control merges `x`, `x + 0`, and `x^2` under representative `x`;
+adding the held-out value `x=2` correctly separates `x^2` while retaining `x + 0`.
+Thus promoted features can be hash-consed by exact observed semantics rather than only
+their zero sets, while presentation binding and held-out/direct replay remain necessary
+before cross-instance reuse.
+
 The first theorem-driven subset-sum sharpening compiles a continuation envelope for
 every prefix. A partial sum is retained after layer `i` only when it lies both in the
 prefix-achievable interval and in `target -` the remaining suffix interval. This is an

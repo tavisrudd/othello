@@ -260,6 +260,197 @@ pub struct FeatureZeroQuotient {
     members: Box<[FeatureZeroClassMember]>,
 }
 
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct FeatureValueClassMember {
+    pub candidate: FeatureId,
+    pub representative: FeatureId,
+}
+
+const _: () = assert!(std::mem::size_of::<FeatureValueClassMember>() == 8);
+const _: () = assert!(std::mem::align_of::<FeatureValueClassMember>() == 4);
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct FeatureValueQuotientBounds {
+    pub maximum_rows: usize,
+    pub maximum_cells: usize,
+    pub maximum_candidates: usize,
+}
+
+pub struct FeatureValueQuotient {
+    selected_rows: usize,
+    representatives: Box<[FeatureId]>,
+    members: Box<[FeatureValueClassMember]>,
+}
+
+#[derive(Clone, Copy, Debug, Error, Eq, PartialEq)]
+pub enum FeatureValueQuotientError {
+    #[error("feature-value quotient bounds are invalid")]
+    InvalidBounds,
+    #[error("feature-value quotient corpus, bitmap, or candidates have the wrong shape")]
+    Shape,
+    #[error("feature-value quotient bitmap has invalid tail bits")]
+    ReachabilityTail,
+    #[error("feature-value quotient candidates are noncanonical")]
+    NonCanonicalCandidates,
+    #[error("feature-value quotient exceeds its configured bound")]
+    TooLarge,
+    #[error(transparent)]
+    Evaluation(#[from] FeatureDagError),
+}
+
+impl FeatureValueQuotient {
+    pub fn compile(
+        dag: &FeatureDag,
+        rows: &[i64],
+        reachable: Option<&[u64]>,
+        candidates: &[FeatureId],
+        bounds: FeatureValueQuotientBounds,
+    ) -> Result<Self, FeatureValueQuotientError> {
+        if bounds.maximum_rows == 0
+            || bounds.maximum_rows > MAX_OBSERVED_FEATURE_SUPPORT_ROWS
+            || bounds.maximum_cells == 0
+            || bounds.maximum_cells > MAX_OBSERVED_FEATURE_SUPPORT_CELLS
+            || bounds.maximum_candidates == 0
+        {
+            return Err(FeatureValueQuotientError::InvalidBounds);
+        }
+        if rows.is_empty()
+            || rows.len() % dag.input_count() != 0
+            || candidates.is_empty()
+            || candidates.len() > bounds.maximum_candidates
+            || candidates
+                .last()
+                .is_some_and(|candidate| candidate.index() >= dag.len())
+        {
+            return Err(FeatureValueQuotientError::Shape);
+        }
+        if candidates.windows(2).any(|pair| pair[0] >= pair[1]) {
+            return Err(FeatureValueQuotientError::NonCanonicalCandidates);
+        }
+        let row_count = rows.len() / dag.input_count();
+        if row_count > bounds.maximum_rows {
+            return Err(FeatureValueQuotientError::TooLarge);
+        }
+        let words = row_count.div_ceil(64);
+        if let Some(mask) = reachable {
+            if mask.len() != words {
+                return Err(FeatureValueQuotientError::Shape);
+            }
+            if row_count % 64 != 0
+                && mask
+                    .last()
+                    .is_some_and(|&word| word & !((1_u64 << (row_count % 64)) - 1) != 0)
+            {
+                return Err(FeatureValueQuotientError::ReachabilityTail);
+            }
+        }
+        let selected_rows = reachable.map_or(row_count, |mask| {
+            mask.iter().map(|word| word.count_ones() as usize).sum()
+        });
+        if selected_rows == 0 {
+            return Err(FeatureValueQuotientError::Shape);
+        }
+        let cells = selected_rows
+            .checked_mul(candidates.len())
+            .ok_or(FeatureValueQuotientError::TooLarge)?;
+        if cells > bounds.maximum_cells {
+            return Err(FeatureValueQuotientError::TooLarge);
+        }
+        let mut columns = vec![0_i64; cells];
+        let mut workspace = dag.workspace();
+        let mut selected = 0;
+        for (row_index, inputs) in rows.chunks_exact(dag.input_count()).enumerate() {
+            let include = reachable
+                .is_none_or(|mask| mask[row_index / 64] & (1_u64 << (row_index % 64)) != 0);
+            if !include {
+                continue;
+            }
+            let values = dag.evaluate(inputs, &mut workspace)?;
+            for (column, candidate) in candidates.iter().enumerate() {
+                columns[column * selected_rows + selected] = values[candidate.index()];
+            }
+            selected += 1;
+        }
+        let mut descriptors = Vec::with_capacity(candidates.len());
+        for column in 0..candidates.len() {
+            let values = &columns[column * selected_rows..(column + 1) * selected_rows];
+            let mut hasher = blake3::Hasher::new();
+            hasher.update(b"ergodis-feature-value-column-v1\0");
+            for value in values {
+                hasher.update(&value.to_le_bytes());
+            }
+            descriptors.push((*hasher.finalize().as_bytes(), column));
+        }
+        descriptors.sort_unstable_by(|left, right| {
+            left.0.cmp(&right.0).then_with(|| {
+                let left_values = &columns[left.1 * selected_rows..(left.1 + 1) * selected_rows];
+                let right_values = &columns[right.1 * selected_rows..(right.1 + 1) * selected_rows];
+                left_values.cmp(right_values)
+            })
+        });
+        let mut representatives = Vec::new();
+        let mut members = Vec::with_capacity(candidates.len());
+        let mut start = 0;
+        while start < descriptors.len() {
+            let (_, representative_column) = descriptors[start];
+            let representative_values = &columns[representative_column * selected_rows
+                ..(representative_column + 1) * selected_rows];
+            let mut end = start + 1;
+            while end < descriptors.len() {
+                let (digest, column) = descriptors[end];
+                let values = &columns[column * selected_rows..(column + 1) * selected_rows];
+                if digest != descriptors[start].0 || values != representative_values {
+                    break;
+                }
+                end += 1;
+            }
+            let representative = descriptors[start..end]
+                .iter()
+                .map(|&(_, column)| candidates[column])
+                .min_by_key(|&candidate| {
+                    (
+                        dag.node(candidate)
+                            .expect("validated candidate belongs to DAG")
+                            .evaluation_cost,
+                        candidate,
+                    )
+                })
+                .expect("equivalence class is nonempty");
+            representatives.push(representative);
+            members.extend(descriptors[start..end].iter().map(|&(_, column)| {
+                FeatureValueClassMember {
+                    candidate: candidates[column],
+                    representative,
+                }
+            }));
+            start = end;
+        }
+        representatives.sort_unstable();
+        members.sort_unstable_by_key(|member| member.candidate);
+        Ok(Self {
+            selected_rows,
+            representatives: representatives.into_boxed_slice(),
+            members: members.into_boxed_slice(),
+        })
+    }
+
+    pub fn selected_rows(&self) -> usize {
+        self.selected_rows
+    }
+
+    pub fn representatives(&self) -> &[FeatureId] {
+        &self.representatives
+    }
+
+    pub fn representative(&self, candidate: FeatureId) -> Option<FeatureId> {
+        self.members
+            .binary_search_by_key(&candidate, |member| member.candidate)
+            .ok()
+            .map(|index| self.members[index].representative)
+    }
+}
+
 impl FeatureZeroQuotient {
     pub fn input_candidates(&self) -> usize {
         self.input_candidates
@@ -1686,6 +1877,34 @@ mod tests {
                 .collect::<Vec<_>>(),
             vec![right, product]
         );
+    }
+
+    #[test]
+    fn full_value_quotient_uses_costed_exact_columns() {
+        let mut dag = FeatureDag::new(2, 2, 16).unwrap();
+        let left = dag.input(0).unwrap();
+        let right = dag.input(1).unwrap();
+        let zero = dag.constant(0).unwrap();
+        let shifted = dag.add(left, zero).unwrap();
+        let square = dag.mul(left, left).unwrap();
+        let candidates = [left, right, zero, shifted, square];
+        let bounds = FeatureValueQuotientBounds {
+            maximum_rows: 3,
+            maximum_cells: 15,
+            maximum_candidates: 5,
+        };
+        let quotient =
+            FeatureValueQuotient::compile(&dag, &[0, 7, 1, 8], None, &candidates, bounds).unwrap();
+        assert_eq!(quotient.selected_rows(), 2);
+        assert_eq!(quotient.representatives(), &[left, right, zero]);
+        assert_eq!(quotient.representative(shifted), Some(left));
+        assert_eq!(quotient.representative(square), Some(left));
+
+        let heldout =
+            FeatureValueQuotient::compile(&dag, &[0, 7, 1, 8, 2, 9], None, &candidates, bounds)
+                .unwrap();
+        assert_eq!(heldout.representative(shifted), Some(left));
+        assert_eq!(heldout.representative(square), Some(square));
     }
 
     #[test]
