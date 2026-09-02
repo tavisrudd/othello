@@ -4098,3 +4098,67 @@ rounds versus 300 iterations improve wall time 2.3653x (`t=2.44`), 3.3496x
 core.  The next implementation gate is a generic cost/target-driven bounded
 checkpoint policy; it may stop only on an independently replayed target hit
 and must price extra OSD checkpoints against saved BP iterations.
+
+That checkpoint policy is now implemented in private commit `fd491e476`.
+The adapter accepts an ordered set of iteration candidates, an optional target
+weight, and a generic cost filter.  Each retained checkpoint runs as a
+separate wave over pre-sized, worker-owned workspaces; all serialization and
+wave construction remain outside the timed solve loop.  A target may stop the
+sequence only after independent equation replay.  The cost filter estimates
+the extra OSD elimination work as
+`checks^2 * ceil((bits + 1) / 64)` and retains an early checkpoint only when
+that cost is no larger than the BP edge updates it can avoid; the final two
+fallback checkpoints are always retained.  This drops the wasteful iteration-1
+probe on BB756 while retaining it on Gross144 and BB288.  Six release tests,
+including the allocation probe over the prepared solve loop, pass.
+
+The first 20-round checkpoint measurements are useful provisional A/B data,
+not yet durable performance claims.  They retained independently replayed
+weights 12, 18, and 34 and measured 300-iteration/controller ratios of 1.941x
+(`t=8.41`), 3.845x (`t=19.20`), and 1.298x (`t=3.47`) on Gross144, BB288, and
+BB756.  Against manually fixed winning iteration counts, the controller ratios
+were 0.982x (`t=0.24`), 0.954x (`t=0.62`), and 0.961x (`t=0.64`), so no
+controller overhead was resolved.  Fable's 2026-09-01 architecture review
+correctly identified that `ergodis-private` currently lacks the public crate's
+explicit release/profile settings.  These timings must therefore be rerun with
+`opt-level=3`, thin LTO, one codegen unit, and aborting panics before admission;
+earlier private ratios remain internal same-build evidence only.
+
+### Fable architecture/evolve review triage
+
+The complete read-only review is
+`notes/2026-09-01-c985-fables-review.md`.  Its highest-value current findings
+are accepted into this live plan in the following order:
+
+1. Establish private/public release-profile parity before producing more
+   durable private benchmark claims, then rerun only admitted claims.  The
+   manifest is currently dirty in another workstream, so do not absorb or
+   commit those unrelated changes; use an explicit build configuration until
+   ownership is clear.
+2. Make `theorem_search` the runner-neutral evolution engine and treat the
+   control daemon as its driver, rather than extending two independent evolve
+   implementations.  Preserve the daemon's evidence and steering surfaces.
+3. Add a persistent hash-consed raw-orbit term DAG, initially bounded to
+   degree two, with evaluation cost and exact `log2` census reduction as the
+   primary Pareto coordinates.  This is the missing gate between recovering
+   human-derived residual coordinates and discovering those coordinates from
+   raw orbit data.
+4. Add symbolic/parametric templates across multiplier shards after the raw
+   term representation is stable.  A retained rule must carry its parameter
+   domain and replay against held-out shards; isolated shard identities are
+   not admissible features.
+5. Import cheap relational primitives (`Mod`, `Div`, `Gcd`, `PopCount`,
+   `Parity`, quadratic character) and bounded row aggregation only through the
+   typed plan substrate, with zero-conjunction/invariant-first proposal before
+   decision trees and sound decision-list assembly afterward.
+6. Use the checkpoint corpus for a basin-obstruction target and use BP+OSD as
+   a cheap fitness oracle for parameter evolution, but keep exact certification
+   as a separate survivor gate.
+
+The review's broad module splits, public-facade cleanup, probe-bin dispatcher,
+and private workspace consolidation are recorded architectural debt rather
+than prerequisites for this tranche.  They require current-tree verification
+and narrow commits; no large refactor should pre-empt the raw-orbit/evolve
+gate.  Campaign-specific public-boundary findings and undeclared binary feature
+gates remain correctness/export audits and should be handled before the next
+public mirror, independently of performance experimentation.
