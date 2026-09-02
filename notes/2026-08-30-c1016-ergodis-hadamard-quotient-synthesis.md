@@ -3091,6 +3091,34 @@ launch merely because it fits in about 0.6--0.8 GiB.  Heavy pilots and any
 eventual campaign must use the project convention `choom -n 1000`, making the
 worker sacrificial under memory pressure to protect the machine.
 
+## Quaternionic-perfect-sequence mechanism audit
+
+Theorem 9 of arXiv:2601.22337 is not an unrestricted bordered-GS reduction.
+Its pairwise-amicability conclusion assumes all three quaternion-type signed
+cross-correlation identities; the C1016 SDS problem assumes only the combined
+autocorrelation identity.  Importing its CPSD-zero/amicability filter would
+therefore be unsound unless a sealed construction-family tag explicitly
+restricts the search to `williamson_qt` or a bordered-amicable subfamily.
+Likewise, the paper's alternating-negation equivalence changes the bordered
+target at odd shifts and is not available here.
+The separation already has a four-point exact oracle: rows
+`(-1,1,1,1)`, `(-1,-1,1,1)`, `(-1,-1,1,1)`, and `(-1,1,-1,1)` have sums
+`(2,0,0,0)` and combined off-zero PAF `-4`, while the first row is not
+amicable with the second or third.  Any future CPSD adapter should retain this
+as a negative test against accidental QT-only promotion.
+
+The reusable mechanism is its exact `2+2` pair join.  Pair PAF signatures are
+additive, so one side is keyed by `PAF_A+PAF_B` and the other by its exact
+target complement; q29 needs only fourteen independent integer coordinates and
+q18 only nine.  Evolve may learn anonymous coordinate masks and key ordering,
+but learned masks are coarse buckets only: a hit receives complete exact-key
+comparison and direct replay.  PSD bounds and principal-minor flags are sound
+prefilters; rounded FFT/CPSD tolerances remain discovery accelerators rather
+than proof authority.  Independent sign, cyclic shift, and reversal of each
+row, common unit decimation, and permutation of the three zero-sum rows are
+safe bordered equivalences.  This audit keeps the paper's useful search
+mechanism without importing its QT-only theorem assumptions.
+
 ## Mystery ledger
 
 - **Settled:** public proof-shaped metadata was unsound and is fully removed.
