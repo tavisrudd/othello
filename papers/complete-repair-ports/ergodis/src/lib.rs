@@ -187,10 +187,11 @@ pub use group_action::{
     OrbitPartition, OrbitQuotientError, OrbitStorage,
 };
 pub use group_aggregation::{
-    GroupAggregateOp, GroupAggregateSpec, GroupAggregationBounds, GroupAggregationError,
-    GroupAggregationPlan, GroupAggregationPlanSnapshot, GroupAggregationProposalBounds,
-    GROUP_AGGREGATION_SNAPSHOT_VERSION, MAX_AGGREGATION_GROUPS, MAX_AGGREGATION_INPUTS,
-    MAX_AGGREGATION_MEMBERS, MAX_AGGREGATION_OUTPUTS, MAX_AGGREGATION_PROPOSAL_ROWS,
+    propose_equal_marginal_scopes, GroupAggregateOp, GroupAggregateSpec, GroupAggregationBounds,
+    GroupAggregationError, GroupAggregationPlan, GroupAggregationPlanSnapshot,
+    GroupAggregationProposalBounds, GroupScopeProposalBounds, GROUP_AGGREGATION_SNAPSHOT_VERSION,
+    MAX_AGGREGATION_GROUPS, MAX_AGGREGATION_INPUTS, MAX_AGGREGATION_MEMBERS,
+    MAX_AGGREGATION_OUTPUTS, MAX_AGGREGATION_PROPOSAL_CELLS, MAX_AGGREGATION_PROPOSAL_ROWS,
     MAX_AGGREGATION_PROPOSED_VALUES,
 };
 pub use hall::{

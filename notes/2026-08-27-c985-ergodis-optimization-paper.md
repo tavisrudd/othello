@@ -4902,8 +4902,20 @@ coordinates from deterministic empirical quantiles. Proposal profiling is capped
 4,096 rows, 256 members per scope, and 64 sampled values; it uses one bounded contiguous
 observation buffer per scope, never an unbounded map. The reach control now enters
 through this proposer with no hand-selected sum-of-squares operation and still recovers
-the 1/15 survivor. Scope generation remains an adapter/controller responsibility because
-its semantics are domain-facing; coordinate generation and evaluation are reusable core.
+the 1/15 survivor. Domain-declared scopes remain an adapter/controller responsibility;
+the generic diagnostic scope proposer below supplies an additional observational route.
+
+Scope generation now has a first generic diagnostic proposer too. It transposes a
+bounded row-major corpus once, sorts each column, digest-buckets the resulting empirical
+marginals, and exact-compares every would-be merge so a hash collision cannot create a
+group. Equal-marginal classes of size at least two become candidate scopes under hard
+row/cell/group/member caps; the temporary representation is one contiguous bounded
+integer matrix. This is deliberately observational evidence, not a proof that field
+permutations preserve the problem. On the seven-coordinate reach control, the proposer
+recovers the full anonymous scope from equal signed-unit marginals; the coordinate
+proposer then emits the moment; the unchanged evolve runner reaches 1/15. Thus the whole
+control now begins from raw rows alone, without a supplied scope, aggregate operation,
+field name, or conclusion.
 
 The first theorem-driven subset-sum sharpening compiles a continuation envelope for
 every prefix. A partial sum is retained after layer `i` only when it lies both in the

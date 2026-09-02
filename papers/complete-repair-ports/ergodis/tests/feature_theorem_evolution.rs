@@ -1,7 +1,8 @@
 use ergodis::{
-    evolve_ranked_streaming, CensusReduction, EvolutionConfig, FeatureBankBounds, FeatureDag,
-    FeatureId, FeatureOp, FeatureZeroBank, GroupAggregationBounds, GroupAggregationPlan,
-    GroupAggregationProposalBounds, RawFeatureExpansion,
+    evolve_ranked_streaming, propose_equal_marginal_scopes, CensusReduction, EvolutionConfig,
+    FeatureBankBounds, FeatureDag, FeatureId, FeatureOp, FeatureZeroBank, GroupAggregationBounds,
+    GroupAggregationPlan, GroupAggregationProposalBounds, GroupScopeProposalBounds,
+    RawFeatureExpansion,
 };
 
 #[derive(Clone, Copy)]
@@ -191,7 +192,18 @@ fn grouped_moment_exposes_a_relation_missing_from_flat_degree_two_terms() {
         .unwrap();
     assert_eq!(best_flat_survivors, 11);
 
-    let scopes = [(0_u16..7).collect::<Vec<_>>().into_boxed_slice()];
+    let scopes = propose_equal_marginal_scopes(
+        7,
+        &flat_rows,
+        GroupScopeProposalBounds {
+            maximum_rows: rows.len(),
+            maximum_cells: flat_rows.len(),
+            maximum_groups: 1,
+            maximum_members_per_group: 7,
+        },
+    )
+    .unwrap();
+    assert_eq!(&*scopes[0], &(0_u16..7).collect::<Vec<_>>());
     let aggregate = GroupAggregationPlan::propose_from_rows(
         7,
         &scopes,

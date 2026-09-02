@@ -15,6 +15,7 @@ pub const MAX_AGGREGATION_OUTPUTS: usize = 512;
 pub const GROUP_AGGREGATION_SNAPSHOT_VERSION: u16 = 1;
 pub const MAX_AGGREGATION_PROPOSAL_ROWS: usize = 4_096;
 pub const MAX_AGGREGATION_PROPOSED_VALUES: usize = 64;
+pub const MAX_AGGREGATION_PROPOSAL_CELLS: usize = 1_048_576;
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
 #[serde(tag = "op", rename_all = "kebab-case", deny_unknown_fields)]
@@ -47,6 +48,14 @@ pub struct GroupAggregationProposalBounds {
     pub plan: GroupAggregationBounds,
     pub maximum_rows: usize,
     pub maximum_count_values_per_group: usize,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct GroupScopeProposalBounds {
+    pub maximum_rows: usize,
+    pub maximum_cells: usize,
+    pub maximum_groups: usize,
+    pub maximum_members_per_group: usize,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -84,6 +93,94 @@ pub enum GroupAggregationError {
     SnapshotVersion,
     #[error("group aggregation proposal corpus has the wrong shape or exceeds its bound")]
     ProposalCorpus,
+    #[error("group scope proposal exceeds its configured bound")]
+    ScopeProposalLimit,
+}
+
+/// Propose diagnostic groups whose columns have exactly equal empirical marginals.
+///
+/// Equality is checked on sorted column values after digest bucketing, so hash
+/// collisions cannot merge unequal columns. The result suggests coordinates to
+/// test; it does not prove a symmetry or exchangeability theorem.
+pub fn propose_equal_marginal_scopes(
+    input_width: usize,
+    rows: &[i64],
+    bounds: GroupScopeProposalBounds,
+) -> Result<Box<[Box<[u16]>]>, GroupAggregationError> {
+    if input_width == 0
+        || input_width > MAX_AGGREGATION_INPUTS
+        || bounds.maximum_rows == 0
+        || bounds.maximum_rows > MAX_AGGREGATION_PROPOSAL_ROWS
+        || bounds.maximum_cells == 0
+        || bounds.maximum_cells > MAX_AGGREGATION_PROPOSAL_CELLS
+        || bounds.maximum_groups == 0
+        || bounds.maximum_groups > MAX_AGGREGATION_GROUPS
+        || bounds.maximum_members_per_group < 2
+        || bounds.maximum_members_per_group > MAX_AGGREGATION_MEMBERS
+        || rows.is_empty()
+        || rows.len() % input_width != 0
+    {
+        return Err(GroupAggregationError::ProposalCorpus);
+    }
+    let row_count = rows.len() / input_width;
+    if row_count > bounds.maximum_rows || rows.len() > bounds.maximum_cells {
+        return Err(GroupAggregationError::ScopeProposalLimit);
+    }
+    let mut columns = vec![0_i64; rows.len()];
+    for (row_index, row) in rows.chunks_exact(input_width).enumerate() {
+        for (column, &value) in row.iter().enumerate() {
+            columns[column * row_count + row_index] = value;
+        }
+    }
+    let mut descriptors = Vec::with_capacity(input_width);
+    for column in 0..input_width {
+        let values = &mut columns[column * row_count..(column + 1) * row_count];
+        values.sort_unstable();
+        let mut hasher = blake3::Hasher::new();
+        hasher.update(b"ergodis-equal-marginal-v1\0");
+        for value in values.iter() {
+            hasher.update(&value.to_le_bytes());
+        }
+        descriptors.push((*hasher.finalize().as_bytes(), column));
+    }
+    descriptors.sort_unstable_by(|left, right| {
+        left.0.cmp(&right.0).then_with(|| {
+            let left_values = &columns[left.1 * row_count..(left.1 + 1) * row_count];
+            let right_values = &columns[right.1 * row_count..(right.1 + 1) * row_count];
+            left_values.cmp(right_values)
+        })
+    });
+    let mut scopes = Vec::new();
+    let mut start = 0;
+    while start < descriptors.len() {
+        let (_, representative) = descriptors[start];
+        let representative_values =
+            &columns[representative * row_count..(representative + 1) * row_count];
+        let mut end = start + 1;
+        while end < descriptors.len() {
+            let (digest, column) = descriptors[end];
+            let values = &columns[column * row_count..(column + 1) * row_count];
+            if digest != descriptors[start].0 || values != representative_values {
+                break;
+            }
+            end += 1;
+        }
+        let members = end - start;
+        if members >= 2 {
+            if members > bounds.maximum_members_per_group || scopes.len() == bounds.maximum_groups {
+                return Err(GroupAggregationError::ScopeProposalLimit);
+            }
+            let mut scope = descriptors[start..end]
+                .iter()
+                .map(|&(_, column)| u16::try_from(column).expect("bounded input width fits u16"))
+                .collect::<Vec<_>>();
+            scope.sort_unstable();
+            scopes.push(scope.into_boxed_slice());
+        }
+        start = end;
+    }
+    scopes.sort_unstable_by(|left, right| left[0].cmp(&right[0]));
+    Ok(scopes.into_boxed_slice())
 }
 
 impl GroupAggregationPlan {
@@ -456,6 +553,37 @@ mod tests {
         assert_eq!(
             GroupAggregationPlan::propose_from_rows(7, &scopes, &[], PROPOSAL_BOUNDS),
             Err(GroupAggregationError::ProposalCorpus)
+        );
+    }
+
+    #[test]
+    fn equal_marginal_scope_proposal_is_exact_and_order_independent() {
+        let scopes = propose_equal_marginal_scopes(
+            4,
+            &[1, 5, 3, 5, 2, 5, 1, 6, 3, 6, 2, 5],
+            GroupScopeProposalBounds {
+                maximum_rows: 3,
+                maximum_cells: 12,
+                maximum_groups: 2,
+                maximum_members_per_group: 2,
+            },
+        )
+        .unwrap();
+        assert_eq!(scopes.len(), 2);
+        assert_eq!(&*scopes[0], &[0, 2]);
+        assert_eq!(&*scopes[1], &[1, 3]);
+        assert_eq!(
+            propose_equal_marginal_scopes(
+                4,
+                &[1, 5, 3, 5, 2, 5, 1, 6, 3, 6, 2, 5],
+                GroupScopeProposalBounds {
+                    maximum_rows: 3,
+                    maximum_cells: 11,
+                    maximum_groups: 2,
+                    maximum_members_per_group: 2,
+                },
+            ),
+            Err(GroupAggregationError::ScopeProposalLimit)
         );
     }
 
