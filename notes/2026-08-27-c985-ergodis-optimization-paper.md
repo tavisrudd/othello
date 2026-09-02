@@ -4212,3 +4212,18 @@ for the current uncommitted private banked-corpus work to acquire a stable
 commit boundary; do not make a public commit depend on those dirty modules.
 No C1016 identifiers, private corpora, or campaign semantics are present in
 the public implementation.
+
+The discovered-term injection gap is also closed.  Commit `9b8588466` extends
+the checked fixed-stack plan VM with Euclidean remainder, checked integer
+division, gcd, magnitude popcount/parity, and a fixed-modulus Legendre symbol;
+the Legendre modulus is rejected at compile time unless it is an odd prime.
+All new operations preserve traced/untraced agreement and fail closed on zero
+division, signed overflow, or an unrepresentable gcd.  Commit `5bcd23ae3` adds
+native Gaussian/Eisenstein norm operations plus an iterative, bounded
+`FeatureDag`-to-plan lowering path.  It also exposes the same operations in the
+bounded textual plan language as functions (`mod`, `div`, `gcd`, `popcount`,
+`parity`, `legendre`, `gaussian_norm`, `eisenstein_norm`), with canonical
+format/parse round trips.  A lowered norm-residue term agrees with direct DAG
+evaluation exhaustively on the control grid.  Thus an evolved feature can now
+be persisted, reviewed as text, compiled, injected, and evaluated without
+recursive lowering or per-row allocation.
