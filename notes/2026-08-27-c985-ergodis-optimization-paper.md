@@ -2684,9 +2684,15 @@ files are disposable and may be deleted at any time.
     including exact refill remainders and monotone timestamps, after every
     accepted debit. Strict reopen retains exhausted capacity and rejects
     duplicate entries, binding/permission/schema/capacity drift, or reversed
-    time; ambiguous replacement poisons dispatch. The next slice is an actual
-    provider-neutral adapter consuming the existing ticket actions; no provider
-    SDK or autonomous adapter is claimed yet.
+    time; ambiguous replacement poisons dispatch. A provider-neutral Python
+    async runner now consumes the existing ticket actions directly: one callback
+    per claimed attempt, absolute execution timeout, typed failure and
+    `Retry-After` reporting, one exact deferred sleep with no polling, and
+    streamed successful completion. Busy/terminal claims return immediately;
+    unexpected failures cannot acquire retry authority outside the daemon. Four
+    deterministic async controls pass. The next slice is typed payload/context
+    delivery plus one concrete SDK translation; no autonomous SDK adapter is
+    claimed yet.
 
     The first new proposer family is accepted. A coloured-Tanner isomorphism
     proposal between the official LP1768 X/Z instances is independently

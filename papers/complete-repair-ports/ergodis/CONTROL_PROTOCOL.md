@@ -241,6 +241,18 @@ reopen path; attaching restored proposal sessions to a resumed campaign remains
 the campaign-resume integration step. Provider SDK code and autonomous provider
 selection remain outside the generic layer.
 
+The Python `ProviderRunner` supplies the first provider-neutral execution
+adapter. Its callback owns exactly one asynchronous attempt. The runner obtains
+the attempt number and absolute execution deadline from the durable ticket,
+uses structured cancellation at that deadline, translates explicit provider
+failures, timeouts, transport errors, and unexpected crashes into the existing
+failure classes, and follows only daemon-recorded retry-wait transitions. A
+deferred ticket sleeps once until `not_before_ms`; it is never polled. Busy or
+terminal claims return immediately. A successful callback yields a binary
+stream that follows the bounded artifact path above. Concrete SDK adapters and
+event notifications remain provider-specific projections, not changes to the
+ticket state machine.
+
 `ergodisctl evolve-start` accepts an optional direct seed JSONL file and up to
 eight repeated `--resume-evidence` paths.  A replay archive must match the
 problem, ordered feature schema, and exact feature-generator provenance.  When

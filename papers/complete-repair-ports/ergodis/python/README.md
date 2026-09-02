@@ -62,6 +62,15 @@ the compact completion control message. The async form moves only that file I/O
 to a helper thread; it never materializes the result in a socket frame or one
 in-memory byte string.
 
+`ergodis_provider.ProviderRunner` is the provider-neutral async execution
+boundary. A backend implements one `async` attempt returning a binary stream;
+the runner claims the ticket, enforces its absolute execution deadline,
+reports typed failures and provider `Retry-After`, sleeps exactly until a
+daemon-recorded retry time, and streams successful output through the ticket.
+It never polls and does not implement a second retry policy. Provider SDK
+adapters remain small translations into this callback and are responsible for
+reaping any SDK work that ignores cancellation.
+
 The `recovery_algorithms` package implements direct finite-field and
 combinatorial formulations. Its simple representations make it useful for
 independent checking on bounded instances; they are not the high-performance

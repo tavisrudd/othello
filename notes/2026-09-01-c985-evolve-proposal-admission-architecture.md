@@ -448,6 +448,17 @@ proposal sessions to a resumed campaign remains separate from the now-durable
 rate store. A real provider-neutral worker adapter must consume the ticket
 actions rather than invent a second timeout/backoff policy.
 
+That adapter now exists in the Python 3.14 binding. `ProviderRunner` invokes an
+arbitrary async backend exactly once per daemon-claimed attempt, enforces the
+ticket's absolute execution deadline with structured cancellation, translates
+typed backend errors/`Retry-After`, timeouts, transport errors, and crashes into
+the existing failure vocabulary, and follows only the resulting durable ticket
+state. Retry-wait sleeps once to the recorded `not_before_ms`; busy and terminal
+claims return without polling. Successful attempts return a binary stream and
+reuse bounded artifact completion. Concrete SDK translation, payload/context
+delivery, and reaping SDK operations that ignore cancellation remain explicit
+backend responsibilities rather than generic retry policy.
+
 The next generic slice now implements the in-memory/persistable ticket state
 machine without adding wire operations. Its fixed ticket identity makes submit
 create-or-return-existing and rejects a conflicting normalized spec. Explicit
