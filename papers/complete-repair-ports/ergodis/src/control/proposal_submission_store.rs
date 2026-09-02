@@ -342,6 +342,7 @@ mod tests {
     fn spec(request: u64) -> ProposalTicketSpec {
         ProposalTicketSpec {
             key: ProposalIdempotencyKey::new("submission", request, [request as u8; 32]).unwrap(),
+            request_schema: [5; 32],
             request_blake3: [request as u8; 32],
             request_bytes: 17,
             proposer_id: 3,

@@ -3,7 +3,8 @@
 use super::{
     random_hex, CircuitBreakerConfig, CircuitPermit, ControlError, ProposalArtifactStore,
     ProposalDeadlines, ProposalFailureClass, ProposalFailureReport, ProposalIdempotencyKey,
-    ProposalRateStore, ProposalRateStoreConfig, ProposalRole, ProposalSession,
+    ProposalRateStore, ProposalRateStoreConfig, ProposalRequestSchemaId,
+    ProposalRequestSchemaRegistry, ProposalRequestSchemaView, ProposalRole, ProposalSession,
     ProposalSessionLimits, ProposalSessionUsage, ProposalSubmissionStore, ProposalTicketClaim,
     ProposalTicketSnapshot, ProposalTicketSpec, ProposalTicketStatus, ProposalTicketSubmission,
     RetryAction, RetryPolicy, TokenBucketConfig,
@@ -73,6 +74,7 @@ pub struct ProposalSessionOpened {
     pub limits: ProposalSessionLimits,
     pub usage: ProposalSessionUsage,
     pub request_upload_directory: PathBuf,
+    pub request_schemas: Vec<ProposalRequestSchemaView>,
 }
 
 #[derive(Clone, Debug, Deserialize)]
@@ -82,6 +84,7 @@ pub struct ProposalSubmitRequest {
     pub request_id: u64,
     pub canonical_payload_blake3: String,
     pub request_bytes: u64,
+    pub request_schema: String,
     pub proposer_id: u16,
     pub role: ProposalRole,
     pub cost_units: u64,
@@ -168,6 +171,8 @@ pub struct ProposalClaimed {
     pub upload_relative_path: Option<PathBuf>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub request_artifact: Option<ProposalArtifactView>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub request_schema: Option<ProposalRequestSchemaView>,
 }
 
 struct ControllerClock {
@@ -222,6 +227,7 @@ pub struct ProposalDaemon {
     clock: ControllerClock,
     retry_policy: RetryPolicy,
     artifacts: ProposalArtifactStore,
+    request_schemas: ProposalRequestSchemaRegistry,
     rate_store: ProposalRateStore,
     sessions: BTreeMap<String, DaemonSession>,
 }
@@ -236,6 +242,22 @@ impl ProposalDaemon {
         run_id: &str,
         nonce: &str,
         source_fingerprint_hex: &str,
+    ) -> Result<Self, ControlError> {
+        Self::create_with_request_schemas(
+            root,
+            run_id,
+            nonce,
+            source_fingerprint_hex,
+            ProposalRequestSchemaRegistry::standard(),
+        )
+    }
+
+    pub fn create_with_request_schemas(
+        root: &Path,
+        run_id: &str,
+        nonce: &str,
+        source_fingerprint_hex: &str,
+        request_schemas: ProposalRequestSchemaRegistry,
     ) -> Result<Self, ControlError> {
         let source_fingerprint = parse_digest(source_fingerprint_hex, "source fingerprint")?;
         fs::create_dir(root)?;
@@ -273,6 +295,7 @@ impl ProposalDaemon {
                 maximum_delay_ms: 30_000,
             },
             artifacts,
+            request_schemas,
             rate_store,
             sessions: BTreeMap::new(),
         })
@@ -342,6 +365,7 @@ impl ProposalDaemon {
             limits,
             usage,
             request_upload_directory,
+            request_schemas: self.request_schemas.views(),
         })
     }
 
@@ -359,7 +383,22 @@ impl ProposalDaemon {
             &request.canonical_payload_blake3,
             "canonical payload digest",
         )?;
-        let key = ProposalIdempotencyKey::new(&request.session_id, request.request_id, payload)?;
+        let request_schema =
+            ProposalRequestSchemaId::from_hex(&request.request_schema).map_err(invalid)?;
+        self.request_schemas
+            .validate(
+                request_schema,
+                request.proposer_id,
+                request.role,
+                request.request_bytes,
+            )
+            .map_err(invalid)?;
+        let key = ProposalIdempotencyKey::new_typed(
+            &request.session_id,
+            request.request_id,
+            request_schema.as_bytes(),
+            payload,
+        )?;
         if self
             .sessions
             .get(&request.session_id)
@@ -396,6 +435,7 @@ impl ProposalDaemon {
         )?;
         let spec = ProposalTicketSpec {
             key,
+            request_schema: request_schema.as_bytes(),
             request_blake3: payload,
             request_bytes: request.request_bytes,
             proposer_id: request.proposer_id,
@@ -539,6 +579,19 @@ impl ProposalDaemon {
             .transpose()
             .map_err(invalid)?
             .map(artifact_view);
+        let request_schema = attempt
+            .map(|_| {
+                self.request_schemas
+                    .validate(
+                        ProposalRequestSchemaId::from_bytes(view.ticket.spec.request_schema),
+                        view.ticket.spec.proposer_id,
+                        view.ticket.spec.role,
+                        view.ticket.spec.request_bytes,
+                    )
+                    .map(|schema| schema.view())
+            })
+            .transpose()
+            .map_err(invalid)?;
         Ok(ProposalClaimed {
             ticket_key: view.ticket_key,
             claim,
@@ -546,6 +599,7 @@ impl ProposalDaemon {
             usage: view.usage,
             upload_relative_path,
             request_artifact,
+            request_schema,
         })
     }
 
@@ -564,6 +618,7 @@ impl ProposalDaemon {
             usage: view.usage,
             upload_relative_path: None,
             request_artifact: None,
+            request_schema: None,
         })
     }
 
@@ -832,6 +887,11 @@ fn same_logical_submission(
 ) -> bool {
     ticket.spec.proposer_id == request.proposer_id
         && ticket.spec.role == request.role
+        && ticket.spec.request_schema
+            == ProposalRequestSchemaId::from_hex(&request.request_schema)
+                .ok()
+                .map(ProposalRequestSchemaId::as_bytes)
+                .unwrap_or([0; 32])
         && ticket.spec.request_blake3
             == blake3::Hash::from_hex(&request.canonical_payload_blake3)
                 .ok()
@@ -956,6 +1016,7 @@ fn invalid(error: impl std::fmt::Display) -> ControlError {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::control::{ProposalRequestEncoding, ProposalRequestSchemaSpec};
     use std::fs::OpenOptions;
     use std::io::Write;
     use std::os::unix::fs::OpenOptionsExt;
@@ -978,6 +1039,9 @@ mod tests {
             request_id: 1,
             canonical_payload_blake3: blake3::hash(b"payload").to_hex().to_string(),
             request_bytes: 7,
+            request_schema: ProposalRequestSchemaRegistry::standard().views()[0]
+                .id
+                .clone(),
             proposer_id: 3,
             role: ProposalRole::Heuristic,
             cost_units: 5,
@@ -1037,6 +1101,10 @@ mod tests {
             claim.claim,
             ProposalTicketClaim::Started { attempt: 0 }
         ));
+        assert_eq!(
+            claim.request_schema,
+            opened.request_schemas.first().cloned()
+        );
         let upload = temporary
             .path()
             .join(claim.upload_relative_path.as_ref().unwrap());
@@ -1058,6 +1126,72 @@ mod tests {
         assert_eq!(completed.usage.outstanding, 0);
         assert_eq!(completed.usage.charged_work_units, 5);
         assert_eq!(completed.artifact.unwrap().bytes, 6);
+    }
+
+    #[test]
+    fn schema_registry_gates_and_binds_streamed_requests() {
+        let temporary = tempfile::tempdir().unwrap();
+        let first = ProposalRequestSchemaSpec::new(
+            "test.first",
+            1,
+            ProposalRequestEncoding::CanonicalCbor,
+            7,
+            ProposalRole::Heuristic.mask(),
+            vec![3].into_boxed_slice(),
+        )
+        .unwrap();
+        let second = ProposalRequestSchemaSpec::new(
+            "test.second",
+            1,
+            ProposalRequestEncoding::TypedPlan,
+            7,
+            ProposalRole::Heuristic.mask(),
+            vec![3].into_boxed_slice(),
+        )
+        .unwrap();
+        let first_id = first.id().to_hex();
+        let second_id = second.id().to_hex();
+        let registry = ProposalRequestSchemaRegistry::new([first, second]).unwrap();
+        let mut daemon = ProposalDaemon::create_with_request_schemas(
+            &temporary.path().join("proposals"),
+            "run",
+            "nonce",
+            blake3::hash(b"source").to_hex().as_ref(),
+            registry,
+        )
+        .unwrap();
+        let opened = daemon.open_session(offer()).unwrap();
+        assert_eq!(opened.request_schemas.len(), 2);
+
+        let mut rejected = submit(&opened.session_id);
+        rejected.request_schema = "0".repeat(64);
+        stage_request(&daemon, &rejected, b"payload");
+        assert!(daemon.submit(rejected).is_err());
+        assert_eq!(
+            daemon
+                .sessions
+                .get(&opened.session_id)
+                .unwrap()
+                .store
+                .session()
+                .unwrap()
+                .usage()
+                .queries,
+            0
+        );
+
+        let mut first_request = submit(&opened.session_id);
+        first_request.request_schema = first_id;
+        let first_submission = daemon.submit(first_request).unwrap();
+        let mut second_request = submit(&opened.session_id);
+        second_request.request_schema = second_id;
+        stage_request(&daemon, &second_request, b"payload");
+        let second_submission = daemon.submit(second_request).unwrap();
+        assert_ne!(first_submission.ticket_key, second_submission.ticket_key);
+        assert_ne!(
+            first_submission.ticket.spec.request_schema,
+            second_submission.ticket.spec.request_schema
+        );
     }
 
     #[test]

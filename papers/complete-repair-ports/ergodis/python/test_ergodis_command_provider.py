@@ -1,21 +1,41 @@
 #!/usr/bin/env python3
 
 import asyncio
-from pathlib import Path
 import sys
 import tempfile
 import unittest
+from pathlib import Path
 
-from ergodis_client import ProposalFailure
+from ergodis_client import (
+    ProposalFailure,
+    ProposalRequestEncoding,
+    ProposalRequestSchema,
+)
 from ergodis_command_provider import CommandProvider
 from ergodis_provider import ProviderFailure, ProviderInvocation
+
+REQUEST_SCHEMA = ProposalRequestSchema(
+    "d" * 64,
+    "test.request",
+    1,
+    ProposalRequestEncoding.BYTE_STREAM,
+    1024,
+    0x0F,
+    (),
+)
 
 
 def invocation(
     request_path: Path, maximum_return_bytes: int = 64
 ) -> ProviderInvocation:
     return ProviderInvocation(
-        "b" * 64, 0, 2_000, 1_000, maximum_return_bytes, request_path
+        "b" * 64,
+        0,
+        2_000,
+        1_000,
+        maximum_return_bytes,
+        request_path,
+        REQUEST_SCHEMA,
     )
 
 

@@ -10,13 +10,14 @@ use super::{
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-pub const PROPOSAL_TICKET_LEDGER_SCHEMA: &str = "ergodis-proposal-ticket-ledger-v2";
+pub const PROPOSAL_TICKET_LEDGER_SCHEMA: &str = "ergodis-proposal-ticket-ledger-v3";
 pub const MAX_PROPOSAL_TICKETS: usize = 65_536;
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct ProposalTicketSpec {
     pub key: ProposalIdempotencyKey,
+    pub request_schema: [u8; 32],
     pub request_blake3: [u8; 32],
     pub request_bytes: u64,
     pub proposer_id: u16,
@@ -703,6 +704,7 @@ mod tests {
                 *blake3::hash(b"canonical payload").as_bytes(),
             )
             .unwrap(),
+            request_schema: [5; 32],
             request_blake3: *blake3::hash(b"canonical payload").as_bytes(),
             request_bytes: 17,
             proposer_id,

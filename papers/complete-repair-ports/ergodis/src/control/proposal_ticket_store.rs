@@ -12,7 +12,7 @@ use std::io::{self, BufWriter, Read, Write};
 use std::os::unix::fs::{OpenOptionsExt, PermissionsExt};
 use std::path::{Path, PathBuf};
 
-pub const PROPOSAL_TICKET_STORE_SCHEMA: &str = "ergodis-proposal-ticket-store-v2";
+pub const PROPOSAL_TICKET_STORE_SCHEMA: &str = "ergodis-proposal-ticket-store-v3";
 const METADATA_FILE: &str = "metadata.json";
 const TICKETS_DIRECTORY: &str = "tickets";
 const MAX_METADATA_BYTES: u64 = 4 * 1024;
@@ -436,6 +436,7 @@ mod tests {
                 *blake3::hash(b"canonical payload").as_bytes(),
             )
             .unwrap(),
+            request_schema: [5; 32],
             request_blake3: *blake3::hash(b"canonical payload").as_bytes(),
             request_bytes: 17,
             proposer_id: 3,

@@ -151,10 +151,12 @@ code.
 The feature-gated control library provides deterministic cold primitives for a
 portfolio of external theorem proposers. `select_proposer` filters by available
 snapshot context, requested authority role, campaign cost/byte budgets,
-provider tokens, concurrency, circuit state, and an absolute deadline. It then
-ranks eligible candidates by checked expected admitted work/reuse per cost plus
-an explicit bounded exploration bonus; duplicate IDs and arithmetic overflow
-fail closed. Selection reads a controller-owned token snapshot but does not
+provider tokens, concurrency, active retry deferral, circuit state, estimated
+completion time, and an absolute deadline. It then ranks eligible candidates
+by checked expected admitted work/reuse and independent operational-success
+probability per cost plus an explicit bounded exploration bonus; duplicate IDs
+and arithmetic overflow fail closed. Provider health does not overwrite the
+mathematical admission estimate. Selection reads a controller-owned token snapshot but does not
 debit it; ticket publication must first charge every applicable hierarchical
 bucket and reselect if any charge is denied. `charge_token_buckets` implements
 that all-or-none debit: every bucket first observes the same monotone timestamp
@@ -173,9 +175,10 @@ and controller queue delay do not count as backend-health failures. The campaign
 daemon uses these primitives for bounded proposer wire operations without
 changing this protocol's search-path boundary.
 `ProposalIdempotencyKey` already supplies the stable 32-byte logical-request
-identity for that integration. It binds a bounded session ID, nonzero request
-ID, and canonical payload BLAKE3 under a versioned domain separator; identical
-retries therefore share an identity while revisions necessarily do not.
+identity for that integration. Its typed form binds a bounded session ID,
+nonzero request ID, request-schema identity, and canonical payload BLAKE3 under
+a versioned domain separator; identical retries therefore share an identity
+while semantically different schemas and revisions do not.
 
 `ProposalTicketLedger` is the provider-neutral asynchronous state machine above
 that identity. Its bounded, serializable snapshot records queued, running,
@@ -274,15 +277,33 @@ provider. This adapter can front local models or provider-specific wrappers;
 a hosted SDK adapter remains an optional later transport layer.
 
 Request/context delivery now mirrors result delivery. Opening a session returns
-a private run-relative upload directory. The client streams one nonempty,
+a private run-relative upload directory and a nonempty bounded registry of
+request-schema descriptors. A descriptor identity is a BLAKE3 commitment to
+its logical name, version, encoding, maximum bytes, role mask, and canonical
+sorted provider allowlist. Duplicate identities and duplicate logical
+name/version pairs fail closed. The standard registry currently exposes the
+versioned external byte-stream schema; embedded controllers may supply a
+bounded registry for typed plan, canonical CBOR/JSON, UTF-8, or provider-
+specific contracts without changing ticket or artifact framing.
+
+Submit names one advertised schema. Before charging or publishing, the daemon
+checks the schema's byte, role, and provider envelope. Schema identity is part
+of the idempotency key and bumped durable ticket/session schemas, preventing
+the same bytes from silently changing meaning. Every runnable claim rechecks
+the durable ticket against the live registry and returns the exact validated
+descriptor to the provider. An unknown, drifted, or incompatible schema is a
+hard failure, not an opaque fallback.
+
+The client streams one nonempty,
 at-most-1-MiB request to its deterministic request-ID filename and submits only
-its canonical BLAKE3 plus measured byte count. After hierarchical rate debit,
+its schema identity, canonical BLAKE3, and measured byte count. After
+hierarchical rate debit,
 the daemon independently hashes, caps, fsyncs, and publishes it read-only; a
 mismatch creates no ticket. Digest and size live in the durable ticket schema.
-Every runnable claim re-hashes the request before returning its path, and the
-Python runner confines that path to the authenticated run directory before a
-backend sees it. Request and result payloads therefore never enter JSON frames
-or whole-memory buffers.
+Every runnable claim also re-hashes the request before returning its path. The
+Python runner confines that path to the authenticated run directory and passes
+the typed schema descriptor with it before a backend sees either. Request and
+result payloads therefore never enter JSON frames or whole-memory buffers.
 
 `ergodisctl evolve-start` accepts an optional direct seed JSONL file and up to
 eight repeated `--resume-evidence` paths.  A replay archive must match the

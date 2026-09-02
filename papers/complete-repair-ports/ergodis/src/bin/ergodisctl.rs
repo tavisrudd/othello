@@ -342,6 +342,8 @@ enum Command {
         #[arg(long)]
         request_bytes: u64,
         #[arg(long)]
+        request_schema: String,
+        #[arg(long)]
         proposer_id: u16,
         #[arg(long, value_enum)]
         role: CliProposalRole,
@@ -723,6 +725,7 @@ fn main() -> Result<()> {
             request_id,
             payload_blake3,
             request_bytes,
+            request_schema,
             proposer_id,
             role,
             cost_units,
@@ -738,6 +741,7 @@ fn main() -> Result<()> {
                 "request_id": request_id,
                 "canonical_payload_blake3": payload_blake3,
                 "request_bytes": request_bytes,
+                "request_schema": request_schema,
                 "proposer_id": proposer_id,
                 "role": role.protocol_name(),
                 "cost_units": cost_units,

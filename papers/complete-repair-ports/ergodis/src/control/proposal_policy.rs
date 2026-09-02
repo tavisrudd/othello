@@ -37,6 +37,27 @@ impl ProposalIdempotencyKey {
         Ok(Self(*hasher.finalize().as_bytes()))
     }
 
+    pub fn new_typed(
+        session_id: &str,
+        request_id: u64,
+        request_schema: [u8; 32],
+        canonical_payload_blake3: [u8; 32],
+    ) -> Result<Self, ControlError> {
+        if session_id.is_empty() || session_id.len() > MAX_SESSION_ID_BYTES || request_id == 0 {
+            return Err(ControlError::Invalid(
+                "invalid proposer idempotency identity".into(),
+            ));
+        }
+        let mut hasher = blake3::Hasher::new();
+        hasher.update(b"ergodis-proposer-idempotency-v2\0");
+        hasher.update(&(session_id.len() as u64).to_le_bytes());
+        hasher.update(session_id.as_bytes());
+        hasher.update(&request_id.to_le_bytes());
+        hasher.update(&request_schema);
+        hasher.update(&canonical_payload_blake3);
+        Ok(Self(*hasher.finalize().as_bytes()))
+    }
+
     pub fn as_bytes(self) -> [u8; 32] {
         self.0
     }
@@ -734,6 +755,15 @@ mod tests {
         assert!(ProposalIdempotencyKey::new("", 7, payload).is_err());
         assert!(ProposalIdempotencyKey::new("session-a", 0, payload).is_err());
         assert!(ProposalIdempotencyKey::new(&"s".repeat(257), 7, payload).is_err());
+        let typed = ProposalIdempotencyKey::new_typed("session-a", 7, [1; 32], payload).unwrap();
+        assert_eq!(
+            typed,
+            ProposalIdempotencyKey::new_typed("session-a", 7, [1; 32], payload).unwrap()
+        );
+        assert_ne!(
+            typed,
+            ProposalIdempotencyKey::new_typed("session-a", 7, [2; 32], payload).unwrap()
+        );
     }
 
     #[test]

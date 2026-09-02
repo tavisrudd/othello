@@ -8,17 +8,16 @@ daemon instead of materializing them in memory.
 from __future__ import annotations
 
 import asyncio
-from dataclasses import dataclass
-from enum import StrEnum
 import io
 import json
 import os
-from pathlib import Path
 import socket
 import struct
+from dataclasses import dataclass
+from enum import StrEnum
+from pathlib import Path
 from types import MappingProxyType
 from typing import Any, BinaryIO, Iterator, Mapping, Self, cast
-
 
 SCHEMA = "ergodis-control-experimental-v0"
 MAX_FRAME_BYTES = 64 * 1024
@@ -345,6 +344,71 @@ class ProposalFailure(StrEnum):
     PROTOCOL_FAULT = "protocol-fault"
 
 
+class ProposalRequestEncoding(StrEnum):
+    BYTE_STREAM = "byte-stream"
+    UTF8 = "utf8"
+    CANONICAL_JSON = "canonical-json"
+    CANONICAL_CBOR = "canonical-cbor"
+    TYPED_PLAN = "typed-plan"
+
+
+@dataclass(frozen=True, slots=True)
+class ProposalRequestSchema:
+    id: str
+    name: str
+    version: int
+    encoding: ProposalRequestEncoding
+    maximum_bytes: int
+    allowed_roles: int
+    allowed_proposer_ids: tuple[int, ...]
+
+    @classmethod
+    def from_mapping(cls, value: Mapping[str, Any]) -> Self:
+        proposer_ids_value = value.get("allowed_proposer_ids")
+        if not isinstance(proposer_ids_value, list):
+            raise ProtocolError("proposal request schema proposer IDs are not an array")
+        proposer_ids_value = cast(list[object], proposer_ids_value)
+        try:
+            proposer_ids = tuple(
+                _bounded_int(item, "allowed_proposer_id", 0, (1 << 16) - 1)
+                for item in proposer_ids_value
+            )
+        except ValueError as error:
+            raise ProtocolError(
+                "proposal request schema proposer ID is invalid"
+            ) from error
+        if any(left >= right for left, right in zip(proposer_ids, proposer_ids[1:])):
+            raise ProtocolError(
+                "proposal request schema proposer IDs are not canonical"
+            )
+        try:
+            encoding = ProposalRequestEncoding(_required_string(value, "encoding"))
+        except ValueError as error:
+            raise ProtocolError(
+                "proposal request schema encoding is unknown"
+            ) from error
+        try:
+            schema = cls(
+                _validate_digest(_required_string(value, "id")),
+                _required_string(value, "name"),
+                _positive_int(value.get("version"), "version"),
+                encoding,
+                _positive_int(value.get("maximum_bytes"), "maximum_bytes"),
+                _bounded_int(value.get("allowed_roles"), "allowed_roles", 1, 0x0F),
+                proposer_ids,
+            )
+        except ValueError as error:
+            raise ProtocolError("proposal request schema field is invalid") from error
+        if schema.maximum_bytes > MAX_PROPOSAL_REQUEST_BYTES:
+            raise ProtocolError("proposal request schema exceeds client byte bound")
+        return schema
+
+    def admits(self, proposer_id: int, role: ProposalRole) -> bool:
+        return self.allowed_roles & role.mask != 0 and (
+            not self.allowed_proposer_ids or proposer_id in self.allowed_proposer_ids
+        )
+
+
 @dataclass(frozen=True, slots=True, kw_only=True)
 class ProposalSessionOffer:
     roles: frozenset[ProposalRole] = frozenset({ProposalRole.HEURISTIC})
@@ -394,6 +458,7 @@ class ProposalTicketView:
     upload_relative_path: Path | None = None
     artifact: Mapping[str, Any] | None = None
     request_artifact: Mapping[str, Any] | None = None
+    request_schema: ProposalRequestSchema | None = None
 
     @classmethod
     def from_result(cls, result: Mapping[str, Any]) -> Self:
@@ -429,6 +494,11 @@ class ProposalTicketView:
             request_artifact_value, dict
         ):
             raise ProtocolError("proposal request artifact is not an object")
+        request_schema_value = result.get("request_schema")
+        if request_schema_value is not None and not isinstance(
+            request_schema_value, dict
+        ):
+            raise ProtocolError("proposal request schema is not an object")
         return cls(
             ticket_key,
             MappingProxyType(dict(ticket)),
@@ -448,6 +518,13 @@ class ProposalTicketView:
                     dict(cast(Mapping[str, Any], request_artifact_value))
                 )
             ),
+            (
+                None
+                if request_schema_value is None
+                else ProposalRequestSchema.from_mapping(
+                    cast(Mapping[str, Any], request_schema_value)
+                )
+            ),
         )
 
 
@@ -459,9 +536,22 @@ class ExternalProposalSession:
     limits: Mapping[str, Any]
     initial_usage: Mapping[str, Any]
     request_upload_directory: Path
+    request_schemas: tuple[ProposalRequestSchema, ...]
 
     @classmethod
     def from_result(cls, client: Session, result: Mapping[str, Any]) -> Self:
+        schemas_value = result.get("request_schemas")
+        if not isinstance(schemas_value, list) or not schemas_value:
+            raise ProtocolError("proposal request schemas are not a nonempty array")
+        schemas_value = cast(list[object], schemas_value)
+        schemas = tuple(
+            ProposalRequestSchema.from_mapping(
+                _as_mapping(item, "proposal request schema")
+            )
+            for item in schemas_value
+        )
+        if len({schema.id for schema in schemas}) != len(schemas):
+            raise ProtocolError("proposal request schema identities are duplicated")
         return cls(
             client,
             _required_string(result, "session_id"),
@@ -469,6 +559,7 @@ class ExternalProposalSession:
             MappingProxyType(dict(_required_mapping(result, "limits"))),
             MappingProxyType(dict(_required_mapping(result, "usage"))),
             Path(_required_string(result, "request_upload_directory")),
+            schemas,
         )
 
     def submit(
@@ -477,6 +568,7 @@ class ExternalProposalSession:
         request_id: int,
         payload_blake3: str,
         payload: BinaryIO,
+        request_schema: ProposalRequestSchema | None = None,
         proposer_id: int,
         role: ProposalRole,
         cost_units: int,
@@ -486,7 +578,10 @@ class ExternalProposalSession:
         admission_timeout_ms: int = 10 * 60 * 1000,
         retention_timeout_ms: int = 15 * 60 * 1000,
     ) -> ProposalTicket:
-        upload, request_bytes = self._stage_request(request_id, payload)
+        schema = self._select_schema(request_schema, proposer_id, role)
+        upload, request_bytes = self._stage_request(
+            request_id, payload, schema.maximum_bytes
+        )
         try:
             result = self.client.request(
                 "proposal-submit",
@@ -498,6 +593,7 @@ class ExternalProposalSession:
                     cost_units=cost_units,
                     maximum_return_bytes=maximum_return_bytes,
                     request_bytes=request_bytes,
+                    request_schema=schema.id,
                     queue_timeout_ms=queue_timeout_ms,
                     execution_timeout_ms=execution_timeout_ms,
                     admission_timeout_ms=admission_timeout_ms,
@@ -514,6 +610,7 @@ class ExternalProposalSession:
         request_id: int,
         payload_blake3: str,
         payload: BinaryIO,
+        request_schema: ProposalRequestSchema | None = None,
         proposer_id: int,
         role: ProposalRole,
         cost_units: int,
@@ -523,8 +620,9 @@ class ExternalProposalSession:
         admission_timeout_ms: int = 10 * 60 * 1000,
         retention_timeout_ms: int = 15 * 60 * 1000,
     ) -> ProposalTicket:
+        schema = self._select_schema(request_schema, proposer_id, role)
         upload, request_bytes = await asyncio.to_thread(
-            self._stage_request, request_id, payload
+            self._stage_request, request_id, payload, schema.maximum_bytes
         )
         try:
             result = (
@@ -538,6 +636,7 @@ class ExternalProposalSession:
                         cost_units=cost_units,
                         maximum_return_bytes=maximum_return_bytes,
                         request_bytes=request_bytes,
+                        request_schema=schema.id,
                         queue_timeout_ms=queue_timeout_ms,
                         execution_timeout_ms=execution_timeout_ms,
                         admission_timeout_ms=admission_timeout_ms,
@@ -604,12 +703,35 @@ class ExternalProposalSession:
             "session_id": self.session_id,
             "request_id": request_id,
             "canonical_payload_blake3": _validate_digest(arguments["payload_blake3"]),
+            "request_schema": _validate_digest(arguments["request_schema"]),
             "proposer_id": proposer_id,
             "role": role.value,
             **checked,
         }
 
-    def _stage_request(self, request_id: int, source: BinaryIO) -> tuple[Path, int]:
+    def _select_schema(
+        self,
+        requested: ProposalRequestSchema | None,
+        proposer_id: int,
+        role: ProposalRole,
+    ) -> ProposalRequestSchema:
+        proposer_id = _bounded_int(proposer_id, "proposer_id", 0, (1 << 16) - 1)
+        role = _validate_role(role)
+        if requested is None:
+            if len(self.request_schemas) != 1:
+                raise ValueError(
+                    "request_schema is required when multiple schemas are offered"
+                )
+            requested = self.request_schemas[0]
+        if not any(schema == requested for schema in self.request_schemas):
+            raise ValueError("request_schema was not offered by this session")
+        if not requested.admits(proposer_id, role):
+            raise ValueError("request_schema does not admit this proposer and role")
+        return requested
+
+    def _stage_request(
+        self, request_id: int, source: BinaryIO, maximum_bytes: int
+    ) -> tuple[Path, int]:
         request_id = _positive_int(request_id, "request_id")
         directory = _confined_run_path(
             self.client.run_dir, self.request_upload_directory
@@ -625,7 +747,7 @@ class ExternalProposalSession:
             with os.fdopen(descriptor, "wb", buffering=0) as output:
                 while chunk := source.read(64 * 1024):
                     total += len(chunk)
-                    if total > MAX_PROPOSAL_REQUEST_BYTES:
+                    if total > maximum_bytes:
                         raise ProtocolError("proposal request exceeds byte bound")
                     output.write(chunk)
                 if total == 0:
@@ -827,6 +949,12 @@ def _required_mapping(value: Mapping[str, Any], key: str) -> Mapping[str, Any]:
     if not isinstance(result, dict):
         raise ProtocolError(f"proposal response {key} is not an object")
     return cast(Mapping[str, Any], result)
+
+
+def _as_mapping(value: Any, description: str) -> Mapping[str, Any]:
+    if not isinstance(value, dict):
+        raise ProtocolError(f"{description} is not an object")
+    return cast(Mapping[str, Any], value)
 
 
 def _positive_int(value: Any, name: str) -> int:

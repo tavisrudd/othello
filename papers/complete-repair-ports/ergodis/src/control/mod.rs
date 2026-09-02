@@ -24,6 +24,7 @@ mod proposal_artifact;
 mod proposal_daemon;
 mod proposal_policy;
 mod proposal_rate_store;
+mod proposal_request_schema;
 mod proposal_session;
 mod proposal_session_store;
 mod proposal_submission_store;
@@ -58,6 +59,13 @@ pub use proposal_policy::{
     TokenBucketSnapshot,
 };
 pub use proposal_rate_store::{ProposalRateStore, ProposalRateStoreConfig, ProposalRateStoreError};
+pub use proposal_request_schema::{
+    ProposalRequestEncoding, ProposalRequestSchemaError, ProposalRequestSchemaId,
+    ProposalRequestSchemaRegistry, ProposalRequestSchemaSpec, ProposalRequestSchemaView,
+    DEFAULT_PROPOSAL_REQUEST_SCHEMA_NAME, DEFAULT_PROPOSAL_REQUEST_SCHEMA_VERSION,
+    MAX_PROPOSAL_REQUEST_SCHEMAS, MAX_PROPOSAL_REQUEST_SCHEMA_NAME_BYTES,
+    MAX_PROPOSAL_SCHEMA_REQUEST_BYTES,
+};
 pub use proposal_session::{
     ProposalRevisionReservation, ProposalSession, ProposalSessionError, ProposalSessionLimits,
     ProposalSessionQuery, ProposalSessionQueryStatus, ProposalSessionReservation,
@@ -3451,6 +3459,7 @@ mod tests {
         .unwrap();
         assert!(opened.ok);
         let session_id = opened.result["session_id"].as_str().unwrap();
+        let request_schema = opened.result["request_schemas"][0]["id"].as_str().unwrap();
         let request_upload = manifest
             .run_dir
             .join(opened.result["request_upload_directory"].as_str().unwrap())
@@ -3471,6 +3480,7 @@ mod tests {
                 "request_id": 1,
                 "canonical_payload_blake3": blake3::hash(b"payload").to_hex().to_string(),
                 "request_bytes": 7,
+                "request_schema": request_schema,
                 "proposer_id": 3,
                 "role": "heuristic",
                 "cost_units": 5,
@@ -3495,6 +3505,7 @@ mod tests {
         assert!(claimed.ok);
         assert_eq!(claimed.result["claim"]["kind"], "started");
         assert_eq!(claimed.result["request_artifact"]["bytes"], 7);
+        assert_eq!(claimed.result["request_schema"]["id"], request_schema);
         let upload = manifest
             .run_dir
             .join(claimed.result["upload_relative_path"].as_str().unwrap());

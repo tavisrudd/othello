@@ -1,18 +1,30 @@
 #!/usr/bin/env python3
 
 import io
-from pathlib import Path
 import unittest
+from pathlib import Path
 from unittest.mock import AsyncMock, patch
 
 from ergodis_client import (
     ExternalProposalSession,
     ProposalFailure,
+    ProposalRequestEncoding,
+    ProposalRequestSchema,
     ProposalTicket,
     ProposalTicketView,
     Session,
 )
 from ergodis_provider import ProviderFailure, ProviderRunner
+
+REQUEST_SCHEMA = ProposalRequestSchema(
+    "d" * 64,
+    "test.request",
+    1,
+    ProposalRequestEncoding.BYTE_STREAM,
+    1024,
+    0x0F,
+    (),
+)
 
 
 def view(
@@ -39,13 +51,22 @@ def view(
             "blake3": "c" * 64,
             "bytes": 7,
         }
+        result["request_schema"] = {
+            "id": REQUEST_SCHEMA.id,
+            "name": REQUEST_SCHEMA.name,
+            "version": REQUEST_SCHEMA.version,
+            "encoding": REQUEST_SCHEMA.encoding.value,
+            "maximum_bytes": REQUEST_SCHEMA.maximum_bytes,
+            "allowed_roles": REQUEST_SCHEMA.allowed_roles,
+            "allowed_proposer_ids": [],
+        }
     return ProposalTicketView.from_result(result)
 
 
 def ticket() -> ProposalTicket:
     client = Session(Path.cwd(), Path("unused.sock"), "run", "nonce")
     session = ExternalProposalSession(
-        client, "session", "a" * 64, {}, {}, Path("unused")
+        client, "session", "a" * 64, {}, {}, Path("unused"), (REQUEST_SCHEMA,)
     )
     return ProposalTicket(session, view("queued"))
 
@@ -77,6 +98,7 @@ class ProviderRunnerTest(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(outcome, ready)
         self.assertEqual(seen[0].remaining_ms, 1_000)
         self.assertEqual(seen[0].attempt, 0)
+        self.assertEqual(seen[0].request_schema, REQUEST_SCHEMA)
         self.assertEqual(complete.await_args.args[0], 0)
 
     async def test_deferred_ticket_sleeps_once_without_polling(self) -> None:

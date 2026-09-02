@@ -294,7 +294,7 @@ files are disposable and may be deleted at any time.
    restartable token buckets; staged absolute deadlines; typed bounded
    retry/backoff and provider-rate-limit handling; a single-probe circuit
    breaker; checked cost-aware proposer selection; and stable 32-byte
-   idempotency keys binding session, request, and canonical payload. It remains
+   idempotency keys binding session, request schema, and canonical payload. It remains
    outside every solve path. A follow-up all-or-none charge closes the gap
    between advisory selection and atomic campaign/provider/session quota debit.
    A bounded provider-neutral asynchronous ticket state machine now supplies
@@ -304,10 +304,10 @@ files are disposable and may be deleted at any time.
    expiry on restore. Per-ticket durability now avoids whole-ledger rewrites:
    bounded key-named records use fsynced temporary files and atomic hard-link/
    rename publication, with strict replay, private permissions, directory sync,
-   crash-temporary handling, and fail-stop poisoning after ambiguous I/O. It
-   still has no socket operation or provider SDK. The remaining daemon
-   integration is campaign attachment, restored-orphan reconciliation, and
-   bounded submit/status/cancel/result operations.
+   crash-temporary handling, and fail-stop poisoning after ambiguous I/O.
+   Campaign socket operations, streamed request/result artifacts, a typed
+   Python runner, and the generic command backend are now integrated below;
+   only provider-specific hosted SDK translations remain open.
    The next theorem-template import closes another C1016 ledger gap without
    importing private vocabulary. A bounded structured integer set represents
    an interval intersected with selected residues and minus sorted sparse
@@ -2718,8 +2718,18 @@ files are disposable and may be deleted at any time.
     and session schemas, and revalidates it on every runnable claim. The runner
     confines the claim path to the authenticated run and passes it directly to
     the command backend. Both directions are fixed-buffer/file streamed; no
-    payload enters JSON or a whole-memory byte string. The next slice is a
-    typed request-schema registry and optional hosted SDK package.
+    payload enters JSON or a whole-memory byte string. The typed request-
+    schema registry is now end to end as well. Its bounded content-derived
+    descriptors commit name, version, encoding, byte cap, role mask, and a
+    canonical provider allowlist. Session open advertises them; submit validates
+    one before charging; schema identity enters the v2 idempotency key and
+    bumped durable ticket/session schemas; every runnable claim revalidates and
+    returns the exact descriptor; and the frozen Python invocation carries it.
+    Duplicate logical name/version pairs, unknown IDs, role/provider mismatch,
+    and schema byte overflow fail closed. The standard byte-stream descriptor
+    preserves generic command providers; embedding controllers can install
+    typed-plan or canonical structured schemas without adding transport ops.
+    The next slice is an optional hosted SDK adapter package.
     Portfolio routing now separates theorem quality from provider health:
     active `Retry-After` deferrals, concurrency/circuit gates, and calls whose
     estimated wall time crosses the absolute deadline are ineligible, while a

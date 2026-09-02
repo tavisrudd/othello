@@ -3,27 +3,42 @@
 import asyncio
 import io
 import json
-from pathlib import Path
 import socket
 import struct
 import tempfile
 import threading
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
 from ergodis_client import (
-    ExternalProposalSession,
     MAX_FRAME_BYTES,
     SCHEMA,
-    ProtocolError,
+    ExternalProposalSession,
+    ProposalRequestSchema,
     ProposalRole,
     ProposalSessionOffer,
     ProposalTicket,
     ProposalTicketView,
+    ProtocolError,
     RemoteError,
     Response,
     Session,
 )
+
+REQUEST_SCHEMA = {
+    "id": "d" * 64,
+    "name": "test.request",
+    "version": 1,
+    "encoding": "byte-stream",
+    "maximum_bytes": 1024,
+    "allowed_roles": 0x0F,
+    "allowed_proposer_ids": [],
+}
+
+
+def request_schema() -> ProposalRequestSchema:
+    return ProposalRequestSchema.from_mapping(REQUEST_SCHEMA)
 
 
 def recv_exact(connection: socket.socket, length: int) -> bytes:
@@ -54,6 +69,7 @@ class ErgodisClientTest(unittest.TestCase):
             "request_upload_directory": (
                 "proposal-artifacts/request-incoming/session-1"
             ),
+            "request_schemas": [REQUEST_SCHEMA],
         }
         submitted = {
             "ticket_key": "b" * 64,
@@ -102,6 +118,9 @@ class ErgodisClientTest(unittest.TestCase):
                 request.call_args_list[1].args[1]["role"], ProposalRole.HEURISTIC.value
             )
             self.assertEqual(request.call_args_list[1].args[1]["request_bytes"], 7)
+            self.assertEqual(
+                request.call_args_list[1].args[1]["request_schema"], "d" * 64
+            )
             self.assertFalse((request_directory / "0000000000000001.upload").exists())
         with self.assertRaises(ValueError):
             proposer.submit(
@@ -161,6 +180,7 @@ class ErgodisClientTest(unittest.TestCase):
                     {},
                     {},
                     Path("unused"),
+                    (request_schema(),),
                 ),
                 ProposalTicketView.from_result(submitted),
             )
@@ -183,7 +203,13 @@ class ErgodisClientTest(unittest.TestCase):
             session = Session(root, root / "unused.sock", "run", "nonce")
             ticket = ProposalTicket(
                 ExternalProposalSession(
-                    session, "session-1", "a" * 64, {}, {}, Path("unused")
+                    session,
+                    "session-1",
+                    "a" * 64,
+                    {},
+                    {},
+                    Path("unused"),
+                    (request_schema(),),
                 ),
                 ProposalTicketView.from_result(
                     {

@@ -45,6 +45,7 @@ proposer = await campaign.open_proposal_session_async(
 ticket = await proposer.submit_async(
     request_id=1,
     payload_blake3=payload_digest,
+    payload=payload_stream,
     proposer_id=3,
     role=ProposalRole.HEURISTIC,
     cost_units=20,
@@ -81,13 +82,23 @@ SAT/MIP tools, and research scripts without adding any provider dependency to
 Ergodis.
 
 Submission input uses the same bounded artifact boundary as output. The session
-returns a private run-relative request-upload directory;
+returns a private run-relative request-upload directory and a nonempty tuple of
+frozen `ProposalRequestSchema` descriptors. If exactly one schema is offered it
+is selected automatically; otherwise `submit(..., request_schema=schema)` is
+required. A descriptor's content-derived identity binds its logical name,
+version, encoding, byte cap, role mask, and optional sorted provider allowlist.
+The Python client rejects an unoffered or incompatible schema before creating a
+file. `ProviderInvocation.request_schema` gives adapters the exact descriptor
+validated by the daemon; SDK adapters should dispatch on its identity or
+encoding rather than guessing from bytes.
+
+The session
 `submit(..., payload=binary_stream, payload_blake3=...)` streams there in fixed
 chunks and sends only the declared digest and measured byte count. The daemon
 re-hashes and publishes a read-only request artifact, binds both fields into the
-durable ticket, and returns its verified path on claim. `ProviderRunner` passes
-that confined path to the backend invocation, so `CommandProvider` needs no
-out-of-band request filename.
+durable ticket together with the schema identity, and returns its verified path
+and descriptor on claim. `ProviderRunner` passes that confined path to the
+backend invocation, so `CommandProvider` needs no out-of-band request filename.
 
 The `recovery_algorithms` package implements direct finite-field and
 combinatorial formulations. Its simple representations make it useful for

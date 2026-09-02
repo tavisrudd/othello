@@ -356,16 +356,16 @@ semantic rejection, provider throttle, or controller queue delay is not a
 backend-health failure and must not trip the breaker.
 
 Every mutating request has an idempotency key derived from session, request ID,
-and canonical payload digest. The controller deduplicates accepted work and
+canonical request-schema identity, and canonical payload digest. The controller
+deduplicates accepted work and
 returns the original ticket/result on retry. Proposal revisions require new
 payload digests. Artifacts use create-only writes and atomic publication, so a
 timeout or crash cannot leave a partially authoritative object.
 
 The implemented `ProposalIdempotencyKey` is a stable 32-byte BLAKE3 identity
-over a versioned domain separator, bounded session ID, nonzero request ID, and
-the canonical payload digest. This provides the identity primitive only; the
-daemon ticket ledger must still enforce create-once lookup and return the
-original typed result.
+over a versioned domain separator, bounded session ID, nonzero request ID,
+schema identity, and canonical payload digest. The daemon ticket ledger
+enforces create-once lookup and returns the original typed result.
 
 ### Overload behavior
 
@@ -376,6 +376,23 @@ The controller can keep autonomous cheap proposers running while an external
 LLM/provider is backed off. Operational telemetry is aggregated by proposer,
 query family, error class, latency bucket, and consumed budget; it is serialized
 off-thread and exposed as compact deltas rather than request logs.
+
+### Typed request registry
+
+Large provider inputs remain streamed artifacts, but they are no longer
+semantically opaque. A bounded controller registry advertises content-derived
+schema descriptors at session open. Each identity commits the logical name,
+version, encoding, byte cap, role mask, and optional canonical provider
+allowlist. Submit, durable ticket state, idempotency, claim, and the Python
+invocation all carry that identity. The daemon validates the envelope before
+charging and revalidates the durable ticket at every runnable claim. There is
+no unknown-schema fallback.
+
+The registry is the extension seam for hosted SDKs and new proposer languages:
+add a descriptor and an adapter-side decoder, not a new transport operation.
+The standard descriptor is a versioned byte stream so command and local-
+process providers remain usable; embedding controllers may install typed-plan
+and canonical structured descriptors.
 
 ### Implemented cold policy boundary
 
@@ -391,7 +408,7 @@ active retry deferrals and estimates that cannot complete before the deadline
 are ineligible.
 Duplicate proposer IDs, invalid probability scales, and score/comparison
 overflow fail closed. Stable logical-request idempotency keys bind session,
-request number, and canonical payload digest. Selection is advisory. The
+request number, schema identity, and canonical payload digest. Selection is advisory. The
 implemented all-or-none hierarchy first previews each campaign/provider/session
 bucket at one monotone timestamp and debits only after every weighted cost is
 admitted; the controller reselects if that charge fails. A hostile pass repaired clock reversal being mistaken

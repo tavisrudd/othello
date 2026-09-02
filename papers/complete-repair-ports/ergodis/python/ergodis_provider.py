@@ -8,19 +8,19 @@ It never polls and never invents retry policy outside the daemon ledger.
 from __future__ import annotations
 
 import asyncio
+import time
 from collections.abc import Awaitable, Callable, Mapping
 from dataclasses import dataclass
-import time
 from pathlib import Path
 from typing import BinaryIO, cast
 
 from ergodis_client import (
     ProposalFailure,
+    ProposalRequestSchema,
     ProposalTicket,
     ProposalTicketView,
     ProtocolError,
 )
-
 
 type ProviderCall = Callable[["ProviderInvocation"], Awaitable[BinaryIO]]
 type ClockMilliseconds = Callable[[], int]
@@ -37,6 +37,7 @@ class ProviderInvocation:
     remaining_ms: int
     maximum_return_bytes: int
     request_path: Path
+    request_schema: ProposalRequestSchema
 
 
 class ProviderFailure(Exception):
@@ -107,6 +108,7 @@ class ProviderRunner:
                 remaining_ms,
                 _maximum_return_bytes(claimed),
                 _request_path(ticket, claimed),
+                _request_schema(claimed),
             )
             try:
                 async with asyncio.timeout(remaining_ms / 1_000):
@@ -193,6 +195,12 @@ def _request_path(ticket: ProposalTicket, view: ProposalTicketView) -> Path:
     if resolved != root and root not in resolved.parents:
         raise ProtocolError("provider request artifact path escapes run directory")
     return resolved
+
+
+def _request_schema(view: ProposalTicketView) -> ProposalRequestSchema:
+    if view.request_schema is None:
+        raise ProtocolError("provider claim omitted its request schema")
+    return view.request_schema
 
 
 def _is_retry_wait(view: ProposalTicketView) -> bool:
