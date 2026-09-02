@@ -193,4 +193,10 @@ checkout, restore, or stash was run.
 - `cache-gc.sh --apply --min-age-days 2` removed 271 unreferenced entries older than two days and
   kept 72 younger ones; the cache went from about 32G to 15G, of which the shared target
   directories are the bulk.
+- `cache-gc.sh` was hardened after review: it refuses any root without a `.ergodis-cache`
+  marker or that is `/`, `$HOME`, a system directory, or a parent of the repository; ages entries
+  by the newest file inside them rather than the top-level mtime; treats names found in evidence,
+  private docs, notes, or `bin/MANIFEST.tsv` as referenced; defaults to a two-day minimum age;
+  re-verifies each deletion target as a direct child of the root; holds a lock; and appends every
+  removal to `gc.log`. `scripts/test-cache-gc.sh` exercises all of these on a throwaway root.
 
