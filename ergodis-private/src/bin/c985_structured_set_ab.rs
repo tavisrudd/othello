@@ -35,24 +35,10 @@ fn main() {
         .collect::<Vec<_>>();
     let left_holes = canonical_holes(0, 16_383, 64, &left_residues, 47, 96);
     let right_holes = canonical_holes(0, 16_383, 64, &right_residues, 61, 96);
-    let left = StructuredIntegerSet::compile(
-        0,
-        16_383,
-        64,
-        &left_residues,
-        &left_holes,
-        bounds,
-    )
-    .unwrap();
-    let right = StructuredIntegerSet::compile(
-        0,
-        16_383,
-        64,
-        &right_residues,
-        &right_holes,
-        bounds,
-    )
-    .unwrap();
+    let left =
+        StructuredIntegerSet::compile(0, 16_383, 64, &left_residues, &left_holes, bounds).unwrap();
+    let right = StructuredIntegerSet::compile(0, 16_383, 64, &right_residues, &right_holes, bounds)
+        .unwrap();
 
     let mut checksum = 0_u64;
     for round in 0..cli.rounds {
@@ -84,7 +70,11 @@ fn canonical_holes(
     limit: usize,
 ) -> Vec<i64> {
     (minimum..=maximum)
-        .filter(|&value| residues.binary_search(&(value.rem_euclid(i64::from(modulus)) as u16)).is_ok())
+        .filter(|&value| {
+            residues
+                .binary_search(&(value.rem_euclid(i64::from(modulus)) as u16))
+                .is_ok()
+        })
         .step_by(stride)
         .take(limit)
         .collect()

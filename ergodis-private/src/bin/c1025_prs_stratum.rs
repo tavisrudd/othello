@@ -388,7 +388,9 @@ fn main() -> Result<()> {
     if m == 0 {
         bail!("--stratum-mod must be positive");
     }
-    let indices: Vec<usize> = (0..=d).filter(|i| i % m == args.stratum_class % m).collect();
+    let indices: Vec<usize> = (0..=d)
+        .filter(|i| i % m == args.stratum_class % m)
+        .collect();
     if indices.is_empty() {
         bail!("empty stratum");
     }

@@ -653,7 +653,9 @@ fn builtin_osd(
             let stop = Arc::clone(&stop);
             scope.spawn(move || {
                 let mut rng = Rng::new(
-                    seed ^ (worker as u64).wrapping_mul(0x9e37_79b9_7f4a_7c15).wrapping_add(1),
+                    seed ^ (worker as u64)
+                        .wrapping_mul(0x9e37_79b9_7f4a_7c15)
+                        .wrapping_add(1),
                 );
                 let mut scratch = OsdScratch::default();
                 loop {
@@ -671,7 +673,8 @@ fn builtin_osd(
                         break;
                     }
                     let current = bound.load(Ordering::Relaxed) as u32;
-                    if let Some(hit) = osd_trial(osd, &mut rng, order, window, current, &mut scratch)
+                    if let Some(hit) =
+                        osd_trial(osd, &mut rng, order, window, current, &mut scratch)
                     {
                         let mut guard = best.lock().unwrap();
                         if guard.as_ref().is_none_or(|prior| hit.weight < prior.weight) {
@@ -684,7 +687,10 @@ fn builtin_osd(
         }
     });
     let hit = best.lock().unwrap().clone();
-    let witness = hit.as_ref().map(|hit| hit.support.clone()).unwrap_or_default();
+    let witness = hit
+        .as_ref()
+        .map(|hit| hit.support.clone())
+        .unwrap_or_default();
     let witness_check = (!witness.is_empty())
         .then(|| classify_support(problem, &witness).ok())
         .flatten();
@@ -767,7 +773,10 @@ fn core_random(
 /// path appended and must print JSON containing a `witness` array of
 /// coordinates. The exact command string is recorded in the certificate.
 fn external_upper(problem: &SparseProblem, command: &str, input: &Path) -> Result<UpperRecord> {
-    let mut parts = command.split_whitespace().map(str::to_string).collect::<Vec<_>>();
+    let mut parts = command
+        .split_whitespace()
+        .map(str::to_string)
+        .collect::<Vec<_>>();
     if parts.is_empty() {
         bail!("empty external upper-bound command");
     }
@@ -775,7 +784,10 @@ fn external_upper(problem: &SparseProblem, command: &str, input: &Path) -> Resul
     parts.push(input.display().to_string());
     let outcome = run_child(&program, &parts)?;
     if !outcome.success {
-        bail!("external upper-bound source failed: {}", outcome.stderr.trim());
+        bail!(
+            "external upper-bound source failed: {}",
+            outcome.stderr.trim()
+        );
     }
     #[derive(Deserialize)]
     struct External {
@@ -833,8 +845,8 @@ fn job_paths(job: &Path, radius: u16, shards: u32) -> PathBuf {
 fn write_atomic(path: &Path, bytes: &[u8]) -> Result<()> {
     let tmp = path.with_extension("tmp");
     {
-        let mut file = fs::File::create(&tmp)
-            .with_context(|| format!("creating {}", tmp.display()))?;
+        let mut file =
+            fs::File::create(&tmp).with_context(|| format!("creating {}", tmp.display()))?;
         file.write_all(bytes)?;
         file.sync_all()?;
     }
@@ -893,7 +905,12 @@ fn ensure_filter(
     if !outcome.success {
         bail!(
             "filter compile failed: {}",
-            outcome.stderr.trim().lines().next().unwrap_or("(no stderr)")
+            outcome
+                .stderr
+                .trim()
+                .lines()
+                .next()
+                .unwrap_or("(no stderr)")
         );
     }
     let record: NativeRecord =
@@ -968,7 +985,12 @@ fn run_shard(
     if !outcome.success {
         bail!(
             "shard {index}/{count} failed: {}",
-            outcome.stderr.trim().lines().next().unwrap_or("(no stderr)")
+            outcome
+                .stderr
+                .trim()
+                .lines()
+                .next()
+                .unwrap_or("(no stderr)")
         );
     }
     let record: NativeRecord =
@@ -1079,7 +1101,10 @@ fn collect_level(dir: &Path, radius: u16, shards: u32) -> Result<Option<LevelRec
         level.total_kernel_supports += record.result.stats.kernel_supports;
         level.total_nontrivial_supports += record.result.stats.nontrivial_supports;
         if let Some(distance) = record.result.distance {
-            if level.minimum_witness_weight.is_none_or(|prior| distance < prior) {
+            if level
+                .minimum_witness_weight
+                .is_none_or(|prior| distance < prior)
+            {
                 level.minimum_witness_weight = Some(distance);
                 level.minimum_witness = record.result.witness.clone();
             }
@@ -1269,7 +1294,10 @@ fn independently_verify_bracket(
     let mut upper: Option<u16> = None;
 
     for level in levels {
-        match (level.minimum_witness_weight, level.minimum_witness.is_empty()) {
+        match (
+            level.minimum_witness_weight,
+            level.minimum_witness.is_empty(),
+        ) {
             (Some(_), true) | (None, false) => bail!(
                 "radius {} has inconsistent witness presence and weight",
                 level.requested_radius
@@ -1284,9 +1312,8 @@ fn independently_verify_bracket(
                 }
                 upper = Some(upper.map_or(weight, |prior| prior.min(weight)));
                 if level.coverage_complete {
-                    exact_from_exhaustion = Some(
-                        exact_from_exhaustion.map_or(weight, |prior| prior.min(weight)),
-                    );
+                    exact_from_exhaustion =
+                        Some(exact_from_exhaustion.map_or(weight, |prior| prior.min(weight)));
                 }
             }
             (None, true) if level.coverage_complete => {
@@ -1385,8 +1412,8 @@ fn load_upper_records(job: &Path) -> Result<Vec<UpperRecord>> {
 }
 
 fn assemble_certificate(job: &Path) -> Result<Certificate> {
-    let header: JobHeader = serde_json::from_slice(&fs::read(job.join("job.json"))?)
-        .context("parsing job.json")?;
+    let header: JobHeader =
+        serde_json::from_slice(&fs::read(job.join("job.json"))?).context("parsing job.json")?;
     let levels = discover_levels(job)?;
     let upper = load_upper_records(job)?;
     let bracket = build_bracket(&header.code, &levels, &upper);
@@ -1395,7 +1422,8 @@ fn assemble_certificate(job: &Path) -> Result<Certificate> {
     } else {
         "the all-ones vector is outside the row space of the physical checks, so no even-weight parity gate applies; an exhausted radius R certifies only d >= R + 1".to_string()
     };
-    let anchor_soundness = if header.code.anchor_count == usize::from(header.code.coordinate_count) {
+    let anchor_soundness = if header.code.anchor_count == usize::from(header.code.coordinate_count)
+    {
         "every coordinate is an anchor, so the enumeration is unconditionally complete".to_string()
     } else {
         format!(
@@ -1450,10 +1478,16 @@ struct Cli {
 #[derive(Debug, ClapArgs, Clone)]
 struct Binaries {
     /// css_distance_native built with --features large-css,parallel.
-    #[arg(long, default_value = "~/.cache/ergodis/certdist/core-target/release/css_distance_native")]
+    #[arg(
+        long,
+        default_value = "~/.cache/ergodis/certdist/core-target/release/css_distance_native"
+    )]
     native: String,
     /// css_distance_random from the same build.
-    #[arg(long, default_value = "~/.cache/ergodis/certdist/core-target/release/css_distance_random")]
+    #[arg(
+        long,
+        default_value = "~/.cache/ergodis/certdist/core-target/release/css_distance_random"
+    )]
     random_bin: String,
 }
 
@@ -1648,15 +1682,15 @@ fn print_bracket(bracket: &Bracket) {
     match bracket.upper {
         Some(upper) if bracket.exact => println!("bracket              d = {upper} (exact)"),
         Some(upper) => println!("bracket              {} <= d <= {}", bracket.lower, upper),
-        None => println!("bracket              d >= {} (no witness yet)", bracket.lower),
+        None => println!(
+            "bracket              d >= {} (no witness yet)",
+            bracket.lower
+        ),
     }
     println!("  lower             {}", bracket.lower_provenance);
     println!("  upper             {}", bracket.upper_provenance);
     if bracket.admissible_values.len() > 1 {
-        println!(
-            "  admissible        {:?}",
-            bracket.admissible_values
-        );
+        println!("  admissible        {:?}", bracket.admissible_values);
     }
 }
 
@@ -1717,7 +1751,11 @@ fn cmd_plan(
             "  shard {index:4}/{shards}   {:>12} candidates   {:>8.2} s search{}",
             run.record.result.stats.candidates,
             seconds,
-            if run.resumed { "  (already on disk)" } else { "" }
+            if run.resumed {
+                "  (already on disk)"
+            } else {
+                ""
+            }
         );
         sampled.push((index, seconds, run.record.result.stats.candidates));
     }
@@ -1731,7 +1769,9 @@ fn cmd_plan(
     println!(
         "  sampled           {sample} shards, {total_candidates} candidates, {total_seconds:.2} s search"
     );
-    println!("  shard spread      {minimum:.2} s .. {maximum:.2} s (modular partition is unbalanced)");
+    println!(
+        "  shard spread      {minimum:.2} s .. {maximum:.2} s (modular partition is unbalanced)"
+    );
     println!(
         "  projected search  {projected_search:.1} s at {threads} threads per shard, sequential shards"
     );
@@ -1740,7 +1780,10 @@ fn cmd_plan(
         projected_search / 3600.0,
         projected_search * threads as f64
     );
-    println!("  sampled peak RSS  {:.1} MiB per shard", peak_rss as f64 / 1024.0);
+    println!(
+        "  sampled peak RSS  {:.1} MiB per shard",
+        peak_rss as f64 / 1024.0
+    );
     println!(
         "  estimator         direct sampling of the target radius; no growth model, no extrapolation across radii"
     );
@@ -1795,7 +1838,11 @@ fn cmd_run(
         };
         let started = Instant::now();
         let record = if upper == "builtin-osd" {
-            let threads = if upper_threads == 0 { threads } else { upper_threads };
+            let threads = if upper_threads == 0 {
+                threads
+            } else {
+                upper_threads
+            };
             builtin_osd(
                 &problem,
                 upper_trials,
@@ -1813,7 +1860,11 @@ fn cmd_run(
                 &local_input,
                 upper_trials,
                 target,
-                if upper_threads == 0 { threads } else { upper_threads },
+                if upper_threads == 0 {
+                    threads
+                } else {
+                    upper_threads
+                },
                 upper_seed,
                 upper_order.min(2) as u8,
                 upper_window,
@@ -1825,7 +1876,9 @@ fn cmd_run(
         };
         let seconds = started.elapsed().as_secs_f64();
         let stem = record.source.replace([':', '/', ' ', '.'], "_");
-        let path = job.join("upper").join(format!("{stem}-{upper_seed:016x}.json"));
+        let path = job
+            .join("upper")
+            .join(format!("{stem}-{upper_seed:016x}.json"));
         let existing: Option<UpperRecord> = fs::read(&path)
             .ok()
             .and_then(|bytes| serde_json::from_slice(&bytes).ok());
@@ -1932,7 +1985,10 @@ fn cmd_run(
     let bytes = canonical_json(&certificate)?;
     write_atomic(&job.join("certificate.json"), &bytes)?;
     print_bracket(&certificate.bracket);
-    println!("certificate          {}", job.join("certificate.json").display());
+    println!(
+        "certificate          {}",
+        job.join("certificate.json").display()
+    );
     println!("certificate sha256   {}", hex_digest(&bytes));
     append_metrics(
         &job,
@@ -2039,7 +2095,11 @@ fn cmd_combine(certificates: Vec<PathBuf>, label: String, out: Option<PathBuf>) 
     }
     if let Some(path) = out {
         write_atomic(&path, &bytes)?;
-        println!("combined certificate {} sha256 {}", path.display(), hex_digest(&bytes));
+        println!(
+            "combined certificate {} sha256 {}",
+            path.display(),
+            hex_digest(&bytes)
+        );
     }
     Ok(())
 }
@@ -2053,8 +2113,8 @@ fn cmd_verify(
     binaries: Binaries,
 ) -> Result<()> {
     let start = Instant::now();
-    let bytes = fs::read(&certificate)
-        .with_context(|| format!("reading {}", certificate.display()))?;
+    let bytes =
+        fs::read(&certificate).with_context(|| format!("reading {}", certificate.display()))?;
     let parsed: Certificate = serde_json::from_slice(&bytes).context("parsing certificate")?;
     println!("certificate          {}", certificate.display());
     println!("certificate sha256   {}", hex_digest(&bytes));
@@ -2069,12 +2129,14 @@ fn cmd_verify(
     let mut failures: Vec<String> = Vec::new();
     let mut checks = 0usize;
 
-    // 1. Code identity re-derived from the required input.
+    // 1. Code identity re-derived from the input.
     let (problem, raw) = load_problem(&input)?;
     let derived = CodeIdentity::derive(&problem, &raw);
     checks += 1;
     if derived != parsed.code {
-        failures.push("code identity re-derived from the input does not match the certificate".to_string());
+        failures.push(
+            "code identity re-derived from the input does not match the certificate".to_string(),
+        );
     } else {
         println!("[ok] code identity, rank, kernel dimension, parity gate and input sha256 all re-derived from the input");
     }
@@ -2114,7 +2176,11 @@ fn cmd_verify(
                 level.requested_radius
             ));
         }
-        if level.shards.iter().any(|shard| shard.result_scope != "partial-shard") {
+        if level
+            .shards
+            .iter()
+            .any(|shard| shard.result_scope != "partial-shard")
+        {
             failures.push(format!(
                 "radius {}: a shard record does not declare partial-shard scope",
                 level.requested_radius
@@ -2229,7 +2295,13 @@ fn cmd_verify(
         }
         let temp = job.join("recheck");
         fs::create_dir_all(&temp)?;
-        let (filter, _, _) = ensure_filter(&native, &job.join("input.json"), &job, level.requested_radius, threads)?;
+        let (filter, _, _) = ensure_filter(
+            &native,
+            &job.join("input.json"),
+            &job,
+            level.requested_radius,
+            threads,
+        )?;
         let stride = (level.shard_count / recheck_shards).max(1);
         let recheck_start = Instant::now();
         let mut matched = 0usize;

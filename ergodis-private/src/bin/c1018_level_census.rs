@@ -226,10 +226,18 @@ fn smith_normal_form(m: &[Vec<i128>], n: usize) -> (Vec<i128>, Vec<Vec<i128>>) {
 }
 
 fn gcd(a: i128, b: i128) -> i128 {
-    if b == 0 { a.abs() } else { gcd(b, a % b) }
+    if b == 0 {
+        a.abs()
+    } else {
+        gcd(b, a % b)
+    }
 }
 fn lcm(a: i128, b: i128) -> i128 {
-    if a == 0 || b == 0 { 0 } else { a / gcd(a, b) * b }
+    if a == 0 || b == 0 {
+        0
+    } else {
+        a / gcd(a, b) * b
+    }
 }
 
 fn multilinear_level(logical: &[i128], k: usize, modulus: i128) -> usize {
@@ -238,7 +246,11 @@ fn multilinear_level(logical: &[i128], k: usize, modulus: i128) -> usize {
         let mut alpha: i128 = 0;
         let mut r = s;
         loop {
-            let sign = if (s.count_ones() - r.count_ones()) % 2 == 0 { 1 } else { -1 };
+            let sign = if (s.count_ones() - r.count_ones()) % 2 == 0 {
+                1
+            } else {
+                -1
+            };
             alpha += sign * logical[r];
             if r == 0 {
                 break;
@@ -343,7 +355,10 @@ fn max_level(a_basis: &[Word], v_basis: &[Word], n: usize, row_cap: usize) -> Op
             })
             .collect();
         let base = logical[0];
-        let logical: Vec<i128> = logical.iter().map(|x| (x - base).rem_euclid(modulus)).collect();
+        let logical: Vec<i128> = logical
+            .iter()
+            .map(|x| (x - base).rem_euclid(modulus))
+            .collect();
         let l = multilinear_level(&logical, k, modulus);
         if l == usize::MAX {
             return Some(usize::MAX);
@@ -356,7 +371,10 @@ fn max_level(a_basis: &[Word], v_basis: &[Word], n: usize, row_cap: usize) -> Op
     // is continuous; check and flag
     for i in diag.len()..n {
         for &v in &reps {
-            let s: i128 = (0..n).filter(|&j| v >> j & 1 == 1).map(|j| vmat[j][i]).sum();
+            let s: i128 = (0..n)
+                .filter(|&j| v >> j & 1 == 1)
+                .map(|j| vmat[j][i])
+                .sum();
             if s != 0 {
                 return Some(usize::MAX);
             }
@@ -517,7 +535,12 @@ fn ladder(row_cap: usize) {
                 families.push((format!("PRM({r},{mm}) in PRM({s},{mm})"), np, ap, vp));
                 let (ns, ash) = shortened(&reed_muller(r, mm), n);
                 let (_, vsh) = punctured(&reed_muller(s, mm), n);
-                families.push((format!("SRM({r},{mm}) in PRM({s},{mm})"), ns, ash.clone(), vsh));
+                families.push((
+                    format!("SRM({r},{mm}) in PRM({s},{mm})"),
+                    ns,
+                    ash.clone(),
+                    vsh,
+                ));
                 let (_, vs2) = shortened(&reed_muller(s, mm), n);
                 families.push((format!("SRM({r},{mm}) in SRM({s},{mm})"), ns, ash, vs2));
             }
@@ -574,8 +597,16 @@ fn ladder(row_cap: usize) {
         } else {
             0
         };
-        let wx = if a.len() <= DIM_CAP { optimal_check_weight(&a, n) } else { 0 };
-        let wz = if b.len() <= DIM_CAP { optimal_check_weight(&b, n) } else { 0 };
+        let wx = if a.len() <= DIM_CAP {
+            optimal_check_weight(&a, n)
+        } else {
+            0
+        };
+        let wz = if b.len() <= DIM_CAP {
+            optimal_check_weight(&b, n)
+        } else {
+            0
+        };
         let lvl = match max_level(&a, &v, n, row_cap) {
             Some(usize::MAX) => "cont".to_string(),
             Some(l) => l.to_string(),
@@ -599,8 +630,7 @@ fn census(n: usize, max_w: u32, min_d: u32, threads: usize, row_cap: usize) {
     // shared across threads: all subspaces of F_2^m for every quotient dimension
     // Only quotient dimensions up to n-1 are needed: `A = 0` is skipped below,
     // and enumerating all subspaces of F_2^n itself would dominate memory.
-    let quotient_lists: Arc<Vec<Vec<Vec<Word>>>> =
-        Arc::new((0..n).map(all_subspaces).collect());
+    let quotient_lists: Arc<Vec<Vec<Vec<Word>>>> = Arc::new((0..n).map(all_subspaces).collect());
     let table: Arc<Mutex<Table>> = Arc::new(Mutex::new(Table::new()));
     let counted = Arc::new(Mutex::new((0u64, 0u64))); // (flags analysed, skipped)
     let chunk = subs.len().div_ceil(threads);
@@ -632,8 +662,7 @@ fn census(n: usize, max_w: u32, min_d: u32, threads: usize, row_cap: usize) {
                 let aperp = dual_basis(a, n);
                 let aperp_span = span(&aperp);
                 // section: coordinates that are not pivots of A
-                let pivots: Vec<usize> =
-                    a.iter().map(|r| r.trailing_zeros() as usize).collect();
+                let pivots: Vec<usize> = a.iter().map(|r| r.trailing_zeros() as usize).collect();
                 let free: Vec<usize> = (0..n).filter(|c| !pivots.contains(c)).collect();
                 let m = free.len();
                 for u in &quotient_lists[m] {
@@ -726,7 +755,11 @@ fn census(n: usize, max_w: u32, min_d: u32, threads: usize, row_cap: usize) {
             r.k, r.wz, r.a, r.v
         );
     }
-    let best = table.values().map(|r| r.level).filter(|&l| l != usize::MAX).max();
+    let best = table
+        .values()
+        .map(|r| r.level)
+        .filter(|&l| l != usize::MAX)
+        .max();
     println!("maximum finite level over the whole census: {best:?}");
 }
 

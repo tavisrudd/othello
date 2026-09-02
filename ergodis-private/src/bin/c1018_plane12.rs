@@ -351,8 +351,17 @@ fn sidon_search(v: usize, k: usize) -> SidonCertificate {
                         used[d2] = true;
                         used[v - d2] = true;
                         recurse(
-                            2, v, k, d2, &mut chosen, &mut used, &mut nodes, &mut sols,
-                            &mut ws, &mut verified, &mut failures,
+                            2,
+                            v,
+                            k,
+                            d2,
+                            &mut chosen,
+                            &mut used,
+                            &mut nodes,
+                            &mut sols,
+                            &mut ws,
+                            &mut verified,
+                            &mut failures,
                         );
                         used[d2] = false;
                         used[v - d2] = false;
@@ -565,7 +574,10 @@ fn orbit_matrix_search(n: usize, cap: usize) -> OrbitCertificate {
         type_profiles: profiles,
         examples,
         verdict: if count == 0 {
-            format!("eliminated: no orbit matrix for an order-{} collineation", n + 1)
+            format!(
+                "eliminated: no orbit matrix for an order-{} collineation",
+                n + 1
+            )
         } else if cap > 0 && count >= cap {
             format!("at least {count} normalized orbit matrices survive (cap reached)")
         } else {
@@ -651,8 +663,8 @@ fn search(
             .collect();
         picked.push(*idx);
         search(
-            dim, col_sum, pair_dot, rows, &next, colsum, picked, first, nodes, found,
-            solutions, profiles, row_type, type_count, cap, max_entry,
+            dim, col_sum, pair_dot, rows, &next, colsum, picked, first, nodes, found, solutions,
+            profiles, row_type, type_count, cap, max_entry,
         );
         picked.pop();
         for j in 0..dim {
@@ -744,8 +756,8 @@ fn starter_search(m: usize) -> StarterCertificate {
             used[b] = true;
             pairs.push([a, b]);
             go(
-                m, half, elements, used, pairs, examined, starters, saturated, deficient,
-                example, ws,
+                m, half, elements, used, pairs, examined, starters, saturated, deficient, example,
+                ws,
             );
             pairs.pop();
             used[b] = false;

@@ -289,7 +289,12 @@ fn build_group(
     }
     let expected = q * q * q - q;
     if mats.len() != expected {
-        bail!("|PGL(2,{})| = {} but enumerated {}", plane.q, expected, mats.len());
+        bail!(
+            "|PGL(2,{})| = {} but enumerated {}",
+            plane.q,
+            expected,
+            mats.len()
+        );
     }
 
     let frobenius_steps = if gamma && plane.h > 1 {
@@ -315,11 +320,7 @@ fn build_group(
         let [a, b, c, d] = *m;
         let s = [
             [f.mul(a, a), f.add(f.mul(a, b), f.mul(a, b)), f.mul(b, b)],
-            [
-                f.mul(a, c),
-                f.add(f.mul(a, d), f.mul(b, c)),
-                f.mul(b, d),
-            ],
+            [f.mul(a, c), f.add(f.mul(a, d), f.mul(b, c)), f.mul(b, d)],
             [f.mul(c, c), f.add(f.mul(c, d), f.mul(c, d)), f.mul(d, d)],
         ];
         let mut base = vec![0u16; plane.n];
@@ -669,8 +670,6 @@ struct CellReport {
     linear_classes: usize,
 }
 
-
-
 fn run_cell(args: &Args, q: u16) -> Result<CellReport> {
     let plane = Plane::new(q)?;
     let index = ProjectiveIndex::new(&plane.field, 2)
@@ -810,11 +809,8 @@ fn run_cell(args: &Args, q: u16) -> Result<CellReport> {
             'outer: for combo in combinations(&idxs, 6) {
                 let arc: Vec<usize> = combo.iter().map(|&i| set[i]).collect();
                 if let Some(report) = analyse_six_arc(&plane, &index, &arc)? {
-                    let complement: BTreeSet<usize> = set
-                        .iter()
-                        .copied()
-                        .filter(|p| !arc.contains(p))
-                        .collect();
+                    let complement: BTreeSet<usize> =
+                        set.iter().copied().filter(|p| !arc.contains(p)).collect();
                     let bs: BTreeSet<usize> = report.brianchon_points.iter().copied().collect();
                     if !bs.is_empty() && bs == complement {
                         split_exact = true;
@@ -843,7 +839,13 @@ fn run_cell(args: &Args, q: u16) -> Result<CellReport> {
             six_arc_split_is_exactly_complement: split_exact,
         });
     }
-    classes.sort_by_key(|c| (c.linear, std::cmp::Reverse(c.size), c.canonical_points.clone()));
+    classes.sort_by_key(|c| {
+        (
+            c.linear,
+            std::cmp::Reverse(c.size),
+            c.canonical_points.clone(),
+        )
+    });
     let exceptional = classes.iter().filter(|c| !c.linear).count();
     let linear_classes = classes.iter().filter(|c| c.linear).count();
 
@@ -945,8 +947,7 @@ fn analyse_set(q: u16, set: &[usize]) -> Result<()> {
             }
         }
     }
-    let all_once = covered.len() == plane.conic_points.len()
-        && covered.values().all(|&v| v == 1);
+    let all_once = covered.len() == plane.conic_points.len() && covered.values().all(|&v| v == 1);
     println!(
         "tangent_points_covered={} of {} each_exactly_once={}",
         covered.len(),
@@ -966,7 +967,10 @@ fn analyse_set(q: u16, set: &[usize]) -> Result<()> {
             singleton_lines += 1;
         }
     }
-    println!("union_size={} lines_meeting_union_once={singleton_lines}", union.len());
+    println!(
+        "union_size={} lines_meeting_union_once={singleton_lines}",
+        union.len()
+    );
 
     // setwise stabiliser in the full conic stabiliser, with its element-order
     // spectrum so the group can be named rather than guessed from its order.

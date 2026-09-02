@@ -288,7 +288,9 @@ impl Family {
             return false;
         };
         let Some(abc) = ab.mul(c) else { return false };
-        let Some(rhs) = abc.mul_int(4) else { return false };
+        let Some(rhs) = abc.mul_int(4) else {
+            return false;
+        };
         match lhs.sub(&rhs) {
             Some(d) => d.is_zero(),
             None => false,
@@ -401,9 +403,9 @@ fn tier1_families() -> Vec<Family> {
         m: 3,
         r: 2,
         tmin: 0,
-        a: Poly::linear(1, 1),          // (n+1)/3 = t+1
-        b: Poly::linear(2, 3),          // n
-        c: Poly(vec![2, 5, 3]),         // n(n+1)/3 = (3t+2)(t+1)
+        a: Poly::linear(1, 1),  // (n+1)/3 = t+1
+        b: Poly::linear(2, 3),  // n
+        c: Poly(vec![2, 5, 3]), // n(n+1)/3 = (3t+2)(t+1)
     });
     // n = 13 (mod 24): s = 3, d = 2
     out.push(family_recipe("n13mod24", 24, 13, 3, DShape::Const(2)).expect("n13mod24"));
@@ -654,17 +656,29 @@ fn arg_val(args: &[String], key: &str, default: &str) -> String {
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
-    let n_max: u64 = arg_val(&args, "--n-max", "10000000").parse().expect("n-max");
+    let n_max: u64 = arg_val(&args, "--n-max", "10000000")
+        .parse()
+        .expect("n-max");
     let out_dir = PathBuf::from(arg_val(
         &args,
         "--out-dir",
         &format!("{}/.cache/ergodis/c1029", std::env::var("HOME").unwrap()),
     ));
-    let ladder_top: usize = arg_val(&args, "--ladder-top", "0").parse().expect("ladder-top");
-    let s_max_ladder: i128 = arg_val(&args, "--ladder-s-max", "31").parse().expect("s-max");
-    let c_max_ladder: i128 = arg_val(&args, "--ladder-c-max", "12").parse().expect("c-max");
-    let witness_s_max: u64 = arg_val(&args, "--witness-s-max", "4001").parse().expect("ws");
-    let ladder_fit_max: u64 = arg_val(&args, "--ladder-fit-max", "0").parse().expect("fit-max");
+    let ladder_top: usize = arg_val(&args, "--ladder-top", "0")
+        .parse()
+        .expect("ladder-top");
+    let s_max_ladder: i128 = arg_val(&args, "--ladder-s-max", "31")
+        .parse()
+        .expect("s-max");
+    let c_max_ladder: i128 = arg_val(&args, "--ladder-c-max", "12")
+        .parse()
+        .expect("c-max");
+    let witness_s_max: u64 = arg_val(&args, "--witness-s-max", "4001")
+        .parse()
+        .expect("ws");
+    let ladder_fit_max: u64 = arg_val(&args, "--ladder-fit-max", "0")
+        .parse()
+        .expect("fit-max");
     let tag = arg_val(&args, "--tag", "run");
     fs::create_dir_all(&out_dir).expect("out dir");
 
@@ -679,7 +693,11 @@ fn main() {
         EXCEPTIONAL.to_vec(),
         "tier-1 covering does not leave exactly the expected exceptional set"
     );
-    eprintln!("tier-1: {} families, uncovered mod 840 = {:?}", t1.len(), unc);
+    eprintln!(
+        "tier-1: {} families, uncovered mod 840 = {:?}",
+        t1.len(),
+        unc
+    );
 
     // ---- residual primes ----
     let t_sieve = std::time::Instant::now();
@@ -777,10 +795,7 @@ fn main() {
     let mut deep_path = 0usize;
     let mut failures: Vec<u64> = Vec::new();
     for &p in &resid {
-        if t2
-            .iter()
-            .any(|f| p % (f.m as u64) == f.r as u64)
-        {
+        if t2.iter().any(|f| p % (f.m as u64) == f.r as u64) {
             ladder_absorbed += 1;
             continue;
         }
@@ -802,7 +817,11 @@ fn main() {
         failures.len(),
         t_wit.elapsed().as_secs_f64()
     );
-    assert!(failures.is_empty(), "witness search failed for {:?}", &failures[..failures.len().min(8)]);
+    assert!(
+        failures.is_empty(),
+        "witness search failed for {:?}",
+        &failures[..failures.len().min(8)]
+    );
 
     // ---- emit ----
     let wit_name = format!("c1029-witnesses-{tag}.txt");
@@ -850,5 +869,10 @@ fn main() {
 
     println!("cert     {}", cert_path.display());
     println!("witness  {}", wit_path.display());
-    println!("residual {} witnesses {} absorbed {}", resid.len(), witnesses.len(), ladder_absorbed);
+    println!(
+        "residual {} witnesses {} absorbed {}",
+        resid.len(),
+        witnesses.len(),
+        ladder_absorbed
+    );
 }
