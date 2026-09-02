@@ -423,11 +423,27 @@ absolute deadlines are server-derived from relative timeouts, duplicate
 recognition reconstructs the original durations from the persisted creation
 time; the same identity with a changed role, provider, work, bytes, or timeout
 envelope fails closed. The buckets are process-local until daemon resume lands.
-The ready result currently carries digest and size rather than a stored compact
-payload. Typed `ergodisctl proposal-*` commands now project the full lifecycle;
-the dependency-free Python 3.14+ binding now mirrors it with frozen slotted
-session/ticket objects, `StrEnum` roles and failures, validated keyword-only
-resource envelopes, and native synchronous/`asyncio` Unix-socket calls.
+Claim now returns a deterministic run-relative upload path. The worker streams
+the result into that private create-only file; completion carries only the
+ticket and attempt. The daemon independently enforces the byte cap, hashes and
+copies through a fixed 64 KiB buffer, fsyncs, and publishes a read-only result
+artifact. Fetch re-hashes it against durable ticket metadata. Thus neither the
+control frame nor the Python binding buffers a complete result, and provider-
+supplied size/digest metadata has no authority. Typed `ergodisctl proposal-*`
+commands project the full lifecycle; the dependency-free Python 3.14+ binding
+mirrors it with frozen slotted session/ticket objects, `StrEnum` roles and
+failures, validated keyword-only resource envelopes, native synchronous/
+`asyncio` Unix-socket calls, and bounded streamed completion.
+
+The operational policy is deliberately split into three accounting layers.
+Logical query/revision/work/return-byte reservations are durable and never
+refunded by reconnect, cancellation, or retry. Attempt retries retain their
+typed action, exact `not_before` time, and owning deadline in the durable
+ticket. Admission-rate token buckets are currently process-local, although
+their exact remainder-bearing snapshot type is restart-validatable; persisting
+and reconciling campaign/provider/session bucket snapshots is the next
+durability slice. A real provider-neutral worker adapter must consume the
+ticket actions rather than invent a second timeout/backoff policy.
 
 The next generic slice now implements the in-memory/persistable ticket state
 machine without adding wire operations. Its fixed ticket identity makes submit
