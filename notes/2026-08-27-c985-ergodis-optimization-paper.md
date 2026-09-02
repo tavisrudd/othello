@@ -2118,6 +2118,17 @@ files are disposable and may be deleted at any time.
    lower bound reduces the 34-orbit frontier; otherwise seed the verified
    weight-24 incumbent and exhaust below it in deterministic retained shards.
 
+   The first post-bound symmetry probe is a measured rejection. For every
+   verified quasi-cyclic layout, it tested exact lifted block reflections on
+   the two canonical axes, both offset orientations, and every
+   block-dependent cyclic shear. Each candidate had to preserve the physical
+   and physical-plus-logical row spaces before it could affect anchors. The
+   family leaves BB288 at 2 orbits, BB360 at 2, TN360 at 36, and both LP1768
+   directions at 34. The implementation is removed: it adds no current
+   quotient and should not tax the importer. Next inspect the LP base-block
+   incidence structure for non-affine block permutations or a stronger exact
+   syndrome invariant before launching radius 20/22 shards.
+
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
