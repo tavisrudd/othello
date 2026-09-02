@@ -2044,6 +2044,26 @@ files are disposable and may be deleted at any time.
    shortcuts: continue from a new whole-worker profile rather than further
    editing the bitmap/append cluster.
 
+   Official QDistSAT ingestion is now a durable application surface rather
+   than an ad hoc matrix conversion. Private commit `4389cf24b` adds a
+   clean-room, create-only adapter for the upstream dense `Hx`/`Hz`/`Gx`/`Gz`
+   schema. It pins and records the upstream revision and four source SHA-256
+   digests; checks rectangular binary input, common coordinate width,
+   `Hx`--`Hz` commutation, both stabilizer ranks, encoded dimension, logical
+   rank and independence modulo the physical checks; row-reduces the output;
+   and emits all anchors without claiming an unproved symmetry. No GPL source
+   or matrix data is copied into this repository. The official repository at
+   revision `9fb224b0fa372161fb3933034016bc8dc423a5ab` contains 27 matrix
+   stems; `--check-only` validates all 54 stem/direction pairs successfully.
+   As an end-to-end gate, both official BB288 directions compile through the
+   public wide CSS backend to 138 physical checks and 12 logical
+   observations. The AVX2/BMI/POPCNT search completes radius 2 with 7,488 Z
+   and 13,616 X candidates. These are ingestion/parser controls, not new
+   distance claims. Next use this pinned bridge to run one protocol over the
+   five upstream unknown-distance stems, beginning with the shortest BB
+   instance and retaining only committed certificates/results rather than
+   disposable build or output paths.
+
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
