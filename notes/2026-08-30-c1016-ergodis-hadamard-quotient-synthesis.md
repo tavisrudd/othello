@@ -1855,9 +1855,17 @@ the same quartet totals. It retires 128,070,942,400,682 cycles and
 168,033,352,053,288 instructions with a 269,090,552-byte per-worker cap.
 Streaming saves 8.0% instructions but costs 49.8% more cycles: random
 partition-point probes are latency-bound, while sorting the cold table enables
-a sequential equal-run merge. The retained layout is therefore production for
-this phase. Sixteen maximum-cap workers require about 8.6 GiB, so thread count
-is selected once from the live explicit RAM gate; no swap fallback is allowed.
+a sequential equal-run merge. A later exact target-cache accelerator improves
+on both. Its shared two-hash Bloom filter rejects only absent targets, and
+every positive probe compares the full seven-coordinate key in an exact
+open-addressed index. It reproduces the control's quartet counts, four
+participation counts, and four participation digests. The four-worker run
+retires 75,461,918,643,675 cycles and 66,741,790,140,083 instructions: 11.7%
+fewer cycles and 63.5% fewer instructions than the retained merge, with a
+10,485,760-byte shared index instead of a 537,526,008-byte per-worker cap.
+The Bloom target cache is therefore production for this phase. Its 16-thread
+resident footprint is small; thread count still passes through the live
+explicit RAM gate, and no swap fallback is allowed.
 
 The first full participation attempt was deliberately stopped after an audit
 found a scheduler boundary race: with several workers, testing `shard == end`
