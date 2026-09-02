@@ -430,7 +430,6 @@ pub fn lift_q29_row0_to_minus9_9(residues: &[u8; ORDER]) -> Option<[i8; ORDER]> 
 #[must_use]
 pub fn replay_q29_moment_crt_sufficiency(residual: &[i16; ORDER]) -> bool {
     if residual[0] != 0
-        || residual.iter().map(|&value| i32::from(value)).sum::<i32>() != 0
         || residual
             .iter()
             .any(|&value| !(-487..=523).contains(&i32::from(value)) || value % 18 != 0)
@@ -444,6 +443,7 @@ pub fn replay_q29_moment_crt_sufficiency(residual: &[i16; ORDER]) -> bool {
     }
 
     let mut system = [[0_u8; 15]; 14];
+    let mut moment_rhs = [0_u8; 14];
     for equation in 0..14 {
         for shift in 1..=14 {
             let base = shift * shift % ORDER;
@@ -462,7 +462,15 @@ pub fn replay_q29_moment_crt_sufficiency(residual: &[i16; ORDER]) -> bool {
             }
             rhs += 2 * i32::from(residual[shift]) * power;
         }
-        system[equation][14] = mod_29(rhs);
+        moment_rhs[equation] = mod_29(rhs);
+        system[equation][14] = moment_rhs[equation];
+    }
+    // Equation zero is the exact global residual sum; equations 1--13 are
+    // the even moments through degree 26.
+    if residual.iter().map(|&value| i32::from(value)).sum::<i32>() != 0
+        || moment_rhs.iter().any(|&value| value != 0)
+    {
+        return false;
     }
 
     for pivot in 0..14 {
@@ -492,10 +500,22 @@ pub fn replay_q29_moment_crt_sufficiency(residual: &[i16; ORDER]) -> bool {
             }
         }
     }
-    if system.iter().any(|row| row[14] != 0) {
-        return false;
+    let mut positive_522_pairs = 0_i32;
+    for representative in 1..=14 {
+        let recovered = system[representative - 1][14];
+        if recovered != mod_29(i32::from(residual[representative])) || recovered != 0 {
+            return false;
+        }
+        // Divisibility by 18 was checked at the boundary. The recovered zero
+        // residue adds divisibility by 29. In [-487,523], only 0 and +522
+        // remain; count the latter and let the exact sum eliminate it.
+        if residual[representative] == 522 {
+            positive_522_pairs += 1;
+        } else if residual[representative] != 0 {
+            return false;
+        }
     }
-    residual.iter().all(|&value| value == 0)
+    positive_522_pairs == 0
 }
 
 fn residual_commitment(residual: &[i16; ORDER]) -> [u8; 32] {
@@ -906,6 +926,13 @@ mod tests {
         asymmetric[1] = 522;
         asymmetric[2] = -522;
         assert!(!replay_q29_moment_crt_sufficiency(&asymmetric));
+
+        let mut missing_moment = [0_i16; ORDER];
+        missing_moment[1] = 18;
+        missing_moment[ORDER - 1] = 18;
+        missing_moment[2] = -18;
+        missing_moment[ORDER - 2] = -18;
+        assert!(!replay_q29_moment_crt_sufficiency(&missing_moment));
     }
 
     #[test]
