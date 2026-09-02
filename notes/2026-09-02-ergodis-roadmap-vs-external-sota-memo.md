@@ -24,7 +24,7 @@ context) = inductive logic programming; PSD = positive semidefinite.
 | AlphaEvolve problem repository (67 problems) as a benchmark suite | NEW | AlphaEvolve appears in `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md` and `2026-09-01-c985-evolve-sota-synthesis-lineages.md` only as an architecture to import from, never as a benchmark corpus | Yes, and this is the memo's single best contribution: we have treated AlphaEvolve as a design source and never as a public problem set we could run against. The 67-problem repository's existence is unverified and must be confirmed first. |
 | FunSearch cap sets and admissible sets as a discovery benchmark | NEW for Ergodis; the cap-set *game* is a separate repository programme | `2026-07-04-capset-game-theorem.md` and the cap lane are about a different object (a combinatorial game on projective planes), not the FunSearch extremal cap-set construction | Partly. Scoring discovery probability under equal evaluator budgets is a genuinely new measurement axis for us; the "512-cap in dimension 8, 4 of 140 runs" figure is unverified. |
 | MiniZinc Challenge structural instances, curated subset | NEW | The only MiniZinc mention in the record is a scope disclaimer in the optimization manuscript ("not a general replacement for OR-Tools, MiniZinc, Gurobi, CPLEX, SCIP"), quoted in `2026-08-29-c998-ergodis-partition-design.md` | Yes. A predeclared classifier for "Ergodis-shaped" instances plus running every qualifying instance including losses is a stronger protocol than anything we have written down, and it operationalizes a disclaimer we currently only assert. |
-| Hadamard order 668 as a public adversarial campaign | REJECTED, with reason | `2026-09-01-c985-evolve-sota-synthesis.md` §1.1 and `2026-08-29-ergodis-portfolio-leverage-synthesis.md` §D.1: existence at order 668 was settled on 2026-08-12 along with every open order below 2000, so 668 was formally withdrawn as a showcase | No. The memo is working from stale information. See §2.1. |
+| Hadamard order 668 as a clean-room retro-solve benchmark with a known answer | NEW, as a benchmark; REJECTED only as a showcase | `2026-09-01-c985-evolve-sota-synthesis.md` §1.1 records existence at 668 settled on 2026-08-12; `2026-08-29-ergodis-portfolio-leverage-synthesis.md` §D.1 withdrew it as a showcase; `2026-08-31-ergodis-target-portfolio.md` §3 records the ownership exclusion | Yes. Read as a retro-solve with ground truth against published structure-aware routes, not a trophy, it is a clean external benchmark; see §2.1. |
 | Magma exhaustive solving of quadratic systems over the two-element field as an adversarial control | NEW | Magma appears in the record only as a commercial competitor for minimum-distance computation (`2026-09-01-c985-evolve-sota-synthesis.md` §3.8), never as a negative control | Yes. The "publish the phase transition where we lose" idea is new to us and cheap; the claimed two-orders-of-magnitude enumeration advantage is unverified. |
 | ZDD family-enumeration comparison | PARTIAL | The crate has a `zdd` module, and `2026-08-30-c1017-ergodis-core-performance-contract-remediation.md` treats it as a performance-remediation target; `2026-08-31-ergodis-instrument-test-targets.md` §4.2 records plainly that no ranked target makes it load-bearing and it may be speculative | Yes. This is the first concrete proposal that would make the ZDD module load-bearing, and it answers an open question we had already flagged as unresolved. |
 | Formal Conjectures corpus and Lean export of a certificate | PLANNED, as the Lean checker rather than the corpus | `2026-08-29-ergodis-portfolio-leverage-synthesis.md` §A.4 queues a Lean-verified checker for the polynomial-time-checkable parts of a certificate, gated on the certificate formats freezing | Partly. Our plan verifies the *checker*; the memo proposes exporting a discovered finite lemma as a Lean proposition. The pipeline direction is new; Formal Conjectures itself (2,615 statements, 1,029 open) is unverified and is a corpus we have no use for. |
@@ -38,18 +38,28 @@ context) = inductive logic programming; PSD = positive semidefinite.
 
 ## 2. Corrections
 
-**2.1 Hadamard order 668 is settled, and the memo's fourth priority is void.** The memo proposes
-order 668 as a public adversarial campaign with structured satisfiability and meet-in-the-middle
-implementations to port. Existence at order 668 was announced on 2026-08-12 by Alpöge,
-Reynolds-Haertle and Voinov, together with the other eleven previously open orders below 2000,
-and confirmed through three independent sources
-(`2026-09-01-c985-evolve-sota-synthesis.md` §1.1). The leverage synthesis withdrew 668 as a
-showcase on that basis (`2026-08-29-ergodis-portfolio-leverage-synthesis.md` §D.1). The live
-private work at order 2092 must also be reframed as class exclusion — a certified "no bordered
+**2.1 Hadamard order 668: void as a trophy, valid as a clean-room retro-solve.** The first
+reading of the memo's fourth item, a public campaign to find an order-668 matrix, is closed:
+existence at order 668 was announced on 2026-08-12 by Alpöge, Reynolds-Haertle and Voinov,
+together with the other eleven previously open orders below 2000, and confirmed through three
+independent sources (`2026-09-01-c985-evolve-sota-synthesis.md` §1.1); the leverage synthesis
+withdrew 668 as a showcase on that basis (`2026-08-29-ergodis-portfolio-leverage-synthesis.md`
+§D.1). The memo's actual proposal survives that fact and is improved by it: port one or more of
+the published structure-aware routes (structured satisfiability over Goethals–Seidel and
+supplementary-difference-set carriers with canonicalization under rotations, reflections and
+multipliers, row-sum families and autocorrelation verification; and the spectral-sieve plus
+meet-in-the-middle autocorrelation framework), run Ergodis on the identical finite search with
+the published answer as ground truth, and compare compile and solve cost, certificate size, and
+replay cost against an implementation that is already structure-aware rather than naive
+satisfiability. A known answer makes the benchmark clean: the question is not whether a matrix
+exists but how much of the published search each system removes exactly. The live private
+work at order 2092 is separately reframed as class exclusion, a certified "no bordered
 Goethals–Seidel array with four circulant blocks of the given carrier under the given multiplier
-subgroup" — because construction races are no longer available. Separately, the target portfolio
-excludes everything Hadamard-, Legendre-pair- and conference-matrix-adjacent as owned by another
-agent (`2026-08-31-ergodis-target-portfolio.md` §3), so this item is doubly out of scope.
+subgroup", because construction races are no longer available. The only remaining obstacle is
+ownership: the target portfolio excludes Hadamard-, Legendre-pair- and conference-matrix-adjacent
+targets as owned by another agent (`2026-08-31-ergodis-target-portfolio.md` §3). That is a
+scope rule Tavis can lift for a benchmark task, and this review recommends lifting it for the
+retro-solve only, not for construction work.
 
 **2.2 The memo's framing of Evolve as a discovery engine understates the admission boundary.**
 The memo asks whether Evolve can "rediscover the useful reflection/residue structure blind" and
@@ -112,8 +122,13 @@ ZDD library, reporting compressed representation size as well as runtime, either
 module or retires it. Acceptance gate: a decision either way, recorded, rather than a benchmark
 row.
 
-**Re-rank downward: everything Hadamard.** Order 668 is closed; the memo's fourth and its
-public-campaign proposal should not enter the roadmap at all.
+**Add, gated on an ownership decision: the order-668 clean-room retro-solve.** Expected artifact:
+one published route reimplemented as a control, the same finite search compiled by Ergodis, and
+a benchmark row reporting exact work removed, certificate bytes, and replay cost with the
+published matrix as ground truth. Control: the published structure-aware implementation.
+Acceptance gate: both sides reach the known answer on the identical search domain, the Ergodis
+certificate replays independently, and the row states which search stages Ergodis compiled away.
+Not a construction campaign; see §2.1.
 
 **Leave as is: the evolve engine import batch.** The first four imports — failure-derived
 generalisation and specialisation constraints from Popper, a subexpression value bank with
@@ -195,7 +210,7 @@ the planted corpus is a test of the boundary, not of discovery.
 **Symbolic finite-structure systems.**
 - Benchmark minimal-support and reliability-counting families against a modern ZDD library, reporting compressed size, and decide the ZDD module's fate.
 - Assemble a public benchmark suite with the three tiers — known quotient, hidden structure, and negative control — reusing the existing benchmark metadata and the MATA external-validity run.
-- Do not open a Hadamard order 668 campaign; existence below order 2000 is settled and the family is another agent's.
+- Order-668 clean-room retro-solve against a published structure-aware route, with the known matrix as ground truth; needs the Hadamard ownership exclusion lifted for benchmark use (§2.1, §3).
 
 ## 6. Trust boundary
 
