@@ -125,10 +125,11 @@ pub use continuation::{
     ContinuationLevel,
 };
 pub use css_distance::{
-    verify_css_anchor_transversal, BoundedCssDistanceResult, CompiledCssDistance,
-    CompiledExtraWideCssDistance, CompiledWideCssDistance, ConnectedSearchStats,
-    CssAnchorOrbitCertificate, CssAnchorOrbitError, CssDistanceArtifactError, CssDistanceError,
-    CssSearchShard, CssShardFrontierCommitment,
+    verify_css_anchor_transversal, verify_css_coordinate_equivalence, BoundedCssDistanceResult,
+    CompiledCssDistance, CompiledExtraWideCssDistance, CompiledWideCssDistance,
+    ConnectedSearchStats, CssAnchorOrbitCertificate, CssAnchorOrbitError,
+    CssCoordinateEquivalenceCertificate, CssCoordinateEquivalenceError, CssDistanceArtifactError,
+    CssDistanceError, CssSearchShard, CssShardFrontierCommitment,
 };
 #[cfg(feature = "large-css")]
 pub use css_distance::{

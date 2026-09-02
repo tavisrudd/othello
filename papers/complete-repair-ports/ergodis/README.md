@@ -258,6 +258,22 @@ css_automorphism_adapter --input problem.json --output replayed.json \
   --proposal-in proposal.json
 ```
 
+`css_isomorphism_adapter` applies the same proposal-versus-proof boundary to
+two CSS inputs. Its optional nauty backend compares their coloured physical
+Tanner graphs and proposes one coordinate bijection. Ergodis then independently
+requires equality of the transported physical row space and equality of the
+transported physical-plus-logical observable row space. A successful
+create-only admission record therefore transports every exact bounded-distance
+verdict and witness in both directions; nauty has proposal authority only.
+The backend-neutral proposal can be retained and replayed without nauty:
+
+```sh
+css_isomorphism_adapter --source a.json --target b.json \
+  --proposal-out a-to-b.json --output admitted.json
+css_isomorphism_adapter --source a.json --target b.json \
+  --proposal-in a-to-b.json --output replayed.json
+```
+
 Large portfolio instances require the same feature-complete release build used
 for their evidence runs:
 

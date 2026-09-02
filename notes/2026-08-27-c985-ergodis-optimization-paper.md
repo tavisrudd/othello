@@ -2575,6 +2575,38 @@ files are disposable and may be deleted at any time.
    interpretation are in
    `2026-08-31-c985-c1016-zero-cost-witness-handoff.md`.
 
+11. **In progress — cost-aware proposer portfolio and cross-instance
+    equivalence.** The common admission lifecycle and proposer context are
+    specified in
+    `2026-09-01-c985-evolve-proposal-admission-architecture.md`. External
+    proposers—including an LLM—receive immutable bounded snapshots and may use
+    only typed, quota-charged probe/trace tickets before submitting a neutral
+    artifact. Selection is a cost-aware contextual portfolio with a bounded
+    exploration reserve. Hierarchical token buckets, absolute queue/execution/
+    retention deadlines, idempotent cancellation, typed non-retryable errors,
+    `Retry-After`, capped full-jitter backoff, and narrow circuit breakers keep
+    failures from multiplying spend. Search workers see none of this; exact
+    admission and compilation remain outside the allocation-free loop.
+
+    The first new proposer family is accepted. A coloured-Tanner isomorphism
+    proposal between the official LP1768 X/Z instances is independently
+    admitted by equality of the transported physical and observable row
+    spaces. The exact ranks are 772 and 996 under a bijection of all 1,768
+    coordinates, proving `d_X = d_Z`; see
+    `2026-09-02-c985-lp1768-cross-direction-equivalence.md`. This eliminates
+    one of the two remaining radius-22 exhaustions rather than merely reducing
+    its roots. Next bind the admitted transport into the shard/evidence ledger,
+    then run only the faster transported presentation.
+
+    A theorem-driven residual-hitting import was also tested and rejected in
+    the CSS hot loop. On LP1768 X at radius 16, a depth-zero budget-five
+    residual clause reduced candidates from 1,012,284,352 to 1,012,085,594
+    (0.0196%) but raised wall time from 9.5249 s to 10.8692 s; allowing eight
+    DFS nodes retained the same work reduction and took 13.1745 s, while a
+    256-node form exceeded 80 s. Every observed prune was already visible at
+    the root and branching added none. Retain residual hitting as a cold
+    compile-time/proposer calculation, not a per-search-node CSS predicate.
+
 ## Gurobi boundary and semantic-symmetry spike, 2026-08-29
 
 The product boundary is now explicit in

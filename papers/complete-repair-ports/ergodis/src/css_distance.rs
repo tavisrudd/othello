@@ -133,6 +133,42 @@ pub enum CssAnchorOrbitError {
     Action(#[from] ExplicitPermutationError),
 }
 
+#[derive(Debug, Error)]
+pub enum CssCoordinateEquivalenceError {
+    #[error("CSS source, target, or coordinate permutation has an incompatible shape")]
+    Shape,
+    #[error("the coordinate permutation does not preserve the CSS search semantics")]
+    NotEquivalent,
+    #[error(transparent)]
+    Matrix(#[from] MatrixError),
+    #[error(transparent)]
+    Action(#[from] ExplicitPermutationError),
+    #[error(transparent)]
+    Orbit(#[from] OrbitCompileError<ExplicitPermutationError>),
+}
+
+/// Exact source-to-target CSS equivalence under one coordinate permutation.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct CssCoordinateEquivalenceCertificate {
+    coordinate_count: u32,
+    physical_rank: u32,
+    observable_rank: u32,
+}
+
+impl CssCoordinateEquivalenceCertificate {
+    pub fn coordinate_count(&self) -> u32 {
+        self.coordinate_count
+    }
+
+    pub fn physical_rank(&self) -> u32 {
+        self.physical_rank
+    }
+
+    pub fn observable_rank(&self) -> u32 {
+        self.observable_rank
+    }
+}
+
 /// Independently checkable coordinate-orbit reduction for CSS search anchors.
 #[derive(Clone, Debug)]
 pub struct CssAnchorOrbitCertificate {
@@ -222,6 +258,70 @@ pub fn verify_css_anchor_transversal(
         anchors: anchors.to_vec().into_boxed_slice(),
         minimum_orbit_size: orbit_sizes.iter().copied().min().unwrap_or(0),
         maximum_orbit_size: orbit_sizes.iter().copied().max().unwrap_or(0),
+    })
+}
+
+/// Verify that a coordinate permutation transports one CSS search problem to
+/// another with exactly the same zero-syndrome and nonzero-observable supports.
+///
+/// Equality of the physical row spaces preserves the kernel predicate.
+/// Equality of `rowspan(physical) + rowspan(logical)` preserves whether a
+/// kernel support has a nonzero logical observation. Since the supplied action
+/// is a bijection, bounded distance verdicts and witnesses transport in both
+/// directions.
+pub fn verify_css_coordinate_equivalence(
+    source_physical: &Matrix,
+    source_logical: &Matrix,
+    target_physical: &Matrix,
+    target_logical: &Matrix,
+    coordinate_images: impl Into<Box<[u32]>>,
+) -> Result<CssCoordinateEquivalenceCertificate, CssCoordinateEquivalenceError> {
+    let coordinates = source_physical.cols();
+    if coordinates == 0
+        || source_logical.rows() == 0
+        || target_logical.rows() == 0
+        || source_logical.cols() != coordinates
+        || target_physical.cols() != coordinates
+        || target_logical.cols() != coordinates
+        || source_physical.as_slice().iter().any(|&entry| entry > 1)
+        || source_logical.as_slice().iter().any(|&entry| entry > 1)
+        || target_physical.as_slice().iter().any(|&entry| entry > 1)
+        || target_logical.as_slice().iter().any(|&entry| entry > 1)
+    {
+        return Err(CssCoordinateEquivalenceError::Shape);
+    }
+    let action = ExplicitPermutationAction::new(coordinates, coordinate_images)?;
+    if action.generator_count() != 1 {
+        return Err(CssCoordinateEquivalenceError::Shape);
+    }
+    compile_permutation_orbits(&action)?;
+    let images = action
+        .images(0)
+        .ok_or(CssCoordinateEquivalenceError::Shape)?;
+
+    let permuted_source_physical = permute_binary_columns(source_physical, images)?;
+    let source_physical_basis = permuted_source_physical.canonical_row_basis::<2>()?;
+    let target_physical_basis = target_physical.canonical_row_basis::<2>()?;
+    if source_physical_basis != target_physical_basis {
+        return Err(CssCoordinateEquivalenceError::NotEquivalent);
+    }
+
+    let source_combined = joined_binary_rows(source_physical, source_logical)?;
+    let source_combined = permute_binary_columns(&source_combined, images)?;
+    let source_combined_basis = source_combined.canonical_row_basis::<2>()?;
+    let target_combined = joined_binary_rows(target_physical, target_logical)?;
+    let target_combined_basis = target_combined.canonical_row_basis::<2>()?;
+    if source_combined_basis != target_combined_basis {
+        return Err(CssCoordinateEquivalenceError::NotEquivalent);
+    }
+
+    Ok(CssCoordinateEquivalenceCertificate {
+        coordinate_count: u32::try_from(coordinates)
+            .map_err(|_| CssCoordinateEquivalenceError::Shape)?,
+        physical_rank: u32::try_from(source_physical_basis.rows())
+            .map_err(|_| CssCoordinateEquivalenceError::Shape)?,
+        observable_rank: u32::try_from(source_combined_basis.rows())
+            .map_err(|_| CssCoordinateEquivalenceError::Shape)?,
     })
 }
 
@@ -5118,6 +5218,66 @@ mod tests {
         assert!(matches!(
             verify_css_anchor_transversal(&physical, &logical, vec![0, 0, 2, 3], &[0, 2, 3]),
             Err(CssAnchorOrbitError::Orbit(
+                OrbitCompileError::NotPermutation { .. }
+            ))
+        ));
+    }
+
+    #[test]
+    fn css_coordinate_equivalence_checks_physical_and_observable_row_spaces() {
+        let source_physical = Matrix::new::<2>(
+            2,
+            4,
+            vec![
+                1, 1, 0, 0, //
+                0, 0, 1, 1,
+            ],
+        )
+        .unwrap();
+        let source_logical = Matrix::new::<2>(1, 4, vec![1, 0, 1, 0]).unwrap();
+        let target_physical = Matrix::new::<2>(
+            3,
+            4,
+            vec![
+                0, 0, 1, 1, //
+                1, 1, 0, 0, //
+                0, 0, 1, 1,
+            ],
+        )
+        .unwrap();
+        let target_logical = Matrix::new::<2>(1, 4, vec![1, 0, 1, 0]).unwrap();
+        let certificate = verify_css_coordinate_equivalence(
+            &source_physical,
+            &source_logical,
+            &target_physical,
+            &target_logical,
+            vec![2, 3, 0, 1],
+        )
+        .unwrap();
+        assert_eq!(certificate.coordinate_count(), 4);
+        assert_eq!(certificate.physical_rank(), 2);
+        assert_eq!(certificate.observable_rank(), 3);
+
+        let incompatible_logical = Matrix::new::<2>(1, 4, vec![1, 0, 0, 0]).unwrap();
+        assert!(matches!(
+            verify_css_coordinate_equivalence(
+                &source_physical,
+                &source_logical,
+                &target_physical,
+                &incompatible_logical,
+                vec![2, 3, 0, 1],
+            ),
+            Err(CssCoordinateEquivalenceError::NotEquivalent)
+        ));
+        assert!(matches!(
+            verify_css_coordinate_equivalence(
+                &source_physical,
+                &source_logical,
+                &target_physical,
+                &target_logical,
+                vec![0, 0, 2, 3],
+            ),
+            Err(CssCoordinateEquivalenceError::Orbit(
                 OrbitCompileError::NotPermutation { .. }
             ))
         ));
