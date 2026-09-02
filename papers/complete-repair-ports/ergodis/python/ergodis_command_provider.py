@@ -3,16 +3,15 @@
 from __future__ import annotations
 
 import asyncio
-from collections.abc import Mapping, Sequence
 import os
-from pathlib import Path
 import signal
 import tempfile
+from collections.abc import Mapping, Sequence
+from pathlib import Path
 from typing import BinaryIO
 
 from ergodis_client import ProposalFailure, ProtocolError
 from ergodis_provider import ProviderFailure, ProviderInvocation
-
 
 _CHUNK_BYTES = 64 * 1024
 
@@ -66,7 +65,8 @@ class CommandProvider:
                 ProposalFailure.PROTOCOL_FAULT,
                 "request artifact is not a bounded private regular file",
             )
-        output = tempfile.TemporaryFile(mode="w+b", dir=self.work_dir)
+        # Ownership transfers to the caller on success; the failure path below closes it.
+        output = tempfile.TemporaryFile(mode="w+b", dir=self.work_dir)  # noqa: SIM115
         stderr = bytearray()
         try:
             with request_path.open("rb") as request:
