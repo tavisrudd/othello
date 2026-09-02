@@ -1,4 +1,5 @@
 #[path = "../q29_mod9_parity_target.rs"]
+#[allow(dead_code)]
 mod parity_target;
 
 mod q29_mod9_lift {
@@ -13,13 +14,19 @@ use ergodis_private::{
     q29_mod9_generator::{generate_q29_mod9_rows_low_lift, Q29Mod9GeneratorWorkspace},
     q29_mod9_lift::{compile_q29_mod9_lift_fibre, Q29Mod9LiftWorkspace},
 };
-use parity_target::{sample_parity_targeted_q29_mod9_lift, Q29ParityTargetWorkspace};
+use parity_target::{
+    sample_parity_targeted_q29_mod9_lift_with_pool_limit, Q29ParityTargetWorkspace,
+};
 
 fn main() {
     let shells = std::env::args()
         .nth(1)
         .and_then(|value| value.parse::<u64>().ok())
         .unwrap_or(10_000);
+    let pool_limit = std::env::args()
+        .nth(2)
+        .and_then(|value| value.parse::<usize>().ok())
+        .unwrap_or(512);
     let mut generator = Q29Mod9GeneratorWorkspace::new().expect("fixed field setup");
     let mut lift = Q29Mod9LiftWorkspace::new();
     let mut parity = Q29ParityTargetWorkspace::new();
@@ -34,15 +41,21 @@ fn main() {
         }
         liftable += 1;
         let mut random = seed ^ 0x6a09_e667_f3bc_c909;
-        if let Some(witness) =
-            sample_parity_targeted_q29_mod9_lift(&generated.rows, &lift, &mut parity, &mut random)
-                .expect("targeted replay")
-        {
+        let witness = sample_parity_targeted_q29_mod9_lift_with_pool_limit(
+            &generated.rows,
+            &lift,
+            &mut parity,
+            &mut random,
+            pool_limit,
+        )
+        .expect("targeted replay");
+        if let Some(witness) = witness {
             hits += 1;
             checksum = checksum.wrapping_add(witness.rows[0][0] as u8 as u64);
         }
     }
     println!("shells={shells}");
+    println!("pool_limit={pool_limit}");
     println!("liftable_fibres={liftable}");
     println!("parity_target_hits={hits}");
     println!("target_workspace_bytes={}", parity.workspace_bytes());
@@ -76,10 +89,14 @@ mod tests {
         );
         let mut parity = Q29ParityTargetWorkspace::new();
         let mut random = 0x510e_527f_ade6_82d1;
-        let witness =
-            sample_parity_targeted_q29_mod9_lift(&residues, &lift, &mut parity, &mut random)
-                .unwrap()
-                .expect("bounded join hit");
+        let witness = parity_target::sample_parity_targeted_q29_mod9_lift(
+            &residues,
+            &lift,
+            &mut parity,
+            &mut random,
+        )
+        .unwrap()
+        .expect("bounded join hit");
         assert!(replay_q29_mod9_lift(&residues, &witness));
         let supports = witness.rows.map(|row| {
             row.iter()
