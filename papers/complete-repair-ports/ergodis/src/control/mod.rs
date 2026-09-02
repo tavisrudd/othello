@@ -31,8 +31,9 @@ use evolution::{
     MAX_EVOLUTION_TARGET_FIELDS,
 };
 pub use proposal_policy::{
-    select_proposer, CircuitBreaker, CircuitBreakerConfig, CircuitBreakerSnapshot, CircuitPermit,
-    DeadlineExceeded, DeadlineStage, ProposalCandidate, ProposalDeadlines, ProposalFailureClass,
+    charge_token_buckets, select_proposer, CircuitBreaker, CircuitBreakerConfig,
+    CircuitBreakerSnapshot, CircuitPermit, DeadlineExceeded, DeadlineStage,
+    HierarchicalTokenBucketError, ProposalCandidate, ProposalDeadlines, ProposalFailureClass,
     ProposalIdempotencyKey, ProposalRole, ProposalSelection, ProposalSelectionContext, RateLimit,
     RetryAction, RetryPolicy, TokenBucket, TokenBucketConfig, TokenBucketError,
     TokenBucketSnapshot,

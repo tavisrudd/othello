@@ -77,6 +77,18 @@ pub enum TokenBucketError {
     RateLimited(RateLimit),
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, thiserror::Error)]
+pub enum HierarchicalTokenBucketError {
+    #[error("hierarchical token-bucket costs do not match the bucket count")]
+    ShapeMismatch,
+    #[error("hierarchical token bucket {bucket_index} rejected the charge: {source}")]
+    Bucket {
+        bucket_index: usize,
+        #[source]
+        source: TokenBucketError,
+    },
+}
+
 #[derive(Clone, Debug)]
 pub struct TokenBucket {
     config: TokenBucketConfig,
@@ -127,12 +139,17 @@ impl TokenBucket {
     }
 
     pub fn try_take(&mut self, now_ms: u64, cost: u64) -> Result<(), TokenBucketError> {
+        self.preview_take(now_ms, cost)?;
+        self.state.tokens -= cost;
+        Ok(())
+    }
+
+    fn preview_take(&mut self, now_ms: u64, cost: u64) -> Result<(), TokenBucketError> {
         if cost == 0 {
             return Err(TokenBucketError::InvalidCost);
         }
         self.refill(now_ms)?;
         if self.state.tokens >= cost {
-            self.state.tokens -= cost;
             return Ok(());
         }
         let missing = cost - self.state.tokens;
@@ -179,6 +196,32 @@ impl TokenBucket {
         }
         Ok(())
     }
+}
+
+/// Atomically debit every applicable campaign/provider/session bucket.
+///
+/// Refills are observed at `now_ms` even when a later bucket rejects the
+/// request, but no token debit occurs unless every bucket admits its cost.
+pub fn charge_token_buckets(
+    buckets: &mut [TokenBucket],
+    costs: &[u64],
+    now_ms: u64,
+) -> Result<(), HierarchicalTokenBucketError> {
+    if buckets.len() != costs.len() {
+        return Err(HierarchicalTokenBucketError::ShapeMismatch);
+    }
+    for (bucket_index, (bucket, &cost)) in buckets.iter_mut().zip(costs).enumerate() {
+        bucket.preview_take(now_ms, cost).map_err(|source| {
+            HierarchicalTokenBucketError::Bucket {
+                bucket_index,
+                source,
+            }
+        })?;
+    }
+    for (bucket, &cost) in buckets.iter_mut().zip(costs) {
+        bucket.state.tokens -= cost;
+    }
+    Ok(())
 }
 
 fn validate_bucket_config(config: TokenBucketConfig) -> Result<(), ControlError> {
@@ -686,6 +729,39 @@ mod tests {
             Err(TokenBucketError::ClockReversed)
         );
         assert_eq!(bucket.snapshot(), before);
+    }
+
+    #[test]
+    fn hierarchical_token_charges_are_all_or_none() {
+        let config = TokenBucketConfig {
+            capacity: 10,
+            refill_units: 1,
+            refill_period_ms: 1_000,
+        };
+        let mut buckets = [
+            TokenBucket::full(config, 0).unwrap(),
+            TokenBucket::full(config, 0).unwrap(),
+        ];
+        buckets[1].try_take(0, 9).unwrap();
+        assert_eq!(
+            charge_token_buckets(&mut buckets, &[4, 2], 0),
+            Err(HierarchicalTokenBucketError::Bucket {
+                bucket_index: 1,
+                source: TokenBucketError::RateLimited(RateLimit {
+                    remaining: 1,
+                    retry_at_ms: 1_000,
+                }),
+            })
+        );
+        assert_eq!(buckets[0].snapshot().tokens, 10);
+        assert_eq!(buckets[1].snapshot().tokens, 1);
+        charge_token_buckets(&mut buckets, &[4, 1], 0).unwrap();
+        assert_eq!(buckets[0].snapshot().tokens, 6);
+        assert_eq!(buckets[1].snapshot().tokens, 0);
+        assert_eq!(
+            charge_token_buckets(&mut buckets, &[1], 0),
+            Err(HierarchicalTokenBucketError::ShapeMismatch)
+        );
     }
 
     #[test]

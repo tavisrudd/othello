@@ -295,7 +295,9 @@ files are disposable and may be deleted at any time.
    retry/backoff and provider-rate-limit handling; a single-probe circuit
    breaker; checked cost-aware proposer selection; and stable 32-byte
    idempotency keys binding session, request, and canonical payload. It remains
-   outside every solve path. Daemon ticket-ledger integration is still open.
+   outside every solve path. A follow-up all-or-none charge closes the gap
+   between advisory selection and atomic campaign/provider/session quota debit.
+   Daemon ticket-ledger integration is still open.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

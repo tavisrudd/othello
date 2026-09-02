@@ -377,9 +377,10 @@ concurrency, bytes, cost, circuit state, and deadline before comparing checked
 expected admitted work/reuse per cost plus a bounded exploration bonus.
 Duplicate proposer IDs, invalid probability scales, and score/comparison
 overflow fail closed. Stable logical-request idempotency keys bind session,
-request number, and canonical payload digest. Selection is advisory: the controller atomically charges
-every applicable hierarchical bucket before publishing the ticket and
-reselects if a charge fails. A hostile pass repaired clock reversal being mistaken
+request number, and canonical payload digest. Selection is advisory. The
+implemented all-or-none hierarchy first previews each campaign/provider/session
+bucket at one monotone timestamp and debits only after every weighted cost is
+admitted; the controller reselects if that charge fails. A hostile pass repaired clock reversal being mistaken
 for ordinary rate limiting and unchecked rational-score cross products.
 
 This is policy, not a new daemon operation. Persisted controller state,

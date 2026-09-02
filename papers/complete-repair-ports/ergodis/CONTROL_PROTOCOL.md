@@ -156,7 +156,10 @@ ranks eligible candidates by checked expected admitted work/reuse per cost plus
 an explicit bounded exploration bonus; duplicate IDs and arithmetic overflow
 fail closed. Selection reads a controller-owned token snapshot but does not
 debit it; ticket publication must first charge every applicable hierarchical
-bucket and reselect if any charge is denied.
+bucket and reselect if any charge is denied. `charge_token_buckets` implements
+that all-or-none debit: every bucket first observes the same monotone timestamp
+and previews its weighted cost, then tokens are subtracted only if all previews
+admit.
 
 `TokenBucket` uses caller-supplied monotone milliseconds, persists exact refill
 remainder, and distinguishes invalid time or cost from an ordinary rate-limit
