@@ -247,6 +247,14 @@ pub struct Q29TradeTablebaseReport {
     pub census_provenance: ProvenanceClass,
 }
 
+#[derive(Clone, Copy, Debug, Serialize, PartialEq, Eq)]
+pub struct Q29TradeOneTripleReport {
+    pub triple_states: [u32; BLOCKS],
+    pub pair_keys_built: u64,
+    pub probes: u64,
+    pub exact_repairs: u32,
+}
+
 #[repr(C)]
 #[derive(Clone, Copy)]
 struct Q29TradeApplication {
@@ -271,6 +279,8 @@ const Q29_TRADE_PAIR_TT_SLOTS: usize = 1 << 24;
 pub struct Q29TradeTablebaseWorkspace {
     local_deltas: [Vec<[i16; 16]>; BLOCKS],
     local_moves: [Vec<u16>; BLOCKS],
+    triple_deltas: Vec<[i16; 16]>,
+    triple_moves: Vec<u32>,
     pair_deltas: Vec<[i16; 16]>,
     pair_moves: Vec<u32>,
     slots: Vec<u32>,
@@ -282,6 +292,8 @@ impl Q29TradeTablebaseWorkspace {
         Self {
             local_deltas: std::array::from_fn(|_| Vec::with_capacity(Q29_TRADE_LOCAL_STATES)),
             local_moves: std::array::from_fn(|_| Vec::with_capacity(Q29_TRADE_LOCAL_STATES)),
+            triple_deltas: Vec::with_capacity(35_000),
+            triple_moves: Vec::with_capacity(35_000),
             pair_deltas: Vec::with_capacity(Q29_TRADE_LOCAL_STATES * Q29_TRADE_LOCAL_STATES),
             pair_moves: Vec::with_capacity(Q29_TRADE_LOCAL_STATES * Q29_TRADE_LOCAL_STATES),
             slots: vec![0; Q29_TRADE_PAIR_TT_SLOTS],
@@ -293,6 +305,8 @@ impl Q29TradeTablebaseWorkspace {
         self.local_deltas.iter().map(Vec::capacity).sum::<usize>()
             * std::mem::size_of::<[i16; 16]>()
             + self.local_moves.iter().map(Vec::capacity).sum::<usize>() * std::mem::size_of::<u16>()
+            + self.triple_deltas.capacity() * std::mem::size_of::<[i16; 16]>()
+            + self.triple_moves.capacity() * std::mem::size_of::<u32>()
             + self.pair_deltas.capacity() * std::mem::size_of::<[i16; 16]>()
             + self.pair_moves.capacity() * std::mem::size_of::<u32>()
             + self.slots.capacity() * std::mem::size_of::<u32>()
@@ -1107,6 +1121,197 @@ pub fn census_q29_trade_tablebase(
     ))
 }
 
+fn compile_trade_triples(
+    rows: &[[i8; Q29_ROW_LENGTH]; BLOCKS],
+    block: usize,
+    witness: Q29TradeWitness,
+    deltas: &mut Vec<[i16; 16]>,
+    moves: &mut Vec<u32>,
+) {
+    deltas.clear();
+    moves.clear();
+    let base: [i32; 15] = std::array::from_fn(|shift| row_correlation(&rows[block], shift));
+    for first in 0..Q29_TRADE_APPLICATIONS_PER_BLOCK {
+        for second in first..Q29_TRADE_APPLICATIONS_PER_BLOCK {
+            for third in second..Q29_TRADE_APPLICATIONS_PER_BLOCK {
+                let mut changed = rows[block];
+                for index in [first, second, third] {
+                    let application = trade_application(index, block);
+                    for point in 0..Q29_ROW_LENGTH {
+                        let source = (point + Q29_ROW_LENGTH
+                            - usize::from(application.translation))
+                            % Q29_ROW_LENGTH;
+                        let in_a = witness.a_mask & (1_u32 << source) != 0;
+                        let in_b = witness.b_mask & (1_u32 << source) != 0;
+                        changed[point] +=
+                            application.orientation * (i8::from(in_b) - i8::from(in_a));
+                    }
+                }
+                if changed.iter().any(|value| !(-9..=9).contains(value)) {
+                    continue;
+                }
+                deltas.push(std::array::from_fn(|shift| {
+                    if shift < 15 {
+                        (row_correlation(&changed, shift) - base[shift]) as i16
+                    } else {
+                        0
+                    }
+                }));
+                moves.push(first as u32 | ((second as u32) << 6) | ((third as u32) << 12));
+            }
+        }
+    }
+}
+
+fn build_trade_pair_tt(
+    first_block: usize,
+    second_block: usize,
+    workspace: &mut Q29TradeTablebaseWorkspace,
+) -> u32 {
+    workspace.pair_deltas.clear();
+    workspace.pair_moves.clear();
+    workspace.slots.fill(0);
+    for first in 0..workspace.local_deltas[first_block].len() {
+        for second in 0..workspace.local_deltas[second_block].len() {
+            let delta = std::array::from_fn(|index| {
+                workspace.local_deltas[first_block][first][index]
+                    + workspace.local_deltas[second_block][second][index]
+            });
+            let mut slot = trade_delta_hash(&delta) & (Q29_TRADE_PAIR_TT_SLOTS - 1);
+            loop {
+                let stored = workspace.slots[slot];
+                if stored == 0 {
+                    let index = workspace.pair_deltas.len();
+                    workspace.pair_deltas.push(delta);
+                    workspace
+                        .pair_moves
+                        .push(first as u32 | ((second as u32) << 16));
+                    workspace.slots[slot] = index as u32 + 1;
+                    break;
+                }
+                if workspace.pair_deltas[stored as usize - 1] == delta {
+                    break;
+                }
+                slot = (slot + 1) & (Q29_TRADE_PAIR_TT_SLOTS - 1);
+            }
+        }
+    }
+    workspace.pair_deltas.len() as u32
+}
+
+/// Extend the compositional trade tablebase to states with exactly three
+/// applications in one row and at most two in every other row.
+pub fn census_q29_trade_tablebase_one_triple(
+    rows: &[[i8; Q29_ROW_LENGTH]; BLOCKS],
+    witness: Q29TradeWitness,
+    workspace: &mut Q29TradeTablebaseWorkspace,
+) -> Result<
+    (
+        Q29TradeOneTripleReport,
+        Option<[[i8; Q29_ROW_LENGTH]; BLOCKS]>,
+    ),
+    Q29MomentError,
+> {
+    extract_q29_inventories(rows)?;
+    for block in 0..BLOCKS {
+        compile_trade_local_states(
+            rows,
+            block,
+            witness,
+            &mut workspace.local_deltas[block],
+            &mut workspace.local_moves[block],
+        );
+    }
+    let target: [i16; 16] = std::array::from_fn(|shift| {
+        if shift < 15 {
+            ((if shift == 0 { 505 } else { -18 }) - combined_correlation(rows, shift)) as i16
+        } else {
+            0
+        }
+    });
+    let mut report = Q29TradeOneTripleReport {
+        triple_states: [0; BLOCKS],
+        pair_keys_built: 0,
+        probes: 0,
+        exact_repairs: 0,
+    };
+    for triple_block in 0..BLOCKS {
+        compile_trade_triples(
+            rows,
+            triple_block,
+            witness,
+            &mut workspace.triple_deltas,
+            &mut workspace.triple_moves,
+        );
+        report.triple_states[triple_block] = workspace.triple_deltas.len() as u32;
+        let mut others = [0_usize; 3];
+        let mut used = 0;
+        for block in 0..BLOCKS {
+            if block != triple_block {
+                others[used] = block;
+                used += 1;
+            }
+        }
+        report.pair_keys_built += u64::from(build_trade_pair_tt(others[0], others[1], workspace));
+        for triple in 0..workspace.triple_deltas.len() {
+            for tail in 0..workspace.local_deltas[others[2]].len() {
+                report.probes += 1;
+                let desired: [i16; 16] = std::array::from_fn(|index| {
+                    target[index]
+                        - workspace.triple_deltas[triple][index]
+                        - workspace.local_deltas[others[2]][tail][index]
+                });
+                let mut slot = trade_delta_hash(&desired) & (Q29_TRADE_PAIR_TT_SLOTS - 1);
+                loop {
+                    let stored = workspace.slots[slot];
+                    if stored == 0 {
+                        break;
+                    }
+                    let pair_index = stored as usize - 1;
+                    if workspace.pair_deltas[pair_index] == desired {
+                        let pair = workspace.pair_moves[pair_index];
+                        let triple_code = workspace.triple_moves[triple];
+                        let mut candidate = *rows;
+                        for shift in [0, 6, 12] {
+                            let index = ((triple_code >> shift) & 63) as usize;
+                            let application = trade_application(index, triple_block);
+                            for point in 0..Q29_ROW_LENGTH {
+                                let source = (point + Q29_ROW_LENGTH
+                                    - usize::from(application.translation))
+                                    % Q29_ROW_LENGTH;
+                                let in_a = witness.a_mask & (1_u32 << source) != 0;
+                                let in_b = witness.b_mask & (1_u32 << source) != 0;
+                                candidate[triple_block][point] +=
+                                    application.orientation * (i8::from(in_b) - i8::from(in_a));
+                            }
+                        }
+                        let codes = [
+                            workspace.local_moves[others[0]][(pair & 0xffff) as usize],
+                            workspace.local_moves[others[1]][(pair >> 16) as usize],
+                            workspace.local_moves[others[2]][tail],
+                        ];
+                        if (0..3).all(|index| {
+                            apply_local_trade_code(
+                                &mut candidate,
+                                others[index],
+                                witness,
+                                codes[index],
+                            )
+                        }) && direct_exact_q29(&candidate)
+                        {
+                            report.exact_repairs = 1;
+                            return Ok((report, Some(candidate)));
+                        }
+                        break;
+                    }
+                    slot = (slot + 1) & (Q29_TRADE_PAIR_TT_SLOTS - 1);
+                }
+            }
+        }
+    }
+    Ok((report, None))
+}
+
 #[inline(always)]
 fn combined_correlation(rows: &[[i8; Q29_ROW_LENGTH]; BLOCKS], shift: usize) -> i32 {
     let mut correlation = 0_i32;
@@ -1338,6 +1543,25 @@ mod tests {
         });
         assert_eq!(allocations, 0);
         assert!(workspace.bytes() < 256 * 1024 * 1024);
+        assert_eq!(report.exact_repairs, u32::from(hit.is_some()));
+        if let Some(hit) = hit {
+            assert!(direct_exact_q29(&hit));
+        }
+    }
+
+    #[test]
+    fn one_triple_trade_tablebase_is_exact_and_allocation_free() {
+        let rows = retained_q29_y6_root();
+        let witness = detect_q29_six_point_trade(&extract_q29_residual(&rows).unwrap()).unwrap();
+        let mut workspace = Q29TradeTablebaseWorkspace::new();
+        let ((report, hit), allocations) = tracked_allocations(|| {
+            census_q29_trade_tablebase_one_triple(&rows, witness, &mut workspace).unwrap()
+        });
+        assert_eq!(allocations, 0);
+        assert_eq!(report.triple_states, [34_220, 34_220, 28_540, 34_220]);
+        assert_eq!(report.pair_keys_built, 11_379_176);
+        assert_eq!(report.probes, 224_900_920);
+        assert_eq!(report.exact_repairs, 0);
         assert_eq!(report.exact_repairs, u32::from(hit.is_some()));
         if let Some(hit) = hit {
             assert!(direct_exact_q29(&hit));

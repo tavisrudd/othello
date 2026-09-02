@@ -2,9 +2,9 @@ use std::{hint::black_box, thread};
 
 use ergodis_private::q29_even_moment_proof::{
     census_q29_single_swaps, census_q29_trade_quadruple_repairs, census_q29_trade_repairs,
-    census_q29_trade_tablebase, census_q29_trade_triple_repairs, detect_q29_six_point_trade,
-    extract_q29_even_moments, extract_q29_residual, retained_q29_y6_root,
-    Q29TradeTablebaseWorkspace,
+    census_q29_trade_tablebase, census_q29_trade_tablebase_one_triple,
+    census_q29_trade_triple_repairs, detect_q29_six_point_trade, extract_q29_even_moments,
+    extract_q29_residual, retained_q29_y6_root, Q29TradeTablebaseWorkspace,
 };
 
 const ORDER: usize = 29;
@@ -19,6 +19,7 @@ enum Mode {
     TripleTrade,
     QuadrupleTrade,
     TradeTablebase,
+    OneTripleTablebase,
 }
 
 fn main() {
@@ -31,8 +32,9 @@ fn main() {
         Some("triple-trade") => Mode::TripleTrade,
         Some("quadruple-trade") => Mode::QuadrupleTrade,
         Some("trade-tablebase") => Mode::TradeTablebase,
+        Some("one-triple-tablebase") => Mode::OneTripleTablebase,
         _ => {
-            panic!("usage: q29_even_moment_perf moment|direct|census|trade|triple-trade|quadruple-trade|trade-tablebase [iterations] [threads]")
+            panic!("usage: q29_even_moment_perf moment|direct|census|trade|triple-trade|quadruple-trade|trade-tablebase|one-triple-tablebase [iterations] [threads]")
         }
     };
     let iterations = args
@@ -126,6 +128,18 @@ fn main() {
                                 ^ u64::from(hit.is_some());
                         }
                     }
+                    Mode::OneTripleTablebase => {
+                        let mut workspace = Q29TradeTablebaseWorkspace::new();
+                        for _ in 0..iterations {
+                            let (report, hit) = black_box(census_q29_trade_tablebase_one_triple(
+                                black_box(&rows),
+                                black_box(witness),
+                                &mut workspace,
+                            ))
+                            .expect("one-triple tablebase");
+                            local ^= report.probes ^ u64::from(hit.is_some());
+                        }
+                    }
                 }
                 local
             }));
@@ -151,6 +165,16 @@ fn main() {
             .expect("trade-tablebase summary");
         eprintln!(
             "trade_tablebase_report={report:?} hit={} workspace_bytes={}",
+            hit.is_some(),
+            workspace.bytes()
+        );
+    }
+    if matches!(mode, Mode::OneTripleTablebase) {
+        let mut workspace = Q29TradeTablebaseWorkspace::new();
+        let (report, hit) = census_q29_trade_tablebase_one_triple(&rows, witness, &mut workspace)
+            .expect("one-triple-tablebase summary");
+        eprintln!(
+            "one_triple_tablebase_report={report:?} hit={} workspace_bytes={}",
             hit.is_some(),
             workspace.bytes()
         );

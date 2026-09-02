@@ -2937,6 +2937,15 @@ per row.  The exact scoped family misses, using 180,133,984 bytes,
 This is roughly two orders of magnitude less compute than brute-force four-
 application enumeration while covering a strictly larger compositional
 family.
+Allowing exactly three applications in any one row while the other rows retain
+at most two extends the same tablebase through as many as nine applications.
+The triple-row domains have `34220/34220/28540/34220` states; four exact
+pair-table builds retain 11,379,176 distinct keys and answer 224,900,920
+probes.  This larger scoped family also misses.  It uses 181,393,984 bytes,
+28,138,466,842 instructions, and 63,062,025,758 cycles with zero hot
+allocations.  The high cycles/instruction ratio identifies the expected TT
+latency boundary; further expansion should reduce keys or learn a tighter
+scope rather than merely enlarge the table.
 
 As a deliberately untrusted discovery control, bounded nonlinear SMT encoded
 all q29 equations and an L1 radius-six neighborhood.  The first form and a
