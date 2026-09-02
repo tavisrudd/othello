@@ -54,9 +54,13 @@ state = await ticket.status_async()
 ```
 
 Equivalent synchronous methods omit the `_async` suffix. Ticket objects expose
-status, claim, typed failure reporting, completion, cancellation, and retained
-result metadata; exact retries continue to use the original server-side
-resource envelope.
+status, claim, typed failure reporting, streamed completion, cancellation, and
+retained result artifacts; exact retries continue to use the original
+server-side resource envelope. `ticket.complete(attempt, binary_stream)` writes
+fixed-size chunks to the daemon-issued create-only upload path before sending
+the compact completion control message. The async form moves only that file I/O
+to a helper thread; it never materializes the result in a socket frame or one
+in-memory byte string.
 
 The `recovery_algorithms` package implements direct finite-field and
 combinatorial formulations. Its simple representations make it useful for

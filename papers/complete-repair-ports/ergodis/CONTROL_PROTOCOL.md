@@ -222,10 +222,19 @@ resource envelope, or relative timeout under the same identity fails closed.
 The corresponding `ergodisctl proposal-*` subcommands expose typed flags, so
 clients need not construct request JSON manually.
 
-The current ready result is compact metadata (digest and byte count), not a
-stored result payload. Rate-bucket state is process-local until campaign resume
-is implemented. Provider SDK code and autonomous provider selection remain
-outside the generic layer.
+Claiming a runnable attempt returns a deterministic run-relative upload path.
+The worker creates that private file and streams its bounded payload directly
+to disk; `proposal-worker-complete` then copies through one fixed 64 KiB buffer,
+computes the BLAKE3 digest and byte count itself, fsyncs, and publishes a
+read-only result by create-only hard link. The control frame never carries the
+payload, and provider-supplied result metadata has no authority. Result lookup
+re-hashes the retained file against the durable ticket before returning its
+run-relative path. Oversized, non-private, symlinked, missing, or changed files
+fail closed.
+
+Rate-bucket state is process-local until campaign resume is implemented.
+Provider SDK code and autonomous provider selection remain outside the generic
+layer.
 
 `ergodisctl evolve-start` accepts an optional direct seed JSONL file and up to
 eight repeated `--resume-evidence` paths.  A replay archive must match the

@@ -12,11 +12,12 @@ from dataclasses import dataclass
 from enum import StrEnum
 import io
 import json
+import os
 from pathlib import Path
 import socket
 import struct
 from types import MappingProxyType
-from typing import Any, Iterator, Mapping, Self, cast
+from typing import Any, BinaryIO, Iterator, Mapping, Self, cast
 
 
 SCHEMA = "ergodis-control-experimental-v0"
@@ -389,6 +390,8 @@ class ProposalTicketView:
     usage: Mapping[str, Any]
     claim: Mapping[str, Any] | None = None
     action: Mapping[str, Any] | str | None = None
+    upload_relative_path: Path | None = None
+    artifact: Mapping[str, Any] | None = None
 
     @classmethod
     def from_result(cls, result: Mapping[str, Any]) -> Self:
@@ -411,12 +414,26 @@ class ProposalTicketView:
             if isinstance(action_value, dict)
             else action_value
         )
+        upload_value = result.get("upload_relative_path")
+        if upload_value is not None and (
+            not isinstance(upload_value, str) or not upload_value
+        ):
+            raise ProtocolError("proposal upload path is invalid")
+        artifact_value = result.get("artifact")
+        if artifact_value is not None and not isinstance(artifact_value, dict):
+            raise ProtocolError("proposal artifact is not an object")
         return cls(
             ticket_key,
             MappingProxyType(dict(ticket)),
             MappingProxyType(dict(usage)),
             claim,
             action,
+            None if upload_value is None else Path(upload_value),
+            (
+                None
+                if artifact_value is None
+                else MappingProxyType(dict(cast(Mapping[str, Any], artifact_value)))
+            ),
         )
 
 
@@ -625,24 +642,28 @@ class ProposalTicket:
             ).result
         )
 
-    def complete(
-        self, attempt: int, result_blake3: str, result_bytes: int
-    ) -> ProposalTicketView:
+    def complete(self, attempt: int, source: BinaryIO) -> ProposalTicketView:
+        """Stream a result artifact and durably complete this attempt."""
+        claimed = self.claim()
+        self._stage_result(attempt, source, claimed)
         return ProposalTicketView.from_result(
             self.session.client.request(
                 "proposal-worker-complete",
-                self._completion_arguments(attempt, result_blake3, result_bytes),
+                self._completion_arguments(attempt),
             ).result
         )
 
     async def complete_async(
-        self, attempt: int, result_blake3: str, result_bytes: int
+        self, attempt: int, source: BinaryIO
     ) -> ProposalTicketView:
+        """Asynchronously claim, stream off-loop, and complete this attempt."""
+        claimed = await self.claim_async()
+        await asyncio.to_thread(self._stage_result, attempt, source, claimed)
         return ProposalTicketView.from_result(
             (
                 await self.session.client.request_async(
                     "proposal-worker-complete",
-                    self._completion_arguments(attempt, result_blake3, result_bytes),
+                    self._completion_arguments(attempt),
                 )
             ).result
         )
@@ -684,15 +705,55 @@ class ProposalTicket:
             "provider_retry_after_ms": retry_after,
         }
 
-    def _completion_arguments(
-        self, attempt: int, result_blake3: str, result_bytes: int
-    ) -> Mapping[str, Any]:
+    def _completion_arguments(self, attempt: int) -> Mapping[str, Any]:
         return {
             **self._identity_arguments(),
             "attempt": _bounded_int(attempt, "attempt", 0, 255),
-            "result_blake3": _validate_digest(result_blake3),
-            "result_bytes": _bounded_int(result_bytes, "result_bytes", 0, _U64_MAX),
         }
+
+    def _stage_result(
+        self, attempt: int, source: BinaryIO, claimed: ProposalTicketView
+    ) -> None:
+        claim = claimed.claim
+        if claim is None or claim.get("kind") not in {"started", "busy"}:
+            raise ProtocolError("proposal attempt is not claimable")
+        claim_attempt = claim.get("attempt")
+        if isinstance(claim_attempt, bool) or claim_attempt != attempt:
+            raise ProtocolError("proposal claim names a different attempt")
+        relative_path = claimed.upload_relative_path
+        if relative_path is None:
+            raise ProtocolError("proposal claim omitted its upload path")
+        spec = _required_mapping(claimed.ticket, "spec")
+        maximum_bytes = _positive_int(spec.get("max_return_bytes"), "max_return_bytes")
+        destination = _confined_run_path(self.session.client.run_dir, relative_path)
+        descriptor = os.open(
+            destination,
+            os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
+            0o600,
+        )
+        total = 0
+        try:
+            with os.fdopen(descriptor, "wb", buffering=0) as output:
+                while chunk := source.read(64 * 1024):
+                    total += len(chunk)
+                    if total > maximum_bytes:
+                        raise ProtocolError("proposal result exceeds ticket byte bound")
+                    output.write(chunk)
+                output.flush()
+                os.fsync(output.fileno())
+        except BaseException:
+            destination.unlink(missing_ok=True)
+            raise
+
+
+def _confined_run_path(run_dir: Path, relative_path: Path) -> Path:
+    if relative_path.is_absolute():
+        raise ProtocolError("proposal artifact path must be run-relative")
+    destination = run_dir / relative_path
+    parent = destination.parent.resolve()
+    if parent != run_dir and run_dir not in parent.parents:
+        raise ProtocolError("proposal artifact path escapes run directory")
+    return parent / destination.name
 
 
 def _required_string(value: Mapping[str, Any], key: str) -> str:

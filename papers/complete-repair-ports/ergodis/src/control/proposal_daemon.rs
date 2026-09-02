@@ -1,11 +1,11 @@
 //! Typed campaign-daemon operations for bounded external proposers.
 
 use super::{
-    charge_token_buckets, random_hex, ControlError, ProposalDeadlines, ProposalFailureClass,
-    ProposalFailureReport, ProposalIdempotencyKey, ProposalRole, ProposalSession,
-    ProposalSessionLimits, ProposalSessionUsage, ProposalSubmissionStore, ProposalTicketClaim,
-    ProposalTicketSnapshot, ProposalTicketSpec, ProposalTicketSubmission, RetryAction, RetryPolicy,
-    TokenBucket, TokenBucketConfig,
+    charge_token_buckets, random_hex, ControlError, ProposalArtifactStore, ProposalDeadlines,
+    ProposalFailureClass, ProposalFailureReport, ProposalIdempotencyKey, ProposalRole,
+    ProposalSession, ProposalSessionLimits, ProposalSessionUsage, ProposalSubmissionStore,
+    ProposalTicketClaim, ProposalTicketSnapshot, ProposalTicketSpec, ProposalTicketStatus,
+    ProposalTicketSubmission, RetryAction, RetryPolicy, TokenBucket, TokenBucketConfig,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
@@ -108,8 +108,6 @@ pub struct ProposalCompleteRequest {
     pub session_id: String,
     pub ticket_key: String,
     pub attempt: u8,
-    pub result_blake3: String,
-    pub result_bytes: u64,
 }
 
 #[derive(Clone, Debug, Deserialize)]
@@ -125,6 +123,15 @@ pub struct ProposalTicketView {
     pub ticket_key: String,
     pub ticket: ProposalTicketSnapshot,
     pub usage: ProposalSessionUsage,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub artifact: Option<ProposalArtifactView>,
+}
+
+#[derive(Clone, Debug, Serialize)]
+pub struct ProposalArtifactView {
+    pub relative_path: PathBuf,
+    pub blake3: String,
+    pub bytes: u64,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -141,6 +148,8 @@ pub struct ProposalClaimed {
     pub claim: ProposalTicketClaim,
     pub ticket: ProposalTicketSnapshot,
     pub usage: ProposalSessionUsage,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub upload_relative_path: Option<PathBuf>,
 }
 
 struct ControllerClock {
@@ -194,6 +203,7 @@ pub struct ProposalDaemon {
     source_fingerprint: [u8; 32],
     clock: ControllerClock,
     retry_policy: RetryPolicy,
+    artifacts: ProposalArtifactStore,
     campaign_rate: TokenBucket,
     providers: BTreeMap<u16, TokenBucket>,
     sessions: BTreeMap<String, DaemonSession>,
@@ -220,6 +230,16 @@ impl ProposalDaemon {
         }
         let mut clock = ControllerClock::new()?;
         let now_ms = clock.now_ms()?;
+        let artifacts = ProposalArtifactStore::create(
+            root.parent().ok_or_else(|| {
+                ControlError::Invalid("proposal root has no run directory".into())
+            })?,
+            &root
+                .parent()
+                .ok_or_else(|| ControlError::Invalid("proposal root has no run directory".into()))?
+                .join("proposal-artifacts"),
+        )
+        .map_err(invalid)?;
         Ok(Self {
             root: root.to_path_buf(),
             run_id: run_id.into(),
@@ -231,6 +251,7 @@ impl ProposalDaemon {
                 base_delay_ms: 250,
                 maximum_delay_ms: 30_000,
             },
+            artifacts,
             campaign_rate: TokenBucket::full(CAMPAIGN_RATE, now_ms)?,
             providers: BTreeMap::new(),
             sessions: BTreeMap::new(),
@@ -252,6 +273,9 @@ impl ProposalDaemon {
             .checked_add(request.ttl_ms)
             .ok_or_else(|| ControlError::Invalid("session expiry overflow".into()))?;
         let session_id = random_hex(16)?;
+        self.artifacts
+            .create_session(&session_id)
+            .map_err(invalid)?;
         let session_binding = session_binding(
             &self.run_id,
             &self.nonce,
@@ -399,11 +423,25 @@ impl ProposalDaemon {
         let session = self.session_mut(&request.session_id)?;
         let claim = session.store.claim(key, now_ms).map_err(invalid)?;
         let view = view(key, &session.store)?;
+        let attempt = match claim {
+            ProposalTicketClaim::Started { attempt } | ProposalTicketClaim::Busy { attempt } => {
+                Some(attempt)
+            }
+            ProposalTicketClaim::Deferred { .. } | ProposalTicketClaim::Terminal { .. } => None,
+        };
+        let upload_relative_path = attempt
+            .map(|attempt| {
+                self.artifacts
+                    .upload_relative_path(&request.session_id, key, attempt)
+            })
+            .transpose()
+            .map_err(invalid)?;
         Ok(ProposalClaimed {
             ticket_key: view.ticket_key,
             claim,
             ticket: view.ticket,
             usage: view.usage,
+            upload_relative_path,
         })
     }
 
@@ -458,13 +496,44 @@ impl ProposalDaemon {
     ) -> Result<ProposalTicketView, ControlError> {
         let now_ms = self.clock.now_ms()?;
         let key = ProposalIdempotencyKey::from_hex(&request.ticket_key)?;
-        let digest = parse_digest(&request.result_blake3, "proposal result digest")?;
+        let maximum_bytes =
+            {
+                let session = self.sessions.get(&request.session_id).ok_or_else(|| {
+                    ControlError::Invalid("unknown external proposer session".into())
+                })?;
+                let ticket = session.store.tickets().get(key).ok_or_else(|| {
+                    ControlError::Invalid("unknown external proposal ticket".into())
+                })?;
+                match ticket.status {
+                    ProposalTicketStatus::Running { attempt, .. }
+                    | ProposalTicketStatus::Ready { attempt, .. }
+                        if attempt == request.attempt => {}
+                    _ => {
+                        return Err(ControlError::Invalid(
+                            "proposal completion does not name the active attempt".into(),
+                        ));
+                    }
+                }
+                ticket.spec.max_return_bytes
+            };
+        let artifact = self
+            .artifacts
+            .publish(&request.session_id, key, request.attempt, maximum_bytes)
+            .map_err(invalid)?;
         let session = self.session_mut(&request.session_id)?;
         session
             .store
-            .complete(key, request.attempt, digest, request.result_bytes, now_ms)
+            .complete(
+                key,
+                request.attempt,
+                artifact.blake3,
+                artifact.bytes,
+                now_ms,
+            )
             .map_err(invalid)?;
-        view(key, &session.store)
+        let mut view = view(key, &session.store)?;
+        view.artifact = Some(artifact_view(artifact));
+        Ok(view)
     }
 
     pub fn cancel(
@@ -484,9 +553,31 @@ impl ProposalDaemon {
     ) -> Result<ProposalTicketView, ControlError> {
         let now_ms = self.clock.now_ms()?;
         let key = ProposalIdempotencyKey::from_hex(&request.ticket_key)?;
+        let (ready, maximum_bytes) = {
+            let session = self.session_mut(&request.session_id)?;
+            let ready = session.store.result(key, now_ms).map_err(invalid)?;
+            let maximum_bytes = session
+                .store
+                .tickets()
+                .get(key)
+                .ok_or_else(|| ControlError::Invalid("unknown external proposal ticket".into()))?
+                .spec
+                .max_return_bytes;
+            (ready, maximum_bytes)
+        };
+        let artifact = self
+            .artifacts
+            .inspect(
+                &request.session_id,
+                key,
+                maximum_bytes,
+                Some((ready.result_blake3, ready.result_bytes)),
+            )
+            .map_err(invalid)?;
         let session = self.session_mut(&request.session_id)?;
-        session.store.result(key, now_ms).map_err(invalid)?;
-        view(key, &session.store)
+        let mut view = view(key, &session.store)?;
+        view.artifact = Some(artifact_view(artifact));
+        Ok(view)
     }
 
     pub fn reserve_revision(
@@ -566,7 +657,16 @@ fn view(
         ticket_key: key.to_hex(),
         ticket,
         usage: store.session().map_err(invalid)?.usage(),
+        artifact: None,
     })
+}
+
+fn artifact_view(artifact: super::ProposalArtifact) -> ProposalArtifactView {
+    ProposalArtifactView {
+        relative_path: artifact.relative_path,
+        blake3: blake3::Hash::from(artifact.blake3).to_hex().to_string(),
+        bytes: artifact.bytes,
+    }
 }
 
 fn same_logical_submission(
@@ -688,6 +788,9 @@ fn invalid(error: impl std::fmt::Display) -> ControlError {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::fs::OpenOptions;
+    use std::io::Write;
+    use std::os::unix::fs::OpenOptionsExt;
 
     fn offer() -> ProposalSessionOpenRequest {
         ProposalSessionOpenRequest {
@@ -747,17 +850,27 @@ mod tests {
             claim.claim,
             ProposalTicketClaim::Started { attempt: 0 }
         ));
+        let upload = temporary
+            .path()
+            .join(claim.upload_relative_path.as_ref().unwrap());
+        let mut output = OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .mode(0o600)
+            .open(upload)
+            .unwrap();
+        output.write_all(b"result").unwrap();
+        output.sync_all().unwrap();
         let completed = daemon
             .complete(ProposalCompleteRequest {
                 session_id: opened.session_id,
                 ticket_key: submitted.ticket_key,
                 attempt: 0,
-                result_blake3: blake3::hash(b"result").to_hex().to_string(),
-                result_bytes: 12,
             })
             .unwrap();
         assert_eq!(completed.usage.outstanding, 0);
         assert_eq!(completed.usage.charged_work_units, 5);
+        assert_eq!(completed.artifact.unwrap().bytes, 6);
     }
 
     #[test]

@@ -391,10 +391,6 @@ enum Command {
         ticket: String,
         #[arg(long)]
         attempt: u8,
-        #[arg(long)]
-        result_blake3: String,
-        #[arg(long)]
-        result_bytes: u64,
     },
     /// Cancel one proposal ticket idempotently.
     ProposalCancel {
@@ -776,16 +772,12 @@ fn main() -> Result<()> {
             session,
             ticket,
             attempt,
-            result_blake3,
-            result_bytes,
         } => (
             "proposal-worker-complete",
             json!({
                 "session_id": session,
                 "ticket_key": ticket,
                 "attempt": attempt,
-                "result_blake3": result_blake3,
-                "result_bytes": result_bytes,
             }),
         ),
         Command::ProposalCancel { session, ticket } => (

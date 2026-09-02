@@ -20,6 +20,7 @@ use std::time::Duration;
 
 mod client;
 mod evolution;
+mod proposal_artifact;
 mod proposal_daemon;
 mod proposal_policy;
 mod proposal_session;
@@ -37,12 +38,13 @@ use evolution::{
     EvolutionSeed, EvolutionTargetAccumulator, EvolutionTargetProfile, EvolutionTargetStrategy,
     MAX_EVOLUTION_TARGET_FIELDS,
 };
+pub use proposal_artifact::{ProposalArtifact, ProposalArtifactError, ProposalArtifactStore};
 pub use proposal_daemon::{
-    ProposalClaimed, ProposalCompleteRequest, ProposalDaemon, ProposalFailureAccepted,
-    ProposalFailureRequest, ProposalRevisionRequest, ProposalSessionOpenRequest,
-    ProposalSessionOpened, ProposalSubmitRequest, ProposalSubmitted, ProposalTicketRequest,
-    ProposalTicketView, MAX_EXTERNAL_OPERATION_TTL_MS, MAX_EXTERNAL_PROPOSAL_SESSIONS,
-    MAX_EXTERNAL_SESSION_OUTSTANDING, MAX_EXTERNAL_SESSION_QUERIES,
+    ProposalArtifactView, ProposalClaimed, ProposalCompleteRequest, ProposalDaemon,
+    ProposalFailureAccepted, ProposalFailureRequest, ProposalRevisionRequest,
+    ProposalSessionOpenRequest, ProposalSessionOpened, ProposalSubmitRequest, ProposalSubmitted,
+    ProposalTicketRequest, ProposalTicketView, MAX_EXTERNAL_OPERATION_TTL_MS,
+    MAX_EXTERNAL_PROPOSAL_SESSIONS, MAX_EXTERNAL_SESSION_OUTSTANDING, MAX_EXTERNAL_SESSION_QUERIES,
     MAX_EXTERNAL_SESSION_RETURN_BYTES, MAX_EXTERNAL_SESSION_REVISIONS, MAX_EXTERNAL_SESSION_TTL_MS,
     MAX_EXTERNAL_SESSION_WORK_UNITS,
 };
@@ -3477,6 +3479,17 @@ mod tests {
         .unwrap();
         assert!(claimed.ok);
         assert_eq!(claimed.result["claim"]["kind"], "started");
+        let upload = manifest
+            .run_dir
+            .join(claimed.result["upload_relative_path"].as_str().unwrap());
+        let mut output = OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .mode(0o600)
+            .open(upload)
+            .unwrap();
+        output.write_all(b"result").unwrap();
+        output.sync_all().unwrap();
         let completed = send_request(
             &manifest,
             "proposal-worker-complete",
@@ -3484,8 +3497,6 @@ mod tests {
                 "session_id": session_id,
                 "ticket_key": ticket_key,
                 "attempt": 0,
-                "result_blake3": blake3::hash(b"result").to_hex().to_string(),
-                "result_bytes": 12,
             }),
             16 * 1024,
         )
@@ -3501,6 +3512,7 @@ mod tests {
         .unwrap();
         assert!(fetched.ok);
         assert_eq!(fetched.result["ticket"]["status"]["state"], "ready");
+        assert_eq!(fetched.result["artifact"]["bytes"], 6);
 
         send_request(&manifest, "shutdown", json!({}), 4096).unwrap();
         server.join().unwrap();

@@ -2670,11 +2670,18 @@ files are disposable and may be deleted at any time.
     `StrEnum` roles/failures, local resource-envelope validation, synchronous
     methods, and native `asyncio` Unix-socket methods. Its transport shares one
     request builder and one strict response validator, retaining bounded frames
-    and monotone IDs. Twelve Python 3.14 tests, including a live async socket
-    handshake, Ruff check/format, and strict Pyright on the binding pass. The
-    next slice is durable rate snapshots and actual
-    compact-result artifact delivery; no provider SDK or autonomous adapter is
-    claimed yet.
+    and monotone IDs. Fourteen Python 3.14 tests, including a live async socket
+    handshake and bounded artifact streaming, Ruff check/format, and strict
+    Pyright on the binding pass. Compact-result delivery is now implemented:
+    claim returns a confined create-only upload path; Python streams into it in
+    fixed chunks; and the daemon independently caps, hashes, fsyncs, and
+    publishes a read-only result artifact through a fixed 64 KiB buffer. The
+    payload never enters a JSON frame or whole-memory buffer, and result fetch
+    revalidates it against durable ticket metadata. Symlink, path-escape,
+    permissions, oversize, stale-attempt, and metadata-mismatch cases fail
+    closed. The next slice is durable rate snapshots and an actual
+    provider-neutral adapter; no provider SDK or autonomous adapter is claimed
+    yet.
 
     The first new proposer family is accepted. A coloured-Tanner isomorphism
     proposal between the official LP1768 X/Z instances is independently

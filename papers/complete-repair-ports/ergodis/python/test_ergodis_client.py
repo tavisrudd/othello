@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import asyncio
+import io
 import json
 from pathlib import Path
 import socket
@@ -11,12 +12,14 @@ import unittest
 from unittest.mock import patch
 
 from ergodis_client import (
+    ExternalProposalSession,
     MAX_FRAME_BYTES,
     SCHEMA,
     ProtocolError,
     ProposalRole,
     ProposalSessionOffer,
     ProposalTicket,
+    ProposalTicketView,
     RemoteError,
     Response,
     Session,
@@ -51,8 +54,12 @@ class ErgodisClientTest(unittest.TestCase):
         }
         claimed = {
             **submitted,
-            "ticket": {"status": {"state": "running"}},
+            "ticket": {
+                "spec": {"max_return_bytes": 50},
+                "status": {"state": "running"},
+            },
             "claim": {"kind": "started", "attempt": 0},
+            "upload_relative_path": "proposal-artifacts/incoming/session-1/upload",
         }
         with patch.object(
             session,
@@ -96,6 +103,109 @@ class ErgodisClientTest(unittest.TestCase):
             )
         with self.assertRaises(TypeError):
             ticket.report_failure(0, "malformed")  # type: ignore[arg-type]
+
+    def test_proposal_result_streams_to_claimed_file_before_completion(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            incoming = root / "proposal-artifacts" / "incoming" / "session-1"
+            incoming.mkdir(parents=True)
+            session = Session(root, root / "unused.sock", "run", "nonce")
+            submitted = {
+                "ticket_key": "b" * 64,
+                "ticket": {
+                    "spec": {"max_return_bytes": 12},
+                    "status": {"state": "queued"},
+                },
+                "usage": {},
+            }
+            claimed = {
+                **submitted,
+                "ticket": {
+                    "spec": {"max_return_bytes": 12},
+                    "status": {"state": "running"},
+                },
+                "claim": {"kind": "busy", "attempt": 0},
+                "upload_relative_path": (
+                    "proposal-artifacts/incoming/session-1/result.upload"
+                ),
+            }
+            completed = {
+                **submitted,
+                "ticket": {
+                    "spec": {"max_return_bytes": 12},
+                    "status": {"state": "ready"},
+                },
+                "artifact": {
+                    "relative_path": "proposal-artifacts/results/session-1/result",
+                    "blake3": "c" * 64,
+                    "bytes": 12,
+                },
+            }
+            ticket = ProposalTicket(
+                ExternalProposalSession(
+                    session,
+                    "session-1",
+                    "a" * 64,
+                    {},
+                    {},
+                ),
+                ProposalTicketView.from_result(submitted),
+            )
+            with patch.object(
+                session,
+                "request",
+                side_effect=[Response(1, 0, claimed), Response(2, 0, completed)],
+            ) as request:
+                view = ticket.complete(0, io.BytesIO(b"bounded data"))
+            self.assertEqual((incoming / "result.upload").read_bytes(), b"bounded data")
+            self.assertEqual(view.artifact["bytes"], 12)
+            self.assertEqual(request.call_args_list[1].args[1]["attempt"], 0)
+            self.assertNotIn("result_blake3", request.call_args_list[1].args[1])
+
+    def test_proposal_result_bound_and_path_escape_fail_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            incoming = root / "proposal-artifacts" / "incoming" / "session-1"
+            incoming.mkdir(parents=True)
+            session = Session(root, root / "unused.sock", "run", "nonce")
+            ticket = ProposalTicket(
+                ExternalProposalSession(session, "session-1", "a" * 64, {}, {}),
+                ProposalTicketView.from_result(
+                    {
+                        "ticket_key": "b" * 64,
+                        "ticket": {
+                            "spec": {"max_return_bytes": 4},
+                            "status": {"state": "queued"},
+                        },
+                        "usage": {},
+                    }
+                ),
+            )
+            base = {
+                "ticket_key": ticket.key,
+                "ticket": {
+                    "spec": {"max_return_bytes": 4},
+                    "status": {"state": "running"},
+                },
+                "usage": {},
+                "claim": {"kind": "started", "attempt": 0},
+            }
+            for path, source in (
+                ("proposal-artifacts/incoming/session-1/large", b"12345"),
+                ("../escape", b"ok"),
+            ):
+                with (
+                    self.subTest(path=path),
+                    patch.object(
+                        session,
+                        "request",
+                        return_value=Response(
+                            1, 0, base | {"upload_relative_path": path}
+                        ),
+                    ),
+                    self.assertRaises(ProtocolError),
+                ):
+                    ticket.complete(0, io.BytesIO(source))
 
     def test_language_neutral_wire_fixture_is_exact(self) -> None:
         fixture_path = (
