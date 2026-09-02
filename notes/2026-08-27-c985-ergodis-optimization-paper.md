@@ -4273,13 +4273,21 @@ rank pruning power against coordinate scope and cheaply retry promising
 subsets while the same binary remains live.  Multiword, duplicate-index,
 out-of-range, and transitive-union controls pass the full public gate.
 
+Commit `07d849b88` closes the zero-conjunction proposer primitive without
+adding a quadratic pair bank or changing the serialized term schema.  A
+canonical pair of persisted feature IDs is scored as the wordwise intersection
+of their zero bitmaps; the intersection is never materialized, arithmetic
+cannot overflow, and repeated pair scoring remains allocation-free.  The
+scope bank ranks the pair by the POPCNT of its unioned input dependencies.
+Controls show two individually loose necessary predicates becoming an exact
+conjunction, plus zero allocation across repeated singleton and pair scoring.
+
 Relative to Fable's A.3 ledger, items 1, 2 (first affine symbolic form), 3, 7,
 and 8 are now landed; the persistent typed representation and injection bridge
 underlying them are also complete.  Item 5's invariant-first ordering exists
 at the generic ranking/admission seam but is not yet the daemon default.  The
 highest-value uncovered reusable slices are therefore: (a) a daemon adapter
-over the one runner-neutral engine, (b) zero-conjunction proposals over the
-new scope bank, and (c) the
+over the one runner-neutral engine and (b) the
 real raw-orbit and basin-obstruction private gates.  Broad file/module moves,
 API-facade cleanup, and private-bin consolidation remain architectural debt;
 they must not be mixed into these narrowly validated evolve commits.
