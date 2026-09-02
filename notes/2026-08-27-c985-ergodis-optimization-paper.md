@@ -4861,3 +4861,15 @@ matrices replay against the transition. Both nested layers forbid proof authorit
 closes restartability for learned coordinate programs without conflating feature
 reproducibility with theorem soundness; the theorem archive, bundle, and eventual proof
 artifact retain separate identities and validation paths.
+
+The C1015 aggregation friction now has a reusable public substrate rather than a
+problem-specific conclusion. A bounded `GroupAggregationPlan` compiles canonical
+field scopes and permutation-invariant operations—sum, sum of squares, extrema,
+value multiplicity, equal-pair count, and distinct count—then evaluates one row or
+a row batch into caller-owned storage. This exposes relations across a bounded family
+of residual objects that the flat scalar grammar could express only through a long,
+ordering-sensitive expression. The plan has a validated versioned snapshot, hard
+input/group/member/output caps, checked arithmetic, no recursion, and a zero-allocation
+repeated-evaluation gate. A seven-member control is invariant under permutation and
+replays the exact aggregate vector. These are candidate coordinates only: they feed
+the existing diagnostic archive and held-out checks but acquire no pruning authority.
