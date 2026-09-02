@@ -43,8 +43,8 @@ def main() -> int:
     if len(records) != 1:
         raise RuntimeError("expected exactly one retained evidence record")
     record = records[0]
-    result = record["result"]
     if record["schema"] == "ergodis-css-distance-random-is-v1":
+        result = record["result"]
         distance = result["distance_upper_bound"]
         witness = result["witness"]
         logical = replay_witness(problem, distance, witness)
@@ -68,12 +68,44 @@ def main() -> int:
         }
         print(json.dumps(output, separators=(",", ":"), sort_keys=True))
         return 0
+    if record["schema"] == "ergodis-private-css-bp-osd-spike-v2":
+        distance = record["best_weight"]
+        witness = record["best_support"]
+        logical = replay_witness(problem, distance, witness)
+        if record["label"] != problem["label"]:
+            raise RuntimeError("BP+OSD evidence/input label mismatch")
+        if record["coordinate_count"] != problem["coordinate_count"]:
+            raise RuntimeError("BP+OSD evidence/input coordinate mismatch")
+        if record["physical_checks"] != len(problem["physical_checks"]):
+            raise RuntimeError("BP+OSD physical-check count mismatch")
+        if record["logical_observations"] != len(problem["logical_observations"]):
+            raise RuntimeError("BP+OSD logical-observation count mismatch")
+        attempted = record["attempted"]
+        replayed = record["independently_replayed"]
+        if attempted <= 0 or not 0 < replayed <= attempted:
+            raise RuntimeError("BP+OSD replay counts are invalid")
+        if record["best_target"] is None or not 0 <= record["best_target"] < len(
+            problem["logical_observations"]
+        ):
+            raise RuntimeError("BP+OSD target index is invalid")
+        output = {
+            "schema": "ergodis-bp-osd-check-v1",
+            "label": problem["label"],
+            "distance_upper_bound": distance,
+            "physical_syndrome_zero": True,
+            "logical_observation": logical,
+            "attempted": attempted,
+            "independently_replayed": replayed,
+        }
+        print(json.dumps(output, separators=(",", ":"), sort_keys=True))
+        return 0
     native_schema = record["schema"]
     if native_schema not in {
         "ergodis-css-distance-native-v3",
         "ergodis-css-distance-native-v6",
     }:
         raise RuntimeError("unknown evidence schema")
+    result = record["result"]
     if native_schema == "ergodis-css-distance-native-v6":
         if record.get("completion_status") != "complete":
             raise RuntimeError("native evidence is not a completed search")

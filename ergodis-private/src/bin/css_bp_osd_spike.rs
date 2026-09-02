@@ -2,7 +2,8 @@ use anyhow::{bail, Context, Result};
 use clap::{Parser, ValueEnum};
 use ergodis::bp_osd::{BinaryParityCheck, BpOsdConfig, BpOsdWorkspace, OsdMethod};
 use serde::{Deserialize, Serialize};
-use std::fs;
+use std::fs::{self, OpenOptions};
+use std::io::Write;
 use std::path::PathBuf;
 use std::time::Instant;
 
@@ -31,6 +32,9 @@ struct Args {
     error_rate: f64,
     #[arg(long, default_value_t = 0.625)]
     min_sum_scale: f64,
+    /// Create a one-record JSONL evidence file after the decode wave.
+    #[arg(long)]
+    evidence: Option<PathBuf>,
 }
 
 #[derive(Clone, Copy, Debug, ValueEnum)]
@@ -381,7 +385,23 @@ fn main() -> Result<()> {
         candidate_checksum: total.candidate_checksum,
         elapsed_seconds,
     };
-    println!("{}", serde_json::to_string(&report)?);
+    let encoded = serde_json::to_vec(&report)?;
+    let mut stdout = std::io::stdout().lock();
+    stdout.write_all(&encoded)?;
+    stdout.write_all(b"\n")?;
+    if let Some(path) = &args.evidence {
+        let mut output = OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(path)
+            .with_context(|| format!("creating evidence file {}", path.display()))?;
+        output
+            .write_all(&encoded)
+            .with_context(|| format!("writing evidence file {}", path.display()))?;
+        output
+            .write_all(b"\n")
+            .with_context(|| format!("finishing evidence file {}", path.display()))?;
+    }
     Ok(())
 }
 
