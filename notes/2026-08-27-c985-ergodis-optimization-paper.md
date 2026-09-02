@@ -2099,9 +2099,24 @@ files are disposable and may be deleted at any time.
    211,772,296 / 0.744: about 5x less exact work and 4.9x wall time. Both
    radius-16 searches are now complete misses in 8.37--8.73 seconds. Native
    BP+OSD independently replays weight-28 incumbents in both directions, still
-   above QDistSAT's weight-25 upper bound. Next extend the exact TN frontier to
-   radius 18, then use the measured growth to choose between deeper sharded TN
-   exhaustion and LP1768's 34-orbit but much wider search.
+   above QDistSAT's weight-25 upper bound. The exact TN radius-18 searches are
+   now complete misses: X traverses 33,491,975,552 candidates in 116.19 seconds
+   and Z traverses 34,090,507,731 in 115.93 seconds. This measured frontier
+   made LP1768 the higher-EV next target.
+
+   Commit `861a1ef0f` narrows the official LP1768 row from approximately
+   `8 <= d <= 230` to `20 <= d <= 24` in both directions. The verified cyclic
+   action gives 34 orbits of size 52. Exact X/Z exhaustion through weight 18
+   traverses 21,206,190,754 and 7,501,315,611 candidates in 144.01 and 53.15
+   seconds. A validated all-ones row-space functional proves every kernel word
+   has even weight, so these searches also exclude weight 19. Native exhaustive
+   order-10 BP+OSD then produces independently replayed weight-24 witnesses in
+   0.69 and 0.73 seconds. The four retained records, source and input hashes,
+   trust boundary, witnesses, and replay protocol are in
+   `2026-09-01-c985-qdist-lp1768-bounds.md`. The next closure gate is weights
+   20 and 22: first test whether another exact action, quotient, or syndrome
+   lower bound reduces the 34-orbit frontier; otherwise seed the verified
+   weight-24 incumbent and exhaust below it in deterministic retained shards.
 
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
