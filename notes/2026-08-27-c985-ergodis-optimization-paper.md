@@ -4352,3 +4352,14 @@ behaviour.  Implement that exact bitmap quotient first, then build the sound
 Pareto/Dalmatian archive on its representatives.  Failure-core contraction
 follows once the plan weakening relation has a checked directional contract;
 do not infer semantic weakening from syntax shape alone.
+
+Commit `27407ed24` lands the first SyGuS-style observational import for the
+actual theorem semantics used today.  `FeatureZeroBank` now quotients candidate
+predicates by exact equality of their complete corpus zero bitmaps—no sampled
+hash or collision assumption—and retains the minimum evaluation-cost, then
+degree/ID, representative.  A compact candidate-to-representative map makes
+the quotient replayable and reports exact eliminated-class counts.  The bank
+now rejects an empty corpus, which previously would make every predicate
+vacuously equivalent.  Controls collapse `x`, `abs(x)`, and `x*x` while
+preserving a genuinely different predicate; full all-feature tests and strict
+all-target clippy pass.
