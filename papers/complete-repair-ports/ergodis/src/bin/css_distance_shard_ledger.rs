@@ -51,6 +51,8 @@ struct ShardRecord {
     executable_blake3: String,
     artifact_payload_blake3: Option<String>,
     search_kernel: String,
+    #[serde(default)]
+    check_presentation_seed: Option<u64>,
     maximum_weight: u16,
     mode: String,
     result_scope: String,
@@ -103,6 +105,7 @@ struct CoverageManifest {
     executable_blake3: String,
     artifact_payload_blake3: Option<String>,
     search_kernel: String,
+    check_presentation_seed: Option<u64>,
     maximum_weight: u16,
     searched_maximum_weight: u16,
     shard_count: u32,
@@ -244,6 +247,7 @@ fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
     let input_blake3 = first_record.input_blake3.clone();
     let executable_blake3 = first_record.executable_blake3.clone();
     let search_kernel = first_record.search_kernel.clone();
+    let check_presentation_seed = first_record.check_presentation_seed;
     let maximum_weight = first_record.maximum_weight;
     let searched_maximum_weight = first_record.result.searched_maximum_weight;
     if searched_maximum_weight > maximum_weight
@@ -296,6 +300,7 @@ fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
             || record.executable_blake3 != executable_blake3
             || record.artifact_payload_blake3.as_deref() != artifact_payload_blake3.as_deref()
             || record.search_kernel != search_kernel
+            || record.check_presentation_seed != check_presentation_seed
             || record.maximum_weight != maximum_weight
             || record.result.searched_maximum_weight != searched_maximum_weight
         {
@@ -417,6 +422,7 @@ fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
         executable_blake3,
         artifact_payload_blake3,
         search_kernel,
+        check_presentation_seed,
         maximum_weight,
         searched_maximum_weight,
         shard_count: first_shard.count,
@@ -503,6 +509,7 @@ mod tests {
                 executable_blake3: "2".repeat(64),
                 artifact_payload_blake3: Some("3".repeat(64)),
                 search_kernel: "portable-wide".to_owned(),
+                check_presentation_seed: None,
                 maximum_weight: 8,
                 mode: "bounded-search-shard".to_owned(),
                 result_scope: "partial-shard".to_owned(),
@@ -551,6 +558,9 @@ mod tests {
         let mut mixed = loaded(1, 2);
         mixed.record.maximum_weight = 10;
         assert!(verify(vec![loaded(0, 2), mixed]).is_err());
+        let mut mixed_seed = loaded(1, 2);
+        mixed_seed.record.check_presentation_seed = Some(7);
+        assert!(verify(vec![loaded(0, 2), mixed_seed]).is_err());
     }
 
     #[test]

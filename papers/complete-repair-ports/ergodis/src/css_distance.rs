@@ -46,15 +46,15 @@ const SYNDROME_PACKING_ADMISSION_MARGIN: u32 = 6;
 const ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSS1";
 const ARTIFACT_VERSION: u16 = 1;
 const WIDE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSW1";
-const WIDE_ARTIFACT_VERSION: u16 = 1;
+const WIDE_ARTIFACT_VERSION: u16 = 2;
 const EXTRA_WIDE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSX1";
-const EXTRA_WIDE_ARTIFACT_VERSION: u16 = 1;
+const EXTRA_WIDE_ARTIFACT_VERSION: u16 = 2;
 const LARGE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSL1";
-const LARGE_ARTIFACT_VERSION: u16 = 2;
+const LARGE_ARTIFACT_VERSION: u16 = 3;
 const HUGE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSH1";
-const HUGE_ARTIFACT_VERSION: u16 = 1;
+const HUGE_ARTIFACT_VERSION: u16 = 2;
 const COLOSSAL_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSC1";
-const COLOSSAL_ARTIFACT_VERSION: u16 = 2;
+const COLOSSAL_ARTIFACT_VERSION: u16 = 3;
 const MAX_ARTIFACT_BLOOM_WORDS: usize = FOUR_COMPLETION_BLOOM_BITS / 64;
 
 fn wide_artifact_identity<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize>(
@@ -81,6 +81,7 @@ fn wide_artifact_version_is_supported<const SUPPORT_WORDS: usize, const CHECK_WO
 ) -> bool {
     let (_, current) = wide_artifact_identity::<SUPPORT_WORDS, CHECK_WORDS>();
     version == current
+        || version.checked_add(1) == Some(current)
         || (SUPPORT_WORDS == LARGE_SUPPORT_WORDS
             && CHECK_WORDS == LARGE_SYNDROME_WORDS
             && version == 1)
@@ -942,6 +943,7 @@ pub struct CompiledWideCssDistanceImpl<
     four_completion_bloom: CompletionBloom,
     check_conflicts: Box<[AlignedConflict<CHECK_WORDS>]>,
     check_neighbors: Box<[PackedSupport<SUPPORT_WORDS>]>,
+    check_presentation_seed: Option<u64>,
     source_sha256: [u8; 32],
     artifact_payload_blake3: Option<[u8; 32]>,
 }
@@ -965,10 +967,18 @@ pub type CompiledColossalCssDistance = CompiledWideCssDistanceImpl<
 
 /// Select original rows forming a basis, preserving sparse presentation rows.
 fn independent_row_indices(matrix: &Matrix) -> Vec<usize> {
+    independent_row_indices_in_order(matrix, 0..matrix.rows())
+}
+
+fn independent_row_indices_in_order(
+    matrix: &Matrix,
+    row_order: impl IntoIterator<Item = usize>,
+) -> Vec<usize> {
     let word_count = matrix.cols().div_ceil(64);
     let mut pivots: Vec<(usize, Box<[u64]>)> = Vec::with_capacity(matrix.rows());
     let mut indices = Vec::with_capacity(matrix.rows());
-    for row_index in 0..matrix.rows() {
+    for row_index in row_order {
+        debug_assert!(row_index < matrix.rows());
         let mut words = vec![0u64; word_count];
         for (column, &entry) in matrix.row(row_index).iter().enumerate() {
             if entry != 0 {
@@ -994,6 +1004,24 @@ fn independent_row_indices(matrix: &Matrix) -> Vec<usize> {
         indices.push(row_index);
     }
     indices
+}
+
+#[inline]
+fn check_presentation_key(seed: u64, row: usize) -> u64 {
+    let mut value = seed ^ (row as u64).wrapping_mul(0x9e37_79b9_7f4a_7c15);
+    value = (value ^ (value >> 30)).wrapping_mul(0xbf58_476d_1ce4_e5b9);
+    value = (value ^ (value >> 27)).wrapping_mul(0x94d0_49bb_1331_11eb);
+    value ^ (value >> 31)
+}
+
+fn seeded_check_row_order(rows: usize, seed: u64) -> (Vec<usize>, Vec<usize>) {
+    let mut order = (0..rows).collect::<Vec<_>>();
+    order.sort_unstable_by_key(|&row| (check_presentation_key(seed, row), row));
+    let mut priority = vec![0; rows];
+    for (position, &row) in order.iter().enumerate() {
+        priority[row] = position;
+    }
+    (order, priority)
 }
 
 /// Recover a check-row functional whose value on every coordinate column is
@@ -1069,6 +1097,7 @@ fn validates_all_ones_functional<const WORDS: usize>(
         .all(|column| packed_dot_parity(functional, column.syndrome) == 1)
 }
 
+#[cfg(test)]
 fn compile_wide_structure<
     const SUPPORT_WORDS: usize,
     const CHECK_WORDS: usize,
@@ -1076,6 +1105,23 @@ fn compile_wide_structure<
 >(
     physical: &Matrix,
     logical: &Matrix,
+) -> Result<WideCompiledStructure<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>, CssDistanceError>
+where
+    PackedSyndrome<CHECK_WORDS>: WideSyndrome,
+{
+    compile_wide_structure_with_presentation::<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>(
+        physical, logical, None,
+    )
+}
+
+fn compile_wide_structure_with_presentation<
+    const SUPPORT_WORDS: usize,
+    const CHECK_WORDS: usize,
+    const LOGICAL_WORDS: usize,
+>(
+    physical: &Matrix,
+    logical: &Matrix,
+    check_presentation_seed: Option<u64>,
 ) -> Result<WideCompiledStructure<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>, CssDistanceError>
 where
     PackedSyndrome<CHECK_WORDS>: WideSyndrome,
@@ -1095,7 +1141,14 @@ where
     if coordinate_count == 0 || logical.rows() == 0 {
         return Err(CssDistanceError::EmptyProblem);
     }
-    let mut basis = independent_row_indices(physical);
+    let mut seeded_priority = None;
+    let mut basis = if let Some(seed) = check_presentation_seed {
+        let (order, priority) = seeded_check_row_order(physical.rows(), seed);
+        seeded_priority = Some(priority);
+        independent_row_indices_in_order(physical, order)
+    } else {
+        independent_row_indices(physical)
+    };
     if basis.len() > maximum_wide_checks {
         return Err(CssDistanceError::TooManyChecks);
     }
@@ -1104,7 +1157,7 @@ where
     // established kernels bit-for-bit unchanged below the same shape gate
     // used by the CLI's colossal backend selection.
     if coordinate_count > 1536 || basis.len() > 704 {
-        sort_basis_by_conflict_degree(physical, &mut basis);
+        sort_basis_by_conflict_degree(physical, &mut basis, seeded_priority.as_deref());
     }
     let mut basis_positions = vec![u16::MAX; physical.rows()];
     for (position, &row) in basis.iter().enumerate() {
@@ -1186,7 +1239,11 @@ where
 /// Put low-conflict independent checks first once, so both fail-first
 /// branching and the existing lowest-bit greedy packing see the strongest
 /// static order without adding work or state to the solve loop.
-fn sort_basis_by_conflict_degree(physical: &Matrix, basis: &mut [usize]) {
+fn sort_basis_by_conflict_degree(
+    physical: &Matrix,
+    basis: &mut [usize],
+    row_priority: Option<&[usize]>,
+) {
     if basis.len() < 2 {
         return;
     }
@@ -1220,7 +1277,12 @@ fn sort_basis_by_conflict_degree(physical: &Matrix, basis: &mut [usize]) {
             .sum::<usize>()
             .saturating_sub(1);
     }
-    basis.sort_unstable_by_key(|&row_index| (degrees[row_index], row_index));
+    basis.sort_unstable_by_key(|&row_index| {
+        (
+            degrees[row_index],
+            row_priority.map_or(row_index, |priority| priority[row_index]),
+        )
+    });
 }
 
 #[allow(private_bounds)]
@@ -1230,8 +1292,31 @@ where
     PackedSyndrome<CHECK_WORDS>: WideSyndrome,
 {
     pub fn compile(physical: &Matrix, logical: &Matrix) -> Result<Self, CssDistanceError> {
-        let structure =
-            compile_wide_structure::<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>(physical, logical)?;
+        Self::compile_with_optional_presentation_seed(physical, logical, None)
+    }
+
+    /// Compile an exactly equivalent independent-check presentation selected
+    /// by a deterministic seed. The seed affects only cold basis selection and
+    /// fixed check order; the represented row space and search predicate are
+    /// unchanged.
+    pub fn compile_with_check_presentation_seed(
+        physical: &Matrix,
+        logical: &Matrix,
+        seed: u64,
+    ) -> Result<Self, CssDistanceError> {
+        Self::compile_with_optional_presentation_seed(physical, logical, Some(seed))
+    }
+
+    fn compile_with_optional_presentation_seed(
+        physical: &Matrix,
+        logical: &Matrix,
+        check_presentation_seed: Option<u64>,
+    ) -> Result<Self, CssDistanceError> {
+        let structure = compile_wide_structure_with_presentation::<
+            SUPPORT_WORDS,
+            CHECK_WORDS,
+            LOGICAL_WORDS,
+        >(physical, logical, check_presentation_seed)?;
         let (short_completion_syndromes, three_completion_bloom, four_completion_bloom) =
             if CHECK_WORDS > WIDE_SYNDROME_WORDS
                 || distinct_quadruple_count(structure.columns.len())
@@ -1256,6 +1341,7 @@ where
             four_completion_bloom,
             check_conflicts: structure.check_conflicts,
             check_neighbors: structure.check_neighbors,
+            check_presentation_seed,
             source_sha256: CompiledCssDistance::source_sha256(physical, logical),
             artifact_payload_blake3: None,
         })
@@ -1279,6 +1365,11 @@ where
             u8::from(self.kernel_weights_even),
             u8::from(self.three_completion_bloom.uses_one_hash()),
         ])?;
+        writer.bytes(&[u8::from(self.check_presentation_seed.is_some())])?;
+        write_u64(
+            &mut writer,
+            self.check_presentation_seed.unwrap_or_default(),
+        )?;
         for syndromes in &self.short_completion_syndromes {
             write_len(&mut writer, syndromes.len())?;
             for &syndrome in syndromes.iter() {
@@ -1300,7 +1391,8 @@ where
         logical: &Matrix,
         mut reader: R,
     ) -> Result<Self, CssDistanceArtifactError> {
-        let (expected_magic, _) = wide_artifact_identity::<SUPPORT_WORDS, CHECK_WORDS>();
+        let (expected_magic, current_version) =
+            wide_artifact_identity::<SUPPORT_WORDS, CHECK_WORDS>();
         let mut magic = [0u8; 8];
         reader.read_exact(&mut magic)?;
         if &magic != expected_magic {
@@ -1335,6 +1427,18 @@ where
             1 => true,
             _ => return Err(CssDistanceArtifactError::Shape),
         };
+        let check_presentation_seed = if version == current_version {
+            let mut present = [0_u8; 1];
+            reader.bytes(&mut present)?;
+            let seed = read_u64(&mut reader)?;
+            match (present[0], seed) {
+                (0, 0) => None,
+                (1, seed) => Some(seed),
+                _ => return Err(CssDistanceArtifactError::Shape),
+            }
+        } else {
+            None
+        };
         if usize::from(coordinate_count) != physical.cols()
             || usize::from(logical_count) != logical.rows()
         {
@@ -1355,8 +1459,11 @@ where
         if !strictly_sorted(&one_completion) || !strictly_sorted(&two_completion) {
             return Err(CssDistanceArtifactError::Shape);
         }
-        let structure =
-            compile_wide_structure::<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>(physical, logical)?;
+        let structure = compile_wide_structure_with_presentation::<
+            SUPPORT_WORDS,
+            CHECK_WORDS,
+            LOGICAL_WORDS,
+        >(physical, logical, check_presentation_seed)?;
         if check_count != structure.check_count
             || maximum_column_check_weight != structure.maximum_column_check_weight
             || kernel_weights_even != structure.kernel_weights_even
@@ -1378,6 +1485,7 @@ where
             four_completion_bloom,
             check_conflicts: structure.check_conflicts,
             check_neighbors: structure.check_neighbors,
+            check_presentation_seed,
             source_sha256,
             artifact_payload_blake3: Some(artifact_payload_blake3),
         })
@@ -1386,6 +1494,11 @@ where
     #[inline]
     pub fn artifact_payload_blake3(&self) -> Option<[u8; 32]> {
         self.artifact_payload_blake3
+    }
+
+    #[inline]
+    pub fn check_presentation_seed(&self) -> Option<u64> {
+        self.check_presentation_seed
     }
 
     /// Test all logical observations without widening the per-candidate hot state.
@@ -5574,8 +5687,60 @@ mod tests {
     fn static_check_order_prefers_fewer_conflicts() {
         let physical = Matrix::new::<2>(3, 2, vec![1, 1, 1, 0, 0, 1]).unwrap();
         let mut basis = vec![0, 1, 2];
-        sort_basis_by_conflict_degree(&physical, &mut basis);
+        sort_basis_by_conflict_degree(&physical, &mut basis, None);
         assert_eq!(basis, [1, 2, 0]);
+    }
+
+    #[test]
+    fn seeded_check_presentations_preserve_search_and_artifact_replay() {
+        let physical = Matrix::new::<2>(3, 4, vec![1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1]).unwrap();
+        let logical = Matrix::new::<2>(1, 4, vec![1, 0, 1, 0]).unwrap();
+        let baseline = CompiledWideCssDistance::compile(&physical, &logical).unwrap();
+        let (seed, seeded) = (0_u64..64)
+            .find_map(|seed| {
+                let compiled = CompiledWideCssDistance::compile_with_check_presentation_seed(
+                    &physical, &logical, seed,
+                )
+                .unwrap();
+                (compiled.columns != baseline.columns).then_some((seed, compiled))
+            })
+            .expect("a dependent presentation admits another basis ordering");
+
+        for maximum_weight in 1..=4 {
+            let seeded_result = seeded
+                .search_bounded_syndrome_driven(&[0, 1, 2, 3], maximum_weight)
+                .unwrap();
+            let baseline_result = baseline
+                .search_bounded_syndrome_driven(&[0, 1, 2, 3], maximum_weight)
+                .unwrap();
+            assert_eq!(
+                seeded_result.distance, baseline_result.distance,
+                "seeded and default presentations must decide the same optimum",
+            );
+            assert_eq!(
+                seeded_result.searched_maximum_weight,
+                baseline_result.searched_maximum_weight
+            );
+        }
+        assert_eq!(seeded.check_presentation_seed(), Some(seed));
+
+        let mut artifact = Vec::new();
+        seeded.write_artifact(&mut artifact).unwrap();
+        let loaded =
+            CompiledWideCssDistance::read_artifact(&physical, &logical, &*artifact).unwrap();
+        assert_eq!(loaded.check_presentation_seed(), Some(seed));
+        assert_eq!(loaded.columns, seeded.columns);
+
+        let mut malformed = artifact;
+        let presentation_offset = 8 + 2 + 32 + 2 + 2 + 4;
+        malformed[presentation_offset] = 2;
+        let payload_end = malformed.len() - 32;
+        let checksum = blake3::hash(&malformed[8..payload_end]);
+        malformed[payload_end..].copy_from_slice(checksum.as_bytes());
+        assert!(matches!(
+            CompiledWideCssDistance::read_artifact(&physical, &logical, &*malformed),
+            Err(CssDistanceArtifactError::Shape)
+        ));
     }
 
     #[test]
@@ -5672,6 +5837,8 @@ mod tests {
         let compiled = CompiledLargeCssDistance::compile(&physical, &logical).unwrap();
         let mut artifact = Vec::new();
         compiled.write_artifact(&mut artifact).unwrap();
+        let presentation_offset = 8 + 2 + 32 + 2 + 2 + 4;
+        artifact.drain(presentation_offset..presentation_offset + 9);
         artifact[8..10].copy_from_slice(&1u16.to_le_bytes());
         let payload_end = artifact.len() - 32;
         let checksum = blake3::hash(&artifact[8..payload_end]);
@@ -5691,6 +5858,16 @@ mod tests {
         let mut artifact = Vec::new();
         compiled.write_artifact(&mut artifact).unwrap();
         assert_eq!(&artifact[8..10], &COLOSSAL_ARTIFACT_VERSION.to_le_bytes());
+        let presentation_offset = 8 + 2 + 32 + 2 + 2 + 4;
+        artifact.drain(presentation_offset..presentation_offset + 9);
+        artifact[8..10].copy_from_slice(&2_u16.to_le_bytes());
+        let payload_end = artifact.len() - 32;
+        let checksum = blake3::hash(&artifact[8..payload_end]);
+        artifact[payload_end..].copy_from_slice(checksum.as_bytes());
+        let loaded =
+            CompiledColossalCssDistance::read_artifact(&physical, &logical, &*artifact).unwrap();
+        assert_eq!(loaded.check_presentation_seed(), None);
+
         artifact[8..10].copy_from_slice(&1_u16.to_le_bytes());
         assert!(matches!(
             CompiledColossalCssDistance::read_artifact(&physical, &logical, &*artifact),

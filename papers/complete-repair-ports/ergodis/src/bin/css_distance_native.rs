@@ -33,6 +33,9 @@ struct Args {
     /// Create a compiled filter artifact. Existing files are never overwritten.
     #[arg(long, conflicts_with = "compiled_in")]
     compiled_out: Option<PathBuf>,
+    /// Deterministically select an equivalent independent-check presentation.
+    #[arg(long, conflicts_with = "compiled_in")]
+    check_presentation_seed: Option<u64>,
     #[arg(long, default_value_t = 1)]
     rounds: u16,
     /// Static anchor-search worker count (requires the `parallel` feature above one).
@@ -85,6 +88,7 @@ struct RunRecord<'a> {
     maximum_weight: u16,
     mode: &'static str,
     preparation_mode: &'static str,
+    check_presentation_seed: Option<u64>,
     preparation_seconds: f64,
     artifact_write_seconds: Option<f64>,
     artifact_payload_blake3: Option<String>,
@@ -155,6 +159,22 @@ enum Backend {
     Huge(CompiledHugeCssDistance),
     #[cfg(feature = "large-css")]
     Colossal(CompiledColossalCssDistance),
+}
+
+impl Backend {
+    fn check_presentation_seed(&self) -> Option<u64> {
+        match self {
+            Self::Compact(_) => None,
+            Self::Wide(compiled) => compiled.check_presentation_seed(),
+            Self::ExtraWide(compiled) => compiled.check_presentation_seed(),
+            #[cfg(feature = "large-css")]
+            Self::Large(compiled) => compiled.check_presentation_seed(),
+            #[cfg(feature = "large-css")]
+            Self::Huge(compiled) => compiled.check_presentation_seed(),
+            #[cfg(feature = "large-css")]
+            Self::Colossal(compiled) => compiled.check_presentation_seed(),
+        }
+    }
 }
 
 fn search_kernel(wide: bool) -> &'static str {
@@ -309,6 +329,9 @@ fn main() -> Result<()> {
     let large_problem =
         !colossal_problem && !huge_problem && (columns > 384 || physical_rank > 192);
     let extra_wide_problem = !large_problem && columns > 320;
+    if args.check_presentation_seed.is_some() && !wide_problem {
+        bail!("--check-presentation-seed requires a syndrome-driven wide backend");
+    }
     let preparation_start = Instant::now();
     let (compiled, preparation_mode) = if let Some(path) = &args.compiled_in {
         let file = File::open(path)
@@ -392,10 +415,21 @@ fn main() -> Result<()> {
     } else if colossal_problem {
         #[cfg(feature = "large-css")]
         {
-            (
-                Backend::Colossal(CompiledColossalCssDistance::compile(&physical, &logical)?),
-                "colossal-compile",
-            )
+            if let Some(seed) = args.check_presentation_seed {
+                (
+                    Backend::Colossal(
+                        CompiledColossalCssDistance::compile_with_check_presentation_seed(
+                            &physical, &logical, seed,
+                        )?,
+                    ),
+                    "colossal-seeded-compile",
+                )
+            } else {
+                (
+                    Backend::Colossal(CompiledColossalCssDistance::compile(&physical, &logical)?),
+                    "colossal-compile",
+                )
+            }
         }
         #[cfg(not(feature = "large-css"))]
         {
@@ -404,10 +438,21 @@ fn main() -> Result<()> {
     } else if huge_problem {
         #[cfg(feature = "large-css")]
         {
-            (
-                Backend::Huge(CompiledHugeCssDistance::compile(&physical, &logical)?),
-                "huge-compile",
-            )
+            if let Some(seed) = args.check_presentation_seed {
+                (
+                    Backend::Huge(
+                        CompiledHugeCssDistance::compile_with_check_presentation_seed(
+                            &physical, &logical, seed,
+                        )?,
+                    ),
+                    "huge-seeded-compile",
+                )
+            } else {
+                (
+                    Backend::Huge(CompiledHugeCssDistance::compile(&physical, &logical)?),
+                    "huge-compile",
+                )
+            }
         }
         #[cfg(not(feature = "large-css"))]
         {
@@ -416,25 +461,58 @@ fn main() -> Result<()> {
     } else if large_problem {
         #[cfg(feature = "large-css")]
         {
-            (
-                Backend::Large(CompiledLargeCssDistance::compile(&physical, &logical)?),
-                "large-compile",
-            )
+            if let Some(seed) = args.check_presentation_seed {
+                (
+                    Backend::Large(
+                        CompiledLargeCssDistance::compile_with_check_presentation_seed(
+                            &physical, &logical, seed,
+                        )?,
+                    ),
+                    "large-seeded-compile",
+                )
+            } else {
+                (
+                    Backend::Large(CompiledLargeCssDistance::compile(&physical, &logical)?),
+                    "large-compile",
+                )
+            }
         }
         #[cfg(not(feature = "large-css"))]
         {
             bail!("instances above 384 coordinates or rank 192 require --features large-css")
         }
     } else if extra_wide_problem {
-        (
-            Backend::ExtraWide(CompiledExtraWideCssDistance::compile(&physical, &logical)?),
-            "extra-wide-compile",
-        )
+        if let Some(seed) = args.check_presentation_seed {
+            (
+                Backend::ExtraWide(
+                    CompiledExtraWideCssDistance::compile_with_check_presentation_seed(
+                        &physical, &logical, seed,
+                    )?,
+                ),
+                "extra-wide-seeded-compile",
+            )
+        } else {
+            (
+                Backend::ExtraWide(CompiledExtraWideCssDistance::compile(&physical, &logical)?),
+                "extra-wide-compile",
+            )
+        }
     } else if wide_problem {
-        (
-            Backend::Wide(CompiledWideCssDistance::compile(&physical, &logical)?),
-            "wide-compile",
-        )
+        if let Some(seed) = args.check_presentation_seed {
+            (
+                Backend::Wide(
+                    CompiledWideCssDistance::compile_with_check_presentation_seed(
+                        &physical, &logical, seed,
+                    )?,
+                ),
+                "wide-seeded-compile",
+            )
+        } else {
+            (
+                Backend::Wide(CompiledWideCssDistance::compile(&physical, &logical)?),
+                "wide-compile",
+            )
+        }
     } else {
         (
             Backend::Compact(CompiledCssDistance::compile(&physical, &logical)?),
@@ -843,6 +921,7 @@ fn main() -> Result<()> {
         maximum_weight,
         mode,
         preparation_mode,
+        check_presentation_seed: compiled.check_presentation_seed(),
         preparation_seconds,
         artifact_write_seconds,
         artifact_payload_blake3,

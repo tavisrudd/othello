@@ -218,6 +218,17 @@ Young-Brothers-Wait. Rare verified bound improvements use cache-line-separated
 worker mailboxes; `--pulse-interval` controls coarse polling without adding
 per-support synchronization.
 
+For long syndrome-driven searches with dependent physical checks,
+`--check-presentation-seed S` deterministically selects another original-row
+basis and fixed check order for the same physical row space. This is an exact
+cold compilation choice, not a heuristic pruning rule: the zero-syndrome and
+logical predicates are unchanged, and no field or instruction is added to the
+solve state. Evidence records the seed, shard ledgers reject mixed seeds, and
+compiled artifacts persist and replay it. Omitting the flag preserves the
+default presentation byte-for-byte. Current wide artifacts include the
+optional seed; readers continue to accept the immediately preceding formats
+(and the older large-width migration format).
+
 Coordinate symmetry discovery is optional and remains outside the solver.
 `css_automorphism_adapter` can invoke a `dreadnaut` executable on the sparse
 physical Tanner graph, or consume the same bounded backend-neutral proposal
