@@ -19,6 +19,7 @@ use std::time::Duration;
 
 mod client;
 mod evolution;
+mod proposal_policy;
 mod synthesis;
 mod text;
 mod vm;
@@ -28,6 +29,13 @@ use evolution::{
     load_evolution_archive, run_evolution, EvolutionBounds, EvolutionIdentity, EvolutionProgress,
     EvolutionSeed, EvolutionTargetAccumulator, EvolutionTargetProfile, EvolutionTargetStrategy,
     MAX_EVOLUTION_TARGET_FIELDS,
+};
+pub use proposal_policy::{
+    select_proposer, CircuitBreaker, CircuitBreakerConfig, CircuitBreakerSnapshot, CircuitPermit,
+    DeadlineExceeded, DeadlineStage, ProposalCandidate, ProposalDeadlines, ProposalFailureClass,
+    ProposalIdempotencyKey, ProposalRole, ProposalSelection, ProposalSelectionContext, RateLimit,
+    RetryAction, RetryPolicy, TokenBucket, TokenBucketConfig, TokenBucketError,
+    TokenBucketSnapshot,
 };
 use synthesis::learn_decision_tree;
 pub use text::{

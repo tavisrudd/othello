@@ -340,15 +340,21 @@ budgets but bounded, so failures cannot multiply spend indefinitely.
 
 Circuit breakers open after a small rolling threshold of attributable failures
 or timeouts. The open interval grows to a cap; one half-open health/probe call
-tests recovery. Successful exact traffic closes the breaker gradually. A
-semantic rejection is not a backend-health failure and must not trip the
-breaker.
+tests recovery. Successful exact traffic closes the breaker. A
+semantic rejection, provider throttle, or controller queue delay is not a
+backend-health failure and must not trip the breaker.
 
 Every mutating request has an idempotency key derived from session, request ID,
 and canonical payload digest. The controller deduplicates accepted work and
 returns the original ticket/result on retry. Proposal revisions require new
 payload digests. Artifacts use create-only writes and atomic publication, so a
 timeout or crash cannot leave a partially authoritative object.
+
+The implemented `ProposalIdempotencyKey` is a stable 32-byte BLAKE3 identity
+over a versioned domain separator, bounded session ID, nonzero request ID, and
+the canonical payload digest. This provides the identity primitive only; the
+daemon ticket ledger must still enforce create-once lookup and return the
+original typed result.
 
 ### Overload behavior
 
@@ -359,6 +365,27 @@ The controller can keep autonomous cheap proposers running while an external
 LLM/provider is backed off. Operational telemetry is aggregated by proposer,
 query family, error class, latency bucket, and consumed budget; it is serialized
 off-thread and exposed as compact deltas rather than request logs.
+
+### Implemented cold policy boundary
+
+The first reusable policy slice now lives in the feature-gated control module.
+It supplies persisted-remainder token buckets driven by caller monotone time;
+typed retry actions with full jitter, provider lower bounds, and absolute
+deadlines; a single-probe half-open circuit breaker; and a deterministic
+portfolio selector. The selector gates context, authority role, tokens,
+concurrency, bytes, cost, circuit state, and deadline before comparing checked
+expected admitted work/reuse per cost plus a bounded exploration bonus.
+Duplicate proposer IDs, invalid probability scales, and score/comparison
+overflow fail closed. Stable logical-request idempotency keys bind session,
+request number, and canonical payload digest. Selection is advisory: the controller atomically charges
+every applicable hierarchical bucket before publishing the ticket and
+reselects if a charge fails. A hostile pass repaired clock reversal being mistaken
+for ordinary rate limiting and unchecked rational-score cross products.
+
+This is policy, not a new daemon operation. Persisted controller state,
+idempotent ticket-ledger lookup, provider adapters, and asynchronous result delivery
+remain the integration boundary. Search workers and existing socket operations
+are unchanged.
 
 ## Runtime and performance boundary
 

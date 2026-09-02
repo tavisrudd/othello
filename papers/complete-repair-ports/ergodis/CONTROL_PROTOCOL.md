@@ -146,6 +146,34 @@ snapshots, performs isolated bounded probes, and sends compact scorecards throug
 the watcher. Search workers do not run evolution, probe workspaces, or protocol
 code.
 
+### External proposer policy
+
+The feature-gated control library provides deterministic cold primitives for a
+portfolio of external theorem proposers. `select_proposer` filters by available
+snapshot context, requested authority role, campaign cost/byte budgets,
+provider tokens, concurrency, circuit state, and an absolute deadline. It then
+ranks eligible candidates by checked expected admitted work/reuse per cost plus
+an explicit bounded exploration bonus; duplicate IDs and arithmetic overflow
+fail closed. Selection reads a controller-owned token snapshot but does not
+debit it; ticket publication must first charge every applicable hierarchical
+bucket and reselect if any charge is denied.
+
+`TokenBucket` uses caller-supplied monotone milliseconds, persists exact refill
+remainder, and distinguishes invalid time or cost from an ordinary rate-limit
+response. `RetryPolicy` never retries malformed, forbidden, semantically
+rejected, or deterministic failures; transient failures use bounded full-jitter
+backoff, provider `Retry-After`, and the owning deadline. Timeouts request a
+smaller scope rather than silently repeating work. `CircuitBreaker` ignores
+semantic rejection, grows bounded open intervals after attributable operational
+failures, and admits at most one half-open probe. Expected provider throttling
+and controller queue delay do not count as backend-health failures. These primitives do not yet
+add proposer wire operations: daemon integration must persist their state and
+issue typed tickets without changing this protocol's search-path boundary.
+`ProposalIdempotencyKey` already supplies the stable 32-byte logical-request
+identity for that integration. It binds a bounded session ID, nonzero request
+ID, and canonical payload BLAKE3 under a versioned domain separator; identical
+retries therefore share an identity while revisions necessarily do not.
+
 `ergodisctl evolve-start` accepts an optional direct seed JSONL file and up to
 eight repeated `--resume-evidence` paths.  A replay archive must match the
 problem, ordered feature schema, and exact feature-generator provenance.  When

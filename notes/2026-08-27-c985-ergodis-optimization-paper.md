@@ -290,6 +290,12 @@ files are disposable and may be deleted at any time.
    slice: stop interpreter-only tuning and select an existing theorem kernel
    whose first real application adapter can turn a kernel win into an
    end-to-end application win.
+   The cold external-proposer policy layer now also has deterministic,
+   restartable token buckets; staged absolute deadlines; typed bounded
+   retry/backoff and provider-rate-limit handling; a single-probe circuit
+   breaker; checked cost-aware proposer selection; and stable 32-byte
+   idempotency keys binding session, request, and canonical payload. It remains
+   outside every solve path. Daemon ticket-ledger integration is still open.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and
@@ -2587,6 +2593,17 @@ files are disposable and may be deleted at any time.
     `Retry-After`, capped full-jitter backoff, and narrow circuit breakers keep
     failures from multiplying spend. Search workers see none of this; exact
     admission and compilation remain outside the allocation-free loop.
+
+    The first cold policy implementation now supplies persisted-remainder
+    token buckets, typed retry actions, provider `Retry-After` handling,
+    deadline-aware full jitter, single-probe half-open circuit breaking, and a
+    deterministic cost-aware proposer selector. Context, authority role,
+    tokens, concurrency, return bytes, cost, circuit state, and deadline all
+    gate eligibility. Duplicate IDs and score overflow fail closed. A hostile
+    pass repaired two initial hazards: monotone-clock reversal can no longer be
+    reported as ordinary throttling, and rational score comparison uses checked
+    cross products. This remains a feature-gated controller primitive; daemon
+    ticket persistence and asynchronous provider adapters are the next layer.
 
     The first new proposer family is accepted. A coloured-Tanner isomorphism
     proposal between the official LP1768 X/Z instances is independently
