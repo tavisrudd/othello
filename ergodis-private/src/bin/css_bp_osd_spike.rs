@@ -13,6 +13,8 @@ struct Args {
     input: PathBuf,
     #[arg(long, default_value_t = 1)]
     threads: usize,
+    #[arg(long, default_value_t = 1)]
+    rounds: usize,
     #[arg(long, value_enum, default_value_t = Method::Zero)]
     method: Method,
     #[arg(long, default_value_t = 10)]
@@ -86,6 +88,7 @@ struct Report<'a> {
     physical_checks: usize,
     logical_observations: usize,
     threads: usize,
+    rounds: usize,
     method: &'static str,
     osd_order: usize,
     attempted: usize,
@@ -127,30 +130,34 @@ fn solve_chunk(
     problem: &SparseProblem,
     targets: &mut [PreparedTarget],
     local: &mut LocalResult,
+    rounds: usize,
 ) -> Result<()> {
-    for prepared in targets {
-        let result = prepared
-            .workspace
-            .decode_bytes(&prepared.code, &prepared.syndrome)?;
-        local.attempted += 1;
-        local.satisfied += usize::from(result.syndrome_satisfied);
-        local.candidate_checksum ^= checksum(result.candidate, prepared.target);
-        if result.syndrome_satisfied && independently_replays(problem, result.candidate) {
-            local.replayed += 1;
-            if local
-                .best_weight
-                .is_none_or(|weight| result.weight < weight)
-            {
-                local.best_weight = Some(result.weight);
-                local.best_target = Some(prepared.target);
-                local.best_support.clear();
-                local.best_support.extend(
-                    result
-                        .candidate
-                        .iter()
-                        .enumerate()
-                        .filter_map(|(index, &bit)| (bit != 0).then_some(index)),
-                );
+    for round in 0..rounds {
+        for prepared in &mut *targets {
+            let result = prepared
+                .workspace
+                .decode_bytes(&prepared.code, &prepared.syndrome)?;
+            local.attempted += 1;
+            local.satisfied += usize::from(result.syndrome_satisfied);
+            let checksum_target = prepared.target ^ round.wrapping_mul(0x9e37_79b9);
+            local.candidate_checksum ^= checksum(result.candidate, checksum_target);
+            if result.syndrome_satisfied && independently_replays(problem, result.candidate) {
+                local.replayed += 1;
+                if local
+                    .best_weight
+                    .is_none_or(|weight| result.weight < weight)
+                {
+                    local.best_weight = Some(result.weight);
+                    local.best_target = Some(prepared.target);
+                    local.best_support.clear();
+                    local.best_support.extend(
+                        result
+                            .candidate
+                            .iter()
+                            .enumerate()
+                            .filter_map(|(index, &bit)| (bit != 0).then_some(index)),
+                    );
+                }
             }
         }
     }
@@ -176,6 +183,9 @@ fn main() -> Result<()> {
     let args = Args::parse();
     if args.threads == 0 || args.threads > 12 {
         bail!("--threads must be in 1..=12");
+    }
+    if args.rounds == 0 {
+        bail!("--rounds must be positive");
     }
     let bytes =
         fs::read(&args.input).with_context(|| format!("reading {}", args.input.display()))?;
@@ -239,7 +249,7 @@ fn main() -> Result<()> {
         let mut handles = Vec::with_capacity(workers);
         for mut job in jobs {
             handles.push(scope.spawn(move || {
-                solve_chunk(problem_ref, &mut job.targets, &mut job.result)?;
+                solve_chunk(problem_ref, &mut job.targets, &mut job.result, args.rounds)?;
                 Ok(job.result)
             }));
         }
@@ -260,6 +270,7 @@ fn main() -> Result<()> {
         physical_checks: problem.physical_checks.len(),
         logical_observations: problem.logical_observations.len(),
         threads: workers,
+        rounds: args.rounds,
         method: match args.method {
             Method::Disabled => "disabled",
             Method::Zero => "osd0",
@@ -334,8 +345,9 @@ mod tests {
             syndrome: vec![0, 0, 1],
         }];
         let mut local = LocalResult::new(4);
-        let (result, events) =
-            measure_current_thread_allocations(|| solve_chunk(&problem, &mut targets, &mut local));
+        let (result, events) = measure_current_thread_allocations(|| {
+            solve_chunk(&problem, &mut targets, &mut local, 1)
+        });
         result.unwrap();
         assert_eq!(events.allocations, 0);
         assert_eq!(events.reallocations, 0);
