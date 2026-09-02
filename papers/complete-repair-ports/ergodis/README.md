@@ -218,6 +218,26 @@ Young-Brothers-Wait. Rare verified bound improvements use cache-line-separated
 worker mailboxes; `--pulse-interval` controls coarse polling without adding
 per-support synchronization.
 
+Coordinate symmetry discovery is optional and remains outside the solver.
+`css_automorphism_adapter` can invoke a `dreadnaut` executable on the sparse
+physical Tanner graph, or consume the same bounded backend-neutral proposal
+schema from `--proposal-in`. The backend only proposes full-image coordinate
+permutations. Ergodis independently checks every admitted generator for
+bijection, preservation of the physical row space, preservation of the
+physical-plus-logical observable row space, and the final orbit transversal.
+Malformed, cross-instance, oversized, or observable-breaking proposals fail
+closed; generators that preserve only the Tanner presentation are discarded.
+The external executable and its code are not bundled or trusted. If no
+discovery backend is desired, omit this preprocessing step and use the input's
+existing verified generators:
+
+```sh
+css_automorphism_adapter --input problem.json --output upgraded.json \
+  --proposal-out proposal.json
+css_automorphism_adapter --input problem.json --output replayed.json \
+  --proposal-in proposal.json
+```
+
 Large portfolio instances require the same feature-complete release build used
 for their evidence runs:
 
