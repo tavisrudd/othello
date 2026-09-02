@@ -21,6 +21,7 @@ mod client;
 mod evolution;
 mod proposal_policy;
 mod proposal_ticket;
+mod proposal_ticket_store;
 mod synthesis;
 mod text;
 mod vm;
@@ -44,6 +45,9 @@ pub use proposal_ticket::{
     ProposalTicketLedger, ProposalTicketLedgerSnapshot, ProposalTicketSnapshot, ProposalTicketSpec,
     ProposalTicketStatus, ProposalTicketSubmission, MAX_PROPOSAL_TICKETS,
     PROPOSAL_TICKET_LEDGER_SCHEMA,
+};
+pub use proposal_ticket_store::{
+    ProposalTicketStore, ProposalTicketStoreError, PROPOSAL_TICKET_STORE_SCHEMA,
 };
 use synthesis::learn_decision_tree;
 pub use text::{

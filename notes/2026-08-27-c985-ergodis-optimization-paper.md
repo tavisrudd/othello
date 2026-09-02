@@ -301,9 +301,13 @@ files are disposable and may be deleted at any time.
    create-or-return-existing submission, attempt-bound stale-callback rejection,
    duplicate-callback idempotence, typed retry waits, distinct admission/result
    deadlines, strict snapshot validation, configured-cap pinning, and overdue
-   expiry on restore. It still has no socket operation or provider SDK. The
-   remaining daemon integration is atomic snapshot persistence, restored-orphan
-   reconciliation, and bounded submit/status/cancel/result operations.
+   expiry on restore. Per-ticket durability now avoids whole-ledger rewrites:
+   bounded key-named records use fsynced temporary files and atomic hard-link/
+   rename publication, with strict replay, private permissions, directory sync,
+   crash-temporary handling, and fail-stop poisoning after ambiguous I/O. It
+   still has no socket operation or provider SDK. The remaining daemon
+   integration is campaign attachment, restored-orphan reconciliation, and
+   bounded submit/status/cancel/result operations.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

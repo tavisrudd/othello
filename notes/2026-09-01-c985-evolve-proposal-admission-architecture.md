@@ -407,6 +407,19 @@ persist-before-acknowledgement, reconcile restored running attempts after
 orphan reaping, and then expose bounded submit/status/cancel/result operations.
 No provider-specific payload belongs in the generic ticket record.
 
+The durable store portion is now implemented without whole-ledger rewrites.
+Private create-only metadata pins the store/ticket schema and configured cap;
+each ticket has one bounded key-named compact record. Creation uses a fsynced
+temporary file and atomic hard link, replacement uses a fsynced temporary file
+and atomic rename, and the containing directory is synced. Replay rejects
+symlinks, wrong names, oversized/corrupt records, excess capacity, and cap or
+schema drift. A bounded number of crash-leftover temporary files is tolerated,
+their sequence numbers are not reused, and restore-time deadline transitions
+are persisted immediately. Any ambiguous persistence error poisons the live
+store: the daemon must stop and recover rather than dispatch against memory-
+only state. Campaign attachment, orphan reconciliation, and wire operations
+remain open.
+
 ## Runtime and performance boundary
 
 Proposal generation, normalization, serialization, counterexample reduction,

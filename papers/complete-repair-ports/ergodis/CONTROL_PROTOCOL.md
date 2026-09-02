@@ -193,9 +193,21 @@ ticket remains running until the controller reaps or reconciles its orphan and
 records that exact attempt's outcome.
 
 This ledger is not yet exposed as a socket operation and its snapshot is not
-yet attached to the campaign's create-only files. That next integration must
-atomically publish state before provider dispatch and persist every transition
-before acknowledging it; provider SDK code remains outside this generic layer.
+yet attached to the campaign daemon. `ProposalTicketStore` now supplies the
+durable boundary it will use: private create-only store metadata pins the
+schema and configured cap; each bounded ticket occupies one key-named compact
+file; new tickets publish by fsynced temporary file plus atomic hard link, and
+updates by fsynced temporary file plus atomic rename. Directories are synced,
+symlinks/misnamed/oversized/corrupt records fail closed, and a persistence
+error poisons the live store so dispatch cannot continue under ambiguous
+durability. Restore tolerates a bounded set of crash-leftover temporary files,
+avoids reusing their names, replays the ledger, persists deadline expirations,
+and never rewrites all tickets for one transition.
+
+The remaining integration must attach this store to a campaign run, persist
+the queued state before provider dispatch and every outcome before
+acknowledging it, reconcile restored running attempts, and expose bounded wire
+operations. Provider SDK code remains outside the generic layer.
 
 `ergodisctl evolve-start` accepts an optional direct seed JSONL file and up to
 eight repeated `--resume-evidence` paths.  A replay archive must match the
