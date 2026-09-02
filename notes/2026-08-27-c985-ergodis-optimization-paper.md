@@ -2156,6 +2156,23 @@ files are disposable and may be deleted at any time.
    exact weight is 22. Before radius 22, probe equivalent independent-check
    presentations and a stronger pure syndrome lower bound off the hot path.
 
+   The first bounded presentation probe is positive and selects the next
+   compiler tranche. The physical input has 780 sparse checks of rank 772;
+   any 772-row basis defines the same zero-syndrome predicate, but the chosen
+   basis and static tie order change the fail-first traversal. Sixteen
+   deterministic row permutations were compiled without changing the kernel.
+   A radius-14 probe selected different winners for X and Z, so no seed may be
+   hard-coded globally. The winners remain best among the tested candidates at
+   radius 16. On radius-20 shard zero they reduce exact candidates from
+   4,280,955,058 to 3,741,881,433 on X (1.144x) and from 4,268,847,189 to
+   3,770,871,266 on Z (1.132x). Single diagnostic wall ratios are 1.009x and
+   1.079x; candidate reduction grows with depth, but per-state cost varies and
+   therefore needs counter modelling. The next implementation is an opt-in,
+   source-bound presentation-seed API followed by deterministic shallow
+   autotuning over a bounded seed bank. It must record the winner, preserve
+   artifact replay, add no hot state, and be selected per instance rather than
+   encoding either LP-specific seed.
+
    Commit `b89f00c45` also turns the one-off nauty diagnostic into an optional,
    backend-neutral discovery boundary. `css_automorphism_adapter` invokes
    `dreadnaut` or replays a bounded source-fingerprint-bound proposal, then
