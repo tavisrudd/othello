@@ -4121,8 +4121,26 @@
       "last": 1037,
       "purpose": "ergodis build-artifact hygiene: shared target dirs, retained baseline binaries, cache GC",
       "sequence": 458
+    },
+    {
+      "count": 1,
+      "first": 1038,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1038,
+      "purpose": "negative-control benchmark tier with predeclared Ergodis-shape classifier",
+      "sequence": 459
+    },
+    {
+      "count": 1,
+      "first": 1039,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1039,
+      "purpose": "theorem-gap planted corpus and evolve admission measurement",
+      "sequence": 460
     }
   ],
-  "next_id": 1038,
+  "next_id": 1040,
   "schema": "codex-task-id-allocations-v1"
 }
