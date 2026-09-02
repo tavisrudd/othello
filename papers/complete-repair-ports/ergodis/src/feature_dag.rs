@@ -108,6 +108,131 @@ pub enum FeatureDagError {
     NonCanonicalSnapshot,
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct FeatureBankBounds {
+    pub maximum_rows: usize,
+    pub maximum_bitmap_words: usize,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct FeaturePredicateCensus {
+    pub rows: u64,
+    pub expected: u64,
+    pub surviving: u64,
+    pub false_negatives: u64,
+}
+
+#[derive(Clone, Copy, Debug, Error, Eq, PartialEq)]
+pub enum FeatureBankError {
+    #[error("feature-bank bounds must be positive")]
+    EmptyBound,
+    #[error("feature-bank row matrix has the wrong size")]
+    Shape,
+    #[error("feature bank exceeds its configured row or bitmap bound")]
+    TooLarge,
+    #[error("expected-label bitmap has the wrong width")]
+    LabelWidth,
+    #[error("expected-label bitmap sets bits beyond the row domain")]
+    LabelTail,
+    #[error(transparent)]
+    Evaluation(#[from] FeatureDagError),
+}
+
+/// Column-major bitmaps for predicates of the form `feature == 0`.
+pub struct FeatureZeroBank {
+    rows: usize,
+    words: usize,
+    features: usize,
+    zero: Box<[u64]>,
+}
+
+impl FeatureZeroBank {
+    pub fn compile(
+        dag: &FeatureDag,
+        row_values: &[i64],
+        bounds: FeatureBankBounds,
+    ) -> Result<Self, FeatureBankError> {
+        if bounds.maximum_rows == 0 || bounds.maximum_bitmap_words == 0 {
+            return Err(FeatureBankError::EmptyBound);
+        }
+        if row_values.len() % dag.input_count() != 0 {
+            return Err(FeatureBankError::Shape);
+        }
+        let rows = row_values.len() / dag.input_count();
+        let words = rows.div_ceil(64);
+        let bitmap_words = dag
+            .len()
+            .checked_mul(words)
+            .ok_or(FeatureBankError::TooLarge)?;
+        if rows > bounds.maximum_rows || bitmap_words > bounds.maximum_bitmap_words {
+            return Err(FeatureBankError::TooLarge);
+        }
+        let mut zero = vec![0_u64; bitmap_words];
+        let mut workspace = dag.workspace();
+        for (row, inputs) in row_values.chunks_exact(dag.input_count()).enumerate() {
+            let values = dag.evaluate(inputs, &mut workspace)?;
+            for (feature, &value) in values.iter().enumerate() {
+                zero[feature * words + row / 64] |= u64::from(value == 0) << (row % 64);
+            }
+        }
+        Ok(Self {
+            rows,
+            words,
+            features: dag.len(),
+            zero: zero.into_boxed_slice(),
+        })
+    }
+
+    pub fn rows(&self) -> usize {
+        self.rows
+    }
+
+    pub fn features(&self) -> usize {
+        self.features
+    }
+
+    pub fn bitmap_words(&self) -> usize {
+        self.zero.len()
+    }
+
+    pub fn zero_mask(&self, feature: FeatureId) -> Option<&[u64]> {
+        (feature.index() < self.features)
+            .then(|| &self.zero[feature.index() * self.words..(feature.index() + 1) * self.words])
+    }
+
+    pub fn score_necessary_zero(
+        &self,
+        feature: FeatureId,
+        expected: &[u64],
+    ) -> Result<FeaturePredicateCensus, FeatureBankError> {
+        if expected.len() != self.words {
+            return Err(FeatureBankError::LabelWidth);
+        }
+        if self.rows % 64 != 0
+            && expected
+                .last()
+                .is_some_and(|&word| word & !((1_u64 << (self.rows % 64)) - 1) != 0)
+        {
+            return Err(FeatureBankError::LabelTail);
+        }
+        let selected = self.zero_mask(feature).ok_or(FeatureBankError::Shape)?;
+        let mut expected_count = 0_u64;
+        let mut surviving = 0_u64;
+        let mut false_negatives = 0_u64;
+        for (&selected, &expected) in selected.iter().zip(expected) {
+            expected_count += u64::from(expected.count_ones());
+            surviving += u64::from(selected.count_ones());
+            false_negatives += u64::from((expected & !selected).count_ones());
+        }
+        Ok(FeaturePredicateCensus {
+            rows: self.rows as u64,
+            expected: expected_count,
+            surviving,
+            false_negatives,
+        })
+    }
+}
+
 pub struct FeatureDag {
     input_count: u16,
     maximum_degree: u8,
@@ -639,5 +764,65 @@ mod tests {
             FeatureDag::from_snapshot(&future, 8),
             Err(FeatureDagError::UnknownNode)
         ));
+    }
+
+    #[test]
+    fn zero_bank_scores_necessary_predicates_from_bitmaps() {
+        let mut dag = FeatureDag::new(1, 2, 8).unwrap();
+        let x = dag.input(0).unwrap();
+        let bank = FeatureZeroBank::compile(
+            &dag,
+            &[-2, 0, 3],
+            FeatureBankBounds {
+                maximum_rows: 3,
+                maximum_bitmap_words: 1,
+            },
+        )
+        .unwrap();
+        assert_eq!(bank.zero_mask(x), Some(&[0b010][..]));
+        let census = bank.score_necessary_zero(x, &[0b010]).unwrap();
+        assert_eq!(
+            census,
+            FeaturePredicateCensus {
+                rows: 3,
+                expected: 1,
+                surviving: 1,
+                false_negatives: 0,
+            }
+        );
+        assert_eq!(
+            bank.score_necessary_zero(x, &[1_u64 << 63]),
+            Err(FeatureBankError::LabelTail)
+        );
+    }
+
+    #[test]
+    fn zero_bank_rescoring_allocates_nothing() {
+        let mut dag = FeatureDag::new(2, 2, 64).unwrap();
+        let candidates = dag
+            .expand_raw_degree_two(RawFeatureExpansion {
+                moduli: &[3],
+                ..RawFeatureExpansion::default()
+            })
+            .unwrap();
+        let rows = (0_i64..32)
+            .flat_map(|left| [left, 31 - left])
+            .collect::<Vec<_>>();
+        let bank = FeatureZeroBank::compile(
+            &dag,
+            &rows,
+            FeatureBankBounds {
+                maximum_rows: 32,
+                maximum_bitmap_words: dag.len(),
+            },
+        )
+        .unwrap();
+        let expected = [0x0000_0000_0000_ffff];
+        let (_, events) = crate::test_alloc::measure_current_thread_allocations(|| {
+            for &candidate in candidates.iter() {
+                std::hint::black_box(bank.score_necessary_zero(candidate, &expected).unwrap());
+            }
+        });
+        assert_eq!(events, crate::test_alloc::AllocationEvents::default());
     }
 }

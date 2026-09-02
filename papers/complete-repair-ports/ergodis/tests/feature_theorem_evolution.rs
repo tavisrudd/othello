@@ -1,6 +1,6 @@
 use ergodis::{
-    evolve_ranked_streaming, CensusReduction, EvolutionConfig, FeatureDag, FeatureId, FeatureOp,
-    RawFeatureExpansion,
+    evolve_ranked_streaming, CensusReduction, EvolutionConfig, FeatureBankBounds, FeatureDag,
+    FeatureId, FeatureOp, FeatureZeroBank, RawFeatureExpansion,
 };
 
 #[derive(Clone, Copy)]
@@ -28,14 +28,17 @@ fn runtime_raw_terms_recover_a_quadratic_residue_pruner() {
         .iter()
         .map(|[left, right]| (left * left - left * right + right * right).rem_euclid(7) == 0)
         .collect::<Vec<_>>();
-    let mut columns = vec![vec![0_i64; rows.len()]; dag.len()];
-    let mut workspace = dag.workspace();
-    for (row_index, row) in rows.iter().enumerate() {
-        let values = dag.evaluate(row, &mut workspace).unwrap();
-        for (column, &value) in columns.iter_mut().zip(values) {
-            column[row_index] = value;
-        }
-    }
+    let flat_rows = rows.iter().flatten().copied().collect::<Vec<_>>();
+    let bank = FeatureZeroBank::compile(
+        &dag,
+        &flat_rows,
+        FeatureBankBounds {
+            maximum_rows: rows.len(),
+            maximum_bitmap_words: dag.len() * rows.len().div_ceil(64),
+        },
+    )
+    .unwrap();
+    let expected_mask = label_mask(&expected);
     let summary = evolve_ranked_streaming(
         candidates.iter().copied(),
         EvolutionConfig {
@@ -45,15 +48,12 @@ fn runtime_raw_terms_recover_a_quadratic_residue_pruner() {
         },
         |_candidate, _output| {},
         |candidate: &FeatureId| {
-            let selected = columns[candidate.index()].iter().map(|&value| value == 0);
-            let (mut false_negatives, mut surviving) = (0_u32, 0_u64);
-            for (selected, &expected) in selected.zip(&expected) {
-                surviving += u64::from(selected);
-                false_negatives += u32::from(expected && !selected);
-            }
+            let census = bank
+                .score_necessary_zero(*candidate, &expected_mask)
+                .unwrap();
             Score {
-                false_negatives,
-                reduction: CensusReduction::new(rows.len() as u64, surviving).unwrap(),
+                false_negatives: u32::try_from(census.false_negatives).unwrap(),
+                reduction: CensusReduction::new(census.rows, census.surviving).unwrap(),
                 cost: dag.node(*candidate).unwrap().evaluation_cost,
             }
         },
@@ -98,16 +98,17 @@ fn affine_lift_transfers_a_symbolic_parameter_to_held_out_shards() {
         .iter()
         .map(|[parameter, x, y]| parameter * x + y == 0)
         .collect::<Vec<_>>();
-    let mut columns = vec![vec![0_i64; rows.len()]; dag.len()];
-    let mut workspace = dag.workspace();
-    for (row_index, row) in rows.iter().enumerate() {
-        for (column, &value) in columns
-            .iter_mut()
-            .zip(dag.evaluate(row, &mut workspace).unwrap())
-        {
-            column[row_index] = value;
-        }
-    }
+    let flat_rows = rows.iter().flatten().copied().collect::<Vec<_>>();
+    let bank = FeatureZeroBank::compile(
+        &dag,
+        &flat_rows,
+        FeatureBankBounds {
+            maximum_rows: rows.len(),
+            maximum_bitmap_words: dag.len() * rows.len().div_ceil(64),
+        },
+    )
+    .unwrap();
+    let expected_mask = label_mask(&expected);
     let summary = evolve_ranked_streaming(
         candidates.iter().copied(),
         EvolutionConfig {
@@ -117,16 +118,12 @@ fn affine_lift_transfers_a_symbolic_parameter_to_held_out_shards() {
         },
         |_candidate, _output| {},
         |candidate: &FeatureId| {
-            let mut false_negatives = 0_u32;
-            let mut surviving = 0_u64;
-            for (&value, &expected) in columns[candidate.index()].iter().zip(&expected) {
-                let selected = value == 0;
-                surviving += u64::from(selected);
-                false_negatives += u32::from(expected && !selected);
-            }
+            let census = bank
+                .score_necessary_zero(*candidate, &expected_mask)
+                .unwrap();
             Score {
-                false_negatives,
-                reduction: CensusReduction::new(rows.len() as u64, surviving).unwrap(),
+                false_negatives: u32::try_from(census.false_negatives).unwrap(),
+                reduction: CensusReduction::new(census.rows, census.surviving).unwrap(),
                 cost: dag.node(*candidate).unwrap().evaluation_cost,
             }
         },
@@ -153,6 +150,14 @@ fn affine_lift_transfers_a_symbolic_parameter_to_held_out_shards() {
             }
         }
     }
+}
+
+fn label_mask(labels: &[bool]) -> Vec<u64> {
+    let mut mask = vec![0_u64; labels.len().div_ceil(64)];
+    for (row, &label) in labels.iter().enumerate() {
+        mask[row / 64] |= u64::from(label) << (row % 64);
+    }
+    mask
 }
 
 fn depends_on_input(dag: &FeatureDag, id: FeatureId, target: u16) -> bool {
