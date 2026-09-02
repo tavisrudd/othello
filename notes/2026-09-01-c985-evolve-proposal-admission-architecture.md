@@ -394,6 +394,14 @@ The standard descriptor is a versioned byte stream so command and local-
 process providers remain usable; embedding controllers may install typed-plan
 and canonical structured descriptors.
 
+The reusable hosted-SDK wrapper now supplies the common execution half of that
+seam. A vendor translation accepts one typed invocation and one already-open
+request stream, performs one attempt, and returns a closeable async byte stream.
+The wrapper schema-gates the call, caps chunks and aggregate bytes, writes an
+anonymous disk-backed result, and bounds closure on cancellation. Vendor code
+only normalizes its error taxonomy and response events; it cannot own retry,
+deadline, rate, or circuit policy. No vendor SDK is a core dependency.
+
 ### Implemented cold policy boundary
 
 The first reusable policy slice now lives in the feature-gated control module.

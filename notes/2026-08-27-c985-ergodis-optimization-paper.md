@@ -2729,7 +2729,16 @@ files are disposable and may be deleted at any time.
     and schema byte overflow fail closed. The standard byte-stream descriptor
     preserves generic command providers; embedding controllers can install
     typed-plan or canonical structured schemas without adding transport ops.
-    The next slice is an optional hosted SDK adapter package.
+    The provider-neutral hosted-SDK wrapper is now implemented without a
+    vendor dependency: one translation receives the typed invocation and an
+    already-open request stream, performs one attempt, and returns a closeable
+    async byte stream. The wrapper schema-gates, caps 64-KiB chunks and total
+    bytes, streams to anonymous disk, and closes under success, failure,
+    cancellation, or a bounded close timeout. It has no retries or policy;
+    provider `Retry-After`, transient faults, deadlines, and circuits remain
+    daemon-owned. Four deterministic controls pass. The next adapter gate is
+    one concrete vendor translation selected by an actual campaign need,
+    rather than making a vendor SDK a core dependency pre-emptively.
     Portfolio routing now separates theorem quality from provider health:
     active `Retry-After` deferrals, concurrency/circuit gates, and calls whose
     estimated wall time crosses the absolute deadline are ineligible, while a

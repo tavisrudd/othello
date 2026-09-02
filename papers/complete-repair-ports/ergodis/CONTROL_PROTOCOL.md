@@ -305,6 +305,16 @@ Python runner confines that path to the authenticated run directory and passes
 the typed schema descriptor with it before a backend sees either. Request and
 result payloads therefore never enter JSON frames or whole-memory buffers.
 
+The optional hosted-SDK wrapper preserves that boundary. A vendor translation
+receives one validated invocation and an already-open request stream, performs
+exactly one attempt, and returns a closeable async byte stream. The wrapper
+requires an explicit schema-identity allowlist, limits each chunk, streams the
+aggregate into an anonymous disk-backed file, enforces the ticket result cap,
+and bounds response closure during cancellation. Provider authentication,
+throttle, transport, and deterministic errors are normalized to the existing
+failure classes; the adapter never retries or overrides daemon deadlines,
+backoff, rate accounting, or circuits.
+
 `ergodisctl evolve-start` accepts an optional direct seed JSONL file and up to
 eight repeated `--resume-evidence` paths.  A replay archive must match the
 problem, ordered feature schema, and exact feature-generator provenance.  When

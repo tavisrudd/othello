@@ -81,6 +81,24 @@ child process group. This supports local LLMs, hosted-provider CLI wrappers,
 SAT/MIP tools, and research scripts without adding any provider dependency to
 Ergodis.
 
+`ergodis_sdk_provider.StreamingSdkProvider` is the optional hosted-SDK
+translation boundary. A vendor adapter supplies exactly one async call taking
+the immutable `ProviderInvocation` plus an already-open bounded request stream,
+and returns a closeable async byte stream. The wrapper accepts only configured
+schema identities, holds the request descriptor open against path replacement,
+rejects chunks above 64 KiB, streams the aggregate response into an anonymous
+disk-backed file, enforces the ticket byte cap, and closes network resources
+under success, failure, cancellation, or a separately bounded close timeout.
+It has no provider dependency and no retry loop.
+
+Vendor code maps authentication/malformed requests to deterministic failures,
+temporary transport/5xx failures to `TRANSIENT_TRANSPORT`, and throttles to
+`PROVIDER_RATE_LIMIT` with the provider's delay in `retry_after_ms`. It must not
+retry, extend deadlines, buffer a complete response, or leave background SDK
+work running: `ProviderRunner` and the daemon own those policies. Thus adding a
+vendor means translating one typed schema and one attempt, not reimplementing
+the campaign protocol.
+
 Submission input uses the same bounded artifact boundary as output. The session
 returns a private run-relative request-upload directory and a nonempty tuple of
 frozen `ProposalRequestSchema` descriptors. If exactly one schema is offered it
