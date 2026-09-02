@@ -693,9 +693,209 @@ formalization, read the paper-specific expert dossier
 
 C985 follows C983 as a separate optimization-facing paper research task and
 does not block C984, C325, or C953.
-C1016 is queued after C985 as a proof-carrying Ergodis pilot: add verified
-`Necessary` plans and test evolved group-ring quotient and compatible-compression
-reductions on the bordered Goethals--Seidel order-2092 search before any full run.
+C1016 is active as a private Ergodis reduction-synthesis pilot. A hostile review found that its
+unapproved presentation-hash/feature-name overlay did not establish extractor semantics. Public
+proof authority, `Necessary`, and all Hadamard/GS code are therefore removed; core again advertises
+`proof_authority: false`. Every C1016 kernel, fixture, campaign, oracle, and evidence artifact lives
+in top-level `ergodis-private`. Fourteen exact private reductions now have independent replay: the first
+pass closes every order-42 multiplier shard and couples the order-two/order-three and `d=9/d=6`
+views; the second pass adds `g=53` order 6 (`2^148.683 -> 2^138.479`), `g=41` joint orders 9/18
+(`369.4x`), commuting-translation Burnside quotients (up to essentially `18^4`), and the `g=91`
+quadratic order-29 sector (two profiles, `291.9x`). The structural pass identifies the common
+mechanism as CRT multiplier-orbit algebras and
+fixed-field norm equations. It adds the common unit-dilation quotient (effective orders 14/14/12/12),
+`g=41` joint orders 3/9/18 (`2^5.909` beyond 9/18), `g=133` structural order 9 and joint orders 3/9
+(`2^21.046` below its raw invariant space), and `g=91` joint orders 3/29 (`2^15.684` beyond order
+29). The `g=91` order-29 compiler is now a closed binomial/three-square proof rather than subset DP.
+The fourteenth reduction is the `g=53` five-family CRT q29 norm joined to q2/q3/q6: it removes a
+further `2^12.869`, gives exact pair-frontier exponents `70.610/70.079`, and has a direct-orbit
+oracle. A private general proof layer now supplies sealed extractor bindings, bounded exact
+linear/Diophantine endpoints, iterative Horn synthesis, independent replay, adversarial semantic
+and provenance tests, and zero-allocation rule kernels. Complete typed character coverage now
+synthesizes a shorter cyclic quotient-PAF theorem: orders `{2,3,6,9,18}` give ten exact `Z/18`
+integer equations. Their zero shell independently removes 20.430689 bits beyond q2/q3/q6 and
+forces one of ten sparse defect profiles, with at least 31 of 40 reciprocal coordinates on the
+`k=2` background. This is a structural double count, not a large certificate; the exact overlap
+with q29 remains uncounted.
+A 315-row `g=91` evolve control found 17
+observationally perfect diagnostic predicates, including one weaker than the exact theorem; this is
+the permanent control showing why corpus perfection has no pruning authority. The quaternionic
+amicability theorem of arXiv:2601.22337 is scoped only to a separate Williamson/QT construction
+root and is invalid for bordered GS. C999 remains read-only. Every resume first reads
+`ergodis/PERFORMANCE.md` and the shared playbook. Provenance distinguishes proved structural and
+exact computational reductions from observed/evolved and heuristic predicates. The latter may guide
+discovery but grant no negative coverage authority. The original PTY search disappeared without a
+retained result and has no evidentiary status. Its replacement completed 50 billion mutations on
+16 threads under CHOOM and a 2 GiB cap, recorded 59,524 instructions and 17,879 aggregate cycles
+per mutation, and found no direct witness. This is a heuristic miss only; its 7.8-hour conservative
+2-GHz model validates the under-one-day gate. The next campaign must retain an exact quotient-shell
+survivor before fine PAF; private search v2 now emits a 32-byte orbit seed only after direct replay
+of all ten quotient equations and revalidates/restores that discovery-only seed on phase-two
+restarts. A one-million-mutation phase-one control found no shell (best residual 3,437) at 27,539
+instructions and 5,828 cycles per mutation; it has no negative meaning. Any positive is checked directly against all defining equations, while a
+negative proves nothing. The serial private all-target/all-feature suite passes 82 library tests plus
+every binary and integration target; the hot allocation and incremental differential gates pass.
+The generic quotient proof derives/replays in 342/314 instructions and 45.6/45.9 cycles per
+operation, while the defect theorem needs 504/464 instructions and 66.2/73.8 cycles, measured
+under CHOOM with nonmultiplexed hardware counters over 20 million operations each.
+Proof hardening and reduction evolution continue.
+The current private loop additionally retains typed exact-prefix checkpoints and
+replays them independently. Eight 16-thread shards (1.28B mutations) yielded
+76 distinct exact q0--q3 checkpoints and only eight observed residual templates.
+The proved zero-shift defect equation has now replaced that stochastic frontier:
+an iterative sparse compiler reduces each 443k--481k base-five block domain to
+711--1,613 exact profiles. A 16-worker Ergodis join exhausts all 2,496 g53
+mod-seven roots at q4 with zero hits; an independent full-base-five/hash oracle
+agrees. The exact q4 fibre has only four classes, determined by the ten possible
+special masks: 864 roots have no q0--q3 lift, and the other classes permit only
+`{15101,15150}`, `{14926,15290}`, or
+`{14919,15094,15108,15178,15206}`, never the required 15,080. A sealed private
+proof stores those ten rows plus six Horn steps and recomputes both algorithms;
+forged semantics/provenance fail closed. The exact solve uses 48.0B cycles,
+independent replay 56.3B, and proof generation plus verification 149.1B, all
+under 49 MiB RSS. The former 8.3-hour stochastic estimate is obsolete: the g53
+multiplier shard is exactly empty before q5/q6/q29 or fine PAF. This does not
+settle unrestricted order 2092; transfer the sparse fibre method to the next
+multiplier sector. Scalar real/modular duals and all tested two-/three-coordinate
+congruence projections cover no roots and are retained as rejected theorem
+shapes. The first transfer closes `g=91` even more sharply: its Z18 fibres have
+one singleton plus two size-14 orbit families, so q0 would require
+`13 n27 + 15 n29 = 34`, which has no bounded nonnegative solution. Its sealed
+structural proof, independent endpoint oracle, adversarial provenance tests,
+and zero-allocation six-rule kernel pass; derive/replay cost 513/459
+instructions per operation. The next transfer gives a major but explicitly
+necessary-only g41 reduction. Its six Z18 slots have scales four/two and q0
+defect budget 230. Exact q0/q1 reduce 262,144 mod-two roots to 9,216/4,608;
+an independent flat oracle checks all 207,360,000 block assignments and agrees.
+Since 41 is 5 mod 18, all quotient shifts reduce structurally to
+q0/q1/q2/q3/q6/q9. Independently exact q2/q3/q6/q9 filters intersect in 768
+roots (341.333x); this is not a common-witness claim. Four further flat oracles
+check 829,440,000 raw assignments. A sealed `ExactComputational` proof binds
+the extractor/source/parameters, generic quotient theorem, shift orbits, and
+the sorted-root digest, then recomputes all filters and oracles. Generation and
+verification use 978.9B instructions, 323.3B cycles, and 139 MiB RSS. The fixed
+16 MiB pair workspace has an explicit load cap and a zero-allocation hot-loop
+test. For g133, exact q0 excludes 11,038,464/26,763,264 mod-four roots, while
+q1 and tested q2--q4 modular/range shapes add no pruning. No under-one-day
+combined estimate or solve launch is yet justified: next compile a common g41
+quotient witness over the 768 roots and find a non-scalar g133 reduction.
+Concurrent public-core edits remain foreign; do not absorb them into C1016.
+The g41 common-witness compiler is now complete: all 768 quotient roots have a
+directly replayed common witness, so quotient-only pruning is exhausted.  Fine
+order-29 evolution reaches residual 8 after 491.52M mutations but no hit.  A
+new private 2-adic autocorrelation theorem replaces the failed flat mod-16
+image (12,582,912-state cap) by 256-bit lift fibres, compressing 14,850,319
+states to 262,144 on the measured block at 150 MiB RSS.  A bounded
+allocation-free Smith reducer proves that the four exact mod-16 images lie in
+cosets of one order-`2^27` subgroup of `(Z/16)^8`, a 32x structural profile
+quotient.  The target survives on the primary witness and eight further roots;
+this is representation leverage, not root exclusion.  A sampled modular match
+was iteratively reconstructed to actual orbit masks and directly rescored
+(residual 44,544); seeded evolution reaches 24 and does not beat the residual-8
+basin. The g133 exact-interior ladder now has a much stronger result. Since
+`133 == 7 (mod 18)`, multiplier shift orbits are `{1,5,7}`, `{2,4,8}`, `{3}`,
+`{6}`, and `{9}`. Exact q6 reduces the 15,724,800 q0/q1 roots to 6,739,200,
+excluding 57.14%; a root-bitset intersection shows q6 is contained in q2, so
+q2 is redundant. A sealed exact-computational proof independently recomputes
+q6 and directly replays positives without a root/pair certificate. The former
+q3/q9 100M-value cap is replaced by the exact structural representation
+`([min,max] intersect residues) minus holes`; both now complete and retain all
+q0/q1 roots. A complete 225-cell weighted Ergodis-evolve corpus found a strong
+q1-profile signal but not the reduction. Private adapter v4 therefore exports
+base residue/range-compatible pair counts and hole-covered pair counts and
+seeds their field-to-field relation. Evolve then finds the perfect three-op
+predicate `base_sumset_pairs != hole_covered_pairs` at generation zero. Private
+extractor v2 commits the canonical mechanism corpus and adds this gap identity
+to its structural transcript; public-core grammar/CEGIS/template wishes are
+recorded in the C1016 core-enhancement ledger and must not be implemented here.
+Private evolve backfill now covers all ten sealed proof systems by exhaustive
+rule ablation and all fourteen banked reductions by exhaustive semantic
+residual corpora. A separate blind harness imports no theorem registry, names,
+fields, masks, rules, predicates, or theorem-specific seeds; across 1,134 rows
+it finds exact generic decision trees and evolve retains perfect candidates
+for all fourteen corpora. This validates blind recovery from supplied
+theorem-derived coordinates, not invention from raw orbit masks: generic
+bounded raw-feature expansion and held-out direct-orbit replay remain the next
+strict gate, and the missing compositional mutation grammar stays ledgered for
+public core without any C1016 core edit.
+The next private blind control removes residual columns: one generic expander
+emits all pairwise differences from opaque paired scalars, and a newly added
+generic zero-conjunction proposer repairs the greedy decision tree's 14/14
+failure on those noisy features. Without theorem dispatch or selected-pair
+metadata it finds exact training predicates for all fourteen reductions and
+replays them on all 14,336 disjoint holdout rows. This is pre-residual scalar
+discovery, not yet raw-orbit discovery; bounded generic norm/CRT expression
+growth plus direct-orbit holdout labels remains the strict next gate.
+The first g133 multiplicity audit invalidated the earlier unit-cost root model,
+but an exact common-shift join now retires that envelope. The 38 q6 block
+classes refine to only 50 full `(energy,q1,q3,q6,q9)` state-set classes, and
+the 42 q6 cells refine to 90 cells representing all 6,739,200 roots. A bounded
+hash join and independent sorted-vector oracle agree that all 90 are empty.
+Generic scoped feature synthesis, given anonymous pair-key observations and no
+scope masks, then evolves one feature valid on all 90 cells:
+`-2 q3 - q9 (mod 11)`. It has ten disjoint residue-set patterns. The structural
+mechanism is the exact cycle identity
+`sum C_r^2 = P0 + 2 P3 + 2 P6 + P9` for the three residue cycles modulo 3.
+An iterative categorical learner recovers the ten scope patterns from the four
+earlier joint-class coordinates with a 63-node exact tree, then continuation
+hash-consing reduces it to a 38-state tablebase; repeated synthesis/evaluation
+allocates zero times. The structural replacement is now sealed without that
+90-cell partition: a typed `(energy,q1,q6,F mod 11)` extractor leaves all q6
+classes unsplit, so the original 42 semantic cells cover all 6,739,200 roots.
+A fixed-hash join and an independent ordered-vector/direct-residue oracle
+exclude all 42 with 18.0/462.5 MB workspaces. The compact six-rule proof
+internally regenerates the q6 corpus, cell weights, root transfer, and both
+joins; its identity provenance is `ProvedStructural` and its negative coverage
+is `ExactComputational`. No JSON presentation has authority. Removing duplicate
+q6 extraction cuts end-to-end proof counters 51.9% to 1.298T cycles. Evolve is
+backfilled with a blind 64-row rule-ablation control and retains 22 perfect
+diagnostic skeletons, none authoritative.
+
+For g41, a generic raw-vector miner independently rediscovers the order-four
+multiplier action and the residual-eight `+1/-1` two-orbit motif. A typed
+seven-residual scorer replaces 28 hot coordinate tests, preserving exact
+search results while saving 4.15% one-thread and 5.59% eight-thread cycles.
+The global autocorrelation identity determines the residual sum from q0;
+balance is scoped, not global, and the all-root evolve report retains the
+768-bit scope mask. A six-coordinate derived-value encoding regressed cycles
+and was rejected. Exact weighted and direct joins now agree on all 1,984,512
+raw common-quotient digit interfaces (1,800--3,662/root), removing the
+arbitrary-preimage model. A sealed, fully replayed 47.6 MB cache reduces all-
+interface load/initialization to 46.2B aggregate cycles and 56 MiB RSS. A
+16-thread 1.984B-mutation discovery pass costs 8.179T cycles and reaches
+residual 16; misses remain non-authoritative. The q29 lift has a new structural
+coordinate `D_s=A0-As=1/2 sum_r(x_r-x_{r+s})^2`: all defects are nonnegative,
+their four-block target is 523, and row-261 complementation preserves them,
+halving block specs. Generic private Dirichlet-feature expansion exposes this
+to evolve without q29-labelled fields. The g133 solve envelope is gone;
+remaining runtime uncertainty is the exact g41 deficit-tablebase/fine-lift
+join. No under-one-day exhaustive estimate or solve launch is yet justified.
+The private blind control is now stricter as well: opaque corpus and
+field IDs plus hidden feature permutation still recover all fourteen banked
+reductions and all 14,336 disjoint holdout rows. Persistent typed feature-DAG,
+scope-learning, and contextual-tablebase capabilities remain private; any
+eventual public-core form is ledgered and must not be implemented in C1016.
+
+The unrestricted bridge now has one exact q18 shell: a full-delta `3+2`
+tablebase repairs the retained residual-32 root in 11.26B instructions and
+3.82B cycles using an 8.13 MB zero-allocation workspace.  All four labelled
+margins are Gale--Ryser compatible with the retained q29 residual-six root,
+and a constructive private boundary emits canonical 18-by-29 matrices and
+directly replays all 521 original equations; the canonical lift has score
+1,204,320, so margin compatibility is plumbing rather than pruning.  On q29,
+a 180--181 MB full-correlation TT replaces brute trade enumeration: at most
+two applications per row costs 0.80B instructions, and allowing one triple
+row costs 28.14B, covering up to nine applications; both exact scoped families
+miss.  A bounded nonlinear SMT proposer timed out twice and was removed as a
+rejected backend.  The full-solve launch remains gated on an exact q29 shell
+and a measured mixed-CRT reconstruction search; no two-day estimate is yet
+justified.
+
+C1017 is queued to remediate the whole-core Ergodis performance-contract audit:
+allocation-counted hot loops, iterative traversal, complete Tiger layouts,
+contention-free worker ownership, one-/parallel-mode counter A/B gates, and the
+public/private source partition. Its task report is
+[`C1017 core remediation`](../2026-08-30-c1017-ergodis-core-performance-contract-remediation.md).
 
 The prior monolithic draft and its cold reads remain inputs, not acceptance of the modular
 hierarchy. C220 remains omitted. Shared-Lean extraction is planned under
