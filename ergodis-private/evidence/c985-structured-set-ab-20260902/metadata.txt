@@ -1,0 +1,8 @@
+schema=c985-structured-set-ab-v1
+git_commit=701f1954275627f208e647da059b6eed2d240424
+rustc=rustc 1.93.1 (01f6ddf75 2026-02-11)
+binary_sha256=1f5b9515eeaf97afea66b4c1792b0f335ae11c58c65d080b2c2c143ee123bba0
+pairs=7
+rounds=100
+queries=257
+cpu=2

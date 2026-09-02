@@ -1,0 +1,1 @@
+mode=Structured rounds=100 queries=257 checksum=12664749333343939563

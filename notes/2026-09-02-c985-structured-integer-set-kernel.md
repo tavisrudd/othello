@@ -108,7 +108,36 @@ default.
 ## Acceptance and next gate
 
 Focused exact/oracle/allocation tests, strict all-target/all-feature clippy, and
-the full all-target/all-feature suite pass. Commit the structural sharpening
-and its retained harness, then repeat the seven-pair counter A/B from that exact
-revision. A direct C1016 adapter remains separate so no active private campaign
-code or vocabulary moves into core.
+the full all-target/all-feature suite pass. From exact commit `701f19542`, the
+retained seven-pair counter A/B (100 rounds by 257 queries per arm, order
+rotated, pinned to CPU 2) reports the following paired medians:
+
+| Measure | Flat / structured | Paired-log t |
+|---|---:|---:|
+| wall | 67.860x | 254.09 |
+| cycles | 92.818x | 1660.30 |
+| instructions | 77.196x | 58948940.40 |
+| branches | 89.507x | 30630825.26 |
+| branch misses | 143.180x | 507.99 |
+
+Every arm reports `work=25700` and the same checksum. This is a deliberately
+application-shaped g133 control of the imported kernel, not a direct C1016
+end-to-end speed claim. The exact harness, raw perf counters, streamed stdout,
+metadata, summary, and SHA-256 manifest are retained at
+`ergodis-private/evidence/c985-structured-set-ab-20260902/`.
+
+Independent replay:
+
+```sh
+nix shell nixpkgs#python3 -c python3 \
+  ergodis-private/benchmarks/summarize_paired_ab.py \
+  ergodis-private/evidence/c985-structured-set-ab-20260902/samples.tsv \
+  /tmp/persistent/c985-structured-set-summary.tsv
+cmp ergodis-private/evidence/c985-structured-set-ab-20260902/summary.tsv \
+  /tmp/persistent/c985-structured-set-summary.tsv
+(cd ergodis-private/evidence/c985-structured-set-ab-20260902 && \
+  sha256sum -c SHA256SUMS)
+```
+
+A direct C1016 adapter remains separate so no active private campaign code or
+vocabulary moves into core.

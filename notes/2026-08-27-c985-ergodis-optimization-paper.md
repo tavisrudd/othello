@@ -319,9 +319,14 @@ files are disposable and may be deleted at any time.
    replay allocate nothing. Exhaustive small residue controls, negative-coordinate
    cases, a flat sum oracle, malformed presentations, forged certificates, and
    the allocation gate pass. The design and novelty boundary are recorded in
-   `2026-09-02-c985-structured-integer-set-kernel.md`. A private retained A/B
-   harness is ready; its first diagnostic preceded the structural-counter
-   commit and is not evidence. Repeat it from the committed revision next.
+   `2026-09-02-c985-structured-integer-set-kernel.md`. The retained seven-pair
+   shape control from exact commit `701f19542` reports 67.86x wall, 92.82x
+   cycles, and 77.20x instructions in favour of the structural counter
+   (`t=254.09/1660.30/58948940.40` on paired log ratios), with equal work and
+   checksums. This is a g133-shaped kernel control, not a direct C1016
+   application claim. Raw counters, streamed stdout, metadata, and hashes are
+   retained under `ergodis-private/evidence/c985-structured-set-ab-20260902/`.
+   The next gate is an independently owned application adapter.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

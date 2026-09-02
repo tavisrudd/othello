@@ -69,4 +69,5 @@ for ((pair = 1; pair <= pairs; pair++)); do
     fi
 done
 
-sha256sum "$samples" "$metadata" >"$output_dir/SHA256SUMS"
+sha256sum "$samples" "$metadata" "$output_dir"/perf-*.csv "$output_dir"/stdout-*.txt \
+    >"$output_dir/SHA256SUMS"
