@@ -4,15 +4,15 @@ use std::io::{self, Write};
 use std::path::PathBuf;
 use std::time::Instant;
 
-use clap::{Parser, ValueEnum};
+use clap::{Args as ClapArgs, ValueEnum};
 use ergodis_private::landed_rank_adapter::{
     q9_channel_system, q9_extra_channel_system, GENERATOR_NAMES, SOURCE_SHA256,
 };
 use ergodis_private::semantic_rank::{compile_semantic_rank_core, Gf9RankWorkspace};
 use serde::Serialize;
 
-#[derive(Parser)]
-struct Args {
+#[derive(ClapArgs)]
+pub struct Args {
     #[arg(long)]
     output: Option<PathBuf>,
 
@@ -100,8 +100,7 @@ fn run_replay_kernel(
     black_box(checksum);
 }
 
-fn main() -> anyhow::Result<()> {
-    let args = Args::parse();
+pub fn run(args: Args) -> anyhow::Result<()> {
     let system = q9_extra_channel_system();
     let started = Instant::now();
     let core = compile_semantic_rank_core(&system);

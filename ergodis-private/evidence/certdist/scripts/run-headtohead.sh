@@ -4,7 +4,8 @@
 # same compiled filter. Answers "how much does resumability cost?" directly.
 set -u
 CD="$HOME/.cache/ergodis/certdist"
-BIN="$CD/shim-target/release/certdist"
+# certdist is now the `css certdist` subcommand of the ergodis-tools binary.
+TOOLS="${ERGODIS_TOOLS:-$HOME/.cache/ergodis/target/ergodis-private/release/ergodis-tools}"
 Q="$HOME/.cache/ergodis/c1018/qldpc"
 NATIVE="$CD/core-target/release/css_distance_native"
 LOG="$CD/headtohead.log"
@@ -17,7 +18,7 @@ pair() {
   local job="$CD/h2h/$target"
   echo "=== $target radius $radius ===" | tee -a "$LOG"
   # Build the job (and its filter) without running the cover, by planning zero shards.
-  "$BIN" run --input "$Q/$target.json" --job "$job" --radius "$radius" \
+  "$TOOLS" css certdist run --input "$Q/$target.json" --job "$job" --radius "$radius" \
     --shards 32 --threads 8 --upper none --wall-budget 0.001 --native "$NATIVE" >/dev/null 2>&1
 
   echo "--- one shot, unsharded, 8 threads" | tee -a "$LOG"
@@ -38,7 +39,7 @@ for line in sys.stdin:
 
   echo "--- 32 resumable shards, 8 threads each, sequential" | tee -a "$LOG"
   /usr/bin/env time -f "SHARDED $target wall=%e maxrss_kib=%M" \
-    "$BIN" run --input "$Q/$target.json" --job "$job" --radius "$radius" \
+    "$TOOLS" css certdist run --input "$Q/$target.json" --job "$job" --radius "$radius" \
       --shards 32 --threads 8 --upper none --native "$NATIVE" 2>&1 \
     | rg '^(shards|bracket)' | tee -a "$LOG"
 }

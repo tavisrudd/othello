@@ -21,7 +21,7 @@
 //! except the two shipped binaries.
 
 use anyhow::{bail, Context, Result};
-use clap::{Args as ClapArgs, Parser, Subcommand};
+use clap::{Args as ClapArgs, Subcommand};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::collections::BTreeSet;
@@ -96,9 +96,7 @@ impl Echelon {
     /// independent and has been absorbed, `None` when it reduced to zero.
     fn insert(&mut self, mut row: Vec<u64>) -> Option<usize> {
         loop {
-            let Some(pivot) = self.leading(&row) else {
-                return None;
-            };
+            let pivot = self.leading(&row)?;
             match &self.pivots[pivot] {
                 None => {
                     self.pivots[pivot] = Some(row);
@@ -707,6 +705,9 @@ fn builtin_osd(
     }
 }
 
+// The upper-bound pass takes the full external-command contract; collapsing it
+// into a struct would only move the same fields behind one more name.
+#[allow(clippy::too_many_arguments)]
 fn core_random(
     problem: &SparseProblem,
     binary: &Path,
@@ -807,7 +808,7 @@ fn external_upper(problem: &SparseProblem, command: &str, input: &Path) -> Resul
         completed_trials: record.completed_trials,
         seed: 0,
         threads: 0,
-        weight: (!record.witness.is_empty()).then(|| record.witness.len() as u16),
+        weight: (!record.witness.is_empty()).then_some(record.witness.len() as u16),
         witness: record.witness,
         witness_check,
     })
@@ -1465,12 +1466,8 @@ fn canonical_json(certificate: &Certificate) -> Result<Vec<u8>> {
 // CLI
 // ---------------------------------------------------------------------------
 
-#[derive(Debug, Parser)]
-#[command(
-    name = "certdist",
-    about = "Certified exact minimum-distance service prototype (job-level driver for the Ergodis CSS distance core)"
-)]
-struct Cli {
+#[derive(Debug, ClapArgs)]
+pub struct Cli {
     #[command(subcommand)]
     command: Job,
 }
@@ -1694,6 +1691,8 @@ fn print_bracket(bracket: &Bracket) {
     }
 }
 
+// One parameter per `plan` flag, so the signature is the command-line contract.
+#[allow(clippy::too_many_arguments)]
 fn cmd_plan(
     input: PathBuf,
     job: PathBuf,
@@ -2381,8 +2380,7 @@ fn cmd_verify(
     }
 }
 
-fn main() -> Result<()> {
-    let cli = Cli::parse();
+pub fn run(cli: Cli) -> Result<()> {
     match cli.command {
         Job::Plan {
             input,

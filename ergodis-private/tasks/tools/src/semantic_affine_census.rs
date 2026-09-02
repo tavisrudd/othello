@@ -2,13 +2,13 @@ use std::fs::OpenOptions;
 use std::io::Write;
 use std::path::PathBuf;
 
-use clap::Parser;
-use ergodis_private::semantic_plan::affine_census::{affine_subspaces, run};
+use clap::Args as ClapArgs;
+use ergodis_private::semantic_plan::affine_census::{affine_subspaces, run as affine_run};
 use ergodis_private::semantic_sets::TernaryPartitionMaxOverlapProfiler;
 use serde::Serialize;
 
-#[derive(Parser)]
-struct Args {
+#[derive(ClapArgs)]
+pub struct Args {
     /// Optional TSV with `nine_set` and optional `orbit_size` columns.
     #[arg(long)]
     labelled_tsv: Option<PathBuf>,
@@ -83,9 +83,8 @@ fn profile_labelled(path: &PathBuf, planes: Vec<u64>) -> anyhow::Result<(u64, Ve
     Ok((total, profiler.histogram().to_vec()))
 }
 
-fn main() -> anyhow::Result<()> {
-    let args = Args::parse();
-    let census = run()?;
+pub fn run(args: Args) -> anyhow::Result<()> {
+    let census = affine_run()?;
     let planes = affine_subspaces(2);
     let lines = affine_subspaces(1);
     assert_eq!(planes.len(), 39);

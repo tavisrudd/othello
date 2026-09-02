@@ -36,8 +36,7 @@ intentionally excluded because they contain ephemeral process/control state.
 Replay from `ergodis-private/` with fresh create-only output paths:
 
 ```sh
-CARGO_TARGET_DIR=../rust/target-c985-private-profile \
-  cargo run --release --bin target_strategy_audit -- \
+cargo run --release -p ergodis-tools -- target-strategy-audit \
   --data examples/data/campaign-c880-live-ordering.jsonl \
   --seeds examples/data/c985-target-strategy-seeds.jsonl \
   --run-root evidence/replay-target-strategy-numeric-runs \
@@ -46,8 +45,7 @@ CARGO_TARGET_DIR=../rust/target-c985-private-profile \
   --target-field root_sized --target-value 6 --target-value 2 \
   --target-value 1 --generations 3 --beam 4 --max-candidates 32
 
-CARGO_TARGET_DIR=../rust/target-c985-private-profile \
-  cargo run --release --bin target_strategy_audit -- \
+cargo run --release -p ergodis-tools -- target-strategy-audit \
   --data examples/data/campaign-c880-live-ordering.jsonl \
   --seeds examples/data/c985-target-strategy-structural-seeds.jsonl \
   --run-root evidence/replay-target-strategy-structural-runs \

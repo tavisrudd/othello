@@ -6,7 +6,7 @@ use std::io::{BufRead, BufReader, Read, Write};
 use std::path::{Path, PathBuf};
 
 use anyhow::{bail, Context, Result};
-use clap::{Parser, ValueEnum};
+use clap::{Args as ClapArgs, ValueEnum};
 use serde::Serialize;
 use sha2::{Digest, Sha256};
 
@@ -18,8 +18,8 @@ enum Direction {
     Z,
 }
 
-#[derive(Debug, Parser)]
-struct Args {
+#[derive(Debug, ClapArgs)]
+pub struct Args {
     /// Matrix stem without `_Hx.txt` / `_Hz.txt` / `_Gx.txt` / `_Gz.txt`.
     #[arg(long)]
     stem: PathBuf,
@@ -92,8 +92,7 @@ struct Symmetry {
     anchors: Vec<u16>,
 }
 
-fn main() -> Result<()> {
-    let args = Args::parse();
+pub fn run(args: Args) -> Result<()> {
     if args.maximum_weight == 0 {
         bail!("--maximum-weight must be positive");
     }
@@ -354,7 +353,7 @@ fn find_symmetry(
     let mut candidates = Vec::new();
 
     for step in 1..columns {
-        if columns % step != 0 {
+        if !columns.is_multiple_of(step) {
             continue;
         }
         let generator = global_shift(columns, step);
@@ -372,7 +371,7 @@ fn find_symmetry(
     }
 
     for block_size in (2..columns).rev() {
-        if columns % block_size != 0 {
+        if !columns.is_multiple_of(block_size) {
             continue;
         }
         for step in 1..block_size {
@@ -402,10 +401,10 @@ fn find_symmetry(
         }
     }
 
-    if columns % 2 == 0 {
+    if columns.is_multiple_of(2) {
         let block_size = columns / 2;
         for rows in 2..block_size {
-            if block_size % rows != 0 {
+            if !block_size.is_multiple_of(rows) {
                 continue;
             }
             let cols = block_size / rows;

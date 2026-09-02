@@ -1,5 +1,5 @@
 use anyhow::{bail, Context, Result};
-use clap::Parser;
+use clap::Args as ClapArgs;
 use serde::Serialize;
 use serde_json::Value;
 use sha2::{Digest, Sha256};
@@ -9,9 +9,8 @@ use std::io::{BufReader, BufWriter, Read, Write};
 use std::os::unix::fs::OpenOptionsExt;
 use std::path::{Path, PathBuf};
 
-#[derive(Debug, Parser)]
-#[command(about = "Learn a conservative routing policy from matched evolution audits")]
-struct Args {
+#[derive(Debug, ClapArgs)]
+pub struct Args {
     #[arg(long, required = true, num_args = 2..)]
     report: Vec<PathBuf>,
     #[arg(long, default_value = ".")]
@@ -313,8 +312,7 @@ fn decide(
     })
 }
 
-fn main() -> Result<()> {
-    let args = Args::parse();
+pub fn run(args: Args) -> Result<()> {
     if args.minimum_reports == 0 {
         bail!("minimum reports must be positive");
     }

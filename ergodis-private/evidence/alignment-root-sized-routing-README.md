@@ -28,14 +28,12 @@ credentials are excluded.
 Replay from `ergodis-private/` with fresh create-only output paths:
 
 ```sh
-CARGO_TARGET_DIR=../rust/target-c985-private-profile \
-  cargo run --release --bin alignment_root_corpus -- \
+cargo run --release -p ergodis-tools -- alignment-root-corpus \
   --points 8 --budget 8 --capture-sized \
   --output examples/data/replay-alignment-root-cost-p8-b8-sized.jsonl \
   --report evidence/replay-alignment-root-cost-p8-b8-sized-report.json
 
-CARGO_TARGET_DIR=../rust/target-c985-private-profile \
-  cargo run --release --bin target_strategy_audit -- \
+cargo run --release -p ergodis-tools -- target-strategy-audit \
   --data examples/data/alignment-root-cost-p8-b8-sized.jsonl \
   --seeds examples/data/alignment-root-cost-seeds.jsonl \
   --run-root evidence/replay-alignment-root-sized-routing-runs \

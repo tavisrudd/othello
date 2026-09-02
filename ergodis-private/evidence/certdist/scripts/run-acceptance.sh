@@ -3,7 +3,8 @@
 # both CSS sides each, driven entirely through the certdist job interface.
 set -u
 CD="$HOME/.cache/ergodis/certdist"
-BIN="$CD/shim-target/release/certdist"
+# certdist is now the `css certdist` subcommand of the ergodis-tools binary.
+TOOLS="${ERGODIS_TOOLS:-$HOME/.cache/ergodis/target/ergodis-private/release/ergodis-tools}"
 Q="$HOME/.cache/ergodis/c1018/qldpc"
 NATIVE="$CD/core-target/release/css_distance_native"
 RANDOM_BIN="$CD/core-target/release/css_distance_random"
@@ -15,7 +16,7 @@ run_side() {
   local job="$CD/jobs/${code}-${side}"
   echo "=== ${code}-${side} radius ${radius} ===" | tee -a "$LOG"
   /usr/bin/env time -f "TIMING ${code}-${side} wall=%e maxrss_kib=%M" \
-    "$BIN" run \
+    "$TOOLS" css certdist run \
       --input "$Q/${code}-${side}.json" \
       --job "$job" \
       --radius "$radius" \
@@ -32,7 +33,7 @@ run_side() {
 
 combine() {
   local code="$1"
-  "$BIN" combine \
+  "$TOOLS" css certdist combine \
     --certificate "$CD/jobs/${code}-x/certificate.json" \
     --certificate "$CD/jobs/${code}-z/certificate.json" \
     --label "$code" \

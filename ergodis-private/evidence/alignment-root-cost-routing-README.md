@@ -77,14 +77,12 @@ socket paths, and controller credentials are intentionally excluded.
 Replay from `ergodis-private/` with fresh create-only paths:
 
 ```sh
-CARGO_TARGET_DIR=../rust/target-c985-private-profile \
-  cargo run --release --bin alignment_root_corpus -- \
+cargo run --release -p ergodis-tools -- alignment-root-corpus \
   --points 8 --budget 8 \
   --output examples/data/replay-alignment-root-cost-p8-b8.jsonl \
   --report evidence/replay-alignment-root-cost-p8-b8-report.json
 
-CARGO_TARGET_DIR=../rust/target-c985-private-profile \
-  cargo run --release --bin target_strategy_audit -- \
+cargo run --release -p ergodis-tools -- target-strategy-audit \
   --data examples/data/alignment-root-cost-p8-b8.jsonl \
   --seeds examples/data/alignment-root-cost-seeds.jsonl \
   --run-root evidence/replay-alignment-root-cost-routing-runs \
@@ -99,8 +97,7 @@ replay the held-out corpus with otherwise identical evolution settings.
 The conservative policy replay is:
 
 ```sh
-CARGO_TARGET_DIR=../rust/target-c985-private-profile \
-  cargo run --release --bin routing_policy_audit -- \
+cargo run --release -p ergodis-tools -- routing-policy-audit \
   --report evidence/alignment-root-cost-routing-report.json \
   evidence/alignment-root-cost-routing-heldout-report.json \
   --package-root . --minimum-reports 2 \

@@ -4,7 +4,8 @@
 # production cost of the job that produced it.
 set -u
 CD="$HOME/.cache/ergodis/certdist"
-BIN="$CD/shim-target/release/certdist"
+# certdist is now the `css certdist` subcommand of the ergodis-tools binary.
+TOOLS="${ERGODIS_TOOLS:-$HOME/.cache/ergodis/target/ergodis-private/release/ergodis-tools}"
 Q="$HOME/.cache/ergodis/c1018/qldpc"
 NATIVE="$CD/core-target/release/css_distance_native"
 LOG="$CD/verify.log"
@@ -35,10 +36,10 @@ if job:
 PY
   echo "--- structural verification:" | tee -a "$LOG"
   /usr/bin/env time -f "TIMING verify-structural $target wall=%e maxrss_kib=%M" \
-    "$BIN" verify --certificate "$job/certificate.json" --input "$Q/$code-$side.json" 2>&1 | tee -a "$LOG"
+    "$TOOLS" css certdist verify --certificate "$job/certificate.json" --input "$Q/$code-$side.json" 2>&1 | tee -a "$LOG"
   echo "--- verification with two shards re-run:" | tee -a "$LOG"
   /usr/bin/env time -f "TIMING verify-recheck2 $target wall=%e maxrss_kib=%M" \
-    "$BIN" verify --certificate "$job/certificate.json" --input "$Q/$code-$side.json" \
+    "$TOOLS" css certdist verify --certificate "$job/certificate.json" --input "$Q/$code-$side.json" \
       --recheck-shards 2 --job "$job" --threads 8 --native "$NATIVE" 2>&1 | tee -a "$LOG"
 done
 
@@ -53,5 +54,5 @@ for level in cert["levels"]:
         break
 json.dump(cert, open(sys.argv[2], "w"), indent=2)
 PY
-"$BIN" verify --certificate "$CD/tampered.json" --input "$Q/r1elite02-x.json" 2>&1 | tail -n 6 | tee -a "$LOG"
+"$TOOLS" css certdist verify --certificate "$CD/tampered.json" --input "$Q/r1elite02-x.json" 2>&1 | tail -n 6 | tee -a "$LOG"
 echo "VERIFY DEMO DONE" | tee -a "$LOG"

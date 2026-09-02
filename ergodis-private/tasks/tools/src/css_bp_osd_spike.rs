@@ -1,5 +1,5 @@
 use anyhow::{bail, Context, Result};
-use clap::{Parser, ValueEnum};
+use clap::{Args as ClapArgs, ValueEnum};
 use ergodis::bp_osd::{BinaryParityCheck, BpOsdConfig, BpOsdWorkspace, OsdMethod};
 use serde::{Deserialize, Serialize};
 use std::fs::{self, OpenOptions};
@@ -7,9 +7,8 @@ use std::io::Write;
 use std::path::PathBuf;
 use std::time::Instant;
 
-#[derive(Debug, Parser)]
-#[command(about = "Private BP+OSD CSS logical-witness application spike")]
-struct Args {
+#[derive(Debug, ClapArgs)]
+pub struct Args {
     #[arg(long)]
     input: PathBuf,
     #[arg(long, default_value_t = 1)]
@@ -150,7 +149,7 @@ fn solve_chunk(
         for prepared in &mut *targets {
             let result = prepared
                 .workspace
-                .decode_bytes(&prepared.code, &prepared.syndrome)?;
+                .decode_bytes(prepared.code, &prepared.syndrome)?;
             local.attempted += 1;
             local.satisfied += usize::from(result.syndrome_satisfied);
             let checksum_target = prepared.target ^ round.wrapping_mul(0x9e37_79b9);
@@ -272,8 +271,7 @@ fn run_wave(
     Ok((total, elapsed))
 }
 
-fn main() -> Result<()> {
-    let args = Args::parse();
+pub fn run(args: Args) -> Result<()> {
     if args.threads == 0 || args.threads > 12 {
         bail!("--threads must be in 1..=12");
     }
@@ -406,7 +404,7 @@ fn main() -> Result<()> {
 }
 
 #[cfg(test)]
-#[path = "../../../papers/complete-repair-ports/ergodis/src/test_alloc.rs"]
+#[path = "../../../../papers/complete-repair-ports/ergodis/src/test_alloc.rs"]
 mod test_alloc;
 
 #[cfg(test)]

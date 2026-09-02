@@ -18,7 +18,7 @@ use std::sync::atomic::{AtomicU64, Ordering};
 use std::time::Instant;
 
 use anyhow::{bail, ensure, Context};
-use clap::{Args, Parser, Subcommand, ValueEnum};
+use clap::{Args, Subcommand, ValueEnum};
 use ergodis_private::hall_core::{HallOutcome, HallWorkspace};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
@@ -399,6 +399,9 @@ impl Expansion {
 
         let mut degree = vec![0usize; compiled.task_count()];
         let mut total: usize = 0;
+        // `task` indexes `adjacency`, `demand`, and the `degree` being filled;
+        // the shared task index is what the accumulation is about.
+        #[allow(clippy::needless_range_loop)]
         for task in 0..compiled.task_count() {
             let deg: usize = compiled.adjacency[task]
                 .iter()
@@ -504,8 +507,13 @@ pub struct Report {
     pub expanded_right: usize,
     #[serde(flatten)]
     pub verdict: Verdict,
+    // Retained wall-clock breakdown: recorded on every run, deliberately kept
+    // out of the certificate JSON, and read only by an operator inspecting the
+    // `Report` value directly.
+    #[allow(dead_code)]
     #[serde(skip)]
     pub matching_micros: u128,
+    #[allow(dead_code)]
     #[serde(skip)]
     pub minimization_micros: u128,
     #[serde(skip)]
@@ -1162,6 +1170,9 @@ const QUALIFICATIONS: [&str; 4] = ["general", "icu", "paediatric", "orthopaedic"
 ///
 /// With `plant < 3` there is no room for the bridge, so the block degenerates to scarce
 /// resources of total capacity `plant - 1` and no cascade.
+// Every argument is one dimension of the planted infeasible block; grouping
+// them would hide which dimension a generator call is varying.
+#[allow(clippy::too_many_arguments)]
 fn plant_block(
     tasks: &mut Vec<Task>,
     resources: &mut Vec<Resource>,
@@ -1687,12 +1698,8 @@ enum Command {
     Selftest,
 }
 
-#[derive(Parser, Debug)]
-#[command(
-    name = "certiis",
-    about = "Explainable infeasibility for assignment problems"
-)]
-struct Arguments {
+#[derive(Args, Debug)]
+pub struct Arguments {
     #[command(subcommand)]
     command: Command,
 }
@@ -1785,8 +1792,7 @@ fn build(domain: Domain, args: &GenerateArgs) -> Instance {
     }
 }
 
-fn main() -> anyhow::Result<()> {
-    let arguments = Arguments::parse();
+pub fn run(arguments: Arguments) -> anyhow::Result<()> {
     match arguments.command {
         Command::Generate(args) => {
             let instance = build(args.domain, &args);
@@ -2341,9 +2347,18 @@ mod tests {
     #[test]
     fn evidence_publication_is_create_only() {
         static TEST_NONCE: AtomicU64 = AtomicU64::new(1);
+        // Scratch space inside the shared out-of-tree target directory. The
+        // fallback is the directory holding this test executable rather than a
+        // relative `target`, which depended on the process working directory.
         let target = std::env::var_os("CARGO_TARGET_DIR")
             .map(PathBuf::from)
-            .unwrap_or_else(|| PathBuf::from("target"));
+            .unwrap_or_else(|| {
+                std::env::current_exe()
+                    .expect("test executable path")
+                    .parent()
+                    .expect("test executable directory")
+                    .to_path_buf()
+            });
         let directory = loop {
             let nonce = TEST_NONCE.fetch_add(1, Ordering::Relaxed);
             let candidate = target.join(format!(

@@ -1,5 +1,5 @@
 use anyhow::{bail, Context, Result};
-use clap::Parser;
+use clap::Args as ClapArgs;
 use ergodis::{
     compile_alignment_attachment, search_alignment_attachment_controlled,
     search_alignment_attachment_from, AlignmentBranchFeatures, AlignmentError,
@@ -23,9 +23,8 @@ const CORPUS_FIELDS: [&str; 6] = [
     "root_initial_branches",
 ];
 
-#[derive(Debug, Parser)]
-#[command(about = "Generate an exact per-root alignment cost corpus")]
-struct Args {
+#[derive(Debug, ClapArgs)]
+pub struct Args {
     #[arg(long, default_value_t = 8)]
     points: u32,
     #[arg(long, default_value_t = 8)]
@@ -151,8 +150,7 @@ fn observable_ceiling(samples: &[RootSample]) -> (usize, u64) {
     (classes.len(), optimum)
 }
 
-fn main() -> Result<()> {
-    let args = Args::parse();
+pub fn run(args: Args) -> Result<()> {
     if args.output == args.report {
         bail!("output and report paths must differ");
     }

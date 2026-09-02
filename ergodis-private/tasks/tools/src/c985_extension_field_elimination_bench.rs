@@ -148,7 +148,7 @@ fn checksum(data: &[u8; MAX_CELLS], cells: usize) -> u64 {
         .fold(0_u64, |sum, &value| sum.rotate_left(7) ^ u64::from(value))
 }
 
-fn run<const H: u8>(backend: &str, rows: usize, cols: usize, seed: u64, repetitions: u64) {
+fn bench<const H: u8>(backend: &str, rows: usize, cols: usize, seed: u64, repetitions: u64) {
     let field = SmallField::new(2, H).expect("valid binary extension field");
     let original = fixture(1_usize << H, rows, cols, seed);
     let tables = BinaryTables::new::<H>(&field);
@@ -173,28 +173,42 @@ fn run<const H: u8>(backend: &str, rows: usize, cols: usize, seed: u64, repetiti
     );
 }
 
-fn main() {
-    let mut args = std::env::args().skip(1);
-    let backend = args.next().expect("backend is required");
-    let degree: u8 = args.next().expect("degree is required").parse().unwrap();
-    let rows: usize = args.next().expect("rows are required").parse().unwrap();
-    let cols: usize = args.next().expect("columns are required").parse().unwrap();
-    let seed: u64 = args.next().expect("seed is required").parse().unwrap();
-    let repetitions: u64 = args
-        .next()
-        .expect("repetitions are required")
-        .parse()
-        .unwrap();
-    assert!(args.next().is_none(), "unexpected argument");
+/// Positional arguments, in the same order and meaning the standalone binary took.
+#[derive(Debug, clap::Args)]
+pub struct Arguments {
+    /// Elimination backend to exercise.
+    backend: String,
+    /// Extension degree, 3 through 8.
+    degree: u8,
+    /// Row count of the generated matrix.
+    rows: usize,
+    /// Column count of the generated matrix.
+    cols: usize,
+    /// Deterministic seed.
+    seed: u64,
+    /// Repetition count.
+    repetitions: u64,
+}
+
+pub fn run(arguments: Arguments) -> anyhow::Result<()> {
+    let Arguments {
+        backend,
+        degree,
+        rows,
+        cols,
+        seed,
+        repetitions,
+    } = arguments;
     match degree {
-        3 => run::<3>(&backend, rows, cols, seed, repetitions),
-        4 => run::<4>(&backend, rows, cols, seed, repetitions),
-        5 => run::<5>(&backend, rows, cols, seed, repetitions),
-        6 => run::<6>(&backend, rows, cols, seed, repetitions),
-        7 => run::<7>(&backend, rows, cols, seed, repetitions),
-        8 => run::<8>(&backend, rows, cols, seed, repetitions),
+        3 => bench::<3>(&backend, rows, cols, seed, repetitions),
+        4 => bench::<4>(&backend, rows, cols, seed, repetitions),
+        5 => bench::<5>(&backend, rows, cols, seed, repetitions),
+        6 => bench::<6>(&backend, rows, cols, seed, repetitions),
+        7 => bench::<7>(&backend, rows, cols, seed, repetitions),
+        8 => bench::<8>(&backend, rows, cols, seed, repetitions),
         _ => panic!("degree must lie in 3..=8"),
     }
+    Ok(())
 }
 
 #[cfg(test)]

@@ -29,7 +29,7 @@ use std::path::PathBuf;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Mutex;
 
-use clap::Parser;
+use clap::Args as ClapArgs;
 use ergodis_private::hall_core::{HallOutcome, HallWorkspace};
 use serde::Serialize;
 
@@ -147,6 +147,9 @@ impl Position {
         self.rows |= 1u32 << (point / grid.q);
         self.cols |= 1u32 << (point % grid.q);
         let classes = &grid.class[usize::from(point)];
+        // The index is the pencil slope, and it selects a row of `load` as well
+        // as an entry of `classes`; iterating one of them hides that pairing.
+        #[allow(clippy::needless_range_loop)]
         for slope in 1..usize::from(grid.q) {
             self.load[slope][usize::from(classes[slope])] += 1;
         }
@@ -170,6 +173,8 @@ impl Position {
             return false;
         }
         let classes = &grid.class[usize::from(point)];
+        // Same slope-indexed pairing of `load` with `classes` as above.
+        #[allow(clippy::needless_range_loop)]
         for slope in 1..usize::from(grid.q) {
             if self.load[slope][usize::from(classes[slope])] >= 2 {
                 return false;
@@ -200,6 +205,9 @@ impl Position {
             cursor = legal.next(usize::from(point) + 1);
         }
         let mut total = 0u32;
+        // `slope` and `intercept` name the line coordinates and index both
+        // `load` and `counts`; the pair of indices is the point of the scan.
+        #[allow(clippy::needless_range_loop)]
         for slope in 1..usize::from(grid.q) {
             for intercept in 0..usize::from(grid.q) {
                 if self.load[slope][intercept] == 0 {
@@ -795,9 +803,8 @@ fn sampled_roots(grid: &Grid, budget: usize, seed: u64) -> Vec<[u16; 4]> {
     roots
 }
 
-#[derive(Parser)]
-#[command(about = "C80 consumed-label Hall rematching instances and admission triage")]
-struct Arguments {
+#[derive(ClapArgs)]
+pub struct Arguments {
     #[arg(long, default_value_t = 11)]
     q: u16,
     /// Sampled deterministic roots; omit with `--exhaustive`.
@@ -848,8 +855,7 @@ struct Summary {
     admission_candidates: Vec<FailureRecord>,
 }
 
-fn main() -> anyhow::Result<()> {
-    let arguments = Arguments::parse();
+pub fn run(arguments: Arguments) -> anyhow::Result<()> {
     anyhow::ensure!(arguments.threads > 0, "thread count must be positive");
     anyhow::ensure!(
         (3..=13).contains(&arguments.q),

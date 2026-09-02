@@ -1,12 +1,12 @@
 use std::path::PathBuf;
 
 use anyhow::{bail, Context, Result};
-use clap::Parser;
+use clap::Args as ClapArgs;
 use ergodis::control::{read_manifest, send_request};
 use serde_json::Value;
 
-#[derive(Debug, Parser)]
-struct Args {
+#[derive(Debug, ClapArgs)]
+pub struct Args {
     #[arg(long)]
     run_dir: PathBuf,
     #[arg(long)]
@@ -19,8 +19,7 @@ struct Args {
     max_bytes: usize,
 }
 
-fn main() -> Result<()> {
-    let args = Args::parse();
+pub fn run(args: Args) -> Result<()> {
     let manifest = read_manifest(&args.run_dir).context("cannot read campaign manifest")?;
     let encoded = if let Some(path) = args.args_file {
         let metadata = std::fs::metadata(&path).context("cannot stat --args-file")?;

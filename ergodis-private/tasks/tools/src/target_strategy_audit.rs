@@ -1,5 +1,5 @@
 use anyhow::{bail, Context, Result};
-use clap::Parser;
+use clap::Args as ClapArgs;
 use ergodis::control::{send_request, Campaign, Manifest, Response};
 use serde::Serialize;
 use serde_json::{json, Value};
@@ -14,9 +14,8 @@ use std::time::Duration;
 const RESPONSE_LIMIT: usize = 64 * 1024;
 const CAMPAIGN_LIMIT: u64 = 4 * 1024 * 1024;
 
-#[derive(Debug, Parser)]
-#[command(about = "Matched exact audit of evolution target strategies")]
-struct Args {
+#[derive(Debug, ClapArgs)]
+pub struct Args {
     #[arg(long)]
     data: PathBuf,
     #[arg(long)]
@@ -295,8 +294,7 @@ fn run_strategy(args: &Args, seeds: &[Value], strategy: &'static str) -> Result<
     })
 }
 
-fn main() -> Result<()> {
-    let args = Args::parse();
+pub fn run(args: Args) -> Result<()> {
     if args.target_fields.len() != args.target_values.len() {
         bail!("target field and value counts differ");
     }
