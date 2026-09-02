@@ -4429,3 +4429,13 @@ Controls distinguish the global top-two from parity-niche winners and verify
 phase/error behavior under the full public gate.  C1016 can use field scope,
 VM cost, and activity bands as descriptors without putting those private axes
 in core.
+
+Commit `d67636a88` adds an exact structural-separability probe.  For checked
+disjoint field groups it builds the positive projection sets and verifies on
+every corpus row that the label equals membership in their Cartesian product.
+A successful report includes bounded projection counts; failure returns the
+first concrete counterexample row, forbidding independent group search.
+Projection storage and group/row counts are bounded, scratch projection memory
+is reused, and overlapping/out-of-range groups fail closed.  Product and XOR
+controls demonstrate acceptance and the expected nonseparable counterexample
+under the full public gate.
