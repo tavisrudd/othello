@@ -1,0 +1,83 @@
+{
+  "schema": "ergodis-private-css-bp-osd-application-spike-v1",
+  "date": "2026-09-01",
+  "engine_commit": "b28d5640c",
+  "adapter_commit": "7efc97147",
+  "protocol": {
+    "host": "performance governor, boost disabled, non-isolated quiet host",
+    "timing": "20 paired rounds with A/B order alternated",
+    "candidate_trust": "every reported witness independently replayed against all physical checks and at least one logical observation",
+    "random_baseline": "css_distance_random, 1000 trials, OSD order 2, window 96, best effort, default fixed seed",
+    "bp_configuration": "one augmented physical-plus-logical-row solve per logical observation; 300 iterations; combination sweep; no shared mutable worker state"
+  },
+  "gross144": {
+    "input_sha256": "4ca7670cb86ab54f15da19b7448d4eada813053325f837a4290d8243a7f34868",
+    "threads": 12,
+    "bp_error_rate": 0.001,
+    "bp_min_sum_scale": 0.8,
+    "bp_osd_order": 64,
+    "bp_best_weight": 12,
+    "random_best_weight": 12,
+    "bp_mean_seconds": 0.002286733,
+    "random_mean_seconds": 0.014297824,
+    "speedup": 6.253,
+    "paired_t": 26.30
+  },
+  "bb288": {
+    "input_sha256": "ef5d9264c92e72a949ce6776b78e896047a096112579ea49a1d5ee1c7a977955",
+    "bp_error_rate": 0.0001,
+    "bp_min_sum_scale": 0.8,
+    "bp_osd_order": 32,
+    "bp_best_weight": 18,
+    "random_best_weight": 18,
+    "one_thread": {
+      "bp_mean_seconds": 0.020378724,
+      "random_mean_seconds": 0.258244045,
+      "speedup": 12.672,
+      "paired_t": 38.47,
+      "bp_cycles": 58004568,
+      "random_cycles": 757225595,
+      "bp_instructions": 290015709,
+      "random_instructions": 1856697269,
+      "bp_branch_misses": 354475,
+      "random_branch_misses": 14561141,
+      "bp_max_rss_kib": 3660,
+      "random_max_rss_kib": 2760
+    },
+    "twelve_threads": {
+      "bp_mean_seconds": 0.003599568,
+      "random_mean_seconds": 0.044331631,
+      "speedup": 12.316,
+      "paired_t": 32.16
+    }
+  },
+  "bb756": {
+    "input_sha256": "83bd1eaf7787cd367f4c6da060658abff902f6404545e42c0902ce12cd198fe2",
+    "input_provenance": {
+      "generator": "papers/complete-repair-ports/ergodis/python/export_bb_native.py --code bb756",
+      "generator_commit": "93bacce6cbc6e70f47574faece04165d5518af6a",
+      "generator_sha256": "60f29e0c41d357d337c30c12f1702886731a0577cc972955451b32b3bf4c2b88"
+    },
+    "threads": 12,
+    "bp_error_rate": 0.001,
+    "bp_min_sum_scale": 0.8,
+    "bp_osd_order": 64,
+    "bp_best_weight": 34,
+    "bp_best_target": 8,
+    "bp_candidate_checksum": 6190887455959210954,
+    "random_best_weight": 42,
+    "bp_mean_seconds": 0.028811521,
+    "random_mean_seconds": 0.345084061,
+    "speedup": 11.977,
+    "paired_t": 30.23,
+    "bp_instructions": 1340201522,
+    "random_instructions": 13941541041,
+    "bp_branch_misses": 1946241,
+    "random_branch_misses": 93432608,
+    "bp_cache_misses": 52378,
+    "random_cache_misses": 459516,
+    "bp_max_rss_kib": 4964,
+    "random_max_rss_kib": 4028
+  },
+  "decision": "admit as a fast independently replayed CSS incumbent generator; retain random information-set search as a complementary diverse fallback and retain exact search as the sole lower-bound authority"
+}

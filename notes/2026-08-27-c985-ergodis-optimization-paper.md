@@ -4010,3 +4010,42 @@ allocation in typed solves, and four independent aligned worker workspaces.
 This completes the public-admission tranche.  Application wiring remains a
 separate measured gate: candidate generation may improve upper-bound discovery,
 but must not alter exact lower-bound or proof-authority paths.
+
+### CSS BP+OSD application spike
+
+The private adapter landed as `7efc97147`.  For each logical observation it
+augments the physical parity-check matrix by that one row and solves syndrome
+`(0,...,0,1)`.  This covers every nonzero logical class without enumerating all
+logical syndromes: every valid logical word is detected by at least one row.
+Targets are partitioned statically over at most twelve independent workers;
+there is no shared mutable solve state.  The adapter independently replays all
+physical and logical rows, so BP's own syndrome flag is never promoted into a
+CSS or optimality claim.
+
+The application gate passes on three sizes.  With 20 paired A/B-alternated
+rounds against the existing 1,000-trial random-information-set/OSD-2 backend:
+
+* Gross [[144,12,12]], 12 threads: both find weight 12; BP+OSD is 6.253x
+  faster (`t=26.30`).
+* BB [[288,12,18]], one thread: both find weight 18; BP+OSD is 12.672x
+  faster (`t=38.47`).  At twelve threads the ratio is 12.316x (`t=32.16`).
+* BB [[756,16,<=34]], 12 threads: BP+OSD finds the known weight-34 incumbent
+  while the fixed 1,000-trial random control finds weight 42; BP+OSD is also
+  11.977x faster (`t=30.23`).
+
+Counters explain the wall result rather than contradicting it.  On one-thread
+BB288, BP+OSD uses 290.0M instructions and 58.0M cycles versus 1.857B and
+757.2M, with 0.354M versus 14.56M branch misses.  On twelve-thread BB756 it
+uses 1.340B versus 13.942B instructions, 1.946M versus 93.43M branch misses,
+and 52.4K versus 459.5K cache misses.  RSS remains small (4.96 MiB versus
+4.03 MiB on BB756), so the gain is computational rather than a memory trade.
+
+The BP parameters were selected by a bounded 20-point sweep on BB288 and
+BB756, then cross-checked unchanged on Gross144.  This is application-tuning
+evidence, not a claim that one universal parameter tuple dominates every code.
+The admitted role is therefore a fast incumbent oracle with independently
+replayed witnesses.  Random information-set search remains useful as a diverse
+fallback, and exhaustive Ergodis remains the sole lower-bound/proof-authority
+path.  Full commands, hashes, counters, RSS, and input-generator provenance are
+in `ergodis-private/evidence/c985-css-bp-osd-application-spike.json`; no durable
+claim depends on a cache or target-directory artifact.
