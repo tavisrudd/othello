@@ -1,0 +1,191 @@
+{
+  "artifacts": {
+    "classifier": {
+      "bytes": 10429,
+      "path": "docs/ergodis-shape-classifier.md",
+      "sha256": "cf965660e76ffa869717c0d8f10387aae9165ce2d46d386b4a86bca4881812ee"
+    },
+    "control_source": {
+      "bytes": 4284,
+      "path": "scripts/negative_control_tier_control.py",
+      "sha256": "6769e16fdf2b40ec0f4eff39b737023756b735628f90c516465e3e7daa9069d6"
+    },
+    "ergodis_binary": {
+      "bytes": 709352,
+      "sha256": "644ea7e6cc7ca90e249aa74abf94a9c29970182415ab70268eb91d44bafb9fcf"
+    },
+    "example_source": {
+      "bytes": 14616,
+      "path": "examples/negative_control_tier.rs",
+      "sha256": "793aa0c499e70086cd8451764fdbe297b3cade033c4335ce371bbc98e44f9a4e"
+    },
+    "raw_jsonl": {
+      "bytes": 9159,
+      "path": "c1038-negative-control-tier.raw.jsonl",
+      "sha256": "8fcbd1c887144a859544e4f7c18b43c11568562e55614237299a6ab86b59d31d"
+    }
+  },
+  "protocol": {
+    "control_workers": 1,
+    "cpu": 3,
+    "fresh_process_per_sample": true,
+    "rotated_order": true,
+    "rounds": 3,
+    "timeout_s": 600.0
+  },
+  "rows": {
+    "L1": {
+      "agreement": "exact agreement",
+      "control_answer": [
+        "1"
+      ],
+      "control_certificate_bytes": 0,
+      "control_median_ns": 118589881,
+      "control_peak_rss_kib": 360616,
+      "direction": "ergodis wins",
+      "ergodis_answer": [
+        "1"
+      ],
+      "ergodis_certificate_bytes": 8,
+      "ergodis_detail": "",
+      "ergodis_median_ns": 30959722,
+      "ergodis_over_control": 3.8304569078494954,
+      "ergodis_peak_rss_kib": 18680,
+      "ergodis_replay_ns": 350,
+      "ergodis_representation": 18911322,
+      "ergodis_status": "ok",
+      "instance_bytes": 398,
+      "instance_sha256": "fed2033646e3b0c10b985a5af23ef22500cf03a91574c5c032eed4f0ed51a628",
+      "rounds": 3,
+      "timeout_s": 600.0
+    },
+    "L2": {
+      "agreement": "exact agreement",
+      "control_answer": [
+        "10"
+      ],
+      "control_certificate_bytes": 0,
+      "control_median_ns": 9124709,
+      "control_peak_rss_kib": 76356,
+      "direction": "ergodis loses",
+      "ergodis_answer": [
+        "10"
+      ],
+      "ergodis_certificate_bytes": 280,
+      "ergodis_detail": "",
+      "ergodis_median_ns": 137052435119,
+      "ergodis_over_control": 6.657823330229186e-05,
+      "ergodis_peak_rss_kib": 29532,
+      "ergodis_replay_ns": 2424,
+      "ergodis_representation": 111079,
+      "ergodis_status": "ok",
+      "instance_bytes": 1137,
+      "instance_sha256": "d3251344530ce5404f862293f7a2a36be5e5e6162564f4f8f817dedea5983800",
+      "rounds": 3,
+      "timeout_s": 600.0
+    },
+    "L3": {
+      "agreement": "ergodis declined the instance under its declared bounds",
+      "control_answer": [
+        "1"
+      ],
+      "control_certificate_bytes": 0,
+      "control_median_ns": 54427496,
+      "control_peak_rss_kib": 76688,
+      "direction": "ergodis loses",
+      "ergodis_answer": [
+        "0"
+      ],
+      "ergodis_certificate_bytes": 0,
+      "ergodis_detail": "bounded subset-sum range overflowed or exceeds its width cap",
+      "ergodis_median_ns": null,
+      "ergodis_over_control": null,
+      "ergodis_peak_rss_kib": 2288,
+      "ergodis_replay_ns": 0,
+      "ergodis_representation": 0,
+      "ergodis_status": "declined",
+      "instance_bytes": 321,
+      "instance_sha256": "c90903fec076bf85ec5b59d3486b2f109c29607b894e41239a21cfea2a66f62a",
+      "rounds": 3,
+      "timeout_s": 600.0
+    },
+    "W1": {
+      "agreement": "exact agreement",
+      "control_answer": [
+        "1"
+      ],
+      "control_certificate_bytes": 0,
+      "control_median_ns": 1781310,
+      "control_peak_rss_kib": 75312,
+      "direction": "ergodis wins",
+      "ergodis_answer": [
+        "1"
+      ],
+      "ergodis_certificate_bytes": 8,
+      "ergodis_detail": "",
+      "ergodis_median_ns": 72164,
+      "ergodis_over_control": 24.68419156366055,
+      "ergodis_peak_rss_kib": 2332,
+      "ergodis_replay_ns": 361,
+      "ergodis_representation": 16622,
+      "ergodis_status": "ok",
+      "instance_bytes": 215,
+      "instance_sha256": "c324c9ad9e43025a9b32be93bef592aff0ae0768fca897a4dac784ccdd7e9665",
+      "rounds": 3,
+      "timeout_s": 600.0
+    },
+    "W2": {
+      "agreement": "exact agreement",
+      "control_answer": [
+        "60"
+      ],
+      "control_certificate_bytes": 0,
+      "control_median_ns": 57354009,
+      "control_peak_rss_kib": 82444,
+      "direction": "ergodis wins",
+      "ergodis_answer": [
+        "60"
+      ],
+      "ergodis_certificate_bytes": 720,
+      "ergodis_detail": "",
+      "ergodis_median_ns": 2938827,
+      "ergodis_over_control": 19.51595279341043,
+      "ergodis_peak_rss_kib": 2792,
+      "ergodis_replay_ns": 1352,
+      "ergodis_representation": 2461,
+      "ergodis_status": "ok",
+      "instance_bytes": 10484,
+      "instance_sha256": "6505318048051f09b0c03e1fbff3843735598c56e7ae2e7b5dc5c07fe774b54d",
+      "rounds": 3,
+      "timeout_s": 600.0
+    },
+    "W3": {
+      "agreement": "exact agreement",
+      "control_answer": [
+        "300"
+      ],
+      "control_certificate_bytes": 0,
+      "control_median_ns": 3022025348,
+      "control_peak_rss_kib": 179152,
+      "direction": "ergodis wins",
+      "ergodis_answer": [
+        "300"
+      ],
+      "ergodis_certificate_bytes": 3600,
+      "ergodis_detail": "",
+      "ergodis_median_ns": 1287790808,
+      "ergodis_over_control": 2.346674109821725,
+      "ergodis_peak_rss_kib": 22484,
+      "ergodis_replay_ns": 18054,
+      "ergodis_representation": 22801,
+      "ergodis_status": "ok",
+      "instance_bytes": 80083,
+      "instance_sha256": "fd01fe5146d494935b9c260178a09dd24f8eb2793601a718c55dc1ab3948851f",
+      "rounds": 3,
+      "timeout_s": 600.0
+    }
+  },
+  "schema_version": 1,
+  "task": "C1038",
+  "what_this_certifies": "Paired fresh-process timings, peak resident set size, and exact answer agreement for six declared instances against a single-worker CP-SAT control on one host. It does not certify a general solver comparison, any result outside these instances, or that the shape classifier is complete."
+}

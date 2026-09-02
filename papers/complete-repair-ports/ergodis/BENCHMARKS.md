@@ -193,6 +193,125 @@ nix shell nixpkgs#uv --command uv run --no-project \
   python3 python/verify_baseline_encodings.py
 ```
 
+## Negative-control tier
+
+The application rows above are all instances ergodis compiles well. This tier
+measures the frontier instead: it runs instances on both sides of the compiler's
+current reach, predicted before measurement, and reports the losses as rows
+rather than as a disclaimer.
+
+The predictions and the checklist that generated them are in
+`docs/ergodis-shape-classifier.md`. That page distinguishes shapes ergodis
+compiles today from shapes it does not yet compile, and names, for each of the
+latter, the mechanism that would absorb it. A loss here is a candidate for
+absorption, in the same way the zero-suppressed decision diagram and
+belief-propagation ordered-statistics decoding imports absorbed shapes earlier
+versions did not compile.
+
+Two kernels carry all six rows deliberately, so the comparison isolates the
+classifier's decision rather than two different implementations. The bounded
+subset-sum kernel appears three times and the weighted repair scheduler three
+times, each on both sides of the frontier.
+
+### Predicted before measurement
+
+| row | instance | classifier verdict | deciding test | predicted |
+| :-- | :------- | :----------------- | :------------ | :-------- |
+| L1 | subset-sum feasibility, 60 generic weights in 1..32,000 | not yet compiled well | state scales with numeric magnitude | ergodis loses |
+| L2 | scheduling, 6 resources, 18 demands, random loads 1..9, no grading | not yet compiled well | Pareto frontier is the state and grows with the load range | ergodis loses |
+| L3 | subset-sum feasibility, 40 weights in 1..200,000 | not yet compiled | same, one magnitude further out | ergodis loses |
+| W1 | subset-sum feasibility, 60 items over a 6-symbol weight alphabet | compiles today | repeated interface | ergodis wins |
+| W2 | scheduling, 400 demands, equal weighted option mass 6 | compiles today | linear conservation law, verified positive grading | ergodis wins |
+| W3 | scheduling, 4,000 demands over 6 demand types | compiles today | repeated interface | ergodis wins |
+
+The classifier file was hashed before any measurement; the report records that
+hash, the timestamp, and the two changes made to the file between the first hash
+and the run.
+
+### Measured
+
+Three paired rounds per row, fresh process per sample, rotated A/B order, both
+sides pinned to the same CPU and run under `choom -n 1000`, model construction
+and interpreter startup inside the timed region, process high-water RSS
+recorded. The control is single-worker CP-SAT from OR-Tools 9.14 in every row.
+Times are medians of unrounded samples.
+
+| row | ergodis | CP-SAT | ergodis RSS | CP-SAT RSS | exact agreement | outcome |
+| :-- | ------: | -----: | ----------: | ---------: | :-------------- | :------ |
+| L1 | 30.960 ms | 118.590 ms | 18.2 MiB | 352.2 MiB | both feasible | ergodis 3.83x — **misprediction** |
+| L2 | 137.052 s | 9.125 ms | 28.8 MiB | 74.6 MiB | both 10 repairs | CP-SAT 15,019x — predicted loss |
+| L3 | declined | 54.427 ms | 2.2 MiB | 74.9 MiB | control feasible; ergodis returned no answer | declared-bounds refusal — predicted loss |
+| W1 | 0.072 ms | 1.781 ms | 2.3 MiB | 73.5 MiB | both feasible | ergodis 24.68x — predicted win |
+| W2 | 2.939 ms | 57.354 ms | 2.7 MiB | 80.5 MiB | both 60 repairs | ergodis 19.52x — predicted win |
+| W3 | 1.288 s | 3.022 s | 22.0 MiB | 175.0 MiB | both 300 repairs | ergodis 2.35x — predicted win |
+
+Five of six rows landed on the predicted side, so the acceptance gate — at least
+one predicted loss and one predicted win as predicted — holds with two losses
+and three wins.
+
+### What each side hands back
+
+The column below is an advantage column and it applies to the losses too: on L2,
+where CP-SAT is four orders of magnitude faster, it still returns an assignment
+with no independently checkable proof of its optimality.
+
+| row | ergodis certificate | independent replay | control certificate |
+| :-- | :------------------ | -----------------: | :------------------ |
+| L1 | 8 B selected-item bitmask | 350 ns | none emitted |
+| L2 | 280 B assignment, 10 demands x 6 loads | 2.42 us | none emitted |
+| L3 | none: the instance was declined | -- | none emitted |
+| W1 | 8 B selected-item bitmask | 361 ns | none emitted |
+| W2 | 720 B assignment, 60 demands x 2 loads | 1.35 us | none emitted |
+| W3 | 3,600 B assignment, 300 demands x 2 loads | 18.05 us | none emitted |
+
+The ergodis replay is independent of the solve: it re-adds the selected weights
+and compares with the target, or re-adds the chosen loads, checks every capacity
+and checks that each chosen load vector really is an option of its demand. It
+touches neither the compiled plan nor the dynamic-programming state. CP-SAT
+returns an assignment, from which feasibility can be rechecked, but emits no
+proof log here, so neither its claimed optimum on L2 and W-rows nor its
+feasibility verdict on L3 carries an artifact a third party can replay. Where
+this document reports "exact agreement", that means the two independently
+written models returned the same number, which is the strongest cross-check
+available for these rows.
+
+### The one misprediction
+
+L1 was predicted to lose and won by 3.83x. The prediction assumed that a
+dynamic-programming width near 10^6 would already be past the point where
+CP-SAT's search wins. It is not: a single equality row over 60 generic weights
+gives CP-SAT a weak linear relaxation and no propagation to speak of, so it
+searches, while the compiled dynamic program does a fixed 1.9 x 10^7 transitions
+and finishes. The classifier's own deciding test was right about the shape — the
+state does scale with the numeric magnitude of the data, and nothing about L1
+contradicts that — but the test says nothing about where the resulting cost
+crosses the control's. L3 is the same shape one magnitude further out, and there
+the kernel declines outright. L1 and L3 therefore bracket the crossover rather
+than L1 landing on the wrong side of a boundary: the frontier for this shape is
+a magnitude threshold between a width of 10^6 and a width of 4 x 10^6, and the
+classifier as written does not predict where it falls. That is a defect in the
+classifier's resolution, recorded here rather than repaired by moving the row.
+
+The absorption mechanism named for this shape is residue-class splitting of the
+sum axis or a meet-in-the-middle split of the item set, both of which the crate
+already uses in other kernels but not in the bounded subset-sum compiler.
+
+These are bounded results for six instances against one control on one host.
+They are not a general solver comparison, they say nothing about instances
+outside the six, and the classifier is not claimed to be complete. Raw samples,
+artifact hashes, and the exact protocol are in
+`evidence/c1038-negative-control-tier.json` with the adjacent raw transcript;
+the full account is in
+`notes/2026-09-02-c1038-negative-control-benchmark-tier.md`. Replay every row
+with:
+
+```text
+scripts/negative-control-tier.sh
+```
+
+Validate a recorded bundle without rerunning it with
+`scripts/check-c1038-negative-control-evidence.sh`.
+
 ## Contextual-state A/B
 
 The contextual-state shortcuts were measured in two interleaved rounds with the
