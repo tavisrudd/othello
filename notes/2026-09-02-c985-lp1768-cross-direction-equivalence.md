@@ -109,6 +109,72 @@ byte-identical admission record without invoking nauty. The independent Python
 replay returned coordinate count 1,768, physical rank 772, observable rank 996,
 and status `verified`.
 
+## Transported shard-cover control
+
+The public `css_distance_shard_ledger` now optionally transports a complete
+raw-shard cover across an exact coordinate admission. It does not trust a
+coverage JSON alone: it first replays every raw shard, reconstructs every
+frontier commitment, and emits the ordinary source coverage. It then rechecks
+both input fingerprints and both transported row spaces, independently replays
+and maps any witness, and creates a separate target-bound transport record.
+
+The retained LP1768 control uses four X shards through radius 14. Their exact
+complete cover visits 109,087,599 candidates. The transport record maps the
+negative verdict to Z with ranks 772/996 and no Z search. The independent
+Python implementation separately reconstructs the four frontier commitments,
+checks every evidence-file digest, recomputes both GF(2) row spaces, and returns
+`status: verified`. Evidence is under
+`ergodis-private/evidence/c985-lp1768-transport-control/`; its independent
+checker is `ergodis-private/benchmarks/verify_css_transport.py`.
+
+Evidence schema v7 also records a canonical semantic BLAKE3 over the coordinate
+order, physical row space, and observable row space. It is independent of JSON
+formatting, row order, and redundant checks. The control independently agrees
+on X digest `7601a191...` and Z digest `95b5a696...`; the transport record binds
+both. Raw input hashes remain alongside them for exact file replay. Legacy v6
+shards remain readable but do not acquire semantic provenance retroactively.
+
+To replay the transport control, regenerate both inputs with
+`--maximum-weight 21`, build `css_distance_native` and
+`css_distance_shard_ledger` with `--features large-css,parallel`, and create
+four X records with `--maximum-weight 14 --shard-count 4`. Then run:
+
+```sh
+css_distance_shard_ledger "$WORK_ROOT"/x-[0-3].jsonl \
+  --output "$WORK_ROOT/x-coverage.json" \
+  --transport-source "$WORK_ROOT/lp1768-x.json" \
+  --transport-target "$WORK_ROOT/lp1768-z.json" \
+  --transport-admission \
+    ergodis-private/evidence/c985-lp1768-transport-control/xz-admission.json \
+  --transport-output "$WORK_ROOT/x-to-z-transport.json"
+
+nix shell nixpkgs#python314 nixpkgs#b3sum --command python \
+  ergodis-private/benchmarks/verify_css_transport.py \
+  --source "$WORK_ROOT/lp1768-x.json" \
+  --target "$WORK_ROOT/lp1768-z.json" \
+  --admission \
+    ergodis-private/evidence/c985-lp1768-transport-control/xz-admission.json \
+  --coverage "$WORK_ROOT/x-coverage.json" \
+  --transport "$WORK_ROOT/x-to-z-transport.json" \
+  "$WORK_ROOT"/x-[0-3].jsonl
+
+sha256sum -c \
+  ergodis-private/evidence/c985-lp1768-transport-control/SHA256SUMS
+```
+
+This control also exposed an important historical provenance boundary. The
+retained 32-shard radius-20 X cover is bound to input BLAKE3 `c94dc815...`,
+whereas regenerating the documented maximum-weight-19 input from the pinned
+QDistSAT revision and the committed importer produces `99782007...`. The old
+input bytes were not retained, so exact source-bound transport correctly
+rejects that historical cover. The raw shards and their coverage ledger remain
+self-consistent, and this observation does not exhibit a wrong search verdict,
+but the documented command does not reproduce their input byte identity.
+Therefore no retroactive X-to-Z transport claim is made for the old radius-20
+cover. The next radius-22 campaign will carry the new canonical semantic digest
+and retain its exact generated input when licensing permits; it will supersede
+the radius-20 cover.
+
 ## Boundaries and next move
 
 The proposer presently compares physical Tanner presentations with equal
@@ -119,6 +185,7 @@ may therefore canonicalize or search equivalent row presentations before
 calling graph isomorphism without changing proof authority.
 
 Highest EV is to run the remaining radius-22 exhaustion in the faster of the
-two transported presentations and map the complete result across. Before that
-long run, compile the admitted permutation into the shard/evidence ledger so a
-reviewer can replay the transport rather than trusting this memo.
+two transported presentations and map the complete result across. The
+transport ledger gate is now complete; the campaign must additionally retain
+the exact generated input or semantic-input certificate so its source binding
+survives future importer or serialization changes.

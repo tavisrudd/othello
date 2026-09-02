@@ -209,6 +209,13 @@ matches the supplied matrices. Artifact and evidence output never overwrite.
 Compatible older payloads remain readable across internal layout-width changes;
 in particular, large-CSS version-1 artifacts are migrated by rebuilding the
 sparse search state and reusing their source-bound completion filters.
+Evidence schema v7 records both the raw input-file BLAKE3 and a canonical
+semantic BLAKE3 of the coordinate order, physical row space, and
+physical-plus-logical observable row space. The latter is invariant under row
+ordering and redundant checks, so replay can distinguish harmless
+serialization or presentation changes from a changed search predicate. The
+shard ledger remains able to read v6 evidence, which lacks this semantic
+identity.
 With the `parallel` feature, `--threads N` statically partitions anchors across
 workers with disjoint DFS workspaces and deterministic post-join reduction.
 On Linux, `--worker-cpus` accepts one unique CPU ID per worker and pins the
@@ -273,6 +280,16 @@ css_isomorphism_adapter --source a.json --target b.json \
 css_isomorphism_adapter --source a.json --target b.json \
   --proposal-in a-to-b.json --output replayed.json
 ```
+
+`css_distance_shard_ledger` can optionally transport a verified complete shard
+cover across such an admission. Supply all four `--transport-source`,
+`--transport-target`, `--transport-admission`, and `--transport-output`
+options together. The ledger first performs its ordinary raw-shard and
+frontier-commitment replay, then independently rechecks the coordinate
+equivalence, replays and maps any positive witness, and creates a separate
+record bound to both inputs, the admission bytes, and the canonical source
+coverage. A transported negative is therefore a theorem-backed reuse of a
+complete source search, not a target-side search or a graph-backend claim.
 
 Large portfolio instances require the same feature-complete release build used
 for their evidence runs:

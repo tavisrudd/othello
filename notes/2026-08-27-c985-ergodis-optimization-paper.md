@@ -2595,8 +2595,24 @@ files are disposable and may be deleted at any time.
     coordinates, proving `d_X = d_Z`; see
     `2026-09-02-c985-lp1768-cross-direction-equivalence.md`. This eliminates
     one of the two remaining radius-22 exhaustions rather than merely reducing
-    its roots. Next bind the admitted transport into the shard/evidence ledger,
-    then run only the faster transported presentation.
+    its roots. The admitted transport is now bound into the shard/evidence
+    ledger: a retained four-shard LP1768 X control exhausts radius 14 over
+    109,087,599 candidates and transports the complete miss to Z after exact
+    source/target row-space replay. A separate Python checker reconstructs all
+    frontier commitments, evidence digests, row spaces, and transport fields.
+
+    That gate caught a historical provenance mismatch rather than silently
+    weakening source identity. The retained radius-20 shards bind X input
+    BLAKE3 `c94dc815...`, while the documented pinned importer now regenerates
+    `99782007...`; the original input bytes were not retained. The cover is
+    internally self-consistent and no wrong verdict is exhibited, but it cannot
+    be retroactively admitted through the source-bound transport. The
+    replacement evidence schema v7 now carries a canonical BLAKE3 of the
+    coordinate order, physical row space, and observable row space in addition
+    to raw file identity; it is invariant under row presentation and is
+    independently recomputed by the Python transport checker. The radius-22
+    campaign must use that schema and run only the faster transported
+    presentation.
 
     A theorem-driven residual-hitting import was also tested and rejected in
     the CSS hot loop. On LP1768 X at radius 16, a depth-zero budget-five

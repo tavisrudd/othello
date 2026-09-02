@@ -1,12 +1,16 @@
 use anyhow::{bail, Context, Result};
 use clap::Parser;
+use ergodis::{css_search_semantics_blake3, verify_css_coordinate_equivalence, Matrix};
 use serde::{Deserialize, Serialize};
 use std::fs::{File, OpenOptions};
 use std::io::{BufWriter, Read, Write};
 use std::path::{Path, PathBuf};
 
 const MAX_RECORD_BYTES: u64 = 4 * 1024 * 1024;
-const EXPECTED_SCHEMA: &str = "ergodis-css-distance-native-v6";
+const MAX_INPUT_BYTES: u64 = 256 * 1024 * 1024;
+const MAX_ADMISSION_BYTES: u64 = 64 * 1024 * 1024;
+const LEGACY_SCHEMA: &str = "ergodis-css-distance-native-v6";
+const EXPECTED_SCHEMA: &str = "ergodis-css-distance-native-v7";
 
 #[derive(Debug, Parser)]
 #[command(about = "Verify complete, compatible CSS distance shard evidence")]
@@ -17,6 +21,39 @@ struct Args {
     /// Create a compact verified coverage manifest. Existing files are never overwritten.
     #[arg(long)]
     output: Option<PathBuf>,
+    /// Source CSS input for optional exact transport of the verified cover.
+    #[arg(long)]
+    transport_source: Option<PathBuf>,
+    /// Target CSS input for optional exact transport of the verified cover.
+    #[arg(long)]
+    transport_target: Option<PathBuf>,
+    /// Exact css_isomorphism_adapter admission record.
+    #[arg(long)]
+    transport_admission: Option<PathBuf>,
+    /// Create a compact transported-cover record. Existing files are never overwritten.
+    #[arg(long)]
+    transport_output: Option<PathBuf>,
+}
+
+#[derive(Debug, Deserialize)]
+struct SparseProblem {
+    coordinate_count: u16,
+    physical_checks: Vec<Vec<u16>>,
+    logical_observations: Vec<Vec<u16>>,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct CoordinateAdmission {
+    schema: String,
+    backend: String,
+    source_blake3: String,
+    target_blake3: String,
+    coordinate_count: u32,
+    physical_rank: u32,
+    observable_rank: u32,
+    coordinate_images: Vec<u16>,
+    verifier: String,
 }
 
 #[derive(Clone, Copy, Debug, Deserialize)]
@@ -48,6 +85,8 @@ struct ShardRecord {
     schema: String,
     completion_status: String,
     input_blake3: String,
+    #[serde(default)]
+    problem_semantics_blake3: Option<String>,
     executable_blake3: String,
     artifact_payload_blake3: Option<String>,
     search_kernel: String,
@@ -102,6 +141,8 @@ struct CoverageManifest {
     schema: &'static str,
     verdict: &'static str,
     input_blake3: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    problem_semantics_blake3: Option<String>,
     executable_blake3: String,
     artifact_payload_blake3: Option<String>,
     search_kernel: String,
@@ -115,6 +156,26 @@ struct CoverageManifest {
     total_candidates: u64,
     frontiers: Vec<ManifestFrontier>,
     shards: Vec<ManifestShard>,
+}
+
+#[derive(Debug, Serialize)]
+struct TransportedCoverage {
+    schema: &'static str,
+    verdict: &'static str,
+    source_input_blake3: String,
+    target_input_blake3: String,
+    source_semantics_blake3: String,
+    target_semantics_blake3: String,
+    source_coverage_blake3: String,
+    coordinate_equivalence_blake3: String,
+    coordinate_count: u32,
+    physical_rank: u32,
+    observable_rank: u32,
+    maximum_weight: u16,
+    searched_maximum_weight: u16,
+    aggregate_distance: Option<u16>,
+    aggregate_witness: Vec<u16>,
+    verifier: &'static str,
 }
 
 struct LoadedRecord {
@@ -138,6 +199,185 @@ fn read_record(path: &Path) -> Result<LoadedRecord> {
     Ok(LoadedRecord {
         evidence_blake3,
         record,
+    })
+}
+
+fn read_bounded(path: &Path, limit: u64, kind: &str) -> Result<(Vec<u8>, String)> {
+    let file = File::open(path).with_context(|| format!("opening {kind} {}", path.display()))?;
+    let mut bytes = Vec::new();
+    file.take(limit + 1)
+        .read_to_end(&mut bytes)
+        .with_context(|| format!("reading {kind} {}", path.display()))?;
+    if bytes.len() as u64 > limit {
+        bail!("{kind} {} exceeds the byte limit", path.display());
+    }
+    let digest = blake3::hash(&bytes).to_hex().to_string();
+    Ok((bytes, digest))
+}
+
+fn dense_matrix(rows: &[Vec<u16>], columns: usize) -> Result<Matrix> {
+    let mut data = vec![0_u8; rows.len().saturating_mul(columns)];
+    for (row_index, row) in rows.iter().enumerate() {
+        for &coordinate in row {
+            let coordinate = usize::from(coordinate);
+            if coordinate >= columns {
+                bail!("coordinate {coordinate} is outside a {columns}-column matrix");
+            }
+            let entry = &mut data[row_index * columns + coordinate];
+            if *entry != 0 {
+                bail!("row {row_index} repeats coordinate {coordinate}");
+            }
+            *entry = 1;
+        }
+    }
+    Matrix::new::<2>(rows.len(), columns, data).context("constructing binary matrix")
+}
+
+fn replay_witness(problem: &SparseProblem, witness: &[u16]) -> Result<()> {
+    let coordinates = usize::from(problem.coordinate_count);
+    let mut support = vec![false; coordinates];
+    for &coordinate in witness {
+        let coordinate = usize::from(coordinate);
+        if coordinate >= coordinates || std::mem::replace(&mut support[coordinate], true) {
+            bail!("distance witness has an invalid or duplicate coordinate");
+        }
+    }
+    let parity = |row: &[u16]| -> Result<bool> {
+        let mut value = false;
+        for &coordinate in row {
+            let coordinate = usize::from(coordinate);
+            if coordinate >= coordinates {
+                bail!("CSS row coordinate is out of range");
+            }
+            value ^= support[coordinate];
+        }
+        Ok(value)
+    };
+    for row in &problem.physical_checks {
+        if parity(row)? {
+            bail!("distance witness violates a physical check");
+        }
+    }
+    if !problem
+        .logical_observations
+        .iter()
+        .map(|row| parity(row))
+        .collect::<Result<Vec<_>>>()?
+        .into_iter()
+        .any(|value| value)
+    {
+        bail!("distance witness has zero logical observation");
+    }
+    Ok(())
+}
+
+fn transport_coverage(
+    manifest: &CoverageManifest,
+    source_bytes: &[u8],
+    source_blake3: String,
+    target_bytes: &[u8],
+    target_blake3: String,
+    admission_bytes: &[u8],
+    admission_blake3: String,
+) -> Result<TransportedCoverage> {
+    let source: SparseProblem =
+        serde_json::from_slice(source_bytes).context("parsing transport source CSS input")?;
+    let target: SparseProblem =
+        serde_json::from_slice(target_bytes).context("parsing transport target CSS input")?;
+    let admission: CoordinateAdmission = serde_json::from_slice(admission_bytes)
+        .context("parsing coordinate-equivalence admission")?;
+    if admission.schema != "ergodis-css-isomorphism-admission-v1"
+        || admission.source_blake3 != source_blake3
+        || admission.target_blake3 != target_blake3
+        || manifest.input_blake3 != source_blake3
+        || admission.coordinate_count != u32::from(source.coordinate_count)
+        || target.coordinate_count != source.coordinate_count
+        || admission.coordinate_images.len() != usize::from(source.coordinate_count)
+        || admission.backend.is_empty()
+        || admission.backend.len() > 256
+        || admission.verifier != "exact-physical-and-observable-row-spaces"
+    {
+        bail!("coordinate-equivalence admission is incompatible with the verified cover");
+    }
+    let coordinates = usize::from(source.coordinate_count);
+    let source_physical = dense_matrix(&source.physical_checks, coordinates)?;
+    let source_logical = dense_matrix(&source.logical_observations, coordinates)?;
+    let target_physical = dense_matrix(&target.physical_checks, coordinates)?;
+    let target_logical = dense_matrix(&target.logical_observations, coordinates)?;
+    let source_semantics_blake3 = blake3::Hash::from(css_search_semantics_blake3(
+        &source_physical,
+        &source_logical,
+    )?)
+    .to_hex()
+    .to_string();
+    let target_semantics_blake3 = blake3::Hash::from(css_search_semantics_blake3(
+        &target_physical,
+        &target_logical,
+    )?)
+    .to_hex()
+    .to_string();
+    if manifest
+        .problem_semantics_blake3
+        .as_ref()
+        .is_some_and(|digest| digest != &source_semantics_blake3)
+    {
+        bail!("source semantic digest does not match the verified cover");
+    }
+    let certificate = verify_css_coordinate_equivalence(
+        &source_physical,
+        &source_logical,
+        &target_physical,
+        &target_logical,
+        admission
+            .coordinate_images
+            .iter()
+            .map(|&image| u32::from(image))
+            .collect::<Vec<_>>(),
+    )
+    .context("independently replaying the coordinate equivalence")?;
+    if certificate.coordinate_count() != admission.coordinate_count
+        || certificate.physical_rank() != admission.physical_rank
+        || certificate.observable_rank() != admission.observable_rank
+    {
+        bail!("coordinate-equivalence admission records inconsistent ranks");
+    }
+
+    let mut mapped_witness = Vec::new();
+    if let Some(distance) = manifest.aggregate_distance {
+        if usize::from(distance) != manifest.aggregate_witness.len() {
+            bail!("coverage manifest has an inconsistent aggregate witness");
+        }
+        replay_witness(&source, &manifest.aggregate_witness)?;
+        mapped_witness.reserve(manifest.aggregate_witness.len());
+        for &coordinate in &manifest.aggregate_witness {
+            mapped_witness.push(admission.coordinate_images[usize::from(coordinate)]);
+        }
+        mapped_witness.sort_unstable();
+        replay_witness(&target, &mapped_witness)?;
+    } else if !manifest.aggregate_witness.is_empty() {
+        bail!("coverage manifest has a witness without a distance");
+    }
+
+    let source_coverage_blake3 = blake3::hash(&serde_json::to_vec(manifest)?)
+        .to_hex()
+        .to_string();
+    Ok(TransportedCoverage {
+        schema: "ergodis-css-distance-transport-v1",
+        verdict: "transported-complete-compatible-cover",
+        source_input_blake3: source_blake3,
+        target_input_blake3: target_blake3,
+        source_semantics_blake3,
+        target_semantics_blake3,
+        source_coverage_blake3,
+        coordinate_equivalence_blake3: admission_blake3,
+        coordinate_count: certificate.coordinate_count(),
+        physical_rank: certificate.physical_rank(),
+        observable_rank: certificate.observable_rank(),
+        maximum_weight: manifest.maximum_weight,
+        searched_maximum_weight: manifest.searched_maximum_weight,
+        aggregate_distance: manifest.aggregate_distance,
+        aggregate_witness: mapped_witness,
+        verifier: "exact-cover-plus-coordinate-equivalence-v1",
     })
 }
 
@@ -244,6 +484,18 @@ fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
         ));
     }
     let artifact_payload_blake3 = first_record.artifact_payload_blake3.clone();
+    let record_schema = first_record.schema.clone();
+    if record_schema != EXPECTED_SCHEMA && record_schema != LEGACY_SCHEMA {
+        bail!("unsupported CSS shard evidence schema");
+    }
+    let problem_semantics_blake3 = first_record.problem_semantics_blake3.clone();
+    if record_schema == EXPECTED_SCHEMA
+        && problem_semantics_blake3
+            .as_deref()
+            .is_none_or(|digest| !valid_digest(digest))
+    {
+        bail!("v7 shard evidence is missing a valid semantic digest");
+    }
     let input_blake3 = first_record.input_blake3.clone();
     let executable_blake3 = first_record.executable_blake3.clone();
     let search_kernel = first_record.search_kernel.clone();
@@ -280,7 +532,7 @@ fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
     let mut aggregate: Option<(u16, Vec<u16>)> = None;
     for loaded in records {
         let record = loaded.record;
-        if record.schema != EXPECTED_SCHEMA
+        if record.schema != record_schema
             || record.completion_status != "complete"
             || record.mode != "bounded-search-shard"
             || record.result_scope != "partial-shard"
@@ -297,6 +549,7 @@ fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
             bail!("duplicate shard index {}", shard.index);
         }
         if record.input_blake3 != input_blake3
+            || record.problem_semantics_blake3 != problem_semantics_blake3
             || record.executable_blake3 != executable_blake3
             || record.artifact_payload_blake3.as_deref() != artifact_payload_blake3.as_deref()
             || record.search_kernel != search_kernel
@@ -416,9 +669,14 @@ fn verify(records: Vec<LoadedRecord>) -> Result<CoverageManifest> {
         .map(|(distance, witness)| (Some(distance), witness))
         .unwrap_or((None, Vec::new()));
     Ok(CoverageManifest {
-        schema: "ergodis-css-distance-shard-coverage-v3",
+        schema: if record_schema == EXPECTED_SCHEMA {
+            "ergodis-css-distance-shard-coverage-v4"
+        } else {
+            "ergodis-css-distance-shard-coverage-v3"
+        },
         verdict: "complete-compatible-cover",
         input_blake3,
+        problem_semantics_blake3,
         executable_blake3,
         artifact_payload_blake3,
         search_kernel,
@@ -452,6 +710,19 @@ fn emit(manifest: &CoverageManifest, output: Option<&Path>) -> Result<()> {
     Ok(())
 }
 
+fn emit_transport(record: &TransportedCoverage, path: &Path) -> Result<()> {
+    let file = OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(path)
+        .with_context(|| format!("creating transported coverage {}", path.display()))?;
+    let mut writer = BufWriter::new(file);
+    serde_json::to_writer(&mut writer, record)?;
+    writer.write_all(b"\n")?;
+    writer.flush()?;
+    Ok(())
+}
+
 fn main() -> Result<()> {
     let args = Args::parse();
     let records = args
@@ -460,7 +731,40 @@ fn main() -> Result<()> {
         .map(|path| read_record(path))
         .collect::<Result<Vec<_>>>()?;
     let manifest = verify(records)?;
-    emit(&manifest, args.output.as_deref())
+    let transport = match (
+        args.transport_source.as_deref(),
+        args.transport_target.as_deref(),
+        args.transport_admission.as_deref(),
+        args.transport_output.as_deref(),
+    ) {
+        (None, None, None, None) => None,
+        (Some(source), Some(target), Some(admission), Some(output)) => {
+            let (source_bytes, source_blake3) =
+                read_bounded(source, MAX_INPUT_BYTES, "transport source")?;
+            let (target_bytes, target_blake3) =
+                read_bounded(target, MAX_INPUT_BYTES, "transport target")?;
+            let (admission_bytes, admission_blake3) =
+                read_bounded(admission, MAX_ADMISSION_BYTES, "transport admission")?;
+            Some((
+                transport_coverage(
+                    &manifest,
+                    &source_bytes,
+                    source_blake3,
+                    &target_bytes,
+                    target_blake3,
+                    &admission_bytes,
+                    admission_blake3,
+                )?,
+                output,
+            ))
+        }
+        _ => bail!("all four --transport-* options must be supplied together"),
+    };
+    emit(&manifest, args.output.as_deref())?;
+    if let Some((record, output)) = transport {
+        emit_transport(&record, output)?;
+    }
+    Ok(())
 }
 
 #[cfg(test)]
@@ -506,6 +810,7 @@ mod tests {
                 schema: EXPECTED_SCHEMA.to_owned(),
                 completion_status: "complete".to_owned(),
                 input_blake3: "1".repeat(64),
+                problem_semantics_blake3: Some("4".repeat(64)),
                 executable_blake3: "2".repeat(64),
                 artifact_payload_blake3: Some("3".repeat(64)),
                 search_kernel: "portable-wide".to_owned(),
@@ -601,6 +906,23 @@ mod tests {
     }
 
     #[test]
+    fn legacy_cover_remains_readable_and_v7_requires_semantics() {
+        let mut legacy_left = loaded(0, 2);
+        let mut legacy_right = loaded(1, 2);
+        for record in [&mut legacy_left, &mut legacy_right] {
+            record.record.schema = LEGACY_SCHEMA.to_owned();
+            record.record.problem_semantics_blake3 = None;
+        }
+        let manifest = verify(vec![legacy_left, legacy_right]).unwrap();
+        assert_eq!(manifest.schema, "ergodis-css-distance-shard-coverage-v3");
+        assert_eq!(manifest.problem_semantics_blake3, None);
+
+        let mut missing = loaded(0, 1);
+        missing.record.problem_semantics_blake3 = None;
+        assert!(verify(vec![missing]).is_err());
+    }
+
+    #[test]
     fn mutated_or_cross_anchor_frontier_buckets_fail_closed() {
         let mut bad_bucket = loaded(1, 2);
         bad_bucket.record.shard_frontiers.as_mut().unwrap()[0].shard_sum_le = "f".repeat(64);
@@ -613,5 +935,104 @@ mod tests {
         let mut wrong_anchor = loaded(1, 2);
         wrong_anchor.record.shard_frontiers.as_mut().unwrap()[0].anchor = 8;
         assert!(verify(vec![loaded(0, 2), wrong_anchor]).is_err());
+    }
+
+    fn transport_fixture() -> (CoverageManifest, Vec<u8>, Vec<u8>, Vec<u8>) {
+        let source = serde_json::to_vec(&serde_json::json!({
+            "coordinate_count": 6,
+            "physical_checks": [[1, 3]],
+            "logical_observations": [[0]]
+        }))
+        .unwrap();
+        let target = serde_json::to_vec(&serde_json::json!({
+            "coordinate_count": 6,
+            "physical_checks": [[0, 4]],
+            "logical_observations": [[3]]
+        }))
+        .unwrap();
+        let source_digest = blake3::hash(&source).to_hex().to_string();
+        let target_digest = blake3::hash(&target).to_hex().to_string();
+        let admission = serde_json::to_vec(&serde_json::json!({
+            "schema": "ergodis-css-isomorphism-admission-v1",
+            "backend": "fixture",
+            "source_blake3": source_digest,
+            "target_blake3": target_digest,
+            "coordinate_count": 6,
+            "physical_rank": 1,
+            "observable_rank": 2,
+            "coordinate_images": [3, 4, 5, 0, 1, 2],
+            "verifier": "exact-physical-and-observable-row-spaces"
+        }))
+        .unwrap();
+        let mut manifest = verify(vec![loaded(0, 2), loaded(1, 2)]).unwrap();
+        manifest.input_blake3 = blake3::hash(&source).to_hex().to_string();
+        let parsed: SparseProblem = serde_json::from_slice(&source).unwrap();
+        manifest.problem_semantics_blake3 = Some(
+            blake3::Hash::from(
+                css_search_semantics_blake3(
+                    &dense_matrix(&parsed.physical_checks, 6).unwrap(),
+                    &dense_matrix(&parsed.logical_observations, 6).unwrap(),
+                )
+                .unwrap(),
+            )
+            .to_hex()
+            .to_string(),
+        );
+        (manifest, source, target, admission)
+    }
+
+    #[test]
+    fn exact_transport_maps_complete_cover_and_witness() {
+        let (manifest, source, target, admission) = transport_fixture();
+        let transported = transport_coverage(
+            &manifest,
+            &source,
+            blake3::hash(&source).to_hex().to_string(),
+            &target,
+            blake3::hash(&target).to_hex().to_string(),
+            &admission,
+            blake3::hash(&admission).to_hex().to_string(),
+        )
+        .unwrap();
+        assert_eq!(transported.aggregate_distance, Some(3));
+        assert_eq!(transported.aggregate_witness, [1, 3, 5]);
+        assert_eq!(transported.physical_rank, 1);
+        assert_eq!(transported.observable_rank, 2);
+    }
+
+    #[test]
+    fn transport_rejects_forged_source_and_observable() {
+        let (manifest, source, target, admission) = transport_fixture();
+        assert!(transport_coverage(
+            &manifest,
+            &source,
+            "0".repeat(64),
+            &target,
+            blake3::hash(&target).to_hex().to_string(),
+            &admission,
+            blake3::hash(&admission).to_hex().to_string(),
+        )
+        .is_err());
+
+        let incompatible_target = serde_json::to_vec(&serde_json::json!({
+            "coordinate_count": 6,
+            "physical_checks": [[0, 4]],
+            "logical_observations": [[2]]
+        }))
+        .unwrap();
+        let mut forged: serde_json::Value = serde_json::from_slice(&admission).unwrap();
+        forged["target_blake3"] =
+            serde_json::Value::String(blake3::hash(&incompatible_target).to_hex().to_string());
+        let forged = serde_json::to_vec(&forged).unwrap();
+        assert!(transport_coverage(
+            &manifest,
+            &source,
+            blake3::hash(&source).to_hex().to_string(),
+            &incompatible_target,
+            blake3::hash(&incompatible_target).to_hex().to_string(),
+            &forged,
+            blake3::hash(&forged).to_hex().to_string(),
+        )
+        .is_err());
     }
 }

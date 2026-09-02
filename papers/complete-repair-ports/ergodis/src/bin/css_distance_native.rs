@@ -1,8 +1,8 @@
 use anyhow::{bail, Context, Result};
 use clap::Parser;
 use ergodis::{
-    verify_css_anchor_transversal, CompiledCssDistance, CompiledExtraWideCssDistance,
-    CompiledWideCssDistance, CssSearchShard, Matrix,
+    css_search_semantics_blake3, verify_css_anchor_transversal, CompiledCssDistance,
+    CompiledExtraWideCssDistance, CompiledWideCssDistance, CssSearchShard, Matrix,
 };
 #[cfg(feature = "large-css")]
 use ergodis::{CompiledColossalCssDistance, CompiledHugeCssDistance, CompiledLargeCssDistance};
@@ -85,6 +85,7 @@ struct RunRecord<'a> {
     schema: &'static str,
     completion_status: &'static str,
     input_blake3: Option<&'a str>,
+    problem_semantics_blake3: &'a str,
     executable_blake3: Option<&'a str>,
     label: &'a str,
     coordinate_count: u16,
@@ -586,6 +587,10 @@ fn main() -> Result<()> {
     }
     let physical = dense_matrix(&problem.physical_checks, columns)?;
     let logical = dense_matrix(&problem.logical_observations, columns)?;
+    let problem_semantics_blake3 = hex_bytes(
+        &css_search_semantics_blake3(&physical, &logical)
+            .context("computing canonical CSS search semantics")?,
+    );
     let anchor_certificate = if problem.coordinate_generators.is_empty() {
         None
     } else {
@@ -1131,9 +1136,10 @@ fn main() -> Result<()> {
     }
     let result = result.expect("positive round count checked above");
     let record = RunRecord {
-        schema: "ergodis-css-distance-native-v6",
+        schema: "ergodis-css-distance-native-v7",
         completion_status: "complete",
         input_blake3: shard_fingerprints.as_ref().map(|(input, _)| input.as_str()),
+        problem_semantics_blake3: &problem_semantics_blake3,
         executable_blake3: shard_fingerprints
             .as_ref()
             .map(|(_, executable)| executable.as_str()),

@@ -147,6 +147,14 @@ pub enum CssCoordinateEquivalenceError {
     Orbit(#[from] OrbitCompileError<ExplicitPermutationError>),
 }
 
+#[derive(Debug, Error)]
+pub enum CssSearchSemanticsError {
+    #[error("CSS physical or logical matrix has an incompatible shape")]
+    Shape,
+    #[error(transparent)]
+    Matrix(#[from] MatrixError),
+}
+
 /// Exact source-to-target CSS equivalence under one coordinate permutation.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct CssCoordinateEquivalenceCertificate {
@@ -323,6 +331,40 @@ pub fn verify_css_coordinate_equivalence(
         observable_rank: u32::try_from(source_combined_basis.rows())
             .map_err(|_| CssCoordinateEquivalenceError::Shape)?,
     })
+}
+
+/// Canonical cryptographic identity of the exact CSS search predicate.
+///
+/// The digest is invariant under row presentation and redundant checks. It
+/// binds the coordinate order, the physical row space, and the
+/// physical-plus-logical observable row space; JSON metadata, row ordering,
+/// and search parameters are deliberately outside this semantic identity.
+pub fn css_search_semantics_blake3(
+    physical: &Matrix,
+    logical: &Matrix,
+) -> Result<[u8; 32], CssSearchSemanticsError> {
+    let coordinates = physical.cols();
+    if coordinates == 0
+        || logical.rows() == 0
+        || logical.cols() != coordinates
+        || physical.as_slice().iter().any(|&entry| entry > 1)
+        || logical.as_slice().iter().any(|&entry| entry > 1)
+    {
+        return Err(CssSearchSemanticsError::Shape);
+    }
+    let physical_basis = physical.canonical_row_basis::<2>()?;
+    let combined = joined_binary_rows(physical, logical)?;
+    let observable_basis = combined.canonical_row_basis::<2>()?;
+    let mut hasher = blake3::Hasher::new();
+    hasher.update(b"ergodis-css-search-semantics-v1\0");
+    hasher.update(&(coordinates as u64).to_le_bytes());
+    for (tag, basis) in [(b'P', &physical_basis), (b'O', &observable_basis)] {
+        hasher.update(&[tag]);
+        hasher.update(&(basis.rows() as u64).to_le_bytes());
+        hasher.update(&(basis.cols() as u64).to_le_bytes());
+        hasher.update(basis.as_slice());
+    }
+    Ok(*hasher.finalize().as_bytes())
 }
 
 fn joined_binary_rows(left: &Matrix, right: &Matrix) -> Result<Matrix, MatrixError> {
@@ -5281,6 +5323,39 @@ mod tests {
                 OrbitCompileError::NotPermutation { .. }
             ))
         ));
+    }
+
+    #[test]
+    fn css_semantic_digest_quotients_row_presentation_only() {
+        let physical = Matrix::new::<2>(
+            2,
+            4,
+            vec![
+                1, 1, 0, 0, //
+                0, 0, 1, 1,
+            ],
+        )
+        .unwrap();
+        let redundant = Matrix::new::<2>(
+            3,
+            4,
+            vec![
+                0, 0, 1, 1, //
+                1, 1, 0, 0, //
+                0, 0, 1, 1,
+            ],
+        )
+        .unwrap();
+        let logical = Matrix::new::<2>(1, 4, vec![1, 0, 1, 0]).unwrap();
+        assert_eq!(
+            css_search_semantics_blake3(&physical, &logical).unwrap(),
+            css_search_semantics_blake3(&redundant, &logical).unwrap()
+        );
+        let incompatible = Matrix::new::<2>(1, 4, vec![1, 0, 0, 0]).unwrap();
+        assert_ne!(
+            css_search_semantics_blake3(&physical, &logical).unwrap(),
+            css_search_semantics_blake3(&physical, &incompatible).unwrap()
+        );
     }
 
     fn subset_xors(keys: &[u128], size: usize) -> Vec<u128> {

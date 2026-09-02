@@ -103,10 +103,11 @@ def main() -> int:
     if native_schema not in {
         "ergodis-css-distance-native-v3",
         "ergodis-css-distance-native-v6",
+        "ergodis-css-distance-native-v7",
     }:
         raise RuntimeError("unknown evidence schema")
     result = record["result"]
-    if native_schema == "ergodis-css-distance-native-v6":
+    if native_schema in {"ergodis-css-distance-native-v6", "ergodis-css-distance-native-v7"}:
         if record.get("completion_status") != "complete":
             raise RuntimeError("native evidence is not a completed search")
         if record.get("result_scope") != "global":
@@ -121,6 +122,10 @@ def main() -> int:
                 raise RuntimeError("unverified anchors do not exhaust the coordinates")
         else:
             raise RuntimeError("unknown anchor verification mode")
+        if native_schema == "ergodis-css-distance-native-v7":
+            semantic_digest = record.get("problem_semantics_blake3")
+            if not isinstance(semantic_digest, str) or len(semantic_digest) != 64:
+                raise RuntimeError("v7 evidence has no semantic problem digest")
     distance = result["distance"]
     witness = result["witness"]
     logical = replay_witness(problem, distance, witness)
