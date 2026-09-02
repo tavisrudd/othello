@@ -312,13 +312,16 @@ files are disposable and may be deleted at any time.
    importing private vocabulary. A bounded structured integer set represents
    an interval intersected with selected residues and minus sorted sparse
    holes, computes exact cardinality, and emits/replays fixed-target sum counts
-   with canonical witnesses. A compiled next-residue table skips forbidden
-   interval positions; membership, sum counting, witness extraction, and replay
-   allocate nothing. Exhaustive small residue controls, negative-coordinate
+   with canonical witnesses. The counter uses residue-progression counting plus
+   sparse-hole inclusion--exclusion, with an exact scan crossover for adverse
+   coprime/small-set shapes. A compiled next-residue table skips forbidden
+   interval positions; membership, either sum route, witness extraction, and
+   replay allocate nothing. Exhaustive small residue controls, negative-coordinate
    cases, a flat sum oracle, malformed presentations, forged certificates, and
    the allocation gate pass. The design and novelty boundary are recorded in
-   `2026-09-02-c985-structured-integer-set-kernel.md`; the first private
-   application A/B remains the next gate.
+   `2026-09-02-c985-structured-integer-set-kernel.md`. A private retained A/B
+   harness is ready; its first diagnostic preceded the structural-counter
+   commit and is not evidence. Repeat it from the committed revision next.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

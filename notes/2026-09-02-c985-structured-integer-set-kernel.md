@@ -46,6 +46,14 @@ recomputes the count and witness from the two set objects; changing the target,
 count, or witness fails replay. Thus emptiness of the target fibre is the
 structural statement `N_t=0`, not an opaque enumerated miss.
 
+The retained counter does not enumerate `A` or `B`. It counts compatible
+residue progressions in the exact overlap interval, then subtracts pairs hit by
+left holes or right holes and adds back their overlap. Witness extraction walks
+only compatible progressions and skips excluded values. An adaptive work gate
+uses the smaller exact-set scan instead when the least-common-multiple period
+plus hole counts exceeds the smaller set cardinality; the two routes implement
+the same observable certificate.
+
 ## Representation and performance boundary
 
 The residue universe is at most 256 and uses one asserted 32-byte four-word
@@ -56,7 +64,7 @@ sparse holes; it does not scan forbidden interval positions. A one-of-256
 residue presentation therefore visits roughly one base value per 256 interval
 positions before holes.
 
-Membership, iteration, fixed-target counting, witness production, and replay
+Membership, iteration, both fixed-target counting routes, witness production, and replay
 are iterative and allocate nothing. The permanent allocation regression runs
 500 targets through production plus verifier and records zero allocations,
 reallocations, and deallocations. Small moduli/residue masks are exhaustively
@@ -65,9 +73,11 @@ flat oracle checks every target in a two-set control. Malformed residue, hole,
 span, and forged-certificate cases fail closed.
 
 This is a new standalone theorem/query kernel rather than a changed solve hot
-loop, so it makes no end-to-end speed claim yet. The first application adapter
-must retain a flat implementation for an interleaved counter A/B and separately
-measure theorem-hit coverage and clean-miss cost.
+loop. A retained private harness now compares the natural flat member scan with
+the structural counter on a g133-shaped modulus-64/range/sparse-hole workload.
+Its first diagnostic run is intentionally not retained because it preceded the
+commit containing the strengthened counter; the exact seven-pair run must be
+repeated from the committed revision before any speed ratio is recorded here.
 
 ## Classical and new boundary
 
@@ -97,7 +107,8 @@ default.
 
 ## Acceptance and next gate
 
-Focused exact/oracle/allocation tests and strict all-target/all-feature clippy
-pass. The full all-target/all-feature suite is the remaining code-acceptance
-gate. After it passes, land the kernel and adapt one existing private
-interval/residue/hole client without moving any private vocabulary into core.
+Focused exact/oracle/allocation tests, strict all-target/all-feature clippy, and
+the full all-target/all-feature suite pass. Commit the structural sharpening
+and its retained harness, then repeat the seven-pair counter A/B from that exact
+revision. A direct C1016 adapter remains separate so no active private campaign
+code or vocabulary moves into core.

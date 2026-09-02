@@ -170,12 +170,7 @@ impl StructuredIntegerSet {
 
     #[inline]
     pub fn contains(&self, value: i64) -> bool {
-        value >= self.minimum
-            && value <= self.maximum
-            && self
-                .residues
-                .contains(euclidean_residue(value, self.modulus))
-            && self.holes.binary_search(&value).is_err()
+        self.contains_base(value) && self.holes.binary_search(&value).is_err()
     }
 
     pub fn iter(&self) -> StructuredIntegerSetIter<'_> {
@@ -198,7 +193,72 @@ impl StructuredIntegerSet {
     }
 
     pub fn sum_certificate(&self, other: &Self, target: i64) -> StructuredSumCertificate {
-        let (scan, probe, swapped) = if self.span() <= other.span() {
+        let Some((minimum, maximum)) = self.sum_window(other, target) else {
+            return StructuredSumCertificate {
+                target,
+                pair_count: 0,
+                witness: None,
+            };
+        };
+        let period = lcm(u32::from(self.modulus), u32::from(other.modulus));
+        let scan_work = self.cardinality.min(other.cardinality);
+        let structural_work = u64::from(period)
+            .saturating_add(u64::try_from(self.holes.len()).unwrap_or(u64::MAX))
+            .saturating_add(u64::try_from(other.holes.len()).unwrap_or(u64::MAX));
+        if scan_work <= structural_work {
+            return self.sum_certificate_by_scan(other, target);
+        }
+        let mut base_pairs = 0_u64;
+        for residue in 0..period {
+            if self.sum_residue_compatible(other, target, residue) {
+                base_pairs = base_pairs
+                    .checked_add(count_residue_wide(minimum, maximum, period, residue))
+                    .expect("fixed-target residue classes partition a validated u64 span");
+            }
+        }
+        let mut left_removed = 0_u64;
+        let mut right_removed = 0_u64;
+        let mut overlap = 0_u64;
+        for &left in self.holes.iter() {
+            if left < minimum || left > maximum {
+                continue;
+            }
+            let complement = i128::from(target) - i128::from(left);
+            let Ok(right) = i64::try_from(complement) else {
+                continue;
+            };
+            if other.contains_base(right) {
+                left_removed += 1;
+                overlap += u64::from(other.holes.binary_search(&right).is_ok());
+            }
+        }
+        for &right in other.holes.iter() {
+            let complement = i128::from(target) - i128::from(right);
+            let Ok(left) = i64::try_from(complement) else {
+                continue;
+            };
+            if left >= minimum && left <= maximum && self.contains_base(left) {
+                right_removed += 1;
+            }
+        }
+        let pair_count = base_pairs
+            .checked_add(overlap)
+            .and_then(|count| count.checked_sub(left_removed))
+            .and_then(|count| count.checked_sub(right_removed))
+            .expect("hole inclusion-exclusion is bounded by the exact base pair count");
+        let witness = (pair_count != 0)
+            .then(|| self.first_sum_witness(other, target, minimum, maximum, period))
+            .flatten();
+        debug_assert_eq!(witness.is_some(), pair_count != 0);
+        StructuredSumCertificate {
+            target,
+            pair_count,
+            witness,
+        }
+    }
+
+    fn sum_certificate_by_scan(&self, other: &Self, target: i64) -> StructuredSumCertificate {
+        let (scan, probe, swapped) = if self.cardinality <= other.cardinality {
             (self, other, false)
         } else {
             (other, self, true)
@@ -246,6 +306,72 @@ impl StructuredIntegerSet {
             }
         }
         Ok(())
+    }
+
+    #[inline]
+    fn contains_base(&self, value: i64) -> bool {
+        value >= self.minimum
+            && value <= self.maximum
+            && self
+                .residues
+                .contains(euclidean_residue(value, self.modulus))
+    }
+
+    fn sum_window(&self, other: &Self, target: i64) -> Option<(i64, i64)> {
+        let minimum = i128::from(self.minimum).max(i128::from(target) - i128::from(other.maximum));
+        let maximum = i128::from(self.maximum).min(i128::from(target) - i128::from(other.minimum));
+        (minimum <= maximum).then(|| {
+            (
+                i64::try_from(minimum).expect("window is bounded by the left i64 interval"),
+                i64::try_from(maximum).expect("window is bounded by the left i64 interval"),
+            )
+        })
+    }
+
+    #[inline]
+    fn sum_residue_compatible(&self, other: &Self, target: i64, left_residue: u32) -> bool {
+        self.residues
+            .contains((left_residue % u32::from(self.modulus)) as u16)
+            && other.residues.contains(
+                (i128::from(target) - i128::from(left_residue))
+                    .rem_euclid(i128::from(other.modulus)) as u16,
+            )
+    }
+
+    fn first_sum_witness(
+        &self,
+        other: &Self,
+        target: i64,
+        minimum: i64,
+        maximum: i64,
+        period: u32,
+    ) -> Option<[i64; 2]> {
+        let mut best = None;
+        for residue in 0..period {
+            if !self.sum_residue_compatible(other, target, residue) {
+                continue;
+            }
+            let Some(mut left) = first_residue_value(minimum, maximum, period, residue) else {
+                continue;
+            };
+            loop {
+                let right = i64::try_from(i128::from(target) - i128::from(left)).ok()?;
+                if self.holes.binary_search(&left).is_err()
+                    && other.holes.binary_search(&right).is_err()
+                {
+                    if best.is_none_or(|pair: [i64; 2]| left < pair[0]) {
+                        best = Some([left, right]);
+                    }
+                    break;
+                }
+                let next = i128::from(left) + i128::from(period);
+                if next > i128::from(maximum) {
+                    break;
+                }
+                left = i64::try_from(next).ok()?;
+            }
+        }
+        best
     }
 }
 
@@ -314,6 +440,42 @@ fn count_residue(
     }
     u64::try_from((maximum - first) / modulus + 1)
         .map_err(|_| StructuredSetError::CardinalityOverflow)
+}
+
+fn count_residue_wide(minimum: i64, maximum: i64, modulus: u32, residue: u32) -> u64 {
+    let modulus = i128::from(modulus);
+    let minimum = i128::from(minimum);
+    let maximum = i128::from(maximum);
+    let offset = (i128::from(residue) - minimum.rem_euclid(modulus)).rem_euclid(modulus);
+    let first = minimum + offset;
+    if first > maximum {
+        0
+    } else {
+        u64::try_from((maximum - first) / modulus + 1)
+            .expect("count lies within a validated u64 interval span")
+    }
+}
+
+fn first_residue_value(minimum: i64, maximum: i64, modulus: u32, residue: u32) -> Option<i64> {
+    let modulus = i128::from(modulus);
+    let minimum = i128::from(minimum);
+    let offset = (i128::from(residue) - minimum.rem_euclid(modulus)).rem_euclid(modulus);
+    let first = minimum + offset;
+    (first <= i128::from(maximum))
+        .then(|| i64::try_from(first).expect("first residue value lies in an i64 interval"))
+}
+
+fn gcd(mut left: u32, mut right: u32) -> u32 {
+    while right != 0 {
+        let remainder = left % right;
+        left = right;
+        right = remainder;
+    }
+    left
+}
+
+fn lcm(left: u32, right: u32) -> u32 {
+    left / gcd(left, right) * right
 }
 
 #[cfg(test)]
