@@ -57,6 +57,7 @@ pub mod scheduler;
 pub mod selector;
 pub mod semantic_symmetry;
 pub mod span;
+pub mod structured_integer_set;
 pub mod theorem_search;
 pub mod transfer;
 pub mod witness;
