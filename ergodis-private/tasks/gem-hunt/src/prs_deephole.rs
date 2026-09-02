@@ -24,15 +24,14 @@
 use std::fmt::Write as _;
 
 use anyhow::{bail, Context, Result};
-use clap::Parser;
-use ergodis::field::{Prime, SmallField};
+use ergodis::field::Prime;
 use ergodis::group_action::GeneratorClosureWorkspace;
 use ergodis::matrix::Matrix;
 use ergodis::projective::ProjectiveIndex;
+use ergodis_private::prs::{quadratic_type, rank_of, sym_power, Field};
 
-#[derive(Parser, Debug)]
-#[command(about = "Exact PRS deep-hole census via normal-rational-curve rank in PG(d,q)")]
-struct Args {
+#[derive(clap::Args, Debug)]
+pub struct DeepholeArgs {
     /// Field order (prime power, <= 251).
     #[arg(long)]
     q: usize,
@@ -61,142 +60,8 @@ struct Args {
 }
 
 // ---------------------------------------------------------------------------
-// finite field GF(p^h), elements are indices 0..q-1 encoding base-p digit
-// vectors of the polynomial representation.
-// ---------------------------------------------------------------------------
-
-struct Field {
-    p: usize,
-    h: usize,
-    q: usize,
-    inner: SmallField,
-}
-
-impl Field {
-    fn new(q: usize) -> Result<Self> {
-        let (p, h) = factor_prime_power(q).context("q must be a prime power")?;
-        if q > 251 {
-            bail!("q must be at most 251 (u8 element encoding)");
-        }
-        let inner = SmallField::new(p as u8, h as u8)?;
-        Ok(Self { p, h, q, inner })
-    }
-
-    #[inline(always)]
-    fn a(&self, x: u8, y: u8) -> u8 {
-        self.inner.add(x, y)
-    }
-    #[inline(always)]
-    fn m(&self, x: u8, y: u8) -> u8 {
-        self.inner.mul(x, y)
-    }
-    #[inline(always)]
-    fn n(&self, x: u8) -> u8 {
-        self.inner.sub(0, x)
-    }
-    #[inline(always)]
-    fn i(&self, x: u8) -> u8 {
-        self.inner.inverse(x).expect("nonzero field element")
-    }
-    fn pow(&self, x: u8, e: usize) -> u8 {
-        let mut acc = 1u8;
-        for _ in 0..e {
-            acc = self.m(acc, x);
-        }
-        acc
-    }
-    /// embed an integer of Z into F_q (image of the prime field)
-    fn from_int(&self, v: usize) -> u8 {
-        (v % self.p) as u8
-    }
-    fn primitive(&self) -> u8 {
-        for g in 2..self.q as u8 {
-            let mut x = g;
-            let mut ord = 1usize;
-            while x != 1 {
-                x = self.m(x, g);
-                ord += 1;
-            }
-            if ord == self.q - 1 {
-                return g;
-            }
-        }
-        // q = 2 or 3
-        (self.q - 1) as u8
-    }
-}
-
-fn factor_prime_power(q: usize) -> Option<(usize, usize)> {
-    if q < 2 {
-        return None;
-    }
-    let mut p = 2usize;
-    while p * p <= q {
-        if q % p == 0 {
-            break;
-        }
-        p += 1;
-    }
-    if p * p > q {
-        return Some((q, 1));
-    }
-    let mut h = 0usize;
-    let mut m = q;
-    while m % p == 0 {
-        m /= p;
-        h += 1;
-    }
-    if m == 1 {
-        Some((p, h))
-    } else {
-        None
-    }
-}
-
-// ---------------------------------------------------------------------------
 // group action: d-th symmetric power of a 2x2 matrix
 // ---------------------------------------------------------------------------
-
-fn binom(n: usize, k: usize) -> u128 {
-    if k > n {
-        return 0;
-    }
-    let mut acc: u128 = 1;
-    for i in 0..k {
-        acc = acc * (n - i) as u128 / (i as u128 + 1);
-    }
-    acc
-}
-
-/// S[i][j] = coefficient of x^{d-j} y^j in (a x + b y)^{d-i} (c x + e y)^i.
-fn sym_power(f: &Field, d: usize, a: u8, b: u8, c: u8, e: u8) -> Vec<Vec<u8>> {
-    let mut s = vec![vec![0u8; d + 1]; d + 1];
-    for i in 0..=d {
-        // A_k = C(d-i,k) a^{d-i-k} b^k ; B_k = C(i,k) c^{i-k} e^k
-        let mut av = vec![0u8; d - i + 1];
-        for (k, item) in av.iter_mut().enumerate() {
-            let coef = f.from_int((binom(d - i, k) % f.p as u128) as usize);
-            *item = f.m(f.m(coef, f.pow(a, d - i - k)), f.pow(b, k));
-        }
-        let mut bv = vec![0u8; i + 1];
-        for (k, item) in bv.iter_mut().enumerate() {
-            let coef = f.from_int((binom(i, k) % f.p as u128) as usize);
-            *item = f.m(f.m(coef, f.pow(c, i - k)), f.pow(e, k));
-        }
-        for (ka, &x) in av.iter().enumerate() {
-            if x == 0 {
-                continue;
-            }
-            for (kb, &y) in bv.iter().enumerate() {
-                if y == 0 {
-                    continue;
-                }
-                s[i][ka + kb] = f.a(s[i][ka + kb], f.m(x, y));
-            }
-        }
-    }
-    s
-}
 
 fn apply(f: &Field, s: &[Vec<u8>], v: &[u8], out: &mut [u8]) {
     let d1 = v.len();
@@ -310,46 +175,6 @@ struct RankInfo {
     apolar_type: String,
 }
 
-/// Gaussian elimination rank over F_q.
-fn rank_of(f: &Field, rows: usize, cols: usize, data: &mut [u8]) -> usize {
-    let mut pivot = 0usize;
-    for col in 0..cols {
-        let mut sel = None;
-        for row in pivot..rows {
-            if data[row * cols + col] != 0 {
-                sel = Some(row);
-                break;
-            }
-        }
-        let Some(sel) = sel else { continue };
-        for c in 0..cols {
-            data.swap(pivot * cols + c, sel * cols + c);
-        }
-        let inv = f.i(data[pivot * cols + col]);
-        for c in 0..cols {
-            data[pivot * cols + c] = f.m(data[pivot * cols + c], inv);
-        }
-        for row in 0..rows {
-            if row == pivot {
-                continue;
-            }
-            let factor = data[row * cols + col];
-            if factor == 0 {
-                continue;
-            }
-            for c in 0..cols {
-                let sub = f.m(factor, data[pivot * cols + c]);
-                data[row * cols + c] = f.a(data[row * cols + c], f.n(sub));
-            }
-        }
-        pivot += 1;
-        if pivot == rows {
-            break;
-        }
-    }
-    pivot
-}
-
 fn hankel_matrix(d: usize, s: &[u8], j: usize) -> (usize, usize, Vec<u8>) {
     let rows = d - j + 1;
     let cols = j + 1;
@@ -360,40 +185,6 @@ fn hankel_matrix(d: usize, s: &[u8], j: usize) -> (usize, usize, Vec<u8>) {
         }
     }
     (rows, cols, data)
-}
-
-/// Classify a binary quadratic Q = l0 + l1 x + l2 x^2 (root at ∞ iff l2 = 0)
-/// by its root pattern in PG(1,q).
-fn quadratic_type(f: &Field, l: &[u8]) -> &'static str {
-    let mut roots = 0usize;
-    let mut distinct = 0usize;
-    for a in 0..f.q as u8 {
-        let val = f.a(l[0], f.a(f.m(l[1], a), f.m(l[2], f.m(a, a))));
-        if val == 0 {
-            roots += 1;
-            distinct += 1;
-        }
-    }
-    let inf_mult = if l[2] == 0 {
-        if l[1] == 0 {
-            2
-        } else {
-            1
-        }
-    } else {
-        0
-    };
-    let total = roots + inf_mult;
-    let _ = distinct;
-    if total == 2 && inf_mult <= 1 {
-        "split"
-    } else if total == 1 || inf_mult == 2 {
-        "double"
-    } else if total == 0 {
-        "inert"
-    } else {
-        "degenerate"
-    }
 }
 
 fn analyse(f: &Field, d: usize, s: &[u8]) -> RankInfo {
@@ -609,8 +400,7 @@ fn stratum_sweep(
     Ok(())
 }
 
-fn main() -> Result<()> {
-    let args = Args::parse();
+pub fn run(args: DeepholeArgs) -> Result<()> {
     let q = args.q;
     let r = args.r;
     if r < 2 {

@@ -46,13 +46,11 @@ use std::fmt::Write as _;
 use std::sync::atomic::{AtomicU64, AtomicUsize, Ordering};
 
 use anyhow::{bail, Context, Result};
-use clap::Parser;
-use ergodis::field::SmallField;
 use ergodis::projective::ProjectiveIndex;
+use ergodis_private::prs::{rank_of, Field};
 
-#[derive(Parser)]
-#[command(about = "Exact deep-hole decision on a PRS carrier stratum, top level only")]
-struct Args {
+#[derive(clap::Args)]
+pub struct StratumArgs {
     /// Field order (prime power, <= 251).
     #[arg(long)]
     q: usize,
@@ -78,71 +76,6 @@ struct Args {
     /// Output JSON path.
     #[arg(long)]
     out: Option<String>,
-}
-
-struct Field {
-    p: usize,
-    h: usize,
-    q: usize,
-    inner: SmallField,
-}
-
-impl Field {
-    fn new(q: usize) -> Result<Self> {
-        let (p, h) = factor_prime_power(q).context("q must be a prime power")?;
-        if q > 251 {
-            bail!("q must be at most 251 (u8 element encoding)");
-        }
-        Ok(Self {
-            p,
-            h,
-            q,
-            inner: SmallField::new(p as u8, h as u8)?,
-        })
-    }
-    #[inline(always)]
-    fn a(&self, x: u8, y: u8) -> u8 {
-        self.inner.add(x, y)
-    }
-    #[inline(always)]
-    fn m(&self, x: u8, y: u8) -> u8 {
-        self.inner.mul(x, y)
-    }
-    #[inline(always)]
-    fn n(&self, x: u8) -> u8 {
-        self.inner.sub(0, x)
-    }
-    #[inline(always)]
-    fn i(&self, x: u8) -> u8 {
-        self.inner.inverse(x).expect("nonzero field element")
-    }
-}
-
-fn factor_prime_power(q: usize) -> Option<(usize, usize)> {
-    if q < 2 {
-        return None;
-    }
-    let mut p = 2usize;
-    while p * p <= q {
-        if q % p == 0 {
-            break;
-        }
-        p += 1;
-    }
-    if p * p > q {
-        return Some((q, 1));
-    }
-    let mut h = 0usize;
-    let mut mm = q;
-    while mm % p == 0 {
-        mm /= p;
-        h += 1;
-    }
-    if mm == 1 {
-        Some((p, h))
-    } else {
-        None
-    }
 }
 
 /// Does the degree-`j` form with dehomogenised coefficients `l[0..=j]` (a root
@@ -201,46 +134,6 @@ impl Rng {
     fn below(&mut self, n: u64) -> u64 {
         self.next() % n
     }
-}
-
-/// Reduced row echelon rank over F_q.
-fn rank_of(f: &Field, rows: usize, cols: usize, data: &mut [u8]) -> usize {
-    let mut pivot = 0usize;
-    for col in 0..cols {
-        let mut sel = None;
-        for row in pivot..rows {
-            if data[row * cols + col] != 0 {
-                sel = Some(row);
-                break;
-            }
-        }
-        let Some(sel) = sel else { continue };
-        for c in 0..cols {
-            data.swap(pivot * cols + c, sel * cols + c);
-        }
-        let inv = f.i(data[pivot * cols + col]);
-        for c in 0..cols {
-            data[pivot * cols + c] = f.m(data[pivot * cols + c], inv);
-        }
-        for row in 0..rows {
-            if row == pivot {
-                continue;
-            }
-            let factor = data[row * cols + col];
-            if factor == 0 {
-                continue;
-            }
-            for c in 0..cols {
-                let sub = f.m(factor, data[pivot * cols + c]);
-                data[row * cols + c] = f.a(data[row * cols + c], f.n(sub));
-            }
-        }
-        pivot += 1;
-        if pivot == rows {
-            break;
-        }
-    }
-    pivot
 }
 
 /// Sylvester fast path.  Returns `Some(is_deep)` when the apolar degree is at
@@ -366,8 +259,7 @@ fn exhaustive_hit(f: &Field, d: usize, s: &[u8]) -> bool {
 
 const CHUNK: u64 = 64;
 
-fn main() -> Result<()> {
-    let args = Args::parse();
+pub fn run(args: StratumArgs) -> Result<()> {
     let (q, r) = (args.q, args.r);
     if r < 3 {
         bail!("redundancy r must be at least 3");

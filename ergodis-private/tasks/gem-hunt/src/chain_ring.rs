@@ -1076,18 +1076,24 @@ fn probe_distance_kernel(
 // Driver
 // ---------------------------------------------------------------------------
 
-fn main() -> anyhow::Result<()> {
-    let mut out_dir = PathBuf::from(std::env::var("HOME").unwrap_or_else(|_| ".".into()))
-        .join(".cache/ergodis/c1028");
-    let mut cert_path: Option<PathBuf> = None;
-    let mut args = std::env::args().skip(1);
-    while let Some(arg) = args.next() {
-        match arg.as_str() {
-            "--out" => out_dir = PathBuf::from(args.next().expect("--out needs a path")),
-            "--cert" => cert_path = Some(PathBuf::from(args.next().expect("--cert needs a path"))),
-            other => anyhow::bail!("unknown argument {other}"),
-        }
-    }
+/// Flag names and defaults reproduce the hand-rolled `std::env::args` parser the
+/// standalone binary used, so committed replay commands are unchanged.
+#[derive(clap::Args)]
+pub struct ChainRingArgs {
+    /// Report output directory. Defaults to `$HOME/.cache/ergodis/c1028`.
+    #[arg(long)]
+    out: Option<PathBuf>,
+    /// Also write the compact certificate here.
+    #[arg(long)]
+    cert: Option<PathBuf>,
+}
+
+pub fn run(cli: ChainRingArgs) -> anyhow::Result<()> {
+    let out_dir = cli.out.unwrap_or_else(|| {
+        PathBuf::from(std::env::var("HOME").unwrap_or_else(|_| ".".into()))
+            .join(".cache/ergodis/c1028")
+    });
+    let cert_path: Option<PathBuf> = cli.cert;
     fs::create_dir_all(&out_dir)?;
     let started = Instant::now();
 

@@ -1,3 +1,6 @@
+[workspace]
+members = [".", "tasks/gem-hunt"]
+
 [package]
 name = "ergodis-private"
 version = "0.0.0"

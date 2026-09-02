@@ -36,18 +36,14 @@ use std::fs;
 use std::path::PathBuf;
 
 use anyhow::{bail, Context, Result};
-use clap::Parser;
 use ergodis::field::SmallField;
 use ergodis::projective::ProjectiveIndex;
+use ergodis_private::arith::factor_prime_power_u16 as factor_prime_power;
 use serde::Serialize;
 use sha2::{Digest, Sha256};
 
-#[derive(Parser, Debug)]
-#[command(
-    name = "c1020-exterior-sets",
-    about = "Exhaustive complete-exterior-set census of a conic in PG(2,q)"
-)]
-struct Args {
+#[derive(clap::Args, Debug)]
+pub struct ExteriorSetsArgs {
     /// Odd prime power orders to census.
     #[arg(long, value_delimiter = ',', num_args = 1..)]
     q: Vec<u16>,
@@ -86,28 +82,6 @@ struct Plane {
     line_conic: Vec<u8>,
     externals: Vec<u32>,
     external_slot: Vec<i32>,
-}
-
-fn factor_prime_power(q: u16) -> Result<(u8, u8)> {
-    if q < 2 {
-        bail!("q = {q} is not a prime power");
-    }
-    for p in 2u16..=q {
-        if q % p != 0 {
-            continue;
-        }
-        let mut rest = q;
-        let mut h = 0u8;
-        while rest % p == 0 {
-            rest /= p;
-            h += 1;
-        }
-        if rest != 1 {
-            bail!("q = {q} is not a prime power");
-        }
-        return Ok((u8::try_from(p).context("characteristic exceeds u8")?, h));
-    }
-    bail!("q = {q} is not a prime power")
 }
 
 impl Plane {
@@ -670,7 +644,7 @@ struct CellReport {
     linear_classes: usize,
 }
 
-fn run_cell(args: &Args, q: u16) -> Result<CellReport> {
+fn run_cell(args: &ExteriorSetsArgs, q: u16) -> Result<CellReport> {
     let plane = Plane::new(q)?;
     let index = ProjectiveIndex::new(&plane.field, 2)
         .map_err(|e| anyhow::anyhow!("projective index: {e}"))?;
@@ -1057,8 +1031,7 @@ fn analyse_set(q: u16, set: &[usize]) -> Result<()> {
     Ok(())
 }
 
-fn main() -> Result<()> {
-    let args = Args::parse();
+pub fn run(args: ExteriorSetsArgs) -> Result<()> {
     if !args.points.is_empty() {
         if args.q.len() != 1 {
             bail!("--points requires exactly one --q");

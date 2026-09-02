@@ -440,16 +440,7 @@ fn uncovered_mod840(fams: &[Family]) -> Vec<i128> {
 // tier-2 ladder: auto-generated families with arbitrary moduli
 // ---------------------------------------------------------------------------------------------
 
-fn gcd(a: i128, b: i128) -> i128 {
-    if b == 0 {
-        a.abs()
-    } else {
-        gcd(b, a % b)
-    }
-}
-fn lcm(a: i128, b: i128) -> i128 {
-    a / gcd(a, b) * b
-}
+use ergodis_private::arith::{gcd_i128 as gcd, lcm_i128_nonzero as lcm};
 
 /// Enumerate candidate (s, d-shape) families over classes with modulus lcm(4*c*s, 24).
 fn tier2_candidates(s_max: i128, c_max: i128) -> Vec<Family> {
@@ -645,41 +636,51 @@ fn find_witness(p: u64, base: &[u64], s_max: u64, depth: u32) -> Option<(u64, u1
 // driver
 // ---------------------------------------------------------------------------------------------
 
-fn arg_val(args: &[String], key: &str, default: &str) -> String {
-    for w in args.windows(2) {
-        if w[0] == key {
-            return w[1].clone();
-        }
-    }
-    default.to_string()
+/// Flag names and defaults reproduce the hand-rolled `std::env::args` parser the
+/// standalone binary used, so committed replay commands are unchanged.
+#[derive(clap::Args)]
+pub struct ParametricCertArgs {
+    /// Residual-prime sieve limit.
+    #[arg(long = "n-max", default_value_t = 10_000_000)]
+    n_max: u64,
+    /// Certificate output directory. Defaults to `$HOME/.cache/ergodis/c1029`.
+    #[arg(long = "out-dir")]
+    out_dir: Option<PathBuf>,
+    /// Number of tier-2 ladder families to select greedily; 0 disables the
+    /// ladder.
+    #[arg(long = "ladder-top", default_value_t = 0)]
+    ladder_top: usize,
+    /// Maximum `s` for tier-2 ladder candidates.
+    #[arg(long = "ladder-s-max", default_value_t = 31)]
+    ladder_s_max: i128,
+    /// Maximum `c` for tier-2 ladder candidates.
+    #[arg(long = "ladder-c-max", default_value_t = 12)]
+    ladder_c_max: i128,
+    /// Maximum `s` searched when constructing a residual witness.
+    #[arg(long = "witness-s-max", default_value_t = 4001)]
+    witness_s_max: u64,
+    /// Maximum residual prime the ladder is fitted against; 0 means all.
+    #[arg(long = "ladder-fit-max", default_value_t = 0)]
+    ladder_fit_max: u64,
+    /// Tag embedded in the certificate and witness file names.
+    #[arg(long, default_value = "run")]
+    tag: String,
 }
 
-fn main() {
-    let args: Vec<String> = std::env::args().collect();
-    let n_max: u64 = arg_val(&args, "--n-max", "10000000")
-        .parse()
-        .expect("n-max");
-    let out_dir = PathBuf::from(arg_val(
-        &args,
-        "--out-dir",
-        &format!("{}/.cache/ergodis/c1029", std::env::var("HOME").unwrap()),
-    ));
-    let ladder_top: usize = arg_val(&args, "--ladder-top", "0")
-        .parse()
-        .expect("ladder-top");
-    let s_max_ladder: i128 = arg_val(&args, "--ladder-s-max", "31")
-        .parse()
-        .expect("s-max");
-    let c_max_ladder: i128 = arg_val(&args, "--ladder-c-max", "12")
-        .parse()
-        .expect("c-max");
-    let witness_s_max: u64 = arg_val(&args, "--witness-s-max", "4001")
-        .parse()
-        .expect("ws");
-    let ladder_fit_max: u64 = arg_val(&args, "--ladder-fit-max", "0")
-        .parse()
-        .expect("fit-max");
-    let tag = arg_val(&args, "--tag", "run");
+pub fn run(cli: ParametricCertArgs) {
+    let n_max: u64 = cli.n_max;
+    let out_dir = cli.out_dir.unwrap_or_else(|| {
+        PathBuf::from(format!(
+            "{}/.cache/ergodis/c1029",
+            std::env::var("HOME").unwrap()
+        ))
+    });
+    let ladder_top: usize = cli.ladder_top;
+    let s_max_ladder: i128 = cli.ladder_s_max;
+    let c_max_ladder: i128 = cli.ladder_c_max;
+    let witness_s_max: u64 = cli.witness_s_max;
+    let ladder_fit_max: u64 = cli.ladder_fit_max;
+    let tag = cli.tag;
     fs::create_dir_all(&out_dir).expect("out dir");
 
     // ---- tier 1 ----

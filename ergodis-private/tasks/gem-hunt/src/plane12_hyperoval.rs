@@ -44,15 +44,11 @@ use std::sync::atomic::{AtomicUsize, Ordering};
 use std::time::Instant;
 
 use anyhow::{bail, Result};
-use clap::Parser;
 use ergodis_private::hall_core::{HallOutcome, HallWorkspace};
 use serde::Serialize;
 
-#[derive(Parser)]
-#[command(about = "order-(n+1) invariant plane completion search")]
-struct Arguments {
-    #[arg(long)]
-    out: PathBuf,
+#[derive(clap::Args)]
+pub struct HyperovalArgs {
     /// Plane order; n + 1 must be prime.
     #[arg(long, default_value_t = 12)]
     n: usize,
@@ -471,8 +467,7 @@ fn is_prime(m: usize) -> bool {
     true
 }
 
-pub fn main() -> Result<()> {
-    let args = Arguments::parse();
+pub fn run(out: PathBuf, args: HyperovalArgs) -> Result<()> {
     let n = args.n;
     let p = n + 1;
     if !is_prime(p) {
@@ -606,10 +601,10 @@ pub fn main() -> Result<()> {
         verdict,
     };
 
-    if let Some(parent) = args.out.parent() {
+    if let Some(parent) = out.parent() {
         fs::create_dir_all(parent)?;
     }
-    let writer = BufWriter::new(File::create(&args.out)?);
+    let writer = BufWriter::new(File::create(&out)?);
     serde_json::to_writer_pretty(writer, &certificate)?;
     println!(
         "{}",

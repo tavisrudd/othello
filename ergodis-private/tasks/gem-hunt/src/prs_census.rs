@@ -41,8 +41,7 @@ use std::fmt::Write as _;
 use std::sync::atomic::{AtomicU64, AtomicUsize, Ordering};
 
 use anyhow::{bail, Context, Result};
-use clap::{Parser, ValueEnum};
-use ergodis::field::SmallField;
+use clap::ValueEnum;
 use ergodis::matrix::Matrix;
 #[cfg(feature = "c1018-lane-action")]
 use ergodis::projective::BinaryLaneProjectiveLinearActionPack;
@@ -51,7 +50,16 @@ use ergodis::projective::BinaryProjectiveLinearActionPack;
 #[cfg(all(not(feature = "c1018-lane-action"), feature = "c1018-sparse-action"))]
 use ergodis::projective::BinarySparseProjectiveLinearActionPack;
 use ergodis::projective::{ProjectiveIndex, ProjectiveLinearActionPack};
+use ergodis_private::arith::{binom, prime_divisors_usize as prime_divisors};
+use ergodis_private::prs::{quadratic_type, sym_power, Field};
 
+// The action-pack choice stays a compile-time feature.  `worker_binary_dense`
+// carries a fixed `export_name` and the retained note above it records that a
+// trait-shared worker erased the isolated radix win under fat LTO, so a runtime
+// flag here would mean either dynamic dispatch in the orbit loop or three
+// duplicate `export_name`d workers.  Either is a hot-path change requiring
+// counter A/B evidence under the core `PERFORMANCE.md`, which this consolidation
+// deliberately does not make.
 #[cfg(feature = "c1018-lane-action")]
 type BinaryActionPack<'a> = BinaryLaneProjectiveLinearActionPack<'a, 6, 5, 3>;
 #[cfg(not(any(feature = "c1018-lane-action", feature = "c1018-sparse-action")))]
@@ -71,9 +79,8 @@ enum RankMode {
     Subset,
 }
 
-#[derive(Parser)]
-#[command(about = "Parallel exact PRS deep-hole census in PG(r-1,q)")]
-struct Args {
+#[derive(clap::Args)]
+pub struct CensusArgs {
     /// Field order (prime power, <= 251).
     #[arg(long)]
     q: usize,
@@ -109,135 +116,6 @@ struct Args {
     /// Output JSON path.
     #[arg(long)]
     out: Option<String>,
-}
-
-// ---------------------------------------------------------------------------
-// field wrapper over the Ergodis core table-driven GF(p^h)
-// ---------------------------------------------------------------------------
-
-struct Field {
-    p: usize,
-    h: usize,
-    q: usize,
-    inner: SmallField,
-}
-
-impl Field {
-    fn new(q: usize) -> Result<Self> {
-        let (p, h) = factor_prime_power(q).context("q must be a prime power")?;
-        if q > 251 {
-            bail!("q must be at most 251 (u8 element encoding)");
-        }
-        let inner = SmallField::new(p as u8, h as u8)?;
-        Ok(Self { p, h, q, inner })
-    }
-    #[inline(always)]
-    fn a(&self, x: u8, y: u8) -> u8 {
-        self.inner.add(x, y)
-    }
-    #[inline(always)]
-    fn m(&self, x: u8, y: u8) -> u8 {
-        self.inner.mul(x, y)
-    }
-    #[inline(always)]
-    fn n(&self, x: u8) -> u8 {
-        self.inner.sub(0, x)
-    }
-    #[inline(always)]
-    fn i(&self, x: u8) -> u8 {
-        self.inner.inverse(x).expect("nonzero field element")
-    }
-    fn powi(&self, x: u8, e: usize) -> u8 {
-        let mut acc = 1u8;
-        for _ in 0..e {
-            acc = self.m(acc, x);
-        }
-        acc
-    }
-    fn from_int(&self, v: usize) -> u8 {
-        (v % self.p) as u8
-    }
-    fn primitive(&self) -> u8 {
-        for g in 2..self.q as u8 {
-            let mut x = g;
-            let mut ord = 1usize;
-            while x != 1 {
-                x = self.m(x, g);
-                ord += 1;
-            }
-            if ord == self.q - 1 {
-                return g;
-            }
-        }
-        (self.q - 1) as u8
-    }
-}
-
-fn factor_prime_power(q: usize) -> Option<(usize, usize)> {
-    if q < 2 {
-        return None;
-    }
-    let mut p = 2usize;
-    while p * p <= q {
-        if q % p == 0 {
-            break;
-        }
-        p += 1;
-    }
-    if p * p > q {
-        return Some((q, 1));
-    }
-    let mut h = 0usize;
-    let mut m = q;
-    while m % p == 0 {
-        m /= p;
-        h += 1;
-    }
-    if m == 1 {
-        Some((p, h))
-    } else {
-        None
-    }
-}
-
-fn binom(n: usize, k: usize) -> u128 {
-    if k > n {
-        return 0;
-    }
-    let mut acc: u128 = 1;
-    for i in 0..k {
-        acc = acc * (n - i) as u128 / (i as u128 + 1);
-    }
-    acc
-}
-
-/// `S[i][j]` = coefficient of `x^{d-j} y^j` in `(a x + b y)^{d-i} (c x + e y)^i`.
-fn sym_power(f: &Field, d: usize, a: u8, b: u8, c: u8, e: u8) -> Vec<Vec<u8>> {
-    let mut s = vec![vec![0u8; d + 1]; d + 1];
-    for i in 0..=d {
-        let mut av = vec![0u8; d - i + 1];
-        for (k, item) in av.iter_mut().enumerate() {
-            let coef = f.from_int((binom(d - i, k) % f.p as u128) as usize);
-            *item = f.m(f.m(coef, f.powi(a, d - i - k)), f.powi(b, k));
-        }
-        let mut bv = vec![0u8; i + 1];
-        for (k, item) in bv.iter_mut().enumerate() {
-            let coef = f.from_int((binom(i, k) % f.p as u128) as usize);
-            *item = f.m(f.m(coef, f.powi(c, i - k)), f.powi(e, k));
-        }
-        for (ka, &x) in av.iter().enumerate() {
-            if x == 0 {
-                continue;
-            }
-            for (kb, &y) in bv.iter().enumerate() {
-                if y == 0 {
-                    continue;
-                }
-                s[i][ka + kb] = f.a(s[i][ka + kb], f.m(x, y));
-            }
-        }
-    }
-    s
 }
 
 // ---------------------------------------------------------------------------
@@ -478,36 +356,6 @@ struct RankInfo {
     apolar_degree: usize,
     apolar_kernel_dim: usize,
     apolar_type: &'static str,
-}
-
-/// Classify a binary quadratic `l0 + l1 x + l2 x^2` (root at `∞` iff `l2 = 0`).
-fn quadratic_type(f: &Field, l: &[u8]) -> &'static str {
-    let mut roots = 0usize;
-    for a in 0..f.q as u8 {
-        let val = f.a(l[0], f.a(f.m(l[1], a), f.m(l[2], f.m(a, a))));
-        if val == 0 {
-            roots += 1;
-        }
-    }
-    let inf_mult = if l[2] == 0 {
-        if l[1] == 0 {
-            2
-        } else {
-            1
-        }
-    } else {
-        0
-    };
-    let total = roots + inf_mult;
-    if total == 2 && inf_mult <= 1 {
-        "split"
-    } else if total == 1 || inf_mult == 2 {
-        "double"
-    } else if total == 0 {
-        "inert"
-    } else {
-        "degenerate"
-    }
 }
 
 struct RankScratch {
@@ -1288,24 +1136,6 @@ fn stratum_sweep(
 // concrete `σ` and takes null spaces over `F_q`, so the split, non-split and
 // unipotent cases run through the same code.
 
-fn prime_divisors(mut n: usize) -> Vec<usize> {
-    let mut out = Vec::new();
-    let mut d = 2usize;
-    while d * d <= n {
-        if n % d == 0 {
-            out.push(d);
-            while n % d == 0 {
-                n /= d;
-            }
-        }
-        d += 1;
-    }
-    if n > 1 {
-        out.push(n);
-    }
-    out
-}
-
 /// Kernel basis of `rows × cols` matrix `data` over `F_q`.
 fn kernel_basis(f: &Field, rows: usize, cols: usize, data: &mut [u8]) -> Vec<Vec<u8>> {
     let pivots = rref(f, rows, cols, data);
@@ -1418,7 +1248,7 @@ fn fix_sweep(
     generators.push((f.p, "unipotent", [1, 0, 1, 1]));
     // split torus, one element of each prime order dividing q-1
     for l in prime_divisors(f.q - 1) {
-        let zeta = f.powi(g, (f.q - 1) / l);
+        let zeta = f.pow(g, (f.q - 1) / l);
         generators.push((l, "split", [1, 0, 0, zeta]));
     }
     // non-split torus, one element of each prime order dividing q+1
@@ -1577,8 +1407,7 @@ fn fix_sweep(
     Ok(())
 }
 
-fn main() -> Result<()> {
-    let args = Args::parse();
+pub fn run(args: CensusArgs) -> Result<()> {
     let q = args.q;
     let r = args.r;
     if r < 2 {

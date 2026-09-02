@@ -28,13 +28,12 @@
 use std::collections::BTreeMap;
 use std::sync::{Arc, Mutex};
 
-use clap::Parser;
+use ergodis_private::arith::{lcm_i128 as lcm, smith_normal_form};
+use ergodis_private::css_codes::{multilinear_level, reed_muller};
+use ergodis_private::gf2_linalg::{dual_basis, rref, span, Word};
 
-type Word = u64;
-
-#[derive(Parser, Debug)]
-#[command(about = "Transversal hierarchy level versus X-check weight census")]
-struct Cli {
+#[derive(clap::Args, Debug)]
+pub struct LevelsArgs {
     /// Exhaustive flag census at this length.
     #[arg(long)]
     census: Option<usize>,
@@ -57,52 +56,6 @@ struct Cli {
 
 // ---------------------------------------------------------------- GF(2) ----
 
-fn rref(basis: &mut Vec<Word>, n: usize) {
-    let mut rank = 0usize;
-    for col in 0..n {
-        let bit = 1u64 << col;
-        let Some(p) = (rank..basis.len()).find(|&i| basis[i] & bit != 0) else {
-            continue;
-        };
-        basis.swap(rank, p);
-        for i in 0..basis.len() {
-            if i != rank && basis[i] & bit != 0 {
-                basis[i] ^= basis[rank];
-            }
-        }
-        rank += 1;
-    }
-    basis.truncate(rank);
-    basis.retain(|&w| w != 0);
-}
-
-fn span(basis: &[Word]) -> Vec<Word> {
-    let mut out = vec![0u64];
-    for &b in basis {
-        let cur: Vec<Word> = out.iter().map(|&w| w ^ b).collect();
-        out.extend(cur);
-    }
-    out
-}
-
-fn dual_basis(basis: &[Word], n: usize) -> Vec<Word> {
-    let mut rows = basis.to_vec();
-    rref(&mut rows, n);
-    let pivots: Vec<usize> = rows.iter().map(|r| r.trailing_zeros() as usize).collect();
-    let free: Vec<usize> = (0..n).filter(|c| !pivots.contains(c)).collect();
-    let mut out = Vec::new();
-    for &f in &free {
-        let mut y = 1u64 << f;
-        for (i, r) in rows.iter().enumerate() {
-            if r >> f & 1 == 1 {
-                y |= 1u64 << pivots[i];
-            }
-        }
-        out.push(y);
-    }
-    out
-}
-
 /// Exact optimal check weight: least `w` with `{c ∈ code : |c| ≤ w}` spanning.
 fn optimal_check_weight(basis: &[Word], n: usize) -> u32 {
     if basis.is_empty() {
@@ -124,159 +77,6 @@ fn optimal_check_weight(basis: &[Word], n: usize) -> u32 {
         }
     }
     u32::MAX
-}
-
-// ------------------------------------------------- Smith normal form ------
-
-fn smith_normal_form(m: &[Vec<i128>], n: usize) -> (Vec<i128>, Vec<Vec<i128>>) {
-    let mut a: Vec<Vec<i128>> = m.to_vec();
-    let rows = a.len();
-    let mut v: Vec<Vec<i128>> = (0..n)
-        .map(|i| (0..n).map(|j| if i == j { 1 } else { 0 }).collect())
-        .collect();
-    let mut diag = Vec::new();
-    let mut t = 0usize;
-    while t < rows && t < n {
-        let mut best: Option<(usize, usize)> = None;
-        for i in t..rows {
-            for j in t..n {
-                if a[i][j] != 0 {
-                    let cand = a[i][j].abs();
-                    if best.is_none_or(|(bi, bj)| cand < a[bi][bj].abs()) {
-                        best = Some((i, j));
-                    }
-                }
-            }
-        }
-        let Some((pi, pj)) = best else { break };
-        a.swap(t, pi);
-        if pj != t {
-            for row in a.iter_mut() {
-                row.swap(t, pj);
-            }
-            for row in v.iter_mut() {
-                row.swap(t, pj);
-            }
-        }
-        loop {
-            let mut changed = false;
-            for i in (t + 1)..rows {
-                if a[i][t] != 0 {
-                    let q = a[i][t] / a[t][t];
-                    for j in t..n {
-                        a[i][j] -= q * a[t][j];
-                    }
-                    if a[i][t] != 0 {
-                        a.swap(t, i);
-                        changed = true;
-                    }
-                }
-            }
-            for j in (t + 1)..n {
-                if a[t][j] != 0 {
-                    let q = a[t][j] / a[t][t];
-                    for row in a.iter_mut() {
-                        row[j] -= q * row[t];
-                    }
-                    for row in v.iter_mut() {
-                        row[j] -= q * row[t];
-                    }
-                    if a[t][j] != 0 {
-                        for row in a.iter_mut() {
-                            row.swap(t, j);
-                        }
-                        for row in v.iter_mut() {
-                            row.swap(t, j);
-                        }
-                        changed = true;
-                    }
-                }
-            }
-            if !changed {
-                break;
-            }
-        }
-        let mut fixed = false;
-        'outer: for i in (t + 1)..rows {
-            for j in (t + 1)..n {
-                if a[i][j] % a[t][t] != 0 {
-                    for j2 in t..n {
-                        a[t][j2] += a[i][j2];
-                    }
-                    fixed = true;
-                    break 'outer;
-                }
-            }
-        }
-        if fixed {
-            continue;
-        }
-        if a[t][t] < 0 {
-            for row in a.iter_mut() {
-                row[t] = -row[t];
-            }
-            for row in v.iter_mut() {
-                row[t] = -row[t];
-            }
-        }
-        diag.push(a[t][t]);
-        t += 1;
-    }
-    (diag, v)
-}
-
-fn gcd(a: i128, b: i128) -> i128 {
-    if b == 0 {
-        a.abs()
-    } else {
-        gcd(b, a % b)
-    }
-}
-fn lcm(a: i128, b: i128) -> i128 {
-    if a == 0 || b == 0 {
-        0
-    } else {
-        a / gcd(a, b) * b
-    }
-}
-
-fn multilinear_level(logical: &[i128], k: usize, modulus: i128) -> usize {
-    let mut level = 0usize;
-    for s in 0..(1usize << k) {
-        let mut alpha: i128 = 0;
-        let mut r = s;
-        loop {
-            let sign = if (s.count_ones() - r.count_ones()) % 2 == 0 {
-                1
-            } else {
-                -1
-            };
-            alpha += sign * logical[r];
-            if r == 0 {
-                break;
-            }
-            r = (r - 1) & s;
-        }
-        let alpha = alpha.rem_euclid(modulus);
-        if alpha == 0 {
-            continue;
-        }
-        let ord = modulus / gcd(alpha, modulus);
-        let mut e = 0usize;
-        let mut o = ord;
-        while o % 2 == 0 {
-            o /= 2;
-            e += 1;
-        }
-        if o != 1 {
-            return usize::MAX;
-        }
-        let cand = s.count_ones() as usize + e - 1;
-        if cand > level {
-            level = cand;
-        }
-    }
-    level
 }
 
 /// Maximum induced logical Clifford-hierarchy level of the flag `A ⊆ V`.
@@ -467,25 +267,6 @@ fn merge(table: &mut Table, r: Record) {
 }
 
 // ---------------------------------------------------------- ladder mode ----
-
-fn reed_muller(r: usize, mm: usize) -> Vec<Word> {
-    let n = 1usize << mm;
-    let mut gens = Vec::new();
-    for s in 0..(1usize << mm) {
-        if (s as u32).count_ones() as usize > r {
-            continue;
-        }
-        let mut w: Word = 0;
-        for p in 0..n {
-            if s & !p == 0 {
-                w |= 1u64 << p;
-            }
-        }
-        gens.push(w);
-    }
-    rref(&mut gens, n);
-    gens
-}
 
 /// Punctured code: delete coordinate 0. The projection of a spanning set spans
 /// the image, so this works on the basis and never enumerates the code.
@@ -763,8 +544,7 @@ fn census(n: usize, max_w: u32, min_d: u32, threads: usize, row_cap: usize) {
     println!("maximum finite level over the whole census: {best:?}");
 }
 
-fn main() {
-    let cli = Cli::parse();
+pub fn run(cli: LevelsArgs) {
     if cli.ladder {
         ladder(cli.row_cap);
     }

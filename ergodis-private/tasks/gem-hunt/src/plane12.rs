@@ -21,13 +21,13 @@ use std::io::BufWriter;
 use std::path::PathBuf;
 
 use anyhow::Result;
-use clap::{Parser, Subcommand};
+use clap::Subcommand;
+use ergodis_private::arith::{gcd_u64 as gcd, prime_divisors_u64 as prime_divisors};
 use ergodis_private::hall_core::{HallOutcome, HallWorkspace};
 use serde::Serialize;
 
-#[derive(Parser)]
-#[command(about = "restricted order-12 projective-plane eliminations")]
-struct Arguments {
+#[derive(clap::Args)]
+pub struct Plane12Args {
     #[arg(long)]
     out: PathBuf,
     #[command(subcommand)]
@@ -35,7 +35,7 @@ struct Arguments {
 }
 
 #[derive(Subcommand)]
-enum Command {
+pub enum Command {
     /// Multiplier-orbit certificate for a planar (v, k, 1) difference set.
     Multiplier {
         #[arg(long, default_value_t = 157)]
@@ -63,18 +63,23 @@ enum Command {
         #[arg(long, default_value_t = 13)]
         m: usize,
     },
+    /// Order-(n+1) invariant plane completion search, optionally forcing an
+    /// invariant hyperoval.
+    Hyperoval(crate::plane12_hyperoval::HyperovalArgs),
 }
 
-fn main() -> Result<()> {
-    let args = Arguments::parse();
+pub fn run(args: Plane12Args) -> Result<()> {
     if let Some(parent) = args.out.parent() {
         fs::create_dir_all(parent)?;
     }
+    // The completion search keeps its own compact stdout summary and writes its
+    // own certificate, so it returns before the shared writer below.
     let value = match args.command {
         Command::Multiplier { v, k } => serde_json::to_value(multiplier_certificate(v, k))?,
         Command::Sidon { v, k } => serde_json::to_value(sidon_search(v, k))?,
         Command::Orbit13 { n, cap } => serde_json::to_value(orbit_matrix_search(n, cap))?,
         Command::Starter { m } => serde_json::to_value(starter_search(m))?,
+        Command::Hyperoval(hyperoval) => return crate::plane12_hyperoval::run(args.out, hyperoval),
     };
     let writer = BufWriter::new(File::create(&args.out)?);
     serde_json::to_writer_pretty(writer, &value)?;
@@ -106,32 +111,6 @@ fn mul_order(a: u64, v: u64) -> u64 {
         order += 1;
     }
     order
-}
-
-fn prime_divisors(mut n: u64) -> Vec<u64> {
-    let mut out = Vec::new();
-    let mut p = 2;
-    while p * p <= n {
-        if n % p == 0 {
-            out.push(p);
-            while n % p == 0 {
-                n /= p;
-            }
-        }
-        p += 1;
-    }
-    if n > 1 {
-        out.push(n);
-    }
-    out
-}
-
-fn gcd(a: u64, b: u64) -> u64 {
-    if b == 0 {
-        a
-    } else {
-        gcd(b, a % b)
-    }
 }
 
 fn multiplier_certificate(v: u64, k: u64) -> MultiplierCertificate {
