@@ -205,6 +205,17 @@ The in-memory cross-thread scorecard may use `repr(C, align(64))`. Current expec
 cardinality favors sorted flat records and `u64` masks; delta coding or bitmap indexes
 are deferred until measured scale requires them.
 
+The first implemented semantic-store slice is deliberately narrower than the full
+campaign store. `SoundTheoremArchive` can snapshot and restore its diagnostic Pareto
+frontier only when the presentation, feature DAG, and output-class content hashes match
+exactly. Restore rechecks bitmap bounds, candidate ordering and identity, soundness on
+the stored corpus, and pairwise non-dominance under a hard 4,096-point cap. The portable
+schema carries `proof_authority: false`, and any attempt to set it is rejected. Thus a
+restart can retain useful diagnostic candidates without turning a corpus observation
+into a proof or pruning fact; promotion still requires its separately bound verifier or
+certificate artifact. Callers must bound serialized bytes before decoding untrusted
+storage.
+
 ## Consequences
 
 ### Positive

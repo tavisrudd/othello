@@ -12,6 +12,13 @@ use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
 pub const SEPARATING_REPLAY_CORE_SNAPSHOT_VERSION: u16 = 1;
+pub const DIAGNOSTIC_THEOREM_ARCHIVE_SNAPSHOT_VERSION: u16 = 1;
+/// Hard cap for the cold diagnostic archive and its quadratic canonicality check.
+///
+/// The archive is a small Pareto frontier, not an unbounded observation log.
+/// Keeping this bound explicit prevents a hostile snapshot from turning restore
+/// into unbounded CPU work or memory residency.
+pub const MAX_DIAGNOSTIC_THEOREM_ARCHIVE_POINTS: usize = 4_096;
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct SeparabilityBounds {
@@ -601,6 +608,39 @@ pub struct SoundTheoremPoint<C> {
     coverage: Box<[u64]>,
 }
 
+#[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+/// Exact semantic identities required to reuse a diagnostic theorem frontier.
+pub struct DiagnosticTheoremArchiveBinding {
+    pub presentation_blake3: [u8; 32],
+    pub feature_dag_blake3: [u8; 32],
+    pub output_class_blake3: [u8; 32],
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+/// Cold, portable representation of one diagnostic Pareto point.
+pub struct DiagnosticTheoremPointSnapshot<C> {
+    pub candidate: C,
+    pub evaluation_cost: u32,
+    pub coverage: Box<[u64]>,
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+/// Portable diagnostic state with no proof or pruning authority.
+///
+/// Callers must impose a byte limit before deserializing untrusted storage.
+pub struct DiagnosticTheoremArchiveSnapshot<C> {
+    pub version: u16,
+    pub proof_authority: bool,
+    pub binding: DiagnosticTheoremArchiveBinding,
+    pub rows: u32,
+    pub maximum_points: u32,
+    pub conclusion: Box<[u64]>,
+    pub points: Box<[DiagnosticTheoremPointSnapshot<C>]>,
+}
+
 impl<C> SoundTheoremPoint<C> {
     pub fn coverage(&self) -> &[u64] {
         &self.coverage
@@ -624,6 +664,18 @@ pub enum TheoremArchiveError {
     BitmapWidth,
     #[error("theorem archive bitmap sets bits beyond the row domain")]
     BitmapTail,
+    #[error("theorem archive candidate identity has conflicting semantics")]
+    IdentityConflict,
+    #[error("diagnostic theorem archive snapshot version is unsupported")]
+    SnapshotVersion,
+    #[error("diagnostic theorem archive snapshot binding does not match")]
+    SnapshotBinding,
+    #[error("diagnostic theorem archive snapshot bounds do not match")]
+    SnapshotBounds,
+    #[error("diagnostic theorem archive snapshot is not canonical")]
+    NonCanonicalSnapshot,
+    #[error("diagnostic theorem archive snapshot claims proof authority")]
+    InvalidProofAuthority,
 }
 
 /// Bounded exact archive of sound pruning theorems.
@@ -668,6 +720,120 @@ impl<C: Clone + Ord> SoundTheoremArchive<C> {
         &self.covered_union
     }
 
+    pub fn diagnostic_snapshot(
+        &self,
+        binding: DiagnosticTheoremArchiveBinding,
+    ) -> Result<DiagnosticTheoremArchiveSnapshot<C>, TheoremArchiveError> {
+        let rows = u32::try_from(self.rows).map_err(|_| TheoremArchiveError::SnapshotBounds)?;
+        let maximum_points =
+            u32::try_from(self.maximum_points).map_err(|_| TheoremArchiveError::SnapshotBounds)?;
+        if self.maximum_points > MAX_DIAGNOSTIC_THEOREM_ARCHIVE_POINTS {
+            return Err(TheoremArchiveError::SnapshotBounds);
+        }
+        Ok(DiagnosticTheoremArchiveSnapshot {
+            version: DIAGNOSTIC_THEOREM_ARCHIVE_SNAPSHOT_VERSION,
+            proof_authority: false,
+            binding,
+            rows,
+            maximum_points,
+            conclusion: self.conclusion.clone(),
+            points: self
+                .points
+                .iter()
+                .map(|point| DiagnosticTheoremPointSnapshot {
+                    candidate: point.candidate.clone(),
+                    evaluation_cost: point.evaluation_cost,
+                    coverage: point.coverage.clone(),
+                })
+                .collect(),
+        })
+    }
+
+    pub fn restore_diagnostic(
+        snapshot: DiagnosticTheoremArchiveSnapshot<C>,
+        expected_binding: DiagnosticTheoremArchiveBinding,
+        configured_maximum_points: usize,
+    ) -> Result<Self, TheoremArchiveError> {
+        if snapshot.version != DIAGNOSTIC_THEOREM_ARCHIVE_SNAPSHOT_VERSION {
+            return Err(TheoremArchiveError::SnapshotVersion);
+        }
+        if snapshot.proof_authority {
+            return Err(TheoremArchiveError::InvalidProofAuthority);
+        }
+        if snapshot.binding != expected_binding {
+            return Err(TheoremArchiveError::SnapshotBinding);
+        }
+        if configured_maximum_points == 0
+            || configured_maximum_points > MAX_DIAGNOSTIC_THEOREM_ARCHIVE_POINTS
+            || snapshot.maximum_points as usize != configured_maximum_points
+            || snapshot.points.len() > configured_maximum_points
+        {
+            return Err(TheoremArchiveError::SnapshotBounds);
+        }
+        let rows = snapshot.rows as usize;
+        validate_archive_bitmap(rows, &snapshot.conclusion)?;
+        if rows == 0 {
+            return Err(TheoremArchiveError::SnapshotBounds);
+        }
+        let mut previous: Option<&C> = None;
+        for point in &snapshot.points {
+            if previous.is_some_and(|candidate| candidate >= &point.candidate) {
+                return Err(TheoremArchiveError::NonCanonicalSnapshot);
+            }
+            previous = Some(&point.candidate);
+            validate_archive_bitmap(rows, &point.coverage)?;
+            if point.coverage.iter().all(|&word| word == 0)
+                || point
+                    .coverage
+                    .iter()
+                    .zip(&snapshot.conclusion)
+                    .any(|(&coverage, &conclusion)| coverage & !conclusion != 0)
+            {
+                return Err(TheoremArchiveError::NonCanonicalSnapshot);
+            }
+        }
+        for (index, left) in snapshot.points.iter().enumerate() {
+            if snapshot
+                .points
+                .iter()
+                .enumerate()
+                .any(|(other_index, right)| {
+                    index != other_index
+                        && coverage_superset(&left.coverage, &right.coverage)
+                        && (left.evaluation_cost < right.evaluation_cost
+                            || (left.evaluation_cost == right.evaluation_cost
+                                && left.candidate <= right.candidate))
+                })
+            {
+                return Err(TheoremArchiveError::NonCanonicalSnapshot);
+            }
+        }
+        let mut covered_union = vec![0_u64; snapshot.conclusion.len()].into_boxed_slice();
+        let mut points = Vec::with_capacity(configured_maximum_points);
+        for point in snapshot.points {
+            for (covered, &word) in covered_union.iter_mut().zip(&point.coverage) {
+                *covered |= word;
+            }
+            points.push(SoundTheoremPoint {
+                candidate: point.candidate,
+                covered_true: point
+                    .coverage
+                    .iter()
+                    .map(|word| u64::from(word.count_ones()))
+                    .sum(),
+                evaluation_cost: point.evaluation_cost,
+                coverage: point.coverage,
+            });
+        }
+        Ok(Self {
+            rows,
+            maximum_points: configured_maximum_points,
+            conclusion: snapshot.conclusion,
+            covered_union,
+            points,
+        })
+    }
+
     pub fn admit(
         &mut self,
         candidate: C,
@@ -675,6 +841,16 @@ impl<C: Clone + Ord> SoundTheoremArchive<C> {
         evaluation_cost: u32,
     ) -> Result<TheoremArchiveAdmission, TheoremArchiveError> {
         validate_archive_bitmap(self.rows, coverage)?;
+        if let Some(point) = self
+            .points
+            .iter()
+            .find(|point| point.candidate == candidate)
+        {
+            if point.evaluation_cost == evaluation_cost && point.coverage() == coverage {
+                return Ok(TheoremArchiveAdmission::RejectedDominated);
+            }
+            return Err(TheoremArchiveError::IdentityConflict);
+        }
         let false_positives = coverage
             .iter()
             .zip(&self.conclusion)
@@ -1890,6 +2066,86 @@ mod tests {
             }
         );
         assert_eq!(archive.points()[0].coverage(), &[0b0001]);
+    }
+
+    #[test]
+    fn diagnostic_theorem_archive_round_trips_with_exact_bindings() {
+        let binding = DiagnosticTheoremArchiveBinding {
+            presentation_blake3: [1; 32],
+            feature_dag_blake3: [2; 32],
+            output_class_blake3: [3; 32],
+        };
+        let mut archive = SoundTheoremArchive::new(4, &[0b1111], 4).unwrap();
+        archive.admit(1_u8, &[0b0011], 2).unwrap();
+        archive.admit(2_u8, &[0b1100], 3).unwrap();
+        let snapshot = archive.diagnostic_snapshot(binding).unwrap();
+        assert!(!snapshot.proof_authority);
+        let encoded = serde_json::to_vec(&snapshot).unwrap();
+        let decoded: DiagnosticTheoremArchiveSnapshot<u8> =
+            serde_json::from_slice(&encoded).unwrap();
+        let restored = SoundTheoremArchive::restore_diagnostic(decoded, binding, 4).unwrap();
+        assert_eq!(restored.covered_union(), &[0b1111]);
+        assert_eq!(restored.points(), archive.points());
+
+        let mut wrong_binding = snapshot.clone();
+        wrong_binding.binding.presentation_blake3 = [9; 32];
+        assert_eq!(
+            SoundTheoremArchive::restore_diagnostic(wrong_binding, binding, 4)
+                .err()
+                .unwrap(),
+            TheoremArchiveError::SnapshotBinding
+        );
+        let mut forged_authority = snapshot.clone();
+        forged_authority.proof_authority = true;
+        assert_eq!(
+            SoundTheoremArchive::restore_diagnostic(forged_authority, binding, 4)
+                .err()
+                .unwrap(),
+            TheoremArchiveError::InvalidProofAuthority
+        );
+    }
+
+    #[test]
+    fn diagnostic_archive_rejects_ambiguous_or_dominated_state() {
+        let binding = DiagnosticTheoremArchiveBinding {
+            presentation_blake3: [1; 32],
+            feature_dag_blake3: [2; 32],
+            output_class_blake3: [3; 32],
+        };
+        let mut archive = SoundTheoremArchive::new(4, &[0b1111], 4).unwrap();
+        assert!(matches!(
+            archive.admit(1_u8, &[0b0011], 2).unwrap(),
+            TheoremArchiveAdmission::Inserted { .. }
+        ));
+        assert_eq!(
+            archive.admit(1_u8, &[0b0011], 2).unwrap(),
+            TheoremArchiveAdmission::RejectedDominated
+        );
+        assert_eq!(
+            archive.admit(1_u8, &[0b0100], 2).unwrap_err(),
+            TheoremArchiveError::IdentityConflict
+        );
+
+        let mut snapshot = archive.diagnostic_snapshot(binding).unwrap();
+        snapshot.points = vec![
+            DiagnosticTheoremPointSnapshot {
+                candidate: 1_u8,
+                evaluation_cost: 1,
+                coverage: vec![0b0011].into_boxed_slice(),
+            },
+            DiagnosticTheoremPointSnapshot {
+                candidate: 2_u8,
+                evaluation_cost: 2,
+                coverage: vec![0b0001].into_boxed_slice(),
+            },
+        ]
+        .into_boxed_slice();
+        assert_eq!(
+            SoundTheoremArchive::restore_diagnostic(snapshot, binding, 4)
+                .err()
+                .unwrap(),
+            TheoremArchiveError::NonCanonicalSnapshot
+        );
     }
 
     #[test]

@@ -4831,3 +4831,13 @@ Projection storage and group/row counts are bounded, scratch projection memory
 is reused, and overlapping/out-of-range groups fail closed.  Product and XOR
 controls demonstrate acceptance and the expected nonseparable counterexample
 under the full public gate.
+
+The next persistence slice makes the diagnostic theorem archive restartable without
+granting it authority. Its versioned snapshot is bound to exact presentation, feature-DAG,
+and output-class hashes and explicitly carries `proof_authority: false`. Restore rejects
+binding/version/bound mismatches, forged authority, noncanonical ordering, conflicting
+candidate identities, invalid bitmaps, unsound corpus coverage, and dominated points.
+The frontier is capped at 4,096 points so the cold pairwise canonicality audit has bounded
+CPU and memory cost. Identical candidate submissions are idempotent; reusing an identity
+with different cost or semantics fails closed. This lands the semantic half of the ADR's
+split persistence model; proof promotion and performance priors remain separate stores.
