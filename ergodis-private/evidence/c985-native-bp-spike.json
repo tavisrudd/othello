@@ -139,6 +139,17 @@
     "parallel_control": "four scoped independent workspaces over one shared immutable code return identical exact candidates",
     "codegen_repair": "explicit x86-64 SSE2 ordered finite-message min/max prevents branchy compiler lowering after bin-to-lib extraction"
   },
+  "public_admission_review": {
+    "final_private_commit": "09e0f1afe",
+    "verdict": "conditionally admit only the reusable engine as a candidate/upper-bound backend; do not import private CLI, evidence, target format, or campaign vocabulary",
+    "proof_boundary": "syndrome_satisfied certifies only Hx=s; it conveys no distance optimality or proof authority, and public callers must independently replay the returned support and observable class",
+    "msrv": "cargo +1.87.0 test --release passes all seven library tests under edition 2021",
+    "portability": "explicit scalar SSE2 ordered finite-message min/max on x86-64, where SSE2 is mandatory; semantic fallback on non-x86-64",
+    "licensing": "official ldpc implementation inspected under MIT; preserve architectural attribution in public documentation even though this is a Rust reimplementation",
+    "parallelism": "no internal threads; immutable compiled code is Sync and caller-owned aligned workspaces are independent, avoiding shared hot state and false sharing",
+    "proposed_public_surface": "bp_osd module containing BinaryParityCheck, BinaryValue, DecodeConfig, OrderedStatistics, BpOsdWorkspace, DecodeView, MatrixError, and DecodeError",
+    "required_public_controls": "neutral malformed-matrix and degree-one tests, Rust-1.87 CI, zero-allocation typed decode gate, single/parallel checksum controls, BB288/C997 public replay, and explicit no-proof-authority documentation"
+  },
   "allocation_gate": "test-only thread-local allocator observes zero alloc/realloc/dealloc events in actual BP and higher-order OSD regions",
-  "decision": "retain private spike; algorithmic, performance, typed-API, zero-allocation, small-instance, cross-instance, and independent-worker gates pass; next gate is public-core admission review"
+  "decision": "public-admission review passes conditionally; import only the reusable candidate engine after a dedicated public-core patch/review, retaining private campaign drivers and evidence outside the paper tree"
 }

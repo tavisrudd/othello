@@ -1340,9 +1340,15 @@ files are disposable and may be deleted at any time.
    checked boundary.  Relative to `87e17d535`, C997 OSD-0 removes 3.65% of
    instructions and 28.07% of sampled cycles; BB756 CS-10 removes 6.28% of
    instructions and 2.36% of cycles, with all retained checksums unchanged.
-   Four concurrent workspaces over one immutable code agree exactly.  The item
-   (d) next gate is public-core admission review, not more work on an
-   ordering-only bridge.
+   Four concurrent workspaces over one immutable code agree exactly.  Public
+   admission review is now complete at private commit `09e0f1afe`: the engine
+   is admissible only as a candidate/upper-bound backend, its result says
+   `syndrome_satisfied` rather than `exact`, and it carries no proof authority.
+   Rust 1.87 tests, finite degree-one behavior, normalized-scale bounds,
+   x86-64/non-x86 portability, independent-worker ownership, attribution, and
+   the private/public source boundary are explicit.  The item (d) next gate is
+   a dedicated reviewed public-core import of the reusable engine only, not
+   more work on an ordering-only bridge.
 
    Current-tree reconciliation changes that order slightly. Static and dynamic
    incumbent fan-out are already present as worker-local relaxed mailboxes plus
@@ -3951,3 +3957,42 @@ partial read depth (`src_cpp/bp.hpp` lines 192--321, `src_cpp/osd.hpp` lines
 `d3429964cd4ffe1abfc041c6ec8b8425cb174f40`; this source checkout is newer than
 the measured package and is used for architectural attribution, not asserted
 as byte-identical source provenance for 2.4.1.
+
+### Native BP+OSD public-admission review
+
+**Verdict: conditional admit.**  Import only the reusable Rust engine, after a
+dedicated public-core patch review, as a heuristic candidate and certified
+upper-bound backend.  Do not import the private replay CLI, target-stream
+format, evidence paths, campaign identifiers, or research-process vocabulary.
+The natural public module is `bp_osd`, exposing an immutable
+`BinaryParityCheck`, typed `BinaryValue`, checked `DecodeConfig`, bounded
+`OrderedStatistics`, aligned worker workspace, borrowed result view, and typed
+construction/decoding errors.
+
+The trust boundary is deliberately narrow.  `syndrome_satisfied` means only
+that the returned binary vector satisfies the supplied equation.  It does not
+mean minimum weight, exact distance, necessity, or proof authority.  A CSS
+caller must independently replay the support against physical checks and the
+requested logical observable before publishing an upper bound.  Exact lower
+bounds continue to come from the exhaustive certified Ergodis backend.
+
+The performance-contract review passes in the private candidate at
+`09e0f1afe`.  Configuration and exhaustive-order bounds are checked once;
+typed syndromes avoid hot rescans; the solve regions allocate nothing; search
+is iterative; and one immutable compiled graph is shared by independent
+`repr(C, align(64))` workspaces with no shared mutable hot state.  Four scoped
+workers agree exactly.  The crate compiles and all seven tests pass under Rust
+1.87/edition 2021.  Degree-one checks use the reference finite maximum message,
+and normalized min-sum scale is restricted to `(0,1]`.  x86-64 uses explicit
+mandatory-SSE2 ordered finite-message min/max to prevent branchy codegen after
+library extraction; other architectures retain a semantic scalar fallback.
+
+The public import should preserve attribution to the official MIT-licensed
+`quantumgizmos/ldpc` implementation and the BP+OSD literature even though the
+engine is a Rust reimplementation.  Its admission tests must include neutral
+malformed-matrix and degree-one cases, Rust-1.87 CI, the typed zero-allocation
+gate, one-/multi-worker checksum controls, public BB288 and C997 replays, and an
+explicit negative test/documentation assertion that syndrome satisfaction does
+not imply optimality.  No internal target parallelism is proposed: callers
+partition targets over worker-owned workspaces, matching Ergodis' existing
+contention-free controller/worker architecture.
