@@ -1,5 +1,5 @@
 [workspace]
-members = [".", "tasks/gem-hunt", "tasks/tools"]
+members = [".", "tasks/gem-hunt", "tasks/hadamard-2092", "tasks/tools"]
 
 [package]
 name = "ergodis-private"
