@@ -5,10 +5,14 @@
 
 use std::collections::BTreeMap;
 
+use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
+pub const FEATURE_DAG_SNAPSHOT_VERSION: u16 = 1;
+
 #[repr(transparent)]
-#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
+#[serde(transparent)]
 pub struct FeatureId(u32);
 
 impl FeatureId {
@@ -17,7 +21,8 @@ impl FeatureId {
     }
 }
 
-#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
+#[serde(tag = "op", rename_all = "kebab-case", deny_unknown_fields)]
 pub enum FeatureOp {
     Input { index: u16 },
     Constant { value: i64 },
@@ -47,6 +52,16 @@ pub struct RawFeatureExpansion<'a> {
     pub include_products: bool,
     pub include_gaussian_norms: bool,
     pub include_eisenstein_norms: bool,
+}
+
+/// Stable serialized form of a feature DAG.
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct FeatureDagSnapshot {
+    pub version: u16,
+    pub input_count: u16,
+    pub maximum_degree: u8,
+    pub operations: Box<[FeatureOp]>,
 }
 
 impl Default for RawFeatureExpansion<'static> {
@@ -85,6 +100,10 @@ pub enum FeatureDagError {
     WorkspaceWidth,
     #[error("feature arithmetic overflowed")]
     ArithmeticOverflow,
+    #[error("unsupported feature DAG snapshot version")]
+    SnapshotVersion,
+    #[error("feature DAG snapshot is not topological and canonical")]
+    NonCanonicalSnapshot,
 }
 
 pub struct FeatureDag {
@@ -127,6 +146,50 @@ impl FeatureDag {
 
     pub fn nodes(&self) -> &[FeatureNode] {
         &self.nodes
+    }
+
+    pub fn snapshot(&self) -> FeatureDagSnapshot {
+        FeatureDagSnapshot {
+            version: FEATURE_DAG_SNAPSHOT_VERSION,
+            input_count: self.input_count,
+            maximum_degree: self.maximum_degree,
+            operations: self
+                .nodes
+                .iter()
+                .map(|node| node.op)
+                .collect::<Vec<_>>()
+                .into_boxed_slice(),
+        }
+    }
+
+    pub fn from_snapshot(
+        snapshot: &FeatureDagSnapshot,
+        maximum_nodes: usize,
+    ) -> Result<Self, FeatureDagError> {
+        if snapshot.version != FEATURE_DAG_SNAPSHOT_VERSION {
+            return Err(FeatureDagError::SnapshotVersion);
+        }
+        if maximum_nodes < snapshot.operations.len() {
+            return Err(FeatureDagError::NodeLimit);
+        }
+        let mut dag = Self::new(snapshot.input_count, snapshot.maximum_degree, maximum_nodes)?;
+        for (ordinal, &op) in snapshot.operations.iter().enumerate() {
+            let id = match op {
+                FeatureOp::Input { index } => dag.input(index)?,
+                FeatureOp::Constant { value } => dag.constant(value)?,
+                FeatureOp::Add { left, right } => dag.add(left, right)?,
+                FeatureOp::Sub { left, right } => dag.sub(left, right)?,
+                FeatureOp::Mul { left, right } => dag.mul(left, right)?,
+                FeatureOp::Mod { source, modulus } => dag.modulo(source, modulus)?,
+                FeatureOp::Abs { source } => dag.abs(source)?,
+                FeatureOp::GaussianNorm { left, right } => dag.gaussian_norm(left, right)?,
+                FeatureOp::EisensteinNorm { left, right } => dag.eisenstein_norm(left, right)?,
+            };
+            if id.index() != ordinal || dag.node(id).is_none_or(|node| node.op != op) {
+                return Err(FeatureDagError::NonCanonicalSnapshot);
+            }
+        }
+        Ok(dag)
     }
 
     pub fn node(&self, id: FeatureId) -> Option<&FeatureNode> {
@@ -507,5 +570,53 @@ mod tests {
             .iter()
             .any(|node| matches!(node.op, FeatureOp::EisensteinNorm { .. })));
         assert!(dag.nodes().iter().all(|node| node.degree <= 2));
+    }
+
+    #[test]
+    fn snapshot_round_trip_preserves_ids_and_values() {
+        let mut dag = FeatureDag::new(2, 2, 128).unwrap();
+        dag.expand_raw_degree_two(RawFeatureExpansion {
+            moduli: &[5],
+            include_eisenstein_norms: true,
+            ..RawFeatureExpansion::default()
+        })
+        .unwrap();
+        let encoded = serde_json::to_vec(&dag.snapshot()).unwrap();
+        let snapshot: FeatureDagSnapshot = serde_json::from_slice(&encoded).unwrap();
+        let restored = FeatureDag::from_snapshot(&snapshot, 128).unwrap();
+        assert_eq!(restored.nodes(), dag.nodes());
+        let mut left = dag.workspace();
+        let mut right = restored.workspace();
+        assert_eq!(
+            dag.evaluate(&[-9, 4], &mut left).unwrap(),
+            restored.evaluate(&[-9, 4], &mut right).unwrap()
+        );
+    }
+
+    #[test]
+    fn snapshot_rejects_duplicate_and_future_nodes() {
+        let duplicate = FeatureDagSnapshot {
+            version: FEATURE_DAG_SNAPSHOT_VERSION,
+            input_count: 1,
+            maximum_degree: 2,
+            operations: vec![FeatureOp::Input { index: 0 }; 2].into_boxed_slice(),
+        };
+        assert!(matches!(
+            FeatureDag::from_snapshot(&duplicate, 8),
+            Err(FeatureDagError::NonCanonicalSnapshot)
+        ));
+        let future = FeatureDagSnapshot {
+            version: FEATURE_DAG_SNAPSHOT_VERSION,
+            input_count: 1,
+            maximum_degree: 2,
+            operations: vec![FeatureOp::Abs {
+                source: FeatureId(1),
+            }]
+            .into_boxed_slice(),
+        };
+        assert!(matches!(
+            FeatureDag::from_snapshot(&future, 8),
+            Err(FeatureDagError::UnknownNode)
+        ));
     }
 }

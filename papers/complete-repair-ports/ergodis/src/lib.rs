@@ -140,8 +140,8 @@ pub use family_response::{
     FamilyResponseTable,
 };
 pub use feature_dag::{
-    FeatureDag, FeatureDagError, FeatureId, FeatureNode, FeatureOp, FeatureWorkspace,
-    RawFeatureExpansion,
+    FeatureDag, FeatureDagError, FeatureDagSnapshot, FeatureId, FeatureNode, FeatureOp,
+    FeatureWorkspace, RawFeatureExpansion, FEATURE_DAG_SNAPSHOT_VERSION,
 };
 pub use fibre::{
     compile_dense_fibres, verify_dense_fibres, DenseFibreBounds, DenseFibreError, DenseFibreIndex,
