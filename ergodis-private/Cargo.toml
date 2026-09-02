@@ -43,27 +43,3 @@ path = "src/bin/q16_quadratic.rs"
 [[bin]]
 name = "q19-marked-polar"
 path = "src/bin/q19_marked_polar.rs"
-
-[[bin]]
-name = "hadamard-quotient-pilot"
-path = "src/bin/hadamard_quotient_pilot.rs"
-
-[[bin]]
-name = "hadamard-reduction-scout"
-path = "src/bin/hadamard_reduction_scout.rs"
-
-[[bin]]
-name = "reduction-proof-spike"
-path = "src/bin/reduction_proof_spike.rs"
-
-[[bin]]
-name = "proof-synthesis-perf"
-path = "src/bin/proof_synthesis_perf.rs"
-
-[[bin]]
-name = "g53-joint-q29-scout"
-path = "src/bin/g53_joint_q29_scout.rs"
-
-[[bin]]
-name = "g53-search"
-path = "src/bin/g53_search.rs"
