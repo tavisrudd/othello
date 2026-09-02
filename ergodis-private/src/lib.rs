@@ -47,6 +47,8 @@ pub mod g91_defect_obstruction;
 pub mod hadamard_2092;
 pub mod hall_core;
 pub mod landed_rank_adapter;
+pub mod mask_cycle_proof;
+pub mod predicate_cover;
 pub mod projective_grid;
 pub mod proof_synthesis;
 pub mod q16_quadratic;
