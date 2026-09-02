@@ -3996,3 +3996,17 @@ explicit negative test/documentation assertion that syndrome satisfaction does
 not imply optimality.  No internal target parallelism is proposed: callers
 partition targets over worker-owned workspaces, matching Ergodis' existing
 contention-free controller/worker architecture.
+
+The conditional import landed as `b28d5640c`.  It contains only the generic
+engine, neutral integration tests, and its public trust-boundary documentation;
+the private CLI, evidence schema, target stream, and campaign vocabulary remain
+outside the paper tree.  The focused Rust-1.87 release test passes all seven
+BP+OSD integration/allocation checks, strict all-target/all-feature clippy
+passes, and the complete public all-target/all-feature suite passes (including
+448 library tests and every integration test, benchmark, and example target).
+The neutral controls cover malformed input, finite degree-one behavior, a
+stable Hamming-code stream checksum with independent equation replay, zero
+allocation in typed solves, and four independent aligned worker workspaces.
+This completes the public-admission tranche.  Application wiring remains a
+separate measured gate: candidate generation may improve upper-bound discovery,
+but must not alter exact lower-bound or proof-authority paths.

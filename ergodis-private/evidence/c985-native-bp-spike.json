@@ -150,6 +150,15 @@
     "proposed_public_surface": "bp_osd module containing BinaryParityCheck, BinaryValue, DecodeConfig, OrderedStatistics, BpOsdWorkspace, DecodeView, MatrixError, and DecodeError",
     "required_public_controls": "neutral malformed-matrix and degree-one tests, Rust-1.87 CI, zero-allocation typed decode gate, single/parallel checksum controls, BB288/C997 public replay, and explicit no-proof-authority documentation"
   },
+  "public_import": {
+    "commit": "b28d5640c",
+    "scope": "generic bp_osd engine, neutral tests, module export, and public trust-boundary documentation only",
+    "msrv_gate": "cargo +1.87.0 test --release --test bp_osd passes all seven tests",
+    "strict_clippy_gate": "cargo clippy --all-targets --all-features -- -D warnings passes",
+    "full_public_gate": "cargo test --all-targets --all-features passes, including 448 library tests and all integration, benchmark, and example targets",
+    "neutral_controls": "malformed inputs fail closed; degree-one messages remain finite; stable Hamming stream independently replays; typed solve is zero-allocation; four aligned workers agree",
+    "proof_boundary": "application integration is separately gated and may produce only independently replayed candidate/upper-bound witnesses"
+  },
   "allocation_gate": "test-only thread-local allocator observes zero alloc/realloc/dealloc events in actual BP and higher-order OSD regions",
-  "decision": "public-admission review passes conditionally; import only the reusable candidate engine after a dedicated public-core patch/review, retaining private campaign drivers and evidence outside the paper tree"
+  "decision": "conditional public import landed and passed MSRV, strict-clippy, zero-allocation, parallel-workspace, and full-suite gates; application wiring remains separately measurement-gated"
 }
