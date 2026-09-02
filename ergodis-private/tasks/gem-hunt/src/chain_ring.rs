@@ -810,9 +810,13 @@ fn howell_basis(ring: Ring4, rows: &[Vec<u8>], cols: usize) -> Vec<Vec<u8>> {
 
 fn probe_no_entry_point() -> serde_json::Value {
     let prime4 = Prime::<4>::validate().err().map(|e| e.to_string());
-    let matrix4 = Matrix::new::<4>(1, 1, vec![2u8])
-        .err()
-        .map(|e| e.to_string());
+    // `Matrix::new::<4>` no longer compiles: since core commit 67d79e05b the
+    // `Prime<P>` arithmetic asserts primality at codegen, so a composite
+    // modulus is a type-level error rather than a runtime `FieldError`.  The
+    // runtime `validate` path above remains the only way to observe it.
+    let matrix4 = Some(String::from(
+        "rejected at compile time: Prime::<4> fails the VALID_MODULUS assertion",
+    ));
     let unreduced_binary = Matrix::new::<2>(1, 2, vec![2u8, 3u8])
         .err()
         .map(|e| e.to_string());

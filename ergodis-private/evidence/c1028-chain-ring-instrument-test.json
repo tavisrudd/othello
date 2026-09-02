@@ -478,7 +478,7 @@
   "core_gap_specification": [
     {
       "Matrix_new_2_on_ring_entries": "matrix entries must be reduced modulo the field order",
-      "Matrix_new_4": "the modulus must be prime and lie in 2..=251",
+      "Matrix_new_4": "rejected at compile time: Prime::<4> fails the VALID_MODULUS assertion",
       "Prime_4_validate": "the modulus must be prime and lie in 2..=251",
       "failure_mode": "no applicable entry point",
       "kernel": "field::Prime / matrix::Matrix"

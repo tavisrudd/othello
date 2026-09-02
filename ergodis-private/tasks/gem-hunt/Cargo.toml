@@ -13,14 +13,6 @@ default = []
 # radix win does not survive a trait-shared body under fat LTO.
 c1018-sparse-action = []
 c1018-lane-action = []
-# The `chain-ring` subcommand does not build at present, in this crate or as the
-# `c1028_chain_ring` binary it replaces: its deliberate "no applicable entry
-# point" probe instantiates `ergodis::Matrix::new::<4>`, and the public core's
-# `Prime::<4>::VALID_MODULUS` const assertion is now a hard codegen error.  That
-# break predates this consolidation and belongs to the public core, which this
-# task must not edit, so the subcommand is behind an off-by-default feature and
-# the rest of the binary builds.
-chain-ring = []
 
 [[bin]]
 name = "gem-hunt"

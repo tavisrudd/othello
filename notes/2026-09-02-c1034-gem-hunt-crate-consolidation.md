@@ -45,7 +45,7 @@ gem-hunt css transversal | levels
 gem-hunt plane12 --out FILE multiplier | sidon | orbit13 | starter | hyperoval
 gem-hunt exterior-sets
 gem-hunt parametric-cert
-gem-hunt chain-ring                      (behind the off-by-default `chain-ring` feature; see below)
+gem-hunt chain-ring
 ```
 
 Three deviations from the tree suggested in the proposal, each so that no existing flag name
@@ -126,7 +126,7 @@ Notes on the three cases whose raw bytes need a caveat:
   pre-existing property of the driver's multi-worker merge, not an effect of the move. At
   `--threads 1` the old and new binaries agree byte for byte, and the deterministic `--ladder`
   sweep agrees at any thread count.
-- No parity run for `chain-ring`; see below.
+- `chain-ring`: replays the committed evidence except one probe string; see below.
 
 Larger committed replay cells (`prs census --r 9 --q 19`, `plane12 sidon --v 157 --k 13`,
 `prs stratum --r 17 --q 29`) were not run: each exceeds the ten-minute ceiling for this task. The
@@ -250,7 +250,7 @@ Both assertions were corrected; no lifted function changed.
 
 ## Skipped, and why
 
-1. **`chain-ring` has no parity run and is behind an off-by-default feature.** The binary it
+1. **`chain-ring` initially had no parity run.** The binary it
    replaces does not build at commit `9cd2ecdd`, in either the debug or the release profile:
 
    ```
@@ -265,13 +265,14 @@ Both assertions were corrected; no lifted function changed.
    hard codegen error, so the probe can no longer be compiled at all. The same error appears
    identically on both sides, which is itself evidence that the move changed nothing.
 
-   This break predates the consolidation and lives in the public core, which this task must not
-   edit. Under one binary per lane it would block the whole `gem-hunt` binary rather than one of
-   119 files, so the subcommand sits behind the off-by-default `chain-ring` Cargo feature and
-   everything else builds. **This needs a decision**: either the public core regains a way to
-   express "this modulus is invalid" without a codegen-time panic, or the C1028 probe is rewritten
-   to record the rejection some other way. Until then the C1028 certificate is not replayable at
-   `HEAD` by any route.
+   **Resolved after review (same day).** The core's compile-time rejection of a composite
+   `Prime<P>` is the intended design (core commits `67d79e05b` and `bbbdb4f38`, 2026-09-01), so
+   the probe changed, not the core: `probe_no_entry_point` now records the field
+   `Matrix_new_4 = "rejected at compile time: Prime::<4> fails the VALID_MODULUS assertion"`
+   instead of instantiating `Matrix::new::<4>`. The `chain-ring` feature gate is removed and the
+   subcommand builds unconditionally. Replay `gem-hunt chain-ring --out DIR --cert F` (0.33 s)
+   reproduces the committed `evidence/c1028-chain-ring-instrument-test.json` in all 429 leaf
+   fields except that one probe string, and the evidence file is refreshed to the new output.
 
 2. **Long committed replay cells were not reproduced.** `prs census --r 9 --q 19`,
    `plane12 sidon --v 157 --k 13`, and `prs stratum --r 17 --q 29 --stratum-mod 7` all exceed the

@@ -35,7 +35,6 @@
     dead_code
 )]
 
-#[cfg(feature = "chain-ring")]
 mod chain_ring;
 mod exterior_sets;
 mod level_census;
@@ -73,9 +72,7 @@ enum Command {
     /// Complete exterior sets of a conic in PG(2,q).
     ExteriorSets(exterior_sets::ExteriorSetsArgs),
     /// Arcs, codes, and probes in the projective Hjelmslev plane over a chain
-    /// ring of order four. Requires the `chain-ring` feature, which currently
-    /// does not build; see that feature's note in `Cargo.toml`.
-    #[cfg(feature = "chain-ring")]
+    /// ring of order four.
     ChainRing(chain_ring::ChainRingArgs),
     /// Parametric covering families and their residual-prime certificate.
     ParametricCert(parametric_cert::ParametricCertArgs),
@@ -113,7 +110,6 @@ fn main() -> Result<()> {
         }
         Command::Plane12(args) => plane12::run(args),
         Command::ExteriorSets(args) => exterior_sets::run(args),
-        #[cfg(feature = "chain-ring")]
         Command::ChainRing(args) => chain_ring::run(args),
         Command::ParametricCert(args) => {
             parametric_cert::run(args);
