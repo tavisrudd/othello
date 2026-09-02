@@ -1,0 +1,2113 @@
+# C1016 — private Ergodis reduction synthesis for Hadamard order 2092
+
+Date: 2026-08-30. Lane: `complete-ports`. Status: in progress; fourteen exact
+reductions have private replay evidence. A non-authoritative g53 discovery
+search is running on 16 threads; no exhaustive order-2092 coverage claim has
+been made.
+
+Resume gate: read `papers/complete-repair-ports/ergodis/PERFORMANCE.md` and
+`notes/queens-othello-perf-playbook.md` completely before compute. Use CHOOM,
+hardware counters rather than busy-host wall time, zero allocation in every
+solve loop, presized iterative search only, and retained single/parallel A/B
+before admitting any solve-kernel change. C999 remains read-only evidence.
+
+## Corrected trust and repository boundary
+
+The first overlay incorrectly treated a presentation hash plus a named feature
+column as proof authority. That authenticated bytes, not the semantics of the
+feature extractor: a correctly named column containing false values could have
+authorized a `Necessary` plan. The overlay was not approved or committed.
+
+The unsound surface is removed. Public Ergodis again advertises
+`proof_authority: false`; `PlanRole::Necessary`, proof-shaped metadata, and
+authorized compilation are absent. Public core contains no Hadamard or
+Goethals--Seidel module, types, schemas, fixtures, tests, or exports. A future
+necessary-predicate mechanism requires a sealed registered extractor binding
+extractor identity, version, parameters, source commitment, and canonical
+field semantics, preferably with independent recomputation. Until then,
+campaign output has diagnostic or ordering authority only.
+
+All C1016 cyclic/GS code, fixtures, oracles, campaigns, and evidence now live
+in top-level `ergodis-private/`. The private carrier is explicitly capped at
+522; subset compilers have hard state budgets and fail closed. No arbitrary
+compression-energy API remains.
+
+## First four exact reductions
+
+1. **Order-three orbit energies.** Exact Eisenstein-energy subset sums close
+   all order-42 shards (`g=5,13,23`), the order-21 shard `g=7`, and the
+   order-14 shard `g=35`. The surviving high-order roots `g=41,133,53,91`
+   retain `1,14,7,40` canonical order-three profiles.
+2. **Joint `d=9/d=6` local fibres.** A residue modulo 29 is a `2 x 3` table of
+   three-sign cell sums. Exactly 1,666 of 34,300 independently legal marginal
+   pairs lift. Coupling this with order two and three on `g=53` reduced the
+   exact four-block assignment exponent from `159.86824` to `148.68299`.
+3. **Galois fixed fields.** At character order nine the four surviving roots
+   have fixed-field degrees `1,2,3,6`; `g=41` is rational and has seven
+   canonical order-nine profiles.
+4. **Orbit-quotiented PAF residual.** PAF is constant on multiplier shift
+   orbits, so `(A,B)` signatures match exact residuals from `(C,D)`. This is a
+   theorem-level decomposition only; no packed solve kernel is admitted yet.
+
+## Four further root-scoped reductions
+
+1. **`g=53`: joint rational orders 2, 3, and 6.** A same-subset DP takes the
+   already reduced exact count
+   `572849117221667545326815648911695209150545920 = 2^148.682991...`
+   to
+   `485809675336267569788580842066841352273920 = 2^138.479443...`.
+   This is another `1179.164x = 2^10.204` reduction and leaves only four
+   canonical joint energy profiles.
+2. **`g=41`: joint rational orders 9 and 18.** Exact four-block assignments
+   fall from `2^269.490398...` to `2^260.961257...`, a `369.426x = 2^8.529`
+   reduction. The 387 joint profiles refine rather than replace the seven
+   order-nine profiles; the gain is in assignment multiplicity.
+3. **Translation-normalizer quotient.** If `(g-1)t=0 mod 522`, translation by
+   `t` commutes with the multiplier. Each block can therefore be canonicalized
+   independently without changing row sums or PAF. Exact Burnside counts give
+   four-block factors essentially `2^4`, `6^4`, `2^4`, and `18^4` for
+   `g=41,133,53,91`. The strongest `g=91` factor is `104975.998... =
+   2^16.679700...`; nonidentity fixed subsets explain the tiny difference from
+   exactly `18^4`.
+4. **`g=91`: quadratic order-29 sector.** The order-14 multiplier image is the
+   quadratic-residue subgroup modulo 29, so the character lies in
+   `Q(sqrt(29))`. Writing each block energy as `c+d sqrt(29)`, feasibility
+   requires `sum c=2092` and `sum d=0`. Only 9 special-block and 5 zero-block
+   signatures occur, yielding exactly two canonical profiles. Assignments
+   fall from `2^194.442134...` to `2^186.252599...`, a `291.941x = 2^8.190`
+   reduction.
+
+## Structural mechanism and five additional reductions
+
+The common mechanism is a CRT orbit algebra. For a character order `q`, a
+multiplier-invariant sequence has residue sums constant on multiplier orbits
+in `Z/qZ`. Its Fourier value is therefore a small fixed-field transform of
+divisor or residue-class sums. Galois conjugacy turns the PSD equation into a
+norm equation, and irrational coefficients must cancel across the four
+blocks. Ergodis is useful for proposing which sectors to join and for
+falsifying the resulting predicates; the authority comes from these explicit
+transforms and independent arithmetic replay, not from a learned formula or a
+large certificate.
+
+1. **Common unit-dilation normalizer.** Every unit modulo 522 commutes with a
+   linear multiplier. Applying the same dilation to all four blocks preserves
+   row sums and merely permutes the PAF equations. After dividing by the
+   multiplier subgroup, the effective groups have orders `14,14,12,12` for
+   `g=41,133,53,91`. Exact Burnside block censuses agree with factors
+   `13.99999996, 13.999999998, 11.9999665, 11.9999345`; fixed candidates
+   explain the tiny deficits from the group orders. This is a common
+   four-block quotient, whereas commuting translations act independently on
+   each block.
+2. **`g=41`: add order three to joint orders 9 and 18.** Exact labelled
+   assignments fall from `2^260.961257...` to `2^255.052059...`, a
+   `60.0960x = 2^5.90920` reduction, with 303 canonical profiles. Attempts to
+   add order two or six hit the explicit compiler state budget and failed
+   closed; the budget was not raised.
+3. **`g=133`: structural order-nine norm.** Modulo nine, each of residues
+   `0,3,6` contains two singleton multiplier orbits and fourteen size-four
+   orbits. The other orbits--four of size three and 28 of size twelve--have
+   zero primitive order-nine character sum. If `n0,n3,n6` are selected counts
+   in the three visible classes, then
+
+       E9 = 4 ((n0-n6)^2 - (n0-n6)(n3-n6) + (n3-n6)^2).
+
+   A bounded binomial generating-function replay gives 96 special and 59 zero
+   signatures, 5,240 canonical profiles, and exponent `286.432588`, down from
+   raw invariant exponent `294.495364`: `2^8.06278`.
+4. **`g=133`: joint order-three/order-nine norm.** The order-nine-visible
+   classes all lie over residue zero modulo three. The invisible orbits split
+   into two identical families, each with two size-three and fourteen
+   size-twelve orbits. Joining their Eisenstein norms gives 963 special and
+   289 zero signatures and 36,497 canonical profiles. Exact assignments have
+   exponent `273.449265`, another `8097.85x = 2^12.9833` below order nine
+   alone, or `2^21.0461` below the raw invariant space.
+5. **`g=91`: joint order-three/order-29 CRT norm.** Modulo `87=3*29`, each
+   residue modulo three contains six fixed points, six size-14 quadratic
+   residue orbits, and six size-14 nonresidue orbits. Thus order three is an
+   Eisenstein norm of three selected-count totals while order 29 is the
+   quadratic norm of the corresponding residue/nonresidue balances. The joint
+   theorem leaves 180 special and 70 zero signatures and 210 canonical
+   profiles. Exact assignments fall from the order-29 exponent `186.252599`
+   to `170.568435`, a further `52650.6x = 2^15.6842` reduction.
+
+The order-29 theorem itself no longer uses subset DP. There are 18 fixed
+points and 18 orbits of each Legendre class. Row sums force fixed-point counts
+8 and 9 in the special and zero blocks. Radical cancellation forces the
+special block to choose nine orbits of each Legendre class. Writing the three
+zero-block balances as `B_i=2b_i`, the entire remaining equation is
+`b_1^2+b_2^2+b_3^2=18`, whose only unordered absolute solutions are
+`(4,1,1)` and `(3,3,0)`. These give the two energy profiles
+`(4;116,116,1856)` and `(4;0,1044,1044)` and reproduce the prior exact
+assignment count by a closed binomial formula.
+
+These are per-root theorems. They are not generalized to other roots or
+construction families.
+
+## Fourteenth reduction: g53 joint q29 CRT norm
+
+For `g=53`, reduction modulo 29 has order seven while reduction modulo 18 is
+negation. CRT therefore decomposes the 50 multiplier orbits into five copies
+of the ten negation-orbit types on `Z/18Z`: over residue zero modulo 29 there
+are two singletons and eight pairs; over each of the four cosets of `<24>` in
+`(Z/29Z)^x` there are two size-seven and eight size-fourteen orbits. A base
+choice contributes its selected count and rational order-2/3/6 character
+values; nonzero families scale those values by seven. This 1,024-row table was
+checked independently against direct permutation closure for all five
+families.
+
+If `a,n0,n1,n2,n3` are the five selected-count coefficients, direct cyclic
+autocorrelation on `Z/29Z` gives the exact order-29 energy
+`C + D sqrt(29)`, where `C=2(2c0-cq-cn)` and `D=2(cq-cn)`. Joining this norm
+with the four exact rational q2/q3/q6 profiles reduces labelled assignments
+from
+
+`485809675336267569788580842066841352273920 = 2^138.479443...`
+
+to
+
+`64949798014649517492352112253500547072 = 2^125.610665...`.
+
+The incremental factor is `7479.772x = 2^12.868779`. Exact compatible pair
+frontiers are
+`1802404311189514243200 = 2^70.610413` on `(special,zero)` and
+`1247353074143183827840 = 2^70.079360` on `(zero,zero)`. Exact per-block
+survivors are 47,614,876,488 special and 150,385,827,216 zero blocks. The
+release compiler used 28,451,000,083 instructions and 19,873,367,141 cycles in
+one nonmultiplexed run under CHOOM. The locked exact-count test and independent
+direct-orbit oracle pass.
+
+The primitive q58 identity
+`zeta_58^x=(-1)^x zeta_29^(15x)` supplies a second quadratic norm whose
+coefficients are the parity sums of the same five families. Its bounded
+per-block census is exact but weak by itself: 45,014,800,248 special and
+141,776,042,952 zero blocks survive. The first exact four-block hash join was
+rejected after 5,542,698,164,850 instructions and 5,882,334,004,341 cycles;
+peak RSS was 465,660 KiB. This is retained as rejected-performance evidence,
+not as a completed reduction. A packed structural join is still required.
+
+## Private evolve-to-proof and discovery search
+
+The private general proof layer now contains sealed extractor descriptors,
+typed observations, five fail-closed provenance classes, bounded exact integer
+linear closure, iterative bounded square-sum and nonnegative-linear endpoints,
+deterministic Horn-rule synthesis, and independent registry replay. The q29
+and g53 adapters reject false values under correct field names, forged
+extractor versions, unknown semantic fields, provenance escalation, and
+mutated transcripts. The g53 exact census is correctly labelled
+`exact-computational`, while universal quotient identities are
+`proved-structural`. Rule derivation and replay use caller-owned storage and
+have zero-allocation integration tests. The rule record is a 16-byte Tiger
+layout. Public Ergodis still grants no proof authority.
+
+The evolve backfill now covers both levels of the banked work. Exhaustive
+rule-ablation corpora cover all ten sealed proof systems (subgroup energy,
+quotient PAF and character coverage, the three g53 systems, g41 filtering,
+the two g133 exact-shift systems, and the g133 cycle-mod-11 proof). Independently, fourteen
+theorem-specific semantic-coordinate corpora cover every reduction listed in
+the first, second, structural, and q29 passes above. Each corpus varies every
+necessary residual and at least one irrelevant diagnostic coordinate over
+`{-1,0,1}`. A generic decision-tree proposer finds the exact conjunction and
+evolve retains a perfect candidate; diagnostic coordinates are not selected.
+The semantic label loop and Horn-ablation closure loop both allocate zero
+times.
+
+The decisive control is `blind_evolve_harness`. It discovers opaque JSONL
+files and imports no C1016 registry, theorem name, field list, rule graph,
+predicate, expected mask, or theorem-specific seed. On all fourteen corpora it
+found an exact candidate and evolve retained at least one perfect descendant:
+1,134 exhaustive rows, 13,539 evolved candidates, and 425 perfect candidates
+in aggregate, with maximum tree depth eight. The CHOOM-protected,
+nonmultiplexed audit used 3,080,103,731 instructions, 867,245,642 cycles,
+606,843,981 branches, and 3,164,156 branch misses. This establishes blind
+recovery from registered theorem-derived residual coordinates. It does **not**
+yet establish rediscovery from raw orbit masks or counts: the residual
+extractors still encode the candidate coordinate system. That stricter test
+requires a private, domain-neutral bounded feature expander (raw unary,
+pairwise, and low-degree norm/CRT expressions) plus held-out direct-orbit
+replay. The current result is discovery infrastructure, not proof authority
+and not a claim that evolve independently invented the mathematics.
+
+The next private adapter removes the residual columns themselves. For each
+coordinate it presents two independently varied opaque scalar observations;
+one theorem-agnostic bounded expander emits all raw scalars and all pairwise
+differences. It has no reduction dispatch, semantic field names, selected
+pairs, or rule mask. The expanded kernel uses caller-owned fixed storage,
+dispatches capacity validation outside its repeated loop, is iterative, and
+allocates zero times. Train and holdout corpora use disjoint deterministic
+seeds and contain 1,024 rows per reduction per split.
+
+This exposed a real proposer defect: the generic greedy decision tree failed
+on the noisy expanded presentation for all fourteen reductions. The private
+evolve adapter now has a generic zero-conjunction proposer. It retains every
+field that vanishes on all positives, then greedily covers the negative rows;
+it knows neither field provenance nor theorem identity. The proposer selected
+two, three, or four pairwise-difference fields as appropriate, evolve retained
+an exact training candidate for all fourteen reductions, and the unchanged
+plans classified all 14,336 disjoint holdout rows exactly. Across training it
+tested 13,491 evolved candidates and retained 17 perfect candidates; each
+holdout admitted exactly the one supplied plan. The CHOOM-protected,
+nonmultiplexed run used 7,998,858,478 instructions, 1,903,109,261 cycles,
+1,292,596,708 branches, and 10,063,017 branch misses. Thus every reduction the
+human loop banked has now caused a missing generic proposer capability to be
+added and replayed.
+
+This is a stricter no-baked-predicate control, but still not the final raw
+orbit gate. The paired scalar observations are pre-residual theorem
+coordinates; their construction still knows which orbit/norm quantities to
+present. Discovery directly from canonical orbit masks/counts needs bounded
+generic sum, product, CRT-residue, and quadratic/Eisenstein-norm expansion,
+with the direct orbit evaluator supplying labels. No pruning authority follows
+from either blind campaign.
+
+The v2 black-box control also removes accidental presentation hints. The
+theorem-aware generator writes only opaque corpus identifiers and `fNNN`
+field identifiers, and applies a deterministic hidden permutation to the raw
+and pair-difference fields shared by a train/holdout pair. The harness still
+imports only Ergodis control types and discovers the fourteen anonymous corpus
+pairs from the directory. It recovered all fourteen reductions and classified
+all 14,336 disjoint holdout rows exactly. The CHOOM-protected,
+nonmultiplexed rerun used 7,743,068,062 instructions, 1,904,203,917 cycles,
+1,274,537,241 branches, and 10,754,080 branch misses. Evidence is under
+`/tmp/persistent/tavis/c1016/blind-opaque-v2/`; it remains discovery-only local
+evidence, not a paper-facing certificate.
+
+For discovery only, fixed minus counts turn the bordered PAF equation into
+
+`sum_b |X_b intersect (X_b+s)| = 520`.
+
+There are 49 nonzero shift orbits under g53. The private local-search kernel
+now stages quotient PAF, subgroup-energy, and fine-shift constraints, with
+exact incremental updates under equal-size swaps and composition-changing
+`2 x size -> 1 x double-size` moves. It is iterative and its mutation loop
+allocates zero times. Intermediate graduation is heuristic; success at all
+constraints is accepted only at exact objective zero and then checked directly
+at all 521 nonzero shifts and against all four row counts. Negative output has
+no coverage authority.
+
+The original 100-billion-mutation PTY run disappeared without a retained
+terminal record or witness and therefore has no evidentiary status. Its
+replacement uses a persistent systemd user unit and disk-backed log. A loaded
+16-thread full-stage control retired 49,452 instructions and 15,789 cycles per
+mutation; a separate cycles/reference-cycles control observed 20,330/12,102
+per mutation under heavier contention. At a conservative 2 GHz per active
+core, the latter models 50 billion total mutations to about 8.8 hours. The
+first service attempt was CHOOM-killed during the deliberately heavy broad
+test at only 6.8 MiB peak RSS. Its restarted replacement completed 50 billion
+mutations without a witness. The persistent log
+`/tmp/persistent/tavis/c1016/g53-search-20260831T0025.log` records every worker
+at the full 10-quotient/2-subgroup/49-shift stage, 2,976,205,325,587,505 retired
+instructions, and 893,934,554,951,320 cycles: 59,524 instructions and 17,879
+cycles per mutation. This is a heuristic miss only. The next campaign uses an
+exact quotient shell before introducing fine PAF constraints.
+
+That separation is now a private `g53-search` v2 protocol. Phase one can emit
+a fixed 32-byte orbit seed only after a separate direct replay of the four row
+weights and all ten quotient equations; phase two accepts such a seed only
+after repeating that replay and restores it on every restart. The seed is
+explicitly heuristic discovery input, with no negative-coverage or certificate
+meaning. A one-million-mutation phase-one counter control (one worker, seed
+2092) found no shell and reached quotient residual 3,437; it used 27,539
+instructions and 5,828 cycles per mutation. This is retained as a failed
+heuristic probe, not mathematical evidence.
+
+## Quotient-PAF synthesis and sparse-defect theorem
+
+The evolve-to-proof conversion now recognizes complete cyclic character
+coverage. For a typed sorted set of character orders dividing `d`, it checks
+`sum phi(order) = d-1`; `{2,3,6,9,18}` therefore compiles to one shorter
+`Z/18` quotient-PAF theorem. Independent replay enumerates quotient fibres and
+never trusts feature names or cyclotomic output.
+
+For g53, let `B_i(x)` be the selected-minus count in residue `x mod 18`.
+Direct ordered-pair double counting proves
+
+`sum_i,x B_i(x) B_i(x+s) = 15603` for `s=0`, and `15080` for `s=1,...,9`.
+
+These ten small-integer equations are exactly the row-sum plus
+orders-2/3/6/9/18 character system. The same generic theorem supplies four
+additional subgroup shells at orders 9, 18, 58, and 87; the search retains
+only the two not implied by the full `Z/18` quotient.
+
+The five g53 orbit families contribute `B=e+7k`. Converting the zero-shift
+identity to signed marginals gives total square energy 1,976 and the bounded
+Diophantine endpoint
+
+`15 n29 + 13 n27 + 4 n15 + 3 n13 = 34`.
+
+Independent iterative replay finds exactly ten magnitude profiles. At most 11
+of the 72 expanded entries are defects, hence at most nine of the 40 reciprocal
+coordinates are defects and at least 31 have `k=2`. A separate exact oracle
+finds that zero shift removes 29.326894 bits after row sums and still removes
+20.430689 bits beyond the locked q2/q3/q6 census. The other nine quotient
+shifts and q29 are additional constraints; their joint reduction has not yet
+been counted, so no unsupported bit factors are multiplied.
+
+## Ergodis evolution control
+
+The independent oracle generated all 315 canonical `g=91` order-29 energy
+quartets, with two positives. `ergodisctl evolve` tested 2,368 scoped plans in
+84 observational classes and found 17 that classify this corpus perfectly.
+Its first best plan was
+
+`constant_sum == 2092 && radical_abs <= 2`.
+
+That predicate is observationally equivalent on this corpus but weaker than
+the theorem's exact `radical_sum == 0`. This is the intended negative control:
+Ergodis can generate and rank a useful reduction shape, but corpus perfection
+does not grant pruning authority. The exact quadratic-field derivation and
+independent replay own the theorem.
+
+## Quaternionic/Williamson paper
+
+Bennett--Bright--Colinot--Nayak, *Quaternionic Perfect Sequences and Hadamard
+Matrices*, arXiv:2601.22337v1, was read from cached PDF sha256
+`3ea5156a3d13e8383f1361be468a92222e0423bf45f198a0ca9d975fceb5e94b`.
+Its Theorem 9 proves equivalence between quaternion-type and Williamson-type
+quadruples and hence pairwise amicability. Their length-20 enumeration reports
+that the pairwise filter reduces over 16 billion pairs to 625,896, about
+26,000x. This theorem does **not** apply to the bordered GS roots: C999's
+decoded blocks are non-amicable. It is retained only as a separately scoped
+`construction_family=williamson_qt` reduction and CPSD feature family.
+
+## Validation and performance
+
+- Public `cargo test --all-targets --all-features`: pass after removing the
+  unsound/public GS overlay.
+- Public strict all-target/all-feature clippy: pass with only recorded
+  pre-existing lint allowances.
+- The current live-core snapshot passes all 195 private library tests. The
+  serial `cargo test --all-targets --all-features` gate also passes every
+  binary and all three integration targets, including all 13 allocation tests
+  in the largest integration group. C1016 does not modify or absorb the live
+  public-core work. A first parallel attempt was CHOOM-killed when several
+  exact census tests overlapped; the g53 canonical replay now uses one
+  thread-safe cache, its parallel proof group passes, and the serial broad gate
+  is the bounded-memory authority.
+- Package-scoped `cargo fmt --package ergodis-private -- --check` passes. The
+  workspace-wide format check is currently blocked only by concurrent foreign
+  public-core edits in `ergodis/src/span.rs`; C1016 does not format or modify
+  that file.
+- Independent Python replay agrees exactly on all eight reductions.
+- Small carriers through 48 exhaustively match direct multiplier-permutation
+  closure; invalid carriers 0 and 523 fail closed.
+- Existing private marginal/residual hot queries remain allocation-free and
+  iterative. New quotient, subgroup, defect-proof, and composition-move
+  kernels have explicit zero-allocation and differential gates; all traversal
+  is iterative.
+
+The new generic proof adapters were separately profiled under
+`choom -n 1000` with nonmultiplexed `instructions,cycles` groups, using 20
+million derive/replay operations each. Quotient-PAF derivation/replay cost
+342/314 retired instructions and 45.6/45.9 cycles per operation; sparse-defect
+derivation/replay cost 504/464 instructions and 66.2/73.8 cycles. These are
+compact rule and bounded-Diophantine transcripts, not solve-loop work; the
+allocation gates cover each adapter independently.
+
+Five nonmultiplexed repetitions of the complete second-pass cold compiler,
+protected by `choom -n 1000`, average 18,971,526,462 instructions,
+13,229,724,210 cycles, 2,261,140,844 branches, 13,825,772 branch misses,
+279,956,710 cache references, and 52,620,990 cache misses. Busy-host wall time
+is not used. Raw counters and the evolve transcript remain on persistent ZFS;
+hashes and exact results are in the private JSON evidence.
+
+After the structural pass, the expanded cold scout was rebuilt at sha256
+`8d4a2c765ea41cab9dce53f85655156db8daba190f8931b24175e142c85b64f3`.
+Five repetitions in separate nonmultiplexed counter groups (100% enabled)
+average 87,269,781,124 instructions, 84,185,754,155 cycles,
+10,663,861,095 branches, 53,330,724 branch misses, 1,425,149,554 cache
+references, and 333,846,835 cache misses. The independent direct-orbit Python
+oracle passes and deliberately costs 1,786,046,501,457 instructions; it is
+validation, not a search component. The scoped current gate passes 184 private
+library tests plus all C1016-owned binaries and allocation tests. Strict
+clippy passes with the recorded repository-wide allowances for pre-existing
+range-loop and `is_multiple_of` lints; C1016's own reported range loops were
+cleaned. No wall time is used.
+
+## Exact-prefix evolution loop and structural boundary census
+
+The next private loop made the quotient curriculum itself replayable. Search
+outcomes now retain the deepest exact quotient prefix, its modular root, and
+its fixed-width selection independently of the best nearby objective. A typed
+prefix input is accepted only after direct row and prefix-PAF replay; a
+one-bit-corrupted checkpoint is rejected. It can therefore concentrate a new
+campaign on the next equation without pretending that a partial checkpoint is
+a quotient shell. The checkpoint remains discovery input and has no negative
+or certificate authority.
+
+Several initially plausible controls were falsified under CHOOM with
+nonmultiplexed `instructions,cycles`:
+
+- A deterministic 64-lift-per-root exact-q0 bank contains 159,744 directly
+  replayed seeds and samples eight witnesses in each block-energy fibre. Its
+  matched 160-million-mutation run still reached the same q4/q7 attractors and
+  no shell. Thus the earlier stall is not an artifact of the one-witness DP.
+- Exact q0 intersected with q1--q6 modulo 49 in 118 sampled seeds across 67
+  roots. The best modular seed has residuals
+  `[0,0,49,0,98,0,49]`; a q7-started search again collapsed to the same local
+  minima. The older arbitrary mod-49 bank was much worse: its best squared
+  q0--q6 residual was 49,839,958 with q0 off by 6,174.
+- Root-preserving coordinate swaps and root-preserving cross-block transfers
+  pass direct row/modular/incremental and zero-allocation tests, but matched
+  160-million-mutation controls did not improve shell reach and cost more.
+  They remain opt-in rejected controls.
+- Restart intervals of 100,000 and 500,000 mutations traded away exact-prefix
+  graduation; 2.5 million remains the retained control.
+
+Eight 16-thread shards then retired 6,524,070,144,453 instructions and
+1,567,306,490,251 cycles over 1.28 billion mutations. They retained 76
+distinct exact q0--q3 checkpoints on 75 modular roots, but no q0--q6
+checkpoint or shell. Independent full quotient replay collapses those 76
+states to only eight q4--q9 residual templates. The two dominant templates
+occur 31 and 25 times, and the special-block modular mask strongly predicts
+the basin. This is an evolved structural observation, not a theorem or a
+root-elimination rule.
+
+The boundary is unusually rigid. Complete per-block q0--q3 profile joins find
+only six single-block homometric representatives among the 76 checkpoints.
+Complete two-block cancelling-delta joins find alternatives for the same six
+and none for the other 70; every positive is directly replayed. The switches
+lead only to already observed residual templates. Exact local closures using
+ordinary swaps, row-preserving 1-by-14/2-by-7 compositions, and scoped
+coordinate permutations find no repair through four compatible moves on all
+14 states in the first corpus. A later audit invalidated the same-block part
+of this negative: individually measured PAF deltas have a quadratic cross term
+when two moves touch one block, even if their orbit edits are disjoint. The
+MITM join now rejects every same-block pair, making additive keys exact only
+for distinct-block compositions. Directly replayed positives remain valid;
+the prior three-/four-move misses and their coverage counts do not.
+
+The repair implementation produced a useful representation experiment, but
+its old counter comparison used the now-invalid same-block workload and is not
+an accepted semantic A/B until rerun with the corrected distinct-block scope.
+Separating replay-only workspace construction from seed-census compilation and
+replacing a quadratic delta scan by a sorted 16-byte packed index reduced one
+two-move scout from 44,015,486,115 to 7,791,502 instructions, about 5,650x.
+The full 14-state two-move corpus then cost 141,998,350 instructions; the
+four-move composition/coordinate closure stays around 32 MiB peak RSS. This
+is cold proof/search infrastructure, not solve-loop work. The mutation loops
+remain iterative and allocation-free.
+
+The next structural target is now sharper: explain or compile the apparent
+four-block rigidity of exact q0--q3 decompositions, then construct q4 exactly
+before adding q5 and q6. A one-equation-at-a-time stochastic control from an
+exact q0--q3 checkpoint still failed to reach exact q4 in 160 million
+mutations, so a wider four-block profile switch or a proof-level obstruction
+is preferable to deeper local annealing.
+
+## Sparse-defect exact q4 exclusion
+
+The apparent q0--q3 rigidity is now explained by the proved zero-shift defect
+equation rather than by deeper annealing.  Writing every scale-seven digit as
+`k=2+d`, the total nonnegative defect energy is exactly 34.  An iterative
+bounded compiler enumerates only row-compatible displacements whose partial
+energy can still fit 34.  Across all 26 block-mask kinds this reduces roughly
+443,000--481,000 raw base-five lifts per mask to 711--1,613 distinct exact
+`(energy,q1,q2,q3,q4)` profiles, 36,890 profiles total.  The records are 16-byte
+Tiger layouts.  The complete compiler costs 153,964,657 instructions and
+40,130,227 cycles at 13.6 MiB RSS under CHOOM.
+
+The optimized exact four-block join then checks all 2,496 proved mod-seven
+roots.  It finds zero q0--q4 hits after 5,615,839,104 left-pair probes.  A
+16-worker Ergodis root execution retires 169,584,086,558 instructions and
+48,028,410,263 cycles at 13.4 MiB RSS.  Its presized root callback has a direct
+zero-allocation regression.  A deliberately different oracle enumerates all
+`5^10` block words, canonicalizes them with ordered sets, and uses a hash join;
+it independently obtains the same 2,496 misses and probe count in
+219,305,454,639 instructions, 56,328,427,859 cycles, and 46.9 MiB RSS.
+
+The exact q4 fibre above q0--q3 is much smaller than the join transcript.  It
+has four classes determined solely by the scale-one special mask:
+
+- masks `1,326,394,512`: no exact q0--q3 lift (864 roots);
+- masks `58,368`: q4 is in `{15101,15150}` (768 roots);
+- masks `172,212`: q4 is in `{14926,15290}` (768 roots); and
+- masks `170,340`: q4 is in `{14919,15094,15108,15178,15206}` (96 roots).
+
+The required q4 value is 15,080, absent from every class.  Thus the entire
+`g=53` multiplier shard is excluded already by q0--q4.  This remains a
+multiplier-assumed result and says nothing about unrestricted order 2092.
+
+A sealed private proof stores only those ten special-mask rows and a six-step
+Horn transcript.  Verification reconstructs the structural defect theorem,
+the four exact fibres, and the independent oracle; no large pair certificate
+is trusted or retained.  Its provenance is `exact-computational`, bound to the
+registered carrier-522/generator-53/Z18 extractor.  Forged bindings and
+evolved provenance fail before replay.  Full generation plus verification
+costs 748,094,578,504 instructions, 149,109,091,710 cycles, and 48.5 MiB RSS.
+
+Three broader conjecture families were fast-falsified and retained as rejected
+controls.  All 2,496 roots lift q0--q4 modulo 343, so a higher 7-adic scalar
+obstruction is absent at that level.  No primitive real separating inequality
+in `[-5,5]^5` excludes even one root; likewise 25,938 scalar congruence
+projections through modulus 64 and all 100 two-/three-coordinate projections
+of size at most 64 exclude none.  The obstruction is an exact five-dimensional
+lattice fibre, not a scalar interval or low-dimensional congruence.
+
+## Transfer theorem: g91 dies at q0
+
+The sparse-background mechanism transfers more strongly to `g=91`.
+Multiplication by 91 is the identity modulo 18, and direct orbit closure proves
+that every residue fibre contains one singleton multiplier orbit and two
+size-14 orbits.  Every quotient count therefore has the form
+
+`B = e + 14 k`, with `e in {0,1}` and `k in {0,1,2}`.
+
+The quotient zero-shift theorem again gives signed energy 1,976.  The 72
+coordinates on the `k=1` background contribute 72, leaving excess 1,904 or 34
+units after division by 56.  A nonbackground coordinate has signed magnitude
+27 or 29 and hence costs 13 or 15 units.  Feasibility would require
+
+`13 n27 + 15 n29 = 34`.
+
+Energy bounds give `0 <= n27,n29 <= 2`; the nine-case endpoint and an
+independent double loop find no solution.  Equivalently, testing
+`n29=0,1,2` leaves `34,19,4`, none divisible by 13.  Thus the entire `g=91`
+multiplier shard is structurally impossible already at q0.  This supersedes
+its earlier order-3/order-29 counting reductions as a decision result, while
+those remain valid demonstrations of the general character compiler.
+
+The private sealed proof binds carrier 522, generator 91, the Z18 projection,
+and source semantics; evolved observations cannot self-promote.  Direct orbit
+reconstruction, the generic quotient-PAF proof, the bounded endpoint, an
+independent oracle, adversarial binding/provenance tests, and a six-step Horn
+replay all pass.  The rule kernel is allocation-free and iterative.  Over 20
+million operations, derive/replay use 513.024/459.024 instructions and
+86.644/62.722 cycles per operation under CHOOM with a nonmultiplexed group.
+
+## Transfer census: g133 q0 is useful, q1--q4 scalar shapes are not
+
+For `g=133`, the Z18 action has ten quotient slots, each with one scale-one
+and seven scale-four orbit families. Thus every coordinate is `B=e+4k`, and
+the signed q0 identity has defect budget 83 above the magnitude-three
+background. A bounded iterative compiler streams all 26,763,264 mod-four
+roots without materializing them. Exact q0 retains 15,724,800 and excludes
+11,038,464 (41.25%); every retained root has a directly reconstructed row/q0
+witness. The run used 236,520,091,736 instructions and 55,906,375,433 cycles.
+
+Exact q1 adds no reduction: all 15,724,800 q0 roots reconstruct a q1 witness.
+The compiler collapses 528 block domains to 24 special and 14 ordinary
+semantic classes and retains 1,564,133 pair profiles. The exact q1 run used
+334,467,859,281 instructions and 122,465,959,332 cycles. Exact
+`(energy,q1,q2)` block growth is only 3,079,923 profiles, but q2 and q4 modulo
+64 plus exact pair minima/maxima still retain precisely the same q0 roots;
+q3 modulo 64 is likewise redundant. These are retained as fast-falsified
+theorem shapes, not promoted reductions. The remaining possible gain is in
+interior exact higher-shift gaps or a different structural projection.
+
+A new same-witness lift compiler tests that remaining non-scalar direction.
+Writing each quotient coefficient as `e+4k`, the generic one-bit
+autocorrelation theorem derives the eight q2--q9 lift bits modulo 8 from the
+canonical binary word and the parity of `k`.  Exact `(energy,q1)` pair images
+carry all eight bits jointly in fixed 256-bit XOR sumsets.  The compiler has
+31 special and 19 zero semantic classes, 3,087,669 block profiles, and
+2,811,235 pair profiles; only 26,639 of 212,629 class quadruples have any
+exact q0/q1 lift.  Nevertheless every one of the 15,724,800 exact-q0/q1 roots
+has a same-witness full mod-eight lift.  Thus joint mod 8 is another exact
+zero-reduction shape, not merely a failed scalar marginal.  The discovery
+run used 1,024,821,200,482 instructions and 266,459,278,371 cycles under
+CHOOM.  Its fixed bitset kernel is iterative and allocation-free, with a
+direct pair-loop oracle.
+
+The reconstructed-witness signal strengthens sharply at the next lift: only
+1,851,024 retained q1 witnesses satisfy all q2--q9 modulo 8, and only 123,024
+satisfy them modulo 16.  Those are discovery counts, not root exclusions,
+because alternate witnesses rescue every root at mod 8 and have not yet been
+compiled at mod 16.  The next exact target is therefore the root-scoped
+mod-eight-to-mod-sixteen fibre, not another scalar shift.
+
+The mod-sixteen block compiler is already bounded enough for that next join.
+Two theorem lifts (`e -> e+4(k mod 2) -> e+4(k mod 4)`) produce the exact
+two-bit normalized q2--q9 signature and match a direct PAF oracle.  Across all
+528 block domains it retains 7,898,051 exact profiles (126,368,816 payload
+bytes), refining the mod-eight classes only from `31/19` to `31/24`.  The
+complete class census uses 813,386,479,728 instructions and 165,266,767,319
+cycles at 136,468 KiB peak RSS.  The 26,763,264 mod-four roots occupy only
+1,566 refined class cells, and each cell requests one unique mod-sixteen
+target signature.  This justifies a cell-scoped fibre join instead of a global
+65,536-state pair table.
+
+That scoped exact join is now complete.  Only 187 special-zero and 303
+zero-zero pair classes are needed.  Their 1,479,261 exact `(energy,q1)` keys
+contain 59,053,245 mod-sixteen signatures, with a proved runtime cap and an
+observed maximum of only 64 signatures per key.  Of the 1,566 requested cells,
+865 have exact q0/q1 lifts, and all 865 contain their required joint q2--q9
+mod-sixteen signature.  Consequently all 15,724,800 exact-q0/q1 roots survive:
+joint mod 16 gives zero reduction, despite the 123,024-witness discovery
+signal.  The run uses 5,550,176,177,805 instructions, 1,110,110,621,324 cycles,
+and 1,022,944 KiB peak RSS under CHOOM.  Dense pair workspaces are temporary;
+retained products use 8-byte Tiger keys and one contiguous `u16` signature
+arena.  This closes low 2-adic joint lifting as a high-EV reduction family;
+the next g133 attack must use exact interior gaps or a non-2-adic character
+projection.
+
+The exact-interior pivot succeeds at q2.  The old mod-64-plus-range pair
+summary has genuine holes: in the first canonical special-zero and zero-zero
+pairs it admits 50,937 nonexistent q2 values, with as many as 62 false values
+in one `(energy,q1)` fibre.  The complete exact q2 compiler uses 24 special
+and 14 zero semantic classes, 1,564,133 Tiger pair keys, and 19,487,229 exact
+pair values.  It reduces the 15,724,800 q0/q1 roots to 15,372,288, excluding
+352,512 roots (2.2418%).  All 15,372,288 retained roots reconstruct class
+witnesses into their own block domains and directly replay the four row sums
+plus q0, q1, and q2.  The replayed run uses 1,286,226,276,223 instructions,
+296,703,676,400 cycles, and 247,832 KiB peak RSS under CHOOM.  Exclusions
+were then independently rebuilt by a shifted-bitset convolution oracle, which
+agrees exactly with the primary pairwise-value compiler on all 532 pair
+classes.  A sealed registered extractor binds carrier 522, generator 133, the
+canonical Z18 semantics, parameters, source commitment, counts, and the
+canonical survivor digest
+`632b6956a3ace976be4a22b85712954ed262b8924a9dc3cd33505103462d2078`.
+Its five-rule proof transcript stores no pair table or root certificate.
+Synthesis plus independent verification uses 4,690,984,127,887 instructions,
+1,096,816,829,332 cycles, and 263,988 KiB peak RSS.  The allocation-free rule
+derive/replay kernels use 429.0/384.0 instructions and 67.45/55.57 cycles per
+operation over 20 million operations.  The 352,512 exclusions now have
+private exact-computational authority; they remain multiplier-assumed and do
+not imply unrestricted order-2092 nonexistence.
+
+The shift census then exposes the multiplier structure that an unscoped
+search would miss.  Because `133 == 7 (mod 18)` and every quotient word is
+constant on multiplication-by-seven orbits, shifts collapse to
+`{1,5,7}`, `{2,4,8}`, `{3}`, `{6}`, and `{9}`.  An exhaustive 1,024-mask
+oracle verifies closure and the induced PAF equality.  Exact q6 is much
+stronger than q2: it retains 6,739,200 of the 15,724,800 q0/q1 roots and
+excludes 8,985,600 (57.14%).  Its 1,564,133 pair keys represent 37,470,257
+logical exact values, with at most 101 values per key.  Primary and shifted
+bitset pair compilers agree, and every positive reconstructs and replays the
+original equations.  The run uses 2,530,338,954,725 instructions and
+650,714,419,417 cycles.  A canonical root-bitset intersection proves
+computationally that every q6 candidate is already a q2 candidate, so q2 is
+redundant once q6 is installed; the intersection run uses
+4,888,863,416,315 instructions and 1,146,209,987,372 cycles.
+A sealed registered q6 extractor v2 now synthesizes and independently verifies the
+same 6,739,200 survivors, 8,985,600 exclusions, 883 survivor cells, and
+canonical survivor digest. It also binds the 225-row gap-mechanism commitment
+and a six-step transcript. The two-pass proof run uses 5,057,092,616,304
+instructions and 1,143,431,945,571 cycles and stores no root or pair-table
+certificate.
+
+The complete q6 cell corpus has only 225 weighted semantic rows representing
+all 15,724,800 q0/q1 roots.  The private Ergodis-evolve adapter binds the
+shift, label semantics, source digest, weights, and feature names.  Evolution
+found the zero-false-positive survivor predicate
+`b0_q1_profiles >= 2120`, covering 5,971,968 of the 6,739,200 q6 survivors,
+and a zero-false-positive two-clause exclusion predicate covering 1,368,576
+of the 8,985,600 exclusions.  These are complete-corpus discovery leads, not
+proof authority.  Adapter v3 exposes only semantic pair-image
+shape data--interval counts, residue support, stored holes, and maximum hole
+counts--so counterexample-guided evolution can propose compression and
+sumset theorems without learning opaque class identifiers.  A bounded
+10,000-candidate v3 run did not beat the q1-profile rule overall.  Its new
+shape-only lead `left_interval_keys == 232` has zero corpus false positives
+and covers 497,664 q6 survivors; this is discovery-only.  The result also
+locates the next tooling gap: the current mutation grammar compares fields to
+constants but cannot synthesize the interval/residue/hole sumset identity.
+Adapter v4 closes that private gap by exporting two independently recomputed
+set quantities: the number of residue/range-compatible pair keys and the
+number completely covered by exact holes.  The relation
+`base_sumset_pairs != hole_covered_pairs` agrees with survival on all 225
+weighted cells.  Seeded with field-to-field comparison shape, evolve finds
+this three-operation predicate at generation zero with perfect weighted
+accuracy.  Extractor v2 binds a canonical mechanism-corpus digest and rejects
+any row where that relation disagrees with direct exact survival; the proof
+transcript adds the gap identity as an explicit structural step.
+
+The q3 and q9 explicit-value compilers were rejected at the declared
+100-million-value boundary rather than allowed to exhaust memory.  Their
+mod-64-plus-range relaxations add no reduction beyond q0/q1.  The exact
+replacement represents each dense scalar image by the proved identity
+`S = ([min,max] intersect R) minus H`, where `R` is its modulo-64 residue
+support and `H` its sorted holes.  The primary dense compiler and an
+independent shifted-bitset compiler still agree before compression; the
+sum-witness query is allocation-free, nonrecursive, and differentially tested
+against direct finite sumsets.  Resource accounting now caps stored holes,
+not the much larger logical value count.  With that representation, q3
+completes with 172,480,220 logical pair values and q9 with 106,138,732; both
+retain all 15,724,800 q0/q1 roots, with the same canonical all-root digest.
+Their runs use respectively 2,345,434,106,623 and 2,176,666,401,177 cycles.
+Thus q3 and q9 are exact negative reduction results, while q6 is the unique
+new constraint among the multiplier-orbit representatives.
+
+The first retained-root multiplicity audit corrects the runtime model. Only
+42 of the 225 aggregated semantic rows survive q6, with weights in
+`{6912,13824,62208,124416,248832,497664}` summing to 6,739,200. Their naive
+per-block digit Cartesian products, weighted by root multiplicity, total
+approximately `1.6411550857083569e27 = 2^90.4068`. This is an upper work
+envelope, not an exact common-witness count: q1/q6 compatibility already
+removes many products, but the current existence proof retains only one
+witness and does not count them. Even dividing optimistically by the proved
+independent-translation and common-unit normalizers (`6^4 * 14 = 18,144`)
+leaves a `2^76.2596` envelope. Consequently the earlier ideal
+615-million-cycles-per-root calculation was not a solve estimate; root count
+alone omits the dominant digit multiplicity.
+
+The next exact compiler now carries a 16-byte Tiger profile containing energy
+and all four nontrivial quotient-shift representatives `q1,q3,q6,q9`, plus
+its digit witness. It is iterative, uses one fixed 2 MiB workspace, performs
+capacity validation outside the repeated kernel, and allocates zero times in
+the real profile loop. Across all 528 special/zero block domains it directly
+enumerates 66,601,558 digit configurations and compresses them to 20,956,714
+distinct common-shift states (3.178x, 1.668 bits). Per-domain configurations
+range from 121,736 to 129,668; distinct states range from 2,741 to 88,247, and
+maximum state multiplicity is 552. Every profile recomputes the four PAFs from
+its decoded digit word, while an independent row/energy enumerator agrees on
+every domain count. The CHOOM-protected census uses 485,026,095,595
+instructions, 115,288,813,324 cycles, 85,437,935,084 branches, and 377,483,818
+branch misses. This block compression alone is insufficient; the decisive
+next measurement is the same-witness four-block join on q1/q3/q6/q9, where
+two additional exact scalar equations are heuristically expected to supply
+the missing 24+ bits but have not yet been counted.
+
+The same-witness join closes that gap.  The 24/14 q6 block classes refine to
+only 31/19 full `(energy,q1,q3,q6,q9)` state-set classes: just twelve q6
+classes split, every split is binary, and the fifty retained class state sets
+occupy 10,674,528 bytes.  Consequently the 42 positive q6 cells refine to
+only 90 full-state cells, representing all 6,739,200 roots (6,912 to 165,888
+roots per cell).  A bounded hash join and a structurally different sorted-
+vector oracle agree on every refined representative: all 90 cells are empty,
+so all 6,739,200 q6 survivors are excluded computationally.  The complete
+two-oracle run uses 1,643,846,718,990 instructions, 394,599,673,789 cycles,
+245,695,412,769 branches, and 794,666,946 branch misses.  Transfer from each
+representative to its roots uses equality of the complete typed block-state
+sets, not an assumption that the older q6 class was sufficient.  This remains
+private discovery evidence until the class partition and transfer lemma are
+sealed and independently replayed.
+
+Generic scoped feature synthesis then searched anonymous two-dimensional
+pair-key observations, learning each feature's maximal valid cell mask rather
+than receiving a scope.  One evolved feature covers all 90 refined cells:
+
+`-2 q3 - q9 (mod 11)`.
+
+It appeared after 413 bounded affine-modular candidates.  Its residue sets
+form only ten cell patterns, each disjoint, although their global unions do
+overlap; thus the current statement is uniform in expression but conditional
+on the earlier full-state cell.  The mechanism is theorem-driven rather than
+an accidental modulus.  For every length-18 quotient word, with
+`C_r = sum_{j == r (mod 3)} x_j`, direct cycle decomposition gives
+
+`sum_r C_r^2 = P0 + 2 P3 + 2 P6 + P9`,
+
+and hence `-2 P3 - P9 = P0 + 2 P6 - sum_r C_r^2`.  The identity has a
+zero-allocation test over 10,000 arbitrary quotient words.  This promotes the
+evolved affine feature into an exact algebraic macro: q0/q6 plus the three
+cycle sums suffice for the modulus-11 obstruction.  The remaining proof-
+synthesis task is to replace the ten learned cell masks by predicates over
+those earlier cycle-sum/q6 features and seal the resulting small structural
+case split, rather than preserving the 90-cell join table.
+
+Scope learning is now explicit rather than hand-authored.  A generic
+multi-class equality tree takes only the four earlier joint-class coordinates
+and the ten evolved residue-pattern labels.  It classifies all 90 cells
+exactly with 63 iterative nodes; reverse hash-consing merges equivalent
+continuations to a 38-state contextual tablebase (28 tests and ten terminal
+patterns).  Nodes are explicit 8-byte `repr(C)` Tiger records.  Both synthesis
+and evaluation accept preallocated storage, use no recursion, and allocate
+zero times on repeated calls.  The successful affine
+feature can be reloaded from its serialized report without re-evolution, with
+its `Evolved` origin and blindness level preserved.  This is the first private
+implementation of feature-plus-scope promotion and CGT/Myhill--Nerode-style
+continuation-state reuse; global minimality of the 38-state DAG is not claimed.
+
+The theorem-native replay makes that learned case split unnecessary for the
+actual exclusion. A sealed block extractor retains only
+`(energy,q1,q6,F mod 11)`, where `F=P0+2P6-sum_r C_r^2`; it independently
+projects every block image back to the exact q6 compiler. Across all 528 typed
+masks, the structural interface does not split a single q6 class: the 24/14
+class counts remain 24/14, and the 42 q6 cells remain 42 cells while covering
+all 6,739,200 roots. Thus the earlier 90-cell q3/q9 partition is valid
+discovery evidence but is not needed for authority.
+
+Two distinct exact joins exclude all 42 structural cells. The primary fixed
+open-address implementation uses 69,273,218,752 instructions, 18,224,702,942
+cycles, and an 18,022,832-byte workspace. The independent ordered-vector
+implementation shares only the sealed block extractor; its coarse arithmetic,
+direct residue convolution, sorting, and binary lookup do not share the
+primary hash path. It uses 169,824,937,376 instructions, 45,781,935,477
+cycles, and at most 462,545,914 workspace bytes. Both produce the same
+89,694-key maximum and agree cell-for-cell.
+
+The promoted private proof accepts only the evolved candidate
+`(-2,-1,11,3)` and then re-extracts everything internally: the sealed q6
+prerequisite, the 42 positive semantic-cell IDs and their total weight, the
+cycle interfaces, all canonical root transfers, and both joins. Supplied JSON
+and field names carry no authority. Its six-step transcript labels the cycle
+identity `ProvedStructural`, but labels the exhaustive 6,739,200-root coverage
+`ExactComputational`; only the latter authorizes the negative. Returning the
+proof and its already-verified corpus together removes duplicate q6 extraction
+inside each authority pass while preserving independent synthesis and
+verification: counters fall 52.178% in instructions and 51.912% in cycles to
+5,366,123,363,295 instructions and 1,297,926,920,812 cycles, with 462.6 MiB
+maximum join workspace. Forged bindings, evolved coefficients, provenance,
+and replay metadata fail closed. An exhaustive six-rule ablation corpus is
+also wired back into evolve: its 64 rows have one positive, a 13-node exact
+tree, and 22 perfect evolved plans among 981 tested. Those plans remain
+diagnostic proof skeletons only.
+
+## Transfer reduction: g41 quotient roots fall to 768
+
+The `g=41` Z18 projection has six slots of multiplicities `1,1,2,2,6,6`.
+The first two have `B=e+4k`; the other four have `B=e+2k`. Relative to signed
+square baselines 9 and 1, q0 has exact defect budget
+
+`(1976 - 4(2*9 + 16))/8 = 230`.
+
+The six-digit bounded compiler reduces 262,144 mod-two roots to 9,216 q0
+roots, then to 4,608 exact q1 roots. Its domains contain only 234,033 row/q0
+configurations and 66,233 `(energy,q1)` profiles. A deliberately different
+flat mixed-radix oracle enumerates all 207,360,000 raw assignments and exactly
+reproduces every domain, 437,740 pair profiles, and both root counts. The q1
+census uses 118,041,701,089 instructions and 18,777,675,608 cycles; the flat
+oracle uses 31,114,353,400 instructions and 6,007,035,456 cycles.
+
+Multiplier invariance gives a further structural theorem. Since
+`41 == 5 (mod 18)`, quotient PAF shifts lie in the five nonzero orbits
+
+- `{1,5,7,11,13,17}`;
+- `{2,4,8,10,14,16}`;
+- `{3,15}`;
+- `{6,12}`; and
+- `{9}`.
+
+Together with q0, only q1, q2, q3, q6, and q9 need compilation. Exact
+per-shift filters retain respectively 1,536, 2,304, 2,304, and 4,608 roots for
+q2, q3, q6, and q9. Their canonical necessary-set intersection contains 768
+roots, a 341.333x reduction from the mod-two shell. This composition does
+**not** assert a common quotient witness: each per-shift filter is exact, but
+the 768 roots are only necessary-filter survivors. Every per-shift positive
+is directly replayed against row, q0, q1, and its selected shift.
+
+Independent flat oracles each enumerate 207,360,000 assignments and reproduce
+the q2/q3/q6/q9 domain counts `93303/157699/107715/146739`. The exact pair
+kernel uses a fixed 16 MiB open-addressed workspace, iterative touched-slot
+reset, an explicit 75% load cap, 16-byte records, and zero allocations in its
+hot insertion loop. The composed filter uses 386,487,762,653 instructions,
+137,615,669,947 cycles, and 138 MiB peak RSS.
+On the exact-q2 retained workload, separate 100%-enabled groups record
+3,482,296,382 branches / 7,590,908 misses and 236,243,728 cache references /
+17,975,996 misses. The fixed-workspace q2 compiler improves the earlier
+sort-all-products control from 36.37B instructions / 9.65B cycles to 26.14B /
+7.46B while also removing product-loop allocation and its 20M raw-state cap.
+
+A sealed private proof binds the carrier, generator, Z18 projection, shift
+orbits, quotient theorem, canonical source semantics, and the digest of the
+768 sorted root IDs. Its authority is `exact-computational`, never
+`proved-structural`; it authorizes exclusions outside the set but grants no
+joint-witness or certificate authority inside it. Verification recomputes
+the filter and all independent domain oracles rather than trusting a large
+certificate. Generation plus verification uses 978,896,150,468 instructions,
+323,268,152,250 cycles, and 139 MiB peak RSS. Its six-rule Horn derive/replay
+kernels use 513.024/459.024 instructions and 86.842/60.168 cycles per operation
+over 20 million operations and have zero-allocation tests.
+
+The common-witness question is now settled constructively.  A grouped exact
+meet-in-the-middle compiler reuses only 40 left pair fibres across the 768
+roots, packs all six coordinates into a 16-byte record, and uses the exact
+`(q2,q3,q6)` image as a prefilter.  It examines 1,493,362,944 left candidates
+but only 2,980,608 right candidates before finding one common quotient witness
+for every root.  All 768 retained witnesses are independently decoded and
+replayed against the four row sums and all ten quotient equations.  The run
+uses 611,840,641,105 instructions, 183,853,612,811 cycles, and 145 MiB peak
+RSS.  Thus no quotient-only theorem can further reduce the 768-root shell;
+the retained witnesses are deterministic seeds for fine PAF work.
+
+Fast-falsification records the rejected theorem shapes explicitly.  Joint
+congruences modulo 8, 16, 32, 64, 3, 5, and 7 preserve all 768 roots.  Every
+one of the fifteen exact two-coordinate projections also preserves all roots,
+as does the exact three-coordinate `(q2,q3,q6)` projection.  The latter needs
+a root-scoped fixed-workspace compiler: global materialization fails closed at
+134,217,728 states and 1.14 GiB RSS, whereas eight independent workers finish
+all 1,536 pair compilations with 989 MiB RSS.  These are exact negative
+controls about reduction shapes, not evidence for or against a Hadamard
+object.
+
+The first fine-PAF transfer uses the order-29 character quotient.  Direct
+fixed-cardinality evolution over the 24 orbit masks preserves the retained
+quotient witness and checks every character hit against the original four row
+sums and all 521 nonzero PAF equations.  After correcting a packed-radix mask
+bug (all earlier runs are void controls), 491,520,000 mutations reached exact
+character residual 8 but no hit.  An exact radius-two scout found no improving
+swap.  These misses are discovery-only.
+
+A generic raw-vector miner now discovers the symmetry and scope that were
+first noticed manually. Given only the best 29-coordinate correlation vector,
+it searches unit actions and recovers multipliers 12 and 17 with the
+eight-orbit quotient (zero plus seven order-four cosets); no coset table is
+supplied to the miner. It compresses the residual to a signed support motif,
+recovering the residual-eight pattern as exactly one `-1` orbit and one `+1`
+orbit. The evolve kernel now retains its best sixteen motifs and a 768-bit
+root scope for nonzero residual sums, with explicit discovery-only provenance.
+
+The hottest scoring loop used to sum all 28 nonzero coordinates even though
+the sealed multiplier action makes each order-four coset constant. A private
+`ResidualTuple<i32,7>` scorer reduces this to seven representatives. On an
+identical one-thread 15.36-million-mutation A/B it preserves the exact best
+correlation and orbit selection while removing 6.916% instructions, 4.145%
+cycles, and 9.903% branch misses. An eight-thread 768,000-mutation A/B also
+preserves the exact search result and removes 3.455% instructions, 5.589%
+cycles, and 3.541% branch misses, including unchanged quotient-census
+overhead. The hot scorer and differential oracle allocate zero times.
+
+The mined residuals also expose an exact earlier-feature relation. For row
+sums `260,261,261,261`, zero-shift correlation `A0`, and seven coset
+residuals `d_i`, the global autocorrelation identity gives
+
+`4 sum_i d_i = 260^2 + 3*261^2 - 29 A0 + 28*523`.
+
+Consequently `A0=9883` forces balance. In that scope, residual eight is the
+smallest possible nonzero score and necessarily has the observed `+1/-1`
+two-orbit form. A low-budget all-root run finds 166/768 best candidates with
+nonzero residual sum and records their exact ordinal mask, so balance is not
+silently promoted to a global root theorem. Deriving the seventh coordinate
+from the affine sum was also A/B tested: it preserved results but regressed
+cycles by 1.20% and branch misses by 3.75%, so the seven-load kernel remains
+the admitted implementation. The affine identity is retained as a search
+feature, lower bound, and scope-learning input.
+
+The affine sum is now also available as a const-specialized evolution pressure
+with weights `0,1,2,4`, dispatched outside the mutation loop.  On the same
+768-interface, 768,000-mutation counter workload, weights `0/1/2/4` leave
+instructions essentially fixed at `603.397/603.405/603.406/603.406` billion.
+Weights two and four reduce best-candidate nonzero-sum scopes from 166 roots
+to 7 and 4, but worsen the best exact residual from 48 to 56; they remain
+optional discovery features rather than the default objective.
+
+The former one-witness-per-root model is now removed.  An exact weighted join
+counts 1,024,896 common quotient-profile quadruples and 1,984,512 raw packed
+digit quadruples over the 768 roots, with 1,800--3,662 raw interfaces per
+root.  There are exactly four multiplicity classes, each on 192 roots:
+`(1006,1800)`, `(982,2140)`, `(1756,2734)`, and `(1594,3662)`, where each pair
+is `(profile quadruples, raw digit quadruples)`.  A structurally independent
+sorted-range enumerator materializes all 1,984,512 raw interfaces and directly
+replays all ten quotient equations, agreeing exactly with the weighted count.
+The weighted census uses 1.690 trillion instructions, 732.2 billion cycles,
+and 159 MiB RSS; the deliberately slower direct oracle uses 4.354 trillion
+instructions, 2.220 trillion cycles, and 268 MiB RSS.
+
+A sealed 47,631,472-byte binary cache now binds the canonical extractor
+semantics, carrier/quotient/multiplier parameters, root masks, exact digit
+payload, and payload SHA-256
+`073389e9cc725e44eb3674a4f5f241710a06324b99f3c395ada3ccebcd8dca98`.
+Both writing and loading replay every witness; malformed payloads, forged
+semantics, trailing bytes, and budget overflow fail closed.  Verified cached
+load plus one initialization on every interface costs 117.8 billion
+instructions, 46.2 billion cycles, and 56 MiB RSS, versus 2.117 trillion cycles
+to regenerate the cache.  A 16-thread, 1,984,512,000-mutation pass over every
+raw interface then completes in 8.179 trillion aggregate cycles and reaches
+residual 16 with no q29 hit.  Its misses are discovery-only; its exact digit
+binding repairs the earlier arbitrary-preimage provenance defect.
+
+The exact q29 lift is now expressed in theorem-native nonnegative coordinates.
+For every cyclic coefficient vector `x`,
+
+`2 D_s = 2(A_0-A_s) = sum_r (x_r-x_{r+s})^2`.
+
+Thus `D_s >= 0`, while the four-block character equations are exactly
+`sum_blocks D_s = 523` on each of the seven multiplier cosets. Any one-block
+defect above 523 is therefore impossible before a pair join. Complementation
+`x -> 18-x` preserves all `D_s`; on each row-261 block it canonically pairs
+`(mask,digits)` with its bit/count complement, explaining and halving the five
+observed mask pairs. A private generic cyclic-Dirichlet feature primitive now
+generates these coordinates from anonymous raw vectors with zero allocations;
+its differential oracle recovers both autocorrelation defects and complement
+invariance without q29-labelled fields. The exact fixed-workspace block
+tablebase and four-block complement join are in progress.
+
+The mod-8/mod-16 seed-power scouts have a narrower contract than their first
+field name suggested. Their modular state images and infeasibility verdicts
+are exact for the selected quotient witness, and any zero representative is
+directly replayed. For a feasible modular state, however, the join retains one
+arbitrary preimage and rescored only that representative; its exact residual
+is not a minimum over the modular fibre. The private report field and
+provenance now say `representative_exact_residual`, and no best-residual or
+negative claim may use it.
+
+A blind mod-16 coefficient-image lift is rejected as a scaling design.  It
+fails closed in block 0 at the sixth slot after 12,582,912 states, using
+694,746,113,496 instructions, 307,908,402,245 cycles, and 495 MiB RSS.  The
+replacement is the structural identity
+
+`A_s(a + 2^k x) = A_s(a) + 2^k B_s(a,x) (mod 2^(k+1))`,
+
+whose quadratic lift term vanishes for `k >= 1`.  A reusable private theorem
+kernel proves/replays this one-bit lift without allocation or recursion and
+matches a direct autocorrelation oracle exhaustively on small carriers.  Its
+q29 specialization stores each mod-eight coefficient state with a 256-bit
+fibre of reachable lift vectors.  On the retained root `3759256`, block 0
+compresses 14,850,319 full mod-16 states to 262,144 fibres (56.65x), finishes
+in 823,804,020,759 instructions and 234,059,873,050 cycles, and peaks at 150
+MiB RSS.  The four exact block images contain
+`262144/262144/129088/262144` correlation profiles.
+
+Observed power-of-two image sizes suggested affine closure, but exact closure
+testing falsified that stronger conjecture.  The weaker additive-hull theorem
+is useful: a bounded allocation-free Smith-style reducer over `Z/2^k`, checked
+exhaustively against brute force on all small two-generator systems, proves
+that all four images lie in cosets of the same order-`2^27` subgroup of
+`(Z/16)^8`.  Its pivots are `[1,1,1,1,1,1,2]`, so the quotient has order 32
+(one mod-16 and one mod-two invariant).  This is a compact 32x structural
+profile reduction, not a large certificate.  The current witness satisfies
+both invariants.  Eight further roots checked concurrently have the identical
+four hull sizes and all retain the target; their exact image sizes fall into
+the small family `262144`, `262143`, `129088`, and `258112`.  This supports a
+universal representation theorem but supplies no observed root pruning.
+
+The subgroup reducer's real loop uses a fixed `8 x 64` stack matrix, no
+recursion, and zero allocations.  Three separate nonmultiplexed 20-million-op
+counter runs record 14,863.210 instructions, 2,333.133 cycles, 2,166.067
+branches, 0.0858 branch misses, 0.0513 cache references, and 0.00152 cache
+misses per membership decision.  The malformed-input and exhaustive small
+brute-force oracles pass.
+
+The order-32 quotient is now explained rather than merely observed.  A new
+domain-neutral private kernel reconstructs any weighted binary orbit
+autocorrelation as a quadratic form by checking its values on basis vectors
+and basis pairs.  This is a bounded structural transcript (at most 64
+variables), not a truth-table certificate.  On the canonical order-29
+quartic classes it proves
+
+`sum_{C != 0} A_C(c) == sum_{C != 0} c_C (mod 2)`.
+
+The synthesized form has diagonal mask `0xfe` and no mixed terms.  The other
+quotient coordinate is the reindexed-double-sum identity
+
+`A_0 + 4 sum_{C != 0} A_C == (sum_i c_i)^2 (mod 16)`.
+
+Together they define a surjective map to `Z/16 x Z/2`, whose kernel has order
+`2^27`; the independently compiled subgroup has that same order and lies in
+the kernel, so equality follows.  For each fixed quotient witness, the six
+large-orbit families have nonzero-class parity one and the six singleton
+families parity zero, making the binary coordinate directly computable from
+the packed quotient digits.  An independent replay of the saved 768 common
+witnesses finds parity zero for all 768.  Thus the index-32 law is a genuine
+theorem and a reusable compression, but it cannot exclude any stored witness.
+It remains witness-local for authority because only one common quotient
+witness per root has been retained.
+
+Quadratic synthesis and replay are iterative and allocation-free.  Under
+CHOOM, separate 100%-enabled counter groups give 358,688 instructions / 66,053
+cycles / 14,552 branches / 72.3 branch misses / 1.08 cache references / 0.12
+cache misses per canonical q29 synthesis over 100,000 operations.  Replay uses
+94.0 instructions and 52.2 cycles per evaluation over 20 million operations.
+The cold synthesis is performed once per registered orbit semantics.
+
+A deterministic `2^20`-sample MITM then found an exact mod-16 four-block
+profile match among 1,016,529 distinct left sums.  Iterative backwards replay
+reconstructed all 24 orbit masks from the compressed fibres and rescored the
+result directly; its exact q29 residual is 44,544, so it is not a positive.
+A seeded 20,000,000-mutation descent reaches residual 24, worse than the
+existing residual-8 basin.  Sampled misses and hull membership carry no
+authority.  In particular, all of these measurements condition on one
+retained common quotient witness per root; no root exclusion follows until
+all quotient witnesses are covered or a witness-independent theorem is
+proved.
+
+## Scoped q29 profile endgames
+
+The sealed all-interface cache was recast as a reusable endgame DAG rather
+than a per-interface search tree.  Its 1,984,512 raw interfaces contain 1,498
+complement-canonical block domains, 39,522 canonical pair domains, and 248,064
+canonical four-block domains.  The still coarser slot-aggregate presentation
+has only 70 block signatures, 775 pair signatures, and 4,224 witnessed
+signature quadruples (132--176 per root).  The cold exact census costs
+12,153,380,115 instructions and 3,865,792,330 cycles at 100% counter coverage,
+with 357,820 KiB peak RSS.
+
+Compiling all 70 exact aggregate profile tables exposes a stronger structural
+normalization: their profile SHA-256 values fall into exactly four classes.
+The 4,224 ordered signature quadruples consequently become six ordered class
+quadruples and only two commutative four-sum problems, `A+C+2*B1` and
+`A+C+2*B5`.  This is currently exact-computational evidence over every
+witnessed aggregate signature, not yet a promoted structural theorem about
+the underlying bounded composition map.  The 70-table run uses
+8,100,137,466,341 instructions, 4,916,259,385,943 cycles, and 656,248 KiB peak
+RSS under CHOOM.  Its exact energy-class join eliminates none of the 4,224
+signature quadruples; all survive with 112,535,808 energy-class quadruples.
+Energy-only signature scoping is therefore a closed negative control.
+
+The original `B1` archetype retains the authenticated residual-eight basin.
+For the new `B5` archetype, private parallel profile evolution scores
+18,747,565,738 candidates and reaches the minimum nonzero L1 residual two,
+with sums `[524,522,523,523,523,523,523]`.  Its exact two-block repair misses,
+and its full difference lattice again has index 58.  The run uses
+1,861,476,196,981 instructions, 525,251,762,097 cycles, and 631,780 KiB peak
+RSS.  These are discovery results; neither a miss nor lattice membership has
+exclusion authority.
+
+A bounded exact local endgame now implements the zero-cost witness handoff:
+the hot table stores only 16-byte pair sums, and recovers pair indices by
+replay only after a hit.  It is iterative and allocation-free after workspace
+construction.  Around the residual-two state, the 8,192-per-block run checks
+67,108,864 left and 67,108,864 right pairs, thereby closing the exact finite
+`8192^4` neighbourhood, with no hit.  It uses 425,327,823,415 instructions,
+317,063,310,374 cycles, and 1,161,544 KiB peak RSS under CHOOM.  Almost every
+left sum is distinct (67,106,148), so pair-sum deduplication is not a useful
+compression.
+
+The remaining exact problem is consequently sharp but not yet launchable.
+The smaller full pair side has about 1.61 trillion pairs and would require
+roughly 25.8 TB at 16 bytes per sum; the middle/middle side can reach about
+2.44 trillion pairs.  Counter extrapolation suggests that raw pair generation
+is compute-plausible on sixteen cores, but the current in-memory sort is not,
+and no bounded low-memory exhaustive join has been established.  There is
+still no defensible under-one-day solve estimate or solve launch.
+
+Separately, the profile-difference index-58 observation now has a sealed
+private proof object.  It binds extractor identity/version, canonical field
+semantics, source table signatures/digests/counts, the authenticated seed,
+concrete basis origins, and the canonical correction.  Independent replay
+checks all 4,664,438 source differences, determinant/Cramer arithmetic, and
+the mod-2/mod-29 null functionals; forged source, basis, and correction values
+are rejected.  The issue-plus-verify adversarial harness uses
+2,193,661,575,959 instructions, 803,844,671,362 cycles, and 622,012 KiB peak
+RSS.  This theorem explains why linear congruences do not prune; it is not
+itself a solve reduction.
+
+## Mixed-CRT divisor-lattice refinement
+
+The exact two-coordinate q29 shard found a genuine aggregate-profile hit in
+the `A+C+2*B5` class, with profile indices
+`[79074,20395,329,567565]` and seven sums all equal to 523.  A sealed cached
+interface with root `3494740`, masks `[20,13,21,13]`, and digits
+`[2215340,1953396,1957340,1958308]` contains all four profiles.  Exact lifts
+and direct word replay give row sums `[260,261,261,261]` and q29 residual zero,
+but all 521 original PAF shifts fail, with L1 residual 13,888 and maximum
+absolute residual 388.  Thus q29-layer emptiness is false; this positive is not
+a Hadamard positive.
+
+The four profile targets have respectively `1,1,2,1` q29 coefficient-vector
+preimages.  More importantly, their first coefficient lifts have
+`2,325,681`, `1,110,122`, `55,573,110`, and `9,540,026` distinct allocation
+fibres before binary orbit orientation.  This closes the misleading idea that
+one q29 profile hit represents only its observed `2^38` orientation fibre.
+The bounded iterative decomposition DP now counts all allocation paths while
+retaining one independently replayed witness; it does not recurse.
+
+Inside the observed orientation fibre, a full-PAF meet-in-the-middle exactly
+excluded all `2^38` choices by factoring them into block tables of sizes
+`1024,256,1024,1024`.  Its first end-to-end measurement was dominated by two
+repeated quotient censuses.  A reusable authenticated context removes that
+error: one solve uses 614,420,431,704 instructions including cold setup, while
+four solves use 617,781,361,875, so each additional exact fibre costs about
+1.12031 billion instructions.  Cold setup is paid once per campaign.  The hot
+pair handoff is now one additive 64-bit fingerprint plus a packed state ID in
+16 bytes; hash collisions can add exact replay work but cannot remove a hit.
+Packed cyclic PAF agrees with a direct 522-position oracle and allocates zero.
+
+The mechanism behind the next reduction is the divisor lattice of 522.  For
+any divisor `d`, quotienting a binary word modulo `d` partitions the original
+PAF shifts.  Therefore a supplementary family with total row weight 1043 and
+nonzero PAF target 520 must have quotient defect
+`sum_b(A_b(0)-A_b(t)) = 523` at every nonzero `t in Z/d`.  A domain-neutral
+private extractor proves this by direct quotient compilation; an independent
+shift-partition oracle, the cyclic `(7,3,1)` difference set, malformed words,
+and allocation tests are green.
+
+A blind bounded divisor-lattice miner, given only the four authenticated
+522-bit words and the SDS parameters, tests divisors in increasing order.  It
+rediscovers 18 and 29 as exact controls and selects 58 as the first
+obstruction after seven candidates, with 57 mismatches and L1 residual 65,888.
+This is `FeatureOrigin::Evolved`; the modulus was not seeded.  Direct scouts
+also reject the observed selection at moduli 87, 174, and 261.  The typed q87
+cell extractor records the important negative control that q87 is not a
+function of the 42 q29 allocation counts alone: paired q29 orbits retain
+distinct mixed-CRT variants.
+
+An exact q58 endgame then enumerated all 3,328 binary orientations of the
+observed q29 fibre.  Every block table became empty before a four-block join:
+each orientation has some nonnegative block q58 defect above the entire budget
+523.  The run, including cold authentication, used 613,399,387,962
+instructions and 183,864,487,603 cycles.  This excludes that one allocation
+fibre structurally at q58.
+
+The complete split box above each q29 coefficient vector is now finite and
+measured.  The first four vectors have respectively
+`74,131,200`, `61,158,240`, `96,800,000`, and `48,648,600` splits; q58's
+nonnegative per-block budget retains `6,360,102`, `5,117,764`, `7,424,384`,
+and `4,158,676`.  This is a combined `21,244.27x = 2^14.375...` reduction
+before any four-block matching.  Canonical exact q58 profile counts are
+`3,159,035`, `2,510,099`, `3,643,376`, and `2,041,635`.  The second legitimate
+block-two preimage has `97,200,000` splits, `7,501,504` budget survivors, and
+`3,680,680` profiles.  These are coefficient-tuple-scoped counts, not a global
+q29-hit multiplicity bound.
+
+The q58 presentation admits a smaller structural form.  In CRT coordinates
+write the two lifts over each residue modulo 29 as their sum `c` and the
+even-minus-odd difference `y`; the latter includes the necessary `(-1)^r`
+twist when expressed by the representatives `r,r+29`.  If `Q_s` is the fixed
+q29 defect, `E=sum y_r^2`, and `Y_s=sum y_r y_{r+s}`, then the paired q58
+defects are
+
+    2 D_t     = Q_s + E - (-1)^t Y_s,
+    2 D_{t+29}= Q_s + E + (-1)^t Y_s.
+
+Consequently the four-block q58 equations are exactly one energy target
+`sum E=523` and seven signed autocorrelation targets `sum Y_s=0`.  A private
+`ResidualTuple<i16,7>` carrier therefore replaces fifteen unsigned defects;
+the canonical profile shrinks from 24 to 16 bytes.  Direct 58-cell replay and
+an exhaustive 256-state small split box independently verify the identity,
+including the CRT twist, and the hot extractor allocates zero.  The new census
+reproduces every survivor and deduplicated-profile count above while using
+451,160,170,990 instructions and 86,291,183,865 cycles, about 3.1x fewer than
+the former 15-defect compiler.  Two source-shape experiments were rejected:
+a runtime quadratic-form family used 564,293,750,462 instructions and
+77,029,181,503 branches, while an explicitly fused seven-update loop used
+600,461,317,478 instructions.  The compiler's fixed nested correlations remain
+the admitted hot kernel.
+
+The evolved feature DAG now accepts an earlier nonnegative terminal and
+blindly exact-checks every later anonymous coordinate or coordinate-pair sum
+from one preallocated workspace.  On both block-two preimages, energy alone,
+energy plus each of the seven signed residuals, and energy plus every one of
+the 21 signed residual-pair sums all reach their targets.  The earlier
+15-defect controls likewise found no exact energy/coordinate or
+energy/two-coordinate-sum obstruction, and sampled-propose/exact-verify affine
+modular evolution through modulus 32 found none in the canonical eight-field
+presentation.  These are explicit closed negative grammars, not exclusion
+claims.  Full-coordinate affine-hull evolution over small prime moduli is the
+next cheap terminal before any high-dimensional exact join.  There remains no
+defensible under-one-day global solve estimate or solve launch.
+
+### Reachable q58 profiles and Fourier-to-Gram promotion
+
+The first high-dimensional follow-up replaced the fifteen-defect carrier by
+the exact 16-byte anti-profile `(E,Y_1,...,Y_7)`.  A fixed-cap hash table now
+collects only profiles reached by the actual six-slot fine-orbit allocation
+DP, retaining the numerically least packed source state for every profile.
+The profile digest binds both the exact anti-profile and that canonical source
+state.  Duplicate insertion, extraction, and the repeated hot loop allocate
+zero times.  The four-coordinate shard loop is explicit and iterative; there
+is no search-tree recursion.
+
+A bounded exact complementary-energy join stores seven residual coordinates
+and two 20-bit profile identifiers in one 16-byte `u128` record.  The former
+16-bit source-ID contract was too small for the producer's explicit 786,432
+profile cap and is retired without increasing the hot record.  Four reachable
+block images are compiled in parallel.  A join hit is replayed first through
+the fine-orbit allocation DP and then by reconstructing all four binary rows
+on `Z/522Z` and directly checking the row weights and all 521 nonzero cyclic
+defects.  Quotient or evolved predicates cannot authorize a positive.
+
+The evolve bridge now exposes rounded q29 Fourier directions as
+**discovery-only** integer witness sources.  A sealed compiler independently
+derives each source's exact cyclic Gram-square coefficients; only that integer
+identity is used for pruning.  The 126 distinct compiled predicates reduce
+the four split-box profile sets from `[14936,33909,11264,31962]` after sparse
+Gram masks to `[4865,14646,3455,14268]`.  A direct real spectral-limit control
+retains `[4864,14642,3454,14264]`, only ten fewer profiles in total, so this
+finite integer family is already a near-complete description of the PSD cone
+on the measured presentation.  The control is discovery evidence, not proof
+authority.
+
+The cross-level q29/q58 energy adapter stores one 24-byte hot q29 profile plus
+a cold union of exact energy fibres.  Across the four concrete interfaces it
+reduces 400 energy classes to 199 and the raw profile-quartet mass from
+`3940644537105098645821635` to `1970787002602119036757093`, essentially twofold.
+An anonymous 336-feature modular grammar is completely saturated.  Adding 42
+integer interval features finds one exact `x0+x1` interval and removes seven
+tiny classes, but changes mass by only about `5.2e-9`; exact support promotion
+finds no further holes.  These controls teach the generic class--feature--cover--
+promotion loop how to rediscover the banked reduction while also showing that
+low-arity q29 arithmetic is not the missing large reduction.
+
+The literature suggestion from Perera--Kotsireas is retained only in this
+safe form.  Residue-class compression has the exact identity
+`DFT_m(comp(X))(j)=DFT_l(X)(dj)` for `l=md`; it does not justify the quoted
+generic `d^2(2l+2)` ceiling.  Under the Legendre PAF normalization stated in
+the supplied summary, summing all shifts gives squared zero-frequency sums
+totalling 2, not 4.  The accessible primary abstract supports a low-complexity
+odd-length DFT matrix evaluator, but not those two quoted formulas; the
+article's own introduction says Djokovic--Kotsireas compression still has to
+be integrated as future work before tackling the smallest open Legendre
+length.  The supplied “PSD compression upper bound theorem” is therefore not
+attributable to this paper.  C1016 uses Fourier directions only to propose
+exact integer Gram witnesses and keeps the already stronger exact
+quotient-defect theorem for compression.
+
+The original four-coordinate census confirms `94763,71771,503474,106098`
+exact q29-projection state visits and `40164,28143,83888,63188` q58-budget
+survivor visits.  It uses 121,602,565,379,154 instructions and
+25,549,977,170,316 cycles.  The dominant defect was structural: every one of
+roughly 112 million block-zero penultimate states scanned all 357 final-slot
+contributions even though q29 additivity determines the required final
+projection exactly.  Presorted projected contributions plus a fixed 512-slot
+complement-support hash reduce that penultimate image to 114,421 completable
+states and reproduce the 94,763/40,164 terminals exactly.  The optimized
+block-zero counter run uses 498,087,803,930 instructions and 119,019,364,138
+cycles.  The full four-worker compiler and exact join use
+2,613,369,529,680 instructions and 674,475,467,660 cycles; maximum join storage
+is 1,215,216 bytes.  The reachable anti-profile counts are
+`24275,20230,39977,36859`.
+
+The original pre-projection compiler subsequently completed independently in
+121,733,738,267,020 instructions and 25,583,330,077,471 cycles.  For all four
+blocks it reproduces those exact profile counts and all four 256-bit reachable
+profile digests.  Thus the projection-complement optimization changes the
+penultimate visits and peak state counts, but not the reachable tablebase.
+
+That join finds a q58 collision after 318,299 right-pair and 1,167 left-pair
+checks.  All four canonical fine allocations replay and have row weights
+`[260,261,261,261]`, but direct all-521-shift replay rejects the candidate with
+L1 residual 12,976 and maximum residual 384.  Divisor replay is exact through
+2, 3, 6, 9, 18, 29, and 58.  The first missing mixed sector is q87: all 86
+nonzero q87 shifts fail, with quotient L1 residual 58,464 and maximum residual
+1,062.  The q58 collision is discovery input, never positive authority.
+
+### q87 Eisenstein four-token endgame
+
+For each residue modulo 29, let `(a,b,c)` be its three lift counts modulo 87.
+The mixed order-three character has exact squared norm
+
+    e(a,b,c)=a^2+b^2+c^2-ab-bc-ca.
+
+The private q87 adapter computes each coordinate's exact triple sumset from
+the concrete six-slot fine-orbit interface and then deliberately forgets
+cross-coordinate correlations.  The zero coordinate has a singleton energy;
+at every nonzero coordinate all supported energies have one residue modulo
+nine.  Since nonzero q29 multiplier orbits have size four, every block energy
+therefore lies in one residue modulo 36.  Exact bounded convolution gives the
+four complete progressions
+
+    E=(101,93,24,161)+36(n0,n1,n2,n3).
+
+The mixed-character Parseval equation is `sum E=523`, hence exactly
+`n0+n1+n2+n3=4`.  The entire marginal q87 layer is the 35 weak compositions
+of four into four parts, down from 22,176 raw energy quartets: a `633.6x`
+reduction and a literal four-token endgame state.
+
+A sealed private proof object binds the extractor identity/version, concrete
+interfaces, q29 coefficients, exact local supports, source digest, progression
+bases, step 36, and total defect four.  Verification independently recompiles
+the fine-orbit sumsets; forged source digests and counts are rejected.  A
+direct fine-orbit word supplies an independent positive support oracle.  No
+large certificate or feature name is trusted.
+
+An exact correlation-preserving lift compiler now tests those five marginal
+energies per block against the same concrete six-slot source interface.  It
+uses a bounded, iterative, three-plus-three MITM over a collision-free 72-bit
+coefficient state and an exact 40-bit q29 projection key.  The partition is
+chosen canonically to balance the six measured slot cardinalities; all kernel
+vectors are presized and the pair loop allocates nothing.  Exhaustive replay
+proves that block zero cannot attain its base energy, so `n0>=1`, and that
+block two can attain only defects `n2 in {0,3,4}`.  Blocks one and three attain
+all five requested defects.  Together with `sum n_i=4`, these facts leave
+exactly 11 energy quartets, not 35.  The block-two exhaustive join, the largest
+one, checks 228,899,520 exact projection-compatible pairs in 19,337,656,833
+cycles with 222,060,800 bytes of bounded workspace.
+
+The sealed exact-lift proof recompiles all four joins and records allowed masks
+`[30,31,25,31]`; it binds the extractor semantics and concrete source digest
+and derives the count 11 internally.  Its profiled issuance uses
+86,976,847,316 instructions and 25,353,753,804 cycles at 100% counter
+coverage.  This is a small recomputable proof object, not a retained state
+certificate.  The remaining proof-synthesis task is to mine the tiny set of
+reachable local-energy vectors for a simpler structural identity explaining
+the exclusions, then replace the exhaustive compiler when that identity has
+an independent source-space derivation.
+
+The generic evolve bridge was extended in response to a real failure.  Its
+first 33-node training tree was exact but failed independent holdout.  A new
+theorem-agnostic constant-on-positive conjunction proposer now precedes a
+complex tree.  Given all 15 anonymously permuted nonempty subset sums, it
+selects only `f014==523`; Ergodis retains one perfect evolved candidate on
+11,176 training rows and the unchanged plan is perfect on 11,000 disjoint
+holdout rows.  The run uses 922,903,278 instructions and 198,460,273 cycles at
+100% counter coverage.  The field remains diagnostic; authority comes only
+from the sealed Eisenstein compiler and independent replay.
+
+The next progressive-blindness round expands the complete block-two marginal
+local-energy domain (432 vectors) and labels it by exact q174-source
+reachability: 409 vectors occur and 23 do not.  A generic sparse-exception DNF
+fits the training exceptions but fails the disjoint holdout, so that trace is
+retained as rejected rather than promoted.  A new theorem-agnostic existential
+feature projector then evaluates all 510 anonymously permuted nonempty subset
+sums of raw coordinate energies and within-coordinate ranks.  It discovers a
+scoped support gap `f110 != 38`, and Ergodis evolves the one-literal predicate
+with perfect deterministic projected replay in 10,620,918 cycles.  Decoding
+after discovery identifies `f110` as q29 coordinates 1--6: the forbidden value
+would require energy-zero triples `(3,3,3)` at coordinates 1,2,3,5 and
+energy-19 permutations of `(1,3,6)` at both coordinates 4 and 6.  This is a
+valid additional per-root reduction, but it is not the earlier defect-1/2
+exclusion.  The full-energy feature is `f248`; its exact attainable support
+omits 15 and 24, precisely those two defects.  The tie demonstrates that local
+pruning score alone is the wrong scope objective: candidate projections must
+be retained as a Pareto set and scored through their known downstream theorem
+consumers.
+
+Complete exact local-vector censuses for the four blocks retain respectively
+304, 630, 409, and 262 vectors.  Their joins visit 27,354,320; 19,940,464;
+228,899,520; and 26,208,768 q29-compatible pairs.  These compact domains are
+the first reusable endgame tables for automatically composing earlier
+features into later necessary supports.
+
+All results in these subsections remain uncommitted private working evidence.
+
+## Public-core enhancement ledger (do not implement in C1016)
+
+These are reusable Ergodis capabilities encountered here that would belong in
+public core. C1016 records them only and uses private adapters; it must not
+modify core.
+
+- **Relational evolution grammar.** Mutation can substitute fields and
+  constants in an existing program, but it does not introduce field-to-field
+  comparisons or arithmetic/set combinators. The private workaround seeds
+  `base_sumset_pairs != hole_covered_pairs` explicitly and exports derived
+  semantic fields. The fourteen-corpus blind harness confirms the same
+  boundary: its generic decision-tree proposer can discover which supplied
+  coordinates matter, but current evolution cannot grow the arithmetic that
+  derives those coordinates from raw orbit observations. The private
+  pairwise-difference, bounded subset-sum, zero-conjunction, and
+  constant-on-positive conjunction proposers close the first relational layer
+  without touching core; the q87 holdout failure demonstrates why invariant
+  preference must precede a complex exact training tree.  General bounded
+  typed arithmetic-expression growth remains ledgered here.
+- **Counterexample-guided campaign refinement.** A campaign presentation is
+  frozen, so an evolve--exact-oracle loop must start a new private campaign to
+  append the smallest obstruction. A reusable core design would need a new
+  provenance-bound presentation/version transition, never in-place mutation.
+- **Typed set-theorem templates.** Interval/residue/hole identities and their
+  zero-allocation sum-witness kernels are presently private. A future generic
+  registry would need sealed extractor identity, canonical set semantics,
+  independent reconstruction, and fail-closed resource bounds before it could
+  issue necessary authority.
+- **Persistent typed feature DAG and contextual scopes.** Successful evolved
+  expressions should become hashed, costed terminals for later campaigns,
+  paired with a learned scope predicate and explicit `evolved`, `human-fed`,
+  or `theorem-derived` provenance.  The private C1016 layer now learns maximal
+  128-bit scope masks, reuses serialized features, and evaluates candidates
+  without hot-loop allocation.  A public design would additionally need
+  canonical typed expression semantics, presentation-version transitions,
+  held-out/direct-oracle replay, and sealed promotion rules.  Keep this private
+  until those authority boundaries exist.
+- **Existential feature projection and downstream-aware scope learning.** A
+  complete reachable domain can be projected through every earlier feature to
+  synthesize its exact attainable-value support without a theorem-specific
+  adapter.  The private projector and sparse-exception proposer now exercise
+  that loop.  The q87 `f110`/`f248` tie shows that maximizing local pruning is
+  insufficient: a reusable implementation should preserve a Pareto frontier
+  of support size, evaluation cost, scope size, and compatibility with known
+  downstream constraints, then let later joins select the useful mask.
+
+## Exact q174 sufficient-state hierarchy and evolved q87 endgame
+
+The first concrete g41 root now has an exact common-refinement tablebase at
+`lcm(58,87)=174`. Forty-six multiplier-orbit coefficient lanes fit in a
+92-bit packed state. A balanced iterative three-plus-three MITM enforces the
+q29 coefficients, memoizes each q58 anti-profile once, and extracts scoped q87
+features without allocation in either hot hash loop. Independent oracles
+compare the packed state with direct q29, q58, and q87 projections and recover
+source orbit masks before any original-space claim.
+
+A flat scoped-profile join was the wrong abstraction. The same exact data are
+now represented hierarchically as a canonical q58 group followed by its q87
+fibre. For the four concrete blocks, 19,335,289 scoped profiles collapse to
+only 24,275; 20,230; 39,977; and 36,859 q58 groups. The grouped join visits
+318,299 right group pairs, 6,666 left group pairs, three complementary group
+quartets before its first collision, and only 487,098 q87 fibre pairs. A
+complete scan finds exactly four broad profile quartets. The compile, join,
+q174 allocation recovery, and independent all-521 replay retire
+813,523,947,740 cycles and 3,190,249,043,907 instructions at 100% counter
+coverage; observed RSS is 1.52 GiB. All four stored representatives fail
+direct replay, but representative failure is explicitly non-authoritative.
+
+The exact second-stage lift rescans each source block once and enumerates every
+q174 state behind those four target profiles. It finds only 192, 224, 256, and
+56 unique states in total; individual fibres contain 8--128 states. A
+collision-free 43-coordinate q87 pair key then exhausts all four target
+quartets with 4,096 right entries and 28,672 left-pair checks. No full-q87
+lift exists. The endgame itself costs 18,301,122 cycles. Negative authority
+comes from the exhaustive source rescan plus this exact lift, never from a
+retained representative or the JSON discovery presentation.
+
+Progressive scope evolution over the fifteen multiplier/conjugacy shift
+classes exposed a structural defect in the original scope: shifts 4 and 10
+belong to the same class, so the fourth coordinate was identically redundant.
+An adversarial scoped-complement regression caught and rejected an initial
+false result that complemented unselected coordinates to 523. After the fix,
+ten single new classes independently empty all four exact target fibres;
+classes 14 and 29 do not. Deterministic lowest-class selection chooses shift
+1 as the later feature. Keeping `[4,6,33]` in the broad table and shift 1 in
+the exact endgame is materially better than flattening `[1,4,6,33]`: block 2
+exceeds the 12,582,912-profile budget in the flat representation, whereas the
+hierarchy stays bounded.
+
+Removing redundant shift 10 preserves every profile count, group count,
+fibre maximum, and all four broad matches exactly, an independent differential
+oracle. It reduces the complete broad compile/join from 810,726,987,040 to
+707,670,323,573 cycles (12.7%) and shrinks profile records from 26 to 24 bytes
+and q87 pair records from 20 to 16 bytes. Rebound exact target-fibre issuance
+reproduces the same state counts and drops from 1,420,128,558,877 to
+1,155,355,040,441 cycles. The one-coordinate scope evolution itself costs
+197,488,267 cycles. Hardware counters are nonmultiplexed and all runs are
+CHOOM-protected.
+
+The scope evaluator is now connected back to Ergodis rather than remaining a
+hand-written ranking endpoint. A compiled context reuses all 43 exact defect
+vectors across candidate masks, reducing the twelve-scope evaluation from
+197,488,267 to 69,414,617 cycles. A generic adapter presents the twelve
+candidate classes as a source-bound opaque one-hot corpus: ten exact positive
+scopes and two negatives, with no shift number, theorem name, mask, or target
+semantics visible to the campaign. The existing blind Ergodis harness builds a
+five-node depth-two tree, evolves 974 candidates, and retains 19 perfect plans
+in 63,865,983 cycles. Its best plan tests opaque fields `f001` and `f010` for
+zero. Only after evolution does the decoder identify those fields as classes
+14 and 29, exactly the two insufficient singleton scopes. This is
+discovery-only plan evidence; exact target-fibre replay remains the authority.
+
+This is the desired reusable mechanism: an earlier exact feature becomes an
+outer sufficient-state table; later features are evolved against only the
+small lifted fibres; successful scopes are replayed by typed source
+extractors; and expensive high-entropy coordinates stay out of the broad key.
+The first proposed scale-up bound through all 1,498 canonical block
+specifications was rejected during semantic replay: `(mask,digits)` does not
+uniquely determine the q29 coefficient target. The q174 mechanism is sound
+for a bound target fibre, but it cannot be charged once per coarse block
+specification. Global scale-up must first enumerate the exact q29 profile
+hits and retain their source-target provenance.
+
+An exact two-prime 2D NTT/CRT census now closes the memory question for that
+q29 layer without generating any pair keys. The two global aggregate joins
+share the `A+C` side. Across projection coordinates 0 and 1, `A+C` has
+259,134,857,721 relevant raw pairs in 175,834 nonempty shards; its maximum
+raw shard is 12,790,280 pairs. `B1+B1` has 84,715,482,675 raw pairs and a
+6,154,373 maximum, while `B5+B5` has 346,688,396,767 and an 18,340,973
+maximum. Only `A+C` is materialized, so the existing fixed 16,777,216-entry
+u64 workspace (128 MiB) is sufficient for every shard; both B sides stream.
+The census fails closed if the two CRT primes cannot represent every possible
+pair count, uses 52,528,256 bytes of temporary workspace, and has independent
+small cyclic-convolution and NTT round-trip oracles. The three-convolution run
+retires 330,030,461,003 cycles and 505,872,623,574 instructions at 100%
+counter coverage under CHOOM.
+
+Maximum-shard kernel probes also show that the remaining five coordinate
+bounds are strong: the 12,790,280-pair maximum `A+C` shard emits 902,984
+stored keys, and the 18,340,973-pair maximum `B5+B5` shard emits 1,202,692
+streamed probes. Repeated in-process calibration, excluding the shared cold
+tablebase cost by counter subtraction, places the current hot work at roughly
+80--92 instructions per raw pair plus left-key sorting. The complete two-join
+raw envelope is 690,538,737,163 pair visits, with the left sort paid once if
+both right archetypes share a campaign adapter. This makes the exact q29
+profile layer plausibly sub-hour on sixteen workers, but is not yet an
+end-to-end solve bound: the number and source multiplicity of exact profile
+hits passed into the q174 lift is still unmeasured.
+
+The dual-archetype campaign now measures that layer exactly. It sorts each
+`A+C` shard once, streams both `B1+B1` and `B5+B5`, retains duplicate left
+keys so quartet multiplicity is exact, and directly replays one source-index
+tuple for every nonempty archetype. The complete 274,576-shard run emits
+118,045,633,868 bounded `A+C` keys, probes 23,820,889,456 `B1` and
+143,053,650,607 `B5` pairs after all seven coordinate bounds, and finds
+149,884 plus 2,205,896 exact aggregate-profile quartets across 29,416 and
+62,778 hit shards. It retires 86,994,802,819,984 cycles and
+146,612,417,354,627 instructions at 100% counter coverage on sixteen
+CHOOM-protected workers. This is an exact aggregate-superset count, not source
+exclusion authority.
+
+Quartets factor through a smaller sufficient interface: their exact
+seven-coordinate `A+C` pair sum. A fixed-cap second pass tags whether each
+pair target is complemented by `B1`, `B5`, or both, then sorts and deduplicates
+within its projection shard. A representative 4,096-shard band reduces 37,186
+quartets to 18,176 pair targets (2.0469x); the known B5-hit shard reduces 66 to
+32. Thus pair targeting mostly removes ordered-pair multiplicity, not the
+missing massive theorem, but it is the right provenance boundary for the 119
+aggregate-signature A/C and 656 aggregate-signature B/D pair domains. The
+exact sealed source graph is larger: 18,608 commutative A/C nodes, 20,914 B/D
+nodes, and 124,140 witnessed edges after canonical complementation and pair
+symmetry. Every edge retains an original witness index/root for replay. The
+cache format stores one
+canonical 16-byte target, archetype bits, extractor/version semantics, all
+four aggregate signatures/counts/digests, and a payload digest. Independent
+readback recomputes all four aggregate tables and rejects source or payload
+forgery. Aggregate relaxation remains explicitly discovery-only; q174 source
+membership and replay are still required.
+
+Exact mask evolution over the complete 1,152,732-target cache identifies a
+near-sufficient state. No one-, two-, or three-coordinate presentation
+separates the B1 and B5 target classes. Four coordinates leave at least 138
+shared projected states. Exactly seven five-coordinate masks have disjoint
+class supports; each is injective on all 74,781 B1 targets and collapses the
+1,077,951 B5 targets to 1,077,941 states, only ten collisions. The seven
+omitted pairs are the cycle `0-2-5-1-4-6-3-0`. A generic opaque
+mask-membership corpus exposes only seven permuted membership bits and 21
+exact labels; the existing Ergodis harness builds a 21-node depth-five tree
+and evolution tests 831 candidates, retaining 21 perfect plans.
+
+A domain-neutral complement-cycle synthesizer converts the seven successful
+masks into a compact graph proof and rejects missing/forged edges. An
+independent q29 verifier then explains the graph structurally: it validates
+that the seven four-element cosets partition all 28 nonzero residues and
+synthesizes the least unit whose class action matches the cycle. The unit is
+3, with action `[2,4,5,0,6,1,3]`. This proves the cycle mechanism rather than
+storing seven unrelated masks. It does not yet prove B1/B5 support
+disjointness without the exact cache.
+
+The mechanism feeds back into the kernel. Sharding on evolved cycle edge
+coordinates `(0,2)` leaves the five-coordinate near-sufficient state in the
+hot key. Relative to the old `(0,1)` control, exact NTT census raw pair counts
+fall from 259,134,857,721 to 255,341,524,444 for A+C, from 84,715,482,675 to
+81,573,412,435 for B1, and from 346,688,396,767 to 340,313,944,053 for B5.
+The maximum materialized A+C shard falls from 12,790,280 to 11,933,166, so
+the fixed 128 MiB per-worker bound remains sufficient. The campaign adapter
+now supports the evolved cycle edges generically and defaults to `(0,2)`.
+
+A second, independently sampled `B1` aggregate quartet now exercises the same
+q174 hierarchy. Its source interface is root 348244 with masks
+`[20,1,21,1]`, digits `[2215340,2203361,1957347,2218467]`, and q29 fibre
+dimensions `[2,4,10,8]`. The old cardinality-only three-plus-three partition
+failed closed on block zero at 16,777,217 retained states. A bounded
+deterministic search over all ten partitions finds `[0,2,5] | [1,3,4]` and
+compiles 4,281,174 exact joint profiles in 84,022,034,559 cycles and
+237,010,454,775 instructions with a 1.268 GB reported workspace. A synthetic
+independent regression reproduces the mechanism: equal raw products can have
+different retained sizes because the bound q29 target prunes partial sums.
+
+The complete four-block target-fibre run finds 23 broad scoped profile
+quartets. Their 59 distinct per-block fibres contain only 8--192 packed q174
+states apiece. Direct 43-class q87 replay excludes all 23 quartets, so this
+particular B1 q29 quartet is exactly empty. The first run retired
+743,645,378,397 cycles and 2,846,592,381,146 instructions. Prebinding the
+small target-q87 key before q58 extraction preserves an identical digest of
+all target states and reduces the run to 732,057,152,815 cycles and
+2,814,834,899,951 instructions; only 27,424,392 of 471,402,623 q29-compatible
+pairs reach q58 extraction. Side compilation and q87 extraction, rather than
+q58 cache lookup, now dominate.
+
+Scope evolution is genuinely root-local. For the earlier B5 fibre any one of
+the independent q87 classes was sufficient. For this B1 fibre no singleton
+works, but 28 of the 66 two-class masks exclude every lift. The generic
+corpus adapter was extended from singleton one-hot candidates to opaque
+fixed-width masks. On 66 source-permuted rows, the blind Ergodis harness
+builds an exact 29-node depth-six tree; evolution tests 874 candidates and
+retains 21 perfect plans. The exact full-state evaluator remains the
+authority. This is a concrete test of learned per-root feature scope rather
+than a globally hard-coded shift.
+
+The current B1-only extrapolation is not yet a launch bound. Charging the
+measured target-fibre compiler independently to all 149,884 aggregate B1
+quartets gives roughly 27 idealized days on sixteen 3 GHz workers, before the
+larger B5 class. The next required sufficient-state reduction is therefore
+cross-hit reuse: measure the distinct participating block/profile fibres and
+compile pair-level q174 transposition tables rather than paying once per
+aggregate quartet. No final solve has been launched.
+
+That extrapolation covers only the tested aggregate-signature edge, not the
+entire g41 shard. Recompiling the sealed 1,984,512-interface cache gives 70
+aggregate signatures, 119 commutative A/C pair nodes, 656 commutative B/D pair
+nodes, and 2,136 incident pair edges. The older count of 4,224 aggregate
+four-block domains retained ordering within the two interchangeable block
+pairs. A new exact aggregate-pair graph removes that ordering, binds every edge
+to a representative source witness/root, and retires 2,994,719,953 cycles and
+10,491,924,951 instructions. This is the appropriate CGT-like transposition
+table at the signature-labelled level: q29 pair support can be compiled once
+per node and propagated only across its incident edges. The profile-class and
+multiset theorems below collapse this layer further, but q174 source states
+remain node/root specific. A global runtime estimate therefore still requires
+q174 pair-state reuse; until then the honest estimate remains above one day
+and no solve launch is justified.
+
+The exact all-signature census reveals a much smaller profile quotient than
+the node labels suggest. Although the 70 signatures generate 89,681,668
+labelled profiles in total, there are only four distinct immutable profile
+tables: 1,788,865 profiles for the three `s0=8` signatures, 901,419 for the
+three `s0=9` signatures, 987,077 for all 32 `s0 in {1,17}` signatures, and
+1,563,261 for all 32 `s0 in {5,13}` signatures. Retaining all four packed
+16-byte tables costs only 83,849,952 bytes. The coefficient-state counts do
+vary within these classes, so this is not the false claim that the raw
+Minkowski images are equal; equality appears only after the exact defect
+profile map and the `<=523` filter. An opaque four-field, 70-row corpus labels
+only by exact table digest. The generic blind harness independently recovers
+all four one-versus-rest classes and evolution retains 36--119 perfect plans
+after 760--995 candidates per class. These are discovery facts pending a
+short transport/flow proof; digest equality alone is not being promoted as
+proof authority.
+
+The census also exposes why digest equality is plausible structurally. After
+the `<=523` filter, every A, B1, and B5 signature has exactly one coefficient
+state per profile: respectively 1,788,865, 987,077, and 1,563,261 admissible
+states, despite widely varying pre-filter state counts. Every C signature has
+1,802,837 admissible states for 901,419 profiles, exactly
+`2*901,419-1`: the fibres are the coefficient-complement pairs
+`c <-> 18-c`, with the all-nine vector as their single fixed point. This
+suggests a two-part compact proof target: fixed-zero defect profiles recover
+the bounded coefficient vector up to explicit complement, and the aggregate
+group-decomposition image saturates that admissible fixed-zero domain. A
+fixed-zero phase-fibre checker is now the independent oracle; exhaustive
+digest equality remains diagnostic until those two structural statements are
+sealed.
+
+The fixed-zero oracle confirms both statements more strongly. For `(row,
+c0)=(260,8)`, all 24,072,133 row-compatible coefficient vectors reduce to
+1,788,865 admissible singleton fibres. `(261,1)` reduces 23,863,182 vectors to
+987,077 singleton fibres, and `(261,5)` reduces 24,019,737 to 1,563,261
+singleton fibres. `(261,9)` reduces 24,072,133 vectors to 1,802,837 admissible
+states: one singleton and 901,418 exact complement pairs. The four unique
+profile counts and digests exactly equal the aggregate class tables. More
+decisively, every aggregate signature's admissible-state count from the
+all-signature census equals the corresponding entire fixed-zero admissible
+domain. The aggregate image is structurally a subset of that domain; equal
+finite cardinality therefore proves saturation. After the exact defect bound,
+the other three aggregate-signature coordinates impose no restriction. The
+four independent fixed-zero audits retire 78,564,717,823 cycles and
+391,313,223,525 instructions at 100% coverage with 100,690,732 bytes of fixed
+workspace apiece. The remaining authority task is packaging the all-signature
+count comparison behind the sealed typed source extractor, not discovering
+another reduction.
+
+That packaging is now complete for the first extractor version. It rereads
+and semantically replays the sealed 1,984,512-interface cache, derives all 70
+signatures, independently recompiles every aggregate coefficient image,
+recomputes all four fixed-zero fibre domains, and checks cardinality plus
+profile digest under canonical row/zero/complement semantics. It verifies
+class multiplicities `3,32,32,3` and issues only
+`exact-profile-table-substitution-only` authority; it explicitly cannot
+exclude a root or issue a final certificate. The proof compilation retires
+5,808,895,345,892 cycles and 8,489,348,915,892 instructions at 100% counter
+coverage. A negative semantic-binding test rejects correct class names with a
+wrong admissible count, digest, or zero coefficient. Extractor v2 makes the
+class summary fields self-describing and adds a checked group-sum inclusion
+invariant without scanning every final state.
+
+Classifying every edge of the sealed graph by those four exact tables first
+appears to leave four pairings: `A+C <-> B1+B1` (364 edges), `A+C <-> B5+B5`
+(364), `A+B1 <-> B1+C` (704), and `A+B5 <-> B5+C` (704). Pairing is not part
+of the theorem, however: the target is the coordinatewise commutative sum of
+all four profiles. Canonicalizing each edge as a sorted four-class multiset
+collapses the first and third pairings to `{A,C,B1,B1}` and the second and
+fourth to `{A,C,B5,B5}`. A compact typed proof rebuilds the graph from the
+sealed witness cache and obtains exactly 1,068 edges of each multiset, with
+364 homogeneous and 704 crossed presentations apiece. It retires
+3,148,945,735 cycles and 10,828,676,658 instructions at 100% counter coverage.
+Thus the two homogeneous campaigns do cover the global profile-class layer;
+the heterogeneous adapter is retained only as an alternative MITM partition.
+
+This reduction was also fed back through the blind discovery path. Digest
+identity, rather than A/B/C names, assigns four opaque class integers. Each of
+the 2,136 graph edges is replicated with four independent permutations of its
+four class fields, and the exact sorted multiset supplies the binary label.
+On all 8,544 rows the generic harness builds a 13-node depth-four tree;
+evolution tests 955 candidates and retains 94 perfect plans. Positional pair
+information therefore cannot explain the learned rule.
+
+The first generic grammar improvement makes this lesson reusable without a
+q29 adapter. An allocation-free private expander accepts an anonymous scalar
+tuple and appends only its checked sum, sum of squares, minimum, and maximum;
+it knows no class labels, target, mask, or theorem. The same 8,544 rows are
+regenerated with independently permuted raw positions and one source-bound
+opaque permutation of all eight fields. The blind proposer then collapses
+from 13 nodes/depth four to three nodes/depth one. Evolution tests 951 plans,
+retains 88 exact plans, and independently finds an exact predicate equivalent
+to the four-class sum split (`4` versus `8`). This retires one bespoke adapter
+class: later unordered scalar interfaces can expose the same symmetric basis
+automatically. The v2 blind run retires 854,999,283 cycles and 2,459,131,884
+instructions at 100% counter coverage; the expander's hot API has a zero-
+allocation oracle and fails closed on width or arithmetic overflow.
+
+The Queens TT lessons determine the storage policy rather than a uniform RAM
+cap. Aggregate A/C node degrees are 8 (64 nodes), 16 (32), 24 (16), 72 (3),
+or 128 (4); B/D degrees are 1 (328), 2 (200), 8 (80), or 16 (48). Expensive
+complete tables with high reuse should be retained; degree-one B/D nodes can
+stream once; and an exact edge search should materialize each A/C shard once
+then probe every incident B/D neighbor. This preserves cross-edge
+transpositions, unlike worker-local sharding. Tables are immutable and
+source-bound, counters stay thread-local, and no lossy fingerprint hit may
+authorize exclusion. The RAM budget may therefore rise above the ordinary
+1--2 GB worker envelope when measured table residency avoids repeated q29 or
+q174 compilation. The controlling comparison is instructions avoided per
+resident byte, not nominal table size: hot multiply reused sufficient states
+may consume several GiB, while cold degree-one records still stream even when
+RAM is available. Every layout retains an explicit hard cap with no swap
+fallback.
+
+An exact seven-convolution NTT/CRT census chooses the physical pair partition
+without changing that theorem. On evolved coordinates `(0,2)`, the shared
+homogeneous envelope is 255,341,524,444 `A+C`, 81,573,412,435 `B1+B1`, and
+340,313,944,053 `B5+B5` raw two-coordinate pairs, or 677,228,880,932 pair
+visits with `A+C` paid once. The crossed B1 partition is slightly cheaper in
+isolation, but forfeits that shared pass; the combined crossed strategy is
+worse. The census retires 432,022,302,869 cycles and 560,362,064,111
+instructions at 100% counter coverage. Its maximum raw B5 cell exceeds 16M,
+but the retained-pair workspace is populated only after all five remaining
+coordinate bounds, so raw NTT cardinality is not the workspace requirement.
+
+The next direct application is in the participation census. A two-sided
+control retains two fixed-cap 16-byte pair tables, sorts both, and merges
+equal-key runs once, doubling the nominal workspace from 256 to 512 MiB per
+worker. A reuse-only napkin initially favored retaining `A+C` and streaming
+the cold B+B records, but that omitted the latency of two binary searches per
+right record. Both paths are iterative and allocation-free in the hot loop,
+and exact ordered-product, heterogeneous-role, endpoint-bitset, and allocation
+oracles agree. The global coverage proof justifies the two shared homogeneous
+joins; the cross adapter remains available for counterfactual partition
+profiling.
+
+The retained-both-sides control has now closed with exact quartet counts
+`[149884,2205896]` and participating-profile counts
+`[6462,38892,135471,90503]`. It retires 85,496,664,336,246 cycles and
+182,643,178,172,958 instructions at 100% coverage with a reported
+537,526,008-byte per-worker cap. This is the independent endpoint-bitset
+oracle for later accelerators. Its legacy static provenance sentence says the
+right sides stream even though the workspace size and invoked kernel identify
+the retained control; that metadata error prevents promoting the artifact as
+proof authority, but does not affect its role as a counter-measured exact
+control. The separately bound streaming run remains in progress.
+
+The streaming run has now closed with byte-identical participation digests and
+the same quartet totals. It retires 128,070,942,400,682 cycles and
+168,033,352,053,288 instructions with a 269,090,552-byte per-worker cap.
+Streaming saves 8.0% instructions but costs 49.8% more cycles: random
+partition-point probes are latency-bound, while sorting the cold table enables
+a sequential equal-run merge. The retained layout is therefore production for
+this phase. Sixteen maximum-cap workers require about 8.6 GiB, so thread count
+is selected once from the live explicit RAM gate; no swap fallback is allowed.
+
+The first full participation attempt was deliberately stopped after an audit
+found a scheduler boundary race: with several workers, testing `shard == end`
+allows a lagging worker to fetch `end+1` after a peer has fetched and exited on
+`end`. Such a run cannot close with exclusion authority. Both private
+participation schedulers now reject every `shard >= end`; the invalid partial
+artifact is not a result. The corrected two-sided run is source-bound
+separately.
+
+Saturation enables the zero-cost witness handoff described in the C985 memo.
+A fixed-zero inverse table maps each participating profile to one coefficient
+vector, or to the explicit two-element C complement fibre. A new direct source
+lift accepts that coefficient vector and runs only the bounded six-slot count
+reconstruction; it does not compile or scan the 20--24 million-state aggregate
+image. The workspace is compiled once per block specification, owns the orbit
+inventory and all DP buffers, and the tested hot API allocates zero bytes.
+
+On the authenticated B1 quartet in `g41-q174-b1-v2`, all four coefficient
+vectors reconstruct exact source orbit masks. The complete four-block handoff
+retires 10,072,151 cycles and 25,072,174 instructions at 100% coverage. Each
+block examines exactly one coefficient state; fixed workspace sizes are only
+2,419,200, 2,419,200, 3,276,800, and 3,225,600 bytes. Direct orbit and defect
+replay is internal to the typed extractor. This retires full q29 coefficient-
+image compilation from the per-profile lift cost; q58/q87 source refinement
+can now receive a coefficient witness directly. The returned orbit masks are
+one deterministic member of a fibre that can contain millions of
+decompositions; they are valid positive witnesses but must never stand in for
+the whole fibre when q58/q87 is used to exclude a source state. The next
+quotient must propagate a sufficient statistic of every decomposition, not
+rescore this arbitrary representative.
+
+A source-bound reuse census identifies the next possible handoff TT without
+assuming it is profitable. The 1,498 canonical block specifications contain
+only 958 distinct digit vectors, with at most four source masks sharing one
+vector. The expensive iterative decomposition is keyed by the digit vector and
+the seven nonzero coefficients; the six-bit mask enters only the small-orbit
+replay. A compact decomposition TT can therefore avoid at most the repeated
+portion across those 1.563 specifications per digit vector on average, while
+every hit still receives mask-specific replay. The census costs
+5,504,432,399 cycles and 16,173,230,077 instructions at 100% coverage. This is
+not enough reuse to allocate the TT blindly: participation cardinalities will
+determine its resident-byte cost and the retained-versus-recompute counter
+model.
+
+The refined census partitions those specifications exactly as 248 A, 648 B1,
+528 B5, and 74 C specifications (38 canonical aggregate signatures total).
+Together with the independent participation counts, a blind Cartesian direct
+lift has an exact class-Cartesian envelope of 111,727,724 `(spec,
+coefficient)` replays. All 90,503 participating C profiles have both members of
+their complement fibre, giving 181,006 C coefficient states. Scheduling by
+digit vector is preferable to a giant hash table at this layer: reconstruct
+once for `(digits, seven nonzero coefficients)`, then replay the at-most-four
+source masks. The sealed 48-byte decomposition type now implements that split;
+both construction and replay are zero-allocation, a full nonzero-coefficient
+identity check prevents misuse, and a test rebinds one decomposition to two
+different zero/mask choices with exact orbit replay.
+
+The rebound work model gives 112, 440, 332, and 74 distinct digit vectors in
+A, B1, B5, and C. Grouped scheduling therefore needs exactly 76,207,040 DP
+decompositions before any source-edge/root scoping, a 31.79% reduction from
+the 111,727,724 raw replays, while retaining only one 48-byte result at a time.
+The cold model recompiles all profile/fibre authorities and replays the sealed
+witness cache, costing 493,063,340,472 cycles and 867,602,891,042 instructions
+at 100% coverage; those counters are proof/model compilation, not projected
+solve work. The latest lightweight signature census itself retires
+5,260,369,803 cycles and 16,173,772,066 instructions. A resident exact TT
+remains available if q174/root ordering prevents grouping, and must be sized
+from distinct joint keys rather than the 111.7-million raw-call envelope.
+
+The first real handoff-kernel RAM trade is positive. The original iterative DP
+zeroed its full predecessor and two count arrays on every coefficient query,
+although the B1 fixture reaches only 3,829 states. A bounded touched-index list
+now sparsely resets predecessors and the two existing frontier vectors reset
+only their own count cells. The hot structs remain contiguous and fixed-cap;
+the loop allocates zero bytes. Workspace for the measured block rises from
+about 2.42 MiB to 4.35 MiB. Four interleaved 10,000-query A/B rounds reproduce
+all 10,000 exact hits in each mode. Sparse reset retires a stable 48.853 billion
+instructions versus 49.688 billion for full reset (1.68% less); it wins cycles
+in three of four rounds, reducing median cycles by 12.3% and aggregate cycles
+by 12.4%. The one cold four-block call regresses because the larger allocation
+must first fault pages, but the production schedule performs thousands of
+queries per workspace, so the repeated-query control is the relevant gate.
+Across all four authenticated B1 blocks, repeated sparse decompositions retire
+1.30--2.60 million cycles and 3.71--7.41 million instructions per query. If the
+entire 76,207,040 grouped envelope had the worst measured fixture cost, it
+would be about 198 trillion aggregate cycles; the block-zero median implies
+about 130 trillion. At an explicitly idealized sixteen-core 3 GHz rate this is
+roughly 45--69 minutes for the q29 decomposition layer alone. It is not yet an
+order-2092 solve estimate: source-edge scoping can lower it, while q174 lift
+and its joint sufficient-state multiplicity remain unmeasured.
+
+That 45--69 minute construction projection is now avoidable for the q29
+decision itself. Split the six slot rows into four unit-weight rows with
+per-column caps `[1,1,2,2]` and two weight-three rows with caps `[2,2]`. After
+choosing the seven aggregate weight-three column counts, each side is a
+capacitated complete-bipartite degree-sequence problem. Max-flow/min-cut gives
+the exact criterion: after sorting column demands, every prefix of size `k`
+must be at most `sum_i min(row_i, cap_i*k)`. Only at most `3^7=2187`
+weight-three choices exist, so the predicate is iterative, fixed-width, and
+allocation-free. An exhaustive independent small-matrix oracle agrees with
+the prefix criterion, and exhaustive small mixed unit/weight-three systems
+agree with the existing constructive DP.
+
+On the complete grouped participation domain the structural predicate accepts
+76,207,038 of 76,207,040 keys. B1, B5, and C are universal; A has exactly two
+exceptions. Both have nonzero coefficients `[9,9,9,9,9,9,9]` and digit counts
+`[2,7,5,4,8,7]` or its within-pair swap `[7,2,4,5,7,8]`. Their obstruction is
+one line: the cap-one row of degree seven occupies every column, hence every
+weight-three column count is at most two, whose total is at most fourteen,
+contradicting the required high-row total fifteen. The structural predicate
+costs only 1.1--2.8 thousand cycles on the four authenticated blocks, versus
+1.3--2.6 million for witness construction. Thus q29 source splitting should
+be represented by this degree-sequence theorem plus two exceptional keys; the
+decomposition fibre, not an arbitrary orbit-mask member, must be carried into
+q174. The full rebound census costs 641,043,515,277 cycles and
+1,103,129,353,629 instructions at 100% coverage, dominated by cold authority
+recompilation rather than the predicate pass. Authority remains diagnostic
+until the general max-flow proof and broader differential gate are sealed.
+
+The generic evolve loop can now rediscover the visible boundary of those two
+exceptions without a theorem-specific adapter. A source-bound corpus scans
+all 723,744 grouped A keys and trains on one exception plus the 4,096 closest
+feasible rows selected only by symmetric-feature distance. After an opaque
+permutation of twenty generic symmetric scalar features, the first blind
+hypothesis was `f004 == 9`. A 4,224-row sampled holdout accepted it, but the
+strengthened exhaustive 723,743-key holdout correctly found 110 false
+positives. The generic CEGAR loop fed those counterexamples back without
+semantic names and evolved `f004 == 9 && f000 == 53`, which is exact on the
+entire holdout. It needed one refinement round, two fields, 944 candidates,
+47 perfect training candidates, and one perfect exhaustive-holdout candidate.
+The two opaque fields recover the all-nine coefficient fibre and the symmetric
+`{2,7}` degree-pair signature (square sum 53). Exhaustive corpus construction
+cost 95,529,611,641 cycles and 231,834,729,500 instructions; CEGAR evolution
+and exhaustive replay cost 8,915,955,690 cycles and 32,780,528,073
+instructions. This is discovery provenance only: the conjunction is a lead,
+while the capacitated Gale--Ryser argument and independent exhaustive oracles
+provide the structural justification.
+
+## Runtime implication
+
+The former 7.8-hour-per-50-billion-mutation estimate is obsolete for `g=53`:
+the theorem-driven exact solve has already completed on 16 workers and proves
+that shard empty before q5, q6, q29, or any fine PAF equation is needed.  The
+measured exact solve and independent replay retire 48.0 and 56.3 billion cycles
+respectively, far below the requested one-day boundary.  This is not an
+unrestricted order-2092 estimate.  C999's warning still applies: a negative
+assumed-multiplier shard does not decide existence. The first transfer closed
+`g=91` structurally at q0. The `g=41` quotient root shell is now reduced
+341.333x to 768 necessary roots. Exact multiplicity and an independent direct
+enumerator agree on 1,984,512 common raw digit interfaces, retiring the former
+arbitrary one-witness model. A sealed 47.6 MB cache loads, replays, and
+initializes all interfaces in 46.2 billion aggregate cycles and 56 MiB RSS. A
+full 1.984-billion-mutation discovery pass takes 8.179 trillion cycles on 16
+workers and reaches residual 16; the earlier selected-witness campaign still
+supplies the best known residual 8. The reusable 2-adic hull removes 32x at the
+mod-16 profile layer, but the target survives. Neither discovery miss has
+exclusion authority: the remaining unknown is an exact q29/fine-lift tablebase
+and four-block complement join. The `g=133` shard no longer
+contributes a residual solve envelope: exact full-state refinement plus the
+two independent joins excludes all 6,739,200 q6 survivors.  Its measured
+90-cell decision cost is 394.60 billion cycles, about 8.2 seconds at the
+idealized aggregate rate of sixteen 3 GHz workers, although the serial proof
+compiler and loaded host are not a solve benchmark.  The evolved modulus-11
+cycle identity now supplies a sealed 42-cell structural replacement with two
+independent joins, so the old `2^76.2596` g133 envelope is retired without
+retaining the q3/q9 state tables. The remaining runtime uncertainty is
+concentrated in the exact g41 fine-lift tablebase. Quotient-witness multiplicity
+and discovery throughput are now bounded, but there is still no defensible
+under-one-day exhaustive estimate and no solve has been launched. The measured
+discovery envelope is minutes for one thousand mutations per every raw
+interface and about 4.2 hours for one hundred thousand; that is not an
+exhaustive upper bound. The exact block-profile/tablebase spike must now bound
+the lift state count and join cost. On the first concrete q58 collision, exact
+q87 liftability further reduces the 35-state mixed-character endgame to 11
+states in 25.354 billion proof-compilation cycles. This is a strong per-root
+reduction and a useful tablebase archetype, but it has not yet been lifted to
+all 1,984,512 interfaces.  The existing all-interface census supplies the
+critical reuse bound: there are only 1,498 canonical block specifications and
+248,064 canonical four-block domains.  At the measured optimized q58 cost,
+compiling one table per block specification is roughly 252 trillion aggregate
+cycles, about 5.8 ideal hours on four memory-bounded 3 GHz workers.  This makes
+a sub-day run plausible, but not yet launchable: q58-only profile
+deduplication retains an arbitrary preimage, so the table key must be refined
+through the common q174 quotient to preserve joint q58/q87 lift classes before
+the global join can authorize exclusions.  Cross-interface sufficient-state
+reuse plus that joint-key multiplicity are therefore the runtime-critical
+measurements.
+
+## Mystery ledger
+
+- **Settled:** public proof-shaped metadata was unsound and is fully removed.
+- **Settled:** order 6 compounds strongly with the existing `g=53` sectors.
+- **Settled:** the order-29 `g=91` sector is a two-coordinate quadratic-field
+  cancellation problem with exactly two profiles.
+- **Settled:** quaternionic amicability belongs to a separate Williamson/QT
+  construction root, not bordered GS.
+- **Settled structurally:** complete character-sector coverage synthesizes the
+  `Z/18` quotient-PAF theorem, whose zero shell removes 20.430689 bits beyond
+  q2/q3/q6 and forces a sparse ten-profile defect family.
+- **Settled for g53:** the sparse exact q0--q4 fibre is empty; q29 overlap is
+  irrelevant for this multiplier shard.
+- **Settled privately:** sealed typed extractors, source/parameter commitments,
+  provenance roles, and independent semantic replay now gate proof authority.
+  Public Ergodis remains deliberately non-authoritative.
+- **Settled:** common unit dilations give exact four-block quotients of order
+  14 or 12 beyond the multiplier subgroup.
+- **Open:** affine multiplier classes beyond commuting translations and common
+  unit dilations remain uncompiled.
+- **Settled:** the ten defect profiles reduce q0--q3 to four special-mask fibre
+  classes, none containing the required q4 value.
+- **Settled:** transfer to g91 strengthens to the impossible Diophantine
+  equation `13 n27 + 15 n29 = 34`, closing that shard at q0.
+- **Settled for g41 quotient filtering:** the shift-orbit theorem reduces ten
+  quotient equations to q0/q1/q2/q3/q6/q9, and independently exact filters
+  reduce 262,144 roots to 768 necessary survivors. Weighted and direct joins
+  agree on all 1,984,512 raw common quotient interfaces; sealed cached replay
+  removes the arbitrary-preimage defect, so quotient-only filtering is
+  exhausted.
+- **Settled structurally for g41 fine fibres:** 2-adic autocorrelation
+  lifting compresses mod-16 coefficient images by 56.65x, and all four block
+  images have the same order-`2^27` additive hull.  The induced order-32
+  quotient is exactly the weighted autocorrelation-sum law plus the synthesized
+  binary quadratic identity.  All 768 retained witnesses satisfy both, so it
+  is a representation reduction rather than a root filter.
+- **Settled for the first g41 q58 collision:** exact mixed-q87 liftability
+  strengthens the four-token endgame from 35 to 11 states via `n0>=1` and
+  `n2 in {0,3,4}`.  The sealed proof recompiles bounded source-state joins;
+  the simpler structural explanation and cross-interface scope remain open.
+- **Settled for the first g41 q174 root:** the exact q58-group/q87-fibre
+  hierarchy leaves four broad profile quartets. Exhaustive source lifts turn
+  them into at most 128 q174 states per block fibre, and any of ten evolved
+  independent q87 shift classes excludes every lift. Shift 10 is proved
+  redundant with shift 4; `[4,6,33]` broad plus shift 1 in the endgame is the
+  bounded compositional form. Generalization to all 1,498 canonical block
+  specifications remains open.
+- **Settled for g133 q0:** exact defect energy excludes 11,038,464 of
+  26,763,264 mod-four roots; q1 and tested q2--q4 scalar modular/range shapes
+  add no reduction.  Exact same-witness joint q2--q9 lifts modulo 8 and 16
+  also retain every q0/q1 root, closing that low 2-adic theorem family.
+- **Settled privately for g133 q2:** exact q2 interior gaps remove 352,512
+  q0/q1 roots; an independent shifted-bitset compiler agrees, every survivor
+  directly replays, and a sealed digest-bound proof adapter authorizes the
+  exclusions as exact-computational.
+- **Settled for the g133 shard:** the evolved mod-11 feature is the exact
+  three-cycle identity; its sealed typed extractor, canonical 42-cell transfer,
+  fixed-hash join, and independent ordered-vector replay exclude all 6,739,200
+  q6 survivors without a large certificate.
+- **Open:** enumerate or structurally cover all common quotient witnesses per
+  root and lift or stratify inside the sparse order-32 fibres; unrestricted
+  order 2092 remains
+  outside these multiplier-assumed results.
+
+No C1016 change is approved or committed.
