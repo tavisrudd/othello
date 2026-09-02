@@ -122,7 +122,7 @@ ZDD library, reporting compressed representation size as well as runtime, either
 module or retires it. Acceptance gate: a decision either way, recorded, rather than a benchmark
 row.
 
-**Add, gated on an ownership decision: the order-668 clean-room retro-solve.** Expected artifact:
+**Option only, not on the roadmap (Tavis, 2026-09-02): the order-668 clean-room retro-solve.** Priority goes to the external benchmark suites (AlphaEvolve subset, FunSearch cap and admissible sets, curated MiniZinc, Magma, ZDD) and to iterating on Evolve's capabilities; revisit 668 only after those. Expected artifact:
 one published route reimplemented as a control, the same finite search compiled by Ergodis, and
 a benchmark row reporting exact work removed, certificate bytes, and replay cost with the
 published matrix as ground truth. Control: the published structure-aware implementation.
