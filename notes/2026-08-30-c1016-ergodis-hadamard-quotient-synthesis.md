@@ -2823,7 +2823,38 @@ counters report 2,057,879,426,721 cycles, 1,278,991,914,348 instructions,
 277,676,102,030 branches, and 995,958,090 branch misses.  No exact q29 hit was
 seen.  The generator policy is now a typed field distinct from its structural
 proof provenance, so deterministic-section, random-norm/random-Hensel, and
-random-norm/low-lift streams cannot be conflated.  The unrestricted outer
+random-norm/low-lift streams cannot be conflated.
+
+A tenfold counted-fibre scale control generated 1,800,000 disjoint modular
+seeds.  Of these, 287,978 pass the minimum-energy bound, 18,007 have nonempty
+bounded integer fibres, and 1,136,134 distinct sampled lifts contain 132
+directly replayed mod-eighteen shells.  The best generated shell remains level
+18.  Sixty-four ten-million-mutation follow-on anneals reach exact q29
+`y`-score 156, with no exact hit.  The complete run costs
+14,785,845,489,985 instructions and 21,671,396,501,441 cycles at full counter
+coverage, peaks near 571 MiB RSS, and finishes in 351.9 seconds on eighteen
+workers.  Thus scaling is healthy, but blind fibre sampling still spends about
+8,607 bounded samples per useful parity shell.  The next adapter targets that
+parity condition inside the fibre rather than treating it as a late rejection;
+the scale control remains discovery-only and grants no negative coverage.
+
+The next exact q29 theorem family is complete rather than merely a two-moment
+gate.  For every even `k=2,4,...,26`, binomial expansion gives
+`sum_s s^k C_s=0 (mod 29)` at the exact target; at `k=28` the right side is
+18.  Since only block zero has nonzero augmentation, the degree-`2r` equation
+contains `2 M_(2r)(0)` and otherwise only lower-degree moments.  It therefore
+derives block zero's next even moment triangularly.  Degree 28 also fixes its
+zero coordinate, and the Vandermonde matrix on the fourteen distinct quadratic
+residues `1^2,...,14^2` then reconstructs the complete symmetric half of block
+zero from blocks one--three plus only block zero's antisymmetric half.  This is
+a compact structural endgame: fourteen row coordinates become derived state,
+not a searched certificate.  On a directly replayed mod-eighteen shell, the
+degree-zero identity plus degrees 2--26 force every symmetric residual to zero
+modulo 29; the energy bound and zero residual sum then promote the congruence
+to exact q29 equality.  The private typed implementation and independent
+oracles are in progress before this reduction receives pruning authority.
+
+The unrestricted outer
 near miss remains much closer: its six unit residuals occur at shifts
 `1,3,5,11,12,13`, with signs `- + + + - -`; an exact three-distinct-block
 radius search around that root misses after direct replay.  A stronger exact
