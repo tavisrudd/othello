@@ -4139,8 +4139,80 @@
       "last": 1039,
       "purpose": "theorem-gap planted corpus and evolve admission measurement",
       "sequence": 460
+    },
+    {
+      "count": 1,
+      "first": 1040,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1040,
+      "purpose": "AlphaEvolve problem-repository finite-field subset benchmark",
+      "sequence": 461
+    },
+    {
+      "count": 1,
+      "first": 1041,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1041,
+      "purpose": "FunSearch cap-set and admissible-set blind-discovery benchmark with equal evaluator budgets",
+      "sequence": 462
+    },
+    {
+      "count": 1,
+      "first": 1042,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1042,
+      "purpose": "curated MiniZinc Challenge subset under the predeclared Ergodis-shape classifier",
+      "sequence": 463
+    },
+    {
+      "count": 1,
+      "first": 1043,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1043,
+      "purpose": "Magma GF(2) quadratic-system exhaustive solving as negative control and phase transition",
+      "sequence": 464
+    },
+    {
+      "count": 1,
+      "first": 1044,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1044,
+      "purpose": "ZDD minimal-support and reliability-family comparison with compressed-size reporting",
+      "sequence": 465
+    },
+    {
+      "count": 1,
+      "first": 1045,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1045,
+      "purpose": "evolve cross-instance transfer benchmark",
+      "sequence": 466
+    },
+    {
+      "count": 1,
+      "first": 1046,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1046,
+      "purpose": "evolve composition-discovery benchmark over sealed features",
+      "sequence": 467
+    },
+    {
+      "count": 1,
+      "first": 1047,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1047,
+      "purpose": "public three-tier StructureBench suite assembly",
+      "sequence": 468
     }
   ],
-  "next_id": 1040,
+  "next_id": 1048,
   "schema": "codex-task-id-allocations-v1"
 }
