@@ -4363,3 +4363,14 @@ now rejects an empty corpus, which previously would make every predicate
 vacuously equivalent.  Controls collapse `x`, `abs(x)`, and `x*x` while
 preserving a genuinely different predicate; full all-feature tests and strict
 all-target clippy pass.
+
+Commit `b4fb5dce7` combines the first Dalmatian and Pareto imports in a bounded
+sound-theorem archive.  Each rule carries a one-bit-per-row coverage set and
+is independently rejected on any false positive.  Admission requires either a
+positive row uncovered by the whole bank or replacement of dominated rules.
+Dominance is deliberately stronger than count-based NSGA scoring: the new
+rule must contain the old rule's actual coverage set at no greater evaluation
+cost.  Complementary equal-count theorems therefore survive, while a cheaper
+union may replace several points even when it adds no row.  Capacity and tail
+errors leave the archive unchanged.  Unsound, dominated, non-novel,
+replacement, complementary, and capacity controls pass the full public gate.
