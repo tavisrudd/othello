@@ -22,6 +22,7 @@ const TRIPLES: usize = LIFT_RADIX * LIFT_RADIX * LIFT_RADIX;
 const TRIPLE_WORDS: usize = TRIPLES.div_ceil(64);
 const ENERGY_TARGET: usize = 523;
 pub const Q87_ENERGY_WORDS: usize = (ENERGY_TARGET + 1).div_ceil(64);
+const Q87_ENERGY_LAST_WORD_MASK: u64 = (1_u64 << ((ENERGY_TARGET + 1) % 64)) - 1;
 const _: () = assert!(524_u64 * 524 * 524 <= u32::MAX as u64);
 
 #[derive(Clone, Debug, Error, PartialEq, Eq)]
@@ -48,6 +49,16 @@ pub struct G41Q87EnergyReport {
     pub energy_support: [u64; Q87_ENERGY_WORDS],
     pub workspace_bytes: u32,
     pub provenance: &'static str,
+}
+
+/// Source-bound marginal q87 table for repeated q29 coefficient queries.
+/// Construction performs all six-slot subset convolutions once; each query is
+/// fixed-width, allocation-free, and selects only precomputed exact fibres.
+pub struct G41Q87EnergySpecTable {
+    mask: u8,
+    digits: u32,
+    coefficient_energy_masks: [[u64; 19]; COORDINATES],
+    coefficient_triples: [[u16; 19]; COORDINATES],
 }
 
 const EXTRACTOR_IDENTITY: &str = "ergodis-private/g41-q87-eisenstein-energy/v1; carrier=522; multiplier=41; q29-three-lift semantics; exact six-slot marginal sumsets; SDS target=1043-520=523";
@@ -214,108 +225,172 @@ const fn gcd(mut first: u16, mut second: u16) -> u16 {
     first
 }
 
+#[inline(always)]
+fn include_shifted_energy(
+    target: &mut [u64; Q87_ENERGY_WORDS],
+    source: &[u64; Q87_ENERGY_WORDS],
+    shift: usize,
+) {
+    let word_shift = shift / 64;
+    let bit_shift = shift % 64;
+    for source_word in 0..Q87_ENERGY_WORDS - word_shift {
+        let value = source[source_word];
+        let target_word = source_word + word_shift;
+        target[target_word] |= value << bit_shift;
+        if bit_shift != 0 && target_word + 1 < Q87_ENERGY_WORDS {
+            target[target_word + 1] |= value >> (64 - bit_shift);
+        }
+    }
+    target[Q87_ENERGY_WORDS - 1] &= Q87_ENERGY_LAST_WORD_MASK;
+}
+
+impl G41Q87EnergySpecTable {
+    pub fn compile(mask: u8, digits: u32) -> Result<Self, G41Q87EnergyError> {
+        if mask >= 64 {
+            return Err(G41Q87EnergyError::SemanticMismatch);
+        }
+        let inventory = compile_inventory()?;
+        let counts = digit_counts(digits);
+        if (0..SLOTS).any(|slot| counts[slot] > inventory.large_len[slot]) {
+            return Err(G41Q87EnergyError::SemanticMismatch);
+        }
+        let mut coefficient_energy_masks = [[0_u64; 19]; COORDINATES];
+        let mut coefficient_triples = [[0_u16; 19]; COORDINATES];
+        for coordinate in 0..COORDINATES {
+            let support = coordinate_support(&inventory, mask, counts, coordinate);
+            for index in 0..TRIPLES {
+                if !has_triple(&support, index) {
+                    continue;
+                }
+                let values = triple_at(index);
+                let coefficient = values.into_iter().map(usize::from).sum::<usize>();
+                if coefficient >= 19 {
+                    return Err(G41Q87EnergyError::SemanticMismatch);
+                }
+                coefficient_triples[coordinate][coefficient] += 1;
+                coefficient_energy_masks[coordinate][coefficient] |=
+                    1_u64 << eisenstein_energy(values);
+            }
+        }
+        Ok(Self {
+            mask,
+            digits,
+            coefficient_energy_masks,
+            coefficient_triples,
+        })
+    }
+
+    pub fn energy_support(
+        &self,
+        q29_coefficients: [u8; COORDINATES],
+    ) -> Result<[u64; Q87_ENERGY_WORDS], G41Q87EnergyError> {
+        if q29_coefficients.iter().any(|&value| value > 18) {
+            return Err(G41Q87EnergyError::SemanticMismatch);
+        }
+        let mut energy_support = [0_u64; Q87_ENERGY_WORDS];
+        energy_support[0] = 1;
+        for (coordinate, &coefficient) in q29_coefficients.iter().enumerate() {
+            let mut energies = self.coefficient_energy_masks[coordinate][usize::from(coefficient)];
+            if energies == 0 {
+                return Err(G41Q87EnergyError::SemanticMismatch);
+            }
+            let weight = if coordinate == 0 { 1 } else { 4 };
+            let mut next = [0_u64; Q87_ENERGY_WORDS];
+            while energies != 0 {
+                let energy = energies.trailing_zeros() as usize * weight;
+                energies &= energies - 1;
+                include_shifted_energy(&mut next, &energy_support, energy);
+            }
+            energy_support = next;
+        }
+        Ok(energy_support)
+    }
+
+    /// Commits to the complete coefficient-to-energy behavior while omitting
+    /// the source presentation. Equal values therefore identify a reusable
+    /// semantic table, not merely equal mask/digit labels.
+    pub fn behavior_digest(&self) -> [u8; 32] {
+        let mut hasher = Sha256::new();
+        hasher.update(b"ergodis-private/g41-q87-energy-spec-behavior/v1");
+        for coordinate in 0..COORDINATES {
+            for coefficient in 0..19 {
+                hasher.update(self.coefficient_energy_masks[coordinate][coefficient].to_le_bytes());
+                hasher.update(self.coefficient_triples[coordinate][coefficient].to_le_bytes());
+            }
+        }
+        hasher.finalize().into()
+    }
+
+    pub fn report(
+        &self,
+        q29_coefficients: [u8; COORDINATES],
+    ) -> Result<G41Q87EnergyReport, G41Q87EnergyError> {
+        let energy_support = self.energy_support(q29_coefficients)?;
+        let coordinate_energy_masks = std::array::from_fn(|coordinate| {
+            self.coefficient_energy_masks[coordinate][usize::from(q29_coefficients[coordinate])]
+        });
+        let coordinate_triples = std::array::from_fn(|coordinate| {
+            self.coefficient_triples[coordinate][usize::from(q29_coefficients[coordinate])]
+        });
+        let coordinate_energy_residues_mod9 = coordinate_energy_masks.map(|energies| {
+            let first_energy = energies.trailing_zeros() as u8;
+            if (0..64).all(|energy| {
+                energies & (1_u64 << energy) == 0 || energy % 9 == u32::from(first_energy % 9)
+            }) {
+                first_energy % 9
+            } else {
+                u8::MAX
+            }
+        });
+        let mut energy_values = 0_u16;
+        let mut minimum_energy = u16::MAX;
+        let mut maximum_energy = 0_u16;
+        let mut previous_energy = None;
+        let mut energy_step = 0_u16;
+        for energy in 0..=ENERGY_TARGET {
+            if energy_support[energy / 64] & (1_u64 << (energy % 64)) != 0 {
+                energy_values += 1;
+                minimum_energy = minimum_energy.min(energy as u16);
+                maximum_energy = maximum_energy.max(energy as u16);
+                if let Some(previous) = previous_energy {
+                    energy_step = gcd(energy_step, energy as u16 - previous);
+                }
+                previous_energy = Some(energy as u16);
+            }
+        }
+        if energy_values == 0 {
+            minimum_energy = 0;
+        }
+        let complete_arithmetic_progression = energy_values == 1
+            || (energy_step != 0
+                && (maximum_energy - minimum_energy) / energy_step + 1 == energy_values);
+        Ok(G41Q87EnergyReport {
+            mask: self.mask,
+            digits: self.digits,
+            q29_coefficients,
+            coordinate_triples,
+            coordinate_energy_masks,
+            coordinate_energy_residues_mod9,
+            energy_values,
+            minimum_energy,
+            maximum_energy,
+            energy_step,
+            complete_arithmetic_progression,
+            energy_support,
+            workspace_bytes: (std::mem::size_of::<Self>()
+                + 2 * Q87_ENERGY_WORDS * std::mem::size_of::<u64>())
+                as u32,
+            provenance: "exact source-bound marginal q87 table; six-slot three-lift sumsets are compiled once per canonical block specification, coefficient queries select exact fibres and convolve fixed-width Eisenstein energies without allocation; cross-coordinate correlations are deliberately forgotten, so this is a necessary condition only",
+        })
+    }
+}
+
 pub fn compile_g41_q87_energy_support(
     mask: u8,
     digits: u32,
     q29_coefficients: [u8; COORDINATES],
 ) -> Result<G41Q87EnergyReport, G41Q87EnergyError> {
-    if mask >= 64 || q29_coefficients.iter().any(|&value| value > 18) {
-        return Err(G41Q87EnergyError::SemanticMismatch);
-    }
-    let inventory = compile_inventory()?;
-    let counts = digit_counts(digits);
-    if (0..SLOTS).any(|slot| counts[slot] > inventory.large_len[slot]) {
-        return Err(G41Q87EnergyError::SemanticMismatch);
-    }
-    let mut coordinate_energy_masks = [0_u64; COORDINATES];
-    let mut coordinate_energy_residues_mod9 = [u8::MAX; COORDINATES];
-    let mut coordinate_triples = [0_u16; COORDINATES];
-    for coordinate in 0..COORDINATES {
-        let support = coordinate_support(&inventory, mask, counts, coordinate);
-        let mut energies = 0_u64;
-        for index in 0..TRIPLES {
-            if !has_triple(&support, index) {
-                continue;
-            }
-            let values = triple_at(index);
-            if values.into_iter().map(u16::from).sum::<u16>()
-                != u16::from(q29_coefficients[coordinate])
-            {
-                continue;
-            }
-            coordinate_triples[coordinate] += 1;
-            energies |= 1_u64 << eisenstein_energy(values);
-        }
-        if energies == 0 {
-            return Err(G41Q87EnergyError::SemanticMismatch);
-        }
-        let first_energy = energies.trailing_zeros() as u8;
-        coordinate_energy_residues_mod9[coordinate] = if (0..64).all(|energy| {
-            energies & (1_u64 << energy) == 0 || energy % 9 == u32::from(first_energy % 9)
-        }) {
-            first_energy % 9
-        } else {
-            u8::MAX
-        };
-        coordinate_energy_masks[coordinate] = energies;
-    }
-    let mut energy_support = [0_u64; Q87_ENERGY_WORDS];
-    energy_support[0] = 1;
-    for coordinate in 0..COORDINATES {
-        let weight = if coordinate == 0 { 1 } else { 4 };
-        let mut next = [0_u64; Q87_ENERGY_WORDS];
-        let mut energies = coordinate_energy_masks[coordinate];
-        while energies != 0 {
-            let energy = energies.trailing_zeros() as usize * weight;
-            energies &= energies - 1;
-            for source in 0..=ENERGY_TARGET - energy {
-                if energy_support[source / 64] & (1_u64 << (source % 64)) != 0 {
-                    let target = source + energy;
-                    next[target / 64] |= 1_u64 << (target % 64);
-                }
-            }
-        }
-        energy_support = next;
-    }
-    let mut energy_values = 0_u16;
-    let mut minimum_energy = u16::MAX;
-    let mut maximum_energy = 0_u16;
-    let mut previous_energy = None;
-    let mut energy_step = 0_u16;
-    for energy in 0..=ENERGY_TARGET {
-        if energy_support[energy / 64] & (1_u64 << (energy % 64)) != 0 {
-            energy_values += 1;
-            minimum_energy = minimum_energy.min(energy as u16);
-            maximum_energy = maximum_energy.max(energy as u16);
-            if let Some(previous) = previous_energy {
-                energy_step = gcd(energy_step, energy as u16 - previous);
-            }
-            previous_energy = Some(energy as u16);
-        }
-    }
-    if energy_values == 0 {
-        minimum_energy = 0;
-    }
-    let complete_arithmetic_progression = energy_values == 1
-        || (energy_step != 0
-            && (maximum_energy - minimum_energy) / energy_step + 1 == energy_values);
-    Ok(G41Q87EnergyReport {
-        mask,
-        digits,
-        q29_coefficients,
-        coordinate_triples,
-        coordinate_energy_masks,
-        coordinate_energy_residues_mod9,
-        energy_values,
-        minimum_energy,
-        maximum_energy,
-        energy_step,
-        complete_arithmetic_progression,
-        energy_support,
-        workspace_bytes: (2 * TRIPLE_WORDS * std::mem::size_of::<u64>()
-            + 2 * Q87_ENERGY_WORDS * std::mem::size_of::<u64>()) as u32,
-        provenance: "exact per-coordinate three-lift sumsets from the concrete six-slot fine-orbit interface; the Eisenstein identity |a+b*w+c*w^2|^2=a^2+b^2+c^2-ab-bc-ca is convolved with q29 orbit weights; the zero coordinate and each local energy residue modulo nine are recorded so the observed step-36 normal form is structurally replayable; cross-coordinate correlations are deliberately forgotten, so this is a necessary mixed-order-87 energy support only",
-    })
+    G41Q87EnergySpecTable::compile(mask, digits)?.report(q29_coefficients)
 }
 
 fn energy_values(report: &G41Q87EnergyReport) -> impl Iterator<Item = usize> + '_ {
@@ -423,6 +498,28 @@ mod tests {
     }
 
     #[test]
+    fn word_shift_matches_independent_scalar_support_for_every_shift() {
+        let mut source = [0_u64; Q87_ENERGY_WORDS];
+        for value in 0..=ENERGY_TARGET {
+            if value % 7 == 1 || value % 11 == 3 {
+                source[value / 64] |= 1_u64 << (value % 64);
+            }
+        }
+        for shift in 0..=ENERGY_TARGET {
+            let mut actual = [0_u64; Q87_ENERGY_WORDS];
+            include_shifted_energy(&mut actual, &source, shift);
+            let mut expected = [0_u64; Q87_ENERGY_WORDS];
+            for value in 0..=ENERGY_TARGET - shift {
+                if source[value / 64] & (1_u64 << (value % 64)) != 0 {
+                    let target = value + shift;
+                    expected[target / 64] |= 1_u64 << (target % 64);
+                }
+            }
+            assert_eq!(actual, expected, "shift {shift}");
+        }
+    }
+
+    #[test]
     fn concrete_interface_support_is_bounded_and_hot_reads_allocate_nothing() {
         let report =
             compile_g41_q87_energy_support(20, 2_215_340, [8, 9, 7, 10, 9, 5, 11, 12]).unwrap();
@@ -442,6 +539,56 @@ mod tests {
             }
         });
         assert_eq!(allocations, 0);
+    }
+
+    #[test]
+    fn reusable_spec_table_matches_direct_report_and_queries_without_allocation() {
+        let coefficients = [8, 9, 7, 10, 9, 5, 11, 12];
+        let table = G41Q87EnergySpecTable::compile(20, 2_215_340).unwrap();
+        let (actual, allocations) = tracked_allocations(|| table.report(coefficients).unwrap());
+        assert_eq!(allocations, 0);
+        let inventory = compile_inventory().unwrap();
+        let counts = digit_counts(2_215_340);
+        for coordinate in 0..COORDINATES {
+            let support = coordinate_support(&inventory, 20, counts, coordinate);
+            let mut direct_mask = 0_u64;
+            let mut direct_triples = 0_u16;
+            for index in 0..TRIPLES {
+                if !has_triple(&support, index) {
+                    continue;
+                }
+                let values = triple_at(index);
+                if values.into_iter().map(u16::from).sum::<u16>()
+                    == u16::from(coefficients[coordinate])
+                {
+                    direct_triples += 1;
+                    direct_mask |= 1_u64 << eisenstein_energy(values);
+                }
+            }
+            assert_eq!(actual.coordinate_energy_masks[coordinate], direct_mask);
+            assert_eq!(actual.coordinate_triples[coordinate], direct_triples);
+        }
+    }
+
+    #[test]
+    fn reusable_spec_table_rejects_an_empty_or_out_of_range_coefficient_fibre() {
+        let table = G41Q87EnergySpecTable::compile(20, 2_215_340).unwrap();
+        assert_eq!(
+            table.energy_support([19; 8]),
+            Err(G41Q87EnergyError::SemanticMismatch)
+        );
+        let mut missing = None;
+        'outer: for coordinate in 0..COORDINATES {
+            for coefficient in 0_u8..=18 {
+                let mut values = [8_u8; COORDINATES];
+                values[coordinate] = coefficient;
+                if table.energy_support(values).is_err() {
+                    missing = Some(values);
+                    break 'outer;
+                }
+            }
+        }
+        assert!(missing.is_some());
     }
 
     #[test]

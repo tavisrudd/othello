@@ -252,6 +252,28 @@ pub struct G41Q29BatchedEvolveReport {
     pub provenance: &'static str,
 }
 
+#[derive(Clone, Debug, Serialize, PartialEq, Eq)]
+pub struct G41Q174EvolveReport {
+    pub threads: u16,
+    pub attempts: u64,
+    pub mutations_per_attempt: u32,
+    pub mutations: u64,
+    pub accepted_mutations: u64,
+    pub q174_hits: u64,
+    pub full_paf_hits: u64,
+    pub best_initial_q174_squared_residual: u64,
+    pub best_q174_squared_residual: u64,
+    pub best_q174_l1_residual: u64,
+    pub best_q174_max_residual: u16,
+    pub best_q174_defect_sum: u64,
+    pub best_q174_min_defect: u16,
+    pub best_q174_max_defect: u16,
+    pub best_q174_zero_energy: u16,
+    pub best_selection: Option<G41Q29Selection>,
+    pub first_full_selection: Option<G41Q29Selection>,
+    pub provenance: &'static str,
+}
+
 #[repr(C)]
 #[derive(Clone, Copy, Debug, Default)]
 struct Q29SingleMove {
@@ -3748,6 +3770,381 @@ fn direct_full_replay(
     true
 }
 
+fn add_orbit_q174(coefficients: &mut [u8; 174], orbit: &FineOrbit) {
+    for &point in &orbit.points[..usize::from(orbit.len)] {
+        coefficients[usize::from(point) % 174] += 1;
+    }
+}
+
+fn subtract_orbit_q174(coefficients: &mut [u8; 174], orbit: &FineOrbit) {
+    for &point in &orbit.points[..usize::from(orbit.len)] {
+        coefficients[usize::from(point) % 174] -= 1;
+    }
+}
+
+fn block_q174_coefficients(
+    witness: &G41JointQuotientWitness,
+    inventory: &FineInventory,
+    selection: &[u16; 24],
+    block: usize,
+) -> [u8; 174] {
+    let mut coefficients = [0_u8; 174];
+    for slot in 0..SLOTS {
+        if witness.masks[block] & (1 << slot) != 0 {
+            add_orbit_q174(&mut coefficients, &inventory.small[slot]);
+        }
+        let selected = selection[block * SLOTS + slot];
+        for orbit in 0..inventory.large_len[slot] {
+            if selected & (1 << orbit) != 0 {
+                add_orbit_q174(
+                    &mut coefficients,
+                    &inventory.large[slot][usize::from(orbit)],
+                );
+            }
+        }
+    }
+    coefficients
+}
+
+fn block_q174_defects(coefficients: &[u8; 174]) -> [u16; 87] {
+    let zero = coefficients
+        .iter()
+        .map(|&value| u32::from(value) * u32::from(value))
+        .sum::<u32>();
+    std::array::from_fn(|index| {
+        let shift = index + 1;
+        let correlation = (0..174)
+            .map(|position| {
+                u32::from(coefficients[position])
+                    * u32::from(coefficients[(position + shift) % 174])
+            })
+            .sum::<u32>();
+        (zero - correlation) as u16
+    })
+}
+
+fn q174_swap_defects(
+    coefficients: &[u8; 174],
+    defects: &[u16; 87],
+    removed: &FineOrbit,
+    added: &FineOrbit,
+) -> [u16; 87] {
+    let mut delta = [0_i8; 174];
+    let mut touched = [false; 174];
+    let mut changed = [0_u8; 24];
+    let mut changed_len = 0_usize;
+    for &point in &removed.points[..usize::from(removed.len)] {
+        let position = usize::from(point) % 174;
+        if !touched[position] {
+            touched[position] = true;
+            changed[changed_len] = position as u8;
+            changed_len += 1;
+        }
+        delta[position] -= 1;
+    }
+    for &point in &added.points[..usize::from(added.len)] {
+        let position = usize::from(point) % 174;
+        if !touched[position] {
+            touched[position] = true;
+            changed[changed_len] = position as u8;
+            changed_len += 1;
+        }
+        delta[position] += 1;
+    }
+    let mut energy_delta = 0_i32;
+    for &position in &changed[..changed_len] {
+        let position = usize::from(position);
+        let value = i32::from(coefficients[position]);
+        let change = i32::from(delta[position]);
+        energy_delta += 2 * value * change + change * change;
+    }
+    std::array::from_fn(|index| {
+        let shift = index + 1;
+        let mut correlation_delta = 0_i32;
+        for &position in &changed[..changed_len] {
+            let position = usize::from(position);
+            let change = i32::from(delta[position]);
+            correlation_delta += change
+                * (i32::from(coefficients[(position + shift) % 174])
+                    + i32::from(coefficients[(position + 174 - shift) % 174])
+                    + i32::from(delta[(position + shift) % 174]));
+        }
+        let updated = i32::from(defects[index]) + energy_delta - correlation_delta;
+        debug_assert!(updated >= 0);
+        updated as u16
+    })
+}
+
+fn q174_score(blocks: &[[u16; 87]; 4]) -> (u64, u64, u16) {
+    let mut squared = 0_u64;
+    let mut l1 = 0_u64;
+    let mut maximum = 0_u16;
+    for shift in 0..87 {
+        let combined = blocks
+            .iter()
+            .map(|block| u32::from(block[shift]))
+            .sum::<u32>();
+        let residual = combined.abs_diff(523) as u16;
+        squared += u64::from(residual) * u64::from(residual);
+        l1 += u64::from(residual);
+        maximum = maximum.max(residual);
+    }
+    (squared, l1, maximum)
+}
+
+fn q174_summary(blocks: &[[u16; 87]; 4], coefficients: &[[u8; 174]; 4]) -> (u64, u16, u16, u16) {
+    let mut sum = 0_u64;
+    let mut minimum = u16::MAX;
+    let mut maximum = 0_u16;
+    for shift in 0..87 {
+        let combined = blocks
+            .iter()
+            .map(|block| u16::from(block[shift]))
+            .sum::<u16>();
+        sum += u64::from(combined);
+        minimum = minimum.min(combined);
+        maximum = maximum.max(combined);
+    }
+    let zero_energy = coefficients
+        .iter()
+        .flatten()
+        .map(|&value| u16::from(value) * u16::from(value))
+        .sum::<u16>();
+    (sum, minimum, maximum, zero_energy)
+}
+
+pub fn evolve_g41_q174_discovery(
+    threads: usize,
+    attempts: u64,
+    mutations_per_attempt: u32,
+) -> Result<G41Q174EvolveReport, G41Q29EvolveError> {
+    let interfaces = enumerate_g41_joint_digit_witnesses()?;
+    evolve_g41_q174_discovery_from_interfaces(
+        &interfaces.witnesses,
+        threads,
+        attempts,
+        mutations_per_attempt,
+    )
+}
+
+pub fn evolve_g41_q174_discovery_from_interfaces(
+    interfaces: &[G41JointQuotientWitness],
+    threads: usize,
+    attempts: u64,
+    mutations_per_attempt: u32,
+) -> Result<G41Q174EvolveReport, G41Q29EvolveError> {
+    use std::sync::atomic::{AtomicU64, Ordering};
+
+    if threads == 0 || threads > 32 || attempts == 0 || mutations_per_attempt == 0 {
+        return Err(G41Q29EvolveError::StateBudget);
+    }
+    if interfaces.is_empty() {
+        return Err(G41Q29EvolveError::SemanticMismatch);
+    }
+    let inventory = compile_inventory()?;
+    let next = AtomicU64::new(0);
+    let reports = std::thread::scope(|scope| {
+        let mut handles = Vec::with_capacity(threads);
+        for worker in 0..threads {
+            let inventory = &inventory;
+            let next = &next;
+            handles.push(scope.spawn(move || {
+                let mut random = 0x9e37_79b9_7f4a_7c15_u64
+                    ^ (worker as u64).wrapping_mul(0xd1b5_4a32_d192_ed03);
+                let mut report = G41Q174EvolveReport {
+                    threads: 1,
+                    attempts: 0,
+                    mutations_per_attempt,
+                    mutations: 0,
+                    accepted_mutations: 0,
+                    q174_hits: 0,
+                    full_paf_hits: 0,
+                    best_initial_q174_squared_residual: u64::MAX,
+                    best_q174_squared_residual: u64::MAX,
+                    best_q174_l1_residual: u64::MAX,
+                    best_q174_max_residual: u16::MAX,
+                    best_q174_defect_sum: 0,
+                    best_q174_min_defect: 0,
+                    best_q174_max_defect: 0,
+                    best_q174_zero_energy: 0,
+                    best_selection: None,
+                    first_full_selection: None,
+                    provenance: "discovery-only q174 evolution over exact source interfaces; misses have no authority, while every zero is reconstructed from fine-orbit masks and checked against all original PAF equations",
+                };
+                loop {
+                    let attempt = next.fetch_add(1, Ordering::Relaxed);
+                    if attempt >= attempts {
+                        break;
+                    }
+                    report.attempts += 1;
+                    let witness =
+                        &interfaces[next_random(&mut random) as usize % interfaces.len()];
+                    let mut selection = initialize_selection(witness, inventory, &mut random);
+                    let mut coefficients: [[u8; 174]; 4] = std::array::from_fn(|block| {
+                        block_q174_coefficients(witness, inventory, &selection, block)
+                    });
+                    let mut block_defects: [[u16; 87]; 4] =
+                        std::array::from_fn(|block| block_q174_defects(&coefficients[block]));
+                    let mut score = q174_score(&block_defects);
+                    report.best_initial_q174_squared_residual = report
+                        .best_initial_q174_squared_residual
+                        .min(score.0);
+                    if score.0 < report.best_q174_squared_residual {
+                        report.best_q174_squared_residual = score.0;
+                        report.best_q174_l1_residual = score.1;
+                        report.best_q174_max_residual = score.2;
+                        let summary = q174_summary(&block_defects, &coefficients);
+                        report.best_q174_defect_sum = summary.0;
+                        report.best_q174_min_defect = summary.1;
+                        report.best_q174_max_defect = summary.2;
+                        report.best_q174_zero_energy = summary.3;
+                        report.best_selection = Some(G41Q29Selection {
+                            root_id: witness.root_id,
+                            digits: witness.digits,
+                            orbit_masks: selection,
+                        });
+                    }
+                    for _ in 0..mutations_per_attempt {
+                        let block = next_random(&mut random) as usize % 4;
+                        let mut slot = next_random(&mut random) as usize % SLOTS;
+                        for _ in 0..SLOTS {
+                            let selected = selection[block * SLOTS + slot];
+                            let count = selected.count_ones();
+                            if count != 0 && count != u32::from(inventory.large_len[slot]) {
+                                break;
+                            }
+                            slot = (slot + 1) % SLOTS;
+                        }
+                        let index = block * SLOTS + slot;
+                        let old_mask = selection[index];
+                        if old_mask == 0
+                            || old_mask.count_ones() == u32::from(inventory.large_len[slot])
+                        {
+                            continue;
+                        }
+                        let mut removed =
+                            next_random(&mut random) as u8 % inventory.large_len[slot];
+                        while old_mask & (1 << removed) == 0 {
+                            removed = (removed + 1) % inventory.large_len[slot];
+                        }
+                        let mut added =
+                            next_random(&mut random) as u8 % inventory.large_len[slot];
+                        while old_mask & (1 << added) != 0 {
+                            added = (added + 1) % inventory.large_len[slot];
+                        }
+                        let removed_orbit = &inventory.large[slot][usize::from(removed)];
+                        let added_orbit = &inventory.large[slot][usize::from(added)];
+                        let candidate_defects = q174_swap_defects(
+                            &coefficients[block],
+                            &block_defects[block],
+                            removed_orbit,
+                            added_orbit,
+                        );
+                        let old_defects = block_defects[block];
+                        block_defects[block] = candidate_defects;
+                        let candidate = q174_score(&block_defects);
+                        report.mutations += 1;
+                        let tolerance = 32_u64.saturating_add(score.0 / 4096);
+                        let accept = candidate.0 <= score.0
+                            || (candidate.0 <= score.0.saturating_add(tolerance)
+                                && next_random(&mut random) & 31 == 0);
+                        if accept {
+                            report.accepted_mutations += 1;
+                            selection[index] ^= (1 << removed) | (1 << added);
+                            subtract_orbit_q174(&mut coefficients[block], removed_orbit);
+                            add_orbit_q174(&mut coefficients[block], added_orbit);
+                            score = candidate;
+                            if score.0 < report.best_q174_squared_residual {
+                                report.best_q174_squared_residual = score.0;
+                                report.best_q174_l1_residual = score.1;
+                                report.best_q174_max_residual = score.2;
+                                let summary = q174_summary(&block_defects, &coefficients);
+                                report.best_q174_defect_sum = summary.0;
+                                report.best_q174_min_defect = summary.1;
+                                report.best_q174_max_defect = summary.2;
+                                report.best_q174_zero_energy = summary.3;
+                                report.best_selection = Some(G41Q29Selection {
+                                    root_id: witness.root_id,
+                                    digits: witness.digits,
+                                    orbit_masks: selection,
+                                });
+                            }
+                        } else {
+                            block_defects[block] = old_defects;
+                        }
+                        if score.0 == 0 {
+                            report.q174_hits += 1;
+                            let selected = G41Q29Selection {
+                                root_id: witness.root_id,
+                                digits: witness.digits,
+                                orbit_masks: selection,
+                            };
+                            if direct_full_replay(witness, inventory, &selection) {
+                                report.full_paf_hits += 1;
+                                report.first_full_selection.get_or_insert(selected);
+                            }
+                            break;
+                        }
+                    }
+                }
+                report
+            }));
+        }
+        handles
+            .into_iter()
+            .map(|handle| {
+                handle
+                    .join()
+                    .map_err(|_| G41Q29EvolveError::ParallelExecution)
+            })
+            .collect::<Result<Vec<_>, _>>()
+    })?;
+    let mut merged = G41Q174EvolveReport {
+        threads: threads as u16,
+        attempts: 0,
+        mutations_per_attempt,
+        mutations: 0,
+        accepted_mutations: 0,
+        q174_hits: 0,
+        full_paf_hits: 0,
+        best_initial_q174_squared_residual: u64::MAX,
+        best_q174_squared_residual: u64::MAX,
+        best_q174_l1_residual: u64::MAX,
+        best_q174_max_residual: u16::MAX,
+        best_q174_defect_sum: 0,
+        best_q174_min_defect: 0,
+        best_q174_max_defect: 0,
+        best_q174_zero_energy: 0,
+        best_selection: None,
+        first_full_selection: None,
+        provenance: "discovery-only q174 evolution over exact source interfaces; misses have no authority, while every zero is reconstructed from fine-orbit masks and checked against all original PAF equations",
+    };
+    for report in reports {
+        merged.attempts += report.attempts;
+        merged.mutations += report.mutations;
+        merged.accepted_mutations += report.accepted_mutations;
+        merged.q174_hits += report.q174_hits;
+        merged.full_paf_hits += report.full_paf_hits;
+        merged.best_initial_q174_squared_residual = merged
+            .best_initial_q174_squared_residual
+            .min(report.best_initial_q174_squared_residual);
+        if report.best_q174_squared_residual < merged.best_q174_squared_residual {
+            merged.best_q174_squared_residual = report.best_q174_squared_residual;
+            merged.best_q174_l1_residual = report.best_q174_l1_residual;
+            merged.best_q174_max_residual = report.best_q174_max_residual;
+            merged.best_q174_defect_sum = report.best_q174_defect_sum;
+            merged.best_q174_min_defect = report.best_q174_min_defect;
+            merged.best_q174_max_defect = report.best_q174_max_defect;
+            merged.best_q174_zero_energy = report.best_q174_zero_energy;
+            merged.best_selection = report.best_selection;
+        }
+        if merged.first_full_selection.is_none() {
+            merged.first_full_selection = report.first_full_selection;
+        }
+    }
+    Ok(merged)
+}
+
 struct Q29Kernel<const BALANCE_WEIGHT: u8, const ROOT_SCOPE: bool> {
     inventory: FineInventory,
     restarts: u16,
@@ -5232,6 +5629,61 @@ mod tests {
             std::hint::black_box(
                 evolve_seeded_batch_const::<4>(&witness, &inventory, seed, 1, 128).unwrap(),
             );
+        });
+        assert_eq!(allocations, 0);
+    }
+
+    #[test]
+    fn q174_sparse_swap_matches_full_recomputation() {
+        let witness = G41JointQuotientWitness {
+            root_id: 3_759_256,
+            masks: [24, 50, 21, 14],
+            digits: [2_217_246, 1_958_432, 1_958_307, 1_972_636],
+        };
+        let inventory = compile_inventory().unwrap();
+        let mut random = 41;
+        let mut selection = initialize_selection(&witness, &inventory, &mut random);
+        let mut coefficients = block_q174_coefficients(&witness, &inventory, &selection, 0);
+        let mut defects = block_q174_defects(&coefficients);
+        for _ in 0..512 {
+            let mut slot = next_random(&mut random) as usize % SLOTS;
+            while selection[slot] == 0
+                || selection[slot].count_ones() == u32::from(inventory.large_len[slot])
+            {
+                slot = (slot + 1) % SLOTS;
+            }
+            let old_mask = selection[slot];
+            let removed = (0..inventory.large_len[slot])
+                .find(|&orbit| old_mask & (1 << orbit) != 0)
+                .unwrap();
+            let added = (0..inventory.large_len[slot])
+                .find(|&orbit| old_mask & (1 << orbit) == 0)
+                .unwrap();
+            let removed_orbit = &inventory.large[slot][usize::from(removed)];
+            let added_orbit = &inventory.large[slot][usize::from(added)];
+            let sparse = q174_swap_defects(&coefficients, &defects, removed_orbit, added_orbit);
+            subtract_orbit_q174(&mut coefficients, removed_orbit);
+            add_orbit_q174(&mut coefficients, added_orbit);
+            assert_eq!(sparse, block_q174_defects(&coefficients));
+            selection[slot] ^= (1 << removed) | (1 << added);
+            defects = sparse;
+        }
+    }
+
+    #[test]
+    fn q174_sparse_swap_allocates_nothing() {
+        let inventory = compile_inventory().unwrap();
+        let coefficients = [1_u8; 174];
+        let defects = block_q174_defects(&coefficients);
+        let (_, allocations) = tracked_allocations(|| {
+            for _ in 0..1_024 {
+                std::hint::black_box(q174_swap_defects(
+                    &coefficients,
+                    &defects,
+                    &inventory.large[0][0],
+                    &inventory.large[0][1],
+                ));
+            }
         });
         assert_eq!(allocations, 0);
     }

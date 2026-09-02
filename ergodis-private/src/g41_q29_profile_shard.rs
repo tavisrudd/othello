@@ -126,6 +126,22 @@ pub struct G41Q29PairTarget {
 
 const _: () = assert!(std::mem::size_of::<G41Q29PairTarget>() == 16);
 
+/// A source-index pair whose complete seven-coordinate sum occurs in the
+/// sealed pair-target table. `side == 0` denotes A+C and carries every
+/// compatible B archetype bit; `side == 1` denotes B+B and carries one bit.
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, PartialOrd, Ord, Serialize)]
+pub struct G41Q29MatchedPair {
+    pub target: u32,
+    pub first: u32,
+    pub second: u32,
+    pub archetype_bits: u8,
+    pub side: u8,
+    pub _pad: u16,
+}
+
+const _: () = assert!(std::mem::size_of::<G41Q29MatchedPair>() == 16);
+
 impl G41Q29ProfileShardWorkspace {
     pub fn new(capacity: usize) -> Result<Self, G41Q29ProfileShardError> {
         if capacity == 0 || capacity > u32::MAX as usize {
@@ -361,7 +377,7 @@ impl<'a> G41Q29PairTargetIndex<'a> {
     }
 
     #[inline(always)]
-    pub fn archetype_bits(&self, coordinates: [u16; COORDINATES]) -> Option<u8> {
+    pub fn match_target(&self, coordinates: [u16; COORDINATES]) -> Option<(u32, u8)> {
         let hash = target_hash(coordinates);
         let first_bit = hash as usize & self.bloom_mask;
         let second_bit = (hash >> 32) as usize & self.bloom_mask;
@@ -378,10 +394,15 @@ impl<'a> G41Q29PairTargetIndex<'a> {
             }
             let target = self.targets[index as usize];
             if target.coordinates == coordinates {
-                return Some(target.archetype_bits);
+                return Some((index, target.archetype_bits));
             }
             slot = (slot + 1) & self.mask;
         }
+    }
+
+    #[inline(always)]
+    pub fn archetype_bits(&self, coordinates: [u16; COORDINATES]) -> Option<u8> {
+        self.match_target(coordinates).map(|(_, bits)| bits)
     }
 }
 
@@ -980,6 +1001,117 @@ pub fn mark_g41_q29_profile_shard_participation_from_targets<
     })
 }
 
+/// Appends every exact source pair in one projection shard that participates
+/// in at least one q29 quartet according to the complete target table. The
+/// caller owns and presizes `output`; the pair loops allocate no memory.
+pub fn collect_g41_q29_profile_shard_matches_from_targets<
+    const FIRST: usize,
+    const SECOND: usize,
+>(
+    left_sets: [&[G41Q29ExactProfile]; 2],
+    right_sets: [&[G41Q29ExactProfile]; 2],
+    left_indices: [&G41Q29ProjectionIndex; 2],
+    right_indices: [&G41Q29ProjectionIndex; 2],
+    left_projection_sum: [u16; 2],
+    target_index: &G41Q29PairTargetIndex<'_>,
+    output: &mut Vec<G41Q29MatchedPair>,
+    output_capacity: usize,
+) -> Result<[u64; 3], G41Q29ProfileShardError> {
+    if FIRST >= COORDINATES
+        || SECOND >= COORDINATES
+        || FIRST == SECOND
+        || left_projection_sum.iter().any(|&value| value > TARGET)
+        || output_capacity == 0
+        || output.capacity() < output_capacity
+    {
+        return Err(G41Q29ProfileShardError::SemanticMismatch);
+    }
+    let mut matching = [0_u64; 3];
+    for first_value in 0..=left_projection_sum[0] {
+        for second_value in 0..=left_projection_sum[1] {
+            let first_range = left_indices[0].range(first_value, second_value);
+            let second_range = left_indices[1].range(
+                left_projection_sum[0] - first_value,
+                left_projection_sum[1] - second_value,
+            );
+            for &first in first_range {
+                for &second in second_range {
+                    let Some(coordinates) = pair_sum_coordinates(
+                        left_sets[0][first as usize],
+                        left_sets[1][second as usize],
+                    ) else {
+                        continue;
+                    };
+                    let Some((target, archetype_bits)) = target_index.match_target(coordinates)
+                    else {
+                        continue;
+                    };
+                    if output.len() == output_capacity {
+                        return Err(G41Q29ProfileShardError::StateBudget);
+                    }
+                    output.push(G41Q29MatchedPair {
+                        target,
+                        first,
+                        second,
+                        archetype_bits,
+                        side: 0,
+                        _pad: 0,
+                    });
+                    matching[0] += 1;
+                }
+            }
+        }
+    }
+
+    let right_projection_sum = [
+        TARGET - left_projection_sum[0],
+        TARGET - left_projection_sum[1],
+    ];
+    for archetype in 0..2 {
+        let right = right_sets[archetype];
+        let index = right_indices[archetype];
+        let archetype_bit = 1_u8 << archetype;
+        for first_value in 0..=right_projection_sum[0] {
+            for second_value in 0..=right_projection_sum[1] {
+                let first_range = index.range(first_value, second_value);
+                let second_range = index.range(
+                    right_projection_sum[0] - first_value,
+                    right_projection_sum[1] - second_value,
+                );
+                for &first in first_range {
+                    for &second in second_range {
+                        let Some(sum) =
+                            pair_sum_coordinates(right[first as usize], right[second as usize])
+                        else {
+                            continue;
+                        };
+                        let needed = sum.map(|value| TARGET - value);
+                        let Some((target, bits)) = target_index.match_target(needed) else {
+                            continue;
+                        };
+                        if bits & archetype_bit == 0 {
+                            continue;
+                        }
+                        if output.len() == output_capacity {
+                            return Err(G41Q29ProfileShardError::StateBudget);
+                        }
+                        output.push(G41Q29MatchedPair {
+                            target,
+                            first,
+                            second,
+                            archetype_bits: archetype_bit,
+                            side: 1,
+                            _pad: 0,
+                        });
+                        matching[archetype + 1] += 1;
+                    }
+                }
+            }
+        }
+    }
+    Ok(matching)
+}
+
 /// Marks every aggregate profile that participates in at least one exact
 /// quartet in this shard. The four bitsets are ordered A, B1, B5, C.
 pub fn mark_g41_q29_profile_shard_participation_dual<const FIRST: usize, const SECOND: usize>(
@@ -1285,6 +1417,46 @@ mod tests {
         assert_eq!(report.pair_records_examined, [1, 2, 0]);
         assert_eq!(report.matching_pair_records, [1, 2, 0]);
         assert_eq!(bits, [[1], [3], [0], [1]]);
+    }
+
+    #[test]
+    fn matched_pair_collection_is_exact_and_allocation_free() {
+        let a = [profile([100; 7])];
+        let c = [profile([150; 7])];
+        let b1 = [profile([136; 7]), profile([137; 7])];
+        let b5 = [profile([100; 7])];
+        let ia = compile_g41_q29_projection_index::<0, 2>(&a).unwrap();
+        let ic = compile_g41_q29_projection_index::<0, 2>(&c).unwrap();
+        let ib1 = compile_g41_q29_projection_index::<0, 2>(&b1).unwrap();
+        let ib5 = compile_g41_q29_projection_index::<0, 2>(&b5).unwrap();
+        let targets = [G41Q29PairTarget {
+            coordinates: [250; 7],
+            archetype_bits: 1,
+            _pad: 0,
+        }];
+        let index = G41Q29PairTargetIndex::compile(&targets).unwrap();
+        let mut pairs = Vec::with_capacity(3);
+        let (matching, allocations) = tracked_allocations(|| {
+            collect_g41_q29_profile_shard_matches_from_targets::<0, 2>(
+                [&a, &c],
+                [&b1, &b5],
+                [&ia, &ic],
+                [&ib1, &ib5],
+                [250, 250],
+                &index,
+                &mut pairs,
+                3,
+            )
+            .unwrap()
+        });
+        assert_eq!(allocations, 0);
+        assert_eq!(matching, [1, 2, 0]);
+        assert_eq!(pairs.len(), 3);
+        assert_eq!(pairs[0].side, 0);
+        assert_eq!(pairs[0].archetype_bits, 1);
+        assert!(pairs[1..]
+            .iter()
+            .all(|pair| pair.side == 1 && pair.archetype_bits == 1));
     }
 
     #[test]

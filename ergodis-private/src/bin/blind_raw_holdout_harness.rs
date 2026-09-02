@@ -358,7 +358,10 @@ fn generic_cegar_constant_conjunction_corpora(
 
 #[cfg(test)]
 mod tests {
-    use super::{generic_cegar_constant_conjunction_corpora, GenericCorpus};
+    use super::{
+        generic_cegar_constant_conjunction_corpora, generic_cegar_sparse_exception_dnf_corpora,
+        GenericCorpus,
+    };
 
     #[test]
     fn cegar_adds_blind_false_positive_and_refines_conjunction() {
@@ -394,10 +397,31 @@ mod tests {
         };
         assert!(generic_cegar_constant_conjunction_corpora(training, &holdout).is_err());
     }
+
+    #[test]
+    fn sparse_exception_cegar_absorbs_holdout_counterexample() {
+        let training = GenericCorpus {
+            fields: vec!["opaque_a".to_owned(), "opaque_b".to_owned()],
+            expected: vec![true, true, false],
+            values: vec![vec![0, 0], vec![1, 1], vec![1, 0]],
+        };
+        let holdout = GenericCorpus {
+            fields: training.fields.clone(),
+            expected: vec![true, false],
+            values: vec![vec![0, 2], vec![1, 2]],
+        };
+        let (_, _, rounds, counterexamples) =
+            generic_cegar_sparse_exception_dnf_corpora(training, &holdout).unwrap();
+        assert!(rounds > 0);
+        assert!(counterexamples > 0);
+    }
 }
 
-fn generic_sparse_exception_dnf(path: &Path) -> Result<(Value, usize)> {
-    let corpus = read_generic_corpus(path)?;
+type SparseClause = Vec<(usize, i64)>;
+
+fn generic_sparse_exception_dnf_corpus(
+    corpus: &GenericCorpus,
+) -> Result<(Value, usize, Vec<SparseClause>)> {
     let positives: Vec<usize> = corpus
         .expected
         .iter()
@@ -413,7 +437,7 @@ fn generic_sparse_exception_dnf(path: &Path) -> Result<(Value, usize)> {
     if positives.is_empty() || negatives.is_empty() {
         bail!("sparse exception proposer requires both labels");
     }
-    let mut clauses = Vec::with_capacity(negatives.len());
+    let mut clauses: Vec<SparseClause> = Vec::with_capacity(negatives.len());
     for &negative in &negatives {
         let mut live = vec![true; positives.len()];
         let mut clause = Vec::new();
@@ -497,6 +521,10 @@ fn generic_sparse_exception_dnf(path: &Path) -> Result<(Value, usize)> {
             program.push(json!({"op": "and"}));
         }
     }
+    let selected_clauses = selected
+        .iter()
+        .map(|&candidate| clauses[candidate].clone())
+        .collect();
     Ok((
         json!({
             "schema": "ergodis-attack-plan-v0",
@@ -506,7 +534,53 @@ fn generic_sparse_exception_dnf(path: &Path) -> Result<(Value, usize)> {
             "program": program,
         }),
         literal_count,
+        selected_clauses,
     ))
+}
+
+fn generic_cegar_sparse_exception_dnf(
+    train_path: &Path,
+    holdout_path: &Path,
+) -> Result<(Value, usize, usize, usize)> {
+    generic_cegar_sparse_exception_dnf_corpora(
+        read_generic_corpus(train_path)?,
+        &read_generic_corpus(holdout_path)?,
+    )
+}
+
+fn generic_cegar_sparse_exception_dnf_corpora(
+    mut training: GenericCorpus,
+    holdout: &GenericCorpus,
+) -> Result<(Value, usize, usize, usize)> {
+    if training.fields != holdout.fields {
+        bail!("training and holdout fields differ");
+    }
+    let mut counterexamples = 0_usize;
+    for round in 0..=16 {
+        let (plan, selected, clauses) = generic_sparse_exception_dnf_corpus(&training)?;
+        let mut failures = Vec::new();
+        for (row, (&expected, values)) in holdout.expected.iter().zip(&holdout.values).enumerate() {
+            let actual = !clauses.iter().any(|clause| {
+                clause
+                    .iter()
+                    .all(|&(field, constant)| values[field] == constant)
+            });
+            if actual != expected {
+                failures.push(row);
+            }
+        }
+        if failures.is_empty() {
+            return Ok((plan, selected, round, counterexamples));
+        }
+        counterexamples = counterexamples
+            .checked_add(failures.len())
+            .context("sparse-exception CEGAR counterexample count overflow")?;
+        for row in failures {
+            training.expected.push(holdout.expected[row]);
+            training.values.push(holdout.values[row].clone());
+        }
+    }
+    bail!("sparse-exception CEGAR exceeded its bounded refinement rounds")
 }
 
 fn evolve(
@@ -588,7 +662,7 @@ fn main() -> Result<()> {
         let training_rows = campaign_rows(&tree)?;
         let tree_exact = tree["evaluation"]["weighted_correct"].as_u64() == Some(training_rows);
         let constant_plan = generic_cegar_constant_conjunction(&train_path, &holdout_path).ok();
-        let exception_plan = generic_sparse_exception_dnf(&train_path).ok();
+        let exception_plan = generic_cegar_sparse_exception_dnf(&train_path, &holdout_path).ok();
         let (
             proposed_plan,
             proposer,
@@ -603,8 +677,14 @@ fn main() -> Result<()> {
                 rounds,
                 counterexamples,
             )
-        } else if let Some((plan, selected)) = exception_plan {
-            (plan, "generic-sparse-exception-dnf", selected, 0, 0)
+        } else if let Some((plan, selected, rounds, counterexamples)) = exception_plan {
+            (
+                plan,
+                "generic-cegar-sparse-exception-dnf",
+                selected,
+                rounds,
+                counterexamples,
+            )
         } else if tree_exact {
             (tree["plan"].clone(), "generic-decision-tree", 0, 0, 0)
         } else {

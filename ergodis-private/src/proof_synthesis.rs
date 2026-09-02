@@ -13,6 +13,78 @@ pub const MAX_SQUARE_VARIABLES: usize = 8;
 pub const MAX_BOUNDED_VARIABLES: usize = 8;
 pub const MAX_FACTS: u8 = 64;
 
+/// Exhaustively evolves primitive bounded homogeneous integer relations over
+/// anonymous scalar observations. The caller owns the output workspace; the
+/// candidate loop is iterative and allocation-free.
+pub fn evolve_bounded_homogeneous_relations<const FIELDS: usize, const CAPACITY: usize>(
+    rows: &[[i32; FIELDS]],
+    coefficient_bound: i8,
+    output: &mut [[i8; FIELDS]; CAPACITY],
+) -> Result<(u64, usize), SynthesisError> {
+    if FIELDS == 0 || FIELDS > MAX_LINEAR_VARIABLES || rows.is_empty() || coefficient_bound <= 0 {
+        return Err(SynthesisError::InvalidLinearDimensions);
+    }
+    let radix = u64::try_from(2_i16 * i16::from(coefficient_bound) + 1)
+        .map_err(|_| SynthesisError::InvalidLinearDimensions)?;
+    let candidates = (0..FIELDS).try_fold(1_u64, |product, _| {
+        product
+            .checked_mul(radix)
+            .ok_or(SynthesisError::ArithmeticOverflow)
+    })?;
+    let mut tested = 0_u64;
+    let mut found = 0_usize;
+    for mut code in 0..candidates {
+        let mut coefficients = [0_i8; FIELDS];
+        for coefficient in &mut coefficients {
+            *coefficient = (code % radix) as i8 - coefficient_bound;
+            code /= radix;
+        }
+        let Some(first) = coefficients.iter().copied().find(|&value| value != 0) else {
+            continue;
+        };
+        if first < 0 || coefficients_gcd(coefficients) != 1 {
+            continue;
+        }
+        tested += 1;
+        let mut holds = true;
+        for row in rows {
+            let mut sum = 0_i64;
+            for field in 0..FIELDS {
+                sum = sum
+                    .checked_add(i64::from(coefficients[field]) * i64::from(row[field]))
+                    .ok_or(SynthesisError::ArithmeticOverflow)?;
+            }
+            if sum != 0 {
+                holds = false;
+                break;
+            }
+        }
+        if holds {
+            if found == CAPACITY {
+                return Err(SynthesisError::SolutionBudget);
+            }
+            output[found] = coefficients;
+            found += 1;
+        }
+    }
+    Ok((tested, found))
+}
+
+fn coefficients_gcd<const FIELDS: usize>(coefficients: [i8; FIELDS]) -> u8 {
+    let mut divisor = 0_u8;
+    for coefficient in coefficients {
+        let mut value = coefficient.unsigned_abs();
+        let mut current = divisor;
+        while value != 0 {
+            let remainder = current % value;
+            current = value;
+            value = remainder;
+        }
+        divisor = current;
+    }
+    divisor
+}
+
 #[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
 pub struct ExtractorDescriptor {
     identity: [u8; 16],
@@ -612,6 +684,25 @@ pub fn solve_bounded_linear_combination(
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::allocation_test::tracked_allocations;
+
+    #[test]
+    fn bounded_relation_evolution_is_blind_exact_and_allocation_free() {
+        let rows = [[1, 2, 2, 0], [2, 0, 1, 2], [3, 4, 5, 0], [7, 2, 8, 0]];
+        let mut output = [[0_i8; 4]; 4];
+        let (result, allocations) =
+            tracked_allocations(|| evolve_bounded_homogeneous_relations(&rows, 2, &mut output));
+        let (tested, found) = result.unwrap();
+        assert!(tested > 0);
+        assert_eq!(found, 1);
+        assert_eq!(output[0], [2, 1, -2, -1]);
+        assert_eq!(allocations, 0);
+        let mut too_small = [[0_i8; 4]; 0];
+        assert_eq!(
+            evolve_bounded_homogeneous_relations(&rows, 2, &mut too_small),
+            Err(SynthesisError::SolutionBudget)
+        );
+    }
 
     #[test]
     fn fraction_free_linear_closure_is_exact() {

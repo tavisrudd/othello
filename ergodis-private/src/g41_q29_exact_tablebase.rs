@@ -814,6 +814,36 @@ pub fn complement_g41_q29_block_spec(
     Ok((mask ^ 63, pack_digit_counts(complement)))
 }
 
+/// Translate a multiplier-invariant length-522 block by 261.  This swaps the
+/// three pairs of q18 source-orbit rows and fixes every q29 coefficient.
+pub fn translate_261_g41_q29_block_spec(
+    mask: u8,
+    digits: u32,
+) -> Result<(u8, u32), G41Q29ExactTablebaseError> {
+    let mut counts = digit_counts(digits);
+    if mask >= 64 || (0..SLOTS).any(|slot| counts[slot] > LARGE_ORBITS[slot]) {
+        return Err(G41Q29ExactTablebaseError::SemanticMismatch);
+    }
+    for first in [0, 2, 4] {
+        counts.swap(first, first + 1);
+    }
+    let translated_mask = ((mask & 0b01_01_01) << 1) | ((mask & 0b10_10_10) >> 1);
+    Ok((translated_mask, pack_digit_counts(counts)))
+}
+
+/// Canonicalize under the existing coefficient complement and the independent
+/// 261-translation.  The returned q29 coefficient/profile semantics need no
+/// transport because 261 is zero modulo 29.
+pub fn translation_canonical_g41_q29_block_spec(
+    mask: u8,
+    digits: u32,
+) -> Result<(u8, u32), G41Q29ExactTablebaseError> {
+    let direct = canonical_g41_q29_block_spec(mask, digits)?;
+    let translated = translate_261_g41_q29_block_spec(mask, digits)?;
+    let translated = canonical_g41_q29_block_spec(translated.0, translated.1)?;
+    Ok((direct.0, direct.1).min((translated.0, translated.1)))
+}
+
 pub fn canonical_g41_q29_block_spec(
     mask: u8,
     digits: u32,
@@ -1838,6 +1868,42 @@ mod tests {
         assert_eq!(twice, spec);
         let canonical = canonical_g41_q29_block_spec(spec.0, spec.1).unwrap();
         assert_eq!((canonical.0, canonical.1), spec.min(once));
+    }
+
+    #[test]
+    fn translation_261_swaps_slot_pairs_and_is_q29_invisible() {
+        let spec = (0b10_01_11_u8, 2_202_981_u32);
+        let once = translate_261_g41_q29_block_spec(spec.0, spec.1).unwrap();
+        let twice = translate_261_g41_q29_block_spec(once.0, once.1).unwrap();
+        assert_eq!(twice, spec);
+        let expected_mask = 0b01_10_11;
+        assert_eq!(once.0, expected_mask);
+        let direct = canonical_g41_q29_block_spec(spec.0, spec.1).unwrap();
+        let translated = canonical_g41_q29_block_spec(once.0, once.1).unwrap();
+        assert_eq!(
+            translation_canonical_g41_q29_block_spec(spec.0, spec.1).unwrap(),
+            (direct.0, direct.1).min((translated.0, translated.1))
+        );
+
+        let inventory = compile_inventory().unwrap();
+        for first in [0, 2, 4] {
+            assert_eq!(
+                orbit_state(&inventory.small[first]).unwrap(),
+                orbit_state(&inventory.small[first + 1]).unwrap()
+            );
+            let mut left = inventory.large[first][..usize::from(inventory.large_len[first])]
+                .iter()
+                .map(|orbit| orbit_state(orbit).unwrap())
+                .collect::<Vec<_>>();
+            let mut right = inventory.large[first + 1]
+                [..usize::from(inventory.large_len[first + 1])]
+                .iter()
+                .map(|orbit| orbit_state(orbit).unwrap())
+                .collect::<Vec<_>>();
+            left.sort_unstable();
+            right.sort_unstable();
+            assert_eq!(left, right);
+        }
     }
 
     #[test]

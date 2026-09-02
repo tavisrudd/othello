@@ -230,12 +230,13 @@ fn predicates_hold(
 
 #[inline(always)]
 fn q87_key(profile: G41Q174JointProfile) -> Q87Key {
-    Q87Key([
-        profile.q87_energy,
-        profile.q87_defects[0],
-        profile.q87_defects[1],
-        profile.q87_defects[2],
-    ])
+    Q87Key(std::array::from_fn(|coordinate| {
+        if coordinate == 0 {
+            profile.q87_energy
+        } else {
+            profile.q87_defects[coordinate - 1]
+        }
+    }))
 }
 
 #[inline(always)]
@@ -510,17 +511,17 @@ mod tests {
             q58_energy: q87[0],
             q58_residuals: ResidualTuple::from_array([residual; 7]),
             q87_energy: q87[0],
-            q87_defects: [q87[1], q87[2], q87[3]],
+            q87_defects: std::array::from_fn(|coordinate| q87[coordinate + 1]),
         }
     }
 
     #[test]
     fn grouped_join_finds_exact_four_coordinate_complement() {
         let blocks = [
-            [profile(0, [100; 4])],
-            [profile(0, [120; 4])],
-            [profile(0, [123; 4])],
-            [profile(0, [180; 4])],
+            [profile(0, [100; 3])],
+            [profile(0, [120; 3])],
+            [profile(0, [123; 3])],
+            [profile(0, [180; 3])],
         ];
         let report = search_g41_q174_grouped_join(
             [&blocks[0], &blocks[1], &blocks[2], &blocks[3]],
@@ -535,10 +536,10 @@ mod tests {
     #[test]
     fn q87_fibre_kernel_allocates_nothing_with_presized_scratch() {
         let blocks = [
-            [profile(0, [100; 4])],
-            [profile(0, [120; 4])],
-            [profile(0, [123; 4])],
-            [profile(0, [180; 4])],
+            [profile(0, [100; 3])],
+            [profile(0, [120; 3])],
+            [profile(0, [123; 3])],
+            [profile(0, [180; 3])],
         ];
         let sets = [
             CompiledSet::compile(&blocks[0]).unwrap(),

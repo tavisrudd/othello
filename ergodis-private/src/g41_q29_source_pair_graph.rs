@@ -1,25 +1,28 @@
 //! Exact source-pair graph beneath the aggregate q29 pair-target quotient.
 
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
 use crate::g41_joint_quotient_search::G41JointQuotientWitness;
-use crate::g41_q29_exact_tablebase::{canonical_g41_q29_block_spec, G41Q29ExactTablebaseError};
+use crate::g41_q29_exact_tablebase::{
+    canonical_g41_q29_block_spec, translation_canonical_g41_q29_block_spec,
+    G41Q29ExactTablebaseError,
+};
 
 const MAX_WITNESSES: usize = 1 << 22;
 
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, PartialOrd, Ord, Serialize)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, PartialOrd, Ord, Deserialize, Serialize)]
 pub struct G41Q29CanonicalBlockSpec {
     pub mask: u8,
     pub digits: u32,
 }
 
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, PartialOrd, Ord, Serialize)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, PartialOrd, Ord, Deserialize, Serialize)]
 pub struct G41Q29SourcePair {
     pub blocks: [G41Q29CanonicalBlockSpec; 2],
 }
 
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, PartialOrd, Ord, Serialize)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, PartialOrd, Ord, Deserialize, Serialize)]
 pub struct G41Q29SourcePairEdge {
     pub ac_pair: u32,
     pub bd_pair: u32,
@@ -37,6 +40,7 @@ pub struct G41Q29SourcePairGraphReport {
     pub provenance: &'static str,
 }
 
+#[derive(Serialize)]
 pub struct G41Q29SourcePairGraph {
     pub report: G41Q29SourcePairGraphReport,
     pub ac_pairs: Box<[G41Q29SourcePair]>,
@@ -62,6 +66,14 @@ fn canonical(
     Ok(G41Q29CanonicalBlockSpec { mask, digits })
 }
 
+fn translation_canonical(
+    mask: u8,
+    digits: u32,
+) -> Result<G41Q29CanonicalBlockSpec, G41Q29SourcePairGraphError> {
+    let (mask, digits) = translation_canonical_g41_q29_block_spec(mask, digits)?;
+    Ok(G41Q29CanonicalBlockSpec { mask, digits })
+}
+
 fn source_pair(
     witness: &G41JointQuotientWitness,
     positions: [usize; 2],
@@ -74,8 +86,25 @@ fn source_pair(
     Ok(G41Q29SourcePair { blocks })
 }
 
-pub fn compile_g41_q29_source_pair_graph(
+fn translation_source_pair(
+    witness: &G41JointQuotientWitness,
+    positions: [usize; 2],
+) -> Result<G41Q29SourcePair, G41Q29SourcePairGraphError> {
+    let mut blocks = [
+        translation_canonical(witness.masks[positions[0]], witness.digits[positions[0]])?,
+        translation_canonical(witness.masks[positions[1]], witness.digits[positions[1]])?,
+    ];
+    blocks.sort_unstable();
+    Ok(G41Q29SourcePair { blocks })
+}
+
+fn compile_graph(
     witnesses: &[G41JointQuotientWitness],
+    pair_extractor: fn(
+        &G41JointQuotientWitness,
+        [usize; 2],
+    ) -> Result<G41Q29SourcePair, G41Q29SourcePairGraphError>,
+    provenance: &'static str,
 ) -> Result<G41Q29SourcePairGraph, G41Q29SourcePairGraphError> {
     if witnesses.is_empty() || witnesses.len() > MAX_WITNESSES {
         return Err(G41Q29SourcePairGraphError::StateBudget);
@@ -89,8 +118,8 @@ pub fn compile_g41_q29_source_pair_graph(
         {
             return Err(G41Q29SourcePairGraphError::SemanticMismatch);
         }
-        let ac = source_pair(witness, [0, 2])?;
-        let bd = source_pair(witness, [1, 3])?;
+        let ac = pair_extractor(witness, [0, 2])?;
+        let bd = pair_extractor(witness, [1, 3])?;
         ac_pairs.push(ac);
         bd_pairs.push(bd);
         raw.push((ac, bd, index as u32, witness.root_id));
@@ -146,12 +175,32 @@ pub fn compile_g41_q29_source_pair_graph(
             ac_pairs: ac_pairs.len() as u32,
             bd_pairs: bd_pairs.len() as u32,
             edges: unique_edges.len() as u32,
-            provenance: "exact commutative A+C/B+D source-pair quotient of the sealed g41 interface witnesses; canonical block complementation preserves q29 defects, every edge retains a representative original witness index/root, and no aggregate or pair-target result authorizes exclusion without exact source replay",
+            provenance,
         },
         ac_pairs: ac_pairs.into_boxed_slice(),
         bd_pairs: bd_pairs.into_boxed_slice(),
         edges: unique_edges.into_boxed_slice(),
     })
+}
+
+pub fn compile_g41_q29_source_pair_graph(
+    witnesses: &[G41JointQuotientWitness],
+) -> Result<G41Q29SourcePairGraph, G41Q29SourcePairGraphError> {
+    compile_graph(
+        witnesses,
+        source_pair,
+        "exact commutative A+C/B+D source-pair quotient of the sealed g41 interface witnesses; canonical block complementation preserves q29 defects, every edge retains a representative original witness index/root, and no aggregate or pair-target result authorizes exclusion without exact source replay",
+    )
+}
+
+pub fn compile_g41_q29_translation_source_pair_graph(
+    witnesses: &[G41JointQuotientWitness],
+) -> Result<G41Q29SourcePairGraph, G41Q29SourcePairGraphError> {
+    compile_graph(
+        witnesses,
+        translation_source_pair,
+        "exact commutative A+C/B+D source-pair quotient of the sealed g41 interface witnesses under independent block complementation and translation by 261; the typed q174 translation proof establishes each block action, every edge retains a representative original witness index/root, and negative authority still requires exact source replay",
+    )
 }
 
 #[cfg(test)]
@@ -176,5 +225,32 @@ mod tests {
         assert_eq!(graph.report.edges, 1);
         assert_eq!(graph.edges[0].witnessed_interfaces, 2);
         assert_eq!(graph.edges[0].representative_witness, 0);
+    }
+
+    #[test]
+    fn translation_graph_identifies_independently_translated_blocks() {
+        let first = G41JointQuotientWitness {
+            root_id: 348_244,
+            masks: [20, 1, 21, 1],
+            digits: [2_215_340, 2_203_361, 1_957_347, 2_218_467],
+        };
+        let mut second = first;
+        for block in 0..4 {
+            let translated = crate::g41_q29_exact_tablebase::translate_261_g41_q29_block_spec(
+                second.masks[block],
+                second.digits[block],
+            )
+            .unwrap();
+            second.masks[block] = translated.0;
+            second.digits[block] = translated.1;
+        }
+        second.root_id = (0..4).fold(0_u32, |root, block| {
+            root | (u32::from(second.masks[block]) << (6 * block))
+        });
+        let graph = compile_g41_q29_translation_source_pair_graph(&[first, second]).unwrap();
+        assert_eq!(graph.report.ac_pairs, 1);
+        assert_eq!(graph.report.bd_pairs, 1);
+        assert_eq!(graph.report.edges, 1);
+        assert_eq!(graph.edges[0].witnessed_interfaces, 2);
     }
 }

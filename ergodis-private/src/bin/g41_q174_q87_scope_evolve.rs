@@ -3,12 +3,14 @@ use std::path::PathBuf;
 
 use anyhow::{Context, Result};
 use ergodis_private::g41_q174_full_q87_join::G41Q174Q87ScopeContext;
+use ergodis_private::g41_q174_joint::{
+    prove_g41_q174_q87_phase_relations, G41Q174Q87PhaseRelation, G41_Q174_Q87_DEFECT_SHIFTS,
+};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
 const MODULUS: usize = 87;
 const MULTIPLIER: usize = 41;
-const EXISTING_SHIFTS: [u8; 4] = [4, 6, 10, 33];
 const MAXIMUM_PAIR_ENTRIES: usize = 1 << 20;
 
 #[derive(Deserialize)]
@@ -34,10 +36,12 @@ struct Scope {
 struct Report {
     source_digest: [u8; 32],
     multiplier_orbit_representatives: Vec<u8>,
-    existing_shifts: [u8; 4],
+    existing_shifts: Vec<u8>,
     existing_canonical_classes: Vec<u8>,
     redundant_existing_shifts: Vec<u8>,
     candidate_classes: Vec<u8>,
+    phase_relations: Vec<G41Q174Q87PhaseRelation>,
+    phase_proof_commitment: [u8; 32],
     scopes_tested: u32,
     minimum_additional_classes: Option<u8>,
     sufficient_scopes: Vec<Scope>,
@@ -82,25 +86,38 @@ fn main() -> Result<()> {
     let mut representatives: Vec<u8> = (1..=MODULUS / 2).map(canonical_class).collect();
     representatives.sort_unstable();
     representatives.dedup();
-    let presented_existing_classes =
-        EXISTING_SHIFTS.map(|shift| canonical_class(usize::from(shift)));
-    let mut existing_canonical_classes: Vec<u8> = presented_existing_classes.to_vec();
+    let existing_shifts: Vec<u8> = G41_Q174_Q87_DEFECT_SHIFTS
+        .into_iter()
+        .map(|shift| shift as u8)
+        .collect();
+    let presented_existing_classes: Vec<u8> = existing_shifts
+        .iter()
+        .map(|&shift| canonical_class(usize::from(shift)))
+        .collect();
+    let mut existing_canonical_classes = presented_existing_classes.clone();
     existing_canonical_classes.sort_unstable();
     existing_canonical_classes.dedup();
     let mut seen_existing = Vec::new();
     let mut redundant_existing_shifts = Vec::new();
-    for (shift, class) in EXISTING_SHIFTS.into_iter().zip(presented_existing_classes) {
+    for (&shift, &class) in existing_shifts.iter().zip(&presented_existing_classes) {
         if seen_existing.contains(&class) {
             redundant_existing_shifts.push(shift);
         } else {
             seen_existing.push(class);
         }
     }
-    let candidate_classes: Vec<u8> = representatives
+    let phase_proof = prove_g41_q174_q87_phase_relations()?;
+    let mut candidate_classes: Vec<u8> = phase_proof
+        .relations
         .iter()
-        .copied()
-        .filter(|class| !existing_canonical_classes.contains(class))
+        .filter_map(|relation| {
+            (!existing_canonical_classes.contains(&relation.repeated_q87_class)
+                && !existing_canonical_classes.contains(&relation.singleton_q87_class))
+            .then_some(relation.repeated_q87_class)
+        })
         .collect();
+    candidate_classes.sort_unstable();
+    candidate_classes.dedup();
     anyhow::ensure!(
         candidate_classes.len() < usize::BITS as usize,
         "scope mask overflow"
@@ -159,14 +176,16 @@ fn main() -> Result<()> {
         &Report {
             source_digest: Sha256::digest(source).into(),
             multiplier_orbit_representatives: representatives,
-            existing_shifts: EXISTING_SHIFTS,
+            existing_shifts,
             existing_canonical_classes,
             redundant_existing_shifts,
             candidate_classes,
+            phase_relations: phase_proof.relations.to_vec(),
+            phase_proof_commitment: phase_proof.proof_commitment,
             scopes_tested,
             minimum_additional_classes,
             sufficient_scopes,
-            provenance: "discovery-only progressively widened scope evolution over multiplier-derived q87 shift classes; candidates contain no hand-selected residual or theorem name, fitness is exact survival of all lifted target-profile quartets, and every evaluation uses the bounded full-state q87 extractor; authority requires sealed source-fibre replay",
+            provenance: "discovery-only progressively widened scope evolution over the independent basis of multiplier-derived q87 shift classes; the sealed three-phase proof removes each algebraically determined partner before evolution, candidates contain no hand-selected residual or theorem name, fitness is exact survival of all lifted target-profile quartets, and every evaluation uses the bounded full-state q87 extractor; authority requires sealed source-fibre replay",
         },
     )?;
     println!();

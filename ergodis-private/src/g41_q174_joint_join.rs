@@ -32,7 +32,7 @@ struct HotProfile {
     q87_defects: [u16; G41_Q174_Q87_SCOPED_DEFECTS],
 }
 
-const _: () = assert!(std::mem::size_of::<HotProfile>() == 24);
+const _: () = assert!(std::mem::size_of::<HotProfile>() == 22);
 
 #[repr(C)]
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, PartialOrd, Ord)]
@@ -42,7 +42,7 @@ struct PairKey {
     residuals: [i16; 7],
 }
 
-const _: () = assert!(std::mem::size_of::<PairKey>() == 22);
+const _: () = assert!(std::mem::size_of::<PairKey>() == 20);
 
 #[repr(C)]
 #[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord)]
@@ -52,7 +52,7 @@ struct PairEntry {
     second: u32,
 }
 
-const _: () = assert!(std::mem::size_of::<PairEntry>() == 32);
+const _: () = assert!(std::mem::size_of::<PairEntry>() == 28);
 
 impl PairEntry {
     #[inline(always)]
@@ -422,8 +422,8 @@ mod tests {
     #[test]
     fn joint_pair_key_round_trips_ids_and_separates_q87_energy() {
         let residuals = [-523, -17, -1, 0, 1, 17, 523];
-        let first = PairEntry::new(joint_key(19, [1, 2, 3], residuals), 700_123, 786_431);
-        let second = PairEntry::new(joint_key(20, [1, 2, 3], residuals), 700_123, 786_431);
+        let first = PairEntry::new(joint_key(19, [1, 2], residuals), 700_123, 786_431);
+        let second = PairEntry::new(joint_key(20, [1, 2], residuals), 700_123, 786_431);
         assert_ne!(first.key(), second.key());
         assert_eq!(first.ids(), [700_123, 786_431]);
     }

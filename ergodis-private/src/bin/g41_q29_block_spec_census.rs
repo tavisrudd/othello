@@ -7,6 +7,7 @@ use clap::Parser;
 use ergodis_private::g41_digit_witness_cache::read_g41_digit_witness_cache;
 use ergodis_private::g41_q29_exact_tablebase::canonical_g41_q29_block_spec;
 use ergodis_private::g41_q29_exact_tablebase::g41_q29_slot_aggregate_signature;
+use ergodis_private::g41_q29_exact_tablebase::translation_canonical_g41_q29_block_spec;
 use serde::Serialize;
 
 #[derive(Parser)]
@@ -25,6 +26,9 @@ struct Report {
     canonical_block_specs_by_position: [u32; 4],
     canonical_block_specs_global: u32,
     canonical_digit_vectors_global: u32,
+    translation_canonical_block_specs_global: u32,
+    translation_canonical_digit_vectors_global: u32,
+    translation_canonical_four_block_domains: u32,
     maximum_masks_per_digit_vector: u8,
     canonical_aggregate_signature_specs: Vec<AggregateSignatureCount>,
     canonical_ac_pair_domains: u32,
@@ -99,9 +103,11 @@ fn main() -> Result<()> {
     let mut canonical_by_position: [Vec<u64>; 4] =
         std::array::from_fn(|_| Vec::with_capacity(count));
     let mut canonical_global = Vec::with_capacity(4 * count);
+    let mut translation_canonical_global = Vec::with_capacity(4 * count);
     let mut ac_pairs = Vec::with_capacity(count);
     let mut bd_pairs = Vec::with_capacity(count);
     let mut quadruples = Vec::with_capacity(count);
+    let mut translation_quadruples = Vec::with_capacity(count);
     let mut aggregate_ac_pairs = Vec::with_capacity(count);
     let mut aggregate_bd_pairs = Vec::with_capacity(count);
     let mut aggregate_quadruples = Vec::with_capacity(count);
@@ -119,13 +125,20 @@ fn main() -> Result<()> {
             let specs: [u64; 4] =
                 std::array::from_fn(|block| pack(witness.masks[block], witness.digits[block]));
             let mut canonical_specs = [0_u64; 4];
+            let mut translation_specs = [0_u64; 4];
             for block in 0..4 {
                 canonical_specs[block] = canonical(witness.masks[block], witness.digits[block])?;
+                let translated = translation_canonical_g41_q29_block_spec(
+                    witness.masks[block],
+                    witness.digits[block],
+                )?;
+                translation_specs[block] = pack(translated.0, translated.1);
             }
             for block in 0..4 {
                 raw[block].push(specs[block]);
                 canonical_by_position[block].push(canonical_specs[block]);
                 canonical_global.push(canonical_specs[block]);
+                translation_canonical_global.push(translation_specs[block]);
             }
             let mut ac = [canonical_specs[0], canonical_specs[2]];
             let mut bd = [canonical_specs[1], canonical_specs[3]];
@@ -134,6 +147,7 @@ fn main() -> Result<()> {
             ac_pairs.push(ac);
             bd_pairs.push(bd);
             quadruples.push(canonical_specs);
+            translation_quadruples.push(translation_specs);
 
             let mut signatures = [[0_u8; 4]; 4];
             for block in 0..4 {
@@ -197,6 +211,8 @@ fn main() -> Result<()> {
     });
     canonical_global.sort_unstable();
     canonical_global.dedup();
+    translation_canonical_global.sort_unstable();
+    translation_canonical_global.dedup();
     let mut canonical_signature_counts = BTreeMap::<[u8; 4], u32>::new();
     for &spec in &canonical_global {
         let sample = unpack_spec(spec);
@@ -222,6 +238,12 @@ fn main() -> Result<()> {
         .unwrap_or(0)
         .min(usize::from(u8::MAX)) as u8;
     canonical_digits.dedup();
+    let mut translation_canonical_digits: Vec<u32> = translation_canonical_global
+        .iter()
+        .map(|&spec| spec as u32)
+        .collect();
+    translation_canonical_digits.sort_unstable();
+    translation_canonical_digits.dedup();
     let output = Report {
         roots: report.roots_examined,
         interfaces: report.digit_witnesses,
@@ -231,6 +253,9 @@ fn main() -> Result<()> {
         canonical_block_specs_by_position,
         canonical_block_specs_global: canonical_global.len() as u32,
         canonical_digit_vectors_global: canonical_digits.len() as u32,
+        translation_canonical_block_specs_global: translation_canonical_global.len() as u32,
+        translation_canonical_digit_vectors_global: translation_canonical_digits.len() as u32,
+        translation_canonical_four_block_domains: distinct(&mut translation_quadruples),
         maximum_masks_per_digit_vector,
         canonical_aggregate_signature_specs,
         canonical_ac_pair_domains: distinct(&mut ac_pairs),
@@ -244,7 +269,7 @@ fn main() -> Result<()> {
         minimum_root_aggregate_four_block_domains,
         maximum_root_aggregate_four_block_domains,
         maximum_split_imbalance_samples,
-        provenance: "cold exact census over the sealed all-interface cache; complementation-canonical block domains preserve q29 defects; counts estimate exact tablebase reuse and carry no exclusion authority",
+        provenance: "cold exact census over the sealed all-interface cache; complementation-canonical and independent-261-translation-canonical block domains preserve q29 defects; the translation action swaps all three q18 slot pairs and is zero modulo 29; counts estimate exact tablebase reuse and carry no exclusion authority until q174 transport replay is sealed",
     };
     serde_json::to_writer(std::io::stdout(), &output)?;
     println!();
