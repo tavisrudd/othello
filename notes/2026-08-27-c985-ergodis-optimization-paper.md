@@ -4873,3 +4873,15 @@ input/group/member/output caps, checked arithmetic, no recursion, and a zero-all
 repeated-evaluation gate. A seven-member control is invariant under permutation and
 replays the exact aggregate vector. These are candidate coordinates only: they feed
 the existing diagnostic archive and held-out checks but acquire no pruning authority.
+
+The matching typed subset-sum template is also implemented as a classical exact
+finite DP, not claimed as a new subset-sum algorithm. It accepts a canonical signed
+weight multiset and fixed target, proves configured item/range/work bounds before
+evaluation, counts all subsets with checked `u64` arithmetic, and records every prefix
+reachability row as packed bits. Backward replay returns a deterministic witness into
+caller-owned words; an exhaustive small signed oracle checks every target in a range,
+and forged witnesses, count overflow, schema drift, and noncanonical weights fail
+closed. The repeated solve section allocates zero times after the workspace is built.
+This supplies an exact candidate/certificate primitive for bounded multiset identities
+while making the scope boundary explicit: large-width instances need a different
+algorithm, and a discovered predicate still passes the ordinary theorem-authority gate.

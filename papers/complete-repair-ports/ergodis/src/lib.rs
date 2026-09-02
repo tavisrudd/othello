@@ -14,6 +14,7 @@ pub mod automata;
 pub mod balanced;
 pub mod binary_kernel_search;
 pub mod bitset;
+pub mod bounded_subset_sum;
 pub mod bp_osd;
 pub mod character_sum;
 pub mod coherent_closure;
@@ -92,6 +93,12 @@ pub use automata::{ExplicitMataDfa, ExplicitMataError};
 pub use binary_kernel_search::{
     BinaryKernelSearchError, BinaryKernelSearchSummary, BinaryKernelSearchWorkspace,
     BinaryKernelTrialOptions, CompiledBinaryKernelSearch,
+};
+pub use bounded_subset_sum::{
+    BoundedSubsetSumBounds, BoundedSubsetSumCertificate, BoundedSubsetSumError,
+    BoundedSubsetSumPlan, BoundedSubsetSumSnapshot, BoundedSubsetSumWorkspace,
+    BOUNDED_SUBSET_SUM_SNAPSHOT_VERSION, MAX_SUBSET_SUM_ITEMS, MAX_SUBSET_SUM_REACHABILITY_WORDS,
+    MAX_SUBSET_SUM_TRANSITIONS, MAX_SUBSET_SUM_WIDTH,
 };
 pub use character_sum::{
     CharacterCensus, CharacterSumError, CyclotomicCensus, PolynomialDegeneracy,

@@ -97,6 +97,7 @@ The main library surfaces are:
 | `CompiledBinaryLinearCode`                           | exact minimum nonzero weight for small-rank binary row spaces    |
 | binary commutant and invariant-split compiler         | verified module blocks beyond coordinate-orbit reduction         |
 | `CompiledCssDistance`                                 | exact bounded CSS distance from connected-support elimination    |
+| feature DAG, group aggregation, bounded subset sum    | replayable theorem-search coordinates and exact finite templates |
 | application types and functions                       | worked storage, sparse-code, and dependent-task models          |
 
 Generate the complete API documentation with:
