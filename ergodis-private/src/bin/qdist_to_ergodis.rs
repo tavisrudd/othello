@@ -31,6 +31,9 @@ struct Args {
     upstream_revision: String,
     #[arg(long)]
     label: Option<String>,
+    /// Discover a verified global, block-cyclic, or two-block torus action.
+    #[arg(long)]
+    discover_symmetry: bool,
     /// Validate the source matrices without writing an Ergodis problem.
     #[arg(long, conflicts_with = "out")]
     check_only: bool,
@@ -51,6 +54,7 @@ struct SparseProblem {
     physical_checks: Vec<Vec<u16>>,
     logical_observations: Vec<Vec<u16>>,
     anchors: Vec<u16>,
+    coordinate_generators: Vec<Vec<u16>>,
     maximum_weight: u16,
     metadata: Metadata,
 }
@@ -75,6 +79,17 @@ struct Metadata {
     logical_rank: usize,
     encoded_dimension: usize,
     anchor_policy: &'static str,
+    symmetry_kind: Option<&'static str>,
+    symmetry_parameters: Vec<usize>,
+    symmetry_orbits: usize,
+}
+
+#[derive(Debug)]
+struct Symmetry {
+    kind: &'static str,
+    parameters: Vec<usize>,
+    generators: Vec<Vec<u16>>,
+    anchors: Vec<u16>,
 }
 
 fn main() -> Result<()> {
@@ -104,6 +119,7 @@ fn main() -> Result<()> {
         args.direction,
         args.maximum_weight,
         args.upstream_revision,
+        args.discover_symmetry,
         [&hx_path, &hz_path, &gx_path, &gz_path],
         [&hx, &hz, &gx, &gz],
     )?;
@@ -143,6 +159,7 @@ fn compile_problem(
     direction: Direction,
     maximum_weight: u16,
     upstream_revision: String,
+    discover_symmetry: bool,
     paths: [&Path; 4],
     matrices: [&Matrix; 4],
 ) -> Result<SparseProblem> {
@@ -164,10 +181,11 @@ fn compile_problem(
     let encoded_dimension = columns
         .checked_sub(hx_basis.len() + hz_basis.len())
         .context("parity-check ranks exceed the coordinate count")?;
-    let (physical, stabilizer, logical_input, direction_name) = match direction {
-        Direction::Z => (&hx_basis, &hz_basis, &gz.rows, "z"),
-        Direction::X => (&hz_basis, &hx_basis, &gx.rows, "x"),
-    };
+    let (physical_input, physical_basis, stabilizer, logical_input, direction_name) =
+        match direction {
+            Direction::Z => (&hx.rows, &hx_basis, &hz_basis, &gz.rows, "z"),
+            Direction::X => (&hz.rows, &hz_basis, &hx_basis, &gx.rows, "x"),
+        };
     if !orthogonal(logical_input, stabilizer) {
         bail!("logical observations do not commute with the stabilizer rows");
     }
@@ -178,21 +196,45 @@ fn compile_problem(
             logical_basis.len()
         );
     }
-    let mut combined = physical.clone();
+    let mut combined = physical_basis.clone();
     combined.extend(logical_basis.iter().cloned());
-    if row_basis(&combined, columns).len() != physical.len() + encoded_dimension {
+    let observable_basis = row_basis(&combined, columns);
+    if observable_basis.len() != physical_basis.len() + encoded_dimension {
         bail!("logical observations are not independent modulo physical checks");
     }
+    let symmetry =
+        discover_symmetry.then(|| find_symmetry(physical_basis, &observable_basis, columns));
+    let symmetry = symmetry.flatten();
+    let (anchors, coordinate_generators, anchor_policy) = symmetry.as_ref().map_or_else(
+        || {
+            (
+                (0..columns).map(|coordinate| coordinate as u16).collect(),
+                Vec::new(),
+                "all-coordinates-no-symmetry-assumed",
+            )
+        },
+        |symmetry| {
+            (
+                symmetry.anchors.clone(),
+                symmetry.generators.clone(),
+                "verified-coordinate-orbit-transversal",
+            )
+        },
+    );
     let [hx_path, hz_path, gx_path, gz_path] = paths;
     Ok(SparseProblem {
         label,
         coordinate_count: columns as u16,
-        physical_checks: physical.iter().map(|row| sparse(row, columns)).collect(),
+        physical_checks: physical_input
+            .iter()
+            .map(|row| sparse(row, columns))
+            .collect(),
         logical_observations: logical_basis
             .iter()
             .map(|row| sparse(row, columns))
             .collect(),
-        anchors: (0..columns).map(|coordinate| coordinate as u16).collect(),
+        anchors,
+        coordinate_generators,
         maximum_weight,
         metadata: Metadata {
             source_schema: "QDistSAT-dense-binary-v1",
@@ -212,7 +254,14 @@ fn compile_problem(
             logical_input_rows: logical_input.len(),
             logical_rank: logical_basis.len(),
             encoded_dimension,
-            anchor_policy: "all-coordinates-no-symmetry-assumed",
+            anchor_policy,
+            symmetry_kind: symmetry.as_ref().map(|symmetry| symmetry.kind),
+            symmetry_parameters: symmetry
+                .as_ref()
+                .map_or_else(Vec::new, |symmetry| symmetry.parameters.clone()),
+            symmetry_orbits: symmetry
+                .as_ref()
+                .map_or(columns, |symmetry| symmetry.anchors.len()),
         },
     })
 }
@@ -295,6 +344,249 @@ fn orthogonal(left: &[Vec<u64>], right: &[Vec<u64>]) -> bool {
     })
 }
 
+fn find_symmetry(
+    physical_basis: &[Vec<u64>],
+    observable_basis: &[Vec<u64>],
+    columns: usize,
+) -> Option<Symmetry> {
+    let physical_pivots = pivot_lookup(physical_basis, columns);
+    let observable_pivots = pivot_lookup(observable_basis, columns);
+    let mut best = None;
+
+    for step in 1..columns {
+        if columns % step != 0 {
+            continue;
+        }
+        let generator = global_shift(columns, step);
+        consider_symmetry(
+            &mut best,
+            "global-shift",
+            vec![step],
+            vec![generator],
+            physical_basis,
+            &physical_pivots,
+            observable_basis,
+            &observable_pivots,
+            columns,
+        );
+    }
+
+    for block_size in (2..columns).rev() {
+        if columns % block_size != 0 {
+            continue;
+        }
+        let generator = cyclic_blocks(columns, block_size);
+        consider_symmetry(
+            &mut best,
+            "block-cyclic",
+            vec![block_size],
+            vec![generator],
+            physical_basis,
+            &physical_pivots,
+            observable_basis,
+            &observable_pivots,
+            columns,
+        );
+    }
+
+    if columns % 2 == 0 {
+        let block_size = columns / 2;
+        for rows in 2..block_size {
+            if block_size % rows != 0 {
+                continue;
+            }
+            let cols = block_size / rows;
+            if cols < 2 {
+                continue;
+            }
+            let generators = vec![
+                torus_shift(columns, rows, cols, true),
+                torus_shift(columns, rows, cols, false),
+            ];
+            consider_symmetry(
+                &mut best,
+                "two-block-torus",
+                vec![rows, cols],
+                generators,
+                physical_basis,
+                &physical_pivots,
+                observable_basis,
+                &observable_pivots,
+                columns,
+            );
+        }
+    }
+    best
+}
+
+#[allow(clippy::too_many_arguments)]
+fn consider_symmetry(
+    best: &mut Option<Symmetry>,
+    kind: &'static str,
+    parameters: Vec<usize>,
+    generators: Vec<Vec<u16>>,
+    physical_basis: &[Vec<u64>],
+    physical_pivots: &[Option<&[u64]>],
+    observable_basis: &[Vec<u64>],
+    observable_pivots: &[Option<&[u64]>],
+    columns: usize,
+) {
+    if !generators.iter().all(|generator| {
+        permutation_preserves_space(physical_basis, physical_pivots, generator, columns)
+            && permutation_preserves_space(observable_basis, observable_pivots, generator, columns)
+    }) {
+        return;
+    }
+    let candidate = Symmetry {
+        kind,
+        parameters,
+        anchors: orbit_anchors(&generators, columns),
+        generators,
+    };
+    let candidate_key = (
+        candidate.anchors.len(),
+        candidate.generators.len(),
+        candidate.kind,
+        candidate.parameters.as_slice(),
+    );
+    let replace = best.as_ref().is_none_or(|prior| {
+        candidate_key
+            < (
+                prior.anchors.len(),
+                prior.generators.len(),
+                prior.kind,
+                prior.parameters.as_slice(),
+            )
+    });
+    if replace {
+        *best = Some(candidate);
+    }
+}
+
+fn pivot_lookup<'a>(basis: &'a [Vec<u64>], columns: usize) -> Vec<Option<&'a [u64]>> {
+    let mut pivots: Vec<Option<&'a [u64]>> = vec![None; columns];
+    for row in basis {
+        if let Some(pivot) = highest_set_bit(row) {
+            pivots[pivot] = Some(row.as_slice());
+        }
+    }
+    pivots
+}
+
+fn permutation_preserves_space(
+    basis: &[Vec<u64>],
+    pivots: &[Option<&[u64]>],
+    permutation: &[u16],
+    columns: usize,
+) -> bool {
+    let mut scratch = vec![0_u64; columns.div_ceil(64)];
+    for row in basis {
+        scratch.fill(0);
+        permute_row_into(row, permutation, &mut scratch);
+        loop {
+            let Some(pivot) = highest_set_bit(&scratch) else {
+                break;
+            };
+            let Some(prior) = pivots[pivot] else {
+                return false;
+            };
+            xor_assign(&mut scratch, prior);
+        }
+    }
+    true
+}
+
+fn permute_row_into(row: &[u64], permutation: &[u16], output: &mut [u64]) {
+    for (word_index, &word) in row.iter().enumerate() {
+        let mut remaining = word;
+        while remaining != 0 {
+            let bit = remaining.trailing_zeros() as usize;
+            remaining &= remaining - 1;
+            let source = word_index * 64 + bit;
+            if source >= permutation.len() {
+                continue;
+            }
+            let target = usize::from(permutation[source]);
+            output[target / 64] |= 1_u64 << (target % 64);
+        }
+    }
+}
+
+fn global_shift(columns: usize, step: usize) -> Vec<u16> {
+    (0..columns)
+        .map(|coordinate| ((coordinate + step) % columns) as u16)
+        .collect()
+}
+
+fn cyclic_blocks(columns: usize, block_size: usize) -> Vec<u16> {
+    (0..columns)
+        .map(|coordinate| {
+            let block = coordinate / block_size;
+            let offset = coordinate % block_size;
+            (block * block_size + (offset + 1) % block_size) as u16
+        })
+        .collect()
+}
+
+fn torus_shift(columns: usize, rows: usize, cols: usize, row_axis: bool) -> Vec<u16> {
+    let block_size = rows * cols;
+    debug_assert_eq!(columns, 2 * block_size);
+    (0..columns)
+        .map(|coordinate| {
+            let block = coordinate / block_size;
+            let offset = coordinate % block_size;
+            let mut row = offset / cols;
+            let mut col = offset % cols;
+            if row_axis {
+                row = (row + 1) % rows;
+            } else {
+                col = (col + 1) % cols;
+            }
+            (block * block_size + row * cols + col) as u16
+        })
+        .collect()
+}
+
+fn orbit_anchors(generators: &[Vec<u16>], columns: usize) -> Vec<u16> {
+    let mut parent = (0..columns).collect::<Vec<_>>();
+    for generator in generators {
+        for (source, &target) in generator.iter().enumerate() {
+            union(&mut parent, source, usize::from(target));
+        }
+    }
+    let mut seen = vec![false; columns];
+    let mut anchors = Vec::new();
+    for coordinate in 0..columns {
+        let root = find_root(&mut parent, coordinate);
+        if !seen[root] {
+            seen[root] = true;
+            anchors.push(coordinate as u16);
+        }
+    }
+    anchors
+}
+
+fn find_root(parent: &mut [usize], mut node: usize) -> usize {
+    let mut root = node;
+    while parent[root] != root {
+        root = parent[root];
+    }
+    while parent[node] != node {
+        let next = parent[node];
+        parent[node] = root;
+        node = next;
+    }
+    root
+}
+
+fn union(parent: &mut [usize], left: usize, right: usize) {
+    let left = find_root(parent, left);
+    let right = find_root(parent, right);
+    if left != right {
+        parent[right] = left;
+    }
+}
+
 fn sparse(row: &[u64], columns: usize) -> Vec<u16> {
     (0..columns)
         .filter(|&column| row[column / 64] & (1_u64 << (column % 64)) != 0)
@@ -356,5 +648,64 @@ mod tests {
         assert_eq!(row_basis(&[hx.clone(), hz.clone()].concat(), 4).len(), 2);
         assert_eq!(row_basis(&gz, 4).len(), 2);
         assert_eq!(sparse(&[0b1010], 4), [1, 3]);
+    }
+
+    #[test]
+    fn discovers_and_materializes_a_verified_block_action() {
+        let physical = Vec::new();
+        let observable = vec![vec![0b0000_1111]];
+        let symmetry = find_symmetry(&physical, &observable, 8).unwrap();
+        assert_eq!(symmetry.kind, "block-cyclic");
+        assert_eq!(symmetry.parameters, [4]);
+        assert_eq!(symmetry.anchors, [0, 4]);
+        assert_eq!(orbit_anchors(&symmetry.generators, 8), [0, 4]);
+
+        let pivots = pivot_lookup(&observable, 8);
+        assert!(permutation_preserves_space(
+            &observable,
+            &pivots,
+            &symmetry.generators[0],
+            8
+        ));
+        assert!(!permutation_preserves_space(
+            &observable,
+            &pivots,
+            &global_shift(8, 1),
+            8
+        ));
+    }
+
+    #[test]
+    fn import_preserves_the_sparse_physical_presentation() {
+        let hx = Matrix {
+            columns: 4,
+            rows: vec![vec![0b0011], vec![0b0011]],
+        };
+        let hz = Matrix {
+            columns: 4,
+            rows: vec![vec![0b1100]],
+        };
+        let gx = Matrix {
+            columns: 4,
+            rows: vec![vec![0b0100]],
+        };
+        let gz = Matrix {
+            columns: 4,
+            rows: vec![vec![0b0001], vec![0b1100]],
+        };
+        let null = Path::new("/dev/null");
+        let problem = compile_problem(
+            "dependent-check-control".to_owned(),
+            Direction::Z,
+            2,
+            "0".repeat(40),
+            false,
+            [null; 4],
+            [&hx, &hz, &gx, &gz],
+        )
+        .unwrap();
+        assert_eq!(problem.physical_checks, [vec![0, 1], vec![0, 1]]);
+        assert_eq!(problem.metadata.hx_rows, 2);
+        assert_eq!(problem.metadata.hx_rank, 1);
     }
 }
