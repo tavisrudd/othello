@@ -61,6 +61,7 @@ pub mod root_execution;
 pub mod rpc;
 pub mod sat;
 pub mod scheduler;
+pub mod scheduler_bound;
 pub mod scheduler_dominance;
 pub mod selector;
 pub mod semantic_symmetry;
@@ -274,6 +275,10 @@ pub use scheduler::{
     maximum_parallel_repairs, CapacityCut, ParallelRepairResult, PositiveGradingCertificate,
     RepairSupportChoice, SchedulerError, WeightedParallelRepairResult, WeightedRepairProblem,
     WeightedRepairWorkspace, WeightedSchedulerBackend,
+};
+pub use scheduler_bound::{
+    solve_certified, solve_certified_with_workspace, verify_certificate, BoundChoice, BoundError,
+    BoundWorkspace, CertifiedSchedule, LagrangianDual, DUAL_DENOMINATOR,
 };
 pub use scheduler_dominance::{
     dominance_witness_bytes, replay_dominance_witnesses, DominanceCounters, DominanceLayout,

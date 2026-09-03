@@ -20,6 +20,9 @@ use ergodis::bounded_subset_sum::{
     MAX_SUBSET_SUM_REACHABILITY_WORDS, MAX_SUBSET_SUM_TRANSITIONS, MAX_SUBSET_SUM_WIDTH,
 };
 use ergodis::scheduler::WeightedRepairProblem;
+use ergodis::scheduler_bound::{
+    solve_certified_with_workspace, verify_certificate, BoundWorkspace,
+};
 use ergodis::scheduler_dominance::DominanceMode;
 
 /// SplitMix64: a deterministic, seed-reproducible generator so that the ergodis
@@ -407,6 +410,84 @@ fn solve(row: &str, repetitions: u32) -> ExitCode {
     ExitCode::SUCCESS
 }
 
+/// C1060: the certified branch-and-bound route.
+///
+/// Solves a scheduler row by depth-first search under the certified Lagrangian
+/// bound and emits the same record shape as `solve`, so the two routes are
+/// directly comparable on one row. The certificate here is the dual multiplier
+/// vector plus the assignment; the replay is `verify_certificate`, which
+/// rebuilds the dual slacks from the multipliers and never re-solves.
+fn certify(row: &str, repetitions: u32) -> ExitCode {
+    let started = std::time::Instant::now();
+    let Instance::Scheduler {
+        capacities,
+        families,
+        ..
+    } = instance(row)
+    else {
+        eprintln!("certify only applies to scheduler rows");
+        return ExitCode::from(2);
+    };
+
+    // Cold, once-per-process: the dual-fit budget is a tuning knob, read here
+    // and never inside the search.
+    let iterations = std::env::var("ERGODIS_DUAL_FIT_ITERATIONS")
+        .ok()
+        .and_then(|value| value.parse().ok())
+        .unwrap_or(DUAL_FIT_ITERATIONS);
+
+    let mut workspace = BoundWorkspace::new();
+    let mut answer = None;
+    for _ in 0..repetitions {
+        answer = Some(
+            solve_certified_with_workspace(&capacities, &families, iterations, &mut workspace)
+                .expect("L2-shaped instances are inside the declared bounds"),
+        );
+    }
+    let answer = answer.expect("at least one repetition");
+
+    let replay_started = std::time::Instant::now();
+    let verified = verify_certificate(
+        &capacities,
+        &families,
+        &answer.multipliers,
+        &answer.assignment,
+    );
+    let replay_ns = replay_started.elapsed().as_nanos();
+    let elapsed_ns = started.elapsed().as_nanos();
+
+    let record = serde_json::json!({
+        "row": row,
+        "side": "ergodis",
+        "route": "certified-bound",
+        "status": if answer.certified { "ok" } else { "uncertified" },
+        "detail": match &verified {
+            Ok(_) => String::new(),
+            Err(error) => error.to_string(),
+        },
+        "repetitions": repetitions,
+        "elapsed_ns": elapsed_ns.to_string(),
+        "answer": answer.repaired_count(),
+        "work": answer.nodes,
+        "representation": answer.multipliers.len(),
+        "certificate_bytes": answer.certificate_bytes(),
+        "replay_ns": replay_ns.to_string(),
+        "peak_rss_kib": peak_rss_kib(),
+        "root_bound": answer.root_bound,
+        "certified": answer.certified,
+        "verified": verified.ok(),
+        "multipliers": answer.multipliers,
+    });
+    println!("{record}");
+    ExitCode::SUCCESS
+}
+
+/// Initial subgradient budget for the dual fit. The solve doubles it when the
+/// root bound fails to close, so this is a starting point rather than a tuned
+/// constant: it is small enough to stay well inside the control's solve time
+/// and large enough that a well-conditioned instance certifies in one round.
+const DUAL_FIT_ITERATIONS: u32 = 500;
+
 fn main() -> ExitCode {
     let arguments: Vec<String> = std::env::args().skip(1).collect();
     match arguments.first().map(String::as_str) {
@@ -423,8 +504,16 @@ fn main() -> ExitCode {
                 .unwrap_or(1);
             solve(row, repetitions)
         }
+        Some("certify") => {
+            let row = arguments.get(1).expect("certify needs a row");
+            let repetitions = arguments
+                .get(2)
+                .map(|value| value.parse().expect("repetitions must be an integer"))
+                .unwrap_or(1);
+            certify(row, repetitions)
+        }
         _ => {
-            eprintln!("usage: negative_control_tier (emit|solve) <row> [repetitions]");
+            eprintln!("usage: negative_control_tier (emit|solve|certify) <row> [repetitions]");
             ExitCode::from(2)
         }
     }
