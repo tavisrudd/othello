@@ -18,7 +18,7 @@ cache_root=$(ergodis_cache_root)
 venv="$cache_root/application-ab-venv"
 mkdir -p "$cache_root"
 
-rows=${ROWS:-L1,L2,L3,W1,W2,W3}
+rows=${ROWS:-L1,L2,L3,W1,W2,W3,C1,C2,C3,C4,C5,C6,C7,C8}
 while (( $# )); do
   case $1 in
     --rows) rows=${2:?--rows needs a value}; shift 2 ;;

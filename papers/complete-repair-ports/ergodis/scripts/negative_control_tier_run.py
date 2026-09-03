@@ -26,7 +26,11 @@ import sys
 import tempfile
 import time
 
-ROWS = ["L1", "L2", "L3", "W1", "W2", "W3"]
+ROWS = [
+    "L1", "L2", "L3", "W1", "W2", "W3",
+    # Crossover ladder for the bounded subset-sum width cap.
+    "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8",
+]
 SCHEMA_VERSION = 1
 
 

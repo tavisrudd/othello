@@ -11,7 +11,8 @@
 //!   negative_control_tier emit  <row>
 //!   negative_control_tier solve <row> [repetitions]
 //!
-//! `<row>` is one of L1 L2 L3 W1 W2 W3.
+//! `<row>` is one of L1 L2 L3 W1 W2 W3, or one of the crossover-ladder rows
+//! C1..C8, which walk the bounded subset-sum width towards and past its cap.
 
 use std::process::ExitCode;
 
@@ -185,8 +186,30 @@ fn instance_w3() -> Instance {
     }
 }
 
+/// Crossover ladder: the L1 shape with the weight magnitude, and therefore the
+/// compiled dynamic-programming width, increased step by step towards and past
+/// the bounded subset-sum width cap. This is what turns the L1/L3 bracket into a
+/// measured phase transition.
+fn instance_crossover(maximum_weight: u64) -> Instance {
+    let mut rng = SplitMix64(0x0C10_3820 ^ maximum_weight);
+    let mut weights: Vec<i64> = (0..60)
+        .map(|_| 1 + rng.below(maximum_weight) as i64)
+        .collect();
+    weights.sort_unstable();
+    let target = weights.iter().step_by(3).sum();
+    Instance::SubsetSum { weights, target }
+}
+
 fn instance(row: &str) -> Instance {
     match row {
+        "C1" => instance_crossover(2_000),
+        "C2" => instance_crossover(6_000),
+        "C3" => instance_crossover(12_000),
+        "C4" => instance_crossover(20_000),
+        "C5" => instance_crossover(28_000),
+        "C6" => instance_crossover(34_000),
+        "C7" => instance_crossover(40_000),
+        "C8" => instance_crossover(60_000),
         "L1" => instance_l1(),
         "L2" => instance_l2(),
         "L3" => instance_l3(),
@@ -254,6 +277,12 @@ fn solve(row: &str, repetitions: u32) -> ExitCode {
 
     match instance(row) {
         Instance::SubsetSum { weights, target } => {
+            // The compiled width is the arithmetic range of the data; it is the
+            // quantity the width cap bounds, so report it whether or not the
+            // instance compiles.
+            let span: i64 = weights.iter().filter(|&&weight| weight > 0).sum::<i64>()
+                - weights.iter().filter(|&&weight| weight < 0).sum::<i64>();
+            detail = format!("width={}", span + 1);
             match BoundedSubsetSumPlan::compile(&weights, target, subset_sum_bounds()) {
                 Ok(plan) => {
                     representation = plan.transition_bound();
@@ -283,7 +312,7 @@ fn solve(row: &str, repetitions: u32) -> ExitCode {
                 }
                 Err(error) => {
                     status = "declined";
-                    detail = error.to_string();
+                    detail = format!("{detail}; {error}");
                 }
             }
         }

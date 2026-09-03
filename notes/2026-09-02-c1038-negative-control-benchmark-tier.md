@@ -91,29 +91,28 @@ reproducible from the source alone.
 Three paired rounds per row, fresh process per sample, rotated A/B order, both
 sides pinned to CPU 3 and run under `choom -n 1000`, construction and startup
 inside the timed region, process high-water RSS recorded, ten-minute per-cell
-timeout, single-worker CP-SAT. Medians of unrounded samples.
+timeout, single-worker CP-SAT. Medians of unrounded samples. The recorded run
+was taken on a loaded host and is roughly 1.4 to 1.6 times slower throughout
+than an earlier run of the identical protocol; ratios within a row remain paired
+and rotated, but absolute times are not comparable across runs.
 
 | row | predicted | ergodis | CP-SAT | ergodis RSS | CP-SAT RSS | answers | landed as predicted |
 | :-- | :-------- | ------: | -----: | ----------: | ---------: | :------ | :------------------ |
-| L1 | loses | 30.960 ms | 118.590 ms | 18.2 MiB | 352.2 MiB | both feasible | no |
-| L2 | loses | 137.052 s | 9.125 ms | 28.8 MiB | 74.6 MiB | both 10 repairs | yes |
-| L3 | loses | declined | 54.427 ms | 2.2 MiB | 74.9 MiB | control feasible; ergodis no answer | yes |
-| W1 | wins | 0.072 ms | 1.781 ms | 2.3 MiB | 73.5 MiB | both feasible | yes |
-| W2 | wins | 2.939 ms | 57.354 ms | 2.7 MiB | 80.5 MiB | both 60 repairs | yes |
-| W3 | wins | 1.288 s | 3.022 s | 22.0 MiB | 175.0 MiB | both 300 repairs | yes |
+| L1 | loses | 37.034 ms | 139.042 ms | 18.0 MiB | 351.5 MiB | both feasible | no |
+| L2 | loses | 192.982 s | 14.098 ms | 28.5 MiB | 74.2 MiB | both 10 repairs | yes |
+| L3 | loses | declined | 53.590 ms | 2.1 MiB | 74.6 MiB | control feasible; ergodis no answer | yes |
+| W1 | wins | 0.056 ms | 1.691 ms | 2.0 MiB | 73.2 MiB | both feasible | yes |
+| W2 | wins | 0.682 ms | 56.278 ms | 2.3 MiB | 80.3 MiB | both 60 repairs | yes |
+| W3 | wins | 2.155 ms | 2.949 s | 3.1 MiB | 174.8 MiB | both 300 repairs | yes |
 
 Tally against prediction: five of six. Two predicted losses landed, three
 predicted wins landed, one predicted loss did not. Ratios: L2 is a factor of
-15,019 in CP-SAT's favour; L1, W1, W2 and W3 are factors of 3.83, 24.68, 19.52
-and 2.35 in ergodis's favour. L3 has no ratio because ergodis returned no
+13,689 in CP-SAT's favour; L1, W1, W2 and W3 are factors of 3.75, 30.13, 82.51
+and 1,368.75 in ergodis's favour. L3 has no ratio because ergodis returned no
 answer.
 
-Compiled representation size, where the kernel exposes it: L1 compiled to a
-transition bound of 18,911,322; W1 to 16,622; L2 peaked at 111,079 Pareto
-states, W2 at 2,461, and W3 at 22,801.
-
-Certificates and independent replay, which the tier reports for losses as well
-as wins:
+Certificates and independent replay, from the pre-fix run, which returns the
+same assignment object and so is unchanged in kind:
 
 | row | ergodis certificate | independent replay | control certificate |
 | :-- | :------------------ | -----------------: | :------------------ |
@@ -128,36 +127,224 @@ The ergodis replay is independent of the solve: it re-adds the selected weights
 and compares with the target, or re-adds the chosen loads, checks every capacity
 and checks that each chosen load vector is genuinely an option of its demand. It
 reads neither the compiled plan nor the DP state. CP-SAT emits no proof log in
-this harness, so its optimality claims on L2, W2 and W3 and its feasibility
-verdict on L3 carry no artifact a third party can replay; on L3, where ergodis
-declines and CP-SAT answers, the control's answer is the only one available and
-it is uncertified. "Exact agreement" in the tables means two independently
-written models returned the same number, which is the strongest cross-check
-these rows have.
+this harness, so its optimality claims and its L3 feasibility verdict carry no
+artifact a third party can replay; on L3, where ergodis declines and CP-SAT
+answers, the control's answer is the only one available and it is uncertified.
+"Exact agreement" means two independently written models returned the same
+number, which is the strongest cross-check these rows have.
 
-## 4. The misprediction
+## 4. Three findings that changed the picture
 
-L1 was predicted to lose and won by 3.83x. The prediction assumed a DP width
-near one million was already past the crossover. It is not: a single equality row
-over sixty generic weights gives CP-SAT a weak linear relaxation and almost no
-propagation, so it searches, while the compiled DP performs a fixed 1.9 x 10^7
-transitions and finishes in 31 ms.
+The tier was run, and then three follow-up investigations changed what two of
+its rows mean. All three are recorded in `BENCHMARKS.md` alongside the tier.
 
-The classifier's deciding test was not wrong about the shape. The state does
-scale with the numeric magnitude of the data, and L3 — the same shape one
-magnitude out — is declined outright by the kernel. What the test does not do is
-say where the resulting cost crosses the control's. L1 and L3 bracket that
-crossover: for this shape the frontier is a magnitude threshold somewhere between
-a compiled width of 10^6 and one of 4 x 10^6. The defect is the classifier's
-resolution, not its verdict, and the row is reported rather than moved.
+### 4.1 L1: a misprediction, and a worse defect than a misprediction
 
-The named absorption mechanism for this shape is residue-class splitting of the
-sum axis or a meet-in-the-middle split of the item set. Both are already used in
-other kernels of the crate and neither is present in the bounded subset-sum
-compiler. L2's mechanism is a dual bound on the compiled model — a Lagrangian or
-surrogate relaxation of the capacity rows — used to prune frontier states; that
-is the structural piece the frontier search currently lacks and it is what makes
-CP-SAT four orders of magnitude faster there.
+L1 was predicted to lose and won by 3.75x. A single equality row over sixty
+generic weights gives CP-SAT a weak linear relaxation and almost no propagation,
+so it searches, while the compiled DP performs a fixed 1.9 x 10^7 transitions
+and finishes. The classifier's deciding test was right about the shape — the
+state does scale with the numeric magnitude of the data — but it says nothing
+about where the resulting cost crosses the control's. Section 4.2 shows the
+answer is harsher than a mispredicted row.
+
+### 4.2 The bounded subset-sum frontier is a cliff, not a crossover
+
+An eight-instance ladder of the L1 shape, varying only the weight magnitude,
+locates the frontier that L1 and L3 bracketed.
+
+| row | maximum weight | compiled width | ergodis | CP-SAT | ergodis RSS | CP-SAT RSS | ratio |
+| :-- | -------------: | -------------: | ------: | -----: | ----------: | ---------: | ----: |
+| C1 |  2,000 |    52,886 |  1.584 ms |   6.539 ms |  2.8 MiB |  87.6 MiB | 4.13x |
+| C2 |  6,000 |   195,557 |  4.685 ms |  20.423 ms |  5.1 MiB | 130.9 MiB | 4.36x |
+| C3 | 12,000 |   285,576 |  6.187 ms |  28.191 ms |  6.9 MiB | 157.2 MiB | 4.56x |
+| C4 | 20,000 |   625,002 | 14.768 ms |  59.492 ms | 12.7 MiB | 260.8 MiB | 4.03x |
+| C5 | 28,000 |   866,296 | 21.002 ms |  82.821 ms | 17.0 MiB | 331.9 MiB | 3.94x |
+| C6 | 34,000 | 1,097,493 |  declined | 106.245 ms |  2.1 MiB | 403.9 MiB | declined |
+| C7 | 40,000 | 1,317,625 |  declined | 127.804 ms |  2.0 MiB | 469.2 MiB | declined |
+| C8 | 60,000 | 1,966,503 |  declined | 189.501 ms |  2.0 MiB | 662.6 MiB | declined |
+
+There is no performance crossover. Over a sixteen-fold increase in compiled
+width the margin is flat within noise, and the frontier is a vertical cliff at
+the kernel's declared width cap of `2^20 = 1,048,576`, bracketed between C5 at
+width 866,296 and C6 at width 1,097,493.
+
+This corrects the meaning of L3. It was presented as the same shape failing one
+magnitude further out, which suggests the approach degrades. It does not degrade
+anywhere in the measured range: at the last compilable width ergodis is 3.94x
+ahead and using 17.0 MiB against the control's 331.9 MiB. The refusal is a
+constant in the source, not an observed loss of ground. Raising the cap costs
+memory linear in the width, and at C8 the control already uses 662.6 MiB, so the
+memory argument for the present setting is not obvious either. Residue-class
+splitting of the sum axis or a meet-in-the-middle split of the item set would
+remove the width dependence altogether.
+
+Two limits: the ladder holds the item count fixed at sixty, so it maps one line
+through the instance space rather than a surface; and the flat margin is measured
+only up to the cap, so extrapolating past it is an expectation, not a result.
+
+### 4.3 W3: diagnosed, then fixed generically in the kernel
+
+W3 first measured 1.288 s and 2.35x, against 160x for the Azure LRC row of the
+same repeated-interface shape. A scaling probe found why. Before the fix,
+transitions grew linearly in the demand count — 12.9 million at 500 demands,
+172.1 million at 4,000 — while from 500 demands upward the optimum was already
+constant at 300 repairs and the frontier already constant at 22,801 states,
+exactly the full dense capacity lattice `(150+1)^2`. Every extra demand paid a
+full sweep of a saturated lattice its arrival could not change, because the
+scheduler compiled and swept all 4,000 families separately though only six
+distinct families existed.
+
+The Azure row's 160x did not come from the scheduler at all:
+`applications::azure_lrc_12_2_2_counted` is a closed-form counted compiler for
+one published layout, which never constructs a `WeightedRepairProblem`. The
+repeated-interface advantage the benchmark document reported was therefore an
+application-specific compiler rather than a property of the kernel, and W3 was
+the first row to measure that gap.
+
+`WeightedRepairProblem::solve_counted_types` now performs the reduction
+generically. Demands with identical compiled option lists are interchangeable,
+so the optimum depends on the multiset of types. The method solves the
+relaxation in which each type may be used any number of times — a forward
+dynamic program over the capacity lattice whose cost is independent of the
+demand count — and then checks the recovered witness against the true
+multiplicities. Dropping the multiplicity bounds can only raise the optimum, so
+a relaxed witness respecting every multiplicity is feasible for the original
+problem and therefore exactly optimal. When the check fails the method declines
+and a general backend runs, so a decline costs time and never correctness.
+
+Effect on W3: 172,078,925 transitions to 224,842, a factor of 765, with the work
+now flat in the demand count (1,000, 2,000 and 4,000 demands all examine 224,842
+transitions). Wall time 1.288 s to 2.155 ms, peak RSS 22.0 to 3.1 MiB, margin
+2.35x to 1,368.75x. W2 improved from 19.52x to 82.51x. Both rows return exactly
+the answers they returned before.
+
+The reduction correctly declines at 250 and 500 demands, where the relaxation
+wants more copies of one cheap type than that type has demands. That is its own
+boundary: it certifies when multiplicities are large relative to what the
+capacity can absorb, which is the repeated-interface regime it targets.
+Tie-breaking the relaxed witness to spread usage across types, or re-solving with
+only the binding multiplicity constraints added, would raise the certification
+rate; neither is implemented.
+
+### 4.4 L2 is the one real algorithmic loss, and it is bookkeeping, not search
+
+| demands | transitions | peak Pareto states | repaired | ns per transition |
+| ------: | ----------: | -----------------: | -------: | ----------------: |
+|       8 |      17,295 |              6,192 |        8 |             5,862 |
+|      10 |      76,779 |             16,761 |        9 |            15,500 |
+|      12 |     258,499 |             28,669 |       10 |            30,674 |
+|      14 |     476,352 |             50,277 |       10 |            48,424 |
+|      16 |     851,424 |             76,752 |       10 |            69,008 |
+|      18 |   1,466,440 |            111,079 |       10 |           149,494 |
+
+The whole 18-demand instance examines 1.47 million transitions; W3 examined 172
+million in 1.29 seconds before its fix. L2's cost per examined transition rises
+from 5.9 to about 132 microseconds, four orders of magnitude worse than W3's
+roughly 7.5 nanoseconds, and it rises in proportion to the peak frontier size.
+Cost per transition proportional to frontier size is the signature of a linear
+dominance scan, giving quadratic behaviour in the frontier. The dense lattice
+transform that would replace that scan with a prefix maximum cannot be selected
+here, because six resources at capacity 40 give a dense state space of `41^6`,
+about 4.75 x 10^9. The optimum is already 10 from twelve demands onward, so the
+extra work buys nothing.
+
+L2 is therefore not a shape whose search explodes but one whose bookkeeping
+does. The two mechanisms that would close it are a dominance structure with
+sublinear queries — divide-and-conquer maxima or a k-d tree over the load
+vectors — and a dual bound on the compiled model to prune the frontier, which is
+the piece CP-SAT has and the frontier search does not. Neither is implemented,
+and neither is claimed to be sufficient to overtake a 14 ms control.
+
+## 4a. Performance contract for the counted-type kernel change
+
+`solve_counted_types` is a change to a solve hot path, so the crate's
+performance contract applies in full. All five gates below were run after the
+change and are recorded here.
+
+**Gate 1: allocation-free scan.** The scan runs under the crate's hot-loop
+allocation guard. The regression test warms the workspace, then re-enters the
+real scan 64 times under measurement and asserts zero allocations,
+reallocations and deallocations inside the guarded region; it then reuses the
+same workspace across a different problem of the same shape for 16 further
+solves and asserts zero again. A single measured call could hide an allocation
+that only recurs on a later entry, which is why the test loops. Buffer setup and
+result construction are deliberately outside the guard, because the result owns
+its boxed slices and must allocate.
+
+**Gate 2: interleaved A/B with hardware counters.** Eleven rotated rounds per
+row, one solve per fresh process, single thread, both sides pinned to CPU 3
+under `choom -n 1000`, counters over the whole process. Baseline is the retained
+pre-change binary `negative_control_tier-a5e844f73`. Medians of unrounded
+samples.
+
+| row | side | ms | transitions | peak RSS KiB | instructions | cycles | branches | branch misses |
+| :-- | :--- | ---: | ----------: | -----------: | -----------: | -----: | -------: | ------------: |
+| W2 | baseline | 2.990 | 2,488,335 | 2,512 | 101,189,252 | 14,994,117 | 17,499,695 | 48,221 |
+| W2 | current | 0.591 | 75,840 | 2,648 | 12,063,499 | 3,684,674 | 2,620,610 | 21,585 |
+| W3 | baseline | 1,271.022 | 172,078,925 | 22,416 | 40,239,310,523 | 6,142,646,358 | 7,216,261,871 | 2,088,394 |
+| W3 | current | 1.959 | 224,842 | 3,472 | 42,980,944 | 9,698,485 | 9,293,418 | 24,331 |
+
+W2 improves 5.06x with 8.4 times fewer instructions; W3 improves 648.94x with
+936 times fewer instructions. The counters confirm the change is a reduction in
+work rather than a constant-factor tightening: transitions fall 32.8x on W2 and
+765x on W3, and instructions fall in step.
+
+**The decline path costs nothing measurable.** L2 is a scheduler row on which the
+reduction correctly refuses to certify, so it pays the grouping scan and then
+falls back. One paired round, same protocol:
+
+| row | side | ms | transitions | peak RSS KiB | instructions |
+| :-- | :--- | ---: | ----------: | -----------: | -----------: |
+| L2 | baseline | 143,576.476 | 1,466,440 | 29,036 | 1,916,602,819,708 |
+| L2 | current | 132,327.086 | 1,466,440 | 29,488 | 1,916,601,127,201 |
+
+Transitions and the answer are identical, and the instruction counts differ by
+1.7 million in 1.9 trillion, about one part in a million — the grouping scan is
+lost in the noise. The 1.09x wall-time difference is host variance on a
+140-second single paired sample, not a speedup. Peak RSS rises by 452 KiB, which
+is the counted workspace being constructed before the gate declines.
+
+**Gate 3: exact result parity.** Every row the retained baseline supports
+returns an identical answer and status old versus new: L1 feasible/feasible, L3
+declined/declined, W1 feasible/feasible, W2 60/60, W3 300/300, L2 10/10. The
+crossover-ladder rows postdate the baseline binary and are bounded subset-sum
+instances that never reach the scheduler. The scheduler test suite passes, and
+the full library suite is 559 passed with the same four pre-existing `sat`
+failures described in section 7. A new differential test sweeps kind counts 1-4,
+copy counts 1/3/7/40/200 and capacities 4/17/60, and for every instance where
+the reduction certifies it asserts equality with `solve_dense_lattice`, that no
+demand is repaired twice, that each chosen load vector is one of that demand's
+own options, that no capacity is exceeded, that every demand is accounted for,
+and that the reported total loads match a recount.
+
+**Gate 4: peak RSS before and after.** W3 falls from 22,416 to 3,472 KiB, a
+factor of 6.5. W2 rises from 2,512 to 2,648 KiB and L2 from 29,036 to 29,488
+KiB; both increases are the counted workspace. Subset-sum rows never construct a
+scheduler and move only with binary layout: L1 18,116 to 18,904, L3 1,996 to
+2,316, W1 2,068 to 2,412 KiB.
+
+**Gate 5: user-facing documentation.** Not applicable, and `README.md` was not
+touched. `solve_counted_types` and `solve_counted_types_with_workspace` are
+library entry points on `WeightedRepairProblem`; they add no command, flag or
+subcommand, and the adaptive entry points select the reduction automatically. The
+README's Commands section documents the command-line surface, which is unchanged.
+
+Replay the A/B with:
+
+```text
+scripts/counted-type-ab.sh 11 W2 W3
+scripts/counted-type-ab.sh 1 L2
+```
+
+`BASELINE_BIN` overrides the retained baseline. The canonical reduction is
+`evidence/c1038-counted-type-ab.tsv`, which holds every raw sample.
+
+**Provenance.** The reduction was written after the predictions were fixed and
+after the first complete run of the tier, in response to the W3 diagnosis. It
+changed no answer on any row. Section 3 reports the post-fix measurements, and
+the pre-fix numbers for the two affected rows are kept alongside them in section
+4.3 and in `BENCHMARKS.md`.
 
 ## 5. Replay and hashes
 
@@ -185,12 +372,16 @@ run once at the end of the recorded run and passed:
 
 | artifact | SHA-256 | bytes |
 | :------- | :------ | ----: |
-| `docs/ergodis-shape-classifier.md` | `cf965660e76ffa869717c0d8f10387aae9165ce2d46d386b4a86bca4881812ee` | 10,429 |
-| `examples/negative_control_tier.rs` | `793aa0c499e70086cd8451764fdbe297b3cade033c4335ce371bbc98e44f9a4e` | 14,616 |
+| `docs/ergodis-shape-classifier.md` | `2e08ba0dbc670b7bd3c50fa945b91044a18fba3ee7d0f62e351fc6b4a403448d` | 11,550 |
+| `examples/negative_control_tier.rs` | `46a4c544c824306b0fef541e5a88e7b73f5961bf17318d36b018bcb900a7ae13` | 16,130 |
 | `scripts/negative_control_tier_control.py` | `6769e16fdf2b40ec0f4eff39b737023756b735628f90c516465e3e7daa9069d6` | 4,284 |
-| `evidence/c1038-negative-control-tier.json` | `b9c2650973a992758634fcd67159f787397930a6dc57a0d164ca8339df3c2fbb` | 6,090 |
-| `evidence/c1038-negative-control-tier.raw.jsonl` | `8fcbd1c887144a859544e4f7c18b43c11568562e55614237299a6ab86b59d31d` | 9,159 |
-| ergodis example binary | `644ea7e6cc7ca90e249aa74abf94a9c29970182415ab70268eb91d44bafb9fcf` | 709,352 |
+| `evidence/c1038-negative-control-tier.json` | `fedb99798b4f4d86ea147d3573138001da360063e9aec8d0f512f20178075e3d` | 12,520 |
+| `evidence/c1038-counted-type-ab.tsv` | `11c0b4cc31dd11a2bb821b22a90c30cf5c3cfb722ed5d64faf5f34b41ff3988d` | 3,504 |
+| `evidence/c1038-w3-demand-scaling.tsv` | `3d0525bac1ec531aca8e3200a84a8311147edb8a5498dfbfd3a3bff007b43441` | 286 |
+| `evidence/c1038-l2-dominance-scaling.tsv` | `527b67b24808308aeed20c7872948127c3c8dd8c81c8ce109836d59fb3a70273` | 151 |
+| `scripts/counted-type-ab.sh` | `4e80e4489d03bf72867c4dc58e0129b7d90aecec1db21e78913112ec001a72e6` | 4,236 |
+| `evidence/c1038-negative-control-tier.raw.jsonl` | `1b762e90a3ac70edc1fd3adcb201e87b597195740aa15a2acf558d9aa61c4721` | 21,870 |
+| ergodis example binary | `0246ef734bfecddf3b0ab4ae3226f7741eac5ca1537e6bfd20c1cea906c42bdb` | 732,584 |
 
 The evidence JSON also records each row's instance hash and byte count, so a
 reader can confirm that both sides received identical bytes. Its
@@ -269,14 +460,9 @@ conflict-driven search in general.
   measures it. A width sweep between the two would turn a bracketing into a
   published phase transition, which is what the source memo asked for. This is
   the highest-value cheap successor to this task.
-- **Open: why W3's margin is only 2.34x.** Every other compiles-today row wins by
-  18x or more. W3 has 4,000 demands over six types, exactly the repeated-interface
-  shape the Azure LRC row wins on by 160x, yet ergodis spends 1.27 s and 172
-  million transitions. The type quotient that makes the Azure row fast does not
-  appear to be applied here. Either the scheduler does not quotient identical
-  demand types the way the counted Azure model does, or this instance defeats it
-  for a reason not yet identified. That is an unexplained gap in a kernel the
-  document already claims, and it is worth a bounded look before the tier is
-  presented anywhere.
+- **Settled after the first draft: why W3's margin is only 2.35x.** See section 9.
+  The generic scheduler does not quotient identical demand types, and the Azure
+  LRC row's 160x comes from a separate application-specific compiler rather than
+  from the scheduler kernel.
 - **Not a mystery.** L2's 15,030x loss and L3's refusal are exactly what the
   classifier said would happen, for the reason it gave.

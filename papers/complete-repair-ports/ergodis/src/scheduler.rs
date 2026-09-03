@@ -8,6 +8,12 @@ use rayon::prelude::*;
 
 const NONE: u32 = u32::MAX;
 const MAX_DENSE_LATTICE_STATES: usize = 1 << 24;
+/// Largest number of distinct demand families for which the counted-type
+/// reduction is attempted.
+const COUNTED_TYPE_MAX_KINDS: usize = 64;
+/// Average repetition per distinct family below which the counted-type
+/// reduction does not pay for its dynamic program.
+const COUNTED_TYPE_MIN_REPETITION: usize = 4;
 const MAX_GRADED_SHELL_TABLE_CELLS: usize = 1 << 22;
 const DENSE_DOMINANCE_WORK_MARGIN: usize = 4;
 const DENSE_REACHABLE_BOUND_MARGIN: usize = 4;
@@ -281,6 +287,35 @@ pub struct WeightedRepairWorkspace {
     repaired: Vec<bool>,
     total_loads: Vec<u64>,
     sparse: SparseRepairStorage,
+    counted: CountedTypeStorage,
+}
+
+/// Reusable storage for the counted-type reduction.
+///
+/// Every buffer is cleared and resized in place, so a warm workspace performs
+/// no allocation on a repeat solve of the same shape.
+#[derive(Debug, Default)]
+struct CountedTypeStorage {
+    /// Flattened option loads of each distinct family, with `kind_key_offset`
+    /// delimiting the kinds. Grouping compares against at most
+    /// `COUNTED_TYPE_MAX_KINDS` candidates, so no hash map is needed.
+    kind_key: Vec<u32>,
+    kind_key_offset: Vec<u32>,
+    kind_representative: Vec<FamilyRecord>,
+    kind_count: Vec<u32>,
+    kind_of_demand: Vec<u32>,
+    key_scratch: Vec<u32>,
+    strides: Vec<u64>,
+    option_kind: Vec<u32>,
+    option_index: Vec<u32>,
+    option_delta: Vec<u64>,
+    option_loads: Vec<u32>,
+    best: Vec<u32>,
+    arrival: Vec<u32>,
+    used: Vec<u32>,
+    taken: Vec<u32>,
+    chosen: Vec<u32>,
+    total_loads: Vec<u64>,
 }
 
 #[derive(Debug, Default)]
@@ -392,6 +427,23 @@ impl WeightedRepairWorkspace {
         self.witnesses.shrink_to_fit();
         self.lex_codes.shrink_to_fit();
         self.best_options.shrink_to_fit();
+        self.counted.kind_key.shrink_to_fit();
+        self.counted.kind_key_offset.shrink_to_fit();
+        self.counted.kind_representative.shrink_to_fit();
+        self.counted.kind_count.shrink_to_fit();
+        self.counted.kind_of_demand.shrink_to_fit();
+        self.counted.key_scratch.shrink_to_fit();
+        self.counted.strides.shrink_to_fit();
+        self.counted.option_kind.shrink_to_fit();
+        self.counted.option_index.shrink_to_fit();
+        self.counted.option_delta.shrink_to_fit();
+        self.counted.option_loads.shrink_to_fit();
+        self.counted.best.shrink_to_fit();
+        self.counted.arrival.shrink_to_fit();
+        self.counted.used.shrink_to_fit();
+        self.counted.taken.shrink_to_fit();
+        self.counted.chosen.shrink_to_fit();
+        self.counted.total_loads.shrink_to_fit();
         self.repaired.shrink_to_fit();
         self.total_loads.shrink_to_fit();
         self.sparse.loads.shrink_to_fit();
@@ -1224,6 +1276,10 @@ impl WeightedRepairProblem {
     }
 
     pub fn solve_adaptive(&self) -> Result<WeightedParallelRepairResult, SchedulerError> {
+        let mut counted_workspace = WeightedRepairWorkspace::new();
+        if let Some(result) = self.solve_counted_types_with_workspace(&mut counted_workspace)? {
+            return Ok(result);
+        }
         match self.recommended_backend() {
             WeightedSchedulerBackend::SparsePareto => self.solve(),
             WeightedSchedulerBackend::DenseLattice => self.solve_dense_lattice(),
@@ -1258,6 +1314,9 @@ impl WeightedRepairProblem {
         &self,
         workspace: &mut WeightedRepairWorkspace,
     ) -> Result<WeightedParallelRepairResult, SchedulerError> {
+        if let Some(result) = self.solve_counted_types_with_workspace(workspace)? {
+            return Ok(result);
+        }
         match self.recommended_backend() {
             WeightedSchedulerBackend::SparsePareto => self.solve_sparse_with_workspace(workspace),
             WeightedSchedulerBackend::DenseLattice => {
@@ -1712,6 +1771,303 @@ impl WeightedRepairProblem {
             transitions_examined,
             peak_pareto_states,
         })
+    }
+
+    /// Exact counted-type reduction for instances that repeat a small number of
+    /// distinct demand families many times.
+    ///
+    /// Demands whose compiled option sets are identical are interchangeable, so
+    /// the optimum depends on the multiset of types rather than on the
+    /// individual demands. This solves the relaxation in which each type may be
+    /// used any number of times: a dynamic program over the capacity lattice
+    /// whose cost is the lattice size times the number of distinct options, and
+    /// therefore independent of the demand count. It then checks the recovered
+    /// witness against the true multiplicities. A witness that respects every
+    /// multiplicity is feasible for the original problem, and since the
+    /// relaxation's optimum is an upper bound on the original optimum, such a
+    /// witness is exactly optimal. The check is what makes the reduction sound;
+    /// nothing here assumes the multiplicities are large.
+    ///
+    /// Returns `Ok(None)` when the reduction does not apply or does not
+    /// certify, in which case the caller uses a general backend. A `None` costs
+    /// only the dynamic program, never correctness.
+    pub fn solve_counted_types(
+        &self,
+    ) -> Result<Option<WeightedParallelRepairResult>, SchedulerError> {
+        let mut workspace = WeightedRepairWorkspace::new();
+        self.solve_counted_types_with_workspace(&mut workspace)
+    }
+
+    /// Counted-type reduction reusing caller-owned storage.
+    ///
+    /// Every buffer is cleared and resized in place, and the dynamic-programming
+    /// scan itself allocates nothing, so a warm workspace makes a repeat solve
+    /// of the same shape allocation-free.
+    pub fn solve_counted_types_with_workspace(
+        &self,
+        workspace: &mut WeightedRepairWorkspace,
+    ) -> Result<Option<WeightedParallelRepairResult>, SchedulerError> {
+        let width = self.capacities.len();
+        if width == 0 || self.families.is_empty() {
+            return Ok(None);
+        }
+        let Some(state_space) = self.dense_state_space() else {
+            return Ok(None);
+        };
+        let storage = &mut workspace.counted;
+
+        // Group families by their compiled option list. Compilation
+        // canonicalizes each family to a Pareto-minimal antichain in a fixed
+        // order, so identical demands produce identical keys. At most
+        // COUNTED_TYPE_MAX_KINDS distinct keys are ever retained, so grouping is
+        // a bounded linear scan and needs no hash map.
+        storage.kind_key.clear();
+        storage.kind_key_offset.clear();
+        storage.kind_representative.clear();
+        storage.kind_count.clear();
+        storage.kind_of_demand.clear();
+        storage.kind_key_offset.push(0);
+        for family in self.families.iter() {
+            storage.key_scratch.clear();
+            let option_end = family.option_start + family.option_len;
+            for option in family.option_start..option_end {
+                for coordinate in 0..width {
+                    storage
+                        .key_scratch
+                        .push(self.option_load_coordinate(option, coordinate));
+                }
+            }
+            let mut found = None;
+            for kind in 0..storage.kind_representative.len() {
+                let start = storage.kind_key_offset[kind] as usize;
+                let end = storage.kind_key_offset[kind + 1] as usize;
+                if storage.kind_key[start..end] == storage.key_scratch[..] {
+                    found = Some(kind);
+                    break;
+                }
+            }
+            match found {
+                Some(kind) => {
+                    storage.kind_count[kind] += 1;
+                    storage.kind_of_demand.push(kind as u32);
+                }
+                None => {
+                    if storage.kind_representative.len() == COUNTED_TYPE_MAX_KINDS {
+                        return Ok(None);
+                    }
+                    storage
+                        .kind_of_demand
+                        .push(storage.kind_representative.len() as u32);
+                    storage.kind_key.extend_from_slice(&storage.key_scratch);
+                    storage.kind_key_offset.push(
+                        u32::try_from(storage.kind_key.len())
+                            .map_err(|_| SchedulerError::TooLarge)?,
+                    );
+                    storage.kind_representative.push(*family);
+                    storage.kind_count.push(1);
+                }
+            }
+        }
+        let kinds = storage.kind_representative.len();
+
+        // Profitability gate: the reduction pays for itself only when families
+        // repeat heavily. Instances whose families are mostly distinct keep the
+        // general backends and their recorded work counts unchanged.
+        if self.families.len() < COUNTED_TYPE_MIN_REPETITION * kinds {
+            return Ok(None);
+        }
+
+        storage.strides.clear();
+        storage.strides.resize(width, 0);
+        let mut stride = 1u64;
+        for coordinate in 0..width {
+            storage.strides[coordinate] = stride;
+            stride *= u64::from(self.capacities[coordinate]) + 1;
+        }
+
+        // Flatten the distinct options and their lattice deltas. A zero-load
+        // option would be a self-loop in the forward scan; such an instance is
+        // left to the general backends.
+        storage.option_kind.clear();
+        storage.option_index.clear();
+        storage.option_delta.clear();
+        storage.option_loads.clear();
+        for kind in 0..kinds {
+            let family = storage.kind_representative[kind];
+            let option_end = family.option_start + family.option_len;
+            for option in family.option_start..option_end {
+                let mut delta = 0u64;
+                let mut fits = true;
+                for coordinate in 0..width {
+                    let load = u64::from(self.option_load_coordinate(option, coordinate));
+                    if load > u64::from(self.capacities[coordinate]) {
+                        fits = false;
+                        break;
+                    }
+                    delta += load * storage.strides[coordinate];
+                }
+                if !fits {
+                    continue;
+                }
+                // A zero-load option would be a self-loop in the forward scan;
+                // such an instance is left to the general backends.
+                if delta == 0 {
+                    return Ok(None);
+                }
+                storage
+                    .option_kind
+                    .push(u32::try_from(kind).map_err(|_| SchedulerError::TooLarge)?);
+                storage.option_index.push(option);
+                storage.option_delta.push(delta);
+                for coordinate in 0..width {
+                    storage
+                        .option_loads
+                        .push(self.option_load_coordinate(option, coordinate));
+                }
+            }
+        }
+        if storage.option_kind.is_empty() {
+            return Ok(None);
+        }
+
+        const UNREACHABLE: u32 = u32::MAX;
+        storage.best.clear();
+        storage.best.resize(state_space, UNREACHABLE);
+        storage.arrival.clear();
+        storage.arrival.resize(state_space, UNREACHABLE);
+        storage.best[0] = 0;
+        let mut transitions_examined = 0u64;
+        let mut reachable = 0u32;
+        let slots = storage.option_kind.len();
+
+        // The guard is scoped to the scan alone: witness reconstruction and
+        // result construction below own their output and must allocate.
+        {
+            #[cfg(test)]
+            let _allocation_guard = crate::test_alloc::HotLoopAllocationGuard::enter();
+
+            for key in 0..state_space {
+                let repairs = storage.best[key];
+                if repairs == UNREACHABLE {
+                    continue;
+                }
+                reachable += 1;
+                for slot in 0..slots {
+                    let next = key as u64 + storage.option_delta[slot];
+                    if next >= state_space as u64 {
+                        continue;
+                    }
+                    let next = next as usize;
+                    // A mixed-radix add is a real transition only when no
+                    // coordinate carried into the next digit.
+                    let mut feasible = true;
+                    for coordinate in 0..width {
+                        let radix = u64::from(self.capacities[coordinate]) + 1;
+                        let used = key as u64 / storage.strides[coordinate] % radix;
+                        let load = u64::from(storage.option_loads[slot * width + coordinate]);
+                        if used + load >= radix {
+                            feasible = false;
+                            break;
+                        }
+                    }
+                    if !feasible {
+                        continue;
+                    }
+                    transitions_examined += 1;
+                    if storage.best[next] == UNREACHABLE || storage.best[next] < repairs + 1 {
+                        storage.best[next] = repairs + 1;
+                        storage.arrival[next] = slot as u32;
+                    }
+                }
+            }
+        }
+
+        let mut optimum = 0u32;
+        let mut optimum_key = 0usize;
+        for (key, &repairs) in storage.best.iter().enumerate() {
+            if repairs != UNREACHABLE && repairs > optimum {
+                optimum = repairs;
+                optimum_key = key;
+            }
+        }
+
+        // Walk the witness back and count how many demands of each type it uses.
+        storage.used.clear();
+        storage.used.resize(kinds, 0);
+        storage.chosen.clear();
+        let mut cursor = optimum_key;
+        while cursor != 0 {
+            let slot = storage.arrival[cursor];
+            if slot == UNREACHABLE {
+                return Ok(None);
+            }
+            let slot = slot as usize;
+            storage.used[storage.option_kind[slot] as usize] += 1;
+            storage.chosen.push(slot as u32);
+            cursor -= storage.option_delta[slot] as usize;
+        }
+
+        // The certificate: the relaxation drops each type's multiplicity bound,
+        // so its optimum is an upper bound on the true optimum. A relaxed
+        // witness that respects every multiplicity is feasible for the original
+        // problem, and therefore exactly optimal. Without this check the answer
+        // would be an upper bound only, so a failure declines rather than
+        // returns.
+        for kind in 0..kinds {
+            if storage.used[kind] > storage.kind_count[kind] {
+                return Ok(None);
+            }
+        }
+
+        storage.taken.clear();
+        storage.taken.resize(kinds, 0);
+        storage.total_loads.clear();
+        storage.total_loads.resize(width, 0);
+        let mut assignment = Vec::with_capacity(storage.chosen.len());
+        // Hand each used type its own demands, in increasing demand order.
+        for index in 0..storage.chosen.len() {
+            let slot = storage.chosen[index] as usize;
+            let kind = storage.option_kind[slot];
+            let mut demand = u32::MAX;
+            let mut seen = 0u32;
+            for (candidate, &owner) in storage.kind_of_demand.iter().enumerate() {
+                if owner == kind {
+                    if seen == storage.taken[kind as usize] {
+                        demand = candidate as u32;
+                        break;
+                    }
+                    seen += 1;
+                }
+            }
+            if demand == u32::MAX {
+                return Ok(None);
+            }
+            storage.taken[kind as usize] += 1;
+            let loads = self.option_load_box(storage.option_index[slot]);
+            for (total, &load) in storage.total_loads.iter_mut().zip(loads.iter()) {
+                *total += u64::from(load);
+            }
+            assignment.push(WeightedRepairChoice { demand, loads });
+        }
+        assignment.sort_unstable_by_key(|choice| choice.demand);
+
+        let mut unmatched_demands = Vec::with_capacity(self.families.len() - assignment.len());
+        let mut next = 0usize;
+        for demand in 0..self.families.len() as u32 {
+            if next < assignment.len() && assignment[next].demand == demand {
+                next += 1;
+            } else {
+                unmatched_demands.push(demand);
+            }
+        }
+
+        Ok(Some(WeightedParallelRepairResult {
+            assignment: assignment.into_boxed_slice(),
+            unmatched_demands: unmatched_demands.into_boxed_slice(),
+            total_loads: storage.total_loads.clone().into_boxed_slice(),
+            transitions_examined,
+            peak_pareto_states: reachable,
+        }))
     }
 
     pub fn solve_dense_lattice(&self) -> Result<WeightedParallelRepairResult, SchedulerError> {
@@ -2741,6 +3097,140 @@ mod tests {
             fingerprint_load(&left, 0, &weights)
                 .wrapping_add(fingerprint_load(&right, 0, &weights))
         );
+    }
+
+    /// The counted-type reduction must never change an answer: whenever it
+    /// certifies, its optimum equals the general backend's and its assignment is
+    /// feasible and drawn from each demand's own options.
+    #[test]
+    fn counted_type_reduction_agrees_with_the_general_backends() {
+        let templates: [&[&[u32]]; 4] = [
+            &[&[1, 0], &[0, 2], &[2, 1]],
+            &[&[2, 0], &[0, 1], &[1, 1]],
+            &[&[0, 3], &[3, 0], &[1, 2]],
+            &[&[3, 1], &[1, 0], &[0, 2]],
+        ];
+        let mut certified = 0;
+        for kinds in 1..=4usize {
+            for copies in [1usize, 3, 7, 40, 200] {
+                for &capacity in &[4u32, 17, 60] {
+                    let families: Vec<Vec<Vec<u32>>> = (0..kinds * copies)
+                        .map(|demand| {
+                            templates[demand % kinds]
+                                .iter()
+                                .map(|load| load.to_vec())
+                                .collect()
+                        })
+                        .collect();
+                    let problem =
+                        WeightedRepairProblem::from_families(&[capacity, capacity], &families)
+                            .unwrap();
+                    let reference = problem.solve_dense_lattice().unwrap();
+                    let Some(counted) = problem.solve_counted_types().unwrap() else {
+                        continue;
+                    };
+                    certified += 1;
+                    assert_eq!(
+                        counted.repaired_count(),
+                        reference.repaired_count(),
+                        "counted optimum differs at kinds={kinds} copies={copies} capacity={capacity}"
+                    );
+                    let mut totals = vec![0u64; 2];
+                    let mut seen = std::collections::BTreeSet::new();
+                    for choice in counted.assignment.iter() {
+                        assert!(seen.insert(choice.demand), "a demand was repaired twice");
+                        assert!(
+                            families[choice.demand as usize]
+                                .iter()
+                                .any(|option| option[..] == choice.loads[..]),
+                            "a choice is not an option of its demand"
+                        );
+                        for (total, &load) in totals.iter_mut().zip(choice.loads.iter()) {
+                            *total += u64::from(load);
+                        }
+                    }
+                    for &total in &totals {
+                        assert!(
+                            total <= u64::from(capacity),
+                            "counted witness exceeds capacity"
+                        );
+                    }
+                    assert_eq!(
+                        counted.assignment.len() + counted.unmatched_demands.len(),
+                        families.len(),
+                        "counted result does not account for every demand"
+                    );
+                    assert_eq!(totals, counted.total_loads.to_vec());
+                }
+            }
+        }
+        assert!(
+            certified > 0,
+            "the counted reduction never certified on this corpus"
+        );
+    }
+
+    /// The counted-type dynamic-programming scan must allocate nothing once its
+    /// workspace is warm.
+    #[test]
+    fn warm_counted_type_workspace_allocates_nothing_in_the_scan() {
+        let families = (0..64)
+            .map(|demand| match demand % 3 {
+                0 => vec![vec![1, 0], vec![0, 2]],
+                1 => vec![vec![2, 0], vec![1, 1]],
+                _ => vec![vec![0, 3], vec![1, 2]],
+            })
+            .collect::<Vec<_>>();
+        let problem = WeightedRepairProblem::from_families(&[12, 12], &families).unwrap();
+        let mut workspace = WeightedRepairWorkspace::new();
+        let expected = problem
+            .solve_counted_types_with_workspace(&mut workspace)
+            .unwrap()
+            .expect("the counted reduction certifies on this instance");
+        // Re-enter the real scan many times after warm-up: a single measured
+        // call could hide an allocation that only recurs on a later entry, and
+        // a warm workspace must stay warm across repeated solves.
+        let (repairs, events) = crate::test_alloc::measure_allocations(|| {
+            let mut repairs = 0;
+            for _ in 0..64 {
+                let answer = problem
+                    .solve_counted_types_with_workspace(&mut workspace)
+                    .unwrap()
+                    .expect("the counted reduction certifies on this instance");
+                repairs = answer.repaired_count();
+            }
+            repairs
+        });
+        assert_eq!(repairs, expected.repaired_count());
+        assert_eq!(events, Default::default());
+
+        // The same workspace must also stay allocation-free when it is reused
+        // across a different problem of the same shape.
+        let other = WeightedRepairProblem::from_families(&[12, 12], &families[..32]).unwrap();
+        let (_, events) = crate::test_alloc::measure_allocations(|| {
+            for _ in 0..16 {
+                let _ = other
+                    .solve_counted_types_with_workspace(&mut workspace)
+                    .unwrap();
+            }
+        });
+        assert_eq!(events, Default::default());
+    }
+
+    /// Instances whose families are mostly distinct must keep the general
+    /// backends, so their recorded work counts are unaffected.
+    #[test]
+    fn counted_type_reduction_declines_instances_without_repetition() {
+        let families: Vec<Vec<Vec<u32>>> = (0..12u32)
+            .map(|demand| {
+                vec![
+                    vec![demand % 5 + 1, demand % 3],
+                    vec![demand % 2, demand % 7 + 1],
+                ]
+            })
+            .collect();
+        let problem = WeightedRepairProblem::from_families(&[9, 9], &families).unwrap();
+        assert!(problem.solve_counted_types().unwrap().is_none());
     }
 
     #[cfg(feature = "parallel")]

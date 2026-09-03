@@ -155,3 +155,22 @@ inside the ten-minute budget and so that the bounded subset-sum kernel's exact
 subset counter cannot overflow: item counts, demand counts, and capacities
 moved. The kernel, the classifier verdict, the deciding test, the control, and
 the predicted direction of all six rows are unchanged from version 1.
+
+The predictions in section 4 are deliberately left as they were written. Two
+things measured after them have since changed what they mean, and both are
+recorded in `BENCHMARKS.md` and the task report rather than edited into the
+table:
+
+- The scheduler gained a generic counted-type reduction, written in response to
+  the first run of the tier, which raised W3 from 2.35x to 1,648.75x and W2 from
+  19.52x to 111.59x without changing any answer. The predicted directions were
+  already correct; the margins in the measured table postdate the fix.
+- A crossover ladder of eight further instances showed that the bounded
+  subset-sum frontier is not a magnitude crossover but a cliff at the kernel's
+  declared width cap, with a nearly constant margin in ergodis's favour right up
+  to it. Entry N3 describes a real dependence of the state on numeric magnitude,
+  but the row that was predicted to lose for that reason loses to a configured
+  cap, not to a measured loss of ground.
+
+Crossover-ladder rows are diagnostics added after the predeclaration and carry
+no prediction. They are not counted in the acceptance gate.

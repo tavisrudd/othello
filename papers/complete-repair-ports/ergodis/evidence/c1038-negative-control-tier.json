@@ -1,9 +1,9 @@
 {
   "artifacts": {
     "classifier": {
-      "bytes": 10429,
+      "bytes": 11550,
       "path": "docs/ergodis-shape-classifier.md",
-      "sha256": "cf965660e76ffa869717c0d8f10387aae9165ce2d46d386b4a86bca4881812ee"
+      "sha256": "2e08ba0dbc670b7bd3c50fa945b91044a18fba3ee7d0f62e351fc6b4a403448d"
     },
     "control_source": {
       "bytes": 4284,
@@ -11,18 +11,18 @@
       "sha256": "6769e16fdf2b40ec0f4eff39b737023756b735628f90c516465e3e7daa9069d6"
     },
     "ergodis_binary": {
-      "bytes": 709352,
-      "sha256": "644ea7e6cc7ca90e249aa74abf94a9c29970182415ab70268eb91d44bafb9fcf"
+      "bytes": 732584,
+      "sha256": "0246ef734bfecddf3b0ab4ae3226f7741eac5ca1537e6bfd20c1cea906c42bdb"
     },
     "example_source": {
-      "bytes": 14616,
+      "bytes": 16130,
       "path": "examples/negative_control_tier.rs",
-      "sha256": "793aa0c499e70086cd8451764fdbe297b3cade033c4335ce371bbc98e44f9a4e"
+      "sha256": "46a4c544c824306b0fef541e5a88e7b73f5961bf17318d36b018bcb900a7ae13"
     },
     "raw_jsonl": {
-      "bytes": 9159,
+      "bytes": 21870,
       "path": "c1038-negative-control-tier.raw.jsonl",
-      "sha256": "8fcbd1c887144a859544e4f7c18b43c11568562e55614237299a6ab86b59d31d"
+      "sha256": "1b762e90a3ac70edc1fd3adcb201e87b597195740aa15a2acf558d9aa61c4721"
     }
   },
   "protocol": {
@@ -34,24 +34,224 @@
     "timeout_s": 600.0
   },
   "rows": {
+    "C1": {
+      "agreement": "exact agreement",
+      "control_answer": [
+        "1"
+      ],
+      "control_certificate_bytes": 0,
+      "control_median_ns": 6539470,
+      "control_peak_rss_kib": 89676,
+      "direction": "ergodis wins",
+      "ergodis_answer": [
+        "1"
+      ],
+      "ergodis_certificate_bytes": 8,
+      "ergodis_detail": "width=52886",
+      "ergodis_median_ns": 1583587,
+      "ergodis_over_control": 4.129529984775071,
+      "ergodis_peak_rss_kib": 2860,
+      "ergodis_replay_ns": 180,
+      "ergodis_representation": 999334,
+      "ergodis_status": "ok",
+      "instance_bytes": 318,
+      "instance_sha256": "6c2d4d998009a75f822cbad98f45a6a7f8cfc841b95a13c7dcd84b8d18a5519c",
+      "rounds": 3,
+      "timeout_s": 600.0
+    },
+    "C2": {
+      "agreement": "exact agreement",
+      "control_answer": [
+        "1"
+      ],
+      "control_certificate_bytes": 0,
+      "control_median_ns": 20422747,
+      "control_peak_rss_kib": 134024,
+      "direction": "ergodis wins",
+      "ergodis_answer": [
+        "1"
+      ],
+      "ergodis_certificate_bytes": 8,
+      "ergodis_detail": "width=195557",
+      "ergodis_median_ns": 4685230,
+      "ergodis_over_control": 4.358963594103171,
+      "ergodis_peak_rss_kib": 5236,
+      "ergodis_replay_ns": 181,
+      "ergodis_representation": 4050778,
+      "ergodis_status": "ok",
+      "instance_bytes": 347,
+      "instance_sha256": "7c2604798be8fc0ae34f485e121a6a20488cbea50e893ef318069a19afeac681",
+      "rounds": 3,
+      "timeout_s": 600.0
+    },
+    "C3": {
+      "agreement": "exact agreement",
+      "control_answer": [
+        "1"
+      ],
+      "control_certificate_bytes": 0,
+      "control_median_ns": 28191495,
+      "control_peak_rss_kib": 160964,
+      "direction": "ergodis wins",
+      "ergodis_answer": [
+        "1"
+      ],
+      "ergodis_certificate_bytes": 8,
+      "ergodis_detail": "width=285576",
+      "ergodis_median_ns": 6187345,
+      "ergodis_over_control": 4.556315350121902,
+      "ergodis_peak_rss_kib": 7092,
+      "ergodis_replay_ns": 160,
+      "ergodis_representation": 5630364,
+      "ergodis_status": "ok",
+      "instance_bytes": 354,
+      "instance_sha256": "4031381d70536a8c0875e2914b9f86c0a98597c09a749ceb2ee764bc83248cef",
+      "rounds": 3,
+      "timeout_s": 600.0
+    },
+    "C4": {
+      "agreement": "exact agreement",
+      "control_answer": [
+        "1"
+      ],
+      "control_certificate_bytes": 0,
+      "control_median_ns": 59491506,
+      "control_peak_rss_kib": 267060,
+      "direction": "ergodis wins",
+      "ergodis_answer": [
+        "1"
+      ],
+      "ergodis_certificate_bytes": 8,
+      "ergodis_detail": "width=625002",
+      "ergodis_median_ns": 14767743,
+      "ergodis_over_control": 4.02847652481493,
+      "ergodis_peak_rss_kib": 13012,
+      "ergodis_replay_ns": 191,
+      "ergodis_representation": 12955810,
+      "ergodis_status": "ok",
+      "instance_bytes": 390,
+      "instance_sha256": "6902dffc45ee610e9b660962c43e332e977e172c043c29ec8bf79bd6f8fa9fae",
+      "rounds": 3,
+      "timeout_s": 600.0
+    },
+    "C5": {
+      "agreement": "exact agreement",
+      "control_answer": [
+        "1"
+      ],
+      "control_certificate_bytes": 0,
+      "control_median_ns": 82821303,
+      "control_peak_rss_kib": 339860,
+      "direction": "ergodis wins",
+      "ergodis_answer": [
+        "1"
+      ],
+      "ergodis_certificate_bytes": 8,
+      "ergodis_detail": "width=866296",
+      "ergodis_median_ns": 21002385,
+      "ergodis_over_control": 3.943423711164232,
+      "ergodis_peak_rss_kib": 17388,
+      "ergodis_replay_ns": 220,
+      "ergodis_representation": 18082606,
+      "ergodis_status": "ok",
+      "instance_bytes": 399,
+      "instance_sha256": "14ec7853d280143ce6fb3901d0c9753e7849da9dfb3beeb7e144c52711a2868e",
+      "rounds": 3,
+      "timeout_s": 600.0
+    },
+    "C6": {
+      "agreement": "ergodis declined the instance under its declared bounds",
+      "control_answer": [
+        "1"
+      ],
+      "control_certificate_bytes": 0,
+      "control_median_ns": 106245435,
+      "control_peak_rss_kib": 413620,
+      "direction": "ergodis loses",
+      "ergodis_answer": [
+        "0"
+      ],
+      "ergodis_certificate_bytes": 0,
+      "ergodis_detail": "width=1097493; bounded subset-sum range overflowed or exceeds its width cap",
+      "ergodis_median_ns": null,
+      "ergodis_over_control": null,
+      "ergodis_peak_rss_kib": 2132,
+      "ergodis_replay_ns": 0,
+      "ergodis_representation": 0,
+      "ergodis_status": "declined",
+      "instance_bytes": 405,
+      "instance_sha256": "6a8b6ecfa955f3f17cc9c971ec61c5e4387fc0e835ab0f3b5adb96eaf8f1f1c0",
+      "rounds": 3,
+      "timeout_s": 600.0
+    },
+    "C7": {
+      "agreement": "ergodis declined the instance under its declared bounds",
+      "control_answer": [
+        "1"
+      ],
+      "control_certificate_bytes": 0,
+      "control_median_ns": 127803726,
+      "control_peak_rss_kib": 480476,
+      "direction": "ergodis loses",
+      "ergodis_answer": [
+        "0"
+      ],
+      "ergodis_certificate_bytes": 0,
+      "ergodis_detail": "width=1317625; bounded subset-sum range overflowed or exceeds its width cap",
+      "ergodis_median_ns": null,
+      "ergodis_over_control": null,
+      "ergodis_peak_rss_kib": 2080,
+      "ergodis_replay_ns": 0,
+      "ergodis_representation": 0,
+      "ergodis_status": "declined",
+      "instance_bytes": 413,
+      "instance_sha256": "dc545f3738452cdcaed6c965d14c8e317d4407c21f83f8f064ebad7f45acb9fe",
+      "rounds": 3,
+      "timeout_s": 600.0
+    },
+    "C8": {
+      "agreement": "ergodis declined the instance under its declared bounds",
+      "control_answer": [
+        "1"
+      ],
+      "control_certificate_bytes": 0,
+      "control_median_ns": 189501237,
+      "control_peak_rss_kib": 678544,
+      "direction": "ergodis loses",
+      "ergodis_answer": [
+        "0"
+      ],
+      "ergodis_certificate_bytes": 0,
+      "ergodis_detail": "width=1966503; bounded subset-sum range overflowed or exceeds its width cap",
+      "ergodis_median_ns": null,
+      "ergodis_over_control": null,
+      "ergodis_peak_rss_kib": 2036,
+      "ergodis_replay_ns": 0,
+      "ergodis_representation": 0,
+      "ergodis_status": "declined",
+      "instance_bytes": 414,
+      "instance_sha256": "546e84cd028c9e892e94a4893cbae452861d74617a4b8d050ec3685ca666dc76",
+      "rounds": 3,
+      "timeout_s": 600.0
+    },
     "L1": {
       "agreement": "exact agreement",
       "control_answer": [
         "1"
       ],
       "control_certificate_bytes": 0,
-      "control_median_ns": 118589881,
-      "control_peak_rss_kib": 360616,
+      "control_median_ns": 139041979,
+      "control_peak_rss_kib": 359944,
       "direction": "ergodis wins",
       "ergodis_answer": [
         "1"
       ],
       "ergodis_certificate_bytes": 8,
-      "ergodis_detail": "",
-      "ergodis_median_ns": 30959722,
-      "ergodis_over_control": 3.8304569078494954,
-      "ergodis_peak_rss_kib": 18680,
-      "ergodis_replay_ns": 350,
+      "ergodis_detail": "width=930529",
+      "ergodis_median_ns": 37033505,
+      "ergodis_over_control": 3.754491480079998,
+      "ergodis_peak_rss_kib": 18444,
+      "ergodis_replay_ns": 340,
       "ergodis_representation": 18911322,
       "ergodis_status": "ok",
       "instance_bytes": 398,
@@ -65,18 +265,18 @@
         "10"
       ],
       "control_certificate_bytes": 0,
-      "control_median_ns": 9124709,
-      "control_peak_rss_kib": 76356,
+      "control_median_ns": 14097567,
+      "control_peak_rss_kib": 76032,
       "direction": "ergodis loses",
       "ergodis_answer": [
         "10"
       ],
       "ergodis_certificate_bytes": 280,
       "ergodis_detail": "",
-      "ergodis_median_ns": 137052435119,
-      "ergodis_over_control": 6.657823330229186e-05,
-      "ergodis_peak_rss_kib": 29532,
-      "ergodis_replay_ns": 2424,
+      "ergodis_median_ns": 192982234150,
+      "ergodis_over_control": 7.305111303169147e-05,
+      "ergodis_peak_rss_kib": 29216,
+      "ergodis_replay_ns": 2184,
       "ergodis_representation": 111079,
       "ergodis_status": "ok",
       "instance_bytes": 1137,
@@ -90,17 +290,17 @@
         "1"
       ],
       "control_certificate_bytes": 0,
-      "control_median_ns": 54427496,
-      "control_peak_rss_kib": 76688,
+      "control_median_ns": 53590363,
+      "control_peak_rss_kib": 76340,
       "direction": "ergodis loses",
       "ergodis_answer": [
         "0"
       ],
       "ergodis_certificate_bytes": 0,
-      "ergodis_detail": "bounded subset-sum range overflowed or exceeds its width cap",
+      "ergodis_detail": "width=3960566; bounded subset-sum range overflowed or exceeds its width cap",
       "ergodis_median_ns": null,
       "ergodis_over_control": null,
-      "ergodis_peak_rss_kib": 2288,
+      "ergodis_peak_rss_kib": 2124,
       "ergodis_replay_ns": 0,
       "ergodis_representation": 0,
       "ergodis_status": "declined",
@@ -115,18 +315,18 @@
         "1"
       ],
       "control_certificate_bytes": 0,
-      "control_median_ns": 1781310,
-      "control_peak_rss_kib": 75312,
+      "control_median_ns": 1691478,
+      "control_peak_rss_kib": 74936,
       "direction": "ergodis wins",
       "ergodis_answer": [
         "1"
       ],
       "ergodis_certificate_bytes": 8,
-      "ergodis_detail": "",
-      "ergodis_median_ns": 72164,
-      "ergodis_over_control": 24.68419156366055,
-      "ergodis_peak_rss_kib": 2332,
-      "ergodis_replay_ns": 361,
+      "ergodis_detail": "width=627",
+      "ergodis_median_ns": 56134,
+      "ergodis_over_control": 30.13286065486158,
+      "ergodis_peak_rss_kib": 2064,
+      "ergodis_replay_ns": 281,
       "ergodis_representation": 16622,
       "ergodis_status": "ok",
       "instance_bytes": 215,
@@ -140,18 +340,18 @@
         "60"
       ],
       "control_certificate_bytes": 0,
-      "control_median_ns": 57354009,
-      "control_peak_rss_kib": 82444,
+      "control_median_ns": 56278285,
+      "control_peak_rss_kib": 82196,
       "direction": "ergodis wins",
       "ergodis_answer": [
         "60"
       ],
       "ergodis_certificate_bytes": 720,
       "ergodis_detail": "",
-      "ergodis_median_ns": 2938827,
-      "ergodis_over_control": 19.51595279341043,
-      "ergodis_peak_rss_kib": 2792,
-      "ergodis_replay_ns": 1352,
+      "ergodis_median_ns": 682060,
+      "ergodis_over_control": 82.51222033252206,
+      "ergodis_peak_rss_kib": 2396,
+      "ergodis_replay_ns": 1363,
       "ergodis_representation": 2461,
       "ergodis_status": "ok",
       "instance_bytes": 10484,
@@ -165,18 +365,18 @@
         "300"
       ],
       "control_certificate_bytes": 0,
-      "control_median_ns": 3022025348,
-      "control_peak_rss_kib": 179152,
+      "control_median_ns": 2949091033,
+      "control_peak_rss_kib": 178944,
       "direction": "ergodis wins",
       "ergodis_answer": [
         "300"
       ],
       "ergodis_certificate_bytes": 3600,
       "ergodis_detail": "",
-      "ergodis_median_ns": 1287790808,
-      "ergodis_over_control": 2.346674109821725,
-      "ergodis_peak_rss_kib": 22484,
-      "ergodis_replay_ns": 18054,
+      "ergodis_median_ns": 2154589,
+      "ergodis_over_control": 1368.7487650777016,
+      "ergodis_peak_rss_kib": 3188,
+      "ergodis_replay_ns": 3526,
       "ergodis_representation": 22801,
       "ergodis_status": "ok",
       "instance_bytes": 80083,
