@@ -4229,8 +4229,17 @@
       "last": 1049,
       "purpose": "certified dominance pruning for the scheduler DP (L2 absorption)",
       "sequence": 470
+    },
+    {
+      "count": 1,
+      "first": 1050,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1050,
+      "purpose": "re-run application benchmark table after the counted-type scheduler reduction; retire the subsumed application-specific demand compiler",
+      "sequence": 471
     }
   ],
-  "next_id": 1050,
+  "next_id": 1051,
   "schema": "codex-task-id-allocations-v1"
 }
