@@ -70,3 +70,24 @@ one-line pointer here.
   leaf classes as piecewise functions of the shared budget level; run-length witness readout.
   Gate to watch: the 2-class leaf census is stream-specific and needs a hostile stream or a
   proved bound.
+- 2026-09-03 — probe 3: incremental certificates. Report:
+  `2026-09-03-c1061-probe3-incremental-certificates.md` (ergodis-private `83773c6`, module
+  `incremental_certificate.rs`). Verdict: **promote**. Hash tree over the retained tree's own node
+  summaries; an internal digest commits to the composed summary plus child digests, so checking
+  the digest chain checks the min-plus composition law. Snapshot certificate plus independent
+  recomposing verifier; delta certificate checked in O(depth) by a verifier holding 72 bytes
+  (artifact, root, sequence). At 1,024 / 16,384 leaves: 1,168 / 1,552 bytes per event, verify
+  4.6 / 6.0 us, full re-verification 129x / 1,748x more expensive. 100,000-event chains verify
+  with zero disagreements; forged ancestor, event, leaf, base matrix, wrong artifact,
+  truncation, and replayed stale deltas each fail closed. Monoid collapse: one certificate per
+  run of k events on a leaf, verification still O(depth), 146 bytes/event at k=8. Crash
+  recovery round-trips through a file and replays to an identical root; full-history replay
+  matches. Cost finding: about 95% of the certified path is SHA-256, so the proof chain costs
+  about 20x the update it certifies; `target-cpu=native` is a recorded negative, lever is a
+  SHA-NI `sha2` backend or BLAKE3 (already a core dependency). Literature to search before any
+  novelty language: authenticated data structures (Merkle, Naor--Nissim, Tamassia, Miller et
+  al., Certificate Transparency consistency proofs), incremental view maintenance with proofs,
+  verifiable state machines and folding schemes, certifying dynamic graph algorithms, tropical
+  segment trees; only "historical decision provenance for an optimization answer" looks
+  unoccupied and is a composition of two mature ideas. Accessor hook for `delta_composition`
+  described in the report, not applied.
