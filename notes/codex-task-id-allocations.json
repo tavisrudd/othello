@@ -4220,8 +4220,17 @@
       "last": 1048,
       "purpose": "subset-sum width frontier: parametrized cap, measured crossover past 2^20, residue-split or MITM to remove width dependence",
       "sequence": 469
+    },
+    {
+      "count": 1,
+      "first": 1049,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1049,
+      "purpose": "certified dominance pruning for the scheduler DP (L2 absorption)",
+      "sequence": 470
     }
   ],
-  "next_id": 1049,
+  "next_id": 1050,
   "schema": "codex-task-id-allocations-v1"
 }
