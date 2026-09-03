@@ -100,6 +100,14 @@ lint-clean, tagged `public` tip to the staging clone; then `publish.sh <tag>` in
 GitHub. Both hops require `ERGODIS_PUBLISH=1`, both park their push URL at `no-push://` between
 publishes, and the private repo's hook rejects any non-local push URL outright.
 
+The staging clone is also where release validation runs: a fresh build, the full test suite,
+the benchmark replay commands, and the public lint all execute against `~/src/ergodis-public`
+exactly as a downstream user would see the tree, before the second hop. This mirrors the paper
+export flow (edit and validate the authority first, then forward-commit the extracted copy and
+validate it standalone), with git as the exporter instead of a file copier: the filtered
+snapshot commit is the export artifact, `EXPORTS.md` is the manifest, and the staging clone is
+the standalone repository that gets validated before it is pushed.
+
 **Export is a snapshot, not a merge.** `scripts/export-public.sh <private-rev> <message-file>`:
 
 1. Materializes `filter(tree(private-rev))` in a scratch worktree: drops every path in the exclude
