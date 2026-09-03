@@ -118,3 +118,18 @@ one-line pointer here.
   entries is provisional until re-measured in hardware counters (instructions and cycles).
   Probe 6 re-measures probes 2 and 5; the hash-backend A/B re-measures probe 3's baseline.
   Probe 1's counter numbers (about 2,366 instructions / 1,025 cycles per update) stand.
+- 2026-09-03 — probe 3 follow-up: hash backend A/B (counters, 7 interleaved paired rounds, 95%
+  CIs). Appended to `2026-09-03-c1061-probe3-incremental-certificates.md` (ergodis-private
+  `3971eb6`). Verdict: **switched default to `sha256-packed`** (SHA-256 compression over packed
+  fixed-size blocks, domain in the initial state, no length block; 128-byte internal-node
+  preimage is two compressions instead of three): 0.665x baseline cycles per emit+verify at 1,024
+  leaves (CI [0.661, 0.668], t = -196) and 0.674x at 16,384 (CI [0.648, 0.701]). SHA-NI is not a
+  separate candidate: `sha2` 0.10.9 already selects it at runtime (force-soft is 4x slower),
+  which also explains the earlier `target-cpu=native` null. BLAKE3 is 2.0x worse at 76- and
+  128-byte sequentially dependent preimages; the non-cryptographic mixer is kept only as a
+  labeled lower bound (0.16x). Counter re-measurement: certified pair costs 22.0x the
+  uncertified update at 1,024 leaves (CI [17.6, 27.6]) and 15.3x at 16,384; full over
+  incremental verification is 136x and 2,072x in cycles, so probe 3's wall verdicts stand.
+  Superseded: the "95% of the certified path is hashing" figure was a cross-binary artifact;
+  within one binary it is 75% at depth 10 and 68% at depth 14. All eight gates pass on all four
+  backends; zero-allocation regression passes with the new default.
