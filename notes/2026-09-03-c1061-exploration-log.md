@@ -220,3 +220,25 @@ one-line pointer here.
   state is itself the output. Highest-value item left: `defect.rs::build_threshold_masks`, one
   prefix-and-suffix scan for every bound. Core untouched; the defect collapse is a private
   replica pending a core change.
+- 2026-09-03 — probe 9: hostile review of the closed-form LRC decision and O(depth) witness
+  queries. Report: `2026-09-03-c1061-probe9-closed-form-review-and-local-witness.md`
+  (ergodis-private `b5ceaef`). Verdict: **closed form proved for repaired_count only; kernel
+  stays**. Scope correction: probe 6's "kernel could be deleted" is withdrawn; the closed form
+  decides `repaired_count`, not `mode_counts`, `total_loads`, or `totals_checked`, so the
+  kernel is skipped only where the count alone is consumed (all of the fleet binding). All
+  three claims proved line by line: the global-capacity branch is dead for every input because
+  the function's first line sets maximum = min(D, Lc + Gc) (named as the condition a future
+  edit could break); the per-domain test collapses to A <= min_d(c_d + m_d) exactly, relying on
+  `saturating_sub`; starting the scan at min(maximum, S1) skips only rejected candidates.
+  Independent oracle: a CP-SAT model (`python/lrc_counted_oracle.py`) agrees with kernel and
+  closed form on all 5,026 corpus cases including boundary inputs, incidentally validating the
+  published kernel against an independent model. Complete enumeration of 2.35 billion inputs
+  over a capacity/demand/extra box: zero mismatches, zero firings of the dead branch; only
+  envelope is an unreachable u64 overflow. The closed form is a property of the counted-kernel
+  family (four structural assumptions, S1 = floor((cap + (w-1)Lc)/w) for read weight w),
+  derived not measured. Local witness queries: 399 instructions per single-pod query vs 1.21M
+  full served readout (3,039x; cycles 1,864x, CI [1,587, 2,189]); 64-pod window 49.8x cheaper;
+  unique vs rack inconclusive at 1.00x, evidence the cost is structural. Implied rule not yet
+  implemented: above about a fifth of the fleet, full readout is cheaper.
+- 2026-09-03 — probe 11 launched: land the two defect-kernel collapses in the Ergodis core under
+  the full core validation gate (first core edit of this task).
