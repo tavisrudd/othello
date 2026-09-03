@@ -324,3 +324,25 @@ one-line pointer here.
   four times, the induce-a-finite-table idea twice. Ten open questions; question 1 (does the
   trait survive both a matrix summary and a function summary) is the gate on any extraction.
   Shared-target-directory worktree hazard recorded as ADR section 7.
+- 2026-09-03 — probe 13: QEC window exactness and external baseline; worklist minimizer.
+  Report: `2026-09-03-c1061-probe13-qec-window-exactness-and-external-baseline.md`
+  (ergodis-private `ecaa632`). Verdicts: **QEC decoding: drop from the product-target list**;
+  **worklist minimizer: promote**. At matched accuracy the retained space-cut delta costs 64x
+  to 82x more instructions per event than PyMatching's sparse blossom at distances 3, 5, 7, 9
+  (497 / 843 / 1,195 / 1,484 per decode vs 40,539 / 67,703 / 94,870 / 94,870 per event), all CIs
+  far from 1.0. The loss is structural: the delta pays a dense 16x16 min-plus product per tree
+  node regardless of defect locality; blossom touches only the defect neighbourhood. Delta cost
+  is flat in distance and blossom's linear, so the crossover is near distance 3,000 to 5,000.
+  Accuracy parity: identical logical error rates and zero disagreements at distances 5, 7, 9
+  over 20,000 shots; 41 tie-breaking disagreements at distance 3. Windowed objective stated
+  precisely: minimum weight over configurations with no measurement error on any seam round,
+  vs full-history minimum weight over free seam states; identical only at T = R. Exactness is a
+  condition on the optimum, not the noise: disagreements on seam-avoiding histories grow from
+  0% to 54% as physical error rises from 0.1% to 5%. Window height priced: height 2 to 6 cuts
+  excess logical error 6x to 14x (60% to 4% excess at 1% physical) at 8x cost per unit height.
+  Qualifies probe 10: the space cut makes distance free, not experiment length. Worklist
+  minimizer: 47.8x (36 states) to 154.8x (144 states) over full re-minimization and 18x to 66x
+  over split-only, growing with size; a one-line fix (recompact labels only when a block
+  splits) moved it from 4.6x. Caveat: steady-state numbers; on a live non-minimal policy the
+  structural win is 4x to 7x, and a linked partition structure would remove the per-block
+  state scan.
