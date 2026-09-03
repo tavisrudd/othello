@@ -153,3 +153,28 @@ one-line pointer here.
   1.74x not 11.5x (wall charged a clone both paths do). Instruction counts are deterministic
   under load, cycle CIs wide, so instructions are primary; rack-fleet run readout inconclusive
   on cycles.
+- 2026-09-03 — probe 7: other problem domains and solve shapes. Report:
+  `2026-09-03-c1061-probe7-other-domains-and-shapes.md` (ergodis-private `cc59d6a`, modules
+  `semiring_tree.rs`, `syndrome_window.rs`, `policy_automaton.rs`). Verdict: **promote the
+  semiring layer; QEC conditional; policy confirmed; routing downgraded to conditional**. Three
+  shapes examined, two prototyped to exact-agreement gates. QEC syndrome decoding as a min-plus
+  chain over rounds (repetition code, phenomenological noise): leaf is closed-form because the
+  parity check has a one-dimensional kernel; congruence exact against brute force; update monoid
+  is an elementary abelian 2-group (toggles commute and are involutions), the best algebra in the
+  series; but interface width is 2^D and per-event instructions grow 8x per unit distance
+  (5,040 / 37,525 / 281,580 / 2,565,491 / 21,974,623 at D = 2..6), so the shape dies at distance
+  6. Delta vs fresh at D = 4, 1,024 rounds, 8 interleaved rounds: 134.7x instructions
+  (CI [134.7, 134.7]), 114.0x cycles (CI [95.6, 136.0]) — two orders below probe 2 because the
+  leaf is cheap. Tropical normalization gives 42 root classes from 799, not probe 2's 2 to 4.
+  Orbit compilation measured and dead: cyclic/dihedral orbits reduce the syndrome table by the
+  group order (m or 2m) against a 2^m table. Five semirings over one compiled topology, and here
+  the functors are different decoders: min-plus is minimum-weight, sum-product is
+  degeneracy-summing maximum-likelihood, and they disagree on 2.5% to 27% of planted instances.
+  Policy automaton: determinism makes the summary a function, so width is |Q| and composition is
+  |Q| lookups; congruence finite by construction (transition monoid 626 at 17 states); trace-edit
+  delta 13.0x instructions / 39.0x cycles; rule-change events have a 128x wider affected set than
+  a path; re-minimization refines only, never coarsens, in 1,500 trials. Clos/fat-tree argued
+  only and downgraded: raw interface far too wide, rescued only by fabric symmetry, which probe
+  5's negative control says is layout-dependent. Two cross-domain rules added to the brief: the
+  chain delta speedup is set by the leaf-to-composition cost ratio, not chain length; symmetry
+  reduction is an instance-structure win, never a structural bound.
