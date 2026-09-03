@@ -113,3 +113,8 @@ one-line pointer here.
 - 2026-09-03 — probe 3 follow-up launched: hash backend A/B on the certified path (sha2 baseline,
   SHA-NI/asm sha2, BLAKE3 single and batch, non-cryptographic lower bound, fewer hash calls).
   Certificate work is engineering, not a paper; no further novelty effort.
+- 2026-09-03 — measurement caveat: the box was loaded with concurrent builds and benchmarks
+  during probes 2, 3, and 5, and their ratios are wall-clock. Every wall-based verdict in those
+  entries is provisional until re-measured in hardware counters (instructions and cycles).
+  Probe 6 re-measures probes 2 and 5; the hash-backend A/B re-measures probe 3's baseline.
+  Probe 1's counter numbers (about 2,366 instructions / 1,025 cycles per update) stand.
