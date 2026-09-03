@@ -4265,8 +4265,44 @@
       "last": 1053,
       "purpose": "repair DAG BFS single-map merge (T3)",
       "sequence": 474
+    },
+    {
+      "count": 1,
+      "first": 1054,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1054,
+      "purpose": "promote hall_core sparse CSR Hall backend into core hall.rs with dense/sparse crossover",
+      "sequence": 475
+    },
+    {
+      "count": 1,
+      "first": 1055,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1055,
+      "purpose": "promote binary_margin_lift Gale-Ryser liftability into core",
+      "sequence": 476
+    },
+    {
+      "count": 1,
+      "first": 1056,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1056,
+      "purpose": "promote two_adic_autocorrelation, z2k_subgroup, bitset_sumset kernels into core; merge bitset_sumset with bounded_subset_sum",
+      "sequence": 477
+    },
+    {
+      "count": 1,
+      "first": 1057,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1057,
+      "purpose": "promote semantic_theorems, predicate_cover, mask_cycle_proof proof scaffolding into core",
+      "sequence": 478
     }
   ],
-  "next_id": 1054,
+  "next_id": 1058,
   "schema": "codex-task-id-allocations-v1"
 }
