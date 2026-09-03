@@ -276,7 +276,13 @@ The bare `cargo clippy --workspace --all-targets -- -D warnings` currently fails
 `/home/tavis/src/ergodis-private/src/congruence_search.rs:33` (`SUMMARY_ENTRIES`), which belongs to
 another agent's in-progress module; it is the only diagnostic in the workspace, hence the scoped rerun.
 `cargo fmt --all` reaches beyond this workspace into other checkouts through the shared tree and reports
-many pre-existing foreign diffs, so formatting was checked per file instead.
+many pre-existing foreign diffs, so formatting was checked per file instead. A full `cargo test
+--workspace` was started but not carried to completion: two other agents were editing the same
+workspace during this probe, so its verdict would not have been attributable to this change.
+
+Committed in `ergodis-private` as `83773c6`, touching only the module, its test, the benchmark, one
+`pub mod` line, and one command arm. The concurrent `snapshot_acceleration` module line and the
+`lrc_delta_binding` edits present in the working tree were deliberately left unstaged.
 
 Zero allocations: `certificate_emission_and_verification_allocate_nothing` runs 20,000 events at 1,024
 leaves through `apply_delta_with_certificate` and `verify_delta` with a counting global allocator and a
