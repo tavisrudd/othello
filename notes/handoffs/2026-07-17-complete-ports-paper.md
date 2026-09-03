@@ -916,6 +916,14 @@ the representation-search spike is a narrow go (typed encoder grammar, full cost
 round-trip admission, control rediscovered; type-level descriptors are the main lever)
 ([C1039](../2026-09-02-c1039-theorem-gap-admission.md), [C1051](../2026-09-02-c1051-evolve-representation-search-spike.md)).
 
+C1049, C1054, and C1060 are closed. The scheduler now has certified dominance pruning and a
+certified Lagrangian bound with branch-and-bound: the L2 negative-control row, predicted to lose,
+solves exactly in 0.41 ms against CP-SAT's 4.6 ms with a 128-byte replayable optimality
+certificate; the bound route does not finish W2, so per-instance routing between the bound and
+the dynamic program is the open successor. The sparse CSR Hall backend is in core with automatic
+layout selection ([C1049](../2026-09-02-c1049-scheduler-dominance-pruning.md),
+[C1054](../2026-09-02-c1054-hall-core-promotion.md), [C1060](../2026-09-02-c1060-beat-cpsat-on-l2.md)).
+
 C1017 is queued to remediate the whole-core Ergodis performance-contract audit:
 allocation-counted hot loops, iterative traversal, complete Tiger layouts,
 contention-free worker ownership, one-/parallel-mode counter A/B gates, and the
