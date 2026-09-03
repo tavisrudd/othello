@@ -686,13 +686,17 @@ derived defaults, and the three that named a stale `nix-target` path now ask
 public checker reached for through a relative path into the monorepo, are
 retained under `evidence/` at their pinned SHA-256.
 
-One finding remains, and it is a real boundary question rather than a wording
-one: `python/check_bb_native.py` in public core has a replay branch keyed on
-the schema `ergodis-private-css-bp-osd-spike-v2`, whose producer and every
-artifact live only in `ergodis-private`. Moving that branch to the private side
-is the boundary-correct fix, but the checker is hashed in `SHA256SUMS` and
-pinned by a retained BB360 evidence file, so repinning that evidence needs an
-explicit decision.
+The last finding was a boundary question rather than a wording one:
+`python/check_bb_native.py` in public core has a replay branch keyed on the
+schema `ergodis-private-css-bp-osd-spike-v2`, whose producer and every artifact
+live only in `ergodis-private`. The user directed that the schema stay as it
+is, so the lint now honours its allowlist for the private-path rule and the
+schema is exempted at that one exact path. Only the `PATH:MARKER` form exempts
+a private-path marker; a bare entry would exempt `ergodis-private` or `/home/`
+across the whole tree, which is what the rule exists to catch. Three guard
+tests cover the exemption, the bare-marker refusal, and an entry naming a
+different path. All 47 publication guards pass and the filtered export tree
+lints clean.
 
 Filenames were the other half, and the lint never saw them: it scans file
 contents, not paths. No tracked file in any Ergodis repository now carries a
@@ -713,8 +717,8 @@ measured rows is unchanged, so no row was re-measured and none needs to be.
 
 The validation gate passes in both repositories: `cargo fmt --check`, strict
 all-target/all-feature clippy, and the full test suites, plus the evidence
-checkers and the registry gate. Core commits `f692857` and `1ea0e9a`, evidence
-commit `921bd9d`, private commit `48c75d7`.
+checkers and the registry gate. Core commits `f692857`, `1ea0e9a`, and
+`b7cb98a`, evidence commit `921bd9d`, private commit `48c75d7`.
 
 Task identifiers still appear inside file *contents* as schema version tags
 (`c985-structured-set-ab-v1`, `c997-source`) and in the registry's citations of
