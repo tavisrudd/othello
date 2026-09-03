@@ -2204,6 +2204,10 @@ impl WeightedRepairProblem {
             total_loads: storage.total_loads.clone().into_boxed_slice(),
             transitions_examined,
             peak_pareto_states: reachable,
+            dominance: DominanceCounters::default(),
+            dominance_layout: None,
+            dominance_witnesses: Box::default(),
+            dominance_layer_starts: Box::default(),
         }))
     }
 
