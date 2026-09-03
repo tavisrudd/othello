@@ -718,7 +718,14 @@ measured rows is unchanged, so no row was re-measured and none needs to be.
 The validation gate passes in both repositories: `cargo fmt --check`, strict
 all-target/all-feature clippy, and the full test suites, plus the evidence
 checkers and the registry gate. Core commits `f692857`, `1ea0e9a`, and
-`b7cb98a`, evidence commit `921bd9d`, private commit `48c75d7`.
+`b7cb98a`, evidence commit `921bd9d`, private commits `48c75d7` and `686ee03`.
+
+One pre-existing defect was found and deliberately left alone. The private
+evidence manifest's entry for the chain-ring instrument test does not match
+that file's content, and did not match before this work either: the recorded
+hash and the committed file disagree at the split-base commit. Repinning
+evidence produced by another task is not this task's call, so the entry stands
+as found and is raised here instead.
 
 Task identifiers still appear inside file *contents* as schema version tags
 (`c985-structured-set-ab-v1`, `c997-source`) and in the registry's citations of
