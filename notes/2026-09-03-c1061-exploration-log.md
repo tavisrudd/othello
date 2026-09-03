@@ -366,3 +366,33 @@ one-line pointer here.
   including the per-leaf summary accessor `delta_composition` still lacks. Methodology: below
   about a thousand instructions per op, cycle differencing goes negative on this box; only
   instructions carry a verdict there.
+- 2026-09-03 — probe 15: incremental top-k policy, tie-closed state, mechanical congruence
+  check. Report: `2026-09-03-c1061-probe15-incremental-topk-and-tie-closed-state.md` (code
+  landed in ergodis-private under `1cd8960`, swept in by a concurrent commit; see process note).
+  Verdicts: **top-k policy: promote (11.4x cheaper than the tree)**; **exact compressive state
+  key: does not exist for this vocabulary**; **probe 12's regression verdict reversed**.
+  Harness error found: the N vs N/2 differencing assumes setup constant in N, but policy,
+  table, and leaf ops pre-drove a driver tree for `repeat` events in setup, charging one extra
+  tree update per event (containment check: leaf evaluation measured 26.1k vs 16.2k for the
+  whole tree delta containing it). Corrected with a fixed 4,096-event window: probe 12's policy
+  is 2.81x cheaper than the tree and its table 5.52x cheaper, not 1.28x and 1.16x more
+  expensive; correction appended to the probe 12 report. `TopKPolicy`: classes in a discount
+  order fixed at intern time (discount vector immutable, only multiplicity moves), three grants
+  collected by an early-exit walk, one pass for grant and gain vector: 1.3k instructions per
+  event vs 15.2k for the tree (11.37x; cycles CI [8.95, 10.27]), 56 KB vs 3.0 MB state, zero
+  allocations, exact agreement with tree and probe 12 policy; the decided leaf alone is 740
+  instructions, so the policy is within 1.81x of irreducible. Ties: no capped multiplicity
+  closes the state (a count at the cap is ambiguous under removal; caps 2 to 4 still give 1 to 4
+  conflicting keys at 400k and 800k events); only the uncapped profile-count vector is
+  conflict-free, at 142,015 states from 400k events and a 99.999% rebase rate. No state key is
+  both exact and compressive; the gain vector gives 7 states, 1% rebase, one value error per
+  100k. Mechanical scorer (1,991 states, 469 checked, 21 events): every multiset statistic is
+  value-exact, none is closed; violations fall monotonically as pod identity is restored
+  (2,347 gain vector, 800 counts, 82 per-pod profile assignment, zero only with per-pod
+  parameters), because the vocabulary names a pod. Probe 12's table therefore reads the class
+  transition as an input symbol: a transducer over an enriched alphabet, not over the state.
+  Process: `retain-bin.sh` refused to overwrite because the same revision produced a different
+  executable; final campaign re-run against a pinned binary (sha256 fd61165d...), ratios
+  reproduced. Shared git index hazard: a concurrent `git add -A`-style commit by another agent
+  swept probe 15's staged and untracked files into its own commit; nothing lost, no history
+  rewritten.

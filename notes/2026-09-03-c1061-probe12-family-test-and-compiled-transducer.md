@@ -218,6 +218,17 @@ claim than "the certificate comes from the table" and is the accurate one.
 
 ### B6. Counter measurement, and the negative that matters
 
+> **Correction (probe 15, same day).** The per-event figures in this section are wrong. The counter
+> harness derives per-operation counts by differencing runs at `N` and `N/2` repeats, which cancels
+> setup only when setup is constant in `N`; the policy and table operations pre-drove a driver tree
+> for `repeat` events in setup, so each was charged for one extra tree update per event. Re-measured
+> with a fixed-size event window, the compiled policy costs **5.4k instructions** and the compiled
+> table **2.8k** against the tree delta's **15.2k** — so the compiled policy is **2.81x cheaper**
+> than the tree and the table **5.52x cheaper**, not 28% and 16% more expensive as stated below.
+> The conclusion that this is "a structural and memory result, not a speed one" is withdrawn. See
+> `notes/2026-09-03-c1061-probe15-incremental-topk-and-tie-closed-state.md`.
+
+
 Instructions per event at 16,384 pods, eight interleaved rounds, two-point differencing:
 
 | operation | instructions | cycles | IPC |
@@ -299,9 +310,9 @@ of its three assumptions is shown load-bearing by a variant that breaks it and i
 than answered wrongly. The online optimizer does disappear for this fleet — a count vector and a
 three-level knapsack reproduce the tree exactly with no kernel — but the finite-state table on top of
 it is an accelerator, not an exact compiled optimizer: it is perfect on 10^5 events and wrong once
-per 10^5 beyond that, because the gain state cannot see tie multiplicity. And the endpoint costs
-28% more instructions per event than the tree it replaces while cutting maintained state 22x, so it
-is currently a structural result and a memory result, not a speed result.
+per 10^5 beyond that, because the gain state cannot see tie multiplicity. (The per-event cost claim
+that stood here was withdrawn by probe 15: a harness error had inflated it; the endpoint is in fact
+cheaper than the tree, not more expensive.)
 
 ## Next probes
 
