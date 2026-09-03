@@ -75,6 +75,54 @@ both arms in a fixed order so that drift affects both arms of a pair equally. Th
 `t` statistic and 95% confidence interval on the **log ratio** across rounds, exponentiated back to
 a ratio. A difference is called a win only when the interval excludes 1.0.
 
+The interleaved driver and the paired analysis are reproduced verbatim here so the numbers below
+are replayable from this note alone.
+
+```bash
+#!/usr/bin/env bash
+# Interleaved paired A/B for C1061 probe 7.  Each round runs, in order, the two
+# sizes of each mode so drift affects both arms of a pair equally.  Per-operation
+# counts come from differencing the two sizes.
+set -u
+BIN=~/.cache/ergodis/target/ergodis-private/release/ergodis-tools
+ROUNDS=${ROUNDS:-8}
+OUT=${1:?usage: probe7_ab.sh <csv>}
+echo "round,mode,size,operations,instructions,cycles" > "$OUT"
+count() {
+  local mode=$1 size=$2 ops=$3 round=$4; shift 4
+  local line
+  line=$(perf stat -e instructions,cycles -x, "$BIN" other-domain-shapes-bench \
+      --mode "$mode" --operations "$ops" "$@" 2>&1 >/dev/null \
+      | awk -F, '/instructions:u/{i=$1} /cycles:u/{c=$1} END{print i","c}')
+  echo "$round,$mode,$size,$ops,$line" >> "$OUT"
+}
+for round in $(seq 1 "$ROUNDS"); do
+  count syndrome-delta small 20000 "$round" --distance 4 --rounds 1024
+  count syndrome-fresh small 200   "$round" --distance 4 --rounds 1024
+  count syndrome-delta large 40000 "$round" --distance 4 --rounds 1024
+  count syndrome-fresh large 400   "$round" --distance 4 --rounds 1024
+  count policy-delta   small 40000 "$round" --positions 4096 --resources 4
+  count policy-fresh   small 40000 "$round" --positions 4096 --resources 4
+  count policy-delta   large 80000 "$round" --positions 4096 --resources 4
+  count policy-fresh   large 80000 "$round" --positions 4096 --resources 4
+done
+```
+
+The width sweep replaces the mode list with `syndrome-delta` at `--distance 2..6`, three rounds, and
+operation pairs 20,000/40,000 for distances 2 to 4, 5,000/10,000 for distance 5, and 1,000/2,000 for
+distance 6.
+
+```python
+# paired analysis: per-operation counts by two-size differencing, then a paired
+# t on the log ratio across rounds, exponentiated to a ratio with a 95% interval.
+per[mode][round] = ((i_large - i_small) / (n_large - n_small),
+                    (c_large - c_small) / (n_large - n_small))
+logs = [log(fresh[r] / delta[r]) for r in rounds]
+mean, sd = mean(logs), stdev(logs); se = sd / sqrt(n); t = mean / se
+lo, hi = exp(mean - t_crit(n - 1) * se), exp(mean + t_crit(n - 1) * se)
+verdict = "win" if lo > 1.0 else "inconclusive" if lo <= 1.0 <= hi else "loss"
+```
+
 ## Domain 1 — quantum error correction: syndrome decoding as a chain over rounds
 
 ### The instance
