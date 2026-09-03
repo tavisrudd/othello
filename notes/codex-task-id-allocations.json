@@ -4328,8 +4328,17 @@
       "last": 1060,
       "purpose": "beat CP-SAT on the L2 generic-load scheduling row: diagnose what CP-SAT exploits, prototype certified bounding or relaxation",
       "sequence": 481
+    },
+    {
+      "count": 1,
+      "first": 1061,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1061,
+      "purpose": "Ergodis spike: compiled dynamic solver (snapshot compile + delta update)",
+      "sequence": 482
     }
   ],
-  "next_id": 1061,
+  "next_id": 1062,
   "schema": "codex-task-id-allocations-v1"
 }
