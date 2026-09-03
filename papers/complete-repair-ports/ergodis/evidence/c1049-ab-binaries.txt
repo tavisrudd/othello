@@ -1,0 +1,5 @@
+control   /home/tavis/.cache/ergodis/bin/negative_control_tier-7062bbfee
+  sha256  b11350328e3a4b33aa425db76f73f6064eace221aaf5f8451a466ee55ea08cc7
+candidate /home/tavis/.cache/ergodis/target/ergodis/release/examples/negative_control_tier
+  sha256  56d8da0bc934a106af8608a38e5f0e9eb4ee1b96d9135f494e4fdff64ea23e7c
+  mtime   2026-09-02 17:23:40.206814784 -0700

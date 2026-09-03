@@ -3,6 +3,13 @@ use std::hash::{Hash, Hasher};
 use rustc_hash::{FxHashMap, FxHasher};
 use thiserror::Error;
 
+// C1049 hook: certified dominance pruning lives in its own module.
+use crate::scheduler_dominance::{
+    certified_pareto_keep_into, dominance_witness_bytes, replay_dominance_witnesses,
+    DominanceCounters, DominanceLayout, DominanceMode, DominanceReplayError, DominanceStorage,
+    DominanceWitness, FrontierState,
+};
+
 #[cfg(feature = "parallel")]
 use rayon::prelude::*;
 
@@ -243,14 +250,42 @@ pub struct WeightedRepairChoice {
     pub loads: Box<[u32]>,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug)]
 pub struct WeightedParallelRepairResult {
     pub assignment: Box<[WeightedRepairChoice]>,
     pub unmatched_demands: Box<[u32]>,
     pub total_loads: Box<[u64]>,
     pub transitions_examined: u64,
     pub peak_pareto_states: u32,
+    /// C1049: counters for certified dominance pruning, zero when the frontier
+    /// used the legacy scan or needed no pruning.
+    pub dominance: DominanceCounters,
+    /// C1049: the lane layout the witness vectors are packed in.
+    pub dominance_layout: Option<DominanceLayout>,
+    /// C1049: one record per certified deletion.
+    pub dominance_witnesses: Box<[DominanceWitness]>,
+    /// C1049: per-layer start offsets into `dominance_witnesses`.
+    pub dominance_layer_starts: Box<[u32]>,
 }
+
+/// Equality is equality of the *answer*: assignment, unmatched demands, loads,
+/// and work counts.
+///
+/// The C1049 dominance certificate is derived metadata that records how a
+/// particular backend reached the answer, so it is deliberately excluded. Two
+/// backends that return the same optimum by different pruning routes are equal
+/// results; compare `dominance_witnesses` directly to check a certificate.
+impl PartialEq for WeightedParallelRepairResult {
+    fn eq(&self, other: &Self) -> bool {
+        self.assignment == other.assignment
+            && self.unmatched_demands == other.unmatched_demands
+            && self.total_loads == other.total_loads
+            && self.transitions_examined == other.transitions_examined
+            && self.peak_pareto_states == other.peak_pareto_states
+    }
+}
+
+impl Eq for WeightedParallelRepairResult {}
 
 impl WeightedParallelRepairResult {
     pub fn repaired_count(&self) -> usize {
@@ -259,6 +294,28 @@ impl WeightedParallelRepairResult {
 
     pub fn complete(&self) -> bool {
         self.unmatched_demands.is_empty()
+    }
+
+    /// Serialized size of the dominance certificate, in bytes.
+    pub fn dominance_witness_bytes(&self) -> u64 {
+        dominance_witness_bytes(&self.dominance_witnesses)
+            + (self.dominance_layer_starts.len() * std::mem::size_of::<u32>()) as u64
+    }
+
+    /// Re-evaluates every recorded dominance comparison.
+    ///
+    /// Returns the number of deletions verified. The check reads only the
+    /// certificate and never re-solves the instance. A solve that emitted no
+    /// certificate verifies vacuously.
+    pub fn replay_dominance(&self) -> Result<u64, DominanceReplayError> {
+        let Some(layout) = self.dominance_layout.as_ref() else {
+            return Ok(0);
+        };
+        replay_dominance_witnesses(
+            layout,
+            &self.dominance_witnesses,
+            &self.dominance_layer_starts,
+        )
     }
 }
 
@@ -295,6 +352,9 @@ struct SparseRepairStorage {
     option_hashes: Vec<u64>,
     heads: EpochHeads,
     keep: Vec<u8>,
+    // C1049 hook: certified dominance pruning storage.
+    dominance: DominanceStorage,
+    frontier: Vec<FrontierState>,
 }
 
 #[repr(C)]
@@ -404,6 +464,8 @@ impl WeightedRepairWorkspace {
         self.sparse.option_hashes.shrink_to_fit();
         self.sparse.heads.buckets.shrink_to_fit();
         self.sparse.keep.shrink_to_fit();
+        self.sparse.dominance.shrink_to_fit();
+        self.sparse.frontier.shrink_to_fit();
     }
 }
 
@@ -417,6 +479,8 @@ pub struct WeightedRepairProblem {
     positive_grading: Option<PositiveGradingCertificate>,
     graded_shell: Option<GradedShellLayout>,
     recommended_backend: WeightedSchedulerBackend,
+    // C1049 hook: which dominance relation the sparse frontier decides.
+    dominance_mode: DominanceMode,
 }
 
 impl WeightedRepairProblem {
@@ -605,6 +669,7 @@ impl WeightedRepairProblem {
             positive_grading: None,
             graded_shell: None,
             recommended_backend: WeightedSchedulerBackend::SparsePareto,
+            dominance_mode: DominanceMode::default(),
         };
         problem.dense_state_space = problem
             .compute_dense_state_space()
@@ -962,6 +1027,10 @@ impl WeightedRepairProblem {
             total_loads: total_loads.into_boxed_slice(),
             transitions_examined,
             peak_pareto_states,
+            dominance: DominanceCounters::default(),
+            dominance_layout: None,
+            dominance_witnesses: Box::default(),
+            dominance_layer_starts: Box::default(),
         })
     }
 
@@ -1001,6 +1070,27 @@ impl WeightedRepairProblem {
         }
         storage.heads.begin_epoch();
         storage.keep.clear();
+
+        // C1049 hook: prepare certified dominance pruning. The suffix-maximum
+        // table is only needed by the clamped relation, so the exact relation
+        // pays nothing for it.
+        storage
+            .dominance
+            .begin_solve(&self.capacities, self.dominance_mode);
+        if storage.dominance.needs_suffix_maxima() {
+            let demands = self.families.len();
+            let maxima = storage.dominance.begin_suffix_maxima(demands, width);
+            for (demand, family) in self.families.iter().copied().enumerate() {
+                let option_end = family.option_start + family.option_len;
+                for option in family.option_start..option_end {
+                    for coordinate in 0..width {
+                        let slot = &mut maxima[demand * width + coordinate];
+                        *slot = (*slot).max(self.option_load_coordinate(option, coordinate));
+                    }
+                }
+            }
+            storage.dominance.seed_suffix_maxima(width);
+        }
 
         let graded_antichain = self.positive_grading.is_some();
         let mut transitions_examined = 0_u64;
@@ -1107,12 +1197,30 @@ impl WeightedRepairProblem {
             if graded_antichain {
                 std::mem::swap(&mut storage.states, &mut storage.updated);
             } else {
-                quadratic_pareto_keep_into(
-                    &storage.updated,
+                // C1049 hook: try the certified scan, fall back to all pairs.
+                storage.frontier.clear();
+                storage
+                    .frontier
+                    .extend(storage.updated.iter().map(|state| FrontierState {
+                        load_start: state.load_start,
+                        repairs: state.repairs,
+                    }));
+                let certified = certified_pareto_keep_into(
+                    &mut storage.dominance,
+                    &storage.frontier,
                     &storage.loads,
-                    width,
+                    &self.capacities,
                     &mut storage.keep,
                 );
+                if !certified {
+                    quadratic_pareto_keep_into(
+                        &storage.updated,
+                        &storage.loads,
+                        width,
+                        &mut storage.keep,
+                    );
+                }
+                storage.dominance.advance_layer(demand as usize, width);
                 storage.states.clear();
                 for (index, &keep) in storage.keep.iter().enumerate() {
                     if keep != 0 {
@@ -1187,6 +1295,10 @@ impl WeightedRepairProblem {
             total_loads: total_loads.into_boxed_slice(),
             transitions_examined,
             peak_pareto_states,
+            dominance: storage.dominance.counters(),
+            dominance_layout: storage.dominance.layout().cloned(),
+            dominance_witnesses: storage.dominance.witnesses().into(),
+            dominance_layer_starts: storage.dominance.layer_starts().into(),
         })
     }
 
@@ -1268,6 +1380,27 @@ impl WeightedRepairProblem {
 
     pub fn recommended_backend(&self) -> WeightedSchedulerBackend {
         self.recommended_backend
+    }
+
+    /// Which dominance relation the sparse frontier decides.
+    pub fn dominance_mode(&self) -> DominanceMode {
+        self.dominance_mode
+    }
+
+    /// Selects the dominance relation the sparse frontier decides.
+    ///
+    /// [`DominanceMode::Exact`], the default, decides exactly the relation the
+    /// all-pairs scan decides and returns the same optimum, repair count, and
+    /// witness assignment. [`DominanceMode::Legacy`] runs the all-pairs scan
+    /// itself and emits no certificate.
+    pub fn set_dominance_mode(&mut self, mode: DominanceMode) {
+        self.dominance_mode = mode;
+    }
+
+    /// Returns this problem with the given dominance relation selected.
+    pub fn with_dominance_mode(mut self, mode: DominanceMode) -> Self {
+        self.dominance_mode = mode;
+        self
     }
 
     fn compute_recommended_backend(&self) -> WeightedSchedulerBackend {
@@ -1711,6 +1844,10 @@ impl WeightedRepairProblem {
             total_loads: total_loads.clone().into_boxed_slice(),
             transitions_examined,
             peak_pareto_states,
+            dominance: DominanceCounters::default(),
+            dominance_layout: None,
+            dominance_witnesses: Box::default(),
+            dominance_layer_starts: Box::default(),
         })
     }
 
@@ -1964,6 +2101,10 @@ impl WeightedRepairProblem {
             total_loads: total_loads.into_boxed_slice(),
             transitions_examined,
             peak_pareto_states,
+            dominance: DominanceCounters::default(),
+            dominance_layout: None,
+            dominance_witnesses: Box::default(),
+            dominance_layer_starts: Box::default(),
         })
     }
 }
@@ -2848,5 +2989,172 @@ mod tests {
                 .zip(capacities)
                 .all(|(load, capacity)| *load <= u64::from(capacity)));
         }
+    }
+
+    // ---- C1049: certified dominance pruning ----
+
+    /// Deterministic SplitMix64, matching the negative-control tier's generator.
+    fn split_mix(state: &mut u64) -> u64 {
+        *state = state.wrapping_add(0x9e37_79b9_7f4a_7c15);
+        let mut value = *state;
+        value = (value ^ (value >> 30)).wrapping_mul(0xbf58_476d_1ce4_e5b9);
+        value = (value ^ (value >> 27)).wrapping_mul(0x94d0_49bb_1331_11eb);
+        value ^ (value >> 31)
+    }
+
+    /// Builds an L2-shaped instance: independent generic loads, no grading.
+    fn generic_load_instance(
+        seed: u64,
+        resources: usize,
+        demands: usize,
+        options: usize,
+        maximum_load: u32,
+        capacity: u32,
+    ) -> WeightedRepairProblem {
+        let mut state = seed;
+        let families = (0..demands)
+            .map(|_| {
+                (0..options)
+                    .map(|_| {
+                        (0..resources)
+                            .map(|_| (split_mix(&mut state) % u64::from(maximum_load)) as u32 + 1)
+                            .collect::<Vec<u32>>()
+                    })
+                    .collect::<Vec<_>>()
+            })
+            .collect::<Vec<_>>();
+        WeightedRepairProblem::from_families(&vec![capacity; resources], &families).unwrap()
+    }
+
+    #[test]
+    fn certified_dominance_matches_the_legacy_scan_on_generic_load_instances() {
+        for seed in 0..16u64 {
+            // `solve` takes the sparse frontier regardless of the recommended
+            // backend, which is the path the certified scan hooks into.
+            let mut problem = generic_load_instance(seed, 4, 8, 3, 6, 12);
+            assert!(problem.positive_grading().is_none());
+
+            problem.set_dominance_mode(DominanceMode::Legacy);
+            let legacy = problem.solve().unwrap();
+            problem.set_dominance_mode(DominanceMode::Exact);
+            let certified = problem.solve().unwrap();
+
+            // Exact optimum, witness assignment, and repair count all match.
+            assert_eq!(
+                certified.repaired_count(),
+                legacy.repaired_count(),
+                "seed {seed}"
+            );
+            assert_eq!(certified.assignment, legacy.assignment, "seed {seed}");
+            assert_eq!(certified.total_loads, legacy.total_loads, "seed {seed}");
+            assert_eq!(certified.unmatched_demands, legacy.unmatched_demands);
+            assert_eq!(certified.peak_pareto_states, legacy.peak_pareto_states);
+            assert_eq!(certified.transitions_examined, legacy.transitions_examined);
+
+            // The legacy scan certifies nothing; the certified scan replays.
+            assert!(legacy.dominance_witnesses.is_empty());
+            assert_eq!(
+                certified.replay_dominance().unwrap(),
+                certified.dominance.pruned_states
+            );
+            assert_eq!(certified.dominance.budget_exhausted, 0);
+            assert_eq!(certified.dominance.witness_capacity_exhausted, 0);
+        }
+    }
+
+    #[test]
+    fn certified_dominance_prunes_and_replays_on_an_l2_shaped_instance() {
+        // The C1038 L2 shape at a size a unit test can afford: six resources,
+        // four options per demand, independent loads in 1..9, capacity 40.
+        let mut problem = generic_load_instance(0x5eed, 6, 9, 4, 9, 40);
+        problem.set_dominance_mode(DominanceMode::Legacy);
+        let legacy = problem.solve().unwrap();
+        problem.set_dominance_mode(DominanceMode::Exact);
+        let certified = problem.solve().unwrap();
+        assert_eq!(certified.assignment, legacy.assignment);
+        assert_eq!(certified.repaired_count(), legacy.repaired_count());
+        assert!(
+            certified.dominance.pruned_states > 0,
+            "the L2 shape should still prune some states"
+        );
+        assert_eq!(
+            certified.replay_dominance().unwrap(),
+            certified.dominance.pruned_states
+        );
+        assert!(certified.dominance_witness_bytes() > 0);
+    }
+
+    #[test]
+    fn clamped_dominance_preserves_the_optimal_repair_count() {
+        for seed in 0..12u64 {
+            let mut problem = generic_load_instance(seed, 4, 8, 3, 6, 12);
+            problem.set_dominance_mode(DominanceMode::Legacy);
+            let legacy = problem.solve().unwrap();
+            problem.set_dominance_mode(DominanceMode::ClampedSuffix);
+            let clamped = problem.solve().unwrap();
+            // The clamped relation may return a different optimal assignment,
+            // so only the optimum itself is required to agree.
+            assert_eq!(
+                clamped.repaired_count(),
+                legacy.repaired_count(),
+                "seed {seed}"
+            );
+            assert!(clamped.dominance.pruned_states >= 1);
+            assert_eq!(
+                clamped.replay_dominance().unwrap(),
+                clamped.dominance.pruned_states
+            );
+        }
+    }
+
+    #[test]
+    fn a_forged_scheduler_witness_is_rejected_by_the_replay_checker() {
+        let mut problem = generic_load_instance(0x5eed, 6, 9, 4, 9, 40);
+        problem.set_dominance_mode(DominanceMode::Exact);
+        let answer = problem.solve().unwrap();
+        assert!(answer.dominance.pruned_states > 0);
+        answer.replay_dominance().unwrap();
+
+        let layout = answer.dominance_layout.clone().unwrap();
+        let mut forged = answer.dominance_witnesses.to_vec();
+        // Swap the roles of the two states: the survivor now claims to dominate
+        // a state whose residual is strictly larger somewhere.
+        let record = &mut forged[0];
+        std::mem::swap(&mut record.packed_dominator, &mut record.packed_pruned);
+        std::mem::swap(&mut record.dominator_repairs, &mut record.pruned_repairs);
+        assert!(
+            replay_dominance_witnesses(&layout, &forged, &answer.dominance_layer_starts).is_err()
+        );
+
+        let mut forged = answer.dominance_witnesses.to_vec();
+        forged[0].dominator = forged[0].pruned;
+        assert_eq!(
+            replay_dominance_witnesses(&layout, &forged, &answer.dominance_layer_starts),
+            Err(DominanceReplayError::SelfDominating { index: 0 })
+        );
+    }
+
+    #[test]
+    fn warm_dominance_scan_allocates_nothing_after_warm_up() {
+        let mut problem = generic_load_instance(0x5eed, 6, 8, 4, 9, 40);
+        problem.set_dominance_mode(DominanceMode::Exact);
+        let mut workspace = WeightedRepairWorkspace::new();
+        // Warm up: the first solves grow every workspace buffer to its size.
+        let expected = problem.solve_sparse_with_workspace(&mut workspace).unwrap();
+        for _ in 0..3 {
+            problem.solve_sparse_with_workspace(&mut workspace).unwrap();
+        }
+        assert!(expected.dominance.pruned_states > 0);
+        // Re-enter the pruned scan repeatedly inside the measured region.
+        let (answer, events) = crate::test_alloc::measure_allocations(|| {
+            let mut last = None;
+            for _ in 0..4 {
+                last = Some(problem.solve_sparse_with_workspace(&mut workspace).unwrap());
+            }
+            last.unwrap()
+        });
+        assert_eq!(answer, expected);
+        assert_eq!(answer.dominance, expected.dominance);
+        assert_eq!(events, Default::default());
     }
 }
