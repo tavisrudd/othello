@@ -92,6 +92,86 @@ trapped. The residual-floor census now running harvests every worker's own best
 state, not just the chunk winner, to give the relation miner the whole left tail
 of this distribution to work on.
 
+## Blind congruence search on the residual: a clean negative
+
+Thirty-four independently obtained best states — sixteen chunk winners from the
+stopped campaign and eighteen per-worker states from the first census chunk —
+were reduced to their fourteen-coordinate residual vectors. Two checks ran on
+that corpus.
+
+First, `score = 16 sum e^2` holds exactly on all thirty-four states, and every
+residual-96 state has exactly three coordinates at `+1` and three at `-1`. A
+coordinate of absolute value two first appears at score 128, never at 96.
+
+Second, a blind search for further linear congruences: the null space of the
+thirty-four-by-fourteen residual matrix was computed over the prime fields 2, 3,
+5, 7, 11, 13, and 29. In every one of them the null space has dimension exactly
+one, which is the already-banked all-ones relation and nothing else. The
+observed residual vectors therefore span the entire thirteen-dimensional
+hyperplane `sum e = 0`.
+
+That is a useful negative. No linear or congruence invariant beyond the
+autocorrelation sum law constrains the deviation, so nothing of that kind
+forbids `sum e^2 = 2` or `4`. Any obstruction would have to come from
+realizability by actual integer rows, not from the residual arithmetic. The
+weight of evidence therefore shifts toward the floor being a property of the
+move geometry — the annealer reaches `sum e^2 = 6` and would have to pass
+through worse states to go lower — rather than a theorem waiting to be proved.
+
+The productive consequence is that the eight residual-96 states are now the
+right targets for an exact bounded neighbourhood census, in the way the earlier
+residual-576 state was proved empty in its complete three-transfer
+neighbourhood. Those censuses were run around older, worse states; these eight
+come from independent seed families and are three times closer to the shell.
+
+## Scope learning: balanced inventories are the wrong place to search
+
+The library already computes a cold per-reseed observation for every outer
+epoch — the four magnitude-inventory counts, the four row energies, the four odd
+supports, the sampling policy, and the best q29 score that epoch reached — and
+the driver was discarding it. It now writes those rows out, giving 5,400 labelled
+scope-to-outcome rows per chunk.
+
+On the first 10,800 rows, with an epoch counted as productive when its million
+mutations reach a q29 residual of 224 or less (a 0.50% base rate), the row-energy
+profile of the scope predicts the outcome strongly and monotonically.
+
+| Smallest row energy | Rows  | Productive | Lift |
+|---------------------|-------|------------|------|
+| under 20            | 1,506 | 1.26%      | 2.52 |
+| 20 to 30            | 1,581 | 1.14%      | 2.28 |
+| 30 to 45            | 2,354 | 0.64%      | 1.27 |
+| 45 to 70            | 2,943 | 0.07%      | 0.14 |
+| 70 and above        | 2,416 | 0.00%      | 0.00 |
+
+| Energy spread (max minus min) | Rows  | Productive | Lift |
+|-------------------------------|-------|------------|------|
+| under 150                     | 3,716 | 0.05%      | 0.11 |
+| 150 to 200                    | 2,746 | 0.58%      | 1.17 |
+| 200 to 260                    | 2,489 | 0.68%      | 1.37 |
+| 260 and above                 | 1,849 | 1.03%      | 2.06 |
+
+Not one of the 2,416 sampled scopes with smallest row energy at or above 70 was
+productive, and scopes with energy spread under 150 were productive twice in
+3,716 draws. Every one of the four epochs that reached residual 128 from a cold
+start has two light rows and two heavy ones: sorted energies
+`(14,19,164,308)`, `(32,56,200,217)`, `(24,28,169,284)`, and `(21,50,206,228)`.
+
+This bears directly on the retained hand-selected inventory. Its row energies are
+`(123,128,128,126)`: smallest energy 123, spread 5. That is the deadest stratum
+in the table on both axes, which is consistent with the earlier fixed-inventory
+control stalling at residual 576 while the scope-sampling campaign reaches 96.
+The lesson is that the productive region is strongly unbalanced inventories — one
+nearly empty row against two heavy ones — and the search has been spending most
+of its budget on balanced ones.
+
+The joint stratum, smallest energy under 30 together with spread at least 200,
+holds 23.3% of draws at 2.38 times the base rate. A sampler restricted to it
+should see roughly two to three times as many productive starts per unit compute.
+Confirming this on fresh chunks as a holdout is in progress; the second-smallest
+energy also shows a sharp optimum in the 40-to-60 band, but that rests on twenty
+events and is not yet separable from noise.
+
 ## Results after eight chunks
 
 144,000,000,000 mutations in 7,333 seconds, 916.6 seconds per chunk, eight
