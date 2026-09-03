@@ -128,6 +128,16 @@ diff of the private range, and nothing needs rebasing. Squash semantics come for
   invoking the lint, and the lint's rule list lives in the private tree.
 - Agents never push; export produces the commit and stops. Pushing is Tavis's action.
 
+**Only polished, release-grade material is published.** An export is a release, not a sync:
+it happens when the code and its documentation are in a state Tavis would put a version number
+on. Before `export-public.sh` runs, a release checklist (private) must pass: README, OPTIMIZATION,
+and BENCHMARKS read as finished documents with no working notes, TODOs, or in-progress sections;
+every public benchmark row has its replay command and evidence tag resolving; the crate builds
+and its gates pass from a fresh clone of the filtered tree; the changelog entry is written for
+readers; and the lint is clean. Anything not ready is excluded from that export by
+`.publicignore` rather than published rough. Work-in-progress kernels, draft docs, and
+exploratory examples stay on `main` until they reach that bar.
+
 **Working on the private side.** Ordinary work lands on `main` with task IDs in commit subjects
 as today. Public-facing documentation is written without task IDs from the start (evidence and
 report names use dates and topics, not IDs) so the lint stays quiet; where an existing document
