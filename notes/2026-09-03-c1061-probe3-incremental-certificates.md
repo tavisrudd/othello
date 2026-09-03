@@ -317,3 +317,167 @@ disappointment is cost density — the proof chain costs about twenty times the 
 of it SHA-256, which turns "delta certificates are nearly free" into "delta certificates cost a few
 microseconds" until the hash backend changes. The domain is still probe 1's synthetic chain, so nothing
 here is a product claim, and Part F should be read as a search list rather than a novelty position.
+
+---
+
+## 2026-09-03 follow-up: commitment-backend A/B, measured in hardware counters
+
+Scope: engineering only. The literature and novelty thread of Part F is closed and was not extended.
+
+Every number in this section is a hardware-counter measurement. The wall-clock figures in Parts B to E
+above are superseded wherever the two disagree; each verdict that changed is marked below.
+
+### The candidates, and what the machine actually runs
+
+1. **`sha256-digest`** — SHA-256 through the `sha2` `Digest` interface with a leading domain tag byte.
+   The original probe-3 scheme, now the A/B baseline.
+2. **A SHA-NI-enabled `sha2`** — *not a candidate, because it is already what runs.* `sha2` 0.10.9
+   selects its x86 SHA-NI backend at runtime through `cpufeatures`
+   (`~/.cargo/registry/src/*/sha2-0.10.9/src/sha256/x86.rs:100`), with no crate feature and no
+   `RUSTFLAGS` involvement; this CPU (AMD Ryzen AI 9 HX 370) reports `sha_ni`. Building the same
+   workload against `sha2/force-soft` is 4.0 to 4.4x slower, which is the confirmation that the
+   hardware path is live. That also explains the recorded `-C target-cpu=native` negative in Part C:
+   there was nothing left for it to enable.
+3. **`sha256-packed`** — the same SHA-256 compression function, called directly on a zero-padded whole
+   number of 64-byte blocks with the domain mixed into the initial state and **no Merkle–Damgård length
+   block**. Sound here because every preimage within a domain has one fixed length, so there is no
+   padding ambiguity to exploit, and collision resistance still rests on the same compression function.
+   The internal-node preimage is packed to exactly 128 bytes — 64-byte summary, two 32-byte child
+   digests, no room spent on a tag byte — so it costs two compressions instead of the three that
+   length padding forced.
+4. **`blake3`** — one-shot and through the `Hasher` interface; both measured, no material difference.
+   The `hash_many`/tree API does not apply: the path's preimages are produced sequentially and each
+   depends on the previous one, so there is no batch to hand it.
+5. **`noncryptographic-lower-bound`** — a 256-bit multiply-xor mixer. **Not acceptable for the
+   fail-closed guarantee**: it has no collision resistance, so a forger can construct an ancestor
+   summary that reproduces a root. It exists to bound how much of the certified path is the hash, and
+   its `Commitment::CRYPTOGRAPHIC` constant is `false` so a caller can refuse it. Note that it still
+   passes the byte-flip forgery tests, which shows only that those tests model accidental corruption,
+   not an adversary.
+
+On the coordinator's item about hashing once per certificate rather than once per node: the design does
+not re-hash anything. Emission performs `depth + 1` hashes and verification `2 * (depth + 1)`, and every
+one of them commits to a distinct node. The second verification pass cannot be folded into the first —
+it walks the same siblings but hashes different node summaries — so the reduction available was in
+*blocks per hash*, which is what `sha256-packed` takes.
+
+The backend is chosen once, outside every loop, by monomorphizing the prover and both verifiers on a
+`Commitment` trait; nothing dispatches per node. A backend identifier goes into the artifact preimage,
+so a certificate produced under one backend can never validate under another.
+
+### Design of the measurement
+
+`ergodis-tools incremental-certificate-bench` gained `--hash` and `--mode`. Each mode puts exactly one
+operation in the measured region — `chain` emits and verifies one certificate per event, `emit` only
+emits, `update` runs the same event stream through the plain uncertified `CompositionTree`, and `full`
+performs one snapshot serialization plus full verification per event — so a differenced counter run is
+attributable to that operation.
+
+Per round, per backend, per mode, two runs differing only in event count (40,000 and 200,000; 200 and
+1,000 for `full`) are differenced, which cancels process startup, instance generation, and the snapshot
+stage. Rounds are interleaved — all backends within a round, seven rounds — so thermal drift is shared
+across arms rather than aliased onto one. The driver and the analysis are
+`/tmp/claude-1000/-home-tavis-src-othello-rust/b9c7b857-9104-4ac3-b222-9bc84903a341/scratchpad/hashab.sh`
+and `analyse.py`; the raw per-round counter rows are `ab-1024.tsv` and `ab-16384.tsv` in the same
+directory. Binary
+`~/.cache/ergodis/target/ergodis-private/release/ergodis-tools`, SHA-256
+`20dfc718031ccb4f431225269a54e2d8d0fec85e35da4ba45681b682c5838c53`, at commit `3971eb6`, run under
+`choom -n 1000`, seed 2026. The machine was carrying other agents' builds throughout, which is visible
+in the cycle standard deviations and is exactly why the design is paired.
+
+Ratios are paired: the statistic is a one-sample t on the seven per-round log ratios against the
+baseline arm of the same round, and the interval is that t interval exponentiated back to a ratio.
+
+### Result, 1,024 leaves (depth 10), one emit-and-verify pair
+
+| backend | n | instructions (sd) | cycles (sd) | cycles ratio vs baseline | 95% CI | t |
+|---|---|---|---|---|---|---|
+| `sha256-digest` (baseline) | 7 | 35,669 (1) | 21,169 (592) | — | — | — |
+| `sha256-packed` | 7 | 24,889 (0) | 14,073 (387) | **0.665** | [0.661, 0.668] | −196.3 |
+| `blake3` | 7 | 61,321 (1) | 42,200 (800) | 1.994 | [1.969, 2.019] | 134.4 |
+| non-cryptographic lower bound | 7 | 10,274 (0) | 3,559 (832) | 0.164 | [0.135, 0.200] | −22.7 |
+
+Emission alone: 7,515 / 5,092 / 14,847 / 1,374 cycles for the four arms, with `sha256-packed` at 0.678
+of baseline, CI [0.665, 0.691].
+
+### Result, 16,384 leaves (depth 14), one emit-and-verify pair
+
+| backend | n | instructions (sd) | cycles (sd) | cycles ratio vs baseline | 95% CI | t |
+|---|---|---|---|---|---|---|
+| `sha256-digest` (baseline) | 7 | 47,784 (1) | 30,077 (1,255) | — | — | — |
+| `sha256-packed` | 7 | 32,992 (2) | 20,254 (173) | **0.674** | [0.648, 0.701] | −24.7 |
+| `blake3` | 7 | 82,159 (1) | 60,276 (1,013) | 2.005 | [1.918, 2.097] | 38.2 |
+| non-cryptographic lower bound | 7 | 13,721 (1) | 6,471 (937) | 0.213 | [0.181, 0.251] | −23.0 |
+
+Emission alone: 11,024 / 7,162 / 21,442 / 2,148 cycles, `sha256-packed` at 0.650 of baseline,
+CI [0.621, 0.680].
+
+No comparison here is underpowered: instruction counts are deterministic to within two instructions,
+and every ratio interval excludes 1.0 at both sizes.
+
+### Recommendation, and the switch
+
+**Use `sha256-packed`.** It is 1.50x faster than the previous scheme in cycles per emit-and-verify pair
+at 1,024 leaves and 1.48x at 16,384, with intervals well clear of 1.0 at both sizes, and it keeps a
+256-bit digest, the same compression function, and the same certificate bytes. BLAKE3 is exactly the
+wrong shape for this workload — it is built for long inputs, and at 76- and 128-byte preimages it costs
+twice as much as SHA-NI SHA-256. The non-cryptographic bound says the whole family of commitments has a
+floor of roughly 3,600 cycles per pair at this depth, which no acceptable backend can reach.
+
+The module default is now `Sha256Packed` (`DefaultCommitment`), and the other three remain selectable
+for measurement. All eight correctness gates — snapshot verification, snapshot tampering, the
+cross-check against `delta_composition`, the 20,000-event chain, the whole forgery and stale-replay
+suite, collapse equivalence, crash recovery, and certificate sizes — now run against all four backends:
+32 tests, all passing. The 100,000-event benchmark chain plus 12,500 collapsed runs verifies with
+identical certificate sizes (1,168 bytes per event, 146 with runs of eight) under every backend. The
+zero-allocation regression passes with the new default.
+
+### Restated verdicts, in cycles
+
+| Claim | Wall-clock figure in Parts B–E | Counter measurement, `sha256-packed` | Changed? |
+|---|---|---|---|
+| Certified path ÷ uncertified update, 1,024 leaves | "~20x", from a differenced counter estimate | 22.00x, CI [17.56, 27.55], t 33.6 | no — and it was 33.09x, CI [26.41, 41.44], under the old backend |
+| Certified path ÷ uncertified update, 16,384 leaves | not measured | 15.25x, CI [12.42, 18.72], t 32.5 | new |
+| Full re-verification ÷ incremental verification, 1,024 leaves | 128.7x | 136x (full 1,221,487 cycles ÷ verification-only 8,981 cycles) | no |
+| Full re-verification ÷ incremental verification, 16,384 leaves | 1,748.0x | 2,072x (27,122,547 ÷ 13,092) | no, and the advantage is larger than the wall clock suggested |
+| Full re-verification ÷ whole emit-and-verify pair, 1,024 / 16,384 leaves | not measured | 87x, CI [84, 90] / 1,338x, CI [1,286, 1,392] | new |
+| Share of the certified path that is hashing | "~95%" | 75% at 1,024 leaves and 68% at 16,384, from the non-cryptographic lower bound; the earlier figure came from comparing against probe 1's update cost measured in a different binary | **yes — the earlier 95% overstated it** |
+| Verification ÷ emission | 1.8x | 1.76x at 1,024 leaves (8,981 ÷ 5,092), 1.83x at 16,384 | no |
+
+The uncertified update itself costs 659 cycles at 1,024 leaves and 1,354 at 16,384 in this binary,
+against probe 1's 1,025 cycles at 1,024 leaves — the same operation measured through a different
+harness, which is the discrepancy that inflated the earlier hashing share.
+
+### Validation of the follow-up
+
+```
+cd /home/tavis/src/ergodis-private
+cargo test -p ergodis-private --lib incremental_certificate   # 32 passed (8 gates x 4 backends)
+cargo test --test incremental_certificate_allocations         # 1 passed
+rustfmt --edition 2021 --check <the three owned files>        # clean
+cargo clippy --workspace --all-targets -- -D warnings -A unused-imports
+cargo build --release -p ergodis-tools
+```
+
+Committed in `ergodis-private` as `3971eb6`, touching the module, its test, the benchmark, and the two
+dependency lines (`sha2` gains the `compress` feature for the block API; `blake3`, already a public-core
+dependency, is added). The workspace-wide clippy run now also reports two `manual_contains` findings in
+`src/policy_automaton.rs`, another agent's in-progress module, alongside the earlier unused import in
+`src/congruence_search.rs`; neither is in an owned path.
+
+### Mystery ledger, follow-up
+
+- **Packing wins 1.5x, but the predicted saving was 1.2x.** Dropping one of three compression blocks on
+  the internal-node preimage should be worth about 20%; the measured 50% means the `Digest` wrapper's
+  per-call setup costs materially more inside the real path than in an isolated microbenchmark, where it
+  measured only 3%. The most likely cause is that the wrapper's buffering and `GenericArray` handling do
+  not inline through the trait boundary here. Unsettled, and it matters only if someone tries to predict
+  a further backend change instead of measuring it.
+- **The non-cryptographic floor is 16% of the packed backend at depth 10 but 32% at depth 14.** The
+  mixer is linear in preimage bytes with no fixed setup, so it should scale with depth exactly as the
+  real backends do. It does not, which suggests the deeper path is increasingly bound by something other
+  than hashing — most plausibly the cache behaviour of the 4.3 MB node-and-digest state. Open, and it
+  bounds how much any further hash work can buy at large depth.
+- Superseded from the earlier ledger: the "645 cycles per SHA-256 call" figure and the "95% of the path
+  is hashing" figure were both artifacts of comparing across binaries. The per-pair counter table above
+  replaces them.
