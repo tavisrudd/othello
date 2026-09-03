@@ -61,6 +61,7 @@ pub mod root_execution;
 pub mod rpc;
 pub mod sat;
 pub mod scheduler;
+pub mod scheduler_dominance;
 pub mod selector;
 pub mod semantic_symmetry;
 pub mod span;
@@ -274,6 +275,10 @@ pub use scheduler::{
     maximum_parallel_repairs, CapacityCut, ParallelRepairResult, PositiveGradingCertificate,
     RepairSupportChoice, SchedulerError, WeightedParallelRepairResult, WeightedRepairProblem,
     WeightedRepairWorkspace, WeightedSchedulerBackend,
+};
+pub use scheduler_dominance::{
+    dominance_witness_bytes, replay_dominance_witnesses, DominanceCounters, DominanceLayout,
+    DominanceMode, DominanceReplayError, DominanceWitness,
 };
 pub use selector::{
     CompiledSelector, CompiledSelectorWorkspace, DenseSelector, DenseSelectorWorkspace,

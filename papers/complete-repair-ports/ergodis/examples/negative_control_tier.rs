@@ -21,6 +21,7 @@ use ergodis::bounded_subset_sum::{
     MAX_SUBSET_SUM_REACHABILITY_WORDS, MAX_SUBSET_SUM_TRANSITIONS, MAX_SUBSET_SUM_WIDTH,
 };
 use ergodis::scheduler::WeightedRepairProblem;
+use ergodis::scheduler_dominance::DominanceMode;
 
 /// SplitMix64: a deterministic, seed-reproducible generator so that the ergodis
 /// side and the control side construct byte-identical instances.
@@ -274,6 +275,8 @@ fn solve(row: &str, repetitions: u32) -> ExitCode {
     let mut detail = String::new();
     let mut certificate_bytes = 0_u64;
     let mut replay_ns = 0_u128;
+    // C1049: certified dominance pruning counters, null for non-scheduler rows.
+    let mut dominance = serde_json::Value::Null;
 
     match instance(row) {
         Instance::SubsetSum { weights, target } => {
@@ -330,7 +333,16 @@ fn solve(row: &str, repetitions: u32) -> ExitCode {
                 None => WeightedRepairProblem::from_families(&capacities, &families),
             };
             match problem {
-                Ok(problem) => {
+                Ok(mut problem) => {
+                    // C1049: the dominance relation is selectable so one binary
+                    // can serve both sides of an in-process A/B.
+                    problem.set_dominance_mode(
+                        match std::env::var("ERGODIS_DOMINANCE_MODE").as_deref() {
+                            Ok("legacy") => DominanceMode::Legacy,
+                            Ok("clamped") => DominanceMode::ClampedSuffix,
+                            _ => DominanceMode::Exact,
+                        },
+                    );
                     let mut last = None;
                     for _ in 0..repetitions {
                         let result = problem
@@ -369,6 +381,30 @@ fn solve(row: &str, repetitions: u32) -> ExitCode {
                                 "replayed loads exceed capacity"
                             );
                         }
+                        // C1049: the dominance certificate is replayed here too.
+                        // The checker re-evaluates every recorded comparison
+                        // from the records alone; it never re-solves.
+                        let dominance_started = std::time::Instant::now();
+                        let verified = result
+                            .replay_dominance()
+                            .expect("every dominance witness replays");
+                        let dominance_replay_ns = dominance_started.elapsed().as_nanos();
+                        assert_eq!(
+                            verified, result.dominance.pruned_states,
+                            "the certificate must account for every pruned state"
+                        );
+                        certificate_bytes += result.dominance_witness_bytes();
+                        dominance = serde_json::json!({
+                            "pruned_states": result.dominance.pruned_states,
+                            "comparisons": result.dominance.comparisons,
+                            "budget_exhausted": result.dominance.budget_exhausted,
+                            "witness_capacity_exhausted":
+                                result.dominance.witness_capacity_exhausted,
+                            "witnesses": result.dominance_witnesses.len(),
+                            "witness_bytes": result.dominance_witness_bytes(),
+                            "verified": verified,
+                            "replay_ns": dominance_replay_ns.to_string(),
+                        });
                         replay_ns = replay_started.elapsed().as_nanos();
                     }
                 }
@@ -394,6 +430,7 @@ fn solve(row: &str, repetitions: u32) -> ExitCode {
         "certificate_bytes": certificate_bytes,
         "replay_ns": replay_ns.to_string(),
         "peak_rss_kib": peak_rss_kib(),
+        "dominance": dominance,
     });
     println!("{record}");
     ExitCode::SUCCESS
