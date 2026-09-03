@@ -221,3 +221,63 @@ on the order of twenty percent of the machine. Pulling epochs from a shared
 counter instead of a fixed per-worker budget would recover it; that was not done
 here because it changes the driver while the floor result argues against buying
 more of the same compute.
+
+## Stratified rerun: the sampler now spends its budget where the outcomes are
+
+The scope-learning result above was acted on. The outer scope sampler draws each
+reseed as an exact conditional sample of four `(energy, odd support)` row scopes
+whose energies sum to 505, under one of three rotating policies. It now accepts
+an optional stratum, and rejects a drawn quartet that misses it before any of the
+expensive work — the inventory unranking and the sign reconstruction — happens.
+The default stratum is the one the census measured: smallest row energy at most
+30 together with an energy spread of at least 200.
+
+Three properties matter for what the rerun can be used to claim.
+
+1. Rejection acts only on the scope selection, never on the drawn coefficients,
+   and the retained draw still passes the unchanged canonical replay boundary.
+   An accepted quartet is an exact conditional draw of the same policy,
+   conditioned on the stratum.
+2. One reseed in five is drawn with the bias switched off, and the attempt budget
+   is bounded at 64 with the last draw kept. The holdout showed the heavy-balanced
+   region is depleted by about a factor of five, not empty, so nothing is
+   excluded — every scope the unbiased sampler could reach is still reachable.
+3. Only an accepted draw increments the novelty visit counts, so a rejected
+   quartet leaves no trace in the policy state, and with the bias disabled the
+   sampler is bit-identical to the control, seed for seed.
+
+This is search policy. It changes where the discovery budget is spent and grants
+no coverage, exclusion, or negative authority over the scopes it under-samples.
+
+All of it is private: the sampler is `ergodis-private/src/q29_inventory_scope.rs`
+and the campaign driver is the tier-2 subcommand, so no public-core change was
+involved. The stratum is configurable from the command line
+(`--stratum`, `--stratum-max-min-energy`, `--stratum-min-spread`,
+`--stratum-attempts`, `--stratum-unbiased-permille`), off by default, and the
+per-reseed census now also records the rejection attempts and whether the
+retained draw is in the stratum. Library and workspace tests pass, including new
+ones for the replay boundary under bias, the unconditioned share, the
+control-path identity, and allocation freedom after workspace setup.
+
+### Measured effect
+
+The rerun is the same campaign shape — eighteen workers, one billion mutations
+per worker per chunk, cold reseed every million mutations — with the bias on.
+Comparing its per-reseed census against the banked unbiased census of 16,200
+rows, with an epoch counted productive when it reaches a q29 residual of 224 or
+less:
+
+| Run                  | Rows   | Productive | Rate  | In stratum |
+|----------------------|--------|------------|-------|------------|
+| unbiased control     | 16,200 |         75 | 0.46% |      24.9% |
+| stratified rerun     | 18,000 |        196 | 1.09% |      82.5% |
+
+The productive rate rises by a factor of 2.35, with a one-sided Fisher exact
+p-value of 2.2e-11. The bias costs nothing: the mean draw takes 7.3 attempts,
+and the first chunk finished in 876 seconds against the control's 916.6, so the
+rejection loop is far cheaper than the reseed it feeds. The stratum share of
+82.5% is what the configuration predicts — four fifths conditioned plus the
+natural quarter of the unconditioned fifth.
+
+The chunk-level result so far is the interesting part and is reported below as it
+accumulates.
