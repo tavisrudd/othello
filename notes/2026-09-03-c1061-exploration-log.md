@@ -197,3 +197,26 @@ one-line pointer here.
   partition in 1,500 trials, licensing a split-only incremental minimizer, with a 128x wider
   affected set than a path. Ranking revision: QEC about 3, security policy 5 with that caveat,
   routing conditional pending a boundary-class-collapse measurement.
+- 2026-09-03 — probe 8: monoidal collapse inside kernels. Report:
+  `2026-09-03-c1061-probe8-monoidal-collapse-inside-kernels.md` (ergodis-private `2d114d2`).
+  Verdict: **promote; two kernels collapsed, one structural rule**. (A) The LRC residual test is
+  a prefix predicate (probe 6 evaluated the slope globally, but k = 0 means no violation), and
+  its threshold is independent of the global parity capacities, so one closed-form sorted pass
+  over the six data capacities answers every budget level: 19.7x fewer instructions than the
+  published kernel per pod (CI tight), 3.2x fewer than probe 6's decided path as called, 1.56x
+  fewer than its best four-call variant but a cycle wash against that variant (CI [0.99, 1.00])
+  because 794 instructions per pod is division-latency-bound. Gate: 960,000 exact value and
+  witness comparisons across all residues. (C) `ergodis::defect`'s signed-flip reachability scan
+  folds one commuting Boolean-semiring convolution per line degree, 757 on PG(2,27) with only
+  seven distinct maps, so binary splitting over multiplicities replaces 598 folds with 17:
+  19.3x fewer instructions and 12.1x fewer cycles (CI [10.1, 14.6]) on the scalar scan, 2.7x
+  across all 757 pencils; verified against a replica of the core scan on all pencils and 2,000
+  hostile multisets. (B) Structural rule: an inner algebra is exploitable exactly when the inner
+  state is a fixed-width vector and the stages come from a small set of commuting maps.
+  Canonical negative: `schedule_repair_dag` (subset mask over 63 tasks, descends through all
+  subsets of the ready set); also partition-refinement loops, `minimum_node_span_repair`, the
+  Ceph antichain builder, `parallel_composition_step`. Three wins that cannot be taken
+  (Gray-code enumeration, extension-field powers, matrix powers) because every intermediate
+  state is itself the output. Highest-value item left: `defect.rs::build_threshold_masks`, one
+  prefix-and-suffix scan for every bound. Core untouched; the defect collapse is a private
+  replica pending a core change.
