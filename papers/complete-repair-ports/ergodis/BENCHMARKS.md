@@ -193,6 +193,63 @@ nix shell nixpkgs#uv --command uv run --no-project \
   python3 python/verify_baseline_encodings.py
 ```
 
+### The repair-DAG row measures a fast path, not the subset descent
+
+The repair-DAG row above uses unit capacities and one distinct resource per
+task, so every ready set fits the capacities whole,
+`schedule_repair_dag` takes its whole-ready fast path at each layer, and the
+instance visits four search states per solve. That row therefore never enters
+the subset descent over ready sets, which is where the kernel's cost lives. It
+is a valid row for the question it asks and it is unchanged; it is simply not
+diagnostic of the descent.
+
+A contended companion instance measures the descent. It keeps the layered
+precedence structure and contends two shared resource dimensions of capacity
+three, with task `j` of every layer loading one unit of dimension `j mod 2`, so
+no ready set fits whole. Three predictions were fixed before the row was
+measured: the state count rises far above four, the optimal makespan rises above
+the layer count, and ergodis still wins but by much less than the published
+row's 167x.
+
+| row | instance | states examined | optimal makespan | ergodis cold | control cold | ergodis warm | control warm |
+| :-- | :------- | --------------: | ---------------: | -----------: | -----------: | -----------: | -----------: |
+| repair DAG, published  | 3 layers x 21 tasks, unit capacity | 4 | 3 | 2.983 ms | 500.139 ms | -- | -- |
+| repair DAG, contended | 3 layers x 12 tasks, 2 dimensions at capacity 3 | 9,955 | 6 | 116.3 ms | 509.7 ms | 115.2 ms | 83.5 ms |
+
+The first two predictions hold: 4 states become 9,955 and the makespan doubles.
+The third is wrong, and the row is reported as a loss. The control is OR-Tools
+9.14 CP-SAT with cumulative unit intervals and one worker, which proves the same
+optimum of six. End to end from a fresh process ergodis wins the cold profile by
+4.38x, but almost all of that margin is the control's interpreter and OR-Tools
+import: inside the process the cold control solves in 48.1 ms against ergodis's
+111.6 ms, and on the eight-solve warm profile the control takes 24.6 ms per
+solve against ergodis's 114.4 ms. On solve work alone, on an instance that
+actually runs the descent, CP-SAT is about 4.7x faster. Peak RSS still favours
+ergodis heavily, 2.7 MiB against 74.0 MiB.
+
+The mechanism is the one the published row hides. The descent enumerates every
+subset of the ready mask at every popped state, so its cost is exponential in
+the ready-set width while CP-SAT propagates the cumulative constraint instead of
+enumerating. Absorbing this shape would mean a capacity-aware batch enumeration
+that skips infeasible subsets rather than testing them, or a dominance rule over
+batches; neither is implemented. Both runs were taken on a host with frequency
+boost enabled, so these are diagnostic-host absolute times; the ratios are
+paired, rotated and same-host, and the row reproduced across two independent
+seven-round runs (4.38x and 4.54x cold, 0.72x and 0.80x warm). Raw samples,
+hashes and the protocol are in
+`evidence/c1050-repair-dag-contended-ab.json`; replay with:
+
+```text
+nix shell nixpkgs#cargo nixpkgs#rustc --command \
+  cargo build --release --example c1050_repair_dag_contended
+python3 python/run_c1050_repair_dag_contended_ab.py \
+  --ergodis <shared-target-dir>/release/examples/c1050_repair_dag_contended \
+  --python <application-ab-venv>/bin/python \
+  --width 12 --layers 3 --capacity 3 --rounds 7 --cpu 3 \
+  --raw-jsonl evidence/c1050-repair-dag-contended-ab.raw.jsonl \
+  --output evidence/c1050-repair-dag-contended-ab.json
+```
+
 ## Negative-control tier
 
 The application rows above are all instances ergodis compiles well. This tier

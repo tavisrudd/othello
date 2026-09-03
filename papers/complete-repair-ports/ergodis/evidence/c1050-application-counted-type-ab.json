@@ -1,0 +1,906 @@
+{
+  "binaries": {
+    "baseline": {
+      "path": "/home/tavis/.cache/ergodis/bin/bench_kernels-a5e844f73",
+      "sha256": "ce3e0b06018d5de706f11fa3b0d942632a9e15980e09db92a507475060ff38e1"
+    },
+    "current": {
+      "path": "/home/tavis/.cache/ergodis/bin/bench_kernels-f40abec7c",
+      "sha256": "b645c234d6ed4d0b85370219275c3f5fb70aab025a696483abeb7931c28afbbb"
+    }
+  },
+  "cpu": 3,
+  "host": {
+    "active_thread_siblings": [
+      3,
+      15
+    ],
+    "boost": "1",
+    "canonical_host_ready": false,
+    "cpu": 3,
+    "cpu_model": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M",
+    "energy_performance_preference": "performance",
+    "governor": "performance",
+    "intel_no_turbo": null,
+    "isolated_cpus": "",
+    "loadavg_before": "1.90 1.35 1.91 2/1092 1491753",
+    "lscpu_json": {
+      "lscpu": [
+        {
+          "data": "x86_64",
+          "field": "Architecture:"
+        },
+        {
+          "data": "32-bit, 64-bit",
+          "field": "CPU op-mode(s):"
+        },
+        {
+          "data": "48 bits physical, 48 bits virtual",
+          "field": "Address sizes:"
+        },
+        {
+          "data": "Little Endian",
+          "field": "Byte Order:"
+        },
+        {
+          "data": "24",
+          "field": "CPU(s):"
+        },
+        {
+          "data": "0-23",
+          "field": "On-line CPU(s) list:"
+        },
+        {
+          "data": "AuthenticAMD",
+          "field": "Vendor ID:"
+        },
+        {
+          "data": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M",
+          "field": "Model name:"
+        },
+        {
+          "data": "26",
+          "field": "CPU family:"
+        },
+        {
+          "data": "36",
+          "field": "Model:"
+        },
+        {
+          "data": "2",
+          "field": "Thread(s) per core:"
+        },
+        {
+          "data": "12",
+          "field": "Core(s) per socket:"
+        },
+        {
+          "data": "1",
+          "field": "Socket(s):"
+        },
+        {
+          "data": "0",
+          "field": "Stepping:"
+        },
+        {
+          "data": "enabled",
+          "field": "Frequency boost:"
+        },
+        {
+          "data": "38%",
+          "field": "CPU(s) scaling MHz:"
+        },
+        {
+          "data": "5157.8950",
+          "field": "CPU max MHz:"
+        },
+        {
+          "data": "605.2640",
+          "field": "CPU min MHz:"
+        },
+        {
+          "data": "3992.53",
+          "field": "BogoMIPS:"
+        },
+        {
+          "data": "fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good amd_lbr_v2 nopl xtopology nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpuid_fault cpb cat_l3 cdp_l3 hw_pstate ssbd mba perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk avx_vnni avx512_bf16 clzero irperf xsaveerptr rdpru wbnoinvd cppc arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif x2avic v_spec_ctrl vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid bus_lock_detect movdiri movdir64b overflow_recov succor smca fsrm avx512_vp2intersect flush_l1d amd_lbr_pmc_freeze",
+          "field": "Flags:"
+        },
+        {
+          "data": "AMD-V",
+          "field": "Virtualization:"
+        },
+        {
+          "data": "576 KiB (12 instances)",
+          "field": "L1d cache:"
+        },
+        {
+          "data": "384 KiB (12 instances)",
+          "field": "L1i cache:"
+        },
+        {
+          "data": "12 MiB (12 instances)",
+          "field": "L2 cache:"
+        },
+        {
+          "data": "24 MiB (2 instances)",
+          "field": "L3 cache:"
+        },
+        {
+          "data": "1",
+          "field": "NUMA node(s):"
+        },
+        {
+          "data": "0-23",
+          "field": "NUMA node0 CPU(s):"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Gather data sampling:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Ghostwrite:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Indirect target selection:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Itlb multihit:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability L1tf:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Mds:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Meltdown:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Mmio stale data:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Old microcode:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Reg file data sampling:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Retbleed:"
+        },
+        {
+          "data": "Mitigation; IBPB on VMEXIT only",
+          "field": "Vulnerability Spec rstack overflow:"
+        },
+        {
+          "data": "Mitigation; Speculative Store Bypass disabled via prctl",
+          "field": "Vulnerability Spec store bypass:"
+        },
+        {
+          "data": "Mitigation; usercopy/swapgs barriers and __user pointer sanitization",
+          "field": "Vulnerability Spectre v1:"
+        },
+        {
+          "data": "Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP always-on; PBRSB-eIBRS Not affected; BHI Not affected",
+          "field": "Vulnerability Spectre v2:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Srbds:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Tsa:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Tsx async abort:"
+        },
+        {
+          "data": "Mitigation; IBPB on VMEXIT",
+          "field": "Vulnerability Vmscape:"
+        }
+      ]
+    },
+    "nohz_full_cpus": "",
+    "online_cpus": "0-23",
+    "physical_core_isolated": false,
+    "platform": "Linux-7.0.9-x86_64-with-glibc2.40",
+    "rustc_vv": "rustc 1.93.1 (01f6ddf75 2026-02-11)\nbinary: rustc\ncommit-hash: 01f6ddf7588f42ae2d7eb0a2f21d44e8e96674cf\ncommit-date: 2026-02-11\nhost: x86_64-unknown-linux-gnu\nrelease: 1.93.1\nLLVM version: 21.1.8\n",
+    "rustflags": "",
+    "scaling_driver": "amd-pstate-epp",
+    "stable_frequency_policy": false,
+    "thread_siblings": "3,15"
+  },
+  "measurements": {
+    "azure_lrc_batch": {
+      "profiles": {
+        "cold": {
+          "baseline": {
+            "median_external_ns_per_solve": 1683344.0,
+            "median_ns_per_solve": 2745.0,
+            "median_peak_rss_kb": 2160.0
+          },
+          "baseline_over_current": 1.6118614210217264,
+          "checksums": [
+            "100000"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 1691659.0,
+            "median_ns_per_solve": 1703.0,
+            "median_peak_rss_kb": 2120.0
+          },
+          "exact_agreement": true,
+          "repetitions": 1,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "1"
+          ]
+        },
+        "stress_batch": {
+          "baseline": {
+            "median_external_ns_per_solve": 45.49992,
+            "median_ns_per_solve": 25.60687,
+            "median_peak_rss_kb": 2088.0
+          },
+          "baseline_over_current": 0.9960015044922786,
+          "checksums": [
+            "10000000000"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 46.12348,
+            "median_ns_per_solve": 25.70967,
+            "median_peak_rss_kb": 2164.0
+          },
+          "exact_agreement": true,
+          "repetitions": 100000,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "100000"
+          ]
+        },
+        "warm_batch": {
+          "baseline": {
+            "median_external_ns_per_solve": 219692.75,
+            "median_ns_per_solve": 288.125,
+            "median_peak_rss_kb": 2104.0
+          },
+          "baseline_over_current": 1.0554029304029304,
+          "checksums": [
+            "800000"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 240160.875,
+            "median_ns_per_solve": 273.0,
+            "median_peak_rss_kb": 2120.0
+          },
+          "exact_agreement": true,
+          "repetitions": 8,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "8"
+          ]
+        }
+      },
+      "variant": "application:azure:rust:100000:100000"
+    },
+    "ceph_recursive_xor": {
+      "profiles": {
+        "cold": {
+          "baseline": {
+            "median_external_ns_per_solve": 1527294.0,
+            "median_ns_per_solve": 81973.0,
+            "median_peak_rss_kb": 2152.0
+          },
+          "baseline_over_current": 1.0017230423306287,
+          "checksums": [
+            "256"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 1632299.0,
+            "median_ns_per_solve": 81832.0,
+            "median_peak_rss_kb": 2148.0
+          },
+          "exact_agreement": true,
+          "repetitions": 1,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "4293"
+          ]
+        },
+        "warm_batch": {
+          "baseline": {
+            "median_external_ns_per_solve": 213075.5,
+            "median_ns_per_solve": 44474.0,
+            "median_peak_rss_kb": 2156.0
+          },
+          "baseline_over_current": 0.9930363088808692,
+          "checksums": [
+            "2048"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 207763.125,
+            "median_ns_per_solve": 44785.875,
+            "median_peak_rss_kb": 2152.0
+          },
+          "exact_agreement": true,
+          "repetitions": 8,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "34344"
+          ]
+        }
+      },
+      "variant": "application:ceph-zdd:rust:8:2"
+    },
+    "ceph_scheduling_quotient_10": {
+      "profiles": {
+        "cold": {
+          "baseline": {
+            "median_external_ns_per_solve": 2860075.0,
+            "median_ns_per_solve": 311029.0,
+            "median_peak_rss_kb": 2256.0
+          },
+          "baseline_over_current": 1.218021115618979,
+          "checksums": [
+            "2"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 2943701.0,
+            "median_ns_per_solve": 255356.0,
+            "median_peak_rss_kb": 2224.0
+          },
+          "exact_agreement": true,
+          "repetitions": 1,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "143"
+          ]
+        },
+        "warm_batch": {
+          "baseline": {
+            "median_external_ns_per_solve": 391723.125,
+            "median_ns_per_solve": 95238.5,
+            "median_peak_rss_kb": 2164.0
+          },
+          "baseline_over_current": 0.9355141713130827,
+          "checksums": [
+            "16"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 402102.5,
+            "median_ns_per_solve": 101803.375,
+            "median_peak_rss_kb": 2336.0
+          },
+          "exact_agreement": true,
+          "repetitions": 8,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "1144"
+          ]
+        }
+      },
+      "variant": "application:ceph-aggregate:rust:10:2:2"
+    },
+    "ceph_scheduling_quotient_30": {
+      "profiles": {
+        "cold": {
+          "baseline": {
+            "median_external_ns_per_solve": 3785839.0,
+            "median_ns_per_solve": 1128912.0,
+            "median_peak_rss_kb": 3332.0
+          },
+          "baseline_over_current": 0.9292129800347679,
+          "checksums": [
+            "2"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 3875025.0,
+            "median_ns_per_solve": 1214912.0,
+            "median_peak_rss_kb": 3324.0
+          },
+          "exact_agreement": true,
+          "repetitions": 1,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "1023"
+          ]
+        },
+        "warm_batch": {
+          "baseline": {
+            "median_external_ns_per_solve": 1152919.0,
+            "median_ns_per_solve": 828143.125,
+            "median_peak_rss_kb": 3432.0
+          },
+          "baseline_over_current": 1.0112535942600518,
+          "checksums": [
+            "16"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 1133375.25,
+            "median_ns_per_solve": 818927.25,
+            "median_peak_rss_kb": 3564.0
+          },
+          "exact_agreement": true,
+          "repetitions": 8,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "8184"
+          ]
+        }
+      },
+      "variant": "application:ceph-aggregate:rust:30:2:2"
+    },
+    "ceph_scheduling_quotient_80": {
+      "profiles": {
+        "cold": {
+          "baseline": {
+            "median_external_ns_per_solve": 9862503.0,
+            "median_ns_per_solve": 7715505.0,
+            "median_peak_rss_kb": 10772.0
+          },
+          "baseline_over_current": 1.0081411707705497,
+          "checksums": [
+            "2"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 9745965.0,
+            "median_ns_per_solve": 7653199.0,
+            "median_peak_rss_kb": 10768.0
+          },
+          "exact_agreement": true,
+          "repetitions": 1,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "6723"
+          ]
+        },
+        "warm_batch": {
+          "baseline": {
+            "median_external_ns_per_solve": 8178091.5,
+            "median_ns_per_solve": 7670562.75,
+            "median_peak_rss_kb": 11092.0
+          },
+          "baseline_over_current": 1.0053906843264062,
+          "checksums": [
+            "16"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 8182127.75,
+            "median_ns_per_solve": 7629434.875,
+            "median_peak_rss_kb": 11068.0
+          },
+          "exact_agreement": true,
+          "repetitions": 8,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "53784"
+          ]
+        }
+      },
+      "variant": "application:ceph-aggregate:rust:80:2:2"
+    },
+    "gpu_mds_checkpoint": {
+      "profiles": {
+        "cold": {
+          "baseline": {
+            "median_external_ns_per_solve": 3197734.0,
+            "median_ns_per_solve": 395817.0,
+            "median_peak_rss_kb": 3256.0
+          },
+          "baseline_over_current": 0.726517673921742,
+          "checksums": [
+            "64"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 3512079.0,
+            "median_ns_per_solve": 544814.0,
+            "median_peak_rss_kb": 3248.0
+          },
+          "exact_agreement": true,
+          "repetitions": 1,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "384000"
+          ]
+        },
+        "stress_batch": {
+          "baseline": {
+            "median_external_ns_per_solve": 124201.65,
+            "median_ns_per_solve": 93282.78,
+            "median_peak_rss_kb": 3356.0
+          },
+          "baseline_over_current": 0.9386111464399042,
+          "checksums": [
+            "6400"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 134474.87,
+            "median_ns_per_solve": 99383.84,
+            "median_peak_rss_kb": 3344.0
+          },
+          "exact_agreement": true,
+          "repetitions": 100,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "38400000"
+          ]
+        },
+        "warm_batch": {
+          "baseline": {
+            "median_external_ns_per_solve": 486043.75,
+            "median_ns_per_solve": 160007.875,
+            "median_peak_rss_kb": 3384.0
+          },
+          "baseline_over_current": 1.0151350776936632,
+          "checksums": [
+            "512"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 492429.375,
+            "median_ns_per_solve": 157622.25,
+            "median_peak_rss_kb": 3436.0
+          },
+          "exact_agreement": true,
+          "repetitions": 8,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "3072000"
+          ]
+        }
+      },
+      "variant": "application:gpu-compiled:rust:10000:6000:64"
+    },
+    "hamming_outer_lrc": {
+      "profiles": {
+        "cold": {
+          "baseline": {
+            "median_external_ns_per_solve": 108348691.0,
+            "median_ns_per_solve": 103780275.0,
+            "median_peak_rss_kb": 2320.0
+          },
+          "baseline_over_current": 1.004395258004921,
+          "checksums": [
+            "5"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 107830296.0,
+            "median_ns_per_solve": 103326130.0,
+            "median_peak_rss_kb": 2152.0
+          },
+          "exact_agreement": true,
+          "repetitions": 1,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "4095"
+          ]
+        },
+        "warm_batch": {
+          "baseline": {
+            "median_external_ns_per_solve": 104135856.125,
+            "median_ns_per_solve": 103510500.5,
+            "median_peak_rss_kb": 2156.0
+          },
+          "baseline_over_current": 0.9999569591180102,
+          "checksums": [
+            "40"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 104096315.75,
+            "median_ns_per_solve": 103514955.875,
+            "median_peak_rss_kb": 2272.0
+          },
+          "exact_agreement": true,
+          "repetitions": 8,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "32760"
+          ]
+        }
+      },
+      "variant": "jin-fu-hamming:rust:6"
+    },
+    "qc_ldpc_codeword": {
+      "profiles": {
+        "cold": {
+          "baseline": {
+            "median_external_ns_per_solve": 3612576.0,
+            "median_ns_per_solve": 1536471.0,
+            "median_peak_rss_kb": 3848.0
+          },
+          "baseline_over_current": 1.0030611405539431,
+          "checksums": [
+            "0"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 3780078.0,
+            "median_ns_per_solve": 1531782.0,
+            "median_peak_rss_kb": 3884.0
+          },
+          "exact_agreement": true,
+          "repetitions": 1,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "1"
+          ]
+        },
+        "stress_batch": {
+          "baseline": {
+            "median_external_ns_per_solve": 1537672.35,
+            "median_ns_per_solve": 1498072.22,
+            "median_peak_rss_kb": 3828.0
+          },
+          "baseline_over_current": 1.0127711039965455,
+          "checksums": [
+            "0"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 1525515.42,
+            "median_ns_per_solve": 1479181.44,
+            "median_peak_rss_kb": 3844.0
+          },
+          "exact_agreement": true,
+          "repetitions": 100,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "100"
+          ]
+        },
+        "warm_batch": {
+          "baseline": {
+            "median_external_ns_per_solve": 1865187.75,
+            "median_ns_per_solve": 1530731.375,
+            "median_peak_rss_kb": 3852.0
+          },
+          "baseline_over_current": 0.9916984934275893,
+          "checksums": [
+            "0"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 1858159.625,
+            "median_ns_per_solve": 1543545.125,
+            "median_peak_rss_kb": 3832.0
+          },
+          "exact_agreement": true,
+          "repetitions": 8,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "8"
+          ]
+        }
+      },
+      "variant": "application:qc:rust:50000:4"
+    },
+    "repair_dag": {
+      "profiles": {
+        "cold": {
+          "baseline": {
+            "median_external_ns_per_solve": 2108355.0,
+            "median_ns_per_solve": 8345.0,
+            "median_peak_rss_kb": 2120.0
+          },
+          "baseline_over_current": 0.9915636882129277,
+          "checksums": [
+            "3"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 2045318.0,
+            "median_ns_per_solve": 8416.0,
+            "median_peak_rss_kb": 2152.0
+          },
+          "exact_agreement": true,
+          "repetitions": 1,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "4"
+          ]
+        },
+        "stress_batch": {
+          "baseline": {
+            "median_external_ns_per_solve": 4322.427,
+            "median_ns_per_solve": 2161.124,
+            "median_peak_rss_kb": 2136.0
+          },
+          "baseline_over_current": 1.0093630448601332,
+          "checksums": [
+            "3000"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 4411.394,
+            "median_ns_per_solve": 2141.077,
+            "median_peak_rss_kb": 2148.0
+          },
+          "exact_agreement": true,
+          "repetitions": 1000,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "4000"
+          ]
+        },
+        "warm_batch": {
+          "baseline": {
+            "median_external_ns_per_solve": 230752.125,
+            "median_ns_per_solve": 3306.125,
+            "median_peak_rss_kb": 2100.0
+          },
+          "baseline_over_current": 0.9917507218118414,
+          "checksums": [
+            "24"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 230705.75,
+            "median_ns_per_solve": 3333.625,
+            "median_peak_rss_kb": 2144.0
+          },
+          "exact_agreement": true,
+          "repetitions": 8,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "32"
+          ]
+        }
+      },
+      "variant": "application:rdag:rust:21:3"
+    },
+    "represented_gf4_tower": {
+      "profiles": {
+        "cold": {
+          "baseline": {
+            "median_external_ns_per_solve": 1964288.0,
+            "median_ns_per_solve": 571223.0,
+            "median_peak_rss_kb": 2712.0
+          },
+          "baseline_over_current": 0.9805645915766164,
+          "checksums": [
+            "2"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 1961642.0,
+            "median_ns_per_solve": 582545.0,
+            "median_peak_rss_kb": 2704.0
+          },
+          "exact_agreement": true,
+          "repetitions": 1,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "5461"
+          ]
+        },
+        "warm_batch": {
+          "baseline": {
+            "median_external_ns_per_solve": 486914.125,
+            "median_ns_per_solve": 281154.75,
+            "median_peak_rss_kb": 2704.0
+          },
+          "baseline_over_current": 0.9904313931327963,
+          "checksums": [
+            "16"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 487059.25,
+            "median_ns_per_solve": 283871.0,
+            "median_peak_rss_kb": 2724.0
+          },
+          "exact_agreement": true,
+          "repetitions": 8,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "43688"
+          ]
+        }
+      },
+      "variant": "transfer-tower:rust:6:4"
+    },
+    "vector_node_span": {
+      "profiles": {
+        "cold": {
+          "baseline": {
+            "median_external_ns_per_solve": 2943380.0,
+            "median_ns_per_solve": 58339.0,
+            "median_peak_rss_kb": 2100.0
+          },
+          "baseline_over_current": 1.0223075035923317,
+          "checksums": [
+            "4"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 2939683.0,
+            "median_ns_per_solve": 57066.0,
+            "median_peak_rss_kb": 2144.0
+          },
+          "exact_agreement": true,
+          "repetitions": 1,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "15"
+          ]
+        },
+        "stress_batch": {
+          "baseline": {
+            "median_external_ns_per_solve": 13989.126,
+            "median_ns_per_solve": 10306.931,
+            "median_peak_rss_kb": 2160.0
+          },
+          "baseline_over_current": 1.0081464096220085,
+          "checksums": [
+            "4000"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 13155.654,
+            "median_ns_per_solve": 10223.645,
+            "median_peak_rss_kb": 2148.0
+          },
+          "exact_agreement": true,
+          "repetitions": 1000,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "15000"
+          ]
+        },
+        "warm_batch": {
+          "baseline": {
+            "median_external_ns_per_solve": 357960.25,
+            "median_ns_per_solve": 26866.25,
+            "median_peak_rss_kb": 2164.0
+          },
+          "baseline_over_current": 1.4673694127928014,
+          "checksums": [
+            "32"
+          ],
+          "current": {
+            "median_external_ns_per_solve": 336222.25,
+            "median_ns_per_solve": 18309.125,
+            "median_peak_rss_kb": 2156.0
+          },
+          "exact_agreement": true,
+          "repetitions": 8,
+          "rounds": 7,
+          "work_agreement": true,
+          "works": [
+            "120"
+          ]
+        }
+      },
+      "variant": "application:vector:rust:64:2"
+    }
+  },
+  "protocol": "fresh process per sample; rotated paired A/B order; both sides pinned to one CPU under choom -n 1000; model construction and process startup inside the timed region; process high-water RSS recorded; medians of unrounded samples; ergodis side only",
+  "rounds": 7,
+  "task": "C1050"
+}
