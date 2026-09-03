@@ -285,3 +285,28 @@ one-line pointer here.
   searches for, which is why the end-to-end workload shows no change. Hazard recorded: a
   worktree build sharing the target directory overwrote the candidate binary and produced two
   identical retained arms; compare SHA-256 of both arms before trusting an A/B.
+- 2026-09-03 — probe 12: family test of the closed form and the compiled fleet transducer.
+  Report: `2026-09-03-c1061-probe12-family-test-and-compiled-transducer.md` (ergodis-private
+  `23a25ed`). Verdicts: **closed form generalizes across the counted-kernel family**;
+  **online optimizer disappears (structurally), but the table is an accelerator, not an exact
+  compiled optimizer, and the endpoint is slower per event than the tree**. Family: a reference
+  scan reproduces the published kernel on 200,000 hostile instances; seven shapes (LRC(12,2,2),
+  (6,2,2), (12,4,2), (10,2,4), read weights 1 and 3, single parity domain) pass complete
+  enumeration (2.03M comparisons, zero mismatches, zero dead-branch firings) and a
+  family-generalized CP-SAT oracle on 4,704 cases; S1 = Lc + floor((cap - Lc)/w) holds for
+  every w and g tested. Each structural assumption is load-bearing: read weight 0, an uncapped
+  scan limit, and a wrapping shortfall each break one, and the closed form refuses by naming
+  the failing assumption. Structural fact: leaf summaries satisfy cost[from][to] = f(to - from),
+  so they are min-plus convolution operators and commute; the fleet optimum is a three-level
+  knapsack over the multiset of leaf profiles, a statistic independent of fleet size.
+  `FleetPolicy` maintains that multiset and matches the tree's optimum on all 100,000 events at
+  16,384 pods with no tree and no kernel. Finite table: seven gain states, 71 KB, zero value
+  and state disagreements on a 100,000-event replay with 0.39% fail-closed rebases; but
+  training on 400k and 800k events exposes 2 then 4 conflicting keys and one value error per
+  100k events after poisoning them. What breaks finiteness is the multiplicity of pods tied at
+  the top of the discount order, not fleet size or width. Defect fixed: class indices are
+  interned per instance, keying on them gave 7% error; keying on the profile gives zero. Cost:
+  20.7k instructions per event vs 16.2k for the tree delta (1.28x regression, CIs exclude 1.0)
+  while cutting state 22x (137 KB vs 3.0 MB); a speed win needs the top-k maintained
+  incrementally instead of rescanned. Harness calibration failure recorded: repeat=2 sizing
+  gave negative instruction counts; a `--min-repeat` floor fixed it.
