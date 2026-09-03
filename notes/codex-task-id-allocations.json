@@ -4211,8 +4211,17 @@
       "last": 1047,
       "purpose": "public three-tier StructureBench suite assembly",
       "sequence": 468
+    },
+    {
+      "count": 1,
+      "first": 1048,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1048,
+      "purpose": "subset-sum width frontier: parametrized cap, measured crossover past 2^20, residue-split or MITM to remove width dependence",
+      "sequence": 469
     }
   ],
-  "next_id": 1048,
+  "next_id": 1049,
   "schema": "codex-task-id-allocations-v1"
 }
