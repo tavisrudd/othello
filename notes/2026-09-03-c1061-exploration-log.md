@@ -43,3 +43,30 @@ one-line pointer here.
   finding: sorting data-domain capacities is exact only when demand is a multiple of six
   (multiplicity vector), so it applies to 23% of pods; fix is canonicalizing
   (capacity, multiplicity) pairs. Open: witness readout locality; proved class bound.
+- 2026-09-03 — probe 4: evolve congruence objective (smallest sufficient statistic closed under
+  the update monoid). Report: `2026-09-03-c1061-probe4-evolve-sufficient-statistics.md`
+  (ergodis-private `015f487`, module `congruence_search.rs`). Verdict: **promote**. Evolve's
+  current fitness is per-row label correctness over a sealed feature batch and cannot express a
+  pairwise, event-closed condition; the closest machinery is `feature_ceiling`. The new scorer
+  keeps three counters (exactness, single-step closure over a generator-closed set, quotient
+  size) and never collapses them. Planted test: on Opt = min(a) + sum(b) + T[c mod 3] with 19
+  sealed features and 7 generators the closure objective recovers exactly the planted statistic;
+  corpus exactness alone returns the answer itself and an additive decoy, each with thousands of
+  closure violations. Design finding: the two decoy classes fail different conditions (an index
+  decoy has zero closure violations and fails exactness on the reachable closure; the answer
+  itself is exact and fails closure), so both counters are necessary; the bare Myhill--Nerode
+  condition would admit the index decoy. Probe-1 toy: no compression on the parameter side
+  (minimal closed statistic is the full parameter record; probe 1's win is the retained tree,
+  not a state quotient), and the clamp-at-evaluation fix from probe 1 shows up as the price of
+  closure vs exactness for the two encodings. On the summary side tropical-projective
+  normalization is composition-compatible with 5 leaf classes and root classes growing
+  12/36/98/219/540 against 25 to 15,625 assignments, so Q = (finite normalized class set) x Z.
+  Evolve cannot reach that quotient because its VM is i64-valued; next step is sealing a
+  `normalized_class_id` feature through the feature-DAG presentation transition.
+- 2026-09-03 — probe 5 candidate (from the snapshot-speedup question): accelerate the initial
+  snapshot bind using probe-2 observations: memoize leaf kernels by normalized class with an
+  exact miss path; compose runs of identical leaf classes by repeated squaring; treat
+  snapshot-from-snapshot as a bucketed delta batch with subtree rebuild O(k log(n/k)); compile
+  leaf classes as piecewise functions of the shared budget level; run-length witness readout.
+  Gate to watch: the 2-class leaf census is stream-specific and needs a hostile stream or a
+  proved bound.
