@@ -96,7 +96,9 @@ One repository, `~/src/ergodis`, two long-lived branches and two remotes.
 
 1. Materializes `filter(tree(private-rev))` in a scratch worktree: drops every path in the exclude
    set (`AGENTS.md`, `CLAUDE.md`, `PERFORMANCE.md`, `evidence/`, `proptest-regressions/`,
-   `.cargo/`, `EXPORTS.md`, anything listed in `.publicignore`), rewrites the monorepo path in
+   `.cargo/`, `EXPORTS.md`, `scripts/export-public.sh` and every other process, workflow,
+   handoff, checklist, or agent-facing document — all process is private and never ships —
+   plus anything listed in `.publicignore`), rewrites the monorepo path in
    scripts to repository-relative, and replaces evidence references with the evidence
    repository's tagged URL.
 2. Runs the public lint on the filtered tree and refuses to continue on any hit: task-ID
@@ -121,8 +123,9 @@ diff of the private range, and nothing needs rebasing. Squash semantics come for
   URL whose ref is not `public` or whose tip does not pass the public lint.
 - `main` has no upstream on the public remote; `push.default = nothing` in the repo config so a
   bare `git push` fails until a remote and ref are named.
-- The lint also runs in CI on the public repository (a workflow that fails on any task-ID
-  token), so a mistake is caught on the remote as well as locally.
+- The lint also runs in CI on the public repository as a minimal workflow that fails on any
+  task-ID token or process document; the workflow file itself carries no process detail beyond
+  invoking the lint, and the lint's rule list lives in the private tree.
 - Agents never push; export produces the commit and stops. Pushing is Tavis's action.
 
 **Working on the private side.** Ordinary work lands on `main` with task IDs in commit subjects
