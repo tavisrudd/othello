@@ -4301,8 +4301,17 @@
       "last": 1057,
       "purpose": "promote semantic_theorems, predicate_cover, mask_cycle_proof proof scaffolding into core",
       "sequence": 478
+    },
+    {
+      "count": 1,
+      "first": 1058,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1058,
+      "purpose": "Ergodis repository split: core to ~/src/ergodis with private main and squashed filtered public branch; companion repos; promotion and docs",
+      "sequence": 479
     }
   ],
-  "next_id": 1058,
+  "next_id": 1059,
   "schema": "codex-task-id-allocations-v1"
 }

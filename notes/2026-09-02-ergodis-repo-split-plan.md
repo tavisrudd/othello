@@ -1,6 +1,6 @@
 # Ergodis repository split plan (proposal, 2026-09-02)
 
-**Lane**: `complete-ports` (proposal; no ID allocated until approved)
+**Lane**: `complete-ports` — task **C1058** (approved 2026-09-02)
 
 ## Goal
 
@@ -65,7 +65,24 @@ infrastructure, task crates, the absorption list.
    `ergodis-private` tests pass against the sibling core; the BENCHMARKS replay commands resolve;
    `cache-gc.sh` and `retain-bin.sh` still find their roots.
 
-## Decisions needed before allocation
+## Decisions taken (Tavis, 2026-09-02)
+
+- **Branch model for the public core.** `~/src/ergodis` keeps a private `main` that receives the
+  replayed history with task IDs intact. The GitHub public repository receives squashed and
+  filtered merges from that private main (one squash per release or milestone, filtered through the
+  exclude list and the path sanitizer), so public history never carries task IDs, private paths,
+  or contributor documents. Commit subjects on private main are therefore not rewritten.
+- **Scope of C1058 includes the promotion track and documentation.** The pending promotions
+  (C1054 hall_core, C1055 margin lift, C1056 arithmetic kernels, C1057 proof scaffolding) land in
+  the new core repository, not the monorepo copy, once the split base is tagged; and each new
+  repository gets its own `AGENTS.md` plus a `CLAUDE.md` symlink to it, a README, and the routed
+  documents it owns (PERFORMANCE.md and the perf playbook extract in `ergodis-contrib`; the
+  kernel registry and campaign docs in `ergodis-private`).
+- **Monorepo after the move.** Cites the external repositories at tagged commits; no vendored
+  copy. Companion names as proposed unless the executing review finds `ergodis-evidence` and
+  `ergodis-contrib` better merged.
+
+## Decisions originally raised
 
 1. Names and visibility of the companions (`ergodis-evidence`, `ergodis-private`, `ergodis-contrib`
    as proposed, or fewer).
