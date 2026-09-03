@@ -1,1 +1,0 @@
-{"schema":"ergodis-attack-plan-v0","name":"hidden-field-threshold","role":"diagnostic","output":"predicate","program":[{"op":"const","value":20},{"op":"field","name":"depth"},{"op":"sub"},{"op":"const","value":0},{"op":"lt"}]}

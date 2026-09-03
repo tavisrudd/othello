@@ -297,11 +297,6 @@ def main() -> int:
     args = parser.parse_args()
 
     check_public_surface()
-    subprocess.run(
-        [sys.executable, PAPER / "verification" / "check_ergodis_public.py"],
-        check=True,
-        cwd=PAPER,
-    )
     check_metadata_and_formal_boundary()
     with tempfile.TemporaryDirectory(prefix="complete-repair-ports-build-") as scratch:
         rebuilt = build_pdf(Path(scratch))

@@ -1,8 +1,0 @@
-{
-  "kind": "ceph-xor",
-  "coordinate_count": 8,
-  "patterns": ["_cDD_cDD", "cDDD____", "____cDDD"],
-  "target": 2,
-  "unavailable": [2],
-  "budget": 10000
-}

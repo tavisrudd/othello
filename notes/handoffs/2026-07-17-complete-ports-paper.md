@@ -17,7 +17,10 @@ Recovery*
 **Standalone paper repository**: `tavisrudd/compositional-recovery` at
 `~/src/math-papers/compositional-recovery`
 **Current local standalone commit**: `80c600f` (40-page revised manuscript;
-verified; no push or deposit)
+verified; no push or deposit; the authority has since dropped `ergodis/`, so the next sync needs
+a prior `git rm -r ergodis` commit there)
+**Ergodis software**: `~/src/ergodis` (private `main`; public GitHub `tavisrudd/ergodis` via the
+staging clone), not this monorepo, since C1058
 **Approved paper license**: MIT
 
 ## Goal
@@ -924,7 +927,21 @@ the dynamic program is the open successor. The sparse CSR Hall backend is in cor
 layout selection ([C1049](../2026-09-02-c1049-scheduler-dominance-pruning.md),
 [C1054](../2026-09-02-c1054-hall-core-promotion.md), [C1060](../2026-09-02-c1060-beat-cpsat-on-l2.md)).
 
-C1017 is queued to remediate the whole-core Ergodis performance-contract audit:
+C1058 is closed: the Ergodis core no longer lives in this monorepo. It is the private `main` of
+`~/src/ergodis` (sibling checkouts `~/src/ergodis-private`, `~/src/ergodis-evidence`,
+`~/src/ergodis-contrib`, each with its own `AGENTS.md`); the monorepo tag `ergodis-split-base`
+(`aa49d68c3`) marks the last commit that carried the trees. All future Ergodis work, including
+C1017, happens in those repositories under their `AGENTS.md` and `../ergodis-contrib/PERFORMANCE.md`;
+this handoff keeps only the paper-facing pointer. The C1055–C1057 promotions are merged there.
+The public export is gated on the release checklist (the filtered tree still has 67 lint findings)
+and the standalone paper repository needs an explicit `git rm -r ergodis` commit before its next
+sync ([C1058](../2026-09-02-c1058-ergodis-repository-split.md),
+[C1055](../2026-09-02-c1055-binary-margin-lift-promotion.md),
+[C1056](../2026-09-02-c1056-arithmetic-kernels-promotion.md),
+[C1057](../2026-09-02-c1057-proof-scaffolding-promotion.md),
+[validation](../2026-09-02-c1058-fresh-clone-validation.md)).
+
+C1017 is queued to remediate the whole-core Ergodis performance-contract audit (now in `~/src/ergodis`):
 allocation-counted hot loops, iterative traversal, complete Tiger layouts,
 contention-free worker ownership, one-/parallel-mode counter A/B gates, and the
 public/private source partition. Its task report is

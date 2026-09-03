@@ -210,7 +210,7 @@ results.
   executes this recursion, stores minimizing lifts to return witnesses, and
   schedules repairs exactly under heterogeneous capacities.
   [Exact Compositional Transfer of Bounded Linear Recovery](https://github.com/tavisrudd/compositional-recovery/blob/main/compositional_recovery.pdf) ·
-  [ergodis](https://github.com/tavisrudd/compositional-recovery/tree/main/ergodis).
+  [ergodis](https://github.com/tavisrudd/ergodis).
 
 - **Order six is the unique nontrivial cut-rigid symmetric conference
   order.** For a balanced half (Y) of a symmetric conference matrix, the

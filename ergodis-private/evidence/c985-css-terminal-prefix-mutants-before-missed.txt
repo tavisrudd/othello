@@ -1,3 +1,0 @@
-src/css_distance.rs:1358:22: replace != with == in CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>::logical_is_nonzero
-src/css_distance.rs:1356:64: replace * with / in CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>::logical_is_nonzero
-src/css_distance.rs:1356:23: replace ^= with |= in CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>::logical_is_nonzero

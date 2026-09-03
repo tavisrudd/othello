@@ -1,8 +1,0 @@
-{
-  "capacities": [1, 1],
-  "families": [
-    [[1, 0], [0, 1]],
-    [[1, 0], [0, 1]]
-  ],
-  "positive_grading": [1, 1]
-}

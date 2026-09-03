@@ -1,3 +1,0 @@
-{"schema":"ergodis-campaign-data-v0","presentation":"c880-live-branch-root-v2","problem":"C880 live branch ordering","fields":["depth","selected_count","candidate","branch_count","unresolved_count","child_unresolved_count","child_packing","root_candidate","root_orbit","root_ordinal","root_total","root_sized","root_initial_unresolved","root_initial_packing","root_initial_branches"],"rows":2}
-{"id":0,"expected":false,"values":[0,1,0,4,127,120,1,0,0,0,4,1,120,1,4]}
-{"id":1,"expected":true,"values":[8,9,31,3,40,20,4,6,6,1,4,1,100,2,3]}

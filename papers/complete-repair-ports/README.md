@@ -91,10 +91,12 @@ measurements, not universal solver rankings. When a model has additional
 general constraints, ergodis instead supplies an exact preprocessing front end
 for residual CP-SAT.
 
-Quick-start commands, JSON examples, architecture notes, and reproducible
-benchmarks are in [`ergodis/`](ergodis/). The production Rust crate is the
-top-level interface; its independent Python reference layer is contained in
-[`ergodis/python/`](ergodis/python/).
+ergodis is developed in its own repository,
+[tavisrudd/ergodis](https://github.com/tavisrudd/ergodis), which carries the
+quick-start commands, JSON examples, architecture notes, reproducible
+benchmarks, and the independent Python reference layer. The measurements
+quoted in this paper correspond to that repository's `BENCHMARKS.md` and
+`evidence/benchmarks.json` at the release tag named there.
 
 ## Main consequences
 

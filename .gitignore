@@ -27,5 +27,3 @@ notes/certs/
 /papers/**/*.vrb
 /papers/**/*.xdv
 
-/ergodis-private/target/
-/ergodis-private/**/target/

@@ -47,14 +47,13 @@ to equal that manifest, apart from the exporter's optional `.gitignore`,
 `PROVENANCE.md`, and `export-manifest.json`.  Those files are scanned when
 present; any other unlisted tracked file fails the release check.
 
-The release verifier also runs `verification/check_ergodis_public.py`. That
-check scans the complete ergodis package, including code, comments, examples,
-fixtures, benchmark labels, and evidence, for nonpublic identifiers, paths, or
-development residue. The algorithm evidence has an independent canonical
-replay:
+The ergodis software is not part of this repository; it lives at
+`https://github.com/tavisrudd/ergodis`, and the measurements quoted in the
+manuscript are those of its `BENCHMARKS.md` and `evidence/benchmarks.json`.
+The algorithm evidence has an independent canonical replay in a clone of that
+repository:
 
 ```text
-cd ergodis
 python3 python/test_algorithms.py
 python3 python/generate_evidence.py --check
 cargo fmt --check

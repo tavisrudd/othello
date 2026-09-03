@@ -1,7 +1,0 @@
-{
-  "schema": "ergodis-attack-plan-v0",
-  "name": "prefer-strong-residual-packing-bound",
-  "role": "ordering",
-  "output": "score",
-  "expr": { "op": "field", "name": "child_packing" }
-}

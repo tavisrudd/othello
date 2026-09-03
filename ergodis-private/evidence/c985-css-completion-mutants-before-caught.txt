@@ -1,8 +1,0 @@
-src/css_distance.rs:1409:31: replace > with >= in CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>::completion_lower_bound_exceeds
-src/css_distance.rs:1409:31: replace > with == in CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>::completion_lower_bound_exceeds
-src/css_distance.rs:1416:13: replace && with || in CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>::completion_lower_bound_exceeds
-src/css_distance.rs:1405:19: replace == with != in CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>::completion_lower_bound_exceeds
-src/css_distance.rs:1395:9: replace CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>::completion_lower_bound_exceeds -> bool with true
-src/css_distance.rs:1398:49: replace & with ^ in CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>::completion_lower_bound_exceeds
-src/css_distance.rs:1409:31: replace > with < in CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>::completion_lower_bound_exceeds
-src/css_distance.rs:1398:49: replace & with | in CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>::completion_lower_bound_exceeds

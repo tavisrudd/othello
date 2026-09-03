@@ -1,6 +1,0 @@
-src/css_distance.rs:325:9: replace PackedSupport<WORDS>::difference_assign with ()
-src/css_distance.rs:1518:41: replace < with > in CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>::search_bounded_syndrome_driven
-src/css_distance.rs:326:19: replace &= with |= in PackedSupport<WORDS>::difference_assign
-src/css_distance.rs:326:19: replace &= with ^= in PackedSupport<WORDS>::difference_assign
-src/css_distance.rs:1518:41: replace < with == in CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>::search_bounded_syndrome_driven
-src/css_distance.rs:326:22: delete ! in PackedSupport<WORDS>::difference_assign
