@@ -283,3 +283,178 @@ the largest kernels in the tree by construction.
    divisions with reciprocal multiplications and measure IPC.
 4. Feed the parametric transfer operator back into the fleet binding so a `BudgetGrainChanged` event
    costs one compile per pod instead of a profile table, and re-measure probe 5's stage 4.
+
+---
+
+## 2026-09-03 follow-up: landing both defect collapses in the Ergodis core
+
+Probe 11. The two collapses of Part B and Part C are now in
+`/home/tavis/src/ergodis/src/defect.rs` under the core's full validation gate, and the private
+replica is gone. This is the first core edit of C1061.
+
+### What landed, in three commits
+
+| commit | change |
+|---|---|
+| `eb349ce` | Three counter workloads in the existing `bench_kernels` binary: `defect:catalog` (the catalogue constructor), `defect:analysis` (the fixed-maximal analysis of one complete 54-point set), `defect:search` (the depth-32 canonical prefix search under catalogue pruning). No behaviour change; this is the harness the A/B needs on both arms. |
+| `08ccfb0` | The two collapses. `signed_flip_reachability` tallies the degree multiset and folds each degree by binary splitting over its multiplicity instead of once per line; `build_threshold_masks` scatters each target into the row of its own tail value and runs one suffix scan for the lower family and one prefix scan for the upper family instead of rescanning every target per bound. Both previous implementations are retained verbatim as `#[cfg(test)]` differential references. |
+| `9a02921` | `signed_flip_reachability` becomes public, and the budget-parameterised `defect:flip-scalar:<budget>` and `defect:flip-pencils:<budget>` workloads are added. |
+
+In `ergodis-private`, `b25cb13` deletes `src/flip_reachability.rs` and its benchmark subcommand: the
+core now owns the collapsed scan, its elementary reference, and the differential between them, so the
+private copy was duplication. Its lines in the two shared files were removed by an exact staged patch
+so that the other agents' concurrent `compiled_transducer`, `counted_family`, `policy_worklist`,
+`window_exactness`, `family_audit` and `transducer_bench` lines stayed in the working tree.
+
+### Why the scan had to be made public to be measured at all
+
+The measurement plan called for the budget-12/13 diagnostics, and finding them exposed a fact about
+the module that is worth recording on its own. `analyze_fixed_maximal_set` computes
+`correction_budget = 19 - baseline_defect` and returns immediately when that is negative. On the
+seeded 54-point set the benchmark can construct — the same deterministic walk the criterion benchmark
+uses — the analysis reports `baseline_defect: 640`, `correction_budget: -621`. **No constructible
+54-point set reaches the scan through the analysis entry point**, because a set with defect at most 19
+is precisely the open object the whole branch is searching for. The scan's real inputs are
+hypothetical near-maximal sets, so through the public surface as it stood the scan was both
+unmeasurable and untestable at a chosen budget.
+
+That is the reason for `9a02921`. Publishing the primitive lets a caller ask the same reachability
+question at a chosen budget without owning a complete maximal set, which is what makes budgets 12 and
+13 measurable, and it is also what makes the private replica convertible — the alternative to deleting
+it was a differential against an entry point that did not exist.
+
+It also explains the `defect:analysis` workload showing no change between the arms: it never reaches
+either kernel. It is retained as an end-to-end regression, not as a speed measurement.
+
+### Correctness
+
+Differentials against the previous implementations, all in `src/defect.rs`:
+
+- `collapsed_flip_scan_matches_the_elementary_scan_on_the_real_plane` — PG(2,27) at five seated
+  prefixes including the full 54, every budget 0 to 19.
+- `collapsed_flip_scan_matches_on_every_pencil_of_the_real_plane` — all 757 pencils of 28 lines, five
+  budgets each.
+- `collapsed_flip_scan_matches_on_hostile_multisets` — 2,000 random multisets, every budget.
+- `threshold_masks_match_the_per_bound_construction` — the real catalogue's masks compared bit for
+  bit against the per-bound construction, and against the masks the catalogue actually stores.
+
+The pre-existing suite is unchanged and passes, including `signed_flip_dp_matches_subset_enumeration`
+(the scan against brute-force subset enumeration) and
+`gf27_catalog_matches_independent_python_counts` (3,435 pairs, 1,013 targets, 1,496 spectra).
+
+Zero-allocation regression: `gf27_fixed_maximal_analysis_allocates_nothing` in
+`tests/contextual_allocations.rs` drives the terminal analysis of a complete 54-point set sixteen
+times through the crate's counting allocator and asserts zero allocator events. The scan is on the
+per-terminal-node path of the search, so this is the required hot-loop gate.
+
+Work-count agreement between the two arms, on all seven workloads, `work` and `checksum` identical:
+
+```
+defect:flip-scalar:12   1514 46912495419392     defect:catalog   2026 5018
+defect:flip-scalar:13   1514 93824991887360     defect:analysis  1516 596
+defect:flip-pencils:12  42392 4140068797153280  defect:search    529256 527802
+defect:flip-pencils:13  42392 5654702737850368
+```
+
+Single-thread and parallel: the defect path contains no rayon and no threads, so the requirement is
+that enabling parallelism changes nothing. A `--features parallel` build reproduces every `work` and
+`checksum` above exactly, and `defect:search` is identical at `RAYON_NUM_THREADS` of 1, 2 and 8
+(264,628 nodes, checksum 263,901 in every case).
+
+### Interleaved paired A/B
+
+Arms are two retained executables carrying the identical harness:
+
+| arm | retained name | SHA-256 |
+|---|---|---|
+| control (pre-collapse kernels) | `bench_kernels-979db9c` | `833604150c56a0a42d4f68b01e7782595565f93bf1595a406ef3d369b0aa4a68` |
+| candidate (collapsed kernels) | `bench_kernels-9a02921` | `667f6183cf1b8fd6624891bab9a7e8230c6905ffd32d03817d023d9d5e6619e2` |
+
+The control was built in a detached worktree at `eb349ce` with the harness from `9a02921` and the
+four-line visibility patch applied, committed there as `979db9c` so `retain-bin.sh` could name it;
+that commit is not on any branch, and the retained binary plus its hash is the durable record.
+
+Seven interleaved rounds; each round runs both arms on each workload at two repetition counts and
+differences them, so process startup, plane construction and fixture building cancel. Instructions are
+the primary metric; ratios are one-sample t intervals on the per-round log ratios.
+
+| workload | n | control instructions | candidate | instruction speedup | 95% CI | t | cycle speedup | 95% CI |
+|---|---|---|---|---|---|---|---|---|
+| `defect:flip-scalar:12` | 7 | 109,285 | 7,360 | **14.848x** | [14.848, 14.849] | 648,402 | 8.348x | [7.566, 9.212] |
+| `defect:flip-scalar:13` | 7 | 118,414 | 7,666 | **15.447x** | [15.446, 15.447] | 600,771 | 9.297x | [9.233, 9.361] |
+| `defect:flip-pencils:12` | 7 | 4,101 | 1,908 | **2.150x** | [2.150, 2.150] | 155,348 | 2.162x | [2.130, 2.195] |
+| `defect:flip-pencils:13` | 7 | 4,439 | 2,064 | **2.151x** | [2.151, 2.151] | — | 2.208x | [2.177, 2.240] |
+| `defect:catalog` | 7 | 46,814,181 | 9,292,637 | **5.038x** | [5.038, 5.038] | 948,149 | 3.866x | [3.685, 4.056] |
+| `defect:search` (negative control) | 7 | 567,142,496 | 567,142,691 | 1.000x | [1.000, 1.000] | −4.0 | 0.998x | [0.985, 1.011] |
+
+Every interval on the five measured workloads excludes 1.0 on both metrics. The scalar figures are per
+whole-plane scan, the pencil figures per single pencil scan, the catalogue figure per construction,
+and the search figure per search.
+
+`defect:search` is the negative control and behaves like one: 195 instructions of difference on 567
+million, a relative change of 3.4 parts in ten million. It reaches neither kernel — the catalogue is
+built once outside the differenced region and the terminal analysis short-circuits — so the collapse
+correctly does nothing there.
+
+The pencil win is the smaller one for the reason Part C gave: 28 lines with multiplicities near four,
+where the tally pass itself costs a pass over those entries. Probe 8's private-replica measurement of
+the scalar scan was 19.31x at budget 19; at budgets 12 and 13 the elementary baseline does less work
+per fold, so the ratio falls to 14.85x and 15.45x. The two measurements agree in shape, and the budget
+is the parameter that moves them.
+
+### Validation gate
+
+```
+cd /home/tavis/src/ergodis
+cargo fmt --check                                             # clean
+cargo clippy --all-targets --all-features -- -D warnings      # clean
+cargo test --all-features                                     # 747 passed, 0 failed
+nix shell nixpkgs#python3 --command python3 python/test_algorithms.py   # 79 tests, OK
+cargo test --test contextual_allocations gf27                 # zero-allocation regression
+../ergodis-contrib/scripts/cache-gc.sh                        # dry run only, nothing applied
+```
+
+The Python oracle differential is the defect module's existing one: `python/test_algorithms.py`'s
+`DefectShellTests` derives the shell histograms and the GF(27) pair census independently, and the Rust
+side asserts the same counts. My change is downstream of the targets those tests fix, and the mask
+differential compares the new construction to the old bit for bit, so the chain from oracle to stored
+masks is closed.
+
+### A hazard worth recording for other agents
+
+Building the control in a git worktree while the main checkout shares
+`~/.cache/ergodis/target/ergodis` silently produced two *identical* retained binaries: cargo keys
+fingerprints by source path but writes both to the same `release/bench_kernels`, so the worktree build
+overwrote the candidate and the main checkout then considered its own artifact fresh and did not
+relink. The first `retain-bin.sh` of the candidate therefore captured the control's bytes, and the
+manifest still carries that superseded row (`bench_kernels-9a02921` at `8336041...`, 13:52:20) ahead of
+the correct one (`667f6183...`, 13:52:57). The retained file on disk is the correct one. The fix is to
+delete the shared output path and force a relink before retaining after any worktree build, and the
+check that catches it is comparing the two arms' SHA-256 values before trusting a single measurement.
+`retain-bin.sh` refusing to overwrite `bench_kernels-eb349ce` is what surfaced the collision.
+
+### Mystery ledger, follow-up
+
+- **The whole flip scan is unreachable through the module's public analysis.** Recorded above, and it
+  is a statement about the search rather than about my change: a set with defect at most 19 is the open
+  object, so until one exists the scan runs only on hypotheticals. The collapse still matters, because
+  the scan is on the per-terminal-node path the moment such a set appears, but no end-to-end workload
+  can show it today. Settled by measurement, not open.
+- **The catalogue win is 5.04x on instructions but 3.87x on cycles.** The scanned construction touches
+  the same mask block three times (scatter, suffix, prefix) where the per-bound construction streamed it
+  once, so it trades instructions for memory traffic. Still a large win on both metrics; the gap is the
+  reason the two ratios differ, and it was not separately profiled.
+- **`defect:flip-scalar:12`'s cycle interval is wide** ([7.57, 9.21]) where its instruction interval is
+  degenerate and the budget-13 cycle interval is tight. The box was carrying other agents' builds; the
+  instruction ratio is the reliable statistic.
+- No correctness mystery. Both collapses are bit-exact against their predecessors on the real plane, on
+  every pencil, on hostile multisets, and on the real catalogue.
+
+### Vibe check
+
+Clean landing. Two kernels collapsed in the core under the full gate with decisive instruction wins
+(14.8x and 15.4x on the budget-12/13 scans, 5.0x on the catalogue), a negative control that correctly
+shows nothing, bit-exact differentials against both predecessors, and the private duplicate deleted.
+The uncomfortable finding is the one that has nothing to do with performance: the scan the search
+depends on cannot be reached by any set anyone can currently build, which says more about how far the
+defect-19 branch is from a survivor than any of the ratios do.
