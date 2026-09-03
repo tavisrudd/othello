@@ -471,10 +471,27 @@ mod tests {
     use super::*;
     use std::io::Write;
 
+    /// Writable scratch directory for CNF fixtures: `$XDG_CACHE_HOME`, else
+    /// `$HOME/.cache`, else the system temporary directory. The chosen root is
+    /// always suffixed with `ergodis` and created if missing, so fixtures never
+    /// land outside a cache root or a temporary directory.
     fn test_cache() -> std::path::PathBuf {
-        std::env::var_os("XDG_CACHE_HOME")
+        let root = std::env::var_os("XDG_CACHE_HOME")
             .map(std::path::PathBuf::from)
-            .unwrap_or_else(|| std::env::current_dir().unwrap().join("target"))
+            .or_else(|| {
+                std::env::var_os("HOME").map(|home| std::path::PathBuf::from(home).join(".cache"))
+            })
+            .unwrap_or_else(std::env::temp_dir);
+        let dir = root.join("ergodis");
+        match std::fs::create_dir_all(&dir) {
+            Ok(()) => dir,
+            Err(_) => {
+                let fallback = std::env::temp_dir().join("ergodis");
+                std::fs::create_dir_all(&fallback)
+                    .expect("no writable cache or temporary location");
+                fallback
+            }
+        }
     }
 
     #[test]
