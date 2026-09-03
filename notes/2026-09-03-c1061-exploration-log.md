@@ -91,3 +91,25 @@ one-line pointer here.
   segment trees; only "historical decision provenance for an optimization answer" looks
   unoccupied and is a composition of two mature ideas. Accessor hook for `delta_composition`
   described in the report, not applied.
+- 2026-09-03 — probe 5: snapshot-bind acceleration. Report:
+  `2026-09-03-c1061-probe5-snapshot-bind-acceleration.md` (ergodis-private `6403357`). Verdict:
+  **promote, layout-conditional**. Canonicalization defect fixed: `LeafClassKey` sorts
+  (capacity, multiplicity) pairs and keys the two global-parity capacities by their sum, exact
+  for every demand residue because both kernel feasibility tests are symmetric functions of that
+  multiset (40,000 hostile draws). Wins: leaf-class memoization 4.4x on a 24-rack-type fleet
+  (99.85% hit rate); run composition by repeated squaring 276 to 292x on a blocked fleet (25 runs
+  over 16,384 pods); budget profile 19x per grain change. Negatives: memoization is a 34%
+  slowdown on a fleet of unique pods (4% hit rate); witness run-length compression is 1.0x on an
+  interleaved fleet. Fleet layout is the hidden parameter behind both big wins.
+  Snapshot-from-snapshot beats a full rebuild by three to four orders of magnitude at every k;
+  merged bottom-up rebuild wins over independent paths for large k and loses slightly at k=1,
+  dispatch threshold between k=4 and k=16. Budget dependence reduces to composing precompiled
+  matrices, so `BudgetGrainChanged` moves from a rebase exit to an in-envelope parametric event
+  (0.85 ms, no kernel call). Redirects: the hostile stream shows the class space is not small
+  (193,473 classes per 200,000 draws) even though only two to three tropically normalized
+  summaries occur, so the table must be keyed on the summary, not the class; witness O(pods) cost
+  is kernel-bound materialization, so serving witnesses from the class cache is the highest-value
+  follow-on.
+- 2026-09-03 — probe 3 follow-up launched: hash backend A/B on the certified path (sha2 baseline,
+  SHA-NI/asm sha2, BLAKE3 single and batch, non-cryptographic lower bound, fewer hash calls).
+  Certificate work is engineering, not a paper; no further novelty effort.
