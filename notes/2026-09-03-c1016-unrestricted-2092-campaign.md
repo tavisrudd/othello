@@ -40,6 +40,58 @@ seed and reproduces the recorded control exactly, later chunks derive a fresh
 coordinator seed, and each finished chunk appends one JSON line. It is committed
 on the branch `c1016-full-2092-campaign` in the private worktree.
 
+## Final result: sixteen chunks, stopped deliberately
+
+The campaign ran 4h04m and was stopped on request after sixteen chunks:
+288,000,000,000 mutations, 288 independent worker runs, eight seed families
+reaching 96 and eight reaching 128, no q29 shell hit and no exact hit. The
+campaign best q29 residual is 96, the same value the earlier recorded
+18,000-profile campaign reached, and it never improved.
+
+| Worker best q29 residual | Runs |
+|--------------------------|------|
+| 96                       | 12   |
+| 128                      | 53   |
+| 160                      | 104  |
+| 192                      | 91   |
+| 224                      | 27   |
+| 256                      | 1    |
+
+Retained evidence is committed on the branch `c1016-full-2092-campaign` of
+`ergodis-private` at `f7aba58`, under
+`evidence/c1016-unrestricted-2092-campaign/` with `SHA256SUMS` covering the
+campaign log, the launcher, the watcher, and the executed binary.
+
+## Why the residuals are quantized, and what the floor is
+
+The phase-one score is the squared error of the combined q29 PAF against 2020
+at shift zero and -72 at each of the fourteen off-zero shifts. Three exact facts
+pin its arithmetic, and together they explain the observed value set completely.
+
+The shell fixes the zero shift, so all error lives off zero. The global
+autocorrelation sum law gives the already-banked all-ones relation: summing the
+combined PAF over all twenty-nine shifts equals the sum of squared row sums,
+which is 4 for row sums `(2,0,0,0)`, so `2020 + 2 sum_{s=1..14} P(s) = 4` and
+the fourteen off-zero deviations `d(s) = P(s) + 72` sum to zero. Because every
+q29 coefficient is even, each block PAF is divisible by four and every `d(s)` is
+too, so `d = 4e` where `e` is the residual of the halved system against
+`(505,-18,...,-18)`.
+
+Hence `score = 16 sum e(s)^2`, and `sum e(s) = 0` forces `sum e(s)^2` to be
+even. Every attainable score is therefore a multiple of 32 — which is exactly
+what 288 worker runs show, with no exception. The campaign floor of 96 is the
+statement `sum e(s)^2 >= 6`, and every residual-96 state examined has `e` in
+`{-1,0,1}` with exactly three coordinates at `+1` and three at `-1`.
+
+The sharp open question is now arithmetic rather than computational: the linear
+constraints admit `sum e^2 = 2` (one coordinate `+1`, one `-1`) and `4`, yet
+neither ever occurs. Either a further exact obstruction excludes small-support
+deviations, in which case the floor is a theorem and the search family is
+provably shell-free, or they are reachable and every annealer so far has been
+trapped. The residual-floor census now running harvests every worker's own best
+state, not just the chunk winner, to give the relation miner the whole left tail
+of this distribution to work on.
+
 ## Results after eight chunks
 
 144,000,000,000 mutations in 7,333 seconds, 916.6 seconds per chunk, eight
