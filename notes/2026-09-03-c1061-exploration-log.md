@@ -27,3 +27,19 @@ one-line pointer here.
   finiteness of the quotient; several semirings over one topology; bind a real capacitated batch
   kernel (`azure_lrc_12_2_2_counted`); `schedule_repair_dag` is not a candidate (subset-mask BFS
   has no per-leaf factorization).
+- 2026-09-03 — probe 2: real kernel binding, witness deltas, quotient finiteness. Report:
+  `2026-09-03-c1061-probe2-real-kernel-witness-deltas.md` (ergodis-private `525a82b`). Verdict:
+  **promote**. A fleet of LRC(12,2,2) pods bound as leaves of the retained tree, coupled only
+  through a four-level shared cross-rack repair budget; `FleetSchema` separates stable schema
+  from mutable parameters and derives each event's affected leaf set from declared schema facts;
+  grain and pod-count events return `RebaseRequired`. At 16,384 pods: fresh solve 19.1 ms vs
+  delta mean 1.89 us, break-even 1.13 updates, zero allocations. Delta cost is flat in fleet
+  size because the ten kernel calls per leaf dominate the log-depth walk, so probe 1's
+  monoid-collapse win does not transfer here. Witness deltas: argmin split labels repaired on
+  the same path, +35% per update, +17% state; reading the whole witness out stays O(pods)
+  (2.6 ms, only 7x below fresh). Tropical normalization: 2 normalized leaf classes (from 25 raw)
+  and 4 root classes (from 1,338 raw) over 20,000 events, so a four-state weighted transducer
+  plus scalar offset is a real target; measured reachable set, not a proved bound. Symmetry
+  finding: sorting data-domain capacities is exact only when demand is a multiple of six
+  (multiplicity vector), so it applies to 23% of pods; fix is canonicalizing
+  (capacity, multiplicity) pairs. Open: witness readout locality; proved class bound.
