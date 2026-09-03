@@ -133,3 +133,23 @@ one-line pointer here.
   Superseded: the "95% of the certified path is hashing" figure was a cross-binary artifact;
   within one binary it is 75% at depth 10 and 68% at depth 14. All eight gates pass on all four
   backends; zero-allocation regression passes with the new default.
+- 2026-09-03 — probe 6: summary-keyed cache, witness serving, dispatch threshold, and counter
+  re-measurement of probes 2 and 5. Report:
+  `2026-09-03-c1061-probe6-summary-keyed-cache-and-witness-serving.md` (ergodis-private
+  `c2e1ac5`). Verdict: **promote; delete the cache**. Unfolding the LRC kernel shows its
+  global-capacity rejection is dead code and the per-domain multiplicity test collapses to one
+  scalar bound A(s) <= min_d(c_d + m_d) with A increasing, so the repaired count is decided in
+  closed form (2.1M hostile comparisons, exact kernel fallback): 8.2x (rack) and 8.6x (unique)
+  fewer instructions than kernel-per-leaf, beating both memos. Re-keying still confirmed as
+  structure: on the unique fleet the parameter-class table had 15,718 entries at 4% hits; the
+  budget-response table has 82 entries at 99.5% hits with three normalized shapes, reconciling
+  probes 2 and 5. Witness serving from stored responses: 1.21M instructions on every fleet
+  shape vs 14.6 to 15.8M kernel-resolved, 12 to 13x (cycle CIs [10.0, 14.6]), 10 bytes per pod;
+  residual is tree descent, still O(pods). Dispatch rule refuted by measurement: merged rebuild
+  wins from k = 4 (not k >= leaves/64) and grows to 1.46x at k = 4,096; threshold is a measured
+  constant. Counter re-measurement (8 rounds, paired log-ratios): most claims confirmed or
+  larger; three changed: witness delta overhead +44% not +35%; blocked-fleet witness run
+  readout 20.9x not 343x (wall timed an 86 ns op); rebind over full rebuild at k = 4,096 is
+  1.74x not 11.5x (wall charged a clone both paths do). Instruction counts are deterministic
+  under load, cycle CIs wide, so instructions are primary; rack-fleet run readout inconclusive
+  on cycles.
