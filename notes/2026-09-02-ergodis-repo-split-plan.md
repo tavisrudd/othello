@@ -85,12 +85,20 @@ infrastructure, task crates, the absorption list.
 
 ## Public/private branching model
 
-One repository, `~/src/ergodis`, two long-lived branches and two remotes.
+One private repository, `~/src/ergodis`, with two long-lived branches, and a separate local
+staging clone, `~/src/ergodis-public`, that is the only checkout connected to GitHub. The private
+repository has no GitHub remote at all; its single remote is the staging path on disk.
 
 | Branch   | Role                                                                 | Remote                                  |
 |----------|----------------------------------------------------------------------|-----------------------------------------|
-| `main`   | Private. Full replayed history, task IDs, contributor docs, evidence pointers. | `private` (a private GitHub repo or none; never the public one) |
-| `public` | Published. Each commit is a filtered snapshot of `main` at an export point, parented on the previous public commit. | `public` = `git@github.com:tavisrudd/ergodis.git`, pushed as its `main` |
+| `main`   | Private. Full replayed history, task IDs, contributor docs, evidence pointers. | none (optionally a private remote later; never a public one) |
+| `public` | Published line. Each commit is a filtered snapshot of `main` at an export point, parented on the previous public commit. | `staging` = `~/src/ergodis-public` (local path), single refspec `public:main` |
+
+Publishing is two hops: `publish-to-staging.sh <tag>` in the private repo pushes the recorded,
+lint-clean, tagged `public` tip to the staging clone; then `publish.sh <tag>` inside
+`~/src/ergodis-public` reruns the lint on the checked-out tree and pushes `main` and the tag to
+GitHub. Both hops require `ERGODIS_PUBLISH=1`, both park their push URL at `no-push://` between
+publishes, and the private repo's hook rejects any non-local push URL outright.
 
 **Export is a snapshot, not a merge.** `scripts/export-public.sh <private-rev> <message-file>`:
 
