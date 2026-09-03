@@ -352,9 +352,42 @@ combined spectrum is `sum_r |Y_r(chi)|^2 = 523 + e-hat(chi)` in halved units.
 Assuming a deviation pattern therefore requires a totally positive algebraic
 integer of `Z[zeta_29]^+` to be a sum of four Hermitian norms, coherently across
 one Galois orbit. That is the same fixed-field norm-equation mechanism that
-closed the `g=91` order-29 sector by a binomial and three-square argument, and it
-is cheap to evaluate per pattern. It belongs in front of the 442 feasibility
-instances as a filter, not behind them.
+closed the `g=91` order-29 sector by a binomial and three-square argument. It
+looked like a cheap filter to put in front of the 442 feasibility instances; the
+next subsection shows that it, and every congruence filter, prunes nothing.
+
+### Why no congruence can ever exclude a deviation pattern
+
+Writing the spectral filter down showed that it, and every congruence filter,
+is dead — which explains the earlier blind congruence negative structurally
+rather than empirically.
+
+Reduce the system modulo a prime `p` and work in the group algebra
+`F_p[Z/29]`. Each row becomes `u_r`, and the periodic correlation of a row is
+`u_r(X) u_r(X^{-1})`, so the whole system is
+`sum_r u_r(X) u_r(X^{-1}) = A(X)`. For `p = 2` the structure is completely
+explicit: 2 is a primitive root modulo 29, so `F_2[Z/29] = F_2 x F_{2^28}`, and
+because `2^14 = -1` modulo 29 the inversion `X -> X^{-1}` is the Frobenius of
+order 14. Hence `u ubar = u^{1+2^14}` is exactly the norm from `F_{2^28}` down
+to `F_{2^14}`, the system is a sum of four norms, that norm map is surjective,
+and any self-conjugate target — which every even correlation vector is — is
+attained. The same argument runs at every prime: inversion either fixes a
+component, making the constraint a norm, or pairs two components, making it a
+conjugate pair, and four summands leave slack in both cases.
+
+So the mod-`p` reduction of the four-block correlation system is solvable for
+every prime and every deviation pattern, residual-32 patterns included. A
+direct randomized check confirms it: a modulo-two solution for the residual-32
+target with support classes 1 and 5 turns up within ten thousand random
+four-row draws.
+
+The consequence is a redirection. The banked negative from the seven-prime
+blind congruence search was not a failure of search design; no congruence
+invariant of any modulus can see this question. Any obstruction has to come
+from integrality together with the bounds — energy 505 spread over four rows
+with coefficients at most nine in absolute value — which is a lattice and
+counting argument, not an arithmetic one. The contraction ladder above is a
+lattice argument; the norm-equation pre-filter is not, and is withdrawn.
 
 ### What was not adopted
 
