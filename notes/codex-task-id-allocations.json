@@ -4238,8 +4238,35 @@
       "last": 1050,
       "purpose": "re-run application benchmark table after the counted-type scheduler reduction; retire the subsumed application-specific demand compiler",
       "sequence": 471
+    },
+    {
+      "count": 1,
+      "first": 1051,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1051,
+      "purpose": "evolve representation-search spike: typed encoder grammar scored by bytes and access cycles, admitted by round-trip replay",
+      "sequence": 472
+    },
+    {
+      "count": 1,
+      "first": 1052,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1052,
+      "purpose": "scheduler dense-lattice backend: workspace port, prefix buffer reuse, u16 prefix (T1+M1+M2)",
+      "sequence": 473
+    },
+    {
+      "count": 1,
+      "first": 1053,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1053,
+      "purpose": "repair DAG BFS single-map merge (T3)",
+      "sequence": 474
     }
   ],
-  "next_id": 1051,
+  "next_id": 1054,
   "schema": "codex-task-id-allocations-v1"
 }
