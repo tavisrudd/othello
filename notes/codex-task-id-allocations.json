@@ -4310,8 +4310,17 @@
       "last": 1058,
       "purpose": "Ergodis repository split: core to ~/src/ergodis with private main and squashed filtered public branch; companion repos; promotion and docs",
       "sequence": 479
+    },
+    {
+      "count": 1,
+      "first": 1059,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1059,
+      "purpose": "publication guard tooling: export-public.sh, public lint, .publicignore, pre-push hook, remote refspec config, CI lint, fixture tests",
+      "sequence": 480
     }
   ],
-  "next_id": 1059,
+  "next_id": 1060,
   "schema": "codex-task-id-allocations-v1"
 }

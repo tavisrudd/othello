@@ -115,7 +115,7 @@ Because every public commit is a full filtered snapshot, the public history is a
 sequence of release-sized commits, `git diff` between two public commits equals the filtered
 diff of the private range, and nothing needs rebasing. Squash semantics come for free.
 
-**Guards against leaking `main`:**
+**Guards against leaking `main`** (delivered by C1059 before any export; versioned hooks under `hooks/` installed through `core.hooksPath`, with fixture tests):
 
 - The `public` remote is configured with a single push refspec
   `refs/heads/public:refs/heads/main` and `remote.public.pushurl` only; `git push public main`
