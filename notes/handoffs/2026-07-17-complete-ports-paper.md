@@ -696,6 +696,10 @@ formalization, read the paper-specific expert dossier
 
 C985 follows C983 as a separate optimization-facing paper research task and
 does not block C984, C325, or C953.
+C1061 is an open-ended Ergodis exploration of compiled dynamic decision engines (snapshot compile,
+delta updates, event-sourced optimizer state); its brief is
+`2026-09-03-c1061-ergodis-compiled-dynamic-solver-brief.md` and its running log is
+`2026-09-03-c1061-exploration-log.md`. Its code lives in `~/src/ergodis-private`.
 C1016 is active as a private Ergodis reduction-synthesis pilot. A hostile review found that its
 unapproved presentation-hash/feature-name overlay did not establish extractor semantics. Public
 proof authority, `Necessary`, and all Hadamard/GS code are therefore removed; core again advertises
