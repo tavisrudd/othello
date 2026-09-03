@@ -208,12 +208,8 @@ cargo test --test delta_composition_allocations              # 1 passed
 cargo fmt --all --check
 cargo clippy --workspace --all-targets -- -D warnings        # clean
 cargo build --release -p ergodis-tools
-cargo test --workspace                                       # full private workspace, still
-                                                             # running at report time; the
-                                                             # change is additive (one new
-                                                             # module, one new test file, one
-                                                             # new subcommand) and every
-                                                             # targeted gate above passed
+cargo test --workspace                                       # full private workspace: all nine
+                                                             # test binaries ok, no failures
 ```
 
 Committed in `ergodis-private` as `cbf2332`. No change was made in `/home/tavis/src/ergodis`

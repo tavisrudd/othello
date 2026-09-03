@@ -178,3 +178,22 @@ one-line pointer here.
   5's negative control says is layout-dependent. Two cross-domain rules added to the brief: the
   chain delta speedup is set by the leaf-to-composition cost ratio, not chain length; symmetry
   reduction is an instance-structure win, never a structural bound.
+- 2026-09-03 — probe 7: other domains and shapes (QEC, security policy automaton, routing).
+  Report: `2026-09-03-c1061-probe7-other-domains-and-shapes.md` (ergodis-private `cc59d6a`).
+  Verdicts: **QEC time-axis chain: drop beyond small distance**; **policy automaton: promote**;
+  **routing: conditional**. QEC syndrome decoding as a min-plus chain over rounds has the best
+  update algebra so far (toggles commute and are involutions: elementary abelian 2-group, exact
+  run collapse, free rollback) but interface width is 2^D and per-event instructions grow about
+  8x per unit of distance (5,040 at D=2 to 22.0M at D=6). Delta vs fresh (8 rounds, two-size
+  differencing): syndrome 134.7x instructions (CI tight) and 114x cycles (CI [95.6, 136]);
+  policy 13.0x instructions and 39x cycles (CI [30.1, 50.5]). Rule added: a chain's delta
+  speedup is set by the leaf-to-composition cost ratio, not chain length, which predicts probe
+  2's 10,000x, 135x, and 13x with one model. Negatives: compiling syndromes by automorphism
+  orbit only divides a 2^m table by the group order; "one decomposition, several semirings"
+  needs the summary to be a matrix, not a function (the deterministic policy summary is a
+  function, 17x cheaper composition, no functor freedom). Policy automaton is the only domain
+  with a finite congruence by construction (626-element transition monoid at 17 states,
+  emittable as a compiled transducer today); single rule edits only refine the Myhill--Nerode
+  partition in 1,500 trials, licensing a split-only incremental minimizer, with a 128x wider
+  affected set than a path. Ranking revision: QEC about 3, security policy 5 with that caveat,
+  routing conditional pending a boundary-class-collapse measurement.
