@@ -7,6 +7,7 @@ use crate::zdd::{DirectMemo, Zdd, EMPTY, UNIT};
 use num_bigint::BigUint;
 use num_traits::ToPrimitive;
 use rustc_hash::{FxHashMap, FxHashSet};
+use std::collections::hash_map::Entry;
 use std::collections::VecDeque;
 use thiserror::Error;
 
@@ -1026,6 +1027,50 @@ pub struct RepairDagAnswer {
     pub states_examined: u64,
 }
 
+/// One BFS visit record for [`schedule_repair_dag`].
+///
+/// The BFS previously kept `distance: FxHashMap<u64, u16>` and
+/// `parent: FxHashMap<u64, (u64, u64)>` keyed by the same subset mask, so every
+/// visited state was hashed twice and probed twice. Both maps always received
+/// the same key on the same line, so a single map to this record carries
+/// exactly what the pair carried and the visited predicate is unchanged.
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+struct RepairVisit {
+    /// The predecessor state this record was reached from (the old `parent.0`).
+    previous: u64,
+    /// The batch of tasks scheduled on the transition (the old `parent.1`).
+    batch: u64,
+    /// Slots used to reach the state (the old `distance` value).
+    distance: u16,
+}
+
+const _: () = assert!(
+    size_of::<RepairVisit>() == 24 && align_of::<RepairVisit>() == 8,
+    "RepairVisit layout regression"
+);
+
+/// Upper bound on the entries presized for the repair-DAG BFS.
+///
+/// The reachable-state count is bounded by `budget` and by `2^tasks.len()`, but
+/// both can be astronomically larger than any instance this kernel is intended
+/// for, so the presize is capped.
+///
+/// The cap is measured, not guessed. The repair-DAG headline row visits four
+/// states per solve, so every reserved byte is pure overhead there: a 4096-entry
+/// reservation cost about 8 microseconds of page faults per fresh process
+/// (cold wall +59%) and a 256-entry one still cost about 7,000 cycles per solve
+/// (warm-batch wall +9%), both of which swamp the roughly 1,500 instructions per
+/// solve the map merge saves. At 64 entries the reservation is about 2 KiB of
+/// map plus 512 bytes of queue, small enough to be served from the existing
+/// heap arena without touching new pages. See
+/// `notes/2026-09-02-c1053-repair-dag-map-merge.md` for the A/B tables.
+///
+/// An instance that reaches more than this many states still grows both
+/// containers; bounding that case needs the designed capacity-exhaustion path
+/// `PERFORMANCE.md` calls for, which is a larger change than this one.
+const REPAIR_DAG_RESERVATION_CAP: u64 = 64;
+
 /// Exact unit-slot scheduler for a repair DAG with multidimensional per-slot
 /// capacities. It is intended for compact RDAGs after algebraic compilation.
 pub fn schedule_repair_dag(
@@ -1047,69 +1092,125 @@ pub fn schedule_repair_dag(
         return Err(ApplicationError::Shape);
     }
     let complete = (1u64 << tasks.len()) - 1;
-    let mut queue = VecDeque::from([0u64]);
-    let mut distance = FxHashMap::default();
-    let mut parent = FxHashMap::default();
-    distance.insert(0u64, 0u16);
+    // Presize both the map and the queue from the reachable-state bound so the
+    // BFS never grows them, and allocate the per-batch load accumulator once
+    // instead of inside `batch_fits`.
+    let state_bound = if tasks.len() >= 64 {
+        u64::MAX
+    } else {
+        1u64 << tasks.len()
+    };
+    let reservation = budget.min(state_bound).min(REPAIR_DAG_RESERVATION_CAP) as usize;
+    let mut queue = VecDeque::with_capacity(reservation);
+    queue.push_back(0u64);
+    let mut visits: FxHashMap<u64, RepairVisit> = FxHashMap::default();
+    visits.reserve(reservation);
+    visits.insert(
+        0u64,
+        RepairVisit {
+            previous: 0,
+            batch: 0,
+            distance: 0,
+        },
+    );
+    let mut loads = vec![0u32; capacities.len()];
     let mut states_examined = 0u64;
-    while let Some(done) = queue.pop_front() {
-        states_examined += 1;
-        if states_examined > budget {
-            return Err(ApplicationError::Budget { budget });
-        }
-        if done == complete {
-            let mut batches = Vec::new();
-            let mut cursor = done;
-            while cursor != 0 {
-                let &(previous, batch) = parent.get(&cursor).ok_or(ApplicationError::Shape)?;
-                batches.push(
-                    (0..tasks.len())
-                        .filter(|&task| batch & (1u64 << task) != 0)
-                        .map(|task| task as u8)
-                        .collect::<Vec<_>>()
-                        .into_boxed_slice(),
-                );
-                cursor = previous;
+    let mut goal = None;
+    {
+        // The visit order is identical to the two-map version. The ready mask,
+        // the whole-ready fast path, and the `batch = (batch - 1) & ready`
+        // subset descent are untouched, and the visited predicate is the same
+        // set: the old code tested `distance`, whose key set was always
+        // `{0}` united with `parent`'s because both maps were written on the
+        // same line for the same key. So the same successors are pushed in the
+        // same sequence, and the queue is FIFO in both. The only removed work
+        // is redundant: the second hash and probe per state, and the repeated
+        // `distance[&done]` lookup, which is now read once per popped state.
+        #[cfg(test)]
+        let _allocation_guard = crate::test_alloc::HotLoopAllocationGuard::enter();
+        while let Some(done) = queue.pop_front() {
+            states_examined += 1;
+            if states_examined > budget {
+                return Err(ApplicationError::Budget { budget });
             }
-            batches.reverse();
-            return Ok(RepairDagAnswer {
-                slots: distance[&done],
-                task_batches: batches.into_boxed_slice(),
-                states_examined,
-            });
-        }
-        let ready = tasks
-            .iter()
-            .enumerate()
-            .filter(|(index, task)| done & (1u64 << index) == 0 && task.predecessors & !done == 0)
-            .fold(0u64, |mask, (index, _)| mask | (1u64 << index));
-        if batch_fits(capacities, tasks, ready) {
-            let next = done | ready;
-            if !distance.contains_key(&next) {
-                distance.insert(next, distance[&done] + 1);
-                parent.insert(next, (done, ready));
-                queue.push_back(next);
+            if done == complete {
+                goal = Some(done);
+                break;
             }
-            continue;
-        }
-        let mut batch = ready;
-        while batch != 0 {
-            if batch_fits(capacities, tasks, batch) {
-                let next = done | batch;
-                if !distance.contains_key(&next) {
-                    distance.insert(next, distance[&done] + 1);
-                    parent.insert(next, (done, batch));
+            let done_distance = visits[&done].distance;
+            let ready = tasks
+                .iter()
+                .enumerate()
+                .filter(|(index, task)| {
+                    done & (1u64 << index) == 0 && task.predecessors & !done == 0
+                })
+                .fold(0u64, |mask, (index, _)| mask | (1u64 << index));
+            if batch_fits(capacities, tasks, ready, &mut loads) {
+                let next = done | ready;
+                if let Entry::Vacant(slot) = visits.entry(next) {
+                    slot.insert(RepairVisit {
+                        previous: done,
+                        batch: ready,
+                        distance: done_distance + 1,
+                    });
                     queue.push_back(next);
                 }
+                continue;
             }
-            batch = (batch - 1) & ready;
+            let mut batch = ready;
+            while batch != 0 {
+                if batch_fits(capacities, tasks, batch, &mut loads) {
+                    let next = done | batch;
+                    if let Entry::Vacant(slot) = visits.entry(next) {
+                        slot.insert(RepairVisit {
+                            previous: done,
+                            batch,
+                            distance: done_distance + 1,
+                        });
+                        queue.push_back(next);
+                    }
+                }
+                batch = (batch - 1) & ready;
+            }
         }
     }
-    Err(ApplicationError::Shape)
+    let Some(done) = goal else {
+        return Err(ApplicationError::Shape);
+    };
+    // Witness reconstruction is output serialization, not search: it runs once,
+    // after the BFS, outside the allocation guard.
+    let mut batches = Vec::new();
+    let mut cursor = done;
+    while cursor != 0 {
+        let &RepairVisit {
+            previous, batch, ..
+        } = visits.get(&cursor).ok_or(ApplicationError::Shape)?;
+        batches.push(
+            (0..tasks.len())
+                .filter(|&task| batch & (1u64 << task) != 0)
+                .map(|task| task as u8)
+                .collect::<Vec<_>>()
+                .into_boxed_slice(),
+        );
+        cursor = previous;
+    }
+    batches.reverse();
+    Ok(RepairDagAnswer {
+        slots: visits[&done].distance,
+        task_batches: batches.into_boxed_slice(),
+        states_examined,
+    })
 }
 
-fn batch_fits(capacities: &[u16], tasks: &[RepairTask], batch: u64) -> bool {
-    let mut loads = vec![0u32; capacities.len()];
+/// Decide whether `batch` fits the per-slot capacities.
+///
+/// `loads` is a caller-owned accumulator of exactly `capacities.len()` entries.
+/// It is cleared on entry, so the result does not depend on its incoming
+/// contents; passing it in keeps the BFS loop free of the per-call
+/// `vec![0u32; capacities.len()]` this function used to allocate.
+fn batch_fits(capacities: &[u16], tasks: &[RepairTask], batch: u64, loads: &mut [u32]) -> bool {
+    debug_assert_eq!(loads.len(), capacities.len());
+    loads.fill(0);
     for (task_index, task) in tasks.iter().enumerate() {
         if batch & (1u64 << task_index) == 0 {
             continue;
@@ -1963,6 +2064,190 @@ mod tests {
         assert_eq!(answer.slots, 2);
         assert_eq!(&*answer.task_batches[0], &[0, 1]);
         assert_eq!(&*answer.task_batches[1], &[2]);
+    }
+
+    /// The pre-C1053 two-map body, verbatim except for `batch_fits` now taking
+    /// a scratch buffer. It is the differential reference for visit order,
+    /// the three scalar outputs, and the witness.
+    fn schedule_repair_dag_two_map_reference(
+        capacities: &[u16],
+        tasks: &[RepairTask],
+        budget: u64,
+    ) -> Result<RepairDagAnswer, ApplicationError> {
+        if tasks.len() > 63
+            || tasks.iter().any(|task| {
+                task.loads.len() != capacities.len()
+                    || task.predecessors >> tasks.len() != 0
+                    || task
+                        .loads
+                        .iter()
+                        .zip(capacities)
+                        .any(|(&load, &capacity)| load > capacity)
+            })
+        {
+            return Err(ApplicationError::Shape);
+        }
+        let mut scratch = vec![0u32; capacities.len()];
+        let complete = (1u64 << tasks.len()) - 1;
+        let mut queue = VecDeque::from([0u64]);
+        let mut distance = FxHashMap::default();
+        let mut parent = FxHashMap::default();
+        distance.insert(0u64, 0u16);
+        let mut states_examined = 0u64;
+        while let Some(done) = queue.pop_front() {
+            states_examined += 1;
+            if states_examined > budget {
+                return Err(ApplicationError::Budget { budget });
+            }
+            if done == complete {
+                let mut batches = Vec::new();
+                let mut cursor = done;
+                while cursor != 0 {
+                    let &(previous, batch) = parent.get(&cursor).ok_or(ApplicationError::Shape)?;
+                    batches.push(
+                        (0..tasks.len())
+                            .filter(|&task| batch & (1u64 << task) != 0)
+                            .map(|task| task as u8)
+                            .collect::<Vec<_>>()
+                            .into_boxed_slice(),
+                    );
+                    cursor = previous;
+                }
+                batches.reverse();
+                return Ok(RepairDagAnswer {
+                    slots: distance[&done],
+                    task_batches: batches.into_boxed_slice(),
+                    states_examined,
+                });
+            }
+            let ready = tasks
+                .iter()
+                .enumerate()
+                .filter(|(index, task)| {
+                    done & (1u64 << index) == 0 && task.predecessors & !done == 0
+                })
+                .fold(0u64, |mask, (index, _)| mask | (1u64 << index));
+            if batch_fits(capacities, tasks, ready, &mut scratch) {
+                let next = done | ready;
+                if !distance.contains_key(&next) {
+                    distance.insert(next, distance[&done] + 1);
+                    parent.insert(next, (done, ready));
+                    queue.push_back(next);
+                }
+                continue;
+            }
+            let mut batch = ready;
+            while batch != 0 {
+                if batch_fits(capacities, tasks, batch, &mut scratch) {
+                    let next = done | batch;
+                    if !distance.contains_key(&next) {
+                        distance.insert(next, distance[&done] + 1);
+                        parent.insert(next, (done, batch));
+                        queue.push_back(next);
+                    }
+                }
+                batch = (batch - 1) & ready;
+            }
+        }
+        Err(ApplicationError::Shape)
+    }
+
+    #[test]
+    fn repair_dag_merged_map_matches_the_two_map_reference_exactly() {
+        let mut state = 0x9E3779B97F4A7C15u64;
+        let mut next = || {
+            state ^= state << 13;
+            state ^= state >> 7;
+            state ^= state << 17;
+            state
+        };
+        let mut compared = 0u32;
+        for _ in 0..400 {
+            let coordinates = 1 + (next() % 3) as usize;
+            let count = 1 + (next() % 10) as usize;
+            let capacities = (0..coordinates)
+                .map(|_| 1 + (next() % 3) as u16)
+                .collect::<Vec<_>>();
+            let tasks = (0..count)
+                .map(|index| {
+                    // Predecessors are restricted to earlier tasks so the DAG
+                    // is acyclic and the instance is usually schedulable.
+                    let predecessors = if index == 0 {
+                        0
+                    } else {
+                        next() & ((1u64 << index) - 1)
+                    };
+                    let loads = (0..coordinates)
+                        .map(|coordinate| (next() % u64::from(capacities[coordinate] + 1)) as u16)
+                        .collect::<Vec<_>>()
+                        .into_boxed_slice();
+                    RepairTask {
+                        predecessors,
+                        loads,
+                    }
+                })
+                .collect::<Vec<_>>();
+            let budget = 1 + next() % 4096;
+            let reference = schedule_repair_dag_two_map_reference(&capacities, &tasks, budget);
+            let merged = schedule_repair_dag(&capacities, &tasks, budget);
+            assert_eq!(merged, reference);
+            compared += 1;
+        }
+        assert_eq!(compared, 400);
+    }
+
+    /// The repair-DAG BFS must not allocate once it is entered. The guard
+    /// inside `schedule_repair_dag` brackets the search only; presizing and
+    /// witness serialization sit outside it deliberately.
+    #[test]
+    fn repair_dag_bfs_allocates_nothing_after_entering_the_search() {
+        // A width-3, 3-layer instance whose slot capacities force the subset
+        // descent, so the measured region covers both successor paths and the
+        // repeated `batch_fits` calls, not only the whole-ready fast path.
+        let mut tasks = Vec::new();
+        for layer in 0..3u32 {
+            let predecessors = if layer == 0 {
+                0
+            } else {
+                ((1u64 << 3) - 1) << ((layer - 1) * 3)
+            };
+            for task in 0..3usize {
+                let mut loads = vec![0u16; 2];
+                loads[task % 2] = 1;
+                tasks.push(RepairTask {
+                    predecessors,
+                    loads: loads.into_boxed_slice(),
+                });
+            }
+        }
+        let capacities = [1u16, 1];
+
+        // Warm up outside the measurement so first-call one-time costs cannot
+        // be mistaken for loop allocations.
+        let warm = schedule_repair_dag(&capacities, &tasks, 1 << 20).unwrap();
+        assert!(warm.slots > 3, "instance must force the subset descent");
+        // The reservation is what makes the search allocation-free, so the
+        // instance must stay inside it for this test to mean anything.
+        assert!(
+            warm.states_examined > 1 && warm.states_examined <= REPAIR_DAG_RESERVATION_CAP,
+            "states examined outside the reservation: {}",
+            warm.states_examined
+        );
+
+        for _ in 0..8 {
+            // `measure_allocations` rather than the current-thread helper: the
+            // guard that defines the measured region is the one inside
+            // `schedule_repair_dag`, which brackets the BFS alone.
+            let (answer, events) = crate::test_alloc::measure_allocations(|| {
+                schedule_repair_dag(&capacities, &tasks, 1 << 20).unwrap()
+            });
+            assert_eq!(answer, warm);
+            assert_eq!(
+                events,
+                crate::test_alloc::AllocationEvents::default(),
+                "repair DAG BFS allocated inside the search"
+            );
+        }
     }
 
     #[test]
