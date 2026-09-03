@@ -205,8 +205,9 @@ pub use group_histogram::{
     MAX_GROUP_HISTOGRAM_INPUTS, MAX_GROUP_HISTOGRAM_MEMBERS, MAX_GROUP_HISTOGRAM_VALUES,
 };
 pub use hall::{
-    solve_hall, verify_hall_certificate, verify_hall_result, DenseHallGraph, HallError,
-    HallReplayError, HallResult, HallWorkspace,
+    resolve_hall_layout, solve_hall, solve_hall_graph, solve_hall_sparse, verify_hall_certificate,
+    verify_hall_graph_result, verify_hall_result, DenseHallGraph, HallError, HallGraph, HallLayout,
+    HallOutcome, HallReplayError, HallResult, HallWorkspace, SparseHallGraph, SparseHallView,
 };
 pub use integer_moments::{
     enumerate_integer_moments, seidel_integer_spectrum_is_type2, IntegerMomentError,

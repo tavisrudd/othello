@@ -1,59 +1,35 @@
 //! Allocation-free repeated Hall tests over caller-supplied CSR graphs.
+//!
+//! The kernel this module used to own was promoted into the public core as
+//! `ergodis::hall`'s sparse backend (C1054), which now runs the same algorithm
+//! over either a CSR pool or dense bitmap rows and selects between them from
+//! measured density. Nothing is reimplemented here: this is the private
+//! crate's stable calling shape over the core kernel, kept so that
+//! `hall-certify`, `certiis`, `c80-hall-rematch`, and the `plane12` scouts
+//! continue to compile and to produce byte-identical certificates.
 
-const NONE: u32 = u32::MAX;
-
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
-pub enum HallOutcome {
-    Saturated,
-    Deficient {
-        left_size: usize,
-        neighborhood_size: usize,
-    },
-}
-
-#[derive(Debug, thiserror::Error, Eq, PartialEq)]
-pub enum HallError {
-    #[error("left vertex count exceeds workspace capacity")]
-    LeftCapacity,
-    #[error("right vertex count exceeds workspace capacity")]
-    RightCapacity,
-    #[error("CSR offsets do not describe the left vertex set")]
-    InvalidOffsets,
-    #[error("CSR graph contains a right endpoint outside the declared range")]
-    InvalidEndpoint,
-}
+pub use ergodis::hall::{HallError, HallOutcome};
 
 /// Reusable storage for exact bipartite matching and Hall-deficit extraction.
 ///
 /// `solve` performs no allocation after construction. The deficient set is the
 /// alternating-reachable left set from all unmatched vertices after a maximum
-/// matching; its neighborhood is the corresponding reachable right set.
+/// matching; its neighborhood is the corresponding reachable right set. That
+/// set is independent of which maximum matching was found, so it is the same
+/// under either core layout.
 pub struct HallWorkspace {
-    pair_left: Vec<u32>,
-    pair_right: Vec<u32>,
-    parent_right: Vec<u32>,
-    seen_left: Vec<u32>,
-    seen_right: Vec<u32>,
-    queue: Vec<u32>,
-    epoch: u32,
-    deficient_left: Vec<u32>,
-    deficient_right: Vec<u32>,
+    inner: ergodis::hall::HallWorkspace,
 }
 
 impl HallWorkspace {
     #[must_use]
     pub fn new(max_left: usize, max_right: usize) -> Self {
-        assert!(max_left < NONE as usize && max_right < NONE as usize);
+        let max_left = u32::try_from(max_left).expect("left capacity exceeds compact storage");
+        let max_right = u32::try_from(max_right).expect("right capacity exceeds compact storage");
+        assert!(max_left < u32::MAX && max_right < u32::MAX);
         Self {
-            pair_left: vec![NONE; max_left],
-            pair_right: vec![NONE; max_right],
-            parent_right: vec![NONE; max_right],
-            seen_left: vec![0; max_left],
-            seen_right: vec![0; max_right],
-            queue: vec![0; max_left],
-            epoch: 0,
-            deficient_left: Vec::with_capacity(max_left),
-            deficient_right: Vec::with_capacity(max_right),
+            inner: ergodis::hall::HallWorkspace::new(max_left, max_right)
+                .expect("Hall workspace allocation"),
         }
     }
 
@@ -64,186 +40,42 @@ impl HallWorkspace {
         offsets: &[u32],
         neighbors: &[u32],
     ) -> Result<HallOutcome, HallError> {
-        self.validate(left_count, right_count, offsets, neighbors)?;
-        self.pair_left[..left_count].fill(NONE);
-        self.pair_right[..right_count].fill(NONE);
-        self.deficient_left.clear();
-        self.deficient_right.clear();
-
-        let mut matched = 0;
-        for root in 0..left_count {
-            if self.augment(root, right_count, offsets, neighbors) {
-                matched += 1;
-            }
+        if left_count > self.inner.max_left() as usize {
+            return Err(HallError::LeftCapacity);
         }
-        if matched == left_count {
-            return Ok(HallOutcome::Saturated);
+        if right_count > self.inner.max_right() as usize {
+            return Err(HallError::RightCapacity);
         }
-
-        self.extract_deficiency(left_count, right_count, offsets, neighbors);
-        debug_assert!(self.deficient_right.len() < self.deficient_left.len());
-        Ok(HallOutcome::Deficient {
-            left_size: self.deficient_left.len(),
-            neighborhood_size: self.deficient_right.len(),
-        })
+        let view = ergodis::hall::SparseHallView::new(
+            left_count as u32,
+            right_count as u32,
+            offsets,
+            neighbors,
+        )?;
+        Ok(ergodis::hall::solve_hall_sparse(view, &mut self.inner)?.outcome())
     }
 
     #[must_use]
     pub fn matching(&self, left_count: usize) -> &[u32] {
-        &self.pair_left[..left_count]
+        &self.inner.matching()[..left_count]
     }
 
     #[must_use]
     pub fn deficient_left(&self) -> &[u32] {
-        &self.deficient_left
+        self.inner.deficient_left_indices()
     }
 
     #[must_use]
     pub fn deficient_right(&self) -> &[u32] {
-        &self.deficient_right
-    }
-
-    fn validate(
-        &self,
-        left_count: usize,
-        right_count: usize,
-        offsets: &[u32],
-        neighbors: &[u32],
-    ) -> Result<(), HallError> {
-        if left_count > self.pair_left.len() {
-            return Err(HallError::LeftCapacity);
-        }
-        if right_count > self.pair_right.len() {
-            return Err(HallError::RightCapacity);
-        }
-        if offsets.len() != left_count + 1
-            || offsets.first().copied() != Some(0)
-            || offsets.last().copied() != Some(neighbors.len() as u32)
-            || offsets.windows(2).any(|pair| pair[0] > pair[1])
-        {
-            return Err(HallError::InvalidOffsets);
-        }
-        if neighbors.iter().any(|&right| right as usize >= right_count) {
-            return Err(HallError::InvalidEndpoint);
-        }
-        Ok(())
-    }
-
-    fn next_epoch(&mut self) -> u32 {
-        self.epoch = self.epoch.wrapping_add(1);
-        if self.epoch == 0 {
-            self.seen_left.fill(0);
-            self.seen_right.fill(0);
-            self.epoch = 1;
-        }
-        self.epoch
-    }
-
-    fn augment(
-        &mut self,
-        root: usize,
-        _right_count: usize,
-        offsets: &[u32],
-        neighbors: &[u32],
-    ) -> bool {
-        let epoch = self.next_epoch();
-        let mut head = 0;
-        let mut tail = 1;
-        self.queue[0] = root as u32;
-        self.seen_left[root] = epoch;
-
-        while head < tail {
-            let left = self.queue[head] as usize;
-            head += 1;
-            let begin = offsets[left] as usize;
-            let end = offsets[left + 1] as usize;
-            for &right_u32 in &neighbors[begin..end] {
-                let right = right_u32 as usize;
-                if self.pair_left[left] == right_u32 || self.seen_right[right] == epoch {
-                    continue;
-                }
-                self.seen_right[right] = epoch;
-                self.parent_right[right] = left as u32;
-                let paired_left = self.pair_right[right];
-                if paired_left == NONE {
-                    self.flip_path(right_u32);
-                    return true;
-                }
-                let paired_left = paired_left as usize;
-                if self.seen_left[paired_left] != epoch {
-                    self.seen_left[paired_left] = epoch;
-                    self.queue[tail] = paired_left as u32;
-                    tail += 1;
-                }
-            }
-        }
-        false
-    }
-
-    fn flip_path(&mut self, mut right: u32) {
-        loop {
-            let left = self.parent_right[right as usize];
-            debug_assert_ne!(left, NONE);
-            let previous_right = self.pair_left[left as usize];
-            self.pair_left[left as usize] = right;
-            self.pair_right[right as usize] = left;
-            if previous_right == NONE {
-                break;
-            }
-            right = previous_right;
-        }
-    }
-
-    fn extract_deficiency(
-        &mut self,
-        left_count: usize,
-        right_count: usize,
-        offsets: &[u32],
-        neighbors: &[u32],
-    ) {
-        let epoch = self.next_epoch();
-        let mut head = 0;
-        let mut tail = 0;
-        for left in 0..left_count {
-            if self.pair_left[left] == NONE {
-                self.seen_left[left] = epoch;
-                self.queue[tail] = left as u32;
-                tail += 1;
-            }
-        }
-        while head < tail {
-            let left = self.queue[head] as usize;
-            head += 1;
-            for &right_u32 in &neighbors[offsets[left] as usize..offsets[left + 1] as usize] {
-                let right = right_u32 as usize;
-                if self.pair_left[left] == right_u32 || self.seen_right[right] == epoch {
-                    continue;
-                }
-                self.seen_right[right] = epoch;
-                let paired_left = self.pair_right[right];
-                if paired_left != NONE && self.seen_left[paired_left as usize] != epoch {
-                    self.seen_left[paired_left as usize] = epoch;
-                    self.queue[tail] = paired_left;
-                    tail += 1;
-                }
-            }
-        }
-        for left in 0..left_count {
-            if self.seen_left[left] == epoch {
-                self.deficient_left.push(left as u32);
-            }
-        }
-        for right in 0..right_count {
-            if self.seen_right[right] == epoch {
-                self.deficient_right.push(right as u32);
-            }
-        }
+        self.inner.deficient_right_indices()
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::{HallError, HallOutcome, HallWorkspace, NONE};
+    use super::{HallError, HallOutcome, HallWorkspace};
+
+    const NONE: u32 = u32::MAX;
 
     #[test]
     fn returns_saturating_matching() {
@@ -280,30 +112,27 @@ mod tests {
     }
 
     #[test]
-    fn repeated_solves_keep_allocations_and_reject_bad_graphs() {
+    fn repeated_solves_reuse_storage_and_reject_bad_graphs() {
         let mut workspace = HallWorkspace::new(4, 4);
-        let capacities = (
-            workspace.queue.capacity(),
-            workspace.deficient_left.capacity(),
-            workspace.deficient_right.capacity(),
-        );
+        let pointer = workspace.inner.matching().as_ptr();
         for _ in 0..100 {
             assert_eq!(
                 workspace.solve(2, 2, &[0, 1, 2], &[0, 1]).unwrap(),
                 HallOutcome::Saturated
             );
         }
-        assert_eq!(
-            capacities,
-            (
-                workspace.queue.capacity(),
-                workspace.deficient_left.capacity(),
-                workspace.deficient_right.capacity(),
-            )
-        );
+        assert_eq!(workspace.inner.matching().as_ptr(), pointer);
         assert_eq!(
             workspace.solve(1, 1, &[0, 1], &[1]),
             Err(HallError::InvalidEndpoint)
+        );
+        assert_eq!(
+            workspace.solve(8, 1, &[0, 1], &[0]),
+            Err(HallError::LeftCapacity)
+        );
+        assert_eq!(
+            workspace.solve(1, 8, &[0, 1], &[0]),
+            Err(HallError::RightCapacity)
         );
     }
 

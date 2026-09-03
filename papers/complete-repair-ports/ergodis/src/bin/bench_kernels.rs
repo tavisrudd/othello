@@ -16,17 +16,18 @@ use ergodis::{
     compile_binary_rank_one, compile_binary_target_subspace,
     compile_verified_explicit_binary_support, confinement_by_generators_field,
     enumerate_integer_moments, gpu_checkpoint_mds_recovery, gpu_checkpoint_mds_same_rack_recovery,
-    minimum_node_span_repair, schedule_repair_dag, solve_hall,
-    ternary_orbit_syndrome_meet_in_middle, ternary_orbit_syndrome_meet_in_middle_count_split,
+    minimum_node_span_repair, resolve_hall_layout, schedule_repair_dag, solve_hall,
+    solve_hall_graph, solve_hall_sparse, ternary_orbit_syndrome_meet_in_middle,
+    ternary_orbit_syndrome_meet_in_middle_count_split,
     ternary_orbit_syndrome_meet_in_middle_unreserved, ternary_orbit_syndrome_search,
     ternary_orbit_syndrome_search_correlated, BinarySupportCandidate, CephXorLayer,
     CompiledBinaryLinearCode, CompositionTower, ContextStrategy, DenseHallGraph, DenseSelector,
     ExplicitBinarySupportProblem, FieldElement, FinitePermutationAction, Gf4,
-    GpuCheckpointCapacities, HallWorkspace, IntegerMomentProblem, IntegerMomentWorkspace, Matrix,
-    OrbitOption, Prime, PrimePolynomialRecurrence, PrimeQuadraticCharacter, QcLdpcCode,
-    RankOneProbeCache, RepairTask, SparseSelector, TowerLevel,
-    VerifiedExplicitBinarySupportProblem, WeightedRepairProblem, WeightedRepairWorkspace,
-    WeightedSchedulerBackend,
+    GpuCheckpointCapacities, HallGraph, HallLayout, HallWorkspace, IntegerMomentProblem,
+    IntegerMomentWorkspace, Matrix, OrbitOption, Prime, PrimePolynomialRecurrence,
+    PrimeQuadraticCharacter, QcLdpcCode, RankOneProbeCache, RepairTask, SparseHallView,
+    SparseSelector, TowerLevel, VerifiedExplicitBinarySupportProblem, WeightedRepairProblem,
+    WeightedRepairWorkspace, WeightedSchedulerBackend,
 };
 
 fn next_u32(state: &mut u64) -> u32 {
@@ -472,9 +473,16 @@ fn plan_vm_spec(variant: &str) -> Option<(&str, usize, u64)> {
 struct HallBenchFixture {
     dense: DenseHallGraph,
     adjacency: Vec<Vec<u32>>,
+    offsets: Vec<u32>,
+    neighbors: Vec<u32>,
+    auto: Option<HallGraph>,
+    auto_layout: HallLayout,
 }
 
+/// Build only the layout the requested backend consumes, so a backend's
+/// measurement boundary contains no other backend's compilation cost.
 fn hall_fixtures(
+    backend: &str,
     left: u32,
     right: u32,
     density_per_mille: u32,
@@ -497,9 +505,31 @@ fn hall_fixtures(
                     }
                 }
             }
+            let mut offsets = Vec::new();
+            let mut neighbors = Vec::new();
+            if backend == "csr" {
+                offsets.reserve(left as usize + 1);
+                neighbors.reserve(edges.len());
+                offsets.push(0);
+                for row in &adjacency {
+                    neighbors.extend_from_slice(row);
+                    offsets.push(neighbors.len() as u32);
+                }
+            }
+            let auto = (backend == "auto").then(|| {
+                HallGraph::compile(left, right, edges.iter().copied(), HallLayout::Auto).unwrap()
+            });
+            let auto_layout = auto.as_ref().map_or(
+                resolve_hall_layout(left, right, edges.len(), HallLayout::Auto),
+                HallGraph::layout,
+            );
             HallBenchFixture {
                 dense: DenseHallGraph::new(left, right, edges).unwrap(),
                 adjacency,
+                offsets,
+                neighbors,
+                auto,
+                auto_layout,
             }
         })
         .collect()
@@ -1530,21 +1560,45 @@ fn main() {
         return;
     }
     if let Some((backend, left, right, density, graph_count, seed)) = hall_spec(&variant) {
-        let fixtures = hall_fixtures(left, right, density, graph_count, seed);
+        let fixtures = hall_fixtures(backend, left, right, density, graph_count, seed);
         let mut dense_workspace = HallWorkspace::new(left, right).unwrap();
         let mut adjacency_workspace = AdjacencyHallWorkspace::new(left, right);
+        // CSR validation is a compile-boundary cost, not a per-decision one, so
+        // the views are built once exactly as a real caller would.
+        let views: Vec<SparseHallView<'_>> = if backend == "csr" {
+            fixtures
+                .iter()
+                .map(|fixture| {
+                    SparseHallView::new(left, right, &fixture.offsets, &fixture.neighbors).unwrap()
+                })
+                .collect()
+        } else {
+            Vec::new()
+        };
         for _ in 0..repetitions {
-            for fixture in &fixtures {
+            for (index, fixture) in fixtures.iter().enumerate() {
                 let cardinality = match backend {
                     "bitmap" => solve_hall(&fixture.dense, &mut dense_workspace)
                         .unwrap()
                         .cardinality(),
                     "adjacency" => adjacency_workspace.solve(&fixture.adjacency),
+                    "csr" => solve_hall_sparse(views[index], &mut dense_workspace)
+                        .unwrap()
+                        .cardinality(),
+                    "auto" => {
+                        solve_hall_graph(fixture.auto.as_ref().unwrap(), &mut dense_workspace)
+                            .unwrap()
+                            .cardinality()
+                    }
                     _ => panic!("unknown Hall backend"),
                 };
                 assert_eq!(cardinality, left);
                 work += 1;
                 checksum = checksum.wrapping_add(u64::from(cardinality));
+                peak_states = peak_states.max(match fixture.auto_layout {
+                    HallLayout::Sparse => 1,
+                    _ => 0,
+                });
                 black_box(cardinality);
             }
         }
