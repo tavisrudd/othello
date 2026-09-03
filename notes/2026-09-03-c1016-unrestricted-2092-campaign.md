@@ -168,9 +168,16 @@ of its budget on balanced ones.
 The joint stratum, smallest energy under 30 together with spread at least 200,
 holds 23.3% of draws at 2.38 times the base rate. A sampler restricted to it
 should see roughly two to three times as many productive starts per unit compute.
-Confirming this on fresh chunks as a holdout is in progress; the second-smallest
-energy also shows a sharp optimum in the 40-to-60 band, but that rests on twenty
-events and is not yet separable from noise.
+
+A fresh chunk of 5,400 rows, held out and scored only after the rule was fixed,
+confirms the effect and slightly strengthens it: base rate 0.39%, stratum rate
+1.18%, lift 3.03. One claim from the training rows does not survive. Zero of
+2,416 training draws with smallest row energy at or above 70 were productive, but
+the holdout has three productive draws out of 1,211 there. That region is
+depleted by roughly a factor of five, not empty, and the rule should be stated as
+a strong bias rather than a hard exclusion. The second-smallest energy also shows
+a sharp optimum in the 40-to-60 band, but that rests on twenty events and is not
+yet separable from noise.
 
 ## Results after eight chunks
 
