@@ -242,3 +242,28 @@ one-line pointer here.
   implemented: above about a fifth of the fleet, full readout is cheaper.
 - 2026-09-03 — probe 11 launched: land the two defect-kernel collapses in the Ergodis core under
   the full core validation gate (first core edit of this task).
+- 2026-09-03 — probe 10: QEC on the space axis and the split-only minimizer. Report:
+  `2026-09-03-c1061-probe10-qec-space-axis-and-split-only-minimizer.md` (ergodis-private
+  `c079d29`). Verdicts: **QEC space cut: promote (distance-independent)**; **split-only
+  minimizer: modest, worklist refinement is the lever**; **policy transducer: promote**. Cutting
+  the detector grid along space makes the separator 2^T in the window height and independent
+  of code distance (distance 25 with a four-round window needs width 16, where the time cut
+  needed 2^25); both cuts agree exactly (500 planted trials plus brute force) and per-event
+  instructions match at equal width, so cost is a function of separator width alone. Both stop
+  paying at width 64: distance 6 for the time cut, window height 6 for the space cut, a decoder
+  tuning knob. `CodeDistanceChanged` drops from rebase to a `RegrowRequired` class. The
+  matching-parity invariant voids exactly half of every leaf's entries at every height (2x on
+  live entries, no change in width). Tropical normalization is weaker on space (3,810 raw root
+  summaries collapse only to 946, vs 19x on time), so no compiled transducer over the space
+  boundary. Delta vs fresh on the space cut: 118.1x instructions and 114.9x cycles (CI
+  [113.9, 115.8]). The cluster-growth decoder is a real join-semilattice (idempotent,
+  commutative, one pointer repointed per effective merge, half of joins absorbed) but has no
+  inverse: a retraction costs 126x a merge even with bounded 64-join replay. Policy: any
+  single-cell edit (deletion included) refines the Myhill--Nerode partition across 1,500
+  trials; a whole-row copy coarsens 64% of the time. The split-only minimizer is 2.65x, not a
+  locality win, because Moore convergence is dominated by refinement-cascade depth. The emitted
+  transducer: 626 monoid elements at 17 states, zero disagreements on all 7,512 Cayley cells and
+  2,000 traces; a monoid-indexed retained tree runs 9.17x the function tree (CI [9.12, 9.22])
+  with 17x less node state, about 119x a naive policy engine with probe 7's 13x. Streaming
+  needs only the 30 KB Cayley table; the 1.5 MB product table is the cost of retained
+  composition.
