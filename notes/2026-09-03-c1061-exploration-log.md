@@ -417,3 +417,30 @@ one-line pointer here.
   knapsack. Two checkable compilation obligations recorded: leaf summaries commute (cost
   depends only on consumed budget) and the grant count is bounded. Added `leaf_summary` /
   `node_summary` accessors to `delta_composition` for the certificate generalization.
+- 2026-09-03 — probe 17: sparsity-aware composition (QEC) and routing verdict. Report:
+  `2026-09-03-c1061-probe17-sparsity-aware-composition-and-routing.md` (ergodis-private
+  `5ed47f9`, `739e289`, `a06ceb2`). Verdicts: **QEC: closed, off the target list**;
+  **routing: promote, ranking row no longer conditional**. Sparsity-aware tree (cost
+  truncation plus a precomputed table for defect-free subtrees serving 46 to 50% of the repair
+  path) is worth 2.8x to 4.1x and cuts the loss to sparse blossom from 82x to 15.1x at
+  distance 9 and 1% physical error (CI [14.3, 16.0]), but no regime flips: PyMatching costs
+  about 400 + 1,054 instructions per defect while the sparse tree is flat at 23,500, so the
+  crossover needs about 22 defects in a 32-detector window (69% density vs a threshold near
+  30%). Residual is W^2 scanning of dense summaries; the representation that would reach it is
+  itself a matching decoder. Own prediction corrected: the no-tree vector sweep is worse than
+  the tree from distance 5 up. Routing: folded-Clos fabric with pod separators; reachable
+  boundary-class set under tropical normalization is 9 to 360 classes over a 10^5 mixed event
+  stream and shrinks as the fabric grows from 256 to 1,024 pods; at matched exactness (3,000
+  Dijkstra agreement checks, zero mismatches) the retained delta beats a Dijkstra re-solve by
+  41x to 305x and full recomposition by 47x to 154x, growing with size; Pareto (latency,
+  bandwidth) stays a four-point front through ten levels; per-event cost 2,287 / 17,167 /
+  119,924 instructions at separator width 2 / 4 / 8, close to S^3. Harness audit: all four of
+  this agent's benches had setup scaling with operation count; converted to a fixed
+  4,096-event window, re-measured over eight rounds, no verdict changed (corrections 1.5% to
+  43% upward, probe 13's QEC loss overstated by 5%). Second defect: three loops silently
+  iterated the window instead of the operation count after a concurrent `cargo fmt` broke a
+  text substitution; symptom was 0.06 instructions per operation. Rule recorded: a
+  differencing harness reporting near-zero per-operation cost has a broken loop, not a fast
+  one; every timed loop now verified to bound on `--operations`. Differential gates caught an
+  unsound truncation rule (sound rule: exact once the best surviving total is within budget)
+  and an asymmetric port penalty in the Dijkstra comparator.
