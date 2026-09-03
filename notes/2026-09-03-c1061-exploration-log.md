@@ -396,3 +396,24 @@ one-line pointer here.
   reproduced. Shared git index hazard: a concurrent `git add -A`-style commit by another agent
   swept probe 15's staged and untracked files into its own commit; nothing lost, no history
   rewritten.
+- 2026-09-03 — probe 19: profile-level vocabulary. Report:
+  `2026-09-03-c1061-probe19-profile-level-vocabulary.md` (ergodis-private `ab05c40`). Verdict:
+  **promote: the LRC fleet optimizer is an exact computed transducer plus a constant-cost
+  ingest**. Re-indexing events by profile (`Reprofile{from,to}`, `AddPod`, `RemovePod`;
+  `GrainChanged` still a rebase) makes the count vector's successor one decrement and one
+  increment, and the congruence scorer returns zero exactness and zero closure violations for
+  the uncapped count vector (exact re-scoring, no hash collision), against 800 closure
+  violations under the pod-indexed alphabet. Controls: the gain vector still fails closure
+  (1,276) and capped counts now fail exactness (141). Exact quotient is the multiset count
+  C(n + P - 1, P - 1): 4.1e36 states at 16,384 pods and 84 profiles, 37,979 reachable on the
+  10^5 stream, zero value disagreements vs the tree. Enriched-alphabet transducer has zero
+  conflicts at 400k and 800k events but a 99.999% rebase rate, so it must be computed, not
+  tabulated: transition is a decrement and an increment, output a three-level knapsack, both
+  closed forms; `TopKPolicy` is that transducer and fails closed on an unseen profile. End to
+  end (pinned binary 181e407e...): ingest + policy 1.3k instructions vs tree 15.3k (11.40x;
+  cycles CI [9.19, 10.17]); ingest is 780 (within 1.05x of the bare closed-form leaf), the
+  transducer about 520. Domain-specific remainder is exactly the ingest (closed-form leaf and
+  profile identity, 60% of per-event cost); everything downstream is counts and a bounded
+  knapsack. Two checkable compilation obligations recorded: leaf summaries commute (cost
+  depends only on consumed budget) and the grant count is bounded. Added `leaf_summary` /
+  `node_summary` accessors to `delta_composition` for the certificate generalization.
