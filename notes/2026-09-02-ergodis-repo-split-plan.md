@@ -71,7 +71,8 @@ infrastructure, task crates, the absorption list.
   replayed history with task IDs intact. The GitHub public repository receives squashed and
   filtered merges from that private main (one squash per release or milestone, filtered through the
   exclude list and the path sanitizer), so public history never carries task IDs, private paths,
-  or contributor documents. Commit subjects on private main are therefore not rewritten.
+  or contributor documents. Commit subjects on private main are therefore not rewritten, and **no task ID may appear in any
+  published commit on the public branch**, in subject, body, or content.
 - **Scope of C1058 includes the promotion track and documentation.** The pending promotions
   (C1054 hall_core, C1055 margin lift, C1056 arithmetic kernels, C1057 proof scaffolding) land in
   the new core repository, not the monorepo copy, once the split base is tagged; and each new
@@ -81,6 +82,56 @@ infrastructure, task crates, the absorption list.
 - **Monorepo after the move.** Cites the external repositories at tagged commits; no vendored
   copy. Companion names as proposed unless the executing review finds `ergodis-evidence` and
   `ergodis-contrib` better merged.
+
+## Public/private branching model
+
+One repository, `~/src/ergodis`, two long-lived branches and two remotes.
+
+| Branch   | Role                                                                 | Remote                                  |
+|----------|----------------------------------------------------------------------|-----------------------------------------|
+| `main`   | Private. Full replayed history, task IDs, contributor docs, evidence pointers. | `private` (a private GitHub repo or none; never the public one) |
+| `public` | Published. Each commit is a filtered snapshot of `main` at an export point, parented on the previous public commit. | `public` = `git@github.com:tavisrudd/ergodis.git`, pushed as its `main` |
+
+**Export is a snapshot, not a merge.** `scripts/export-public.sh <private-rev> <message-file>`:
+
+1. Materializes `filter(tree(private-rev))` in a scratch worktree: drops every path in the exclude
+   set (`AGENTS.md`, `CLAUDE.md`, `PERFORMANCE.md`, `evidence/`, `proptest-regressions/`,
+   `.cargo/`, `EXPORTS.md`, anything listed in `.publicignore`), rewrites the monorepo path in
+   scripts to repository-relative, and replaces evidence references with the evidence
+   repository's tagged URL.
+2. Runs the public lint on the filtered tree and refuses to continue on any hit: task-ID
+   tokens (`\bC[0-9]{2,4}\b` in text files, with an allowlist file for legitimate identifiers
+   such as chemical or code names), private path fragments (`othello`, `ergodis-private`,
+   `notes/`, `/home/`), contributor-doc names, and any file larger than a stated cap.
+3. Creates the public commit with `git commit-tree <filtered-tree> -p <previous public>` using the
+   supplied message file (release notes written for readers, never task IDs; the lint runs on the
+   message too), advances `public`, and tags it `v<semver>`.
+4. Appends one line to the private-only `EXPORTS.md`: date, private revision, public commit,
+   tag. This is the only record linking the two histories and it never leaves `main`.
+
+Because every public commit is a full filtered snapshot, the public history is a clean linear
+sequence of release-sized commits, `git diff` between two public commits equals the filtered
+diff of the private range, and nothing needs rebasing. Squash semantics come for free.
+
+**Guards against leaking `main`:**
+
+- The `public` remote is configured with a single push refspec
+  `refs/heads/public:refs/heads/main` and `remote.public.pushurl` only; `git push public main`
+  is refused by the refspec, and a `pre-push` hook additionally rejects any push to the public
+  URL whose ref is not `public` or whose tip does not pass the public lint.
+- `main` has no upstream on the public remote; `push.default = nothing` in the repo config so a
+  bare `git push` fails until a remote and ref are named.
+- The lint also runs in CI on the public repository (a workflow that fails on any task-ID
+  token), so a mistake is caught on the remote as well as locally.
+- Agents never push; export produces the commit and stops. Pushing is Tavis's action.
+
+**Working on the private side.** Ordinary work lands on `main` with task IDs in commit subjects
+as today. Public-facing documentation is written without task IDs from the start (evidence and
+report names use dates and topics, not IDs) so the lint stays quiet; where an existing document
+cites an ID, the sanitizer rewrites it to the dated report title before export.
+
+**Companion repositories** follow the same pattern only if they are ever published;
+`ergodis-private` and `ergodis-contrib` have a single `main` and only a private remote.
 
 ## Decisions originally raised
 
