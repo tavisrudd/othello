@@ -281,3 +281,87 @@ natural quarter of the unconditioned fifth.
 
 The chunk-level result so far is the interesting part and is reported below as it
 accumulates.
+
+## Method transfer from the high-weight GRS coset paper
+
+The user pointed at `papers/high_weight_grs_cosets`, which classifies every coset
+of weight at least `r-1` of a point-deleted generalized Reed--Solomon code. That
+paper is foreign to this lane and nothing here edits it, but three of its moves
+transfer directly to the residual-floor question, and one of them was checked
+numerically here.
+
+### The shift-multiplier group acts, and it collapses the exclusion problem
+
+The paper's classification works by acting with the projective group on syndrome
+directions and classifying orbits rather than individual cosets. The unrestricted
+q29 problem has exactly such a group and the search has not been using it.
+
+Relabelling every column by `j -> c j` for `c` invertible modulo 29 preserves
+each row's energy and row sum, hence the canonical scope, and transforms the
+combined periodic autocorrelation by `A(s) -> A(c s)`. The target is constant off
+zero, so it is fixed. Therefore the deviation vector transforms by
+`e(s) -> e(c s)`, and the group `(Z/29)^* / {+-1}`, cyclic of order 14, acts on
+the fourteen shift classes simply transitively. This was verified directly on the
+retained residual-96 state: relabelling by `c = 2, 3, 5, 12` leaves the shell
+value 2020 and the residual `sum e^2 = 6` unchanged while permuting the deviation
+support.
+
+Two consequences follow immediately.
+
+1. **The small-support exclusion becomes a finite, small case list.** Up to the
+   action, the residual-32 shapes (`sum e^2 = 2`, one class at `+1` and one at
+   `-1`) form exactly `14 * 13 / 14 = 13` orbits, and the residual-64 shapes
+   (`sum e^2 = 4`, two classes at `+1` and two at `-1`) form
+   `91 * 66 / 14 = 429` orbits. Deciding 442 exactly pinned feasibility
+   instances settles whether the campaign floor of 96 is a theorem. Each
+   instance is far more constrained than the search that has been run: all
+   fourteen off-zero correlation values are fixed exactly, not minimized.
+2. **The action is a free score-preserving macro-move.** Every state has
+   thirteen relabelled twins with the same score and a different deviation
+   support. The move set currently reaches none of them, so the annealer's basin
+   structure is much finer than the problem's. Applying a random multiplier as an
+   occasional macro-move, or canonicalizing states under the action to
+   deduplicate, changes the move geometry at zero cost — which is exactly what
+   the previous section argued is needed, and unlike more compute it is free.
+
+An orbit classification of the eight banked residual-96 states puts them in eight
+distinct orbits, so the floor is not concentrated on one distinguished deviation
+shape; the six-support `+-1` shell is broadly realizable in a way the two- and
+four-support shells so far are not.
+
+### The contraction ladder, applied to the difference operator
+
+The paper reduces arbitrary redundancy to a terminal pencil of binary cubics by a
+coherent polar contraction, then decides the terminal case exactly by a genus-one
+count. The analogous contraction here already exists in one step and has not been
+iterated. For a shift `s` write `d_r = y_r - shift_s(y_r)`. Then
+`sum_{r,j} d_r(j)^2 = 2 D_s = 2(523 - e(s))`, and the whole correlation of the
+derived system is pinned by the original one,
+`A_d(t) = 2 A(t) - A(t+s) - A(t-s)`. So assuming a deviation pattern determines
+the derived system's energy and its complete correlation, and the derived system
+is smaller. Iterating gives a ladder of exactly pinned systems whose terminal
+level is small enough for an exact tablebase, with an exclusion or a witness
+propagating back up. This is the closest structural analogue of the paper's
+recursive carrier theorem, and it is the route that turns the floor from a search
+observation into a proof or a witness.
+
+### Spectral pre-filter before any expensive join
+
+At a nontrivial character the target spectrum is exactly `2092`, the order — the
+combined spectrum is `sum_r |Y_r(chi)|^2 = 523 + e-hat(chi)` in halved units.
+Assuming a deviation pattern therefore requires a totally positive algebraic
+integer of `Z[zeta_29]^+` to be a sum of four Hermitian norms, coherently across
+one Galois orbit. That is the same fixed-field norm-equation mechanism that
+closed the `g=91` order-29 sector by a binomial and three-square argument, and it
+is cheap to evaluate per pattern. It belongs in front of the 442 feasibility
+instances as a filter, not behind them.
+
+### What was not adopted
+
+The paper's rank-two and catalecticant stratification does not transfer: the
+correlation circulant here is positive definite of full rank, so there is no
+degenerate locus of the same kind to land in. Its abundance-bound style
+construction remains a possible positive route — counting quadruples with a
+prescribed correlation by character sums would say whether residual-32 states
+should be expected to exist at all — but it is weaker evidence than the exact
+ladder and is not proposed as the next step.
