@@ -1,0 +1,2416 @@
+{
+  "schema": "ergodis-private-planted-theorem-gap-admission-v1",
+  "planted_source_digest": "1bff77e9c2b5e61da5edc9c6583c9d726778f98150fc80a041cac6f8cdee9a43",
+  "views": [
+    {
+      "view": "training",
+      "rows": 125,
+      "positive_rows": 5,
+      "fields": 55,
+      "presented_residual_fields": [
+        36,
+        35,
+        49,
+        50,
+        45
+      ],
+      "constant_positive_fields": [
+        35,
+        36,
+        49,
+        50
+      ],
+      "generator_digest": [
+        189,
+        88,
+        211,
+        29,
+        196,
+        208,
+        1,
+        136,
+        89,
+        9,
+        69,
+        64,
+        36,
+        36,
+        137,
+        6,
+        147,
+        53,
+        106,
+        92,
+        61,
+        61,
+        20,
+        103,
+        219,
+        30,
+        15,
+        8,
+        45,
+        208,
+        156,
+        212
+      ],
+      "view_digest": [
+        43,
+        140,
+        237,
+        47,
+        189,
+        199,
+        89,
+        150,
+        235,
+        66,
+        243,
+        97,
+        41,
+        67,
+        41,
+        178,
+        112,
+        177,
+        201,
+        112,
+        228,
+        32,
+        195,
+        250,
+        96,
+        109,
+        249,
+        190,
+        163,
+        233,
+        153,
+        73
+      ],
+      "provenance": "planted admission-boundary corpus; the training view is a tied sublattice of the direct-model enumeration and grants no pruning authority"
+    },
+    {
+      "view": "direct-model",
+      "rows": 3125,
+      "positive_rows": 125,
+      "fields": 55,
+      "presented_residual_fields": [
+        36,
+        35,
+        49,
+        50,
+        45
+      ],
+      "constant_positive_fields": [
+        35,
+        36
+      ],
+      "generator_digest": [
+        117,
+        91,
+        143,
+        106,
+        252,
+        212,
+        208,
+        87,
+        75,
+        195,
+        192,
+        252,
+        111,
+        202,
+        6,
+        48,
+        82,
+        39,
+        215,
+        200,
+        113,
+        72,
+        86,
+        94,
+        151,
+        108,
+        66,
+        72,
+        111,
+        206,
+        136,
+        115
+      ],
+      "view_digest": [
+        76,
+        201,
+        244,
+        187,
+        189,
+        254,
+        29,
+        48,
+        237,
+        205,
+        146,
+        43,
+        184,
+        148,
+        244,
+        11,
+        84,
+        7,
+        181,
+        94,
+        27,
+        124,
+        107,
+        221,
+        133,
+        28,
+        147,
+        57,
+        153,
+        50,
+        218,
+        75
+      ],
+      "provenance": "planted admission-boundary corpus; the training view is a tied sublattice of the direct-model enumeration and grants no pruning authority"
+    }
+  ],
+  "view_digests": [
+    "2b8ced2fbdc75996eb42f361294329b270b1c970e420c3fa606df9bea3e99949",
+    "4cc9f4bbbdfe1d30edcd922bb894f40b5407b55e1b7c6bdd851c93399932da4b"
+  ],
+  "domain": {
+    "fields": 55,
+    "constants": 9,
+    "maximum_literals": 3,
+    "declared_conjunctions": 20214975,
+    "live_literals": 50,
+    "enumerated_conjunctions": 20875,
+    "corpus_perfect": 125,
+    "stop_condition": "the declared domain is exhausted; there is no budget, timeout, or sampling step",
+    "pruning_argument": "conjunction coverage is monotone decreasing in the literal set, so any conjunction containing a literal with empty training coverage covers no training row and cannot meet the nonempty-coverage requirement; such conjunctions are counted but not materialized"
+  },
+  "proposer": {
+    "proposer": "generic-constant-conjunction",
+    "selected_fields": 2,
+    "training_rows": 125,
+    "tree_nodes": 33,
+    "tree_depth": 16,
+    "evolve_generations": 4,
+    "evolve_beam": 32,
+    "evolve_max_candidates": 1000,
+    "evolve_tested": 979,
+    "evolve_perfect": 36,
+    "evidence_records": 991,
+    "distinct_proposed_predicates": 990,
+    "unreplayable_proposals": 0,
+    "context": "the proposer and the evolve campaign see the training view only; the direct-model view is an admission input and is never presented to proposal"
+  },
+  "planted_predicates": [
+    {
+      "name": "P0-sound",
+      "origin": "planted",
+      "literals": [
+        {
+          "field": 36,
+          "constant": 0
+        },
+        {
+          "field": 35,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "79e4ab656ca4a428b229eaef1aeeb463e837b106d474ceb05de7875886463790",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 0,
+      "admission": "admitted (removed 0, novel rows 125)",
+      "counterexample": null
+    },
+    {
+      "name": "P1-unsound-tied-second",
+      "origin": "planted",
+      "literals": [
+        {
+          "field": 36,
+          "constant": 0
+        },
+        {
+          "field": 49,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "865333547bc82469fb8ebedbbdfeb37b8048b095655fb3e194b8a65613ec42d2",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 100,
+      "admission": "rejected-unsound (100 direct-model false positives)",
+      "counterexample": {
+        "row": 1300,
+        "residuals": [
+          0,
+          -2,
+          0,
+          -2,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "P2-unsound-tied-third",
+      "origin": "planted",
+      "literals": [
+        {
+          "field": 36,
+          "constant": 0
+        },
+        {
+          "field": 50,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "79a7aae293309cdebef521ceabcd7ff18b45631eb7885522637a4ebe3fe4cefd",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 100,
+      "admission": "rejected-unsound (100 direct-model false positives)",
+      "counterexample": {
+        "row": 1260,
+        "residuals": [
+          0,
+          -2,
+          -2,
+          0,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "P3-unsound-tied-second-and-third",
+      "origin": "planted",
+      "literals": [
+        {
+          "field": 36,
+          "constant": 0
+        },
+        {
+          "field": 49,
+          "constant": 0
+        },
+        {
+          "field": 50,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "95d1d7cc5d6a64fb34d4bce5ee874b00504d4a8a3be4b10fc38f6e4933f402bb",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 25,
+      "direct_model_false_positives": 20,
+      "admission": "rejected-unsound (20 direct-model false positives)",
+      "counterexample": {
+        "row": 1310,
+        "residuals": [
+          0,
+          -2,
+          0,
+          0,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    }
+  ],
+  "evolve_proposals": [
+    {
+      "name": "seed-generic-constant-conjunction",
+      "origin": "blind-proposer",
+      "literals": null,
+      "plan_digest": "c17ebcd6dd6556148378aab331d238dbfffd7776c95f69c1494fd3b0262c25c2",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0000",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "534677cf90f8c3c748a787f0ef033a7b4ff93611bb7b939661c75451f8988bf5",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0049",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "6ec54e17cbce2deba6bc0813a1da22673d4932ef34566158a7f51f35f4ff0cd5",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 100,
+      "admission": "rejected-unsound (100 direct-model false positives)",
+      "counterexample": {
+        "row": 1300,
+        "residuals": [
+          0,
+          -2,
+          0,
+          -2,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0050",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "c4a6aa16cc790a00bba7c30b0a5d74f2a14db20bb6247a8dcd09d6ef9e8ed903",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 100,
+      "admission": "rejected-unsound (100 direct-model false positives)",
+      "counterexample": {
+        "row": 1260,
+        "residuals": [
+          0,
+          -2,
+          -2,
+          0,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0132",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "b28c59eb442991ecdcbcceb507fb2de123bcd9a313c87a99787b7e16ebe904a7",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-no-novel-coverage",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0133",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "f40216c7b1be9972d8cfbf03c26cdedc66dba7bd7e635867036667595e739e03",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0134",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "aff35ee73640c672949380e9a9a5014892d793b44989f94c09fca5c3ee4c6f86",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0135",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "766c829b399c65ab5e18baa63d5340f7458a5a9259986f58ee4ea6970ba89ded",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 1,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 2182,
+        "residuals": [
+          1,
+          0,
+          0,
+          -1,
+          0
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0136",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "18995cbdb11d0169d74b390d5d5db534054d8250246504f1b6fb8b429f3d93ce",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0137",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "6486690aef9cb79b4de0f3e236f7a492c732eaef5d433483df6fb3e98df44a67",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 126,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 2182,
+        "residuals": [
+          1,
+          0,
+          0,
+          -1,
+          0
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0138",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "11a7e3b2b86744ca781f18e6a0407f25f67ee8e7c96db9b9b8e31c89f4ad2e15",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-no-novel-coverage",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0139",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "d57892da1cd0fcaba796074833534a5c14c264bb00903d69f94ef638e8b06a9d",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0140",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "17a54c721c87cd23a5c5368ef61499c0eaa3f5218aa26e1d85baf2130fd7b47e",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0141",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "b73bb5a897ac8913c10c22145e313440f425774ce1142ad813dc6329d59115a0",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-no-novel-coverage",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0142",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "496fcb93052b6fa83dce2fc7b5220bb4c9ee3ab22b6c5e24b2a2562668a7c103",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0143",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "b4887fd2ff9e03aac8f81abfd2a5acdb50597171fd931ed9f0836f6cde1196a6",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0144",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "b1a8de173afd24c140b0bfd469c9949e9741184267e50228a01c7d5eac739b7f",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 1,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 2953,
+        "residuals": [
+          2,
+          1,
+          1,
+          -2,
+          1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0145",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "0bb2fdd85f2afb96f9a11b8f5b572eec5eacc2edc9f8cfa871b95ab57822b255",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0146",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "801acfa859031ca273421619253afc0ba6a00621fb3cb83a35ec21852a047934",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 126,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 2953,
+        "residuals": [
+          2,
+          1,
+          1,
+          -2,
+          1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0148",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "ce1c4f7e40ab8ffb85199f8d83c1bcd5103d54312ad07d5b704e6c547cb63144",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0151",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "1b3727e1928045e9bb736e90782e349f9087571e912ead60c0997a7ded688be2",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0154",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "421fe7195bc3f693abb2df14f2939bad4927ccbb13028df5fb2271beb901841f",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0157",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "1cbb47ec5b7db104a21d9278e502a55a3ace329b6ea66c20d172e3f9e1c96259",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0160",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "a0a9cae423620c5457a8c11edaa42176e0ff2d329db362eefb97e9708bef8e30",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 1,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0163",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "063d40a333d6a5a4435ebdf146c9a6e5b5056c4ff250aa3dd7a76e927ab117e8",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0166",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "36f49d7e5409698907137885719a08c9500935a22b5b738c7ab2272c60e1d65c",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0169",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "41b3bf783c8f1a1b18f90855d35327d18f546d0fe3f8ba8b94dbc6042e686491",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0172",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "b30a342deb06aae6974cc97745bb1f19ca025f1a127e278c295dded597196b9f",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0175",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "b7c0d57f7de9a5907f87028c6aaa8cc78ead908e0d15bdb071f924d2b8924988",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0178",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "8de649ea816a2734ddb897ef7f0e12a2b5a7dc0455c69f5d3937a29ac01a042e",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0181",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "2fec267e3e0f98a9db22531d30ccca7c0adee9be8c79f0644188e9b38f16e183",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0184",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "50e71b3f184472cdff8f8a4abd5e2e4edb0ac9d409e5117fa5f0f2e663d81d95",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0187",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "bbf19f81cb02edae255b2c7f39557e3d2ce09d5377f3bf9a1bb56980a438969a",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0190",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "6b2bbed0e5c8aabf30db658968bf70ce8a54cc07a4008199e76a9a50418ac8a1",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0193",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "ede7f44852b39fe41d87a20b9655f522a3737244a62b1fb159667d4e44ad18fd",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0196",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "e2b3fbc7e8aff0f0e5b8eae917fa759fa5473511730b5172801d3e7c921bc500",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0199",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "4a196c40730a3b6128afd756b6fcda78f83f0711b23146546417d6889f92c70d",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0202",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "6997a9174632004b7025a4d595d82d42f19c187666777af868b5a515ac1e5592",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0212",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "ee631d0a9a8ea5fb0322d9eac8ef54d645ac360ad0d92814c93ff614aed97e6a",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0213",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "ce4b81f645cc056f95d8f5daf4c826d24433ca30797cebfe53db2b7e07db0e60",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0214",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "afd5ac5d5c578fc07fcf212c8996bd43b35daa920e5bfaae4337988a608bd256",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 6,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0244",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "bcecf3488fac1a6ab88f663c709d5cf9213e4903633e09df1ab66adf0c205f77",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0245",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "554069e1d25ee1961150e9dbffae2fd2659319747c71634f83a512dd78ee5658",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-no-novel-coverage",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0246",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "8179ff2c3a91d322055020be1c56bd04bff3ea58543d4b17438ea47aefb18315",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 1,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 2182,
+        "residuals": [
+          1,
+          0,
+          0,
+          -1,
+          0
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0247",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "8f62f1ffb5b4bdd384d1348fa142c38f7199baf3e9644969198535e31e316619",
+      "training_covered": 2,
+      "training_false_positives": 0,
+      "direct_model_covered": 1,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 2182,
+        "residuals": [
+          1,
+          0,
+          0,
+          -1,
+          0
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0250",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "ad2f35c0c9c6f1734dd2f94a2868c42c4b01b970d7f854bda2bc812c33679962",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 157,
+      "direct_model_false_positives": 32,
+      "admission": "rejected-unsound (32 direct-model false positives)",
+      "counterexample": {
+        "row": 30,
+        "residuals": [
+          -2,
+          -2,
+          -1,
+          -1,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0303",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "848902eb9152ebaba93b915923b810e64771ceed59df7251547a5d012bb68e62",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-no-novel-coverage",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0319",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "fdc4f344279f1b02e51ca89eecce42f51c0101a2b5a7d47476bcbb746d620f54",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0388",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "d8d8372f5cf5da86d7d87a37078870b66a73f7d0466295463c942b0f3c10ca03",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0396",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "bd2a182e7d75d4345a818684d14d6ad561e14db45115669aad1118eb442e80a9",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-no-novel-coverage",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0412",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "32a46ee14d4e78a0a47aafdd1aa884f14e5902fddb0c6294ee587331ac9447de",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0505",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "aef83b993438b26d66bd78ad00bf04bd7f87933e93c10fd1728d86c1a4997056",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 126,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 3108,
+        "residuals": [
+          2,
+          2,
+          2,
+          -1,
+          1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0506",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "69e149d5513080a4c29a639bbc9e5a9d7f9920aa6347dd42e7fb717eec41f733",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 126,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 200,
+        "residuals": [
+          -2,
+          -1,
+          1,
+          -2,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0531",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "3d0ac236fce12dcab8e395ce6c9a37ef306ef94eba612da25ca1256c2ee4676d",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0532",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "a214a52d2dfb1061708b3b38a72aec1d1e408030fdb09516a822ef8251377bc9",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 126,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 2930,
+        "residuals": [
+          2,
+          1,
+          0,
+          -1,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0555",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "fa0c935d5ba0bff1aa0d39f5923799e4169cfde691820519971f78ffb76016b5",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 129,
+      "direct_model_false_positives": 4,
+      "admission": "rejected-unsound (4 direct-model false positives)",
+      "counterexample": {
+        "row": 785,
+        "residuals": [
+          -1,
+          -1,
+          -1,
+          0,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0556",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "b1e435714a03d7d82a43da414c6c2ec8b0d8f97cce3dbc04075c5c61a50b1e45",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 126,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 403,
+        "residuals": [
+          -2,
+          1,
+          -1,
+          -2,
+          1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0578",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "5454d739ff4cd7027667320d6768e657cd2b86d539d0ecf1175bfa0122b634d3",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0579",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "ab642603dc0c4dd97a261450cf5957ab5d313104fca6eb8812f528f9e495612d",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 127,
+      "direct_model_false_positives": 2,
+      "admission": "rejected-unsound (2 direct-model false positives)",
+      "counterexample": {
+        "row": 406,
+        "residuals": [
+          -2,
+          1,
+          -1,
+          -1,
+          -1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0603",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "d4db9723608852b44f9de662659eca114262e7dc4e0883bc5d7c7e87ab4a1449",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0604",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "ddafad888d3d09216aeb33d0de88a438409d013de54ec9e18957b64585c8a7eb",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 128,
+      "direct_model_false_positives": 3,
+      "admission": "rejected-unsound (3 direct-model false positives)",
+      "counterexample": {
+        "row": 335,
+        "residuals": [
+          -2,
+          0,
+          1,
+          0,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0627",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "207b7b46632e52c0fee007f6e088ca84584354a1058151b2c255f51b38694d9f",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 127,
+      "direct_model_false_positives": 2,
+      "admission": "rejected-unsound (2 direct-model false positives)",
+      "counterexample": {
+        "row": 416,
+        "residuals": [
+          -2,
+          1,
+          -1,
+          1,
+          -1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0628",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "d29027fa7e1961b225f8df8b4ef01e7d3a6116be36aabfbe94f7ee504d70a8d6",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 127,
+      "direct_model_false_positives": 2,
+      "admission": "rejected-unsound (2 direct-model false positives)",
+      "counterexample": {
+        "row": 2636,
+        "residuals": [
+          2,
+          -1,
+          -2,
+          0,
+          -1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0650",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "72ded222a2e15a60d5340caed875c231dbd7ed22eb5483b4584fb0ac07163658",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 128,
+      "direct_model_false_positives": 3,
+      "admission": "rejected-unsound (3 direct-model false positives)",
+      "counterexample": {
+        "row": 664,
+        "residuals": [
+          -1,
+          -2,
+          -1,
+          0,
+          2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0651",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "caf1b94ac1c1bce99025e49a83e4bb82a3f699085998ce9207566665786762cb",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0675",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "a17886e4ba5b61b658d569486f627f8f149ce362735f6190b314834c1441d029",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0676",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "ad3609facc5d6dd3e64a38562bb4adf2e888970d2827d8b8e989aa18d158ffff",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0699",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "33f94bb75fe1121109e7857d83ea4d9aedcbd9ae304f01ef00f10c1e1654330a",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 127,
+      "direct_model_false_positives": 2,
+      "admission": "rejected-unsound (2 direct-model false positives)",
+      "counterexample": {
+        "row": 176,
+        "residuals": [
+          -2,
+          -1,
+          0,
+          -2,
+          -1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0700",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "eaeef217e499c45cf6a05775f320a73f0f5bd8ce11f0f0d263169468c7a68ab8",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 127,
+      "direct_model_false_positives": 2,
+      "admission": "rejected-unsound (2 direct-model false positives)",
+      "counterexample": {
+        "row": 434,
+        "residuals": [
+          -2,
+          1,
+          0,
+          -1,
+          2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0723",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "4e4c9ae56bdf8b9d68e8064025647617946f62eeced3bbc6ef97666c3a1ca8c8",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 128,
+      "direct_model_false_positives": 3,
+      "admission": "rejected-unsound (3 direct-model false positives)",
+      "counterexample": {
+        "row": 57,
+        "residuals": [
+          -2,
+          -2,
+          0,
+          -1,
+          0
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0724",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "ef1e3fb54accc5aaa5a4f2e4ce656aef75b5a0873195aaa5099a4d42ebced7fe",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 127,
+      "direct_model_false_positives": 2,
+      "admission": "rejected-unsound (2 direct-model false positives)",
+      "counterexample": {
+        "row": 561,
+        "residuals": [
+          -2,
+          2,
+          0,
+          0,
+          -1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0746",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "02fa402bf6fb0c3f68c2784208fd7b6ff2aa64248bb8916d420592c6a444e8da",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 126,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 461,
+        "residuals": [
+          -2,
+          1,
+          1,
+          0,
+          -1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0747",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "48181cca57000afd66239c32ccef97abb8d2765ca1e4372e505f132e26a92d9a",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 127,
+      "direct_model_false_positives": 2,
+      "admission": "rejected-unsound (2 direct-model false positives)",
+      "counterexample": {
+        "row": 1739,
+        "residuals": [
+          0,
+          1,
+          2,
+          0,
+          2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0770",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "140475e7fd3907ff848ff8a49bee1e708309336917132764e59a64fdd29ddf8f",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 128,
+      "direct_model_false_positives": 3,
+      "admission": "rejected-unsound (3 direct-model false positives)",
+      "counterexample": {
+        "row": 538,
+        "residuals": [
+          -2,
+          2,
+          -1,
+          0,
+          1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0771",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "34fa4dac735330d8db6988236921af663c953b3dddf8c5cb4f0ffe21eb998915",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 127,
+      "direct_model_false_positives": 2,
+      "admission": "rejected-unsound (2 direct-model false positives)",
+      "counterexample": {
+        "row": 234,
+        "residuals": [
+          -2,
+          -1,
+          2,
+          -1,
+          2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0794",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "5cedafc7c98b3ecedcc4b5beb30fa6ec959c8dfb2879f07a007bf407251c9565",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0795",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "c80a03bfbe63dd07ae28d6a67840f204a535e0404e2dd171fa1be68618df0dac",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0957",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "fcbc7150f4a8a0d728e0f4ff467371b4a594b3a4c662bcefb5e086f84c3fd094",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-no-novel-coverage",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0958",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "c2ff3dbe458859d4044ccce02eeb307ca6c3943b0ae1a304efdf5d6b327dccb5",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 1,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 756,
+        "residuals": [
+          -1,
+          -1,
+          -2,
+          -1,
+          -1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0959",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "a448790b832e597c08a8c4adf672d34ddf4f537ebc6b86f72cb249cce80958ff",
+      "training_covered": 2,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0960",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "47de0b087bf02c45097ffaffd02884a4bd4a8951288d32462bec1f93f4391043",
+      "training_covered": 2,
+      "training_false_positives": 0,
+      "direct_model_covered": 1,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 756,
+        "residuals": [
+          -1,
+          -1,
+          -2,
+          -1,
+          -1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0961",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "5f3529ca40fd54086798bbd18e8c25b07b99ba8530828b9140e37aefd2777bed",
+      "training_covered": 2,
+      "training_false_positives": 0,
+      "direct_model_covered": 1,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 2182,
+        "residuals": [
+          1,
+          0,
+          0,
+          -1,
+          0
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0962",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "7e62e01dfea85597d8d428e4c33c643a28703befae4d287163256e03099a7d68",
+      "training_covered": 2,
+      "training_false_positives": 0,
+      "direct_model_covered": 2,
+      "direct_model_false_positives": 2,
+      "admission": "rejected-unsound (2 direct-model false positives)",
+      "counterexample": {
+        "row": 756,
+        "residuals": [
+          -1,
+          -1,
+          -2,
+          -1,
+          -1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0963",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "27d58f09ae00d2966b7d5966f4f6b74a78f5e1ce154fbf553b868fbab443ec07",
+      "training_covered": 3,
+      "training_false_positives": 0,
+      "direct_model_covered": 1,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 2182,
+        "residuals": [
+          1,
+          0,
+          0,
+          -1,
+          0
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "evolve-0985",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "e041f2d386d92b96993766a4be403068b4e943b5a2469f33dd2d177bc4f40e87",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0986",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "3fea274ff8265b9288c461b7757e511afbd338306515225fc146e2e36c0748f9",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    },
+    {
+      "name": "evolve-0987",
+      "origin": "evolve",
+      "literals": null,
+      "plan_digest": "d5d4e809910bc8bfd2995b4148809734ec261b6f6a5955a8adcc1c0778a82641",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 0,
+      "direct_model_false_positives": 0,
+      "admission": "rejected-dominated",
+      "counterexample": null
+    }
+  ],
+  "sweep_rejections": [
+    {
+      "name": "sweep-000066",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 32,
+          "constant": -3
+        }
+      ],
+      "plan_digest": "a85da7667592f010bd5be7d9ab80e5bde7296b12398dfc3e59f9baa69d60bcae",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 1,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 2435,
+        "residuals": [
+          1,
+          2,
+          0,
+          0,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000085",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 32,
+          "constant": -3
+        },
+        {
+          "field": 49,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "3dda355280c7af938dba22ee2bdb82a5ff1f565f5a54c2b73bff01c7b74b4cec",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 1,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 2435,
+        "residuals": [
+          1,
+          2,
+          0,
+          0,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000086",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 32,
+          "constant": -3
+        },
+        {
+          "field": 49,
+          "constant": 0
+        },
+        {
+          "field": 50,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "5882f7d2b06390ec94d3bdbea66982e5c7b43c46bf23889816a4d54f31329acb",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 1,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 2435,
+        "residuals": [
+          1,
+          2,
+          0,
+          0,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000087",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 32,
+          "constant": -3
+        },
+        {
+          "field": 50,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "226eca85a3e613048e543d6ec4007a37e4fe711b1c1dc7be6cc6eca50c40cd7e",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 1,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 2435,
+        "residuals": [
+          1,
+          2,
+          0,
+          0,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000101",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 36,
+          "constant": 0
+        },
+        {
+          "field": 45,
+          "constant": -2
+        },
+        {
+          "field": 49,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "45ee89cc649e03a3084064ffab477a37e1a6467d59bd7fc45f7e0fc06156783f",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 25,
+      "direct_model_false_positives": 20,
+      "admission": "rejected-unsound (20 direct-model false positives)",
+      "counterexample": {
+        "row": 1300,
+        "residuals": [
+          0,
+          -2,
+          0,
+          -2,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000102",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 36,
+          "constant": 0
+        },
+        {
+          "field": 45,
+          "constant": -2
+        },
+        {
+          "field": 50,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "f3617aa49a487d60927a22daaef166d8e773b3dd95168f2578f92df5eee695ca",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 25,
+      "direct_model_false_positives": 20,
+      "admission": "rejected-unsound (20 direct-model false positives)",
+      "counterexample": {
+        "row": 1260,
+        "residuals": [
+          0,
+          -2,
+          -2,
+          0,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000103",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 36,
+          "constant": 0
+        },
+        {
+          "field": 45,
+          "constant": -1
+        },
+        {
+          "field": 49,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "291d041d59576bb8bbe6187e9d41eccf479eb97b883f1916941426fd940d0b51",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 25,
+      "direct_model_false_positives": 20,
+      "admission": "rejected-unsound (20 direct-model false positives)",
+      "counterexample": {
+        "row": 1301,
+        "residuals": [
+          0,
+          -2,
+          0,
+          -2,
+          -1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000104",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 36,
+          "constant": 0
+        },
+        {
+          "field": 45,
+          "constant": -1
+        },
+        {
+          "field": 50,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "2c7e1982d56c916cb06fd213a229086ecb31fc35378fbd9af679deddfc115aa9",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 25,
+      "direct_model_false_positives": 20,
+      "admission": "rejected-unsound (20 direct-model false positives)",
+      "counterexample": {
+        "row": 1261,
+        "residuals": [
+          0,
+          -2,
+          -2,
+          0,
+          -1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000105",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 36,
+          "constant": 0
+        },
+        {
+          "field": 45,
+          "constant": 0
+        },
+        {
+          "field": 49,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "a400b938bbdfb052b1b932d32a3b674d0d95fc2b1782b42af93207ac66533314",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 25,
+      "direct_model_false_positives": 20,
+      "admission": "rejected-unsound (20 direct-model false positives)",
+      "counterexample": {
+        "row": 1302,
+        "residuals": [
+          0,
+          -2,
+          0,
+          -2,
+          0
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000106",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 36,
+          "constant": 0
+        },
+        {
+          "field": 45,
+          "constant": 0
+        },
+        {
+          "field": 50,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "9564e3f1519330aaf32ba8646f457301ceb51b07e9fa72422853c711df388efd",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 25,
+      "direct_model_false_positives": 20,
+      "admission": "rejected-unsound (20 direct-model false positives)",
+      "counterexample": {
+        "row": 1262,
+        "residuals": [
+          0,
+          -2,
+          -2,
+          0,
+          0
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000107",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 36,
+          "constant": 0
+        },
+        {
+          "field": 45,
+          "constant": 1
+        },
+        {
+          "field": 49,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "8a0abc905506bfe5ba871d8bcbb4862bd4482d27cd35d948d97f5aa7ef7a841c",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 25,
+      "direct_model_false_positives": 20,
+      "admission": "rejected-unsound (20 direct-model false positives)",
+      "counterexample": {
+        "row": 1303,
+        "residuals": [
+          0,
+          -2,
+          0,
+          -2,
+          1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000108",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 36,
+          "constant": 0
+        },
+        {
+          "field": 45,
+          "constant": 1
+        },
+        {
+          "field": 50,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "7834532a6f26f363839fc0abe96b4b8a62377460928f240476f386fc29bc5e52",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 25,
+      "direct_model_false_positives": 20,
+      "admission": "rejected-unsound (20 direct-model false positives)",
+      "counterexample": {
+        "row": 1263,
+        "residuals": [
+          0,
+          -2,
+          -2,
+          0,
+          1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000110",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 36,
+          "constant": 0
+        },
+        {
+          "field": 45,
+          "constant": 2
+        },
+        {
+          "field": 49,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "c02f3cf07f52566a7353ad6d9bc696a9bfed073c4b50447563dc67acafe3e2e0",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 25,
+      "direct_model_false_positives": 20,
+      "admission": "rejected-unsound (20 direct-model false positives)",
+      "counterexample": {
+        "row": 1304,
+        "residuals": [
+          0,
+          -2,
+          0,
+          -2,
+          2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000111",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 36,
+          "constant": 0
+        },
+        {
+          "field": 45,
+          "constant": 2
+        },
+        {
+          "field": 50,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "c92d34ede69ceb2a215ca6308747cda0d173349a47d3c939a2e8c40e9856d3bc",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 25,
+      "direct_model_false_positives": 20,
+      "admission": "rejected-unsound (20 direct-model false positives)",
+      "counterexample": {
+        "row": 1264,
+        "residuals": [
+          0,
+          -2,
+          -2,
+          0,
+          2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000115",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 36,
+          "constant": 0
+        },
+        {
+          "field": 49,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "d1756452238dd0083b518972bcff64e81114ee7d5b44f2de1e735664a6a96ea6",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 100,
+      "admission": "rejected-unsound (100 direct-model false positives)",
+      "counterexample": {
+        "row": 1300,
+        "residuals": [
+          0,
+          -2,
+          0,
+          -2,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000116",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 36,
+          "constant": 0
+        },
+        {
+          "field": 49,
+          "constant": 0
+        },
+        {
+          "field": 50,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "eacc85ca4e84567831c3ee3906fd192c41e2c2a82abd6a487ce0a8cad7a75a46",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 25,
+      "direct_model_false_positives": 20,
+      "admission": "rejected-unsound (20 direct-model false positives)",
+      "counterexample": {
+        "row": 1310,
+        "residuals": [
+          0,
+          -2,
+          0,
+          0,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000117",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 36,
+          "constant": 0
+        },
+        {
+          "field": 50,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "de274819b57cb5ec32a0cc20a45dd9e9b84ffbde28394cfab0d8000a5ce68ac7",
+      "training_covered": 5,
+      "training_false_positives": 0,
+      "direct_model_covered": 125,
+      "direct_model_false_positives": 100,
+      "admission": "rejected-unsound (100 direct-model false positives)",
+      "counterexample": {
+        "row": 1260,
+        "residuals": [
+          0,
+          -2,
+          -2,
+          0,
+          -2
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000121",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 46,
+          "constant": -3
+        }
+      ],
+      "plan_digest": "a1db03cfa853c59e38d1d110daf154bde190e3480bf1dc797975db0d08fc07ce",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 1,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 2941,
+        "residuals": [
+          2,
+          1,
+          0,
+          1,
+          -1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    },
+    {
+      "name": "sweep-000122",
+      "origin": "domain-sweep",
+      "literals": [
+        {
+          "field": 46,
+          "constant": -3
+        },
+        {
+          "field": 49,
+          "constant": 0
+        }
+      ],
+      "plan_digest": "e698a7aba81fb3147f2d67085a75b70e613fc15d617407f548d93d7d57e73428",
+      "training_covered": 1,
+      "training_false_positives": 0,
+      "direct_model_covered": 1,
+      "direct_model_false_positives": 1,
+      "admission": "rejected-unsound (1 direct-model false positives)",
+      "counterexample": {
+        "row": 2941,
+        "residuals": [
+          2,
+          1,
+          0,
+          1,
+          -1
+        ],
+        "claimed": true,
+        "expected": false
+      }
+    }
+  ],
+  "totals": {
+    "candidates_screened": 1120,
+    "admitted": 1,
+    "rejected_unsound": 620,
+    "rejected_other": 499,
+    "retained_sweep_rejections": 19,
+    "retained_evolve_proposals": 87,
+    "evolve_zero_false_positive": 383,
+    "uncompilable_proposals": 0,
+    "by_origin": [
+      {
+        "origin": "planted",
+        "screened": 4,
+        "admitted": 1,
+        "rejected_unsound": 3,
+        "rejected_other": 0
+      },
+      {
+        "origin": "evolve",
+        "screened": 991,
+        "admitted": 0,
+        "rejected_unsound": 598,
+        "rejected_other": 393
+      },
+      {
+        "origin": "domain-sweep",
+        "screened": 125,
+        "admitted": 0,
+        "rejected_unsound": 19,
+        "rejected_other": 106
+      }
+    ]
+  },
+  "limits": "planted-family evidence only: no claim of general admission soundness, of transfer to unplanted corpora, or that evolve discovered mathematics"
+}

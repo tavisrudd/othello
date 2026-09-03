@@ -39,10 +39,10 @@ struct HoldoutAudit {
     proposed_plan: Value,
 }
 
-struct GenericCorpus {
-    fields: Vec<String>,
-    expected: Vec<bool>,
-    values: Vec<Vec<i64>>,
+pub(crate) struct GenericCorpus {
+    pub(crate) fields: Vec<String>,
+    pub(crate) expected: Vec<bool>,
+    pub(crate) values: Vec<Vec<i64>>,
 }
 
 #[derive(Serialize)]
@@ -52,7 +52,7 @@ struct HoldoutReport {
     provenance: &'static str,
 }
 
-fn require_ok(response: Response) -> Result<Value> {
+pub(crate) fn require_ok(response: Response) -> Result<Value> {
     if !response.ok {
         bail!(
             "campaign rejected request: {}",
@@ -62,7 +62,7 @@ fn require_ok(response: Response) -> Result<Value> {
     Ok(response.result)
 }
 
-fn wait_until_ready(manifest: &Manifest) -> Result<()> {
+pub(crate) fn wait_until_ready(manifest: &Manifest) -> Result<()> {
     for _ in 0..10_000 {
         if send_request(manifest, "capabilities", json!({}), RESPONSE_LIMIT).is_ok() {
             return Ok(());
@@ -114,7 +114,7 @@ fn campaign_rows(value: &Value) -> Result<u64> {
         .context("campaign response omitted weighted_rows")
 }
 
-fn read_generic_corpus(path: &Path) -> Result<GenericCorpus> {
+pub(crate) fn read_generic_corpus(path: &Path) -> Result<GenericCorpus> {
     let file = File::open(path)?;
     let mut lines = BufReader::new(file).lines();
     let header: Value = serde_json::from_str(
@@ -222,9 +222,11 @@ fn generic_zero_conjunction(path: &Path) -> Result<(Value, usize)> {
     ))
 }
 
-type FieldConstants = Vec<(usize, i64)>;
+pub(crate) type FieldConstants = Vec<(usize, i64)>;
 
-fn generic_constant_conjunction(corpus: &GenericCorpus) -> Result<(Value, usize, FieldConstants)> {
+pub(crate) fn generic_constant_conjunction(
+    corpus: &GenericCorpus,
+) -> Result<(Value, usize, FieldConstants)> {
     let first_positive = corpus
         .expected
         .iter()
@@ -522,7 +524,7 @@ fn generic_cegar_sparse_exception_dnf_corpora(
     bail!("sparse-exception CEGAR exceeded its bounded refinement rounds")
 }
 
-fn evolve(
+pub(crate) fn evolve(
     manifest: &Manifest,
     plan: &Value,
     name: &str,
@@ -549,7 +551,7 @@ fn evolve(
     wait_for_evolution(manifest)
 }
 
-fn shutdown(
+pub(crate) fn shutdown(
     manifest: &Manifest,
     server: thread::JoinHandle<Result<(), ControlError>>,
 ) -> Result<()> {

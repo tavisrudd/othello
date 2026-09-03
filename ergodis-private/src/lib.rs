@@ -88,6 +88,7 @@ pub mod landed_rank_adapter;
 pub mod mask_cycle_proof;
 pub mod order6_crt_residual;
 pub mod order6_margin_evolve;
+pub mod planted_gap_corpus;
 pub mod predicate_cover;
 pub mod projected_orbit_min_cost;
 pub mod projective_grid;

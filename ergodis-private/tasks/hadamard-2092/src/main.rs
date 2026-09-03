@@ -181,6 +181,8 @@ enum EvolveCommand {
     RawFeatures(evolve::raw_features::Arguments),
     /// Theorem-agnostic train/holdout harness for expanded scalar observations.
     BlindHoldout(evolve::blind_holdout::Arguments),
+    /// Planted theorem-gap corpus and admission-boundary measurement (C1039).
+    TheoremGap(evolve::theorem_gap::Arguments),
 }
 
 #[derive(Subcommand)]
@@ -280,6 +282,7 @@ fn main() -> Result<()> {
             },
             EvolveCommand::RawFeatures(arguments) => evolve::raw_features::run(arguments),
             EvolveCommand::BlindHoldout(arguments) => evolve::blind_holdout::run(arguments),
+            EvolveCommand::TheoremGap(arguments) => evolve::theorem_gap::run(arguments),
         },
         Command::Proof(command) => match command {
             ProofCommand::Perf(arguments) => proof::perf::run(arguments),

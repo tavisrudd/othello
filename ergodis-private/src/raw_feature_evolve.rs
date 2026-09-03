@@ -72,11 +72,11 @@ struct DataRow<'a> {
 }
 
 #[derive(Clone, Copy)]
-struct SplitMix64(u64);
+pub(crate) struct SplitMix64(pub(crate) u64);
 
 impl SplitMix64 {
     #[inline(always)]
-    fn next(&mut self) -> u64 {
+    pub(crate) fn next(&mut self) -> u64 {
         self.0 = self.0.wrapping_add(0x9e37_79b9_7f4a_7c15);
         let mut value = self.0;
         value = (value ^ (value >> 30)).wrapping_mul(0xbf58_476d_1ce4_e5b9);
@@ -110,11 +110,14 @@ fn expand_pairwise_differences_validated(raw: &[i64], output: &mut [i64]) -> usi
     cursor
 }
 
-fn opaque_feature_names(fields: usize) -> Vec<String> {
+pub(crate) fn opaque_feature_names(fields: usize) -> Vec<String> {
     (0..fields).map(|index| format!("f{index:03}")).collect()
 }
 
-fn feature_permutation(fields: usize, source_digest: [u8; 32]) -> [u16; MAX_EXPANDED_FIELDS] {
+pub(crate) fn feature_permutation(
+    fields: usize,
+    source_digest: [u8; 32],
+) -> [u16; MAX_EXPANDED_FIELDS] {
     let mut permutation = [0_u16; MAX_EXPANDED_FIELDS];
     for (index, slot) in permutation[..fields].iter_mut().enumerate() {
         *slot = index as u16;
@@ -150,7 +153,7 @@ fn digest(slug: &str, split: &str, source_digest: [u8; 32]) -> [u8; 32] {
     hasher.finalize().into()
 }
 
-fn digest_hex(digest: [u8; 32]) -> String {
+pub(crate) fn digest_hex(digest: [u8; 32]) -> String {
     const HEX: &[u8; 16] = b"0123456789abcdef";
     let mut output = String::with_capacity(64);
     for byte in digest {
