@@ -126,6 +126,13 @@ diff of the private range, and nothing needs rebasing. Squash semantics come for
 - The lint also runs in CI on the public repository as a minimal workflow that fails on any
   task-ID token or process document; the workflow file itself carries no process detail beyond
   invoking the lint, and the lint's rule list lives in the private tree.
+- The public remote's `pushurl` is parked at a non-routable `no-push://` URL; only
+  `scripts/publish.sh` swaps in the real URL for one push, and only with `ERGODIS_PUBLISH=1`
+  set and a tip that is a lint-clean, tagged, `EXPORTS.md`-recorded `public` commit.
+- Companion repositories have no public remote at all.
+- Claude Code project settings in every Ergodis directory deny `git push` and `gh repo`
+  mutations, so agents cannot publish even by mistake; GitHub branch protection on the public
+  `main` requires the CI lint.
 - Agents never push; export produces the commit and stops. Pushing is Tavis's action.
 
 **Only polished, release-grade material is published.** An export is a release, not a sync:
