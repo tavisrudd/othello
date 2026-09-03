@@ -444,3 +444,27 @@ one-line pointer here.
   one; every timed loop now verified to bound on `--operations`. Differential gates caught an
   unsound truncation rule (sound rule: exact once the best surviving total is within budget)
   and an asymmetric port penalty in the Dijkstra comparator.
+- 2026-09-03 — probe 20: sealed compilation obligations and second semirings. Report:
+  `2026-09-03-c1061-probe20-sealed-obligations-and-second-semiring.md` (ergodis-private
+  `33b6ded`, which also swept in probe 18's staged files; see process note). Verdicts:
+  **obligations sealed**; **three semirings over one decomposition, count vector closed under
+  all**; **probability semiring is not reliability (load-bearing negative)**.
+  `fleet_obligations` seals a schema binding, derives ten Horn steps, and verifies by
+  recomputing every semantic check from sealed representative pods (convolution property,
+  probe 12's four assumptions, profile from budget response); tampering with profile, grant
+  bound, transcript, or provenance each fails closed. Emit 345.7k instructions, verify 172.5k
+  for 20 profiles. Boolean, counting, and probability semirings all run on the same
+  count-vector state and profile alphabet, each checked against brute force; the scorer gives
+  quotient 220 with zero exactness and zero closure violations for all three. None needs the
+  tree; cost separates them: Boolean 39 instructions (34x below min-plus, 392x below the tree
+  delta), min-plus 1.3k, counting 627k and probability 650k because their readouts enumerate
+  grant-shape assignments instead of a bounded top-k (implementation property; probe-15 trick
+  should transfer, untested). Negative: the probability semiring sums over overlapping
+  allocation events, returning 2.19 against a true 0.109 on a three-pod fleet; it is a
+  union-bound surrogate, and reliability needs a per-pod threshold decomposition that is not a
+  semiring readout over this decomposition. Second finding: the min-plus knapsack has run in a
+  near-degenerate regime across probes 12 to 19 because adding global parity capacity also
+  raises aggregate data load, so data-domain capacity binds rather than the shared budget;
+  exactness unaffected, optimum less interesting than it looked. Process: the shared git
+  index is not safe even with a `git diff --cached --stat` check, since the check is not
+  atomic with the commit; the fix is per-agent worktrees or `GIT_INDEX_FILE` (Tavis's call).
