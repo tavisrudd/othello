@@ -910,6 +910,12 @@ clippy clean; builds go to `~/.cache/ergodis/target/`, A/B baselines are retaine
 The C1016 cache under `~/.cache/ergodis/c1016/` is absent on this host, so cold end-to-end g41
 replays need it regenerated first.
 
+C1039 and C1051 are closed: the planted theorem-gap corpus shows admission admitting exactly the
+sound predicate and rejecting every unsound corpus-perfect one with a replayable counterexample;
+the representation-search spike is a narrow go (typed encoder grammar, full cost vector,
+round-trip admission, control rediscovered; type-level descriptors are the main lever)
+([C1039](../2026-09-02-c1039-theorem-gap-admission.md), [C1051](../2026-09-02-c1051-evolve-representation-search-spike.md)).
+
 C1017 is queued to remediate the whole-core Ergodis performance-contract audit:
 allocation-counted hot loops, iterative traversal, complete Tiger layouts,
 contention-free worker ownership, one-/parallel-mode counter A/B gates, and the
