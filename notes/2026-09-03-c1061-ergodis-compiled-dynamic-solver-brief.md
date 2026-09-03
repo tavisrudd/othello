@@ -1,8 +1,10 @@
 # C1061 brief: Ergodis as a compiled dynamic decision engine (snapshot compile + delta update)
 
 **Lane**: `complete-ports`
-**Status**: allocated 2026-09-03; spike not started. Source: user + ChatGPT brainstorm, condensed
+**Status**: allocated 2026-09-03; open-ended exploration, not a gated single spike; not started. Source: user + ChatGPT brainstorm, condensed
 here as the task-facing design brief. Nothing below is a claim; everything is a hypothesis to test.
+The deliverable shape is a running exploration log plus dated findings, with directions promoted
+or dropped as evidence arrives; the candidate probes at the end are a menu, not a gate.
 
 ## Thesis
 
@@ -73,7 +75,60 @@ DAG and capacitated simultaneous-repair machinery already exist: coded recovery 
 rack/pod hierarchy with a bounded fault universe compiled by orbit type under the rack/code
 symmetry group, then failure and capacity events.
 
-## Spike deliverable (proposed acceptance gate)
+## Operational shell: event sourcing and CQRS
+
+Event sourcing supplies the authoritative delta stream; CQRS supplies the architectural slot for
+specialized derived state; Ergodis supplies a derived state that is normally uncomputable
+incrementally: the exact optimum, witness, and certificate. The framing sentence for systems
+engineers: *Ergodis treats the optimal decision as a materialized view and compiles the problem's
+structure so that an event updates the optimum instead of rerunning the optimizer.* This is
+incremental view maintenance for exact optimization; the update rules are derived from algebraic
+structure (quotients, min-sum composition, spans, symmetry, sufficient statistics) instead of from
+relational algebra.
+
+Correspondences:
+
+| Event / CQRS concept  | Ergodis concept                                |
+|-----------------------|------------------------------------------------|
+| Event log             | authoritative delta sequence                   |
+| Aggregate state       | raw domain snapshot                            |
+| Projection            | quotient optimizer state `Q_t`                 |
+| Materialized view     | current optimum and witness                    |
+| Projection update     | `apply_delta()`                                |
+| Projection snapshot   | serialized `Q_t`                               |
+| Replay                | exact optimizer reconstruction                 |
+| Projection version    | compiler / compiled-artifact version           |
+| Command               | requested optimized action                     |
+| Event                 | observed consequence                           |
+| Rebuild projection    | cold snapshot solve or recomposition           |
+
+Consequences worth exploring:
+
+- **The event enum is the compilation contract.** A declared vocabulary such as `NodeFailed`,
+  `NodeRecovered`, `LinkCapacityChanged`, `DemandAdded`, `DemandRemoved` tells the compiler the
+  complete mutation algebra, so it can derive per-event-type affected components. Semantic events
+  carry more optimization information than `set_variable(i, x)`.
+- **Parametric vs structural events.** Most events stay inside the compiled envelope; events such
+  as `RackAdded` or `CodingSchemeChanged` trigger partial or full recompile. The compiler could
+  classify, or prove, which category an event type belongs to.
+- **Crash recovery is replay.** Persist compiler version, artifact hash, event offset, `Q`,
+  optimum, witness, certificate; on restart load, verify, replay from the offset. Full-history
+  replay reproduces the identical state, matching the existing replay and certificate philosophy.
+- **Event-sourced certificates.** `C_t --Δ_t--> C_{t+1}` as an auditable chain of small proof
+  transitions (previous root, affected quotient nodes, new root, certificate delta): historical
+  decision provenance on top of ordinary state provenance.
+- **Commands are not events.** The projection recommends an action; the domain accepts or rejects
+  it; only the resulting event feeds Ergodis. Optimizer state derives from facts, never from what
+  the optimizer hoped would happen.
+- **Concurrency by sequence number.** A decision stamped `based_on_event` can be rejected as stale
+  by the command side, or the delta engine is fast enough to have already advanced past it.
+- The three technologies are independent; event sourcing plus CQRS is the natural shell, not a
+  requirement.
+
+## Candidate probes (menu, not a gate)
+
+Explore in whatever order the evidence favors; record each in a dated findings note and keep a
+running exploration log. Suggested starting points:
 
 1. One concrete domain (coded recovery over a small fixed hierarchy) expressed as
    `OpenProblem<Boundary, Summary>` with `compose`, `tensor`, `quotient`, `reconstruct`, and the
@@ -90,4 +145,11 @@ symmetry group, then failure and capacity events.
 5. A written verdict on whether an optimization congruence with finite quotient exists for the
    chosen domain, with the exact reason if it does not.
 
-Out of scope for the spike: HFT, crypto block building, FPGA emission, any public-surface claim.
+6. Event-sourcing shell: a typed event enum as the compilation contract, per-event-type affected
+   component derivation, parametric vs structural classification, replay-based recovery.
+7. Whether the same compiled decomposition supports several target semirings (min-plus, Boolean,
+   counting, probability, Pareto) without recompilation.
+8. Evolve objective: smallest sufficient statistic closed under the update monoid.
+
+Not in scope for now: public-surface claims. HFT, crypto block building, and FPGA emission are
+later directions, open for exploration if a finding points there.
