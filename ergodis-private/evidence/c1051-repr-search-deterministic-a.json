@@ -1,0 +1,2254 @@
+{
+  "admission": {
+    "allocation": "zero allocator events in decode and probe",
+    "probe_agreement": "every query in the fixed schedule, exactly",
+    "round_trip_identity": "training and every held-out observation"
+  },
+  "deterministic": true,
+  "grammar": {
+    "max_depth": 3,
+    "observation_kinds": [
+      "sorted-ids",
+      "dense-bitmap",
+      "small-int-vector"
+    ],
+    "serializers": [
+      "identity",
+      "narrow",
+      "varint",
+      "elias-fano",
+      "run-length",
+      "bitpack",
+      "dictionary"
+    ],
+    "size": 224,
+    "transforms": [
+      "window-clip",
+      "delta",
+      "zigzag",
+      "canonical-permutation"
+    ]
+  },
+  "instances": [
+    {
+      "elements": 62,
+      "entropy_bound_bytes": 15.628386282025634,
+      "family": "subset-sum-reachability",
+      "fingerprint": "e81602559ad21e61d90104f2742626e01280962f5658f1ee0d140ce32df09ebe",
+      "holdout_fingerprints": [
+        "566aa48aceabf6e410baef33e87fc10375696872460b31737c6f02cf74976f8b",
+        "524e7bf2e987353a023fce60fcf8366e9bf7ab35af5638f8c11e7e1a4a8c063e"
+      ],
+      "kind": "dense-bitmap",
+      "name": "subset-sum-24",
+      "note": "reachability row 12 of a 24-item, magnitude-9 plan at target 0; compiled width 129; recomputed windows verified against transition_bound()",
+      "reference_bytes": 496,
+      "universe": 129
+    },
+    {
+      "elements": 436,
+      "entropy_bound_bytes": 118.3939099419967,
+      "family": "subset-sum-reachability",
+      "fingerprint": "aae227c9af1a2c932164da83453ce19c6f1b86013d6723669472081a28efa828",
+      "holdout_fingerprints": [
+        "f8bb26e3bc31f308b07dcec3a7dd03529b52505cb68fb0bf0c154965ee3239c3",
+        "830a9134c9a247ae8d73b5dcc46dc2b72f46282079cc766dc3dc838622d114a0"
+      ],
+      "kind": "dense-bitmap",
+      "name": "subset-sum-40",
+      "note": "reachability row 20 of a 40-item, magnitude-40 plan at target 0; compiled width 958; recomputed windows verified against transition_bound()",
+      "reference_bytes": 3488,
+      "universe": 958
+    },
+    {
+      "elements": 1273,
+      "entropy_bound_bytes": 341.62990509561035,
+      "family": "subset-sum-reachability",
+      "fingerprint": "5e33397b74ffc254bef55c176ae247baa3bd9a428faf085372dd33001a3512fb",
+      "holdout_fingerprints": [
+        "8bd9831af479774c3a6fd8323b2bd5a05284630242eb181d06b5b05b82285088",
+        "826c8261e46ffa6b48c9c927404ce408c785fe0eb1b3accfb1462b840e9fd3ed"
+      ],
+      "kind": "dense-bitmap",
+      "name": "subset-sum-56",
+      "note": "reachability row 28 of a 56-item, magnitude-90 plan at target 0; compiled width 2750; recomputed windows verified against transition_bound()",
+      "reference_bytes": 10184,
+      "universe": 2750
+    },
+    {
+      "elements": 512,
+      "entropy_bound_bytes": 795.5817330156918,
+      "family": "sparse-sorted-ids",
+      "fingerprint": "851ee30cbaf3342ebb34b099486c20bf29a663152e76b3437605cdcf588d1907",
+      "holdout_fingerprints": [
+        "745d1b31897b904d2f56f7fa62dfca288c6934a519817ee395d51d923faf23c9",
+        "0659dcec1fcf80d2ced0c8e924f2585a2cd298d14cc19382b4b43222440af1e2"
+      ],
+      "kind": "sorted-ids",
+      "name": "sparse-sorted-ids",
+      "note": "512 distinct ids uniform in a 2^20 universe",
+      "reference_bytes": 4096,
+      "universe": 1048576
+    },
+    {
+      "elements": 2515,
+      "entropy_bound_bytes": 910.2019334512216,
+      "family": "clustered-runs",
+      "fingerprint": "4dc2142cf668d6682bcb5b0cc6ba8c4ba15bf58371b57eebaaf03fd7b9da38fe",
+      "holdout_fingerprints": [
+        "6444d7815bdf195adeaff8b788381bc5a5c41a030af239bfaa6f1696a06f8e26",
+        "b9d60e8a413c397601190e917cf102258c9dc25b324cb7af971cc8f4a908f115"
+      ],
+      "kind": "dense-bitmap",
+      "name": "clustered-runs",
+      "note": "24 contiguous runs of 48-207 members in an 8192 universe",
+      "reference_bytes": 20120,
+      "universe": 8192
+    },
+    {
+      "elements": 1024,
+      "entropy_bound_bytes": 768.0,
+      "family": "small-integer-vector",
+      "fingerprint": "0e5e3ec6a6b44c99559a4271136e9ec94f660e0df41c3836e28e2111fe48ce99",
+      "holdout_fingerprints": [
+        "add21586cfd9fc26cb726cd7768e5128131ba1b02cca73956dc58866cce410d3",
+        "9342b476d1569fd9ad852d557b306d108fce07da87dca9f97a71f4017a0e84c5"
+      ],
+      "kind": "small-int-vector",
+      "name": "witness-vector",
+      "note": "1024 order-bearing values over a 64-symbol alphabet, in short runs",
+      "reference_bytes": 8192,
+      "universe": 64
+    }
+  ],
+  "kind": "spike",
+  "lane": "complete-ports",
+  "measurement": {
+    "clock": "reference cycles from the invariant time-stamp counter",
+    "iterations": 4,
+    "probes": 256,
+    "rounds": 7,
+    "statistic": "median over rounds of the per-operation cost",
+    "warmup": 2
+  },
+  "results": [
+    {
+      "admitted_candidates": 186,
+      "bytes_first_top": [
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 8,
+            "peak_working_bytes": 1008,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 4
+          },
+          "objective": 1048.0,
+          "pipeline": "canonical-permutation . window-clip . bitpack . type-carried",
+          "probe_class": "random-access",
+          "rank": 1,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 8,
+            "peak_working_bytes": 1008,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 3
+          },
+          "objective": 1040.0,
+          "pipeline": "window-clip . bitpack . type-carried",
+          "probe_class": "random-access",
+          "rank": 2,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 9,
+            "peak_working_bytes": 1008,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 2
+          },
+          "objective": 1033.0,
+          "pipeline": "bitpack . type-carried",
+          "probe_class": "random-access",
+          "rank": 3,
+          "rejection": null
+        }
+      ],
+      "control": {
+        "cost": {
+          "_padding0": 0,
+          "_padding1": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "decode_cycles": 0,
+          "encode_cycles": 0,
+          "encoded_bytes": 72,
+          "peak_working_bytes": 1008,
+          "precondition_cycles": 0,
+          "probe_cycles_q16": 0,
+          "syntax_cost": 3
+        },
+        "exhaustive_rank": 63,
+        "objective": 1104.0,
+        "pipeline": "window-clip . bitpack . runtime-header",
+        "search_no_worse_by_bytes_and_probe_cycles": true,
+        "search_returned_control": false
+      },
+      "control_bytes_first_rank": 65,
+      "exhaustive_best": "window-clip . bitpack . type-carried",
+      "exhaustive_top": [
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 8,
+            "peak_working_bytes": 1008,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 3
+          },
+          "objective": 1040.0,
+          "pipeline": "window-clip . bitpack . type-carried",
+          "probe_class": "random-access",
+          "rank": 1,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 8,
+            "peak_working_bytes": 1008,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 4
+          },
+          "objective": 1048.0,
+          "pipeline": "canonical-permutation . window-clip . bitpack . type-carried",
+          "probe_class": "random-access",
+          "rank": 2,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 9,
+            "peak_working_bytes": 1008,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 2
+          },
+          "objective": 1033.0,
+          "pipeline": "bitpack . type-carried",
+          "probe_class": "random-access",
+          "rank": 3,
+          "rejection": null
+        }
+      ],
+      "grammar_size": 224,
+      "instance": "subset-sum-24",
+      "rejected_examples": [
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . bitpack . packed-word",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . bitpack . runtime-header",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . bitpack . type-carried",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . elias-fano . packed-word",
+          "probe_class": null,
+          "rejection": "training: encode NotMonotone"
+        }
+      ],
+      "search": {
+        "best": "window-clip . bitpack . type-carried",
+        "best_is_exhaustive_best": true,
+        "distinct_evaluations": 107,
+        "engine": "ergodis::theorem_search::drive_ranked_evolution_streaming",
+        "grammar_size": 224,
+        "top": [
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 8,
+              "peak_working_bytes": 1008,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 3
+            },
+            "objective": 1040.0,
+            "pipeline": "window-clip . bitpack . type-carried",
+            "probe_class": "random-access",
+            "rank": 1,
+            "rejection": null
+          },
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 8,
+              "peak_working_bytes": 1008,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 4
+            },
+            "objective": 1048.0,
+            "pipeline": "canonical-permutation . window-clip . bitpack . type-carried",
+            "probe_class": "random-access",
+            "rank": 2,
+            "rejection": null
+          },
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 9,
+              "peak_working_bytes": 1008,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 2
+            },
+            "objective": 1033.0,
+            "pipeline": "bitpack . type-carried",
+            "probe_class": "random-access",
+            "rank": 3,
+            "rejection": null
+          }
+        ],
+        "trials": 107
+      },
+      "usage_weights": {
+        "bytes": 1.0,
+        "decodes": 0.0,
+        "encodes": 1.0,
+        "preconditions": 1.0,
+        "probes": 62.0,
+        "syntax": 8.0,
+        "working_bytes": 1.0
+      }
+    },
+    {
+      "admitted_candidates": 178,
+      "bytes_first_top": [
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 32,
+            "peak_working_bytes": 6992,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 4
+          },
+          "objective": 7056.0,
+          "pipeline": "canonical-permutation . delta . run-length . packed-word",
+          "probe_class": "streaming",
+          "rank": 1,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 32,
+            "peak_working_bytes": 6992,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 3
+          },
+          "objective": 7048.0,
+          "pipeline": "delta . run-length . packed-word",
+          "probe_class": "streaming",
+          "rank": 2,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 32,
+            "peak_working_bytes": 6992,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 4
+          },
+          "objective": 7056.0,
+          "pipeline": "delta . window-clip . run-length . packed-word",
+          "probe_class": "streaming",
+          "rank": 3,
+          "rejection": null
+        }
+      ],
+      "control": {
+        "cost": {
+          "_padding0": 0,
+          "_padding1": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "decode_cycles": 0,
+          "encode_cycles": 0,
+          "encoded_bytes": 119,
+          "peak_working_bytes": 6992,
+          "precondition_cycles": 0,
+          "probe_cycles_q16": 0,
+          "syntax_cost": 3
+        },
+        "exhaustive_rank": 44,
+        "objective": 7135.0,
+        "pipeline": "window-clip . bitpack . runtime-header",
+        "search_no_worse_by_bytes_and_probe_cycles": true,
+        "search_returned_control": false
+      },
+      "control_bytes_first_rank": 47,
+      "exhaustive_best": "delta . run-length . packed-word",
+      "exhaustive_top": [
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 32,
+            "peak_working_bytes": 6992,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 3
+          },
+          "objective": 7048.0,
+          "pipeline": "delta . run-length . packed-word",
+          "probe_class": "streaming",
+          "rank": 1,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 32,
+            "peak_working_bytes": 6992,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 4
+          },
+          "objective": 7056.0,
+          "pipeline": "canonical-permutation . delta . run-length . packed-word",
+          "probe_class": "streaming",
+          "rank": 2,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 32,
+            "peak_working_bytes": 6992,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 4
+          },
+          "objective": 7056.0,
+          "pipeline": "delta . window-clip . run-length . packed-word",
+          "probe_class": "streaming",
+          "rank": 3,
+          "rejection": null
+        }
+      ],
+      "grammar_size": 224,
+      "instance": "subset-sum-40",
+      "rejected_examples": [
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . bitpack . packed-word",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . bitpack . runtime-header",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . bitpack . type-carried",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . elias-fano . packed-word",
+          "probe_class": null,
+          "rejection": "holdout-0: encode NotMonotone"
+        }
+      ],
+      "search": {
+        "best": "delta . run-length . packed-word",
+        "best_is_exhaustive_best": true,
+        "distinct_evaluations": 128,
+        "engine": "ergodis::theorem_search::drive_ranked_evolution_streaming",
+        "grammar_size": 224,
+        "top": [
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 32,
+              "peak_working_bytes": 6992,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 3
+            },
+            "objective": 7048.0,
+            "pipeline": "delta . run-length . packed-word",
+            "probe_class": "streaming",
+            "rank": 1,
+            "rejection": null
+          },
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 32,
+              "peak_working_bytes": 6992,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 4
+            },
+            "objective": 7056.0,
+            "pipeline": "canonical-permutation . delta . run-length . packed-word",
+            "probe_class": "streaming",
+            "rank": 2,
+            "rejection": null
+          },
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 32,
+              "peak_working_bytes": 6992,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 4
+            },
+            "objective": 7056.0,
+            "pipeline": "delta . window-clip . run-length . packed-word",
+            "probe_class": "streaming",
+            "rank": 3,
+            "rejection": null
+          }
+        ],
+        "trials": 128
+      },
+      "usage_weights": {
+        "bytes": 1.0,
+        "decodes": 0.0,
+        "encodes": 1.0,
+        "preconditions": 1.0,
+        "probes": 436.0,
+        "syntax": 8.0,
+        "working_bytes": 1.0
+      }
+    },
+    {
+      "admitted_candidates": 178,
+      "bytes_first_top": [
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 163,
+            "peak_working_bytes": 20384,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 2
+          },
+          "objective": 20563.0,
+          "pipeline": "bitpack . type-carried",
+          "probe_class": "random-access",
+          "rank": 1,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 163,
+            "peak_working_bytes": 20384,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 3
+          },
+          "objective": 20571.0,
+          "pipeline": "canonical-permutation . bitpack . type-carried",
+          "probe_class": "random-access",
+          "rank": 2,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 163,
+            "peak_working_bytes": 20384,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 4
+          },
+          "objective": 20579.0,
+          "pipeline": "canonical-permutation . window-clip . bitpack . type-carried",
+          "probe_class": "random-access",
+          "rank": 3,
+          "rejection": null
+        }
+      ],
+      "control": {
+        "cost": {
+          "_padding0": 0,
+          "_padding1": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "decode_cycles": 0,
+          "encode_cycles": 0,
+          "encoded_bytes": 227,
+          "peak_working_bytes": 20384,
+          "precondition_cycles": 0,
+          "probe_cycles_q16": 0,
+          "syntax_cost": 3
+        },
+        "exhaustive_rank": 11,
+        "objective": 20635.0,
+        "pipeline": "window-clip . bitpack . runtime-header",
+        "search_no_worse_by_bytes_and_probe_cycles": true,
+        "search_returned_control": false
+      },
+      "control_bytes_first_rank": 12,
+      "exhaustive_best": "bitpack . type-carried",
+      "exhaustive_top": [
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 163,
+            "peak_working_bytes": 20384,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 2
+          },
+          "objective": 20563.0,
+          "pipeline": "bitpack . type-carried",
+          "probe_class": "random-access",
+          "rank": 1,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 163,
+            "peak_working_bytes": 20384,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 3
+          },
+          "objective": 20571.0,
+          "pipeline": "canonical-permutation . bitpack . type-carried",
+          "probe_class": "random-access",
+          "rank": 2,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 163,
+            "peak_working_bytes": 20384,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 3
+          },
+          "objective": 20571.0,
+          "pipeline": "window-clip . bitpack . type-carried",
+          "probe_class": "random-access",
+          "rank": 3,
+          "rejection": null
+        }
+      ],
+      "grammar_size": 224,
+      "instance": "subset-sum-56",
+      "rejected_examples": [
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . bitpack . packed-word",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . bitpack . runtime-header",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . bitpack . type-carried",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . elias-fano . packed-word",
+          "probe_class": null,
+          "rejection": "training: encode NotMonotone"
+        }
+      ],
+      "search": {
+        "best": "bitpack . type-carried",
+        "best_is_exhaustive_best": true,
+        "distinct_evaluations": 122,
+        "engine": "ergodis::theorem_search::drive_ranked_evolution_streaming",
+        "grammar_size": 224,
+        "top": [
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 163,
+              "peak_working_bytes": 20384,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 2
+            },
+            "objective": 20563.0,
+            "pipeline": "bitpack . type-carried",
+            "probe_class": "random-access",
+            "rank": 1,
+            "rejection": null
+          },
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 163,
+              "peak_working_bytes": 20384,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 3
+            },
+            "objective": 20571.0,
+            "pipeline": "canonical-permutation . bitpack . type-carried",
+            "probe_class": "random-access",
+            "rank": 2,
+            "rejection": null
+          },
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 163,
+              "peak_working_bytes": 20384,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 3
+            },
+            "objective": 20571.0,
+            "pipeline": "window-clip . bitpack . type-carried",
+            "probe_class": "random-access",
+            "rank": 3,
+            "rejection": null
+          }
+        ],
+        "trials": 122
+      },
+      "usage_weights": {
+        "bytes": 1.0,
+        "decodes": 0.0,
+        "encodes": 1.0,
+        "preconditions": 1.0,
+        "probes": 1273.0,
+        "syntax": 8.0,
+        "working_bytes": 1.0
+      }
+    },
+    {
+      "admitted_candidates": 166,
+      "bytes_first_top": [
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 960,
+            "peak_working_bytes": 8208,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 4
+          },
+          "objective": 9200.0,
+          "pipeline": "canonical-permutation . delta . narrow . type-carried",
+          "probe_class": "streaming",
+          "rank": 1,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 960,
+            "peak_working_bytes": 8208,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 3
+          },
+          "objective": 9192.0,
+          "pipeline": "delta . narrow . type-carried",
+          "probe_class": "streaming",
+          "rank": 2,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 960,
+            "peak_working_bytes": 8208,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 4
+          },
+          "objective": 9200.0,
+          "pipeline": "delta . window-clip . narrow . type-carried",
+          "probe_class": "streaming",
+          "rank": 3,
+          "rejection": null
+        }
+      ],
+      "control": {
+        "cost": {
+          "_padding0": 0,
+          "_padding1": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "decode_cycles": 0,
+          "encode_cycles": 0,
+          "encoded_bytes": 130201,
+          "peak_working_bytes": 8208,
+          "precondition_cycles": 0,
+          "probe_cycles_q16": 0,
+          "syntax_cost": 3
+        },
+        "exhaustive_rank": 159,
+        "objective": 138433.0,
+        "pipeline": "window-clip . bitpack . runtime-header",
+        "search_no_worse_by_bytes_and_probe_cycles": true,
+        "search_returned_control": false
+      },
+      "control_bytes_first_rank": 160,
+      "exhaustive_best": "delta . narrow . type-carried",
+      "exhaustive_top": [
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 960,
+            "peak_working_bytes": 8208,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 3
+          },
+          "objective": 9192.0,
+          "pipeline": "delta . narrow . type-carried",
+          "probe_class": "streaming",
+          "rank": 1,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 960,
+            "peak_working_bytes": 8208,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 4
+          },
+          "objective": 9200.0,
+          "pipeline": "canonical-permutation . delta . narrow . type-carried",
+          "probe_class": "streaming",
+          "rank": 2,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 960,
+            "peak_working_bytes": 8208,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 4
+          },
+          "objective": 9200.0,
+          "pipeline": "delta . window-clip . narrow . type-carried",
+          "probe_class": "streaming",
+          "rank": 3,
+          "rejection": null
+        }
+      ],
+      "grammar_size": 224,
+      "instance": "sparse-sorted-ids",
+      "rejected_examples": [
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . bitpack . packed-word",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . bitpack . runtime-header",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . bitpack . type-carried",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . elias-fano . packed-word",
+          "probe_class": null,
+          "rejection": "training: encode NotMonotone"
+        }
+      ],
+      "search": {
+        "best": "delta . narrow . type-carried",
+        "best_is_exhaustive_best": true,
+        "distinct_evaluations": 113,
+        "engine": "ergodis::theorem_search::drive_ranked_evolution_streaming",
+        "grammar_size": 224,
+        "top": [
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 960,
+              "peak_working_bytes": 8208,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 3
+            },
+            "objective": 9192.0,
+            "pipeline": "delta . narrow . type-carried",
+            "probe_class": "streaming",
+            "rank": 1,
+            "rejection": null
+          },
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 960,
+              "peak_working_bytes": 8208,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 4
+            },
+            "objective": 9200.0,
+            "pipeline": "canonical-permutation . delta . narrow . type-carried",
+            "probe_class": "streaming",
+            "rank": 2,
+            "rejection": null
+          },
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 960,
+              "peak_working_bytes": 8208,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 4
+            },
+            "objective": 9200.0,
+            "pipeline": "delta . window-clip . narrow . type-carried",
+            "probe_class": "streaming",
+            "rank": 3,
+            "rejection": null
+          }
+        ],
+        "trials": 113
+      },
+      "usage_weights": {
+        "bytes": 1.0,
+        "decodes": 1.0,
+        "encodes": 1.0,
+        "preconditions": 1.0,
+        "probes": 0.0,
+        "syntax": 8.0,
+        "working_bytes": 1.0
+      }
+    },
+    {
+      "admitted_candidates": 178,
+      "bytes_first_top": [
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 344,
+            "peak_working_bytes": 40256,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 4
+          },
+          "objective": 40632.0,
+          "pipeline": "canonical-permutation . delta . run-length . packed-word",
+          "probe_class": "streaming",
+          "rank": 1,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 344,
+            "peak_working_bytes": 40256,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 3
+          },
+          "objective": 40624.0,
+          "pipeline": "delta . run-length . packed-word",
+          "probe_class": "streaming",
+          "rank": 2,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 344,
+            "peak_working_bytes": 40256,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 4
+          },
+          "objective": 40632.0,
+          "pipeline": "delta . window-clip . run-length . packed-word",
+          "probe_class": "streaming",
+          "rank": 3,
+          "rejection": null
+        }
+      ],
+      "control": {
+        "cost": {
+          "_padding0": 0,
+          "_padding1": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "decode_cycles": 0,
+          "encode_cycles": 0,
+          "encoded_bytes": 961,
+          "peak_working_bytes": 40256,
+          "precondition_cycles": 0,
+          "probe_cycles_q16": 0,
+          "syntax_cost": 3
+        },
+        "exhaustive_rank": 17,
+        "objective": 41241.0,
+        "pipeline": "window-clip . bitpack . runtime-header",
+        "search_no_worse_by_bytes_and_probe_cycles": true,
+        "search_returned_control": false
+      },
+      "control_bytes_first_rank": 18,
+      "exhaustive_best": "delta . run-length . packed-word",
+      "exhaustive_top": [
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 344,
+            "peak_working_bytes": 40256,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 3
+          },
+          "objective": 40624.0,
+          "pipeline": "delta . run-length . packed-word",
+          "probe_class": "streaming",
+          "rank": 1,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 344,
+            "peak_working_bytes": 40256,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 4
+          },
+          "objective": 40632.0,
+          "pipeline": "canonical-permutation . delta . run-length . packed-word",
+          "probe_class": "streaming",
+          "rank": 2,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 344,
+            "peak_working_bytes": 40256,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 4
+          },
+          "objective": 40632.0,
+          "pipeline": "delta . window-clip . run-length . packed-word",
+          "probe_class": "streaming",
+          "rank": 3,
+          "rejection": null
+        }
+      ],
+      "grammar_size": 224,
+      "instance": "clustered-runs",
+      "rejected_examples": [
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . bitpack . packed-word",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . bitpack . runtime-header",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . bitpack . type-carried",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . delta . elias-fano . packed-word",
+          "probe_class": null,
+          "rejection": "training: encode NotMonotone"
+        }
+      ],
+      "search": {
+        "best": "delta . run-length . packed-word",
+        "best_is_exhaustive_best": true,
+        "distinct_evaluations": 122,
+        "engine": "ergodis::theorem_search::drive_ranked_evolution_streaming",
+        "grammar_size": 224,
+        "top": [
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 344,
+              "peak_working_bytes": 40256,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 3
+            },
+            "objective": 40624.0,
+            "pipeline": "delta . run-length . packed-word",
+            "probe_class": "streaming",
+            "rank": 1,
+            "rejection": null
+          },
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 344,
+              "peak_working_bytes": 40256,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 4
+            },
+            "objective": 40632.0,
+            "pipeline": "canonical-permutation . delta . run-length . packed-word",
+            "probe_class": "streaming",
+            "rank": 2,
+            "rejection": null
+          },
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 344,
+              "peak_working_bytes": 40256,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 4
+            },
+            "objective": 40632.0,
+            "pipeline": "delta . window-clip . run-length . packed-word",
+            "probe_class": "streaming",
+            "rank": 3,
+            "rejection": null
+          }
+        ],
+        "trials": 122
+      },
+      "usage_weights": {
+        "bytes": 1.0,
+        "decodes": 0.0,
+        "encodes": 1.0,
+        "preconditions": 1.0,
+        "probes": 2515.0,
+        "syntax": 8.0,
+        "working_bytes": 1.0
+      }
+    },
+    {
+      "admitted_candidates": 89,
+      "bytes_first_top": [
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 768,
+            "peak_working_bytes": 16400,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 2
+          },
+          "objective": 17184.0,
+          "pipeline": "narrow . type-carried",
+          "probe_class": "random-access",
+          "rank": 1,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 768,
+            "peak_working_bytes": 16400,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 3
+          },
+          "objective": 17192.0,
+          "pipeline": "window-clip . narrow . type-carried",
+          "probe_class": "random-access",
+          "rank": 2,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 776,
+            "peak_working_bytes": 16400,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 2
+          },
+          "objective": 17192.0,
+          "pipeline": "narrow . packed-word",
+          "probe_class": "random-access",
+          "rank": 3,
+          "rejection": null
+        }
+      ],
+      "control": {
+        "cost": null,
+        "exhaustive_rank": 182,
+        "objective": null,
+        "pipeline": "window-clip . bitpack . runtime-header",
+        "search_no_worse_by_bytes_and_probe_cycles": false,
+        "search_returned_control": false
+      },
+      "control_bytes_first_rank": 182,
+      "exhaustive_best": "narrow . type-carried",
+      "exhaustive_top": [
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 768,
+            "peak_working_bytes": 16400,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 2
+          },
+          "objective": 17184.0,
+          "pipeline": "narrow . type-carried",
+          "probe_class": "random-access",
+          "rank": 1,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 768,
+            "peak_working_bytes": 16400,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 3
+          },
+          "objective": 17192.0,
+          "pipeline": "window-clip . narrow . type-carried",
+          "probe_class": "random-access",
+          "rank": 2,
+          "rejection": null
+        },
+        {
+          "admitted": true,
+          "allocator_events": 0,
+          "cost": {
+            "_padding0": 0,
+            "_padding1": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "decode_cycles": 0,
+            "encode_cycles": 0,
+            "encoded_bytes": 776,
+            "peak_working_bytes": 16400,
+            "precondition_cycles": 0,
+            "probe_cycles_q16": 0,
+            "syntax_cost": 2
+          },
+          "objective": 17192.0,
+          "pipeline": "narrow . packed-word",
+          "probe_class": "random-access",
+          "rank": 3,
+          "rejection": null
+        }
+      ],
+      "grammar_size": 224,
+      "instance": "witness-vector",
+      "rejected_examples": [
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "bitpack . packed-word",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "bitpack . runtime-header",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "bitpack . type-carried",
+          "probe_class": null,
+          "rejection": "training: encode NotASet"
+        },
+        {
+          "admitted": false,
+          "allocator_events": 0,
+          "cost": null,
+          "objective": null,
+          "pipeline": "canonical-permutation . bitpack . packed-word",
+          "probe_class": null,
+          "rejection": "training: encode OrderNotFree"
+        }
+      ],
+      "search": {
+        "best": "narrow . type-carried",
+        "best_is_exhaustive_best": true,
+        "distinct_evaluations": 113,
+        "engine": "ergodis::theorem_search::drive_ranked_evolution_streaming",
+        "grammar_size": 224,
+        "top": [
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 768,
+              "peak_working_bytes": 16400,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 2
+            },
+            "objective": 17184.0,
+            "pipeline": "narrow . type-carried",
+            "probe_class": "random-access",
+            "rank": 1,
+            "rejection": null
+          },
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 768,
+              "peak_working_bytes": 16400,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 3
+            },
+            "objective": 17192.0,
+            "pipeline": "window-clip . narrow . type-carried",
+            "probe_class": "random-access",
+            "rank": 2,
+            "rejection": null
+          },
+          {
+            "admitted": true,
+            "allocator_events": 0,
+            "cost": {
+              "_padding0": 0,
+              "_padding1": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "decode_cycles": 0,
+              "encode_cycles": 0,
+              "encoded_bytes": 776,
+              "peak_working_bytes": 16400,
+              "precondition_cycles": 0,
+              "probe_cycles_q16": 0,
+              "syntax_cost": 2
+            },
+            "objective": 17192.0,
+            "pipeline": "narrow . packed-word",
+            "probe_class": "random-access",
+            "rank": 3,
+            "rejection": null
+          }
+        ],
+        "trials": 113
+      },
+      "usage_weights": {
+        "bytes": 1.0,
+        "decodes": 0.0,
+        "encodes": 1.0,
+        "preconditions": 1.0,
+        "probes": 1024.0,
+        "syntax": 8.0,
+        "working_bytes": 1.0
+      }
+    }
+  ],
+  "task": "C1051"
+}

@@ -21,6 +21,7 @@ mod q16_quadratic;
 mod q19_marked_polar;
 mod q25_pair_repair;
 mod qdist_to_ergodis;
+mod repr_search;
 mod routing_policy_audit;
 mod semantic_affine_census;
 mod semantic_rank_census;
@@ -66,6 +67,8 @@ enum Command {
     SemanticRankCensus(semantic_rank_census::Args),
     /// C80 consumed-label Hall rematching instances and admission triage.
     C80HallRematch(Box<c80_hall_rematch::Arguments>),
+    /// C1051 spike: evolve-style search over a typed lossless-encoder grammar.
+    ReprSearch(Box<repr_search::Args>),
 }
 
 #[derive(Subcommand)]
@@ -105,5 +108,16 @@ fn main() -> Result<()> {
         Command::SemanticAffineCensus(args) => semantic_affine_census::run(args),
         Command::SemanticRankCensus(args) => semantic_rank_census::run(args),
         Command::C80HallRematch(args) => c80_hall_rematch::run(*args),
+        Command::ReprSearch(args) => repr_search::run(*args),
     }
 }
+
+/// The C1051 spike rejects any encoder candidate that allocates in its decode
+/// or probe path, so the binary carries a counting allocator. Its non-measuring
+/// path is one relaxed atomic load.
+/// Not registered under `cfg(test)`: the public core installs its own counting
+/// allocator in its test configuration, and a crate may define only one.
+#[cfg(not(test))]
+#[global_allocator]
+static ALLOCATOR: repr_search::alloc_guard::CountingAllocator =
+    repr_search::alloc_guard::CountingAllocator;

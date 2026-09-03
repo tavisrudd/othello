@@ -118,6 +118,7 @@ pub mod q29_transfer_anneal;
 pub mod quotient_paf_proof;
 pub mod raw_feature_evolve;
 pub mod reduction_proof;
+pub mod repr_grammar;
 pub mod semantic_plan;
 pub mod semantic_rank;
 pub mod semantic_sets;
