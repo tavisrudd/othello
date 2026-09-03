@@ -659,6 +659,68 @@ campaign-VM zero-allocation test, strict clippy, exact/fallback boundary tests,
 and Tiger layout assertions pass. Evidence is under
 `/home/tavis/.cache/ergodis-perf/c1017-plan-vm-truth-table`.
 
+## 2026-09-02 publication-boundary closure
+
+The Ergodis core now lives in `~/src/ergodis`, the private library and task
+crates in `~/src/ergodis-private`. Two gates were repaired there.
+
+The kernel registry gate (acceptance gate 8) had stopped running. Its checker
+resolves every source and evidence path against the parent directory holding
+the sibling checkouts, and the rows citing research reports still used the
+old shared-root prefix, so the strict run aborted on its first row rather than
+reporting a census. Those rows now begin `othello/`, the resolution rule is
+recorded in the registry README, and the strict gate passes with all 17 kernels
+at 69 passing and 33 not-applicable cells and nothing open.
+
+The public/private source boundary (acceptance gate 7) was the other live gap.
+The filtered export tree carried 67 lint findings: 43 task identifiers and 24
+private paths. Every one is now repaired at the source rather than allowlisted.
+Task identifiers in core sources, examples, benchmark scripts, and public
+documents became descriptive names — the benchmark tier's L2 and W3 rows, the
+certified dominance and branch-and-bound routes, the counted-type reduction —
+and the `task` field that three runner scripts wrote into their evidence
+summaries is gone, no consumer having read it. Hardcoded developer home
+directories in eleven scripts and one example became `XDG_CACHE_HOME`/`HOME`
+derived defaults, and the three that named a stale `nix-target` path now ask
+`ergodis_bin` for the executable. The observational Boa A/B samples, which the
+public checker reached for through a relative path into the monorepo, are
+retained under `evidence/` at their pinned SHA-256.
+
+One finding remains, and it is a real boundary question rather than a wording
+one: `python/check_bb_native.py` in public core has a replay branch keyed on
+the schema `ergodis-private-css-bp-osd-spike-v2`, whose producer and every
+artifact live only in `ergodis-private`. Moving that branch to the private side
+is the boundary-correct fix, but the checker is hashed in `SHA256SUMS` and
+pinned by a retained BB360 evidence file, so repinning that evidence needs an
+explicit decision.
+
+Filenames were the other half, and the lint never saw them: it scans file
+contents, not paths. No tracked file in any Ergodis repository now carries a
+task identifier in its name. In the core that is six examples, five scripts,
+three Python runners, and all 124 evidence artifacts, with every reference
+rewritten in sources, benchmark documents, replay scripts, evidence bundles,
+and the checksum manifest. `ergodis-evidence` is refreshed to match byte for
+byte with a rebuilt `SHA256SUMS`. In `ergodis-private` it is 180 files, eleven
+directories, and the twenty cap-game artifacts whose `c80` prefix became
+`cap-game`, including the Rust module and subcommand that carried it.
+
+One consequence needed care. The negative-control evidence bundle pins the
+SHA-256 of the shape-classifier document, the example source, and the control
+source, and the identifier scrub changed all three. The bundle is re-pinned
+with a `source_repin` record naming the superseded hashes and stating that only
+comments, prose, and names moved; the pinned Ergodis binary that produced the
+measured rows is unchanged, so no row was re-measured and none needs to be.
+
+The validation gate passes in both repositories: `cargo fmt --check`, strict
+all-target/all-feature clippy, and the full test suites, plus the evidence
+checkers and the registry gate. Core commits `f692857` and `1ea0e9a`, evidence
+commit `921bd9d`, private commit `48c75d7`.
+
+Task identifiers still appear inside file *contents* as schema version tags
+(`c985-structured-set-ab-v1`, `c997-source`) and in the registry's citations of
+monorepo report filenames. Those are data tags and real paths in another
+repository, not names this rename owns.
+
 ## Review findings for the pending C1016 Rust overlay
 
 The 2026-08-30 overlay in `ergodis/src` is **not approved as submitted**. Its

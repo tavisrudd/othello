@@ -941,10 +941,14 @@ sync ([C1058](../2026-09-02-c1058-ergodis-repository-split.md),
 [C1057](../2026-09-02-c1057-proof-scaffolding-promotion.md),
 [validation](../2026-09-02-c1058-fresh-clone-validation.md)).
 
-C1017 is queued to remediate the whole-core Ergodis performance-contract audit (now in `~/src/ergodis`):
+C1017 is active on the whole-core Ergodis performance-contract audit (now in `~/src/ergodis`):
 allocation-counted hot loops, iterative traversal, complete Tiger layouts,
 contention-free worker ownership, one-/parallel-mode counter A/B gates, and the
-public/private source partition. Its task report is
+public/private source partition. The kernel-registry gate passes again after its
+evidence paths were repointed across the repository split, and the export
+boundary is clean apart from one private BP+OSD schema branch in the public
+`check_bb_native.py`; no tracked file in any Ergodis repository carries a task
+identifier in its name. Its task report is
 [`C1017 core remediation`](../2026-08-30-c1017-ergodis-core-performance-contract-remediation.md).
 
 The prior monolithic draft and its cold reads remain inputs, not acceptance of the modular
