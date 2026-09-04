@@ -705,8 +705,11 @@ blossom expansion and no dense matcher, wins every cell against its prior build,
 oracle behind the certified predecoder, whose sound margin commits nothing at the radii built
 (`2026-09-04-c1061-probe28c-blossom-expansion-and-tiger-behind-the-predecoder.md`). The sparse
 core's scheduling cost is measured and mostly inherent
-(`2026-09-04-c1061-probe28d-sparse-core-scheduling-cost.md`, with a design note for a simpler and
-safer core); the next step is Tavis's decision on that redesign.
+(`2026-09-04-c1061-probe28d-sparse-core-scheduling-cost.md`). Its validate-on-pop redesign is
+taken and measured (`2026-09-04-c1061-probe28e-validate-on-pop-sparse-core.md`): stamps gone, a
+debug oracle for the whole queue contract, packed layout at 0.926x of probe 28d on the losing
+cells, one cell at parity with PyMatching; the next step is the A/B of its last commit, then the
+certificate's closure reads.
 C1016 is active as a private Ergodis reduction-synthesis pilot. A hostile review found that its
 unapproved presentation-hash/feature-name overlay did not establish extractor semantics. Public
 proof authority, `Necessary`, and all Hadamard/GS code are therefore removed; core again advertises
