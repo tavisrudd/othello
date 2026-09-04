@@ -714,7 +714,12 @@ as a lever: caching it per node costs more in region-wide invalidation than the 
 removes, so it is reverted, while the depth merge that enabled it is kept
 (`2026-09-04-c1061-probe28g-depth-merge-and-the-rejected-rate-cache.md`, reviewed in
 `2026-09-04-c1061-probe28g-fable-review.md`). The derived standing is about 0.92x at d=9, 1.16x at
-d=15 and 1.27x at d=25; the next work is the predecoder items from probe 28c.
+d=15 and 1.27x at d=25. Probe 28c's two predecoder items are then closed
+(`2026-09-04-c1061-probe28h-margin-radius-and-the-surface-d9-rederivation.md`): the certified
+margin predecoder commits no correction at the smallest sound margin at any radius that compiles,
+exhaustively over every ball syndrome, and the surface d=9 rows the aliased check masks invalidated
+are re-derived, moving exactly one published number. Both standing levers are closed; `solve` at
+27.5% of the matcher profile has never been attacked.
 C1016 is active as a private Ergodis reduction-synthesis pilot. A hostile review found that its
 unapproved presentation-hash/feature-name overlay did not establish extractor semantics. Public
 proof authority, `Necessary`, and all Hadamard/GS code are therefore removed; core again advertises

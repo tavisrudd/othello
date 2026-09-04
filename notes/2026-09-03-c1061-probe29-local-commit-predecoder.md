@@ -104,6 +104,13 @@ weight bound, so the residual contract is verified rather than assumed.
 `rank` is the dimension of the crossing subspace, so `2^rank` is the number of quantified contexts;
 `entries` is the compiled interior metric's size.
 
+**Correction (probe 28h, 2026-09-04).** The `surface`, `d = 9`, `r = 2` row below was computed on
+the graph whose 32-bit check-support masks aliased distance 9's checks 32 to 39 onto 0 to 7, the
+defect probe 28c found. On the repaired graph it reads 28, 45, 60, 18, 262,144, 5.37e8 — which
+restores the ball-width saturation this section's own text asserts. Every other surface row here,
+and the compile table further down, is unchanged; see
+`2026-09-04-c1061-probe28h-margin-radius-and-the-surface-d9-rederivation.md`.
+
 | family | `d` | `r` | ball bits | interior | crossing | rank | contexts | metric entries |
 |---|---|---|---|---|---|---|---|---|
 | repetition | 5 | 1 | 6 | 8 | 6 | 4 | 16 | 128 |

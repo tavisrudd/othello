@@ -155,6 +155,15 @@ assumption is the one gap in this probe's exactness claim and it is stated rathe
 mechanism, radius 1. `committed` is the fraction of windows the certificate commits; `corrections` is
 the fraction where the committed action is a nonzero correction rather than "no error here".
 
+**Correction (probe 28h, 2026-09-04).** The distance-9 rows below were computed on the graph whose
+32-bit check-support masks aliased distance 9's checks 32 to 39 onto 0 to 7 (probe 28c). Re-derived
+on the repaired graph they are 0.6752 / 0.9711 / 0.0059 at `Δ = 2` and 0.6752 / 0.8768 / 0.0000 at
+`Δ = 3`, both at 1% error: unchanged within the sampling of 20,000 shots, because a radius-1
+surface ball is ten detectors and never reaches an aliased check. The deterministic compile row
+further down is identical. Probe 28c has separately withdrawn the `Δ = 2` coverage figures as
+coverage by unsound commits. See
+`2026-09-04-c1061-probe28h-margin-radius-and-the-surface-d9-rederivation.md`.
+
 | `d` | `Δ` | ball | rate | clean | **committed** | corrections |
 |---|---|---|---|---|---|---|
 | 5 | 2 | 10 | 0.001 | 0.9600 | **0.9998** | 0.0010 |

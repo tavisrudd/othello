@@ -50,6 +50,7 @@ and the next-session plan. Reports are the authority for numbers and method.
 | 28e   | Validate-on-pop sparse core, taken                  | stamps gone, oracle in; packed layout 0.926x at the losing cells; d=9 at parity | `2026-09-04-c1061-probe28e-validate-on-pop-sparse-core.md`                    |
 | 28f   | Hoist measured, narrow closure                      | hoist 0.93x at p=0.05; u16 closure a wash; d=9 ahead of PyMatching, d=15/25 at 1.17x/1.28x | `2026-09-04-c1061-probe28f-hoist-ab-and-narrow-closure.md`                  |
 | 28g   | Depth merge kept, rate cache rejected               | depth merge 0.992x; caching the far owner's rate is 1.10x, reverted      | `2026-09-04-c1061-probe28g-depth-merge-and-the-rejected-rate-cache.md`        |
+| 28h   | Margin radius grid; surface d=9 re-derived          | killed; no ball syndrome at any radius commits a correction at margin 3  | `2026-09-04-c1061-probe28h-margin-radius-and-the-surface-d9-rederivation.md`  |
 | 29    | Local-commit predecoder                             | sound at every radius; does not compile past small d                     | `2026-09-03-c1061-probe29-local-commit-predecoder.md`                        |
 | 30    | Margin certificate predecoder                       | certificate proved and local; not yet d=9 accuracy-identical             | `2026-09-03-c1061-probe30-margin-certificate-predecoder.md`                  |
 | 31    | Sparse evaluation and per-witness margin            | paused by Tavis; per-witness margin dead as posed                        | `2026-09-03-c1061-probe31-sparse-evaluation-and-per-witness-margin.md`       |
@@ -72,8 +73,10 @@ expansion as its only general solver, 15 of 18 cells ahead of PyMatching).
 compression (the table is already the compressed form); probability semiring over the cost
 decomposition as reliability; capped-multiplicity state keys; per-witness margin as posed;
 memoization on unique fleets; QEC time-axis chain beyond distance 6; the certified margin
-predecoder at radius 1 or 2 (the only sound margin commits nothing; probe 28c); the local
-I1/I2 certificate as a simpler object than the LP pair certificate (probe 28c).
+predecoder at every radius that compiles — the only sound margin commits nothing, sampled in probe
+28c and then exhaustively over every ball syndrome in probe 28h; the local
+I1/I2 certificate as a simpler object than the LP pair certificate (probe 28c);
+caching the far owner's rate on the node record (probe 28g).
 
 **Paused, with next steps in their reports.** Probe 18 (generic chain zero-allocation regression,
 9.5 dedupe needs a quiet tree), probe 21 (routing fair baseline), probe 22 (non-degenerate LRC
@@ -154,3 +157,19 @@ PyMatching to about 0.92x at d=9, 1.16x at d=15 and 1.27x at d=25. `solve` at 27
 largest symbol and has never been attacked directly. The next work is the predecoder items from
 probe 28c: a radius-3 or observation-conditioned margin audited by the kernel, and the surface d=9
 rows re-derived on the repaired graph.
+
+## State after probe 28h, 2026-09-04
+
+Both of probe 28c's predecoder items are closed. The certified margin predecoder is dead at every
+radius that compiles, and exhaustively rather than by sampling: the compiled policy at the smallest
+sound margin has two distinct decisions where the unsound margin has three, so no ball syndrome
+anywhere in a twenty-bit ball commits a correction. A sixteen-thousand-fold increase in enumerated
+context buys nothing, so the obstruction is the margin threshold and not the amount of local
+information, and the observation-conditioned variant is not worth building. The construction fails
+by one unit of margin; the only route left is a soundness argument valid one unit lower, or the
+module's `BoundedSafe` tier used under a declared fault bound. The surface distance-9 rows probe
+28c invalidated are re-derived, and exactly one published number moves: probe 29's region-shape row
+at radius 2, whose repaired value restores the ball-width saturation probe 29's own text asserts.
+Everything at radius 1 is bit-for-bit unchanged, because a ten-detector ball never reaches the
+aliased checks. Both standing levers of this probe family — the predecoder and the matcher's
+`touch_node` — are now closed; `solve` at 27.5% of the matcher profile has never been attacked.
