@@ -546,3 +546,20 @@ one-line pointer here.
   at 5%); the tier census predicts about 28x at d=7 with deeper tiers. Next: a spatial
   locality argument (a defect far from the commit region cannot change the commit decision),
   for which the six-state d=9 automaton is direct evidence.
+- 2026-09-03 — probe 26: TigerBlossom kernel. Report:
+  `2026-09-03-c1061-probe26-tiger-blossom-kernel.md` (code and A/B logs committed in
+  ergodis-private). Verdict: **promote; exact; wins at low error, loses at high error and
+  large d through the fallback**. Exactness: identical minimum-weight matching to PyMatching
+  on all 360,000 shots across d in {3, 5, 7, 9, 15, 25} and p in {0.001, 0.01, 0.05}, plus an
+  in-tree Floyd--Warshall and subset-DP oracle; prediction differences only on degenerate
+  ties (4.2% at d=3, p=0.05, zero by d=25). Zero allocations across `decode_batch`, workspace
+  bounded at 559 KiB. Instructions vs PyMatching: 3.1x to 12.3x fewer at p=0.001 and 1.9x to
+  7.2x at p=0.01 up to d=15; loses at p=0.05 for d >= 7 (1.5x at d=7 to 25.5x at d=25) and
+  at d=25, p=0.01 (1.7x); all CIs exclude 1.0, eight rounds, pinned hashed binaries. The whole
+  win is one specialization: compiling the metric closure (all-pairs distances and path
+  parities, constants of the code); removing it costs 1.15x at d=3 and 20.6x at d=25.
+  Small-case closed forms add 1.0x to 2.3x; cluster decomposition is a measured wash (first
+  misread from a two-variable arm, corrected with an isolating arm). The whole loss is the
+  general fallback, a dense O(n^3) blossom over the reduced complete graph instead of sparse
+  region growth (deliberate deviation from the brief); replacing it is the next step and
+  would close every losing cell. Zero allocation bought determinism, not speed.
