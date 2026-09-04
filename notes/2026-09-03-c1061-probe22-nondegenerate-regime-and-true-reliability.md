@@ -166,3 +166,7 @@ a test or a number, so neither is a result. Part A, the question the probe was a
 was not started. The next session should gate the two implementations before trusting them and then
 do the regime work, which remains the open question that matters most for interpreting the whole
 probe series.
+
+## Log addendum, 2026-09-03: commit provenance
+
+Stopped as documentation in ergodis-private `305373d` (one path).

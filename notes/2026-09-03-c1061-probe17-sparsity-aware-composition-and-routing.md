@@ -406,3 +406,7 @@ not scale.
    non-synthetic consumer after the LRC fleet.
 4. Do not spend further effort on QEC decoding cost. If the domain is revisited, revisit it for the
    certificate path or the group-action rollback, which are the parts no matching decoder has.
+
+## Log addendum, 2026-09-03: commit provenance
+
+Code for this probe is in ergodis-private `5ed47f9`, `739e289`, `a06ceb2`.

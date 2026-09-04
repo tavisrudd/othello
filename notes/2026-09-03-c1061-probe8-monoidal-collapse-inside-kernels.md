@@ -458,3 +458,23 @@ shows nothing, bit-exact differentials against both predecessors, and the privat
 The uncomfortable finding is the one that has nothing to do with performance: the scan the search
 depends on cannot be reached by any set anyone can currently build, which says more about how far the
 defect-19 branch is from a survivor than any of the ratios do.
+
+## Log addendum, 2026-09-03: probe 11 entry from the exploration log
+
+Probe 11: defect-kernel collapses landed in the Ergodis core under the full gate (core commits
+`eb349ce`, `08ccfb0`, `9a02921`; ergodis-private `b25cb13` removes the replica). Appended to this
+report. Verdict: **landed**. Binary splitting over multiplicities replaces the per-degree fold;
+threshold masks rebuilt as one scatter plus suffix and prefix scans; both predecessors retained as
+cfg(test) differential references. Paired A/B, seven rounds, two retained binaries with distinct
+hashes: 14.85x / 15.45x fewer instructions at budgets 12 / 13 on the whole-plane scan (cycles 8.3x
+/ 9.3x), 2.15x per pencil, 5.04x on the catalogue constructor, all CIs excluding 1.0; the depth-32
+search is the negative control at 1.000x. Bit-exact on PG(2,27) at five seated prefixes and every
+budget, all 757 pencils, 2,000 hostile multisets, the catalogue's masks; zero-allocation
+regression; identical work counts across arms and under parallel at 1/2/8 threads. Gate green:
+fmt, clippy, 747 tests, 79 Python oracle tests. Finding: `analyze_fixed_maximal_set`
+short-circuits on a negative correction budget and the best constructible 54-point set reports
+defect 640 for a budget of -621, so the flip scan is unreachable through the public analysis; a set
+with defect at most 19 is the open object it searches for, which is why the end-to-end workload
+shows no change. Hazard recorded: a worktree build sharing the target directory overwrote the
+candidate binary and produced two identical retained arms; compare SHA-256 of both arms before
+trusting an A/B.

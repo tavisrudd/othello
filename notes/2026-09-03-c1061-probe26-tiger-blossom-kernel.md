@@ -795,3 +795,43 @@ sparse rewrite land at all. Fifteen of eighteen cells win, the worst cell improv
 three that still lose have a measured cause with a named fix rather than a shrug. The one thing to
 carry forward is methodological: three separate times a plausible story about where the cost or
 the bug lived was wrong, and each time a counter or an assertion settled it in minutes.
+
+## Log addendum, 2026-09-03: probe 26 and probe 28 entries from the exploration log
+
+Probe 26: TigerBlossom kernel (code and A/B logs committed in ergodis-private). Verdict:
+**promote; exact; wins at low error, loses at high error and large d through the fallback**.
+Exactness: identical minimum-weight matching to PyMatching on all 360,000 shots across d in
+{3, 5, 7, 9, 15, 25} and p in {0.001, 0.01, 0.05}, plus an in-tree Floyd--Warshall and subset-DP
+oracle; prediction differences only on degenerate ties (4.2% at d=3, p=0.05, zero by d=25). Zero
+allocations across `decode_batch`, workspace bounded at 559 KiB. Instructions vs PyMatching: 3.1x
+to 12.3x fewer at p=0.001 and 1.9x to 7.2x at p=0.01 up to d=15; loses at p=0.05 for d >= 7 (1.5x
+at d=7 to 25.5x at d=25) and at d=25, p=0.01 (1.7x); all CIs exclude 1.0, eight rounds, pinned
+hashed binaries. The whole win is one specialization: compiling the metric closure (all-pairs
+distances and path parities, constants of the code); removing it costs 1.15x at d=3 and 20.6x at
+d=25. Small-case closed forms add 1.0x to 2.3x; cluster decomposition is a measured wash (first
+misread from a two-variable arm, corrected with an isolating arm). The whole loss is the general
+fallback, a dense O(n^3) blossom over the reduced complete graph instead of sparse region growth
+(deliberate deviation from the brief); replacing it is the next step and would close every losing
+cell. Zero allocation bought determinism, not speed.
+
+Probe 28: TigerBlossom sparse fallback, every cell (ergodis-private `880ffa6`); its material lives
+in the probe-28 section of this report. Verdict: **15 of 18 cells won (was 12); three p=0.05 cells
+still lose with a measured cause**. The dense O(n^3) fallback is replaced by region growth over the
+compiled detector graph (linear-function duals on a global clock, bucket event queue with recycled
+pool, blossom contraction and extraction), and every solve is certified optimal by LP duality
+before its answer is used, so a matcher bug costs speed, not correctness; the sparse matcher costs
+about 5,500 instructions on a sixteen-defect block vs 706,000 dense. Exactness: zero
+minimum-weight disagreements vs PyMatching on all 360,000 frozen shots; zero allocations across
+`decode_batch`; certificate soundness gated on 77,174 random instances with zero certified-but-wrong
+answers. Ratios 0.089x to 0.95x on the won cells, all CIs excluding 1.0; worst cell d=25, p=0.05
+improved 12.7x (25.51x to 2.008x, CI [1.994, 2.021]); losing: d=9 1.135x (wins on cycles at 0.785x
+through a third fewer branch misses), d=15 1.534x, d=25 2.008x. Pinned binary sha256
+203cb386...7042. Remaining loss: the dense fallback is 32% of the worst cell's profile while
+answering 1.7% of blocks; 4,430 of 4,434 random-instance declines were optimal answers whose dual
+drifted infeasible by one unit, so fixing the drift retires the dense matcher (about a third of
+that cell); a rounding-overshoot theory was ruled out by assertion. `decode_with_gap` added as a
+separate entry point (exact minimum weight per logical class via a parity-resolved metric closure
+plus a compiled closed-logical-operator term, gated by exhaustive enumeration at d=3); hot path
+untouched. Next, in order: fix the dual drift, add blossom expansion (61 structural declines), then
+the sparse core's per-operation cost; the `latency` mode for per-shot p50/p99/max is written but
+was not run.

@@ -361,3 +361,7 @@ can be *enumerated*, not by the certificate.
    amortizes the lookup over more committed rounds.
 4. Replace the repetition code with a surface or qLDPC code, where the brief expects automatic
    decoder synthesis to be worth more than it is against a matching-ideal instance.
+
+## Log addendum, 2026-09-03: commit provenance
+
+Code for this probe is in ergodis-private `7673db3`.

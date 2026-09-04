@@ -275,3 +275,8 @@ locality to exploit in the first place.
 Committed as `afd9e54` (pathspec form). All tests pass; `cargo clippy -p ergodis-private --lib` is
 clean on my files (the remaining workspace errors are in the concurrent TigerBlossom agent's
 `tiger_blossom.rs`).
+
+## Log addendum, 2026-09-03: commit provenance
+
+Code for this probe is in ergodis-private `fe4d6a3`, `9e64308`, `afd9e54`, `130b0fa`, `b7e7c6d`;
+26 tests across four modules.
