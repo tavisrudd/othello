@@ -715,7 +715,10 @@ removes, so it is reverted, while the depth merge that enabled it is kept
 (`2026-09-04-c1061-probe28g-depth-merge-and-the-rejected-rate-cache.md`, reviewed in
 `2026-09-04-c1061-probe28g-fable-review.md`). The standing against PyMatching is then measured directly rather
 than scaled: sixteen of eighteen cells ahead by 2.5x to 11.5x, only d=15 and d=25 at 5% error
-behind at 1.151x and 1.272x, with the LP certificate inside every Tiger decode. Probe 28c's two predecoder items are then closed
+behind at 1.151x and 1.272x, with the LP certificate inside every Tiger decode. That comparison is
+a lower bound: the shipped arm is not the fastest configuration in 13 of 18 cells, so C1063 will
+route to the best arm per shot and restate every comparison on it
+(`2026-09-04-c1063-tiger-blossom-solver-routing-brief.md`). Probe 28c's two predecoder items are then closed
 (`2026-09-04-c1061-probe28h-margin-radius-and-the-surface-d9-rederivation.md`): the certified
 margin predecoder commits no correction at the smallest sound margin at any radius that compiles,
 exhaustively over every ball syndrome, and the surface d=9 rows the aliased check masks invalidated

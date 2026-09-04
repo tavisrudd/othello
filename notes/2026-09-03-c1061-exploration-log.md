@@ -177,3 +177,18 @@ at radius 2, whose repaired value restores the ball-width saturation probe 29's 
 Everything at radius 1 is bit-for-bit unchanged, because a ten-detector ball never reaches the
 aliased checks. Both standing levers of this probe family — the predecoder and the matcher's
 `touch_node` — are now closed; `solve` at 27.5% of the matcher profile has never been attacked.
+
+## State after the stack ladder, 2026-09-04
+
+The standing against PyMatching was measured directly for the first time since probe 28 (sixteen of
+eighteen cells ahead, 2.5x to 11.5x; d=15 and d=25 at 5% error behind at 1.151x and 1.272x), and the
+layers above the matcher were measured against the shipped arm. Two findings. Graph specialization
+is the dominant optimization in the package, worth up to 18.8x at d=25 p=0.001 and almost nothing at
+d=25 p=0.05, and at 0.1% error the sparse matcher runs on 0.005% to 0.15% of shots, so the large
+low-error wins are the compiled closure and the closed-form fast paths rather than the matching
+engine. Against that, the shipped `LEVEL_SPARSE` arm is not the fastest configuration in 13 of 18
+cells — level 3 wins eleven of them, by up to 2.334x — so every benchmark including the PyMatching
+comparison is reported on something slower than the kernel can already do. Tavis has directed that
+the default and every state-of-the-art comparison use the best arm per point; that is C1063, for a
+later session, specified in `2026-09-04-c1063-tiger-blossom-solver-routing-brief.md`. Evidence:
+ergodis-private `benchmarks/tiger-blossom/2026-09-04-probe28g-ce0658b-{stack-ab,vs-pymatching-external-ab}.log`.
