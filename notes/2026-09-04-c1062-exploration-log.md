@@ -78,7 +78,7 @@ probe may quietly claim both.
 |-------|-----------------------------------------------------|------|-----------------------|---------|--------|
 | 0     | Prior-art and landscape audit                       | S    | every landscape claim in the brief resolved or discarded | **done**: engines exist, no probe cut; responsibility formula corrected; probe 7 gains a near neighbour | `2026-09-04-c1062-probe0-prior-art-and-landscape-audit.md` |
 | 1a    | Pencil: carrier, cost model, signature collapse     | S    | closed-form state count; collapse stated and proved | **done**: viable but narrow; envelope `\|U\| ≲ 10^4` at arity 2–3; probe 7 promoted | `2026-09-04-c1062-probe1a-carrier-and-cost-model.md` |
-| 1     | Lowering, oracle, Balke–Pearl fixture, towers       | M    | class-for-class agreement on the response-function fixture | planned | — |
+| 1     | Lowering, oracle, Balke–Pearl fixture, towers       | M    | class-for-class agreement on the response-function fixture | **done**: 60 contexts to 32 classes, all three gates pass; contract one-quarter delivered | `2026-09-04-c1062-probe1-lowering-and-towers.md` |
 | 2     | Best intervention, and the economics that follow    | L    | compiled beats memoized re-solve on the enumeration query, residual compression above the orbit baseline | planned | — |
 | 3     | Exact actual causality and responsibility           | L    | verifier work under 10% of search; published verdicts matched | planned | — |
 | 4     | Level-3 counterfactual and the observation precondition | M | exact under `O ⊇ E ∪ {Y}`; demonstrably wrong without it | planned | — |
@@ -447,11 +447,20 @@ notion.
 
 ## Next step
 
-Probes 0 and 1a are done and neither killed anything. Probe 0 reframed probe 3 and corrected a
-responsibility formula that would have produced wrong numbers; probe 1a fixed the carrier, produced
-the cost model, and promoted probe 7. **Probe 1 is next** — the typed `CausalPresentation`, the
-`(u, I)` lowering with support-set sorts and relevance pruning, the direct-enumeration oracle, the
-`n ≤ 4` response-function gate, and the observation and arity towers. Probe 7 is blocked until its
-novelty argument against the variable-partition coarsening line is written down; that writing is
-cheap and can happen any time.
+Probes 0, 1a and 1 are done and none killed anything. Probe 0 reframed probe 3 and corrected a
+responsibility formula that would have produced wrong numbers; probe 1a fixed the carrier and
+promoted probe 7; probe 1 built the lowering and passed all three gates, with the response-function
+fixture collapsing 60 contexts to exactly 32 classes.
+
+**Probe 2 and probe 3 are both unblocked and independent of each other.** Probe 3 now has its
+substrate — the congruence on intervened states is compiled and reachable — and its formula is
+correct before any code. Probe 2 is the first probe that can show the compile paying for itself.
+Probe 3 is the one that carries the surviving differentiators, so on expected value it goes first
+unless the aim is to settle economics early.
+
+Two carried-forward items from probe 1, neither blocking: the arity tower is computed at full price
+per rung rather than incrementally through `plan_layered_greedy_schedule`, and non-vacuous word
+structure remains entirely untested until probe 8. Probe 7 is still blocked until its novelty
+argument against the variable-partition coarsening line is written down; that writing is cheap and
+can happen any time.
 </content>
