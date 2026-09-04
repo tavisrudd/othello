@@ -76,21 +76,32 @@ probe may quietly claim both.
 
 | Probe | Name                                                | Size | Predeclared threshold | Verdict | Report |
 |-------|-----------------------------------------------------|------|-----------------------|---------|--------|
-| 0     | Prior-art and landscape audit                       | S    | every landscape claim in the brief resolved or discarded | planned | — |
-| 1a    | Pencil: carrier, cost model, signature collapse     | S    | closed-form state count; collapse stated and proved | planned | — |
+| 0     | Prior-art and landscape audit                       | S    | every landscape claim in the brief resolved or discarded | running | — |
+| 1a    | Pencil: carrier, cost model, signature collapse     | S    | closed-form state count; collapse stated and proved | **done**: viable but narrow; envelope `\|U\| ≲ 10^4` at arity 2–3; probe 7 promoted | `2026-09-04-c1062-probe1a-carrier-and-cost-model.md` |
 | 1     | Lowering, oracle, Balke–Pearl fixture, towers       | M    | class-for-class agreement on the response-function fixture | planned | — |
 | 2     | Best intervention, and the economics that follow    | L    | compiled beats memoized re-solve on the enumeration query, residual compression above the orbit baseline | planned | — |
 | 3     | Exact actual causality and responsibility           | L    | verifier work under 10% of search; published verdicts matched | planned | — |
 | 4     | Level-3 counterfactual and the observation precondition | M | exact under `O ⊇ E ∪ {Y}`; demonstrably wrong without it | planned | — |
 | 5     | Evolve proposes, separator refutes                  | M    | seals to the exact kernel, and beats the random-counterexample arm on generations | planned | — |
 | 6     | k-ary experiment design and decision equivalence    | M    | measured gap between full and decision-sufficient identification, plus a near-zero gap on the negative family | planned | — |
-| 7     | Compositional lowering along the DAG                | L    | composed quotient equals the flat one on small models | gated on 1–2 | — |
+| 7     | Compositional lowering along the DAG                | L    | composed quotient equals the flat one on small models | **expected necessary** (probe 1a) | — |
 | 8     | Unrolled sequential window                          | S    | word closure non-vacuous, measured | planned | — |
 | 9     | End-to-end: incident to minimal repair              | L    | demo only, never counted as evidence | gated on 2 and 3 | — |
 
 Sizes are relative within one fast session: S is under an hour, M is one to three, L is a session.
 Gating: `0 ∥ 1a → 1 → {2, 3, 4, 5, 8} → {6, 7} → 9`. Probe 3 depends on probe 2 only for the
 class-pruning machinery, which probe 3 owns.
+
+**Probe 1a is complete and changes the shape of what follows.** The flat lowering is viable but the
+envelope is narrow: memory is dominated by the generator transition tables at about `4(nd + 1)`
+bytes per state, which caps the carrier near `1.2 × 10^7` states for twenty binary variables, so
+`|U| · Σ_{j≤k} C(n,j) d^j` must fit that — roughly `|U| ≲ 10^4` at arity two or three. The exogenous
+alphabet is the wall: a declared failure vector over fourteen components fits, a canonical
+response-function exogenous space does not, by orders of magnitude. Four consequences are folded
+into the probes below: probe 7 is promoted from gated to expected, the Balke–Pearl fixture is fixed
+at `n ≤ 4` as a correctness gate rather than a scaling result, relevance pruning moves into the
+lowering itself, and probe 1 must report the materialized state count and transition-table bytes
+rather than `|U|`.
 
 ## Probe 0 — prior-art and landscape audit
 
@@ -147,7 +158,10 @@ declared atomic edit set, arity bound) and a total lowering onto `FinitePresenta
 1. **The Balke–Pearl fixture, which is external truth rather than a self-written oracle.** Compile
    a canonical-exogenous model with `O` = all endogenous variables and the full `do(pa(V) := p)`
    vocabulary; the resulting classes must agree class-for-class with the product of per-variable
-   response-function partitions.
+   response-function partitions. **Fixed at `n ≤ 4`**: probe 1a's cost model puts `n = 4` with at
+   most two parents per variable at about `5.3 × 10^6` states and `n = 5` at `2.5 × 10^8`, out of
+   reach. The report must say this is a correctness gate, so that nobody later reads the small
+   fixture as a scaling failure.
 2. An independent Python oracle that enumerates *partial assignments directly* — not "words up to
    the diameter", which would import the compiler's own view and turn a shared misreading into an
    agreement.
@@ -157,9 +171,17 @@ declared atomic edit set, arity bound) and a total lowering onto `FinitePresenta
 `O` grows from outcome to every variable, and the arity tower `~_{≤1} ⊇ ~_{≤2} ⊇ …` from
 `continuation.rs`. These are the only numbers that tell a user which declaration to make.
 
-**Kill criterion, restated so it can fire.** The report must identify what the compiler adds beyond
-the signature partition, and the response-function fixture must agree class-for-class. "Partitions
-agree with my own oracle" is not a result.
+**Two requirements from probe 1a.** Relevance pruning belongs in the lowering itself, not in the
+measurement: exogenous variables that are not ancestors of the observation set factor out of
+`Val(U)` and must be dropped before the carrier is built. And the report states the materialized
+state count `|U| · Σ_{j≤k} C(n,j) d^j`, the transition-table bytes, and the per-state constant
+`4(nd + 1)` — never `|U|` as "raw states", which understates the compile by orders of magnitude.
+
+**Kill criterion, restated so it can fire.** The report must deliver probe 1a's four-item contract
+for what the compiler adds beyond the signature partition — the congruence on intervened states,
+replayable separators, the arity tower from layered scheduling, and non-vacuity under a
+non-idempotent edit vocabulary — and the response-function fixture must agree class-for-class.
+"Partitions agree with my own oracle" is not a result.
 
 ## Probe 2 — best intervention, and the economics that follow
 
@@ -287,14 +309,21 @@ true by construction.
 **Blame** (the brainstorm's proposal 7) is a formula over this probe's weighted hypothesis set once
 probe 3 exists, and is a deliverable here rather than a probe of its own.
 
-## Probe 7 — compositional lowering along the DAG (gated)
+## Probe 7 — compositional lowering along the DAG (expected necessary)
 
 The "hundred thousand variables become a fifty-state machine" claim is unreachable by materializing
 `(u, I)`. The only scalable route is compositional: quotient each mechanism locally by its response
 classes and compose along the DAG using `composition.rs` and the C1061 retained-tree machinery,
 checking the composed quotient against the flat one on small models. This is the Rischel–Weichwald
-direction. It replaces revision one's probe 6 grand claim and is where the spike would go if the
-flat carrier turns out to be the wall probe 1a suspects.
+direction, and it replaces revision one's probe 6 grand claim.
+
+**Probe 1a promoted this from gated to expected.** The flat carrier's envelope — `|U| ≲ 10^4` at
+arity two or three — covers applied fixtures with a modest declared exogenous alphabet and nothing
+else. Any canonical exogenous space, and any model with more than roughly fourteen independent
+binary exogenous sources, is out of reach flat. So the flat lowering is the correctness substrate
+and the small-model oracle, and this probe is the only route to a scaling claim. It should not wait
+on probes 1 and 2 to gate it; it should start as soon as probe 1 gives it an oracle to check
+against.
 
 ## Probe 8 — unrolled sequential window
 
