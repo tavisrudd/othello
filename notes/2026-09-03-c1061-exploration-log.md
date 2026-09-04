@@ -670,3 +670,33 @@ one-line pointer here.
   Next, in order: fix the dual drift, add blossom expansion (61 structural declines), then
   the sparse core's per-operation cost; the `latency` mode for per-shot p50/p99/max is
   written but was not run.
+
+## Session close, 2026-09-03
+
+Thirty-one probes in one day; all reports and code committed (monorepo `notes/`,
+ergodis-private through `880ffa6`, ergodis core through `9a02921`). All three trees clean.
+
+**Standing results.** The retained composition tree with typed deltas, the closed-form LRC
+leaf, the profile-level vocabulary, the computed exact transducer plus constant-cost ingest
+(11.4x over the tree), the generic `OpenProblem` core with a certificate chain over four
+summary shapes, the policy transducer and worklist minimizer, the two defect-kernel collapses
+landed in core (15x), the routing win over Dijkstra re-solve, the proved predecoder safety
+certificates (per-context, local-commit, margin), and TigerBlossom (exact on 360,000 shots,
+15 of 18 cells ahead of PyMatching).
+
+**Standing negatives.** Dense per-shot QEC decoding; syndrome orbit compilation; boundary-matrix
+compression (the table is already the compressed form); probability semiring over the cost
+decomposition as reliability; capped-multiplicity state keys; per-witness margin as posed;
+memoization on unique fleets; QEC time-axis chain beyond distance 6.
+
+**Paused, with next steps in their reports.** Probe 18 (generic chain zero-allocation
+regression, 9.5 dedupe needs a quiet tree), probe 21 (routing fair baseline), probe 22
+(non-degenerate LRC regime, true reliability gates), probe 28 (dual drift fix retires the dense
+fallback, blossom expansion, latency mode unrun), probe 31 (d=5 soundness audit, sparse-margin
+cost across p). The ADR at `~/src/ergodis-private/docs/adr/0001-generic-dynamic-decision-layer.md`
+is a proposal awaiting Tavis's decision on core extraction.
+
+**Process rules learned today.** Instructions primary under load, cycles unusable below about
+a thousand instructions per op; fixed-window harness, every timed loop bound on `--operations`;
+near-zero per-op cost means a broken loop; pin and hash both A/B binaries; commit with
+`git commit -m .. -- <own paths>` since the shared index is not safe even after a staged check.

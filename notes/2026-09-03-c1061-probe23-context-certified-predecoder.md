@@ -279,8 +279,8 @@ value follow-on from this probe.
 
 ### Distance 9
 
-The box was heavily contended by concurrent agents during this measurement and only one paired round
-completed for distance 9, so it is reported without a confidence interval and marked `n = 1`.
+The box was heavily contended by concurrent agents, so distance 9 completed three paired rounds
+rather than eight; `n` is reported per row.
 
 | quantity | value |
 |---|---|
@@ -288,13 +288,13 @@ completed for distance 9, so it is reported without a confidence interval and ma
 | minimal states | **6** |
 | table bytes | 6,150 |
 | defer rate at 1% error | 0.0743 |
-| PyMatching per decode | 2,397 (`n = 1`) |
-| compiled LUT per round | **63.3** (`n = 1`) |
-| raw ratio | 37.9x |
-| composed cost per round | 63.3 + 0.0743 x 2,397 = 241.4 |
-| **composed speedup** | **9.9x** |
+| PyMatching per decode | 2,296 (sd 4.69%, `n = 3`) |
+| compiled LUT per round | **63.8** (sd 0.72%, `n = 3`) |
+| raw ratio | **35.9x**, 95% CI [33.8, 38.2] |
+| composed cost per round | 63.8 + 0.0743 x 2,296 = 234.4 |
+| **composed speedup** | **9.8x** |
 
-The distance-9 lookup costs 63.3 instructions per round, squarely inside the flat 62 to 100 band the
+The distance-9 lookup costs 63.8 instructions per round, squarely inside the flat 62 to 100 band the
 other distances show, which is what a six-state automaton should cost regardless of code size.
 
 That measurement also illustrates where the work went: the *total* instruction count for the
