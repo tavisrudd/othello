@@ -918,6 +918,19 @@ rejected backend.  The full-solve launch remains gated on an exact q29 shell
 and a measured mixed-CRT reconstruction search; no two-day estimate is yet
 justified.
 
+The plain (unbordered) `Z/523` route is now built and measured
+(`2026-09-04-c1016-plain-523-cyclotomy-and-spin-shard.md`). Its cheap cyclotomic
+tier is empty by an exact size congruence: no plain 4-SDS on `Z/523` is invariant
+under a multiplier subgroup of order 18 or more, for any of the 33 admissible
+parameter sets, so the sweeps the review ranked as minutes each do not exist. The
+surviving object is the order-three spin shard, which collapses the 261 equations
+to 87; it is implemented, validated by building Hadamard matrices of orders 172,
+244, 268 and 292 from scratch with independent full replay, and 3.36x faster than
+its first hot loop at exact parity. Its search reach ends near carrier 73, and a
+180-fold budget increase moves the residual by at most a quarter, so compute is
+not the lever. Nothing here excludes a plain solution at 523; the route needs a
+further exact structure, not a larger campaign.
+
 C1035 is closed: `ergodis-private` is a Cargo workspace whose root package is library-only; the
 six named tools live in `tasks/tools` (`ergodis-tools`), gem-mining drivers in `tasks/gem-hunt`,
 and no new `src/bin` file is allowed (see `ergodis-private/AGENTS.md`). C1036 will triage the
