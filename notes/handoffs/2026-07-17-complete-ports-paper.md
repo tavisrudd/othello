@@ -709,9 +709,12 @@ core's scheduling cost is measured and mostly inherent
 taken and measured (`2026-09-04-c1061-probe28e-validate-on-pop-sparse-core.md`): stamps gone, a
 debug oracle for the whole queue contract, packed layout at 0.926x of probe 28d on the losing
 cells. Its hoist is measured and the certificate's narrow closure is a kept wash
-(`2026-09-04-c1061-probe28f-hoist-ab-and-narrow-closure.md`): d=9 is ahead of PyMatching on
-the derived standing, d=15 and d=25 at about 1.17x and 1.28x; the next lever is the far owner's
-rate load inside `touch_node`, then the predecoder items from probe 28c.
+(`2026-09-04-c1061-probe28f-hoist-ab-and-narrow-closure.md`). The far owner's rate is then closed
+as a lever: caching it per node costs more in region-wide invalidation than the dependent load it
+removes, so it is reverted, while the depth merge that enabled it is kept
+(`2026-09-04-c1061-probe28g-depth-merge-and-the-rejected-rate-cache.md`, reviewed in
+`2026-09-04-c1061-probe28g-fable-review.md`). The derived standing is about 0.92x at d=9, 1.16x at
+d=15 and 1.27x at d=25; the next work is the predecoder items from probe 28c.
 C1016 is active as a private Ergodis reduction-synthesis pilot. A hostile review found that its
 unapproved presentation-hash/feature-name overlay did not establish extractor semantics. Public
 proof authority, `Necessary`, and all Hadamard/GS code are therefore removed; core again advertises
