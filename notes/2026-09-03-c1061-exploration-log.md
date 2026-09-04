@@ -468,3 +468,14 @@ one-line pointer here.
   exactness unaffected, optimum less interesting than it looked. Process: the shared git
   index is not safe even with a `git diff --cached --stat` check, since the check is not
   atomic with the commit; the fix is per-agent worktrees or `GIT_INDEX_FILE` (Tavis's call).
+- 2026-09-03 — redirect (Tavis, from Sol's notes): QEC is not given up. The dense per-shot
+  decoder negative stands; the target becomes compiling the smallest certifiably safe decoder
+  policy, plus an internal zero-allocation sparse-blossom kernel. Brief:
+  `2026-09-03-c1061-qec-redirect-brief.md`. Probes 18 (generic certificates), 21 (routing fair
+  baseline), and 22 (non-degenerate LRC regime, true reliability) are stopped as documentation
+  only and continue in a fresh session. Launched: probe 23 context-certified predecoder
+  (coverage(p, d, T), exactness of the safety claim, minimized LUT, tiered path vs PyMatching);
+  probe 24 matching-signature compression of the dense boundary tables (valuated delta-matroid
+  and matchgate identities); probe 25 soft output vs `decode_gap`; probe 26 TigerBlossom
+  (specialized, bounded-memory, index-based sparse blossom with exact fast paths, gated on
+  identical MWPM weight to PyMatching on probe 13's frozen inputs).
