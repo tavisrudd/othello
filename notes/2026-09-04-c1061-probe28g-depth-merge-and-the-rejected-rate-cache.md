@@ -54,9 +54,8 @@ Instructions per decode. Every instruction interval excludes 1.0. The p=0.01 and
 move by less than 0.5%. Log: ergodis-private
 `benchmarks/tiger-blossom/2026-09-04-probe28g-ced13b7-vs-ca31df6-binaries-ab.log`.
 
-Carried onto probe 28f's derived standing against PyMatching, the three formerly losing cells move
-by the same 0.992: d=9 to about 0.92x, d=15 to about 1.16x, d=25 to about 1.27x. These remain
-derived from probe 28d's scaling, not a fresh direct comparison.
+The standing against PyMatching is measured directly below rather than scaled onto probe 28f's
+derived figure.
 
 ## Stage two: the cached owner rate (`5e70cc8`), reverted
 
@@ -151,9 +150,32 @@ to touch. Measured the same way against stage one:
 
 Every instruction interval has width 0.001 and excludes 1.0; cycles are flat within their intervals.
 Exactness is identical to stage one on all eighteen cells. Together with stage one the tree is at
-0.988x of probe 28f, which carries the derived standing against PyMatching to about 0.92x at d=9,
-1.16x at d=15 and 1.26x at d=25. Logs: ergodis-private
+0.988x of probe 28f. Logs: ergodis-private
 `benchmarks/tiger-blossom/2026-09-04-probe28g-ce0658b-{vs-ced13b7-binaries-ab.log,pymatching-exactness.txt}`.
+
+## The standing against PyMatching, measured rather than derived
+
+Every probe since 28 has carried the comparison against PyMatching by scaling the previous
+standing through each internal A/B. Measured directly instead, `--mode external` against PyMatching
+2.4.0, six interleaved rounds, two-size differencing, instructions per decode
+(`benchmarks/tiger-blossom/2026-09-04-probe28g-ce0658b-vs-pymatching-external-ab.log`):
+
+| d  | p=0.001 ratio | p=0.01 ratio | p=0.05 ratio | p=0.05 tiger | p=0.05 PyMatching |
+|----|---------------|--------------|--------------|--------------|-------------------|
+| 3  | 0.346         | 0.187        | 0.399        | 605.5        | 1,520.6           |
+| 5  | 0.212         | 0.256        | 0.598        | 2,132.7      | 3,567.8           |
+| 7  | 0.152         | 0.232        | 0.772        | 4,168.3      | 5,396.9           |
+| 9  | 0.165         | 0.261        | **0.932**    | 6,623.7      | 7,108.3           |
+| 15 | 0.108         | 0.402        | **1.151**    | 14,367.7     | 12,488.7          |
+| 25 | 0.087         | 0.643        | **1.272**    | 27,139.9     | 21,335.7          |
+
+Sixteen of eighteen cells are ahead, by 2.5x to 11.5x. Only d=15 and d=25 at 5% error are behind,
+and every Tiger decode here also runs the LP-duality certificate, which is 7.6% of the decode at
+d=25 p=0.05 and which PyMatching does not produce.
+
+The derived standing was close but slightly optimistic: it put d=9 p=0.05 at about 0.92 against a
+measured 0.932, d=15 at 1.16 against 1.151, and d=25 at 1.26 against 1.272. Later probes should
+measure this directly rather than extend the scaling chain further.
 
 ## Gates
 
@@ -170,8 +192,8 @@ stage one's measurements stand for the current tree without a further run.
 
 ## Mystery ledger
 
-- **The three p=0.05 cells against PyMatching.** d=9 is ahead on the derived standing; d=15 and
-  d=25 sit at about 1.16x and 1.27x. Settled today: the far owner's rate is not the lever, and the
+- **The three p=0.05 cells against PyMatching.** Measured directly today: d=9 is ahead at 0.932,
+  d=15 and d=25 are behind at 1.151 and 1.272. Settled today: the far owner's rate is not the lever, and the
   reason is structural rather than an implementation detail, so this closes the profile's
   `touch_node` line as a target. Open: `solve` at 27.5% with its inlined handlers is now the
   largest single symbol and has never been attacked directly. The closeout pass produced one

@@ -153,8 +153,11 @@ measures 1.10x at every p=0.05 cell. It is reverted, and rate falls — which th
 lets cost nothing today — are why no rearrangement of the walks closes the gap. The refactor that
 enabled it is kept: a node's `distance` and `wrapped` were only ever read as their difference and
 became one `depth`, worth 0.992x at every p=0.05 cell, and the closeout put the constant
-incident-edge count back into the room that merge freed for a further 0.4%. Together they carry the
-derived standing against PyMatching to about 0.92x at d=9, 1.16x at d=15 and 1.26x at d=25. `solve` at 27.5% is now the
+incident-edge count back into the room that merge freed for a further 0.4%. The standing against
+PyMatching is then measured directly rather than scaled for the first time since probe 28: sixteen
+of eighteen cells are ahead by 2.5x to 11.5x, and only d=15 and d=25 at 5% error are behind, at
+1.151x and 1.272x, with the LP certificate included in every Tiger decode and absent from
+PyMatching's. Later probes should measure this rather than extend the scaling chain. `solve` at 27.5% is now the
 largest symbol and has never been attacked directly. The next work is the predecoder items from
 probe 28c: a radius-3 or observation-conditioned margin audited by the kernel, and the surface d=9
 rows re-derived on the repaired graph.
