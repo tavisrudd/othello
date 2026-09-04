@@ -609,3 +609,24 @@ one-line pointer here.
   to 96% of windows in a 1 KB distance-independent table, deployable but not
   accuracy-identical. Named successor: a certificate that charges the crossing context its own
   weight instead of intersecting within each context.
+- 2026-09-03 — probe 30: margin certificate predecoder. Report:
+  `2026-09-03-c1061-probe30-margin-certificate-predecoder.md` (ergodis-private `c4ba919`,
+  twelve gates). Verdict: **certificate proved and local; coverage recovered; still not d=9
+  accuracy-identical, now for oracle-reach and cost reasons**. Charging each crossing mechanism
+  its weight gives the escaped-ball cost W_a; the condition W_a + Delta <= min over a' != a of
+  W_a' is proved safe by explicit splicing, with the outside advantage bounded by R_max, the
+  largest outside repair cost over the crossing subspace (exact BFS where the outside fits).
+  Smallest sound margin measured by exhaustive audit against a metric-closure oracle over all
+  syndromes of weight <= 4: Delta = 1 to 2 at radius 2, 2 to 3 at radius 1, never more than 3;
+  the unpriced Delta = 0 policy (what a clustering predecoder assumes) violates on 2.6% of
+  commits at repetition d=7. Probe 29's full-spatial-cut requirement is gone: at radius 1,
+  Delta = 2, one 1,024-byte table identical at surface d = 5, 7, 9 commits 97.4% of windows
+  (probe 29 committed 0.0000 at d = 7, 9); shot-level defer falls from 1.0000 to 0.611 at d=9
+  and 0.212 at d=5 with a two-tier radius cascade, committing real corrections. Not reached:
+  the audit oracle reaches only surface d=3, so Delta = 2 there is extrapolated while the
+  audited-sound radius-1 value is 3, which defers every shot; and the timed arm costs 415.5
+  instructions per position, 32,825 per committed round vs PyMatching 2,296 (14.9x loss), with
+  a bitset rewrite estimated to reach only parity since both do O(d^2) work per round. Too
+  conservative because a radius-1 ball expresses cost differences of only 0, 1, 2, so margin 3
+  exceeds its dynamic range. Named successor: a per-witness bound Delta(c_a) from the observed
+  syndrome just outside the ball, and a radius-2 representation avoiding 2^28 enumeration.
