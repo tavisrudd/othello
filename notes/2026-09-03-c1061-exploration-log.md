@@ -479,3 +479,18 @@ one-line pointer here.
   and matchgate identities); probe 25 soft output vs `decode_gap`; probe 26 TigerBlossom
   (specialized, bounded-memory, index-based sparse blossom with exact fast paths, gated on
   identical MWPM weight to PyMatching on probe 13's frozen inputs).
+- 2026-09-03 — probe 22: stopped as documentation (ergodis-private `305373d`, one path). Report:
+  `2026-09-03-c1061-probe22-nondegenerate-regime-and-true-reliability.md`. Part A
+  (non-degenerate regime re-run of probes 12, 15, 19, 20) not started; recorded expectation:
+  structural results survive (commutation and closure do not mention discount magnitudes),
+  performance ratios are at risk (deeper top-k walk under contention). Part B implemented,
+  unverified: true reliability is a semiring readout over the distribution of budget demand
+  (one threshold vector per fleet, truncation at the grant bound discards exactly the
+  infeasible mass), not over the cost decomposition; `reliability_exact` folds pods of one
+  profile by repeated squaring, O(P log n), reading the count vector alone. Probe 20's "not a
+  semiring readout" narrows to "not over the cost decomposition" once verified. Part C
+  implemented, unverified: `optimal_pattern_count_incremental` restricts enumeration to the
+  top GRANT_BOUND discount values per level. Neither new function has a test or an instruction
+  count. Fresh-session order: gate C (equality with `optimal_pattern_count` on fleets with ties
+  and singleton classes), gate B against `overlap_gap`'s exact branch, measure both vs 627k /
+  650k, then A with a named contended-fleet generator.
