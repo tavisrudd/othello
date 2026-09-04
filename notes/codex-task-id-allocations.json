@@ -4337,8 +4337,17 @@
       "last": 1061,
       "purpose": "Ergodis spike: compiled dynamic solver (snapshot compile + delta update)",
       "sequence": 482
+    },
+    {
+      "count": 1,
+      "first": 1062,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1062,
+      "purpose": "Ergodis structural causal model integration spike: causal quotient, actual causality, evolve abstraction search",
+      "sequence": 483
     }
   ],
-  "next_id": 1062,
+  "next_id": 1063,
   "schema": "codex-task-id-allocations-v1"
 }
