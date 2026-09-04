@@ -4,7 +4,7 @@
 **Brief**: `2026-09-04-c1062-ergodis-causal-brief.md`
 **Plan review**: `2026-09-04-c1062-plan-review.md` (adversarial; this plan is its revision)
 **Code**: `~/src/ergodis-private` (core changes, if any, in `~/src/ergodis`)
-**Status**: planned; no probe run yet.
+**Status**: probes 0, 1a, 1, 3 and 2 done; probe 7 next, blocked on its novelty argument.
 
 This is the routing document for C1062. The task asks whether a finite structural causal model
 (SCM) is another context language for the Ergodis contextual quotient, and what that buys: exact
@@ -79,7 +79,7 @@ probe may quietly claim both.
 | 0     | Prior-art and landscape audit                       | S    | every landscape claim in the brief resolved or discarded | **done**: engines exist, no probe cut; responsibility formula corrected; probe 7 gains a near neighbour | `2026-09-04-c1062-probe0-prior-art-and-landscape-audit.md` |
 | 1a    | Pencil: carrier, cost model, signature collapse     | S    | closed-form state count; collapse stated and proved | **done**: viable but narrow; envelope `\|U\| ≲ 10^4` at arity 2–3; probe 7 promoted | `2026-09-04-c1062-probe1a-carrier-and-cost-model.md` |
 | 1     | Lowering, oracle, Balke–Pearl fixture, towers       | M    | class-for-class agreement on the response-function fixture | **done**: 60 contexts to 32 classes, all three gates pass; contract one-quarter delivered | `2026-09-04-c1062-probe1-lowering-and-towers.md` |
-| 2     | **Best intervention, and the economics that follow** | L    | compiled beats memoized re-solve on the enumeration query, residual compression above the orbit baseline | **next; promoted to the spine** | — |
+| 2     | **Best intervention, and the economics that follow** | L    | compiled beats memoized re-solve on the enumeration query, residual compression above the orbit baseline | **done**: compression passes (4.97x, 2.00x), timing fails structurally; quotient worth 220x over concrete-state search | `2026-09-04-c1062-probe2-best-intervention-and-economics.md` |
 | 3     | Exact actual causality and responsibility           | L    | verifier work under 10% of search; published verdicts matched | **done**: all eight published verdicts reproduced; certificate missed 10% at a 55-candidate scale; not closed | `2026-09-04-c1062-probe3-actual-cause-and-responsibility.md` |
 | 4     | Level-3 counterfactual and the observation precondition | M | exact under `O ⊇ E ∪ {Y}`; demonstrably wrong without it | planned | — |
 | 5     | Evolve proposes, separator refutes                  | M    | seals to the exact kernel, and beats the random-counterexample arm on generations | planned | — |
@@ -464,20 +464,40 @@ throwing's `{BH}` witness. Its exhaustion certificate missed the predeclared 10%
 55-candidate search scale where a class-based negative cannot compress; Tavis directed that this not
 close the probe, and the finding is recorded as unmeasured-at-scale rather than refuted.
 
-**Probe 2 is next and is now the spine**, per Tavis's steer that the decision layer is what to lean
-into. Its first deliverable is `best_intervention` with a cost model — the cheapest intervention
-reaching a declared outcome, as a search over the monoid action on the quotient rather than a single
-re-solve — followed by minimax regret over a bounded model set. Probe 6's decision-equivalence
-quotient follows directly from it.
+Probe 2 is done and it both passes and fails, which is why its verdict is worth reading rather than
+summarizing. `best_intervention` is built as a shortest path over the monoid action on the quotient,
+it is exact against the enumeration oracle on every context in six families, and every witness
+replays. Compression passes its threshold — 4.97x on distinct weights and 2.00x on a restricted
+repair vocabulary, above a symmetry baseline that is verified rather than declared. Timing fails, and
+structurally: the flat lowering solves the model once per materialized state, and that state count is
+exactly the work a memoized re-solve does to fill a table over every context, measured at 1.00x. No
+faster refinement changes that. Two corrections came out of it. Symmetry orbits do not coarsen the
+compiled quotient, because a labelled edit vocabulary makes the class partition equivariant rather
+than invariant, so the credit ratio is taken against the join of the two partitions. And probe 3's
+"the policy failure tracks the sort count" hypothesis is withdrawn: `MultiwayTranscript` and
+`AdaptiveTranscript` fail as well, and the threshold tracks neither sorts nor states.
+
+**Probe 7 is next and is now doubly motivated.** Probe 1a promoted it on carrier grounds; probe 2
+promotes it independently on decision-layer grounds, because the compiled query wins exactly where
+the context space cannot be memoized and the carrier is never materialized. It stays blocked until
+its novelty argument against the variable-partition coarsening line is written down, and that
+argument is now the highest-value unblocked piece of writing in the task. Probe 8 is the second
+surviving direction and now has a measured reason to exist: with hard interventions the intervention
+set is the state set, so one-shot enumeration sees everything a search could, and only a
+non-idempotent vocabulary makes the shortest path earn its keep.
 
 Carried forward, none blocking. The arity tower is computed at full price per rung rather than
-incrementally through `plan_layered_greedy_schedule`. Non-vacuous word structure is untested until
-probe 8. Probe 7 remains blocked until its novelty argument against the variable-partition
-coarsening line is written down. Probe 3's amortization arm was never measured, because it lives in
-the tools binary that a concurrent lane currently has broken.
+incrementally through `plan_layered_greedy_schedule`. The intervention-vocabulary quotient is empty
+for hard edits (16 declared edits, 16 distinct actions) and should be re-measured under a
+non-idempotent vocabulary rather than dropped. Probe 6's decision-equivalence key cannot be the class
+key, because an intervention's class tuple across candidate models is already almost a complete
+invariant. Probe 3's amortization arm was never measured.
 
-**Two obstructions outside this lane**, both raised and neither fixed here: the ergodis core's
-`CertificatePolicy::QuotientOnly` miscompiles presentations with more than about sixteen sorts (see
-the probe 3 report for the three-policy table), and `tasks/tools/src/tiger_blossom_bench.rs` is
-uncommitted and does not compile, which blocks the whole `ergodis-tools` binary.
+**Two obstructions outside this lane**, both raised and neither fixed here. The ergodis core
+miscompiles the causal lowerings under four of its five certificate policies — `QuotientOnly`,
+`MultiwayTranscript` and `AdaptiveTranscript` all fail where `SplitTranscript` and
+`ExhaustivePairAudit` succeed and agree; the probe 2 report carries the six-row table that withdraws
+probe 3's sort-count hypothesis. It fails closed, so no wrong answer escapes. Separately, the
+exhaustive pair audit costs 846x the refinement it certifies (1.516 s against 1.792 ms on 33,024
+states) and reached 6.9 GB at 205,056 states, which is what caps the flat carrier in practice.
 </content>
