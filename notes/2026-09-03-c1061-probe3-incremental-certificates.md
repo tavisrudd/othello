@@ -481,3 +481,79 @@ dependency, is added). The workspace-wide clippy run now also reports two `manua
 - Superseded from the earlier ledger: the "645 cycles per SHA-256 call" figure and the "95% of the path
   is hashing" figure were both artifacts of comparing across binaries. The per-pair counter table above
   replaces them.
+
+---
+
+## 2026-09-03 follow-up: one chain for every summary type, and a certificate from a table
+
+Probe 18. The chain in this report was written for one domain: a min-plus matrix summary with a known
+leaf evaluator. It has now been generalized over the `OpenProblem` core trait that probe 16 settled,
+instantiated for four summary shapes, and extended with a certificate that comes from a compiled
+transition table instead of a tree. Full results are in section 10 of
+`/home/tavis/src/ergodis-private/docs/adr/0001-generic-dynamic-decision-layer.md`; this is the part
+that bears on the original chain.
+
+### What changed about the guarantee
+
+The chain in this report proves both the leaf evaluation and the composition, because it carries the
+leaf's base matrix, previous parameters, and the event, and the verifier re-evaluates the leaf. The
+generic chain cannot do that — the leaf evaluator is domain code the trait does not name — so it
+carries the leaf's previous and new summaries and proves only:
+
+> the root moved from `R_t` to `R_{t+1}` because leaf `l` changed from `S_old` to `S_new`, and every
+> ancestor recomposed correctly.
+
+Leaf-evaluation correctness becomes a separate obligation. That is the cost of one chain for every
+domain, and the specialized chain here remains the stronger artifact on its own domain.
+
+### A correction to this report's fail-closed claim
+
+This report says a forged ancestor summary or digest gives `PreviousRoot`. Building the generic suite
+showed that is true at level 0 and not guaranteed above it, **and the same is true of the specialized
+chain.** At level 0 the sibling is a leaf, so its digest is recomputable from the supplied summary and
+the two are bound outright. Above level 0 a sibling's digest depends on children the verifier does not
+hold; the binding is indirect, and a forged sibling is rejected through whichever reconstructed root it
+moves. A forgery that moves neither root is one min-plus composition absorbs — it changes no value the
+certificate asserts — so nothing unsound is accepted, but the error code is not always `PreviousRoot`.
+The accurate statement of the guarantee is the disjunction, and the generic suite now asserts it that
+way. The specialized suite's byte offsets happen to land on cases that always move a root, which is why
+it never caught this.
+
+### Cost of the generalization
+
+Seven interleaved rounds, fixed 4,096-event window, 1,024 leaves, pinned binary
+`b0138ac07ab2131be786e589...`, `sha256-packed`:
+
+| chain | instructions per event | certificate bytes |
+|---|---|---|
+| specialized min-plus (this report) | 25,046 | 1,168 |
+| generic, min-plus matrix | 49,457 | 1,216 |
+| generic, policy transition function | 62,166 | 1,264 |
+| generic, monoid element index | 25,598 | 496 |
+| generic, semiring window at width 8 | 204,433 | 3,520 |
+| table transition, no tree at all | 3,749 | 328 |
+
+One chain for four shapes costs 1.97x a chain for one, on the domain where they compare directly, and
+1.02x when the summary is a single word. Two defects were fixed while measuring — a `Vec` allocated per
+digest, and a length prefix that pushed the 128-byte internal preimage to a third compression block —
+worth 63,323 to 49,457 instructions between them. The residual is encode and decode at every level in
+both passes.
+
+### The table certificate
+
+`TableCommitment`, `TableProver` and `TableVerifier` answer probe 12's question: a delta certificate can
+be emitted from a table transition alone, as `(table root, previous sequence, previous state, symbol,
+next state, offset delta, inclusion path)`. The verifier holds 64 bytes and does `O(log cells)` hashes,
+independent of tree depth and problem size — 6.68x cheaper than this report's chain, CI [6.68, 6.68].
+The table itself is certified once by recomputation at build time; after that every event is an
+inclusion proof against the same root. It is demonstrated on the policy transducer, whose table is a
+genuine transition function, and must not be applied to the LRC fleet's `ShapeTable` until probe 12's
+enriched tie-multiplicity state closes that transition.
+
+### Harness correction affecting this report
+
+The benchmark behind this report pre-drew one event per measured event, so its two-point differencing
+charged every arm one event draw per operation. Re-measured with a fixed 4,096-event window, the
+certificate arms move by well under a percent — the draw is negligible against 25,000 instructions — so
+every verdict in this report stands unchanged. The same audit moved probe 8's numbers materially; that
+correction is recorded in section 10.5 of the ADR.
