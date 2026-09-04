@@ -928,8 +928,11 @@ to 87; it is implemented, validated by building Hadamard matrices of orders 172,
 244, 268 and 292 from scratch with independent full replay, and 3.36x faster than
 its first hot loop at exact parity. Its search reach ends near carrier 73, and a
 180-fold budget increase moves the residual by at most a quarter, so compute is
-not the lever. Nothing here excludes a plain solution at 523; the route needs a
-further exact structure, not a larger campaign.
+not the lever. A solution-count heuristic then shows the shards are dense rather
+than empty — about `2^61` expected solutions at carrier 73 and `2^306` at 523,
+with only the density falling — so the bottleneck is the search itself. The
+successor is a stronger search on this shard, a full-neighbourhood tabu step with
+incremental per-swap deltas, not a further exact structure.
 
 C1035 is closed: `ergodis-private` is a Cargo workspace whose root package is library-only; the
 six named tools live in `tasks/tools` (`ergodis-tools`), gem-mining drivers in `tasks/gem-hunt`,
