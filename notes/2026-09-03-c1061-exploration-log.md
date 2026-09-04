@@ -48,6 +48,7 @@ and the next-session plan. Reports are the authority for numbers and method.
 | 28c   | Blossom expansion; Tiger behind the predecoder      | dense matcher gone, all 18 cells faster; sound margin commits nothing    | `2026-09-04-c1061-probe28c-blossom-expansion-and-tiger-behind-the-predecoder.md` |
 | 28d   | Sparse core scheduling cost                         | 5% off every high-error cell; re-arm waste gone; design note for a safer core | `2026-09-04-c1061-probe28d-sparse-core-scheduling-cost.md`                    |
 | 28e   | Validate-on-pop sparse core, taken                  | stamps gone, oracle in; packed layout 0.926x at the losing cells; d=9 at parity | `2026-09-04-c1061-probe28e-validate-on-pop-sparse-core.md`                    |
+| 28f   | Hoist measured, narrow closure                      | hoist 0.93x at p=0.05; u16 closure a wash; d=9 ahead of PyMatching, d=15/25 at 1.17x/1.28x | `2026-09-04-c1061-probe28f-hoist-ab-and-narrow-closure.md`                  |
 | 29    | Local-commit predecoder                             | sound at every radius; does not compile past small d                     | `2026-09-03-c1061-probe29-local-commit-predecoder.md`                        |
 | 30    | Margin certificate predecoder                       | certificate proved and local; not yet d=9 accuracy-identical             | `2026-09-03-c1061-probe30-margin-certificate-predecoder.md`                  |
 | 31    | Sparse evaluation and per-witness margin            | paused by Tavis; per-witness margin dead as posed                        | `2026-09-03-c1061-probe31-sparse-evaluation-and-per-witness-margin.md`       |
@@ -127,3 +128,13 @@ PyMatching, d=15 and d=25 at about 1.26x and 1.37x). The last commit, `22d8e98` 
 node's record out of its incident-edge loop), passes every gate but has no A/B yet. Next, in
 order: that A/B; a `u16` closure mirror for the certificate's reads; then the predecoder only
 under a radius-3 or observation-conditioned margin audited by the kernel.
+
+## State after probe 28f, 2026-09-04
+
+The hoist measured at 0.93x of the layout build at every p=0.05 cell and 0.86x of probe 28d's
+control, so d=9 is now ahead of PyMatching on the derived standing and d=15/d=25 sit at about
+1.17x and 1.28x. The certificate's `u16` closure mirror is exact and gated but a wash: flat
+instructions, about 1% of cycles at d=25 p=0.05, and it is kept only because it is never worse
+at a losing cell (probe 28f). The profile now puts `touch_node` and `solve` at 28.6% and 29.9%
+with the certificate at 7.6%; the next lever is the far owner's rate load inside `touch_node`,
+then the predecoder items from probe 28c.
