@@ -591,3 +591,21 @@ one-line pointer here.
   the compiled LUT stops at d=3. Next move: change what is committed, a local correction
   rather than a global logical parity. Code: ergodis-private `fe4d6a3`, `9e64308`, `afd9e54`,
   `130b0fa`, `b7e7c6d`; 26 tests across four modules.
+- 2026-09-03 — probe 29: local-commit predecoder. Report:
+  `2026-09-03-c1061-probe29-local-commit-predecoder.md` (ergodis-private `a120c33`). Verdict:
+  **sound at every radius; still does not compile past small d; certificate too
+  conservative**. Committing a local correction: the splicing argument proves a safe local
+  action preserves a global minimum-weight solution with no reachability quantifier and no
+  exact-tie gap; the handoff contract (residual syndrome s ^ boundary(a) with the region
+  retired, globalmin = |a| + residualmin) is verified exhaustively on repetition and rotated
+  surface codes. Ball width saturates with distance (6 bits at repetition radius 1 for d = 7
+  to 15, 10 bits at surface radius 1 for d = 5 to 9), so the table is distance-independent.
+  Locality still fails: the proved tier survives only when the ball spans a full spatial cut
+  (d=9 repetition, radius 3: centre position certifies 95.0%, its neighbour 2.6%); required
+  radius grows like d/2, so the surface code needs 2^((d^2-1)/2). The radius-1 surface policy
+  is 1 KB containing the single decision `defer`; shot-level defer rate 1.0000 at d=5, 0.9998
+  on repetition d=9; 296 instructions per position evaluation, 2,665 per committed round vs
+  PyMatching's 2,296. The bounded tier (at most one fault crossing the ball boundary) covers 93
+  to 96% of windows in a 1 KB distance-independent table, deployable but not
+  accuracy-identical. Named successor: a certificate that charges the crossing context its own
+  weight instead of intersecting within each context.
