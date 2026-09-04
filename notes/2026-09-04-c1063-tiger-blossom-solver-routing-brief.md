@@ -52,6 +52,49 @@ forms but solves per cluster. Sending everything to the matcher pays only once t
 dense enough that cluster decomposition and the pair matrix cost more than they save, which is why
 level 4 wins as distance times error rate grows and loses everywhere else.
 
+## Which cells matter, and what that changes (Tavis, 2026-09-04)
+
+Tavis's follow-up: the point is to win in the cells relevant to real usage. That reprioritizes this
+task and exposes a larger gap behind it.
+
+**The real-usage column is p=0.001.** Superconducting hardware runs near `1e-3` physical error;
+`0.05` is roughly fifty times that and is a scaling stress row, not an operating point. Our standing
+there is already the strongest part of the grid — 2.9x at d=3, 4.7x at d=5, 6.6x at d=7, 6.1x at
+d=9, 9.3x at d=15, 11.5x at d=25 — and the margin *grows* with distance, which is the direction
+real devices are moving. Both cells we lose to PyMatching are at p=0.05.
+
+**So routing buys little where it matters.** At p=0.001 the best arm beats the shipped one by only
+4.2% to 9.4% (level 3, best at d=15 with 1.105x); carried onto the direct comparison that moves
+d=25 from about 11.5x to about 12.2x. The eye-catching 2.334x is at d=3 p=0.05, a cell of no
+operational interest. Routing is still worth doing — it is nearly free and it is exactness-neutral —
+but it should be understood as a few per cent in the regime that counts, not as the headline.
+
+**The real obstacle is that the benchmark is not yet a real-usage benchmark.** Four gaps, in
+descending order of how much they distort the picture:
+
+1. **Family.** `tiger_blossom_bench::setup` builds `repetition_code_mechanisms` only. Real usage is
+   the rotated surface code, and increasingly qLDPC. A surface builder already exists as
+   `local_commit_predecoder::surface_graph` returning a `DecodingGraph`, and `predecoder_pipeline`
+   already compiles a `DecodingGraph` into a `KernelSpec`, so the bridge to bench TigerBlossom on
+   the surface code is short.
+2. **Noise model.** The mechanisms are phenomenological with unit weight on every edge, one rate
+   shared by data and measurement errors. Real decoders consume a circuit-level detector error
+   model with weighted edges. Unit weights flatter us specifically: the two-defect closure lookup
+   and the `divide_up(needed, rate)` fast path with rate in `{1,2}` both exploit them.
+3. **Window.** Four rounds at every distance. A real window is on the order of `d` rounds and
+   decoding is streaming with a sliding window, so both the defect count per call and the
+   graph shape are unrepresentative at large `d`.
+4. **Metric.** Instructions per decode. Real-time decoding is governed by a per-round deadline of
+   about a microsecond, so the operational question is latency and its tail, not instruction count.
+   The bench has a `latency` mode that has never been run.
+
+**Recommended shape for this task**, unless Tavis directs otherwise: do the grid before the
+routing. Reweight the rates toward `1e-3` and below, demote `0.05` to a labelled stress row, add
+the surface family through the existing bridge, and run the `latency` mode alongside instructions.
+Then fit the routing threshold on that grid rather than on the current one — a threshold fitted on
+the present rates would be tuned largely by cells nobody operates in. Adding circuit-level weighted
+noise is the largest of the four and may deserve its own task ID; that is Tavis's call.
+
 ## What to build
 
 **Do not tune per `(d, p)` cell.** A deployed decoder knows its compiled graph but not the physical
