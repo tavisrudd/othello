@@ -519,3 +519,30 @@ one-line pointer here.
   the generic chain (missing; both defects are what it would catch), borrowed-encoding path
   for the 1.97x, other hash backends, file round-trip, normalized-class encoding for the
   width-8 certificate; 9.5 dedupe still needs a quiet tree.
+- 2026-09-03 — probe 21: routing fair baseline, stopped as documentation. Report:
+  `2026-09-03-c1061-probe21-fair-dynamic-routing-baseline.md` (ergodis-private `23c9b3f`).
+  Routing continues in a fresh session.
+- 2026-09-03 — probe 23: context-certified predecoder. Report:
+  `2026-09-03-c1061-probe23-context-certified-predecoder.md` (ergodis-private `7673db3`).
+  Verdict: **promote; the QEC opportunity is real in this form**. K(s,b) is the set of
+  commit-region parities among minimum-weight explanations conditional on seam state b;
+  Safe(s) is a nonempty intersection over all reachable b. Splicing argument: any global
+  optimum's window part is window-optimal at its seam b*, so a safe action replaces it at
+  equal weight; logical outcome preserved exactly whenever the class costs differ, exact ties
+  counted as the one gap. Verified by exhaustive adversarial enumeration over every syndrome at
+  (d,T) = (3,3), (3,4), (5,2) at both commit sizes, plus a brute-force check of the min-plus
+  cost table (8 tests). Coverage at d=9, p=1%: proved tier 92.05% at T=2, 99.80% at T=4,
+  99.85% at T=6; as a cascade the strong decoder sees 0.00% to 0.56% of shots across p in
+  0.001 to 0.05 and d in 3 to 9. Certification is not quiet-window recognition: at d=9, T=6,
+  p=5% only 0.35% of windows are clean yet 98.85% are certified, nearly all with a unique safe
+  parity. Compiled artifact: the certified predecoder for the distance-9 repetition code with
+  two rounds of lookahead is a six-state automaton in 6,150 bytes (65,536 syndromes, 11,000x
+  compression, worklist-minimized); d=5, T=4 gives 29 states. Proved-only is smaller than
+  proved-plus-bounded (6 vs 90 states). Cost: 62 to 100 instructions per committed round, flat
+  in distance and error rate, vs PyMatching 300 to 8,861 on matched six-round windows; raw
+  3.5x to 140.7x, composed (charging the LUT for every deferred shot) 3.5x to 30x; at d=3 the
+  full T=2,4,6 cascade in 595 bytes defers nothing at any error rate. Binding constraint:
+  enumeration depth 2^((d-1)T), so only T=2 compiles at d >= 7 (d=7 defer 6.3% at 1%, 24.7%
+  at 5%); the tier census predicts about 28x at d=7 with deeper tiers. Next: a spatial
+  locality argument (a defect far from the commit region cannot change the commit decision),
+  for which the six-state d=9 automaton is direct evidence.
