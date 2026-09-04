@@ -647,3 +647,26 @@ one-line pointer here.
   subcommand; instructions per committed round across p, with the live risk that at 1% error a
   d=9 shot's about 30 defects wake about 300 positions against the dense sweep's 79, so sparse
   may only win at low p.
+- 2026-09-03 — probe 28: TigerBlossom sparse fallback, every cell. Probe-28 section of
+  `2026-09-03-c1061-probe26-tiger-blossom-kernel.md` (ergodis-private `880ffa6`). Verdict:
+  **15 of 18 cells won (was 12); three p=0.05 cells still lose with a measured cause**. The
+  dense O(n^3) fallback is replaced by region growth over the compiled detector graph
+  (linear-function duals on a global clock, bucket event queue with recycled pool, blossom
+  contraction and extraction), and every solve is certified optimal by LP duality before its
+  answer is used, so a matcher bug costs speed, not correctness; the sparse matcher costs
+  about 5,500 instructions on a sixteen-defect block vs 706,000 dense. Exactness: zero
+  minimum-weight disagreements vs PyMatching on all 360,000 frozen shots; zero allocations
+  across `decode_batch`; certificate soundness gated on 77,174 random instances with zero
+  certified-but-wrong answers. Ratios 0.089x to 0.95x on the won cells, all CIs excluding
+  1.0; worst cell d=25, p=0.05 improved 12.7x (25.51x to 2.008x, CI [1.994, 2.021]); losing:
+  d=9 1.135x (wins on cycles at 0.785x through a third fewer branch misses), d=15 1.534x,
+  d=25 2.008x. Pinned binary sha256 203cb386...7042. Remaining loss: the dense fallback is 32%
+  of the worst cell's profile while answering 1.7% of blocks; 4,430 of 4,434 random-instance
+  declines were optimal answers whose dual drifted infeasible by one unit, so fixing the
+  drift retires the dense matcher (about a third of that cell); a rounding-overshoot theory
+  was ruled out by assertion. `decode_with_gap` added as a separate entry point (exact minimum
+  weight per logical class via a parity-resolved metric closure plus a compiled
+  closed-logical-operator term, gated by exhaustive enumeration at d=3); hot path untouched.
+  Next, in order: fix the dual drift, add blossom expansion (61 structural declines), then
+  the sparse core's per-operation cost; the `latency` mode for per-shot p50/p99/max is
+  written but was not run.

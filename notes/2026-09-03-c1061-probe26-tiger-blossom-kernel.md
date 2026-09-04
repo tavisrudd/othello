@@ -478,3 +478,320 @@ each. That the entire win rests on compiling the metric closure — a specializa
 library structurally cannot make — is the most useful thing in the probe, and the fact that zero
 allocation bought stability rather than speed is worth remembering before the next Tiger rewrite is
 justified on speed grounds.
+
+---
+
+# C1061 probe 28: replacing the dense fallback with sparse region growth
+
+**Date**: 2026-09-03 (appended to the probe-26 report; same lane, same contracts).
+
+## Headline
+
+**The dense general fallback is gone. TigerBlossom now grows regions over the compiled detector
+graph, and every answer is certified optimal by LP duality before it is trusted, so exactness no
+longer depends on the matcher being bug-free. The exactness gate holds: zero minimum-weight
+disagreements against PyMatching on all 360,000 frozen shots. Fifteen of eighteen cells are wins,
+against twelve at the end of probe 26; the worst cell, distance 25 at p=0.05, went from a 25.5x
+loss to 2.0x.**
+
+The three remaining losses are all at p=0.05, where blocks are large. Their cause is measured, not
+guessed: at distance 25 and p=0.05 the sparse matcher answers 98.3% of blocks, and the dense
+matcher answering the other 1.7% still takes about a third of the profile.
+
+## Status
+
+- [x] P1 profile the dense fallback and locate the cost
+- [x] P2 sparse region-growth matcher: growth, alternating trees, augmentation, boundary
+- [x] P3 boundary rerouting
+- [x] P4 blossom contraction and matching extraction
+- [x] P5 LP-duality certificate; sparse matcher is the default decode level
+- [x] P6 exactness gate on the frozen 360,000 shots, full grid A/B
+- [x] P7 complementary-gap output
+- [ ] P8 close the three p=0.05 cells: drive declines to zero, then the matcher's own constant
+- [ ] P9 blossom expansion
+
+## Why the dense matcher had to go
+
+`perf record` on distance 25 at p=0.05 put 68% of the time in `BlossomMatcher::solve` and 15% more
+in `on_found_edge`. A scaling sweep over real blocks showed the shape:
+
+| defects in block | instructions | vs `m^3` | growth exponent |
+|---|---|---|---|
+| 4  | 1,850     | 28.9x  | —    |
+| 8  | 31,371    | 61.3x  | 5.16 |
+| 10 | 244,077   | 244.1x | 9.19 |
+| 16 | 738,702   | 180.3x | 2.40 |
+| 24 | 1,974,022 | 142.8x | 2.44 |
+| 32 | 4,044,604 | 123.4x | 2.51 |
+
+The asymptotic exponent is about 2.5, better than the cubic the implementation was designed
+around, but **the constant is 120 to 240 times `m^3`**. A twenty-vertex matching problem cost a
+quarter of a million instructions. The step between eight and ten defects is the subset dynamic
+program handing over to the blossom matcher. That is a constant, not an asymptotic, and no amount
+of shaving fixes it — hence a different algorithm.
+
+Measured in isolation on real sixteen-defect blocks, the sparse matcher costs about **5,500
+instructions against the dense matcher's 706,000**, a factor of 128.
+
+## The sparse matcher
+
+`src/tiger_blossom_sparse.rs`. Regions grow outward over the compiled detector graph and the
+matcher reacts to collisions, so work tracks events rather than the reduced complete graph.
+
+- A region's dual is a linear function of a global clock, `radius(t) = offset + growth * t` with
+  growth in `{-1, 0, +1}`, so a growing region's dual is never touched while it grows.
+- Each node carries the doubled distance from its growth source and a *wrapped* sum, the frozen
+  radii of the regions between the one that absorbed it and the outermost one covering it. Its
+  local radius is `wrapped + radius(owner, t) - distance`, and an edge of doubled weight `w` is
+  tight when the two local radii sum to `w`. Weights are doubled so a head-on collision lands on
+  an integer clock.
+- The event queue is a bucket queue over the clock with a recycled entry pool — one fixed
+  allocation. Every entry is revalidated on pop against its slot's schedule stamp, so a rate change
+  cannot silently drop the collision it was scheduled for. Three event kinds: an edge becoming
+  tight, a region reaching the boundary, and a shrinking region releasing its outermost node.
+- Contraction folds the odd cycle a same-tree collision closes into one region whose dual starts at
+  zero, folding each member's frozen radius into the wrapped sum of every node beneath it so no
+  local radius changes at the moment of contraction. Extraction walks the odd cycles back down to
+  defect-level pairs, priced from the compiled closure, so the geometry is never walked twice.
+- A tree reaching a region already matched to the boundary takes over that boundary slot rather
+  than stalling: every boundary copy joins every other at zero cost, so rematching the path leaves
+  one more defect matched and keeps the parity the final matching needs.
+
+Everything is presized, structure of arrays, `u16` identifiers with sentinels, and iterative — the
+subtree walks contraction and extraction need use an explicit preallocated stack.
+
+The sparse level also skips the pair matrix and the cluster decomposition entirely: the matcher
+consumes detector nodes and returns a pairing, and only that pairing is priced. Those two were a
+quarter of the profile before removal.
+
+## The certificate, and why it is the load-bearing piece
+
+The region radii are a dual solution in the odd-cut formulation: every region is an odd set of
+defects whose cut must carry a matched edge, so each region contributes its radius exactly once,
+a region separating a pair constrains that pair's distance, and a region containing a defect
+constrains that defect's boundary match. Weak duality gives
+`dual objective <= optimum <= primal cost`, so a **feasible dual whose objective equals the primal
+cost proves the matching optimal**.
+
+Every solve is certified before its answer is used. A solve that does not certify is declined and
+the dense matcher answers it. That is what makes exactness independent of the matcher being
+correct, and it is why the gate below is a result rather than a hope.
+
+Soundness is gated on 77,174 random instances across four distances: **zero certified answers were
+wrong**. Coverage is 94% there and 98.3% on real syndromes at distance 25 and p=0.05.
+
+## Exactness gate
+
+Pinned binary `~/.cache/ergodis/bin/ergodis-tools-190f009`, SHA-256
+`203cb386d497d805c3eec35dbd5b2eaceb98268563810e6e865bec02b9737042`. PyMatching 2.4.0, NumPy 2.5.1,
+CPython 3.14.3. 20,000 shots per cell, four-round windows, the same matching graph on both sides.
+
+**Zero minimum-weight disagreements across all eighteen cells — 360,000 shots.** Prediction
+differences remain only where degeneracy is dense and are the documented tie policy.
+
+## Instructions per decode, against PyMatching `decode_batch`
+
+Same harness as probe 26: two-size differencing, fixed-window loops bound on an explicit operation
+count, eight interleaved rounds, counters in two unmultiplexed passes, paired log-ratio means with
+95% confidence intervals.
+
+| d | p | tiger instr | sd | pymatching instr | sd | ratio | 95% CI | n | verdict |
+|---|---|---|---|---|---|---|---|---|---|
+| 3  | 0.001 | 67     | 0.01% | 309    | 47.18% | **0.248x** | [0.148, 0.418] | 8 | win  |
+| 3  | 0.01  | 99     | 0.01% | 532    | 24.48% | **0.191x** | [0.152, 0.241] | 8 | win  |
+| 3  | 0.05  | 661    | 0.00% | 1,658  | 7.57%  | **0.400x** | [0.374, 0.427] | 8 | win  |
+| 5  | 0.001 | 68     | 0.02% | 360    | 32.19% | **0.199x** | [0.149, 0.264] | 8 | win  |
+| 5  | 0.01  | 204    | 0.00% | 788    | 13.56% | **0.260x** | [0.232, 0.293] | 8 | win  |
+| 5  | 0.05  | 2,624  | 0.00% | 3,504  | 3.61%  | **0.749x** | [0.727, 0.772] | 8 | win  |
+| 7  | 0.001 | 70     | 0.01% | 383    | 32.52% | **0.191x** | [0.146, 0.249] | 8 | win  |
+| 7  | 0.01  | 272    | 0.00% | 1,132  | 16.55% | **0.243x** | [0.211, 0.281] | 8 | win  |
+| 7  | 0.05  | 5,036  | 0.00% | 5,285  | 2.64%  | **0.953x** | [0.933, 0.974] | 8 | win  |
+| 9  | 0.001 | 72     | 0.02% | 463    | 32.60% | **0.163x** | [0.124, 0.214] | 8 | win  |
+| 9  | 0.01  | 418    | 0.00% | 1,473  | 5.39%  | **0.284x** | [0.272, 0.297] | 8 | win  |
+| 9  | 0.05  | 8,170  | 0.00% | 7,198  | 2.19%  | **1.135x** | [1.115, 1.156] | 8 | loss |
+| 15 | 0.001 | 82     | 0.01% | 735    | 12.97% | **0.112x** | [0.100, 0.126] | 8 | win  |
+| 15 | 0.01  | 1,085  | 0.00% | 2,517  | 7.24%  | **0.432x** | [0.406, 0.460] | 8 | win  |
+| 15 | 0.05  | 19,170 | 0.00% | 12,500 | 1.12%  | **1.534x** | [1.519, 1.548] | 8 | loss |
+| 25 | 0.001 | 107    | 0.01% | 1,208  | 8.23%  | **0.089x** | [0.083, 0.095] | 8 | win  |
+| 25 | 0.01  | 2,906  | 0.00% | 4,186  | 3.60%  | **0.695x** | [0.674, 0.716] | 8 | win  |
+| 25 | 0.05  | 42,956 | 0.00% | 21,394 | 0.80%  | **2.008x** | [1.994, 2.021] | 8 | loss |
+
+Every interval excludes 1.0, so every cell is decided. TigerBlossom's counts are deterministic to
+0.02%.
+
+Against probe 26, cell by cell: distance 7 at p=0.05 went from 1.45x to 0.95x, distance 25 at
+p=0.01 from 1.70x to 0.70x, distance 9 at p=0.05 from 3.08x to 1.14x, distance 15 at p=0.05 from
+10.81x to 1.53x, and distance 25 at p=0.05 from 25.50x to 2.01x. Three cells that probe 26 lost
+are now won; the p=0.001 and p=0.01 wins were preserved.
+
+## Branches, misses, and cycles
+
+| d | p | metric | tiger | pymatching | ratio |
+|---|---|---|---|---|---|
+| 9  | 0.001 | cycles                | 12.40    | 295.30   | 0.068x |
+| 9  | 0.001 | branches              | 15.50    | 103.30   | 0.153x |
+| 9  | 0.001 | branch-misses         | 0.10     | 0.10     | 0.915x |
+| 9  | 0.001 | L1-dcache-load-misses | 0.40     | 1.40     | 0.280x |
+| 9  | 0.01  | cycles                | 70.50    | 304.90   | 0.275x |
+| 9  | 0.01  | branches              | 85.00    | 272.10   | 0.313x |
+| 9  | 0.01  | branch-misses         | 0.20     | 1.10     | 0.174x |
+| 9  | 0.01  | L1-dcache-load-misses | 0.30     | 1.60     | 0.216x |
+| 9  | 0.05  | cycles                | 2,014.60 | 2,592.10 | 0.785x |
+| 9  | 0.05  | branches              | 1,687.00 | 1,303.80 | 1.294x |
+| 9  | 0.05  | branch-misses         | 22.50    | 33.30    | 0.674x |
+| 9  | 0.05  | L1-dcache-load-misses | 1.60     | 2.90     | 0.559x |
+| 25 | 0.001 | cycles                | 19.80    | 342.80   | 0.071x |
+| 25 | 0.001 | branches              | 23.40    | 272.80   | 0.086x |
+| 25 | 0.001 | L1-dcache-load-misses | 0.80     | 3.40     | 0.231x |
+| 25 | 0.01  | cycles                | 579.10   | 1,094.80 | 0.573x |
+| 25 | 0.01  | branches              | 588.80   | 819.60   | 0.718x |
+| 25 | 0.01  | branch-misses         | 3.40     | 9.50     | 0.358x |
+| 25 | 0.01  | L1-dcache-load-misses | 3.70     | 8.20     | 0.455x |
+| 25 | 0.05  | cycles                | 9,699.10 | 7,461.50 | 1.302x |
+| 25 | 0.05  | branches              | 9,050.80 | 3,984.00 | 2.272x |
+| 25 | 0.05  | branch-misses         | 101.80   | 94.50    | 1.076x |
+| 25 | 0.05  | L1-dcache-load-misses | 76.80    | 47.70    | 1.645x |
+
+`LLC-load-misses` is unsupported on this host; `cache-misses` stands in and is at or below
+PyMatching's everywhere, never above 0.5 per decode on either side. Two things are worth reading
+off this table. In the winning regime TigerBlossom is not merely issuing fewer instructions but
+touching far less memory — a fifth of PyMatching's L1 misses at distance 25 and p=0.01. And at
+distance 9 with p=0.05 it **loses on instructions while winning on cycles** (1.14x against 0.79x),
+because its branch misses are a third lower: the work is more predictable even where there is more
+of it.
+
+## Per-shot distribution
+
+Decoding is deterministic given the shot, so the spread is a property of the shot mix, not of the
+kernel. The exact work distribution is the defect histogram: at distance 9 and p=0.01, 11,070 of
+20,000 shots carry no defect, 5,855 carry two, and the tail reaches ten; at distance 25 and p=0.05
+the mean is 14.8 defects and the largest block seen is 34, at 34.7 sparse events per block.
+
+A wall-clock p50/p99/max was **not measured**. A `latency` bench mode reporting both the exact
+event distribution and a wall-clock one is committed and unused; running it was outside the scope
+this pass was cut to.
+
+## Where the three losing cells go
+
+Profile of distance 25 at p=0.05, the worst cell, after all the above:
+
+| component | share |
+|---|---|
+| dense fallback (`BlossomMatcher::solve` + `on_found_edge` + `set_slack`) | 32% |
+| sparse matcher core (`solve`, `edge_event_time`, `schedule_node`, `push_event`) | 41% |
+| certificate | 9% |
+| blossom extraction (`descend`) | 6% |
+
+**The dense fallback is a third of the cost for 1.7% of the blocks.** At distance 25 and p=0.05,
+19,502 blocks are answered sparsely, 61 are declined because a contracted region would have to be
+expanded, and 286 are declined because their answer did not certify. Those 347 blocks cost about a
+third of the cell.
+
+The 286 uncertified are the interesting ones, and the diagnosis is specific: on random instances
+**4,430 of 4,434 declines were answers that were in fact optimal but whose dual was infeasible**,
+typically by one unit on a single pair constraint, with a third region sitting on the path between
+the two defects. So the matcher is finding optimal matchings while its duals drift out of
+feasibility, and the certificate — correctly — refuses to vouch for them. Fixing that drift is
+worth about a third of the worst cell and would also remove the last of the dense matcher.
+
+A rounding overshoot in the collision time was the obvious suspect and was **ruled out by
+measurement**: an assertion that a two-region collision never lands on a half step never fired.
+
+Sparse-matcher traffic per answered block at that cell: 34.7 events popped, 26.2 scheduling calls,
+65.0 event pushes, 92.2 event-time evaluations. That is a reasonable event count for fifteen
+defects, so the core's remaining cost is per-operation, not per-event.
+
+## Bugs the staging caught, and how
+
+Each was found by a check, not by reading code; several had symptoms that pointed elsewhere.
+
+1. **Consumed events left their schedule stamp set**, so a later schedule for the same time looked
+   already queued and the event was lost. Symptom: feasible but suboptimal matchings.
+2. **Skipping a collision with a boundary-matched region** breaks the primal-dual invariant.
+   Declining, and later rerouting properly, was the only correct move.
+3. **A release event scheduled for the instant the radius equals a node's distance** releases
+   nothing and re-arms at the same clock, livelocking. All 6,419 declines at distance 25 and p=0.05
+   were this, surfacing as budget exhaustion. The fix is a `+ 1`.
+4. **The event pool was bump-allocated and never recycled**, so long solves ran it dry.
+5. **The boundary event time never had the wrapped term**, so after a contraction a region grew
+   past a member's boundary constraint. Found by a debug-only dual feasibility assertion.
+6. **A node changing owner in a contraction kept its schedule stamps**, suppressing the re-arm when
+   the recomputed time coincided.
+7. **`schedule_region` walked only a region's own node list**, but a blossom's covered nodes live
+   in its members' lists — so re-arming a blossom scheduled nothing. This is the one the
+   feasibility assertion was built to catch, and it was the last wrong-answer bug.
+8. **The certificate used the wrong LP.** Weighting a blossom's dual by half its size is the
+   odd-set formulation, not the odd-cut one the region radii actually solve; each region
+   contributes its radius exactly once. The wrong objective rejected 8,536 optimal answers.
+9. **Pricing a matched pair by the cheaper boundary substitution** broke the dual accounting the
+   certificate checks.
+
+A tenth item is a measurement error, not a code bug: a decline-cause census written with an
+over-broad string replacement reported the odd-cycle case under the reroute counter, which made
+blossom contraction look unnecessary for one round of work. Splitting the counters properly showed
+it was the entire remaining gap. Worth recording because the wrong reading was acted on.
+
+## Complementary gap
+
+`decode_with_gap` is a separate entry point; the decode hot path is untouched. It resolves the
+minimum weight in **every** logical class by a subset dynamic program over the whole defect set
+indexed by accumulated class, capped at twelve defects.
+
+Three things make it exact where a naive version is not. The cluster decomposition is deliberately
+not used: it preserves the unconstrained optimum but not the optimum within a class, because the
+exchange that justifies it can change the parity it carries. Pair and boundary costs come from a
+**parity-resolved metric closure** — the least path weight between two detectors carrying each
+logical class — because the shortest path fixes one parity and the gap is precisely a question
+about the other. And any solution can be moved to the complementary class by adding a closed
+logical operator, whose least weight is compiled as the code distance, so no class is ever
+unreachable and the gap is capped by the distance.
+
+It is gated by **exhaustive enumeration of every error configuration** of a distance-3 two-round
+code, over all sixteen syndromes and both classes, and separately checked to agree with the
+certified hard decoder on the class it predicts.
+
+Measured behaviour at distance 9 (20,000 shots): mean gap 8.91 at p=0.001, 8.14 at p=0.01, 5.75 at
+p=0.05, with full coverage except shots above the twelve-defect cap at p=0.05. Confidence falls as
+noise rises, which is what soft output is for.
+
+## Exactness, allocation, memory
+
+- Zero weight disagreements against PyMatching on all 360,000 frozen shots.
+- Zero allocations across `decode_batch`, now exercising the sparse level, the dense level, and the
+  unspecialized level in one measured region under a counting allocator.
+- The workspace is bounded and does not grow; it now also holds the sparse matcher's arrays, the
+  gap table, and the parity-resolved closure.
+
+## Files and commits
+
+- `src/tiger_blossom_sparse.rs` — the sparse region-growth matcher and its certificate.
+- `src/tiger_blossom.rs` — workspace, levels, gap entry point.
+- `src/tiger_blossom_graph.rs` — the compiler, metric closure, parity-resolved closure.
+- `src/tiger_blossom_match.rs` — the dense matcher, retained as the fallback.
+- `tasks/tools/src/tiger_blossom_bench.rs` — bench subcommand.
+
+Probe-28 commits: `bb2c1b1` sparse matcher; `ce586c9` boundary reroute; `df2675c` contraction,
+extraction, feasibility check; `f340718` certificate and sparse default; `ef7a45b` skip the pair
+matrix and clusters, parity-resolved closure; `190f009` odd-cut objective and raw pricing;
+`9d05c3b` latency mode. Earlier probe-28 work: `85bd1c4` drivers.
+
+## Next steps, in order
+
+1. **Fix the dual drift** that makes 1.7% of real blocks fail to certify. It is worth about a third
+   of the worst cell and would retire the dense matcher from the hot path. The certificate makes
+   this purely a performance question, not a correctness one.
+2. **Blossom expansion**, which retires the last 61 structural declines.
+3. **The sparse core's per-operation cost**, which is where the remaining loss sits once the
+   fallback is gone: 34.7 events cost far more than 34.7 events should.
+4. Run the committed `latency` mode for the per-shot distribution.
+5. Only then consider the batch-internal SIMD front end, which is worth little at p=0.05 and
+   nothing at p=0.001.
+
+## Vibe check
+
+Strong and honest. The gate that mattered — exactness — is now structural rather than empirical:
+the certificate means a buggy matcher costs speed, not correctness, and that is what let the
+sparse rewrite land at all. Fifteen of eighteen cells win, the worst cell improved 12.7x, and the
+three that still lose have a measured cause with a named fix rather than a shrug. The one thing to
+carry forward is methodological: three separate times a plausible story about where the cost or
+the bug lived was wrong, and each time a counter or an assertion settled it in minutes.
