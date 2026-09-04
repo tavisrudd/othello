@@ -79,8 +79,8 @@ probe may quietly claim both.
 | 0     | Prior-art and landscape audit                       | S    | every landscape claim in the brief resolved or discarded | **done**: engines exist, no probe cut; responsibility formula corrected; probe 7 gains a near neighbour | `2026-09-04-c1062-probe0-prior-art-and-landscape-audit.md` |
 | 1a    | Pencil: carrier, cost model, signature collapse     | S    | closed-form state count; collapse stated and proved | **done**: viable but narrow; envelope `\|U\| ≲ 10^4` at arity 2–3; probe 7 promoted | `2026-09-04-c1062-probe1a-carrier-and-cost-model.md` |
 | 1     | Lowering, oracle, Balke–Pearl fixture, towers       | M    | class-for-class agreement on the response-function fixture | **done**: 60 contexts to 32 classes, all three gates pass; contract one-quarter delivered | `2026-09-04-c1062-probe1-lowering-and-towers.md` |
-| 2     | Best intervention, and the economics that follow    | L    | compiled beats memoized re-solve on the enumeration query, residual compression above the orbit baseline | planned | — |
-| 3     | Exact actual causality and responsibility           | L    | verifier work under 10% of search; published verdicts matched | planned | — |
+| 2     | **Best intervention, and the economics that follow** | L    | compiled beats memoized re-solve on the enumeration query, residual compression above the orbit baseline | **next; promoted to the spine** | — |
+| 3     | Exact actual causality and responsibility           | L    | verifier work under 10% of search; published verdicts matched | **done**: all eight published verdicts reproduced; certificate missed 10% at a 55-candidate scale; not closed | `2026-09-04-c1062-probe3-actual-cause-and-responsibility.md` |
 | 4     | Level-3 counterfactual and the observation precondition | M | exact under `O ⊇ E ∪ {Y}`; demonstrably wrong without it | planned | — |
 | 5     | Evolve proposes, separator refutes                  | M    | seals to the exact kernel, and beats the random-counterexample arm on generations | planned | — |
 | 6     | k-ary experiment design and decision equivalence    | M    | measured gap between full and decision-sufficient identification, plus a near-zero gap on the negative family | planned | — |
@@ -194,6 +194,12 @@ non-idempotent edit vocabulary — and the response-function fixture must agree 
 "Partitions agree with my own oracle" is not a result.
 
 ## Probe 2 — best intervention, and the economics that follow
+
+**This is now the spine of the task.** Tavis's direction after probe 3: the decision layer is what
+to lean into. That agrees with the adversarial plan review, which called the missing optimization
+probe the largest faithfulness gap in the original plan. Actual causality becomes an *input* to this
+layer rather than the headline — a minimal contingency is what turns "this failed" into "this is the
+smallest change that would have prevented it", which is a decision rather than an attribution.
 
 **This probe was missing.** The brainstorm's proposal 6 is optimization over interventions, Ergodis
 is an exact optimization compiler, and the first plan contained no optimization probe — while
@@ -452,15 +458,26 @@ responsibility formula that would have produced wrong numbers; probe 1a fixed th
 promoted probe 7; probe 1 built the lowering and passed all three gates, with the response-function
 fixture collapsing 60 contexts to exactly 32 classes.
 
-**Probe 2 and probe 3 are both unblocked and independent of each other.** Probe 3 now has its
-substrate — the congruence on intervened states is compiled and reachable — and its formula is
-correct before any code. Probe 2 is the first probe that can show the compile paying for itself.
-Probe 3 is the one that carries the surviving differentiators, so on expected value it goes first
-unless the aim is to settle economics early.
+Probe 3 is done: all eight published Halpern–Pearl verdicts reproduce exactly, including the two
+that catch a weaker implementation — the disjunctive forest fire's conjunctive cause and rock
+throwing's `{BH}` witness. Its exhaustion certificate missed the predeclared 10% threshold, but at a
+55-candidate search scale where a class-based negative cannot compress; Tavis directed that this not
+close the probe, and the finding is recorded as unmeasured-at-scale rather than refuted.
 
-Two carried-forward items from probe 1, neither blocking: the arity tower is computed at full price
-per rung rather than incrementally through `plan_layered_greedy_schedule`, and non-vacuous word
-structure remains entirely untested until probe 8. Probe 7 is still blocked until its novelty
-argument against the variable-partition coarsening line is written down; that writing is cheap and
-can happen any time.
+**Probe 2 is next and is now the spine**, per Tavis's steer that the decision layer is what to lean
+into. Its first deliverable is `best_intervention` with a cost model — the cheapest intervention
+reaching a declared outcome, as a search over the monoid action on the quotient rather than a single
+re-solve — followed by minimax regret over a bounded model set. Probe 6's decision-equivalence
+quotient follows directly from it.
+
+Carried forward, none blocking. The arity tower is computed at full price per rung rather than
+incrementally through `plan_layered_greedy_schedule`. Non-vacuous word structure is untested until
+probe 8. Probe 7 remains blocked until its novelty argument against the variable-partition
+coarsening line is written down. Probe 3's amortization arm was never measured, because it lives in
+the tools binary that a concurrent lane currently has broken.
+
+**Two obstructions outside this lane**, both raised and neither fixed here: the ergodis core's
+`CertificatePolicy::QuotientOnly` miscompiles presentations with more than about sixteen sorts (see
+the probe 3 report for the three-policy table), and `tasks/tools/src/tiger_blossom_bench.rs` is
+uncommitted and does not compile, which blocks the whole `ergodis-tools` binary.
 </content>
