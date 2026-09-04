@@ -717,3 +717,23 @@ is a proposal awaiting Tavis's decision on core extraction.
 a thousand instructions per op; fixed-window harness, every timed loop bound on `--operations`;
 near-zero per-op cost means a broken loop; pin and hash both A/B binaries; commit with
 `git commit -m .. -- <own paths>` since the shared index is not safe even after a staged check.
+
+## Next session plan, set 2026-09-04 by Tavis
+
+1. **Matcher first** (probe 28c): the three simplifications in
+   `2026-09-04-c1061-probe28b-tiger-blossom-dual-drift.md`, in order: blossom expansion and
+   deletion of the dense matcher (`tiger_blossom_match.rs`, pair matrix, cluster plumbing); the
+   local I1/I2 certificate in place of the LP pair loop; one queue entry per edge. Gates: the
+   debug I1/I2 assertion suite, full-coverage ratchet, 360,000-shot PyMatching exactness, the
+   18-cell A/B against retained `ergodis-tools-dfd4ee0`, zero allocation.
+2. **Then the broader pipeline**: the certified predecoder (probes 23, 27, 29, 30, 31) has no
+   in-process strong decoder for deferred shots; PyMatching is only an out-of-process baseline.
+   Wire TigerBlossom as the strong decoder behind the defer path (same compiled detector graph),
+   then bench and optimize the end-to-end predecoder-plus-Tiger pipeline against PyMatching alone
+   on the shot grid, instructions and per-shot latency (the unrun `latency` mode). Probe 31's
+   sparse-margin cost across p and the d=5 oracle audit fold into this.
+3. Standing external framing (ChatGPT, 2026-09-03, retained for context): of its five routes,
+   the context-certified tiered predecoder is built (probes 23 to 31), the boundary-matrix
+   compression was killed (probe 24), soft output was measured (probe 25); open are FPGA
+   synthesis of small tiers and moving to qLDPC/bivariate-bicycle codes where no dominant sparse
+   matcher exists. Neither is scheduled before items 1 and 2.
