@@ -700,8 +700,11 @@ C1061 is an open-ended Ergodis exploration of compiled dynamic decision engines 
 delta updates, event-sourced optimizer state); its brief is
 `2026-09-03-c1061-ergodis-compiled-dynamic-solver-brief.md` and its running log is
 `2026-09-03-c1061-exploration-log.md`. Its code lives in `~/src/ergodis-private`. The
-TigerBlossom dual drift is fixed (`2026-09-04-c1061-probe28b-tiger-blossom-dual-drift.md`); the
-next matcher step is blossom expansion, which retires the dense fallback.
+exploration log is a routing document with one companion report per probe. TigerBlossom now has
+blossom expansion and no dense matcher, wins every cell against its prior build, and is the exact
+oracle behind the certified predecoder, whose sound margin commits nothing at the radii built
+(`2026-09-04-c1061-probe28c-blossom-expansion-and-tiger-behind-the-predecoder.md`); the next step
+is the sparse core's scheduling cost.
 C1016 is active as a private Ergodis reduction-synthesis pilot. A hostile review found that its
 unapproved presentation-hash/feature-name overlay did not establish extractor semantics. Public
 proof authority, `Necessary`, and all Hadamard/GS code are therefore removed; core again advertises

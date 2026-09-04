@@ -45,6 +45,7 @@ and the next-session plan. Reports are the authority for numbers and method.
 | 27    | Locality and surface-code predecoder                | locality argument false; certificate transfers, compilation does not     | `2026-09-03-c1061-probe27-locality-and-surface-code-predecoder.md`           |
 | 28    | TigerBlossom sparse fallback, every cell            | 15 of 18 cells won; three p=0.05 cells lose with a measured cause        | probe 26 report, probe-28 section and log addendum                           |
 | 28b   | TigerBlossom dual drift                             | drift fixed; declines to zero; worst cell 16% better                     | `2026-09-04-c1061-probe28b-tiger-blossom-dual-drift.md`                      |
+| 28c   | Blossom expansion; Tiger behind the predecoder      | dense matcher gone, all 18 cells faster; sound margin commits nothing    | `2026-09-04-c1061-probe28c-blossom-expansion-and-tiger-behind-the-predecoder.md` |
 | 29    | Local-commit predecoder                             | sound at every radius; does not compile past small d                     | `2026-09-03-c1061-probe29-local-commit-predecoder.md`                        |
 | 30    | Margin certificate predecoder                       | certificate proved and local; not yet d=9 accuracy-identical             | `2026-09-03-c1061-probe30-margin-certificate-predecoder.md`                  |
 | 31    | Sparse evaluation and per-witness margin            | paused by Tavis; per-witness margin dead as posed                        | `2026-09-03-c1061-probe31-sparse-evaluation-and-per-witness-margin.md`       |
@@ -60,18 +61,20 @@ the profile-level vocabulary, the computed exact transducer plus constant-cost i
 the tree), the generic `OpenProblem` core with a certificate chain over four summary shapes, the
 policy transducer and worklist minimizer, the two defect-kernel collapses landed in core (15x), the
 routing win over Dijkstra re-solve, the proved predecoder safety certificates (per-context,
-local-commit, margin), and TigerBlossom (exact on 360,000 shots, 15 of 18 cells ahead of
-PyMatching).
+local-commit, margin), and TigerBlossom (exact on 360,000 shots, region growth with blossom
+expansion as its only general solver, 15 of 18 cells ahead of PyMatching).
 
 **Standing negatives.** Dense per-shot QEC decoding; syndrome orbit compilation; boundary-matrix
 compression (the table is already the compressed form); probability semiring over the cost
 decomposition as reliability; capped-multiplicity state keys; per-witness margin as posed;
-memoization on unique fleets; QEC time-axis chain beyond distance 6.
+memoization on unique fleets; QEC time-axis chain beyond distance 6; the certified margin
+predecoder at radius 1 or 2 (the only sound margin commits nothing; probe 28c); the local
+I1/I2 certificate as a simpler object than the LP pair certificate (probe 28c).
 
 **Paused, with next steps in their reports.** Probe 18 (generic chain zero-allocation regression,
 9.5 dedupe needs a quiet tree), probe 21 (routing fair baseline), probe 22 (non-degenerate LRC
-regime, true reliability gates), probe 28 (dual drift fix retires the dense fallback, blossom
-expansion, latency mode unrun), probe 31 (d=5 soundness audit, sparse-margin cost across p). The
+regime, true reliability gates), probe 28c (sparse core's per-event scheduling cost at the three
+losing p=0.05 cells; surface d=9 predecoder rows to re-derive on the repaired graph). The
 ADR at `~/src/ergodis-private/docs/adr/0001-generic-dynamic-decision-layer.md` is a proposal
 awaiting Tavis's decision on core extraction.
 
@@ -99,3 +102,11 @@ near-zero per-op cost means a broken loop; pin and hash both A/B binaries; commi
    compression was killed (probe 24), soft output was measured (probe 25); open are FPGA
    synthesis of small tiers and moving to qLDPC/bivariate-bicycle codes where no dominant sparse
    matcher exists. Neither is scheduled before items 1 and 2.
+
+## State after probe 28c, 2026-09-04
+
+Item 1 is done except the local certificate, which is closed with a reason; item 2 is done and
+its answer is negative at the radii built: the kernel as oracle shows margins 1 and 2 unsound and
+margin 3 committing nothing, and the surface d=9 graph used by probes 27 to 31 was aliased (fixed).
+Next in order: the sparse core's scheduling cost (profile in the probe 28c report), then the
+predecoder only under a radius-3 or observation-conditioned margin audited by the kernel.
