@@ -166,6 +166,45 @@ solution. The best configuration at 523 is the free block of size 240 with zero
 in the repeated block, in plain (non-symmetric) mode; the symmetric shard is
 markedly worse at the same budget, reaching only 1,180.
 
+## Where the search actually reaches, and what more compute buys
+
+Two measurements settle whether the 236 at 523 is a budget problem.
+
+**Reach.** Same fixed budget as the ladder (eight workers, one million
+mutations, four restarts), best over both spin-shaped parameter sets and all
+four mode and zero-membership combinations:
+
+| carrier `v` | best residual score |
+|-------------|---------------------|
+| 61          | 0                   |
+| 67          | 0                   |
+| 73          | 0                   |
+| 79          | 2                   |
+| 97          | 4                   |
+| 103         | 4                   |
+| 109         | 4                   |
+| 127         | 8                   |
+
+The search closes the shard outright up to `v = 73` and never again above it.
+Each of those zeros is a Hadamard matrix built from scratch — orders 244, 268
+and 292 — with the independent full replay certifying every equation. The
+banked `hit-v73.json` is one of them, re-verified by the Python oracle.
+
+**Budget.** Raising the budget about 180-fold, to twelve workers, twenty
+million mutations and twelve restarts:
+
+| carrier `v` | best at low budget | best at 180x budget |
+|-------------|--------------------|---------------------|
+| 127         | 8                  | 6                   |
+| 163         | 16                 | 16                  |
+| 199         | 30                 | 24                  |
+
+Two orders of magnitude of extra compute move the residual by 25 percent, zero
+percent and 20 percent. This is the same plateau shape the bordered `q29`
+campaign measured, reached here in minutes rather than hours. **Compute is not
+the lever for this shard**, and the gap from `v = 73` to `v = 523` is not one
+that more of the same search closes.
+
 ## Hot-loop measurement
 
 The first implementation repaired the full autocorrelation array on every
@@ -186,9 +225,35 @@ billion, branches `13.81` to `5.47` billion, branch misses `10.29` to `8.47`
 million, cache misses essentially unchanged. That is a wall-time ratio of 2.69x
 explained entirely by removed work, not by a measurement artifact.
 
+A second change stores each sequence twice end to end and keeps the compact
+autocorrelation in read-shift order, so a flip needs no wrap test and walks its
+autocorrelation slice sequentially. Five more interleaved rounds against the
+build of commit `503369c` (SHA-256 `e74ce994...`) give 1.9, 1.9, 1.9, 1.9, 1.8
+seconds against 1.4 in every round, again at identical scores, with instructions
+`34.22` to `25.83` billion and cycles `5.99` to `4.38` billion. Branch counts are
+unchanged, so the earlier wrap tests had already been compiled to conditional
+moves and the win is the removed arithmetic and the sequential autocorrelation
+access. Cumulatively the step loop is 3.36x faster than the first
+implementation at exactly equal results.
+
 The step loop has a zero-allocation regression that enters the real loop across
 several reseeds (`tests/plain_prime_sds_allocations.rs`), and the workspace
 clippy gate passes.
+
+## Verdict on move B
+
+The move as ranked is closed. Its cheap tier — cyclotomic sweeps at index 6, 9,
+18 and 29 — is empty by an exact congruence, and the tiers that survive have at
+best `2^58` blocks each, so no exhaustive cyclotomic sweep exists at 523. The
+spin shard is the genuinely new and well-conditioned object the move points at,
+it is now implemented, validated against real solutions, and measured, and its
+search reach ends near `v = 73` with a plateau that compute does not move.
+
+Nothing here excludes a plain solution at 523: every miss is a heuristic miss
+with no negative authority, and the two Djokovic special parameter sets remain
+untouched as mathematics. What is settled is that this route does not reach 2092
+by search alone, so the next attempt on it needs a further exact structure that
+shrinks the shard, not a larger campaign.
 
 ## Provenance
 
@@ -209,3 +274,8 @@ positive, and a miss proves nothing about the shard.
   equal budget, even though it has fewer free bits and the same equations. Open
   whether that shard is simply empty at `(240; 257,257,257)` or whether the
   symmetric move set is badly conditioned.
+- The reach boundary between `v = 73` and `v = 79` is sharp, and the residual
+  above it sits at small even values — 2, 4, 4, 4, 8 — rather than drifting.
+  Whether those are floors of the move geometry or of the shards themselves is
+  unexamined, and the `sum_c r(c) = 0` identity is the only congruence currently
+  known on the plain residual.
