@@ -240,20 +240,58 @@ The step loop has a zero-allocation regression that enters the real loop across
 several reseeds (`tests/plain_prime_sds_allocations.rs`), and the workspace
 clippy gate passes.
 
+## The shards are solution-rich, so the search is the bottleneck
+
+The obvious reading of the reach boundary is that the shards above `v = 73` are
+empty. A solution-count heuristic of the kind the review used on the `q29` floor
+says the opposite, and says it emphatically.
+
+Count the states: `X_0` picks `n_0` of the `(v-1)/3` orbits of `<mu>` and `X_1`
+picks `k_1` of `v` positions. Count the constraints: `(v-1)/6` class residuals,
+one of them dependent through `sum_c r(c) = 0`, each of which must land exactly
+on zero. Taking the per-class spread `sigma` from the measured random-start
+score gives a density at zero of about `1 / (sigma sqrt(2 pi))` per equation.
+
+| carrier `v` | `log2` states | `sigma` | `log2` constraint cost | `log2` expected solutions |
+|-------------|---------------|---------|------------------------|---------------------------|
+| 61          | 74.4          | 2.05    | 21.2                   | 53.1                      |
+| 73          | 89.9          | 2.48    | 29.0                   | 60.9                      |
+| 79          | 97.8          | 2.39    | 31.0                   | 66.8                      |
+| 97          | 121.7         | 2.74    | 41.7                   | 80.0                      |
+| 127         | 161.3         | 3.99    | 66.4                   | 94.8                      |
+| 163         | 208.9         | 3.56    | 82.1                   | 126.8                     |
+| 199         | 256.5         | 5.51    | 121.2                  | 135.3                     |
+| 307         | 399.9         | 6.96    | 206.2                  | 193.7                     |
+| 421         | 551.4         | 7.96    | 298.0                  | 253.4                     |
+| 523         | 687.2         | 8.58    | 380.7                  | 306.5                     |
+
+The expected solution count rises monotonically with the carrier: about `2^61`
+where the search still closes the shard, and about `2^306` at 523 where it
+cannot. What falls is the *density* — one solution in about `2^381` states at
+523 against one in `2^29` at 73 — and that is exactly what a local search feels.
+
+So the reach boundary is a property of this search, not of these shards. The
+spin shard at 523 should be richly populated, and the productive next move is a
+stronger search rather than a further exact structure or a larger campaign.
+
 ## Verdict on move B
 
-The move as ranked is closed. Its cheap tier — cyclotomic sweeps at index 6, 9,
-18 and 29 — is empty by an exact congruence, and the tiers that survive have at
-best `2^58` blocks each, so no exhaustive cyclotomic sweep exists at 523. The
-spin shard is the genuinely new and well-conditioned object the move points at,
-it is now implemented, validated against real solutions, and measured, and its
-search reach ends near `v = 73` with a plateau that compute does not move.
+The move as ranked is closed and replaced. Its cheap tier — cyclotomic sweeps at
+index 6, 9, 18 and 29 — is empty by an exact congruence, and the tiers that
+survive have at best `2^58` blocks each, so no exhaustive cyclotomic sweep exists
+at 523. The spin shard is the genuinely new and well-conditioned object the move
+points at: 87 equations instead of 261, implemented, validated by construction at
+four carriers, and 3.36x faster than its first hot loop.
 
-Nothing here excludes a plain solution at 523: every miss is a heuristic miss
-with no negative authority, and the two Djokovic special parameter sets remain
-untouched as mathematics. What is settled is that this route does not reach 2092
-by search alone, so the next attempt on it needs a further exact structure that
-shrinks the shard, not a larger campaign.
+Nothing here excludes or establishes a plain solution at 523. Every miss is a
+heuristic miss with no negative authority, and the two Djokovic special parameter
+sets remain untouched as mathematics. What is settled is that this search reaches
+carrier 73 and not 79, that its plateau is immune to two orders of magnitude of
+extra compute, and that the shard it is failing on is heuristically dense with
+solutions. The successor is a stronger search on exactly this shard — a
+full-neighbourhood tabu step with incremental per-swap deltas is the standard
+instrument and the current random threshold-accepting walk is the weakest one —
+not more of the present campaign.
 
 ## Provenance
 
@@ -275,7 +313,14 @@ positive, and a miss proves nothing about the shard.
   whether that shard is simply empty at `(240; 257,257,257)` or whether the
   symmetric move set is badly conditioned.
 - The reach boundary between `v = 73` and `v = 79` is sharp, and the residual
-  above it sits at small even values — 2, 4, 4, 4, 8 — rather than drifting.
-  Whether those are floors of the move geometry or of the shards themselves is
-  unexamined, and the `sum_c r(c) = 0` identity is the only congruence currently
-  known on the plain residual.
+  above it sits at small even values — 2, 4, 4, 4, 8 — rather than drifting. The
+  solution-count heuristic settles the coarse question, that the shards are dense
+  rather than empty, but not why the boundary is this sharp. The
+  `sum_c r(c) = 0` identity is the only congruence currently known on the plain
+  residual, and whether the small even values above the boundary are forced is
+  unexamined.
+- The census is carrier-generic and costs milliseconds, so the same exclusion
+  table can be produced for every open admissible order at once. Whether any
+  other open order has a nonempty high-order cyclotomic tier — which would be a
+  cheap exhaustible target that 523 is not — has not been checked, and is the
+  clearest free opportunity this task leaves.
