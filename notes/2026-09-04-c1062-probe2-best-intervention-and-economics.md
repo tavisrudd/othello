@@ -32,11 +32,17 @@ measurement probe predeclares its shape verdicts and carries at least one predic
 | Family | Shape reading | Prediction |
 |---|---|---|
 | `reliability-3of8` | C1, C2 (failed-count summary), C3, C4, C5 (full symmetric group) | **loss**: classes are the failed-count strata, so orbits equal classes and residual compression is exactly 1.0 |
-| `weighted-threshold-10` | C1, C2, C3, C4; **not** C5 — distinct Fibonacci weights admit no symmetry | **win**: orbits are singletons by construction, so every merge is intervention-driven |
+| `weighted-threshold-8` | C1, C2, C3, C4; **not** C5 — distinct Fibonacci weights admit no symmetry | **win**: orbits are singletons by construction, so every merge is intervention-driven |
 | `distractor` | C1, C2, C3 | **loss**: relevance pruning explains all of it; residual after pruning is 1.0 |
 | `identity` | C1, C3; **fails C2** — observing every variable leaves no sufficient summary | **loss**: classes equal contexts, the compile buys nothing |
 | `wide-conjunction` | C1, C2, C3, C4 | **partial**: the arity tower refines past one, so some but not all of the collapse survives the orbit baseline |
+| `restricted-vocabulary` | C1, C2, C3, C4 — eight components of which only three may be touched | **win**: the realistic repair vocabulary is the shape where unpinned contexts have room to merge, so residual above 1.5 |
+| `weighted-threshold-10` | the timing family, ten distinct weights | **win** on time: the compiled arm's cumulative cost crosses below the memoized re-solve within the distinct-context count |
 | `response-function` | correctness carry from probe 1, not an economics row | no prediction |
+
+Every candidate symmetry offered to a family is **verified exhaustively** and only the verified ones
+enter its orbit baseline, so a family cannot be made to look intervention-compressed by declaring a
+thin group.
 
 A predicted loss that loses is a pass. A predicted loss that wins is a finding about the shape
 classifier, not a success for this probe.
