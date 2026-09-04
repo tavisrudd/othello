@@ -1,9 +1,10 @@
 # C1061 probe 28g: one depth per node, and the far owner's rate cache rejected
 
 **Lane**: `complete-ports` · **Date**: 2026-09-04 · **Code**: ergodis-private `ced13b7` (the depth
-merge, kept), `5e70cc8` (the rate cache, reverted by `df69199`); evidence `ab3324d`; retained
-binaries `ergodis-tools-ced13b7` (SHA-256 `198fa1f7…cdb1`) and `ergodis-tools-5e70cc8`
-(`79776659…a373`); controls `ergodis-tools-ca31df6` (probe 28f) and `ergodis-tools-586ec26`
+merge, kept), `5e70cc8` (the rate cache, reverted by `df69199`), `ce0658b` (`degree` back in the
+record, kept); evidence `ab3324d`, `2b109c9`; retained binaries `ergodis-tools-ced13b7` (SHA-256
+`198fa1f7…cdb1`), `ergodis-tools-5e70cc8` (`79776659…a373`) and `ergodis-tools-ce0658b`
+(`8e95413c…fd10`); controls `ergodis-tools-ca31df6` (probe 28f) and `ergodis-tools-586ec26`
 (probe 28d) · **Continues**: `2026-09-04-c1061-probe28f-hoist-ab-and-narrow-closure.md`.
 
 ## Headline
@@ -18,11 +19,12 @@ the whole regression. The eighteen-cell A/B puts the cache at 1.096x to 1.109x o
 p=0.05. It is reverted.
 
 The enabling refactor that came with it is kept and is worth 0.8% on its own: a node's `distance`
-and `wrapped` fields were only ever read as their difference, so they became one `depth`, and the
-constant incident-edge count left the hot record for its own array. That measures 0.992x of probe
-28f's build at every p=0.05 cell, with intervals of width 0.001.
+and `wrapped` fields were only ever read as their difference, so they became one `depth`. That
+measures 0.992x of probe 28f's build at every p=0.05 cell, with intervals of width 0.001. A
+closeout pass then took a further 0.4% by putting the constant incident-edge count back into the
+room the merge freed, so the tree ends at 0.988x of probe 28f.
 
-Exactness against PyMatching holds on all 360,000 frozen shots at both stages, cell for cell
+Exactness against PyMatching holds on all 360,000 frozen shots at every stage, cell for cell
 identical to probe 28f's counts.
 
 ## Stage one: one depth per node (`ced13b7`), kept
@@ -132,6 +134,27 @@ table is a few kilobytes and stays in L1, so the load being removed is cheap, wh
 being kept is charged at every rate change. Any future attempt to remove that load needs to leave
 the rate in one place.
 
+## Stage three: `degree` back in the record (`ce0658b`), kept
+
+The closeout pass found a free one. `degree` left the hot record in stage one only to make room for
+stage two's two cached fields; stage two is gone, so the room is padding and `degree` goes back into
+it, taking the record to sixteen bytes with no unused space and removing an array `touch_node` had
+to touch. Measured the same way against stage one:
+
+| d  | p    | `ced13b7` | `ce0658b` | ratio | branches ratio |
+|----|------|-----------|-----------|-------|----------------|
+| 9  | 0.01 | 385.7     | 385.0     | 0.998 | 0.998          |
+| 9  | 0.05 | 6,648.6   | 6,623.7   | 0.996 | 0.995          |
+| 15 | 0.05 | 14,421.7  | 14,367.7  | 0.996 | 0.995          |
+| 25 | 0.01 | 2,696.2   | 2,688.7   | 0.997 | 0.997          |
+| 25 | 0.05 | 27,236.5  | 27,139.9  | 0.996 | 0.995          |
+
+Every instruction interval has width 0.001 and excludes 1.0; cycles are flat within their intervals.
+Exactness is identical to stage one on all eighteen cells. Together with stage one the tree is at
+0.988x of probe 28f, which carries the derived standing against PyMatching to about 0.92x at d=9,
+1.16x at d=15 and 1.26x at d=25. Logs: ergodis-private
+`benchmarks/tiger-blossom/2026-09-04-probe28g-ce0658b-{vs-ced13b7-binaries-ab.log,pymatching-exactness.txt}`.
+
 ## Gates
 
 Debug kernel suite at both stages (the random suite at four distances, 20,000 instances each, with
@@ -151,7 +174,16 @@ stage one's measurements stand for the current tree without a further run.
   d=25 sit at about 1.16x and 1.27x. Settled today: the far owner's rate is not the lever, and the
   reason is structural rather than an implementation detail, so this closes the profile's
   `touch_node` line as a target. Open: `solve` at 27.5% with its inlined handlers is now the
-  largest single symbol and has never been attacked directly.
+  largest single symbol and has never been attacked directly. The closeout pass produced one
+  specific hypothesis about it, below.
+- **`solve`'s share may be the bucket scan rather than the handlers.** `pop_event` walks forward
+  from the clock over `bucket_count` buckets, two lanes each, until it finds a queued entry, and
+  `bucket_count` is the horizon rounded up to a power of two — `4 * max boundary distance + 4 * max
+  weight + 16`, which is 128 at d=25. Every pop that does not land in the current bucket pays a
+  linear scan, and `solve`'s self time is that loop plus the dispatch. This is a reading of the
+  code, not a measurement. The test is the distribution of scan length per pop, or simply whether a
+  summary word over the buckets, or a remembered next non-empty bucket, moves the cell. It is the
+  first thing to try if the matcher is picked up again.
 - **`descend` doing real work with no blossoms in most shots.** Unchanged and still open from
   probe 28e. It reads 3.3% here against 6.4% in probe 28f, but that profile is of the rejected
   build, whose extra eleven points inflate the denominator; nothing was measured about `descend`
@@ -159,6 +191,13 @@ stage one's measurements stand for the current tree without a further run.
 - **The p=0.001 cells are immovable.** Every stage since 28d moves them by less than 0.5%. Those
   cells are dominated by setup the matcher never enters, which is consistent but has never been
   confirmed by a profile of a p=0.001 cell.
+- **At what problem size would the mirror pay?** The rejection rests on the rate table being small
+  enough to stay in L1: these graphs have at most a hundred detectors and a few hundred regions, so
+  `rate` is a few kilobytes. The maintenance cost of a per-node mirror is proportional to nodes
+  covered per rate change and does not shrink, but the load it removes gets more expensive as the
+  table leaves cache. On a qLDPC or bivariate-bicycle code with thousands of simultaneous defects
+  the calculus could invert. Not measured, and worth knowing before the qLDPC direction probe 28c's
+  external framing named is opened.
 - **Newtype indices.** Still open as hygiene.
 
 ## Vibe check
@@ -171,4 +210,5 @@ matcher is committed, gated and exact throughout.
 
 1. The predecoder items from probe 28c, unchanged: a radius-3 or observation-conditioned margin
    audited by the kernel, and the surface d=9 rows re-derived on the repaired graph.
-2. If the matcher is picked up again, `solve` and its inlined handlers, not `touch_node`.
+2. If the matcher is picked up again, `solve` and its inlined handlers, not `touch_node`, and the
+   bucket-scan hypothesis in the ledger first.

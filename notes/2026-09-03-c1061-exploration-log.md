@@ -49,7 +49,7 @@ and the next-session plan. Reports are the authority for numbers and method.
 | 28d   | Sparse core scheduling cost                         | 5% off every high-error cell; re-arm waste gone; design note for a safer core | `2026-09-04-c1061-probe28d-sparse-core-scheduling-cost.md`                    |
 | 28e   | Validate-on-pop sparse core, taken                  | stamps gone, oracle in; packed layout 0.926x at the losing cells; d=9 at parity | `2026-09-04-c1061-probe28e-validate-on-pop-sparse-core.md`                    |
 | 28f   | Hoist measured, narrow closure                      | hoist 0.93x at p=0.05; u16 closure a wash; d=9 ahead of PyMatching, d=15/25 at 1.17x/1.28x | `2026-09-04-c1061-probe28f-hoist-ab-and-narrow-closure.md`                  |
-| 28g   | Depth merge kept, rate cache rejected               | depth merge 0.992x; caching the far owner's rate is 1.10x, reverted      | `2026-09-04-c1061-probe28g-depth-merge-and-the-rejected-rate-cache.md`        |
+| 28g   | Depth merge kept, rate cache rejected               | 0.988x kept; caching the far owner rate is 1.10x, reverted               | `2026-09-04-c1061-probe28g-depth-merge-and-the-rejected-rate-cache.md`        |
 | 28h   | Margin radius grid; surface d=9 re-derived          | killed; no ball syndrome at any radius commits a correction at margin 3  | `2026-09-04-c1061-probe28h-margin-radius-and-the-surface-d9-rederivation.md`  |
 | 29    | Local-commit predecoder                             | sound at every radius; does not compile past small d                     | `2026-09-03-c1061-probe29-local-commit-predecoder.md`                        |
 | 30    | Margin certificate predecoder                       | certificate proved and local; not yet d=9 accuracy-identical             | `2026-09-03-c1061-probe30-margin-certificate-predecoder.md`                  |
@@ -152,8 +152,9 @@ walks that region's subtree; `set_growth` becomes 11% of the d=25 p=0.05 profile
 measures 1.10x at every p=0.05 cell. It is reverted, and rate falls — which the scheduling contract
 lets cost nothing today — are why no rearrangement of the walks closes the gap. The refactor that
 enabled it is kept: a node's `distance` and `wrapped` were only ever read as their difference and
-became one `depth`, worth 0.992x at every p=0.05 cell, which carries the derived standing against
-PyMatching to about 0.92x at d=9, 1.16x at d=15 and 1.27x at d=25. `solve` at 27.5% is now the
+became one `depth`, worth 0.992x at every p=0.05 cell, and the closeout put the constant
+incident-edge count back into the room that merge freed for a further 0.4%. Together they carry the
+derived standing against PyMatching to about 0.92x at d=9, 1.16x at d=15 and 1.26x at d=25. `solve` at 27.5% is now the
 largest symbol and has never been attacked directly. The next work is the predecoder items from
 probe 28c: a radius-3 or observation-conditioned margin audited by the kernel, and the surface d=9
 rows re-derived on the repaired graph.
