@@ -46,6 +46,7 @@ and the next-session plan. Reports are the authority for numbers and method.
 | 28    | TigerBlossom sparse fallback, every cell            | 15 of 18 cells won; three p=0.05 cells lose with a measured cause        | probe 26 report, probe-28 section and log addendum                           |
 | 28b   | TigerBlossom dual drift                             | drift fixed; declines to zero; worst cell 16% better                     | `2026-09-04-c1061-probe28b-tiger-blossom-dual-drift.md`                      |
 | 28c   | Blossom expansion; Tiger behind the predecoder      | dense matcher gone, all 18 cells faster; sound margin commits nothing    | `2026-09-04-c1061-probe28c-blossom-expansion-and-tiger-behind-the-predecoder.md` |
+| 28d   | Sparse core scheduling cost                         | 5% off every high-error cell; re-arm waste gone; design note for a safer core | `2026-09-04-c1061-probe28d-sparse-core-scheduling-cost.md`                    |
 | 29    | Local-commit predecoder                             | sound at every radius; does not compile past small d                     | `2026-09-03-c1061-probe29-local-commit-predecoder.md`                        |
 | 30    | Margin certificate predecoder                       | certificate proved and local; not yet d=9 accuracy-identical             | `2026-09-03-c1061-probe30-margin-certificate-predecoder.md`                  |
 | 31    | Sparse evaluation and per-witness margin            | paused by Tavis; per-witness margin dead as posed                        | `2026-09-03-c1061-probe31-sparse-evaluation-and-per-witness-margin.md`       |
@@ -103,10 +104,15 @@ near-zero per-op cost means a broken loop; pin and hash both A/B binaries; commi
    synthesis of small tiers and moving to qLDPC/bivariate-bicycle codes where no dominant sparse
    matcher exists. Neither is scheduled before items 1 and 2.
 
-## State after probe 28c, 2026-09-04
+## State after probe 28d, 2026-09-04
 
-Item 1 is done except the local certificate, which is closed with a reason; item 2 is done and
-its answer is negative at the radii built: the kernel as oracle shows margins 1 and 2 unsound and
-margin 3 committing nothing, and the surface d=9 graph used by probes 27 to 31 was aliased (fixed).
-Next in order: the sparse core's scheduling cost (profile in the probe 28c report), then the
-predecoder only under a radius-3 or observation-conditioned margin audited by the kernel.
+Probe 28c's item 1 is done except the local certificate, which is closed with a reason; item 2 is
+done and its answer is negative at the radii built (margins 1 and 2 unsound, margin 3 commits
+nothing; the surface d=9 graph used by probes 27 to 31 was aliased, fixed). Probe 28d took the
+scheduling target: single-edge re-arm and a shift for the rate division give 0.95x at the three
+losing p=0.05 cells, and the traffic counters show the remaining evaluations are the initial
+scheduling of the defects, so no further scheduling win exists. Its report carries a design note,
+requested by Tavis, for a simpler and safer sparse core (validate on pop, re-push on touch, one
+"no late entry" debug oracle, packed per-node and per-region state). Next, in order: Tavis's
+decision on that redesign; otherwise the layout and closure-read levers as separate probes; then
+the predecoder only under a radius-3 or observation-conditioned margin audited by the kernel.
