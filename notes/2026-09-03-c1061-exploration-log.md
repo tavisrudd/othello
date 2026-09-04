@@ -563,3 +563,31 @@ one-line pointer here.
   general fallback, a dense O(n^3) blossom over the reduced complete graph instead of sparse
   region growth (deliberate deviation from the brief); replacing it is the next step and
   would close every losing cell. Zero allocation bought determinism, not speed.
+- 2026-09-03 — probe 24: matching-signature compression. Report:
+  `2026-09-03-c1061-probe24-matching-signature-compression.md`. Verdict: **killed; hypothesis
+  inverted**. The boundary table is a valuated even delta-matroid (zero exchange violations
+  across 524,288 triples per shape; the even-support condition is probe 17's parity
+  superselection rule under its proper name), but the tropical matchgate identities fail, and
+  a parameter count shows the 256-entry table is the compressed form for any region past about
+  sixteen columns, the matching gadget being the expansion. No smaller exact object exists.
+- 2026-09-03 — probe 25: soft-output gap. Report: `2026-09-03-c1061-probe25-soft-output-gap.md`.
+  Verdict: **exact, loses on cost**. PyMatching 2.4.0 has no `decode_gap`, so an
+  augmented-graph two-decode baseline was built; our gap matches it on 20,000 of 20,000 shots
+  at three distances on both class costs. Our composition is 6x to 12x dearer than two matching
+  decodes, and the k-logical widening loses from k=2 (8^(k-1) composition vs 2^k decodes).
+  Kept: the competitor's curve, soft output costs sparse blossom 3.5x to 20x its hard decode,
+  worst at low error rates.
+- 2026-09-03 — probe 27: spatial locality and the rotated surface code. Report:
+  `2026-09-03-c1061-probe27-locality-and-surface-code-predecoder.md`. Verdicts: **locality
+  argument false**; **certificate transfers to the surface code, compilation does not**. Every
+  spatial column influences the commit decision at every distance because the committed
+  quantity is a logical parity and the logical operator spans the code; the fallback (closure
+  over reachable normalized states) gives 111x at d=5 and dies at d=7, so deeper tiers compile
+  where not needed and not where needed; probe 23's predicted 28x at d=7 is unreachable this
+  way. Surface code: a BFS-compiled metric closure replaces the closed-form leaf and the whole
+  pipeline carries over (exhaustive safety at d=3 passes; the cascade defers nothing up to 2%
+  error), but the boundary alphabet goes from 2^d to 2^((d^2+1)/2): 268 MB dense leaf matrix
+  at d=5 (matrix-free sweep at about 4 s per shot after a stack overflow), 2^25 wide at d=7;
+  the compiled LUT stops at d=3. Next move: change what is committed, a local correction
+  rather than a global logical parity. Code: ergodis-private `fe4d6a3`, `9e64308`, `afd9e54`,
+  `130b0fa`, `b7e7c6d`; 26 tests across four modules.
