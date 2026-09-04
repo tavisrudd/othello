@@ -699,7 +699,9 @@ does not block C984, C325, or C953.
 C1061 is an open-ended Ergodis exploration of compiled dynamic decision engines (snapshot compile,
 delta updates, event-sourced optimizer state); its brief is
 `2026-09-03-c1061-ergodis-compiled-dynamic-solver-brief.md` and its running log is
-`2026-09-03-c1061-exploration-log.md`. Its code lives in `~/src/ergodis-private`.
+`2026-09-03-c1061-exploration-log.md`. Its code lives in `~/src/ergodis-private`. The
+TigerBlossom dual drift is fixed (`2026-09-04-c1061-probe28b-tiger-blossom-dual-drift.md`); the
+next matcher step is blossom expansion, which retires the dense fallback.
 C1016 is active as a private Ergodis reduction-synthesis pilot. A hostile review found that its
 unapproved presentation-hash/feature-name overlay did not establish extractor semantics. Public
 proof authority, `Necessary`, and all Hadamard/GS code are therefore removed; core again advertises

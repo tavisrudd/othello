@@ -670,6 +670,23 @@ one-line pointer here.
   Next, in order: fix the dual drift, add blossom expansion (61 structural declines), then
   the sparse core's per-operation cost; the `latency` mode for per-shot p50/p99/max is
   written but was not run.
+- 2026-09-04 — probe 28b: the TigerBlossom dual drift. Report:
+  `2026-09-04-c1061-probe28b-tiger-blossom-dual-drift.md` (ergodis-private `6750d5e`,
+  `6d973a0`, `dfd4ee0`, retained binary `ergodis-tools-dfd4ee0`). Verdict: **drift fixed;
+  declines to zero; exactness intact; worst cell 16% better, mid cells 3 to 8% worse**. Three
+  defects, each one broken invariant of the geometric primal-dual model and each located by a
+  debug assertion of the two local dual-feasibility invariants after every event: a shrinking
+  region released nodes one tick late; a singleton whose dual went negative had no node left to
+  collide through (fixed by a phantom presence at its home node, with tree links recording the
+  contacting singleton rather than a detector node); and a collision entry from a since-frozen
+  side was dropped instead of being oriented to the still-growing side. Same-tick releases
+  jumping the queue cost 2.5x scheduling traffic until releases and phantom contacts got a late
+  lane. Random suite 76,612 of 76,612 certified, ratchet now demands full coverage; zero
+  minimum-weight disagreements against PyMatching on all 360,000 shots. Against the retained
+  control: d=25 p=0.05 0.841x, d=15 p=0.05 0.953x, other p>=0.01 cells 1.01x to 1.08x. Three
+  cells still lose to PyMatching (about 1.20x, 1.46x, 1.69x). Next, in order: blossom expansion
+  and deletion of the dense matcher; the local certificate in place of the LP pair loop; one
+  entry per edge.
 
 ## Session close, 2026-09-03
 
