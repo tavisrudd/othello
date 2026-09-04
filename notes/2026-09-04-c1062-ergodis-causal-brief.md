@@ -16,21 +16,23 @@ The material in section 3 is a condensed write-up of a ChatGPT brainstorm suppli
   causality and Beckers–Halpern causal abstraction). These are checkable against standard
   references and I treat them as probably right, subject to the audit in probe 0.
 - **Landscape claims** (named 2026 papers, version numbers, release dates, benchmark figures,
-  "no mature engine exists"). These are unverified generated text. Several are the kind of detail
-  a language model fabricates confidently: `pyAgrum 3.0` moving causal machinery to C++ in July
-  2026, `FLOP` at ICLR 2026 with a Rust implementation, `I-FLOP` "six days ago", `C-ADL` embedding
-  SCMs in architecture description languages, a May 2026 translation of binary Halpern SCM
-  reasoning into dynamic logic of propositional assignments, `SMILE 2.4.7` from June 2026.
-  **None of these may be cited, relied on for a novelty verdict, or used to size a market until
-  audited** under `notes/literature-audit-conventions.md`. They are leads, not facts.
+  "no mature engine exists"). These were unverified generated text and are now **resolved** by
+  probe 0, `2026-09-04-c1062-probe0-prior-art-and-landscape-audit.md`: `pyAgrum 3.0`'s C++ causal
+  module, `FLOP` at ICLR 2026 with a Rust implementation, `I-FLOP`, and `C-ADL` are **confirmed**
+  and none competes with this work; the May 2026 dynamic-logic-of-propositional-assignments
+  translation and `SMILE 2.4.7` are **not found** and must not be repeated. The lesson stands for
+  the next brainstorm: roughly two thirds survived, which is neither "all fabricated" nor safe to
+  assume.
 
-The one landscape claim that most affects EV — *there is no mature fast engine for Halpern actual
-causality* — is also the one most worth checking first, because the whole of probe 3's value rests
-on it. I now expect it to be **false**: Ibrahim and Pretschner's HP2SAT and their MaxSAT/ILP
-formulation of actual causality and responsibility both appear to exist, and probe 0 must confirm
-or refute them before probe 3 starts. If they exist, probe 3's claim narrows from "the first exact
-engine" to "a compiled, certificate-carrying engine against a per-query SAT or ILP encoding", which
-is narrower, more defensible, and still worth building.
+The one landscape claim that most affected EV — *there is no mature fast engine for Halpern actual
+causality* — is **false**, as probe 0 confirmed. HP2SAT (2019), the Ibrahim–Pretschner ATVA 2020
+MaxSAT/ILP encodings, and the Özcan–Alrajeh–Craven KR 2025 answer-set-programming engine all exist,
+all implement the modified definition over acyclic binary models, and the field is at roughly 8,000
+binary variables in seconds. The pre-written consequence branch absorbs this: probe 3's claim
+narrows from "the first exact engine" to "a compiled, certificate-carrying engine against a
+per-query encoding", and its surviving differentiators, in descending strength, are non-binary
+finite domains, degree of responsibility, an exported exhaustion certificate, and cross-query
+amortization. Any framing that rests on being first or on raw speed is dropped.
 
 ## 2. The central object, stated once
 
@@ -66,8 +68,17 @@ proposed one is too coarse*.
    abstract-then-intervene) is the exactness condition.
 2. **Actual causality is exact combinatorial optimization.** Halpern–Pearl asks whether `X=x`
    actually caused `phi` in a given context, and the hard part is finding a contingency `W` under
-   which changing `X` changes the outcome. Degree of responsibility is `1/(k+1)` for a minimum
-   contingency of size `k`. So the native problem is `min |W|` subject to a counterfactual
+   which changing `X` changes the outcome. The brainstorm gives degree of responsibility as
+   `1/(k+1)` for a minimum contingency of size `k`. **That formula is a trap and probe 0 caught it.**
+   In Chockler–Halpern 2004, Definition 3.2, `k` counts only the contingency variables whose value
+   *differs* from the actual context; under the **modified** Halpern–Pearl definition the contingency
+   is always held at actual values, so that count is identically zero and the formula returns
+   responsibility 1 for every cause. The correct modified-definition formula is
+   `1/(|X'| + |W|)`, minimised jointly over the (cause, witness) pairs in which the queried variable
+   appears as a conjunct — Ibrahim's 2021 dissertation, Definition 2.5, corroborated by
+   Ibrahim–Pretschner ATVA 2020 Definition 3 and Triantafyllou et al. AIES 2022 Definition 4.1.
+   Halpern's book chapter 6 is the canonical reference and was not reachable, so cite the
+   dissertation with Chockler–Halpern 2004 until someone has the book open. So the native problem is `min |W|` subject to a counterfactual
    condition — exact finite combinatorial optimization over a structure that is traversed
    combinatorially many times.
 3. **Causal uncertainty gives a meet-semilattice.** With a finite hypothesis set `H` of candidate

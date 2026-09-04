@@ -76,7 +76,7 @@ probe may quietly claim both.
 
 | Probe | Name                                                | Size | Predeclared threshold | Verdict | Report |
 |-------|-----------------------------------------------------|------|-----------------------|---------|--------|
-| 0     | Prior-art and landscape audit                       | S    | every landscape claim in the brief resolved or discarded | running | — |
+| 0     | Prior-art and landscape audit                       | S    | every landscape claim in the brief resolved or discarded | **done**: engines exist, no probe cut; responsibility formula corrected; probe 7 gains a near neighbour | `2026-09-04-c1062-probe0-prior-art-and-landscape-audit.md` |
 | 1a    | Pencil: carrier, cost model, signature collapse     | S    | closed-form state count; collapse stated and proved | **done**: viable but narrow; envelope `\|U\| ≲ 10^4` at arity 2–3; probe 7 promoted | `2026-09-04-c1062-probe1a-carrier-and-cost-model.md` |
 | 1     | Lowering, oracle, Balke–Pearl fixture, towers       | M    | class-for-class agreement on the response-function fixture | planned | — |
 | 2     | Best intervention, and the economics that follow    | L    | compiled beats memoized re-solve on the enumeration query, residual compression above the orbit baseline | planned | — |
@@ -161,7 +161,12 @@ declared atomic edit set, arity bound) and a total lowering onto `FinitePresenta
    response-function partitions. **Fixed at `n ≤ 4`**: probe 1a's cost model puts `n = 4` with at
    most two parents per variable at about `5.3 × 10^6` states and `n = 5` at `2.5 × 10^8`, out of
    reach. The report must say this is a correctness gate, so that nobody later reads the small
-   fixture as a scaling failure.
+   fixture as a scaling failure. Probe 0 confirmed the construction is real and in the 1994 paper in
+   the form assumed here, with credit running back to Pearl 1993a, and added one clause: the
+   published construction partitions **per exogenous variable** and forms the canonical space as a
+   product, so if the fixture has an exogenous variable feeding more than one endogenous variable,
+   the expected object is the joint partition induced by the tuple of response functions rather than
+   the product. State which case the fixture is in.
 2. An independent Python oracle that enumerates *partial assignments directly* — not "words up to
    the diameter", which would import the compiler's own view and turn a shared misreading into an
    agreement.
@@ -170,6 +175,11 @@ declared atomic edit set, arity bound) and a total lowering onto `FinitePresenta
 **Measurements that ship with it** (these were missing and are cheap): `|Q|` as the observation set
 `O` grows from outcome to every variable, and the arity tower `~_{≤1} ⊇ ~_{≤2} ⊇ …` from
 `continuation.rs`. These are the only numbers that tell a user which declaration to make.
+
+**One positioning sentence for the report, from probe 0.** With `O` = declared outcome, the compiled
+relation is the exact combinatorial counterpart of Kekić, Schölkopf and Besserve's Targeted Causal
+Reduction (UAI 2024), which learns an approximate target-specific reduction from interventional
+simulation data. Exact versus learned is the honest distinction and it is a good one.
 
 **Two requirements from probe 1a.** Relevance pruning belongs in the lowering itself, not in the
 measurement: exogenous variables that are not ancestors of the observation set factor out of
@@ -218,9 +228,32 @@ or the residual compression above the orbit baseline is negligible.
 fixed singleton cause. That is wrong for the modified Halpern–Pearl definition it also said to
 implement first: a variable can be part of a **conjunctive** cause, and the disjunctive forest fire
 — in the fixture list — is exactly that case, where neither lightning nor match is a cause alone
-while the conjunction is. The search ranges over `(X', W, x')` with `X ⊆ X'`, and the responsibility
-denominator counts `|X'|` as well as `|W|` under the modified definition. The brief's `1/(k+1)` is
-the original Chockler–Halpern formula. **Probe 0 fixes the exact formula before any code.**
+while the conjunction is. The search ranges over `(X', W, x')` with `X ⊆ X'`.
+
+**The responsibility formula, settled by probe 0, and it was a correctness bug.** Implement
+
+```
+dr(X = x, φ)  =  1 / (|X'| + |W|)
+```
+
+minimised jointly over the (cause, witness) pairs in which the queried variable is a conjunct
+(Ibrahim 2021 dissertation, Definition 2.5; corroborated by Ibrahim–Pretschner ATVA 2020
+Definition 3 and Triantafyllou et al. AIES 2022 Definition 4.1). **Do not transplant `1/(k+1)`.** In
+Chockler–Halpern 2004 that `k` counts only the contingency variables whose value *differs* from the
+actual context, and under the modified definition the contingency is held at actual values, so `k`
+is identically zero and the formula returns responsibility 1 for every cause — wrong numbers that
+would have looked plausible. Note also the form is `1/k` with `k = |X'| + |W|`, not `1/(k+1)`: the
+`+1` is absorbed because a cause is non-empty. Halpern's book chapter 6 is the canonical citation
+and was not reachable; cite the dissertation with Chockler–Halpern 2004 until someone has it open.
+
+**Framing, and what actually differentiates this.** Probe 0 confirmed that mature engines exist —
+HP2SAT (2019), the ATVA 2020 MaxSAT/ILP encodings, and the Özcan–Alrajeh–Craven KR 2025 answer-set
+engine, all modified-definition, all acyclic, at roughly 8,000 binary variables in seconds. **Drop
+any claim of being first, and any framing that rests on raw speed.** The surviving differentiators,
+in descending order of strength: non-binary finite domains, which no engine has; degree of
+responsibility, which the strongest engine omits; an exported, independently replayable exhaustion
+certificate, which nobody has; and cross-query amortization, which nobody has tested and which this
+plan already says must be earned rather than assumed.
 
 **The amortization mechanism, made explicit.** Revision one asserted "the compiled quotient is the
 substrate, so repeated queries share one compile", which is unsupported: two contexts merged by `~`
@@ -239,10 +272,21 @@ problem — under the modified definition feasibility is *not* monotone (pinning
 actual value can un-flip the outcome), so minimal-`W` is not a hitting-set problem in general; the
 hitting flavour appears only in the original definition's overdetermination cases.
 
-**No `sat.rs` A/B.** `ergodis/src/sat.rs` is a structured-CNF *recognizer* for graph-colouring
-instances that emits clique and pigeonhole UNSAT certificates; there is no CDCL and no general
-solver in tree. Either write a small DPLL for these tiny models — feasible at this pace and useful
-elsewhere — or drop the A/B and say so in the report.
+**No `sat.rs` A/B, and probe 0 resolved the choice.** `ergodis/src/sat.rs` is a structured-CNF
+*recognizer* for graph-colouring instances that emits clique and pigeonhole UNSAT certificates;
+there is no CDCL and no general solver in tree. Revision two offered a choice between writing a
+small DPLL and dropping the comparison: **drop it**. The external field has moved to answer-set
+programming with preference optimization, so a hand-rolled DPLL would be a comparison against a
+straw arm. The same hours go into making the exhaustion certificate exportable and independently
+replayable, which is the differentiator no engine has.
+
+**Comparator and external agreement fixture.** Not HP2SAT. Use the KR 2025 answer-set engine
+(`github.com/DanHOzcan/HP_ASPBinary`), which reports beating the SAT, MaxSAT, and ILP strategies on
+their own suite in both runtime and memory, and whose public benchmark — 500 checking/finding and
+187 inferring queries over 37 binary models — is the natural external agreement fixture for our
+binary cases. **Do not use the ATVA 2020 inference encoding as an oracle**: Özcan et al. report its
+`G*` satisfiability claim is incorrect, so treat disagreement with ATVA 2020 as expected rather than
+alarming.
 
 **Fixtures with verdicts pre-entered.** Rock throwing, forest fire in both conjunctive and
 disjunctive form, voting, and the late-preemption cases, each with its **published** verdict and
@@ -321,9 +365,26 @@ direction, and it replaces revision one's probe 6 grand claim.
 arity two or three — covers applied fixtures with a modest declared exogenous alphabet and nothing
 else. Any canonical exogenous space, and any model with more than roughly fourteen independent
 binary exogenous sources, is out of reach flat. So the flat lowering is the correctness substrate
-and the small-model oracle, and this probe is the only route to a scaling claim. It should not wait
-on probes 1 and 2 to gate it; it should start as soon as probe 1 gives it an oracle to check
-against.
+and the small-model oracle, and this probe is the only route to a scaling claim.
+
+**Probe 0 then found the near neighbour, and it blocks the start.** Madaleno, Misra and Markham,
+"Coarsening Causal DAG Models" (arXiv:2601.10531, April 2026), runs a recursive partition-refinement
+algorithm over the **partition-refinement lattice of the variable set**, with a completeness theorem
+relative to refinement oracles, and defines *interventional coarsening* as merging nodes
+indistinguishable with respect to the available interventions. The vocabulary overlap is near total.
+Three differences keep it from pre-empting us and every one must be stated in probe 7's report
+rather than left for a reader to find: it partitions variables where we partition the exogenous
+space; it learns consistently in the sample limit from interventional data with unknown targets
+where we compute an exact quotient of a known finite model; and its refinement is oracle-driven
+where ours returns a replayable separating intervention.
+
+**The warning that changes the sequencing.** Its carrier is a partition of the variable set — which
+is exactly the carrier this log says the `(u, I)` quotient cannot express. Pivoting to the
+compositional route to make "these 27 states are one causal variable" expressible means pivoting
+onto that paper's carrier, at which point the novelty argument rests on the algorithmic axis alone:
+exact versus learned, witness-carrying versus oracle-driven. That is a real argument and a good one,
+but it is not the argument this plan anticipated. **Probe 7 does not start until that argument is
+written down.**
 
 ## Probe 8 — unrolled sequential window
 
@@ -341,6 +402,12 @@ One model from incident to actual cause to minimal corrective intervention with 
 chain. It is the demonstration artifact and must **never** be counted as evidence. Gated on probes 2
 and 3, not on 3 alone, because "minimal repair" is a best-intervention query.
 
+**It must not claim application novelty.** Probe 0 found the territory occupied: Rafieioskouei and
+Bonakdarpour (IEEE TCAD 2024, with 2025 and 2026 follow-ups) already run abstraction-refinement
+Halpern–Pearl root-cause analysis over transition systems for cyber-physical safety violations, and
+Tanhaei's C-ADL (*Journal of Systems and Software*, 2026) embeds SCMs in an architecture description
+language for design-time root-cause and counterfactual reasoning. Cite both.
+
 ## Scope, and the decisions behind it
 
 - **Acyclic finite deterministic mechanisms only.** Cyclic SCMs need a solution concept first.
@@ -357,6 +424,14 @@ and 3, not on 3 alone, because "minimal repair" is a best-intervention query.
   quotient cannot express "these states are one variable" at all; any paper, manuscript, mirror, or
   public-surface change.
 
+## Terminology
+
+"Bisimulation under intervention" is a published term (Chakraborty, Caulfield and Pym 2025, with
+van Benthem–Bergstra and Hennessy–Milner correspondence theorems). Per the standing rule against
+coining, use their term and cite them whenever this quotient is described as a bisimulation. What is
+ours on that axis is the minimization algorithm and the separating witness, not the equivalence
+notion.
+
 ## Process rules
 
 - Each probe writes its own dated report before the next starts; this log gets a row and a one-line
@@ -372,7 +447,11 @@ and 3, not on 3 alone, because "minimal repair" is a best-intervention query.
 
 ## Next step
 
-Probe 0 and probe 1a in parallel. Nothing else starts before both are on disk: probe 0 can delete
-or reframe the session-sized probe 3 before it begins, and probe 1a decides the carrier and the cost
-model before any code is written.
+Probes 0 and 1a are done and neither killed anything. Probe 0 reframed probe 3 and corrected a
+responsibility formula that would have produced wrong numbers; probe 1a fixed the carrier, produced
+the cost model, and promoted probe 7. **Probe 1 is next** — the typed `CausalPresentation`, the
+`(u, I)` lowering with support-set sorts and relevance pruning, the direct-enumeration oracle, the
+`n ≤ 4` response-function gate, and the observation and arity towers. Probe 7 is blocked until its
+novelty argument against the variable-partition coarsening line is written down; that writing is
+cheap and can happen any time.
 </content>
