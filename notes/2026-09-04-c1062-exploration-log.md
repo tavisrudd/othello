@@ -2,242 +2,348 @@
 
 **Lane**: `complete-ports`
 **Brief**: `2026-09-04-c1062-ergodis-causal-brief.md`
+**Plan review**: `2026-09-04-c1062-plan-review.md` (adversarial; this plan is its revision)
 **Code**: `~/src/ergodis-private` (core changes, if any, in `~/src/ergodis`)
 **Status**: planned; no probe run yet.
 
 This is the routing document for C1062. The task asks whether a finite structural causal model
-(SCM) is just another context language for the Ergodis contextual quotient, and if so what that
-buys: exact causal abstraction with separating interventions as counterexamples, an exact
-Halpern–Pearl actual-causality and responsibility engine, an exact epistemic/experiment-design
-layer over a bounded hypothesis family, and an Evolve loop that names the quotient classes. Each
-probe below gets its own dated report; this file carries only the probe index, standing results,
-process rules, and the next step. Reports are the authority for numbers and method.
+(SCM) is another context language for the Ergodis contextual quotient, and what that buys: exact
+causal abstraction with separating interventions as counterexamples, an exact Halpern–Pearl
+actual-causality and responsibility engine, exact best-intervention search over the compiled
+quotient, an experiment-design layer over a bounded hypothesis family, and an Evolve loop that
+names the quotient classes. Each probe gets its own dated report; this file carries only the probe
+index, standing results, process rules, and the next step. Reports are the authority for numbers.
+
+**This plan is revision two.** The first version rested on a lowering that is ill-typed, and the
+adversarial review killed it. What changed is recorded in the next section, because the correction
+is the most important content in the file.
+
+## The lowering, corrected
+
+The first plan said: state is the exogenous assignment `u`, generators are atomic interventions
+`do(V := a)`, so forty generators replace `3^20` interventions. That is wrong. A generator in
+`observational.rs` is a total map from states to states, and `do(V := a)` applied to `u` is a
+solution of a *different model*; it is not an element of `U`. The generator has nowhere to land.
+The exception is interventions on root variables only, where pinning a root is re-assigning its
+exogenous value and `U` is closed — but the plan's own fixtures intervene on non-roots.
+
+The forced repair: **state is the pair `(u, I)`**, where `I` is the current partial assignment of
+pinned variables, later overriding earlier. Generators are total on that carrier. The consequences
+are all bad for the original claim and must be carried openly:
+
+- **The exponential moves from the vocabulary into the compile.** Materialized states number
+  `|U| · ∏_V (|D_V| + 1)`. The forty-generator observation is true of the *vocabulary* and false of
+  the *compile*. Probe 2 reports the materialized `(u, I)` count as raw states, never `|U|`.
+- **The escape is an arity bound.** Restrict to interventions of arity at most `k`, expressed as
+  the sort structure (states `|U| · Σ_{j ≤ k} C(n, j) d^j`) or as a `FiniteContextLanguage` over
+  generator words. `continuation.rs` then gives the refinement tower `~_{≤1} ⊇ ~_{≤2} ⊇ …` for
+  free. The tower need not stabilize — a threshold-`t` outcome keeps refining until arity near `t`
+  — so stabilization is a reported object, not a stopping rule.
+- **Word closure is vacuous for hard interventions.** Override composition is idempotent and
+  commutative on distinct variables, so every word reduces to its final partial assignment and the
+  reachable set from `u` is exactly `{(u, I)}`. Therefore `u ~ u'` iff `O(M_I(u)) = O(M_I(u'))` for
+  every admissible `I` — a one-pass signature partition, which refinement recomputes at the same
+  asymptotic cost. **The compiler's contribution is not the quotient on `U`.** It is (a) the uniform
+  separator certificate and (b) the congruence on the intervened states `(u, I)`, which is the
+  monoid action on `Q` and the thing that prunes the contingency search in probe 3.
+- **The thesis has content only where the context alphabet is genuinely sequential**: unrolled
+  time-indexed models, observe-then-act sequences in the epistemic layer, and non-idempotent
+  operations such as soft or shift interventions. Probe 8 tests the first of those, deliberately.
+- **"Generator" widens to "declared atomic mechanism edit"**, not just value assignment, so that
+  disable-block, force-signal, and policy interventions `do(V := g(pa(V)))` are expressible. Each
+  is still a total typed map from a declared finite set. The linear-vocabulary statement then reads
+  "linear in the declared edit set", which is what it should always have said.
+- **The observation is a declared query-relevant variable set, not just the outcome.** Level-3
+  abduction needs the evidence set to be a union of classes, which holds iff `O ⊇ E`; actual-cause
+  verdicts need the actual values of the cause and candidate contingency variables. With `O` equal
+  to every endogenous variable on a root-exogenous model the quotient is the identity. So `O` is a
+  dial from coarse to trivial, and `|Q|` must be reported as a function of `|O|`.
+
+**What the compiled relation actually is.** With `O` = declared outcome, it coarsens the *exogenous*
+space with endogenous variables and vocabulary unchanged — Beckers–Halpern's `τ` is the identity on
+endogenous settings and the commuting square is trivial. It is closest to targeted reduction of
+causal models. With `O` = all endogenous variables and the full `do(pa(V) := p)` vocabulary on a
+canonical exogenous space, it is **exactly Balke and Pearl's 1994 response-function partition**.
+That is a known object, a mandatory correctness fixture, and a novelty risk. Beckers–Halpern
+variable-merging abstraction ("these 27 states are one causal variable") lives on a different
+carrier — endogenous settings — and there `(u, I)` is strictly *finer*, since it remembers whether
+`V = 1` is natural or pinned. The full atomic vocabulary is also exactly what makes nontrivial
+merges impossible, which is why Beckers–Halpern restrict the allowed intervention set. **The
+linear-vocabulary claim and the interesting-abstraction claim pull in opposite directions**, and no
+probe may quietly claim both.
 
 ## Probe index
 
-| Probe | Name                                              | Size | Verdict | Report |
-|-------|---------------------------------------------------|------|---------|--------|
-| 0     | Prior-art and landscape audit                     | S    | planned | —      |
-| 1     | SCM lowering onto the observational compiler      | M    | planned | —      |
-| 2     | Quotient economics and the negative control       | M    | planned | —      |
-| 3     | Exact actual causality and responsibility         | L    | planned | —      |
-| 4     | Version space, evidence meet, next experiment     | M    | planned | —      |
-| 5     | Evolve proposes the abstraction, separator refutes| M    | planned | —      |
-| 6     | Intervention-vocabulary quotient                  | M    | gated on 1–2 | — |
-| 7     | Blame under model uncertainty                     | S    | gated on 3–4 | — |
-| 8     | One end-to-end system: incident to minimal repair | L    | gated on 3 | — |
+| Probe | Name                                                | Size | Predeclared threshold | Verdict | Report |
+|-------|-----------------------------------------------------|------|-----------------------|---------|--------|
+| 0     | Prior-art and landscape audit                       | S    | every landscape claim in the brief resolved or discarded | planned | — |
+| 1a    | Pencil: carrier, cost model, signature collapse     | S    | closed-form state count; collapse stated and proved | planned | — |
+| 1     | Lowering, oracle, Balke–Pearl fixture, towers       | M    | class-for-class agreement on the response-function fixture | planned | — |
+| 2     | Best intervention, and the economics that follow    | L    | compiled beats memoized re-solve on the enumeration query, residual compression above the orbit baseline | planned | — |
+| 3     | Exact actual causality and responsibility           | L    | verifier work under 10% of search; published verdicts matched | planned | — |
+| 4     | Level-3 counterfactual and the observation precondition | M | exact under `O ⊇ E ∪ {Y}`; demonstrably wrong without it | planned | — |
+| 5     | Evolve proposes, separator refutes                  | M    | seals to the exact kernel, and beats the random-counterexample arm on generations | planned | — |
+| 6     | k-ary experiment design and decision equivalence    | M    | measured gap between full and decision-sufficient identification, plus a near-zero gap on the negative family | planned | — |
+| 7     | Compositional lowering along the DAG                | L    | composed quotient equals the flat one on small models | gated on 1–2 | — |
+| 8     | Unrolled sequential window                          | S    | word closure non-vacuous, measured | planned | — |
+| 9     | End-to-end: incident to minimal repair              | L    | demo only, never counted as evidence | gated on 2 and 3 | — |
 
 Sizes are relative within one fast session: S is under an hour, M is one to three, L is a session.
-Probes 1 through 5 are the spike proper and are ordered so the cheapest fatal answer comes first.
-Probes 6 through 8 are conditional and exist so the plan does not silently expand.
+Gating: `0 ∥ 1a → 1 → {2, 3, 4, 5, 8} → {6, 7} → 9`. Probe 3 depends on probe 2 only for the
+class-pruning machinery, which probe 3 owns.
 
 ## Probe 0 — prior-art and landscape audit
 
-**Question.** Is "compute the coarsest exact causal abstraction by partition refinement over the
-intervention monoid, with a separating intervention as the refutation witness" already published?
-And separately, is the claim "no mature fast engine exists for Halpern actual causality" true?
+**Questions.** (a) Is coarsest-exact-causal-abstraction-by-partition-refinement, with a separating
+intervention as the refutation witness, already published? (b) Does a mature engine for
+Halpern–Pearl actual causality exist? (c) What is the exact responsibility formula for the variant
+implemented in probe 3?
 
-**Why first.** Probe 3 is the largest probe and its entire value rests on that second claim. The
-first question decides whether any of this can ever carry a paper claim, and a novelty failure here
-triggers the lane's bounded adjacent-crown extraction rather than more code.
+**Why first.** Probe 3 is session-sized and its framing rests entirely on (b). I now expect the
+answer to (b) to be **yes** — Ibrahim and Pretschner's HP2SAT (2019) and their ATVA 2020 MaxSAT/ILP
+formulation, which includes responsibility. The brief's "no mature fast engine" line came from
+unverified generated text and should be treated as probably false until checked. Write the
+consequence branch before running: if an engine exists, probe 3's claim narrows from "the first
+exact engine" to "a compiled, certificate-carrying engine versus a per-query SAT or ILP encoding",
+which is a different and much more defensible claim, and probe 3 keeps its value.
 
-**Method.** Bounded audit under `notes/literature-audit-conventions.md`, checking the shared
-literature cache first. Targets: Beckers–Halpern exact and approximate causal abstraction;
-Rubenstein et al. exact transformations of causal models; Rischel–Weichwald compositional/categorical
-causal abstraction; Geiger et al. causal abstraction for interpretability; Halpern's actual
-causality and degree of responsibility, and its complexity classification; the SAT-based actual
-causality checkers; ChiRho's causal explanation module. Every unverified landscape claim listed in
-brief section 1 is checked or discarded, not repeated.
+**Method.** Bounded audit under `notes/literature-audit-conventions.md`, cache first. Targets:
+Balke–Pearl 1994 response functions; Rubenstein et al. 2017; Beckers–Halpern 2019;
+Beckers–Eberhardt–Halpern 2019; Rischel–Weichwald 2021; Geiger et al. 2021 and 2023; Zennaro et al.
+2023; Massidda et al. 2023; Kekić et al. on targeted reduction; Halpern's *Actual Causality* chapter
+6 for the responsibility denominator under the modified definition; Chockler–Halpern 2004;
+HP2SAT and Ibrahim–Pretschner; ChiRho's causal-explanation module; and — because the compiled
+object is bisimulation of the interventional labelled transition system — Kanellakis–Smolka and
+Paige–Tarjan. Every unverified landscape claim in brief section 1 is resolved or discarded.
 
-**Deliverable.** A dated audit note recording, per source, what it does and does not cover, with
-the exact searched domain and stop condition for every negative.
+**Deliverable.** A dated audit note, per source, with the exact searched domain and stop condition
+for every negative, plus the written consequence branch for (b).
 
-**Kill criterion.** If coarsest-abstraction-by-refinement over an intervention monoid is already a
-published algorithm with a certificate, the mathematical crown is gone; the engineering probes may
-still proceed as an engine claim, but the framing changes and the paper option closes.
+## Probe 1a — pencil probe
 
-## Probe 1 — SCM lowering onto the observational compiler
+**No code.** One page establishing: the closed carrier and why `state = u` fails; the materialized
+state count as a function of `(|U|, n, d, k)`; the signature-collapse statement for hard
+interventions and its proof; the arity-bounded sort structure and the alternative
+`FiniteContextLanguage` encoding; and the explicit list of what the compiler adds beyond a one-pass
+signature partition.
 
-**Hypothesis.** An acyclic finite SCM plus a declared intervention vocabulary lowers into an
-existing `FinitePresentation` with no semantic change to `observational.rs`, and the compiled
-quotient is exactly `~_I` — indistinguishability under every word of interventions.
+**Why it exists.** The review's central finding is that probe 1 as originally written could not
+fail. This probe decides, before any lowering code, whether probe 1 is an adapter worth building or
+an infrastructure step whose value is entirely downstream. Under an hour.
 
-**Lowering** (stated in brief section 5, restated here because the probe stands or falls on it):
-state is the exogenous assignment; generators are the atomic single-variable interventions
-`do(V := a)`, each acting by mechanism override and re-solve; contexts are words in those
-generators, which is the whole intervention monoid because later assignments override earlier ones
-on shared variables; the observation is the declared outcome tuple of the solved assignment. The
-generator count is linear in variables times domain size, so the intervention algebra is quotiented
-against without ever enumerating it.
+**Kill criterion.** If the arity-bounded state count is impractical at every `k` that produces a
+non-trivial quotient, the flat lowering is dead and the spike jumps straight to probe 7's
+compositional route.
 
-**Method.** A tier-1 `causal` module in `ergodis-private` holding a typed `CausalPresentation`
-(variables, domains, mechanism tables, declared outcome variables, declared intervention
-vocabulary) and a total lowering into `FinitePresentation`. No new binary; a `c1062` subcommand on
-the existing lane crate. An independent Python oracle brute-forces `~_I` on small models by direct
-enumeration of intervention words up to the diameter, and the two partitions must agree exactly.
-Fixtures: a chain, a fork, a collider, a diamond with a threshold outcome, and one deliberately
-adversarial model whose quotient is the identity.
+## Probe 1 — lowering, oracle, and the response-function fixture
 
-**Deliverable.** Agreeing partitions on every fixture; a separating intervention word printed for
-each separated pair and replayed by the Python oracle; the exact statement of which SCM class is
-covered (acyclic, finite domains, deterministic mechanisms, declared vocabulary).
+**Deliverable, not a verdict.** A tier-1 `causal` module in `ergodis-private`: a typed
+`CausalPresentation` (variables, domains, mechanism tables, declared query-relevant observation set,
+declared atomic edit set, arity bound) and a total lowering onto `FinitePresentation` over the
+`(u, I)` carrier. A `c1062` subcommand on the lane crate; no new `src/bin`.
 
-**Kill criterion.** The lowering needs a semantic change to the observational compiler; or
-separating words are not recoverable in intervention terms; or the quotient is the identity on
-every natural fixture, meaning there is nothing to compile.
+**Correctness gates, in order of strength.**
 
-**What it settles.** If this lands, the brainstorm's first proposal is an adapter and the risk moves
-entirely downstream. This is the highest-information probe per hour in the plan.
+1. **The Balke–Pearl fixture, which is external truth rather than a self-written oracle.** Compile
+   a canonical-exogenous model with `O` = all endogenous variables and the full `do(pa(V) := p)`
+   vocabulary; the resulting classes must agree class-for-class with the product of per-variable
+   response-function partitions.
+2. An independent Python oracle that enumerates *partial assignments directly* — not "words up to
+   the diameter", which would import the compiler's own view and turn a shared misreading into an
+   agreement.
+3. Separating interventions printed for every separated pair and replayed by that oracle.
 
-## Probe 2 — quotient economics and the negative control
+**Measurements that ship with it** (these were missing and are cheap): `|Q|` as the observation set
+`O` grows from outcome to every variable, and the arity tower `~_{≤1} ⊇ ~_{≤2} ⊇ …` from
+`continuation.rs`. These are the only numbers that tell a user which declaration to make.
 
-**Hypothesis.** The causal quotient compresses hard on mechanistic structure — deterministic
-mechanisms, wide fan-in collapsing to narrow observables, threshold or monotone outcomes,
-interchangeable components — and does not compress on generic randomly generated models. Predicting
-which is which in advance is the point.
+**Kill criterion, restated so it can fire.** The report must identify what the compiler adds beyond
+the signature partition, and the response-function fixture must agree class-for-class. "Partitions
+agree with my own oracle" is not a result.
 
-**Method.** Predeclare per family, using `ergodis/docs/ergodis-shape-classifier.md`, whether it
-should compress and why, *before* measuring. Families: a failure-domain reliability model
-(replicated components behind a threshold outcome), a capacity/cut model, a small combinational
-circuit with an assertion observable, a random sparse acyclic model with random mechanism tables
-(predicted loss), and a random model with a fine-grained observable exposing every variable
-(predicted identity quotient). Report raw states, classes, quotient/raw ratio, compile time and
-peak RSS, and warm query time against direct re-solve, with the lane's usual interleaved rounds.
+## Probe 2 — best intervention, and the economics that follow
 
-**Deliverable.** A table of predicted versus measured shape verdicts, and an explicit statement of
-the regime boundary — the structural condition under which the compile pays for itself, expressed
-as a break-even query count as in C1061 probe 1.
+**This probe was missing.** The brainstorm's proposal 6 is optimization over interventions, Ergodis
+is an exact optimization compiler, and the first plan contained no optimization probe — while
+probes 6 and 9 silently depended on one. It is also the query where compilation plausibly pays: a
+warm-query race between one class lookup and one re-solve of a twenty-variable model is a race the
+re-solve wins in nanoseconds.
 
-**Kill criterion.** Compression is absent or marginal on the families predicted to win. A predicted
-loss that loses is a pass, not a failure.
+**The query.** `best_intervention`: the minimum-cost declared edit (or minimum-arity intervention)
+reaching a declared outcome, and "does any intervention of arity at most `k` reach `o`?". Computed
+first by direct enumeration, then as a search over the monoid action on `Q`. Second half: minimax
+regret over a small set of candidate models.
 
-**Note.** Do not compare against junction-tree engines here. The honest comparison target for a
-deterministic mechanistic model is direct re-solve and enumeration, which is native. A probabilistic
-comparison is a separate, later question and would need probe 0's landscape audit first.
+**Economics, with the three baselines the review demands.** Report classes against `|U|`, against
+`|U|` after pruning non-ancestors of the outcome, and against the orbits of the declared
+automorphism group; count only the residue as intervention-driven compression. Relevance pruning
+and component interchangeability compress for free, and in the reliability family the classes are
+just the failed-count orbits — reporting that as a win would be self-deception. The baseline for
+timing is a **memoized** re-solve, not a naive one. Predeclare each family's verdict under
+`ergodis/docs/ergodis-shape-classifier.md` before building it, including at least one predicted
+loss; a predicted loss that loses is a pass.
+
+**Also folded in here:** the intervention-vocabulary quotient, `i_1 ~ i_2` when they induce the same
+map on `Q`, reported as `|J|` against the declared edit set. It is a one-line measurement, not the
+grand claim it was in revision one.
+
+**Kill criterion.** The compiled form does not beat memoized enumeration on the enumeration query,
+or the residual compression above the orbit baseline is negligible.
 
 ## Probe 3 — exact actual causality and responsibility
 
-**Hypothesis.** Halpern–Pearl actual causality over a finite SCM is exact bounded combinatorial
-optimization with heavy repeated structure, and Ergodis can answer many such queries against one
-compiled model with a replayable certificate that includes the negative — no smaller contingency
-works.
+**The native problem, restated correctly.** Revision one stated the search as minimum `W` for a
+fixed singleton cause. That is wrong for the modified Halpern–Pearl definition it also said to
+implement first: a variable can be part of a **conjunctive** cause, and the disjunctive forest fire
+— in the fixture list — is exactly that case, where neither lightning nor match is a cause alone
+while the conjunction is. The search ranges over `(X', W, x')` with `X ⊆ X'`, and the responsibility
+denominator counts `|X'|` as well as `|W|` under the modified definition. The brief's `1/(k+1)` is
+the original Chockler–Halpern formula. **Probe 0 fixes the exact formula before any code.**
 
-**The native problem.** Given a model, an actual context, a candidate cause `X = x`, and an outcome
-`phi`, find the minimum contingency `W` (a set of variables held at their actual values) under which
-changing `X` changes `phi`; responsibility is `1/(|W| + 1)`. The engine must produce the witness
-assignment, the counterfactual outcome, and an exhaustion argument over all smaller `W`.
+**The amortization mechanism, made explicit.** Revision one asserted "the compiled quotient is the
+substrate, so repeated queries share one compile", which is unsupported: two contexts merged by `~`
+can carry different actual values and different verdicts, because `O` = outcome does not contain
+them. What is true: for a fixed actual context `u*`, the contingency states `(u*, W := w*)` are
+states of the compiled system, and two contingency sets in the same class have identical futures
+under every `do(X := x')`. **So the quotient prunes the contingency search by class**, and the
+exhaustion half of the certificate becomes "these `m` classes cover every smaller `W`, and each
+fails" — compact exactly when `m` is far below `Σ_{j < k} C(n, j)`. That is the measurable form of
+the kill criterion.
 
-**Method.** Which Halpern–Pearl variant is implemented must be declared explicitly and tested
-against it — the modified definition first, because its complexity is lower and its semantics are
-less contested; the original definition only if the modified one lands. Native iterative search with
-no allocation in the candidate loop, layered by `|W|` so the first success is minimal by
-construction. Reuse `residual_hitting.rs` and `predicate_cover.rs` where the structure is a hitting
-or covering problem; use the native `sat.rs` as an in-tree alternative encoding for a fair internal
-A/B, not as an external dependency. The compiled quotient from probe 1 is the substrate, so repeated
-queries share one compile.
+**Method.** Native iterative search, no allocation in the candidate loop, layered by `|X'| + |W|` so
+the first success is minimal by construction, with class-level pruning from the intervened-state
+congruence. `residual_hitting.rs` is referenced only where the structure genuinely is a hitting
+problem — under the modified definition feasibility is *not* monotone (pinning a mediator at its
+actual value can un-flip the outcome), so minimal-`W` is not a hitting-set problem in general; the
+hitting flavour appears only in the original definition's overdetermination cases.
 
-**Deliverable.** Exact actual-cause verdicts, minimal contingencies, and responsibility values on a
-fixture set including the standard textbook cases (rock throwing, forest fire in both conjunctive
-and disjunctive form, voting, the late-preemption cases), replayed by an independent Python
-Halpern–Pearl checker. A compact certificate whose exhaustion half is verifiable without redoing
-the search.
+**No `sat.rs` A/B.** `ergodis/src/sat.rs` is a structured-CNF *recognizer* for graph-colouring
+instances that emits clique and pigeonhole UNSAT certificates; there is no CDCL and no general
+solver in tree. Either write a small DPLL for these tiny models — feasible at this pace and useful
+elsewhere — or drop the A/B and say so in the report.
 
-**Kill criterion.** The exhaustion certificate is no smaller than re-running the search — that is,
-there is no compact negative — and the per-query cost does not amortize across queries against one
-compiled model. Either would mean the engine is a re-implementation rather than a compiler.
+**Fixtures with verdicts pre-entered.** Rock throwing, forest fire in both conjunctive and
+disjunctive form, voting, and the late-preemption cases, each with its **published** verdict and
+responsibility value entered before the run. Singleton-cause search under the modified definition
+returns a clean-looking "not a cause, responsibility 0" on the disjunctive fire, which is wrong;
+pre-entered verdicts are the only guard against that.
 
-**Baseline discipline.** Published SAT-solver figures from probe 0's audit are context for sizing,
-never a measured comparison. A measured comparison needs the same machine and the same model
-encoding, and is out of scope unless probe 0 finds a runnable artifact.
+**Kill criterion, now a disjunction.** Either the exhaustion certificate costs as much to verify as
+the search costs to run (predeclared threshold: verifier work above 10% of search work), or the
+per-query cost does not amortize across queries against one compile. Revision one made this an
+`and`, which would have let a probe with no compact certificate pass on amortization alone.
 
-## Probe 4 — version space, evidence meet, next experiment
+## Probe 4 — level-3 counterfactual and the observation precondition
 
-**Hypothesis.** `query_design.rs` already is the causal experiment-design engine once hypotheses are
-candidate SCMs and queries are interventions, and the decision-equivalence quotient makes the
-hypothesis set dramatically smaller before any experiment is chosen.
+**Why it exists.** Brief section 5 sells the state choice with "the twin network becomes a path",
+and revision one never tested it. It is true only under a precondition: abduction needs the evidence
+set `{u : E(u) = e}` to be a union of classes, which holds iff `O ⊇ E`.
 
-**Method.** A bounded hypothesis family (a small set of candidate mechanism tables over one variable
-set). Evidence accumulation as the semilattice meet `H |-> H ∩ C_e`, with associativity,
-commutativity, and idempotence as property tests rather than prose. Decision equivalence: quotient
-`H` by the induced optimal action under a declared objective, then measure how many experiments the
-decision-relevant target needs versus full identification of the model. Experiment selection by
-worst-case remaining class count and by expected decision regret, verified exactly against
-exhaustive optimal sequences on small instances.
-
-**Deliverable.** Exact controls showing the experiment count under three objectives — full
-identification, decision-sufficient identification, and cost-weighted — on the same family, and the
-measured gap between them. The interesting number is how much cheaper decision-sufficient discovery
-is; if it is not much cheaper, the whole "do not learn what the decision does not need" thesis is
-weak in practice and should be said so.
-
-**Kill criterion.** `query_design.rs` needs a rewrite rather than an adapter, or the
-decision-equivalence quotient never merges anything on natural families.
+**Method.** Fix a model, a prior over `U`, an evidence set `E`, and a counterfactual query
+`P(Y_{x'} = y' | e)`. Compute it on the weighted quotient with `O ⊇ E ∪ {Y}` and against direct
+enumeration; then repeat with `O` = outcome only and **show the quotient gives the wrong answer**.
+The negative half is the point: it converts an assertion into a measured statement with its
+precondition attached.
 
 ## Probe 5 — Evolve proposes the abstraction, separator refutes
 
-**Hypothesis.** The C1039 planted-gap admission machinery works unchanged with the separating
-intervention as its counterexample oracle, and Evolve recovers human-legible coordinates for the
-quotient classes rather than merely a correct classifier.
-
-**Method.** Plant a system whose true causal coordinates are known — for the failure-domain family,
-something like failed-domain count, a cut-capacity bucket, and a parity bit. Blind the presentation
-the way C1016's private control does: opaque field identifiers, permuted features, no labelled hint
-of the planted coordinates. Evolve proposes a typed feature term `phi` from `feature_dag`; the exact
+**Method.** Plant a system whose true causal coordinates are known (failed-domain count, a
+cut-capacity bucket, a parity bit), blinded as in C1016's private control: opaque field identifiers,
+permuted features, no labelled hint. Evolve proposes a typed `feature_dag` term `phi`; the exact
 engine checks whether `ker phi` equals the compiled quotient; on failure it returns a separating
-intervention word plus the two merged states, which is added to the corpus as a counterexample.
-Loop until sealed or the budget expires.
+intervention plus the two merged states, added to the corpus.
 
-**Deliverable.** Whether the planted coordinates are recovered, at what generation, and — the
-distinguishing test against a plain classifier — whether the admitted term is *exactly* the quotient
-rather than corpus-perfect. C1039 already demonstrates that admission rejects unsound corpus-perfect
-predicates with a replayable counterexample; this probe checks that the causal separator is a
-sufficient counterexample oracle for that same gate.
+**Three corrections from the review.**
 
-**Kill criterion.** Evolve reaches corpus-perfect terms that admission rejects forever, with
-separating interventions failing to guide it toward the planted coordinates. That would mean the
-counterexamples are not informative in practice, which is the load-bearing claim of the whole Evolve
-half of the brainstorm.
+1. **Fitness must be kernel equality, a partition distance — not label regression.**
+   `feature_synthesis.rs` fits integer targets and class labels are arbitrary integers, so a
+   regression fitness makes Evolve chase a label permutation rather than the partition.
+2. **Recovery is judged up to reparameterization.** A term whose kernel is the quotient but whose
+   coordinates are a bijective re-encoding of the planted ones is a full success.
+3. **The informativeness claim needs an A/B.** C1039's admission replays exhaustively and returns
+   *some* counterexample on rejection, so any counterexample gives soundness. The brief's claim is
+   that separating interventions are *unusually good* counterexamples, which is only measurable
+   against a random or first-row counterexample arm, with generations-to-seal as the measure.
+   Without that arm, a success is attributable to admission, not to separators.
 
-## Conditional probes
+## Probe 6 — k-ary experiment design and decision equivalence
 
-**Probe 6 — intervention-vocabulary quotient.** Collapse interventions inducing the same map on the
-compiled quotient, giving a monoid action `J acting on Q`, and measure `|J|` against the declared
-vocabulary. This is where a "hundred thousand variables become a fifty-state machine" claim would
-have to come from. Gated on probes 1 and 2, because it is meaningless if `Q` does not compress.
+**Reframed.** Revision one called this an adapter over `query_design.rs`. It is not:
+`query_design.rs` handles *binary* queries as hypothesis bitmasks, while an intervention on a finite
+SCM has a `d`-ary outcome partition, and binarizing overcounts experiments. Expected decision regret
+also needs a prior and a utility the module does not carry. This is a new k-ary module that reuses
+the module's exact-verification pattern, and it depends on probe 2 for its decision key.
 
-**Probe 7 — blame under model uncertainty.** Expected responsibility over a weighted hypothesis set,
-which is cheap once probes 3 and 4 both exist and is otherwise not a probe at all.
+**Deleted:** the semilattice property tests. Set intersection being associative, commutative, and
+idempotent cannot fail and proves nothing about causal reasoning.
 
-**Probe 8 — one end-to-end system.** A single realistic model taken from incident to actual cause to
-minimal corrective intervention, with the full certificate chain. Candidates: a small circuit with an
-assertion failure, or a service/failure-domain model. This is the demonstration artifact, not a
-research result, and it should only be built after probe 3 lands.
+**Method.** A bounded family of candidate mechanism tables. Quotient by decision equivalence under
+a declared objective, then measure experiments needed for full identification, for
+decision-sufficient identification, and cost-weighted, with exhaustive optimal sequences as the
+exact check on small instances. **Include a predeclared family where the decision needs full
+identification and expect a gap near zero**; without it, "decision-sufficient is much cheaper" is
+true by construction.
 
-## Explicitly out of scope
+**Blame** (the brainstorm's proposal 7) is a formula over this probe's weighted hypothesis set once
+probe 3 exists, and is a deliverable here rather than a probe of its own.
 
-- General causal discovery from observational data. Ergodis cannot resolve identifiability, and
-  competing with statistical discovery packages is not the niche.
-- Any wrapper around, or build dependency on, pyAgrum, HUGIN, SMILE, DoWhy, ChiRho, or a junction-
-  tree engine. Independent replay is an in-tree Python oracle.
-- Cyclic and dynamic SCMs. Acyclic finite deterministic mechanisms only, stated as a scope
-  condition rather than discovered as a limitation later.
-- Mechanistic interpretability of neural networks. Interesting, but it needs a quantized or
-  finite-state substrate that this spike does not produce.
-- Any paper, manuscript, mirror, or public-surface change.
+## Probe 7 — compositional lowering along the DAG (gated)
+
+The "hundred thousand variables become a fifty-state machine" claim is unreachable by materializing
+`(u, I)`. The only scalable route is compositional: quotient each mechanism locally by its response
+classes and compose along the DAG using `composition.rs` and the C1061 retained-tree machinery,
+checking the composed quotient against the flat one on small models. This is the Rischel–Weichwald
+direction. It replaces revision one's probe 6 grand claim and is where the spike would go if the
+flat carrier turns out to be the wall probe 1a suspects.
+
+## Probe 8 — unrolled sequential window
+
+**One toy, one afternoon.** A two-state machine over a bounded window, lowered by unrolling into an
+acyclic model. This is the only probe where word closure is **not** vacuous, so it is the only one
+that tests the "SCM is just another context language" thesis where it has content. It also decides
+whether the brainstorm's highest-ranked targets — electronic design automation and debug, incident
+root-cause analysis, breach accountability, fault injection, all of them time-indexed — are one
+sentence away from scope or genuinely out. Revision one excluded them by a scope condition without
+noticing that the exclusion removed every 5/5 target.
+
+## Probe 9 — end-to-end demo (gated)
+
+One model from incident to actual cause to minimal corrective intervention with the full certificate
+chain. It is the demonstration artifact and must **never** be counted as evidence. Gated on probes 2
+and 3, not on 3 alone, because "minimal repair" is a best-intervention query.
+
+## Scope, and the decisions behind it
+
+- **Acyclic finite deterministic mechanisms only.** Cyclic SCMs need a solution concept first.
+  Sequential targets are reachable by bounded unrolling, which probe 8 tests rather than assumes.
+- **The probabilistic layer is deferred, and this is a decision with a reason, not an omission.**
+  Brief section 5 demanded a measured negative control against a junction-tree-class baseline;
+  revision one silently dropped both that and `P(y | do(i))`. The deferral stands because the
+  deterministic layer must work first, but the eventual native negative control is named here: a
+  variable-elimination enumerator over the same finite model, roughly a hundred lines of Rust. No
+  external package, per the lane's native preference.
+- **Out of scope:** general causal discovery from observational data; any wrapper on or dependency
+  on pyAgrum, HUGIN, SMILE, DoWhy, or ChiRho; mechanistic interpretability of neural networks —
+  and note the real reason is not "no finite substrate" but the carrier problem, since this
+  quotient cannot express "these states are one variable" at all; any paper, manuscript, mirror, or
+  public-surface change.
 
 ## Process rules
 
-- Each probe writes its own dated report before the next probe starts; this log gets only a row and
-  a one-line verdict.
-- Predeclare shape predictions before measuring, per C1038.
-- Every negative result states its exact searched domain and stop condition.
+- Each probe writes its own dated report before the next starts; this log gets a row and a one-line
+  verdict.
+- Every row carries a predeclared numeric threshold, in the C1061 style ("break-even 1.13 updates",
+  "15 of 18 cells"), entered before the run.
+- Predeclare shape verdicts before measuring, per C1038, with at least one predicted loss per
+  measurement probe.
+- Every negative states its exact searched domain and stop condition.
 - Commit owned paths as each probe's validation passes; no accumulation.
-- Tier rules from `ergodis-private/AGENTS.md`: tier-1 library code, one subcommand per task on the
-  lane crate, no new `src/bin`, shared build cache.
+- Tier rules from `ergodis-private/AGENTS.md`: tier-1 library code, one subcommand on the lane
+  crate, no new `src/bin`, shared build cache.
 
 ## Next step
 
-Probe 0 and probe 1 in parallel — the audit does not block the lowering, and probe 1 is the cheapest
-fatal test in the plan.
+Probe 0 and probe 1a in parallel. Nothing else starts before both are on disk: probe 0 can delete
+or reframe the session-sized probe 3 before it begins, and probe 1a decides the carrier and the cost
+model before any code is written.
 </content>
-</invoke>

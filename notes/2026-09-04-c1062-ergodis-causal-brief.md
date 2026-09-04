@@ -26,7 +26,11 @@ The material in section 3 is a condensed write-up of a ChatGPT brainstorm suppli
 
 The one landscape claim that most affects EV — *there is no mature fast engine for Halpern actual
 causality* — is also the one most worth checking first, because the whole of probe 3's value rests
-on it.
+on it. I now expect it to be **false**: Ibrahim and Pretschner's HP2SAT and their MaxSAT/ILP
+formulation of actual causality and responsibility both appear to exist, and probe 0 must confirm
+or refute them before probe 3 starts. If they exist, probe 3's claim narrows from "the first exact
+engine" to "a compiled, certificate-carrying engine against a per-query SAT or ILP encoding", which
+is narrower, more defensible, and still worth building.
 
 ## 2. The central object, stated once
 
@@ -118,9 +122,9 @@ domain-neutral module; the missing part is a lowering from SCMs into it.
 | richer context alphabets, refinement towers       | `ergodis/src/continuation.rs`                              |
 | rank-bounded outer tests, scalar contextual layer | `ergodis/src/contextual.rs`                                |
 | context languages and their products              | `FiniteContextLanguage`, `ContextLanguageProduct`          |
-| version space over hypotheses, adaptive tests     | `ergodis/src/query_design.rs`                              |
-| exact minimal hitting / covering search           | `ergodis/src/residual_hitting.rs`, `predicate_cover.rs`     |
-| native SAT when a search wants clauses            | `ergodis/src/sat.rs`                                       |
+| version space over hypotheses, adaptive tests     | `ergodis/src/query_design.rs` — **binary queries only**, so a `d`-ary intervention outcome needs a new module reusing its verification pattern |
+| exact minimal hitting / covering search           | `ergodis/src/residual_hitting.rs`, `predicate_cover.rs` — applicable only where feasibility is monotone, which the modified Halpern–Pearl definition is not |
+| general SAT                                       | **absent.** `ergodis/src/sat.rs` is a structured-CNF recognizer for graph-colouring instances emitting clique and pigeonhole UNSAT certificates; there is no CDCL in tree |
 | composition and delta updates on a retained tree  | `ergodis/src/composition.rs`, C1061's delta machinery      |
 | typed feature terms for Evolve                    | `ergodis/src/feature_dag.rs`, `ergodis-private/src/feature_synthesis.rs`, `repr_grammar.rs` |
 | admission that rejects unsound corpus-perfect predicates with a replayable counterexample | `ergodis-private/src/planted_gap_corpus.rs` (C1039) |
@@ -131,46 +135,65 @@ There is currently **no** causal, intervention, counterfactual, or do-calculus c
 either repository; a bounded search over both `src` trees finds nothing. This is greenfield on top
 of finished machinery.
 
-## 5. My assessment, and the one technical insight that makes probe 1 cheap
+## 5. The encoding question
 
-The encoding question is the whole spike, so state it precisely.
+The encoding is the whole spike, so state it precisely. **My first attempt at it was wrong**, and
+the correction is worth more than the original claim, so both are recorded here. The adversarial
+review in `2026-09-04-c1062-plan-review.md` found the defect; the corrected lowering and its
+consequences are developed in the exploration log's opening section, which is the authority.
 
-`observational.rs` wants finite state sorts, an observation per state, and **total typed unary
-generators**; it computes exactly the states no well-typed generator path can distinguish, and it
-emits a separator for every separated pair. An acyclic finite SCM lowers into that as follows.
+**What I first claimed.** State is the exogenous assignment `u`; generators are the atomic
+interventions `do(V := a)`, each acting by mechanism override and re-solve; contexts are words in
+those generators, which generate the whole intervention monoid because later assignments override
+earlier ones; so twenty binary variables need forty generators rather than `3^20` interventions,
+making the first proposal an adapter rather than an engine.
 
-- **State** = the exogenous assignment `u` (equivalently, the solved endogenous assignment it
-  determines). This is the right choice because it is what a counterfactual holds fixed while the
-  mechanisms change; Pearl's twin-network construction becomes a path in the generator system
-  rather than a separate algorithm.
-- **Generator** = one atomic intervention `do(V := a)` for a single variable `V` and value `a`,
-  acting by overriding `V`'s mechanism and re-solving. Total, deterministic, well-typed.
-- **Context** = a word in those generators, which is exactly the full intervention algebra, because
-  single-variable assignments generate the whole intervention monoid under later-overrides-earlier
-  composition.
-- **Observation** = the value of the declared outcome variables in the solved assignment.
+**Why it is wrong.** A generator in `observational.rs` is a total map from states to states, and
+`do(V := a)` applied to `u` is a solution of a *different model* — it is not an element of `U`. The
+generator has nowhere to land. The lowering is ill-typed except when interventions are confined to
+root variables, where pinning a root is just re-assigning its exogenous value.
 
-The consequence matters: the intervention *vocabulary* the compiler needs is linear in
-`variables x domain size`, not exponential in subsets, while the *context language* it quotients
-against is still the whole intervention algebra. A model with twenty binary variables needs forty
-generators, not `3^20` interventions. If that lowering is faithful, section 3's first proposal is an
-adapter, not an engine, and the real risk moves entirely to actual causality, the version-space
-layer, and the Evolve loop.
+**The forced repair, and what it costs.** The state must be the pair `(u, I)` with `I` the current
+partial assignment of pinned variables. That is well-typed, but it moves the exponential from the
+vocabulary into the compile: materialized states number `|U| · ∏_V (|D_V| + 1)`. The escape is an
+arity bound carried in the sort structure or a `FiniteContextLanguage`. Worse for the original
+claim, on that carrier hard-intervention words are idempotent and commutative, so every word reduces
+to its final partial assignment and the quotient on `U` is a one-pass signature partition that
+refinement recomputes at the same cost. **What the compiler actually adds is the uniform separator
+certificate and the congruence on the intervened states `(u, I)`** — and that congruence, not the
+quotient on `U`, is what prunes the actual-cause contingency search.
 
-Three things I expect to be genuinely hard, and which the probes must not paper over:
+**What the compiled relation is.** With the outcome as observation it coarsens the exogenous space
+with endogenous variables unchanged, so it is a targeted reduction rather than Beckers–Halpern
+variable merging. With every endogenous variable observed and the full `do(pa(V) := p)` vocabulary
+on a canonical exogenous space, it is exactly Balke and Pearl's 1994 response-function partition —
+a known object, a mandatory correctness fixture, and a novelty risk. Variable-merging abstraction
+needs endogenous settings as the carrier, and there `(u, I)` is strictly finer; the full atomic
+vocabulary is precisely what makes nontrivial merges impossible, which is why Beckers–Halpern
+restrict the intervention set. **The linear-vocabulary claim and the interesting-abstraction claim
+pull in opposite directions.**
+
+Four things that remain genuinely hard, which the probes must not paper over:
 
 1. **Probabilistic SCMs.** The quotient is exact for the deterministic mechanism layer; a
    distribution over exogenous contexts pushes forward to class weights, and `P(y | do(i))` is then
    exact on the quotient. That is sound, but it only *wins* when the quotient is much smaller than
    the state space, which requires mechanistic structure — deterministic mechanisms, few outcome
    values, threshold or monotone behaviour, wide fan-in collapsing to narrow observables. On a
-   generic noisy Bayesian network it will lose to a junction tree, and the spike must say so with a
-   measured negative control rather than discover it later.
-2. **Cyclic and dynamic models.** Acyclic is assumed above. Cyclic SCMs need a solution concept
-   before "re-solve" is even a function.
-3. **Minimality of the contingency search.** Actual causality is not just a search for some `W`; it
-   needs an exhaustion argument that no smaller `W` works. The certificate has to carry that
-   negative, and a compact form for it is the interesting engineering problem.
+   generic noisy Bayesian network it will lose to a junction tree. The eventual native negative
+   control is a variable-elimination enumerator, not an external package.
+2. **Cyclic and dynamic models.** Acyclic is assumed above; cyclic SCMs need a solution concept
+   before "re-solve" is even a function. This matters more than it first appears, because every
+   application the brainstorm ranks 5/5 is time-indexed, so bounded unrolling is load-bearing
+   rather than optional.
+3. **Minimality of the contingency search.** Actual causality is not a search for some `W`; it needs
+   an exhaustion argument that no smaller one works, and feasibility is not monotone under the
+   modified definition, so it is not a hitting-set problem in general. A compact form for that
+   negative is the interesting engineering problem.
+4. **The observation set is a dial, not a given.** Level-3 abduction needs the evidence set to be a
+   union of classes, so `O ⊇ E`; actual-cause verdicts need the cause and contingency values in `O`.
+   Observe everything and the quotient is the identity. Nothing is exact "on the quotient" until the
+   query-relevant variable set is declared.
 
 Positioning, which I agree with and which should be held to: Ergodis is not competing with
 statistical causal discovery and cannot make identifiability problems disappear. Its role begins
