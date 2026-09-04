@@ -494,3 +494,28 @@ one-line pointer here.
   count. Fresh-session order: gate C (equality with `optimal_pattern_count` on fleets with ties
   and singleton classes), gate B against `overlap_gap`'s exact branch, measure both vs 627k /
   650k, then A with a named contended-fleet generator.
+- 2026-09-03 — probe 18: generic certificate chain, wrapped up (ergodis-private `93572c5`,
+  ADR section 10; probe-3 report appended, monorepo `5eee9718d`). Verdict: **promote; one
+  chain serves four summary shapes; table-emitted certificates work**. `CertifiableProblem`
+  (canonical encoding, validating decode, artifact payload) as a fourth capability; all four
+  shapes run the fail-closed suite and crash-recovery replay (5 generic, 10 open-problem, 32
+  specialized tests green). Two defects fixed: per-digest allocation and a length prefix
+  pushing the internal preimage to a third compression block, together 63.3k to 49.5k
+  instructions per event. Measured (7 rounds, fixed window, pinned b0138ac0..., instruction sd
+  0): specialized chain 25,046 instructions / 1,168 bytes per event; generic matrix 49,457 /
+  1,216; policy function 62,166 / 1,264; monoid index 25,598 / 496; width-8 window 204,433 /
+  3,520; generic costs 1.97x the specialized chain where directly comparable, 1.02x when the
+  summary is one word. Probe 12's question answered yes: `TableCommitment` / `TableProver` /
+  `TableVerifier` emit (table root, previous sequence, previous state, symbol, next state,
+  offset delta, inclusion path); the verifier holds 64 bytes, does O(log cells) hashes, and
+  costs 3,749 instructions / 328 bytes per event, 6.68x cheaper than the tree chain; the table
+  is certified once at build by recomputation, then each event is an inclusion proof; covers
+  value and offset, not witnesses, and must not be applied to the fleet `ShapeTable` until
+  its state closes. Corrections: the generic chain proves composition, not leaf evaluation
+  (separate obligation); a forged ancestor yields `PreviousRoot` only at level 0, above it the
+  guarantee is a disjunction (true of the specialized chain too). Harness audit: probe 8's
+  parametric-vs-kernel win is 33.45x not 19.70x, parametric-vs-decided 1.99x not 1.56x, cycle
+  wash confirmed; no probe-16 verdict changed. Next session: zero-allocation regression for
+  the generic chain (missing; both defects are what it would catch), borrowed-encoding path
+  for the 1.97x, other hash backends, file round-trip, normalized-class encoding for the
+  width-8 certificate; 9.5 dedupe still needs a quiet tree.
