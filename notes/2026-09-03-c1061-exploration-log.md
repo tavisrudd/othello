@@ -630,3 +630,20 @@ one-line pointer here.
   conservative because a radius-1 ball expresses cost differences of only 0, 1, 2, so margin 3
   exceeds its dynamic range. Named successor: a per-witness bound Delta(c_a) from the observed
   syndrome just outside the ball, and a radius-2 representation avoiding 2^28 enumeration.
+- 2026-09-03 — probe 31: sparse evaluation and per-witness margin, paused by Tavis. Report:
+  `2026-09-03-c1061-probe31-sparse-evaluation-and-per-witness-margin.md` (ergodis-private
+  `8a75f0a`, seventeen gates across probes 29 to 31). Done: clean-ball lemma proved and gated
+  (zero ball syndrome gives W_0 = 0 and any other action costs at least the local girth g_R,
+  so g_R >= Delta lets a defect-free position commit the empty correction unevaluated, an
+  identity of the compiled table); sparse evaluation provably equals dense, and the gate
+  caught that evaluation order changes the policy since each commit rewrites the syndrome, so
+  the worklist must stay in ascending position order; an exact matching oracle (unit-weight
+  BFS detector metric plus 2^k subset matching over defects) replaces the 2^detectors metric
+  closure and agrees with it on three small instances and with probe 30's audit at surface
+  d=3. Dead: the per-witness margin as posed, because crossing patterns form a group under
+  symmetric difference, so the coset {c_a xor c*} equals {c*} and Delta(c_a) = R_max for every
+  witness; only conditioning on the observed outside syndrome can tighten it (not reached).
+  Unmeasured, in order: the d=5 oracle audit (is Delta = 2 sound there); a sparse-margin bench
+  subcommand; instructions per committed round across p, with the live risk that at 1% error a
+  d=9 shot's about 30 defects wake about 300 positions against the dense sweep's 79, so sparse
+  may only win at low p.
