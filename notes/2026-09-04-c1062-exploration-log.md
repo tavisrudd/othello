@@ -169,36 +169,45 @@ every component it would chain is already built and independently replayed and t
 counting the demonstration as evidence. The task is ready to close on Tavis's call.
 
 The task-level verdict is `2026-09-05-c1062-closeout-synthesis.md`, which supersedes the 2026-09-04
-version: the lowering is exact and mostly not worth compiling, with three independent economics
-measurements tying at `1.00x`; the thesis has content only under a sequential non-idempotent
-vocabulary; and what the compiler buys is the certificate, the decidable expressibility test, and
-completeness over words the direct route never enumerated.
+version and has since been revised for the two post-review measurements: the lowering is exact,
+nothing built on it is wrong, and nothing measured shows that compiling it buys what the task said
+it buys. The thesis has content only under a sequential non-idempotent vocabulary. Of the three
+things the earlier closeout said compiling buys, the certificate's compactness is unmeasured on the
+only axis left, the expressibility test is sufficient and conservative rather than exact, and
+completeness over unbounded words is false against probe 8's own oracle.
 
-Three successors deserve allocation, in this order.
+The repair-and-retention pass is done (`ergodis-private` `121c218`, `81aebd9`, `29883b0`, `346fa0c`):
+every review's patches are applied, probe 4's fifth arm and probe 7's ceiling counterexample are in
+the fixtures, probe 3's inert regression witness is replaced, every probe retains an evidence file
+with its replay command, and each report is corrected against its review.
 
-1. **A repair-and-retention pass over the reviews' patches**, which is the precondition for trusting
-   anything below it: fix the live defects the reviews name, replace probe 3's inert regression
-   witness with one that pins the repaired agreement, add the fixtures the reviews wrote (probe 7's
-   correlated-parents counterexample and shared-source-merging model, probe 4's fifth arm), retain an
-   evidence file for every probe, and apply each review's wording repairs to its report so the
-   reports stop saying what the reviews refuted.
-2. **The two measurements that can still move a verdict**: probe 3's wide-domain fixture together
-   with its amortization arm, the last untested route to a positive certificate result on the flat
-   carrier; and the compositional counterfactual crossover, probe 7's reduction under probe 4's
-   query, which composes exact pieces into a measurement nobody has taken.
-3. **The economics question, restated.** Whether the certificate can be emitted without compiling
-   the carrier is answered — probes 5 and 8 already do it from the direct route, and completeness is
-   not a differentiator. The replacement question is whether any declaration makes compiling cheaper
-   than the direct signature partition; probe 8's strict-subset vocabulary and a probe 2 timing
-   workload with nontrivial answers are the two cheap places to look. A negative there would let the
-   `1.00x` results be reported as a design input rather than as three coincidences.
+Two post-review measurements ran under predeclarations committed before any number existed
+(`7f6367bb3`, `d53c8817a`), which is the discipline every review found missing:
+
+- **The concrete baseline, strengthened** (`2026-09-05-c1062-probe2-concrete-baseline-predeclaration.md`,
+  result in probe 2's report). Both arms now walk their own adjacency; the withdrawn `220x` becomes a
+  measured `6.8x`, inside its predeclared band, with the per-query relaxation invariant holding. Most
+  of the gap was representation. It is an upper bound while the two arms use different heaps.
+- **The wide-domain certificate fixture and the amortization arm**
+  (`2026-09-05-c1062-probe3-wide-domain-and-amortization.md`). The fixture is condemned by its own
+  `d = 2` control, so the domain-width axis is **untested, not refuted**; a corrected fixture needs an
+  intervenable variable outside the query pool and its own predeclaration. Amortization is a clean
+  loss on every row, so that item is closed in the negative.
+
+What is left, in order: the compositional counterfactual crossover (probe 7's reduction under probe
+4's query); a predeclared second attempt at the domain-width fixture; and the restated economics
+question — whether any declaration makes compiling cheaper than the direct signature partition, with
+probe 8's strict-subset vocabulary, an equalized-heap baseline, and a probe 2 timing workload with
+nontrivial answers as the cheap places to look.
 
 Carried forward, none blocking: the arity tower is computed at full price per rung rather than
 incrementally through `plan_layered_greedy_schedule`; the intervention-vocabulary quotient is empty
 for hard edits and should be re-measured under a non-idempotent vocabulary rather than dropped;
-probe 3's amortization arm was never measured; and whether the compiled machinery buys anything on
-probe 6's outcome table — probe 1's signature construction transposed onto the hypothesis index —
-is unmeasured.
+whether the compiled machinery buys anything on probe 6's outcome table — probe 1's signature
+construction transposed onto the hypothesis index — is unmeasured; relevance pruning is still not
+wired into the lowering, deliberately, and the lowering now reports how many exogenous variables
+would prune; and the `u64` context index caps probe 7's next scale claim until a digit-vector solve
+lifts it.
 
 The two Ergodis-core defects this task raised are repaired in
 `2026-09-04-c1062-core-certificate-policy-repair.md` (core `6cc9668`). One item remains for C1017:
