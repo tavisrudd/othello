@@ -4373,8 +4373,17 @@
       "last": 1065,
       "purpose": "attack the sparse matcher's fixed per-shot cost on weighted circuit-level graphs",
       "sequence": 486
+    },
+    {
+      "count": 2,
+      "first": 1066,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1067,
+      "purpose": "sparse matcher event-queue discipline (heap vs bucket, horizon retirement, dispatch on compiled largest edge weight); matcher-wide performance-contract audit",
+      "sequence": 487
     }
   ],
-  "next_id": 1066,
+  "next_id": 1068,
   "schema": "codex-task-id-allocations-v1"
 }
