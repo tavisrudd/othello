@@ -1083,7 +1083,8 @@ substitution restates the whole condition in four letters: four sequences over
 shift, the two constants differing by 523. The plateau's depth in bits is
 model-dependent: an independent Gaussian-ball count of the same plateau gives
 about 195 rather than 130 bits, so that figure carries roughly ±60 and the
-400-bit total is the robust half.
+400-bit total is the robust half; that recheck and a ranked read of the whole
+campaign are in `2026-09-05-c1016-adversarial-status-review.md`.
 
 The paired move is now built and closed
 (`2026-09-05-c1016-paired-transfer-and-the-two-opt-census.md`). Its motivation
