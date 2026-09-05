@@ -6,8 +6,8 @@
 **Code**: `~/src/ergodis-private` (core changes, if any, in `~/src/ergodis`)
 **Status**: probes 0, 1a, 1, 3, 2, 7, 8, 4, 5 and 6 done; probe 9 remains, and the closeout
 recommends dropping it. Task-level verdict: `2026-09-04-c1062-closeout-synthesis.md`.
-Probes 1, 2, 3, 4, 5 and 6 have been adversarially reviewed; see § "Reviews" for what each review
-changed. Probes 0, 1a, 7 and 8 are unreviewed.
+Probes 1a, 1, 2, 3, 4, 5, 6 and 8 have been adversarially reviewed; see § "Reviews" for what each
+review changed. Probe 7's review is in flight and probe 0 is unreviewed.
 
 This is the routing document for C1062. The task asks whether a finite structural causal model
 (SCM) is another context language for the Ergodis contextual quotient, and what that buys: exact
@@ -103,11 +103,13 @@ applying them. The reviews are the authority for what a probe's numbers now mean
 
 | Probe | Review | Correctness | What the review changed |
 |-------|--------|-------------|-------------------------|
+| 1a    | `2026-09-05-c1062-probe1a-review.md` | the `state = u` refutation and the signature-collapse proposition both hold | recommending sorts over a context language forecloses the contingency pruning it promised, since a class never spans sorts and a candidate's pinned support *is* its sort — the ceiling probe 3 later spent a session hitting, derivable at pencil time; the closed-form count is a uniform-domain special case one fixture already falls outside |
 | 1     | `2026-09-05-c1062-probe1-review.md` | survives; the response-function gate is external truth | probe 1a's per-state constant is the interior-sort one, so the envelope is `\|U\| ≲ 10^5` not `10^4`; the predeclared separator-replay gate was silently swapped and never run; relevance pruning has no caller; `class_of` does not bound its context argument |
 | 2     | `2026-09-05-c1062-probe2-review.md` | survives everything attacked, including minimax regret | the `220x` is withdrawn — it times a 297,216-byte array clear, and like-for-like is `102x`; the credit ratio's denominator changed after predeclaration and `restricted-vocabulary` is `1.000x` under the declared metric; the timing loss is larger than reported and misattributed |
 | 3     | `2026-09-05-c1062-probe3-review.md` | survives; all eight verdicts and both cause shapes re-derived | the named regression witness compares one policy against itself; the sort-count diagnosis is the `4,096`-state admission gate; the compactness excuse is refuted — the fraction is flat in model size, and only domain width can move it; four rows marked "Published" are computed, not published |
 | 4     | `2026-09-05-c1062-probe4-review.md` | survives; all four arms re-derived class vector by class vector | the stated precondition omits the outcome-observed check the code makes, and a fifth arm returns `0` against a true `1/3`; `O ⊇ E ∪ {Y}` is refuted by the probe's own third row; the condition is sufficient and conservative, not exact; the two failure modes are asymmetric under representative choice |
 | 5     | `2026-09-04-c1062-probe5-fable-review.md` | ratios reproduce | the separator rule was returning the null intervention; the partition arm's collapse was a fitness artifact; the two headline ratios are statistically unestablished and the partition arm is the probe's only real effect |
+| 8     | `2026-09-05-c1062-probe8-review.md` | every number reproduces from the binary and from an independent implementation; the control is measured, not assumed | the completeness-over-unbounded-words claim is false against probe 8's own oracle, which closes a finite edit-state space and already answers every word — 20,000 sampled length-twenty words per vocabulary land inside it; only 7 of the 34 separators are order-essential over *all* minimal separators; the richer-vocabulary-is-finer statement is contradicted by its own table; the `1.00x` is a ratio of two counts with no solve in it |
 | 6     | `2026-09-05-c1062-probe6-review.md` | structural half survives, including non-transitivity | the "no teaching signal" finding is single-seed and inverts at forty seeds (37–40 of 40 in favour of the separator); the predeclared loss is a property of the strong decision-sufficiency criterion, not of the family |
 
 Three findings are common to every reviewed probe and belong to the task rather than to any one of
