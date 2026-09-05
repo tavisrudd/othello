@@ -17,3 +17,12 @@ Ergodis hot loops, not about supplementary difference sets; it is a candidate
 line for the shared performance playbook, and the measurement is in
 `2026-09-04-c1016-full-neighbourhood-tabu-spin-shard.md`.
 
+
+2026-09-04, C1063, while adding evidence rows to
+`ergodis-private/benchmarks/tiger-blossom/SHA256SUMS`: that manifest mixes two path conventions.
+Thirty of its rows name a bare basename and two, added under C1061 probe 28g, name a path relative
+to the repository root, so `sha256sum -c` fails on those two from inside the directory and would
+fail on all the others from the root. Nothing is wrong with the recorded hashes; the manifest simply
+cannot be checked in one command from either place. Any evidence manifest that accumulates rows
+across tasks wants one stated convention and a check that runs in the reproducibility instructions,
+which is a general point about our evidence bundles rather than about TigerBlossom.

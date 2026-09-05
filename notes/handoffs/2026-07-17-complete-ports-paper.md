@@ -724,6 +724,17 @@ margin predecoder commits no correction at the smallest sound margin at any radi
 exhaustively over every ball syndrome, and the surface d=9 rows the aliased check masks invalidated
 are re-derived, moving exactly one published number. Both standing levers are closed; `solve` at
 27.5% of the matcher profile has never been attacked.
+C1063 is closed (`2026-09-04-c1063-tiger-blossom-routing-and-real-usage-grid.md`). The default arm
+is now `LEVEL_ROUTED`, which picks the cluster decomposition or the sparse matcher per shot by
+defect count against a threshold compiled into `KernelSpec`; it is never worse across 55 cells and
+up to 1.97x faster at the operating rates. The benchmark gained the rotated surface code, a window
+that follows the distance, and its first latency run; building the surface family exposed and
+repaired a distance-one defect in `RotatedSurfaceCode::new` that invalidates surface-family numbers
+taken before 2026-09-04, repetition numbers untouched. The PyMatching standing is restated on the
+routed arm: 16 of the 18 published cells ahead at 3.3x to 11.4x with the same two dense cells
+behind in instructions and ahead in cycles, and all 33 real-usage cells ahead. The open successors
+are the weighted circuit-level detector error model, an unmeasured latency tail beyond the
+ninety-ninth percentile, and Tavis's decision on routing the unspecialized graph path.
 C1016 is active as a private Ergodis reduction-synthesis pilot. A hostile review found that its
 unapproved presentation-hash/feature-name overlay did not establish extractor semantics. Public
 proof authority, `Necessary`, and all Hadamard/GS code are therefore removed; core again advertises
