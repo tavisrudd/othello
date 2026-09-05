@@ -18,6 +18,9 @@ absolute milliseconds run above the ones below; every argument here is about rat
 measured in the same process.
 **Reviewed**: `2026-09-05-c1062-probe2-review.md`. Corrections from that review are marked
 **[corrected]** below and the original text is kept wherever it explains how a number was reached.
+**Baseline repair**: `2026-09-05-c1062-probe2-concrete-baseline-predeclaration.md`, committed before
+the change it predicts. § "The strengthened concrete baseline" carries the result and is the headline
+comparison; the `220x` and `103x` figures are weaker-baseline numbers kept for their derivation.
 
 **Verdict.** The decision layer is built and it is exact: the compiled arm agrees with the
 enumeration oracle on every query over every context in six families, and every witness it returns
@@ -39,8 +42,11 @@ where the compiled query wins is the one where the carrier is never materialized
 - **The arms were not memoized alike.** `12.420 ms` is the compiled arm *with* a class memo and
   `2,733.393 ms` is the concrete arm with no memo of any kind. The like-for-like row was already in
   the same table — `compiled` without a memo against `state search` without one — and it reads
-  `102x`; on the repaired code and the retained evidence it is unchanged at `103x`
-  (`1,829.704` against `17.803` at 65,536 queries).
+  `102x`; on the repaired code it is unchanged at `103x` (`1,829.704` against `17.803` at 65,536
+  queries). **That `103x` is itself superseded**: against a concrete arm given the same edge
+  representation as the compiled one it is **`6.8x`**. See § "The strengthened concrete baseline",
+  which is now the headline comparison; `103x` and `220x` are both weaker-baseline numbers and are
+  kept only to show how they were reached.
 - **What remains is a representation difference, not a compression measurement.** Hard interventions
   are idempotent and commute on distinct variables, so the reachable set from `(u, {})` is the single
   fibre `{(u, I)}` — 129 states of the 33,024 in the carrier. The concrete arm nonetheless touches the
@@ -58,8 +64,56 @@ quotienting buys the query is the one this report already makes in § "What a qu
 the graph is `22x` to `84x` smaller and the weighted plan collapses parallel edges by a further `1.07x`
 to `1.46x` — and those numbers are counts off the compiled artifact, not timings.
 
-**[corrected]** the `6.3x` is `5.0x` on the repaired code and the current core (`8.142` against
-`1.635` at 65,536 queries). The direction and the argument are unchanged.
+**[corrected]** the `6.3x` is `5.0x` on the repaired code and the current core (`8.176` against
+`1.632` at 65,536 queries). The direction and the argument are unchanged.
+
+## The strengthened concrete baseline
+
+This section supersedes the `220x` and the `103x` above. It was **predeclared before the change was
+written**, in `2026-09-05-c1062-probe2-concrete-baseline-predeclaration.md`, committed at `othello`
+`7f6367bb3`; the code came afterwards.
+
+**What changed.** `ConcreteSearch` used to scan *every* generator in the presentation at every settled
+state and ask the transition table whether it applied. On the timing family that is 256 generators of
+which about seven — the ones belonging to the state's own sort — can apply, so the arm was paying a
+dense `(generator, state)` matrix scan where the compiled arm walks a compact 200-edge per-class
+adjacency. `ConcreteSearch::new` now precomputes a state-to-sort map and the generator ids grouped by
+source sort, as one flat array with an offset per sort, and the search enumerates only its state's
+own list. The graph, the costs, the Dijkstra and the heap are untouched; only which candidate edges
+are enumerated changes. This is a change to *what the baseline is*, not to how it is measured, and it
+is the change the plan's own rule about strong baselines asks for.
+
+**Predicted, then measured.**
+
+| quantity | predicted | measured |
+|---|---|---|
+| `relaxations` per query | unchanged at `356.7` | `356.7` |
+| answers | identical | identical |
+| candidate edges per query | `16,512` to about `357` | `16,512` to `356.7`, of which `356.7` apply |
+| like-for-like ratio, `state search` against `compiled` | `7x`, band `4x`–`15x` | **`6.8x`** |
+| compiled form still winning | ratio `>= 5x` | met, at `6.8x` |
+| every other table | unmoved | unmoved |
+
+On a quiet host at 65,536 queries: `state search` `123.651 ms` against `compiled` `18.142 ms`. The
+arm's marginal per-query cost falls from `27.81 µs` to `1.788 µs`, a `15.6x` speedup against a
+`46.3x` reduction in candidate edges — the gap between those two being the heap and the bookkeeping,
+which the prediction budgeted at about `1.6 µs` per exhausting query. The retained evidence file was
+captured under load and reads `201.869` against `28.244`, a ratio of `7.15x`: the absolute
+milliseconds move with the host and the ratio does not, which is why the ratio was the quantity
+predeclared.
+
+**What it means.** Roughly **93 percent of the published `220x` was representation** — a dense matrix
+scan against an adjacency list — and not the compression the arm was named for. What survives is
+`6.8x`, which clears the predeclared `5x` bar, so the quotient's smaller search graph is a real
+per-query effect and not nothing: 129 reachable concrete states with `356.7` applicable edges against
+at most 74 classes with 200 plan edges, plus the compiled side's indexed decrease-key heap against the
+standard-library binary heap the concrete arm still uses. A tighter comparison would equalize the heap
+too, and would shrink `6.8x` further; that is the remaining known asymmetry and it is named rather
+than measured.
+
+The direction of the probe's verdict is unchanged and its shape is sharper. Quotienting the search
+graph is worth single digits at query time on this family, not two orders of magnitude. What loses
+remains materializing the flat carrier, and that conclusion never rested on this arm.
 
 ## Predeclarations, entered before any measurement
 
@@ -489,11 +543,12 @@ it. But the shape of the failure is specific and it is not "the decision layer i
 - the query layer is exact, witness-carrying, and replayable, and it is now the substrate probe 6 and
   probe 9 were waiting on;
 - quotienting the search graph is worth 220x against the same search on concrete states;
-  **[corrected]** withdrawn: the arms were not memoized alike (`103x` like-for-like on the repaired
-  code) and what remains is a representation difference — the concrete arm scans all 256 generators at
-  every settled state through a dense transition table while the compiled arm walks a 200-edge
-  per-class adjacency. The defensible statement is the next bullet's, which is a count off the
-  compiled artifact rather than a timing;
+  **[corrected]** withdrawn and replaced. The arms were not memoized alike (`103x` like-for-like),
+  and the rest was a representation difference: the concrete arm scanned all 256 generators at every
+  settled state through a dense transition table while the compiled arm walked a 200-edge per-class
+  adjacency. Given the same representation the concrete arm is only **`6.8x`** behind — so quotienting
+  the search graph is worth single digits at query time here, not two orders of magnitude, and it is
+  worth something rather than nothing. § "The strengthened concrete baseline" carries the measurement;
 - refinement is cheap (1.792 ms) and the compression is large (22x to 84x on states);
 - what loses is **materializing the flat carrier**, because doing so costs exactly what filling a
   complete memo costs.
@@ -523,9 +578,12 @@ routine. `ConcreteSearch` cleared two arrays of 33,024 entries on every query in
 reachable fibre of 129 states, and — the dominant cost — scanned all 256 generators at every settled
 state through the presentation's dense `(generator, state)` table, of which about five apply. The
 per-query clear is now bounded to what the query touched, which removed roughly a sixth of the arm's
-per-query cost; making the arm walk a per-sort generator list would remove most of the rest and is
-**not** applied here, because it changes what the baseline arm is rather than correcting how it is
-measured. Until it is, no timing ratio against this arm should be read as a compression measurement.
+per-query cost. The per-sort generator list — which does change what the baseline arm is rather than
+correcting how it is measured — was predeclared and then applied, and it removed most of the rest;
+§ "The strengthened concrete baseline" has the numbers. One asymmetry remains and is not fixed: the
+concrete arm still uses a standard-library binary heap where the compiled side has the core's indexed
+decrease-key heap, so the surviving `6.8x` is an upper bound on what the graph-size difference alone
+is worth.
 
 Two smaller repairs applied alongside it. `minimax_regret` used to write
 `class_of(...).unwrap_or(u32::MAX)`, so an unresolvable class became a real quotient key that every
