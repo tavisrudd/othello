@@ -4,8 +4,7 @@
 **Brief**: `2026-09-04-c1062-ergodis-causal-brief.md`
 **Plan review**: `2026-09-04-c1062-plan-review.md` (adversarial; this plan is its revision)
 **Code**: `~/src/ergodis-private` (core changes, if any, in `~/src/ergodis`)
-**Status**: probes 0, 1a, 1, 3, 2, 7, 8 and 4 done; probes 5, 6 and 9 remain, with probe 5 the
-highest-value next step.
+**Status**: probes 0, 1a, 1, 3, 2, 7, 8, 4 and 5 done; probes 6 and 9 remain.
 
 This is the routing document for C1062. The task asks whether a finite structural causal model
 (SCM) is another context language for the Ergodis contextual quotient, and what that buys: exact
@@ -83,7 +82,7 @@ probe may quietly claim both.
 | 2     | **Best intervention, and the economics that follow** | L    | compiled beats memoized re-solve on the enumeration query, residual compression above the orbit baseline | **done**: compression passes (4.97x, 2.00x), timing fails structurally; quotient worth 220x over concrete-state search | `2026-09-04-c1062-probe2-best-intervention-and-economics.md` |
 | 3     | Exact actual causality and responsibility           | L    | verifier work under 10% of search; published verdicts matched | **done**: all eight published verdicts reproduced; certificate missed 10% at a 55-candidate scale; not closed | `2026-09-04-c1062-probe3-actual-cause-and-responsibility.md` |
 | 4     | Level-3 counterfactual and the observation precondition | M | exact under `O ⊇ E ∪ {Y}`; demonstrably wrong without it | **done**: two arms exact, two wrong (0/1 and 2/3 against a true 1/3); `O ⊇ E` is sufficient and not necessary, and the exact two-part condition is decidable on the classes | `2026-09-04-c1062-probe4-counterfactual-precondition.md` |
-| 5     | Evolve proposes, separator refutes                  | M    | seals to the exact kernel, and beats the random-counterexample arm on generations | planned | — |
+| 5     | Evolve proposes, separator refutes                  | M    | seals to the exact kernel, and beats the random-counterexample arm on generations | **done**: first half met, second half refuted — the loop seals up to reparameterization, but the separator arm is `0.770x` on the largest sealing family and the kind-balanced diagnostic arm returns to `0.967x` | `2026-09-04-c1062-probe5-evolve-proposes-separator-refutes.md` |
 | 6     | k-ary experiment design and decision equivalence    | M    | measured gap between full and decision-sufficient identification, plus a near-zero gap on the negative family | planned | — |
 | 7     | Compositional lowering along the DAG                | L    | composed quotient equals the flat one on small models | **done**: reduction exact, `4.1e15` contexts to 4,096 in 25.6 µs; the composed quotient is a product partition and equals the flat one on 9 of 13 families, reaching the product ceiling on every coordinate | `2026-09-04-c1062-probe7-novelty-argument.md`, `2026-09-04-c1062-probe7-compositional-lowering.md` |
 | 8     | Unrolled sequential window                          | S    | word closure non-vacuous, measured | **done**: met sharply — cursor vocabulary has 0/4 idempotent, 0/6 commuting, minimal words past the window, and all 34 length-≥2 separators order-essential, against a control with none; economics 1.00x as predeclared | `2026-09-04-c1062-probe8-unrolled-sequential-window.md` |
@@ -527,9 +526,25 @@ compiled classes without re-solving. A caller can therefore be told a query is i
 of receiving a wrong fraction, and the size of a wrong answer carries no information, only its
 existence.
 
-**Probes 5, 6 and 9 remain.** Probe 5 is the highest-value next step: it is the only one that
-exercises the separating intervention as a counterexample oracle, which is the claim the brief rests
-most weight on and which nothing has yet tested.
+**Probe 5 is done and it refutes the claim the brief rested most weight on.** The loop seals: the
+blinded planted abstraction is recovered exactly, up to reparameterization, on every family inside
+the synthesizer's reach, with all 2,849 separating interventions replayed against the model rather
+than the compiler. The separating intervention is not the better counterexample. On the largest
+family that seals reliably the separator arm is `0.770x` against a uniformly sampled violated pair,
+and the reason is that a separating intervention is a *one-sided* oracle: it witnesses over-merging
+only, since a merge is certified by the absence of any separating intervention. The diagnostic arm
+that samples the violation kind uniformly before applying the separator rule lands back on the
+random arm at `0.967x`, so the separator's choice among counterexamples carries no measurable
+teaching signal once the one-sidedness is removed. The one arm that ever wins is the certificate's
+*induced global partition*, at `1.667x` on the smallest family, and it collapses to `1/12` sealed on
+the next family up because the constraint becomes unsatisfiable inside the search's reach; whether
+that is intrinsic or an artifact of equal fitness weighting is a carried re-test. An unexpected
+result sits inside the reach diagnostic: handing the search the entire quotient at once is *harder*
+than growing a six-context sample, so the counterexample loop earns its keep through staging rather
+than through the witness.
+
+**Probes 6 and 9 remain.** Probe 6 must not assume separators are the informative choice; a
+uniformly sampled violated pair is now the baseline to beat.
 
 Carried forward, none blocking. The arity tower is computed at full price per rung rather than
 incrementally through `plan_layered_greedy_schedule`. The intervention-vocabulary quotient is empty
