@@ -771,10 +771,12 @@ for the contextual quotient; its brief is `2026-09-04-c1062-ergodis-causal-brief
 document and probe index are `2026-09-04-c1062-exploration-log.md`, and its task-level verdict is
 `2026-09-04-c1062-closeout-synthesis.md`. Its code lives in `~/src/ergodis-private`. Probes 0–8 are
 done and the closeout recommends dropping the gated demonstration, but the spike continues: each
-probe gets an adversarial review pass before the task closes, probe 5 first and probe 6 after. It
-raised two Ergodis-core defects for C1017: four of five
-certificate policies miscompile the causal lowerings (failing closed), and the exhaustive pair audit
-costs 846x the refinement it certifies.
+probe gets an adversarial review pass before the task closes, probe 5 first and probe 6 after. The two
+Ergodis-core defects it raised are repaired in `2026-09-04-c1062-core-certificate-policy-repair.md`
+(core `6cc9668`): the multiway refiner enumerated a split block's members from the array its own
+dirty-marking reorders, and the deferred-verification path returned a silently wrong quotient, so
+"fails closed" held only for the immediate verifier. One item remains for C1017 — the
+deferred-verification artifact carries no unverified marker.
 C1016 is active as a private Ergodis reduction-synthesis pilot. A hostile review found that its
 unapproved presentation-hash/feature-name overlay did not establish extractor semantics. Public
 proof authority, `Necessary`, and all Hadamard/GS code are therefore removed; core again advertises

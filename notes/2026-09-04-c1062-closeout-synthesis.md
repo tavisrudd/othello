@@ -110,20 +110,44 @@ object. With the observation set equal to the declared outcome, the compiled rel
 combinatorial counterpart of Kekić, Schölkopf and Besserve's targeted causal reduction — exact
 against learned is the distinction, and it is a good one.
 
-## 7. Two obstructions outside this lane, both still open
+## 7. Two obstructions outside this lane, both now repaired
 
-Neither was fixed here and both belong to the Ergodis core rather than to C1062.
+Neither was fixed by the probes, because the spike did not own the core. Both were repaired in a
+follow-up pass recorded in `2026-09-04-c1062-core-certificate-policy-repair.md` (core `6cc9668`,
+private `3167a94`).
 
-1. **The core miscompiles the causal lowerings under four of its five certificate policies.**
-   `QuotientOnly`, `MultiwayTranscript` and `AdaptiveTranscript` all fail where `SplitTranscript`
-   and `ExhaustivePairAudit` succeed and agree. It fails closed, so no wrong answer escapes, and
-   probe 2 carries the six-row table that withdrew probe 3's "the failure tracks the sort count"
-   hypothesis — the threshold tracks neither sorts nor states.
-2. **The exhaustive pair audit costs 846x the refinement it certifies** (1.516 s against 1.792 ms on
-   33,024 states) and reached 6.9 GB at 205,056 states. That, not memory in principle, is what caps
-   the flat carrier in practice.
+1. **The core miscompiled the causal lowerings under four of its five certificate policies**, and it
+   was a real core bug rather than a caller error. The multiway refiner marked a freshly split
+   block's predecessors dirty while enumerating that block's members *from the very array the
+   marking reorders*, so whenever a new block contained its own predecessors — every generator from
+   a sort into itself, which is every re-pin generator a causal lowering emits — some members were
+   visited twice and others never, and the refiner stopped on a partition that was not a congruence.
+   The reduced trigger is one sort of six states with one generator. `MultiwayTranscript` hits it
+   directly; `QuotientOnly` and `AdaptiveTranscript` hit it only when the multiway refiner is
+   admitted at all, which needs at least 4,096 states and at most two observations per sort — and
+   that admission rule, not a sort or state count, is why the threshold "tracked neither sorts nor
+   states".
+   **The "fails closed" claim the probes recorded is half wrong, and the correction matters.**
+   `compile_observational_with_policy` does fail closed, raising `GeneratorMismatch` from its
+   immediate verifier, but `compile_observational_with_deferred_verification` returned the wrong
+   partition silently — 2,914 classes where the truth is 1,468. The repair enumerates from a
+   snapshot of the split block, gated by a six-state regression confirmed to fail on the old code
+   and by a cross-policy agreement test over domain-neutral presentations, including a 4,352-state
+   shape admitted to the multiway path. Every probe-2 family now agrees under all five policies, and
+   200,000 fuzzed presentations show no disagreement.
+2. **The exhaustive pair audit's cost is inherent in its retained form, and was also partly
+   implementation.** The memory is the quadratic record set — 7,880,704 records of 24 bytes at
+   33,024 states — which only the core's existing streaming entry points avoid. On top of that the
+   verifier retained a hash set of every pair and the builder grew its pool by doubling; removing
+   both, with the accepted-certificate set unchanged, makes verification 4.2x faster (`|t| ≥ 8.8`
+   over seven interleaved rounds) and halves the audited compile's peak memory. Of the recorded
+   numbers, the 846x, the 1.516 s, the 1.792 ms and the 33,024 states are confirmed to order of
+   magnitude; the 6.9 GB at 205,056 states is what the record count predicts but was not reproduced
+   directly.
 
-Both are C1017 territory. They are the highest-value items C1062 found for someone else.
+One item remains for C1017 and is recorded in that note: the deferred-verification artifact carries
+no "unverified" marker, and this episode is the demonstration that its failure mode is a silently
+wrong quotient rather than an error.
 
 ## 8. Extra juice and the Tao pass
 

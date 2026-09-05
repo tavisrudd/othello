@@ -578,7 +578,13 @@ non-idempotent vocabulary rather than dropped. Probe 3's amortization arm was ne
 6's outcome table is probe 1's signature construction transposed onto the hypothesis index, and
 whether the compiled machinery buys anything there is unmeasured.
 
-**Two obstructions outside this lane**, both raised and neither fixed here. The ergodis core
+**Two obstructions outside this lane**, both since repaired in
+`2026-09-04-c1062-core-certificate-policy-repair.md` (core `6cc9668`): the miscompile was a real
+core bug in the multiway refiner, which enumerated a freshly split block's members from the array
+its own dirty-marking reorders, and "fails closed" holds only for the immediate verifier — the
+deferred path returned 2,914 classes where the truth is 1,468. The pair audit's cost is inherent in
+its retained form, with a 4.2x verification win and half the peak memory available from removing a
+retained hash set and a doubling pool. The original record follows. The ergodis core
 miscompiles the causal lowerings under four of its five certificate policies — `QuotientOnly`,
 `MultiwayTranscript` and `AdaptiveTranscript` all fail where `SplitTranscript` and
 `ExhaustivePairAudit` succeed and agree; the probe 2 report carries the six-row table that withdraws
