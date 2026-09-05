@@ -6,6 +6,8 @@
 **Code**: `~/src/ergodis-private` (core changes, if any, in `~/src/ergodis`)
 **Status**: probes 0, 1a, 1, 3, 2, 7, 8, 4, 5 and 6 done; probe 9 remains, and the closeout
 recommends dropping it. Task-level verdict: `2026-09-04-c1062-closeout-synthesis.md`.
+Probes 1, 2, 3, 4, 5 and 6 have been adversarially reviewed; see § "Reviews" for what each review
+changed. Probes 0, 1a, 7 and 8 are unreviewed.
 
 This is the routing document for C1062. The task asks whether a finite structural causal model
 (SCM) is another context language for the Ergodis contextual quotient, and what that buys: exact
@@ -92,6 +94,29 @@ probe may quietly claim both.
 Sizes are relative within one fast session: S is under an hour, M is one to three, L is a session.
 Gating: `0 ∥ 1a → 1 → {2, 3, 4, 5, 8} → {6, 7} → 9`. Probe 3 depends on probe 2 only for the
 class-pruning machinery, which probe 3 owns.
+
+## Reviews
+
+Each review is adversarial, read-only, and independent: it re-derives the probe's numbers from the
+definitions in code that shares nothing with the probe's own, and it proposes patches without
+applying them. The reviews are the authority for what a probe's numbers now mean.
+
+| Probe | Review | Correctness | What the review changed |
+|-------|--------|-------------|-------------------------|
+| 1     | `2026-09-05-c1062-probe1-review.md` | survives; the response-function gate is external truth | probe 1a's per-state constant is the interior-sort one, so the envelope is `\|U\| ≲ 10^5` not `10^4`; the predeclared separator-replay gate was silently swapped and never run; relevance pruning has no caller; `class_of` does not bound its context argument |
+| 2     | `2026-09-05-c1062-probe2-review.md` | survives everything attacked, including minimax regret | the `220x` is withdrawn — it times a 297,216-byte array clear, and like-for-like is `102x`; the credit ratio's denominator changed after predeclaration and `restricted-vocabulary` is `1.000x` under the declared metric; the timing loss is larger than reported and misattributed |
+| 3     | `2026-09-05-c1062-probe3-review.md` | survives; all eight verdicts and both cause shapes re-derived | the named regression witness compares one policy against itself; the sort-count diagnosis is the `4,096`-state admission gate; the compactness excuse is refuted — the fraction is flat in model size, and only domain width can move it; four rows marked "Published" are computed, not published |
+| 4     | `2026-09-05-c1062-probe4-review.md` | survives; all four arms re-derived class vector by class vector | the stated precondition omits the outcome-observed check the code makes, and a fifth arm returns `0` against a true `1/3`; `O ⊇ E ∪ {Y}` is refuted by the probe's own third row; the condition is sufficient and conservative, not exact; the two failure modes are asymmetric under representative choice |
+| 5     | `2026-09-04-c1062-probe5-fable-review.md` | ratios reproduce | the separator rule was returning the null intervention; the partition arm's collapse was a fitness artifact; the two headline ratios are statistically unestablished and the partition arm is the probe's only real effect |
+| 6     | `2026-09-05-c1062-probe6-review.md` | structural half survives, including non-transitivity | the "no teaching signal" finding is single-seed and inverts at forty seeds (37–40 of 40 in favour of the separator); the predeclared loss is a property of the strong decision-sufficiency criterion, not of the family |
+
+Three findings are common to every reviewed probe and belong to the task rather than to any one of
+them. **No probe retained an evidence file on disk** except probe 5. **Single-seed ratios inverted
+twice** under repetition, in probes 5 and 6, so no ratio in this task should be read without a
+paired-seed test behind it. And **the independent oracle the plan demanded was never built**: each
+probe's oracle shares `solve_into`, `observation_of` and `enumerate_supports` with the lowering it
+checks. The reviews supply that independence retroactively in scratch Python and the numbers hold,
+which is why the correctness verdicts stand.
 
 **Probe 1a is complete and changes the shape of what follows.** The flat lowering is viable but the
 envelope is narrow: memory is dominated by the generator transition tables at about `4(nd + 1)`
