@@ -732,9 +732,25 @@ that follows the distance, and its first latency run; building the surface famil
 repaired a distance-one defect in `RotatedSurfaceCode::new` that invalidates surface-family numbers
 taken before 2026-09-04, repetition numbers untouched. The PyMatching standing is restated on the
 routed arm: 16 of the 18 published cells ahead at 3.3x to 11.4x with the same two dense cells
-behind in instructions and ahead in cycles, and all 33 real-usage cells ahead. The open successors
-are the weighted circuit-level detector error model, an unmeasured latency tail beyond the
-ninety-ninth percentile, and Tavis's decision on routing the unspecialized graph path.
+behind in instructions and ahead in cycles, and all 33 real-usage cells ahead. Every one of those
+figures is on the phenomenological noise model and C1064 restates them.
+C1064 is closed (`2026-09-04-c1064-weighted-circuit-level-dem.md`). The grid now runs on
+stim-generated weighted circuit-level detector error models, read by
+`ergodis-private/src/detector_error_model.rs`; the phenomenological path is bit-for-bit unchanged
+and reproduces C1063's accuracy table. On that model the PyMatching standing is no longer uniform:
+Tiger is ahead in 26 of 33 operating cells and behind in 7 — the two largest surface graphs from
+`p = 0.001` up, surface `d = 7` and repetition `d = 25` at `p = 0.002` — in cycles as well as
+instructions. Exactness is stronger, with zero weight and zero prediction disagreements on all 33
+cells, because real weights remove the ties. `routing_threshold` is refitted on mean degree for
+weighted graphs (nine below six neighbours per detector, fifteen at or above) and worth up to 4.76x;
+the unit-weight branch is kept verbatim. Under real weights the closed forms answer 6.5% of shots
+instead of 86%, the compiled interior specialization never fires, and the sparse matcher's fixed
+per-shot cost rises tenfold, which is where the losses live. The open successors are the sparse
+matcher's fixed entry cost on weighted graphs, a third code family to test the mean-degree
+crossover rule, the proposed drop of the quantization scale from 32 to 8 (a measured 7 to 8 per cent
+with no accuracy change, which would restate the grid), compile-time splitting of the
+non-observable stabilizer component (halves both decoders, changes no ratio), the latency tail
+beyond the ninety-ninth percentile, and Tavis's decision on routing the unspecialized graph path.
 C1062 is an open-ended Ergodis exploration of structural causal models as another context language
 for the contextual quotient; its brief is `2026-09-04-c1062-ergodis-causal-brief.md`, its routing
 document and probe index are `2026-09-04-c1062-exploration-log.md`, and its task-level verdict is

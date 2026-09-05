@@ -26,3 +26,15 @@ fail on all the others from the root. Nothing is wrong with the recorded hashes;
 cannot be checked in one command from either place. Any evidence manifest that accumulates rows
 across tasks wants one stated convention and a check that runs in the reproducibility instructions,
 which is a general point about our evidence bundles rather than about TigerBlossom.
+
+
+2026-09-04, C1064, while comparing the phenomenological surface graph against the stim model of the
+same code: `local_commit_predecoder::surface_graph` builds one stabilizer sector, not two. At
+distance nine with a nine-round window it has 360 detectors where stim's rotated memory-Z model has
+720, and the difference is exactly the X-type detectors, which stim's circuit produces and the
+builder does not. For a memory experiment that is defensible — the omitted sector cannot flip the
+reported class — but it means every certified-predecoder and margin-radius result on the surface
+family is a statement about a single-sector graph of half the size, with half the detector density
+and none of the second sector's defects competing for the workspace. Nothing measured here is wrong
+because of it; it is a scope fact about the object those probes decode, and it is worth stating
+wherever a surface-family number is carried over to a real device.

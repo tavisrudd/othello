@@ -282,3 +282,80 @@ for a distance-11 surface code, on this noise model, would need parallelism, a f
 a predecoder — this kernel single-threaded does not make the deadline. The maxima remain single
 outliers in the tens of microseconds and are not stable between runs, so the tail beyond the
 ninety-ninth percentile is still not something this harness characterizes.
+
+## Closeout: the quantization scale is free money, and the component split is not the answer
+
+**Quantization is not costing accuracy, and a coarser scale is 7 to 8 per cent cheaper.**
+The brief asked for the knee in logical error against the integer weight scale and there is none
+(`benchmarks/tiger-blossom/2026-09-04-c1064-weight-scale-knee.txt`): at surface `d = 7` and
+repetition `d = 25`, `p = 0.001`, 400,000 shots, the logical error is flat from scale one — where
+the whole weight range is five to eight — to scale 128. Cost is not flat
+(`benchmarks/tiger-blossom/2026-09-04-c1064-weight-scale-cost-ab.log`): against the shipped scale of
+32, scale 8 costs 0.927 at surface `d = 9` and 0.914 at repetition `d = 25`, and scale 1 costs 0.899
+and 0.881, because the largest edge weight sets the bucket-queue modulus.
+
+This is left as a proposal rather than taken, because it is the one closeout change that would move
+every number in this report: the whole grid stands on scale 32 and would have to be restated on
+whatever replaces it. The conclusions are robust to the choice — an 8 per cent reduction moves
+surface `d = 9` at `p = 0.001` from 1.226 to about 1.14 and surface `d = 11` at `p = 0.0005` from
+1.102 to about 1.02, narrowing the losses without flipping them — so the finding above does not
+depend on it. Scale 1 is not the right answer even though it is cheapest: at weights of five to
+eight the ties come back, and with them the prediction disagreements that scale 32 eliminated.
+
+**A stim memory model is two graphs, and only one of them decides anything.** Union-find over the
+weighted surface models shows two components with no shared detector: 192 and 144 at `d = 7`, 400
+and 320 at `d = 9`, 720 and 600 at `d = 11`. Only the larger one carries the observable — X and Z
+errors decouple, and a memory-Z experiment reports a class that only the Z-type component can flip.
+Everything the decoder does on the other component is work whose result is discarded.
+
+`scripts/tiger_blossom_dem_component.py` writes the restricted model so the size of that prize could
+be measured before anyone builds the split into the compiler
+(`benchmarks/tiger-blossom/2026-09-04-c1064-observable-component-split.log`). It is large in
+absolute terms and it changes nothing relative:
+
+| graph            | full | restricted | restricted / full | restricted / PyMatching on the same graph | full / PyMatching |
+|------------------|------|------------|-------------------|-------------------------------------------|-------------------|
+| surface `d = 7`  | 5,259 | 2,309     | 0.439             | 0.456                                     | 0.562             |
+| surface `d = 9`  | 26,049 | 12,474   | 0.479             | 1.179                                     | 1.226             |
+| surface `d = 11` | 67,831 | 33,760   | 0.498             | 1.672                                     | 1.690             |
+
+The kernel does half the work on the restricted graph and the logical error is unchanged, so this is
+a real halving of latency and of the compiled tables — the metric closure is quadratic in detectors,
+so at `d = 11` it shrinks by about seventy per cent. But PyMatching halves too, and the standing
+moves by less than five per cent in every cell. Component splitting is therefore worth doing for
+absolute latency and memory, and it is not the lever that recovers the large-distance losses.
+
+## Mystery ledger
+
+**Why the sparse matcher's cost barely depends on the defect count between three and seven, and how
+much of it is avoidable.** On weighted surface `d = 9` the matcher costs 1,338 ns at three defects,
+1,521 at five and 1,530 at six, while doing 2.8 sparse events at three defects. A cost that flat
+against the work done is a fixed entry cost proportional to the graph, not to the shot. The `ej`
+pass did not settle where it lives, and it is now the highest-value question in the kernel: the
+matcher is the arm that runs on every dense shot, it is where all seven PyMatching losses are, and
+its per-shot floor is what a routing threshold of fifteen exists to avoid paying. The evidence gap
+is a profile of one three-defect decode on a weighted graph, attributing the fixed cost to
+initialization, workspace clearing, or the pair matrix.
+
+**Whether the mean-degree account of the crossover is causal or a coincidence of two families.**
+The refitted rule rests on the observation that every graph with more than six neighbours per
+detector crosses over at fourteen or later and every graph with fewer crosses at eight or ten, on
+two code families. Two families make two points, and a rule that separates them is not yet a rule
+that predicts. The gate is a third family with an intermediate degree — a heavy-hexagon layout, or a
+surface model with the diagonal decomposition edges thinned — where the rule can be stated in
+advance and then measured.
+
+**Why the twenty-four-detector surface model has no crossover below sixteen.** Every other graph
+crosses somewhere the sweep can see. This one, with mean degree 6.5, never lets the matcher become
+the cheapest arm at any count that fills a bucket, even at five per cent error. The likeliest
+account is that at twenty-four detectors the matcher's fixed cost is a large fraction of any decode,
+so the decomposition wins until the shot is most of the graph, but that is inference, not
+measurement, and it is the one graph the fitted rule covers by a bound rather than by a value. It
+does not matter operationally: a sixteen-defect shot on twenty-four detectors does not occur.
+
+**Settled by the closeout, and recorded so it is not re-asked.** Whether the weighted comparison was
+unfair because the kernel decodes both stabilizer components while a real decoder would split them:
+it was not. Splitting halves the kernel's work and PyMatching's alike, and moves every ratio by less
+than five per cent. And whether the integer quantization was costing accuracy or flattering the
+comparison: neither. Logical error is flat across seven octaves of scale, and the shipped scale is
+the most expensive of them by 8 per cent, which understates rather than overstates the kernel.
