@@ -4,7 +4,8 @@
 **Brief**: `2026-09-04-c1062-ergodis-causal-brief.md`
 **Plan review**: `2026-09-04-c1062-plan-review.md` (adversarial; this plan is its revision)
 **Code**: `~/src/ergodis-private` (core changes, if any, in `~/src/ergodis`)
-**Status**: probes 0, 1a, 1, 3, 2, 7, 8, 4, 5 and 6 done; probe 9 remains.
+**Status**: probes 0, 1a, 1, 3, 2, 7, 8, 4, 5 and 6 done; probe 9 remains, and the closeout
+recommends dropping it. Task-level verdict: `2026-09-04-c1062-closeout-synthesis.md`.
 
 This is the routing document for C1062. The task asks whether a finite structural causal model
 (SCM) is another context language for the Ergodis contextual quotient, and what that buys: exact
@@ -559,7 +560,16 @@ experiments that actually split the survivors, which is probe 5's verdict measur
 greedy matched the exact plan on every family, so nothing here shows the exact planner is worth its
 cost. Blame is delivered as the prior-weighted degree of responsibility, exact and predeclared.
 
-**Probe 9 remains.**
+**Probe 9 remains, and the closeout recommends dropping it.** Every component it would chain is
+built and independently replayed, and the plan already says the demonstration must never count as
+evidence, so it adds a session of work and no evidence. The task-level verdict across probes 0–8 is
+`2026-09-04-c1062-closeout-synthesis.md`: the lowering is exact and mostly not worth compiling —
+three independent economics measurements tie at `1.00x` — the thesis has content only under a
+sequential non-idempotent vocabulary, and what the compiler actually buys is the certificate, the
+decidable expressibility test, and completeness over words the direct route never enumerated. The
+two items worth an allocated successor are the compositional counterfactual crossover (probe 7's
+reduction under probe 4's query) and whether the certificate can be emitted without compiling the
+carrier at all.
 
 Carried forward, none blocking. The arity tower is computed at full price per rung rather than
 incrementally through `plan_layered_greedy_schedule`. The intervention-vocabulary quotient is empty
