@@ -751,6 +751,21 @@ crossover rule, the proposed drop of the quantization scale from 32 to 8 (a meas
 with no accuracy change, which would restate the grid), compile-time splitting of the
 non-observable stabilizer component (halves both decoders, changes no ratio), the latency tail
 beyond the ninety-ninth percentile, and Tavis's decision on routing the unspecialized graph path.
+C1065 is closed (`2026-09-05-c1065-sparse-matcher-weighted-fixed-cost.md`). The matcher's fixed
+per-shot cost was workspace clearing and a bucket walk, both sized by the compiled graph and the
+largest edge weight, not by the shot; an occupancy bitmap over the bucket queue and undo lists with
+a priced crossover remove them. The matcher is 13 to 47 per cent cheaper at every operating rate and
+a three-defect decode on surface `d = 9` falls from 1,338 ns to 379 ns. `routing_threshold` refits
+left with it — seven below six neighbours per detector, fourteen at or above — which is worth a
+further 5 to 17 per cent on the repetition family. Against PyMatching the standing improves without
+reversing: 27 of 33 operating cells ahead in instructions and 30 in cycles, with surface `d = 11` at
+`p = 0.0005` flipping to a win; exactness holds at zero weight and zero prediction disagreements on
+all 33. C1064's quantization-scale proposal is closed by measurement — the 7 to 8 per cent was the
+bucket modulus and is now about 0.4 — while dense shots and every unit-weight graph pay 1 to 4 per
+cent for machinery they do not need. The open successors are a two-path dispatch on the compiled
+largest edge weight if the phenomenological grid is worth protecting, replacing the bucket queue
+with a small heap (which would also retire the horizon refusal path), and C1064's third code family
+for the mean-degree rule.
 C1062 is an open-ended Ergodis exploration of structural causal models as another context language
 for the contextual quotient; its brief is `2026-09-04-c1062-ergodis-causal-brief.md`, its routing
 document and probe index are `2026-09-04-c1062-exploration-log.md`, and its task-level verdict is
