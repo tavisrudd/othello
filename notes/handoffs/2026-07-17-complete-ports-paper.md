@@ -762,10 +762,19 @@ reversing: 27 of 33 operating cells ahead in instructions and 30 in cycles, with
 `p = 0.0005` flipping to a win; exactness holds at zero weight and zero prediction disagreements on
 all 33. C1064's quantization-scale proposal is closed by measurement — the 7 to 8 per cent was the
 bucket modulus and is now about 0.4 — while dense shots and every unit-weight graph pay 1 to 4 per
-cent for machinery they do not need. The open successors are a two-path dispatch on the compiled
-largest edge weight if the phenomenological grid is worth protecting, replacing the bucket queue
-with a small heap (which would also retire the horizon refusal path), and C1064's third code family
-for the mean-degree rule.
+cent for machinery they do not need.
+C1066 is closed (`2026-09-05-c1066-sparse-matcher-queue-discipline.md`). The heap is rejected on
+measurement — it loses on both noise models because the queue takes about eight pushes per pop —
+so the bucket queue and its horizon refusal path stay. The queue's clearing and scanning
+discipline is now compiled from the graph's largest edge weight, so unit-weight graphs carry no
+occupancy bitmap; that returns about half of what C1065 cost the published phenomenological grid
+and costs the weighted grid at most 0.4 per cent, which is a decision still open to Tavis.
+C1067 is closed (`2026-09-05-c1067-tiger-matcher-performance-contract-audit.md`). The matcher holds
+the performance contract except that it shipped its per-node traffic counters, worth 1.4 to 2.0
+per cent; they now sit behind the `tiger-traffic` feature, so census and traffic runs need
+`--features tiger-traffic` and a build without it prints `counters off`. The open successors are
+C1064's third code family for the mean-degree rule and the six remaining PyMatching losses, whose
+lever is now the touch loop and the certificate's closure reads.
 C1062 is an open-ended Ergodis exploration of structural causal models as another context language
 for the contextual quotient; its brief is `2026-09-04-c1062-ergodis-causal-brief.md`, its routing
 document and probe index are `2026-09-04-c1062-exploration-log.md`, and its task-level verdict is
