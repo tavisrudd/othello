@@ -6,8 +6,8 @@
 **Code**: `~/src/ergodis-private` (core changes, if any, in `~/src/ergodis`)
 **Status**: probes 0, 1a, 1, 3, 2, 7, 8, 4, 5 and 6 done; probe 9 remains, and the closeout
 recommends dropping it. Task-level verdict: `2026-09-04-c1062-closeout-synthesis.md`.
-Probes 1a, 1, 2, 3, 4, 5, 6 and 8 have been adversarially reviewed; see § "Reviews" for what each
-review changed. Probe 7's review is in flight and probe 0 is unreviewed.
+Every probe except 0 has been adversarially reviewed; see § "Reviews" for what each review changed.
+The closeout synthesis predates the reviews and has not been reconciled with them.
 
 This is the routing document for C1062. The task asks whether a finite structural causal model
 (SCM) is another context language for the Ergodis contextual quotient, and what that buys: exact
@@ -109,6 +109,7 @@ applying them. The reviews are the authority for what a probe's numbers now mean
 | 3     | `2026-09-05-c1062-probe3-review.md` | survives; all eight verdicts and both cause shapes re-derived | the named regression witness compares one policy against itself; the sort-count diagnosis is the `4,096`-state admission gate; the compactness excuse is refuted — the fraction is flat in model size, and only domain width can move it; four rows marked "Published" are computed, not published |
 | 4     | `2026-09-05-c1062-probe4-review.md` | survives; all four arms re-derived class vector by class vector | the stated precondition omits the outcome-observed check the code makes, and a fifth arm returns `0` against a true `1/3`; `O ⊇ E ∪ {Y}` is refuted by the probe's own third row; the condition is sufficient and conservative, not exact; the two failure modes are asymmetric under representative choice |
 | 5     | `2026-09-04-c1062-probe5-fable-review.md` | ratios reproduce | the separator rule was returning the null intervention; the partition arm's collapse was a fitness artifact; the two headline ratios are statistically unestablished and the partition arm is the probe's only real effect |
+| 7     | `2026-09-05-c1062-probe7-review.md` | theorem sound; all thirteen fixtures re-derived; the coarsest-product-refinement claim verified as partition equality where the tool compares block counts | the ledger's open item closes against the probe — a four-context fixture with correlated parents gives composed 4 against a ceiling of 2, so the `ensure!`/`assert_eq!` demanding ceiling equality assert something false in general and will hard-fail on it; `wide-conjunction-arity-1` is an arity-rung mismatch, not a non-product shape; the `1.000e12x` is a fixture dial and the scale check tests plumbing, not the theorem; the three novelty differences hold against the paper itself |
 | 8     | `2026-09-05-c1062-probe8-review.md` | every number reproduces from the binary and from an independent implementation; the control is measured, not assumed | the completeness-over-unbounded-words claim is false against probe 8's own oracle, which closes a finite edit-state space and already answers every word — 20,000 sampled length-twenty words per vocabulary land inside it; only 7 of the 34 separators are order-essential over *all* minimal separators; the richer-vocabulary-is-finer statement is contradicted by its own table; the `1.00x` is a ratio of two counts with no solve in it |
 | 6     | `2026-09-05-c1062-probe6-review.md` | structural half survives, including non-transitivity | the "no teaching signal" finding is single-seed and inverts at forty seeds (37–40 of 40 in favour of the separator); the predeclared loss is a property of the strong decision-sufficiency criterion, not of the family |
 
