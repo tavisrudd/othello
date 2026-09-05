@@ -4364,8 +4364,17 @@
       "last": 1064,
       "purpose": "weighted circuit-level detector error model for the TigerBlossom grid",
       "sequence": 485
+    },
+    {
+      "count": 1,
+      "first": 1065,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1065,
+      "purpose": "attack the sparse matcher's fixed per-shot cost on weighted circuit-level graphs",
+      "sequence": 486
     }
   ],
-  "next_id": 1065,
+  "next_id": 1066,
   "schema": "codex-task-id-allocations-v1"
 }
