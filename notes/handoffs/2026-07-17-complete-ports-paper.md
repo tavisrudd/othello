@@ -953,9 +953,22 @@ tabu step whose exact per-swap delta comes from incrementally maintained
 per-group toggle effects, so all 75,616 candidate swaps at carrier 523 are scored
 exactly on every step. At equal wall clock it is at or below the walk's residual
 on every rung of the carrier ladder, it closes carrier 97 — which the walk never
-closes — and it reaches 184 at 523 against the walk's 208. The next lever is the
-transfer of the same delta algebra to the bordered `q29` and `g41` sectors, whose
-campaigns are the ones actually holding up the order-2092 programme.
+closes — and it reaches 184 at 523 against the walk's 208.
+
+That delta algebra is now transferred to both bordered sectors
+(`2026-09-04-c1016-tabu-transfer-bordered-sectors.md`), and the two split. On the
+order-six `q29` margin shell it closes the shell: the stopped 288-billion-mutation
+campaign held a floor of 96 for four hours, while at equal wall clock the tabu
+step reaches 32 — the smallest nonzero score the autocorrelation sum law permits —
+in every round, and with a longer epoch it hits 0 twelve times, giving twelve
+distinct exact `q29` shell states with distinct row-energy profiles. The campaign's
+open question is answered: the floor of 96 was a trap in the move geometry, not an
+obstruction. An independent Python oracle replays all 168 banked worker states. On
+the `g=41` fine-orbit sector the same algebra is a wash: at matched wall clock both
+engines reach residual 8, the value the banked evolution already had, with the tabu
+step scoring 25.1x as many exchanges exactly, so that sector is not
+neighbourhood-limited. The next lever is phase two: drive the `q58`/`q87`/`q174`
+search from the banked shell corpus rather than from a random lift.
 
 C1035 is closed: `ergodis-private` is a Cargo workspace whose root package is library-only; the
 six named tools live in `tasks/tools` (`ergodis-tools`), gem-mining drivers in `tasks/gem-hunt`,
