@@ -4,8 +4,7 @@
 **Brief**: `2026-09-04-c1062-ergodis-causal-brief.md`
 **Plan review**: `2026-09-04-c1062-plan-review.md` (adversarial; this plan is its revision)
 **Code**: `~/src/ergodis-private` (core changes, if any, in `~/src/ergodis`)
-**Status**: probes 0, 1a, 1, 3 and 2 done; probe 7's novelty argument is written
-(`2026-09-04-c1062-probe7-novelty-argument.md`) and probe 7 is unblocked.
+**Status**: probes 0, 1a, 1, 3, 2 and 7 done; probe 8 next.
 
 This is the routing document for C1062. The task asks whether a finite structural causal model
 (SCM) is another context language for the Ergodis contextual quotient, and what that buys: exact
@@ -85,7 +84,7 @@ probe may quietly claim both.
 | 4     | Level-3 counterfactual and the observation precondition | M | exact under `O ⊇ E ∪ {Y}`; demonstrably wrong without it | planned | — |
 | 5     | Evolve proposes, separator refutes                  | M    | seals to the exact kernel, and beats the random-counterexample arm on generations | planned | — |
 | 6     | k-ary experiment design and decision equivalence    | M    | measured gap between full and decision-sufficient identification, plus a near-zero gap on the negative family | planned | — |
-| 7     | Compositional lowering along the DAG                | L    | composed quotient equals the flat one on small models | **unblocked**: novelty argument written; variable merging declined, factored exogenous carrier kept | `2026-09-04-c1062-probe7-novelty-argument.md` |
+| 7     | Compositional lowering along the DAG                | L    | composed quotient equals the flat one on small models | **done**: reduction exact, `4.1e15` contexts to 4,096 in 25.6 µs; the composed quotient is a product partition and equals the flat one on 9 of 13 families, reaching the product ceiling on every coordinate | `2026-09-04-c1062-probe7-novelty-argument.md`, `2026-09-04-c1062-probe7-compositional-lowering.md` |
 | 8     | Unrolled sequential window                          | S    | word closure non-vacuous, measured | planned | — |
 | 9     | End-to-end: incident to minimal repair              | L    | demo only, never counted as evidence | gated on 2 and 3 | — |
 
@@ -484,14 +483,24 @@ than invariant, so the credit ratio is taken against the join of the two partiti
 "the policy failure tracks the sort count" hypothesis is withdrawn: `MultiwayTranscript` and
 `AdaptiveTranscript` fail as well, and the threshold tracks neither sorts nor states.
 
-**Probe 7 is next and is now doubly motivated.** Probe 1a promoted it on carrier grounds; probe 2
-promotes it independently on decision-layer grounds, because the compiled query wins exactly where
-the context space cannot be memoized and the carrier is never materialized. It stays blocked until
-its novelty argument against the variable-partition coarsening line is written down, and that
-argument is now the highest-value unblocked piece of writing in the task. Probe 8 is the second
-surviving direction and now has a measured reason to exist: with hard interventions the intervention
-set is the state set, so one-shot enumeration sees everything a search could, and only a
-non-idempotent vocabulary makes the shortest path earn its keep.
+**Probe 7 is done and it delivers the scaling half of the task.** The reduction of the exogenous
+alphabet is exact for every observation set, intervenable set and arity — theorem plus an exhaustive
+small-model gate plus a 200,000-sample randomized check at scale — and on twelve thresholded sources
+over domain 20 it takes `4.096e15` contexts to 4,096 in 25.6 microseconds, after which the ordinary
+flat lowering compiles the reduced model at 102,400 states into 300 classes. The composed *quotient*
+is a product partition of the exogenous coordinates and the flat quotient need not be one, so the two
+agree on 9 of 13 predeclared families and the four predicted losses are exactly the non-product
+shapes: context-dependent masking, parity across two exogenous parents of one mechanism, a count that
+pinning cannot decompose, and a binding arity bound. On every coordinate of every family the composed
+partition reaches the coarsest product refinement, so the whole residual gap is the price of
+factoring rather than slack in the passes. Two carried items: the arity dial has no compositional
+form (the passes compute the full-arity rung), and the `u64` context index, not memory, is now what
+caps the scale claim.
+
+**Probe 8 is next.** It is the other surviving direction from probe 2 and has a measured reason to
+exist: with hard interventions the intervention set is the state set, so one-shot enumeration sees
+everything a search could, and only a non-idempotent vocabulary makes the shortest path earn its
+keep.
 
 Carried forward, none blocking. The arity tower is computed at full price per rung rather than
 incrementally through `plan_layered_greedy_schedule`. The intervention-vocabulary quotient is empty
