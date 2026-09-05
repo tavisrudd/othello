@@ -7,8 +7,17 @@
 the actual-cause layer that feeds this one a minimal contingency.
 **Code**: `ergodis-private` `17906d2` (library) and `4b2276a` (report tool)
 **Replay**: `cargo test --release -p ergodis-private --lib best_intervention::` for the correctness
-gates; `ergodis-tools best-intervention-report --rounds 5 --workloads 256,1024,4096,16384,65536`
-for every table below. `rustc 1.93.1`, release profile, `choom -n 1000`, single thread.
+gates; `cd ~/src/ergodis-private && cargo run --release --package ergodis-tools --
+best-intervention-report --rounds 5 --workloads 256,1024,4096,16384,65536` for every table below.
+`rustc 1.93.1`, release profile, `choom -n 1000`, single thread.
+**Evidence**: `ergodis-private` `evidence/2026-09-05-best-intervention-repaired.txt`, the output of
+that command after the review repairs. No evidence was retained when this report was written, which
+matters most for the timing tables, since those are the one kind of number a later re-run cannot
+recover. That capture was taken on a contended host (load average around 6 of 24 cores), so its
+absolute milliseconds run above the ones below; every argument here is about ratios between arms
+measured in the same process.
+**Reviewed**: `2026-09-05-c1062-probe2-review.md`. Corrections from that review are marked
+**[corrected]** below and the original text is kept wherever it explains how a number was reached.
 
 **Verdict.** The decision layer is built and it is exact: the compiled arm agrees with the
 enumeration oracle on every query over every context in six families, and every witness it returns
@@ -25,6 +34,33 @@ only **6.3x** — and it loses only because on a flat carrier the entire context
 to memoize. That is a statement about the flat lowering, not about the decision layer. The route
 where the compiled query wins is the one where the carrier is never materialized, which is probe 7.
 
+**[corrected]**, and the `220x` is **withdrawn**. Two things are wrong with it.
+
+- **The arms were not memoized alike.** `12.420 ms` is the compiled arm *with* a class memo and
+  `2,733.393 ms` is the concrete arm with no memo of any kind. The like-for-like row was already in
+  the same table — `compiled` without a memo against `state search` without one — and it reads
+  `102x`; on the repaired code and the retained evidence it is unchanged at `103x`
+  (`1,829.704` against `17.803` at 65,536 queries).
+- **What remains is a representation difference, not a compression measurement.** Hard interventions
+  are idempotent and commute on distinct variables, so the reachable set from `(u, {})` is the single
+  fibre `{(u, I)}` — 129 states of the 33,024 in the carrier. The concrete arm nonetheless touches the
+  whole carrier on every query: it cleared two arrays of 33,024 entries per query, and, more
+  expensively, it scans **every one of the 256 generators at every settled state** because it walks
+  the presentation's dense `(generator, state)` transition table rather than an adjacency list. The
+  compiled arm walks a 200-edge per-class adjacency that fits in cache. The report tool now prints
+  both work counts (`356.7` edge relaxations per query against a 33,024-state carrier and a
+  256-generator alphabet), so the ratio can be read against the work rather than taken on its own.
+
+The review predicted that bounding the per-query clear would collapse the concrete arm's cost, and it
+did not: the clear was worth roughly a sixth of the per-query time and the generator scan is the rest.
+That prediction is corrected here rather than quietly dropped. The defensible statement of what
+quotienting buys the query is the one this report already makes in § "What a query actually walks" —
+the graph is `22x` to `84x` smaller and the weighted plan collapses parallel edges by a further `1.07x`
+to `1.46x` — and those numbers are counts off the compiled artifact, not timings.
+
+**[corrected]** the `6.3x` is `5.0x` on the repaired code and the current core (`8.142` against
+`1.635` at 65,536 queries). The direction and the argument are unchanged.
+
 ## Predeclarations, entered before any measurement
 
 Committed before the measuring code was written (`a6bd72e6a`, extended in the next commit to cover
@@ -36,6 +72,18 @@ two families added while building, still before any run).
    break-even query count reached within the number of distinct contexts.
 2. **Compression.** Residual compression above the orbit baseline must exceed **1.5x** on at least
    one family whose verified automorphism group is trivial or near-trivial.
+
+**[corrected]** This paragraph was edited in the same commit that carried the results, and the edit is
+not marked. As committed before any code (`a6bd72e6a`, extended at `b2bd15820`, both ahead of the
+report tool at `4b2276a`) it read: "Residual compression above the orbit baseline, **`orbits / classes`**,
+must exceed 1.5x on at least one family whose **declared** automorphism group is **trivial**.
+Relevance pruning and symmetry are free; only the residue counts." The results commit deleted the
+metric and widened "declared … trivial" to "verified … trivial or near-trivial" — the second change
+being exactly what `weighted-threshold-8` needed once the run found two of its 28 transpositions
+verifying, against a shape reading that had said it admits no symmetry. The predeclaration *order* is
+good and better than probes 6 and 7 manage; the predeclaration *text* was amended after the fact
+without a marker. Read as it stood before the run, the threshold still passes on
+`weighted-threshold-8`, which was declared trivial and clears 1.5x under either metric.
 
 ### Predicted verdicts per family
 
@@ -103,14 +151,38 @@ incomparable axes, so a system that has one still wants the other.
 
 ## Compression, against the three baselines
 
-| family | contexts | pruned | verified/offered | orbits | classes | joint | residual |
-|---|---|---|---|---|---|---|---|
-| `reliability-3of8`      | 256 | 256 | 28/28 |   9 | 164 |  6 | 1.500 |
-| `weighted-threshold-8`  | 256 | 256 |  2/28 | 144 |  44 | 29 | 4.966 |
-| `distractor`            |  32 |   8 |  4/10 |   4 |   8 |  4 | 1.000 |
-| `identity`              |  18 |  18 |   0/0 |  18 |  18 | 18 | 1.000 |
-| `wide-conjunction`      |  32 |  32 | 10/10 |   6 |  17 |  4 | 1.500 |
-| `restricted-vocabulary` | 256 | 256 | 13/28 |  24 |  24 | 12 | 2.000 |
+| family | contexts | pruned | verified/offered | orbits | classes | joint | residual | vs classes |
+|---|---|---|---|---|---|---|---|---|
+| `reliability-3of8`      | 256 | 256 | 28/28 |   9 | 164 |  6 | 1.500 | 0.055 |
+| `weighted-threshold-8`  | 256 | 256 |  2/28 | 144 |  44 | 29 | 4.966 | 3.273 |
+| `distractor`            |  32 |   8 |  4/10 |   4 |   8 |  4 | 1.000 | 0.500 |
+| `identity`              |  18 |  18 |   0/0 |  18 |  18 | 18 | 1.000 | 1.000 |
+| `wide-conjunction`      |  32 |  32 | 10/10 |   6 |  17 |  4 | 1.500 | 0.353 |
+| `restricted-vocabulary` | 256 | 256 | 13/28 |  24 |  24 | 12 | 2.000 | 1.000 |
+
+**[corrected]** The `vs classes` column is new and is `orbits / classes`, the residue as the plan
+predeclared it. Nothing else in the table changed. The two metrics disagree about which families clear
+the bar, and the disagreement is not bookkeeping:
+
+- Under the published `orbits / joint`, two families clear `1.5x` — `weighted-threshold-8` at `4.966`
+  and `restricted-vocabulary` at `2.000`.
+- Under the predeclared `orbits / classes`, **one** does. `restricted-vocabulary`, a predicted *win*,
+  sits at exactly `1.000x`: the compiled quotient produces exactly as many classes as symmetry
+  produces orbits. Its `2.000` arises because the two partitions differ while having the same block
+  count, so their join halves it — a genuinely interesting fact, and not the quantity the prediction
+  was made against.
+
+The correction that motivated the swap is right and is not in dispute: `verify_automorphism` requires
+`O(sigma u, sigma I) = O(u, I)` over every context and every admissible pinned assignment, which makes
+a verified symmetry permute the classes rather than merge them, so `orbits / classes` can and does sit
+below one. What was missed is that the per-family predictions were made under one metric and scored
+under another. Both are now printed so a reader can do either scoring.
+
+One qualification on the orbit baseline itself, in the direction that flatters this probe:
+`transpositions_of` offers only component transpositions, so a symmetry not generated by verifying
+transpositions is never found, and every such miss leaves the orbit count higher and the residual
+larger. On `reliability-3of8` all 28 verify and the group is the full symmetric one; on
+`weighted-threshold-8`, where two do, it is unchecked.
 
 **Every predeclared verdict landed.** The two predicted losses lost for exactly the predicted reason:
 `distractor` is entirely explained by relevance pruning (32 contexts down to 8, residual 1.000), and
@@ -119,6 +191,28 @@ predicted wins won, both above the 1.5x threshold: `weighted-threshold-8` at 4.9
 `restricted-vocabulary` at 2.000x. `wide-conjunction` came in at exactly 1.500x, matching its
 "partial" call. `reliability-3of8` lost as predicted but by a different mechanism than predicted,
 which is the correction above.
+
+**[corrected]** `reliability-3of8` is scored as a landed prediction on a number that contradicts it,
+and `restricted-vocabulary` is counted as a predicted win under a metric adopted after the fact
+(see the correction to the table above; under the predeclared `orbits / classes` it is `1.000x`). The
+entered verdict for `reliability-3of8` was "**loss**: classes are the failed-count strata, so orbits
+equal classes and residual compression is exactly 1.0". Measured: 9 orbits against 164 classes — not
+equal, off by a factor of eighteen — and a residual of `1.500`, not `1.0`, which is the same value
+scored as "partial" for `wide-conjunction` one sentence earlier. Only the one-word label survived, and
+the plan's own rule covers this case: a predicted loss that does not lose the predicted way "is a
+finding about the shape classifier, not a success for this probe". The finding it produced deserves
+stating in those terms: C5 was read correctly for this family — all 28 transpositions verify — and the
+inference drawn from it, that orbits therefore equal classes, is what failed, because a labelled edit
+vocabulary makes the quotient equivariant rather than invariant. That is a correction to how the
+classifier's C5 row should be read when the vocabulary is labelled.
+
+The other number worth keeping beside `1.500` is `0.055`. On this family the compiled quotient folds
+256 contexts to 164 classes, a `1.56x` fold, while symmetry alone folds them to 9 orbits, a `28x`
+fold: the quotient is eighteen times *worse* than the free baseline. `orbits / joint = 1.500` says
+something true and much narrower — the classes bridge four of the nine failed-count orbits, because
+with arity two a context with five or more failures can never be repaired and all of them look alike.
+The plan's warning was that reporting the reliability family as a win would be self-deception; the
+classes turn out not to be the orbits, and both numbers belong in the record.
 
 Two details worth keeping. `weighted-threshold-8` has **2 of its 28 offered transpositions verified**:
 distinct Fibonacci weights do not make a family asymmetric, because a threshold can be blind to a
@@ -177,6 +271,30 @@ So on this carrier a compile cannot come out ahead of exhaustive memoization, fo
 workload length. This is not a tuning result and no faster refinement changes it. It is the decision
 layer's version of what probe 1a already established about the carrier.
 
+**[corrected]**, twice, and both corrections run *against* the compile, so the conclusion is
+understated rather than overstated.
+
+- **The `1.00x` is an identity, not a measurement.** The report tool computes it as
+  `states / (contexts * interventions)`, and the carrier is defined as one state per
+  `(context, admissible intervention)` pair, so `33,024 = 256 * 129` holds by construction. As a
+  structural argument that is exactly right and is what this section claims; printed under the heading
+  "Measured ratio" beside a timing threshold, it reads as an empirical tie and is not one.
+- **The memoized arm does half the solves the identity charges it with.** `best_intervention_enumerated`
+  prunes by cost before solving — `if best.is_some_and(|(incumbent, _)| cost >= incumbent) { continue }`
+  — and supports are enumerated shortest-first, so once a cost-`c` answer is found every candidate of
+  cost `>= c` is skipped unsolved. On the timing family that is a clean factor of two: an independent
+  re-derivation of `deep_pipeline(8, 24, 8)` gives 128 of 256 contexts answering at cost zero after one
+  solve and the other 128 unreachable after all 129, for **16,640** solves against the carrier's
+  33,024. The arm's own timing corroborates the count — `1.7 ms` at 65,536 queries is 16,640 solves of
+  a depth-25 chain at about 90 ns each, and neither that nor the unmemoized column fits 33,024.
+
+The consequence for the reading below is that "the entire remaining gap is the lowering constant … a
+factor of about six for building transition tables on top of **the same solves**" misattributes about
+half of the gap: the solves are not the same, the memo does half as many, and the per-solve costs then
+differ by two to three times rather than six. The direction of the verdict is unaffected — the compile
+is charged more solves than the strongest baseline actually performs, so "a compile cannot come out
+ahead of exhaustive memoization on this carrier" holds a fortiori — and the word to drop is "exactly".
+
 ## Timing
 
 The compiled arm is given its cheapest correct configuration. The policy table below shows the split
@@ -224,6 +342,39 @@ Four things to read out of that table.
    11.5 to 26.9 ms as the workload grows, because it re-runs Dijkstra per query; with it, 74 classes
    cover 256 contexts and it stays flat.
 
+**[corrected]**, four items across this reading and the table above it.
+
+- Point 3's `220x` is withdrawn; see the verdict correction. Point 4 describes the compiled arm's own
+  drift correctly and is not a reason to withhold a memo from the arm it is compared against: a
+  per-context memo over 256 contexts would flatten the concrete arm the same way, and none was
+  offered.
+- Point 1's attribution is corrected in the structural-bound section above: about half the gap is the
+  memo doing half as many solves, not table-building.
+- **The workload has no nontrivial answers.** On `deep-pipeline` at the target these arms ask for,
+  128 of the 256 contexts answer at cost zero and the other 128 are unreachable; the report tool now
+  prints the split (`2067 at cost zero, 2029 unreachable, 0 with a nonempty intervention` over a
+  4,096-query workload). No arm ever runs the query the probe is about, which also makes the
+  "arms return identical costs" check nearly vacuous — the answer vector is `Some(0)` and `None` and
+  nothing else. The real correctness gate is the six-family table in § "Correctness", which does
+  exercise nonzero costs across every attainable observation. This does not weaken the timing verdict:
+  a workload of trivial queries is the *most* favourable one for the compiled arm, since a harder query
+  would cost it a real Dijkstra per query while the memo would still be one hash lookup. It does mean
+  the table measures fixed costs and per-query overheads rather than query cost.
+- **"Agreeing with the audited compile class for class" was checked as class-count equality.** The
+  tool compared `class_outputs().len()` on both sides; two different partitions can have the same
+  block count, which is what the `restricted-vocabulary` row of the compression table is about. It now
+  compares `state_classes()` and `class_outputs()` exactly, and still prints `true`. The claim was
+  correct — the core's cross-policy gate establishes it — it just was not what this tool checked.
+
+**[corrected]** every millisecond in the table above predates the core certificate-policy repair
+recorded in `2026-09-04-c1062-core-certificate-policy-repair.md`, and three figures no longer
+reproduce. On the repaired core and the repaired arm, at the same configuration:
+`lower 6.387 ms` and `refine 1.186 ms` against the published `9.567` and `1.792`; the exhaustive pair
+audit `379.342 ms` against `1,516.079`, so the certificate costs about `320x` the refinement it
+certifies rather than `846x`; and peak RSS `258,484 KiB` against `500,312`, the halving that repair
+predicted. The workload columns move with the host and are quoted in the evidence file rather than
+restated here.
+
 ## The declared vocabulary, quotiented by its action on Q
 
 | family | declared edits | distinct actions on Q | collapse |
@@ -265,6 +416,12 @@ Three findings, all core rather than lane.
 - **The threshold is neither sorts nor states.** `restricted-vocabulary` has only 7 sorts and fails
   three policies, while `distractor` has 7 sorts and passes all five; `wide-conjunction` has 16 sorts
   and only multiway fails. Probe 3's stated sort-count hypothesis should be withdrawn.
+  **[corrected]** — half right, and now placed. The core repair note traced it: `multiway_admission`
+  gates on **at least 4,096 states** and at most two observations per sort, and the refiner behind
+  that gate had a bug only some shapes trigger. So it is a state threshold *plus* a shape condition,
+  not "neither" — `restricted-vocabulary` at 4,864 states is admitted while `wide-conjunction` at
+  1,632 is not, which is why only the explicit multiway policy fails there. Probe 3's sort-count
+  hypothesis is still withdrawn.
 - **`SplitTranscript` succeeded everywhere and agreed with the exhaustive pair audit class for class
   in every row.** It is the policy to use, and probe 2's timing arm does.
 
@@ -272,6 +429,19 @@ The failure is a fail-closed one: the verifier rejects a partition that is not a
 wrong answer escapes. The lowering is not at fault — its range check passes, two independent policies
 agree, and the audited compile agrees with an independent signature oracle. **Raising, not fixing**:
 `~/src/ergodis` is C1017's active surface.
+
+**[corrected]** the table above is a record of a bug that has since been repaired, and it no longer
+reproduces: on the current core all five policies agree on all six families. The diagnosis and the
+repair are in `2026-09-04-c1062-core-certificate-policy-repair.md`, which also records that
+"fails closed" is true of `compile_observational_with_policy` — the entry point this table uses — and
+false of `compile_observational_with_deferred_verification`, which handed back a wrong partition. The
+call to raise rather than fix was right.
+
+Worth adding, because it is why none of this probe's numbers were ever at risk: every measured table
+here compiles under `ExhaustivePairAudit` or `SplitTranscript`, the two policies the repair note
+certifies as correct in every row, and the three affected policies appear only in the diagnostic table
+above, whose outputs nothing else consumes. That is a stronger reason than the one that cleared probe
+1, which was below the 4,096-state admission gate; four of this probe's six families are well above it.
 
 ## Minimax regret
 
@@ -299,6 +469,12 @@ the *decision* key rather than the class key, which is a useful narrowing for th
   than a lane one: the exhaustive pair audit on 33,024 states takes 1.516 s and 6.9 GB at 205,056
   states, while the split transcript does the same partition in 1.792 ms. Whether the audit is
   quadratic by necessity or by implementation is unexamined here. Owner: C1017.
+  **[corrected]** — answered, and by both branches. The core repair note found the record set
+  quadratic by definition (one record per separated same-sort pair, 7.9 million here) and the verifier
+  and builder quadratic by implementation; removing the retained pair set and the doubling growth made
+  verification `4.2x` faster and halved the audited compile's peak memory with the accepted
+  certificates unchanged. The ratio is now about `320x` (`379.342 ms` against `1.186 ms` here), and
+  the residual is the record set, for which the core already has non-retaining streaming entry points.
 - **The compiled arm's 6.3x gap is entirely the lowering constant.** Open only in the sense that it
   could be shrunk — the lowering builds transition tables the memo does not need — but shrinking it
   cannot cross the structural bound, so no successor should spend time on it hoping to.
@@ -313,6 +489,11 @@ it. But the shape of the failure is specific and it is not "the decision layer i
 - the query layer is exact, witness-carrying, and replayable, and it is now the substrate probe 6 and
   probe 9 were waiting on;
 - quotienting the search graph is worth 220x against the same search on concrete states;
+  **[corrected]** withdrawn: the arms were not memoized alike (`103x` like-for-like on the repaired
+  code) and what remains is a representation difference — the concrete arm scans all 256 generators at
+  every settled state through a dense transition table while the compiled arm walks a 200-edge
+  per-class adjacency. The defensible statement is the next bullet's, which is a count off the
+  compiled artifact rather than a timing;
 - refinement is cheap (1.792 ms) and the compression is large (22x to 84x on states);
 - what loses is **materializing the flat carrier**, because doing so costs exactly what filling a
   complete memo costs.
@@ -336,3 +517,19 @@ a non-idempotent vocabulary rather than dropped. Probe 6's decision-equivalence 
 class key. The `ConcreteSearch` baseline arm uses a standard-library binary heap rather than the
 core's indexed heap, which flatters the compiled arm by a small constant; the 220x is far outside
 that, but a tighter comparison would use the same heap on both sides.
+
+**[corrected]** the heap was the small caveat and the large one sat two lines above it in the same
+routine. `ConcreteSearch` cleared two arrays of 33,024 entries on every query in order to walk a
+reachable fibre of 129 states, and — the dominant cost — scanned all 256 generators at every settled
+state through the presentation's dense `(generator, state)` table, of which about five apply. The
+per-query clear is now bounded to what the query touched, which removed roughly a sixth of the arm's
+per-query cost; making the arm walk a per-sort generator list would remove most of the rest and is
+**not** applied here, because it changes what the baseline arm is rather than correcting how it is
+measured. Until it is, no timing ratio against this arm should be read as a compression measurement.
+
+Two smaller repairs applied alongside it. `minimax_regret` used to write
+`class_of(...).unwrap_or(u32::MAX)`, so an unresolvable class became a real quotient key that every
+failing intervention would share, and all but the cheapest would be dropped from the minimax search;
+with `class_of` now bounding its context argument that path is reachable, and it returns
+`InterventionError::UnresolvedClass` instead of merging. And the compression report now prints both
+credit ratios and the two arms' work counts.

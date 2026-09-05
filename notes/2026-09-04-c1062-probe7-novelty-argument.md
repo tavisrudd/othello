@@ -8,7 +8,29 @@ the warning that raised this block; probe 1a (`2026-09-04-c1062-probe1a-carrier-
 for the carrier envelope; probe 1 (`2026-09-04-c1062-probe1-lowering-and-towers.md`) for the
 response-function gate; probe 2 (`2026-09-04-c1062-probe2-best-intervention-and-economics.md`) for
 the structural timing failure.
-**Verdict**: probe 7 is **unblocked, and the block dissolves rather than being argued past**. The
+**Reviewed**: `2026-09-05-c1062-probe7-review.md`, which read arXiv:2601.10531v2 in full rather than
+probe 0's summary of it. Corrections are marked **[corrected]** below.
+**Verdict**: probe 7 is **unblocked, and the block dissolves rather than being argued past**.
+
+**[corrected]**, three items, none of which changes the verdict.
+
+- All three differences in § 4 check out against the paper itself. Two hold more strongly than
+  stated: Corollary 16's consistency additionally carries a Gaussianity assumption, and Definition 8's
+  interventional coarsening merges nodes with *equal intervened-ancestor sets*, which is a graphical
+  condition rather than the behavioural indistinguishability probe 0's paraphrase suggests — two nodes
+  with the same intervened ancestors can respond to those interventions completely differently.
+- **Half of § 8's gate is discharged.** That gate asks for `RePaRe` to be read past `partial` depth
+  "to confirm that its interventional coarsening is not secretly computing an exogenous-side object
+  under a variable-side presentation". Definition 8 settles it without needing the proof of Theorem 10:
+  the coarsening is `chi(v) = chi(w) <=> I-an_G(v) = I-an_G(w)` over the node set, and there is no
+  exogenous or latent object anywhere in it. What remains of the gate is the `RefineTest` body.
+- **Two of this note's requirements on probe 7 were not met, and probe 7's report now says so.**
+  § 3 ingredient 3 asserts that the arity bound entering as a reachability restriction "is what makes
+  the arity tower a compositional object"; it is not implemented, the composed passes compute the
+  full-arity rung, and § 4 difference 4's "two declared dials, each with a measured tower" is
+  therefore one dial for probe 7 and two only for probe 1's flat lowering. § 4 difference 3 required
+  probe 7 to carry the separating-intervention witness through the factorization "or say that it did
+  not"; it did not, and the report now says so. The
 compositional route does not have to move onto the variable-partition carrier, and it should not.
 Two corrections ride along: one standing claim is retired, and one piece of prior art is imported
 rather than re-invented.

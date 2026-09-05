@@ -8,8 +8,14 @@ reaching a target observation); probe 3 for the responsibility engine behind bla
 counterexample-arm baseline.
 **Code**: `ergodis-private` `ec5a294` (`src/causal_design.rs`, families in `src/causal_fixtures.rs`,
 `tasks/tools/src/causal_design_report.rs`, oracle `python/c1062_design_oracle.py`)
-**Replay**: `cargo run --release --package ergodis-tools -- causal-design-report`, then
-`python3 python/c1062_design_oracle.py evidence/c1062-design-tables.json`
+**Replay**: `cd ~/src/ergodis-private && cargo run --release --package ergodis-tools --
+causal-design-report`, then `python3 python/c1062_design_oracle.py evidence/c1062-design-tables.json`
+**Evidence**: `ergodis-private` `evidence/2026-09-05-causal-design-repaired.txt`, the output of both
+commands after the review repairs, and `evidence/c1062-design-tables.json`, the exported tables the
+oracle reads. Only the tables were retained when this report was written; the arm table, which is the
+only measured content in the probe, existed solely as prose.
+**Reviewed**: `2026-09-05-c1062-probe6-review.md`. Corrections from that review are marked
+**[corrected]** below and the original text is kept wherever it explains how a number was reached.
 **Predeclared threshold**: a measured gap between full and decision-sufficient identification, plus a
 near-zero gap on a family predeclared to need full identification.
 **Verdict**: **met on both halves, and the equivalence in the probe's title turns out not to exist.**
@@ -62,6 +68,35 @@ Every number below was predeclared before the run and every one held. Counts are
 own repair fires the outcome, so the optimal actions are pairwise disjoint singletons and knowing
 enough to act is precisely knowing everything. The gap is exactly one, as entered.
 
+**[corrected]** "knowing enough to act is precisely knowing everything" is a property of the stopping
+criterion this probe implements, not of the family. `ActionSets` keeps, per candidate, the experiments
+reaching the target *at that candidate's own minimum edit cost*, and `share_an_action` stops when
+those sets intersect — so "decision-sufficient" here means a single action that is simultaneously
+**cost-optimal** for every survivor, which is the strongest of the criteria a caller might use. Under
+the natural weaker reading the objective's own wording suggests — one action guaranteed to reach the
+target under every survivor, priced at what it costs — the same dynamic program over the exported
+tables gives:
+
+| family                  | decision experiments, as reported | under "one action that works for every survivor" |
+|-------------------------|-----------------------------------|--------------------------------------------------|
+| dominant-repair         | 0                                 | 0                                                |
+| split-repair            | 2                                 | 1                                                |
+| faulty-component        | 3                                 | **2**                                            |
+| quaternary-probe        | 1                                 | 0                                                |
+| indistinguishable-twins | 1                                 | 0                                                |
+
+So the predeclared loss loses at `1.00x` only under simultaneous optimality; under the hedged reading
+it is `3/2 = 1.50x`. With two survivors `{i, j}` the arity-two intervention repairing both components
+reaches the target under both at cost `2` where the informed repair costs `1`, and at the declared
+probe price (`probe_base = 1`) that trade is an exact tie — two probes plus a cost-two hedged repair,
+or three probes plus a cost-one informed repair, both totalling four. The criterion cuts the other way
+on two families: on `quaternary-probe` and `indistinguishable-twins` a single cost-two action already
+works for every candidate, so a worst-case-cost caller needs zero experiments where this table says
+one, and those gaps are understated rather than overstated. The structural gap behind all of this is
+that the probe carries two price scales — `probe_costs` for experiments and `edit_costs` for actions —
+and never puts them in one objective. Every number in this table is correct for the criterion
+implemented, and the criterion should be named wherever the gap is quoted.
+
 The two ends of the range matter more than the middle. In `dominant-repair` the decision is free —
 one repair is optimal under every candidate, so no experiment is worth running — while identifying
 the truth still takes three. In `indistinguishable-twins` two candidates differ only in a variable
@@ -73,6 +108,23 @@ An independent Python oracle reproduces every entry. It memoizes top down over f
 sets where the Rust program iterates flat over subset indices, and it rebuilds the optimal-action
 sets and both stopping predicates from the exported table rather than importing them, so the
 agreement is between two algorithms and not two spellings of one.
+
+**[corrected]**, two scope claims in this section.
+
+- "Every number below was predeclared" covers `|H|`, `columns`, `full`, `priced` and `decision`; the
+  `gap`, `action classes` and `all share` columns are not predeclared anywhere. Of the § 4
+  binarization table only `quaternary-probe` is. And the fixtures carrying the predeclarations, the
+  code that measures them and the evidence all landed in a single commit (`4bdc713`), so nothing on
+  disk distinguishes entry from result.
+- The oracle's independence is real for the dynamic program and does not extend to the model layer:
+  it reads the `outcomes` rows out of the JSON rather than re-deriving them, so `solve_into`,
+  `observation_of` and `admissible_experiments` are imported wholesale and an error there would be
+  invisible to it. It also compares only `full`, `priced` and `decision` per family — the `binary`
+  column is printed and never entered into the agreement test, and nothing in § 4, § 5 or § 6 is
+  exported at all. "Reproduces every entry" should read "reproduces three entries per family, by a
+  different algorithm, on an outcome table it imports". A tautology in the oracle has also been
+  removed: for `priced-probes` it used to copy the expected decision value into the measured one and
+  call the result an agreement; it now prints `n/a` for the cell it never computed.
 
 ## 3. Decision equivalence does not exist, and the intersection does
 
@@ -146,12 +198,64 @@ measurement of it and the reason to stop treating the separating witness as the 
 the machinery. What is valuable is the certificate, which is one-sided in neither direction and
 replays.
 
+**[corrected]**, and this is the one place in the probe where a second seed inverts the sentence.
+Every ratio above is a single seed, `0x5eed1062`, with no variance and no paired statistic. The report
+tool now recomputes the same ratio on forty independent seeds:
+
+| family           | seeds | mean     | min      | max      | w/t/l   |
+|------------------|-------|----------|----------|----------|---------|
+| dominant-repair  | 40    | `1.0074` | `0.9968` | `1.0180` | 38/0/2  |
+| split-repair     | 40    | `1.0214` | `1.0089` | `1.0340` | 40/0/0  |
+| faulty-component | 40    | `1.0218` | `0.9955` | `1.0525` | 37/0/3  |
+| quaternary-probe | 40    | `1.0000` | `1.0000` | `1.0000` | 0/40/0  |
+| priced-probes    | 40    | `1.0814` | `1.0421` | `1.1180` | 40/0/0  |
+
+The separator arm beats uniform sampling among splitting experiments on 40, 40, 38 and 37 of 40 seeds
+on the four non-degenerate families. By an exact two-sided sign test that is `p ~ 2e-12` on two
+families and `p ~ 2e-7` and `2e-8` on the others: **measurable, and small**. Measured against the
+headroom that exists at all — the fraction of the gap between the random-splitting baseline and the
+exact optimal arm that the separator recovers — it is a sixth to a half.
+
+Two things follow. The predeclared verdict is unchanged and in fact cleaner: every family lands inside
+the `1.10x` band on the seed mean, so the arm misses the informativeness bar everywhere. But "no
+measurable teaching signal" is the wrong sentence for it; the correct one is that the separator rule
+is **consistently but only marginally better** than uniform sampling among splitting experiments,
+recovering a minority of the available headroom and missing the predeclared bar on every family. And
+the transfer claim does not hold: after its own review's repairs, probe 5's separator-*pair* arm was a
+null with a *negative* lean (`p = 0.180`, per-seed ratios spanning `0.519` to `1.800`), while this arm
+is a small positive effect with a near-perfect sign record. Those are different results, not one
+result measured twice, so "the second independent measurement of it" is withdrawn.
+
+Two further caveats on the table's five rows. `quaternary-probe` is degenerate: every arm there —
+optimal, greedy, uniform-splitting, separator — returns exactly `2.000` on every seed with zero
+variance, because every splitting experiment resolves the family in two steps, so the band is tested
+on four families rather than five. And the stated range against the straw `uniform` arm, "`2.12x` to
+`4.00x`", drops the `priced-probes` row: the five ratios are `3.997`, `3.033`, `2.120`, `3.392` and
+`1.949`, so the range is `1.95x` to `4.00x`.
+
 The same table carries a result about the exact machinery that cuts the other way, reported here
 because it is the kind of thing this probe exists to catch: **greedy maximum-split matched the exact
 optimum on every family, in mean and in worst case.** Optimal decision-tree construction is
 NP-hard in general and greedy is only logarithmically approximate, so these six families are simply
 too small to separate them. The exact dynamic program's value is demonstrated in its certificate and
 in the unresolvable and zero-experiment cases, not in a shorter plan.
+
+**[corrected]** "in mean" is not a comparison against a mean optimum. `DesignPlan::compile` is a
+minimax — `worst = worst.max(value)` over blocks, ties broken towards fewer experiments — so the
+`optimal` arm walks the *worst-case*-optimal tree and its `mean` column is that tree's mean, not the
+minimum achievable mean. A tree with a worse worst case can have a better mean, so greedy tied a tree
+that was not trying to win that comparison. The claim stands in worst case, where it is exhaustive
+rather than sampled: both arms are deterministic and every candidate is walked as the truth. The same
+assumption was baked into `the_optimal_arm_is_never_beaten`, which asserted `mean() >= optimal.mean()`
+for every other arm and would have failed for a correct reason on some future family; it now asserts
+on the worst case.
+
+**[corrected]** one number outside the published tables moved. `ArmMetrics::mean` divided the sum of
+completed runs' steps by *every* run, including runs that hit the step limit and contributed no
+steps, which biased the mean down for exactly the arms that fail to finish. It now divides by the
+completed runs. The only arm that ever stalls here is the straw `uniform` arm, once in 2,048 runs on
+`dominant-repair`, whose mean moves from `12.199` to `12.205`; its `vs splitting` ratio still prints
+`0.251x` and no cell of the table in this section changes.
 
 ## 6. Blame
 
@@ -167,7 +271,13 @@ is the point: blame is a property of the family, not of any model in it.
 
 - **Why did greedy never lose?** Settled by argument rather than by measurement: with at most eight
   candidates and a balanced-split experiment always available, the greedy tree hits the information
-  lower bound. The families were built to expose stopping-rule behaviour, not to stress tree
+  lower bound. **[corrected]** "a balanced-split experiment always available" contradicts the
+  arity-bound entry four items down, which says that on `faulty-component` no experiment can split
+  three against three. The statement that covers both: on every family the optimum equals the
+  information lower bound attainable from the branching factors the declared vocabulary actually
+  offers — three for six or eight candidates under binary splits, two for eight candidates under one
+  four-way plus one binary split, one for four candidates under a four-way split — and max-split
+  greedy attains that bound. The conclusion is unaffected. The families were built to expose stopping-rule behaviour, not to stress tree
   construction, and a family that separates greedy from optimal would need dozens of candidates with
   deliberately unbalanced tests. **Open as a limit of the evidence**: nothing here shows the exact
   dynamic program is worth its cost as a planner.
@@ -175,7 +285,13 @@ is the point: blame is a property of the family, not of any model in it.
   miss by three thousandths rather than rounded into a pass. The family has only four candidates and
   two useful experiments, so the arm has almost no room to choose badly; the conclusion does not rest
   on this row and would be unchanged if it had landed at `1.09x`. **Closed as noise, with the number
-  stated.**
+  stated.** **[corrected]** — closed the right way for the wrong reason. `1.103x` is a high
+  single-seed draw: the forty-seed mean is `1.0814` with a range of `1.0421` to `1.1180`, so the
+  family passes the band rather than missing it by three thousandths, and the framing invites a reader
+  to treat the threshold as knife-edge there when it is not. The explanation given is also backwards —
+  `priced-probes` has the **largest** separator effect of any family, not the smallest, and its 40/0/0
+  sign record is the most consistent in the table. Reporting the number rather than rounding it was
+  the right call and the direction of the error was the safe one.
 - **Nothing in this probe uses the Ergodis compiler.** The design layer runs on the outcome table
   directly, built by solving each candidate under each intervention. That is worth stating plainly
   because the task is about the contextual quotient: the table here is probe 1's signature
