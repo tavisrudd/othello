@@ -1080,11 +1080,34 @@ solutions — one in `2^400`, essentially the plain-523 shard's density — and 
 plateau at 3,680 sits only about 130 bits into that 400-bit descent. The same
 substitution restates the whole condition in four letters: four sequences over
 `-2..=1` on `Z/174` whose aggregate autocorrelation is constant off the zero
-shift, the two constants differing by 523. Next: build a move the fifteen
-relations permit but a single transfer cannot make — a paired transfer between
-two columns of one residue group, or a search scoped to one group — test a much
-larger shell corpus, and note that even an exact `q174` hit leaves the last
-factor of three to the carrier-522 replay, which nothing scores yet.
+shift, the two constants differing by 523. The plateau's depth in bits is
+model-dependent: an independent Gaussian-ball count of the same plateau gives
+about 195 rather than 130 bits, so that figure carries roughly ±60 and the
+400-bit total is the robust half.
+
+The paired move is now built and closed
+(`2026-09-05-c1016-paired-transfer-and-the-two-opt-census.md`). Its motivation
+was wrong and the correction stands: a single transfer fixes every column total
+and so already satisfies all fifteen relations, which constrain the net
+deviation and not the move; what a pair adds is the interaction of the two
+count changes, and only that part is confined to the `q29` residue group of the
+two columns' difference. The exact paired delta is the two single deltas, twice
+the inner product of their delta vectors, and a sparse interaction on at most
+four classes, so a whole two-transfer census costs one dot product per pair.
+That census is exhaustive and empty: over all twelve banked plateau states,
+42,532,366 paired moves, zero improving, zero improving singles, no
+distinguished residue group, and on seven of the twelve the best pair is
+cross-block with no interaction at all. An independent numpy oracle that
+handles repeated interaction classes differently reproduces every field on all
+twelve states. The engine loses accordingly — five interleaved rounds put it
+1.140x worse at matched wall clock (`t = 9.79`), taking 11.5x fewer steps for a
+30x wider neighbourhood at 14.2x the instructions per step — and the retained
+single-transfer step is unchanged at 2,684,702 instructions against 2,685,236
+banked. Group-scoped search is closed with it, since no group holds an
+improving pair. Next: score the carrier `Z/522` rung above an exact `q174` hit,
+which nothing scores yet and which has 174 free correlation classes of its own,
+so it is the larger of the two remaining rungs rather than "the last factor of
+three"; price a return to the plain `Z/523` spin shard against it.
 
 C1035 is closed: `ergodis-private` is a Cargo workspace whose root package is library-only; the
 six named tools live in `tasks/tools` (`ergodis-tools`), gem-mining drivers in `tasks/gem-hunt`,
