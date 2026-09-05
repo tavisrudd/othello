@@ -73,4 +73,65 @@ Every specialization level returns the same weight and the same observable parit
 models: zero disagreements over 20,000 shots at surface distances 3, 5 and 7 and repetition
 distances 9 and 25 at `p = 0.002`.
 
-## (in progress)
+## The shipped routing rule is wrong on this model, and wrong in the expensive direction
+
+The `arms` mode times every specialization level on real drawn syndromes bucketed by defect count.
+Run over ten weighted graphs at `p = 0.001`
+(`benchmarks/tiger-blossom/2026-09-04-c1064-weighted-arm-profile.log`), it says two things the
+unit-weight sweep could not.
+
+**The sparse matcher's fixed cost per shot is an order of magnitude larger on a weighted graph.**
+Under unit weights C1063 found one anomaly, at three defects, where handing the whole set to region
+growth cost nine times the closed forms. Under circuit-level weights that anomaly is ten to thirty
+times and it extends across every count from three to seven. On weighted surface `d = 9`, at three
+defects the sparse matcher costs 1,338 ns against the cluster decomposition's 50, and at five
+defects 1,521 against 159. The cost barely depends on the defect count, which is what a fixed entry
+cost looks like: the matcher is paying to set up, not to search.
+
+**The crossover therefore moves far to the right, and the two families separate.** The smallest
+defect count from which the sparse matcher is the cheapest arm at that count and every larger one:
+
+| graph                  | detectors | edges | mean degree | crossover, weighted | C1063, unit weights |
+|------------------------|-----------|-------|-------------|---------------------|---------------------|
+| repetition `d = 5`     | 24        | 65    | 5.42        | 8                   | 6                   |
+| repetition `d = 9`     | 80        | 225   | 5.62        | 10                  | 6 or 7              |
+| repetition `d = 15`    | 224       | 645   | 5.76        | 8                   | 8                   |
+| repetition `d = 25`    | 624       | 1,825 | 5.85        | 10                  | 8                   |
+| surface `d = 3`        | 24        | 78    | 6.50        | at least 16         | 7                   |
+| surface `d = 7`        | 336       | 1,558 | 9.27        | 14                  | 8                   |
+| surface `d = 9`        | 720       | 3,534 | 9.82        | 16                  | 8                   |
+| surface `d = 11`       | 1,320     | 6,718 | 10.18       | 16                  | 8                   |
+
+Surface `d = 3` is a lower bound: no count below sixteen ever became the matcher's, and sixteen is
+the largest bucket that fills even at five per cent error. Surface `d = 5` and repetition `d = 3`
+are omitted because no bucket above their means fills at any rate the models cover.
+
+C1063's account of the crossover — that it tracks graph size and does not separate the two families
+— does not survive the weighted model. Sorted by detector count the weighted crossovers are not
+monotone and the families are cleanly apart: every repetition graph measures eight or ten and every
+surface graph fourteen or more, while repetition `d = 25` has almost twice the detectors of surface
+`d = 7` and half its crossover. What does separate them is the neighbourhood. A rotated surface
+graph built from a decomposed circuit-level model carries more than six neighbours per detector and
+a repetition graph fewer than six, and on the denser graph a given defect count occupies a smaller
+region, so the cluster decomposition stays cheap for longer.
+
+The refitted rule is therefore one step on the mean degree, with each branch the middle of its
+measured pair: **fewer than six neighbours per detector gives nine, six or more gives fifteen.** In
+the integers the compiler sees, that is `edges < 3 * nodes`. Every measured weighted crossover is
+within one count of its branch, and surface `d = 3` sits at or above its lower bound.
+
+The unit-weight rule is kept exactly as C1063 fitted it — seven below one hundred and twenty-eight
+detectors, eight at or above — so no number measured on a phenomenological graph moves.
+`routing_threshold` now takes the compiled edge count and the compiled largest edge weight alongside
+the detector count, and the branch between the two regimes is `max_weight > 1`. All three are
+properties of the compiled graph; the rule still never reads the error rate, which a deployed
+decoder does not know. A unit test pins the rule against every crossover both sweeps measured.
+
+What the old constant was costing on this model is direct: it sent a shot to the sparse matcher from
+seven or eight defects, and on weighted surface `d = 7` at eight defects that costs 1,283 ns against
+the cluster decomposition's 429 — three times the work — with the penalty persisting through
+thirteen defects. Under circuit-level noise that is not a rare corner: the mean defect count at
+surface `d = 7` is 5.33 and at `d = 9` is 11.94, so the shipped rule was mis-routing the middle of
+the distribution.
+
+## (in progress: routed-versus-shipped ladder, PyMatching standing, latency, fast-path census)
