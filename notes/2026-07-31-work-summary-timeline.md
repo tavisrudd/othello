@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-31-work-summary.md`](2026-07-31-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-08-29**, with quiet stretches Jun 28–30, Jul 27, and Aug 16–17.
+Activity spans **2026-06-14 → 2026-09-04**, with quiet stretches Jun 28–30, Jul 27, and Aug 16–17.
 This is the *chronological* view; the scope report is the *state* view.
 
 ## Content split between the two documents — binding rule
@@ -1331,6 +1331,113 @@ hypothesis, and the new `quantum-codes` lane reported its first result.
   native exact CSS distance backend with parallel and persisted anchor search. C925
   `[cubic-threefolds]` added rank-seven lattice probes (sign-permutation, sign-type exhaust, torus
   splitting, root-stable level) to the modular direct-QDM packet.
+
+## Week 16 — Aug 30 – Sep 4 · The compiler becomes its own repository, a headline loss is converted into a win, and a decoder line opens
+
+This is the week the compiler stopped being a subdirectory of a manuscript. Ergodis was audited for
+correctness, given a measured negative-control tier that says where it loses, moved out of the
+monorepo into its own repositories behind a publication guard, and then pointed at two new problem
+classes — real-time quantum-error-correction decoding and structural causal models. On the
+mathematics side an eight-hour overnight hunting campaign produced the strongest single night of
+results in the gem-mining lane, and a full-text reading of a 1991 paper pre-empted the figure that
+campaign's sibling task had just rediscovered.
+
+- **Aug 30 — an overnight hunting campaign, a Hall attack on the cap game, and a whole-core audit.**
+  C1018 `[gem-mining]` launched an eight-hour Ergodis hunting campaign at 23:15 against the bounded
+  targets in `notes/open-problems/plausible-bridges/`, with sub-agents per lane; one twenty-minute
+  session-limit interruption at about 03:00 was survived because the sub-agents resumed with their
+  context intact. C80 `[cap]`, user-directed into the same campaign, built the global Hall
+  rematching driver. On the engineering side, C985 wrote three read-only portfolio studies — a
+  method inventory that reads every successful C task as one loop (enumerate structured partial
+  objects, quotient, retain one obstruction per class, extract a lemma from the exceptional classes,
+  replay independently), a cross-domain gem scan, and an evolve state-of-the-art literature audit —
+  and C1017 wrote the performance-contract remediation report against the C985 whole-core audit,
+  which had graded solve-loop zero allocation, search recursion, and the public/private partition
+  at D. C1016 `[complete-ports]` synthesized the Hadamard quotient work into one document.
+
+- **Aug 31 — the campaign closes with six result lanes, and the correctness audit lands.** C1018
+  closed with wins on projective Reed–Solomon deep holes (Conjecture B falsified at redundancy nine
+  by an exhaustive census of all 883,708,281 points of the projective eight-space over the field of
+  thirteen elements), on quantum low-density parity-check distances (all six previously open
+  Liu–Marquardt lifted-product codes closed exactly, and a new exact rate–distance record), on a
+  finite transversal-gate no-go census, and on a narrowing of the bivariate-bicycle
+  `[[756,16,d]]` band; mixed results on projective planes of order 12 and on the cap game.
+  C1019 turned two of those capabilities into commercial prototypes, `certdist` and `certiis`.
+  C1020 reconstructed Brouwer's complete exceptional exterior-set census and refuted C193's declared
+  null; **C1022 then audited it against Dye 1991 read at full text from user-supplied page scans and
+  found the figure itself pre-empted**, leaving only the census bridge — the novelty-extraction
+  procedure working exactly as designed, on the same day. C1023 and C1024 closed the two proposed
+  routes to making the deep-hole threshold rigorous; C1025 found its own premise false and the
+  conjecture surviving on a domain an order of magnitude larger; C1026 collapsed the conjecture's
+  two hypotheses into one inequality. C1027 surveyed fifteen importable solver techniques and
+  implemented none. C1028 and C1029 ran the two instrument tests (finite chain rings; the
+  repository's first parametric certificate). C1030 ran the whole-core correctness audit — four
+  parallel pass-1 audits, a vetting pass that refuted one finding outright and corrected three
+  severities downward, then four round-2 audits — and produced the correctness-safeguards decision
+  record. C1031 explored a campaign console.
+
+- **Sep 1 — adapters, oracles, and two new quantum distances.** C1031's console was red-teamed and
+  left as a prototype with no production build allocated. C1033 began the DuckDB/Jupyter/Sage
+  analysis integration. The C985 line landed the optional CSS automorphism-discovery adapter (nauty
+  as an untrusted proposer with no proof authority, every generator re-checked against both row
+  spaces), check-presentation autotuning, and the proposal/admission architecture that generalizes
+  that pattern for Ergodis Evolve. Two quantum results: `LP_714_100_?` certified at exact distance
+  16 in under three seconds of search where the published QDistSAT table records that none of its
+  46 configurations finished under a 7,200-second limit; and `LP_1768_224_?` bracketed at
+  `22 ≤ d ≤ 24` against a published `8 ≤ d ≤ 230`.
+
+- **Sep 2 — the heaviest engineering day of the programme: consolidation, a benchmark tier, five
+  promotions, the repository split, and the L2 reversal.** C1034–C1036 turned `ergodis-private` into
+  a Cargo workspace and reduced its auto-discovered binaries to three task binaries, deleting the
+  dead and banked ones with history preserved; C1037 moved every build tree out of the source trees
+  and found roughly 31 GiB of unreferenced cache reclaimable. C1038 replaced the assertion "ergodis
+  is not a general constraint-programming replacement" with a **measured** frontier: a shape
+  classifier and a six-row prediction table were SHA-256 hashed before any measurement, and five of
+  six rows landed on the predicted side. C1039 measured the admission boundary on a planted
+  theorem-gap corpus: 1,120 candidates screened, exactly one admitted, 620 rejected as unsound each
+  with a replayable counterexample. C1049 then attacked the tier's worst row and C1060 finished it,
+  converting L2 from a 13,689x loss into an 11x win with a 128-byte certificate. C1051 ran the
+  evolve representation-search spike and, unprompted, found a correction to its own control.
+  C1053–C1057 promoted five kernels into the core under parity, zero-allocation and
+  hardware-counter gates. C1058 executed the repository split — 378 commits replayed onto the
+  C1059 tip, four repositories, fresh-clone validation, and a monorepo commit removing the trees —
+  and C1059 built the publication guard it landed on, with 44 of 44 fixture refusals passing.
+  **Nothing was pushed anywhere.**
+
+- **Sep 3 — thirty-one probes in one day on a compiled dynamic decision engine.** C1061
+  `[complete-ports]` ran an open-ended exploration of Ergodis as a compiled *dynamic* engine:
+  compile the fixed structure once, then answer a stream of typed events by a leaf-to-root
+  recomputation. Probes 1–9 and 11 established the core engine on coded-repair fleets; probes 7, 10,
+  12, 15, 17, 19 and 20 tested generality and found network routing a win, the probability semiring
+  a wrong answer (a union-bound surrogate over-counting by a factor of twenty), and the exact
+  transducer real but *computed* rather than tabulated. Probe 13 delivered a decisive loss for the
+  dense approach against PyMatching's sparse blossom, which is what caused the line to build
+  TigerBlossom from scratch in probe 26. Two probes were stopped by user instruction with their
+  consequences recorded rather than papered over — probe 21's absence means the routing ratios stand
+  only against a static comparator. In parallel C1016 ran the unrestricted order-2092 campaign and
+  the multiplier shard-window sweep, and a Fable review of the reduction argument.
+
+- **Sep 4 — TigerBlossom overtakes PyMatching, a causal-model spike lands, and a surface-code bug
+  invalidates one probe family.** The probe-28 sub-series (28b–28h) drove the sparse matcher to
+  sixteen of eighteen cells ahead of PyMatching by 2.5x to 11.5x, with the margin growing with code
+  distance and largest exactly where superconducting hardware operates. Probe 28h killed the
+  certified margin predecoder exhaustively and, in doing so, exposed a distance-one bug in the
+  repository's own rotated-surface-code builder that predates the task; **every surface-family
+  number taken before this day is invalidated, while every repetition-code number — which is the
+  whole PyMatching comparison — is untouched.** C1062 ran the structural-causal-model spike: its
+  adversarial plan review killed the first lowering before any code was written, the repaired
+  lowering is exact and compresses states by up to 84x, and its headline economic claim failed for a
+  structural reason (with hard interventions the intervention set *is* the state set). C1063 was
+  allocated to route TigerBlossom to its best solver per shot; the user's same-day scope refinement
+  reordered it — fix the benchmark grid toward realistic error rates first, then fit the routing
+  threshold on it.
+
+  **Process notes for the week.** Two load-bearing premises in three tasks were false and both were
+  asserted from the shape of the situation without one cheap probe; both were caught by a
+  coordinator gate placed before the build, and the reports say so. The C1030 audit's fifth root
+  cause — the evidence chain not being in git — made every replay command in the affected committed
+  reports dead against any commit, which is what the C1058 split and the C1036 consolidation were
+  partly for. Fable was used for two adversarial reviews (the C1016 reduction argument, probe 28g).
 
 ---
 

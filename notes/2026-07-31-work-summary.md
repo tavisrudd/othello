@@ -15,8 +15,8 @@ games, backed by:
 - a bespoke game-tablebase + query/mining toolchain,
 - a `sorry`-free **Lean 4 / Mathlib** formalization layer,
 - and, newest, an exact compositional optimization compiler (`ergodis`) that turns the recovery
-  theory's quotient theorems into a general tool and is being prepared for release under a dual
-  licence.
+  theory's quotient theorems into a general tool, has since been extracted into its own repository
+  behind a tested publication guard, and is being prepared for release under a dual licence.
 
 The open research center of gravity is the **projective cap ("Nofil") program** and its **odd
 projective-plane kernel**, with the Lean layer certifying results as they land. But the cap machinery
@@ -838,6 +838,96 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   Application-level crossover was measured separately and found absent on small and sequential-query
   workloads, so that control is retained as conditional rather than advertised.
 
+  **Where it loses is now measured, not asserted.** The scope disclaimer "not a general replacement
+  for a mixed-integer or constraint-programming solver" has been replaced by a frontier: a one-page
+  classifier of the instance shapes the compiler can exploit, and a six-row prediction table naming
+  three expected losses and three expected wins, were written and cryptographically hashed *before*
+  any timing run. Five of six rows landed on the predicted side, with wins of 30.1x, 82.5x and
+  1,368.8x against a single-worker constraint-programming control, one predicted loss that instead won
+  by 3.75x, and one clean loss in which the compiler declines to answer because the instance exceeds a
+  declared width bound. That refusal is worth stating precisely: across a ladder of eight instances
+  varying only in weight magnitude there is **no performance crossover** — the margin is flat within
+  noise over a sixteen-fold width increase — and then a vertical cliff at the declared cap. The
+  frontier there is a constant in the source, not algorithmic degradation. On every row the compiler
+  emits a certificate of between eight and 3,600 bytes, replayed in microseconds; the control emits
+  none.
+
+  **The one large loss was converted into a win.** The six-resource generic-load scheduling row lost
+  by a factor of 13,689 — 163 seconds against 4.6 milliseconds. Certified dominance pruning cut it to
+  9.4 seconds with every one of its 632,666 pruning deletions certified and the optimum, witness and
+  transition count bit-identical to the unpruned binary. The row was then won outright by replacing
+  the layered frontier with iterative branch and bound under a **Lagrangian dual bound whose
+  multipliers are derived from the inner maximum**, so dual feasibility holds by construction and the
+  checker need only verify nonnegativity; multipliers are integer numerators over a fixed denominator,
+  so no floating-point value enters the certificate. The result is **0.41 milliseconds against 4.6, an
+  eleven-fold win with a 128-byte certificate replayed in 0.8 microseconds**, against a control that
+  emits no proof at all. An independently computed linear-programming relaxation explains why the row
+  was winnable — it is bound-closed and conflict-free, so the contest is entirely about the bound —
+  and symmetry quotienting was rejected outright because no group exists there to exploit. The two
+  routes are complementary, not nested: the bound is weakest where many demands each contribute a
+  little, and on two such rows the certified route does not finish while the dynamic program answers
+  in milliseconds. **No automatic rule yet chooses between them from the instance alone.**
+
+  **One measured loss stands and is published.** The repair-scheduling row in the headline application
+  table uses unit capacities, so the instance never enters the subset descent where the kernel's cost
+  lives. A contended companion instance was added to measure that descent, and on solve work alone the
+  constraint-programming control is about 4.7x faster there. The compiler still wins end to end by
+  4.4x cold, but that margin is the control's interpreter and library import, and the record says so.
+
+  **The verification layer was itself audited.** A whole-code correctness audit — parallel first-pass
+  audits of the core library, the search engines and the certificate plane, a vetting pass that
+  refuted one finding outright and corrected three severities downward, then a second round restricted
+  to the two highest severities — found **no committed result wrong**, and two structural weaknesses:
+  checks that could not fail (a verification mode that reported success with every witness unchecked;
+  an instance loader whose load-bearing fields silently defaulted, so a misspelled key caused a
+  misclassification whose digest still matched), and a working definition of "verified" as
+  re-execution, which cannot catch a defect on the prover's side. The adopted remedy is a rule rather
+  than a refactor: **every advertised check ships with a failing control** — a test constructing the
+  smallest mutation that should make that named check fail, per load-bearing field in isolation — and
+  evidence records must describe observed scope through typed fields rather than free-form strings.
+  Two claims were flagged as possibly wrong rather than merely unguarded and are owed re-examination.
+
+  **The compiler has been pointed at two new problem classes, with one win and one instructive
+  failure.** Asking what happens when the structure is fixed but the data changes continuously gives
+  an *optimization congruence* — a quotient through which the optimal value and witness factor, to
+  which composition descends, and which every declared event respects. That is the Myhill–Nerode
+  condition generalized from language acceptance to optimal behaviour, and where the quotient is
+  finite the optimizer collapses to a finite weighted transducer. On coded-repair fleets an event is
+  answered in about 1.9 microseconds, flat in fleet size, against a 4.93-millisecond fresh solve at
+  16,384 leaves, breaking even after roughly one update. Against a specialized quantum-decoding
+  baseline the *dense* form of this idea lost decisively, by 64x to 82x in instructions, for
+  structural reasons; that loss produced a from-scratch allocation-free sparse matching decoder which
+  now stands **ahead of PyMatching in sixteen of eighteen tested cells by 2.5x to 11.5x**, with the
+  margin growing with code distance and largest exactly where superconducting hardware operates. Two
+  cells lose, both at a physical error rate fifty times hardware rates. What makes that comparison
+  unusually strong is that there are zero minimum-weight disagreements across all 360,000 shots and
+  every answer carries a linear-programming optimality certificate the baseline does not produce;
+  what limits it is that the family is the repetition code under unit-weight phenomenological noise,
+  and the metric is instructions rather than per-round latency. Both limits are stated in the record.
+  A **certified predecoder** built alongside it is a sound, general, and *negative* result: it does not
+  reach distance nine on the rotated surface code by any of five routes tried, and an exhaustive sweep
+  shows the construction **fails by exactly one unit of margin** — a sharper statement than "it did not
+  work", and the thing a successor must attack. One correction belongs with this: a distance-one defect
+  in the repository's own rotated-surface-code construction left two corner data qubits in no check at
+  any distance, one of them on the logical column, so **every surface-code number taken before its
+  repair is withdrawn**; every repetition-code number, which is the entire decoder comparison, is
+  unaffected.
+
+  The second class is causal: take the admissible contexts to be future *interventions* on a finite
+  structural causal model, which reads exact causal abstraction as a quotient to be *computed* rather
+  than as a validity check on a proposed abstraction. The spike is technically clean — an adversarial
+  review killed the first encoding before any code was written, because pinning a variable produces a
+  solution of a *different* model, so the obvious encoding computes plain observational equivalence
+  while appearing to typecheck; the repaired encoding agrees with an enumeration oracle on every query
+  across six model families and compresses states by up to 84x. Its economic claim nonetheless failed,
+  for a reason worth keeping: **hard interventions are idempotent and commutative**, so the number of
+  states materialized equals the number of solves a plain memo would perform, measured at a ratio of
+  1.00, and the compiled arm never crosses the memoized re-solve. Quotienting the graph is not what
+  failed — on the identical search over concrete states the quotient wins by 220x — *materializing*
+  the graph is. The two surviving directions follow directly: a compositional lowering that never
+  materializes the carrier, and a non-idempotent edit vocabulary, which is the only setting where
+  shortest path earns its keep.
+
   **The same principle transfers to exact quantum-code distance.** Computing the minimum distance of
   a CSS code exactly is an integer program over its coordinates, and two distinct effects were
   separated and measured on the bivariate-bicycle gross code `[[144,12,12]]`. The conventional
@@ -855,6 +945,39 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   reproducible rather than verifiable — and every ratio is specific to that solver and instance.
   Whether the reduction survives on solvers with built-in orbital branching is the open gate on any
   external claim. This result is not assigned to a manuscript.
+
+  **The same front end has since closed distances that published sources left as upper bounds.** The
+  entire published lifted-product list of Liu and Marquardt now has exact distances — six codes of
+  length 1428 to 1500 whose printed values were randomized upper bounds from `10⁵` trials, every one
+  of which turned out tight, so the contribution is the certification rather than a corrected number.
+  One of them, `[[1428,186,18]]`, sets a new exact rate–distance record `kd²/n = 42.20`, beating the
+  previous exactly known best by 1.245x, found in about 51 seconds of search through a verified
+  right-translation anchor reduction worth a factor of 42 to 60. Two codes from a satisfiability-based
+  distance solver's own published benchmark set were then settled where that solver records that
+  **none of its 46 configurations finished within a 7,200-second limit**: `[[714,100,16]]` exactly, in
+  under three seconds of search on each check side, and `[[1768,224,d]]` bracketed at `22 ≤ d ≤ 24`
+  against a published `8 ≤ d ≤ 230` — with an independently verified 1,768-coordinate bijection
+  proving `d_X = d_Z`, so only one direction needs the remaining exhaustion. The bivariate-bicycle
+  `[[756,16,d]]` case is narrowed to `28 ≤ d ≤ 34` with `d` even, by an exhaustion of `5.59 × 10¹¹`
+  candidates plus the observation that the all-ones vector lies in the check row space; it remains the
+  one unfinished exact distance in the portfolio. **Trust boundary:** each is an exhaustive finite
+  enumeration with the attained witness replayed by a second implementation, and nothing is
+  machine-checked beyond that. One measured fact constrains what such a certificate may promise: the
+  parallel search is deterministic in its conclusion but not in its counters whenever a bound is
+  published, giving a five percent spread in candidate counts at eight threads and exact
+  reproducibility at one.
+
+  **A certified finite no-go for transversal gates came out of the same machinery.** Over every binary
+  CSS code of length at most eight — an exhaustive enumeration of 8,044,851 flags at length eight — an
+  X-check weight of at most seven admits no diagonal transversal gate at level three or above of the
+  Clifford hierarchy. Hence **eight qubits is the minimum length for a diagonal transversal
+  non-Clifford gate**, and at length eight level three occurs only at full check weight, uniquely for
+  `[[8,3,2]]`. The proof gap is named rather than absorbed: that code's `±1`-phase gate evades the
+  textbook uniform-phase divisibility argument and yet lands exactly on the threshold, so the
+  threshold is not explained by that argument. Alongside it, complete diagonal transversal groups were
+  computed for several small codes by Smith normal form over all real phases, giving exact
+  classifications for `[[16,4,2]]`, `[[32,5,2]]` and `[[31,1,3]]` and exact negatives for the Steane,
+  `[[15,7,3]]` and Shor codes.
 
 - **Repair ports as a theory in their own right** (`repairports` → `rp-next`) — the completed repair
   machinery turned into a deliberate search engine, run under a discipline that each round must yield
@@ -1783,6 +1906,34 @@ These results combine exact invariant theory, Plücker inversion, Gale duality, 
 apolarity, finite-group descent, low-genus point bounds, and independently replayed bounded
 classifications. They do **not** prove the general Reed–Solomon deep-hole conjecture.
 
+- **The exceptional behaviour is now reduced to one conjectural inequality, and two routes to
+  proving it are closed.** Writing `X(r)` for the set of field orders at which the deep holes exceed
+  the persistent locus together with the modular carrier's deep part, the standing conjecture is that
+  for every redundancy `r ≥ 6` and every prime power `q ≥ max(16, r+3)` the deep holes are exactly
+  that union — equivalently, `X(r) ∩ {q ≥ r+3} ⊆ {7,8,9,11,13}`. The **constant threshold sixteen is
+  far below the proved threshold**, which is 29 at redundancy six and 59 at redundancy ten. Its
+  support is exhaustive censuses at redundancies three through ten, complete non-regular
+  classifications over *all* prime powers at redundancies eight and nine, and certificate-backed
+  stratum sweeps reaching redundancy 39 and field order 127 in which none of the 171 in-scope cells
+  fires. The two hypotheses beyond `r ≥ 6` turned out to be the two branches of that single
+  inequality, crossing at redundancy thirteen, each independently necessary with an explicit witness;
+  the linear branch is already slack, so the true boundary is a curve, located above two known cells
+  and below a third, and deciding whether it flattens needs two cells out of budget by one factor of
+  `q²`. Three predecessor conjectures were **falsified by exhaustive computation** on the way — the
+  persistent-locus-only form, killed by an exhaustive census of all 883,708,281 points of the
+  projective eight-space over the field of thirteen elements which found one extra orbit; the
+  monotonicity of the exceptional band; and two successive guesses about which carrier shapes recur —
+  while one underlying fixed-locus lemma is **proved**. Both proposed routes to rigour are closed by
+  located obstructions rather than by exhaustion of effort. The Lang–Weil route fails for every
+  carrier: its error constant is about `6.5 × 10¹⁴` at redundancy nine and still around `10⁶` with
+  Betti-number bounds, against an observed switch-off at sixteen; the residual does not decay; and its
+  irreducibility hypothesis fails exactly on the persistent points. The multiplicative-subgroup
+  incidence route fails on both gate questions, since the relevant subgroups grow like `q` where the
+  machinery needs `q^{2/3}`, and every stratum-local statement is vacuous on the regular orbits — which
+  are the entire residual at redundancies eight and nine. **What no stratum-local tool of any kind can
+  reach is the class of orbits with trivial stabilizer**, and the named handle for it is the Borel
+  normal form.
+
 ### MDS–CSS AME local-unitary rigidity
 
 Let `C` be a linear `[2m,m,m+1]_q` MDS code and
@@ -2193,6 +2344,30 @@ frame reduction  (PG(2,q)=P ⟺ a single 4-cap frame is P; Lean)
   finite exact residual signature (sealed conic subsets already give unboundedly many P-valued
   heights), every scalar extremal selector tested, and unrestricted coordinate encodings, which are
   vacuous because a natural number can encode the whole residual.
+  **That rematching has since been attacked directly, and the target is now sharper and smaller.**
+  Two edge relations were compared. The sparse one, joining a new defect to a consumed label when the
+  line through them carries a point of the residual, is false as a universal invariant — nearly a
+  fifth of the exhaustively enumerated exchanges over `𝔽₁₁` are Hall-deficient under it. The complete
+  relation needs no incidence data at all and its Hall condition collapses to the single inequality
+  `|consumed| ≥ |created|`; with the charge accounting proved, strict support descent is exactly
+  strict inequality there. **So the live proof object is a counting statement, not a matching
+  statement, and the matching engine is a verifier rather than the algorithm.** Over `𝔽₁₁` the
+  inequality is verified exhaustively across all 1,560,900 legal size-four states and all 10,890,000
+  complete exchanges, with zero failures, while strict support descent *alone* is false there —
+  363,000 exchanges leave the support flat, and in every one the overload coordinate drops to zero, so
+  the correct well-founded coordinate at that field is the lexicographic pair. The decisive fact is
+  that `𝔽₁₁` is game-semantically empty: every defect-creating exchange has a zero-overload successor
+  and every such successor is a first-player win, hence lies outside every sound survivor set. **No
+  complete old-labelled exchange creating a new defect can be part of any sound survivor strategy
+  there**, which upgrades an earlier sampled observation to an exhaustive theorem, certifies away
+  every previously reported Hall failure at that field as sitting on a dead position, and means no
+  amount of searching at `q = 11` can produce the counterexample the acceptance gate asks for. The
+  degeneracy is a legal-density coincidence of the small field: a size-six residual there has about
+  1.2 legal moves and no positive overload, against 5.4 moves and three percent positive overload at
+  `q = 13`. The search therefore moves to `q = 13`, the smallest field with content, where a
+  deterministic 20.7-million-exchange sample gives strict surplus every time with no equality cases
+  and no failures under either relation. That is a large sample, not an exhaustion, and there is no
+  proof.
 - Prize: eventual uniform proof ~35–45%. **This is a subjective prior, not a measurement, and it
   should carry no weight in a resourcing decision** — it is a considered guess about an open problem,
   written in the same register as the exact results above it, which is exactly the confusion to
@@ -2309,7 +2484,7 @@ research programme may enter the frozen numbered manuscripts before those gates 
 
 **The optimization compiler's next gates.** `ergodis` has cleared its automata-minimization gate
 against published state-of-the-art tooling and its first quantum gate, and both frontiers are now
-about *external* validity rather than about the mathematics. Three things are open. The
+about *external* validity rather than about the mathematics. Several things are open. The
 symmetry-reduction factors on exact quantum-code distance were measured on one solver's
 branch-and-bound tree; solvers with built-in orbital branching may already recover part of the
 reduction, and rerunning there is the gate on any claim outside this programme. The certified
@@ -2324,6 +2499,36 @@ logging and the certified-automata-minimization literature found that the two li
 anticipate every individual component of the compiler's certificate bundle; what is unoccupied is the
 pipeline, not any piece of it, which shapes how the work can be positioned.
 
+Three newer gates sit on top of those. **The two winning scheduling routes have no automatic
+selector**: the certified dual bound wins the row the dynamic program lost by four orders of
+magnitude, and the dynamic program wins two rows the bound cannot finish, so choosing between them
+from the instance alone is the immediate successor and belongs in the shape classifier. **The decoder
+benchmark is not yet a real-usage benchmark**: it is the repetition code under unit-weight
+phenomenological noise, with a fixed four-round window at every distance and instructions per decode
+as the metric, where an operational decoder is governed by per-round latency and its tail under
+circuit-level weighted noise. Rebuilding the grid — weighting it toward realistic error rates,
+following the distance with the window, and reporting latency alongside instructions — comes before
+any further tuning, and a directly measured stack ladder already shows the shipped configuration is
+not the fastest one in thirteen of eighteen cells, so the standing comparison rests on something
+slower than the kernel can do. **The causal line is blocked on a novelty argument** rather than on
+engineering: the compositional lowering that would avoid materializing the carrier has to be written
+against a published variable-partition coarsening line first, and that argument is the highest-value
+unwritten piece there.
+
+**Where the compiler is pointed next, and where it deliberately is not.** Three ranked target slates
+were written and all are explicitly provisional. The first-ranked target is the exact quantum-distance
+line as a sustained programme — finish the one open band, then sweep every published code under about
+1,500 qubits whose printed distance is a heuristic upper bound — ranked first because nobody else in
+the field runs the exact computation, and because there is no miss: an exact value equal to the
+published bound is still the first certificate for it. Explicitly **not** pointed at the compiler: the
+cap game on odd projective planes, where the missing piece is a proof object rather than a bigger
+search; well-trodden classical geometry, where three same-day pre-emptions occurred during one
+campaign; and continuous or structure-free search spaces. One methodological lesson is recorded
+across all three slates and is worth more than the rankings: **proved reductions beat hardware** — a
+single-level lemma plus one fast path took one cell from a 600-second timeout to 0.14 seconds and
+turned an out-of-budget region into a 190-cell sweep, which is more reach than ten waves of raw
+search would have bought.
+
 **Adjacent problems, opened deliberately and bounded.** For Hadamard order 668, 25 of the 30
 mod-3-compatible fixed common multiplier subgroups are impossible — a published 21-subgroup
 proof-carrying baseline reproduced, then extended by a nine-compression congruence and a shift-111
@@ -2334,6 +2539,46 @@ no matrix of order 668 is constructed here. Existence at order 668 was settled e
 2000, method undisclosed), so the residual census now bears only on the Legendre-pair question at
 length 333. A companion attack on
 `M(18) ∈ {57,58,59}` by Seidel-spectrum census is queued and has produced nothing yet.
+
+With a separately posted order-2060 matrix also checked and classified, **the smallest open admissible
+order is now 2092 = 4·523**, and the work there is deliberately reframed from a construction race into
+**class exclusion** — certified statements that no matrix of a named structural shape and multiplier
+symmetry exists. On the bordered route four multiplier shards are closed by proof or exhaustion, one
+of them by exhausting all 2,496 admissible roots over more than five billion probes with an
+independent enumeration oracle confirming, and a uniform level test empties 148 of the 167 nontrivial
+multiplier units outright. On the plain route the admissible parameter sets are exactly the 33
+representations of 2092 as a sum of four positive odd squares, and an exact size congruence proves
+that no supplementary difference set on the cyclic group of order 523 is invariant under any
+multiplier subgroup of order at least eighteen, which closes the cheap cyclotomic tier by theorem
+rather than by search. Two negatives are labelled as searches rather than theorems: an unrestricted
+campaign of 288 billion mutations never beat a fixed residual, and — more usefully — a four-norm
+argument **proves that no congruence of any modulus can ever exclude the surviving patterns**, so
+only a lattice or counting argument could, which tells a successor where not to look. One incidental
+construction fell out of the improved local search: a certified Hadamard matrix of order 388,
+obtained through an exact per-swap delta identity that is proved and transfers to the bordered
+sectors.
+
+**Two further adjacent problems were opened and reported with their negatives.** Brouwer's complete
+census of exceptional complete exterior sets of a conic was reconstructed and this programme's
+invariants run over it, producing a bridge between two literatures that no located work cites
+together: the exceptional configuration at field order 31 *is* the Clebsch hexagon with its ten
+Brianchon points, so that census's entries at field orders 11 and 31 are one projective figure at two
+completion levels, and the two equations `6 = (q+1)/2` and `6+10 = (q+1)/2` each have one solution —
+which is why the icosahedral group appears exactly twice in the census. A previously declared null
+was refuted with it: the ten-vertex, fifteen-edge match is *not* forced by an arbitrary six-arc, since
+the Brianchon count over the 453 six-arcs of that configuration ranges over `0,2,3,4,6,10` and at
+three other field orders the best six-subset never reaches ten. **The figure itself, however, is
+pre-empted**: a full-text reading of Dye's 1991 paper, checked against page images rather than an
+optical reconstruction, shows he already proves the figure, its chord structure, its stabilizer, and
+the exact congruence deciding whether the Brianchon points are external. The contribution is
+therefore stated as the census bridge, with Dye cited for the figure. For projective planes of order
+twelve, two classical eliminations are certified — no point-regular collineation group, by a
+multiplier-orbit certificate plus an exhaustion of `1.18 × 10¹¹` nodes, hence every prime-order
+collineation fixes a point and a line — while the target case is not: the order-thirteen-invariant
+hyperoval survives, and the exhaustion shows that **assuming the hyperoval makes the problem strictly
+harder**, shrinking the exploitable symmetry and raising the survivor count. What is kept is an exact
+reformulation, a lossless reduction from eleven-factorial to 139 classes, and a new bridge to
+one-factorizations and starters; the successor route there is algebraic rather than combinatorial.
 
 **How much an aligned reconstruction costs.** The passages paper proves aligned four-sets determine
 a two-graph; the quantitative version asks how many alignment tests that takes, where a 4-set is
@@ -2412,6 +2657,25 @@ being prepared for release under a dual licence with the observational compiler 
 published speed claim — in the freely available part. Its engineering discipline is the same as the
 rest of the repo's: every run emits a compact certificate that is independently replayed and verified
 before a result is returned, so a wrong quotient is detected rather than trusted.
+
+It has since **left this repository**. The core crate now lives in its own repository, separated from
+the research workspace that drives it, with the reproducibility evidence and manifest kept on the
+private side and a filtered public snapshot produced by a guarded export; the manuscript that
+introduced it now cites the external repository. Two supporting changes came with the move. The
+research workspace became a proper multi-crate workspace whose task drivers are subcommands of a few
+binaries rather than a hundred auto-discovered ones, with dead and banked drivers deleted and history
+preserved; and every build tree moved out of the source trees, which found roughly 31 GiB of
+unreferenced build cache. Two capabilities were prototyped on top of the core and gated: a certified
+exact minimum-distance service with a live bracket, durable resume across machines, an up-front
+feasibility estimate, and a verification mode; and a **certified infeasibility explainer**, which
+answers an over-constrained roster with the minimal sets of tasks whose eligible resources are too
+few rather than with the word "infeasible". On 78 generated instances that explainer matches the
+planted ground truth exactly on all sixty infeasible cases and returns a median explanation in 0.40
+milliseconds against 61.2 for an unsatisfiable-core extraction — but the commercially interesting
+result is not the speed: on rosters with several independent shortages the solver's core is *smaller*
+and deleting the tasks it names leaves the roster still infeasible, every time, while the decomposed
+certificates restore feasibility every time. A core answers "is there a conflict"; a planner needs
+"what are all the shortages, and who is short".
 
 **Sum-free solvers:** Rust (`sumfree.rs` cyclic Grundy; `capset2/5.rs` u128/256-bit AGL-canonical),
 Go (`sumfree.go` full-`Aut(G)` negamax; `sumfree_par.go` sharded-parallel + pairing verifier;
@@ -2948,8 +3212,24 @@ and verification practitioners, and its speed claim is checkable by anyone with 
 comparison inputs. It is licensed AGPL-3.0 (the surrounding manuscript stays MIT) and is being
 prepared for release under a dual licence, split so that the observational compiler — the part the
 published benchmark exercises — is in the freely available half and depends on nothing withheld, with
-no dependency edge from the public part into the reserved one. Two pieces of homework were done
-before that split was designed. A per-vertical intellectual-property review found the quantum
+no dependency edge from the public part into the reserved one.
+
+**That split has now been executed, and the guard around it is enforced by tooling rather than by
+care.** The core crate was extracted into its own repository with its history replayed rather than
+squashed, the research workspace kept separately with its full history, and the evidence tree kept on
+the private side because moving it would have broken the manuscript's canonical replay and its
+checksum manifest. A public snapshot is produced only by a filtered export; a lint rule set, an
+export script, a staging clone whose push destination is deliberately parked, and independent
+pre-commit and pre-push hooks stand between that snapshot and any publication. The guard is tested
+the way a solver is tested: a fixture suite in which every refusal — task identifiers, process
+documents, private path fragments, oversize files, a dirty tree, an unrecorded tag, a broken replay
+command, a push to the public destination from a fresh clone — is exercised and passes, all 44 of
+them. Fresh-clone validation across the resulting repositories passed thirteen checks outright and
+repaired three, one of which revealed that the manuscript's canonical evidence replay had **already
+been broken in this repository** by an earlier file move. The public export tree carries one
+remaining lint finding, recorded rather than suppressed. **Nothing has been pushed, released, or
+given a remote**; branch protection and one credentialed verification remain, and both are reserved
+for an explicit authorization. Two pieces of homework were done before the split was designed. A per-vertical intellectual-property review found the quantum
 application area free of relevant patents, the storage area the only one warranting paid
 freedom-to-operate work, and patent-eligibility the dominant risk overall. A prior-art assessment
 against pseudo-Boolean proof logging and the certified-automata-minimization literature then found

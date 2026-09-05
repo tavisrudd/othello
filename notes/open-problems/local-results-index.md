@@ -1,6 +1,6 @@
 # Local result index for open-problem matching
 
-**Snapshot date:** 2026-08-30
+**Snapshot date:** 2026-09-04
 
 This is a routing index, not a replacement for theorem reports. Its purpose is
 to make later external-problem filtering possible without repeatedly searching
@@ -157,19 +157,32 @@ Primary baseline: `notes/2026-07-31-results-summary-snapshot.md`, section
 ## Exact computational results and solver measurements
 
 31. Exact minimum distances closing published upper bounds for large quantum CSS
-    codes: lifted-product \([[1496,194,20]]\) and \([[1496,198,16]]\), replacing
-    bounds obtained from randomized trials, and bivariate-bicycle
-    \([[288,12,18]]\), \([[360,12,24]]\), \([[784,24,24]]\). A fourth,
-    \([[756,16,\cdot]]\), reaches only \(d\ge24\). Exhaustive enumerations with
-    the attained witness replayed by a second implementation.
+    codes: the complete published Liu–Marquardt lifted-product list, namely
+    \([[1428,186,18]]\), \([[1496,194,20]]\), \([[1496,198,16]]\),
+    \([[1496,192,16]]\), \([[1496,198,14]]\), \([[1500,81,18]]\) and
+    \([[1500,76,20]]\), every one replacing a randomized upper bound that proved
+    tight; bivariate-bicycle \([[288,12,18]]\), \([[360,12,24]]\),
+    \([[784,24,24]]\); and \([[714,100,16]]\), whose distance a published
+    satisfiability-based solver could not compute under a two-hour limit in any
+    of 46 configurations. \([[1428,186,18]]\) is a new exact rate–distance record
+    \(kd^2/n=42.20\). Open bands: \([[756,16,d]]\) narrowed to
+    \(28\le d\le34\) with \(d\) even, and \([[1768,224,d]]\) to \(22\le d\le24\)
+    with \(d_X=d_Z\) proved by a verified coordinate bijection. Exhaustive
+    enumerations with the attained witness replayed by a second implementation.
 32. Measured solver and compiler results for *ergodis*: 2.699x geometric mean
     over the reference automaton minimizer on its own published input list,
     winning 158 of 169; 104.16x cold and 81.48x warm over a
     constraint-programming control on eight coding and storage workloads;
     381.13x over a leading SAT solver on the certified-unsatisfiable rows of the
     official VLSAT-2 list; and 30.10x wall on an exact quantum-distance round
-    trip after restoring a symmetry the conventional encoding destroys. These
-    are reproducible measurements, not theorems, and each carries its protocol.
+    trip after restoring a symmetry the conventional encoding destroys. A
+    predeclared negative-control tier, hashed before measurement, adds the
+    frontier: five of six predicted rows landed, wins of 3.75x, 30.13x, 82.51x
+    and 1,368.75x, one refusal outside a declared width bound, and the one large
+    loss converted into an 11x win with a 128-byte certificate by a certified
+    Lagrangian dual bound. One published loss stands: a contended repair-DAG row
+    where the control is about 4.7x faster on solve work. These are reproducible
+    measurements, not theorems, and each carries its protocol.
 33. The externally announced Hadamard order-668 payload decoded, verified in
     exact arithmetic and classified: a bordered Goethals–Seidel array with a
     four-row border over four circulants of length 166 with an extra inner
@@ -177,6 +190,66 @@ Primary baseline: `notes/2026-07-31-results-summary-snapshot.md`, section
     with the shift as a free parameter. Disjoint from the Legendre-pair route,
     so length-333 Legendre pairs remain open; smallest open admissible order is
     now 2092.
+34. Class exclusion at Hadamard order \(2092=4\cdot523\): four bordered
+    multiplier shards closed by proof or exhaustion; a uniform level test empties
+    148 of the 167 nontrivial multiplier units; the plain admissible parameter
+    sets are exactly the 33 representations of 2092 as a sum of four positive odd
+    squares; and no plain supplementary difference set on the cyclic group of
+    order 523 is invariant under a multiplier subgroup of order \(\ge18\). A
+    four-norm argument proves no congruence of any modulus can exclude the
+    surviving deviation patterns. Existence at 2092 is open. Incidental: a
+    certified Hadamard matrix of order 388 from a spin shard.
+## Finite-geometry, coding and game results added since the previous snapshot
+
+35. Certified finite no-go for transversal gates: over every binary CSS code of
+    length \(\le8\) (8,044,851 flags at length eight, exhaustive), X-check weight
+    \(\le7\) admits no diagonal transversal gate at Clifford-hierarchy level
+    \(\ge3\); hence eight qubits is the minimum length for a diagonal transversal
+    non-Clifford gate, and level three at length eight occurs only for
+    \([[8,3,2]]\). Exact diagonal transversal groups for \([[16,4,2]]\),
+    \([[32,5,2]]\) and \([[31,1,3]]\); exact negatives for Steane,
+    \([[15,7,3]]\) and Shor.
+36. Projective planes of order twelve: no point-regular collineation group
+    (classical, recertified by multiplier orbits plus a \(1.18\times10^{11}\)-node
+    exhaustion), hence every prime-order collineation fixes a point and a line;
+    the order-thirteen tactical decomposition is solvable; a bridge from hyperoval
+    external lines to one-factorizations of \(K_{14}\) and starters in \(Z_{13}\),
+    with all 133 starters enumerated. The order-thirteen-invariant hyperoval is
+    **not** eliminated, and assuming it strictly increases the survivor count.
+37. Projective Reed–Solomon exceptional band: the standing conjecture is
+    \(X(r)\cap\{q\ge r+3\}\subseteq\{7,8,9,11,13\}\) for every \(r\ge6\), i.e. a
+    constant threshold 16 far below the proved threshold. Three predecessor
+    conjectures falsified by exhaustive census; the Lang–Weil and
+    multiplicative-subgroup-incidence routes both closed by located obstructions;
+    the residual is the regular class with trivial stabilizer, unreachable by any
+    stratum-local tool.
+38. The cap game on odd projective planes: on the complete exchange relation the
+    Hall condition collapses to \(|\text{consumed}|\ge|\text{created}|\), so the
+    live proof object is a counting statement. Verified over all 10,890,000
+    complete exchanges at \(q=11\), where the whole domain is also proved
+    game-semantically dead, so that field is discharged as the equality base case
+    and cannot supply a counterexample; strict surplus holds on a
+    20.7-million-exchange sample at \(q=13\). No proof.
+39. Exact minimum-weight decoding measurements: a from-scratch sparse matching
+    kernel ahead of PyMatching 2.4.0 in sixteen of eighteen cells by 2.5x to
+    11.5x on the repetition code under phenomenological noise, with the margin
+    growing in distance, zero minimum-weight disagreements over 360,000 shots,
+    and a linear-programming optimality certificate on every decode. Two losses
+    at a physical error rate of 0.05. A certified predecoder is sound and general
+    and fails by exactly one unit of margin at every radius that compiles.
+    Reproducible measurements on one family and one metric, not theorems.
+40. Brouwer's exceptional complete exterior-set census bridged to the Clebsch
+    hexagon: the exceptional configuration at \(q=31\) is the hexagon with its
+    ten Brianchon points, so the \(q=11\) and \(q=31\) entries are one figure at
+    two completion levels, and \(A_5\) occurs exactly twice in the census because
+    \(6=(q+1)/2\) and \(6+10=(q+1)/2\) each have one solution. The
+    ten-vertex/fifteen-edge match is *not* forced by an arbitrary six-arc. **The
+    figure itself is pre-empted by Dye 1991**; only the census bridge is
+    unlocated, and no work citing both literatures was found. Provisional
+    (unvetted mining-lane result).
+
+Primary baseline: `notes/2026-07-31-results-summary-snapshot.md`, sections
+"Unassigned adjacent results" and "Two open programmes."
 
 ## Matching cautions
 
@@ -193,4 +266,8 @@ Primary baseline: `notes/2026-07-31-results-summary-snapshot.md`, section
   the timed region agree.
 - A classical mechanism reused in a new setting is not a new mechanism. Match
   such work by the downstream consequence, not by the construction it reuses.
+- Two literatures that never cite each other can both contain a result. Read the
+  classical source at full text before claiming a configuration; a citation-graph
+  search over the modern side will not find it, and what survives is usually the
+  bridge between the two, not the object.
 
