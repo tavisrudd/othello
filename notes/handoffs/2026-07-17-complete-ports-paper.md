@@ -992,8 +992,32 @@ obstruction. An independent Python oracle replays all 168 banked worker states. 
 the `g=41` fine-orbit sector the same algebra is a wash: at matched wall clock both
 engines reach residual 8, the value the banked evolution already had, with the tabu
 step scoring 25.1x as many exchanges exactly, so that sector is not
-neighbourhood-limited. The next lever is phase two: drive the `q58`/`q87`/`q174`
-search from the banked shell corpus rather than from a random lift.
+neighbourhood-limited.
+
+Phase two is now driven from that shell corpus
+(`2026-09-04-c1016-phase-two-from-shell-corpus.md`), which had never happened
+before: the banked walk enters phase two only after phase one reaches the shell
+inside the same run, and the stopped campaign never did. The same delta algebra
+transfers to the `q58` and `q87` views. The objective factors through the
+characters of the order-six fibre — the `q58` shell is a perfect-autocorrelation
+condition on an integer fluctuation with `sum e^2 = 523`, the `q87` shell the
+same condition on an Eisenstein fluctuation with `sum N(delta) = 523`, and the
+four registered zero shells together say exactly that the fibre's character
+spectrum is flat at `2092 = 4 * 523` off the trivial character. So a candidate is
+two per-column table reads and one `O(1)` energy change, and all `4 * 29 * 30`
+transfers are scored exactly on every step. At equal wall clock the step reaches
+1,472--1,664 against the walk's 7,344--9,008 and puts the `q174` energy exactly on
+target in every round while the walk never does: this sector is strongly
+neighbourhood-limited. Both engines plateau, insensitively to a two-hundred-fold
+per-lift budget range and to every tabu policy tried, and almost all of the
+residual is the `q87` Eisenstein half — scoping the search to that half alone
+improves it by a tenth, so it is hard on its own rather than crowded out.
+Capacity, parity and Eisenstein-prime exclusions are all empty. The flat-spectrum
+reading also shows that phase two never scores the order-six character pair's
+off-zero correlations, which is the largest untouched rung of the ladder. Next:
+look for a congruence on the `q87` correlation that would explain a floor near
+1,500, test whether a much larger shell corpus holds states phase two finds
+easier, and score that order-six pair.
 
 C1035 is closed: `ergodis-private` is a Cargo workspace whose root package is library-only; the
 six named tools live in `tasks/tools` (`ergodis-tools`), gem-mining drivers in `tasks/gem-hunt`,
