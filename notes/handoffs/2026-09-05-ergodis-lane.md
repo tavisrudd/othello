@@ -3,7 +3,8 @@
 **Lane**: `ergodis`
 
 **Purpose:** routing only. Closed dispositions, measurements, proof summaries, and correction
-trails belong in the dated task reports.
+trails belong in the dated task reports and in the archive companion,
+[`2026-09-05-ergodis-lane-archive.md`](2026-09-05-ergodis-lane-archive.md).
 
 **Date**: 2026-09-05
 **Status**: ACTIVE. Split out of `complete-ports` on 2026-09-05. C1016 (order-2092 Hadamard
