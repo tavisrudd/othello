@@ -4382,8 +4382,17 @@
       "last": 1067,
       "purpose": "sparse matcher event-queue discipline (heap vs bucket, horizon retirement, dispatch on compiled largest edge weight); matcher-wide performance-contract audit",
       "sequence": 487
+    },
+    {
+      "count": 1,
+      "first": 1068,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1068,
+      "purpose": "sparse matcher touch loop and certificate closure reads on the six weighted PyMatching losses",
+      "sequence": 488
     }
   ],
-  "next_id": 1068,
+  "next_id": 1069,
   "schema": "codex-task-id-allocations-v1"
 }
