@@ -1040,10 +1040,36 @@ residual is the `q87` Eisenstein half — scoping the search to that half alone
 improves it by a tenth, so it is hard on its own rather than crowded out.
 Capacity, parity and Eisenstein-prime exclusions are all empty. The flat-spectrum
 reading also shows that phase two never scores the order-six character pair's
-off-zero correlations, which is the largest untouched rung of the ladder. Next:
-look for a congruence on the `q87` correlation that would explain a floor near
-1,500, test whether a much larger shell corpus holds states phase two finds
-easier, and score that order-six pair.
+off-zero correlations, which is the largest untouched rung of the ladder.
+
+That pair is now scored
+(`2026-09-05-c1016-full-q174-correlation-and-the-order-six-pair.md`). The whole
+ladder is one carrier correlation — `2088` at the zero shift and `-4` elsewhere
+on four blocks of length 522 — and each registered target is that law
+aggregated over a shift subgroup, so the `q174` view's own correlation,
+`(2080, -12)` over all 88 canonical shift classes, aggregates to `q58`, `q87`
+and the energy together. Scoring it is therefore a strict extension, and it
+adds exactly the order-six pair, cut out by an inclusion-exclusion whose norm
+obeys an exact integer orthogonality identity that every reported state is
+checked against. Measured on the twelve banked phase-two states, between 99.2%
+and 99.8% of their whole deviation sits in that pair: they hold a registered
+residual near 1,700 while their full `q174` correlation error is 108,832 to
+401,456, and the registered score does not even order them by true error. The
+same full-neighbourhood step scoring the whole correlation reaches 3,344--3,712
+at equal wall clock, thirty to seventy times closer, at the cost of a
+registered residual about three and a half times worse; its step costs 5.3x the
+instructions of the registered step, and hoisting the scope test out of the
+candidate scan left the registered path 5.1% cheaper than before the change at
+identical results. That plateau is insensitive to a hundredfold per-lift budget
+range and to starting from the banked registered-solved states instead of fresh
+lifts, its residual is spread evenly across the sign, order-three and order-six
+blocks rather than concentrated, and it sits a hundred times above the exact
+floor of 32 that the mod-four and mean-zero fibre invariants permit. Next: look
+for a congruence on the `q174` deviation beyond those two invariants that would
+explain the plateau near 3,500, test a much larger shell corpus now that there
+is a scale that orders states by real distance, and note that even an exact
+`q174` hit leaves the last factor of three to the carrier-522 replay, which
+nothing scores yet.
 
 C1035 is closed: `ergodis-private` is a Cargo workspace whose root package is library-only; the
 six named tools live in `tasks/tools` (`ergodis-tools`), gem-mining drivers in `tasks/gem-hunt`,
