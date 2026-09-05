@@ -161,7 +161,124 @@ because the arm it routes away from is much worse there.
 
 The gain shrinks as the rate rises on the largest surface graphs, for the reason C1063 gave: more
 shots land above the threshold, where the routed arm and the level-four arm are the same code.
-Surface `d = 11` at `p = 0.002` has a mean of about forty-five defects and the routed arm is the
-matcher on essentially every shot, which is exactly the ratio of 1.000.
+Surface `d = 11` at `p = 0.002` has a mean of 44.2 defects and the routed arm is the matcher on
+essentially every shot, which is exactly the ratio of 1.000.
 
-## (in progress: PyMatching standing, latency, fast-path census)
+## The PyMatching standing does not survive intact, and this is the finding
+
+Same protocol as C1063 — three interleaved rounds, two-size differencing, instructions per decode,
+PyMatching 2.4.0 built from the same shot files and the same quantized integer weights — over the
+thirty-three operating cells of the weighted grid
+(`benchmarks/tiger-blossom/2026-09-04-c1064-weighted-vs-pymatching-operating.log`). Ratios are Tiger
+over PyMatching, so below one means Tiger is ahead.
+
+| family     | d  | `p = 0.0005` | `p = 0.001` | `p = 0.002` |
+|------------|----|--------------|-------------|-------------|
+| surface    | 3  | 0.189        | 0.092       | 0.166       |
+| surface    | 5  | 0.139        | 0.211       | 0.396       |
+| surface    | 7  | 0.250        | 0.562       | **1.115**   |
+| surface    | 9  | 0.584        | **1.226**   | **1.736**   |
+| surface    | 11 | **1.102**    | **1.690**   | **1.997**   |
+| repetition | 3  | 0.703        | 0.269       | 0.244       |
+| repetition | 5  | 0.170        | 0.192       | 0.106       |
+| repetition | 7  | 0.113        | 0.115       | 0.137       |
+| repetition | 9  | 0.098        | 0.110       | 0.219       |
+| repetition | 15 | 0.097        | 0.279       | 0.718       |
+| repetition | 25 | 0.288        | 0.887       | **1.533**   |
+
+Tiger is ahead in twenty-six of the thirty-three cells and behind in seven, marked in bold. On the
+phenomenological grid C1063 measured Tiger ahead in all thirty-three. The standing therefore holds
+where it was strongest and reverses where the syndrome is densest: the losses are the two largest
+surface graphs from `p = 0.001` upward, surface `d = 7` at `p = 0.002`, and repetition `d = 25` at
+`p = 0.002`.
+
+Cycles agree rather than rescuing the losses, which is a second difference from C1063. There, the
+two losing cells were instruction-count losses that became cycle wins; here surface `d = 9` at
+`p = 0.001` is 1.029 in cycles, `d = 11` is 1.281 and 1.259 at the two higher rates, and repetition
+`d = 25` at `p = 0.002` is 1.659. Only surface `d = 7` at `p = 0.002` flips, to 0.927. PyMatching's
+round-to-round spread is one to eighty per cent on the small cells against about 0.01 per cent for
+the kernel, so its ratios below about `d = 7` are worth one significant figure; the losing cells are
+all large, where its spread is under two per cent and the ratios are firm.
+
+The shape is legible and it is about density. The weighted surface graphs carry a mean of 5.3, 11.9
+and 22.5 defects at distances 7, 9 and 11 at `p = 0.001`, and 10.5, 23.5 and 44.2 at `p = 0.002`, so
+nearly every shot in the losing cells is above
+the routing threshold and the kernel is running its sparse region-growth matcher on a genuinely
+weighted graph — which is the regime PyMatching 2's sparse blossom implementation was built for.
+Where the syndrome is sparse enough that the cluster decomposition and the closed forms answer the
+shot, the kernel is still three to eleven times ahead.
+
+Two consequences follow, and neither is a footnote. The published claim of a uniform advantage over
+PyMatching was a property of the phenomenological model as much as of the kernel, and any future
+statement of the standing has to name the noise model it was measured on. And the kernel's own
+frontier moves: the thing to attack is the sparse matcher's cost on weighted graphs, not the closed
+forms, because that is now the arm that runs on every dense shot and it is where the losses are.
+
+## Exactness is stronger on the weighted model, not weaker
+
+PyMatching 2.4.0 verified against the routed arm on all thirty-three cells at twenty thousand shots
+each (`benchmarks/tiger-blossom/2026-09-04-c1064-weighted-pymatching-exactness.txt`): zero weight
+disagreements and, in every cell, zero prediction disagreements as well.
+
+That second half is new. On the phenomenological grid C1063 found the two decoders predicting
+different logical classes on up to 831 shots in 20,000, because minimum-weight witnesses tie
+constantly under unit weights and the tie policy lets either decoder settle whichever it reaches
+first. Real weights break those ties: with edge weights spread from 141 to 263 the minimum-weight
+witness is essentially always unique, so agreeing on the cost forces agreeing on the class. The
+kernel's tie policy is unchanged; the model stopped exercising it.
+
+## How much of the old picture was tie degeneracy
+
+The `FastPathCensus` on the same cell under both models, 200,000 shots
+(`benchmarks/tiger-blossom/2026-09-04-c1064-fast-path-census-both-models.txt`). The four whole-shot
+closed forms — empty, single defect, the two-defect closure lookup, and the four-defect form —
+answer a shot without any search at all:
+
+| cell                        | closed forms answer | sparse matcher answers | interior nodes | sparse events per answer |
+|-----------------------------|---------------------|------------------------|----------------|--------------------------|
+| surface `d = 9`, phenom.    | 86.4%               | 1.3%                   | 63             | 8.70                     |
+| surface `d = 9`, circuit    | 6.5%                | 32.1%                  | 0              | 23.63                    |
+| repetition `d = 25`, phenom.| 86.3%               | 2.8%                   | 506            | 5.23                     |
+| repetition `d = 25`, circuit| 50.4%               | 12.1%                  | 0              | 8.28                     |
+
+On the phenomenological surface model six shots in seven are answered by a closed form and never
+reach a search. On the circuit-level model at the same distance and nominal rate, one in fifteen is.
+The compiled interior neighbour-offset specialization — which relaxes through fixed integer offsets
+instead of the adjacency arrays — does not fire at all on either weighted graph, because it requires
+every interior edge to carry one shared weight with no observable flip, and a circuit-level model
+gives no two edges the same weight by accident.
+
+So the answer to the question the brief asked is: a large part of the earlier picture was the model.
+The closed forms were answering most shots because unit weights make the two-defect closure exact
+and cheap, and the interior specialization existed because unit weights make every bulk edge
+identical. Neither holds on a circuit-level model, and what is left carrying the load is the cluster
+decomposition — which is why the routing threshold had to move so far and why the remaining
+frontier is the sparse matcher.
+
+## Latency, and the deadline it now has to be read against
+
+Operating rate, 200,000 shots per row, the window following the distance
+(`benchmarks/tiger-blossom/2026-09-04-c1064-weighted-latency-operating.txt`). A window of `d` rounds
+gives the decoder a budget of about `d` microseconds against a one-microsecond per-round deadline.
+
+| graph                | shipped level 4, p50/p90/p99 (ns) | routed, p50/p90/p99 (ns) | budget |
+|----------------------|-----------------------------------|--------------------------|--------|
+| surface `d = 7`      | 1442 / 2454 / 4548                | 281 / 1513 / 5120        | 7 µs   |
+| surface `d = 9`      | 3657 / 5621 / 9438                | 2073 / 5841 / 9478       | 9 µs   |
+| surface `d = 11`     | 7554 / 11802 / 19626              | 7794 / 12212 / 20659     | 11 µs  |
+| repetition `d = 15`  | 40 / 120 / 1563                   | 40 / 120 / 1232          | 15 µs  |
+| repetition `d = 25`  | 641 / 2575 / 3366                 | 300 / 2965 / 4519        | 25 µs  |
+
+Routing halves the median at surface `d = 7` and `d = 9` and at repetition `d = 25`, and leaves the
+upper quantiles roughly where they were, because the shots in the tail are the dense ones that both
+arms send to the matcher.
+
+Against the budget, the repetition family is comfortable and the surface family is not. Surface
+`d = 7` and `d = 9` fit inside their windows with about a 30 per cent and 5 per cent margin at the
+ninety-ninth percentile, and surface `d = 11` is nearly twice over it on both arms. On the
+phenomenological model every graph except surface `d = 11` held its ninety-ninth percentile under a
+single microsecond; on the circuit-level model none of the surface graphs does. A real-time decoder
+for a distance-11 surface code, on this noise model, would need parallelism, a faster dense arm, or
+a predecoder — this kernel single-threaded does not make the deadline. The maxima remain single
+outliers in the tens of microseconds and are not stable between runs, so the tail beyond the
+ninety-ninth percentile is still not something this harness characterizes.
