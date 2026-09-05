@@ -57,7 +57,7 @@ task is that the review's repair, not the spike's original claim, is what the ta
 | 2 | compiling pays for the decision query | **exact, and the economics fail structurally**: compression passes at `4.97x` and `2.00x` above a verified symmetry fold and beats concrete-state search by `220x`, but against memoized re-solve the ratio is `1.00x`, because the lowering solves the model once per materialized state — exactly the table a memoized solver fills |
 | 3 | an exact, certificate-carrying Halpern–Pearl engine | **correct**: all eight published verdicts reproduced, including the two that catch a weaker implementation; the exhaustion certificate missed its 10% threshold at a 55-candidate scale where a class-based negative cannot compress |
 | 4 | the twin network becomes a path | **precondition corrected**: two arms exact, two numerically wrong (`0/1` and `2/3` against a true `1/3`); `O ⊇ E` is sufficient and not necessary, and the exact condition — evidence set is a union of classes, action is declared — is decidable on the classes |
-| 5 | separating interventions are unusually good counterexamples | **refuted**: the loop seals up to reparameterization with all 2,849 separators replayed, but the separator arm is `0.770x` on the largest sealing family and `0.967x` once the one-sidedness is removed |
+| 5 | separating interventions are unusually good counterexamples | **refuted for the pair, reversed for the partition**: the loop seals up to reparameterization with every separator replayed; the separator-*pair* arm is `0.770x` on the largest sealing family and `0.967x` once the one-sidedness is removed, though its review shows those are `p = 0.180` and `p = 1.000` on paired seeds — a direction, not a measured penalty — while the separator-*partition* arm, whose reported collapse was a fitness artifact, wins at `p = 0.002` and `p = 0.039` after repair |
 | 6 | decision equivalence is a cheaper identification target | **met, and the equivalence does not exist**: gaps from `1.00x` on the predeclared loss to zero experiments, and to a decision reached where identification is impossible; sharing an optimal action is not transitive, so no quotient expresses the stopping rule |
 | 7 | a compositional route reaches scale | **exact and it scales**: `4.096 × 10^15` contexts to 4,096 in 25.6 microseconds, exact for every observation set, intervenable set and arity; the composed quotient is a product partition and equals the flat one on 9 of 13 families, the four losses being exactly the non-product shapes |
 | 8 | the "another context language" thesis has content | **met sharply, and only here**: under a cyclic-cursor vocabulary no generator is idempotent, no pair commutes, and all 34 separators of length two or more are order-essential, against a hard-pin control with none; economics predeclared as a loss and lost at `1.00x` |
@@ -82,10 +82,19 @@ compiled machine answers every word.
 
 ## 5. What died, and should not be revived without new evidence
 
-- **The separating intervention as a teaching signal.** Measured twice, in the seal loop (probe 5)
-  and in experiment selection (probe 6), against fair baselines both times: `0.770x`/`0.967x` and
-  `1.00x`–`1.10x`. It is a sound witness and a good certificate; it is not an unusually informative
-  counterexample, and the brief rested weight on the claim that it is.
+- **The separating intervention *as a pair* as a teaching signal.** Measured twice, in the seal loop
+  (probe 5) and in experiment selection (probe 6), against fair baselines both times: `0.770x` and
+  `0.967x` there, `1.00x`–`1.10x` here. Probe 5's review adds that its two ratios are `p = 0.180`
+  and `p = 1.000` on paired seeds, so the fair statement across both probes is that **nothing
+  measures an advantage**, rather than that a penalty was measured. The brief rested weight on the
+  claim that the witness teaches, and no measurement supports it.
+  **The exception is the constraint the witness carries.** The same review found that probe 5's
+  separator-*partition* arm — the whole observation partition the separating intervention induces,
+  imposed over every context — wins at `p = 0.002` and `p = 0.039` on two families once a
+  duplicate-refinement and stall-exemption artifact is removed, and seals in the fewest rounds of
+  any arm wherever it seals. So the usable form of the witness is a global refinement constraint,
+  not a counterexample pair. That is the one place in C1062 where the separating intervention pays,
+  and it was buried under a bug until after the probes closed.
 - **Variable merging, and the "hundred thousand variables become a fifty-state machine" line.**
   Retired in probe 7. The `(u, I)` quotient cannot express "these 27 states are one causal
   variable" — that is a partition of the variable set, which is the carrier of Madaleno, Misra and
@@ -181,8 +190,13 @@ wrong quotient rather than an error.
   compile is the last untested half of probe 3's kill criterion. **Open, and the only unmeasured
   path to a positive economic result on the flat carrier.**
 - **Probe 5's induced global partition arm won at `1.667x` on the smallest family and collapsed to
-  `1/12` sealed on the next.** Whether that is intrinsic or an artifact of equal fitness weighting
-  is a carried re-test that nobody ran. **Open.**
+  `1/12` sealed on the next.** **Settled by the review, and by neither branch of the question as
+  posed**: the weighting was not equal, it grew by one copy per round, because the arm pushed
+  duplicate refinements into its list; and the arm was exempt from the stall rule, so a run that had
+  stopped making progress spent its whole budget. Repaired, the arm seals 11 of 12 on that family
+  and wins at `p = 0.039`. The lesson worth carrying is not about weighting: a diagnostic exemption
+  granted to one arm, plus an unchecked `push`, produced a clean-looking negative result that stood
+  in a committed report.
 - **The intervention-vocabulary quotient is empty for hard edits** (16 declared edits, 16 distinct
   actions) and was never re-measured under the non-idempotent vocabulary probe 8 built, where it is
   the natural place for a nonzero answer. **Open, and cheap.**

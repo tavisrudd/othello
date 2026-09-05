@@ -83,7 +83,7 @@ probe may quietly claim both.
 | 2     | **Best intervention, and the economics that follow** | L    | compiled beats memoized re-solve on the enumeration query, residual compression above the orbit baseline | **done**: compression passes (4.97x, 2.00x), timing fails structurally; quotient worth 220x over concrete-state search | `2026-09-04-c1062-probe2-best-intervention-and-economics.md` |
 | 3     | Exact actual causality and responsibility           | L    | verifier work under 10% of search; published verdicts matched | **done**: all eight published verdicts reproduced; certificate missed 10% at a 55-candidate scale; not closed | `2026-09-04-c1062-probe3-actual-cause-and-responsibility.md` |
 | 4     | Level-3 counterfactual and the observation precondition | M | exact under `O ⊇ E ∪ {Y}`; demonstrably wrong without it | **done**: two arms exact, two wrong (0/1 and 2/3 against a true 1/3); `O ⊇ E` is sufficient and not necessary, and the exact two-part condition is decidable on the classes | `2026-09-04-c1062-probe4-counterfactual-precondition.md` |
-| 5     | Evolve proposes, separator refutes                  | M    | seals to the exact kernel, and beats the random-counterexample arm on generations | **done**: first half met, second half refuted — the loop seals up to reparameterization, but the separator arm is `0.770x` on the largest sealing family and the kind-balanced diagnostic arm returns to `0.967x` | `2026-09-04-c1062-probe5-evolve-proposes-separator-refutes.md` |
+| 5     | Evolve proposes, separator refutes                  | M    | seals to the exact kernel, and beats the random-counterexample arm on generations | **done, then revised**: the loop seals up to reparameterization; the separator-*pair* arm is `0.770x` and the kind-balanced arm `0.967x`, both reproduced and both statistically unestablished (`p = 0.180`, `p = 1.000`); the separator-*partition* arm's reported collapse was a fitness artifact and it wins at `p = 0.002` and `p = 0.039` after repair | `2026-09-04-c1062-probe5-evolve-proposes-separator-refutes.md`, revised by `2026-09-04-c1062-probe5-fable-review.md` |
 | 6     | k-ary experiment design and decision equivalence    | M    | measured gap between full and decision-sufficient identification, plus a near-zero gap on the negative family | **done**: met on both halves; gaps run from `1.00x` on the predeclared loss to zero experiments and to a decision reached where identification is impossible, and decision-sufficiency is not an equivalence relation at all | `2026-09-04-c1062-probe6-kary-design-and-decision-equivalence.md` |
 | 7     | Compositional lowering along the DAG                | L    | composed quotient equals the flat one on small models | **done**: reduction exact, `4.1e15` contexts to 4,096 in 25.6 µs; the composed quotient is a product partition and equals the flat one on 9 of 13 families, reaching the product ceiling on every coordinate | `2026-09-04-c1062-probe7-novelty-argument.md`, `2026-09-04-c1062-probe7-compositional-lowering.md` |
 | 8     | Unrolled sequential window                          | S    | word closure non-vacuous, measured | **done**: met sharply — cursor vocabulary has 0/4 idempotent, 0/6 commuting, minimal words past the window, and all 34 length-≥2 separators order-essential, against a control with none; economics 1.00x as predeclared | `2026-09-04-c1062-probe8-unrolled-sequential-window.md` |
@@ -526,6 +526,15 @@ that the evidence set is a union of classes and the action is declared, both dec
 compiled classes without re-solving. A caller can therefore be told a query is inexpressible instead
 of receiving a wrong fraction, and the size of a wrong answer carries no information, only its
 existence.
+
+**Probe 5 is done, and its review revises the second half of what follows**
+(`2026-09-04-c1062-probe5-fable-review.md`). Both ratios below reproduce exactly under the repaired
+code at the published budget, so nothing here is an arithmetic error, but on paired seeds they are
+`p = 0.180` and `p = 1.000`: the separator *pair* shows no measurable advantage, which is weaker and
+more accurate than a measured penalty. The separator *partition* arm's collapse was duplicate
+refinements inflating its fitness plus a stall exemption; repaired, it seals 11 of 12 on
+`group counts` and wins at `p = 0.039` there and `p = 0.002` on `pair counts`, the only significant
+effects in the probe. The original text follows.
 
 **Probe 5 is done and it refutes the claim the brief rested most weight on.** The loop seals: the
 blinded planted abstraction is recovered exactly, up to reparameterization, on every family inside

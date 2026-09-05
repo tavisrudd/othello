@@ -16,13 +16,24 @@ and `evidence/2026-09-04-causal-abstraction-full-sample-reach.txt` (the reach di
 is deterministic: a second run reproduced every figure below exactly.
 **Predeclared threshold**: seals to the exact kernel, and beats the random-counterexample arm on
 generations.
-**Verdict**: **first half met, second half refuted.** The loop seals — it recovers the planted
-abstraction exactly, up to reparameterization, on the families inside its reach. The separating
-intervention is *not* a better counterexample than a uniformly sampled violated pair: on the
-largest family that seals reliably it is **worse**, at `0.770x` (the random arm needs 0.770 times
-the rounds, i.e. the separator arm takes about 30% more). The diagnosis is that a separating
-intervention is a one-sided oracle, and the diagnostic arm that repairs the one-sidedness lands
-back on the random arm at `0.967x`.
+**Verdict**: **first half met, second half refuted for the separating *pair* and reversed for the
+separating *partition*.** The loop seals — it recovers the planted abstraction exactly, up to
+reparameterization, on the families inside its reach. No arm built on the separating *pair* shows an
+advantage over a uniformly sampled violated pair: on the largest family that seals reliably it is
+slower, at `0.770x` (the random arm needs 0.770 times the rounds), and the diagnostic arm that
+removes the one-sidedness lands back on the random arm at `0.967x`.
+
+**Revised by the review** (`2026-09-04-c1062-probe5-fable-review.md`), which reproduced both those
+ratios exactly and then asked what they weigh. On paired seeds the `0.770x` is seven losses to two
+wins with one tie, `p = 0.180`, spanning `0.519` to `1.800`: the direction holds, a measured "about
+30% worse" does not. The `0.967x` is four wins, one tie, five losses, `p = 1.000` — a wash, now with
+the statistic to say so. And the arm this report wrote off is the one real effect: the separator
+*partition* arm's collapse was duplicate refinements inflating its fitness plus a stall exemption
+that let it burn its budget, not a property of the method. Repaired, it seals 11 of 12 on
+`group counts` and wins at `1.619x` there (`p = 0.039`) and `1.667x` on `pair counts` (`p = 0.002`),
+the only significant effects in the probe. The sound constraint the certificate carries is worth
+something; the pair it is returned for is not. Sections 3 to 5 below are the original measurement;
+the revised numbers and their spread are in § 5 of the review.
 
 ## 1. What the loop is
 
@@ -49,16 +60,26 @@ mutation stream, same starting sample of six contexts:
 
 1. **random pair** — a uniformly sampled violated pair, taken by reservoir in one pass.
 2. **separator pair** — among the *over-merged* pairs, the one whose minimal separating intervention
-   is shortest. This is the arm the brief's claim is about.
+   is shortest, first in scan order among ties. This is the arm the brief's claim is about. The
+   review (`2026-09-04-c1062-probe5-fable-review.md`, § 2.1) found that on these families the rule
+   is nearly vacuous: the intervention vocabulary is the **null intervention** at arity zero
+   followed by the `A = v` and `B = v` pins, all at arity one, so "shortest" can only prefer a pair
+   the plain observation already separates, and otherwise returns the lexicographically first
+   over-merged pair. The `null` column in § 3 counts how often the returned certificate was the
+   observation itself.
 3. **separator partition** — that same pair, plus the whole observation partition the separating
    intervention induces over all contexts, which the term must refine. This is the sound constraint
    one certificate actually carries, rather than the single pair.
 4. **separator within kind** — a diagnostic arm added *after* the first three were measured, to
    explain what they measured. It samples the *kind* of violation uniformly, exactly as the random
    arm does, and only then applies the separator rule among the over-merged pairs.
+5. **random over-merge** — a second diagnostic arm, added by the review. It is one-sided like the
+   separator-pair arm (an over-merge whenever one exists) but samples uniformly among the
+   over-merged pairs. Against arm two it isolates the shortest-first rule from the one-sidedness;
+   against arm one it isolates the one-sidedness alone.
 
-Arms one to three were predeclared. Arm four was not, and is labelled diagnostic everywhere it
-appears; it is not judged against the thresholds.
+Arms one to three were predeclared. Arms four and five were not, and are labelled diagnostic
+everywhere they appear; they are not judged against the thresholds.
 
 ## 2. The families, the ground truth, and the predeclarations
 
@@ -79,9 +100,13 @@ makes the intervention do work rather than decorate the setup.
 The predeclarations, entered in the fixture source before the run: the separator arms seal in at
 most `0.8x` the random arm's rounds on the three count and residue families, and the two parity
 families are a wash within `1.1x` because four classes leave too few violated pairs for the choice
-to matter. Every threshold is judged as a ratio of medians over the seeds where **both** arms
-sealed; a capped unsealed run has no round count to compare, and averaging the cap in would flatter
-whichever arm failed more often.
+to matter. Every threshold is judged as the **median of the per-seed ratios**
+`random rounds / arm rounds`, over the seeds where **both** arms sealed; a capped unsealed run has
+no round count to compare, and averaging the cap in would flatter whichever arm failed more often.
+(The first version of this report said "ratio of medians"; the code has always computed the median
+of paired ratios, which is the right statistic for paired seeds.) The plan row predeclared the
+measure as **generations**, the fixture source as **rounds**; the binary now judges both, and § 3
+reports both.
 
 The ground truth passes three independent routes on every family: the signature table built by
 direct enumeration of pinned assignments, the compiler's own `root_classes` under the
@@ -153,6 +178,17 @@ the arm the review demanded, they are not.
 
 ## 5. The certificate arm splits: best on the smallest family, collapses on the next
 
+> **Superseded by the review.** The collapse described in this section is a code artifact, not a
+> property of the method. The arm pushed every induced partition into its refinement list without
+> checking for duplicates — and the returned partition is the observation partition most of the
+> time — so each copy re-counted the same violations in the fitness, one more copy per round; and
+> that arm alone was exempted from the stall rule, so a run whose rounds had stopped adding anything
+> burned its whole budget instead of aborting. With duplicates refused and one stall rule for every
+> arm, the same measurement has it sealing 11 of 12 on `group counts` and winning there at
+> `1.619x`, `p = 0.039`. The reasoning below about a sound constraint outrunning the learner is
+> therefore **not** established by this data, and the "equal weight" qualification at the end of the
+> section is the wrong diagnosis: the weight was not equal, it grew by one per round.
+
 The separator-partition arm is the only arm that ever beats random, and it does so decisively on
 `pair counts`: median 3 rounds against 5, a `1.667x` gain, sealing 12/12 with the smallest final
 sample of any arm (8.4 contexts). One separating intervention there hands over a whole sound
@@ -192,9 +228,14 @@ Blinding held throughout: the search receives permuted opaque coordinates and no
 decoy coordinates are correctly ignored by every sealed term, since a term that read one could not
 have kernel equal to a quotient that is constant along the decoy fibres.
 
-Certificates replay: all 2,849 separating interventions consumed across the 240 runs were re-solved
-against the causal model itself — not read back from the signature table — and every one separates
-the pair it was returned for.
+Certificates replay: every separating intervention consumed across the runs was re-solved against
+the causal model itself — not read back from the signature table — and every one separates the
+pair it was returned for (the count is in § 3a). Two qualifications from the review: the replay
+uses the same `solve_into` the table was built from, so it is a check on the arms' index
+bookkeeping and not an independent solver — the independent corroboration of the table is the
+three-route ground-truth gate above; and the count includes the random arm's separators (it
+records one whenever its sampled pair happens to be an over-merge) and the arity-zero null
+intervention, which on these families is the certificate most of the time.
 
 ## 7. The reach envelope, and an unexpected result inside it
 
