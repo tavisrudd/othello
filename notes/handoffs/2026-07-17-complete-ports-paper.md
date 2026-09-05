@@ -126,11 +126,17 @@ The unrestricted `Z/523` route now runs a full-neighbourhood tabu step: it close
 plateau is settled as search depth rather than arithmetic — no congruence constrains the deviation
 at any modulus with prime factors below a million, and the plateau sits roughly 130 bits (±60) into
 a 400-bit descent. The exhaustive two-transfer census over all twelve banked plateau states is
-empty, which also closes group-scoped search.
+empty, which also closes group-scoped search. The carrier `Z/522` rung above that view is now
+scored as well: it has 173 free correlation classes, not 174, it carries 99.5% of the deviation a
+`q174` state cannot see, its own full-neighbourhood search plateaus at about 14,400, and the wider
+column neighbourhood loses to it, so the campaign's route stays "solve `q174` first, then repair
+the fibre".
 
-**Next**: score the carrier `Z/522` rung above an exact `q174` hit — nothing scores it yet and it
-has 174 free correlation classes of its own — and price a return to the plain `Z/523` spin shard
-against it. Latest reports:
+**Next**: widen the shell corpus beyond the twelve banked states, now that the carrier objective
+orders states by distance from an actual solution, and price a character-domain move set — the
+whole condition is a flat spectrum at `4 * 523` — against the position-domain plateau; a return to
+the plain `Z/523` spin shard is still the standing alternative. Latest reports:
+[carrier 522 rung](../2026-09-05-c1016-carrier-522-rung.md),
 [paired transfer and the two-opt census](../2026-09-05-c1016-paired-transfer-and-the-two-opt-census.md),
 [adversarial status review](../2026-09-05-c1016-adversarial-status-review.md). Concurrent public-core
 edits remain foreign; do not absorb them into C1016. Provenance rules stand: proved structural and
