@@ -305,6 +305,11 @@ every event, now including a weighted graph; the release kernel tests including 
 `decode_batch` gate; library clippy `-D warnings` and `rustfmt`; PyMatching 2.4.0 weight and
 prediction agreement; and interleaved A/Bs against retained controls.
 
+Provenance: every retained binary was built from a working tree carrying another task's uncommitted
+changes under `src/causal_*`, which the manifest records as dirty. Those modules are not on any
+decode path and the `tiger_blossom*` sources were at the named commits in each build, so the
+comparison is between the commits it names.
+
 **The weighted suite is new** and is part of the deliverable rather than a convenience: every
 mechanism this task touches is weight-sensitive, and the existing suite compiles unit weights, where
 the next event is one or two ticks away and the modulus is a few dozen. The new case draws edge
