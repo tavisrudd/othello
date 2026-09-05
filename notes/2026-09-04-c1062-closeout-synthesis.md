@@ -1,5 +1,7 @@
 # C1062 closeout: what a structural causal model is worth as a context language for Ergodis
 
+**Superseded by:** `2026-09-05-c1062-closeout-synthesis.md`.
+
 **Lane**: `complete-ports`
 **Task**: C1062, task-level closeout across probes 0, 1a, 1, 2, 3, 4, 5, 6, 7 and 8
 **Plan**: `2026-09-04-c1062-exploration-log.md` (probe index, thresholds, process rules)

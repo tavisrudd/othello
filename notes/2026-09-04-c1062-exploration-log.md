@@ -5,9 +5,9 @@
 **Plan review**: `2026-09-04-c1062-plan-review.md` (adversarial; this plan is its revision)
 **Code**: `~/src/ergodis-private` (core changes, if any, in `~/src/ergodis`)
 **Status**: probes 0, 1a, 1, 3, 2, 7, 8, 4, 5 and 6 done; probe 9 remains, and the closeout
-recommends dropping it. Task-level verdict: `2026-09-04-c1062-closeout-synthesis.md`.
+recommends dropping it. Task-level verdict: `2026-09-05-c1062-closeout-synthesis.md`, which
+supersedes `2026-09-04-c1062-closeout-synthesis.md`.
 Every probe except 0 has been adversarially reviewed; see § "Reviews" for what each review changed.
-The closeout synthesis predates the reviews and has not been reconciled with them.
 
 This is the routing document for C1062. The task asks whether a finite structural causal model
 (SCM) is another context language for the Ergodis contextual quotient, and what that buys: exact
