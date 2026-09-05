@@ -4,7 +4,8 @@
 **Brief**: `2026-09-04-c1062-ergodis-causal-brief.md`
 **Plan review**: `2026-09-04-c1062-plan-review.md` (adversarial; this plan is its revision)
 **Code**: `~/src/ergodis-private` (core changes, if any, in `~/src/ergodis`)
-**Status**: probes 0, 1a, 1, 3 and 2 done; probe 7 next, blocked on its novelty argument.
+**Status**: probes 0, 1a, 1, 3 and 2 done; probe 7's novelty argument is written
+(`2026-09-04-c1062-probe7-novelty-argument.md`) and probe 7 is unblocked.
 
 This is the routing document for C1062. The task asks whether a finite structural causal model
 (SCM) is another context language for the Ergodis contextual quotient, and what that buys: exact
@@ -84,7 +85,7 @@ probe may quietly claim both.
 | 4     | Level-3 counterfactual and the observation precondition | M | exact under `O ⊇ E ∪ {Y}`; demonstrably wrong without it | planned | — |
 | 5     | Evolve proposes, separator refutes                  | M    | seals to the exact kernel, and beats the random-counterexample arm on generations | planned | — |
 | 6     | k-ary experiment design and decision equivalence    | M    | measured gap between full and decision-sufficient identification, plus a near-zero gap on the negative family | planned | — |
-| 7     | Compositional lowering along the DAG                | L    | composed quotient equals the flat one on small models | **expected necessary** (probe 1a) | — |
+| 7     | Compositional lowering along the DAG                | L    | composed quotient equals the flat one on small models | **unblocked**: novelty argument written; variable merging declined, factored exogenous carrier kept | `2026-09-04-c1062-probe7-novelty-argument.md` |
 | 8     | Unrolled sequential window                          | S    | word closure non-vacuous, measured | planned | — |
 | 9     | End-to-end: incident to minimal repair              | L    | demo only, never counted as evidence | gated on 2 and 3 | — |
 
@@ -384,13 +385,19 @@ space; it learns consistently in the sample limit from interventional data with 
 where we compute an exact quotient of a known finite model; and its refinement is oracle-driven
 where ours returns a replayable separating intervention.
 
-**The warning that changes the sequencing.** Its carrier is a partition of the variable set — which
-is exactly the carrier this log says the `(u, I)` quotient cannot express. Pivoting to the
-compositional route to make "these 27 states are one causal variable" expressible means pivoting
-onto that paper's carrier, at which point the novelty argument rests on the algorithmic axis alone:
-exact versus learned, witness-carrying versus oracle-driven. That is a real argument and a good one,
-but it is not the argument this plan anticipated. **Probe 7 does not start until that argument is
-written down.**
+**The warning that changed the sequencing, now resolved.** Its carrier is a partition of the variable
+set — exactly the carrier this log says the `(u, I)` quotient cannot express — so the block was that
+pivoting to the compositional route in order to make "these 27 states are one causal variable"
+expressible would pivot onto that paper's carrier. The argument is now written
+(`2026-09-04-c1062-probe7-novelty-argument.md`) and it dissolves the block rather than arguing past
+it: the two promotions of probe 7 were both about never materializing `|U| · π_k`, not about
+variable merging, so **probe 7 declines variable merging and keeps the exogenous carrier, held
+factored over exogenous variables**. `RePaRe` is then a vocabulary neighbour and not a carrier
+neighbour. Three consequences bind this probe. The factored partition-refinement technique is
+imported from the model-minimization line descending from Givan, Dean and Greig (2003) and no
+algorithmic novelty is claimed for it. Variable merging is out of scope on purpose. And the
+"hundred thousand variables become a fifty-state machine" line is **retired**, replaced by a
+statement about exogenous contexts and the cost of one class lookup.
 
 ## Probe 8 — unrolled sequential window
 
