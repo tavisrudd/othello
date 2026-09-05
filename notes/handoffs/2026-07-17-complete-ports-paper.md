@@ -154,10 +154,15 @@ instructions and 30 in cycles, with zero weight and zero prediction disagreement
 [`2026-09-03-c1061-exploration-log.md`](../2026-09-03-c1061-exploration-log.md), one companion
 report per probe.
 
+C1069 closed the predecoder half of that read: the predecoder has no per-shot certificate, its
+audited-sound margin commits nothing, and the claims that had outrun it — the pipeline's equality
+test, the clean-ball skip on the surface tiers, the sparse/dense order, the audit's scope — are
+corrected with a test each. Report:
+[C1069 predecoder certificate read](../2026-09-05-c1069-predecoder-certificate-read.md).
+
 **Open successors**: a third code family to test the mean-degree crossover rule; the queue-struct
-borrow split, the only remaining lever on the touch loop; the same certificate read for the
-predecoder path; compile-time splitting of the non-observable stabilizer component; and the latency
-tail beyond the ninety-ninth percentile.
+borrow split, the only remaining lever on the touch loop; compile-time splitting of the
+non-observable stabilizer component; and the latency tail beyond the ninety-ninth percentile.
 
 **Waiting on Tavis**: routing the unspecialized graph path; the C1066 queue-discipline tradeoff
 (compiling clearing/scanning from the graph's largest edge weight returns about half of what C1065
