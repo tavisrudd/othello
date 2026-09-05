@@ -170,9 +170,12 @@ distance-one defect — and repetition numbers are untouched. Census and traffic
 
 ### C1062 — structural causal models as a context language
 
-Probes 0–8 are done and the closeout recommends dropping the gated demonstration, but each probe
-still gets an adversarial review pass before the task closes: probe 5 first, then probe 6. Brief
-`2026-09-04-c1062-ergodis-causal-brief.md`, routing log
+Probes 0–8 are done and every one of them now has its independent adversarial review (probes 1a, 1,
+2, 3, 4, 6, 7 and 8 dated 2026-09-05, probe 5 on 2026-09-04). The closeout recommends dropping the
+gated end-to-end demonstration, probe 9, so the task is ready to close on Tavis's call. The two
+items worth an allocated successor are the compositional counterfactual crossover — probe 7's
+reduction under probe 4's query — and whether the certificate can be emitted without compiling the
+carrier at all. Brief `2026-09-04-c1062-ergodis-causal-brief.md`, routing log
 `2026-09-04-c1062-exploration-log.md`, verdict `2026-09-04-c1062-closeout-synthesis.md`.
 
 ### C985 — Ergodis exact algebraic optimization paper
