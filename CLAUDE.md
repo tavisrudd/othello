@@ -27,13 +27,24 @@ At the start of a session:
 1. read this complete guide in a dedicated command with no other operation.
 2. Select a lane from the user's explicit alias, named handoff, or named task — never infer it from
    git, a task ID's number, or the previous session. A bare `C<id>` or `go C<id>` selects that task
-   **and its lane**: look up the exact `C<id>` row in `notes/2026-07-07-codex-task-queue.md`, treat
-   its bracketed lane peg as authoritative, and read only that lane's entry handoff below. Do not
-   search broadly for the ID or ask which lane it belongs to.
+   **and its lane**: retrieve the single exact `C<id>` row from `notes/2026-07-07-codex-task-queue.md`
+   with an anchored one-match query (`rg -n -m 1 '^- \*\*C<id> ' notes/2026-07-07-codex-task-queue.md`),
+   treat its bracketed lane peg as authoritative, and read only that lane's entry handoff below. Do
+   not search broadly for the ID or ask which lane it belongs to.
 3. Read only that lane's entry handoff. It is the current-state map.
 4. Otherwise, read `notes/2026-07-07-codex-task-queue.md` only for global task-ID allocation,
    explicit lane completion, or a user-requested cross-lane status. A selected lane's handoff owns
    its next step.
+
+**Never read the queue in full.** It is tens of thousands of tokens of rows for lanes you are not
+in, and no task needs more than its own row. Every access is a bounded query: an anchored exact-row
+lookup for one ID, or a section-scoped query for one lane's rows. `Read` on that file with no
+offset and limit, `cat`, and an unanchored search for a bare number are all command-shaping
+failures. The same holds for the companion archive
+`notes/2026-07-07-codex-task-queue-archive.md` and for
+`notes/2026-09-05-queue-row-specifications.md`, which holds the verbatim pre-trim text of rows that
+were once full task specifications: query them by exact ID when a row points you there, never as a
+whole file.
 5. Do not preload archives, discovery logs, expert dossiers, paper sources, build manuals, or
    performance playbooks. Load them when the task or handoff points to them.
 
@@ -246,7 +257,9 @@ for filenames just use the plain name.
 
 **Current-task handoff exception:** The line-count and display-token caps below do not apply to the
 selected lane's live handoff or files it directs the agent to read. Read them in full, chunking only
-to avoid tool truncation. This exception does not authorize other preloads or broad output.
+to avoid tool truncation. This exception does not authorize other preloads or broad output, and it
+never covers `notes/2026-07-07-codex-task-queue.md`, its archive, or the queue-row specifications
+note: those are always bounded exact-row or single-lane queries, even when a handoff mentions them.
 
 **Before every `rg`, `grep`, `find`, or equivalent call, all of these must be visible in the
 command:**
