@@ -176,7 +176,7 @@ gated end-to-end demonstration, probe 9, so the task is ready to close on Tavis'
 items worth an allocated successor are the compositional counterfactual crossover — probe 7's
 reduction under probe 4's query — and whether the certificate can be emitted without compiling the
 carrier at all. Brief `2026-09-04-c1062-ergodis-causal-brief.md`, routing log
-`2026-09-04-c1062-exploration-log.md`, verdict `2026-09-04-c1062-closeout-synthesis.md`.
+`2026-09-04-c1062-exploration-log.md`, verdict `2026-09-05-c1062-closeout-synthesis.md`.
 
 ### C985 — Ergodis exact algebraic optimization paper
 
