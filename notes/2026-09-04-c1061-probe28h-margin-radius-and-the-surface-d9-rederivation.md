@@ -9,6 +9,18 @@ its next list.
 Replay: `bash scripts/margin_radius_grid.sh ~/.cache/ergodis/bin/ergodis-tools-ced13b7 4096`
 (binary SHA-256 `198fa1f7b91dcc747f909b288735b6c8ffc2c33ac9b68f85d54e0e2f1cc3cdb1`).
 
+> **Superseded, 2026-09-05: every surface-family row below is stale.** Later on 2026-09-04, C1063
+> found and repaired a distance-one defect in `RotatedSurfaceCode::new` and stated that it
+> invalidates surface-family numbers taken before that repair, this report's distance-9
+> re-derivation included — the re-derivation below addressed the earlier 32-bit check-mask
+> aliasing and was itself overtaken hours later. The repetition-family rows are unaffected,
+> because they never used that builder. The evidence file
+> `benchmarks/tiger-blossom/2026-09-04-probe28h-margin-radius-grid.txt` is hashed in
+> `SHA256SUMS`: the hash attests the bytes, not that the surface rows still stand. No later
+> report reuses them; nobody has re-run the grid on the repaired builder
+> (`2026-09-04-c1063-tiger-blossom-routing-and-real-usage-grid.md`, and finding 11 of
+> `2026-09-05-c1068-qec-decoder-risk-review.md`).
+
 ## Headline
 
 **The certified margin predecoder is closed, and closed structurally rather than by sampling: at

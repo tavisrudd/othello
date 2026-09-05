@@ -772,9 +772,25 @@ and costs the weighted grid at most 0.4 per cent, which is a decision still open
 C1067 is closed (`2026-09-05-c1067-tiger-matcher-performance-contract-audit.md`). The matcher holds
 the performance contract except that it shipped its per-node traffic counters, worth 1.4 to 2.0
 per cent; they now sit behind the `tiger-traffic` feature, so census and traffic runs need
-`--features tiger-traffic` and a build without it prints `counters off`. The open successors are
-C1064's third code family for the mean-degree rule and the six remaining PyMatching losses, whose
-lever is now the touch loop and the certificate's closure reads.
+`--features tiger-traffic` and a build without it prints `counters off`.
+C1068 is closed (`2026-09-05-c1068-touch-loop-and-certificate-closure.md`, with the independent
+`2026-09-05-c1068-qec-decoder-risk-review.md` behind it). The lever on the six PyMatching losses
+was the certificate's pair loop, not the touch loop: it carried 72 per cent of the kernel's
+last-level cache misses and walked two ancestor chains per defect pair. A `u16` closure saturated
+at twice the largest boundary distance, a comparison of outermost regions in place of those walks,
+an eight-byte queue record and a packed undo list make the matcher 13.2 per cent cheaper at surface
+`d = 11` and `p = 0.002` and 3 to 9 per cent across the losing family, with exact census parity
+against the C1067 control on all 146 cell and arm combinations; the touch loop's own gather repair
+was measured and lost. The certificate now checks the primal as well as the dual — it never verified
+that the pairing was a matching, and discarded the blossom odd-cardinality counts it computed — and
+`dissolve` now counts a lost touch as the decline it causes. The PyMatching arm's per-decode divisor
+did not match the decodes it performed, crediting the competitor with being 2.34 per cent cheaper
+than it is in every published ratio; it is fixed, and on it the standing is 27 of 33 operating cells
+ahead in instructions and 30 in cycles, the same six behind with every margin narrower and the worst
+at 1.704 against 2.039. The open successors are C1064's third code family for the mean-degree rule,
+the queue-struct borrow split that is the only remaining lever on the touch loop, the same
+certificate read for the predecoder path, and Tavis's call on the harness's PyMatching working-set
+asymmetry, which runs in Tiger's favour in cycles.
 C1062 is an open-ended Ergodis exploration of structural causal models as another context language
 for the contextual quotient; its brief is `2026-09-04-c1062-ergodis-causal-brief.md`, its routing
 document and probe index are `2026-09-04-c1062-exploration-log.md`, and its task-level verdict is

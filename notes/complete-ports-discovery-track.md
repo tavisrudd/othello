@@ -52,3 +52,20 @@ and no lattice basis. That reframing turned a computation that could not finish 
 sweeps every prime below a million in thirty-four seconds. It is a general point about congruence
 hunts in this workspace rather than about the order-six fibre: ask for ranks over prime fields, not
 for a Hermite basis.
+
+
+2026-09-05, C1068, while profiling the sparse matcher for a speedup: the decode loop runs at about
+three and a half instructions per cycle, and that number changes what kind of optimization is worth
+attempting. The shared performance playbook's standing conclusion for this workspace is that search
+is memory-latency-bound and that per-node micro-optimizations wash out, so effort belongs on
+representation and node count. The matcher inverts that. At surface distance eleven and one in five
+hundred physical error it retires 150,608 instructions in 42,600 cycles while taking 820 last-level
+cache misses per decode, so those misses are almost entirely overlapped and the machine is
+instruction-bound, not stalled. Two experiments landed on the right side of that reading and one on
+the wrong side: trading a scattered table read for an arithmetic filter would have cost instructions
+to buy cycles the kernel was not spending, and was not attempted, while removing the chain walks and
+halving the queue record — pure instruction removal — paid immediately. The general point is that
+"latency-bound" is a property of a particular loop and its working set, not of the workspace: a
+kernel whose whole hot state is tens of kilobytes can be frontend- or issue-bound even when its rare
+misses are dramatic in a profile, and the cheapest way to tell is the instructions-per-cycle ratio
+before choosing which lever to pull.
