@@ -2,7 +2,8 @@
 
 **Lane**: `complete-ports` · **Date**: 2026-09-04 · **Code**: `~/src/ergodis-private`
 **Brief**: `2026-09-04-c1064-weighted-circuit-level-dem-brief.md`
-**Status**: in progress
+**Status**: complete — the grid runs on the weighted model, the routing threshold is refitted on it,
+and the PyMatching standing is restated and no longer uniform
 
 ## What this task is
 
