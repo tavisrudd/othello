@@ -755,8 +755,9 @@ C1062 is an open-ended Ergodis exploration of structural causal models as anothe
 for the contextual quotient; its brief is `2026-09-04-c1062-ergodis-causal-brief.md`, its routing
 document and probe index are `2026-09-04-c1062-exploration-log.md`, and its task-level verdict is
 `2026-09-04-c1062-closeout-synthesis.md`. Its code lives in `~/src/ergodis-private`. Probes 0–8 are
-done; only the gated demonstration remains and the closeout recommends dropping it, so the task is
-ready to close on Tavis's word. It raised two Ergodis-core defects for C1017: four of five
+done and the closeout recommends dropping the gated demonstration, but the spike continues: each
+probe gets an adversarial review pass before the task closes, probe 5 first and probe 6 after. It
+raised two Ergodis-core defects for C1017: four of five
 certificate policies miscompile the causal lowerings (failing closed), and the exhaustive pair audit
 costs 846x the refinement it certifies.
 C1016 is active as a private Ergodis reduction-synthesis pilot. A hostile review found that its
