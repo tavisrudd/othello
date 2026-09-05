@@ -4,7 +4,8 @@
 **Brief**: `2026-09-04-c1062-ergodis-causal-brief.md`
 **Plan review**: `2026-09-04-c1062-plan-review.md` (adversarial; this plan is its revision)
 **Code**: `~/src/ergodis-private` (core changes, if any, in `~/src/ergodis`)
-**Status**: probes 0, 1a, 1, 3, 2 and 7 done; probe 8 next.
+**Status**: probes 0, 1a, 1, 3, 2, 7 and 8 done; probes 4, 5, 6 and 9 remain, with probe 4 the
+highest-value next step.
 
 This is the routing document for C1062. The task asks whether a finite structural causal model
 (SCM) is another context language for the Ergodis contextual quotient, and what that buys: exact
@@ -85,7 +86,7 @@ probe may quietly claim both.
 | 5     | Evolve proposes, separator refutes                  | M    | seals to the exact kernel, and beats the random-counterexample arm on generations | planned | — |
 | 6     | k-ary experiment design and decision equivalence    | M    | measured gap between full and decision-sufficient identification, plus a near-zero gap on the negative family | planned | — |
 | 7     | Compositional lowering along the DAG                | L    | composed quotient equals the flat one on small models | **done**: reduction exact, `4.1e15` contexts to 4,096 in 25.6 µs; the composed quotient is a product partition and equals the flat one on 9 of 13 families, reaching the product ceiling on every coordinate | `2026-09-04-c1062-probe7-novelty-argument.md`, `2026-09-04-c1062-probe7-compositional-lowering.md` |
-| 8     | Unrolled sequential window                          | S    | word closure non-vacuous, measured | planned | — |
+| 8     | Unrolled sequential window                          | S    | word closure non-vacuous, measured | **done**: met sharply — cursor vocabulary has 0/4 idempotent, 0/6 commuting, minimal words past the window, and all 34 length-≥2 separators order-essential, against a control with none; economics 1.00x as predeclared | `2026-09-04-c1062-probe8-unrolled-sequential-window.md` |
 | 9     | End-to-end: incident to minimal repair              | L    | demo only, never counted as evidence | gated on 2 and 3 | — |
 
 Sizes are relative within one fast session: S is under an hour, M is one to three, L is a session.
@@ -497,10 +498,26 @@ factoring rather than slack in the passes. Two carried items: the arity dial has
 form (the passes compute the full-arity rung), and the `u64` context index, not memory, is now what
 caps the scale claim.
 
-**Probe 8 is next.** It is the other surviving direction from probe 2 and has a measured reason to
-exist: with hard interventions the intervention set is the state set, so one-shot enumeration sees
-everything a search could, and only a non-idempotent vocabulary makes the shortest path earn its
-keep.
+**Probe 8 is done and it closes the "SCM is just another context language" question.** Under the
+cyclic-cursor vocabulary on an unrolled window, no generator is idempotent, no generator pair
+commutes, some edit states need a word longer than the window, and all 34 separating certificates of
+length two or more are order-essential — a permutation of the same multiset fails to separate the
+pair. The hard-pin control has none of that: every generator idempotent, no separator past length
+one, which confirms probe 1's own caveat that its three-step certificate was a pin in word shape.
+Repetition and order turn out to be independent axes, and the unit shift is the separating example
+with 13 length-two separators and zero order-essential ones. The economics were predeclared as a loss
+and lost at exactly 1.00x in all three vocabularies, so a richer vocabulary does not make compilation
+cheaper; it makes the direct route complete only up to the word length it enumerated while the
+compiled machine answers every word. Two further results: a richer vocabulary is a *finer* quotient
+and here drives it to the identity, so a sequential vocabulary must be declared for reach rather than
+compression; and the protected-tail lever is closed as a measured negative, since a modular shift
+undoes the machine's saturation and three editable steps resolve as much as four. The time-indexed
+application targets are in scope by bounded unrolling, with the two attached conditions measured
+rather than asserted.
+
+**Probes 4, 5, 6 and 9 remain.** Probe 4 is the highest-value next step: its deliverable is a
+correctness statement with a stated precondition plus a demonstrated negative, which is the shape
+that has paid best in this task.
 
 Carried forward, none blocking. The arity tower is computed at full price per rung rather than
 incrementally through `plan_layered_greedy_schedule`. The intervention-vocabulary quotient is empty
