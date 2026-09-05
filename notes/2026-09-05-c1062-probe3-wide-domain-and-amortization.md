@@ -2,9 +2,18 @@
 
 **Lane**: `complete-ports`
 **Task**: C1062, probe 3 successor (closeout § 13 item 2, first half)
-**Status**: **predeclaration only.** Nothing here has been built, run or measured. Every number below
-is a prediction derived from the structure, entered before any code exists, so that the measurement
-can fail. This file is committed before Phase 2 begins.
+**Status**: **measured.** §§ 1–7 are the predeclaration, committed at `othello` `d53c8817a` before
+any code existed. §§ 8–11 are the result, added afterwards; nothing above § 8 has been edited.
+**Verdict**: **the domain-width prediction failed, and its own control caught it.** The `d = 2` row
+was predeclared to show no compaction at all and prunes 6 of 13. The candidate counts and carrier
+sizes were right on all eleven rows; the class counts were not, and the reason is that at the queried
+context no pin set inside the arity bound can flip the outcome, so the whole fibre is one class per
+sort and the settings collapse for a reason that has nothing to do with the domain. The 10% threshold
+is nominally met from `d = 5` onward — earlier than predicted, which is the wrong direction for a
+declared loss — and **should not be reported as met**, because the fixture is degenerate. The
+amortization arm is a clean loss: the compile does not pay on any row, and the oracle route is
+*slower* than the plain route everywhere, including the case most favourable to it.
+**Evidence**: `ergodis-private` `evidence/2026-09-05-causal-wide-domain-amortization.txt`.
 **Inputs**: `2026-09-04-c1062-probe3-actual-cause-and-responsibility.md` (as corrected),
 `2026-09-05-c1062-probe3-review.md` § 2.3 for the structural argument this tests, and
 `2026-09-05-c1062-closeout-synthesis.md` § 12 for the two open items.
@@ -212,3 +221,229 @@ Stated now so it is not discovered later as a result.
   the sort structure forbids pruning. A positive result here is a statement about one axis of a
   two-axis search.
 - **It does not revisit probe 3's eight published verdicts**, which are unaffected.
+
+---
+
+# Measured
+
+Everything above this line predates the code. Nothing above it has been changed.
+
+**Convention, stated once**: the verifier fraction's numerator is **certificate entries**, per the
+decision recorded in the closeout, with **distinct `(size, class)` pairs** reported beside it. Every
+percentage in this section is entries over candidates.
+
+## 8. The domain sweep: measured against predicted, cell by cell
+
+Replay: `cd ~/src/ergodis-private && cargo test --release --package ergodis-private --lib
+actual_cause:: -- --nocapture --test-threads=1`.
+
+| row | `d` | `mx` | states | pred. states | candidates | pred. candidates | entries | pred. entries | distinct | pred. distinct | fraction | predicted fraction |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| width `d=2` (control) | 2 | 2 | 528 | 528 | 13 | 13 | **7** | 13 | **4** | 10 | **53.85%** | 100.00% |
+| width `d=3` | 3 | 2 | 1,072 | 1,072 | 32 | 32 | **7** | 13 | **4** | 10 | **21.88%** | 40.63% |
+| width `d=5` (loss row) | 5 | 2 | 2,736 | 2,736 | 88 | 88 | **7** | 13 | **4** | 10 | **7.95%** | 14.77% |
+| width `d=8` | 8 | 2 | 6,672 | 6,672 | 217 | 217 | **7** | 13 | **4** | 10 | **3.23%** | 5.99% |
+| width `d=10` | 10 | 2 | 10,256 | 10,256 | 333 | 333 | **7** | 13 | **4** | 10 | **2.10%** | 3.90% |
+| width `d=20` | 20 | 2 | 39,696 | 39,696 | 1,273 | 1,273 | **7** | 13 | **4** | 10 | **0.55%** | 1.02% |
+| depth 3, `d=3` | 3 | 3 | 2,800 | 2,800 | 164 | 164 | **19** | 55 | **7** | 31 | **11.59%** | 33.54% |
+| depth 3, `d=5` | 5 | 3 | 10,736 | 10,736 | 616 | 616 | **19** | 55 | **7** | 31 | **3.08%** | 8.93% |
+| depth 3, `d=10` | 10 | 3 | 74,256 | 74,256 | 3,951 | 3,951 | **19** | 55 | **7** | 31 | **0.48%** | 1.39% |
+| model `n=5, d=5` | 5 | 2 | 8,832 | 8,832 | 116 | 116 | **9** | 17 | **5** | 13 | **7.76%** | 14.66% |
+| model `n=6, d=5` | 5 | 2 | 25,984 | 25,984 | 144 | 144 | **11** | 21 | **6** | 16 | **7.64%** | 14.58% |
+
+**What was right.** Every carrier size and every candidate count, on all eleven rows. The search
+structure — which causes, which witnesses, how many settings — is exactly as modelled, and the query
+is a genuine negative on every row with `unclassified = 0` throughout, so the certificate covers
+every candidate it should.
+
+**What was wrong.** Every class count. Entries came in at 7 where 13 was predicted, 19 where 55 was
+predicted, 9 and 11 where 17 and 21 were. The one invariant the prediction rested on does hold:
+entries and distinct classes do not move with the domain at fixed `(n, mx)`. But the constants are
+smaller than predicted, and the reason invalidates the fixture.
+
+## 9. The diagnosis: the fixture is degenerate, and the `d = 2` control is what caught it
+
+Threshold 3 said the `d = 2` row must show exactly 100% with zero pruning, and that if it showed any
+compaction the class model was wrong and everything else was suspect. It shows 53.85% and prunes 6 of
+13. Taking that at its word:
+
+**The class model in § 2 property 3 is wrong.** It derived that the class of a pinned state is its
+zero/nonzero pattern, using overwrites on `S = D \ {i}` to read off each coordinate separately. The
+derivation is valid in general and fails on this fixture for a reason the derivation did not check:
+it assumed the observation *varies* over the reachable set. It does not. At the queried context every
+input is zero, so at least one input is zero however few coordinates are pinned; breaking the quorum
+requires setting **every** input nonzero, which needs `inputs` simultaneous pins. With the arity bound
+below that — which § 2 property 1 deliberately arranged, because it is what makes the query a genuine
+negative — **no pin set reachable in that fibre changes the observation at all.** The whole fibre is
+one class per sort, so every setting of every cause collapses, and the collapse has nothing to do
+with `d`.
+
+This is pinned as a test rather than left as prose:
+`the_wide_domain_fibre_is_observationally_constant_within_the_arity_bound` checks all 400 value pairs
+of a size-two cause at `d = 20` and finds one class, and separately checks that the compiled quotient
+over the *whole* carrier is not trivial — classes per sort run 5, 9 and 12 — so the collapse is a
+property of this fibre and this bound, invisible without asking the question at one context.
+
+**The tension the fixture design missed**, stated so a successor does not walk into it. Two things
+were required at once: no candidate may flip the outcome (or the query is not a negative and there is
+nothing to certify), and the observation must vary within the arity bound (or the classes are
+trivial). In this shape those are the same condition. A candidate pins its cause coordinates freely
+and its witness coordinates at their actual values; a free overwrite pins any coordinates freely; and
+because the witness's actual value is the quorum-satisfying one, both are capped at the same reach —
+`arity` coordinates set nonzero. So "flippable within the bound" and "some candidate flips" coincide,
+and there is no gap to sit in.
+
+**What a corrected fixture needs.** The flip must require a coordinate the *cause* cannot reach while
+a free overwrite can. The natural construction is a variable that is intervenable but excluded from
+the query pool: free overwrites may pin it, causes may not, so the observation varies within the
+bound while no candidate flips. That is a different fixture with different predicted numbers, and it
+needs its own predeclaration before it is built. It is not written here, on purpose.
+
+## 10. Against the thresholds
+
+| # | threshold | verdict |
+|---|---|---|
+| 1 | 10% met at some domain width | **nominally met from `d = 5`, and it does not count.** The compaction is trivial pruning of a degenerate query, not the settings-per-cause mechanism the threshold was about. Reporting this as the certificate compacting would be reporting the fixture, not the method. |
+| 2 | `d = 5` predicted to **miss** at 14.77% | **failed.** It passes, at 7.95%. A declared loss that wins is the direction that deserves suspicion, and here the suspicion was justified. |
+| 3 | `d = 2` control must show no compaction | **failed, and it is the finding.** 53.85%, 6 of 13 pruned. |
+| 4 | model-width control flat within 1 point | **passed.** 7.95%, 7.76%, 7.64% across `n = 4, 5, 6` while the candidate count grows 88 → 116 → 144, a spread of 0.31 points. The absolute values are not the predicted ones, but the review's structural claim — the fraction is flat in model width — is confirmed on a second family, independent of the fixture's degeneracy, because it follows from entries growing as `4n − 3` against candidates growing as `4n + 24(n−1)`. |
+| 5 | every cell hard, entries and distinct invariant in `d` | **half.** The invariance holds exactly. The constants are wrong on every row. |
+| 6 | verdict `0/1` and `unclassified = 0` everywhere | **passed** on all eleven rows. |
+
+**So: is the 10% threshold met at any reachable domain width? Not by a measurement that means
+anything.** The numbers below 10% are real numbers produced by real pruning, and they are not
+evidence that the exhaustion certificate compacts, because the query they certify has a constant
+observation. The domain-width axis remains **untested**, not refuted — the review's argument that it
+is the only axis on which compaction is available still stands, and this attempt failed to build a
+fixture that isolates it.
+
+## 11. The amortization arm
+
+Replay: `cd ~/src/ergodis-private && cargo run --release --package ergodis-tools --
+actual-cause-report`. Timing is the mean of 200 repeats per query; `compile us` is one `lower` plus
+one `compile` under `SplitTranscript`.
+
+| fixture | pool `n` | compile µs | plain µs | pruned µs | break-even | pays? |
+|---|---|---|---|---|---|---|
+| forest-fire-conjunctive | 2 | 156.2 | 0.22 | 0.31 | never | no |
+| forest-fire-disjunctive | 2 | 93.7 | 0.90 | 1.46 | never | no |
+| rock-throwing-suzy | 4 | 548.2 | 0.63 | 1.04 | never | no |
+| rock-throwing-billy | 4 | 505.8 | 11.61 | 16.77 | never | no |
+| voting-5-4 | 9 | 1,850,202.5 | 0.42 | 0.50 | never | no |
+| width `d=2` | 4 | 306.9 | 1.44 | 2.32 | never | no |
+| width `d=5` | 4 | 1,907.5 | 5.68 | 7.40 | never | no |
+| width `d=10` | 4 | 13,302.5 | 20.24 | 25.30 | never | no |
+| width `d=20` | 4 | 103,425.4 | 72.26 | 97.25 | never | no |
+| depth 3, `d=10` | 4 | 188,723.1 | 247.68 | 340.51 | never | no |
+| model `n=6, d=5` | 6 | 19,012.7 | 12.28 | 14.44 | never | no |
+
+**Which branch fired.** The predeclaration named two and said the sign was uncertain: either
+`pruned ≥ plain`, in which case break-even is "never" and the arm is a clean loss, or `pruned < plain`
+with a very large break-even. **The first branch fired, on every one of the sixteen rows.** I did not
+predict which, and this is not the branch I leaned toward in the prose; what was predicted, and
+holds, is that the compile does not pay on any row.
+
+**The mechanism is the one named in advance.** The class is computed for *every* candidate before
+the prune check, so the oracle route pays one `class_of` per candidate where the plain route pays one
+`solve_into` per candidate. `class_of` allocates two vectors, sorts one and linear-scans the support
+table; `solve_into` is a handful of table lookups into a caller-owned buffer. Pruning does not remove
+per-candidate work, it substitutes heavier work for lighter and saves only the downstream record
+construction. The `d = 20` row is the sharpest illustration: pruning removes 1,260 of 1,273
+candidates, so the oracle route performs 13 solves against the plain route's 1,273 — and is still
+**35% slower**, 97.25 µs against 72.26 µs.
+
+**Against the declared pay condition.** A model with `n` pool literals has exactly `n` distinct
+responsibility queries, so the compile pays only if break-even is below `n` — 2, 4, 6 or 9 here.
+Break-even is infinite on every row, so it is not below `n` anywhere. **The named predicted loss
+(`n = 4`, `d = 20`, `mx = 2`) lost.** The most extreme number in the table is `voting-5-4`, where a
+1.85-second compile supports a 0.42 µs query: even had the sign gone the other way, break-even would
+have been in the millions against a model with nine queries.
+
+This is the third independent route to the same structural finding — probe 2's timing arm, probe 8's
+economics identity, and now this — and it is the only one of the three that was a real timing
+measurement free to come out the other way.
+
+## 12. Closeout
+
+### Extra value now in reach
+
+- **The degenerate-fibre check is worth promoting out of this fixture.** Asking whether the queried
+  context's fibre is observationally constant within the arity bound is a two-line test, and it is
+  the precondition for *any* certificate measurement meaning anything. Probe 3's original five
+  fixtures were never checked for it. `voting-5-4` and `forest-fire-conjunctive` both report `0.00%`
+  with an empty certificate, which the corrected report already flags as "not a pass"; the check
+  would say why in a way that generalizes.
+- **`class_of` is the amortization arm's whole cost, and it is fixable.** It allocates two vectors
+  per call and finds the sort by a linear scan comparing `Vec<u32>`s. A precomputed support index and
+  a caller-owned buffer would remove both. That would not make the compile pay — the compile cost
+  dominates by orders of magnitude — but it would change the per-query comparison from "the oracle is
+  35% slower" to something closer to a real test of whether pruning helps, which is what this arm
+  should have been measuring. Cheap, and it is the only lever visible on it.
+- **The `4n − 3` and `3n − 2` closed forms held exactly.** They are a small general result about this
+  search's shape: with a size bound of two, entries grow linearly in the pool while candidates grow
+  linearly in the pool *and* quadratically in the domain. That is the compaction ceiling stated as a
+  formula rather than as a measurement, and it is what a successor should predict against.
+
+### What Tao would ask that this missed
+
+- **"What is the smallest object that exhibits the phenomenon?"** The fixture was designed for a
+  clean closed form and got one, and the closed form was for the wrong quantity. A single hand-worked
+  three-context example — write out the signature of two settings and see whether they differ —
+  would have caught the constant-observation collapse before any code, in minutes. The `d = 2` control
+  did the same job afterwards, at the cost of a build.
+- **"You proved compaction is *available* at `d − 1`; did you check it is *attained*?"** The review's
+  structural argument gives an upper bound on how much pruning is possible. This attempt confused the
+  bound with a construction. Attaining it needs the settings to be pairwise distinguishable *except*
+  through the queried coordinate, which is a strictly harder condition than "the outcome reads a
+  coarse predicate", and neither the review nor the predeclaration separated the two.
+- **"The quotient is rich and the fibre is trivial — which one does the certificate live in?"** The
+  fibre, and nothing in probe 3, its review, or this predeclaration says so. Every certificate
+  statement in this task is a statement about one exogenous context, while every quotient statement is
+  about the whole carrier. That distinction is now explicit and it deserves to be stated wherever the
+  certificate is discussed.
+
+### Mystery ledger
+
+- **Can the domain-width axis be isolated at all?** The corrected fixture in § 9 — an intervenable
+  variable outside the query pool — is a construction, not a proof that it works. **Open.** Evidence
+  gap: a predeclared fixture in which the observation varies within the arity bound while no
+  candidate flips, and a measured fraction that falls with `d` for the settings reason rather than
+  the constant-fibre reason. One session, and it needs its own predeclaration.
+- **Why is the compaction constant exactly `2^{mx}·k` -shaped?** Measured entries are 7 at `mx = 2`
+  and 19 at `mx = 3` for `n = 4`, and 9 and 11 for `n = 5, 6` at `mx = 2`. The `mx = 2` family fits
+  `2n − 1`, which is not a form I predicted or can currently derive from the collapse argument — the
+  collapse says one class per `(cause, witness)` group, which would give `1 + (n−1) + (n−1) = 2n − 1`
+  at `mx = 2`. That matches. **Closed by arithmetic**, and worth stating: under a constant fibre the
+  entry count is the number of distinct pinned *supports* the search reaches, which is a property of
+  the pool and the bound alone.
+- **Is probe 3's original `rock-throwing-billy` row degenerate in the same way?** Its fraction is
+  58.18% with 16 distinct classes over 55 candidates, so its fibre is clearly *not* constant — the
+  classes vary. **Closed in the negative**, and it means the original measurement, though it missed
+  its threshold, was measuring the real thing while this one was not.
+- **Would a faster `class_of` change the amortization verdict?** **Open, and narrow.** Evidence gap:
+  the compile cost exceeds the total query cost by two to four orders of magnitude on every row, so
+  the per-query comparison would have to invert *and* the compile would have to fall by three orders
+  of magnitude. The first is plausible, the second is not, so the expected answer is no and the
+  measurement would be about the per-query claim only.
+- **No mystery remains about whether the compile amortizes on the flat carrier.** It does not, on any
+  fixture in this task, and this arm was the last one free to say otherwise.
+
+### What this does to the task-level verdict
+
+For the closeout's author to apply; this note does not edit that file.
+
+- **§ 12's "probe 3's certificate compactness — open on the domain-width axis only, predicted of
+  order `1/(d−1)`, one fixture, one session"** should become: attempted, the fixture was degenerate,
+  the axis remains open, and the next attempt must predeclare a fixture whose queried fibre is
+  observationally non-constant within the arity bound. The estimate of one session still looks right;
+  the prediction of `1/(d−1)` is untested rather than confirmed.
+- **§ 12's "probe 3's amortization arm — still unmeasured, open and cheap"** should become
+  **closed in the negative**: measured on sixteen rows, the compile never pays and the oracle route is
+  slower than the plain route on every one, including the case built to favour it.
+- **§ 5's "no measurement shows that compiling makes an answer cheaper"** gains its third and
+  strongest instance. The first two were identities that could not have come out otherwise; this one
+  was a timing measurement that could have, and did not.
+- **§ 13's recommendation item 2** loses half its content. The compositional counterfactual crossover
+  remains; probe 3's pair of measurements is now one measurement closed in the negative and one
+  attempt that failed on its own control.
+- **Nothing in §§ 1–4 or 6–9 moves.** No published verdict, no quotient, no economics number changes.
