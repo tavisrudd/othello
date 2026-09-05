@@ -134,4 +134,34 @@ thirteen defects. Under circuit-level noise that is not a rare corner: the mean 
 surface `d = 7` is 5.33 and at `d = 9` is 11.94, so the shipped rule was mis-routing the middle of
 the distribution.
 
-## (in progress: routed-versus-shipped ladder, PyMatching standing, latency, fast-path census)
+## What routing is worth on the weighted grid
+
+Three interleaved rounds, two-size differencing, instructions per decode, the window following the
+distance (`benchmarks/tiger-blossom/2026-09-04-c1064-weighted-routed-ladder-ab.log`). Ratios are the
+routed arm over the level-four arm C1063 replaced, so below one is a gain.
+
+| family     | d  | `p = 0.0005` | `p = 0.001` | `p = 0.002` |
+|------------|----|--------------|-------------|-------------|
+| surface    | 3  | 0.484        | 0.354       | 0.252       |
+| surface    | 5  | 0.216        | 0.210       | 0.279       |
+| surface    | 7  | 0.254        | 0.365       | 0.652       |
+| surface    | 9  | 0.385        | 0.691       | 0.975       |
+| surface    | 11 | 0.634        | 0.956       | 1.000       |
+| repetition | 3  | 0.986        | 0.987       | 0.881       |
+| repetition | 5  | 0.906        | 0.857       | 0.676       |
+| repetition | 7  | 0.753        | 0.615       | 0.511       |
+| repetition | 9  | 0.863        | 0.565       | 0.561       |
+| repetition | 15 | 0.546        | 0.596       | 0.705       |
+| repetition | 25 | 0.534        | 0.704       | 0.908       |
+
+The routed arm is never worse in any of the thirty-three operating cells, and at its best it is
+4.76x faster — surface `d = 5` at `p = 0.001`. On the phenomenological grid the same comparison
+topped out at 1.97x. Routing is worth roughly twice as much on the model real decoders consume,
+because the arm it routes away from is much worse there.
+
+The gain shrinks as the rate rises on the largest surface graphs, for the reason C1063 gave: more
+shots land above the threshold, where the routed arm and the level-four arm are the same code.
+Surface `d = 11` at `p = 0.002` has a mean of about forty-five defects and the routed arm is the
+matcher on essentially every shot, which is exactly the ratio of 1.000.
+
+## (in progress: PyMatching standing, latency, fast-path census)
