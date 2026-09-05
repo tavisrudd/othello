@@ -934,9 +934,17 @@ its first hot loop at exact parity. Its search reach ends near carrier 73, and a
 180-fold budget increase moves the residual by at most a quarter, so compute is
 not the lever. A solution-count heuristic then shows the shards are dense rather
 than empty — about `2^61` expected solutions at carrier 73 and `2^306` at 523,
-with only the density falling — so the bottleneck is the search itself. The
-successor is a stronger search on this shard, a full-neighbourhood tabu step with
-incremental per-swap deltas, not a further exact structure.
+with only the density falling — so the bottleneck is the search itself.
+
+That stronger search is now built and measured
+(`2026-09-04-c1016-full-neighbourhood-tabu-spin-shard.md`): a full-neighbourhood
+tabu step whose exact per-swap delta comes from incrementally maintained
+per-group toggle effects, so all 75,616 candidate swaps at carrier 523 are scored
+exactly on every step. At equal wall clock it is at or below the walk's residual
+on every rung of the carrier ladder, it closes carrier 97 — which the walk never
+closes — and it reaches 184 at 523 against the walk's 208. The next lever is the
+transfer of the same delta algebra to the bordered `q29` and `g41` sectors, whose
+campaigns are the ones actually holding up the order-2092 programme.
 
 C1035 is closed: `ergodis-private` is a Cargo workspace whose root package is library-only; the
 six named tools live in `tasks/tools` (`ergodis-tools`), gem-mining drivers in `tasks/gem-hunt`,
