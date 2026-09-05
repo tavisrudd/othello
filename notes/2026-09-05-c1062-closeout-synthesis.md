@@ -9,6 +9,9 @@
 `2026-09-05-c1062-probe4-review.md`, `2026-09-04-c1062-probe5-fable-review.md`,
 `2026-09-05-c1062-probe6-review.md`, `2026-09-05-c1062-probe7-review.md`,
 `2026-09-05-c1062-probe8-review.md`. Probe 0 was not reviewed.
+**Measurements after review**: `2026-09-05-c1062-probe2-concrete-baseline-predeclaration.md` with
+its result in the probe 2 report, and `2026-09-05-c1062-probe3-wide-domain-and-amortization.md`;
+both predeclared and committed before any number existed
 **Code**: `~/src/ergodis-private` (`causal*.rs`, `best_intervention.rs`, `actual_cause.rs`,
 `causal_design.rs`); core changes: none from the probes, one repair recorded in
 `2026-09-04-c1062-core-certificate-policy-repair.md`
@@ -38,9 +41,11 @@ along the axis that grows, and the reviews measured it flat rather than leaving 
 expressibility test is a sufficient and conservative check with three parts, not the exact two-part
 condition the probe stated. The completeness claim is false against probe 8's own oracle, which closes
 a finite edit-state space and therefore already answers every word. Every economics tie of `1.00x` is
-an identity of the carrier or a family too small to separate the arms, not a measurement of cost. Two
-of the task's headline ratios — probe 2's `220x` and probe 7's `1.000e12x` — are withdrawn or reworded
-as artifacts of instrumentation and fixture choice.
+an identity of the carrier or a family too small to separate the arms, not a measurement of cost, and
+the one timing arm that was free to come out in the compile's favour — probe 3's amortization arm,
+measured after the reviews — came out against it on every row. Two of the task's headline ratios are
+withdrawn or reworded: probe 2's `220x` over concrete-state search is a measured `6.8x` once the
+baseline carries its own adjacency, and probe 7's `1.000e12x` is a dial set by the fixture.
 
 Two things move in the task's favour. The separating intervention does carry a teaching signal, in
 both probes that measured it: probe 5's partition arm is the only statistically real effect in that
@@ -78,7 +83,11 @@ spread behind it.
 Predeclaration discipline was uneven rather than absent: probes 2 and 3 committed their thresholds
 before their code, probe 2 then edited its threshold text in the results commit, and probes 6 and 7
 landed code, verdicts and measurements in one commit, with six of probe 7's thirteen verdicts coming
-from a wildcard default.
+from a wildcard default. The two measurements taken after the reviews are the first in this task whose
+predictions were committed before any number existed, and that discipline earned its keep at once: the
+wide-domain certificate fixture failed its own predeclared control and was condemned by it, where
+without the control its rows below ten percent would have been reported as the task's one positive
+certificate result.
 
 ## 3. The repair that shaped everything, as it now stands
 
@@ -118,8 +127,8 @@ does not change any verdict that rested on it.
 | 0 | no mature actual-causality engine exists; the compiled object is unpublished | **half false**, unreviewed and unchanged: three engine lineages exist; the full-observation quotient is Balke–Pearl's response-function partition; the refinement algorithm with a separating witness was not located |
 | 1a | the flat carrier is practical | **viable, and the envelope is `\|U\| ≲ 10^5`**, six to nine times wider than reported; the kill criterion as written could not have fired; the sort structure forecloses the cross-support pruning the same note promised probe 3 |
 | 1 | the lowering is correct against external truth | **passes**: 60 contexts to exactly 32 classes, class for class, now corroborated by an implementation sharing no code; the predeclared separator-replay gate was replaced by an arity-boundary gate and never run, and the four printed separators all replay when the review runs them; relevance pruning is claimed in the lowering and is not there |
-| 2 | compiling pays for the decision query | **exact, and the economics fail by more than reported**: the `220x` over concrete-state search is withdrawn, being a ratio of per-query workspace clears with the arms memoized unalike (`102x` like for like, and even that is a memset); the compression threshold passes on one family rather than two, because the published credit ratio is not the predeclared one; the `1.00x` against memoized re-solve is an identity of the carrier, and the memoized baseline fills its table in half the solves the identity charges it with; the timing workload has no query with a nonempty answer |
-| 3 | an exact, certificate-carrying Halpern–Pearl engine | **correct, certificate refuted on compactness**: every verdict and both discriminating shapes re-derive independently; the verifier fraction is flat near seventy percent as the model grows, and structurally cannot fall because classes never span sorts; only domain width can move it; four rows labelled "Published" are computed from published shapes, and every value in the table is one the original definition also yields |
+| 2 | compiling pays for the decision query | **exact, and the economics fail by more than reported**: the `220x` over concrete-state search is withdrawn — the arms were memoized unalike (`102x` like for like) and the concrete arm scanned the whole generator alphabet at every state; with both arms carrying their own adjacency the predeclared re-measurement gives `6.8x`, inside its `4x`–`15x` band, with the relaxation count unchanged at `356.7`; the compression threshold passes on one family rather than two, because the published credit ratio is not the predeclared one; the `1.00x` against memoized re-solve is an identity of the carrier, and the compiled arm loses to that baseline by `5.0x` on the repaired code; the timing workload has no query with a nonempty answer |
+| 3 | an exact, certificate-carrying Halpern–Pearl engine | **correct, certificate refuted on model width, untested on domain width, and the compile never amortizes**: every verdict and both discriminating shapes re-derive independently; the verifier fraction is flat as the model grows, on two families now, and structurally cannot fall because classes never span sorts; the predeclared attempt to measure the domain-width axis failed its own `d = 2` control and the fixture is degenerate; the amortization arm is a clean loss on every row; four rows labelled "Published" are computed from published shapes, and every value in the table is one the original definition also yields |
 | 4 | the twin network becomes a path | **measurement stands, precondition restated**: two arms exact, two wrong (`0/1` and `2/3` against `1/3`), `O ⊇ E` sufficient and not necessary; the stated two-part condition omits the outcome-observed check the code makes and admits a wrong answer, `O ⊇ E ∪ {Y}` alone is refuted by the probe's own third row, and the three checks are jointly sufficient and conservative rather than exact |
 | 5 | separating interventions are unusually good counterexamples | **refuted for the pair, reversed for the partition**: `0.770x` and `0.967x` reproduce exactly and are `p = 0.180` and `p = 1.000` on paired seeds; the separator rule was returning the null intervention 84% of the time; the partition arm's collapse was duplicate refinements plus a stall exemption, and repaired it wins at `p = 0.002` and `p = 0.039` |
 | 6 | decision equivalence is a cheaper identification target | **structural half stands, comparative half inverts**: sharing an optimal action is not transitive, so no quotient expresses the stopping rule; the gap result is an existence result by construction; the predeclared `1.00x` loss holds only under the simultaneous-optimality criterion; the separator arm wins on 36 to 40 of 40 seeds at two to eight percent, below the `1.10x` bar and not absent |
@@ -137,16 +146,36 @@ tree that minimizes the worst case rather than the mean.
 
 The direction survives and is, if anything, understated. Probe 2's memoized baseline prunes by cost
 and fills its table in 16,640 solves where the compile performs 33,024, so the identity credits the
-baseline with twice the work it actually does and the compile loses by more than the report says; and
-the like-for-like gap against the concrete search is dominated by a 297,216-byte workspace clear
-rather than by search. On the one timing family, half the contexts answer
-at cost zero and the other half are unreachable, so no arm ever ran the query the probe is about.
-Nothing in C1062 has timed a compiled query winning, and nothing has timed one on a workload where the
-answer is nontrivial.
+baseline with twice the work it actually does; on the repaired code the compiled arm loses to that
+baseline by `5.0x` and never crosses. On the one timing family, half the contexts answer at cost zero
+and the other half are unreachable, so no arm ever ran the query the probe is about.
 
-Probe 7 remains the only route that changes the arithmetic, because it never materializes
-`|U| · π_k`. Its cost is linear in the mechanism-table size and independent of the context count,
-which is the defensible form of its scale claim.
+The one comparison the compiled query does win was re-measured under a predeclaration committed
+before the code. Probe 2's concrete-search baseline used to scan every generator in the alphabet at
+every settled state where only its own sort's generators can apply; walking a per-sort list instead,
+with the search otherwise untouched, the like-for-like ratio falls from `102x` to `6.8x`, against a
+point prediction of `7x` in a `4x`–`15x` band, and the per-query relaxation count holds at exactly
+`356.7` — the predeclared invariant that would have signalled a changed search rather than a changed
+representation. So roughly 93 percent of the withdrawn `220x` was representation, and this
+document's earlier attribution of the gap to a per-query workspace clear was wrong on the mechanism:
+the clear was about a sixth of the cost and the dense alphabet scan was the rest. What survives is a
+single-digit per-query advantage for the smaller search graph, and `6.8x` is an upper bound on what
+graph size alone buys, because the concrete arm still uses a standard-library heap against the core's
+indexed decrease-key heap.
+
+The third instance is the only one that was free to come out otherwise. Probe 3's amortization arm —
+one compile, then every responsibility query on the model with the class oracle against the same
+queries without it — was predeclared as a loss and lost cleanly: on every row the pruned route is
+slower than the plain route, so break-even is never, and at domain twenty pruning removes 1,260 of
+1,273 candidates and still runs 35 percent slower, because `class_of` runs on every candidate before
+the prune check and costs more than the solve it replaces. Even had the sign gone the other way, the
+compile on the largest fixture supports a sub-microsecond query at a cost of nearly two seconds
+against a model with nine distinct queries.
+
+Nothing in C1062 has timed a compiled query beating the direct route on the flat carrier. Probe 7
+remains the only route that changes the arithmetic, because it never materializes `|U| · π_k`. Its
+cost is linear in the mechanism-table size and independent of the context count, which is the
+defensible form of its scale claim.
 
 ## 6. What the compiler is actually worth here
 
@@ -158,8 +187,20 @@ sorts, so the certificate can only merge settings of one cause with one witness 
 `d^c − 1`, which is one for singleton binary causes. The review measured the verifier fraction flat
 from five to eleven voters and from size bound two to four, with pruning falling to zero on the larger
 rows, and on the distinct-class reading the one real row is `29.09%` rather than `58.18%`, still a
-miss. The only lever that can reach the ten-percent threshold is domain width, and that fixture is a
-session's work. Elsewhere the certificate is thin in a different way: probe 1 decoded its separators
+miss. The only lever that can reach the ten-percent threshold is domain width, and the predeclared
+attempt to measure it failed on its own control: the `d = 2` row was required to show no compaction
+and showed `53.85%`, because at the queried context every input is zero and breaking the quorum needs
+every input pinned nonzero, which the arity bound — imposed deliberately to make the query a genuine
+negative — forbids. The whole fibre is one class per sort for a reason that has nothing to do with
+domain width, the rows below ten percent from `d = 5` onward measure the fixture rather than the
+method, and the author declined to report the threshold as met. The domain-width axis is therefore
+untested, not refuted; the model-width control on the same fixture passed independently, so the
+structural claim above stands on a second family. A corrected fixture needs an intervenable variable
+outside the query pool, so that a free overwrite can flip the outcome where no candidate can, and it
+needs its own predeclaration. One distinction that attempt makes explicit belongs wherever the
+certificate is discussed: every certificate statement in this task is about one exogenous context's
+fibre, while every quotient statement is about the whole carrier, and a rich quotient can sit over a
+trivial fibre. Elsewhere the certificate is thin in a different way: probe 1 decoded its separators
 and never replayed them, probe 5's separators were the null intervention 84% of the time, and probe
 7's `refinement_witness` returns a pair of contexts exhibiting the composed quotient's own
 incompleteness, not a replayable experiment. The one place a certificate carries information no pin
@@ -189,8 +230,11 @@ that the plan itself ruled out and that exists nowhere in the repository.
 
 What survives as the compiler's contribution is therefore narrow: exactness against external truth on
 the flat carrier, the congruence on intervened states as an available object that only probes 2 and 3
-consume, and a sufficient decidable safety check for counterfactual queries. None of those needed a
-faster answer, and none was shown to need the compile rather than the direct signature partition.
+consume, a sufficient decidable safety check for counterfactual queries, and one small positive the
+re-measurement adds — quotienting the search graph is worth single digits at query time on probe 2's
+family, `6.8x` at most, bought back many times over by materializing the carrier and by the class
+lookup that costs more than the solve it replaces. None of those needed a faster answer, and none was
+shown to need the compile rather than the direct signature partition.
 
 ## 7. What reversed in the task's favour
 
@@ -229,8 +273,10 @@ condition, further from probe 7's object than the report's paraphrase suggested.
 - **"A richer vocabulary is a finer quotient."** The unit shift has the smallest edit space and the
   finest quotient; the mechanism is whether the vocabulary can invert what the natural run discards.
 - **The `220x`, the `1.000e12x` as a discovered compression, and the `846x` certificate cost.** The
-  first is withdrawn, the second is `(20/2)^12` set by the fixture, and the third is superseded by the
-  core repair to roughly `300x`.
+  first is withdrawn and replaced by a predeclared, measured `6.8x`; the second is `(20/2)^12` set by
+  the fixture; the third is superseded by the core repair to roughly `300x`.
+- **Cross-query amortization of the actual-cause compile.** Probe 3's arm, the last economics
+  measurement free to come out in the compile's favour, lost on every row.
 
 ## 9. What is ours, after the audit and the reviews
 
@@ -290,11 +336,23 @@ caller, and every one has a patch written in its review.
 
 - **Why is every economics ratio exactly `1.00x`?** Settled, and not as the previous closeout had it:
   two of the three are identities that could not have come out otherwise, and the third is a
-  family-size tie. There was never a measurement to explain. **Closed.**
-- **Probe 3's certificate compactness.** Refuted on the model-size axis with a structural reason.
-  **Open on the domain-width axis only**, predicted of order `1/(d − 1)`, one fixture, one session.
-- **Probe 3's amortization arm.** Still unmeasured; the foreign obstruction that blocked it is gone
-  and the measurement is one flag on the existing subcommand. **Open and cheap.**
+  family-size tie. There was never a measurement to explain. The two real timing measurements since —
+  probe 2's strengthened baseline and probe 3's amortization arm — both landed where their
+  predeclarations said, against the compile. **Closed.**
+- **Probe 3's certificate compactness.** Refuted on the model-size axis with a structural reason, now
+  on two families. **Open on the domain-width axis, and the first attempt to isolate that axis
+  failed on its own control.** The quorum fixture's queried fibre is observationally constant within
+  the arity bound, so its compaction is trivial pruning of a degenerate query. The next attempt needs
+  a fixture whose queried fibre varies within the arity bound while no candidate flips the outcome —
+  an intervenable variable outside the query pool is the construction — with a fibre-constancy check
+  as its first gate and its own predeclaration. The `1/(d − 1)` prediction is untested, not
+  confirmed; probe 3's original `rock-throwing-billy` row is not degenerate in this way, so the
+  original miss was measuring the real thing.
+- **Probe 3's amortization arm.** **Closed in the negative.** Measured on every fixture in the probe
+  and the wide-domain sweep: break-even never, the oracle route slower than the plain route on every
+  row including the one built to favour it, and the compile cost two to four orders of magnitude
+  above the total query cost everywhere. Whether a `class_of` without per-call allocation would
+  invert the per-query comparison is open and narrow; it could not make the compile pay.
 - **Probe 7's composed quotient reaching the product ceiling.** **Closed in the negative** by a
   four-context counterexample whose mechanism is the forward pass's per-variable reachability product.
   The conjecture that equality holds whenever that product is realized is unproved and would convert
@@ -331,18 +389,22 @@ Three successors deserve allocation, in order.
    4's fifth arm), retain an evidence file for every probe, and apply each review's wording repairs to
    its report so the reports stop saying things the reviews refuted. This is bookkeeping, and it is the
    precondition for anything below being trusted.
-2. **The two measurements that can still move a verdict.** Probe 3's wide-domain fixture and its
-   amortization arm, which together are the last untested route to a positive certificate result on the
-   flat carrier; and the compositional counterfactual crossover — probe 7's reduction under probe 4's
-   query — which probe 4's review confirms is the open cost question and which composes existing exact
-   pieces into a measurement nobody has taken.
+2. **The measurements that can still move a verdict.** The compositional counterfactual crossover —
+   probe 7's reduction under probe 4's query — which probe 4's review confirms is the open cost
+   question and which composes existing exact pieces into a measurement nobody has taken. And a second
+   attempt at probe 3's domain-width axis, which is the last untested route to a positive certificate
+   result on the flat carrier: it must be a different fixture, with an intervenable variable outside
+   the query pool, gated first on the queried fibre being observationally non-constant within the
+   arity bound, and predeclared before it is built, as the failed attempt was. The amortization half of
+   this item is done and lost.
 3. **The economics question, restated.** The previous closeout asked whether the certificate could be
    emitted without compiling the carrier. Probes 5 and 8 already do that — their separators come from
    the direct route — and completeness is not a differentiator, so the question in that form is answered.
    The replacement is narrower: is there any declaration under which compiling is ever cheaper than
-   the direct signature partition? Probe 8's strict-subset vocabulary and a probe 2 timing workload with
-   nontrivial answers are the two cheap places to look, and a negative there would let the `1.00x`
-   results be reported as a design input rather than as three coincidences.
+   the direct signature partition? Probe 8's strict-subset vocabulary, a probe 2 timing workload with
+   nontrivial answers, and a concrete baseline with the same indexed heap as the compiled arm are the
+   three cheap places to look, and a negative there would let the economics results be reported as a
+   design input rather than as a run of coincidences.
 
 The core-side items — the deferred-verification artifact carrying no "unverified" marker, and the
 certificate-policy witness — belong with C1017 rather than here.
