@@ -3,9 +3,22 @@
 **Lane**: `complete-ports`
 **Task**: C1062, probe 1a (pencil probe; no code)
 **Plan**: `2026-09-04-c1062-exploration-log.md`
+**Reviewed**: `2026-09-05-c1062-probe1a-review.md`, with the cost-constant defect established in
+`2026-09-05-c1062-probe1-review.md` § 2.1. Corrections are marked **[corrected]** below and the
+original reasoning is kept wherever it explains how a number was reached.
+**Replay**: none — this is a pencil probe with no code. Its arithmetic was recomputed independently
+in the probe 1 review; the carrier costs it predicts are measured in
+`ergodis-private` `evidence/2026-09-05-causal-lowering-repaired.txt`.
 **Verdict**: the flat lowering is **viable but narrow**. The wall is the exogenous alphabet and the
 generator transition tables, not the pin set. Probe 7's compositional route should be promoted from
 "gated" to "expected necessary for anything beyond the stated envelope".
+
+**[corrected]** "narrow" is six to nine times less narrow than the numbers below say, because
+`4(nd + 1)` is the interior-sort constant rather than the arity-bounded one; see § 3. Probe 7's
+promotion survives on the canonical-exogenous argument, which fails by twelve orders of magnitude and
+does not care about a factor of six. Separately, the recommendation in § 2 to use sorts rather than a
+context language forecloses the contingency pruning § 5 item 1 promises, and that trade is not named
+here; it is the ceiling probe 3 later hit.
 
 ## 1. Why `state = u` fails, stated exactly
 
@@ -73,6 +86,19 @@ no padding or sink state. This is cleaner than the alternative of encoding the b
 generators total on the full unbounded carrier. Recommendation: **sorts, not a context language**,
 for the arity bound.
 
+**[corrected] the trade this recommendation makes is not named, and it costs § 5 item 1.** In a
+typed presentation the generators are declared per source sort, so states in different sorts have
+different outgoing generator sets and a label-respecting bisimulation can never identify them —
+`CompiledObservation` carries one `SortRange` per sort. A contingency candidate's pinned support
+*is* its sort, so two different contingency sets are never in the same class and the pruning item 1
+promises can only act across the pinned **values** of one fixed support. Probe 3 measured the
+consequence: verifier fractions flat at 66% to 73% and pruning falling to zero on the larger rows,
+because the candidate count is dominated by the witness-set choice, which is exactly the axis the
+congruence cannot touch. The memory argument for sorts is still right — the context-language route
+materializes `|U| · (d+1)^n` against `|U| · π_k` — but the recommendation buys memory and gives up
+cross-support identification, and that should have been stated here. See
+`2026-09-05-c1062-probe1a-review.md` § 2 and `2026-09-05-c1062-probe3-review.md` § 2.3.
+
 ## 3. The cost model
 
 Let `n = |V|`, uniform domain size `d`, arity bound `k`, and write
@@ -82,6 +108,14 @@ Let `n = |V|`, uniform domain size `d`, arity bound `k`, and write
 π_k  =  Σ_{j ≤ k} C(n, j) d^j        (pin configurations)
 |X_k| = |U| · π_k                    (materialized states)
 ```
+
+**[corrected]** These are a special case, not the general form. Sorts range over subsets of the
+declared **intervenable** set, not of `V`, so the binomial is `C(m, j)` with `m = |intervenable|`;
+and domains need not be uniform, so `π_k = Σ_{|S| ≤ k} ∏_{v ∈ S} d_v`. The implementation is general
+in both. One shipped fixture is already outside the uniform form: `identity-predicted-loss` has
+domains 2 and 3, giving `π_2 = 1 + (2 + 3) + 6 = 12` and `6 × 12 = 72` states, which no single `d`
+in `1 + 2d + d²` reproduces. The `m = n` assumption is also the one probe 3's `enumerate_supports`
+bug depended on.
 
 Unbounded (`k = n`) this is `|X| = |U| · (d + 1)^n`, which is the `∏_V (|D_V| + 1)` factor the
 revised plan reports. **The first plan's "forty generators, not 3^20" is true of the vocabulary and
@@ -106,19 +140,42 @@ state. A 2 GB working budget therefore caps the carrier at
 well below the `u32` state-id ceiling of `2^32`, so **memory binds before the id width does**. This
 is the number that matters and it did not appear anywhere in the first plan.
 
+**[corrected] `4(nd + 1)` is the interior constant and is wrong for the regime this envelope is
+about.** The `(interior sorts)` qualifier attached to the derivation above is dropped from the
+conclusion, and in the arity-bounded regime the interior sorts are a vanishing minority: a sort at
+the bound carries `kd` generators, not `nd`, and `C(n,k) d^k` dominates `Σ_{j<k} C(n,j) d^j`.
+Recomputed:
+
+| n  | k | d | nominal `4(nd+1)` | realized | overstatement | `\|X\|` at 2 GB, nominal | realized |
+|----|---|---|-------------------|----------|---------------|--------------------------|----------|
+| 20 | 2 | 2 | 164               | 27.4     | `6.0x`        | `1.2e7`                  | `7.3e7`  |
+| 20 | 3 | 2 | 164               | 39.0     | `4.2x`        | `1.2e7`                  | `5.1e7`  |
+| 30 | 2 | 2 | 244               | 27.6     | `8.8x`        | `8.2e6`                  | `7.2e7`  |
+| 10 | 3 | 2 | 84                | 37.7     | `2.2x`        | `2.4e7`                  | `5.3e7`  |
+
+`memory binds before the id width does` still holds at the corrected ceiling. What the probe did not
+anticipate is that for the audited certificate policy neither the transition table nor the id width
+binds: the core repair note records `ExhaustivePairAudit` reaching 6.9 GB at 205,056 states, so the
+practical cap is the certificate's memory.
+
 **The resulting envelope.** Solving `|U| · π_k ≤ 1.2 × 10^7`:
 
-| n  | d | k | π_k   | max \|U\| |
-|----|---|---|-------|-----------|
-| 20 | 2 | 2 | 801   | ~15,000   |
-| 20 | 2 | 3 | 9,921 | ~1,200    |
-| 30 | 2 | 2 | 1,741 | ~6,900    |
-| 10 | 2 | 3 | 1,161 | ~10,300   |
-| 10 | 2 | 10 (full) | 59,049 | ~200 |
+| n  | d | k | π_k   | max \|U\| as written | max \|U\| corrected |
+|----|---|---|-------|----------------------|---------------------|
+| 20 | 2 | 2 | 801   | ~15,000              | ~91,000             |
+| 20 | 2 | 3 | 9,921 | ~1,200               | ~5,200              |
+| 30 | 2 | 2 | 1,801 | ~6,900               | ~40,000             |
+| 10 | 2 | 3 | 1,161 | ~10,300              | ~46,000             |
+| 10 | 2 | 10 (full) | 59,049 | ~200        | ~200                |
 
-Read the other way: with a declared exogenous alphabet of about `10^4` states, arity 2 to 3 on 20 to
-30 endogenous variables is comfortable, and full arity is not. That is a real envelope, and it is
-narrow.
+**[corrected]** two things in this table. The `n = 30, k = 2` row read `π_2 = 1,741`; the correct
+value is `1,801`, since `1 + 30·2 + 435·4 = 1,801` and the singleton term was dropped. And the
+`max |U|` column is recomputed against the realized per-state cost above; at full arity the two
+constants coincide, which is why the last row does not move.
+
+Read the other way: with a declared exogenous alphabet of about `10^5` states — **[corrected]** from
+`10^4` — arity 2 to 3 on 20 to 30 endogenous variables is comfortable, and full arity is not. That
+is a real envelope, and it is narrow, an order of magnitude less narrow than first written.
 
 **The exogenous alphabet is the wall.** `|U|` is whatever the presentation declares. For an applied
 model it is often modest — a failure vector over 14 components gives `|U| = 16,384`, which sits at
@@ -127,7 +184,8 @@ where `U_V` ranges over response functions, `|U| = ∏_V d^(d^|pa(V)|)`; ten bin
 parents each gives `16^10 ≈ 1.1 × 10^12` and is hopeless. Consequences:
 
 - Applied fixtures (failure domains, capacity cuts, small circuits) fit, at arity 2 to 3, up to
-  roughly 14 independent binary exogenous sources.
+  roughly 16 independent binary exogenous sources — **[corrected]** from 14, since `2^16 = 65,536`
+  fits under the corrected `~91,000` ceiling and `2^17` does not.
 - **The Balke–Pearl response-function fixture is only checkable on tiny models.** With `d = 2` and
   at most two parents per variable, `n = 3` gives `|X| = 4096 × 27 ≈ 1.1 × 10^5` and `n = 4` gives
   `65,536 × 81 ≈ 5.3 × 10^6`; `n = 5` is already `2.5 × 10^8` and out. **Plan the fixture at
@@ -153,6 +211,14 @@ Observations: the observation sequence produced by reading a word `w` from `(u, 
 only on `w`. Hence the full observation behaviour of `x` is determined by, and determines, the
 function `I ↦ O(u, I)`. Two root states are indistinguishable exactly when these functions agree. ∎
 
+**[corrected] the proposition is about roots only, and the generalization is not the obvious one.**
+The proof and the statement are correct as written and were independently checked in
+`2026-09-05-c1062-probe1a-review.md` § 1. But `(u, I)` and `(u', I'')` with non-empty pins are
+equivalent iff `dom(I) = dom(I'')` **and** `O(u, I ⊕ w) = O(u', I'' ⊕ w)` for every admissible word
+effect `w` — indexed by the overwrite, not by the absolute pin set, because a word cannot unpin a
+coordinate and the untouched coordinates keep each state's own values. § 5 item 1 makes a claim about
+exactly these states without that qualification.
+
 **Corollary (arity tower).** `x ~_{≤k} x'` iff `O(u, I) = O(u', I)` for all `|dom I| ≤ k`, and
 `~_{≤1} ⊇ ~_{≤2} ⊇ …` refines monotonically. The tower need not stabilize below `k = n`: a
 threshold-`t` outcome keeps refining until arity near `t`, so stabilization is a reported object, not
@@ -169,6 +235,16 @@ because a probe 1 that reports only "the partitions agree" will have measured no
 
 Four things, and only these. Each is the justification for a specific downstream probe, so this list
 is the contract probe 1 must deliver against.
+
+**[corrected] scored against the finished task.** Item 4 came in as promised, by probe 8, and it is
+the item that paid — promoting probe 8 out of the gated tail on the strength of this list was right.
+Item 2 was delivered not by probe 1 (which decoded rather than replayed) but by probe 5, where 2,601
+of 3,100 replayed separators were the null intervention; probe 1's replay gate has since been run
+and passes. Item 3 was never built: probe 1's tower is computed by the direct oracle at full price
+per rung. Item 1 is capped by § 2's own sort structure, above. And the thing the task's closeout
+ended up naming as what compilation buys — probe 4's decidable expressibility test, which tells a
+caller a counterfactual query is inexpressible instead of returning a wrong fraction — is **not on
+this list at all**. "And only these" was wrong in both directions.
 
 1. **The congruence on intervened states.** The signature partition says nothing about pairs
    `(u, I)`, `(u', I')` with non-empty pins. The compiler gives class equality for all of them,
@@ -189,6 +265,14 @@ is the contract probe 1 must deliver against.
    why probe 8 (unrolled sequential window) was promoted out of the gated tail.
 
 ## 6. Kill criterion: not fired, but narrowed
+
+**[corrected] the criterion as written could not have fired.** `k = 1` produces a non-trivial
+quotient on essentially any fixture with more than one class, and `|U| · (1 + Σ_v d_v)` states is
+practical for any `|U|` worth writing down; to fire, *every* `k` with a non-trivial quotient would
+have to be impractical, and the smallest such `k` never is. A version that can fire: no `k`
+producing a quotient strictly coarser than the identity fits the declared budget. The substantive
+verdict is nonetheless robust, and in an unexpected direction — the criterion was evaluated against
+the too-pessimistic constant of § 3, which pushes toward firing, and it still did not fire.
 
 The plan's criterion was "if the arity-bounded state count is impractical at every `k` producing a
 non-trivial quotient, the flat lowering is dead and the spike jumps to probe 7". It does not fire:

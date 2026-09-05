@@ -8,16 +8,32 @@ probe tests; probe 1 for the caveat that its separating words were pins in word 
 the structural timing result.
 **Code**: `ergodis-private` `691eba8` (`src/causal_sequential.rs`,
 `tasks/tools/src/causal_sequential_report.rs`)
-**Replay**: `cargo run --release --package ergodis-tools -- causal-sequential-report`
-**Predeclared threshold**: word closure non-vacuous, measured.
+**Replay**: `cd ~/src/ergodis-private && cargo run --release --package ergodis-tools --
+causal-sequential-report`
+**Evidence**: `ergodis-private` `evidence/2026-09-05-causal-sequential-repaired.txt`, the output of
+that command after the review repairs. No evidence was retained when this report was written.
+**Reviewed**: `2026-09-05-c1062-probe8-review.md`. Corrections are marked **[corrected]** below and
+the original reasoning is kept wherever it explains how a number was reached.
+**Predeclared threshold**: word closure non-vacuous, measured. **[corrected]** that threshold is met
+by any nonzero outcome and could not have failed; the fixture is also a three-state machine where the
+plan says two, which is an improvement and was undisclosed.
 **Verdict**: **met, and sharply.** Under the cyclic-cursor vocabulary no generator is idempotent, no
 generator pair commutes, some edit states need a word longer than the window, and every one of the
 34 separating certificates of length two or more is order-essential — a permutation of the same
 multiset fails to separate the pair. The hard-pin control reproduces the collapse exactly: all
 generators idempotent, no separator longer than one step, no order-essential separation. The
 economics are unchanged from probe 2 and were predeclared as a loss: the ratio is 1.00x in every
-vocabulary. What a richer vocabulary buys is not speed. It is that the direct route is complete only
-up to the word length it enumerated, while the compiled machine answers every word.
+vocabulary.
+
+**[corrected]** the verdict originally closed "What a richer vocabulary buys is not speed. It is that
+the direct route is complete only up to the word length it enumerated, while the compiled machine
+answers every word." That is false against this probe's own oracle — see § 5. What the measurements
+do establish is narrower and still valuable: under a non-idempotent, non-commuting vocabulary the
+separating **certificate** is a genuine word whose order and repetitions carry information no pin set
+carries, and the hard-pin control turns probe 1's caveat about word-shaped pins from an argument
+into a measurement. Two further corrections below: "all 34 order-essential" is a property of the
+emitted certificates and holds for **7** of the 34 pairs; and the economics `1.00x` is an identity
+that could not have come out otherwise.
 
 ## 1. The window
 
@@ -48,11 +64,19 @@ next repair, drive the next test vector.
 The oracle enumerates reachable edit states directly rather than as generator words, so a misreading
 shared between the model and the compiler cannot manufacture agreement. All three agree.
 
-**A richer vocabulary is a finer quotient, and here it is the identity.** Hard pins leave 11 classes
-on 16 contexts; the unit shift and the cursor both resolve every context. That is the same dial probe
-1 found on the observation set, running the other way: more intervention vocabulary is not free
-precision, it is a monotone slide toward the identity. Anyone declaring a sequential vocabulary for
-the sake of compression is declaring the wrong thing.
+**Both non-idempotent vocabularies drive the quotient to the identity.** Hard pins leave 11 classes
+on 16 contexts; the unit shift and the cursor both resolve every context. Anyone declaring a
+sequential vocabulary for the sake of compression is declaring the wrong thing.
+
+**[corrected]** this paragraph originally led with "A richer vocabulary is a finer quotient … a
+monotone slide toward the identity". There is no such dial, and the table above refutes it: the unit
+shift has four generators against the hard pin's twelve, 81 reachable edit states against 256, and
+all six of its generator pairs commute — and it gives the **finer** quotient. The mechanism is the
+one § 6 identifies: the machine's saturation is what loses information and a *modular* shift undoes
+it, because state two plus one wraps to zero. The right generalization is about whether the
+vocabulary can invert what the natural run discards, not about how much vocabulary there is. The
+practical advice survives; the reason given for it does not. See
+`2026-09-05-c1062-probe8-review.md` § 2.3.
 
 ## 3. The collapse, measured
 
@@ -85,11 +109,31 @@ the word is not a pin set in disguise.
 Over all separated context pairs, the length of the shortest separating word, searched shortest
 first up to length four.
 
-| vocabulary         | separated pairs | length 0 | length 1 | length >= 2 | order essential |
-|--------------------|-----------------|----------|----------|-------------|-----------------|
-| hard-pin (control) | 112             | 59       | 53       | 0           | 0               |
-| unit-shift         | 120             | 59       | 48       | 13          | 0               |
-| cyclic-cursor      | 120             | 59       | 27       | 34          | 34              |
+| vocabulary         | separated pairs | length 0 | length 1 | length >= 2 | unbounded | order essential (certificate) | order essential (pair) |
+|--------------------|-----------------|----------|----------|-------------|-----------|-------------------------------|------------------------|
+| hard-pin (control) | 112             | 59       | 53       | 0           | 0         | 0                             | 0                      |
+| unit-shift         | 120             | 59       | 48       | 13          | 0         | 0                             | 0                      |
+| cyclic-cursor      | 120             | 59       | 27       | 34          | 0         | 34                            | **7**                  |
+
+**[corrected] "all 34 order-essential" is a property of the certificates, not of the pairs.** The
+report tool takes **one** word per pair — whatever the shortest-first search returns first — and
+tests that word's permutations. Enumerating instead *every* minimal-length separating word per pair,
+only **7** of the 34 cursor pairs have the property that every minimal separator needs its order;
+for the other 27 some minimal separator can be permuted freely and still separates. The
+certificate-level claim stands and is what a caller replaying that certificate must respect; the
+pair-level claim is the one the wording reads as. The `34` itself is complete: the cursor quotient is
+the identity, and `59 + 27 + 34 = 120` accounts for every pair inside the search bound.
+
+**[corrected] the `unbounded` column is new and the old code could not have shown a nonzero one.** A
+pair with no separator inside `--max-word` was folded into the **length 0** column by an
+`unwrap_or_default` — the column that means "separated before any intervention". At `--max-word 1`
+that inflated the cursor's length-zero count from 59 to 93. The tool now counts such pairs
+separately and fails rather than printing a prettier table.
+
+**[added]** every minimal separator here has length two or three — 24 and 10 for the cursor, 12 and
+1 for the unit shift — so **no separating certificate exceeds the window**, even though some edit
+states need words of length seven or eight to reach. The overlong-word result of § 3 is about
+edit-state reachability, not about separation, and the two sit close enough together to read as one.
 
 **This is the result probe 1 could not have.** Probe 1's wide-conjunction certificate read
 `do(V0:=1) do(V1:=1) do(V2:=1)`, and its report flagged the caveat that must not be glossed: by the
@@ -118,6 +162,27 @@ carrier state and the direct route once per reachable edit state, and every edit
 in all three vocabularies, so the ratio is exactly one. Probe 2's structural finding recurs
 unchanged.
 
+**[corrected] this is an identity, not a measurement, and it could not have come out otherwise.**
+Neither column is timed and neither is a solve count taken from a run: both are combinatorial counts,
+the ratio is exactly `encoded edit states / reachable edit states`, the context factor cancels, and
+it is bounded below by one because the reachable set is a subset of the encoding. The predeclared
+verdict was "a loss", and the only outcomes available were `1.00x` or worse — the arm could not have
+been won. The columns are relabelled `encoded states` and `reachable states` in the tool. The gate
+that would break the identity, correctly named in § 8, is a vocabulary whose reachable edit set is a
+strict subset of its declared encoding; none is built here.
+
+**[corrected] compilation does not buy completeness here.** The paragraph below argued "when the edit
+monoid is the free monoid on the cursor alphabet, enumerating edit states means enumerating words,
+and the enumeration is complete only up to the length it reached". The antecedent is false in all
+three vocabularies: the edit-state space is finite — 81, 256, 1,024 — and `reachable_with_depth`
+closes it by breadth-first search in at most eight steps, so the direct oracle already answers every
+word of every length. The experiment § 8 asked for settles it against the claim: drawing 20,000
+uniform random length-twenty words per vocabulary, **zero** land outside the set the oracle had
+already enumerated, and necessarily zero, since the reachable set is closed under every generator.
+The claim would hold against a direct route that enumerates words to a bound; no such route exists
+in this repository, and the plan explicitly forbade it. See
+`2026-09-05-c1062-probe8-review.md` § 2.1. The original paragraph follows.
+
 **What changes is completeness, not cost.** The direct route enumerates edit states; when the edit
 monoid is the free monoid on the cursor alphabet, enumerating edit states means enumerating words,
 and the enumeration is complete only up to the length it reached. The compiled machine is a finite
@@ -129,16 +194,25 @@ speed.
 
 I expected the identity quotient in section 2 to be an artifact of a vocabulary that can write the
 observed variable directly, and the obvious lever is to protect the last step so no edit can touch
-it. Built and measured: with three of four steps editable, the carrier drops by roughly a third
-(hard-pin 4,096 to 1,024; unit-shift 1,296 to 432; cursor 16,384 to 3,072) and **every quotient and
-every separator count is identical** — 11, 16, 16 classes, and the same 0, 13, 34 length-two-or-more
-separator counts with the same 0, 0, 34 order-essential counts.
+it. Built and measured: with three of four steps editable, the carrier falls to a quarter, a third and
+three sixteenths respectively (hard-pin 4,096 to 1,024; unit-shift 1,296 to 432; cursor 16,384 to
+3,072 — **[corrected]** from "drops by roughly a third", which is right for one of the three) and
+**every quotient and every separator count is identical** — 11, 16, 16 classes, and the same 0, 13,
+34 length-two-or-more separator counts with the same 0, 0, 34 certificate-level order-essential
+counts and the same 0, 0, 7 pair-level ones.
 
 The reason is specific and worth keeping: the machine's saturation is what loses information, and a
 *modular* shift undoes it, because state two plus one wraps to zero. So three editable steps probe
 every context exactly as four do. **The lever is closed as a measured negative**, and the general
 statement it leaves behind is that protecting a step can only coarsen the quotient or leave it alone
 — which is gated as an invariant in the tests — but is not guaranteed to coarsen it.
+
+**[corrected]** the test gates the class **count**, not the partition, and the reason given
+("protecting a step removes generators") does not apply to the cursor, where `with_editable` changes
+the cursor's wrap modulus rather than removing generators. The invariant is nonetheless true, for a
+different reason: the protected model's observations are a sub-vector of the open model's, since the
+protected semantics coincide with the open ones at every edit state whose tail binding is the
+identity. See `2026-09-05-c1062-probe8-review.md` § 6.
 
 ## 7. What this decides about the time-indexed applications
 
@@ -166,17 +240,21 @@ the identity.
   shift is the separating example: 13 length-two separators, zero order-essential. No open question,
   but it is the fact that makes "non-idempotent" too coarse a label to plan with.
 - **The economics ratio is exactly 1.00x in all three vocabularies, at every size tried.** Expected
-  from probe 2 and predeclared, but it is now three independent confirmations of the same structural
-  identity, and I have no fixture in which it is not one. **Open, with a named gate**: a vocabulary
+  from probe 2 and predeclared. **[corrected]** not "three independent confirmations": the three
+  share one construction and one formula, and the ratio is an identity given full reachability rather
+  than a measurement. **Open, with a named gate**: a vocabulary
   whose reachable edit set is a strict subset of the declared edit-state encoding would break the
   identity, because the compiled route pays for the encoding and the direct route pays only for what
   is reachable. Every vocabulary here has full reachability by construction. Whether a natural one
   does not is untested.
-- **The compiled machine answers words of unbounded length and the direct route does not.** Stated in
-  section 5 and true by construction, but not *measured* — there is no fixture here where a query of
-  length beyond the enumerated bound is actually asked and answered. That is the one claim in this
-  report resting on structure rather than a number, and the cheap experiment that would fix it is to
-  ask a length-20 word against both routes.
+- **The compiled machine answers words of unbounded length and the direct route does not.**
+  **[corrected] closed in the negative.** The length-20 experiment named here was run: 20,000 uniform
+  random length-twenty words per vocabulary, and zero land outside the set the direct oracle had
+  already enumerated. The direct route closes a finite edit-state space by breadth-first search
+  rather than enumerating words to a bound, so it answers every word of every length exactly as the
+  compiled machine does. The claim is false in this regime; § 5 carries the repair. The original text
+  follows: "Stated in section 5 and true by construction, but not *measured* — there is no fixture
+  here where a query of length beyond the enumerated bound is actually asked and answered."
 
 ## 9. Next
 
