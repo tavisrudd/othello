@@ -1064,12 +1064,27 @@ identical results. That plateau is insensitive to a hundredfold per-lift budget
 range and to starting from the banked registered-solved states instead of fresh
 lifts, its residual is spread evenly across the sign, order-three and order-six
 blocks rather than concentrated, and it sits a hundred times above the exact
-floor of 32 that the mod-four and mean-zero fibre invariants permit. Next: look
-for a congruence on the `q174` deviation beyond those two invariants that would
-explain the plateau near 3,500, test a much larger shell corpus now that there
-is a scale that orders states by real distance, and note that even an exact
-`q174` hit leaves the last factor of three to the carrier-522 replay, which
-nothing scores yet.
+floor of 32 that the mod-four and mean-zero fibre invariants permit.
+
+That plateau is now settled as search depth rather than arithmetic
+(`2026-09-05-c1016-q174-congruence-hunt.md`). The invariant set is larger than
+recorded: the energy deviation is a multiple of eight, and the exact `q29` shell
+pins fifteen aggregates of the `q174` deviation rather than the one mean-zero
+total, cutting its free rank from 87 to 73 and confining any cheap trade to a
+single `q29` residue group. Against that corrected lattice, 63,984 single-transfer
+deltas have full rank 73 over every one of the 78,498 prime fields below a
+million, so no congruence constrains the deviation at any modulus whose prime
+factors are below that bound; the floor stays 32, reached by 422 vectors. The
+fibre holds `2^1719`--`2^1727` states with about `2^1322` expected exact
+solutions — one in `2^400`, essentially the plain-523 shard's density — and the
+plateau at 3,680 sits only about 130 bits into that 400-bit descent. The same
+substitution restates the whole condition in four letters: four sequences over
+`-2..=1` on `Z/174` whose aggregate autocorrelation is constant off the zero
+shift, the two constants differing by 523. Next: build a move the fifteen
+relations permit but a single transfer cannot make — a paired transfer between
+two columns of one residue group, or a search scoped to one group — test a much
+larger shell corpus, and note that even an exact `q174` hit leaves the last
+factor of three to the carrier-522 replay, which nothing scores yet.
 
 C1035 is closed: `ergodis-private` is a Cargo workspace whose root package is library-only; the
 six named tools live in `tasks/tools` (`ergodis-tools`), gem-mining drivers in `tasks/gem-hunt`,

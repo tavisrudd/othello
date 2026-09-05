@@ -38,3 +38,17 @@ family is a statement about a single-sector graph of half the size, with half th
 and none of the second sector's defects competing for the workspace. Nothing measured here is wrong
 because of it; it is a scope fact about the object those probes decode, and it is worth stating
 wherever a surface-family number is carried over to a real device.
+
+
+2026-09-05, C1016, while deciding whether a congruence constrains the q174 deviation: the obvious
+tool for that question, an integer Hermite normal form of the difference lattice, does not survive
+the dimension. Even from generators whose every coordinate is at most six, in 73 or 87 dimensions
+the basis entries grow geometrically under both extended-gcd combination and Euclidean row
+reduction, and the reduction overflows a 128-bit integer at rank eleven. The right tool is much
+cheaper and strictly more complete for the question asked: a congruence with a modulus divisible by
+the prime p exists exactly when the generators fail to span the lattice modulo p, so a rank over
+the field of p elements decides it one prime at a time in machine integers, with no growth at all
+and no lattice basis. That reframing turned a computation that could not finish into one that
+sweeps every prime below a million in thirty-four seconds. It is a general point about congruence
+hunts in this workspace rather than about the order-six fibre: ask for ranks over prime fields, not
+for a Hermite basis.
