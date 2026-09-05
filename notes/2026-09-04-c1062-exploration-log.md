@@ -4,7 +4,7 @@
 **Brief**: `2026-09-04-c1062-ergodis-causal-brief.md`
 **Plan review**: `2026-09-04-c1062-plan-review.md` (adversarial; this plan is its revision)
 **Code**: `~/src/ergodis-private` (core changes, if any, in `~/src/ergodis`)
-**Status**: probes 0, 1a, 1, 3, 2, 7 and 8 done; probes 4, 5, 6 and 9 remain, with probe 4 the
+**Status**: probes 0, 1a, 1, 3, 2, 7, 8 and 4 done; probes 5, 6 and 9 remain, with probe 5 the
 highest-value next step.
 
 This is the routing document for C1062. The task asks whether a finite structural causal model
@@ -82,7 +82,7 @@ probe may quietly claim both.
 | 1     | Lowering, oracle, Balke–Pearl fixture, towers       | M    | class-for-class agreement on the response-function fixture | **done**: 60 contexts to 32 classes, all three gates pass; contract one-quarter delivered | `2026-09-04-c1062-probe1-lowering-and-towers.md` |
 | 2     | **Best intervention, and the economics that follow** | L    | compiled beats memoized re-solve on the enumeration query, residual compression above the orbit baseline | **done**: compression passes (4.97x, 2.00x), timing fails structurally; quotient worth 220x over concrete-state search | `2026-09-04-c1062-probe2-best-intervention-and-economics.md` |
 | 3     | Exact actual causality and responsibility           | L    | verifier work under 10% of search; published verdicts matched | **done**: all eight published verdicts reproduced; certificate missed 10% at a 55-candidate scale; not closed | `2026-09-04-c1062-probe3-actual-cause-and-responsibility.md` |
-| 4     | Level-3 counterfactual and the observation precondition | M | exact under `O ⊇ E ∪ {Y}`; demonstrably wrong without it | planned | — |
+| 4     | Level-3 counterfactual and the observation precondition | M | exact under `O ⊇ E ∪ {Y}`; demonstrably wrong without it | **done**: two arms exact, two wrong (0/1 and 2/3 against a true 1/3); `O ⊇ E` is sufficient and not necessary, and the exact two-part condition is decidable on the classes | `2026-09-04-c1062-probe4-counterfactual-precondition.md` |
 | 5     | Evolve proposes, separator refutes                  | M    | seals to the exact kernel, and beats the random-counterexample arm on generations | planned | — |
 | 6     | k-ary experiment design and decision equivalence    | M    | measured gap between full and decision-sufficient identification, plus a near-zero gap on the negative family | planned | — |
 | 7     | Compositional lowering along the DAG                | L    | composed quotient equals the flat one on small models | **done**: reduction exact, `4.1e15` contexts to 4,096 in 25.6 µs; the composed quotient is a product partition and equals the flat one on 9 of 13 families, reaching the product ceiling on every coordinate | `2026-09-04-c1062-probe7-novelty-argument.md`, `2026-09-04-c1062-probe7-compositional-lowering.md` |
@@ -515,9 +515,21 @@ undoes the machine's saturation and three editable steps resolve as much as four
 application targets are in scope by bounded unrolling, with the two attached conditions measured
 rather than asserted.
 
-**Probes 4, 5, 6 and 9 remain.** Probe 4 is the highest-value next step: its deliverable is a
-correctness statement with a stated precondition plus a demonstrated negative, which is the shape
-that has paid best in this task.
+**Probe 4 is done and it corrects the precondition it set out to test.** Two arms are exact and two
+give numerically wrong answers — `0/1` and `2/3` against a true `1/3` — all four as predeclared, with
+the quotient answers taken from the compiler's own classes after an oracle check. The two failure
+modes are genuinely separate halves of abduction–action–prediction: the evidence set splitting a
+class kills abduction, and an action outside the declared vocabulary kills prediction. The plan's
+`O ⊇ E` turns out to be **sufficient and not necessary** — an arm whose evidence variable is never
+observed is still exact, because `do(V1 := 1)` makes the outcome read it — so the exact condition is
+that the evidence set is a union of classes and the action is declared, both decidable on the
+compiled classes without re-solving. A caller can therefore be told a query is inexpressible instead
+of receiving a wrong fraction, and the size of a wrong answer carries no information, only its
+existence.
+
+**Probes 5, 6 and 9 remain.** Probe 5 is the highest-value next step: it is the only one that
+exercises the separating intervention as a counterexample oracle, which is the claim the brief rests
+most weight on and which nothing has yet tested.
 
 Carried forward, none blocking. The arity tower is computed at full price per rung rather than
 incrementally through `plan_layered_greedy_schedule`. The intervention-vocabulary quotient is empty
