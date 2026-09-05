@@ -4,7 +4,7 @@
 **Brief**: `2026-09-04-c1062-ergodis-causal-brief.md`
 **Plan review**: `2026-09-04-c1062-plan-review.md` (adversarial; this plan is its revision)
 **Code**: `~/src/ergodis-private` (core changes, if any, in `~/src/ergodis`)
-**Status**: probes 0, 1a, 1, 3, 2, 7, 8, 4 and 5 done; probes 6 and 9 remain.
+**Status**: probes 0, 1a, 1, 3, 2, 7, 8, 4, 5 and 6 done; probe 9 remains.
 
 This is the routing document for C1062. The task asks whether a finite structural causal model
 (SCM) is another context language for the Ergodis contextual quotient, and what that buys: exact
@@ -83,7 +83,7 @@ probe may quietly claim both.
 | 3     | Exact actual causality and responsibility           | L    | verifier work under 10% of search; published verdicts matched | **done**: all eight published verdicts reproduced; certificate missed 10% at a 55-candidate scale; not closed | `2026-09-04-c1062-probe3-actual-cause-and-responsibility.md` |
 | 4     | Level-3 counterfactual and the observation precondition | M | exact under `O ⊇ E ∪ {Y}`; demonstrably wrong without it | **done**: two arms exact, two wrong (0/1 and 2/3 against a true 1/3); `O ⊇ E` is sufficient and not necessary, and the exact two-part condition is decidable on the classes | `2026-09-04-c1062-probe4-counterfactual-precondition.md` |
 | 5     | Evolve proposes, separator refutes                  | M    | seals to the exact kernel, and beats the random-counterexample arm on generations | **done**: first half met, second half refuted — the loop seals up to reparameterization, but the separator arm is `0.770x` on the largest sealing family and the kind-balanced diagnostic arm returns to `0.967x` | `2026-09-04-c1062-probe5-evolve-proposes-separator-refutes.md` |
-| 6     | k-ary experiment design and decision equivalence    | M    | measured gap between full and decision-sufficient identification, plus a near-zero gap on the negative family | planned | — |
+| 6     | k-ary experiment design and decision equivalence    | M    | measured gap between full and decision-sufficient identification, plus a near-zero gap on the negative family | **done**: met on both halves; gaps run from `1.00x` on the predeclared loss to zero experiments and to a decision reached where identification is impossible, and decision-sufficiency is not an equivalence relation at all | `2026-09-04-c1062-probe6-kary-design-and-decision-equivalence.md` |
 | 7     | Compositional lowering along the DAG                | L    | composed quotient equals the flat one on small models | **done**: reduction exact, `4.1e15` contexts to 4,096 in 25.6 µs; the composed quotient is a product partition and equals the flat one on 9 of 13 families, reaching the product ceiling on every coordinate | `2026-09-04-c1062-probe7-novelty-argument.md`, `2026-09-04-c1062-probe7-compositional-lowering.md` |
 | 8     | Unrolled sequential window                          | S    | word closure non-vacuous, measured | **done**: met sharply — cursor vocabulary has 0/4 idempotent, 0/6 commuting, minimal words past the window, and all 34 length-≥2 separators order-essential, against a control with none; economics 1.00x as predeclared | `2026-09-04-c1062-probe8-unrolled-sequential-window.md` |
 | 9     | End-to-end: incident to minimal repair              | L    | demo only, never counted as evidence | gated on 2 and 3 | — |
@@ -543,15 +543,30 @@ result sits inside the reach diagnostic: handing the search the entire quotient 
 than growing a six-context sample, so the counterexample loop earns its keep through staging rather
 than through the witness.
 
-**Probes 6 and 9 remain.** Probe 6 must not assume separators are the informative choice; a
-uniformly sampled violated pair is now the baseline to beat.
+**Probe 6 is done, and the equivalence in its title does not exist.** The gap between identifying the
+truth and learning enough to act runs the whole range across six predeclared families, every entered
+number held, and an independent Python oracle reproduces all of them from the exported tables by a
+different algorithm. The predeclared loss lost at exactly `1.00x`; one family needs three experiments
+to identify and zero to decide; and one family cannot be identified at all — two candidates differ
+only in an unobserved variable — while its decision still takes one probe, so the decision layer is
+not a discount on identification but answers questions identification cannot. The stopping rule is
+that the survivors share an optimal action, and that is **not transitive**, so no quotient of the
+hypotheses can express it; it is downward closed, which is all the dynamic program needs. Three side
+results: binarizing a `d`-ary experiment is free when the answer was binary and costs the full
+branching factor when it is not, because the per-value indicators peel one block at a time; the
+separating experiment again carries no teaching signal once the baseline is uniform sampling among
+experiments that actually split the survivors, which is probe 5's verdict measured a second way; and
+greedy matched the exact plan on every family, so nothing here shows the exact planner is worth its
+cost. Blame is delivered as the prior-weighted degree of responsibility, exact and predeclared.
+
+**Probe 9 remains.**
 
 Carried forward, none blocking. The arity tower is computed at full price per rung rather than
 incrementally through `plan_layered_greedy_schedule`. The intervention-vocabulary quotient is empty
 for hard edits (16 declared edits, 16 distinct actions) and should be re-measured under a
-non-idempotent vocabulary rather than dropped. Probe 6's decision-equivalence key cannot be the class
-key, because an intervention's class tuple across candidate models is already almost a complete
-invariant. Probe 3's amortization arm was never measured.
+non-idempotent vocabulary rather than dropped. Probe 3's amortization arm was never measured. Probe
+6's outcome table is probe 1's signature construction transposed onto the hypothesis index, and
+whether the compiled machinery buys anything there is unmeasured.
 
 **Two obstructions outside this lane**, both raised and neither fixed here. The ergodis core
 miscompiles the causal lowerings under four of its five certificate policies — `QuotientOnly`,
