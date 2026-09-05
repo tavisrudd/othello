@@ -4355,8 +4355,17 @@
       "last": 1063,
       "purpose": "TigerBlossom per-shot solver routing as the default configuration, and rebenchmarking against PyMatching with it",
       "sequence": 484
+    },
+    {
+      "count": 1,
+      "first": 1064,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1064,
+      "purpose": "weighted circuit-level detector error model for the TigerBlossom grid",
+      "sequence": 485
     }
   ],
-  "next_id": 1064,
+  "next_id": 1065,
   "schema": "codex-task-id-allocations-v1"
 }
