@@ -1,0 +1,1181 @@
+{
+  "schema": "c1070-probe4-labelled-dual-tower-v1",
+  "model": "flat compiled tower over F_q; unit-cost single-leaf observations",
+  "sweeps": [
+    {
+      "order": 2,
+      "message_dimension": 3,
+      "leaves": 4,
+      "towers": 210,
+      "full_rank_towers": 119,
+      "projective_towers": 35,
+      "profile_classes": 63,
+      "ambiguous_profile_classes": 0,
+      "projective_ambiguity": false,
+      "first_collision": null
+    },
+    {
+      "order": 2,
+      "message_dimension": 3,
+      "leaves": 5,
+      "towers": 462,
+      "full_rank_towers": 329,
+      "projective_towers": 21,
+      "profile_classes": 84,
+      "ambiguous_profile_classes": 56,
+      "projective_ambiguity": false,
+      "first_collision": {
+        "labelled_costs": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2
+        ],
+        "left": {
+          "multiplicities": [
+            1,
+            1,
+            1,
+            2,
+            0,
+            0,
+            0
+          ],
+          "leaves": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "labelled_costs": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2
+          ],
+          "dual_dimension": 2,
+          "dual_labelled_costs": [
+            1,
+            1,
+            2
+          ],
+          "dual_cost_multiset": [
+            1,
+            1,
+            2
+          ]
+        },
+        "right": {
+          "multiplicities": [
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          "leaves": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "labelled_costs": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2
+          ],
+          "dual_dimension": 2,
+          "dual_labelled_costs": [
+            1,
+            1,
+            1
+          ],
+          "dual_cost_multiset": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "order": 2,
+      "message_dimension": 3,
+      "leaves": 6,
+      "towers": 924,
+      "full_rank_towers": 742,
+      "projective_towers": 7,
+      "profile_classes": 91,
+      "ambiguous_profile_classes": 84,
+      "projective_ambiguity": false,
+      "first_collision": {
+        "labelled_costs": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ],
+        "left": {
+          "multiplicities": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            0,
+            0
+          ],
+          "leaves": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              1
+            ]
+          ],
+          "labelled_costs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2
+          ],
+          "dual_dimension": 3,
+          "dual_labelled_costs": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            1
+          ],
+          "dual_cost_multiset": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2
+          ]
+        },
+        "right": {
+          "multiplicities": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          "leaves": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1
+            ]
+          ],
+          "labelled_costs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2
+          ],
+          "dual_dimension": 3,
+          "dual_labelled_costs": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            2,
+            1
+          ],
+          "dual_cost_multiset": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "order": 2,
+      "message_dimension": 3,
+      "leaves": 7,
+      "towers": 1716,
+      "full_rank_towers": 1478,
+      "projective_towers": 1,
+      "profile_classes": 92,
+      "ambiguous_profile_classes": 84,
+      "projective_ambiguity": false,
+      "first_collision": {
+        "labelled_costs": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ],
+        "left": {
+          "multiplicities": [
+            1,
+            1,
+            1,
+            1,
+            3,
+            0,
+            0
+          ],
+          "leaves": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              1
+            ]
+          ],
+          "labelled_costs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2
+          ],
+          "dual_dimension": 4,
+          "dual_labelled_costs": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            2,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1
+          ],
+          "dual_cost_multiset": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "right": {
+          "multiplicities": [
+            1,
+            1,
+            1,
+            2,
+            2,
+            0,
+            0
+          ],
+          "leaves": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              1
+            ]
+          ],
+          "labelled_costs": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2
+          ],
+          "dual_dimension": 4,
+          "dual_labelled_costs": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            2,
+            1,
+            1,
+            2,
+            2,
+            1,
+            2,
+            3,
+            3,
+            2
+          ],
+          "dual_cost_multiset": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            3,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "order": 2,
+      "message_dimension": 2,
+      "leaves": 4,
+      "towers": 15,
+      "full_rank_towers": 12,
+      "projective_towers": 0,
+      "profile_classes": 4,
+      "ambiguous_profile_classes": 3,
+      "projective_ambiguity": false,
+      "first_collision": {
+        "labelled_costs": [
+          1,
+          1,
+          2
+        ],
+        "left": {
+          "multiplicities": [
+            1,
+            3,
+            0
+          ],
+          "leaves": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "labelled_costs": [
+            1,
+            1,
+            2
+          ],
+          "dual_dimension": 2,
+          "dual_labelled_costs": [
+            1,
+            1,
+            1
+          ],
+          "dual_cost_multiset": [
+            1,
+            1,
+            1
+          ]
+        },
+        "right": {
+          "multiplicities": [
+            2,
+            2,
+            0
+          ],
+          "leaves": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "labelled_costs": [
+            1,
+            1,
+            2
+          ],
+          "dual_dimension": 2,
+          "dual_labelled_costs": [
+            1,
+            1,
+            2
+          ],
+          "dual_cost_multiset": [
+            1,
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "order": 2,
+      "message_dimension": 2,
+      "leaves": 5,
+      "towers": 21,
+      "full_rank_towers": 18,
+      "projective_towers": 0,
+      "profile_classes": 4,
+      "ambiguous_profile_classes": 1,
+      "projective_ambiguity": false,
+      "first_collision": {
+        "labelled_costs": [
+          1,
+          1,
+          1
+        ],
+        "left": {
+          "multiplicities": [
+            1,
+            1,
+            3
+          ],
+          "leaves": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "labelled_costs": [
+            1,
+            1,
+            1
+          ],
+          "dual_dimension": 3,
+          "dual_labelled_costs": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            2,
+            1
+          ],
+          "dual_cost_multiset": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2
+          ]
+        },
+        "right": {
+          "multiplicities": [
+            1,
+            2,
+            2
+          ],
+          "leaves": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "labelled_costs": [
+            1,
+            1,
+            1
+          ],
+          "dual_dimension": 3,
+          "dual_labelled_costs": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            1
+          ],
+          "dual_cost_multiset": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "order": 2,
+      "message_dimension": 2,
+      "leaves": 6,
+      "towers": 28,
+      "full_rank_towers": 25,
+      "projective_towers": 0,
+      "profile_classes": 4,
+      "ambiguous_profile_classes": 4,
+      "projective_ambiguity": false,
+      "first_collision": {
+        "labelled_costs": [
+          1,
+          1,
+          1
+        ],
+        "left": {
+          "multiplicities": [
+            1,
+            1,
+            4
+          ],
+          "leaves": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "labelled_costs": [
+            1,
+            1,
+            1
+          ],
+          "dual_dimension": 4,
+          "dual_labelled_costs": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1
+          ],
+          "dual_cost_multiset": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "right": {
+          "multiplicities": [
+            1,
+            2,
+            3
+          ],
+          "leaves": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "labelled_costs": [
+            1,
+            1,
+            1
+          ],
+          "dual_dimension": 4,
+          "dual_labelled_costs": [
+            1,
+            1,
+            2,
+            1,
+            2,
+            2,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1
+          ],
+          "dual_cost_multiset": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "order": 3,
+      "message_dimension": 2,
+      "leaves": 4,
+      "towers": 35,
+      "full_rank_towers": 31,
+      "projective_towers": 1,
+      "profile_classes": 11,
+      "ambiguous_profile_classes": 6,
+      "projective_ambiguity": false,
+      "first_collision": {
+        "labelled_costs": [
+          1,
+          1,
+          2,
+          2
+        ],
+        "left": {
+          "multiplicities": [
+            1,
+            3,
+            0,
+            0
+          ],
+          "leaves": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "labelled_costs": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "dual_dimension": 2,
+          "dual_labelled_costs": [
+            1,
+            1,
+            1,
+            2
+          ],
+          "dual_cost_multiset": [
+            1,
+            1,
+            1,
+            2
+          ]
+        },
+        "right": {
+          "multiplicities": [
+            2,
+            2,
+            0,
+            0
+          ],
+          "leaves": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "labelled_costs": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "dual_dimension": 2,
+          "dual_labelled_costs": [
+            1,
+            1,
+            2,
+            2
+          ],
+          "dual_cost_multiset": [
+            1,
+            1,
+            2,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "order": 3,
+      "message_dimension": 2,
+      "leaves": 5,
+      "towers": 56,
+      "full_rank_towers": 52,
+      "projective_towers": 0,
+      "profile_classes": 11,
+      "ambiguous_profile_classes": 10,
+      "projective_ambiguity": false,
+      "first_collision": {
+        "labelled_costs": [
+          1,
+          1,
+          1,
+          2
+        ],
+        "left": {
+          "multiplicities": [
+            1,
+            1,
+            3,
+            0
+          ],
+          "leaves": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "labelled_costs": [
+            1,
+            1,
+            1,
+            2
+          ],
+          "dual_dimension": 3,
+          "dual_labelled_costs": [
+            1,
+            1,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2,
+            2
+          ],
+          "dual_cost_multiset": [
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        "right": {
+          "multiplicities": [
+            1,
+            2,
+            2,
+            0
+          ],
+          "leaves": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "labelled_costs": [
+            1,
+            1,
+            1,
+            2
+          ],
+          "dual_dimension": 3,
+          "dual_labelled_costs": [
+            1,
+            1,
+            1,
+            2,
+            1,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2,
+            2
+          ],
+          "dual_cost_multiset": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        }
+      }
+    }
+  ],
+  "verdict": {
+    "labelled_duality_holds": false,
+    "labelled_duality_holds_for_projective_towers": true,
+    "smallest_counterexample_leaves": 4
+  }
+}
