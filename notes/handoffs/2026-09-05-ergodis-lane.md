@@ -102,8 +102,9 @@ carrier at all. Brief `2026-09-04-c1062-ergodis-causal-brief.md`, routing log
 Queued, open-ended. Reads the labelled prescribed-coset recovery theory as a privacy interface and
 asks whether the tower quotient compiles a secret subspace, mask subspace, and observation model
 into named-functional and `t`-symbol leakage costs with witnesses. Brief and probe plan:
-[C1070 brief](../2026-09-06-c1070-ergodis-compositional-leakage-brief.md). **Next**: probe 0
-(prior-art audit), then probe 1 (mask-quotiented associativity).
+[C1070 brief](../2026-09-06-c1070-ergodis-compositional-leakage-brief.md). Product framing: prior art is
+surveyed for citation and technique, never as a gate. **Next**: probe 1 (mask-quotiented
+associativity) and probe 5 (interface on the settled tower case), with the probe 0 survey alongside.
 
 ### C985 — Ergodis exact algebraic optimization paper
 

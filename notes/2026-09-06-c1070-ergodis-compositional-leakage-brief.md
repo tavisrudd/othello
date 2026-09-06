@@ -7,6 +7,9 @@ secret functional, or leak at least `t` symbols of a secret subspace, with coeff
 **Code**: `~/src/ergodis-private` (core changes, if any, in `~/src/ergodis`)
 **Manuscript**: `papers/complete-repair-ports/compositional_recovery.tex` (owned by `complete-ports`;
 this task reads it and does not edit it)
+**Framing**: Ergodis as a product. The question is what the engine can exploit and ship as a privacy
+interface. Prior art is gathered because we want to know it and to cite it; it never blocks the
+software from exploiting a technique, and no probe waits on a novelty verdict.
 **Status of this file**: reference. Source brainstorm, assessment, mapping onto existing machinery,
 and the probe plan. Probe reports are the result documents.
 
@@ -123,15 +126,16 @@ of scope for this task.
   *encoding*), secret sharing from concatenated codes (Chen–Cramer–Goldwasser–de Haan–
   Vaikuntanathan 2007; Cascudo–Cramer–Xing), rank-metric RGHW for network coding
   (Martínez-Peñas), and leakage-resilient secret sharing (Benhamouda et al.), which is a different
-  leakage model and must not be conflated. Verdict wanted: is "labelled compositional leakage with
-  witnesses through a tower" pre-empted?
+  leakage model and must not be conflated. Output wanted: what exists, what to cite, and which
+  techniques the engine should absorb. Not a gate. It runs alongside probe 1, not before it.
 - **Probe 1** — mask-quotiented associativity, proof or counterexample, small computational check
   in `ergodis-private`.
 - **Probe 2** — leakage profile from the quotient; measure on the manuscript's existing example
   towers.
 - **Probe 3** — vector costs; first check what the core's dominance machinery already supports.
 - **Probe 4** — labelled duality; bounded to one session.
-- **Probe 5** — interface, only after probes 1–2 settle what the object is.
+- **Probe 5** — interface. Start on the mask-free tower case immediately, since that object is
+  already settled; widen as probes 1–2 land.
 
 Each probe gets one dated report `notes/2026-MM-DD-c1070-probeN-*.md` and an independent
 adversarial review, as in C1062. Reproducibility conventions apply to any number that could reach
@@ -155,7 +159,7 @@ state of an adversary's view that stays exact under every future observation of 
 and the manuscript's answer shape (a finite contextual quotient at bounded radius that is a
 congruence) is the candidate. That is **probe 6** below.
 
-**Prior-art risk is higher on this axis than on the tower axis.** Two literatures already compute
+**Two adjacent literatures on this axis, to learn from and cite, not to be gated by.** Both compute
 "which probes reveal which secret combination" by rank tests:
 
 - Masking verification for side-channel security: the `t`-probing model (Ishai–Sahai–Wagner 2003),
@@ -163,12 +167,13 @@ congruence) is the candidate. That is **probe 6** below.
   decide exactly the rank condition above for linear (and some nonlinear) gadgets, mostly over
   `F_2`, and they compose gadgets through *unlabelled* sufficient conditions — non-interference,
   strong non-interference, PINI. Astra's point lands here precisely: SNI-style composition is the
-  unlabelled summary; an exact labelled compositional rule with witnesses would be a contribution
-  *against* that literature, and probe 0 must say whether one already exists.
+  unlabelled summary; an exact labelled compositional rule with witnesses is what the product
+  offers over those tools, and their gadget corpora are ready-made test and benchmark inputs.
 - Secure regenerating codes: Pawar–El Rouayheb–Ramchandran 2011, Shah–Rashmi–Kumar 2011,
   Rawat–Koyluoglu–Silberstein–Vishwanath 2014 model an eavesdropper on repair transcripts with
   exactly the rank-equivocation arithmetic; proactive refresh is Herzberg–Jarecki–Krawczyk–Yung
-  1995. These give amounts, not labelled spaces, as far as memory serves; probe 0 checks.
+  1995. These give amounts, not labelled spaces, as far as memory serves; probe 0 checks, and
+  their constructions are candidate demo inputs for the interface.
 
 The constrained-optimization product — maximize legitimate recoverability subject to bounds on
 illegitimate recoverability — is a Pareto problem in the same vector-cost family as probe 3 and is
@@ -186,14 +191,15 @@ Additional probes:
 - **Probe 7** — legitimate-versus-illegitimate recoverability as a vector-cost problem; after
   probe 3.
 
-Probe 0 is widened to the two literatures above.
+Probe 0 is widened to the two literatures above, still as a survey with no gating role.
 
 ## 8. Standing constraints
 
 - No edits to the `complete-ports` manuscript; a paper-facing consequence is proposed to that lane
   as a candidate statement, not written in.
-- No public-surface or Ergodis-paper claim until probe 0 returns and at least probe 1 or 2 has a
-  reviewed result.
+- Product first. Prior art is recorded and cited; it never blocks building or shipping a
+  capability. Novelty language is only needed if a paper claim is later carved out, and that is
+  a separate decision.
 - The linear-uniform model is the scope. Non-uniform priors, noisy channels, and computational
   (as opposed to information-theoretic) privacy are out of scope and should be named as such in
   any report.
