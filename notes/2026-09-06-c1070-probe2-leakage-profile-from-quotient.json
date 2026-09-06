@@ -1,0 +1,345 @@
+{
+  "schema": "c1070-probe2-leakage-structure-v1",
+  "model": "uniform linear, mask-free; leakage is dim(S ∩ V_H) field symbols",
+  "named_cases": [
+    {
+      "name": "theorem-b-non-submodular",
+      "order": 2,
+      "profile": [
+        2
+      ],
+      "greedy_coalition_chain": [
+        2
+      ],
+      "optimal_subspace_chain_exists": true,
+      "submodularity_violations": 1,
+      "supermodularity_violations": 0
+    },
+    {
+      "name": "proposition-c-greedy-extension-fails",
+      "order": 2,
+      "profile": [
+        1,
+        2,
+        3
+      ],
+      "greedy_coalition_chain": [
+        1,
+        3,
+        3
+      ],
+      "optimal_subspace_chain_exists": false,
+      "submodularity_violations": 0,
+      "supermodularity_violations": 0
+    },
+    {
+      "name": "theorem-b-non-submodular",
+      "order": 3,
+      "profile": [
+        2
+      ],
+      "greedy_coalition_chain": [
+        2
+      ],
+      "optimal_subspace_chain_exists": true,
+      "submodularity_violations": 1,
+      "supermodularity_violations": 0
+    },
+    {
+      "name": "proposition-c-greedy-extension-fails",
+      "order": 3,
+      "profile": [
+        1,
+        2,
+        3
+      ],
+      "greedy_coalition_chain": [
+        1,
+        3,
+        3
+      ],
+      "optimal_subspace_chain_exists": false,
+      "submodularity_violations": 0,
+      "supermodularity_violations": 0
+    },
+    {
+      "name": "theorem-b-non-submodular",
+      "order": 5,
+      "profile": [
+        2
+      ],
+      "greedy_coalition_chain": [
+        2
+      ],
+      "optimal_subspace_chain_exists": true,
+      "submodularity_violations": 1,
+      "supermodularity_violations": 0
+    },
+    {
+      "name": "proposition-c-greedy-extension-fails",
+      "order": 5,
+      "profile": [
+        1,
+        2,
+        3
+      ],
+      "greedy_coalition_chain": [
+        1,
+        3,
+        3
+      ],
+      "optimal_subspace_chain_exists": false,
+      "submodularity_violations": 0,
+      "supermodularity_violations": 0
+    }
+  ],
+  "cross_checks": [
+    {
+      "input": "(x, y, x+y) over F_3, secret x+y",
+      "order": 3,
+      "message_dimension": 2,
+      "secret_dimension": 1,
+      "units": 3,
+      "direct_profile": [
+        1
+      ],
+      "sweep_profile": [
+        1
+      ],
+      "agrees": true,
+      "direct_subspace_searches": 1,
+      "coalitions_swept": 8
+    },
+    {
+      "input": "(x, y, x+2y) over F_3, secret x+y",
+      "order": 3,
+      "message_dimension": 2,
+      "secret_dimension": 1,
+      "units": 3,
+      "direct_profile": [
+        2
+      ],
+      "sweep_profile": [
+        2
+      ],
+      "agrees": true,
+      "direct_subspace_searches": 1,
+      "coalitions_swept": 8
+    },
+    {
+      "input": "(x, y, x+y) over F_5, secret x+y",
+      "order": 5,
+      "message_dimension": 2,
+      "secret_dimension": 1,
+      "units": 3,
+      "direct_profile": [
+        1
+      ],
+      "sweep_profile": [
+        1
+      ],
+      "agrees": true,
+      "direct_subspace_searches": 1,
+      "coalitions_swept": 8
+    },
+    {
+      "input": "(x, y, x+2y) over F_5, secret x+y",
+      "order": 5,
+      "message_dimension": 2,
+      "secret_dimension": 1,
+      "units": 3,
+      "direct_profile": [
+        2
+      ],
+      "sweep_profile": [
+        2
+      ],
+      "agrees": true,
+      "direct_subspace_searches": 1,
+      "coalitions_swept": 8
+    },
+    {
+      "input": "two-level F_3 tower: [4,3] single-parity-check outer, two [3,2] inner blocks",
+      "order": 3,
+      "message_dimension": 3,
+      "secret_dimension": 3,
+      "units": 8,
+      "direct_profile": [
+        1,
+        2,
+        3
+      ],
+      "sweep_profile": [
+        1,
+        2,
+        3
+      ],
+      "agrees": true,
+      "direct_subspace_searches": 27,
+      "coalitions_swept": 256
+    },
+    {
+      "input": "two-level GF(4) tower on the engine's example field GF(2)[a]/(a^2+a+1)",
+      "order": 4,
+      "message_dimension": 2,
+      "secret_dimension": 2,
+      "units": 8,
+      "direct_profile": [
+        1,
+        2
+      ],
+      "sweep_profile": [
+        1,
+        2
+      ],
+      "agrees": true,
+      "direct_subspace_searches": 6,
+      "coalitions_swept": 256
+    }
+  ],
+  "sweeps": [
+    {
+      "family": "f2-amb3-leaf4",
+      "order": 2,
+      "ambient": 3,
+      "leaves": 4,
+      "shape": "single-coordinate-units",
+      "instances": 61440,
+      "sweep_direct_disagreements": 0,
+      "non_submodular_instances": 30786,
+      "non_supermodular_instances": 34783,
+      "neither_modularity_instances": 23646,
+      "no_optimal_chain_instances": 0,
+      "chain_testable_instances": 43785,
+      "worst_greedy_percent": 100
+    },
+    {
+      "family": "f2-amb3-leaf4",
+      "order": 2,
+      "ambient": 3,
+      "leaves": 4,
+      "shape": "single-and-whole-block-units",
+      "instances": 61440,
+      "sweep_direct_disagreements": 0,
+      "non_submodular_instances": 30786,
+      "non_supermodular_instances": 54495,
+      "neither_modularity_instances": 30786,
+      "no_optimal_chain_instances": 0,
+      "chain_testable_instances": 43785,
+      "worst_greedy_percent": 133
+    },
+    {
+      "family": "f2-amb3-leaf4",
+      "order": 2,
+      "ambient": 3,
+      "leaves": 4,
+      "shape": "graded-single-and-whole-block-units",
+      "instances": 61440,
+      "sweep_direct_disagreements": 0,
+      "non_submodular_instances": 30786,
+      "non_supermodular_instances": 54495,
+      "neither_modularity_instances": 30786,
+      "no_optimal_chain_instances": 504,
+      "chain_testable_instances": 43785,
+      "worst_greedy_percent": 200
+    },
+    {
+      "family": "f3-amb3-leaf3",
+      "order": 3,
+      "ambient": 3,
+      "leaves": 3,
+      "shape": "single-coordinate-units",
+      "instances": 531441,
+      "sweep_direct_disagreements": 0,
+      "non_submodular_instances": 309504,
+      "non_supermodular_instances": 98904,
+      "neither_modularity_instances": 69888,
+      "no_optimal_chain_instances": 0,
+      "chain_testable_instances": 344162,
+      "worst_greedy_percent": 100
+    },
+    {
+      "family": "f3-amb3-leaf3",
+      "order": 3,
+      "ambient": 3,
+      "leaves": 3,
+      "shape": "single-and-whole-block-units",
+      "instances": 531441,
+      "sweep_direct_disagreements": 0,
+      "non_submodular_instances": 309504,
+      "non_supermodular_instances": 429936,
+      "neither_modularity_instances": 309504,
+      "no_optimal_chain_instances": 0,
+      "chain_testable_instances": 344162,
+      "worst_greedy_percent": 133
+    },
+    {
+      "family": "f3-amb3-leaf3",
+      "order": 3,
+      "ambient": 3,
+      "leaves": 3,
+      "shape": "graded-single-and-whole-block-units",
+      "instances": 531441,
+      "sweep_direct_disagreements": 0,
+      "non_submodular_instances": 309504,
+      "non_supermodular_instances": 429936,
+      "neither_modularity_instances": 309504,
+      "no_optimal_chain_instances": 0,
+      "chain_testable_instances": 344162,
+      "worst_greedy_percent": 100
+    },
+    {
+      "family": "f5-amb2-leaf3",
+      "order": 5,
+      "ambient": 2,
+      "leaves": 3,
+      "shape": "single-coordinate-units",
+      "instances": 109375,
+      "sweep_direct_disagreements": 0,
+      "non_submodular_instances": 74880,
+      "non_supermodular_instances": 89664,
+      "neither_modularity_instances": 69120,
+      "no_optimal_chain_instances": 0,
+      "chain_testable_instances": 104904,
+      "worst_greedy_percent": 100
+    },
+    {
+      "family": "f5-amb2-leaf3",
+      "order": 5,
+      "ambient": 2,
+      "leaves": 3,
+      "shape": "single-and-whole-block-units",
+      "instances": 109375,
+      "sweep_direct_disagreements": 0,
+      "non_submodular_instances": 74880,
+      "non_supermodular_instances": 102720,
+      "neither_modularity_instances": 74880,
+      "no_optimal_chain_instances": 0,
+      "chain_testable_instances": 104904,
+      "worst_greedy_percent": 133
+    },
+    {
+      "family": "f5-amb2-leaf3",
+      "order": 5,
+      "ambient": 2,
+      "leaves": 3,
+      "shape": "graded-single-and-whole-block-units",
+      "instances": 109375,
+      "sweep_direct_disagreements": 0,
+      "non_submodular_instances": 74880,
+      "non_supermodular_instances": 102720,
+      "neither_modularity_instances": 74880,
+      "no_optimal_chain_instances": 0,
+      "chain_testable_instances": 104904,
+      "worst_greedy_percent": 100
+    }
+  ],
+  "verdict": {
+    "sweep_equals_direct_everywhere": true,
+    "leak_dimension_is_submodular": false,
+    "leak_dimension_is_supermodular": false,
+    "optimal_subspace_chain_always_exists": false,
+    "worst_greedy_percent": 200,
+    "direct_subspace_searches_replaced": 37
+  }
+}
