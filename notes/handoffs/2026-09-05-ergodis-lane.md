@@ -118,8 +118,13 @@ partially ordered monoid and front types but the transfer stack is scalar throug
 coalition-side quantity, one best-first sweep over coalitions gives every `t` at once with no
 subspace enumeration and no quotient, greedy subspace extension fails only under heterogeneous
 costs, and the compositional route pays for itself only on towers too large to flatten
-([report](../2026-09-06-c1070-probe2-leakage-profile-from-quotient.md)). In flight: probe 0
-(survey) and probe 6 (transcript state). **Next**: unify `masked_leakage`, `hierarchical_leakage`,
+([report](../2026-09-06-c1070-probe2-leakage-profile-from-quotient.md)); probe 0, the survey: every
+adjacent literature (relative-weight secret sharing, masking verification, secure storage and
+network coding, hierarchical access structures, composed-code schemes) is amount-only or unlabelled
+in composition, freshness is assumed everywhere and verified nowhere, and the IronMask/maskVerif
+gadget corpora are a ready benchmark
+([report](../2026-09-06-c1070-probe0-prior-art-survey.md), read depths marked, no novelty verdict).
+In flight: probe 6 (transcript state). **Next**: unify `masked_leakage`, `hierarchical_leakage`,
 `leakage_structure`, and `vector_leakage` in `ergodis-private` around the coalition sweep; move the
 vector search onto `CappedAdditiveMonoid`. Open theorem: whether uniform unit costs force an
 optimal leaked-subspace chain (measured on 1.4M instances, unproved).
