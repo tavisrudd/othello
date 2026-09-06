@@ -67,10 +67,21 @@ Pavese preprint):
   one-sided bracket `τ_0 = 58/7`, the PG(6,9) admissible set and secant divisibility, the
   countermodel packing bound.
 
+## Export state
+
+- `export-paper-repos.py plan` and `audit` at HEAD: 22 files, zero reference findings.
+- Materialized to `~/src/math-papers/secant-hyperplane-defects` (content SHA-256
+  `b4bc5627…`), initialized as a git repository on `main` with two unsigned commits ("Initial
+  secant-hyperplane defects release", "Add export manifest"); `verify` and an in-tree `make check`
+  replay recorded below. Not pushed; no GitHub repository created.
+- `paper-facts.py extract --paper secant_hyperplane_defects` and `generate` were run; the
+  regenerated manuscripts table in `notes/2026-07-31-work-summary.md` also refreshed three
+  foreign rows (ame-lu, complete-ports, mds-css titles) from their already-tracked facts
+  artifacts. Remaining facts-check errors (30) are pre-existing and belong to other papers.
+
 ## Not done / open for the user
 
-- Math-papers materialization and GitHub creation (`export-paper-repos.py plan/audit/materialize`
-  after commit); Zenodo concept DOI, then README badge and DOI line.
+- GitHub repository creation and push; Zenodo concept DOI, then README badge and DOI line.
 - Independent replay of the scan beyond this session's own run.
 - Cold read of the manuscript prose.
 
