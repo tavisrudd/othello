@@ -32,8 +32,8 @@
 \newcommand{\rhoC}{\rho_{\cC}}
 \newcommand{\tmin}{t_2(2,q)}
 
-\title{Arcs complete outside a conic:\\
-a prescribed-hole defect identity and matching-design rigidity}
+\title{Secant defects with prescribed holes:\\
+arcs, caps, and matching designs}
 \author{Tavis Rudd}
 \date{July 2026}
 
@@ -41,39 +41,35 @@ a prescribed-hole defect identity and matching-design rigidity}
 \maketitle
 
 \begin{abstract}
-We prove that if \(\cH\) is any prescribed set of \(q+1\) points in a
-finite projective plane of order \(q\), then every arc \(A\) disjoint from
-\(\cH\) whose secants cover all points outside \(A\cup\cH\) satisfies
+Let \(A\) be an arc in a finite projective plane of order \(q\) and let
+\(\cH\) be any prescribed set of points disjoint from \(A\).  The first two
+secant moments give an exact defect identity: the amount by which the
+secant-covered points outside \(A\cup\cH\) fall short of their counting
+ceiling is a sum of nonnegative local terms.  When
+\(|\cH|=q+1\) and the secants cover everything outside \(A\cup\cH\), it
+yields
 \[
- |A|\ge
- \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
+ |A|\ge \sqrt{2q}+\frac32-\frac8{\sqrt{2q}},
 \]
-Thus even after exempting \(q+1\) points from coverage, the bound retains
-the classical \(\sqrt{2q}\) scale with additive term \(3/2-o(1)\); the
-constant \(3/2\) survives any \(o(q^{3/2})\) exempt points.  More
-generally, the first two secant moments yield an exact defect identity with
-nonnegative local summands.  At zero defect, each concurrency class
-containing at least two secants is a maximum matching, and these classes form
-a simple \(\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)\) design.  In
-Desarguesian planes, the arc realizes this design by concurrent chord
-families; the defect also gives quantitative deletion stability, and
-Hirzebruch's inequality shows that no such design with at least six points
-is realized in characteristic zero.  For caps in \(\PG(n,q)\) the identity
-persists with the number of coplanar quadruples in place of
-\(\binom{k}{4}\), and counting those quadruples through each secant gives
+and the constant \(3/2\) survives any \(o(q^{3/2})\) exempt points.  At zero
+defect the concurrency classes of secants are maximum matchings forming a
+simple \(\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)\) design, realized in
+Desarguesian planes by concurrent chord families; positive defect gives
+quantitative deletion stability, and Hirzebruch's inequality shows that no
+such design with at least six points is realized in characteristic zero.
+For caps in \(\PG(n,q)\) the identity persists with coplanar quadruples in
+place of \(\binom{k}{4}\), giving
 \(|A|\ge\sqrt2\,q+\frac12+\frac3{\sqrt2}-o(1)\) for complete caps in
 \(\PG(3,q)\), against \(\frac12+\sqrt2\) from the counting bound.
 
-For a nonsingular conic \(\cC\subseteq\PG(2,q)\), let \(\rhoC(q)\) denote
-the corresponding minimum.  In characteristic two, a \(\cC\)-complete
-zero-defect arc with odd \(k\ge7\) is an oval of size \(q+1\) whose nucleus
-lies on \(\cC\), while even \(k\ge6\) forces \(k=q+2\), hence a hyperoval.
-The coordinate triangle gives \(\rhoC(3)=3\) by hand.
-A kernel-checked classification gives \(\rhoC(16)=9\); exhaustive
-classifications with kernel-checked attaining witnesses give
+For holes on a nonsingular conic \(\cC\subseteq\PG(2,q)\), let \(\rhoC(q)\)
+denote the minimum size.  In characteristic two, a zero-defect
+\(\cC\)-complete arc with odd \(k\ge7\) is an oval whose nucleus lies on
+\(\cC\), and even \(k\ge6\) forces a hyperoval.  The coordinate triangle
+gives \(\rhoC(3)=3\); a kernel-checked classification gives \(\rhoC(16)=9\),
+and exhaustive classifications with kernel-checked witnesses give
 \(\rhoC(13)=8\), \(\rhoC(17)=9\), and \(\rhoC(19)=10\).  The defect
-identity, equality criterion, and deletion stability are independently
-formalized in Lean.
+identity, equality criterion, and deletion stability are formalized in Lean.
 \end{abstract}
 
 \noindent\textbf{Keywords.} complete arc; conic; saturating set; secant

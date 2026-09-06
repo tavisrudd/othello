@@ -1,5 +1,5 @@
 {
-  "title": "Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity",
+  "title": "Secant defects with prescribed holes: arcs, caps, and matching designs",
   "description": "For a nonsingular conic C in PG(2,q), this preprint studies arcs disjoint from C whose secants cover every remaining point outside C. It proves ρ_C(q)≥√(2q)+3/2−8/√(2q), classifies zero defect in characteristic two, and determines ρ_C(13)=8, ρ_C(16)=9, ρ_C(17)=9, and ρ_C(19)=10. The mechanism is an exact prescribed-hole secant-moment identity with a nonnegative remainder: equality yields matching-design rigidity and rank-three realization, while positive defect gives a quantitative deletion bound.",
   "creators": [
     {
