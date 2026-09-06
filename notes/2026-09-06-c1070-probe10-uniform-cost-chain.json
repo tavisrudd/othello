@@ -1,0 +1,2959 @@
+{
+  "schema": "c1070-probe10-uniform-cost-chain-v1",
+  "model": "uniform linear, mask-free, every unit at cost 1",
+  "named_cases": [
+    {
+      "name": "block-uniform",
+      "note": "cost-1 units, one of which is a two-coordinate block; no optimal chain",
+      "order": 2,
+      "ambient": 5,
+      "leaves": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      ],
+      "profile": [
+        1,
+        2,
+        3
+      ],
+      "greedy_coalition_chain": [
+        1,
+        3,
+        3
+      ],
+      "optimal_subspace_chain_exists": false,
+      "optimal_coalition_chain_exists": false
+    },
+    {
+      "name": "block-uniform-with-singletons",
+      "note": "the same, with every leaf also available as its own cost-1 unit",
+      "order": 2,
+      "ambient": 5,
+      "leaves": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      ],
+      "profile": [
+        1,
+        2,
+        3
+      ],
+      "greedy_coalition_chain": [
+        1,
+        3,
+        3
+      ],
+      "optimal_subspace_chain_exists": false,
+      "optimal_coalition_chain_exists": false
+    },
+    {
+      "name": "proposition-c-at-unit-cost",
+      "note": "probe 2's heterogeneous-cost counterexample loses its failure at unit cost",
+      "order": 2,
+      "ambient": 3,
+      "leaves": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "profile": [
+        1,
+        1,
+        2
+      ],
+      "greedy_coalition_chain": [
+        1,
+        2,
+        2
+      ],
+      "optimal_subspace_chain_exists": true,
+      "optimal_coalition_chain_exists": true
+    },
+    {
+      "name": "probe-direct-sum-binary",
+      "note": "probing model over F_2: [8,4,4] Reed-Muller plus [3,1,3] repetition",
+      "order": 2,
+      "ambient": 11,
+      "leaves": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ],
+        [
+          8
+        ],
+        [
+          9
+        ],
+        [
+          10
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1
+        ]
+      ],
+      "profile": [
+        3,
+        6,
+        7,
+        8,
+        11
+      ],
+      "greedy_coalition_chain": [
+        3,
+        7,
+        9,
+        10,
+        11
+      ],
+      "optimal_subspace_chain_exists": false,
+      "optimal_coalition_chain_exists": false
+    },
+    {
+      "name": "block-uniform",
+      "note": "cost-1 units, one of which is a two-coordinate block; no optimal chain",
+      "order": 3,
+      "ambient": 5,
+      "leaves": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      ],
+      "profile": [
+        1,
+        2,
+        3
+      ],
+      "greedy_coalition_chain": [
+        1,
+        3,
+        3
+      ],
+      "optimal_subspace_chain_exists": false,
+      "optimal_coalition_chain_exists": false
+    },
+    {
+      "name": "block-uniform-with-singletons",
+      "note": "the same, with every leaf also available as its own cost-1 unit",
+      "order": 3,
+      "ambient": 5,
+      "leaves": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      ],
+      "profile": [
+        1,
+        2,
+        3
+      ],
+      "greedy_coalition_chain": [
+        1,
+        3,
+        3
+      ],
+      "optimal_subspace_chain_exists": false,
+      "optimal_coalition_chain_exists": false
+    },
+    {
+      "name": "proposition-c-at-unit-cost",
+      "note": "probe 2's heterogeneous-cost counterexample loses its failure at unit cost",
+      "order": 3,
+      "ambient": 3,
+      "leaves": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "profile": [
+        1,
+        1,
+        2
+      ],
+      "greedy_coalition_chain": [
+        1,
+        2,
+        2
+      ],
+      "optimal_subspace_chain_exists": true,
+      "optimal_coalition_chain_exists": true
+    },
+    {
+      "name": "probe-mds",
+      "note": "single-coordinate units only; leaked space of the optimal plane is MDS",
+      "order": 3,
+      "ambient": 6,
+      "leaves": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "profile": [
+        2,
+        4,
+        6
+      ],
+      "greedy_coalition_chain": [
+        2,
+        5,
+        6
+      ],
+      "optimal_subspace_chain_exists": false,
+      "optimal_coalition_chain_exists": false
+    },
+    {
+      "name": "block-uniform",
+      "note": "cost-1 units, one of which is a two-coordinate block; no optimal chain",
+      "order": 4,
+      "ambient": 5,
+      "leaves": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      ],
+      "profile": [
+        1,
+        2,
+        3
+      ],
+      "greedy_coalition_chain": [
+        1,
+        3,
+        3
+      ],
+      "optimal_subspace_chain_exists": false,
+      "optimal_coalition_chain_exists": false
+    },
+    {
+      "name": "block-uniform-with-singletons",
+      "note": "the same, with every leaf also available as its own cost-1 unit",
+      "order": 4,
+      "ambient": 5,
+      "leaves": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      ],
+      "profile": [
+        1,
+        2,
+        3
+      ],
+      "greedy_coalition_chain": [
+        1,
+        3,
+        3
+      ],
+      "optimal_subspace_chain_exists": false,
+      "optimal_coalition_chain_exists": false
+    },
+    {
+      "name": "proposition-c-at-unit-cost",
+      "note": "probe 2's heterogeneous-cost counterexample loses its failure at unit cost",
+      "order": 4,
+      "ambient": 3,
+      "leaves": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "profile": [
+        1,
+        1,
+        2
+      ],
+      "greedy_coalition_chain": [
+        1,
+        2,
+        2
+      ],
+      "optimal_subspace_chain_exists": true,
+      "optimal_coalition_chain_exists": true
+    },
+    {
+      "name": "probe-mds",
+      "note": "single-coordinate units only; leaked space of the optimal plane is MDS",
+      "order": 4,
+      "ambient": 6,
+      "leaves": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "profile": [
+        2,
+        4,
+        6
+      ],
+      "greedy_coalition_chain": [
+        2,
+        5,
+        6
+      ],
+      "optimal_subspace_chain_exists": false,
+      "optimal_coalition_chain_exists": false
+    },
+    {
+      "name": "block-uniform",
+      "note": "cost-1 units, one of which is a two-coordinate block; no optimal chain",
+      "order": 5,
+      "ambient": 5,
+      "leaves": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      ],
+      "profile": [
+        1,
+        2,
+        3
+      ],
+      "greedy_coalition_chain": [
+        1,
+        3,
+        3
+      ],
+      "optimal_subspace_chain_exists": false,
+      "optimal_coalition_chain_exists": false
+    },
+    {
+      "name": "block-uniform-with-singletons",
+      "note": "the same, with every leaf also available as its own cost-1 unit",
+      "order": 5,
+      "ambient": 5,
+      "leaves": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      ],
+      "profile": [
+        1,
+        2,
+        3
+      ],
+      "greedy_coalition_chain": [
+        1,
+        3,
+        3
+      ],
+      "optimal_subspace_chain_exists": false,
+      "optimal_coalition_chain_exists": false
+    },
+    {
+      "name": "proposition-c-at-unit-cost",
+      "note": "probe 2's heterogeneous-cost counterexample loses its failure at unit cost",
+      "order": 5,
+      "ambient": 3,
+      "leaves": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "profile": [
+        1,
+        1,
+        2
+      ],
+      "greedy_coalition_chain": [
+        1,
+        2,
+        2
+      ],
+      "optimal_subspace_chain_exists": true,
+      "optimal_coalition_chain_exists": true
+    },
+    {
+      "name": "probe-mds",
+      "note": "single-coordinate units only; leaked space of the optimal plane is MDS",
+      "order": 5,
+      "ambient": 6,
+      "leaves": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "profile": [
+        2,
+        4,
+        6
+      ],
+      "greedy_coalition_chain": [
+        2,
+        5,
+        6
+      ],
+      "optimal_subspace_chain_exists": false,
+      "optimal_coalition_chain_exists": false
+    },
+    {
+      "name": "block-uniform",
+      "note": "cost-1 units, one of which is a two-coordinate block; no optimal chain",
+      "order": 7,
+      "ambient": 5,
+      "leaves": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      ],
+      "profile": [
+        1,
+        2,
+        3
+      ],
+      "greedy_coalition_chain": [
+        1,
+        3,
+        3
+      ],
+      "optimal_subspace_chain_exists": false,
+      "optimal_coalition_chain_exists": false
+    },
+    {
+      "name": "block-uniform-with-singletons",
+      "note": "the same, with every leaf also available as its own cost-1 unit",
+      "order": 7,
+      "ambient": 5,
+      "leaves": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ]
+      ],
+      "profile": [
+        1,
+        2,
+        3
+      ],
+      "greedy_coalition_chain": [
+        1,
+        3,
+        3
+      ],
+      "optimal_subspace_chain_exists": false,
+      "optimal_coalition_chain_exists": false
+    },
+    {
+      "name": "proposition-c-at-unit-cost",
+      "note": "probe 2's heterogeneous-cost counterexample loses its failure at unit cost",
+      "order": 7,
+      "ambient": 3,
+      "leaves": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "profile": [
+        1,
+        1,
+        2
+      ],
+      "greedy_coalition_chain": [
+        1,
+        2,
+        2
+      ],
+      "optimal_subspace_chain_exists": true,
+      "optimal_coalition_chain_exists": true
+    },
+    {
+      "name": "probe-mds",
+      "note": "single-coordinate units only; leaked space of the optimal plane is MDS",
+      "order": 7,
+      "ambient": 6,
+      "leaves": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ]
+      ],
+      "units": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ]
+      ],
+      "secret": [
+        [
+          1,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "profile": [
+        2,
+        4,
+        6
+      ],
+      "greedy_coalition_chain": [
+        2,
+        5,
+        6
+      ],
+      "optimal_subspace_chain_exists": false,
+      "optimal_coalition_chain_exists": false
+    }
+  ],
+  "ladders": [
+    {
+      "order": 2,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 3,
+      "shape": [
+        3
+      ],
+      "instances": 128,
+      "chain_testable": 24,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 3,
+      "shape": [
+        2,
+        1
+      ],
+      "instances": 128,
+      "chain_testable": 24,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 3,
+      "shape": [
+        1,
+        1,
+        1
+      ],
+      "instances": 128,
+      "chain_testable": 24,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        4
+      ],
+      "instances": 1024,
+      "chain_testable": 504,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        3,
+        1
+      ],
+      "instances": 1024,
+      "chain_testable": 504,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        2,
+        2
+      ],
+      "instances": 1024,
+      "chain_testable": 504,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        2,
+        1,
+        1
+      ],
+      "instances": 1024,
+      "chain_testable": 504,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "instances": 1024,
+      "chain_testable": 504,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        5
+      ],
+      "instances": 8192,
+      "chain_testable": 5880,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        4,
+        1
+      ],
+      "instances": 8192,
+      "chain_testable": 5880,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        3,
+        2
+      ],
+      "instances": 8192,
+      "chain_testable": 5880,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        3,
+        1,
+        1
+      ],
+      "instances": 8192,
+      "chain_testable": 5880,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        2,
+        2,
+        1
+      ],
+      "instances": 8192,
+      "chain_testable": 5880,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        2,
+        1,
+        1,
+        1
+      ],
+      "instances": 8192,
+      "chain_testable": 5880,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "instances": 8192,
+      "chain_testable": 5880,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 3,
+      "shape": [
+        3
+      ],
+      "instances": 768,
+      "chain_testable": 24,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 3,
+      "shape": [
+        2,
+        1
+      ],
+      "instances": 768,
+      "chain_testable": 24,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 3,
+      "shape": [
+        1,
+        1,
+        1
+      ],
+      "instances": 768,
+      "chain_testable": 24,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        4
+      ],
+      "instances": 12288,
+      "chain_testable": 3192,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        3,
+        1
+      ],
+      "instances": 12288,
+      "chain_testable": 3192,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        2,
+        2
+      ],
+      "instances": 12288,
+      "chain_testable": 3192,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        2,
+        1,
+        1
+      ],
+      "instances": 12288,
+      "chain_testable": 3192,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "instances": 12288,
+      "chain_testable": 3192,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        5
+      ],
+      "instances": 196608,
+      "chain_testable": 106680,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        4,
+        1
+      ],
+      "instances": 196608,
+      "chain_testable": 106680,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        3,
+        2
+      ],
+      "instances": 196608,
+      "chain_testable": 106680,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        3,
+        1,
+        1
+      ],
+      "instances": 196608,
+      "chain_testable": 106680,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        2,
+        2,
+        1
+      ],
+      "instances": 196608,
+      "chain_testable": 106680,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        2,
+        1,
+        1,
+        1
+      ],
+      "instances": 196608,
+      "chain_testable": 106680,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "instances": 196608,
+      "chain_testable": 106680,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 5,
+      "secret_dim": 3,
+      "leaves": 3,
+      "shape": [
+        3
+      ],
+      "instances": 3072,
+      "chain_testable": 24,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 5,
+      "secret_dim": 3,
+      "leaves": 3,
+      "shape": [
+        2,
+        1
+      ],
+      "instances": 3072,
+      "chain_testable": 24,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 5,
+      "secret_dim": 3,
+      "leaves": 3,
+      "shape": [
+        1,
+        1,
+        1
+      ],
+      "instances": 3072,
+      "chain_testable": 24,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 5,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        4
+      ],
+      "instances": 98304,
+      "chain_testable": 5880,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 5,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        3,
+        1
+      ],
+      "instances": 98304,
+      "chain_testable": 5880,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 5,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        2,
+        2
+      ],
+      "instances": 98304,
+      "chain_testable": 5880,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 5,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        2,
+        1,
+        1
+      ],
+      "instances": 98304,
+      "chain_testable": 5880,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 5,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "instances": 98304,
+      "chain_testable": 5880,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 5,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        5
+      ],
+      "instances": 3145728,
+      "chain_testable": 872760,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 5,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        4,
+        1
+      ],
+      "instances": 3145728,
+      "chain_testable": 872760,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 5,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        3,
+        2
+      ],
+      "instances": 3145728,
+      "chain_testable": 872760,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 5,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        3,
+        1,
+        1
+      ],
+      "instances": 3145728,
+      "chain_testable": 872760,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 5,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        2,
+        2,
+        1
+      ],
+      "instances": 3145728,
+      "chain_testable": 872760,
+      "subspace_chain_failures": 16128,
+      "coalition_chain_failures": 16128,
+      "first_subspace_failure": {
+        "order": 2,
+        "ambient": 5,
+        "leaves": [
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        ],
+        "units": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "secret": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        ],
+        "profile": [
+          1,
+          2,
+          3
+        ],
+        "greedy_coalition_chain": [
+          1,
+          3,
+          3
+        ],
+        "optimal_subspace_chain_exists": false,
+        "optimal_coalition_chain_exists": false
+      }
+    },
+    {
+      "order": 2,
+      "ambient": 5,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        2,
+        1,
+        1,
+        1
+      ],
+      "instances": 3145728,
+      "chain_testable": 872760,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 2,
+      "ambient": 5,
+      "secret_dim": 3,
+      "leaves": 5,
+      "shape": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "instances": 3145728,
+      "chain_testable": 872760,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 3,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        4
+      ],
+      "instances": 39366,
+      "chain_testable": 28080,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 3,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        3,
+        1
+      ],
+      "instances": 39366,
+      "chain_testable": 28080,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 3,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        2,
+        2
+      ],
+      "instances": 39366,
+      "chain_testable": 28080,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 3,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        2,
+        1,
+        1
+      ],
+      "instances": 39366,
+      "chain_testable": 28080,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 3,
+      "ambient": 3,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "instances": 39366,
+      "chain_testable": 28080,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 3,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        4
+      ],
+      "instances": 1594323,
+      "chain_testable": 634608,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 3,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        3,
+        1
+      ],
+      "instances": 1594323,
+      "chain_testable": 634608,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 3,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        2,
+        2
+      ],
+      "instances": 1594323,
+      "chain_testable": 634608,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 3,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        2,
+        1,
+        1
+      ],
+      "instances": 1594323,
+      "chain_testable": 634608,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    },
+    {
+      "order": 3,
+      "ambient": 4,
+      "secret_dim": 3,
+      "leaves": 4,
+      "shape": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "instances": 1594323,
+      "chain_testable": 634608,
+      "subspace_chain_failures": 0,
+      "coalition_chain_failures": 0,
+      "first_subspace_failure": null
+    }
+  ],
+  "verdict": {
+    "subspace_chain_always_exists": false,
+    "coalition_chain_always_exists": false,
+    "named_case_failures": 15,
+    "ladder_instances": 32192125,
+    "ladder_subspace_failures": 16128,
+    "ladder_coalition_failures": 16128,
+    "smallest_failing_ambient": 5,
+    "smallest_failing_units": 3
+  }
+}
