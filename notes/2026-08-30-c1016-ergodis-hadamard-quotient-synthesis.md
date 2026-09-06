@@ -136,6 +136,12 @@ Closed around the frontier:
   wall clock. Shell *identity* may be one — a single run per shell spreads
   11.7% — but that spread is the size of the run-to-run spread, so it is a lead
   and not a measurement.
+- The seventeen low-order characters are solved. They are exactly the exact
+  `q18` shell, an exact quadruple is banked, and it lifts against a banked
+  exact `q29` shell through the proved Gale--Ryser margin construction on all
+  four blocks — giving a concrete carrier state exact at 45 of the 521
+  characters at once. The order-two character additionally forces `u_1 = 0 mod
+  4` on the special block, which 17 of 24 banked plateau states violate.
 
 ### The plain `Z/523` route is the standing alternative
 
@@ -148,16 +154,17 @@ the current instrument remains available and has not been tried since.
 
 ## Open moves, in the order they are worth doing
 
-1. **Enforce the low-order characters exactly.** The characters of order 2, 3,
-   6, 9 and 18 are seventeen of the 521, and each class is a finite condition
-   on a low-dimensional projection of the state. The order-two one is a single
-   Diophantine equation, `sum_b u_b^2 = 523` in the halved variables
-   `u_b = z_b(-1)/2`, and nothing in the campaign enforces it — that class sits
-   at the same 28.8 energy per character on the plateau as on a fresh random
-   lift, untouched. Solving the seventeen exactly and searching the remaining
-   504 subject to them is a different search shape from anything run so far,
-   and it is the largest unexploited structure the character-domain reading
-   exposed.
+1. **Search inside the margin fibre.** By CRT a block is an 18-by-29 binary
+   matrix whose row sums are its `q18` coefficients and whose column sums are
+   its `q29` coefficients, so the 2-by-2 alternating swap preserves both and
+   holds all 45 low-order characters exact for a whole descent. A banked exact
+   `q18` quadruple bridged against a banked exact `q29` shell gives the
+   starting point, and a random point of its fibre is statistically
+   indistinguishable from an unconstrained random state, so the constraint
+   costs nothing at the start. The question to measure is whether a descent
+   restricted to that move set reaches the unrestricted plateau — about 30,272
+   in the full-carrier units of the q18 report — at equal wall clock. The
+   campaign's exact incremental delta algebra applies to the swap unchanged.
 2. **Replicate the per-shell sweep on the tail.** Shells 37, 23, 2, 9 and 10
    were the best of the 39 at one fifteen-second run each, with the best
    reaching carrier 13,648 — below anything the rotating corpus produced. Run
@@ -192,6 +199,7 @@ All paths are relative to `notes/`.
 | Adversarial second opinion on the campaign and the paired-move plan | `2026-09-05-c1016-adversarial-status-review.md`                |
 | The carrier `Z/522` rung above an exact `q174` state                | `2026-09-05-c1016-carrier-522-rung.md`                         |
 | The character-domain move set, its census, and corpus width         | `2026-09-05-c1016-character-domain-move-set-and-corpus-width.md` |
+| The exact `q18` shell and its unobstructed 18-by-29 margin lift      | `2026-09-05-c1016-exact-q18-and-the-margin-lift.md`             |
 | Zero-cost witness handoff shared with C985                          | `2026-08-31-c985-c1016-zero-cost-witness-handoff.md`           |
 
 ## Workspace and replay
@@ -238,6 +246,12 @@ reduction program, in the archive. What is open:
   shells is the same size as the seed-to-seed spread on a fixed corpus, and
   nothing the campaign records about a shell predicts the depth reached from
   it. Gated on the replicated sweep in open move 2.
-- **The order-two Diophantine condition is unenforced.** `sum_b u_b^2 = 523` in
-  the halved variables, at a class the search has never moved. Open by
-  construction; it is open move 1.
+- **Whether a descent restricted to the margin fibre reaches the unrestricted
+  depth.** The fibre holds 45 characters exact and its random point is as good
+  as an unconstrained random state, so nothing in the starting distribution
+  argues against it; the restriction of the move set is what has to be
+  measured. Open, and it is open move 1.
+- **How large the exact `q18` solution set is.** A climber plus a radius-four
+  repair reaches it in eleven rounds against an exhaustive count of `7.1e74`
+  assignments, so the density is high, but nothing measures it. Open, with no
+  successor allocated.
