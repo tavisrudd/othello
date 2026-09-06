@@ -8,11 +8,12 @@ manual edit or stale generation.
 
 | Stable trust identifier | Gate | Terminals | Axioms extracted | Review status |
 |---|---|---:|---:|---|
-| `trust-spine:complete_ports:gate:RepairPorts.Gates.CompletePorts` | `RepairPorts.Gates.CompletePorts` | 42 | 42 | extracted and matched |
+| `trust-spine:complete_ports:gate:RepairPorts.Gates.CompletePorts` | `RepairPorts.Gates.CompletePorts` | 61 | 61 | extracted and matched |
 | `trust-spine:finitegeom_first_tag:gate:CapGame.Affine` | `CapGame.Affine` | 1 | 1 | extracted and matched |
 | `trust-spine:finitegeom_first_tag:gate:ProjectiveCap.Binary` | `ProjectiveCap.Binary` | 1 | 1 | extracted and matched |
 | `trust-spine:finitegeom_first_tag:gate:ProjectiveCap.EllipticMirror` | `ProjectiveCap.EllipticMirror` | 2 | 2 | extracted and matched |
 | `trust-spine:finitegeom_first_tag:gate:ProjectiveCap.PlaneOutcome` | `ProjectiveCap.PlaneOutcome` | 3 | 3 | extracted and matched |
+| `trust-spine:q13_passant_code:gate:TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate` | `TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate` | 8 | 8 | extracted and matched |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.AMELUAggregate` | `RelativeConicArcs.Gates.AMELUAggregate` | 182 | 182 | extracted and matched |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.AMELUTwoUniformRigidity` | `RelativeConicArcs.Gates.AMELUTwoUniformRigidity` | 22 | 22 | extracted and matched |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.ArcsCompleteOutsideConic` | `RelativeConicArcs.Gates.ArcsCompleteOutsideConic` | 48 | 48 | extracted and matched |
@@ -40,8 +41,9 @@ manual edit or stale generation.
 
 | Stable trust identifier | Adopted terminals | Axioms extracted | Review status |
 |---|---:|---:|---|
-| `trust-spine:complete_ports` | 42 | 42 | all terminal axioms extracted and matched |
+| `trust-spine:complete_ports` | 61 | 61 | all terminal axioms extracted and matched |
 | `trust-spine:finitegeom_first_tag` | 7 | 7 | all terminal axioms extracted and matched |
+| `trust-spine:q13_passant_code` | 8 | 8 | all terminal axioms extracted and matched |
 | `trust-spine:relconic` | 792 | 701 | 91 terminal axiom sets await extraction |
 
-The machine-readable list contains exactly 841 adopted public terminals.
+The machine-readable list contains exactly 868 adopted public terminals.

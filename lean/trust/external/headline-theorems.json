@@ -15,7 +15,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -41,13 +41,169 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
         "RepairPorts.Gates.CompletePorts"
       ],
       "id": "trust-spine:complete_ports:terminal:FiniteGeom.dualCode_injective",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "FiniteGeom.projectiveAxisTwistedCubic_code_parameters",
+      "declaration_module": "FiniteGeom.ProjectiveAxisTwistedCubic",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:FiniteGeom.projectiveAxisTwistedCubic_code_parameters",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairCodes.minimalProjectiveAxisRepair_four_invariants",
+      "declaration_module": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairCodes.minimalProjectiveAxisRepair_four_invariants",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairCodes.minimalProjectiveAxisRepair_full_invariants",
+      "declaration_module": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairCodes.minimalProjectiveAxisRepair_full_invariants",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairCodes.minimalProjectiveAxisTwistedCubicRepair_full_eq_four",
+      "declaration_module": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairCodes.minimalProjectiveAxisTwistedCubicRepair_full_eq_four",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairCodes.minimalProjectiveCubicRepair_four_invariants",
+      "declaration_module": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairCodes.minimalProjectiveCubicRepair_four_invariants",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairCodes.minimalProjectiveCubicRepair_full_invariants",
+      "declaration_module": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairCodes.minimalProjectiveCubicRepair_full_invariants",
       "observed_axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -67,7 +223,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -93,7 +249,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -119,7 +275,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -145,7 +301,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -171,7 +327,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -197,7 +353,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -223,7 +379,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -249,7 +405,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -275,7 +431,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -301,7 +457,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -327,7 +483,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -353,7 +509,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -379,7 +535,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -405,7 +561,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -431,7 +587,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -457,7 +613,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -483,7 +639,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -509,7 +665,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -535,7 +691,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -561,13 +717,39 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
         "RepairPorts.Gates.CompletePorts"
       ],
       "id": "trust-spine:complete_ports:terminal:RepairPorts.disjointTripleRepairs_reliability_ne_overlapping",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.dualDist_harmonicQuarticCode",
+      "declaration_module": "RepairPorts.HarmonicQuartic",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.dualDist_harmonicQuarticCode",
       "observed_axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -587,7 +769,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -613,7 +795,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -639,7 +821,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -665,7 +847,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -691,13 +873,39 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
         "RepairPorts.Gates.CompletePorts"
       ],
       "id": "trust-spine:complete_ports:terminal:RepairPorts.eventually_prescribedPorts",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.eventually_radiusThree_prescribedPortPair",
+      "declaration_module": "RepairPorts.PositiveDensity",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.eventually_radiusThree_prescribedPortPair",
       "observed_axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -717,7 +925,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -743,13 +951,267 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
         "RepairPorts.Gates.CompletePorts"
       ],
       "id": "trust-spine:complete_ports:terminal:RepairPorts.exactPointedConfinementAndTransfer",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.existsUnique_harmonicQuarticCompletion",
+      "declaration_module": "RepairPorts.HarmonicQuartic",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.existsUnique_harmonicQuarticCompletion",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.finiteHarmonicBlock_repairPort",
+      "declaration_module": "RepairPorts.HarmonicQuartic",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.finiteHarmonicBlock_repairPort",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.harmonicPortClosure_of_containsBlock_iff",
+      "declaration_module": "RepairPorts.HarmonicQuartic",
+      "expected_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.harmonicPortClosure_of_containsBlock_iff",
+      "observed_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.harmonicPortClosure_of_containsNoBlock_iff",
+      "declaration_module": "RepairPorts.HarmonicQuartic",
+      "expected_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.harmonicPortClosure_of_containsNoBlock_iff",
+      "observed_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.harmonicPortClosure_withNucleus_iff",
+      "declaration_module": "RepairPorts.HarmonicQuartic",
+      "expected_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.harmonicPortClosure_withNucleus_iff",
+      "observed_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.harmonicQuarticCode_parameters_of_sharp_section",
+      "declaration_module": "RepairPorts.HarmonicQuartic",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.harmonicQuarticCode_parameters_of_sharp_section",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.harmonicQuarticDeterminant_finite",
+      "declaration_module": "RepairPorts.HarmonicQuartic",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.harmonicQuarticDeterminant_finite",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.harmonicQuarticDeterminant_infinity",
+      "declaration_module": "RepairPorts.HarmonicQuartic",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.harmonicQuarticDeterminant_infinity",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.harmonicQuarticFamily_projective_linearIndependent_iff",
+      "declaration_module": "RepairPorts.HarmonicQuartic",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.harmonicQuarticFamily_projective_linearIndependent_iff",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.harmonicQuarticGenerator_smallColumnIndependent",
+      "declaration_module": "RepairPorts.HarmonicQuartic",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.harmonicQuarticGenerator_smallColumnIndependent",
       "observed_axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -769,7 +1231,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -795,13 +1257,39 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
         "RepairPorts.Gates.CompletePorts"
       ],
       "id": "trust-spine:complete_ports:terminal:RepairPorts.hasDerivAt_portReliability_update",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "complete_ports"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RepairPorts.infinityHarmonicBlock_repairPort",
+      "declaration_module": "RepairPorts.HarmonicQuartic",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
+        }
+      ],
+      "gates": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "id": "trust-spine:complete_ports:terminal:RepairPorts.infinityHarmonicBlock_repairPort",
       "observed_axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -821,7 +1309,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -847,7 +1335,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -873,7 +1361,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -899,7 +1387,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -925,7 +1413,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -951,7 +1439,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -977,7 +1465,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -1003,7 +1491,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -1029,7 +1517,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -1055,7 +1543,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -1081,7 +1569,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RepairPorts.Gates.CompletePorts.json",
-          "sha256": "40dd3033b028685f0a48b8b4bd4f24220976d8ee61ba35c0562a0122cad306ef"
+          "sha256": "fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d"
         }
       ],
       "gates": [
@@ -1276,6 +1764,210 @@
         "propext"
       ],
       "trust_area": "finitegeom_first_tag"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.arbitrary_weightTen_profile_transport",
+      "declaration_module": "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.json",
+          "sha256": "b37897ad5d47651b4b6c563fc70bb0f02673519f1e71d669d8953d3415e3d0bd"
+        }
+      ],
+      "gates": [
+        "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"
+      ],
+      "id": "trust-spine:q13_passant_code:terminal:TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.arbitrary_weightTen_profile_transport",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "q13_passant_code"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.dimension_from_rank_certificate",
+      "declaration_module": "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.json",
+          "sha256": "b37897ad5d47651b4b6c563fc70bb0f02673519f1e71d669d8953d3415e3d0bd"
+        }
+      ],
+      "gates": [
+        "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"
+      ],
+      "id": "trust-spine:q13_passant_code:terminal:TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.dimension_from_rank_certificate",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "q13_passant_code"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.incidence_shape",
+      "declaration_module": "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.json",
+          "sha256": "b37897ad5d47651b4b6c563fc70bb0f02673519f1e71d669d8953d3415e3d0bd"
+        }
+      ],
+      "gates": [
+        "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"
+      ],
+      "id": "trust-spine:q13_passant_code:terminal:TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.incidence_shape",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "q13_passant_code"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.tangent_graph_certificate",
+      "declaration_module": "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate",
+      "expected_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.json",
+          "sha256": "b37897ad5d47651b4b6c563fc70bb0f02673519f1e71d669d8953d3415e3d0bd"
+        }
+      ],
+      "gates": [
+        "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"
+      ],
+      "id": "trust-spine:q13_passant_code:terminal:TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.tangent_graph_certificate",
+      "observed_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "q13_passant_code"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightEight_semantic_transport",
+      "declaration_module": "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.json",
+          "sha256": "b37897ad5d47651b4b6c563fc70bb0f02673519f1e71d669d8953d3415e3d0bd"
+        }
+      ],
+      "gates": [
+        "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"
+      ],
+      "id": "trust-spine:q13_passant_code:terminal:TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightEight_semantic_transport",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "q13_passant_code"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightTen_cycle_fibre_profile",
+      "declaration_module": "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.json",
+          "sha256": "b37897ad5d47651b4b6c563fc70bb0f02673519f1e71d669d8953d3415e3d0bd"
+        }
+      ],
+      "gates": [
+        "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"
+      ],
+      "id": "trust-spine:q13_passant_code:terminal:TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightTen_cycle_fibre_profile",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "q13_passant_code"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightTen_isolated_fibre_profile",
+      "declaration_module": "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.json",
+          "sha256": "b37897ad5d47651b4b6c563fc70bb0f02673519f1e71d669d8953d3415e3d0bd"
+        }
+      ],
+      "gates": [
+        "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"
+      ],
+      "id": "trust-spine:q13_passant_code:terminal:TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightTen_isolated_fibre_profile",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "q13_passant_code"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightTen_profile_reduction",
+      "declaration_module": "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate",
+      "expected_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.json",
+          "sha256": "b37897ad5d47651b4b6c563fc70bb0f02673519f1e71d669d8953d3415e3d0bd"
+        }
+      ],
+      "gates": [
+        "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"
+      ],
+      "id": "trust-spine:q13_passant_code:terminal:TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightTen_profile_reduction",
+      "observed_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "q13_passant_code"
     },
     {
       "axiom_status": "extracted-and-matched",
@@ -8951,7 +9643,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -8969,7 +9661,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -8989,7 +9681,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -9011,7 +9703,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -9035,7 +9727,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -9061,7 +9753,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -9087,7 +9779,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -9111,7 +9803,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -9133,7 +9825,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -9157,7 +9849,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -9181,7 +9873,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -9204,7 +9896,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -9227,7 +9919,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -9247,7 +9939,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -9267,7 +9959,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -9287,7 +9979,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -11161,7 +11853,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -11185,7 +11877,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -11209,7 +11901,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -11235,7 +11927,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -11261,7 +11953,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -11385,7 +12077,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -11408,7 +12100,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -11433,7 +12125,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -11458,7 +12150,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -11483,7 +12175,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -11509,7 +12201,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -11535,7 +12227,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -13665,7 +14357,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -13691,7 +14383,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -13717,7 +14409,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -13743,7 +14435,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -14135,7 +14827,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -14243,7 +14935,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -14302,7 +14994,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -14345,7 +15037,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -14405,7 +15097,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -14431,7 +15123,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -14456,7 +15148,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -17873,7 +18565,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -17899,7 +18591,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -17925,7 +18617,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -18003,7 +18695,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -18029,7 +18721,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -18053,7 +18745,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -18075,7 +18767,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -18801,7 +19493,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -18826,7 +19518,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -18851,7 +19543,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
@@ -19551,7 +20243,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschPassages.json",
-          "sha256": "eaa513a73b225fed7bf1304ad7959097bcc02ed7163635b2f11d554d76d36a6c"
+          "sha256": "00b4946ae60b2b02a24e4cc53c52a8705c533193675ab381c26573cec0967872"
         }
       ],
       "gates": [
