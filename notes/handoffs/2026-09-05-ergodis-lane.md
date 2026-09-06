@@ -99,46 +99,16 @@ carrier at all. Brief `2026-09-04-c1062-ergodis-causal-brief.md`, routing log
 
 ### C1070 — exact compositional leakage analysis for hierarchical linear encodings
 
-In progress, open-ended. Reads the labelled prescribed-coset recovery theory as a privacy interface
-and asks whether the tower quotient compiles a secret subspace, mask subspace, and observation model
-into named-functional and `t`-symbol leakage costs with witnesses. Brief and probe plan:
-[C1070 brief](../2026-09-06-c1070-ergodis-compositional-leakage-brief.md). Product framing: prior art is
-surveyed for citation and technique, never as a gate.
-
-Closed: probe 1, masks are label pinning on the enlarged message space, the min–sum composes under
-per-block mask freshness, shared masks must be promoted to a message coordinate, and the fresh
-formula can only overstate privacy
-([report](../2026-09-06-c1070-probe1-mask-quotiented-associativity.md)); probe 5, the mask-free
-interface `leakage-profile` in `ergodis-private` with per-class minima, witnesses, direct
-`t`-profile, and brute-force cross-check
-([report](../2026-09-06-c1070-probe5-privacy-interface-tower-case.md)); probe 3, vector costs as
-Pareto antichains per class and per `t`, the core's `ordered_resource` module already holds the
-partially ordered monoid and front types but the transfer stack is scalar throughout
-([report](../2026-09-06-c1070-probe3-vector-costs.md)); probe 2, the `t`-symbol profile is a
-coalition-side quantity, one best-first sweep over coalitions gives every `t` at once with no
-subspace enumeration and no quotient, greedy subspace extension fails only under heterogeneous
-costs, and the compositional route pays for itself only on towers too large to flatten
-([report](../2026-09-06-c1070-probe2-leakage-profile-from-quotient.md)); probe 0, the survey: every
-adjacent literature (relative-weight secret sharing, masking verification, secure storage and
-network coding, hierarchical access structures, composed-code schemes) is amount-only or unlabelled
-in composition, freshness is assumed everywhere and verified nowhere, and the IronMask/maskVerif
-gadget corpora are a ready benchmark
-([report](../2026-09-06-c1070-probe0-prior-art-survey.md), read depths marked, no novelty verdict).
-Probe 6, transcript state: the adversary state is the observed row space and nothing coarser is
-exact against an unrestricted next observation, retired randomness contracts the state exactly,
-proactive refresh is that contraction, and mask reuse is a one-sided rank-drop alarm; analyzer
-`transcript-leakage-report` validated on share, repair, and refresh transcripts
-([report](../2026-09-06-c1070-probe6-transcript-state.md)). Probe 8, one leakage surface: `ergodis_private::leakage::{LeakageProblem, analyze}` and the
-`leakage` subcommand take field, tower with per-block masks, secret, units with scalar or vector
-costs, and optional transcript; masks are label pinning in the compiler, the profile is the sweep,
-every committed probe artifact regenerates byte-identically; the private cost accumulator stays
-because the core monoid saturates at caps and its witness is one `u32`
-([report](../2026-09-06-c1070-probe8-leakage-module-unification.md)). In flight: probe 9,
-IronMask/maskVerif linear-gadget corpus benchmark. **Next**: review probe 9, then a closeout
-synthesis for C1070 and Tavis's call on what ships. Foreign issue seen in passing: the
-`fabric_routing` retained-tree-versus-Dijkstra test fails at `de53b6c` in `ergodis-private`, a
-module owned by another lane. Open theorem: whether uniform unit costs force an
-optimal leaked-subspace chain (measured on 1.4M instances, unproved).
+All probes done and reviewed; ready to close on Tavis's call. Nine probes closed (1, 5, 3, 2, 0, 6,
+8, 9; probes 4 and 7 not run), each with a dated report, generator, certificate, and independent
+cross-check. Verdicts, the product claim, the ship order, open successors, and the consolidated
+mystery ledger are in the
+[closeout synthesis](../2026-09-06-c1070-closeout-synthesis.md); the brief is
+`../2026-09-06-c1070-ergodis-compositional-leakage-brief.md`. Product framing: prior art informs,
+never gates. **Waiting on Tavis**: close C1070; whether to allocate successors for the uniform-cost
+chain theorem, the schema migration, and probes 4 and 7; whether a paper is carved out. Foreign
+issue seen in passing: the `fabric_routing` retained-tree-versus-Dijkstra test fails at `de53b6c` in
+`ergodis-private`, a module owned by another lane; an Opus fix is in review.
 
 ### C1072-C1074 — finite-geometry absorption targets from the relconic discovery track
 
