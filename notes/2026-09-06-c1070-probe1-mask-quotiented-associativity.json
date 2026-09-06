@@ -1,0 +1,879 @@
+{
+  "schema": "c1070-probe1-masked-leakage-v1",
+  "model": "uniform linear, rank-one targets, prime fields; masks annihilated, not quotiented",
+  "named_cases": [
+    {
+      "name": "astra-shared-mask-pair",
+      "p": 2,
+      "target": [
+        1,
+        1
+      ],
+      "brute": 2,
+      "naive": "infinite",
+      "promoted": 2
+    },
+    {
+      "name": "astra-shared-mask-pair",
+      "p": 3,
+      "target": [
+        1,
+        2
+      ],
+      "brute": 2,
+      "naive": "infinite",
+      "promoted": 2
+    },
+    {
+      "name": "astra-shared-mask-pair",
+      "p": 5,
+      "target": [
+        1,
+        4
+      ],
+      "brute": 2,
+      "naive": "infinite",
+      "promoted": 2
+    },
+    {
+      "name": "share-triple-c1-unmasked",
+      "p": 3,
+      "target": [
+        1,
+        1
+      ],
+      "brute": 1,
+      "naive": 1,
+      "promoted": 1
+    },
+    {
+      "name": "share-triple-c1-fresh-inner-mask",
+      "p": 3,
+      "target": [
+        1,
+        1
+      ],
+      "brute": 2,
+      "naive": 2,
+      "promoted": 2
+    },
+    {
+      "name": "share-triple-c2-unmasked",
+      "p": 3,
+      "target": [
+        1,
+        1
+      ],
+      "brute": 2,
+      "naive": 2,
+      "promoted": 2
+    },
+    {
+      "name": "share-triple-c2-fresh-inner-mask",
+      "p": 3,
+      "target": [
+        1,
+        1
+      ],
+      "brute": 4,
+      "naive": 4,
+      "promoted": 4
+    },
+    {
+      "name": "share-triple-c1-unmasked",
+      "p": 5,
+      "target": [
+        1,
+        1
+      ],
+      "brute": 1,
+      "naive": 1,
+      "promoted": 1
+    },
+    {
+      "name": "share-triple-c1-fresh-inner-mask",
+      "p": 5,
+      "target": [
+        1,
+        1
+      ],
+      "brute": 2,
+      "naive": 2,
+      "promoted": 2
+    },
+    {
+      "name": "share-triple-c2-unmasked",
+      "p": 5,
+      "target": [
+        1,
+        1
+      ],
+      "brute": 2,
+      "naive": 2,
+      "promoted": 2
+    },
+    {
+      "name": "share-triple-c2-fresh-inner-mask",
+      "p": 5,
+      "target": [
+        1,
+        1
+      ],
+      "brute": 4,
+      "naive": 4,
+      "promoted": 4
+    }
+  ],
+  "sweeps": [
+    {
+      "sweep": "two-block-dl1",
+      "p": 2,
+      "shared_mask": 0,
+      "towers": 48,
+      "queries": 192,
+      "naive_agree": 192,
+      "naive_over": 0,
+      "naive_over_finite": 0,
+      "naive_under": 0,
+      "promoted_agree": 192,
+      "promoted_disagree": 0,
+      "first_naive_disagreement": null,
+      "first_finite_over": null
+    },
+    {
+      "sweep": "two-block-dl1",
+      "p": 2,
+      "shared_mask": 1,
+      "towers": 48,
+      "queries": 192,
+      "naive_agree": 177,
+      "naive_over": 15,
+      "naive_over_finite": 6,
+      "naive_under": 0,
+      "promoted_agree": 192,
+      "promoted_disagree": 0,
+      "first_naive_disagreement": {
+        "outer": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "block": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "target": [
+          1,
+          1
+        ],
+        "brute": 2,
+        "naive": "infinite",
+        "promoted": 2
+      },
+      "first_finite_over": {
+        "outer": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "block": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "target": [
+          1,
+          1
+        ],
+        "brute": 2,
+        "naive": 4,
+        "promoted": 2
+      }
+    },
+    {
+      "sweep": "two-block-dl1",
+      "p": 3,
+      "shared_mask": 0,
+      "towers": 243,
+      "queries": 2187,
+      "naive_agree": 2187,
+      "naive_over": 0,
+      "naive_over_finite": 0,
+      "naive_under": 0,
+      "promoted_agree": 2187,
+      "promoted_disagree": 0,
+      "first_naive_disagreement": null,
+      "first_finite_over": null
+    },
+    {
+      "sweep": "two-block-dl1",
+      "p": 3,
+      "shared_mask": 1,
+      "towers": 243,
+      "queries": 2187,
+      "naive_agree": 1803,
+      "naive_over": 384,
+      "naive_over_finite": 288,
+      "naive_under": 0,
+      "promoted_agree": 2187,
+      "promoted_disagree": 0,
+      "first_naive_disagreement": {
+        "outer": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "block": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "target": [
+          2,
+          1
+        ],
+        "brute": 2,
+        "naive": "infinite",
+        "promoted": 2
+      },
+      "first_finite_over": {
+        "outer": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "block": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "target": [
+          1,
+          1
+        ],
+        "brute": 3,
+        "naive": 4,
+        "promoted": 3
+      }
+    },
+    {
+      "sweep": "two-block-dl1",
+      "p": 5,
+      "shared_mask": 0,
+      "towers": 1875,
+      "queries": 46875,
+      "naive_agree": 46875,
+      "naive_over": 0,
+      "naive_over_finite": 0,
+      "naive_under": 0,
+      "promoted_agree": 46875,
+      "promoted_disagree": 0,
+      "first_naive_disagreement": null,
+      "first_finite_over": null
+    },
+    {
+      "sweep": "two-block-dl1",
+      "p": 5,
+      "shared_mask": 1,
+      "towers": 1875,
+      "queries": 46875,
+      "naive_agree": 30363,
+      "naive_over": 16512,
+      "naive_over_finite": 15360,
+      "naive_under": 0,
+      "promoted_agree": 46875,
+      "promoted_disagree": 0,
+      "first_naive_disagreement": {
+        "outer": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "block": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "target": [
+          4,
+          1
+        ],
+        "brute": 2,
+        "naive": "infinite",
+        "promoted": 2
+      },
+      "first_finite_over": {
+        "outer": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "block": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "target": [
+          1,
+          1
+        ],
+        "brute": 3,
+        "naive": 4,
+        "promoted": 3
+      }
+    },
+    {
+      "sweep": "three-block-dl1",
+      "p": 2,
+      "shared_mask": 0,
+      "towers": 32,
+      "queries": 128,
+      "naive_agree": 128,
+      "naive_over": 0,
+      "naive_over_finite": 0,
+      "naive_under": 0,
+      "promoted_agree": 128,
+      "promoted_disagree": 0,
+      "first_naive_disagreement": null,
+      "first_finite_over": null
+    },
+    {
+      "sweep": "three-block-dl1",
+      "p": 2,
+      "shared_mask": 1,
+      "towers": 32,
+      "queries": 128,
+      "naive_agree": 114,
+      "naive_over": 14,
+      "naive_over_finite": 2,
+      "naive_under": 0,
+      "promoted_agree": 128,
+      "promoted_disagree": 0,
+      "first_naive_disagreement": {
+        "outer": [
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ]
+        ],
+        "block": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "target": [
+          1,
+          0
+        ],
+        "brute": 2,
+        "naive": "infinite",
+        "promoted": 2
+      },
+      "first_finite_over": {
+        "outer": [
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "block": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "target": [
+          1,
+          1
+        ],
+        "brute": 2,
+        "naive": 4,
+        "promoted": 2
+      }
+    },
+    {
+      "sweep": "three-block-dl1",
+      "p": 3,
+      "shared_mask": 0,
+      "towers": 162,
+      "queries": 1458,
+      "naive_agree": 1458,
+      "naive_over": 0,
+      "naive_over_finite": 0,
+      "naive_under": 0,
+      "promoted_agree": 1458,
+      "promoted_disagree": 0,
+      "first_naive_disagreement": null,
+      "first_finite_over": null
+    },
+    {
+      "sweep": "three-block-dl1",
+      "p": 3,
+      "shared_mask": 1,
+      "towers": 162,
+      "queries": 1458,
+      "naive_agree": 1106,
+      "naive_over": 352,
+      "naive_over_finite": 96,
+      "naive_under": 0,
+      "promoted_agree": 1458,
+      "promoted_disagree": 0,
+      "first_naive_disagreement": {
+        "outer": [
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ]
+        ],
+        "block": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "target": [
+          1,
+          0
+        ],
+        "brute": 2,
+        "naive": "infinite",
+        "promoted": 2
+      },
+      "first_finite_over": {
+        "outer": [
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ]
+        ],
+        "block": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "target": [
+          2,
+          1
+        ],
+        "brute": 2,
+        "naive": 4,
+        "promoted": 2
+      }
+    },
+    {
+      "sweep": "three-block-dl1",
+      "p": 5,
+      "shared_mask": 0,
+      "towers": 1250,
+      "queries": 31250,
+      "naive_agree": 31250,
+      "naive_over": 0,
+      "naive_over_finite": 0,
+      "naive_under": 0,
+      "promoted_agree": 31250,
+      "promoted_disagree": 0,
+      "first_naive_disagreement": null,
+      "first_finite_over": null
+    },
+    {
+      "sweep": "three-block-dl1",
+      "p": 5,
+      "shared_mask": 1,
+      "towers": 1250,
+      "queries": 31250,
+      "naive_agree": 18962,
+      "naive_over": 12288,
+      "naive_over_finite": 7680,
+      "naive_under": 0,
+      "promoted_agree": 31250,
+      "promoted_disagree": 0,
+      "first_naive_disagreement": {
+        "outer": [
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ]
+        ],
+        "block": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "target": [
+          1,
+          0
+        ],
+        "brute": 2,
+        "naive": "infinite",
+        "promoted": 2
+      },
+      "first_finite_over": {
+        "outer": [
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ]
+        ],
+        "block": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "target": [
+          2,
+          1
+        ],
+        "brute": 3,
+        "naive": 4,
+        "promoted": 3
+      }
+    },
+    {
+      "sweep": "two-block-dl2",
+      "p": 2,
+      "shared_mask": 0,
+      "towers": 1536,
+      "queries": 6144,
+      "naive_agree": 6144,
+      "naive_over": 0,
+      "naive_over_finite": 0,
+      "naive_under": 0,
+      "promoted_agree": 6144,
+      "promoted_disagree": 0,
+      "first_naive_disagreement": null,
+      "first_finite_over": null
+    },
+    {
+      "sweep": "two-block-dl2",
+      "p": 2,
+      "shared_mask": 1,
+      "towers": 1536,
+      "queries": 6144,
+      "naive_agree": 6020,
+      "naive_over": 124,
+      "naive_over_finite": 96,
+      "naive_under": 0,
+      "promoted_agree": 6144,
+      "promoted_disagree": 0,
+      "first_naive_disagreement": {
+        "outer": [
+          [
+            1,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1,
+            0
+          ]
+        ],
+        "block": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ]
+        ],
+        "target": [
+          1,
+          1
+        ],
+        "brute": 2,
+        "naive": "infinite",
+        "promoted": 2
+      },
+      "first_finite_over": {
+        "outer": [
+          [
+            1,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1,
+            0
+          ]
+        ],
+        "block": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0
+          ]
+        ],
+        "target": [
+          1,
+          1
+        ],
+        "brute": 2,
+        "naive": 4,
+        "promoted": 2
+      }
+    },
+    {
+      "sweep": "two-block-dl2",
+      "p": 3,
+      "shared_mask": 0,
+      "towers": 59049,
+      "queries": 531441,
+      "naive_agree": 531441,
+      "naive_over": 0,
+      "naive_over_finite": 0,
+      "naive_under": 0,
+      "promoted_agree": 531441,
+      "promoted_disagree": 0,
+      "first_naive_disagreement": null,
+      "first_finite_over": null
+    },
+    {
+      "sweep": "two-block-dl2",
+      "p": 3,
+      "shared_mask": 1,
+      "towers": 59049,
+      "queries": 531441,
+      "naive_agree": 498561,
+      "naive_over": 32880,
+      "naive_over_finite": 24768,
+      "naive_under": 0,
+      "promoted_agree": 531441,
+      "promoted_disagree": 0,
+      "first_naive_disagreement": {
+        "outer": [
+          [
+            1,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1,
+            0
+          ]
+        ],
+        "block": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ]
+        ],
+        "target": [
+          2,
+          1
+        ],
+        "brute": 2,
+        "naive": "infinite",
+        "promoted": 2
+      },
+      "first_finite_over": {
+        "outer": [
+          [
+            1,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1,
+            0
+          ]
+        ],
+        "block": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0
+          ]
+        ],
+        "target": [
+          1,
+          1
+        ],
+        "brute": 3,
+        "naive": 4,
+        "promoted": 3
+      }
+    }
+  ],
+  "verdict": {
+    "fresh_min_sum_exact": true,
+    "promoted_min_sum_exact": true,
+    "shared_masks_break_the_fresh_min_sum": true,
+    "only_unsound_direction_observed": "yes: every fresh-hypothesis violation over-reports the cost, understating leakage"
+  }
+}

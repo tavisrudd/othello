@@ -204,6 +204,26 @@ Naming both directions matters because only one of them is dangerous.
 | mask-quotiented labels (drop $R^{*}$, minimize over it) | cost too **small**, leakage too **large** | conservative for a privacy claim, useless for exact answers, no valid witness |
 | fresh-mask min–sum applied when masks are in fact shared | cost too **large**, leakage too **small** | **unsound privacy claim**: certifies a coalition cannot recover a secret it can recover |
 
+The second row's direction is not an empirical observation but a theorem, which is worth stating
+because it tells a deployer exactly which way an unverified freshness assumption can fail.
+
+**Lemma 5 (the fresh-mask formula never under-reports).** Let a tower have a mask space
+$R_{\mathrm{sh}}$ shared between blocks, and let $\widetilde\Lambda(c)$ be the value returned by
+Theorem 2's formula applied as if every block's copy of $R_{\mathrm{sh}}$ were private to it. Then
+$$\widetilde\Lambda(c)\ \ge\ \Lambda^{\mathrm{msk}}_{A\circ B,T}(c)\qquad\text{for every }c,$$
+with equality not guaranteed.
+
+*Proof.* The fresh reading imposes $\Phi^{R_{\mathrm{sh}}}_{B_e}Y_e=0$ for every block $e$
+separately; the true condition is the single equation $\sum_e\Phi^{R_{\mathrm{sh}}}_{B_e}Y_e=0$. The
+first implies the second, so the fresh reading minimizes the same support functional over a *subset*
+of the true feasible set. A minimum over a subset is at least the minimum over the whole set.
+$\square$
+
+So a missed sharing always produces a claim of *more* privacy than is real, never less; and §6.3
+finds zero under-reports in 1,239,350 exact comparisons, as Lemma 5 requires. The failure is silent
+in the worst way: §6.3 also finds 48,296 cases where the over-report is a plausible finite number
+rather than an obvious $\infty$.
+
 The second row is the composition failure mode of the unlabelled side-channel composition notions
 (non-interference, strong non-interference, probe-isolating non-interference) that the brief cites,
 and §4 is exactly that failure in one line of algebra.
@@ -306,17 +326,195 @@ leaf breaks (F) again for the composite, and the promotion must be redone at the
 
 ## 6. Computational check
 
-*(filled in after the run; see §6.1 for the replay command and hashes)*
+### 6.1 What is checked, and what the checker trusts
+
+For every tower in a canonical enumerated family, three numbers are computed for **every** named
+secret functional at once:
+
+* **brute** — the exact masked cost, by exhaustive search over all leaf coefficient vectors of the
+  composite generator, keeping those whose induced label is the named functional on the secret space
+  and zero on every mask coordinate (outer, shared, and fresh alike);
+* **naive** — the min–sum prediction of Theorem 2 built from the per-block masked cost tables, with
+  every block mask treated as fresh, i.e. the formula applied *as if* (F) held;
+* **promoted** — the same prediction after the shared randomness has been moved into the
+  intermediate alphabet by `TowerSpec::promote_shared`, so that (F) genuinely holds.
+
+The min–sum itself is **not reimplemented**: `naive` and `promoted` are computed by
+`ergodis::composition::CompositionTable`, the public core's composition kernel, driven by the masked
+tables. A disagreement is therefore a statement about the mathematics and about the core's kernel,
+not a comparison of two private implementations of the same formula. Two further internal invariants
+are enforced and would abort the run: the promoted tower must brute-force to the *same* cost vector
+as the original (promotion changes where randomness is eliminated, never the leaf code), and every
+block-table computation is an independent exhaustive search.
+
+**Trusted boundary.** The checker trusts the composite-generator construction, prime-field arithmetic
+mod `p`, and the core's composition kernel. It does *not* trust any of the proofs of §2–§5: brute
+force is computed from the composite generator directly, with no reference to the min–sum. The
+enumeration is deterministic and canonical throughout; **no randomness is used anywhere**, so there
+are no seeds to record.
+
+**Scope of the check.** Rank-one targets (`t = 1`), two-level towers, prime fields `q ∈ {2,3,5}`,
+uniform blocks or one distinguished block, uniform linear model. It does *not* check `t ≥ 2` targets,
+non-prime fields, towers of depth three or more, or the target-normalized formula in the manuscript's
+own erased-node convention — §6.4 says what that leaves open.
+
+### 6.2 Inputs
+
+Named cases:
+
+* `astra-shared-mask-pair` — Astra's transcript `y₁ = s₁ + r`, `y₂ = s₂ + r` as a two-block tower
+  with one shared mask coordinate; target `s₁ − s₂`.
+* `share-triple-c1` / `share-triple-c2` — the manuscript's labelled-versus-unlabelled witness, shares
+  `(x, y, x + y)` and `(x, y, x + 2y)`, target `x + y`; each run twice, once with no inner mask and
+  once with a fresh two-coordinate additive re-sharing of every outer symbol (hierarchical
+  re-randomized secret sharing).
+
+Sweeps. Each fixes a shape and a small canonical list of outer codes, and then enumerates **every**
+block encoder of that shape over `F_q` in odometer order, for `shared_mask ∈ {0, 1}`:
+
+| sweep | blocks | intermediate `dim L` | block coordinates | block masks | outer codes | fields |
+|---|---|---|---|---|---|---|
+| `two-block-dl1` | 2 | 1 | 2 | 1 | identity, sum column, transposed sum column | 2, 3, 5 |
+| `three-block-dl1` | 3 | 1 | 2 | 1 | `(x, y, x+y)` and `(x, y, x+2y)` | 2, 3, 5 |
+| `two-block-dl2` | 2 | 2 | 3 | 1 | repetition, repetition after a coordinate swap, repetition after a shear | 2, 3 |
+
+### 6.3 Results
+
+Totals over the whole sweep: **128,390 towers** and **1,239,350 target queries**, of which
+**619,675** satisfy the freshness hypothesis (F).
+
+| claim | measured |
+|---|---|
+| fresh masks: `naive == brute` | **619,675 / 619,675**, no exception |
+| promotion: `promoted == brute` | **1,239,350 / 1,239,350**, no exception, shared and fresh alike |
+| shared masks break the fresh formula | **62,569** disagreements out of 619,675 shared-mask queries |
+| direction of every disagreement | **over-report in all 62,569**; **zero** under-reports |
+| over-reports that return a wrong *finite* cost rather than declaring the request infeasible | **48,296** |
+
+The direction result is the one to carry forward: across 1.24 million exact comparisons, applying the
+fresh-mask min–sum to a tower with shared randomness *never once* returned a cost below the truth. It
+always returned a cost above it, which is the unsound direction for a privacy claim — it certifies
+that a coalition cannot recover a secret that it can in fact recover. And in 48,296 of those cases it
+returned a plausible-looking finite number rather than an obvious $\infty$, so the failure is not
+self-announcing.
+
+Named-case values, all three fields agreeing:
+
+| case | field | brute | naive | promoted |
+|---|---|---|---|---|
+| `astra-shared-mask-pair`, target $s_1-s_2$ | 2, 3, 5 | **2** | **infinite** | **2** |
+| `share-triple-c1-unmasked`, target $x+y$ | 3, 5 | 1 | 1 | 1 |
+| `share-triple-c2-unmasked`, target $x+y$ | 3, 5 | 2 | 2 | 2 |
+| `share-triple-c1-fresh-inner-mask` | 3, 5 | 2 | 2 | 2 |
+| `share-triple-c2-fresh-inner-mask` | 3, 5 | 4 | 4 | 4 |
+
+The Astra row is §4's counterexample, confirmed independently of the algebra. The `share-triple` rows
+confirm both that the labelled cost separates the two schemes exactly as the manuscript's abstract
+says ($1$ against $2$), and that wrapping each share in a fresh mask preserves the separation while
+doubling both costs ($2$ against $4$) — fresh masking scales the labelled cost, it does not blur the
+distinction that the unlabelled summary loses.
+
+Smallest finite over-report found, in canonical order, over $\F_2$ in `two-block-dl1`: outer code
+$\begin{pmatrix}1&0\\0&1\end{pmatrix}$, block encoder rows $(1,0)$ and $(1,1)$, target $(1,1)$ —
+true cost $2$, fresh-formula prediction $4$, promoted prediction $2$.
+
+### 6.4 Replay, hashes, and independent cross-check
+
+Working directory `~/src/ergodis-private`; toolchain `rustc 1.93.1 (01f6ddf75 2026-02-11)`; core
+checkout `~/src/ergodis` at `6cc9668`; private checkout at `0fe17e4`. Regenerate:
+
+```
+cd ~/src/ergodis-private
+cargo build --release -p ergodis-tools
+~/.cache/ergodis/target/ergodis-private/release/ergodis-tools masked-leakage-report \
+  --out ~/src/othello/notes/2026-09-06-c1070-probe1-mask-quotiented-associativity.json
+```
+
+Verify the tracked certificate without writing to the worktree by appending `--check` to the same
+command; it regenerates in memory and fails loudly on any difference. Runtime is about 14 seconds.
+
+| artifact | bytes | SHA-256 |
+|---|---:|---|
+| `ergodis-private/src/masked_leakage.rs` | 23043 | `c1303c1381a8a5a7faa53c1c87bce0ab15f7f8fd4bb3146ef9285e18c8ab9dbb` |
+| `ergodis-private/tasks/tools/src/masked_leakage_report.rs` | 13550 | `a01ce80b7554940d60b58eb2672860618b2fc0d000d191d86f43df560ece6ed6` |
+| `notes/2026-09-06-c1070-probe1-mask-quotiented-associativity.json` | 15517 | `8c0c2c25734f043cb90c4de1d17f0e92fdbad41448a14403b5f36c9b93932ec4` |
+
+**Independent cross-check.** Two are available and both are used. First, the brute-force search and
+the min–sum prediction share no code: the former reads the composite generator directly, the latter
+runs the public core's composition kernel over per-block tables, so agreement across 1.24 million
+queries is a genuine differential check rather than a self-consistency check. Second, the
+`astra-shared-mask-pair` and `share-triple` values are computed independently by hand in §4 and in
+the manuscript's own worked example, and they match. What is *not* independently cross-checked is the
+composite-generator construction itself; the `promote_shared` invariant (both spellings of the tower
+must brute-force to the same cost vector) is the check standing in for it.
+
+**Negatives, stated with their domain.** No under-report was found in any of the 1,239,350 queries;
+no disagreement of any kind was found in any of the 619,675 fresh-mask queries. The search domain is
+exactly the family tabulated in §6.2 and the stop condition is exhaustion of that family. Nothing
+here bounds behaviour at `t ≥ 2`, at depth three or more, or over non-prime fields.
 
 ---
 
 ## 7. What this means for the product interface
 
-*(see §7 after the run)*
+Five things follow directly, and they are all cheap to build because none of them needs a new
+algorithm.
+
+1. **Masks need no new engine.** By Corollary 3, the privacy interface can accept a mask declaration
+   and lower it to the existing compiler by enlarging the message space and pinning the request to
+   zero on the mask coordinates. `transfer-subspace` and the existing prescribed-coset cost code take
+   the enlarged instance unchanged; this probe's checker uses exactly that path.
+
+2. **Freshness is a compile-time obligation the tool must discharge, not assume.** §4 and §6.3 show
+   that assuming independence when randomness is shared silently produces a wrong finite number in
+   the direction that overstates security. The input format therefore has to name each randomness
+   source and its scope, and the compiler has to *verify* independence rather than trust a
+   per-gadget "this block is fresh" annotation. This is precisely where the unlabelled
+   non-interference / strong non-interference style of composition goes wrong, and it is the concrete
+   thing the product does better.
+
+3. **The repair is mechanical and its price is known.** Promote every shared randomness source to a
+   message coordinate of the lowest level at which it is common, pinned to zero. The state cost is a
+   factor $q^{t\dim R_{\mathrm{sh}}}$ at the levels below the promotion point — nothing at all if the
+   randomness is genuinely local. Since promotion is a pure reinterpretation of the same leaf code
+   (checked in §6.1), it can be applied automatically and reported to the user as the reason the
+   compiled state grew.
+
+4. **Mask reuse is detectable, not just a hazard to be declared.** Sharing shows up as a rank drop in
+   the mask block of the induced-label matrix. The interface can therefore *report* unexpected reuse
+   from the encoding alone, which is a diagnostic the probing-model tools do not offer.
+
+5. **The compiled object and its bounds are unchanged.** By §5 the finite contextual quotient, the
+   witness-context length bound $\max\{2,r+1\}$ and the functional-dual dimension bound $\min\{t,r\}$
+   all carry over. So the probe-2 deliverable — a compiled leakage profile rather than one query per
+   subspace — is not blocked by masks and can be designed against the masked model from the start.
+   The one hypothesis to carry into the interface's documentation is §5.3: with only $\F_q$-linear
+   shared randomness, use the general rank- and radius-bounded tests, not the rank-one projective
+   probe.
+
+What this does **not** deliver: nothing about `t ≥ 2` targets under masks beyond the unchanged
+bounds, nothing about adaptive observers, nothing outside the uniform linear model.
 
 ---
 
-## 8. Prior art noticed while working
+## 8. Mystery ledger
+
+Written after an explicit extra-juice and Tao-style closeout pass over the finished result.
+
+| observation | status |
+|---|---|
+| Zero under-reports across 1,239,350 comparisons, while over-reports are common. Looked like a suspiciously clean empirical asymmetry. | **Settled during closeout**, and it produced a free upgrade: Lemma 5 in §3.3 proves the fresh-mask feasible set is a subset of the true one, so the direction is forced. The measurement is now a confirmation of a theorem rather than the evidence for a pattern. |
+| The `share-triple` masked costs are exactly double their unmasked values ($1\to2$, $2\to4$) in both fields and both schemes. | **Settled.** The fresh two-coordinate additive re-sharing makes the block cost function constant at $2$ on every nonzero intermediate label, so the manuscript's sharp scalar envelope $\delta_{B,T}\Lambda_{A,T}\le\Lambda_{A\circ B,T}\le R_{B,T}\Lambda_{A,T}$ has $\delta_{B,T}=R_{B,T}=2$ and pins the composite exactly. Fresh masking scales the labelled cost; it does not blur the labelled separation. |
+| The min–sum is shortest path in a graph labelled by the abelian group $\operatorname{Hom}(T,L^{*}\oplus R^{*})$. | **Settled as a reframing**, and it is the useful one: promotion is exactly "enlarge the labelling group", and the complexity $q^{t(\dim L+\dim R_{\mathrm{sh}})}$ is the group's order. It also says what probe 3 needs — replacing the min–plus semiring by a partially ordered one leaves the group structure untouched, so only the dominance layer changes. |
+| The share of shared-mask queries that disagree grows with the field: roughly $8\%$ at $q=2$, $18\%$ at $q=3$, $35\%$ at $q=5$ in `two-block-dl1`. | **Open, low value.** Plausibly because cross-block cancellation reaches more targets as $q$ grows, but no formula was derived and none is needed for any downstream claim. No owner allocated. |
+| Whether the map from coalition to leakage space, $H\mapsto L_H$, has matroid or submodularity structure that would let the outer minimization over $t$-dimensional secret subspaces be done greedily. | **Open, and it is a real lead for probe 2**, which owns the minimization over $T$. Noticed while proving §5, not sought. Not pursued here; probe 2 is the owner. |
+
+No other genuine mystery remains in this probe: (a), (b) and (c) are each settled with a proof, and
+the computational check agrees with every one of them.
+
+---
+
+## 9. Prior art noticed while working
 
 Recorded, not gating, per the brief's standing constraint.
 
