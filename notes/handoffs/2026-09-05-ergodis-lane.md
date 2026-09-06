@@ -111,10 +111,13 @@ formula can only overstate privacy
 ([report](../2026-09-06-c1070-probe1-mask-quotiented-associativity.md)); probe 5, the mask-free
 interface `leakage-profile` in `ergodis-private` with per-class minima, witnesses, direct
 `t`-profile, and brute-force cross-check
-([report](../2026-09-06-c1070-probe5-privacy-interface-tower-case.md)). In flight: probe 3 (vector
-costs). **Next**: probe 2 (profile from the quotient, greedy lead in the discovery track), then
-probe 0 (survey) and probe 6 (transcript state); unify `masked_leakage` and `hierarchical_leakage`
-in `ergodis-private`.
+([report](../2026-09-06-c1070-probe5-privacy-interface-tower-case.md)); probe 3, vector costs as
+Pareto antichains per class and per `t`, the core's `ordered_resource` module already holds the
+partially ordered monoid and front types but the transfer stack is scalar throughout
+([report](../2026-09-06-c1070-probe3-vector-costs.md)). In flight: probe 2 (profile from the
+quotient, greedy lead in the discovery track) and probe 0 (survey). **Next**: probe 6 (transcript
+state) after probe 2; unify `masked_leakage`, `hierarchical_leakage`, and `vector_leakage` in
+`ergodis-private`; move the vector search onto `CappedAdditiveMonoid`.
 
 ### C985 — Ergodis exact algebraic optimization paper
 
