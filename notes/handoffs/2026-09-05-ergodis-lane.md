@@ -140,6 +140,18 @@ synthesis for C1070 and Tavis's call on what ships. Foreign issue seen in passin
 module owned by another lane. Open theorem: whether uniform unit costs force an
 optimal leaked-subspace chain (measured on 1.4M instances, unproved).
 
+### C1072-C1074 — finite-geometry absorption targets from the relconic discovery track
+
+Queued, not started. Three leads logged on 2026-09-06 in
+[`2026-07-16-relconic-discovery-track.md`](../2026-07-16-relconic-discovery-track.md), routed here as
+Ergodis instance families rather than relconic manuscript work; no manuscript edit in any of them.
+C1072 compiles the equality case of the `PG(3,q)` secant-local coverage bound as a symmetric exact
+cover over closed block partitions of `E(K_k)`. C1073 compiles minimum ordinary completion of a
+conic-complete arc as independent domination on a union of chord-involution matchings. C1074 turns
+the Farr–Lisoněk free-pair cap constructions into a test-cap corpus for the concentration condition
+in the `n ≥ 4` programme. Each row carries its own provenance pointer; read the discovery-track
+entry before starting.
+
 ### C985 — Ergodis exact algebraic optimization paper
 
 In progress as the optimization-facing sequel to the `complete-ports` lane's manuscript; it does not
@@ -162,6 +174,6 @@ host, so cold end-to-end `g41` replays need it regenerated first.
 ## Lane ownership
 
 This lane was split out of `complete-ports` on 2026-09-05 and owns C985, C1016, C1017,
-C1031-C1033, C1040-C1048, C1052, C1061, C1062. Future Ergodis engine, benchmark, tooling,
+C1031-C1033, C1040-C1048, C1052, C1061, C1062, C1070, C1072-C1074. Future Ergodis engine, benchmark, tooling,
 capability, and Ergodis-paper tasks use `[ergodis]`. The bounded-recovery manuscript work (C325,
 C953, C955, C964) stays on `[complete-ports]`.
