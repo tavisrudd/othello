@@ -4409,8 +4409,17 @@
       "last": 1070,
       "purpose": "exact compositional leakage analysis for hierarchical linear encodings (Astra riff)",
       "sequence": 490
+    },
+    {
+      "count": 1,
+      "first": 1071,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 1071,
+      "purpose": "arcs paper upgrades from Astra full-manuscript review: q=3 boundary repair, intrinsic-defect decomposition, stronger gap, hole-set asymptotic, higher-dim identity, evaluation equivalence, char-0 obstruction",
+      "sequence": 491
     }
   ],
-  "next_id": 1071,
+  "next_id": 1072,
   "schema": "codex-task-id-allocations-v1"
 }
