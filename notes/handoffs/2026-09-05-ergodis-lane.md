@@ -114,10 +114,15 @@ interface `leakage-profile` in `ergodis-private` with per-class minima, witnesse
 ([report](../2026-09-06-c1070-probe5-privacy-interface-tower-case.md)); probe 3, vector costs as
 Pareto antichains per class and per `t`, the core's `ordered_resource` module already holds the
 partially ordered monoid and front types but the transfer stack is scalar throughout
-([report](../2026-09-06-c1070-probe3-vector-costs.md)). In flight: probe 2 (profile from the
-quotient, greedy lead in the discovery track) and probe 0 (survey). **Next**: probe 6 (transcript
-state) after probe 2; unify `masked_leakage`, `hierarchical_leakage`, and `vector_leakage` in
-`ergodis-private`; move the vector search onto `CappedAdditiveMonoid`.
+([report](../2026-09-06-c1070-probe3-vector-costs.md)); probe 2, the `t`-symbol profile is a
+coalition-side quantity, one best-first sweep over coalitions gives every `t` at once with no
+subspace enumeration and no quotient, greedy subspace extension fails only under heterogeneous
+costs, and the compositional route pays for itself only on towers too large to flatten
+([report](../2026-09-06-c1070-probe2-leakage-profile-from-quotient.md)). In flight: probe 0
+(survey) and probe 6 (transcript state). **Next**: unify `masked_leakage`, `hierarchical_leakage`,
+`leakage_structure`, and `vector_leakage` in `ergodis-private` around the coalition sweep; move the
+vector search onto `CappedAdditiveMonoid`. Open theorem: whether uniform unit costs force an
+optimal leaked-subspace chain (measured on 1.4M instances, unproved).
 
 ### C985 — Ergodis exact algebraic optimization paper
 
