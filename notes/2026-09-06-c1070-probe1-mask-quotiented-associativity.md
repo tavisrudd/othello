@@ -522,9 +522,12 @@ Recorded, not gating, per the brief's standing constraint.
   decision procedure of the $t$-probing model (Ishai–Sahai–Wagner 2003) as implemented by maskVerif,
   IronMask, SILVER and VRAPS. Those tools decide the same linear-algebra question; what they compose
   through is an *unlabelled* sufficient condition (non-interference, strong non-interference,
-  probe-isolating non-interference). Theorem 2 plus §4 is the exact labelled statement those
-  conditions approximate, together with the precise hypothesis (F) under which the approximation is
-  sound and the exact repair when it is not.
+  probe-isolating non-interference). For the *linear* gadgets and the threshold-probing model,
+  Theorem 2 plus §4 looks like the exact labelled statement those conditions approximate, together
+  with the hypothesis (F) under which the approximation is sound and the repair when it is not.
+  That comparison is asserted from memory of those definitions, not checked against them; the
+  non-interference notions also cover nonlinear gadgets and random-probing models that this probe
+  does not touch. Probe 0 owns the check.
 * Massey's coding-theoretic view of secret sharing is the identification in §1.2; relative
   generalized Hamming weights as the parameter of linear secret sharing is
   Luo–Mitrpant–Vinck–Chen 2005, Kurihara–Uyematsu–Matsumoto 2012, Geil–Martín–Matsumoto–Ruano–Luo

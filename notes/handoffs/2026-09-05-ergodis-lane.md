@@ -99,12 +99,22 @@ carrier at all. Brief `2026-09-04-c1062-ergodis-causal-brief.md`, routing log
 
 ### C1070 — exact compositional leakage analysis for hierarchical linear encodings
 
-Queued, open-ended. Reads the labelled prescribed-coset recovery theory as a privacy interface and
-asks whether the tower quotient compiles a secret subspace, mask subspace, and observation model
+In progress, open-ended. Reads the labelled prescribed-coset recovery theory as a privacy interface
+and asks whether the tower quotient compiles a secret subspace, mask subspace, and observation model
 into named-functional and `t`-symbol leakage costs with witnesses. Brief and probe plan:
 [C1070 brief](../2026-09-06-c1070-ergodis-compositional-leakage-brief.md). Product framing: prior art is
-surveyed for citation and technique, never as a gate. **Next**: probe 1 (mask-quotiented
-associativity) and probe 5 (interface on the settled tower case), with the probe 0 survey alongside.
+surveyed for citation and technique, never as a gate.
+
+Closed: probe 1, masks are label pinning on the enlarged message space, the min–sum composes under
+per-block mask freshness, shared masks must be promoted to a message coordinate, and the fresh
+formula can only overstate privacy
+([report](../2026-09-06-c1070-probe1-mask-quotiented-associativity.md)); probe 5, the mask-free
+interface `leakage-profile` in `ergodis-private` with per-class minima, witnesses, direct
+`t`-profile, and brute-force cross-check
+([report](../2026-09-06-c1070-probe5-privacy-interface-tower-case.md)). In flight: probe 3 (vector
+costs). **Next**: probe 2 (profile from the quotient, greedy lead in the discovery track), then
+probe 0 (survey) and probe 6 (transcript state); unify `masked_leakage` and `hierarchical_leakage`
+in `ergodis-private`.
 
 ### C985 — Ergodis exact algebraic optimization paper
 
