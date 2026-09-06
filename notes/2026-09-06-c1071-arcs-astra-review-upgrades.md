@@ -359,23 +359,36 @@ support}`.
 `theta_n - k - h = q^n + (1-λ) q^{n-1} + o(q^{n-1})`, giving `a ≥ (2 - λ + η)/sqrt2`. The
 Cauchy–Schwarz step is correct: `E[T 1_{T ≥ μ/2}] ≥ μ/2`, so `μ^2/4 ≤ E[T^2] P(T ≥ μ/2)`.
 
-**Item 18 — Hirzebruch bookkeeping: PROVED modulo the exact published hypotheses (sub to fetch).**
-In a rank-three realization the only multiple points of the `d = binom(k,2)` secant lines are
-the `k` arc points (multiplicity `k-1`; no other secant passes through an arc point) and the
-design blocks (multiplicity exactly `m`; two blocks cannot share a point since `2m > m`, and a
-block point is not an arc point), with every disjoint secant pair in exactly one block, so
+**Item 18 — Hirzebruch bookkeeping: PROVED, with the exact published form now consulted.**
+Source: P. Pokora, "Hirzebruch-type inequalities viewed as tools in combinatorics",
+arXiv:1808.09167v4 (2020-12-25), read depth `partial` (Sections 1–2 and Remarks 2.8–2.9; cache
+key `arXiv:1808.09167`, SHA-256 `cf208e4b…84faf8`), citing Hirzebruch, "Arrangements of lines
+and algebraic surfaces", Arithmetic and Geometry Vol. II (1983), not consulted directly. Two forms:
+(3) Theorem 1.5/2.3 (Hirzebruch): `d ≥ 4` lines in `P^2(C)`, `t_d = t_{d-1} = 0`, then
+`t_2 + t_3 ≥ d + sum_{r≥5} (r-4) t_r`. This is the form the reviewer quoted.
+(5) Remark 2.9 (the variant "usually found in the literature", justified via Miyaoka–Sakai):
+`d ≥ 6`, `t_d = t_{d-1} = t_{d-2} = 0`, then `t_2 + (3/4) t_3 ≥ d + sum_{r≥5} (2r-9) t_r`.
+Arrangement data for a rank-three realization: the only multiple points of the `d = binom(k,2)`
+secants are the `k` arc points (multiplicity `k-1`; no other secant passes through an arc point)
+and the design blocks (multiplicity exactly `m`; two blocks cannot share a point since `2m > m`,
+and a block point is not an arc point); every disjoint secant pair lies in exactly one block, so
 `t_m = (binom(d,2) - k binom(k-1,2)) / binom(m,2)`. Values: `k=4`: `t_3=4, t_2=3`; `k=5`:
 `t_4=5, t_2=15`; `k=6`: `t_5=6, t_3=15`; `k=7`: `t_6=7, t_3=35`; `k=8`: `t_7=8, t_4=35`;
-`k ≥ 8`: `t_2 = t_3 = 0`. With the inequality `t_2 + (3/4) t_3 ≥ d + sum_{r≥5} (r-4) t_r`:
-`k=4`: `3 + 3 = 6 ≥ 6` (equality); `k=5`: `15 ≥ 10`; `k=6`: `11.25 ≥ 21` false; `k=7`:
-`26.25 ≥ 35` false; `k ≥ 8`: `0 ≥ d + (k-5)k + (m-4)t_m > 0` false. With the reviewer's weaker
-`t_2 + t_3` form, `k=7` gives `35 ≥ 35` and is NOT excluded. So with the `3/4` form the
-characteristic-zero exclusion for all `k ≥ 6` uses Hirzebruch alone. The `k=6` configuration
-of blocks and secants is the duad–syntheme (Cremona–Richmond, `15_3`) configuration together
-with the six vertices; the doily alone is realizable over the reals, so the obstruction is the
-six five-fold vertices. Hypothesis check: the arrangement has no point on `d`, `d-1`, or `d-2`
-lines for `k ≥ 4` since `k-1 < d-2`. Pending: the exact hypotheses of the `3/4` form
-(`t_d = t_{d-1} = t_{d-2} = 0`, and any `d ≥ 6` proviso) from a consulted source.
+`k ≥ 8`: `t_2 = t_3 = 0`. Hypotheses hold for `k ≥ 4` (`d ≥ 6` and `k-1 < d-2`).
+With (5): `k=4`: `3 + 3 = 6 ≥ 6` (equality); `k=5`: `15 ≥ 10`; `k=6`: `11.25 ≥ 15 + 1·6 = 21`
+false; `k=7`: `26.25 ≥ 21 + 3·7 = 42` false; `k ≥ 8`: `0 ≥ d + (2k-11)k + (2m-9)t_m > 0` false.
+With (3) only: `k=6`: `15 ≥ 21` false; `k=7`: `35 ≥ 21 + 2·7 = 35` holds with equality, so
+the reviewer's form does NOT exclude `k=7`; `k ≥ 8` false. Conclusion: with form (5), no
+rank-three realization of the equality design exists over any field of characteristic zero for
+any `k ≥ 6`, by Hirzebruch alone; the seven-point design's abstract nonexistence is not needed
+(and covers `k=7` independently if the paper prefers form (3)). Pokora also states that the
+`d=6, t_3=4, t_2=3` arrangement (the complete quadrilateral, our `k=4` design) is the unique
+real arrangement attaining equality in (3). The `k=6` block/secant incidence is the
+duad–syntheme `15_3` (Cremona–Richmond) configuration; the doily is realizable over the reals,
+so the obstruction is the six five-fold vertices. Field extension: a realization over a
+characteristic-zero field `F` uses finitely many coordinates generating a finitely generated
+subfield, which embeds in `C`; the incidence and non-incidence relations are polynomial
+equalities and inequalities preserved by the embedding.
 
 **Item 20 — ovoid framing: accepted for Phase 2.** Elliptic quadric = ovoid = maximal cap.
 
@@ -409,7 +422,53 @@ At `q = 3`, `k = 8`, (iii) already fails (`28/3`). Sub to brute-force (v) with `
 `ρ ≤ m`, `q ≤ 2000` (item 23 numerics). Remaining: whether any `(q,k)` satisfies (iii)–(v)
 simultaneously, and if none, how much slack is forced. Successor material, not for this task.
 
-**Items 5, 6, 22: pending sub extraction/numerics.**
+**Item 5 — characteristic-zero obstruction: PROVED (with item 18); genuinely new for
+`k ∉ {6, 7, 10}`.** The manuscript currently has: Corollary `cor:six-seven-rigidity` (a) six-arcs
+(Desarguesian, zero defect forces characteristic two, `F_4 ⊆ K`, projective uniqueness), (b)
+seven-arcs (`Δ_H ≥ 2` in any plane, from Alspach–Heinrich's abstract nonexistence of
+`MATCH(7,3,1)`), and Theorem `thm:match-ten-realization` (ten points: realization iff
+`char K = 2` and `F_8 ⊆ K`). Nothing for `k ∈ {8, 9} ∪ [11, ∞)`. New statement: for every
+`k ≥ 6`, no `MATCH(k, ⌊k/2⌋, 1)` design has a rank-three projective realization
+(Definition `def:rank-three-realization`) over a field of characteristic zero. Proof: item 18
+(Hirzebruch form (5) for `k = 6, 7`; either form for `k ≥ 8`, where `t_2 = t_3 = 0` makes the
+left side vanish), plus the finitely-generated-subfield embedding. Consequence via Theorem
+`thm:matching-design` and Corollary `cor:star-matching-realization`: no `k`-arc, `k ≥ 6`, in
+`PG(2, K)` with `char K = 0` has zero defect — vacuous as stated because the defect is defined
+for finite planes only; the meaningful form is the design-realizability statement above, which
+sits naturally next to `thm:match-ten-realization`. Sub check (worklog C2): pair identity and
+integrality of `t_m` hold for `k = 4..12`; `t_d = t_{d-1} = t_{d-2} = 0` holds throughout.
+
+**Item 6 — ten-point projective uniqueness: PROVED from the existing certificate; new text.**
+The tracked certificate regenerates byte-identically (worklog B1; Singular 4.4.1, 9.6 s). Its
+characteristic-two lexicographic basis for the regular-hyperoval design is triangular:
+univariate generator `y_9^5 + y_9^4 + y_9^3 + y_9 = y_9(y_9+1)(y_9^3+y_9+1)`, then `x_9 = y_9^3`,
+then one monic linear generator in each of the remaining ten unknowns. The arc inequation
+`x_9(x_9 - 1) ≠ 0` excludes `y_9 ∈ {0, 1}`, so the saturated ideal is radical and
+zero-dimensional with exactly three solutions over `F̄_2`, all with coordinates in `F_8`, and
+they form one Frobenius orbit (`t, t^2, t^4` for `t^3 + t + 1 = 0`). Uniqueness argument: any
+rank-three realization over `K` (necessarily `char K = 2`, `F_8 ⊆ K`) is carried by an element
+of `PGL(3, K)` onto a normalized realization with the four frame points standard, hence onto one
+of the three solutions. The paper's converse realizes the design by the regular hyperoval of
+`PG(2, 8)` with some labeling; normalizing it gives one of the three solutions, and the other
+two are its images under the Frobenius collineations `σ, σ^2` of `PG(2, 8)`, which carry a
+conic plus its nucleus to a conic plus its nucleus. All regular hyperovals of `PG(2, 8)` are
+`PGL(3, 8)`-equivalent, so the point set of every normalized solution is a regular hyperoval.
+Hence every rank-three realization of the regular-hyperoval design over any field is
+`PGL(3, K)`-equivalent to the regular hyperoval of `PG(2, 8)` embedded in `PG(2, K)`. This
+classifies the arc, not the labeling and not any prescribed conic. No new computation is
+needed beyond quoting "exactly three solutions" from the certificate's lex basis, which the
+appendix should now state explicitly.
+
+**Item 22 — finite sanity checks: DONE (worklog C1).** For `q = 3..13` the refined bound (13)
+and the exact balanced-pencil bound give the same smallest allowed `k`, and both exceed the
+first moment by one except at `q = 5, 10` where they tie. `q = 3`: `k ≥ 8`; `q = 4`: `k ≥ 9`;
+`q = 5`: `k ≥ 10`; `q = 13`: `k ≥ 22`. Comparison with the tabulated smallest complete caps
+awaits the literature part (D1).
+
+**Phase 1 status: every item has a verdict. Failed claims: none. Corrections to the reviewer:
+the Hirzebruch form quoted is the weak one (item 18); the `m-1` gap does not transfer to
+`PG(n,q)` (item 3); the two "minor wording repairs" and the `q ≥ 4` repair are already in the
+manuscript (worklog A3, A5, A6), so no edit is needed for them.**
 
 ## Source: Astra review, verbatim
 
