@@ -128,10 +128,16 @@ Probe 6, transcript state: the adversary state is the observed row space and not
 exact against an unrestricted next observation, retired randomness contracts the state exactly,
 proactive refresh is that contraction, and mask reuse is a one-sided rank-drop alarm; analyzer
 `transcript-leakage-report` validated on share, repair, and refresh transcripts
-([report](../2026-09-06-c1070-probe6-transcript-state.md)). In flight: unification of the five
-leakage modules around the coalition sweep with vector costs on `CappedAdditiveMonoid`, and
-ingestion of the IronMask/maskVerif gadget corpora as a benchmark. **Next**: review both, then a
-closeout synthesis for C1070 and Tavis's call on what ships. Open theorem: whether uniform unit costs force an
+([report](../2026-09-06-c1070-probe6-transcript-state.md)). Probe 8, one leakage surface: `ergodis_private::leakage::{LeakageProblem, analyze}` and the
+`leakage` subcommand take field, tower with per-block masks, secret, units with scalar or vector
+costs, and optional transcript; masks are label pinning in the compiler, the profile is the sweep,
+every committed probe artifact regenerates byte-identically; the private cost accumulator stays
+because the core monoid saturates at caps and its witness is one `u32`
+([report](../2026-09-06-c1070-probe8-leakage-module-unification.md)). In flight: probe 9,
+IronMask/maskVerif linear-gadget corpus benchmark. **Next**: review probe 9, then a closeout
+synthesis for C1070 and Tavis's call on what ships. Foreign issue seen in passing: the
+`fabric_routing` retained-tree-versus-Dijkstra test fails at `de53b6c` in `ergodis-private`, a
+module owned by another lane. Open theorem: whether uniform unit costs force an
 optimal leaked-subspace chain (measured on 1.4M instances, unproved).
 
 ### C985 — Ergodis exact algebraic optimization paper
