@@ -99,14 +99,15 @@ carrier at all. Brief `2026-09-04-c1062-ergodis-causal-brief.md`, routing log
 
 ### C1070 — exact compositional leakage analysis for hierarchical linear encodings
 
-All probes done and reviewed; ready to close on Tavis's call. Nine probes closed (1, 5, 3, 2, 0, 6,
-8, 9; probes 4 and 7 not run), each with a dated report, generator, certificate, and independent
+Reopened on Tavis's call for probes 4, 7, and 10. Nine probes closed (1, 5, 3, 2, 0, 6,
+8, 9); in flight: probe 10 (uniform-cost chain spike), probe 4 (labelled duality), probe 7
+(constrained recoverability), each with a dated report, generator, certificate, and independent
 cross-check. Verdicts, the product claim, the ship order, open successors, and the consolidated
 mystery ledger are in the
 [closeout synthesis](../2026-09-06-c1070-closeout-synthesis.md); the brief is
 `../2026-09-06-c1070-ergodis-compositional-leakage-brief.md`. Product framing: prior art informs,
-never gates. **Waiting on Tavis**: close C1070; whether to allocate successors for the uniform-cost
-chain theorem, the schema migration, and probes 4 and 7; whether a paper is carved out. Foreign
+never gates. **Next**: review probes 10, 4, and 7, fold them into the synthesis, then close on Tavis's call;
+the schema migration and any paper carve-out remain Tavis's calls. Foreign
 issue seen in passing: the `fabric_routing` retained-tree-versus-Dijkstra test fails at `de53b6c` in
 `ergodis-private`, a module owned by another lane; an Opus fix is in review.
 
