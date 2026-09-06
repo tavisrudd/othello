@@ -20,6 +20,13 @@ quantity: one best-first sweep over coalitions in nondecreasing cost yields $\Ga
 simultaneously. That is Theorem A, it is unconditional, and it removes the entire outer minimization
 that probe 5's direct method performs.
 
+**Correction (2026-09-06, probe 10).** The uniform-cost measurement in this report — zero
+optimal-chain failures in 1,434,264 instances — is a parameter artefact: those families priced a
+coordinate at 2 and a block at 3, not `c ≡ 1`, and never exceeded ambient dimension 3. Probe 10
+(`2026-09-06-c1070-probe10-uniform-cost-chain.md`) refutes the chain conjecture at `c ≡ 1` in both
+versions, already with single-coordinate units, and identifies it with Wei's chain condition.
+Theorem A, Proposition C, and the `t`-factor bound are unaffected.
+
 | question | verdict |
 |---|---|
 | (1a) is $H\mapsto\dim L_H$ submodular? | **No** — and not supermodular either. Two-unit counterexamples in dimension at most two exist over every field (Theorem B). So no submodular-minimization or matroid machinery applies on the coalition side. |
