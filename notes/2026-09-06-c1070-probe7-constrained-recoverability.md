@@ -117,8 +117,9 @@ Write `Feas(τ) = { E ∈ F : A_j(E) ≥ τ_j ∀j }` and, when nonempty,
 2. *(Completeness.)* Every `E ∈ Par(F)` lies in `Opt(τ_E)` for the single-constraint threshold
    vector `τ_E` given by `τ_{E,j} = A_j(E)`. Hence the ε-constraint form reaches every point of the
    front, including points on non-convex parts of it, which weighted-sum scalarization does not.
-3. *(Coincidence.)* `Opt(τ) ⊆ Par(F)` for every `τ` with `Feas(τ) ≠ ∅` **if and only if** `A` is
-   constant on `Opt(τ)` for every such `τ`.
+3. *(Coincidence.)* `Opt(τ) ⊆ Par(F)` for every `τ` with `Feas(τ) ≠ ∅` **if and only if** the
+   values of `A` on `Opt(τ)` form an antichain under the componentwise order, for every such `τ`.
+   When `A` is scalar this says `A` is constant on `Opt(τ)`.
 
 *Proof.* (1) Suppose `E'` dominates `E*`: `L(E') ≤ L(E*)`, `A(E') ≥ A(E*)`, one strict. Since
 `A_j(E') ≥ A_j(E*) ≥ τ_j` for every `j` — here the componentwise reading of the constraint is what
@@ -130,10 +131,15 @@ inequalities are equalities, contradicting strictness. □
 `L(E') < L(E)`, then `A_j(E') ≥ τ_{E,j} = A_j(E)` for every `j` and `L(E') < L(E)`, so `E'`
 dominates `E`, contradicting Pareto-optimality. Hence `E ∈ Opt(τ_E)`. □
 
-(3) (⇐) If `A` is constant on `Opt(τ)`, then every `E ∈ Opt(τ)` is an `A`-maximizer of `Opt(τ)` and
-part (1) applies. (⇒) Suppose `A` is not constant on `Opt(τ)` for some feasible `τ`: pick
-`E₁, E₂ ∈ Opt(τ)` with `A(E₁) < A(E₂)`. Then `L(E₂) = L(E₁)` and `A(E₂) > A(E₁)`, so `E₂` dominates
-`E₁`, and `E₁ ∈ Opt(τ) \ Par(F)`. □
+(3) (⇐) If the `A`-values on `Opt(τ)` form an antichain, then every `E ∈ Opt(τ)` is an `A`-maximal
+element of `Opt(τ)` and the argument of part (1) applies to it verbatim (part (1) used only that no
+element of `Opt(τ)` has a strictly larger `A`-value). (⇒) Suppose two elements of `Opt(τ)` are
+comparable with a strict difference: `E₁, E₂ ∈ Opt(τ)` with `A(E₁) ≤ A(E₂)` componentwise and
+`A(E₁) ≠ A(E₂)`. Then `L(E₂) = L(E₁)` and `E₂` dominates `E₁`, so `E₁ ∈ Opt(τ) \ Par(F)`. □
+
+(Coordinator's correction on review: the original statement read "`A` is constant on `Opt(τ)`",
+which is the right condition only for scalar `A`; for vector `A` two incomparable values on
+`Opt(τ)` do not produce a dominated element, so the antichain condition is the exact one.)
 
 **Read this as a product statement.** Part (2) says a customer who states thresholds loses nothing:
 sweeping `τ` over the attained adversarial values enumerates the whole front. Part (3) says a
@@ -476,7 +482,7 @@ the node units.
 | At `(a,b) = (0,0)` in the locality family the repair cost and the attack cost are the same number attained by the same leaf. | **Settled**: reader and adversary pools intersect in that leaf, so the two `μ` evaluations are literally the same minimum. The general statement — `μ(T, U) ≥ μ(T, U')` whenever `U ⊆ U'`, so a shared unit bounds both sides at once — is why locality and privacy trade at all. |
 | The twelve feasible tower candidates are indistinguishable to the model, yet an engineer would prefer some of them. | **Open, by design.** `attained_by` exposes the whole class rather than picking; the missing criterion (field size of the coefficients, symmetry, implementation cost) is not a recoverability quantity and does not belong in this objective. A successor that wants a tie-break must declare a third objective, not a hidden rule. |
 | Whether the ε-constraint sweep can be run *incrementally* — reusing the search across thresholds instead of re-solving — is untouched. | **Open**, low value at this scale; it becomes real only when the family stops being exhaustively enumerable, which is the same wall as probe 9's wire count. |
-| Whether the theorem's part 3 hypothesis ("`A` constant on `Opt(τ)`") is ever satisfiable in a non-degenerate design family. | **Settled negative in practice**: both non-trivial validations violate it — the brief's pair violates it at threshold 1, the tower family violates it across sixteen tied candidates. The condition is not a mild regularity assumption; it fails on the first two realistic instances, which is the whole justification for returning the front. |
+| Whether the theorem's part 3 hypothesis (the `A`-values on `Opt(τ)` form an antichain; for scalar `A`, constant) is ever satisfiable in a non-degenerate design family. | **Settled negative in practice**: both non-trivial validations violate it — the brief's pair violates it at threshold 1, the tower family violates it across sixteen tied candidates. The condition is not a mild regularity assumption; it fails on the first two realistic instances, which is the whole justification for returning the front. |
 
 No genuine mystery remains in the formulation. The theorem is proved, the three validations landed
 on their predicted fronts, and every reported number is confirmed by an independent path. What is
