@@ -19,7 +19,14 @@ privacy are outside everything discussed below.
 
 ## 0. Read-depth summary
 
-Filled in at the end of the survey; see §9 for the coverage statement and the full-text count.
+**No source in this report was read at `full text`.** Six were read at `partial`:
+Kurihara–Uyematsu–Matsumoto 2012, Geil–Martín–Matsumoto–Ruano–Luo (arXiv version), IronMask (eprint),
+maskVerif (eprint), Cassiers–Standaert on probe-isolating non-interference (eprint), and
+Cramer–Damgård–Maurer 2000 (abstract and introduction only). Every other source is `secondary only`
+or `abstract/metadata only`, marked in place. The §3 verdicts on the masking tools rest on `partial`
+reads of the papers themselves and are the strongest claims here; the §4 "amount-only" verdicts rest
+on abstracts and are correspondingly weaker. §9 carries the full coverage statement, including what
+was not reachable.
 
 ---
 
@@ -397,5 +404,225 @@ published capacity, which is a free correctness check, and the profile then says
 capacity does — which node subsets recover which combination. The locality axis in Rawat et al. is
 also the natural real-world instance of probe 3's per-level budget: local repair groups are exactly
 "at most `b` coordinates within a block".
+
+---
+
+## 5. Hierarchical and multilevel secret sharing
+
+The brief's §6 anticipated the answer and it is correct: **these are hierarchical *access structures*,
+not hierarchical *encodings*.** The hierarchy lives in who may reconstruct, expressed as a
+multipartite threshold condition on participant levels. It does not live in the encoding, which is a
+single-level polynomial or vector-space construction. Nothing in this line concatenates one linear
+encoding inside another, so nothing in it composes labelled costs through a tower — the object C1070
+is about does not appear.
+
+- **Tassa, "Hierarchical Threshold Secret Sharing", Journal of Cryptology 20(2), pp. 237–264, 2007** —
+  *read depth: abstract/metadata only*, from search-result listings on 2026-09-06 (a Springer article
+  page and the author's own conference-version PDF listing); not opened, not cached. The mechanism,
+  as reported in those listings: the scheme "uses Birkhoff interpolation, i.e., the construction of a
+  polynomial according to an unstructured set of point and derivative values." That is a single
+  polynomial encoding with participants at different levels receiving different derivative orders —
+  a hierarchical access structure over a flat encoding. The characterisation is the auditor's
+  inference from the reported mechanism, not a quotation of the paper's own framing.
+- **Brickell, "Some ideal secret sharing schemes", Journal of Combinatorial Mathematics and
+  Combinatorial Computing 9, pp. 105–113, 1989** — *read depth: abstract/metadata only*, from a
+  search-result listing; not opened. The vector-space construction for multilevel and compartmented
+  structures is attributed from that listing.
+- **Simmons, "How to (Really) Share a Secret", CRYPTO '88, LNCS 403, pp. 390–448, Springer, 1990** —
+  *read depth: abstract/metadata only*, from search-result listings, which report that Simmons gave
+  the definitions of the compartmented and hierarchical access structures. Not opened. Note the
+  publication-year discrepancy the brief's shorthand hides: the conference is 1988, the proceedings
+  volume is dated 1990; cite whichever is intended explicitly.
+
+**Headline for the comparison table.** Hierarchical access structure over a flat encoding. No
+composition of encodings, therefore no tower, no per-level observation budget, and no labelled cost.
+
+**What to cite it for.** One disambiguating sentence, wherever C1070 says "hierarchical": to state
+that hierarchical here means composed encodings, not the multipartite access structures of this line.
+Getting that sentence in early prevents the most likely misreading by a reader from the
+secret-sharing community.
+
+**What to absorb.** Little mathematically, but one interface idea: multipartite access structures are
+the standard vocabulary a practitioner brings, so accepting a level-and-threshold description and
+compiling it into the observation model would remove a translation step for exactly the audience the
+privacy interface targets.
+
+---
+
+## 6. Secret sharing from composed and multiplicative codes
+
+- **Chen, Cramer, Goldwasser, de Haan, Vaikuntanathan, "Secure Computation from Random Error
+  Correcting Codes", EUROCRYPT 2007, LNCS 4515, pp. 291–310** — *read depth: abstract/metadata only*,
+  from search-result listings on 2026-09-06 (the IACR EUROCRYPT 2007 programme page and a Springer
+  chapter page); not opened, not cached. It is cited by Kurihara et al. (read at `partial`) as
+  reference [4], repeatedly paired with Massey's construction: verbatim from that paper, "the schemes
+  of Massey [11] and Chen et al. [4, Sect. 4.1]" are shown to be equivalent to the coset construction
+  and to "always achieve the `α`-strong security". So its secret-sharing content sits inside the same
+  amount-only frame as §2.
+- **Cramer, Damgård, Maurer, "General Secure Multi-party Computation from any Linear Secret-Sharing
+  Scheme", EUROCRYPT 2000** — *read depth: partial* (cache key `10.1007/3-540-45539-6_22`, sha256
+  `f89720b98a76ca6394a416ff7c16a5b37e7458131a05507595678d7d9b2218f7`, 19 pp., fetched 2026-07-16 from
+  the IACR archive copy `https://www.iacr.org/archive/eurocrypt2000/1807/18070321-new.pdf`; sections
+  read here: abstract and the introduction's summary of multiplicativity; the protocols and proofs
+  were not read). The relevant composition notion is multiplicativity, not concatenation. Verbatim:
+  "an LSSS is multiplicative if each player `P_i` can, from his shares of secrets `s` and `s'`,
+  compute a value `c_i`, such that the product `s s'` can be computed as a linear combination of all
+  the `c_i`'s", and "multiplicativity can be assumed without loss of generality: we give an efficient
+  procedure that transforms any LSSS into a multiplicative LSSS of size at most twice that of the
+  original one."
+- **Cascudo, Chen, Cramer, Xing, "Asymptotically good ideal linear secret sharing schemes with strong
+  multiplication over any fixed finite field", CRYPTO 2009, LNCS 5677, pp. 466–486** — *read depth:
+  abstract/metadata only*, from search-result listings; not opened. Same axis: multiplicativity and
+  asymptotic parameters, and the composition being exploited is algebraic-geometric tower
+  construction for *parameters*, not an analysis of leakage through the composition.
+- **Márquez-Corbella, Martínez-Moro, Suárez-Canedo, "On the Composition of Secret Sharing Schemes
+  Related to Codes", arXiv:1211.5566, 2012** — *read depth: abstract/metadata only* (arXiv abstract
+  page fetched 2026-09-06; arXiv version; PDF not fetched). This is the nearest title in the
+  literature to "leakage through the composition" and it is **not** about leakage. Verbatim from the
+  abstract: "we construct a subclass of the composite access structure introduced by Martínez et al.
+  based on schemes realizing the structure given by the set of codewords of minimal support of linear
+  codes … all the schemes on this paper are ideal (in fact they allow a vector space construction)".
+  Composite access structures, ideality, and vector-space realisability — access structures and
+  parameters, no leakage analysis.
+
+The textbook treatment (Cramer, Damgård, Nielsen, *Secure Multiparty Computation and Secret
+Sharing*) named in the brief was **not consulted** in this survey; it is recorded in §9 as a
+coverage gap, not as a source.
+
+**Headline for the comparison table.** Composition appears as multiplicativity and as composite
+access structures, both aimed at parameters and realisability. No source located here analyses what
+leaks *through* a concatenation, and no source composes a per-functional leakage cost across levels.
+
+**What to cite it for.** Chen et al. as the standard companion to Massey for the coding construction;
+Cramer–Damgård–Maurer for the linear-secret-sharing-scheme formalism the interface's input model
+should match; Márquez-Corbella et al. as the existing meaning of "composition" in this community,
+which is a different meaning from C1070's.
+
+**What to absorb.** The multiplicativity property is a second, orthogonal question the same compiled
+object could answer — "for which pairs of functionals is a product locally computable" is again a
+membership test on row spaces — and is a plausible later feature, not a C1070 deliverable. Recorded
+here rather than pursued.
+
+---
+
+## 7. Leakage-resilient secret sharing: a different model, not to be conflated
+
+- **Benhamouda, Degwekar, Ishai, Rabin, "On the Local Leakage Resilience of Linear Secret Sharing
+  Schemes", CRYPTO 2018, LNCS 10993; journal version in Journal of Cryptology (DOI
+  `10.1007/s00145-021-09375-2`); eprint 2019/653** — *read depth: abstract/metadata only*, from
+  search-result listings on 2026-09-06 (Springer chapter and article pages, the IACR CRYPTO 2018 PDF
+  listing, and the eprint listing); not opened, not cached. As reported there, the model is that "the
+  adversary can apply an arbitrary function of a bounded output length to the secret state of each
+  party, but cannot otherwise learn joint information about the states", and the results are that
+  additive sharing and high-threshold Shamir are locally leakage resilient over large prime fields
+  with enough parties, "obtained via tools from Fourier analysis and additive combinatorics".
+
+**Why it must not be conflated with C1070.** Three separate differences, each sufficient on its own.
+
+1. **The leakage function.** There, an *arbitrary* bounded-output function of each share
+   individually. Here, the adversary sees exact field values of chosen coordinates and nothing else.
+   Neither model contains the other: the local model allows nonlinear compression of a whole share
+   that the linear model forbids, and the linear model allows joint observation across parties that
+   the local model forbids.
+2. **The statistic.** There, statistical distance between the leakage distributions for two secrets,
+   with parameters. Here, an exact integer rank and an exactly identified subspace of functionals.
+   No labelled statement is even expressible in the local model, because the leakage function is
+   arbitrary.
+3. **The proof technique.** Fourier analysis and additive combinatorics over large prime fields,
+   versus linear algebra over any finite field. Nothing transfers in either direction.
+
+**Headline for the comparison table.** Different leakage model entirely — arbitrary bounded-output
+functions applied per share, with statistical-distance guarantees. Not comparable, and it should be
+cited only to disclaim the overlap.
+
+**What to cite it for.** A single scoping sentence in any C1070 write-up: "leakage-resilient secret
+sharing in the sense of Benhamouda et al. is a different model (local, arbitrary bounded-output
+functions of individual shares), and none of the results here bear on it."
+
+---
+
+## 8. Comparison table
+
+One row per literature. "Labelled" means the result identifies *which* secret functionals leak, not
+just how many symbols. "Witness" means a coefficient vector reconstructing the functional from the
+observed coordinates. "Composes" means a stated rule for a composed object built from analysed parts.
+
+| Literature | Object it computes | Labelled? | Witness? | Composes? | What C1070 adds |
+|---|---|---|---|---|---|
+| Relative generalized Hamming weights and linear secret sharing (Massey; Wei; Luo et al.; Kurihara et al.; Geil et al.) | Equivocation `Δ_m = min_{&#124;I&#124;=m} H(S &#124; C_I)`, a weight hierarchy per nested code pair | No — an amount, minimised over coalitions of fixed size | No | Single level only; no composition rule | Identity of the leaked subspace, per-functional minimum coalitions, and an associative min–sum through a tower |
+| Masking verification and the probing model (Ishai–Sahai–Wagner; maskVerif; IronMask; SILVER; VRAPS; NI/SNI/PINI) | Exact per-gadget decision of the same rank condition; minimal input-share index set | No — the residual functionals are computed then projected to index sets | Coordinate-side only (which input shares, which probe tuple) | Yes, but as a **sufficient** cardinality condition; "`t`-NI is … not a necessary condition" | Exact labelled composition with secret-side witnesses, and freshness verified rather than assumed |
+| Secure distributed storage and secure network coding (Pawar et al.; Shah et al.; Rawat et al.; Cai–Yeung; Martínez-Peñas–Matsumoto; Herzberg et al.) | Secrecy capacity, equivocation, rank/matrix weight profiles, with matching constructions | No — amount-only throughout | No | Per-construction analysis; no compositional calculus | Which node or transcript subsets recover which combination, and the transcript-axis composition rule |
+| Hierarchical and multilevel secret sharing (Simmons; Brickell; Tassa) | Multipartite access structures over a single flat encoding | No — and no encoding hierarchy at all | No | Not applicable | Hierarchy in the *encoding*, with per-level observation budgets |
+| Secret sharing from composed and multiplicative codes (Chen et al.; Cramer–Damgård–Maurer; Cascudo et al.; Márquez-Corbella et al.) | Multiplicativity, composite access structures, asymptotic parameters, ideality | No | No | "Composition" means composite access structures or multiplicativity, not leakage through a concatenation | Leakage analysis *through* the concatenation, which this line does not address |
+| Leakage-resilient secret sharing (Benhamouda et al.) | Statistical distance under arbitrary bounded-output functions of each share | Not expressible in the model | No | Not applicable | Not comparable; cite to disclaim overlap |
+
+---
+
+## 9. Coverage statement and read depths
+
+**Full-text count.** **Zero** sources were read at `full text`. Five were read at `partial`:
+Kurihara–Uyematsu–Matsumoto 2012; Geil–Martín–Matsumoto–Ruano–Luo (arXiv version); IronMask (eprint);
+maskVerif (eprint); Cassiers–Standaert PINI (eprint); plus Cramer–Damgård–Maurer at `partial` for its
+abstract and multiplicativity summary only, which makes six. Everything else in this report is
+`secondary only` or `abstract/metadata only`, and each is marked in place. A reader should treat every
+"amount-only" verdict resting on an abstract as exactly that strong and no stronger.
+
+**Searched and found nothing.** No exact labelled compositional rule for linear gadgets, and no
+per-functional leakage witness through a composed encoding, was located in any of the six
+literatures at the depths recorded. This is a **survey observation, not a novelty verdict**, and it
+must not be quoted as one: the brief's framing is that prior art informs and never gates, and this
+report deliberately carries no priority claim. Any future novelty claim would need the owning paper's
+claim–proof–novelty ledger row, deeper reads, and the citation-graph width requirement of
+`notes/literature-audit-conventions.md`.
+
+**Could not access / not attempted — carried forward as open gaps.**
+
+- MathSciNet: **NOT COVERED** (institutional authentication, unreachable from this session).
+- zbMATH Open, OpenAlex, Crossref, Semantic Scholar: **not queried.** No forward-citation closure or
+  citing-set enumeration was attempted, because no deliverable here rests on an absence. The
+  three-service width requirement therefore did not bind; it would bind on any later novelty task.
+- Not opened, and named in the brief: Luo–Mitrpant–Vinck–Chen 2005; Wei 1991; Massey 1993 and 1995;
+  Ishai–Sahai–Wagner 2003; SILVER; VRAPS; Barthe et al. 2015 and 2016; Cai–Yeung 2002 and 2011;
+  Martínez-Peñas 2016 full texts; Herzberg et al. 1995; Tassa 2007; Brickell 1989; Simmons 1988;
+  Chen–Cramer–Goldwasser–de Haan–Vaikuntanathan 2007; Cascudo–Chen–Cramer–Xing 2009; Benhamouda
+  et al. 2018.
+- Cramer, Damgård, Nielsen, *Secure Multiparty Computation and Secret Sharing* (textbook): **not
+  consulted.**
+- The two tighter-composition works surfaced in search — "Unifying Freedom and Separation for Tight
+  Probing-Secure Composition" (CRYPTO 2023) and "Probing Security through Input-Output Separation and
+  Revisited Quasilinear Masking" (IACR TCHES) — were **not opened**, and are the first place a deeper
+  check of §3.4 question 3 should go.
+
+**Cached this session** (all `status: ok`, extraction by poppler `pdftotext`):
+
+| key | sha256 | pages |
+|---|---|---|
+| `eprint:2021/1671` | `f9b1b936d56256649c22fd564c80e921d866be3b5f6da25ea993b38d41d24f47` | 35 |
+| `eprint:2018/562` | `98b9c223fed48755678440d8aec22a4022a3aa3936767416c137928f83cfb3c0` | 20 |
+| `eprint:2018/438` | `b42403afae17e89aa04e13434d3eaf1c917f49eb0b623a47fbcefa066391b117` | 13 |
+
+Already present in the cache and used here: `10.1587/transfun.E95.A.2067`, `arXiv:1403.7985`,
+`10.1007/3-540-45539-6_22` (hashes recorded in place above).
+
+---
+
+## 10. The three things the product should absorb first
+
+1. **The masking-tool gadget corpora as the benchmark suite.** IronMask and maskVerif distribute
+   standard gadgets in machine-readable form with published verdicts. Ingesting that format gives the
+   privacy interface a test suite with known expected answers and makes every comparison against
+   NI/SNI/PINI concrete rather than rhetorical. This is the highest-value item because it is
+   engineering with no research risk.
+2. **Freshness as a discharged obligation, reported as a diagnostic.** Every tool in §3 takes
+   per-gadget fresh randomness as an axiom. Probe 1 §4 gives the two-block counterexample, §3.3's
+   Lemma 5 proves the error direction is always toward overstating privacy, and §7 gives the
+   mechanical repair. Verifying independence from the encoding and reporting shared randomness as a
+   rank drop is a capability no surveyed tool has, and it is the sharpest single product claim
+   available.
+3. **Speak the two input vocabularies the audiences already use.** The coset construction
+   `C_2 ⊊ C_1` from §2 and the multipartite level-and-threshold description from §5 are how the
+   secret-sharing community states a scheme; the secure regenerating-code constructions of §4 are
+   demo inputs whose published secrecy capacities are a free correctness check on the compiled
+   profile — and the profile then says strictly more than the capacity does.
 
 ---
