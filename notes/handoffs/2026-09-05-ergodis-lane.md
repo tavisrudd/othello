@@ -124,9 +124,14 @@ network coding, hierarchical access structures, composed-code schemes) is amount
 in composition, freshness is assumed everywhere and verified nowhere, and the IronMask/maskVerif
 gadget corpora are a ready benchmark
 ([report](../2026-09-06-c1070-probe0-prior-art-survey.md), read depths marked, no novelty verdict).
-In flight: probe 6 (transcript state). **Next**: unify `masked_leakage`, `hierarchical_leakage`,
-`leakage_structure`, and `vector_leakage` in `ergodis-private` around the coalition sweep; move the
-vector search onto `CappedAdditiveMonoid`. Open theorem: whether uniform unit costs force an
+Probe 6, transcript state: the adversary state is the observed row space and nothing coarser is
+exact against an unrestricted next observation, retired randomness contracts the state exactly,
+proactive refresh is that contraction, and mask reuse is a one-sided rank-drop alarm; analyzer
+`transcript-leakage-report` validated on share, repair, and refresh transcripts
+([report](../2026-09-06-c1070-probe6-transcript-state.md)). In flight: unification of the five
+leakage modules around the coalition sweep with vector costs on `CappedAdditiveMonoid`, and
+ingestion of the IronMask/maskVerif gadget corpora as a benchmark. **Next**: review both, then a
+closeout synthesis for C1070 and Tavis's call on what ships. Open theorem: whether uniform unit costs force an
 optimal leaked-subspace chain (measured on 1.4M instances, unproved).
 
 ### C985 — Ergodis exact algebraic optimization paper
