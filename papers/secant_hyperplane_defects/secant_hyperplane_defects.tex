@@ -1,0 +1,91 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=29mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\numberwithin{equation}{section}
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\PG}{\mathrm{PG}}
+\newcommand{\cH}{\mathcal H}
+\newcommand{\cS}{\mathcal S}
+\newcommand{\cY}{\mathcal Y}
+\newcommand{\binomtwo}[1]{\binom{#1}{2}}
+\DeclareMathOperator{\wt}{wt}
+\DeclareMathOperator{\supp}{supp}
+
+\title{Secant--hyperplane defects of complete caps}
+\author{Tavis Rudd}
+\date{September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A cap in \(\PG(d,q)\) is complete when every point off it lies on a
+secant.  We show that the overlap loss of a complete \(k\)-cap, the
+number \(\binom{k}{2}(q-1)-\theta_d+k\) of coincidences among the points
+its secants cover, is carried by every hyperplane in a prescribed
+amount: the loss inside a hyperplane meeting the cap in \(s\) points is
+the quadratic \(\binom{k}{2}-\theta_{d-1}+q\binom{s}{2}-(k-2)s\).  Since
+that quantity lies between zero and the total loss, the hyperplane
+sections of a complete cap have sizes in a finite admissible set, which
+near the counting bound is very small.  Feeding the admissible set into
+the hyperplane character equations, globally and through a fixed
+secant, gives integer feasibility conditions and a lower bound on the
+number of coplanar quadruples through every secant.  These exclude
+complete caps of size \(31\) in \(\PG(4,7)\), \(37\) in \(\PG(4,8)\),
+\(97\) in \(\PG(4,16)\), \(293\) in \(\PG(6,8)\), and \(387\) in
+\(\PG(6,9)\), each equal to the counting bound.  A formal model shows
+that the degree constraints on coplanar quadruples cannot by themselves
+force collisions on a positive proportion of secants, so the hyperplane
+constraint is an essential ingredient.  The identity extends to caps
+complete outside a prescribed set of holes.
+\end{abstract}
+
+\noindent\textbf{Keywords.} complete cap; hyperplane section; quasi-perfect
+code; covering radius; character equations; coplanar quadruple; free pair.
+
+\smallskip
+\noindent\textbf{2020 Mathematics Subject Classification.} 51E22, 51E21,
+94B65, 05B25.
+
+\input{sections/01-introduction}
+\input{sections/02-preliminaries}
+\input{sections/03-hyperplane-loss}
+\input{sections/04-secant-hyperplane-moments}
+\input{sections/05-integer-feasibility}
+\input{sections/06-coverage}
+\input{sections/07-exclusions}
+\input{sections/08-limits}
+\input{sections/09-conclusion}
+
+\section*{AI assistance disclosure}
+
+This project was developed with extensive assistance from OpenAI Codex and
+Anthropic Claude in proof exploration, literature research, exact computation,
+adversarial review, and drafting.  The author checked the arguments,
+computations, code, and cited sources, reviewed and edited all AI-assisted
+material, and assumes responsibility for all content.
+
+\footnotesize
+\raggedright
+\input{sections/bibliography}
+\end{document}

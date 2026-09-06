@@ -1,0 +1,102 @@
+\section{The hyperplane loss identity}
+\label{sec:hyperplane-loss}
+
+The identity is a count of secant--point incidences inside a hyperplane,
+with the cap points included at a fictitious multiplicity so that every
+secant contributes the same way.
+
+\begin{proof}[Proof of Theorem~\ref{thm:hyperplane-loss}]
+Extend the index to the cap points by \(r(a)=k-1\) for \(a\in A\), the
+number of secants through \(a\).  Every secant meets \(\Pi\) in exactly
+one point unless it lies in \(\Pi\), in which case it contributes
+\(q+1\) incidences, and the secants inside \(\Pi\) are the
+\(\binom{s}{2}\) pairs of \(A\cap\Pi\).  Hence
+\[
+ \sum_{x\in\Pi}r(x)=N+q\binomtwo{s}.
+\]
+Subtracting one for each of the \(\theta_{d-1}\) points of \(\Pi\), and
+then \(k-2\) for each of the \(s\) cap points, leaves
+\(\sum_{x\in\Pi\setminus A}(r(x)-1)=N+q\binom{s}{2}-\theta_{d-1}-(k-2)s\),
+which is~\eqref{eq:hyperplane-loss}.  If \(A\) is complete then every
+summand \(r(x)-1\) is nonnegative, so \(Q(s)\ge0\), and the summands over
+all of \(\PG(d,q)\setminus A\) add to \(\Lambda_0\)
+by~\eqref{eq:overlap-loss}, so \(Q(s)\le\Lambda_0\).
+\end{proof}
+
+Summing~\eqref{eq:hyperplane-loss} over all hyperplanes and using the
+character equations~\eqref{eq:character} returns
+\(\theta_{d-1}\sum_{x\notin A}(r(x)-1)=\theta_{d-1}\Lambda(A)\) on both
+sides, as it must; the content of the theorem is the distribution, not
+the total.  For \(d=2\) the hyperplanes are lines, \(s\le2\), and the
+identity reads \(Q(0)=N-q-1\), \(Q(1)=N-k-q+1\), \(Q(2)=N-2k+q+3\):
+a complete arc in \(\PG(2,q)\) has \(N\ge q+1\) with the loss on an
+external line equal to \(N-q-1\).  The planar case carries no new
+information.  For \(d\ge3\) the quadratic \(Q\) has an interior minimum
+near \(s=(k-2)/q+\tfrac12\), and the shape of the admissible set is
+governed by two numbers.
+
+\begin{lemma}[Shape of the admissible set]
+\label{lem:admissible-shape}
+Let \(A\) be a complete \(k\)-cap in \(\PG(d,q)\), \(d\ge3\).  If
+\(Q\) has real roots \(\sigma_1\le\sigma_2\), then every hyperplane
+section size lies in
+\[
+ \cS=\{s\le\sigma_1:Q(s)\le\Lambda_0\}\cup\{s\ge\sigma_2:Q(s)\le\Lambda_0\},
+\]
+two runs of consecutive integers, each with at most
+\(2+\sqrt{2\Lambda_0/q}\) elements; no section size lies strictly between
+the roots.  If \(Q\) has no real root, then \(\cS\) is the single run
+\(\{s:Q(s)\le\Lambda_0\}\).
+\end{lemma}
+
+\begin{proof}
+The vertex of \(Q\) is at \(s^*=\tfrac12+(k-2)/q\), and on each side of
+it \(Q\) is monotone, so each run is an interval of integers.  For
+\(s\ge s^*\) and \(j\ge0\),
+\(Q(s+j)-Q(s)=j\bigl(qs-(k-2)\bigr)+q\binom{j}{2}\ge q\binom{j}{2}\),
+and for \(s\le s^*\),
+\(Q(s-j)-Q(s)=j\bigl((k-2)-qs\bigr)+q\binom{j+1}{2}\ge q\binom{j}{2}\).
+If both endpoints of a run are admissible, the difference of their
+\(Q\)-values is at most \(\Lambda_0\), so \(q\binom{j}{2}\le\Lambda_0\)
+for the distance \(j\) between them.
+\end{proof}
+
+At the counting bound \(\Lambda_0<k(q-1)+1\), so each run has
+\(O(\sqrt k)\) elements, while the two runs are separated by the distance
+between the roots of \(Q\).  For the five parameter sets of
+Theorem~\ref{thm:exclusions} the runs have at most three elements and the
+gap between them is at least four; Table~\ref{tab:cases} lists them.
+
+\subsection{Prescribed holes}
+
+The identity is exact for every cap, so it can be applied when only part
+of the space must be covered.  Let \(\cH\) be a set of \(h\) points off
+\(A\), and call \(A\) complete outside \(\cH\) if every point outside
+\(A\cup\cH\) is covered; the notion is studied
+in~\cite{RuddSecantDefects}, where \(\cH\) is a conic, a quadric, or an
+arbitrary set.
+
+\begin{proposition}[Loss identity with holes]
+\label{prop:holes}
+Let \(A\) be a \(k\)-cap complete outside \(\cH\), \(|\cH|=h\), and let
+\(u\le h\) be the number of uncovered points.  Then for every hyperplane
+\(\Pi\),
+\[
+ -|\cH\cap\Pi|\le -\#\{x\in\cH\cap\Pi:r(x)=0\}\le Q(s_\Pi)\le\Lambda_0+u\le\Lambda_0+h .
+\]
+In particular every section size lies in
+\(\{s:-h\le Q(s)\le\Lambda_0+h\}\).
+\end{proposition}
+
+\begin{proof}
+In~\eqref{eq:hyperplane-loss} the summands \(r(x)-1\) are at least
+\(-1\), with equality exactly at uncovered points, all of which lie in
+\(\cH\); this gives the lower bounds.  The nonnegative summands over the
+whole space add to \(\Lambda(A)+u\) with \(\Lambda(A)\) as
+in~\eqref{eq:overlap-loss}, and \(\Lambda(A)=N(q-1)-(\theta_d-k-u)=\Lambda_0+u\).
+\end{proof}
+
+Every statement below that uses only the admissible set and the moment
+identities holds for caps complete outside \(\cH\) after replacing
+\(\Lambda_0\) by \(\Lambda_0+h\) and \(\cS\) by the wider set of the
+proposition.  We do not pursue the numerical consequences here.

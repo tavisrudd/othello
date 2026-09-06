@@ -1,0 +1,138 @@
+\section{Integer feasibility and local bounds}
+\label{sec:feasibility}
+
+For a complete cap the section sizes lie in the admissible set \(\cS\)
+of~\eqref{eq:admissible}.  Writing \(b_s\) for the number of hyperplanes
+with section size \(s\), the character equations~\eqref{eq:character}
+become a system of three linear equations in the unknowns
+\((b_s)_{s\in\cS}\), which must have a solution in nonnegative integers.
+
+\begin{proposition}[Global feasibility]
+\label{prop:global-feasibility}
+If \(A\) is a complete \(k\)-cap in \(\PG(d,q)\), then there are
+nonnegative integers \((b_s)_{s\in\cS}\) with
+\[
+ \sum_{s\in\cS}b_s=\theta_d,
+ \qquad
+ \sum_{s\in\cS}s\,b_s=k\,\theta_{d-1},
+ \qquad
+ \sum_{s\in\cS}\binomtwo{s}b_s=N\,\theta_{d-2}.
+\]
+\end{proposition}
+
+When \(\cS=\{s_1,s_2\}\) has two elements the first two equations
+determine \(b_{s_2}=(k\theta_{d-1}-s_1\theta_d)/(s_2-s_1)\), which must be
+an integer between \(0\) and \(\theta_d\), and the third equation must
+then hold as well.  This is the test that settles four of the five cases
+of Theorem~\ref{thm:exclusions}.
+
+The local version, through a fixed secant, is the same system with the
+counts of Theorem~\ref{thm:secant-hyperplane-moments}; its second moment
+is not fixed but is tied to \(T_\ell\).  Put
+\begin{equation}
+ t=\theta_{d-2},\qquad R=(k-2)\theta_{d-3},\qquad
+ C_0=\binomtwo{k-2}\theta_{d-4},\qquad D=q^{d-3},
+\label{eq:local-constants}
+\end{equation}
+and let \(\cS-2=\{s-2:s\in\cS,\ s\ge2\}\) be the admissible values of
+\(w_\Pi\).
+
+\begin{theorem}[Local bounds]
+\label{thm:local-bounds}
+Let \(A\) be a complete \(k\)-cap in \(\PG(d,q)\), \(d\ge3\), and let
+\(\ell\) be a secant.  Then there are nonnegative integers
+\((b_w)_{w\in\cS-2}\), the numbers of hyperplanes through \(\ell\) of each
+section size, with
+\begin{equation}
+ \sum_w b_w=t,\qquad \sum_w w\,b_w=R,\qquad
+ \sum_w\binomtwo{w}b_w=C_0+D\,T_\ell .
+\label{eq:local-system}
+\end{equation}
+Consequently, if \(P_{\min}\) and \(P_{\max}\) are the smallest and
+largest values of \(\sum_w\binom{w}{2}b_w\) over the nonnegative integer
+solutions of the first two equations that satisfy
+\(\sum_w\binom{w}{2}b_w\equiv C_0\pmod D\), then
+\begin{equation}
+ \max\Bigl\{0,\ \Bigl\lceil\frac{P_{\min}-C_0}{D}\Bigr\rceil\Bigr\}
+ \le T_\ell\le
+ \min\Bigl\{(q-1)(m-1),\ \Bigl\lfloor\frac{P_{\max}-C_0}{D}\Bigr\rfloor\Bigr\},
+\label{eq:local-bounds}
+\end{equation}
+and if the first two equations have no nonnegative integer solution, or
+no solution meets the congruence, then no such cap exists.
+\end{theorem}
+
+\begin{proof}
+The three equations are Theorem~\ref{thm:secant-hyperplane-moments}
+grouped by section size, and the support is \(\cS-2\) by
+Theorem~\ref{thm:hyperplane-loss}.  The bounds
+in~\eqref{eq:local-bounds} follow, the trivial upper bound
+\((q-1)(m-1)\) coming from~\eqref{eq:secant-collisions} and
+\(r(x)\le m\).
+\end{proof}
+
+The extrema \(P_{\min}\) and \(P_{\max}\) are the values of an integer
+program in at most \(|\cS|\) variables; for \(|\cS|\le3\) the solutions
+are enumerated directly, and in general a closed-form lower bound is
+available whenever the mean \(R/t\) falls into a gap of the support.
+
+\begin{lemma}[Bracket bound]
+\label{lem:bracket}
+Let \(W\) be a finite set of nonnegative integers and let \((b_w)_{w\in W}\)
+be nonnegative integers with \(\sum b_w=t\) and \(\sum w\,b_w=R\).  Let
+\(a\le b\) be elements of \(W\) with \(a\le R/t\le b\) and no element of
+\(W\) strictly between \(a\) and \(b\).  Then
+\begin{equation}
+ \sum_{w\in W}\binomtwo{w}b_w
+ =\frac{(a+b-1)R-abt}{2}+\frac12\sum_{w\in W}(w-a)(w-b)\,b_w,
+\label{eq:bracket-identity}
+\end{equation}
+where every summand of the last sum is nonnegative, and a summand with
+\(w\notin\{a,b\}\) is at least \((b-a+1)\,b_w\).
+\end{lemma}
+
+\begin{proof}
+For every integer \(w\),
+\(\binom{w}{2}=\tfrac12\bigl((a+b-1)w-ab\bigr)+\tfrac12(w-a)(w-b)\);
+multiply by \(b_w\) and sum.  Since \(W\) has no element strictly between
+\(a\) and \(b\), every \(w\in W\) satisfies \(w\le a\) or \(w\ge b\), so
+\((w-a)(w-b)\ge0\), and if \(w\ne a,b\) then one factor is at least
+\(1\) and the other at least \(b-a+1\).
+\end{proof}
+
+\begin{corollary}[Closed-form local bound]
+\label{cor:closed-form}
+In the setting of Theorem~\ref{thm:local-bounds}, let \(a\le b\) bracket
+\(R/t\) in \(\cS-2\) as in Lemma~\ref{lem:bracket} and put
+\[
+ \tau_0=\frac{(a+b-1)R-abt-2C_0}{2D}.
+\]
+Then \(T_\ell\ge\lceil\tau_0\rceil\) for every secant, and the number of
+hyperplanes through \(\ell\) whose section size is not \(a+2\) or \(b+2\)
+is at most \(2D(T_\ell-\tau_0)/(b-a+1)\).
+\end{corollary}
+
+\begin{proof}
+Apply Lemma~\ref{lem:bracket} to~\eqref{eq:local-system}:
+\(2D(T_\ell-\tau_0)=\sum_w(w-a)(w-b)b_w\ge0\), and the last sum is at
+least \((b-a+1)\) times the number of hyperplanes with \(w\notin\{a,b\}\).
+\end{proof}
+
+The second statement is a stability estimate: a secant whose collision
+count is close to \(\tau_0\) is contained almost only in hyperplanes of
+the two bracketing sizes.  When \(R/t\) is itself admissible the bracket
+degenerates to \(a=b\) and \(\tau_0=(t\binom{a}{2}-C_0)/D\), the balanced
+case.  The lower bound of Corollary~\ref{cor:closed-form} is what a cap
+must exhibit on \emph{every} secant; it is compared in
+Section~\ref{sec:coverage} with what the total loss can afford.
+
+\begin{remark}[One-sided version]
+\label{rem:one-sided}
+Both Theorem~\ref{thm:local-bounds} and Corollary~\ref{cor:closed-form}
+remain valid with \(\cS\) replaced by the larger set
+\(\cS_+=\{s:Q(s)\ge0\}\), which uses only the lower half of
+Theorem~\ref{thm:hyperplane-loss}.  The bracket then spans the gap
+between the roots of \(Q\) alone.  For the five cases of
+Theorem~\ref{thm:exclusions} this weaker support still gives a positive
+\(\tau_0\); see Table~\ref{tab:cases}.
+\end{remark}

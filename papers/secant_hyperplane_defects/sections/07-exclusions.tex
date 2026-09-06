@@ -1,0 +1,126 @@
+\section{Exclusions at the counting bound}
+\label{sec:exclusions}
+
+We first work one case by hand, then give the data for all five, and
+finally describe the exact scan that found them.
+
+\subsection{A complete 31-cap in \texorpdfstring{\(\PG(4,7)\)}{PG(4,7)}}
+
+Suppose \(A\) is a complete \(31\)-cap in \(\PG(4,7)\).  Then \(N=465\),
+\(\theta_3=400\), \(\theta_4=2801\), and
+\(\Lambda_0=465\cdot6-2801+31=20\); the counting bound is met with a slack
+of \(20\), so \(31\) is its smallest admissible value.  The hyperplane
+loss polynomial is
+\[
+ Q(s)=465-400+7\binomtwo{s}-29s=\tfrac12\bigl(7s^2-65s+130\bigr),
+\]
+with \(Q(0)=65\), \(Q(1)=36\), \(Q(2)=14\), \(Q(3)=-1\), \(Q(6)=-4\),
+\(Q(7)=9\), \(Q(8)=29\), and \(Q\) is decreasing before its vertex at
+\(s^*=4.64\) and increasing after.  The only values in \([0,20]\) are
+\(Q(2)=14\) and \(Q(7)=9\): every solid meets \(A\) in exactly \(2\) or
+exactly \(7\) points.
+
+\emph{Global route.}  With \(b_2\) solids of size \(2\) and \(b_7\) of
+size \(7\), the first two character equations read
+\(b_2+b_7=2801\) and \(2b_2+7b_7=31\cdot400=12400\), so
+\(5b_7=6798\), which is not divisible by \(5\).  No such cap exists.
+
+\emph{Local route.}  Fix a secant \(\ell\).  The \(t=\theta_2=57\)
+solids through \(\ell\) have \(w_\Pi\in\{0,5\}\) with
+\(\sum w_\Pi=R=29\cdot8=232\), and \(232\) is not divisible by \(5\); the
+local system is infeasible as well.  Using only the lower half
+\(Q(s)\ge0\), the section sizes lie in \(\{0,1,2\}\cup\{7,\dots,31\}\),
+so \(w_\Pi\in\{0\}\cup\{5,\dots,29\}\) and the mean \(R/t=4.07\) is
+bracketed by \(a=0\) and \(b=5\).  With \(C_0=\binom{29}{2}=406\) and
+\(D=7\), Corollary~\ref{cor:closed-form} gives
+\(\tau_0=(4\cdot232-812)/14=58/7\), so \(T_\ell\ge9\) on every secant.
+Theorem~\ref{thm:secant-local} with \(m=15\) then demands
+\(\Lambda_0\ge465\,\varphi_{15}(9)=465\cdot\tfrac9{10}=418.5\), against
+\(\Lambda_0=20\).  Either route proves \(t_2(4,7)\ge32\).
+
+\subsection{The five cases}
+
+Table~\ref{tab:cases} gives the same data for all five parameter sets.
+In each, \(k\) is the smallest integer satisfying the counting
+bound~\eqref{eq:counting-bound}.  The global column reports the
+divisibility obstruction in the two-element cases; the local columns
+report the one-sided bracket bound and the resulting coverage demand,
+which exceeds \(\Lambda_0\) by a wide margin in every case.
+
+\begin{table}[ht]
+\centering
+\caption{Complete caps excluded at the counting bound.  \(\cS\) is the
+admissible set of hyperplane section sizes; the global column gives the
+integer that the two-size character equations require to be divisible by
+\(s_2-s_1\); \(a,b\) bracket the mean \(R/t\) in the one-sided support
+\(\cS_+-2\); \(\beta=\lceil\tau_0\rceil\) is the resulting lower bound on
+every \(T_\ell\); the last column is the coverage demand
+\(N\varphi_m(\beta)\), to be compared with \(\Lambda_0\).}
+\label{tab:cases}
+\small
+\begin{tabular}{@{}rrrrlrrrrr@{}}
+\toprule
+\(d\) & \(q\) & \(k\) & \(\Lambda_0\) & \(\cS\) & global & \(a,b\) & \(\tau_0\) & \(\beta\) & \(N\varphi_m(\beta)\)\\
+\midrule
+4 & 7  & 31  & 20  & \(\{2,7\}\)              & \(6798/5\)     & \(0,5\)   & \(58/7\)      & 9  & \(418.5\)\\
+4 & 8  & 37  & 18  & \(\{3,7\}\)              & \(7602/4\)     & \(1,5\)   & \(5/4\)       & 2  & \(444\)\\
+4 & 16 & 97  & 32  & \(\{4,9\}\)              & \(144173/5\)   & \(2,7\)   & \(21/4\)      & 6  & \(3990.9\)\\
+6 & 8  & 293 & 146 & \(\{29,30,31,43,44\}\)   & ---            & \(29,41\) & \(5009/256\)  & 20 & \(40741.0\)\\
+6 & 9  & 387 & 44  & \(\{37,50\}\)            & \(3587183/13\) & \(35,48\) & \(16940/729\) & 24 & \(71703.4\)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{proof}[Proof of Theorem~\ref{thm:exclusions}]
+For \(\PG(4,7)\) see above.  For \(\PG(4,8)\), \(\PG(4,16)\), and
+\(\PG(6,9)\) the admissible set has two elements \(s_1<s_2\), and
+\((s_2-s_1)b_{s_2}=k\theta_{d-1}-s_1\theta_d\) is the fraction shown in the
+global column, which is not an integer; Proposition~\ref{prop:global-feasibility}
+excludes the cap.  For \(\PG(6,8)\) the admissible set is
+\(\{29,30,31,43,44\}\), so \(w_\Pi\in\{27,28,29,41,42\}\) and the local
+system~\eqref{eq:local-system} is feasible, but the mean
+\(R/t=170235/4681=36.37\) is bracketed by \(a=29\) and \(b=41\) with no
+admissible value between them;
+Corollary~\ref{cor:closed-form} gives \(\tau_0=5009/256\), so every
+secant has \(T_\ell\ge20\), and Theorem~\ref{thm:secant-local} with
+\(N=42778\), \(m=146\) demands \(\Lambda_0\ge42778\cdot\tfrac{20}{21}>40740\)
+against \(\Lambda_0=146\).  In the four two-element cases the one-sided
+local route of Table~\ref{tab:cases} gives an independent proof.  The
+arithmetic in the table is replayed by the exact-arithmetic script
+described below.
+\end{proof}
+
+\subsection{The scan and where it stops}
+
+The tests of Sections~\ref{sec:feasibility} and~\ref{sec:coverage} are
+finite for every \((d,q,k)\).  A deterministic script, using only exact
+integer and rational arithmetic, applies them to every prime power
+\(q\le128\) for \(d=3\), \(q\le64\) for \(d=4\), \(q\le16\) for \(d=5\),
+and \(q\le9\) for \(d=6\), and to every \(k\) from the counting bound to
+twelve above it.  For each \((d,q,k)\) it computes \(\Lambda_0\),
+\(\cS\), and the constants~\eqref{eq:local-constants}; decides
+feasibility of the first two equations of~\eqref{eq:local-system} by a
+dynamic programme over the gaps of \(\cS-2\); solves the global and local
+systems exactly, with the congruence, when \(|\cS|\le3\); and evaluates
+the bracket bound, the budget test~\eqref{eq:budget}, and the
+ceiling~\eqref{eq:ceiling}, in both the two-sided and the one-sided
+form.  Its certificate records, for every \((d,q)\), the counting bound,
+every excluded \(k\), and the first \(k\) surviving all tests.
+
+The outcome in dimension at least four is exactly
+Theorem~\ref{thm:exclusions}: the five parameter sets above are the only
+ones in the scanned domain at which the smallest excluded \(k\) equals the
+counting bound, and in each of them \(k+1\) survives every test.  (Test
+firings above the largest cap of a space, for \(q=2\), are not gains and
+are listed separately in the certificate.)  In dimension three the scan
+reproduces, for most \(q\), the one-step gain of the secant-local bound
+of~\cite[Section~5]{RuddSecantDefects}; in \(\PG(3,7)\) the global
+divisibility test excludes \(k=12\), where that bound gives \(13\).  The
+limits of the domain in dimensions five and six are set by the running
+time of the dynamic programme, not by any mathematical stop.  The script,
+its certificate, and the SHA-256 digest of the certificate are part of
+the paper's repository; the replay command is in its verification
+README.  None of the exclusions depends on the scan: each is a hand
+calculation of the kind shown for \(\PG(4,7)\), and the script's role is
+to replay them and to establish the negative statement about the rest of
+the domain.

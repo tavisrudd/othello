@@ -1,0 +1,111 @@
+\section{Caps, secants, and two families of identities}
+\label{sec:preliminaries}
+
+Throughout, \(A\) is a \(k\)-cap in \(\PG(d,q)\) with \(k\ge4\), and
+\(d\ge3\) except where \(d\ge2\) is stated.  We write
+\(\theta_j=(q^{j+1}-1)/(q-1)\) for the number of points of \(\PG(j,q)\),
+with \(\theta_j=0\) for \(j<0\), and put
+\[
+ N=\binomtwo{k},\qquad m=\lfloor k/2\rfloor .
+\]
+A \emph{secant} is a line meeting \(A\) in two points; there are \(N\) of
+them, and each carries \(q-1\) points off \(A\).  For \(x\notin A\) the
+\emph{index} \(r(x)\) is the number of secants through \(x\); the
+\emph{covered} points are those with \(r(x)\ge1\), and \(A\) is complete
+exactly when every point off \(A\) is covered.  Two secants through a
+common point \(x\notin A\) have four distinct endpoints, since three cap
+points are never collinear, so \(r(x)\le m\).
+
+Counting secant--point incidences,
+\begin{equation}
+ \sum_{x\notin A}r(x)=N(q-1),
+\label{eq:first-moment}
+\end{equation}
+and writing \(Y\) for the set of covered points, the \emph{overlap loss}
+\begin{equation}
+ \Lambda(A)=\sum_{x\in Y}\bigl(r(x)-1\bigr)=N(q-1)-|Y|
+\label{eq:overlap-loss}
+\end{equation}
+is nonnegative, equals \(\Lambda_0=N(q-1)-\theta_d+k\) when \(A\) is
+complete, and exceeds \(\Lambda_0\) otherwise, by exactly the number of
+uncovered points.  The counting bound~\eqref{eq:counting-bound} is the
+statement \(\Lambda_0\ge0\).
+
+\subsection{Coplanar quadruples through a secant}
+
+Let \(c_4(A)\) be the number of four-subsets of \(A\) contained in a
+plane.  For a secant \(\ell\) with endpoints \(a,b\) put
+\[
+ T_\ell=\#\bigl\{B\subseteq A:|B|=4,\ a,b\in B,\ B\text{ coplanar}\bigr\}.
+\]
+The \(\theta_{d-2}\) planes through \(\ell\) partition \(A\setminus\{a,b\}\);
+if the plane \(\pi\) contains \(z_\pi\) of these points then
+\(\{a,b,c,d\}\) is coplanar exactly when \(c\) and \(d\) lie in the same
+plane through \(\ell\), so
+\begin{equation}
+ T_\ell=\sum_{\pi\supset\ell}\binomtwo{z_\pi},
+ \qquad
+ \sum_{\pi\supset\ell}z_\pi=k-2,
+ \qquad
+ \sum_{\ell}T_\ell=6\,c_4(A).
+\label{eq:pencil}
+\end{equation}
+Two secants with disjoint endpoints meet if and only if their four
+endpoints are coplanar, and then they meet at a point off \(A\).  Hence
+\(T_\ell\) also counts the secants meeting \(\ell\) outside \(A\), and a
+point \(x\in\ell\setminus A\) accounts for \(r(x)-1\) of them:
+\begin{equation}
+ T_\ell=\sum_{x\in\ell\setminus A}\bigl(r(x)-1\bigr).
+\label{eq:secant-collisions}
+\end{equation}
+These identities are from~\cite[Section~5]{RuddSecantDefects}, where a
+lower bound on every \(T_\ell\) is converted into a lower bound on
+\(\Lambda(A)\); we recall that conversion in Section~\ref{sec:coverage}.
+A pair \(\{a,b\}\) with \(T_{ab}=0\) is one such that every plane through
+\(a\) and \(b\) contains at most one further cap point, a \emph{free
+pair} in the sense of Farr and
+Lison\v{e}k~\cite{FarrLisonek2006a,FarrLisonek2006}.
+
+\subsection{Character equations}
+
+For a hyperplane \(\Pi\) write \(s_\Pi=|A\cap\Pi|\).  Counting the
+hyperplanes through no point, one point, and two points of \(A\) gives
+the classical character equations
+\begin{equation}
+ \sum_{\Pi}1=\theta_d,
+ \qquad
+ \sum_{\Pi}s_\Pi=k\,\theta_{d-1},
+ \qquad
+ \sum_{\Pi}\binomtwo{s_\Pi}=N\,\theta_{d-2},
+\label{eq:character}
+\end{equation}
+the sums running over all hyperplanes; the third uses that two points
+span a line, which lies in \(\theta_{d-2}\) hyperplanes.  These hold for
+every point set and are the standard starting point for the study of
+intersection numbers.
+
+\subsection{The coding dictionary}
+
+A complete cap spans \(\PG(d,q)\), since a cap inside a hyperplane covers
+no point outside it.  Take a generator matrix \(G\) with the \(k\) points
+of \(A\) as columns and let \(C_A\) be its row space, a projective
+\([k,d+1]_q\) code.  Its codewords are the linear functionals restricted
+to \(A\), so they correspond to hyperplanes, and the codeword attached to
+\(\Pi\) has weight \(k-s_\Pi\).  The dual code \(C_A^\perp\) has minimum
+distance at least four because no three columns are dependent, and its
+weight-four words are the dependencies among coplanar quadruples: each
+quadruple contributes \(q-1\) words with all four coefficients nonzero,
+and conversely.  Completeness of \(A\) says that every vector of
+\(\F_q^{d+1}\) is a combination of at most two columns of \(G\), that is,
+that \(C_A^\perp\) has covering radius two; a linear code with minimum
+distance four and covering radius two is quasi-perfect.  Thus complete
+\(k\)-caps in \(\PG(d,q)\) are exactly the parity-check matrices of
+quasi-perfect \([k,k-d-1,4]_q\) codes, with the two exceptions of the
+\(5\)-cap in \(\PG(3,2)\) and the \(11\)-cap in \(\PG(4,3)\), whose codes
+are perfect with minimum distance
+five~\cite{DavydovFainaMarcuginiPambianco2017}.
+In this dictionary \(\Lambda_0\) is the excess of the sphere-covering
+count for radius two, the admissible set~\eqref{eq:admissible} is a
+restriction on the weight distribution of \(C_A\), and
+Theorem~\ref{thm:secant-hyperplane-moments} concerns the weight
+distribution of \(C_A\) shortened at the two coordinates of a secant.

@@ -1,0 +1,19 @@
+# Claim, proof, and novelty ledger
+
+This is the owning surface for priority language in *Secant–hyperplane
+defects of complete caps*.  No manuscript, README, snapshot, or public
+summary may strengthen these entries independently.
+
+| Claim family | Proof status | Literature posture | Manuscript action |
+|---|---|---|---|
+| Hyperplane loss identity `thm:hyperplane-loss` | Printed elementary proof: extended secant multiplicities summed over a hyperplane, then subtraction of the all-one and cap-point vectors. Checked by hand at intake and again while drafting | The lower inequality `Q(s) ≥ 0` is the hyperplane-local form of the classical covering count; it was not located as a stated inequality in the recorded audit, and is expected to be folklore. The upper inequality `Q(s) ≤ Λ_0` and the admissible set were not located anywhere. MathSciNet, Google Scholar, Hirschfeld–Thas *General Galois Geometries*, and the paywalled Davydov et al. 2009 and Giulietti 2013 surveys are uncovered | State the lower half as expected folklore and the pair as the ingredient not found; keep “to our knowledge” wording; no “first” claim for the lower half |
+| Secant–hyperplane moments `thm:secant-hyperplane-moments` | Printed geometric proof by the plane-versus-solid dichotomy; consistency with the pencil identity at `d = 3` checked | Classical in content: the first two Pless power moments of the cap code shortened at two coordinates. Counting over hyperplanes through a fixed plane appears in Thas (arXiv:1710.02512). No located source states the identity through a secant with `T_ℓ` isolated | Present as the standard character equations restricted to a pencil, credit Pless and Thas, claim only the use |
+| Local bounds and bracket bound `thm:local-bounds`, `lem:bracket`, `cor:closed-form` | Printed proofs; the bracket identity is a one-line polynomial identity | Integer-envelope method of the author's Integral Secant Arcs paper on a new degree sequence. No priority claim beyond the application | Infrastructure; no novelty adjective |
+| Exclusions `thm:exclusions` | Each case is a hand calculation reproduced in Section 7 and Table 1; the script replays all five and the scan | No published bound above the counting bound for `t_2(d,q)`, `d ≥ 4`, was located (C1075 audit: OpenAlex, Crossref, arXiv, zbMATH Open; three primary introductions state the trivial bound as current). No prior divisibility or integer-feasibility exclusion of a counting-bound cap size located. Coverage gaps as above | Claim “we found no earlier … exclusion of a counting-bound size for a complete cap in `PG(d,q)` with `d ≥ 4`” with the audit pointer; state that the numbers remain far from the smallest known caps |
+| Degree-only countermodel `prop:degree-countermodel` | Printed construction (edge-disjoint `K_4` packing); greedy bound `k(k−1)/72` verified by hand | A statement about formal incidence data, not about caps; no literature claim | Present as a negative structural statement about the proof method |
+| Perfect-code caps (Section 8.2) | Uses Pavese, Proposition 3.1, at its true strength: classification of the equality cases of his counting bound for 4-general sets; the manuscript adds the observation that a complete cap with `c_4 = 0` has `Λ_0 = 0` and hence meets that bound with equality | Pavese's tables show complete 4-general sets (maximal as 4-general sets) exist in many parameters; the manuscript says so and distinguishes them from complete caps | No classification claim beyond Pavese's |
+| Prescribed holes `prop:holes` | Printed proof | Extension of the identity; the notion of completeness outside a hole set is from the author's Secant Defects paper | No novelty claim; numerical consequences not pursued |
+
+The paper-local `literature-audit.md` records the search depth, per-source
+read markers, and the remaining database gaps.  The standalone exporter
+excludes both this ledger and that audit as internal research records.

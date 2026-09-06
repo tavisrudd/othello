@@ -1,0 +1,72 @@
+\section{From collision counts to coverage}
+\label{sec:coverage}
+
+A lower bound on every \(T_\ell\) is a lower bound on how many secants
+each secant meets.  Each meeting costs coverage, and the cost is smallest
+when the meetings on a secant are concentrated at few points of high
+index.  The exact minimum cost is the following envelope
+from~\cite[Section~5]{RuddSecantDefects}; we include the short proof.
+
+For \(m\ge2\) and an integer \(T\ge0\) write \(T=j(m-1)+\rho\) with
+\(0\le\rho<m-1\) and put
+\begin{equation}
+ \varphi_m(T)=j\,\frac{m-1}{m}+\frac{\rho}{\rho+1}.
+\label{eq:phi}
+\end{equation}
+Thus \(\varphi_m(T)=T/(T+1)\) for \(T\le m-1\), and
+\(\varphi_m\) is nondecreasing with
+\(\varphi_m(T)\ge\max\{T/m,\,T/(T+1)\}\).
+
+\begin{theorem}[Secant-local coverage bound]
+\label{thm:secant-local}
+For every \(k\)-cap \(A\) in \(\PG(d,q)\),
+\[
+ \Lambda(A)\ge\sum_{\ell}\varphi_m(T_\ell),
+\]
+the sum running over the secants of \(A\).  In particular a complete cap
+on all of whose secants \(T_\ell\ge\beta\) satisfies
+\(\Lambda_0\ge N\varphi_m(\beta)\).
+\end{theorem}
+
+\begin{proof}
+Distribute the loss over the secants: a covered point of index \(r\)
+gives \((r-1)/r\) to each of its \(r\) secants, so
+\(\Lambda(A)=\sum_\ell L_\ell\) with
+\(L_\ell=\sum_{x\in\ell\setminus A}(1-1/r(x))\).  On a fixed secant the
+indices are integers in \([1,m]\) with \(\sum(r(x)-1)=T_\ell\)
+by~\eqref{eq:secant-collisions}.  The function \(r\mapsto1-1/r\) is
+concave, so the minimum of \(L_\ell\) over real vectors with these
+constraints is attained at a vertex of the constraint polytope, where at
+most one coordinate lies strictly between \(1\) and \(m\).  Coordinates
+equal to \(1\) contribute nothing, \(j\) coordinates equal to \(m\)
+contribute \(j(m-1)/m\) and use \(j(m-1)\) of the total, and the remaining
+coordinate \(\rho+1\) contributes \(\rho/(\rho+1)\); so
+\(L_\ell\ge\varphi_m(T_\ell)\).  The last statement uses monotonicity of
+\(\varphi_m\) and \(\Lambda(A)=\Lambda_0\) for a complete cap.
+\end{proof}
+
+Combined with Corollary~\ref{cor:closed-form} this gives the second
+exclusion test: a complete cap must satisfy
+\begin{equation}
+ N\varphi_m\bigl(\lceil\tau_0\rceil\bigr)\le\Lambda_0 .
+\label{eq:budget}
+\end{equation}
+Near the counting bound the left side is of order \(N\) as soon as
+\(\tau_0>0\), while the right side is at most \(k(q-1)\), so the test is
+decisive whenever the admissible support has a gap around the mean.
+A gap is the typical situation only at the counting bound itself; see
+Section~\ref{sec:limits}.
+
+The collisions on one secant are also bounded above by the total loss,
+because the planes through the secant carry planar arcs whose own losses
+add.  The plane-fan bound of~\cite[Section~5]{RuddSecantDefects} states
+that every secant of a \(k\)-cap in \(\PG(d,q)\), \(d\ge3\), satisfies
+\(\Lambda(A)\ge2T_\ell+2T_\ell^2/(k-2)\), so for a complete cap
+\begin{equation}
+ T_\ell\le U:=\Bigl\lfloor\tfrac12\bigl(\sqrt{(k-2)^2+2(k-2)\Lambda_0}-(k-2)\bigr)\Bigr\rfloor .
+\label{eq:ceiling}
+\end{equation}
+A lower bound \(\lceil\tau_0\rceil>U\) would be a third exclusion test.
+In the scan of Section~\ref{sec:exclusions} it never fires where the
+first two do not, and we record it only for completeness of the
+certificate.

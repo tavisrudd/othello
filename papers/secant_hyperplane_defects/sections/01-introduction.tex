@@ -1,0 +1,191 @@
+\section{Introduction}
+\label{sec:introduction}
+
+A \(k\)-cap in the projective space \(\PG(d,q)\) over the field of order
+\(q\) is a set of \(k\) points, no three collinear.  A line meeting the cap
+in two points is a secant, and the cap is complete if every point off it
+lies on a secant, that is, if it is maximal under inclusion.  The smallest
+size of a complete cap in \(\PG(d,q)\) is denoted \(t_2(d,q)\).  Counting
+the points that the \(\binom{k}{2}\) secants can cover gives the classical
+lower bound
+\begin{equation}
+ \binomtwo{k}(q-1)+k\ge\theta_d,
+ \qquad
+ \theta_j=\frac{q^{j+1}-1}{q-1},
+\label{eq:counting-bound}
+\end{equation}
+so \(t_2(d,q)\ge\sqrt2\,q^{(d-1)/2}\) up to lower-order terms.  In the
+plane this bound has been improved by Segre's lemma of
+tangents~\cite{Segre1959,Polverino1999}; in \(\PG(3,q)\) a secant-local
+count improves the additive constant~\cite{RuddSecantDefects}; for
+\(d\ge4\) the literature quotes~\eqref{eq:counting-bound} as the lower
+bound, and the exact value of \(t_2(d,q)\) for \(d\ge3\) is known only for
+very small \(q\)~\cite{DavydovFainaMarcuginiPambianco2017,
+BartoliDavydovKreshchukMarcuginiPambianco2016,BartoliFainaMarcuginiPambianco2017}.
+Complete caps are the same objects as parity-check matrices of
+quasi-perfect linear codes of minimum distance four and covering radius
+two, and \(t_2(d,q)\) is the shortest length of such a code of
+codimension \(d+1\)~\cite{DavydovFainaMarcuginiPambianco2017}.
+
+This paper adds one constraint to the counting argument and follows it to
+its finite consequences.  The counting bound has a slack, the
+\emph{overlap loss}
+\begin{equation}
+ \Lambda_0=\binomtwo{k}(q-1)-\theta_d+k,
+\label{eq:loss}
+\end{equation}
+which counts, with multiplicity, the points covered by more than one
+secant.  The observation is that this slack is not free to distribute:
+every hyperplane must carry a prescribed share of it.
+
+\begin{theorem}[Hyperplane loss identity]
+\label{thm:hyperplane-loss}
+Let \(A\) be a \(k\)-cap in \(\PG(d,q)\), \(d\ge2\), and for a point
+\(x\notin A\) let \(r(x)\) be the number of secants of \(A\) through
+\(x\).  For every hyperplane \(\Pi\) with \(|A\cap\Pi|=s\),
+\begin{equation}
+ \sum_{x\in\Pi\setminus A}\bigl(r(x)-1\bigr)=Q(s),
+ \qquad
+ Q(s)=\binomtwo{k}-\theta_{d-1}+q\binomtwo{s}-(k-2)s.
+\label{eq:hyperplane-loss}
+\end{equation}
+If \(A\) is complete then \(0\le Q(s)\le\Lambda_0\) for every hyperplane
+section size \(s\).
+\end{theorem}
+
+The lower inequality is the counting bound~\eqref{eq:counting-bound}
+applied inside the hyperplane; the upper inequality says that a
+hyperplane cannot carry more loss than the whole space has.  Together they
+confine the section sizes of a complete cap to the \emph{admissible set}
+\begin{equation}
+ \cS=\{s:0\le Q(s)\le\Lambda_0\}.
+\label{eq:admissible}
+\end{equation}
+Since \(Q\) is a quadratic in \(s\) with leading coefficient \(q/2\), the
+admissible set consists of at most two short runs of integers around the
+roots of \(Q\), and when \(\Lambda_0\) is small, which is exactly the
+situation at the counting bound, it can have two elements.  A complete
+\(31\)-cap in \(\PG(4,7)\), for instance, would have \(\Lambda_0=20\) and
+would meet every hyperplane in \(2\) or \(7\) points.
+
+Section sizes of a cap are tied to its parameters by the character
+equations, the three moment identities obtained by counting hyperplanes,
+point--hyperplane incidences, and pair--hyperplane incidences.  Restricting
+those equations to the admissible set gives a finite integer system, and
+its infeasibility excludes the cap.  The same equations restricted to the
+hyperplanes through a fixed secant \(\ell\) bring in a second invariant,
+the number \(T_\ell\) of coplanar four-subsets of \(A\) containing both
+endpoints of \(\ell\), which measures how many other secants \(\ell\)
+meets.
+
+\begin{theorem}[Secant--hyperplane moments]
+\label{thm:secant-hyperplane-moments}
+Let \(A\) be a \(k\)-cap in \(\PG(d,q)\), \(d\ge3\), let \(\ell\) be a
+secant, and for each hyperplane \(\Pi\supset\ell\) put
+\(w_\Pi=|A\cap\Pi|-2\).  Then
+\begin{equation}
+ \#\{\Pi\supset\ell\}=\theta_{d-2},
+ \qquad
+ \sum_{\Pi\supset\ell}w_\Pi=(k-2)\theta_{d-3},
+ \qquad
+ \sum_{\Pi\supset\ell}\binomtwo{w_\Pi}=\binomtwo{k-2}\theta_{d-4}+q^{d-3}\,T_\ell .
+\label{eq:moments-intro}
+\end{equation}
+\end{theorem}
+
+For a complete cap the \(w_\Pi\) lie in \(\cS-2\).  Fixing the count and
+the first moment and minimizing the second over that support gives an
+unconditional lower bound on \(T_\ell\) for every secant
+(Theorem~\ref{thm:local-bounds}), and the secant-local coverage bound
+of~\cite{RuddSecantDefects} converts a lower bound on every \(T_\ell\)
+into a lower bound on \(\Lambda_0\).  Both routes close finitely.
+
+\begin{theorem}[Exclusions]
+\label{thm:exclusions}
+There is no complete cap of size \(31\) in \(\PG(4,7)\), \(37\) in
+\(\PG(4,8)\), \(97\) in \(\PG(4,16)\), \(293\) in \(\PG(6,8)\), or \(387\)
+in \(\PG(6,9)\).  Hence
+\[
+ t_2(4,7)\ge32,\quad t_2(4,8)\ge38,\quad t_2(4,16)\ge98,\quad
+ t_2(6,8)\ge294,\quad t_2(6,9)\ge388 .
+\]
+\end{theorem}
+
+Each excluded size is the smallest \(k\) satisfying~\eqref{eq:counting-bound},
+so each bound improves the counting bound by one.  In four of the five
+cases the admissible set has two elements and the global character
+equations are already inconsistent over it; the fifth, \(\PG(6,8)\), has
+five admissible sizes separated by a gap of eleven around the mean, and is
+excluded by the coverage route.  A deterministic exact-arithmetic scan
+over \(d\le6\) and small \(q\) (Section~\ref{sec:exclusions}) finds no
+other gain over the counting bound in dimension at least four, and never a
+gain of more than one.  Section~\ref{sec:limits} explains why: one step
+above the counting bound \(\Lambda_0\) grows by about \(kq\), the
+admissible set becomes an interval, and every test is satisfied.  The value
+of Theorem~\ref{thm:exclusions} is therefore the mechanism rather than the
+numbers, which remain far from the smallest known complete caps
+(\(56\) points in \(\PG(4,7)\)~\cite{BartoliDavydovKreshchukMarcuginiPambianco2016}).
+
+The second contribution is negative.  The companion
+paper~\cite{RuddSecantDefects} asks whether a positive proportion of the
+secants of a complete cap in \(\PG(d,q)\), \(d\ge4\), must carry
+\(T_\ell\ge cq\) collisions, which would improve the counting bound at the
+scale \(q^{(d-3)/2}\).  Proposition~\ref{prop:degree-countermodel}
+constructs formal collision data satisfying every constraint that the
+coplanar-quadruple counts, the secant--point incidences, and the
+plane-pencil identities impose, in which only \(o\bigl(\binom{k}{2}\bigr)\)
+secants meet any other.  Any proof of such a proportion must use an
+ambient constraint; Theorem~\ref{thm:hyperplane-loss} is one.
+
+\subsection*{Related work}
+
+The global counting bound~\eqref{eq:counting-bound} and the dictionary
+between complete caps and quasi-perfect codes are standard; the papers of
+Bartoli, Davydov, Faina, Kreshchuk, Marcugini, and Pambianco cited above
+collect the known sizes and constructions of small complete caps and
+quote \(\sqrt2\,q^{(d-1)/2}\) as the lower bound for \(d\ge3\).  The
+character equations for hyperplane sections are classical; in coding
+terms they are the first two power moment identities of
+Pless~\cite{Pless1963} for the projective code generated by the cap, and
+Theorem~\ref{thm:secant-hyperplane-moments} is the same identity for the
+code shortened at two coordinates.  Counting cap points over the
+hyperplanes through a fixed subspace is a standard device, used for
+instance by Thas over the hyperplanes through a plane to bound the
+largest caps of \(\PG(n,q)\), \(q\) even~\cite{Thas2017}.  Divisibility
+conditions on hyperplane intersection numbers are the subject of the
+theory of divisible codes~\cite{Kurz2021}; the divisibility used here is
+imposed by completeness rather than assumed.  Wehlau classifies the
+complete caps of \(\PG(n,2)\) that miss a codimension-two subspace
+through their hyperplane intersection sizes~\cite{Wehlau2004}, the
+nearest instance we know of constraining a complete cap by its hyperplane
+sections; the mechanism there is the binary structure, not a loss count.
+Pairs with \(T_\ell=0\) are the free pairs of Farr and
+Lison\v{e}k~\cite{FarrLisonek2006a,FarrLisonek2006}, and caps in which
+every pair is free are the \(4\)-general sets of
+Pavese~\cite{Pavese2025}; both notions reappear in
+Section~\ref{sec:limits}.  The overlap loss \(\Lambda_0\) and the
+secant-local statistics \(T_\ell\) and \(\varphi_m\) are taken
+from~\cite{RuddSecantDefects}, and the integer-envelope viewpoint from
+\cite{RuddIntegralSecant}; the present paper differs from both in that its
+degree sequences are hyperplane section sizes rather than secant
+occupancies or point--block incidences.  The lower half of
+Theorem~\ref{thm:hyperplane-loss} is a one-line consequence of
+completeness that we expect to be folklore, though we did not find it
+stated; we found no earlier statement of the upper half, of the
+admissible set, or of any exclusion of a counting-bound size for a
+complete cap in \(\PG(d,q)\) with \(d\ge4\).  The searches and sources
+behind that sentence are recorded with the paper's repository.
+
+\subsection*{Organization}
+
+Section~\ref{sec:preliminaries} fixes notation and recalls the pencil and
+character identities.  Sections~\ref{sec:hyperplane-loss}
+and~\ref{sec:moments} prove Theorems~\ref{thm:hyperplane-loss}
+and~\ref{thm:secant-hyperplane-moments}, including the version for caps
+complete outside a prescribed set of holes.
+Section~\ref{sec:feasibility} derives the integer feasibility conditions
+and the local bounds on \(T_\ell\), Section~\ref{sec:coverage} converts
+them into coverage bounds, and Section~\ref{sec:exclusions} proves
+Theorem~\ref{thm:exclusions} and describes the scan.
+Section~\ref{sec:limits} gives the formal countermodel and the reasons the
+method stops one step above the counting bound.

@@ -1,0 +1,63 @@
+\section{Secant--hyperplane moments}
+\label{sec:moments}
+
+The character equations~\eqref{eq:character} count hyperplanes through
+zero, one, and two cap points.  Restricting them to the hyperplanes
+through a fixed secant leaves the same three counts, but the pairs of
+further cap points now split according to whether they are coplanar with
+the secant, and that is where \(T_\ell\) enters.
+
+\begin{proof}[Proof of Theorem~\ref{thm:secant-hyperplane-moments}]
+Fix the secant \(\ell=ab\).  The hyperplanes through \(\ell\) correspond
+to the hyperplanes of the quotient space \(\PG(d-2,q)\), so there are
+\(\theta_{d-2}\) of them.  A further cap point \(u\) spans with \(\ell\) a
+plane, which lies in \(\theta_{d-3}\) hyperplanes; summing over the
+\(k-2\) choices of \(u\) gives the first moment.  For a pair
+\(\{u,v\}\subseteq A\setminus\{a,b\}\), the span of \(\ell,u,v\) is a
+plane when \(\{a,b,u,v\}\) is coplanar and a solid otherwise, since no
+three of the four points are collinear.  A plane lies in
+\(\theta_{d-3}\) hyperplanes and a solid in \(\theta_{d-4}\); there are
+\(T_\ell\) coplanar pairs and \(\binom{k-2}{2}-T_\ell\) others, so
+\[
+ \sum_{\Pi\supset\ell}\binomtwo{w_\Pi}
+ =\Bigl(\binomtwo{k-2}-T_\ell\Bigr)\theta_{d-4}+T_\ell\,\theta_{d-3}
+ =\binomtwo{k-2}\theta_{d-4}+q^{d-3}\,T_\ell,
+\]
+because \(\theta_{d-3}-\theta_{d-4}=q^{d-3}\).
+\end{proof}
+
+For \(d=3\) the hyperplanes through \(\ell\) are its planes,
+\(\theta_{-1}=0\), and the second moment is \(T_\ell\) itself, which is
+the pencil identity~\eqref{eq:pencil}.  For \(d\ge4\) the theorem
+expresses \(T_\ell\) through the section sizes of the hyperplanes through
+\(\ell\),
+\begin{equation}
+ T_\ell=\frac1{q^{d-3}}\Bigl(\sum_{\Pi\supset\ell}\binomtwo{w_\Pi}-\binomtwo{k-2}\theta_{d-4}\Bigr),
+\label{eq:T-from-sections}
+\end{equation}
+so the sum on the right is congruent to \(\binom{k-2}{2}\theta_{d-4}\)
+modulo \(q^{d-3}\) for every secant.
+
+\begin{remark}[Shortened codes]
+In the dictionary of Section~\ref{sec:preliminaries}, the hyperplanes
+through \(\ell=ab\) are the codewords of \(C_A\) vanishing at the
+coordinates \(a\) and \(b\), that is, the code \(C_A\) shortened at
+\(\{a,b\}\), a \([k-2,d-1]_q\) code whose codewords have weights
+\(k-2-w_\Pi\).  Its dual is \(C_A^\perp\) punctured at \(\{a,b\}\), whose
+words of weight at most two are the \((q-1)T_\ell\) images of the
+weight-four words of \(C_A^\perp\) with support containing \(a\) and
+\(b\).  Theorem~\ref{thm:secant-hyperplane-moments} is therefore the
+first two power moment identities of Pless~\cite{Pless1963} for the
+shortened code, which express its zeroth, first, and second weight
+moments through its length, dimension, and the numbers of dual words of
+weight one and two.  We keep the geometric proof because it exhibits the
+plane-versus-solid dichotomy that produces the factor \(q^{d-3}\).
+\end{remark}
+
+The same restriction can be made to the hyperplanes through any fixed
+subspace; counting over the hyperplanes through a fixed plane is the
+technique of Thas~\cite{Thas2017} for bounding the largest caps of
+\(\PG(n,q)\), \(q\) even.  The secant is the right subspace here because
+the second moment then measures the collisions of one secant with the
+others, the quantity that the coverage bound of
+Section~\ref{sec:coverage} consumes.

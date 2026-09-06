@@ -1,0 +1,113 @@
+\section{Limits of the method}
+\label{sec:limits}
+
+\subsection{One step above the counting bound}
+
+Passing from \(k\) to \(k+1\) increases \(\Lambda_0\) by \(k(q-1)+1\),
+and by Lemma~\ref{lem:admissible-shape} each run of the admissible set
+then has about \(\sqrt{2k}\) elements, while the gap between the roots
+of \(Q\) shrinks.  In every scanned case the two runs merge at the first
+step, and once \(\cS\) is an interval containing the means \(k\theta_{d-1}/\theta_d\)
+and \(R/t\), both integer systems are feasible and every bracket bound is
+zero.  For \(\PG(4,7)\) and \(k=32\), for example, \(\Lambda_0=207\) and
+\(Q(s)=\tfrac12(7s^2-67s+192)\) has negative discriminant, so \(Q>0\)
+everywhere, and \(\cS=\{0,1,\dots,12\}\).  The mechanism therefore gains
+one step and no more.  A larger gain would need a constraint that
+survives an interval of admissible sizes, and the natural candidate is
+the distribution of the losses \(Q(s_\Pi)\) themselves, which the
+character equations do not see.
+
+\subsection{Complete caps without coplanar quadruples}
+
+If \(c_4(A)=0\), every point off \(A\) lies on at most one secant.  For
+a complete cap this forces index one everywhere, \(\Lambda_0=0\), and
+\(Q(s_\Pi)=0\) for every hyperplane: the section sizes are the integer
+roots of \(Q\).  In the coding dictionary \(C_A^\perp\) is then a perfect
+two-error-correcting code, and Pavese's classification of the equality
+cases of his counting bound for \(4\)-general
+sets~\cite[Proposition~3.1]{Pavese2025} identifies \(A\) as the elliptic
+quadric of \(\PG(3,2)\) or the \(11\)-cap of \(\PG(4,3)\).  The identity
+accommodates both: for \(k=5\) in \(\PG(3,2)\), \(Q(s)=(s-1)(s-3)\), and
+every plane meets the quadric in \(1\) or \(3\) points; for \(k=11\) in
+\(\PG(4,3)\), \(Q(s)=\tfrac32(s-2)(s-5)\), and every solid meets the cap
+in \(2\) or \(5\) points, the weights \(9\) and \(6\) of the dual ternary
+Golay code.  Complete \(4\)-general sets that are not complete caps exist
+in many other parameters~\cite[Section~5]{Pavese2025}, and normal
+rational curves have \(c_4=0\) in every dimension; the constraints of
+this paper say nothing about them because they are not complete caps.
+
+\subsection{Why degree constraints alone cannot force spread collisions}
+
+The higher-dimensional problem of~\cite{RuddSecantDefects} asks whether a
+positive proportion of the secants of a complete cap in \(\PG(d,q)\),
+\(d\ge4\), must satisfy \(T_\ell\ge cq\).  The constraints available
+without an ambient hyperplane count are the incidence identities of
+Section~\ref{sec:preliminaries}: the secant--point
+count~\eqref{eq:first-moment}, the collision
+count~\eqref{eq:secant-collisions}, the pencil identities~\eqref{eq:pencil},
+the coincidence count \(\sum_{x}\binom{r(x)}{2}=3c_4(A)\), and the
+capacity \(r(x)\le m\).  We show that formal data can satisfy all of
+them with almost every secant free.
+
+\begin{proposition}[Degree constraints do not force spread collisions]
+\label{prop:degree-countermodel}
+Fix \(d\ge4\) and let \(q\to\infty\) with \(k=k(q)\) satisfying
+\(k\asymp q^{(d-1)/2}\), \(\Lambda_0\ge0\), \(\Lambda_0\equiv0\pmod3\),
+and \(\Lambda_0\le k(k-1)/24\).  Then there exist an abstract \(k\)-set
+\(A\), a family \(\mathcal Q\) of \(M=\Lambda_0/3\) four-subsets of \(A\)
+called coplanar, a finite set \(Y\) with \(|Y|=\theta_d-k\), and for each
+pair \(\ell\subseteq A\) a \((q-1)\)-subset \(Y_\ell\subseteq Y\), such
+that, with \(r(x)=\#\{\ell:x\in Y_\ell\}\),
+\(T_\ell=\sum_{x\in Y_\ell}(r(x)-1)\), and \(c_4=|\mathcal Q|\):
+\begin{enumerate}[label=(\alph*),nosep]
+\item \(1\le r(x)\le2\le m\) for all \(x\in Y\), \(\sum_xr(x)=N(q-1)\),
+ and \(\sum_x\binom{r(x)}{2}=3c_4\);
+\item two pairs with disjoint endpoints share a point of \(Y\) if and
+ only if their union is in \(\mathcal Q\), and then they share exactly one
+ point; pairs with a common endpoint share no point;
+\item \(T_\ell=\#\{B\in\mathcal Q:\ell\subseteq B\}\) and
+ \(\sum_\ell T_\ell=6c_4\), and for every \(\ell\) there are nonnegative
+ integers \(z_{\ell,1},\dots,z_{\ell,\theta_{d-2}}\) with
+ \(\sum_iz_{\ell,i}=k-2\) and \(\sum_i\binom{z_{\ell,i}}{2}=T_\ell\);
+\item \(T_\ell\in\{0,1\}\) for every \(\ell\), so at most
+ \(6M=2\Lambda_0=o(N)\) pairs have \(T_\ell>0\).
+\end{enumerate}
+The hypotheses hold for all large \(q\) whenever \(k\) is within a
+bounded distance of the smallest integer satisfying the counting bound
+and \(\Lambda_0\equiv0\pmod3\).
+\end{proposition}
+
+\begin{proof}
+A maximal family of edge-disjoint four-subsets of \(A\), regarded as
+copies of \(K_4\) in \(K_k\), has at least \(k(k-1)/72\) members: every
+four-subset shares an edge with some member, and a fixed member shares an
+edge with at most \(6\binom{k-2}{2}\) four-subsets, itself included, so
+the family has at least \(\binom{k}{4}/6\binom{k-2}{2}=k(k-1)/72\)
+members.  Choose \(M=\Lambda_0/3\le k(k-1)/72\) of them as \(\mathcal Q\).
+For each \(B=\{a,b,c,d\}\in\mathcal Q\) introduce three new points
+\(x_{ab|cd},x_{ac|bd},x_{ad|bc}\) and put each into the sets of its two
+pairs; since the members of \(\mathcal Q\) are edge-disjoint, each pair
+lies in at most one member, so each pair receives at most one such point.
+Complete every \(Y_\ell\) with private points to size \(q-1\).  The
+shared points have \(r=2\) and there are \(3M\) of them; the private
+points have \(r=1\) and there are \(N(q-1)-6M\) of them; so
+\(|Y|=N(q-1)-3M=N(q-1)-\Lambda_0=\theta_d-k\), and (a) and (b) hold by
+construction.  A pair in a member of \(\mathcal Q\) has \(T_\ell=1\), all
+others \(T_\ell=0\), which gives (d) and the first half of (c).  For the
+pencil rows take one entry \(2\) (for the pair \(\{c,d\}\)) and \(k-4\)
+entries \(1\) when \(T_\ell=1\), and \(k-2\) entries \(1\) when
+\(T_\ell=0\), padded with zeros; this needs \(\theta_{d-2}\ge k-2\), which
+holds for large \(q\) because \(\theta_{d-2}\ge q^{d-2}\) and
+\(k\asymp q^{(d-1)/2}\) with \(d\ge4\).  Finally, near the counting bound
+\(\Lambda_0=O(kq)\), and \(kq=o(k^2)\) since \(k\asymp q^{(d-1)/2}\) with
+\(d\ge4\); so \(\Lambda_0\le k(k-1)/24\) for large \(q\).
+\end{proof}
+
+The data of the proposition are not a cap: no ambient space is present,
+and the two-point sets \(Y_\ell\) are not lines.  Its role is to show
+that any argument forcing a positive proportion of secants to carry
+\(T_\ell\ge cq\) must use more than the identities (a)--(c).  The
+hyperplane loss identity is such an additional constraint: it ties the
+distribution of the indices to the hyperplane sections, which the formal
+data do not have.  Whether it can be pushed beyond the one-step gain of
+Section~\ref{sec:exclusions} is the question we leave open.

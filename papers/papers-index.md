@@ -71,6 +71,12 @@ matching designs*
   classical inclusion `C subset U`; `arcs` publishes the exact equality, coding translation, and
   certificate as an apparently unrecorded synthesis.
 
+**`secant_hyperplane_defects`** — *Secant–hyperplane defects of complete caps*
+- *Contents:* manuscript, exact-arithmetic scan certificate, private claim ledger and literature
+  audit (excluded from export). Third paper of the secant-defect series: the two-sided hyperplane
+  loss identity for complete caps, secant–hyperplane moments, integer feasibility exclusions at the
+  counting bound in `PG(4,q)` and `PG(6,q)`, and the degree-only countermodel.
+
 **4 · `clebsch-rigidity`** — *Reconstructing the Clebsch code and its golden orientation from its
 deep-hole syndrome locus*, with the companion *Computational strengthenings of Clebsch syndrome
 rigidity* in the same root

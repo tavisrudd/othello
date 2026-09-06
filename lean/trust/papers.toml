@@ -315,3 +315,9 @@ id = "cubic_gluing_resolvent"
 dir = "papers/cubic-gluing-resolvent"
 main = "cubic_gluing_resolvent.tex"
 lane = "cubic-threefolds"
+
+[[paper]]
+id = "secant_hyperplane_defects"
+dir = "papers/secant_hyperplane_defects"
+main = "secant_hyperplane_defects.tex"
+lane = "relconic"
