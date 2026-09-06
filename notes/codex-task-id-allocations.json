@@ -4418,8 +4418,17 @@
       "last": 1071,
       "purpose": "arcs paper upgrades from Astra full-manuscript review: q=3 boundary repair, intrinsic-defect decomposition, stronger gap, hole-set asymptotic, higher-dim identity, evaluation equivalence, char-0 obstruction",
       "sequence": 491
+    },
+    {
+      "count": 3,
+      "first": 1072,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1074,
+      "purpose": "Ergodis absorption targets from the relconic discovery track: secant-block exact cover, involution-matching independent domination, free-pair test caps",
+      "sequence": 492
     }
   ],
-  "next_id": 1072,
+  "next_id": 1075,
   "schema": "codex-task-id-allocations-v1"
 }
