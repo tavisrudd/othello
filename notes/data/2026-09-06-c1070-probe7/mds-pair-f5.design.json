@@ -1,0 +1,54 @@
+{
+  "schema": "c1070-leakage-design-v1",
+  "name": "mds-pair-f5",
+  "base": {
+    "field": { "characteristic": 5, "degree": 1 },
+    "message_dimension": 2,
+    "levels": [
+      {
+        "name": "shares",
+        "blocks": [
+          {
+            "name": "code",
+            "generator": { "rows": 2, "cols": 3, "data": [1, 0, 1, 0, 1, 1] }
+          }
+        ]
+      }
+    ],
+    "secret": { "rows": 1, "cols": 2, "data": [1, 1] },
+    "observation": { "generate": [{ "kind": "leaf-coordinates", "cost": 1 }] }
+  },
+  "family": {
+    "slots": [
+      {
+        "name": "code",
+        "level": 0,
+        "block": 0,
+        "choices": [
+          {
+            "name": "x+y",
+            "generator": { "rows": 2, "cols": 3, "data": [1, 0, 1, 0, 1, 1] }
+          },
+          {
+            "name": "x+2y",
+            "generator": { "rows": 2, "cols": 3, "data": [1, 0, 1, 0, 1, 2] }
+          }
+        ]
+      }
+    ]
+  },
+  "legitimate": [
+    {
+      "name": "reconstruct-from-any-two-shares",
+      "target": { "name": "whole message", "whole_message": true },
+      "all_subsets": 2
+    }
+  ],
+  "adversarial": [
+    {
+      "name": "protect-x-plus-y",
+      "target": { "name": "x+y", "functionals": { "rows": 1, "cols": 2, "data": [1, 1] } },
+      "threshold": 1
+    }
+  ]
+}

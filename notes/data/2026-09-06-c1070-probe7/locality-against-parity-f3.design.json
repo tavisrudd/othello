@@ -1,0 +1,65 @@
+{
+  "schema": "c1070-leakage-design-v1",
+  "name": "locality-against-parity-f3",
+  "base": {
+    "field": { "characteristic": 3, "degree": 1 },
+    "message_dimension": 3,
+    "levels": [
+      {
+        "name": "code",
+        "blocks": [
+          {
+            "name": "systematic-plus-two-parities",
+            "generator": {
+              "rows": 3,
+              "cols": 5,
+              "data": [1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1]
+            }
+          }
+        ]
+      }
+    ],
+    "secret": { "rows": 1, "cols": 3, "data": [1, 0, 0] },
+    "observation": { "generate": [{ "kind": "leaf-coordinates", "cost": 1 }] }
+  },
+  "family": {
+    "slots": [
+      {
+        "name": "p",
+        "level": 0,
+        "block": 0,
+        "template": {
+          "rows": 3,
+          "cols": 5,
+          "data": [1, 0, 0, 1, 1, 0, 1, 0, 255, 1, 0, 0, 1, 255, 1]
+        }
+      }
+    ]
+  },
+  "legitimate": [
+    {
+      "name": "repair-m0-from-the-local-group",
+      "target": { "name": "m0", "functionals": { "rows": 1, "cols": 3, "data": [1, 0, 0] } },
+      "observation": {
+        "units": [
+          { "name": "m1", "cost": 1, "coordinates": [1] },
+          { "name": "m2", "cost": 1, "coordinates": [2] },
+          { "name": "p", "cost": 1, "coordinates": [3] }
+        ]
+      }
+    }
+  ],
+  "adversarial": [
+    {
+      "name": "protect-m0-from-a-parity-only-coalition",
+      "target": { "name": "m0", "functionals": { "rows": 1, "cols": 3, "data": [1, 0, 0] } },
+      "observation": {
+        "units": [
+          { "name": "p", "cost": 1, "coordinates": [3] },
+          { "name": "q", "cost": 1, "coordinates": [4] }
+        ]
+      },
+      "threshold": 1
+    }
+  ]
+}

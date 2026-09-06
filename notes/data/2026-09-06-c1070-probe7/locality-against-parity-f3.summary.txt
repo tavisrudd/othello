@@ -1,0 +1,10 @@
+design: locality-against-parity-f3
+family 9 = [9], feasible 9, engine evaluations 18, nodes popped 96
+Pareto front (legitimate cost minimized, adversarial cost maximized):
+  L=1 A=[1]  p=(0,0)  (1 candidate(s))
+    legitimate repair-m0-from-the-local-group: cost 1 via ["p"]
+    adversary   protect-m0-from-a-parity-only-coalition: cost 1 via ["p"]
+  L=2 A=[unrecoverable]  p=(1,0)  (4 candidate(s))
+    legitimate repair-m0-from-the-local-group: cost 2 via ["m1", "p"]
+    adversary   protect-m0-from-a-parity-only-coalition: unrecoverable
+cross-check: 9 candidates, 108 core recovery tests, agrees true

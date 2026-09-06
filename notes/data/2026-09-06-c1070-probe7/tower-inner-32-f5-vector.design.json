@@ -1,0 +1,231 @@
+{
+  "schema": "c1070-leakage-design-v1",
+  "name": "tower-inner-32-f5-vector",
+  "base": {
+    "field": {
+      "characteristic": 5,
+      "degree": 1
+    },
+    "message_dimension": 2,
+    "levels": [
+      {
+        "name": "code",
+        "blocks": [
+          {
+            "name": "inner-32",
+            "generator": {
+              "rows": 2,
+              "cols": 3,
+              "data": [
+                1,
+                0,
+                1,
+                0,
+                1,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "nodes",
+        "blocks": [
+          {
+            "name": "node0",
+            "generator": {
+              "rows": 1,
+              "cols": 2,
+              "data": [
+                1,
+                1
+              ]
+            }
+          },
+          {
+            "name": "node1",
+            "generator": {
+              "rows": 1,
+              "cols": 2,
+              "data": [
+                1,
+                1
+              ]
+            }
+          },
+          {
+            "name": "node2",
+            "generator": {
+              "rows": 1,
+              "cols": 2,
+              "data": [
+                1,
+                1
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "secret": {
+      "rows": 2,
+      "cols": 2,
+      "data": [
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    "observation": {
+      "generate": [
+        {
+          "kind": "leaf-coordinates",
+          "cost": 1
+        }
+      ]
+    },
+    "cost_model": {
+      "schema": "ergodis.leakage-cost-model.v1",
+      "name": "leaves-and-nodes",
+      "components": [
+        {
+          "kind": "unit-count",
+          "select": {
+            "whole_block": false
+          },
+          "weight": 1,
+          "name": "leaves"
+        },
+        {
+          "kind": "unit-count",
+          "select": {
+            "whole_block": true
+          },
+          "weight": 1,
+          "name": "nodes"
+        }
+      ]
+    }
+  },
+  "family": {
+    "slots": [
+      {
+        "name": "inner",
+        "level": 0,
+        "block": 0,
+        "template": {
+          "rows": 2,
+          "cols": 3,
+          "data": [
+            1,
+            0,
+            255,
+            0,
+            1,
+            255
+          ]
+        }
+      }
+    ]
+  },
+  "legitimate": [
+    {
+      "name": "repair-node2-from-nodes-0-and-1",
+      "target": {
+        "name": "node2 replicas",
+        "coordinates": [
+          4,
+          5
+        ]
+      },
+      "observation": {
+        "units": [
+          {
+            "name": "n0a",
+            "cost": 1,
+            "coordinates": [
+              0
+            ]
+          },
+          {
+            "name": "n0b",
+            "cost": 1,
+            "coordinates": [
+              1
+            ]
+          },
+          {
+            "name": "n1a",
+            "cost": 1,
+            "coordinates": [
+              2
+            ]
+          },
+          {
+            "name": "n1b",
+            "cost": 1,
+            "coordinates": [
+              3
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "reconstruct-from-any-two-nodes",
+      "target": {
+        "name": "whole message",
+        "whole_message": true
+      },
+      "observation": {
+        "generate": [
+          {
+            "kind": "level-blocks",
+            "level": 1,
+            "cost": 1
+          }
+        ]
+      },
+      "all_subsets": 2
+    },
+    {
+      "name": "reconstruct-cheapest-node-set",
+      "target": {
+        "name": "whole message",
+        "whole_message": true
+      },
+      "observation": {
+        "generate": [
+          {
+            "kind": "level-blocks",
+            "level": 1,
+            "cost": 1
+          }
+        ]
+      }
+    }
+  ],
+  "adversarial": [
+    {
+      "name": "protect-x-plus-y",
+      "target": {
+        "name": "x+y",
+        "functionals": {
+          "rows": 1,
+          "cols": 2,
+          "data": [
+            1,
+            1
+          ]
+        }
+      },
+      "threshold": 2
+    },
+    {
+      "name": "gamma-2",
+      "profile_t": 2,
+      "threshold": 2
+    }
+  ]
+}

@@ -1,0 +1,232 @@
+{
+  "schema": "c1070-leakage-design-v1",
+  "name": "mds-pair-f5",
+  "slot_sizes": [
+    2
+  ],
+  "family_size": 2,
+  "candidates_evaluated": 2,
+  "feasible_candidates": 2,
+  "engine_evaluations": 4,
+  "nodes_popped": 15,
+  "units": [
+    {
+      "index": 0,
+      "name": "leaf0",
+      "cost": 1,
+      "coordinates": [
+        0
+      ]
+    },
+    {
+      "index": 1,
+      "name": "leaf1",
+      "cost": 1,
+      "coordinates": [
+        1
+      ]
+    },
+    {
+      "index": 2,
+      "name": "leaf2",
+      "cost": 1,
+      "coordinates": [
+        2
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "index": 0,
+      "label": "code=x+y",
+      "generators": [
+        {
+          "rows": 2,
+          "cols": 3,
+          "data": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            1
+          ]
+        }
+      ],
+      "legitimate": [
+        {
+          "name": "reconstruct-from-any-two-shares",
+          "cost": 2,
+          "unrecoverable": false,
+          "witness": {
+            "cost": 2,
+            "unit_indices": [
+              0,
+              1
+            ],
+            "unit_names": [
+              "leaf0",
+              "leaf1"
+            ],
+            "coordinates": [
+              0,
+              1
+            ],
+            "coefficients": {
+              "rows": 2,
+              "cols": 2,
+              "data": [
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "subsets_checked": 3,
+          "subsets_failed": 0
+        }
+      ],
+      "adversarial": [
+        {
+          "name": "protect-x-plus-y",
+          "cost": 1,
+          "unrecoverable": false,
+          "witness": {
+            "cost": 1,
+            "unit_indices": [
+              2
+            ],
+            "unit_names": [
+              "leaf2"
+            ],
+            "coordinates": [
+              2
+            ],
+            "coefficients": {
+              "rows": 1,
+              "cols": 1,
+              "data": [
+                1
+              ]
+            }
+          }
+        }
+      ],
+      "legitimate_cost": 2,
+      "adversarial_cost": [
+        1
+      ],
+      "weakest_link": 1,
+      "feasible": true,
+      "on_front": false
+    },
+    {
+      "index": 1,
+      "label": "code=x+2y",
+      "generators": [
+        {
+          "rows": 2,
+          "cols": 3,
+          "data": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "legitimate": [
+        {
+          "name": "reconstruct-from-any-two-shares",
+          "cost": 2,
+          "unrecoverable": false,
+          "witness": {
+            "cost": 2,
+            "unit_indices": [
+              0,
+              1
+            ],
+            "unit_names": [
+              "leaf0",
+              "leaf1"
+            ],
+            "coordinates": [
+              0,
+              1
+            ],
+            "coefficients": {
+              "rows": 2,
+              "cols": 2,
+              "data": [
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "subsets_checked": 3,
+          "subsets_failed": 0
+        }
+      ],
+      "adversarial": [
+        {
+          "name": "protect-x-plus-y",
+          "cost": 2,
+          "unrecoverable": false,
+          "witness": {
+            "cost": 2,
+            "unit_indices": [
+              0,
+              1
+            ],
+            "unit_names": [
+              "leaf0",
+              "leaf1"
+            ],
+            "coordinates": [
+              0,
+              1
+            ],
+            "coefficients": {
+              "rows": 1,
+              "cols": 2,
+              "data": [
+                1,
+                1
+              ]
+            }
+          }
+        }
+      ],
+      "legitimate_cost": 2,
+      "adversarial_cost": [
+        2
+      ],
+      "weakest_link": 2,
+      "feasible": true,
+      "on_front": true
+    }
+  ],
+  "front": [
+    {
+      "legitimate_cost": 2,
+      "adversarial_cost": [
+        2
+      ],
+      "representative": 1,
+      "representative_label": "code=x+2y",
+      "attained_by": [
+        1
+      ]
+    }
+  ],
+  "cross_check": {
+    "candidates_checked": 2,
+    "core_recovery_tests": 22,
+    "agrees": true
+  }
+}

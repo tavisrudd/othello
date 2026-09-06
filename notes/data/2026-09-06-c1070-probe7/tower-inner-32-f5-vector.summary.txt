@@ -1,0 +1,10 @@
+design: tower-inner-32-f5-vector
+family 25 = [25], feasible 12, engine evaluations 125, nodes popped 2150
+Pareto front (legitimate cost minimized, adversarial cost maximized):
+  L=2 A=[2, 2]  inner=(2,1)  (12 candidate(s))
+    legitimate repair-node2-from-nodes-0-and-1: cost 2 via ["n0a", "n1a"]
+    legitimate reconstruct-from-any-two-nodes: cost 2 via ["L1B0", "L1B1"]
+    legitimate reconstruct-cheapest-node-set: cost 2 via ["L1B0", "L1B1"]
+    adversary   protect-x-plus-y: cost 2 via ["leaf0", "leaf2"]
+    adversary   gamma-2: cost 2
+cross-check: 25 candidates, 3870 core recovery tests, agrees true

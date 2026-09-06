@@ -1,0 +1,7 @@
+design: mds-pair-f5
+family 2 = [2], feasible 2, engine evaluations 4, nodes popped 15
+Pareto front (legitimate cost minimized, adversarial cost maximized):
+  L=2 A=[2]  code=x+2y  (1 candidate(s))
+    legitimate reconstruct-from-any-two-shares: cost 2 via ["leaf0", "leaf1"]
+    adversary   protect-x-plus-y: cost 2 via ["leaf0", "leaf1"]
+cross-check: 2 candidates, 22 core recovery tests, agrees true
