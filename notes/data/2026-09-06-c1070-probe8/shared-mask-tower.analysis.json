@@ -1,0 +1,145 @@
+{
+  "schema": "c1070-leakage-problem-v1",
+  "name": "shared-mask-tower",
+  "exposed_dimension": 2,
+  "mask_dimension": 1,
+  "units": [
+    {
+      "index": 0,
+      "name": "y1",
+      "cost": 1,
+      "coordinates": [
+        0
+      ]
+    },
+    {
+      "index": 1,
+      "name": "y2",
+      "cost": 1,
+      "coordinates": [
+        1
+      ]
+    }
+  ],
+  "functional_classes": [
+    {
+      "index": 0,
+      "secret_coordinates": [
+        0,
+        1
+      ],
+      "functional": [
+        0,
+        1,
+        0
+      ],
+      "private": true
+    },
+    {
+      "index": 1,
+      "secret_coordinates": [
+        1,
+        0
+      ],
+      "functional": [
+        1,
+        0,
+        0
+      ],
+      "private": true
+    },
+    {
+      "index": 2,
+      "secret_coordinates": [
+        1,
+        1
+      ],
+      "functional": [
+        1,
+        1,
+        0
+      ],
+      "private": true
+    },
+    {
+      "index": 3,
+      "secret_coordinates": [
+        1,
+        2
+      ],
+      "functional": [
+        1,
+        2,
+        0
+      ],
+      "private": true
+    },
+    {
+      "index": 4,
+      "secret_coordinates": [
+        1,
+        3
+      ],
+      "functional": [
+        1,
+        3,
+        0
+      ],
+      "private": true
+    },
+    {
+      "index": 5,
+      "secret_coordinates": [
+        1,
+        4
+      ],
+      "functional": [
+        1,
+        4,
+        0
+      ],
+      "recovery": {
+        "cost": 2,
+        "unit_indices": [
+          0,
+          1
+        ],
+        "unit_names": [
+          "y1",
+          "y2"
+        ],
+        "coordinates": [
+          0,
+          1
+        ],
+        "coefficients": {
+          "rows": 1,
+          "cols": 2,
+          "data": [
+            1,
+            4
+          ]
+        }
+      },
+      "private": false,
+      "brute_force": {
+        "reported": 2,
+        "found": 2,
+        "coalitions_examined": 4
+      }
+    }
+  ],
+  "leakage_profile": [
+    {
+      "t": 1,
+      "minimum_cost": 2,
+      "subspaces_avoided": 6
+    },
+    {
+      "t": 2,
+      "subspaces_avoided": 1
+    }
+  ],
+  "brute_force_checked": true,
+  "brute_force_agrees": true
+}

@@ -1,0 +1,168 @@
+{
+  "schema": "c1070-leakage-problem-v1",
+  "exposed_dimension": 0,
+  "mask_dimension": 0,
+  "transcript": {
+    "name": "shamir-share-then-repair",
+    "note": "Threshold-3 Shamir over F_7: f(x) = s + a1 x + a2 x^2, share i is f(i). An eavesdropper holds share 1. Node 2 is then replaced and helpers 3 and 4 send their shares to the new node in the clear; the eavesdropper reads both helper transcripts. The third observation completes a threshold set and the secret leaks.",
+    "order": 7,
+    "secret_dim": 1,
+    "mask_dim": 2,
+    "steps": [
+      {
+        "step": 1,
+        "operation": "share",
+        "observations_added": 1,
+        "state_dim": 1,
+        "mask_rank": 1,
+        "leak_dim": 0,
+        "new_leak_dim": 0,
+        "leakage": [],
+        "new_leaks": [],
+        "reuse": {
+          "coupling": 0,
+          "shared_mask_covectors": [],
+          "mask_names": [],
+          "alarm": false
+        },
+        "cross_check": {
+          "core_leak_dim": 0,
+          "core_space_agrees": true,
+          "brute_force_agrees": true,
+          "brute_force_vectors": 7
+        }
+      },
+      {
+        "step": 2,
+        "operation": "repair-node-2-helper-3",
+        "observations_added": 1,
+        "state_dim": 2,
+        "mask_rank": 2,
+        "leak_dim": 0,
+        "new_leak_dim": 0,
+        "leakage": [],
+        "new_leaks": [],
+        "reuse": {
+          "coupling": 0,
+          "shared_mask_covectors": [],
+          "mask_names": [],
+          "alarm": false
+        },
+        "cross_check": {
+          "core_leak_dim": 0,
+          "core_space_agrees": true,
+          "brute_force_agrees": true,
+          "brute_force_vectors": 49
+        }
+      },
+      {
+        "step": 3,
+        "operation": "repair-node-2-helper-4",
+        "observations_added": 1,
+        "state_dim": 3,
+        "mask_rank": 2,
+        "leak_dim": 1,
+        "new_leak_dim": 1,
+        "leakage": [
+          {
+            "functional": [
+              1
+            ],
+            "render": "s",
+            "witness": [
+              [
+                "share1",
+                2
+              ],
+              [
+                "helper3",
+                5
+              ],
+              [
+                "helper4",
+                1
+              ]
+            ]
+          }
+        ],
+        "new_leaks": [
+          {
+            "functional": [
+              1
+            ],
+            "render": "s",
+            "witness": [
+              [
+                "share1",
+                2
+              ],
+              [
+                "helper3",
+                5
+              ],
+              [
+                "helper4",
+                1
+              ]
+            ]
+          }
+        ],
+        "reuse": {
+          "coupling": 1,
+          "shared_mask_covectors": [
+            [
+              1,
+              4
+            ]
+          ],
+          "mask_names": [
+            "a1",
+            "a2"
+          ],
+          "alarm": true
+        },
+        "cross_check": {
+          "core_leak_dim": 1,
+          "core_space_agrees": true,
+          "brute_force_agrees": true,
+          "brute_force_vectors": 343
+        }
+      }
+    ],
+    "contraction": [
+      {
+        "step": 1,
+        "live_mask_dim": 2,
+        "state_dim": 1,
+        "contracted_dim": 1,
+        "final_leak_dim": 1,
+        "contracted_final_leak_dim": 1,
+        "agrees": true
+      },
+      {
+        "step": 2,
+        "live_mask_dim": 1,
+        "state_dim": 2,
+        "contracted_dim": 1,
+        "final_leak_dim": 1,
+        "contracted_final_leak_dim": 1,
+        "agrees": true
+      },
+      {
+        "step": 3,
+        "live_mask_dim": 0,
+        "state_dim": 3,
+        "contracted_dim": 1,
+        "final_leak_dim": 1,
+        "contracted_final_leak_dim": 1,
+        "agrees": true
+      }
+    ],
+    "total_mask_deficiency": 1,
+    "expectations_met": true,
+    "cross_checks_agree": true,
+    "contraction_exact": true
+  },
+  "brute_force_checked": false,
+  "brute_force_agrees": true
+}
