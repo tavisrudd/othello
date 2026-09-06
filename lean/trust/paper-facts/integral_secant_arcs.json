@@ -91,6 +91,13 @@
       "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
     },
     {
+      "key": "RuddSecantDefects",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex",
+      "text": "T.~Rudd, \\emph{Secant defects with prescribed holes: arcs, caps, and matching designs}, preprint (2026), \\href{https://doi.org/10.5281/zenodo.21682567}{doi:10.5281/zenodo.21682567}."
+    },
+    {
       "key": "SWeven",
       "kind": "bibitem",
       "self_authored": false,
@@ -113,7 +120,7 @@
   "environment_counts": {
     "corollary": 4,
     "lemma": 9,
-    "proposition": 5,
+    "proposition": 6,
     "remark": 1,
     "theorem": 5
   },
@@ -241,6 +248,26 @@
     {
       "environment": "equation",
       "label": "eq:coverage-linear"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:endpoint-equality-degrees"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:endpoint-pencil-equation"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:endpoint-scalar-conditions"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:endpoint-shell-cap"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:endpoint-six-rows"
     },
     {
       "environment": "equation",
@@ -460,6 +487,10 @@
     },
     {
       "environment": "proposition",
+      "label": "prop:exact-five-thirds-endpoint"
+    },
+    {
+      "environment": "proposition",
       "label": "prop:rational-family-stability"
     },
     {
@@ -538,6 +569,7 @@
     "lem:centered-moment-identities",
     "thm:line-code-gap",
     "prop:three-line-rigidity",
+    "prop:exact-five-thirds-endpoint",
     "thm:factor-pair",
     "thm:characteristic-two",
     "lem:degree-extrema",
@@ -560,17 +592,17 @@
   "paper": "integral_secant_arcs",
   "pdfs": [
     {
-      "bytes": 181879,
-      "pages": 21,
+      "bytes": 195231,
+      "pages": 24,
       "path": "papers/integral_secant_arcs/integral_secant_arcs.pdf",
-      "sha256": "d356b5965e441e3025dae48eadde9c6d5e3fa7e31ac48ea23e82f40e4f99920e"
+      "sha256": "7c387c6c8a9199a8f4851fb4bc5c9bf95c6407f1836ad57ba00fe6e101c4b41b"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/integral_secant_arcs/integral_secant_arcs.tex",
-      "sha256": "3db0c880d045ec9b4080e744f0f1835c07940191d2f4d4fccfed64da2db4a0fc"
+      "sha256": "09fb97922c91bdb77f31a81e8da600ef947e1f1189131355e9e749576a930555"
     },
     {
       "path": "papers/integral_secant_arcs/formal-annotations.tex",
@@ -578,7 +610,7 @@
     },
     {
       "path": "papers/integral_secant_arcs/sections/01-introduction.tex",
-      "sha256": "41fb454ed85ea3eb77231d251d981b9c7f3b4c94eb0143a57f039b08a76a5a46"
+      "sha256": "b486096ba39852943ab0060e9f5a817f34cf18576ca13ad9a4b459f251a9992b"
     },
     {
       "path": "papers/integral_secant_arcs/sections/02-integer-envelopes.tex",
@@ -598,7 +630,7 @@
     },
     {
       "path": "papers/integral_secant_arcs/sections/06-line-code-obstruction.tex",
-      "sha256": "9b0a8f29011dcee134f2f1df9dd78040a3039d41b8fd75c1291f39e58e0e736a"
+      "sha256": "bab29596b77b2613c200cd822346ea874e641559efa5d396a54b84c4fc283d83"
     },
     {
       "path": "papers/integral_secant_arcs/sections/06-characteristic-two.tex",

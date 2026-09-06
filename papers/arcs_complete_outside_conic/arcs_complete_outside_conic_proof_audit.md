@@ -438,6 +438,27 @@ numerics and certificate reruns in `notes/2026-09-06-c1071-sub-worklog.md`.
 - Remarks `rem:independent-domination` and `rem:noisy-reconstruction`: direct arguments, no
   external input.
 
+## Analytic claims added by C1077 (2026-09-06)
+
+Verified by hand in `notes/2026-09-06-c1077-arcs-cap-section-upgrades.md`; the statements come
+from the external memo banked as `notes/2026-09-06-astra-cap-hyperplane-memo.md` (Part 2,
+Proposition 5 and the index remark), re-proved in the paper's own notation.
+
+- `prop:plane-fan`: \(\Lambda(A)\ge 2T_\ell+2T_\ell^2/(k-2)\) and \(\Lambda(A)\ge r(x)^2-1\), with
+  \(\Lambda(A)=\sum_{x\in Y}(r(x)-1)=N(q-1)-|Y|\). Inputs: `thm:cap-defect-identity` applied in
+  each plane through the secant, `lem:max-index`, the identity
+  \(6\binom{z+2}4/\lfloor(z+2)/2\rfloor\ge(z+1)\binom z2\) (equality for even \(z\), the factor
+  \(z+2\ge z+1\) for odd \(z\)), the additivity of planar losses over the planes through
+  \(\ell\) (a point off \(\ell\) lies in one plane, a point on \(\ell\) has
+  \(r(x)-1=\sum_\pi(r_\pi(x)-1)\)), `eq:pencil` for \(\sum z_\pi^2=k-2+2T_\ell\), and
+  Cauchy–Schwarz \((\sum z^2)^2\le(\sum z)(\sum z^3)\). For the index bound: the \(2r(r-1)\)
+  cross-secants between endpoints of distinct secants through \(x\) each carry a collision point
+  of index at least two, hence \(L_{cd}\ge1/2\), and the \(r\) secants through \(x\) carry
+  \(r-1\) in total. Elementary; no computation.
+- The relationship paragraph after `lem:pencil-bound` and the sentence added to the
+  higher-dimensional problem in the conclusion are expository and cite
+  `RuddIntegralSecant` (doi:10.5281/zenodo.22087679).
+
 ## Claims intentionally omitted
 
 - No claim that the classical first two index equations are new.

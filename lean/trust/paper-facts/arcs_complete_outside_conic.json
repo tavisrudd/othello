@@ -131,6 +131,13 @@
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "RuddIntegralSecant",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex",
+      "text": "T.~Rudd, \\newblock Integral Secant Distributions and Line-Code Obstructions for Complete \\((k,n)\\)-Arcs, \\newblock preprint (2026). \\newblock doi:10.5281/zenodo.22087679."
     }
   ],
   "dir": "papers/arcs_complete_outside_conic",
@@ -139,7 +146,7 @@
     "definition": 2,
     "lemma": 5,
     "problem": 3,
-    "proposition": 6,
+    "proposition": 7,
     "remark": 5,
     "theorem": 13
   },
@@ -442,6 +449,10 @@
     },
     {
       "environment": "proposition",
+      "label": "prop:plane-fan"
+    },
+    {
+      "environment": "proposition",
       "label": "prop:small-values"
     },
     {
@@ -562,17 +573,17 @@
   "paper": "arcs_complete_outside_conic",
   "pdfs": [
     {
-      "bytes": 249961,
-      "pages": 35,
+      "bytes": 257098,
+      "pages": 37,
       "path": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.pdf",
-      "sha256": "b88adbf2baeb7982a339c16ec29941e7ce584085f1ecf49914a1acfab38d420e"
+      "sha256": "977445cc7358e18fea9e23fd9c447ed04dae2debe749ac760a3fb47877042d31"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex",
-      "sha256": "f9a87ac759aaa396a0a960b4138f053cb906438d8c8ae898287c430543540487"
+      "sha256": "c966e04b03082e22e800519d39fc95fb58eb5af33407e1ceaa7f3f0e5459dd91"
     }
   ],
   "title": "Secant defects with prescribed holes:\\\\ arcs, caps, and matching designs",

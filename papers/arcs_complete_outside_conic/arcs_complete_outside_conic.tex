@@ -1454,6 +1454,17 @@ $m$, holes of intermediate index, and unbalanced pencils.  In the plane
 $t=1$, $s=k-2$, and the pencil term vanishes, so
 $N B_2(k,q)=6\binom{k}{4}$ recovers~\eqref{eq:defect}.
 
+The pencil term is an integer remainder of the kind that
+\cite{RuddIntegralSecant} makes the main mechanism for complete
+$(k,n)$-arcs in the plane.  There the degrees are the point--block
+incidences of the family of maximal secants, and the remainder is the gap
+between an integer degree sequence and its convex envelope.  Here the
+degrees are the pencil occupancies $z_\pi$ of ordinary secants, and the
+remainder measures collisions between secants rather than incidences
+between points and a selected family.  The two papers use the same counting
+step on different incidence structures, and neither result contains the
+other.
+
 \subsection{A secant-local coverage bound}
 
 Replacing $c_4(A)$ by its lower bound in~\eqref{eq:cap-arbitrary-holes} is
@@ -1512,6 +1523,73 @@ $6c_4(A)/m$ of Theorem~\ref{thm:cap-defect-identity}; the term
 $T_\ell/(T_\ell+1)$ is new.  It says that a secant meeting many others
 loses almost one point of coverage however concentrated those meetings
 are, with equality when they all occur at a single point.
+
+The collisions on one secant are also bounded above by the total loss,
+because the planes through the secant carry planar arcs whose own losses
+add.  Write $Y$ for the set of points outside $A$ on at least one secant
+and
+\[
+ \Lambda(A)=\sum_{x\in Y}\bigl(r(x)-1\bigr)=N(q-1)-|Y|
+\]
+for the total overlap loss; a cap complete outside $\cH$ has
+$\Lambda(A)\le N(q-1)-\theta_n+k+h$.
+
+\begin{proposition}[Plane-fan bound]
+\label{prop:plane-fan}
+For every $k$-cap $A$ in $\PG(n,q)$, $n\ge3$, every secant $\ell$, and
+every $x\in Y$,
+\[
+ \Lambda(A)\ge 2T_\ell+\frac{2T_\ell^2}{k-2},
+ \qquad
+ \Lambda(A)\ge r(x)^2-1.
+\]
+Hence
+$T_\ell\le\tfrac12\bigl(\sqrt{(k-2)^2+2(k-2)\Lambda(A)}-(k-2)\bigr)$
+and $r(x)\le\sqrt{\Lambda(A)+1}$.
+\end{proposition}
+
+\begin{proof}
+For a plane $\pi\supset\ell$ let $r_\pi(x)$, $x\in\pi\setminus A$, count
+the secants of the $(z_\pi+2)$-arc $A\cap\pi$ through $x$.  Theorem~%
+\ref{thm:cap-defect-identity} in $\pi$ gives
+$\sum_{x}\binom{r_\pi(x)}2=3\binom{z_\pi+2}4$, and
+$r_\pi(x)\le m_\pi=\lfloor(z_\pi+2)/2\rfloor$ by
+Lemma~\ref{lem:max-index}.  Since $r-1=2\binom r2/r\ge2\binom r2/m_\pi$
+for $1\le r\le m_\pi$,
+\[
+ \sum_{x\in\pi\setminus A,\ r_\pi(x)\ge1}\bigl(r_\pi(x)-1\bigr)
+ \ge\frac{6}{m_\pi}\binom{z_\pi+2}4\ge(z_\pi+1)\binom{z_\pi}2
+ =\frac{z_\pi^3-z_\pi}2,
+\]
+the middle inequality being an equality for even $z_\pi$ and, for odd
+$z_\pi$, the inequality $z_\pi+2\ge z_\pi+1$.  A point $x\in Y$ off $\ell$
+lies in one plane through $\ell$ and has $r(x)\ge r_\pi(x)$; a point
+$x\in\ell\setminus A$ has $r(x)-1=\sum_\pi(r_\pi(x)-1)$, since every
+secant through $x$ other than $\ell$ lies in exactly one plane through
+$\ell$.  Summing over the planes,
+$\Lambda(A)\ge\frac12\bigl(\sum_\pi z_\pi^3-(k-2)\bigr)$.  By~\eqref{eq:pencil},
+$\sum_\pi z_\pi=k-2$ and $\sum_\pi z_\pi^2=k-2+2T_\ell$, and
+Cauchy--Schwarz gives $\sum_\pi z_\pi^3\ge(k-2+2T_\ell)^2/(k-2)$, which
+is the first bound.
+
+For the second, let $\ell_1,\dots,\ell_r$ be the secants through $x$, with
+$r=r(x)$, and write $\Lambda(A)=\sum_\ell L_\ell$ as in the proof of
+Theorem~\ref{thm:secant-local-coverage}.  Each $\ell_i$ receives
+$L_{\ell_i}\ge1-1/r$ from $x$, in total $r-1$.  The $2r$ endpoints span
+$2r(r-1)$ further secants joining endpoints of distinct $\ell_i$, and each
+such secant $cd$ with $c\in\ell_i$, $d\in\ell_j$ meets the secant through
+the other two endpoints, because $\ell_i\cup\ell_j$ is coplanar; that
+meeting point lies outside $A$ and has index at least $2$, so
+$L_{cd}\ge\frac12$.  Summing, $\Lambda(A)\ge(r-1)+r(r-1)=r^2-1$.
+\end{proof}
+
+Near the covering scale in higher dimension the budget
+$N(q-1)-\theta_n+k+h$ is small: for a complete cap one step above the
+counting bound it is of order $kq$, so no secant carries more than
+$O(k\sqrt q)$ collisions and no point has index above $O(\sqrt{kq})$.
+This is an unconditional restriction on how the coplanar quadruples are
+distributed over the secants, though far from the concentration at scale
+$q$ that the higher-dimensional problem in the conclusion asks for.
 
 \subsection{Three dimensions}
 
@@ -1678,7 +1756,9 @@ $c_4(A)$ of coplanar quadruples of a complete cap at
 $k\asymp q^{(n-1)/2}$ together with an upper bound on its concentration over
 secants; by Theorem~\ref{thm:secant-local-coverage} a proportion $\eta$ of
 secants with unbounded $T_\ell$ improves the second-order term of the
-lower bound by $\eta/\sqrt2$.
+lower bound by $\eta/\sqrt2$.  Proposition~\ref{prop:plane-fan} caps
+$T_\ell$ at $O(k\sqrt q)$ near the counting bound, which is the only
+unconditional concentration bound so far.
 \end{problem}
 
 \begin{problem}
@@ -2848,6 +2928,13 @@ S.~Reichard and A.~J. Woldar,
 systems,
 \newblock \emph{Beitr\"age zur Algebra und Geometrie} \textbf{63} (2022).
 \newblock doi:10.1007/s13366-021-00570-7.
+
+\bibitem{RuddIntegralSecant}
+T.~Rudd,
+\newblock Integral Secant Distributions and Line-Code Obstructions for
+Complete \((k,n)\)-Arcs,
+\newblock preprint (2026).
+\newblock doi:10.5281/zenodo.22087679.
 
 \end{thebibliography}
 
