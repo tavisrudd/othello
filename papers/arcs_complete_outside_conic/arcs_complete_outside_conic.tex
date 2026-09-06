@@ -61,6 +61,7 @@ For a nonsingular conic \(\cC\subseteq\PG(2,q)\), let \(\rhoC(q)\) denote
 the corresponding minimum.  In characteristic two, a \(\cC\)-complete
 zero-defect arc with odd \(k\ge7\) is an oval of size \(q+1\) whose nucleus
 lies on \(\cC\), while even \(k\ge6\) forces \(k=q+2\), hence a hyperoval.
+The coordinate triangle gives \(\rhoC(3)=3\) by hand.
 A kernel-checked classification gives \(\rhoC(16)=9\); exhaustive
 classifications with kernel-checked attaining witnesses give
 \(\rhoC(13)=8\), \(\rhoC(17)=9\), and \(\rhoC(19)=10\).  The defect
@@ -184,7 +185,7 @@ then \(k\ge L_2(q)\).  In particular, every nonsingular conic satisfies
 \begin{theorem}[Exact small orders]
 \label{thm:intro-small-orders}
 \[
- \rhoC(13)=8,\qquad \rhoC(16)=9,\qquad
+ \rhoC(3)=3,\qquad \rhoC(13)=8,\qquad \rhoC(16)=9,\qquad
  \rhoC(17)=9,\qquad \rhoC(19)=10.
 \]
 \end{theorem}
@@ -1635,13 +1636,20 @@ For the standard conic
 in the indicated projective planes,
 \[
 \begin{gathered}
- \rhoC(5)=4,\quad \rhoC(8)=6,\quad \rhoC(9)=6,\quad \rhoC(11)=6,\\
+ \rhoC(3)=3,\quad \rhoC(5)=4,\quad \rhoC(8)=6,\quad \rhoC(9)=6,\quad
+ \rhoC(11)=6,\\
  \rhoC(13)=8,\quad \rhoC(17)=9,\quad \rhoC(19)=10.
 \end{gathered}
 \]
 \end{proposition}
 
 \begin{proof}
+For $q=3$, an arc of size at most two has at most one secant and leaves at
+least nine points uncovered, more than a conic holds, so $\rhoC(3)\ge3$.
+The coordinate triangle has the three coordinate lines as secants, and its
+ordinary-uncovered locus is the four points with all coordinates nonzero,
+which is the nonsingular conic $V(X^2+Y^2+Z^2)$.  An invertible coordinate
+change carries this conic to $XZ=Y^2$, so $\rhoC(3)=3$.
 Equation~\eqref{eq:L2} gives
 \[
  L_2(5)=4,
@@ -1787,7 +1795,8 @@ restriction is sharp.  In \(\PG(2,3)\) the coordinate triangle has the
 three coordinate lines as secants, so its uncovered locus is the four
 points with all coordinates nonzero, which is the conic
 \(X^2+Y^2+Z^2=0\).  This \(3\)-arc is \(\cC\)-complete with
-\(\binom{3}{2}=3<4=q+1\), and it gives \(\rhoC(3)=3\).
+\(\binom{3}{2}=3<4=q+1\); it is the attaining arc for \(\rhoC(3)=3\) in
+Proposition~\ref{prop:small-values}.
 
 For fixed arc length and sufficiently large \(q\), the ordinary-uncovered
 locus remembers its parent arc.  The inverse map has two elementary stages.

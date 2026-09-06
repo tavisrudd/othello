@@ -37,8 +37,9 @@ re-verified against the source before editing; none changes a headline theorem.
    short derivation (`q^2-k <= C(k,2)(q-1)`, so `C(k,2) <= q` forces `k >= q`
    and then `C(k,2) >= C(q,2) > q`), and recording the example, which gives
    `rho_C(3) = 3` (a 2-arc leaves nine uncovered points, so no smaller arc is
-   conic-complete). Not added to the exact-small-orders theorem in the
-   introduction; that is a body-statement change for the author to decide.
+   conic-complete). At Tavis's request the value was also added to the
+   exact-small-orders theorem in the introduction and to the small-values
+   proposition, with the two-line proof there.
 4. **Dual star–matching corollary** now states `k >= 4` explicitly, matching
    the matching-design theorem it invokes.
 5. **Coding dictionary**: "points on secants" became "points outside `A` on
