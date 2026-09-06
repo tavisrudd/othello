@@ -1,0 +1,46 @@
+{
+  "schema": "ergodis.hierarchical-leakage.v1",
+  "name": "two-level F_3 tower: [4,3] single-parity-check outer, two [3,2] inner blocks",
+  "field": { "characteristic": 3, "degree": 1 },
+  "message_dimension": 3,
+  "levels": [
+    {
+      "name": "outer",
+      "blocks": [
+        {
+          "name": "spc",
+          "generator": {
+            "rows": 3,
+            "cols": 4,
+            "data": [1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1]
+          }
+        }
+      ]
+    },
+    {
+      "name": "inner",
+      "blocks": [
+        {
+          "name": "in0",
+          "generator": { "rows": 2, "cols": 3, "data": [1, 0, 1, 0, 1, 1] }
+        },
+        {
+          "name": "in1",
+          "generator": { "rows": 2, "cols": 3, "data": [1, 0, 1, 0, 1, 2] }
+        }
+      ]
+    }
+  ],
+  "secret": {
+    "rows": 3,
+    "cols": 3,
+    "data": [1, 0, 0, 0, 1, 0, 0, 0, 1]
+  },
+  "observation": {
+    "generate": [
+      { "kind": "leaf-coordinates", "cost": 1 },
+      { "kind": "level-blocks", "level": 1, "cost": 2 }
+    ]
+  },
+  "options": { "brute_force_check": true }
+}

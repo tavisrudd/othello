@@ -1,0 +1,22 @@
+{
+  "schema": "ergodis.hierarchical-leakage.v1",
+  "name": "(x, y, x+y) over F_5, secret x+y",
+  "field": { "characteristic": 5, "degree": 1 },
+  "message_dimension": 2,
+  "levels": [
+    {
+      "name": "shares",
+      "blocks": [
+        {
+          "name": "outer",
+          "generator": { "rows": 2, "cols": 3, "data": [1, 0, 1, 0, 1, 1] }
+        }
+      ]
+    }
+  ],
+  "secret": { "rows": 1, "cols": 2, "data": [1, 1] },
+  "observation": {
+    "generate": [{ "kind": "leaf-coordinates", "cost": 1 }]
+  },
+  "options": { "brute_force_check": true }
+}

@@ -1,0 +1,152 @@
+{
+  "schema": "ergodis.hierarchical-leakage.v1",
+  "name": "(x, y, x+y) over F_3, secret x+y",
+  "field": {
+    "characteristic": 3,
+    "degree": 1,
+    "order": 3,
+    "modulus": [
+      0,
+      1
+    ]
+  },
+  "message_dimension": 2,
+  "level_widths": [
+    3
+  ],
+  "leaf_count": 3,
+  "encoding": {
+    "rows": 2,
+    "cols": 3,
+    "data": [
+      1,
+      0,
+      1,
+      0,
+      1,
+      1
+    ]
+  },
+  "secret_dimension": 1,
+  "secret_basis": {
+    "rows": 1,
+    "cols": 2,
+    "data": [
+      1,
+      1
+    ]
+  },
+  "units": [
+    {
+      "index": 0,
+      "name": "leaf0",
+      "cost": 1,
+      "coordinates": [
+        0
+      ]
+    },
+    {
+      "index": 1,
+      "name": "leaf1",
+      "cost": 1,
+      "coordinates": [
+        1
+      ]
+    },
+    {
+      "index": 2,
+      "name": "leaf2",
+      "cost": 1,
+      "coordinates": [
+        2
+      ]
+    }
+  ],
+  "functional_classes": [
+    {
+      "index": 0,
+      "secret_coordinates": [
+        1
+      ],
+      "functional": [
+        1,
+        1
+      ],
+      "recovery": {
+        "cost": 1,
+        "unit_indices": [
+          2
+        ],
+        "unit_names": [
+          "leaf2"
+        ],
+        "coordinates": [
+          2
+        ],
+        "coefficients": {
+          "rows": 1,
+          "cols": 1,
+          "data": [
+            1
+          ]
+        }
+      },
+      "private": false,
+      "brute_force": {
+        "reported": 1,
+        "found": 1,
+        "coalitions_examined": 4
+      }
+    }
+  ],
+  "leakage_profile": [
+    {
+      "t": 1,
+      "subspaces_examined": 1,
+      "minimum_cost": 1,
+      "subspace_coordinates": {
+        "rows": 1,
+        "cols": 1,
+        "data": [
+          1
+        ]
+      },
+      "subspace_functionals": {
+        "rows": 1,
+        "cols": 2,
+        "data": [
+          1,
+          1
+        ]
+      },
+      "recovery": {
+        "cost": 1,
+        "unit_indices": [
+          2
+        ],
+        "unit_names": [
+          "leaf2"
+        ],
+        "coordinates": [
+          2
+        ],
+        "coefficients": {
+          "rows": 1,
+          "cols": 1,
+          "data": [
+            1
+          ]
+        }
+      },
+      "brute_force": {
+        "reported": 1,
+        "found": 1,
+        "coalitions_examined": 4
+      }
+    }
+  ],
+  "brute_force_checked": true,
+  "brute_force_agrees": true,
+  "spans_reduced": 4,
+  "nodes_popped": 8
+}

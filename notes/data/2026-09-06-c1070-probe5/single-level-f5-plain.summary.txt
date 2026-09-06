@@ -1,0 +1,14 @@
+hierarchical leakage report: (x, y, x+y) over F_5, secret x+y
+field GF(5) = GF(5)^1, modulus [0, 1]
+message dimension 2, level widths [3], 3 leaf coordinates
+secret subspace dimension 1 (1 projective classes of secret functional)
+observation model: 3 units
+  [0] leaf0 cost 1 coordinates [0]
+  [1] leaf1 cost 1 coordinates [1]
+  [2] leaf2 cost 1 coordinates [2]
+minimum-cost coalition per secret functional:
+  s = [1, 1]  cost 1  units ["leaf2"]  coordinates [2]  witness [1]
+t-symbol leakage profile (direct method):
+  t = 1: cost 1 via leaf2 (1 subspaces examined)
+brute-force cross-check: every reported minimum confirmed
+work: 4 coalition spans reduced, 8 best-first nodes popped

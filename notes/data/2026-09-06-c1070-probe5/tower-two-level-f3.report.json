@@ -1,0 +1,846 @@
+{
+  "schema": "ergodis.hierarchical-leakage.v1",
+  "name": "two-level F_3 tower: [4,3] single-parity-check outer, two [3,2] inner blocks",
+  "field": {
+    "characteristic": 3,
+    "degree": 1,
+    "order": 3,
+    "modulus": [
+      0,
+      1
+    ]
+  },
+  "message_dimension": 3,
+  "level_widths": [
+    4,
+    6
+  ],
+  "leaf_count": 6,
+  "encoding": {
+    "rows": 3,
+    "cols": 6,
+    "data": [
+      1,
+      0,
+      1,
+      0,
+      1,
+      2,
+      0,
+      1,
+      1,
+      0,
+      1,
+      2,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0
+    ]
+  },
+  "secret_dimension": 3,
+  "secret_basis": {
+    "rows": 3,
+    "cols": 3,
+    "data": [
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1
+    ]
+  },
+  "units": [
+    {
+      "index": 0,
+      "name": "leaf0",
+      "cost": 1,
+      "coordinates": [
+        0
+      ]
+    },
+    {
+      "index": 1,
+      "name": "leaf1",
+      "cost": 1,
+      "coordinates": [
+        1
+      ]
+    },
+    {
+      "index": 2,
+      "name": "leaf2",
+      "cost": 1,
+      "coordinates": [
+        2
+      ]
+    },
+    {
+      "index": 3,
+      "name": "leaf3",
+      "cost": 1,
+      "coordinates": [
+        3
+      ]
+    },
+    {
+      "index": 4,
+      "name": "leaf4",
+      "cost": 1,
+      "coordinates": [
+        4
+      ]
+    },
+    {
+      "index": 5,
+      "name": "leaf5",
+      "cost": 1,
+      "coordinates": [
+        5
+      ]
+    },
+    {
+      "index": 6,
+      "name": "L1B0",
+      "cost": 2,
+      "coordinates": [
+        0,
+        1,
+        2
+      ],
+      "level": 1,
+      "block": 0
+    },
+    {
+      "index": 7,
+      "name": "L1B1",
+      "cost": 2,
+      "coordinates": [
+        3,
+        4,
+        5
+      ],
+      "level": 1,
+      "block": 1
+    }
+  ],
+  "functional_classes": [
+    {
+      "index": 0,
+      "secret_coordinates": [
+        0,
+        0,
+        1
+      ],
+      "functional": [
+        0,
+        0,
+        1
+      ],
+      "recovery": {
+        "cost": 1,
+        "unit_indices": [
+          3
+        ],
+        "unit_names": [
+          "leaf3"
+        ],
+        "coordinates": [
+          3
+        ],
+        "coefficients": {
+          "rows": 1,
+          "cols": 1,
+          "data": [
+            1
+          ]
+        }
+      },
+      "private": false,
+      "brute_force": {
+        "reported": 1,
+        "found": 1,
+        "coalitions_examined": 7
+      }
+    },
+    {
+      "index": 1,
+      "secret_coordinates": [
+        0,
+        1,
+        0
+      ],
+      "functional": [
+        0,
+        1,
+        0
+      ],
+      "recovery": {
+        "cost": 1,
+        "unit_indices": [
+          1
+        ],
+        "unit_names": [
+          "leaf1"
+        ],
+        "coordinates": [
+          1
+        ],
+        "coefficients": {
+          "rows": 1,
+          "cols": 1,
+          "data": [
+            1
+          ]
+        }
+      },
+      "private": false,
+      "brute_force": {
+        "reported": 1,
+        "found": 1,
+        "coalitions_examined": 7
+      }
+    },
+    {
+      "index": 2,
+      "secret_coordinates": [
+        0,
+        1,
+        1
+      ],
+      "functional": [
+        0,
+        1,
+        1
+      ],
+      "recovery": {
+        "cost": 2,
+        "unit_indices": [
+          1,
+          3
+        ],
+        "unit_names": [
+          "leaf1",
+          "leaf3"
+        ],
+        "coordinates": [
+          1,
+          3
+        ],
+        "coefficients": {
+          "rows": 1,
+          "cols": 2,
+          "data": [
+            1,
+            1
+          ]
+        }
+      },
+      "private": false,
+      "brute_force": {
+        "reported": 2,
+        "found": 2,
+        "coalitions_examined": 24
+      }
+    },
+    {
+      "index": 3,
+      "secret_coordinates": [
+        0,
+        1,
+        2
+      ],
+      "functional": [
+        0,
+        1,
+        2
+      ],
+      "recovery": {
+        "cost": 2,
+        "unit_indices": [
+          1,
+          3
+        ],
+        "unit_names": [
+          "leaf1",
+          "leaf3"
+        ],
+        "coordinates": [
+          1,
+          3
+        ],
+        "coefficients": {
+          "rows": 1,
+          "cols": 2,
+          "data": [
+            1,
+            2
+          ]
+        }
+      },
+      "private": false,
+      "brute_force": {
+        "reported": 2,
+        "found": 2,
+        "coalitions_examined": 24
+      }
+    },
+    {
+      "index": 4,
+      "secret_coordinates": [
+        1,
+        0,
+        0
+      ],
+      "functional": [
+        1,
+        0,
+        0
+      ],
+      "recovery": {
+        "cost": 1,
+        "unit_indices": [
+          0
+        ],
+        "unit_names": [
+          "leaf0"
+        ],
+        "coordinates": [
+          0
+        ],
+        "coefficients": {
+          "rows": 1,
+          "cols": 1,
+          "data": [
+            1
+          ]
+        }
+      },
+      "private": false,
+      "brute_force": {
+        "reported": 1,
+        "found": 1,
+        "coalitions_examined": 7
+      }
+    },
+    {
+      "index": 5,
+      "secret_coordinates": [
+        1,
+        0,
+        1
+      ],
+      "functional": [
+        1,
+        0,
+        1
+      ],
+      "recovery": {
+        "cost": 2,
+        "unit_indices": [
+          0,
+          3
+        ],
+        "unit_names": [
+          "leaf0",
+          "leaf3"
+        ],
+        "coordinates": [
+          0,
+          3
+        ],
+        "coefficients": {
+          "rows": 1,
+          "cols": 2,
+          "data": [
+            1,
+            1
+          ]
+        }
+      },
+      "private": false,
+      "brute_force": {
+        "reported": 2,
+        "found": 2,
+        "coalitions_examined": 24
+      }
+    },
+    {
+      "index": 6,
+      "secret_coordinates": [
+        1,
+        0,
+        2
+      ],
+      "functional": [
+        1,
+        0,
+        2
+      ],
+      "recovery": {
+        "cost": 2,
+        "unit_indices": [
+          0,
+          3
+        ],
+        "unit_names": [
+          "leaf0",
+          "leaf3"
+        ],
+        "coordinates": [
+          0,
+          3
+        ],
+        "coefficients": {
+          "rows": 1,
+          "cols": 2,
+          "data": [
+            1,
+            2
+          ]
+        }
+      },
+      "private": false,
+      "brute_force": {
+        "reported": 2,
+        "found": 2,
+        "coalitions_examined": 24
+      }
+    },
+    {
+      "index": 7,
+      "secret_coordinates": [
+        1,
+        1,
+        0
+      ],
+      "functional": [
+        1,
+        1,
+        0
+      ],
+      "recovery": {
+        "cost": 1,
+        "unit_indices": [
+          2
+        ],
+        "unit_names": [
+          "leaf2"
+        ],
+        "coordinates": [
+          2
+        ],
+        "coefficients": {
+          "rows": 1,
+          "cols": 1,
+          "data": [
+            1
+          ]
+        }
+      },
+      "private": false,
+      "brute_force": {
+        "reported": 1,
+        "found": 1,
+        "coalitions_examined": 7
+      }
+    },
+    {
+      "index": 8,
+      "secret_coordinates": [
+        1,
+        1,
+        1
+      ],
+      "functional": [
+        1,
+        1,
+        1
+      ],
+      "recovery": {
+        "cost": 1,
+        "unit_indices": [
+          4
+        ],
+        "unit_names": [
+          "leaf4"
+        ],
+        "coordinates": [
+          4
+        ],
+        "coefficients": {
+          "rows": 1,
+          "cols": 1,
+          "data": [
+            1
+          ]
+        }
+      },
+      "private": false,
+      "brute_force": {
+        "reported": 1,
+        "found": 1,
+        "coalitions_examined": 7
+      }
+    },
+    {
+      "index": 9,
+      "secret_coordinates": [
+        1,
+        1,
+        2
+      ],
+      "functional": [
+        1,
+        1,
+        2
+      ],
+      "recovery": {
+        "cost": 2,
+        "unit_indices": [
+          2,
+          3
+        ],
+        "unit_names": [
+          "leaf2",
+          "leaf3"
+        ],
+        "coordinates": [
+          2,
+          3
+        ],
+        "coefficients": {
+          "rows": 1,
+          "cols": 2,
+          "data": [
+            1,
+            2
+          ]
+        }
+      },
+      "private": false,
+      "brute_force": {
+        "reported": 2,
+        "found": 2,
+        "coalitions_examined": 24
+      }
+    },
+    {
+      "index": 10,
+      "secret_coordinates": [
+        1,
+        2,
+        0
+      ],
+      "functional": [
+        1,
+        2,
+        0
+      ],
+      "recovery": {
+        "cost": 2,
+        "unit_indices": [
+          0,
+          1
+        ],
+        "unit_names": [
+          "leaf0",
+          "leaf1"
+        ],
+        "coordinates": [
+          0,
+          1
+        ],
+        "coefficients": {
+          "rows": 1,
+          "cols": 2,
+          "data": [
+            1,
+            2
+          ]
+        }
+      },
+      "private": false,
+      "brute_force": {
+        "reported": 2,
+        "found": 2,
+        "coalitions_examined": 24
+      }
+    },
+    {
+      "index": 11,
+      "secret_coordinates": [
+        1,
+        2,
+        1
+      ],
+      "functional": [
+        1,
+        2,
+        1
+      ],
+      "recovery": {
+        "cost": 2,
+        "unit_indices": [
+          1,
+          4
+        ],
+        "unit_names": [
+          "leaf1",
+          "leaf4"
+        ],
+        "coordinates": [
+          1,
+          4
+        ],
+        "coefficients": {
+          "rows": 1,
+          "cols": 2,
+          "data": [
+            1,
+            1
+          ]
+        }
+      },
+      "private": false,
+      "brute_force": {
+        "reported": 2,
+        "found": 2,
+        "coalitions_examined": 24
+      }
+    },
+    {
+      "index": 12,
+      "secret_coordinates": [
+        1,
+        2,
+        2
+      ],
+      "functional": [
+        1,
+        2,
+        2
+      ],
+      "recovery": {
+        "cost": 2,
+        "unit_indices": [
+          0,
+          4
+        ],
+        "unit_names": [
+          "leaf0",
+          "leaf4"
+        ],
+        "coordinates": [
+          0,
+          4
+        ],
+        "coefficients": {
+          "rows": 1,
+          "cols": 2,
+          "data": [
+            2,
+            2
+          ]
+        }
+      },
+      "private": false,
+      "brute_force": {
+        "reported": 2,
+        "found": 2,
+        "coalitions_examined": 24
+      }
+    }
+  ],
+  "leakage_profile": [
+    {
+      "t": 1,
+      "subspaces_examined": 13,
+      "minimum_cost": 1,
+      "subspace_coordinates": {
+        "rows": 1,
+        "cols": 3,
+        "data": [
+          1,
+          0,
+          0
+        ]
+      },
+      "subspace_functionals": {
+        "rows": 1,
+        "cols": 3,
+        "data": [
+          1,
+          0,
+          0
+        ]
+      },
+      "recovery": {
+        "cost": 1,
+        "unit_indices": [
+          0
+        ],
+        "unit_names": [
+          "leaf0"
+        ],
+        "coordinates": [
+          0
+        ],
+        "coefficients": {
+          "rows": 1,
+          "cols": 1,
+          "data": [
+            1
+          ]
+        }
+      },
+      "brute_force": {
+        "reported": 1,
+        "found": 1,
+        "coalitions_examined": 7
+      }
+    },
+    {
+      "t": 2,
+      "subspaces_examined": 13,
+      "minimum_cost": 2,
+      "subspace_coordinates": {
+        "rows": 2,
+        "cols": 3,
+        "data": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ]
+      },
+      "subspace_functionals": {
+        "rows": 2,
+        "cols": 3,
+        "data": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ]
+      },
+      "recovery": {
+        "cost": 2,
+        "unit_indices": [
+          0,
+          1
+        ],
+        "unit_names": [
+          "leaf0",
+          "leaf1"
+        ],
+        "coordinates": [
+          0,
+          1
+        ],
+        "coefficients": {
+          "rows": 2,
+          "cols": 2,
+          "data": [
+            1,
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      "brute_force": {
+        "reported": 2,
+        "found": 2,
+        "coalitions_examined": 24
+      }
+    },
+    {
+      "t": 3,
+      "subspaces_examined": 1,
+      "minimum_cost": 3,
+      "subspace_coordinates": {
+        "rows": 3,
+        "cols": 3,
+        "data": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "subspace_functionals": {
+        "rows": 3,
+        "cols": 3,
+        "data": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "recovery": {
+        "cost": 3,
+        "unit_indices": [
+          0,
+          1,
+          3
+        ],
+        "unit_names": [
+          "leaf0",
+          "leaf1",
+          "leaf3"
+        ],
+        "coordinates": [
+          0,
+          1,
+          3
+        ],
+        "coefficients": {
+          "rows": 3,
+          "cols": 3,
+          "data": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        }
+      },
+      "brute_force": {
+        "reported": 3,
+        "found": 3,
+        "coalitions_examined": 56
+      }
+    }
+  ],
+  "brute_force_checked": true,
+  "brute_force_agrees": true,
+  "spans_reduced": 26,
+  "nodes_popped": 513
+}
