@@ -37,29 +37,20 @@ the C985 optimization-facing paper.
 
 ### C1016 — order-2092 Hadamard reduction and search (private, `~/src/ergodis-private`)
 
-Fourteen exact private reductions are banked with independent replay; the `g53` multiplier shard is
-exactly empty, `g=91` is closed structurally, and `g41`/`g133` quotient-only pruning is exhausted.
-The unrestricted `Z/523` route now runs a full-neighbourhood tabu step: it closes the order-six
-`q29` margin shell (twelve distinct exact shell states) but plateaus on the `q174` view, and that
-plateau is settled as search depth rather than arithmetic — no congruence constrains the deviation
-at any modulus with prime factors below a million, and the plateau sits roughly 130 bits (±60) into
-a 400-bit descent. The exhaustive two-transfer census over all twelve banked plateau states is
-empty, which also closes group-scoped search. The carrier `Z/522` rung above that view is now
-scored as well: it has 173 free correlation classes, not 174, it carries 99.5% of the deviation a
-`q174` state cannot see, its own full-neighbourhood search plateaus at about 14,400, and the wider
-column neighbourhood loses to it, so the campaign's route stays "solve `q174` first, then repair
-the fibre".
+The frontier, the closed dispositions, the routing to every dated sub-report, and the open-move
+order all live in the task card,
+[C1016 order-2092 reduction and search](../2026-08-30-c1016-ergodis-hadamard-quotient-synthesis.md),
+with its append-only companion
+[archive](../2026-08-30-c1016-ergodis-hadamard-quotient-synthesis-archive.md). Read the card on
+resume; it is the current-state map for this task.
 
-**Next**: widen the shell corpus beyond the twelve banked states, now that the carrier objective
-orders states by distance from an actual solution, and price a character-domain move set — the
-whole condition is a flat spectrum at `4 * 523` — against the position-domain plateau; a return to
-the plain `Z/523` spin shard is still the standing alternative. Latest reports:
-[carrier 522 rung](../2026-09-05-c1016-carrier-522-rung.md),
-[paired transfer and the two-opt census](../2026-09-05-c1016-paired-transfer-and-the-two-opt-census.md),
-[adversarial status review](../2026-09-05-c1016-adversarial-status-review.md). Concurrent public-core
-edits remain foreign; do not absorb them into C1016. Provenance rules stand: proved structural and
-exact computational reductions grant negative coverage, observed/evolved and heuristic predicates
-never do. Every resume first reads `../ergodis-contrib/PERFORMANCE.md` and the shared playbook.
+**Next**: the card's open moves, in its order — enforce the seventeen low-order characters exactly
+(the order-two Diophantine condition `sum_b u_b^2 = 523` is the unexploited one), then replicate
+the per-shell sweep on the tail shells; a return to the plain `Z/523` spin shard is still the
+standing alternative. Concurrent public-core edits remain foreign; do not absorb them into C1016.
+Provenance rules stand: proved structural and exact computational reductions grant negative
+coverage, observed/evolved and heuristic predicates never do. Every resume first reads
+`../ergodis-contrib/PERFORMANCE.md` and the shared playbook.
 
 ### C1017 — whole-core Ergodis performance-contract remediation (`~/src/ergodis`)
 
