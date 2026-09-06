@@ -1,0 +1,35 @@
+{
+  "name": "proactive-refresh-updates-observed",
+  "note": "The same refresh, but the eavesdropper also reads the update messages g(1) = b and g(2) = 2b. The refresh mask is then reused between the update messages and the epoch-2 share; the coupling closes and the secret leaks at the third operation.",
+  "characteristic": 7,
+  "secrets": ["s"],
+  "masks": ["a", "b"],
+  "operations": [
+    {
+      "name": "epoch-1-share",
+      "fresh_masks": ["a"],
+      "observations": [
+        { "name": "old-share1", "secret": { "s": 1 }, "mask": { "a": 1 } }
+      ]
+    },
+    {
+      "name": "refresh-updates-observed",
+      "fresh_masks": ["b"],
+      "observations": [
+        { "name": "update1", "secret": {}, "mask": { "b": 1 } },
+        { "name": "update2", "secret": {}, "mask": { "b": 2 } }
+      ]
+    },
+    {
+      "name": "epoch-2-share",
+      "fresh_masks": [],
+      "observations": [
+        { "name": "new-share2", "secret": { "s": 1 }, "mask": { "a": 2, "b": 2 } }
+      ]
+    }
+  ],
+  "expect": {
+    "leak_dims": [0, 0, 1],
+    "reuse_steps": [3]
+  }
+}

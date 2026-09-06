@@ -1,0 +1,27 @@
+{
+  "name": "astra-fresh-mask",
+  "note": "The same two operations with independent pads. Same per-operation leakage verdicts as the shared-mask transcript, different composed leakage: the pair of transcripts is the proof that no function of the leakage spaces composes.",
+  "characteristic": 5,
+  "secrets": ["s1", "s2"],
+  "masks": ["r1", "r2"],
+  "operations": [
+    {
+      "name": "mask-s1",
+      "fresh_masks": ["r1"],
+      "observations": [
+        { "name": "y1", "secret": { "s1": 1 }, "mask": { "r1": 1 } }
+      ]
+    },
+    {
+      "name": "mask-s2-with-a-fresh-pad",
+      "fresh_masks": ["r2"],
+      "observations": [
+        { "name": "y2", "secret": { "s2": 1 }, "mask": { "r2": 1 } }
+      ]
+    }
+  ],
+  "expect": {
+    "leak_dims": [0, 0],
+    "reuse_steps": []
+  }
+}

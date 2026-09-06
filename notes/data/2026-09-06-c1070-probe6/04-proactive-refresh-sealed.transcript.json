@@ -1,0 +1,32 @@
+{
+  "name": "proactive-refresh-sealed",
+  "note": "Threshold-2 Shamir over F_7, shares f(i) = s + a i. A Herzberg-Jarecki-Krawczyk-Yung refresh adds a fresh sharing of zero, g(x) = b x, so epoch-2 shares are s + (a+b) i. The eavesdropper holds one old share and one new share and never sees the update messages. Leakage stays zero across the refresh, and the old row contracts to nothing by Theorem 5.",
+  "characteristic": 7,
+  "secrets": ["s"],
+  "masks": ["a", "b"],
+  "operations": [
+    {
+      "name": "epoch-1-share",
+      "fresh_masks": ["a"],
+      "observations": [
+        { "name": "old-share1", "secret": { "s": 1 }, "mask": { "a": 1 } }
+      ]
+    },
+    {
+      "name": "refresh-updates-not-observed",
+      "fresh_masks": ["b"],
+      "observations": []
+    },
+    {
+      "name": "epoch-2-share",
+      "fresh_masks": [],
+      "observations": [
+        { "name": "new-share2", "secret": { "s": 1 }, "mask": { "a": 2, "b": 2 } }
+      ]
+    }
+  ],
+  "expect": {
+    "leak_dims": [0, 0, 0],
+    "reuse_steps": []
+  }
+}

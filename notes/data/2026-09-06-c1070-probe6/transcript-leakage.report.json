@@ -1,0 +1,794 @@
+{
+  "schema": "c1070-probe6-transcript-leakage-v1",
+  "model": "uniform linear over a prime field; state is the observed row space in (s,r) coordinates and leakage is L(V) = V ∩ Ann(R)",
+  "transcripts": [
+    {
+      "name": "astra-shared-mask",
+      "note": "Two one-time-pad operations reusing one mask. Each leaks nothing alone; together they reveal s1 - s2. The witness that leakage spaces do not compose.",
+      "order": 5,
+      "secret_dim": 2,
+      "mask_dim": 1,
+      "steps": [
+        {
+          "step": 1,
+          "operation": "mask-s1",
+          "observations_added": 1,
+          "state_dim": 1,
+          "mask_rank": 1,
+          "leak_dim": 0,
+          "new_leak_dim": 0,
+          "leakage": [],
+          "new_leaks": [],
+          "reuse": {
+            "coupling": 0,
+            "shared_mask_covectors": [],
+            "mask_names": [],
+            "alarm": false
+          },
+          "cross_check": {
+            "core_leak_dim": 0,
+            "core_space_agrees": true,
+            "brute_force_agrees": true,
+            "brute_force_vectors": 5
+          }
+        },
+        {
+          "step": 2,
+          "operation": "mask-s2-with-the-same-pad",
+          "observations_added": 1,
+          "state_dim": 2,
+          "mask_rank": 1,
+          "leak_dim": 1,
+          "new_leak_dim": 1,
+          "leakage": [
+            {
+              "functional": [
+                1,
+                4
+              ],
+              "render": "s1 + 4*s2",
+              "witness": [
+                [
+                  "y1",
+                  1
+                ],
+                [
+                  "y2",
+                  4
+                ]
+              ]
+            }
+          ],
+          "new_leaks": [
+            {
+              "functional": [
+                1,
+                4
+              ],
+              "render": "s1 + 4*s2",
+              "witness": [
+                [
+                  "y1",
+                  1
+                ],
+                [
+                  "y2",
+                  4
+                ]
+              ]
+            }
+          ],
+          "reuse": {
+            "coupling": 1,
+            "shared_mask_covectors": [
+              [
+                1
+              ]
+            ],
+            "mask_names": [
+              "r"
+            ],
+            "alarm": true
+          },
+          "cross_check": {
+            "core_leak_dim": 1,
+            "core_space_agrees": true,
+            "brute_force_agrees": true,
+            "brute_force_vectors": 25
+          }
+        }
+      ],
+      "contraction": [
+        {
+          "step": 1,
+          "live_mask_dim": 1,
+          "state_dim": 1,
+          "contracted_dim": 1,
+          "final_leak_dim": 1,
+          "contracted_final_leak_dim": 1,
+          "agrees": true
+        },
+        {
+          "step": 2,
+          "live_mask_dim": 0,
+          "state_dim": 2,
+          "contracted_dim": 1,
+          "final_leak_dim": 1,
+          "contracted_final_leak_dim": 1,
+          "agrees": true
+        }
+      ],
+      "total_mask_deficiency": 1,
+      "expectations_met": true,
+      "cross_checks_agree": true,
+      "contraction_exact": true
+    },
+    {
+      "name": "astra-fresh-mask",
+      "note": "The same two operations with independent pads. Same per-operation leakage verdicts as the shared-mask transcript, different composed leakage: the pair of transcripts is the proof that no function of the leakage spaces composes.",
+      "order": 5,
+      "secret_dim": 2,
+      "mask_dim": 2,
+      "steps": [
+        {
+          "step": 1,
+          "operation": "mask-s1",
+          "observations_added": 1,
+          "state_dim": 1,
+          "mask_rank": 1,
+          "leak_dim": 0,
+          "new_leak_dim": 0,
+          "leakage": [],
+          "new_leaks": [],
+          "reuse": {
+            "coupling": 0,
+            "shared_mask_covectors": [],
+            "mask_names": [],
+            "alarm": false
+          },
+          "cross_check": {
+            "core_leak_dim": 0,
+            "core_space_agrees": true,
+            "brute_force_agrees": true,
+            "brute_force_vectors": 5
+          }
+        },
+        {
+          "step": 2,
+          "operation": "mask-s2-with-a-fresh-pad",
+          "observations_added": 1,
+          "state_dim": 2,
+          "mask_rank": 2,
+          "leak_dim": 0,
+          "new_leak_dim": 0,
+          "leakage": [],
+          "new_leaks": [],
+          "reuse": {
+            "coupling": 0,
+            "shared_mask_covectors": [],
+            "mask_names": [],
+            "alarm": false
+          },
+          "cross_check": {
+            "core_leak_dim": 0,
+            "core_space_agrees": true,
+            "brute_force_agrees": true,
+            "brute_force_vectors": 25
+          }
+        }
+      ],
+      "contraction": [
+        {
+          "step": 1,
+          "live_mask_dim": 1,
+          "state_dim": 1,
+          "contracted_dim": 0,
+          "final_leak_dim": 0,
+          "contracted_final_leak_dim": 0,
+          "agrees": true
+        },
+        {
+          "step": 2,
+          "live_mask_dim": 0,
+          "state_dim": 2,
+          "contracted_dim": 0,
+          "final_leak_dim": 0,
+          "contracted_final_leak_dim": 0,
+          "agrees": true
+        }
+      ],
+      "total_mask_deficiency": 0,
+      "expectations_met": true,
+      "cross_checks_agree": true,
+      "contraction_exact": true
+    },
+    {
+      "name": "shamir-share-then-repair",
+      "note": "Threshold-3 Shamir over F_7: f(x) = s + a1 x + a2 x^2, share i is f(i). An eavesdropper holds share 1. Node 2 is then replaced and helpers 3 and 4 send their shares to the new node in the clear; the eavesdropper reads both helper transcripts. The third observation completes a threshold set and the secret leaks.",
+      "order": 7,
+      "secret_dim": 1,
+      "mask_dim": 2,
+      "steps": [
+        {
+          "step": 1,
+          "operation": "share",
+          "observations_added": 1,
+          "state_dim": 1,
+          "mask_rank": 1,
+          "leak_dim": 0,
+          "new_leak_dim": 0,
+          "leakage": [],
+          "new_leaks": [],
+          "reuse": {
+            "coupling": 0,
+            "shared_mask_covectors": [],
+            "mask_names": [],
+            "alarm": false
+          },
+          "cross_check": {
+            "core_leak_dim": 0,
+            "core_space_agrees": true,
+            "brute_force_agrees": true,
+            "brute_force_vectors": 7
+          }
+        },
+        {
+          "step": 2,
+          "operation": "repair-node-2-helper-3",
+          "observations_added": 1,
+          "state_dim": 2,
+          "mask_rank": 2,
+          "leak_dim": 0,
+          "new_leak_dim": 0,
+          "leakage": [],
+          "new_leaks": [],
+          "reuse": {
+            "coupling": 0,
+            "shared_mask_covectors": [],
+            "mask_names": [],
+            "alarm": false
+          },
+          "cross_check": {
+            "core_leak_dim": 0,
+            "core_space_agrees": true,
+            "brute_force_agrees": true,
+            "brute_force_vectors": 49
+          }
+        },
+        {
+          "step": 3,
+          "operation": "repair-node-2-helper-4",
+          "observations_added": 1,
+          "state_dim": 3,
+          "mask_rank": 2,
+          "leak_dim": 1,
+          "new_leak_dim": 1,
+          "leakage": [
+            {
+              "functional": [
+                1
+              ],
+              "render": "s",
+              "witness": [
+                [
+                  "share1",
+                  2
+                ],
+                [
+                  "helper3",
+                  5
+                ],
+                [
+                  "helper4",
+                  1
+                ]
+              ]
+            }
+          ],
+          "new_leaks": [
+            {
+              "functional": [
+                1
+              ],
+              "render": "s",
+              "witness": [
+                [
+                  "share1",
+                  2
+                ],
+                [
+                  "helper3",
+                  5
+                ],
+                [
+                  "helper4",
+                  1
+                ]
+              ]
+            }
+          ],
+          "reuse": {
+            "coupling": 1,
+            "shared_mask_covectors": [
+              [
+                1,
+                4
+              ]
+            ],
+            "mask_names": [
+              "a1",
+              "a2"
+            ],
+            "alarm": true
+          },
+          "cross_check": {
+            "core_leak_dim": 1,
+            "core_space_agrees": true,
+            "brute_force_agrees": true,
+            "brute_force_vectors": 343
+          }
+        }
+      ],
+      "contraction": [
+        {
+          "step": 1,
+          "live_mask_dim": 2,
+          "state_dim": 1,
+          "contracted_dim": 1,
+          "final_leak_dim": 1,
+          "contracted_final_leak_dim": 1,
+          "agrees": true
+        },
+        {
+          "step": 2,
+          "live_mask_dim": 1,
+          "state_dim": 2,
+          "contracted_dim": 1,
+          "final_leak_dim": 1,
+          "contracted_final_leak_dim": 1,
+          "agrees": true
+        },
+        {
+          "step": 3,
+          "live_mask_dim": 0,
+          "state_dim": 3,
+          "contracted_dim": 1,
+          "final_leak_dim": 1,
+          "contracted_final_leak_dim": 1,
+          "agrees": true
+        }
+      ],
+      "total_mask_deficiency": 1,
+      "expectations_met": true,
+      "cross_checks_agree": true,
+      "contraction_exact": true
+    },
+    {
+      "name": "proactive-refresh-sealed",
+      "note": "Threshold-2 Shamir over F_7, shares f(i) = s + a i. A Herzberg-Jarecki-Krawczyk-Yung refresh adds a fresh sharing of zero, g(x) = b x, so epoch-2 shares are s + (a+b) i. The eavesdropper holds one old share and one new share and never sees the update messages. Leakage stays zero across the refresh, and the old row contracts to nothing by Theorem 5.",
+      "order": 7,
+      "secret_dim": 1,
+      "mask_dim": 2,
+      "steps": [
+        {
+          "step": 1,
+          "operation": "epoch-1-share",
+          "observations_added": 1,
+          "state_dim": 1,
+          "mask_rank": 1,
+          "leak_dim": 0,
+          "new_leak_dim": 0,
+          "leakage": [],
+          "new_leaks": [],
+          "reuse": {
+            "coupling": 0,
+            "shared_mask_covectors": [],
+            "mask_names": [],
+            "alarm": false
+          },
+          "cross_check": {
+            "core_leak_dim": 0,
+            "core_space_agrees": true,
+            "brute_force_agrees": true,
+            "brute_force_vectors": 7
+          }
+        },
+        {
+          "step": 2,
+          "operation": "refresh-updates-not-observed",
+          "observations_added": 0,
+          "state_dim": 1,
+          "mask_rank": 1,
+          "leak_dim": 0,
+          "new_leak_dim": 0,
+          "leakage": [],
+          "new_leaks": [],
+          "reuse": {
+            "coupling": 0,
+            "shared_mask_covectors": [],
+            "mask_names": [],
+            "alarm": false
+          },
+          "cross_check": {
+            "core_leak_dim": 0,
+            "core_space_agrees": true,
+            "brute_force_agrees": true,
+            "brute_force_vectors": 7
+          }
+        },
+        {
+          "step": 3,
+          "operation": "epoch-2-share",
+          "observations_added": 1,
+          "state_dim": 2,
+          "mask_rank": 2,
+          "leak_dim": 0,
+          "new_leak_dim": 0,
+          "leakage": [],
+          "new_leaks": [],
+          "reuse": {
+            "coupling": 0,
+            "shared_mask_covectors": [],
+            "mask_names": [],
+            "alarm": false
+          },
+          "cross_check": {
+            "core_leak_dim": 0,
+            "core_space_agrees": true,
+            "brute_force_agrees": true,
+            "brute_force_vectors": 49
+          }
+        }
+      ],
+      "contraction": [
+        {
+          "step": 1,
+          "live_mask_dim": 1,
+          "state_dim": 1,
+          "contracted_dim": 0,
+          "final_leak_dim": 0,
+          "contracted_final_leak_dim": 0,
+          "agrees": true
+        },
+        {
+          "step": 2,
+          "live_mask_dim": 1,
+          "state_dim": 1,
+          "contracted_dim": 0,
+          "final_leak_dim": 0,
+          "contracted_final_leak_dim": 0,
+          "agrees": true
+        },
+        {
+          "step": 3,
+          "live_mask_dim": 0,
+          "state_dim": 2,
+          "contracted_dim": 0,
+          "final_leak_dim": 0,
+          "contracted_final_leak_dim": 0,
+          "agrees": true
+        }
+      ],
+      "total_mask_deficiency": 0,
+      "expectations_met": true,
+      "cross_checks_agree": true,
+      "contraction_exact": true
+    },
+    {
+      "name": "proactive-refresh-updates-observed",
+      "note": "The same refresh, but the eavesdropper also reads the update messages g(1) = b and g(2) = 2b. The refresh mask is then reused between the update messages and the epoch-2 share; the coupling closes and the secret leaks at the third operation.",
+      "order": 7,
+      "secret_dim": 1,
+      "mask_dim": 2,
+      "steps": [
+        {
+          "step": 1,
+          "operation": "epoch-1-share",
+          "observations_added": 1,
+          "state_dim": 1,
+          "mask_rank": 1,
+          "leak_dim": 0,
+          "new_leak_dim": 0,
+          "leakage": [],
+          "new_leaks": [],
+          "reuse": {
+            "coupling": 0,
+            "shared_mask_covectors": [],
+            "mask_names": [],
+            "alarm": false
+          },
+          "cross_check": {
+            "core_leak_dim": 0,
+            "core_space_agrees": true,
+            "brute_force_agrees": true,
+            "brute_force_vectors": 7
+          }
+        },
+        {
+          "step": 2,
+          "operation": "refresh-updates-observed",
+          "observations_added": 2,
+          "state_dim": 2,
+          "mask_rank": 2,
+          "leak_dim": 0,
+          "new_leak_dim": 0,
+          "leakage": [],
+          "new_leaks": [],
+          "reuse": {
+            "coupling": 0,
+            "shared_mask_covectors": [],
+            "mask_names": [],
+            "alarm": false
+          },
+          "cross_check": {
+            "core_leak_dim": 0,
+            "core_space_agrees": true,
+            "brute_force_agrees": true,
+            "brute_force_vectors": 343
+          }
+        },
+        {
+          "step": 3,
+          "operation": "epoch-2-share",
+          "observations_added": 1,
+          "state_dim": 3,
+          "mask_rank": 2,
+          "leak_dim": 1,
+          "new_leak_dim": 1,
+          "leakage": [
+            {
+              "functional": [
+                1
+              ],
+              "render": "s",
+              "witness": [
+                [
+                  "old-share1",
+                  2
+                ],
+                [
+                  "update2",
+                  1
+                ],
+                [
+                  "new-share2",
+                  6
+                ]
+              ]
+            }
+          ],
+          "new_leaks": [
+            {
+              "functional": [
+                1
+              ],
+              "render": "s",
+              "witness": [
+                [
+                  "old-share1",
+                  2
+                ],
+                [
+                  "update2",
+                  1
+                ],
+                [
+                  "new-share2",
+                  6
+                ]
+              ]
+            }
+          ],
+          "reuse": {
+            "coupling": 1,
+            "shared_mask_covectors": [
+              [
+                1,
+                1
+              ]
+            ],
+            "mask_names": [
+              "a",
+              "b"
+            ],
+            "alarm": true
+          },
+          "cross_check": {
+            "core_leak_dim": 1,
+            "core_space_agrees": true,
+            "brute_force_agrees": true,
+            "brute_force_vectors": 2401
+          }
+        }
+      ],
+      "contraction": [
+        {
+          "step": 1,
+          "live_mask_dim": 2,
+          "state_dim": 1,
+          "contracted_dim": 1,
+          "final_leak_dim": 1,
+          "contracted_final_leak_dim": 1,
+          "agrees": true
+        },
+        {
+          "step": 2,
+          "live_mask_dim": 1,
+          "state_dim": 2,
+          "contracted_dim": 1,
+          "final_leak_dim": 1,
+          "contracted_final_leak_dim": 1,
+          "agrees": true
+        },
+        {
+          "step": 3,
+          "live_mask_dim": 0,
+          "state_dim": 3,
+          "contracted_dim": 1,
+          "final_leak_dim": 1,
+          "contracted_final_leak_dim": 1,
+          "agrees": true
+        }
+      ],
+      "total_mask_deficiency": 1,
+      "expectations_met": true,
+      "cross_checks_agree": true,
+      "contraction_exact": true
+    }
+  ],
+  "separation": [
+    {
+      "order": 2,
+      "secret_dim": 1,
+      "mask_dim": 1,
+      "subspaces": 5,
+      "response_classes": 4,
+      "absorbing_subspaces": 2,
+      "unexpected_collisions": 0
+    },
+    {
+      "order": 2,
+      "secret_dim": 2,
+      "mask_dim": 1,
+      "subspaces": 16,
+      "response_classes": 15,
+      "absorbing_subspaces": 2,
+      "unexpected_collisions": 0
+    },
+    {
+      "order": 2,
+      "secret_dim": 1,
+      "mask_dim": 2,
+      "subspaces": 16,
+      "response_classes": 12,
+      "absorbing_subspaces": 5,
+      "unexpected_collisions": 0
+    },
+    {
+      "order": 2,
+      "secret_dim": 2,
+      "mask_dim": 2,
+      "subspaces": 67,
+      "response_classes": 63,
+      "absorbing_subspaces": 5,
+      "unexpected_collisions": 0
+    },
+    {
+      "order": 3,
+      "secret_dim": 2,
+      "mask_dim": 1,
+      "subspaces": 28,
+      "response_classes": 27,
+      "absorbing_subspaces": 2,
+      "unexpected_collisions": 0
+    },
+    {
+      "order": 3,
+      "secret_dim": 1,
+      "mask_dim": 2,
+      "subspaces": 28,
+      "response_classes": 23,
+      "absorbing_subspaces": 6,
+      "unexpected_collisions": 0
+    },
+    {
+      "order": 3,
+      "secret_dim": 2,
+      "mask_dim": 2,
+      "subspaces": 212,
+      "response_classes": 207,
+      "absorbing_subspaces": 6,
+      "unexpected_collisions": 0
+    },
+    {
+      "order": 5,
+      "secret_dim": 1,
+      "mask_dim": 1,
+      "subspaces": 8,
+      "response_classes": 7,
+      "absorbing_subspaces": 2,
+      "unexpected_collisions": 0
+    },
+    {
+      "order": 5,
+      "secret_dim": 2,
+      "mask_dim": 1,
+      "subspaces": 64,
+      "response_classes": 63,
+      "absorbing_subspaces": 2,
+      "unexpected_collisions": 0
+    }
+  ],
+  "additivity": [
+    {
+      "order": 2,
+      "secret_dim": 2,
+      "mask_dim": 1,
+      "pairs": 136,
+      "decoupled_pairs": 70,
+      "decoupled_failures": 0,
+      "coupled_superadditive": 21,
+      "coupled_additive": 45
+    },
+    {
+      "order": 2,
+      "secret_dim": 1,
+      "mask_dim": 2,
+      "pairs": 136,
+      "decoupled_pairs": 58,
+      "decoupled_failures": 0,
+      "coupled_superadditive": 21,
+      "coupled_additive": 57
+    },
+    {
+      "order": 2,
+      "secret_dim": 2,
+      "mask_dim": 2,
+      "pairs": 2278,
+      "decoupled_pairs": 688,
+      "decoupled_failures": 0,
+      "coupled_superadditive": 741,
+      "coupled_additive": 849
+    },
+    {
+      "order": 3,
+      "secret_dim": 2,
+      "mask_dim": 1,
+      "pairs": 406,
+      "decoupled_pairs": 153,
+      "decoupled_failures": 0,
+      "coupled_superadditive": 120,
+      "coupled_additive": 133
+    },
+    {
+      "order": 3,
+      "secret_dim": 1,
+      "mask_dim": 2,
+      "pairs": 406,
+      "decoupled_pairs": 151,
+      "decoupled_failures": 0,
+      "coupled_superadditive": 120,
+      "coupled_additive": 135
+    },
+    {
+      "order": 5,
+      "secret_dim": 1,
+      "mask_dim": 1,
+      "pairs": 36,
+      "decoupled_pairs": 15,
+      "decoupled_failures": 0,
+      "coupled_superadditive": 10,
+      "coupled_additive": 11
+    }
+  ],
+  "verdict": {
+    "expectations_met": true,
+    "cross_checks_agree": true,
+    "contraction_exact": true,
+    "separation_holds": true,
+    "decoupled_additivity_holds": true,
+    "alarm_is_one_sided": true,
+    "steps_analyzed": 13,
+    "exhaustively_replayed_steps": 13
+  }
+}

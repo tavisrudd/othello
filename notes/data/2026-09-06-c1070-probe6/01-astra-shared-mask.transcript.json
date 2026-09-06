@@ -1,0 +1,27 @@
+{
+  "name": "astra-shared-mask",
+  "note": "Two one-time-pad operations reusing one mask. Each leaks nothing alone; together they reveal s1 - s2. The witness that leakage spaces do not compose.",
+  "characteristic": 5,
+  "secrets": ["s1", "s2"],
+  "masks": ["r"],
+  "operations": [
+    {
+      "name": "mask-s1",
+      "fresh_masks": ["r"],
+      "observations": [
+        { "name": "y1", "secret": { "s1": 1 }, "mask": { "r": 1 } }
+      ]
+    },
+    {
+      "name": "mask-s2-with-the-same-pad",
+      "fresh_masks": [],
+      "observations": [
+        { "name": "y2", "secret": { "s2": 1 }, "mask": { "r": 1 } }
+      ]
+    }
+  ],
+  "expect": {
+    "leak_dims": [0, 1],
+    "reuse_steps": [2]
+  }
+}

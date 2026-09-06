@@ -1,0 +1,34 @@
+{
+  "name": "shamir-share-then-repair",
+  "note": "Threshold-3 Shamir over F_7: f(x) = s + a1 x + a2 x^2, share i is f(i). An eavesdropper holds share 1. Node 2 is then replaced and helpers 3 and 4 send their shares to the new node in the clear; the eavesdropper reads both helper transcripts. The third observation completes a threshold set and the secret leaks.",
+  "characteristic": 7,
+  "secrets": ["s"],
+  "masks": ["a1", "a2"],
+  "operations": [
+    {
+      "name": "share",
+      "fresh_masks": ["a1", "a2"],
+      "observations": [
+        { "name": "share1", "secret": { "s": 1 }, "mask": { "a1": 1, "a2": 1 } }
+      ]
+    },
+    {
+      "name": "repair-node-2-helper-3",
+      "fresh_masks": [],
+      "observations": [
+        { "name": "helper3", "secret": { "s": 1 }, "mask": { "a1": 3, "a2": 2 } }
+      ]
+    },
+    {
+      "name": "repair-node-2-helper-4",
+      "fresh_masks": [],
+      "observations": [
+        { "name": "helper4", "secret": { "s": 1 }, "mask": { "a1": 4, "a2": 2 } }
+      ]
+    }
+  ],
+  "expect": {
+    "leak_dims": [0, 0, 1],
+    "reuse_steps": [3]
+  }
+}
