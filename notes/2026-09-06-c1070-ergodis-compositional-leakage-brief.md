@@ -137,7 +137,58 @@ Each probe gets one dated report `notes/2026-MM-DD-c1070-probeN-*.md` and an ind
 adversarial review, as in C1062. Reproducibility conventions apply to any number that could reach
 a paper.
 
-## 7. Standing constraints
+## 7. Second direction (Astra, same day): labelled information flow across transcripts
+
+Same object, different axis of composition. For secrets `s` and masks `r` independent and uniform,
+an observer of `y = A s + B r` learns `rank[A B] − rank B` symbols, and the *space* of revealed
+secret functionals is `L = { uᵀA : uᵀB = 0 }`. This is section 2's intersection with the mask
+subspace projected out, so it is the object of probe 1, not a new one. What is new is the
+composition axis: not "tower level to tower level" but "operation to operation" along a protocol
+transcript of repair, refresh, and masking steps, where mask reuse makes leakage non-additive.
+Astra's example: `s₁ + r` alone leaks nothing, `s₂ + r` alone leaks nothing, together they reveal
+`s₁ − s₂`. A per-operation summary "zero leakage" is an unlabelled state that does not compose.
+
+The correct observation: **leakage spaces do not compose; observation spaces do.** The state that
+composes exactly is the observed row space in `(s, r)`-coordinates, and `L` is a function of it,
+not the other way round. So the question is the manuscript's question again — what is the coarsest
+state of an adversary's view that stays exact under every future observation of bounded size? —
+and the manuscript's answer shape (a finite contextual quotient at bounded radius that is a
+congruence) is the candidate. That is **probe 6** below.
+
+**Prior-art risk is higher on this axis than on the tower axis.** Two literatures already compute
+"which probes reveal which secret combination" by rank tests:
+
+- Masking verification for side-channel security: the `t`-probing model (Ishai–Sahai–Wagner 2003),
+  and the tools maskVerif (Barthe et al.), IronMask (Belaïd et al. 2022), SILVER, VRAPS. They
+  decide exactly the rank condition above for linear (and some nonlinear) gadgets, mostly over
+  `F_2`, and they compose gadgets through *unlabelled* sufficient conditions — non-interference,
+  strong non-interference, PINI. Astra's point lands here precisely: SNI-style composition is the
+  unlabelled summary; an exact labelled compositional rule with witnesses would be a contribution
+  *against* that literature, and probe 0 must say whether one already exists.
+- Secure regenerating codes: Pawar–El Rouayheb–Ramchandran 2011, Shah–Rashmi–Kumar 2011,
+  Rawat–Koyluoglu–Silberstein–Vishwanath 2014 model an eavesdropper on repair transcripts with
+  exactly the rank-equivocation arithmetic; proactive refresh is Herzberg–Jarecki–Krawczyk–Yung
+  1995. These give amounts, not labelled spaces, as far as memory serves; probe 0 checks.
+
+The constrained-optimization product — maximize legitimate recoverability subject to bounds on
+illegitimate recoverability — is a Pareto problem in the same vector-cost family as probe 3 and is
+deferred behind it (probe 7). Scope stays as Astra scoped it: explicit linear protocols, stated
+mask reuse, stated observation models; adaptive observers, nonlinear operations, and side channels
+are out.
+
+Additional probes:
+
+- **Probe 6** — transcript state. Define the adversary view as a row space in `(s, r)`-space,
+  give the exact composition rule (sum of row spaces, then quotient), and find the coarsest state
+  exact under all future observations of bounded rank. Check whether it is the manuscript's
+  contextual quotient with the mask subspace as the "outer" side. Mask-reuse detection falls out
+  as a rank drop in `B`.
+- **Probe 7** — legitimate-versus-illegitimate recoverability as a vector-cost problem; after
+  probe 3.
+
+Probe 0 is widened to the two literatures above.
+
+## 8. Standing constraints
 
 - No edits to the `complete-ports` manuscript; a paper-facing consequence is proposed to that lane
   as a candidate statement, not written in.
