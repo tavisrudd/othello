@@ -49,13 +49,20 @@ finite projective plane of order \(q\), then every arc \(A\) disjoint from
  \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
 Thus even after exempting \(q+1\) points from coverage, the bound retains
-the classical \(\sqrt{2q}\) scale with additive term \(3/2-o(1)\).  More
+the classical \(\sqrt{2q}\) scale with additive term \(3/2-o(1)\); the
+constant \(3/2\) survives any \(o(q^{3/2})\) exempt points.  More
 generally, the first two secant moments yield an exact defect identity with
 nonnegative local summands.  At zero defect, each concurrency class
 containing at least two secants is a maximum matching, and these classes form
 a simple \(\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)\) design.  In
 Desarguesian planes, the arc realizes this design by concurrent chord
-families; the defect also gives quantitative deletion stability.
+families; the defect also gives quantitative deletion stability, and
+Hirzebruch's inequality shows that no such design with at least six points
+is realized in characteristic zero.  For caps in \(\PG(n,q)\) the identity
+persists with the number of coplanar quadruples in place of
+\(\binom{k}{4}\), and counting those quadruples through each secant gives
+\(|A|\ge\sqrt2\,q+\frac12+\frac3{\sqrt2}-o(1)\) for complete caps in
+\(\PG(3,q)\), against \(\frac12+\sqrt2\) from the counting bound.
 
 For a nonsingular conic \(\cC\subseteq\PG(2,q)\), let \(\rhoC(q)\) denote
 the corresponding minimum.  In characteristic two, a \(\cC\)-complete
@@ -209,13 +216,33 @@ characteristic-two branch closes by a chord-involution sign argument.  Thus
 the identity extracts equality and stability from the classical moments; it
 is not an independent third incidence equation.
 
+The same machinery reaches further than the conic.  The defect splits into
+an integer intrinsic part and a hole part, which sharpens the discrete gap
+(Proposition~\ref{prop:intrinsic-defect}); the constant \(3/2\) persists for
+any \(o(q^{3/2})\) prescribed holes and degrades linearly beyond that
+scale (Theorem~\ref{thm:large-holes}); the equality designs are never
+realized in characteristic zero once \(k\ge6\), by Hirzebruch's inequality
+for line arrangements (Theorem~\ref{thm:char-zero-obstruction}), and the
+ten-point design has a projectively unique realization
+(Corollary~\ref{cor:ten-point-uniqueness}).  In \(\PG(n,q)\) the identity
+holds for caps with the number of coplanar quadruples in place of
+\(\binom{k}{4}\), and counting those quadruples secant by secant yields a
+coverage bound with a term the plane does not have; in \(\PG(3,q)\) it
+raises the additive constant of the counting bound for complete caps from
+\(\frac12+\sqrt2\) to \(\frac12+\frac3{\sqrt2}\)
+(Section~\ref{sec:caps}).
+
 \paragraph{Optional coding translation.}
 For \(k\ge4\), projective representatives of the points of \(A\) in a
 Desarguesian plane form a parity-check matrix of a \([k,k-3,4]_q\) MDS
 code.  If \(U(A)\ne\varnothing\), then \(U(A)\) is its projective
 deep-hole syndrome locus: points of \(A\), points outside \(A\) on
 secants, and points of \(U(A)\) have coset weight one, two, and three,
-respectively.  This is a
+respectively.  Quantitatively, a syndrome whose projective point \(x\) lies
+outside \(A\) is realized by exactly \(r(x)\) error vectors of weight two,
+one on each secant through \(x\); and when \(A\) is \(\cC\)-complete at
+most \((q^2-1)/(q^3-1)\) of the nonzero syndromes need weight three, since
+their points lie on \(\cC\).  This is a
 dictionary for the uncovered-locus statements, not an input to their proofs.
 
 The surrounding notions differ at the defining containment.  Saturating
@@ -518,16 +545,64 @@ $(r-1)(m-r)\ge m-2$.  For $1\le r\le m-1$,
 $r(m-r)\ge m-1$.  Apply these estimates to~\eqref{eq:defect}.
 \end{proof}
 
-In particular, the defect has a discrete gap:
-\[
- m\Delta_{\cH}(A)=0
- \quad\text{or}\quad
- m\Delta_{\cH}(A)\ge m-2.
-\]
 Thus small defect forces almost every multiply covered required point to
 have the maximum possible multiplicity $m$, while almost every hole point
-met by a secant also has multiplicity $m$.  This is the precise stability
-content behind the equality heuristic.
+met by a secant also has multiplicity $m$.
+
+The defect splits into a part that depends only on the secant arrangement
+and a part paid for the prescribed holes.  Write
+\[
+ D(A)=\Delta_{\varnothing}(A)
+ =N(q-1)-\frac6m\binom{k}{4}-|\cX_{\varnothing}(A)|
+\]
+for the \emph{intrinsic defect}, the defect with no holes at all.
+
+\begin{proposition}[Intrinsic defect and the discrete gap]
+\label{prop:intrinsic-defect}
+Let $A$ be a $k$-arc in a projective plane of order $q$ with $k\ge4$, and
+let $\cH\subseteq\Pi\setminus A$.  Then $D(A)$ is a nonnegative integer,
+\begin{equation}
+ \Delta_{\cH}(A)=D(A)+\sum_{\substack{y\in\cH\\ r(y)>0}}
+ \left(1-\frac{r(y)}m\right),
+\label{eq:intrinsic-split}
+\end{equation}
+and $\Delta_{\cH}(A)$ is nondecreasing in $\cH$.  Consequently
+\begin{equation}
+ m\Delta_{\cH}(A)=0
+ \quad\text{or}\quad
+ m\Delta_{\cH}(A)\ge m-1,
+\label{eq:gap}
+\end{equation}
+and the second alternative splits further: if $D(A)\ge1$ then
+$m\Delta_{\cH}(A)\ge m$, while if $D(A)=0$ then $m\Delta_{\cH}(A)$ is
+$m-1$ times the number of holes of index one.
+\end{proposition}
+
+\begin{proof}
+The quantity $\frac6m\binom{k}{4}$ equals $(k-1)(k-2)(k-3)/2$ for even $k$
+and $k(k-2)(k-3)/2$ for odd $k$; both are integers, so $D(A)$ is an
+integer, and it is nonnegative by Theorem~\ref{thm:defect} with
+$\cH=\varnothing$.  Since $\cX_{\cH}(A)$ is $\cX_{\varnothing}(A)$ with the
+covered holes removed,
+$|\cX_{\cH}(A)|=|\cX_{\varnothing}(A)|-\#\{y\in\cH:r(y)>0\}$, and
+substituting this into the definition of $\Delta_{\cH}(A)$
+gives~\eqref{eq:intrinsic-split}.  Every summand there is nonnegative by
+Lemma~\ref{lem:max-index}, which gives monotonicity.
+
+For the gap, multiply~\eqref{eq:intrinsic-split} by $m$.  If $D(A)\ge1$
+the first term alone is at least $m$.  If $D(A)=0$, then~\eqref{eq:defect}
+with $\cH=\varnothing$ forces $r(x)\in\{1,m\}$ at every covered point
+$x\notin A$, holes included; so each nonzero summand in
+$\sum_{y}(m-r(y))$ equals $m-1$.
+\end{proof}
+
+The gap~\eqref{eq:gap} is sharp: a complete quadrilateral ($k=4$, $m=2$)
+has $D(A)=0$, and a single index-one hole gives $m\Delta_{\cH}(A)=1$.
+The two alternatives have different sources.  A secant arrangement that is
+not itself extremal costs at least one full unit of defect, whereas an
+extremal arrangement acquires defect only through holes met by exactly one
+secant, at $(m-1)/m$ each.  This is the precise stability content behind
+the equality heuristic.
 
 \subsection{Concurrency designs at equality}
 \label{subsec:matching-design}
@@ -1183,6 +1258,50 @@ $a\ge3/2-8/s$, which is~\eqref{eq:asymptotic-lower}.  Letting $q$ tend to
 infinity through prime powers gives~\eqref{eq:liminf}.
 \end{proof}
 
+The conic supplies the finite bound~\eqref{eq:asymptotic-lower}, but the
+limit~\eqref{eq:liminf} needs far fewer than $q+1$ exempt points to be
+disturbed: the hole count must reach the scale $q^{3/2}$ before the
+additive constant moves.
+
+\begin{theorem}[Large prescribed hole sets]
+\label{thm:large-holes}
+For each $q$ in an infinite set of prime powers, let $\cH_q$ be a set of
+$h_q$ points of a projective plane of order $q$ and let $A_q$ be a
+$k_q$-arc disjoint from $\cH_q$ and complete outside $\cH_q$.  If
+$h_q/q^{3/2}\to\lambda$, then
+\begin{equation}
+ \liminf_{q\to\infty}\bigl(k_q-\sqrt{2q}\bigr)\ge\frac32-\frac{\lambda}{\sqrt2}.
+\label{eq:large-holes}
+\end{equation}
+In particular the constant $3/2$ of~\eqref{eq:liminf} persists whenever
+$h_q=o(q^{3/2})$.
+\end{theorem}
+
+\begin{proof}
+Drop the nonnegative term $\IH(A_q)/m$ from~\eqref{eq:arbitrary-holes}:
+\[
+ q^2+q+1-k_q-h_q\le\binom{k_q}{2}(q-1)-\frac6m\binom{k_q}{4}.
+\]
+The first-moment inequality $q^2+q+1-k_q-h_q\le\binom{k_q}{2}(q-1)$ with
+$h_q=O(q^{3/2})$ gives $k_q^2\ge2q-O(q^{1/2})$, so $a_q=k_q-\sqrt{2q}$ is
+bounded below.  Along any subsequence on which $a_q$ is bounded above,
+write $k=\sqrt{2q}+a$ with $a$ in a fixed bounded set.  Then
+$\binom{k}{2}(q-1)=q^2+(a-\tfrac12)\sqrt2\,q^{3/2}+O(q)$ and, for either
+parity of $k$, $\frac6m\binom{k}{4}=\tfrac12k^3+O(k^2)=\sqrt2\,q^{3/2}+O(q)$,
+with the $O(q)$ terms uniform in $a$.  The displayed inequality becomes
+\[
+ 0\le\sqrt2\Bigl(a-\frac32\Bigr)q^{3/2}+h_q+O(q),
+\]
+and dividing by $\sqrt2\,q^{3/2}$ gives $a\ge3/2-\lambda/\sqrt2-o(1)$.
+Subsequences on which $a_q\to\infty$ satisfy~\eqref{eq:large-holes}
+trivially.
+\end{proof}
+
+No property of $\cH_q$ beyond its size is used.  A line, a conic, a
+unital, or any $O(q^{3/2-\varepsilon})$ points may be exempted without
+loss in the constant, while exempting $\lambda q^{3/2}$ points costs
+exactly $\lambda/\sqrt2$ in the bound stated.
+
 \begin{remark}[The scale of the conic term]
 \label{rem:scale}
 Every secant meets $\cC$ in at most two points, so
@@ -1197,6 +1316,331 @@ balanced finite cases, but cannot improve the additive constant $3/2$ in
 Theorem~\ref{thm:asymptotic}.  Any stronger asymptotic result needs an
 additional mechanism, not merely a spectral estimate for $\IC(A)$.
 \end{remark}
+
+\begin{remark}[Ordinary completion as independent domination]
+\label{rem:independent-domination}
+A $\cC$-complete arc is one step from an ordinary complete arc, and the
+step is a graph problem on the uncovered locus.  Let $A$ be
+$\cC$-complete with $U=\cU_{\cC}(A)\subseteq\cC$, and let $\Gamma_A$ be the
+graph on $U$ in which $u\sim v$ when the line $uv$ contains a point of $A$.
+For $S\subseteq\cC$, the set $A\cup S$ is an arc if and only if
+$S\subseteq U$ and $S$ is independent in $\Gamma_A$: a covered conic point
+lies on a secant, three points of $\cC$ are never collinear, and a
+collinear triple $a,s,s'$ with $a\in A$ is exactly an edge $ss'$.  Such an
+$A\cup S$ is an ordinary complete arc if and only if $S$ is a maximal
+independent set, because every point outside $U$ is already covered, a
+line $ss'$ meets $\cC$ only at $s,s'$, and $u\in U\setminus S$ lies on the
+secant $as$ exactly when $u\sim s$.  So the least number of conic points
+that complete $A$ is the independent domination number $i(\Gamma_A)$.
+Each $a\in A$ contributes the matching $\{u,\iota_a(u)\}$ of its chord
+involution restricted to $U$, so $\Gamma_A$ is a union of $k$ matchings,
+has maximum degree at most $k$, and $i(\Gamma_A)\ge|U|/(k+1)$.
+\end{remark}
+
+\section{Coverage by caps and the secant-local remainder}
+\label{sec:caps}
+
+The defect identity uses three facts about secants: a line has $q+1$
+points, two secants meet in at most one point, and the number of
+intersecting pairs of secants with disjoint endpoints is determined by the
+arc.  Only the third fact changes for caps in higher dimension, where two
+such secants meet exactly when their four endpoints are coplanar.  This
+section records the resulting identity and then extracts more from it than
+the planar argument does, by counting coplanar quadruples through each
+secant separately.
+
+Throughout, $A$ is a $k$-cap in $\PG(n,q)$ with $n\ge2$ and $k\ge4$: a set
+of $k$ points, no three collinear.  Put
+$\theta_j=(q^{j+1}-1)/(q-1)$, keep $N=\binom{k}{2}$,
+$m=\lfloor k/2\rfloor$, and $r(x)$ for the number of secants through a
+point $x\notin A$, and let $\cH$, $V_{\cH}(A)$, $\cX_{\cH}(A)$, and
+$\IH(A)$ be as in Section~\ref{sec:defect}.  Let $c_4(A)$ be the number
+of four-subsets of $A$ that lie in a plane.  Lemma~\ref{lem:max-index} and
+its proof hold verbatim, so $r(x)\le m$.
+
+\begin{theorem}[Cap defect identity]
+\label{thm:cap-defect-identity}
+For every $k$-cap $A$ in $\PG(n,q)$,
+\[
+ \sum_{x\notin A}r(x)=N(q-1),
+ \qquad
+ \sum_{x\notin A}\binom{r(x)}2=3c_4(A),
+\]
+and with
+\[
+ \Delta_{\cH}(A)=N(q-1)-\frac6m c_4(A)-\frac{\IH(A)}m-|\cX_{\cH}(A)|
+\]
+the identity~\eqref{eq:defect} holds unchanged:
+\(
+ m\Delta_{\cH}(A)=\sum_{x\in\cX_{\cH}(A)}(r(x)-1)(m-r(x))
+ +\sum_{y\in\cH}r(y)(m-r(y))\ge0.
+\)
+In particular, a cap complete outside $\cH$ with $|\cH|=h$ satisfies
+\begin{equation}
+ \theta_n-k-h\le N(q-1)-\frac6m c_4(A)-\frac{\IH(A)}m.
+\label{eq:cap-arbitrary-holes}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The first equation counts incidences as in Proposition~\ref{prop:moments}.
+For the second, two secants through a common point $x\notin A$ have four
+distinct endpoints by the cap analogue of Lemma~\ref{lem:max-index}, and
+two secants with disjoint endpoints meet if and only if they span a plane,
+that is, if and only if their four endpoints are coplanar; the meeting
+point is outside $A$ since no three cap points are collinear.  A coplanar
+four-subset has three pairings, each giving one intersecting pair.  The
+proof of Theorem~\ref{thm:defect} used only these two equations and
+$r\le m$, so it applies with $3\binom{k}{4}$ replaced by $3c_4(A)$.
+\end{proof}
+
+For $n=2$ every four-subset is coplanar and $c_4(A)=\binom{k}{4}$.  For
+$n\ge3$ the nonnegative summands have the same stability content as
+before, each nonzero one being at least $m-2$, but two features of the
+plane are lost: $D(A)$ need not be an integer, so the gap of
+Proposition~\ref{prop:intrinsic-defect} does not transfer, and secants with
+disjoint endpoints may be skew, so the Kneser graph of
+Theorem~\ref{thm:matching-design} no longer decomposes into concurrence
+cliques.  What is gained is a term, $c_4(A)$, that the geometry constrains.
+
+\subsection{Coplanar quadruples through a secant}
+
+Fix a secant $\ell$ with endpoints $a,b$ and let
+\[
+ T_\ell=\#\bigl\{B\in\tbinom A4:a,b\in B,\ B\text{ coplanar}\bigr\}.
+\]
+The $t=\theta_{n-2}$ planes through $\ell$ partition $A\setminus\{a,b\}$;
+if the plane $\pi$ contains $z_\pi$ of these points, then
+$\{a,b,c,d\}$ is coplanar exactly when $c,d$ lie in the same plane through
+$\ell$, so
+\begin{equation}
+ T_\ell=\sum_{\pi\supset\ell}\binom{z_\pi}2,
+ \qquad
+ \sum_{\pi\supset\ell}z_\pi=k-2,
+ \qquad
+ \sum_\ell T_\ell=6c_4(A).
+\label{eq:pencil}
+\end{equation}
+The same number counts the secants that meet $\ell$ outside $A$, one for
+each coplanar $\{c,d\}$, and a point $x\in\ell\setminus A$ accounts for
+$r(x)-1$ of them:
+\begin{equation}
+ T_\ell=\sum_{x\in\ell\setminus A}\bigl(r(x)-1\bigr).
+\label{eq:secant-collisions}
+\end{equation}
+
+\begin{lemma}[Pencil bound]
+\label{lem:pencil-bound}
+Write $k-2=ts+b$ with $0\le b<t$ and put
+$B_n(k,q)=t\binom{s}{2}+sb$.  Then for every secant,
+\begin{equation}
+ T_\ell=B_n(k,q)+\frac12\sum_{\pi\supset\ell}(z_\pi-s)(z_\pi-s-1),
+\label{eq:pencil-remainder}
+\end{equation}
+where every summand is a nonnegative integer.  Hence
+$T_\ell\ge B_n(k,q)$, with equality exactly when every plane through
+$\ell$ contains $s$ or $s+1$ further cap points, and
+$c_4(A)\ge\frac16\binom{k}{2}B_n(k,q)$.
+\end{lemma}
+
+\begin{proof}
+For integers $z$ and $s$,
+$\binom z2-sz+\binom{s+1}2=\frac12(z-s)(z-s-1)$, and the product of two
+consecutive integers is nonnegative.  Sum over the $t$ planes using
+$\sum z_\pi=k-2=ts+b$:
+$s(k-2)-t\binom{s+1}2=t\binom s2+sb$.
+\end{proof}
+
+Substituting~\eqref{eq:pencil-remainder} into
+Theorem~\ref{thm:cap-defect-identity} gives a three-term identity whose
+summands are all nonnegative: concurrence multiplicities away from $1$ and
+$m$, holes of intermediate index, and unbalanced pencils.  In the plane
+$t=1$, $s=k-2$, and the pencil term vanishes, so
+$N B_2(k,q)=6\binom{k}{4}$ recovers~\eqref{eq:defect}.
+
+\subsection{A secant-local coverage bound}
+
+Replacing $c_4(A)$ by its lower bound in~\eqref{eq:cap-arbitrary-holes} is
+not the best use of~\eqref{eq:secant-collisions}.  The intersections on a
+secant cost coverage in a way that depends on how they are distributed
+along it, and the cost is smallest when they are concentrated.
+
+For $m\ge2$ and an integer $T\ge0$, write $T=j(m-1)+\rho$ with
+$0\le\rho<m-1$ and put
+\[
+ \varphi_m(T)=j\,\frac{m-1}{m}+\frac{\rho}{\rho+1}.
+\]
+Thus $\varphi_m(T)=T/(T+1)$ for $T\le m-1$, $\varphi_m(T)=T/m$ when
+$m-1$ divides $T$, and $\varphi_m(T)\ge\max\{T/m,\,T/(T+1)\}$ always.
+
+\begin{theorem}[Secant-local coverage bound]
+\label{thm:secant-local-coverage}
+For every $k$-cap $A$ in $\PG(n,q)$ and every $\cH\subseteq\PG(n,q)\setminus A$,
+\begin{equation}
+ |\cX_{\cH}(A)|\le
+ N(q-1)-\sum_{\ell}\varphi_m(T_\ell)-\frac{\IH(A)}m,
+\label{eq:secant-local}
+\end{equation}
+the sum running over the secants of $A$.  Consequently
+\begin{equation}
+ |\cX_{\cH}(A)|\le
+ N\Bigl(q-1-\varphi_m\bigl(B_n(k,q)\bigr)\Bigr)-\frac{\IH(A)}m.
+\label{eq:secant-local-explicit}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Let $Y$ be the set of points outside $A$ on at least one secant.  Then
+$N(q-1)-|Y|=\sum_{x\in Y}(r(x)-1)=\sum_\ell L_\ell$ with
+\[
+ L_\ell=\sum_{x\in\ell\setminus A}\Bigl(1-\frac1{r(x)}\Bigr),
+\]
+since a point of index $r$ receives $(r-1)/r$ from each of its $r$
+secants.  On a fixed secant the indices $r(x)$, $x\in\ell\setminus A$,
+are integers in $[1,m]$ with $\sum(r(x)-1)=T_\ell$
+by~\eqref{eq:secant-collisions}.  The function $r\mapsto1-1/r$ is concave,
+so the minimum of $L_\ell$ over the polytope of real vectors with these
+constraints is attained at a vertex, where at most one coordinate lies
+strictly between $1$ and $m$.  Coordinates equal to $1$ contribute nothing,
+$j$ coordinates equal to $m$ contribute $j(m-1)/m$ and use $j(m-1)$ of the
+total, and the remaining coordinate $\rho+1$ contributes $\rho/(\rho+1)$;
+so $L_\ell\ge\varphi_m(T_\ell)$.  Finally
+$|\cX_{\cH}(A)|=|Y|-\#\{y\in\cH:r(y)>0\}$ and each covered hole has index
+at most $m$, so at least $\IH(A)/m$ holes are covered.  The explicit
+form follows from Lemma~\ref{lem:pencil-bound} and monotonicity of
+$\varphi_m$.
+\end{proof}
+
+The term $T_\ell/m$ in $\varphi_m$ reproduces the correction
+$6c_4(A)/m$ of Theorem~\ref{thm:cap-defect-identity}; the term
+$T_\ell/(T_\ell+1)$ is new.  It says that a secant meeting many others
+loses almost one point of coverage however concentrated those meetings
+are, with equality when they all occur at a single point.
+
+\subsection{Three dimensions}
+
+In $\PG(3,q)$ a secant lies in $t=q+1$ planes, so for $q+3\le k\le2q+4$
+the balanced occupancies are $1$ and $2$ and $B_3(k,q)=k-q-3$.  A pair
+$\{a,b\}$ with $T_{ab}=0$ is a \emph{free pair} in the sense of Farr and
+Lison\v{e}k~\cite{FarrLisonek2006}, a pair not participating in any
+coplanar quadruple; a cap of $\PG(3,q)$ with a free pair has at most $q+3$
+points~\cite[Theorem~2.3]{FarrLisonek2006}, and the pencil count
+quantifies what happens above that threshold: every secant meets at least
+$k-q-3$ others.  The threshold needs no upper restriction: $\binom z2\ge z-1$
+for every integer $z\ge0$, so $T_\ell\ge(k-2)-(q+1)$ whenever $k\ge q+3$.
+
+\begin{corollary}[Complete caps in \(\PG(3,q)\)]
+\label{cor:pg3q-complete-caps}
+Let $A$ be a $k$-cap in $\PG(3,q)$ with $k\ge q+3$ and let
+$\cH\subseteq\PG(3,q)\setminus A$ with $|\cH|=h$.  Then
+\begin{equation}
+ |\cX_{\cH}(A)|\le
+ \binom{k}{2}\Bigl(q-2+\frac1{k-q-2}\Bigr)-\frac{\IH(A)}m,
+\label{eq:pg3q-coverage}
+\end{equation}
+and if $A$ is complete outside $\cH$,
+\begin{equation}
+ q^3+q^2+q+1-k-h\le
+ \binom{k}{2}\Bigl(q-2+\frac1{k-q-2}\Bigr)-\frac{\IH(A)}m.
+\label{eq:pg3q-complete}
+\end{equation}
+If $h_q=\lambda q^2+o(q^2)$ along a sequence of caps complete outside
+$\cH_q$, then
+\begin{equation}
+ \liminf_{q\to\infty}\bigl(k_q-\sqrt2\,q\bigr)\ge\frac12+\frac{3-\lambda}{\sqrt2}.
+\label{eq:pg3q-asymptotic}
+\end{equation}
+For ordinary complete caps ($\lambda=0$) the constant is
+$\frac12+\frac3{\sqrt2}=2.621\ldots$, and for caps complete outside a
+nonsingular quadric, which has $q^2+1$ or $(q+1)^2$ points ($\lambda=1$),
+it is $\frac12+\sqrt2$.
+\end{corollary}
+
+\begin{proof}
+For $k\ge q+3$, $T_\ell\ge k-q-3$ on every secant and
+$\varphi_m(T)\ge T/(T+1)$ is nondecreasing in $T$, so
+\eqref{eq:secant-local} gives
+$L\ge N\frac{k-q-3}{k-q-2}=N\bigl(1-\frac1{k-q-2}\bigr)$,
+which is~\eqref{eq:pg3q-coverage}; completeness turns it
+into~\eqref{eq:pg3q-complete}.  For the limit, drop $\IH/m$ and note that
+the first-moment inequality $\theta_3-k-h\le N(q-1)$ bounds
+$a_q=k_q-\sqrt2\,q$ from below.  Along a subsequence with $a$ bounded,
+$N=q^2+\sqrt2\,a\,q-\frac{\sqrt2}2q+O(1)$ and $1/(k-q-2)=O(1/q)$, so
+the right side of~\eqref{eq:pg3q-complete} is
+$q^3+(\sqrt2\,a-\frac{\sqrt2}2-2)q^2+O(q)$, while the left side is
+$q^3+(1-\lambda)q^2+o(q^2)$.  Comparing the $q^2$ coefficients gives
+$\sqrt2\,a\ge3-\lambda+\frac{\sqrt2}2-o(1)$.
+\end{proof}
+
+The first moment alone gives the constant $\frac12+\sqrt2=1.914\ldots$
+for ordinary complete caps, so the secant-local term contributes exactly
+$1/\sqrt2$.  The finite inequality is usable directly.  At $q=3$ it reads
+$40-k\le\binom{k}{2}(1+\frac1{k-5})$, which fails for $k=7$ ($33>31.5$)
+and holds for $k=8$, whereas the first moment allows $k=7$.  At $q=13$
+and $k=21$ it reads $2359\le2345$, so no complete $21$-cap exists in
+$\PG(3,13)$, while the first moment permits one.  The smallest complete
+caps of $\PG(3,q)$ have $8$, $12$, and $17$ points for $q=3,5,7$, and the
+smallest known have $30$ and $36$ points for $q=11,13$
+\cite{BartoliDavydovKreshchukMarcuginiPambianco2016}; the inequality
+gives $8$, $10$, $13$, $19$, $22$, tight at $q=3$ and loose thereafter.
+The same source calls $\sqrt2\,q^{(n-1)/2}$ the trivial lower bound for
+complete caps of $\PG(n,q)$ and cites no improvement, and we found none
+in the sources we could consult; the additive term in
+\eqref{eq:pg3q-asymptotic} is, to our knowledge, the first refinement of
+the counting bound for complete caps in $\PG(3,q)$.
+
+\subsection{Four and more dimensions}
+
+At the covering scale $k\asymp q^{(n-1)/2}$ a secant lies in
+$t=\theta_{n-2}\asymp q^{n-2}$ planes, and $k-2<t$ for large $q$ as soon
+as $n\ge4$.  Then $s=0$, $B_n(k,q)=0$, and Lemma~\ref{lem:pencil-bound}
+says nothing.  This is not an artefact of the method.  A parity-check
+matrix of a perfect two-error-correcting code has columns forming a cap
+with no coplanar quadruple, since any four columns are independent, that
+is complete, since every syndrome is a combination of at most two columns.
+The ternary Golay code gives a complete $11$-cap in $\PG(4,3)$ and the
+binary repetition code of length five gives the frame in $\PG(3,2)$; in
+both, every point outside the cap lies on exactly one secant.  These two
+are also the equality cases of Pavese's packing bound for sets with no four
+coplanar points~\cite[Proposition~3.1]{Pavese2023}.  Normal rational
+curves, complete or not, also have $c_4(A)=0$.  Any lower bound
+on $c_4(A)$ for complete caps in $\PG(n,q)$, $n\ge4$, must exclude these.
+
+The invariant has a coding-theoretic reading.  If $H$ has the cap points
+as columns and $C=\ker H$, then a coplanar quadruple spans a
+one-dimensional space of dependencies with all four coefficients nonzero,
+because no three cap points are collinear; conversely every weight-four
+codeword arises this way.  Hence
+\[
+ A_4(C)=(q-1)\,c_4(A),
+ \qquad
+ (q-1)\,T_{ab}=\#\{c\in C:\operatorname{wt}(c)=4,\ a,b\in\operatorname{supp}(c)\},
+\]
+so Theorem~\ref{thm:secant-local-coverage} is a statement about how the
+weight-four supports of $C$ are distributed over pairs of coordinates,
+not only about their number.
+
+Theorem~\ref{thm:secant-local-coverage} also isolates what a higher
+dimensional improvement would need.  If a proportion $\eta$ of the secants
+have $T_\ell\ge d$, then for a cap complete outside $\cH$
+\[
+ \theta_n-k-h\le N\Bigl(q-1-\eta\frac{d}{d+1}\Bigr)-\frac{\IH(A)}m,
+\]
+and with $h=\lambda q^{n-1}+o(q^{n-1})$, $n\ge4$, and $d=d(q)\to\infty$
+on a proportion $\eta-o(1)$ of secants, the expansion used for
+Corollary~\ref{cor:pg3q-complete-caps}, in which the term $-k/2$ of $N$
+is now of lower order, gives
+\[
+ \liminf_{q\to\infty}\frac{k-\sqrt2\,q^{(n-1)/2}}{q^{(n-3)/2}}
+ \ge\frac{2-\lambda+\eta}{\sqrt2},
+\]
+against $(2-\lambda)/\sqrt2$ from the first moment.  Since the average of
+$T_\ell$ is $6c_4(A)/N$, a lower bound $\mathbb E\,T_\ell\ge\gamma q$
+together with $\mathbb E\,T_\ell^2\le Cq^2$ would give
+$\Pr(T_\ell\ge\gamma q/2)\ge\gamma^2/(4C)$ by Cauchy--Schwarz, which is
+such a proportion.  The higher-dimensional problem is therefore to force
+coplanar quadruples that are both numerous and spread over the secants;
+it is stated as a problem in the conclusion.
 
 \section{Conclusion and further questions}
 
@@ -1216,13 +1660,38 @@ $O(\sqrt q(\log q)^c)$.  On the lower-bound side,
 Remark~\ref{rem:scale} shows that improving the additive constant \(3/2\)
 requires a mechanism coupling rank-three realization to the matching
 structure, rather than a sharper estimate of the conic-incidence term.
+The identity~\eqref{eq:defect} makes the target exact.  For
+$k=\sqrt{2q}+O(1)$ the defect of a $\cC$-complete arc is
+$\sqrt2(k-\sqrt{2q}-\tfrac32)q^{3/2}+O(q)$, so any improvement of the
+constant needs a defect of order $q^{3/2}$; excluding zero defect, or
+proving a bounded positive defect, cannot help.  A sufficient geometric
+condition: if the points $x$ with $r(x)\le(1-\varepsilon)m$ carry a
+proportion $\eta$ of the pairs of concurrent secants, then
+$(r-1)(m-r)\ge\frac{2\varepsilon}{1-\varepsilon}\binom r2$ at each of them
+gives $m\Delta_{\cC}(A)\ge\frac{6\eta\varepsilon}{1-\varepsilon}\binom{k}{4}$
+and hence
+$\liminf(\rhoC(q)-\sqrt{2q})\ge\frac32+\frac{\eta\varepsilon}{1-\varepsilon}$.
+Whether rank-three geometry forces such a proportion is open.
 \end{problem}
 
 \begin{problem}
-Develop the higher-dimensional analogue for caps complete outside a
-prescribed quadric in $\PG(n,q)$.  The evaluation lemma already applies to
-arbitrary feature maps and Veronese degrees; the missing ingredient is an
-appropriate exact secant-moment remainder for caps.
+In $\PG(n,q)$ with $n\ge4$, the pencil bound of
+Section~\ref{sec:caps} is vacuous at the covering scale, and complete caps
+with no coplanar quadruple exist.  Find a lower bound on the number
+$c_4(A)$ of coplanar quadruples of a complete cap at
+$k\asymp q^{(n-1)/2}$ together with an upper bound on its concentration over
+secants; by Theorem~\ref{thm:secant-local-coverage} a proportion $\eta$ of
+secants with unbounded $T_\ell$ improves the second-order term of the
+lower bound by $\eta/\sqrt2$.
+\end{problem}
+
+\begin{problem}
+Determine whether the secant-local bound of
+Corollary~\ref{cor:pg3q-complete-caps} is attained.  Equality forces the
+secants of a complete cap in $\PG(3,q)$ to split into concurrent bundles of
+size $k-q-2$ with secants from different bundles skew, every plane meeting
+the cap in at most four points, and $\binom{k}{2}(q-2+\frac1{k-q-2})=q^3+q^2+q+1-k$;
+for $k=q+4$ the last condition fails for every $q$.
 \end{problem}
 
 \appendix
@@ -1389,6 +1858,104 @@ parameter \(t\) with \(t^3+t+1=0\), while the arc inequations force
 \(t\notin\F_2\).  Thus \(\F_8\subseteq K\).  The regular hyperoval over
 \(\F_8\) and scalar extension prove the converse.
 \end{proof}
+
+The certificate says more than existence.  In characteristic two the
+lexicographic basis for the regular-hyperoval design is triangular: its
+univariate generator is \(t(t+1)(t^3+t+1)\) in the parameter \(t\), the
+next generator fixes one coordinate as \(t^3\), and every remaining
+generator is linear in a fresh unknown.  The arc inequations remove
+\(t\in\F_2\), so the normalized realizations are exactly three points over
+\(\overline{\F}_2\), with coordinates in \(\F_8\), forming one orbit of the
+Frobenius map \(t\mapsto t^2\).
+
+\begin{corollary}[Projective uniqueness of the ten-point realization]
+\label{cor:ten-point-uniqueness}
+Every rank-three projective realization of the regular-hyperoval design over
+a field \(K\) is carried by an element of \(\operatorname{PGL}(3,K)\) onto
+the regular hyperoval of \(\PG(2,8)\), embedded in \(\PG(2,K)\) through
+\(\F_8\subseteq K\).
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:match-ten-realization}, \(K\) has characteristic two
+and contains \(\F_8\).  A projectivity moves the four frame points of any
+realization to their normalized positions, so every realization is
+\(\operatorname{PGL}(3,K)\)-equivalent to one of the three normalized
+solutions.  The regular hyperoval of \(\PG(2,8)\), labelled as in the
+converse above, normalizes to one of them, and the other two are its
+images under the Frobenius collineations of \(\PG(2,8)\).  A Frobenius
+collineation carries a conic and its nucleus to a conic and its nucleus,
+and all conics of \(\PG(2,8)\) are projectively equivalent, so each of the
+three solutions is a regular hyperoval as a point set.
+\end{proof}
+
+The corollary classifies the arc, not the labelling and not the prescribed
+conic: the \(63\) matchings may be attached to the ten points in several
+ways, and the disjoint conic of the relative-completeness problem is
+additional data.
+
+Away from characteristic two, a single classical inequality settles every
+size at once.  Hirzebruch~\cite{Hirzebruch1983} proved, by way of the
+Kummer covers of the plane branched along a line arrangement, that an
+arrangement of \(d\ge6\) lines in \(\PG(2,\mathbb C)\) with
+\(t_d=t_{d-1}=t_{d-2}=0\) satisfies
+\begin{equation}
+ t_2+\frac34t_3\ge d+\sum_{r\ge5}(2r-9)t_r,
+\label{eq:hirzebruch}
+\end{equation}
+where \(t_r\) is the number of points lying on exactly \(r\) of the lines;
+this is the form recorded by Pokora~\cite[Remark~2.9]{Pokora2020}, and the
+weaker form \(t_2+t_3\ge d+\sum_{r\ge5}(r-4)t_r\) holds already for
+\(d\ge4\) and \(t_d=t_{d-1}=0\)~\cite[Theorem~1.5]{Pokora2020}.
+
+\begin{theorem}[No realizations in characteristic zero]
+\label{thm:char-zero-obstruction}
+Let \(k\ge6\) and \(m=\lfloor k/2\rfloor\).  No simple
+\(\operatorname{MATCH}(k,m,1)\) design has a rank-three projective
+realization over a field of characteristic zero.
+\end{theorem}
+
+\begin{proof}
+Let \(K\) have characteristic zero and suppose a realization exists.  Its
+finitely many coordinates generate a finitely generated subfield of \(K\),
+which embeds in \(\mathbb C\); incidences and non-incidences are polynomial
+equations and inequations preserved by the embedding, so we may take
+\(K=\mathbb C\).
+
+Consider the arrangement of the \(d=\binom{k}{2}\) secant lines.  The arc
+points lie on \(k-1\) secants each, and no other secant passes through an
+arc point because the points form an arc.  Two secants with disjoint
+endpoints meet at a point outside \(A\); the unique block containing the
+pair is concurrent there by Definition~\ref{def:rank-three-realization}, so
+the point lies on those \(m=\lfloor k/2\rfloor\) secants, and on no
+further secant, since Lemma~\ref{lem:max-index} holds in every projective
+plane.  Hence the multiple points are the \(k\) arc
+points, each of multiplicity \(k-1\), and the block points, each of
+multiplicity \(m\); their number is
+\[
+ t_m=\frac{\binom{d}{2}-k\binom{k-1}{2}}{\binom m2},
+\]
+since every pair of disjoint secants lies in exactly one block.  Every
+multiplicity is at most \(k-1<d-2\), so~\eqref{eq:hirzebruch} applies.
+
+For \(k\ge8\) one has \(m\ge4\) and \(k-1\ge7\), so \(t_2=t_3=0\) and the
+left side of~\eqref{eq:hirzebruch} vanishes while the right side is
+positive.  For \(k=6\): \(d=15\), \(t_5=6\), \(t_3=15\), and
+\eqref{eq:hirzebruch} would read \(45/4\ge21\).  For \(k=7\): \(d=21\),
+\(t_6=7\), \(t_3=35\), and it would read \(105/4\ge42\).  Each is false.
+\end{proof}
+
+For \(k=7\) the weaker form gives \(35\ge35\) and decides nothing, so the
+three-quarters coefficient is used.  The case \(k=6\) is instructive: the
+fifteen block points and fifteen secants form the duad--syntheme
+configuration of Cremona and Richmond, which is realizable over the reals,
+and the obstruction is the requirement that the six arc points carry five
+secants each.  The design for \(k=4\), the complete quadrilateral with
+\(d=6\), \(t_3=4\), \(t_2=3\), attains equality in~\eqref{eq:hirzebruch}.
+Together with Corollary~\ref{cor:six-seven-rigidity} and
+Theorem~\ref{thm:match-ten-realization}, the theorem shows that the
+realizable equality designs found so far live in characteristic two, and
+that the ten-point design has a single realizable characteristic.
 
 \section{An upper-bound transfer from complete arcs}
 \label{sec:transfer}
@@ -1585,22 +2152,42 @@ obstruction used to rule this out at $q=16$.
 
 \begin{lemma}[Uncovered evaluation obstruction]
 \label{lem:evaluation-obstruction}
-Let $A$ and $U$ be finite sets of projective points.  There is no nonzero
-$f\in V$ such that $U\subseteq Z(f)$ and $A\cap Z(f)=\varnothing$ if either
-of the following holds:
+Let $A$ and $U$ be finite sets of projective points over a field $K$.
+There is no nonzero $f\in V$ such that $U\subseteq Z(f)$ and
+$A\cap Z(f)=\varnothing$ if either of the following holds:
 \begin{enumerate}
  \item the evaluation map
  $f\mapsto(\operatorname{ev}_u(f))_{u\in U}$ is injective;
  \item for some $a\in A$, the functional $\operatorname{ev}_a$ belongs to
  the span of $\{\operatorname{ev}_u:u\in U\}$.
 \end{enumerate}
+Conversely, if $K$ is infinite, or if $K=\F_q$ and $|A|\le q$, then the
+absence of such an $f$ implies one of the two conditions.  The bound
+$|A|\le q$ cannot be raised: the $q+1$ lines through the origin cover
+$\F_q^2$.
 \end{lemma}
 
 \begin{proof}
 If $f$ vanishes on $U$, injectivity in the first case gives $f=0$.  In the
 second case, applying a spanning relation for $\operatorname{ev}_a$ to $f$
 gives $f(a)=0$, contrary to $A\cap Z(f)=\varnothing$.
+
+For the converse, let $W=\{f\in V:U\subseteq Z(f)\}$ and $d=\dim W$.  The
+first condition says $d=0$, and the second says that some
+$\operatorname{ev}_a$ vanishes on $W$, because $W$ is the annihilator of
+$\{\operatorname{ev}_u\}$ and $V$ is finite-dimensional.  Suppose neither
+holds.  Then $d\ge1$ and each $\ker(\operatorname{ev}_a|_W)$, $a\in A$, is
+a hyperplane of $W$.  Over an infinite field a vector space is not a
+finite union of proper subspaces.  Over $\F_q$ the union of $|A|\le q$
+hyperplanes has at most $1+q(q^{d-1}-1)<q^d$ vectors.  In either case some
+$f\in W$ lies outside every kernel: it vanishes on $U$ and at no point of
+$A$.
 \end{proof}
+
+For $|A|\le q$ the lemma is therefore a complete linear-algebraic test for
+the existence of a form in $V$ vanishing on $U$ and avoiding $A$.  It says
+nothing about nonsingularity, which remains a separate condition when $V$
+is the space of quadratic forms.
 
 \begin{lemma}[Line--triangle obstruction]
 \label{lem:line-triangle-obstruction}
@@ -1867,6 +2454,18 @@ $U(A)$.  Conversely, if $gU(A)=U(A)$, then
 $U(gA)=gU(A)=U(A)$, so Proposition~\ref{prop:arc-reconstruction} gives
 $gA=A$.
 \end{proof}
+
+\begin{remark}[Reconstruction from a corrupted locus]
+\label{rem:noisy-reconstruction}
+The threshold in Corollary~\ref{cor:arc-reconstruction-algorithm} has
+room for errors.  Let $T$ be any point set with $|T\,\triangle\,S|\le e$.
+A secant meets $S$ in all $q+1$ of its points and a non-secant line in at
+most $N$, since it meets each secant at most once; so secants meet $T$ in
+at least $q+1-e$ points and non-secants in at most $N+e$.  If
+$2e<q+1-N$, the secants are again the lines meeting $T$ in more than
+$N+e$ points, and $A$ is recovered as before.  Only the projective-plane
+axioms enter, so this holds in every projective plane of order $q$.
+\end{remark}
 
 \begin{remark}[Sharpness of the strict threshold]
 \label{rem:arc-reconstruction-sharp}
@@ -2135,6 +2734,35 @@ B.~Alspach and K.~Heinrich,
 \newblock Matching designs,
 \newblock \emph{Australasian Journal of Combinatorics} \textbf{2} (1990),
 39--55.
+
+\bibitem{Hirzebruch1983}
+F.~Hirzebruch,
+\newblock Arrangements of lines and algebraic surfaces,
+\newblock in \emph{Arithmetic and geometry, Vol.~II}, Progress in
+Mathematics \textbf{36}, Birkh\"auser, Boston, 1983, 113--140.
+
+\bibitem{Pokora2020}
+P.~Pokora,
+\newblock Hirzebruch-type inequalities viewed as tools in combinatorics,
+preprint, arXiv:1808.09167v4 (2020).
+
+\bibitem{FarrLisonek2006}
+J.~B.~Farr and P.~Lison\v{e}k,
+\newblock Large caps with free pairs in dimensions five and six,
+\newblock \emph{Innovations in Incidence Geometry} \textbf{4} (2006),
+69--88.
+
+\bibitem{Pavese2023}
+F.~Pavese,
+\newblock On 4-general sets in finite projective spaces,
+preprint, arXiv:2305.13838v1 (2023).
+
+\bibitem{BartoliDavydovKreshchukMarcuginiPambianco2016}
+D.~Bartoli, A.~A.~Davydov, A.~A.~Kreshchuk, S.~Marcugini, and
+F.~Pambianco,
+\newblock Tables, bounds and graphics of the smallest known sizes of
+complete caps in the spaces \(\mathrm{PG}(3,q)\) and \(\mathrm{PG}(4,q)\),
+preprint, arXiv:1610.09656v1 (2016).
 
 \bibitem{Ball1997}
 S.~Ball,

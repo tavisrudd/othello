@@ -41,7 +41,7 @@ from pathlib import Path
 PAPER = Path(__file__).resolve().parents[1]
 SOURCE = "arcs_complete_outside_conic.tex"
 TRACKED_PDF = PAPER / "arcs_complete_outside_conic.pdf"
-EXPECTED_PAGES = 27
+EXPECTED_PAGES = 35
 # 2026-01-01T00:00:00Z. Fixed so that independent builds of one source agree.
 DETERMINISTIC_EPOCH = "1767225600"
 
