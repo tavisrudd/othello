@@ -1,0 +1,446 @@
+# C1016 — how long a full order-2092 search takes with the banked reductions
+
+**Lane**: `ergodis` · **Task**: C1016 · 2026-09-05 · independent review estimate.
+
+Every quoted number is tagged **[exact]** (proved, or an exhaustive enumeration;
+grants negative coverage), **[measured]** (an observed timing or search result;
+no negative authority), or **[model]** (a heuristic density, tail fit or
+composition of such; no negative authority). Arithmetic done for this review is
+tagged **[review]** and is a model unless it only rearranges exact inputs.
+
+## 0. Bottom line
+
+With the banked instrument — exact `q29` shell seeding, full-neighbourhood tabu
+on the carrier objective, one plateau state per 30 s per worker — the
+per-restart probability of an order-2092 hit is, under the only model the
+evidence supports, about `2^-716` (range `2^-700` to `2^-930`), so a hit costs
+about `2^690` twelve-worker-years, or `2^675` million-core-years [model]. That
+is "never" at every machine scale. The campaign's own figure of "about 270 bits
+remain" is a `q174`-only number: it omits the carrier rung, which adds at least
+about 500 bits under the same reading, and it is a statement about the uniform
+measure rather than about the search. To reach one twelve-worker-year the
+remaining depth would have to fall to about 24 bits — a reduction of roughly
+690 bits — and no open frontier on the card is within two orders of magnitude
+of that size. Solution-richness does not rescue it: the descent traces show the
+instrument gaining exactly `log2 N` tail-bits for `N` restarts once it is past a
+few thousand steps, which is the signature of a saturated sampler, and a better
+local-search instrument moves the exponent by tens of bits, not hundreds.
+
+## 1. Inputs, with provenance
+
+From the live card (`2026-08-30-c1016-ergodis-hadamard-quotient-synthesis.md`),
+the congruence hunt (`2026-09-05-c1016-q174-congruence-hunt.md`) and its
+evidence `phase-two-q174-congruence.json`:
+
+- Bordered route `4-{522; 260, 261, 261, 261; 520}` on `Z/522`; ladder
+  `q29 -> q174 -> carrier 522`; route "solve `q174` first, then repair the
+  carrier fibre" [card, routing decision from a measured A/B].
+- Carrier states above one exact `q29` shell: `2^1718.8` to `2^1726.6`
+  (per-shell median `2^1724.6`) [exact, given the shell].
+- Free rank of the `q174` deviation: 73 [exact]. Spread of each free coordinate
+  over 512 uniform lifts: median 17.9, largest 20.1 **in lattice steps of
+  four** (see section 4.1) [measured].
+- Gaussian-density cost of 73 exact coordinates: `2^399.5` to `2^401.1`
+  [model]; expected exact `q174` solutions per shell fibre `2^1318` to
+  `2^1327` [model].
+- Mean `q174` objective of a uniform lift 456,000 to 473,000 [measured];
+  two-moment gamma fit puts the plateau at 3,680 at `2^-118.9` to `2^-142.4` in
+  that tail [model]; "states at or below the plateau" `2^1591` (median shell)
+  [model].
+- Floor 32 [exact]. No congruence at any modulus with prime factors below a
+  million [exact over that domain].
+
+From the carrier rung (`2026-09-05-c1016-carrier-522-rung.md`) and
+`carrier-spectrum*.json`:
+
+- Above an exact `q174` hit: 173 free classes [exact]; orbit fibre `2^827.4` to
+  `2^830.5` [exact]; per-class spread 37.1 raw [measured]; cost 4.535 bits per
+  class on the mod-four lattice, `2^42.8` exact carrier solutions per `q174`
+  hit, i.e. one solution in `2^786` fibre states [model].
+- Above the shell directly: 246 free classes [exact]; spread 44.6 raw
+  [measured]; uniform-lift carrier error median 521,664 [measured]; flat
+  mod-four reading `2^543` to `2^545` exact carrier solutions per shell, one in
+  `2^1180` states [model].
+- Carrier fibre search plateaus at about 14,400 from 365,000; a hundredfold
+  per-lift budget range moves it by about 1% [measured].
+
+From the exact `q18` and margin-fibre reports and tonight's `margin-fibre.tsv`,
+`margin-fibre-deep.json`, `margin-fibre-wide.json` [measured, 12 workers]:
+
+- Column-scope control: 670 steps/s/worker; 84 restarts of 30 s; best 14,800,
+  median 15,376, worst 15,632. Wide run: 366 restarts of about 4,500 steps;
+  best 14,496, median 15,184.
+- Best-so-far by step count (deep): 17,136 at 100; 15,712 at 300; 15,376 at
+  1,000; 15,216 at 3,000; 14,800 at 10,000. Wide: 16,496 / 15,376 / 15,136 /
+  14,496 at 100 / 300 / 1,000 / 3,000.
+- Margin-fibre arm (q18 and q29 exact): 394 steps/s/worker; best 21,840,
+  flat from 1,000 steps on.
+
+From the plain route (`2026-09-04-c1016-plain-523-cyclotomy-and-spin-shard.md`):
+
+- Spin shard at `v = 523`: `2^687.2` states, 86 independent equations, `2^306.5`
+  expected solutions, one in `2^381` states [model]; the weak threshold walk
+  reaches carrier 73 (density one in `2^29`) and not 79 (one in `2^31`), and
+  180-fold budget moves the 523 residual by tens of percent [measured].
+
+From the multiplier window (`2026-09-03-c1016-multiplier-shard-window.md`):
+148 of 167 nontrivial units are emptied [exact]; the open remainder is the
+order-7 subgroup generated by 181 and groups of order at most four [exact
+survivorship, not existence].
+
+## 2. The carrier rung, and why the `q174` number is not the total
+
+The 400-bit figure prices the 73 `q174` equations only. The rung above an exact
+`q174` hit has 173 more free classes at 4.54 bits each, 787 bits [model on an
+exact rank]. Per shell the two-stage sum is `399.8 + 787.2 = 1187.0` bits of
+constraint cost against `2^1724.6` states, giving `2^537.6` carrier solutions per
+shell; the flat one-stage reading of the same measurement gives `2^544.5`. The
+two agree within 7 bits [review]. (The carrier report quotes a 135-bit gap
+between these readings; section 4.1 explains why that gap is an artefact.)
+
+So the states-per-solution ladder for the bordered route is:
+
+| stage                                         | states-per-solution | provenance |
+|-----------------------------------------------|--------------------:|------------|
+| `q174` exact, above a shell (73 equations)     | `2^400`             | model      |
+| carrier exact, above an exact `q174` hit       | `2^786`             | model      |
+| carrier exact, above a shell (246 equations)   | `2^1180`            | model      |
+| plain `Z/523` spin shard (86 equations)        | `2^381`             | model      |
+
+None of these is a floor in the bounding sense: each is a Gaussian-density
+model whose unmodelled class correlations could move it by tens of bits either
+way. What *is* one-sided is that any statement of remaining depth that stops at
+`q174` undercounts the search by the rung's share, so a `q174`-only figure
+should never be quoted as the campaign's distance to a hit.
+
+## 3. The estimate
+
+### 3.1 The model the evidence supports
+
+The instrument does not descend to zero; it plateaus. So the only usable
+production rate is *restarts*, at one plateau state per 30 s per worker
+[measured], and the estimate is a per-restart hit probability. The evidence
+supports exactly one model of that probability:
+
+**Sampler reading.** Past a few thousand steps, a restart is an independent
+draw from a fixed plateau distribution, and the search has no further bias
+toward solutions beyond the objective depth it reaches. Under this reading the
+per-restart hit probability is the uniform-measure density of solutions among
+states at the plateau's objective:
+
+    log2 P(hit per restart) = log2 P_uniform(objective <= plateau)
+                              - log2(states-per-solution)          [composition]
+
+The descent traces are what support it. Under a scaled chi-square model of the
+carrier objective from a shell (246 degrees of freedom, mean 519,128), the
+best-of-84 improvement from the median 15,376 to 14,800 is 6.6 tail-bits for
+`log2 84 = 6.4` [review]; the best-of-366 improvement to 14,496 is 3.6 tail-bits
+for `log2(366/84) = 2.1` [review]; and ten times the steps, from 1,000 to
+10,000, buys 6.6 tail-bits. Best-of-`N` on a fixed distribution gains exactly
+`log2 N`, so the instrument is a sampler from about 3,000 steps on, and the
+wide run (more, shorter restarts) beat the deep run at equal wall clock, which
+is what a sampler does.
+
+### 3.2 The numbers
+
+Carrier tail depth of the plateau [review, model]:
+
+| origin                          | dof | mean    | `log2 P(obj <= 14,800)` |
+|---------------------------------|----:|--------:|------------------------:|
+| from shell, free classes        | 246 | 519,128 |                    -464 |
+| from shell, all classes         | 262 | 519,128 |                    -494 |
+| above exact `q174` hit, free    | 173 | 364,280 |                    -285 |
+| above exact `q174` hit, all     | 262 | 364,280 |                    -429 |
+
+Composition from the shell: `1724.6 - 464 - 544.5 = 716` bits remain per
+restart. Above an exact `q174` hit, at its own plateau 14,400:
+`829 - 287 - 43 = 499` bits remain — so even a free exact `q174` hit leaves
+the rung about 500 bits deep under the same reading.
+
+The tail model is the dominant within-model uncertainty. The campaign's own
+`q174` gamma fit needs shape 23 to put 3,680 at `2^-131`; an iid chi-square on
+the 73 free directions (shape 36.5) puts it at `2^-206`, and on 88 classes at
+`2^-248` [review]. The fitted tail is therefore about 0.55 to 0.65 of the
+chi-square depth. If the carrier tail is shallow by the same factor, the
+plateau sits at about `2^-260` to `2^-300` rather than `2^-464`, and the
+remaining depth rises to about 880 to 930 bits. So:
+
+**Remaining depth from a shell at the banked plateau: 716 bits, range about
+700 to 930 [model].** Dominant uncertainty: the shape of the objective's left
+tail 300 to 460 bits below its bulk, which no measurement reaches; the
+solution-density model's unmodelled class correlations add a further tens of
+bits either way.
+
+### 3.3 Wall clock
+
+Twelve workers make `12 / 30` restarts per second, `2^23.6` per year; a million
+cores make `2^39.9` per year [review from measured rate].
+
+| remaining bits | twelve-worker-years | million-core-years |
+|---------------:|--------------------:|-------------------:|
+| 716 (estimate) | `2^692`             | `2^676`            |
+| 930 (shallow-tail bracket) | `2^906` | `2^890`            |
+| 269 (`q174`-only, campaign's implicit figure) | `2^245` | `2^229` |
+| 125 (would-be `q174` with the mistaken lattice correction) | `2^101` | `2^85` |
+
+Every row is "never". The second-to-last row is what the campaign's "about 270
+bits remain" converts to if it were the whole story; it is not, and it is
+still `2^245` years.
+
+## 4. The bit accounting, checked
+
+### 4.1 The sigma unit, and the carrier report's "correction" of the 400
+
+The carrier report states that the congruence hunt priced its 73 equations at
+unit spacing and that on the mod-four lattice each is two bits cheaper, so the
+`q174` cost should be `2^255` to `2^267` and the "one in `2^400`" figure "should
+not be quoted again". **That correction is a double count, and the original 400
+stands.**
+
+Evidence: `phase-two-q174-congruence.json` records, per shell, `mean_objective`
+459,419 over 88 canonical classes, so the raw per-class RMS of the deviation is
+72.3, while `median_sigma` is 17.95 — a ratio of 4.03 [review from recorded
+fields]. The recorded sigma is measured on the lattice coordinate `D/4`, and
+pricing it at unit spacing (`log2(sigma * sqrt(2 pi))` per equation, 5.49 bits,
+73 equations) reproduces the recorded 399.8 to 401.0 bits. The mod-four lattice
+is already inside the 400. Two consistency checks confirm it: the carrier
+report's own uniform-lift per-class spread of 37 raw is 9.3 lattice steps, and a
+`q174` class aggregates three carrier classes, so its raw spread of about
+`44.5 * sqrt 3 = 77`, or 19 lattice steps, is exactly the 17.9 to 20.1 recorded;
+and once the sigma is read in its own units, the structured two-stage count
+(`400 + 787 = 1187` bits) matches the flat count (1181 bits) within 7 bits,
+which dissolves the carrier report's unexplained 135-bit gap — that gap is the
+`73 * 2 = 146` bits the correction removed.
+
+Consequences: the `q174` expected-solution count stays at about `2^1322` per
+shell, not `2^1460`; the carrier report's structured shell-level figure of
+`2^680` solutions should read about `2^538`; and its `2^632` distinct `q174`
+count-hits per shell should read about `2^490`. Its conclusion ("solution-rich,
+search is the bottleneck") survives, and its own rung figures (`2^43` lifts per
+hit, 4.54 bits per class) are correctly priced because its carrier sigma is
+raw.
+
+### 4.2 Is "400 = 130 + 270" a legitimate subtraction?
+
+As arithmetic on the uniform measure, yes. `P_u(solution) = P_u(obj <= t) *
+P_u(solution | obj <= t)` is an identity, and the campaign computed exactly
+`log2_states_at_plateau - log2_expected_solutions = 1591.4 - 1322.5 = 268.9`.
+Both terms are models of the same measure, so subtracting them is coherent.
+
+As a statement about the search, no, on three counts.
+
+1. The 269 bits is the solution density *among uniformly random states at the
+   plateau's objective*. It becomes the search's remaining work only under the
+   sampler reading of section 3.1 — which the descent traces do support — and
+   under that reading it is a per-restart probability, not a descent still to
+   be made. "The plateau sits 130 bits into a 400-bit descent" wrongly suggests
+   the search has done a third of the work; a sampler has done none of the
+   remaining work and will not, at any budget.
+2. It is a `q174` number. The composition has to be done at the carrier, where
+   the plateau sits at about `2^-464` (chi-square) and the density is one in
+   `2^1180`, giving about 716 bits, and where even an exact `q174` hit leaves
+   about 499 bits on the rung.
+3. The 130 is the least reliable input: it is a two-moment gamma fit
+   extrapolated 130 bits into a tail, with shape 23 against a chi-square 36.5
+   to 44, and the alternatives put the same plateau 75 to 117 bits deeper. The
+   card's "±60" understates this.
+
+So "about 270 bits remain" is not the right reading. The right reading is:
+under the sampler model, one restart hits with probability about `2^-716` at
+the carrier, and the campaign's figure describes only the lower rung.
+
+### 4.3 Should the total be quoted as a floor?
+
+Not as a bound: 1180 bits states-per-solution is a two-sided model. What can be
+said one-sidedly is that the carrier rung adds a positive, large term to any
+`q174`-only figure — at least about 500 bits above an exact `q174` hit under the
+same model — so the total should be quoted as "716 from the shell, of which the
+`q174` rung is the smaller part", never as the `q174` figure alone.
+
+## 5. What reduction would bring this to one machine-year
+
+One twelve-worker-year is `2^23.6` restarts; one million-core-year `2^39.9`.
+The remaining depth must fall from about 716 bits to about 24 (or 40), so the
+structural reduction needed is **about 690 bits, range 660 to 900** [review].
+That is not a search-instrument upgrade; it is a reduction of the same size as
+the entire carrier rung plus most of the `q174` rung.
+
+Against the card's open frontiers:
+
+| frontier                                   | size in bits, this review's reading | provenance |
+|--------------------------------------------|------------------------------------:|------------|
+| per-shell selection (11.7% spread at 15,000) | about 20 tail-bits at most            | measured spread, model conversion |
+| margin-fibre search                          | negative: 48% worse, saturated        | measured tonight |
+| character-domain moves, paired transfers, column scope, group scope | 0 to negative | measured / exact census |
+| multiplier remainder, order-7 subgroup `<181>` | dimension 2088 -> about 360 (18 fixed points, 72 orbits of 7, per block 90 orbit-bits) | exact parameter count; existence unknown |
+| plain `Z/523` spin shard with the tabu step   | states-per-solution 381 against 1180 bits: about 800 bits better-positioned; tail depth there unmeasured | model |
+
+Only the last two are of the right order of magnitude, and neither is a
+reduction of the unrestricted problem: each is a *shard* that may be empty. The
+order-7 shard's 360 free bits are still far beyond exhaustion (the exhausted
+order-14 shard had about 180), and its solution density under the assumption is
+unmeasured. The plain spin shard is the lowest states-per-solution object in
+the whole campaign by roughly 800 bits, because its symmetric ansatz collapses
+261 equations to 86 while the bordered route's multiplier census kills every
+comparable ansatz there. Under the sampler reading it would still need about
+357 tail-bits from the instrument to reach one twelve-worker-year, against the
+131 the instrument demonstrably reaches at `q174`; so it too is "never" on
+current evidence, but it is the one place where hundreds of bits of structure
+already exist rather than needing to be found. Open move 3 on the card is
+therefore the highest-value cheap *measurement*: run the full-neighbourhood
+step on the spin shard and fit its plateau tail, which would put a number
+where this table has "unmeasured".
+
+## 6. Red team: is the campaign much closer than this?
+
+**Solution-richness.** Real under the model: `2^538` carrier solutions per
+shell, `2^306` on the spin shard. It is also irrelevant to a local search's
+reach. The empirical signature is decisive against "close": every rung stalls
+at 1.5 to 2 lattice steps per class regardless of group, objective or
+neighbourhood; a hundredfold budget moves the plateau by 1%; best-of-`N` gains
+exactly `log2 N`; five exact widenings of the move set have lost. That is the
+standard picture of a rugged landscape whose local-search threshold energy sits
+far above the ground state even when ground states are exponentially many — the
+same picture the low-autocorrelation-sequence and Legendre-pair literature
+shows, where known heuristics scale as `c^n` with `c` around 1.3 to 1.4 despite
+abundant optima. At 2088 free bits, `1.34^2088` is about `2^880` [external
+analogy, not a measurement of this problem], which lands in this review's
+range.
+
+**A better instrument.** It can change the per-restart probability by many
+orders of magnitude and still leave the answer at "never": the instrument's
+whole demonstrated edge over uniform sampling is about 120 to 130 tail-bits at
+`q174` and about 460 at the carrier, gained in the first few thousand steps; a
+new move set that doubled that edge would still leave 250 to 450 bits. The
+precedent the card offers — the exact `q18` shell, priced at `7.1e74` and solved
+in seconds by a climber plus a radius-four exact repair — does not scale: that
+was a 72-coordinate problem whose plateau (64 to 192) was inside a radius-four
+ball of a solution, while the carrier plateau has about 200 of its 262 classes
+off target by one to three lattice steps [measured]. A repair that closes it is
+exhaustive over hundreds of coordinates.
+
+**What the tail statistics do and do not forbid.** They forbid nothing: they
+are models of the uniform measure and say nothing about search dynamics, and no
+miss has negative authority. What rules out the "close" reading is the
+*descent-curve* evidence, which is measured: a sampler that gains `log2 N` bits
+per `N` restarts is not close to anything `2^700` away. The one reading under
+which the campaign is close — that plateau states sit a short Hamming distance
+from solutions that the current move sets cannot see — is exactly what the
+two-transfer census (exact, empty), the paired-transfer, column-scope,
+character-multiplier and margin-fibre arms (all measured worse) have tested,
+and all of them went against it. It is not excluded, because misses exclude
+nothing; it has no evidence for it.
+
+**What would change the answer.** Only a change in the exponent's coefficient,
+not its base: an algebraic or lattice-decoding construction of the flat
+spectrum at `4 * 523`, or a multiplier-type ansatz that survives the exact level
+identities and is exhaustible by a ladder join. The campaign has closed most of
+the second class; the first is not on the card.
+
+## 7. Where the existing estimate is wrong or unsupported
+
+1. **The carrier report's lattice correction of the `q174` cost is a double
+   count.** The recorded `q174` sigma is on the lattice coordinate (ratio of raw
+   RMS to sigma is 4.03 in the evidence), so `2^400` was already mod-four
+   priced. `2^255` to `2^267`, `2^1460` solutions per shell, `2^680` structured
+   shell-level solutions and `2^632` `q174` count-hits per shell are all
+   overstated by about 146 bits; the "135-bit gap between flat and structured
+   readings" is that error, not a model error bar. The 400 should continue to
+   be quoted.
+2. **"About 270 bits remain" is a `q174`-only, uniform-measure number.** At the
+   carrier the same composition gives about 716 bits (range 700 to 930), and
+   even above an exact `q174` hit the rung leaves about 499. "The plateau sits
+   130 bits into a 400-bit descent" reads a sampler's per-restart probability
+   as progress along a descent; the descent traces show no descent past a few
+   thousand steps.
+3. **The gamma tail's stated uncertainty is too small.** The fitted shape (23)
+   is well below any iid-Gaussian shape (36.5 to 44), and the alternatives put
+   the plateau 75 to 117 bits deeper than the `2^-131` quoted; "±60" on the card
+   should read something like "-120 / +20", and the carrier's tail has never
+   been fitted at all.
+4. **The card's "`2^1322` exact solutions" and the carrier report's "`2^1460`"
+   coexist on the card and in the routing table without a note that they
+   disagree.** Item 1 resolves it in favour of the former.
+5. **The plain route's "one in `2^381`" is quoted as comparable to the bordered
+   "one in `2^400`" as if both were the whole problem.** The bordered `2^400`
+   is one rung; the whole bordered route is one in `2^1180`. The routes are not
+   nearly the same density: the spin shard is about 800 bits better-positioned,
+   which is the one substantive thing the comparison should have said and did
+   not. (Whether the shard is nonempty is unknown.)
+
+Nothing in this review is a negative result about order 2092: every number
+here is a model or a measurement of an instrument, and the object may well
+have solutions on both routes. The claim is only about the cost of the banked
+search.
+
+## 8. Replay
+
+    uv run --with scipy --with numpy python est.py
+
+reading `phase-two-q174-congruence.json`, `carrier-spectrum.json` and
+`carrier-spectrum-shell.json` from the private campaign worktree's `evidence/`
+directory (`~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`). The
+descent traces are `margin-fibre-deep.json` and `margin-fibre-wide.json` in the
+same directory, fields `column_control.descent_trace` and
+`margin_fibre.descent_trace`. The script, verbatim:
+
+```python
+import math, json, statistics
+from scipy.stats import gamma, chi2
+from scipy.optimize import brentq
+L = math.log2
+ev = '/home/tavis/src/ergodis-worktrees/c1016-full-2092/ergodis-private/evidence/'
+d = json.load(open(ev + 'phase-two-q174-congruence.json'))
+print("== q174 unit check ==")
+for f in d['fibre'][:3]:
+    rms = math.sqrt(f['mean_objective'] / 88)
+    print(f"mean_obj={f['mean_objective']:.0f} rms_raw={rms:.2f} median_sigma={f['median_sigma']:.2f} "
+          f"ratio={rms/f['median_sigma']:.2f} cost={f['log2_constraint_cost']:.1f} "
+          f"unit-priced would be {73*L(f['median_sigma']*math.sqrt(2*math.pi)):.1f}")
+f = d['fibre'][0]; m = f['mean_objective']
+print("== q174 tail: shape needed for the fitted rarity vs chi-square shapes ==")
+tgt = f['log2_plateau_rarity']
+g = lambda a: gamma.logcdf(3680, a, scale=m/a) / math.log(2) - tgt
+a = brentq(g, 5, 200); print(f"fitted gamma shape ~{a:.1f}  (chi2 over 88 classes 44, over 73 free dirs 36.5)")
+for a in (a, 36.5, 44):
+    print(f"  shape {a:5.1f}: log2 P(obj<=3680) = {gamma.logcdf(3680, a, scale=m/a)/math.log(2):.1f}")
+print("== bit ledger per shell (bordered) ==")
+S = json.load(open(ev + 'carrier-spectrum-shell.json')); B = json.load(open(ev + 'carrier-spectrum.json'))
+def val(x, k):
+    ps = x.get('per_state') or x.get('states'); return statistics.median(p[k] for p in ps)
+states = val(S, 'fibre_bits'); sol_flat = val(S, 'expected_solutions_bits_mod_four'); med_sh = val(S, 'carrier_score_median')
+sol_q = val(B, 'expected_solutions_bits_mod_four'); fib_q = val(B, 'fibre_bits'); sig_b = val(B, 'class_sigma_geometric'); med_b = val(B, 'carrier_score_median')
+q174cost = f['log2_constraint_cost']; rung = 173 * L(sig_b * math.sqrt(2*math.pi) / 4)
+print(f"states above shell {states:.1f}; flat carrier solutions {sol_flat:.1f}")
+print(f"structured: q174 cost {q174cost:.1f} + rung {rung:.1f} = {q174cost+rung:.1f} -> solutions {states-q174cost-rung:.1f} (gap to flat {abs(states-q174cost-rung-sol_flat):.1f} bits)")
+print(f"states-per-solution from shell: {states-sol_flat:.0f} bits; above a q174 hit: {fib_q-sol_q:.0f} bits")
+print("== carrier tails (scaled chi-square models) ==")
+def tail(obj, k, mean): return chi2.logcdf(obj * k / mean, k) / math.log(2)
+for lab, k, mean in (("from shell, k=246", 246, med_sh), ("from shell, k=262", 262, med_sh),
+                     ("above q174 hit, k=173", 173, med_b), ("above q174 hit, k=262", 262, med_b)):
+    print(f"  {lab:24s} mean={mean:,.0f}: P(<=14800)={tail(14800,k,mean):.0f} bits  P(<=14496)={tail(14496,k,mean):.0f}  "
+          f"P(<=15376)={tail(15376,k,mean):.0f}  P(<=17136)={tail(17136,k,mean):.0f}")
+t_sh = tail(14800, 246, med_sh); rem = states + t_sh - sol_flat
+print(f"remaining bits from shell at 14,800 (k=246): {rem:.0f}")
+t_q = tail(14400, 173, med_b); print(f"remaining bits above q174 hit at 14,400 (k=173): {fib_q+t_q-sol_q:.0f}")
+print("== q174 composition ==")
+print(f"400 = tail {-f['log2_plateau_rarity']:.1f} + remaining {f['log2_states_at_plateau']-f['log2_expected_solutions']:.1f}")
+print("== empirical gain per doubling, column control ==")
+for a_, b_, n in ((15376, 14800, 84.0), (14800, 14496, 366/84)):
+    print(f"  {a_}->{b_}: {tail(a_,246,med_sh)-tail(b_,246,med_sh):.1f} tail-bits for log2 N-ratio {L(n):.1f}")
+print(f"  1000->10000 steps (15376->14800): {tail(15376,246,med_sh)-tail(14800,246,med_sh):.1f} bits per decade of steps")
+print("== wall clock ==")
+rps = 12/30; yr = 3.156e7
+print(f"restarts/yr at 12 workers: 2^{L(rps*yr):.1f};  per 10^6 cores: 2^{L(rps*yr*1e6/12):.1f}")
+for bits in (rem, 269, 125):
+    print(f"  need 2^{bits:.0f} restarts: {bits-L(rps*yr):.0f} bits beyond one 12-worker year, {bits-L(rps*yr*1e6/12):.0f} beyond one million-core year")
+```
+
+Its output on 2026-09-05 is the source of every `[review]` figure above:
+ratio 4.03 / 4.01 / 4.02 on the first three shells; fitted shape 23.0 giving
+-131.0 against -205.9 (shape 36.5) and -247.5 (shape 44); states 1724.6, flat
+solutions 544.5, structured `399.8 + 787.2 = 1187.0` giving 537.6 (gap 6.9);
+states-per-solution 1180 from the shell and 786 above a hit; carrier tails
+-464 / -494 / -285 / -429; remaining 716 from the shell and 499 above a hit;
+best-of-N gains 6.6 for 6.4 and 3.6 for 2.1; 6.6 bits per decade of steps;
+`2^23.6` restarts per twelve-worker-year and `2^39.9` per million-core-year.

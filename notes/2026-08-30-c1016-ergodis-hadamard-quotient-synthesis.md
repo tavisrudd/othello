@@ -142,6 +142,17 @@ Closed around the frontier:
   four blocks — giving a concrete carrier state exact at 45 of the 521
   characters at once. The order-two character additionally forces `u_1 = 0 mod
   4` on the special block, which 17 of 24 banked plateau states violate.
+- The 2-by-2 alternating swap is closed as a descent operator, and the fibre
+  question it was built to answer is *not*. The swap holds both margins and so
+  keeps all 45 characters exact, its whole admissible neighbourhood is scanned
+  exactly per step at about six tenths of the column step's rate, and it
+  plateaus at 21,840 against the unrestricted arm's 14,800 at equal wall clock.
+  But the same descent reaches only 22,656 inside the margin fibre of the
+  unrestricted arm's own 14,800 state — a fibre that contains a 14,800 state by
+  construction — and seeded on that state it fails to improve it in 558,800
+  steps. The shortfall follows the move set, not the exact `q18` fibre, so
+  nothing is yet measured about the constraint. A successor instrument is only
+  believable once it reaches about 14,800 in that control fibre.
 
 ### The plain `Z/523` route is the standing alternative
 
@@ -154,17 +165,18 @@ the current instrument remains available and has not been tried since.
 
 ## Open moves, in the order they are worth doing
 
-1. **Search inside the margin fibre.** By CRT a block is an 18-by-29 binary
-   matrix whose row sums are its `q18` coefficients and whose column sums are
-   its `q29` coefficients, so the 2-by-2 alternating swap preserves both and
-   holds all 45 low-order characters exact for a whole descent. A banked exact
-   `q18` quadruple bridged against a banked exact `q29` shell gives the
-   starting point, and a random point of its fibre is statistically
-   indistinguishable from an unconstrained random state, so the constraint
-   costs nothing at the start. The question to measure is whether a descent
-   restricted to that move set reaches the unrestricted plateau — about 30,272
-   in the full-carrier units of the q18 report — at equal wall clock. The
-   campaign's exact incremental delta algebra applies to the swap unchanged.
+1. **Widen the fibre move set, or replace it.** The 2-by-2 alternating swap
+   descends the margin fibre badly enough that it cannot decide the question it
+   was built for, and the control run names the acceptance gate exactly: reach
+   about 14,800 inside the margin fibre of the unrestricted arm's own 14,800
+   state, where that depth is known to exist. The swap is the lowest-order
+   element of the fibre's move group; compositions of two or three swaps sharing
+   a row or a column are the next shell, and the closed-form Gram entry that
+   made the single swap affordable extends to them unchanged. The cheapest
+   diagnostic first: at the deep state the whole swap neighbourhood offers no
+   improving move, and nothing says whether that is the move's coarseness — it
+   changes four positions at once and cannot express a single transfer — or
+   something structural about the state.
 2. **Replicate the per-shell sweep on the tail.** Shells 37, 23, 2, 9 and 10
    were the best of the 39 at one fifteen-second run each, with the best
    reaching carrier 13,648 — below anything the rotating corpus produced. Run
@@ -200,6 +212,7 @@ All paths are relative to `notes/`.
 | The carrier `Z/522` rung above an exact `q174` state                | `2026-09-05-c1016-carrier-522-rung.md`                         |
 | The character-domain move set, its census, and corpus width         | `2026-09-05-c1016-character-domain-move-set-and-corpus-width.md` |
 | The exact `q18` shell and its unobstructed 18-by-29 margin lift      | `2026-09-05-c1016-exact-q18-and-the-margin-lift.md`             |
+| The margin-fibre descent, its controls, and the swap's failure       | `2026-09-05-c1016-margin-fibre-descent.md`                     |
 | Zero-cost witness handoff shared with C985                          | `2026-08-31-c985-c1016-zero-cost-witness-handoff.md`           |
 
 ## Workspace and replay
@@ -247,10 +260,13 @@ reduction program, in the archive. What is open:
   nothing the campaign records about a shell predicts the depth reached from
   it. Gated on the replicated sweep in open move 2.
 - **Whether a descent restricted to the margin fibre reaches the unrestricted
-  depth.** The fibre holds 45 characters exact and its random point is as good
-  as an unconstrained random state, so nothing in the starting distribution
-  argues against it; the restriction of the move set is what has to be
-  measured. Open, and it is open move 1.
+  depth.** Still open, and now open for a sharper reason: the 2-by-2 alternating
+  swap cannot descend a margin fibre whose floor is known, so the restriction
+  itself has never been measured. The gate for any successor is the control run
+  of the margin-fibre report.
+- **Why the swap neighbourhood has no improving move at a deep state.** Measured
+  over 558,800 exact full-neighbourhood steps and unexplained. It is the
+  cheapest probe of what a wider fibre move set must contain.
 - **How large the exact `q18` solution set is.** A climber plus a radius-four
   repair reaches it in eleven rounds against an exhaustive count of `7.1e74`
   assignments, so the density is high, but nothing measures it. Open, with no

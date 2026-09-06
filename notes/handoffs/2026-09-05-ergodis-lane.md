@@ -44,10 +44,9 @@ with its append-only companion
 [archive](../2026-08-30-c1016-ergodis-hadamard-quotient-synthesis-archive.md). Read the card on
 resume; it is the current-state map for this task.
 
-**Next**: the card's open moves, in its order — enforce the seventeen low-order characters exactly
-(the order-two Diophantine condition `sum_b u_b^2 = 523` is the unexploited one), then replicate
-the per-shell sweep on the tail shells; a return to the plain `Z/523` spin shard is still the
-standing alternative. Concurrent public-core edits remain foreign; do not absorb them into C1016.
+**Next**: the card's open moves, in its order — widen or replace the margin-fibre move set against
+the control gate the card names, then replicate the per-shell sweep on the tail shells; a return to
+the plain `Z/523` spin shard is still the standing alternative. Concurrent public-core edits remain foreign; do not absorb them into C1016.
 Provenance rules stand: proved structural and exact computational reductions grant negative
 coverage, observed/evolved and heuristic predicates never do. Every resume first reads
 `../ergodis-contrib/PERFORMANCE.md` and the shared playbook.
