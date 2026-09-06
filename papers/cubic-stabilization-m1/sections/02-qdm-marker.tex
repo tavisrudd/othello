@@ -494,9 +494,20 @@ Write a centered base equation as
 \(\partial y=(z^{-1}C_\partial+C_{\partial,0}+O(z))y\).  The
 \(z^{-2}\) coefficient of flatness gives \([N,C_\partial]=0\), and the trace
 of the \(z^{-1}\) coefficient gives \(\tr C_\partial=0\); here the base
-equation has been scalar-centered.  The commutant of a nonzero rank-one
-nilpotent \(2\times2\) matrix is the coefficient-field span of \(I\) and
-\(N\), so \(C_\partial=q_\partial N\).  The same \(z^{-1}\) coefficient gives
+equation has been scalar-centered.  Nilpotence of \(N\) away from the
+base point is not yet known, so the commutant is computed over the
+complete local ring \(\mathcal O\) of the formal bulk germ.  The rank-two
+spectral cluster continues over \(\mathcal O\) because it is separated
+from the other two eigenvalues at the base point; \(N\) is the centered
+\(z^{-1}\) coefficient of that continuation, so \(\tr N=0\), and it
+specializes at the closed point to a nonzero rank-one nilpotent.  Choose
+\(v\) with \(v,Nv\) a basis modulo the maximal ideal; by Nakayama it is a
+basis over \(\mathcal O\), so \(N\) is cyclic.  Any \(C\) commuting with a
+cyclic \(N\) is determined by \(Cv=\alpha v+\beta Nv\) and equals
+\(\alpha I+\beta N\), whether or not \(N\) is nilpotent.  Hence
+\([N,C_\partial]=0\) and \(\tr C_\partial=0=\tr N\) give
+\(C_\partial=q_\partial N\) with \(q_\partial\in\mathcal O\).  The same
+\(z^{-1}\) coefficient gives
 \[
  \partial N=-q_\partial N+
  [N,q_\partial A_0-C_{\partial,0}].

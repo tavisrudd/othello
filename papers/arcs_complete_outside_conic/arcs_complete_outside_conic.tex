@@ -212,8 +212,9 @@ is not an independent third incidence equation.
 For \(k\ge4\), projective representatives of the points of \(A\) in a
 Desarguesian plane form a parity-check matrix of a \([k,k-3,4]_q\) MDS
 code.  If \(U(A)\ne\varnothing\), then \(U(A)\) is its projective
-deep-hole syndrome locus: points of \(A\), points on secants, and points of
-\(U(A)\) have coset weight one, two, and three, respectively.  This is a
+deep-hole syndrome locus: points of \(A\), points outside \(A\) on
+secants, and points of \(U(A)\) have coset weight one, two, and three,
+respectively.  This is a
 dictionary for the uncovered-locus statements, not an input to their proofs.
 
 The surrounding notions differ at the defining containment.  Saturating
@@ -582,6 +583,7 @@ $\binom{k-2}{2}/(m-1)$ points of $Z$, which has the two displayed values.
 
 \begin{corollary}[Dual star--matching incidence realization]
 \label{cor:star-matching-realization}
+Suppose \(k\ge4\).
 If \(\Delta_{\cH}(A)=0\), then after any projective duality the
 \(\binom{k}{2}\) secants become points carrying an incidence realization
 of the star--matching pairwise-balanced design on \(E(K_k)\).
@@ -1775,10 +1777,17 @@ witness in Appendix~\ref{app:witnesses} gives the matching upper bound.
 \section{An inverse coda: uncovered-locus reconstruction}
 \label{sec:reconstruction}
 
-This coda does not apply to the \(\cC\)-complete arcs studied above:
-they satisfy \(U(A)\subseteq\cC\), and the first-moment covering
-inequality gives \(\binom{k}{2}\ge q+1\), opposite to the strict
-hypothesis below.
+For \(q\ge4\) this coda does not apply to the \(\cC\)-complete arcs
+studied above.  They satisfy \(U(A)\subseteq\cC\), so at most \(q+1\)
+points are uncovered and~\eqref{eq:first-moment} gives
+\(q^2-k\le\binom{k}{2}(q-1)\).  If \(\binom{k}{2}\le q\), this forces
+\(k\ge q\), hence \(\binom{k}{2}\ge\binom{q}{2}>q\) when \(q\ge4\); so
+\(\binom{k}{2}\ge q+1\), opposite to the strict hypothesis below.  The
+restriction is sharp.  In \(\PG(2,3)\) the coordinate triangle has the
+three coordinate lines as secants, so its uncovered locus is the four
+points with all coordinates nonzero, which is the conic
+\(X^2+Y^2+Z^2=0\).  This \(3\)-arc is \(\cC\)-complete with
+\(\binom{3}{2}=3<4=q+1\), and it gives \(\rhoC(3)=3\).
 
 For fixed arc length and sufficiently large \(q\), the ordinary-uncovered
 locus remembers its parent arc.  The inverse map has two elementary stages.

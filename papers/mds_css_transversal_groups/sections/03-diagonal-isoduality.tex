@@ -193,10 +193,13 @@ product-Pauli corrections.  Thus label-space preservation is sufficient
 here; no coherent choice of Clifford phases is being assumed.
 At any chosen input party \(j\), their blocks run through all lower and
 upper elementary unipotents because \(s_j\ne0\).  Together these generate
-\(\mathrm{SL}_2(q)\).  Under the Choi correspondence, an input block
-\(A\) induces the logical block \(A^{-T}\).  This map is an automorphism
-of \(\mathrm{SL}_2(q)\), so every one-qudit logical symplectic action has
-a product-Clifford physical implementation.  Logical Paulis have
+\(\mathrm{SL}_2(q)\).  Under the Choi correspondence, an input unitary
+\(U\) implements the logical unitary \(U^{-T}=\overline{U}\).  Complex
+conjugation fixes \(X(a)\) and sends \(Z(b)\) to \(Z(-b)\), so an input
+block \(A\) induces the logical block \(KAK\) with \(K=\diag(1,-1)\).
+This map is an automorphism of \(\mathrm{SL}_2(q)\) preserving the
+diagonal torus, so every one-qudit logical symplectic action has a
+product-Clifford physical implementation.  Logical Paulis have
 physical Pauli representatives, so the full projective one-qudit
 Clifford group
 \(\F_q^2\rtimes\mathrm{SL}_2(q)\) is transversal.
