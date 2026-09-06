@@ -1,0 +1,321 @@
+{
+  "bibliography": [
+    {
+      "key": "BartoliDavydovKreshchukMarcuginiPambianco2016",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/secant_hyperplane_defects/sections/bibliography.tex"
+    },
+    {
+      "key": "BartoliFainaMarcuginiPambianco2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/secant_hyperplane_defects/sections/bibliography.tex"
+    },
+    {
+      "key": "DavydovFainaMarcuginiPambianco2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/secant_hyperplane_defects/sections/bibliography.tex"
+    },
+    {
+      "key": "FarrLisonek2006",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/secant_hyperplane_defects/sections/bibliography.tex"
+    },
+    {
+      "key": "FarrLisonek2006a",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/secant_hyperplane_defects/sections/bibliography.tex"
+    },
+    {
+      "key": "Kurz2021",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/secant_hyperplane_defects/sections/bibliography.tex"
+    },
+    {
+      "key": "Pavese2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/secant_hyperplane_defects/sections/bibliography.tex"
+    },
+    {
+      "key": "Pless1963",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/secant_hyperplane_defects/sections/bibliography.tex"
+    },
+    {
+      "key": "Polverino1999",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/secant_hyperplane_defects/sections/bibliography.tex"
+    },
+    {
+      "key": "RuddIntegralSecant",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/secant_hyperplane_defects/sections/bibliography.tex",
+      "text": "T.~Rudd, \\emph{Integral Secant Distributions and Line-Code Obstructions for Complete \\((k,n)\\)-Arcs}, preprint (2026), \\href{https://doi.org/10.5281/zenodo.22087679}{doi:10.5281/zenodo.22087679}."
+    },
+    {
+      "key": "RuddSecantDefects",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/secant_hyperplane_defects/sections/bibliography.tex",
+      "text": "T.~Rudd, \\emph{Secant defects with prescribed holes: arcs, caps, and matching designs}, preprint (2026), \\href{https://doi.org/10.5281/zenodo.21682567}{doi:10.5281/zenodo.21682567}."
+    },
+    {
+      "key": "Segre1959",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/secant_hyperplane_defects/sections/bibliography.tex"
+    },
+    {
+      "key": "Thas2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/secant_hyperplane_defects/sections/bibliography.tex"
+    },
+    {
+      "key": "Wehlau2004",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/secant_hyperplane_defects/sections/bibliography.tex"
+    }
+  ],
+  "dir": "papers/secant_hyperplane_defects",
+  "environment_counts": {
+    "corollary": 1,
+    "lemma": 2,
+    "proposition": 3,
+    "remark": 2,
+    "theorem": 5
+  },
+  "labels": [
+    {
+      "environment": "corollary",
+      "label": "cor:closed-form"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:T-from-sections"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:admissible"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:bracket-identity"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:budget"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:ceiling"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:character"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:counting-bound"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:first-moment"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:hyperplane-loss"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:local-bounds"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:local-constants"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:local-system"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:loss"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:moments-intro"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:overlap-loss"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pencil"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:phi"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:secant-collisions"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:admissible-shape"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:bracket"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:degree-countermodel"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:global-feasibility"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:holes"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:one-sided"
+    },
+    {
+      "environment": "",
+      "label": "sec:conclusion"
+    },
+    {
+      "environment": "",
+      "label": "sec:coverage"
+    },
+    {
+      "environment": "",
+      "label": "sec:exclusions"
+    },
+    {
+      "environment": "",
+      "label": "sec:feasibility"
+    },
+    {
+      "environment": "",
+      "label": "sec:hyperplane-loss"
+    },
+    {
+      "environment": "",
+      "label": "sec:introduction"
+    },
+    {
+      "environment": "",
+      "label": "sec:limits"
+    },
+    {
+      "environment": "",
+      "label": "sec:moments"
+    },
+    {
+      "environment": "",
+      "label": "sec:preliminaries"
+    },
+    {
+      "environment": "table",
+      "label": "tab:cases"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:exclusions"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:hyperplane-loss"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:local-bounds"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:secant-hyperplane-moments"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:secant-local"
+    }
+  ],
+  "main": "papers/secant_hyperplane_defects/secant_hyperplane_defects.tex",
+  "manifest_labels": null,
+  "paper": "secant_hyperplane_defects",
+  "pdfs": [
+    {
+      "bytes": 152352,
+      "pages": 14,
+      "path": "papers/secant_hyperplane_defects/secant_hyperplane_defects.pdf",
+      "sha256": "f7232d69efc366d17f14b43737ea77f33b50dea09f70bac684c95e7b14836844"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/secant_hyperplane_defects/secant_hyperplane_defects.tex",
+      "sha256": "28f2aefc99ca6ecfad1d9549e7ffb1986eeea6bafe9a7a0777c7c7c211a70cfb"
+    },
+    {
+      "path": "papers/secant_hyperplane_defects/sections/01-introduction.tex",
+      "sha256": "d5823a3fbf0a3b2e885e9b68775f8470585dc7ab9033f5d404b75642da168fe0"
+    },
+    {
+      "path": "papers/secant_hyperplane_defects/sections/02-preliminaries.tex",
+      "sha256": "34f5f34a3565ce535d5e4bbeee64afa52a9277881f02a95cf48af2bb86c66ebe"
+    },
+    {
+      "path": "papers/secant_hyperplane_defects/sections/03-hyperplane-loss.tex",
+      "sha256": "a5f847e75acc709d0a649e132850955d75cc31bb2ab650e47e2c8c2b031d13b7"
+    },
+    {
+      "path": "papers/secant_hyperplane_defects/sections/04-secant-hyperplane-moments.tex",
+      "sha256": "4586f2bc4a6920665b574ce486ea9db718c24f893dfd4158f401efc567ffba50"
+    },
+    {
+      "path": "papers/secant_hyperplane_defects/sections/05-integer-feasibility.tex",
+      "sha256": "5d181d6d038bfeb47a3d591a5cec19916c1879a16acc02875c40bbbd6be7003b"
+    },
+    {
+      "path": "papers/secant_hyperplane_defects/sections/06-coverage.tex",
+      "sha256": "4e7820e9011dc217fdd5acd1413f5de6595af08eb27816f04f923645119e4520"
+    },
+    {
+      "path": "papers/secant_hyperplane_defects/sections/07-exclusions.tex",
+      "sha256": "1a9b89737455a0a5b635bf1eecbe067429532e409778cac79a099654effb6aa6"
+    },
+    {
+      "path": "papers/secant_hyperplane_defects/sections/08-limits.tex",
+      "sha256": "49551dbda159932f7be8a45c43d2d1d807678f598f5d4d03a29c803e1549beaf"
+    },
+    {
+      "path": "papers/secant_hyperplane_defects/sections/09-conclusion.tex",
+      "sha256": "8cc9d205d876160afe2c882b3046850e49d1814101cc6efcc87b40252b301b7a"
+    },
+    {
+      "path": "papers/secant_hyperplane_defects/sections/bibliography.tex",
+      "sha256": "889ae8e3233fee5416d826fab7d82b31201abe2c2a229bdf76b42cad616e779b"
+    }
+  ],
+  "title": "Secant--hyperplane defects of complete caps",
+  "title_normalized": "secant-hyperplane defects of complete caps",
+  "untracked_bibliography": []
+}
