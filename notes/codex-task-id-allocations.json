@@ -4427,8 +4427,17 @@
       "last": 1074,
       "purpose": "Ergodis absorption targets from the relconic discovery track: secant-block exact cover, involution-matching independent domination, free-pair test caps",
       "sequence": 492
+    },
+    {
+      "count": 4,
+      "first": 1075,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 1078,
+      "purpose": "Astra cap memo follow-ups: t_2(4,q) literature check, divisibility-exclusion scan, cross-citation and cap-section upgrades, third paper on secant-hyperplane defects",
+      "sequence": 493
     }
   ],
-  "next_id": 1075,
+  "next_id": 1079,
   "schema": "codex-task-id-allocations-v1"
 }
