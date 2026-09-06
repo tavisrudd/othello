@@ -1,0 +1,132 @@
+{
+  "schema": "ergodis.hierarchical-leakage-vector.v1",
+  "name": "(x, y, x+y) over F_5, secret x+y",
+  "cost_model_name": "leaves-and-blocks",
+  "component_labels": [
+    "leaves",
+    "blocks"
+  ],
+  "message_dimension": 2,
+  "leaf_count": 3,
+  "secret_dimension": 1,
+  "units": [
+    {
+      "index": 0,
+      "name": "leaf0",
+      "cost": 1,
+      "coordinates": [
+        0
+      ]
+    },
+    {
+      "index": 1,
+      "name": "leaf1",
+      "cost": 1,
+      "coordinates": [
+        1
+      ]
+    },
+    {
+      "index": 2,
+      "name": "leaf2",
+      "cost": 1,
+      "coordinates": [
+        2
+      ]
+    }
+  ],
+  "unit_costs": [
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      0
+    ]
+  ],
+  "functional_classes": [
+    {
+      "index": 0,
+      "secret_coordinates": [
+        1
+      ],
+      "functional": [
+        1,
+        1
+      ],
+      "antichain": [
+        {
+          "cost": [
+            1,
+            0
+          ],
+          "unit_indices": [
+            2
+          ],
+          "unit_names": [
+            "leaf2"
+          ],
+          "coordinates": [
+            2
+          ],
+          "coefficients": {
+            "rows": 1,
+            "cols": 1,
+            "data": [
+              1
+            ]
+          }
+        }
+      ],
+      "private": false,
+      "brute_force": {
+        "coalitions_examined": 8,
+        "recovering_coalitions": 5,
+        "minimal": [
+          [
+            1,
+            0
+          ]
+        ]
+      }
+    }
+  ],
+  "leakage_profile": [
+    {
+      "t": 1,
+      "subspaces_examined": 1,
+      "antichain": [
+        {
+          "cost": [
+            1,
+            0
+          ],
+          "unit_indices": [
+            2
+          ],
+          "unit_names": [
+            "leaf2"
+          ],
+          "coordinates": [
+            2
+          ],
+          "coefficients": {
+            "rows": 1,
+            "cols": 1,
+            "data": [
+              1
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "brute_force_checked": true,
+  "brute_force_agrees": true,
+  "nodes_popped": 14
+}

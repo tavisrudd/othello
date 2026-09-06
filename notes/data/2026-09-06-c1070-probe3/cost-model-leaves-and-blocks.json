@@ -1,0 +1,19 @@
+{
+  "schema": "ergodis.leakage-cost-model.v1",
+  "name": "leaves-and-blocks",
+  "components": [
+    {
+      "kind": "unit-count",
+      "select": { "whole_block": false },
+      "weight": 1,
+      "name": "leaves"
+    },
+    {
+      "kind": "unit-count",
+      "select": { "whole_block": true },
+      "weight": 1,
+      "name": "blocks"
+    }
+  ],
+  "brute_force_check": true
+}

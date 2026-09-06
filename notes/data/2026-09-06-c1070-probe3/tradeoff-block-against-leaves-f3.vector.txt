@@ -1,0 +1,19 @@
+vector-cost leakage report: block-against-leaves trade-off over F_3, secret m0+m1+m2
+cost model leaves-and-blocks, components ["leaves", "blocks"]
+message dimension 3, 6 leaf coordinates, secret dimension 1
+observation model: 5 units
+  [0] L1B0 cost [0, 1] coordinates [0, 1, 2]
+  [1] L1B1 cost [0, 1] coordinates [3, 4, 5]
+  [2] leaf0 cost [1, 0] coordinates [0]
+  [3] leaf1 cost [1, 0] coordinates [1]
+  [4] leaf3 cost [1, 0] coordinates [3]
+Pareto antichain per secret functional:
+  s = [1, 1, 1]  2 minimal cost vector(s)
+      [0, 1] via ["L1B1"] coordinates [3, 4, 5] witness [0, 1, 0]
+      [3, 0] via ["leaf0", "leaf1", "leaf3"] coordinates [0, 1, 3] witness [1, 1, 1]
+t-symbol leakage profile (antichain of the union):
+  t = 1: 2 minimal cost vector(s) over 1 subspaces
+      [0, 1] via ["L1B1"]
+      [3, 0] via ["leaf0", "leaf1", "leaf3"]
+brute-force cross-check: every reported antichain confirmed
+work: 28 best-first nodes popped

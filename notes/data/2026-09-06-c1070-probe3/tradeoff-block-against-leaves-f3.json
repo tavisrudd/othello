@@ -1,0 +1,44 @@
+{
+  "schema": "ergodis.hierarchical-leakage.v1",
+  "name": "block-against-leaves trade-off over F_3, secret m0+m1+m2",
+  "field": { "characteristic": 3, "degree": 1 },
+  "message_dimension": 3,
+  "levels": [
+    {
+      "name": "outer",
+      "blocks": [
+        {
+          "name": "spc",
+          "generator": {
+            "rows": 3,
+            "cols": 4,
+            "data": [1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1]
+          }
+        }
+      ]
+    },
+    {
+      "name": "inner",
+      "blocks": [
+        {
+          "name": "in0",
+          "generator": { "rows": 2, "cols": 3, "data": [1, 0, 1, 0, 1, 1] }
+        },
+        {
+          "name": "in1",
+          "generator": { "rows": 2, "cols": 3, "data": [1, 0, 1, 0, 1, 2] }
+        }
+      ]
+    }
+  ],
+  "secret": { "rows": 1, "cols": 3, "data": [1, 1, 1] },
+  "observation": {
+    "generate": [{ "kind": "level-blocks", "level": 1, "cost": 2 }],
+    "units": [
+      { "name": "leaf0", "cost": 1, "coordinates": [0] },
+      { "name": "leaf1", "cost": 1, "coordinates": [1] },
+      { "name": "leaf3", "cost": 1, "coordinates": [3] }
+    ]
+  },
+  "options": { "brute_force_check": true }
+}
