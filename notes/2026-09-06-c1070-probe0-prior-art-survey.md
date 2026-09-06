@@ -139,3 +139,174 @@ secret coordinates leaks — and reporting it lets a user compare the compiler's
 number this literature would give them.
 
 ---
+
+## 3. Masking verification and the probing model
+
+This is the closest literature to C1070 by mechanism: these tools decide, by Gaussian elimination
+over the field, exactly the rank condition of the brief's §2. The differences are in what is exported
+and in how gadgets are composed.
+
+### 3.1 The model
+
+- **Ishai, Sahai, Wagner, "Private circuits: Securing hardware against probing attacks", CRYPTO 2003,
+  LNCS 2729, pp. 463–481** — *read depth: secondary only*, via IronMask (`partial`), which introduces
+  it as "The most famous one is probably the `t`-probing model, introduced by Ishai, Sahai, and Wagner
+  in 2003". Bibliographic detail verbatim from IronMask's reference [32]. The paper itself was not
+  opened; only the model attribution is claimed here.
+
+### 3.2 What the tools return: a witness, but not the leaked functional
+
+- **Belaïd, Mercadier, Rivain, Taleb, "IronMask: Versatile Verification of Masking Security", IEEE
+  S&P 2022, pp. 142–160; eprint 2021/1671** — *read depth: partial* (cache key `eprint:2021/1671`,
+  sha256 `f9b1b936d56256649c22fd564c80e921d866be3b5f6da25ea993b38d41d24f47`, 35 pp., fetched
+  2026-09-06 from `https://eprint.iacr.org/2021/1671.pdf`; **eprint version read, not the IEEE
+  published version**; sections read: abstract, §1 introduction, §2 preliminaries including the
+  security-notion definitions and Table 1, §3.1 on the Gaussian-elimination method and Lemma 1, the
+  implementation notes on wire representation and glitches, and the tool-comparison section; the
+  quadratic-gadget proofs and the benchmark tables were skimmed only). The IEEE volume and page range
+  are from a web search result page for the published version, not read off the article.
+
+  The exported object is the **set of input share indices**, not the leaked linear combination.
+  Verbatim: the single building block is "the set of input shares (SIS) function. The latter takes as
+  input a set of probes on internal wires of the gadget as well as a set of output shares, and returns
+  a set of input shares necessary (and sufficient) to perfectly simulate these internal probes and
+  output shares."
+
+  The labelled information is computed and then discarded. Verbatim on the mechanism: "after
+  executing the Gaussian elimination, we are guaranteed that the remaining expressions cannot be
+  simplified any further in the given field `K` and they are solely formed of operations between input
+  shares (they do not include any random variables)", after which the function `shares(.)` "simply
+  consists in extracting the indices of the input shares that are contained in the symbolic
+  expressions". So the residual expressions after elimination *are* the surviving secret-side
+  functionals — the same object C1070 calls the leaked space and the coefficient witness — and the
+  tool's interface projects them to an index set. (That reading of what the residual expressions are
+  is my own inference from the quoted mechanism, not the paper's framing.)
+
+  The security notions are then **cardinality conditions on those index sets**. Verbatim from
+  Definition 2: "A gadget `G` is `t`-NI if for any tuple `P` of `t1` internal probes and any set `O`
+  of `t2` output share indices such that `t1 + t2 ≤ t`, the sets `(I_1, …, I_ℓ) := SIS_G(P, O)`
+  satisfy `|I_i| ≤ t` for all `i`", and Table 1 gives the whole family in the same shape:
+  `t`-SNI is `|I_i| ≤ t1`, `t`-TNI is `|I_i| ≤ t1 + t2`, `t`-PINI is `|(∪_i I_i) ∩ O| ≤ t1`, and
+  probing security is `|I_i| ≤ n − 1`. Failure in the probing model is likewise all-or-nothing per
+  input: "a failure occurs when all the shares (of one input) are necessary".
+
+  Randomness freshness is **built into the model, not verified**: "A randomized arithmetic circuit is
+  equipped with an additional random gate of fan-in 0 which outputs a fresh uniform random value
+  of `K`."
+
+- **Barthe, Belaïd, Cassiers, Fouque, Grégoire, Standaert, "maskVerif: Automated Verification of
+  Higher-Order Masking in Presence of Physical Defaults", ESORICS 2019, LNCS 11735; eprint 2018/562**
+  — *read depth: partial* (cache key `eprint:2018/562`, sha256
+  `98b9c223fed48755678440d8aec22a4022a3aa3936767416c137928f83cfb3c0`, 20 pp., fetched 2026-09-06 from
+  `https://eprint.iacr.org/2018/562.pdf`; **eprint version read, not the ESORICS published version**;
+  sections read: abstract, §1 introduction, §2.1 implementation and verification procedure, the
+  strong-non-interference definition, §5 experimental evaluation preamble). The ESORICS
+  volume/series detail is from a web search result listing, not read off the article.
+
+  On failure the tool reports **the probe tuple**, not the leaked functional. Verbatim: "Whenever
+  verification fails, i.e. a potentially flawed tuple is detected, our tool computes the joint
+  distribution of this tuple, so as to verify exactly whether this tuple is an attack for the weakest
+  security notion considered. This step is exact, therefore all false negatives are removed. Our tool
+  successfully concludes for the secure examples, and outputs and checks the flawed tuple of
+  intermediate computations for the insecure examples." Composition is again by cardinality: strong
+  non-interference "imposes more stringent cardinality constraints", and its purpose is that
+  "it allows analyzing smaller (computationally tractable) parts of them independently, with global
+  security guarantees thanks to composition."
+
+  The earlier 2015 tool in the same line is **Barthe, Belaïd, Dupressoir, Fouque, Grégoire, Strub,
+  "Verified proofs of higher-order masking", EUROCRYPT 2015, LNCS 9056, pp. 457–485** — *read depth:
+  secondary only*, bibliographic detail verbatim from IronMask's reference [5]; not opened.
+  Strong non-interference was introduced in **Barthe, Belaïd, Dupressoir, Fouque, Grégoire, Strub,
+  Zucchini, "Strong non-interference and type-directed higher-order masking", ACM CCS 2016,
+  pp. 116–129** — *read depth: secondary only*, detail verbatim from IronMask's reference [6]; not
+  opened.
+
+### 3.3 Composition: sufficient, one-directional, and stated as such
+
+- **Cassiers, Standaert, "Trivially and Efficiently Composing Masked Gadgets with Probe Isolating
+  Non-Interference", IEEE Trans. Inf. Forensics and Security 15, pp. 2542–2555, 2020
+  (DOI `10.1109/TIFS.2020.2971153`); eprint 2018/438** — *read depth: partial* (cache key
+  `eprint:2018/438`, sha256 `b42403afae17e89aa04e13434d3eaf1c917f49eb0b623a47fbcefa066391b117`,
+  13 pp., fetched 2026-09-06 from `https://eprint.iacr.org/2018/438.pdf`; **eprint version read, not
+  the IEEE published version**; sections read: abstract, the non-interference definitions in §II, the
+  opening of §III on trivial composition). The volume, page range and DOI are from a web search
+  result page for the published version and were not read off the article itself.
+
+  Two statements settle the exactness question, verbatim. Sufficiency but not necessity: "`t`-NI is
+  however not a necessary condition for probing security, because it requires indistinguishable
+  simulation for any value of the input shares, not only for any value of the sensitive variables,
+  which sometimes makes the simulation of probing secure gadgets impossible". And the composition
+  rule is a one-directional closure: PINI "enjoys a simple and practical composition property: any
+  composite gadget whose composing gadgets are all PINI is itself PINI."
+
+- **Knichel, Sasdrich, Moradi, "SILVER — statistical independence and leakage verification",
+  ASIACRYPT 2020, Part I, LNCS 12491, pp. 787–816** — *read depth: secondary only*, via IronMask,
+  which characterises it as "the only previous tool providing complete verification for quadratic
+  gadgets with non-linear randomness" and as suffering "low performance". Bibliographic detail
+  verbatim from IronMask's reference [33]; not opened. That characterisation is IronMask's and is
+  unverified against SILVER.
+
+- **Belaïd, Coron, Prouff, Rivain, Taleb, "Random probing security: Verification, composition,
+  expansion and new constructions", CRYPTO 2020** (the VRAPS tool) — *read depth: secondary only*,
+  via IronMask, which calls it "the only previous tool verifying random probing composability and
+  expandability" and notes that VRAPS is incomplete in the direction that matters here: IronMask
+  "avoids failure false positives i.e. detected failure tuples which are not really failures, unlike
+  VRAPS". Bibliographic detail is from IronMask's reference [13]; that entry's page range was not
+  captured in the bounded read and is therefore omitted rather than recalled. Not opened, and the
+  incompleteness characterisation is IronMask's, unverified against VRAPS.
+
+### 3.4 Direct answers to the questions the brief asked
+
+1. **Do these tools return which secret linear combination a probe set reveals?** No. IronMask
+   returns the minimal set of input **share indices** sufficient for perfect simulation; maskVerif
+   returns the flawed **probe tuple**. Both compute residual functionals internally during Gaussian
+   elimination and then project them away. Nothing in the exported interface names a secret
+   functional or hands back a coefficient vector reconstructing it.
+2. **Is their composition exact or a sufficient condition?** A sufficient condition, and the papers
+   say so: non-interference is explicitly "not a necessary condition for probing security", and the
+   PINI composition theorem is stated only in the direction PINI-parts implies PINI-whole. All the
+   notions in IronMask's Table 1 are cardinality bounds on index sets, so a composite that fails the
+   bound may still be secure, and the notions cannot express *which* functional would leak.
+3. **Is there an exact compositional labelled result for linear gadgets already?** None was located
+   at the depth of this survey. Verification of a *fixed* linear gadget is exact and complete in these
+   tools; what is approximated is the **composition step**, and the approximation is exactly the loss
+   of labels. Two later works surfaced in search whose titles promise tighter composition —
+   "Unifying Freedom and Separation for Tight Probing-Secure Composition" (CRYPTO 2023) and "Probing
+   Security through Input-Output Separation and Revisited Quasilinear Masking" (IACR TCHES) — *read
+   depth: abstract/metadata only, from search-result listings*; neither was opened, and this survey
+   makes no claim about them beyond recording them as the first place a later check should look.
+   This is a product survey, not a novelty audit: nothing here is a priority claim.
+
+### 3.5 Headline, citations, and what to absorb
+
+**Headline for the comparison table.** Exact per-gadget decision of the same rank condition; the
+answer is exported as index-set cardinalities, composition is a sufficient condition (NI, SNI, PINI)
+that discards which functional leaks, and per-gadget fresh randomness is an axiom of the model rather
+than something checked.
+
+**What to cite it for.** The probing model itself (Ishai–Sahai–Wagner) whenever C1070 describes a
+coalition of observed wires; IronMask's set-of-input-shares function as the prior art nearest to R2's
+per-class minimum coalitions with witnesses; and the NI/SNI/PINI family as the named unlabelled
+composition conditions that R1's Theorem 2 and Lemma 5 refine. Probe 1's §9 asserted this comparison
+from memory and flagged it for this probe; it is **confirmed** at the depth recorded above, with one
+correction of emphasis: the set-of-input-shares function *is* a witness of a kind — a minimal
+necessary-and-sufficient input-share set — so the accurate statement is not "these tools give no
+witness" but "these tools give a coordinate-side witness and no secret-side label."
+
+**What to absorb, concretely.**
+
+1. **The gadget corpora are ready-made benchmark inputs.** IronMask and maskVerif ship standard
+   gadgets — ISW multiplication, refresh gadgets, DOM-AND, parallel and hardware variants, a 2-share
+   AES — in machine-readable form. Ingesting that format gives the engine a test suite with known
+   expected answers at low authoring cost, and directly supports the reconciliation probe 5 §8 asks
+   for.
+2. **Report the minimal input-share set alongside the labelled answer, not instead of it.** That
+   makes the output a strict refinement of what a masking engineer already reads, which is the
+   cheapest adoption path.
+3. **Freshness as a discharged obligation is the concrete differentiator.** These tools take
+   per-gate fresh randomness as a modelling axiom. Probe 1 §4 shows what that costs when it is false,
+   and §3.3's Lemma 5 shows the error is always in the unsafe direction. An interface that *verifies*
+   independence from the encoding, and reports shared randomness as a rank drop in the mask block, is
+   a capability none of these tools offers.
+
+---
