@@ -4400,8 +4400,17 @@
       "last": 1069,
       "purpose": "adversarial certificate read of the predecoder path (margin certificate, sparse sweep, pipeline)",
       "sequence": 489
+    },
+    {
+      "count": 1,
+      "first": 1070,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1070,
+      "purpose": "exact compositional leakage analysis for hierarchical linear encodings (Astra riff)",
+      "sequence": 490
     }
   ],
-  "next_id": 1070,
+  "next_id": 1071,
   "schema": "codex-task-id-allocations-v1"
 }

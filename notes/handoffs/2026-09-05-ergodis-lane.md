@@ -97,6 +97,14 @@ reduction under probe 4's query — and whether the certificate can be emitted w
 carrier at all. Brief `2026-09-04-c1062-ergodis-causal-brief.md`, routing log
 `2026-09-04-c1062-exploration-log.md`, verdict `2026-09-05-c1062-closeout-synthesis.md`.
 
+### C1070 — exact compositional leakage analysis for hierarchical linear encodings
+
+Queued, open-ended. Reads the labelled prescribed-coset recovery theory as a privacy interface and
+asks whether the tower quotient compiles a secret subspace, mask subspace, and observation model
+into named-functional and `t`-symbol leakage costs with witnesses. Brief and probe plan:
+[C1070 brief](../2026-09-06-c1070-ergodis-compositional-leakage-brief.md). **Next**: probe 0
+(prior-art audit), then probe 1 (mask-quotiented associativity).
+
 ### C985 — Ergodis exact algebraic optimization paper
 
 In progress as the optimization-facing sequel to the `complete-ports` lane's manuscript; it does not
