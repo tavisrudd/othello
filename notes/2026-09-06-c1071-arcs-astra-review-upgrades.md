@@ -470,6 +470,68 @@ the Hirzebruch form quoted is the weak one (item 18); the `m-1` gap does not tra
 `PG(n,q)` (item 3); the two "minor wording repairs" and the `q ≥ 4` repair are already in the
 manuscript (worklog A3, A5, A6), so no edit is needed for them.**
 
+### Phase 2 proposal — new numbered statements (awaiting the user's choice; 2026-09-06)
+
+Placement and shape for each surviving Phase 1 item. Prose tightening and the two already-landed
+wording repairs need no decision. Each entry: proposed label, placement, one-line statement,
+and what it costs.
+
+1. `prop:intrinsic-defect` (after Theorem `thm:defect`, Section 3). `D(A) = Δ_∅(A)` is a
+   nonnegative integer, `Δ_H(A) = D(A) + Σ_{y∈H, r(y)>0}(1 - r(y)/m)`, `Δ_H` is monotone in
+   `H`, and `mΔ_H(A) ∈ {0} ∪ [m-1, ∞)`. Replaces the unlabelled `m-2` gap display after
+   Corollary `cor:stability` (the corollary itself stays). Half a page.
+2. `thm:large-hole-asymptotic` (Section 5 beside Theorem `thm:asymptotic`, or as a corollary
+   of `cor:arbitrary-holes` in Section 3). For arcs complete outside `H` with
+   `|H|/q^{3/2} → λ`: `liminf(k - √(2q)) ≥ 3/2 - λ/√2`; in particular `3/2` whenever
+   `|H| = o(q^{3/2})`. Generalizes `thm:asymptotic`'s liminf clause; the explicit finite
+   bound `√(2q) + 3/2 - 8/√(2q)` stays as the conic case. Half a page.
+3. `lem:evaluation-equivalence` (replace or extend Lemma `lem:evaluation-obstruction`,
+   Section 8.1). Over `F_q` with `|A| ≤ q` the two obstructions are also necessary; sharp at
+   `|A| = q+1`; over infinite fields for every finite `A`. Ten lines; the existing
+   `check_evaluation_dichotomy.py` becomes the cited check for the boundary example.
+4. `thm:char-zero-obstruction` (Section 7, after Theorem `thm:match-ten-realization`). For
+   every `k ≥ 6`, no `MATCH(k, ⌊k/2⌋, 1)` design has a rank-three projective realization over
+   a field of characteristic zero. Proof by Hirzebruch's inequality (Pokora's form (5)) with
+   the multiplicity bookkeeping; new citations: Hirzebruch 1983, Pokora arXiv:1808.09167. Two
+   thirds of a page. Remark: the `k = 4` design is the unique real equality case of the weak
+   form; the `k = 6` block–secant incidence is the Cremona–Richmond configuration.
+5. `cor:ten-point-uniqueness` (immediately after `thm:match-ten-realization`). Every
+   rank-three realization of the regular-hyperoval design is `PGL(3,K)`-equivalent to the
+   regular hyperoval of `PG(2,8)`; the appendix gains one sentence recording that the
+   characteristic-two lexicographic basis has exactly three solutions, one Frobenius orbit.
+   Quarter page, no new computation.
+6. `prop:independent-domination` (Section 5, conic specialization, or the conclusion). For a
+   `C`-complete arc, `A ∪ S` (`S ⊆ C`) is an arc iff `S` is independent in `Γ_A`, and an
+   ordinary complete arc iff `S` is a maximal independent set; the minimum completion size is
+   `i(Γ_A)`, and `Γ_A` is a union of the `k` chord-involution matchings, so at least
+   `|U|/(k+1)` points are needed. Half a page.
+7. `prop:noisy-reconstruction` (coda, after `prop:arc-reconstruction`). Threshold recovery of
+   the secants and `A` from any `T` with `|T Δ (Π \ U(A))| ≤ e` when `2e < q + 1 - binom(k,2)`,
+   in any projective plane. Quarter page.
+8. Higher-dimensional section (new Section between the conic specialization and the
+   conclusion, or an appendix; the user decides the weight). Contents, in order:
+   `thm:cap-defect-identity` (item 3, with `c_4(A)`); `prop:pencil-bound` (item 11:
+   `T_ℓ ≥ B_n(k,q)`, the exact pencil remainder, and the three-term identity);
+   `thm:secant-local-coverage` (items 12, 17: `|X_H| ≤ N(q-1) - Σ_ℓ φ_m(T_ℓ) - I_H/m`);
+   `cor:pg3q-complete-caps` (item 13: the finite inequality for `k ≥ q+3` and
+   `liminf(k - √2 q) ≥ 1/2 + (3-λ)/√2`, with the ovoid case `λ = 1`); a remark on `n ≥ 4`
+   vacuity with the Golay and frame examples (item 14) and the coding identity
+   `A_4(C) = (q-1) c_4(A)` (item 15); and the conditional target (item 16) plus the equality
+   necessary conditions (item 23) as an open problem in the conclusion. Two to three pages.
+   Novelty wording for the `PG(3,q)` constant is gated on the literature part (D1).
+9. Coding-dictionary sentence (introduction paragraph at L212–219): one sentence giving the
+   weight-three syndrome fraction `≤ (q^2-1)/(q^3-1)` and `r(x)` as the weight-two
+   multiplicity. Two lines, no numbered statement.
+10. Conclusion: replace or extend the open problems with the quantitative target
+    (item 10: a positive fraction of second-moment mass at multiplicity `≤ (1-ε)m` gives
+    `3/2 + ηε/(1-ε)`) and the higher-dimensional program (lower bound on `c_4` plus
+    concentration control over secants).
+
+Framing (Phase 3, no decision needed yet): title candidates foregrounding prescribed-hole
+secant defects; the progression classical moments → local defect → matching structure →
+geometric and algebraic obstructions in the introduction's key-idea paragraph; the
+characteristic-set-`{2}` remark for the ten-point design.
+
 ## Source: Astra review, verbatim
 
 > I reviewed the full manuscript, including the appendices, and inspected the small odd-order
