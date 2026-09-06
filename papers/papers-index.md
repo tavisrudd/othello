@@ -57,8 +57,8 @@ Obstructions for Complete \((k,n)\)-Arcs*
 - *Contents:* manuscript, exact-arithmetic evidence bundle, partial Lean
   companion, imported-source registry, and referee guide.
 
-**3 · `arcs_complete_outside_conic`** — *Arcs complete outside a conic: a prescribed-hole defect
-identity and matching-design rigidity*
+**3 · `arcs_complete_outside_conic`** — *Secant defects with prescribed holes: arcs, caps, and
+matching designs*
 - *Status:* self-contained manuscript + PDF + independent checkers + strict-trust Lean
   formalization; the 21-page paper has completed adversarial, style-guide, and repeated cold-prose
   review. The standard frame and optional-branch hierarchy are explicit. Its remaining

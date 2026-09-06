@@ -1,4 +1,4 @@
-# Arcs complete outside a conic
+# Secant defects with prescribed holes
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21682567-blue.svg)](https://doi.org/10.5281/zenodo.21682567)
 
@@ -7,8 +7,8 @@
 [**Open the paper (PDF) →**](arcs_complete_outside_conic.pdf)
 
 This repository contains the manuscript
-*Arcs complete outside a conic: a prescribed-hole defect identity and
-matching-design rigidity* by Tavis Rudd, together with its public
+*Secant defects with prescribed holes: arcs, caps, and matching designs*
+by Tavis Rudd, together with its public
 computational evidence.
 
 In any finite projective plane of order \(q\), if \(\mathcal H\) is an

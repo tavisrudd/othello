@@ -31,6 +31,12 @@
       "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
     },
     {
+      "key": "BartoliDavydovKreshchukMarcuginiPambianco2016",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
       "key": "BartoliEtAl2018",
       "kind": "bibitem",
       "self_authored": false,
@@ -38,6 +44,12 @@
     },
     {
       "key": "BlokhuisSeressWilbrink1992",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "FarrLisonek2006",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
@@ -56,6 +68,12 @@
     },
     {
       "key": "Hirschfeld1998",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "Hirzebruch1983",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
@@ -97,6 +115,18 @@
       "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
     },
     {
+      "key": "Pavese2023",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "Pokora2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
       "key": "ReichardWoldar2022",
       "kind": "bibitem",
       "self_authored": false,
@@ -105,13 +135,13 @@
   ],
   "dir": "papers/arcs_complete_outside_conic",
   "environment_counts": {
-    "corollary": 22,
+    "corollary": 24,
     "definition": 2,
-    "lemma": 4,
-    "problem": 2,
-    "proposition": 5,
-    "remark": 3,
-    "theorem": 9
+    "lemma": 5,
+    "problem": 3,
+    "proposition": 6,
+    "remark": 5,
+    "theorem": 13
   },
   "labels": [
     {
@@ -196,6 +226,10 @@
     },
     {
       "environment": "corollary",
+      "label": "cor:pg3q-complete-caps"
+    },
+    {
+      "environment": "corollary",
       "label": "cor:q-plus-one-holes"
     },
     {
@@ -217,6 +251,10 @@
     {
       "environment": "corollary",
       "label": "cor:star-matching-realization"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:ten-point-uniqueness"
     },
     {
       "environment": "definition",
@@ -244,6 +282,10 @@
     },
     {
       "environment": "equation",
+      "label": "eq:cap-arbitrary-holes"
+    },
+    {
+      "environment": "equation",
       "label": "eq:conic-complete"
     },
     {
@@ -264,6 +306,22 @@
     },
     {
       "environment": "equation",
+      "label": "eq:gap"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:hirzebruch"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:intrinsic-split"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:large-holes"
+    },
+    {
+      "environment": "equation",
       "label": "eq:liminf"
     },
     {
@@ -277,6 +335,38 @@
     {
       "environment": "equation",
       "label": "eq:parity-capacity"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pencil"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pencil-remainder"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pg3q-asymptotic"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pg3q-complete"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pg3q-coverage"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:secant-collisions"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:secant-local"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:secant-local-explicit"
     },
     {
       "environment": "align",
@@ -319,6 +409,10 @@
       "label": "lem:max-index"
     },
     {
+      "environment": "lemma",
+      "label": "lem:pencil-bound"
+    },
+    {
       "environment": "estimate",
       "label": "lem:polynomial-estimate"
     },
@@ -329,6 +423,10 @@
     {
       "environment": "proposition",
       "label": "prop:arc-reconstruction"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:intrinsic-defect"
     },
     {
       "environment": "proposition",
@@ -356,7 +454,19 @@
     },
     {
       "environment": "remark",
+      "label": "rem:independent-domination"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:noisy-reconstruction"
+    },
+    {
+      "environment": "remark",
       "label": "rem:scale"
+    },
+    {
+      "environment": "document",
+      "label": "sec:caps"
     },
     {
       "environment": "document",
@@ -400,11 +510,23 @@
     },
     {
       "environment": "theorem",
+      "label": "thm:cap-defect-identity"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:char-zero-obstruction"
+    },
+    {
+      "environment": "theorem",
       "label": "thm:defect"
     },
     {
       "environment": "theorem",
       "label": "thm:intro-small-orders"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:large-holes"
     },
     {
       "environment": "theorem",
@@ -428,6 +550,10 @@
     },
     {
       "environment": "theorem",
+      "label": "thm:secant-local-coverage"
+    },
+    {
+      "environment": "theorem",
       "label": "thm:transfer"
     }
   ],
@@ -436,20 +562,20 @@
   "paper": "arcs_complete_outside_conic",
   "pdfs": [
     {
-      "bytes": 195446,
-      "pages": 27,
+      "bytes": 249961,
+      "pages": 35,
       "path": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.pdf",
-      "sha256": "505d0c06b7f64384684d94c4699aa8731faf05f55cfb7de274fbd15f86f5f69f"
+      "sha256": "b88adbf2baeb7982a339c16ec29941e7ce584085f1ecf49914a1acfab38d420e"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex",
-      "sha256": "a19f7827a911de09f64e20ec2cf34d7b61fcf8c3f4ea666423ed92e01f6484c6"
+      "sha256": "f9a87ac759aaa396a0a960b4138f053cb906438d8c8ae898287c430543540487"
     }
   ],
-  "title": "Arcs complete outside a conic:\\\\ a prescribed-hole defect identity and matching-design rigidity",
-  "title_normalized": "arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity",
+  "title": "Secant defects with prescribed holes:\\\\ arcs, caps, and matching designs",
+  "title_normalized": "secant defects with prescribed holes: arcs, caps, and matching designs",
   "untracked_bibliography": []
 }

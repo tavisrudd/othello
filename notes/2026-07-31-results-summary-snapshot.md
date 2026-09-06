@@ -54,8 +54,8 @@ The results are grouped as follows.
    anomaly, and lattice shadows it generates. This is a source-development
    body of mathematics feeding future forward versions of the paper in
    section 3, not a manuscript of its own.
-8. *Arcs complete outside a conic: a prescribed-hole defect identity and
-   matching-design rigidity*.
+8. *Secant defects with prescribed holes: arcs, caps, and matching
+   designs*.
 9. *Integral Secant Distributions and Improved Bounds for Complete
    \((k,n)\)-Arcs* — exact integer degree envelopes and modular-lift
    improvements for complete higher arcs.
@@ -1857,7 +1857,7 @@ full search strength, and neither do the Sylvester cut-frame identities
 \(K^2=10K+75I\) and \((K-5I)^2=100I\), although the Sylvester graph and its
 Bose--Mesner decomposition are catalogued machinery rather than new objects.
 
-## *Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity*
+## *Secant defects with prescribed holes: arcs, caps, and matching designs*
 
 Let \(\mathcal C\) be a nonsingular conic in \(\operatorname{PG}(2,q)\) and let
 \(A\) be a \(k\)-arc disjoint from it. Call \(A\) *complete outside*

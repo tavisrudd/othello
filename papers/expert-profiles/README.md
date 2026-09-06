@@ -16,7 +16,7 @@ Do not preload or reuse them as general context for another paper.
 |---|---|---|
 | 1 | Nofil / finite-geometry outcomes | `01-nofil-finite-geometry-outcomes.md` |
 | 2 | Dihedral Schreier Node Kayles | `02-dihedral-schreier-node-kayles.md` |
-| 3 | Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity | `03-arcs-complete-outside-conic.md` |
+| 3 | Secant defects with prescribed holes: arcs, caps, and matching designs | `03-arcs-complete-outside-conic.md` |
 | 4 | Clebsch rigidity | `04-clebsch-rigidity.md` |
 | 5 | Complete bounded repair ports | `05-complete-repair-ports.md` |
 | 6 | Frobenius-equivariant pair extension and robust repair | `06-equivariant-robust-completion.md` |
