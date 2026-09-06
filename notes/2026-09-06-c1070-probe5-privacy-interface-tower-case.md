@@ -198,6 +198,20 @@ Six tests in `src/hierarchical_leakage.rs`, all passing:
 - the projective and subspace enumerations have the Gaussian counts; and
 - a functional outside every observation is reported private, with no profile entry at `t = 1`.
 
+### 5.6 Validation gate
+
+`rustfmt --check` is clean on both new files. `cargo test -p ergodis-private --release --lib` passes
+the whole private library suite, 924 tests, none failing. `cargo clippy -p ergodis-private
+-p ergodis-tools --lib --bins --all-features -- -D warnings` reports nothing against either new
+file; it does fail on nine pre-existing findings in three unrelated `tasks/tools` modules
+(`actual_cause_report.rs`, `generic_certificate_bench.rs`, `profile_vocabulary_bench.rs`), which are
+foreign to this probe and were left untouched. That is worth raising: the tier-2 tools binary does
+not currently pass its own `-D warnings` gate.
+
+A second session was concurrently building the probe 1 mask module in the same repository. This
+probe's commit was staged as an exact patch so that only its own hunks in the two shared files
+(`src/lib.rs`, `tasks/tools/src/main.rs`) were committed; no foreign work was swept in.
+
 ## 6. Replay
 
 Working directory `/home/tavis/src/othello/notes/data/2026-09-06-c1070-probe5`. Build once from
