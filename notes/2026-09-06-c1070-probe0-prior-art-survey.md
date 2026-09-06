@@ -310,3 +310,92 @@ witness" but "these tools give a coordinate-side witness and no secret-side labe
    a capability none of these tools offers.
 
 ---
+
+## 4. Secure distributed storage, regenerating codes, and secure network coding
+
+The eavesdropper-on-repair-transcripts literature runs the same rank-equivocation arithmetic as the
+brief's §2, on the axis probe 1 calls the transcript axis: an observer accumulates the data stored at
+some nodes plus the data downloaded during repair of others.
+
+- **Pawar, El Rouayheb, Ramchandran, "Securing Dynamic Distributed Storage Systems against
+  Eavesdropping and Adversarial Attacks", arXiv:1009.2556 (2011), published IEEE Trans. Inform.
+  Theory 58, pp. 6734–6753, 2012** — *read depth: abstract/metadata only* (arXiv abstract page
+  `https://arxiv.org/abs/1009.2556` fetched 2026-09-06; **arXiv version's abstract, not the published
+  version**; the PDF was not fetched or cached; the journal volume/page detail comes from the same
+  search-result summary and is unverified against the article). Verbatim from the abstract: "In this
+  scenario, we give upper bounds on the maximum amount of information that can be stored safely on
+  the system. For an important operating regime … which we call the 'bandwidth-limited regime', we
+  show that our upper bounds are tight and provide explicit code constructions."
+  **Amount-only.** The deliverable is a secrecy capacity plus matching constructions.
+
+- **Shah, Rashmi, Kumar, "Information-theoretically Secure Regenerating Codes for Distributed
+  Storage", arXiv:1107.5279; presented in part at IEEE GLOBECOM 2011** — *read depth:
+  abstract/metadata only* (arXiv abstract page `https://arxiv.org/abs/1107.5279` fetched 2026-09-06;
+  arXiv version; PDF not fetched; the GLOBECOM venue attribution is from a search-result summary).
+  Verbatim: "we consider a threat model where an eavesdropper may gain access to the data stored in a
+  subset of the storage nodes, and possibly also, to the data downloaded during repair of some nodes.
+  We provide explicit constructions of regenerating codes that achieve information-theoretic secrecy
+  capacity in this setting." **Amount-only**, and this is the paper that states the repair-transcript
+  threat model most directly.
+
+- **Rawat, Koyluoglu, Silberstein, Vishwanath, "Optimal Locally Repairable and Secure Codes for
+  Distributed Storage Systems", arXiv:1210.6954; IEEE Trans. Inform. Theory 60(1), pp. 212–236,
+  January 2014** — *read depth: abstract/metadata only* (arXiv abstract page
+  `https://arxiv.org/abs/1210.6954` fetched 2026-09-06; arXiv version; PDF not fetched; volume, issue
+  and page range from a search-result summary, unverified against the article). The contributions are
+  "an improved bound on the secrecy capacity for minimum storage regenerating codes", secure coding
+  schemes against colluding eavesdroppers, and minimum-distance bounds for locally repairable codes.
+  **Amount-only**, with the added axis of locality — which is the closest thing in this literature to
+  C1070's per-level observation budget.
+
+- **Cai, Yeung, "Secure network coding", Proc. IEEE ISIT 2002, Lausanne, p. 323; and
+  "Secure Network Coding on a Wiretap Network", IEEE Trans. Inform. Theory 57(1), pp. 424–435, 2011**
+  — *read depth: abstract/metadata only*, from search-result listings on 2026-09-06; neither paper was
+  opened and neither is cached. Bibliographic detail is from those listings. Nothing about their
+  contents is claimed here beyond that they are the origin of the wiretap-network model that the
+  rank-metric line below extends.
+
+- **Martínez-Peñas, Matsumoto, "Unifying notions of generalized weights for universal security on
+  wire-tap networks", arXiv:1607.01263 (v1 July 2016, v2 December 2016)** — *read depth:
+  abstract/metadata only* (arXiv abstract page `https://arxiv.org/abs/1607.01263` fetched 2026-09-06;
+  arXiv version; PDF not fetched). Verbatim: "we introduce new parameters (relative dimension/rank
+  support profile and relative generalized matrix weights) for linear codes that are linear over the
+  field used in the network, measuring the universal security performance of these codes", and the
+  parameters "strictly extend relative dimension/length profile and relative generalized Hamming
+  weights, respectively, and relative dimension/intersection profile and relative generalized rank
+  weights, respectively." **Amount-only**, and explicitly so: the parameters are profiles and weights
+  that *measure* performance. A companion in the same line, Martínez-Peñas, "On the similarities
+  between generalized rank and Hamming weights and their applications to network coding",
+  arXiv:1506.04036 (2015/2016), is recorded at *read depth: abstract/metadata only* from a
+  search-result listing and was not opened.
+
+- **Herzberg, Jarecki, Krawczyk, Yung, "Proactive Secret Sharing Or: How to Cope With Perpetual
+  Leakage", CRYPTO 1995, LNCS 963, pp. 339–352** — *read depth: abstract/metadata only*, from a
+  search-result listing on 2026-09-06 (a Springer chapter page and a Google Research publication
+  page); not opened, not cached. It is cited here only as the origin of periodic share refresh, which
+  is the operation that motivates the transcript axis: refresh injects new randomness and the question
+  becomes what a long-lived observer of many refresh transcripts accumulates. Whether the paper
+  contains any labelled statement was **not** checked, and no claim about its contents is made.
+
+**Headline for the comparison table.** Amount-only, uniformly: secrecy capacity, equivocation, and
+weight/profile parameters, with matching constructions. Every source reachable at this survey's depth
+states its guarantee as a maximum secure file size or an information-theoretic capacity, and none
+identifies which secret functionals a given eavesdropper set recovers, nor returns a coalition
+witness. The brief's §7 expectation ("these give amounts, not labelled spaces, as far as memory
+serves") is **confirmed** at abstract depth, and the caveat that this depth is abstracts rather than
+full texts belongs on the claim.
+
+**What to cite it for.** The threat model, not the mathematics: whenever C1070 or the interface
+describes an observer of repair or refresh transcripts, Shah–Rashmi–Kumar and Pawar–El Rouayheb–
+Ramchandran are the model's home, Cai–Yeung is the network-coding origin, Martínez-Peñas–Matsumoto
+is the rank-metric generalisation of the weight parameters, and Herzberg et al. is proactive refresh.
+
+**What to absorb.** The secure regenerating-code constructions are **demo inputs with published
+expected answers**. A construction that "achieves secrecy capacity" against `ℓ` eavesdropped nodes is
+a tower the interface can compile; the compiled per-functional profile must be consistent with the
+published capacity, which is a free correctness check, and the profile then says more than the
+capacity does — which node subsets recover which combination. The locality axis in Rawat et al. is
+also the natural real-world instance of probe 3's per-level budget: local repair groups are exactly
+"at most `b` coordinates within a block".
+
+---
