@@ -353,7 +353,10 @@ cargo build --release -p ergodis-tools
 ```
 
 The run is deterministic: no randomness, no parallelism, no wall-clock dependence. `--check`
-recomputes the whole report and fails if the tracked certificate differs by a single field.
+recomputes the whole report and fails if the tracked certificate differs by a single field. It was
+run against the committed certificate and reports `certificate at
+notes/data/2026-09-06-c1070-probe9/gadget-corpus.json matches a fresh run`, with the same counts
+`accepted 75 rejected 44 | agree 54 disagree 0 unresolved 15 no-claim 6 | cross-checked 20`.
 
 SHA-256 of the committed artefacts is in `notes/data/2026-09-06-c1070-probe9/SHA256SUMS`.
 
