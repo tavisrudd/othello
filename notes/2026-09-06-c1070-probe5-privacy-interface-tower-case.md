@@ -161,7 +161,7 @@ eight units in total. The secret is the whole three-dimensional message space, g
 projective classes.
 
 The compiled leaf functionals are `m0`, `m1`, `m0+m1`, `m2`, `m0+m1+m2`, `2m0+2m1`. The reported
-per-class minima are 1 for the four classes that a single leaf carries — `m0`, `m1`, `m0+m1`
+per-class minima are 1 for the five classes that a single leaf carries — `m0`, `m1`, `m0+m1`
 (equivalently `2m0+2m1`), `m2`, `m0+m1+m2` — and 2 for the rest, each with an explicit two-coordinate
 witness. The profile is cost 1 at `t = 1`, cost 2 at `t = 2`, cost 3 at `t = 3`, examining 13, 13
 and 1 subspaces respectively. Work: 26 coalition spans reduced, 513 best-first nodes popped.
