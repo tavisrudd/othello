@@ -4,8 +4,8 @@
 
 **Date:** 2026-09-06
 
-**Status:** QUEUED. Order of work is fixed by the user: math first, then paper edits, then
-framing/positioning.
+**Status:** DONE (2026-09-06): Phase 1 verified, Phases 2–3 landed in the manuscript. Open:
+title decision, math-papers sync, the `PG(3,q)` novelty gap (four inaccessible sources).
 
 ## Goal
 
@@ -527,10 +527,77 @@ and what it costs.
     `3/2 + ηε/(1-ε)`) and the higher-dimensional program (lower bound on `c_4` plus
     concentration control over secants).
 
+**User decision (2026-09-06):** items 1–5 and 8–10 as numbered statements; 6 and 7 as remarks.
+
 Framing (Phase 3, no decision needed yet): title candidates foregrounding prescribed-hole
 secant defects; the progression classical moments → local defect → matching structure →
 geometric and algebraic obstructions in the introduction's key-idea paragraph; the
 characteristic-set-`{2}` remark for the ten-point design.
+
+### Phase 2 and 3 status (2026-09-06): LANDED
+
+Manuscript commit: "arcs: C1071 upgrades — …" on `main`. Build: `check_manuscript_build.py`
+PASS, 35 pages (was 27), warning-free; expected page count updated in the checker. Landed:
+`prop:intrinsic-defect` (Section 3), `thm:large-holes` (Section 5), converse clause of
+`lem:evaluation-obstruction` (Section 8.1), `cor:ten-point-uniqueness` and
+`thm:char-zero-obstruction` (equality-classification appendix, after
+`thm:match-ten-realization`), `rem:independent-domination` (end of Section 5),
+new Section `sec:caps` (cap defect identity, pencil bound, secant-local coverage theorem with
+`φ_m`, `PG(3,q)` corollary with the ovoid case, `n ≥ 4` remark with Golay/frame examples and
+Pavese's equality cases, coding identity, conditional target), `rem:noisy-reconstruction`
+(coda), the coding-dictionary sentence (introduction), a new introduction paragraph and two
+abstract sentences (Phase 3 framing), and three conclusion problems (quantitative planar target,
+higher-dimensional `c_4` program, `PG(3,q)` equality). New bibliography entries: Hirzebruch
+1983, Pokora 2020, Farr–Lisoněk 2006, Pavese 2023, Bartoli–Davydov–Kreshchuk–Marcugini–Pambianco
+2016. Novelty sentence for the `PG(3,q)` constant lives in the proof-audit ledger row
+"C1071 (2026-09-06)" and is quoted once in `sec:caps`, with "to our knowledge" load-bearing
+because four sources could not be accessed (Davydov–Faina–Marcugini–Pambianco J. Geom. 2009,
+Hirschfeld–Storme 1998/2001, Hirschfeld–Thas FFA 2014).
+
+Not done, by design: title change (user's call; candidates: "Prescribed-hole secant defects of
+arcs and caps", "Secant defects with prescribed holes: arcs, caps, and matching designs");
+math-papers sync (needs the user's instruction and `notes/export-and-mirror-conventions.md`);
+the artifact upgrades from the review's item 8 (Singular lift coefficients as certificates,
+order-16 transporter architecture for odd orders) — separate allocation if wanted.
+
+### `ej`+`tt` closeout pass
+
+Done cheaply during the task: the concave exact loss `φ_m` (strictly better than the reviewer's
+`max`); Hirzebruch's strong form removing the seven-point design input; free-pair and 4-general
+citations tying `T_ℓ = 0` and the zero-`c_4` examples to the literature; the `q = 3` tightness
+check; the ρ = 2 equality exclusion.
+
+What Tao would ask, and the answers:
+- Is the secant-local gain a change of summation order plus one local constraint? Yes:
+  `L = Σ_x (r-1) = Σ_ℓ L_ℓ` and `r(x) ≤ T_ℓ + 1` for `x ∈ ℓ`. In the plane `T_ℓ` is uniform and
+  ≈ `q`, so the constraint is vacuous; the gain exists exactly when `T_ℓ` is small relative to
+  `m`, i.e. in `PG(3,q)` at the covering scale. A per-point version `r(x) ≤ 1 + min_{ℓ∋x} T_ℓ`
+  is the same information.
+- Does the plane-section moment problem give more? No: the pencil bound is the LP optimum up to
+  `k ≈ 2q+2` (sub C4, and the pointwise-inequality proof in item 21).
+- Is the bound attainable? Item 23: strong necessary conditions; `ρ = 2` never; general case
+  open and logged as a problem in the paper and an Ergodis lead in the discovery track.
+- What about the `I_H/m` term for an ovoid? Not bounded below here; every secant meets an ovoid
+  in at most two points, so `I_H ≤ 2N`, and the term is `O(q^{3/2})`, below the `q^2` scale of
+  the constant. No leverage at this order.
+
+### Mystery ledger
+
+1. **Known smallest complete caps in `PG(3,q)` sit near `2.7q`, the bound near `1.41q`.**
+   Exact values `8, 12, 17` at `q = 3, 5, 7` and smallest known `30, 36` at `q = 11, 13`
+   (secondary-only through arXiv:1610.09656), against the bound's `8, 10, 13, 19, 22`. Tight
+   only at `q = 3`. The literature (same source) says constructions near `√2 q` are known only
+   for `q` even. Whether `t_2(3,q)/q → √2` for odd `q` is not settled by anything consulted.
+   Evidence gap: Davydov–Faina–Marcugini–Pambianco 2009 (inaccessible). Owner: none allocated.
+2. **Attainability of the `PG(3,q)` secant-local bound.** Necessary conditions derived
+   (item 23); no example and no proof of non-attainment beyond `ρ = 2`. Owner: successor task
+   if the user allocates it; Ergodis lead logged.
+3. **Settled by the pass:** the reviewer's Hirzebruch form (weak form quoted; strong form
+   needed for `k = 7`); the LP-equals-pencil coincidence (pointwise inequality
+   `n(n-1)(n-3)(n-4) ≥ 0`); the `m-1` gap's failure in higher dimension (non-integrality of
+   `D`); the ten-point uniqueness (three Frobenius-conjugate solutions were already in the
+   certificate).
+No other genuine mystery remains.
 
 ## Source: Astra review, verbatim
 
