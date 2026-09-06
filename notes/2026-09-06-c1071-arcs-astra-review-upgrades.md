@@ -196,8 +196,220 @@ queue row and archive row for C1071. Math-papers sync only after user instructio
 
 ## Report
 
-(To be filled per phase. Each Phase 1 item: PROVED / FAILED / QUALIFIED, with the argument or the
-counterexample.)
+### Phase 1 verdicts (2026-09-06, main session; every derivation below was redone by hand
+against the manuscript's definitions in Section 3, lines 278–531)
+
+Notation as in the paper: `N = binom(k,2)`, `m = floor(k/2)`, `r(x)` = secants through `x`,
+`V_H = Pi \ (A ∪ H)`, `X_H = {x ∈ V_H : r(x) > 0}`, `I_H = sum_{y∈H} r(y)`,
+`Delta_H = N(q-1) - (6/m) binom(k,4) - I_H/m - |X_H|`, and the identity
+`m Delta_H = sum_{X_H} (r-1)(m-r) + sum_H r(m-r)`. The paper works in an arbitrary projective
+plane of order `q`; nothing below uses more.
+
+**Item 1 — intrinsic-defect decomposition and the `m-1` gap: PROVED.**
+Put `D(A) = Delta_∅(A) = N(q-1) - (6/m)binom(k,4) - |X_∅|`. Since `X_H = X_∅ \ {y ∈ H : r(y)>0}`,
+`Delta_H = D(A) - I_H/m + #{y ∈ H : r(y)>0} = D(A) + sum_{y∈H, r(y)>0} (1 - r(y)/m)`.
+Integrality: `(6/m)binom(k,4) = (k-1)(k-2)(k-3)/2` for `k` even (three consecutive integers,
+divisible by 6) and `k(k-2)(k-3)/2` for `k` odd (`k-3` even); so `D(A) ∈ Z`, and `D(A) ≥ 0` by
+the identity with `H = ∅`. Gap: `m Delta_H = m D(A) + sum_{y∈H, r>0} (m - r(y))`. If `D(A) ≥ 1`
+then `m Delta_H ≥ m`. If `D(A) = 0`, the identity forces `r(x) ∈ {1, m}` for every covered
+`x ∉ A`, holes included, so each nonzero hole term is `m-1`. Hence `m Delta_H ∈ {0} ∪ [m-1, ∞)`.
+Sharpness (item 19): the complete quadrilateral (`k=4, m=2`, diagonal points have index 2, so
+`D=0`) with `H` = one index-one point gives `m Delta_H = 1 = m-1`; any matching-design arc with
+an index-one hole does the same. Monotonicity of `Delta_H` in `H` is immediate from the
+decomposition. This strictly improves Corollary `cor:stability`'s `m-2` gap and separates the two
+sources: an intrinsically nonextremal arrangement costs at least `m` (i.e. `D ≥ 1`), an
+extremal one costs exactly `m-1` per index-one hole.
+
+**Item 2 — hole sets up to `o(q^{3/2})`: PROVED.**
+From Corollary `cor:arbitrary-holes` with `I_H/m` dropped:
+`q^2 + q + 1 - k - h ≤ N(q-1) - (6/m)binom(k,4)`. With `k = sqrt(2q) + a`:
+`N(q-1) = q^2 + (a - 1/2) sqrt2 q^{3/2} + O(q)` and `(6/m)binom(k,4) = k^3/2 + O(k^2)
+= sqrt2 q^{3/2} + O(q)`, the `O(q)` terms being polynomials in `a` times `q`. So
+`RHS - LHS = sqrt2 (a - 3/2) q^{3/2} + h + O(q) ≥ 0`, uniformly for `a` in any bounded set.
+Rigor: the first-moment inequality `q^2 + q + 1 - k - h ≤ N(q-1)` with `h = O(q^{3/2})` gives
+`k^2 ≥ 2q - O(q^{1/2})`, so `a` is bounded below. Along any subsequence with `a` bounded above
+the expansion applies and yields `a ≥ 3/2 - λ/sqrt2 - o(1)` when `h/q^{3/2} → λ`; subsequences
+with `a → ∞` satisfy the liminf trivially. `λ = 0` covers every `h = o(q^{3/2})`, in particular
+every conic, every line, every unital, and every set of `O(q^{3/2 - ε})` points.
+
+**Item 3 — higher-dimensional remainder identity: PROVED.**
+For a cap `A` in `PG(n,q)` (any projective space with `q+1` points per line): two secants with
+disjoint endpoints meet iff their four endpoints are coplanar, and the meeting point is off `A`
+(else three collinear cap points); two secants sharing an endpoint meet only there. Each
+coplanar four-subset has three pairings, so `sum_{x∉A} binom(r(x),2) = 3 c_4(A)`, and
+`sum r(x) = N(q-1)`, `r(x) ≤ m` are unchanged. The proof of Theorem `thm:defect` uses only these
+three facts, so it goes through verbatim with `3 binom(k,4)` replaced by `3 c_4(A)`:
+`m Delta^{(n)}_H = sum_{X_H} (r-1)(m-r) + sum_H r(m-r) ≥ 0` where
+`Delta^{(n)}_H = N(q-1) - 6c_4(A)/m - I_H/m - |X_H|`. Completeness outside `H` gives
+`theta_n - k - h ≤ N(q-1) - 6c_4(A)/m - I_H/m`. What does not transfer: the Kneser-graph
+clique decomposition of Section `subsec:matching-design` needs every disjoint secant pair to meet,
+which fails for `n ≥ 3`; only the intersecting pairs form concurrence cliques. The decomposition
+`Delta_H = D(A) + sum_{H, r>0}(1 - r/m)` also transfers, but `D(A) = N(q-1) - 6c_4/m - |X_∅|` need
+not be an integer in `PG(n,q)` (`m | 6c_4(A)` is not automatic), so the improved `m-1` gap does
+not transfer: in higher dimension `m D(A) = sum (r-1)(m-r)` is a nonnegative integer whose nonzero
+terms are at least `m-2`, and the gap stays at the paper's `m-2`.
+
+**Item 4 — evaluation equivalence: PROVED (statement to be matched to the paper's lemma; sub
+extraction pending).**
+Let `V` be a finite-dimensional space of forms over `F_q`, `U` a point set, `W = {f ∈ V : f|_U = 0}`,
+`d = dim W`. For a point `a`, `ev_a|_W = 0` iff `ev_a` annihilates `W = (span{ev_u})^⊥`, iff
+`ev_a ∈ span{ev_u : u ∈ U}` (double annihilator in finite dimension). If `W = 0` or some
+`ev_a|_W = 0` there is no avoiding form. Conversely if `d ≥ 1` and every `ev_a|_W ≠ 0`, each
+`ker(ev_a|_W)` is a hyperplane of `W`, and `|∪_{a∈A} ker| ≤ 1 + |A|(q^{d-1} - 1)
+≤ 1 + q(q^{d-1} - 1) = q^d - q + 1 < q^d` when `|A| ≤ q`; any `f ∈ W` outside the union vanishes
+on `U` and at no point of `A`. Sharp: the `q+1` lines through the origin cover `F_q^2`. Over an
+infinite field the same holds for every finite `A`. Nonsingularity of an avoiding quadratic is a
+separate condition, as the reviewer says.
+
+**Item 7 — independent-domination bridge: PROVED.**
+`A` a `C`-complete arc, `U = U(A) ⊆ C` its uncovered locus, `Γ_A` on `U` with `u ~ v` iff the
+line `uv` contains a point of `A`. Any `S` with `A ∪ S` an arc and `S ⊆ C` has `S ⊆ U` (covered
+conic points lie on a secant). For `S ⊆ U`: triples inside `A` are fine; `a, a', s` collinear
+would put `s` on a secant; `s, s', s''` are three conic points; `a, s, s'` collinear iff `ss'` is
+an edge. So `A ∪ S` is an arc iff `S` is independent. Completeness of `A ∪ S`: points off
+`A ∪ C` and points of `C \ U` are already on `A`-secants; a point `u ∈ U \ S` lies on no
+`A`-secant, on no `ss'` (a line meets `C` in at most two points), and on `as` iff `u ~ s`. So
+`A ∪ S` is complete iff `S` dominates `U`, i.e. iff `S` is a maximal independent set, and the
+minimum number of points completing `A` is the independent domination number `i(Γ_A)`. Each
+`a ∈ A` contributes the matching `{u, ι_a(u)}` of its chord involution restricted to `U`
+(fixed points of `ι_a`, the tangency points from `a`, give no edge), so `Γ_A` is a union of `k`
+matchings and `Δ(Γ_A) ≤ k`; consequently any ordinary completion of `A` inside `C` adds at least
+`|U|/(k+1)` points. Even `q`: check the paper's Definition `def:relative` for the nucleus
+convention before stating this (sub extraction pending).
+
+**Item 8 — coding dictionary quantitative statements: PROVED (trivial).**
+Nonzero syndromes number `q^3 - 1`; each projective point carries `q-1` of them; the points whose
+syndromes need weight three are exactly the uncovered points `U ⊆ C`, at most `q+1` of them; so
+the fraction is at most `(q+1)(q-1)/(q^3-1)`. A syndrome `s` with `[s] ∉ A` is `αh_i + βh_j`
+with `α, β ≠ 0` iff `[s]` lies on the secant `h_i h_j`, and then `(α, β)` is unique; so the
+number of weight-two error vectors with syndrome `s` is `r([s])`.
+
+**Item 9 — reconstruction with errors: PROVED.**
+`S = Π \ U(A)` is the union of the secants (it contains `A`). A secant meets `S` in `q+1`
+points; a non-secant line meets each secant at most once, so meets `S` in at most `N` points. If
+`|T Δ S| ≤ e` then secants meet `T` in `≥ q+1-e` points and non-secants in `≤ N+e`, so
+`2e < q+1-N` separates them by a threshold, and `A` is recovered from the secant set as in the
+coda. Only the projective-plane axioms are used.
+
+**Item 10 — `η, ε` sufficient condition: PROVED (conditional target, not a theorem to add).**
+`(r-1)(m-r) = binom(r,2) · 2(m-r)/r ≥ (2ε/(1-ε)) binom(r,2)` when `r ≤ (1-ε)m`, and hole terms
+`r(m-r)` are at least as large. If the points with `r ≤ (1-ε)m` carry a proportion `η` of
+`sum binom(r,2) = 3 binom(k,4)`, then `m Delta_H ≥ (6ηε/(1-ε)) binom(k,4)`. With `h = O(q)`,
+`k = sqrt(2q)+a`, `binom(k,4) = q^2/6 + O(q^{3/2})`, `m = sqrt(q/2) + O(1)`:
+`Delta_H ≥ sqrt2 (ηε/(1-ε)) q^{3/2} + O(q)`, and `Delta_H = sqrt2 (a - 3/2) q^{3/2} + O(q)`
+(item 2), so `a ≥ 3/2 + ηε/(1-ε) - o(1)`.
+
+**Items 11–12, 17 — pencil bound, secant-local overlap, exact loss minimum: PROVED.**
+Fix a secant `ℓ = ab` in `PG(n,q)`. A four-subset `{a,b,c,d}` is coplanar iff `c, d` lie in the
+same plane through `ℓ` (the plane `⟨ℓ, c⟩` is unique). The `k-2` other cap points are
+partitioned by the `t = theta_{n-2}` planes through `ℓ`, so `T_ℓ = sum_π binom(z_π, 2)` and
+`sum_ℓ T_ℓ = 6 c_4(A)`. Minimizing `sum binom(z_π,2)` under `sum z_π = k-2` balances the
+occupancies, giving `T_ℓ ≥ B_n(k,q) = t binom(s,2) + sb` for `k-2 = ts + b`, `0 ≤ b < t`; the
+identity `binom(z,2) - sz + binom(s+1,2) = (z-s)(z-s-1)/2` summed over the pencil gives
+`T_ℓ = B_n(k,q) + (1/2) sum_π (z_π - s)(z_π - s - 1)` with every summand a nonnegative integer
+(checked: `s(k-2) - t binom(s+1,2) = t binom(s,2) + sb`). Summing over secants gives (4) and,
+substituted into item 3, the three-term identity (5) whose planar case (`t=1`, `s=k-2`,
+`B_2 = binom(k-2,2)`, `N B_2 = 6 binom(k,4)`) is the paper's theorem.
+Local overlap: `T_ℓ = sum_{x ∈ ℓ \ A} (r(x)-1)` (both sides count secants meeting `ℓ` off `A`).
+With `L_ℓ = sum_{x∈ℓ\A} (1 - 1/r(x))`, `sum_ℓ L_ℓ = sum_x (r(x)-1) = N(q-1) - |Y|`, `Y` the
+covered locus. Since `1 - 1/r` is concave in `r` and `sum (r-1) = T_ℓ`, `1 ≤ r ≤ m`, the minimum
+of `L_ℓ` is at an extreme point: `floor(T_ℓ/(m-1))` points of index `m` and one of index
+`rem + 1`, `rem = T_ℓ mod (m-1)`. So `L_ℓ ≥ φ_m(T_ℓ) := floor(T/(m-1))(m-1)/m + rem/(rem+1)`,
+which equals `T/(T+1)` for `T ≤ m-1`, equals `T/m` when `(m-1) | T`, and exceeds
+`max{T/m, T/(T+1)}` otherwise (e.g. `T = m`: `(m-1)/m + 1/2` versus `1`). Reviewer's (9)–(11)
+follow with `max{·,·}` replaced by `φ_m`; the reviewer's equality condition (all collisions of
+`ℓ` at one point) is the `T ≤ m-1` case of the extreme point. Covered holes number at least
+`I_H/m`, so `|X_H| ≤ N(q-1) - sum_ℓ φ_m(T_ℓ) - I_H/m`.
+
+**Item 13 — `PG(3,q)` consequences: PROVED (math); literature gate open.**
+`t = q+1`; for `q+3 ≤ k ≤ 2q+4`, `s = 1`, `b = k-q-3`, `B_3 = k-q-3`. For every `k ≥ q+3`,
+`binom(z,2) ≥ z-1` gives `T_ℓ ≥ (k-2) - (q+1) = k-q-3` with no upper restriction, and
+`T/(T+1)` is increasing, so `L_ℓ ≥ (k-q-3)/(k-q-2) = 1 - 1/(k-q-2)`. Hence
+`|X_H| ≤ N(q - 2 + 1/(k-q-2)) - I_H/m` and, for a cap complete outside `H`,
+`theta_3 - k - h ≤ N(q - 2 + 1/(k-q-2)) - I_H/m`. Expansion with `k = sqrt2 q + a`:
+`N = q^2 + sqrt2 a q - (sqrt2/2) q + O(1)`, so the right side is
+`q^3 + (sqrt2 a - sqrt2/2 - 2) q^2 + O(q)`; with `h = λ q^2 + o(q^2)` the left side is
+`q^3 + (1-λ) q^2 + o(q^2)`; comparing gives `a ≥ 1/2 + (3-λ)/sqrt2 - o(1)`. The first moment
+gives `a ≥ 1/2 + sqrt2`, so the gain is exactly `1/sqrt2`. Boundedness of `a` below follows
+from the first moment as in item 2. Nonsingular quadrics have `q^2 + 1` (elliptic, an ovoid)
+or `(q+1)^2` (hyperbolic) points, so `λ = 1` and `k ≥ sqrt2 q + sqrt2 + 1/2 - o(1)` for caps
+complete outside a quadric. Checked `q = 13`, `k = 21`: `theta_3 - 21 = 2359 > 2345 = 210·(11 + 1/6)`;
+the first moment allows `21` (`210·12 = 2520`).
+
+**Item 14 — `n ≥ 4` vacuity and zero-`c_4` examples: PROVED.**
+At `k ≍ q^{(n-1)/2}` and `t = theta_{n-2} ≍ q^{n-2}`, `k-2 < t` for large `q` iff `n ≥ 4`, so
+`s = 0` and `B_n = 0`. Normal rational curves have `c_4 = 0` (Vandermonde). A parity-check
+matrix of a perfect two-error-correcting code gives a cap with `c_4 = 0` (minimum distance 5:
+any four columns independent) that is complete (every syndrome is a combination of at most two
+columns): the ternary Golay `[11,6,5]` code gives a complete 11-cap in `PG(4,3)`, the binary
+`[5,1,5]` repetition code the 5-frame in `PG(3,2)`. So "complete implies `c_4 > 0`" is false in
+general, and any higher-dimensional `c_4` lower bound must exclude these.
+
+**Item 15 — coding formulation: PROVED.**
+Four coplanar cap points span a rank-three space, so their dependency space is one-dimensional,
+and a zero coefficient would make three of them collinear; hence each coplanar four-subset
+carries exactly `q-1` weight-four codewords of `C = ker H`, and every weight-four codeword arises
+this way: `A_4(C) = (q-1) c_4(A)` and `(q-1) T_ab = #{weight-four codewords with a, b in the
+support}`.
+
+**Item 16 — conditional higher-dimensional target: PROVED as stated (conditional).**
+(19) is item 12 with `T_ℓ/(T_ℓ+1) ≥ d/(d+1)` on a proportion `η` of secants. For `n ≥ 4` and
+`k = sqrt2 q^{(n-1)/2} + a q^{(n-3)/2}`: `N(q-1-η) = q^n + (sqrt2 a - 1 - η) q^{n-1} + o(q^{n-1})`
+(the `-k/2` term in `N` is `O(q^{(n-1)/2})`, lower order for `n ≥ 4`), against
+`theta_n - k - h = q^n + (1-λ) q^{n-1} + o(q^{n-1})`, giving `a ≥ (2 - λ + η)/sqrt2`. The
+Cauchy–Schwarz step is correct: `E[T 1_{T ≥ μ/2}] ≥ μ/2`, so `μ^2/4 ≤ E[T^2] P(T ≥ μ/2)`.
+
+**Item 18 — Hirzebruch bookkeeping: PROVED modulo the exact published hypotheses (sub to fetch).**
+In a rank-three realization the only multiple points of the `d = binom(k,2)` secant lines are
+the `k` arc points (multiplicity `k-1`; no other secant passes through an arc point) and the
+design blocks (multiplicity exactly `m`; two blocks cannot share a point since `2m > m`, and a
+block point is not an arc point), with every disjoint secant pair in exactly one block, so
+`t_m = (binom(d,2) - k binom(k-1,2)) / binom(m,2)`. Values: `k=4`: `t_3=4, t_2=3`; `k=5`:
+`t_4=5, t_2=15`; `k=6`: `t_5=6, t_3=15`; `k=7`: `t_6=7, t_3=35`; `k=8`: `t_7=8, t_4=35`;
+`k ≥ 8`: `t_2 = t_3 = 0`. With the inequality `t_2 + (3/4) t_3 ≥ d + sum_{r≥5} (r-4) t_r`:
+`k=4`: `3 + 3 = 6 ≥ 6` (equality); `k=5`: `15 ≥ 10`; `k=6`: `11.25 ≥ 21` false; `k=7`:
+`26.25 ≥ 35` false; `k ≥ 8`: `0 ≥ d + (k-5)k + (m-4)t_m > 0` false. With the reviewer's weaker
+`t_2 + t_3` form, `k=7` gives `35 ≥ 35` and is NOT excluded. So with the `3/4` form the
+characteristic-zero exclusion for all `k ≥ 6` uses Hirzebruch alone. The `k=6` configuration
+of blocks and secants is the duad–syntheme (Cremona–Richmond, `15_3`) configuration together
+with the six vertices; the doily alone is realizable over the reals, so the obstruction is the
+six five-fold vertices. Hypothesis check: the arrangement has no point on `d`, `d-1`, or `d-2`
+lines for `k ≥ 4` since `k-1 < d-2`. Pending: the exact hypotheses of the `3/4` form
+(`t_d = t_{d-1} = t_{d-2} = 0`, and any `d ≥ 6` proviso) from a consulted source.
+
+**Item 20 — ovoid framing: accepted for Phase 2.** Elliptic quadric = ovoid = maximal cap.
+
+**Item 21 — plane-section moments: PROVED; the pencil bound is the LP optimum at the covering
+scale.** In `PG(3,q)` every coplanar four-subset lies in exactly one plane, so
+`c_4 = sum_π binom(n_π,4)`; three non-collinear points lie in one plane, so
+`sum_π binom(n_π,3) = binom(k,3)`, and `sum_π binom(n_π,2) = N(q+1)`, `sum_π n_π = k theta_2`.
+The pencil bound `c_4 ≥ N(k-q-3)/6 = binom(k,3)/2 - N(q+1)/6` is exactly the pointwise
+inequality `binom(n,4) - binom(n,3)/2 + binom(n,2)/6 = n(n-1)(n-3)(n-4)/24 ≥ 0` summed over
+planes, with equality iff no plane meets `A` in exactly 2 or in at least 5 points. Any LP over
+the three fixed moments produces a bound of the form `c_4 ≥ α + β sum n + γ sum binom(n,2)
++ δ sum binom(n,3)` valid pointwise; the pencil inequality touches at `n ∈ {0,1,3,4}`, which is
+the support of the LP's extremal distribution at the covering scale (`p_2 = 0` there), so the
+two bounds coincide. The LP can only improve on it when planes with five or more cap points
+are forced, i.e. well above the covering scale. Sub numerics (C4) are a check on this.
+
+**Item 23 — equality structure of the `PG(3,q)` bound: PARTIAL; necessary conditions derived,
+and the `ρ = 2` case excluded.** Write `ρ = k-q-2`. Equality in (13) for an ordinary complete
+cap forces: (i) every plane through every secant contains 1 or 2 further cap points, so every
+plane meets `A` in at most 4 points; (ii) each secant has exactly one collision point, of index
+`ρ`, all its other external points having index 1, so the index spectrum is `{1, ρ}` and
+`ρ ≤ m`; (iii) the `N` secants are partitioned into `N/ρ` concurrent blocks of size `ρ`
+(so `ρ | N`), and two secants from different blocks are skew (they cannot meet, since a meeting
+point would be a second collision); (iv) if `ab, cd` lie in one block then `{a,b,c,d}` is a
+coplanar quadrangle and `ac, bd` lie in a second block, `ad, bc` in a third, so the block
+relation on disjoint secant pairs is closed under re-pairing; (v) the Diophantine identity
+`N(q - 2 + 1/ρ) = theta_3 - k`. For `ρ = 2` (`k = q+4`) condition (iv) says the blocks are the
+three perfect matchings of the `K_4`'s of a Steiner system `S(2,4,k)`, and (v) becomes
+`2q^3 - 7q^2 - 3q + 24 = 0`, which has no integer root, so equality never occurs at `ρ = 2`.
+At `q = 3`, `k = 8`, (iii) already fails (`28/3`). Sub to brute-force (v) with `ρ | N`,
+`ρ ≤ m`, `q ≤ 2000` (item 23 numerics). Remaining: whether any `(q,k)` satisfies (iii)–(v)
+simultaneously, and if none, how much slack is forced. Successor material, not for this task.
+
+**Items 5, 6, 22: pending sub extraction/numerics.**
 
 ## Source: Astra review, verbatim
 
