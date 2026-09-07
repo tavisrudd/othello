@@ -157,3 +157,7 @@ Core 174999c and private cc56b87 connect admitted LRC events to authenticated su
 ## 2026-09-07 — C1101 portable run identity and history
 
 Core e4e7424, private dd3f19d. UUIDv7 RunId follows explicit user preference for SQUUID-like run identity; SHA-256 identifies immutable specs/records/content. Bounded codecs and explicit parent checks pass native/WASM and private LRC alias interoperation. No repository publication or current mathematical authority implied. Next is a bounded offline run bundle. Report: `../2026-09-07-c1101-portable-run-records.md`.
+
+## 2026-09-07 — C1103 offline run bundle foundation
+
+Core c8da541, private fd0f03f. Bounded borrowed-payload reader/encoder checks included identities and parents, rejects conflicting histories, and lists missing specs/parents/content. Complete and partial LRC bundles exercise explicit subsequent verification. Native, seven bundle/eight private tests, Python and WASM compilation pass. Browser/client inspection is next; no FS or execution-resumption claim. Report: `../2026-09-07-c1103-offline-run-bundles.md`.

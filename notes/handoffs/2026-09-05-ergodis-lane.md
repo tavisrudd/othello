@@ -235,12 +235,19 @@ new forks get fresh IDs. Six runtime and eight private tests, full native gates,
 compilation pass. This is structural/content/link admission, not repository publication or
 mathematical authority. No clock/RNG/filesystem or solver hot-path change.
 
-**Next**: bounded run bundles and offline viewing/content resolution above the solver, following
-C1084. Package a concrete source, event stream, snapshots and scoped evidence; resolve lineage and
-invoke independent verification explicitly, then fork without transferring old authority.
-Repository publication/fencing, attempts/budgets and actual execution recovery remain separate.
-Other algebras/backends and compact sibling proofs need their own admission/performance gates.
-Preserve native64 performance and solver/control separation. C1032 and module schemas remain open.
+**C1103 complete**: core `c8da541`, private `fd0f03f`;
+`notes/2026-09-07-c1103-offline-run-bundles.md`. Bounded portable bundles expose manifests, records,
+borrowed payloads and explicit missing dependencies. Included content/parent checks and duplicate
+history rejection pass seven bundle tests; the private LRC fixture resolves actual snapshot/delta
+bytes before explicit verification. Full native, eight private tests, Python and WASM compilation
+pass. Opening data implies no solver execution, publisher authentication or mathematical authority.
+
+**Next**: expose offline bundle inspection in the browser/client workflow: bounded file input,
+manifest and run lineage, missing-content diagnostics, no live-session requirement. Keep domain
+verification an explicit capability/action. Repository publication/fencing, attempts/budgets and
+actual execution recovery remain separate. Other algebras/backends and compact sibling proofs
+need their own admission/performance gates. Preserve native64 performance and solver/control
+separation. C1032 and module schemas remain open.
 
 ### C985 — Ergodis exact algebraic optimization paper
 
