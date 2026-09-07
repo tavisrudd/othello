@@ -56,9 +56,23 @@ cubic phase states, and the bipartition product-exclusion argument.
    (Reed–Solomon lane) work only after checking that it actually uses apolarity (the lane
    handoff does not mention it; unverified as of 2026-09-07).
 
-Title candidates (author's call): *Strength-two trades, transversal cubic gates, and the magic
-of the Clebsch codes*; *Quadratic trades as certificates for coupled cubic-phase quantum
-resources*.
+Title and alias proposals (2026-09-07; author's call, not yet decided):
+
+- **Recommended:** *Strength-two trades and transversal cubic gates: the Clebsch cubic-phase
+  codes and their magic*. Directory `papers/clebsch-cubic-phase/`; spoken alias `cubic-phase`.
+  Reasons: "strength-two trade" is Paper II's and the literature's term; "transversal cubic
+  gates" and "cubic-phase" are the standard quantum names; "magic" is safe in a title (lit
+  check, stabilizer Rényi entropy in the abstract); it does not say "coupled" (only true for
+  p = 11 and two non-Clebsch trades at p = 7), "exceptional codes" (the family exists for every
+  prime), or "invariant gate" (one section). The `clebsch-` prefix matches `clebsch-rigidity`,
+  `clebsch-factorization`, `clebsch-passages` and carries no Roman numeral (C919: only the five
+  numbered papers do). The directory name still fits if C1102 is later re-pegged to
+  `quantum-codes`.
+- Alternative 1: *Quadratic trades as certificates for coupled cubic-phase quantum resources*
+  (Astra's working title). Cons: "coupled" is weakened by C1099; "certificates" undersells the
+  family and magic results.
+- Alternative 2: *Transversal cubic gates from conic matchings*. Cons: hides the all-primes
+  translation family and the magic theorem.
 
 ## Framing notes from Sol's 2026-09-07 assessment (adopted where C1099 confirms them)
 
