@@ -135,7 +135,8 @@ with selected heuristics/theorems optionally private. Assess separable industry 
 licensing or acquisition carve-outs, with QEC the leading case. Target runtime: one core binary
 loading specialized kernels as shared libraries and compiling extension source on the fly into
 Ergodis IR; the existing WASM prototype must also load industry extensions. Both shippable and
-hosted black-box demos are required (shippable takes priority). Scope and acceptance:
+hosted black-box demos are required (shippable takes priority). A Terra audit of current WASM
+support is in progress; planned memo `notes/2026-09-06-c1079-wasm-capability-audit.md`. Scope and acceptance:
 `notes/2026-09-06-c1079-ergodis-evolve-brief.md`. Evidence report:
 `notes/2026-09-06-c1079-ergodis-evolve-review.md`.
 

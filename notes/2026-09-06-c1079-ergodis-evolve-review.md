@@ -116,6 +116,10 @@ should carry across hosts with appropriate target artifacts and explicit compati
 The initial inventories did not inspect this prototype; no WASM-loading support or parity is
 claimed. The brief now requires a compatibility matrix and recipient-run/hosted demo coverage.
 
+A user-requested Terra audit of current WASM capabilities is in progress. Planned memo:
+`notes/2026-09-06-c1079-wasm-capability-audit.md`. It will separate implemented/exposed/tested
+support from portability possibilities and uninspected or unsupported paths.
+
 ## Next synthesis work
 
 Use these inventories to construct a concrete cross-repository capability/admission map, then
