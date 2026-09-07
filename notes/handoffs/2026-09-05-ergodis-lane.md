@@ -221,11 +221,18 @@ checker with summary-transition-only authority. 50 scoped tests and CLI smoke pa
 CLI integration clippy pass. Whole-tool clippy remains blocked by an unrelated unchanged lint in
 `tasks/tools/src/leakage_dual_tower.rs:116`; no suppression or foreign fix applied.
 
-**Next**: bind domain-event admission to an authenticated summary transition for an existing
-adapter. Keep source correctness separate from commitments and summary composition. Other
-algebra/backends and compact sibling proofs need separate explicit admission/performance gates.
-Preserve native64 performance and solver/control separation. C1032 and durable/module schemas
-remain open.
+**C1100 complete**: core `174999c`, private `cc56b87`;
+`notes/2026-09-07-c1100-domain-bound-transitions.md`. Domain-bound LRC events use the independent
+checker’s admitted-leaf API; rejection preserves domain and verifier state. Core owns wire parsing.
+Full native, 16 private tests, Python and WASM gates pass. Summary aliases are intentional: this
+checks consistency with the supplied source interpretation, not unique source/event identity or
+independent domain optimality. Existing solver loops and hot layouts unchanged.
+
+**Next**: durable source/event identity and evidence coverage above the solver, following C1084:
+load and independently verify an old run, then fork an event stream without confusing equal
+summaries with equal source histories. Other algebra/backends and compact sibling proofs need
+separate explicit admission/performance gates. Preserve native64 performance and solver/control
+separation. C1032 and durable/module schemas remain open.
 
 ### C985 — Ergodis exact algebraic optimization paper
 

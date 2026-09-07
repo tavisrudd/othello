@@ -5594,3 +5594,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1090 `[clebsch]` [REPORTED 2026-09-07]** — Clebsch II cubic-phase codes `[[14,6,2]]_7`, `[[22,10,2]]_11`: priority search (codes and invariant-theoretic phase unclaimed; weighted mechanism and synthillation partially known), exact Pauli-spectrum classification for both primes (rational-normal-curve extremum, Waring bracket `9 ≤ r(F_7) ≤ 13`), and the user's decision for a standalone companion note; successor C1099 → `notes/clebsch-tasks/c1090-cubic-phase-codes.md`
 
 - **C1098 `[ergodis]` [REPORTED 2026-09-07]** — Retire legacy certificate authority and migrate supported consumers → `notes/2026-09-07-c1098-certificate-authority-migration.md`.
+
+- **C1100 `[ergodis]` [REPORTED 2026-09-07]** — Domain-bound LRC authenticated transitions; atomic rejection and explicit summary/source distinction. Core 174999c; private cc56b87. Native, private 16 tests, Python and WASM gates pass → notes/2026-09-07-c1100-domain-bound-transitions.md

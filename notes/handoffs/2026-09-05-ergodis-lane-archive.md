@@ -149,3 +149,7 @@ Private `83ebffa`; report `../2026-09-07-c1098-certificate-authority-migration.m
 Removed old verifier API names, gated historical replay and migrated supported matrix CLI mode
 to independent checker. 50 scoped tests and CLI smoke pass. Whole-tool clippy has the unrelated
 unchanged leakage_dual_tower.rs:116 lint. Domain/source linkage is the next boundary.
+
+## 2026-09-07 — C1100 domain-bound transitions
+
+Core 174999c and private cc56b87 connect admitted LRC events to authenticated summary replacements. Core owns parsing; both states commit only after admission and authentication. Native, private 16 tests, Python and WASM gates pass. Summary identity is not source/event provenance; durable record binding is next. Report: `../2026-09-07-c1100-domain-bound-transitions.md`.
