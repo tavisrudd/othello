@@ -117,3 +117,7 @@ Six private tests establish initial same-model query boundaries across privacy, 
 ## 2026-09-07 — C1093 dynamic query admission
 
 Added cold bound LRC queries and retained-update contract tests; audited OpenProblem/generic evidence. Eleven scoped tests pass. Report: `notes/2026-09-07-c1093-dynamic-query-admission.md`. No hot-path changes or performance claims.
+
+## 2026-09-07 — C1094 core structural admission
+
+Core checked shape (`b74a369`) and private fallible construction (`4add0bc`) pass full/scoped gates and WASM. Report: `notes/2026-09-07-c1094-core-composition-admission.md`. This is geometry/storage admission, not semantic authority.

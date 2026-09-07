@@ -185,12 +185,18 @@ parametric LRC; one compilation serves count/threshold/witness readouts with che
 source-vs-commitment clarification: `notes/2026-09-07-c1093-dynamic-query-admission.md`.
 No hot kernels changed; the DeltaRun saturation limitation is now executable regression evidence.
 
-**Next**: allocate the minimal shared cold core admission boundary demonstrated by these adapters,
-with fallible bounded construction around existing OpenProblem capabilities. Keep domain models
-private. Separate summary-transition receipts from independently checked domain leaf transitions
-before migrating generic evidence. Preserve same-model query specialization, question/design
-exploration, native64 layouts/performance and the solver/control separation. Durable schemas and
-module manifests follow those contracts; C1032 remains open.
+**C1094 complete**: core `CompositionShape` and private fallible retained-tree construction,
+core `b74a369`, private `4add0bc`; `notes/2026-09-07-c1094-core-composition-admission.md`.
+Full core fmt/clippy/tests, private constructor tests, Python parity and WASM release check pass.
+The boundary validates geometry/inline storage only; algebra, query and evidence admission remain
+separate. Original hot loops/layouts and native construction paths unchanged.
+
+**Next**: allocate semantic adapter admission over the existing composition capabilities, with
+explicit supported query/observable contracts and domain-checked leaf transitions. Then move generic
+summary-transition checking into the independent verifier with its narrower claim scope. Reuse the
+private OpenProblem/parametric/certificate implementations and existing domain corpus. Preserve
+question/design exploration, native64 performance and the solver/control separation. Durable schemas
+and module manifests follow those contracts; C1032 remains open.
 
 ### C985 — Ergodis exact algebraic optimization paper
 

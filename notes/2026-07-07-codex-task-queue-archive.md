@@ -5583,3 +5583,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1089 `[ame-lu]` [REPORTED 2026-09-07]** — Paper I marginal-certification proposition (sharp `m`-marginal mixed-state determination with the iff spanning criterion, `(m+1)`-local parent Hamiltonian with `m`-local no-go, marginal fidelity certificate) and stochastic-conversion corollary (product operators between stabilizer AME states are Clifford up to scalars; SLOCC = LU = LC on the class), cold read, export, summary refresh → `notes/2026-09-07-c1089-ame-marginal-certification.md`
 
 - **C1093 `[ergodis]` [REPORTED 2026-09-07]** — Immutable parametric query admission, update regressions and generic evidence audit → `notes/2026-09-07-c1093-dynamic-query-admission.md`
+
+- **C1094 `[ergodis]` [REPORTED 2026-09-07]** — Core composition shape and fallible private construction; full core and portable gates pass → `notes/2026-09-07-c1094-core-composition-admission.md`
