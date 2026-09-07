@@ -298,13 +298,20 @@ Report: `notes/2026-09-07-c1123-repository-analysis.md`.
 update/fork ancestry, run selection and bounded SVG rendering pass executed notebook
 and Chromium output checks. Report: `notes/2026-09-07-c1033-saved-run-notebook.md`.
 
-**C1124 in progress**: user-directed real-workload campaign console, using the recovered
-C1031 console and current native engine. No toy or infographic default.
+**C1124 complete**: real-workload campaign console recovered against current native
+Ergodis; private `10a465b`, `9d75d53`, `de4f4fd`. Reader, VM differential and static/live
+browser gates pass on an order-2092 corpus (19,997 candidates, 178 behavior classes).
 Report: `notes/2026-09-07-c1124-real-campaign-console.md`.
 
-**Next after C1124**: C1033's standing live-evolution campaign and candidate mutation-lineage view.
-Candidate lineage is distinct from this saved run ancestry. Browser analytical export
-and larger-store pagination need separate slices.
+**Demo direction (user instruction)**: operator console like the supplied older campaign
+artifact, with real problems; no infographic or toy-example default. Private entry:
+`make -C analysis/campaign-console demo`. Review preview: `http://127.0.0.1:8767/`;
+process location/ownership is recorded in the report. C1124 covers the candidate-lineage
+console formerly listed as C1033's next step; saved run ancestry is a separate view.
+
+**Next gate**: select and allocate a second real application demonstration (recovery/helper
+costs or QEC decoding) to show another engine capability. Browser analytical export
+and larger-store pagination also require their own slices.
 Browser/native bounded persistence pilots are complete; automatic execution recovery, larger
 stores and additional platform/retention guarantees need separately allocated slices and gates.
 Closed scope and gates: `notes/2026-09-07-ergodis-offline-workflow-successors.md`.

@@ -204,3 +204,16 @@ accounting, selected-run update/fork ancestry, separate same-run branch tracks,
 and expandable identities. Executed notebook and Chromium-rendered output checks
 pass. Report: `../2026-09-07-c1033-saved-run-notebook.md`. C1033 stays open for
 its standing live-evolution candidate-lineage frontier; no incidental discovery.
+
+## 2026-09-07 — C1124 real-workload console
+
+User supplied the older campaign-console artifact, rejected infographic presentation,
+and explicitly required real problems. Recovered the committed C1031 console into
+private tooling and validated it on a new current-engine order-2092 research run.
+Private `10a465b`, `9d75d53`, `de4f4fd`; report
+`../2026-09-07-c1124-real-campaign-console.md`. Static/live and current VM gates pass;
+full-count sampling corrections are tested. Read-only final-run preview remains at
+port 8767 with task-owned PID recorded in the output directory. C1124 supplies the
+live candidate-lineage console previously queued as the next C1033 slice. No
+incidental mathematical discovery. Next demo work needs a second real workload,
+not a return to a toy or infographic default.
