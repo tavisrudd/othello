@@ -4715,8 +4715,17 @@
       "last": 1120,
       "purpose": "Astra review follow-up: foundations, additive motivic extension, rank-four descent obstruction, finite-index slices, stabilization corollaries",
       "sequence": 524
+    },
+    {
+      "count": 1,
+      "first": 1121,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1121,
+      "purpose": "Simplify offline browser demo onboarding and saved-run actions with real-browser UI checks",
+      "sequence": 525
     }
   ],
-  "next_id": 1121,
+  "next_id": 1122,
   "schema": "codex-task-id-allocations-v1"
 }
