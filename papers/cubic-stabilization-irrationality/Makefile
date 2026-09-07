@@ -25,9 +25,11 @@ verify:
 	$(PYTHON) verification/check_slice_cover.py \
 		--check-certificate verification/slice-cover-certificate.json \
 		--check-empty-certificates verification/groebner-empty-certificates.json
+	$(PYTHON) verification/derive_rank_four.py
+	$(LINT_PYTHON) verification/check_rank_four.py
 	$(LINT_PYTHON) verification/check_metadata.py
 
-manuscript: $(SOURCE) formal-annotations.tex verification/slice-cover-values.tex
+manuscript: $(SOURCE) formal-annotations.tex verification/slice-cover-values.tex verification/rank-four-values.tex
 	$(LINT_PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)
 	$(LATEXMK) $(LATEXMK_FLAGS) $(SOURCE)
 

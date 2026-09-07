@@ -105,6 +105,7 @@ expected_statement_evidence = {
     "thm:cubic-level": {"quartic-del-pezzo-slice-cover"},
     "thm:two-variable": {"quartic-del-pezzo-slice-cover"},
     "prop:tangent-section": {"quartic-del-pezzo-slice-cover"},
+    "prop:rank-four-descent": {"cox-rank-four"},
 }
 for environment, body in statement_pattern.findall(text):
     label_match = re.search(r"\\label\{([^}]+)\}", body)

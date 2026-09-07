@@ -64,6 +64,13 @@ calculation and the evidence boundary.
 
 ## Evidence and replay
 
+The concluding limitation for full type I3 has a separate, finite audit:
+check the contravariant character kernel, the primitive generator, and the
+affine weight permutations. The two weight orbits exclude descended sets of
+five or six weights. The 1992 unimodular five-subsets demonstrate why a
+lattice-basis check alone does not settle descent. Exact conventions and
+independent replay are in `verification/rank-four.md`.
+
 No Lean development formalizes the new results.  Formal coverage is recorded
 as `absent` in `verification/claim-map.json`.  The imported results and their
 conventions are listed in `verification/imported-sources.json`; the exact

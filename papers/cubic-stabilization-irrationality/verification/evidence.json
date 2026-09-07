@@ -1,4 +1,12 @@
 {
+  "cox-rank-four": {
+    "checksum_manifest": "verification/rank-four-SHA256SUMS",
+    "commands": [
+      "uv run --with sympy==1.14.0 python3 verification/derive_rank_four.py",
+      "uv run python3 verification/check_rank_four.py"
+    ],
+    "role": "Full-I3 rank-four character kernel, sixteen restricted weights, affine Galois permutations and orbit partition, all 4368 five-subset determinants (1992 unimodular), absence of descended five-subsets, rank-three multiplicities, and independent integer/rational checks with saturation and translation negative controls."
+  },
   "quartic-del-pezzo-slice-cover": {
     "checksum_manifest": "verification/SHA256SUMS",
     "commands": [

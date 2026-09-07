@@ -59,6 +59,16 @@
     "hypotheses": "The field has characteristic zero; the generic fibre is birational over k(B) to a smooth quartic del Pezzo surface with a rational point and stably permutation geometric Picard lattice.",
     "objects": "A dominant rational map Y to B of geometrically integral varieties and their stabilization levels."
   },
+  "prop:rank-four-descent": {
+    "cautions": "Exact program-checked lattice assertions and a descent proof in the text, not a Lean theorem. This excludes only the stated weight-space criterion in this embedding with full I3, not other embeddings, nonlinear sections, or smaller Galois images.",
+    "conclusion": "There is a unique rank-four subtorus; its sixteen distinct coordinate weights have orbits of size four and twelve, so no sum of five weight spaces descends.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "41579cb65e7313c5171992d41d2a64b3bdd0ce37c28f17f9bc17921e9991cf02",
+    "environment": "proposition",
+    "hypotheses": "The projective Cox embedding is fixed and the Galois image is the full group I3.",
+    "objects": "Rank-four subtori of the projective Cox torus with its full marked I3 Galois action."
+  },
   "prop:tangent-section": {
     "cautions": "The subgroup classification is complete only for the four types for which H1 vanishes on every subgroup; no classification of all W(D5) subgroups is claimed.",
     "conclusion": "Geometrically, there is a codimension-three tangent linear section containing a point x on the quotient component where tangent projection is an isomorphism. For each of the four types, the points and the section descend when the surface has a rational point.",

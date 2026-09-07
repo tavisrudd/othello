@@ -53,6 +53,10 @@ the upper bound.
 - For a fibration satisfying the surface theorem over `k(B)`,
   `Y × A² ~ B × A⁴`, hence
   `max(ell_k(Y)-2,0) = max(ell_k(B)-4,0)`, including infinite levels.
+- For the full type-`I₃` Galois image, the unique rank-four subtorus has
+  sixteen distinct coordinate weights in orbits of sizes four and twelve.
+  No five weight spaces have a descended direct sum, so the same quotient
+  criterion cannot apply at rank four in this Cox embedding.
 
 The paper does not claim that every smooth cubic threefold has finite
 stabilization level. The fourfold consequence concerns birational rationality
@@ -85,6 +89,11 @@ artifact. A second program,
 independently checks the resulting certificate and quotient minors. Both
 programs reject optimized Python execution so that assertion checks cannot be
 disabled.
+
+The separate [rank-four certificate](verification/rank-four.md) reconstructs
+the character kernel and affine weight actions and exhausts all five-subsets.
+Its generator uses SymPy; its independent checker uses rational elimination
+and ambient integer determinants. Both are included in `make check`.
 
 No Lean development formalizes the new quotient theorem, the surface theorem,
 or their corollaries. Their formal coverage is recorded as `absent` in
