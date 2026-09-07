@@ -4670,8 +4670,17 @@
       "last": 1104,
       "purpose": "observational-cost theory follow-up",
       "sequence": 519
+    },
+    {
+      "count": 3,
+      "first": 1105,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1107,
+      "purpose": "Offline bundle inspection, explicit verification and fork workflow, durable run repository ownership contracts",
+      "sequence": 520
     }
   ],
-  "next_id": 1105,
+  "next_id": 1108,
   "schema": "codex-task-id-allocations-v1"
 }
