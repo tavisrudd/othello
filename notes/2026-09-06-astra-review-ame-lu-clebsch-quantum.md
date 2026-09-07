@@ -92,3 +92,14 @@ Haah's generalized divisible codes; Krishna--Tillich 2019; Saha--Prakash 2025). 
 known; the two invariant-defined gates, their certificates, and the trade-to-code dictionary are
 the candidate novelty.  No priority search has been done.  Queued as C1090 in `clebsch`; the
 `clebsch` handoff and discovery track were not edited (foreign lane).
+
+**Overlap with the existing Clebsch quantum spinoff (checked 2026-09-07).**
+`papers/conference-cut-spectra` (*Balanced Cuts of Conference Matrices*, DOI
+10.5281/zenodo.21766747) is a linear-optics application of Clebsch III's order-six conference
+matrices: real orthogonal six-mode transfers indexed by the six synthematic totals, determinant
+amplitudes obeying the Segre-cubic nulls `Σ Z_T = 0`, `Σ Z_T³ = 0`, degree-three Schur sectors
+of `±1` control vectors, boson/fermion sampling readout, and a photonic design limit.  It has no
+finite-field, stabilizer-code, qudit-register, transversal-gate, or magic-state content, and its
+cubic identities are real power sums on six amplitudes, not `F_p` moment identities on `2p`
+points.  There is no overlap of objects, results, or claims with the cubic-phase codes; C1090
+should cite it only as the programme's earlier quantum application, in a coda.
