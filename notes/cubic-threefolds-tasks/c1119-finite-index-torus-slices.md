@@ -1,7 +1,19 @@
 # C1119: Finite-index torus slices and coprime-degree consequences
 
 **Lane:** `cubic-threefolds`
-**Status:** queued after C1116's quotient/descent audit
+**Status:** complete; authority and standalone gates pass with identical PDFs
+
+## Result
+
+The rational slice component has degree e dividing the lattice index d;
+an explicit O(1,2) scroll example has d=2 and e=1. For any finite collection
+of admissible indices, their gcd annihilates A0 of smooth proper quotient
+models over every field extension, and a rational point supplies degree
+surjectivity. Report: `notes/2026-09-07-c1119-finite-index-torus-slices.md`.
+The extension follows the main proofs, preserving the original cubic reading
+path. C978/C956 next own exposition, terminology and the full-paper cold-read
+sub-referee cycle requested by the author.
+Authority `018a23c08`; standalone `099428f`.
 
 ## Goal and scope
 

@@ -152,7 +152,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `cubic-threefolds`
 
-- **C1119 `[cubic-threefolds]` [QUEUED; AFTER C1116 QUOTIENT GATE]** — prove the finite-index slice degree statement and its coprime-degree universal-CH0 consequence with descended component and degree hypotheses → `notes/cubic-threefolds-tasks/c1119-finite-index-torus-slices.md`
 
 - **C940 `[cubic-threefolds]` [ACTIVE; EPILOGUE SPLIT]** — split the strictly `m=1` cubic-stabilization epilogue into a short unconditional direct-QDM paper, a self-contained six-axis/nonstandard-`A_5` pencil paper, and a separately identified conditional framed-monodromy note; preserve the existing proof dependencies and formal provenance, add only verified corollaries/examples, and do not edit `papers/cubic-stabilization-irrationality/` → `notes/cubic-threefolds-tasks/c940-epilogue-three-way-split.md`.
 - **C934 `[cubic-threefolds]` [ACTIVE; PAPER UPGRADE/EXPORT COMPLETE; ALL-DEGREE TABLE OPEN]** — the integral derived splitting, factor-three attachment, mod-three Loewy chain, Fano lift, and modular relative-Lefschetz failure are proved, merged, unanimously rerefereed, and exported; finish the original acceptance debt by enumerating every local/global integral group and its torsion in all degrees → `notes/cubic-threefolds-tasks/c934-integral-theta-decomposition-complex.md`.

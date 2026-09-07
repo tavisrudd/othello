@@ -137,7 +137,14 @@ The source scan of Colliot-Thelene--Coray p. 329 was also inspected to
 confirm the precise parametrization and characteristic hypotheses.
 The main quotient/Cox/cubic route remains Sections 2--4; the extension is
 Section 6. The abstract and headline statements were not expanded by C1119.
-Standalone synchronization remains pending at this authority checkpoint.
+Authority checkpoint `018a23c08` passed the export plan and audit with zero
+findings. Standalone `make check` passed in
+`/tmp/claude-run-quiet/20260907-162236-make-C-cubic-stabilization-irrationality-check/`
+with the same PDF hash. Export verification passed; standalone forward
+commit `099428f`. Nothing was pushed or emailed. The author has required a
+fresh full-paper cold-read sub-referee protocol after the exposition and
+terminology revisions; the local proof audit and build gates here do not
+replace that forthcoming review.
 
 ## Mystery ledger — ej + tt
 

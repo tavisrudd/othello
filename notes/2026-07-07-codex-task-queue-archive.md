@@ -5633,3 +5633,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1118 `[cubic-threefolds]` [COMPLETE 2026-09-07]** — full-I3 rank-four kernel, weight orbits and all 4368 five-subsets independently certified; rank-three maximality for the specified criterion integrated with matching paper gates → `notes/2026-09-07-c1118-rank-four-cox-descent.md`
 
 - **C1124 `[ergodis]` [REPORTED 2026-09-07]** — recovered real-workload campaign console on current native Ergodis; order-2092 corpus, 19,997 candidates/178 classes, current evidence adaptation and static/live/VM gates; private `10a465b`, `9d75d53`, `de4f4fd` → `notes/2026-09-07-c1124-real-campaign-console.md`.
+
+- **C1119 `[cubic-threefolds]` [COMPLETE 2026-09-07]** — finite-index slice degree divisibility, full scroll example and gcd-index universal CH0 consequence integrated after main proofs; matched authority and standalone gates → `notes/2026-09-07-c1119-finite-index-torus-slices.md`

@@ -54,8 +54,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   replayed and integrated, with matching source and standalone PDFs. The
   same orbit argument excludes rank five for this criterion. Report:
   `../2026-09-07-c1118-rank-four-cox-descent.md`.
-  Next is **C1119** finite-index slices. C978/C956 retain exposition, including the author's requested
-  post-upgrade audit of specialist terminology and symbols;
+  **C1119 is complete:** finite-index slice degrees, the scroll example and
+  universal zero-cycle consequences are integrated and synchronized with
+  matching PDFs; report: `../2026-09-07-c1119-finite-index-torus-slices.md`.
+  Next are **C978/C956** exposition and terminology: preserve the original
+  cubic headlines and a complete main-proof reading path, with extensions
+  after the core arguments. Once the full drafts are ready, run the author's
+  requested **full-paper cold-read sub-referee protocol on both papers**,
+  repair findings and revalidate before considering the deferred email.
   C963/C965/C966 retain algorithmic work. Treat upgrades as queued proof
   obligations, not accepted theorems. Review and ordering:
   `../2026-09-07-cubic-astra-review-triage.md`. Tschinkel--Zhang v2 source
