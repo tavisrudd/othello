@@ -1,7 +1,8 @@
 # C1079 — ergodis-evolve review and synthesis plan
 
 **Lane**: `ergodis`
-**Status**: IN PROGRESS; Terra evidence collection complete; synthesis plan remains open.
+**Status**: IN PROGRESS; initial and WASM inventories complete; architecture synthesis and broader
+core/private build/test/docs review underway.
 Evidence map: `notes/2026-09-06-c1079-ergodis-evolve-review.md`.
 
 ## Authoritative product intent
@@ -262,13 +263,35 @@ which industry assets to demonstrate, authorize delivery/publication, or settle 
 patent questions. Demo visibility is independent of search mode, origin, validation, and IP
 ownership; obfuscation is not evidence of correctness or legal protection.
 
+## Wider consolidation and engineering discipline
+
+The user explicitly expands C1079 beyond evolve: review other Ergodis components needing
+consolidation/cleanup and the currently ad-hoc core/private split. Include both repositories’
+build, test, and documentation discipline in the proposed plan.
+
+Produce a bounded whole-workspace ownership map: generic algebra/kernels, compiler/runtime,
+control/evolution, reusable adapters, industry knowledge, task drivers, fixtures/evidence, and
+release tooling. Identify concrete duplication/misplacement and high-value cleanup; distinguish
+source-verified problems from inventory leads. Preserve private IP and current work ownership;
+this is authorization to review and propose, not merge unrelated implementation changes.
+
+Assess actual enforcement as well as written rules: reproducible dependency/toolchain/build
+configuration, feature/target coverage, zero-allocation/performance gates, independent parity
+and certificate replay, test corpus ownership, cross-repository integration, native/WASM and
+module compatibility, private/public packaging checks, doc authority/versioning and stale status.
+Recommend a small actionable baseline of local/CI/release checks with explicit ownership,
+artifacts, and failure behavior. Reuse existing tooling/gates; propose changes to validation or
+architecture for review rather than silently replacing requirements. Avoid omnibus refactoring
+or make-work tests. The plan should show how ongoing contributions maintain the intended split.
+
 ## Boundary and acceptance
 
 This task produces a review and concrete, reviewable synthesis plan, not an implementation merge
 or architecture migration. Present consequential architecture choices for Tavis’s decision after
 completing the evidence and recommendation. Do not narrow the product into a manual controller,
 a fixed theorem catalogue, or a single C1016 search heuristic without explicit justification and
-approval. Do not expand into unrelated engine remediation or manuscript work.
+approval. Broader Ergodis consolidation/cleanup and build/test/docs review are now explicitly
+authorized as above; manuscript work remains outside scope.
 
 Acceptance: one evidence-backed account reconciles the existing implementations and intentions,
 recommends the best autonomous-system direction, identifies unresolved choices honestly, and
