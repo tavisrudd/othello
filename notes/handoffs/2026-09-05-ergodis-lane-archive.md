@@ -105,3 +105,7 @@ opaque checkpoint export/import and failed-import preservation. Native/Python ga
 binary hash is unchanged. No in-flight cancellation, durable repository or module loader claim.
 Report: `../2026-09-07-c1088-browser-campaign-control.md`. Next: durable run/artifact records,
 metadata, annotations and portable repository/history contract, then storage adapters.
+
+## 2026-09-07 — C1091 semantic contracts
+
+Archived the user-supplied September 4 and 5 brainstorms verbatim with message hashes. Core synthesis: `notes/2026-09-07-c1091-core-semantic-contracts.md`. User steering prioritizes family-specific semantic contract examples before universal persistence schemas; the prior durable-records next step follows that gate. No code or runtime behavior changed.

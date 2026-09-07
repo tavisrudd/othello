@@ -167,12 +167,18 @@ WASM campaign corpus gates pass. Legacy native daemon/Python clients remain sepa
 status and opaque checkpoint file exchange pass real Chromium UI/Worker/WASM tests; provenance,
 verification and coverage remain separate. WASM binary unchanged; no in-flight cancellation claim.
 
-**Next**: allocate durable run records/artifact references and the portable repository boundary,
-including implementation/environment/provenance metadata, annotations and explicit history/fork
-semantics; then native/browser storage adapters with publication/recovery tests. Responsive
-autonomous jobs, general quotient/lifting and industry module loading follow. Preserve the
-no-control-in-kernels boundary and native performance gates. C1032 remains open for full original
-acceptance review.
+**C1091 complete**: verbatim September 4–5 brainstorm archives and core semantic-contract synthesis:
+`notes/2026-09-07-c1091-core-semantic-contracts.md`. Historical performance/novelty/product claims
+remain unverified source material. Quotients, representative catalogs, event semantics and policy
+contracts are distinct; autonomous Evolve is broader than quotient minimization.
+
+**Next**: allocate a bounded semantic-contract corpus across QEC decoding, causal counterfactuals,
+privacy leakage and the existing recovery pilot. Define family-specific validated model/query/target,
+objective and evidence contracts before extracting common core types or freezing durable payloads.
+Keep kernels unchanged in the first slice. Then resume durable run records/repository adapters,
+with semantic references, provenance, annotations and explicit fork/update validity. A representative
+catalog pilot precedes broader autonomous representation selection. Preserve the no-control-in-kernels
+boundary and native64 performance gates. C1032 remains open for full original acceptance review.
 
 ### C985 — Ergodis exact algebraic optimization paper
 
