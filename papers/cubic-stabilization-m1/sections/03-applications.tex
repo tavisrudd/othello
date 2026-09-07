@@ -2,19 +2,25 @@
 \label{sec:applications}
 
 No new quantum calculation is needed in this section.  We first apply the
-marker directly in dimension three, then transfer the stabilization theorem
+marker to products of threefolds with \(\PP^1\), then transfer the stabilization theorem
 through Kuznetsov's flop, and finally combine it with known criteria for
 universal \(CH_0\)-triviality.
 
 \begin{proof}[Proof of Corollary~\ref{cor:threefold-marker}]
-In dimension three, every center in projective weak factorization has
-dimension at most one.  The curve part of
-Proposition~\ref{prop:atomic-lowdim} therefore makes
-\(I_{\mathrm{exp}}\) birationally invariant.  The generic quantum product of
-\(\PP^3\) is semisimple, so \(I_{\mathrm{exp}}(\PP^3)=0\).  A marked block
-gives \(I_{\mathrm{exp}}(Y)>0\), ruling out rationality.
+A counted block gives \(I_{\mathrm{exp}}(Y)>0\).  The projective-bundle
+formula gives
+\[
+ I_{\mathrm{exp}}(Y\times\PP^1)=2I_{\mathrm{exp}}(Y)>0.
+\]
+Every center in projective weak factorization of fourfolds has dimension
+at most two, so Proposition~\ref{prop:atomic-lowdim} makes every correction
+zero.  Theorem~\ref{thm:marker-ledger} therefore makes the marker
+birationally invariant in dimension four.  Since
+\(I_{\mathrm{exp}}(\PP^4)=0\) by \eqref{eq:atomic-projective-value},
+\(Y\times\PP^1\) is irrational.  Rationality of \(Y\) would imply
+rationality of this product, so \(Y\) is irrational as well.
 \proves{cor:threefold-marker}%
-\uses{prop:atomic-lowdim, thm:marker-ledger}%
+\uses{prop:atomic-lowdim, thm:marker-ledger, prop:qdm-operation-ledgers}%
 \end{proof}
 
 \begin{proof}[Proof of Corollary~\ref{cor:v14-one-step}]

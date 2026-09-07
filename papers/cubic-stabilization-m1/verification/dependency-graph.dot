@@ -125,6 +125,7 @@ digraph manuscript {
   "prop:eckardt-reflection-group" -> "prop:A5-not-coprime" [style=solid];
   "prop:principal-gluing-packet" -> "prop:no-elliptic-product" [style=dashed];
   "prop:principal-gluing-packet" -> "prop:no-elliptic-product" [style=solid];
+  "prop:qdm-operation-ledgers" -> "cor:threefold-marker" [style=solid];
   "prop:rank2-rigidity" -> "prop:atomic-lowdim" [style=dashed];
   "prop:six-axis-polarization" -> "prop:no-elliptic-product" [style=dashed];
   "prop:six-axis-polarization" -> "prop:no-elliptic-product" [style=solid];

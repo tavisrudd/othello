@@ -36,8 +36,8 @@
 The irrationality of \(X\times\PP^1\) for every smooth complex cubic
 threefold \(X\) is sharp: two explicit smooth cubic threefolds over
 \(\mathbf Q\) are rational after multiplication by \(\PP^2\).  For each,
-the least \(m\) such that \(X\times\PP^m\) is rational is two, over both
-\(\mathbf Q\) and \(\mathbf C\).  We prove more
+the least \(m\) such that \(X\times\PP^m\) is rational is two over every
+characteristic-zero ground field.  We prove more
 generally that if \(k\) has characteristic zero, \(S\) is a smooth quartic del
 Pezzo surface with \(S(k)\ne\varnothing\), and \(\Pic(S_{\bar k})\) is a
 stably permutation Galois module, then \(S\times\A^2\) is \(k\)-rational.  We
@@ -68,7 +68,7 @@ remains irrational after multiplication by \(\PP^1\)
 Tschinkel and Zhang is at least two.  We prove that this lower bound is
 attained by two of their examples.
 
-For a projective variety \(V/k\), put
+For a geometrically integral variety \(V/k\), put
 \[
  \ell_k(V)=\min\{m\geq0:V\times\A^m\text{ is }k\text{-rational}\}.
 \]
@@ -92,12 +92,12 @@ X_3:\quad &x_4(x_1^2+2x_1x_2)+x_3(x_1^2+x_1x_2+x_2^2)
 \coverage{absent}%
 \imports{rudd-one-stabilization,tz-cubic-series}%
 \evidence{quartic-del-pezzo-slice-cover}%
-For \(j\in\{1,3\}\),
+For every field \(F\) of characteristic zero and \(j\in\{1,3\}\),
 \[
- \ell_{\mathbf Q}(X_j)=\ell_{\C}((X_j)_{\C})=2.
+ \ell_F((X_j)_F)=2.
 \]
-Equivalently, \((X_j)_{\C}\times\PP^1\) is irrational, whereas
-\(X_j\times\PP^2\) is rational over \(\mathbf Q\).
+Thus \((X_j)_F\times\PP^1\) is not \(F\)-rational, whereas
+\((X_j)_F\times\PP^2\) is \(F\)-rational.
 \end{theorem}
 
 The following surface theorem supplies the upper bound in
@@ -687,11 +687,16 @@ The one-stabilization theorem proves that
 \(X\times\PP^1\) is irrational for every smooth complex cubic threefold
 \(X\) \cite[Theorem~1.1]{RuddM1}.  It applies to
 \((X_j)_{\mathbf C}\).  Therefore
-neither \(X_j\) nor \(X_j\times\PP^1\) can be rational over \(\mathbf Q\),
-because rationality survives extension of the ground field.  Corollary
-\ref{cor:cubics} gives rationality at \(m=2\) over \(\mathbf Q\), and hence
-also over \(\mathbf C\).  This proves both equalities of stabilization
-levels.
+\((X_j)_{\C}\) has no rational stabilization with \(m\leq1\).
+Suppose one existed over a characteristic-zero field \(F\).  A birational
+map to projective space, its inverse, and their composition identities use
+only finitely many coefficients.  They therefore descend together to a
+finitely generated subfield \(F_0/\mathbf Q\) of \(F\), including the
+nonzero denominators defining their domains.  An embedding
+\(F_0\hookrightarrow\C\) would give the forbidden rationalization over
+\(\C\).  No embedding of all of \(F\) is needed.
+Corollary~\ref{cor:cubics} gives rationality at \(m=2\) over
+\(\mathbf Q\), which base-changes to \(F\).  Hence the level is exactly two.
 \uses{cor:cubics}%
 \imports{rudd-one-stabilization,tz-cubic-series}%
 \end{proof}
@@ -717,6 +722,127 @@ admit a decomposition of the diagonal and hence is not stably rational
 \(X\times\PP^m\) rational, so \(\ell_{\C}(X)=\infty\).
 \uses{thm:cubic-level}%
 \imports{egfs-very-general-cubic}%
+\end{proof}
+
+\section{Generic surfaces, partners, and fibrations}
+
+The same function-field argument shows that the surface bound itself is
+sharp.  Let \(S_j/\mathbf Q(t)\) be the generic quartic del Pezzo surface
+obtained from \(X_j\) in the proof of Corollary~\ref{cor:cubics}.
+
+\begin{corollary}[Exact level of the generic surfaces]
+\label{cor:generic-surface-level}
+\coverage{absent}%
+\uses{thm:cubic-level,cor:cubics}%
+\imports{tz-cubic-series}%
+For every field \(F\) of characteristic zero and \(j\in\{1,3\}\),
+\[
+ \ell_{F(t)}((S_j)_{F(t)})=2.
+\]
+\end{corollary}
+
+\begin{proof}
+The rationalization of \(S_j\times\A^2\) over \(\mathbf Q(t)\) constructed
+in the proof of Corollary~\ref{cor:cubics} base-changes to \(F(t)\).
+The same generic-fibre identification gives
+\(F(X_j)=F(t)((S_j)_{F(t)})\).  If the surface were rational after one
+stabilization, then
+\[
+ F(X_j)(u)\simeq F(t)(z_1,z_2,z_3)
+\]
+would be purely transcendental over \(F\), contradicting
+Theorem~\ref{thm:cubic-level}.  Rationality without stabilization would
+also imply rationality after one stabilization.  This proves the lower
+bound.  The argument does not require the Galois image to retain its
+original type after extension of the ground field.
+\uses{thm:cubic-level,cor:cubics}%
+\imports{tz-cubic-series}%
+\end{proof}
+
+Exact level also transfers through the projective-line correspondences
+used in the companion paper.
+
+\begin{corollary}[Partners of the specified cubics]
+\label{cor:partner-level}
+\coverage{absent}%
+\uses{thm:cubic-level}%
+Let \(F\) have characteristic zero and let \(V/F\) be a geometrically
+integral threefold.  If, for some \(j\in\{1,3\}\),
+\[
+ V\times\PP^1\sim_F (X_j)_F\times\PP^1,
+\]
+then \(\ell_F(V)=2\).
+\end{corollary}
+
+\begin{proof}
+The displayed product is irrational by Theorem~\ref{thm:cubic-level}.
+Taking one further product with \(\PP^1\), and using
+\(\PP^1\times\PP^1\sim_F\PP^2\), gives
+\[
+ V\times\PP^2\sim_F (X_j)_F\times\PP^2\sim_F\PP^5.
+\]
+Thus two stabilizations suffice and one does not.
+\uses{thm:cubic-level}%
+\end{proof}
+
+\begin{remark}[Genus-eight Fano partners]
+\label{rem:fano-partners}
+\coverage{absent}%
+\uses{cor:partner-level}%
+\imports{kuznetsov-partner-correspondence}%
+Over an algebraically closed field of characteristic zero, Kuznetsov's
+flop relates rank-two projective bundles over a smooth genus-eight Fano
+threefold and its associated Pfaffian cubic
+\cite[Theorems~2.17--2.18]{KuznetsovV14}.  A projective bundle is birational
+to the product with projective space.  Hence
+Corollary~\ref{cor:partner-level} applies when the associated cubic is
+\((X_1)_F\) or \((X_3)_F\).  Over other fields the same conclusion holds
+whenever that correspondence is defined over \(F\).  It is not an exact-level
+statement for arbitrary genus-eight Fano threefolds.
+\end{remark}
+
+For a general fibration the base contributes its own stabilization level.
+The following formula keeps track of the four free variables supplied by
+the surface rationalization.
+
+\begin{proposition}[Stabilization along a surface fibration]
+\label{prop:fibration-level}
+\coverage{absent}%
+\uses{thm:two-variable}%
+Let \(k\) have characteristic zero, and let \(Y\dashrightarrow B\) be a
+dominant rational map of geometrically integral \(k\)-varieties.  Suppose
+its generic fibre is \(k(B)\)-birational to a smooth quartic del Pezzo
+surface satisfying the hypotheses of Theorem~\ref{thm:two-variable}.
+Then
+\[
+ Y\times\A^2\sim_k B\times\A^4,
+ \qquad
+ \max\{\ell_k(Y)-2,0\}=\max\{\ell_k(B)-4,0\},
+\]
+where subtracting a finite integer from \(\infty\) leaves \(\infty\).
+In particular, \(\ell_k(B)\leq4\) implies \(\ell_k(Y)\leq2\);
+if \(4<\ell_k(B)<\infty\), then \(\ell_k(Y)=\ell_k(B)-2\).
+The variety \(Y\) is stably rational if and only if \(B\) is.
+\end{proposition}
+
+\begin{proof}
+Put \(K=k(B)\).  The surface theorem gives
+\[
+ k(Y)(u,v)\simeq K(z_1,z_2,z_3,z_4),
+\]
+which proves the birational equivalence over \(k\).
+For every geometrically integral variety \(W\) and integer \(a\geq0\),
+the definition of the level gives
+\[
+ \ell_k(W\times\A^a)=\max\{\ell_k(W)-a,0\}.
+\]
+Indeed, further stabilization by \(m\) makes this product rational exactly
+when stabilization of \(W\) by \(a+m\) does; rationality persists under
+additional affine factors.  This also proves the formula when the level
+is infinite.  Apply it to the two birational varieties above.  The stated
+consequences follow by considering whether \(\ell_k(B)\) is at most four,
+finite and greater than four, or infinite.
+\uses{thm:two-variable}%
 \end{proof}
 
 \appendix
@@ -838,6 +964,10 @@ version 0.16.0, Zenodo, 2026,
 \bibitem{ShepherdBarron} N.~I.~Shepherd-Barron,
 \emph{Stably rational irrational varieties},
 in The Fano Conference, Univ. Torino, Turin, 2004, 693--700.
+
+\bibitem{KuznetsovV14} A.~Kuznetsov,
+\emph{Derived categories of cubic and \(V_{14}\) threefolds},
+Proc. Steklov Inst. Math. 246 (2004), 171--194; arXiv:math/0303037v1.
 
 \bibitem{TZ} Yu.~Tschinkel and Zh.~Zhang,
 \emph{Universal torsors over quartic del Pezzo surfaces and stable

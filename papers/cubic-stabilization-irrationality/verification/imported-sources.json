@@ -28,6 +28,28 @@
     "pinpoint": "Theorem 2.1",
     "used": "A nonminimal quartic del Pezzo surface with a rational point is birational to a rational del Pezzo surface of degree at least five."
   },
+  "kuznetsov-partner-correspondence": {
+    "citation": "KuznetsovV14",
+    "conventions": [
+      {
+        "aspect": "ground field",
+        "matched": "The unconditional application of the source is stated in that field range; over other fields the correspondence is explicitly required to be defined over F.",
+        "requirement": "The source assumes an algebraically closed field of characteristic zero."
+      },
+      {
+        "aspect": "associated cubic",
+        "matched": "Exact level two is asserted only if that associated cubic is one of X_1 or X_3 after base change.",
+        "requirement": "The cubic is the Pfaffian cubic associated with the given smooth genus-eight Fano."
+      },
+      {
+        "aspect": "bundles",
+        "matched": "Each vector bundle is generically trivial, giving a birational product with P1, to which the partner corollary applies.",
+        "requirement": "The birational varieties are projectivizations of rank-two vector bundles."
+      }
+    ],
+    "pinpoint": "Notation on page 3 and Theorems 2.17–2.18",
+    "used": "Birational rank-two projective bundles over a smooth genus-eight Fano threefold and its associated Pfaffian cubic."
+  },
   "manin-stable-permutation": {
     "citation": "Manin1966",
     "conventions": [
@@ -45,7 +67,7 @@
     "conventions": [
       {
         "aspect": "domain",
-        "matched": "The two displayed cubic threefolds are smooth after base change to C.",
+        "matched": "The two displayed cubic threefolds are smooth after base change to C. For arbitrary F the manuscript descends a birational map and its inverse together to a finitely generated field embeddable in C.",
         "requirement": "The theorem applies to every smooth complex cubic threefold."
       },
       {
@@ -91,22 +113,22 @@
     "pinpoint": "Propositions 5.1 and 5.3",
     "used": "The two cubic series and their quartic del Pezzo generic fibres."
   },
-  "tz-type-classification": {
+  "tz-tangent-projection": {
     "citation": "TZ",
     "conventions": [
       {
-        "aspect": "hypothesis",
-        "matched": "The minimal branch assumes the stably permutation Picard condition.",
-        "requirement": "The classification is for k-minimal quartic del Pezzo surfaces satisfying the hereditary H1 condition."
+        "aspect": "domain",
+        "matched": "The ground field has characteristic zero, the projective Cox model becomes a variety with one apparent double point after base change, and the rational-point hypothesis gives Zariski-dense k-points on the twisted Cox model. The split Cox model is integral and has no linear equations; these properties persist under twisting.",
+        "requirement": "Theorem 2.4 in v2 assumes characteristic zero, a reduced irreducible nondegenerate projective variety, the one-apparent-double-point property after base change, and Zariski density of k-points."
       },
       {
-        "aspect": "framing",
-        "matched": "Weyl conjugation is treated as a change of Cox marking.",
-        "requirement": "Types I0, I1, and I2 occur as subgroups of I3 only up to conjugacy in W(D5)."
+        "aspect": "singular scope",
+        "matched": "The argument does not assume that the projective Cox model is globally smooth.",
+        "requirement": "Unlike the smooth-case Ciliberto--Mella--Russo statement, Theorem 2.4 is stated for a projective variety and does not assume global smoothness."
       }
     ],
-    "pinpoint": "Proposition 4.1 and Lemma 4.2",
-    "used": "Reduction of the minimal case to the four Galois-image types and subgroup containment."
+    "pinpoint": "Theorem 2.4",
+    "used": "For a general k-rational smooth point of the possibly singular projective Cox model, tangent projection is birational over k."
   },
   "tz-torsor-splitting": {
     "citation": "TZ",
@@ -125,22 +147,22 @@
     "pinpoint": "Lemma 2.1, Remark 2.2, Corollary 3.5, and the Cox embedding at the start of Section 3",
     "used": "Existence of the pointed universal torsor, density of rational points, generic splitting, and its dense-open Cox embedding."
   },
-  "tz-tangent-projection": {
+  "tz-type-classification": {
     "citation": "TZ",
     "conventions": [
       {
-        "aspect": "domain",
-        "matched": "The ground field has characteristic zero, the projective Cox model becomes a variety with one apparent double point after base change, and the rational-point hypothesis gives Zariski-dense k-points on the twisted Cox model. The split Cox model is integral and has no linear equations; these properties persist under twisting.",
-        "requirement": "Theorem 2.4 in v2 assumes characteristic zero, a reduced irreducible nondegenerate projective variety, the one-apparent-double-point property after base change, and Zariski density of k-points."
+        "aspect": "hypothesis",
+        "matched": "The minimal branch assumes the stably permutation Picard condition.",
+        "requirement": "The classification is for k-minimal quartic del Pezzo surfaces satisfying the hereditary H1 condition."
       },
       {
-        "aspect": "singular scope",
-        "matched": "The argument does not assume that the projective Cox model is globally smooth.",
-        "requirement": "Unlike the smooth-case Ciliberto--Mella--Russo statement, Theorem 2.4 is stated for a projective variety and does not assume global smoothness."
+        "aspect": "framing",
+        "matched": "Weyl conjugation is treated as a change of Cox marking.",
+        "requirement": "Types I0, I1, and I2 occur as subgroups of I3 only up to conjugacy in W(D5)."
       }
     ],
-    "pinpoint": "Theorem 2.4",
-    "used": "For a general k-rational smooth point of the possibly singular projective Cox model, tangent projection is birational over k."
+    "pinpoint": "Proposition 4.1 and Lemma 4.2",
+    "used": "Reduction of the minimal case to the four Galois-image types and subgroup containment."
   },
   "voskresenskii-rank-two": {
     "citation": "Voskresenskii1967",

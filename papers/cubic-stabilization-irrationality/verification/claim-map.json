@@ -16,8 +16,18 @@
     "declarations": [],
     "digest": "20f1d3e655ea75ae31ce42b91b45b608f7226aa5dcbfbafd22d34d009f5cd828",
     "environment": "corollary",
-    "hypotheses": "r is nonnegative and X is one of the cubics in Tschinkel--Zhang Propositions 5.1 or 5.2.",
+    "hypotheses": "r is nonnegative and X is one of the cubics in Tschinkel--Zhang Propositions 5.1 or 5.3.",
     "objects": "The two explicit series of cubic hypersurfaces."
+  },
+  "cor:generic-surface-level": {
+    "cautions": "The function-field identification and the upper-bound rationalization base-change from Q(t). No unchanged Galois type after extension is assumed; the lower bound uses the specified cubic, not arbitrary quartic del Pezzo surfaces.",
+    "conclusion": "ell_F(t)((S_j)_F(t))=2.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "d5e53b7fb83fb1ed73fd39c9d1dfa2e604c325b77da39dab986c56922898da4a",
+    "environment": "corollary",
+    "hypotheses": "F has characteristic zero; j is 1 or 3; S_j is the actual generic contracted surface in the TZ cubic fibration.",
+    "objects": "The generic quartic del Pezzo surfaces S_j over Q(t) associated with the two specified cubic threefolds, and their base changes to F(t)."
   },
   "cor:moduli": {
     "cautions": "The finite value is proved only for X_1 and X_3; the infinite value is a very-general statement.",
@@ -29,6 +39,26 @@
     "hypotheses": "The base field is C and the cubic is either displayed or very general as specified.",
     "objects": "The level-of-stable-rationality function ell_C on smooth cubic-threefold moduli."
   },
+  "cor:partner-level": {
+    "cautions": "The birational correspondence over F is a hypothesis. It is not constructed for every threefold or every genus-eight Fano.",
+    "conclusion": "ell_F(V)=2.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "2efcc8f6509db061806c957e7ee8686e4825670c37998e5078335f2590cadb02",
+    "environment": "corollary",
+    "hypotheses": "F has characteristic zero and V times P1 is F-birational to X_j times P1 for j=1 or 3.",
+    "objects": "A geometrically integral threefold V/F and one specified cubic X_j after extension to F."
+  },
+  "prop:fibration-level": {
+    "cautions": "The surface hypotheses are imposed over the generic function field. If ell(B) is at most four, the formula gives only an upper bound of two for ell(Y), not an exact value.",
+    "conclusion": "Y times A2 is k-birational to B times A4; max(ell(Y)-2,0)=max(ell(B)-4,0), including infinity, with the stated finite-level consequences and equivalence of stable rationality.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "e9af67c6457113073a713c942f41d46838dc3e81c8771f669f227cd3b0cbb3de",
+    "environment": "proposition",
+    "hypotheses": "The field has characteristic zero; the generic fibre is birational over k(B) to a smooth quartic del Pezzo surface with a rational point and stably permutation geometric Picard lattice.",
+    "objects": "A dominant rational map Y to B of geometrically integral varieties and their stabilization levels."
+  },
   "prop:tangent-section": {
     "cautions": "The subgroup classification is complete only for the four types for which H1 vanishes on every subgroup; no classification of all W(D5) subgroups is claimed.",
     "conclusion": "Geometrically, there is a codimension-three tangent linear section containing a point x on the quotient component where tangent projection is an isomorphism. For each of the four types, the points and the section descend when the surface has a rational point.",
@@ -38,6 +68,16 @@
     "environment": "proposition",
     "hypotheses": "The ground field has characteristic zero and the Cox parameters lie on the smooth open; for ground-field descent the quartic del Pezzo surface has a rational point and the Galois image has type I0, I1, I2, or I3.",
     "objects": "The saturated rank-three subtorus, complementary Cox-coordinate subspace, and the incidence conditions defining the tangent section."
+  },
+  "rem:fano-partners": {
+    "cautions": "No arithmetic descent of Kuznetsov's correspondence and no exact-level result for every genus-eight Fano is asserted.",
+    "conclusion": "The partner corollary gives exact level two for these specified partners.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "17e635a842a8696f5e3033b5eb2fed31ef35d79a7e79409b751b534cb2b7bb33",
+    "environment": "remark",
+    "hypotheses": "Kuznetsov works over an algebraically closed characteristic-zero field. Over other fields the required projective-bundle correspondence must be defined over the ground field.",
+    "objects": "Smooth genus-eight Fano threefolds with one of the specified cubics as associated Pfaffian cubic."
   },
   "rem:saturation": {
     "cautions": "The degree-two artifact belongs to the parameter isogeny, not the Rosenlicht quotient.",
@@ -49,6 +89,16 @@
     "hypotheses": "The three pairwise-sign cocharacters are used in the last three coordinates.",
     "objects": "An index-two even-sum cocharacter sublattice and its saturation."
   },
+  "thm:cubic-level": {
+    "cautions": "The upper bound base-changes from Q. The lower bound descends a putative birational map, its inverse, and their identities to a finitely generated subfield before embedding into C; F itself need not embed into C.",
+    "conclusion": "For every such F, ell_F(X_F)=2.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "816c27cd708487cfcb7b56946f43fe5b4f5d628f5cc08f94a926ec7d8f964c61",
+    "environment": "theorem",
+    "hypotheses": "F has characteristic zero and X is one of the two displayed smooth cubic threefolds.",
+    "objects": "The least rational stabilization of either specified cubic after extension from Q to an arbitrary characteristic-zero field F."
+  },
   "thm:torus-quotient": {
     "cautions": "A finite-index set of weight differences would give a finite orbit cover and does not suffice.",
     "conclusion": "The Rosenlicht quotient Z/T is k-rational.",
@@ -58,16 +108,6 @@
     "environment": "theorem",
     "hypotheses": "A generically free projectively linear rank-r torus action, a rational point in the birational tangent-projection locus, descended complementary sums of projective weight spaces, an integral basis of weight differences, and a nondegenerate tangent linear section whose quotient component meets the tangent-projection isomorphism open.",
     "objects": "A projective torus action on a projective variety and its Rosenlicht quotient."
-  },
-  "thm:cubic-level": {
-    "cautions": "The upper bound is for the two displayed cubics; nonrationality after one stabilization imports a separate theorem applying to all smooth complex cubic threefolds.",
-    "conclusion": "For each displayed cubic, the smallest m with X times P^m rational is two over Q and C.",
-    "coverage": "absent",
-    "declarations": [],
-    "digest": "f01f6acaba79c2a8f2f62490f2a973dbd61e61713fe65b3d278c0df5fd1acaf4",
-    "environment": "theorem",
-    "hypotheses": "X is one of the two displayed smooth cubic threefolds.",
-    "objects": "The smallest rational stabilization over Q and after base change to C."
   },
   "thm:two-variable": {
     "cautions": "Universal-torsor geometry and the four-type classification are imported from Tschinkel--Zhang.",

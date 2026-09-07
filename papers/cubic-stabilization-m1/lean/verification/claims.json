@@ -41,8 +41,8 @@
       "objects": "An additive marker on block multisets for smooth projective threefolds, a projective-three-space endpoint, a selected threefold, and a rationality predicate.",
       "hypotheses": "Assumed weak-factorization data and marker formulas in dimension three supply the blowup and blowdown formulas; every point or curve center summand has zero marker; both endpoints are smooth of dimension three; projective three-space has marker zero; the selected threefold has nonzero marker; and rationality supplies the birational comparison with projective three-space.",
       "conclusion": "The selected threefold is not rational.",
-      "cautions": "Fragment. Lean proves the endpoint contradiction while retaining each center summand separately, but does not construct the generic even QDM, identify a counted block with a nonzero additive marker, supply weak factorization or vanishing on centers, calculate projective space, or construct the rationality comparison.",
-      "statement_digest": "3b6ba0d8684a8d7110811fa6fb6f0ed0a293da76d7fe72cec3667da882b8e291",
+      "cautions": "Fragment. Lean proves the endpoint contradiction while retaining each center summand separately, but does not construct the generic even QDM, identify a counted block with a nonzero additive marker, supply weak factorization or vanishing on centers, calculate projective space, or construct the rationality comparison. The manuscript now proves the stronger irrationality of Y times P1 via the dimension-four ledger and the projective-bundle formula. This terminal proves only the unstabilized conclusion; the strengthened statement retains fragment coverage.",
+      "statement_digest": "6824de2bd981e97ae2a2aee4c8f64d99a761274a47905770bb02564c3b2d3962",
       "terminal_digest": "fd742b8caba6eed5b20aef7a07c8938baaf30d65f49d16b708ffa6b525fb0ec7"
     },
     {

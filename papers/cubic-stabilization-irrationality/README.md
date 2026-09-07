@@ -13,10 +13,10 @@ such integer exists. For each of two displayed smooth cubic threefolds `X/Q`,
 this paper proves
 
 ```text
-ell_Q(X) = ell_C(X_C) = 2.
+ell_F(X_F) = 2 for every characteristic-zero field F.
 ```
 
-Equivalently, `X_C × P¹` is irrational while `X × P²` is rational over `Q`.
+Thus `X_F × P¹` is not `F`-rational while `X_F × P²` is `F`-rational.
 The lower bound is the separately cited one-stabilization theorem for every
 smooth complex cubic threefold, pinned here to
 [version 0.16.0](https://doi.org/10.5281/zenodo.22132303); this paper proves
@@ -45,6 +45,14 @@ the upper bound.
 - On the moduli space of smooth complex cubic threefolds,
   `ell_C((X_j)_C) = 2` for `j ∈ {1,3}`, while the stabilization level is
   infinite at a very general point.
+- The associated generic quartic del Pezzo surfaces have exact level two
+  over `F(t)` for every characteristic-zero field `F`. The same level
+  transfers to any threefold with a birational `P¹` correspondence to one
+  of the two specified cubics, including genus-eight Fano partners where
+  that correspondence is defined.
+- For a fibration satisfying the surface theorem over `k(B)`,
+  `Y × A² ~ B × A⁴`, hence
+  `max(ell_k(Y)-2,0) = max(ell_k(B)-4,0)`, including infinite levels.
 
 The paper does not claim that every smooth cubic threefold has finite
 stabilization level. The fourfold consequence concerns birational rationality

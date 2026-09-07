@@ -91,7 +91,7 @@ computes the same two exponent representatives and uses them with Iritani's
 blowup theorem to prove symplectic irrationality of cubic threefolds
 \cite{Cai}; that argument does not address stabilization.
 
-The same construction gives a threefold criterion without stabilization.
+The same construction gives a one-stabilization criterion for threefolds.
 
 \begin{corollary}[Threefold marker criterion]
 \label{cor:threefold-marker}
@@ -99,12 +99,13 @@ The same construction gives a threefold criterion without stabilization.
 \lean{threefold_not_rational_of_occurrenceIndexedMarker}%
 Let \(Y\) be a smooth projective complex threefold.  If its generic even QDM
 contains a block counted by the formal-exponent marker defined in
-\eqref{eq:atomic-fold}, then \(Y\) is irrational.
+\eqref{eq:atomic-fold}, then \(Y\times\PP^1\) is irrational.  In particular,
+\(Y\) is irrational.
 \end{corollary}
 
-Indeed, the only centers in a weak factorization of threefolds have dimension
-at most one, where the marker vanishes, while the generic quantum product of
-\(\PP^3\) is semisimple.  This gives an irrationality criterion formulated in
+Indeed, the marker doubles on \(Y\times\PP^1\), while all centers in a
+weak factorization of fourfolds have dimension at most two and contribute
+zero.  This gives an irrationality criterion formulated in
 terms of the quantum \(D\)-module.  We do not claim that this marker coincides
 with a semiorthogonal or derived-categorical rationality obstruction.
 

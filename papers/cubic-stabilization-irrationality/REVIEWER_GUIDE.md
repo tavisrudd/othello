@@ -1,7 +1,7 @@
 # A referee's route through the proof
 
 The paper proves that two explicit smooth cubic threefolds have stabilization
-level exactly two over both `Q` and `C`.  The lower bound is imported from the
+level exactly two over every characteristic-zero ground field.  The lower bound is imported from the
 separate one-stabilization theorem.  The new proof is the upper bound: a
 quartic del Pezzo surface satisfying the stated Picard-lattice hypothesis
 becomes rational after multiplication by `A²`.
@@ -13,7 +13,8 @@ followed by its final proof summary.  Section 2 states and proves the general
 torus-quotient criterion.  In Section 3, the weight calculation through
 Proposition `prop:tangent-section` verifies its hypotheses for the four
 relevant Galois types.  Section 4 then turns the quotient into the surface and
-cubic rationality statements.  The appendices contain the exact finite
+cubic rationality statements. Section 5 gives the generic-surface,
+specified-partner, and quantitative fibration consequences. The appendices contain the exact finite
 calculation and the evidence boundary.
 
 ## Five checks
@@ -56,7 +57,10 @@ calculation and the evidence boundary.
    argument, while the residual rank-two torus is rational.  Applying this
    over the generic-fibre fields of the two cubic fibrations yields
    `X × P²` rational.  The separately cited one-stabilization theorem gives
-   irrationality of `X_C × P¹`, hence the exact level.
+   irrationality of `X_C × P¹`. A putative rationalization over an arbitrary
+   characteristic-zero field descends, together with its inverse and their
+   identities, to a finitely generated subfield embeddable in `C`. This gives
+   the lower bound over every such field; the upper bound base-changes from `Q`.
 
 ## Evidence and replay
 
