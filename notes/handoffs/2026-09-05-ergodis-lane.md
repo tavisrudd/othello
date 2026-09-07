@@ -289,8 +289,9 @@ shortcut checking and a rendered counterexample. Former controls remain advanced
 Full native/Python and browser semantic/UI/recovery gates pass. Report:
 `notes/2026-09-07-c1122-first-visit-demo.md`.
 
-**Next gate**: choose and allocate the analytical projection bridge using coherent repository
-snapshots; C1033's DuckDB/Jupyter manifest-ledger read surface remains a downstream consumer.
+**C1123 in progress**: analytical projection bridge from coherent repository snapshots to
+read-only DuckDB/Jupyter heads, lineage, attempts and exact accounting. User approved scope.
+Report: `notes/2026-09-07-c1123-repository-analysis.md`. C1033 remains a downstream consumer.
 Browser/native bounded persistence pilots are complete; automatic execution recovery, larger
 stores and additional platform/retention guarantees need separately allocated slices and gates.
 Closed scope and gates: `notes/2026-09-07-ergodis-offline-workflow-successors.md`.
