@@ -270,8 +270,11 @@ versioned sidecars and coherent analytical snapshots informed by C1033. Bounded 
 ten conformance tests, full native, Python and release WASM gates pass. No persistent adapter or
 actual execution recovery is implemented.
 
-**Next gate**: choose and allocate the first persistent adapter/backend and analytical projection
-bridge. C1033's existing DuckDB/Jupyter manifest-ledger read surface is a downstream consumer;
+**Next**: C1114 implements browser IndexedDB persistence first, followed by C1115 native
+filesystem persistence using the same portable repository semantics. Tavis approved browser/WASM
+demo support in the initial scope; automatic execution resumption remains separate.
+Report/scope: `notes/2026-09-07-c1114-browser-repository.md`. The analytical projection
+bridge remains a subsequent slice. C1033's existing DuckDB/Jupyter manifest-ledger read surface is a downstream consumer;
 this contract does not select DuckDB as the authoritative writer store. Native and browser storage
 adapters and execution recovery need their own allocated slices and actual platform crash gates.
 Closed scope and gates: `notes/2026-09-07-ergodis-offline-workflow-successors.md`.
