@@ -279,6 +279,10 @@ shares the same portable replay semantics. Cross-process ownership and five publ
 SIGKILL gates pass on ZFS; full native/Python/release WASM gates pass.
 Report: `notes/2026-09-07-c1115-native-repository.md`.
 
+**C1121 complete**: core `b219db3`; example-first saved-run demo, first-save setup,
+clear evidence/save actions and expandable technical details. Desktop/mobile and browser
+process-restart gates pass. Report: `notes/2026-09-07-c1121-demo-usability.md`.
+
 **Next gate**: choose and allocate the analytical projection bridge using coherent repository
 snapshots; C1033's DuckDB/Jupyter manifest-ledger read surface remains a downstream consumer.
 Browser/native bounded persistence pilots are complete; automatic execution recovery, larger

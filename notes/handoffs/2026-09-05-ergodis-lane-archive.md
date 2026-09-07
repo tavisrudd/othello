@@ -174,3 +174,9 @@ Native local Unix filesystem host: core `248b678`, docs `8848e3f`. Shared portab
 cross-process writer exclusion, atomic publication and SIGKILL recovery on ZFS; full
 native/Python/WASM gates pass. Report: `../2026-09-07-c1115-native-repository.md`.
 Browser/native initial scope is complete; analytical projection allocation is next.
+
+## 2026-09-07 — C1121 demo usability
+
+Core `b219db3`: example-first onboarding, first-save setup, clear actions and technical
+disclosure. Native/Python and actual desktop/mobile/browser-restart gates pass.
+Report: `../2026-09-07-c1121-demo-usability.md`.

@@ -5617,3 +5617,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1109 `[continuation]` [REPORTED 2026-09-07 — POLYNOMIAL RECOGNITION; EXACT q=5,7,8,9,11 BOUNDARY]** — cyclic-table coordinate recognition, independent transport checks, and complete resolution/automorphism census; q=5,8 are index-two exceptions → `notes/2026-09-07-c1109-certified-continuation-reconstruction.md`.
 
 - **C1115 `[ergodis]` [REPORTED 2026-09-07]** — Native filesystem repository adapter sharing C1114 portable semantics; cross-process fencing and filesystem crash/restart gates; follows C1114 → `notes/2026-09-07-c1115-native-repository.md`.
+
+- **C1121 `[ergodis]` [REPORTED 2026-09-07]** — Simplify offline demo onboarding, example-first exploration and saved-run actions; real-browser UI gates → `notes/2026-09-07-c1121-demo-usability.md`.
