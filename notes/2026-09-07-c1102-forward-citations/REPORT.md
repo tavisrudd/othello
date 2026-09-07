@@ -12,6 +12,9 @@ were mechanically screened, but technical adjudication of the promotions remains
 Continuation: `USER-SCAN-FOLLOWUP.md` resolves Wang–Li access and records
 Dai–Fu–Luo's explicit qubit product ceiling; the snapshot below is historical.
 
+Further technical reading: `TECHNICAL-FOLLOWUP.md` pins the binary rank formula,
+Alltop primary access, and distinctions from local-unitary nonlocal magic.
+
 ## Outcome and resume gate
 
 1. All seven original seeds have independently obtained OpenAlex, Crossref, and Semantic

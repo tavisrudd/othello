@@ -12,6 +12,8 @@ completion of technical review. Alltop access is resolved in the permanent cache
 user scan sets are recorded in `notes/2026-09-07-c1102-forward-citations/USER-SCAN-FOLLOWUP.md`;
 the added Kagamihara–Tsuchiya seed has Crossref 404 / Semantic Scholar 429 gaps.
 Watson–Campbell–Anwar–Browne 2015 supplies omitted signed-qudit prior art.
+`notes/2026-09-07-c1102-forward-citations/TECHNICAL-FOLLOWUP.md` records six
+primary-section comparisons, including the direct binary rank-formula predecessor.
 
 ## Read first (in this order, nothing else)
 

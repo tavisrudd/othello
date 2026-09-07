@@ -1,0 +1,16 @@
+[
+  {
+    "url": "https://arxiv.org/pdf/2608.28563v2",
+    "status": 200,
+    "path": "/tmp/persistent/tavis/lit-search/c1102-primary/sierant-v2.pdf",
+    "bytes": 903851,
+    "sha256": "f2abdb271e4bba189e29ec27473a2da5d2e7010f86b78f64624a6269fcf6f67d"
+  },
+  {
+    "url": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2602.23687?fields=title,citationCount,externalIds",
+    "status": 429,
+    "path": "/tmp/persistent/tavis/lit-search/c1102-primary/kagamihara-s2-third.json",
+    "bytes": 174,
+    "sha256": "65ab993d12c5c2cc9b68e6da2bb79b326930283e520363ffcdc145f88cd5a148"
+  }
+]
