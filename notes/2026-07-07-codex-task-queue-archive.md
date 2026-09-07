@@ -5566,3 +5566,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1082 `[ergodis]` [REPORTED 2026-09-07]** — scalar PlanSpec executable semantics and FeatureDag lowering conformance complete; all 27 ops in 41 oracle cases, 1,984 DAG rows, cold field-schema narrowing fix; all native gates pass; core `ac6b3ad` → `notes/2026-09-07-c1082-scalar-semantics.md`.
 
 - **C1083 `[ergodis]` [REPORTED 2026-09-07]** — bounded portable campaign transitions, scoped checking/execution and command-log replay complete; 10 model sequences, 7 adversarial tests, full native/Python/WASM regression gates pass; core `6269cd1` → `notes/2026-09-07-c1083-campaign-transitions.md`.
+
+- **C1084 `[ergodis]` [COMPLETE 2026-09-07]** — Portable native/browser control and session architecture; crate dependency plan, repository/protocol contracts, staged migration and unchanged performance discipline → `notes/2026-09-07-c1084-portable-control-architecture.md`

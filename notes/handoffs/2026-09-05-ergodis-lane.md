@@ -140,11 +140,16 @@ C1083's bounded portable campaign transition model and checkpoint replay are com
 `notes/2026-09-07-c1083-campaign-transitions.md` (core `6269cd1`). Latest outcome, current evidence
 and prior run coverage remain separate; Cancel/Resume preserves completed evidence and budgets.
 
-**Next**: allocate a bounded autonomous proposer driver using this transition model, retaining
-counterexamples/replay state and exposing a common native/browser command workflow. Keep native
-socket/host I/O outside portable semantics, and preserve 64-bit hot specialization/layout guards.
-Physical artifact persistence, general quotient/lifting instructions and private module loading
-remain subsequent C1079 gates. C1032 remains open for full original acceptance review.
+C1084's portable control/session architecture and staged migration plan are complete:
+`notes/2026-09-07-c1084-portable-control-architecture.md`. Shared native/browser service; attachable
+frontends; explicit host, repository and compilation-unit boundaries; native64 performance gates
+unchanged. This is a design, not a claim of implemented hosts or platform support.
+
+**Next**: allocate stage 1 portable scalar/text/codec ownership extraction with compatibility
+reexports, default/native/WASM conformance and unchanged hot evaluators. Follow with the shared
+Campaign facade in a portable runtime crate, then browser control and durable native/browser hosts.
+Responsive autonomous jobs follow those boundaries; general quotient/lifting and industry module
+loading remain subsequent gates. C1032 remains open for full original acceptance review.
 
 ### C985 — Ergodis exact algebraic optimization paper
 
@@ -168,6 +173,6 @@ host, so cold end-to-end `g41` replays need it regenerated first.
 ## Lane ownership
 
 This lane was split out of `complete-ports` on 2026-09-05 and owns C985, C1016, C1017,
-C1031-C1033, C1040-C1048, C1052, C1061, C1062, C1070, C1072-C1074, C1079, C1080, C1081, C1082, C1083. Future Ergodis engine, benchmark, tooling,
+C1031-C1033, C1040-C1048, C1052, C1061, C1062, C1070, C1072-C1074, C1079, C1080, C1081, C1082, C1083, C1084. Future Ergodis engine, benchmark, tooling,
 capability, and Ergodis-paper tasks use `[ergodis]`. The bounded-recovery manuscript work (C325,
 C953, C955, C964) stays on `[complete-ports]`.

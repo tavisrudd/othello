@@ -58,3 +58,7 @@ Portable campaign transitions and checked command-log replay committed as core `
 Ten independent model sequences, seven adversarial tests and full native/Python/WASM regressions
 passed. Native hot loops/layouts unchanged. Report:
 `../2026-09-07-c1083-campaign-transitions.md`.
+
+## 2026-09-07 — C1084 portable control architecture
+
+Completed planning-only source audit and architecture in `../2026-09-07-c1084-portable-control-architecture.md` at core `6269cd1`. Two Terra reviews. User-directed browser/local+remote session model, notebook/kernel analogy, deep module boundaries, staged crate layout, durable repository contracts, private native/WASM/IR extensions and performance gates. Advance portable language extraction and shared runtime facade before autonomous-driver host wiring. No runtime changes or new platform support claims.
