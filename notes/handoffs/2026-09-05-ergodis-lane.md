@@ -136,12 +136,11 @@ C1082's scalar operation semantics and FeatureDag lowering conformance are compl
 `notes/2026-09-07-c1082-scalar-semantics.md` (core `ac6b3ad`). The public compiler now validates
 field-schema bounds before u16 lowering; native evaluator/layouts are unchanged.
 
-**Next**: allocate a portable executable campaign transition model with explicit candidate,
-evidence and artifact state, mode/coverage, cancellation/budget outcomes and replay binding.
-Scalar/reduction languages now have documented contracts and finite conformance suites;
-whole-DAG versus selected-root error domains remain distinct. General quotients, kernel imports
-and machine-checked compiler proofs are later gates. Preserve native specialization and exact
-Tiger layout guards. C1032 remains open for full original acceptance review.
+**Active C1083**: portable executable campaign transitions, continued on Tavis's instruction.
+Use the existing finite reduction to connect proposals, checking and solver execution with explicit
+revision/evidence state, cancellation gates, aggregate budgets and bounded replay. Report:
+`notes/2026-09-07-c1083-campaign-transitions.md`. No generic daemon integration, plugin loader or
+unbounded autonomous campaign is claimed in this slice. Native hot loops/layouts remain unchanged.
 
 ### C985 — Ergodis exact algebraic optimization paper
 
@@ -165,6 +164,6 @@ host, so cold end-to-end `g41` replays need it regenerated first.
 ## Lane ownership
 
 This lane was split out of `complete-ports` on 2026-09-05 and owns C985, C1016, C1017,
-C1031-C1033, C1040-C1048, C1052, C1061, C1062, C1070, C1072-C1074, C1079, C1080, C1081, C1082. Future Ergodis engine, benchmark, tooling,
+C1031-C1033, C1040-C1048, C1052, C1061, C1062, C1070, C1072-C1074, C1079, C1080, C1081, C1082, C1083. Future Ergodis engine, benchmark, tooling,
 capability, and Ergodis-paper tasks use `[ergodis]`. The bounded-recovery manuscript work (C325,
 C953, C955, C964) stays on `[complete-ports]`.
