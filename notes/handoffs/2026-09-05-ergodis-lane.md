@@ -136,11 +136,15 @@ C1082's scalar operation semantics and FeatureDag lowering conformance are compl
 `notes/2026-09-07-c1082-scalar-semantics.md` (core `ac6b3ad`). The public compiler now validates
 field-schema bounds before u16 lowering; native evaluator/layouts are unchanged.
 
-**Active C1083**: portable executable campaign transitions, continued on Tavis's instruction.
-Use the existing finite reduction to connect proposals, checking and solver execution with explicit
-revision/evidence state, cancellation gates, aggregate budgets and bounded replay. Report:
-`notes/2026-09-07-c1083-campaign-transitions.md`. No generic daemon integration, plugin loader or
-unbounded autonomous campaign is claimed in this slice. Native hot loops/layouts remain unchanged.
+C1083's bounded portable campaign transition model and checkpoint replay are complete:
+`notes/2026-09-07-c1083-campaign-transitions.md` (core `6269cd1`). Latest outcome, current evidence
+and prior run coverage remain separate; Cancel/Resume preserves completed evidence and budgets.
+
+**Next**: allocate a bounded autonomous proposer driver using this transition model, retaining
+counterexamples/replay state and exposing a common native/browser command workflow. Keep native
+socket/host I/O outside portable semantics, and preserve 64-bit hot specialization/layout guards.
+Physical artifact persistence, general quotient/lifting instructions and private module loading
+remain subsequent C1079 gates. C1032 remains open for full original acceptance review.
 
 ### C985 — Ergodis exact algebraic optimization paper
 

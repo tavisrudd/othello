@@ -51,3 +51,10 @@ Scalar operation specification, independent checked-integer reference and DAG-lo
 conformance committed as core `ac6b3ad`. All native gates passed. Cold compiler field-schema
 validation prevents u16 truncation and ambiguous names; evaluator and layouts unchanged.
 Report: `../2026-09-07-c1082-scalar-semantics.md`.
+
+## 2026-09-07 — C1083 complete
+
+Portable campaign transitions and checked command-log replay committed as core `6269cd1`.
+Ten independent model sequences, seven adversarial tests and full native/Python/WASM regressions
+passed. Native hot loops/layouts unchanged. Report:
+`../2026-09-07-c1083-campaign-transitions.md`.

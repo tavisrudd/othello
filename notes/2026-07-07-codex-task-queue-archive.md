@@ -5564,3 +5564,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1081 `[ergodis]` [REPORTED 2026-09-07]** — language-layer inventory and formal finite reduction semantics, independent Python oracle, bounded logical document interpreter and native/WASM conformance complete; 12 shared cases plus 3 Worker rejections; core `55c5d8c` → `notes/2026-09-07-c1081-language-semantics.md`.
 
 - **C1082 `[ergodis]` [REPORTED 2026-09-07]** — scalar PlanSpec executable semantics and FeatureDag lowering conformance complete; all 27 ops in 41 oracle cases, 1,984 DAG rows, cold field-schema narrowing fix; all native gates pass; core `ac6b3ad` → `notes/2026-09-07-c1082-scalar-semantics.md`.
+
+- **C1083 `[ergodis]` [REPORTED 2026-09-07]** — bounded portable campaign transitions, scoped checking/execution and command-log replay complete; 10 model sequences, 7 adversarial tests, full native/Python/WASM regression gates pass; core `6269cd1` → `notes/2026-09-07-c1083-campaign-transitions.md`.
