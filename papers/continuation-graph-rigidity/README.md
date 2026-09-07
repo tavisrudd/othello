@@ -153,5 +153,6 @@ The repository is `tavisrudd/continuation-graph-rigidity` on GitHub.
 
 ## License
 
-The manuscript and accompanying software are distributed under the
-[MIT license](LICENSE).
+The manuscript is licensed under the Creative Commons Attribution 4.0
+International License (CC BY 4.0); see [LICENSE](LICENSE). The accompanying
+software is separately licensed under the [MIT License](LICENSE-MIT).

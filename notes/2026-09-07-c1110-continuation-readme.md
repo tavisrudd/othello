@@ -16,3 +16,7 @@ verification pass after guarded export from `eb4bb49d1`; downstream commit
 `3d85103deb524908931e9612ecc0875857ab19da100faba95708c2bf71af48fc`.
 The author will supply a concept DOI after the first release; add its README
 badge then. No GitHub action was taken.
+
+The author corrected the manuscript license to CC BY 4.0. LICENSE, README,
+CITATION.cff and Zenodo metadata now agree; LICENSE-MIT preserves the prior
+software and supporting-file license. Metadata and local-link checks pass.
