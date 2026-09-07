@@ -152,11 +152,12 @@ and bounded byte-reader tests pass; native/WASM layout assertions remain exact. 
 authority: core `docs/glossary.md`. C1084 includes run metadata/notes, forkable history and the
 separate orchestration bounded context above the mathematical engine.
 
-**In progress — C1086**: independent finite verification crate and cold solver-admission bridge;
-`notes/2026-09-07-c1086-independent-verification.md`. User-approved verification context advances
-this cut before orchestration; no verifier dependency on solver or host machinery.
+**C1086 complete**: independent finite verification crate and cold solver-admission bridge,
+core `08221f2`; `notes/2026-09-07-c1086-independent-verification.md`. Native, standalone verifier,
+Python and browser/WASM gates pass; no verifier dependency on solver or host machinery. Old checker
+receipts intentionally require fresh verification rather than exact replay under the new checker.
 
-**Next after C1086**: allocate the portable orchestration crate and bounded shared client/session contract;
+**Next**: allocate the portable orchestration crate and bounded shared client/session contract;
 move the current Campaign workflow above core with explicit consumer migration, retaining its
 semantics and avoiding a cyclic compatibility reexport. Then implement browser control and durable
 run records/metadata/annotations/history through native/browser repository adapters. Responsive
@@ -187,5 +188,5 @@ host, so cold end-to-end `g41` replays need it regenerated first.
 
 This lane was split out of `complete-ports` on 2026-09-05 and owns C985, C1016, C1017,
 C1031-C1033, C1040-C1048, C1052, C1061, C1062, C1070, C1072-C1074, C1079, C1080, C1081, C1082, C1083, C1084, C1085. Future Ergodis engine, benchmark, tooling,
-capability, and Ergodis-paper tasks use `[ergodis]`. The bounded-recovery manuscript work (C325,
+capability, and Ergodis-paper tasks use `[ergodis]`. C1086's independent verifier is complete. The bounded-recovery manuscript work (C325,
 C953, C955, C964) stays on `[complete-ports]`.

@@ -275,7 +275,8 @@ against authoritative inputs and supplied evidence within a declared budget. Sol
 answers and proposes evidence; verification checks the claim. The orchestrator records outcomes
 and selects policy but cannot mint a verification capability from a receipt or status field.
 
-Start by extracting the fixed finite GF(2) coordinate-restriction checker into `ergodis-verify`,
+Implemented in C1086 (core `08221f2`; report `2026-09-07-c1086-independent-verification.md`):
+the fixed finite GF(2) coordinate-restriction checker is extracted into `ergodis-verify`,
 with a bounded `binary_composition` module. Keep only primitive typed problem/claim representations,
 canonicalization/identity, direct arithmetic, scoped records, replay and opaque verified tokens.
 Do not move origin, run metadata, search mode, discovery policy or private-module loading into
@@ -363,16 +364,15 @@ Treat the following as the target dependency shape, reached incrementally rather
 immediate workspace rewrite:
 
 ```text
-ergodis (existing library: languages, compiler, solver, cold admission bridge)
-    |
-    +--> ergodis-verify (leaf mathematical contracts and independent checking)
-    ^
-    |-- ergodis-runtime (campaign workflows, portable service, protocol, repository contracts)
-    |       ^
-    |       |-- ergodis-host-native (native storage, transport, jobs, thin binaries)
-    |       |-- ergodis-wasm (existing wasm/ package, Worker-facing bindings)
-    |
-    |-- private domain crates (separate repositories; optional runtime integration)
+Dependency arrows point from consumer to dependency:
+
+ergodis-host-native / ergodis-wasm --> ergodis-runtime (planned orchestration)
+ergodis-runtime --> ergodis (compiler/solver/cold admission bridge)
+ergodis-runtime --> ergodis-verify (independent mathematical checking)
+ergodis --> ergodis-verify
+private domain crates --> ergodis (optional runtime integration)
+
+The verifier has no arrow back to solver, runtime, hosts or private packages.
 ```
 
 The runtime crate becomes worthwhile when stage 2 introduces the shared service: there are already
@@ -780,6 +780,6 @@ A final Terra review checked the crate DAG and session split; its scheduler-owne
 was resolved explicitly. A follow-up source audit distinguished the two Python clients. The
 separate TUI artifact remains a bounded recovery prerequisite, as recorded above.
 
-Portable language ownership is complete. The user-approved independent verification cut now
-precedes the shared Campaign facade; then orchestration moves above core. This removes concrete
+Portable language ownership and the independent verification cut are complete. The shared Campaign
+facade and orchestration move above core next. This removes concrete
 dependency coupling before autonomous scheduling and persistence create more.

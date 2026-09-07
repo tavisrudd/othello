@@ -76,3 +76,13 @@ now owns domain terminology. C1084 expanded with metadata/annotations, forkable 
 separate orchestration bounded context. Report: `../2026-09-07-c1085-portable-scalar-language.md`.
 Next: portable runtime/workflow ownership and shared client contract, without control dependencies
 in solvers or kernels. Metadata persistence remains planned, not claimed as implemented.
+
+## 2026-09-07 — C1086 independent verification
+
+Core `08221f2` moves bounded GF(2) restriction checking into solver-independent `ergodis-verify`.
+Core admission consumes opaque scoped tokens; mode and provenance stay outside verification.
+Problem/candidate identities remain stable; old checker receipts require fresh checking. Workspace,
+standalone verifier, independent Python and WASM/browser gates pass; native profiles and hot
+layouts remain unchanged. C1084 plan and public glossary now distinguish verification ownership.
+Report: `../2026-09-07-c1086-independent-verification.md`. Next: portable runtime/workflow
+extraction and bounded client/session contract. No incidental discovery entry.

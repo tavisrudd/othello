@@ -5570,3 +5570,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1084 `[ergodis]` [COMPLETE 2026-09-07]** — Portable native/browser control and session architecture; crate dependency plan, repository/protocol contracts, staged migration and unchanged performance discipline → `notes/2026-09-07-c1084-portable-control-architecture.md`
 
 - **C1085 `[ergodis]` [COMPLETE 2026-09-07]** — Portable scalar/text/codec ownership, bounded stream input, native compatibility and default/native/WASM validation; shared domain glossary → `notes/2026-09-07-c1085-portable-scalar-language.md` (core `57af8b4`).
+
+- **C1086 `[ergodis]` [REPORTED 2026-09-07]** — Independent finite verification crate and solver admission bridge complete; core `08221f2`, native/Python/WASM/browser and dependency gates pass → `notes/2026-09-07-c1086-independent-verification.md`
