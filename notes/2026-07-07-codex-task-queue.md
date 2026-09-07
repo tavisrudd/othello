@@ -318,3 +318,5 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 All completed rows, original rankings, amendments, and detailed task bodies are preserved in
 `2026-07-07-codex-task-queue-archive.md`. Do not copy them
 back into this live registry.
+
+- **C1101 `[ergodis]` [IN PROGRESS]** — Portable immutable run records, content-bound source/events and explicit fork lineage → notes/2026-09-07-c1101-portable-run-records.md
