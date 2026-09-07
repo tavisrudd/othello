@@ -328,5 +328,4 @@ All completed rows, original rankings, amendments, and detailed task bodies are 
 `2026-07-07-codex-task-queue-archive.md`. Do not copy them
 back into this live registry.
 
-- **C1114 `[ergodis]` [IN PROGRESS]** — Browser IndexedDB repository adapter, portable replay boundary, saved-run demo and actual browser persistence/interruption gates → `notes/2026-09-07-c1114-browser-repository.md`.
-- **C1115 `[ergodis]` [QUEUED]** — Native filesystem repository adapter sharing C1114 portable semantics; cross-process fencing and filesystem crash/restart gates; follows C1114 → `notes/2026-09-07-c1114-browser-repository.md`.
+- **C1115 `[ergodis]` [IN PROGRESS]** — Native filesystem repository adapter sharing C1114 portable semantics; cross-process fencing and filesystem crash/restart gates; follows C1114 → `notes/2026-09-07-c1114-browser-repository.md`.

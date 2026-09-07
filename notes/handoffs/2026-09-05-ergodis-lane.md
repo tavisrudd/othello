@@ -270,8 +270,9 @@ versioned sidecars and coherent analytical snapshots informed by C1033. Bounded 
 ten conformance tests, full native, Python and release WASM gates pass. No persistent adapter or
 actual execution recovery is implemented.
 
-**Next**: C1114 implements browser IndexedDB persistence first, followed by C1115 native
-filesystem persistence using the same portable repository semantics. Tavis approved browser/WASM
+**C1114 complete**: core `96a81b5`; browser IndexedDB persistence, portable bounded replay,
+save/reopen/verify/fork UI and actual Chromium crash/restart gates pass.
+**Next**: C1115 native filesystem persistence using the same portable repository semantics. Tavis approved browser/WASM
 demo support in the initial scope; automatic execution resumption remains separate.
 Report/scope: `notes/2026-09-07-c1114-browser-repository.md`. The analytical projection
 bridge remains a subsequent slice. C1033's existing DuckDB/Jupyter manifest-ledger read surface is a downstream consumer;

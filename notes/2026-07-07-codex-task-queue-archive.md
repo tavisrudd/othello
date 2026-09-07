@@ -5608,3 +5608,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1106 `[ergodis]` [REPORTED 2026-09-07]** — Explicit bounded snapshot verification and fresh-UUIDv7 child bundle downloads; exact parent preservation, chosen-spec forks and no inherited evidence authority. Four portable workflow tests, full native, Python, WASM and actual browser gates pass. Core feab0c6 → notes/2026-09-07-c1106-offline-verification-forks.md
 
 - **C1107 `[ergodis]` [REPORTED 2026-09-07]** — Portable repository transactions, head CAS, writer fencing, attempts, conservative recovery accounting and versioned sidecars; coherent analytical snapshots informed by C1033. Bounded volatile reference and ten conformance tests; full native, Python and release WASM gates pass. Core 75b646b → notes/2026-09-07-c1107-repository-contract.md
+
+- **C1114 `[ergodis]` [REPORTED 2026-09-07]** — Browser IndexedDB repository adapter, portable replay boundary, saved-run demo and actual browser persistence/interruption gates → `notes/2026-09-07-c1114-browser-repository.md`.

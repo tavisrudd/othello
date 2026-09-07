@@ -161,3 +161,9 @@ Core e4e7424, private dd3f19d. UUIDv7 RunId follows explicit user preference for
 ## 2026-09-07 — C1103 offline run bundle foundation
 
 Core c8da541, private fd0f03f. Bounded borrowed-payload reader/encoder checks included identities and parents, rejects conflicting histories, and lists missing specs/parents/content. Complete and partial LRC bundles exercise explicit subsequent verification. Native, seven bundle/eight private tests, Python and WASM compilation pass. Browser/client inspection is next; no FS or execution-resumption claim. Report: `../2026-09-07-c1103-offline-run-bundles.md`.
+
+## 2026-09-07 — C1114 complete
+
+Browser IndexedDB repository, portable replay image and offline saved-run controls: core
+`96a81b5`; native/Python/WASM and actual Chromium crash/restart gates pass. Report:
+`../2026-09-07-c1114-browser-repository.md`. Native companion C1115 follows.
