@@ -242,8 +242,14 @@ history rejection pass seven bundle tests; the private LRC fixture resolves actu
 bytes before explicit verification. Full native, eight private tests, Python and WASM compilation
 pass. Opening data implies no solver execution, publisher authentication or mathematical authority.
 
-**Next**: C1105 offline browser/client bundle inspection, then C1106 explicit verification and
-fresh-ID fork workflow. C1107 defines and tests the portable repository publication/fencing,
+**C1105 complete**: core `d5e5504`; `notes/2026-09-07-c1105-offline-browser-inspection.md`.
+Offline browser/client inspection exposes manifest, identities, lineage, declared modes and
+missing dependencies through the portable WASM parser. Bounded single-use Workers; no campaign
+or implicit verification. Real Chromium complete/partial/corrupt/oversize cases, full native,
+Python and release WASM gates pass.
+
+**Next**: C1106 explicit verification and fresh-ID fork workflow.
+C1107 defines and tests the portable repository publication/fencing,
 attempt and recovery-accounting contract before storage adapters or actual execution recovery.
 Allocated scope and gates: `notes/2026-09-07-ergodis-offline-workflow-successors.md`.
 Keep domain verification explicit; preserve native64 performance and solver/control separation.

@@ -5602,3 +5602,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1101 `[ergodis]` [REPORTED 2026-09-07]** — UUIDv7 run IDs, bounded immutable record/spec codecs, content binding and explicit fork lineage. Core e4e7424; private dd3f19d. Native, six runtime/eight private tests, Python and WASM gates pass → notes/2026-09-07-c1101-portable-run-records.md
 
 - **C1103 `[ergodis]` [REPORTED 2026-09-07]** — Bounded offline run bundles with borrowed payloads, included identity/parent checks and explicit missing dependencies. Core c8da541; private fd0f03f. Native, seven bundle/eight private tests, Python and WASM pass → notes/2026-09-07-c1103-offline-run-bundles.md
+
+- **C1105 `[ergodis]` [REPORTED 2026-09-07]** — Bounded offline browser/client inspection with manifest, exact identities/lineage, declared modes and missing dependencies; no live campaign or implicit verification. Real Chromium complete/partial/corrupt/oversize gates, full native, Python and WASM pass. Core d5e5504 → notes/2026-09-07-c1105-offline-browser-inspection.md
