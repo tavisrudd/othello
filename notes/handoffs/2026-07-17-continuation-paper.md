@@ -57,7 +57,8 @@ reconstruction remains outside the headline under the existing N1-only ruling.
   Qualified external subject review and priority diligence remain distinct from
   the completed sub-agent review and local corrections.
   The author handles GitHub and DOI actions; add the published artifact citation
-  to the verification appendix once its persistent identity is supplied.
+  to the verification appendix using version DOI `10.5281/zenodo.22651106`.
+  Concept DOI `10.5281/zenodo.22651105` is verified and linked in the README.
 - **C271** — obtain/read the named Drake–Sané and Metsch sources and complete the auth-gated
   citation diligence for N2; keep N2 softened meanwhile. Existing audit:
   `notes/2026-07-11-continuation-rigidity-audit-scope.md`.
