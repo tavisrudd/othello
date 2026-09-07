@@ -1,0 +1,122 @@
+\section{Finite data and verification boundary}\label{sec:finite-data}
+The arguments proving the signed-moment dictionary, translation family,
+Hessian formula, product ceiling and interval comparison are given in the
+text. The conic matrices, polynomial identities, exact spectra and shadow
+identification use finite computations. No Lean coverage is claimed for this
+companion. The source annotations identify each dependence; the claim map
+pins every theorem statement and records formal coverage as absent.
+
+\subsection{Coordinates and exact inputs}
+The evidence index supplies the full matrices, signs and raw cubics from the
+committed reconstruction bundle. For $p=7$ the coefficient order is
+$X^2,XY,XZ,Y^2,YZ,Z^2$ and the logical substitution is
+$u=(a,b,s+c,3s+c,d,e)$.
+For $p=11$ the selected coefficient order is
+\[
+ X^4,X^3Y,X^3Z,X^2YZ,X^2Z^2,XY^2Z,XYZ^2,XZ^3,YZ^3,Z^4;
+\]
+the substitution is
+$u=(z_0,z_1,7z_2,6z_3,3s+6z_4,s+3z_4,6z_5,7z_6,z_7,z_8)$.
+The transvectant normalization is
+\[
+ (f,g)_r=\frac{(m-r)!(n-r)!}{m!n!}
+ \sum_{j=0}^r(-1)^j\binom rj
+ \frac{\partial^rf}{\partial S^{r-j}\partial T^j}
+ \frac{\partial^rg}{\partial S^j\partial T^{r-j}},
+\]
+for binary forms of degrees $m,n$; all denominators used here are invertible.
+
+For the other $p=7$ trades, one may reconstruct the positive and negative
+sheets as translation classes of the following matchings. Entries are partner
+lists on $0,\ldots,6,\infty$, with index $7$ representing infinity:
+\[
+\begin{array}{c|cc}
+ &+&-\\\hline
+\text{dihedral}&(1,0,5,4,3,2,7,6)&(1,0,6,4,3,7,2,5)\\
+\text{Borel}&(1,0,4,6,2,7,3,5)&(1,0,6,5,7,3,2,4).
+\end{array}
+\]
+Their vector censuses at ranks $0,3,4,5,6$ are respectively
+\[
+ (1,6,1092,20202,96348),\qquad (1,6,588,20286,96768).
+\]
+Their fourth-moment sums are $58711/16807$ and $55327/16807$.
+
+\subsection{Classification and distance computations}
+The conic search enumerates perfect matchings, identifies their translation
+classes, and buckets classes by equal first and second moment tensors.
+Pairs in a bucket are tested for a nonzero third-moment difference, then
+quotiented by the stated affine action. The respective numbers of translation
+classes for $p=5,7,11,13,17,19$ are
+$3,15,945,10395,2027025,34459425$; the numbers of inequivalent hits under
+$\operatorname{AGL}(1,p)$ are $0,3,2,1,0,0$.
+This is a finite source classification, not a classification of all trades
+or all Clifford-equivalent codes. Every hit has the signed moment condition,
+$\dim L=p$ and Schur-square dimension $2p-1$.
+The $p=13$ hit gives $[[26,12,2]]_{13}$; its stored 20000-vector Hessian
+sample is not an exhaustive spectrum or a proved minimum-rank bound.
+The new $p=11$ and $p=13$ X-distance estimates are only upper bounds.
+
+The fixed-space distance search uses all $L'\subseteq L$ containing $\one$
+with $\dim L'\geq3$. Put
+$R(L')=\{s\in L':T(s,L',L')=0\}$.
+It suffices to test the maximal admissible X-space $R(L')$.
+A weight-two $e_i-e_j$ is undetected exactly when columns $i,j$ of this
+space agree; it is harmless exactly when those columns of $L'$ agree.
+Thus distance at least three requires equality of the two column partitions.
+Reduced row-echelon enumeration of subspaces of $L/\langle\one\rangle$
+visits $61927311$ candidates of dimensions two through six. None with a
+nonzero restricted cubic passes the partition test. The one-dimensional
+case also fails: a nonzero one-variable cubic has zero trilinear radical
+on that quotient, so its only available X-space is $\langle\one\rangle$,
+which does not separate its distinct evaluation columns.
+This excludes the specified nonzero-cubic subcodes inside the fixed $L$;
+it does not exclude other evaluation spaces, concatenation or code switching.
+For comparison, evaluation on all of $\Fp$ with X-space
+$\operatorname{RS}_2$ gives the length-$p$ distance-three rows
+$[[7,1,3]]_7$, $[[11,3,3]]_{11}$ and $[[13,4,3]]_{13}$ in the recorded
+polynomial-code search. They are distinct from Campbell's length-$(p-1)$
+construction~\cite{campbell2014}; their checks belong to the strengthening
+bundle.
+The exhaustive negative has an internal count check and recorded tally,
+but no independent full second implementation.
+
+\subsection{Artifacts and reproducibility}
+The machine-readable evidence registry in \texttt{verification/evidence.json}
+records the exact repository paths, checksums, byte counts, replay commands,
+search domains and limits. The inputs are the committed C1090 reconstruction
+and spectrum bundles, the C1099 strengthening and shadow bundles, and the
+C1102 factory benchmark. The factory certificate contains all native and
+primitive enumerators, exact rational sample values and interval constants.
+Its checks compare primal enumeration with MacWilliams transforms and
+synthesis-kernel enumeration with the Fourier expression; no random seed or
+floating-point decision enters that benchmark.
+
+The lightweight draft check verifies statement identities, annotation links,
+input hashes, census arithmetic and the exact product and interval inequalities.
+A fresh standard-library check also re-expands both coordinate normal forms,
+checks both conic moment and Schur-square identities, reproduces the complete
+$p=7$ census, and checks seven primes in the translation family.
+It does not rerun the multi-billion-point $p=11$ census or the matching
+exhaustions. Those remain explicitly attributed to the recorded executions;
+full commands and their runtime estimates accompany the evidence registry.
+This working draft resolves artifacts within the monorepo. A standalone
+archival package, public immutable locator and external manuscript review
+remain release work, and are not implied by the local draft check.
+
+\subsection{Literature coverage}
+The literature record has 336 explicit dispositions: 23 primary-comparison
+memberships, 47 abstract/metadata comparisons and 266 title screens.
+Its 33 technical sources include three full-text readings; the remaining
+read depths and exact sections are recorded individually. Title screening
+does not technically exclude the unread bodies. The canonical positioning
+ledger N1--N9 is retained in the citation audit, and all priority wording
+here is scoped to that ledger.
+
+Seven original citation seeds have independent OpenAlex, Crossref and
+Semantic Scholar counts. For the added Kagamihara--Tsuchiya preprint,
+OpenAlex and Semantic Scholar return zero with empty enumerations; Crossref
+has no record for the DataCite-registered arXiv DOI. The explicitly approved
+coverage exception preserves that result as unavailable, with no three-source
+absence verdict. MathSciNet is not covered. This limits priority claims;
+it does not alter the positive mathematical attribution to the preprint.

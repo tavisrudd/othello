@@ -1,0 +1,47 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,booktabs,geometry,hyperref}
+\geometry{margin=1in}
+\hypersetup{hidelinks}
+\input{formal-annotations}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\Fp}{\mathbb F_p}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\wt}{\operatorname{wt}}
+\newcommand{\rk}{\operatorname{rank}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\title{Strength-two trades and transversal cubic gates:\\the Clebsch cubic-phase codes and their magic}
+\author{}
+\date{Draft, September 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+A signed point configuration whose moments vanish through degree two defines a
+CSS code with a transversal cubic phase. We apply this dictionary to conic
+matchings, obtaining error-detecting codes with invariant-theoretic logical
+phases, and give an elementary $[[2p,p-1,2]]_p$ construction for every prime
+$p\geq5$. The Pauli spectrum of a homogeneous cubic phase is determined by its
+Hessian-rank distribution. Exact finite censuses distinguish the conic resources
+from products of elementary cubic states; the ten-qudit example over $\mathbb F_{11}$
+is not Clifford-equivalent to a product across any bipartition. For the six-qudit
+example over $\mathbb F_7$, a native fourteen-input factory costs fewer than
+$16.116$ raw resources per accepted block, compared with lower bounds of $54$
+and $36$ for two explicitly specified separate-distillation menus at the same
+target block infidelity. A five-dimensional restriction identifies a chordal
+cubic and gives the two associated sign choices distinct operational meanings.
+\end{abstract}
+\input{sections/01-trades}
+\input{sections/02-spectrum}
+\input{sections/03-factory}
+\input{sections/04-shadow}
+\appendix
+\input{sections/05-evidence}
+\input{references}
+\end{document}

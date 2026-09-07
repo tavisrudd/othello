@@ -1,0 +1,50 @@
+{
+  "conic-input": {
+    "checksum_manifest": "verification/input-hashes.json",
+    "commands": [
+      "python3 papers/clebsch-cubic-phase/verification/finite_check.py --check",
+      "cd notes/2026-09-06-clebsch-quantum-replay && uv run --with numpy --with sympy python check1.py",
+      "cd notes/2026-09-06-clebsch-quantum-replay && uv run --with numpy --with sympy python check3.py"
+    ],
+    "limits": "Fresh draft checks reverify both moment/Schur ranks and coordinate normal forms; original reports own the independent matching reconstruction and transvectant identification.",
+    "role": "Matrices, moments, Schur squares and invariant cubic identities"
+  },
+  "factory": {
+    "checksum_manifest": "verification/input-hashes.json",
+    "commands": [
+      "python3 notes/2026-09-07-c1102-factory-benchmark/benchmark.py --check"
+    ],
+    "limits": "Independent uniform Z inputs and ideal stabilizer operations; only specified separate-distillation menu. Deterministic Python standard library exact arithmetic.",
+    "role": "Exact native/primitive/synthesis enumerators and interval inequalities"
+  },
+  "magic-comparison": {
+    "checksum_manifest": "verification/input-hashes.json",
+    "commands": [
+      "cd notes/2026-09-07-c1099-cubic-phase-strengthening && uv run python test3a_verify.py 7 11 13",
+      "cd notes/2026-09-07-c1099-cubic-phase-strengthening/search && cargo build --release",
+      "~/.cache/ergodis/c1099-target/release/c1099 dist3",
+      "~/.cache/ergodis/c1099-target/release/c1099 trades 19"
+    ],
+    "limits": "Full source enumeration through p=19; p13 spectrum sampled, new p11/p13 X-distances only upper bounds. Distance search has one implementation and a domain-count check. Full p19 search about five minutes on 24 cores.",
+    "role": "Conic source, other spectra, distance search and exact entropy comparisons"
+  },
+  "rank-census": {
+    "checksum_manifest": "verification/input-hashes.json",
+    "commands": [
+      "python3 papers/clebsch-cubic-phase/verification/finite_check.py --check",
+      "cd notes/2026-09-07-c1090-resource-classification && uv run --with numpy --with sympy python check2.py",
+      "cd notes/2026-09-07-c1090-resource-classification/rank11 && cargo build --release",
+      "~/.cache/ergodis/c1090-target/release/rank11 notes/2026-09-07-c1090-resource-classification/tensor11.txt --low 6"
+    ],
+    "limits": "p=11: trusted exhaustive execution, 2593742460 projective representatives, about 82 seconds on 24 cores; p=7 independently reproduced. No new full census asserted.",
+    "role": "Exact p=7/11 projective Hessian counts, minimum loci and Waring bound"
+  },
+  "shadow": {
+    "checksum_manifest": "verification/input-hashes.json",
+    "commands": [
+      "cd notes/2026-09-07-c1099-cubic-phase-strengthening/paperv && for f in step1_config.py step2_action.py step3_decomp.py step4_bridge.py step5_pencil.py step6_identify.py step7_invariants.py step8_torsors.py step9_survey.py; do uv run --with numpy --with sympy python \"$f\"; done"
+    ],
+    "limits": "Finite-field computations, not a classification of all full-gate lifts; scripts regenerate serialized intermediates in sequence. Report distinguishes exact coefficients from sampled probes; about 30 seconds.",
+    "role": "A5 decomposition, explicit Hankel identity, pencil counts and scoped lift tests"
+  }
+}

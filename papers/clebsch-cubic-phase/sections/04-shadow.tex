@@ -1,0 +1,59 @@
+\section{A chordal restriction of the logical cubic}\label{sec:shadow}
+The logical cubic also provides an interface with the invariant pencil in
+\emph{Chordal and Conference Cubics: Reconstruction and a Residual
+$C_2$-Torsor}~\cite{shadowgeometry}. A restriction of a logical polynomial
+is a resource on fewer variables; it does not by itself construct a subcode.
+
+\begin{proposition}[Chordal shadow and sign choices]\label{prop:shadow}
+\coverage{absent}\uses{prop:conic-input,thm:hessian}\evidence{shadow}
+Over $\mathbb F_{11}$ the stabilizer $A_5$ of the base matching acts on the
+logical space as $\one\oplus V_4\oplus V_5$. The restriction to its unique
+five-dimensional constituent is, in the recorded coordinates,
+\[
+ 8\det\begin{pmatrix}z_0&z_1&z_2\\z_1&z_2&z_3\\z_2&z_3&z_4\end{pmatrix}.
+\]
+It is a chordal member of the invariant pencil. At ranks $0,3,4,5$, the
+chordal and conference censuses are respectively
+\[
+ (1,120,27720,133210),\qquad (1,300,22260,138490).
+\]
+Thus their five-qudit phase states are not Clifford-equivalent. At $p=7$ the restriction $s=0$ in
+\eqref{eq:normal-forms} is $3J$.
+Reversing the sheets sends $U_F$ to $U_F^{-1}$. The residual involution
+exchanging the two chordal members acts as a linear Clifford change of frame
+on the five shadow variables.
+\end{proposition}
+\begin{proof}[Finite identification and operational deduction]
+Character idempotents in the reconstructed $A_5$ action have ranks $1,4,5$.
+The recorded intertwiner identifies $V_5$ with the augmentation module on the
+six matching pairs; polynomial substitution gives the Hankel determinant.
+The two exact censuses then separate the resources by
+Theorem~\ref{thm:hessian}. The $p=7$ restriction follows directly from
+\eqref{eq:normal-forms}.
+Sheet reversal changes every sign in~\eqref{eq:logical}, hence negates $F$.
+For an invertible linear map $q$, the basis permutation $|z\rangle\mapsto|qz\rangle$
+is Clifford: it sends $X(v)$ to $X(qv)$ and $Z(w)$ to $Z(q^{-T}w)$.
+The recorded involution exchanges the two chordal polynomials, giving the stated
+frame change. The identity is on the shadow, not a claim about all extensions
+to the full ten-qudit gate.
+\proves{prop:shadow}\uses{prop:conic-input,thm:hessian}\evidence{shadow}
+\end{proof}
+The singular scheme of the Hankel cubic is a rational normal quartic;
+its twelve $\mathbb F_{11}$-points are not the entire scheme.
+The existing lift tests rule out the identity-on-complement extension and
+geometric $\PGL_2(11)$ lifts of the residual involution. They do not classify
+arbitrary full-gate lifts. These boundaries are part of ledger N4.
+
+\subsection*{Questions suggested by the construction}
+The translation family shows that the parameters and cubic-weight rigidity
+alone do not select the symmetric examples. Their distinction lies in the
+phase geometry and its spectrum. It remains to explain the observed stopping
+of the conic translation-class source beyond $p=13$, rather than merely
+extend a matching enumeration. A second question is whether a balanced
+$2p$-point trade can realize a trace-cubic resource on $p-1$ logical qudits.
+Finally, the distance-three search inside the fixed $p=7$ evaluation space
+fails, while the elementary distance-three RS examples do not establish the
+same product exclusion. Finding a distance-at-least-three code with several
+logical qudits and such an invariant phase is a separate construction problem.
+The present factory comparison leaves pooled distillation and unrestricted
+adaptive preparation open.

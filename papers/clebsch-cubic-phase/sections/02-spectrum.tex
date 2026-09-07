@@ -1,0 +1,139 @@
+\section{The Hessian spectrum and product exclusion}\label{sec:spectrum}
+For a homogeneous cubic $F$ on $\Fp^k$, put
+$|F\rangle=p^{-k/2}\sum_u\omega^{F(u)}|u\rangle$ and
+$H_F(v)=(\partial_i\partial_jF)(v)$. We use natural logarithms and define
+\[
+ M_\alpha(|\psi\rangle)=\frac{1}{1-\alpha}
+ \log\left(p^{-k}\sum_{v,w}|\langle\psi|X(v)Z(w)|\psi\rangle|^{2\alpha}\right)
+ \quad(\alpha>0,\ \alpha\ne1).
+\]
+These are stabilizer R\'enyi entropies with the normalization in
+\cite{leone,wangli}; they vanish on pure stabilizer states and are additive
+under tensor products. The following quadratic-sum calculation makes them
+accessible without enumerating all $p^{2k}$ Paulis.
+
+\begin{theorem}[Rank formula]\label{thm:hessian}
+\coverage{absent}
+Let $p\geq5$, and set $r(v)=\rk H_F(v)$ and
+$N_r=\#\{v:r(v)=r\}$. Then
+\begin{equation}\label{eq:pauli-spectrum}
+ |\langle F|X(v)Z(w)|F\rangle|=
+ \begin{cases}p^{-r(v)/2},&w\in\im H_F(v),\\0,&\text{otherwise.}\end{cases}
+\end{equation}
+Consequently
+\begin{equation}\label{eq:rank-entropy}
+ M_\alpha(|F\rangle)=\frac{1}{1-\alpha}
+ \log\left(p^{-k}\sum_{r=0}^kN_rp^{(1-\alpha)r}\right).
+\end{equation}
+\end{theorem}
+\begin{proof}
+The expectation is $p^{-k}\sum_u\omega^{F(u)-F(u+v)+w^Tu}$.
+Writing $c_v=\nabla F(v)$, the exponent, up to a constant, is
+$-\tfrac12u^TH_F(v)u+(w-c_v)^Tu$.
+The sum over the radical vanishes unless $w-c_v\in\im H_F(v)$.
+Euler's identity $H_F(v)v=2c_v$ makes this equivalent to the condition
+in~\eqref{eq:pauli-spectrum}. On a complementary subspace diagonalize the
+quadratic form. Each nonzero quadratic coefficient contributes a Gauss sum
+of modulus $\sqrt p$: its squared modulus follows by replacing a pair
+$(x,y)$ with $(x-y,x+y)$ in the double sum, an invertible substitution.
+The radical contributes $p^{k-r(v)}$, proving the modulus formula.
+There are $p^{r(v)}$ admissible $w$ for each $v$; summing their powers proves
+\eqref{eq:rank-entropy}.
+\proves{thm:hessian}
+\end{proof}
+
+Kagamihara--Tsuchiya~\cite[Theorem 1]{kagamihara} give the binary
+rank-reduction formula, with $C(x)+C(x)^T$ replacing the odd-characteristic
+Hessian. Chen--Yan--Zhou~\cite{chen} supply related hypergraph-state moment
+methods. We use the established rank-reduction method in odd characteristic;
+no first rank-formula or first odd-prime extension claim is made (ledger N5).
+
+\begin{proposition}[Exact conic spectra]\label{prop:spectra}
+\coverage{absent}\uses{prop:conic-input,thm:hessian}\evidence{rank-census}
+The nonzero entries of the vector rank distributions for the two conic phases are
+\[
+\begin{array}{c|rrrrr}
+p=7:\ r&0&3&4&5&6\\\hline
+N_r&1&48&2940&26502&88158
+\end{array}
+\]
+\[
+\begin{array}{c|rrrrrrr}
+p=11:\ r&0&5&6&7&8&9&10\\\hline
+N_r&1&120&14520&80520&21442960&2387485210&23528401270.
+\end{array}
+\]
+In each case the minimum positive rank is $(p-1)/2$, attained on exactly
+$p+1$ projective points. In the binary-form coordinates these are $s=0$ and
+the perfect $(p-3)$rd powers. In particular,
+\[
+ M_2(F_7)=\log\frac{1977326743}{78835},\qquad
+ M_2(F_{11})=\log\frac{11^{19}}{7151076991}.
+\]
+\end{proposition}
+\begin{proof}[Finite verification and deduction]
+The census visits vectors with first nonzero coordinate one. Since
+$H_F(av)=aH_F(v)$ for $a\ne0$, every projective representative contributes
+$p-1$ vectors; the zero vector is added separately. The domains have
+$19608$ and $2593742460$ representatives. The $p=7$ census has an independent
+implementation; the $p=11$ exhaustive execution is checked against it in the
+smaller case, not independently duplicated at its full size.
+Substitution verifies the $p+1$ perfect-power points. The census has exactly
+that many minimum-rank lines, so this containment is an equality over $\Fp$.
+Equation~\eqref{eq:rank-entropy} gives the entropy values.
+\proves{prop:spectra}\uses{thm:hessian}\evidence{rank-census}
+\end{proof}
+
+\begin{lemma}[Product ceiling]\label{lem:product-ceiling}
+\coverage{absent}
+For a pure state in dimension $D$ with an orthogonal unitary Pauli basis,
+$M_2\leq\log((D+1)/2)$. Thus a pure product on blocks of $a$ and $k-a$
+prime-dimensional qudits satisfies
+\begin{equation}\label{eq:product-bound}
+ M_2\leq\log\frac{(p^a+1)(p^{k-a}+1)}4.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Put $x_P=|\langle P\rangle|^2$. Purity gives $\sum_Px_P=D$ and
+$x_I=1$. Cauchy--Schwarz on the $D^2-1$ other entries yields
+$\sum_Px_P^2\geq1+(D-1)^2/(D^2-1)=2D/(D+1)$.
+Insert this into the definition of $M_2$. For a product the Pauli sum
+factorizes, so the entropies add.
+\proves{lem:product-ceiling}
+\end{proof}
+The product-ceiling method has predecessors in the characteristic-function
+and qudit entropy literature~\cite{dai,wangli}. The argument above needs no
+assumption that a SIC fiducial exists or attains the bound.
+
+\begin{corollary}[Clifford-product exclusion]\label{cor:product-exclusion}
+\coverage{absent}\uses{prop:spectra,lem:product-ceiling}\evidence{magic-comparison}
+The ten-qudit state $|F_{11}\rangle$ is not Clifford-equivalent to a product
+across any nontrivial bipartition. The same conclusion holds for the dihedral
+and Borel six-qudit conic trades over $\mathbb F_7$ in
+Appendix~\ref{sec:finite-data}. This entropy test alone does not establish
+the conclusion for the six-qudit Clebsch state $|F_7\rangle$.
+\end{corollary}
+\begin{proof}
+For fixed $k$, the largest right side of~\eqref{eq:product-bound} occurs at
+$a=1$ or $k-1$: the variable part $p^a+p^{k-a}$ increases toward the
+endpoints. At $p=11,k=10$ the bound is $22.6797\ldots$, below
+$22.8695\ldots=M_2(F_{11})$. At $p=7,k=6$ it is $10.4228\ldots$;
+the other two trades give $10.4246\ldots$ and $10.4840\ldots$, whereas
+$M_2(F_7)=10.1299\ldots$. These comparisons are checked as exact rational
+inequalities before taking logarithms. Clifford conjugation permutes the
+Pauli moduli, so it preserves $M_2$.
+\proves{cor:product-exclusion}\uses{prop:spectra,lem:product-ceiling}\evidence{magic-comparison}
+\end{proof}
+
+For comparison, independent cubic qudits have
+$M_2=k\log(p^2/(2p-1))$. Two disjoint $xyz$ phases at $p=7$ have
+$M_2=8.8047\ldots$, also below $F_7$.
+The trace cubic $F(u)=\Tr_{\mathbb F_{p^k}/\Fp}(u^3)$ has full Hessian rank
+at every nonzero $u$, by nondegeneracy of the trace pairing, and hence
+$M_2=\log(D^2/(2D-1))$, $D=p^k$. These finite-field cubic fiducials belong
+to the Alltop--MUB construction~\cite{alltop,klappenecker,damski}.
+Feng--Luo~\cite[Proposition 2 and Appendix C]{feng} prove single-prime
+L1 optimality among diagonal gates. Neither that result nor the L1 ceiling
+of~\cite{damski} is an unrestricted $M_2$ maximality theorem.
+The conjecture in~\cite{knipfer} concerns two prime-dimensional qudits;
+we do not extend its attribution to arbitrary $k$ (ledger N9).

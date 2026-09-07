@@ -4,8 +4,9 @@ Date: 2026-09-07. Lane: `clebsch`. **Gate 1 PASSED with approved Crossref covera
 
 This is the single current home of the companion's positioning verdicts. Historical
 C1090/C1099 verdicts are superseded by these rows; the audit's ADJUDICATION.md owns
-the supporting search/read-depth record. No manuscript exists. When a manuscript
-ledger is adopted, move this authority once and leave a redirect, not a second copy.
+the supporting search/read-depth record. The working manuscript is now `papers/clebsch-cubic-phase/`. This remains the
+sole novelty authority; the paper's formal claim map records statement identity
+and evidence, not a duplicate novelty verdict.
 These are bounded literature verdicts, not a claim of exhaustive full-text coverage.
 
 All source keys below resolve in `adjudication-sources.json`, except the explicitly

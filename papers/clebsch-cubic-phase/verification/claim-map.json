@@ -1,0 +1,102 @@
+{
+  "cor:product-exclusion": {
+    "cautions": "No Lean proof is claimed. Finite computations retain the recorded evidence limits; source checking is not an independent full census.",
+    "conclusion": "The ten-qudit state $|F_{11}\\rangle$ is not Clifford-equivalent to a product across any nontrivial bipartition. The same conclusion holds for the dihedral and Borel six-qudit conic trades over $\\mathbb F_7$ in Appendix~\\ref{sec:finite-data}. This entropy test alone does not establish the conclusion for the six-qudit Clebsch state $|F_7\\rangle$.",
+    "coverage": "absent",
+    "declarations": [],
+    "hypotheses": "The field, dimensional and configuration/noise assumptions stated below.",
+    "objects": "cor:product-exclusion",
+    "statement_sha256": "ce9d9972e42838a82069ead8a5d68fed89b29398e3671306a8e5dafe27172a97",
+    "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "lem:product-ceiling": {
+    "cautions": "No Lean proof is claimed. Finite computations retain the recorded evidence limits; source checking is not an independent full census.",
+    "conclusion": "For a pure state in dimension $D$ with an orthogonal unitary Pauli basis, $M_2\\leq\\log((D+1)/2)$. Thus a pure product on blocks of $a$ and $k-a$ prime-dimensional qudits satisfies \\begin{equation} M_2\\leq\\log\\frac{(p^a+1)(p^{k-a}+1)}4. \\end{equation}",
+    "coverage": "absent",
+    "declarations": [],
+    "hypotheses": "The field, dimensional and configuration/noise assumptions stated below.",
+    "objects": "lem:product-ceiling",
+    "statement_sha256": "678d23661704f04e249f31681d1d2fc5e015e72450b723912146eee556a57246",
+    "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "lem:waring": {
+    "cautions": "No Lean proof is claimed. Finite computations retain the recorded evidence limits; source checking is not an independent full census.",
+    "conclusion": "The weighted linear-form cubic ranks obey $9\\leq r(F_7)\\leq13$ and $15\\leq r(F_{11})\\leq21$. The rank-nine lower bound also holds for any homogeneous cubic phase on six qudits Clifford-equivalent to $|F_7\\rangle$.",
+    "coverage": "absent",
+    "declarations": [],
+    "hypotheses": "The field, dimensional and configuration/noise assumptions stated below.",
+    "objects": "lem:waring",
+    "statement_sha256": "eed86a7679ec399aeb5b04e3fe0e692541f5c7514c37745ae75ffa0270ce38df",
+    "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "prop:conic-input": {
+    "cautions": "No Lean proof is claimed. Finite computations retain the recorded evidence limits; source checking is not an independent full census.",
+    "conclusion": "For the stated matchings the construction has distinct points, $\\dim L=p$, and $\\dim L^{\\circ2}=2p-1$. It gives $[[14,6,2]]_7$ and $[[22,10,2]]_{11}$. In invertible logical coordinates the phases are \\begin{equation} F_7=4sI+3J,\\qquad F_{11}=4sI_2+2I_3. \\end{equation} Here $I=ae-4bd+3c^2$ and $J=\\det\\left(\\begin{smallmatrix}a&b&c\\\\b&c&d\\\\c&d&e\\end{smallmatrix}\\right)$ are binary-quartic invariants. For the binary octavic $f(S,T)=\\sum_{i=0}^8\\binom8i z_iS^{8-i}T^i$, $I_2=(f,f)_8$ and $I_3=((f,f)_4,f)_8$ use normalized transvectants.",
+    "coverage": "absent",
+    "declarations": [],
+    "hypotheses": "The field, dimensional and configuration/noise assumptions stated below.",
+    "objects": "prop:conic-input",
+    "statement_sha256": "0695a06e1fd07130112f0a61c9899f21936b8724e4f8c964bb14ab13fd90e7f1",
+    "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "prop:shadow": {
+    "cautions": "No Lean proof is claimed. Finite computations retain the recorded evidence limits; source checking is not an independent full census.",
+    "conclusion": "Over $\\mathbb F_{11}$ the stabilizer $A_5$ of the base matching acts on the logical space as $\\one\\oplus V_4\\oplus V_5$. The restriction to its unique five-dimensional constituent is, in the recorded coordinates, \\[ 8\\det\\begin{pmatrix}z_0&z_1&z_2\\\\z_1&z_2&z_3\\\\z_2&z_3&z_4\\end{pmatrix}. \\] It is a chordal member of the invariant pencil. Its rank census at ranks $0,3,4,5$ is $(1,120,27720,133210)$; the conference member has $(1,300,22260,138490)$, so their five-qudit phase states are not Clifford-equivalent. At $p=7$ the restriction $s=0$ in \\eqref{eq:normal-forms} is $3J$. Reversing the sheets sends $U_F$ to $U_F^{-1}$. The residual involution exchanging the two chordal members acts as a linear Clifford change of frame on the five shadow variables.",
+    "coverage": "absent",
+    "declarations": [],
+    "hypotheses": "The field, dimensional and configuration/noise assumptions stated below.",
+    "objects": "prop:shadow",
+    "statement_sha256": "19a3efe47ac75e2ad4de5be7d70ca920940bbc9c1fdcb5d1f9e962d451883e63",
+    "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "prop:spectra": {
+    "cautions": "No Lean proof is claimed. Finite computations retain the recorded evidence limits; source checking is not an independent full census.",
+    "conclusion": "The nonzero entries of the vector rank distributions for the two conic phases are \\[ \\begin{array}{c|rrrrr} p=7:\\ r&0&3&4&5&6\\\\\\hline N_r&1&48&2940&26502&88158 \\end{array} \\] \\[ \\begin{array}{c|rrrrrrr} p=11:\\ r&0&5&6&7&8&9&10\\\\\\hline N_r&1&120&14520&80520&21442960&2387485210&23528401270. \\end{array} \\] In each case the minimum positive rank is $(p-1)/2$, attained on exactly $p+1$ projective points. In the binary-form coordinates these are $s=0$ and the perfect $(p-3)$rd powers. In particular, \\[ M_2(F_7)=\\log\\frac{1977326743}{78835},\\qquad M_2(F_{11})=\\log\\frac{11^{19}}{7151076991}. \\]",
+    "coverage": "absent",
+    "declarations": [],
+    "hypotheses": "The field, dimensional and configuration/noise assumptions stated below.",
+    "objects": "prop:spectra",
+    "statement_sha256": "ae709272dee543730db04b573dcb0ff947e9c3e799d14ec528b117a393474660",
+    "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "prop:translation": {
+    "cautions": "No Lean proof is claimed. Finite computations retain the recorded evidence limits; source checking is not an independent full census.",
+    "conclusion": "These sheets define a strength-two trade with affine span $V$ and $\\dim L=p$. Its code is $[[2p,p-1,2]]_p$, and its logical cubic is \\begin{equation} F(u)=-3u(t)q(u),\\qquad q(u)=\\sum_i u(a_i)^2\\quad(u\\in V^*). \\end{equation} The quadratic form $q$ has rank $p-2$. Moreover $\\dim L^{\\circ2}=2p-1$; every preserving physical cubic weight is a scalar multiple of the sheet-sign vector.",
+    "coverage": "absent",
+    "declarations": [],
+    "hypotheses": "The field, dimensional and configuration/noise assumptions stated below.",
+    "objects": "prop:translation",
+    "statement_sha256": "25a5086de89466049450be2b3697bb962ddf55c584e4a8f7ab4da667e380e2a7",
+    "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "thm:factory": {
+    "cautions": "No Lean proof is claimed. Finite computations retain the recorded evidence limits; source checking is not an independent full census.",
+    "conclusion": "Under~\\eqref{eq:noise}, for every $0<\\delta\\leq0.01$, let $q$ be the native factory's output block infidelity. Its expected raw consumption is less than $16.116$. Every separate construction in the sign-only menu with block infidelity at most $q$ costs at least $54$ raw inputs per output; in the weighted relaxation it costs at least $36$. Feasible separate constructions meeting this target exist throughout the interval.",
+    "coverage": "absent",
+    "declarations": [],
+    "hypotheses": "The field, dimensional and configuration/noise assumptions stated below.",
+    "objects": "thm:factory",
+    "statement_sha256": "0f2c9a65c6c64b27f5ae40371472cf50bd46a0f0fe82ac1f9689d3c2256a9c33",
+    "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "thm:hessian": {
+    "cautions": "No Lean proof is claimed. Finite computations retain the recorded evidence limits; source checking is not an independent full census.",
+    "conclusion": "Let $p\\geq5$, and set $r(v)=\\rk H_F(v)$ and $N_r=\\#\\{v:r(v)=r\\}$. Then \\begin{equation} |\\langle F|X(v)Z(w)|F\\rangle|= \\begin{cases}p^{-r(v)/2},&w\\in\\im H_F(v),\\\\0,&\\text{otherwise.}\\end{cases} \\end{equation} Consequently \\begin{equation} M_\\alpha(|F\\rangle)=\\frac{1}{1-\\alpha} \\log\\left(p^{-k}\\sum_{r=0}^kN_rp^{(1-\\alpha)r}\\right). \\end{equation}",
+    "coverage": "absent",
+    "declarations": [],
+    "hypotheses": "The field, dimensional and configuration/noise assumptions stated below.",
+    "objects": "thm:hessian",
+    "statement_sha256": "e41c4a482ee41651bd4fa7587874fb883c7366ba165f982914316323ca223a40",
+    "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "thm:trade-code": {
+    "cautions": "No Lean proof is claimed. Finite computations retain the recorded evidence limits; source checking is not an independent full census.",
+    "conclusion": "Suppose $n=2p$, $k=p-1$, and $\\dim L=p$. Then the CSS code with X-stabilizer space $S=\\langle\\one\\rangle$ and Z-stabilizer space $L^\\perp$ has parameters $[[2p,p-1,2]]_p$. The signed transversal operation $\\bigotimes_i M_{\\epsilon_i}$, where $M_c|z\\rangle=\\omega^{cz^3}|z\\rangle$, induces the logical diagonal gate \\begin{equation} U_F|u\\rangle=\\omega^{F(u)}|u\\rangle,\\qquad F(u)=\\sum_i\\epsilon_i(x_i^Tu)^3. \\end{equation} More generally, for $S\\subseteq L$, a physical cubic with weights $w_i$ is constant on every coset of $S$ in $L$ if and only if $\\sum_i w_i s_i b_i c_i=0$ for all $s\\in S$ and $b,c\\in L$. For $S=\\langle\\one\\rangle$ this condition is $w\\perp L^{\\circ2}$.",
+    "coverage": "absent",
+    "declarations": [],
+    "hypotheses": "The field, dimensional and configuration/noise assumptions stated below.",
+    "objects": "thm:trade-code",
+    "statement_sha256": "a67dc0c6c5b19cceef19a20ea172e671f38a3f044f3939bfd69ed8680e0857e6",
+    "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  }
+}

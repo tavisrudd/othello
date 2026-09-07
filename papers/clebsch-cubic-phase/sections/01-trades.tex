@@ -1,0 +1,168 @@
+\section{Signed trades as quantum codes}\label{sec:trades}
+The same cancellation that makes two point configurations agree on quadratics
+can make a cubic phase insensitive to a stabilizer coordinate. The surviving
+third moment is then a logical gate. Our examples use perfect matchings of a
+conic, but the cancellation mechanism applies to any signed configuration.
+
+Fix a prime $p\geq5$ and write $\omega=\exp(2\pi i/p)$. A qudit has basis
+$\{|x\rangle:x\in\Fp\}$, with $X(a)|x\rangle=|x+a\rangle$ and
+$Z(b)|x\rangle=\omega^{bx}|x\rangle$. A \emph{strength-two signed trade}
+is a list of distinct points $x_i\in\Fp^k$, with signs $\epsilon_i\in\{1,-1\}$,
+such that
+\begin{equation}\label{eq:moments}
+ \sum_i\epsilon_i=0,\qquad \sum_i\epsilon_i x_i=0,\qquad
+ \sum_i\epsilon_i x_ix_i^T=0.
+\end{equation}
+These equalities are in $\Fp$. Let $E$ have rows $x_i^T$ and let
+$L=\{a\one+Eu:a\in\Fp,\ u\in\Fp^k\}\subseteq\Fp^n$.
+The coordinatewise product span is denoted by $L^{\circ2}$.
+
+\begin{theorem}[Trade-to-code dictionary]\label{thm:trade-code}
+\coverage{absent}
+Suppose $n=2p$, $k=p-1$, and $\dim L=p$. Then the CSS code with
+X-stabilizer space $S=\langle\one\rangle$ and Z-stabilizer space $L^\perp$
+has parameters $[[2p,p-1,2]]_p$. The signed transversal operation
+$\bigotimes_i M_{\epsilon_i}$, where $M_c|z\rangle=\omega^{cz^3}|z\rangle$,
+induces the logical diagonal gate
+\begin{equation}\label{eq:logical}
+ U_F|u\rangle=\omega^{F(u)}|u\rangle,\qquad
+ F(u)=\sum_i\epsilon_i(x_i^Tu)^3.
+\end{equation}
+More generally, for $S\subseteq L$, a physical cubic with weights $w_i$
+is constant on every coset of $S$ in $L$ if and only if
+$\sum_i w_i s_i b_i c_i=0$ for all $s\in S$ and $b,c\in L$.
+For $S=\langle\one\rangle$ this condition is $w\perp L^{\circ2}$.
+\end{theorem}
+\begin{proof}
+Put $D=\operatorname{diag}(\epsilon_i)$. Equation~\eqref{eq:moments}
+says that $L$ is isotropic for the nondegenerate pairing $v^TDw$.
+Its dimension is half the length, so $L^\perp=DL$. In particular
+$S\subseteq L$, and the CSS dimension is $\dim L-\dim S=p-1$.
+An encoded basis is
+\[
+ |u_L\rangle=p^{-1/2}\sum_{a\in\Fp}|a\one+Eu\rangle.
+\]
+Expanding $\sum_i\epsilon_i(a+x_i^Tu)^3$ removes all terms involving $a$
+by~\eqref{eq:moments}, leaving~\eqref{eq:logical}.
+
+For the distance, no weight-one Z error lies in $S^\perp$.
+Since the points are distinct, $e_i-e_j\in S^\perp\setminus L^\perp$
+for every $i\ne j$, so $d_Z=2$. A weight-one vector cannot lie in $L$:
+its pairing with $\one\in L$ under $D$ would be nonzero. Thus $d_X\geq2$.
+
+For the general criterion, write $T_w(s,b,c)=\sum_i w_i s_i b_i c_i$.
+The difference of the physical cubic at $z+s$ and $z$ is
+$3T_w(s,z,z)+3T_w(s,s,z)+T_w(s,s,s)$. Its quadratic part must vanish
+as a polynomial function on $L$; degrees are less than $p$.
+Polarization, using $2,3\ne0$, gives $T_w(s,L,L)=0$.
+This condition also kills the lower terms because $s\in L$, proving sufficiency.
+\proves{thm:trade-code}
+\end{proof}
+
+This is a specialization of the signed qudit orthogonality mechanism in
+Watson--Campbell--Anwar--Browne~\cite[Definition 2 and Lemmas 6--8]{watson},
+with related divisible-code and prime-qudit constructions
+in~\cite{haah,cab,krishna}. The contribution considered here is the choice of
+configuration and the resulting logical resource. Our positioning follows the
+bounded comparison recorded in ledger rows N1--N4 of the accompanying literature
+audit; no classification of all CSS codes with these parameters is asserted.
+The Schur-square conductor also governs the MDS--CSS transversal-group
+classification~\cite{mds}. The distinction is the full product
+$S\circ L\circ L$ in Theorem~\ref{thm:trade-code}: Schur-square codimension
+one alone does not imply a non-Clifford gate. Here the X-space is only
+$\langle\one\rangle$.
+
+\subsection{An elementary family at every prime}
+An example separates parameter existence from the conic geometry.
+Let $V=\Fp^p/\langle\one\rangle$, write $a_i$ for the image of the $i$th
+standard basis vector, and set $t=a_0$. The functional
+$\sigma([z])=\sum_i z_i$ is well-defined because $p=0$ in $\Fp$.
+Take the positive sheet to be $\{a_i\}$ and the negative sheet to be
+$\{a_i+t\}$.
+
+\begin{proposition}[Translation trade]\label{prop:translation}
+\coverage{absent}\uses{thm:trade-code}
+These sheets define a strength-two trade with affine span $V$ and
+$\dim L=p$. Its code is $[[2p,p-1,2]]_p$, and its logical cubic is
+\begin{equation}\label{eq:translation-phase}
+ F(u)=-3u(t)q(u),\qquad q(u)=\sum_i u(a_i)^2\quad(u\in V^*).
+\end{equation}
+The quadratic form $q$ has rank $p-2$. Moreover
+$\dim L^{\circ2}=2p-1$; every preserving physical cubic weight is a scalar
+multiple of the sheet-sign vector.
+\end{proposition}
+\begin{proof}
+The sheets lie in the disjoint affine hyperplanes $\sigma=1,2$.
+Within a sheet the points are distinct, and their differences span
+$\ker\sigma$; $t$ supplies the remaining direction. Since $\sum_i a_i=0$,
+translation preserves the first two moments of this $p$-point set.
+The cubic expansion gives~\eqref{eq:translation-phase}.
+Identify $V^*$ with $K=\{u\in\Fp^p:\sum_i u_i=0\}$.
+Then $q(u)=\sum_i u_i^2$; its radical on $K$ is $\langle\one\rangle$,
+so its rank is $p-2$ and the displayed cubic is nonzero.
+
+For rigidity, let weights $\alpha_i,\beta_i$ on the two sheets annihilate
+every affine quadratic. Put $\gamma=\alpha+\beta$ and $B=\sum_i\beta_i$.
+The linear moment says $\gamma+Be_0\in\langle\one\rangle$.
+The quadratic moment on $K$ has symmetric matrix
+\[
+ A=\operatorname{diag}(\gamma)+e_0\beta^T+\beta e_0^T+Be_0e_0^T.
+\]
+A symmetric form vanishing on $K\times K$ is
+$\one r^T+r\one^T$ for some $r$. For distinct $i,j\ne0$, comparison gives
+$r_i+r_j=0$. There are at least four such indices, whence all $r_i=0$
+for $i\ne0$. Diagonal comparison gives $\gamma_i=0$ there; the linear
+moment then forces $\gamma_0=-B$. Off-diagonal comparison gives
+$\beta_i=r_0$ for $i\ne0$, and the $(0,0)$ entry gives $\beta_0=r_0$.
+Thus $B=pr_0=0$, $\gamma=0$, and $\alpha=-\beta$ are constant weights.
+The annihilator of $L^{\circ2}$ is therefore exactly the sign line.
+\proves{prop:translation}\uses{thm:trade-code}
+\end{proof}
+
+\subsection{The conic configurations}
+For the two symmetric examples take $Q=XZ-Y^2$ and label its points by
+$a\mapsto(1:a:a^2)$ and $\infty\mapsto(0:0:1)$.
+For a perfect matching $M$ of $\mathbb P^1(\Fp)$ define
+\[
+ P_M=\prod_{\{a,b\}\in M}L_{ab},\quad
+ L_{ab}=abX-(a+b)Y+Z,\quad L_{a\infty}=aX-Y.
+\]
+Use base matchings
+\[
+ M_7=\{02,14,3\infty,56\},\qquad
+ M_{11}=\{01,25,37,49,68,10\infty\}.
+\]
+Their $\PGL_2(p)$ orbits have $2p$ members. The determinant square class
+of a transformation taking the base matching to $M$ specifies its sign.
+The coefficient vector of $(P_M-P_{M_p})/Q$ specifies $x_M$.
+The exact division, sign consistency, and moment conditions are part of the
+finite input verification. This is the configuration studied in
+\emph{Quadratic Trade Rigidity and Cubic Orientation in Conic Matching
+Quotients}~\cite{tradegeometry}.
+
+\begin{proposition}[Finite conic input]\label{prop:conic-input}
+\coverage{absent}\uses{thm:trade-code}\evidence{conic-input}
+For the stated matchings the construction has distinct points,
+$\dim L=p$, and $\dim L^{\circ2}=2p-1$. It gives
+$[[14,6,2]]_7$ and $[[22,10,2]]_{11}$.
+In invertible logical coordinates the phases are
+\begin{equation}\label{eq:normal-forms}
+ F_7=4sI+3J,\qquad F_{11}=4sI_2+2I_3.
+\end{equation}
+Here $I=ae-4bd+3c^2$ and
+$J=\det\left(\begin{smallmatrix}a&b&c\\b&c&d\\c&d&e\end{smallmatrix}\right)$
+are binary-quartic invariants. For the binary octavic
+$f(S,T)=\sum_{i=0}^8\binom8i z_iS^{8-i}T^i$,
+$I_2=(f,f)_8$ and $I_3=((f,f)_4,f)_8$ use normalized transvectants.
+\end{proposition}
+\begin{proof}[Finite verification]
+Appendix~\ref{sec:finite-data} specifies the matrices and substitutions.
+Exact finite-field expansion checks the moments,
+ranks and both polynomial identities. The signed-trade theorem then supplies
+the code and gate. These are finite polynomial and linear-algebra checks;
+the evidence record gives the independent reconstruction and its limits.
+\proves{prop:conic-input}\uses{thm:trade-code}\evidence{conic-input}
+\end{proof}
+The invariant here is the logical phase itself. This differs from using
+invariant theory to study weight enumerators~\cite{kalra}; it is not a claim
+that invariant-defined gates in general originate with these examples.

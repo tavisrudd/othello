@@ -1,0 +1,10 @@
+{
+  "verification/finite-certificate.json": {
+    "bytes": 909,
+    "sha256": "92ec7f144a1434f00c2098453343a9c4c6957a550b105e24186db8162ac4cbe6"
+  },
+  "verification/finite_check.py": {
+    "bytes": 4840,
+    "sha256": "aad01b9ba5b25ea7ef932c928a55ac01343ab3aa46d82160ad2c10c1ad2de07b"
+  }
+}

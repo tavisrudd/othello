@@ -1,0 +1,171 @@
+\section{A bounded factory comparison}\label{sec:factory}
+The resource-count question is different from the entropy question. We compare
+preparing and purifying the whole six-qudit phase with purifying independent
+single-qudit primitives and then compiling it. This is the synthillation
+strategy of Campbell--Howard~\cite{campbellhoward}; Li--Yeh~\cite[Section 4.4
+and Appendix C.1]{liyeh} already connects signed physical qutrit gates to a
+coupled logical resource and its distillation. Our claim is the following
+finite, same-target comparison (ledger N8).
+
+\subsection{Noise and allowed operations}
+Every raw input is
+\begin{equation}\label{eq:noise}
+ \rho_c=(1-\delta)|M_c\rangle\langle M_c|+
+ \frac{\delta}{6}\sum_{e\ne0}Z(e)|M_c\rangle\langle M_c|Z(-e),
+ \qquad |M_c\rangle=7^{-1/2}\sum_x\omega^{cx^3}|x\rangle.
+\end{equation}
+Inputs are independent; stabilizer preparation, Clifford operations,
+measurements, feed-forward and storage are ideal. Uniformity of the six
+nonzero labels is an assumption, not a consequence of diagonal twirling.
+
+The native factory prepares $|+_L\rangle=7^{-7/2}\sum_{z\in L}|z\rangle$,
+injects the fourteen signed cubic gates, measures the code stabilizers,
+and decodes on acceptance. Injection is deterministic: controlled subtraction
+from data $x$ to a magic ancilla, followed by ancilla outcome $m$, supplies
+phase $c(x+m)^3$. A quadratic Clifford correction removes the $m$-dependent
+terms. An ancilla error $Z(e)$ becomes $Z(e)$ on the data. No injection outcome
+is discarded. For the resulting physical error vector $e$, acceptance is
+$\one^Te=0$ and the logical error label is $E^Te$; the error is harmless
+exactly when $e\in L^\perp$.
+
+The separate architecture distills each primitive independently with any
+finite concatenation of the three modules in Table~\ref{tab:modules}, then
+uses deterministic linear-form cubic synthesis without final postselection.
+Outputs may be stored separately and successful attempts retained. Module
+choices and depths may differ between terms. A final Clifford is allowed if
+its input is a homogeneous cubic-phase state on the same six qudits.
+Ancilla-assisted general synthesis, pooled multi-output distillers and joint
+synthillation are outside this menu.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{lllll}
+\toprule
+Module & points & X space & logical row & cubic weights\\
+\midrule
+Weighted four-site & $0,1,2,3$ & $\langle1\rangle$ & $x$ & $(-1,3,-3,1)$\\
+QRM six-site & $\mathbb F_7^*$ & $\langle x\rangle$ & $1$ & all $1$\\
+RS seven-site & $\mathbb F_7$ & $\langle1,x\rangle$ & $x^2$ & all $1$\\
+\bottomrule
+\end{tabular}
+\caption{The three allowed one-output distillers. In each row
+$L=S+\langle\ell\rangle$ and the logical coefficient is $-1$;
+coordinate negation supplies $+1$. Parameters are respectively
+$[[4,1,2]]_7$, $[[6,1,2]]_7$, and $[[7,1,3]]_7$.}\label{tab:modules}
+\end{table}
+The six-site row is the prime-qudit QRM construction~\cite{cab,campbell2014};
+the length-seven RS row is checked separately. We distinguish raw supplies.
+In the \emph{sign-only menu}, only $c=\pm1$ has unit cost. The four-site
+module costs eight raw injections because each $\pm3$ gate uses three signs.
+Its two middle error rates are
+$\delta_3=(6/7)[1-(1-7\delta/6)^3]$.
+In the \emph{weighted relaxation}, every nonzero cubic coefficient has unit
+raw cost and error $\delta$. This relaxation favors the separate architecture.
+
+\begin{lemma}[Cubic synthesis lower bound]\label{lem:waring}
+\coverage{absent}\uses{prop:spectra}\evidence{rank-census,conic-input}
+The weighted linear-form cubic ranks obey
+$9\leq r(F_7)\leq13$ and $15\leq r(F_{11})\leq21$.
+The rank-nine lower bound also holds for any homogeneous cubic phase on six
+qudits Clifford-equivalent to $|F_7\rangle$.
+\end{lemma}
+\begin{proof}
+In a shortest decomposition $F=\sum_{i=1}^r c_i\ell_i^3$, the coefficient
+vectors span the logical space and are projectively distinct.
+The Hessian at $v$ has rank at most the number of $\ell_i(v)\ne0$.
+For $F_7$, killing five independent forms gives $r\geq8$.
+If $r=8$, every six coefficient vectors must be independent, or a common
+annihilator would have Hessian rank at most two. The $\binom85=56$
+five-subsets then span distinct hyperplanes, producing 56 minimum-rank lines.
+The census has only eight. Thus $r\geq9$.
+For $F_{11}$ the same argument gives $r\geq14$ and excludes equality:
+$\binom{14}9=2002>12$ minimum-rank lines would be needed.
+The raw signed decompositions have one zero row, giving the upper bounds.
+For a cubic phase the Pauli-modulus multiplicity at $p^{-r/2}$ is $N_rp^r$,
+so the histogram recovers the rank census. Clifford invariance therefore
+preserves every input to the lower-bound argument.
+\proves{lem:waring}\uses{prop:spectra}\evidence{rank-census,conic-input}
+\end{proof}
+A weighted cube is implemented by Clifford computation of $\ell_i$, one
+weighted cubic gate, and uncomputation. This signature-tensor synthesis
+framework is explicit in Heyfron--Campbell~\cite[Section IV]{heyfron};
+the rank bound is for that model, not arbitrary circuits (ledger N7).
+For these matching configurations, the signed cubic line is also the Macaulay
+inverse system of the Artinian reduction with Hilbert function
+$(1,p-1,p-1,1)$~\cite[Corollary on self-association and cubic duality]{tradegeometry}.
+Thus the same cubic enters the geometric duality and the linear-form
+compilation problem.
+
+\begin{theorem}[Same-target resource comparison]\label{thm:factory}
+\coverage{absent}\uses{thm:trade-code,lem:waring}\evidence{factory}
+Under~\eqref{eq:noise}, for every $0<\delta\leq0.01$, let $q$ be the
+native factory's output block infidelity. Its expected raw consumption is
+less than $16.116$. Every separate construction in the sign-only menu
+with block infidelity at most $q$ costs at least $54$ raw inputs per output;
+in the weighted relaxation it costs at least $36$.
+Feasible separate constructions meeting this target exist throughout the interval.
+\end{theorem}
+\begin{proof}
+Write $a=1-\delta$ and $P$ for native acceptance. Single errors are rejected.
+Every accepted weight-two error is harmful, since the evaluation points are
+distinct. Their probability is $(91/6)\delta^2a^{12}$.
+For a fixed error support of size at least two, fixing all but its last
+nonzero label leaves at most one of six choices that accepts. A union bound
+on pairs therefore gives
+\begin{equation}\label{eq:native-bounds}
+ a^{14}\leq P\leq1-14\delta a^{13},\qquad
+ \frac{91\delta^2a^{12}}{6P}\leq q\leq\frac{91\delta^2}{6a^{14}}.
+\end{equation}
+Bernoulli's inequality implies
+\[
+ a^{12}(1+14\delta a)\geq(1-12\delta)(1+14\delta-14\delta^2)
+ =1+\delta(2-182\delta+168\delta^2)\geq1.
+\]
+Hence $a^{12}\geq1-14\delta a^{13}\geq P$,
+so $q\geq(91/6)\delta^2$, while
+$q/\delta\leq(91/600)/(0.99)^{14}<1$.
+Also $14/P\leq14/(0.99)^{14}<16.116$.
+
+A noisy primitive on a nonzero form with coefficient vector $b$ contributes
+an independent error label $eb$. For probability distributions on the
+additive logical-label group,
+$\|\mu*\nu\|_\infty\leq\|\mu\|_\infty$, since each convolution value
+is an average. An unpurified raw term therefore forces final error at least
+$\delta$, even with cancellations or a fixed Pauli correction.
+The states $Z(\eta)|F\rangle$ are orthogonal, so this probability is exactly
+a block-infidelity statement. Since $q<\delta$, all synthesis terms must
+be purified. Each independent tree has at least six raw leaves in the
+sign-only menu and four in the weighted menu. Retrying cannot lower those
+counts. Lemma~\ref{lem:waring} requires at least nine terms, giving $54$
+and $36$.
+
+For feasibility use the thirteen-term signed decomposition. A weighted
+four-site primitive has error at most $\delta^2/a^4$, so thirteen give
+block error at most $13\delta^2/(0.99)^4<(91/6)\delta^2$.
+For the seven-site module harmful accepted errors have weight at least three,
+giving error at most $35\delta^3/a^7$; thirteen give
+$455\delta^3/a^7<(91/6)\delta^2$ throughout the interval.
+A union bound suffices for these feasible upper estimates; the lower bound
+already allowed cancellations.
+\proves{thm:factory}\uses{thm:trade-code,lem:waring}\evidence{factory}
+\end{proof}
+
+At $\delta=0.01$ the exact enumerator calculation gives the comparison below.
+The separate rows are feasible constructions, not claims to attain their
+menu's optimum.
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+Construction & block infidelity & expected raw inputs\\
+\midrule
+Native fourteen-input & $0.00159853$ & $16.0894$\\
+Weighted four-site, thirteen terms & $0.00133141$ & $54.1275$\\
+Sign-only seven-site, thirteen terms & $0.0000130920$ & $97.6325$\\
+\bottomrule
+\end{tabular}
+\end{center}
+For an ordinary enumerator $A_w$ of $L^\perp$, native good-output probability
+before conditioning is $\sum_w A_wa^{14-w}(\delta/6)^w$.
+Acceptance also has the closed form
+$P=[1+6(1-7\delta/6)^{14}]/7$. Thus the calculation includes harmless
+accepted errors, rather than treating every nonzero physical error as failure.

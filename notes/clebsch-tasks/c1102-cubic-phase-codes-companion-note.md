@@ -4,8 +4,10 @@
 
 **Date:** 2026-09-07
 
-**Status:** active writing task; Gate 1 passed on 2026-09-07 with the explicitly
-approved Crossref coverage exception. Manuscript drafting is authorized.
+**Status:** first 11-page draft exists at `papers/clebsch-cubic-phase/companion.pdf`;
+local source, finite and PDF checks pass. Gate 1 passed with the explicitly
+approved Crossref coverage exception. Active for manuscript review and packaging.
+Draft report: `notes/2026-09-07-c1102-companion-draft.md`.
 Citation dispositions are banked in
 `notes/2026-09-07-c1102-forward-citations/ADJUDICATION.md`: all 336 promotions have
 explicit dispositions, with 20 additional partial primary readings. This is not
@@ -18,7 +20,8 @@ The user confirmed that the added Hessian source is preprint-only and approved
 recording Crossref as not covered, retaining the OpenAlex/Semantic Scholar zeros
 without a three-source absence verdict. Scope and restrictions are recorded in
 `notes/2026-09-07-c1102-forward-citations/gate-approval.json` and `GATE-DECISION.md`.
-Next: draft the four-part companion using ledger N1–N9 and the banked benchmark.
+Next: critical manuscript review, then standalone artifact packaging and author
+metadata decisions. No publication or mirror synchronization has occurred.
 
 ## Read first (in this order, nothing else)
 

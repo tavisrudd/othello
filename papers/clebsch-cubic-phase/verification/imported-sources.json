@@ -1,0 +1,329 @@
+{
+  "alltop": {
+    "cache_key": "10.1109/TIT.1980.1056185",
+    "citation": "alltop",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Earlier pp. 351-352/Theorem 2 image-verified reading: prime cubic sequences for p>=5."
+      }
+    ],
+    "pinpoint": "Section III, Theorem 2, pp. 351\u2013352 and quadratic Gauss-sum proof Eqs. (3)\u2013(5); load-bearing formulas checked against rendered PDF page images during preceding C1102 work",
+    "read_depth": "partial",
+    "used": "Earlier pp. 351-352/Theorem 2 image-verified reading: prime cubic sequences for p>=5.",
+    "version": "Published scan, 1980"
+  },
+  "cab": {
+    "cache_key": "arXiv:1205.3104",
+    "citation": "cab",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Prime-dimensional non-Clifford diagonal gates and distillation are prior framework; source hierarchy is numbered with Paulis at zero."
+      }
+    ],
+    "pinpoint": "II Definitions 2-3, Theorem 1 and surrounding gate/distillation discussion",
+    "read_depth": "partial",
+    "used": "Prime-dimensional non-Clifford diagonal gates and distillation are prior framework; source hierarchy is numbered with Paulis at zero.",
+    "version": "arXiv:1205.3104v2 [quant-ph] 19 Jul 2012"
+  },
+  "campbell2014": {
+    "cache_key": "arXiv:1406.3055",
+    "citation": "campbell2014",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "The source uses length d-1 and distance floor((d+1)/3), not the card-attributed [[p,1,(p+2)/3]]_p. Cite as related punctured polynomial construction, not direct source of the length-p table."
+      }
+    ],
+    "pinpoint": "Main-text Transversal gates, Error correcting properties and MSD, Eqs. (6)-(7)",
+    "read_depth": "partial",
+    "used": "The source uses length d-1 and distance floor((d+1)/3), not the card-attributed [[p,1,(p+2)/3]]_p. Cite as related punctured polynomial construction, not direct source of the length-p table.",
+    "version": "arXiv:1406.3055v2 [quant-ph] 9 Oct 2015"
+  },
+  "campbellhoward": {
+    "cache_key": "arXiv:1606.01904",
+    "citation": "campbellhoward",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Synthillation and exact enumerator analysis are established in the binary setting; no general first-synthillation claim."
+      }
+    ],
+    "pinpoint": "II.C Eqs. (35)-(39), exact success/output-error and MacWilliams discussion",
+    "read_depth": "partial",
+    "used": "Synthillation and exact enumerator analysis are established in the binary setting; no general first-synthillation claim.",
+    "version": "arXiv:1606.01904v5 [quant-ph] 30 Apr 2026"
+  },
+  "chen": {
+    "cache_key": "arXiv:2308.01886",
+    "citation": "chen",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Earlier Proposition 1/Theorem 1 reading: induced phase derivatives evaluate qubit hypergraph moments."
+      }
+    ],
+    "pinpoint": "Proposition 1 and Theorem 1, Eqs. (13)\u2013(15), PDF p. 6 and following discussion",
+    "read_depth": "partial",
+    "used": "Earlier Proposition 1/Theorem 1 reading: induced phase derivatives evaluate qubit hypergraph moments.",
+    "version": "v2, accepted Quantum article marker 2024-05-09"
+  },
+  "dai": {
+    "cache_key": "10.1007/s10773-022-05027-8",
+    "citation": "dai",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Earlier full-text image reading: characteristic-function L1 product ceiling; general method is prior art."
+      }
+    ],
+    "pinpoint": "Published pp. 1\u201318 read directly in nine user-supplied two-page screenshots. Relied on Eq. (8), Propositions 1\u20132 and their proofs, pp. 5\u20138; examples Sec. 5, pp. 10\u201315, especially product-state bound Sec. 5.3(3), p. 15; conclusion and references pp. 15\u201318. Load-bearing passages visually verified against original images. Full-text reading does not assert independent verification of every example calculation.",
+    "read_depth": "full text",
+    "used": "Earlier full-text image reading: characteristic-function L1 product ceiling; general method is prior art.",
+    "version": "Published, International Journal of Theoretical Physics 61:35"
+  },
+  "damski": {
+    "cache_key": "arXiv:2603.15550",
+    "citation": "damski",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Product-WH L1 norm, equimodular ceiling and finite-field trace-cubic MUB fiducials in every prime-power dimension p^n, p>=5. Different entropy order from M2; do not attribute an unrestricted M2 maximum theorem."
+      }
+    ],
+    "pinpoint": "I; III Definition 7 and Lemmas 1-6 with proofs; IV.A Theorem 1 Eq. (21) and comparison with Klappenecker-Rotteler",
+    "read_depth": "partial",
+    "used": "Product-WH L1 norm, equimodular ceiling and finite-field trace-cubic MUB fiducials in every prime-power dimension p^n, p>=5. Different entropy order from M2; do not attribute an unrestricted M2 maximum theorem.",
+    "version": "arXiv:2603.15550v1 [quant-ph] 16 Mar 2026"
+  },
+  "feng": {
+    "cache_key": "10.1088/1402-4896/ad80e7",
+    "citation": "feng",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Single-prime d>=5 L1 optimality among diagonal gates on stabilizer inputs; Appendix C uses WH purity, Cauchy\u2013Schwarz and nondegenerate one-variable quadratic Gauss sums. No general multivariate Hessian-rank/SRE theorem is stated. Distinguish diagonal-orbit optimum from unrestricted pure-state optimum; equality-class classification on p. 5 is conjectural."
+      }
+    ],
+    "pinpoint": "All nine pages: sections 1\u20134, Definitions 1\u20133, Propositions 1\u20132, Eqs. (3)\u2013(8), conjecture on p. 5, Appendices A\u2013C and references. Appendix C inequalities and Gauss-sum equality checked visually.",
+    "read_depth": "full text",
+    "used": "Single-prime d>=5 L1 optimality among diagonal gates on stabilizer inputs; Appendix C uses WH purity, Cauchy\u2013Schwarz and nondegenerate one-variable quadratic Gauss sums. No general multivariate Hessian-rank/SRE theorem is stated. Distinguish diagonal-orbit optimum from unrestricted pure-state optimum; equality-class classification on p. 5 is conjectural.",
+    "version": "Published, Physica Scripta 99 (2024) 115226, pages 1\u20139"
+  },
+  "haah": {
+    "cache_key": "arXiv:1709.08658",
+    "citation": "haah",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Weighted binary divisibility and product logical action are prior art; not a first weighted-mechanism contribution."
+      }
+    ],
+    "pinpoint": "III Definition III.1/Lemma III.2; V Lemma V.3 and Eq. V.2",
+    "read_depth": "partial",
+    "used": "Weighted binary divisibility and product logical action are prior art; not a first weighted-mechanism contribution.",
+    "version": "arXiv:1709.08658v2 [quant-ph] 5 Apr 2018"
+  },
+  "heyfron": {
+    "cache_key": "arXiv:1902.05634",
+    "citation": "heyfron",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Weighted sums of cubes and symmetric signature tensors explicitly implement prime-qudit circuits; column minimization is prior synthesis framework, not a new Waring-to-gates bridge."
+      }
+    ],
+    "pinpoint": "IV Lemmas 1-2, Eqs. (6)-(9), Definition 1 and Problem 3",
+    "read_depth": "partial",
+    "used": "Weighted sums of cubes and symmetric signature tensors explicitly implement prime-qudit circuits; column minimization is prior synthesis framework, not a new Waring-to-gates bridge.",
+    "version": "arXiv:1902.05634v1 [quant-ph] 14 Feb 2019"
+  },
+  "kagamihara": {
+    "cache_key": "arXiv:2602.23687",
+    "citation": "kagamihara",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Earlier III.A/Theorem 1 proof: explicit binary rank formula; odd-prime generalization cannot be called the first rank formula."
+      }
+    ],
+    "pinpoint": "III.A, Theorem 1 Eq. (12), proof and rank-evaluation discussion, PDF p. 3",
+    "read_depth": "partial",
+    "used": "Earlier III.A/Theorem 1 proof: explicit binary rank formula; odd-prime generalization cannot be called the first rank formula.",
+    "version": "v2, 14 May 2026"
+  },
+  "kalra": {
+    "cache_key": "arXiv:2501.10163",
+    "citation": "kalra",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Earlier 4.1.1-4.1.2/Theorems 2-3 reading: invariant rings constrain GF(4) code weight enumerators, a different role from a logical phase."
+      }
+    ],
+    "pinpoint": "Abstract/contents and section 4.1.1 Theorem 2, section 4.1.2 Theorem 3 introduction, pp. 18\u201319",
+    "read_depth": "partial",
+    "used": "Earlier 4.1.1-4.1.2/Theorems 2-3 reading: invariant rings constrain GF(4) code weight enumerators, a different role from a logical phase.",
+    "version": "v3, 23 March 2026"
+  },
+  "klappenecker": {
+    "cache_key": "arXiv:quant-ph/0309120",
+    "citation": "klappenecker",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Earlier full-text Theorem 1: trace-cubic finite-field MUB construction."
+      }
+    ],
+    "pinpoint": "Entire v1 preprint, sections 1\u20135 and references; load-bearing Theorem 1 and proof",
+    "read_depth": "full text",
+    "used": "Earlier full-text Theorem 1: trace-cubic finite-field MUB construction.",
+    "version": "recorded in source audit"
+  },
+  "knipfer": {
+    "cache_key": "arXiv:2607.07197",
+    "citation": "knipfer",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Earlier introduction/Eq. (2): two-prime-qudit conjecture, not an arbitrary-number-of-qudits theorem."
+      }
+    ],
+    "pinpoint": "HTML abstract and section I through equation 2; PDF acquired but not independently read",
+    "read_depth": "partial",
+    "used": "Earlier introduction/Eq. (2): two-prime-qudit conjecture, not an arbitrary-number-of-qudits theorem.",
+    "version": "recorded in source audit"
+  },
+  "krishna": {
+    "cache_key": "arXiv:1811.08461",
+    "citation": "krishna",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Unweighted prime-qudit triorthogonality with weighted product logical cubic action; different from a coupled invariant phase."
+      }
+    ],
+    "pinpoint": "Definition 2, CSS construction and Theorem 3 statement/proof opening",
+    "read_depth": "partial",
+    "used": "Unweighted prime-qudit triorthogonality with weighted product logical cubic action; different from a coupled invariant phase.",
+    "version": "arXiv:1811.08461v2 [quant-ph] 7 Jan 2019"
+  },
+  "leone": {
+    "cache_key": "arXiv:2106.12587",
+    "citation": "leone",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Pauli-moment entropies, Clifford invariance and tensor additivity are established; no monotonicity claim needed here."
+      }
+    ],
+    "pinpoint": "Main text opening and Stabilizer Renyi Entropy, Eqs. (1)-(5), properties (i)-(iii)",
+    "read_depth": "partial",
+    "used": "Pauli-moment entropies, Clifford invariance and tensor additivity are established; no monotonicity claim needed here.",
+    "version": "arXiv:2106.12587v5 [quant-ph] 12 Mar 2022"
+  },
+  "liyeh": {
+    "cache_key": "arXiv:2603.04548",
+    "citation": "liyeh",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Physical single-site 3 T plus 3 T-dagger implements logical qutrit AND; Appendix C.1 explicitly extends decoding-based resource distillation to its inner coupled qutrit diagonal gate. Retire prior physical-two-qutrit dismissal and no-qudit-synthillation claim."
+      }
+    ],
+    "pinpoint": "4.3 closing, Eq. (21), 4.4; Appendix C.1 Eqs. (33)-(35) and qutrit extension paragraph; C.2 Proposition 2 statement",
+    "read_depth": "partial",
+    "used": "Physical single-site 3 T plus 3 T-dagger implements logical qutrit AND; Appendix C.1 explicitly extends decoding-based resource distillation to its inner coupled qutrit diagonal gate. Retire prior physical-two-qutrit dismissal and no-qudit-synthillation claim.",
+    "version": "arXiv:2603.04548v2 [quant-ph] 17 Mar 2026"
+  },
+  "mds": {
+    "citation": "mds",
+    "conventions": [
+      {
+        "aspect": "hypotheses",
+        "matched": "Cited as another regime, not applied as a theorem to the distance-two trade codes.",
+        "requirement": "Half-rate [2m,m,m+1] MDS codes over odd prime fields."
+      }
+    ],
+    "pinpoint": "Abstract of papers/mds_css_transversal_groups/main.tex",
+    "read_depth": "abstract/metadata only",
+    "used": "Context: Schur-square conductor and the Clifford classification under the half-rate MDS hypotheses.",
+    "version": "Local manuscript abstract, read 2026-09-07"
+  },
+  "shadowgeometry": {
+    "citation": "shadowgeometry",
+    "conventions": [
+      {
+        "aspect": "source relationship",
+        "matched": "The manuscript states a finite verification and identifies the reconstruction evidence.",
+        "requirement": "Do not represent a reconstruction report as a full primary manuscript reading."
+      }
+    ],
+    "pinpoint": "C1090 reconstruction / C1099 logical-cubic-vs-Paper-V report, as appropriate",
+    "read_depth": "secondary only",
+    "used": "Geometry context; finite statements are supported by the named reconstruction bundles.",
+    "version": "Local manuscript title and task-owned reconstruction reports"
+  },
+  "tradegeometry": {
+    "citation": "tradegeometry",
+    "conventions": [
+      {
+        "aspect": "normalization and scope",
+        "matched": "The text identifies the signed cubic line, without asserting a new exact scalar or all-code classification.",
+        "requirement": "Artinian reduction by the homogenizing coordinate for the B3/H3 configurations; the inverse system is a cubic line."
+      }
+    ],
+    "pinpoint": "Corollary cor:self-associated-gorenstein; manuscript lines 1944\u20131955 read directly, plus the C1090 reconstruction reports",
+    "read_depth": "partial",
+    "used": "Macaulay inverse-system interpretation of the signed cubic line; reconstruction evidence owns the finite code checks.",
+    "version": "Local manuscript title and task-owned reconstruction reports"
+  },
+  "wangli": {
+    "cache_key": "10.1007/s11128-023-04186-9",
+    "citation": "wangli",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Earlier image-verified pp. 6-9: qudit SRE, invariance and additivity; Proposition 2 includes SIC hypothesis."
+      }
+    ],
+    "pinpoint": "Pages 1\u201320 supplied and visually inspected; detailed reliance on Eq. (2), Theorem 1 and Proposition 2, pp. 6\u20139. References inspected on pp. 19\u201320. Partial marks the technical audit depth; not all proofs independently checked.",
+    "read_depth": "partial",
+    "used": "Earlier image-verified pp. 6-9: qudit SRE, invariance and additivity; Proposition 2 includes SIC hypothesis.",
+    "version": "Published, Quantum Information Processing 22:444"
+  },
+  "watson": {
+    "cache_key": "arXiv:1503.08800",
+    "citation": "watson",
+    "conventions": [
+      {
+        "aspect": "domain and normalization",
+        "matched": "The manuscript follows ledger N1\u2013N9; distinguishes binary/prime/prime-power domains, L1 from M2, and the stated read depth.",
+        "requirement": "Direct signed-qudit predecessor; strong integer star-orthogonality includes repeated rows and implies the signed cubic logical gate. Retire weighted-qubits/unweighted-qudits contrast."
+      }
+    ],
+    "pinpoint": "IV.B Definition 2/Eq. (18), V Lemmas 6-8, VIII Discussion",
+    "read_depth": "partial",
+    "used": "Direct signed-qudit predecessor; strong integer star-orthogonality includes repeated rows and implies the signed cubic logical gate. Retire weighted-qubits/unweighted-qudits contrast.",
+    "version": "arXiv:1503.08800v2 [quant-ph] 10 Aug 2015"
+  }
+}
