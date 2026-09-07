@@ -19,3 +19,14 @@ C985 moved verbatim into the new handoff and are not archived here.
 ## Archived from the live handoff
 
 No entries yet.
+
+## 2026-09-06 — C1079 review and convergence plan
+
+Completed the user-directed synthesis of core/private evolve, C985/C1016 research, and the
+recovered C1032 browser prototype. Report: `notes/2026-09-06-c1079-ergodis-evolve-review.md`;
+its evidence table routes the eight supporting inventories/analyses. The plan separates search
+mode, origin, scoped validation and disclosure; recommends core workflow consolidation, hybrid
+native/IR industry extensions and QEC separation, native/WASM and recipient-run/hosted demos,
+and concrete build/test/docs gates. Static/adversarial review only; no source migration, build,
+benchmark, release, or IP allocation. Next implementation allocation awaits the recommended
+architecture/scope decision. No incidental mathematical discovery arose.

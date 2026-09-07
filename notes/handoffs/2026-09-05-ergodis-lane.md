@@ -123,22 +123,18 @@ the Farr–Lisoněk free-pair cap constructions into a test-cap corpus for the c
 in the `n ≥ 4` programme. Each row carries its own provenance pointer; read the discovery-track
 entry before starting.
 
-### C1079 — ergodis-evolve review and synthesis plan
+### Ergodis consolidation — next implementation decision
 
-Evidence collection complete across core, private/C1016, and prior C985 research. Next: synthesize
-the convergence plan from `notes/2026-09-06-c1079-ergodis-evolve-review.md`. Bring together core evolve,
-private/C1016 work, and extension spikes into a
-clear staged plan for the best autonomous structure-discovery and theorem/parameter-driven
-quotient system, steerable through a Unix socket. Reconcile conflicting inherited intent against
-Tavis’s explicit autonomy goal. Target ownership: reusable evolve machinery/workflows in core,
-with selected heuristics/theorems optionally private. Assess separable industry IP for future
-licensing or acquisition carve-outs, with QEC the leading case. Target runtime: one core binary
-loading specialized kernels as shared libraries and compiling extension source on the fly into
-Ergodis IR; the existing WASM prototype must also load industry extensions. Both shippable and
-hosted black-box demos are required (shippable takes priority). The WASM audit is complete
-(`notes/2026-09-06-c1079-wasm-capability-audit.md`); full architecture/delivery synthesis is in progress. Scope and acceptance:
-`notes/2026-09-06-c1079-ergodis-evolve-brief.md`. Evidence report:
-`notes/2026-09-06-c1079-ergodis-evolve-review.md`.
+C1079 review closed: `notes/2026-09-06-c1079-ergodis-evolve-review.md` contains the recommended
+portable autonomous workflow, core/private cleanup, hybrid native/IR packages, QEC IP boundary,
+native/WASM and local+hosted demo stages, and build/test/docs gates. No implementation migration
+or release was performed. WASM memo: `notes/2026-09-06-c1079-wasm-capability-audit.md`.
+
+**Next**: Tavis’s architecture/scope decision for a bounded portable candidate/parameter/admission
+pilot, alongside recovery of C1032’s browser baseline. Coordinate existing C1032/C1017 ownership;
+no implementation successor ID allocated before that decision. Generic machinery/workflows belong
+in core; selected industry knowledge may remain private. Both shippable and hosted black-box demos
+are required, with shippable priority and the existing WASM prototype included.
 
 ### C985 — Ergodis exact algebraic optimization paper
 

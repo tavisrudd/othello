@@ -1,8 +1,8 @@
 # C1079 — ergodis-evolve review and synthesis plan
 
 **Lane**: `ergodis`
-**Status**: IN PROGRESS; initial and WASM inventories complete; architecture synthesis and broader
-core/private build/test/docs review underway.
+**Status**: COMPLETE — review and recommended convergence plan delivered on 2026-09-06.
+Implementation and release decisions remain downstream.
 Evidence map: `notes/2026-09-06-c1079-ergodis-evolve-review.md`.
 
 ## Authoritative product intent
