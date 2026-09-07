@@ -127,3 +127,10 @@ score inflation and familiarity effects. Its final suggestion was applied:
 the opening now asks directly whether every graph symmetry extends to the plane.
 No added tutorial or new literature branch was recommended. The outstanding
 publication citation and independent priority diligence remain separate.
+
+
+Final reader-polish export: authority 358b43b98, standalone 504b411.
+Standalone make check and deterministic PDF verification pass; exporter hashes
+and PDF byte equality agree. PDF 335529 bytes, 12 pages. Export content hash
+57e407eada10d7736a1430497f2fb9856e596a1f478104d602969a478ee54fde.
+No GitHub or DOI action occurred.
