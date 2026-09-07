@@ -157,7 +157,7 @@ core `08221f2`; `notes/2026-09-07-c1086-independent-verification.md`. Native, st
 Python and browser/WASM gates pass; no verifier dependency on solver or host machinery. Old checker
 receipts intentionally require fresh verification rather than exact replay under the new checker.
 
-**Next**: allocate the portable orchestration crate and bounded shared client/session contract;
+**In progress — C1087**: portable orchestration crate and bounded shared client/session contract;
 move the current Campaign workflow above core with explicit consumer migration, retaining its
 semantics and avoiding a cyclic compatibility reexport. Then implement browser control and durable
 run records/metadata/annotations/history through native/browser repository adapters. Responsive
