@@ -191,8 +191,12 @@ Full core fmt/clippy/tests, private constructor tests, Python parity and WASM re
 The boundary validates geometry/inline storage only; algebra, query and evidence admission remain
 separate. Original hot loops/layouts and native construction paths unchanged.
 
-**Next**: allocate semantic adapter admission over the existing composition capabilities, with
-explicit supported query/observable contracts and domain-checked leaf transitions. Then move generic
+**C1095 complete**: additional observable admission on validated finite quotients, core `8fe20fa`;
+`notes/2026-09-07-c1095-observable-admission.md`. Multiple readouts reuse a compilation; finer
+readouts return a concrete distinguishing pair. Full native gates, Python parity and WASM release
+check pass. This is state-readout admission on supplied contexts, not domain/policy evidence.
+
+**Next**: domain-checked leaf transitions over the existing composition capabilities, then move
 summary-transition checking into the independent verifier with its narrower claim scope. Reuse the
 private OpenProblem/parametric/certificate implementations and existing domain corpus. Preserve
 question/design exploration, native64 performance and the solver/control separation. Durable schemas

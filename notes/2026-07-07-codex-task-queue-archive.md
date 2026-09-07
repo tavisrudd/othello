@@ -5585,3 +5585,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1093 `[ergodis]` [REPORTED 2026-09-07]** — Immutable parametric query admission, update regressions and generic evidence audit → `notes/2026-09-07-c1093-dynamic-query-admission.md`
 
 - **C1094 `[ergodis]` [REPORTED 2026-09-07]** — Core composition shape and fallible private construction; full core and portable gates pass → `notes/2026-09-07-c1094-core-composition-admission.md`
+
+- **C1095 `[ergodis]` [REPORTED 2026-09-07]** — Semantic admission of additional observables on existing finite quotients → `notes/2026-09-07-c1095-observable-admission.md`.

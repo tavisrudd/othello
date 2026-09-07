@@ -121,3 +121,10 @@ Added cold bound LRC queries and retained-update contract tests; audited OpenPro
 ## 2026-09-07 — C1094 core structural admission
 
 Core checked shape (`b74a369`) and private fallible construction (`4add0bc`) pass full/scoped gates and WASM. Report: `notes/2026-09-07-c1094-core-composition-admission.md`. This is geometry/storage admission, not semantic authority.
+
+## 2026-09-07 — C1095 finite observable admission
+
+Core `8fe20fa`; report `../2026-09-07-c1095-observable-admission.md`. Validated quotient
+reuse admits class-constant readouts and rejects lost distinctions with a concrete pair.
+Native full gates, 508 trajectory cases, eight Python fixtures and WASM compilation pass.
+Next: domain-checked leaf transitions and explicitly scoped independent summary checking.
