@@ -103,3 +103,31 @@ comprehensive novelty clearance. C1110 remains open for revision and validation.
 The review's explicit ej/tt closeout separates the purely partite clique bound
 from geometric centre recovery; its mystery ledger retains the computation-free
 q=7 and q=8 explanations as open questions, without finding a correctness gap.
+
+
+## Referee revisions applied
+
+All findings R1–R5 in the cold-agent report were addressed in the authority:
+R1 adds k>=2, distinct points, and the two-line injectivity argument; R2
+states Bruno–Mella's compactified theorem over C for n>=5 with Theorem 3
+pinpoint (the primary arXiv abstract was rechecked at
+https://arxiv.org/abs/1006.0987; the referee's partial-source record supplies
+the theorem context). R3 discloses shared exact-cover recursion. R4 identifies
+the partite input separately from geometric centre recovery. R5 specifies
+both arcs' recovery hypotheses, nonzero auxiliary elements, the moduli markings
+and forgetful maps, k>=3 and empty-class conventions for extremal parameters;
+it removes duplicated orientation and the uncited six-point Clebsch aside.
+The affected claim-map hypotheses were reviewed and only their two statement
+digests refreshed. No algorithm or finite result changed.
+
+Authority `make check pdf` passed: source/evidence checks, mutation controls,
+finite replay, recognition controls and two deterministic PDF builds. Revised
+PDF: 327297 bytes; the corrected introduction and representation pages were
+visually inspected. No undefined references or overfull boxes were reported.
+
+**ej+tt closeout / Mystery ledger:** the cheap scope repair now also explicitly
+handles empty extremal classes, avoiding a new degenerate-case convention gap.
+The partite/geometric distinction is incorporated without claiming a new
+hypergraph theorem or priority. Computation-free explanations at q=7,8 and
+literature clearance remain open as recorded previously; no new correctness
+mystery emerged. The cold-referee report is preserved unchanged as history.

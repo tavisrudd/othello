@@ -27,10 +27,10 @@
       "conclusion": "The tangent-symbol hypergraph is k-uniform and linear and has the conflict graph as its line graph",
       "coverage": "absent",
       "declarations": [],
-      "hypotheses": "A k-arc in a finite projective plane",
+      "hypotheses": "A k-arc with k>=2 in a finite projective plane; the intersection formula concerns distinct legal points",
       "label": "prop:intersection",
       "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
-      "statement_sha256": "069784da4b2e1dd036ce16388fc30c5fcd222765b97745e89feae4ce24e426f2",
+      "statement_sha256": "9183afad2a5007de1496eb299da996f2fd0eef75a08962560e61e0dc3f7b6d50",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     {
@@ -49,10 +49,10 @@
       "conclusion": "Tangent traces are the large maximal cliques",
       "coverage": "absent",
       "declarations": [],
-      "hypotheses": "q-binomial(k-1,2)>k(k-2)+1",
+      "hypotheses": "q-binomial(k-1,2)>k(k-2)+1; comparison arc J has the same k and its plane order satisfies the same inequality",
       "label": "thm:traces",
       "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
-      "statement_sha256": "8d7fcc3c45e8b6131611686f7f20b6d5c92455eee570d282b1fc180f530bbffe",
+      "statement_sha256": "813b344a59400c56bf733eb89a1b406fa444d7e87c5c2fe8635a62047972930c",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     {

@@ -119,12 +119,9 @@ It is therefore the identity.
 The corollary concerns graphs promised to arise from projective frames.
 Section~\ref{sec:algorithm} also gives recognition of an arbitrary input
 graph against this family and checks the resulting coordinate transport.
-No ambient labels or colouring are supplied with the input graph.
-
-
-The input is only one uncoloured binary relation.  No tangent colouring,
-coordinate system, or ambient plane is supplied.  The proof has two
-independent stages.  First, a continuation-specific clique bound recovers
+The input is only one uncoloured binary relation, without tangent colours
+or ambient coordinates. The proof has two stages. First, a clique bound
+using the centre partition of the tangent symbols recovers
 the tangent traces and a second large-clique argument recovers their four
 centre classes.  Second, after normalizing the frame, the graph becomes the
 agreement graph of the four maps
@@ -136,12 +133,15 @@ A graph automorphism preserving the recovered classes induces permutations
 of the four alphabets.  Compatibility with both quotient maps forces those
 permutations to be one field automorphism.
 
-This coordinate model identifies the vertex set with $M_{0,5}(\F_q)$ and
-the graph with the uncoloured fibre-coincidence graph of four of the five
-forgetful maps to $M_{0,4}$.  Bruno and Mella's theorem
-$\Aut(M_{0,n})=S_n$ concerns biregular automorphisms of the algebraic
-variety~\cite{BrunoMella}; it does not constrain arbitrary permutations of
-the finite rational point set preserving a single graph relation.  The
+With markings $(0,1,\infty,x,y)$, this coordinate model identifies the
+vertex set with $M_{0,5}(\F_q)$. Up to reparametrizing the target, the four
+displayed maps forget respectively $y$, $x$, $1$, and $0$. Thus the graph
+records fibre coincidence for four of the five forgetful maps to $M_{0,4}$.
+For comparison, Bruno and Mella prove
+$\Aut(\overline{M}_{0,n})=S_n$ for the compactified moduli space over
+$\mathbb C$ when $n\ge5$~\cite[Theorem 3]{BrunoMella}. This algebraic
+automorphism theorem does not constrain arbitrary permutations of the
+finite rational point set preserving a single graph relation.  The
 content here is precisely that the uncoloured finite graph recovers the four
 forgotten colours.  Cross-ratio graphs supply a related automorphism and isomorphism
 classification~\cite[Definitions 3.2 and 3.4, Theorems 7.1 and 7.2]{GPZ}.
@@ -202,7 +202,8 @@ For $x\in V_K$, put
 \]
 
 \begin{proposition}[Intersection representation]\label{prop:intersection}\coverage{absent}
-The sets $S_x$ form a $k$-uniform linear hypergraph $\cH_K$, and
+Suppose $k\ge2$. The sets $S_x$ form a $k$-uniform linear hypergraph
+$\cH_K$, and for distinct $x,y\in V_K$,
 \[
  |S_x\cap S_y|=
  \begin{cases}
@@ -217,10 +218,13 @@ Consequently $G_K$ is the line graph of $\cH_K$.
 Since $x$ is legal, $xt$ is tangent to $K$ for every $t\in K$, so
 $|S_x|=k$.  Two such sets share a tangent symbol exactly when the
 corresponding points lie on that tangent and hence are adjacent.  Distinct
-points cannot share two projective lines, proving linearity.
+points cannot share two projective lines, proving linearity. Moreover,
+for two distinct centres $t,u$, the lines $xt$ and $xu$ are distinct
+because $x$ is legal, and their intersection is $x$. Hence $S_x$ determines
+$x$, so distinct points give distinct hyperedges.
 \end{proof}
 
-After choosing a label for each pencil $\Sigma_t$, the map
+For $k\ge2$, after choosing a label for each pencil $\Sigma_t$, the map
 \[
   x\longmapsto(xt)_{t\in K}\in\prod_{t\in K}\Sigma_t
 \]
@@ -260,8 +264,9 @@ $|C|-1=\sum_t|C_t|\leq k(k-2)$.
 
 Deza's weak-$\Delta$-system theorem gives the related generic bound
 $k^2-k+1$ for a non-sunflower family of $k$-sets~\cite{Deza}.  The improved
-constant above uses the resolution of every continuation edge by a selected
-centre.
+constant above uses the $k$-partite structure: every hyperedge contains
+one tangent symbol from each centre class. This step needs no further
+projective incidence; the centre-recovery argument below does.
 
 \begin{theorem}[Tangent-trace recovery]\label{thm:traces}\coverage{absent}\uses{lem:clique}
 If
@@ -271,8 +276,9 @@ If
 \end{equation}
 then the tangent traces are exactly the maximal cliques of $G_K$ with more
 than $k(k-2)+1$ vertices.  Hence every abstract graph isomorphism
-$G_K\to G_J$ canonically induces an isomorphism of the uncoloured
-tangent-trace hypergraphs.
+$G_K\to G_J$, where $J$ is a $k$-arc whose plane order also satisfies
+\eqref{eq:trace-threshold}, canonically induces an isomorphism of the
+uncoloured tangent-trace hypergraphs.
 \end{theorem}
 
 \begin{proof}
@@ -451,10 +457,10 @@ Writing $x=ry$, equation~\eqref{eq:mult} becomes
  \label{eq:punctured}
 \end{equation}
 whenever $r,y,ry\ne1$.  Extend $\gamma(1)=1$.  If $r,s,rs\ne1$, choose
-$y\notin\{1,s^{-1},(rs)^{-1}\}$; this is possible since
+$y\in\F_q^*\setminus\{1,s^{-1},(rs)^{-1}\}$; this is possible since
 $|\F_q^*|\geq4$.  Applying \eqref{eq:punctured} twice gives
 $\gamma(rs)=\gamma(r)\gamma(s)$.  The inverse case follows by choosing
-$y\notin\{1,r\}$ and comparing $h(y)$ with $h(rr^{-1}y)$.  Hence $\gamma$
+$y\in\F_q^*\setminus\{1,r\}$ and comparing $h(y)$ with $h(rr^{-1}y)$.  Hence $\gamma$
 extends multiplicatively.
 
 Equation \eqref{eq:punctured} also makes $h(x)/\gamma(x)$ constant on $D$, say
@@ -663,7 +669,8 @@ available covering block is explored. This enumerates each unordered
 cover once and terminates because the uncovered set strictly decreases.
 A second implementation enumerates fixed-size cliques directly instead
 of deriving them from maximal cliques. The two complete enumerations
-agree by canonical digests.
+agree by canonical digests. Their graph and clique constructions differ,
+but they share the exact-cover recursion described above.
 
 Graph automorphism generators are computed with Sage's graph algorithm.
 Their generated groups are explicitly enumerated and every permutation
@@ -681,8 +688,7 @@ nonambient automorphism.
 Together with Theorem~\ref{thm:main}, the census proves semilinear rigidity
 for every prime power $q\ge5$ except $q=5,8$. This combined statement has
 a finite computational premise at $q=7,9,11$; the theorem for $q\ge13$
-does not. The census concerns \emph{four-point frames}. A six-point
-Clebsch seed over $\F_{11}$ is a different reconstruction problem.
+does not.
 
 At $q=7$ there are $1352$ individual clique partitions but only one
 compatible four-pencil resolution. Thus uniqueness of the full resolution
@@ -713,10 +719,12 @@ to the classical neighbourhood of projective-plane complement and
 pseudo-complement embedding theorems~\cite{Batten,Bruck,BM1,BM2}; it is not
 a contribution claimed in this paper.
 
-The present arguments isolate two extremal parameters.  Let $m(k)$ be the
+The present arguments isolate two extremal parameters. For $k\ge3$, let
+$m(k)$ be the
 largest clique in a $k$-arc continuation graph that is not contained in one
 tangent trace, and let $r(k)$ be the largest disjointness clique of tangent
-traces using at least two selected centres.  We proved
+traces using at least two selected centres. Set either parameter to zero
+if its defining class is empty. We proved
 \[
  m(k)\leq k(k-2)+1,
  \qquad

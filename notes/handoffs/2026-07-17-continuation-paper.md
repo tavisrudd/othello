@@ -30,17 +30,16 @@ reconstruction remains outside the headline under the existing N1-only ruling.
   Source-only claim/evidence checks and reproducible PDF builds pass. No Lean theorem is claimed.
   The prototype recognizer is slower than generic graph isomorphism on the recorded controls.
 - C1110 is active: the exported draft received a fresh-context sub-agent referee review.
-  No main-result defect was found; two required local corrections and recommended
-  clarifications remain, together with the exact public Clebsch comparison.
+  No main-result defect was found; all local findings R1–R5 are now corrected
+  and the authority checks pass. The uncited Clebsch aside was removed.
   Review: `notes/2026-09-07-c1110-continuation-cold-referee.md`.
   Export/validation record: `notes/2026-09-07-c1110-continuation-upgraded-manuscript.md`.
 
 ## Next steps
 
-- **C1110** — address referee R1 (k>=2 representation hypothesis) and R2
-  (Bruno–Mella compactification attribution), incorporate the trust/exposition
-  clarifications, then validate and synchronize. Qualified external subject review
-  and priority diligence remain distinct from this sub-agent review.
+- **C1110** — complete publication-readiness review of the corrected first draft.
+  Qualified external subject review and priority diligence remain distinct from
+  the completed sub-agent review and local corrections.
   The author handles GitHub and DOI actions.
 - **C271** — obtain/read the named Drake–Sané and Metsch sources and complete the auth-gated
   citation diligence for N2; keep N2 softened meanwhile. Existing audit:
