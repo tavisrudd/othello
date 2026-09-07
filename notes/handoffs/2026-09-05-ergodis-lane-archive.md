@@ -217,3 +217,5 @@ port 8767 with task-owned PID recorded in the output directory. C1124 supplies t
 live candidate-lineage console previously queued as the next C1033 slice. No
 incidental mathematical discovery. Next demo work needs a second real workload,
 not a return to a toy or infographic default.
+
+2026-09-07: C1125 closes portable console integration against existing backend contracts; private `bd0acc4`. User-directed unified reduction-before-lineage view and below-fold details. Scope, gates and remaining execution bridge: `../2026-09-07-c1125-portable-console.md`.

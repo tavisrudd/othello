@@ -309,6 +309,15 @@ artifact, with real problems; no infographic or toy-example default. Private ent
 process location/ownership is recorded in the report. C1124 covers the candidate-lineage
 console formerly listed as C1033's next step; saved run ancestry is a separate view.
 
+**C1125 complete**: private `bd0acc4`; workspace uses current portable bundle,
+IndexedDB repository and WASM campaign clients. Actual browser workflow gates pass.
+Campaign reduction/cascade precedes lineage; counters/provenance stay visible below
+the fold, with a short header. User rejects collapse-to-simplify clicks.
+Report: `notes/2026-09-07-c1125-portable-console.md`.
+WASM accepts user GF(2) CampaignSpec/checkpoints; native corpus evolution and opaque
+RunBundle-to-execution conversion remain unsupported. Allocate their bridge only
+as an explicit implementation slice; never imply a bundle is executable by opening it.
+
 **Next gate**: select and allocate a second real application demonstration (recovery/helper
 costs or QEC decoding) to show another engine capability. Browser analytical export
 and larger-store pagination also require their own slices.
