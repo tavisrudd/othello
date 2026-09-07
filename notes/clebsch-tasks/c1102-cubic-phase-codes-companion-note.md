@@ -4,8 +4,13 @@
 
 **Date:** 2026-09-07
 
-**Status:** queued; writing task; the first gate is forward-citation closure, and no manuscript
-text is written before it passes
+**Status:** active at Gate 1; no manuscript text before forward-citation closure passes.
+Acquisition and first triage are banked in
+`notes/2026-09-07-c1102-forward-citations/REPORT.md`: three counts for all seven original
+seeds, 1,377 graph memberships screened, 336 title-deduplicated promotions awaiting
+completion of technical review. Alltop and Wang–Li full-text access remains unresolved;
+the added Kagamihara–Tsuchiya seed has Crossref 404 / Semantic Scholar 429 gaps.
+Watson–Campbell–Anwar–Browne 2015 supplies omitted signed-qudit prior art.
 
 ## Read first (in this order, nothing else)
 
@@ -26,12 +31,13 @@ Per `notes/literature-audit-conventions.md`, with OpenAlex, Crossref, and Semant
 (three sources for every negative): Haah 2018 (PRA 97, 042327), Campbell–Howard 2017 (PRA 95,
 022316), Krishna–Tillich 2019, Prakash–Saha 2025, Campbell–Anwar–Browne 2012, and the
 stabilizer Rényi entropy line (Leone–Oliviero–Hamma 2022; qudit definition Wang–Li, QIP 22,
-444 (2023)). Start from `notes/2026-09-07-c1099-lit-check-magic-of-phase-states.md`, which
+444 (2023)). Resume from the C1102 audit report above; the earlier
+`notes/2026-09-07-c1099-lit-check-magic-of-phase-states.md`
 found: Kagamihara–Tsuchiya (arXiv:2602.23687) for the `p = 2` Hessian-rank formula, Alltop
 1980 / Klappenecker–Rötteler 2004 for the trace-cubic state as a MUB fiducial, and Knipfer
 et al. (arXiv:2607.07197) for the conjectured maximum `log(D^2/(2D-1))` that the trace cubic
-attains; its gaps (nothing read at full text, primaries not obtained, no forward-citation run)
-are this gate's first work items. Record every
+attains for two qudits. Its broader attribution for arbitrary numbers of qudits is not
+supported by that source. The C1102 report owns the updated access/read-depth gaps. Record every
 consulted source; produce verdict lines for: the general signed-moment CSS mechanism, the
 `[[2p, p-1, 2]]_p` translation-trade family, the conic trades at p = 7, 11, 13, the
 invariant-theoretic phase, the Hessian-rank formula for stabilizer Rényi entropies of diagonal
@@ -163,10 +169,14 @@ member of Paper V's pencil (`8·det Hankel`, singular along the twelve-point rat
 quartic), never the conference member; at p = 7 the `s = 0` restriction is `3·det Hankel`.
 Global negation is `U_F ↔ U_F^{-1}`; the residual chordal-line torsor swaps the two chordal
 members, which are Clifford-equivalent via `q`, so it is a Clifford frame change on the five
-shadow directions and not a symmetry of the full gate. The note states this as a proposition
+shadow directions. Only the identity-on-complement extension and geometric lifts have
+been ruled out; arbitrary full-gate lifts remain open. The note states the established part as a proposition
 with the Hessian-census separation `(1,120,27720,133210)` vs `(1,300,22260,138490)`.
 Hand-back candidate for Paper V (its owner's call, needs a forward release): one sentence
-giving the two torsors their operational reading (gate inversion; logical frame change).
+giving the two torsors their operational reading (gate inversion; logical frame change),
+scoped to the verified finite-field shadow. Do not claim general non-liftability or identify
+the twelve rational singular points with the entire singular scheme. No Paper V manuscript
+or forward release occurs before the companion exists and its gates pass.
 
 ## Hand-back once the note exists
 

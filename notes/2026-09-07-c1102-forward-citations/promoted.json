@@ -1,0 +1,5083 @@
+[
+  {
+    "seed": "haah",
+    "service": "openalex",
+    "title": "On Optimality of CSS Codes for Transversal T",
+    "id": "https://openalex.org/W2980742961",
+    "doi": "https://doi.org/10.1109/jsait.2020.3012914",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Diagonal",
+      "Transversal",
+      "Triorthogon",
+      "diagonal",
+      "transversal",
+      "triorthogon"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "haah",
+    "service": "openalex",
+    "title": "Mitigating Coherent Noise by Balancing Weight-2 Z-Stabilizers",
+    "id": "https://openalex.org/W3216414171",
+    "doi": "https://doi.org/10.1109/tit.2021.3130155",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "haah",
+    "service": "openalex",
+    "title": "Permutation-Invariant Quantum Codes With Transversal Generalized Phase Gates",
+    "id": "https://openalex.org/W4403919042",
+    "doi": "https://doi.org/10.1109/tit.2024.3487964",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Invariant",
+      "Transversal",
+      "invariant",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "haah",
+    "service": "openalex",
+    "title": "Classification of small triorthogonal codes",
+    "id": "https://openalex.org/W3184133984",
+    "doi": "https://doi.org/10.1103/physreva.106.012437",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Triorthogon",
+      "triorthogon"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "haah",
+    "service": "openalex",
+    "title": "Designing the Quantum Channels Induced by Diagonal Gates",
+    "id": "https://openalex.org/W3204079156",
+    "doi": "https://doi.org/10.22331/q-2022-09-08-802",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Diagonal",
+      "diagonal",
+      "divisib",
+      "invariant",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "haah",
+    "service": "openalex",
+    "title": "Good Binary Quantum Codes with Transversal CCZ Gate",
+    "id": "https://openalex.org/W4411319878",
+    "doi": "https://doi.org/10.1145/3717823.3718186",
+    "externalIds": null,
+    "abstract_available": false,
+    "matches": [
+      "Transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "haah",
+    "service": "openalex",
+    "title": "From Magic State Distillation to Dynamical Systems",
+    "id": "https://openalex.org/W4414182510",
+    "doi": "https://doi.org/10.22331/q-2025-09-15-1858",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "haah",
+    "service": "openalex",
+    "title": "Transversal Clifford and T -Gate Codes of Short Length and High Distance",
+    "id": "https://openalex.org/W4410427697",
+    "doi": "https://doi.org/10.1109/jsait.2025.3570832",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Transversal",
+      "transversal",
+      "triorthogon"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "haah",
+    "service": "openalex",
+    "title": "Climbing the diagonal Clifford hierarchy",
+    "id": "https://openalex.org/W4415401457",
+    "doi": "https://doi.org/10.20935/acadquant7957",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "synthesis",
+      "transversal",
+      "triorthogon"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "haah",
+    "service": "openalex",
+    "title": "Magic state parity-checker with pre-distilled components",
+    "id": "https://openalex.org/W2751770370",
+    "doi": "https://doi.org/10.22331/q-2018-03-14-56",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "haah",
+    "service": "openalex",
+    "title": "Homological Origin of the Transversal Implementability of Logical Diagonal Gates in Quantum CSS Codes",
+    "id": "https://openalex.org/W7167816467",
+    "doi": "https://doi.org/10.1093/ptep/ptag133",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Diagonal",
+      "Transversal",
+      "diagonal",
+      "divisib",
+      "transversal",
+      "triorthogon"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "haah",
+    "service": "semantic-scholar",
+    "title": "Improved Quantum Codes with Transversal T Gates",
+    "id": "7647b171cef0e37a7f69abbf7a9c57f623e8f664",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2608.24000",
+      "CorpusId": 291334614
+    },
+    "abstract_available": true,
+    "matches": [
+      "Transversal",
+      "divisib",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "haah",
+    "service": "semantic-scholar",
+    "title": "The 27-qubit Counterexample to the LU-LC Conjecture is Minimal",
+    "id": "b627f0800dd0fa1b24b134b50312ed4d9e533c78",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2603.25219",
+      "DBLP": "journals/corr/abs-2603-25219",
+      "DOI": "10.48550/arXiv.2603.25219",
+      "CorpusId": 286789478
+    },
+    "abstract_available": true,
+    "matches": [
+      "triorthogon"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "haah",
+    "service": "semantic-scholar",
+    "title": "Transversal gates for quantum CSS codes",
+    "id": "7cb9d4c7cc146e2696e3ff9bec1f93cd4b18fb39",
+    "doi": null,
+    "externalIds": {
+      "DBLP": "journals/corr/abs-2601-21514",
+      "ArXiv": "2601.21514",
+      "DOI": "10.48550/arXiv.2601.21514",
+      "CorpusId": 285140706
+    },
+    "abstract_available": true,
+    "matches": [
+      "Transversal",
+      "diagonal",
+      "divisib",
+      "transversal",
+      "triorthogon"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "haah",
+    "service": "semantic-scholar",
+    "title": "Divisible Codes for Quantum Computation",
+    "id": "ae535372077f0d7e31967780398941dc34cd0f30",
+    "doi": null,
+    "externalIds": {
+      "DBLP": "journals/corr/abs-2204-13176",
+      "ArXiv": "2204.13176",
+      "DOI": "10.48550/arXiv.2204.13176",
+      "CorpusId": 248427126
+    },
+    "abstract_available": true,
+    "matches": [
+      "Divisib",
+      "diagonal",
+      "divisib",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "haah",
+    "service": "semantic-scholar",
+    "title": "Classical Coding Approaches to Quantum Applications",
+    "id": "9bdb80a1163e1d1ecc84f8aa3f3610a6224200ad",
+    "doi": null,
+    "externalIds": {
+      "DBLP": "journals/corr/abs-2004-06834",
+      "ArXiv": "2004.06834",
+      "MAG": "3016934057",
+      "CorpusId": 215768841
+    },
+    "abstract_available": true,
+    "matches": [
+      "Diagonal",
+      "diagonal",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Codes and Protocols for Distilling T , controlled- S , and Toffoli Gates",
+    "id": "https://openalex.org/W2755575243",
+    "doi": "https://doi.org/10.22331/q-2018-06-07-71",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "transversal",
+      "triorthogon"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Pseudomagic Quantum States",
+    "id": "https://openalex.org/W4399510749",
+    "doi": "https://doi.org/10.1103/physrevlett.132.210602",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Bell Sampling from Quantum Circuits",
+    "id": "https://openalex.org/W4400413075",
+    "doi": "https://doi.org/10.1103/physrevlett.133.020601",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Unifying Gate Synthesis and Magic State Distillation",
+    "id": "https://openalex.org/W2410139980",
+    "doi": "https://doi.org/10.1103/physrevlett.118.060501",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Synthesis",
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Qutrit and ququint magic states",
+    "id": "https://openalex.org/W3012122828",
+    "doi": "https://doi.org/10.1103/physreva.102.042409",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "qudit",
+      "ququint",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Constraints on magic state protocols from the statistical mechanics of Wigner negativity",
+    "id": "https://openalex.org/W3175949765",
+    "doi": "https://doi.org/10.1038/s41534-022-00551-1",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "On Groups in the Qubit Clifford Hierarchy",
+    "id": "https://openalex.org/W4399624967",
+    "doi": "https://doi.org/10.22331/q-2024-06-13-1370",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Implementing fault-tolerant non-Clifford gates using the [[8,3,2]] color code",
+    "id": "https://openalex.org/W4400115560",
+    "doi": "https://doi.org/10.1103/physreva.109.062438",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Magic state distillation and cost analysis in fault-tolerant universal quantum computation",
+    "id": "https://openalex.org/W4384023812",
+    "doi": "https://doi.org/10.1088/2058-9565/ace6ca",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Code switching revisited: Low-overhead magic state preparation using color codes",
+    "id": "https://openalex.org/W4409731313",
+    "doi": "https://doi.org/10.1103/physrevresearch.7.023080",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "A universal circuit set using the S3 quantum double",
+    "id": "https://openalex.org/W4411976869",
+    "doi": "https://doi.org/10.1038/s41534-025-01063-4",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Error rates and resource overheads of encoded three-qubit gates",
+    "id": "https://openalex.org/W2728133773",
+    "doi": "https://doi.org/10.1103/physreva.96.042302",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "nonlocal magic",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Classical Coding Problem from Transversal T Gates",
+    "id": "https://openalex.org/W2999161308",
+    "doi": "https://doi.org/10.1109/isit44484.2020.9174408",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Transversal",
+      "transversal",
+      "triorthogon"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Geometric Structure and Transversal Logic of Quantum Reed\u2013Muller Codes",
+    "id": "https://openalex.org/W4412718947",
+    "doi": "https://doi.org/10.1109/tit.2025.3592631",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Transversal",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Lower bounds on the non-Clifford resources for quantum computations",
+    "id": "https://openalex.org/W2934956484",
+    "doi": "https://doi.org/10.1088/2058-9565/ab8963",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Optimizing Quantum Circuit Synthesis with Dominator Analysis",
+    "id": "https://openalex.org/W4406014815",
+    "doi": "https://doi.org/10.1109/iccd63220.2024.00015",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Synthesis",
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Measurement-Free Code-Switching Protocol for Low-Overhead Quantum Computation Using Permutation-Invariant Codes",
+    "id": "https://openalex.org/W4416424346",
+    "doi": "https://doi.org/10.1103/p28m-hb6x",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Invariant",
+      "Transversal",
+      "invariant",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Efficient Simulation of Logical Magic State Preparation Protocols",
+    "id": "https://openalex.org/W7140659639",
+    "doi": "https://doi.org/10.1103/fby6-xjbm",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Optimal two-qubit circuits for universal fault-tolerant quantum computation",
+    "id": "https://openalex.org/W2998793783",
+    "doi": "https://doi.org/10.1038/s41534-021-00424-z",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Co-design of CSS Codes and Diagonal Gates",
+    "id": "https://openalex.org/W4289713249",
+    "doi": "https://doi.org/10.1109/isit50566.2022.9834511",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Diagonal",
+      "diagonal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Scalable Spider Nests (...Or How to Graphically Grok Transversal Non-Clifford Gates)",
+    "id": "https://openalex.org/W4394782127",
+    "doi": "https://doi.org/10.4204/eptcs.406.4",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Transversal",
+      "diagonal",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Morphing Quantum Codes",
+    "id": "https://openalex.org/W3217663389",
+    "doi": "https://doi.org/10.1103/prxquantum.3.030319",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "triorthogon"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Universal Quantum Computation via Scalable Measurement-Free Error Correction",
+    "id": "https://openalex.org/W4405655747",
+    "doi": "https://doi.org/10.1103/lkk1-v6wp",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "openalex",
+    "title": "Transversal AND in Quantum Codes",
+    "id": "https://openalex.org/W7168814723",
+    "doi": "https://doi.org/10.1007/978-3-032-30839-9_1",
+    "externalIds": null,
+    "abstract_available": false,
+    "matches": [
+      "Transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "semantic-scholar",
+    "title": "Genuine Multipartite Entanglement between Logical Qubits via Cross-Code Lattice Surgery",
+    "id": "ce61611e17f0cfff2ec6b38759f9006ced91d4f5",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2607.04227",
+      "CorpusId": 289934627
+    },
+    "abstract_available": true,
+    "matches": [
+      "Multipartite",
+      "multipartite",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "semantic-scholar",
+    "title": "Exploring the landscape of compact magic-state distillation factories",
+    "id": "484d033645a2cbd7522cc269ca60d5eb331b42d9",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2606.07734",
+      "CorpusId": 289031564
+    },
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "triorthogon"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "semantic-scholar",
+    "title": "Multi-Qubit Dyadic Phase Fixing for Fault-Tolerant Quantum Compilation",
+    "id": "c1553b82b8a16c26690f44e2ef288186f47ad43a",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2606.05397",
+      "CorpusId": 288977024
+    },
+    "abstract_available": true,
+    "matches": [
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "semantic-scholar",
+    "title": "Optimal Approximation of Single Qubit Rotations within a Quantum Circuit",
+    "id": "b0ce54acab841e9019b68689aad615cc515efbad",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2605.09671",
+      "CorpusId": 288260088
+    },
+    "abstract_available": true,
+    "matches": [
+      "Diagonal",
+      "diagonal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "semantic-scholar",
+    "title": "Affine Equivalence in the Clifford Hierarchy",
+    "id": "574110522587ef67af1eac582833f428fbf7d843",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2507.14370",
+      "CorpusId": 280280842
+    },
+    "abstract_available": true,
+    "matches": [
+      "diagonal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "semantic-scholar",
+    "title": "Low-overhead Magic State Circuits with Transversal CNOTs",
+    "id": "146438f292040e1fd951071789ba279f35ac1021",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2501.10291",
+      "CorpusId": 275606447
+    },
+    "abstract_available": true,
+    "matches": [
+      "Transversal",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "semantic-scholar",
+    "title": "Transpiler-Architecture Co-Design to Curb Clifford Costs in Fault-Tolerant Quantum Computing",
+    "id": "0dba86fa2e8c41c4290c09a47b12daefd2a56a40",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2412.15434",
+      "DBLP": "conf/isca/WangLSDDNL26",
+      "DOI": "10.1109/ISCA66397.2026.00072",
+      "CorpusId": 274965547
+    },
+    "abstract_available": true,
+    "matches": [
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "semantic-scholar",
+    "title": "Techniques to Reduce (\u03c0/4)-Parity-Phase Circuits, Motivated by the ZX Calculus",
+    "id": "7d3a96f87692f7a535780834e7655864812af4e2",
+    "doi": null,
+    "externalIds": {
+      "DBLP": "journals/corr/abs-1911-09039",
+      "MAG": "2990563319",
+      "ArXiv": "1911.09039",
+      "DOI": "10.4204/EPTCS.318.9",
+      "CorpusId": 208175925
+    },
+    "abstract_available": true,
+    "matches": [
+      "diagonal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-howard",
+    "service": "semantic-scholar",
+    "title": "Two-qubit Stabilizer Circuits with Recovery I: Existence",
+    "id": "995f73273f3af22053bfe175779c638cb49b8ec9",
+    "doi": null,
+    "externalIds": {
+      "MAG": "2962720890",
+      "ArXiv": "1803.06081",
+      "DBLP": "conf/tqc/DamW18",
+      "DOI": "10.4230/LIPIcs.TQC.2018.7",
+      "CorpusId": 51868603
+    },
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Ultracold polar molecules as qudits",
+    "id": "https://openalex.org/W2995051253",
+    "doi": "https://doi.org/10.1088/1367-2630/ab60f4",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Quantifying the magic of quantum channels",
+    "id": "https://openalex.org/W2921011193",
+    "doi": "https://doi.org/10.1088/1367-2630/ab451d",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Experimental High-Dimensional Greenberger-Horne-Zeilinger Entanglement with Superconducting Transmon Qutrits",
+    "id": "https://openalex.org/W3154264864",
+    "doi": "https://doi.org/10.1103/physrevapplied.17.024062",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Multipartite",
+      "Qutrit",
+      "multipartite",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Lower Bound for the T Count Via Unitary Stabilizer Nullity",
+    "id": "https://openalex.org/W4330335310",
+    "doi": "https://doi.org/10.1103/physrevapplied.19.034052",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Quantum-Fourier-transform-based quantum arithmetic with qudits",
+    "id": "https://openalex.org/W2740800173",
+    "doi": "https://doi.org/10.1103/physreva.103.032417",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "The 2 T -qutrit, a two-mode bosonic qutrit",
+    "id": "https://openalex.org/W4379469029",
+    "doi": "https://doi.org/10.22331/q-2023-06-05-1032",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Microwave-driven i swap-like gate for fixed-frequency superconducting transmon qutrits",
+    "id": "https://openalex.org/W4387047732",
+    "doi": "https://doi.org/10.1103/physreva.108.032615",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Quantum state engineering in three-level systems via Lewis-Riesenfeld invariants",
+    "id": "https://openalex.org/W4406696515",
+    "doi": "https://doi.org/10.1103/physreva.111.012623",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "The qudit Pauli group: non-commuting pairs, non-commuting sets, and structure theorems",
+    "id": "https://openalex.org/W4393934095",
+    "doi": "https://doi.org/10.22331/q-2024-04-04-1307",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Deriving T-gates from cubic phase gates via GKP encoding",
+    "id": "https://openalex.org/W4408823639",
+    "doi": "https://doi.org/10.1088/1572-9494/adc54c",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "cubic",
+      "mutually unbiased",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Certifying dimension of quantum systems by sequential projective measurements",
+    "id": "https://openalex.org/W3127147744",
+    "doi": "https://doi.org/10.22331/q-2021-06-10-472",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Counting stabiliser codes for arbitrary dimension",
+    "id": "https://openalex.org/W4383341652",
+    "doi": "https://doi.org/10.22331/q-2023-07-06-1048",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Scaling W State Circuits in the qudit Clifford Hierarchy",
+    "id": "https://openalex.org/W4386631134",
+    "doi": "https://doi.org/10.1145/3594671.3594687",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Binary Triorthogonal and CSS-T Codes for Quantum Error Correction",
+    "id": "https://openalex.org/W4404037844",
+    "doi": "https://doi.org/10.1109/allerton63246.2024.10735332",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Triorthogon",
+      "triorthogon"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Asymptotically Good Quantum Codes with Transversal Non-Clifford Gates",
+    "id": "https://openalex.org/W4411319822",
+    "doi": "https://doi.org/10.1145/3717823.3718234",
+    "externalIds": null,
+    "abstract_available": false,
+    "matches": [
+      "Transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Quantum LDPC Codes with Transversal Non-Clifford Gates via Products of Algebraic Codes",
+    "id": "https://openalex.org/W4411320031",
+    "doi": "https://doi.org/10.1145/3717823.3718139",
+    "externalIds": null,
+    "abstract_available": false,
+    "matches": [
+      "Transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Low Overhead Qutrit Magic State Distillation",
+    "id": "https://openalex.org/W4392737325",
+    "doi": "https://doi.org/10.22331/q-2025-06-12-1768",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "qutrit",
+      "triorthogon"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "The Clifford hierarchy for one qubit or qudit",
+    "id": "https://openalex.org/W4415379643",
+    "doi": "https://doi.org/10.1098/rspa.2025.0035",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Quantum circuit optimization for arbitrary high-dimensional bipartite quantum computation",
+    "id": "https://openalex.org/W7140108426",
+    "doi": "https://doi.org/10.1088/1367-2630/ae55be",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Synthesis Techniques for Fault-tolerant Quantum Circuit Implementation using Clifford+ Z N -group",
+    "id": "https://openalex.org/W4399677281",
+    "doi": "https://doi.org/10.1145/3673240",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Synthesis",
+      "synthesis",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Dynamic decoupling for multi-level systems",
+    "id": "https://openalex.org/W4352994433",
+    "doi": "https://doi.org/10.7498/aps.72.20222398",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Characterization of control in a superconducting qutrit using randomized benchmarking",
+    "id": "https://openalex.org/W3083934153",
+    "doi": "https://doi.org/10.1103/physrevresearch.3.l042007",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Characterization of Multilevel Dynamics and Decoherence in a High-Anharmonicity Capacitively Shunted Flux Circuit",
+    "id": "https://openalex.org/W3046909204",
+    "doi": "https://doi.org/10.1103/physrevapplied.16.054051",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Experimental approach to demonstrating contextuality for qudits",
+    "id": "https://openalex.org/W3093839736",
+    "doi": "https://doi.org/10.1103/physreva.103.062220",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Composability of global phase invariant distance and its application to approximation error management",
+    "id": "https://openalex.org/W3167778728",
+    "doi": "https://doi.org/10.1088/2399-6528/ac3a43",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Implementation of a Walsh-Hadamard Gate in a Superconducting Qutrit",
+    "id": "https://openalex.org/W2923384172",
+    "doi": "https://doi.org/10.1103/physrevlett.125.180504",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "diagonal",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Constructions of binary Quantum CSS-T codes from some special functions",
+    "id": "https://openalex.org/W4417023073",
+    "doi": "https://doi.org/10.3934/amc.2026003",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Scalable platform for qudit-based quantum computing using polar molecules",
+    "id": "https://openalex.org/W7133206131",
+    "doi": "https://doi.org/10.1103/tcqw-ll6v",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Magic Tricycles: Efficient Magic-State Generation with Finite Block-Length Quantum LDPC Codes",
+    "id": "https://openalex.org/W7133301739",
+    "doi": "https://doi.org/10.1103/ghhp-cytl",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "openalex",
+    "title": "Asymptotically good CSS codes that realize the logical transversal Clifford group fault-tolerantly",
+    "id": "https://openalex.org/W7204154341",
+    "doi": "https://doi.org/10.1109/isit62367.2026.11653742",
+    "externalIds": null,
+    "abstract_available": false,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "semantic-scholar",
+    "title": "Quantum group codes for non-Clifford logic: enhanced decoding, addressability and parallelizability",
+    "id": "abcc4bde93d28004d5fce1db2a3f2acddb60d0c9",
+    "doi": null,
+    "externalIds": {
+      "DBLP": "journals/corr/abs-2606-27211",
+      "ArXiv": "2606.27211",
+      "DOI": "10.48550/arXiv.2606.27211",
+      "CorpusId": 289631306
+    },
+    "abstract_available": true,
+    "matches": [
+      "cubic",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "semantic-scholar",
+    "title": "Quantum Codes with Transversal CCZ Gates and Sublinear Z-Stabilizers",
+    "id": "7ffd98ab46ece5d5da64681e59da34fe8a11c3b5",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2606.22472",
+      "DBLP": "journals/corr/abs-2606-22472",
+      "DOI": "10.48550/arXiv.2606.22472",
+      "CorpusId": 289626724
+    },
+    "abstract_available": true,
+    "matches": [
+      "Transversal",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "semantic-scholar",
+    "title": "Magic state distillation with permutation-invariant codes and a two-qubit example",
+    "id": "09b6574c75ca385112094b516a92e55ac820ea5c",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2603.04310",
+      "CorpusId": 286238816
+    },
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "semantic-scholar",
+    "title": "Fast magic state preparation by gauging higher-form transversal gates in parallel",
+    "id": "a54ff6f9955a06af858aeb66af560c96a9425155",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2601.22939",
+      "CorpusId": 285240989
+    },
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "semantic-scholar",
+    "title": "Magic State Distillation using Asymptotically Good Codes on Qudits",
+    "id": "f4c34c972aed483101767395a69ab08a7d16841e",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2512.21874",
+      "CorpusId": 284275913
+    },
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit",
+      "transversal",
+      "triorthogon"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "semantic-scholar",
+    "title": "Good quantum codes with addressable and parallelizable transversal non-Clifford gates",
+    "id": "3fe2b816b54e666ae9f4f11556d5ac4a9acda645",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2510.19809",
+      "CorpusId": 283721931
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "semantic-scholar",
+    "title": "Sublogarithmic Distillation in all Prime Dimensions using Punctured Reed-Muller Codes",
+    "id": "999a9badd4a5d8b1e7fd9e3cbe28cd43b36278b1",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2510.10852",
+      "CorpusId": 282057589
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "triorthogon"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "semantic-scholar",
+    "title": "Near-Asymptotically-Good Quantum Codes with Transversal CCZ Gates and Sublinear-Weight Parity-Checks",
+    "id": "3e49b6581164ec96ebb5008fec7634b73dc2b2ba",
+    "doi": null,
+    "externalIds": {
+      "DBLP": "journals/corr/abs-2510-06798",
+      "ArXiv": "2510.06798",
+      "DOI": "10.1109/FOCS63196.2025.00082",
+      "CorpusId": 281891767
+    },
+    "abstract_available": true,
+    "matches": [
+      "Transversal",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "semantic-scholar",
+    "title": "Error stabilized logical qubits in qudit generalizations of the monitored Kitaev model",
+    "id": "a3a03a0cad4bb77c1f7028dfff76a5f443281308",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2509.16758",
+      "CorpusId": 281420273
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "semantic-scholar",
+    "title": "No-go theorems for logical gates on product quantum codes",
+    "id": "ff151abc57991450ea0f687b713ac520e29cb3aa",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2507.16797",
+      "CorpusId": 280165809
+    },
+    "abstract_available": true,
+    "matches": [
+      "hypergraph",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "semantic-scholar",
+    "title": "A short review on qudit quantum machine learning",
+    "id": "3e6e194d87ffc676f4e835a9274234d21f567a5e",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2505.05158",
+      "CorpusId": 278394575
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "semantic-scholar",
+    "title": "Magic teleportation with generalized lattice surgery",
+    "id": "f6d826bfc1ac762b337b569f0e9a9e7b9e16facb",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2503.19758",
+      "CorpusId": 277313533
+    },
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "semantic-scholar",
+    "title": "Quantum Fault Tolerance with Constant-Space and Logarithmic-Time Overheads",
+    "id": "af38cc1c38c215d353ec6fd5b607d90ac294983c",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2411.03632",
+      "DBLP": "journals/corr/abs-2411-03632",
+      "DOI": "10.1145/3717823.3718318",
+      "CorpusId": 273850180
+    },
+    "abstract_available": true,
+    "matches": [
+      "cubic",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "semantic-scholar",
+    "title": "Constant-overhead magic state distillation",
+    "id": "794ffb5eb6747bc0e7c612691ad4f373e1c33a36",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2408.07764",
+      "DOI": "10.1038/s41567-025-03026-0",
+      "CorpusId": 271874587
+    },
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "semantic-scholar",
+    "title": "A Search for High-Threshold Qutrit Magic State Distillation Routines",
+    "id": "7a5dd23e4a6729781ff6f478701e7565d6edf139",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2408.00436",
+      "DBLP": "journals/corr/abs-2408-00436",
+      "DOI": "10.1103/61q5-f754",
+      "CorpusId": 271600846
+    },
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "cubic",
+      "qudit",
+      "qutrit",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "krishna-tillich",
+    "service": "semantic-scholar",
+    "title": "Lower Bound for the \n<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\" overflow=\"scroll\"><mml:mi>T</mml:mi></mml:math>\n Count Via Unitary Stabilizer Nullity",
+    "id": "ceb24acbb5bed71913d0e1e754af10e0c29adb2d",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2103.09999",
+      "DOI": "10.1103/PhysRevApplied.19.034052",
+      "CorpusId": 232269590
+    },
+    "abstract_available": true,
+    "matches": [
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "prakash-saha",
+    "service": "openalex",
+    "title": "Synthesis and Arithmetic of Single Qutrit Circuits",
+    "id": "https://openalex.org/W4407957950",
+    "doi": "https://doi.org/10.22331/q-2025-02-26-1647",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "Synthesis",
+      "qudit",
+      "qutrit",
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "prakash-saha",
+    "service": "semantic-scholar",
+    "title": "High-threshold magic state distillation with quantum quadratic residue codes",
+    "id": "1e027198757dabf1ba49f59392f141ef14e28405",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2603.18560",
+      "CorpusId": 286670010
+    },
+    "abstract_available": true,
+    "matches": [
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "prakash-saha",
+    "service": "semantic-scholar",
+    "title": "Sparse Phase Ansatzes for Resource-Efficient Qudit State Preparation via the SNAP-Displacement Protocol",
+    "id": "f331fac340c27b12ee05d024ecff321afa0928e8",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2603.12203",
+      "CorpusId": 286493205
+    },
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "prakash-saha",
+    "service": "semantic-scholar",
+    "title": "Quantum Universality in Composite Systems: A Trichotomy of Clifford Resources",
+    "id": "aec835fe1e24e05d230a517c4aa3b4c9b57ea3c8",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2512.20787",
+      "CorpusId": 284153871
+    },
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "prakash-saha",
+    "service": "semantic-scholar",
+    "title": "Buildings for Synthesis with Clifford+R",
+    "id": "b552e70c8950ddd4b54f680b74ba3dc1284ed7fc",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2510.11526",
+      "CorpusId": 282056663
+    },
+    "abstract_available": true,
+    "matches": [
+      "Synthesis",
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "prakash-saha",
+    "service": "semantic-scholar",
+    "title": "A Complete and Natural Rule Set for Multi-Qutrit Clifford Circuits",
+    "id": "45c904ac70ccef45650f0b61982c4bdb5838ce75",
+    "doi": null,
+    "externalIds": {
+      "DBLP": "journals/corr/abs-2508-14670",
+      "ArXiv": "2508.14670",
+      "DOI": "10.4204/EPTCS.426.2",
+      "CorpusId": 280691919
+    },
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "prakash-saha",
+    "service": "semantic-scholar",
+    "title": "Invariant Theory, Magic State Distillation, and Bounds on Classical Codes",
+    "id": "92c4c3723c3e9746b02fad020beaf89a46f6d550",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2501.10163",
+      "CorpusId": 275606832
+    },
+    "abstract_available": true,
+    "matches": [
+      "Invariant",
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Qudits and High-Dimensional Quantum Computing",
+    "id": "https://openalex.org/W3046716817",
+    "doi": "https://doi.org/10.3389/fphy.2020.589504",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "A universal qudit quantum processor with trapped ions",
+    "id": "https://openalex.org/W3201545989",
+    "doi": "https://doi.org/10.1038/s41567-022-01658-0",
+    "externalIds": null,
+    "abstract_available": false,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Quantum Information Scrambling on a Superconducting Qutrit Processor",
+    "id": "https://openalex.org/W3009952673",
+    "doi": "https://doi.org/10.1103/physrevx.11.021010",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Enhanced Fault-Tolerant Quantum Computing in d -Level Systems",
+    "id": "https://openalex.org/W1973237732",
+    "doi": "https://doi.org/10.1103/physrevlett.113.230501",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Qutrit Randomized Benchmarking",
+    "id": "https://openalex.org/W3080935772",
+    "doi": "https://doi.org/10.1103/physrevlett.126.210504",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Multilevel distillation of magic states for quantum computing",
+    "id": "https://openalex.org/W2044066793",
+    "doi": "https://doi.org/10.1103/physreva.87.042305",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Factoring with qutrits: Shor's algorithm on ternary and metaplectic quantum architectures",
+    "id": "https://openalex.org/W2375200430",
+    "doi": "https://doi.org/10.1103/physreva.96.012306",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Quantifying nonstabilizerness of matrix product states",
+    "id": "https://openalex.org/W4293114468",
+    "doi": "https://doi.org/10.1103/physrevb.107.035148",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant",
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Practical trapped-ion protocols for universal qudit-based quantum computing",
+    "id": "https://openalex.org/W2964110774",
+    "doi": "https://doi.org/10.1103/physrevresearch.2.033128",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Experimental Engineering of Arbitrary Qudit States with Discrete-Time Quantum Walks",
+    "id": "https://openalex.org/W2952638737",
+    "doi": "https://doi.org/10.1103/physrevlett.122.020503",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Unified framework for magic state distillation and multiqubit gate synthesis with reduced resource cost",
+    "id": "https://openalex.org/W2410653068",
+    "doi": "https://doi.org/10.1103/physreva.95.022316",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "synthesis",
+      "synthillation"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Robust and Efficient High-Dimensional Quantum State Tomography",
+    "id": "https://openalex.org/W3090053884",
+    "doi": "https://doi.org/10.1103/physrevlett.126.100402",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "ququint",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Fast fault-tolerant decoder for qubit and qudit surface codes",
+    "id": "https://openalex.org/W1695111371",
+    "doi": "https://doi.org/10.1103/physreva.92.032309",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Experimental Realization of Two Qutrits Gate with Tunable Coupling in Superconducting Circuits",
+    "id": "https://openalex.org/W4317543109",
+    "doi": "https://doi.org/10.1103/physrevlett.130.030603",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Two-Qutrit Quantum Algorithms on a Programmable Superconducting Processor",
+    "id": "https://openalex.org/W4379654531",
+    "doi": "https://doi.org/10.1103/physrevapplied.19.064024",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Qudit Entanglers Using Quantum Optimal Control",
+    "id": "https://openalex.org/W4389135169",
+    "doi": "https://doi.org/10.1103/prxquantum.4.040333",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Qudit Dynamical Decoupling on a Superconducting Quantum Processor",
+    "id": "https://openalex.org/W4407132932",
+    "doi": "https://doi.org/10.1103/physrevlett.134.050601",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Fast decoders for qudit topological codes",
+    "id": "https://openalex.org/W2102532141",
+    "doi": "https://doi.org/10.1088/1367-2630/16/6/063038",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Quantum computing with parafermions",
+    "id": "https://openalex.org/W2323298496",
+    "doi": "https://doi.org/10.1103/physrevb.93.125105",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Towards Low Overhead Magic State Distillation",
+    "id": "https://openalex.org/W2900580483",
+    "doi": "https://doi.org/10.1103/physrevlett.123.070507",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Transversal Clifford gates on folded surface codes",
+    "id": "https://openalex.org/W2295938918",
+    "doi": "https://doi.org/10.1103/physreva.94.042316",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Transversal",
+      "qudit",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Qudit color codes and gauge color codes in all spatial dimensions",
+    "id": "https://openalex.org/W1834306174",
+    "doi": "https://doi.org/10.1103/physreva.92.022312",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit",
+      "transversal",
+      "triorthogon"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Qutrit Magic State Distillation Tight in Some Directions",
+    "id": "https://openalex.org/W1953924046",
+    "doi": "https://doi.org/10.1103/physrevlett.115.030501",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Error thresholds for Abelian quantum double models: Increasing the bit-flip stability of topological quantum memory",
+    "id": "https://openalex.org/W2031084331",
+    "doi": "https://doi.org/10.1103/physreva.91.042331",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Normal form for single-qutrit Clifford+ T operators and synthesis of single-qutrit gates",
+    "id": "https://openalex.org/W2887228844",
+    "doi": "https://doi.org/10.1103/physreva.98.032304",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qutrit",
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "An efficient magic state approach to small angle rotations",
+    "id": "https://openalex.org/W2301476117",
+    "doi": "https://doi.org/10.1088/2058-9565/1/1/015007",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Improved HDRG decoders for qudit and non-Abelian quantum error correction",
+    "id": "https://openalex.org/W2064875352",
+    "doi": "https://doi.org/10.1088/1367-2630/17/3/035017",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Maximum nonlocality and minimum uncertainty using magic states",
+    "id": "https://openalex.org/W2007155307",
+    "doi": "https://doi.org/10.1103/physreva.91.042103",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "mutually unbiased",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Entanglement distance for arbitrary M -qudit hybrid systems",
+    "id": "https://openalex.org/W2966642380",
+    "doi": "https://doi.org/10.1103/physreva.101.042129",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Optimality of T-gate for generating magic resource",
+    "id": "https://openalex.org/W4313366846",
+    "doi": "https://doi.org/10.1088/1572-9494/acaf28",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Preserving multilevel quantum coherence by dynamical decoupling",
+    "id": "https://openalex.org/W4221159109",
+    "doi": "https://doi.org/10.1103/physreva.106.022412",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Efficient Control of a Transmon Qudit Using Effective Spin- 7 / 2 Rotations",
+    "id": "https://openalex.org/W4410288692",
+    "doi": "https://doi.org/10.1103/vbh4-lysv",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Qudit Shadow Estimation Based on the Clifford Group and the Power of a Single Magic Gate",
+    "id": "https://openalex.org/W4409643501",
+    "doi": "https://doi.org/10.1103/physrevlett.134.160801",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Classical simulability of Clifford + T circuits with Clifford-augmented matrix product states",
+    "id": "https://openalex.org/W4405767530",
+    "doi": "https://doi.org/10.1103/ybnf-rjw8",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Qudit vs. qubit: Simulated performance of error-correction codes in higher dimensions",
+    "id": "https://openalex.org/W4414494535",
+    "doi": "https://doi.org/10.1103/2w52-qd2j",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Qudit-based quantum error-correcting codes from irreducible representations of SU( d )",
+    "id": "https://openalex.org/W4414723992",
+    "doi": "https://doi.org/10.1103/6z3t-96t9",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Quantum information processing by weaving quantum Talbot carpets",
+    "id": "https://openalex.org/W2109632467",
+    "doi": "https://doi.org/10.1103/physreva.91.062328",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "quDit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Randomized benchmarking for qudit Clifford gates",
+    "id": "https://openalex.org/W2989593155",
+    "doi": "https://doi.org/10.1088/1367-2630/ab8ab1",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Order 3 symmetry in the Clifford hierarchy",
+    "id": "https://openalex.org/W2151462437",
+    "doi": "https://doi.org/10.1088/1751-8113/47/45/455302",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Alltop",
+      "mutually unbiased"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Realizing nonadiabatic holonomic quantum computation beyond the three-level setting",
+    "id": "https://openalex.org/W3129092195",
+    "doi": "https://doi.org/10.1103/physreva.103.052605",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Towers of generalized divisible quantum codes",
+    "id": "https://openalex.org/W2760602975",
+    "doi": "https://doi.org/10.1103/physreva.97.042327",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "divisib",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Approximate stabilizer rank and improved weak simulation of Clifford-dominated circuits for qudits",
+    "id": "https://openalex.org/W2885106418",
+    "doi": "https://doi.org/10.1103/physreva.99.052307",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Protecting operations on qudits from noise by continuous dynamical decoupling",
+    "id": "https://openalex.org/W2995678717",
+    "doi": "https://doi.org/10.1103/physrevresearch.3.013235",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Qutrit circuits and algebraic relations: A pathway to efficient spin-1 Hamiltonian simulation",
+    "id": "https://openalex.org/W4386495919",
+    "doi": "https://doi.org/10.1103/physreva.109.012426",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Entangling power of symmetric two-qubit quantum gates and three-level operations",
+    "id": "https://openalex.org/W4206579551",
+    "doi": "https://doi.org/10.1103/physreva.105.012601",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Quantum correlations and coherence in a mixed spin- ( 1 2 , 1 ) Heisenberg dimer under intrinsic decoherence",
+    "id": "https://openalex.org/W4391357293",
+    "doi": "https://doi.org/10.1088/1402-4896/ad203f",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Pauli-based model of quantum computation with higher-dimensional systems",
+    "id": "https://openalex.org/W4386724119",
+    "doi": "https://doi.org/10.1103/physreva.108.032606",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "ququint",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Randomised benchmarking for universal qudit gates",
+    "id": "https://openalex.org/W4400710856",
+    "doi": "https://doi.org/10.1088/1367-2630/ad6635",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Building Qutrit Diagonal Gates from Phase Gadgets",
+    "id": "https://openalex.org/W4388667237",
+    "doi": "https://doi.org/10.4204/eptcs.394.4",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Diagonal",
+      "Qutrit",
+      "diagonal",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Exact Synthesis of Multiqutrit Clifford-Cyclotomic Circuits",
+    "id": "https://openalex.org/W4396945312",
+    "doi": "https://doi.org/10.4204/eptcs.406.2",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Synthesis",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Universality of Z3 parafermions via edge-mode interaction and quantum simulation of topological space evolution with Rydberg atoms",
+    "id": "https://openalex.org/W3211487820",
+    "doi": "https://doi.org/10.1103/physrevresearch.5.023076",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Finite-Function-Encoding Quantum States",
+    "id": "https://openalex.org/W3108855249",
+    "doi": "https://doi.org/10.22331/q-2022-05-09-708",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "hypergraph",
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Robust control and entanglement of qudits in neutral atom arrays",
+    "id": "https://openalex.org/W4417176007",
+    "doi": "https://doi.org/10.1103/4xcd-wyxx",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Nonuniform code concatenation for universal fault-tolerant quantum computing",
+    "id": "https://openalex.org/W2399822591",
+    "doi": "https://doi.org/10.1103/physreva.96.032337",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Universal quantum computing with parafermions assisted by a half-fluxon",
+    "id": "https://openalex.org/W2728015739",
+    "doi": "https://doi.org/10.1103/physrevb.100.144508",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "States that are far from being stabilizer states",
+    "id": "https://openalex.org/W1581964053",
+    "doi": "https://doi.org/10.1088/1751-8113/48/34/345301",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Alltop"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Local-dimension-invariant qudit stabilizer codes",
+    "id": "https://openalex.org/W3007136529",
+    "doi": "https://doi.org/10.1103/physreva.101.052343",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Contextual bound states for qudit magic state distillation",
+    "id": "https://openalex.org/W2996799192",
+    "doi": "https://doi.org/10.1103/physreva.101.010303",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Classical simulation of quantum circuits using fewer Gaussian eliminations",
+    "id": "https://openalex.org/W3009432091",
+    "doi": "https://doi.org/10.1103/physreva.103.022603",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Broadcasting of quantum correlations in qubit-qudit systems",
+    "id": "https://openalex.org/W2943249164",
+    "doi": "https://doi.org/10.1103/physreva.100.042319",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Quantum circuit model for discrete-time three-state quantum walks on Cayley graphs",
+    "id": "https://openalex.org/W4400913666",
+    "doi": "https://doi.org/10.1103/physreva.110.012617",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Qudit low-density parity-check codes",
+    "id": "https://openalex.org/W4415315324",
+    "doi": "https://doi.org/10.22331/q-2026-03-13-2023",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "hypergraph",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Ancilla-driven quantum computation for qudits and continuous variables",
+    "id": "https://openalex.org/W2592023879",
+    "doi": "https://doi.org/10.1103/physreva.95.052317",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Time-dependent Rabi frequencies to protect quantum operations on an atomic qutrit by continuous dynamical decoupling",
+    "id": "https://openalex.org/W4313574940",
+    "doi": "https://doi.org/10.1103/physreva.109.032611",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Fast exact synthesis of two-qubit unitaries using a near-minimum number of T gates",
+    "id": "https://openalex.org/W4366265023",
+    "doi": "https://doi.org/10.1103/physreva.107.042424",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Stationary Phase Method in Discrete Wigner Functions and Classical Simulation of Quantum Circuits",
+    "id": "https://openalex.org/W2896548375",
+    "doi": "https://doi.org/10.22331/q-2021-07-05-494",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Entanglement transfer, accumulation and retrieval via quantum-walk-based qubit\u2013qudit dynamics",
+    "id": "https://openalex.org/W3092722679",
+    "doi": "https://doi.org/10.1088/1367-2630/abdbe1",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Realization of the iSWAP-like gate among the superconducting qutrits",
+    "id": "https://openalex.org/W4292179581",
+    "doi": "https://doi.org/10.1088/1674-1056/ac89e7",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Fault-tolerantly implementing dense rotation operations based on non-stabilizer states",
+    "id": "https://openalex.org/W3116298077",
+    "doi": "https://doi.org/10.7498/aps.63.220304",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Constructing All Qutrit Controlled Clifford+T gates in Clifford+T",
+    "id": "https://openalex.org/W4224903690",
+    "doi": "https://doi.org/10.1007/978-3-031-09005-9_3",
+    "externalIds": null,
+    "abstract_available": false,
+    "matches": [
+      "Qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Quantum multigraph states and multihypergraph states",
+    "id": "https://openalex.org/W4399391239",
+    "doi": "https://doi.org/10.1103/physreva.109.062407",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "hypergraph",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "A Qutrit $[\\![ 6,2,2 ]\\!]_{3}$ Quantum Error-Correcting Code with a Transversal Binary AND Gate",
+    "id": "https://openalex.org/W4416875376",
+    "doi": "https://doi.org/10.1109/qce65121.2025.10440",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "Transversal",
+      "qudit",
+      "qutrit",
+      "synthesis",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Synthesis of single-qutrit circuits from Clifford + R gates",
+    "id": "https://openalex.org/W4417182928",
+    "doi": "https://doi.org/10.1103/98q1-3yv8",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Synthesis",
+      "qutrit",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Demonstration of magic state power of D ( S 3 ) anyons with two qudits",
+    "id": "https://openalex.org/W7147446550",
+    "doi": "https://doi.org/10.1088/1367-2630/ae4aca",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Classical simulability of <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"> <mml:mrow> <mml:mi>Clifford</mml:mi> <mml:mo>+</mml:mo> </mml:mrow> <mml:mrow> <mml:mi>T</mml:mi> </mml:mrow> </mml:math> circuits with Clifford-augmented matrix product states",
+    "id": "https://openalex.org/W7154837363",
+    "doi": "https://doi.org/10.1103/ybnf-rjw8",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Composite-dimensional topological codes with boundaries and defects",
+    "id": "https://openalex.org/W7165522961",
+    "doi": "https://doi.org/10.1103/qr5v-1rg6",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "openalex",
+    "title": "Operational Signatures of Non\u2010Markovian Memory: Entanglement Revivals and Multi\u2010Time Metrology in a Qubit Pseudomode Channel",
+    "id": "https://openalex.org/W7170646859",
+    "doi": "https://doi.org/10.1002/andp.70249",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "divisib",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Qudit W and Greenberger\u2013Horne\u2013Zeilinger states on a two-photon chip",
+    "id": "b3a918e95be1aaf26eea99c2318895ba1935a186",
+    "doi": null,
+    "externalIds": {
+      "PubMedCentral": "13443087",
+      "DOI": "10.1038/s41377-026-02285-7",
+      "CorpusId": 290839638,
+      "PubMed": "42557245"
+    },
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "multipartite",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Qutrit entanglement and joint multi-parameter estimation in an optical clock platform",
+    "id": "dd9a53482058c733b0eec1458c5a63151561515a",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2608.05426",
+      "CorpusId": 290852213
+    },
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "M\\\"obius-Guided Diagonal-Gate Compilation with Native Multiqubit Controlled-Phase Gates on Neutral-Atom Processors",
+    "id": "20d7c51de9a9f8f1247a36ab3b5ac0290f7f4c6e",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2607.08212",
+      "CorpusId": 290009625
+    },
+    "abstract_available": true,
+    "matches": [
+      "Diagonal",
+      "diagonal",
+      "hypergraph"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Stabilizer rank bounds for magic-state orbits",
+    "id": "e78dce27ea2f7068d41df6458b4e9fb55f4b8bd5",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2605.28586",
+      "CorpusId": 288702061
+    },
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Fraxonium: Fractional fluxon states for qudit encoding",
+    "id": "7ce0dc360417027cd295dc32f450a3a8622f4fdf",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2605.14586",
+      "CorpusId": 288254225
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Fault-tolerant resource comparison of qudit and qubit encodings for diagonal quadratic operators",
+    "id": "4fe5fd17e40bcbc16d594849a40819d41b8ebf7b",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2604.26792",
+      "DOI": "10.1103/832q-bqlx",
+      "CorpusId": 287902182
+    },
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "qudit",
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Magic and Non-Clifford Gates in Topological Quantum Field Theory",
+    "id": "1d10e8f72796fda8145a554d7db3332430b71fd7",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2604.14271",
+      "CorpusId": 287508847
+    },
+    "abstract_available": true,
+    "matches": [
+      "non-local magic"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Extreme non-negative Wigner functions",
+    "id": "b29fd9cba5ca8bd626c38c559e5d744e8ce9a10d",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2512.14831",
+      "CorpusId": 283920941
+    },
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Automorphism in gauge theories: Higher symmetries and transversal non-Clifford logical gates",
+    "id": "a75b283f564da4c9d296b2b98eae746632859e6b",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2511.15783",
+      "DOI": "10.21468/SciPostPhys.20.6.159",
+      "CorpusId": 283110087
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Beyond Qubits: Multilevel Quantum Sensing for Dark Matter",
+    "id": "1e0923bed5f3c29d7cfec543064e2b10ff825617",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2510.19918",
+      "CorpusId": 282304398
+    },
+    "abstract_available": true,
+    "matches": [
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Distributed Quantum Error Correction with Permutation-Invariant Approximate Codes",
+    "id": "adc262b9a94e21466feb8ca04e2ce4fe0a69b14f",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2509.25093",
+      "CorpusId": 281674161
+    },
+    "abstract_available": true,
+    "matches": [
+      "Invariant",
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Entanglement Swapping for Partially Entangled Qudits and the Role of Quantum Complementarity",
+    "id": "cbb04639d3e9672087cd848f3d08584cf2782498",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2508.00813",
+      "DOI": "10.1002/qute.202500674",
+      "CorpusId": 280417081
+    },
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "A fault-tolerant neutral-atom architecture for universal quantum computation",
+    "id": "110fd6109dd989f8f9e81abb40fcb0cddc76ea81",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2506.20661",
+      "PubMedCentral": "12727508",
+      "DOI": "10.1038/s41586-025-09848-5",
+      "CorpusId": 280299731,
+      "PubMed": "41214350"
+    },
+    "abstract_available": true,
+    "matches": [
+      "synthesis",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Orbit classification and analysis of qutrit graph states under local complementation and local scaling",
+    "id": "2252611b934c3758e291e744459408a6470f0dda",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2506.05478",
+      "CorpusId": 279243044
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "A Fully Device-Independent Ternary Quantum Key Distribution Protocol Based on the Impossible Colouring Game",
+    "id": "3709c4200c2d7e1a847115ab393faee7c07cf377",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2505.15599",
+      "CorpusId": 278782473
+    },
+    "abstract_available": true,
+    "matches": [
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Simulating non-Abelian statistics of parafermions with superconducting processor",
+    "id": "adf9f6e3d5ebd71985e5e9c2e4617190ab13bd60",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2502.20254",
+      "CorpusId": 276647888
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Groups of diagonal gates in the Clifford hierarchy",
+    "id": "4697e3b4411182d089e77168a062994eaa3c8a1d",
+    "doi": null,
+    "externalIds": {
+      "DOI": "10.1134/S0040577924120018",
+      "CorpusId": 275063281
+    },
+    "abstract_available": false,
+    "matches": [
+      "diagonal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Simple Construction of Qudit Floquet Codes on a Family of Lattices",
+    "id": "a1e88a29e918310424be5c28899e48976dcd8470",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2410.02022",
+      "CorpusId": 273098537
+    },
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Quantum error correction of qudits beyond break-even",
+    "id": "38c5620cf10ff1123a1ef7cbe0f3ddebdd4511db",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2409.15065",
+      "PubMedCentral": "12078179",
+      "DOI": "10.1038/s41586-025-08899-y",
+      "CorpusId": 272827730,
+      "PubMed": "40369140"
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Efficient universal qudit control using emulated spin rotations up to \n<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mml:mrow><mml:mi>d</mml:mi><mml:mo>=</mml:mo><mml:mn>8</mml:mn></mml:mrow></mml:math>",
+    "id": "d3063c70a731fe36c05bebda1ebb0caa1cf808fe",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2405.15857",
+      "DOI": "10.1103/vbh4-lysv",
+      "CorpusId": 270062975
+    },
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Characterising Semi-Clifford Gates Using Algebraic Sets",
+    "id": "05bb5f1a4c048a4a9a2c97d39d63999f75904a3b",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2309.15184",
+      "DOI": "10.1007/s00220-024-05050-2",
+      "CorpusId": 263152833
+    },
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Resource-efficient photonic quantum computation with high-dimensional cluster states",
+    "id": "4e27cce572a280dbe4bcd7fc6afaa729f5dd0b38",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2309.10464",
+      "DOI": "10.1038/s41566-024-01524-w",
+      "CorpusId": 262054070
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Control and readout of a 13-level trapped ion qudit",
+    "id": "d6322c6c8c3979dc8624374beb58aa126faf2f74",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2306.03340",
+      "DOI": "10.1038/s41534-025-01031-y",
+      "CorpusId": 259088888
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Extending the computational reach of a superconducting qutrit processor",
+    "id": "5552a409a63fe6a1ab6606dffe1efae69d3e0c9c",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2305.16507",
+      "DOI": "10.1038/s41534-024-00892-z",
+      "CorpusId": 258947396
+    },
+    "abstract_available": true,
+    "matches": [
+      "multipartite",
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Stabilizer entropies and nonstabilizerness monotones",
+    "id": "0fae6e28937ee1a9f439418b49d9cb425eeb3508",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2303.10152",
+      "DBLP": "journals/quantum/HaugP23",
+      "DOI": "10.22331/q-2023-08-28-1092",
+      "CorpusId": 257622628
+    },
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Noisy qudit vs multiple qubits: conditions on gate efficiency for enhancing fidelity",
+    "id": "11f3c4a887ab2504891497b60ad7b6a5e52803e1",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2302.04543",
+      "DOI": "10.1038/s41534-024-00829-6",
+      "CorpusId": 256697382
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Optimal diagonal qutrit gates for creating Wigner negativity",
+    "id": "813ac9ad93c7f4b1fa3c05a92685038ba8d71985",
+    "doi": null,
+    "externalIds": {
+      "DOI": "10.1016/j.physleta.2022.128620",
+      "CorpusId": 255701193
+    },
+    "abstract_available": false,
+    "matches": [
+      "diagonal",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Highly Efficient Storage of 25-Dimensional Photonic Qudit in a Cold-Atom-Based Quantum Memory.",
+    "id": "75dced409331fb26973dd58eff5589e5dcaad0f7",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2301.00999",
+      "DOI": "10.1103/physrevlett.131.240801",
+      "CorpusId": 255393690,
+      "PubMed": "38181137"
+    },
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "invariant",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "High-fidelity qutrit entangling gates for superconducting circuits",
+    "id": "4960eb5c4d080ea65fb9797d1ff204bed16f2660",
+    "doi": null,
+    "externalIds": {
+      "PubMedCentral": "9722686",
+      "ArXiv": "2206.07216",
+      "DOI": "10.1038/s41467-022-34851-z",
+      "CorpusId": 249674773,
+      "PubMed": "36470858"
+    },
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Native qudit entanglement in a trapped ion quantum processor",
+    "id": "3a538feaf085802f9e139dbfa01757605b65a8d2",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2206.04104",
+      "PubMedCentral": "10115791",
+      "DOI": "10.1038/s41467-023-37375-2",
+      "CorpusId": 249538497,
+      "PubMed": "37076475"
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Quantum computing hardware for HEP algorithms and sensing",
+    "id": "86cab11e34c0c3994ead1026250fffc354309df3",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2204.08605",
+      "CorpusId": 248239872
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Qutrit Metaplectic Gates Are a Subset of Clifford+T",
+    "id": "3dac96a61a32524d41459ca005ff152b80bbc8d3",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2202.09235",
+      "DBLP": "conf/tqc/GlaudellRWY22",
+      "DOI": "10.4230/LIPIcs.TQC.2022.12",
+      "CorpusId": 246996952
+    },
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Decoding techniques applied to the compilation of CNOT circuits for NISQ architectures",
+    "id": "9e6a6ddbc328dca3c75ed06c56e760eafb29c576",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2201.06457",
+      "DBLP": "journals/corr/abs-2201-06457",
+      "MAG": "3202298278",
+      "DOI": "10.1016/j.scico.2021.102726",
+      "CorpusId": 244216686
+    },
+    "abstract_available": true,
+    "matches": [
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Qudit surface codes and hypermap codes",
+    "id": "be2061aa5a8ab7c1f8b9998eb6b0d2cbf55ad2e2",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2112.01752",
+      "DBLP": "journals/qip/Lei23a",
+      "DOI": "10.1007/s11128-023-04060-8",
+      "CorpusId": 259950679
+    },
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "A normal form for single-qudit Clifford+T operators",
+    "id": "4ee9fe7789cae308774b1fa184f6922706008cc5",
+    "doi": null,
+    "externalIds": {
+      "DBLP": "journals/qip/PrakashKJ21",
+      "ArXiv": "2011.07970",
+      "DOI": "10.1007/s11128-021-03280-0",
+      "CorpusId": 126318679
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Clifford operators in SU(N)1; N not odd prime",
+    "id": "8d4e0c5ed4c9d9e12b46f735f952933cd03c1d6f",
+    "doi": null,
+    "externalIds": {
+      "MAG": "3098115776",
+      "ArXiv": "2011.06035",
+      "CorpusId": 226306740
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Efficient quantum gate teleportation in higher dimensions",
+    "id": "cf3504292c71f28a303e049553dffd020874dfa2",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2011.00127",
+      "DOI": "10.1098/rspa.2020.0865",
+      "CorpusId": 226227346
+    },
+    "abstract_available": true,
+    "matches": [
+      "Diagonal",
+      "diagonal",
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Quantum CNOT Circuits Synthesis for NISQ Architectures Using the Syndrome Decoding Problem",
+    "id": "9b01bde2d61e994dce152492fdc44d545b0e95b9",
+    "doi": null,
+    "externalIds": {
+      "PubMedCentral": "7345310",
+      "DBLP": "conf/rc/BrugiereBVMA20",
+      "MAG": "3041601145",
+      "DOI": "10.1007/978-3-030-52482-1_11",
+      "CorpusId": 220127754
+    },
+    "abstract_available": true,
+    "matches": [
+      "Synthesis",
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Magic state distillation with the ternary Golay code",
+    "id": "f48b7c1e413d28ed8ec8d4b15fb30a658e37f5ce",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2003.02717",
+      "MAG": "3104842602",
+      "DOI": "10.1098/rspa.2020.0187",
+      "CorpusId": 212414785,
+      "PubMed": "33071576"
+    },
+    "abstract_available": true,
+    "matches": [
+      "cubic",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Measuring Trapped Ion Qudits",
+    "id": "e0ddf54f2e1ac91e7d83531856e2b1b31605524c",
+    "doi": null,
+    "externalIds": {
+      "MAG": "2980530519",
+      "CorpusId": 209966270
+    },
+    "abstract_available": false,
+    "matches": [
+      "Qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Twisted photons: new quantum perspectives in high dimensions",
+    "id": "cab4684df39e72f025370cd65354f8b9d99da228",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "1708.06101",
+      "MAG": "2749109634",
+      "PubMedCentral": "6060046",
+      "DOI": "10.1038/lsa.2017.146",
+      "CorpusId": 4898240,
+      "PubMed": "30839541"
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "A note on optimality of quantum circuits over metaplectic basis",
+    "id": "bd08d7f1333a588fd13c32532afbb7253fbdb791",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "1606.02315",
+      "DBLP": "journals/qic/Bocharov18",
+      "MAG": "2949309368",
+      "DOI": "10.26421/QIC18.1-2-1",
+      "CorpusId": 41544183
+    },
+    "abstract_available": true,
+    "matches": [
+      "qutrit",
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Realization of qudits in coupled potential wells",
+    "id": "f9157869cafa9e0ccd23d50e457e9714bb7c3975",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "1605.04566",
+      "MAG": "2410380253",
+      "DOI": "10.1142/S0219749916500295",
+      "CorpusId": 52088302
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Holographic software for quantum networks",
+    "id": "a8c27a9e258a9383f0cf2effec86a0b26162d94f",
+    "doi": null,
+    "externalIds": {
+      "MAG": "2951003614",
+      "ArXiv": "1605.00127",
+      "DOI": "10.1007/s11425-017-9207-3",
+      "CorpusId": 3742929
+    },
+    "abstract_available": true,
+    "matches": [
+      "multipartite",
+      "product state",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Small codes for magic state distillation",
+    "id": "e24e873cd67462c9b20e34bc89fdf69a87ea2203",
+    "doi": null,
+    "externalIds": {
+      "MAG": "2201569971",
+      "ArXiv": "1512.04765",
+      "DOI": "10.1140/epjd/e2016-60682-y",
+      "CorpusId": 119240570
+    },
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Improved Quantum Ternary Arithmetics",
+    "id": "38e618ebdce8d65e1fc74ad0d528bab7ae10e749",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "1512.03824",
+      "MAG": "2964001484",
+      "DBLP": "journals/corr/BocharovCRS15",
+      "CorpusId": 662738
+    },
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "diagonal",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Resource optimization for fault-tolerant quantum computing",
+    "id": "37cc5f13e607019c31db3a9a08635f8fc9855afa",
+    "doi": null,
+    "externalIds": {
+      "MAG": "2270941253",
+      "ArXiv": "1410.5124",
+      "DBLP": "phd/basesearch/Paetznick13",
+      "CorpusId": 33819711
+    },
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Quantum Contextuality with Stabilizer States",
+    "id": "bb9d8f6ee82297d76df573b8a70e1fcb529bd926",
+    "doi": null,
+    "externalIds": {
+      "MAG": "2038129354",
+      "ArXiv": "1501.04342",
+      "DBLP": "journals/entropy/HowardBV13",
+      "DOI": "10.3390/e15062340",
+      "CorpusId": 2270693
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Qudit versions of the qubit \"pi-over-eight\" gate",
+    "id": "4214d27a1040824d2eabb506a7de5bebe42d2115",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "1206.1598",
+      "MAG": "24440755",
+      "DOI": "10.1103/PhysRevA.86.022316",
+      "CorpusId": 56324846
+    },
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "diagonal",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "A linearized stabilizer formalism for systems of finite dimension",
+    "id": "8cc44f242fef598ab8bdcb9c96a2c48c9b0d135d",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "1102.3354",
+      "MAG": "2950091699",
+      "DBLP": "journals/qic/Beaudrap13",
+      "DOI": "10.26421/QIC13.1-2-6",
+      "CorpusId": 46220176
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "service": "semantic-scholar",
+    "title": "Qudit surface code and hypermap code",
+    "id": "6dbfbac583178d7c146f6731135fdaebfc633bca",
+    "doi": null,
+    "externalIds": {
+      "CorpusId": 244896046
+    },
+    "abstract_available": false,
+    "matches": [
+      "Qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Nonstabilizerness via Perfect Pauli Sampling of Matrix Product States",
+    "id": "https://openalex.org/W4388047769",
+    "doi": "https://doi.org/10.1103/physrevlett.131.180401",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Product State",
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Nonstabilizerness via Matrix Product States in the Pauli Basis",
+    "id": "https://openalex.org/W4391420775",
+    "doi": "https://doi.org/10.1103/physrevlett.133.010601",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Product State",
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "On the practical usefulness of the Hardware Efficient Ansatz",
+    "id": "https://openalex.org/W4400294954",
+    "doi": "https://doi.org/10.22331/q-2024-07-03-1395",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "diagonal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Magic spreading in random quantum circuits",
+    "id": "https://openalex.org/W4408475821",
+    "doi": "https://doi.org/10.1038/s41467-025-57704-x",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Nonstabilizerness versus entanglement in matrix product states",
+    "id": "https://openalex.org/W4396821160",
+    "doi": "https://doi.org/10.1103/physrevb.110.045101",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Augmenting Density Matrix Renormalization Group with Clifford Circuits",
+    "id": "https://openalex.org/W4404090111",
+    "doi": "https://doi.org/10.1103/physrevlett.133.190402",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Quantum State Designs with Clifford-Enhanced Matrix Product States",
+    "id": "https://openalex.org/W4408226607",
+    "doi": "https://doi.org/10.1103/prxquantum.6.010345",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Product State",
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Quantum entropy and central limit theorem",
+    "id": "https://openalex.org/W4380362792",
+    "doi": "https://doi.org/10.1073/pnas.2304589120",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Unveiling the Stabilizer Group of a Matrix Product State",
+    "id": "https://openalex.org/W4400185528",
+    "doi": "https://doi.org/10.1103/physrevlett.133.010602",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Product State"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Quantum magic and multipartite entanglement in the structure of nuclei",
+    "id": "https://openalex.org/W4408326378",
+    "doi": "https://doi.org/10.1103/physrevc.111.034317",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "multipartite"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Nonstabilizerness of permutationally invariant systems",
+    "id": "https://openalex.org/W4391871417",
+    "doi": "https://doi.org/10.1103/physreva.110.022436",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Magic of quantum hypergraph states",
+    "id": "https://openalex.org/W4398174656",
+    "doi": "https://doi.org/10.22331/q-2024-05-21-1351",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "hypergraph",
+      "maximum magic",
+      "multipartite"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Stabilizer R\u00e9nyi entropy on qudits",
+    "id": "https://openalex.org/W4389742301",
+    "doi": "https://doi.org/10.1007/s11128-023-04186-9",
+    "externalIds": null,
+    "abstract_available": false,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Quantifying non-stabilizerness via information scrambling",
+    "id": "https://openalex.org/W4391643332",
+    "doi": "https://doi.org/10.21468/scipostphys.16.2.043",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Clifford Circuits Augmented Time-Dependent Variational Principle",
+    "id": "https://openalex.org/W4409473232",
+    "doi": "https://doi.org/10.1103/physrevlett.134.150404",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Evaluating Many-Body Stabilizer R\u00e9nyi Entropy by Sampling Reduced Pauli Strings: Singularities, Volume Law, and Nonlocal Magic",
+    "id": "https://openalex.org/W4412595397",
+    "doi": "https://doi.org/10.1103/pyzr-jmvw",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Nonlocal Magic"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Clifford Dressed Time-Dependent Variational Principle",
+    "id": "https://openalex.org/W4409473243",
+    "doi": "https://doi.org/10.1103/physrevlett.134.150403",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Quantum magic and computational complexity in the neutrino sector",
+    "id": "https://openalex.org/W4411023104",
+    "doi": "https://doi.org/10.1103/physrevresearch.7.023228",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Dequantizing quantum machine learning models using tensor networks",
+    "id": "https://openalex.org/W4399121204",
+    "doi": "https://doi.org/10.1103/physrevresearch.6.023218",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Stabilizer disentangling of conformal field theories",
+    "id": "https://openalex.org/W4410601115",
+    "doi": "https://doi.org/10.21468/scipostphys.18.5.165",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Efficient mutual magic and magic capacity with matrix product states",
+    "id": "https://openalex.org/W4414851539",
+    "doi": "https://doi.org/10.21468/scipostphys.19.4.085",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Gravitational Backreaction is Magical",
+    "id": "https://openalex.org/W4417267542",
+    "doi": "https://doi.org/10.1103/z3vr-w5c5",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "nonlocal magic"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Magic Resource Can Enhance the Quantum Capacity of Channels",
+    "id": "https://openalex.org/W4407218832",
+    "doi": "https://doi.org/10.1103/physrevlett.134.050202",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Nonstabilizerness in kinetically constrained Rydberg atom arrays",
+    "id": "https://openalex.org/W4410893638",
+    "doi": "https://doi.org/10.1103/jz4d-vdhj",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Disentangling critical quantum spin chains with Clifford circuits",
+    "id": "https://openalex.org/W4407321635",
+    "doi": "https://doi.org/10.1103/physrevb.111.085121",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Product State"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Quantum algorithms for inverse participation ratio estimation in multiqubit and multiqudit systems",
+    "id": "https://openalex.org/W4410438477",
+    "doi": "https://doi.org/10.1103/physreva.111.052614",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Long-Range Nonstabilizerness and Phases of Matter",
+    "id": "https://openalex.org/W4415259719",
+    "doi": "https://doi.org/10.1103/1hlj-h6t9",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Nonstabilizerness in open XXZ spin chains: Universal scaling and dynamics",
+    "id": "https://openalex.org/W4415830255",
+    "doi": "https://doi.org/10.1103/96bk-xf8p",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Quantifying Qubit Magic Resource with Gottesman-Kitaev-Preskill Encoding",
+    "id": "https://openalex.org/W3204653445",
+    "doi": "https://doi.org/10.1103/physrevlett.128.210502",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Stabilizer entropy of quantum tetrahedra",
+    "id": "https://openalex.org/W4391801192",
+    "doi": "https://doi.org/10.1103/physrevd.109.126008",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Entanglement of random hypergraph states",
+    "id": "https://openalex.org/W3205469496",
+    "doi": "https://doi.org/10.1103/physreva.106.012410",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "hypergraph",
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Quantum Lego Expansion Pack: Enumerators from Tensor Networks",
+    "id": "https://openalex.org/W4400881602",
+    "doi": "https://doi.org/10.1103/prxquantum.5.030313",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Magic of random matrix product states",
+    "id": "https://openalex.org/W4396904075",
+    "doi": "https://doi.org/10.1103/physrevb.109.174207",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "product state",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Many-Body Entropies and Entanglement from Polynomially Many Local Measurements",
+    "id": "https://openalex.org/W4401888748",
+    "doi": "https://doi.org/10.1103/physrevx.14.031035",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Minimal-Clifford shadow estimation by mutually unbiased bases",
+    "id": "https://openalex.org/W4399302682",
+    "doi": "https://doi.org/10.1103/physrevapplied.21.064001",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "mutually unbiased"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Nonstabilizerness of a boundary time crystal",
+    "id": "https://openalex.org/W4410854463",
+    "doi": "https://doi.org/10.1103/d7tm-9hkp",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Quantifying magic resource via quantum Jensen\u2013Shannon divergence",
+    "id": "https://openalex.org/W4404942881",
+    "doi": "https://doi.org/10.1088/1751-8121/ad9a28",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Efficient witnessing and testing of magic in mixed quantum states",
+    "id": "https://openalex.org/W4416379936",
+    "doi": "https://doi.org/10.1038/s41534-026-01189-z",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Maximal magic for two-qubit states",
+    "id": "https://openalex.org/W4415186443",
+    "doi": "https://doi.org/10.1088/2058-9565/ae3028",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Maximal magic",
+      "maximal magic",
+      "mutually unbiased"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Computing quantum magic of state vectors",
+    "id": "https://openalex.org/W7153034998",
+    "doi": "https://doi.org/10.22331/q-2026-04-10-2059",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Semi-device-independent nonstabilizerness certification in the prepare-and-measure scenario",
+    "id": "https://openalex.org/W4414874103",
+    "doi": "https://doi.org/10.1103/wm7m-xnfq",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Local spreading of stabilizer R\u00e9nyi entropy in a brickwork random Clifford circuit",
+    "id": "https://openalex.org/W4416233106",
+    "doi": "https://doi.org/10.1103/68g7-8pdc",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Optimality of the Howard-Vala T-gate in stabilizer quantum computation",
+    "id": "https://openalex.org/W4402907262",
+    "doi": "https://doi.org/10.1088/1402-4896/ad80e7",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Faster computation of nonstabilizerness",
+    "id": "https://openalex.org/W4406903327",
+    "doi": "https://doi.org/10.1103/physrevapplied.23.014069",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Unitary-invariant method for witnessing nonstabilizerness in quantum processors",
+    "id": "https://openalex.org/W4411795920",
+    "doi": "https://doi.org/10.1088/1751-8121/ade9ff",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Stabilizer-accelerated quantum many-body ground-state estimation",
+    "id": "https://openalex.org/W4415830613",
+    "doi": "https://doi.org/10.1103/5qr5-7jkz",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "multipartite"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Magic of discrete Lattice Gauge theories",
+    "id": "https://openalex.org/W4402692872",
+    "doi": "https://doi.org/10.1142/s0219887825500033",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Analyzing the Free States of one Quantum Resource Theory as Resource States of Another",
+    "id": "https://openalex.org/W4415140693",
+    "doi": "https://doi.org/10.1002/qute.202500702",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "multipartite"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Experimentally Validated Quantum-Secure Federated Learning over a Multi-user Quantum Network",
+    "id": "https://openalex.org/W4406779172",
+    "doi": "https://doi.org/10.34133/research.1299",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "multipartite"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Pauli spectrum of quantum channels and the related magic-channel distillation bounds",
+    "id": "https://openalex.org/W4406048671",
+    "doi": "https://doi.org/10.1103/physreva.111.012405",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "synthesis"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Augmenting Density Matrix Renormalization Group with Matchgates and Clifford Circuits",
+    "id": "https://openalex.org/W7133330355",
+    "doi": "https://doi.org/10.1088/0256-307x/43/4/040708",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Spectral signatures of nonstabilizerness and criticality in infinite matrix product states",
+    "id": "https://openalex.org/W7157748912",
+    "doi": "https://doi.org/10.1103/77wh-qv29",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Stabilizer R\u00e9nyi entropy for translation-invariant matrix product states",
+    "id": "https://openalex.org/W7161108496",
+    "doi": "https://doi.org/10.1103/7hzd-lv9k",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant",
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Probing new physics in the top sector using quantum information",
+    "id": "https://openalex.org/W7163562606",
+    "doi": "https://doi.org/10.1103/c9yb-81kv",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Benchmarking the performance of a high-Q cavity qudit using random unitaries",
+    "id": "https://openalex.org/W4408782966",
+    "doi": "https://doi.org/10.1088/2058-9565/adc47c",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Anticoncentration in Clifford Circuits and Beyond: From Random Tensor Networks to Pseudomagic States",
+    "id": "https://openalex.org/W4415086559",
+    "doi": "https://doi.org/10.1103/p8dn-glcw",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Entanglement phase diagrams from partial transpose moments",
+    "id": "https://openalex.org/W4312091208",
+    "doi": "https://doi.org/10.48550/arxiv.2212.10181",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Product State"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Entanglement and Magic Correlations Generated by Discrete Beam\u2010Splitters",
+    "id": "https://openalex.org/W4413462020",
+    "doi": "https://doi.org/10.1002/andp.202500288",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "mutually unbiased",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Bell Sampling in Quantum Monte Carlo Simulations",
+    "id": "https://openalex.org/W4415326878",
+    "doi": "https://doi.org/10.1103/fq8z-y55j",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Gauge and diffeomorphism invariance from quantum information principles",
+    "id": "https://openalex.org/W4416025566",
+    "doi": "https://doi.org/10.1103/4gyj-l8bj",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Quantum fidelity estimation in the resource theory of nonstabilizerness",
+    "id": "https://openalex.org/W4416454708",
+    "doi": "https://doi.org/10.1103/l8tq-hhxk",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Distribution of nonlocality on quantum random circuits",
+    "id": "https://openalex.org/W4417268153",
+    "doi": "https://doi.org/10.1103/8nbw-bvj2",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "multipartite"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Advantage of utilizing nonlocal magic resource in Haar-random circuits",
+    "id": "https://openalex.org/W7118969954",
+    "doi": "https://doi.org/10.1088/1751-8121/ae3408",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "nonlocal magic",
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Chirality, magic, and quantum correlations in multipartite quantum states",
+    "id": "https://openalex.org/W7133237099",
+    "doi": "https://doi.org/10.21468/scipostphys.20.3.066",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "multipartite"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Optimal ququint diagonal gates for generating Wigner negativity",
+    "id": "https://openalex.org/W7137318080",
+    "doi": "https://doi.org/10.1103/d36z-tb7h",
+    "externalIds": null,
+    "abstract_available": false,
+    "matches": [
+      "diagonal",
+      "ququint"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Offline recovery of magic and entanglement from noisy Pauli product states",
+    "id": "https://openalex.org/W7160404692",
+    "doi": "https://doi.org/10.1088/1402-4896/ae67b5",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Exact stabilizer scars in two-dimensional U ( 1 ) lattice gauge theory",
+    "id": "https://openalex.org/W7161129848",
+    "doi": "https://doi.org/10.1103/hvdp-4m6f",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Fortuity and complexity in a simple quark model",
+    "id": "https://openalex.org/W7161583242",
+    "doi": "https://doi.org/10.1007/jhep09(2026)040",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Quantum hypergraph states: a review",
+    "id": "https://openalex.org/W7163410701",
+    "doi": "https://doi.org/10.1088/1361-6633/ae7735",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "hypergraph",
+      "multipartite",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "openalex",
+    "title": "Choi-level twirling of quantum channels: finite constructions and non-compact transformations",
+    "id": "https://openalex.org/W7196959098",
+    "doi": "https://doi.org/10.1088/1751-8121/ae965b",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Exact quantification of nonlocal magic",
+    "id": "2437c7d17fe9c84a21f3fab55eaf72052e9587b5",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2608.28563",
+      "CorpusId": 291471887
+    },
+    "abstract_available": true,
+    "matches": [
+      "Nonlocal magic",
+      "nonlocal magic"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Dynamical spectral functions from bitstring-sampled quantum subspaces: entanglement, not one-body magic, tracks the sampling cost",
+    "id": "a01456910bce6a5a9aa410d263681499e7cadbcb",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2608.16436",
+      "CorpusId": 291183097
+    },
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Quantum magic is necessary but not sufficient for wormhole-inspired teleportation",
+    "id": "24568d562ffc6be90b34f8b46589cec7447c1bd9",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2606.19180",
+      "CorpusId": 289629191
+    },
+    "abstract_available": true,
+    "matches": [
+      "maximal magic"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Magic and entanglement in 1+1-dimensional SU(2) lattice gauge theory",
+    "id": "635eb553822f0f5c7973b748c071c10d6364803e",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2606.09971",
+      "CorpusId": 289132770
+    },
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Structured Parameterization and Non-Stabilizerness in Hypergraph QAOA",
+    "id": "c4a26cb8dbf7c95f77e9154dc5883b57b97f5fe4",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2605.01620",
+      "CorpusId": 287950854
+    },
+    "abstract_available": true,
+    "matches": [
+      "Hypergraph",
+      "hypergraph"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Nonlocal nonstabilizerness in free fermion models",
+    "id": "abfbf6fb8c20cdbb174f4761fb302bad26f4dacd",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2604.27055",
+      "CorpusId": 287915542
+    },
+    "abstract_available": true,
+    "matches": [
+      "Nonlocal magic",
+      "nonlocal magic"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Product Weyl-Heisenberg covariant MUBs and Maximizers of Magick",
+    "id": "ba5f13b999a3ee60fe73e6bb3964cc22e9e4fc5a",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2603.15550",
+      "CorpusId": 286572775
+    },
+    "abstract_available": true,
+    "matches": [
+      "mutually unbiased"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Kinematic budget of quantum correlations",
+    "id": "32b1365ab473f0986c7c54b9c587165901f74679",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2603.03887",
+      "CorpusId": 286238633
+    },
+    "abstract_available": true,
+    "matches": [
+      "invariant"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Non-local nonstabiliserness in Gluon and Graviton Scattering",
+    "id": "9e5c6f7fa22a7008ebba4a3b64130f4248e709ac",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2603.04148",
+      "CorpusId": 286238285
+    },
+    "abstract_available": true,
+    "matches": [
+      "non-local magic"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Gluing Randomness via Entanglement: Tight Bound from Second R\\'enyi Entropy",
+    "id": "3c8c7b31a7a86adc6a85bffce36073675726a41d",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2601.16454",
+      "CorpusId": 284982358
+    },
+    "abstract_available": true,
+    "matches": [
+      "multipartite"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "The Quantum Complexity of String Breaking in the Schwinger Model",
+    "id": "80354b14ea8462e012157b8ac897f4b77ca59793",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2601.08825",
+      "CorpusId": 284704450
+    },
+    "abstract_available": true,
+    "matches": [
+      "Product State"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Multipartite Non-local Magic and SYK Model",
+    "id": "ef554fd73f48e9161351eddbb720fbeda9e51cbf",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2601.03076",
+      "CorpusId": 284512560
+    },
+    "abstract_available": true,
+    "matches": [
+      "Multipartite",
+      "Non-local Magic",
+      "multipartite",
+      "non-local magic"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Experimental demonstration of non-local magic in a superconducting quantum processor",
+    "id": "c663cb8c4e9b49f490f642839238162aa18cf5a1",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2511.15576",
+      "CorpusId": 283103769
+    },
+    "abstract_available": true,
+    "matches": [
+      "Non-local magic",
+      "non-local magic"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Nonstabilizerness in quantum-enhanced metrological protocols",
+    "id": "937ee8400f03dd8ed2cc6b88135d5dd74746a1c9",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2510.01380",
+      "DOI": "10.1103/tmf9-fyc2",
+      "CorpusId": 281724865
+    },
+    "abstract_available": true,
+    "matches": [
+      "multipartite"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Spin versus Magic: Lessons from Gluon and Graviton Scattering",
+    "id": "1c904b09084aafe022058af7fe4bc43d3c03bd39",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2508.14967",
+      "CorpusId": 280700089
+    },
+    "abstract_available": true,
+    "matches": [
+      "maximal magic"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "High-expressibility quantum neural networks using only classical resources",
+    "id": "639b9e85be319f58d022d018f5769d2188ec74bf",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2506.13605",
+      "DBLP": "journals/qmi/MaroneseFVD26",
+      "DOI": "10.1007/s42484-026-00371-y",
+      "CorpusId": 279402340
+    },
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Extremal Magic States from Symmetric Lattices",
+    "id": "8fc6c8f5049eb9dd72f6b97d240b40a5e28c0e7b",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2506.11725",
+      "CorpusId": 279391479
+    },
+    "abstract_available": true,
+    "matches": [
+      "maximal magic",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Quantum Complexity and Chaos in Many-Qudit Doped Clifford Circuits",
+    "id": "fa6897745e5b7338e11d020b069301ea3026cd96",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2506.02127",
+      "DBLP": "journals/quantum/MagniT25",
+      "DOI": "10.22331/q-2025-12-24-1956",
+      "CorpusId": 279118687
+    },
+    "abstract_available": true,
+    "matches": [
+      "Qudit",
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Quantumness can enhance resilience to statistical noise in spin-network quantum reservoir computing",
+    "id": "db41a5b76fb25e948e37f82440b6b3300eb4c2a6",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2504.17837",
+      "DOI": "10.3389/fphy.2026.1817739",
+      "CorpusId": 278129537
+    },
+    "abstract_available": true,
+    "matches": [
+      "diagonal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Quantum resources of quantum and classical variational methods",
+    "id": "9754ba1866ab3d935cdb770d6bde25a69e11b577",
+    "doi": null,
+    "externalIds": {
+      "DBLP": "journals/mlst/SpriggsACG25",
+      "ArXiv": "2409.13008",
+      "DOI": "10.1088/2632-2153/adaca2",
+      "CorpusId": 272770283
+    },
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Estimating Non-Stabilizerness Dynamics Without Simulating It",
+    "id": "841a4bc5e4e960e002a600fcf4fbd8856b4f38ae",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2405.06054",
+      "CorpusId": 269740880
+    },
+    "abstract_available": true,
+    "matches": [
+      "product state"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Stabilizer Testing and Magic Entropy via Quantum Fourier Analysis",
+    "id": "2c4f556c377088460449994482b4f8840ee4bbbc",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2306.09292",
+      "DOI": "10.1007/s00220-025-05421-3",
+      "CorpusId": 259165644
+    },
+    "abstract_available": true,
+    "matches": [
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "service": "semantic-scholar",
+    "title": "Quantum hypergraph states: a concise review",
+    "id": "c565e5364647da9b748b1b8ea27998ec0160a4ad",
+    "doi": null,
+    "externalIds": {
+      "CorpusId": 283458380
+    },
+    "abstract_available": false,
+    "matches": [
+      "hypergraph"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "wang-li",
+    "service": "openalex",
+    "title": "Analysis of the relationship between imaginarity and entanglement",
+    "id": "https://openalex.org/W4408694975",
+    "doi": "https://doi.org/10.1103/physreva.111.032425",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "diagonal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "wang-li",
+    "service": "openalex",
+    "title": "GCAMPS: A Scalable Classical Simulator for Qudit Systems",
+    "id": "https://openalex.org/W4416157945",
+    "doi": "https://doi.org/10.1145/3773656.3773689",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Product State",
+      "Qudit",
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "wang-li",
+    "service": "semantic-scholar",
+    "title": "Mutual mana: Converting local magic into correlations via discrete beamsplitters",
+    "id": "36154f33c676aea4a4a5f98e8a258e39cd29df21",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2511.08004",
+      "DOI": "10.1016/j.aop.2026.170608",
+      "CorpusId": 282922102
+    },
+    "abstract_available": true,
+    "matches": [
+      "multipartite",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "chen-yan-zhou",
+    "service": "openalex",
+    "title": "Non-Clifford and Parallelizable Fault-Tolerant Logical Gates on Constant and Almost-Constant Rate Homological Quantum Low-Density Parity-Check Codes via Higher Symmetries",
+    "id": "https://openalex.org/W4417261711",
+    "doi": "https://doi.org/10.1103/wcxs-w69t",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "hypergraph",
+      "invariant",
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "chen-yan-zhou",
+    "service": "openalex",
+    "title": "Randomized Hypergraph States and Their Entanglement Properties",
+    "id": "https://openalex.org/W4414988567",
+    "doi": "https://doi.org/10.1002/andp.202500622",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "Hypergraph",
+      "hypergraph",
+      "multipartite"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "chen-yan-zhou",
+    "service": "openalex",
+    "title": "Nonsymmetric Greenberger-Horne-Zeilinger states: Weighted hypergraph and controlled-unitary graph representations",
+    "id": "https://openalex.org/W4414620175",
+    "doi": "https://doi.org/10.1103/7zxj-jp34",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "hypergraph",
+      "multipartite",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "chen-yan-zhou",
+    "service": "openalex",
+    "title": "Symmetry-Accelerated Classical Simulation of Clifford-Dominated Circuits",
+    "id": "https://openalex.org/W4416245781",
+    "doi": "https://doi.org/10.1103/nnzz-481j",
+    "externalIds": null,
+    "abstract_available": true,
+    "matches": [
+      "diagonal",
+      "hypergraph"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "chen-yan-zhou",
+    "service": "openalex",
+    "title": "k -uniform complete hypergraph-state stabilizers in terms of local operators",
+    "id": "https://openalex.org/W7151482588",
+    "doi": "https://doi.org/10.1103/ykj9-8gwj",
+    "externalIds": null,
+    "abstract_available": false,
+    "matches": [
+      "hypergraph"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "chen-yan-zhou",
+    "service": "semantic-scholar",
+    "title": "The Pauli Probability Spectrum Carries the Pure-State Quantum Fisher Metric",
+    "id": "41b37954182d1ff8018f59ea65b844eb7e26709e",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2608.21437",
+      "CorpusId": 291325081
+    },
+    "abstract_available": true,
+    "matches": [
+      "transversal"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "chen-yan-zhou",
+    "service": "semantic-scholar",
+    "title": "On Hypergraph Representation of Multipartite Quantum Systems",
+    "id": "393eb96c7cc477052f5ea7073fe85aa833eeb64e",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2608.12067",
+      "CorpusId": 291037154
+    },
+    "abstract_available": true,
+    "matches": [
+      "Hypergraph",
+      "Multipartite",
+      "hypergraph",
+      "multipartite"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "chen-yan-zhou",
+    "service": "semantic-scholar",
+    "title": "Device-Independent Self-Testing of the Three-Qubit CCZ Hypergraph State",
+    "id": "1a0bab97aba4a789b4441f880de112b92663a34f",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2607.21288",
+      "CorpusId": 290473538
+    },
+    "abstract_available": true,
+    "matches": [
+      "Hypergraph",
+      "cubic",
+      "hypergraph"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "chen-yan-zhou",
+    "service": "semantic-scholar",
+    "title": "Implementation and representation of qudit multi-controlled unitaries and hypergraph states by N-body angular momentum couplings",
+    "id": "b39fdaadd65181fd2cc0dfe6c08f08815f0ab77c",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2506.21831",
+      "CorpusId": 280278690
+    },
+    "abstract_available": true,
+    "matches": [
+      "Qutrit",
+      "hypergraph",
+      "qudit",
+      "qutrit"
+    ],
+    "disposition": "PROMOTE"
+  },
+  {
+    "seed": "chen-yan-zhou",
+    "service": "semantic-scholar",
+    "title": "Non-symmetric GHZ states: weighted hypergraph and controlled-unitary graph representations",
+    "id": "3b4414148288197d5449999a37d17ea1afba514a",
+    "doi": null,
+    "externalIds": {
+      "ArXiv": "2408.02740",
+      "DOI": "10.1103/7zxj-jp34",
+      "CorpusId": 271719711
+    },
+    "abstract_available": true,
+    "matches": [
+      "hypergraph",
+      "multipartite",
+      "qudit"
+    ],
+    "disposition": "PROMOTE"
+  }
+]

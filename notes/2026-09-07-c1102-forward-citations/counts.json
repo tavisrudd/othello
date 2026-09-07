@@ -1,0 +1,674 @@
+[
+  {
+    "seed": "haah",
+    "doi": "10.1103/PhysRevA.97.042327",
+    "services": {
+      "openalex": {
+        "url": "https://api.openalex.org/works/doi:10.1103/PhysRevA.97.042327",
+        "timestamp": "2026-09-07T21:26:13.091685+00:00",
+        "status": 200,
+        "sha256": "a46e61428d0c1c550d8720c4864d6f85e72a26d8233c1fb130479429dd1b4cc2",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/haah-openalex.json",
+        "title": "Towers of generalized divisible quantum codes",
+        "count": 16,
+        "id": "https://openalex.org/W2760602975",
+        "identifiers": {
+          "openalex": "https://openalex.org/W2760602975",
+          "doi": "https://doi.org/10.1103/physreva.97.042327",
+          "mag": "2760602975"
+        },
+        "pages": [
+          {
+            "url": "https://api.openalex.org/works?filter=cites%3AW2760602975&per_page=200&cursor=%2A&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cabstract_inverted_index",
+            "timestamp": "2026-09-07T21:26:13.766065+00:00",
+            "status": 200,
+            "sha256": "963be7b5b9d2afcc4910241d82a62145b95952e75148580b4ba67165f03132f4",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/haah-openalex-citations-0.json"
+          }
+        ],
+        "enumerated": 16,
+        "enumeration_complete": true,
+        "enumeration_cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/haah-openalex-citing.json",
+        "enumeration_sha256": "b3e2bfa107d0a36f4683b59f7742fb9746542dbd0f0515bfbe49581c95bbff34"
+      },
+      "crossref": {
+        "url": "https://api.crossref.org/works/10.1103/PhysRevA.97.042327",
+        "timestamp": "2026-09-07T21:26:13.384274+00:00",
+        "status": 200,
+        "sha256": "6c07155973c862f10db8f0790dfedb25a992fda8d9d85c701f08269954d91d87",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/haah-crossref.json",
+        "title": [
+          "Towers of generalized divisible quantum codes"
+        ],
+        "count": 13,
+        "id": null,
+        "identifiers": {
+          "DOI": "10.1103/physreva.97.042327"
+        }
+      },
+      "semantic-scholar": {
+        "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1103/PhysRevA.97.042327?fields=title,citationCount,externalIds",
+        "timestamp": "2026-09-07T21:26:13.622672+00:00",
+        "status": 200,
+        "sha256": "761a431c17138a3847c5bcd3016b286adf43fdec9673b62e980cce90bb0c53e9",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/haah-semantic-scholar.json",
+        "title": "Towers of generalized divisible quantum codes",
+        "count": 19,
+        "id": "a57e31ff67b876c8efbfa26c7895be6abf127775",
+        "identifiers": {
+          "ArXiv": "1709.08658",
+          "MAG": "2760602975",
+          "DOI": "10.1103/PhysRevA.97.042327",
+          "CorpusId": 119106809
+        },
+        "pages": [
+          {
+            "url": "https://api.semanticscholar.org/graph/v1/paper/a57e31ff67b876c8efbfa26c7895be6abf127775/citations?fields=title%2Cabstract%2Cyear%2CexternalIds&limit=1000&offset=0",
+            "timestamp": "2026-09-07T21:26:14.086669+00:00",
+            "status": 200,
+            "sha256": "0f53d5963a58a473be908378973297592ddc1e9069731345f4bbdde7b6bd210e",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/haah-semantic-scholar-citations-0.json"
+          }
+        ],
+        "enumerated": 19,
+        "enumeration_complete": true,
+        "enumeration_cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/haah-semantic-scholar-citing.json",
+        "enumeration_sha256": "89587b553f1c3d9e9174fdbdd9f635896b1280768e84d7e45b6bd06735c592a0"
+      }
+    }
+  },
+  {
+    "seed": "campbell-howard",
+    "doi": "10.1103/PhysRevA.95.022316",
+    "services": {
+      "openalex": {
+        "url": "https://api.openalex.org/works/doi:10.1103/PhysRevA.95.022316",
+        "timestamp": "2026-09-07T21:26:13.092382+00:00",
+        "status": 200,
+        "sha256": "e86abb71265b9e74fcfeaf8403f7f14f07f95b9cb71e07f7b7fff28db41b5867",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/campbell-howard-openalex.json",
+        "title": "Unified framework for magic state distillation and multiqubit gate synthesis with reduced resource cost",
+        "count": 101,
+        "id": "https://openalex.org/W2410653068",
+        "identifiers": {
+          "openalex": "https://openalex.org/W2410653068",
+          "doi": "https://doi.org/10.1103/physreva.95.022316",
+          "mag": "2410653068"
+        },
+        "pages": [
+          {
+            "url": "https://api.openalex.org/works?filter=cites%3AW2410653068&per_page=200&cursor=%2A&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cabstract_inverted_index",
+            "timestamp": "2026-09-07T21:26:13.773955+00:00",
+            "status": 200,
+            "sha256": "ec43e168f8497ea8b7bebe418d46fcf343d8b5d2a91fa16419ab400a2e8c94f2",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/campbell-howard-openalex-citations-0.json"
+          }
+        ],
+        "enumerated": 103,
+        "enumeration_complete": true,
+        "enumeration_cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/campbell-howard-openalex-citing.json",
+        "enumeration_sha256": "3180426bacb6adbeb57c92c54ad0a17882b638dcff66d230288164a7b2d59dc2"
+      },
+      "crossref": {
+        "url": "https://api.crossref.org/works/10.1103/PhysRevA.95.022316",
+        "timestamp": "2026-09-07T21:26:13.383451+00:00",
+        "status": 200,
+        "sha256": "3c9fa72823bcba14e27f1aac6c3cd6f5397eba6bde27b5e25f775524cd06e090",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/campbell-howard-crossref.json",
+        "title": [
+          "Unified framework for magic state distillation and multiqubit gate synthesis with reduced resource cost"
+        ],
+        "count": 83,
+        "id": null,
+        "identifiers": {
+          "DOI": "10.1103/physreva.95.022316"
+        }
+      },
+      "semantic-scholar": {
+        "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1103/PhysRevA.95.022316?fields=title,citationCount,externalIds",
+        "timestamp": "2026-09-07T21:26:13.620176+00:00",
+        "status": 200,
+        "sha256": "65eb836716cf92313629026a372afe31c363e05012cde6bcfb1697949a9021c4",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/campbell-howard-semantic-scholar.json",
+        "title": "Unified framework for magic state distillation and multiqubit gate synthesis with reduced resource cost",
+        "count": 102,
+        "id": "d2516bb70b4c8fb3bca69b21031898c25de2eac3",
+        "identifiers": {
+          "ArXiv": "1606.01904",
+          "MAG": "2410653068",
+          "DOI": "10.1103/PhysRevA.95.022316",
+          "CorpusId": 119074308
+        },
+        "pages": [
+          {
+            "url": "https://api.semanticscholar.org/graph/v1/paper/d2516bb70b4c8fb3bca69b21031898c25de2eac3/citations?fields=title%2Cabstract%2Cyear%2CexternalIds&limit=1000&offset=0",
+            "timestamp": "2026-09-07T21:26:14.521835+00:00",
+            "status": 200,
+            "sha256": "b4841aab415481ab0d37878f6538159a31b2701d155bba396613ef9387d68a98",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/campbell-howard-semantic-scholar-citations-0.json"
+          }
+        ],
+        "enumerated": 102,
+        "enumeration_complete": true,
+        "enumeration_cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/campbell-howard-semantic-scholar-citing.json",
+        "enumeration_sha256": "aebeb02b2cd6131de28a9b183573b3bea3ab2a811d82e2f02465ecb67283c3f7"
+      }
+    }
+  },
+  {
+    "seed": "krishna-tillich",
+    "doi": "10.1103/PhysRevLett.123.070507",
+    "services": {
+      "openalex": {
+        "url": "https://api.openalex.org/works/doi:10.1103/PhysRevLett.123.070507",
+        "timestamp": "2026-09-07T21:26:13.093031+00:00",
+        "status": 200,
+        "sha256": "7cbc3b86afa3537fd4cd045fc9863cfa746d94ba1196dda1391d7e3ff0551332",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/krishna-tillich-openalex.json",
+        "title": "Towards Low Overhead Magic State Distillation",
+        "count": 68,
+        "id": "https://openalex.org/W2900580483",
+        "identifiers": {
+          "openalex": "https://openalex.org/W2900580483",
+          "doi": "https://doi.org/10.1103/physrevlett.123.070507",
+          "mag": "2900580483",
+          "pmid": "https://pubmed.ncbi.nlm.nih.gov/31491096"
+        },
+        "pages": [
+          {
+            "url": "https://api.openalex.org/works?filter=cites%3AW2900580483&per_page=200&cursor=%2A&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cabstract_inverted_index",
+            "timestamp": "2026-09-07T21:26:13.931146+00:00",
+            "status": 200,
+            "sha256": "e9c1526de938451c7c17a3b7e44407cbcb7bab0118502fc6259d0f544e1fc59f",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/krishna-tillich-openalex-citations-0.json"
+          }
+        ],
+        "enumerated": 69,
+        "enumeration_complete": true,
+        "enumeration_cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/krishna-tillich-openalex-citing.json",
+        "enumeration_sha256": "95c62e122c5b5b6c6b411c487091d99780d9bd67a00d4fa05fc0832fb1f1054e"
+      },
+      "crossref": {
+        "url": "https://api.crossref.org/works/10.1103/PhysRevLett.123.070507",
+        "timestamp": "2026-09-07T21:26:13.602319+00:00",
+        "status": 200,
+        "sha256": "f4514021807c775509f84f43386e51197c1010a18a49b26ceca8d2bb658ef15a",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/krishna-tillich-crossref.json",
+        "title": [
+          "Towards Low Overhead Magic State Distillation"
+        ],
+        "count": 58,
+        "id": null,
+        "identifiers": {
+          "DOI": "10.1103/physrevlett.123.070507"
+        }
+      },
+      "semantic-scholar": {
+        "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1103/PhysRevLett.123.070507?fields=title,citationCount,externalIds",
+        "timestamp": "2026-09-07T21:26:13.831568+00:00",
+        "status": 200,
+        "sha256": "5534df68cb7b6fc19aab03265bfbc400e4385a228893759b6cfa8b0d068e90b8",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/krishna-tillich-semantic-scholar.json",
+        "title": "Towards Low Overhead Magic State Distillation.",
+        "count": 76,
+        "id": "5dc0cf3a7d31e699843957301537ca187f9a5c9e",
+        "identifiers": {
+          "MAG": "2967498040",
+          "ArXiv": "1811.08461",
+          "DOI": "10.1103/PhysRevLett.123.070507",
+          "CorpusId": 119385051,
+          "PubMed": "31491096"
+        },
+        "pages": [
+          {
+            "url": "https://api.semanticscholar.org/graph/v1/paper/5dc0cf3a7d31e699843957301537ca187f9a5c9e/citations?fields=title%2Cabstract%2Cyear%2CexternalIds&limit=1000&offset=0",
+            "timestamp": "2026-09-07T21:26:14.368668+00:00",
+            "status": 200,
+            "sha256": "3049ba24162df6a052a2d11bae7a697e95fb84a99d1bc48068290595da8a7a32",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/krishna-tillich-semantic-scholar-citations-0.json"
+          }
+        ],
+        "enumerated": 76,
+        "enumeration_complete": true,
+        "enumeration_cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/krishna-tillich-semantic-scholar-citing.json",
+        "enumeration_sha256": "62fcf07e8f67ac737ba9fb7f34a732a6816c239f8bc9dda8c27ecf46a8069762"
+      }
+    }
+  },
+  {
+    "seed": "prakash-saha",
+    "doi": "10.22331/q-2025-06-12-1768",
+    "services": {
+      "openalex": {
+        "url": "https://api.openalex.org/works/doi:10.22331/q-2025-06-12-1768",
+        "timestamp": "2026-09-07T21:26:14.245822+00:00",
+        "status": 200,
+        "sha256": "872f7795e3c6b35cfc05d5f17bf95a71f556fe7ed20132fdd64961f6b85b9270",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/prakash-saha-openalex.json",
+        "title": "Low Overhead Qutrit Magic State Distillation",
+        "count": 2,
+        "id": "https://openalex.org/W4392737325",
+        "identifiers": {
+          "openalex": "https://openalex.org/W4392737325",
+          "doi": "https://doi.org/10.22331/q-2025-06-12-1768"
+        },
+        "pages": [
+          {
+            "url": "https://api.openalex.org/works?filter=cites%3AW4392737325&per_page=200&cursor=%2A&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cabstract_inverted_index",
+            "timestamp": "2026-09-07T21:26:14.880357+00:00",
+            "status": 200,
+            "sha256": "3952a394db8738dc7ccba9187b2e7c2bf86bd6b52ab15ccb5ee9805c4a01cfe1",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/prakash-saha-openalex-citations-0.json"
+          }
+        ],
+        "enumerated": 2,
+        "enumeration_complete": true,
+        "enumeration_cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/prakash-saha-openalex-citing.json",
+        "enumeration_sha256": "45aa26c653fcf8af47ad1231dc53e2dfb0023383e093103c77bbe54a9c249493"
+      },
+      "crossref": {
+        "url": "https://api.crossref.org/works/10.22331/q-2025-06-12-1768",
+        "timestamp": "2026-09-07T21:26:14.461134+00:00",
+        "status": 200,
+        "sha256": "1598ae9d320b4424e9d725ab20c5867691122675089cf444213222fff3b960a7",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/prakash-saha-crossref.json",
+        "title": [
+          "Low Overhead Qutrit Magic State Distillation"
+        ],
+        "count": 3,
+        "id": null,
+        "identifiers": {
+          "DOI": "10.22331/q-2025-06-12-1768"
+        }
+      },
+      "semantic-scholar": {
+        "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.22331/q-2025-06-12-1768?fields=title,citationCount,externalIds",
+        "timestamp": "2026-09-07T21:26:14.785280+00:00",
+        "status": 200,
+        "sha256": "41f1e949df8d3c0a8101d69fe840b7fa50471bc7e66eeb77a4520738bfb1f16e",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/prakash-saha-semantic-scholar.json",
+        "title": "Low Overhead Qutrit Magic State Distillation",
+        "count": 12,
+        "id": "0ab6e2c25ee80cbcadaf4b079939d8af9cccff3c",
+        "identifiers": {
+          "ArXiv": "2403.06228",
+          "DBLP": "journals/quantum/PrakashS25",
+          "DOI": "10.22331/q-2025-06-12-1768",
+          "CorpusId": 268351836
+        },
+        "pages": [
+          {
+            "url": "https://api.semanticscholar.org/graph/v1/paper/0ab6e2c25ee80cbcadaf4b079939d8af9cccff3c/citations?fields=title%2Cabstract%2Cyear%2CexternalIds&limit=1000&offset=0",
+            "timestamp": "2026-09-07T21:26:15.228065+00:00",
+            "status": 200,
+            "sha256": "f7860e0fc42d556b8e0803a67f2af14e1bb8be9ff50829cc5226a174b6859076",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/prakash-saha-semantic-scholar-citations-0.json"
+          }
+        ],
+        "enumerated": 12,
+        "enumeration_complete": true,
+        "enumeration_cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/prakash-saha-semantic-scholar-citing.json",
+        "enumeration_sha256": "f6ca71b62bf550e036e18efdf52cfabdf1bf6ec6e03dc7cf5c0fa935ff6cf13e"
+      }
+    }
+  },
+  {
+    "seed": "campbell-anwar-browne",
+    "doi": "10.1103/PhysRevX.2.041021",
+    "services": {
+      "openalex": {
+        "url": "https://api.openalex.org/works/doi:10.1103/PhysRevX.2.041021",
+        "timestamp": "2026-09-07T21:26:14.623129+00:00",
+        "status": 200,
+        "sha256": "f20cc6fa657faaf1a638db664263b09bf3b5d698d9ed37bad87bc6c32f7ecf3d",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/campbell-anwar-browne-openalex.json",
+        "title": "Magic-State Distillation in All Prime Dimensions Using Quantum Reed-Muller Codes",
+        "count": 164,
+        "id": "https://openalex.org/W2005868823",
+        "identifiers": {
+          "openalex": "https://openalex.org/W2005868823",
+          "doi": "https://doi.org/10.1103/physrevx.2.041021",
+          "mag": "2005868823"
+        },
+        "pages": [
+          {
+            "url": "https://api.openalex.org/works?filter=cites%3AW2005868823&per_page=200&cursor=%2A&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cabstract_inverted_index",
+            "timestamp": "2026-09-07T21:26:15.084187+00:00",
+            "status": 200,
+            "sha256": "7592b860fae83256e7548059249c72a57d58307f2a9e6bc760b0b4264c6ded5c",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/campbell-anwar-browne-openalex-citations-0.json"
+          }
+        ],
+        "enumerated": 168,
+        "enumeration_complete": true,
+        "enumeration_cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/campbell-anwar-browne-openalex-citing.json",
+        "enumeration_sha256": "651217401e17e37d994e6be6732b5405c4554533e25e8871ab9d4fc4739f7da2"
+      },
+      "crossref": {
+        "url": "https://api.crossref.org/works/10.1103/PhysRevX.2.041021",
+        "timestamp": "2026-09-07T21:26:14.774858+00:00",
+        "status": 200,
+        "sha256": "41bc0b630f6ee4d938e275a0a56a9a04c8902b0aee3b45c9cb106b1753d9c1af",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/campbell-anwar-browne-crossref.json",
+        "title": [
+          "Magic-State Distillation in All Prime Dimensions Using Quantum Reed-Muller Codes"
+        ],
+        "count": 164,
+        "id": null,
+        "identifiers": {
+          "DOI": "10.1103/physrevx.2.041021"
+        }
+      },
+      "semantic-scholar": {
+        "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1103/PhysRevX.2.041021?fields=title,citationCount,externalIds",
+        "timestamp": "2026-09-07T21:26:15.011743+00:00",
+        "status": 200,
+        "sha256": "6372678144b0a745ecded8d8d9bc965979c8d024d95fcdbe96e8e5fd02c05583",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/campbell-anwar-browne-semantic-scholar.json",
+        "title": "Magic-State Distillation in All Prime Dimensions Using Quantum Reed-Muller Codes",
+        "count": 245,
+        "id": "beaee81da08934513acad338e1d4c5a5ea3bb0a0",
+        "identifiers": {
+          "ArXiv": "1205.3104",
+          "MAG": "2005868823",
+          "DOI": "10.1103/PhysRevX.2.041021",
+          "CorpusId": 119282434
+        },
+        "pages": [
+          {
+            "url": "https://api.semanticscholar.org/graph/v1/paper/beaee81da08934513acad338e1d4c5a5ea3bb0a0/citations?fields=title%2Cabstract%2Cyear%2CexternalIds&limit=1000&offset=0",
+            "timestamp": "2026-09-07T21:26:15.870756+00:00",
+            "status": 200,
+            "sha256": "03b9d6d36541753b075b5c8ea41ce0e6830e8b60c849aea117dbb58438fedb56",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/campbell-anwar-browne-semantic-scholar-citations-0.json"
+          }
+        ],
+        "enumerated": 245,
+        "enumeration_complete": true,
+        "enumeration_cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/campbell-anwar-browne-semantic-scholar-citing.json",
+        "enumeration_sha256": "713d6d18dfa5979cc4fae8a2faa87599b159b03d16eeb23ac27ceeb0e2a19984"
+      }
+    }
+  },
+  {
+    "seed": "leone-oliviero-hamma",
+    "doi": "10.1103/PhysRevLett.128.050402",
+    "services": {
+      "openalex": {
+        "url": "https://api.openalex.org/works/doi:10.1103/PhysRevLett.128.050402",
+        "timestamp": "2026-09-07T21:26:14.772928+00:00",
+        "status": 200,
+        "sha256": "b024c731e17d2df9946bc845bf9b991c0bd0c1dbea04e39da7cd1fa7c7b299df",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/leone-oliviero-hamma-openalex.json",
+        "title": "Stabilizer R\u00e9nyi Entropy",
+        "count": 288,
+        "id": "https://openalex.org/W4212821541",
+        "identifiers": {
+          "openalex": "https://openalex.org/W4212821541",
+          "doi": "https://doi.org/10.1103/physrevlett.128.050402",
+          "pmid": "https://pubmed.ncbi.nlm.nih.gov/35179939"
+        },
+        "pages": [
+          {
+            "url": "https://api.openalex.org/works?filter=cites%3AW4212821541&per_page=200&cursor=%2A&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cabstract_inverted_index",
+            "timestamp": "2026-09-07T21:26:15.540758+00:00",
+            "status": 200,
+            "sha256": "10e0f0ae0b75a98add0bed26b7389d9f7d6cdc47d30ddcc6238e1159837e2bcc",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/leone-oliviero-hamma-openalex-citations-0.json"
+          },
+          {
+            "url": "https://api.openalex.org/works?filter=cites%3AW4212821541&per_page=200&cursor=Ils5Ny4wLCAxLCAnaHR0cHM6Ly9vcGVuYWxleC5vcmcvVzcxMjc0MDczMzQnXSI%3D&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cabstract_inverted_index",
+            "timestamp": "2026-09-07T21:26:16.258653+00:00",
+            "status": 200,
+            "sha256": "da879323a432b5b4b291d84d8a714042470e80d749f590258f5e2fbc91cb4965",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/leone-oliviero-hamma-openalex-citations-1.json"
+          }
+        ],
+        "enumerated": 309,
+        "enumeration_complete": true,
+        "enumeration_cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/leone-oliviero-hamma-openalex-citing.json",
+        "enumeration_sha256": "f83e18bee4620e299f1d91ea487137c9d374845ba01aaf0a782da5ad4355dbe1"
+      },
+      "crossref": {
+        "url": "https://api.crossref.org/works/10.1103/PhysRevLett.128.050402",
+        "timestamp": "2026-09-07T21:26:15.195456+00:00",
+        "status": 200,
+        "sha256": "43cdf2bc70b907ada62bbd2fd39c7432fd5c28e8e149355fe96019a2104db136",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/leone-oliviero-hamma-crossref.json",
+        "title": [
+          "Stabilizer R\u00e9nyi Entropy"
+        ],
+        "count": 283,
+        "id": null,
+        "identifiers": {
+          "DOI": "10.1103/physrevlett.128.050402"
+        }
+      },
+      "semantic-scholar": {
+        "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1103/PhysRevLett.128.050402?fields=title,citationCount,externalIds",
+        "timestamp": "2026-09-07T21:26:15.432002+00:00",
+        "status": 200,
+        "sha256": "27f7bcdd3d48036e2a6a22c7a32755b6904f602ef6ac84905079a4e9cb8e071b",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/leone-oliviero-hamma-semantic-scholar.json",
+        "title": "Stabilizer R\u00e9nyi Entropy.",
+        "count": 158,
+        "id": "2367deb4b9b431fc7cc97057e1b1d821f188b6b3",
+        "identifiers": {
+          "ArXiv": "2106.12587",
+          "DOI": "10.1103/PhysRevLett.128.050402",
+          "CorpusId": 245880719,
+          "PubMed": "35179939"
+        },
+        "pages": [
+          {
+            "url": "https://api.semanticscholar.org/graph/v1/paper/2367deb4b9b431fc7cc97057e1b1d821f188b6b3/citations?fields=title%2Cabstract%2Cyear%2CexternalIds&limit=1000&offset=0",
+            "timestamp": "2026-09-07T21:26:17.076797+00:00",
+            "status": 200,
+            "sha256": "d9f5721da15294d6f01f4095fbc7bfb75d1730a16cb1783e8adae98d1dfc3d74",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/leone-oliviero-hamma-semantic-scholar-citations-0.json"
+          }
+        ],
+        "enumerated": 158,
+        "enumeration_complete": true,
+        "enumeration_cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/leone-oliviero-hamma-semantic-scholar-citing.json",
+        "enumeration_sha256": "bdbb51d7777a21c3aa3675ec0f8258e125bc0eff51e0e93243313b11baa18b7a"
+      }
+    }
+  },
+  {
+    "seed": "wang-li",
+    "doi": "10.1007/s11128-023-04186-9",
+    "services": {
+      "openalex": {
+        "url": "https://api.openalex.org/works/doi:10.1007/s11128-023-04186-9",
+        "timestamp": "2026-09-07T21:26:15.369532+00:00",
+        "status": 200,
+        "sha256": "1d6a02b924b0e452caf3d5a5b536f37a8e6668713a1e87eb86501dfacd7d7f59",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/wang-li-openalex.json",
+        "title": "Stabilizer R\u00e9nyi entropy on qudits",
+        "count": 23,
+        "id": "https://openalex.org/W4389742301",
+        "identifiers": {
+          "openalex": "https://openalex.org/W4389742301",
+          "doi": "https://doi.org/10.1007/s11128-023-04186-9"
+        },
+        "pages": [
+          {
+            "url": "https://api.openalex.org/works?filter=cites%3AW4389742301&per_page=200&cursor=%2A&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cabstract_inverted_index",
+            "timestamp": "2026-09-07T21:26:16.040855+00:00",
+            "status": 200,
+            "sha256": "19a8d7a4757393f4b1c3ef9ca027d648ccae4054403b5f7998ba689b8eb850e2",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/wang-li-openalex-citations-0.json"
+          }
+        ],
+        "enumerated": 25,
+        "enumeration_complete": true,
+        "enumeration_cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/wang-li-openalex-citing.json",
+        "enumeration_sha256": "a723980eaf38a54c6e7b0db475f9af709431e75e901260c9365d53fc058987bb"
+      },
+      "crossref": {
+        "url": "https://api.crossref.org/works/10.1007/s11128-023-04186-9",
+        "timestamp": "2026-09-07T21:26:15.604145+00:00",
+        "status": 200,
+        "sha256": "3121fd523e53b2ba533bf2af4b152ccf73316cc859a31d87776ebbda9af9ab76",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/wang-li-crossref.json",
+        "title": [
+          "Stabilizer R\u00e9nyi entropy on qudits"
+        ],
+        "count": 25,
+        "id": null,
+        "identifiers": {
+          "DOI": "10.1007/s11128-023-04186-9"
+        }
+      },
+      "semantic-scholar": {
+        "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1007/s11128-023-04186-9?fields=title,citationCount,externalIds",
+        "timestamp": "2026-09-07T21:26:15.925575+00:00",
+        "status": 200,
+        "sha256": "fd13d891cf7a94f3c9fb42c23f77819baf3509c1af22b183fde7c9f9d1a4de7e",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/wang-li-semantic-scholar.json",
+        "title": "Stabilizer R\u00e9nyi entropy on qudits",
+        "count": 17,
+        "id": "8c9db531785300055d74509433ca23153e4cabf7",
+        "identifiers": {
+          "DBLP": "journals/qip/WangL23",
+          "DOI": "10.1007/s11128-023-04186-9",
+          "CorpusId": 266266031
+        },
+        "pages": [
+          {
+            "url": "https://api.semanticscholar.org/graph/v1/paper/8c9db531785300055d74509433ca23153e4cabf7/citations?fields=title%2Cabstract%2Cyear%2CexternalIds&limit=1000&offset=0",
+            "timestamp": "2026-09-07T21:26:16.343100+00:00",
+            "status": 200,
+            "sha256": "d33d5dcfe0ae8af5e010366c38e54f7808cf42666e7ecf6b0ba81c00ad18df2a",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/wang-li-semantic-scholar-citations-0.json"
+          }
+        ],
+        "enumerated": 17,
+        "enumeration_complete": true,
+        "enumeration_cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/wang-li-semantic-scholar-citing.json",
+        "enumeration_sha256": "225c4a0fc36b1107738da61980bc754599112ef93a8bcead50754d32b81f0f12"
+      }
+    }
+  },
+  {
+    "seed": "kagamihara-tsuchiya",
+    "doi": "10.48550/arXiv.2602.23687",
+    "services": {
+      "openalex": {
+        "url": "https://api.openalex.org/works/doi:10.48550/arXiv.2602.23687",
+        "timestamp": "2026-09-07T21:26:16.348153+00:00",
+        "status": 200,
+        "sha256": "5cb033ca82d8912dd6e7c81ad3b3e0e96e9dd21496181fea59092f8fe1569594",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/kagamihara-tsuchiya-openalex.json",
+        "title": "Stabilizer R\u00e9nyi entropy of 3-uniform hypergraph states",
+        "count": 0,
+        "id": "https://openalex.org/W7133199202",
+        "identifiers": {
+          "openalex": "https://openalex.org/W7133199202",
+          "doi": "https://doi.org/10.48550/arxiv.2602.23687"
+        },
+        "pages": [
+          {
+            "url": "https://api.openalex.org/works?filter=cites%3AW7133199202&per_page=200&cursor=%2A&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cabstract_inverted_index",
+            "timestamp": "2026-09-07T21:26:16.838078+00:00",
+            "status": 200,
+            "sha256": "992c492a56b7182a20a13379d143fb8b996eaa1a5bf997190ed352d32bfffc4f",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/kagamihara-tsuchiya-openalex-citations-0.json"
+          }
+        ],
+        "enumerated": 0,
+        "enumeration_complete": true,
+        "enumeration_cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/kagamihara-tsuchiya-openalex-citing.json",
+        "enumeration_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      },
+      "crossref": {
+        "url": "https://api.crossref.org/works/10.48550/arXiv.2602.23687",
+        "timestamp": "2026-09-07T21:26:16.510548+00:00",
+        "error": "HTTP Error 404: Not Found"
+      },
+      "semantic-scholar": {
+        "url": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2602.23687?fields=title,citationCount,externalIds",
+        "timestamp": "2026-09-07T21:26:16.743199+00:00",
+        "error": "HTTP Error 429: "
+      }
+    }
+  },
+  {
+    "seed": "chen-yan-zhou",
+    "doi": "10.22331/q-2024-05-21-1351",
+    "services": {
+      "openalex": {
+        "url": "https://api.openalex.org/works/doi:10.22331/q-2024-05-21-1351",
+        "timestamp": "2026-09-07T21:26:16.522233+00:00",
+        "status": 200,
+        "sha256": "005e458ce34c8a6fbe6c3865b532bad0574da03be4261ae6c8760309eb8f9999",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/chen-yan-zhou-openalex.json",
+        "title": "Magic of quantum hypergraph states",
+        "count": 24,
+        "id": "https://openalex.org/W4398174656",
+        "identifiers": {
+          "openalex": "https://openalex.org/W4398174656",
+          "doi": "https://doi.org/10.22331/q-2024-05-21-1351"
+        },
+        "pages": [
+          {
+            "url": "https://api.openalex.org/works?filter=cites%3AW4398174656&per_page=200&cursor=%2A&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cabstract_inverted_index",
+            "timestamp": "2026-09-07T21:26:17.092466+00:00",
+            "status": 200,
+            "sha256": "a69ad3d760c6a81698b69f738c83b92c0a0a297010ff273d0720a750b0d95bf2",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/chen-yan-zhou-openalex-citations-0.json"
+          }
+        ],
+        "enumerated": 27,
+        "enumeration_complete": true,
+        "enumeration_cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/chen-yan-zhou-openalex-citing.json",
+        "enumeration_sha256": "893a6acbd0ecb8c40352c004b29f8b742705f9d88799ecdb8d3c6ae68bba76d0"
+      },
+      "crossref": {
+        "url": "https://api.crossref.org/works/10.22331/q-2024-05-21-1351",
+        "timestamp": "2026-09-07T21:26:16.679699+00:00",
+        "status": 200,
+        "sha256": "82f01c468a2b42a4b36bc48bc026dbfcd6aca59f0f652dc48e4bd0ef01d22744",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/chen-yan-zhou-crossref.json",
+        "title": [
+          "Magic of quantum hypergraph states"
+        ],
+        "count": 25,
+        "id": null,
+        "identifiers": {
+          "DOI": "10.22331/q-2024-05-21-1351"
+        }
+      },
+      "semantic-scholar": {
+        "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.22331/q-2024-05-21-1351?fields=title,citationCount,externalIds",
+        "timestamp": "2026-09-07T21:26:17.014101+00:00",
+        "status": 200,
+        "sha256": "961d83839096860851ccd1e8ce78c3201849d97ef20f85762d8ef96c5a821b62",
+        "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/chen-yan-zhou-semantic-scholar.json",
+        "title": "Magic of quantum hypergraph states",
+        "count": 29,
+        "id": "2f49704f81827b30d2d6e3d626adf719c0b531b6",
+        "identifiers": {
+          "DBLP": "journals/quantum/ChenYZ24",
+          "ArXiv": "2308.01886",
+          "DOI": "10.22331/q-2024-05-21-1351",
+          "CorpusId": 260438634
+        },
+        "pages": [
+          {
+            "url": "https://api.semanticscholar.org/graph/v1/paper/2f49704f81827b30d2d6e3d626adf719c0b531b6/citations?fields=title%2Cabstract%2Cyear%2CexternalIds&limit=1000&offset=0",
+            "timestamp": "2026-09-07T21:26:17.423750+00:00",
+            "status": 200,
+            "sha256": "d8c0a309577d3ce0d48a9dba48fcc254cda65f759c7d301d83c2509b15d7bf85",
+            "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/chen-yan-zhou-semantic-scholar-citations-0.json"
+          }
+        ],
+        "enumerated": 29,
+        "enumeration_complete": true,
+        "enumeration_cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/chen-yan-zhou-semantic-scholar-citing.json",
+        "enumeration_sha256": "585493176b21121a0a4c665f79ab80a9626a296d66523c7ca14ca51acdac2242"
+      }
+    }
+  }
+]

@@ -14,6 +14,11 @@ V's `q` exchanges the two chordal members by an explicit orthogonal involution o
 five-dimensional space, so the residual `C_2`-torsor is a Clifford frame change on the
 shadow, not an invisible one and not a change of gate class.
 
+**C1102 review correction (2026-09-07).** The singular scheme of the chordal member
+is the rational normal quartic; its twelve rational points are not the entire scheme.
+The non-lift tests below exclude the identity-on-`1 + V_4` extension and geometric
+`PGL_2(11)` lifts only. They do not exclude every linear lift preserving the full cubic.
+
 ## 0. Verdicts
 
 | question | verdict |
@@ -22,7 +27,7 @@ shadow, not an invisible one and not a change of gate class.
 | does it ever hit the conference cubic | **No**, and not even up to Clifford equivalence: the Hessian-rank censuses over `F_11^5` differ, `(1,0,0,120,27720,133210)` for the chordal shadow against `(1,0,0,300,22260,138490)` for the conference cubic |
 | sheet exchange | acts on the shadow as `-1`; the cubic goes to `-c`, the projective member is fixed, and the gate goes to its inverse. This is the global-negation torsor `{[B],[-B]}` |
 | Paper V's `q` | swaps the two chordal members, fixes the conference member; on the shadow it is a `Q_0`-orthogonal involution, hence a Clifford frame change between two Clifford-equivalent chordal gates |
-| Sol's conjecture | **both halves confirmed**, with one sharpening: the residual torsor is the Clifford frame change alternative, not the invisible one, and it does not lift to a symmetry of the full ten-qudit cubic |
+| Sol's conjecture | **both operational readings confirmed**: the residual torsor is a Clifford frame change; the tested identity-on-complement and geometric lifts fail, while arbitrary lifts remain unclassified |
 
 ## 1. Setup and conventions
 
@@ -124,8 +129,8 @@ There are exactly 12 projective members. Survey (`step9_survey.py`):
 The logical shadow is member 9. Its singular locus over `F_11` is 12 points, every
 five-subset of which is a basis — the signature of a rational normal quartic, and the
 `|P^1(F_11)|` count Paper V's special-orbit proposition predicts. Each singular point has a
-`C_5` stabilizer in `A_5`, so the singular scheme is the split degree-twelve `A_5/C_5`
-scheme `Z_5`. Matching those twelve points with `P^1(F_11)` equivariantly and building the
+`C_5` stabilizer in `A_5`, so these rational points form the split degree-twelve `A_5/C_5`
+subscheme `Z_5` of the singular rational normal quartic. Matching those twelve points with `P^1(F_11)` equivariantly and building the
 resulting projectivity `L` gives
 
 ```
@@ -202,10 +207,11 @@ paper's: `[x_0^2 x_1] q(h) = 9` and `(q - 1)h = 8 c_B`.
    single explicit `Q_0`-isometry `q` carries one to the other, and a linear change of
    logical coordinates is a logical Clifford, so the two chordal gates are
    Clifford-equivalent — same Hessian census, same magic, same singular geometry.
-   Sharpening: `q` is a symmetry of the *shadow*, not of the gate. Extending it by the
+   Scope of the lift tests: `q` exchanges the two shadow cubics. Extending it by the
    identity on `1 + V_4` does not preserve `F_11` up to any scalar, and no element of
    `PGL_2(11)` induces `q` on `W`, so the torsor's Clifford realization acts on the five
-   logical directions carrying the shadow, not on the full ten-qudit register.
+   logical directions carrying the shadow. Whether a different extension preserves the
+   full ten-qudit cubic remains open, as section 10 records.
 
 ## 8. The p = 7 analogue
 
@@ -230,7 +236,8 @@ The rank-3 count `48` reappears from the six-variable p = 7 Clebsch census
 All under `notes/2026-09-07-c1099-cubic-phase-strengthening/paperv/`, run in that directory
 as `uv run --with numpy --with sympy python <script>`, in the order given (later steps read
 the `out/*.pkl` intermediates written by earlier ones). Captured outputs are saved beside
-them as `out/<script>.txt`; nothing here is committed yet.
+them as `out/<script>.txt`. The bundle is now tracked in git; C1102's literature review
+does not constitute a fresh computational replay.
 
 | script                | what it establishes                                                                                                                                                    | runtime    |
 |-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
