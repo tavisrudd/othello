@@ -63,6 +63,10 @@ unverified marker. Report:
 
 ### C1061 — compiled dynamic decision engines and the Tiger decoder
 
+**Certificate authority caveat:** C1097 demonstrates a sibling-forgery acceptance in the legacy
+generic root-only checker and audits the same gap in the specialized checker. These paths must
+not supply independent evidence authority; migration is open. See the C1097 report below.
+
 Probes through C1068 are closed. The default arm is `LEVEL_ROUTED`; on stim-generated weighted
 circuit-level detector error models Tiger is ahead of PyMatching in 27 of 33 operating cells in
 instructions and 30 in cycles, with zero weight and zero prediction disagreements on all 33. Log:
@@ -201,11 +205,18 @@ check pass. This is state-readout admission on supplied contexts, not domain/pol
 summary claims and changed source/schema before mutation; unrelated-leaf updates remain valid.
 13 scoped tests, formatting and clippy pass. Same-kernel summary evaluation is not independent proof.
 
-**Next**: independent summary-transition checking with explicit domain/event prerequisites,
-using the private OpenProblem/generic-certificate implementation and the new admission corpus.
-Keep source correctness separate from table commitments; preserve question/design exploration,
-native64 performance and solver/control separation. Durable schemas and module manifests follow
-those contracts; C1032 remains open.
+**C1097 complete**: independent fixed min-plus/SHA256Digest summary-transition checker,
+core `46f7d1c`, private `9c1a620`; `notes/2026-09-07-c1097-independent-summary-transitions.md`.
+Retains authenticated snapshot summaries/digests: O(N) memory, O(log N) updates. The executed
+sibling-forgery regression is accepted by the legacy generic checker and rejected by the new one.
+Legacy generic/specialized authority claims are corrected; their implementations remain unmigrated.
+Native full gates, private interoperability/mutation tests, Python and WASM compilation pass.
+
+**Next (highest priority)**: migrate proof consumers away from legacy root-only checker authority,
+with explicit unsupported-backend/format rejection. Bind domain-event admission to the checked
+summary transition; do not confuse table commitments with source correctness. Compact sibling proofs
+and other algebra/backends require separate admission and performance gates. Preserve native64
+performance and solver/control separation. C1032 and durable/module schemas remain open.
 
 ### C985 — Ergodis exact algebraic optimization paper
 

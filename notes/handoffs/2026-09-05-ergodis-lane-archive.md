@@ -135,3 +135,10 @@ Private `b6307ed`; report `../2026-09-07-c1096-leaf-update-admission.md`.
 Event semantics, after-state and evaluated summary checked before issuing an opaque update;
 application checks schema/source preconditions. 13 scoped tests, formatting and clippy pass.
 Independent summary proof checking remains the next boundary.
+
+## 2026-09-07 — C1097 independent summary transition checking
+
+Core `46f7d1c`, private `9c1a620`; report `../2026-09-07-c1097-independent-summary-transitions.md`.
+Found executable upper-sibling forgery in legacy generic checker; specialized source audit finds
+same binding omission. New fixed SHA256Digest min-plus checker retains authenticated tree state
+and rejects it. All acceptance gates pass. Legacy consumer migration is now highest priority.

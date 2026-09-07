@@ -5589,3 +5589,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1095 `[ergodis]` [REPORTED 2026-09-07]** — Semantic admission of additional observables on existing finite quotients → `notes/2026-09-07-c1095-observable-admission.md`.
 
 - **C1096 `[ergodis]` [REPORTED 2026-09-07]** — Domain-checked leaf updates and stale source rejection → `notes/2026-09-07-c1096-leaf-update-admission.md`.
+
+- **C1097 `[ergodis]` [REPORTED 2026-09-07]** — Independent min-plus summary transition verification → `notes/2026-09-07-c1097-independent-summary-transitions.md`.
