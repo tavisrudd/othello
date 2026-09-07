@@ -75,7 +75,10 @@ can be adjoined while preserving this property.  The continuation graph
 $G_K$ records which pairs of legal continuations are incompatible.  This
 graph arises naturally as the residual conflict graph of a capacity-two
 avoidance game, but the question studied here is static: how much of the
-projective geometry does the abstract graph remember?
+projective geometry does the abstract graph remember? Incompatibility
+records that two points share a tangent, but erases which tangent and
+which selected point witnesses the conflict. The reconstruction problem
+is to recover this lost organization from the binary relation alone.
 
 Here a tangent meets $K$ in exactly one point, its \emph{centre}, and a
 secant meets $K$ in two. A tangent trace consists of the legal points on
@@ -84,15 +87,13 @@ We write $\PG(2,q)$ for the plane over $\F_q$. A semilinear collineation
 is induced by an invertible linear coordinate change composed with a
 field automorphism; these form $\PGammaL(3,q)$.
 
-There are three different reconstruction questions.  If the ambient
-incidence plane is supplied, one may ask whether an ambient collineation
-preserving $G_K$ must preserve $K$.  More intrinsically, one may ask whether
-the abstract graph recovers the traces of tangent lines and their partition
-by points of $K$.  Strongest of all is an extension question: must every
-abstract graph automorphism be induced by an ambient collineation?  These
-questions are not equivalent.  In particular, the fundamental theorem of
-projective geometry cannot be applied before enough incidence has been
-recovered from the graph.
+An ambient symmetry of the plane preserves collinearity. A symmetry of
+$G_K$ is given only as a permutation preserving incompatible pairs; it need
+not initially preserve any line. To extend it to the plane, we must first
+recognize enough incidence inside the graph. Recovering tangent traces is
+only the first step: we must also group them by centre and recover the
+field action. The fundamental theorem of projective geometry cannot supply
+these missing steps.
 
 Our main result settles the extension question for the first possible arc
 size.  Every four-arc in $\PG(2,q)$ is a projective frame.
@@ -116,9 +117,13 @@ to semilinear equivalence within this family.
 
 
 
-The corollary concerns graphs promised to arise from projective frames.
-Section~\ref{sec:algorithm} also gives recognition of an arbitrary input
-graph against this family and checks the resulting coordinate transport.
+The corollary controls individual maps: every relabelling preserving
+incompatibility has exactly one semilinear extension. It therefore
+identifies the full symmetry of the encoded constraint system.
+Section~\ref{sec:algorithm} makes the reconstruction effective: given an
+arbitrary graph and a finite field of order at least $13$, it either
+rejects or supplies field
+coordinates whose pairwise comparisons verify the representation.
 The input is only one uncoloured binary relation, without tangent colours
 or ambient coordinates. The proof has two stages. First, a clique bound
 using the centre partition of the tangent symbols recovers
@@ -155,44 +160,59 @@ extra symmetries, and the translated quotient removes them.
 
 \paragraph{Related work.}
 
-The space $M_{0,5}$ parametrizes ordered configurations of five distinct
-projective-line points modulo projectivities. With markings
-$(0,1,\infty,x,y)$, this coordinate model identifies the
-vertex set with $M_{0,5}(\F_q)$. Up to reparametrizing the target, the four
-displayed maps forget respectively $y$, $x$, $1$, and $0$. Thus the graph
-records fibre coincidence for four of the five forgetful maps to $M_{0,4}$.
-For comparison, Bruno and Mella prove
-$\Aut(\overline{M}_{0,n})=S_n$ for the compactified moduli space over
-$\mathbb C$ when $n\ge5$~\cite[Theorem 3]{BrunoMella}. This algebraic
-automorphism theorem does not constrain arbitrary permutations of the
-finite rational point set preserving a single graph relation.  The
-first step here is that the uncoloured finite graph recovers the four
-forgotten colours; the second forces semilinear extension.  Cross-ratio graphs supply a related automorphism and isomorphism
-classification~\cite[Definitions 3.2 and 3.4, Theorems 7.1 and 7.2]{GPZ}.
-Their vertices are the $q(q+1)$ ordered pairs of distinct projective-line
-points and their edges use cross-ratio orbits. Our vertex set has
-$(q-2)(q-3)$ elements and its edges record fibre coincidence.
-
-The tangent-symbol representation is a linear-hypergraph reconstruction
-problem. Bhattacharya, Godinho, Majumder and Singhi
+The closest reconstruction comparison represents each graph vertex by
+the tangent lines through it. Two such sets meet precisely when their
+vertices are adjacent. This makes the graph an intersection graph of a
+hypergraph, whose edges here are sets of tangent symbols.
+Bhattacharya, Godinho, Majumder and Singhi
 \cite[Lemmas 2.3--2.4]{BGMS} recover large star cliques in intersection
-graphs of uniform hypergraphs of bounded pair degree. For uniformity four
-and pair degree one, their star-clique threshold is $14$; the
+graphs of uniform hypergraphs of bounded pair degree. A star clique
+consists of hyperedges sharing one symbol. For four-element hyperedges
+with each pair of symbols in at most one hyperedge, their threshold for
+recovering such cliques is $14$; the
 centre-resolved argument below gives $10$. Hypergraph reconstruction
 recovers the tangent symbols. Recovering their centre classes and forcing
 semilinear extension are further steps, proved here without importing a
-general hypergraph-recognition theorem.
+general hypergraph-recognition theorem. Their broader recognition theorem
+uses a minimum edge-degree hypothesis~\cite[Theorem 1.1]{BGMS}; the
+comparison of clique thresholds concerns the first recovery step, not
+the whole semilinear extension problem.
 
+The four-coordinate model also gives an isometry-extension question for
+a nonlinear code. Hamming distance counts the positions in which two
+words differ. Here distinct words have distance three or four, and an
+edge records distance three, so graph automorphisms are exactly the
+code's distance-preserving permutations. MacWilliams-type extension
+results assume algebraic structure on the code and its isometries;
+Dyshko treats additive isometries of additive MDS
+codes~\cite[Sections 1--2]{Dyshko}. Our hypotheses supply neither
+additivity nor coordinate positions. The graph first recovers the four
+positions, and compatibility of the two quotient coordinates then forces
+a common field automorphism after frame normalization.
+
+A related finite-geometric question asks when a graph built from field
+invariants admits symmetries beyond its prescribed geometric action.
+Gardiner, Praeger and Zhou determine automorphism groups and isomorphisms
+for cross-ratio graphs on ordered distinct projective-line
+pairs~\cite[Theorems 7.1--7.2]{GPZ}. Those graphs prescribe cross-ratio
+orbits as adjacency. Here adjacency merges four fibre relations, and the
+proof recovers their separate roles before identifying the field action.
+The configuration-space interpretation of these fibres is optional
+background in Section~\ref{sec:remarks}.
+
+\paragraph{Boundary and reading guide.}
 The lower boundary is genuine.  One-point continuation graphs are disjoint
 unions of cliques, every two-point continuation graph is a rook graph
 independent of the plane, and triangles generally admit automorphisms from
 the multiplicative group of the field that are not semilinear.  At $q=5$ and $q=8$ the ambient group has index two in the graph
 automorphism group. The finite classification in
 Section~\ref{sec:boundary} proves rigidity at $q=7,9,11$.
-Thus $q\ge13$ is the range of the uniform geometric proof, not the
-sharp boundary of the automorphism statement.
+Thus $q\ge13$ is the range of the uniform geometric proof. The finite
+boundary locates exactly where the encoding loses uniqueness: at $q=5,8$
+the graph admits two four-pencil resolutions, exchanged by its extra
+symmetries. This distinguishes a failure of reconstruction from a
+limitation of the large-clique method.
 
-\paragraph{Reading guide.}
 For the main theorem, retain the recovery statements in
 Sections~\ref{sec:traces}--\ref{sec:centres}, then follow the four-coordinate
 model and the two algebraic lemmas in Section~\ref{sec:frame}.
@@ -222,6 +242,9 @@ contains exactly one point of $K$.  Thus every edge has a unique
 \emph{selected centre}.
 
 For $t\in K$, let $\Sigma_t$ be the $q+2-k$ tangent lines through $t$.
+A hypergraph is a family of subsets, called hyperedges. It is $k$-uniform
+if each hyperedge has $k$ elements, and linear if distinct hyperedges
+meet in at most one element. Its line graph joins intersecting hyperedges.
 For $x\in V_K$, put
 \[
   S_x=\{xt:t\in K\}\subseteq\coprod_{t\in K}\Sigma_t.
@@ -255,9 +278,12 @@ For $k\ge2$, after choosing a label for each pencil $\Sigma_t$, the map
   x\longmapsto(xt)_{t\in K}\in\prod_{t\in K}\Sigma_t
 \]
 is an injective nonlinear code of length $k$.  Distinct words agree in at
-most one coordinate, and adjacency means agreement in exactly one.  No
-linearity or additivity is asserted, so standard MacWilliams extension
-theorems do not apply; compare~\cite{Dyshko}.
+most one coordinate. Thus their Hamming distance is $k-1$ for an
+adjacent pair and $k$ otherwise. The graph therefore retains the entire
+distance function on this code, even though it forgets the names of the
+coordinates and their symbols. For four-point frames with $q\ge13$, the theorem
+recovers those coordinates and identifies every distance-preserving
+permutation with a semilinear symmetry.
 
 \section{Intrinsic recovery of tangent traces}
 \label{sec:traces}
@@ -465,13 +491,19 @@ Write $D=\F_q\setminus\{0,1\}$.  For $q\geq13$,
 Theorems~\ref{thm:traces} and~\ref{thm:centres} recover the four coordinate
 partitions.  After composing with the unique projectivity inducing the
 corresponding permutation of the frame, a graph automorphism preserves all
-four partitions.  Its alphabet permutations satisfy
+four partitions. Preserving a partition permits relabelling its fibres;
+write $\alpha,\beta,\gamma,\delta$ for these four permutations of $D$.
+The first two send a vertex to $(\alpha(x),\beta(y))$. Its last two
+labels can also be read from the quotient formulas, so consistency gives
 \begin{align}
  \frac{\alpha(x)}{\beta(y)}&=\gamma(x/y),\label{eq:mult}\\
  \frac{\alpha(x)-1}{\beta(y)-1}
    &=\delta\left(\frac{x-1}{y-1}\right)\label{eq:shift}
 \end{align}
-for all distinct $x,y\in D$.
+for all distinct $x,y\in D$. The word \emph{isotopy} below refers to
+these initially independent relabellings of the inputs and output of
+division. The missing diagonal $x=y$ will force the two input relabellings
+to coincide.
 
 \begin{lemma}[Punctured multiplicative isotopy]\label{lem:isotopy}\coverage{absent}
 Suppose permutations $\alpha,\beta,\gamma$ of $D$ satisfy
@@ -517,7 +549,9 @@ $\alpha=\beta=\gamma=\chi$ for a multiplicative-group automorphism $\chi$.
 Define $\eta(z)=1-\chi(1-z)$ on $D$.  Substitution of $x=1-z$ and $y=1-w$
 in \eqref{eq:shift} yields $\eta(z)/\eta(w)=\delta(z/w)$.  A second
 application of Lemma~\ref{lem:isotopy} gives $\eta=\delta=:\lambda$, where
-$\lambda$ is another multiplicative-group automorphism.
+$\lambda$ is another multiplicative-group automorphism. Thus $\chi$ is
+multiplicative both in the original coordinates and after translating
+$1$ to $0$. We now show that this forces a Frobenius power.
 
 Since $\F_q^*$ is cyclic, write $\chi(x)=x^m$ and $\lambda(x)=x^n$, with
 $1\leq m,n\leq q-2$ and both exponents coprime to $q-1$.  The definition
@@ -641,6 +675,10 @@ of the third class. Identify that missing symbol with its row label.
 In the normal form this is the identity $x/1=x$: row $x$ omits the
 quotient value $x$.
 
+The missing symbols carry the information lost by deleting the values
+$0,1$ from the coordinate grid. For example, over $\F_{13}$ the quotient
+labels in row $2$ are $D\setminus\{2\}$: division by the excluded
+column $1$ would give $2$.
 The third symbol at cell $(x,y)$ now gives $x/y$ for distinct $x,y\in D$.
 Adjoin a symbol $1$, put $x/x=1$ and $x/1=x$, and define $1/y$ as the
 unique symbol of $D$ missing from column $y$. Set $1/1=1$. Reject
@@ -764,6 +802,20 @@ alone reconstructs every line of the projective plane for a general arc,
 and it says nothing about the outcome or Sprague--Grundy value of an
 avoidance game.
 
+\paragraph{A configuration-space interpretation.}
+The space $M_{0,5}$ parametrizes ordered configurations of five distinct
+projective-line points modulo projectivities. With markings
+$(0,1,\infty,x,y)$, the model in Proposition~\ref{prop:normal} identifies the
+vertex set with $M_{0,5}(\F_q)$. Up to reparametrizing the target, the four
+maps in \eqref{eq:coordinates} forget respectively $y$, $x$, $1$, and $0$. Thus the graph
+records fibre coincidence for four of the five forgetful maps to $M_{0,4}$.
+For comparison, Bruno and Mella prove
+$\Aut(\overline{M}_{0,n})=S_n$ for the compactified moduli space over
+$\mathbb C$ when $n\ge5$~\cite[Theorem 3]{BrunoMella}. This algebraic
+automorphism theorem does not constrain arbitrary permutations of the
+finite rational point set preserving a single graph relation.
+
+\paragraph{Beyond pairwise compatibility.}
 There is a stronger residual object,
 \[
  \Delta_K=\{X\subseteq V_K:K\cup X\text{ is an arc}\}.
@@ -773,6 +825,7 @@ one selected point, together with the collinear triples whose line contains
 no selected point.  Thus $\Delta_K$ retains line-incidence information that
 $G_K$ discards.  We do not pursue reconstruction from this stronger object here.
 
+\paragraph{Open problems.}
 The present arguments isolate two extremal parameters. For $k\ge3$, let
 $m(k)$ be the maximum size of a clique not contained in one tangent
 trace, taken over $k$-arcs in finite projective planes of all orders.

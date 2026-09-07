@@ -35,6 +35,9 @@ reconstruction remains outside the headline under the existing N1-only ruling.
   Review: `notes/2026-09-07-c1110-continuation-cold-referee.md`.
   A second fresh-reader exposition review and percentile estimates are complete;
   local polish is applied. Report: `notes/2026-09-07-c1110-continuation-layering-review.md`.
+  Motivation now emphasizes unique map extension, coordinate certificates and
+  nonlinear-code isometries; closest-source comparison is documented in
+  `notes/2026-09-07-c1110-continuation-motivation-positioning.md`.
   Export/validation record: `notes/2026-09-07-c1110-continuation-upgraded-manuscript.md`.
 
 ## Next steps
