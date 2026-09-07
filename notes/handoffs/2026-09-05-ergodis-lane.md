@@ -145,8 +145,9 @@ C1084's portable control/session architecture and staged migration plan are comp
 frontends; durable history independent of processes; explicit view/verify/replay/resume/fork
 workflows, host/repository/compilation-unit boundaries; native64 performance gates unchanged. This is a design, not a claim of implemented hosts or platform support.
 
-**Next**: allocate stage 1 portable scalar/text/codec ownership extraction with compatibility
-reexports, default/native/WASM conformance and unchanged hot evaluators. Follow with the shared
+**In progress — C1085**: stage 1 portable scalar/text/codec ownership extraction with compatibility
+reexports, default/native/WASM conformance and unchanged hot evaluators; report
+`notes/2026-09-07-c1085-portable-scalar-language.md`. Follow with the shared
 Campaign facade in a portable runtime crate, then browser control and durable native/browser hosts.
 Responsive autonomous jobs follow those boundaries; general quotient/lifting and industry module
 loading remain subsequent gates. C1032 remains open for full original acceptance review.

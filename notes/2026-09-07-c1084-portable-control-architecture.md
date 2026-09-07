@@ -443,6 +443,63 @@ checks. Do not export raw hot structs or persist pointers, layout-dependent usiz
 trait objects. Cache identity binds source, schema, compiler/checker semantics and relevant target
 features; caches never become proofs merely because hashes match.
 
+## Run records, artifact metadata and user annotations
+
+Use **run record** for the persisted account of an execution, **campaign record** for the durable
+investigation and **artifact** for an immutable output such as a certificate, checkpoint, trace or
+compiled cache. An exported **run bundle** packages records and reachable artifacts. A bundle may
+be incomplete for replay and must say which dependencies are included or absent. These are target
+repository contracts, not an implemented persistence schema in the current bounded pilot.
+
+A versioned run record binds its immutable execution specification and attempt history to:
+
+- **Identity and lineage:** repository/campaign/run/attempt IDs, parent/fork/replay links, source
+  input digests, artifact references and record-schema version. Do not use process IDs or filenames
+  as identity. A standalone imported artifact need not invent a producing campaign.
+- **Implementation:** core release/revision and dirty-state declaration, executable/module digest,
+  compiler/checker/IR/schema versions, dependency-lock/build-manifest digest, build profile, enabled
+  features, relevant target flags and package identities. Record unknown/unavailable facts as such;
+  a Git revision alone does not identify a dirty or differently configured executable.
+- **Execution environment:** host kind (native/browser/remote), OS/runtime version, target triple,
+  architecture/pointer width, CPU model/features when available, logical/physical worker limits,
+  memory budget and relevant affinity/ISA policies actually used. Capture selected relevant settings,
+  never the whole environment, authentication tokens or arbitrary machine/user filesystem paths.
+  Browser-reported capabilities may be partial; do not fabricate hardware identity.
+- **Time and accounting:** observed start/end times with time source, monotonic elapsed duration
+  local to an attempt, logical work/reservations, physical/recovery work and stop reason. Clocks from
+  different hosts are not assumed synchronized. Environment/performance telemetry stays outside the
+  semantic identity used to check the mathematical result.
+- **Provenance and meaning:** independent theorem and parameter ancestry, generator/feature-extractor
+  identity, seed and relevant nondeterministic inputs, search mode, claim scope, verification records,
+  coverage, witness/certificate references and disclosure policy. Separately bind observed metadata,
+  declared metadata and any attestation; producer assertions are not trusted verification.
+
+Artifacts carry their own schema/type, content hash, byte length, producer/input references and
+required interpreter/checker/package identities. Their metadata can reference shared immutable
+build/environment records rather than copying a large manifest into every certificate. Hash exact
+artifact bytes; specify canonicalization independently for any structured semantic identity. No
+metadata entry, package signature or successful decoding grants pruning/admission authority.
+
+User annotations include title, description, tags and free-form notes, plus annotation ID, target
+record/artifact ID, author as supplied/authenticated, creation/edit time and revision. Keep them in
+bounded versioned sidecar records with optimistic concurrency, so editing a note cannot change a
+certificate hash or silently rewrite the recorded execution. Corrections to execution/provenance
+metadata append a superseding record with an explanation; retain the original observation. Notes
+are plain text/escaped Markdown in clients, not executable content. Notes/history export follows
+an explicit user choice and disclosure policy; private commentary need not ship with a demo.
+
+Capture build facts at build/package time and environment facts once per attempt at cold startup;
+reference them throughout. Do not sample host metadata or serialize annotations in solve loops.
+System metadata should be useful for reproducibility and performance comparison without confusing
+incidental hostname/time with semantic equality. Reports must distinguish reproducible inputs from
+missing modules or incomplete recovery information.
+
+Stage 2 defines the typed manifest/reference boundaries and naming; stage 4 persists records,
+annotations and exports. Add schema roundtrip/migration tests, unknown-metadata preservation rules,
+missing-environment cases, artifact-note hash independence, annotation conflict handling and export
+redaction tests. The public terminology authority starts at core `docs/glossary.md`; source/API and
+frontend naming changes must use it or update it explicitly.
+
 ## Extensions and the public/private boundary
 
 Core owns module registration contracts, compilation, checking and generic execution semantics.
