@@ -257,3 +257,25 @@ The unresolved issues are concrete: the smallest common signature/claim vocabula
 No incidental discovery-track entry was required: all findings were sought as part of this review. This is not a theorem-development task; no novelty or new proof verdict is being issued.
 
 Validation for this documentation slice: exact archived-message hash checks, local relative-link checks and scoped whitespace checks. No code, dependency, format, performance or mathematical capability is claimed to have changed.
+
+## Accepted motivation — query and design specialization (September 7 follow-up)
+
+A single validated model should admit multiple compiled plans specialized jointly for the query,
+representation and evidence requested. Shared input does not imply identical compilation. A
+threshold query may need only a bound and a counterexample; an exact optimum needs exclusion
+coverage; weighted updates, reliability and partial-information decisions can require successively
+different retained information. Reuse validated intermediate structure when its contract permits
+it, and measure the additional cost of stronger contracts explicitly.
+
+Evolve's search domain also includes **questions and designs**, not merely algorithms answering a
+fixed question. It can propose targets, observations/experiments, guarantee levels, scenario classes,
+physical designs and their compiled plans. Give that exploration its own evaluation contract:
+allowed changes, utility or operational value, hard constraints, cost of information/implementation,
+and required evidence. Compare candidates under declared comparable metrics; a cheaper answer to
+a different question is not automatically an improvement.
+
+Separate three activities: strategy search for an unchanged query; question design (what to ask or
+observe); and source-design synthesis (what system should exist). Track a candidate as design +
+query contract + compiled plan + evidence, with lineage and dependencies. This describes the
+exploration semantics; it does not require a universal tuple-shaped public API. Include two queries
+against one model in the first executable corpus, alongside a changed-design reuse rejection.

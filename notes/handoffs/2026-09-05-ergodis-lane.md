@@ -172,13 +172,21 @@ verification and coverage remain separate. WASM binary unchanged; no in-flight c
 remain unverified source material. Quotients, representative catalogs, event semantics and policy
 contracts are distinct; autonomous Evolve is broader than quotient minimization.
 
-**Next**: allocate a bounded semantic-contract corpus across QEC decoding, causal counterfactuals,
-privacy leakage and the existing recovery pilot. Define family-specific validated model/query/target,
-objective and evidence contracts before extracting common core types or freezing durable payloads.
-Keep kernels unchanged in the first slice. Then resume durable run records/repository adapters,
-with semantic references, provenance, annotations and explicit fork/update validity. A representative
-catalog pilot precedes broader autonomous representation selection. Preserve the no-control-in-kernels
-boundary and native64 performance gates. C1032 remains open for full original acceptance review.
+**C1092 complete**: query/design specialization motivation and six private executable semantic
+contract tests across privacy, causal and QEC; private `4841e23`, report
+`notes/2026-09-07-c1092-query-specialization-corpus.md`. Scoped tests, clippy and formatting pass.
+Recovered C1061 incremental/witness/certificate/top-k history. Existing LRC events distinguish
+parametric changes from rebase. Generic DeltaRun batching has numeric/same-leaf preconditions that
+must be enforced before external promotion; see the report's explicit saturation counterexample.
+
+**Next**: allocate adaptation/audit of existing `open_problem`, `parametric_lrc` and
+`generic_certificate` from private ADR 0001 §§9–10, with cold recovery/LRC update-contract examples.
+Extend their capability boundaries with the smallest shared
+model/query/observable/objective/admission types demonstrated by the corpus. Include same-model
+query specialization and Evolve question/design search under an explicit evaluation contract.
+Do not freeze durable payloads yet. Keep kernels unchanged initially; preserve native64 gates and
+the solver/control separation. Durable records, independent incremental evidence, representative
+catalogs and industry modules follow their stated admission gates. C1032 remains open.
 
 ### C985 — Ergodis exact algebraic optimization paper
 

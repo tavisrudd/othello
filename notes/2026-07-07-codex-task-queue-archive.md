@@ -5578,3 +5578,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1088 `[ergodis]` [REPORTED 2026-09-07]** — Browser Worker/client campaign demo complete; core `ea1f563`, actual UI/replay and native/Python gates pass → `notes/2026-09-07-c1088-browser-campaign-control.md`
 
 - **C1091 `[ergodis]` [REPORTED 2026-09-07]** — Verbatim September 4–5 brainstorm archives and core semantic-contract plan; domain examples precede durable schemas → `notes/2026-09-07-c1091-core-semantic-contracts.md`
+
+- **C1092 `[ergodis]` [REPORTED 2026-09-07]** — Query/design specialization motivation, six private contract tests and incremental history audit → `notes/2026-09-07-c1092-query-specialization-corpus.md`
