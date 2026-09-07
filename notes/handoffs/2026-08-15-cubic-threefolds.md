@@ -47,8 +47,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   field, generic-surface, specified-partner and fibration corollaries are
   integrated and validated; report:
   `../2026-09-07-c1120-stabilization-corollaries.md`.
-  Next is **C1117** additive motivic/spectrum work, **C1118** the full-I3 rank-four
-  certificate, and **C1119** finite-index slices. C978/C956 retain exposition;
+  **C1117 is complete:** additive motivic/spectrum formulas and consequences
+  are integrated; both gates pass with matching PDFs. Report:
+  `../2026-09-07-c1117-additive-spectrum-extension.md`.
+  Next is **C1118** the full-I3 rank-four certificate, then **C1119** finite-index
+  slices. C978/C956 retain exposition, including the author's requested
+  post-upgrade audit of specialist terminology and symbols;
   C963/C965/C966 retain algorithmic work. Treat upgrades as queued proof
   obligations, not accepted theorems. Review and ordering:
   `../2026-09-07-cubic-astra-review-triage.md`. Tschinkel--Zhang v2 source

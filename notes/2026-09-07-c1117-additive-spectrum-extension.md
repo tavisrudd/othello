@@ -108,7 +108,12 @@ The 17-page PDF has SHA-256
 `6a13dfc44514a2e5ced925f8efb200a0509490e77b79ebafc1679efb6a0ef54e`.
 Pages 14--16 were visually inspected after the final gate; no display or
 pagination repair was needed. Scoped whitespace checks passed. This is an
-authority checkpoint; standalone synchronization remains pending.
+authority checkpoint, committed as `08ee6cea8`. The guarded export audit
+reported no findings. The standalone gate also passed (run-quiet directory
+`/tmp/claude-run-quiet/20260907-155453-make-C-cubic-stabilization-m1-check/`)
+with the same PDF hash. Export verification passed after staging the new
+section; the initial tracked-tree check correctly reported that unstaged
+new file as missing. Standalone forward commit: `bcce442`. Nothing was pushed.
 
 ## Mystery ledger — ej + tt
 

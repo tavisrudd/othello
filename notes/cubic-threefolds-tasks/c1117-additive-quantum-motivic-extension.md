@@ -1,7 +1,15 @@
 # C1117: Additive quantum motivic extension and factorization constraints
 
 **Lane:** `cubic-threefolds`
-**Status:** queued after C1116's all-dimensional comparison gate
+**Status:** complete; authority and standalone gates pass
+
+## Result
+
+The additive scalar and exact-discriminant extensions, Hodge comparison,
+factorization identities, and limitations are integrated in Section 4.
+Report: `notes/2026-09-07-c1117-additive-spectrum-extension.md`.
+Authority `08ee6cea8`, standalone `bcce442`; identical 17-page PDFs.
+The five new statements have absent Lean coverage, explicitly recorded.
 
 ## Goal
 
