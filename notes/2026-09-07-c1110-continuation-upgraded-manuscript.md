@@ -37,7 +37,7 @@ controls; the paper claims a representation and correctness result, not speedup.
 - Typesetting: two byte-identical PDF builds at a fixed epoch, no undefined
   references or overfull boxes; all 11 pages visually inspected. Equation labels
   were converted to numbered environments after visual review caught inherited
-  display-counter misuse. The final rebuild is required before export.
+  display-counter misuse. The final rebuild passed before export.
 
 This is an internal proof/prose pass and independent computational replay, not an
 independent cold mathematical/prose referee report. That acceptance item and the
@@ -54,4 +54,28 @@ practically faster recognizer remain explicit questions, not hidden proof gaps.
 No additional out-of-scope discovery was identified; the discovery companion is
 unchanged. No new tasks were allocated beyond the approved six-task plan.
 
-Export verification and final commit identities are recorded after synchronization.
+## Verified local export
+
+The guarded exporter materialized `~/src/math-papers/continuation-graph-rigidity`
+from authority commit `4b7d602f3052a27bb5b519cac1adcca931751342`.
+Its 31 public source files passed the private-reference audit with zero findings;
+the exporter added provenance and its manifest (33 tracked files total).
+The new independent local Git history begins at
+`da8db37068c8cb7797fc9ff4134c1ebf64316099`.
+
+Inside the standalone repository, the following passed:
+
+```sh
+nix develop path:. --command bash -c 'make check && python3 verification/check_manuscript_build.py'
+```
+
+Exporter verification passed after the initial local commit. The manifest content
+SHA-256 is `d1c24554f5a157576514f892bd25907128f6b204c5f5a82a0acf31a9e5a93ae5`.
+The standalone PDF and `verification/SHA256SUMS` are byte-identical to the
+committed authority. The deterministic PDF is 325997 bytes and 11 pages.
+Citation and Zenodo metadata are included; no DOI has been assigned and no GitHub
+operation was performed. The author handles those actions.
+
+A combined image/tool display exceeded the conversation output budget during
+export inspection. Recovery used bounded export-manifest verification and the
+standalone checks above; no materialization was repeated over an existing tree.

@@ -29,7 +29,7 @@ reconstruction remains outside the headline under the existing N1-only ruling.
 - The finite data replay under independent Python/nauty construction and Sage 10.7/10.9.
   Source-only claim/evidence checks and reproducible PDF builds pass. No Lean theorem is claimed.
   The prototype recognizer is slower than generic graph isomorphism on the recorded controls.
-- C1110 is active: the first draft and its local export packaging are prepared; independent
+- C1110 is active: the first draft is exported and locally verified; independent
   cold mathematical/prose review and the exact public Clebsch comparison remain open.
   Export/validation record: `notes/2026-09-07-c1110-continuation-upgraded-manuscript.md`.
 
@@ -61,6 +61,6 @@ and competitive recognition performance remain open research, not new allocation
 
 ## Standalone draft
 
-Target: `~/src/math-papers/continuation-graph-rigidity`, written only through
+Verified local Git repository: `~/src/math-papers/continuation-graph-rigidity`, exported through
 `papers/scripts/export-paper-repos.py`. `.zenodo.json`, CFF and the MIT license are
 included in the authority. No GitHub operation or DOI assignment is part of this task.
