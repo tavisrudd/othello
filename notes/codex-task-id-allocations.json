@@ -4553,8 +4553,17 @@
       "last": 1091,
       "purpose": "Archive September 4\u20135 brainstorms and synthesize core semantic contracts before durable schemas",
       "sequence": 506
+    },
+    {
+      "count": 1,
+      "first": 1092,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1092,
+      "purpose": "Query specialization motivation and executable semantic contract examples",
+      "sequence": 507
     }
   ],
-  "next_id": 1092,
+  "next_id": 1093,
   "schema": "codex-task-id-allocations-v1"
 }
