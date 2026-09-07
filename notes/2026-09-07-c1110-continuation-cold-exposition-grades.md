@@ -1,0 +1,70 @@
+# C1110 — cold exposition review and percentile estimates
+
+Date: 2026-09-07. Snapshot: manuscript commit `11e00a242`; adjacent PDF, 12 pages, 331605 bytes. Read all 896 source lines and the extracted text of all PDF pages. The parent reviewer separately owns visual layout and export checks; this report does not claim an independent visual inspection. No prior review, revision report, task report, or previous findings were consulted. Read the complete repository guide and paper style guide. No manuscript edits, literature audit, computational regeneration, or formal checking were performed. This report is intentionally uncommitted for the parent to integrate.
+
+## Verdict
+
+The paper has a clear, self-contained structural result with an intelligible governing mechanism. A finite-geometry/algebraic-combinatorics specialist can identify the main theorem on PDF page 2, understand the two combinatorial recovery steps, and read the algebraic closure on page 7 without importing a large theorem. An adjacent graph-theory/algebra graduate researcher can follow the same argument with occasional reconstruction of conventions. The principal difficulty is visible: recovering uncoloured coordinate positions precedes forcing multiplication and translated multiplication to come from one field automorphism.
+
+I found no fatal defect in the stable-range argument on this read. That is a bounded referee judgment, not a proof of correctness. The core paper is ready for informed external mathematical feedback. Submission readiness is lower than its prose quality: the PDF does not supply a retrievable, versioned link for the computational bundle, the related-work interfaces need a little more orientation, and a few precise statements need cleanup. I would request a focused revision, not a new exposition architecture.
+
+## Percentile estimates
+
+Reference class: typical recent specialist finite-geometry/algebraic-combinatorics research preprints. These are subjective expert estimates of relative presentation quality, not measured benchmarks, probabilities of mathematical correctness, or probabilities of acceptance. Ranges reflect uncertainty about the comparator population and audience. Adjacent-field accessibility uses the same preprint reference class, assessed from the perspective of a graph-theory/algebra graduate researcher; it is not a comparison with graduate textbooks. Scores are deliberately rounded, and the overall estimate is not an arithmetic average.
+
+| Dimension | Midpoint percentile | Plausible range | Concrete reason |
+|---|---:|---:|---|
+| Specialist clarity | 80 | 70–90 | `thm:main` is early and precise; the geometric and algebraic mechanisms are compact and separable. |
+| Adjacent-field accessibility | 65 | 50–75 | Tangents and semilinearity receive useful glosses, but the first related-work paragraph introduces moduli/forgetful-map language without explaining the object. |
+| Layered navigation | 80 | 70–90 | The numerical model and reading guide give an actual first-pass route, with recognition and finite verification clearly separated. |
+| Conceptual motivation | 75 | 65–85 | “What geometry does one binary relation remember?” is a coherent question, and the triangle obstruction explains the fourth pencil. Broader consequences remain modest. |
+| Proof transparency/rigour | 80 | 70–90 | Both clique arguments expose their counting mechanism, and the polynomial identity closes the algebra without a black box. A few coordinate and convention bridges remain implicit. |
+| Notation/definitions | 75 | 65–85 | The four-coordinate model is economical; minor domain, simple-graph, and extremal-parameter conventions could be made explicit. |
+| Concision/style | 75 | 65–85 | Most paragraphs have a distinct job; the complex/complement detour and some repeated scope/trust prose spend space without advancing the central proof. |
+| Computational trust communication | 70 | 55–80 | The paper separates written proof, trusted execution, shared replay code, and witnessed versus full group orders, but a standalone reader cannot locate the stated public bundle from the PDF. |
+| Literature positioning | 65 | 50–75 | The hypergraph comparison is concrete and useful; moduli and cross-ratio comparisons are less integrated into the story. This grades presentation only. |
+| Overall exposition | 75 | 65–85 | A short, coherent mathematical argument is supported by helpful orientation; the remaining friction is local rather than structural. |
+| Submission readiness | 65 | 50–75 | External review is appropriate now; artifact citation and a small precision pass should precede a polished submission. Venue fit and independently verified novelty are outside this estimate. |
+
+**Novelty: ungraded.** I did not inspect the original sources or search for unmentioned predecessors. The manuscript's account of its distinction from known results is intelligible, but that is not evidence that the novelty claim is established.
+
+## Strong passages and actual friction
+
+1. **Introduction, `thm:main`, `cor:reconstruction`, and the paragraph beginning “For a concrete model.”** The theorem/corollary pair distinguishes automorphisms from transport between two frames and states the family restriction honestly. The example over F13 is useful rather than decorative: the words `(2,3,5,7)` and `(2,4,7,9)` show why a repeated value in different positions is irrelevant. The subsequent ten-versus-nine and eleven-versus-four gaps explain the recovery mechanism before the generic bounds. I checked the displayed field arithmetic. Retain this sequence.
+
+2. **Introduction, Related work.** The first paragraph changes immediately from elementary projective geometry to `M_{0,5}`, markings, forgetful maps, and compactification. A specialist outside moduli theory can infer the intended comparison, but the notation has no operational definition. One clause identifying `M_{0,5}` as ordered configurations of five distinct projective-line points modulo projectivities would make the transition usable. The hypergraph paragraph is closer to the actual proof and would also be a natural first related-work paragraph. The phrase “the content here is precisely ... four forgotten colours” understates the separate field-extension step that the paper itself correctly emphasizes elsewhere. Describe colour recovery as one part of the content.
+
+3. **Sections 2–4, `prop:intersection`, `lem:clique`, `thm:traces`, `thm:centres`.** These are strong proof passages. The operational description of the sets `S_x` largely compensates for not defining “linear hypergraph” separately. In `lem:clique`, choosing a point off one tangent and excluding two centres is the key gain over a generic intersecting-family bound, and the proof exposes it. In `thm:centres`, the restriction to a plane is both used and explained. An adjacent reader may initially wonder how a proof using the unknown centres can show intrinsic recovery; the size-characterization conclusions resolve this, and the introductory example already provides the right interpretation. I do not recommend adding a long explanation.
+
+4. **Section 6, `prop:normal` and the transition to `eq:mult`–`eq:shift`.** The coordinate change is correct as presented, but “direct equations ... up to reparametrization” leaves the reader to match the four coordinates to the normalized frame points. A single ordered correspondence would remove this small but central language-change burden: `x`, `y`, `x/y`, `(x-1)/(y-1)` correspond respectively to the centres `(0:1:0)`, `(1:0:0)`, `(0:0:1)`, `(1:1:1)`. The subsequent alphabet equations then have an immediately visible geometric source. This is a better place to spend one sentence than to add another general roadmap.
+
+5. **Section 6, `lem:isotopy` and `lem:frobenius`.** These are the strongest mathematical exposition in the paper. The missing diagonal forces the two row/column permutations to coincide; the punctured quotient equation supplies multiplicativity; the shift produces a polynomial identity of degree below q. I checked the excluded-element choice, the inverse case, removal of the multiplicative scalar, the extension of the identity to 0 and 1, and the final p-power argument. The inverse case is terse but reconstructible. Saying once that the multiplicative group of a finite field is cyclic would help the adjacent reader at `chi(x)=x^m` without reteaching finite fields. The uniqueness argument in `cor:reconstruction` is also convincing. Its first sentence says “normal form proved below” even though `prop:normal` is above it; replace that direction with the semantic reference.
+
+6. **Section 7, `thm:recognition`.** The algorithm separates recovery, completion, and final verification well. The missing-symbol interpretation of division-table completion is the important idea, and the proof gives it enough space. Soundness is secured by the final bijection and all-pairs check even for unpromised input; completeness uses frame permutations and the cyclic multiplicative group. The coarse complexity claim is plausible from the given enumeration bounds. “Closed common neighbourhoods” is less exact than the explicit seed-union formula in `lem:seeds`: reuse that formula for five seeds in the disjointness graph, and state deduplication of equal closures once. These are algorithm-specification improvements, not a discovered failure of the recognition theorem.
+
+7. **Section 8, `prop:boundary`, and Appendix A, `sec:verification`.** The scope separation is notably good. The proof explicitly admits that the two census implementations share exact-cover recursion, and distinguishes checking generated permutations from obtaining the full group order through nauty. I did not replay these computations and cannot independently affirm the census. The practical defect is artifact discoverability: “the public bundle,” relative filenames, `make check`, and a verification README do not tell a reader holding only the PDF which repository/version to obtain. Add a stable repository/archive citation with a fixed revision or release. Toolchain details can remain in the linked README. Do not imply that the enumerated witnesses alone certify the upper bound; the current text correctly keeps the trusted group computation visible.
+
+8. **Section 9, `sec:remarks` and `prob:extremal`.** The three open problems are concrete. The stronger-complex paragraph is weaker: “under explicit large-order hypotheses” invokes hypotheses that are not stated, followed by four broad references. As an optional comparison this is acceptable motivation, but its exact reconstruction claim is hard to assess from the supplied text. Either give a precise cited theorem/hypothesis or shorten the paragraph to the elementary observation about retained triples. Also define `m(k)` and `r(k)` as maximum *sizes* over the intended class of planes/orders/arcs. The sentence “Any improvement immediately lowers the intrinsic recovery threshold” is literally too strong: improving only the nonbinding bound need not change the maximum of the two requirements. For k=4, improving the centre bound alone leaves the trace bound q≥13 in place. Say improvements can lower the corresponding sufficient bound.
+
+9. **Small convention cleanup, `eq:conflict` and `eq:triangle`.** State once that adjacency is for distinct vertices. As written, the right-hand sides hold on the diagonal; ordinary simple-graph convention makes the intended reading evident, so this is not a counterexample to the theorem. `prop:intersection` already uses the distinctness qualification correctly.
+
+## Bounded mathematical assessment
+
+The stable-range reasoning survives the checks above. Tangent traces have enough legal points; a non-tangent clique loses two possible centres in each part; disjointness across centres is controlled by secants avoiding those centres. For k=4 these yield the required thresholds. The frame model turns preservation of the recovered partitions into the two displayed isotopy constraints, and the algebra forces Frobenius. The final faithfulness argument supplies uniqueness of ambient extension. None of this depends on the census or on the cited general hypergraph reconstruction theorem.
+
+The recognition argument also has the right logical structure. Its final direct certificate check protects soundness against spurious recovered objects. The small-order claims remain computational premises for this reviewer. The secondary literature comparisons and stronger-complex assertion were not source-audited. No claim of formal verification is made by the paper or inferred here.
+
+## Focused revision priority
+
+1. Supply a retrievable, versioned artifact citation in `sec:verification`.
+2. Repair the moduli interface, the backward-pointing normal-form reference, and the literal overstatement in `prob:extremal`.
+3. Add the one-line coordinate-to-centre correspondence and explicit five-seed closure/deduplication convention.
+4. Shorten or precisely source the optional complex/complement passage; resist adding more generic orientation prose.
+
+## Closeout: ej + tt and mystery ledger
+
+The bounded extra-value check suggests preserving the two-stage asymmetry: geometry recovers positions, while the fourth position forces addition through translation. The main proof already communicates this; the highest-value small improvement is the explicit coordinate-to-centre match, not another summary or a new figure. A conceptual reader can then explain both why the reconstruction works and why three centres are insufficient.
+
+No new mathematical mystery was discovered by this review. The unexplained q=8 two-resolution phenomenon and q=7 partition abundance are already honestly isolated in `prob:boundary-proof`; settling them requires a new mathematical argument beyond this review. Novelty and computational replay remain unperformed audits, not mysteries or hidden evidence of correctness.
+
+Vibe check: coherent and mathematically credible on a cold read; good specialist exposition with a small, specific submission polish list.

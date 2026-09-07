@@ -15,7 +15,7 @@ reconstruction remains outside the headline under the existing N1-only ruling.
 
 ## Current status
 
-- The 11-page first draft is `papers/continuation-graph-rigidity/continuation_graph_rigidity.tex`
+- The 12-page first draft is `papers/continuation-graph-rigidity/continuation_graph_rigidity.tex`
   and its deterministic PDF. The stable q>=13 proof is written mathematics; the graph
   determines q and every graph isomorphism extends uniquely semilinearly.
 - C1108 reconciled completed C295 with the paper and compared exact hypergraph/cross-ratio
@@ -33,6 +33,8 @@ reconstruction remains outside the headline under the existing N1-only ruling.
   No main-result defect was found; all local findings R1–R5 are now corrected
   and the authority checks pass. The uncited Clebsch aside was removed.
   Review: `notes/2026-09-07-c1110-continuation-cold-referee.md`.
+  A second fresh-reader exposition review and percentile estimates are complete;
+  local polish is applied. Report: `notes/2026-09-07-c1110-continuation-layering-review.md`.
   Export/validation record: `notes/2026-09-07-c1110-continuation-upgraded-manuscript.md`.
 
 ## Next steps
@@ -40,7 +42,8 @@ reconstruction remains outside the headline under the existing N1-only ruling.
 - **C1110** — complete publication-readiness review of the corrected first draft.
   Qualified external subject review and priority diligence remain distinct from
   the completed sub-agent review and local corrections.
-  The author handles GitHub and DOI actions.
+  The author handles GitHub and DOI actions; add the published artifact citation
+  to the verification appendix once its persistent identity is supplied.
 - **C271** — obtain/read the named Drake–Sané and Metsch sources and complete the auth-gated
   citation diligence for N2; keep N2 softened meanwhile. Existing audit:
   `notes/2026-07-11-continuation-rigidity-audit-scope.md`.

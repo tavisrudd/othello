@@ -57,3 +57,35 @@ this makes their shared mechanism visible without removing their different
 incidence hypotheses. The fourth translated quotient explains why multiplication
 alone is insufficient. No mathematical mystery is settled by editorial changes;
 the q=7,8 computation-free questions and priority diligence remain open.
+
+
+## Cold reader outcome and final polish
+
+The independent report is
+`notes/2026-09-07-c1110-continuation-cold-exposition-grades.md`. Its subjective
+midpoints are specialist clarity 80, adjacent accessibility 65, layered
+navigation 80, conceptual motivation 75, proof transparency 80, notation 75,
+concision 75, computational communication 70, literature positioning 65,
+overall exposition 75 and submission readiness 65. Ranges and concrete reasons
+are preserved in the report. These grades apply to 11e00a242, before the
+following small polish; no post-polish grade increase is inferred.
+
+Applied the concrete local suggestions: operational moduli-space gloss, explicit
+coordinate-to-centre correspondence, cyclic-group reminder, semantic normal-form
+reference, simple-graph distinctness convention, explicit five-seed union and
+deduplication, precise extremal domains, and correction of the overstatement
+that any bound improvement lowers the combined threshold. The unquantified
+complement-reconstruction detour and its four unused bibliography entries were
+removed. The census statement and table are now kept on one page. Its final
+page placement was visually checked.
+
+The reader's artifact-discoverability objection remains an explicit publication
+item: the author owns GitHub/DOI publication, and no published revision or DOI
+has been supplied. We did not invent a retrievable archival reference. Once
+published, add its persistent citation to the verification appendix. This does
+not prevent local verification or delivery of the requested exposition review.
+
+The revised extremal claim-map row was reviewed before refreshing its digest;
+all checks and deterministic builds passed again (331812-byte PDF). No new
+main-result issue was found. The additional ej/tt closeout settled the distinction
+between improving one sufficient bound and lowering their combined threshold.

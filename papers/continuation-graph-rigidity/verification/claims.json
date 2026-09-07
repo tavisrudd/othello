@@ -188,14 +188,14 @@
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     {
-      "cautions": "Open problem, not a proved assertion.",
+      "cautions": "Open question; improving one bound need not lower a threshold controlled by the other bound. No Lean formalization claimed.",
       "conclusion": "Open extremal clique and disjointness parameters",
       "coverage": "absent",
       "declarations": [],
-      "hypotheses": "General k-arcs",
+      "hypotheses": "k>=3; extremal sizes range over k-arcs in finite projective planes of all orders, with empty classes assigned zero",
       "label": "prob:extremal",
       "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
-      "statement_sha256": "c010d7bc30b9d4569c6d55446956ac550cbf9a0e5d1881728756cd3c9fcb5d4d",
+      "statement_sha256": "8aae3fadd24cbbea56a3b97faa640bcb8223c4201e55d92dfc254306a463af8c",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     {

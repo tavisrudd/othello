@@ -155,7 +155,9 @@ extra symmetries, and the translated quotient removes them.
 
 \paragraph{Related work.}
 
-With markings $(0,1,\infty,x,y)$, this coordinate model identifies the
+The space $M_{0,5}$ parametrizes ordered configurations of five distinct
+projective-line points modulo projectivities. With markings
+$(0,1,\infty,x,y)$, this coordinate model identifies the
 vertex set with $M_{0,5}(\F_q)$. Up to reparametrizing the target, the four
 displayed maps forget respectively $y$, $x$, $1$, and $0$. Thus the graph
 records fibre coincidence for four of the five forgetful maps to $M_{0,4}$.
@@ -164,8 +166,8 @@ $\Aut(\overline{M}_{0,n})=S_n$ for the compactified moduli space over
 $\mathbb C$ when $n\ge5$~\cite[Theorem 3]{BrunoMella}. This algebraic
 automorphism theorem does not constrain arbitrary permutations of the
 finite rational point set preserving a single graph relation.  The
-content here is precisely that the uncoloured finite graph recovers the four
-forgotten colours.  Cross-ratio graphs supply a related automorphism and isomorphism
+first step here is that the uncoloured finite graph recovers the four
+forgotten colours; the second forces semilinear extension.  Cross-ratio graphs supply a related automorphism and isomorphism
 classification~\cite[Definitions 3.2 and 3.4, Theorems 7.1 and 7.2]{GPZ}.
 Their vertices are the $q(q+1)$ ordered pairs of distinct projective-line
 points and their edges use cross-ratio orbits. Our vertex set has
@@ -207,6 +209,7 @@ $K\subset P$ be a $k$-arc.  Define
 \[
   V_K=\{x\in P\setminus K:K\cup\{x\}\text{ is an arc}\}.
 \]
+All graphs are simple; adjacency formulas concern distinct vertices.
 The \emph{continuation graph} $G_K$ has vertex set $V_K$, with
 \begin{equation}
   x\sim_K y
@@ -453,8 +456,9 @@ in one coordinate.
 The six frame secants have equations
 $X=0$, $Y=0$, $Z=0$, $X=Y$, $X=Z$, and $Y=Z$.
 After normalizing $Z=1$, avoiding them gives the displayed set $\Omega$.
-Direct equations for lines through the four frame points give, up to
-reparametrization, the four pencil parameters in \eqref{eq:coordinates}.
+The parameters $x$, $y$, $x/y$, and $(x-1)/(y-1)$ label lines through
+$(0:1:0)$, $(1:0:0)$, $(0:0:1)$, and $(1:1:1)$, respectively. These
+are the four pencil parameters in \eqref{eq:coordinates}.
 \end{proof}
 
 Write $D=\F_q\setminus\{0,1\}$.  For $q\geq13$,
@@ -515,7 +519,7 @@ in \eqref{eq:shift} yields $\eta(z)/\eta(w)=\delta(z/w)$.  A second
 application of Lemma~\ref{lem:isotopy} gives $\eta=\delta=:\lambda$, where
 $\lambda$ is another multiplicative-group automorphism.
 
-Write $\chi(x)=x^m$ and $\lambda(x)=x^n$, with
+Since $\F_q^*$ is cyclic, write $\chi(x)=x^m$ and $\lambda(x)=x^n$, with
 $1\leq m,n\leq q-2$ and both exponents coprime to $q-1$.  The definition
 of $\eta$ says
 \[
@@ -549,7 +553,7 @@ $S_4$, and the field automorphism group has order $e=[\F_q:\F_p]$.
 \end{proof}
 
 \begin{proof}[Proof of Corollary~\ref{cor:reconstruction}]
-The normal form proved below gives $|V(G_K)|=(q-2)(q-3)$, which is
+Proposition~\ref{prop:normal} gives $|V(G_K)|=(q-2)(q-3)$, which is
 strictly increasing for $q\ge3$. Hence $q=q'$. Choose a projectivity
 $h$ carrying $K$ to $J$. The map $h^{-1}f$ is a graph automorphism,
 so Theorem~\ref{thm:main} supplies an extension.
@@ -616,10 +620,12 @@ $O(n^2)$ field operations and adjacency tests.
 \begin{proof}
 \emph{Recover the partitions.}
 Enumerate four-cliques and apply Lemma~\ref{lem:seeds}, retaining only
-clique closures of size $q-3$. Reject unless there are $4(q-2)$ traces.
+clique closures of size $q-3$, deduplicating equal sets. Reject unless
+there are $4(q-2)$ traces.
 Construct their disjointness graph. Recover centre classes as the large
 maximal cliques from Theorem~\ref{thm:centres}; concretely, enumerate
-five-cliques and take their closed common neighbourhoods. In a true
+five-cliques $Q$ and form $Q\cup\bigcap_{B\in Q}N_{D_K}(B)$, again
+deduplicating equal sets. In a true
 frame graph every such five-clique is contained in one centre class,
 and a trace outside that class is disjoint from at most one member of
 it, so this closure is exactly the class. Reject unless there are four
@@ -692,6 +698,7 @@ of $V(G)$, each into $q-2$ cliques of size $q-3$, such that every edge
 belongs to exactly one block across the four partitions. Blocks need
 not be maximal cliques. The geometric pencils give one such resolution.
 
+\begin{samepage}
 \begin{proposition}[Exact small-order census]\label{prop:boundary}\coverage{absent}\evidence{boundary}\uses{prop:normal,lem:isotopy,lem:frobenius}
 For the indicated frame graphs the following table is exact. Here $b$
 counts all $(q-3)$-cliques, $p$ counts their partitions of the vertex set,
@@ -711,6 +718,7 @@ geometric resolution is exactly the ambient semilinear group, of index
 two. At $q=7,9,11$ every graph automorphism is ambient.
 The two resolutions share all twelve blocks at $q=5$ and no blocks at $q=8$.
 \end{proposition}
+\end{samepage}
 \begin{proof}[Computational proof and completeness]
 The certificate bundle named in Appendix~\ref{sec:verification} enumerates
 all cliques of size $q-3$, all exact covers of the vertex set by such
@@ -763,18 +771,13 @@ There is a stronger residual object,
 Its minimal nonfaces are the incompatible pairs whose joining line contains
 one selected point, together with the collinear triples whose line contains
 no selected point.  Thus $\Delta_K$ retains line-incidence information that
-$G_K$ discards.  Under explicit large-order hypotheses, this information
-can be used to complete the complement of the secant arrangement and then
-recover $K$ from the multiplicities of the restored secants.  This belongs
-to the classical neighbourhood of projective-plane complement and
-pseudo-complement embedding theorems~\cite{Batten,Bruck,BM1,BM2}; it is not
-a contribution claimed in this paper.
+$G_K$ discards.  We do not pursue reconstruction from this stronger object here.
 
 The present arguments isolate two extremal parameters. For $k\ge3$, let
-$m(k)$ be the
-largest clique in a $k$-arc continuation graph that is not contained in one
-tangent trace, and let $r(k)$ be the largest disjointness clique of tangent
-traces using at least two selected centres. Set either parameter to zero
+$m(k)$ be the maximum size of a clique not contained in one tangent
+trace, taken over $k$-arcs in finite projective planes of all orders.
+Over the same class, let $r(k)$ be the maximum size of a disjointness
+clique of tangent traces using at least two selected centres. Set either parameter to zero
 if its defining class is empty. We proved
 \[
  m(k)\leq k(k-2)+1,
@@ -784,8 +787,8 @@ if its defining class is empty. We proved
 
 \begin{problem}\label{prob:extremal}\coverage{absent}\uses{lem:clique,thm:centres}
 Determine $m(k)$ or $r(k)$ exactly for an infinite family of $k$, or improve
-their orders of growth.  Any improvement immediately lowers the intrinsic
-recovery threshold.
+their orders of growth.  Improvements can lower the corresponding
+sufficient recovery bounds.
 \end{problem}
 
 \begin{problem}\label{prob:boundary-proof}\coverage{absent}\uses{prop:boundary}
@@ -843,30 +846,6 @@ artifacts; this first draft remains subject to author and external review.
 A.~Bhattacharya, A.~Godinho, P.~Majumder and N.~Singhi,
 \newblock Reconstruction of hypergraphs from line graphs and degree sequences,
 \newblock arXiv:2104.14863v1, 2021.
-
-\bibitem{Batten}
-L.~M.~Batten,
-\newblock A dual approach to embedding the complement of two lines in a finite projective plane,
-\newblock \emph{J. Austral. Math. Soc. Ser. A} \textbf{51} (1991), 362--371.
-\newblock doi:10.1017/S1446788700034595.
-
-\bibitem{BM1}
-A.~Beutelspacher and K.~Metsch,
-\newblock Embedding finite linear spaces in projective planes,
-\newblock in \emph{Finite Geometries}, Lecture Notes in Pure and Applied Mathematics,
-Marcel Dekker, 1985.
-
-\bibitem{BM2}
-A.~Beutelspacher and K.~Metsch,
-\newblock Embedding finite linear spaces in projective planes II,
-\newblock \emph{Discrete Math.} \textbf{66} (1987), 219--230.
-\newblock doi:10.1016/0012-365X(87)90098-7.
-
-\bibitem{Bruck}
-R.~H.~Bruck,
-\newblock Finite nets. II. Uniqueness and imbedding,
-\newblock \emph{Pacific J. Math.} \textbf{13} (1963), 421--457.
-\newblock doi:10.2140/PJM.1963.13.421.
 
 \bibitem{BrunoMella}
 A.~Bruno and M.~Mella,
