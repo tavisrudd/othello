@@ -4517,8 +4517,17 @@
       "last": 1087,
       "purpose": "Portable runtime campaign ownership and bounded client session contract",
       "sequence": 502
+    },
+    {
+      "count": 1,
+      "first": 1088,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1088,
+      "purpose": "Interactive browser Worker client campaign control demo and checkpoint exchange",
+      "sequence": 503
     }
   ],
-  "next_id": 1088,
+  "next_id": 1089,
   "schema": "codex-task-id-allocations-v1"
 }
