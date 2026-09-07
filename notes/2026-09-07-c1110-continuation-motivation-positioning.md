@@ -85,3 +85,10 @@ recognition controls and two deterministic PDF builds. Final PDF is 12 pages,
 335629 bytes. The revised opening three pages were visually inspected; no
 undefined references or overfull boxes were reported. No fresh percentile
 grades or independent novelty verdict are claimed.
+
+
+Export verified from authority 3ad9e3ce7; standalone forward commit 9b83a53.
+Standalone checks and deterministic PDF verification pass; PDF bytes equal the
+authority. Export content hash:
+`c4cf8b67266d67e609b7e009100bcedc97a24ba35394c864b764e52aa911b3cb`.
+No GitHub or DOI action occurred.
