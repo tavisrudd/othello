@@ -17,8 +17,13 @@ commutative monoid.  An additive rank-two formal-exponent marker vanishes on
 every center that can occur in weak factorization in dimension four, doubles
 under product with `P^1`, detects the cubic block, and vanishes on projective
 space.  The same construction gives an irrationality criterion for smooth
-projective threefolds and the one-stabilization theorem for smooth prime Fano
+projective threefolds after one stabilization and the one-stabilization theorem for smooth prime Fano
 threefolds of genus eight.
+
+The count and the multiset of exact residue discriminants extend additively
+to `K0(Var_C)/(L-1)`. They distinguish certain threefolds with equal Hodge
+diamonds and constrain the centers in any rationalizing weak factorization.
+These extensions are proved in Section 4; they are not formalized in Lean.
 
 Here *even* means that odd bulk variables are set to zero and the connection
 is restricted to even cohomology.  *Generic* means that the numerical Novikov

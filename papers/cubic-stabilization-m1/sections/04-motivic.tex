@@ -1,0 +1,244 @@
+\section{Additive and spectral extensions}
+\label{sec:motivic}
+
+The blowup formulas also define an additive invariant on the Grothendieck
+group of varieties.  We first retain the squared exponent gaps instead of
+only counting them.  The canonical modified lattice is essential here:
+arbitrary separate integer shifts of the two exponents can change their
+squared difference.
+
+\begin{lemma}[A fixed target for the residue spectrum]
+\label{lem:constant-residue-spectrum}
+\coverage{absent}%
+\uses{prop:rank2-rigidity,lem:faithful-center-base-change,prop:qdm-operation-ledgers}%
+For every counted generic block, \(\delta^\sharp\) belongs to
+\[
+ \mathcal D=\C\setminus\{n^2:n\in\Z\}.
+\]
+Its value is preserved by the regular comparisons used in the blowup and
+projective-bundle formulas.
+\end{lemma}
+
+\begin{proof}
+The finite jet defining the residue is over a finite algebraic extension
+of the reduced generic coefficient field \(K_Y\): spectral projectors
+and the finitely many Sylvester equations needed for this jet require
+only algebraic scalar extension.  Proposition~\ref{prop:rank2-rigidity}
+makes its discriminant constant in every even bulk direction.  On the
+reduced source, a divisor direction acts by
+\(X_d\mapsto(D\cdot d)X_d\), while the other bulk directions are ordinary
+partial derivatives.  Thus the discriminant is killed by all logarithmic
+derivations in the numerical curve and remaining bulk variables.
+
+The common constants of \(K_Y\) under these derivations are \(\C\).
+Here is a coefficient argument that also applies to the completed ring.
+Write a constant fraction as \(f/g\).  Simultaneous formal rescaling of
+the monomials gives \(f(e^t x)g(x)=f(x)g(e^t x)\), by uniqueness of formal
+Taylor expansion.  At each bounded ample-plus-bulk degree only finitely
+many monomials occur.  Their distinct exponential characters are linearly
+independent, by the Vandermonde argument in
+Lemma~\ref{lem:faithful-center-base-change}.  Comparing the coefficient
+of each monomial therefore gives
+\(f_a g_b=g_a f_b\) for every pair of indices \(a,b\).
+Choose \(b\) with \(g_b\ne0\); then \(f=(f_b/g_b)g\).
+The same constant field holds in an algebraic extension: differentiating
+the monic minimal polynomial of an algebraic constant gives a polynomial
+of smaller degree vanishing at it, so every coefficient of the minimal
+polynomial is constant.  Since \(\C\) is algebraically closed, the
+algebraic constant lies in \(\C\).  The exponent criterion excludes
+exactly the integer squares.
+
+A regular comparison maps the centered leading operator and its image
+line to their counterparts.  It therefore maps \(E^\sharp\) isomorphically
+to the corresponding modified lattice.  On reduction modulo \(z\), the
+residues are conjugate.  A common scalar shift of the residue also leaves
+\((\tr R)^2-4\det R\) unchanged.  These are the transformations supplied
+by the comparisons; no separate change of the two exponent representatives
+is needed.  The faithful coefficient maps fix \(\C\), so they preserve
+the same numerical value in \(\mathcal D\).
+\uses{prop:rank2-rigidity,lem:faithful-center-base-change,prop:qdm-operation-ledgers}%
+\end{proof}
+
+Let \(M_{\mathrm{disc}}=\bigoplus_{\delta\in\mathcal D}\mathbf N e_\delta\), with group completion
+\(G_{\mathrm{disc}}=\bigoplus_{\delta\in\mathcal D}\Z e_\delta\).  For a connected smooth projective
+variety put
+\[
+ \mathfrak S(Y)=\sum_{E\text{ counted}}e_{\delta^\sharp(E)}\in M_{\mathrm{disc}}.
+\]
+Extend by sums over connected components and put
+\(\mathfrak S(\varnothing)=0\).  The augmentation
+\(\epsilon:G_{\mathrm{disc}}\to\Z\), \(e_\delta\mapsto1\), recovers
+\(I_{\mathrm{exp}}\).
+
+\begin{proposition}[Intrinsic operation formulas]
+\label{prop:intrinsic-spectrum-formulas}
+\coverage{absent}%
+\uses{lem:constant-residue-spectrum,lem:faithful-center-base-change,prop:qdm-operation-ledgers}%
+Let \(Y\) be smooth projective over \(\C\).  For a smooth closed center
+\(Z\subset Y\) of codimension \(c\geq1\) and
+a rank-\(r\) vector bundle \(V\) on \(Y\),
+\[
+ \mathfrak S(\Bl_ZY)=\mathfrak S(Y)+(c-1)\mathfrak S(Z),
+ \qquad \mathfrak S(\PP_Y(V))=r\mathfrak S(Y).
+\]
+The same formulas hold for \(I_{\mathrm{exp}}\).  For centers of differing
+component dimensions, apply the formula separately to each component.
+\end{proposition}
+
+\begin{proof}
+Lemma~\ref{lem:faithful-center-base-change} identifies every center
+occurrence with a faithful extension of its intrinsic module in every
+dimension.  Lemma~\ref{lem:constant-residue-spectrum} preserves each
+summand's spectrum.  Independent unit coordinates separate the summands
+generically, as in Proposition~\ref{prop:qdm-operation-ledgers}.
+Consequently their spectra add.  The projective-bundle comparison gives
+\(r\) copies in the same way.  Augmentation proves the scalar formulas.
+Disjoint centers may be blown up successively, giving the last assertion.
+\uses{lem:constant-residue-spectrum,lem:faithful-center-base-change,prop:qdm-operation-ledgers}%
+\end{proof}
+
+\begin{theorem}[Additive Grothendieck-group invariants]
+\label{thm:additive-motivic-marker}
+\coverage{absent}%
+\uses{prop:intrinsic-spectrum-formulas}%
+\imports{Bittner:blowup-presentation}%
+There are unique additive homomorphisms
+\[
+ \mathcal S:K_0(\operatorname{Var}_{\C})/(\mathbb L-1)\longrightarrow G_{\mathrm{disc}},
+ \qquad
+ \mathcal I=\epsilon\mathcal S:
+ K_0(\operatorname{Var}_{\C})/(\mathbb L-1)\longrightarrow\Z
+\]
+agreeing with \(\mathfrak S\) and \(I_{\mathrm{exp}}\) on smooth projective
+varieties.  Here \(\mathbb L=[\mathbf A^1]\),
+\(\mathcal I(1)=\mathcal I(\mathbb L)=0\), and for a smooth cubic
+threefold \(X\), \(\mathcal S([X])=e_{4/9}\) and \(\mathcal I([X])=1\).
+\end{theorem}
+
+\begin{proof}
+Bittner's presentation of the abelian group uses smooth projective
+generators, the empty class, and the blowup relation
+\cite[Theorem~3.1]{Bittner}.  Since the exceptional divisor is
+\(\PP_Z(N_{Z/Y})\), Proposition~\ref{prop:intrinsic-spectrum-formulas} gives
+\[
+ \mathfrak S(\Bl_ZY)-\mathfrak S(\PP_Z(N_{Z/Y}))
+ =\mathfrak S(Y)-\mathfrak S(Z)
+\]
+in \(G_{\mathrm{disc}}\).  Thus the assignment extends uniquely and additively.
+For a smooth projective \(Y\), the scissor relation and the bundle formula
+give
+\[
+ [Y\times\PP^1]=[Y]+\mathbb L[Y],\qquad
+ \mathcal S(\mathbb L[Y])=
+ \mathfrak S(Y\times\PP^1)-\mathfrak S(Y)=\mathfrak S(Y).
+\]
+Smooth projective classes generate the whole group, so
+\(\mathcal S((\mathbb L-1)a)=0\) for every \(a\).  This proves the
+factorization through the indicated quotient, and augmentation gives
+\(\mathcal I\).  Points have no counted block, while the cubic has the
+single block of discriminant \(4/9\) computed in
+Section~\ref{subsec:shared-cubic-packet}.
+\uses{prop:intrinsic-spectrum-formulas,prop:atomic-lowdim}%
+\imports{Bittner:blowup-presentation}%
+\end{proof}
+
+These are additive group invariants.  In particular, \(\mathcal I\) is
+not multiplicative: its value at \(1\) is zero but its value at a cubic
+is one.  The identity \(\mathcal I(\mathbb L a)=\mathcal I(a)\) does not make
+\(\mathcal I\) a stable-birational invariant.
+
+For \(n\geq1\), the relation \(H^{n+1}=q\) in small quantum cohomology
+shows that Euler multiplication on \(\PP^n\) has distinct eigenvalues at
+\(q\ne0\).  It remains semisimple at the generic big point.  Thus
+\(\mathfrak S(\PP^n)=0\) for every \(n\), including \(n=0\).
+For example, embed a cubic threefold \(X\subset\PP^4\subset\PP^5\).
+Then \(\mathcal I([\Bl_X\PP^5])=1\), whereas
+\(\mathcal I([\PP^5])=0\).  Thus birational invariance already fails
+in dimension five.
+
+\begin{proposition}[Equal Hodge diamonds, different marker values]
+\label{prop:hodge-marker-separation}
+\coverage{absent}%
+\uses{prop:intrinsic-spectrum-formulas,prop:atomic-lowdim}%
+Let \(X\) be a smooth cubic threefold and \(p\in X\).  Let
+\(C\subset\PP^1\times\PP^1\subset\PP^3\) be a smooth curve of
+bidegree \((2,6)\).  Then \(\Bl_pX\) and \(\Bl_C\PP^3\) have the same
+Hodge diamond, but their marker values are respectively one and zero.
+Consequently \(\mathcal I\) does not factor through the Hodge--Deligne
+polynomial.
+\end{proposition}
+
+\begin{proof}
+The linear system \(\OO(2,6)\) contains smooth members, and adjunction
+gives genus \((2-1)(6-1)=5\).  For the cubic,
+\(c(T_X)=(1+H)^5/(1+3H)\) gives Euler characteristic \(-6\).
+Weak Lefschetz and \(K_X=\OO_X(-2)\) then give
+\(h^{1,1}=h^{2,2}=1\), \(h^{2,1}=h^{1,2}=5\), and
+\(h^{3,0}=h^{0,3}=0\).  The Hodge blowup formula shows that both displayed
+blowups have, besides \(h^{0,0}=h^{3,3}=1\), precisely
+\[
+ h^{1,1}=h^{2,2}=2,\qquad h^{2,1}=h^{1,2}=5.
+\]
+Their Hodge--Deligne polynomials therefore agree.  The intrinsic blowup
+formula adds only point or curve contributions, all zero, so their marker
+values equal those of \(X\) and \(\PP^3\), namely one and zero.
+\uses{prop:intrinsic-spectrum-formulas,prop:atomic-lowdim}%
+\end{proof}
+
+\begin{corollary}[Contributions in any rationalizing factorization]
+\label{cor:factorization-spectrum}
+\coverage{absent}%
+\uses{prop:intrinsic-spectrum-formulas,prop:atomic-lowdim}%
+\imports{AKMW:weak-factorization}%
+Let \(X\) be a smooth cubic threefold.  In any projective weak
+factorization of a rationalization
+\(X\times\PP^m\dashrightarrow\PP^{m+3}\), orient the arrows from the
+product to projective space and take connected centers.  Then
+\[
+ \sum_{\mathrm{blowdowns}}(c_Z-1)\mathfrak S(Z)
+ -\sum_{\mathrm{blowups}}(c_Z-1)\mathfrak S(Z)
+ =(m+1)e_{4/9}.
+\]
+For \(m=2\), only threefold centers of codimension two can contribute;
+their net spectrum is \(3e_{4/9}\), and their net scalar marker is three.
+\end{corollary}
+
+\begin{proof}
+The initial spectrum is \((m+1)e_{4/9}\); projective space has no counted
+blocks and hence spectrum zero.  Telescope the intrinsic blowup formulas.
+In dimension five, every nontrivial center has dimension at most three,
+and centers of dimension at most two contribute zero.  The remaining
+centers have codimension two.  Applying \(\epsilon\) gives the scalar
+identity.  This counts contributions with multiplicity, not distinct
+centers, and does not identify a center as a cubic threefold.
+\uses{prop:intrinsic-spectrum-formulas,prop:atomic-lowdim}%
+\imports{AKMW:weak-factorization}%
+\end{proof}
+
+\paragraph{Limits of the construction.}
+Smooth complex cubic threefolds form one connected deformation family.
+Unmarked deformation-invariant Gromov--Witten data are consequently the
+same throughout that family, whereas it contains both stably rational
+cubics \cite{TschinkelZhangTorsors} and very general stably irrational
+cubics \cite{EGFS}.  Increasing the collection of such quantum data
+cannot by itself completely detect stable rationality within the family.
+
+The rank-two pairing argument also has a specific boundary.  In rank
+three, let \(E_{ij}\) denote the matrix units and put
+\[
+ N=E_{12}+E_{23},\qquad
+ P=\begin{pmatrix}0&0&1\\0&1&0\\1&0&0\end{pmatrix},\qquad
+ A_0=E_{21}-E_{32}.
+\]
+Then
+\[
+ N^TP=PN=E_{23}+E_{32},\qquad
+ PA_0=E_{21}-E_{12}=-A_0^TP.
+\]
+Thus the constant pairing is horizontal for \(A(z)=N/z+A_0\), but
+\(A_0e_1=e_2\notin\ker N\).  Pairing horizontality alone does not
+preserve the kernel flag.  For a cyclic Jordan leading term and
+\(S=\diag(1,z,\ldots,z^{r-1})\), regularity of the modified connection
+requires \((A_k)_{ij}=0\) whenever \(i-j>k\), for \(k\geq0\).
+Additional geometric filtration compatibility would therefore be needed
+for that higher-rank modification.

@@ -4,6 +4,11 @@
 
 **Status:** active by author instruction; referee-accepted release candidate
 
+**Next exposition pass:** after the mathematical upgrades, audit terminology
+and symbols with C978 for standard specialist usage, unnecessary coined labels,
+and notation consistency (author instruction, 2026-09-07). Preserve precisely
+defined new concepts while explaining them in familiar mathematical language.
+
 ## Stable entry point
 
 - authority: `papers/cubic-stabilization-irrationality/`

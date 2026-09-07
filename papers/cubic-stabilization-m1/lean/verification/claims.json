@@ -928,6 +928,56 @@
       "cautions": "Conditional deduction. Lean proves the classification induction and its application to each individual center summand, but does not construct the geometric QDM blocks, classify the surfaces, prove the initial calculations or operation formulas, or construct the faithful comparison for each center summand.",
       "statement_digest": "8537c121f53992f1723ebcd290313be05adc3ce66ea78da2df973f2e036a4850",
       "terminal_digest": "5ba89ca7cb2e71e08172b3d6baff7ab9c7ec980d2c21ef45e620c96f0d63225c"
+    },
+    {
+      "manuscript_label": "lem:constant-residue-spectrum",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The exact discriminant of the canonical modified residue of a counted generic even block.",
+      "hypotheses": "The reduced numerical generic field, all even bulk derivations, an algebraic finite jet, and regular comparisons preserving the original lattice.",
+      "conclusion": "The discriminant is a complex number outside the integer squares and is preserved by the comparisons.",
+      "cautions": "Absent. The common-constant-field argument and functoriality of the canonical modified lattice are proved in the manuscript; arbitrary changes of regular-singular lattices are not permitted for the exact spectrum.",
+      "statement_digest": "d9b1fa8191773481b5f2bb2c668e1629b2843ea7587151c7c338b872a63dc1b9"
+    },
+    {
+      "manuscript_label": "prop:intrinsic-spectrum-formulas",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The finite discriminant multiset, its scalar augmentation, smooth projective varieties, vector bundles and smooth centers.",
+      "hypotheses": "The audited faithful center maps in every dimension, exact residue transport, and independent unit coordinates separating comparison summands.",
+      "conclusion": "The intrinsic blowup and projective-bundle formulas hold for the spectrum and scalar count.",
+      "cautions": "Absent. This uses the geometric comparisons; the existing abstract operation terminals do not formalize the newly defined fixed spectrum target.",
+      "statement_digest": "787668caf541256d0ca5be93849a085b230cdc8d110a6b10a90d219cff558528"
+    },
+    {
+      "manuscript_label": "thm:additive-motivic-marker",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The additive Grothendieck group of complex varieties and the free abelian group on permitted complex discriminants.",
+      "hypotheses": "Intrinsic blowup and projective-bundle formulas, additivity over components and value zero on the empty variety.",
+      "conclusion": "Unique additive extensions factor through the ideal L-1; the scalar extension is zero on 1 and L and one on a smooth cubic threefold.",
+      "cautions": "Absent. Bittner supplies an abelian-group presentation; no multiplicative invariant or stable-birational invariance is claimed.",
+      "statement_digest": "63fad0d5353da4e1571121c69966ddabd12c9050660beb09016a5c0b82b27c74"
+    },
+    {
+      "manuscript_label": "prop:hodge-marker-separation",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The point blowup of a smooth cubic threefold and the blowup of P3 along a smooth bidegree-(2,6) curve on a quadric.",
+      "hypotheses": "The Hodge blowup formula, the curve genus and cubic Hodge numbers, and intrinsic marker formulas with point/curve vanishing.",
+      "conclusion": "The two threefolds have equal Hodge diamonds and marker values one and zero, so the additive invariant cannot factor through the Hodge-Deligne polynomial.",
+      "cautions": "Absent. The Hodge and marker calculations are mathematical proofs in the text, not new Lean conclusions.",
+      "statement_digest": "7096a9882e10a672adcbc82306a680e9ea857f984eae03887ab9ee0a8f55fae6"
+    },
+    {
+      "manuscript_label": "cor:factorization-spectrum",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "A projective weak factorization of a rationalization of X times P^m, oriented toward projective space with connected smooth centers.",
+      "hypotheses": "X is a smooth cubic threefold; the rationalization exists; the intrinsic formulas and low-dimensional vanishing hold.",
+      "conclusion": "Blowdown contributions minus blowup contributions equal (m+1)e_(4/9); at m=2 only codimension-two threefold centers contribute, with net scalar count three.",
+      "cautions": "Absent. This is a necessary condition on an existing rationalization, not a construction, a count of distinct centers, or an identification of centers as cubic threefolds.",
+      "statement_digest": "362145f8a92a142b186fe5b235ef1b574f83a22c9d149cf7fd97897200693f60"
     }
   ],
   "machinery": [

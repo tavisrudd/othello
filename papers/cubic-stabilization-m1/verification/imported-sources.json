@@ -363,6 +363,28 @@
           "matched": "The family of the theorem is indexed by the smooth locus of the pencil, which is exactly the complement of its finitely many singular members."
         }
       ]
+    },
+    "Bittner:blowup-presentation": {
+      "citation": "Bittner",
+      "pinpoint": "Theorem 3.1, presentation (bl), including its projective-generator variant",
+      "used": "The presentation of the additive Grothendieck group by smooth projective generators, the empty class and blowup relations.",
+      "conventions": [
+        {
+          "aspect": "base field",
+          "requirement": "Characteristic zero.",
+          "matched": "The construction is over C."
+        },
+        {
+          "aspect": "group presentation",
+          "requirement": "Values must satisfy the empty-class and blowup relations in an abelian group. Multiplicativity is not required.",
+          "matched": "The finite discriminant monoid is group-completed; intrinsic blowup and exceptional projective-bundle formulas give the relation, with sums over components."
+        },
+        {
+          "aspect": "L-1 quotient",
+          "requirement": "The presentation itself does not assert annihilation of L-1 by an arbitrary additive invariant.",
+          "matched": "The manuscript proves annihilation on every smooth projective generator from the P1 bundle formula, then extends additively to all classes."
+        }
+      ]
     }
   }
 }

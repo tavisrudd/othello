@@ -70,7 +70,7 @@ truncated Chern class arithmetic, the Betti numbers, the degree count placing th
 whole odd cohomology in that packet, and the constancy of rank on a connected
 component.
 
-Checked coverage snapshot: 57 claims; 4 absent; 25 fragmentary; 27 conditional;
+Checked coverage snapshot: 62 claims; 9 absent; 25 fragmentary; 27 conditional;
 1 complete; 318 reviewer terminals, of which 83 are machinery serving no current
 manuscript claim.
 

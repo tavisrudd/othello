@@ -12,6 +12,10 @@ to follow on a first expert read.
 
 ## Scope
 
+- Author instruction (2026-09-07): after the mathematical upgrades, audit
+  terminology and symbols across both papers for standard specialist usage.
+  Replace unnecessary coined labels, distinguish genuinely new definitions,
+  and check notation for consistency and collisions. Coordinate with C956.
 - Improve the theorem-first narrative, proof roadmaps, local transitions, and
   notation onboarding.
 - Remove avoidable ambiguity, repetition, and forward-reference friction.
