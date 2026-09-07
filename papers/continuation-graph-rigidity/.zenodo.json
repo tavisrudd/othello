@@ -1,0 +1,11 @@
+{
+  "title": "Reconstructing projective frames from their continuation graphs",
+  "creators": [{"name": "Rudd, Tavis"}],
+  "description": "First draft. Semilinear reconstruction of four-point projective frames from uncoloured continuation graphs, polynomial recognition over a supplied finite field, and independently replayed small-order exceptions. The stable-range proof is written mathematics; no Lean formalization is claimed.",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "license": "MIT",
+  "access_right": "open",
+  "version": "0.1.0",
+  "keywords": ["finite geometry", "graph reconstruction", "semilinear rigidity", "projective frames"]
+}

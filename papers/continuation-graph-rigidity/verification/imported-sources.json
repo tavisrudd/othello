@@ -1,0 +1,5 @@
+{
+  "schema": "continuation-imported-sources-v1",
+  "entries": {},
+  "reason": "Cited reconstruction and moduli theorems provide comparisons, not logical premises. The written proofs use standard finite-field arithmetic, cyclicity of a finite field's multiplicative group, and projective-frame normalization; there is no imported formal terminal or claimed Lean proof. The Frobenius exponent argument is proved directly."
+}

@@ -254,6 +254,7 @@ reason = "internal theorem-adoption ledger; public claims remain in the manuscri
 
 [[repository]]
 name = "continuation-graph-rigidity"
+include_release_pdfs = true
 source = "papers/continuation-graph-rigidity"
 paper_ids = ["continuation_graph_rigidity"]
 disposition = "active"

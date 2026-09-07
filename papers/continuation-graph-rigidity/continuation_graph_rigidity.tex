@@ -8,6 +8,7 @@
 \usepackage{booktabs}
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Reconstructing projective frames from their continuation graphs},pdfauthor={Tavis Rudd}}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
@@ -30,33 +31,30 @@
 \newcommand{\Aut}{\operatorname{Aut}}
 \newcommand{\Stab}{\operatorname{Stab}}
 
-\title{Semilinear rigidity of four-point-frame continuation graphs}
+\title{Reconstructing projective frames from their continuation graphs}
 \author{Tavis Rudd}
-\date{Working draft --- July 2026}
+\date{First draft --- September 7, 2026}
+
+\input{formal-annotations.tex}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Let $K$ be a projective frame in $\PG(2,q)$.  Its continuation graph has as
-vertices the points that can be adjoined to $K$ without creating three
-collinear points, with two vertices adjacent when they cannot be adjoined
-simultaneously.  We prove that, for every prime power $q\geq 13$, every
-automorphism of this abstract uncoloured graph is induced by a semilinear
-collineation stabilizing $K$.  Consequently
-\[
-  \Aut(G_K)=\Stab_{\PGammaL(3,q)}(K)
-  \quad\text{and}\quad
-  |\Aut(G_K)|=24[\F_q:\F_p].
-\]
-The proof first recovers the tangent-line traces as the large maximal
-cliques of the graph and then recovers their four centre classes from
-disjointness.  In frame coordinates, a colour-preserving automorphism must
-preserve simultaneously a multiplicative quotient and its translate; a
-punctured isotopy argument forces the induced alphabet permutations to be a
-common Frobenius automorphism.  We also exhibit exact obstructions for arcs
-of size at most three.  Thus four points are the first possible uniform
-semilinear-rigidity threshold.
+A projective frame in $\PG(2,q)$ determines a graph on the points that can
+be adjoined without creating three collinear points; two vertices are
+adjacent when they cannot be adjoined together. For $q\ge13$, we prove
+that every isomorphism between these uncoloured graphs extends uniquely
+to a semilinear equivalence of the frames. The graph also determines $q$.
+The proof recovers tangent traces and their four centre classes, then uses
+compatibility between multiplication and translation to recover the field
+action. Completing a punctured division table makes the reconstruction
+algorithmic and gives polynomial-time recognition over a supplied finite
+field, with an independently checkable coordinate certificate.
+An exhaustive finite computation closes the range $5\le q<13$:
+semilinear rigidity holds at $q=7,9,11$, whereas $q=5,8$ each have exactly
+two four-pencil resolutions and an ambient subgroup of index two.
+The stable-range proof is independent of this computation.
 \end{abstract}
 
 \noindent\textbf{Keywords.} finite projective plane; arc; continuation
@@ -89,14 +87,40 @@ recovered from the graph.
 Our main result settles the extension question for the first possible arc
 size.  Every four-arc in $\PG(2,q)$ is a projective frame.
 
-\begin{theorem}[Main theorem]\label{thm:main}
+\begin{theorem}[Semilinear rigidity]\label{thm:main}\coverage{absent}\uses{thm:traces,thm:centres,prop:normal,lem:frobenius}
 Let $K$ be a projective frame in $\PG(2,q)$, where $q=p^e\geq13$.  Then, as
 permutation groups on the legal continuation set,
 \[
-  \Aut(G_K)=\Stab_{\PGammaL(3,q)}(K).
+  \Aut(G_K)=\Stab_{\PGammaL(3,q)}(K),
+  \qquad |\Aut(G_K)|=24e.
 \]
-In particular $|\Aut(G_K)|=24e$.
 \end{theorem}
+
+\begin{corollary}[Reconstruction and extension]\label{cor:reconstruction}\coverage{absent}\uses{thm:main,prop:normal}
+Let $K\subset\PG(2,q)$ and $J\subset\PG(2,q')$ be projective frames,
+where $q,q'\ge13$. Every graph isomorphism $f:G_K\to G_J$ forces
+$q=q'$ and extends uniquely to a semilinear collineation carrying $K$
+to $J$. Thus the abstract graph determines the plane and its frame up
+to semilinear equivalence within this family.
+\end{corollary}
+
+\begin{proof}
+The normal form proved below gives $|V(G_K)|=(q-2)(q-3)$, which is
+strictly increasing for $q\ge3$. Hence $q=q'$. Choose a projectivity
+$h$ carrying $K$ to $J$. The map $h^{-1}f$ is a graph automorphism,
+so Theorem~\ref{thm:main} supplies an extension.
+For uniqueness, an extension acting trivially on the legal vertices
+fixes each recovered centre class. After frame normalization it is a
+field automorphism $x\mapsto x^{p^i}$. Every $x\in\F_q\setminus\{0,1\}$
+occurs as a first coordinate, so this automorphism fixes the whole field.
+It is therefore the identity.
+\end{proof}
+
+The corollary concerns graphs promised to arise from projective frames.
+Section~\ref{sec:algorithm} also gives recognition of an arbitrary input
+graph against this family and checks the resulting coordinate transport.
+No ambient labels or colouring are supplied with the input graph.
+
 
 The input is only one uncoloured binary relation.  No tangent colouring,
 coordinate system, or ambient plane is supplied.  The proof has two
@@ -119,24 +143,38 @@ $\Aut(M_{0,n})=S_n$ concerns biregular automorphisms of the algebraic
 variety~\cite{BrunoMella}; it does not constrain arbitrary permutations of
 the finite rational point set preserving a single graph relation.  The
 content here is precisely that the uncoloured finite graph recovers the four
-forgotten colours.  Cross-ratio graphs are close methodological relatives,
-but have a different vertex set and adjacency relation~\cite{GPZ}.
+forgotten colours.  Cross-ratio graphs supply a related automorphism and isomorphism
+classification~\cite[Definitions 3.2 and 3.4, Theorems 7.1 and 7.2]{GPZ}.
+Their vertices are the $q(q+1)$ ordered pairs of distinct projective-line
+points and their edges use cross-ratio orbits. Our vertex set has
+$(q-2)(q-3)$ elements and its edges record fibre coincidence.
+
+The tangent-symbol representation is a linear-hypergraph reconstruction
+problem. Bhattacharya, Godinho, Majumder and Singhi
+\cite[Lemmas 2.3--2.4]{BGMS} recover large star cliques in intersection
+graphs of uniform hypergraphs of bounded pair degree. For uniformity four
+and pair degree one, their star-clique threshold is $14$; the
+centre-resolved argument below gives $10$. Hypergraph reconstruction
+recovers the tangent symbols. Recovering their centre classes and forcing
+semilinear extension are further steps, proved here without importing a
+general hypergraph-recognition theorem.
 
 The lower boundary is genuine.  One-point continuation graphs are disjoint
 unions of cliques, every two-point continuation graph is a rook graph
 independent of the plane, and triangles generally admit automorphisms from
-the multiplicative group of the field that are not semilinear.  At $q=5$
-the frame graph is $K_6$ minus a perfect matching and has twice the expected
-automorphism group.  The orders $q=7,8,9,11$ are not classified here.  The
-bound $q\geq13$ is a sufficient intrinsic-recovery threshold, not a claim of
-sharpness.
+the multiplicative group of the field that are not semilinear.  At $q=5$ and $q=8$ the ambient group has index two in the graph
+automorphism group. The finite classification in
+Section~\ref{sec:boundary} proves rigidity at $q=7,9,11$.
+Thus $q\ge13$ is the range of the uniform geometric proof, not the
+sharp boundary of the automorphism statement.
 
 The paper is organized as follows.  Section~\ref{sec:def} gives the graph
 and its linear-hypergraph representation.  Sections~\ref{sec:traces} and
 \ref{sec:centres} recover tangent traces and selected centres.  Section
 \ref{sec:obstructions} records the low-cardinality obstructions.  Section
 \ref{sec:frame} proves Theorem~\ref{thm:main}.  Section~\ref{sec:remarks}
-states scope boundaries and open problems.
+states scope boundaries and open problems. The recognition algorithm
+and finite boundary are in Sections~\ref{sec:algorithm} and~\ref{sec:boundary}.
 
 \section{Continuation graphs and their intersection representation}
 \label{sec:def}
@@ -147,13 +185,13 @@ $K\subset P$ be a $k$-arc.  Define
   V_K=\{x\in P\setminus K:K\cup\{x\}\text{ is an arc}\}.
 \]
 The \emph{continuation graph} $G_K$ has vertex set $V_K$, with
-\[
+\begin{equation}
   x\sim_K y
   \quad\Longleftrightarrow\quad
   \text{some line contains $x,y$, and one point of $K$}.
-  \tag{2.1}
-\]
-Because $x$ and $y$ are individually legal, a line witnessing (2.1)
+  \label{eq:conflict}
+\end{equation}
+Because $x$ and $y$ are individually legal, a line witnessing \eqref{eq:conflict}
 contains exactly one point of $K$.  Thus every edge has a unique
 \emph{selected centre}.
 
@@ -163,7 +201,7 @@ For $x\in V_K$, put
   S_x=\{xt:t\in K\}\subseteq\coprod_{t\in K}\Sigma_t.
 \]
 
-\begin{proposition}[Intersection representation]\label{prop:intersection}
+\begin{proposition}[Intersection representation]\label{prop:intersection}\coverage{absent}
 The sets $S_x$ form a $k$-uniform linear hypergraph $\cH_K$, and
 \[
  |S_x\cap S_y|=
@@ -198,7 +236,7 @@ For a tangent line $\ell$, write $B_\ell=\ell\cap V_K$.  This is a clique
 of $G_K$, but a clique need not a priori lie on one tangent: different
 edges may have different selected centres.
 
-\begin{lemma}[Non-tangent clique bound]\label{lem:clique}
+\begin{lemma}[Non-tangent clique bound]\label{lem:clique}\coverage{absent}
 Assume $k\geq2$.  If a clique $C$ of $G_K$ is not contained in a tangent
 trace, then
 \[
@@ -225,12 +263,12 @@ $k^2-k+1$ for a non-sunflower family of $k$-sets~\cite{Deza}.  The improved
 constant above uses the resolution of every continuation edge by a selected
 centre.
 
-\begin{theorem}[Tangent-trace recovery]\label{thm:traces}
+\begin{theorem}[Tangent-trace recovery]\label{thm:traces}\coverage{absent}\uses{lem:clique}
 If
-\[
+\begin{equation}
   q-\binom{k-1}{2}>k(k-2)+1,
-  \tag{3.1}
-\]
+  \label{eq:trace-threshold}
+\end{equation}
 then the tangent traces are exactly the maximal cliques of $G_K$ with more
 than $k(k-2)+1$ vertices.  Hence every abstract graph isomorphism
 $G_K\to G_J$ canonically induces an isomorphism of the uncoloured
@@ -255,7 +293,7 @@ Assume Theorem~\ref{thm:traces} applies.  Form a graph $D_K$ whose vertices
 are the recovered tangent traces, joining two traces when they are disjoint
 as subsets of $V_K$.
 
-\begin{theorem}[Centre-class recovery]\label{thm:centres}
+\begin{theorem}[Centre-class recovery]\label{thm:centres}\coverage{absent}\uses{thm:traces}
 Put
 \[
   T=q+2-k,\qquad c=\binom{k-2}{2}.
@@ -298,13 +336,13 @@ different centres may be skew.
 \section{Why extension cannot begin before four points}
 \label{sec:obstructions}
 
-\begin{proposition}[One point]
+\begin{proposition}[One point]\label{prop:one-point}\coverage{absent}
 For a one-point arc in $\PG(n,q)$, the continuation graph is a disjoint
-union of $1+q+\cdots+q^{n-1}$ copies of $K_q$.  Its automorphism group is
-strictly larger than the ambient point stabilizer in all nontrivial cases.
+union of $1+q+\cdots+q^{n-1}$ copies of $K_q$.  This structure permits permutations of individual clique fibres;
+semilinear rigidity does not hold uniformly for one-point arcs.
 \end{proposition}
 
-\begin{theorem}[Two points]\label{thm:rook}
+\begin{theorem}[Two points]\label{thm:rook}\coverage{absent}
 If $K=\{a,b\}$ in any projective plane of order $q$, then
 \[
   G_K\cong K_q\mathbin{\square}K_q.
@@ -320,16 +358,16 @@ are adjacent exactly when they share one of these tangent lines.  This is
 rook adjacency.
 \end{proof}
 
-\begin{theorem}[Three points]\label{thm:triangle}
+\begin{theorem}[Three points]\label{thm:triangle}\coverage{absent}
 Let $K$ be a triangle in $\PG(2,q)$.  With its vertices normalized to the
 coordinate points, the legal vertices are $(x:y:1)$ with
 $x,y\in\F_q^*$, and
-\[
+\begin{equation}
  (x,y)\sim(x',y')
  \Longleftrightarrow
  x=x'\ \text{or}\ y=y'\ \text{or}\ x/y=x'/y'.
- \tag{5.1}
-\]
+ \label{eq:triangle}
+\end{equation}
 Every automorphism $\alpha$ of the multiplicative group $\F_q^*$ therefore
 induces the graph automorphism $(x,y)\mapsto(\alpha(x),\alpha(y))$.  This is
 not induced by a semilinear collineation unless $\alpha$ is a field
@@ -337,7 +375,7 @@ automorphism.
 \end{theorem}
 
 \begin{proof}
-The three equalities in (5.1) are the three tangent-pencil parameters.  A
+The three equalities in \eqref{eq:triangle} are the three tangent-pencil parameters.  A
 multiplicative-group automorphism preserves equality and quotient.  If an
 ambient semilinear collineation induces this map, preservation of the three
 pencil partitions forces it to fix the triangle vertices.  In normalized
@@ -358,17 +396,17 @@ Normalize the frame as
  K=\{(1:0:0),(0:1:0),(0:0:1),(1:1:1)\}.
 \]
 
-\begin{proposition}[Four-coordinate normal form]\label{prop:normal}
+\begin{proposition}[Four-coordinate normal form]\label{prop:normal}\coverage{absent}
 The legal continuation points are
 \[
  \Omega=\{(x,y):x,y\notin\{0,1\},\ x\ne y\}.
 \]
 The map
-\[
+\begin{equation}
  (x,y)\longmapsto
  \left(x,y,\frac{x}{y},\frac{x-1}{y-1}\right)
- \tag{6.1}
-\]
+ \label{eq:coordinates}
+\end{equation}
 is injective, and two vertices are adjacent exactly when their images agree
 in one coordinate.
 \end{proposition}
@@ -378,7 +416,7 @@ The six frame secants have equations
 $X=0$, $Y=0$, $Z=0$, $X=Y$, $X=Z$, and $Y=Z$.
 After normalizing $Z=1$, avoiding them gives the displayed set $\Omega$.
 Direct equations for lines through the four frame points give, up to
-reparametrization, the four pencil parameters in (6.1).
+reparametrization, the four pencil parameters in \eqref{eq:coordinates}.
 \end{proof}
 
 Write $D=\F_q\setminus\{0,1\}$.  For $q\geq13$,
@@ -393,7 +431,7 @@ four partitions.  Its alphabet permutations satisfy
 \end{align}
 for all distinct $x,y\in D$.
 
-\begin{lemma}[Punctured multiplicative isotopy]\label{lem:isotopy}
+\begin{lemma}[Punctured multiplicative isotopy]\label{lem:isotopy}\coverage{absent}
 Suppose permutations $\alpha,\beta,\gamma$ of $D$ satisfy
 \eqref{eq:mult} for all distinct $x,y\in D$, with $q\geq5$.  Then
 $\alpha=\beta=\gamma=\chi$, where $\chi$ extends to an automorphism of the
@@ -408,25 +446,25 @@ row with first coordinate $\alpha(x)$ omits $\alpha(x)$.  Thus
 $\alpha=\beta=:h$.
 
 Writing $x=ry$, equation~\eqref{eq:mult} becomes
-\[
+\begin{equation}
  h(ry)=\gamma(r)h(y)
- \tag{6.4}
-\]
+ \label{eq:punctured}
+\end{equation}
 whenever $r,y,ry\ne1$.  Extend $\gamma(1)=1$.  If $r,s,rs\ne1$, choose
 $y\notin\{1,s^{-1},(rs)^{-1}\}$; this is possible since
-$|\F_q^*|\geq4$.  Applying (6.4) twice gives
+$|\F_q^*|\geq4$.  Applying \eqref{eq:punctured} twice gives
 $\gamma(rs)=\gamma(r)\gamma(s)$.  The inverse case follows by choosing
 $y\notin\{1,r\}$ and comparing $h(y)$ with $h(rr^{-1}y)$.  Hence $\gamma$
 extends multiplicatively.
 
-Equation (6.4) also makes $h(x)/\gamma(x)$ constant on $D$, say
+Equation \eqref{eq:punctured} also makes $h(x)/\gamma(x)$ constant on $D$, say
 $h(x)=A\gamma(x)$.  Since both $h$ and $\gamma$ permute $D$, one has
 $AD=D$.  But $AD=\F_q^*\setminus\{A\}$ and
 $D=\F_q^*\setminus\{1\}$, so $A=1$.
 \end{proof}
 
-\begin{lemma}[Shifted isotopy forces Frobenius]\label{lem:frobenius}
-If permutations $\alpha,\beta,\gamma,\delta$ of $D$ satisfy both
+\begin{lemma}[Shifted isotopy forces Frobenius]\label{lem:frobenius}\coverage{absent}\uses{lem:isotopy}
+Assume $q\ge5$. If permutations $\alpha,\beta,\gamma,\delta$ of $D$ satisfy both
 \eqref{eq:mult} and \eqref{eq:shift}, then all four are restrictions of one
 field automorphism of $\F_q$.
 \end{lemma}
@@ -449,7 +487,9 @@ for every $z\in D$, and the identity also holds for $z=0,1$.  The
 polynomial $(1-X)^m+X^n-1$ has all $q$ field elements as roots but degree
 at most $q-2$, so it vanishes identically.  Comparing degrees gives $m=n$,
 and then $(1-X)^m=1-X^m$.  All intermediate binomial coefficients vanish
-in characteristic $p$.  By Lucas's theorem, $m$ is a power of $p$.
+in characteristic $p$.  Write $m=p^r u$ with $p\nmid u$. If $u>1$, the coefficient of
+$X^{p^r}$ in $(1-X)^m=(1-X^{p^r})^u$ is $-u\ne0$,
+contradicting the vanishing of intermediate coefficients. Thus $u=1$.
 Therefore all four maps are the same Frobenius automorphism.
 \end{proof}
 
@@ -467,15 +507,188 @@ collineation fixing the normalized frame.
 Conversely, every semilinear frame stabilizer preserves legal points and
 collinearity, so it acts on $G_K$.  The projective stabilizer of a frame is
 $S_4$, and the field automorphism group has order $e=[\F_q:\F_p]$.
+\proves{thm:main}
 \end{proof}
 
-\begin{remark}[The small-order boundary]
+\begin{remark}[The small-order boundary]\label{rem:small-order}\coverage{absent}\uses{prop:boundary,lem:isotopy}
 The isotopy lemmas already apply for $q\geq5$; the bound $q\geq13$ enters
 only when the uncoloured graph is required to recover its four coordinate
 partitions.  At $q=5$, $G_K\cong K_6\setminus3K_2$, whose automorphism group
-has order $48$, twice the projective frame stabilizer.  No classification
-of $q=7,8,9,11$ is claimed.
+has order $48$, twice the projective frame stabilizer.  Section~\ref{sec:boundary} settles the remaining orders $7,8,9,11$
+by exact finite enumeration.
 \end{remark}
+
+
+\section{Recognition and coordinate certificates}\label{sec:algorithm}
+
+The proof can be made constructive without searching through all
+permutations of the field alphabet. First recover the pencils. Then the
+missing entries in three pencils complete a group division table, leaving
+only the possible images of a cyclic generator to test.
+
+\begin{lemma}[Four-point trace seeds]\label{lem:seeds}\coverage{absent}\uses{prop:normal,lem:clique}
+Let $K$ be a four-point frame and $B$ a tangent trace. A vertex outside
+$B$ has at most three neighbours in $B$. Consequently, if $Q$ consists
+of four vertices of $B$, then
+\[
+ B=Q\cup\bigcap_{v\in Q}N(v).
+\]
+For $q\ge13$, the sets on the right that are cliques of size $q-3$,
+as $Q$ ranges over four-cliques, are exactly the tangent traces.
+\end{lemma}
+\begin{proof}
+Write $t$ for the centre of $B$. For an outside vertex $z$, a neighbour
+on $B$ must lie on one of the three lines $zu$ with $u\in K\setminus\{t\}$.
+Each such line meets the line of $B$ at most once. Thus no outside vertex
+is adjacent to four vertices of $B$. Conversely all other vertices of
+$B$ are adjacent to those four vertices. Every trace has size $q-3$ by
+the normal form. Any resulting clique of that size has at least ten
+vertices, so Lemma~\ref{lem:clique} places it in a tangent trace; equal
+sizes give equality.
+\end{proof}
+
+\begin{theorem}[Polynomial recognition over a supplied field]\label{thm:recognition}\coverage{absent}\uses{lem:seeds,thm:centres,prop:normal}
+Given a graph $G$ with $n$ vertices and a model of $\F_q$, $q\ge13$,
+one can decide in polynomial time whether $G$ is a frame continuation
+graph and, if it is, output a bijection
+\[
+ \phi:V(G)\longrightarrow
+ \{(x,y)\in(\F_q\setminus\{0,1\})^2:x\ne y\}
+\]
+that preserves and reflects adjacency. A coarse bound for the procedure
+below is $O(n^6)$ elementary adjacency and field operations after rejecting
+$n\ne(q-2)(q-3)$. A supplied coordinate certificate can be checked using
+$O(n^2)$ field operations and adjacency tests.
+\end{theorem}
+\begin{proof}
+Enumerate four-cliques and apply Lemma~\ref{lem:seeds}, retaining only
+clique closures of size $q-3$. Reject unless there are $4(q-2)$ traces.
+Construct their disjointness graph. Recover centre classes as the large
+maximal cliques from Theorem~\ref{thm:centres}; concretely, enumerate
+five-cliques and take their closed common neighbourhoods. In a true
+frame graph every such five-clique is contained in one centre class,
+and a trace outside that class is disjoint from at most one member of
+it, so this closure is exactly the class. Reject unless there are four
+classes of $q-2$ traces partitioning the recovered traces and each class
+partitions $V(G)$. These tests do not alone certify recognition.
+
+Order the four classes. The first two provide rows and columns. In a
+true frame graph each row meets each column in one vertex, except for
+one missing column; missing columns pair the row and column alphabets.
+Call their common alphabet $D$. Each row also omits exactly one symbol
+of the third class. Identify that missing symbol with its row label.
+In the normal form this is the identity $x/1=x$: row $x$ omits the
+quotient value $x$.
+
+The third symbol at cell $(x,y)$ now gives $x/y$ for distinct $x,y\in D$.
+Adjoin a symbol $1$, put $x/x=1$ and $x/1=x$, and define $1/y$ as the
+unique symbol of $D$ missing from column $y$. Set $1/1=1$. Reject
+inconsistent or nonunique entries. For a frame this completes the full
+division table of $\F_q^*$.
+
+Set $ab=a/(1/b)$. Try each element as a cyclic generator, checking its
+powers exhaust the $q-1$ symbols and that the division table agrees
+with subtraction of exponents modulo $q-1$. This recognizes a cyclic
+group directly, without assuming associativity of an unchecked table.
+Map a generator to each primitive element of the supplied field in turn.
+For each map, form $(x,y)$ coordinates and check that the fourth class
+is exactly the fibre partition of $(x-1)/(y-1)$. Finally check that the
+coordinates are a bijection onto the displayed set and that adjacency
+agrees for every pair. Output a passing map, or reject if none passes.
+
+For a true frame any ordering of the four pencils is realized by a
+projectivity, so the completed table and at least one generator image
+pass these tests. Conversely the final check itself proves that a passing
+map is an isomorphism; no promised geometry is needed for soundness.
+
+There are at most $O(n^4)$ seeds, with $O(n^2)$ work per closure and
+clique check. After the trace-count check the disjointness graph has
+$O(\sqrt n)$ vertices, so its five-seed enumeration and checks cost
+$O(n^{7/2})$. Table completion, cyclic-table checks and all generator
+images take polynomial time bounded by $O(q^3+qn^2)$ here. The initial
+vertex count gives $q=O(\sqrt n)$, establishing the stated coarse bound.
+The last pairwise adjacency check is also the independent certificate
+verification procedure.
+\end{proof}
+
+\begin{proposition}[Size of the coordinate representation]\label{prop:size}\coverage{absent}\uses{prop:normal}
+A frame graph has $(q-2)(q-3)$ vertices, degree $4(q-4)$, and
+$2(q-2)(q-3)(q-4)$ edges. Four field symbols per vertex determine
+adjacency by equality in one coordinate.
+\end{proposition}
+\begin{proof}
+Each coordinate fibre in the normal form has $q-3$ vertices. Distinct
+fibres through a vertex meet only at that vertex, so its neighbours
+split into four sets of size $q-4$. Count edges by summing degrees.
+\end{proof}
+
+The coordinate representation therefore uses $\Theta(q^2)$ field symbols
+instead of $\Theta(q^3)$ explicit edges. This is a storage statement,
+not a speedup claim for every graph operation. In particular, enumerating
+all edges still has its output cost. The supplied reference implementation
+and timing protocol are described in the verification appendix.
+
+\section{The finite boundary}\label{sec:boundary}
+
+A \emph{four-pencil resolution} is an unordered set of four partitions
+of $V(G)$, each into $q-2$ cliques of size $q-3$, such that every edge
+belongs to exactly one block across the four partitions. Blocks need
+not be maximal cliques. The geometric pencils give one such resolution.
+
+\begin{proposition}[Exact small-order census]\label{prop:boundary}\coverage{absent}\evidence{boundary}\uses{prop:normal,lem:isotopy,lem:frobenius}
+For the indicated frame graphs the following table is exact. Here $b$
+counts all $(q-3)$-cliques, $p$ counts their partitions of the vertex set,
+and $r$ counts four-pencil resolutions.
+\[
+\begin{array}{c|r|r|r|r|r}
+q&|V|&|\Aut(G_K)|&b&p&r\\\hline
+5&6&48&12&8&2\\
+7&20&24&180&1352&1\\
+8&30&144&48&16&2\\
+9&42&48&28&4&1\\
+11&72&24&36&4&1\\
+\end{array}
+\]
+At $q=5,8$ the two resolutions form one orbit, and the stabilizer of the
+geometric resolution is exactly the ambient semilinear group, of index
+two. At $q=7,9,11$ every graph automorphism is ambient.
+The two resolutions share all twelve blocks at $q=5$ and no blocks at $q=8$.
+\end{proposition}
+\begin{proof}[Computational proof and completeness]
+The certificate bundle named in Appendix~\ref{sec:verification} enumerates
+all cliques of size $q-3$, all exact covers of the vertex set by such
+cliques, and all exact covers of the edge set by the resulting partitions.
+At each recursive step an uncovered vertex or edge is chosen and every
+available covering block is explored. This enumerates each unordered
+cover once and terminates because the uncovered set strictly decreases.
+A second implementation enumerates fixed-size cliques directly instead
+of deriving them from maximal cliques. The two complete enumerations
+agree by canonical digests.
+
+Graph automorphism generators are computed with Sage's graph algorithm.
+Their generated groups are explicitly enumerated and every permutation
+is checked against the edge set. An independent nauty computation gives
+the same full group orders, establishing the upper bound as well as the
+witnessed subgroup. The action on all resolutions is checked explicitly.
+Finally, the isotopy lemmas apply for every $q\ge5$: an automorphism
+stabilizing the geometric resolution, after a frame permutation, is
+Frobenius. Hence its stabilizer is precisely the ambient group. The
+bundle supplies an explicit representative of the other coset in each
+exceptional case; multiplying it by the ambient group describes every
+nonambient automorphism.
+\end{proof}
+
+Together with Theorem~\ref{thm:main}, the census proves semilinear rigidity
+for every prime power $q\ge5$ except $q=5,8$. This combined statement has
+a finite computational premise at $q=7,9,11$; the theorem for $q\ge13$
+does not. The census concerns \emph{four-point frames}. A six-point
+Clebsch seed over $\F_{11}$ is a different reconstruction problem.
+
+At $q=7$ there are $1352$ individual clique partitions but only one
+compatible four-pencil resolution. Thus uniqueness of the full resolution
+can hold even when its individual candidate partitions are plentiful.
+At $q=8$ the two-resolution orbit is exactly the obstruction to extending
+all graph automorphisms semilinearly.
 
 \section{Scope, a stronger complex, and open problems}
 \label{sec:remarks}
@@ -498,9 +711,7 @@ can be used to complete the complement of the secant arrangement and then
 recover $K$ from the multiplicities of the restored secants.  This belongs
 to the classical neighbourhood of projective-plane complement and
 pseudo-complement embedding theorems~\cite{Batten,Bruck,BM1,BM2}; it is not
-a contribution claimed in this paper.  A separate full-text comparison
-with the Drake--San\'e and Metsch treatments is required before assigning a
-sharper novelty boundary to that reconstruction route.
+a contribution claimed in this paper.
 
 The present arguments isolate two extremal parameters.  Let $m(k)$ be the
 largest clique in a $k$-arc continuation graph that is not contained in one
@@ -512,23 +723,51 @@ traces using at least two selected centres.  We proved
  r(k)\leq k\binom{k-2}{2}.
 \]
 
-\begin{problem}
+\begin{problem}\label{prob:extremal}\coverage{absent}\uses{lem:clique,thm:centres}
 Determine $m(k)$ or $r(k)$ exactly for an infinite family of $k$, or improve
 their orders of growth.  Any improvement immediately lowers the intrinsic
 recovery threshold.
 \end{problem}
 
-\begin{problem}
-Classify the frame graphs for $q=7,8,9,11$, including every nongeometric
-automorphism and every alternative resolution into four coordinate
-partitions.
+\begin{problem}\label{prob:boundary-proof}\coverage{absent}\uses{prop:boundary}
+Give a computation-free proof of the boundary in
+Proposition~\ref{prop:boundary}, especially the two-resolution phenomenon
+at $q=8$ and uniqueness despite the many individual partitions at $q=7$.
 \end{problem}
 
-\begin{problem}
+\begin{problem}\label{prob:larger-arcs}\coverage{absent}\uses{thm:traces,thm:centres}
 For larger arcs, determine natural hypotheses under which recovery of the
 tangent traces and their centre classes forces every graph isomorphism to
 extend semilinearly.
 \end{problem}
+
+
+\appendix
+\section{Verification and reproducibility}\label{sec:verification}
+
+The stable-range results have written proofs and use no finite census.
+No theorem in this draft is claimed to be Lean-formalized. The small-order
+census is an exact computer-assisted result, independently replayed using
+different graph and clique algorithms; its trust base includes Python,
+SageMath, nauty, and their arithmetic and graph implementations.
+
+The public bundle contains \texttt{verification/boundary.json}, its
+SHA-256 manifest, the generator, the independent replay, and the
+coordinate-certificate checker. From the repository root,
+\texttt{make check} checks the statement/evidence links and replays the
+finite census and deterministic recognition tests. \texttt{make boundary}
+regenerates the census with SageMath; \texttt{make benchmark} records a
+fresh timing sample. The verification README specifies the field models,
+versions, exact domains, relabelling seeds and trusted boundaries.
+
+The reference recognizer supplies prime-field models and explicit models
+of orders $8,9$; stable-range transport tests use $q=13,17,19$. The
+mathematical recognition theorem allows any supplied finite field.
+Checks include relabelled inputs, invalid coordinate certificates,
+deleted edges, and degree-preserving edge switches. Recorded timings
+compare reconstruction with generic graph isomorphism on the same
+relabelled inputs, excluding graph construction. They are single-run
+measurements, not a claim that reconstruction is faster.
 
 \section*{AI assistance disclosure}
 
@@ -536,11 +775,15 @@ This project was developed with extensive assistance from OpenAI Codex and
 Anthropic Claude. Under the author's direction, the systems assisted
 throughout with proof exploration, literature research, symbolic and finite
 computation, code and formal-proof development, verification, and manuscript
-drafting and revision. The author checked the resulting arguments,
-computations, code, and cited sources, reviewed and edited all AI-assisted
-material, and assumes responsibility for all content.
+drafting and revision. The author assumes responsibility for the manuscript and its accompanying
+artifacts; this first draft remains subject to author and external review.
 
 \begin{thebibliography}{99}
+
+\bibitem{BGMS}
+A.~Bhattacharya, A.~Godinho, P.~Majumder and N.~Singhi,
+\newblock Reconstruction of hypergraphs from line graphs and degree sequences,
+\newblock arXiv:2104.14863v1, 2021.
 
 \bibitem{Batten}
 L.~M.~Batten,

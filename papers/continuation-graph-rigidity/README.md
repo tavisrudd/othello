@@ -1,28 +1,44 @@
-# Semilinear rigidity of four-point-frame continuation graphs
+# Reconstructing projective frames from their continuation graphs
 
-**Title:** *Semilinear rigidity of four-point-frame continuation graphs.*
+Tavis Rudd — first draft, September 2026.
 
-## Headline
+For a four-point projective frame over a finite field of order at least 13,
+its uncoloured conflict graph determines the field order and the plane/frame
+up to semilinear equivalence. Every graph isomorphism extends uniquely.
+The written proof also gives polynomial recognition over a supplied field and
+an independently checkable coordinate transport.
 
-Let a projective frame determine its abstract continuation, or conflict, graph.
-For (qge13), every automorphism of that graph is induced by an ambient
-semilinear projective transformation (Theorem 7.4). The proof is an
-(M_{0,5}) four-map-reduct rigidity argument: the graph retains enough
-cross-ratio data to recover the ambient semilinear action.
+An exact finite census settles orders 5, 7, 8, 9 and 11. Orders 5 and 8 each
+have two four-pencil resolutions and an ambient subgroup of index two;
+orders 7, 9 and 11 have a unique resolution and only ambient automorphisms.
+The stable-range proof does not depend on the census.
 
-This is an N1-only paper. Full-complex reconstruction is a softened scope
-remark rather than a second theorem, and the extremal quantities (m(k)) and
-(r(k)) remain open.
+## Read and check
 
-## Files and status
+- [Manuscript PDF](continuation_graph_rigidity.pdf)
+- [LaTeX source](continuation_graph_rigidity.tex)
+- [Verification scope and commands](verification/README.md)
+- [Citation metadata](CITATION.cff)
 
-- `continuation_graph_rigidity.tex` — manuscript source.
-- `continuation_graph_rigidity.pdf` — working PDF when present.
+With Nix installed, from this directory:
 
-The written N1 proof is complete. A Lean formalization is planned but is not
-part of the current evidence boundary, and this directory is not yet a citable
-public release.
+```sh
+nix develop --command make check
+nix develop --command python3 verification/check_manuscript_build.py
+```
 
-The continuation graph is distinct from the projective cap-game reply graphs:
-this paper studies abstract reconstruction and semilinear automorphisms, not
-game values.
+`make pdf` in the development shell refreshes the PDF through two deterministic
+builds. The finite census can also be regenerated with `make boundary`.
+
+## Scope and trust
+
+This is a first draft, not a claim of completed external referee review.
+No theorem is claimed to be Lean-formalized. The small-order census is
+independently replayed exact computation, with Python/Sage/nauty in its trust
+base. The reference recognition tests cover relabelled prime-field examples
+at orders 13, 17 and 19; the written algorithm accepts any supplied finite field.
+Full continuation-complex reconstruction is discussed only as background.
+The paper makes no game-value or generic solver-speedup claim.
+
+The manuscript and accompanying software are distributed under the MIT license.
+No DOI is assigned in this draft's citation metadata.

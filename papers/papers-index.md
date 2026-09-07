@@ -193,10 +193,11 @@ of eight-arcs*
   retired source view merged into this paper;
   `completion-core-rigidity` is reusable generic infrastructure outside the submission.
 
-**7 · `continuation-graph-rigidity`** — *Semilinear rigidity of four-point-frame continuation
-graphs*
-- *Status:* N1-only LaTeX working manuscript with complete written proof; the planned Lean library
-  is not yet built. Full-complex reconstruction remains a softened scope remark.
+**7 · `continuation-graph-rigidity`** — *Reconstructing projective frames from their continuation graphs*
+- *Status:* 11-page first draft with written stable-range reconstruction/recognition proofs and an
+  independently replayed small-order census; source-only claim/evidence checks and local export
+  packaging are present. Lean and independent external review remain open. No GitHub/DOI action
+  is included; full-complex reconstruction remains a scope remark.
 
 **Active unnumbered candidate · `high_weight_grs_cosets`** — *High-weight cosets of generalized and
 extended Reed--Solomon codes*

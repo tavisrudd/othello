@@ -1,0 +1,225 @@
+{
+  "claims": [
+    {
+      "cautions": "Written argument or scope remark; no Lean formalization claimed.",
+      "conclusion": "Automorphisms equal the ambient semilinear stabilizer, order 24e",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "Projective frame, q=p^e>=13",
+      "label": "thm:main",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "e968b59051bf8244e752741433ec5f502fa711c9e501522b9bbb4486b488e924",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written argument or scope remark; no Lean formalization claimed.",
+      "conclusion": "Each graph isomorphism extends uniquely; field order and geometry are recovered",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "Two Desarguesian frames with q,qprime>=13",
+      "label": "cor:reconstruction",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "25711f6e1712f89766474d22b9a791d901cdf0a92f3cc03528f69295e62f8da7",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written argument or scope remark; no Lean formalization claimed.",
+      "conclusion": "The tangent-symbol hypergraph is k-uniform and linear and has the conflict graph as its line graph",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "A k-arc in a finite projective plane",
+      "label": "prop:intersection",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "069784da4b2e1dd036ce16388fc30c5fcd222765b97745e89feae4ce24e426f2",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written argument or scope remark; no Lean formalization claimed.",
+      "conclusion": "Clique size at most k(k-2)+1",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "k>=2; clique not contained in a tangent trace",
+      "label": "lem:clique",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "2d85d504f3ac46f28c7ceacc99115bb3b4573406102d0036be6abe73ad297bb8",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written argument or scope remark; no Lean formalization claimed.",
+      "conclusion": "Tangent traces are the large maximal cliques",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "q-binomial(k-1,2)>k(k-2)+1",
+      "label": "thm:traces",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "8d7fcc3c45e8b6131611686f7f20b6d5c92455eee570d282b1fc180f530bbffe",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written argument or scope remark; no Lean formalization claimed.",
+      "conclusion": "Large disjointness cliques recover centre classes",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "Trace recovery and q+2-k>k binomial(k-2,2)",
+      "label": "thm:centres",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "e59e08d062773e5154801d890061897cf53be5377c1ffb02877aa87be5cf4bef",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written argument or scope remark; no Lean formalization claimed.",
+      "conclusion": "Disjoint union of projective-direction clique fibres",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "One selected point in PG(n,q)",
+      "label": "prop:one-point",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "f24e4ea68d2f5ae0379ecc6592c6977ee8727576a55bb006ac181ea4e1fc3e14",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written argument or scope remark; no Lean formalization claimed.",
+      "conclusion": "The graph is the q by q rook graph",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "Two selected points in any plane of order q",
+      "label": "thm:rook",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "e4b260d352dcca8476dd4ba410d2125e41a750e65e8ac1744021c5ec42c78712",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written argument or scope remark; no Lean formalization claimed.",
+      "conclusion": "Multiplicative automorphisms preserve the graph; ambient ones are field automorphisms",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "Coordinate triangle in PG(2,q)",
+      "label": "thm:triangle",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "9bb4cd9da1da9668e354bdebeb0fceca91ddb055033b60a54f33cc42934094f7",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written argument or scope remark; no Lean formalization claimed.",
+      "conclusion": "Legal vertices and edges have the four-map normal form",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "Four specified coordinate frame points",
+      "label": "prop:normal",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "353368d709cdcec9fe3bd3656c46eae26aa81a64b789f99b5f0ce0d92d1b2f45",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written argument or scope remark; no Lean formalization claimed.",
+      "conclusion": "All maps extend to one multiplicative-group automorphism",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "q>=5; alphabet permutations satisfy the punctured quotient equation",
+      "label": "lem:isotopy",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "0ef3056c9a3b618b164f3133ce22f9e4356a365dbe846b341b1149c790473968",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written argument or scope remark; no Lean formalization claimed.",
+      "conclusion": "All four maps extend to one field automorphism",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "q>=5; both quotient and translated quotient equations hold",
+      "label": "lem:frobenius",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "c865d04c445c267b4cbecb46c09546024fbc2df5cb0b67cd1f9f9dcbb3c6db80",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written argument or scope remark; no Lean formalization claimed.",
+      "conclusion": "The stable bound is a pencil-recovery threshold",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "Isotopy range q>=5, uniform intrinsic recovery range q>=13",
+      "label": "rem:small-order",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "a91ddcb837721749cfbed3ae4c255b161453ca66c9cc1e234cc006293a51e6e3",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written argument or scope remark; no Lean formalization claimed.",
+      "conclusion": "Four vertices determine a tangent trace by common neighbourhood",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "Four-point frame; final recovery statement q>=13",
+      "label": "lem:seeds",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "37d3e865478775a8a3ad77b29da3fbcb62865066cc8a56793679414a3c4e6a8d",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written argument or scope remark; no Lean formalization claimed.",
+      "conclusion": "Polynomial recognition with a quadratic-time coordinate-certificate check",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "Arbitrary graph and supplied finite field, q>=13",
+      "label": "thm:recognition",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "806008752691a4798d67fda316b43ead495c3c5920f8b5215c22c8ec7fd32526",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written argument or scope remark; no Lean formalization claimed.",
+      "conclusion": "Exact counts and four-symbol representation of adjacency",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "Four-point frame normal form",
+      "label": "prop:size",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "3707148064f0d9665c808c98a3ef175c64c446f1be4b96409871bd8326c7101b",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Exact finite computational evidence; Python/Sage/nauty trust, no Lean proof.",
+      "conclusion": "Complete resolutions, full automorphism orders and index-two exceptional cosets",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "Exact finite domain q=5,7,8,9,11",
+      "label": "prop:boundary",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "83f24edf61771a09d393b1bf6719ca3254cd4214da5ef68f010bacd6f15fec6b",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Open problem, not a proved assertion.",
+      "conclusion": "Open extremal clique and disjointness parameters",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "General k-arcs",
+      "label": "prob:extremal",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "c010d7bc30b9d4569c6d55446956ac550cbf9a0e5d1881728756cd3c9fcb5d4d",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Open problem, not a proved assertion.",
+      "conclusion": "Open computation-free explanation of the boundary",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "The small-order finite census",
+      "label": "prob:boundary-proof",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "6c7021c8126b64e74d9cddd0140b6ec39fd650cd3e22a72a2f884e78f8237824",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Open problem, not a proved assertion.",
+      "conclusion": "Open semilinear extension hypotheses",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "Larger arcs with intrinsic tangent/centre recovery",
+      "label": "prob:larger-arcs",
+      "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
+      "statement_sha256": "72e140da8572ad6e7f6284ba73986d9bd4cff7eba584d4503d034e782eace85c",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  ],
+  "schema": "continuation-claims-v1"
+}

@@ -120,12 +120,13 @@ Clebsch hexagon code*, is not being published and is retained at
   closeout are complete. C318 and C319 own the remaining exact-minimum trust-manifest and
   canonicalizer/demotion decisions. C152's exchange graph is a release gate only if later adopted.
 
-**7 · Semilinear rigidity of four-point-frame continuation graphs** —
+**7 · Reconstructing projective frames from their continuation graphs** —
 `continuation-graph-rigidity`
-- *What:* the four-frame rigidity theorem only; full-complex reconstruction is demoted to scope
-  remarks.
-- *Gate:* the LaTeX working manuscript and complete written proof exist. The planned Lean library
-  remains the hardest formalization; use the collaborator route if it stalls.
+- *What:* stable-range semilinear reconstruction, polynomial recognition over a supplied field,
+  and an independently replayed exact small-order frame boundary. Full-complex reconstruction
+  remains a scope remark.
+- *Gate:* an exportable 11-page first draft and reproducibility bundle exist. Independent external
+  review and the planned Lean library remain release work; use the collaborator route if formalization stalls.
 
 **Active unnumbered merger candidate · Beyond redundancy four for PRS** — `beyond4_prs`
 - *What:* C491's complete redundancy-five classification is the headline; C498/C509/C512/C513/

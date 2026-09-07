@@ -1,72 +1,66 @@
-# Semilinear rigidity of four-point-frame continuation graphs
+# Reconstructing projective frames from their continuation graphs
 
 **Lane**: `continuation`
 
-**Date**: 2026-07-17
+**Date**: 2026-09-07
 
 Discovery companion: `notes/2026-07-19-continuation-discovery-track.md`.
 
 ## Goal
 
-Bring `papers/continuation-graph-rigidity` (semilinear automorphisms of the continuation graph of
-a four-point projective frame) to the arcs/clebsch release bar as an **N1-only** paper per ruling D3 and the
-ship-order #7 gate: LaTeX+PDF manuscript, full-trust Lean, provenance section, adversarial and
-cold-prose review, and a cleared novelty audit. N1 is the headline (four-point-frame continuation
-graph has exactly its ambient semilinear automorphisms, q ≥ 13, Thm 7.4). N2 (full-complex
-reconstruction, Thm 8.4) is demoted to a remarks subsection out of the abstract and contributions
-until the paywalled Metsch / Drake–Sané read clears.
+Prepare the upgraded first draft and a validated standalone export for the author.
+The user owns GitHub and DOI actions. Independent mathematical/prose review and
+C273's formalization remain subsequent publication-readiness work. Full-complex
+reconstruction remains outside the headline under the existing N1-only ruling.
 
 ## Current status
 
-- Theorem package: `notes/2026-07-10-continuation-graph-rigidity-upgrades.md`, all main theorems
-  `[PROVED]` with full written proofs. Extremal quantities m(k), r(k) are `[OPEN]`.
-- Prior-art audit: `notes/2026-07-11-continuation-rigidity-audit-scope.md` — **N1 SURVIVES**
-  (Bruno–Mella / cross-ratio-graph prior art points the other way); **N2 SOFTEN** (collides with the
-  complement / pseudo-complement embedding genre — Batten, Drake–Sané, Beutelspacher–Metsch — but the
-  arc-recovery chain survives).
-- Manuscript: C272 is complete. The N1-only working draft is
-  `papers/continuation-graph-rigidity/continuation_graph_rigidity.tex`; it contains the complete
-  `q>=13` proof, keeps N2 in scope remarks only, states `m(k),r(k)` as open, and records the exact
-  small-order boundary. See `notes/2026-07-17-c272-continuation-n1-manuscript.md`.
-- Lean: `ContinuationRigidity` is a planned Phase 3 library, **not yet built**.
-- Planning rulings: `papers/papers-planning.md` ship-order entry #7 (gate: no manuscript; hardest
-  formalization; collaborator route if it stalls) and ruling D3 (N1 only; N2 to remarks).
-
-## Open frontiers
-
-- **N2 residual diligence (C271):** the N2 SOFTEN verdict is gated on a MathSciNet/zbMATH
-  forward-citation run (auth-gated) plus full texts of Drake–Sané and Metsch (LNM 1490), currently
-  paywalled/unread. Closing it may reopen N2 for the abstract, but D3 holds until then.
-- **Manuscript maturation:** C272 supplies the N1 draft. PDF compilation, bibliography refinement,
-  cold-prose review, and integration with C273's eventual formal statement remain release work.
-- **Lean not built (C273):** the Phase 3 `ContinuationRigidity` library is planned only.
-- **Extremal m(k), r(k) `[OPEN]`:** genuine research, not a release gap. No C task allocated; a
-  sharpening result is out of scope for the N1 release and stays a stated open frontier.
+- The 11-page first draft is `papers/continuation-graph-rigidity/continuation_graph_rigidity.tex`
+  and its deterministic PDF. The stable q>=13 proof is written mathematics; the graph
+  determines q and every graph isomorphism extends uniquely semilinearly.
+- C1108 reconciled completed C295 with the paper and compared exact hypergraph/cross-ratio
+  reconstruction hypotheses. This was not a comprehensive renewed priority audit. Report:
+  `notes/2026-09-07-c1108-continuation-reconciliation.md`.
+- C1109 completed polynomial recognition over a supplied finite field, using a completed
+  cyclic division table, with independent coordinate-certificate checking. Its exact finite
+  census finds q=5,8 have two resolutions and an index-two ambient subgroup; q=7,9,11 are rigid.
+  All nonambient cosets and all four-pencil resolutions are recorded in the public bundle.
+  Report: `notes/2026-09-07-c1109-certified-continuation-reconstruction.md`.
+- The finite data replay under independent Python/nauty construction and Sage 10.7/10.9.
+  Source-only claim/evidence checks and reproducible PDF builds pass. No Lean theorem is claimed.
+  The prototype recognizer is slower than generic graph isomorphism on the recorded controls.
+- C1110 is active: the first draft and its local export packaging are prepared; independent
+  cold mathematical/prose review and the exact public Clebsch comparison remain open.
+  Export/validation record: `notes/2026-09-07-c1110-continuation-upgraded-manuscript.md`.
 
 ## Next steps
 
-- **C1108 → C1109 → C1110** — approved upgrade sequence: reconcile completed C295 and compare reconstruction literature; certify reconstruction and classify small frame orders; assemble and review upgraded manuscript. Full acceptance criteria: `notes/2026-09-07-continuation-ergodis-reconstruction-plan.md`. Start C1108; existing C271 and C273 obligations remain.
-- **C271** — N2-gate literature closure: obtain full texts of Drake–Sané and Metsch LNM 1490, run
-  the MathSciNet/zbMATH forward-citation check, and update
-  `notes/2026-07-11-continuation-rigidity-audit-scope.md` with the outcome (implements the audit's
-  recorded residual diligence; does not re-decide N1 SURVIVES).
-- **C273** — `ContinuationRigidity` Lean library per the Phase 3 plan; do not re-decide the plan.
-  The recorded collaborator route is the fallback if formalization stalls (per the #7 gate).
+- **C1110** — review the prepared draft and finish its independent mathematical/prose and
+  publication-ownership checks. The author handles GitHub and DOI actions.
+- **C271** — obtain/read the named Drake–Sané and Metsch sources and complete the auth-gated
+  citation diligence for N2; keep N2 softened meanwhile. Existing audit:
+  `notes/2026-07-11-continuation-rigidity-audit-scope.md`.
+- **C273** — implement the planned `ContinuationRigidity` Lean library; no library has been
+  built. The recorded collaborator route remains the fallback if formalization stalls.
 
-## Crowns consumer contract
+Approved task scope: `notes/2026-09-07-continuation-ergodis-reconstruction-plan.md`.
+The larger-arc extension problem, exact m(k)/r(k), computation-free q=7/8 boundary,
+and competitive recognition performance remain open research, not new allocations.
 
-- `continuation` owns C271--C273, the N1 statement, graph convention, stable `q>=13` range,
-  exceptional boundary, manuscript, and Lean implementation.
-- General C295 reconstruction consumes the committed C272 N1 package and manuscript read-only and
-  must not widen C272 or C273. C273 formalization is not a prerequisite to specify C295's intrinsic recovery
-  predicates.
-- The bounded q=11 Clebsch matching-decomposition pilot lies below N1's field range and may proceed
-  independently in `crowns` once its queue gate is recorded. It is not evidence for the general
-  `q>=13` theorem by itself.
-- Any C295 result proposed for this manuscript returns to the continuation owner for integration;
-  crowns agents do not edit the paper or this handoff.
+## Ownership and consumers
 
-## Collaborator route
+- This lane owns the manuscript, graph convention, stable proof, exact frame boundary and
+  reconstruction code. Owned paths are the paper root, continuation reports/handoffs, and the
+  continuation entries of shared task/paper/export maps.
+- C295 is complete. Its stable-frame corollary is integrated. Its six-point Clebsch pilot at
+  q=11 remains distinct from the four-frame graph at that order; do not conflate their data.
+- C1111–C1113 in `ergodis` consume this paper read-only for preservation-contract corpora,
+  autonomous representation discovery and conditional transfer. They do not widen C273.
+- C296 remains gated until reconstructed data contribute to a game-value theorem on the same
+  class. Static recognition is not a game-value result.
 
-The #7 gate records a collaborator route as the fallback if the (hardest-in-the-portfolio)
-formalization stalls. It is the recorded escape hatch, not a first move.
+## Standalone draft
+
+Target: `~/src/math-papers/continuation-graph-rigidity`, written only through
+`papers/scripts/export-paper-repos.py`. `.zenodo.json`, CFF and the MIT license are
+included in the authority. No GitHub operation or DOI assignment is part of this task.

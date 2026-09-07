@@ -5610,3 +5610,8 @@ depth because this archive is in the same `notes/` directory.
 - **C1107 `[ergodis]` [REPORTED 2026-09-07]** — Portable repository transactions, head CAS, writer fencing, attempts, conservative recovery accounting and versioned sidecars; coherent analytical snapshots informed by C1033. Bounded volatile reference and ten conformance tests; full native, Python and release WASM gates pass. Core 75b646b → notes/2026-09-07-c1107-repository-contract.md
 
 - **C1114 `[ergodis]` [REPORTED 2026-09-07]** — Browser IndexedDB repository adapter, portable replay boundary, saved-run demo and actual browser persistence/interruption gates → `notes/2026-09-07-c1114-browser-repository.md`.
+
+## 2026-09-07 — continuation reconstruction upgrade
+
+- **C1108 `[continuation]` [REPORTED 2026-09-07 — C295 RECONCILED; BOUNDED LITERATURE COMPARISON]** — reconstruction corollary integrated, exact hypergraph/cross-ratio comparison recorded; no comprehensive novelty re-clearance → `notes/2026-09-07-c1108-continuation-reconciliation.md`.
+- **C1109 `[continuation]` [REPORTED 2026-09-07 — POLYNOMIAL RECOGNITION; EXACT q=5,7,8,9,11 BOUNDARY]** — cyclic-table coordinate recognition, independent transport checks, and complete resolution/automorphism census; q=5,8 are index-two exceptions → `notes/2026-09-07-c1109-certified-continuation-reconstruction.md`.

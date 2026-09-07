@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Please cite the manuscript; DOI metadata will be added when assigned."
+type: article
+title: "Reconstructing projective frames from their continuation graphs"
+authors:
+  - family-names: Rudd
+    given-names: Tavis
+version: 0.1.0
+date-released: 2026-09-07
+license: MIT
