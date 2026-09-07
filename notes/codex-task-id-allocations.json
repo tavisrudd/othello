@@ -4634,8 +4634,17 @@
       "last": 1100,
       "purpose": "Bind LRC event admission to authenticated summary transitions",
       "sequence": 515
+    },
+    {
+      "count": 1,
+      "first": 1101,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1101,
+      "purpose": "Portable immutable run records with source event identity and fork lineage",
+      "sequence": 516
     }
   ],
-  "next_id": 1101,
+  "next_id": 1102,
   "schema": "codex-task-id-allocations-v1"
 }
