@@ -1,4 +1,38 @@
 {
+  "actp-zero-cycles": {
+    "citation": "ACTP",
+    "conventions": [
+      {
+        "aspect": "proper models and universality",
+        "matched": "The corollary states this for each smooth proper model and each F/k; the moving and pushforward argument is repeated over F.",
+        "requirement": "The target is smooth proper; universal N-torsion means annihilation of A0 after every field extension."
+      },
+      {
+        "aspect": "index",
+        "matched": "Surjectivity of degree is proved using a k-point; the gcd argument separately kills the kernel.",
+        "requirement": "Universal triviality of A0 alone is weaker than the degree map being an isomorphism."
+      }
+    ],
+    "pinpoint": "Section 1.2, pp. 5--7 of the author PDF, especially the paragraph after Theorem 1.4",
+    "used": "Birational invariance of A0 for smooth proper varieties, moving zero-cycles off a proper closed subset, and universal annihilation of A0 by a unirational parametrization degree."
+  },
+  "ctcoray-unirational-degree": {
+    "citation": "CTCoray",
+    "conventions": [
+      {
+        "aspect": "field and model",
+        "matched": "The rational source is resolved to a smooth projective variety in characteristic zero; the smooth proper target extension is recorded separately. All extensions F/k still have characteristic zero.",
+        "requirement": "The stated source propositions apply to smooth projective geometrically integral varieties in characteristic zero (also certain surface cases)."
+      },
+      {
+        "aspect": "degree and surjectivity",
+        "matched": "A rational point in the nonempty parametrization domain supplies a target k-point independently.",
+        "requirement": "Annihilation of the kernel of degree does not itself supply a degree-one cycle."
+      }
+    ],
+    "pinpoint": "Lemma 6.2 and Propositions 6.3--6.4, pp. 328--329",
+    "used": "Proper pushforward after pullback multiplies zero-cycle classes by the generically finite degree; birational invariance and resolution show that a unirational parametrization degree annihilates A0 in characteristic zero."
+  },
   "egfs-very-general-cubic": {
     "citation": "EGFS",
     "conventions": [
@@ -47,7 +81,7 @@
         "requirement": "The birational varieties are projectivizations of rank-two vector bundles."
       }
     ],
-    "pinpoint": "Notation on page 3 and Theorems 2.17–2.18",
+    "pinpoint": "Notation on page 3 and Theorems 2.17\u20132.18",
     "used": "Birational rank-two projective bundles over a smooth genus-eight Fano threefold and its associated Pfaffian cubic."
   },
   "manin-stable-permutation": {
@@ -141,7 +175,7 @@
       {
         "aspect": "framing",
         "matched": "The proof translates a generic rational section before quotienting first by the anticanonical scalar and then by the rank-three subtorus.",
-        "requirement": "Remark 2.2 gives splitting over the function field for the Néron–Severi torus; equivariance is supplied by translation."
+        "requirement": "Remark 2.2 gives splitting over the function field for the N\u00e9ron\u2013Severi torus; equivariance is supplied by translation."
       }
     ],
     "pinpoint": "Lemma 2.1, Remark 2.2, Corollary 3.5, and the Cox embedding at the start of Section 3",

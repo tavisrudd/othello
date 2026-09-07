@@ -12,6 +12,10 @@ to follow on a first expert read.
 
 ## Scope
 
+- Author priority (2026-09-07): the extensions must preserve accessibility
+  and the original cubic headlines. Keep a complete first reading through
+  the main obstruction before the additive and spectral refinements; review
+  the abstract, introduction and section openings for competing headlines.
 - Author instruction (2026-09-07): after the mathematical upgrades, audit
   terminology and symbols across both papers for standard specialist usage.
   Replace unnecessary coined labels, distinguish genuinely new definitions,
@@ -25,6 +29,13 @@ to follow on a first expert read.
   interface instead of folding it into this exposition-only pass.
 
 ## Acceptance
+
+After the full upgraded drafts and terminology revisions are ready, run the
+full-paper cold-read sub-referee protocol on both manuscripts (author
+instruction, 2026-09-07). Include mathematical dependencies, specialist
+terminology, adjacent-reader accessibility, and preservation of the cubic
+headlines. Repair findings and replay the gates before considering the
+unsent email. Earlier cold reads do not satisfy this new-draft requirement.
 
 1. The paper's deterministic manuscript checks pass.
 2. A fresh exposition-focused cold read finds no required clarity repair.

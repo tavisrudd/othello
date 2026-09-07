@@ -8,6 +8,14 @@
 and symbols with C978 for standard specialist usage, unnecessary coined labels,
 and notation consistency (author instruction, 2026-09-07). Preserve precisely
 defined new concepts while explaining them in familiar mathematical language.
+The author also requires that the extensions preserve accessibility and the
+original cubic headlines. Keep the quotient construction and exact-level
+proof as the main reading path; place finite-index and method-limit results
+after it. Audit the abstract and introduction for competing headlines.
+After the full drafts and terminology revisions, run the full-paper cold-read
+sub-referee protocol for both papers (author instruction, 2026-09-07), repair
+findings, and revalidate. The older accepted reviews are not reviews of these
+upgraded drafts. Keep the email deferred through that review cycle.
 
 ## Stable entry point
 

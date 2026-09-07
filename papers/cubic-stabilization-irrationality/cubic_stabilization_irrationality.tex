@@ -205,7 +205,10 @@ descriptions of the quotient therefore give the rationality of
 \(S\times\A^2\).  Applying the argument over the two base function fields
 proves Corollary~\ref{cor:cubics}.  In Section~2 we prove the quotient
 criterion, in Section~3 we construct the required Cox-model section, and in
-Section~4 we deduce the rationality statements.
+Section~4 we deduce the rationality statements.  The subsequent sections
+collect further consequences, the finite-index extension of the quotient
+criterion, and the limitation of the Cox-weight construction.  These may be
+read after the proofs of the main theorems.
 
 \section{A criterion for rational torus quotients}
 
@@ -366,9 +369,17 @@ and \eqref{eq:inverse-graph} give the rational map and its inverse without
 an unrecorded finite cover.
 \end{proof}
 
-The integral-basis condition is essential.  If the weight differences span
-a proper finite-index sublattice, the same equations generally define a
-finite cover of a \(T\)-orbit rather than a rational section.
+The integral-basis condition gives uniqueness of the orbit correction.
+For an effective action illustrating the distinction, let
+\[
+ t\cdot(x_0,x_1,x_2)=(x_0,t^d x_1,tx_2)
+\]
+on \(\A^3\), and impose \(x_1=x_0\).  On \(x_0x_1x_2\ne0\),
+the correcting elements satisfy \(t^d=x_0/x_1\).  In characteristic zero
+there are \(d\) geometric solutions; only for \(d=1\) is the correction
+unique.  The action is effective because of the weight-one coordinate.
+This finite ambiguity is therefore different from a kernel in a redundant
+parametrization of the torus.
 
 The proof is constructive once equations for \(Z\), a tangent point, and the
 linear forms \(\lambda_i\) are given.  The signed minors in
@@ -846,6 +857,161 @@ finite and greater than four, or infinite.
 \uses{thm:two-variable}%
 \end{proof}
 
+\section{Finite-index slices and zero-cycles}
+\label{sec:finite-index}
+
+The tangent projection still supplies a rational component when the weight
+differences have finite index.  The issue is to show that this particular
+component dominates the quotient and to determine its degree.
+
+\begin{theorem}[Finite-index torus slices]
+\label{thm:finite-index-slice}
+\coverage{absent}%
+\uses{thm:torus-quotient}%
+Assume that \(k\) has characteristic zero.  Keep all the hypotheses of
+Theorem~\ref{thm:torus-quotient}, except that
+\[
+ M'=\sum_{j=1}^r\Z(w_j-w_0)\subset M=X^*(T_{\ks})
+\]
+is required to have finite index \(d\), rather than index one.
+The closure \(C\) of \(\Lambda\cap U_p\) is a geometrically integral,
+\(k\)-rational variety, and its rational map to \(Z/T\) is dominant and
+generically finite of degree \(e\) dividing \(d\).
+In particular, the quotient admits a dominant rational parametrization
+\(\PP^{n-r}\dashrightarrow Z/T\) of degree \(e\mid d\).
+\end{theorem}
+
+\begin{proof}
+The image \(L\) of \(\Lambda\) under tangent projection is a
+\(k\)-linear \(\PP^{n-r}\).  Take the isomorphism open \(U_p\) to be
+defined over \(k\).  Since \(\Lambda\) contains the projection centre,
+\[
+ \Lambda\cap U_p\simeq L\cap\pi_p(U_p).
+\]
+The right side is a nonempty open in \(L\), by the hypothesis on \(x\).
+Thus its closure \(C\) is defined over \(k\), geometrically integral and
+\(k\)-rational.  This constructs the component without choosing a
+geometric component and then assuming that it descends.
+
+We next prove dominance.  The selected weight spaces are permuted by
+Galois, up to a common translation of weights, so \(M'\) is Galois stable.
+Its inclusion in \(M\) defines an isogeny of \(k\)-tori
+\[
+ \varphi:T\longrightarrow T',\qquad X^*(T'_{\ks})=M',
+\]
+with finite \'etale kernel \(H\) of order \(d\).  Over \(\ks\), its
+coordinates are \(\chi^{w_j-w_0}\), for \(1\leq j\leq r\).
+At the chosen point \(x\in\Lambda\cap U_p\), the equations of
+\(\Lambda\), restricted to the orbit, have invertible differential in
+the torus directions.  Indeed, \(A(x)(1,\ldots,1)^{\mathsf t}=0\);
+after removing the common character, their differential is the product
+of the last \(r\) columns of \(A(x)\) and \(\mathrm d\varphi\).
+The first matrix is invertible because \(\kappa_0(x)\ne0\), and
+\(\mathrm d\varphi\) is invertible in characteristic zero.  Therefore the
+orbit tangent space and \(T_xC\) are complementary in \(T_xZ\).
+The action map \(T\times C\to Z\) is \'etale at \((1,x)\), hence
+dominant.  Consequently \(C\) meets an invariant quotient open and
+dominates \(Z/T\).  Its dimension is \(n-r\), so the induced map is
+generically finite.
+
+To prove divisibility of its degree, extend the constants to \(\bar k\)
+and put \(F=\bar k(Z/T)\).  The generic orbit is a torsor under the
+split torus \(T_F\); Hilbert's Theorem~90 gives an \(F\)-point on it.
+Using that point to identify the orbit with \(T_F\), its intersection
+with \(\Lambda\) is given by \eqref{eq:orbit-correction}.  It is an
+\(H_F\)-torsor of degree \(d\).  Here \(H\) is constant, since the
+constants are algebraically closed.  The absolute Galois group of \(F\)
+acts on this torsor by translations through a subgroup of \(H\).
+Every orbit therefore has the order of that subgroup, a divisor of \(d\).
+Equivalently, every field factor of this finite \'etale algebra has degree
+dividing \(d\).
+
+The generic fibre of \(C_{\bar k}\to(Z/T)_{\bar k}\) is one such field
+factor.  Indeed, \(C\cap U_p\) is an open in the full linear section,
+and \(C\) is geometrically integral.  Its degree is still \(e\): a
+generically finite morphism of degree \(e\) becomes finite locally free
+of rank \(e\) after shrinking the target, and that rank is preserved
+by extension of constants.  Thus \(e\mid d\).
+\end{proof}
+
+\begin{remark}[The degree can be smaller than the index]
+\label{rem:finite-index-scroll}
+\coverage{absent}%
+\uses{thm:finite-index-slice}%
+Let \(Z=\PP^1\times\PP^1\subset\PP^5\) be embedded by
+\(\mathcal O(1,2)\).  On an affine chart its coordinates are
+\[
+ [1:x:y:xy:y^2:xy^2].
+\]
+Let \(\Gm\) scale \(y\), giving weights \(0,1,2\), each with
+multiplicity two.  Select the weight-zero and weight-two spaces, so
+\(d=2\), and take \(p=(1,1)\).  The hyperplane
+\[
+ \Lambda:\quad X_5-X_4-X_1+X_0=0
+\]
+contains the tangent plane at \(p\) and the weight-one space.  Its equation
+on \(Z\) is \((x-1)(y^2-1)=0\).
+In coordinates \(u=x-1\), \(v=y-1\), tangent projection is
+\[
+ (u,v)\longmapsto[uv:v^2:uv^2],
+\]
+with inverse \(u=Y_2/Y_1\), \(v=Y_2/Y_0\) on the open where all
+three target coordinates are nonzero.  Thus it is an isomorphism on
+\(uv\ne0\).  Automorphisms of the two factors give the same conclusion
+at every tangent point.  The point \((x,y)=(2,-1)\) lies in this open and in
+\(\Lambda\); the two entries of \(A(x,y)\) are \(-1,1\).
+The component meeting the open is \(y=-1\).  It maps birationally to
+the quotient, whose function field is \(k(x)\), so \(e=1<d=2\).
+The other horizontal component, \(y=1\), and the vertical component
+\(x=1\) lie outside the isomorphism open.  This example satisfies the
+tangent and descent hypotheses; it is not merely a weight calculation.
+\end{remark}
+
+\begin{corollary}[Zero-cycles from finite-index slices]
+\label{cor:finite-index-chow}
+\coverage{absent}%
+\uses{thm:finite-index-slice}%
+\imports{ctcoray-unirational-degree,actp-zero-cycles}%
+Let \(Q\) be a geometrically integral variety over a characteristic-zero
+field \(k\).  Suppose that it is \(k\)-birational to quotients admitting
+constructions as in Theorem~\ref{thm:finite-index-slice}, with indices
+\(d_1,\ldots,d_s\), where \(s\geq1\).
+For every smooth proper model \(\overline Q\) and every extension
+\(F/k\), the degree map
+\[
+ \deg:CH_0(\overline Q_F)\longrightarrow\Z
+\]
+is surjective and its kernel is annihilated by
+\(\gcd(d_1,\ldots,d_s)\).
+In particular, two coprime indices imply universal \(CH_0\)-triviality.
+\end{corollary}
+
+\begin{proof}
+The theorem gives parametrizations of degrees \(e_i\mid d_i\).
+A parametrization has a nonempty open domain in projective space.  Since
+\(k\) is infinite, this domain has a \(k\)-point, whose image supplies
+a point of \(\overline Q(k)\).  Its base changes make all degree maps
+surjective.
+
+For clarity, recall the degree argument of
+\cite[Lemma~6.2 and Propositions~6.3--6.4]{CTCoray}; the smooth proper
+form is also stated in \cite[Section~1.2]{ACTP}.
+Resolve one parametrization to a proper generically finite morphism
+\(f:W\to\overline Q\) of degree \(e_i\), with \(W\) smooth,
+projective and \(k\)-rational.  Over any \(F/k\), birational invariance
+gives \(CH_0(W_F)\simeq\Z\) by degree.  Shrink to a nonempty open
+of \(\overline Q_F\) over which \(f_F\) is finite flat of degree
+\(e_i\).  The moving lemma represents any degree-zero class \(\alpha\)
+by a cycle supported in that open.  Its flat inverse image is a degree-zero
+cycle on \(W_F\), hence is rationally equivalent to zero.  Pushing it
+forward gives \(e_i\alpha=0\).  Thus also \(d_i\alpha=0\) for each
+\(i\); a B\'ezout combination proves the assertion.
+\end{proof}
+
+The coprime-index conclusion is a criterion for future constructions.
+The scroll above illustrates the degree calculation on a rational quotient;
+it does not supply a new nonrational example with coprime-index slices.
+
 \section{A limitation of the rank-four construction}
 
 The rank-three construction uses four weight spaces, each of dimension
@@ -1009,6 +1175,12 @@ AI-assisted material, and assumes responsibility for all content.
 \emergencystretch=1em
 \raggedright
 \begin{thebibliography}{99}
+\bibitem{ACTP} A.~Auel, J.-L.~Colliot-Th\'el\`ene, and R.~Parimala,
+\emph{Universal unramified cohomology of cubic fourfolds containing a plane},
+arXiv:1310.6705,
+\href{https://math.dartmouth.edu/~auel/papers/docs/ACTP_universaltriviality.pdf}
+{author version}, Section~1.2.
+
 \bibitem{BCTSSD} A.~Beauville, J.-L.~Colliot-Th\'el\`ene, J.-J.~Sansuc,
 and P.~Swinnerton-Dyer,
 \emph{Vari\'et\'es stablement rationnelles non rationnelles},
@@ -1020,6 +1192,12 @@ Ann. of Math. (2) 121 (1985), no.~2, 283--318,
 J. Algebraic Geom. 13 (2004), no.~3, 475--512,
 \href{https://doi.org/10.1090/S1056-3911-03-00355-2}
 {doi:10.1090/S1056-3911-03-00355-2}.
+
+\bibitem{CTCoray} J.-L.~Colliot-Th\'el\`ene and D.~Coray,
+\emph{L'\'equivalence rationnelle sur les points ferm\'es des surfaces
+rationnelles fibr\'ees en coniques},
+Compositio Math. 39 (1979), no.~3, 301--332,
+\href{https://www.numdam.org/item/CM_1979__39_3_301_0/}{Numdam}.
 
 \bibitem{EGFS} P.~Engel, O.~de Gaay Fortman, and S.~Schreieder,
 \emph{Matroids and the integral Hodge conjecture for abelian varieties},

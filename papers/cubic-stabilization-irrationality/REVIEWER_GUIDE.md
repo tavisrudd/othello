@@ -64,6 +64,15 @@ calculation and the evidence boundary.
 
 ## Evidence and replay
 
+For the finite-index extension, check three distinct steps: the rational
+component is defined by the tangent-projection open over the ground field;
+the orbit directions are transverse there, proving dominance; and after
+algebraic closure of constants, the generic intersection is a torsor under
+a constant finite group, proving degree divisibility. The scroll example
+has index two and degree one. The zero-cycle corollary separately supplies
+a degree-one cycle and annihilates the degree-zero group after every field
+extension. No new nonrational coprime-index example is claimed.
+
 The concluding limitation for full type I3 has a separate, finite audit:
 check the contravariant character kernel, the primitive generator, and the
 affine weight permutations. The two weight orbits exclude descended sets of

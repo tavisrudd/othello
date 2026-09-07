@@ -19,6 +19,16 @@
     "hypotheses": "r is nonnegative and X is one of the cubics in Tschinkel--Zhang Propositions 5.1 or 5.3.",
     "objects": "The two explicit series of cubic hypersurfaces."
   },
+  "cor:finite-index-chow": {
+    "cautions": "Degree-one cycles are supplied by rational points in the domain of a parametrization. The proof resolves rational maps, moves cycles to a finite-flat open and pushes flat inverse images forward. Useful nonrational coprime-index examples are not asserted.",
+    "conclusion": "Over every field extension the degree map on CH0 is surjective and its kernel is annihilated by gcd(d_i); coprime indices imply universal CH0-triviality.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "68eeb8de4231f6b18fb7c7df199e4b866282cccdc714dc2a3125ed9c85675033",
+    "environment": "corollary",
+    "hypotheses": "Characteristic zero and one or more constructions satisfying every hypothesis of the finite-index theorem, with indices d_i.",
+    "objects": "Smooth proper models of a geometrically integral variety birational to quotients admitting finite-index slices."
+  },
   "cor:generic-surface-level": {
     "cautions": "The function-field identification and the upper-bound rationalization base-change from Q(t). No unchanged Galois type after extension is assumed; the lower bound uses the specified cubic, not arbitrary quartic del Pezzo surfaces.",
     "conclusion": "ell_F(t)((S_j)_F(t))=2.",
@@ -89,6 +99,16 @@
     "hypotheses": "Kuznetsov works over an algebraically closed characteristic-zero field. Over other fields the required projective-bundle correspondence must be defined over the ground field.",
     "objects": "Smooth genus-eight Fano threefolds with one of the specified cubics as associated Pfaffian cubic."
   },
+  "rem:finite-index-scroll": {
+    "cautions": "Explicit algebraic formulas in the text, not a computer certificate or Lean formalization. The quotient is already rational; this is not a new nonrational coprime-index example.",
+    "conclusion": "The hypotheses of the finite-index theorem hold with index two and rational component degree one.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "c891c5df34a58fbfb2f9b2cb70e24d94a87ef4ff9acf8972c4c6b0ac3a770198",
+    "environment": "remark",
+    "hypotheses": "Characteristic zero, the specified weight spaces, point (1,1), hyperplane, and witness (2,-1).",
+    "objects": "The O(1,2) embedding of P1 times P1 and the effective torus scaling its second factor."
+  },
   "rem:saturation": {
     "cautions": "The degree-two artifact belongs to the parameter isogeny, not the Rosenlicht quotient.",
     "conclusion": "Adjoining the half-sum saturates the cocharacter lattice and removes the projective mu_2 kernel.",
@@ -108,6 +128,16 @@
     "environment": "theorem",
     "hypotheses": "F has characteristic zero and X is one of the two displayed smooth cubic threefolds.",
     "objects": "The least rational stabilization of either specified cubic after extension from Q to an arbitrary characteristic-zero field F."
+  },
+  "thm:finite-index-slice": {
+    "cautions": "The proof uses transversality for dominance and a constant finite-kernel torsor after algebraic closure of constants for divisibility. Index d need not equal the component degree e; no geometric component is assumed to descend.",
+    "conclusion": "The closure of the section on the tangent-isomorphism open is geometrically integral and k-rational, dominates the quotient, and has degree e dividing d.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "d5e1e77c618e1a71992f6f8af48632a0945039abb1a7d7163657b0b811ac9e92",
+    "environment": "theorem",
+    "hypotheses": "Characteristic zero and all hypotheses of the unimodular quotient criterion, replacing the basis condition by a sublattice of finite index d.",
+    "objects": "A generically free projectively linear torus action, selected weights, tangent projection and descended linear section."
   },
   "thm:torus-quotient": {
     "cautions": "A finite-index set of weight differences would give a finite orbit cover and does not suffice.",

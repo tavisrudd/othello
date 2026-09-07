@@ -34,6 +34,11 @@ the upper bound.
   The differences among selected weight spaces form a basis of the character
   lattice; a tangent linear section then meets a general orbit once and is
   identified with projective space by tangent projection.
+- In characteristic zero, weight differences of finite index `d` instead
+  give a rational slice component whose degree over the quotient divides
+  `d`. Constructions with coprime indices imply universal `CH₀`-triviality
+  of smooth proper quotient models. A scroll example shows that the
+  component degree can be strictly smaller than the index.
 - For both Tschinkel–Zhang series `X_{j,r}` of smooth cubic hypersurfaces,
   `X_{j,r} × P²` is rational over `Q` for every `r ≥ 0` and `j ∈ {1,3}`.
   Their stable-rationality conclusions therefore hold with a uniform `P²`
