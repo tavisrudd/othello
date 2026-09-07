@@ -92,3 +92,27 @@ Standalone checks and deterministic PDF verification pass; PDF bytes equal the
 authority. Export content hash:
 `c4cf8b67266d67e609b7e009100bcedc97a24ba35394c864b764e52aa911b3cb`.
 No GitHub or DOI action occurred.
+
+
+## Continued reader-focused polish
+
+At the user's request to keep improving readability, interest and accessibility,
+the introduction now opens with the concrete four-point erasure puzzle before
+notation. Tangent is defined at first use. The low-cardinality section explains
+the progression from rows/columns to division to translated division. Repeated
+conclusions were cut from the post-corollary paragraph and the code paragraphs.
+The Dyshko comparison now describes only the cited additive MDS setting, expands
+MDS, and makes no blanket statement about all MacWilliams-type results. The
+recognition proof replaces the redundant numerical row example and ambiguous
+zero-deletion description with the exact identity row/column/diagonal completion
+of the multiplicative table. No theorem or computational artifact changes.
+
+Authority make check/pdf passes; the 335531-byte draft remains 12 pages. Opening
+three pages were visually inspected. The same reader has been resumed for a
+bounded final feedback pass while the parent checks layout and export.
+
+**ej+tt closeout:** preserving the code-metric connection while trimming its
+repeated theorem conclusions improves economy without losing the reason to care.
+The opening puzzle changes presentation only; it does not claim rigidity for
+arbitrary planes or every field order. No new mathematical mystery or priority
+verdict results from this edit.

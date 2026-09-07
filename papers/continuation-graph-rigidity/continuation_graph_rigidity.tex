@@ -69,31 +69,31 @@ graph; semilinear group; graph automorphism; cross ratio; $M_{0,5}$.
 
 \section{Introduction}
 
-Let $K$ be an arc in a finite projective plane: no line contains three
-points of $K$.  A point outside $K$ is a \emph{legal continuation} when it
-can be adjoined while preserving this property.  The continuation graph
-$G_K$ records which pairs of legal continuations are incompatible.  This
-graph arises naturally as the residual conflict graph of a capacity-two
-avoidance game, but the question studied here is static: how much of the
-projective geometry does the abstract graph remember? Incompatibility
-records that two points share a tangent, but erases which tangent and
-which selected point witnesses the conflict. The reconstruction problem
-is to recover this lost organization from the binary relation alone.
+Choose four points in a finite projective plane, with no three on a line.
+Keep the points that can be added without creating a collinear triple,
+and join two of them when they cannot both be added. Now erase the plane,
+the chosen points, and all labels. Does the remaining graph determine
+which of its symmetries come from the original geometry?
 
-Here a tangent meets $K$ in exactly one point, its \emph{centre}, and a
-secant meets $K$ in two. A tangent trace consists of the legal points on
+More generally, an \emph{arc} $K$ is a set with no three collinear points.
+A point outside $K$ is a \emph{legal continuation} if adjoining it preserves
+this property. The continuation graph $G_K$ joins incompatible pairs of
+legal continuations. Such a pair lies on a \emph{tangent}, a line meeting
+$K$ in exactly one point. The graph records the conflict but forgets both
+the tangent and its selected point. Recovering this lost organization is
+the first obstacle to extending a graph symmetry to the plane.
+
+The selected point on a tangent is its \emph{centre}; a secant meets $K$
+in two points. A tangent trace consists of the legal points on
 that line; the pencil at a centre is the family of tangents through it.
 We write $\PG(2,q)$ for the plane over $\F_q$. A semilinear collineation
 is induced by an invertible linear coordinate change composed with a
 field automorphism; these form $\PGammaL(3,q)$.
 
-An ambient symmetry of the plane preserves collinearity. A symmetry of
-$G_K$ is given only as a permutation preserving incompatible pairs; it need
-not initially preserve any line. To extend it to the plane, we must first
-recognize enough incidence inside the graph. Recovering tangent traces is
-only the first step: we must also group them by centre and recover the
-field action. The fundamental theorem of projective geometry cannot supply
-these missing steps.
+A graph symmetry initially preserves only incompatible pairs. To extend
+it, we recover the tangent traces, group them by centre, and then constrain
+the field action. The fundamental theorem of projective geometry applies
+after incidence is known; it does not recover that incidence from a graph.
 
 Our main result settles the extension question for the first possible arc
 size.  Every four-arc in $\PG(2,q)$ is a projective frame.
@@ -118,8 +118,7 @@ to semilinear equivalence within this family.
 
 
 The corollary controls individual maps: every relabelling preserving
-incompatibility has exactly one semilinear extension. It therefore
-identifies the full symmetry of the encoded constraint system.
+incompatibility has exactly one semilinear extension.
 Section~\ref{sec:algorithm} makes the reconstruction effective: given an
 arbitrary graph and a finite field of order at least $13$, it either
 rejects or supplies field
@@ -182,13 +181,11 @@ The four-coordinate model also gives an isometry-extension question for
 a nonlinear code. Hamming distance counts the positions in which two
 words differ. Here distinct words have distance three or four, and an
 edge records distance three, so graph automorphisms are exactly the
-code's distance-preserving permutations. MacWilliams-type extension
-results assume algebraic structure on the code and its isometries;
-Dyshko treats additive isometries of additive MDS
-codes~\cite[Sections 1--2]{Dyshko}. Our hypotheses supply neither
-additivity nor coordinate positions. The graph first recovers the four
-positions, and compatibility of the two quotient coordinates then forces
-a common field automorphism after frame normalization.
+code's distance-preserving permutations. In the algebraic setting,
+Dyshko studies extension of additive isometries of additive maximum
+distance separable (MDS) codes~\cite[Sections 1--2]{Dyshko}. Here the
+code is nonlinear, and the input specifies only pairwise distances.
+Recovering coordinate positions is therefore part of the extension problem.
 
 A related finite-geometric question asks when a graph built from field
 invariants admits symmetries beyond its prescribed geometric action.
@@ -281,9 +278,7 @@ is an injective nonlinear code of length $k$.  Distinct words agree in at
 most one coordinate. Thus their Hamming distance is $k-1$ for an
 adjacent pair and $k$ otherwise. The graph therefore retains the entire
 distance function on this code, even though it forgets the names of the
-coordinates and their symbols. For four-point frames with $q\ge13$, the theorem
-recovers those coordinates and identifies every distance-preserving
-permutation with a semilinear symmetry.
+coordinates and their symbols.
 
 \section{Intrinsic recovery of tangent traces}
 \label{sec:traces}
@@ -395,6 +390,13 @@ different centres may be skew.
 
 \section{Why extension cannot begin before four points}
 \label{sec:obstructions}
+
+The number of selected points changes what adjacency can detect. Two
+centres give only rows and columns. A third adds division, but division
+alone allows every automorphism of the multiplicative group. The fourth
+centre will add a translated quotient, linking this multiplicative data
+to the field's additive structure.
+
 
 \begin{proposition}[One point]\label{prop:one-point}\coverage{absent}
 For a one-point arc in $\PG(n,q)$, the continuation graph is a disjoint
@@ -675,11 +677,9 @@ of the third class. Identify that missing symbol with its row label.
 In the normal form this is the identity $x/1=x$: row $x$ omits the
 quotient value $x$.
 
-The missing symbols carry the information lost by deleting the values
-$0,1$ from the coordinate grid. For example, over $\F_{13}$ the quotient
-labels in row $2$ are $D\setminus\{2\}$: division by the excluded
-column $1$ would give $2$.
 The third symbol at cell $(x,y)$ now gives $x/y$ for distinct $x,y\in D$.
+To complete division on $\F_q^*$, we restore the identity row and column
+and the diagonal; zero does not belong to this table.
 Adjoin a symbol $1$, put $x/x=1$ and $x/1=x$, and define $1/y$ as the
 unique symbol of $D$ missing from column $y$. Set $1/1=1$. Reject
 inconsistent or nonunique entries. For a frame this completes the full
