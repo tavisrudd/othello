@@ -132,11 +132,12 @@ C1080's portable admission pilot and current-core browser recovery are complete:
 C1081's language inventory, finite reduction semantics and native/WASM conformance slice are
 complete: `notes/2026-09-07-c1081-language-semantics.md` (core `55c5d8c`).
 
-**Next**: allocate full scalar PlanSpec integer/error semantics and FeatureDag lowering
-conformance before campaign unification. The reduction document now has a reference evaluator
-and cross-host corpus; campaign transitions and genuine quotient/lifting contracts remain
-specified obligations, not executable machinery. Preserve native specialization and exact Tiger
-layout guards. C1032 remains open for its full original acceptance review.
+**Active C1082**: scalar PlanSpec integer/error semantics and FeatureDag lowering conformance,
+continued on Tavis's instruction in intent-based mode. Report:
+`notes/2026-09-07-c1082-scalar-semantics.md`. Preserve native specialization/hot loops and exact
+Tiger layout guards. Portable campaign unification and general kernel imports remain successors;
+control-plane scalar features are not being added wholesale to WASM. C1032 remains open for its
+full original acceptance review.
 
 ### C985 — Ergodis exact algebraic optimization paper
 
@@ -160,6 +161,6 @@ host, so cold end-to-end `g41` replays need it regenerated first.
 ## Lane ownership
 
 This lane was split out of `complete-ports` on 2026-09-05 and owns C985, C1016, C1017,
-C1031-C1033, C1040-C1048, C1052, C1061, C1062, C1070, C1072-C1074, C1079, C1080, C1081. Future Ergodis engine, benchmark, tooling,
+C1031-C1033, C1040-C1048, C1052, C1061, C1062, C1070, C1072-C1074, C1079, C1080, C1081, C1082. Future Ergodis engine, benchmark, tooling,
 capability, and Ergodis-paper tasks use `[ergodis]`. The bounded-recovery manuscript work (C325,
 C953, C955, C964) stays on `[complete-ports]`.
