@@ -46,9 +46,9 @@ reconstruction remains outside the headline under the existing N1-only ruling.
 
 ## Next steps
 
-- **C1110** — finish the small paired-review polish: narrow the Dyshko
-  comparison, trim repeated conclusions, and clarify identity-table completion;
-  then complete publication-readiness review of the corrected first draft.
+- **C1110** — complete publication-readiness review. The same-reader final pass
+  finds the local exposition concerns resolved; preserve the current structure.
+  Feedback: `notes/2026-09-07-c1110-continuation-final-reader-polish.md`.
   Qualified external subject review and priority diligence remain distinct from
   the completed sub-agent review and local corrections.
   The author handles GitHub and DOI actions; add the published artifact citation

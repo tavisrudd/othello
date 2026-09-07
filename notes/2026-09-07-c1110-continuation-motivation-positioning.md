@@ -116,3 +116,14 @@ repeated theorem conclusions improves economy without losing the reason to care.
 The opening puzzle changes presentation only; it does not claim rigidity for
 arbitrary planes or every field order. No new mathematical mystery or priority
 verdict results from this edit.
+
+
+The same-reader focused reassessment is recorded in
+`notes/2026-09-07-c1110-continuation-final-reader-polish.md`. It finds the local
+issues resolved and no substantial remaining reader-facing obstacle in the
+passages reviewed. Rounded scores remain accessibility 75, motivation 80,
+concision 75, positioning 75, overall 80; the reader explicitly cautions against
+score inflation and familiarity effects. Its final suggestion was applied:
+the opening now asks directly whether every graph symmetry extends to the plane.
+No added tutorial or new literature branch was recommended. The outstanding
+publication citation and independent priority diligence remain separate.
