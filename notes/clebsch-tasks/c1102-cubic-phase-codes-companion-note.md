@@ -121,6 +121,15 @@ resources*.
   search (signed configurations whose first surviving moment is `det_3`, the `6×6` Pfaffian,
   the `E_6` Cartan cubic, or the trace cubic of ledger item 1).
 
+## Hand-back once the note exists
+
+- Series coda (programme map, shared apparatus per C919): one sentence adding the
+  companion note as a further shadow of the exceptional carrier, phrased as "the
+  `PGL_2`-symmetric, near-Pauli-flat member of the transversal-cubic family with an
+  invariant-theoretic logical phase" (not "a transversal cubic", which every prime has). Ride
+  the next forward release of the series; no Paper I edit for this alone. The p = 11
+  statement is the stronger one (`|F_11>` clears every bipartition product bound).
+
 ## Boundaries
 
 - No Paper II manuscript or Lean edit; the note is unnumbered and outside the series standard.
