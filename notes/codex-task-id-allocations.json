@@ -4463,8 +4463,17 @@
       "last": 1081,
       "purpose": "Language inventory, executable reduction semantics and native/WASM conformance slice",
       "sequence": 496
+    },
+    {
+      "count": 1,
+      "first": 1082,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1082,
+      "purpose": "Executable scalar PlanSpec semantics and FeatureDag lowering conformance",
+      "sequence": 497
     }
   ],
-  "next_id": 1082,
+  "next_id": 1083,
   "schema": "codex-task-id-allocations-v1"
 }
