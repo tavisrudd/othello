@@ -10,6 +10,15 @@ Discovery companion:
 
 ## Current status
 
+**C1089 is queued (2026-09-06).**  Adopt in Paper I the sharp `m`-marginal
+certification proposition (UDA from the `m` marginals on `B∪{j}`, both
+sharpness directions, `(m+1)`-local parent Hamiltonian with `m`-local no-go,
+marginal fidelity certificate) and the SLOCC remark (product Kraus branches
+between 2-uniform states are scalar-unitary, so SLOCC = LU = LC).  Literature
+is closed in `2026-09-06-c1089-literature-ame-marginals-slocc.md`; the review
+that sourced it is `2026-09-06-astra-review-ame-lu-clebsch-quantum.md`.  Read
+`papers/style-guide.md` before editing.
+
 **C991 completed (2026-08-28).**  The 37-page Paper I revision is synchronized
 to the standalone `ame-lu` repository at forward commit `667a2d0`, with
 exporter content SHA-256
