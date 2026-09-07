@@ -9,6 +9,9 @@ acquired source's key, SHA-256, version, access URL, depth, and sections actuall
 Acquisition does not upgrade C1090/C1099's read depths. The largest available citing sets
 were mechanically screened, but technical adjudication of the promotions remains unfinished.
 
+Continuation: `USER-SCAN-FOLLOWUP.md` resolves Wang–Li access and records
+Dai–Fu–Luo's explicit qubit product ceiling; the snapshot below is historical.
+
 ## Outcome and resume gate
 
 1. All seven original seeds have independently obtained OpenAlex, Crossref, and Semantic

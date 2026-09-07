@@ -8,7 +8,8 @@
 Acquisition and first triage are banked in
 `notes/2026-09-07-c1102-forward-citations/REPORT.md`: three counts for all seven original
 seeds, 1,377 graph memberships screened, 336 title-deduplicated promotions awaiting
-completion of technical review. Alltop and Wang–Li full-text access remains unresolved;
+completion of technical review. Alltop access is resolved in the permanent cache; the complete Wang–Li and Dai–Fu–Luo
+user scan sets are recorded in `notes/2026-09-07-c1102-forward-citations/USER-SCAN-FOLLOWUP.md`;
 the added Kagamihara–Tsuchiya seed has Crossref 404 / Semantic Scholar 429 gaps.
 Watson–Campbell–Anwar–Browne 2015 supplies omitted signed-qudit prior art.
 
@@ -43,7 +44,21 @@ consulted source; produce verdict lines for: the general signed-moment CSS mecha
 invariant-theoretic phase, the Hessian-rank formula for stabilizer Rényi entropies of diagonal
 cubic phase states, and the bipartition product-exclusion argument.
 
-## Contents once the gate passes (from C1099 section 4)
+## Approved crisp structure and bounded benchmark
+
+The user's upgrade instruction admits the bounded p=7 same-target factory comparison.
+`notes/2026-09-07-c1102-factory-benchmark/REPORT.md` and its replay bundle establish
+native expected consumption below 16.116 for 0 < delta <= 0.01, against lower bounds
+54 for the specified sign-only separate-distiller menu and 36 in its weighted
+relaxation. The rank bracket suffices; no exact-rank search is a prerequisite.
+These are menu-specific comparisons, not unrestricted protocol lower bounds.
+
+Use four main steps after Gate 1: signed-trade construction and logical cubic;
+Hessian spectrum and geometric product exclusions (credit the prior ceiling method);
+one bounded factory theorem/table; one compact Paper V shadow/torsor proposition.
+Move detailed classifications, enumerators and exhaustion to appendices/artifacts.
+
+## Supporting contents once the gate passes (from C1099 section 4)
 
 1. trade-to-code dictionary; general existence (translation trade, every prime p ≥ 5);
    rigidity `dim L^{∘2} = 2p - 1` for every member found;
@@ -90,8 +105,8 @@ Title and alias proposals (2026-09-07; author's call, not yet decided):
   factories, never as good error-correcting codes.
 - The practical criterion is the ratio "noisy cubic resources consumed per accepted block"
   over "optimal elementary cubic cost of `U_F`". C1090's bracket `9 ≤ r(F_7) ≤ 13` puts the
-  denominator between 9 and 13 against 14 consumed, so no advantage is demonstrable until the
-  exact weighted Waring rank is known; state this plainly as the open practical question.
+  denominator between 9 and 13 against 14 consumed, but equal-error comparison must also price primitive purification. The approved
+  C1102 bounded benchmark above resolves that menu-specific comparison without exact rank.
 - C1099 corrects two of Sol's expectations: rigidity `rad T|_L = <1>` is generic (every trade
   found has it, including the trivial translation trade), so the programme question is "which
   `L`", not "larger radical"; and the controlled-quadratic lead `sQ(z)` is realized trivially by
@@ -136,8 +151,7 @@ Title and alias proposals (2026-09-07; author's call, not yet decided):
   arXiv:2507.05392, and the constant-overhead distillation paper (Nature Physics 2025) as
   the state of the distance side, so the note does not claim the distance direction.
 - Not for this note (candidate successor tasks, unallocated): exact and Clifford-aware
-  weighted Waring ranks of `F_7`, `F_11` and a fair synthillation benchmark (one block versus
-  distill-primitives-then-synthesize at equal target error); the invariant-gate cubature
+  weighted Waring ranks of `F_7`, `F_11` and unrestricted synthillation benchmarks beyond the approved bounded menu; the invariant-gate cubature
   search (signed configurations whose first surviving moment is `det_3`, the `6×6` Pfaffian,
   the `E_6` Cartan cubic, or the trace cubic of ledger item 1).
 

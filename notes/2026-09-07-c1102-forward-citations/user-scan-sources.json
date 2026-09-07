@@ -1,0 +1,317 @@
+[
+  {
+    "cache_directory": "/tmp/persistent/tavis/lit-search/wang-li-2023",
+    "manifest_sha256": "b7a5754117b1fff996c50aefdf841558dee18f071eacdc02af5317037d25d72b",
+    "key": "10.1007/s11128-023-04186-9",
+    "title": "Stabilizer Rényi entropy on qudits",
+    "authors": [
+      "Yiran Wang",
+      "Yongming Li"
+    ],
+    "year": 2023,
+    "version": "Published, Quantum Information Processing 22:444",
+    "url": "https://doi.org/10.1007/s11128-023-04186-9",
+    "access": "User-supplied institutional-browser screenshots, received 2026-09-07",
+    "format": "authoritative user-supplied PNG page captures; not publisher PDF",
+    "pages_present": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "pages_missing": [],
+    "read_depth": "partial",
+    "read_sections": "Pages 1–20 supplied and visually inspected; detailed reliance on Eq. (2), Theorem 1 and Proposition 2, pp. 6–9. References inspected on pp. 19–20. Partial marks the technical audit depth; not all proofs independently checked.",
+    "extraction": "None; no OCR or searchable reconstruction generated",
+    "files": [
+      {
+        "page": 1,
+        "file": "page-01.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-10-36.grover.reg.png",
+        "bytes": 625587,
+        "sha256": "1c465415a55cb37616c142d0432584ca02e4a39c095ac4a6afa5411c4df17c5e"
+      },
+      {
+        "page": 2,
+        "file": "page-02.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-10-53.grover.reg.png",
+        "bytes": 990780,
+        "sha256": "185078d359a322c2f1de741a21aa59b3ab2aacf9410d86d1c0705cc721442993"
+      },
+      {
+        "page": 3,
+        "file": "page-03.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-11-04.grover.reg.png",
+        "bytes": 678049,
+        "sha256": "69bb89787c7a34cbc7fff4cce0c24adc889d668eb1d7b9c5e3ec155afb00c89b"
+      },
+      {
+        "page": 4,
+        "file": "page-04.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-11-17.grover.reg.png",
+        "bytes": 451164,
+        "sha256": "ab04c8f0cd50da73661177afd509a9b592b8a1cec4af757a291b0eca63a55427"
+      },
+      {
+        "page": 5,
+        "file": "page-05.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-11-27.grover.reg.png",
+        "bytes": 661604,
+        "sha256": "180ebc520da2390ca772f2edd676e5e60cd12aa09e72d935d31d6440883aecf0"
+      },
+      {
+        "page": 6,
+        "file": "page-06.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-11-37.grover.reg.png",
+        "bytes": 473446,
+        "sha256": "c4876a642b99e5ded5f8eabe4b5d55144901a4e54abc7ea42261b53e6037e5b3"
+      },
+      {
+        "page": 7,
+        "file": "page-07.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-11-49.grover.reg.png",
+        "bytes": 478725,
+        "sha256": "83516b56a795b3ca4110707b6de96a9ca606ae84999235acdf410a9bd767f001"
+      },
+      {
+        "page": 8,
+        "file": "page-08.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-11-59.grover.reg.png",
+        "bytes": 575700,
+        "sha256": "07ec195fe70dcc0f826ef38905e4346a26a3f09606fecb049b3ed6ccdb56de8c"
+      },
+      {
+        "page": 9,
+        "file": "page-09.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-12-11.grover.reg.png",
+        "bytes": 493311,
+        "sha256": "f9bc843763c88c3f90799edfd3231597975c729393a9c4360c56622adf3d480a"
+      },
+      {
+        "page": 10,
+        "file": "page-10.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-12-22.grover.reg.png",
+        "bytes": 368589,
+        "sha256": "f14cab3303652f106178ba37992e82b15b51e26a69bcaff7c427da4df20fab8c"
+      },
+      {
+        "page": 11,
+        "file": "page-11.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-12-32.grover.reg.png",
+        "bytes": 420835,
+        "sha256": "7f02d2c1237639bc45ba4966cbc3b7e6eb4f98f172d5cdd9527301477bb2fe1d"
+      },
+      {
+        "page": 12,
+        "file": "page-12.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-12-42.grover.reg.png",
+        "bytes": 410401,
+        "sha256": "473bab286d15cda92b13b917840944c64455fbc19982275e13b4f622764f5ec6"
+      },
+      {
+        "page": 13,
+        "file": "page-13.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-12-52.grover.reg.png",
+        "bytes": 500102,
+        "sha256": "25ac2505d609a235788376cf07f3caa86f5315de265ca311717bfb679465130a"
+      },
+      {
+        "page": 14,
+        "file": "page-14.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-13-03.grover.reg.png",
+        "bytes": 314990,
+        "sha256": "e42a1be57d9ec1fe02a69f6c0eb494c20b4c5b6191201e48e509e4998abcc36f"
+      },
+      {
+        "page": 15,
+        "file": "page-15.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-13-13.grover.reg.png",
+        "bytes": 403009,
+        "sha256": "23e91907169f7b5184ada32d12ea50c88c9282bfdf79cd10c1a24941f253adcc"
+      },
+      {
+        "page": 16,
+        "file": "page-16.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-13-24.grover.reg.png",
+        "bytes": 724267,
+        "sha256": "bbe4ce4d272960b7ea32a7c663ba028e7c7f0cafb398d43e8b71c2eca00ea861"
+      },
+      {
+        "page": 17,
+        "file": "page-17.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-13-34.grover.reg.png",
+        "bytes": 462446,
+        "sha256": "e456b2d57e9b88a2c59f659f42e6c254a890fe835ba3f34146737d9e756287d9"
+      },
+      {
+        "page": 18,
+        "file": "page-18.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-13-43.grover.reg.png",
+        "bytes": 570583,
+        "sha256": "eea71532a16f9b8273740db1c1a01cd00a83aa674661e594c49c4301a71a9ed2"
+      },
+      {
+        "page": 19,
+        "file": "page-19.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-15-02.grover.reg.png",
+        "bytes": 873226,
+        "sha256": "d6611c3a584e8619fd3b8b2b42444b965e2d7496e3cfcd67c44f39ff4eaf2b76"
+      },
+      {
+        "page": 20,
+        "file": "page-20.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-15-10.grover.reg.png",
+        "bytes": 825241,
+        "sha256": "7a437114917c9ac9a22478eefd87e789a0113db0e532444c25bb047827602a13"
+      }
+    ]
+  },
+  {
+    "cache_directory": "/tmp/persistent/tavis/lit-search/dai-fu-luo-2022",
+    "manifest_sha256": "dd0ebcacb734bec1c8e4bc575e89cc98af76165c18686629d5094e173e037486",
+    "key": "10.1007/s10773-022-05027-8",
+    "title": "Detecting Magic States via Characteristic Functions",
+    "authors": [
+      "Hao Dai",
+      "Shuangshuang Fu",
+      "Shunlong Luo"
+    ],
+    "year": 2022,
+    "version": "Published, International Journal of Theoretical Physics 61:35",
+    "url": "https://doi.org/10.1007/s10773-022-05027-8",
+    "access": "User-supplied browser screenshots received 2026-09-07",
+    "format": "Original two-page PNG spreads, left page precedes right page",
+    "pages_present": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "pages_missing": [],
+    "read_depth": "full text",
+    "read_sections": "Published pp. 1–18 read directly in nine user-supplied two-page screenshots. Relied on Eq. (8), Propositions 1–2 and their proofs, pp. 5–8; examples Sec. 5, pp. 10–15, especially product-state bound Sec. 5.3(3), p. 15; conclusion and references pp. 15–18. Load-bearing passages visually verified against original images. Full-text reading does not assert independent verification of every example calculation.",
+    "extraction": "None; original images preserved without cropping or OCR",
+    "files": [
+      {
+        "pages": [
+          1,
+          2
+        ],
+        "file": "pages-01-02.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-19-54.grover.reg.png",
+        "bytes": 1403549,
+        "sha256": "5b6a73727c5ad8560087817c1755ee2021ae355ff32d6a4eee37258799cc62a0"
+      },
+      {
+        "pages": [
+          3,
+          4
+        ],
+        "file": "pages-03-04.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-20-08.grover.reg.png",
+        "bytes": 1222472,
+        "sha256": "eb9bbe19b50187da9eefb2dcfc2bdf6f76ab7dcd124f8dae7ed65ea901c87e90"
+      },
+      {
+        "pages": [
+          5,
+          6
+        ],
+        "file": "pages-05-06.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-20-22.grover.reg.png",
+        "bytes": 1012743,
+        "sha256": "ffc10368995d07edfeee21266915d2b79576d21741c4d595cc5fc321b76f2bdf"
+      },
+      {
+        "pages": [
+          7,
+          8
+        ],
+        "file": "pages-07-08.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-20-34.grover.reg.png",
+        "bytes": 1053611,
+        "sha256": "1d150ed2c3b2703f8caee8adcc8907d565c64c393bbf74840eb05370e2853235"
+      },
+      {
+        "pages": [
+          9,
+          10
+        ],
+        "file": "pages-09-10.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-20-52.grover.reg.png",
+        "bytes": 1052587,
+        "sha256": "54faee6398ea70e3fb2c2ff20ae5a334b9a318adcdd48d5a651e2b9c88ec2c79"
+      },
+      {
+        "pages": [
+          11,
+          12
+        ],
+        "file": "pages-11-12.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-23-57.grover.reg.png",
+        "bytes": 937986,
+        "sha256": "c6a5789a64c5a7eb8d65efb960fb76af9cb907d4bac7479abde16c895536969a"
+      },
+      {
+        "pages": [
+          13,
+          14
+        ],
+        "file": "pages-13-14.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-24-09.grover.reg.png",
+        "bytes": 937528,
+        "sha256": "3121d830b68dbf357d08fd3d3413fc539dd1f21b4b8b7966d4aeffcd642438e2"
+      },
+      {
+        "pages": [
+          15,
+          16
+        ],
+        "file": "pages-15-16.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-24-20.grover.reg.png",
+        "bytes": 1266554,
+        "sha256": "d074d36f5e8c594d13b4530c9d67401f6bf370dbc08aedbc42e8c8be922b67e4"
+      },
+      {
+        "pages": [
+          17,
+          18
+        ],
+        "file": "pages-17-18.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-15-24-30.grover.reg.png",
+        "bytes": 1428814,
+        "sha256": "df558274c5d5228396b525ead55665a97497a391f53721a28f0fc8babdbfe8d1"
+      }
+    ]
+  }
+]
