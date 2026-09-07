@@ -80,15 +80,15 @@
       {
         "aspect": "domain",
         "matched": "The argument is applied over the function field of the stated projection base.",
-        "requirement": "The generic fibre is the quartic del Pezzo surface constructed in Propositions 5.1 or 5.2."
+        "requirement": "The generic fibre is the quartic del Pezzo surface constructed in Propositions 5.1 or 5.3."
       },
       {
         "aspect": "equation",
-        "matched": "The second family uses the cubic tail x3^3 - x3*x4^2 + x4^3, exactly as in Proposition 5.2.",
-        "requirement": "The displayed equations, coefficients, and added Fermat cubes agree with Propositions 5.1 and 5.2."
+        "matched": "The second family uses the cubic tail x3^3 - x3*x4^2 + x4^3, exactly as in Proposition 5.3.",
+        "requirement": "The displayed equations, coefficients, and added Fermat cubes agree with Propositions 5.1 and 5.3."
       }
     ],
-    "pinpoint": "Propositions 5.1 and 5.2",
+    "pinpoint": "Propositions 5.1 and 5.3",
     "used": "The two cubic series and their quartic del Pezzo generic fibres."
   },
   "tz-type-classification": {
@@ -130,8 +130,8 @@
     "conventions": [
       {
         "aspect": "domain",
-        "matched": "The ground field has characteristic zero, the projective Cox model becomes a variety with one apparent double point after base change, and the rational-point hypothesis gives Zariski-dense k-points on the twisted Cox model.",
-        "requirement": "Theorem 2.4 assumes characteristic zero, the one-apparent-double-point property after base change, and Zariski density of k-points."
+        "matched": "The ground field has characteristic zero, the projective Cox model becomes a variety with one apparent double point after base change, and the rational-point hypothesis gives Zariski-dense k-points on the twisted Cox model. The split Cox model is integral and has no linear equations; these properties persist under twisting.",
+        "requirement": "Theorem 2.4 in v2 assumes characteristic zero, a reduced irreducible nondegenerate projective variety, the one-apparent-double-point property after base change, and Zariski density of k-points."
       },
       {
         "aspect": "singular scope",

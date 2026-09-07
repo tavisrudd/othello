@@ -23,8 +23,10 @@ Let \(Y\) be smooth and projective.  We first make three setup choices.
 Pass to numerical Novikov variables, set the odd bulk variables to zero, and
 restrict the underlying cohomology space to \(H^{\mathrm{ev}}(Y)\).  The
 last restriction is essential: restricting the bulk base alone would still
-leave odd cohomology in the fibre.  Let \(K_Y\) be the generic coefficient
-field of this even QDM and fix an algebraic closure \(\overline K_Y\).  We form
+leave odd cohomology in the fibre.  Use graded completions as in
+\cite[Section~2.2]{IritaniBlowup}, and let \(K_Y\) be the fraction field of
+the numerical divisor-equation-reduced coefficient domain described below.
+Fix an algebraic closure \(\overline K_Y\).  We form
 all spectral blocks only after base change to \(\overline K_Y\), so no later
 scalar extension can split a factor that has already been counted as one
 block.
@@ -288,41 +290,59 @@ faithful scalar extension, followed by the formal coordinate change
 \end{lemma}
 
 \begin{proof}
-We prove injectivity by filtering to finitely many curve classes and using the
-independence of their exponentials in the target divisor coordinates.
+All completions here use the graded convention of
+\cite[Section~2.2]{IritaniBlowup}.  The pullback is defined on the reduced
+ring by the String and Divisor Equations, as explained after (5.36) and
+(5.47) there.  It need not be defined on the unrestricted bulk power-series
+ring.  We prove injectivity using the first nonzero Novikov degree, retaining
+the full exponentials in the target divisor coordinates.
 Choose integral divisors \(D_1,\ldots,D_\rho\) whose pairings separate
 \(N_1(Z)\), and use their dual coordinates in \(s_j^{(2)}\).  The variables
 \(s_j\) occur only in the target \(A_j\), not as coefficients in
 \(R_{Z,\mathrm{src}}^{\mathrm{red}}\).  This asymmetry is essential.
 
-Filter the source by an ample degree pulled back from \(Y\), together with
-the ordinary bulk order.  Every fibre of the untagged monomial map in a
-bounded piece is finite: the restriction of an ample divisor from \(Y\) is
+Filter by an integral ample degree pulled back from \(Y\).  Every fibre of
+the untagged monomial map in a bounded piece is finite: the restriction
+of an ample divisor from \(Y\) is
 ample on \(Z\), and its bounded slice of \(\overline{NE}(Z)\) contains only
 finitely many lattice points.  This filtration is respected by the target
-map because \(H\cdot i_*d=(i^*H)\cdot d\).  The fixed shift
-\(\varsigma_j^\circ\) and the
-translations of the nondivisor and unit coordinates are invertible formal
-changes of target coordinates, so they do not affect injectivity.
+map because \(H\cdot i_*d=(i^*H)\cdot d\), and the fixed shifts have
+nonnegative Novikov degree.
+
+For a fixed curve class, the coefficient of an element of the reduced ring
+is polynomial in the nondivisor and unit coordinates.  Indeed, an element
+has finitely many homogeneous degrees and bounded unit degree; every other
+even nondivisor coordinate has strictly negative degree.  Thus only
+finitely many of its monomials occur at that curve class.  This is where
+the reduced, graded source is essential.
 
 Suppose a nonzero source element maps to zero and take its first nonzero
-filtered part.  Group its finitely many terms by their common untagged target
-monomial and by their nondivisor bulk monomial.  On one nonzero group the
+Novikov-degree part.  At that degree only the Novikov-degree-zero part of
+\(\varsigma_j^\circ\) enters.  Translation by its nondivisor and unit
+components is an injective substitution on the polynomial coefficients,
+over the target Laurent coefficient field.  Its divisor component
+multiplies each exponential by a nonzero scalar.  Group the terms by their
+common untagged target monomial.  On one nonzero group the
 remaining relation has the form
 \[
  \sum_{d\in F}a_d
  \exp\!\left(\sum_{k=1}^\rho(D_k\cdot d)s_{j,k}\right)=0,
  \qquad a_d\ne0,
 \]
-over a characteristic-zero coefficient domain that does not contain the
-variables \(s_{j,k}\).  The exponent vectors are distinct.  Choose an integral
+over a characteristic-zero coefficient domain, including the remaining bulk
+coordinates, that does not contain the variables \(s_{j,k}\).
+The exponent vectors are distinct.  Choose an integral
 one-parameter restriction on which they remain distinct.  Derivatives of
 orders \(0,\ldots,|F|-1\) at the origin give a Vandermonde matrix, hence every
-\(a_d\) is zero, a contradiction.  Thus \(\iota_j\) is injective on every
-bounded quotient and, by separated completeness, on the full reduced source.
+\(a_d\) is zero, a contradiction.  This proves injectivity on the full
+reduced source.  We have not truncated the divisor exponentials by bulk
+order; doing so could lose the distinction between curve classes.
 
 Remark~2.3 of \cite{IritaniBlowup} gives the intrinsic reduced source, and
-Remark~5.6 gives its image under the noninjective map~(5.15).
+Remark~5.6 gives its image under the raw Novikov map~(5.15).
+Although that map can be noninjective on the unrestricted source, it retains
+the independent \(\sigma^{(2)}\) coordinates in its target.  Its restriction
+to the reduced source is injective by the same argument, with zero shift.
 Equations~(5.47)--(5.48) then pull that image into the external direct sum over
 \(A_j\), where the variables \(s_j\) are independent, and identify the direct
 sum with the blowup module.  Associativity of scalar extension therefore
@@ -498,7 +518,7 @@ equation has been scalar-centered.  Nilpotence of \(N\) away from the
 base point is not yet known, so the commutant is computed over the
 complete local ring \(\mathcal O\) of the formal bulk germ.  The rank-two
 spectral cluster continues over \(\mathcal O\) because it is separated
-from the other two eigenvalues at the base point; \(N\) is the centered
+from the complementary spectral clusters at the base point; \(N\) is the centered
 \(z^{-1}\) coefficient of that continuation, so \(\tr N=0\), and it
 specializes at the closed point to a nonzero rank-one nilpotent.  Choose
 \(v\) with \(v,Nv\) a basis modulo the maximal ideal; by Nakayama it is a
@@ -514,8 +534,9 @@ cyclic \(N\) is determined by \(Cv=\alpha v+\beta Nv\) and equals
 \]
 Writing \(B=q_\partial A_0-C_{\partial,0}\), one has
 \(\partial(N^2)=-2q_\partial N^2+[N^2,B]\); uniqueness for the formal
-coefficient recursion preserves \(N^2=0\), while the nonzero leading value
-prevents \(N\) from becoming the zero formal section.  Thus formal bulk
+coefficient recursion preserves \(N^2=0\).  An entry nonzero at the closed
+point remains a unit, so \(N\) has rank one throughout the formal germ.
+Thus formal bulk
 transport preserves the nonzero square-zero orbit and its
 image line.  After modification, the only possible base
 pole is \(z^{-1}kE_{21}\).  If

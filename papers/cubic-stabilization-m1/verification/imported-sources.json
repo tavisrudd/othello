@@ -44,13 +44,13 @@
     },
     "IritaniBlowup:thm-5.18": {
       "citation": "IritaniBlowup",
-      "pinpoint": "Equation (1.1), Theorem 5.18, especially parts (3), (4), (6), and (7), Section 5.8.2, especially equations (5.47)--(5.48), Remarks 2.3 and 5.6, and equation (5.15)",
+      "pinpoint": "Section 2.2, Equation (1.1), Theorem 5.18, especially parts (3), (4), (6), and (7), Section 5.8.2, especially equations (5.47)--(5.48), Remarks 2.3 and 5.6, equation (5.15), and the reduced-ring pullback discussion after (5.36)",
       "used": "The regular parity-preserving quantum-D-module comparison for a blowup, with one ambient summand, c-1 occurrence-indexed center summands, explicit homogeneous degree shifts, leading branch asymptotics, and an invertible reconstruction Jacobian.",
       "conventions": [
         {
           "aspect": "coefficient maps",
           "requirement": "Equation (1.1) supplies common graded completed coefficient maps; the raw center Novikov map can be noninjective, and no finite algebraic coefficient algebra is asserted for an arbitrary non-Fano fourfold.",
-          "matched": "The ambient comparison uses the common coefficient image. Each center occurrence first receives the separate target-only tagging proved injective in the manuscript, and only then passes to the common algebraically closed generic overfield."
+          "matched": "Generic fields are fraction fields of the numerical reduced graded domains. The raw map restricted to the reduced source is already injective because its target retains independent divisor coordinates. The translated map is proved injective separately, before extension to the common algebraically closed generic overfield."
         },
         {
           "aspect": "loop coordinate",
@@ -60,7 +60,7 @@
         {
           "aspect": "center variables",
           "requirement": "The center Novikov map can have a kernel; the reduced source contains the combined divisor-equation monomials rather than separate divisor coordinates; and Section 5.8.2 introduces independent center coordinates on the external direct-sum target.",
-          "matched": "Each occurrence is pulled back from the reduced source to the external direct-sum ring. The target-only divisor coordinates separate every finite collision fibre, giving the faithful coefficient embedding used by the marker ledger."
+          "matched": "At the first nonzero Novikov degree, grading and bounded unit degree make the other bulk coefficients polynomial. Their fixed translations are injective; the full divisor exponentials then separate the finite collision fibre. No automorphism of an unrestricted formal bulk ring, or injectivity after truncating divisor exponentials, is asserted."
         },
         {
           "aspect": "parity",
