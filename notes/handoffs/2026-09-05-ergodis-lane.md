@@ -298,7 +298,11 @@ Report: `notes/2026-09-07-c1123-repository-analysis.md`.
 update/fork ancestry, run selection and bounded SVG rendering pass executed notebook
 and Chromium output checks. Report: `notes/2026-09-07-c1033-saved-run-notebook.md`.
 
-**Next**: C1033's standing live-evolution campaign and candidate mutation-lineage view.
+**C1124 in progress**: user-directed real-workload campaign console, using the recovered
+C1031 console and current native engine. No toy or infographic default.
+Report: `notes/2026-09-07-c1124-real-campaign-console.md`.
+
+**Next after C1124**: C1033's standing live-evolution campaign and candidate mutation-lineage view.
 Candidate lineage is distinct from this saved run ancestry. Browser analytical export
 and larger-store pagination need separate slices.
 Browser/native bounded persistence pilots are complete; automatic execution recovery, larger
