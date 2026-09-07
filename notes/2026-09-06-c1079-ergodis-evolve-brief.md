@@ -190,6 +190,38 @@ Deliver a staged path to the single-host-binary hybrid native/IR model without m
 building a loader/compiler extension during this evidence-and-plan task. Public export and specific private IP
 release decisions remain separate.
 
+## Obfuscated black-box demonstrations
+
+Explicit user requirement: provide demos using both native shared-library extensions and
+source-to-IR extensions in an obfuscated black-box form, preserving private industry knowledge.
+The synthesis must include a concrete demo packaging/execution strategy for each path.
+
+- Evaluate recipient-run packages and hosted/remote execution against a stated inspection model:
+  what the recipient receives, controls, and can inspect. Distinguish obfuscation and reduced
+  disclosure from a guarantee of secrecy on a recipient-controlled machine. Recommend an
+  appropriate option without silently requiring online-only demos or promising unrecoverability.
+- For native extensions, assess the demo artifact and exposed symbols/interfaces, metadata,
+  diagnostics, and runtime outputs. For source-to-IR extensions, assess private compilation
+  before delivery, protected/opaque deployable IR or other executable artifacts, and hosted
+  compilation/execution. State which routes require source or readable IR at the recipient and
+  what tradeoffs that introduces. Production runtime compilation remains part of the target;
+  demos may use a separately prepared artifact when justified.
+- Map exposure through the whole demo, including Unix-socket introspection, candidate archives,
+  generated/evolved source and parameters, proof/replay exports, debug traces, logs, caches,
+  temporary files, and error messages. Define the intended public demo interface and useful
+  observable results without inadvertently shipping private theorem/heuristic assets.
+- Preserve full internal provenance and validation records while exposing a deliberately scoped
+  demo view. Any withheld evidence must be explicit: do not describe an opaque result as
+  independently replayable when the recipient lacks the required checker, inputs, or artifacts.
+- Include a reviewable demo bundle/dependency manifest and acceptance checks for unintended
+  disclosure, compatibility, and representative functionality, with QEC as the leading example.
+  Identify the residual exposure and deployment tradeoffs that require a user decision.
+
+This is a packaging and technical disclosure requirement for C1079’s plan. It does not choose
+which industry assets to demonstrate, authorize delivery/publication, or settle licensing or
+patent questions. Demo visibility is independent of search mode, origin, validation, and IP
+ownership; obfuscation is not evidence of correctness or legal protection.
+
 ## Boundary and acceptance
 
 This task produces a review and concrete, reviewable synthesis plan, not an implementation merge

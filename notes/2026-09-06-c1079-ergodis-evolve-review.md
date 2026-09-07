@@ -95,6 +95,15 @@ an existing dynamic loader or assess ABI compatibility. Loading during active ru
 unloading/replacement remain choices to evaluate. The brief records the required analysis;
 no loader implementation or ABI selection has been made.
 
+## Black-box demo requirement added after collection
+
+Tavis also requires obfuscated black-box demonstrations for both native kernels and source/IR
+extensions. The convergence plan must compare recipient-run and hosted options, define artifact
+and introspection exposure, and preserve internal provenance while making any withheld replay
+material explicit. The initial collection did not audit demo packaging or reverse-engineering
+exposure. The brief now includes those requirements; no demo bundle or disclosure is authorized
+or produced by this update.
+
 ## Next synthesis work
 
 Use these inventories to construct a concrete cross-repository capability/admission map, then
