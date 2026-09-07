@@ -121,6 +121,26 @@ resources*.
   search (signed configurations whose first surviving moment is `det_3`, the `6×6` Pfaffian,
   the `E_6` Cartan cubic, or the trace cubic of ledger item 1).
 
+## Placement against the portfolio's other transversal-gate results (checked 2026-09-07)
+
+- *Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes*
+  (`papers/mds_css_transversal_groups/`, `ame-lu` lane): its abstract already states that the
+  codimension of the Schur square determines all transversal logical unitaries and that AME
+  rigidity excludes non-Clifford product implementations. The note must place the trade codes
+  against it with the correct parameter: both regimes have Schur-square codimension one; what
+  differs is the X-stabilizer (`<1>` against `C^⊥`) tested against the Schur cube
+  `S_X ∘ L ∘ L`. Cite it as the Clifford end of one parameter, `dim S_X`; do not claim a new
+  algebra.
+- The `ame-lu` handoff's dual-distance dictionary (finite diagonal symmetry groups of CSS coset
+  states carrying a non-Clifford order-eight element; projective triply-even codes) is the
+  qubit analogue of memo Proposition 3 / section 6.1 (all position-dependent diagonal cubic
+  phases preserving the code are `w ∈ (L^{∘2})^⊥`). Cite it; the qudit cubic statement is the
+  same dictionary one degree up.
+- The `quantum-codes` lane (`notes/handoffs/2026-08-25-quantum-codes.md`) is the portfolio's
+  designated home for cross-lane code and gate work consuming geometric results; C1102 is
+  pegged `clebsch` because the note is a Clebsch companion. Re-pegging is the user's call, not
+  this card's.
+
 ## Hand-back once the note exists
 
 - Series coda (programme map, shared apparatus per C919): one sentence adding the
