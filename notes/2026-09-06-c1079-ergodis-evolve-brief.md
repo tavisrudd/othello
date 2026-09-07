@@ -139,13 +139,16 @@ private material, file patents, create entities, or allocate IP rights. The core
 direction above still stands; the plan must explain how shared machinery and separable industry
 knowledge fit together.
 
-## Runtime-loadable industry extensions
+## Hybrid runtime industry extensions
 
-Explicit user requirement: one core binary should be able to load industry-specific extensions
-from shared libraries at runtime (`.so` on the current platform, equivalents where supported).
-Private heuristics/theorems and related industry capabilities should be distributable as such
-modules, consistent with the core/private and potential industry carve-out boundaries above.
-This is part of the target architecture for the synthesis, not merely an optional packaging idea.
+User direction: one core binary loads industry extensions at runtime. The latest preferred
+shape is a hybrid: shared libraries (`.so` and platform equivalents) for specialized kernels,
+and source code compiled on the fly into Ergodis IR for other extensible/evolved logic.
+An industry package may supply both. This refines the earlier shared-library-only framing;
+the plan must assess the division of responsibilities rather than force all private knowledge
+into native modules. Source language, IR entry points, and exact native/IR split remain to be
+recommended from existing machinery. Runtime source compilation does not by itself imply
+arbitrary Rust/native compilation, a new JIT, or hot replacement of active solver code.
 
 The plan must inspect existing extension/registration mechanisms and specify a concrete runtime
 module contract covering:
@@ -153,6 +156,20 @@ module contract covering:
 - Which capabilities a module can register: industry adapters, proposers, heuristics, theorem
   validators, parameter generators, and quotient/compiler specializations as applicable; identify
   which lifecycle and workflow services stay in the host core.
+- Recover existing source languages, typed term/feature DAGs, VM lowering, and compiler paths;
+  identify which can support industry-supplied and evolve-generated source without inventing a
+  parallel IR. Define source-to-IR validation, resource bounds, compilation diagnostics, and
+  compatibility with downstream quotient/compiler consumers.
+- Define how IR programs call registered native kernels: typed semantics, required capabilities,
+  parameter/shape constraints, evaluation costs, and proof/replay obligations. A native kernel’s
+  availability or a source program’s successful compilation is not evidence of theorem validity.
+- Bind source digest, language/compiler/IR versions, compilation options, native module versions,
+  and resulting IR identity into lineage and replay. Distinguish source mutation from compiler
+  transformation and parameter instantiation; specify which changes require revalidation and
+  how cached compilation/evidence is reused without losing scope or origin.
+- Assess confidential source/IR/caches, generated artifacts, and diagnostics as part of each
+  industry’s IP package, including deployment arrangements where private source is available
+  to the runtime. Source-to-IR compilation is not an IP disclosure or ownership decision.
 - ABI/API versioning and compatibility, module identity/version/digest, dependency negotiation,
   loading/initialization, ownership and lifetime of data/callbacks, error handling, and reproducible
   module resolution. Evaluate the implementation choices under the existing Rust/performance
@@ -169,8 +186,8 @@ module contract covering:
 - Independently buildable/versioned industry modules, a core-only usable binary, and concrete
   compatibility/replay/acceptance tests. Assess QEC as the leading private module/carve-out example.
 
-Deliver a staged path to the single-host-binary/shared-library model without moving source or
-building a new loader during this evidence-and-plan task. Public export and specific private IP
+Deliver a staged path to the single-host-binary hybrid native/IR model without moving source or
+building a loader/compiler extension during this evidence-and-plan task. Public export and specific private IP
 release decisions remain separate.
 
 ## Boundary and acceptance
