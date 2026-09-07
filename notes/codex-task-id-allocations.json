@@ -4454,8 +4454,17 @@
       "last": 1080,
       "purpose": "Implement C1079 portable candidate parameter admission pilot with an existing proposer and exact solver consumer",
       "sequence": 495
+    },
+    {
+      "count": 1,
+      "first": 1081,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1081,
+      "purpose": "Language inventory, executable reduction semantics and native/WASM conformance slice",
+      "sequence": 496
     }
   ],
-  "next_id": 1081,
+  "next_id": 1082,
   "schema": "codex-task-id-allocations-v1"
 }
