@@ -4688,8 +4688,17 @@
       "last": 1110,
       "purpose": "C295 reconciliation and literature comparison; certified reconstruction and small orders; upgraded manuscript review",
       "sequence": 521
+    },
+    {
+      "count": 3,
+      "first": 1111,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1113,
+      "purpose": "Reconstruction preservation corpus; autonomous representation discovery and repair; gated transfer to one existing workload",
+      "sequence": 522
     }
   ],
-  "next_id": 1111,
+  "next_id": 1114,
   "schema": "codex-task-id-allocations-v1"
 }
