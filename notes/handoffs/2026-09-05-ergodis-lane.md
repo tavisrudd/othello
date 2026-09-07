@@ -123,11 +123,13 @@ the Farr–Lisoněk free-pair cap constructions into a test-cap corpus for the c
 in the `n ≥ 4` programme. Each row carries its own provenance pointer; read the discovery-track
 entry before starting.
 
-### C1079 — ergodis-evolve review
+### C1079 — ergodis-evolve review and synthesis plan
 
-Queued, not started. Review correctness, exactness/certificate boundaries, integration risks, and
-test coverage in `ergodis-evolve`; deliver severity-ranked findings with file/line evidence and
-targeted reproduction checks. Read the owning checkout’s `AGENTS.md` first. Planned report:
+Queued, not started. Bring together core evolve, private/C1016 work, and extension spikes into a
+clear staged plan for the best autonomous structure-discovery and theorem/parameter-driven
+quotient system, steerable through a Unix socket. Reconcile conflicting inherited intent against
+Tavis’s explicit autonomy goal. Scope and acceptance:
+`notes/2026-09-06-c1079-ergodis-evolve-brief.md`. Planned report:
 `notes/2026-09-06-c1079-ergodis-evolve-review.md`.
 
 ### C985 — Ergodis exact algebraic optimization paper
