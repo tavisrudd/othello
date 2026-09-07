@@ -129,12 +129,12 @@ C1079's convergence plan is complete: `notes/2026-09-06-c1079-ergodis-evolve-rev
 C1080's portable admission pilot and current-core browser recovery are complete:
 `notes/2026-09-07-c1080-admission-pilot.md` (core `5247f6d`, `95d16b9`).
 
-**Next**: allocate the next bounded implementation slice for persistent autonomous campaigns and
-portable IR, carrying the independent mode/origin/admission contract into native and browser hosts.
-Keep native 64-bit hot layouts/performance and exact size/alignment guards. Industry knowledge
-stays private under the C1079 IP plan. Dynamic modules and private demo packaging remain future
-stages. C1032 remains open for full original acceptance review; its recovered `wasm/` now builds
-and passes a Chromium Worker smoke test against current core.
+**Active C1081**: Tavis approved language inventory, executable semantics and one end-to-end
+reduction/admission conformance slice before further campaign/IR expansion. Report:
+`notes/2026-09-07-c1081-language-semantics.md`. Preserve native hot loops and exact layout guards;
+keep reference evaluation off the production path. Machine-checked compiler proofs and dynamic
+extension loading remain successors, not claims of this slice. C1032 remains open for its full
+original acceptance review.
 
 ### C985 — Ergodis exact algebraic optimization paper
 
@@ -158,6 +158,6 @@ host, so cold end-to-end `g41` replays need it regenerated first.
 ## Lane ownership
 
 This lane was split out of `complete-ports` on 2026-09-05 and owns C985, C1016, C1017,
-C1031-C1033, C1040-C1048, C1052, C1061, C1062, C1070, C1072-C1074, C1079, C1080. Future Ergodis engine, benchmark, tooling,
+C1031-C1033, C1040-C1048, C1052, C1061, C1062, C1070, C1072-C1074, C1079, C1080, C1081. Future Ergodis engine, benchmark, tooling,
 capability, and Ergodis-paper tasks use `[ergodis]`. The bounded-recovery manuscript work (C325,
 C953, C955, C964) stays on `[complete-ports]`.
