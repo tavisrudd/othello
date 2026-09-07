@@ -18,6 +18,28 @@ For every smooth complex cubic threefold \(X\), the fourfold
 \(X\times\PP^1\) is irrational.
 \end{theorem}
 
+The birational argument is short.  We construct an integer-valued
+\emph{exponent count} \(I_{\mathrm{exp}}\) with
+\[
+ I_{\mathrm{exp}}(X)=1,\qquad
+ I_{\mathrm{exp}}(X\times\PP^1)=2,\qquad
+ I_{\mathrm{exp}}(\PP^4)=0.
+\]
+For a blowup along a smooth center of codimension \(c\), its change is
+\[
+ I_{\mathrm{exp}}(\Bl_ZY)
+ =I_{\mathrm{exp}}(Y)+\sum_{j=0}^{c-2}c_{\mathrm{exp}}(\omega_j).
+\]
+Here each \(\omega_j\) records one center summand in the quantum blowup
+comparison.  Every such contribution vanishes when \(\dim Z\leq2\).
+Weak factorization of smooth projective fourfolds uses only these centers,
+so the count is birationally invariant in dimension four.  Its values
+above rule out a birational map \(X\times\PP^1\dashrightarrow\PP^4\).
+Section~\ref{sec:atomic-one-step} constructs the count and proves these
+properties.  This also explains the dimensional limit: a factorization
+in dimension five may use threefold centers, whose contributions need
+not vanish.
+
 The stable-rationality picture varies across the moduli space.  Hassett and
 Tschinkel identified varieties birational to cubic threefolds as the
 exceptional Fano-threefold case not covered by their stable-irrationality
@@ -40,19 +62,14 @@ coordinates on cohomology.  By the even QDM we mean the restriction to even
 cohomology with the odd bulk variables set to zero.  We then
 replace the ring of numerical Novikov and even bulk
 parameters by its fraction field; this is what \emph{generic} means below.  In
+particular, it refers to quantum parameters, not to a general point in the
+moduli space of cubic threefolds.  In
 the direction of the connection variable \(z\), the leading coefficient is
 quantum multiplication by the Euler field.  Over an algebraic closure of the
 generic coefficient field, its generalized eigenspaces decompose the formal
 connection into blocks.
 
-We record the block isomorphism classes in a free commutative monoid.  For an
-additive marker on this monoid, Iritani's blowup theorem gives a formula for
-its change under blowup, with each center summand retained.  Combined with
-weak factorization, this formula makes any such marker that vanishes on every
-center occurring in a weak factorization of smooth fourfolds a birational
-invariant.
-
-The marker counts rank-two blocks for which the centered leading term \(N\) of
+The count selects rank-two blocks for which the centered leading term \(N\) of
 Euler multiplication is nonzero and satisfies \(N^2=0\).  Horizontality of the
 Poincar\'e pairing makes a canonical elementary modification regular singular,
 while flatness gives a Lax equation for its residue, whose eigenvalues are
@@ -61,7 +78,7 @@ distinct modulo \(\Z\), equivalently when the two formal exponent classes are
 distinct.
 Using Beauville's quantum product formulas, we compute the exponent
 representatives \(-1/6\) and \(-5/6\) for the cubic block, with difference
-\(2/3\).  The resulting marker
+\(2/3\).  The resulting invariant
 vanishes on points, curves, and surfaces and on projective space.
 Iritani--Koto's projective-bundle theorem shows that it doubles after product
 with \(\PP^1\).  This proves the theorem.
@@ -78,11 +95,11 @@ include work on cubic, Gushel--Mukai, and K\"uchle fourfolds
 \cite{GuereCubicFourfold,BenedettiManivelPerrin,
 BenedettiFayGuereManivelPerrin}.
 
-The marker used here retains less structure: it uses no Hodge structure and
+The invariant used here retains less structure: it uses no Hodge structure and
 records only the rank-two formal-exponent condition above.  Its purpose is the
 one-stabilization problem.  For this purpose, we specialize Iritani's blowup
 comparison in a way that keeps the center summands distinct, prove that the
-marker vanishes on points, curves, and surfaces, and use Iritani--Koto's
+invariant vanishes on points, curves, and surfaces, and use Iritani--Koto's
 projective-bundle comparison for stabilization
 \cite{IritaniBlowup,IritaniKoto}.  Gyenge gives a complementary
 formal tensor-product theorem for quantum \(D\)-modules of products and proves
@@ -91,95 +108,17 @@ computes the same two exponent representatives and uses them with Iritani's
 blowup theorem to prove symplectic irrationality of cubic threefolds
 \cite{Cai}; that argument does not address stabilization.
 
-The same construction gives a one-stabilization criterion for threefolds.
+The same argument applies to any smooth projective threefold with positive
+exponent count.  It also gives irrationality after one stabilization for
+prime Fano threefolds of genus eight, and universally \(CH_0\)-trivial
+irrational fourfolds.  These consequences are stated and proved in
+Section~\ref{sec:applications}.  The additive and spectral extensions in
+Section~\ref{sec:motivic} follow the proof of the cubic theorem and its
+applications.
 
-\begin{corollary}[Threefold marker criterion]
-\label{cor:threefold-marker}
-\coverage{fragment}%
-\lean{threefold_not_rational_of_occurrenceIndexedMarker}%
-Let \(Y\) be a smooth projective complex threefold.  If its generic even QDM
-contains a block counted by the formal-exponent marker defined in
-\eqref{eq:atomic-fold}, then \(Y\times\PP^1\) is irrational.  In particular,
-\(Y\) is irrational.
-\end{corollary}
-
-Indeed, the marker doubles on \(Y\times\PP^1\), while all centers in a
-weak factorization of fourfolds have dimension at most two and contribute
-zero.  This gives an irrationality criterion formulated in
-terms of the quantum \(D\)-module.  We do not claim that this marker coincides
-with a semiorthogonal or derived-categorical rationality obstruction.
-
-A further application comes from Kuznetsov's construction.  For an arbitrary
-smooth prime Fano threefold \(V\) of genus eight, it associates a smooth
-Pfaffian cubic threefold \(X\) and rank-two projective bundles over \(V\) and
-\(X\) related by a flop
-\cite[Theorems~2.17--2.18]{KuznetsovV14}.
-Tschinkel and Zhang study equivariant and twisted stable-birational
-refinements of this Pfaffian--Grassmannian correspondence
-\cite{TschinkelZhangV14}.
-This gives the following consequence.
-
-\begin{corollary}[Irrationality after one stabilization for \(V_{14}\)]
-\label{cor:v14-one-step}
-\coverage{conditional_deduction}%
-\lean{genusEight_oneProjectiveLine_not_rational_of_residueContext}%
-For every smooth prime Fano threefold \(V\) of genus eight,
-\(V\times\PP^1\) is irrational.
-\end{corollary}
-
-The theorem also yields universally \(CH_0\)-trivial irrational fourfolds.
-Universal \(CH_0\)-triviality passes to a projective bundle by
-the projective-bundle formula for Chow groups.
-
-\begin{corollary}[Separation in codimension at most three]
-\label{cor:voisin-separation}
-\coverage{fragment}%
-\lean{primitiveMinimalClassFamily_universalCH0_and_irrational_stabilization,%
- exists_universalCH0_cubic_with_irrational_stabilization}%
-\uses{thm:every-cubic}%
-\imports{Voisin:minimal-class-locus}%
-There is a nonempty countable union of subvarieties of codimension at most
-three in the moduli space of smooth cubic threefolds such that, for every
-member \(X\), both \(X\) and \(X\times\PP^1\) are universally
-\(CH_0\)-trivial, while \(X\times\PP^1\) is irrational.
-\end{corollary}
-
-\begin{corollary}[Fermat cubic]
-\label{cor:fermat-separation}
-\coverage{conditional_deduction}%
-\lean{fermatCubic_universalCH0_and_irrational_stabilization}%
-\uses{thm:every-cubic}%
-\imports{CT:separated-variable-criterion}%
-Let
-\[
-  X=\{x_1^3+x_2^3+x_3^3+x_4^3+x_5^3=0\}\subset\PP^4.
-\]
-Then the fourfold \(X\times\PP^1\) is universally \(CH_0\)-trivial and
-irrational.
-\end{corollary}
-
-\begin{corollary}[Coprime-degree cubics]
-\label{cor:coprime-separation}
-\coverage{conditional_deduction}%
-\lean{coprimeUnirationalDegrees_universalCH0_and_irrational_stabilization}%
-\uses{thm:every-cubic}%
-\imports{YYZ:coprime-degree-family, YYZ:coprime-degrees-persist}%
-Let \(X\) be one of the cubic threefolds of
-\cite[Theorem~3.3]{YYZ}.  Then \(X\times\PP^1\) admits unirational
-parametrizations of coprime degrees, is universally \(CH_0\)-trivial, and is
-irrational.
-\end{corollary}
-
-Voisin proves the codimension-at-most-three statement
-\cite[Theorem~4.5]{Voisin}.  The Fermat case follows from
-Colliot-Th\'el\`ene's separated-variable criterion \cite{CT}.  Yang--Yu--Zhu construct
-the coprime-degree family \cite[Theorems~1.1 and 3.3]{YYZ}.  The last
-corollary answers the \(m=1\) case of their question; it does not address all
-stabilizations.
-
-Section~\ref{sec:atomic-one-step} constructs the block monoid, proves the
-marker formulas for blowups and projective bundles, defines the exponent
-marker, computes the cubic block, and proves that the marker vanishes on
+Section~\ref{sec:atomic-one-step} constructs the exponent count and proves its
+comparison formulas for blowups and projective bundles, defines the exponent
+invariant, computes the cubic block, and proves that the invariant vanishes on
 centers of dimension at most two.
 Section~\ref{sec:applications} gives the
 threefold, genus-eight, and universal-\(CH_0\) consequences.

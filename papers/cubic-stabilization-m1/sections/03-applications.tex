@@ -2,9 +2,19 @@
 \label{sec:applications}
 
 No new quantum calculation is needed in this section.  We first apply the
-marker to products of threefolds with \(\PP^1\), then transfer the stabilization theorem
+invariant to products of threefolds with \(\PP^1\), then transfer the stabilization theorem
 through Kuznetsov's flop, and finally combine it with known criteria for
 universal \(CH_0\)-triviality.
+
+\begin{corollary}[Threefold criterion]
+\label{cor:threefold-marker}
+\coverage{fragment}%
+\lean{threefold_not_rational_of_occurrenceIndexedMarker}%
+Let \(Y\) be a smooth projective complex threefold.  If its generic even QDM
+contains a block counted by the exponent count defined in
+\eqref{eq:atomic-fold}, then \(Y\times\PP^1\) is irrational.  In particular,
+\(Y\) is irrational.
+\end{corollary}
 
 \begin{proof}[Proof of Corollary~\ref{cor:threefold-marker}]
 A counted block gives \(I_{\mathrm{exp}}(Y)>0\).  The projective-bundle
@@ -14,7 +24,7 @@ formula gives
 \]
 Every center in projective weak factorization of fourfolds has dimension
 at most two, so Proposition~\ref{prop:atomic-lowdim} makes every correction
-zero.  Theorem~\ref{thm:marker-ledger} therefore makes the marker
+zero.  Theorem~\ref{thm:marker-ledger} therefore makes the invariant
 birationally invariant in dimension four.  Since
 \(I_{\mathrm{exp}}(\PP^4)=0\) by \eqref{eq:atomic-projective-value},
 \(Y\times\PP^1\) is irrational.  Rationality of \(Y\) would imply
@@ -22,6 +32,18 @@ rationality of this product, so \(Y\) is irrational as well.
 \proves{cor:threefold-marker}%
 \uses{prop:atomic-lowdim, thm:marker-ledger, prop:qdm-operation-ledgers}%
 \end{proof}
+
+Kuznetsov's associated Pfaffian cubic and flop supply the next application.
+Tschinkel and Zhang study equivariant and twisted forms of this correspondence
+\cite{TschinkelZhangV14}.
+
+\begin{corollary}[Irrationality after one stabilization for \(V_{14}\)]
+\label{cor:v14-one-step}
+\coverage{conditional_deduction}%
+\lean{genusEight_oneProjectiveLine_not_rational_of_residueContext}%
+For every smooth prime Fano threefold \(V\) of genus eight,
+\(V\times\PP^1\) is irrational.
+\end{corollary}
 
 \begin{proof}[Proof of Corollary~\ref{cor:v14-one-step}]
 Kuznetsov's flop gives a birational map between rank-two projective bundles
@@ -34,6 +56,19 @@ Theorem~\ref{thm:every-cubic}.
 \uses{thm:every-cubic}%
 \imports{KuznetsovV14:flop}%
 \end{proof}
+
+\begin{corollary}[Separation in codimension at most three]
+\label{cor:voisin-separation}
+\coverage{fragment}%
+\lean{primitiveMinimalClassFamily_universalCH0_and_irrational_stabilization,%
+ exists_universalCH0_cubic_with_irrational_stabilization}%
+\uses{thm:every-cubic}%
+\imports{Voisin:minimal-class-locus}%
+There is a nonempty countable union of subvarieties of codimension at most
+three in the moduli space of smooth cubic threefolds such that, for every
+member \(X\), both \(X\) and \(X\times\PP^1\) are universally
+\(CH_0\)-trivial, while \(X\times\PP^1\) is irrational.
+\end{corollary}
 
 \begin{proof}[Proof of Corollary~\ref{cor:voisin-separation}]
 Voisin produces a nonempty countable union of subvarieties of codimension at
@@ -48,6 +83,20 @@ Theorem~\ref{thm:every-cubic} supplies its irrationality.
 \imports{Voisin:minimal-class-locus}%
 \end{proof}
 
+\begin{corollary}[Fermat cubic]
+\label{cor:fermat-separation}
+\coverage{conditional_deduction}%
+\lean{fermatCubic_universalCH0_and_irrational_stabilization}%
+\uses{thm:every-cubic}%
+\imports{CT:separated-variable-criterion}%
+Let
+\[
+  X=\{x_1^3+x_2^3+x_3^3+x_4^3+x_5^3=0\}\subset\PP^4.
+\]
+Then the fourfold \(X\times\PP^1\) is universally \(CH_0\)-trivial and
+irrational.
+\end{corollary}
+
 \begin{proof}[Proof of Corollary~\ref{cor:fermat-separation}]
 The Fermat equation is a sum of five forms in separated single variables, so
 \cite{CT} gives universal \(CH_0\)-triviality; the projective-bundle formula
@@ -57,6 +106,18 @@ Theorem~\ref{thm:every-cubic}.
 \uses{thm:every-cubic}%
 \imports{CT:separated-variable-criterion}%
 \end{proof}
+
+\begin{corollary}[Coprime-degree cubics]
+\label{cor:coprime-separation}
+\coverage{conditional_deduction}%
+\lean{coprimeUnirationalDegrees_universalCH0_and_irrational_stabilization}%
+\uses{thm:every-cubic}%
+\imports{YYZ:coprime-degree-family, YYZ:coprime-degrees-persist}%
+Let \(X\) be one of the cubic threefolds of
+\cite[Theorem~3.3]{YYZ}.  Then \(X\times\PP^1\) admits unirational
+parametrizations of coprime degrees, is universally \(CH_0\)-trivial, and is
+irrational.
+\end{corollary}
 
 \begin{proof}[Proof of Corollary~\ref{cor:coprime-separation}]
 The cubics of \cite[Theorem~3.3]{YYZ} carry unirational parametrizations of

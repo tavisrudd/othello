@@ -13,7 +13,7 @@
 For every smooth complex cubic threefold `X`, the paper proves that
 `X x P^1` is irrational.  The proof decomposes the generic even quantum
 `D`-module into blocks and records their isomorphism classes in a free
-commutative monoid.  An additive rank-two formal-exponent marker vanishes on
+commutative monoid.  An additive rank-two exponent count vanishes on
 every center that can occur in weak factorization in dimension four, doubles
 under product with `P^1`, detects the cubic block, and vanishes on projective
 space.  The same construction gives an irrationality criterion for smooth

@@ -196,10 +196,14 @@ model of \(S\).  The rank-five torus \(T_0\) acting on \(Z\) contains a
   saturated rank-three subtorus \(T_3\).  Four of its weight spaces form a
 Galois-stable set, and their weight differences form a \(\mathbf Z\)-basis of
 the character lattice.  A codimension-three tangent section cuts a general
-\(T_3\)-orbit in one point, so
-tangent projection identifies \(Z/T_3\) birationally with \(\PP^4\).
-Generic splitting of the universal torsor also gives
-\(Z/T_3\sim_k S\times(T_0/T_3)\).
+\(T_3\)-orbit in one point.  The proof identifies the same quotient in
+two ways:
+\[
+ \underbrace{Z/T_3\sim_k\PP^4}_{\text{tangent section}},
+ \qquad
+ \underbrace{Z/T_3\sim_k S\times(T_0/T_3)}_{\text{equivariant torsor trivialization}}.
+\]
+Here \(\dim Z=7\), \(\dim T_0=5\), and \(\dim T_3=3\).
 The residual torus \(T_0/T_3\) has dimension two and is rational; the two
 descriptions of the quotient therefore give the rationality of
 \(S\times\A^2\).  Applying the argument over the two base function fields
@@ -222,6 +226,18 @@ quotient.
 
 The descent hypothesis below is what turns this geometric slice over \(\ks\)
 into a \(k\)-rational quotient.
+
+The integral-basis condition gives uniqueness of the orbit correction.
+For an effective action illustrating the distinction, let
+\[
+ t\cdot(x_0,x_1,x_2)=(x_0,t^d x_1,tx_2)
+\]
+on \(\A^3\), and impose \(x_1=x_0\).  On \(x_0x_1x_2\ne0\),
+the correcting elements satisfy \(t^d=x_0/x_1\).  In characteristic zero
+there are \(d\) geometric solutions; only for \(d=1\) is the correction
+unique.  The action is effective because of the weight-one coordinate.
+This finite ambiguity is therefore different from a kernel in a redundant
+parametrization of the torus.
 
 Let \(Z\subset\PP(V)\) be a geometrically integral \(n\)-fold over an
 infinite field \(k\).  At a smooth point \(p\in Z(k)\), write
@@ -277,6 +293,7 @@ The maximal minors first produce a unique point of \(\Lambda\) on a general
 \(T\)-orbit.  The hypothesis that this section meets \(U_p\) then identifies
 it birationally with projective space.
 
+\emph{Orbit intersection and descent.}
 For a geometric point \(q=\sum q_j+q_B\), where \(q_j\in V_{w_j}\) and
 \(q_B\in\widehat B\), put \(A(q)_{ij}=\lambda_i(q_j)\) and define
 \begin{equation}
@@ -317,6 +334,7 @@ Then \(C\dashrightarrow Z/T\) is birational and
 \((1,\ldots,1)\) lies in the kernel of \(A(x)\); uniqueness gives
 \(s(x)=x\).  Thus \(C\) meets \(U_p\).
 
+\emph{Rationality of the section.}
 The image of \(\Lambda\) under \(\pi_p\) is a linear
 \(\PP^{n-r}\subset\PP^n\), because \(\Lambda\) contains the centre of the
 linear projection.  The irreducible variety \(C\) has dimension \(n-r\),
@@ -368,18 +386,6 @@ quadrics in \cite[Section~3]{TZ}.  Equations \eqref{eq:orbit-correction}
 and \eqref{eq:inverse-graph} give the rational map and its inverse without
 an unrecorded finite cover.
 \end{proof}
-
-The integral-basis condition gives uniqueness of the orbit correction.
-For an effective action illustrating the distinction, let
-\[
- t\cdot(x_0,x_1,x_2)=(x_0,t^d x_1,tx_2)
-\]
-on \(\A^3\), and impose \(x_1=x_0\).  On \(x_0x_1x_2\ne0\),
-the correcting elements satisfy \(t^d=x_0/x_1\).  In characteristic zero
-there are \(d\) geometric solutions; only for \(d=1\) is the correction
-unique.  The action is effective because of the weight-one coordinate.
-This finite ambiguity is therefore different from a kernel in a redundant
-parametrization of the torus.
 
 The proof is constructive once equations for \(Z\), a tangent point, and the
 linear forms \(\lambda_i\) are given.  The signed minors in
@@ -483,6 +489,11 @@ required in Theorem~\ref{thm:torus-quotient}.  On the open where the four
 selected weight-space components are nonzero, a projective stabilizer fixes
 their three ratios.  The three weight differences form a basis, so that
 stabilizer is trivial.  In particular, the \(T_3\)-action is generically free.
+
+The coordinate calculations below establish nonemptiness over the splitting
+field.  The conditions themselves are defined over \(k\); density of
+\(k\)-points then supplies ground-field data.  Descending those conditions
+does not require a particular displayed coordinate witness to descend.
 
 \begin{proposition}[A tangent section for the four Galois types]
 \label{prop:tangent-section}
@@ -1012,7 +1023,7 @@ The coprime-index conclusion is a criterion for future constructions.
 The scroll above illustrates the degree calculation on a rational quotient;
 it does not supply a new nonrational example with coprime-index slices.
 
-\section{A limitation of the rank-four construction}
+\section{Limits of the Cox-weight criterion}
 
 The rank-three construction uses four weight spaces, each of dimension
 three.  Their multiplicities are essential to descent.  For the full
@@ -1086,6 +1097,10 @@ sections, or smaller Galois images.
 \section{Exact tangent-section certificate}
 \label{app:slice-certificate}
 
+The four constructions below depend symbolically on the surface parameters
+\((a,b)\).  For every smooth parameter value, at least one has both the
+required evaluation rank and a nonzero smoothness minor.
+
 For a tangent point \(p\) parametrized by \(z=(z_1,z_2,z_3)\), the space
 \(H_p\) of tangent hyperplanes containing \(B\) has dimension four.
 Evaluation on the four selected weight spaces gives a \(4\)-by-\(4\) matrix.
@@ -1097,6 +1112,15 @@ The individual values serve only to certify nonemptiness of the required open.
 \begin{center}
 \SliceWitnessTable
 \end{center}
+
+For the first row, the entries in the \(z\) column determine the tangent
+point \(p\), while the entries in the \(e\) and \(z'\) columns determine
+\(x\).  Linear algebra on the tangent Jacobian, together with the condition
+that the hyperplanes contain \(B\), gives a basis of \(H_p\).  Evaluating
+that basis on the four weight-space components of \(x\) gives the
+determinant \(D_1\) below.  The Jacobian minor \(M_1\) certifies smoothness
+at \(p\).  The other rows repeat this construction with the indicated
+coordinates.
 
 Let \(D_i\) be the determinant of the evaluation matrix for choice \(i\), and
 let \(M_i\) be the fixed \(8\)-by-\(8\) Jacobian minor at the same tangent

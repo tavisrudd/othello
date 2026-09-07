@@ -42,7 +42,7 @@
       "hypotheses": "Assumed weak-factorization data and marker formulas in dimension three supply the blowup and blowdown formulas; every point or curve center summand has zero marker; both endpoints are smooth of dimension three; projective three-space has marker zero; the selected threefold has nonzero marker; and rationality supplies the birational comparison with projective three-space.",
       "conclusion": "The selected threefold is not rational.",
       "cautions": "Fragment. Lean proves the endpoint contradiction while retaining each center summand separately, but does not construct the generic even QDM, identify a counted block with a nonzero additive marker, supply weak factorization or vanishing on centers, calculate projective space, or construct the rationality comparison. The manuscript now proves the stronger irrationality of Y times P1 via the dimension-four ledger and the projective-bundle formula. This terminal proves only the unstabilized conclusion; the strengthened statement retains fragment coverage.",
-      "statement_digest": "6824de2bd981e97ae2a2aee4c8f64d99a761274a47905770bb02564c3b2d3962",
+      "statement_digest": "28ac5e653d2e922798d9498f70494624ca723f63988c5e2278f39b49a1717202",
       "terminal_digest": "fd742b8caba6eed5b20aef7a07c8938baaf30d65f49d16b708ffa6b525fb0ec7"
     },
     {
@@ -434,7 +434,7 @@
       "hypotheses": "A characteristic-zero field and a nonzero square root r of three times the line-class Novikov variable. Lean takes the two displayed matrices as data and checks the finite matrix and normalized-gauge calculations.",
       "conclusion": "The Euler matrix has eigenvalues 6r, -6r, 0, 0 with one rank-two Jordan block at zero; the first two reduced coefficients and the modified residue have the displayed values and indicial polynomial; the normalized block gauge exists and is unique coefficientwise; and the resulting exponent difference 2/3 is not an integer.",
       "cautions": "Fragment. Lean checks the algebraic reduction but does not derive the quantum products or identify the input matrices with the cubic QDM. That identification is now derived in the manuscript from Beauville’s published formulas. Higher gauge coefficients are established recursively rather than explicitly computed.",
-      "statement_digest": "1fe93b862ceb29729b7554896e246b5650c24941cb3d3de726efe107141f6bc4",
+      "statement_digest": "1c7f425320cb2dfafaa938410cd591cd7046cf5440d00d8f181a1f9e0a96af7d",
       "terminal_digest": "ef30fb83a5f676b8b5cefdbd458b64c2167358fb669bad8af85a8ce511455d44"
     },
     {
@@ -882,7 +882,7 @@
       "hypotheses": "Assumed weak-factorization data and marker formulas supply blowup and blowdown chains in ambient dimension d, each blowup records its codimension and a separately indexed family of c-1 center summands, and every summand from a smooth center of dimension at most d-2 has zero marker contribution.",
       "conclusion": "The marker is the unique additive extension of its value on each block class; birationally related endpoints have equal markers; and the marker descends to the quotient set of birational classes.",
       "cautions": "Conditional deduction. Lean proves the free commutative-monoid construction, the arbitrary-monoid and arbitrary-dimension telescoping argument, preservation of the individual center summands, and descent to birational classes. Weak factorization and the geometric operation formulas are supplied as typed inputs rather than formalized from algebraic geometry. The QDM comparisons that produce those formulas remain outside this row and are registered under prop:qdm-operation-ledgers.",
-      "statement_digest": "c22e56f91ccdc4f1a3421fee5c6c71c2a37f331212d4668bbbeb770aac070730",
+      "statement_digest": "9940726e078ec3a7f1f12b7d957025ed7b29d154e2a817db34b4d44b77b2bbba",
       "terminal_digest": "f8a38d7c98c400a29332ad3f24cebfe48c60bc38ea82dfa62f0f4850e602b042"
     },
     {
@@ -913,7 +913,7 @@
       "hypotheses": "The comparison on full cohomology preserves the chosen even submodules in both directions. The additive marker is invariant under every recorded suspension. The projective-bundle matching identifies the total-space blocks with rank copies of the base blocks up to those suspensions. The blowup matching identifies the blowup blocks with the ambient blocks plus the literal finite family of individual center blocks, again up to recorded suspensions. Smoothness, positivity of the bundle rank, and the projective-bundle dimension formula are explicit premises of the packaged projective-bundle result.",
       "conclusion": "Lean restricts the parity-preserving comparison to a linear equivalence on even cohomology, converts each suspension-compatible block matching into equality of additive markers, and derives the projective-bundle and blowup marker formulas with every center summand kept separate. It also packages the blowup formula with the center source and dimension data used in birational descent.",
       "cautions": "Conditional deduction. Lean proves the restriction to even cohomology and the suspension-invariant categorical additivity step without identifying nonzero-degree maps with degree-zero graded morphisms. The formal blowup theorem keeps the source of every center summand visible. Lean does not construct cohomology or its parity splitting, the geometric QDM blocks, a fixed algebraic splitting field, the common coefficient ring, the parity-preserving regular comparison maps, pairwise spectral separation of summands, the invertible bulk Jacobians, or the component matching from Iritani's and Iritani–Koto's theorems; those remain the manuscript's cited geometric and analytic inputs.",
-      "statement_digest": "b607fd91bfe0f75fb533f1dead9103a74a5e519dcf892b992f92bdd9587ad747",
+      "statement_digest": "6f0a87305201041df4f6011a2e9485b3d60295214853be6bc52b8337dc545489",
       "terminal_digest": "ec2903f27f534c7d201f8d7284d3855ae3e09d50a5cf6bd55af84bca25c3c5f2"
     },
     {
@@ -967,7 +967,7 @@
       "hypotheses": "The Hodge blowup formula, the curve genus and cubic Hodge numbers, and intrinsic marker formulas with point/curve vanishing.",
       "conclusion": "The two threefolds have equal Hodge diamonds and marker values one and zero, so the additive invariant cannot factor through the Hodge-Deligne polynomial.",
       "cautions": "Absent. The Hodge and marker calculations are mathematical proofs in the text, not new Lean conclusions.",
-      "statement_digest": "7096a9882e10a672adcbc82306a680e9ea857f984eae03887ab9ee0a8f55fae6"
+      "statement_digest": "dfcc6cabc4718c09e1b06a62a894372d2b4176940c96a7d0374a4069873de64e"
     },
     {
       "manuscript_label": "cor:factorization-spectrum",
@@ -977,7 +977,7 @@
       "hypotheses": "X is a smooth cubic threefold; the rationalization exists; the intrinsic formulas and low-dimensional vanishing hold.",
       "conclusion": "Blowdown contributions minus blowup contributions equal (m+1)e_(4/9); at m=2 only codimension-two threefold centers contribute, with net scalar count three.",
       "cautions": "Absent. This is a necessary condition on an existing rationalization, not a construction, a count of distinct centers, or an identification of centers as cubic threefolds.",
-      "statement_digest": "362145f8a92a142b186fe5b235ef1b574f83a22c9d149cf7fd97897200693f60"
+      "statement_digest": "67f2944f3c42c798af4b2030d071208b706de5206426174777321d6c43ff25ff"
     }
   ],
   "machinery": [

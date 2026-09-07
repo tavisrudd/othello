@@ -1,9 +1,9 @@
-\section{QDM markers and one stabilization}
+\section{Quantum connections and one stabilization}
 \label{sec:atomic-one-step}
 
 We prove the theorem by applying the quantum \(D\)-module
 decomposition formulas directly.  The common argument is stated first for an
-arbitrary additive marker.  We then construct the specific marker used for a
+arbitrary additive invariant.  We then construct the specific invariant used for a
 cubic threefold and prove that it vanishes on points, curves, and surfaces.
 
 Here is the concrete invariant before the general construction.  Split the
@@ -69,33 +69,31 @@ blocks.  Nondegeneracy of the total pairing then makes every diagonal
 restriction nondegenerate.
 \end{proof}
 
-We call these factors the \emph{generic even QDM blocks} of \(Y\).  A block
+We call these factors the \emph{generic even QDM blocks} of \(Y\).
+Each is a whole primary spectral summand; individual Jordan blocks within
+one primary summand are not counted separately.  A block
 retains its connection, pairing, and centered Euler endomorphism, but not an
 absolute cohomological grading.  A block type may retain additional marked
 data.  If it retains grading, a morphism may carry a recorded integral
-suspension, and the marker must be invariant under that suspension.  The block
+suspension, and the invariant must be invariant under that suspension.  The block
 type used below forgets absolute grading.  Its morphisms preserve the
 retained data and are regular connection isomorphisms after scalar extension
 and formal change of bulk coordinates.  In particular, their gauges use
 neither negative nor fractional powers of the connection variable \(z\).
 
-Fix a block type \(\mathcal T\).  Let \(\Pi_{\mathcal T}\) be the
-regular-isomorphism groupoid of blocks of that type and put
-\[
- \mathcal L_{\mathcal T}
- :=\pi_0\operatorname{Sym}^{\sqcup}(\Pi_{\mathcal T}),
-\]
-the free commutative monoid on their isomorphism classes, equivalently the
-monoid of finite multisets of such classes.  Direct
+Fix the retained data \(\mathcal T\).  Write \(\mathcal L_{\mathcal T}\)
+for the monoid of finite multisets of regular-isomorphism classes of blocks
+with these data.  Its addition is multiset union.  Direct
 sum gives each \(Y\) its block multiset
 \(\mathcal B_{\mathcal T}(Y)\in\mathcal L_{\mathcal T}\).  An
-\emph{additive marker} is a commutative-monoid homomorphism
+\emph{additive invariant} is a commutative-monoid homomorphism
 \[
  w:\mathcal L_{\mathcal T}\longrightarrow A,
  \qquad I_w(Y):=w(\mathcal B_{\mathcal T}(Y)),
 \]
-where \(A\) is a commutative monoid.  We do not pass to a group
-completion: subtraction would destroy useful markers, including Boolean ones.
+where \(A\) is a commutative monoid.  This formulation also allows values
+in monoids without subtraction.  The additive group-valued extension of
+the exponent count is treated after the main theorem.
 
 We use the following notation.
 \begin{table}[ht]
@@ -104,13 +102,12 @@ We use the following notation.
 \toprule
 Symbol & Meaning \\
 \midrule
-\(\Pi_{\mathcal T}\) & regular-isomorphism groupoid of typed QDM blocks \\
 \(\mathcal L_{\mathcal T}\) &
-  \(\pi_0\operatorname{Sym}^{\sqcup}(\Pi_{\mathcal T})\), finite block multisets \\
+  finite multisets of regular-isomorphism classes of blocks \\
 \(\mathcal B_{\mathcal T}(Y)\) & multiset of block isomorphism classes for \(Y\) \\
-\(w:\mathcal L_{\mathcal T}\to A\) & additive marker with values in \(A\) \\
+\(w:\mathcal L_{\mathcal T}\to A\) & additive invariant with values in \(A\) \\
 \(\omega_j\) & data attached to the \(j\)-th center summand \\
-\(c_w(\omega_j)\) & marker contribution of that center summand \\
+\(c_w(\omega_j)\) & invariant contribution of that center summand \\
 \bottomrule
 \end{tabular}
 \caption{Notation for the block monoid and center summands.}
@@ -131,16 +128,16 @@ where \(\varsigma_j\) is Iritani's center reconstruction parameter and
 \(\chi_j\) is the induced numerical Novikov specialization.  Its correction
 is \(c_w(\omega_j):=w(\mathcal B_{\mathcal T}(Z;\omega_j))\).  The comparison
 will give equality only after applying \(w\); distinct block multisets may
-have the same marker.
+have the same invariant.
 
-\begin{theorem}[Birational invariance of additive markers]
+\begin{theorem}[A birational invariance criterion]
 \label{thm:marker-ledger}
 \coverage{conditional_deduction}%
 \lean{effectiveBlockLedger_fold_unique,%
   occurrenceIndexedMarker_eq_of_birational,%
   occurrenceIndexedMarker_descends_to_birationalClasses}%
 \imports{AKMW:weak-factorization}%
-Let \(w:\mathcal L_{\mathcal T}\to A\) be an additive marker unchanged by the
+Let \(w:\mathcal L_{\mathcal T}\to A\) be an additive invariant unchanged by the
 allowed regular scalar extensions and formal coordinate changes.  Suppose
 \begin{align}
  I_w(\PP_Y(V))&=rI_w(Y),
@@ -158,12 +155,12 @@ Projective weak factorization writes a birational map of smooth projective
 \(d\)-folds as a zigzag of blowups and blowdowns along smooth centers of
 codimension at least two \cite[Theorem~0.3.1]{AKMW}.  By
 \eqref{eq:marker-blowup} and the vanishing of every center correction, the
-marker is unchanged at each step; the equalities therefore telescope.
+invariant is unchanged at each step; the equalities therefore telescope.
 Disconnected centers are treated componentwise, while a divisor blowup is an
 isomorphism.
 \end{proof}
 
-Equivalently, the marker descends on object sets:
+Equivalently, the invariant descends on object sets:
 \begin{equation}
 \begin{CD}
  \operatorname{Ob}(\mathsf{SmProj}_d) @>{I_w}>> A\\
@@ -178,7 +175,7 @@ This square reformulates the proof; it is not an additional input.
 \subsection{Compatibility with blowups and projective bundles}
 
 To use the cited decomposition theorems, we must check that they preserve all
-the data seen by the marker.  Four issues arise: coefficient fields,
+the data seen by the invariant.  Four issues arise: coefficient fields,
 restriction to even cohomology, regularity in \(z\), and faithful embedding of
 the center coefficients.
 The last issue is the delicate one: Iritani's center Novikov map may have a
@@ -207,7 +204,7 @@ even bulk base.  The supermodule conventions and the pull-push and Fourier
 formulas in Iritani's Section~5.8 and Iritani--Koto's construction are
 parity-preserving.  After the odd bulk variables are set to zero, the
 comparison and its inverse therefore restrict to mutually inverse maps on
-\(H^{\mathrm{ev}}\).  This is the QDM on which the additive marker is defined.
+\(H^{\mathrm{ev}}\).  This is the QDM on which the additive invariant is defined.
 
 \paragraph{Regularity in \(z\).}
 The comparisons are regular in \(z\).  Iritani's Theorem~5.18 and
@@ -227,7 +224,7 @@ ambient and center components have degrees \(0\) and \(-c\), respectively
 \cite[Theorem~5.1(3)]{IritaniKoto}\cite[Theorem~5.18(3)]{IritaniBlowup}.
 Because the block type used here does not retain absolute grading, these shifts
 do not change its component.  For a graded refinement they are recorded as
-integral suspensions, and the operation formula applies only to a marker
+integral suspensions, and the operation formula applies only to a invariant
 invariant under those suspensions.
 
 \paragraph{Faithful center coordinates.}
@@ -364,7 +361,7 @@ original blowup coordinates.
   qdmBlowup_markerFormula_of_occurrenceBlockComparison,%
   qdmBlowup_step_of_occurrenceBlockComparison}%
 \imports{IritaniKoto:thm-5.1,IritaniBlowup:thm-5.18}%
-Let an additive marker be preserved by the regular scalar extensions and formal
+Let an additive invariant be preserved by the regular scalar extensions and formal
 coordinate changes described above, and by every recorded grading suspension
 if its block type retains grading.  The projective-bundle and blowup QDM
 comparisons on even cohomology then supply \eqref{eq:marker-pbundle} and
@@ -384,7 +381,7 @@ nonzero polynomial in \(u_i-u_j\), with leading coefficient one.  Hence the
 spectra of distinct factors are disjoint at the generic point: their primary
 blocks do not fuse when the direct sum is formed.  Regularity, restriction to
 even cohomology, the fixed splitting field, and suspension invariance therefore
-carry the marker blockwise across the comparison, and additivity gives
+carry the invariant blockwise across the comparison, and additivity gives
 \eqref{eq:marker-pbundle}.  Tensoring the bundle by a line bundle, when needed
 for the global-generation convention, changes neither the projective bundle
 nor the intrinsic Novikov embedding
@@ -406,7 +403,7 @@ coefficient ring; the proof never composes Laurent comparisons recursively.
 \end{proof}
 
 The QDM comparisons need not identify the underlying elements of the block
-monoid.  They identify their images under the additive marker \(w\), whose
+monoid.  They identify their images under the additive invariant \(w\), whose
 additivity is expressed by the square
 \begin{equation}
 \begin{CD}
@@ -421,12 +418,12 @@ Proposition~\ref{prop:qdm-operation-ledgers} supplies the resulting equalities
 in \(A\).  Its blowup statement also retains the data distinguishing the
 center summands, as required by Theorem~\ref{thm:marker-ledger}.
 
-\subsection{The rank-two formal-exponent marker}
+\subsection{The rank-two exponent count}
 
 We now specialize the general construction to \(A=\mathbf N\).  The block
 type \(\mathcal T_{\mathrm{exp}}\) retains the connection, pairing, and centered
-Euler endomorphism on \(H^{\mathrm{ev}}\).  It retains no absolute
-grading, marked bulk section, or loop framing.  Let \(E\) be a generic even
+Euler endomorphism on \(H^{\mathrm{ev}}\), and forgets absolute
+grading.  Let \(E\) be a generic even
 block with centered connection
 \begin{equation}
  z\partial_z y=A(z)y,
@@ -434,7 +431,24 @@ block with centered connection
  \label{eq:atomic-block-expansion}
 \end{equation}
 Assume \(\rk E=2\), \(N\ne0\), and \(N^2=0\).  Then
-\(L=\im N=\ker N\) is a line.  The canonical elementary modification along
+\(L=\im N=\ker N\) is a line.  The following matrix calculation explains
+the modification.  In a frame adapted to \(L\), suppose that \(A_0\)
+preserves this line, so that
+\[
+ N=\begin{pmatrix}0&\nu\\0&0\end{pmatrix},\qquad
+ A_0=\begin{pmatrix}a&b\\0&d\end{pmatrix},\qquad
+ (A_1)_{21}=c.
+\]
+Changing the frame by \(S=\diag(1,z)\) removes the pole and gives residue
+\[
+ R=\begin{pmatrix}a&\nu\\c&d-1\end{pmatrix}.
+\]
+The lower-left entry explains why the first-order coefficient \(A_1\)
+is needed; the subtraction of one comes from differentiating the new
+frame.  Eigenvalues \(0,1\) represent the same class modulo \(\Z\)
+and do not qualify, whereas \(0,2/3\) represent distinct classes.
+
+The canonical elementary modification along
 this line is
 \begin{equation}
  E^\sharp=\{s\in E:s\bmod z\in L\}.
@@ -573,7 +587,7 @@ discriminant formula.
 For such a block \(E\), write \(\rho_1,\rho_2\) for the eigenvalues of its
 modified residue in the
 fixed algebraic closure \(\overline K\) of the generic coefficient field.
-Define the marker on each block by
+Define the invariant on each block by
 \begin{equation}
  w_{\mathrm{exp}}(E)=
  \begin{cases}
@@ -589,7 +603,7 @@ and extend it additively to
 w_{\mathrm{exp}}(\mathcal B_{\mathcal T_{\mathrm{exp}}}(Y))\).
 Propositions~\ref{prop:rank2-rigidity} and
 \ref{prop:residue-discriminant-exponents} make this a well-defined additive
-marker for Proposition~\ref{prop:qdm-operation-ledgers}: conjugation preserves
+invariant for Proposition~\ref{prop:qdm-operation-ledgers}: conjugation preserves
 the residue eigenvalues, and a common scalar shift preserves their
 difference.  The use of exponent classes also makes the scalar test
 insensitive to integral changes of representatives.  The condition
@@ -614,13 +628,13 @@ give \cite[main theorem and (2.1)--(2.3)]{Beauville}
 \end{equation}
 Thus, in the basis \((1,P,P^2,P^3)\),
 \begin{equation}
- K_X=2\begin{pmatrix}
+ U_X=2\begin{pmatrix}
  0&6q&0&36q^2\\1&0&15q&0\\0&1&0&6q\\0&0&1&0
  \end{pmatrix},
- \qquad G_X=\frac12\diag(3,1,-1,-3),
+ \qquad D_X=\frac12\diag(3,1,-1,-3),
  \label{eq:cubic-small-even-connection}
 \end{equation}
-and \(z^2\partial_zS=(K_X+zG_X)S\).  This agrees with
+and \(z^2\partial_zy=(U_X+zD_X)y\).  This agrees with
 \cite[Section~3]{Cai}.
 
 \begin{proposition}[Small-even cubic block reduction]
@@ -632,26 +646,26 @@ and \(z^2\partial_zS=(K_X+zG_X)S\).  This agrees with
   cubicSmallEven_normalizedGauge_coefficients,%
   cubicExponentDifference_nonintegral}%
 \imports{Beauville:quantum-products}%
-The characteristic and minimal polynomials of \(K_X\) are both
+The characteristic and minimal polynomials of \(U_X\) are both
 \(T^2(T^2-108q)\).  After adjoining \(r\), its eigenvalues are
 \(6r,-6r,0,0\), and the zero generalized eigenspace is one rank-two Jordan
 block.  A normalized gauge regular in \(z\) gives
 \begin{equation}
  \begin{aligned}
- z^2\partial_z\widetilde S_+&=(6r+O(z^2))\widetilde S_+,\\
- z^2\partial_z\widetilde S_-&=(-6r+O(z^2))\widetilde S_-,\\
+ z^2\partial_z\widetilde y_+&=(6r+O(z^2))\widetilde y_+,\\
+ z^2\partial_z\widetilde y_-&=(-6r+O(z^2))\widetilde y_-,\\
  z^2\partial_z
- \begin{pmatrix}\widetilde S_3\\\widetilde S_4\end{pmatrix}
- &=\bigl[J_0+zD_0+z^2E_0+O(z^3)\bigr]
- \begin{pmatrix}\widetilde S_3\\\widetilde S_4\end{pmatrix},
+ \begin{pmatrix}\widetilde y_3\\\widetilde y_4\end{pmatrix}
+ &=\bigl[N+zA_0+z^2A_1+O(z^3)\bigr]
+ \begin{pmatrix}\widetilde y_3\\\widetilde y_4\end{pmatrix},
  \end{aligned}
  \label{eq:cubic-integral-block-reduction}
 \end{equation}
 where
 \begin{equation}
- J_0=\begin{pmatrix}0&2\\0&0\end{pmatrix},\quad
- D_0=\begin{pmatrix}-19/18&0\\0&19/18\end{pmatrix},\quad
- E_0=\begin{pmatrix}0&-14/(81r^2)\\-8/81&0\end{pmatrix}.
+ N=\begin{pmatrix}0&2\\0&0\end{pmatrix},\quad
+ A_0=\begin{pmatrix}-19/18&0\\0&19/18\end{pmatrix},\quad
+ A_1=\begin{pmatrix}0&-14/(81r^2)\\-8/81&0\end{pmatrix}.
  \label{eq:cubic-shared-block-data}
 \end{equation}
 \end{proposition}
@@ -665,9 +679,9 @@ The matrix
  \end{pmatrix},
  \qquad \det C=-486r^5,
 \]
-puts \(K_X\) into
+puts \(U_X\) into
 \[
- C^{-1}K_XC=
+ C^{-1}U_XC=
  \begin{pmatrix}6r&0&0&0\\0&-6r&0&0\\0&0&0&2\\0&0&0&0\end{pmatrix}.
 \]
 Partition as \(1\mid1\mid2\).  At each positive order in \(z\), the
@@ -675,29 +689,38 @@ off-diagonal gauge coefficient is the unique solution of a Sylvester
 equation between blocks with disjoint scalar spectra.  The gauge and inverse
 are regular in \(z\); explicitly, it has the normalized form
 \begin{equation}
- A(z)=I+\sum_{n\ge1}A_nz^n,
- \qquad A_n\text{ block-off-diagonal}.
+ G(z)=I+\sum_{n\ge1}G_nz^n,
+ \qquad G_n\text{ block-off-diagonal}.
  \label{eq:cubic-integral-block-gauge}
 \end{equation}
 Direct multiplication through order \(z^2\) gives
 \eqref{eq:cubic-shared-block-data}.
 \end{proof}
 
-For the zero block, \(N=J_0=2E_{12}\).  With \(S=\diag(1,z)\),
+For the zero block, \(N=2E_{12}\).  With \(S=\diag(1,z)\),
 \begin{equation}
  R_X
- =2E_{12}+D_0-\frac8{81}E_{21}-\diag(0,1)
+ =2E_{12}+A_0-\frac8{81}E_{21}-\diag(0,1)
  =\begin{pmatrix}-19/18&2\\-8/81&1/18\end{pmatrix}.
  \label{eq:RX}
 \end{equation}
 Its characteristic polynomial is
 \((T+1/6)(T+5/6)\).  Thus the two exponent classes differ by
-\(2/3\notin\Z\), so the block is marked.  Equivalently,
+\(2/3\notin\Z\), so the block is counted.  Equivalently,
 \begin{equation}
  \boxed{\delta^\sharp(X)=\frac49},
  \qquad I_{\mathrm{exp}}(X)=1.
  \label{eq:cubic-delta}
 \end{equation}
+
+\paragraph{From the small connection to the generic block.}
+At the small quantum point, the rank-two cluster is separated from the
+other eigenvalues.  The cyclic-centralizer argument in
+Proposition~\ref{prop:rank2-rigidity} continues that cluster over the formal
+bulk ring and proves that its centerd leading term remains nonzero and
+square-zero.  The modified residue is then preserved by flatness.  Thus
+the small calculation determines the exponent count at generic quantum
+parameters, for every smooth cubic threefold.
 
 \subsection{Vanishing on centers through dimension two}
 
@@ -727,7 +750,7 @@ Let \(C\) have genus \(g\ge1\).  There is no nonconstant genus-zero map to
 For \(g=1\), \(N=0\).  For \(g>1\), the modification
 \(S=\diag(z,1)\) gives residue \(aE_{21}-\tfrac12I\), of discriminant zero.
 Its two eigenvalues, and therefore its two exponent classes, are equal.  Thus
-every curve has zero marker.
+every curve has zero invariant.
 
 \smallskip
 \noindent\emph{Surfaces with nef canonical class.}
@@ -739,7 +762,7 @@ degree
  a+b-2c_1(S)\cdot d+\sum_\nu(e_\nu-2)\ge b+2.
 \]
 The centered Euler operator strictly raises ordinary degree.  Its only block
-is the whole even cohomology, of rank \(b_0+b_2+b_4\ge3\), so its marker is
+is the whole even cohomology, of rank \(b_0+b_2+b_4\ge3\), so its invariant is
 zero.
 
 \smallskip
@@ -753,7 +776,7 @@ formula~\eqref{eq:marker-blowup} adds only zero point terms.  This proves
 intrinsic vanishing for every surface.
 Lemma~\ref{lem:faithful-center-base-change} identifies every separate center
 summand with a faithful scalar extension of the corresponding intrinsic generic
-block, and the marker is unchanged by that extension.
+block, and the invariant is unchanged by that extension.
 \end{proof}
 
 \subsection{The projective endpoint and the contradiction}
