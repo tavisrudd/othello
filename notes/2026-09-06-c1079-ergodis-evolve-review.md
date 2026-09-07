@@ -116,9 +116,12 @@ should carry across hosts with appropriate target artifacts and explicit compati
 The initial inventories did not inspect this prototype; no WASM-loading support or parity is
 claimed. The brief now requires a compatibility matrix and recipient-run/hosted demo coverage.
 
-A user-requested Terra audit of current WASM capabilities is in progress. Planned memo:
-`notes/2026-09-06-c1079-wasm-capability-audit.md`. It will separate implemented/exposed/tested
-support from portability possibilities and uninspected or unsupported paths.
+The user-requested Terra audit is complete:
+`notes/2026-09-06-c1079-wasm-capability-audit.md`. It recovers C1032 on
+`codex/c1032-ergodis-wasm` at `d5a39e5f43e29ca8965dd45dc174b92265fccb65`: a narrow browser
+GF(2) composition adapter with historical parity/smoke evidence, absent from the split core.
+Current extension/IR/autonomous support is not established by that prototype. Full C1079
+architecture and delivery synthesis is now authorized and in progress.
 
 ## Next synthesis work
 
