@@ -4598,8 +4598,17 @@
       "last": 1096,
       "purpose": "Domain-checked leaf updates and stale transition rejection",
       "sequence": 511
+    },
+    {
+      "count": 1,
+      "first": 1097,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1097,
+      "purpose": "Independent min-plus summary transition verification",
+      "sequence": 512
     }
   ],
-  "next_id": 1097,
+  "next_id": 1098,
   "schema": "codex-task-id-allocations-v1"
 }
