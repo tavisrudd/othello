@@ -4742,8 +4742,17 @@
       "last": 1123,
       "purpose": "Read-only coherent repository snapshot projection into DuckDB and Jupyter with exact counters and lineage",
       "sequence": 527
+    },
+    {
+      "count": 1,
+      "first": 1124,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1124,
+      "purpose": "Replace infographic demo entry with campaign console using current browser engine and inspectable proposal state",
+      "sequence": 528
     }
   ],
-  "next_id": 1124,
+  "next_id": 1125,
   "schema": "codex-task-id-allocations-v1"
 }
