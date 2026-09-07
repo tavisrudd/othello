@@ -37,3 +37,10 @@ Portable finite admission/discovery pilot and current-core browser recovery comm
 `5247f6d` and `95d16b9`. Native gates, eight-case adapter Python parity, wasm release build and
 Chromium Worker smoke passed; 64-bit layouts remain unchanged with exact guards. Scope, replay
 and remaining campaign/IR/module gates: `../2026-09-07-c1080-admission-pilot.md`.
+
+## 2026-09-07 — C1081 complete
+
+Language inventory, finite executable semantics, portable reduction documents and native/WASM
+conformance committed in core `55c5d8c`. All native and browser gates passed, including 12 shared
+reduction cases and 3 Worker rejection cases. Contract distinguishes restriction from quotient
+and declared origins from evidence. Report: `../2026-09-07-c1081-language-semantics.md`.

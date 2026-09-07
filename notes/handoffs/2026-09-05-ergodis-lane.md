@@ -129,12 +129,14 @@ C1079's convergence plan is complete: `notes/2026-09-06-c1079-ergodis-evolve-rev
 C1080's portable admission pilot and current-core browser recovery are complete:
 `notes/2026-09-07-c1080-admission-pilot.md` (core `5247f6d`, `95d16b9`).
 
-**Active C1081**: Tavis approved language inventory, executable semantics and one end-to-end
-reduction/admission conformance slice before further campaign/IR expansion. Report:
-`notes/2026-09-07-c1081-language-semantics.md`. Preserve native hot loops and exact layout guards;
-keep reference evaluation off the production path. Machine-checked compiler proofs and dynamic
-extension loading remain successors, not claims of this slice. C1032 remains open for its full
-original acceptance review.
+C1081's language inventory, finite reduction semantics and native/WASM conformance slice are
+complete: `notes/2026-09-07-c1081-language-semantics.md` (core `55c5d8c`).
+
+**Next**: allocate full scalar PlanSpec integer/error semantics and FeatureDag lowering
+conformance before campaign unification. The reduction document now has a reference evaluator
+and cross-host corpus; campaign transitions and genuine quotient/lifting contracts remain
+specified obligations, not executable machinery. Preserve native specialization and exact Tiger
+layout guards. C1032 remains open for its full original acceptance review.
 
 ### C985 — Ergodis exact algebraic optimization paper
 
