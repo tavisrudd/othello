@@ -264,9 +264,17 @@ chosen-spec forks preserve original parent records and carry no child evidence. 
 evidence remains inspectable. Four portable workflow tests, full native, Python, release WASM and
 actual Chromium verification/fork gates pass. No source interpretation or execution authority.
 
-**Next**: C1107 defines and tests the portable repository publication/fencing,
-attempt and recovery-accounting contract before storage adapters or actual execution recovery.
-Allocated scope and gates: `notes/2026-09-07-ergodis-offline-workflow-successors.md`.
+**C1107 complete**: core `75b646b`; `notes/2026-09-07-c1107-repository-contract.md`.
+Portable repository transactions, head CAS, writer fences, attempts, conservative reservations,
+versioned sidecars and coherent analytical snapshots informed by C1033. Bounded volatile reference,
+ten conformance tests, full native, Python and release WASM gates pass. No persistent adapter or
+actual execution recovery is implemented.
+
+**Next gate**: choose and allocate the first persistent adapter/backend and analytical projection
+bridge. C1033's existing DuckDB/Jupyter manifest-ledger read surface is a downstream consumer;
+this contract does not select DuckDB as the authoritative writer store. Native and browser storage
+adapters and execution recovery need their own allocated slices and actual platform crash gates.
+Closed scope and gates: `notes/2026-09-07-ergodis-offline-workflow-successors.md`.
 Keep domain verification explicit; preserve native64 performance and solver/control separation.
 Other algebras/backends and compact sibling proofs need their own admission/performance gates.
 C1032 and module schemas remain open; these slices do not close or duplicate their broader scope.
