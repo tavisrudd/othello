@@ -39,6 +39,13 @@ their routed instructions before any such operation.
 
 ## Acceptance
 
+Bounded source-review input completed on 2026-09-07:
+`notes/2026-09-07-c1116-tz-friendly-feedback.md` checks the revised projection
+theorem statement, identifies the Example 5.2 model-pointer error with an
+explicit coordinate bridge, and records a qualified Remark 5.4 question.
+An unsent friendly-email draft is adjacent. This does not complete the
+foundation audit or authorize sending correspondence.
+
 A claim-by-claim audit names each exact source hypothesis and local provider,
 and separates accepted conclusions from unresolved gates. Repair concrete
 defects in authority, update provenance correctly, run the required scoped

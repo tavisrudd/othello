@@ -67,3 +67,9 @@ model, distinct invariance arguments, and notation collision. Preserve
 provenance and avoid introducing unproved upgrades in overview prose.
 
 Review: `notes/2026-09-07-cubic-astra-review-triage.md`.
+
+Author clarification: make the revision navigable for Zhijia Zhang and other
+birational geometers without prior QDM familiarity. His August 26 comment,
+together with the ChatGPT exposition feedback, motivates this audience target.
+Show the birational reduction first and the rank-two model before abstraction;
+do not promise that the specialist comparison proof needs no QDM expertise.

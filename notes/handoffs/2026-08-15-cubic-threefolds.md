@@ -47,6 +47,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   obligations, not accepted theorems. Review and ordering:
   `../2026-09-07-cubic-astra-review-triage.md`. Tschinkel--Zhang v2 source
   comparison: `../2026-09-07-tz-v1-v2-comparison.md`.
+  A bounded friendly-feedback review and unsent email draft are recorded in
+  `../2026-09-07-c1116-tz-friendly-feedback.md`; the foundation audit remains
+  open. C978 now explicitly targets birational geometers unfamiliar with QDMs.
 - **C956 — exact level-two cubic manuscript, referee-accepted candidate.**
   Cross-specialty review repaired the characteristic-zero scope, the
   singular-compatible tangent-projection citation, the relative evaluation
