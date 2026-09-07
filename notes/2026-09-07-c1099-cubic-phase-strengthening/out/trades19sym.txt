@@ -1,0 +1,6 @@
+trades p=19 : 27171 translation classes (AGL-symmetric only)
+# p=19 classes=27171 pairs-checked=0 hits(m0..m2 equal, m3 different)=0 strength3(m3 also equal)=0 bucket-size-distribution=[(1, 27171)]
+
+real	0m18.429s
+user	0m21.771s
+sys	0m0.022s

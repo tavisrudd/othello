@@ -4,7 +4,10 @@
 
 **Date:** 2026-09-07
 
-**Status:** queued; self-contained for a fresh session
+**Status:** complete 2026-09-07 — all three tests run; category fixed as a construction
+paper; writing task allocated as C1102 (`c1102-cubic-phase-codes-companion-note.md`).
+Results and decision at the end of this card; full detail in
+`notes/2026-09-07-c1099-cubic-phase-strengthening/REPORT.md`.
 
 ## Read first (in this order, nothing else)
 
@@ -101,3 +104,23 @@ edit in this task.
   `notes/2026-MM-DD-c1099-…/` directory with replay commands.
 - No hardware or commercial claim; no manuscript text.
 - Report on disk at every stop; commit validated work before any long build.
+
+## Results (2026-09-07)
+
+Bundle: `notes/2026-09-07-c1099-cubic-phase-strengthening/` (report, Rust search crate,
+Python scripts, raw outputs, `SHA256SUMS`).
+
+| test | result | certificate |
+|---|---|---|
+| 1 magic | `M_2(|F_7>) = log(1977326743/78835) = 10.130` vs `6 log(49/13) = 7.961` (product) and `8.805` (two CCZ); `M_2(|F_11>) = 22.870` vs `17.513` and `18.834`. `|F_11>` exceeds the additive product bound of every bipartition (`22.680`), so it is Clifford-inequivalent to every product state; `|F_7>` (`10.130`) does not exceed the `(1,5)` bound `10.423`. Caveat: the trace cubic `Tr(u^3)` on `F_{p^k}` is the most magic cubic on the same qudits (`10.982`, `23.286`). | `test1_magic.py`, `out/test1.txt` |
+| 2 distance three | exhaustive negative over all 61 927 311 subspaces `L' ∋ 1`, `dim L' ≥ 3`: the radical of the cubic on `L'` never separates the coordinates `L'` separates, so no `[[14, k' ≥ 1, ≥ 3]]_7` subcode with a nonzero logical cubic exists (`S = R(L')` is the optimal X-space; `d_X' ≥ 6` automatically) | `search/` (`c1099 dist3`), `out/dist3.txt` |
+| 3 family | (a) conic source, pairs of translation classes of matchings: p = 7 three inequivalent trades (Clebsch `M_2 = 10.130`, dihedral `10.425`, Borel `10.484`); p = 11 two (Clebsch, Borel `22.879`); p = 13 one (new rigid `[[26, 12, 2]]_13`, dihedral, `r_min ≥ 10` sampled); p = 5, 17 none (exhaustive); `PGL_2` orbit pairs never; `PSL_2` orbit pairs give longer non-Lagrangian codes at p = 7, 11. (b) translation trade `Ω_- = Ω_+ + t`: a rigid `[[2p, p-1, 2]]_p` code with transversal signed cubic for every prime p ≥ 5, logical cubic `-3 (t·u) q(u)`, `M_2 = 5.83` at p = 7. (c) GRS at length 2p reduces to length p and caps `k` at `(p-3)/2`; polynomial codes give `[[p, (p-5)/2, 3]]_p`. | `c1099 trades/orbits`, `test3a_verify.py`, `test3b_family.py`, `test3c_rs.py`, `out/` |
+
+**Decision.** Construction paper. Contents: the dictionary with the all-primes existence
+theorem and rigidity; the magic theorem (Hessian-rank formula, exact values, bipartition
+exclusion, trace-cubic caveat); the conic-source classification to p = 17 with the p = 13
+code; the distance-three negative and the Reed–Solomon benchmark; the Waring bracket and
+factory from C1090. The Clebsch trades are distinguished by symmetry and normal forms, not by
+parameters or by being the most magic member. Title candidates and Gate 1 are in the C1102
+card. Mystery ledger: report section 6 (trace-cubic realizability; why the conic source stops
+after p = 13; strength-three orbit pairs).

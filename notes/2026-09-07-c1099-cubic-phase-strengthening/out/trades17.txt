@@ -1,0 +1,6 @@
+trades p=17 : 2027025 translation classes (all)
+# p=17 classes=2027025 pairs-checked=0 hits(m0..m2 equal, m3 different)=0 strength3(m3 also equal)=0 bucket-size-distribution=[(1, 2027025)]
+
+real	0m9.748s
+user	3m26.600s
+sys	0m0.125s

@@ -1934,3 +1934,41 @@ not retained in the committed bundle.
 
 **Status:** open, unpromoted, no identifier allocated. Nothing in Paper V depends
 on it; the committed certificate stands on its own.
+
+## 2026-09-07 — the extension-field trace cubic is the most magic cubic phase state on its qudits, and the Clebsch states sit just below it
+
+**Provenance:** C1099 Test 1 (stabilizer Rényi magic of the Clebsch phase states), while
+building the comparison rows; the trace cubic was not among the resources the card asked
+to compare.
+
+**Observation:** for `F(u) = Tr_{F_{p^k}/F_p}(u^3)`, the Hessian bilinear form at `v` is
+`(x, y) ↦ 6 Tr(v x y)`, nondegenerate for every `v ≠ 0`, so every nonzero Hessian has rank
+`k` and `Σ_P |<P>|^4 = 2 - p^{-k}`: its `M_2` is within `10^{-5}` of the pure-state maximum
+`log((p^k+1)/2)`. Among diagonal cubic phase states it is the maximum, since `M_2` is a
+function of the Hessian-rank distribution alone (C1099 report, section 1). The Clebsch
+states reach `92.2 %` and `98.2 %` of the bound at p = 7 and 11.
+
+**Why it matters:** the rank-census Waring bound only forces `r ≥ 2p - 3` cubes for the
+trace cubic, so a balanced signed `2p`-term decomposition, hence a `[[2p, p-1, 2]]_p` code
+whose transversal signed cubic is the maximally magic gate, is not excluded.
+
+**Evidence:** REASONED and computed (`test1_magic.py`, exact rationals).
+
+**Status:** open, unpromoted; recorded as ledger item 1 of the C1099 report.
+
+## 2026-09-07 — `PGL_2(p)`-orbit pairs of conic matchings with equal signed moments through order three
+
+**Provenance:** C1099 Test 3(a) orbit-pair search (`c1099 orbits 11`, `c1099 orbits 13`),
+while looking for pairs with equal moments through order two only.
+
+**Observation:** at p = 11 (orbit size 660) and p = 13 (orbit size 1092) many pairs of
+`PGL_2(p)`-orbits of perfect matchings have `μ_1 = 0` and equal nonzero `μ_2` and `μ_3`
+(82 and 8434 flagged pairs). By the memo's section 9.3 mechanism such a signed
+configuration admits a transversal degree-four phase provided the signed `μ_4` is nonzero,
+which was not checked. The codes would be long (`2 · 660`, `2 · 1092` positions) with affine
+rank 15–16 and 22, so few logical qudits per physical qudit.
+
+**Evidence:** COMPUTED for orders 1–3 (`out/orbits11.txt`, `out/orbits13.txt`); order 4
+unverified.
+
+**Status:** open, unpromoted, no identifier allocated.

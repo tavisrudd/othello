@@ -1,0 +1,25 @@
+
+=== p = 7 ===
+  affine points: n = 7; rows: (a,b) -> [[n,k,d]] with d = min(d_X,d_Z); MDS values d_X = n-b+1, d_Z = a+1
+    d=2: best k=2 at (a,b)=(1,3) -> [[7,2,2]]_7 (d_X=5, d_Z=2, exact); dim of weight space=2; signed (+-1) weight exists: True
+    d=3: best k=1 at (a,b)=(2,3) -> [[7,1,3]]_7 (d_X=5, d_Z=3, exact); dim of weight space=1; signed (+-1) weight exists: True
+  doubled affine points (n = 2p = 14), S = <1>: largest b with a nonzero logical cubic gives k = 2 (b = 3); predicted cap (p-3)/2 = 2; trade codes give k = 6
+
+=== p = 11 ===
+  affine points: n = 11; rows: (a,b) -> [[n,k,d]] with d = min(d_X,d_Z); MDS values d_X = n-b+1, d_Z = a+1
+    d=2: best k=4 at (a,b)=(1,5) -> [[11,4,2]]_11 (d_X=7, d_Z=2, MDS); dim of weight space=2; signed (+-1) weight exists: True
+    d=3: best k=3 at (a,b)=(2,5) -> [[11,3,3]]_11 (d_X=7, d_Z=3, MDS); dim of weight space=1; signed (+-1) weight exists: True
+    d=4: best k=1 at (a,b)=(3,4) -> [[11,1,4]]_11 (d_X=8, d_Z=4, MDS); dim of weight space=2; signed (+-1) weight exists: False
+  doubled affine points (n = 2p = 22), S = <1>: largest b with a nonzero logical cubic gives k = 4 (b = 5); predicted cap (p-3)/2 = 4; trade codes give k = 10
+
+=== p = 13 ===
+  affine points: n = 13; rows: (a,b) -> [[n,k,d]] with d = min(d_X,d_Z); MDS values d_X = n-b+1, d_Z = a+1
+    d=2: best k=5 at (a,b)=(1,6) -> [[13,5,2]]_13 (d_X=8, d_Z=2, MDS); dim of weight space=2; signed (+-1) weight exists: True
+    d=3: best k=4 at (a,b)=(2,6) -> [[13,4,3]]_13 (d_X=8, d_Z=3, MDS); dim of weight space=1; signed (+-1) weight exists: True
+    d=4: best k=2 at (a,b)=(3,5) -> [[13,2,4]]_13 (d_X=9, d_Z=4, MDS); dim of weight space=2; signed (+-1) weight exists: True
+    d=5: best k=1 at (a,b)=(4,5) -> [[13,1,5]]_13 (d_X=9, d_Z=5, MDS); dim of weight space=1; signed (+-1) weight exists: True
+  doubled affine points (n = 2p = 26), S = <1>: largest b with a nonzero logical cubic gives k = 5 (b = 6); predicted cap (p-3)/2 = 5; trade codes give k = 12
+
+real	0m26.195s
+user	0m26.102s
+sys	0m0.020s
