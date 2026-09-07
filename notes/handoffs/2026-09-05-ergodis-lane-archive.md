@@ -62,3 +62,7 @@ passed. Native hot loops/layouts unchanged. Report:
 ## 2026-09-07 — C1084 portable control architecture
 
 Completed planning-only source audit and architecture in `../2026-09-07-c1084-portable-control-architecture.md` at core `6269cd1`. Two Terra reviews. User-directed browser/local+remote session model, notebook/kernel analogy, deep module boundaries, staged crate layout, durable repository contracts, private native/WASM/IR extensions and performance gates. Advance portable language extraction and shared runtime facade before autonomous-driver host wiring. No runtime changes or new platform support claims.
+
+### C1084 follow-up — history independent of live processes
+
+Extended the architecture with one daemon per workspace, durable campaign/run/artifact identities, offline history viewing, distinct attach/verify/replay/resume/fork operations, activation fencing and crash reconciliation. Existing Campaign Resume remains a gate operation; historical activation and mid-solve continuation are explicitly different capabilities. Documentation only; implementation order and performance gates unchanged.

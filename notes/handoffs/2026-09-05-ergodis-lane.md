@@ -142,8 +142,8 @@ and prior run coverage remain separate; Cancel/Resume preserves completed eviden
 
 C1084's portable control/session architecture and staged migration plan are complete:
 `notes/2026-09-07-c1084-portable-control-architecture.md`. Shared native/browser service; attachable
-frontends; explicit host, repository and compilation-unit boundaries; native64 performance gates
-unchanged. This is a design, not a claim of implemented hosts or platform support.
+frontends; durable history independent of processes; explicit view/verify/replay/resume/fork
+workflows, host/repository/compilation-unit boundaries; native64 performance gates unchanged. This is a design, not a claim of implemented hosts or platform support.
 
 **Next**: allocate stage 1 portable scalar/text/codec ownership extraction with compatibility
 reexports, default/native/WASM conformance and unchanged hot evaluators. Follow with the shared

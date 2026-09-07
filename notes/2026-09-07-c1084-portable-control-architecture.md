@@ -42,8 +42,9 @@ hide substantial work, rather than passing every operating-system call through a
 ## Frontend and kernel/session split
 
 Adopt the user's notebook/kernel analogy explicitly. The frontend owns presentation, editable
-inputs and views. The long-lived session owns campaigns, operation history, loaded packages and
-resource policy. Compute workers execute jobs for that session. Distinguish the session runtime
+inputs and views. The repository owns durable campaigns and operation history. A live session owns loaded packages,
+resource policy and execution handles for the campaigns it has activated. Compute workers execute
+jobs for that session. Distinguish the session runtime
 from the specialized mathematical kernels already called kernels in Ergodis; use `SessionHost`
 in API names to avoid that collision.
 
@@ -74,6 +75,96 @@ references. Re-running a cell is a new request unless explicitly retrying the sa
 Saving notebook output does not save a live continuation or certify a theorem. Exported campaign
 checkpoints/artifacts carry the reproducibility contract. A Jupyter adapter is an extension after
 the shared client works, not a dependency of the first browser demo.
+
+## Daemon, durable history and reopening work without live processes
+
+The workspace repository, not the daemon process, is the durable center of the product. Default to
+one native daemon per user/workspace repository, with multiple active campaigns and isolated jobs.
+Do not require one daemon per campaign or a machine-global singleton. Separate repositories may
+have separate daemons, and a frontend may attach to several endpoints explicitly. This is local
+ownership, not a distributed scheduling/consensus project.
+
+The daemon presents both live control and a durable catalog. Its supervisor owns active session
+handles, worker lifecycle and admission to host resources; its repository service owns history
+queries. Browsing stored work must not instantiate a Campaign, load private executable modules,
+run a checker, replay a solve or allocate a solver workspace. A standalone viewer can use the same
+read-only repository API against an exported bundle or local store with no daemon at all. A browser
+can therefore open a historical demo offline even when its original native processes are gone.
+
+Keep durable and ephemeral identities explicit:
+
+| Entity | Lifetime and purpose |
+|---|---|
+| Repository/workspace | Durable namespace and access boundary; indexed catalog is rebuildable |
+| Campaign | Durable evolving investigation with goals, candidate/evidence lineage and budget history |
+| Solve/run | An immutable execution specification and append-only history, standalone or campaign-linked |
+| Execution attempt | One activation/recovery of a run on a host; new identity after restart |
+| Certificate/artifact | Immutable content identity, provenance and verification records; may be imported without a run |
+| Live session/worker | Ephemeral attachment/execution handle with ownership generation; PID/socket are host diagnostics |
+
+Artifact presence, historical outcome and live availability are independent dimensions. An old
+completed solve remains completed when its process exits; an old certificate remains browsable
+when its producing campaign is unavailable. A run recorded as Running but with no reconciled owner
+is Unreconciled/Interrupted as appropriate, not silently Completed, Failed or definitely still
+running. A timeout alone is not proof that a remote worker died. Verification displays historical
+checker results separately from verification performed by the current host and checker version.
+
+The frontend's entry point is a workspace view with active work and searchable history. Opening
+an item presents the last committed snapshot, lineage, results, certificates and capability status.
+It offers explicit actions according to the stored material:
+
+| Action | Meaning and prerequisites |
+|---|---|
+| View | Read bounded metadata/artifacts; no live process or solver dependencies required |
+| Attach | Connect to a currently owned live session; never starts duplicate work |
+| Verify | Run a selected available checker over a certificate; add a new verification record without rewriting the old claim |
+| Replay | Reexecute stored inputs/commands under identified semantics and compare outcomes; uses a new attempt and physical-work budget |
+| Resume | Activate an existing campaign at a committed boundary or compatible persisted continuation; preserve lineage and logical spend |
+| Fork | Create a new campaign/run derived from an old artifact/checkpoint with explicit changes, parent links and its own budget |
+
+A certificate is not necessarily a checkpoint. An old manifest and logs may support viewing but
+not replay. A replay document may reconstruct campaign state but cannot restore an unpersisted
+search stack. The current Campaign v1 supports reconstruction by bounded replay, not mid-solve
+continuation; its Resume command only reopens the cancelled gate. The new host-level resume action
+must describe which of these mechanisms it will use rather than overloading the existing command.
+
+Provide a bounded resume/replay preflight returning required inputs, exact package/compiler/checker
+identities, schema/target compatibility, available checkpoint kind, outstanding reservations and
+estimated/limited recovery work. Missing private modules, unsupported historical schemas or absent
+inputs return specific reasons; they do not block basic viewing. A change of problem, goal semantics,
+mode or incompatible implementation creates an explicit fork/migration artifact instead of
+silently continuing the old run. Completed runs remain immutable historical executions; further
+exploration becomes another run or a fork within the appropriate campaign lineage.
+
+On activation, acquire repository ownership atomically and mint a new fencing generation before
+launching jobs. Publication requires both the expected repository generation and current owner
+fence, preventing an old daemon/worker from publishing after replacement. The repository adapter
+must implement this transaction/lock guarantee; an in-memory daemon registry or PID-file check is
+insufficient. Restart first reconciles durable reservations and attempts, reattaches only through
+a valid worker identity handshake where supported, and marks unresolved work explicitly. Do not
+unconditionally rerun every historical Running entry. Duplicate activation is rejected or attaches
+to the existing owner; it never silently creates a second spender.
+
+A graceful stop supports detaching the frontend, stopping a campaign and shutting down the daemon
+as different operations. Document whether workers drain, checkpoint or are interrupted during
+shutdown. Reserve budgets before launch and never refund ambiguous crashed work automatically.
+Checkpoint retention and garbage collection must follow reachable campaign/run/artifact references,
+not process liveness. Deleting a live handle must not delete historical evidence.
+
+Implementation belongs in the existing planned portable runtime (catalog/session supervision
+policy), repository (durable records/index/ownership publication) and host (processes/locks). No new
+crate is needed solely for historical viewing. Typed versioned historical readers may preserve an
+unsupported old document for display without making it executable. Read projections and pagination
+keep opening a large history cheap; rebuild indexes off the solve path. No history indexing,
+heartbeat or catalog traffic enters a solve hot loop.
+
+Stage 2 defines durable IDs and separates host resume from Campaign Resume. Stage 3 includes
+opening an exported historical bundle without a live worker. Stage 4 adds paginated catalog,
+read-only offline access, activation fencing and crash reconciliation; stage 5 implements actual
+continuation/recovery capabilities. Add acceptance cases for a completed run without processes,
+an orphaned in-progress run, a certificate without its producer, unavailable private packages,
+viewing without executing, competing activation, stale-owner publication and replay/fork budget
+separation. Preserve the same workflow across browser, TUI, notebook and Python clients.
 
 ## Present state and what must change
 
