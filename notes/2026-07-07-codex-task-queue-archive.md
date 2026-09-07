@@ -5591,3 +5591,4 @@ depth because this archive is in the same `notes/` directory.
 - **C1096 `[ergodis]` [REPORTED 2026-09-07]** — Domain-checked leaf updates and stale source rejection → `notes/2026-09-07-c1096-leaf-update-admission.md`.
 
 - **C1097 `[ergodis]` [REPORTED 2026-09-07]** — Independent min-plus summary transition verification → `notes/2026-09-07-c1097-independent-summary-transitions.md`.
+- **C1090 `[clebsch]` [REPORTED 2026-09-07]** — Clebsch II cubic-phase codes `[[14,6,2]]_7`, `[[22,10,2]]_11`: priority search (codes and invariant-theoretic phase unclaimed; weighted mechanism and synthillation partially known), exact Pauli-spectrum classification for both primes (rational-normal-curve extremum, Waring bracket `9 ≤ r(F_7) ≤ 13`), and the user's decision for a standalone companion note; successor C1099 → `notes/clebsch-tasks/c1090-cubic-phase-codes.md`

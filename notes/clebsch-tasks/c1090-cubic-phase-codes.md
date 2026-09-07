@@ -5,7 +5,8 @@ verdict is recorded here)
 
 **Date:** 2026-09-07
 
-**Status:** active
+**Status:** complete 2026-09-07 — decision (b) taken by the user; successor C1099 runs the three
+strengthening tests before the note is drafted
 
 ## Input
 
@@ -106,4 +107,7 @@ Prakash–Saha 2025.
 ## Log
 
 - 2026-09-07: card opened; bundle banked; priority search and resource classification
-  dispatched and completed (above); decision (a)/(b)/(c) awaiting the author.
+  dispatched and completed (above); the user chose (b).  Strength assessment: a correct short
+  certificate note as it stands; three tests (magic content, a distance-three member at
+  `p = 7`, a family beyond `p = 7, 11`) decide whether it becomes a construction paper.
+  Queued as C1099 (`c1099-cubic-phase-codes-strengthening.md`); this card is closed.
