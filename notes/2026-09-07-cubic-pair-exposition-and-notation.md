@@ -96,8 +96,25 @@ defect was found on these pages.
 - m=1 PDF SHA-256: `a4d957b8acd89b49bf73e46ddd4b625b2356123f81e900a4ce74763ab6e4b395`.
 - Sharpness PDF SHA-256: `c097d691430810c1c0bafc7b31e1754fc429f3f6c3e8fbd8dca87e6c393532b7`.
 
-Mirror provenance will be recorded after guarded synchronization. No
-cold-read acceptance is claimed here.
+Authority draft: `d590dbec0`. Guarded plan/audit/sync and verify passed
+for both exports, with zero reference findings. Both standalone `make check`
+gates pass and reproduce the PDF hashes above exactly. Forward commits:
+m=1 `cf96368`; sharpness `7f62464`.
+
+A cross-paper consistency read checked the surface, specified-cubic,
+generic-surface, partner and fibration statements against the companion
+lower-bound dependency. The upper bounds do not import the lower bound;
+exact-level and irrationality conclusions do. No scope mismatch was found
+in that check.
+
+Two independent full-paper cold readers have now been launched without
+prior reports or conversation history: `cold_m1` and `cold_sharpness`.
+They are reading the complete respective manuscripts, including extensions,
+and are instructed to distinguish demonstrated errors from gaps and
+unverified interfaces. This begins useful independent review while the
+custom protocol location remains pending; it is not a claim that the
+author's specific protocol has been completed. No cold-read acceptance
+is claimed here.
 The location of the governing sub-referee protocol has been requested from
 the author while drafting continues; prior review reports were located but
 not the governing instructions.
