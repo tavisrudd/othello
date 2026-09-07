@@ -4589,8 +4589,17 @@
       "last": 1095,
       "purpose": "Semantic admission of additional observables on existing finite quotients",
       "sequence": 510
+    },
+    {
+      "count": 1,
+      "first": 1096,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1096,
+      "purpose": "Domain-checked leaf updates and stale transition rejection",
+      "sequence": 511
     }
   ],
-  "next_id": 1096,
+  "next_id": 1097,
   "schema": "codex-task-id-allocations-v1"
 }
