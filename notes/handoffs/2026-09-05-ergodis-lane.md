@@ -123,18 +123,16 @@ the Farr–Lisoněk free-pair cap constructions into a test-cap corpus for the c
 in the `n ≥ 4` programme. Each row carries its own provenance pointer; read the discovery-track
 entry before starting.
 
-### Ergodis consolidation — next implementation decision
+### C1080 — portable admission pilot; C1032 browser recovery
 
-C1079 review closed: `notes/2026-09-06-c1079-ergodis-evolve-review.md` contains the recommended
-portable autonomous workflow, core/private cleanup, hybrid native/IR packages, QEC IP boundary,
-native/WASM and local+hosted demo stages, and build/test/docs gates. No implementation migration
-or release was performed. WASM memo: `notes/2026-09-06-c1079-wasm-capability-audit.md`.
+Tavis authorized implementation on 2026-09-07 after C1079’s completed convergence plan
+(`notes/2026-09-06-c1079-ergodis-evolve-review.md`). C1080 implements a bounded candidate →
+scoped admission → exact composition-solver consumer, with independent theorem/parameter origin,
+mode and evidence binding. Report: `notes/2026-09-07-c1080-admission-pilot.md`.
 
-**Next**: Tavis’s architecture/scope decision for a bounded portable candidate/parameter/admission
-pilot, alongside recovery of C1032’s browser baseline. Coordinate existing C1032/C1017 ownership;
-no implementation successor ID allocated before that decision. Generic machinery/workflows belong
-in core; selected industry knowledge may remain private. Both shippable and hosted black-box demos
-are required, with shippable priority and the existing WASM prototype included.
+C1032’s historical browser adapter is being forward-ported into current core `wasm/` and validated
+alongside the pilot. Native/WASM source changes stay in core; industry knowledge remains private.
+No plugin loader, broad migration, export or publication is included in this first implementation.
 
 ### C985 — Ergodis exact algebraic optimization paper
 
@@ -158,6 +156,6 @@ host, so cold end-to-end `g41` replays need it regenerated first.
 ## Lane ownership
 
 This lane was split out of `complete-ports` on 2026-09-05 and owns C985, C1016, C1017,
-C1031-C1033, C1040-C1048, C1052, C1061, C1062, C1070, C1072-C1074, C1079. Future Ergodis engine, benchmark, tooling,
+C1031-C1033, C1040-C1048, C1052, C1061, C1062, C1070, C1072-C1074, C1079, C1080. Future Ergodis engine, benchmark, tooling,
 capability, and Ergodis-paper tasks use `[ergodis]`. The bounded-recovery manuscript work (C325,
 C953, C955, C964) stays on `[complete-ports]`.
