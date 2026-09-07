@@ -11,11 +11,12 @@ explicit dispositions, with 20 additional partial primary readings. This is not
 336 full-text exclusions. The canonical pre-draft verdicts are rows N1–N9 of
 `notes/2026-09-07-c1102-forward-citations/CLAIM-PROOF-NOVELTY.md`; they supersede
 the historical C1090/C1099 positioning. Alltop/Wang–Li/Dai–Fu–Luo access is resolved.
-The two remaining coverage limits are the added Hessian seed's Crossref missing
-record (Semantic Scholar now succeeds with count 0), and Feng–Luo
-`10.1088/1402-4896/ad80e7` primary proof access. No gate revision or draft is authorized.
-The bounded access follow-up and exact proposed gate revision are in
-`notes/2026-09-07-c1102-forward-citations/GATE-DECISION.md`; decision pending.
+Feng–Luo `10.1088/1402-4896/ad80e7` is now read at full text from user scans
+of all nine published pages; all promoted primary-access gaps are resolved.
+The sole remaining Gate 1 blocker is the added Hessian seed's missing Crossref
+record (OpenAlex and Semantic Scholar each report 0). The amended proposal in
+`notes/2026-09-07-c1102-forward-citations/GATE-DECISION.md` requests only a
+bounded exception for that missing count. No gate revision or draft is authorized.
 
 ## Read first (in this order, nothing else)
 

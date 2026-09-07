@@ -3,13 +3,14 @@
 Date: 2026-09-07. Lane: `clebsch`.
 **All 336 original promotions have a recorded disposition; Gate 1 is still OPEN.**
 
-This pass adds **zero full-text readings and twenty partial primary readings**.
-It reuses eleven earlier C1102 source readings, including the two full-text readings
-(Klappenecker–Rötteler and Dai–Fu–Luo). The technical source register contains
-32 records: two full text, 29 partial and one abstract/metadata-only Bravyi–Haah
-record. No metadata dismissal is represented as a
-full-text reading. `adjudication-sources.json` pins exact bytes, versions, read
-sections, comparisons and whether the reading is new or reused.
+The original adjudication added twenty partial readings. The user-scan follow-up
+adds one **full-text** reading of Feng–Luo, resolving the last primary-access gap.
+The current technical register has **33 sources: three full text, 29 partial,
+one abstract/metadata only**. Current dispositions: **23 primary-comparison
+memberships, 47 metadata background, 266 title screens, zero access gaps**.
+The full-text readings are Klappenecker–Rötteler, Dai–Fu–Luo and Feng–Luo.
+`adjudication-sources.json` pins bytes, versions and read sections. The historical
+acquisition snapshot and its counts remain frozen.
 
 The current verdicts live only in `CLAIM-PROOF-NOVELTY.md`, rows N1–N9. In particular,
 N1–N6 adjudicate the six required questions; N7–N9 close the writing card's synthesis,
@@ -18,7 +19,7 @@ the older “unclaimed” labels, without pretending that source access was exha
 
 The final bounded access follow-up and a **pending, unapplied** gate proposal
 are recorded in `GATE-DECISION.md`, with hashed metadata in
-`continuation-access.json`. Neither remaining gap was resolved.
+`continuation-access.json`. Its access-gap proposal is superseded by the user scans; only the Crossref exception remains pending.
 
 ## What changed
 
@@ -65,8 +66,8 @@ register. The mechanical first discriminator is unchanged in `screen.py`; the hu
 second discriminator and explicit decisions are in `adjudicate.py` and
 `adjudication.json`.
 
-Disposition totals: **22 primary-comparison memberships, 47 abstract/metadata
-background dispositions, 266 title-screen dispositions, one primary-access gap**.
+Current disposition totals: **23 primary-comparison memberships, 47 abstract/metadata
+background dispositions, 266 title-screen dispositions, zero primary-access gaps**.
 These are memberships in the promotion list, not counts of distinct primary papers.
 For example, the two Li–Yeh titles resolve to the same pinned arXiv source. The
 Campbell–Howard PRL/PRA titles concern companion papers: the PRA reading supplies the
@@ -106,15 +107,30 @@ DataCite result explains the Crossref gap; it does not waive that requirement.
 No three-source absence verdict is issued for later odd-prime rank-formula work.
 The missing count is external coverage, not a remaining technical reading task.
 
-**One relevant promoted primary text remains inaccessible:** Feng–Luo,
-*Optimality of the Howard–Vala T-gate in stabilizer quantum computation*,
-`10.1088/1402-4896/ad80e7`. Read depth: **abstract/metadata only**, from the frozen
-graph's abstract. Its publisher `/pdf` returned HTTP 200 HTML, SHA-256
-`f1ec4a0d8379baae6b010f0f073e0ee31d269ec287357182f3b2c075705e4a90`, rejected by
-the cache's PDF sniff. The abstract specifies a single-prime L1 optimality theorem;
-the unread proof cannot license an absence claim about broader rank methods.
-A final ResearchGate publisher-preview fallback displayed only the first-page
-abstract/introduction, not the theorem or proof. No author-contact request was sent.
+**Feng–Luo primary access is now resolved.** The user supplied original PNG spreads
+covering all nine published pages of *Optimality of the Howard–Vala T-gate in
+stabilizer quantum computation*, DOI `10.1088/1402-4896/ad80e7`. Read depth:
+**full text**, including Appendices A–C and references. The source register pins
+all five image hashes, provenance and the scan manifest in the shared
+`feng-luo-2024/` cache. No OCR was used; formulas were read from the images.
+Earlier publisher-HTML and preview failures remain historical acquisition evidence.
+
+Proposition 1 reduces both average and maximum stabilizer-input L1 magic to the
+uniform-input diagonal phase state. Proposition 2, for prime d>=5, establishes
+`M_max = 1+(d-1)sqrt(d)` and
+`M_ave = d(2+(d-1)sqrt(d))/(d+1)` for nonzero powers of the Howard–Vala gate.
+Appendix C splits off the k=0 WH sector, uses purity to fix the remaining squared
+mass, and applies Cauchy–Schwarz. The equality condition is constant modulus
+`1/sqrt(d)` for all k!=0 and all l; cubic finite differences reduce the amplitudes
+to nondegenerate quadratic Gauss sums, proving attainment. Clifford invariance
+then gives the stated gate-equivalence extension. Page 5 relates the Watson gate
+to the sixth power of the Howard–Vala gate with diagonal Clifford factors.
+
+The comparison and positioning consequences are in ledger N5/N9. The paper's
+classification of all optimal diagonal gates is explicitly conjectural (p. 5),
+not a theorem. The larger pure-state SIC ceiling on p. 3 is distinct from the
+diagonal-orbit optimum. No source-wide absence claim follows beyond what was
+actually read; this source does not repair the independent Crossref coverage gap.
 
 Wang–Li, Dai–Fu–Luo and Alltop retain the resolved access recorded in the previous
 follow-ups. No new scan request is needed for them. MathSciNet remains **NOT
@@ -151,6 +167,10 @@ now explicit in the ledger. No incidental gem outside the named questions was
 found, so no discovery-track entry or successor allocation is needed.
 
 ### Mystery ledger
+
+* **Settled by the scan follow-up ej + tt pass:** the optimality proof is accessible;
+  the remaining equality-class question is a stated conjecture, not missing proof
+  of Proposition 2. No new task or incidental discovery is allocated.
 
 * **Settled:** the apparent absence of qudit synthillation came from confusing
   the logical AND with its physical transversal factors.

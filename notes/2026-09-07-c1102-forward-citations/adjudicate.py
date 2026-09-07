@@ -21,6 +21,7 @@ ABSTRACT_READ = {
 }
 
 PRIMARY = {
+    272: '10.1088/1402-4896/ad80e7',
     5: 'arXiv:2408.10140',
     13: 'arXiv:2601.21514',
     19: 'arXiv:1606.01904',
@@ -84,7 +85,6 @@ REASONS = {
     261: 'Abstract explicitly includes exact logical error rates for qudit channels via enumerators; no first qudit-enumerator claim.',
     264: 'Abstract: shadow estimation and Clifford measurement ensembles; MUB background.',
     268: 'Abstract explicitly about two qubits and a qubit conjecture; not an arbitrary odd-prime theorem.',
-    272: 'Relevant single-prime L1 optimality; publisher PDF was HTML. ACCESS GAP, no source-wide negative.',
     298: 'Review abstract, not substituted for primary rank/state-construction sources.',
     326: 'Abstract: qubit topological triple-intersection invariant induces logical phase; distinguishes binary-form invariants, not first invariant-defined gate.',
     330: 'Title-only graph screen: stabilizer representation, not a novelty-bearing use of that paper. No text-level exclusion.',
@@ -113,8 +113,6 @@ def main():
             row.update(read_depth='secondary only',
                        sections_read='Companion PRA arXiv:1606.01904, II.C; PRL full text not read',
                        reason='The related PRA primary reading supplies the synthillation comparison; this is not a primary reading of the PRL companion.')
-        if i == 272:
-            row['disposition'] = 'ACCESS_GAP'
         rows.append(row)
     payload = dict(
         promoted_sha256=hashlib.sha256((ROOT / 'promoted.json').read_bytes()).hexdigest(),

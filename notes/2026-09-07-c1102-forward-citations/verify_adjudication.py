@@ -24,12 +24,14 @@ for original, row in zip(promoted, rows):
     assert (row['title'], row['id']) == (original['title'], original['id'])
     assert row['read_depth'] in DEPTHS
     assert row['fields_read'] and row['reason'] and row['disposition']
-assert sum(r['disposition'] == 'ACCESS_GAP' for r in rows) == 1
+assert sum(r['disposition'] == 'ACCESS_GAP' for r in rows) == 0
 assert rows[19]['read_depth'] == 'secondary only'
+assert rows[272]['read_depth'] == 'full text'
+assert rows[272]['disposition'] == 'PRIMARY_COMPARISON'
 
 sources = json.loads((ROOT / 'adjudication-sources.json').read_text())
-assert len(sources) == len({s['key'] for s in sources}) == 32
-assert sum(s['read_depth'] == 'full text' for s in sources) == 2
+assert len(sources) == len({s['key'] for s in sources}) == 33
+assert sum(s['read_depth'] == 'full text' for s in sources) == 3
 assert sum(s['reading_pass'] == 'current adjudication' and s['read_depth'] == 'partial'
            for s in sources) == 20
 assert not any(s['reading_pass'] == 'current adjudication' and s['read_depth'] == 'full text'
@@ -72,5 +74,5 @@ assert (ROOT / 'adjudication.json').read_bytes() == before
 ledger = (ROOT / 'CLAIM-PROOF-NOVELTY.md').read_text()
 assert all(f'| N{i} |' in ledger for i in range(1, 10))
 assert 'Gate 1 remains OPEN' in ledger
-print('PASS: 336 dispositions; 32 source records and hashes; 20 new partial/0 new full-text readings; graph errors distinguished from zeros.')
-print('Gate 1 remains OPEN: Crossref coverage and one promoted primary-access gap.')
+print('PASS: 336 dispositions; 33 source records and hashes; 20 original new partial readings plus 1 user-scan full reading; graph errors distinguished from zeros.')
+print('Gate 1 remains OPEN: Crossref coverage; Feng–Luo primary access resolved.')

@@ -916,5 +916,86 @@
     "pdf_path": "/tmp/persistent/tavis/lit-search/pdf/arXiv_1209.2426.pdf",
     "reading_pass": "current adjudication",
     "comparison": "Abstract defines binary triorthogonality and transversal T with possible Clifford correction; historical mechanism citation, no claimed new binary construction."
+  },
+  {
+    "key": "10.1088/1402-4896/ad80e7",
+    "title": "Optimality of the Howard-Vala T-gate in stabilizer quantum computation",
+    "authors": [
+      "Lingxuan Feng",
+      "Shunlong Luo"
+    ],
+    "year": 2024,
+    "version": "Published, Physica Scripta 99 (2024) 115226, pages 1\u20139",
+    "url": "https://doi.org/10.1088/1402-4896/ad80e7",
+    "access": "User-supplied PNG screenshots received 2026-09-07; visually read against original images, no OCR",
+    "pages_present": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "pages_missing": [],
+    "files": [
+      {
+        "pages": [
+          1,
+          2
+        ],
+        "file": "pages-01-02.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-16-06-05.grover.reg.png",
+        "bytes": 1154306,
+        "sha256": "dbda5790aa66efdb6641a0eb81a1cb74cdb114f8283f0da20f337eea5043b573"
+      },
+      {
+        "pages": [
+          3,
+          4
+        ],
+        "file": "pages-03-04.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-16-06-59.grover.reg.png",
+        "bytes": 873763,
+        "sha256": "80a32c6f704237bcd0b6226c7f9656f88491fe96119cf0a2f6906d43e839d80a"
+      },
+      {
+        "pages": [
+          5,
+          6
+        ],
+        "file": "pages-05-06.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-16-07-11.grover.reg.png",
+        "bytes": 943901,
+        "sha256": "ed5e1c7c4eb10c4c9ba69a20fbe40bc85bd68c8dc580dbd52010031930ed210f"
+      },
+      {
+        "pages": [
+          7,
+          8
+        ],
+        "file": "pages-07-08.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-16-07-20.grover.reg.png",
+        "bytes": 517737,
+        "sha256": "778efbb4c8df36958e51e48ab0197b95ee8c81da06ce8b0ca5d6d327f0890c0b"
+      },
+      {
+        "pages": [
+          9
+        ],
+        "file": "pages-09.png",
+        "source_path": "/home/tavis/screenshots/2026-09-07-16-07-28.grover.reg.png",
+        "bytes": 677178,
+        "sha256": "aa36a6c60546fa46c76a95eb564a629902f22fcd4771fcceeb3d1dac9459c3fa"
+      }
+    ],
+    "read_depth": "full text",
+    "sections_read": "All nine pages: sections 1\u20134, Definitions 1\u20133, Propositions 1\u20132, Eqs. (3)\u2013(8), conjecture on p. 5, Appendices A\u2013C and references. Appendix C inequalities and Gauss-sum equality checked visually.",
+    "reading_pass": "user scan follow-up",
+    "comparison": "Single-prime d>=5 L1 optimality among diagonal gates on stabilizer inputs; Appendix C uses WH purity, Cauchy\u2013Schwarz and nondegenerate one-variable quadratic Gauss sums. No general multivariate Hessian-rank/SRE theorem is stated. Distinguish diagonal-orbit optimum from unrestricted pure-state optimum; equality-class classification on p. 5 is conjectural.",
+    "cache_directory": "/tmp/persistent/tavis/lit-search/feng-luo-2024",
+    "manifest_sha256": "344fe752a2010a4b6422a06a8d570190ca1c3d2fc8155f7328a0b6612d294052"
   }
 ]

@@ -2,6 +2,14 @@
 
 Date: 2026-09-07. Lane: `clebsch`. **Proposal only; approval pending. Gate 1 remains OPEN.**
 
+**Current amendment after user scans:** Feng–Luo is now read at full text, pp. 1–9,
+including Appendix C. Its access exception below is withdrawn; condition 2 is
+replaced by primary attribution through ledger N5/N9. The requested decision now
+concerns only the added Hessian seed’s missing Crossref count, retaining all other
+claim restrictions. No approval or manuscript release has been inferred.
+
+The following records the access attempt and proposal before those scans arrived.
+
 This continuation adds **zero full-text and zero technical-section readings**.
 The existing 336 dispositions and 32 technical-source records are unchanged.
 Their read-depth limitations remain those in `ADJUDICATION.md`; in particular,

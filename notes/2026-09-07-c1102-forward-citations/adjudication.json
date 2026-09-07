@@ -3986,13 +3986,14 @@
       "id": "https://openalex.org/W4402907262",
       "doi": "https://doi.org/10.1088/1402-4896/ad80e7",
       "externalIds": null,
-      "read_depth": "abstract/metadata only",
+      "read_depth": "full text",
       "fields_read": [
-        "title",
-        "abstract"
+        "primary sections"
       ],
-      "disposition": "ACCESS_GAP",
-      "reason": "Relevant single-prime L1 optimality; publisher PDF was HTML. ACCESS GAP, no source-wide negative."
+      "disposition": "PRIMARY_COMPARISON",
+      "reason": "Single-prime d>=5 L1 optimality among diagonal gates on stabilizer inputs; Appendix C uses WH purity, Cauchy\u2013Schwarz and nondegenerate one-variable quadratic Gauss sums. No general multivariate Hessian-rank/SRE theorem is stated. Distinguish diagonal-orbit optimum from unrestricted pure-state optimum; equality-class classification on p. 5 is conjectural.",
+      "source_key": "10.1088/1402-4896/ad80e7",
+      "sections_read": "All nine pages: sections 1\u20134, Definitions 1\u20133, Propositions 1\u20132, Eqs. (3)\u2013(8), conjecture on p. 5, Appendices A\u2013C and references. Appendix C inequalities and Gauss-sum equality checked visually."
     },
     {
       "index": 273,
