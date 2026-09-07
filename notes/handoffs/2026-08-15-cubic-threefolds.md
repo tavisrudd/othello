@@ -43,8 +43,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   descent audited, and TZ v2 citations/hypotheses matched. Both authority and
   mirror gates pass with matching PDFs; report:
   `../2026-09-07-c1116-cubic-foundations-audit.md`.
-  Next is **C1120** stabilization corollaries,
-  **C1117** additive motivic/spectrum work, **C1118** the full-I3 rank-four
+  **C1120 is complete:** marked-threefold, arbitrary characteristic-zero
+  field, generic-surface, specified-partner and fibration corollaries are
+  integrated and validated; report:
+  `../2026-09-07-c1120-stabilization-corollaries.md`.
+  Next is **C1117** additive motivic/spectrum work, **C1118** the full-I3 rank-four
   certificate, and **C1119** finite-index slices. C978/C956 retain exposition;
   C963/C965/C966 retain algorithmic work. Treat upgrades as queued proof
   obligations, not accepted theorems. Review and ordering:
@@ -55,6 +58,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   planned paper updates are complete; offer thanks/observations without
   requesting feedback. C978 explicitly targets birational geometers
   unfamiliar with QDMs. C956/C978 remain open by author instruction.
+  Additional pencil-focused feedback is assessed in
+  `../2026-09-07-cubic-six-axis-feedback-triage.md`; it is a proposed future
+  project, not an allocated replacement for this order.
 - **C956 — exact level-two cubic manuscript, referee-accepted candidate.**
   Cross-specialty review repaired the characteristic-zero scope, the
   singular-compatible tangent-projection citation, the relative evaluation

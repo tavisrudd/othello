@@ -1,7 +1,16 @@
 # C1120: Natural-strength stabilization corollaries
 
 **Lane:** `cubic-threefolds`
-**Status:** queued after the relevant C1116 foundation gates
+**Status:** completed 2026-09-07
+
+## Outcome
+
+All five consequences are proved and integrated, with explicit field and
+correspondence hypotheses and honest formal coverage. Both authority and
+mirror gates pass; rebuilt PDFs match. Authority `36fcb6ad7`, local mirrors
+`165f241` and `31e34b1`. No push, deposit, or email.
+Report: `../2026-09-07-c1120-stabilization-corollaries.md`.
+Next: C1117 additive motivic/spectrum work.
 
 ## Goal and scope
 

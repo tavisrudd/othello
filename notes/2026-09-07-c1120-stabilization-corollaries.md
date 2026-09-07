@@ -114,7 +114,20 @@ field-descent proof on pages 9--10 were visually reviewed. The PDFs have
 | m1 | `a5845fd9769e9cb65d57539bce907713f42f427b788e6e172542a500e39f99a9` |
 | sharpness | `f0a3c47a251ce3fcb8588bfa7978404929afa0a5e91c1a5017f870edd80a182b` |
 
-Downstream synchronization follows this committed authority checkpoint.
+Authority commit: `36fcb6ad7`. Both local mirrors replayed `make check`
+successfully and exporter verification passed. The rebuilt PDFs match the
+authority hashes above. Mirror commits: m1 `165f241`, sharpness `31e34b1`.
+Exporter content hashes:
+`4dc8985804868c97bbe6165a6313f2d8a404b517f0d4aa98c6fec5bebd27f7b0`
+and `835584dbe1b4c386a2575c71248fdbb9fb0aa8dd2a9055a58ca99206a69f7e58`.
+Distinct mirror logs are under
+`/tmp/claude-run-quiet/20260907-152925-make-C-cubic-stabilization-m1-check/`
+and `/tmp/claude-run-quiet/20260907-152925-make-C-cubic-stabilization-irrationality-check/`.
+
+The author's additional six-axis-pencil feedback arrived during mirror
+validation. Its bounded assessment is in
+`2026-09-07-cubic-six-axis-feedback-triage.md`; it proposes a possible
+future geometric project without allocating it or interrupting C1120.
 
 ## Mystery ledger — ej + tt closeout
 
