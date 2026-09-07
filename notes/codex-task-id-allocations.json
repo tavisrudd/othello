@@ -4562,8 +4562,17 @@
       "last": 1092,
       "purpose": "Query specialization motivation and executable semantic contract examples",
       "sequence": 507
+    },
+    {
+      "count": 1,
+      "first": 1093,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1093,
+      "purpose": "Admit parametric LRC queries and updates against existing dynamic composition capabilities",
+      "sequence": 508
     }
   ],
-  "next_id": 1093,
+  "next_id": 1094,
   "schema": "codex-task-id-allocations-v1"
 }
