@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-31-work-summary.md`](2026-07-31-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-09-04**, with quiet stretches Jun 28–30, Jul 27, and Aug 16–17.
+Activity spans **2026-06-14 → 2026-09-06**, with quiet stretches Jun 28–30, Jul 27, and Aug 16–17.
 This is the *chronological* view; the scope report is the *state* view.
 
 ## Content split between the two documents — binding rule
@@ -1431,6 +1431,24 @@ campaign's sibling task had just rediscovered.
   allocated to route TigerBlossom to its best solver per shot; the user's same-day scope refinement
   reordered it — fix the benchmark grid toward realistic error rates first, then fit the routing
   threshold on it.
+
+- **Sep 5 — the causal and Hadamard readings were narrowed by their controls.** C1062's nine
+  adversarial reviews retained the exact SCM lowering but withdrew its economic headline: the
+  repaired concrete baseline leaves a `6.8x` like-for-like query advantage, whereas the only
+  amortization measurement loses on every row. C1016 derived and checked a margin-preserving
+  `2×2` swap descent for the order-2092 campaign; its controls show that the descent operator,
+  rather than the exact low-order-character fibre, is what fails to reach the unrestricted plateau.
+  The sparse-matcher fixed-cost bug was removed and its certificate path closed.
+
+- **Sep 6 — the cap and leakage programmes became concrete deliverables.** C1071 expanded and
+  retitled the arcs manuscript, adding its cap section, intrinsic defect, large-hole asymptotic,
+  characteristic-zero obstruction, and reconstruction/coding material; the deterministic build
+  reached 35 pages, then 37 after the plane-fan addition. C1076's exact complete-cap scan found
+  five isolated one-step exclusions in its finite domain, and C1078 started a separately gated
+  secant--hyperplane manuscript. C1070 delivered the Ergodis leakage surface: labelled recovery
+  and leakage profiles, checked mask freshness, transcript-state analysis, and 54 agreeing
+  budget-complete verdicts from a 75-gadget published corpus. The work was split from
+  `complete-ports` into the new `ergodis` lane.
 
   **Process notes for the week.** Two load-bearing premises in three tasks were false and both were
   asserted from the shape of the situation without one cheap probe; both were caught by a

@@ -1,6 +1,6 @@
 # Portfolio results summary snapshot
 
-**Date:** 2026-09-04
+**Date:** 2026-09-06
 
 A self-contained summary of the major results of an ongoing programme in
 finite geometry, coding theory, and combinatorial game theory. It is written
@@ -13,6 +13,26 @@ in Lean 4; where that matters it is stated explicitly, and the boundary between
 a human proof, a machine-checked proof, and an exhaustive finite verification
 is stated rather than blurred. Nothing here has been published or externally
 refereed.
+
+**Update, 2026-09-05–06.** The arcs manuscript is now titled *Secant defects
+with prescribed holes: arcs, caps, and matching designs*. Its completed cap
+section proves a secant-local coverage inequality, a `PG(3,q)` corollary, and
+the plane-fan bounds \(\Lambda(A)\ge 2T_\ell+2T_\ell^2/(k-2)\) and
+\(\Lambda(A)\ge r(x)^2-1\). The manuscript build is warning-free and
+reproducible. A separate, literature-checked skeleton manuscript records
+secant--hyperplane defects of complete caps; its exact scan finds only five
+one-step exclusions over its stated finite domain, so it makes no broader
+asymptotic claim.
+
+The optimisation programme also acquired two sharply delimited results. For
+finite structural causal models, the contextual lowering and an unmaterialized
+compositional reduction are exact, but flat-carrier compilation has no measured
+economic advantage: the best repaired like-for-like result is `6.8x`, and the
+amortized arm loses throughout its tested range. For explicit linear leakage
+protocols, a new exact analyser returns labelled recovery and leakage costs
+with coefficient witnesses, verifies freshness assumptions, and benchmarks 54
+of 75 published linear gadgets with no disagreement; the remaining 21 cases
+are explicitly budget-limited.
 
 **How to read the length.** Sections are not sized in proportion to the
 mathematics they contain. Each one carries its scope boundaries, its priority

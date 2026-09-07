@@ -18,6 +18,27 @@ games, backed by:
   theory's quotient theorems into a general tool, has since been extracted into its own repository
   behind a tested publication guard, and is being prepared for release under a dual licence.
 
+### Current additions through 2026-09-06
+
+The arcs programme now has a 37-page, warning-free and reproducible manuscript,
+*Secant defects with prescribed holes: arcs, caps, and matching designs*. Its
+new cap section proves secant-local coverage and plane-fan concentration bounds,
+including \(\Lambda(A)\ge 2T_\ell+2T_\ell^2/(k-2)\) and
+\(\Lambda(A)\ge r(x)^2-1\), and gives a `PG(3,q)` corollary. A companion
+complete-cap manuscript has been drafted around secant--hyperplane moments.
+Its certified finite scan finds only five one-step exclusions above the
+counting bound in its stated domain; this is an exclusion mechanism, not a
+general improved-bound theorem.
+
+Ergodis's causal-model lowering is exact, but its flat-carrier compilation has
+no demonstrated economic advantage: after repair, the strongest like-for-like
+query result is `6.8x`, while the measured amortized route loses throughout the
+tested range. The separate compositional reduction remains exact because it
+avoids materializing the carrier. A new linear-leakage analyser now computes
+labelled recovery and adversarial costs with coefficient witnesses, checks
+freshness rather than assuming it, and agrees with the published probing order
+on all 54 budget-complete cases in a 75-gadget corpus.
+
 The open research center of gravity is the **projective cap ("Nofil") program** and its **odd
 projective-plane kernel**, with the Lean layer certifying results as they land. But the cap machinery
 has spun off enough standalone finite-geometry and coding-theory mathematics — extension, rigidity,
