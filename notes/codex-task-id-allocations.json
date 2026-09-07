@@ -4706,8 +4706,17 @@
       "last": 1115,
       "purpose": "Browser IndexedDB repository persistence and native filesystem companion with shared contract and platform recovery gates",
       "sequence": 523
+    },
+    {
+      "count": 5,
+      "first": 1116,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 1120,
+      "purpose": "Astra review follow-up: foundations, additive motivic extension, rank-four descent obstruction, finite-index slices, stabilization corollaries",
+      "sequence": 524
     }
   ],
-  "next_id": 1116,
+  "next_id": 1121,
   "schema": "codex-task-id-allocations-v1"
 }
