@@ -38,11 +38,17 @@ reconstruction remains outside the headline under the existing N1-only ruling.
   Motivation now emphasizes unique map extension, coordinate certificates and
   nonlinear-code isometries; closest-source comparison is documented in
   `notes/2026-09-07-c1110-continuation-motivation-positioning.md`.
+  Same-reader paired reassessment: overall 75→80, positioning 65→75,
+  motivation 75→80, adjacent accessibility 65→75 (subjective percentiles).
+  Remaining small edits and grading limits:
+  `notes/2026-09-07-c1110-continuation-exposition-grade-deltas.md`.
   Export/validation record: `notes/2026-09-07-c1110-continuation-upgraded-manuscript.md`.
 
 ## Next steps
 
-- **C1110** — complete publication-readiness review of the corrected first draft.
+- **C1110** — finish the small paired-review polish: narrow the Dyshko
+  comparison, trim repeated conclusions, and clarify identity-table completion;
+  then complete publication-readiness review of the corrected first draft.
   Qualified external subject review and priority diligence remain distinct from
   the completed sub-agent review and local corrections.
   The author handles GitHub and DOI actions; add the published artifact citation
