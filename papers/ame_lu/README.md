@@ -21,7 +21,11 @@ square blocks are all invertible, and only \(m\) minimum supports are needed
 for recognition.  With party labels fixed, equivalence reduces to testing at
 most \(\lvert\operatorname{Sp}_{2e}(\mathbb F_p)\rvert\) base frames.  Over a
 prime field it reduces further to linear intertwining equations for
-\((m-1)^2\) fundamental four-cycles and one determinant equation.  The
+\((m-1)^2\) fundamental four-cycles and one determinant equation.  The same
+\(m\) supports carry the reductions that determine the state among all
+density operators, with a commuting-projector parent Hamiltonian at the
+smallest possible locality, and every stochastic local conversion between
+two such states is Clifford up to scalars.  The
 common centralizer of these cycles is an intrinsic local endomorphism
 algebra.  In prime local dimension it has five possible types, determines
 the associated code structure, and is necessarily nonscalar through six

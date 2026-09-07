@@ -511,6 +511,206 @@ lifts this to LU equivalence.  Taking \(G=H\) gives the centralizer
 statement.
 \end{proof}
 
+\subsection{Marginal certification and stochastic conversion}
+\label{subsec:marginal-certification}
+
+The half-set direct sum has two consequences outside the equivalence
+problem.  The first says which reductions of a stabilizer AME state
+determine it among all density operators and gives the matching parent
+Hamiltonian; the second removes the unitarity hypothesis from
+Theorem~\ref{thm:lu-lc-rigidity}.  For a party set \(A\), write
+\(\sigma_A\) for the reduction of a density operator \(\sigma\) to \(A\),
+and \(\|X\|_1=\Tr|X|\).
+
+\begin{proposition}[Marginal certification]
+\label{prop:marginal-certification}
+Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with
+\(m\geq2\), fix an \(m\)-party set \(B\), and for \(j\notin B\) put
+\(A_j=B\cup\{j\}\) and
+\[
+ \Pi_j=q^{m-1}\rho^\psi_{A_j}\otimes I_{A_j^c}.
+\]
+\begin{enumerate}
+\item Each \(\Pi_j\) is the orthogonal projector onto the joint \(+1\)
+ eigenspace of the stabilizer lifts with labels in \(L(A_j)\).  The
+ \(\Pi_j\) commute, and
+ \(\prod_{j\notin B}\Pi_j=\lvert\psi\rangle\langle\psi\rvert\).
+\item A density operator \(\sigma\) on the \(2m\) parties with
+ \(\sigma_{A_j}=\rho^\psi_{A_j}\) for every \(j\notin B\) equals
+ \(\lvert\psi\rangle\langle\psi\rvert\).  More generally, the reductions
+ of \(\psi\) to \((m+1)\)-party sets \(C_1,\ldots,C_k\) determine \(\psi\)
+ among all density operators if and only if \(L(C_1),\ldots,L(C_k)\) span
+ \(L\); in particular \(k\geq m\).
+\item Every reduction of \(\psi\) to at most \(m\) parties is maximally
+ mixed, so no family of such reductions distinguishes \(\psi\) from the
+ maximally mixed state.
+\item \(H=\sum_{j\notin B}(I-\Pi_j)\) is a sum of \(m\) commuting
+ projectors, each acting on \(m+1\) parties, with kernel
+ \(\mathbb C\lvert\psi\rangle\) and spectral gap exactly one.  For every
+ density operator \(\sigma\),
+ \[
+  1-\langle\psi\rvert\sigma\lvert\psi\rangle
+  \leq\Tr(H\sigma)
+  \leq\sum_{j\notin B}\tfrac12\bigl\|\sigma_{A_j}-\rho^\psi_{A_j}\bigr\|_1 .
+ \]
+\item A Hamiltonian that is a sum of terms acting on at most \(m\) parties
+ each and has \(\lvert\psi\rangle\) as a ground state is a scalar.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i) By \((2.3)\) and Proposition~\ref{prop:stabilizer-ame-support},
+\[
+ q^{m-1}\rho^\psi_{A_j}\otimes I_{A_j^c}
+ =q^{-2}\sum_{\ell\in L(A_j)}\widetilde W_\ell ,
+\]
+and the lifts on the right form the subgroup of the stabilizer group with
+labels in \(L(A_j)\), of order \(q^2\).  The normalized sum over a finite
+abelian group of unitaries is the projector onto its joint \(+1\)
+eigenspace, so \(\Pi_j\) is that projector, and the \(\Pi_j\) commute
+because the stabilizer group is abelian.  By
+Proposition~\ref{prop:half-set-direct-sum}, addition is a bijection
+\(\bigoplus_{j\notin B}L(A_j)\to L\), and the lift is multiplicative on
+the stabilizer group; hence
+\[
+ \prod_{j\notin B}\Pi_j
+ =q^{-2m}\sum_{\ell\in L}\widetilde W_\ell
+ =\lvert\psi\rangle\langle\psi\rvert
+\]
+by \((2.2)\).
+
+(ii) Let \(G=L(C_1)+\cdots+L(C_k)\) and
+\(P_i=q^{-2}\sum_{\ell\in L(C_i)}\widetilde W_\ell\), a projector by the
+argument of (i).  If \(\sigma_{C_i}=\rho^\psi_{C_i}\), then Weyl
+orthogonality and \(|L(C_i)|=q^2\) give
+\(\Tr(\sigma P_i)=q^{m-1}\Tr\bigl((\rho^\psi_{C_i})^2\bigr)=1\); since
+\(0\leq P_i\leq I\), this forces \(P_i\sigma=\sigma\).  If the
+\(L(C_i)\) span \(L\), then \(\prod_iP_i\) is the projector onto the joint
+\(+1\) eigenspace of the whole stabilizer group, which is
+\(\lvert\psi\rangle\langle\psi\rvert\), so
+\(\sigma=\lvert\psi\rangle\langle\psi\rvert\sigma\); taking adjoints,
+\(\sigma
+ =\lvert\psi\rangle\langle\psi\rvert\sigma\lvert\psi\rangle\langle\psi\rvert
+ =\lvert\psi\rangle\langle\psi\rvert\).
+If instead \(G\neq L\), put
+\[
+ \tau=q^{-2m}\sum_{\ell\in G}\widetilde W_\ell .
+\]
+This is \(|G|q^{-2m}\) times the projector onto the joint \(+1\) eigenspace
+of the lifts of \(G\), whose rank \(q^{2m}/|G|\) exceeds one; so \(\tau\)
+is a density operator of rank greater than one.  Tracing out \(C_i^c\)
+annihilates every lift not supported in \(C_i\), and
+\(G\cap L(C_i)=L(C_i)\), so
+\[
+ \tau_{C_i}=q^{-2m}\cdot q^{m-1}\sum_{\ell\in L(C_i)}\widetilde W_\ell
+ =\rho^\psi_{C_i}
+\]
+by \((2.3)\).  Thus the reductions do not determine \(\psi\).  The first
+sentence is the case \(C_i=A_j\), where
+Proposition~\ref{prop:half-set-direct-sum} gives the spanning, and its
+final sentence gives \(k\geq m\).
+
+(iii) is \((2.3)\) with the AME condition.
+
+(iv) Commuting projectors make \(H\) diagonalizable with integer
+eigenvalues, and the eigenvalue \(0\) has eigenspace
+\(\bigcap_j\operatorname{range}\Pi_j=\operatorname{range}\prod_j\Pi_j
+ =\mathbb C\lvert\psi\rangle\) by (i).  Hence
+\(H\geq I-\lvert\psi\rangle\langle\psi\rvert\), which is the first
+inequality.  The gap is attained: a Pauli \(W_v\) whose pairing character
+is nontrivial on exactly one summand \(L(A_j)\) exists because the
+characters of \(L\) are realized by labels modulo \(L\), and
+\(W_v\lvert\psi\rangle\) has \(H=1\).  For the second inequality,
+\(\Tr(\sigma(I-\Pi_j))
+ =\Tr\bigl((\rho^\psi_{A_j}-\sigma_{A_j})P_j\bigr)\)
+with \(P_j=q^{m-1}\rho^\psi_{A_j}\), using
+\(\Tr(\rho^\psi_{A_j}P_j)=1\).  For a traceless Hermitian \(X\) and
+\(0\leq P\leq I\), \(\Tr(XP)\leq\Tr X_+=\tfrac12\|X\|_1\).  Sum over
+\(j\).
+
+(v) Let \(H'=\sum_kh_k\) with \(h_k\) acting on a set \(S_k\) of at most
+\(m\) parties.  By (iii),
+\(\langle\psi\rvert h_k\lvert\psi\rangle=q^{-2m}\Tr h_k\), so
+\(\langle\psi\rvert H'\lvert\psi\rangle=q^{-2m}\Tr H'\) is the mean of
+the eigenvalues of \(H'\).  If \(\psi\) is a ground state, the least
+eigenvalue equals the mean, so all eigenvalues coincide.
+\end{proof}
+
+For qubit stabilizer states, Wu, Yang, Wang, Wen, Qin, and Gao show that
+the reductions to the supports of any \(n\) generators determine the state
+among all density operators \cite[Theorem~2]{WuYangWangWenQin2015}.  The
+AME support geometry lowers the count from \(2m\) to \(m\), fixes every
+support to \(m+1\) parties, and shows that neither number can be reduced.
+Generic pure states on \(n\) parties are determined by reductions to about
+\(n/2+1\) parties \cite{JonesLinden2005}; here the locality is the same
+but the family is explicit.  The certificate in (iv) is the stabilizer
+witness of \cite{TothGuhne2005} applied to a frustration-free Hamiltonian,
+and the state \(\sigma\) need not be pure, stabilizer, or AME, which
+separates it from the approximate product-symmetry statements of
+Section~\ref{sec:quantitative}.
+
+\begin{corollary}[Stochastic conversion]
+\label{cor:stochastic-conversion}
+Let \(\lvert\psi\rangle,\lvert\phi\rangle\) be stabilizer
+\(\AME(2m,q)\) states with \(m\geq2\), and let \(A_1,\ldots,A_{2m}\) be
+linear operators on \(\mathbb C^q\) with
+\[
+ (A_1\otimes\cdots\otimes A_{2m})\lvert\psi\rangle=c\lvert\phi\rangle,
+ \qquad c\neq0 .
+\]
+Then every \(A_i\) is a nonzero scalar multiple of a Clifford unitary.
+Consequently equivalence under stochastic local operations and classical
+communication, LU equivalence, and LC equivalence coincide for these
+states; an exact single-copy conversion succeeds with probability one when
+the states are LC equivalent and with probability zero otherwise; and
+Corollary~\ref{cor:finite-recognition} decides which.
+\end{corollary}
+
+\begin{proof}
+The one-party reductions of \(\phi\) have full rank, so each \(A_i\) is
+invertible.  Write \(A_i=c_iU_ie^{H_i}\) with \(c_i\neq0\), \(U_i\)
+unitary, and \(H_i\) Hermitian and traceless: this is the polar
+decomposition, with the scalar chosen to remove the trace of the logarithm
+of the positive factor.  Let \(H=\sum_iH_i\) act on party \(i\) through
+\(H_i\), and put
+\[
+ f(t)=\log\bigl\|e^{tH}\lvert\psi\rangle\bigr\|^2,\qquad
+ \lvert\psi_t\rangle
+ =e^{tH}\lvert\psi\rangle\big/\bigl\|e^{tH}\lvert\psi\rangle\bigr\| .
+\]
+Then \(f'(t)=2\langle\psi_t\rvert H\lvert\psi_t\rangle\) and
+\(f''(t)=4\operatorname{Var}_{\psi_t}(H)\geq0\).  The states
+\(\psi_0=\psi\) and \(\psi_1\propto(\bigotimes_iU_i^\dagger)\phi\) both
+have one-party reductions \(q^{-1}I\), and each \(H_i\) is traceless, so
+\(f'(0)=f'(1)=0\).  Convexity forces \(f'\equiv0\) on \([0,1]\), hence
+\(\operatorname{Var}_\psi(H)=0\) and \(H\lvert\psi\rangle=0\).  Expanding
+\(\langle\psi\rvert H^2\lvert\psi\rangle=0\) with the two-party
+reductions \(q^{-2}I\) of \(\psi\) gives
+\[
+ 0=\sum_i\langle\psi\rvert H_i^2\lvert\psi\rangle
+  +\sum_{i\neq j}\langle\psi\rvert H_iH_j\lvert\psi\rangle
+  =q^{-1}\sum_i\Tr(H_i^2),
+\]
+so every \(H_i=0\) and \(A_i=c_iU_i\).
+Theorem~\ref{thm:lu-lc-rigidity} makes each \(U_i\) Clifford.  A
+successful branch of a stochastic protocol is a product operator as
+displayed, so LC-inequivalent states cannot be converted with positive
+probability, while LC-equivalent states are converted deterministically.
+\end{proof}
+
+Equality of the SLOCC and LU classes holds for every state with maximally
+mixed one-party reductions by the Kempf--Ness theorem
+\cite{KempfNess1979,GourWallach2011}, and for AME states explicitly
+\cite[Corollary~1]{BurchardtRaissi2020}; the conversion dichotomy is
+recorded in \cite{RajchelMieldziocEtAl2026}.  Kempf--Ness alone does not
+make each factor unitary: the stabilizer of such a state in the product of
+special linear groups is reductive and may contain a torus, as it does for
+the Greenberger--Horne--Zeilinger state, which is one-uniform.  The
+variance argument uses two-uniformity and applies verbatim to every
+two-uniform state; the Clifford conclusion is the stabilizer-AME rigidity.
+For qubit stabilizer states, compare the local-symmetry classification of
+\cite{EnglbrechtKraus2020}.
+
 \subsection{Encoder consequences}
 
 \begin{proof}[Proof of Corollary~\ref{cor:transversal-clifford}]
