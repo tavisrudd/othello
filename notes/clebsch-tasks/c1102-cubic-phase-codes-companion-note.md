@@ -42,6 +42,13 @@ cubic phase states, and the bipartition product-exclusion argument.
    orbit pairs), the new `[[26, 12, 2]]_13`, stabilizers and censuses;
 4. exhaustive distance-three negative at p = 7 and the Reed–Solomon benchmark;
 5. Waring bracket and the factory with exact enumerators (C1090).
+6. the synthesis bridge (memo section 9.1, currently only implicit in C1090): a Waring
+   decomposition `F = Σ c_j ℓ_j^3` is a circuit (Clifford computes `ℓ_j`, weighted cubic
+   phase, uncompute), so the Waring rank is a non-Clifford gate count in that model and
+   apolarity is the compilation problem; state it explicitly, tie it to Paper II's Macaulay
+   inverse-system cubic, and cite the apolarity/decomposition machinery of the deep-hole
+   (Reed–Solomon lane) work only after checking that it actually uses apolarity (the lane
+   handoff does not mention it; unverified as of 2026-09-07).
 
 Title candidates (author's call): *Strength-two trades, transversal cubic gates, and the magic
 of the Clebsch codes*; *Quadratic trades as certificates for coupled cubic-phase quantum
