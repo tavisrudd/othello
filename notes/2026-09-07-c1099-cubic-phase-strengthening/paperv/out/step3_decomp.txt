@@ -1,0 +1,10 @@
+|Stab(M_11)| = 60
+element orders in the stabilizer: {1: 1, 2: 15, 3: 20, 5: 24}
+orders of a, b, ab: 3, 5, 2
+<a,b> has order 60; equals the stabilizer: True
+trace of rho by element order (mod 11): 1:[10], 2:[2], 3:[1], 5:[0]
+integer character read off: chi_W = (10, 2, 1, 0, 0) -> 1 + V_4 + V_5
+isotypic ranks: {'triv': 1, 'V4': 4, 'V5': 5, "V3+V3'": 0}
+W = im(e_5) has dimension 5
+W is stable under the generators: True
+wrote out/decomp.pkl

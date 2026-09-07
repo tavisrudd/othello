@@ -1,0 +1,6 @@
+orbit size 22; sheet sizes 11/11
+scaling factors alpha_M used: [1]
+zero vectors at indices [14]; base matching there: True
+reconstructed point set == E11 row set: True
+positive sheets agree: True  (or swapped: False)
+F_reconstructed == 1 * B2  (mod 11)

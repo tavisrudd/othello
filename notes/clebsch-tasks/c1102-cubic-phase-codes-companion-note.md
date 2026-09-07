@@ -141,6 +141,19 @@ resources*.
   pegged `clebsch` because the note is a Clebsch companion. Re-pegging is the user's call, not
   this card's.
 
+## Paper V identification (settled 2026-09-07, for the note and for Paper V's hand-back)
+
+`notes/2026-09-07-c1099-logical-cubic-vs-paper-v-cubics.md`: the p = 11 logical cubic
+restricted to the unique five-dimensional `A_5`-summand of the logical space is a chordal
+member of Paper V's pencil (`8·det Hankel`, singular along the twelve-point rational normal
+quartic), never the conference member; at p = 7 the `s = 0` restriction is `3·det Hankel`.
+Global negation is `U_F ↔ U_F^{-1}`; the residual chordal-line torsor swaps the two chordal
+members, which are Clifford-equivalent via `q`, so it is a Clifford frame change on the five
+shadow directions and not a symmetry of the full gate. The note states this as a proposition
+with the Hessian-census separation `(1,120,27720,133210)` vs `(1,300,22260,138490)`.
+Hand-back candidate for Paper V (its owner's call, needs a forward release): one sentence
+giving the two torsors their operational reading (gate inversion; logical frame change).
+
 ## Hand-back once the note exists
 
 - Series coda (programme map, shared apparatus per C919): one sentence adding the

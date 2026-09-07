@@ -1,0 +1,12 @@
+six-set Omega (pairs of M_11): {0,1}, {10,inf}, {2,5}, {3,7}, {4,9}, {6,8}
+permutation image of A_5 in S_6 has order 60; transitive: True
+dim Hom_{A_5}(A_M, W) = 1
+bridge T verified equivariant on all 60 elements; det T != 0: True
+restricted cubic c = F_11 o psi obtained and checked at 20 points
+c is A_5-invariant: True
+dim Pi = dim Sym^3(A_M^*)^{A_5} = 2
+A_5-invariant order-six conference two-graphs on Omega: 64 signings, 1 projective triangle cubics
+odd permutations of Omega normalizing the A_5-image: 60
+  of which involutions: 10
+chosen outer permutation tau = [1, 0, 4, 5, 2, 3]
+wrote out/bridge.pkl

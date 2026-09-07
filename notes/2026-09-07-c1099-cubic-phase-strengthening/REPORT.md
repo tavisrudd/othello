@@ -374,10 +374,19 @@ is sampled, not exhaustive; `d_X` for the new p = 11 and p = 13 codes is only an
    stabilizer qudit, with `M_2 = 8.63` at p = 7. No conic trade cubic has that (all are
    concise with `r_min = 3`), so the logical cubics are not Clifford-equivalent to the
    conference cubic; a Clifford-invariant certificate of Paper V's "chordal, not conference".
-   Settled at the level of a necessary condition; the exact identification of the logical
-   cubic with Paper V's chordal Hankel companion is immediate (`F_logical(u) = μ_3(u,u,u)`,
-   the signed third moment as a cubic form on the dual of the ambient space) and belongs in
-   the C1102 note.
+   Settled, and then upgraded to an exact identification in
+   `../2026-09-07-c1099-logical-cubic-vs-paper-v-cubics.md` (scripts under `paperv/`): the
+   logical space at p = 11 decomposes under `A_5` as `1 ⊕ V_4 ⊕ V_5`; the restriction of
+   `F_11` to the unique five-dimensional summand is a **chordal** member of Paper V's
+   invariant pencil (singular along the twelve-point rational normal quartic, equal to
+   `8·det Hankel` in explicit coordinates, matching Paper V's own projected sheet cubic),
+   never the conference member; the two are separated by their Hessian censuses over
+   `F_11^5`, `(1, 120, 27720, 133210)` against `(1, 300, 22260, 138490)`. Torsors: sheet
+   exchange negates the cubic (`U_F ↔ U_F^{-1}`, the global-negation torsor); Paper V's `q`
+   swaps the two chordal members, which are Clifford-equivalent via `q` itself, so the
+   residual chordal-line torsor is a Clifford frame change on the five shadow directions and
+   not a symmetry of the ten-qudit gate. At p = 7 the restriction to `s = 0` is `3·det Hankel`,
+   chordal without any projection.
 8. **Rigidity is generic.** Every trade found, including the trivial translation trade, has
    `dim L^{∘2} = 2p - 1`. Paper II's rigidity therefore does not distinguish the exceptional
    configurations at the code level; only the symmetry and the magic do. Settled by

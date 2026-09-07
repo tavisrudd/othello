@@ -1,0 +1,13 @@
+|N_{PGL_2(11)}(A_5)| = 60; contains an outer-coset element: False
+the configuration is symmetric under x -> -x: False
+-I is in rho(PGL_2(11)): False
+on W the sheet exchange is -1: c -> -c, projectively fixed: True; equal as actual cubics: False
+
+q preserves the standard quadratic form I+J on the augmentation: True
+q is an involution: True
+q sends the logical chordal cubic to the other chordal member: True
+q is A_5-equivariant on the augmentation: False
+the identity-on-(1+V_4) extension of q multiplies F_11 by: [0, 1, 10, 2, 3, 4, 5, 6, 7, 8, 9, 'nonproportional'] (a single scalar would mean q lifts to a symmetry of the full ten-qudit cubic)
+elements of PGL_2(11) whose action preserves W: 60 (= |A_5|: True); none of them induces q, since q is not A_5-equivariant
+stabilizer Renyi-2 magic of the 5-qudit chordal shadow: M_2 = 10.6517 nats
+stabilizer Renyi-2 magic of the 5-qudit conference cubic: M_2 = 10.7070 nats
