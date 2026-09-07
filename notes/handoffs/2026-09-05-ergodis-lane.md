@@ -125,12 +125,14 @@ entry before starting.
 
 ### C1079 — ergodis-evolve review and synthesis plan
 
-Evidence collection in progress, including prior C985 research. Bring together core evolve,
+Evidence collection complete across core, private/C1016, and prior C985 research. Next: synthesize
+the convergence plan from `notes/2026-09-06-c1079-ergodis-evolve-review.md`. Bring together core evolve,
 private/C1016 work, and extension spikes into a
 clear staged plan for the best autonomous structure-discovery and theorem/parameter-driven
 quotient system, steerable through a Unix socket. Reconcile conflicting inherited intent against
-Tavis’s explicit autonomy goal. Scope and acceptance:
-`notes/2026-09-06-c1079-ergodis-evolve-brief.md`. Planned report:
+Tavis’s explicit autonomy goal. Target ownership: reusable evolve machinery/workflows in core,
+with selected heuristics/theorems optionally private. Scope and acceptance:
+`notes/2026-09-06-c1079-ergodis-evolve-brief.md`. Evidence report:
 `notes/2026-09-06-c1079-ergodis-evolve-review.md`.
 
 ### C985 — Ergodis exact algebraic optimization paper

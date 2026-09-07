@@ -1,7 +1,8 @@
 # C1079 — ergodis-evolve review and synthesis plan
 
 **Lane**: `ergodis`
-**Status**: IN PROGRESS; evidence collection authorized on 2026-09-06 using Terra sub-agents.
+**Status**: IN PROGRESS; Terra evidence collection complete; synthesis plan remains open.
+Evidence map: `notes/2026-09-06-c1079-ergodis-evolve-review.md`.
 
 ## Authoritative product intent
 
@@ -78,6 +79,26 @@ Heuristic search can use proved theorems, and heuristic candidate selection can 
 proof-generating run when all soundness obligations for the resulting claims are discharged.
 Assess concrete examples of these combinations in the existing implementations and identify
 where current terminology, admission rules, or artifacts collapse the distinctions.
+
+## Core machinery and private knowledge boundary
+
+User direction on 2026-09-06: evolve’s reusable machinery, core abstractions, and workflows
+belong in Ergodis core. Selected heuristics and theorems may remain private trade secrets.
+The synthesis must classify components by that boundary, not permanently assign a generic
+workflow to private merely because C1016 or a spike first implemented it.
+
+Map core-owned proposer/evaluator/admission interfaces, lifecycle/control/persistence workflows,
+and generic composition/quotient machinery separately from optional private heuristic policies,
+theorem implementations, parameter recipes, and task-specific adapters or fixtures. These are
+classification targets for the review, not a decision that every example must stay private.
+Private implementations should consume core contracts through the existing one-way dependency;
+core must not require, name, or leak private knowledge. Confidentiality is independent of search
+mode, origin, and validation: private does not imply heuristic and public does not imply proved.
+
+Recommend concrete promotion and extension seams while preserving existing history and validation
+gates. This user direction sets the intended ownership boundary; it does not authorize public
+export/push or choose which specific heuristics/theorems to disclose. Core checkout ownership and
+public release remain separate decisions.
 
 ## Boundary and acceptance
 
