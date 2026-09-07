@@ -286,3 +286,25 @@ acting on the object rather than the bookkeeping, and a calibration resource;
 the ame-lu setting has none of them, and odd characteristic admits no
 two-element quotient at all.  Do not reopen.  The refutation was productive
 anyway — see the C796 report.  `golden` remains foreign and unedited.
+
+### 2026-09-07 — which `m`-families of `(m+1)`-sets span the label group
+
+**Observation (C1089, incidental):** the marginal-certification proposition
+proves that reductions to `(m+1)`-sets `C_1,…,C_k` determine a stabilizer
+`AME(2m,q)` state among all density operators exactly when the supported
+subgroups `L(C_i)` span `L`, and the half-set family `B ∪ {j}` does so with
+`k = m`.  Nothing says which other `m`-families span.  Since each `L(C_i)`
+has order `q^2`, an `m`-family spans iff the subgroups are independent, and
+the family `B ∪ {j}` is independent because restriction to `B^c` is injective
+on `L`.  For a family without a common `m`-core the same restriction trick
+fails, so independence is a genuine condition on the state, not only on the
+set system.
+**Why it may matter / strongest question:** a family of `(m+1)`-sets whose
+subgroups are independent for *every* stabilizer AME state would be a purely
+combinatorial certificate design; one that depends on the state would give a
+new LU invariant (the spanning hypergraph).  Also open: whether fewer than `m`
+reductions can suffice among *pure* states (UDP), since the mixed-state
+counterexample lives in a rank-`q^{2(m-k)}` joint eigenspace.
+**Evidence:** none computed.  A four-party (`m = 2`) check over `q = 2, 3`
+would settle the first question at that size in minutes.
+**Status:** OPEN, not allocated.
