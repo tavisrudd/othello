@@ -95,3 +95,5 @@ would have been an incorrect replacement for “resolution”. No new mathematic
 mystery emerged; q=7,8 explanations and the publication citation remain open.
 
 Authority validation passed: `nix develop path:/home/tavis/src/othello/papers/continuation-graph-rigidity --command make -C papers/continuation-graph-rigidity check pdf`. The deterministic PDF is 336758 bytes. The changed finite-boundary page was visually inspected: definition and table fit cleanly. Scoped whitespace checks pass.
+
+Export complete: authority `1c5467e44`, standalone forward commit `fde3690`. Guarded exporter verification reports content SHA-256 `89e0ae20621532ed9de93b0f46ab539fcee390721b96ad3a2526ef0fd819cd3e`. Standalone `make check` and deterministic manuscript check both pass; its PDF is byte-identical to the authority. No GitHub or DOI action was taken.
