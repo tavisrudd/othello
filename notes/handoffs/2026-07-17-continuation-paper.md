@@ -45,6 +45,8 @@ reconstruction remains outside the headline under the existing N1-only ruling.
   Terminology and notation audit corrected pencils, clarified resolutions and
   simplified local proof wording; report:
   `notes/2026-09-07-c1110-continuation-terminology-audit.md`.
+  README now gives a mathematical overview before verification commands:
+  `notes/2026-09-07-c1110-continuation-readme.md`.
   Export/validation record: `notes/2026-09-07-c1110-continuation-upgraded-manuscript.md`.
 
 ## Next steps
