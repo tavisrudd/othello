@@ -4499,8 +4499,17 @@
       "last": 1085,
       "purpose": "Portable scalar language ownership and bounded stream codecs with compatibility and native/WASM conformance",
       "sequence": 500
+    },
+    {
+      "count": 1,
+      "first": 1086,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1086,
+      "purpose": "Independent finite verification crate and solver admission bridge with explicit verification context and native/WASM validation",
+      "sequence": 501
     }
   ],
-  "next_id": 1086,
+  "next_id": 1087,
   "schema": "codex-task-id-allocations-v1"
 }
