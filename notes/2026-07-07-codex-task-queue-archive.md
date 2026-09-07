@@ -5568,3 +5568,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1083 `[ergodis]` [REPORTED 2026-09-07]** — bounded portable campaign transitions, scoped checking/execution and command-log replay complete; 10 model sequences, 7 adversarial tests, full native/Python/WASM regression gates pass; core `6269cd1` → `notes/2026-09-07-c1083-campaign-transitions.md`.
 
 - **C1084 `[ergodis]` [COMPLETE 2026-09-07]** — Portable native/browser control and session architecture; crate dependency plan, repository/protocol contracts, staged migration and unchanged performance discipline → `notes/2026-09-07-c1084-portable-control-architecture.md`
+
+- **C1085 `[ergodis]` [COMPLETE 2026-09-07]** — Portable scalar/text/codec ownership, bounded stream input, native compatibility and default/native/WASM validation; shared domain glossary → `notes/2026-09-07-c1085-portable-scalar-language.md` (core `57af8b4`).

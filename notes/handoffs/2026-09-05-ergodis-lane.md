@@ -145,12 +145,19 @@ C1084's portable control/session architecture and staged migration plan are comp
 frontends; durable history independent of processes; explicit view/verify/replay/resume/fork
 workflows, host/repository/compilation-unit boundaries; native64 performance gates unchanged. This is a design, not a claim of implemented hosts or platform support.
 
-**In progress — C1085**: stage 1 portable scalar/text/codec ownership extraction with compatibility
-reexports, default/native/WASM conformance and unchanged hot evaluators; report
-`notes/2026-09-07-c1085-portable-scalar-language.md`. Follow with the shared
-Campaign facade in a portable runtime crate, then browser control and durable native/browser hosts.
-Responsive autonomous jobs follow those boundaries; general quotient/lifting and industry module
-loading remain subsequent gates. C1032 remains open for full original acceptance review.
+C1085's portable scalar/text/codec extraction is complete: core `57af8b4`, report
+`notes/2026-09-07-c1085-portable-scalar-language.md`. Native compatibility retained; default scalar
+and bounded byte-reader tests pass; native/WASM layout assertions remain exact. Public terminology
+authority: core `docs/glossary.md`. C1084 includes run metadata/notes, forkable history and the
+separate orchestration bounded context above the mathematical engine.
+
+**Next**: allocate the portable orchestration crate and bounded shared client/session contract;
+move the current Campaign workflow above core with explicit consumer migration, retaining its
+semantics and avoiding a cyclic compatibility reexport. Then implement browser control and durable
+run records/metadata/annotations/history through native/browser repository adapters. Responsive
+autonomous jobs, general quotient/lifting and industry module loading follow. Preserve the
+no-control-in-kernels boundary and native performance gates. C1032 remains open for full original
+acceptance review.
 
 ### C985 — Ergodis exact algebraic optimization paper
 
@@ -174,6 +181,6 @@ host, so cold end-to-end `g41` replays need it regenerated first.
 ## Lane ownership
 
 This lane was split out of `complete-ports` on 2026-09-05 and owns C985, C1016, C1017,
-C1031-C1033, C1040-C1048, C1052, C1061, C1062, C1070, C1072-C1074, C1079, C1080, C1081, C1082, C1083, C1084. Future Ergodis engine, benchmark, tooling,
+C1031-C1033, C1040-C1048, C1052, C1061, C1062, C1070, C1072-C1074, C1079, C1080, C1081, C1082, C1083, C1084, C1085. Future Ergodis engine, benchmark, tooling,
 capability, and Ergodis-paper tasks use `[ergodis]`. The bounded-recovery manuscript work (C325,
 C953, C955, C964) stays on `[complete-ports]`.

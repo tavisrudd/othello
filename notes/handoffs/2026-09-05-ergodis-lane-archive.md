@@ -66,3 +66,13 @@ Completed planning-only source audit and architecture in `../2026-09-07-c1084-po
 ### C1084 follow-up — history independent of live processes
 
 Extended the architecture with one daemon per workspace, durable campaign/run/artifact identities, offline history viewing, distinct attach/verify/replay/resume/fork operations, activation fencing and crash reconciliation. Existing Campaign Resume remains a gate operation; historical activation and mid-solve continuation are explicitly different capabilities. Documentation only; implementation order and performance gates unchanged.
+
+## 2026-09-07 — C1085 portable scalar language
+
+Core `57af8b4` extracts scalar/text semantics and a bounded stream decoder from native control;
+compatibility reexports remain. Exact native64/wasm32 CompiledPredicate size+alignment guards,
+default scalar conformance and full native/Python/browser regression gates pass. Public glossary
+now owns domain terminology. C1084 expanded with metadata/annotations, forkable run history and
+separate orchestration bounded context. Report: `../2026-09-07-c1085-portable-scalar-language.md`.
+Next: portable runtime/workflow ownership and shared client contract, without control dependencies
+in solvers or kernels. Metadata persistence remains planned, not claimed as implemented.
