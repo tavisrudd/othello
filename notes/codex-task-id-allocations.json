@@ -4616,8 +4616,17 @@
       "last": 1098,
       "purpose": "Retire legacy certificate authority and migrate supported consumers",
       "sequence": 513
+    },
+    {
+      "count": 1,
+      "first": 1099,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 1099,
+      "purpose": "Cubic-phase codes strengthening: stabilizer Renyi magic, distance-3 subcode search, family search beyond p=7,11; then decide the companion note",
+      "sequence": 514
     }
   ],
-  "next_id": 1099,
+  "next_id": 1100,
   "schema": "codex-task-id-allocations-v1"
 }
