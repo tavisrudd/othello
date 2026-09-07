@@ -96,7 +96,7 @@
       "hypotheses": "Coordinate triangle in PG(2,q)",
       "label": "thm:triangle",
       "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
-      "statement_sha256": "9bb4cd9da1da9668e354bdebeb0fceca91ddb055033b60a54f33cc42934094f7",
+      "statement_sha256": "d0da1bef57a01f6318b8fc4cee947ace3484b9c904933258cbbfce164bd618b7",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     {
@@ -118,7 +118,7 @@
       "hypotheses": "q>=5; alphabet permutations satisfy the punctured quotient equation",
       "label": "lem:isotopy",
       "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
-      "statement_sha256": "0ef3056c9a3b618b164f3133ce22f9e4356a365dbe846b341b1149c790473968",
+      "statement_sha256": "c1cda32b3c4e2e0b75ab09018622c266ab5c8df93e30c83b107429e21f58e240",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     {
@@ -140,7 +140,7 @@
       "hypotheses": "Isotopy range q>=5, uniform intrinsic recovery range q>=13",
       "label": "rem:small-order",
       "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
-      "statement_sha256": "a91ddcb837721749cfbed3ae4c255b161453ca66c9cc1e234cc006293a51e6e3",
+      "statement_sha256": "7c1b5307dc9cd79ea4117f6a46ec1e590c684f533d5d0f4145e10699f83bff0e",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     {
@@ -177,14 +177,14 @@
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     {
-      "cautions": "Exact finite computational evidence; Python/Sage/nauty trust, no Lean proof.",
+      "cautions": "Exact finite computation. A resolution includes both the clique decomposition and its partition into four parallel classes; no Lean formalization claimed.",
       "conclusion": "Complete resolutions, full automorphism orders and index-two exceptional cosets",
       "coverage": "absent",
       "declarations": [],
       "hypotheses": "Exact finite domain q=5,7,8,9,11",
       "label": "prop:boundary",
       "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
-      "statement_sha256": "83f24edf61771a09d393b1bf6719ca3254cd4214da5ef68f010bacd6f15fec6b",
+      "statement_sha256": "81dca8a56bbb896791cefba5c29ff405488abeba2b5060c49954082aa83bc83e",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     {

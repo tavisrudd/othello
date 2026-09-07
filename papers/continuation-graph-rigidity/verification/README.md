@@ -15,7 +15,7 @@ x,y outside {0,1} and x!=y. Graphs are simple and uncoloured; adjacency is confl
 
 `generate_boundary.py` uses Sage determinant incidence and the Sage automorphism
 algorithm. It derives all size-(q-3) cliques from the complete maximal-clique
-list, then enumerates exact vertex covers and exact edge covers.
+list, then enumerates exact covers of the vertex set and of the edge set.
 `replay_boundary.py` constructs field arithmetic independently in ordinary
 Python and uses coordinate equality for adjacency, enumerates fixed-size cliques
 directly, and independently obtains full automorphism orders from nauty's
@@ -46,7 +46,7 @@ for subsequent replays. `SHA256SUMS` records load-bearing source and output hash
 
 ## Recognition and controls
 
-`recognize.py` receives only adjacency, recovers pencils, completes a cyclic
+`recognize.py` receives only adjacency, recovers the four partitions, completes a cyclic
 quotient table, and tries generator images in a supplied field. Its finite-field
 reference implementation supports prime fields and explicit orders 8,9;
 recognition itself requires q>=13. Unsupported extension-field models return no
@@ -58,7 +58,7 @@ relabelled inputs, a duplicated coordinate, a deleted edge, and a degree-preserv
 edge switch. Coordinate validation checks every vertex and every adjacency pair.
 
 `benchmark.json` records one wall-time sample comparing reconstruction and Sage
-isomorphism with an explicit transport, excluding graph construction. Reproduce
+isomorphism with an explicit isomorphism, excluding graph construction. Reproduce
 with `make benchmark`; times will vary and are not byte-replayed. The recorded
 reconstruction implementation is slower than the generic control at these three
 orders. This prototype demonstrates correctness and exposes structure; it does not

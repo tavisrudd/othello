@@ -24,10 +24,7 @@
 \newcommand{\PG}{\mathrm{PG}}
 \newcommand{\PGL}{\mathrm{PGL}}
 \newcommand{\PGammaL}{\mathrm{P\Gamma L}}
-\newcommand{\cG}{\mathcal G}
 \newcommand{\cH}{\mathcal H}
-\newcommand{\cS}{\mathcal S}
-\newcommand{\cV}{\mathcal V}
 \newcommand{\Aut}{\operatorname{Aut}}
 \newcommand{\Stab}{\operatorname{Stab}}
 
@@ -55,7 +52,7 @@ algorithmic and gives polynomial-time recognition over a supplied finite
 field, with an independently checkable coordinate certificate.
 An exhaustive finite computation closes the range $5\le q<13$:
 semilinear rigidity holds at $q=7,9,11$, whereas $q=5,8$ each have exactly
-two ways to organize the graph into four tangent pencils, and the
+two resolutions into four parallel classes of cliques, and the
 semilinear subgroup has index two in the full automorphism group.
 The stable-range proof is independent of this computation.
 \end{abstract}
@@ -85,10 +82,13 @@ the first obstacle to extending a graph symmetry to the plane.
 
 The selected point on a tangent is its \emph{centre}; a secant meets $K$
 in two points. A tangent trace consists of the legal points on
-that line; the pencil at a centre is the family of tangents through it.
-We write $\PG(2,q)$ for the plane over $\F_q$. A semilinear collineation
-is induced by an invertible linear coordinate change composed with a
-field automorphism; these form $\PGammaL(3,q)$.
+that line. The pencil with centre $t$ consists of all lines through $t$;
+its nonempty tangent traces partition the continuation points. We call this
+partition the class with centre $t$.
+We write $\PG(2,q)$ for the plane over $\F_q$. A projectivity is induced
+by an invertible linear map; allowing a field automorphism as well gives
+a semilinear collineation. These form $\PGammaL(3,q)$. Stabilizers of
+point sets are taken setwise.
 
 A graph symmetry initially preserves only incompatible pairs. To extend
 it, we recover the tangent traces, group them by centre, and then constrain
@@ -151,7 +151,7 @@ a disjointness clique using several centres has at most four members.
 These two size gaps give the intrinsic reconstruction
 \[
  \text{graph}\ \longrightarrow\ \text{tangent traces}
- \ \longrightarrow\ \text{four pencils}
+ \ \longrightarrow\ \text{centre classes}
  \ \longrightarrow\ \text{field coordinates}.
 \]
 The last arrow uses both quotient maps: multiplication alone leaves
@@ -169,7 +169,7 @@ graphs of uniform hypergraphs of bounded pair degree. A star clique
 consists of hyperedges sharing one symbol. For four-element hyperedges
 with each pair of symbols in at most one hyperedge, their threshold for
 recovering such cliques is $14$; the
-centre-resolved argument below gives $10$. Hypergraph reconstruction
+argument using the four centre classes below gives $10$. Hypergraph reconstruction
 recovers the tangent symbols. Recovering their centre classes and forcing
 semilinear extension are further steps, proved here without importing a
 general hypergraph-recognition theorem. Their broader recognition theorem
@@ -206,7 +206,7 @@ automorphism group. The finite classification in
 Section~\ref{sec:boundary} proves rigidity at $q=7,9,11$.
 Thus $q\ge13$ is the range of the uniform geometric proof. The finite
 boundary locates exactly where the encoding loses uniqueness: at $q=5,8$
-the graph admits two four-pencil resolutions, exchanged by its extra
+the graph admits two resolutions into four parallel classes, exchanged by its extra
 symmetries. This distinguishes a failure of reconstruction from a
 limitation of the large-clique method.
 
@@ -227,6 +227,8 @@ $K\subset P$ be a $k$-arc.  Define
   V_K=\{x\in P\setminus K:K\cup\{x\}\text{ is an arc}\}.
 \]
 All graphs are simple; adjacency formulas concern distinct vertices.
+We write $N_G(v)$ for the open neighbourhood of $v$ in $G$, omitting the
+subscript when the graph is clear.
 The \emph{continuation graph} $G_K$ has vertex set $V_K$, with
 \begin{equation}
   x\sim_K y
@@ -270,7 +272,7 @@ because $x$ is legal, and their intersection is $x$. Hence $S_x$ determines
 $x$, so distinct points give distinct hyperedges.
 \end{proof}
 
-For $k\ge2$, after choosing a label for each pencil $\Sigma_t$, the map
+For $k\ge2$, after labelling the tangents in each $\Sigma_t$, the map
 \[
   x\longmapsto(xt)_{t\in K}\in\prod_{t\in K}\Sigma_t
 \]
@@ -423,14 +425,14 @@ rook adjacency.
 \begin{theorem}[Three points]\label{thm:triangle}\coverage{absent}
 Let $K$ be a triangle in $\PG(2,q)$.  With its vertices normalized to the
 coordinate points, the legal vertices are $(x:y:1)$ with
-$x,y\in\F_q^*$, and
+$x,y\in\F_q^\times$, and
 \begin{equation}
  (x,y)\sim(x',y')
  \Longleftrightarrow
  x=x'\ \text{or}\ y=y'\ \text{or}\ x/y=x'/y'.
  \label{eq:triangle}
 \end{equation}
-Every automorphism $\alpha$ of the multiplicative group $\F_q^*$ therefore
+Every automorphism $\alpha$ of the multiplicative group $\F_q^\times$ therefore
 induces the graph automorphism $(x,y)\mapsto(\alpha(x),\alpha(y))$.  This is
 not induced by a semilinear collineation unless $\alpha$ is a field
 automorphism.
@@ -447,14 +449,15 @@ Since $\alpha(1)=1$, equality with the displayed graph automorphism forces
 $A=B=1$ and $\alpha=\sigma$.
 \end{proof}
 
-For example, inversion on $\F_5^*$ is nonambient.  These examples separate
+For example, inversion on $\F_5^\times$ is nonambient.  These examples separate
 intrinsic centre recovery from ambient semilinear extension.
 
 \section{The four-point frame}
 \label{sec:frame}
 
-The geometric step has recovered four pencils. We now ask which
-permutations of their labels preserve the graph. Three pencils encode
+The geometric step has recovered four partitions into tangent traces.
+We now ask which permutations of their labels preserve the graph. Three
+partitions encode
 multiplication; the fourth compares multiplication before and after a
 translation. For a first reading, retain the conclusions of the next two
 lemmas: the first forces one multiplicative permutation, and the second
@@ -502,16 +505,15 @@ labels can also be read from the quotient formulas, so consistency gives
  \frac{\alpha(x)-1}{\beta(y)-1}
    &=\delta\left(\frac{x-1}{y-1}\right)\label{eq:shift}
 \end{align}
-for all distinct $x,y\in D$. The word \emph{isotopy} below refers to
-these initially independent relabellings of the inputs and output of
-division. The missing diagonal $x=y$ will force the two input relabellings
-to coincide.
+for all distinct $x,y\in D$. These are initially independent
+permutations of the row, column and quotient labels. The missing diagonal
+$x=y$ will force the row and column permutations to coincide.
 
-\begin{lemma}[Punctured multiplicative isotopy]\label{lem:isotopy}\coverage{absent}
+\begin{lemma}[Relabelling a punctured division table]\label{lem:isotopy}\coverage{absent}
 Suppose permutations $\alpha,\beta,\gamma$ of $D$ satisfy
 \eqref{eq:mult} for all distinct $x,y\in D$, with $q\geq5$.  Then
 $\alpha=\beta=\gamma=\chi$, where $\chi$ extends to an automorphism of the
-multiplicative group $\F_q^*$.
+multiplicative group $\F_q^\times$.
 \end{lemma}
 
 \begin{proof}
@@ -527,19 +529,19 @@ Writing $x=ry$, equation~\eqref{eq:mult} becomes
  \label{eq:punctured}
 \end{equation}
 whenever $r,y,ry\ne1$.  Extend $\gamma(1)=1$.  If $r,s,rs\ne1$, choose
-$y\in\F_q^*\setminus\{1,s^{-1},(rs)^{-1}\}$; this is possible since
-$|\F_q^*|\geq4$.  Applying \eqref{eq:punctured} twice gives
+$y\in\F_q^\times\setminus\{1,s^{-1},(rs)^{-1}\}$; this is possible since
+$|\F_q^\times|\geq4$.  Applying \eqref{eq:punctured} twice gives
 $\gamma(rs)=\gamma(r)\gamma(s)$.  The inverse case follows by choosing
-$y\in\F_q^*\setminus\{1,r\}$ and comparing $h(y)$ with $h(rr^{-1}y)$.  Hence $\gamma$
+$y\in\F_q^\times\setminus\{1,r\}$ and comparing $h(y)$ with $h(rr^{-1}y)$.  Hence $\gamma$
 extends multiplicatively.
 
 Equation \eqref{eq:punctured} also makes $h(x)/\gamma(x)$ constant on $D$, say
 $h(x)=A\gamma(x)$.  Since both $h$ and $\gamma$ permute $D$, one has
-$AD=D$.  But $AD=\F_q^*\setminus\{A\}$ and
-$D=\F_q^*\setminus\{1\}$, so $A=1$.
+$AD=D$.  But $AD=\F_q^\times\setminus\{A\}$ and
+$D=\F_q^\times\setminus\{1\}$, so $A=1$.
 \end{proof}
 
-\begin{lemma}[Shifted isotopy forces Frobenius]\label{lem:frobenius}\coverage{absent}\uses{lem:isotopy}
+\begin{lemma}[Compatibility with translation]\label{lem:frobenius}\coverage{absent}\uses{lem:isotopy}
 Assume $q\ge5$. If permutations $\alpha,\beta,\gamma,\delta$ of $D$ satisfy both
 \eqref{eq:mult} and \eqref{eq:shift}, then all four are restrictions of one
 field automorphism of $\F_q$.
@@ -555,7 +557,7 @@ $\lambda$ is another multiplicative-group automorphism. Thus $\chi$ is
 multiplicative both in the original coordinates and after translating
 $1$ to $0$. We now show that this forces a Frobenius power.
 
-Since $\F_q^*$ is cyclic, write $\chi(x)=x^m$ and $\lambda(x)=x^n$, with
+Since $\F_q^\times$ is cyclic, write $\chi(x)=x^m$ and $\lambda(x)=x^n$, with
 $1\leq m,n\leq q-2$ and both exponents coprime to $q-1$.  The definition
 of $\eta$ says
 \[
@@ -568,7 +570,7 @@ and then $(1-X)^m=1-X^m$.  All intermediate binomial coefficients vanish
 in characteristic $p$.  Write $m=p^r u$ with $p\nmid u$. If $u>1$, the coefficient of
 $X^{p^r}$ in $(1-X)^m=(1-X^{p^r})^u$ is $-u\ne0$,
 contradicting the vanishing of intermediate coefficients. Thus $u=1$.
-Therefore all four maps are the same Frobenius automorphism.
+Therefore all four maps are the same power of the Frobenius automorphism.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
@@ -602,7 +604,7 @@ It is therefore the identity.
 \end{proof}
 
 \begin{remark}[The small-order boundary]\label{rem:small-order}\coverage{absent}\uses{prop:boundary,lem:isotopy}
-The isotopy lemmas already apply for $q\geq5$; the bound $q\geq13$ enters
+The division-table lemmas already apply for $q\geq5$; the bound $q\geq13$ enters
 only when the uncoloured graph is required to recover its four coordinate
 partitions.  At $q=5$, $G_K\cong K_6\setminus3K_2$, whose automorphism group
 has order $48$, twice the projective frame stabilizer.  Section~\ref{sec:boundary} settles the remaining orders $7,8,9,11$
@@ -613,13 +615,13 @@ by exact finite enumeration.
 \section{Recognition and coordinate certificates}\label{sec:algorithm}
 
 The proof can be made constructive without searching through all
-permutations of the field alphabet. First recover the pencils. Then the
-missing entries in three pencils complete a group division table, leaving
+permutations of the field alphabet. First recover the four partitions.
+Then the missing entries in three partitions complete a division table, leaving
 only the possible images of a cyclic generator to test. The final check
 compares every pair of vertices, so the recovered coordinates are a
 certificate even when the input was not promised to come from geometry.
 
-\begin{lemma}[Four-point trace seeds]\label{lem:seeds}\coverage{absent}\uses{prop:normal,lem:clique}
+\begin{lemma}[Recovering traces by common neighbours]\label{lem:seeds}\coverage{absent}\uses{prop:normal,lem:clique}
 Let $K$ be a four-point frame and $B$ a tangent trace. A vertex outside
 $B$ has at most three neighbours in $B$. Consequently, if $Q$ consists
 of four vertices of $B$, then
@@ -678,12 +680,12 @@ In the normal form this is the identity $x/1=x$: row $x$ omits the
 quotient value $x$.
 
 The third symbol at cell $(x,y)$ now gives $x/y$ for distinct $x,y\in D$.
-To complete division on $\F_q^*$, we restore the identity row and column
+To complete division on $\F_q^\times$, we restore the identity row and column
 and the diagonal; zero does not belong to this table.
 Adjoin a symbol $1$, put $x/x=1$ and $x/1=x$, and define $1/y$ as the
 unique symbol of $D$ missing from column $y$. Set $1/1=1$. Reject
 inconsistent or nonunique entries. For a frame this completes the full
-division table of $\F_q^*$.
+division table of $\F_q^\times$.
 
 \emph{Assign field values and verify.}
 Set $ab=a/(1/b)$. Try each element as a cyclic generator, checking its
@@ -702,9 +704,9 @@ pass these tests. Conversely the final check itself proves that a passing
 map is an isomorphism; no promised geometry is needed for soundness.
 
 \emph{Cost.}
-There are at most $O(n^4)$ seeds, with $O(n^2)$ work per closure and
+There are $O(n^4)$ four-vertex subsets, with $O(n^2)$ work per closure and
 clique check. After the trace-count check the disjointness graph has
-$O(\sqrt n)$ vertices, so its five-seed enumeration and checks cost
+$O(\sqrt n)$ vertices, so enumerating and checking its five-cliques costs
 $O(n^{7/2})$. Table completion, cyclic-table checks and all generator
 images take polynomial time bounded by $O(q^3+qn^2)$ here. The initial
 vertex count gives $q=O(\sqrt n)$, establishing the stated coarse bound.
@@ -731,19 +733,22 @@ and timing protocol are described in the verification appendix.
 
 \section{The finite boundary}\label{sec:boundary}
 
-A \emph{four-pencil resolution} is an unordered set of four partitions
-of $V(G)$, each into $q-2$ cliques of size $q-3$, such that every edge
-belongs to exactly one block across the four partitions. Blocks need
-not be maximal cliques. The geometric pencils give one such resolution.
+A \emph{parallel class} is a partition of $V(G)$ into $q-2$ cliques
+of size $q-3$, called blocks. A \emph{resolution} is an unordered set of
+four parallel classes whose blocks partition the edge set of $G$.
+Here parallelism means disjointness of the vertex sets of the blocks.
+Thus it specifies both a $K_{q-3}$-decomposition and its resolution into
+parallel classes. Blocks need not be maximal cliques. The tangent traces
+at the four frame points give the \emph{geometric resolution}.
 
 \begin{samepage}
 \begin{proposition}[Exact small-order census]\label{prop:boundary}\coverage{absent}\evidence{boundary}\uses{prop:normal,lem:isotopy,lem:frobenius}
 For the indicated frame graphs the following table is exact. Here $b$
-counts all $(q-3)$-cliques, $p$ counts their partitions of the vertex set,
-and $r$ counts four-pencil resolutions.
+counts all $(q-3)$-cliques, $a$ counts parallel classes,
+and $r$ counts resolutions.
 \[
 \begin{array}{c|r|r|r|r|r}
-q&|V|&|\Aut(G_K)|&b&p&r\\\hline
+q&|V(G_K)|&|\Aut(G_K)|&b&a&r\\\hline
 5&6&48&12&8&2\\
 7&20&24&180&1352&1\\
 8&30&144&48&16&2\\
@@ -766,7 +771,7 @@ available covering block is explored. This enumerates each unordered
 cover once and terminates because the uncovered set strictly decreases.
 A second implementation enumerates fixed-size cliques directly instead
 of deriving them from maximal cliques. The two complete enumerations
-agree by canonical digests. Their graph and clique constructions differ,
+agree after sorting and comparing hashes. Their graph and clique constructions differ,
 but they share the exact-cover recursion described above.
 
 Graph automorphism generators are computed with Sage's graph algorithm.
@@ -774,7 +779,7 @@ Their generated groups are explicitly enumerated and every permutation
 is checked against the edge set. An independent nauty computation gives
 the same full group orders, establishing the upper bound as well as the
 witnessed subgroup. The action on all resolutions is checked explicitly.
-Finally, the isotopy lemmas apply for every $q\ge5$: an automorphism
+Finally, the division-table lemmas apply for every $q\ge5$: an automorphism
 stabilizing the geometric resolution, after a frame permutation, is
 Frobenius. Hence its stabilizer is precisely the ambient group. The
 bundle supplies an explicit representative of the other coset in each
@@ -788,7 +793,7 @@ a finite computational premise at $q=7,9,11$; the theorem for $q\ge13$
 does not.
 
 At $q=7$ there are $1352$ individual clique partitions but only one
-compatible four-pencil resolution. Thus uniqueness of the full resolution
+compatible resolution into four parallel classes. Thus uniqueness of the full resolution
 can hold even when its individual candidate partitions are plentiful.
 At $q=8$ the two-resolution orbit is exactly the obstruction to extending
 all graph automorphisms semilinearly.
@@ -796,7 +801,7 @@ all graph automorphisms semilinearly.
 \section{Scope, a stronger complex, and open problems}
 \label{sec:remarks}
 
-The theorem reconstructs the four tangent-pencil classes and proves that
+The theorem reconstructs the four classes of tangent traces and proves that
 all graph automorphisms are ambient.  It does not say that the binary graph
 alone reconstructs every line of the projective plane for a general arc,
 and it says nothing about the outcome or Sprague--Grundy value of an
@@ -876,7 +881,7 @@ fresh timing sample. The verification README specifies the field models,
 versions, exact domains, relabelling seeds and trusted boundaries.
 
 The reference recognizer supplies prime-field models and explicit models
-of orders $8,9$; stable-range transport tests use $q=13,17,19$. The
+of orders $8,9$; stable-range isomorphism tests use $q=13,17,19$. The
 mathematical recognition theorem allows any supplied finite field.
 Checks include relabelled inputs, invalid coordinate certificates,
 deleted edges, and degree-preserving edge switches. Recorded timings

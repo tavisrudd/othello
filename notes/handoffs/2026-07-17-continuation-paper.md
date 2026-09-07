@@ -24,7 +24,7 @@ reconstruction remains outside the headline under the existing N1-only ruling.
 - C1109 completed polynomial recognition over a supplied finite field, using a completed
   cyclic division table, with independent coordinate-certificate checking. Its exact finite
   census finds q=5,8 have two resolutions and an index-two ambient subgroup; q=7,9,11 are rigid.
-  All nonambient cosets and all four-pencil resolutions are recorded in the public bundle.
+  All nonambient cosets and all resolutions into four parallel classes are recorded in the public bundle.
   Report: `notes/2026-09-07-c1109-certified-continuation-reconstruction.md`.
 - The finite data replay under independent Python/nauty construction and Sage 10.7/10.9.
   Source-only claim/evidence checks and reproducible PDF builds pass. No Lean theorem is claimed.
@@ -42,6 +42,9 @@ reconstruction remains outside the headline under the existing N1-only ruling.
   motivation 75→80, adjacent accessibility 65→75 (subjective percentiles).
   Remaining small edits and grading limits:
   `notes/2026-09-07-c1110-continuation-exposition-grade-deltas.md`.
+  Terminology and notation audit corrected pencils, clarified resolutions and
+  simplified local proof wording; report:
+  `notes/2026-09-07-c1110-continuation-terminology-audit.md`.
   Export/validation record: `notes/2026-09-07-c1110-continuation-upgraded-manuscript.md`.
 
 ## Next steps

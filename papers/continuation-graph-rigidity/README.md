@@ -6,10 +6,10 @@ For a four-point projective frame over a finite field of order at least 13,
 its uncoloured conflict graph determines the field order and the plane/frame
 up to semilinear equivalence. Every graph isomorphism extends uniquely.
 The written proof also gives polynomial recognition over a supplied field and
-an independently checkable coordinate transport.
+an independently checkable coordinate isomorphism.
 
 An exact finite census settles orders 5, 7, 8, 9 and 11. Orders 5 and 8 each
-have two four-pencil resolutions and an ambient subgroup of index two;
+have two resolutions into four parallel classes and an ambient subgroup of index two;
 orders 7, 9 and 11 have a unique resolution and only ambient automorphisms.
 The stable-range proof does not depend on the census.
 
