@@ -4571,8 +4571,17 @@
       "last": 1093,
       "purpose": "Admit parametric LRC queries and updates against existing dynamic composition capabilities",
       "sequence": 508
+    },
+    {
+      "count": 1,
+      "first": 1094,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1094,
+      "purpose": "Core bounded composition construction with private adapter integration",
+      "sequence": 509
     }
   ],
-  "next_id": 1094,
+  "next_id": 1095,
   "schema": "codex-task-id-allocations-v1"
 }
