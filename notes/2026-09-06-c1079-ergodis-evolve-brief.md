@@ -48,6 +48,34 @@ and meaningful test/evidence gaps as inputs to synthesis.
    first implementation step. Include severity-ranked review findings with file/line evidence
    and targeted reproduction checks where applicable.
 
+## Search mode, provenance, and validation are distinct
+
+Explicit user clarification: distinguish the search’s mode (proof-generating or heuristic) from
+where its theorems and parameters came from as evolve generates and evolves them. The synthesis
+must define these dimensions separately in its proposed data model, runtime policy, artifacts,
+and Unix-socket observations/control:
+
+- **Search mode** specifies the run’s obligations and permissible conclusions. Proof-generating
+  search must discharge the obligations needed for its claimed reductions and coverage. Heuristic
+  search may explore with unvalidated candidates but cannot turn their pruning into proved
+  negative coverage. State what mode changes mean for accumulated results and coverage.
+- **Provenance** records origin and derivation for theorem candidates and parameter candidates
+  individually: imported or human-supplied, generated, evolved, or composed; exact parent
+  versions, generation/mutation steps, and relevant run/input/configuration identifiers. Preserve
+  lineage through validation and reuse rather than replacing origin with a trust label.
+- **Validation status and scope** record what has actually been established, with supporting
+  evidence, assumptions, applicability domain, and parameter side conditions. Distinguish an
+  established theorem from an unproved generated conjecture, and a theorem’s proof from the
+  validity of a particular parameter instantiation. Mutations require explicit revalidation or
+  justified evidence reuse; descendants do not automatically inherit their parents’ guarantees.
+
+These dimensions must not be conflated: an evolved candidate can become validated and usable in
+proof-generating search; a hand-written or imported candidate is not automatically established.
+Heuristic search can use proved theorems, and heuristic candidate selection can support a
+proof-generating run when all soundness obligations for the resulting claims are discharged.
+Assess concrete examples of these combinations in the existing implementations and identify
+where current terminology, admission rules, or artifacts collapse the distinctions.
+
 ## Boundary and acceptance
 
 This task produces a review and concrete, reviewable synthesis plan, not an implementation merge
