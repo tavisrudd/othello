@@ -4526,8 +4526,26 @@
       "last": 1088,
       "purpose": "Interactive browser Worker client campaign control demo and checkpoint exchange",
       "sequence": 503
+    },
+    {
+      "count": 1,
+      "first": 1089,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 1089,
+      "purpose": "Paper I: sharp m-marginal certification proposition, parent Hamiltonian, SLOCC branch corollary",
+      "sequence": 504
+    },
+    {
+      "count": 1,
+      "first": 1090,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 1090,
+      "purpose": "Clebsch II cubic-phase quantum codes: priority search and resource-content classification",
+      "sequence": 505
     }
   ],
-  "next_id": 1089,
+  "next_id": 1091,
   "schema": "codex-task-id-allocations-v1"
 }
