@@ -50,8 +50,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   **C1117 is complete:** additive motivic/spectrum formulas and consequences
   are integrated; both gates pass with matching PDFs. Report:
   `../2026-09-07-c1117-additive-spectrum-extension.md`.
-  Next is **C1118** the full-I3 rank-four certificate, then **C1119** finite-index
-  slices. C978/C956 retain exposition, including the author's requested
+  **C1118 is complete:** the full-I3 rank-four certificate is independently
+  replayed and integrated, with matching source and standalone PDFs. The
+  same orbit argument excludes rank five for this criterion. Report:
+  `../2026-09-07-c1118-rank-four-cox-descent.md`.
+  Next is **C1119** finite-index slices. C978/C956 retain exposition, including the author's requested
   post-upgrade audit of specialist terminology and symbols;
   C963/C965/C966 retain algorithmic work. Treat upgrades as queued proof
   obligations, not accepted theorems. Review and ordering:

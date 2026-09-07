@@ -1,7 +1,17 @@
 # C1118: Full-I3 rank-four Cox-weight descent obstruction
 
 **Lane:** `cubic-threefolds`
-**Status:** queued; finite reconstruction independent of the quantum lower bound
+**Status:** complete; authority and standalone gates pass with identical PDFs
+
+## Result
+
+The unique primitive character, orbit sizes four and twelve, and all 4368
+five-subsets are independently checked; 1992 are unimodular and none descends.
+The same orbit argument excludes rank five, so rank three is maximal for
+this criterion in the full-I3 Cox representation. Integrated as
+`prop:rank-four-descent`; report:
+`notes/2026-09-07-c1118-rank-four-cox-descent.md`.
+Authority `d2f86f539` with export update `1c052f11e`; standalone `0ef5ae7`.
 
 ## Goal and scope
 

@@ -152,7 +152,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `cubic-threefolds`
 
-- **C1118 `[cubic-threefolds]` [QUEUED; RANK-FOUR CERTIFICATE]** — independently reconstruct and certify the full-I3 rank-four character line, restricted weight orbits, and descended five-window obstruction → `notes/cubic-threefolds-tasks/c1118-rank-four-cox-descent-obstruction.md`
 - **C1119 `[cubic-threefolds]` [QUEUED; AFTER C1116 QUOTIENT GATE]** — prove the finite-index slice degree statement and its coprime-degree universal-CH0 consequence with descended component and degree hypotheses → `notes/cubic-threefolds-tasks/c1119-finite-index-torus-slices.md`
 
 - **C940 `[cubic-threefolds]` [ACTIVE; EPILOGUE SPLIT]** — split the strictly `m=1` cubic-stabilization epilogue into a short unconditional direct-QDM paper, a self-contained six-axis/nonstandard-`A_5` pencil paper, and a separately identified conditional framed-monodromy note; preserve the existing proof dependencies and formal provenance, add only verified corollaries/examples, and do not edit `papers/cubic-stabilization-irrationality/` → `notes/cubic-threefolds-tasks/c940-epilogue-three-way-split.md`.

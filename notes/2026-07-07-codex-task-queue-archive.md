@@ -5629,3 +5629,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1123 `[ergodis]` [REPORTED 2026-09-07]** — coherent native repository projection for DuckDB/Jupyter heads, update/fork lineage, attempts and exact u64 accounting; private `c835284`, `2820c67`; scoped native/CLI/SQL gates pass, inherited whole-tool Clippy lint remains → `notes/2026-09-07-c1123-repository-analysis.md`.
 
 - **C1117 `[cubic-threefolds]` [COMPLETE 2026-09-07]** — additive Bittner and exact-spectrum extensions, Hodge separation and factorization consequences; authority and standalone gates pass → `notes/2026-09-07-c1117-additive-spectrum-extension.md`
+
+- **C1118 `[cubic-threefolds]` [COMPLETE 2026-09-07]** — full-I3 rank-four kernel, weight orbits and all 4368 five-subsets independently certified; rank-three maximality for the specified criterion integrated with matching paper gates → `notes/2026-09-07-c1118-rank-four-cox-descent.md`

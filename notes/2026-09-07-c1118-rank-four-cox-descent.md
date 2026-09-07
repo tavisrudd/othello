@@ -88,7 +88,11 @@ passed. Authority source checkpoint: `d2f86f539`. The exporter initially
 refused because its existing lint-removal rewrite matched the old Makefile
 prerequisite line. That existing rewrite was updated to preserve the newly
 added generated-TeX prerequisite on both sides; no check or export exclusion
-was weakened. Standalone synchronization remains pending at this checkpoint.
+was weakened. Export source `1c052f11e` passed plan and audit with zero
+findings. The standalone `make check` passed in
+`/tmp/claude-run-quiet/20260907-160616-make-C-cubic-stabilization-irrationality-check/`
+and produced the identical PDF hash above. Export verification passed;
+standalone forward commit `0ef5ae7`. Nothing was pushed or emailed.
 
 ## Mystery ledger — ej + tt
 
