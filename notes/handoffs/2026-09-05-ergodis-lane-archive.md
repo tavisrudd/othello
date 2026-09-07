@@ -153,3 +153,7 @@ unchanged leakage_dual_tower.rs:116 lint. Domain/source linkage is the next boun
 ## 2026-09-07 — C1100 domain-bound transitions
 
 Core 174999c and private cc56b87 connect admitted LRC events to authenticated summary replacements. Core owns parsing; both states commit only after admission and authentication. Native, private 16 tests, Python and WASM gates pass. Summary identity is not source/event provenance; durable record binding is next. Report: `../2026-09-07-c1100-domain-bound-transitions.md`.
+
+## 2026-09-07 — C1101 portable run identity and history
+
+Core e4e7424, private dd3f19d. UUIDv7 RunId follows explicit user preference for SQUUID-like run identity; SHA-256 identifies immutable specs/records/content. Bounded codecs and explicit parent checks pass native/WASM and private LRC alias interoperation. No repository publication or current mathematical authority implied. Next is a bounded offline run bundle. Report: `../2026-09-07-c1101-portable-run-records.md`.

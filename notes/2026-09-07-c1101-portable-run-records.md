@@ -1,6 +1,8 @@
 # C1101 — Portable run identity and immutable history
 
-**Lane:** `ergodis`. **Date:** 2026-09-07. **Status:** implementation in progress.
+**Lane:** `ergodis`. **Date:** 2026-09-07. **Status:** complete.
+
+Core `e4e7424` (design docs `b950d69`); private `dd3f19d`.
 
 ## Motivation
 
@@ -55,9 +57,52 @@ the safe integer range explicitly, never through an imprecise Number.
 
 ## Validation
 
-Pending implementation and validation. Tests will cover identity separation,
-UUIDv7 validation, explicit fork linkage, immutable parents, source/event byte
-binding, canonical roundtrip and malformed records, and missing/wrong ancestry.
+Implementation, source audit and final full native gates pass, including the
+follow-up for loading an expected content ID from an external index. WASM
+release compilation passes with UUID support and exact identifier layout
+assertions. The runtime has six record tests. Python parity passes eight exact cost/witness/work
+cases. Eight private tests pass, including the new record interoperation case
+and seven C1100 domain-bound transition regressions. The runtime corpus covers
+identity separation, UUIDv7 validation and the RFC example, explicit fork
+linkage, immutable parents, source/event byte binding, canonical roundtrip,
+byte mutations, malformed records and wrong ancestry. Reference/spec digest
+vectors were computed independently with Python hashlib/struct and pinned in
+the tests. Domain-separated hash encoding and bounded binary layout are
+documented in core `docs/run-records.md`.
+
+The private LRC fixture creates source states with equal min-plus summaries but
+different content identities. It stores references to an actual prover snapshot
+and delta, decodes and links the records, checks source/event/evidence bytes,
+then explicitly invokes C1100 domain-bound verification. Finally it creates a
+fresh-ID fork without copying evidence into the child. This is not a new domain
+serialization standard: the fixture encodes fields explicitly for the test.
+
+Terra implemented the runtime module and independently reviewed the combined
+boundary; Luna supplied initial runtime tests. Parent reviewed and corrected
+the implementation, added source/event interoperation and additional rejection
+and compatibility tests, and owns all builds and commits. Source review found
+no remaining correctness blocker. Artifact bytes are hashed by borrowed slice,
+without copying them or applying the record-size cap to large artifacts;
+untrusted hosts must bound or stream reads before calling this API.
+
+Replay (use `run-quiet`, one build owner):
+
+```sh
+# ~/src/ergodis
+nix shell nixpkgs#cargo nixpkgs#rustc nixpkgs#clippy nixpkgs#rustfmt --command bash -c 'cargo fmt --check && cargo clippy --all-targets --all-features -- -D warnings && cargo test --all-features'
+nix shell nixpkgs#python3 --command python3 wasm/scripts/check-python-parity.py
+nix shell nixpkgs#cargo nixpkgs#rustc --command cargo check --manifest-path wasm/Cargo.toml --target wasm32-unknown-unknown --release
+# ~/src/ergodis-private
+nix shell nixpkgs#cargo nixpkgs#rustc nixpkgs#clippy --command cargo clippy -p ergodis-private --test run_record_identity -- -D warnings
+nix shell nixpkgs#cargo nixpkgs#rustc --command cargo test -p ergodis-private --test run_record_identity --test domain_bound_transitions
+nix shell nixpkgs#rustfmt --command rustfmt --check --edition 2021 tests/run_record_identity.rs
+```
+
+Capture prefixes under `/tmp/claude-run-quiet/`: final native `20260907-125243`,
+Python `20260907-125047`, private `20260907-125142`, WASM `20260907-125405`,
+cache dry run `20260907-125406`. No speed claim; full-tool
+clippy is not part of this slice and its previously recorded unrelated finding
+is untouched. No export/push. Cache cleanup remains dry-run only.
 
 ## Follow-through
 
@@ -66,3 +111,6 @@ certificates with these records; open it without a live process, resolve content
 and ancestry, run the appropriate checker, and fork without transferring old
 authority to a changed query. Repository atomic publication and resource budget
 admission remain explicit gates rather than properties inferred from hashes.
+
+Discovery-track review: no incidental mathematical discovery. The source/summary
+alias distinction and identity split were intended task outcomes.

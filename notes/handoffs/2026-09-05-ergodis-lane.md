@@ -228,11 +228,19 @@ Full native, 16 private tests, Python and WASM gates pass. Summary aliases are i
 checks consistency with the supplied source interpretation, not unique source/event identity or
 independent domain optimality. Existing solver loops and hot layouts unchanged.
 
-**Next**: durable source/event identity and evidence coverage above the solver, following C1084:
-load and independently verify an old run, then fork an event stream without confusing equal
-summaries with equal source histories. Other algebra/backends and compact sibling proofs need
-separate explicit admission/performance gates. Preserve native64 performance and solver/control
-separation. C1032 and durable/module schemas remain open.
+**C1101 complete**: core `e4e7424`, private `dd3f19d`;
+`notes/2026-09-07-c1101-portable-run-records.md`. Portable RunId uses host-supplied UUIDv7, distinct
+from content hashes. Immutable spec/record codecs bind sources/events and explicit fork parents;
+new forks get fresh IDs. Six runtime and eight private tests, full native gates, Python and WASM
+compilation pass. This is structural/content/link admission, not repository publication or
+mathematical authority. No clock/RNG/filesystem or solver hot-path change.
+
+**Next**: bounded run bundles and offline viewing/content resolution above the solver, following
+C1084. Package a concrete source, event stream, snapshots and scoped evidence; resolve lineage and
+invoke independent verification explicitly, then fork without transferring old authority.
+Repository publication/fencing, attempts/budgets and actual execution recovery remain separate.
+Other algebras/backends and compact sibling proofs need their own admission/performance gates.
+Preserve native64 performance and solver/control separation. C1032 and module schemas remain open.
 
 ### C985 — Ergodis exact algebraic optimization paper
 
