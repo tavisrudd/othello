@@ -84,7 +84,11 @@ The PDF has 14 pages, 145165 bytes, and SHA-256
 `976799bdd49ce9195fe96e63cf8893e1d41e5f4122d63f29a8bb3631cb405fe0`.
 Pages 11--13, including the new proposition and verification text, were
 visually inspected; no layout repair was required. Scoped whitespace checks
-passed. Standalone synchronization remains pending at this source checkpoint.
+passed. Authority source checkpoint: `d2f86f539`. The exporter initially
+refused because its existing lint-removal rewrite matched the old Makefile
+prerequisite line. That existing rewrite was updated to preserve the newly
+added generated-TeX prerequisite on both sides; no check or export exclusion
+was weakened. Standalone synchronization remains pending at this checkpoint.
 
 ## Mystery ledger — ej + tt
 
