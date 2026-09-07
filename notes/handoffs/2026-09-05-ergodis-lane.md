@@ -123,16 +123,18 @@ the Farr–Lisoněk free-pair cap constructions into a test-cap corpus for the c
 in the `n ≥ 4` programme. Each row carries its own provenance pointer; read the discovery-track
 entry before starting.
 
-### C1080 — portable admission pilot; C1032 browser recovery
+### Evolve convergence — next implementation slice
 
-Tavis authorized implementation on 2026-09-07 after C1079’s completed convergence plan
-(`notes/2026-09-06-c1079-ergodis-evolve-review.md`). C1080 implements a bounded candidate →
-scoped admission → exact composition-solver consumer, with independent theorem/parameter origin,
-mode and evidence binding. Report: `notes/2026-09-07-c1080-admission-pilot.md`.
+C1079's convergence plan is complete: `notes/2026-09-06-c1079-ergodis-evolve-review.md`.
+C1080's portable admission pilot and current-core browser recovery are complete:
+`notes/2026-09-07-c1080-admission-pilot.md` (core `5247f6d`, `95d16b9`).
 
-C1032’s historical browser adapter is being forward-ported into current core `wasm/` and validated
-alongside the pilot. Native/WASM source changes stay in core; industry knowledge remains private.
-No plugin loader, broad migration, export or publication is included in this first implementation.
+**Next**: allocate the next bounded implementation slice for persistent autonomous campaigns and
+portable IR, carrying the independent mode/origin/admission contract into native and browser hosts.
+Keep native 64-bit hot layouts/performance and exact size/alignment guards. Industry knowledge
+stays private under the C1079 IP plan. Dynamic modules and private demo packaging remain future
+stages. C1032 remains open for full original acceptance review; its recovered `wasm/` now builds
+and passes a Chromium Worker smoke test against current core.
 
 ### C985 — Ergodis exact algebraic optimization paper
 

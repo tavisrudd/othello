@@ -30,3 +30,10 @@ native/IR industry extensions and QEC separation, native/WASM and recipient-run/
 and concrete build/test/docs gates. Static/adversarial review only; no source migration, build,
 benchmark, release, or IP allocation. Next implementation allocation awaits the recommended
 architecture/scope decision. No incidental mathematical discovery arose.
+
+## 2026-09-07 — C1080 complete
+
+Portable finite admission/discovery pilot and current-core browser recovery committed as
+`5247f6d` and `95d16b9`. Native gates, eight-case adapter Python parity, wasm release build and
+Chromium Worker smoke passed; 64-bit layouts remain unchanged with exact guards. Scope, replay
+and remaining campaign/IR/module gates: `../2026-09-07-c1080-admission-pilot.md`.
