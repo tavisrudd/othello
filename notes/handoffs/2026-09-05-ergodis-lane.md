@@ -283,6 +283,12 @@ Report: `notes/2026-09-07-c1115-native-repository.md`.
 clear evidence/save actions and expandable technical details. Desktop/mobile and browser
 process-restart gates pass. Report: `notes/2026-09-07-c1121-demo-usability.md`.
 
+**C1122 complete**: core `67d929b`; first-visit introduction explains the optimizer via
+an interactive lamp problem and actual WASM optimum, followed by guided safe/unsafe
+shortcut checking and a rendered counterexample. Former controls remain advanced tools.
+Full native/Python and browser semantic/UI/recovery gates pass. Report:
+`notes/2026-09-07-c1122-first-visit-demo.md`.
+
 **Next gate**: choose and allocate the analytical projection bridge using coherent repository
 snapshots; C1033's DuckDB/Jupyter manifest-ledger read surface remains a downstream consumer.
 Browser/native bounded persistence pilots are complete; automatic execution recovery, larger

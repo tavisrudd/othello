@@ -330,5 +330,3 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 All completed rows, original rankings, amendments, and detailed task bodies are preserved in
 `2026-07-07-codex-task-queue-archive.md`. Do not copy them
 back into this live registry.
-
-- **C1122 `[ergodis]` [IN PROGRESS]** — First-visit product introduction, visible optimization puzzle and guided shortcut checking; retain advanced inspectors and real-browser gates → `notes/2026-09-07-c1122-first-visit-demo.md`.

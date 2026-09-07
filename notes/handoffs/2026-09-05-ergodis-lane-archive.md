@@ -180,3 +180,9 @@ Browser/native initial scope is complete; analytical projection allocation is ne
 Core `b219db3`: example-first onboarding, first-save setup, clear actions and technical
 disclosure. Native/Python and actual desktop/mobile/browser-restart gates pass.
 Report: `../2026-09-07-c1121-demo-usability.md`.
+
+## 2026-09-07 — C1122 first-visit demo
+
+Core `67d929b`: concrete optimizer introduction, interactive switch/lamp optimum and guided
+shortcut/counterexample campaign. Advanced interfaces retained. Full native/Python and
+actual browser gates pass. Report: `../2026-09-07-c1122-first-visit-demo.md`.

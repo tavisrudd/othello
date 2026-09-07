@@ -5621,3 +5621,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1121 `[ergodis]` [REPORTED 2026-09-07]** — Simplify offline demo onboarding, example-first exploration and saved-run actions; real-browser UI gates → `notes/2026-09-07-c1121-demo-usability.md`.
 
 - **C1116 `[cubic-threefolds]` [COMPLETED 2026-09-07]** — audited the cubic pair foundations; repaired the reduced graded coefficient proof, clarified formal scope, matched TZ v2, and validated both authorities/mirrors → `notes/2026-09-07-c1116-cubic-foundations-audit.md`
+
+- **C1122 `[ergodis]` [REPORTED 2026-09-07]** — First-visit product introduction, visible optimization puzzle and guided shortcut checking; retain advanced inspectors and real-browser gates → `notes/2026-09-07-c1122-first-visit-demo.md`.
