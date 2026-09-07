@@ -113,3 +113,7 @@ Archived the user-supplied September 4 and 5 brainstorms verbatim with message h
 ## 2026-09-07 — C1092 query specialization corpus
 
 Six private tests establish initial same-model query boundaries across privacy, causal and QEC (`4841e23`). Scoped validation passed. C1061 incremental history recovered, including event/rebase classification and generic batch preconditions. Report: `notes/2026-09-07-c1092-query-specialization-corpus.md`.
+
+## 2026-09-07 — C1093 dynamic query admission
+
+Added cold bound LRC queries and retained-update contract tests; audited OpenProblem/generic evidence. Eleven scoped tests pass. Report: `notes/2026-09-07-c1093-dynamic-query-admission.md`. No hot-path changes or performance claims.

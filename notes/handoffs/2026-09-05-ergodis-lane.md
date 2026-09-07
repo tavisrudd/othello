@@ -179,14 +179,18 @@ Recovered C1061 incremental/witness/certificate/top-k history. Existing LRC even
 parametric changes from rebase. Generic DeltaRun batching has numeric/same-leaf preconditions that
 must be enforced before external promotion; see the report's explicit saturation counterexample.
 
-**Next**: allocate adaptation/audit of existing `open_problem`, `parametric_lrc` and
-`generic_certificate` from private ADR 0001 §§9–10, with cold recovery/LRC update-contract examples.
-Extend their capability boundaries with the smallest shared
-model/query/observable/objective/admission types demonstrated by the corpus. Include same-model
-query specialization and Evolve question/design search under an explicit evaluation contract.
-Do not freeze durable payloads yet. Keep kernels unchanged initially; preserve native64 gates and
-the solver/control separation. Durable records, independent incremental evidence, representative
-catalogs and industry modules follow their stated admission gates. C1032 remains open.
+**C1093 complete**: cold `RepairModel`/`RepairPlan`/borrowed `BudgetQuery` adapter around existing
+parametric LRC; one compilation serves count/threshold/witness readouts with checked top-ups.
+11 scoped contract tests, clippy and formatting pass. OpenProblem/generic-certificate audit and
+source-vs-commitment clarification: `notes/2026-09-07-c1093-dynamic-query-admission.md`.
+No hot kernels changed; the DeltaRun saturation limitation is now executable regression evidence.
+
+**Next**: allocate the minimal shared cold core admission boundary demonstrated by these adapters,
+with fallible bounded construction around existing OpenProblem capabilities. Keep domain models
+private. Separate summary-transition receipts from independently checked domain leaf transitions
+before migrating generic evidence. Preserve same-model query specialization, question/design
+exploration, native64 layouts/performance and the solver/control separation. Durable schemas and
+module manifests follow those contracts; C1032 remains open.
 
 ### C985 — Ergodis exact algebraic optimization paper
 
