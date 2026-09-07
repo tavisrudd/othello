@@ -107,6 +107,15 @@ material explicit. The initial collection did not audit demo packaging or revers
 exposure. The brief now includes those requirements; no demo bundle or disclosure is authorized
 or produced by this update.
 
+## Existing WASM prototype requirement added after collection
+
+Tavis identifies an existing WASM prototype and requires it to load the industry extensions too.
+The next evidence pass must locate and inspect that prototype, then map both specialized-kernel
+and source/IR extension support to its actual host environment. Package/capability semantics
+should carry across hosts with appropriate target artifacts and explicit compatibility gaps.
+The initial inventories did not inspect this prototype; no WASM-loading support or parity is
+claimed. The brief now requires a compatibility matrix and recipient-run/hosted demo coverage.
+
 ## Next synthesis work
 
 Use these inventories to construct a concrete cross-repository capability/admission map, then

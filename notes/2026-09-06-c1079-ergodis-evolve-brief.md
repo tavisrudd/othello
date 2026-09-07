@@ -190,6 +190,35 @@ Deliver a staged path to the single-host-binary hybrid native/IR model without m
 building a loader/compiler extension during this evidence-and-plan task. Public export and specific private IP
 release decisions remain separate.
 
+## Existing WASM prototype as an extension host
+
+User states that a WASM prototype already exists and requires it to load the industry extensions
+as well. Treat that prototype as an existing implementation to recover and inspect, not a new
+runtime to invent. The synthesis must include it alongside native and hosted execution.
+
+- Locate the prototype and its actual execution environment, compiler/IR support, packaging,
+  host interfaces, and current module-loading mechanisms. Establish whether relevant constraints
+  come from browser deployment, a standalone WASM host, or both; do not assume the environment.
+- Define the same logical industry package/capability contract across hosts, with target-specific
+  executable artifacts where needed. Assess WASM-compatible builds/variants or host bindings for
+  specialized kernels, and source-to-IR compilation/loading/evaluation in the WASM prototype.
+  Shared semantics and package identity do not require the identical native `.so` artifact to
+  load in WASM. Identify unsupported kernels or obligations explicitly rather than silently
+  substituting remote execution or weaker behavior.
+- Map target compatibility, imports/exports, memory/data exchange, supported numerical semantics,
+  resource limits, and lifecycle to the existing prototype. Compare feasible module mechanisms
+  using current primary documentation during the design work before choosing one.
+- Preserve theorem/parameter lineage, target/compiler/kernel identity, validation scope, and
+  replay across targets. Specify semantic parity checks for representative private capabilities
+  and how any target-specific evidence requirements are discharged.
+- Include WASM-compatible black-box packages in the recipient-run demo plan, as well as the
+  applicable hosted delivery path. Assess source/IR/module/introspection exposure for the actual
+  WASM environment; retain full internal provenance and explicit disclosure boundaries.
+
+Deliver an implementation-grounded compatibility matrix and staged integration path for native
+kernels, source/IR extensions, and the existing WASM host. Runtime and extension source changes
+remain downstream of this review-and-plan task.
+
 ## Obfuscated black-box demonstrations
 
 Explicit user requirement: provide demos using both native shared-library extensions and
