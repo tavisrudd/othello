@@ -41,19 +41,22 @@
 \maketitle
 
 \begin{abstract}
-A projective frame in $\PG(2,q)$ determines a graph on the points that can
+Four points with no three collinear in the projective plane $\PG(2,q)$
+determine a graph on the points that can
 be adjoined without creating three collinear points; two vertices are
 adjacent when they cannot be adjoined together. For $q\ge13$, we prove
 that every isomorphism between these uncoloured graphs extends uniquely
 to a semilinear equivalence of the frames. The graph also determines $q$.
-The proof recovers tangent traces and their four centre classes, then uses
+The proof recovers the legal points on each tangent line, groups these
+lines by their selected point, then uses
 compatibility between multiplication and translation to recover the field
 action. Completing a punctured division table makes the reconstruction
 algorithmic and gives polynomial-time recognition over a supplied finite
 field, with an independently checkable coordinate certificate.
 An exhaustive finite computation closes the range $5\le q<13$:
 semilinear rigidity holds at $q=7,9,11$, whereas $q=5,8$ each have exactly
-two four-pencil resolutions and an ambient subgroup of index two.
+two ways to organize the graph into four tangent pencils, and the
+semilinear subgroup has index two in the full automorphism group.
 The stable-range proof is independent of this computation.
 \end{abstract}
 
@@ -73,6 +76,13 @@ $G_K$ records which pairs of legal continuations are incompatible.  This
 graph arises naturally as the residual conflict graph of a capacity-two
 avoidance game, but the question studied here is static: how much of the
 projective geometry does the abstract graph remember?
+
+Here a tangent meets $K$ in exactly one point, its \emph{centre}, and a
+secant meets $K$ in two. A tangent trace consists of the legal points on
+that line; the pencil at a centre is the family of tangents through it.
+We write $\PG(2,q)$ for the plane over $\F_q$. A semilinear collineation
+is induced by an invertible linear coordinate change composed with a
+field automorphism; these form $\PGammaL(3,q)$.
 
 There are three different reconstruction questions.  If the ambient
 incidence plane is supplied, one may ask whether an ambient collineation
@@ -104,17 +114,7 @@ to $J$. Thus the abstract graph determines the plane and its frame up
 to semilinear equivalence within this family.
 \end{corollary}
 
-\begin{proof}
-The normal form proved below gives $|V(G_K)|=(q-2)(q-3)$, which is
-strictly increasing for $q\ge3$. Hence $q=q'$. Choose a projectivity
-$h$ carrying $K$ to $J$. The map $h^{-1}f$ is a graph automorphism,
-so Theorem~\ref{thm:main} supplies an extension.
-For uniqueness, an extension acting trivially on the legal vertices
-fixes each recovered centre class. After frame normalization it is a
-field automorphism $x\mapsto x^{p^i}$. Every $x\in\F_q\setminus\{0,1\}$
-occurs as a first coordinate, so this automorphism fixes the whole field.
-It is therefore the identity.
-\end{proof}
+
 
 The corollary concerns graphs promised to arise from projective frames.
 Section~\ref{sec:algorithm} also gives recognition of an arbitrary input
@@ -132,6 +132,28 @@ agreement graph of the four maps
 A graph automorphism preserving the recovered classes induces permutations
 of the four alphabets.  Compatibility with both quotient maps forces those
 permutations to be one field automorphism.
+
+For a concrete model, work over $\F_{13}$. The legal points $(2,3)$ and
+$(2,4)$ have four-coordinate words $(2,3,5,7)$ and $(2,4,7,9)$. They
+are adjacent because their first coordinates agree: they lie on the same
+vertical tangent. Agreement means equality in the same position, not merely
+a shared field value. The task is to recover these coordinate positions
+when only adjacency remains.
+
+At this order each tangent trace is a ten-vertex clique, whereas a clique
+spread across several tangents has at most nine vertices. Once the traces
+are recovered, the eleven traces through one centre are pairwise disjoint;
+a disjointness clique using several centres has at most four members.
+These two size gaps give the intrinsic reconstruction
+\[
+ \text{graph}\ \longrightarrow\ \text{tangent traces}
+ \ \longrightarrow\ \text{four pencils}
+ \ \longrightarrow\ \text{field coordinates}.
+\]
+The last arrow uses both quotient maps: multiplication alone leaves
+extra symmetries, and the translated quotient removes them.
+
+\paragraph{Related work.}
 
 With markings $(0,1,\infty,x,y)$, this coordinate model identifies the
 vertex set with $M_{0,5}(\F_q)$. Up to reparametrizing the target, the four
@@ -168,13 +190,14 @@ Section~\ref{sec:boundary} proves rigidity at $q=7,9,11$.
 Thus $q\ge13$ is the range of the uniform geometric proof, not the
 sharp boundary of the automorphism statement.
 
-The paper is organized as follows.  Section~\ref{sec:def} gives the graph
-and its linear-hypergraph representation.  Sections~\ref{sec:traces} and
-\ref{sec:centres} recover tangent traces and selected centres.  Section
-\ref{sec:obstructions} records the low-cardinality obstructions.  Section
-\ref{sec:frame} proves Theorem~\ref{thm:main}.  Section~\ref{sec:remarks}
-states scope boundaries and open problems. The recognition algorithm
-and finite boundary are in Sections~\ref{sec:algorithm} and~\ref{sec:boundary}.
+\paragraph{Reading guide.}
+For the main theorem, retain the recovery statements in
+Sections~\ref{sec:traces}--\ref{sec:centres}, then follow the four-coordinate
+model and the two algebraic lemmas in Section~\ref{sec:frame}.
+The general $k$-dependent estimates can be read after the frame case;
+Section~\ref{sec:obstructions} explains why three points are insufficient.
+Sections~\ref{sec:algorithm} and~\ref{sec:boundary} give, respectively,
+the recognition algorithm and the finite computational boundary.
 
 \section{Continuation graphs and their intersection representation}
 \label{sec:def}
@@ -297,7 +320,9 @@ the full trace containing it.
 
 Assume Theorem~\ref{thm:traces} applies.  Form a graph $D_K$ whose vertices
 are the recovered tangent traces, joining two traces when they are disjoint
-as subsets of $V_K$.
+as subsets of $V_K$. The selected centres are no longer given. We recover
+them by the same size-gap principle: traces through one centre form a
+large disjoint family, whereas a family mixing centres is small.
 
 \begin{theorem}[Centre-class recovery]\label{thm:centres}\coverage{absent}\uses{thm:traces}
 Put
@@ -396,6 +421,13 @@ intrinsic centre recovery from ambient semilinear extension.
 
 \section{The four-point frame}
 \label{sec:frame}
+
+The geometric step has recovered four pencils. We now ask which
+permutations of their labels preserve the graph. Three pencils encode
+multiplication; the fourth compares multiplication before and after a
+translation. For a first reading, retain the conclusions of the next two
+lemmas: the first forces one multiplicative permutation, and the second
+forces that permutation to preserve the field.
 
 Normalize the frame as
 \[
@@ -516,6 +548,19 @@ $S_4$, and the field automorphism group has order $e=[\F_q:\F_p]$.
 \proves{thm:main}
 \end{proof}
 
+\begin{proof}[Proof of Corollary~\ref{cor:reconstruction}]
+The normal form proved below gives $|V(G_K)|=(q-2)(q-3)$, which is
+strictly increasing for $q\ge3$. Hence $q=q'$. Choose a projectivity
+$h$ carrying $K$ to $J$. The map $h^{-1}f$ is a graph automorphism,
+so Theorem~\ref{thm:main} supplies an extension.
+For uniqueness, an extension acting trivially on the legal vertices
+fixes each recovered centre class. After frame normalization it is a
+field automorphism $x\mapsto x^{p^i}$. Every $x\in\F_q\setminus\{0,1\}$
+occurs as a first coordinate, so this automorphism fixes the whole field.
+It is therefore the identity.
+\proves{cor:reconstruction}
+\end{proof}
+
 \begin{remark}[The small-order boundary]\label{rem:small-order}\coverage{absent}\uses{prop:boundary,lem:isotopy}
 The isotopy lemmas already apply for $q\geq5$; the bound $q\geq13$ enters
 only when the uncoloured graph is required to recover its four coordinate
@@ -530,7 +575,9 @@ by exact finite enumeration.
 The proof can be made constructive without searching through all
 permutations of the field alphabet. First recover the pencils. Then the
 missing entries in three pencils complete a group division table, leaving
-only the possible images of a cyclic generator to test.
+only the possible images of a cyclic generator to test. The final check
+compares every pair of vertices, so the recovered coordinates are a
+certificate even when the input was not promised to come from geometry.
 
 \begin{lemma}[Four-point trace seeds]\label{lem:seeds}\coverage{absent}\uses{prop:normal,lem:clique}
 Let $K$ be a four-point frame and $B$ a tangent trace. A vertex outside
@@ -567,6 +614,7 @@ $n\ne(q-2)(q-3)$. A supplied coordinate certificate can be checked using
 $O(n^2)$ field operations and adjacency tests.
 \end{theorem}
 \begin{proof}
+\emph{Recover the partitions.}
 Enumerate four-cliques and apply Lemma~\ref{lem:seeds}, retaining only
 clique closures of size $q-3$. Reject unless there are $4(q-2)$ traces.
 Construct their disjointness graph. Recover centre classes as the large
@@ -578,6 +626,7 @@ it, so this closure is exactly the class. Reject unless there are four
 classes of $q-2$ traces partitioning the recovered traces and each class
 partitions $V(G)$. These tests do not alone certify recognition.
 
+\emph{Complete the division table.}
 Order the four classes. The first two provide rows and columns. In a
 true frame graph each row meets each column in one vertex, except for
 one missing column; missing columns pair the row and column alphabets.
@@ -592,6 +641,7 @@ unique symbol of $D$ missing from column $y$. Set $1/1=1$. Reject
 inconsistent or nonunique entries. For a frame this completes the full
 division table of $\F_q^*$.
 
+\emph{Assign field values and verify.}
 Set $ab=a/(1/b)$. Try each element as a cyclic generator, checking its
 powers exhaust the $q-1$ symbols and that the division table agrees
 with subtraction of exponents modulo $q-1$. This recognizes a cyclic
@@ -607,6 +657,7 @@ projectivity, so the completed table and at least one generator image
 pass these tests. Conversely the final check itself proves that a passing
 map is an isomorphism; no promised geometry is needed for soundness.
 
+\emph{Cost.}
 There are at most $O(n^4)$ seeds, with $O(n^2)$ work per closure and
 clique check. After the trace-count check the disjointness graph has
 $O(\sqrt n)$ vertices, so its five-seed enumeration and checks cost
