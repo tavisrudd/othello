@@ -4643,8 +4643,17 @@
       "last": 1101,
       "purpose": "Portable immutable run records with source event identity and fork lineage",
       "sequence": 516
+    },
+    {
+      "count": 1,
+      "first": 1102,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 1102,
+      "purpose": "C1099 successor: cubic-phase codes companion note writing task, forward-citation closure first gate",
+      "sequence": 517
     }
   ],
-  "next_id": 1102,
+  "next_id": 1103,
   "schema": "codex-task-id-allocations-v1"
 }
