@@ -1,0 +1,85 @@
+{
+  "key": "arXiv:2602.23687",
+  "version": "arXiv:2602.23687v2, margin 14 May 2026; title-page date 15 May 2026",
+  "access": "User-supplied original PNG spreads, 2026-09-07",
+  "read_depth": "partial",
+  "sections_read": "Title/version; III.A Theorem 1 and proof, Eq. (12); Appendix B rank identification. Other supplied pages retained, without upgrading inherited source to a full-text reading.",
+  "pages_present": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "pages_missing": [],
+  "files": [
+    {
+      "pages": [
+        1,
+        2
+      ],
+      "file": "pages-01-02.png",
+      "source_path": "/home/tavis/screenshots/2026-09-07-16-13-45.grover.reg.png",
+      "bytes": 1479443,
+      "sha256": "96a1bda65695df3e46a2dde353b8edec68d34b22653fecfc29bcd64facae8b49"
+    },
+    {
+      "pages": [
+        3,
+        4
+      ],
+      "file": "pages-03-04.png",
+      "source_path": "/home/tavis/screenshots/2026-09-07-16-14-01.grover.reg.png",
+      "bytes": 1352268,
+      "sha256": "b0c4220fec2bb41184f5428fa33b7badc36b54e7a8015672505e8172f97075df"
+    },
+    {
+      "pages": [
+        5,
+        6
+      ],
+      "file": "pages-05-06.png",
+      "source_path": "/home/tavis/screenshots/2026-09-07-16-14-14.grover.reg.png",
+      "bytes": 1323649,
+      "sha256": "3ec5f5fc1c896046ff582da67f557f845ecf441f10201bee8806b1dbc393aed5"
+    },
+    {
+      "pages": [
+        7,
+        8
+      ],
+      "file": "pages-07-08.png",
+      "source_path": "/home/tavis/screenshots/2026-09-07-16-14-25.grover.reg.png",
+      "bytes": 1340196,
+      "sha256": "d05b90e33d8607bdd7dc7b6097cf242ac4b0bf3285100d0cb5c5a6642756cdc2"
+    },
+    {
+      "pages": [
+        9,
+        10
+      ],
+      "file": "pages-09-10.png",
+      "source_path": "/home/tavis/screenshots/2026-09-07-16-14-41.grover.reg.png",
+      "bytes": 1368961,
+      "sha256": "a8d0740e3c8cb083e3bcb77646a3ab977f3014bae563dd5475d8efa0899f53a8"
+    },
+    {
+      "pages": [
+        11
+      ],
+      "file": "pages-11.png",
+      "source_path": "/home/tavis/screenshots/2026-09-07-16-14-51.grover.reg.png",
+      "bytes": 349269,
+      "sha256": "ebc307671e99e5cda6252025e6bbc68c728cb0fc2b1a1096048134e565aa2852"
+    }
+  ],
+  "comparison": "Confirms the GF(2) rank formula and preprint version. Supplies no journal DOI or independent Crossref citation count.",
+  "cache_directory": "/tmp/persistent/tavis/lit-search/kagamihara-tsuchiya-2026-v2-scans",
+  "manifest_sha256": "9e867aee6e911a379237c4b865f35e26057efb258281f617df71253737f6ce11"
+}

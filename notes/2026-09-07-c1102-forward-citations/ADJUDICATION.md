@@ -1,7 +1,7 @@
 # C1102 — Remaining citation adjudication
 
 Date: 2026-09-07. Lane: `clebsch`.
-**All 336 original promotions have a recorded disposition; Gate 1 is still OPEN.**
+**All 336 original promotions have a recorded disposition; Gate 1 has PASSED with the approved Crossref coverage exception.**
 
 The original adjudication added twenty partial readings. The user-scan follow-up
 adds one **full-text** reading of Feng–Luo, resolving the last primary-access gap.
@@ -19,7 +19,7 @@ the older “unclaimed” labels, without pretending that source access was exha
 
 The final bounded access follow-up and a **pending, unapplied** gate proposal
 are recorded in `GATE-DECISION.md`, with hashed metadata in
-`continuation-access.json`. Its access-gap proposal is superseded by the user scans; only the Crossref exception remains pending.
+`continuation-access.json`. Its access-gap proposal is superseded by the user scans; the user subsequently approved only the Crossref coverage exception (see `gate-approval.json`).
 
 ## What changed
 
@@ -180,8 +180,8 @@ found, so no discovery-track entry or successor allocation is needed.
   source; it does not change the separately certified length-p construction.
 * **Not a mathematical mystery:** Crossref cannot supply a count for this absent
   record; Semantic Scholar now can. Exact remaining gate: a supported third count
-  or an explicitly authorized revision of the count requirement. No such revision
-  was made here.
+  or an explicitly authorized revision of the count requirement. The user approved that narrow revision after the scan follow-up;
+  `gate-approval.json` preserves the missing count as null, not zero.
 * **Not settled by this audit:** equivalence of the explicit translation/conic
   codes with all instances of general published constructions, and unrestricted
   factory optimality. N2–N4/N8 state those limits. No new genuine mathematical
@@ -223,3 +223,23 @@ python3 notes/2026-09-07-c1102-forward-citations/verify_adjudication.py
 **Next C1102 action:** resolve the two explicit Gate-1 coverage limits (Crossref
 count and Feng–Luo primary access), or obtain an explicit author decision on a
 revised bounded gate. No manuscript text is authorized by the current verdict.
+
+## Approved citation closure (2026-09-07)
+
+The user confirmed the Hessian source is preprint-only and explicitly approved
+its Crossref coverage exception. This closes Gate 1 and the remaining citation
+adjudication, with the N1–N9 restrictions intact. C1102 itself remains active as
+a writing task. The original acquisition report/checker remain frozen historical
+artifacts; the adjudication checker validates the current approval and evidence.
+
+Post-gate **ej + tt**: separate literature availability from technical novelty.
+No further paper access is required for this citation decision, and the absence
+of a Crossref record supplies no mathematical distinction or priority evidence.
+The mystery ledger's open equivalence and unrestricted-factory questions remain
+outside this bounded result. No new mystery, incidental discovery, or successor
+allocation arises from the approval.
+
+Propagation: current ledger, task card and live handoff updated; the original
+acquisition snapshot and historical proposals are labeled as such. No companion
+manuscript or public summary yet exists to update. The next work is the approved
+four-part companion draft; title/directory proposals remain provisional.

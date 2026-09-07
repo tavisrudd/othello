@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-07",
+  "task": "C1102",
+  "gate": 1,
+  "status": "passed_with_approved_coverage_exception",
+  "user_approval": "approved",
+  "approved_question": "Approve that narrow Gate 1 exception so I can proceed?",
+  "scope": "Added Hessian seed arXiv:2602.23687 only; Crossref not covered because the DataCite-registered preprint has no identified Crossref record.",
+  "crossref_count": null,
+  "crossref_coverage": "not covered",
+  "openalex_count": 0,
+  "semantic_scholar_count": 0,
+  "three_source_absence_claim_allowed": false,
+  "positioning_authority": "CLAIM-PROOF-NOVELTY.md N1\u2013N9",
+  "drafting_authorized": true,
+  "publication_authorized": false,
+  "restrictions": [
+    "Preserve original seven-seed three-service evidence and all 336 dispositions.",
+    "No three-source citation-graph absence verdict for the added Hessian seed.",
+    "Preserve source read depths and bounded priority wording in N1\u2013N9.",
+    "Retain all later proof, annotation, reproducibility and manuscript acceptance requirements."
+  ]
+}

@@ -1,6 +1,6 @@
 # C1102 — Pre-draft claim–proof–novelty ledger
 
-Date: 2026-09-07. Lane: `clebsch`. **Gate 1 remains OPEN.**
+Date: 2026-09-07. Lane: `clebsch`. **Gate 1 PASSED with approved Crossref coverage exception.**
 
 This is the single current home of the companion's positioning verdicts. Historical
 C1090/C1099 verdicts are superseded by these rows; the audit's ADJUDICATION.md owns
@@ -25,7 +25,7 @@ No Lean coverage is asserted or adopted by this pre-draft research ledger.
 | N8 | The native p=7 factory beats the exact separate-distiller menu at equal target block infidelity. Evidence: `../2026-09-07-c1102-factory-benchmark/REPORT.md` and replay bundle. | **Specific bounded comparison.** Campbell–Howard `1606.01904` supplies synthillation/enumerator methodology. Li–Yeh `2603.04548` §4.4 and App. C.1 already connects signed physical qutrit T gates, a coupled logical gate and resource distillation. Retire “no qudit synthillation” and “no qudit enumerator analysis” claims (also see metadata promotion 261). | The benchmark excludes pooled factories, joint synthillation and general adaptive protocols; these exclusions are essential. Li–Yeh is characteristic three, and no numerical comparison to it is asserted. |
 | N9 | Trace-cubic benchmark on `p^k` basis states. Evidence: C1099 trace pairing calculation; literature comparisons in this audit. | **Known construction and extremality context.** Klappenecker–Rötteler `quant-ph/0309120` and Damski et al. `2603.15550`, Theorem 1, give finite-field trace-cubic MUB fiducials. Feng–Luo, Proposition 2 and Appendix C (full text), supplies single-prime L1 diagonal-gate optimality; its p. 5 equality-class classification is a conjecture. Damski's Lemma 6 is an L1 equimodular ceiling; it is not an unrestricted M2 maximum theorem. | Knipfer et al. `2607.07197` is a two-prime-qudit conjecture. Neither citation establishes the broad arbitrary-k M2 maximality sentence in the historical report. |
 
-**Drafting decision:** no row grants manuscript release. The missing Crossref count
-cannot be fabricated from a DataCite registration or replaced without changing the
-existing gate. Source access and metadata-only coverage remain explicit. The narrow
-construction positioning is available for author review; Gate 1 itself is not passed.
+**Drafting decision:** the user approved the narrow Crossref coverage exception
+on 2026-09-07; `gate-approval.json` records its scope. Drafting is released under
+N1–N9, with no three-source absence claim for the added Hessian seed. No count or
+read depth is upgraded by this approval; later manuscript acceptance gates remain.

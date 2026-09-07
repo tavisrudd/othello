@@ -73,6 +73,22 @@ subprocess.run([sys.executable, str(ROOT / 'adjudicate.py')], check=True, captur
 assert (ROOT / 'adjudication.json').read_bytes() == before
 ledger = (ROOT / 'CLAIM-PROOF-NOVELTY.md').read_text()
 assert all(f'| N{i} |' in ledger for i in range(1, 10))
-assert 'Gate 1 remains OPEN' in ledger
+approval = json.loads((ROOT / 'gate-approval.json').read_text())
+assert approval['task'] == 'C1102' and approval['gate'] == 1
+assert approval['status'] == 'passed_with_approved_coverage_exception'
+assert approval['user_approval'] == 'approved'
+assert approval['crossref_count'] is None
+assert approval['crossref_coverage'] == 'not covered'
+assert approval['openalex_count'] == approval['semantic_scholar_count'] == 0
+assert approval['three_source_absence_claim_allowed'] is False
+assert approval['drafting_authorized'] is True
+assert approval['publication_authorized'] is False
+assert 'Gate 1 PASSED with approved Crossref coverage exception' in ledger
+scan = json.loads((ROOT / 'hessian-user-scans.json').read_text())
+assert scan['key'] == 'arXiv:2602.23687' and scan['read_depth'] == 'partial'
+assert scan['pages_present'] == list(range(1, 12)) and not scan['pages_missing']
+check(Path(scan['cache_directory']) / 'manifest.json', scan['manifest_sha256'])
+for item in scan['files']:
+    check(Path(scan['cache_directory']) / item['file'], item['sha256'])
 print('PASS: 336 dispositions; 33 source records and hashes; 20 original new partial readings plus 1 user-scan full reading; graph errors distinguished from zeros.')
-print('Gate 1 remains OPEN: Crossref coverage; Feng–Luo primary access resolved.')
+print('Gate 1 PASSED with user-approved Crossref coverage exception; no three-source absence verdict.')

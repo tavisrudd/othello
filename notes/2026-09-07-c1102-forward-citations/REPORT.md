@@ -1,6 +1,8 @@
 # C1102 — Forward-citation acquisition, first triage, and Paper V hand-back corrections
 
-Date: 2026-09-07. Lane: `clebsch`. Status: **Gate 1 OPEN; manuscript drafting NOT released.**
+Date: 2026-09-07. Lane: `clebsch`. Historical acquisition status: **Gate 1 OPEN at this checkpoint.**
+Current status: Gate 1 passed with the user-approved coverage exception; see
+`GATE-DECISION.md` and `gate-approval.json`.
 
 This is a partial audit, not forward-citation closure. **One source was read at full text**
 in this pass (Klappenecker–Rötteler v1); five at partial depth and seven at

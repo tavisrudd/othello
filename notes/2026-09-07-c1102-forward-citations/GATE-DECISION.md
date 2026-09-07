@@ -1,12 +1,19 @@
-# C1102 — proposed bounded Gate 1 decision
+# C1102 — approved bounded Gate 1 decision
 
-Date: 2026-09-07. Lane: `clebsch`. **Proposal only; approval pending. Gate 1 remains OPEN.**
+Date: 2026-09-07. Lane: `clebsch`.
+**Gate 1 PASSED with the explicitly approved Crossref coverage exception.**
 
-**Current amendment after user scans:** Feng–Luo is now read at full text, pp. 1–9,
-including Appendix C. Its access exception below is withdrawn; condition 2 is
-replaced by primary attribution through ledger N5/N9. The requested decision now
-concerns only the added Hessian seed’s missing Crossref count, retaining all other
-claim restrictions. No approval or manuscript release has been inferred.
+The user confirmed the Hessian source is preprint-only and answered **“approved”**
+to the narrow exception: record Crossref as not covered, retain OpenAlex and
+Semantic Scholar results, and issue no three-source absence claim. Exact scope is
+in `gate-approval.json`. Drafting is authorized; publication and later acceptance
+requirements are unaffected. Feng–Luo is read at full text, so its earlier proposed
+access exception is unnecessary and withdrawn.
+
+The supplied complete eleven-page Hessian v2 scan set is preserved in
+`hessian-user-scans.json`; read depth remains partial (III.A and Appendix B).
+It confirms the version and rank formula, not Crossref coverage. Source counts
+remain 33 distinct papers, including three full-text readings.
 
 The following records the access attempt and proposal before those scans arrived.
 

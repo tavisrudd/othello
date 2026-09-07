@@ -4,7 +4,8 @@
 
 **Date:** 2026-09-07
 
-**Status:** active at Gate 1; no manuscript text before forward-citation closure passes.
+**Status:** active writing task; Gate 1 passed on 2026-09-07 with the explicitly
+approved Crossref coverage exception. Manuscript drafting is authorized.
 Citation dispositions are banked in
 `notes/2026-09-07-c1102-forward-citations/ADJUDICATION.md`: all 336 promotions have
 explicit dispositions, with 20 additional partial primary readings. This is not
@@ -13,10 +14,11 @@ explicit dispositions, with 20 additional partial primary readings. This is not
 the historical C1090/C1099 positioning. Alltop/Wang–Li/Dai–Fu–Luo access is resolved.
 Feng–Luo `10.1088/1402-4896/ad80e7` is now read at full text from user scans
 of all nine published pages; all promoted primary-access gaps are resolved.
-The sole remaining Gate 1 blocker is the added Hessian seed's missing Crossref
-record (OpenAlex and Semantic Scholar each report 0). The amended proposal in
-`notes/2026-09-07-c1102-forward-citations/GATE-DECISION.md` requests only a
-bounded exception for that missing count. No gate revision or draft is authorized.
+The user confirmed that the added Hessian source is preprint-only and approved
+recording Crossref as not covered, retaining the OpenAlex/Semantic Scholar zeros
+without a three-source absence verdict. Scope and restrictions are recorded in
+`notes/2026-09-07-c1102-forward-citations/gate-approval.json` and `GATE-DECISION.md`.
+Next: draft the four-part companion using ledger N1–N9 and the banked benchmark.
 
 ## Read first (in this order, nothing else)
 
@@ -31,7 +33,7 @@ bounded exception for that missing count. No gate revision or draft is authorize
 5. `notes/literature-audit-conventions.md` and, before any manuscript text,
    `papers/style-guide.md` — both routed reads.
 
-## Gate 1 — forward-citation closure (must pass before any draft)
+## Gate 1 — forward-citation closure (passed with approved exception)
 
 Per `notes/literature-audit-conventions.md`, with OpenAlex, Crossref, and Semantic Scholar
 (three sources for every negative): Haah 2018 (PRA 97, 042327), Campbell–Howard 2017 (PRA 95,
