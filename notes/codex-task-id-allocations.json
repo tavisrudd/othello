@@ -4679,8 +4679,17 @@
       "last": 1107,
       "purpose": "Offline bundle inspection, explicit verification and fork workflow, durable run repository ownership contracts",
       "sequence": 520
+    },
+    {
+      "count": 3,
+      "first": 1108,
+      "kind": "reservation",
+      "lane": "continuation",
+      "last": 1110,
+      "purpose": "C295 reconciliation and literature comparison; certified reconstruction and small orders; upgraded manuscript review",
+      "sequence": 521
     }
   ],
-  "next_id": 1108,
+  "next_id": 1111,
   "schema": "codex-task-id-allocations-v1"
 }
