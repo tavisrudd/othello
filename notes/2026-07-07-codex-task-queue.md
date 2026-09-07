@@ -318,5 +318,3 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 All completed rows, original rankings, amendments, and detailed task bodies are preserved in
 `2026-07-07-codex-task-queue-archive.md`. Do not copy them
 back into this live registry.
-
-- **C1098 `[ergodis]` [IN PROGRESS]** — Retire legacy certificate authority and migrate supported consumers → `notes/2026-09-07-c1098-certificate-authority-migration.md`.
