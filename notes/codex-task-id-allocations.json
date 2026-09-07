@@ -4751,8 +4751,17 @@
       "last": 1124,
       "purpose": "Replace infographic demo entry with campaign console using current browser engine and inspectable proposal state",
       "sequence": 528
+    },
+    {
+      "count": 1,
+      "first": 1125,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1125,
+      "purpose": "Integrate portable bundles and WASM campaigns into the operator console",
+      "sequence": 529
     }
   ],
-  "next_id": 1125,
+  "next_id": 1126,
   "schema": "codex-task-id-allocations-v1"
 }
