@@ -4607,8 +4607,17 @@
       "last": 1097,
       "purpose": "Independent min-plus summary transition verification",
       "sequence": 512
+    },
+    {
+      "count": 1,
+      "first": 1098,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1098,
+      "purpose": "Retire legacy certificate authority and migrate supported consumers",
+      "sequence": 513
     }
   ],
-  "next_id": 1098,
+  "next_id": 1099,
   "schema": "codex-task-id-allocations-v1"
 }
