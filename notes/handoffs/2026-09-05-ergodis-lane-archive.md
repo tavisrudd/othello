@@ -44,3 +44,10 @@ Language inventory, finite executable semantics, portable reduction documents an
 conformance committed in core `55c5d8c`. All native and browser gates passed, including 12 shared
 reduction cases and 3 Worker rejection cases. Contract distinguishes restriction from quotient
 and declared origins from evidence. Report: `../2026-09-07-c1081-language-semantics.md`.
+
+## 2026-09-07 — C1082 complete
+
+Scalar operation specification, independent checked-integer reference and DAG-lowering
+conformance committed as core `ac6b3ad`. All native gates passed. Cold compiler field-schema
+validation prevents u16 truncation and ambiguous names; evaluator and layouts unchanged.
+Report: `../2026-09-07-c1082-scalar-semantics.md`.

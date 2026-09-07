@@ -132,12 +132,16 @@ C1080's portable admission pilot and current-core browser recovery are complete:
 C1081's language inventory, finite reduction semantics and native/WASM conformance slice are
 complete: `notes/2026-09-07-c1081-language-semantics.md` (core `55c5d8c`).
 
-**Active C1082**: scalar PlanSpec integer/error semantics and FeatureDag lowering conformance,
-continued on Tavis's instruction in intent-based mode. Report:
-`notes/2026-09-07-c1082-scalar-semantics.md`. Preserve native specialization/hot loops and exact
-Tiger layout guards. Portable campaign unification and general kernel imports remain successors;
-control-plane scalar features are not being added wholesale to WASM. C1032 remains open for its
-full original acceptance review.
+C1082's scalar operation semantics and FeatureDag lowering conformance are complete:
+`notes/2026-09-07-c1082-scalar-semantics.md` (core `ac6b3ad`). The public compiler now validates
+field-schema bounds before u16 lowering; native evaluator/layouts are unchanged.
+
+**Next**: allocate a portable executable campaign transition model with explicit candidate,
+evidence and artifact state, mode/coverage, cancellation/budget outcomes and replay binding.
+Scalar/reduction languages now have documented contracts and finite conformance suites;
+whole-DAG versus selected-root error domains remain distinct. General quotients, kernel imports
+and machine-checked compiler proofs are later gates. Preserve native specialization and exact
+Tiger layout guards. C1032 remains open for full original acceptance review.
 
 ### C985 — Ergodis exact algebraic optimization paper
 

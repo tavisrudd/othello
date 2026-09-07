@@ -5562,3 +5562,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1080 `[ergodis]` [REPORTED 2026-09-07]** — portable finite reduction admission/discovery pilot and current-core browser recovery complete; native and wasm gates passed, exact 64-bit layout guards preserved; core commits `5247f6d`, `95d16b9` → `notes/2026-09-07-c1080-admission-pilot.md`.
 
 - **C1081 `[ergodis]` [REPORTED 2026-09-07]** — language-layer inventory and formal finite reduction semantics, independent Python oracle, bounded logical document interpreter and native/WASM conformance complete; 12 shared cases plus 3 Worker rejections; core `55c5d8c` → `notes/2026-09-07-c1081-language-semantics.md`.
+
+- **C1082 `[ergodis]` [REPORTED 2026-09-07]** — scalar PlanSpec executable semantics and FeatureDag lowering conformance complete; all 27 ops in 41 oracle cases, 1,984 DAG rows, cold field-schema narrowing fix; all native gates pass; core `ac6b3ad` → `notes/2026-09-07-c1082-scalar-semantics.md`.
