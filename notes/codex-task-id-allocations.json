@@ -4490,8 +4490,17 @@
       "last": 1084,
       "purpose": "Portable browser/native control architecture and staged migration plan",
       "sequence": 499
+    },
+    {
+      "count": 1,
+      "first": 1085,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1085,
+      "purpose": "Portable scalar language ownership and bounded stream codecs with compatibility and native/WASM conformance",
+      "sequence": 500
     }
   ],
-  "next_id": 1085,
+  "next_id": 1086,
   "schema": "codex-task-id-allocations-v1"
 }
