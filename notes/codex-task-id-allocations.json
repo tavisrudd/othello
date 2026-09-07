@@ -4733,8 +4733,17 @@
       "last": 1122,
       "purpose": "Rebuild browser first-visit experience around a concrete optimization example and guided safe-reduction campaign",
       "sequence": 526
+    },
+    {
+      "count": 1,
+      "first": 1123,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1123,
+      "purpose": "Read-only coherent repository snapshot projection into DuckDB and Jupyter with exact counters and lineage",
+      "sequence": 527
     }
   ],
-  "next_id": 1123,
+  "next_id": 1124,
   "schema": "codex-task-id-allocations-v1"
 }
