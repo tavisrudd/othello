@@ -1,10 +1,16 @@
 cff-version: 1.2.0
-message: "Please cite the manuscript; DOI metadata will be added when assigned."
+message: "Please cite the archived manuscript using the version DOI below."
 type: article
 title: "Reconstructing projective frames from their continuation graphs"
 authors:
   - family-names: Rudd
     given-names: Tavis
 version: 0.1.0
-date-released: 2026-09-07
+date-released: 2026-09-08
 license: CC-BY-4.0
+doi: 10.5281/zenodo.22651106
+url: "https://github.com/tavisrudd/continuation-graph-rigidity"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22651105
+    description: Concept DOI for all versions

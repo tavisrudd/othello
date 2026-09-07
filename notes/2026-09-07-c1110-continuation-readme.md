@@ -20,3 +20,9 @@ badge then. No GitHub action was taken.
 The author corrected the manuscript license to CC BY 4.0. LICENSE, README,
 CITATION.cff and Zenodo metadata now agree; LICENSE-MIT preserves the prior
 software and supporting-file license. Metadata and local-link checks pass.
+
+Zenodo API `https://zenodo.org/api/records/22651106` confirms version DOI
+`10.5281/zenodo.22651106`, concept DOI `10.5281/zenodo.22651105`, title match,
+version `0.1.0` and publication date `2026-09-08`. Added concept badge and
+separate version/concept citation links; CFF cites the version and records
+the concept identifier. This supersedes the pending-DOI note above.

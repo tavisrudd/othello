@@ -1,5 +1,7 @@
 # Reconstructing projective frames from their continuation graphs
 
+[![Concept DOI](https://img.shields.io/badge/Concept_DOI-10.5281%2Fzenodo.22651105-blue.svg)](https://doi.org/10.5281/zenodo.22651105)
+
 Tavis Rudd — first draft, September 2026.
 
 ## Read the paper
@@ -147,8 +149,11 @@ Larger arcs and reconstruction of the full continuation complex remain outside
 its scope. The graph records pairwise incompatibility; it does not by itself
 assert that every independent set can be adjoined simultaneously.
 
-This is a first draft. Citation metadata is provided in
-[`CITATION.cff`](CITATION.cff); no DOI is assigned in that metadata.
+The concept DOI for all versions is
+[10.5281/zenodo.22651105](https://doi.org/10.5281/zenodo.22651105).
+The archived first draft, version `0.1.0`, has version DOI
+[10.5281/zenodo.22651106](https://doi.org/10.5281/zenodo.22651106).
+Citation metadata is provided in [`CITATION.cff`](CITATION.cff).
 The repository is `tavisrudd/continuation-graph-rigidity` on GitHub.
 
 ## License
