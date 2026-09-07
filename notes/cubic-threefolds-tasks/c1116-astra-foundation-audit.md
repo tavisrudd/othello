@@ -1,7 +1,18 @@
 # C1116: Cubic pair foundation audit after Astra feedback
 
 **Lane:** `cubic-threefolds`
-**Status:** queued; highest-EV next action
+**Status:** completed 2026-09-07; targeted audit and repairs validated
+
+## Outcome
+
+The faithful-center proof now uses the reduced graded source, polynomial
+translations at initial Novikov degree, and untruncated divisor exponentials.
+The cyclic repair was checked and its unformalized preliminary step is
+explicit in the claim map. The quotient/descent interfaces and TZ v2 inputs
+were checked; citations and hypothesis matches were updated. Both authority
+and mirror gates pass, with byte-identical rebuilt PDFs. No push or email.
+Report: `../2026-09-07-c1116-cubic-foundations-audit.md`.
+Next: C1120; exact spectrum and finite-index proofs remain with C1117/C1119.
 
 ## Goal and scope
 

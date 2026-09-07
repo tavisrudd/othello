@@ -140,13 +140,39 @@ the sharpness bibliography's final page was checked by text extraction.
 The two simultaneous wrappers chose the same timestamp/command log directory;
 their successful exit results were returned separately, but that directory
 is not a reliable archive of both runs. Downstream replays use distinct
-command names and retain separate logs. Synchronization is pending at this
-authority checkpoint.
+command names and retain separate logs. Both downstream `make check` replays
+passed, and exporter verification passed for both trees. Their rebuilt PDFs
+are byte-identical to the authority hashes below. The synchronized authority
+commit is `5af6b7bdf`; local forward mirror commits are `6ab5c45` (m1) and
+`fa1fea8` (sharpness). No push or deposit occurred.
+
+Replay commands from the authority root:
+
+```sh
+make -C papers/cubic-stabilization-m1 check
+make -C papers/cubic-stabilization-irrationality check
+make -C /home/tavis/src/math-papers/cubic-stabilization-m1 check
+make -C /home/tavis/src/math-papers/cubic-stabilization-irrationality check
+```
+
+Distinct downstream logs are under
+`/tmp/claude-run-quiet/20260907-151551-make-C-cubic-stabilization-m1-check/`
+and
+`/tmp/claude-run-quiet/20260907-151551-make-C-cubic-stabilization-irrationality-check/`.
+The m1 gate did not rebuild Lean or independently recompute every imported
+quantum invariant; its exact scope is the source-only gate described above.
 
 | Authority PDF | SHA-256 |
 |---|---|
 | m1 | `fcefda002538db8ed1edb72c119c66701a55e50dcd1ec54bf00751fe5b2403ae` |
 | sharpness | `d3166fedba26d16e8d5b584097a466cd358b8e974a823c41c8856aa598b73db5` |
+
+Exporter content hashes are
+`01798c562f668adf9261e693177260e9094967daf6fd13d574e3c7be1bbaa8ba`
+(m1) and
+`0fdf31ce992bbdf935b77cc8a2770c979b0c9312427bdcb46ca470fbbdf82014`
+(sharpness). These checks also carry the previously landed errata to the
+current downstream trees.
 
 ## Mystery ledger — ej + tt closeout
 

@@ -152,7 +152,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `cubic-threefolds`
 
-- **C1116 `[cubic-threefolds]` [QUEUED; FOUNDATION AUDIT]** — audit the repaired cyclic persistence, faithful center coefficient maps, quotient/descent interfaces, provenance, and Tschinkel--Zhang v2 source changes before strengthening either paper → `notes/cubic-threefolds-tasks/c1116-astra-foundation-audit.md`
 - **C1120 `[cubic-threefolds]` [QUEUED; AFTER C1116]** — prove natural-strength marked-threefold, all-characteristic-zero-field, generic-surface, specified Fano-partner and quantitative fibration corollaries → `notes/cubic-threefolds-tasks/c1120-stabilization-corollaries.md`
 - **C1117 `[cubic-threefolds]` [QUEUED; AFTER C1116 ALL-DIMENSIONAL GATE]** — establish the additive Bittner extension through L-1, separately test exact spectrum transport, and derive Hodge and weak-factorization consequences → `notes/cubic-threefolds-tasks/c1117-additive-quantum-motivic-extension.md`
 - **C1118 `[cubic-threefolds]` [QUEUED; RANK-FOUR CERTIFICATE]** — independently reconstruct and certify the full-I3 rank-four character line, restricted weight orbits, and descended five-window obstruction → `notes/cubic-threefolds-tasks/c1118-rank-four-cox-descent-obstruction.md`

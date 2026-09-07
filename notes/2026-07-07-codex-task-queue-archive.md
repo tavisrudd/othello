@@ -5619,3 +5619,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1115 `[ergodis]` [REPORTED 2026-09-07]** — Native filesystem repository adapter sharing C1114 portable semantics; cross-process fencing and filesystem crash/restart gates; follows C1114 → `notes/2026-09-07-c1115-native-repository.md`.
 
 - **C1121 `[ergodis]` [REPORTED 2026-09-07]** — Simplify offline demo onboarding, example-first exploration and saved-run actions; real-browser UI gates → `notes/2026-09-07-c1121-demo-usability.md`.
+
+- **C1116 `[cubic-threefolds]` [COMPLETED 2026-09-07]** — audited the cubic pair foundations; repaired the reduced graded coefficient proof, clarified formal scope, matched TZ v2, and validated both authorities/mirrors → `notes/2026-09-07-c1116-cubic-foundations-audit.md`

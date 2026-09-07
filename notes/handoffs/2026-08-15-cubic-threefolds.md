@@ -38,9 +38,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **Astra review intake (2026-09-07):** the cyclic-centralizer and witness-cover
-  errata are already fixed at `6034287a6`. Next is **C1116**, a targeted
-  foundation/source audit; then **C1120** stabilization corollaries,
+- **Astra review intake (2026-09-07):** **C1116 is complete**: the reduced
+  graded coefficient proof was repaired, cyclic persistence and quotient
+  descent audited, and TZ v2 citations/hypotheses matched. Both authority and
+  mirror gates pass with matching PDFs; report:
+  `../2026-09-07-c1116-cubic-foundations-audit.md`.
+  Next is **C1120** stabilization corollaries,
   **C1117** additive motivic/spectrum work, **C1118** the full-I3 rank-four
   certificate, and **C1119** finite-index slices. C978/C956 retain exposition;
   C963/C965/C966 retain algorithmic work. Treat upgrades as queued proof
@@ -48,8 +51,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-09-07-cubic-astra-review-triage.md`. Tschinkel--Zhang v2 source
   comparison: `../2026-09-07-tz-v1-v2-comparison.md`.
   A bounded friendly-feedback review and unsent email draft are recorded in
-  `../2026-09-07-c1116-tz-friendly-feedback.md`; the foundation audit remains
-  open. C978 now explicitly targets birational geometers unfamiliar with QDMs.
+  `../2026-09-07-c1116-tz-friendly-feedback.md`. Hold the email until the
+  planned paper updates are complete; offer thanks/observations without
+  requesting feedback. C978 explicitly targets birational geometers
+  unfamiliar with QDMs. C956/C978 remain open by author instruction.
 - **C956 — exact level-two cubic manuscript, referee-accepted candidate.**
   Cross-specialty review repaired the characteristic-zero scope, the
   singular-compatible tangent-projection citation, the relative evaluation
