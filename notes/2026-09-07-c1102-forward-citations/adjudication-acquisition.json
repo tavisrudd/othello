@@ -1,0 +1,114 @@
+[
+  {
+    "key": "arXiv:2603.04548",
+    "url": "https://arxiv.org/pdf/2603.04548",
+    "timestamp": "2026-09-07T22:40:13.634992+00:00",
+    "status": 200,
+    "sha256": "19ea5b431cbf16d1e29ab2531b628d7bba3f5457285c1493af7a57f29b9d5b07",
+    "ingest_exit": 0
+  },
+  {
+    "key": "arXiv:2603.15550",
+    "url": "https://arxiv.org/pdf/2603.15550",
+    "timestamp": "2026-09-07T22:40:13.635466+00:00",
+    "status": 200,
+    "sha256": "73b4700b01d94e1b05e5ac5c1e9c0d48661c42e03db0b56832000db492dbf1e7",
+    "ingest_exit": 0
+  },
+  {
+    "key": "arXiv:2506.11725",
+    "url": "https://arxiv.org/pdf/2506.11725",
+    "timestamp": "2026-09-07T22:40:13.637524+00:00",
+    "status": 200,
+    "sha256": "11150451b298d05c788def1c0fd91e3be29a7e6a20ff8b9897d8b1e897f487e6",
+    "ingest_exit": 0
+  },
+  {
+    "key": "arXiv:2512.21874",
+    "url": "https://arxiv.org/pdf/2512.21874",
+    "timestamp": "2026-09-07T22:40:14.474129+00:00",
+    "status": 200,
+    "sha256": "12636434e6ba8fc899e3451050cbdabe7fbb4bf192fa400d4791d53343292a32",
+    "ingest_exit": 0
+  },
+  {
+    "key": "arXiv:2510.10852",
+    "url": "https://arxiv.org/pdf/2510.10852",
+    "timestamp": "2026-09-07T22:40:14.485216+00:00",
+    "status": 200,
+    "sha256": "6857065a65fd9029b9205b826f4fc0717f1007b433ac8cbf803ca33f08dbbaf1",
+    "ingest_exit": 0
+  },
+  {
+    "key": "arXiv:2408.10140",
+    "url": "https://arxiv.org/pdf/2408.10140",
+    "timestamp": "2026-09-07T22:40:14.514314+00:00",
+    "status": 200,
+    "sha256": "1bed8504554e448f1f0b945eef5a419e560afabcf26972a091ae38bd6ddc6487",
+    "ingest_exit": 0
+  },
+  {
+    "key": "arXiv:2502.01864",
+    "url": "https://arxiv.org/pdf/2502.01864",
+    "timestamp": "2026-09-07T22:40:14.925916+00:00",
+    "status": 200,
+    "sha256": "17317c577dcc64ee2105aab7604ec5db29b9c3c691de2dc77835c833211af747",
+    "ingest_exit": 0
+  },
+  {
+    "key": "arXiv:2507.05392",
+    "url": "https://arxiv.org/pdf/2507.05392",
+    "timestamp": "2026-09-07T22:40:14.937957+00:00",
+    "status": 200,
+    "sha256": "1e65c80b4524977122e48f73d2d4b9d12b60b23bee76088225cc4f19fbfa7ca4",
+    "ingest_exit": 0
+  },
+  {
+    "key": "arXiv:2408.07764",
+    "url": "https://arxiv.org/pdf/2408.07764",
+    "timestamp": "2026-09-07T22:40:15.300705+00:00",
+    "status": 200,
+    "sha256": "318046172e5d0817dc57165a2207c875e559de7351f5f0efd4d157b92b85811e",
+    "ingest_exit": 0
+  },
+  {
+    "key": "arXiv:1902.05634",
+    "url": "https://arxiv.org/pdf/1902.05634",
+    "timestamp": "2026-09-07T22:40:15.319885+00:00",
+    "status": 200,
+    "sha256": "4f0dc6fcdf785eb6b93543e68e716684e0e883256bc9358dd91c9a4620e28483",
+    "ingest_exit": 0
+  },
+  {
+    "key": "arXiv:1406.3055",
+    "url": "https://arxiv.org/pdf/1406.3055",
+    "timestamp": "2026-09-07T22:40:15.462019+00:00",
+    "status": 200,
+    "sha256": "1cc50ba7c5e366c9629c48665360c0a6c058a7b9990820d5cd8a7e53574abea9",
+    "ingest_exit": 0
+  },
+  {
+    "key": "arXiv:2012.00490",
+    "url": "https://arxiv.org/pdf/2012.00490",
+    "timestamp": "2026-09-07T22:40:15.743223+00:00",
+    "status": 200,
+    "sha256": "d33dd2e1baf67bdbada29634bd45080255b482bc52a3a64a4af01737c3dfbbbd",
+    "ingest_exit": 0
+  },
+  {
+    "key": "arXiv:2306.09292",
+    "url": "https://arxiv.org/pdf/2306.09292",
+    "timestamp": "2026-09-07T22:40:15.838442+00:00",
+    "status": 200,
+    "sha256": "dd78734628771309e25fbdfda48cdcd16c5ae24f6aab41b7ab2ce582d3274872",
+    "ingest_exit": 1
+  },
+  {
+    "key": "arXiv:1407.2713",
+    "url": "https://arxiv.org/pdf/1407.2713",
+    "timestamp": "2026-09-07T22:40:15.854901+00:00",
+    "status": 200,
+    "sha256": "9681c71b2a704cd52a580af4b6d54a2b5a0dcb1f8618724eeb2c3743c7976bcf",
+    "ingest_exit": 0
+  }
+]

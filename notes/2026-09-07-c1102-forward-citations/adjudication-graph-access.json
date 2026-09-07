@@ -1,0 +1,44 @@
+[
+  {
+    "name": "s2-arxiv-retry",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2602.23687?fields=title,citationCount,externalIds",
+    "timestamp": "2026-09-07T22:40:35.607308+00:00",
+    "status": 200,
+    "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/s2-arxiv-retry.json",
+    "sha256": "696ba133811cff114d40832bdce70abd3901aea6080b572278b30a2bc8f14ae1",
+    "count": 0,
+    "id": "db79e31f1d0d66ece3e069e0c4c6eb6049bbfc69",
+    "title": "Stabilizer R\\'enyi entropy of 3-uniform hypergraph states",
+    "identifiers": {
+      "ArXiv": "2602.23687",
+      "CorpusId": 286171702
+    }
+  },
+  {
+    "name": "s2-doi-retry",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.48550/arXiv.2602.23687?fields=title,citationCount,externalIds",
+    "timestamp": "2026-09-07T22:40:35.607800+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found",
+    "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/s2-doi-retry.json",
+    "sha256": "c139f8ea97d1597e4b7ce124907bed54e1c2cb940c15b5569496141db9fdc05a"
+  },
+  {
+    "name": "crossref-retry",
+    "url": "https://api.crossref.org/works/10.48550/arXiv.2602.23687",
+    "timestamp": "2026-09-07T22:40:35.608285+00:00",
+    "status": 404,
+    "error": "HTTP Error 404: Not Found",
+    "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/crossref-retry.json",
+    "sha256": "ae8462e3af85ca7577aaa97ff22a194f9dfd7fada58cf4944b53d2fdfa7b1f92"
+  },
+  {
+    "name": "datacite-registration",
+    "url": "https://api.datacite.org/dois/10.48550/arXiv.2602.23687",
+    "timestamp": "2026-09-07T22:40:35.608676+00:00",
+    "status": 200,
+    "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/datacite-registration.json",
+    "sha256": "3b55b44e466008bfffb865512966eab16c2a5795764ef0d4554b53442e6b0961",
+    "registrationAgency": "arXiv"
+  }
+]

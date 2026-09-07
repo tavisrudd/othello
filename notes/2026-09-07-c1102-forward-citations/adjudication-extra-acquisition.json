@@ -1,0 +1,16 @@
+[
+  {
+    "key": "arXiv:2312.14399",
+    "url": "https://arxiv.org/pdf/2312.14399",
+    "status": 200,
+    "sha256": "508341c52d0b085825e62a4f9f410af83fd7f0553a50004755325e21c95b1561",
+    "ingest_exit": 1
+  },
+  {
+    "key": "10.1088/1402-4896/ad80e7",
+    "url": "https://iopscience.iop.org/article/10.1088/1402-4896/ad80e7/pdf",
+    "status": 200,
+    "sha256": "f1ec4a0d8379baae6b010f0f073e0ee31d269ec287357182f3b2c075705e4a90",
+    "ingest_exit": 1
+  }
+]

@@ -15,6 +15,10 @@ Dai–Fu–Luo's explicit qubit product ceiling; the snapshot below is historica
 Further technical reading: `TECHNICAL-FOLLOWUP.md` pins the binary rank formula,
 Alltop primary access, and distinctions from local-unitary nonlocal magic.
 
+Current continuation: `ADJUDICATION.md` records all 336 dispositions and the remaining
+coverage limits. `CLAIM-PROOF-NOVELTY.md`, N1–N9, is the canonical pre-draft ledger;
+the provisional verdicts and next steps below are the frozen earlier checkpoint.
+
 ## Outcome and resume gate
 
 1. All seven original seeds have independently obtained OpenAlex, Crossref, and Semantic

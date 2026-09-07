@@ -1,0 +1,35 @@
+{
+  "preserved_entries": 1048,
+  "repaired_entries": [
+    {
+      "key": "arXiv:1804.02692",
+      "authors": "Yiwei Zhang; Eitan Yaakobi; Tuvi Etzion; Moshe Schwartz",
+      "bytes": 388158,
+      "extractor": "pdftotext (nixpkgs#poppler-utils)",
+      "fetched": "2026-08-24",
+      "pages": 5,
+      "sha256": "904ff548b692a9a44ff89f238f0240004cc6cb2201b3f2e2e4b823dd16f83ccc",
+      "status": "ok",
+      "text_words": 6350,
+      "title": "On the Access Complexity of PIR Schemes",
+      "url": "https://arxiv.org/pdf/1804.02692",
+      "year": 2018
+    },
+    {
+      "key": "arXiv:2407.16629",
+      "authors": null,
+      "bytes": 590708,
+      "extractor": "pdftotext (nixpkgs#poppler-utils)",
+      "fetched": "2026-09-04",
+      "pages": 13,
+      "sha256": "a8cc22c6a29e33c7ce77bc532bc66d82b38b462611bc2d0caa53bf2a2afbbc27",
+      "status": "ok",
+      "text_words": 13085,
+      "title": "Efficient Discovery of Actual Causality using Abstraction-Refinement",
+      "url": "https://arxiv.org/pdf/2407.16629",
+      "year": null
+    }
+  ],
+  "corrupt_backup": "/tmp/persistent/tavis/lit-search/manifest.json.c1102-concurrency-corrupt-20260907",
+  "repair": "Preserved all independently parsable records; reconstructed two damaged records from intact fields and adjacent hashed text/PDF; subsequent ingests serialized."
+}

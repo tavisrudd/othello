@@ -5,15 +5,15 @@
 **Date:** 2026-09-07
 
 **Status:** active at Gate 1; no manuscript text before forward-citation closure passes.
-Acquisition and first triage are banked in
-`notes/2026-09-07-c1102-forward-citations/REPORT.md`: three counts for all seven original
-seeds, 1,377 graph memberships screened, 336 title-deduplicated promotions awaiting
-completion of technical review. Alltop access is resolved in the permanent cache; the complete Wang–Li and Dai–Fu–Luo
-user scan sets are recorded in `notes/2026-09-07-c1102-forward-citations/USER-SCAN-FOLLOWUP.md`;
-the added Kagamihara–Tsuchiya seed has Crossref 404 / Semantic Scholar 429 gaps.
-Watson–Campbell–Anwar–Browne 2015 supplies omitted signed-qudit prior art.
-`notes/2026-09-07-c1102-forward-citations/TECHNICAL-FOLLOWUP.md` records six
-primary-section comparisons, including the direct binary rank-formula predecessor.
+Citation dispositions are banked in
+`notes/2026-09-07-c1102-forward-citations/ADJUDICATION.md`: all 336 promotions have
+explicit dispositions, with 20 additional partial primary readings. This is not
+336 full-text exclusions. The canonical pre-draft verdicts are rows N1–N9 of
+`notes/2026-09-07-c1102-forward-citations/CLAIM-PROOF-NOVELTY.md`; they supersede
+the historical C1090/C1099 positioning. Alltop/Wang–Li/Dai–Fu–Luo access is resolved.
+The two remaining coverage limits are the added Hessian seed's Crossref missing
+record (Semantic Scholar now succeeds with count 0), and Feng–Luo
+`10.1088/1402-4896/ad80e7` primary proof access. No gate revision or draft is authorized.
 
 ## Read first (in this order, nothing else)
 
@@ -74,10 +74,11 @@ Move detailed classifications, enumerators and exhaustion to appendices/artifact
 6. the synthesis bridge (memo section 9.1, currently only implicit in C1090): a Waring
    decomposition `F = Σ c_j ℓ_j^3` is a circuit (Clifford computes `ℓ_j`, weighted cubic
    phase, uncompute), so the Waring rank is a non-Clifford gate count in that model and
-   apolarity is the compilation problem; state it explicitly, tie it to Paper II's Macaulay
-   inverse-system cubic, and cite the apolarity/decomposition machinery of the deep-hole
-   (Reed–Solomon lane) work only after checking that it actually uses apolarity (the lane
-   handoff does not mention it; unverified as of 2026-09-07).
+   apolarity is the compilation problem; state it explicitly and tie it to Paper II's Macaulay
+   inverse-system cubic. Cite the direct qudit predecessor Heyfron–Campbell
+   arXiv:1902.05634, IV, Eqs. (8)–(9), Lemma 2 and Problem 3 (ledger N7).
+   The optional deep-hole/ Reed–Solomon-lane apolarity citation remains unverified and unused;
+   it is not needed to establish this already-published synthesis bridge.
 
 Title and alias proposals (2026-09-07; author's call, not yet decided):
 
@@ -130,8 +131,10 @@ Title and alias proposals (2026-09-07; author's call, not yet decided):
 - Sol's weighted-evaluation theorem (Lagrange weights `w_i = 1/P'(α_i)`, `S = RS_{s_0+1}`,
   `L = RS_{r+1}`, `s_0 + 2r ≤ n - 2`, giving `[[n, 3r-n+2, min(n-r, n-2r)]]_q`) is the
   mechanism of C1099 Test 3(c); the C1099 table (`[[7,1,3]]_7`, `[[11,3,3]]_11`,
-  `[[13,4,3]]_13`) is exactly its `a = 2` row. Cite Campbell 2014 (arXiv:1406.3055) for the
-  `[[p,1,(p+2)/3]]_p` case. Present the design space as Sol's four axes
+  `[[13,4,3]]_13`) is exactly its `a = 2` row. Cite Campbell 2014 (arXiv:1406.3055) as
+  related punctured polynomial-code precedent: its physical length is `p-1` and its
+  maximum distance is `floor((p+1)/3)`, not the formerly attributed length-p formula.
+  The C1099 length-p table retains its own proof. Present the design space as Sol's four axes
   `(dim S, d_X, d_Z, complexity of F̄)`: Reed–Solomon wins the first three with a trivial cubic,
   the conic trades win the fourth with `d_Z = 2`.
 - The "missing middle ground" (`d ≥ 3`, `k > 1`, non-factorizable invariant cubic) is open on

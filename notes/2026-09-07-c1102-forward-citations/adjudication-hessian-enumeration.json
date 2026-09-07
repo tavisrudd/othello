@@ -1,0 +1,8 @@
+{
+  "url": "https://api.semanticscholar.org/graph/v1/paper/db79e31f1d0d66ece3e069e0c4c6eb6049bbfc69/citations?fields=title,abstract,year,externalIds&limit=1000&offset=0",
+  "status": 200,
+  "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/s2-hessian-citations-final.json",
+  "sha256": "b890c0f15f5c03ba84c2ef5ace10d4d63f07c6388916be8151f53ffbb7a0b479",
+  "count": 0,
+  "complete": true
+}

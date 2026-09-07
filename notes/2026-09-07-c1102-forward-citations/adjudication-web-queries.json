@@ -1,0 +1,56 @@
+{
+  "date": "2026-09-07",
+  "queries": [
+    "\"Quantum multigraph states and multihypergraph states\" arxiv",
+    "\"Optimality of the Howard-Vala T-gate\" pdf",
+    "\"quantum\" \"translation trade\" cubic",
+    "\"cubic\" \"Hessian\" \"qudit\" entropy",
+    "\"Hessian\" \"stabilizer\" \"cubic\"",
+    "\"Clebsch\" \"magic states\"",
+    "\"[[14,6,2]]\" quantum",
+    "\"binary quartic\" \"magic\" quantum",
+    "\"Groups of diagonal gates in the Clifford hierarchy\" arxiv",
+    "\"Homological Origin of the Transversal Implementability\" arxiv",
+    "\"k-uniform complete hypergraph-state stabilizers\" arxiv",
+    "site.arxiv.org Bravyi Haah \"Magic-state distillation with low overhead\"",
+    "site.mathnet.ru \"Groups of diagonal gates\""
+  ],
+  "scope": "Discovery only; no negative inferred from web-search counts. Unrelated hits were not consulted.",
+  "metadata_sources": [
+    {
+      "url": "https://arxiv.org/abs/2602.23687",
+      "read_depth": "abstract/metadata only",
+      "use": "Pinned seed/version and DataCite registration link"
+    },
+    {
+      "url": "https://arxiv.org/abs/2312.14399",
+      "read_depth": "abstract/metadata only",
+      "use": "Resolve graph promotion to primary preprint; subsequent partial PDF reading in source register"
+    },
+    {
+      "url": "https://arxiv.org/abs/2602.14499",
+      "read_depth": "abstract/metadata only",
+      "use": "Resolve homological obstruction title; no full-text characterization"
+    },
+    {
+      "url": "https://arxiv.org/abs/2511.15911",
+      "read_depth": "abstract/metadata only",
+      "use": "Resolve complete-hypergraph stabilizer title; no full-text characterization"
+    },
+    {
+      "url": "https://www.mathnet.ru/eng/tmf10730",
+      "read_depth": "abstract/metadata only",
+      "use": "Diagonal-group classification title/abstract only; no PDF reading"
+    },
+    {
+      "url": "https://arxiv.org/abs/1209.2426",
+      "read_depth": "abstract/metadata only",
+      "use": "Bravyi-Haah identifier and abstract verified; PDF cached"
+    },
+    {
+      "url": "https://www.researchgate.net/publication/384404677_Optimality_of_the_Howard-Vala_T-gate_in_stabilizer_quantum_computation",
+      "read_depth": "abstract/metadata only",
+      "use": "Final publisher-preview fallback: only first-page introduction/abstract visible, no theorem or proof; full-text request not sent."
+    }
+  ]
+}
