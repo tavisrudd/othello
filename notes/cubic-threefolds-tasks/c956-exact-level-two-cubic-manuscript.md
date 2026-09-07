@@ -124,3 +124,15 @@ badge.  Do not push, deposit, or close without that instruction.
 Read the dated report and confirm whether the author has authorized publication
 or closure.  Do not reopen accepted prose without a new concrete finding.
 C958 remains queued behind C956.
+
+## Astra exposition follow-up, 2026-09-07
+
+The author supplied new concrete exposition findings. Implement the sharpness
+editorial decisions in the linked review: two descriptions of the quotient,
+orbit-versus-rationality proof stages, descent sequence, and one worked
+symbolic witness. The cover erratum is already fixed. C1116 owns foundation
+and v2 source checks, C1118/C1119 own new slice mathematics, and C1120 owns
+new stabilization corollaries. Preserve the full disclosure and author-close
+restriction.
+
+Review: `notes/2026-09-07-cubic-astra-review-triage.md`.

@@ -38,6 +38,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
+- **Astra review intake (2026-09-07):** the cyclic-centralizer and witness-cover
+  errata are already fixed at `6034287a6`. Next is **C1116**, a targeted
+  foundation/source audit; then **C1120** stabilization corollaries,
+  **C1117** additive motivic/spectrum work, **C1118** the full-I3 rank-four
+  certificate, and **C1119** finite-index slices. C978/C956 retain exposition;
+  C963/C965/C966 retain algorithmic work. Treat upgrades as queued proof
+  obligations, not accepted theorems. Review and ordering:
+  `../2026-09-07-cubic-astra-review-triage.md`. Tschinkel--Zhang v2 source
+  comparison: `../2026-09-07-tz-v1-v2-comparison.md`.
 - **C956 — exact level-two cubic manuscript, referee-accepted candidate.**
   Cross-specialty review repaired the characteristic-zero scope, the
   singular-compatible tangent-projection citation, the relative evaluation

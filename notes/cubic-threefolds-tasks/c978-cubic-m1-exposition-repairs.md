@@ -57,3 +57,13 @@ the novelty sentence parallel verb structure.  It is synchronized at authority
 with content SHA-256
 `b15dbbc7d0c387080ad007c24f62a7df25e2791562ed6b7d6e23c41d2486a892`.
 C978 remains active by author instruction.
+
+## Astra exposition follow-up, 2026-09-07
+
+Implement the m1 editorial decisions in the linked review after coordinating
+with C1116. The cyclic repair is already present; C1117 and C1120 own new
+mathematics. Prioritize the early occurrence-indexed reduction, rank-two
+model, distinct invariance arguments, and notation collision. Preserve
+provenance and avoid introducing unproved upgrades in overview prose.
+
+Review: `notes/2026-09-07-cubic-astra-review-triage.md`.
