@@ -83,6 +83,16 @@ readiness; they must not be treated as that audit. The brief now defines the tec
 and unresolved rights/ownership questions to carry into the plan. No asset or rights transfer
 is authorized by this requirement.
 
+## Runtime extension requirement added after collection
+
+Tavis requests one core binary that loads private industry extensions as runtime shared libraries
+(`.so` and platform equivalents). The synthesis must turn that requirement into a concrete
+versioned module/registration contract, aligned with theorem/parameter provenance, admission,
+replay, core performance, and industry IP separation. The initial inventories did not establish
+an existing dynamic loader or assess ABI compatibility. Loading during active runs and live
+unloading/replacement remain choices to evaluate. The brief records the required analysis;
+no loader implementation or ABI selection has been made.
+
 ## Next synthesis work
 
 Use these inventories to construct a concrete cross-repository capability/admission map, then

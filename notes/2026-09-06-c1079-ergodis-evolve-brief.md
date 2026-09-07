@@ -139,6 +139,40 @@ private material, file patents, create entities, or allocate IP rights. The core
 direction above still stands; the plan must explain how shared machinery and separable industry
 knowledge fit together.
 
+## Runtime-loadable industry extensions
+
+Explicit user requirement: one core binary should be able to load industry-specific extensions
+from shared libraries at runtime (`.so` on the current platform, equivalents where supported).
+Private heuristics/theorems and related industry capabilities should be distributable as such
+modules, consistent with the core/private and potential industry carve-out boundaries above.
+This is part of the target architecture for the synthesis, not merely an optional packaging idea.
+
+The plan must inspect existing extension/registration mechanisms and specify a concrete runtime
+module contract covering:
+
+- Which capabilities a module can register: industry adapters, proposers, heuristics, theorem
+  validators, parameter generators, and quotient/compiler specializations as applicable; identify
+  which lifecycle and workflow services stay in the host core.
+- ABI/API versioning and compatibility, module identity/version/digest, dependency negotiation,
+  loading/initialization, ownership and lifetime of data/callbacks, error handling, and reproducible
+  module resolution. Evaluate the implementation choices under the existing Rust/performance
+  guides before recommending an ABI; this brief does not select one.
+- Binding module and knowledge provenance into candidates, theorem/parameter lineage, validation
+  evidence, and replay artifacts. Distinguish registering a validator from establishing trust in
+  its checks; loading a module must not itself grant proof authority or disclosure rights.
+- The trust and failure model of in-process modules, and whether any extension capability needs
+  a separate execution boundary. Do not equate a shared-library boundary with confidentiality or
+  fault isolation. Preserve the industry IP boundary in packaging and interfaces as well as code.
+- Interaction with active campaigns, Unix-socket steering, and compiled consumers, including safe
+  lifecycle transitions and hot-path costs. Determine whether loading is startup-only or also
+  allowed during a run; live unloading/hot replacement is an unresolved choice, not a requirement.
+- Independently buildable/versioned industry modules, a core-only usable binary, and concrete
+  compatibility/replay/acceptance tests. Assess QEC as the leading private module/carve-out example.
+
+Deliver a staged path to the single-host-binary/shared-library model without moving source or
+building a new loader during this evidence-and-plan task. Public export and specific private IP
+release decisions remain separate.
+
 ## Boundary and acceptance
 
 This task produces a review and concrete, reviewable synthesis plan, not an implementation merge

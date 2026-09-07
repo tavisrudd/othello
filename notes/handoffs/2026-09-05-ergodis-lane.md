@@ -132,7 +132,8 @@ clear staged plan for the best autonomous structure-discovery and theorem/parame
 quotient system, steerable through a Unix socket. Reconcile conflicting inherited intent against
 Tavis’s explicit autonomy goal. Target ownership: reusable evolve machinery/workflows in core,
 with selected heuristics/theorems optionally private. Assess separable industry IP for future
-licensing or acquisition carve-outs, with QEC the leading case. Scope and acceptance:
+licensing or acquisition carve-outs, with QEC the leading case. Target runtime: one core binary
+loading industry extensions as shared libraries (`.so` etc.). Scope and acceptance:
 `notes/2026-09-06-c1079-ergodis-evolve-brief.md`. Evidence report:
 `notes/2026-09-06-c1079-ergodis-evolve-review.md`.
 
