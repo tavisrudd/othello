@@ -4652,8 +4652,17 @@
       "last": 1102,
       "purpose": "C1099 successor: cubic-phase codes companion note writing task, forward-citation closure first gate",
       "sequence": 517
+    },
+    {
+      "count": 1,
+      "first": 1103,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1103,
+      "purpose": "Bounded offline run bundles with content resolution and lineage diagnostics",
+      "sequence": 518
     }
   ],
-  "next_id": 1103,
+  "next_id": 1104,
   "schema": "codex-task-id-allocations-v1"
 }
