@@ -289,9 +289,13 @@ shortcut checking and a rendered counterexample. Former controls remain advanced
 Full native/Python and browser semantic/UI/recovery gates pass. Report:
 `notes/2026-09-07-c1122-first-visit-demo.md`.
 
-**C1123 in progress**: analytical projection bridge from coherent repository snapshots to
-read-only DuckDB/Jupyter heads, lineage, attempts and exact accounting. User approved scope.
-Report: `notes/2026-09-07-c1123-repository-analysis.md`. C1033 remains a downstream consumer.
+**C1123 complete**: private `c835284`, `2820c67`; coherent native repository projection
+into DuckDB/Jupyter heads, update/fork lineage, attempts and exact u64 accounting.
+Scoped native/CLI/SQL gates pass; inherited whole-tool Clippy lint remains.
+Report: `notes/2026-09-07-c1123-repository-analysis.md`.
+
+**Next**: C1033 can consume these detached tables for saved-run notebook lineage and
+accounting views. Browser analytical export and larger-store pagination need separate slices.
 Browser/native bounded persistence pilots are complete; automatic execution recovery, larger
 stores and additional platform/retention guarantees need separately allocated slices and gates.
 Closed scope and gates: `notes/2026-09-07-ergodis-offline-workflow-successors.md`.

@@ -186,3 +186,13 @@ Report: `../2026-09-07-c1121-demo-usability.md`.
 Core `67d929b`: concrete optimizer introduction, interactive switch/lamp optimum and guided
 shortcut/counterexample campaign. Advanced interfaces retained. Full native/Python and
 actual browser gates pass. Report: `../2026-09-07-c1122-first-visit-demo.md`.
+
+## 2026-09-07 — C1123 analytical bridge
+
+User approved the analytical bridge scope after `go ergodis`; intent-based mode
+continued. C1123 is closed: private `c835284`, `2820c67` implement coherent native
+snapshot export and detached DuckDB/Jupyter tables with exact accounting and
+published-head ancestry. Scoped native/CLI/SQL checks pass; the inherited
+`leakage_dual_tower.rs:116` Clippy blocker remains foreign. Report:
+`../2026-09-07-c1123-repository-analysis.md`. C1033 owns downstream notebook views.
+No incidental discovery-track entry was warranted.

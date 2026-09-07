@@ -5625,3 +5625,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1122 `[ergodis]` [REPORTED 2026-09-07]** — First-visit product introduction, visible optimization puzzle and guided shortcut checking; retain advanced inspectors and real-browser gates → `notes/2026-09-07-c1122-first-visit-demo.md`.
 
 - **C1120 `[cubic-threefolds]` [COMPLETED 2026-09-07]** — proved natural-strength marked-threefold, arbitrary characteristic-zero field, generic-surface, specified-partner and fibration corollaries; validated authorities and matching mirrors → `notes/2026-09-07-c1120-stabilization-corollaries.md`
+
+- **C1123 `[ergodis]` [REPORTED 2026-09-07]** — coherent native repository projection for DuckDB/Jupyter heads, update/fork lineage, attempts and exact u64 accounting; private `c835284`, `2820c67`; scoped native/CLI/SQL gates pass, inherited whole-tool Clippy lint remains → `notes/2026-09-07-c1123-repository-analysis.md`.
