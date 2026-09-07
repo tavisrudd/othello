@@ -38,13 +38,18 @@ the C985 optimization-facing paper.
 
 ### C1111–C1113 — reconstruction-driven representation discovery
 
-Queued: C1111 builds a frame/triangle/Clebsch preservation-contract corpus using current admission
-machinery; C1112 runs autonomous representation discovery, counterexample repair and measured
-controls; C1113 is gated on useful certified discovery before transfer to one existing recovery,
-privacy or causal workload. C1111 may start independently of continuation's C1108. Reuse the
-existing Evolve architecture; continuation owns mathematical reconstruction and manuscript edits.
-Acceptance criteria and dependency order:
-`notes/2026-09-07-continuation-ergodis-reconstruction-plan.md`. Successful transfer may feed C985.
+C1111/C1112 have a bounded spike on private branch `spike/continuation-reconstruction`
+at `~/.cache/ergodis/worktrees/continuation/ergodis-private`, with a sibling core worktree
+pinned at `67d929b`. Main-checkout code is untouched. All run/log/temp data use ZFS-backed
+`~/.cache/ergodis/continuation-spike/`; Cargo uses its shared configured target.
+The existing proposer learns and repairs a trace selector; partition certificates pass on
+q=13,17,19, with triangle joint-legality failure and frame/Clebsch marking ambiguity controls.
+This is a bounded representation/admission pilot, not autonomous field-coordinate discovery.
+Direct adjacency queries beat partition-word queries; C1113 transfer remains gated on useful
+end-to-end benefit. Next: adversarial field-family tests and a query using recovered incidence.
+Reports: `notes/2026-09-07-c1111-reconstruction-contract-corpus.md` and
+`notes/2026-09-07-c1112-autonomous-representation-discovery.md`.
+Acceptance criteria: `notes/2026-09-07-continuation-ergodis-reconstruction-plan.md`.
 
 ### C1016 — order-2092 Hadamard reduction and search (private, `~/src/ergodis-private`)
 

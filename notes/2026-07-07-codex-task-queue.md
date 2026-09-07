@@ -208,8 +208,8 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 - **C955 `[complete-ports]` [QUEUED AFTER C953; COEFFICIENT-PRESENTATION SPECTRUM]** — for a fixed nested code pair and target dimension, characterize the attainable minimum distances of represented coefficient presentations and optimize the additive confinement term without changing the relative-weight hierarchy → `notes/2026-08-24-c955-coefficient-presentation-spectrum.md`.
 ### `ergodis`
 
-- **C1111 `[ergodis]` [QUEUED]** — frame/triangle/Clebsch reconstruction corpus with explicit preservation queries, independent checking, failure and ambiguity cases; reuse current admission machinery → `notes/2026-09-07-continuation-ergodis-reconstruction-plan.md` (C1111).
-- **C1112 `[ergodis]` [QUEUED AFTER C1111]** — autonomous representation/readout discovery and counterexample repair with held-out instances and measured direct/hand-written controls; finite evidence is not universal proof → `notes/2026-09-07-continuation-ergodis-reconstruction-plan.md` (C1112).
+- **C1111 `[ergodis]` [IN PROGRESS — WORKTREE SPIKE]** — frame/triangle/Clebsch reconstruction corpus with explicit preservation queries, independent checking, failure and ambiguity cases; reuse current admission machinery → `notes/2026-09-07-continuation-ergodis-reconstruction-plan.md` (C1111).
+- **C1112 `[ergodis]` [IN PROGRESS — BOUNDED SPIKE]** — autonomous representation/readout discovery and counterexample repair with held-out instances and measured direct/hand-written controls; finite evidence is not universal proof → `notes/2026-09-07-continuation-ergodis-reconstruction-plan.md` (C1112).
 - **C1113 `[ergodis]` [GATED ON C1112 USEFUL CERTIFIED DISCOVERY]** — transfer reusable discovery/refinement to one existing recovery/privacy/causal workload; measure benefit or exact negative, feed C985 only if supported → `notes/2026-09-07-continuation-ergodis-reconstruction-plan.md` (C1113).
 
 ### `continuation`
