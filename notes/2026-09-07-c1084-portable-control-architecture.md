@@ -29,7 +29,7 @@ flowchart TD
   BH --> Service[Portable control service]
   NH --> Service
   Driver[Autonomous driver] --> Service
-  Service --> Engine[Campaign semantics, compiler, checker, solver]
+  Service --> Engine[Language, compiler, checker, solver]
   BH --> BS[Browser storage and execution]
   NH --> NS[Native storage and execution]
 ```
@@ -201,7 +201,7 @@ previously proposed autonomous-driver wiring; it does not replace those semantic
 | Language/compiler | Typed documents, validation, canonicalization, lowering, executable semantics | Paths, sockets, JS objects, scheduling |
 | Campaign | Candidate revisions, evidence, budgets, result coverage, deterministic transition rules | Transport identity, OS handles, browser lifecycle |
 | Control service | Session lifecycle, bounded dispatch, operation tracking, authorization decisions, event cursors | Unix APIs, browser promises, storage layout |
-| Repository | Verified immutable artifacts and atomic publication of campaign generations | Theorem truth, solver workspace layout |
+| Repository | Typed, integrity-checked immutable artifacts and atomic publication of campaign generations | Theorem truth, solver workspace layout |
 | Execution host | Job lifetime, resources, platform capabilities and completion delivery | Authority to bypass admission |
 | Adapters | Wire framing, endpoint authentication, storage implementation, platform integration | A second implementation of campaign rules |
 
@@ -266,15 +266,42 @@ TUI consumption incrementally. Do not shell out to `ergodisctl` from each new fr
 server-local artifact paths to a remote client. User-requested Python modernization is a named
 migration deliverable, with old/new protocol compatibility tests, not an incidental cleanup.
 
+## Solver boundary: control never becomes a kernel dependency
+
+The user explicitly requires control-plane isolation. Orchestration is a separate bounded context above the mathematical engine. The current campaign
+workflow module is temporarily housed in the core library; stage 2 moves that workflow ownership
+to the portable runtime. Runtime/control state must not enter the solver dependency path. The solver contract is validated compiled inputs,
+caller/worker-owned workspace and mathematical results. Sessions, run IDs, annotations, catalog
+queries, repository handles, transport events and client permissions do not belong in kernel
+arguments or per-state records. Serialize returned results into run records in the outer runtime.
+
+Keep the dependency graph one-way: hosts and portable control runtime depend on core; solvers and
+kernels never import that runtime. New metadata/history types belong outside solver modules.
+The scalar extraction moves language semantics out of the legacy control module; it must not move
+Unix/control ownership into default core. Leave the old optional control implementation isolated
+until its consumers migrate, then remove it from the core dependency surface deliberately.
+
+If a running solver supports steering, pass only the narrow algorithm-relevant compiled plan or
+verified monotone fact at a declared safe point. The outer runtime translates user commands,
+selects/revalidates replacements and owns transport. A solver must never parse a control command,
+construct a workflow event or fetch an artifact. Disabled steering specialization retains no
+runtime branch, atomic poll or serialization overhead. Any enabled safe-point mechanics still
+require the existing measured performance and contention gates.
+
+Enforce this with dependency/import checks in the eventual crate split, separate feature builds,
+review of kernel signatures and preserved exact layout assertions. Avoid a universal context or
+callback object that smuggles runtime access into computation. Zero-allocation and retained A/B
+gates remain necessary; crate layering alone does not establish runtime isolation or performance.
+
 ## Compilation units and crate layout
 
 Treat the following as the target dependency shape, reached incrementally rather than as an
 immediate workspace rewrite:
 
 ```text
-ergodis (existing library: languages, compiler, admission, campaign, solver)
+ergodis (existing library: languages, compiler, admission, solver)
     ^
-    |-- ergodis-runtime (portable service, protocol, repository contracts)
+    |-- ergodis-runtime (campaign workflows, portable service, protocol, repository contracts)
     |       ^
     |       |-- ergodis-host-native (native storage, transport, jobs, thin binaries)
     |       |-- ergodis-wasm (existing wasm/ package, Worker-facing bindings)
@@ -287,7 +314,7 @@ two consumers, and it prevents serde protocol/host churn from rebuilding the sol
 depend on core but core must never depend on runtime. Keep wire types in runtime initially; create
 a separate protocol crate only when a Rust client actually needs it without the engine dependency.
 Browser TypeScript consumes generated/checked wire types, not the Rust solver dependency graph.
-Do not split languages, admission, campaign and individual kernels into crates merely to mirror
+Do not split languages, admission and individual kernels into crates merely to mirror
 the diagram. First establish internal modules and narrow visibility, then measure clean and
 incremental build costs before a further split. A module by itself is not a separate compilation
 unit; do not promise build isolation from a file move.
@@ -296,7 +323,10 @@ Keep existing core-host APIs working during migration. Legacy `control-plane` co
 leaf of the core temporarily while new hosts depend inward; its compatibility facade must not
 reexport from a runtime crate that already depends on core. Reexport moved scalar/text APIs only
 from within core. Moving legacy host APIs into the native crate later requires an explicit consumer
-migration/deprecation, not a cyclic compatibility dependency. Migrate private consumers in a
+migration/deprecation, not a cyclic compatibility dependency. Likewise moving the current
+`core::campaign` pilot into runtime must migrate its consumers/tests explicitly; do not retain a
+core-to-runtime reexport that creates a cycle. Keep its mathematical inputs and admission checker
+in core; move command history, workflow state, cancellation gates and recovery orchestration above. Migrate private consumers in a
 bounded paired change and keep their core revision pin reviewable.
 
 Use explicit target-specific dependency sections for OS libraries and optional host features for
@@ -324,8 +354,9 @@ roots and one build owner; do not create a cache per crate experiment.
 
 ## One logical protocol, multiple delivery mechanisms
 
-Start with Create, Apply, Snapshot, Checkpoint, Restore and capability discovery. Apply initially
-wraps the existing bounded campaign commands unchanged. Subscription/watch is delivery of
+Start with Create, Apply, Snapshot, Checkpoint, Restore and capability discovery. Move the bounded
+campaign workflow from core to runtime with its existing command/replay semantics unchanged; Apply
+initially wraps those commands. Subscription/watch is delivery of
 snapshots/events, not a second state-changing API. Later add explicit asynchronous job operations
 under a versioned contract rather than quietly changing what Apply/Cancel completion means.
 
@@ -442,6 +473,57 @@ Browser async fetching/streaming stays outside those codecs. Centralize format l
 checks. Do not export raw hot structs or persist pointers, layout-dependent usize values or Rust
 trait objects. Cache identity binds source, schema, compiler/checker semantics and relevant target
 features; caches never become proofs merely because hashes match.
+
+## Run history as a lineage DAG
+
+Use Git's useful history vocabulary without importing its merge semantics. Durable run snapshots
+are immutable nodes; named branches are mutable references to selected snapshots, updated with
+expected-generation checks. A snapshot describes committed state, inputs, metadata and artifact
+references. It need not contain a resumable checkpoint. Stable campaign/run IDs remain distinct
+from snapshot digests, human-readable branch names and live session IDs.
+
+Disambiguate current code: `campaign::Snapshot` is a transient campaign-state observation,
+not a durable RunSnapshot. Call the protocol projection **CampaignStateView** in new APIs; the
+current Snapshot API name remains mapped until its explicit migration. `campaign::RunReport` is
+an observed solve report, not the planned persisted RunRecord. Protocol state-query delivery
+does not commit a repository snapshot or promise resumption.
+
+A **fork** creates new work from a chosen historical snapshot, including an old completed or
+interrupted run. The fork records its parent snapshot, inherited inputs/candidates/evidence,
+explicit overrides and fresh budget policy. The original run and its spend remain unchanged.
+Source notes, private dependencies and disclosure restrictions do not disappear across a fork.
+Changing implementation/target may require reconstruction or rechecking even when the mathematical
+inputs are unchanged. References to prior receipts are provenance, not inherited opaque Admission.
+
+Start with these user actions: **Open snapshot**, **Fork run**, **Name branch**, **Compare runs**,
+and **Continue campaign**. The last action identifies whether it attaches, replays to reconstruct
+state or resumes a compatible continuation. A retry after transport failure is not a fork, and a
+recovered physical attempt is not a new logical branch. Keep durable snapshots at useful cold
+commit/checkpoint boundaries, never create a history node for each search state.
+
+History links are typed: predecessor/continuation, fork origin, replay-of and imported provenance.
+Evidence derivation/dependency links form a related graph but are not interchangeable with history
+parents. The read model can show both with distinct edge labels. Multiple evidence parents mean
+combined provenance, not that two runs have been merged soundly. Do not add a generic MergeRuns
+operation: combining knowledge produces a new candidate/run with declared inputs and fresh
+admission checks wherever required. Cherry-picking a candidate is an explicit import/proposal,
+not permission to transplant its old coverage to another problem.
+
+A branch reference is workspace-local naming metadata, not evidence identity. Annotation targets
+should identify the immutable snapshot when the note concerns a particular result; a separate
+campaign/branch note can intentionally track ongoing work. Renaming a branch changes no artifacts.
+Exports include requested parent closure or explicitly identify unresolved ancestry. Viewers can
+show incomplete imported history without pretending that replay is possible. Validate bounded
+DAG structure and reject cycles before activating imported executable history; browsing malformed
+imports may show diagnostics but must not accept them as trusted history.
+
+Repository stage adds snapshot/reference records, typed lineage edges, branch CAS conflicts and
+fork manifests. Compare views distinguish changed mathematical inputs, evidence, implementation,
+environment, budgets and notes instead of treating every metadata difference as semantic change.
+Tests cover fork-from-old-snapshot, immutable parent records, independent budgets, branch races,
+missing ancestry, cyclic imports, no inherited authority and preservation of private dependencies.
+This shares the existing repository/runtime crates; it is not a request to embed Git or add a
+separate version-control daemon.
 
 ## Run records, artifact metadata and user annotations
 
@@ -573,7 +655,7 @@ working native CLI and browser demo throughout; no flag-day replacement.
 | Stage | Deliverable and dependency | Acceptance / stopping boundary |
 |---|---|---|
 | 1 — Portable language ownership | Extract scalar/text/codec modules from control, retain reexports and path wrappers | Existing scalar/Python/FeatureDag suites unchanged; default native and wasm library compile; legacy control tests pass; no hot changes |
-| 2 — Shared control contract | Portable runtime crate with bounded typed facade over Campaign v1; versions, capabilities, IDs, errors, revision and retry rules; in-process adapter | Native/WASM run the same serialized corpus; request conflict/size/unknown-op tests; receipts cannot install authority; schema fixtures reviewed |
+| 2 — Shared control contract | Portable runtime crate owns migrated Campaign v1 workflow and bounded typed facade; versions, capabilities, IDs, errors, revision and retry rules; in-process adapter | Native/WASM run the same serialized corpus; request conflict/size/unknown-op tests; receipts cannot install authority; schema fixtures reviewed |
 | 3 — Local browser control demo | Worker facade, common client, progress/status, checkpoint export/import; use bounded sync operations initially | Create→propose→check→execute→cancel→resume→restore demo; evidence/provenance/coverage displayed separately; no claim of in-flight stopping |
 | 4 — Repository and native bridge | Commit/dedup contract, memory/native/IndexedDB adapters; native new-protocol endpoint and authenticated browser web connection | Crash/ack-loss/conflict/quota/eviction tests, reconnect no duplicate logical charge, legacy Unix security tests retained; same UI drives local/remote |
 | 5 — Responsive autonomous jobs | Async operation state machine, reservation/recovery, compute-worker ownership, measured bounded continuation where needed | UI/service responsiveness under load; cancel races/stale completions; restart/recovery budgets; deterministic replay projection; hot-change perf gates |
