@@ -36,6 +36,16 @@ the C985 optimization-facing paper.
 
 ## Active frontiers
 
+### C1111–C1113 — reconstruction-driven representation discovery
+
+Queued: C1111 builds a frame/triangle/Clebsch preservation-contract corpus using current admission
+machinery; C1112 runs autonomous representation discovery, counterexample repair and measured
+controls; C1113 is gated on useful certified discovery before transfer to one existing recovery,
+privacy or causal workload. C1111 may start independently of continuation's C1108. Reuse the
+existing Evolve architecture; continuation owns mathematical reconstruction and manuscript edits.
+Acceptance criteria and dependency order:
+`notes/2026-09-07-continuation-ergodis-reconstruction-plan.md`. Successful transfer may feed C985.
+
 ### C1016 — order-2092 Hadamard reduction and search (private, `~/src/ergodis-private`)
 
 The frontier, the closed dispositions, the routing to every dated sub-report, and the open-move

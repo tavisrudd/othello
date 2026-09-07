@@ -45,6 +45,7 @@ until the paywalled Metsch / Drake–Sané read clears.
 
 ## Next steps
 
+- **C1108 → C1109 → C1110** — approved upgrade sequence: reconcile completed C295 and compare reconstruction literature; certify reconstruction and classify small frame orders; assemble and review upgraded manuscript. Full acceptance criteria: `notes/2026-09-07-continuation-ergodis-reconstruction-plan.md`. Start C1108; existing C271 and C273 obligations remain.
 - **C271** — N2-gate literature closure: obtain full texts of Drake–Sané and Metsch LNM 1490, run
   the MathSciNet/zbMATH forward-citation check, and update
   `notes/2026-07-11-continuation-rigidity-audit-scope.md` with the outcome (implements the audit's
