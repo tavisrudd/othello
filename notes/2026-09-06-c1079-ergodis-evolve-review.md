@@ -72,6 +72,17 @@ private knowledge implementations consuming domain-neutral core contracts. Confi
 independent of mode/provenance/validation. No source move or public disclosure was performed.
 The brief records this direction for the forthcoming convergence plan.
 
+## Industry IP constraint added after collection
+
+Tavis further identified optional industry licensing/patent material and possible subsidiaries
+or branches that could be acquired with their IP. QEC is the prime candidate to keep separate.
+The next synthesis must assess QEC’s asset/dependency boundary and trace cross-industry knowledge
+flow through evolve-generated artifacts, while retaining reusable machinery in core. The initial
+inventories did not audit legal ownership, disclosure history, patentability, or carve-out
+readiness; they must not be treated as that audit. The brief now defines the technical mapping
+and unresolved rights/ownership questions to carry into the plan. No asset or rights transfer
+is authorized by this requirement.
+
 ## Next synthesis work
 
 Use these inventories to construct a concrete cross-repository capability/admission map, then

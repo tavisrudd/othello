@@ -100,6 +100,45 @@ gates. This user direction sets the intended ownership boundary; it does not aut
 export/push or choose which specific heuristics/theorems to disclose. Core checkout ownership and
 public release remain separate decisions.
 
+## Industry IP and potential carve-outs
+
+Further user direction: held-back private knowledge may later become licensed IP or patent
+material for specific industries. Ergodis may establish industry subsidiaries/branches as
+acquisition targets, transferable with their associated IP. QEC is the prime candidate to keep
+separate. These are strategic possibilities to preserve, not decisions that an entity, patent,
+license, or transaction already exists.
+
+The synthesis must therefore address separability beyond a single public/private flag:
+
+- Map shared core machinery versus industry-specific assets, beginning with QEC, including
+  algorithms, theorem implementations, heuristics, parameter recipes, adapters, datasets,
+  fixtures, benchmarks, evidence, documentation, and generated/evolved artifacts. Identify
+  current locations, contributors/source provenance where recorded, dependency edges, and
+  unresolved ownership or reuse assumptions. Repository location alone is not legal ownership.
+- Assess a QEC carve-out explicitly: which assets could transfer together, which core services
+  they require, what core access/licensing assumptions would need a decision, and whether build,
+  test, deployment, and ongoing development could function after separation. Keep generic core
+  independent of industry implementations; identify current coupling rather than presuming the
+  boundary is already clean.
+- Trace knowledge flow through evolve: mixed private/public or cross-industry parents, training
+  corpora, candidate archives, learned policies, theorem compositions, parameter tuning, proof
+  artifacts, socket responses, and exported diagnostics. Recommend how to retain source and
+  derivation lineage plus explicit use/disclosure decisions, so evolution or validation cannot
+  silently erase an input’s private or industry association. Do not infer legal derivative-work
+  status or automatic ownership merely from computational ancestry.
+- Distinguish technical validation, confidentiality/disclosure, permitted reuse, and proposed
+  ownership/industry allocation. Certification does not itself authorize publication, licensing,
+  or movement between industry packages. Record uncertain or mixed cases for a concrete decision.
+- Recommend a reviewable asset/dependency map and staged technical boundaries that preserve
+  future licensing, patent, and acquisition options. Flag questions requiring IP/legal advice
+  without deciding patentability, inventorship, assignment, or transaction structure in this
+  technical review. Any later legal conclusions require appropriate research and review.
+
+This adds analysis to C1079, not authorization to move QEC work, change other lanes, disclose
+private material, file patents, create entities, or allocate IP rights. The core/private ownership
+direction above still stands; the plan must explain how shared machinery and separable industry
+knowledge fit together.
+
 ## Boundary and acceptance
 
 This task produces a review and concrete, reviewable synthesis plan, not an implementation merge
