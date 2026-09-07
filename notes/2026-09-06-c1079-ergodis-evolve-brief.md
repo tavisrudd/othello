@@ -1,7 +1,7 @@
 # C1079 — ergodis-evolve review and synthesis plan
 
 **Lane**: `ergodis`
-**Status**: QUEUED; scope clarified by Tavis on 2026-09-06.
+**Status**: IN PROGRESS; evidence collection authorized on 2026-09-06 using Terra sub-agents.
 
 ## Authoritative product intent
 
@@ -18,6 +18,9 @@ Bring together the version in the Ergodis core (`~/src/ergodis`), the private im
 experiments (`~/src/ergodis-private`, largely C1016), and spikes extending either. Locate the
 relevant spikes through the owning checkout guides and narrow source/document references;
 read each checkout’s `AGENTS.md` before reviewing it. Preserve ongoing task ownership.
+Recover existing repo-local notes and previous research reports, especially C985, before
+proposing new mechanisms or terminology. Tavis explicitly requested Terra sub-agents for this
+evidence collection.
 
 Inventory implemented capabilities, experimental capabilities, stated intentions, and measured
 results separately, with exact source/revision provenance. Trace conflicting descriptions to

@@ -125,7 +125,8 @@ entry before starting.
 
 ### C1079 — ergodis-evolve review and synthesis plan
 
-Queued, not started. Bring together core evolve, private/C1016 work, and extension spikes into a
+Evidence collection in progress, including prior C985 research. Bring together core evolve,
+private/C1016 work, and extension spikes into a
 clear staged plan for the best autonomous structure-discovery and theorem/parameter-driven
 quotient system, steerable through a Unix socket. Reconcile conflicting inherited intent against
 Tavis’s explicit autonomy goal. Scope and acceptance:
