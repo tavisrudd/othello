@@ -1,15 +1,21 @@
 # Friendly follow-up to Tschinkel and Zhang — unsent draft
 
+**Timing:** Hold until our paper updates are complete and validated. The
+revision paragraph below is prospective send-time wording; it does not record
+completed work. Recheck the mathematical observations against the final papers.
+Offer thanks and useful observations only; request no review, correction, or
+response. Do not send as part of the current revision work.
+
 **Subject:** A few comments on v2 and the new two-quadric example
 
 Dear Yuri and Zhijia,
 
 Thank you again for taking a look at my papers. Zhijia, your comment about
 not working with quantum D-modules was helpful too. Alongside other
-exposition feedback, it has prompted me to plan a revision of the m=1 paper
-that makes the argument easier to follow for a birational geometer without
-prior familiarity with QDMs: the weak-factorization reduction first, then a
-concrete rank-two matrix model before the general construction.
+exposition feedback, it helped prompt the revisions I have now made to the
+m=1 paper. The argument now starts with the weak-factorization reduction,
+then introduces a concrete rank-two matrix model before the general
+construction, to make it easier to follow without prior familiarity with QDMs.
 
 I read the additions in v2 and had a few small comments that may be useful.
 
@@ -23,10 +29,11 @@ on x3=a*x5, take
 With beta=-3*a^3-a, the two quadrics of your del Pezzo model become -a*q1
 and q2. This might make the example particularly easy to check.
 
-For Remark 5.4, could you clarify why the different Eckardt counts on the
-chosen sections distinguish the ambient cubics? I may be missing an
-intrinsic characterization of those sections, or of the associated cyclic
-cover structure, that an isomorphism must preserve.
+For Remark 5.4, the comparison of Eckardt counts on the chosen sections
+seems to need one further explanation: why an isomorphism of the ambient
+cubics must preserve or recover those sections. An intrinsic characterization
+of the sections or the associated cyclic cover structure would make the
+nonisomorphism argument easier to follow.
 
 There is also a possible application of the surface upper bound in my
 sharpness manuscript: using your type-I1 generic fiber, the same
@@ -35,8 +42,8 @@ example after multiplication by A^2, over Q and hence R. This is conditional
 on my surface argument; it would not establish exact level two, since the
 one-stabilization lower bound in the other paper is specific to cubics.
 
-I hope these observations are useful, and I would welcome any correction
-if I have misunderstood the example or the nonisomorphism argument.
+Thank you again for your work and for taking the time to look at the earlier
+versions of my papers. I hope these observations are useful.
 
 Best,
 Tavis

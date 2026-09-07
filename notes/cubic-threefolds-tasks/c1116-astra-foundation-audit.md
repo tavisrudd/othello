@@ -45,6 +45,9 @@ theorem statement, identifies the Example 5.2 model-pointer error with an
 explicit coordinate bridge, and records a qualified Remark 5.4 question.
 An unsent friendly-email draft is adjacent. This does not complete the
 foundation audit or authorize sending correspondence.
+Author instruction: hold that email until both paper updates are complete and
+validated; offer thanks and observations only, with no request or expectation
+of feedback on the observations or our papers.
 
 A claim-by-claim audit names each exact source hypothesis and local provider,
 and separates accepted conclusions from unresolved gates. Repair concrete

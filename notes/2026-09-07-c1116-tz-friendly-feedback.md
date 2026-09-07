@@ -12,8 +12,11 @@ targets the new example, the nonisomorphism remark, and the revised
 tangent-projection source. It is not a full proof audit of their paper.
 
 Send-worthy material: one definite cross-reference correction, one qualified
-proof-clarification question, and a conditional application of our surface
-upper bound. The adjacent draft is unsent. No email tool was used.
+observation about the nonisomorphism justification, and a conditional
+application of our surface upper bound. By author instruction, hold the email
+until our paper updates are complete and validated. Offer thanks and useful
+observations without requesting or expecting feedback on either their comments
+or our papers. The adjacent draft is unsent. No email tool was used.
 
 ## 1. Example 5.2: correction and explicit coordinate bridge
 
@@ -54,8 +57,9 @@ Remark 5.4 distinguishes the cubics by Eckardt counts on the chosen sections
 ambient varieties. The text should explain why an ambient isomorphism must
 preserve or recover this section/structure, or use an invariant of the whole
 cubic. This is a gap in the stated justification, not a counterexample to
-the nonisomorphism claim. Ask whether there is an intrinsic characterization
-being used; do not assert that the cubics are isomorphic.
+the nonisomorphism claim. Observe that an intrinsic characterization would
+complete this explanation; do not request a response or assert that the cubics
+are isomorphic.
 
 ## 3. Useful extension: the new example inherits an upper bound
 
@@ -108,8 +112,9 @@ while preventing an unjustified exact-level claim.
 - **Settled:** the model pointer is wrong, but the intended linear
   identification is explicit and invertible over Q(a).
 - **Open:** an intrinsic argument distinguishing the ambient cubic families
-  is not supplied by different selected-section Eckardt counts alone. Ask
-  the authors; no counterexample or new classification is claimed.
+  is not supplied by different selected-section Eckardt counts alone. Record
+  the observation without requesting feedback; no counterexample or new
+  classification is claimed.
 - **Open:** the intersection-of-two-quadrics example's exact level is not
   determined by these observations. No new task is allocated for it.
 - **Closed as an email objection:** the revised projection source supplies
