@@ -131,3 +131,13 @@ The partite/geometric distinction is incorporated without claiming a new
 hypergraph theorem or priority. Computation-free explanations at q=7,8 and
 literature clearance remain open as recorded previously; no new correctness
 mystery emerged. The cold-referee report is preserved unchanged as history.
+
+
+The corrected authority at `f0964aeba` was synchronized through the guarded
+exporter. Initial sync refused because the new local repository lacked origin;
+adding the registry's URL to local Git configuration resolved the prerequisite
+without network access. No GitHub action or push occurred. Standalone `make
+check` and deterministic PDF comparison passed; exporter verification reports
+33 files and content SHA-256
+`6d658fd8f7a70738e06938f309b611d90e6140183f4700e295bca9f7f063563d`.
+The standalone PDF is byte-identical to the authority.
