@@ -25,7 +25,13 @@ text is written before it passes
 Per `notes/literature-audit-conventions.md`, with OpenAlex, Crossref, and Semantic Scholar
 (three sources for every negative): Haah 2018 (PRA 97, 042327), Campbell–Howard 2017 (PRA 95,
 022316), Krishna–Tillich 2019, Prakash–Saha 2025, Campbell–Anwar–Browne 2012, and the
-stabilizer Rényi entropy line (Leone–Oliviero–Hamma 2022 and its qudit extensions). Record every
+stabilizer Rényi entropy line (Leone–Oliviero–Hamma 2022; qudit definition Wang–Li, QIP 22,
+444 (2023)). Start from `notes/2026-09-07-c1099-lit-check-magic-of-phase-states.md`, which
+found: Kagamihara–Tsuchiya (arXiv:2602.23687) for the `p = 2` Hessian-rank formula, Alltop
+1980 / Klappenecker–Rötteler 2004 for the trace-cubic state as a MUB fiducial, and Knipfer
+et al. (arXiv:2607.07197) for the conjectured maximum `log(D^2/(2D-1))` that the trace cubic
+attains; its gaps (nothing read at full text, primaries not obtained, no forward-citation run)
+are this gate's first work items. Record every
 consulted source; produce verdict lines for: the general signed-moment CSS mechanism, the
 `[[2p, p-1, 2]]_p` translation-trade family, the conic trades at p = 7, 11, 13, the
 invariant-theoretic phase, the Hessian-rank formula for stabilizer Rényi entropies of diagonal

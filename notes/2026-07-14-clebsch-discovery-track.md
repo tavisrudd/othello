@@ -1954,7 +1954,11 @@ whose transversal signed cubic is the maximally magic gate, is not excluded.
 
 **Evidence:** REASONED and computed (`test1_magic.py`, exact rationals).
 
-**Status:** open, unpromoted; recorded as ledger item 1 of the C1099 report.
+**Status:** open, unpromoted; recorded as ledger item 1 of the C1099 report. Literature
+check the same day (`notes/2026-09-07-c1099-lit-check-magic-of-phase-states.md`): the
+state is Alltop's MUB fiducial (Klappenecker–Rötteler 2004 over `F_{p^n}`), and its exact
+`M_2 = log(D^2/(2D-1))` is the conjectured multi-qudit maximum of Knipfer et al.
+(arXiv:2607.07197); the stabilizer-entropy reading and the realizability question are ours.
 
 ## 2026-09-07 — `PGL_2(p)`-orbit pairs of conic matchings with equal signed moments through order three
 

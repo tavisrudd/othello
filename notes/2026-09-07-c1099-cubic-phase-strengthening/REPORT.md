@@ -85,9 +85,14 @@ Exact headline values: `exp M_2(|F_7>) = 1977326743/78835`, `exp M_2(|M>^{⊗6})
 3. **Caveat: the Clebsch states are not the most magic cubic phase states on their qudits.**
    The trace cubic `Tr(u^3)` of the field `F_{p^k}`, i.e. the single `p^k`-dimensional
    cubic-phase qudit written on `k` qudits, has Hessian rank `k` at every `v ≠ 0` (the bilinear
-   forms `Tr(v x y)` are nondegenerate for `v ≠ 0`), so `Σ|<P>|^4 = 2 - p^{-k}` and its `M_2`
-   sits `10^{-5}` below the absolute pure-state bound. The Clebsch states reach `92.2 %`
-   (p = 7) and `98.2 %` (p = 11) of that bound. Whether the trace cubic itself admits a
+   forms `Tr(v x y)` are nondegenerate for `v ≠ 0`), so `Σ|<P>|^4 = 2 - p^{-k}` and
+   `M_2 = log(D^2/(2D-1))` exactly, `D = p^k`, which is `10^{-5}` below the Pauli-flat bound
+   `log((D+1)/2)`. The Clebsch states reach `92.2 %` (p = 7) and `98.2 %` (p = 11) of that
+   bound. Literature check (`../2026-09-07-c1099-lit-check-magic-of-phase-states.md`): the
+   trace cubic is Alltop's mutually-unbiased-bases fiducial (Klappenecker–Rötteler 2004 for
+   `F_{p^n}`, `p ≥ 5`), and `log(D^2/(2D-1))` is exactly the conjectured multi-qudit maximum
+   of `M_2` in Knipfer et al. (arXiv:2607.07197, eq. 2), so it is a conjectured maximizer; the
+   `p = 2` version of the Hessian-rank formula is Kagamihara–Tsuchiya (arXiv:2602.23687). Whether the trace cubic itself admits a
    balanced signed `2p`-term decomposition (and hence a `[[2p, p-1, 2]]_p` code realizing it
    transversally) is open; see the ledger.
 
