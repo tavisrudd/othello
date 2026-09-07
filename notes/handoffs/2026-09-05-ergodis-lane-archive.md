@@ -196,3 +196,11 @@ published-head ancestry. Scoped native/CLI/SQL checks pass; the inherited
 `leakage_dual_tower.rs:116` Clippy blocker remains foreign. Report:
 `../2026-09-07-c1123-repository-analysis.md`. C1033 owns downstream notebook views.
 No incidental discovery-track entry was warranted.
+
+## 2026-09-07 — C1033 saved-run notebook slice
+
+Private `81af202` adds the notebook consumer of C1123 projections: exact
+accounting, selected-run update/fork ancestry, separate same-run branch tracks,
+and expandable identities. Executed notebook and Chromium-rendered output checks
+pass. Report: `../2026-09-07-c1033-saved-run-notebook.md`. C1033 stays open for
+its standing live-evolution candidate-lineage frontier; no incidental discovery.

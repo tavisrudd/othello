@@ -294,8 +294,13 @@ into DuckDB/Jupyter heads, update/fork lineage, attempts and exact u64 accountin
 Scoped native/CLI/SQL gates pass; inherited whole-tool Clippy lint remains.
 Report: `notes/2026-09-07-c1123-repository-analysis.md`.
 
-**Next**: C1033 can consume these detached tables for saved-run notebook lineage and
-accounting views. Browser analytical export and larger-store pagination need separate slices.
+**C1033 saved-run notebook slice complete**: private `81af202`; exact accounting,
+update/fork ancestry, run selection and bounded SVG rendering pass executed notebook
+and Chromium output checks. Report: `notes/2026-09-07-c1033-saved-run-notebook.md`.
+
+**Next**: C1033's standing live-evolution campaign and candidate mutation-lineage view.
+Candidate lineage is distinct from this saved run ancestry. Browser analytical export
+and larger-store pagination need separate slices.
 Browser/native bounded persistence pilots are complete; automatic execution recovery, larger
 stores and additional platform/retention guarantees need separately allocated slices and gates.
 Closed scope and gates: `notes/2026-09-07-ergodis-offline-workflow-successors.md`.
