@@ -195,8 +195,9 @@ release decisions remain separate.
 Explicit user requirement: provide demos using both native shared-library extensions and
 source-to-IR extensions in an obfuscated black-box form, preserving private industry knowledge.
 The synthesis must include a concrete demo packaging/execution strategy for each path.
-Latest user priority: shippable black boxes that recipients run themselves. Hosted/walled
-execution is secondary and must not substitute for the deliverable.
+User wants both delivery modes: shippable black boxes that recipients run themselves, and
+hosted/remote black-box access. Shippable packages are the priority; hosted delivery is also
+required, not merely a comparison. Cover both native and source/IR extensions in both modes.
 
 - Lead with a distributable core executable plus native/opaque-IR industry payloads, runnable
   on recipient-controlled infrastructure without depending on hosted execution. Specify supported
@@ -204,8 +205,12 @@ execution is secondary and must not substitute for the deliverable.
   dependency must be explicit and justified, not silently assumed.
 - Evaluate the recipient-run package against a stated inspection model: what the recipient
   receives, controls, and can inspect. Recommend practical obfuscation and exposure-reduction
-  measures and their costs without promising unrecoverability. Hosted execution may be a
-  secondary comparison, not the recommended substitute for a shippable black box.
+  measures and their costs without promising unrecoverability.
+- Also specify a hosted/remote delivery path: the execution boundary, client/API and steering
+  surface, access controls, and permitted results/evidence. Identify the runtime, module contracts,
+  and validation/provenance machinery shared with recipient-run packages, and the differences
+  in deployment, observability, data handling, and disclosure. Hosted execution complements the
+  shippable package; neither mode substitutes for the other.
 - For native extensions, assess the demo artifact and exposed symbols/interfaces, metadata,
   diagnostics, and runtime outputs. For source-to-IR extensions, assess private compilation
   before delivery and protected/opaque deployable IR or other executable artifacts loadable

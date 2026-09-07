@@ -98,8 +98,9 @@ no loader implementation or ABI selection has been made.
 ## Black-box demo requirement added after collection
 
 Tavis also requires obfuscated black-box demonstrations for both native kernels and source/IR
-extensions. His clarified priority is shippable, recipient-run black boxes; hosted/walled execution
-is secondary and cannot substitute for that deliverable. The convergence plan must specify local
+extensions. Both shippable, recipient-run packages and hosted/remote access are required;
+shippable black boxes remain the priority. The plan must cover both extension paths in both
+delivery modes, sharing runtime and provenance/admission contracts where appropriate. The convergence plan must specify local
 packaging and execution, define artifact and introspection exposure, and preserve internal
 provenance while making any withheld replay
 material explicit. The initial collection did not audit demo packaging or reverse-engineering

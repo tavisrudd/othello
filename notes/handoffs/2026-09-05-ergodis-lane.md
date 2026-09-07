@@ -134,7 +134,7 @@ Tavis’s explicit autonomy goal. Target ownership: reusable evolve machinery/wo
 with selected heuristics/theorems optionally private. Assess separable industry IP for future
 licensing or acquisition carve-outs, with QEC the leading case. Target runtime: one core binary
 loading specialized kernels as shared libraries and compiling extension source on the fly into
-Ergodis IR, with shippable, recipient-run obfuscated black-box demos for both paths. Scope and acceptance:
+Ergodis IR, with both shippable and hosted black-box demos for both paths (shippable takes priority). Scope and acceptance:
 `notes/2026-09-06-c1079-ergodis-evolve-brief.md`. Evidence report:
 `notes/2026-09-06-c1079-ergodis-evolve-review.md`.
 
