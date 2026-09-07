@@ -195,15 +195,21 @@ release decisions remain separate.
 Explicit user requirement: provide demos using both native shared-library extensions and
 source-to-IR extensions in an obfuscated black-box form, preserving private industry knowledge.
 The synthesis must include a concrete demo packaging/execution strategy for each path.
+Latest user priority: shippable black boxes that recipients run themselves. Hosted/walled
+execution is secondary and must not substitute for the deliverable.
 
-- Evaluate recipient-run packages and hosted/remote execution against a stated inspection model:
-  what the recipient receives, controls, and can inspect. Distinguish obfuscation and reduced
-  disclosure from a guarantee of secrecy on a recipient-controlled machine. Recommend an
-  appropriate option without silently requiring online-only demos or promising unrecoverability.
+- Lead with a distributable core executable plus native/opaque-IR industry payloads, runnable
+  on recipient-controlled infrastructure without depending on hosted execution. Specify supported
+  targets, packaging, installation, dependencies, and local execution. Any network or activation
+  dependency must be explicit and justified, not silently assumed.
+- Evaluate the recipient-run package against a stated inspection model: what the recipient
+  receives, controls, and can inspect. Recommend practical obfuscation and exposure-reduction
+  measures and their costs without promising unrecoverability. Hosted execution may be a
+  secondary comparison, not the recommended substitute for a shippable black box.
 - For native extensions, assess the demo artifact and exposed symbols/interfaces, metadata,
   diagnostics, and runtime outputs. For source-to-IR extensions, assess private compilation
-  before delivery, protected/opaque deployable IR or other executable artifacts, and hosted
-  compilation/execution. State which routes require source or readable IR at the recipient and
+  before delivery and protected/opaque deployable IR or other executable artifacts loadable
+  by the shipped runtime. State which routes require source or readable IR at the recipient and
   what tradeoffs that introduces. Production runtime compilation remains part of the target;
   demos may use a separately prepared artifact when justified.
 - Map exposure through the whole demo, including Unix-socket introspection, candidate archives,
