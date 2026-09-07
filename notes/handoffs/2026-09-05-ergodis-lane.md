@@ -65,7 +65,8 @@ unverified marker. Report:
 
 **Certificate authority caveat:** C1097 demonstrates a sibling-forgery acceptance in the legacy
 generic root-only checker and audits the same gap in the specialized checker. These paths must
-not supply independent evidence authority; migration is open. See the C1097 report below.
+not supply independent evidence authority. C1098 removed the old API names and gated first-party
+benchmark consumers behind explicit legacy replay; see the reports below.
 
 Probes through C1068 are closed. The default arm is `LEVEL_ROUTED`; on stim-generated weighted
 circuit-level detector error models Tiger is ahead of PyMatching in 27 of 33 operating cells in
@@ -209,14 +210,22 @@ summary claims and changed source/schema before mutation; unrelated-leaf updates
 core `46f7d1c`, private `9c1a620`; `notes/2026-09-07-c1097-independent-summary-transitions.md`.
 Retains authenticated snapshot summaries/digests: O(N) memory, O(log N) updates. The executed
 sibling-forgery regression is accepted by the legacy generic checker and rejected by the new one.
-Legacy generic/specialized authority claims are corrected; their implementations remain unmigrated.
+Legacy generic/specialized authority claims are corrected; C1098 confines their algorithms to
+explicit historical replay and migrates the supported consumer.
 Native full gates, private interoperability/mutation tests, Python and WASM compilation pass.
 
-**Next (highest priority)**: migrate proof consumers away from legacy root-only checker authority,
-with explicit unsupported-backend/format rejection. Bind domain-event admission to the checked
-summary transition; do not confuse table commitments with source correctness. Compact sibling proofs
-and other algebra/backends require separate admission and performance gates. Preserve native64
-performance and solver/control separation. C1032 and durable/module schemas remain open.
+**C1098 complete**: private `83ebffa`; `notes/2026-09-07-c1098-certificate-authority-migration.md`.
+Removed old verifier API names; legacy algorithms are explicitly named replay and benchmark
+consumers require opt-in with false authority. New `matrix-verified-chain` uses the independent
+checker with summary-transition-only authority. 50 scoped tests and CLI smoke pass; library and
+CLI integration clippy pass. Whole-tool clippy remains blocked by an unrelated unchanged lint in
+`tasks/tools/src/leakage_dual_tower.rs:116`; no suppression or foreign fix applied.
+
+**Next**: bind domain-event admission to an authenticated summary transition for an existing
+adapter. Keep source correctness separate from commitments and summary composition. Other
+algebra/backends and compact sibling proofs need separate explicit admission/performance gates.
+Preserve native64 performance and solver/control separation. C1032 and durable/module schemas
+remain open.
 
 ### C985 — Ergodis exact algebraic optimization paper
 

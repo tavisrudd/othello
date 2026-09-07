@@ -142,3 +142,10 @@ Core `46f7d1c`, private `9c1a620`; report `../2026-09-07-c1097-independent-summa
 Found executable upper-sibling forgery in legacy generic checker; specialized source audit finds
 same binding omission. New fixed SHA256Digest min-plus checker retains authenticated tree state
 and rejects it. All acceptance gates pass. Legacy consumer migration is now highest priority.
+
+## 2026-09-07 — C1098 first-party authority migration
+
+Private `83ebffa`; report `../2026-09-07-c1098-certificate-authority-migration.md`.
+Removed old verifier API names, gated historical replay and migrated supported matrix CLI mode
+to independent checker. 50 scoped tests and CLI smoke pass. Whole-tool clippy has the unrelated
+unchanged leakage_dual_tower.rs:116 lint. Domain/source linkage is the next boundary.
