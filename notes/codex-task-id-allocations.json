@@ -4697,8 +4697,17 @@
       "last": 1113,
       "purpose": "Reconstruction preservation corpus; autonomous representation discovery and repair; gated transfer to one existing workload",
       "sequence": 522
+    },
+    {
+      "count": 2,
+      "first": 1114,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1115,
+      "purpose": "Browser IndexedDB repository persistence and native filesystem companion with shared contract and platform recovery gates",
+      "sequence": 523
     }
   ],
-  "next_id": 1114,
+  "next_id": 1116,
   "schema": "codex-task-id-allocations-v1"
 }
