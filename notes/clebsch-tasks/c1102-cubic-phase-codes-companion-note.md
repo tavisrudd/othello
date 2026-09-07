@@ -14,6 +14,8 @@ the historical C1090/C1099 positioning. Alltop/Wang–Li/Dai–Fu–Luo access i
 The two remaining coverage limits are the added Hessian seed's Crossref missing
 record (Semantic Scholar now succeeds with count 0), and Feng–Luo
 `10.1088/1402-4896/ad80e7` primary proof access. No gate revision or draft is authorized.
+The bounded access follow-up and exact proposed gate revision are in
+`notes/2026-09-07-c1102-forward-citations/GATE-DECISION.md`; decision pending.
 
 ## Read first (in this order, nothing else)
 

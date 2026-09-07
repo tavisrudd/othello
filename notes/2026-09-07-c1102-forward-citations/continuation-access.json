@@ -1,0 +1,32 @@
+[
+  {
+    "name": "feng-crossref",
+    "url": "https://api.crossref.org/works/10.1088/1402-4896/ad80e7",
+    "timestamp": "2026-09-07T23:00:44.731489+00:00",
+    "status": 200,
+    "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/continuation-feng-crossref.json",
+    "sha256": "3566f9b47da8239b1ec1d3e4cf4ea723774058203c3dd24cc1a68dce0fb61920",
+    "read_depth": "abstract/metadata only",
+    "sections_read": "message.link, resource, relation"
+  },
+  {
+    "name": "feng-openalex",
+    "url": "https://api.openalex.org/works/doi:10.1088/1402-4896/ad80e7",
+    "timestamp": "2026-09-07T23:00:44.732293+00:00",
+    "status": 200,
+    "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/continuation-feng-openalex.json",
+    "sha256": "282b8432fbcecd1f7f6ed159b3dcc1adea45554a8c1d259b035864c4f0cee84b",
+    "read_depth": "abstract/metadata only",
+    "sections_read": "id, open_access, locations"
+  },
+  {
+    "name": "kagamihara-datacite",
+    "url": "https://api.datacite.org/dois/10.48550/arXiv.2602.23687",
+    "timestamp": "2026-09-07T23:00:44.732798+00:00",
+    "status": 200,
+    "cache": "/tmp/persistent/tavis/lit-search/c1102-forward-citations/continuation-kagamihara-datacite.json",
+    "sha256": "3b55b44e466008bfffb865512966eab16c2a5795764ef0d4554b53442e6b0961",
+    "read_depth": "abstract/metadata only",
+    "sections_read": "data.attributes publisher, relatedIdentifiers, relatedItems"
+  }
+]

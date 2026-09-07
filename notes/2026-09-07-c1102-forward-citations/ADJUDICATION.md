@@ -16,6 +16,10 @@ N1–N6 adjudicate the six required questions; N7–N9 close the writing card's 
 factory and trace-cubic attribution questions. Their bounded statements supersede
 the older “unclaimed” labels, without pretending that source access was exhaustive.
 
+The final bounded access follow-up and a **pending, unapplied** gate proposal
+are recorded in `GATE-DECISION.md`, with hashed metadata in
+`continuation-access.json`. Neither remaining gap was resolved.
+
 ## What changed
 
 1. **Physical versus logical gates in Li–Yeh.** The old C1090 dismissal said that
