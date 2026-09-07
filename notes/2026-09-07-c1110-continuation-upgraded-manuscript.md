@@ -79,3 +79,27 @@ operation was performed. The author handles those actions.
 A combined image/tool display exceeded the conversation output budget during
 export inspection. Recovery used bounded export-manifest verification and the
 standalone checks above; no materialization was repeated over an existing tree.
+
+
+## Cold sub-agent referee review
+
+At the author's explicit request a fresh-context sub-agent reviewed the exported
+commit `da8db37068c8cb7797fc9ff4134c1ebf64316099`, without prior task reports or
+author explanations. Its full report is
+`notes/2026-09-07-c1110-continuation-cold-referee.md`. It read all manuscript
+proofs and the public verification implementation and successfully replayed
+`make check`. It found no main theorem, recognition, or census defect.
+
+Two required revisions remain: restrict the general intersection/code
+representation to k>=2 (and distinct points in the intersection formula), and
+correct the Bruno–Mella attribution to the compactified moduli space with its
+hypotheses. Recommended changes clarify shared exact-cover code and the partite
+hypergraph mechanism, plus local quantifiers and exposition. The parent
+corroborated the small-cap error and independently rechecked export provenance
+and citation metadata. No manuscript or standalone content was changed during
+review. This is an independent agent reading, not an external human referee or
+comprehensive novelty clearance. C1110 remains open for revision and validation.
+
+The review's explicit ej/tt closeout separates the purely partite clique bound
+from geometric centre recovery; its mystery ledger retains the computation-free
+q=7 and q=8 explanations as open questions, without finding a correctness gap.

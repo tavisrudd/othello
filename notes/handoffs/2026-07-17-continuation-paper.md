@@ -29,14 +29,19 @@ reconstruction remains outside the headline under the existing N1-only ruling.
 - The finite data replay under independent Python/nauty construction and Sage 10.7/10.9.
   Source-only claim/evidence checks and reproducible PDF builds pass. No Lean theorem is claimed.
   The prototype recognizer is slower than generic graph isomorphism on the recorded controls.
-- C1110 is active: the first draft is exported and locally verified; independent
-  cold mathematical/prose review and the exact public Clebsch comparison remain open.
+- C1110 is active: the exported draft received a fresh-context sub-agent referee review.
+  No main-result defect was found; two required local corrections and recommended
+  clarifications remain, together with the exact public Clebsch comparison.
+  Review: `notes/2026-09-07-c1110-continuation-cold-referee.md`.
   Export/validation record: `notes/2026-09-07-c1110-continuation-upgraded-manuscript.md`.
 
 ## Next steps
 
-- **C1110** — review the prepared draft and finish its independent mathematical/prose and
-  publication-ownership checks. The author handles GitHub and DOI actions.
+- **C1110** — address referee R1 (k>=2 representation hypothesis) and R2
+  (Bruno–Mella compactification attribution), incorporate the trust/exposition
+  clarifications, then validate and synchronize. Qualified external subject review
+  and priority diligence remain distinct from this sub-agent review.
+  The author handles GitHub and DOI actions.
 - **C271** — obtain/read the named Drake–Sané and Metsch sources and complete the auth-gated
   citation diligence for N2; keep N2 softened meanwhile. Existing audit:
   `notes/2026-07-11-continuation-rigidity-audit-scope.md`.
