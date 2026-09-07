@@ -5604,3 +5604,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1103 `[ergodis]` [REPORTED 2026-09-07]** — Bounded offline run bundles with borrowed payloads, included identity/parent checks and explicit missing dependencies. Core c8da541; private fd0f03f. Native, seven bundle/eight private tests, Python and WASM pass → notes/2026-09-07-c1103-offline-run-bundles.md
 
 - **C1105 `[ergodis]` [REPORTED 2026-09-07]** — Bounded offline browser/client inspection with manifest, exact identities/lineage, declared modes and missing dependencies; no live campaign or implicit verification. Real Chromium complete/partial/corrupt/oversize gates, full native, Python and WASM pass. Core d5e5504 → notes/2026-09-07-c1105-offline-browser-inspection.md
+
+- **C1106 `[ergodis]` [REPORTED 2026-09-07]** — Explicit bounded snapshot verification and fresh-UUIDv7 child bundle downloads; exact parent preservation, chosen-spec forks and no inherited evidence authority. Four portable workflow tests, full native, Python, WASM and actual browser gates pass. Core feab0c6 → notes/2026-09-07-c1106-offline-verification-forks.md

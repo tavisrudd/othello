@@ -248,8 +248,13 @@ missing dependencies through the portable WASM parser. Bounded single-use Worker
 or implicit verification. Real Chromium complete/partial/corrupt/oversize cases, full native,
 Python and release WASM gates pass.
 
-**Next**: C1106 explicit verification and fresh-ID fork workflow.
-C1107 defines and tests the portable repository publication/fencing,
+**C1106 complete**: core `feab0c6`; `notes/2026-09-07-c1106-offline-verification-forks.md`.
+Explicit min-plus snapshot checking with summary-only coverage and fresh-UUIDv7 child downloads;
+chosen-spec forks preserve original parent records and carry no child evidence. Unknown/missing
+evidence remains inspectable. Four portable workflow tests, full native, Python, release WASM and
+actual Chromium verification/fork gates pass. No source interpretation or execution authority.
+
+**Next**: C1107 defines and tests the portable repository publication/fencing,
 attempt and recovery-accounting contract before storage adapters or actual execution recovery.
 Allocated scope and gates: `notes/2026-09-07-ergodis-offline-workflow-successors.md`.
 Keep domain verification explicit; preserve native64 performance and solver/control separation.

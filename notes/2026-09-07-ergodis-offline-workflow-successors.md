@@ -1,7 +1,8 @@
 # Ergodis offline workflow successors
 
 Date: 2026-09-07. Lane: `ergodis`. Status: C1105 complete (core `d5e5504`);
-C1106 and C1107 queued. Report: `2026-09-07-c1105-offline-browser-inspection.md`.
+C1106 complete (core `feab0c6`); C1107 queued. Reports:
+`2026-09-07-c1105-offline-browser-inspection.md`, `2026-09-07-c1106-offline-verification-forks.md`.
 
 C1101 supplies UUIDv7 run identity and portable records; C1103 supplies bounded bundles.
 The next product increment lets users inspect historical work without a running process,
