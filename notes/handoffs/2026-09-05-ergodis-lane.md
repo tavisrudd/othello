@@ -123,6 +123,13 @@ the Farr–Lisoněk free-pair cap constructions into a test-cap corpus for the c
 in the `n ≥ 4` programme. Each row carries its own provenance pointer; read the discovery-track
 entry before starting.
 
+### C1079 — ergodis-evolve review
+
+Queued, not started. Review correctness, exactness/certificate boundaries, integration risks, and
+test coverage in `ergodis-evolve`; deliver severity-ranked findings with file/line evidence and
+targeted reproduction checks. Read the owning checkout’s `AGENTS.md` first. Planned report:
+`notes/2026-09-06-c1079-ergodis-evolve-review.md`.
+
 ### C985 — Ergodis exact algebraic optimization paper
 
 In progress as the optimization-facing sequel to the `complete-ports` lane's manuscript; it does not
@@ -145,6 +152,6 @@ host, so cold end-to-end `g41` replays need it regenerated first.
 ## Lane ownership
 
 This lane was split out of `complete-ports` on 2026-09-05 and owns C985, C1016, C1017,
-C1031-C1033, C1040-C1048, C1052, C1061, C1062, C1070, C1072-C1074. Future Ergodis engine, benchmark, tooling,
+C1031-C1033, C1040-C1048, C1052, C1061, C1062, C1070, C1072-C1074, C1079. Future Ergodis engine, benchmark, tooling,
 capability, and Ergodis-paper tasks use `[ergodis]`. The bounded-recovery manuscript work (C325,
 C953, C955, C964) stays on `[complete-ports]`.
