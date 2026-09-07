@@ -4436,8 +4436,17 @@
       "last": 1078,
       "purpose": "Astra cap memo follow-ups: t_2(4,q) literature check, divisibility-exclusion scan, cross-citation and cap-section upgrades, third paper on secant-hyperplane defects",
       "sequence": 493
+    },
+    {
+      "count": 1,
+      "first": 1079,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1079,
+      "purpose": "Review ergodis-evolve for correctness, integration risks, and test coverage gaps",
+      "sequence": 494
     }
   ],
-  "next_id": 1079,
+  "next_id": 1080,
   "schema": "codex-task-id-allocations-v1"
 }
