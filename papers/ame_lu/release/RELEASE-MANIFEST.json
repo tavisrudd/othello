@@ -11,9 +11,9 @@
         "sha256": "2b6a65af3d935ac153c41d6cd00975f6165869b573bd65ba9ea6c418f36cd15d"
       },
       {
-        "bytes": 299258,
+        "bytes": 301243,
         "path": "ame-lu.pdf",
-        "sha256": "c49f14500f4517311db55e8960b91f8e0d120de2cdbe6dc2199fb8963cb00653"
+        "sha256": "04b34952727f31c93bde2f7f7a5a68d68394452712339fb8c4dce17be63e4911"
       },
       {
         "bytes": 2650,
@@ -61,9 +61,9 @@
         "sha256": "0f5f42eb9f281a171c67cb5a2985da49976091aee0af9fae941157e5402e6c17"
       },
       {
-        "bytes": 34166,
+        "bytes": 35402,
         "path": "sections/03-exact-rigidity-atlas.tex",
-        "sha256": "4b9e0e1bb26c19d12f2d2ea58c54198a027404fcca16edeb07ccebfdc25d391e"
+        "sha256": "a23d4bdb286a4160725cb21f3b158df89285eac97e26a7c766d4808a5e6fe0d8"
       },
       {
         "bytes": 10079,
@@ -96,7 +96,7 @@
         "sha256": "f5747e9f3a2eac151eea1a7d766f7b96b3f56c6f18667e348c634351d3bacfd8"
       }
     ],
-    "tree_sha256": "402db31f829c84a8cef00b9bca8cc454de0afa879aea5cfc7e3e79eb378ffbf5"
+    "tree_sha256": "34d53f246449adfd3e55634c64a14fba19f72728ce8df29f6966d60249f28c9e"
   },
   "formal_companion": {
     "artifacts": [
