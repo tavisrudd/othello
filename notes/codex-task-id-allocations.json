@@ -4724,8 +4724,17 @@
       "last": 1121,
       "purpose": "Simplify offline browser demo onboarding and saved-run actions with real-browser UI checks",
       "sequence": 525
+    },
+    {
+      "count": 1,
+      "first": 1122,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1122,
+      "purpose": "Rebuild browser first-visit experience around a concrete optimization example and guided safe-reduction campaign",
+      "sequence": 526
     }
   ],
-  "next_id": 1122,
+  "next_id": 1123,
   "schema": "codex-task-id-allocations-v1"
 }
