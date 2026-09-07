@@ -364,7 +364,21 @@ is sampled, not exhaustive; `d_X` for the new p = 11 and p = 13 codes is only an
 5. **Exact `d_X` and exact p = 13 census.** Both are well-defined finite computations
    (a proper minimum-weight algorithm; a `13^12`-point census, about a day at C1090's rate).
    Gap only, no mystery.
-6. **Rigidity is generic.** Every trade found, including the trivial translation trade, has
+7. **The conference triangle cubic is a different, weaker resource.** Prompted by Sol's
+   Paper III/V comments (2026-09-07): the order-six Paley conference matrix's triangle cubic
+   `Σ_{i<j<k} B_ij B_jk B_ki x_i x_j x_k` (Paper V's conference cubic; a trace form per the
+   discovery track) has Hessian census `(N_0, N_4, N_5) = (7, 19572, 98070)` over `F_7^6`
+   and `(N_0, N_3, N_4, N_5) = (11, 3300, 244860, 1523390)` over `F_11^6` (tensors
+   `out/t_triangle6_p{7,11}.txt`, census by `rank11`). It has a nonzero vector with vanishing
+   Hessian, so it is not concise: Clifford-equivalent to a five-qudit cubic state times a
+   stabilizer qudit, with `M_2 = 8.63` at p = 7. No conic trade cubic has that (all are
+   concise with `r_min = 3`), so the logical cubics are not Clifford-equivalent to the
+   conference cubic; a Clifford-invariant certificate of Paper V's "chordal, not conference".
+   Settled at the level of a necessary condition; the exact identification of the logical
+   cubic with Paper V's chordal Hankel companion is immediate (`F_logical(u) = μ_3(u,u,u)`,
+   the signed third moment as a cubic form on the dual of the ambient space) and belongs in
+   the C1102 note.
+8. **Rigidity is generic.** Every trade found, including the trivial translation trade, has
    `dim L^{∘2} = 2p - 1`. Paper II's rigidity therefore does not distinguish the exceptional
    configurations at the code level; only the symmetry and the magic do. Settled by
    computation; a one-line proof for the translation trade would be a free upgrade for the
