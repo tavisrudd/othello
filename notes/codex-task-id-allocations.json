@@ -4544,8 +4544,17 @@
       "last": 1090,
       "purpose": "Clebsch II cubic-phase quantum codes: priority search and resource-content classification",
       "sequence": 505
+    },
+    {
+      "count": 1,
+      "first": 1091,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1091,
+      "purpose": "Archive September 4\u20135 brainstorms and synthesize core semantic contracts before durable schemas",
+      "sequence": 506
     }
   ],
-  "next_id": 1091,
+  "next_id": 1092,
   "schema": "codex-task-id-allocations-v1"
 }
