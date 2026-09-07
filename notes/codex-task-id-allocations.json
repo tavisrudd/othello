@@ -4661,8 +4661,17 @@
       "last": 1103,
       "purpose": "Bounded offline run bundles with content resolution and lineage diagnostics",
       "sequence": 518
+    },
+    {
+      "count": 1,
+      "first": 1104,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 1104,
+      "purpose": "observational-cost theory follow-up",
+      "sequence": 519
     }
   ],
-  "next_id": 1104,
+  "next_id": 1105,
   "schema": "codex-task-id-allocations-v1"
 }
