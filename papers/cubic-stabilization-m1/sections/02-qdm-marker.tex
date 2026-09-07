@@ -31,7 +31,24 @@ all spectral blocks only after base change to \(\overline K_Y\), so no later
 scalar extension can split a factor that has already been counted as one
 block.
 
+For a homogeneous even cohomology basis \((\phi_\alpha)\), our conventions are
+\[
+ \nabla_{\partial_{t^\alpha}}
+ =\partial_{t^\alpha}+z^{-1}(\phi_\alpha\star_t),\qquad
+ \nabla_{z\partial_z}=z\partial_z-z^{-1}(E_Y\star_t)+\mu_Y,
+\]
+where \(n=\dim Y\), \(\mu_Y|_{H^k(Y)}=(k-n)/2\), and
+\[
+ E_Y=c_1(Y)+\sum_\alpha
+ \left(1-\frac{\deg\phi_\alpha}{2}\right)t^\alpha\phi_\alpha.
+\]
+Horizontal sections therefore satisfy
+\(z^2\partial_z y=((E_Y\star_t)-z\mu_Y)y\).
 Let \(U\) denote multiplication by the Euler field on \(H^{\mathrm{ev}}(Y)\).
+For a primary block with eigenvalue \(\lambda\), centering removes the
+scalar exponential factor \(e^{-\lambda/z}\); its leading operator becomes
+\(N=U-\lambda I\).
+
 After base change to \(\overline K_Y\), each generalized eigenspace of \(U\) is
 a summand of the full formal connection, not just an invariant subspace of
 \(U\):
@@ -224,8 +241,7 @@ ambient and center components have degrees \(0\) and \(-c\), respectively
 \cite[Theorem~5.1(3)]{IritaniKoto}\cite[Theorem~5.18(3)]{IritaniBlowup}.
 Because the block type used here does not retain absolute grading, these shifts
 do not change its component.  For a graded refinement they are recorded as
-integral suspensions, and the operation formula applies only to a invariant
-invariant under those suspensions.
+integral suspensions, and the operation formula applies only to an invariant under those suspensions.
 
 \paragraph{Faithful center coordinates.}
 Iritani's center map need not be injective
@@ -693,7 +709,29 @@ are regular in \(z\); explicitly, it has the normalized form
  \qquad G_n\text{ block-off-diagonal}.
  \label{eq:cubic-integral-block-gauge}
 \end{equation}
-Direct multiplication through order \(z^2\) gives
+To extract the coefficient used in the residue, write
+\(y=CG(z)\widetilde y\), \(J=C^{-1}U_XC\) and \(B=C^{-1}D_XC\).
+Label the blocks by \(+,-,0\).  If the transformed coefficient is
+\(J+z\widehat A_0+z^2\widehat A_1+\cdots\), then
+\[
+ (J+zB)G-z^2G'=G(J+z\widehat A_0+z^2\widehat A_1+\cdots).
+\]
+Thus \((\widehat A_0)_{ii}=B_{ii}\), while the first Sylvester equations are
+\[
+ J_i(G_1)_{ij}-(G_1)_{ij}J_j=-B_{ij}\qquad(i\ne j).
+\]
+At the next order,
+\[
+ \widehat A_1=[J,G_2]+BG_1-G_1-G_1\widehat A_0.
+\]
+Since \(G_1,G_2\) are block off-diagonal and \(\widehat A_0\) is block
+diagonal, the zero block is simply
+\[
+ A_1=(\widehat A_1)_{00}
+ =B_{0+}(G_1)_{+0}+B_{0-}(G_1)_{-0}
+ =\begin{pmatrix}0&-14/(81r^2)\\-8/81&0\end{pmatrix}.
+\]
+This computes the needed coefficient without solving for \(G_2\), and proves
 \eqref{eq:cubic-shared-block-data}.
 \end{proof}
 
@@ -714,10 +752,10 @@ Its characteristic polynomial is
 \end{equation}
 
 \paragraph{From the small connection to the generic block.}
-At the small quantum point, the rank-two cluster is separated from the
+After inverting \(q\), at the small quantum point the rank-two cluster is separated from the
 other eigenvalues.  The cyclic-centralizer argument in
 Proposition~\ref{prop:rank2-rigidity} continues that cluster over the formal
-bulk ring and proves that its centerd leading term remains nonzero and
+bulk ring and proves that its centered leading term remains nonzero and
 square-zero.  The modified residue is then preserved by flatness.  Thus
 the small calculation determines the exponent count at generic quantum
 parameters, for every smooth cubic threefold.
