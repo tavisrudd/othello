@@ -89,3 +89,10 @@ The revised extremal claim-map row was reviewed before refreshing its digest;
 all checks and deterministic builds passed again (331812-byte PDF). No new
 main-result issue was found. The additional ej/tt closeout settled the distinction
 between improving one sufficient bound and lowering their combined threshold.
+
+
+Final local export: authority 3fb03e29d, standalone 1d51e99. Exporter
+verification, standalone make check and deterministic PDF verification pass;
+PDF byte equality with authority confirmed. Content SHA-256:
+`052c790ebc8e210dd392a1620f68293c0cecfb898a6b9911c81ccf4afced93f8`.
+No GitHub or DOI action occurred.
