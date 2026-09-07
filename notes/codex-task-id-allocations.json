@@ -4445,8 +4445,17 @@
       "last": 1079,
       "purpose": "Review ergodis-evolve for correctness, integration risks, and test coverage gaps",
       "sequence": 494
+    },
+    {
+      "count": 1,
+      "first": 1080,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1080,
+      "purpose": "Implement C1079 portable candidate parameter admission pilot with an existing proposer and exact solver consumer",
+      "sequence": 495
     }
   ],
-  "next_id": 1080,
+  "next_id": 1081,
   "schema": "codex-task-id-allocations-v1"
 }
