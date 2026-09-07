@@ -117,3 +117,11 @@ coefficient derivation and residue continuation, and the expanded appendix
 with its formulas and factor-case interpretation. No clipping was found.
 The new formulas expose existing definitions and the derivation of the
 already stated coefficient; no new computational theorem is asserted.
+
+Final authority repair commit: `bdbb2b751`. Both guarded exports pass plan,
+audit (zero findings), sync and verify. Standalone gates pass with the exact
+repaired PDF hashes above; forward commits are m=1 `60a5236` and sharpness
+`b9876e6`. No manuscript or certificate claim was weakened by the repairs.
+C978/C956 remain open; the custom protocol's governing instructions are
+still the next missing input. The independent review and bounded repair
+rechecks are complete, with the limits stated above.

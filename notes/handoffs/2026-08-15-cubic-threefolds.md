@@ -57,19 +57,22 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   **C1119 is complete:** finite-index slice degrees, the scroll example and
   universal zero-cycle consequences are integrated and synchronized with
   matching PDFs; report: `../2026-09-07-c1119-finite-index-torus-slices.md`.
-  **C978/C956 draft pass is committed** at `d590dbec0`: original cubic
-  headlines and main-proof routes are preserved, terminology and matrix
-  symbols are standardized, and extensions follow the core arguments.
-  Both authority and mirror gates pass with matching PDFs; mirror commits
-  are `cf96368` and `7f62464`. Report:
-  `../2026-09-07-cubic-pair-exposition-and-notation.md`. Next run the author's
-  requested **full-paper cold-read sub-referee protocol on both papers**,
-  repair findings and revalidate before considering the deferred email.
-  The protocol location has been requested. Independent full-paper cold
-  readers have begun on both drafts without prior reviews; this is not yet
-  completion of the custom protocol or cold-review acceptance.
-  C963/C965/C966 retain algorithmic work. Treat upgrades as queued proof
-  obligations, not accepted theorems. Review and ordering:
+  **C978/C956 draft and independent cold-read passes are complete locally**:
+  original cubic headlines and main-proof routes are preserved, terminology
+  and matrix symbols are standardized, and extensions follow the core
+  arguments. Draft report: `../2026-09-07-cubic-pair-exposition-and-notation.md`.
+  Two fresh-context readers read the full respective papers and returned no
+  verified fatal error; their concrete exposition findings were repaired
+  and rechecked. Repair authority: `bdbb2b751`; mirrors `60a5236` and
+  `b9876e6`. All four paper gates pass with matching source/mirror PDFs.
+  Review scope, limitations and validation:
+  `../2026-09-07-cubic-pair-cold-read.md`.
+  The custom protocol location remains pending, so this is not a claim of
+  its full completion or independent specialist certification. C978/C956
+  stay open by author instruction. Finish the custom protocol requirements
+  once located before considering the deferred email.
+  C963/C965/C966 retain algorithmic work. The upgraded claims retain their stated
+  imported-theorem dependencies and recorded review limits. Review and ordering:
   `../2026-09-07-cubic-astra-review-triage.md`. Tschinkel--Zhang v2 source
   comparison: `../2026-09-07-tz-v1-v2-comparison.md`.
   A bounded friendly-feedback review and unsent email draft are recorded in

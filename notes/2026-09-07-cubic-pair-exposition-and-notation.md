@@ -128,3 +128,10 @@ extensions begin. The symbol audit also removed an actual ambiguity between
 the coefficient field and the cubic Euler matrix, and between connection
 matrices and gauges. Full-paper cold readers still need to test whether the
 resulting first-reading route works for its intended audiences.
+
+## Subsequent cold-read repairs
+
+The two independent full-paper reads and their rechecked repairs are now
+recorded in `2026-09-07-cubic-pair-cold-read.md` (authority `bdbb2b751`).
+That report supersedes the review-in-progress status above and records the
+new PDF identities. The custom protocol's location remains pending.
