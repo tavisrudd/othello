@@ -4472,8 +4472,17 @@
       "last": 1082,
       "purpose": "Executable scalar PlanSpec semantics and FeatureDag lowering conformance",
       "sequence": 497
+    },
+    {
+      "count": 1,
+      "first": 1083,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1083,
+      "purpose": "Portable executable campaign transitions with scoped admission and replay",
+      "sequence": 498
     }
   ],
-  "next_id": 1083,
+  "next_id": 1084,
   "schema": "codex-task-id-allocations-v1"
 }
