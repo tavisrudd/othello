@@ -128,3 +128,10 @@ Core `8fe20fa`; report `../2026-09-07-c1095-observable-admission.md`. Validated 
 reuse admits class-constant readouts and rejects lost distinctions with a concrete pair.
 Native full gates, 508 trajectory cases, eight Python fixtures and WASM compilation pass.
 Next: domain-checked leaf transitions and explicitly scoped independent summary checking.
+
+## 2026-09-07 — C1096 domain leaf update admission
+
+Private `b6307ed`; report `../2026-09-07-c1096-leaf-update-admission.md`.
+Event semantics, after-state and evaluated summary checked before issuing an opaque update;
+application checks schema/source preconditions. 13 scoped tests, formatting and clippy pass.
+Independent summary proof checking remains the next boundary.

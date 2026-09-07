@@ -196,11 +196,16 @@ separate. Original hot loops/layouts and native construction paths unchanged.
 readouts return a concrete distinguishing pair. Full native gates, Python parity and WASM release
 check pass. This is state-readout admission on supplied contexts, not domain/policy evidence.
 
-**Next**: domain-checked leaf transitions over the existing composition capabilities, then move
-summary-transition checking into the independent verifier with its narrower claim scope. Reuse the
-private OpenProblem/parametric/certificate implementations and existing domain corpus. Preserve
-question/design exploration, native64 performance and the solver/control separation. Durable schemas
-and module manifests follow those contracts; C1032 remains open.
+**C1096 complete**: private event-to-leaf admission, private `b6307ed`;
+`notes/2026-09-07-c1096-leaf-update-admission.md`. Opaque checked transitions reject forged after/
+summary claims and changed source/schema before mutation; unrelated-leaf updates remain valid.
+13 scoped tests, formatting and clippy pass. Same-kernel summary evaluation is not independent proof.
+
+**Next**: independent summary-transition checking with explicit domain/event prerequisites,
+using the private OpenProblem/generic-certificate implementation and the new admission corpus.
+Keep source correctness separate from table commitments; preserve question/design exploration,
+native64 performance and solver/control separation. Durable schemas and module manifests follow
+those contracts; C1032 remains open.
 
 ### C985 — Ergodis exact algebraic optimization paper
 
