@@ -7,6 +7,7 @@ trails belong in the dated task reports and in the archive companion,
 [`2026-09-05-ergodis-lane-archive.md`](2026-09-05-ergodis-lane-archive.md).
 
 **Date**: 2026-09-05
+**Mode**: intent-based.
 **Status**: ACTIVE. Split out of `complete-ports` on 2026-09-05. C1016 (order-2092 Hadamard
 reduction), C1061 (compiled dynamic decision engines / Tiger decoder), and C1062 (structural causal
 models as a context language) are in progress; C1062 is ready to close on Tavis's call. C1017 (core
@@ -151,7 +152,11 @@ and bounded byte-reader tests pass; native/WASM layout assertions remain exact. 
 authority: core `docs/glossary.md`. C1084 includes run metadata/notes, forkable history and the
 separate orchestration bounded context above the mathematical engine.
 
-**Next**: allocate the portable orchestration crate and bounded shared client/session contract;
+**In progress — C1086**: independent finite verification crate and cold solver-admission bridge;
+`notes/2026-09-07-c1086-independent-verification.md`. User-approved verification context advances
+this cut before orchestration; no verifier dependency on solver or host machinery.
+
+**Next after C1086**: allocate the portable orchestration crate and bounded shared client/session contract;
 move the current Campaign workflow above core with explicit consumer migration, retaining its
 semantics and avoiding a cyclic compatibility reexport. Then implement browser control and durable
 run records/metadata/annotations/history through native/browser repository adapters. Responsive

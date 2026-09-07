@@ -199,6 +199,7 @@ previously proposed autonomous-driver wiring; it does not replace those semantic
 | Module | Owns and hides | Must not know |
 |---|---|---|
 | Language/compiler | Typed documents, validation, canonicalization, lowering, executable semantics | Paths, sockets, JS objects, scheduling |
+| Verification | Typed mathematical claims, independent checking, scoped records and opaque verified results | Solver machinery, search mode, provenance policy, host/runtime state |
 | Campaign | Candidate revisions, evidence, budgets, result coverage, deterministic transition rules | Transport identity, OS handles, browser lifecycle |
 | Control service | Session lifecycle, bounded dispatch, operation tracking, authorization decisions, event cursors | Unix APIs, browser promises, storage layout |
 | Repository | Typed, integrity-checked immutable artifacts and atomic publication of campaign generations | Theorem truth, solver workspace layout |
@@ -266,6 +267,69 @@ TUI consumption incrementally. Do not shell out to `ergodisctl` from each new fr
 server-local artifact paths to a remote client. User-requested Python modernization is a named
 migration deliverable, with old/new protocol compatibility tests, not an incidental cleanup.
 
+## Independent verification bounded context
+
+Verification is a separate bounded context with a leaf implementation that does not depend on
+the solver, orchestration or host crates. Its job is to check a precisely typed mathematical claim
+against authoritative inputs and supplied evidence within a declared budget. Solving discovers
+answers and proposes evidence; verification checks the claim. The orchestrator records outcomes
+and selects policy but cannot mint a verification capability from a receipt or status field.
+
+Start by extracting the fixed finite GF(2) coordinate-restriction checker into `ergodis-verify`,
+with a bounded `binary_composition` module. Keep only primitive typed problem/claim representations,
+canonicalization/identity, direct arithmetic, scoped records, replay and opaque verified tokens.
+Do not move origin, run metadata, search mode, discovery policy or private-module loading into
+this crate. Core admission adapts native matrices/cost tables to the verifier and consumes the
+opaque result at a cold execution boundary. Verifier input validation must be independent of a
+solver constructor having supposedly checked the same input already.
+
+For this first cut, the small mathematical contracts can live beside the checker. Create a
+separate contracts crate only when additional independent consumers/families justify it; do not
+create a generic certificate/plugin framework to move one existing checker. The verifier can be
+built/tested for native and WASM without compiling the solver. Its normal dependency closure must
+contain no solver, runtime, Rayon, platform-control, filesystem or module-loader dependency.
+
+| Claim kind | Required distinction |
+|---|---|
+| Feasibility | A witness satisfies the original constraints; not an optimality proof |
+| Optimality | A feasible witness plus a justified bound/exhaustive argument closes the objective gap |
+| Infeasibility | Evidence covers the entire declared feasible domain; absence of a heuristic answer is insufficient |
+| Restriction preservation | All feasible solutions remain inside the retained domain under stated hypotheses |
+| Quotient preservation | Cost relation and witness-lifting obligations hold; it is not merely a filter |
+
+Only the existing bounded restriction family is implemented in the first slice. Each later
+certificate language gets its own versioned claim/input/evidence semantics. No unqualified
+Verified status conflates these obligations. Malformed input, unsupported schema/checker and budget
+exhaustion remain distinct from a counterexample/refutation. A checker need not trust the solver's
+search trace or proposed implementation identifier.
+
+Formalization target: prove checker soundness for each family—acceptance implies the specified
+scoped claim. A totality/resource argument must state its admitted input bounds. Specify primitive
+arithmetic, canonicalization, parsing and version dispatch as part of the trusted boundary, and
+record remaining compiler/runtime assumptions. Share necessary definitions while maintaining an
+independent reference formulation/test corpus so a shared low-level bug does not masquerade as
+independent agreement. There is no machine-checked checker proof in this initial extraction.
+
+The current checker exhausts a bounded Cartesian domain independently; extraction makes it easier
+to audit, not automatically cheaper. Succinct certificates are a later algorithmic improvement.
+Preserve checking budgets and native solver performance separately. No certificate parsing,
+hashing, proof search or workflow accounting enters the solve hot loop.
+
+Checker implementation identity changes when code moves. Preserve mathematical problem/candidate
+identity where the encoding is unchanged, but do not issue the old source hash from a new checker.
+Historical receipts remain viewable; exact replay under the wrong checker identity fails. A fresh
+check emits a new verification record linked by the outer history layer. Exact historical campaign
+replay may consequently require an explicitly supported old checker or a new reconstruction/fork;
+never silently rewrite the old receipt/command log or call a refreshed claim exact historical replay.
+Distinguish semantic rule version, source digest and outer build/environment metadata.
+
+Acceptance: direct leaf tests with no solver dependency; independent oracle cases; core-adapter
+parity for canonical inputs, hashes, outcomes, counters and counterexamples; malformed/oversized
+input; forged/unknown receipts; problem/claim swaps; stale checker identity; and native/WASM builds.
+Use compile-fail/API privacy checks to preserve the non-deserializable token boundary. Root native
+and browser regressions stay required. The orchestration extraction follows this cut and depends
+inward on both solver and verifier.
+
 ## Solver boundary: control never becomes a kernel dependency
 
 The user explicitly requires control-plane isolation. Orchestration is a separate bounded context above the mathematical engine. The current campaign
@@ -299,7 +363,9 @@ Treat the following as the target dependency shape, reached incrementally rather
 immediate workspace rewrite:
 
 ```text
-ergodis (existing library: languages, compiler, admission, solver)
+ergodis (existing library: languages, compiler, solver, cold admission bridge)
+    |
+    +--> ergodis-verify (leaf mathematical contracts and independent checking)
     ^
     |-- ergodis-runtime (campaign workflows, portable service, protocol, repository contracts)
     |       ^
@@ -584,7 +650,8 @@ frontend naming changes must use it or update it explicitly.
 
 ## Extensions and the public/private boundary
 
-Core owns module registration contracts, compilation, checking and generic execution semantics.
+Core owns module registration contracts, compilation and generic execution semantics.
+The independent verification context owns mathematical checking and scoped verified results.
 The control service schedules logical operations; the execution host schedules physical jobs and
 owns threads/processes. Module discovery and loading use those contracts in the host.
 Private packages own domain heuristics, theorem libraries, tuned parameters and specialized kernels.
@@ -655,6 +722,7 @@ working native CLI and browser demo throughout; no flag-day replacement.
 | Stage | Deliverable and dependency | Acceptance / stopping boundary |
 |---|---|---|
 | 1 — Portable language ownership | Extract scalar/text/codec modules from control, retain reexports and path wrappers | Existing scalar/Python/FeatureDag suites unchanged; default native and wasm library compile; legacy control tests pass; no hot changes |
+| Verification boundary — before stage 2 | Independent finite checker crate and cold admission bridge; explicit source identity transition | No solver dependency, canonical identity/outcome parity, forged-record rejection, native/WASM gates |
 | 2 — Shared control contract | Portable runtime crate owns migrated Campaign v1 workflow and bounded typed facade; versions, capabilities, IDs, errors, revision and retry rules; in-process adapter | Native/WASM run the same serialized corpus; request conflict/size/unknown-op tests; receipts cannot install authority; schema fixtures reviewed |
 | 3 — Local browser control demo | Worker facade, common client, progress/status, checkpoint export/import; use bounded sync operations initially | Create→propose→check→execute→cancel→resume→restore demo; evidence/provenance/coverage displayed separately; no claim of in-flight stopping |
 | 4 — Repository and native bridge | Commit/dedup contract, memory/native/IndexedDB adapters; native new-protocol endpoint and authenticated browser web connection | Crash/ack-loss/conflict/quota/eviction tests, reconnect no duplicate logical charge, legacy Unix security tests retained; same UI drives local/remote |
@@ -712,5 +780,6 @@ A final Terra review checked the crate DAG and session split; its scheduler-owne
 was resolved explicitly. A follow-up source audit distinguished the two Python clients. The
 separate TUI artifact remains a bounded recovery prerequisite, as recorded above.
 
-Next highest-value slice: stage 1 portable language ownership, immediately followed by the bounded
-shared Campaign facade. This removes concrete coupling before the autonomous driver creates more.
+Portable language ownership is complete. The user-approved independent verification cut now
+precedes the shared Campaign facade; then orchestration moves above core. This removes concrete
+dependency coupling before autonomous scheduling and persistence create more.
