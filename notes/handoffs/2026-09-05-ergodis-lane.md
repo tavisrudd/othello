@@ -162,7 +162,7 @@ core `75c1021`; `notes/2026-09-07-c1087-portable-campaign-runtime.md`. Existing 
 preserved; explicit retry/revision/generation rules and JS-safe counters; native/Python and actual
 WASM campaign corpus gates pass. Legacy native daemon/Python clients remain separate APIs.
 
-**Next**: allocate the interactive browser Worker/client control demo over the shared service:
+**In progress — C1088**: interactive browser Worker/client control demo over the shared service:
 create/propose/check/execute/cancel/resume, status and checkpoint export/import, with evidence,
 provenance and coverage shown separately. Then implement durable run records/metadata/annotations/
 history through native/browser repository adapters. Responsive
