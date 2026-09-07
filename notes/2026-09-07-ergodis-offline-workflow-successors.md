@@ -3,8 +3,12 @@
 Date: 2026-09-07. Lane: `ergodis`. Status: C1105 complete (core `d5e5504`);
 C1106 complete (core `feab0c6`); C1107 complete (core `75b646b`). Reports:
 `2026-09-07-c1105-offline-browser-inspection.md`, `2026-09-07-c1106-offline-verification-forks.md`,
-`2026-09-07-c1107-repository-contract.md`. Persistent adapter/backend selection and allocation
-is the next gate; the existing C1033 analytical read layer remains a downstream integration.
+`2026-09-07-c1107-repository-contract.md`. C1114 browser IndexedDB persistence is complete (core `96a81b5`), and C1115 native Unix
+filesystem persistence is complete (core `248b678`, docs `8848e3f`). Reports:
+`2026-09-07-c1114-browser-repository.md`, `2026-09-07-c1115-native-repository.md`.
+Both share the portable bounded replay format and pass actual platform process-crash gates.
+Analytical projection bridge selection/allocation is the next gate; C1033 remains downstream.
+Automatic execution resumption is a separate slice.
 
 C1101 supplies UUIDv7 run identity and portable records; C1103 supplies bounded bundles.
 The next product increment lets users inspect historical work without a running process,

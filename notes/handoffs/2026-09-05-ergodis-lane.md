@@ -272,12 +272,17 @@ actual execution recovery is implemented.
 
 **C1114 complete**: core `96a81b5`; browser IndexedDB persistence, portable bounded replay,
 save/reopen/verify/fork UI and actual Chromium crash/restart gates pass.
-**Next**: C1115 native filesystem persistence using the same portable repository semantics. Tavis approved browser/WASM
-demo support in the initial scope; automatic execution resumption remains separate.
-Report/scope: `notes/2026-09-07-c1114-browser-repository.md`. The analytical projection
-bridge remains a subsequent slice. C1033's existing DuckDB/Jupyter manifest-ledger read surface is a downstream consumer;
-this contract does not select DuckDB as the authoritative writer store. Native and browser storage
-adapters and execution recovery need their own allocated slices and actual platform crash gates.
+Report: `notes/2026-09-07-c1114-browser-repository.md`.
+
+**C1115 complete**: core `248b678`, docs `8848e3f`; separate native Unix filesystem host
+shares the same portable replay semantics. Cross-process ownership and five publication-step
+SIGKILL gates pass on ZFS; full native/Python/release WASM gates pass.
+Report: `notes/2026-09-07-c1115-native-repository.md`.
+
+**Next gate**: choose and allocate the analytical projection bridge using coherent repository
+snapshots; C1033's DuckDB/Jupyter manifest-ledger read surface remains a downstream consumer.
+Browser/native bounded persistence pilots are complete; automatic execution recovery, larger
+stores and additional platform/retention guarantees need separately allocated slices and gates.
 Closed scope and gates: `notes/2026-09-07-ergodis-offline-workflow-successors.md`.
 Keep domain verification explicit; preserve native64 performance and solver/control separation.
 Other algebras/backends and compact sibling proofs need their own admission/performance gates.

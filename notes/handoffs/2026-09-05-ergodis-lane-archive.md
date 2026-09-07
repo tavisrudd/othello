@@ -167,3 +167,10 @@ Core c8da541, private fd0f03f. Bounded borrowed-payload reader/encoder checks in
 Browser IndexedDB repository, portable replay image and offline saved-run controls: core
 `96a81b5`; native/Python/WASM and actual Chromium crash/restart gates pass. Report:
 `../2026-09-07-c1114-browser-repository.md`. Native companion C1115 follows.
+
+## 2026-09-07 — C1115 complete
+
+Native local Unix filesystem host: core `248b678`, docs `8848e3f`. Shared portable replay,
+cross-process writer exclusion, atomic publication and SIGKILL recovery on ZFS; full
+native/Python/WASM gates pass. Report: `../2026-09-07-c1115-native-repository.md`.
+Browser/native initial scope is complete; analytical projection allocation is next.
