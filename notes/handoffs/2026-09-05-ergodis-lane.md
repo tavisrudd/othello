@@ -242,12 +242,13 @@ history rejection pass seven bundle tests; the private LRC fixture resolves actu
 bytes before explicit verification. Full native, eight private tests, Python and WASM compilation
 pass. Opening data implies no solver execution, publisher authentication or mathematical authority.
 
-**Next**: expose offline bundle inspection in the browser/client workflow: bounded file input,
-manifest and run lineage, missing-content diagnostics, no live-session requirement. Keep domain
-verification an explicit capability/action. Repository publication/fencing, attempts/budgets and
-actual execution recovery remain separate. Other algebras/backends and compact sibling proofs
-need their own admission/performance gates. Preserve native64 performance and solver/control
-separation. C1032 and module schemas remain open.
+**Next**: C1105 offline browser/client bundle inspection, then C1106 explicit verification and
+fresh-ID fork workflow. C1107 defines and tests the portable repository publication/fencing,
+attempt and recovery-accounting contract before storage adapters or actual execution recovery.
+Allocated scope and gates: `notes/2026-09-07-ergodis-offline-workflow-successors.md`.
+Keep domain verification explicit; preserve native64 performance and solver/control separation.
+Other algebras/backends and compact sibling proofs need their own admission/performance gates.
+C1032 and module schemas remain open; these slices do not close or duplicate their broader scope.
 
 ### C985 — Ergodis exact algebraic optimization paper
 
