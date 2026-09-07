@@ -157,10 +157,15 @@ core `08221f2`; `notes/2026-09-07-c1086-independent-verification.md`. Native, st
 Python and browser/WASM gates pass; no verifier dependency on solver or host machinery. Old checker
 receipts intentionally require fresh verification rather than exact replay under the new checker.
 
-**In progress — C1087**: portable orchestration crate and bounded shared client/session contract;
-move the current Campaign workflow above core with explicit consumer migration, retaining its
-semantics and avoiding a cyclic compatibility reexport. Then implement browser control and durable
-run records/metadata/annotations/history through native/browser repository adapters. Responsive
+**C1087 complete**: portable `ergodis-runtime` owns Campaign and bounded synchronous session control,
+core `75c1021`; `notes/2026-09-07-c1087-portable-campaign-runtime.md`. Existing campaign semantics
+preserved; explicit retry/revision/generation rules and JS-safe counters; native/Python and actual
+WASM campaign corpus gates pass. Legacy native daemon/Python clients remain separate APIs.
+
+**Next**: allocate the interactive browser Worker/client control demo over the shared service:
+create/propose/check/execute/cancel/resume, status and checkpoint export/import, with evidence,
+provenance and coverage shown separately. Then implement durable run records/metadata/annotations/
+history through native/browser repository adapters. Responsive
 autonomous jobs, general quotient/lifting and industry module loading follow. Preserve the
 no-control-in-kernels boundary and native performance gates. C1032 remains open for full original
 acceptance review.

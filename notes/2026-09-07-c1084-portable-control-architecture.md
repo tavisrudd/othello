@@ -168,7 +168,8 @@ separation. Preserve the same workflow across browser, TUI, notebook and Python 
 
 ## Present state and what must change
 
-- `src/campaign.rs` is already default-feature portable state: synchronous `new`, `apply`,
+- `crates/runtime/src/campaign.rs` owns default-feature portable workflow after C1087:
+  synchronous `new`, `apply`,
   `snapshot`, `checkpoint_json`, `restore_json`. Its bounded schema-1 replay reexecutes checks
   and solves; it does not deserialize admission authority. Cancel gates subsequent commands,
   preserves spend/evidence and does not interrupt an active call.
@@ -334,8 +335,8 @@ inward on both solver and verifier.
 ## Solver boundary: control never becomes a kernel dependency
 
 The user explicitly requires control-plane isolation. Orchestration is a separate bounded context above the mathematical engine. The current campaign
-workflow module is temporarily housed in the core library; stage 2 moves that workflow ownership
-to the portable runtime. Runtime/control state must not enter the solver dependency path. The solver contract is validated compiled inputs,
+workflow module moves into `ergodis-runtime` in C1087. Runtime/control state must not enter the
+solver dependency path. The solver contract is validated compiled inputs,
 caller/worker-owned workspace and mathematical results. Sessions, run IDs, annotations, catalog
 queries, repository handles, transport events and client permissions do not belong in kernel
 arguments or per-state records. Serialize returned results into run records in the outer runtime.
@@ -366,7 +367,7 @@ immediate workspace rewrite:
 ```text
 Dependency arrows point from consumer to dependency:
 
-ergodis-host-native / ergodis-wasm --> ergodis-runtime (planned orchestration)
+ergodis-host-native (planned) / ergodis-wasm --> ergodis-runtime
 ergodis-runtime --> ergodis (compiler/solver/cold admission bridge)
 ergodis-runtime --> ergodis-verify (independent mathematical checking)
 ergodis --> ergodis-verify
@@ -780,6 +781,7 @@ A final Terra review checked the crate DAG and session split; its scheduler-owne
 was resolved explicitly. A follow-up source audit distinguished the two Python clients. The
 separate TUI artifact remains a bounded recovery prerequisite, as recorded above.
 
-Portable language ownership and the independent verification cut are complete. The shared Campaign
-facade and orchestration move above core next. This removes concrete
-dependency coupling before autonomous scheduling and persistence create more.
+Portable language ownership and the independent verification cut are complete. C1087 implements
+the shared bounded Campaign facade and moves orchestration above core. The synchronous WASM
+binding provides conformance coverage; stage 3 still owns the interactive Worker/client demo.
+This removes concrete dependency coupling before autonomous scheduling and persistence create more.

@@ -86,3 +86,13 @@ standalone verifier, independent Python and WASM/browser gates pass; native prof
 layouts remain unchanged. C1084 plan and public glossary now distinguish verification ownership.
 Report: `../2026-09-07-c1086-independent-verification.md`. Next: portable runtime/workflow
 extraction and bounded client/session contract. No incidental discovery entry.
+
+## 2026-09-07 — C1087 portable campaign runtime
+
+Core `75c1021` moves finite Campaign workflow/tests into `ergodis-runtime`, with a narrow cold
+core compile boundary and no reverse dependency. The bounded synchronous SessionService adds
+coordinated request IDs, generation/revision checks, retained-response retries and explicit resync.
+Native/Python and actual WASM/Chromium campaign corpus gates pass. Thin CampaignSession binding
+exists; Worker control UI, legacy native/Python adapters and durable repositories remain future work.
+Report: `../2026-09-07-c1087-portable-campaign-runtime.md`. Next: interactive Worker/client demo,
+then durable run records, annotations and fork history. No hot-loop/layout change or speed claim.
