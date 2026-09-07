@@ -4625,8 +4625,17 @@
       "last": 1099,
       "purpose": "Cubic-phase codes strengthening: stabilizer Renyi magic, distance-3 subcode search, family search beyond p=7,11; then decide the companion note",
       "sequence": 514
+    },
+    {
+      "count": 1,
+      "first": 1100,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1100,
+      "purpose": "Bind LRC event admission to authenticated summary transitions",
+      "sequence": 515
     }
   ],
-  "next_id": 1100,
+  "next_id": 1101,
   "schema": "codex-task-id-allocations-v1"
 }
