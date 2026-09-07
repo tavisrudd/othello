@@ -5574,3 +5574,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1086 `[ergodis]` [REPORTED 2026-09-07]** — Independent finite verification crate and solver admission bridge complete; core `08221f2`, native/Python/WASM/browser and dependency gates pass → `notes/2026-09-07-c1086-independent-verification.md`
 
 - **C1087 `[ergodis]` [REPORTED 2026-09-07]** — Portable runtime and bounded session contract complete; core `75c1021`, native/Python/WASM corpus gates pass → `notes/2026-09-07-c1087-portable-campaign-runtime.md`
+
+- **C1088 `[ergodis]` [REPORTED 2026-09-07]** — Browser Worker/client campaign demo complete; core `ea1f563`, actual UI/replay and native/Python gates pass → `notes/2026-09-07-c1088-browser-campaign-control.md`

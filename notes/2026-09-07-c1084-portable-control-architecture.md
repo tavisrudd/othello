@@ -782,6 +782,7 @@ was resolved explicitly. A follow-up source audit distinguished the two Python c
 separate TUI artifact remains a bounded recovery prerequisite, as recorded above.
 
 Portable language ownership and the independent verification cut are complete. C1087 implements
-the shared bounded Campaign facade and moves orchestration above core. The synchronous WASM
-binding provides conformance coverage; stage 3 still owns the interactive Worker/client demo.
+the shared bounded Campaign facade and moves orchestration above core. C1088 (core `ea1f563`)
+adds the interactive Worker/client demo, real UI conformance and opaque checkpoint file exchange.
+Stage 4 now owns durable run records, metadata, annotations and repository/history boundaries.
 This removes concrete dependency coupling before autonomous scheduling and persistence create more.

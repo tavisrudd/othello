@@ -96,3 +96,12 @@ Native/Python and actual WASM/Chromium campaign corpus gates pass. Thin Campaign
 exists; Worker control UI, legacy native/Python adapters and durable repositories remain future work.
 Report: `../2026-09-07-c1087-portable-campaign-runtime.md`. Next: interactive Worker/client demo,
 then durable run records, annotations and fork history. No hot-loop/layout change or speed claim.
+
+## 2026-09-07 — C1088 browser campaign control
+
+Core `ea1f563` adds campaign.html with a dedicated WASM Worker and bounded single-flight client.
+Real Chromium UI tests cover checked/heuristic workflows, cancellation gates, accepted provenance,
+opaque checkpoint export/import and failed-import preservation. Native/Python gates pass; WASM
+binary hash is unchanged. No in-flight cancellation, durable repository or module loader claim.
+Report: `../2026-09-07-c1088-browser-campaign-control.md`. Next: durable run/artifact records,
+metadata, annotations and portable repository/history contract, then storage adapters.

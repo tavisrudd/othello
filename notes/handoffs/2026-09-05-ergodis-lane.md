@@ -162,10 +162,14 @@ core `75c1021`; `notes/2026-09-07-c1087-portable-campaign-runtime.md`. Existing 
 preserved; explicit retry/revision/generation rules and JS-safe counters; native/Python and actual
 WASM campaign corpus gates pass. Legacy native daemon/Python clients remain separate APIs.
 
-**In progress — C1088**: interactive browser Worker/client control demo over the shared service:
-create/propose/check/execute/cancel/resume, status and checkpoint export/import, with evidence,
-provenance and coverage shown separately. Then implement durable run records/metadata/annotations/
-history through native/browser repository adapters. Responsive
+**C1088 complete**: interactive browser Worker/client campaign demo, core `ea1f563`;
+`notes/2026-09-07-c1088-browser-campaign-control.md`. Create/propose/check/execute/cancel/resume,
+status and opaque checkpoint file exchange pass real Chromium UI/Worker/WASM tests; provenance,
+verification and coverage remain separate. WASM binary unchanged; no in-flight cancellation claim.
+
+**Next**: allocate durable run records/artifact references and the portable repository boundary,
+including implementation/environment/provenance metadata, annotations and explicit history/fork
+semantics; then native/browser storage adapters with publication/recovery tests. Responsive
 autonomous jobs, general quotient/lifting and industry module loading follow. Preserve the
 no-control-in-kernels boundary and native performance gates. C1032 remains open for full original
 acceptance review.
