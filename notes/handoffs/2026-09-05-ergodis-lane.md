@@ -336,11 +336,15 @@ compilation with stage selection. Desktop/narrow browser workflow gates pass.
 Report: `notes/2026-09-07-c1126-campaign-information-architecture.md`.
 Preview remains `http://127.0.0.1:8767/`; this is the concrete IA review surface.
 
-**Input/query mockups**: private `aa659a7`, `analysis/campaign-console/mockups/README.md`.
-Six interactive views share a base presentation interface: general corpus, Hadamard,
-query comparison, Stim QEC, OR-Library FT10 scheduling, and explicit RS recovery.
-Review: `http://127.0.0.1:8769/`. Real/generated inputs and scenario parameters are
-labelled; these are design prototypes, not new backend results. Browser checks pass.
+**C1129 complete**: private `daf812d`; loaded domain workspace with explicit
+snapshot/runnable contexts and staged Create session → Run → Review actions.
+Real Worker/WASM executes a bounded QEC projection; CampaignSpec/checkpoint loading
+and portable bundle inspection pass browser gates. Scheduling/recovery remain
+snapshot-only. Secondary step/file controls sit below the visualization.
+Review: `http://127.0.0.1:8769/#qec`; report:
+`notes/2026-09-08-c1129-runnable-domain-lab.md`.
+Next UI slice (unallocated): integrate loaded domain/session interaction into the
+main campaign workspace; broader QEC/recovery adapters require their own contracts.
 
 **Next gate**: select and allocate a second real application demonstration (recovery/helper
 costs or QEC decoding) to show another engine capability. Browser analytical export

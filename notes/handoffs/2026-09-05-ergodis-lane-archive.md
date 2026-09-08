@@ -221,3 +221,11 @@ not a return to a toy or infographic default.
 2026-09-07: C1125 closes portable console integration against existing backend contracts; private `bd0acc4`. User-directed unified reduction-before-lineage view and below-fold details. Scope, gates and remaining execution bridge: `../2026-09-07-c1125-portable-console.md`.
 
 2026-09-07: C1126 implements the dashboard-analogue proposal for current console data sources. Campaigns/Library, browser-run action, contextual inspection and below-fold details; see `../2026-09-07-c1126-campaign-information-architecture.md`.
+
+## 2026-09-08 — C1129 loaded domain workspace
+
+Private `daf812d` replaces fixed lab interaction with domain/CampaignSpec/checkpoint
+loading, portable bundle inspection, explicit read-only and runnable contexts, and
+staged real QEC projection WASM actions. Two Chromium gates pass. Report:
+`../2026-09-08-c1129-runnable-domain-lab.md`. Supersedes the static-only lab
+disposition at `aa659a7`; full scheduling/recovery WASM remains unimplemented.

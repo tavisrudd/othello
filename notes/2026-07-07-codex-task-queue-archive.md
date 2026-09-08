@@ -5639,3 +5639,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1125 `[ergodis]` [REPORTED 2026-09-07]** — Portable bundle/WASM operator workspace and simplified unified campaign view → `notes/2026-09-07-c1125-portable-console.md`
 
 - **C1126 `[ergodis]` [REPORTED 2026-09-07]** — Working campaign/library navigation and contextual inspection → `notes/2026-09-07-c1126-campaign-information-architecture.md`
+
+- **C1129 `[ergodis]` [REPORTED 2026-09-08]** — Loaded domain lab, explicit snapshot/runnable contexts and staged real WASM actions; browser gates pass → `notes/2026-09-08-c1129-runnable-domain-lab.md`.
