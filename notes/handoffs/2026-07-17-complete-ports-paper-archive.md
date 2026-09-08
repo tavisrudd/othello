@@ -1109,3 +1109,15 @@ Resumed Astra feedback accepted the bounded revision after one terminology fix.
 Authority `d42414dc6`, mirror `c3a63ed`; 45-page deterministic gates pass,
 byte-identical PDFs and guarded export verification, no push. The user's
 question about cuts produced recommendations only; C325/C953 remain open.
+
+## 2026-09-07 — Authorized five-page tightening
+
+Removed manuscript benchmark detail, moved formal packaging to companion
+documentation, deleted the programme coda and sequel outlook, and compressed
+repeated optimizer/conclusion prose. See
+`notes/2026-09-07-complete-ports-tightening.md`. Authority `f9841bbb9`, mirror
+`b9bbf4d`; 40-page deterministic gates and byte identity pass. All 62
+statement/proof environments match the preceding audited revision exactly.
+Export content SHA-256:
+`5d071ebeafb9e063fd70934e47097731c7e5c311907290e88fbc2d7436bcd4fb`.
+No push, Lean execution, new benchmark, or change to C325/C953 status.
