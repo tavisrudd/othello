@@ -1,7 +1,9 @@
 # C1127: critical assessment and response plan
 
-**Lane**: `complete-ports`  
-**Date**: 2026-09-08  
+**Lane**: `complete-ports`
+
+**Date**: 2026-09-08
+
 **Status**: assessment complete; manuscript revision pending.
 
 ## Scope and evidence
