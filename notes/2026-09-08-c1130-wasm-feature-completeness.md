@@ -3,6 +3,15 @@
 **Lane**: `ergodis`
 **Status**: QUEUED, explicitly requested by Tavis on 2026-09-08.
 
+## Context prerequisites
+
+Read `ergodis-architecture-context.md` and the selected references before choosing
+the shared execution abstraction. In particular C1091 already specifies the
+compiled-plan executor below orchestration; private ADR 0001/OpenProblem and
+C1093–C1095 supply implementations/admission boundaries to reuse. The private
+terminology review identifies missing definitions without changing shipped docs.
+All task/context/research guidance remains private and not-to-ship.
+
 ## Objective and architectural requirement
 
 All Ergodis capabilities must be usable via WASM. WASM is a full execution target,

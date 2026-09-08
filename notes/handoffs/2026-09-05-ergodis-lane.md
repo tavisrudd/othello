@@ -17,6 +17,12 @@ are queued or in progress per their own rows.
 
 **Discovery companion**: [ergodis discovery track](../ergodis-discovery-track.md).
 
+**Architecture context**: for architecture, shared API/schema, execution, model/query
+or portability work, read `notes/ergodis-architecture-context.md` after this handoff.
+It is private, not-to-ship contributor guidance and routes to prior ADRs, current
+abstractions and terminology. Narrow UI/admin work does not require the full history.
+
+
 ## Identity and locations
 
 - **Ergodis software**: private `main` of `~/src/ergodis`, with sibling checkouts
