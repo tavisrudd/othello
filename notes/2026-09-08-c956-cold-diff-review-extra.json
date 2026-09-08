@@ -1,0 +1,83 @@
+{
+  "orbit_correction": "passed",
+  "scroll_inverse": "passed",
+  "source_sha256": "eab9a28c6a0c5c54087a99d6008baafc33d313d3ab6f7ff8d28696b60d7ad9ad",
+  "sympy": "1.14.0",
+  "witness_bases": [
+    {
+      "hyperplane_denominators": [
+        "1",
+        "2",
+        "3",
+        "6*b"
+      ],
+      "pole_checks": [
+        {
+          "excluded_by_delta_times_minor": true,
+          "factor": "b"
+        }
+      ],
+      "z": [
+        1,
+        3,
+        7
+      ]
+    },
+    {
+      "hyperplane_denominators": [
+        "1",
+        "10*b",
+        "2",
+        "5"
+      ],
+      "pole_checks": [
+        {
+          "excluded_by_delta_times_minor": true,
+          "factor": "b"
+        }
+      ],
+      "z": [
+        2,
+        5,
+        11
+      ]
+    },
+    {
+      "hyperplane_denominators": [
+        "1",
+        "8",
+        "8*b"
+      ],
+      "pole_checks": [
+        {
+          "excluded_by_delta_times_minor": true,
+          "factor": "b"
+        }
+      ],
+      "z": [
+        3,
+        8,
+        13
+      ]
+    },
+    {
+      "hyperplane_denominators": [
+        "1",
+        "72*b",
+        "8",
+        "9"
+      ],
+      "pole_checks": [
+        {
+          "excluded_by_delta_times_minor": true,
+          "factor": "b"
+        }
+      ],
+      "z": [
+        4,
+        9,
+        17
+      ]
+    }
+  ]
+}

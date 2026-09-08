@@ -1,0 +1,38 @@
+{
+  "notes/2026-09-08-c956-cold-diff-review-check.json": {
+    "bytes": 2257,
+    "sha256": "4e4071a6ccbd4c6823cbd95dbfff5146c7ce86059bbecfdf2915b43210b7bbeb"
+  },
+  "notes/2026-09-08-c956-cold-diff-review-check.py": {
+    "bytes": 1649,
+    "sha256": "68f6af65c377241a7f52cb5a6d91e5d156077af9ac95c87cac14d473969550d0"
+  },
+  "notes/2026-09-08-c956-cold-diff-review-extra.json": {
+    "bytes": 1342,
+    "sha256": "700c330f9730cd29bf5f0ddb5ecf39069f0d51ca8624ad99aca01cbafbc3fd32"
+  },
+  "notes/2026-09-08-c956-cold-diff-review-extra.py": {
+    "bytes": 2160,
+    "sha256": "a1036f24997a0846f3c6ba856528e20ad20dcb16405db5d6b4b3c67bcbd04de9"
+  },
+  "notes/2026-09-08-c956-cold-diff-review.md": {
+    "bytes": 19418,
+    "sha256": "acb5d8dff2b6fbbcf17093f10ea387b2d5d21b8c45bcb7467eb5974675677c67"
+  },
+  "papers/cubic-stabilization-irrationality/cubic_stabilization_irrationality.pdf": {
+    "bytes": 175769,
+    "sha256": "647a2b816ee1fdc1af5dde587a538d2ab93dcd3ff9b5192e469997bbe22f2dda"
+  },
+  "papers/cubic-stabilization-irrationality/cubic_stabilization_irrationality.tex": {
+    "bytes": 65517,
+    "sha256": "8ed36b23e9d5416a7ff40c452d572974dc9c5637d45c8a899cd4bfa703156d7c"
+  },
+  "papers/cubic-stabilization-irrationality/verification/rank-four-values.tex": {
+    "bytes": 233,
+    "sha256": "7c9b07ef7ec736f166fa28ce0f4d3f639eb15727f23e0a159b33c27a9c999c91"
+  },
+  "papers/cubic-stabilization-irrationality/verification/slice-cover-values.tex": {
+    "bytes": 3198,
+    "sha256": "12db9466bb66620694b29deda09078462b86c305138afbb453fd8b9122091921"
+  }
+}

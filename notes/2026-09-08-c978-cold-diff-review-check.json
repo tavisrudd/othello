@@ -1,0 +1,35 @@
+{
+  "cases": {
+    "1": {
+      "discriminant": "16/9",
+      "eigenvalues": [
+        "-7/6",
+        "1/6"
+      ]
+    },
+    "2": {
+      "discriminant": "1",
+      "eigenvalues": [
+        "-1",
+        "0"
+      ]
+    },
+    "3": {
+      "discriminant": "4/9",
+      "eigenvalues": [
+        "-1/6",
+        "-5/6"
+      ]
+    }
+  },
+  "checks": [
+    "universal characteristic polynomial and primary split",
+    "Sylvester first jet solved from scratch",
+    "modified residue and discriminant",
+    "three Fano specializations",
+    "separate appendix split and complete printed A1"
+  ],
+  "domain": "Q(a,b,q), q(2a+b) != 0; appendix Q(r), r != 0",
+  "status": "pass",
+  "sympy": "1.14.0"
+}

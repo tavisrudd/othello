@@ -1,0 +1,70 @@
+{
+  "checks": [
+    {
+      "command": [
+        "verification/derive_slice_cover.py",
+        "--check-certificate",
+        "verification/slice-cover-certificate.json",
+        "--check-tex-artifact",
+        "verification/slice-cover-values.tex",
+        "--check-empty-certificates",
+        "verification/groebner-empty-certificates.json"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "slice-cover derivation: ok\n"
+    },
+    {
+      "command": [
+        "verification/check_slice_cover.py",
+        "--check-certificate",
+        "verification/slice-cover-certificate.json",
+        "--check-empty-certificates",
+        "verification/groebner-empty-certificates.json"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "slice-cover certificate: ok\n"
+    },
+    {
+      "command": [
+        "verification/check_rank_four.py"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "independent rank-four check: all 4368 subsets; 1992 unimodular; 0 descended five-subsets; saturation and translation controls passed\n"
+    }
+  ],
+  "inputs": {
+    "verification/check_rank_four.py": {
+      "bytes": 6554,
+      "sha256": "a87cba385c9a87cc23175f01926946cbd76ed9ca49180fc227a193fd6cc7b9b7"
+    },
+    "verification/check_slice_cover.py": {
+      "bytes": 8973,
+      "sha256": "ba741fb3fa9d16b95caa7562381aa0d455a53525e9bf0566c57d05147283f02e"
+    },
+    "verification/derive_slice_cover.py": {
+      "bytes": 27355,
+      "sha256": "eab9a28c6a0c5c54087a99d6008baafc33d313d3ab6f7ff8d28696b60d7ad9ad"
+    },
+    "verification/groebner-empty-certificates.json": {
+      "bytes": 92261,
+      "sha256": "9c0cf99e650a3db08d4adc926b893ddf13d5473a912721abd2a6efbc862472f0"
+    },
+    "verification/rank-four-certificate.json": {
+      "bytes": 6171,
+      "sha256": "b5cb0c283d549db17ea422b82683950d839d486f098ecd4525193b7dea45cd40"
+    },
+    "verification/slice-cover-certificate.json": {
+      "bytes": 5527,
+      "sha256": "f827b273b04cfcf202fdbe0c7e3aa9cf2588660fddad3ac8aadb76a71c9fb4c4"
+    },
+    "verification/slice-cover-values.tex": {
+      "bytes": 3198,
+      "sha256": "12db9466bb66620694b29deda09078462b86c305138afbb453fd8b9122091921"
+    }
+  },
+  "python": "3.14.3",
+  "sympy": "1.14.0"
+}
