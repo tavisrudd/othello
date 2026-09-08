@@ -52,7 +52,8 @@ after adjoining its target-image labels to the state.
 
 If every label is enumerated, put $Q=q^{mt}$ and $S=q^{st}$.  The direct
 table algorithm uses $O(NQS)$ min--sum transitions, $O(Q)$ working cost
-memory, and $O(NQ)$ predecessor entries when all witnesses are retained.
+memory, and $O(NQ)$ predecessor entries when one minimizing witness is retained
+for each finite table entry.
 \end{proposition}
 
 \begin{proof}
@@ -69,6 +70,12 @@ invariant applied to the paired labels in~\eqref{eq:target-cost-composition}.
 \uses{prop:prescribed-coset-composition}%
 \proves{prop:exact-hierarchical-optimizer}%
 \end{proof}
+
+The predecessor bound counts entries; local coefficient lifts have their own
+storage cost.  Retaining every tied transition can require $O(NQS)$ entries,
+and enumerating all complete minimizing recoveries incurs their output cost.
+Support alternatives require the families below, including larger minimal
+supports that can become useful after a failure or price change.
 
 The implementation also removes unreachable labels and merges states only
 when an explicit expansion map identifies each reduced choice with original
@@ -259,13 +266,22 @@ Changing the interface spaces can require new coordinates.  None of these
 bounds avoids the output cost of explicitly requesting all $q^{t\dim W}$
 syndromes.
 
-An independent optimality check can use the layered transition graph of
-the fixed-query computation.  A feasible path of cost $C$, together with
-potentials satisfying $p(v)\leq p(u)+w(u,v)$ on every legal edge,
-$p(\mathrm{source})=0$, and $p(\mathrm{terminal})=C$, proves optimality
-by telescoping along every source--terminal path.  This requires complete
-transition coverage and justified local costs and state reductions; a
-reconstructed path alone supplies only an upper bound.
+An independent optimality certificate for this tree recursion assigns a
+potential $p_S(s)$ to each subtree state.  At a leaf, require
+$p_S(s)$ to be no greater than the cost of every local choice realizing $s$.
+At each internal node with children $S_L,S_R$, require
+\[
+ p_S(s)\leq p_{S_L}(s_L)+p_{S_R}(s_R)
+\]
+for every legal child-state pair with parent state $s$.  Induction bounds the
+cost of every feasible subtree realization below by its potential.  A feasible
+root witness of cost $p_E(c)$ therefore proves optimality.  In the budgeted
+version the states also include exact helper counts.  This certificate requires
+complete local-choice and transition coverage and justified state restrictions;
+a reconstructed witness alone supplies only an upper bound.  The sequential
+recursion~\eqref{eq:hierarchical-recovery-dp} instead has the usual path
+certificate, obtained by telescoping edge-potential inequalities on states
+$(i,c)$.
 
 \subsection{A worked bilinear task reduction}
 

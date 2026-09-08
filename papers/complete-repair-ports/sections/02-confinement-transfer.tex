@@ -200,8 +200,12 @@ The strict inequalities
 \[
  1\leq M_1(D_P,K_P)<\cdots<M_\ell(D_P,K_P)
 \]
-therefore say that each additional independent target combination requires a
-strictly larger helper union.  These minima solve the single-block problem but
+therefore say that the optimal helper-union cost, minimized over all recoverable
+target subspaces of each dimension, strictly increases with that dimension.
+The cost need not strictly increase when a prescribed target subspace is
+enlarged: helpers $(u+v,v)$ recover $u$ and $(u,v)$ with the same two-helper
+union, although the best one-dimensional target costs one helper.
+These minima solve the single-block problem but
 do not yet provide recursive state: the next section restores the functional
 labels needed for exact concatenation.  Only when an outer-distance condition
 removes every nonzero label does the answer collapse to

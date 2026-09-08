@@ -30,9 +30,13 @@ $r_e^{\mathrm{coop}}(C)=\max_{|P|=e}\kappa_C(P)$, then
 \[
  r_e^{\mathrm{coop}}(C)\geq d_e(C^\perp)-e.
 \]
-For a fixed inner code $C$, once the outer dual distance is large enough for
-the collapse in Theorem~\ref{thm:objectwise-confinement}, the least helper
-cost of a first nonconfined system over all $e$-coordinate target sets is
+Represent $C$ by an encoder with message alphabet $L$ and let $O\leq L^N$
+be $L$-linear, with $N\geq2$.  Put $a=d_e(C^\perp)-e$.  If
+\[
+ d(O^\perp)\geq a+d(C^\perp)+1,
+\]
+then the least helper cost of a nonconfined identity-normalized system in
+$O\circ C$, minimized over all $e$-coordinate target sets in a chosen block, is
 \begin{equation}
  d_e(C^\perp)-e+d(C^\perp).
  \label{eq:best-target-escape}
@@ -69,19 +73,32 @@ The second summand lies in $\ker G_P$ and hence is a target-only dual
 equation, so adjoining these kernel equations recovers the full identity
 without adding helpers.  Thus the common minimum is $\kappa_C(P)$.
 
-Now repeat the block-functional argument of
-Theorem~\ref{thm:objectwise-confinement}.  Once the outer-functional case is
-excluded, the target block of any identity system uses at least
-$\kappa_C(P)$ helpers.  If the system is nonconfined, a nonzero equation map
-in another block has union support at least $d(C^\perp)$; the two supports
-are disjoint.  Conversely, attach a minimum-weight word of $C^\perp$ in a
-second block through any nonzero linear functional on $\F_q^P$.  Hence the
-first nonconfinement cost for this $P$ is
-$\kappa_C(P)+d(C^\perp)$.  Minimizing over $P$ and using
-\eqref{eq:best-target-ghw} proves~\eqref{eq:best-target-escape}.
+The distance hypothesis implies that every outer coordinate projection is
+surjective.  Apply the block-functional decomposition to an identity system
+parameterized by $\F_q^P$.  In the zero-functional sector its target block
+uses at least $\kappa_C(P)$ helpers.  Nonconfinement requires a nonzero map
+into the inner dual in another block, costing at least $d(C^\perp)$.
+Conversely, when $P$ is recoverable, attach a minimum-weight dual word in a
+second block through a nonzero functional on $\F_q^P$.  Thus the zero-sector
+cost is exactly $\kappa_C(P)+d(C^\perp)$, with value $\infty$ when $P$
+is not recoverable.  This argument also covers $\operatorname{im}G_P=0$,
+since the identity parameter space still has dimension $e\geq1$.
+
+Every nonzero-functional sector uses at least $d(O^\perp)-1$ helpers, hence
+at least $a+d(C^\perp)$.  Every zero-sector cost has the same lower bound,
+and an information-set target attaining~\eqref{eq:best-target-ghw} attains it.
+This proves~\eqref{eq:best-target-escape}.  Equality in the distance bound
+can permit a nonzero-sector tie; exclusion of that sector is unnecessary.
 \uses{thm:objectwise-confinement}%
 \proves{thm:best-target-ghw}%
 \end{proof}
+
+This hypothesis controls the minimum over target sets.  For an individual
+recoverable $P$, the sufficient bound is
+$d(O^\perp)\geq\kappa_C(P)+d(C^\perp)+1$.
+If every $e$-set is recoverable, replacing $\kappa_C(P)$ by
+$r_e^{\mathrm{coop}}(C)$ forces these individual collapse formulas
+simultaneously.
 
 Before bounding the MDS thresholds, we record what the coefficient layer adds
 even when the support clutter is completely uniform.

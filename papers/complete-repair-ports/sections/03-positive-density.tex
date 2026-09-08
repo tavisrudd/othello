@@ -620,7 +620,11 @@ response.
 Two represented inner codes are \emph{contextually equivalent at $T$} when
 their values of $\Gamma_{j,T}$ agree in every member of this family.  A
 compatible further concatenation adds outer layers above the same
-distinguished leaf and does not retarget that leaf.
+distinguished leaf.  Throughout such an evaluation, the confinement region
+remains the entire original $I$-block containing the target: it is not enlarged
+to a newly formed composite block.  Target coordinates and normalization also
+remain fixed.  Compatibility requires that the composed outer code, viewed
+over $L$, belongs to the context family just defined.
 
 \begin{theorem}[Minimal contextual quotient at rank one]
 \label{thm:rank-one-contextual-state}
@@ -651,8 +655,9 @@ predict the costs in every outer context.  It is enough to test the full outer
 code and outer codes whose functional dual has $L$-dimension one.  The bounded
 higher-rank theorem below also shows that, after truncation at any fixed helper
 radius, only finitely many of these probes are needed.
-Moreover, contextual equivalence at $T$ is a congruence under the compatible
-further concatenations defined above.
+Moreover, equality of responses persists when the outer contexts are themselves
+formed by compatible further concatenation, with the original leaf confinement
+region fixed.
 \end{theorem}
 
 \begin{proof}
@@ -673,17 +678,15 @@ $\min\{z_{I,T},\Theta_{I,T}([b])\}$.  Equality in every context therefore
 forces equality of the displayed response family; the first part of the
 theorem gives the converse.
 
-For the congruence statement, place the same distinguished target leaf in two
-composites $A\circ I_1$ and $A\circ I_2$.  Here compatible means that later
-layers keep this same target leaf and its induced target image.  Any such
-later context $C$
-tests the target-normalized composites
-$C\circ(A\circ I_i)=(C\circ A)\circ I_i$.  The target-normalized composition
-formula \eqref{eq:target-cost-composition} carries the same leaf target image
-on both parenthesizations, and $C\circ A$ is one of the contexts quantified
-above.  Contextual equivalence of $I_1$ and $I_2$ therefore gives equal costs
-after every such $C$.  Hence contextual equivalence is a congruence for the
-specified compatible concatenations.
+For the closure statement, let $A$ and $C$ form a compatible outer context
+$C\circ A$.  Associativity identifies
+$C\circ(A\circ I_i)=(C\circ A)\circ I_i$ at the physical leaf coordinates.
+On both sides, measure escape from the same original $I_i$-block, with the
+same target coordinates and normalization.  Thus parenthesization preserves
+the recovery equations, their helper unions, and the requirement of a nonzero
+coefficient outside that region.  Since $C\circ A$ is an $L$-linear member
+of the quantified context family, contextual equivalence gives equal responses
+for $I_1$ and $I_2$ in this context.
 \uses{thm:ungated-ranked-confinement}%
 \proves{thm:rank-one-contextual-state}%
 \end{proof}
@@ -691,6 +694,11 @@ specified compatible concatenations.
 This theorem compares numerical costs only.  Full coefficient witnesses still
 require the minimizing lifts described after
 Theorem~\ref{prop:prescribed-coset-composition}.
+It does not assert congruence of escape summaries recomputed at a composite
+block boundary.  In the binary code $(a,a,a,a,b,b,b,b)$ with target coordinate
+$1$, escape from $\{1,2\}$ costs one helper, using $x_1+x_3=0$.
+Escape from $\{1,2,3,4\}$ costs three: parity requires one helper in that
+region and at least two outside it, attained by $x_1+x_2+x_5+x_6=0$.
 
 When $\dim_{\F_q}T=t$, the image of any map
 $B:T\to\operatorname{FD}(O)$ lies in an $L$-subspace
@@ -789,10 +797,9 @@ a nonzero space $T$, have equal values of $\mathcal R_{r,T}$ if and only if
 their truncated nonconfinement costs agree in every compatible finite outer
 context.
 Equality of this vector is therefore the coarsest numerical equivalence that
-determines exact responses through helper radius $r$.  It is a congruence
-under compatible further concatenation above the same target leaf and induced
-target image, using the trace-transitive identifications of
-Theorem~\ref{prop:prescribed-coset-composition}.
+determines exact responses through helper radius $r$.  Equality persists under
+evaluation against composed outer contexts in the same family, with the
+original leaf confinement region, target coordinates, and normalization fixed.
 
 For exact, untruncated comparison, put
 $z_{I,T}=\rho_T(I)+d(I^\perp)$.  This is finite for every nonzero
@@ -807,10 +814,12 @@ $\min\{t,z-1\}$.
 The theorem says that any unequal bounded responses have a representative
 among the listed contexts; the converse is immediate.  Hence equality of the
 finite response vector is precisely observational equivalence, and any
-numerical summary valid in all contexts must refine it.  A compatible later
-context applied to $A\circ I$ is, by associativity and trace transitivity, a
-context of the form $(C\circ A)\circ I$.  Observational equivalence therefore
-persists under further composition.
+numerical summary valid in all contexts must refine it.  Evaluation against a
+compatible composed outer context $C\circ A$ is already among these tests.
+Associativity and trace transitivity preserve the physical leaf coordinates
+and target normalization; fixing the original leaf region also preserves
+which equations leave it.  Equality therefore persists in these evaluations,
+without asserting equality of newly formed macroblock escape summaries.
 
 The full outer code of length two has response $z_{I,T}$ and separates unequal
 $z$ values.  When both values equal $z$, every exact response is at most $z$.
@@ -843,7 +852,7 @@ $M_t(D_P,K_P)+d(I^\perp)$ after minimization over $T$.  Consequently,
 \label{thm:objectwise-confinement}
 \coverage{absent}%
 Let $r$ be a nonnegative integer and let $O\leq L^N$ be an $L$-linear outer
-code with $N\geq2$ and $d(O^\perp)>r+1$, and assume $T\leq W_P$.  Then
+code with $N\geq2$ and $d(O^\perp)>r+1$, and assume $0\ne T\leq W_P$.  Then
 $O\circ I$ confines every
 normalized recovery system for $T$ of cost at most $r$ if and only if
 \begin{equation}
@@ -1052,7 +1061,7 @@ $n-1\geq k$, the asserted transfer is nonvacuous throughout the family.
 \proves{prop:strict-weighted-transfer}%
 \end{proof}
 
-For a nondegenerate singleton target $P=\{x\}$, the first relative weight is
+For a nonzero, helper-recoverable singleton target $P=\{x\}$, the first relative weight is
 the least number of helpers in a dual word through $x$.  If the total-weight
 threshold used for one-coordinate equations is denoted by $z_x(I)$, then
 \begin{equation}
@@ -1061,6 +1070,9 @@ threshold used for one-coordinate equations is denoted by $z_x(I)$, then
 \end{equation}
 The helper-radius condition~\eqref{eq:ranked-confinement} is therefore
 $r+1<z_x(I)$, with no change of convention hidden in the reduction.
+If the target column is nonzero but not helper-recoverable, then $W_P=0$:
+its local recovery cost is infinite and there is no first relative weight
+of this pair.
 Theorem~\ref{thm:ungated-ranked-confinement} is the common finite formula.
 The outer-distance condition removes its nonzero-functional sector and gives the
 RGHW threshold in every recovered dimension.  Restricting instead to one
