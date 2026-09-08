@@ -12,7 +12,12 @@ Scalar recovery thresholds do not compose: an outer code can select an
 intermediate functional whose cost scalar minimization discarded. The paper
 identifies labelled prescribed-coset costs as an exact compositional state,
 proves their min--sum closure, and determines when outer distance collapses
-them to a relative-weight formula.
+them to a relative-weight formula. A stronger operational theorem transfers
+minimal recovery supports whenever every outer dual word touching the target
+has weight greater than `r+1`, without the inner additive restriction needed
+for equation confinement. Quotient-labelled lifting, support antichains,
+weighted pricing, and fixed-query boundary width connect composition to
+operational optimization.
 
 For a target set `P` and helper set `J`, shortening and puncturing the inner
 dual onto `J` give `K_P = short_J(I⊥) ⊆ D_P = punct_J(I⊥)`. Thus the pair depends
@@ -60,43 +65,33 @@ description. A single scalar threshold is not sufficient input
 for this recursion; in particular, the zero-functional nonconfinement cost
 `rho_T(I)+d(I⊥)` loses the required functional labels.
 
-## ergodis companion
+## Ergodis companion
 
-**ergodis—Exact Recovery, Global Optimization, and Invariant Synthesis—is an
-exact compiler and solver derived from the paper's recovery theory.** It
-compiles prescribed-coset support functions through labelled concatenation
-levels and returns exact helper costs and confinement thresholds. By storing
-minimizing lifts alongside the numerical tables, it also returns
-coefficient-level witnesses rather than only scalar optima. Its capacity-aware
-scheduler selects simultaneous repairs under heterogeneous helper limits and
-coefficient-weighted download costs. The same structural compiler accelerates
-orbit-structured code search and can shrink residual constraint
-programming-satisfiability (CP-SAT) models.
+[Ergodis](https://github.com/tavisrudd/ergodis) is now a separately developed
+compiler and exact solver for finite algebraic optimization. Its source and
+software license are maintained in that repository; the paper does not bundle
+the engine.
 
-The tool extends the theory into executable optimization; it is not evidence
-for the proofs. The mathematical results establish the reductions, and no
-theorem relies on the implementation or its measurements.
+The September 2026 development system includes labelled recovery composition
+and witness expansion; compressed support families; Pareto scheduling and
+Lagrangian bounds; finite observational minimization and admission of new
+readouts; algebraic and symmetry-based search, including bounded CSS distance;
+and portable campaign and saved-run interfaces for native and browser hosts.
+Release snapshots may expose a smaller surface. The repository's `DESIGN.md`,
+`OPTIMIZATION.md`, and interface documentation describe the implemented scope.
 
-Its current engines cover hierarchical recovery, capacity-aware batch
-scheduling, and orbit-structured code search. Their exact recovery objects
-could support further batch and private information retrieval (PIR),
-availability, topology-aware repair, service-rate, and recovery-profile design
-front ends.
+Independent verification has explicit contracts. `ergodis-verify` checks a
+bounded binary-composition restriction and, separately, authenticated min-plus
+summary transitions. Those checks do not establish every source lowering or
+every solver answer's optimality. A stored witness proves feasibility; a
+matching validated lower or dual bound is needed for an optimum certificate.
+The paper's Lean companion remains a separate artifact with narrower coverage.
 
-The theorem-driven GF(4) tower benchmark is 344,300 times faster than direct
-CP-SAT and 8,080 times faster than CP-SAT receiving the labelled tables. Across
-six bundled application examples, matched exact controls range from 8 times
-slower to three--five orders of magnitude slower. These are bounded
-measurements, not universal solver rankings. When a model has additional
-general constraints, ergodis instead supplies an exact preprocessing front end
-for residual CP-SAT.
-
-ergodis is developed in its own repository,
-[tavisrudd/ergodis](https://github.com/tavisrudd/ergodis), which carries the
-quick-start commands, JSON examples, architecture notes, reproducible
-benchmarks, and the independent Python reference layer. The measurements
-quoted in this paper correspond to that repository's `BENCHMARKS.md` and
-`evidence/benchmarks.json` at the release tag named there.
+The manuscript retains the earlier recovery benchmark snapshot as bounded
+historical measurements. It does not extend those speedups to the expanded
+system. The empirical question is which interface widths, target ranks, block
+types, resource frontiers, and reuse patterns make compilation worthwhile,
+including compilation, query, witness, and verification costs.
 
 ## Main consequences
 
@@ -109,10 +104,10 @@ quoted in this paper correspond to that repository's `BENCHMARKS.md` and
 - Suitable outer families copy the normalized equations onto coordinate
   classes of positive density while retaining positive rate and relative
   distance.
-- Whenever the exact prescribed-coset threshold holds for each demand, support
-  transfer preserves bounded service-rate regions. The outer-dual-distance
-  condition is sufficient and holds eventually in families with growing
-  dual distance.
+- Target-touching outer dual distance greater than `r+1` preserves minimal
+  supports, reliability under any availability law with the same local
+  marginal, fractional service regions, and support-based integral allocations.
+  Growing outer dual distance gives eventual transfer at every fixed radius.
 - Two systems can have identical complete relative-weight hierarchies but
   different bounded repair reliabilities.
 - Different ambient inner-dual realizations of the same abstract nested pair
@@ -177,8 +172,6 @@ axiom-audit instructions in [`lean/README.md`](lean/README.md).
   dependency macros used by the manuscript.
 - `sections/` contains the proofs, applications, conclusion, and verification
   statement.
-- `ergodis/` contains the ergodis library, CLI, application examples, tests,
-  performance evidence, and an independent Python validation layer.
 - `lean/` is the paper-owned Lean 4 companion and depends on a pinned Mathlib
   revision.
 - `verification/` contains release and evidence checks.
@@ -194,7 +187,5 @@ archive of this rewrite.
 
 ## License
 
-The `ergodis/` software is licensed under the GNU Affero General Public
-License, version 3.0 (AGPL-3.0); see `ergodis/LICENSE`. Contact the author for
-commercial licensing of ergodis. Everything else in this repository is licensed
-under the MIT License; see `LICENSE`.
+This paper and its formal companion are licensed under the MIT License; see
+`LICENSE`. The separate Ergodis repository carries its own software license.

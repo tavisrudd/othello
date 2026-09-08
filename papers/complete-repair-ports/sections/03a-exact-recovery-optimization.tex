@@ -4,14 +4,64 @@
 The closure law in Theorem~\ref{prop:prescribed-coset-composition} supplies an
 exact compiler state: its coordinates are the intermediate functionals that
 scalar summaries discard.  ergodis (Exact Recovery, Global Optimization, and
-Invariant Synthesis) compiles and evaluates that state.  Numerical tables
-store the fibrewise minima; separately stored predecessor labels and
-minimizing lifts reconstruct a coefficient-level witness for every optimum.
+Invariant Synthesis) has developed into a compiler and exact solver for
+finite algebraic optimization, with recovery as one application.  Its
+standalone repository is
+\href{https://github.com/tavisrudd/ergodis}{\texttt{tavisrudd/ergodis}};
+the software is developed and distributed separately from this manuscript.
+Numerical tables store fibrewise minima; predecessor labels and minimizing
+lifts reconstruct coefficient-level witnesses.
 Throughout this section, the algebraic cost counts participating scalar helper
 coordinates.  Repair bandwidth, subpacketization, and physical data movement
 are separate downstream objectives.
 
 \input{figures/ergodis-pipeline}
+
+\paragraph{Implemented interfaces.}
+The development system examined in September 2026 includes the following
+layers.  Their contracts are documented in the software's optimization guide,
+architecture document, and interface-specific documentation; release snapshots
+can contain a smaller surface.
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item Labelled composition and generated-span kernels support scalar and
+simultaneous recovery, compressed support families, and capacity-aware
+scheduling.  Pareto load search is complemented by Lagrangian bounds and
+branch-and-bound; an exact primal assignment and a matching rounded dual
+bound certify the number of repaired demands when that bound closes.
+\item Finite typed deterministic presentations admit observational
+minimization and replayable distinguishing contexts.  A separate readout
+admission operation checks whether a new observation is constant on each
+retained class, returning a concrete conflicting pair when it is not.
+This explicit-carrier path does not establish a construction bound for
+implicit presentations.
+\item Coordinate-orbit covers, invariant linear blocks, and connected-support
+CSS-distance search expose algebraic structure before residual search.
+Orbit coverage still requires the application to establish invariance of
+feasibility and of the current query's objective.  Changed failures or prices
+can reduce the admissible symmetry group.
+\item Portable campaign control, native and browser execution surfaces,
+and saved-run records support proposing, checking, executing, inspecting,
+and forking bounded investigations.  Candidate generation and persistence
+are separate from mathematical admission and the solver's hot loops.
+\end{itemize}
+
+\paragraph{Verification contracts.}
+The independent \texttt{ergodis-verify} crate has no optimizer dependency.
+Its bounded binary-composition checker establishes a specified
+necessary-coordinate restriction by direct finite checking.  Its separate
+min-plus transition checker authenticates supplied four-by-four summaries
+against a retained tree, with linear storage and logarithmic update work.
+The latter uses explicitly bounded saturating arithmetic.  It certifies
+summary composition and replacements, not the lowering of a source model
+or domain optimality.  Saved evidence must be checked under its declared
+contract; storing or reopening a record supplies no mathematical authority.
+These executable checkers are distinct from the paper's Lean formalization.
+
+The theory below isolates the recovery interfaces underlying this broader
+system.  In particular, witness reconstruction, numerical quotient
+minimization, preservation under all prices, and event-correct reliability
+are different requirements.  A capability of one engine does not establish
+all four for every adapter.
 
 We first state the algorithm in flattened $\F_q$-linear coordinates.  Let
 $T$ have dimension $t$, let the outer message space have dimension $m$, and
@@ -86,17 +136,201 @@ unreachable.  Iterating the compiler through a tower preserves the
 intermediate labels required at the next level; collapsing each table to one
 minimum would destroy precisely this compositional information.
 
-ergodis can also pass the resulting recovery choices to an exact load-vector
-dynamic program for heterogeneous helper capacities.  This scheduling layer
-is an application of the compiled support data, not part of the compositional
-state or its mathematical characterization.
+\subsection{Interfaces for resource choices and availability}
+
+To reuse compilation under changing prices or failures, retain more than a
+unit-cost minimizer.  For each ordinary label $b$, let
+\[
+ \mathcal A_{i,T}(b)=\min_{\subseteq}
+ \{\supp Y(T):\Phi_iY=b\},
+\]
+where $\min_{\subseteq}$ removes strict supersets and the empty fibre gives
+the empty family.  The family $\{\varnothing\}$ is distinct from the empty
+family.  In the notation of the flattened optimizer, the exact substitution is
+\begin{equation}
+ \mathcal A_T^{\mathrm{out}}(c)=\min_{\subseteq}
+ \left\{\bigcup_i H_i:\sum_iA_ib_i=c,\quad
+                   H_i\in\mathcal A_{i,T}(b_i)\right\}.
+ \label{eq:support-antichain-composition}
+\end{equation}
+Indeed every lift decomposes into these block fibres; replacing one block
+support by a contained support with the same label preserves compatibility.
+Conversely every displayed choice lifts.  The same argument applies to
+Theorem~\ref{thm:quotient-lifting-composition}, and to target normalization
+with its existing constraints.  Retain a coefficient witness for each
+surviving support.  For additive nonnegative resource loads one may instead
+retain a Pareto frontier within each label: coordinatewise domination is
+preserved by addition.  This is safe only for the resource observations
+represented by that load vector.  The numerical contextual quotient in
+Corollary~\ref{cor:bounded-contextual-state} does not automatically preserve these richer observations.
+
+\begin{proposition}[Supports, prices, and availability]
+\label{prop:pricing-availability-equivalence}
+\coverage{absent}%
+Fix a finite labelled helper set $E$, a radius, and its minimal recovery
+family $\mathcal M$.  The following data determine one another:
+$\mathcal M$; the success indicator
+$F(A)=\mathbf1\{\exists H\in\mathcal M:H\subseteq A\}$ on every
+$A\subseteq E$; the price function
+\[
+ \pi_{\mathcal M}(p)=\min_{H\in\mathcal M}\sum_{h\in H}p_h
+ \quad(p\in\mathbb R_{\geq0}^E);
+\]
+and the reliability for every independent helper survival vector in
+$[0,1]^E$.  Empty price minima have value $\infty$.
+\end{proposition}
+
+\begin{proof}
+The family gives both displayed functions and its reliability by summing
+$F(A)$ against the probability of each available set.  The minimal successful
+sets of $F$ recover $\mathcal M$.  Prices zero on $A$ and one outside $A$
+satisfy $\pi_{\mathcal M}(p)=0$ exactly when $F(A)=1$, including the
+empty-family case.  Finally deterministic survival vectors recover every
+$F(A)$ from reliability.  These implications prove the assertion.
+\proves{prop:pricing-availability-equivalence}%
+\end{proof}
+
+This equivalence concerns information, not the number of oracle calls.
+Extracting reliability can require exponentially many availability queries.
+Summing probabilities of coefficient witnesses is not event evaluation:
+repairs $\{1,2\}$ and $\{2,3\}$ with survival probability $1/2$ each give
+success probability $1/4+1/4-1/8=3/8$, although summing the two repair
+probabilities gives $1/2$.  One must evaluate the existential event $F$,
+for example by inclusion--exclusion or a Boolean representation that retains
+overlap.  Factoring probabilities is valid on independent variable sets;
+adding alternative probabilities is valid on disjoint events.
+
+For service optimization, retain the radius as a separate constraint and
+evaluate $\pi_a(p)$ over supports of size at most $r$.  An alternative
+discarded under unit prices can become optimal under new prices.
+Either the support families or a valuation-independent circuit of feasible
+choices permits exact repricing and reconstruction.
+For the fractional objective $\max\sum_a w_a\lambda_a$ under helper
+capacities $c_h$, the full dual is
+\[
+ \min_{p\geq0}\sum_h c_hp_h,
+ \qquad \sum_{h\in R}p_h\geq w_a
+       \quad(a\in\mathcal A,\ R\in\mathcal M_a^{(\leq r)}).
+\]
+Thus solving a restricted service LP, pricing every demand, and adding a
+witness whenever $w_a-\pi_a(p)>0$ yields column generation.  If the
+restricted primal and dual have equal finite values and no price violation
+remains, their value is the full optimum: the restricted primal is feasible
+for the full problem and the prices give a matching full dual bound.
+This is a fractional certificate.  Integral scheduling needs its own exact
+search or bounds.  Support-family equality transfers an integral feasible
+region, but an LP optimum need not be an integral optimum.
+
+\subsection{Width of a fixed query}
+
+The ambient syndrome dimension is a pessimistic state bound.  Fix $c$ and
+write $A_i b=a_i\circ b$, where $a_i:L_i\to W$ is linear and
+$b:T\to L_i$.  On a supplied binary tree of factors, a subtree $S$ has
+contribution spaces
+\[
+ U_S=\sum_{i\in S}\operatorname{im}a_i,\qquad
+ V_S=\sum_{i\notin S}\operatorname{im}a_i,\qquad
+ w_S=\dim(U_S\cap V_S).
+\]
+
+\begin{proposition}[Boundary-coordinate compilation]
+\label{prop:boundary-width-compilation}
+\coverage{absent}%
+For a fixed linear output map $c:T\to W$, $\dim T=t$, feasible partial
+syndromes at cut $S$ lie in
+\[
+ \operatorname{Hom}(T,U_S)\cap
+       \bigl(c-\operatorname{Hom}(T,V_S)\bigr).
+\]
+This set is empty or an affine space with $q^{t w_S}$ elements.
+Given local choice tables on $n$ disjoint blocks and a binary tree with
+$w=\max_S w_S$, scalar additive optimization uses at most
+$O(nq^{2tw})$ pair combinations, in addition to scanning the local tables
+and polynomial linear algebra.  It returns an attaining lift when local
+lifts are supplied.  A separate integer support budget $r$ increases the
+bound to $O(n(r+1)^2q^{2tw})$ combinations.
+\end{proposition}
+
+\begin{proof}
+Subtract any feasible partial syndrome.  The difference space is
+$\operatorname{Hom}(T,U_S)\cap\operatorname{Hom}(T,V_S)
+=\operatorname{Hom}(T,U_S\cap V_S)$, of dimension $tw_S$.
+Choose affine boundary coordinates by linear algebra.  At a leaf scan its
+table and retain the minimum at each admitted boundary state.  At an
+internal node enumerate the pairs of child states, add their syndrome maps,
+discard sums outside the parent affine space, and minimize their summed
+cost at each parent state.  Induction on the tree proves the same invariant
+as in Proposition~\ref{prop:exact-hierarchical-optimizer}.  Each child
+has at most $q^{tw}$ states, giving the pair bound.  Store minimizers and
+backtrack for witnesses.  For a support budget retain the best price at each
+exact helper count $0,\ldots,r$ and add counts when combining; disjoint
+ownership makes those counts additive.
+\uses{prop:exact-hierarchical-optimizer}%
+\proves{prop:boundary-width-compilation}%
+\end{proof}
+
+The bound charges local compilation separately.  It counts arithmetic
+operations; exact rational prices also incur their arithmetic bit cost.
+Paired normalization labels must be included when measuring width for a
+target-normalized query.  Support or Pareto messages multiply combination
+work by the numbers of retained alternatives and their pruning costs.
+On a balanced tree, a change to one leaf's costs or availability, with the
+linear interfaces and fixed query unchanged, recomputes only its ancestor
+messages: $O(C_{\mathrm{combine}}\log n)$ work plus the leaf update.
+Changing the interface spaces can require new coordinates.  None of these
+bounds avoids the output cost of explicitly requesting all $q^{t\dim W}$
+syndromes.
+
+An independent optimality check can use the layered transition graph of
+the fixed-query computation.  A feasible path of cost $C$, together with
+potentials satisfying $p(v)\leq p(u)+w(u,v)$ on every legal edge,
+$p(\mathrm{source})=0$, and $p(\mathrm{terminal})=C$, proves optimality
+by telescoping along every source--terminal path.  This requires complete
+transition coverage and justified local costs and state reductions; a
+reconstructed path alone supplies only an upper bound.
+
+\subsection{A worked bilinear task reduction}
+
+Let worker $i$ return $a_i(x)b_i(y)$, with $a_i\in V^*$ and $b_i\in W^*$
+over $\F_q$.  For $\tau_i=a_i\otimes b_i$, define
+$Q:\F_q^E\to V^*\otimes W^*$ by $Qe_i=\tau_i$.
+A bilinear target $f$ has a linear aggregation on workers $H$ exactly when
+$f=\sum_{i\in H}c_i\tau_i$: evaluate on pairs of basis vectors to prove
+necessity, and use bilinearity for sufficiency.  Taking
+$D=Q^{-1}(\langle f\rangle)$ and $K=\ker Q$ makes this a prescribed
+quotient lift when $f\in\operatorname{im}Q$.
+
+For example, three workers return
+\[
+ x_1y_1,\qquad x_2y_2,\qquad (x_1+x_2)(y_1+y_2),
+\]
+and the target is $x_1y_2+x_2y_1$.  Comparing the four tensor coefficients
+forces the aggregation coefficients $(-1,-1,1)$ over every field, including
+characteristic two.  All three workers are necessary, the contacted-worker
+cost is three, and the nonnegative weighted cost is $p_1+p_2+p_3$.
+If any worker is unavailable the target is outside the available span.
+Generally, a separating linear functional that vanishes on that span but
+not on $f$ certifies this impossibility, by extending a basis of the span.
+It certifies impossibility of the stated linear aggregation protocol.
+
+Compression to a smaller worker-function space is exact when a linear map
+is injective on the span of the workers and requested tasks: every coefficient
+relation then holds before compression exactly when it holds afterward.
+This preserves supports, prices, and aggregation witnesses.  A Schur-product
+presentation can be used when it supplies this identification.  For repeated
+inputs or polynomial tasks, the space must be the actual function space;
+formal monomials need not be independent over a finite field.
 
 \subsection{Measured performance and solver choice}
 
-The scientific role of the implementation is the exact executable semantics
-above.  The measurements in this subsection assess engineering reach and the
+The measurements below are the previously recorded recovery benchmark
+snapshot, not a measurement of every current engine.  They assess engineering reach and the
 point at which a general solver becomes preferable; they are not mathematical evidence or the
-principal contribution of the software.
+principal contribution of the software.  The structural comparison is how
+interface width, target rank, field size, distinct block types, frontier size,
+and query reuse affect total cost.  Compilation, repeated queries, witness
+expansion, and verification must be charged separately; a fast retained-state
+query does not imply a fast construction of that state.
 
 The specialized dynamic programs are most useful when compilation exposes a
 small algebraic state space.  They are not replacements for a general

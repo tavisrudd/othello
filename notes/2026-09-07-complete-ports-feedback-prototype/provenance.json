@@ -1,0 +1,25 @@
+{
+  "origin": "User-supplied ergodis_adversity_core_prototype.zip; files preserved byte-for-byte",
+  "archive_sha256": "bbf57ac2a27a264d1544d67796181a1432ea8a2ebdee6890b01663f0706db616",
+  "python": "3.13.12",
+  "replay": "python3 test_adversity_cores.py",
+  "result": "all assertions passed; output byte-identical to supplied test_results.json",
+  "files": {
+    "README.md": {
+      "sha256": "d6da3a54b2a44a2743245ea767602579b663a44c44e3769a927e6a24af671c76",
+      "bytes": 13446
+    },
+    "adversity_cores.py": {
+      "sha256": "b09a0d09789b4813cf7a45a1cf4a3189ad6cc8e6bf3b02df20587e65db9d555e",
+      "bytes": 7474
+    },
+    "test_adversity_cores.py": {
+      "sha256": "5cd72599f2ca763454881f33dfde991d4816ea5e2f383b2f6fcd919f4c1053b5",
+      "bytes": 9289
+    },
+    "test_results.json": {
+      "sha256": "cc407c5aa195e9660c1f42ea419cd35d26868a28891830f5fd22f1db8cf6df74",
+      "bytes": 919
+    }
+  }
+}

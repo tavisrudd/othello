@@ -223,6 +223,64 @@ in one block compete for the same helper pair.  Thus this instance will serve
 as the model case for both composition and scheduling without identifying the
 two optimizations.
 
+\subsection{Minimal supports and operational transfer}
+
+An external equation can violate coefficient confinement without supplying a
+new recovery option.  To separate these questions, let
+$\mathcal M_{j,T}^{(\leq r)}(O\circ I)$ be the inclusion-minimal helper
+supports recovering $T$ with at most $r$ helpers.  A set recovers $T$ when
+some normalized system uses only that set.  Define the target-touching distance
+\[
+ \delta_j(O^\perp)=\min\{\wt(u):u\in O^\perp,\ u_j\ne0\},
+\]
+with empty minimum $\infty$.
+
+\begin{theorem}[Minimal-support confinement]
+\label{thm:minimal-support-confinement}
+\coverage{absent}%
+Let $O\leq L^N$ be $L$-linear, let its projection onto block $j$ be
+surjective, and let $0\ne T\leq U_P$.  If $\delta_j(O^\perp)>r+1$, then
+\[
+ \mathcal M_{j,T}^{(\leq r)}(O\circ I)
+ =\{\{j\}\times H:H\in\mathcal M_T^{(\leq r)}(I)\}.
+\]
+No inequality involving $\rho_T(I)+d(I^\perp)$ is required.
+Consequently bounded recovery success has the same probability for every
+global helper-availability law with the prescribed target-block marginal.
+\end{theorem}
+
+\begin{proof}
+Let $Y$ be a normalized system with helper support $H$, $|H|\leq r$, and
+put $B_h=\Phi_IY_h$.  If $B_j\ne0$, choose $v\in T$ with $B_j(v)\ne0$.
+The trace identification sends $B(v)$ to an outer dual word touching $j$.
+Its other nonzero blocks each contain a helper in $H$, so its weight is at
+most $r+1$, a contradiction.  Thus $B_j=0$, and the target-block portion
+of $Y$ is an inner-dual system with the same target normalization.  Deleting
+all external coefficients preserves recovery and only decreases support.
+Every global minimal support is therefore local.  Conversely, a proper
+globally recovering subset of a local minimal support would, by this same
+restriction argument, contradict local minimality.  Zero-extension supplies
+the other inclusion.  For each available set, success means containing one
+of these minimal supports; the two success indicators therefore agree
+pointwise after restriction to the target block.  Taking expectations proves
+the probability assertion without an independence assumption.
+\proves{thm:minimal-support-confinement}%
+\end{proof}
+
+The relevant first new alternative can also be defined exactly.  Let
+$\varepsilon_{j,T}$ be the least size of a globally recovering helper set
+$H$ whose portion in block $j$ does not recover $T$ locally.  Equivalently,
+it is the least size of a global minimal support using an external helper:
+minimize inside $H$ for one direction; a local recovery inside a minimal
+support contradicts minimality for the other.  The theorem gives
+$\varepsilon_{j,T}\geq\delta_j(O^\perp)-1$ when the latter is finite,
+and $\varepsilon_{j,T}=\infty$ when $\delta_j(O^\perp)=\infty$.
+Its value cannot be obtained simply by deleting the zero sector from
+$\Gamma_{j,T}$: a nonzero-labelled lift can also contain a local recovery.
+For $O=L^N$, every minimal recovery support is local at every radius,
+although adjoining an external inner-dual word gives the finite equation
+threshold $\rho_T(I)+d(I^\perp)$ whenever $T$ is locally recoverable.
+
 \subsection{Repeated concatenation}
 
 The ordinary prescribed-coset costs retain the intermediate labels needed at

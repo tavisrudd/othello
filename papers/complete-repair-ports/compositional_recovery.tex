@@ -47,25 +47,26 @@
 \maketitle
 
 \begin{abstract}
-In a concatenated linear code, an outer equation selects which inner
-functional each block must realize.  The least helper count forgets that label
-and can give the wrong finite threshold.  Within one block,
-relative generalized Hamming weights of the canonical
-shortening--puncturing pair are exactly the minimum helper unions for each
-dimension.  For concatenation, the minimum cost of a recovery
-leaving the target block is instead a labelled min--sum formula whose local
-terms are target-normalized prescribed-coset support costs.  These costs
-compose associatively through finite towers.  Sufficient outer dual distance
-excludes the nonzero-label terms and recovers the scalar formula
-$M_t(D_P,K_P)+d(I^\perp)$.  Below this threshold, restriction and
-zero-extension preserve every normalized recovery equation and exact helper
-support.  The labelled costs form a closed but redundant state.  Through
-helper radius $r$, every numerical distinction is witnessed by an outer
-context of length at most $\max\{2,r+1\}$ and functional-dual dimension at
-most $\min\{t,r\}$.  The resulting finite contextual quotient is the coarsest
-exact bounded numerical state and a congruence; at rank one it has an explicit
-projective description.  An exact companion implementation evaluates the
-recursion and reconstructs witnesses; no proof depends on it.
+Linear recovery under concatenation depends on which intermediate functional
+an outer equation requires, not only on the least helper count.  We give
+an exact labelled min--sum formula for the first recovery equation leaving
+its target block and prove associative composition with coefficient witnesses.
+Within one block, relative generalized Hamming weights of the
+shortening--puncturing pair give the minimum helper unions in each recovered
+dimension.  Operational recovery admits a stronger transfer theorem: if every
+outer dual word touching the target block has weight greater than $r+1$,
+all inclusion-minimal recovery supports through radius $r$ remain local,
+without the additive inner-dual restriction needed for equation confinement.
+This transfers reliability under arbitrary availability laws with the same
+local marginal, fractional service regions, and integral support allocations.
+A general quotient-labelled lifting theorem composes prescribed operations
+in nested code pairs.  Support antichains preserve resource alternatives;
+all nonnegative price queries contain exactly the same information as the
+availability function.  Boundary coordinates give fixed-query complexity
+bounds, and bilinear worker tasks supply a worked extension.
+The bounded numerical contextual quotient remains a coarser observation
+contract.  Ergodis implements related compilation, optimization, and
+verification interfaces; no proof depends on its execution.
 \end{abstract}
 
 \section{Introduction}
@@ -73,9 +74,8 @@ recursion and reconstructs witnesses; no proof depends on it.
 Which recovery information survives concatenation?  A scalar locality or
 confinement threshold does not: the outer code can force an intermediate
 functional whose cost was discarded when the scalar minimum was taken.  The
-problem is therefore compositional.  We seek finite data that determine
-exactly when a recovery equation can leave its inner block and that can be
-propagated through another concatenation level.
+problem is therefore compositional.  We seek finite interfaces that compile recovery choices through successive
+concatenations while preserving the distinctions a specified objective observes.
 
 A linear recovery equation expresses a target combination as a linear
 combination of helper symbols; its cost is the number of distinct helpers
@@ -92,14 +92,18 @@ theory below makes this schematic example intrinsic and, in
 Proposition~\ref{prop:functional-label-separation}, realizes it while holding
 the unlabelled recovery data fixed.
 
-Here exact transfer means more than equality of a numerical parameter.  Below
-a helper radius, every global recovery is uniquely the zero-extension of a
+At the coefficient level, exact transfer means more than equality of a
+numerical parameter.  Under the equation-confinement criterion below, every global recovery is uniquely the zero-extension of a
 recovery inside the target block.  Formally, restriction to that block and
 zero-extension back into the concatenation are inverse bijections on
 normalized recovery-equation systems, preserving coefficients and exact
 helper supports.  Normalization means that the target coefficients act as the
-identity on the recovered subspace.  This is the structure needed to transport recovery-set
-overlap, bounded reliability, and capacity constraints.
+identity on the recovered subspace.  Operational queries need only minimal
+supports.  Theorem~\ref{thm:minimal-support-confinement} transfers those
+under the weaker condition $\delta_j(O^\perp)>r+1$, where $\delta_j$ is
+the least weight of an outer dual word touching the target block.  Unrelated
+external equations can violate coefficient confinement without creating a
+new minimal recovery option.
 
 Three projections of the recovery data answer different questions.  Relative
 generalized Hamming weights give the minimum helper union at each recovered
@@ -138,11 +142,11 @@ When is every recovered dimension confined through radius $r$?
 rank one is confined. \\
 What determines bounded reliability and capacity sharing?
 & Exact minimal helper supports and their overlaps determine the corresponding
-block-local statistics preserved by restriction and zero-extension. \\
+block-local statistics; target-touching distance suffices for their transfer. \\
 \bottomrule
 \end{tabular}
 \caption{Six questions answered by different projections of the recovery data.
-The first and last rows discard information needed by the composition rows.}
+The last row needs no equation-confinement hypothesis once minimal supports agree.}
 \label{tab:intro-question-map}
 \end{table}
 
@@ -235,7 +239,12 @@ Consequently, for any outer family with dual distance tending to infinity,
 the same statement holds for all sufficiently long concatenations at every
 fixed $r$.
 
-The second central result is the closure law in
+The quotient-lifting law in Theorem~\ref{thm:quotient-lifting-composition}
+places recovery in a general nested-pair framework.  Its support-antichain
+refinement retains resource choices, and all nonnegative helper prices
+determine the same minimal family as availability queries
+(Proposition~\ref{prop:pricing-availability-equivalence}).  Scalar labelled
+costs give the specialized closure law in
 Theorem~\ref{prop:prescribed-coset-composition}: the labelled
 prescribed-coset functions entering $\Gamma_{j,T}$ compose associatively by
 exact min--sum substitution.  Storing an argmin in each attained fibre also
@@ -291,7 +300,8 @@ automata minimization
 Section~\ref{sec:related-work} gives the detailed comparisons and citations.
 
 ergodis (Exact Recovery, Global Optimization, and Invariant Synthesis) is an
-exact compiler and solver derived from these reductions.  From finite linear
+separately developed compiler and exact solver for finite algebraic
+optimization, initially motivated by these reductions.  From finite linear
 recovery data and optional capacity constraints it composes labelled costs,
 computes confinement thresholds and schedules, and returns replayable
 coefficient-level witnesses.  Section~\ref{sec:exact-recovery-optimization}

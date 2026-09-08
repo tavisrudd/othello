@@ -1,0 +1,34 @@
+{
+  "seed": 20260905,
+  "random_weighted_families": 120,
+  "core_local_failure_comparisons": 6964,
+  "nonlinear_monotone_penalty_comparisons": 3600,
+  "independent_wedge_certificate_checks": 120,
+  "oracle_construction": {
+    "raw_alternatives": 56,
+    "oracle_calls": 10,
+    "retained": 10,
+    "bound": 10
+  },
+  "tight_binomial_examples": 9,
+  "label_and_degree_composition_comparisons": 3248,
+  "capacity_packing_comparisons": 160,
+  "sparse_dual_example": {
+    "raw_per_demand": 28,
+    "retained_per_demand": 3,
+    "dual_support": 1,
+    "optimum_for_100_demands": 298
+  },
+  "dense_price_modulo_cardinality": {
+    "raw_price_support": 8,
+    "residual_support": 1,
+    "priced_optimum": 13
+  },
+  "sharp_probability_bound": {
+    "full_reliability": "1",
+    "catalog_reliability": "243/250",
+    "error_and_bound": "7/250"
+  },
+  "rejected_certificate_mutations": 5,
+  "status": "all assertions passed"
+}

@@ -6,10 +6,12 @@
 trails belong in the dated task reports and in the archive companion,
 [`2026-07-17-complete-ports-paper-archive.md`](2026-07-17-complete-ports-paper-archive.md).
 
-**Date**: 2026-09-05
-**Status**: ACTIVE. The 40-page manuscript passes its 31-claim, four-Lean-terminal, and
-84-file Ergodis public-surface gates. The remaining paper route is C325 then C953, with C955 after.
-No push and no deposit.
+**Date**: 2026-09-07
+**Status**: ACTIVE. The operational revision has a 43-page manuscript and 32
+registered claims, with four unchanged Lean terminals. Minimal-support confinement,
+quotient-labelled lifting, pricing/availability, and boundary-width compilation
+are human-proved additions. Ergodis is described as a separately developed system.
+The remaining paper route is C325 then C953, with C955 after. No push or deposit.
 
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
@@ -35,6 +37,10 @@ human proofs and whose formal coverage is stated claim by claim. Computations, f
 certificates, and replay machinery may support appendices but may not carry a body theorem. Public
 release remains a separate fresh-history operation that never publishes the private monorepo or its
 history.
+
+Revision record: `notes/2026-09-07-complete-ports-operational-revision.md` includes
+the feedback dispositions and supplied adversity-catalog prototype replay.
+The full catalog/sparse-dual development is a sequel direction, not a new lane task.
 
 ## Main-proof admission rule
 
@@ -68,7 +74,9 @@ Title: *Exact Compositional Transfer of Bounded Linear Recovery*.
 8. positive-density realization and bounded service-rate-region transfer;
 9. reliability and coefficient-presentation separations beyond the RGHW hierarchy;
 10. the projective simplex code as the principal non-MDS application; and
-11. compact formal-verification and reproducibility appendices.
+11. quotient-labelled lifting, support-antichain composition, price/availability
+    equivalence, fixed-query boundary width, and a worked bilinear reduction; and
+12. compact formal-verification and reproducibility appendices.
 
 Use only established coding-theory terminology. “Associated nested code pair” is a literal
 description of $K_P\subseteq D_P$, not a coined term. Research and referee reports must contain
@@ -84,6 +92,10 @@ of the labelled costs, best-target GHW and cooperative-locality consequences, th
 staircase and rigidity, positive-density and service-rate transfer, reliability and
 coefficient-presentation separations, the projective-simplex family, and the C984 finite higher-rank
 quotient.
+
+The user-requested operational interface, fixed-query compilation, and scoped
+bilinear extension expand the earlier scope. The full catalog/sparse-dual sequel
+and bandwidth implementation remain outside this manuscript.
 
 Out: extended EXIT, deletion--contraction, secondary geometries, vector bandwidth, generic
 coefficient optimization, BGS packing, and the C980 probe census, rank-stratified algorithms,

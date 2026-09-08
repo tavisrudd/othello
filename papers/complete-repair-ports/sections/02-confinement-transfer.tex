@@ -199,3 +199,85 @@ do not yet provide recursive state: the next section restores the functional
 labels needed for exact concatenation.  Only when an outer-distance condition
 removes every nonzero label does the answer collapse to
 $M_t(D_P,K_P)+d(I^\perp)$.
+
+\subsection{Prescribed quotient operations}
+
+The pair construction admits a useful general form.  For finite linear codes
+$K\subseteq D\leq\F_q^E$, let $\pi:D\to D/K$ be the quotient map.
+Given a finite $\F_q$-space $T$ and a linear map $B:T\to D/K$, put
+\[
+ \kappa_T^{D/K}(B)=
+ \min_{\substack{Y:T\to D\ \mathrm{linear}\\\pi Y=B}}
+ |\supp Y(T)|.
+\]
+Thus a quotient label specifies an operation and a lift specifies its
+physical coordinates.  Under $D_P/K_P\cong W_P$, the inclusion of a
+target subspace $T$ has cost $\rho_T(I)$: its helper lift has image under
+$G_J$ equal to the requested target, and negating the helper coefficients
+gives the normalized dual equations.  More generally, minimizing
+$\kappa_T^{D/K}(B)$ over injective $B$ with $\dim T=t$ gives $M_t(D,K)$.
+Indeed an injective quotient image forces the lift image to be disjoint
+from $K$, and every $t$-dimensional subspace disjoint from $K$ supplies
+such a map after choosing a basis.
+
+\begin{theorem}[Composition of quotient-labelled lifts]
+\label{thm:quotient-lifting-composition}
+\coverage{absent}%
+Let $E_i$ be disjoint, let $K_i\subseteq D_i\leq\F_q^{E_i}$, and write
+$\pi_i:D_i\to L_i=D_i/K_i$.  For a nested pair
+$R_0\subseteq R_1\leq\bigoplus_iL_i$, take inverse images inside
+$\bigoplus_iD_i$:
+\[
+ \pi=\bigoplus_i\pi_i,\qquad D=\pi^{-1}(R_1),\qquad K=\pi^{-1}(R_0).
+\]
+Then $D/K\cong R_1/R_0$.  Writing $\bar\pi:R_1\to R_1/R_0$, every
+linear $B:T\to R_1/R_0$ satisfies
+\begin{equation}
+ \kappa_T^{D/K}(B)=
+ \min_{\substack{Z:T\to R_1\ \mathrm{linear}\\\bar\pi Z=B}}
+ \sum_i\kappa_T^{D_i/K_i}(\operatorname{pr}_iZ).
+ \label{eq:quotient-lifting-composition}
+\end{equation}
+Minimizing lifts compose to a witness.  Repeated substitution is associative.
+\end{theorem}
+
+\begin{proof}
+The surjection $D\to R_1/R_0$ induced by $\pi$ has kernel $K$, giving
+the asserted isomorphism.  A lift $Y:T\to D$ determines $Z=\pi Y$ with
+$\bar\pi Z=B$.  For fixed $Z$, its block maps $Y_i$ are precisely the
+independent lifts of $\operatorname{pr}_iZ$.  Their supports are disjoint,
+so their minimum costs add.  All quotient maps admit linear sections;
+hence these minima are attained and their block witnesses assemble to a
+lift of $B$.  This proves both inequalities in the formula.  At further
+levels, either order of substitution minimizes over the same compatible
+intermediate maps and the same sum of leaf costs.
+\proves{thm:quotient-lifting-composition}%
+\end{proof}
+
+No common extension field is needed here.  For heterogeneous injective
+encoders $e_i:V_i\hookrightarrow\F_q^{E_i}$ and a base-field-linear
+outer relation $O\leq\bigoplus_iV_i$, the interface is
+$e_i^*:\F_q^{E_i}\to V_i^*$ and compatibility is membership in
+$\operatorname{ann}(O)$.  Orthogonality to all encoded outer words proves
+this directly.  Target-normalized fibres retain their target constraints
+and exclude target coordinates from the cost.  To identify a prescribed
+target with the full alphabet $V_j$, the projection $O\to V_j$ must be
+surjective; a nonzero projection alone is insufficient.  With nonzero $T$
+and at least two blocks, the zero-functional nonconfinement contribution is
+$\rho_{j,T}+\min_{i\ne j}d(I_i^\perp)$, by adjoining a minimum dual word
+in the cheapest external block.  Extension-field scalar and projective
+actions used below are additional structure of that specialization.
+
+\paragraph{Available quotient directions.}
+For a coordinate set $A\subseteq E$, the quotient directions realizable
+entirely on $A$ form
+\[
+ L(A)=\pi(D\cap\F_q^A),\qquad
+ \dim L(A)=\dim(D\cap\F_q^A)-\dim(K\cap\F_q^A).
+\]
+Here $\F_q^A$ is embedded by zero-extension.  The formula is rank--nullity
+for the restricted quotient map.  A prescribed $B$ has a lift on $A$
+exactly when $B(T)\subseteq L(A)$, since the restricted surjection admits
+a linear section.  This retains the directions exposed on $A$, as well as
+their maximum possible rank; minimizing ordinary words of $D$ would lose
+the requirement that the quotient label be nonzero.

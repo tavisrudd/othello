@@ -199,7 +199,10 @@ $\Delta_N=d(O_N)$.
 \begin{corollary}[Positive-density realization]
 \label{cor:positive-density}
 \coverage{absent}%
-Assume $d(O_N^\perp)\to\infty$.  Fix either a nonzero target subspace $T$ and
+Assume $d(O_N^\perp)\to\infty$.  For every fixed finite radius $r$, the
+inclusion-minimal recovery supports for every nonzero $T\leq W_P$ are
+eventually copied in every block, with no inner additive ceiling on $r$.
+For the stronger coefficient statement, fix either a nonzero target subspace $T$ and
 a radius $r$ satisfying Theorem~\ref{thm:objectwise-confinement}, or a rank
 $t$ and radius $r$ satisfying Theorem~\ref{thm:ranked-confinement}.  For all
 sufficiently large $N$, every corresponding inner normalized recovery system
@@ -227,7 +230,10 @@ finite field $L$.
 \end{corollary}
 
 \begin{proof}
-The transfer statement is the zero-extension bijection in the confinement
+Minimal-support transfer follows from
+Theorem~\ref{thm:minimal-support-confinement}, since
+$\delta_j(O_N^\perp)\geq d(O_N^\perp)$ uniformly in $j$.
+The coefficient transfer statement is the zero-extension bijection in the confinement
 theorems, applied independently in every block.  There are $mN$ coordinates,
 and each inner coordinate occurs once in each block, which gives the density
 claims.  The blockwise inner encoder is injective, so restriction of scalars
@@ -257,14 +263,13 @@ choose a sequence with rate tending to $R$, primal relative distance at least
 $\delta$, and dual relative distance at least $\delta^\perp$; see also
 \cite[Chapter~17]{MacWilliamsSloane1977}.
 \uses{thm:objectwise-confinement, thm:ranked-confinement,
-cor:all-rank-bottleneck}%
+cor:all-rank-bottleneck,thm:minimal-support-confinement}%
 \proves{cor:positive-density}%
 \end{proof}
 
-Exact support transfer also preserves the fractional load-balancing region
-used in service-rate problems.  We state the consequence because it requires
-only the inclusion-minimal recovery sets, whereas the theorem transfers all
-normalized coefficients as well.
+Minimal-support transfer preserves the fractional load-balancing region
+used in service-rate problems.  The target-touching distance condition is
+sufficient even when coefficient confinement fails.
 
 Fix one inner target block with helper set $J$.  Let $\mathcal A$ be a finite
 set of demands on that block, with demand $a$ represented by a nonzero target
@@ -288,33 +293,34 @@ This is the bounded service-rate region of the recovery-set system
 \label{cor:service-rate-transfer}
 \coverage{absent}%
 Let $O\leq L^N$ be an outer code with $N\geq2$ whose projection onto the
-target block is nonzero.  Suppose
+target block is nonzero.  Suppose either
 \[
- r<\Gamma_{j,T_a}(O,I)
- \qquad(a\in\mathcal A).
+ \delta_j(O^\perp)>r+1,
+ \qquad\text{or}\qquad
+ r<\Gamma_{j,T_a}(O,I)\quad\text{for every }a\in\mathcal A.
 \]
 Transport capacities from the inner helper set to its copy in that block of
 $O\circ I$.  Then the inner and concatenated bounded service-rate regions are
 equal.  Capacities assigned outside the target block do not change this
-equality, because confinement excludes every cost-$\leq r$ recovery using
-those external helpers.  In particular, the hypothesis follows from
-$d(O^\perp)>r+1$ together with
-$r<\rho_{T_a}(I)+d(I^\perp)$ for every $a\in\mathcal A$.  Consequently,
-for an outer family with $d(O_N^\perp)\to\infty$, the equality holds for all
-sufficiently large $N$ whenever those inner inequalities hold.
+equality, because every minimal support is local.  The same transfer holds
+for support-based integral allocations, obtained by requiring the variables
+$f_{a,R}$ to be nonnegative integers.  Consequently, for an outer family
+with $d(O_N^\perp)\to\infty$, both equalities hold eventually at every
+fixed finite radius, without an inner-distance inequality.
 \end{corollary}
 
 \begin{proof}
-Theorem~\ref{thm:ungated-ranked-confinement} confines every cost-$\leq r$
-system for every demand.  Thus restriction and zero-extension copy every
-inclusion-minimal support and create no cross-block minimal support.  The
+Theorems~\ref{thm:minimal-support-confinement} and
+\ref{thm:ungated-ranked-confinement} give minimal-support equality under
+the respective hypotheses.  The
 helper bijection therefore transports the
 feasible variables $f_{a,R}$ and every capacity inequality in both
 directions.  Allowing the full upward-closed recovery-set family gives the
 same region: flow assigned to a nonminimal set can be moved to a contained
 minimal set and weakly decreases every helper load.  Thus cross-block
-supersets and capacities outside the target block are irrelevant.
-\uses{thm:ungated-ranked-confinement, thm:objectwise-confinement}%
+supersets and capacities outside the target block are irrelevant.  These
+operations preserve integrality, proving the integral assertion as well.
+\uses{thm:ungated-ranked-confinement,thm:minimal-support-confinement}%
 \proves{cor:service-rate-transfer}%
 \end{proof}
 
