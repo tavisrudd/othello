@@ -40,3 +40,19 @@ giving precisely projection/sign in the stated decompositions. No additional
 finite evidence or mystery is introduced. The conceptual q=7,8 boundary problem
 remains the already recorded future research direction; no new allocation or
 incidental discovery entry is needed. C1110 remains open for external review.
+
+## Export
+
+Authority: `222ea8dd92eb052f2969822447cc733d5aa7630d`.
+Exporter plan/audit found zero private references; sync and verify pass.
+Canonical content SHA-256:
+`4c088d3d5b8a1d0097a26869d25b68344a2afbbe29ce244600c637a2189f897b`.
+PDF, checksum manifest and claim map agree byte-for-byte across both trees.
+Exact export command, from the monorepo root:
+
+```sh
+python3 papers/scripts/export-paper-repos.py sync --source-ref 222ea8dd92eb052f2969822447cc733d5aa7630d --repository continuation-graph-rigidity --root /home/tavis/src/math-papers/continuation-graph-rigidity
+```
+
+Standalone forward commit: `70e9857`. Standalone full checks and deterministic
+PDF replay pass. Local export only; publication archive remains for the author.
