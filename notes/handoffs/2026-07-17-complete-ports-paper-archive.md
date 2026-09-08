@@ -1098,3 +1098,14 @@ motivates the local, compositional and operational questions before notation
 and recurs through quotient costs, transfer, pricing and reliability. The
 all-rank corollary precedes the optional contextual machinery. Authority
 `0ae040e02`, mirror `65d096b`; 44-page deterministic gates pass, no push.
+
+## 2026-09-07 — Proof clarity and literature audit
+
+Theorem-level attribution corrections, rational incidence seeds, and the
+fixed-query DP invariant are recorded in
+`notes/2026-09-07-complete-ports-improvement-and-audit.md`. Eleven primary
+sources were partially read at recorded passages; no exhaustive novelty verdict.
+Resumed Astra feedback accepted the bounded revision after one terminology fix.
+Authority `d42414dc6`, mirror `c3a63ed`; 45-page deterministic gates pass,
+byte-identical PDFs and guarded export verification, no push. The user's
+question about cuts produced recommendations only; C325/C953 remain open.

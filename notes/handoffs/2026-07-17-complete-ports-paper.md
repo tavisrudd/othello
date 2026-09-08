@@ -7,7 +7,7 @@ trails belong in the dated task reports and in the archive companion,
 [`2026-07-17-complete-ports-paper-archive.md`](2026-07-17-complete-ports-paper-archive.md).
 
 **Date**: 2026-09-07
-**Status**: ACTIVE. The operational revision has a 44-page manuscript and 32
+**Status**: ACTIVE. The operational revision has a 45-page manuscript and 32
 registered claims, with four unchanged Lean terminals. Minimal-support confinement,
 quotient-labelled lifting, pricing/availability, and boundary-width compilation
 are human-proved additions. Ergodis is presented through the mathematics it embodies and the repair,
@@ -24,8 +24,8 @@ The remaining paper route is C325 then C953, with C955 after. No push or deposit
 - **Canonical identity**: `complete-ports` — *Exact Compositional Transfer of Bounded Linear
   Recovery*. Approved license MIT.
 - **Standalone paper repository**: `tavisrudd/compositional-recovery` at
-  `~/src/math-papers/compositional-recovery`, local commit `65d096b` (44-page
-  layered exposition and resumed Astra feedback, verified, unpushed). The obsolete bundled engine and its
+  `~/src/math-papers/compositional-recovery`, local commit `c3a63ed` (45-page
+  proof clarification and literature audit, verified, unpushed). The obsolete bundled engine and its
   checker have been removed in separate forward commits.
 - **Ergodis engine**: the engine, its benchmark programme, and the C985 optimization sequel live in
   the [`ergodis`](2026-09-05-ergodis-lane.md) lane.
@@ -123,7 +123,7 @@ hierarchy.
 ### Referee repair disposition
 
 The Astra technical and journal-style findings have been repaired and the
-44-page deterministic manuscript gate passes. The exposition review against
+45-page deterministic manuscript gate passes. The exposition review against
 `papers/style-guide.md` and exact dispositions are in
 `notes/2026-09-07-complete-ports-referee-repair.md`.
 Astra's source follow-up confirms the improved mathematical focus; it is not
@@ -132,6 +132,12 @@ are in `verification/artifact-versions.json`. No new Lean or benchmark run. The 
 Astra feedback are recorded in
 `notes/2026-09-07-complete-ports-layered-exposition.md`; its running example
 recurs through quotient costs, transfer, pricing and reliability.
+The targeted literature audit, explicit proof repairs, final Astra follow-up
+and prospective low-risk cuts are recorded in
+`notes/2026-09-07-complete-ports-improvement-and-audit.md`.
+Novelty assessments are owned by the linked claim–proof–novelty ledger;
+the audit does not establish exhaustive literature coverage. Proposed cuts
+have not been applied.
 
 ### Paper route
 
