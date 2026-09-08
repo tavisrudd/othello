@@ -258,7 +258,8 @@ for example by inclusion--exclusion or a Boolean representation that retains
 overlap.  Factoring probabilities is valid on independent variable sets;
 adding alternative probabilities is valid on disjoint events.
 
-For service optimization, retain the radius as a separate constraint and
+\paragraph{Fractional service optimization.}
+Retain the radius as a separate constraint and
 evaluate $\pi_a(p)$ over supports of size at most $r$.
 For the fractional objective $\max\sum_a w_a\lambda_a$ under helper
 capacities $c_h$, the full dual is
@@ -351,7 +352,8 @@ Changing the interface spaces can require new coordinates.  None of these
 bounds avoids the output cost of explicitly requesting all $q^{t\dim W}$
 syndromes.
 
-An independent optimality certificate for this tree recursion assigns a
+\paragraph{Optimality certificates.}
+An independent certificate for this tree recursion assigns a
 potential $p_S(s)$ to each subtree state.  At a leaf, require
 $p_S(s)$ to be no greater than the cost of every local choice realizing $s$.
 At each internal node with children $S_L,S_R$, require
