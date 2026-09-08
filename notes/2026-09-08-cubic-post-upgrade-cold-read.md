@@ -29,3 +29,14 @@ The parent independently freezes the review target, checks evidence and formal
 scope consistency, and adjudicates the returned findings. Reviewers own only
 their report/evidence files and are instructed not to commit or edit papers.
 No manuscript change or new gate run is needed merely to dispatch this review.
+
+## Parent-side documentation check (independent of referee verdicts)
+
+The Paper 1 verification README’s opening still describes registry bundles
+collectively as computational premises, whereas the newly registered universal
+residue replay is explicitly supporting evidence only. Its following paragraph
+already states the correct boundary. Reconcile the opening after both cold
+reports are frozen. This affects documentation, not the mathematical proof.
+The dependency graph has no incoming edges for the primary endpoint theorem;
+that omission also occurs in the baseline and must not be attributed to this
+diff. The graph’s stated partial-coverage boundary remains important.
