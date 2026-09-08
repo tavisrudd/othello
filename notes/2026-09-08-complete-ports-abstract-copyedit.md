@@ -2,7 +2,7 @@
 
 **Lane**: `complete-ports`
 **Date**: 2026-09-08
-**Status**: edits implemented; final validation pending.
+**Status**: complete; returning referee feedback addressed, paper and summary exported locally.
 
 The user asked for obvious copy edits, whether the abstract was ideal, and
 explicitly instructed against bloating it with secondary results or machinery.
@@ -27,7 +27,7 @@ was rejected by its existing 140--200-word editorial range. The revision meets
 that unchanged range by explaining the primary mechanism and guarantees; no
 secondary result or machinery was restored. The user additionally requested
 resuming the same cold reader with the diff, then updating the portfolio summary.
-Those follow-up steps are pending.
+Those follow-up steps are completed below.
 
 ## Returning referee and portfolio summary
 
@@ -76,3 +76,20 @@ inner escape obstruction remains. The returning referee found no theorem defect
 and requested no further abstract revision. C325 and aggregate C953 verification,
 including public artifact accessibility, remain separate open gates. These were
 task-owned editorial findings; no incidental discovery entry is warranted.
+
+## Final release and local exports
+
+Authority `ee25d74a2` contains the final qualification and summary refresh.
+Paper standalone `325d4de` passes `make check`: 44 pages, warning-free, 32
+claims and four unchanged Lean terminals. Export verification passes with
+59 files and content SHA-256
+`29664b5dec18f16c6101da9d859208e16305f912e7d9843d9747832983e093bc`.
+Authority and standalone PDFs agree at SHA-256
+`e571205a722ee6b335f932af3190133a4a1c678b64a718e48d165dd6d657f332`.
+
+The summary follows the documented portfolio exception to the paper exporter:
+only the committed authoritative README was copied after checking its clean
+matching downstream baseline. Summary standalone `5266144` agrees bytewise
+with `papers/summary/README.md`, SHA-256
+`308fdadec2889151f30903c8ff0e80f1824883c84b243ca0c49d1c16a7fce6bc`.
+No push or deposit occurred in either repository.

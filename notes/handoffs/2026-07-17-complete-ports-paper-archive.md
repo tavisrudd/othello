@@ -1148,3 +1148,14 @@ edits are documented in `notes/2026-09-08-complete-ports-editorial-followup.md`.
 The 44-page release gates pass with unchanged theorem/proof statements and
 formal coverage; standalone `7dec7fe` is verified and unpushed. C325 and the
 remaining C953 aggregate gates stay open.
+
+## 2026-09-08 — focused abstract, returning referee, portfolio update
+
+The same referee endorsed the focused abstract and requested one qualification
+of eventual confinement, now repaired. Abstract, copy edits, canonical summary
+wording, and portfolio refresh are recorded in
+`notes/2026-09-08-complete-ports-abstract-copyedit.md`; the unchanged referee
+follow-up is `notes/2026-09-08-complete-ports-referee-followup.md`.
+Paper standalone `325d4de` passes the 44-page release gate. Summary standalone
+`5266144` matches its authoritative README. Both are local and unpushed;
+C325 and the aggregate C953 gate remain open.
