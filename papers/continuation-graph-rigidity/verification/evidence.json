@@ -1,10 +1,23 @@
 {
-  "schema": "continuation-evidence-v1",
   "entries": {
     "boundary": {
-      "role": "Complete four-pencil resolution census and full graph automorphism orders at q=5,7,8,9,11, with q=13 as a stable-range cross-check; independently replayed, not kernel-checked.",
+      "archived_artifact": {
+        "archive_bytes": 388943,
+        "archive_sha256": "5a341b4174531b2c00b6b4c3ffbc4941bab1b9d0727a01b76c007a2c621025f0",
+        "boundary_sha256": "e92bb7833f86d269831f8fd9e2ae719d7e662a67fbd699e8a3e92d0f15cb9858",
+        "doi": "10.5281/zenodo.22651106",
+        "download": "https://zenodo.org/api/records/22651106/files/tavisrudd/continuation-graph-rigidity-v0.1.0.zip/content",
+        "git_commit": "31eff40f6cfd61dd1996e4199da2e22f3522c21c",
+        "relationship": "The archived boundary.json is byte-identical to this revision; revised manuscript and recognizer are not claimed to belong to that release.",
+        "version": "0.1.0"
+      },
       "checksum_manifest": "verification/SHA256SUMS",
-      "commands": ["python3 verification/replay_boundary.py", "nix shell --inputs-from path:. nixpkgs#sage --command sage -python verification/generate_boundary.py --check"]
+      "commands": [
+        "python3 verification/replay_boundary.py",
+        "nix shell --inputs-from path:. nixpkgs#sage --command sage -python verification/generate_boundary.py --check"
+      ],
+      "role": "Complete four-pencil resolution census and full graph automorphism orders at q=5,7,8,9,11, with q=13 as a stable-range cross-check; independently replayed, not kernel-checked."
     }
-  }
+  },
+  "schema": "continuation-evidence-v1"
 }

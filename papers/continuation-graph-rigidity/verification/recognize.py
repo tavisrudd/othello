@@ -54,7 +54,7 @@ def recognize(adj, *, field=None):
     if len(traces)!=4*(q-2):return None
     disjoint=[sum(1<<j for j,b in enumerate(traces) if i!=j and not a&b) for i,a in enumerate(traces)]
     classes=set()
-    for seed in fixed_cliques(disjoint,5):
+    for seed in fixed_cliques(disjoint,2):
         c=closed_common(disjoint,seed)
         if c.bit_count()==q-2 and is_clique(disjoint,c):classes.add(c)
     classes=sorted(classes)

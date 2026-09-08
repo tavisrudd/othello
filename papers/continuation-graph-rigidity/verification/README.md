@@ -1,6 +1,6 @@
 # Verification scope
 
-The stable-range proofs are written mathematics. All 23 statement records are
+The stable-range proofs are written mathematics. All 24 statement records are
 marked `absent` for Lean coverage, including scope remarks and open problems.
 The annotations and claim hashes check source consistency; they do not prove
 mathematics. Dependency edges record the indicated statement-level dependencies,
@@ -47,7 +47,9 @@ for subsequent replays. `SHA256SUMS` records load-bearing source and output hash
 ## Recognition and controls
 
 `recognize.py` receives adjacency and an optional `field` object, recovers
-four partitions, completes a cyclic quotient table, and tries generator images.
+four partitions using four-vertex trace seeds and edge seeds for centre
+classes, completes a cyclic quotient table, and tries generator images.
+The degree check gives an O(n^(7/2)) operation bound, not a wall-time promise.
 Recognition requires q>=9. `recognize(adj, field=f)` and
 `verify_transport(adj, q, coordinates, field=f)` use the supplied model throughout.
 The field object provides `q`, `sub(x,y)`, `div(x,y)`, and `power(x,k)`;
@@ -67,7 +69,9 @@ supplied arithmetic; its coordinates deliberately fail with the default model.
 Field-order mismatches are rejected. `recognition.json` stores the deterministic
 coordinate certificates; normal tests reproduce them byte-for-byte. Regenerate
 intentionally with `check_recognition.py --update-certificate`.
-`check_geometric_witnesses.py` checks the displayed five-clique and exceptional witnesses;
+`check_geometric_witnesses.py` checks the displayed five-clique, exceptional
+witnesses and Hamming generators at q=9,16,25, including commutation with
+Frobenius and the generated orders;
 its `--sage` mode independently compares all arithmetic pairs in the new field
 models with Sage. Coordinate verification is independent of reconstruction
 search but shares the supplied arithmetic, whose field axioms remain trusted.
@@ -97,3 +101,10 @@ an altered statement, update its record with `refresh_claim_digests.py LABEL`;
 and the positive boundary at q=7 still uses enumeration.
 All cited external reconstruction
 results are comparisons, not imported premises of the proofs.
+
+The original census evidence is archived at DOI 10.5281/zenodo.22651106
+(version 0.1.0, Git 31eff40f6cfd61dd1996e4199da2e22f3522c21c).
+The downloaded archive's boundary.json was compared byte-for-byte with the
+current certificate. `evidence.json` pins the archive URL, revision and hashes;
+the witness checker ensures the local census still matches this identity.
+The improved recognizer and manuscript are later changes, not part of that archive.

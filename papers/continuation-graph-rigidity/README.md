@@ -2,7 +2,7 @@
 
 [![Concept DOI](https://img.shields.io/badge/Concept_DOI-10.5281%2Fzenodo.22651105-blue.svg)](https://doi.org/10.5281/zenodo.22651105)
 
-Tavis Rudd — first draft, September 2026.
+Tavis Rudd — revised draft, September 2026.
 
 ## Read the paper
 
@@ -52,8 +52,9 @@ recovers the information lost when those cliques became unlabelled edges:
    a clique spread across several tangents has at most five vertices, so the graph identifies
    the traces by their size.
 2. **Recover the four classes.** Traces through the same frame point partition
-   the vertices. A second clique argument, now using disjointness of traces,
-   recovers these four partitions.
+   the vertices. In the disjointness graph, a pair of traces from one class has
+   exactly the other members of that class as common neighbours. Edge closures
+   recover the four partitions.
 3. **Recover the field action.** In suitable coordinates the vertices are
    pairs `(x,y)` with `x,y ∉ {0,1}` and `x ≠ y`, represented by the words
 
@@ -98,7 +99,11 @@ Only the positive q=7 boundary case depends on computation; q=9 and 11
 also follow from the uniform proof. The census itself is an exact computation. Sage constructs the graphs
 from incidence; a separate Python implementation constructs them from
 coordinate equality and uses nauty to check full automorphism-group orders.
-Both enumerate the resolutions to exhaustion. The two routes share the
+Both enumerate the resolutions to exhaustion. The census certificate is
+byte-identical to the archived v0.1.0 artifact (DOI
+[10.5281/zenodo.22651106](https://doi.org/10.5281/zenodo.22651106), Git revision
+`31eff40f6cfd61dd1996e4199da2e22f3522c21c`); this revised manuscript and
+recognizer are later changes. The two routes share the
 exact-cover recursion. The certificate records the resolutions, group
 generators, and exceptional automorphisms. See the
 [verification guide](verification/README.md) for the precise trust boundary.
@@ -108,7 +113,7 @@ generators, and exceptional automorphisms. See the
 [`verification/recognize.py`](verification/recognize.py) implements the
 reconstruction and returns a coordinate certificate. Checking the certificate
 requires comparing every pair of vertices, independently of the search that
-found it. The paper gives an `O(n^6)` recognition bound and an `O(n²)`
+found it. The paper gives an `O(n^(7/2))` recognition bound and an `O(n²)`
 certificate check for a graph with `n` vertices over a supplied field.
 
 The reference recognizer is tested at orders 9, 11, 13, 16, 17, 19 and 25,

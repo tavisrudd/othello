@@ -58,11 +58,11 @@ The stable-range proof is independent of this computation.
 \end{abstract}
 
 \noindent\textbf{Keywords.} finite projective plane; arc; continuation
-graph; semilinear group; graph automorphism; cross ratio; $M_{0,5}$.
+graph; semilinear group; graph automorphism; Hamming isometry; code extension.
 
 \smallskip
 \noindent\textbf{2020 Mathematics Subject Classification.} 51E21, 05C25,
-20B25, 14H10.
+20B25, 94B27.
 
 \section{Introduction}
 
@@ -98,7 +98,7 @@ after incidence is known; it does not recover that incidence from a graph.
 Our main result settles the extension question at the smallest arc size
 for which semilinear rigidity holds uniformly in the field order.  Every four-arc in $\PG(2,q)$ is a projective frame.
 
-\begin{theorem}[Semilinear rigidity]\label{thm:main}\coverage{absent}\uses{cor:frame-traces,thm:centres,prop:normal,lem:frobenius}
+\begin{theorem}[Semilinear rigidity]\label{thm:main}\coverage{absent}\uses{cor:frame-traces,lem:centre-seeds,prop:normal,lem:frobenius}
 Let $K$ be a projective frame in $\PG(2,q)$, where $q=p^e\geq9$.  Then, as
 permutation groups on the legal continuation set,
 \[
@@ -344,9 +344,13 @@ Send $\ell$ to infinity, write its centre as $t$, and affinely normalize
 the other centres to $u=(0,0)$, $v=(1,0)$, $w=(0,1)$.
 Since $K$ is a frame, $t$ is not the direction of a triangle side.
 Fix an outside point $P=(a,b)$ and put $c=1-a-b$; legality gives $abc\ne0$.
-The three ideal clique points are exactly the directions from $P$ to
-$u,v,w$. Every other outside point assigns these same directions to the
-three centres by a permutation. Each assignment has at most one point,
+The directions from $P$ to $u,v,w$ are distinct because $P$ avoids
+the triangle sides; they are exactly the three ideal clique points.
+For each outside point $Q$, define its assignment $\pi_Q\in S_{\{u,v,w\}}$ by
+\[
+ \operatorname{dir}(Q-r)=\operatorname{dir}(P-\pi_Q(r)),
+ \qquad r\in\{u,v,w\}.
+\] Each assignment has at most one point,
 as two of its distinct directions already specify an intersection.
 The identity gives $P$. Two points can share a line through an affine
 centre only if their assignments agree there; if they agree nowhere,
@@ -359,7 +363,7 @@ transpositions differ by a triangle-side vector. Their assignments agree
 nowhere, so they cannot be adjacent.
 
 The two three-cycle candidates are $R=(c,a)$ and $S=(b,c)$, each requiring
-$ab+bc+ca=0$. For example, writing $R=(h,j)$, one cycle gives
+$ab+bc+ca=0$. For example, the assignment $\pi_R=(u\ v\ w)$, with $R=(h,j)$, gives
 \[
  bh=(a-1)j,\qquad (b-1)(h-1)=aj,\qquad bh=a(j-1).
 \]
@@ -401,184 +405,40 @@ It also makes each full trace maximal, since adjoining an outside vertex
 would contradict the same bound.
 \end{proof}
 
-The following general bound applies to arcs in arbitrary finite projective
-planes. It is independent of the sharper frame argument.
-
-\begin{lemma}[Non-tangent clique bound]\label{lem:clique}\coverage{absent}
-Assume $k\geq2$.  If a clique $C$ of $G_K$ is not contained in a tangent
-trace, then
-\[
-  |C|\leq k(k-2)+1.
-\]
-\end{lemma}
-
-\begin{proof}
-Fix $x\in C$ and partition $C\setminus\{x\}$ into sets $C_t$, where
-$y\in C_t$ when the edge $xy$ is centred at $t\in K$.  For a nonempty
-$C_t$, choose $z\in C$ outside the line $xt$; such a $z$ exists because
-$C$ is not contained in that trace.  Let $u$ be the centre of $xz$.
-
-For $y\in C_t$, let $s_y$ be the centre of $zy$.  The centres $s_y$ are
-distinct: otherwise two distinct points of $xt$ would also lie on one line
-through $z$.  Moreover $s_y\notin\{t,u\}$, since either equality forces
-$z$ or $y$ onto two distinct lines through $x$.  Hence $|C_t|\leq k-2$.
-There are at most $k$ parts, and therefore
-$|C|-1=\sum_t|C_t|\leq k(k-2)$.
-\end{proof}
-
-Deza's weak-$\Delta$-system theorem gives the related generic bound
-$k^2-k+1$ for a non-sunflower family of $k$-sets with constant pairwise
-intersection size~\cite{Deza}; in our application that size is one.
-The multipartite improvement is already implicit in the argument of
-\cite[Lemma 2.2]{FHMW}: a non-star linear intersecting $k$-partite
-hypergraph has maximum degree $\Delta\le k-1$, and counting edges meeting
-one edge gives $h\le k(\Delta-1)+1\le(k-1)^2$. These intermediate steps
-need only the non-star condition, although the stated lemma assumes a
-stronger covering-number hypothesis. Lemma~\ref{lem:clique} specializes
-that argument to tangent symbols; it needs no further projective incidence.
-
-\begin{theorem}[Tangent-trace recovery]\label{thm:traces}\coverage{absent}\uses{lem:clique}
-If
-\begin{equation}
-  q-\binom{k-1}{2}>k(k-2)+1,
-  \label{eq:trace-threshold}
-\end{equation}
-then the tangent traces are exactly the maximal cliques of $G_K$ with more
-than $k(k-2)+1$ vertices.  Hence every abstract graph isomorphism
-$G_K\to G_J$, where $J$ is a $k$-arc whose plane order also satisfies
-\eqref{eq:trace-threshold}, canonically induces an isomorphism of the
-uncoloured tangent-trace hypergraphs.
-\end{theorem}
-
-\begin{proof}
-A tangent contains $q$ points besides its centre.  At most
-$\binom{k-1}{2}$ of them lie on secants determined by the other selected
-points, so every tangent trace has more than the threshold in the statement.
-Lemma~\ref{lem:clique} says that every clique above that threshold lies in
-one tangent trace.  Such a trace is maximal: a vertex adjacent to its whole
-trace would create a larger clique and hence would itself lie on the same
-tangent.  Conversely every maximal clique above the threshold is therefore
-the full trace containing it.
-\end{proof}
-
 \section{Intrinsic recovery of selected centres}
 \label{sec:centres}
 
-Assume the tangent traces have been recovered, either by
-Corollary~\ref{cor:frame-traces} or by Theorem~\ref{thm:traces}.  Form a graph $D_K$ whose vertices
-are the recovered tangent traces, joining two traces when they are disjoint
-as subsets of $V_K$. The selected centres are no longer given. We recover
-them by the same size-gap principle: traces through one centre form a
-large disjoint family, whereas a family mixing centres is small.
+For a frame with $q\ge9$, form the disjointness graph $D_K$ on the
+recovered tangent traces: two traces are adjacent when their legal point
+sets are disjoint. The four centre classes can be recovered from edges
+of this graph.
 
-\begin{theorem}[Centre-class recovery]\label{thm:centres}\coverage{absent}\uses{cor:frame-traces,thm:traces}
-Suppose all tangent traces are nonempty and have been recovered. Put
+\begin{lemma}[Centre recovery from edge seeds]\label{lem:centre-seeds}\coverage{absent}\uses{cor:frame-traces}
+Let $K$ be a projective frame in $\PG(2,q)$, $q\ge9$. A trace outside a
+centre class $\mathcal P$ is disjoint from at most one member of
+$\mathcal P$. For distinct $A,B\in\mathcal P$,
 \[
-  T=q+2-k,\qquad c=\binom{k-2}{2}.
+ \mathcal P=\{A,B\}\cup\bigl(N_{D_K}(A)\cap N_{D_K}(B)\bigr).
 \]
-If $T>kc$, then the $k$ classes of tangent traces having a common selected
-centre are exactly the maximal cliques of $D_K$ with more than $kc$
-members.  Thus $G_K$ intrinsically recovers its tangent traces, their
-partition into selected centres, and every tangent-incidence triple
-$(t,x,y)$ with $x,y\in V_K$.
-\end{theorem}
-
+The closures of edges of $D_K$ that are cliques of size $q-2$ are
+exactly the four centre classes.
+\end{lemma}
 \begin{proof}
-The $T$ traces centred at one $t\in K$ are pairwise disjoint.  Fix a trace
-$A$ centred at $t$ and another centre $u\ne t$.  A tangent trace at $u$ can
-be disjoint from $A$ only when the two ambient tangent lines meet at an
-illegal point.  That point cannot lie on a secant involving $t$ or $u$;
-it must lie on one of the $c$ secants whose endpoints are both in
-$K\setminus\{t,u\}$.  Each such secant determines at most one tangent
-through $u$, so at most $c$ traces centred at $u$ are disjoint from $A$.
+Let $A$ have centre $t$, and let $u\ne t$ be another centre. A tangent
+through $u$ can meet the line of $A$ at an illegal point only on the
+secant joining the two remaining frame points: a secant involving $t$
+or $u$ would force one of the tangent lines to be a secant. That
+remaining secant determines at most one such tangent through $u$.
+Thus a trace outside $\mathcal P$ cannot be disjoint from two members,
+whereas all traces within $\mathcal P$ are pairwise disjoint. This proves
+the closure formula.
 
-Now let a clique of $D_K$ use at least two centre classes, and choose traces
-$A,B$ from distinct classes.  The trace $A$ bounds the contribution from
-each other class by $c$, while $B$ gives the same bound for the class of
-$A$.  The mixed clique therefore has at most $kc$ members.  Under $T>kc$,
-every larger clique lies in one centre class, and maximality recovers the
-whole class.
+A clique mixing centre classes has at most four members. Indeed, choose
+$A,B$ in different classes. The trace $A$ bounds the contribution of
+each other class by one, and $B$ bounds the contribution of $A$'s class
+by one. Since $q-2>4$, every retained closure lies in a single centre
+class and fills it. Conversely, every class is obtained from any of its edges.
 \end{proof}
-
-For reference, the resulting sufficient integer thresholds are
-\[
-\begin{array}{c|ccccc}
-k&3&4&5&6&8\\ \hline
-q&7&13&23&41&127.
-\end{array}
-\]
-These are the general plane bounds; for Desarguesian frames the entry
-$13$ improves to $9$ by Corollary~\ref{cor:frame-traces}.  The disjointness
-argument is plane-specific: in higher dimension, tangent lines with
-different centres may be skew.
-
-\section{Why uniform extension needs four points}
-\label{sec:obstructions}
-
-The number of selected points changes what adjacency can detect. Two
-centres give only rows and columns. A third adds division, but division
-alone allows every automorphism of the multiplicative group. The fourth
-centre will add a translated quotient, linking this multiplicative data
-to the field's additive structure.
-
-
-\begin{proposition}[One point]\label{prop:one-point}\coverage{absent}
-For a one-point arc in $\PG(n,q)$, the continuation graph is a disjoint
-union of $1+q+\cdots+q^{n-1}$ copies of $K_q$.  This structure permits permutations of individual clique fibres;
-semilinear rigidity does not hold uniformly for one-point arcs.
-\end{proposition}
-
-\begin{theorem}[Two points]\label{thm:rook}\coverage{absent}
-If $K=\{a,b\}$ in any projective plane of order $q$, then
-\[
-  G_K\cong K_q\mathbin{\square}K_q.
-\]
-In particular, its isomorphism type is independent of the projective plane.
-\end{theorem}
-
-\begin{proof}
-The legal points are precisely the $q^2$ points outside $ab$.  Map such a
-point $x$ to the ordered pair of tangent lines $(ax,bx)$.  Every choice of
-one tangent at $a$ and one at $b$ meets in one legal point, and two points
-are adjacent exactly when they share one of these tangent lines.  This is
-rook adjacency.
-\end{proof}
-
-\begin{theorem}[Three points]\label{thm:triangle}\coverage{absent}
-Let $K$ be a triangle in $\PG(2,q)$.  With its vertices normalized to the
-coordinate points, the legal vertices are $(x:y:1)$ with
-$x,y\in\F_q^\times$, and
-\begin{equation}
- (x,y)\sim(x',y')
- \Longleftrightarrow
- x=x'\ \text{or}\ y=y'\ \text{or}\ x/y=x'/y'.
- \label{eq:triangle}
-\end{equation}
-Every automorphism $\alpha$ of the multiplicative group $\F_q^\times$ therefore
-induces the graph automorphism $(x,y)\mapsto(\alpha(x),\alpha(y))$.  This is
-not induced by a semilinear collineation unless $\alpha$ is a field
-automorphism.
-\end{theorem}
-
-\begin{proof}
-The three equalities in \eqref{eq:triangle} are the three tangent-pencil parameters.  A
-multiplicative-group automorphism preserves equality and quotient. For $q=2$
-the multiplicative group is trivial, so the conclusion holds directly.
-Assume $q\ge3$. Each pencil trace then contains at least two legal points
-and determines its ambient line. If an
-ambient semilinear collineation induces this map, preservation of the three
-pencil partitions forces it to fix the triangle vertices.  In normalized
-coordinates it has the form
-$(x,y)\mapsto(A\sigma(x),B\sigma(y))$ for a field automorphism $\sigma$.
-Since $\alpha(1)=1$, equality with the displayed graph automorphism forces
-$A=B=1$ and $\alpha=\sigma$.
-\end{proof}
-
-For example, inversion on $\F_5^\times$ is nonambient.  These examples separate
-intrinsic centre recovery from ambient semilinear extension. The failure
-is uniform, not absolute: at $q=3$ the triangle graph is $K_4$, and its
-triangle stabilizer $C_2^2\rtimes S_3\cong S_4$ acts faithfully on all four
-legal points.
 
 \section{The four-point frame}
 \label{sec:frame}
@@ -592,7 +452,7 @@ lemmas: the first forces one multiplicative permutation, and the second
 forces that permutation to preserve the field.
 
 Write $D=\F_q\setminus\{0,1\}$.  For $q\geq9$,
-Corollary~\ref{cor:frame-traces} and Theorem~\ref{thm:centres} recover the four coordinate
+Corollary~\ref{cor:frame-traces} and Lemma~\ref{lem:centre-seeds} recover the four coordinate
 partitions.  After composing with the unique projectivity inducing the
 corresponding permutation of the frame, a graph automorphism preserves all
 four partitions. Preserving a partition permits relabelling its fibres;
@@ -674,7 +534,7 @@ Therefore all four maps are the same power of the Frobenius automorphism.
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
 For $q\ge9$, Corollary~\ref{cor:frame-traces} recovers the tangent traces,
-and Theorem~\ref{thm:centres} applies since $q-2>4$.  Thus every graph automorphism
+and Lemma~\ref{lem:centre-seeds} recovers the four centre classes.  Thus every graph automorphism
 permutes the four recovered centre classes.  Every permutation of a
 projective frame is realized by a unique projectivity.  Compose by its
 inverse to obtain an automorphism preserving all four classes.  In the
@@ -704,7 +564,7 @@ Uniqueness follows from the faithful action proved in Theorem~\ref{thm:main}.
 \proves{cor:reconstruction}
 \end{proof}
 
-\begin{corollary}[Hamming-space extension]\label{cor:code-extension}\coverage{absent}\uses{thm:main,prop:normal,cor:frame-traces,thm:centres}
+\begin{corollary}[Hamming-space extension]\label{cor:code-extension}\coverage{absent}\uses{thm:main,prop:normal,cor:frame-traces,lem:centre-seeds}
 Let $q=p^e\ge9$, $D=\F_q\setminus\{0,1\}$ and $Q=q-2$. The code
 \[
  C_q=\{(x,y,x/y,(x-1)/(y-1)):x,y\in D,\ x\ne y\}\subset D^4
@@ -731,6 +591,23 @@ fixing every codeword therefore fixes the positions and all symbols,
 proving injectivity. Theorem~\ref{thm:main} identifies the group.
 \end{proof}
 
+The action can be written directly on words. Set
+$(a,b,c,d)=(x,y,x/y,(x-1)/(y-1))$. The three adjacent transpositions
+of the ordered frame induce
+\[
+\begin{aligned}
+ s_1(a,b,c,d)&=(b,a,c^{-1},d^{-1}),\\
+ s_2(a,b,c,d)&=(c,b^{-1},a,1-d),\\
+ s_3(a,b,c,d)&=(1-a,1-b,d,c).
+\end{aligned}
+\]
+They come from the point maps $(x,y)\mapsto(y,x)$,
+$(x,y)\mapsto(x/y,1/y)$ and $(x,y)\mapsto(1-x,1-y)$, respectively:
+the corresponding projectivities swap the first two coordinate points,
+the second and third, and the third with $(1:1:1)$. Thus they generate
+$S_4$. Together with componentwise Frobenius they generate the full
+Hamming stabilizer; the formulas also show that Frobenius commutes with them.
+
 The natural alphabet has $Q$ symbols, which need not be a prime power.
 The Singleton bound for length four and distance three is $Q^2$;
 thus this code is not MDS. Hamming-space extension recovers position and
@@ -745,6 +622,202 @@ has order $48$, twice the projective frame stabilizer.  Section~\ref{sec:boundar
 by exact finite enumeration.
 \end{remark}
 
+
+\section{Recovery bounds for general arcs}\label{sec:general-recovery}
+
+The following general bound applies to arcs in arbitrary finite projective
+planes. It is independent of the sharper frame argument.
+
+\begin{lemma}[Non-tangent clique bound]\label{lem:clique}\coverage{absent}
+Assume $k\geq2$.  If a clique $C$ of $G_K$ is not contained in a tangent
+trace, then
+\[
+  |C|\leq k(k-2)+1.
+\]
+\end{lemma}
+
+\begin{proof}
+Fix $x\in C$ and partition $C\setminus\{x\}$ into sets $C_t$, where
+$y\in C_t$ when the edge $xy$ is centred at $t\in K$.  For a nonempty
+$C_t$, choose $z\in C$ outside the line $xt$; such a $z$ exists because
+$C$ is not contained in that trace.  Let $u$ be the centre of $xz$.
+
+For $y\in C_t$, let $s_y$ be the centre of $zy$.  The centres $s_y$ are
+distinct: otherwise two distinct points of $xt$ would also lie on one line
+through $z$.  Moreover $s_y\notin\{t,u\}$, since either equality forces
+$z$ or $y$ onto two distinct lines through $x$.  Hence $|C_t|\leq k-2$.
+There are at most $k$ parts, and therefore
+$|C|-1=\sum_t|C_t|\leq k(k-2)$.
+\end{proof}
+
+Deza's weak-$\Delta$-system theorem gives the related generic bound
+$k^2-k+1$ for a non-sunflower family of $k$-sets with constant pairwise
+intersection size~\cite{Deza}; in our application that size is one.
+The multipartite improvement is already implicit in the argument of
+\cite[Lemma 2.2]{FHMW}: a non-star linear intersecting $k$-partite
+hypergraph has maximum degree $\Delta\le k-1$, and counting edges meeting
+one edge gives $h\le k(\Delta-1)+1\le(k-1)^2$. These intermediate steps
+need only the non-star condition, although the stated lemma assumes a
+stronger covering-number hypothesis. Lemma~\ref{lem:clique} specializes
+that argument to tangent symbols; it needs no further projective incidence.
+
+\begin{theorem}[Tangent-trace recovery]\label{thm:traces}\coverage{absent}\uses{lem:clique}
+If
+\begin{equation}
+  q-\binom{k-1}{2}>k(k-2)+1,
+  \label{eq:trace-threshold}
+\end{equation}
+then the tangent traces are exactly the maximal cliques of $G_K$ with more
+than $k(k-2)+1$ vertices.  Hence every abstract graph isomorphism
+$G_K\to G_J$, where $J$ is a $k$-arc whose plane order also satisfies
+\eqref{eq:trace-threshold}, canonically induces an isomorphism of the
+uncoloured tangent-trace hypergraphs.
+\end{theorem}
+
+\begin{proof}
+A tangent contains $q$ points besides its centre.  At most
+$\binom{k-1}{2}$ of them lie on secants determined by the other selected
+points, so every tangent trace has more than the threshold in the statement.
+Lemma~\ref{lem:clique} says that every clique above that threshold lies in
+one tangent trace.  Such a trace is maximal: a vertex adjacent to its whole
+trace would create a larger clique and hence would itself lie on the same
+tangent.  Conversely every maximal clique above the threshold is therefore
+the full trace containing it.
+\end{proof}
+
+For recovered nonempty tangent traces, again let $D_K$ join two traces
+when their legal point sets are disjoint. The same geometric counting
+argument gives the following general centre-recovery bound.
+
+\begin{theorem}[Centre-class recovery]\label{thm:centres}\coverage{absent}\uses{cor:frame-traces,thm:traces}
+Suppose all tangent traces are nonempty and have been recovered. Put
+\[
+  T=q+2-k,\qquad c=\binom{k-2}{2}.
+\]
+If $T>kc$, then the $k$ classes of tangent traces having a common selected
+centre are exactly the maximal cliques of $D_K$ with more than $kc$
+members.  Thus $G_K$ intrinsically recovers its tangent traces, their
+partition into selected centres, and every tangent-incidence triple
+$(t,x,y)$ with $x,y\in V_K$.
+\end{theorem}
+
+\begin{proof}
+The $T$ traces centred at one $t\in K$ are pairwise disjoint.  Fix a trace
+$A$ centred at $t$ and another centre $u\ne t$.  A tangent trace at $u$ can
+be disjoint from $A$ only when the two ambient tangent lines meet at an
+illegal point.  That point cannot lie on a secant involving $t$ or $u$;
+it must lie on one of the $c$ secants whose endpoints are both in
+$K\setminus\{t,u\}$.  Each such secant determines at most one tangent
+through $u$, so at most $c$ traces centred at $u$ are disjoint from $A$.
+
+Now let a clique of $D_K$ use at least two centre classes, and choose traces
+$A,B$ from distinct classes.  The trace $A$ bounds the contribution from
+each other class by $c$, while $B$ gives the same bound for the class of
+$A$.  The mixed clique therefore has at most $kc$ members.  Under $T>kc$,
+every larger clique lies in one centre class, and maximality recovers the
+whole class.
+\end{proof}
+
+For reference, the resulting sufficient integer thresholds are
+\[
+\begin{array}{c|ccccc}
+k&3&4&5&6&8\\ \hline
+q&7&13&23&41&127.
+\end{array}
+\]
+These are the general plane bounds; for Desarguesian frames the entry
+$13$ improves to $9$ by Corollary~\ref{cor:frame-traces}.  The disjointness
+argument is plane-specific: in higher dimension, tangent lines with
+different centres may be skew.
+
+\section{Why uniform extension needs four points}
+\label{sec:obstructions}
+
+The number of selected points changes what adjacency can detect. Two
+centres give only rows and columns. A third adds division, but division
+alone allows every automorphism of the multiplicative group. The fourth
+centre will add a translated quotient, linking this multiplicative data
+to the field's additive structure.
+
+
+\begin{proposition}[One point]\label{prop:one-point}\coverage{absent}
+For a one-point arc in $\PG(n,q)$, the continuation graph is a disjoint
+union of $1+q+\cdots+q^{n-1}$ copies of $K_q$.  This structure permits permutations of individual clique fibres;
+semilinear rigidity does not hold uniformly for one-point arcs.
+\end{proposition}
+
+\begin{theorem}[Two points]\label{thm:rook}\coverage{absent}
+If $K=\{a,b\}$ in any projective plane of order $q$, then
+\[
+  G_K\cong K_q\mathbin{\square}K_q.
+\]
+In particular, its isomorphism type is independent of the projective plane.
+\end{theorem}
+
+\begin{proof}
+The legal points are precisely the $q^2$ points outside $ab$.  Map such a
+point $x$ to the ordered pair of tangent lines $(ax,bx)$.  Every choice of
+one tangent at $a$ and one at $b$ meets in one legal point, and two points
+are adjacent exactly when they share one of these tangent lines.  This is
+rook adjacency.
+\end{proof}
+
+In the Desarguesian case, write $q=p^e$. Then
+\[
+ |\Aut(K_q\mathbin{\square}K_q)|=2(q!)^2,
+ \qquad |\Stab_{\PGammaL(3,q)}\{a,b\}|=2e q^2(q-1)^2.
+\]
+The first count comes from independent row and column permutations and
+their interchange. For the second, normalize $a,b$ to the first two
+coordinate points: their pointwise linear stabilizer has matrices
+\[
+ \begin{pmatrix} A&0&u\\0&B&v\\0&0&C\end{pmatrix},
+ \qquad ABC\ne0.
+\]
+Quotient by scalars and allow a field automorphism and the interchange
+of $a,b$. Thus the ratio of the graph group order to the ambient
+stabilizer order is $((q-2)!)^2/e>1$ for $q\ge4$, since
+$e\le q-2<((q-2)!)^2$. Even before any kernel is factored out,
+the ambient group is too small: two-point rigidity fails for every $q\ge4$.
+
+\begin{theorem}[Three points]\label{thm:triangle}\coverage{absent}
+Let $K$ be a triangle in $\PG(2,q)$.  With its vertices normalized to the
+coordinate points, the legal vertices are $(x:y:1)$ with
+$x,y\in\F_q^\times$, and
+\begin{equation}
+ (x,y)\sim(x',y')
+ \Longleftrightarrow
+ x=x'\ \text{or}\ y=y'\ \text{or}\ x/y=x'/y'.
+ \label{eq:triangle}
+\end{equation}
+Every automorphism $\alpha$ of the multiplicative group $\F_q^\times$ therefore
+induces the graph automorphism $(x,y)\mapsto(\alpha(x),\alpha(y))$.  This is
+not induced by a semilinear collineation unless $\alpha$ is a field
+automorphism.
+\end{theorem}
+
+\begin{proof}
+The three equalities in \eqref{eq:triangle} are the three tangent-pencil parameters.  A
+multiplicative-group automorphism preserves equality and quotient. For $q=2$
+the multiplicative group is trivial, so the conclusion holds directly.
+Assume $q\ge3$. Each pencil trace then contains at least two legal points
+and determines its ambient line. If an
+ambient semilinear collineation induces this map, preservation of the three
+pencil partitions forces it to fix the triangle vertices.  In normalized
+coordinates it has the form
+$(x,y)\mapsto(A\sigma(x),B\sigma(y))$ for a field automorphism $\sigma$.
+Since $\alpha(1)=1$, equality with the displayed graph automorphism forces
+$A=B=1$ and $\alpha=\sigma$.
+\end{proof}
+
+Inversion on $\F_q^\times$ is nonambient for every $q\ge5$.
+Otherwise $p^r\equiv-1\pmod{q-1}$ for some $0\le r<e$, whereas
+$1\le p^r\le q/p\le q/2<q-2$. (Inversion is a field automorphism
+at $q=3,4$.) These examples separate
+intrinsic centre recovery from ambient semilinear extension. The failure
+is uniform, not absolute: at $q=3$ the triangle graph is $K_4$, and its
+triangle stabilizer $C_2^2\rtimes S_3\cong S_4$ acts faithfully on all four
+legal points.
 
 \section{Recognition and coordinate certificates}\label{sec:algorithm}
 
@@ -776,7 +849,7 @@ vertices, so Lemma~\ref{lem:frame-clique} places it in a tangent trace; equal
 sizes give equality.
 \end{proof}
 
-\begin{theorem}[Polynomial recognition over a supplied field]\label{thm:recognition}\coverage{absent}\uses{lem:seeds,thm:centres,prop:normal}
+\begin{theorem}[Polynomial recognition over a supplied field]\label{thm:recognition}\coverage{absent}\uses{lem:seeds,lem:centre-seeds,prop:normal,prop:size}
 Given a graph $G$ with $n$ vertices and a model of $\F_q$, $q\ge9$,
 one can decide in polynomial time whether $G$ is a frame continuation
 graph and, if it is, output a bijection
@@ -784,23 +857,23 @@ graph and, if it is, output a bijection
  \phi:V(G)\longrightarrow
  \{(x,y)\in(\F_q\setminus\{0,1\})^2:x\ne y\}
 \]
-that preserves and reflects adjacency. A coarse bound for the procedure
-below is $O(n^6)$ elementary adjacency and field operations after rejecting
+that preserves and reflects adjacency. The procedure below uses
+$O(n^{7/2})$ elementary adjacency and field operations after rejecting
 $n\ne(q-2)(q-3)$. A supplied coordinate certificate can be checked using
 $O(n^2)$ field operations and adjacency tests.
 \end{theorem}
 \begin{proof}
 \emph{Recover the partitions.}
-Enumerate four-cliques and apply Lemma~\ref{lem:seeds}, retaining only
+First check that the graph is simple and every vertex has degree
+$d=4(q-4)$, rejecting otherwise. Enumerate four-cliques by choosing
+a vertex and three of its neighbours, and apply Lemma~\ref{lem:seeds}, retaining only
 clique closures of size $q-3$, deduplicating equal sets. Reject unless
 there are $4(q-2)$ traces.
-Construct their disjointness graph. Recover centre classes as the large
-maximal cliques from Theorem~\ref{thm:centres}; concretely, enumerate
-five-cliques $Q$ and form $Q\cup\bigcap_{B\in Q}N_{D_K}(B)$, again
-deduplicating equal sets. In a true
-frame graph every such five-clique is contained in one centre class,
-and a trace outside that class is disjoint from at most one member of
-it, so this closure is exactly the class. Reject unless there are four
+Construct their disjointness graph. For each edge $AB$, form
+$\{A,B\}\cup(N_{D_K}(A)\cap N_{D_K}(B))$, retaining only closures
+that are cliques of size $q-2$ and deduplicating equal sets.
+Lemma~\ref{lem:centre-seeds} proves that these are exactly the centre
+classes for a true frame graph. Reject unless there are four
 classes of $q-2$ traces partitioning the recovered traces and each class
 partitions $V(G)$. These tests do not alone certify recognition.
 
@@ -854,12 +927,18 @@ pass these tests. Conversely the final check itself proves that a passing
 map is an isomorphism; no promised geometry is needed for soundness.
 
 \emph{Cost.}
-There are $O(n^4)$ four-vertex subsets, with $O(n^2)$ work per closure and
-clique check. After the trace-count check the disjointness graph has
-$O(\sqrt n)$ vertices, so enumerating and checking its five-cliques costs
-$O(n^{7/2})$. Table completion, cyclic-table checks and all generator
-images take polynomial time bounded by $O(q^3+qn^2)$ here. The initial
-vertex count gives $q=O(\sqrt n)$, establishing the stated coarse bound.
+After the vertex-count and degree checks, $q,d=O(\sqrt n)$.
+Choosing a vertex and three neighbours gives $O(nd^3)=O(n^{5/2})$
+four-clique candidates. Each common-neighbour closure costs $O(n)$
+adjacency tests. Check its size before testing whether it is a clique;
+a closure of size $q-3$ needs only $O(q^2)=O(n)$ further tests.
+Thus trace recovery takes $O(n^{7/2})$ operations. Equal retained sets
+can be deduplicated by sorting their ordered vertex lists within this bound.
+After the trace-count check, $D_K$ has $O(\sqrt n)$ vertices, so its
+construction and edge-seed closure tests take at most $O(n^2)$ operations.
+Table completion, cyclic-table checks and generator images take
+$O(q^3+qn^2)=O(n^{5/2})$ operations. These bounds apply to arbitrary
+inputs passing the preliminary checks, not only to frame graphs.
 The last pairwise adjacency check is also the independent certificate
 verification procedure.
 \end{proof}
@@ -913,7 +992,8 @@ The two resolutions share all twelve blocks at $q=5$ and no blocks at $q=8$.
 \end{proposition}
 \end{samepage}
 \begin{proof}[Computational proof and completeness]
-The certificate bundle named in Appendix~\ref{sec:verification} enumerates
+The archived census bundle~\cite{CensusArtifact}, identified in
+Appendix~\ref{sec:verification}, enumerates
 all cliques of size $q-3$, all exact covers of the vertex set by such
 cliques, and all exact covers of the edge set by the resulting partitions.
 At each recursive step an uncovered vertex or edge is chosen and every
@@ -1051,9 +1131,19 @@ census is an exact computer-assisted result, independently replayed using
 different graph and clique algorithms; its trust base includes Python,
 SageMath, nauty, and their arithmetic and graph implementations.
 
-The public bundle contains \texttt{verification/boundary.json}, its
-SHA-256 manifest, the generator, the independent replay, and the
-coordinate-certificate checker. From the repository root,
+The computational evidence for Proposition~\ref{prop:boundary} is the
+version $0.1.0$ archive~\cite{CensusArtifact}, DOI
+\href{https://doi.org/10.5281/zenodo.22651106}{10.5281/zenodo.22651106},
+corresponding to the following repository and immutable Git revision:
+\begin{quote}\small
+\url{https://github.com/tavisrudd/continuation-graph-rigidity}\\
+\texttt{31eff40f6cfd61dd1996e4199da2e22f3522c21c}
+\end{quote}
+Its \texttt{verification/boundary.json} is byte-identical to the census
+certificate used here. The archive contains the original census generator,
+independent replay and checksums. This revised manuscript and its improved
+recognizer are later changes; the census proposition continues to use the
+original archived evidence. From the repository root,
 \texttt{make check} checks the statement/evidence links and replays the
 finite census and deterministic recognition tests. \texttt{make boundary}
 regenerates the census with SageMath; \texttt{make benchmark} records a
@@ -1078,9 +1168,10 @@ Anthropic Claude. Under the author's direction, the systems assisted
 throughout with proof exploration, literature research, symbolic and finite
 computation, code and formal-proof development, verification, and manuscript
 drafting and revision. The author assumes responsibility for the manuscript and its accompanying
-artifacts; this first draft remains subject to author and external review.
+artifacts; this revised draft remains subject to author and external review.
 
 \begin{thebibliography}{99}
+\small
 
 \bibitem{BCPS}
 R.~A.~Bailey, P.~J.~Cameron, C.~E.~Praeger and C.~Schneider,
@@ -1090,7 +1181,9 @@ R.~A.~Bailey, P.~J.~Cameron, C.~E.~Praeger and C.~Schneider,
 \bibitem{FHMW}
 N.~Franceti\'c, S.~Herke, B.~D.~McKay and I.~M.~Wanless,
 \newblock On Ryser's conjecture for linear intersecting multipartite hypergraphs,
-\newblock arXiv:1508.00951v3, 2015.
+\newblock \emph{European J. Combin.} \textbf{61} (2017), 91--105.
+\newblock doi:10.1016/j.ejc.2016.10.004; arXiv:1508.00951v3 (2015).
+Lemma numbering cited here refers to this arXiv version.
 
 \bibitem{BGMS}
 A.~Bhattacharya, A.~Godinho, P.~Majumder and N.~Singhi,
@@ -1102,6 +1195,12 @@ A.~Bruno and M.~Mella,
 \newblock The automorphism group of $\overline{M}_{0,n}$,
 \newblock \emph{J. Eur. Math. Soc.} \textbf{15} (2013), 949--968.
 \newblock doi:10.4171/JEMS/382; arXiv:1006.0987.
+
+\bibitem{CensusArtifact}
+T.~Rudd,
+\newblock Reconstructing projective frames from their continuation graphs,
+\newblock computational artifact, version 0.1.0, Zenodo, 2026.
+\newblock \href{https://doi.org/10.5281/zenodo.22651106}{doi:10.5281/zenodo.22651106}.
 
 \bibitem{Deza}
 M.~Deza,

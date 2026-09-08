@@ -1,6 +1,7 @@
 """Check displayed geometric witnesses; optionally replay arithmetic with Sage."""
 import argparse
 import json
+import hashlib
 from itertools import combinations
 from pathlib import Path
 from frame_model import Field, model
@@ -51,6 +52,31 @@ def main():
         else:
             assert points[2] == (3, 2) and points[5] == (4, 3)
     print('PASS five-clique words and both displayed exceptional involutions')
+
+    metadata = json.loads((ROOT / 'evidence.json').read_text())['entries']['boundary']['archived_artifact']
+    assert hashlib.sha256((ROOT / 'boundary.json').read_bytes()).hexdigest() == metadata['boundary_sha256']
+    for q in (9, 16, 25):
+        f, points, words, _, _ = model(q)
+        index = {word: i for i, word in enumerate(words)}
+        actions = [lambda a,b,c,d: (b,a,f.div(1,c),f.div(1,d)),
+                   lambda a,b,c,d: (c,f.div(1,b),a,f.sub(1,d)),
+                   lambda a,b,c,d: (f.sub(1,a),f.sub(1,b),d,c)]
+        generators = [tuple(index[action(*word)] for word in words) for action in actions]
+        frobenius = tuple(index[tuple(f.power(a,f.p) for a in word)] for word in words)
+        assert all(tuple(g[frobenius[i]] for i in range(len(words))) ==
+                   tuple(frobenius[g[i]] for i in range(len(words))) for g in generators)
+        identity = tuple(range(len(words)))
+        def generated(permutations):
+            seen = {identity}; todo = [identity]
+            while todo:
+                p = todo.pop()
+                for g in permutations:
+                    h = tuple(g[p[i]] for i in range(len(words)))
+                    if h not in seen: seen.add(h); todo.append(h)
+            return seen
+        assert len(generated(generators)) == 24
+        assert len(generated(generators + [frobenius])) == 24*f.e
+    print('PASS displayed Hamming generators and Frobenius, q=9,16,25')
 
     if args.sage:
         from sage.all import GF, PolynomialRing

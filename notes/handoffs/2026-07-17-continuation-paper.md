@@ -21,7 +21,7 @@ reconstruction remains outside the headline under the existing N1-only ruling.
   repository-local commit signing is disabled by author instruction. Report:
   `notes/2026-09-08-c1132-continuation-referee-response.md`.
 
-- The 15-page revised draft is `papers/continuation-graph-rigidity/continuation_graph_rigidity.tex`
+- The revised draft is `papers/continuation-graph-rigidity/continuation_graph_rigidity.tex`
   and its deterministic PDF. The stable q>=9 proof is written mathematics; the graph
   determines q and every graph isomorphism extends uniquely semilinearly.
 - C1108 reconciled completed C295 with the paper and compared exact hypergraph/cross-ratio
@@ -35,7 +35,12 @@ reconstruction remains outside the headline under the existing N1-only ruling.
 - The finite data replay under independent Python/nauty construction and Sage 10.7/10.9.
   Source-only claim/evidence checks and reproducible PDF builds pass. No Lean theorem is claimed.
   The prototype recognizer is slower than generic graph isomorphism on the recorded controls.
-- C1110 is active: the exported draft received a fresh-context sub-agent referee review.
+- C1110 addressed the follow-up referee feedback: exact archived census citation,
+  edge-seed centre recovery and O(n^(7/2)) recognition, explicit Hamming generators,
+  uniform minimality calculations and a continuous frame proof. Authority checks
+  pass; standalone synchronization remains for this revision. Report:
+  `notes/2026-09-08-c1110-continuation-second-referee-revision.md`.
+- Earlier C1110 reviews: the exported draft received a fresh-context sub-agent referee review.
   No main-result defect was found; all local findings R1–R5 are now corrected
   and the authority checks pass. The uncited Clebsch aside was removed.
   Review: `notes/2026-09-07-c1110-continuation-cold-referee.md`.
@@ -64,8 +69,8 @@ reconstruction remains outside the headline under the existing N1-only ruling.
   Feedback: `notes/2026-09-07-c1110-continuation-final-reader-polish.md`.
   Qualified external subject review and priority diligence remain distinct from
   the completed sub-agent review and local corrections.
-  The author handles GitHub and DOI actions; add the published artifact citation
-  to the verification appendix using version DOI `10.5281/zenodo.22651106`.
+  The author handles GitHub and DOI actions. The manuscript now cites the
+  verified census artifact, version DOI `10.5281/zenodo.22651106`, with its exact Git revision.
   Concept DOI `10.5281/zenodo.22651105` is verified and linked in the README.
 - **C271** — obtain/read the named Drake–Sané and Metsch sources and complete the auth-gated
   citation diligence for N2; keep N2 softened meanwhile. Existing audit:

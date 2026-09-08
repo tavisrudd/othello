@@ -156,13 +156,13 @@
     },
     {
       "cautions": "Written argument or scope remark; no Lean formalization claimed.",
-      "conclusion": "Polynomial recognition with a quadratic-time coordinate-certificate check",
+      "conclusion": "O(n^(7/2)) recognition after degree and vertex-count checks, with O(n^2) coordinate-certificate verification",
       "coverage": "absent",
       "declarations": [],
       "hypotheses": "Arbitrary graph and supplied finite field, q>=9",
       "label": "thm:recognition",
       "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
-      "statement_sha256": "7a5c80ebb1d1d9e6af81bfe45fa594cca9b43af94b5b64c57c5113acbc395887",
+      "statement_sha256": "19fff34efd2f72dcada2579557f318acdb55dad7a7f014746e85854161ae96b2",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     {
@@ -251,6 +251,17 @@
       "label": "cor:code-extension",
       "objects": "The four-coordinate code in D^4 and its Hamming isometries",
       "statement_sha256": "bfcb97d0380d2253b091d170075cd47f738073081fcde4bcf27ac00d01d902a3",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written geometric proof; no Lean formalization claimed.",
+      "conclusion": "An outside trace meets the disjointness neighbourhood of a class at most once; edge closures of size q-2 that are cliques recover exactly four centre classes",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "Desarguesian projective frame, q>=9",
+      "label": "lem:centre-seeds",
+      "objects": "Disjointness graph of recovered tangent traces and frame centre classes",
+      "statement_sha256": "e2436986f05526369ed67b43158e30d2a71458666c0726e441fd2c36cba9ff5b",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     }
   ],
