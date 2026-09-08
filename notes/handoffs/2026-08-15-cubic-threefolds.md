@@ -44,12 +44,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   passes under both manuscripts; intrinsic recovery and locus novelty remain
   separate follow-on gates. **C1131 is complete:** selective manuscript
   upgrades are implemented; both authority and standalone gates pass with
-  matching PDFs (20 and 19 pages), local commits b3da4cc/d72ad45. Report:
+  matching PDFs (20 and 19 pages). Report:
   `../2026-09-08-c1131-selective-manuscript-upgrades.md`.
   The author-requested fresh full-paper cold reviews with diffs are complete:
   both recommend acceptance after minor revision; their corrections and
   targeted follow-up are recorded in
-  `../2026-09-08-cubic-post-upgrade-cold-read.md`.
+  `../2026-09-08-cubic-post-upgrade-cold-read.md`. The four subsequent
+  targeted proof/statement repairs are implemented and validated; current
+  export details: `../2026-09-08-cubic-targeted-statement-repairs.md`.
   C978/C956 stay open for the author-retained custom protocol once located;
   C958 retains the next constructive work on complete ground-field maps. Final
   dispositions: `../2026-09-08-c1128-final-dispositions.md`; placement:

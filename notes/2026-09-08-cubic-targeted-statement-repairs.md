@@ -2,8 +2,8 @@
 
 **Date:** 2026-09-08. **Lane:** cubic-threefolds. **Tasks:** C978/C956 remain open.
 **Authorization:** the author supplied four prioritized edits A–D after export.
-**Status:** all four edits implemented; both authority gates and rendered-page
-inspection pass. Local mirror synchronization pending.
+**Status:** all four edits implemented and exported. Both authority and mirror
+gates pass; rendered pages inspected and paired PDFs byte-identical.
 
 1. **Quotient section:** replace generic injectivity as a purported
    characteristic-free birationality criterion by the supplied isomorphism on
@@ -47,7 +47,17 @@ Both authority `make check` gates pass (2026-09-08):
   19 pages, 176145 bytes.
 - Rendered affected pages inspected: Paper 1 pages 13, 16–17; Paper 2 pages
   5 and 7. No clipping or layout defect; neither paper gained a page.
-- `git diff --check` passes. Committed exports and matching PDF check pending.
+- `git diff --check` passes. Both standalone `make check` gates also pass.
+- Authority commit: `f879abf24`. Ordinary local mirror commits:
+  `43b1c2c` (one-stabilization), `d06806d` (sharpness).
+- Export plans and audits had zero findings; post-build, post-commit
+  verification passes and both mirror worktrees are clean. Paired authority
+  and mirror PDFs are byte-identical. No push was performed.
+
+| Paper | Export content SHA-256 | PDF SHA-256 |
+|---|---|---|
+| One-stabilization | `bfedb6eca5e2b3d353e771b773bd33d9899becee820123f187733aef132e1819` | `6ee4f570d5954262dff595b260900d2dda058a1560e9921f122c433647928ffe` |
+| Sharpness | `58628aef12045fa3b03b1fd2232572808c8766ba0a4df4f1845ab56f2d6e5da3` | `77bdc33b24d0fc4b84c6c7f5d5c69253d61e3c9357ed62f286906e609b7eb965` |
 
  The edits retain the accepted coefficient
 comparison, persistence and torus construction; no earlier exposition request
