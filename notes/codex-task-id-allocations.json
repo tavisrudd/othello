@@ -4769,8 +4769,17 @@
       "last": 1126,
       "purpose": "Build the proposed campaign and library navigation with contextual inspection",
       "sequence": 530
+    },
+    {
+      "count": 1,
+      "first": 1127,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1127,
+      "purpose": "Critically assess and address the September 8 ChatGPT/Astra referee feedback on the compositional-recovery manuscript",
+      "sequence": 531
     }
   ],
-  "next_id": 1127,
+  "next_id": 1128,
   "schema": "codex-task-id-allocations-v1"
 }
