@@ -276,3 +276,11 @@ native/WASM, editable capacities, forward-checked application and 2D map selecti
 Original six-repair target needs 20 added units. Rejected dispatch variants and
 accepted single/four-worker performance controls are retained. Report:
 `notes/2026-09-08-c1130-capacity-design.md`. User requested scheduling next.
+
+## 2026-09-08 — C1130 scheduling and direct input controls
+
+Private `ec3185c`: native/WASM resource scheduling, GPU checkpoint and generic
+allocation imports, direct capacity grips/target sliders, shared hover/click pins,
+and QEC double-click parity. Native and actual browser gates pass; LRC/QEC
+accepted payloads preserved. Report: ../2026-09-08-c1130-scheduling-and-direct-inputs.md.
+Full C1130 remains open for CampaignSession/composition integration and glossary.

@@ -67,8 +67,14 @@ workspace (8769 and 8770), with retained plans and explicit snapshot/runnable
 contexts. Main campaign runtime/console integration remains open. Report:
 `notes/2026-09-08-c1130-application-wasm-workspace.md`.
 Private `5b327eb` adds exact native/WASM capacity design and editable recovery
-inputs with a two-axis map; native performance gates pass. User-selected next UI
-application: scheduling. Report: `notes/2026-09-08-c1130-capacity-design.md`.
+inputs with a two-axis map; native performance gates pass. Report:
+`notes/2026-09-08-c1130-capacity-design.md`. Private `ec3185c` adds native/WASM
+resource scheduling, draggable capacities/targets, hover previews with click pins,
+and QEC double-click parity. Browser and native gates pass; accepted LRC/QEC
+payloads remain unchanged. FT10 is still inspect-only; default scheduling executes
+GPU checkpoint batches. Next: CampaignSession/composition integration and the
+private glossary reconciliation. Report:
+`notes/2026-09-08-c1130-scheduling-and-direct-inputs.md`.
 Preserve public-core loading of separately compiled/obfuscated private packages;
 canonical WASM engine plus extensions, not a mandatory private assembly build.
 Start with a concrete contract over composition, compiled LRC queries and QEC;
