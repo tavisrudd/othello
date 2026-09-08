@@ -2,7 +2,7 @@
 
 **Lane**: `complete-ports`
 **Date**: 2026-09-08
-**Status**: consistency repairs implemented; validation pending.
+**Status**: complete; authority and standalone release gates pass.
 
 The user supplied a source/diff follow-up on standalone `325d4de`, reporting
 no new mathematical error and identifying two residual theorem-ending
@@ -63,3 +63,14 @@ The final deterministic rebuild passes at 44 pages, warning-free. Rendered
 pages 28 and 36 were inspected: all three qualified endings are complete and
 legible, and the projective table remains intact. The abstract and portfolio
 summary are unchanged by this pass.
+
+## Final identity
+
+Authority `32f77d450` was synchronized by the guarded exporter to local
+standalone forward commit `6e659b0`. Both release gates pass at 44 pages,
+warning-free, 32 claims, and four unchanged Lean terminals. Export verification
+passes with 59 tracked files and content SHA-256
+`21c53551b190c9b75fbe26cb36d8a07ca14ab9d720ae5ef11669e96a7b3e1219`.
+The two PDF hashes match:
+`cb5e4f3ba7fd4ae8743bf7064af3e836301f247616a5305ad97380363d71a15b`.
+The local standalone worktree is clean. No push or deposit occurred.

@@ -26,8 +26,8 @@ deposit.
 - **Canonical identity**: `complete-ports` — *Exact Compositional Transfer of Bounded Linear
   Recovery*. Approved license MIT.
 - **Standalone paper repository**: `tavisrudd/compositional-recovery` at
-  `~/src/math-papers/compositional-recovery`, local commit `325d4de` (44-page
-  focused abstract and qualified confinement summary, verified, unpushed). The obsolete bundled engine and its
+  `~/src/math-papers/compositional-recovery`, local commit `6e659b0` (44-page
+  qualified theorem endings and README boundary, verified, unpushed). The obsolete bundled engine and its
   checker have been removed in separate forward commits.
 - **Ergodis engine**: the engine, its benchmark programme, and the C985 optimization sequel live in
   the [`ergodis`](2026-09-05-ergodis-lane.md) lane.
@@ -122,7 +122,9 @@ follow-up and bounded terminology/navigation edits are recorded in
 endorsed the focused abstract; its sole remaining prose qualification is repaired.
 The abstract/copy-edit and portfolio-summary update are recorded in
 `notes/2026-09-08-complete-ports-abstract-copyedit.md`; the review is in
-`notes/2026-09-08-complete-ports-referee-followup.md`. The browser could not
+`notes/2026-09-08-complete-ports-referee-followup.md`. A subsequent supplied
+review prompted the completed theorem-ending and README qualification sweep in
+`notes/2026-09-08-complete-ports-qualification-sweep.md`. The browser could not
 access the public Ergodis URL; artifact accessibility and implementation audit
 remain part of C953. This bounded early review does not complete C953.
 

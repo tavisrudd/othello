@@ -1159,3 +1159,13 @@ follow-up is `notes/2026-09-08-complete-ports-referee-followup.md`.
 Paper standalone `325d4de` passes the 44-page release gate. Summary standalone
 `5266144` matches its authoritative README. Both are local and unpushed;
 C325 and the aggregate C953 gate remain open.
+
+## 2026-09-08 — eventuality consistency sweep
+
+Completed the supplied theorem-ending/README corrections and found the same
+ambiguity in the projective-simplex ending. All three now retain their inner
+thresholds; the README fixes the original leaf context boundary. Three reviewed
+claim rows and digests agree; proofs and formal coverage remain unchanged.
+`notes/2026-09-08-complete-ports-qualification-sweep.md` records the dispositions,
+source sweep, rendered inspection, and gates. Standalone `6e659b0` is verified,
+44 pages, and unpushed. No optional structural reordering was performed.
