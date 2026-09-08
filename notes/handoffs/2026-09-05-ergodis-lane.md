@@ -323,6 +323,12 @@ WASM accepts user GF(2) CampaignSpec/checkpoints; native corpus evolution and op
 RunBundle-to-execution conversion remain unsupported. Allocate their bridge only
 as an explicit implementation slice; never imply a bundle is executable by opening it.
 
+**C1126 complete**: working Campaigns/Library navigation, real native campaign and
+browser-session listing, inspector beside candidate analysis, compact historical
+compilation with stage selection. Desktop/narrow browser workflow gates pass.
+Report: `notes/2026-09-07-c1126-campaign-information-architecture.md`.
+Preview remains `http://127.0.0.1:8767/`; this is the concrete IA review surface.
+
 **Next gate**: select and allocate a second real application demonstration (recovery/helper
 costs or QEC decoding) to show another engine capability. Browser analytical export
 and larger-store pagination also require their own slices.

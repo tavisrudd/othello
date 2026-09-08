@@ -5637,3 +5637,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1119 `[cubic-threefolds]` [COMPLETE 2026-09-07]** — finite-index slice degree divisibility, full scroll example and gcd-index universal CH0 consequence integrated after main proofs; matched authority and standalone gates → `notes/2026-09-07-c1119-finite-index-torus-slices.md`
 
 - **C1125 `[ergodis]` [REPORTED 2026-09-07]** — Portable bundle/WASM operator workspace and simplified unified campaign view → `notes/2026-09-07-c1125-portable-console.md`
+
+- **C1126 `[ergodis]` [REPORTED 2026-09-07]** — Working campaign/library navigation and contextual inspection → `notes/2026-09-07-c1126-campaign-information-architecture.md`
