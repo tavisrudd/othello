@@ -3,10 +3,11 @@
 **Lane**: `ergodis`
 **Status**: IN PROGRESS, started by Tavis’s `go` on 2026-09-08.
 Initial contract: `2026-09-08-c1130-execution-contract-proposal.md`.
-Concrete interface/package ABI design is in progress; no kernel migration yet.
+Experimental interface/package loading is implemented; no production kernel migration.
 Loading/execution spike design: `2026-09-08-c1130-private-module-loading-spike.md`.
-Next implementation gate: independently loaded private LRC/QEC providers in an
-unchanged public host, with native/WASM parity and retained native cost evidence.
+Independent LRC/QEC loading and native/browser transcript parity pass; retained
+performance and distribution gates remain open. Results:
+`2026-09-08-c1130-module-loading-results.md`.
 
 ## Context prerequisites
 
