@@ -1,0 +1,69 @@
+{
+  "date": "2026-09-08",
+  "scope": "Positive source verification; no novelty or priority verdict; no forward-citation closure.",
+  "full_text_sources": 0,
+  "sources": [
+    {
+      "key": "arXiv:math/0507232",
+      "version": "math/0507232v3",
+      "title": "Przyjalkowski: Quantum cohomology of smooth complete intersections in weighted projective spaces and singular toric varieties",
+      "url": "https://arxiv.org/pdf/math/0507232v3",
+      "read_depth": "partial",
+      "passages": [
+        "Theorem 1.1 and its hypotheses",
+        "Theorem 2.3.5 reconstruction statement",
+        "Section 2.6, definitions, Proposition 2.6.4, Theorem 2.6.6 and proof"
+      ],
+      "access": "PDF page 9 rendered locally and inspected for both displayed matrices",
+      "pdf_sha256": "62e3e974bbddb580acade0728bf6513076c4548c15c3cf885c809f6eb8052e0c",
+      "pdf_bytes": 258222
+    },
+    {
+      "key": "arXiv:1911.08949",
+      "version": "1911.08949v3",
+      "title": "Kuznetsov–Prokhorov: Rationality of Fano threefolds over non-closed fields",
+      "url": "https://arxiv.org/pdf/1911.08949v3",
+      "read_depth": "partial",
+      "passages": [
+        "Section 2.3 through Theorem 2.7",
+        "Section 3.1 through Theorem 3.3",
+        "Section 3.2 through Theorem 3.5"
+      ],
+      "access": "Extracted PDF text",
+      "pdf_sha256": "0cdc0dd962fb6af047976dea0976566d9a256b801842aad388133cc677b9e203",
+      "pdf_bytes": 789442
+    },
+    {
+      "key": "arXiv:1303.3288",
+      "version": "1303.3288v3",
+      "title": "Coates–Corti–Galkin–Kasprzyk: Quantum Periods for 3-Dimensional Fano Manifolds",
+      "url": "https://arxiv.org/pdf/1303.3288v3",
+      "read_depth": "partial",
+      "passages": [
+        "Sections 3–5: B1, B2 and B3 descriptions and period formulas"
+      ],
+      "access": "Extracted PDF text; corroborative descriptions only, not a replacement for the full quantum matrix",
+      "pdf_sha256": "a01ad88951e72c9b6ef16e8be2e08408bc6e6cf20e9133befe009d62782d9686",
+      "pdf_bytes": 1528940
+    }
+  ],
+  "discovery_queries": [
+    "Przyjalkowski \"2.6.6\" quantum cohomology",
+    "Przyjalkowski counting matrix 240 1248 48 160 del Pezzo",
+    "Przyjalkowski quantum cohomology weighted complete intersections counting matrices",
+    "\"1248\" \"240\" \"quantum\" Fano",
+    "\"2.6.6\" \"counting\" Fano"
+  ],
+  "local_inputs": [
+    {
+      "path": "papers/cubic-stabilization-m1/sections/02-qdm-marker.tex",
+      "sha256": "3ea4d7a5ef5b283aab4b068b975f6f6646ff6a3a219f4bc1721eb59c6ff1357d",
+      "bytes": 38415
+    },
+    {
+      "path": "notes/2026-09-08-c1128-comparison-rigidity-audit.md",
+      "sha256": "0ff13c9248f8ccaabea7dbae02a1ca9355b4c5935251ecf28c2fd2a48ad88547",
+      "bytes": 21533
+    }
+  ]
+}

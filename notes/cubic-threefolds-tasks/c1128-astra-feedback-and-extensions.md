@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 
-**Status:** active; priority 1–3 audit complete, 2026-09-08
+**Status:** active; priorities 1–3 and Fano-input audit complete, 2026-09-08
 
 ## Goal and source
 
@@ -83,10 +83,10 @@ by this intake request.
 
 ## Next action
 
-Audit the universal rational block calculation and the primary quantum
-inputs for the degree-one and degree-two Fano applications. The comparison
-gate supports a separately defined lattice count; it does not itself verify
-those family inputs. Manuscript inclusion still awaits the author's decision.
+Audit the selected and residual torus identifications, the explicit orbit
+normalization, and exact trivial-stabilization linearization thresholds.
+Check primary literature and existing C958/C963/C965/C966 ownership before
+recommending additions. Manuscript inclusion still awaits the author's decision.
 
 ## Accepted audit chunk: priorities 1–3
 
@@ -102,4 +102,18 @@ block, so it did not supply a counterexample to this stronger invariant.
 The audit identifies the graded completed z-enhancement wording and explicit
 persistence hypotheses as presentation repairs. Exact local identities and
 negative controls pass; source-read depths and hashes are recorded. No
-manuscript or Lean source changed, and no new Fano application is yet claimed.
+manuscript or Lean source changed in that chunk.
+
+## Accepted audit chunk: universal calculation and Fano inputs
+
+Report: `notes/2026-09-08-c1128-fano-audit.md`.
+The rational Sylvester calculation, direct original-basis Frobenius
+recurrence, and independent Fraction checker agree. Przyjalkowski's v3
+matrix theorem supplies the degree-one and degree-two inputs with the
+required anticanonical normalization. The rank-four ambient cohomology is
+all even cohomology here. Under the previously audited geometric inputs,
+degree one is detected by I_exp and degree two by I_lat; this supports
+the proposed complete index-two one-stabilization classification over C.
+Source verification is partial and positive; no novelty verdict or
+manuscript inclusion is authorized by this finding. The stronger spectrum
+also separates the three degrees after one stabilization.

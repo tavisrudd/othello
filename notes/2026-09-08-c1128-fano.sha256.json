@@ -1,0 +1,34 @@
+{
+  "notes/2026-09-08-c1128-fano-audit.md": {
+    "sha256": "904415d0596237a38df66ed9e9324912130118501d177335376d77f8a3b7908d",
+    "bytes": 13474
+  },
+  "notes/2026-09-08-c1128-fano-checks.py": {
+    "sha256": "050fdb007b0caaebc1d8db034c55b828a90033d8110255698f051907a883cde5",
+    "bytes": 5574
+  },
+  "notes/2026-09-08-c1128-fano-checks.json": {
+    "sha256": "87c25d53cede01caa29accb66a30717a73cd57879e15c11ba5f8e349e9ce97f4",
+    "bytes": 2774
+  },
+  "notes/2026-09-08-c1128-fano-independent.py": {
+    "sha256": "8ae52ba363c324651730e963725413ff84ab67860a133eeec7af9289e20c07d1",
+    "bytes": 3011
+  },
+  "notes/2026-09-08-c1128-fano-independent.json": {
+    "sha256": "8e93f2ecae8b05e8c2df538d682c1ca55c4e55db2e0305bc714ff3830d325e5c",
+    "bytes": 627
+  },
+  "notes/2026-09-08-c1128-fano-sources.json": {
+    "sha256": "83f72b0a932139033ba953323a74937babf3367791b7ee6ccc1b7192ac973083",
+    "bytes": 2763
+  },
+  "notes/cubic-threefolds-tasks/c1128-astra-feedback-inputs/stabilization_extension_checks.py": {
+    "sha256": "47abeae50ab4e34f1a91d1d608dd35b085710532558697d0c8e4867fb24adbaf",
+    "bytes": 5318
+  },
+  "notes/cubic-threefolds-tasks/c1128-astra-feedback-inputs/stabilization_extension_checks.json": {
+    "sha256": "d4a2d9ca936dc41736afc638b3730602fa6626fa397deae3f52e7cce2ad6ea39",
+    "bytes": 2575
+  }
+}
