@@ -108,9 +108,14 @@
         "aspect": "stabilization",
         "matched": "The invariant field is K(s_1,...,s_m); the exact lower bound is imported from the cubic level theorem.",
         "requirement": "Adjoined variables are fixed by the acting torus."
+      },
+      {
+        "aspect": "ground field",
+        "matched": "The manuscript gives the split-torus argument over arbitrary characteristic-zero k directly: diagonalization and a basis of the kernel weight lattice generate the rational invariant field.",
+        "requirement": "Popov works over an algebraically closed field."
       }
     ],
-    "pinpoint": "arXiv:1110.2410v4, Theorem 4; Theorem 5 and Corollary 5 for prior examples",
+    "pinpoint": "arXiv:1110.2410v4, Theorem 4 and Lemma 5; Theorem 5 and Corollary 5 for prior examples",
     "used": "A birationally linear split-torus action has rational invariant field; prior nonlinearizable rank-two actions."
   },
   "rudd-one-stabilization": {

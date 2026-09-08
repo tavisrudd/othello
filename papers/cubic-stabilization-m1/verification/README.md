@@ -3,12 +3,13 @@
 This registry and the bundled Lean package cover the primary paper and both
 companion manuscripts in this repository.
 
-The proof spines are structural apart from the computations in
-`evidence.json`, which are the only places a symbolic program is invoked as a
-premise.  None of them is certificate-checked; each is a trusted execution,
-cross-checked as its registry entry records.  Exactly one statement now invokes
-one as a premise: `lem:hirzebruch-euler-spectrum`, in the conditional framed
-refinement.
+The registry in `evidence.json` distinguishes computational premises from
+supporting replays of printed proofs. The computations used as premises are
+trusted executions, cross-checked as their registry entries record. The
+conditional framed route uses `lem:hirzebruch-euler-spectrum`; the coordinate
+statement `lem:pencil-loci-coordinates` uses the pencil calculations described
+below. The universal-residue bundle supports the printed algebra and is not a
+proof premise.
 
 The pencil's Eckardt locus used to be a second such place.  It no longer is.
 `prop:A5-not-coprime` is proved from `lem:eckardt-involution` and
@@ -39,8 +40,8 @@ Statements resting on a bundle are marked by `\evidence` in the source.  That
 macro is typographically empty, so a reader of the rendered paper sees the
 boundary in the prose of the proof that names the trust level rather than at
 the annotation.  This enumeration is a reading of the printed proofs, not a
-fact read off `dependency-graph.dot`: as recorded below, edges are filled for
-the categorical marker route and the one-stabilization theorem only, and a statement
+fact read off `dependency-graph.dot`: as recorded below, edges are recorded only where the source explicitly annotates a dependency;
+the detached one-stabilization proof has no incoming edges recorded, and a statement
 carrying no edge has none recorded rather than none.
 
 `make check` performs the source-only Lean correspondence check, deterministic

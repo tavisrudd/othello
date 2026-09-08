@@ -123,8 +123,8 @@ are \(k\)-rational.  In particular, this holds for every stably
 \(k\)-rational smooth quartic del Pezzo surface.
 \end{theorem}
 
-Write \(Z=\operatorname{Proj}\operatorname{Cox}(S)\) for the projective Cox
-model.  The new ingredient is a saturated rank-three subtorus \(T_3\) of the
+Write \(Z\) for the projective Cox model attached to the universal torsor
+trivial over a fixed point of \(S(k)\).  The new ingredient is a saturated rank-three subtorus \(T_3\) of the
 rank-five torus acting on \(Z\), chosen so that \(Z/T_3\) is rational and the
 residual torus has dimension two.  The dimensions are
 \[
@@ -425,7 +425,7 @@ acts by simultaneous scalar multiplication on the sixteen Cox generators.
 Write \(T_0=T/\lambda_{-K}(\Gm)\), a torus of rank five.  Over \(\bar k\),
 the projective Cox model
 \[
- Z=\operatorname{Proj}\operatorname{Cox}(S)\subset\PP^{15}
+ Z_{\bar k}=\operatorname{Proj}\operatorname{Cox}(S_{\bar k})\subset\PP^{15}_{\bar k}
 \]
 is a seven-dimensional variety with one apparent double point
 \cite[Lemma~3.2]{TZ}.
@@ -550,8 +550,7 @@ They permute \((0,1),(1,-1),(-1,0)\); these generate the lattice with their
 sum as its only relation.  Thus
 \(T_0/T_3\simeq\operatorname{Res}^{1}_{E_3/k}\Gm\)
 for the cubic \'etale algebra of this Galois set.  Both identifications
-restrict to the smaller Galois types.  No assertion that \(E_3\) is the
-ordinary cubic resolvent of \(E_4\) is needed.
+restrict to the smaller Galois types.
 
 The coordinate calculations below establish nonemptiness over the splitting
 field.  The conditions themselves are defined over \(k\); density of
@@ -576,19 +575,21 @@ Theorem~\ref{thm:torus-quotient} holds at \(x\) for \(T_3\).  If
 \end{proposition}
 
 \begin{proof}
-For \(p\in Z_{\mathrm{sm}}\), let \(H_p\) be the space of tangent
+Work first over \(\bar k\).  For \(p\in Z_{\mathrm{sm}}\), let \(H_p\)
+be the space of tangent
 hyperplanes containing \(B\).  If \(x=\sum_{j=0}^3x_j+x_B\) is its
 weight-space decomposition, evaluation gives
 \[
- \operatorname{ev}_{p,x}:H_p\longrightarrow k^4,
+ \operatorname{ev}_{p,x}:H_p\longrightarrow\bar k^4,
  \qquad \lambda\longmapsto
  \bigl(\lambda(x_0),\ldots,\lambda(x_3)\bigr).
 \]
 Let \(\mathcal E_{\mathrm{ev}}\subset Z_{\mathrm{sm}}\times Z\) be the
 open locus where \(H_p\) has dimension four,
 \(\operatorname{ev}_{p,x}\) is an isomorphism, and the \(T_3\)-action is
-free at \(x\).  These are the open conditions needed to construct the
-codimension-three orbit slice.
+free at \(x\).  For the four Galois types in the statement, these
+conditions are Galois-invariant and therefore define a \(k\)-open.
+They are the conditions needed for the codimension-three orbit slice.
 
 \paragraph{Geometric existence.}
 First we show that \(\mathcal E_{\mathrm{ev}}\) is nonempty for every
@@ -766,8 +767,7 @@ Since \(\mathbf Q(X)=K(S)\) as extensions of \(K\),
  \simeq\mathbf Q(t_1,\ldots,t_{r+1},z_1,z_2,z_3,z_4)
 \]
 is purely transcendental.  This is rationality of \(X\times\A^2\),
-equivalently of \(X\times\PP^2\).  This is a function-field argument; no
-specialization assertion is used.
+equivalently of \(X\times\PP^2\).
 \uses{thm:two-variable}%
 \imports{tz-cubic-series}%
 \end{proof}
@@ -951,8 +951,11 @@ one such variable.  Over \(\C\), every finite-subgroup quotient is rational.
 Put \(K=k(X_j)\) and identify \(K(u,v)\) with a rational function field
 in five variables.  Let the torus fix \(K\) and scale \(u,v\).
 Its invariant field after \(m\) trivial variables is \(K(s_1,\ldots,s_m)\).
-A linear split-torus action has rational invariant field
-\cite[Theorem~4]{Popov}.  Theorem~\ref{thm:cubic-level} forces \(m\ge2\);
+A linear split-torus action over \(k\) has rational invariant field:
+diagonalize the action and choose an integral basis of the kernel of its
+weight map.  The corresponding invariant monomials freely generate that
+field; compare \cite[Theorem~4 and Lemma~5]{Popov} over an algebraically
+closed field.  Theorem~\ref{thm:cubic-level} forces \(m\ge2\);
 at \(m=2\) rationalize the invariant field and retain \(u,v\) as diagonal
 coordinates.  For a primitive rank-one subtorus of weights \((a,b)\),
 the invariant field is \(K(u^bv^{-a})\), of exact stabilization level one.
