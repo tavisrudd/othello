@@ -1,0 +1,68 @@
+{
+  "coverage_limits": [
+    "No complete reread of imported comparison proofs",
+    "No independent reread of minimal-surface classification",
+    "No new Fano quantum input checked",
+    "No Lean or manuscript build"
+  ],
+  "external_sources": [
+    {
+      "bytes": 1203210,
+      "depth": "partial",
+      "key": "arXiv:2307.13555",
+      "passages": "(1.1), Theorem 1.1, Remarks 1.3-1.5; sections 2.2-2.3; section 5.5.2; (5.36)-(5.43), Theorem 5.18; section 5.8.2",
+      "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2307.13555.pdf",
+      "sha256": "c16f56b283863322df04dadaeb0780889abd67a664f56a74fea39bc7ba8a934b",
+      "url": "https://arxiv.org/html/2307.13555v3",
+      "version": "v3"
+    },
+    {
+      "bytes": 819521,
+      "depth": "partial",
+      "key": "arXiv:2307.03696",
+      "passages": "Remark 1.2, Remarks 1.9-1.11; section 5.1, (5.2)-(5.3), Theorem 5.1, Remarks 5.2-5.3",
+      "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2307.03696.pdf",
+      "sha256": "5139f8e0c9d46f8ccb8cb415396a0fb1fb357719b7dcfbca46234a9735b57624",
+      "url": "https://arxiv.org/html/2307.03696v4",
+      "version": "v4"
+    }
+  ],
+  "full_text_external_count": 0,
+  "local_snapshot_commit": "a559518ae13dcada2933645450c62c4e8e4f950a",
+  "local_sources": [
+    {
+      "bytes": 6417,
+      "path": "papers/cubic-stabilization-m1/sections/01-introduction.tex",
+      "sha256": "0f8d6c18b5fb21da0a9843acdc0911b245e0f979e142a9c60b4cba5feb129e9d"
+    },
+    {
+      "bytes": 38415,
+      "path": "papers/cubic-stabilization-m1/sections/02-qdm-marker.tex",
+      "sha256": "3ea4d7a5ef5b283aab4b068b975f6f6646ff6a3a219f4bc1721eb59c6ff1357d"
+    },
+    {
+      "bytes": 11396,
+      "path": "papers/cubic-stabilization-m1/sections/04-motivic.tex",
+      "sha256": "ee4754066281a1e5d8e3ae6e54a6a5f87395e3d8a30f10d7ebbfb0a0225bee05"
+    },
+    {
+      "bytes": 79419,
+      "path": "notes/2026-08-21-epilogue-m1-red-team-referee.md",
+      "sha256": "8bbd602ed83d72db97699bdc701e4e2aafd1148c0e6898a31f10b8ced931c13f"
+    },
+    {
+      "bytes": 5014,
+      "path": "notes/2026-08-21-c910-unconditional-qdm-referee-repair.md",
+      "sha256": "aeeeb0c05d688d169d1c019e16ebb2afe2c3f51eee05bd77436a45d310f34069"
+    },
+    {
+      "bytes": 13645,
+      "path": "notes/2026-09-07-c1116-cubic-foundations-audit.md",
+      "sha256": "b7c457a1d12049caac2d68b8d9cd1e58ff51c50c1e8ed931a912c9b490c90e13"
+    }
+  ],
+  "read_depth_details": "notes/2026-09-08-c1128-comparison-rigidity-audit.md",
+  "schema": "c1128-source-audit-v1",
+  "scope": "priorities 1-3 only; no novelty verdict",
+  "task": "C1128"
+}

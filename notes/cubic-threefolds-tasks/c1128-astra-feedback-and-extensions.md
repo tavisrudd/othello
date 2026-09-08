@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 
-**Status:** queued; intake preserved 2026-09-08
+**Status:** active; priority 1–3 audit complete, 2026-09-08
 
 ## Goal and source
 
@@ -83,6 +83,23 @@ by this intake request.
 
 ## Next action
 
-Read the current faithful-center and comparison proofs together with the
-2026-08-21 reason for narrowing the count, then write a precise lattice
-preservation statement and audit each imported comparison against it.
+Audit the universal rational block calculation and the primary quantum
+inputs for the degree-one and degree-two Fano applications. The comparison
+gate supports a separately defined lattice count; it does not itself verify
+those family inputs. Manuscript inclusion still awaits the author's decision.
+
+## Accepted audit chunk: priorities 1–3
+
+Report: `notes/2026-09-08-c1128-comparison-rigidity-audit.md`.
+Reviewable exposition proposal:
+`notes/2026-09-08-c1128-proposed-proof-presentation.md`.
+
+The primary comparisons preserve the canonical modified lattice; cyclic
+persistence, residue regularity and low-dimensional vanishing do not use
+nonresonance. Under the already-used geometric inputs this supports I_lat.
+The original resonant cubic-fourfold example was not a counted whole primary
+block, so it did not supply a counterexample to this stronger invariant.
+The audit identifies the graded completed z-enhancement wording and explicit
+persistence hypotheses as presentation repairs. Exact local identities and
+negative controls pass; source-read depths and hashes are recorded. No
+manuscript or Lean source changed, and no new Fano application is yet claimed.

@@ -1,0 +1,25 @@
+{
+  "files": [
+    {
+      "bytes": 7180,
+      "file": "notes/2026-09-08-c1128-lattice-audit-checks.py",
+      "sha256": "b9124d217c9adca19ece007b279ff3cc0d9f949c1cff80809b1a609ca96e341f"
+    },
+    {
+      "bytes": 1471,
+      "file": "notes/2026-09-08-c1128-lattice-audit-checks.json",
+      "sha256": "a3664c13dcbc206ebf41d740515cae0ed4ef5b53c733bbd63c36d6a6082f126b"
+    },
+    {
+      "bytes": 2601,
+      "file": "notes/2026-09-08-c1128-audit-sources.json",
+      "sha256": "6bf2124349de26f1829629fc3fb3fdb73f972880ed14f733ec2ec56a69a95b06"
+    },
+    {
+      "bytes": 8177,
+      "file": "notes/2026-09-08-c1128-proposed-proof-presentation.md",
+      "sha256": "65300d14dc3da791ecdd81cb6e21876ec9404c34e91f3645f51db43166ecd709"
+    }
+  ],
+  "schema": "c1128-audit-hashes-v1"
+}

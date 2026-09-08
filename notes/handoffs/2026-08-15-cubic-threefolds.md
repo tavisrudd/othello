@@ -38,14 +38,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C1128 — queued, mathematics/literature audit first (2026-09-08).**
-  Audit the new Astra feedback, canonical-lattice/Fano extensions, torus
-  consequences, and the proposed three-dimensional cubic/genus-two family.
-  All five supplied artifacts are preserved with hashes. First audit lattice
-  preservation and the prior narrowing to exponent classes. Manuscript inclusion
-  awaits the author’s decision after the audit; C978/C956 remain open. Card:
-  `../cubic-threefolds-tasks/c1128-astra-feedback-and-extensions.md`; intake:
-  `../2026-09-08-c1128-astra-feedback-intake.md`.
+- **C1128 — priorities 1–3 audited (2026-09-08).** The primary comparisons
+  preserve the canonical modified lattice; persistence, residue regularity,
+  and surface vanishing support the stronger count without nonresonance.
+  The historical cubic-fourfold concern was not a counted whole-primary
+  counterexample. Exact local checks pass. The first-reading revision is a
+  proposal only; manuscript inclusion still awaits the author's decision.
+  Next audit the universal Fano calculation and quantum inputs. Report:
+  `../2026-09-08-c1128-comparison-rigidity-audit.md`; card:
+  `../cubic-threefolds-tasks/c1128-astra-feedback-and-extensions.md`.
 - **Astra review intake (2026-09-07):** **C1116 is complete**: the reduced
   graded coefficient proof was repaired, cyclic persistence and quotient
   descent audited, and TZ v2 citations/hypotheses matched. Both authority and
