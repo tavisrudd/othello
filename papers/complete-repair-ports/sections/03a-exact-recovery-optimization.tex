@@ -111,10 +111,8 @@ A unit-cost table alone returns one, but does not retain this function.
 The same three supports give the availability event
 $1\text{ survives}\;\lor\;2\text{ survives}\;\lor\;
 (3\text{ and }4\text{ survive})$.
-Retaining the alternatives answers both questions; evaluating their
-probabilities must still account for overlaps.  The following construction
-preserves those alternatives inside each functional label.
-  For each ordinary label $b$, let
+Retain these alternatives within each functional label.  For each ordinary
+label $b$, let
 \[
  \mathcal A_{i,T}(b)=\min_{\subseteq}
  \{\supp Y(T):\Phi_iY=b\},
@@ -178,10 +176,7 @@ overlap.  Factoring probabilities is valid on independent variable sets;
 adding alternative probabilities is valid on disjoint events.
 
 For service optimization, retain the radius as a separate constraint and
-evaluate $\pi_a(p)$ over supports of size at most $r$.  An alternative
-discarded under unit prices can become optimal under new prices.
-Either the support families or a valuation-independent circuit of feasible
-choices permits exact repricing and reconstruction.
+evaluate $\pi_a(p)$ over supports of size at most $r$.
 For the fractional objective $\max\sum_a w_a\lambda_a$ under helper
 capacities $c_h$, the full dual is
 \[
@@ -223,31 +218,45 @@ This set is empty or an affine space with $q^{t w_S}$ elements.
 Given local choice tables on $n$ disjoint blocks and a binary tree with
 $w=\max_S w_S$, scalar additive optimization uses at most
 $O(nq^{2tw})$ pair combinations, in addition to scanning the local tables
-and polynomial linear algebra.  It returns an attaining lift when local
-lifts are supplied.  A separate integer support budget $r$ increases the
-bound to $O(n(r+1)^2q^{2tw})$ combinations.
+and polynomial linear algebra.  For a finite optimum it returns an attaining
+lift when local lifts are supplied.  A separate integer support budget $r$
+increases the bound to $O(n(r+1)^2q^{2tw})$ combinations.
 \end{proposition}
 
 \begin{proof}
-Subtract any feasible partial syndrome.  The difference space is
+If the displayed affine set is nonempty, subtract any one of its elements.
+The difference space is
 $\operatorname{Hom}(T,U_S)\cap\operatorname{Hom}(T,V_S)
 =\operatorname{Hom}(T,U_S\cap V_S)$, of dimension $tw_S$.
-Choose affine boundary coordinates by linear algebra.  At a leaf scan its
-table and retain the minimum at each admitted boundary state.  At an
-internal node enumerate the pairs of child states, add their syndrome maps,
-discard sums outside the parent affine space, and minimize their summed
-cost at each parent state.  Induction on the tree proves the same invariant
-as in Proposition~\ref{prop:exact-hierarchical-optimizer}.  Each child
-has at most $q^{tw}$ states, giving the pair bound.  Store minimizers and
-backtrack for witnesses.  For a support budget retain the best price at each
-exact helper count $0,\ldots,r$ and add counts when combining; disjoint
-ownership makes those counts additive.
+Choose affine boundary coordinates by linear algebra.  These states express
+linear compatibility, not necessarily realization by the local choice tables.
+Store at each state the least cost of actual subtree choices with that
+contribution, with value $\infty$ when none exist.  Every global feasible
+assignment survives the restriction, since its complementary choices supply
+the remaining contribution to $c$.
+
+At a leaf, scanning its table establishes this invariant.  At an internal
+node, enumerate child-state pairs, add their syndrome maps, discard sums
+outside the parent affine set, and minimize the summed costs.  Disjoint
+children combine independently.  Conversely, a subtree realization at an
+admitted parent state has admitted child states: the sibling contribution
+and a linear outside completion supply each child's complement.  This
+preserves the invariant.  At the root, return the entry at $c$, or $\infty$
+if its affine set is empty.  The invariant gives the global optimum and
+detects infeasibility.  Each child has at
+most $q^{tw}$ states, giving the pair bound.  Store minimizers and backtrack
+for finite optima.  For a support budget retain the best price at each exact
+helper count $0,\ldots,r$, starting with the leaf tables, and add counts when
+combining; disjoint ownership makes those counts additive.
 \uses{prop:exact-hierarchical-optimizer}%
 \proves{prop:boundary-width-compilation}%
 \end{proof}
 
-The bound charges local compilation separately.  It counts arithmetic
-operations; exact rational prices also incur their arithmetic bit cost.
+The bound counts state-pair combinations and charges local compilation
+separately.  Coordinate maps are precomputed by polynomial linear algebra;
+processing a pair has polynomial arithmetic cost in the interface dimensions,
+in addition to cost addition and comparison.  Exact rational prices also
+incur their arithmetic bit cost.
 Paired normalization labels must be included when measuring width for a
 target-normalized query.  Support or Pareto messages multiply combination
 work by the numbers of retained alternatives and their pruning costs.

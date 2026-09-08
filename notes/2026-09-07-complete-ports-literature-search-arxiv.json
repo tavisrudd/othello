@@ -1,0 +1,51 @@
+{
+  "batch": "Q17–Q20",
+  "queries": [
+    "concatenated codes dual distance locality recovery sets",
+    "linear code prescribed cosets joint support generalized coset weights",
+    "minimal tree realizations linear codes state complexity recovery",
+    "concatenated codes minimal recovery sets service rate"
+  ],
+  "domains": [
+    "arxiv.org"
+  ],
+  "returned_entries": 9,
+  "entries": [
+    {
+      "title": "On Minimal Tree Realizations of Linear Codes",
+      "url": "https://arxiv.org/abs/0711.1383"
+    },
+    {
+      "title": "Constraint Complexity of Realizations of Linear Codes on Arbitrary Graphs",
+      "url": "https://arxiv.org/abs/0805.2199"
+    },
+    {
+      "title": "Observability, Controllability and Local Reducibility of Linear Codes on Graphs",
+      "url": "https://arxiv.org/abs/1202.0534"
+    },
+    {
+      "title": "Concatenated Codes for Recovery From Multiple Reads of DNA Sequences",
+      "url": "https://arxiv.org/abs/2010.15461"
+    },
+    {
+      "title": "Sparse Quantum Codes from Quantum Circuits",
+      "url": "https://arxiv.org/pdf/1411.3334"
+    },
+    {
+      "title": "Limits on the storage of quantum information in a",
+      "url": "https://arxiv.org/pdf/1610.06169"
+    },
+    {
+      "title": "Tailored codes for small quantum memories",
+      "url": "https://arxiv.org/pdf/1703.08179"
+    },
+    {
+      "title": "Riemann-Lebesgue Forest for Regression",
+      "url": "https://arxiv.org/pdf/2402.04550"
+    },
+    {
+      "title": "CATEGORICAL HEISENBERG ACTION I: RATIONAL CHEREDNIK",
+      "url": "https://arxiv.org/pdf/2408.02485"
+    }
+  ]
+}

@@ -1,0 +1,316 @@
+{
+  "date": "2026-09-07",
+  "service": "web search tool",
+  "screen": "Titles and returned snippets; promote works concerning linear-code recovery, prescribed coset support, composition, service regions, or finite-interface minimization. Discard lexical matches outside these subjects.",
+  "note": "Result entries preserve displayed title and URL, not full search-engine index counts. Batches are pooled; no per-query count inferred. Q01–Q04 are recorded in the audit report; their raw output was not retained.",
+  "batches": [
+    {
+      "batch": "Q05–Q08",
+      "queries": [
+        "\"linear recovery\" \"concatenated codes\"",
+        "\"minimal recovery\" concatenation codes",
+        "\"prescribed coset\" \"generalized\" code support",
+        "\"target\" \"recovery\" \"tree\" \"min-sum\" code"
+      ],
+      "returned_entries": 22,
+      "entries": [
+        {
+          "title": "LOCALLY RECOVERABLE CODES FROM ALGEBRAIC CURVES",
+          "url": "https://www.ime.unicamp.br/sites/default/files/pesquisa/relatorios/rp-2018-10.pdf"
+        },
+        {
+          "title": "Algebraic methods for",
+          "url": "https://aaltodoc.aalto.fi/bitstreams/4d36f224-34ac-4618-97c0-0e77103d46c4/download"
+        },
+        {
+          "title": "Cornell Math - Thesis Abstracts (Algebra)",
+          "url": "https://pi.math.cornell.edu/Research/Abstracts/algebra.html"
+        },
+        {
+          "title": "INSTITUTO DE CIÊNCIAS BIOLÓGICAS",
+          "url": "https://repositorio.unb.br/bitstream/10482/42578/1/2021_CamilaAidaCamposCouto.pdf"
+        },
+        {
+          "title": "(PDF) Serving Every Symbol: All-Symbol PIR and Batch Codes",
+          "url": "https://www.researchgate.net/publication/399559348_Serving_Every_Symbol_All-Symbol_PIR_and_Batch_Codes"
+        },
+        {
+          "title": "Localized Definitions and Distributed Reasoning: A Proof-of-Concept Mechanistic Interpretability Study via Activation Patching",
+          "url": "https://arxiv.org/abs/2504.02976"
+        },
+        {
+          "title": "(PDF) Maximal Achievable Service Rates of Codes and Connections to Combinatorial Designs",
+          "url": "https://www.researchgate.net/publication/392918317_Maximal_Achievable_Service_Rates_of_Codes_and_Connections_to_Combinatorial_Designs"
+        },
+        {
+          "title": "The Lazarus Effect: Healing Compromised Devices in the Internet of Small Things",
+          "url": "https://arxiv.org/abs/2005.09714"
+        },
+        {
+          "title": "Generalized Hamming weights of trace codes - MaRDI portal",
+          "url": "https://portal.mardi4nfdi.de/wiki/Generalized_Hamming_weights_of_trace_codes"
+        },
+        {
+          "title": "IEEE TRANSACTIONS ON PARALLEL AND DISTRIBUTED SYSTEMS, VOL. 31, NO. 9, SEPTEMBER 2020 2001",
+          "url": "https://ranger.uta.edu/~jiang/publication/Journals/2020/2020-IEEE-TPDS-Fork-Join.pdf"
+        },
+        {
+          "title": "US11188404B2 - Methods of data concurrent recovery for a distributed storage system and storage medium thereof - Google Patents",
+          "url": "https://patents.google.com/patent/US11188404B2/en"
+        },
+        {
+          "title": "IEEE TRANSACTIONS ON INFORMATION THEORY, VOL.",
+          "url": "https://par.nsf.gov/servlets/purl/10321315"
+        },
+        {
+          "title": "In Search of I/O-Optimal Recovery from Disk Failures",
+          "url": "https://m.ezisraelc.com/events/hotstorage11/tech/final_files/Khan.pdf"
+        },
+        {
+          "title": "Linear-time list recovery of high-rate expander codes - ScienceDirect",
+          "url": "https://www.sciencedirect.com/science/article/am/pii/S0890540118300075"
+        },
+        {
+          "title": "recension",
+          "url": "https://www.lri.fr/~lobstein/review2.html"
+        },
+        {
+          "title": "[Literature Review] On the Service Rate Region of Reed-Muller Codes",
+          "url": "https://www.themoonlight.io/review/on-the-service-rate-region-of-reed-muller-codes"
+        },
+        {
+          "title": "Generalized Cyclotomic Mappings",
+          "url": "https://www.emergentmind.com/topics/generalized-cyclotomic-mappings"
+        },
+        {
+          "title": "MirageNet:A Secure, Efficient, and Scalable On-Device Model Protection in Heterogeneous TEE and GPU System",
+          "url": "https://arxiv.org/abs/2601.13826"
+        },
+        {
+          "title": "[論文レビュー] Recovery Algorithms for Linear Batch Codes",
+          "url": "https://www.themoonlight.io/ja/review/recovery-algorithms-for-linear-batch-codes"
+        },
+        {
+          "title": "[Revue de papier] A Combinatorial Perspective on Random Access Efficiency for DNA Storage",
+          "url": "https://www.themoonlight.io/fr/review/a-combinatorial-perspective-on-random-access-efficiency-for-dna-storage"
+        },
+        {
+          "title": "Information and Locality in Cayley Graphs",
+          "url": "https://arxiv.org/abs/2608.04608"
+        },
+        {
+          "title": "[no title returned]",
+          "url": "https://publications.waset.org/abstracts/search?q=CPT+codes"
+        }
+      ]
+    },
+    {
+      "batch": "Q09–Q12",
+      "queries": [
+        "\"Dual-Code Bounds on Multiple Concurrent\"",
+        "\"Recovery Algorithms for Linear Batch Codes\"",
+        "\"Constructions of Locally Repairable Codes via Concatenated Codes\"",
+        "\"The Generalized Distributive Law\" junction tree theorem"
+      ],
+      "returned_entries": 24,
+      "entries": [
+        {
+          "title": "Constructions of locally repairable codes via concatenated codes",
+          "url": "https://arxiv.org/abs/2605.04618"
+        },
+        {
+          "title": "Recovery Algorithms for Linear Batch Codes",
+          "url": "https://arxiv.org/abs/2605.09748"
+        },
+        {
+          "title": "Dual-Code Bounds on Multiple Concurrent (Local) Data Recovery",
+          "url": "https://arxiv.org/abs/2201.07503"
+        },
+        {
+          "title": "Dual-Code Bounds on Multiple Concurrent",
+          "url": "https://par.nsf.gov/servlets/purl/10390704"
+        },
+        {
+          "title": "dblp: Constructions of locally repairable codes via concatenated codes.",
+          "url": "https://dblp.uni-trier.de/rec/journals/corr/abs-2605-04618.html"
+        },
+        {
+          "title": "[Literature Review] Constructions of locally repairable codes via concatenated codes",
+          "url": "https://www.themoonlight.io/en/review/constructions-of-locally-repairable-codes-via-concatenated-codes"
+        },
+        {
+          "title": "A New Look at the Generalized Distributive Law∗",
+          "url": "https://people.eecs.berkeley.edu/~ananth/Preprints/Payam/1nlgdln2.pdf"
+        },
+        {
+          "title": "2022 IEEE International Symposium on Information Theory (ISIT 2022) (Table of Contents)",
+          "url": "https://www.proceedings.com/content/064/064987webtoc.pdf"
+        },
+        {
+          "title": "The generalized distributive law - Information Theory, IEEE Transactions on",
+          "url": "https://www.cs.ubc.ca/~murphyk/Teaching/Papers/GDL.pdf"
+        },
+        {
+          "title": "Constructions of locally repairable codes via concatenated codes",
+          "url": "https://shoepaly.app/?_=%2Fpdf%2F2605.04618%23hKr38k1yZITo%2FkpxGBdjJos%3D"
+        },
+        {
+          "title": "(PDF) Constructions of locally repairable codes via concatenated codes",
+          "url": "https://www.researchgate.net/publication/404542897_Constructions_of_locally_repairable_codes_via_concatenated_codes"
+        },
+        {
+          "title": "Generalized distributive law",
+          "url": "https://en.wikipedia.org/wiki/Generalized_distributive_law"
+        },
+        {
+          "title": "The Generalized Distributive Law , Fellow, IEEE",
+          "url": "https://studylib.net/doc/14247662/the-generalized-distributive-law---fellow--ieee"
+        },
+        {
+          "title": "Spectral-Domain Spreading via Hadamard Transform for Robust Downlink Non-Orthogonal Multiple Access | Kurate.org",
+          "url": "https://kurate.org/paper/88ae05af-a4bf-4613-915b-af5d4aa58c37"
+        },
+        {
+          "title": "Weight distribution bounds to relate minimum distance, list decoding, and symmetric channel performance | Kurate.org",
+          "url": "https://kurate.org/paper/4b9bff68-7eb6-4d4f-9e03-cd66993dfdb0"
+        },
+        {
+          "title": "The Generalized Distributive Law and Free Energy",
+          "url": "https://studylib.net/doc/18516341/the-generalized-distributive-law-and-free-energy"
+        },
+        {
+          "title": "Recovery Algorithms for Linear Batch Codes | Cool Papers - Immersive Paper Discovery",
+          "url": "https://papers.cool/arxiv/2605.09748"
+        },
+        {
+          "title": "[Papierüberprüfung] Recovery Algorithms for Linear Batch Codes",
+          "url": "https://www.themoonlight.io/de/review/recovery-algorithms-for-linear-batch-codes"
+        },
+        {
+          "title": "(PDF) Good locally repairable codes via propagation rules",
+          "url": "https://www.researchgate.net/publication/362591735_Good_locally_repairable_codes_via_propagation_rules"
+        },
+        {
+          "title": "Generalized distributive law",
+          "url": "https://wiki.sizzltek.com/content/wikipedia_en_all_maxi_2025-08/Generalized_distributive_law"
+        },
+        {
+          "title": "Author Search Results :: Library Catalog",
+          "url": "https://info.umar.mx/Author/Home?author=Fang%2C+Wei"
+        },
+        {
+          "title": "Variational Bayes Inference in Digital Receivers",
+          "url": "https://arxiv.org/abs/1811.02506"
+        },
+        {
+          "title": "Decoding methods",
+          "url": "https://en.wikipedia.org/wiki/Decoding_methods"
+        },
+        {
+          "title": "Algoritmo de propagación de creencias",
+          "url": "https://es.wikipedia.org/wiki/Algoritmo_de_propagaci%C3%B3n_de_creencias"
+        }
+      ]
+    },
+    {
+      "batch": "Q13–Q16",
+      "queries": [
+        "\"target\" \"concatenated\" \"minimal recovery sets\"",
+        "\"prescribed coset\" recovery composition",
+        "\"functional labels\" \"recovery\" codes",
+        "\"linear recovery\" \"boundary width\""
+      ],
+      "returned_entries": 22,
+      "entries": [
+        {
+          "title": "Here a prescribed coset corresponds to the map \\(a \\mapsto T_n(a)\\), where \\(n\\) is any positive integer whose image in \\(\\mathbb{Z}/12\\mathbb{Z}\\) lies in the prescribed coset. The coset containing 1 is the identity element, and in this case it is the only invertible element in the quotient semigroup. Note that the cosets have sizes 1, 2, and 4. This also holds for larger primes, and will be made explicit in the proof of Theorem 2.",
+          "url": "https://websites.umich.edu/~zieve/papers/chebyshev.pdf"
+        },
+        {
+          "title": "The results of the evaluation are shown in Table 1 (the row marked “step 1”).",
+          "url": "https://aclanthology.org/P04-1040.pdf"
+        },
+        {
+          "title": "Deep embeddings to comprehend and visualize microbiome protein space | Scientific Reports",
+          "url": "https://www.nature.com/articles/s41598-022-14055-7"
+        },
+        {
+          "title": "Published at the GEM workshop, ICLR 2026",
+          "url": "https://openreview.net/pdf/ce6e2381143eaf945170826bb16907472b14983d.pdf"
+        },
+        {
+          "title": "Durham E-Theses",
+          "url": "https://etheses.dur.ac.uk/1176/1/1176.pdf?EThOS+%28BL%29="
+        },
+        {
+          "title": "<table id=\"e1\">",
+          "url": "https://cdn.tmarket.io/audience-profiles/e4159b5a-ffc8-4f69-80be-5f4717965320.pdf"
+        },
+        {
+          "title": "Volkmar Felsch,",
+          "url": "https://docs.gap-system.org/pkg/itc/doc/manual.pdf"
+        },
+        {
+          "title": "Coset-refined trace statistics, nodal characters, and affine branches in cubic norm tori",
+          "url": "https://arxiv.org/abs/2605.21939"
+        },
+        {
+          "title": "COG database update 2024 - PMC",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11701660/"
+        },
+        {
+          "title": "On the Distance Distribution of Reed-Muller Codes",
+          "url": "https://arxiv.org/abs/2601.18691"
+        },
+        {
+          "title": "120Pcs Hangover Recovery Kit Stickers - in Sickness Comoros | Ubuy",
+          "url": "https://www.comoros.ubuy.com/com/product/F5CFC67KY-120pcs-hangover-recovery-kit-stickers-in-sickness-in-health-fun-and-functional-party-favor-labels"
+        },
+        {
+          "title": "CCL Label – Pressure Sensitive Labels",
+          "url": "https://ccllabel.com/en/solutions/solution-by-industries/food-and-dairy/pressure-sensitive-labels"
+        },
+        {
+          "title": "From atoms to fragments: a coarse representation for efficient and functional protein design | Bioinformatics | Oxford Academic",
+          "url": "https://academic.oup.com/bioinformatics/article/42/5/btag172/8654714?login=false"
+        },
+        {
+          "title": "research.md · radoslawcz/lawprop_obstruction at main",
+          "url": "https://huggingface.co/radoslawcz/lawprop_obstruction/blob/main/research.md"
+        },
+        {
+          "title": "US5068789A - Method and means for grammatically processing a natural language sentence - Google Patents",
+          "url": "https://patents.google.com/patent/US5068789A/en"
+        },
+        {
+          "title": "Frontiers | Assessing the restorative benefits of open rooftop green spaces characteristics using virtual reality and EEG analysis",
+          "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2026.1807425/full"
+        },
+        {
+          "title": "New Codes on High Dimensional Expanders",
+          "url": "https://arxiv.org/abs/2308.15563"
+        },
+        {
+          "title": "(PDF) Accounting for Epistatic Interactions Improves the Functional Analysis of Protein Structures.",
+          "url": "https://www.researchgate.net/publication/256495246_Accounting_for_Epistatic_Interactions_Improves_the_Functional_Analysis_of_Protein_Structures"
+        },
+        {
+          "title": "A low dimensional embedding of brain dynamics enhances diagnostic accuracy and behavioral prediction in stroke | Scientific Reports",
+          "url": "https://www.nature.com/articles/s41598-023-42533-z"
+        },
+        {
+          "title": "Irreducible polynomials with prescribed trace and restricted norm",
+          "url": "https://arxiv.org/abs/0710.2767"
+        },
+        {
+          "title": "Contents",
+          "url": "https://www.tempodimare.com/?_=%2Fhtml%2F2608.05146v1%23nIKhFiPUZajrdh0GkGynKZM%3D"
+        },
+        {
+          "title": "Primitive Quadratic Polynomials in Additive Coset Families - Science Explorer Abstract",
+          "url": "https://scixplorer.org/abs/2026arXiv260728052Z/abstract"
+        }
+      ]
+    }
+  ]
+}

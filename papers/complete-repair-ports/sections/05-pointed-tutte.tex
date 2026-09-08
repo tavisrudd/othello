@@ -21,9 +21,8 @@ $\{0,\ldots,8\}$, let
 where, for example, $158$ denotes $\{1,5,8\}$.  Both are realizable as the
 minimum recovery sets at a distinguished coordinate of a represented
 $[10,4,6]_q$ code over a common finite prime field.
-Here a \emph{clutter} means a family of sets none of which contains another;
-in this example it is the complete radius-three family of inclusion-minimal
-recovery supports.  Larger minimal supports also occur: in $\mathcal A$,
+These are the complete radius-three families of inclusion-minimal recovery
+supports.  Larger minimal supports also occur: in $\mathcal A$,
 $\{0,1,2,4\}$ contains none of the listed triples, while the construction
 below makes its four helper columns a basis and hence a recovery set.
 
@@ -60,14 +59,21 @@ k&\mathcal A&\mathcal B\\ \hline
 Inclusion--exclusion for the five edge-containment events gives
 \eqref{eq:reliability-A} and~\eqref{eq:reliability-B}.
 
-We now give the representation argument.  Its purpose is to realize exactly
-the five listed triples as collinear triples; after lifting, adjoining the
-distinguished target $x$ turns exactly those triples into four-column circuits.
+Realize the listed triples as plane collinearities, then lift so that precisely
+their unions with the target $x$ are four-column circuits.
 
 \paragraph{The two plane arrangements.}
-Over an infinite field $K$, choose
-five projective lines $\ell_1,\ldots,\ell_5$.  For
-$\mathcal A$, make $\ell_2,\ell_3,\ell_4$ concurrent and label
+Work over $K=\mathbb Q$.  In homogeneous coordinates $(X,Y,Z)$, choose
+five projective lines $\ell_1,\ldots,\ell_5$ using the following defining
+linear forms:
+\[
+\begin{array}{c|ccccc}
+ & \ell_1&\ell_2&\ell_3&\ell_4&\ell_5\\ \hline
+\mathcal A&Z&X-Y&Y&X&X+Y+Z\\
+\mathcal B&X&X+Y+Z&Z&Y&X-Y.
+\end{array}
+\]
+For $\mathcal A$, the lines $\ell_2,\ell_3,\ell_4$ are concurrent; label
 \[
  0=\ell_2\cap\ell_3\cap\ell_4,\quad
  1=\ell_1\cap\ell_4,\quad
@@ -76,7 +82,7 @@ $\mathcal A$, make $\ell_2,\ell_3,\ell_4$ concurrent and label
  8=\ell_1\cap\ell_5.
 \]
 Choose $2,6$ on $\ell_2$, $3$ on $\ell_4$, and $7$ on $\ell_5$.
-For $\mathcal B$, make $\ell_1,\ell_4,\ell_5$ concurrent at $1$, put
+For $\mathcal B$, the lines $\ell_1,\ell_4,\ell_5$ meet at $1$; put
 \[
  8=\ell_1\cap\ell_3,\quad
  7=\ell_2\cap\ell_3,\quad
@@ -84,21 +90,23 @@ For $\mathcal B$, make $\ell_1,\ell_4,\ell_5$ concurrent at $1$, put
  2=\ell_2\cap\ell_5,
 \]
 and choose $6,3,5,4$ on $\ell_1,\ell_2,\ell_4,\ell_5$, respectively.
-The incidence skeleton is
+The fixed points in these two arrangements have representatives
 \[
-\begin{array}{c|c|c}
- & \text{three concurrent lines} & \text{other prescribed intersections}\\ \hline
-\mathcal A & \ell_2,\ell_3,\ell_4\text{ at }0
-  & 1=\ell_1\cap\ell_4,\ 4=\ell_3\cap\ell_5,\
-    5=\ell_1\cap\ell_3,\ 8=\ell_1\cap\ell_5\\
-\mathcal B & \ell_1,\ell_4,\ell_5\text{ at }1
-  & 8=\ell_1\cap\ell_3,\ 7=\ell_2\cap\ell_3,\
-    0=\ell_3\cap\ell_4,\ 2=\ell_2\cap\ell_5
-\end{array}
+\begin{aligned}
+\mathcal A:\quad&0=e_3,\quad1=e_2,\quad4=e_1-e_3,\quad
+                  5=e_1,\quad8=e_1-e_2;\\
+\mathcal B:\quad&1=e_3,\quad8=e_2,\quad7=e_1-e_2,\quad
+                  0=e_1,\quad2=e_1+e_2-2e_3.
+\end{aligned}
 \]
-At each free choice, avoid the finitely many unwanted joining lines.  The
-unwanted lines are precisely those that would create an additional collinear
-triple.  The displayed triples are therefore exactly the collinear triples.
+The only collinear triples among these fixed points are $045,158$ in
+$\mathcal A$ and $078$ in $\mathcal B$, as their coordinates show.
+Choose each remaining point on its assigned line, avoiding previously chosen
+points, intersections with other supporting lines, and unintended joining
+lines of pairs already chosen.  No unintended joining line coincides with the
+assigned line: its existing points belong to the prescribed triple being
+completed.  Thus only finitely many rational points are excluded at each
+step.  The five displayed triples are exactly the resulting collinear triples.
 
 \paragraph{Generic lift.}
 Choose representatives $p_i\in K^3$ of either plane configuration, let
@@ -106,18 +114,25 @@ $x=(1,0,0,0)$, and lift helper $i$ to $h_i=(t_i,p_i)\in K^4$.  Dependence of
 the lifts over any displayed line and dependence of any four helper lifts are
 proper linear conditions on the $t_i$.  For a displayed line, its three
 quotient vectors have a unique dependence up to scalar, and the same
-coefficients give one nonzero linear equation in the $t_i$.  For four helper
-points, the quotient vectors span $K^3$, so their lifted determinant is a
-nonzero linear form in the four first coordinates.  Avoiding this finite union
+coefficients give one nonzero linear equation in the $t_i$.  No four helper
+points are collinear, since every supporting line contains exactly
+three selected points and every other collinear triple was excluded.  Their
+quotient vectors therefore span $K^3$.  Expanding the lifted determinant along
+the first coordinates exhibits a nonzero cofactor, so it is a nonzero linear
+form in those coordinates.  Avoiding this finite union of proper hyperplanes
 makes every helper triple and quadruple independent, while the dependent
 four-sets through $x$ are exactly $\{x\}\cup A$ for the five prescribed
 triples $A$.
 
 \paragraph{Finite-field realization and parameters.}
-Choose the construction over $\mathbb Q$ and reduce both
-configurations modulo one prime avoiding the finitely many nonzero
-determinants.  The two row-span codes then have rank four, dual distance four,
-and minimum recovery sets exactly $\mathcal A$ and $\mathcal B$.  A
+Clear the column denominators in both rational configurations.  For every
+subset required to be independent, retain a nonzero integer minor witnessing
+that independence, including triples containing $x$ and two helpers.  Such
+triples are independent because the projected helper points are distinct.
+Choose one prime dividing none of these finitely many minors.  The required
+dependence determinants are zero and remain zero on reduction.  Thus both
+row-span codes have rank four, dual distance four, and minimum-cardinality
+recovery sets exactly $\mathcal A$ and $\mathcal B$.  A
 hyperplane not containing $x$ contains at most three helpers because every
 four helpers are independent.  A hyperplane containing $x$ contains at most
 one displayed collinear triple, and such a triple gives four columns in a
