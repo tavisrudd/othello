@@ -4760,8 +4760,17 @@
       "last": 1125,
       "purpose": "Integrate portable bundles and WASM campaigns into the operator console",
       "sequence": 529
+    },
+    {
+      "count": 1,
+      "first": 1126,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1126,
+      "purpose": "Build the proposed campaign and library navigation with contextual inspection",
+      "sequence": 530
     }
   ],
-  "next_id": 1126,
+  "next_id": 1127,
   "schema": "codex-task-id-allocations-v1"
 }
