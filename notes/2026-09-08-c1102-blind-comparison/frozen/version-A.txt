@@ -1,0 +1,664 @@
+              Strength-two trades and transversal cubic gates:
+               the Clebsch cubic-phase codes and their magic
+                                               Tavis Rudd
+
+                                        Draft, September 2026
+
+
+                                                Abstract
+         Can a symmetric point configuration define a multiqudit phase resource whose structure
+     and preparation cost can both be certified? We study this question through strength-two signed
+     trades: cancellation of their quadratic moments makes the third moment a transversal logical
+     phase. Conic matchings give error-detecting codes with binary-invariant logical cubics, while an
+     elementary translation trade supplies the same [[2p, p − 1, 2]]p parameters at every prime p ≥ 5.
+     Exact Hessian-rank censuses identify the conic resources through their Pauli spectra. The ten-
+     qudit example over F11 is not Clifford-equivalent to a product across any bipartition. For the
+     six-qudit example over F7 , joint preparation beats a specified independent primitive-distillation
+     menu at the same target block infidelity: fewer than 16.116 raw inputs versus a lower bound of
+     54, or 36 when all weighted cubic types have unit cost. This comparison assumes independent
+     uniform Z noise, ideal Clifford operations, and input error at most 1%. A chordal restriction
+     of the logical phase explains how geometric sign choices act as gate inversion and changes of
+     logical frame.
+
+
+1    Signed trades as quantum codes
+A transversal gate acts separately at each physical site, yet it can induce a phase coupling many
+logical qudits. Such a gate can prepare a whole multiqudit resource in one error-detecting block.
+This raises two questions: how can the resulting resource be distinguished from independently
+prepared cubic states, and when does joint preparation save raw resources at a common output
+error? We use finite geometry to choose the logical phase and exact Pauli data to answer these
+questions for two small codes.
+    The examples give different answers. The [[22, 10, 2]]11 code prepares a state that cannot become
+a product across any bipartition, even after an entangling Clifford change of coordinates (Corol-
+lary 2.4). For the [[14, 6, 2]]7 code, Theorem 3.2 proves a preparation advantage over a specified
+separate-distillation menu. The same product-exclusion test does not settle that six-qudit state.
+These are high-rate error-detecting resource factories; distance two is used to reject errors, not to
+correct an arbitrary single-site fault.
+    The common mechanism is simple. Two signed point sets agree on all quadratics, so a cubic
+phase cannot see the stabilizer coordinate. Its surviving third moment becomes the logical phase.
+This is the signed-orthogonality mechanism of qudit transversal-gate constructions [1, 3, 4], ex-
+pressed below for an arbitrary coupled cubic in Theorem 1.1. Our contributions are the resource
+interpretation of the conic phases, their exact spectra and product consequences, and the bounded
+preparation comparison. The translation example shows why the code parameters alone do not
+distinguish the geometry.
+
+
+                                                     1
+    Fix a prime p ≥ 5 and write ω = exp(2πi/p). A qudit has basis {|x⟩ : x ∈ Fp }, with X(a)|x⟩ =
+|x + a⟩ and Z(b)|x⟩ = ω bx |x⟩. A strength-two signed trade is a list of distinct points xi ∈ Fkp , with
+signs ϵi ∈ {1, −1}, such that
+                            X               X                        X
+                                 ϵi = 0,          ϵi xi = 0,                 ϵi xi xTi = 0.            (1)
+                             i                i                      i
+
+These equalities are in Fp . Let E have rows xTi and let L = {a1 + Eu : a ∈ Fp , u ∈ Fkp } ⊆ Fnp . The
+coordinatewise product span is denoted by L◦2 . A Calderbank–Shor–Steane (CSS) code is specified
+here by commuting X- and Z-stabilizer spaces: vectors in those spaces prescribe products of the
+corresponding Pauli operators whose common +1 eigenspace is the code. The notation [[n, k, d]]p
+means n physical qudits, k logical qudits and distance d.
+Theorem 1.1 (Trade-to-code dictionary). Suppose n = 2p, k = p − 1, and dim L = p. Then the
+CSS code with X-stabilizer space S = ⟨1⟩ and Z-stabilizer space L⊥ has parameters [[2p, p − 1, 2]]p .
+                                                            3
+The signed transversal operation i Mϵi , where Mc |z⟩ = ω cz |z⟩, induces the logical diagonal gate
+                                 N
+
+                                                                     X
+                             UF |u⟩ = ω F (u) |u⟩,         F (u) =           ϵi (xTi u)3 .             (2)
+                                                                         i
+
+More generally, for S ⊆ L, a physical cubic with weights wi is constant on every coset of S in L if
+and only if i wi si bi ci = 0 for all s ∈ S and b, c ∈ L. For S = ⟨1⟩ this condition is w ⊥ L◦2 .
+           P
+
+Proof. Put D = diag(ϵi ). Equation (1) says that L is isotropic for the nondegenerate pairing
+v T Dw. Its dimension is half the length, so L⊥ = DL. In particular S ⊆ L, and the CSS dimension
+is dim L − dim S = p − 1. An encoded basis is
+
+                                       |uL ⟩ = p−1/2
+                                                       X
+                                                              |a1 + Eu⟩.
+                                                       a∈Fp
+
+Expanding i ϵi (a + xTi u)3 removes all terms involving a by (1), leaving (2).
+            P
+
+    For the distance, no weight-one Z error lies in S ⊥ . Since the points are distinct, ei −ej ∈ S ⊥ \L⊥
+for every i ̸= j, so dZ = 2. A weight-one vector cannot lie in L: its pairing with 1 ∈ L under D
+would be nonzero. Thus dX ≥ 2.
+                                                        P
+    For the general criterion, write Tw (s, b, c) = i wi si bi ci . The difference of the physical cubic at
+z + s and z is 3Tw (s, z, z) + 3Tw (s, s, z) + Tw (s, s, s). Its quadratic part must vanish as a polynomial
+function on L; degrees are less than p. Polarization, using 2, 3 ̸= 0, gives Tw (s, L, L) = 0. This
+condition also kills the lower terms because s ∈ L, proving sufficiency.
+
+    Watson–Campbell–Anwar–Browne [1, Definition 2 and Lemmas 6–8] impose signed orthogo-
+nality conditions that also restrict logical triple products. The proof above retains precisely the
+condition needed for a possibly coupled logical cubic. Related divisible-code and prime-qudit con-
+structions appear in [2, 3, 4]. The Schur-square conductor also governs the MDS–CSS transversal-
+group classification [22]; here the full product S ◦ L ◦ L matters, and the X-space is only ⟨1⟩.
+
+1.1    An elementary family at every prime
+The following calibration example requires no conic. It supplies both the code parameters and
+uniqueness of the preserving cubic weight, leaving the logical phase and its resource properties as
+the distinctions to investigate. Let V = Fpp /⟨1⟩, write ai for the image of the ith standard basis
+                                                 P
+vector, and set t = a0 . The functional σ([z]) = i zi is well-defined because p = 0 in Fp . Take the
+positive sheet to be {ai } and the negative sheet to be {ai + t}.
+
+                                                       2
+Proposition 1.2 (Translation trade). These sheets define a strength-two trade with affine span V
+and dim L = p. Its code is [[2p, p − 1, 2]]p , and its logical cubic is
+
+                                                                          (u ∈ V ∗ ).
+                                                            X
+                        F (u) = −3u(t)q(u),        q(u) =       u(ai )2                             (3)
+                                                            i
+
+The quadratic form q has rank p − 2. Moreover dim L◦2 = 2p − 1; every preserving physical cubic
+weight is a scalar multiple of the sheet-sign vector.
+
+Proof. The sheets lie in the disjoint affine hyperplanes σ = 1, 2. Within a sheet the points are
+                                                                                             P
+distinct, and their differences span ker σ; t supplies the remaining direction. Since i ai = 0,
+translation preserves the first two moments of this p-point set. The cubic expansion gives (3).
+Identify V ∗ with K = {u ∈ Fpp : i ui = 0}. Then q(u) = i u2i ; its radical on K is ⟨1⟩, so its rank
+                                     P                          P
+
+is p − 2 and the displayed cubic is nonzero.
+    For rigidity, let weights αi , βi on the two sheets annihilate every affine quadratic. Put γ = α + β
+and B = i βi . The linear moment says γ +Be0 ∈ ⟨1⟩. The quadratic moment on K has symmetric
+          P
+
+matrix
+                                    A = diag(γ) + e0 β T + βeT0 + Be0 eT0 .
+A symmetric form vanishing on K × K is 1rT + r1T for some r. For distinct i, j ̸= 0, comparison
+gives ri + rj = 0. There are at least four such indices, whence all ri = 0 for i ̸= 0. Diagonal
+comparison gives γi = 0 there; the linear moment then forces γ0 = −B. Off-diagonal comparison
+gives βi = r0 for i ̸= 0, and the (0, 0) entry gives β0 = r0 . Thus B = pr0 = 0, γ = 0, and α = −β
+are constant weights. The annihilator of L◦2 is therefore exactly the sign line.
+
+1.2   The conic configurations
+The matching construction has three stages. Products of secant equations give a finite list of
+evaluation points; their signed moments supply the code; a change of logical coordinates expresses
+the resulting phase through binary-form invariants. A reader interested in the resource calculation
+may retain Proposition 1.3 and defer the coefficient conventions to the appendix. We call these the
+Clebsch examples after their underlying matching geometry [20].
+    For the two symmetric examples take Q = XZ − Y 2 and label its points by a 7→ (1 : a : a2 ) and
+∞ 7→ (0 : 0 : 1). For a perfect matching M of P1 (Fp ) define
+                          Y
+                 PM =             Lab ,   Lab = abX − (a + b)Y + Z,       La∞ = aX − Y.
+                        {a,b}∈M
+
+Use base matchings
+
+                     M7 = {02, 14, 3∞, 56},        M11 = {01, 25, 37, 49, 68, 10∞}.
+
+Their PGL2 (p) orbits have 2p members. The determinant square class of a transformation taking
+the base matching to M specifies its sign. The coefficient vector of (PM −PMp )/Q specifies xM . The
+exact division, sign consistency, and moment conditions are part of the finite input verification. This
+is the configuration studied in Quadratic Trade Rigidity and Cubic Orientation in Conic Matching
+Quotients [20].
+
+Proposition 1.3 (Finite conic input). For the stated matchings the construction has distinct points,
+dim L = p, and dim L◦2 = 2p − 1. It gives [[14, 6, 2]]7 and [[22, 10, 2]]11 . In invertible logical
+
+
+                                                    3
+coordinates, consisting of a scalar coordinate s and five quartic or nine octavic coordinates, the
+phases are
+                               F7 = 4sI + 3J,     F11 = 4sI2 + 2I3 .                           (4)
+                                         a b c
+Here I = ae − 4bd + 3c2 and J = det           b c d are binary-quartic invariants. For the binary octavic
+                                              c d e
+              P8   8     8−i  i
+f (S, T ) =    i=0 i zi S     T , I2 = (f, f )8 and I3 = ((f, f )4 , f )8 use normalized transvectants.
+
+Finite verification. Appendix A specifies the matrices and substitutions. Exact finite-field expan-
+sion checks the moments, ranks and both polynomial identities. The signed-trade theorem then
+supplies the code and gate. These are finite polynomial and linear-algebra checks; the evidence
+record gives the independent reconstruction and its limits.
+
+   The invariant here is the logical phase itself. This differs from using invariant theory to study
+weight enumerators [5]; the comparison concerns these particular binary-form phases.
+
+
+2    The Hessian spectrum and product exclusion
+Clifford operations permute Pauli operators up to phase. The moduli of a state’s Pauli expecta-
+tions therefore survive every Clifford change of frame and can obstruct conversion to independent
+resources. Their fourth moment will give a product-state obstruction; their rare largest nontrivial
+values will later obstruct a short sum-of-cubes synthesis.
+    For a homogeneous cubic F on Fkp , put |F ⟩ = p−k/2 u ω F (u) |u⟩ and HF (v) = (∂i ∂j F )(v). We
+                                                         P
+
+use natural logarithms and define
+                                                                     !
+                               1
+                                  log p−k
+                                          X
+                   Mα (|ψ⟩) =                 |⟨ψ|X(v)Z(w)|ψ⟩|2α         (α > 0, α ̸= 1).
+                              1−α         v,w
+
+These stabilizer Rényi entropies quantify nonstabilizerness, usually called magic, with the normal-
+ization in [6, 7]; they vanish on pure stabilizer states and are additive under tensor products. The
+following quadratic-sum calculation makes them accessible without enumerating all p2k Paulis.
+
+Theorem 2.1 (Rank formula). Let p ≥ 5, and set r(v) = rank HF (v) and Nr = #{v : r(v) = r}.
+Then                                      (
+                                            p−r(v)/2 , w ∈ im HF (v),
+                     |⟨F |X(v)Z(w)|F ⟩| =                                               (5)
+                                            0,         otherwise.
+Consequently
+                                                        k
+                                                                         !
+                                            1
+                                               log p−k
+                                                       X
+                               Mα (|F ⟩) =                 Nr p(1−α)r .                              (6)
+                                           1−α         r=0
+                                                        T
+Proof. The expectation is p−k u ω F (u)−F (u+v)+w u . Writing cv = ∇F (v), the exponent, up to a
+                                  P
+
+constant, is − 12 uT HF (v)u+(w−cv )T u. The sum over the radical vanishes unless w−cv ∈ im HF (v).
+Euler’s identity HF (v)v = 2cv makes this equivalent to the condition in (5). On a complementary
+subspace diagonalize the quadratic form. Each nonzero quadratic coefficient contributes a Gauss
+                    √
+sum of modulus p: its squared modulus follows by replacing a pair (x, y) with (x − y, x + y) in
+the double sum, an invertible substitution. The radical contributes pk−r(v) , proving the modulus
+formula. There are pr(v) admissible w for each v; summing their powers proves (6).
+
+
+
+
+                                                    4
+    Kagamihara–Tsuchiya [8, Theorem 1] give the binary rank-reduction formula, with C(x) +
+C(x)T replacing the odd-characteristic Hessian. Chen–Yan–Zhou [9] supply related hypergraph-
+state moment methods. We use the established rank-reduction method in odd characteristic; the
+contribution below is the geometric evaluation and its resource consequences. For example, a single-
+qudit cubic F (u) = u3 has rank zero at u = 0 and rank one at all other points. Thus N0 = 1,
+N1 = p − 1, and M2 = log(p2 /(2p − 1)). Tensor products add these entropies. The same formula
+now turns the multivariate rank counts into an exact resource comparison.
+Proposition 2.2 (Exact conic spectra). The nonzero entries of the vector rank distributions for
+the two conic phases are
+                               p=7: r 0 3     4     5     6
+                                 Nr   1 48 2940 26502 88158
+
+            p = 11 : r 0   5     6     7        8          9           10
+               Nr      1 120 14520 80520 21442960 2387485210 23528401270.
+In each case the minimum positive rank is (p − 1)/2, attained on exactly p + 1 projective points. In
+the binary-form coordinates these are s = 0 and the perfect (p − 3)rd powers. In particular,
+                                   1977326743                            1119
+                     M2 (F7 ) = log            ,     M2 (F11 ) = log             .
+                                      78835                          7151076991
+Finite verification and deduction. The census visits vectors with first nonzero coordinate one. Since
+HF (av) = aHF (v) for a ̸= 0, every projective representative contributes p − 1 vectors; the zero
+vector is added separately. The domains have 19608 and 2593742460 representatives. The p = 7
+census has an independent implementation; the p = 11 exhaustive execution is checked against it
+in the smaller case, not independently duplicated at its full size. Substitution verifies the p + 1
+perfect-power points. The census has exactly that many minimum-rank lines, so this containment
+is an equality over Fp . Equation (6) gives the entropy values.
+
+Lemma 2.3 (Product ceiling). For a pure state in dimension D with an orthogonal unitary Pauli
+basis, M2 ≤ log((D + 1)/2). Thus a pure product on blocks of a and k − a prime-dimensional qudits
+satisfies
+                                            (pa + 1)(pk−a + 1)
+                                  M2 ≤ log                      .                             (7)
+                                                     4
+Proof. Put xP = |⟨P ⟩|2 . Purity gives P xP = D and xI = 1. Cauchy–Schwarz on the D2 − 1
+                                      P
+
+other entries yields P x2P ≥ 1 + (D − 1)2 /(D2 − 1) = 2D/(D + 1). Insert this into the definition
+                    P
+
+of M2 . For a product the Pauli sum factorizes, so the entropies add.
+
+    The product-ceiling method has predecessors in the characteristic-function and qudit entropy
+literature [10, 7]. The bound need not be attained.
+Corollary 2.4 (Clifford-product exclusion). The ten-qudit state |F11 ⟩ is not Clifford-equivalent
+to a product across any nontrivial bipartition. The same conclusion holds for the dihedral and
+Borel six-qudit conic trades over F7 in Appendix A. This entropy test alone does not establish the
+conclusion for the six-qudit Clebsch state |F7 ⟩.
+Proof. For fixed k, the largest right side of (7) occurs at a = 1 or k − 1: the variable part pa + pk−a
+increases toward the endpoints. At p = 11, k = 10 the bound is 22.6797 . . ., below 22.8695 . . . =
+M2 (F11 ). At p = 7, k = 6 it is 10.4228 . . .; the other two trades give 10.4246 . . . and 10.4840 . . .,
+whereas M2 (F7 ) = 10.1299 . . .. These comparisons are checked as exact rational inequalities before
+taking logarithms. Clifford conjugation permutes the Pauli moduli, so it preserves M2 .
+
+                                                    5
+    Two disjoint xyz phases at p = 7 have M2 = 8.8047 . . ., also below F7 . The trace cubic
+F (u) = TrFpk /Fp (u3 ) has full Hessian rank at every nonzero u, by nondegeneracy of the trace
+pairing, and hence M2 = log(D2 /(2D − 1)), D = pk . These finite-field cubic fiducials belong to
+the Alltop–MUB construction [11, 12, 13]. Feng–Luo [14, Proposition 2 and Appendix C] prove
+single-prime L1 optimality among diagonal gates. Neither that result nor the L1 ceiling of [13] is
+an unrestricted M2 maximality theorem. The conjecture in [15] concerns two prime-dimensional
+qudits; we do not extend its attribution to arbitrary k.
+
+
+3     A bounded factory comparison
+The resource-count question is different from the entropy question. We compare preparing and
+purifying the whole six-qudit phase with purifying independent single-qudit primitives and then
+compiling it. This is the synthillation strategy of Campbell–Howard [16]; Li–Yeh [17, Section 4.4
+and Appendix C.1] already connects signed physical qutrit gates to a coupled logical resource and
+its distillation. Our claim is the following finite, same-target comparison.
+
+3.1   Noise and allowed operations
+Every raw input is
+                                    δX                                                          3
+                                                                       |Mc ⟩ = 7−1/2
+                                                                                       X
+         ρc = (1 − δ)|Mc ⟩⟨Mc | +          Z(e)|Mc ⟩⟨Mc |Z(−e),                              ω cx |x⟩.   (8)
+                                    6 e̸=0                                              x
+
+Inputs are independent; stabilizer preparation, Clifford operations, measurements, feed-forward
+and storage are ideal. Uniformity of the six nonzero labels is an assumption, not a consequence of
+diagonal twirling.
+    The native factory prepares |+L ⟩ = 7−7/2 z∈L |z⟩, injects the fourteen signed cubic gates,
+                                                   P
+
+measures the code stabilizers, and decodes on acceptance. Injection is deterministic: controlled
+subtraction from data x to a magic ancilla, followed by ancilla outcome m, supplies phase c(x+m)3 .
+A quadratic Clifford correction removes the m-dependent terms. An ancilla error Z(e) becomes
+Z(e) on the data. No injection outcome is discarded. For the resulting physical error vector e,
+acceptance is 1T e = 0 and the logical error label is E T e; the error is harmless exactly when e ∈ L⊥ .
+    The separate architecture distills each primitive independently with any finite concatenation
+of the three modules in Table 1, then uses deterministic linear-form cubic synthesis without final
+postselection. Outputs may be stored separately and successful attempts retained. Module choices
+and depths may differ between terms. A final Clifford is allowed if its input is a homogeneous
+cubic-phase state on the same six qudits. Ancilla-assisted general synthesis, pooled multi-output
+distillers and joint synthillation are outside this menu.
+
+                  Module               points       X space   logical row   cubic weights
+                  Weighted four-site   0, 1, 2, 3   ⟨1⟩       x             (−1, 3, −3, 1)
+                  QRM six-site         F∗7          ⟨x⟩       1             all 1
+                  RS seven-site        F7           ⟨1, x⟩    x2            all 1
+
+Table 1: The three allowed one-output distillers. In each row L = S + ⟨ℓ⟩ and the logical coefficient
+is −1; coordinate negation supplies +1. Parameters are respectively [[4, 1, 2]]7 , [[6, 1, 2]]7 , and
+[[7, 1, 3]]7 .
+
+
+
+                                                      6
+    Here QRM means quantum Reed–Muller and RS means Reed–Solomon. The six-site row is
+the prime-qudit QRM construction [3, 19]; the length-seven RS row is checked separately. We
+distinguish raw supplies. In the sign-only menu, only c = ±1 has unit cost. The four-site module
+costs eight raw injections because each ±3 gate uses three signs. Its two middle error rates are
+δ3 = (6/7)[1 − (1 − 7δ/6)3 ]. In the weighted relaxation, every nonzero cubic coefficient has unit raw
+cost and error δ. This relaxation favors the separate architecture.
+    Define the weighted cubic rank r(F ) as the least number of nonzero terms in F = i ci ℓ3i , with
+                                                                                          P
+
+ci ∈ F∗p and nonzero linear forms ℓi over the same field. In linear-form synthesis each term consumes
+a primitive. The spectral calculation therefore has a second use: it limits how few independently
+prepared primitives can realize the target.
+
+Lemma 3.1 (Cubic synthesis lower bound). The weighted linear-form cubic ranks obey 9 ≤ r(F7 ) ≤
+13 and 15 ≤ r(F11 ) ≤ 21. The rank-nine lower bound also holds for any homogeneous cubic phase
+on six qudits Clifford-equivalent to |F7 ⟩.
+
+Proof. In a shortest decomposition F = ri=1 ci ℓ3i , the coefficient vectors span the logical space and
+                                          P
+
+are projectively distinct. The Hessian at v has rank at most the number of ℓi (v) ̸= 0. For F7 , killing
+five independent forms gives r ≥ 8. If r = 8, every six coefficient vectors   must be independent, or
+                                                                        8
+a common annihilator would have Hessian rank at most two. The 5 = 56 five-subsets then span
+distinct hyperplanes, producing 56 minimum-rank lines. The census has only eight. Thus r ≥ 9.
+For F11 the same argument gives r ≥ 14 and excludes equality: 14       9 = 2002 > 12 minimum-rank
+lines would be needed. The raw signed decompositions have one zero row, giving the upper bounds.
+For a cubic phase the Pauli-modulus multiplicity at p−r/2 is Nr pr , so the histogram recovers the
+rank census. Clifford invariance therefore preserves every input to the lower-bound argument.
+
+    A weighted cube is implemented by Clifford computation of ℓi , one weighted cubic gate, and
+uncomputation. This signature-tensor synthesis framework is explicit in Heyfron–Campbell [18,
+Section IV]; the rank bound is for that model, not arbitrary circuits.
+    The comparison uses three steps. Native error detection brings the block error below the
+raw input error. Independence then prevents any unpurified synthesis term from meeting that
+target, even if errors from different terms can cancel. Finally, the rank bound forces at least nine
+independently purified terms. The proof retains the exact interval bounds and both raw-resource
+supplies.
+
+Theorem 3.2 (Same-target resource comparison). Under (8), for every 0 < δ ≤ 0.01, let q be the
+native factory’s output block infidelity. Its expected raw consumption is less than 16.116. Every
+separate construction in the sign-only menu with block infidelity at most q costs at least 54 raw
+inputs per output; in the weighted relaxation it costs at least 36. Feasible separate constructions
+meeting this target exist throughout the interval.
+
+Proof. Write a = 1 − δ and P for native acceptance. Single errors are rejected. Every ac-
+cepted weight-two error is harmful, since the evaluation points are distinct. Their probability
+is (91/6)δ 2 a12 . For a fixed error support of size at least two, fixing all but its last nonzero label
+leaves at most one of six choices that accepts. A union bound on pairs therefore gives
+
+                                                       91δ 2 a12      91δ 2
+                          a14 ≤ P ≤ 1 − 14δa13 ,                 ≤ q ≤ 14 .                         (9)
+                                                         6P           6a
+Bernoulli’s inequality implies
+
+             a12 (1 + 14δa) ≥ (1 − 12δ)(1 + 14δ − 14δ 2 ) = 1 + δ(2 − 182δ + 168δ 2 ) ≥ 1.
+
+                                                   7
+Hence a12 ≥ 1 − 14δa13 ≥ P , so q ≥ (91/6)δ 2 , while q/δ ≤ (91/600)/(0.99)14 < 1. Also 14/P ≤
+14/(0.99)14 < 16.116.
+    A noisy primitive on a nonzero form with coefficient vector b contributes an independent error
+label eb. For probability distributions on the additive logical-label group, ∥µ ∗ ν∥∞ ≤ ∥µ∥∞ , since
+each convolution value is an average. An unpurified raw term therefore forces final error at least
+δ, even with cancellations or a fixed Pauli correction. The states Z(η)|F ⟩ are orthogonal, so this
+probability is exactly a block-infidelity statement. An allowed final Clifford maps the ideal and
+errored outputs together and preserves their overlaps. Since q < δ, all synthesis terms must be
+purified. Each independent tree has at least six raw leaves in the sign-only menu and four in the
+weighted menu. Retrying cannot lower those counts. Lemma 3.1 requires at least nine terms, giving
+54 and 36.
+    For feasibility use the thirteen-term signed decomposition. A weighted four-site primitive has
+error at most δ 2 /a4 , so thirteen give block error at most 13δ 2 /(0.99)4 < (91/6)δ 2 . For the seven-site
+module harmful accepted errors have weight at least three, giving error at most 35δ 3 /a7 ; thirteen
+give 455δ 3 /a7 < (91/6)δ 2 throughout the interval. A union bound suffices for these feasible upper
+estimates; the lower bound already allowed cancellations.
+
+    At δ = 0.01 the exact enumerator calculation gives the comparison below. The separate rows
+are feasible constructions, not claims to attain their menu’s optimum.
+
+            Construction                              block infidelity   expected raw inputs
+            Native fourteen-input                          0.00159853                  16.0894
+            Weighted four-site, thirteen terms             0.00133141                  54.1275
+            Sign-only seven-site, thirteen terms         0.0000130920                  97.6325
+
+For an ordinary enumerator Aw of L⊥ , native good-output probability before conditioning is
+P        14−w (δ/6)w . Acceptance also has the closed form P = [1 + 6(1 − 7δ/6)14 ]/7. Thus the
+   w Aw a
+calculation includes harmless accepted errors, rather than treating every nonzero physical error as
+failure.
+
+
+4    A chordal restriction of the logical cubic
+The logical cubic also provides an interface with the invariant pencil in Chordal and Conference
+Cubics: Reconstruction and a Residual C2 -Torsor [21]. A restriction of a logical polynomial is a
+resource on fewer variables; it does not by itself construct a subcode. The useful question is whether
+this smaller resource retains a distinction that the Clifford-invariant spectrum can detect.
+    Write A = {y ∈ F611 : i yi = 0} for the five-dimensional augmentation space of the six matching
+                          P
+
+pairs, ordered as
+                             ({0, 1}, {10, ∞}, {2, 5}, {3, 7}, {4, 9}, {6, 8}).
+The geometric construction supplies an embedding ψ : A −→ V5 and two A5 -invariant cubics: the
+restriction h = F ◦ ψ and a conference cubic c. Here a conference cubic is obtained from the signed
+              P
+triangle sum i<j<k Bij Bjk Bki yi yj yk , restricted to A, where B is the chosen symmetric conference
+matrix: its diagonal is zero, its off-diagonal entries are ±1, and B 2 = 5I. The chosen signing has
+A5 -invariant triangle products. The coefficient certificate uses the basis ei − e5 (0 ≤ i < 5) of A.
+A chordal cubic is the secant hypersurface of a rational normal quartic; the Hankel determinant
+below is its standard equation. The span of h and c is the invariant pencil, a two-dimensional
+space of cubics considered up to nonzero scalar. The supplied coefficient certificate fixes actual
+representatives, since scalar multiples can define different phase functions in fixed coordinates.
+
+                                                     8
+Proposition 4.1 (Chordal shadow and sign choices). Over F11 the stabilizer A5 of the base match-
+ing acts on the logical space as 1⊕V4 ⊕V5 . The restriction to its unique five-dimensional constituent
+is, in the recorded coordinates,                          
+                                               v0 v1 v2
+                                        8 det v1 v2 v3  .
+                                                          
+                                               v2 v3 v4
+Here v0 , . . . , v4 are new linear coordinates on A. The restriction is a chordal member of the invariant
+pencil. At ranks 0, 3, 4, 5, the chordal and conference censuses are respectively
+
+                          (1, 120, 27720, 133210),       (1, 300, 22260, 138490).
+
+Thus their five-qudit phase states are not Clifford-equivalent. At p = 7 the restriction s = 0 in (4)
+is 3J. Reversing the sheets sends UF to UF−1 , a Clifford-conjugate gate. Let q be the involution
+on A induced by the permutation (01)(24)(35) of these ordered pairs. With actual representatives
+h and h2 = h ◦ q, q exchanges the two chordal members and gives a linear Clifford equivalence of
+their five-qudit states.
+
+Finite identification and operational deduction. Character idempotents in the reconstructed A5 ac-
+tion have ranks 1, 4, 5. The recorded intertwiner identifies V5 with the augmentation module on
+the six matching pairs; polynomial substitution gives the Hankel determinant. The two exact cen-
+suses then separate the resources by Theorem 2.1. The p = 7 restriction follows directly from
+(4). Sheet reversal changes every sign in (2), hence negates F . For an invertible linear map q, the
+basis permutation |z⟩ 7→ |qz⟩ is Clifford: it sends X(v) to X(qv) and Z(w) to Z(q −T w). In the
+coefficient certificate, h ◦ q = 2h   b 2 , where h
+                                                  b 2 is the projectively normalized second chordal cubic.
+Taking h2 = h ◦ q gives h2 ◦ q = h because q 2 = I; the basis permutation for q therefore exchanges
+|h⟩ and |h2 ⟩. If normalized representatives are preferred, the basis permutation for 7q sends |h⟩ to
+ b 2 ⟩: its inverse is 8q, and 2 · 83 = 1 in F11 . For sheet reversal, homogeneity gives F (−u) = −F (u),
+|h
+so coordinate negation conjugates UF to UF−1 and sends |F ⟩ to | − F ⟩. The q-exchange identity is
+on the shadow, not a claim about all extensions to the full ten-qudit gate.
+
+    The singular scheme of the Hankel cubic is a rational normal quartic; its twelve F11 -points are
+not the entire scheme. The existing lift test rules out the identity-on-complement extension. For
+geometric lifts, checking all 1320 elements of PGL2 (11) gives exactly 60 that preserve V5 , namely
+the reconstructed A5 . Their restrictions have determinant 1, whereas det q = −1 on A. Thus none
+restricts to q. This excludes the specified geometric lifts; it does not classify arbitrary full-gate lifts.
+
+Questions suggested by the construction
+The translation family shows that the parameters and cubic-weight rigidity alone do not select the
+symmetric examples. Their distinction lies in the phase geometry and its spectrum. The conic
+translation-class search finds no examples at p = 17 or 19, after finding examples at 7, 11 and 13.
+Does this finite pattern reflect an obstruction at larger primes, or do examples recur? A second
+question is whether a balanced 2p-point trade can realize a trace-cubic resource on p − 1 logical
+qudits. Finally, the distance-three search inside the fixed p = 7 evaluation space fails, while the
+elementary distance-three RS examples do not establish the same product exclusion. Finding a
+distance-at-least-three code with several logical qudits and such an invariant phase is a separate
+construction problem. The present factory comparison leaves pooled distillation and unrestricted
+adaptive preparation open.
+
+
+                                                     9
+A     Finite data and verification boundary
+The arguments proving the signed-moment dictionary, translation family, Hessian formula, product
+ceiling and interval comparison are given in the text. The conic matrices, polynomial identities,
+exact spectra and shadow identification use finite computations. No Lean coverage is claimed
+for this companion. The source annotations identify each dependence; the claim map pins every
+theorem statement and records formal coverage as absent.
+
+A.1     Coordinates and exact inputs
+The evidence index supplies the full matrices, signs and raw cubics from the committed reconstruc-
+tion bundle. For p = 7 the coefficient order is X 2 , XY, XZ, Y 2 , Y Z, Z 2 and the logical substitution
+is u = (a, b, s + c, 3s + c, d, e). For p = 11 the selected coefficient order is
+
+                      X 4 , X 3 Y, X 3 Z, X 2 Y Z, X 2 Z 2 , XY 2 Z, XY Z 2 , XZ 3 , Y Z 3 , Z 4 ;
+
+the substitution is u = (z0 , z1 , 7z2 , 6z3 , 3s + 6z4 , s + 3z4 , 6z5 , 7z6 , z7 , z8 ). The transvectant normal-
+ization is
+                                                      r
+                                                                    !
+                               (m − r)!(n − r)! X             j r          ∂rf             ∂rg
+                    (f, g)r =                            (−1)                                    ,
+                                       m!n!          j=0
+                                                                 j ∂S ∂T ∂S ∂T r−j
+                                                                          r−j       j     j
+
+
+for binary forms of degrees m, n; all denominators used here are invertible.
+    For these matching configurations, the signed cubic line is also the Macaulay inverse system of
+the Artinian reduction with Hilbert function (1, p − 1, p − 1, 1) [20, Corollary on self-association and
+cubic duality]. Thus the same cubic enters the geometric duality and the linear-form compilation
+problem.
+    For the other p = 7 trades, one may reconstruct the positive and negative sheets as translation
+classes of the following matchings. Entries are partner lists on 0, . . . , 6, ∞, with index 7 representing
+infinity:
+                                               +                        −
+                          dihedral (1, 0, 5, 4, 3, 2, 7, 6) (1, 0, 6, 4, 3, 7, 2, 5)
+                           Borel    (1, 0, 4, 6, 2, 7, 3, 5) (1, 0, 6, 5, 7, 3, 2, 4).
+Their vector censuses at ranks 0, 3, 4, 5, 6 are respectively
+
+                          (1, 6, 1092, 20202, 96348),          (1, 6, 588, 20286, 96768).
+
+Their fourth-moment sums are 58711/16807 and 55327/16807.
+
+A.2     Classification and distance computations
+The conic search enumerates perfect matchings, identifies their translation classes, and buckets
+classes by equal first and second moment tensors. Pairs in a bucket are tested for a nonzero
+third-moment difference, then quotiented by the stated affine action. The respective numbers of
+translation classes for p = 5, 7, 11, 13, 17, 19 are 3, 15, 945, 10395, 2027025, 34459425; the numbers
+of inequivalent hits under AGL(1, p) are 0, 3, 2, 1, 0, 0. This is a finite source classification, not
+a classification of all trades or all Clifford-equivalent codes. Every hit has the signed moment
+condition, dim L = p and Schur-square dimension 2p − 1. The p = 13 hit gives [[26, 12, 2]]13 ;
+its stored 20000-vector Hessian sample is not an exhaustive spectrum or a proved minimum-rank
+bound. The new p = 11 and p = 13 X-distance estimates are only upper bounds.
+
+
+                                                          10
+    The fixed-space distance search uses all L′ ⊆ L containing 1 with dim L′ ≥ 3. Put R(L′ ) =
+{s ∈ L′ : T (s, L′ , L′ ) = 0}. It suffices to test the maximal admissible X-space R(L′ ). A weight-
+two ei − ej is undetected exactly when columns i, j of this space agree; it is harmless exactly
+when those columns of L′ agree. Thus distance at least three requires equality of the two column
+partitions. Reduced row-echelon enumeration of subspaces of L/⟨1⟩ visits 61927311 candidates
+of dimensions two through six. None with a nonzero restricted cubic passes the partition test.
+The one-dimensional case also fails: a nonzero one-variable cubic has zero trilinear radical on that
+quotient, so its only available X-space is ⟨1⟩, which does not separate its distinct evaluation columns.
+This excludes the specified nonzero-cubic subcodes inside the fixed L; it does not exclude other
+evaluation spaces, concatenation or code switching. For comparison, evaluation on all of Fp with
+X-space RS2 gives the length-p distance-three rows [[7, 1, 3]]7 , [[11, 3, 3]]11 and [[13, 4, 3]]13 in the
+recorded polynomial-code search. They are distinct from Campbell’s length-(p−1) construction [19];
+their checks belong to the strengthening bundle. The exhaustive negative has an internal count
+check and recorded tally, but no independent full second implementation.
+
+A.3    Artifacts and reproducibility
+The machine-readable evidence registry in verification/evidence.json records the exact repos-
+itory paths, checksums, byte counts, replay commands, search domains and limits. The inputs
+are the committed reconstruction, spectrum, strengthening and shadow bundles, together with
+the factory benchmark. The factory certificate contains all native and primitive enumerators, ex-
+act rational sample values and interval constants. Its checks compare primal enumeration with
+MacWilliams transforms and synthesis-kernel enumeration with the Fourier expression; no random
+seed or floating-point decision enters that benchmark.
+    The lightweight draft check verifies statement identities, annotation links, input hashes, census
+arithmetic and the exact product and interval inequalities. A fresh standard-library check also
+re-expands both coordinate normal forms, checks both conic moment and Schur-square identities,
+reproduces the complete p = 7 census, and checks seven primes in the translation family. A separate
+check reproduces the actual shadow normalization and compares all 1320 geometric actions with
+the residual involution. It does not rerun the multi-billion-point p = 11 census or the matching
+exhaustions. Those remain explicitly attributed to the recorded executions; full commands and
+their runtime estimates accompany the evidence registry. The accompanying supplement contains
+the inputs and programs needed for these checks. The lightweight check does not independently
+reproduce the large searches.
+
+
+References
+ [1] F. H. E. Watson, E. T. Campbell, H. Anwar and D. E. Browne. Qudit Color Codes and
+     Gauge Color Codes in All Spatial Dimensions. arXiv:1503.08800v2 (2015), preprint.
+ [2] J. Haah. Towers of generalized divisible quantum codes. arXiv:1709.08658v2 (2018), preprint.
+ [3] E. T. Campbell, H. Anwar and D. E. Browne. Magic state distillation in all prime dimensions
+     using quantum Reed-Muller codes. arXiv:1205.3104v2 (2012), preprint.
+ [4] A. Krishna and J.-P. Tillich. Towards low overhead magic state distillation.
+     arXiv:1811.08461v2 (2019), preprint.
+ [5] A. R. Kalra and S. Prakash. Invariant Theory, Magic State Distillation, and Bounds on
+     Classical Codes. arXiv:2501.10163v3 (2026), preprint.
+
+                                                   11
+ [6] L. Leone, S. F. E. Oliviero and A. Hamma. Stabilizer Rényi Entropy. arXiv:2106.12587v5
+     (2022), preprint.
+
+ [7] Y. Wang and Y. Li. Stabilizer Rényi entropy on qudits. Quantum Inf. Process. 22 (2023),
+     444. 10.1007/s11128-023-04186-9.
+
+ [8] D. Kagamihara and S. Tsuchiya. Stabilizer Rényi entropy of 3-uniform hypergraph states.
+     arXiv:2602.23687v2 (2026), preprint.
+
+ [9] J. Chen, Y. Yan and Y. Zhou. Magic of quantum hypergraph states. arXiv:2308.01886v2
+     (2024), preprint.
+
+[10] H. Dai, S. Fu and S. Luo. Detecting Magic States via Characteristic Functions. Int. J. Theor.
+     Phys. 61 (2022), 35. 10.1007/s10773-022-05027-8.
+
+[11] W. O. Alltop. Complex sequences with low periodic correlations. (1980).
+     10.1109/TIT.1980.1056185.
+
+[12] A. Klappenecker and M. Rötteler. Constructions of Mutually Unbiased Bases.
+     arXiv:quant-ph/0309120v1 (2003), preprint.
+
+[13] B. S. Damski, R. Bistroń, D. Ponterio, J. Czartowski and K. Życzkowski. Product
+     Weyl-Heisenberg covariant MUBs and Maximizers of Magick. arXiv:2603.15550v1 (2026),
+     preprint.
+
+[14] L. Feng and S. Luo. Optimality of the Howard-Vala T-gate in stabilizer quantum
+     computation. Phys. Scr. 99 (2024), 115226. 10.1088/1402-4896/ad80e7.
+
+[15] M. Knipfer, A. Roman, K. Matcheva and K. T. Matchev. Analytical Landscape of Maximal
+     Magic for Two-Qutrit States and Beyond. arXiv:2607.07197v1 (2026), preprint.
+
+[16] E. T. Campbell and M. Howard. A unified framework for magic state distillation and
+     multi-qubit gate synthesis with reduced resource cost. arXiv:1606.01904v5 (2026), preprint.
+
+[17] C. Li and L. Yeh. Transversal AND in Quantum Codes. arXiv:2603.04548v2 (2026), preprint.
+
+[18] L. E. Heyfron and E. T. Campbell. A quantum compiler for qudits of prime dimension
+     greater than 3. arXiv:1902.05634v1 (2019), preprint.
+
+[19] E. T. Campbell. Enhanced fault-tolerant quantum computing in d-level systems.
+     arXiv:1406.3055 (2014).
+
+[20] T. Rudd. Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients.
+     Companion manuscript. 10.5281/zenodo.21682217.
+
+[21] T. Rudd. Chordal and Conference Cubics: Reconstruction and a Residual C2 -Torsor.
+     Companion manuscript. 10.5281/zenodo.21895530.
+
+[22] T. Rudd. Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes.
+     Companion manuscript. 10.5281/zenodo.21766797.
+
+
+
+
+                                               12
+

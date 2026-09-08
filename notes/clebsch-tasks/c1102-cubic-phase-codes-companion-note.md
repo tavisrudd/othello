@@ -26,8 +26,14 @@ Self-contained supplement, metadata and public README committed; official export
 has zero findings and a disposable candidate passes all checks with an identical PDF.
 Standalone: `~/src/math-papers/clebsch-cubic-phase`, commit `5ab613c`;
 exporter verification and all lightweight/PDF checks pass; tree clean.
-Next: the style guide’s blind specialist/adjacent-reader comparison and author
-publication decision. No publication or mirror synchronization has occurred.
+Blind before/after comparison (style guide step 7) done 2026-09-08: both the
+specialist (8 vs 7) and the adjacent reader (7 vs 5) chose the revised draft;
+`notes/2026-09-08-c1102-blind-comparison/REPORT.md`. The specialist asks for three
+cheap edits before acceptance (supplement locator for the finite evidence and an
+accurate Appendix A pointer; the `N_0 = 1` full-span step in Lemma 3.1; one
+Bravyi–Haah positioning sentence) plus a "raw states only" cost caveat in §3.1.
+Next: apply those edits, rebuild, forward-commit the standalone repository, then the
+author publication decision. No publication or mirror synchronization has occurred.
 
 ## Read first (in this order, nothing else)
 
