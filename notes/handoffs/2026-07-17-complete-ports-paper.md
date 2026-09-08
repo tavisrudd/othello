@@ -6,14 +6,16 @@
 trails belong in the dated task reports and in the archive companion,
 [`2026-07-17-complete-ports-paper-archive.md`](2026-07-17-complete-ports-paper-archive.md).
 
-**Date**: 2026-09-07
+**Date**: 2026-09-08
 **Status**: ACTIVE. The operational revision has a 40-page manuscript and 32
 registered claims, with four unchanged Lean terminals. Minimal-support confinement,
 quotient-labelled lifting, pricing/availability, and boundary-width compilation
 are human-proved additions. Ergodis is presented through the mathematics it embodies and the repair,
 allocation, and reuse decisions that this enables. A binary running example motivates local cost, compatibility, and capacity
 choices before the exact main formula on page 2; detailed verification and benchmark records are in companion documentation.
-The remaining paper route is C325 then C953, with C955 after. No push or deposit.
+The next manuscript step is C1127, addressing the September 8 supplied referee
+report after critical assessment. The remaining route is C1127, C325, C953,
+then C955. No push or deposit.
 
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
@@ -120,6 +122,19 @@ hierarchy.
 
 ## Active frontiers
 
+### C1127: supplied referee response
+
+Critical assessment and the ordered revision plan are in
+`notes/2026-09-08-c1127-complete-ports-referee-response.md`.
+The six correction groups are supported by the inspected source. First repair
+contextual closure at the original leaf confinement boundary, then quantifiers,
+hypotheses, witness accounting, and the tree optimality certificate. Follow with
+one complete multilevel example and selective exposition work. The stronger
+region-indexed theory is outside the initial repair. Explicit instances and an
+economical interface family are bounded supporting attempts. Assessment is
+complete; manuscript edits and validation are pending. This report does not
+replace C325 or the fresh C953 aggregate gate.
+
 ### Referee repair disposition
 
 The Astra technical and journal-style findings have been repaired and the
@@ -142,12 +157,14 @@ environments are unchanged.
 
 ### Paper route
 
-1. **C325** — appendix-only consolidated executable verifier reproducing every retained finite
+1. **C1127** — implement the assessed September 8 referee response, with fixed-leaf
+   observation semantics, precise optimizer claims, and a complete multilevel example.
+2. **C325** — appendix-only consolidated executable verifier reproducing every retained finite
    appendix table from a versioned manifest, with independent replay and per-claim evidence routes.
-2. **C953** — aggregate referee/export gate after C325: theorem, human-proof, Lean adequacy, axiom,
+3. **C953** — aggregate referee/export gate after C325: theorem, human-proof, Lean adequacy, axiom,
    terminology, literature, computation-independence, rendered-manuscript, and hostile referee
    audits, then the draft-readiness verdict.
-3. **C955** — coefficient-presentation spectrum, after C953.
+4. **C955** — coefficient-presentation spectrum, after C953.
 
 ## Lane ownership
 
