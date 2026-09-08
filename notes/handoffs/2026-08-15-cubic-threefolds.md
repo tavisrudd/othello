@@ -71,6 +71,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   its full completion or independent specialist certification. C978/C956
   stay open by author instruction. Finish the custom protocol requirements
   once located before considering the deferred email.
+  Portfolio summary is updated and exported (`ea8f2e5a0` / `a8e17f7`).
+  The author retains Paper 2's current title. The follow-up Lean audit finds
+  no stale claim digests; the primary threefold endpoint and formal-germ
+  interface are the first useful extension targets. Existing persistence
+  algebra can be reused. Scope and larger targets:
+  `../2026-09-07-cubic-pair-lean-extension-audit.md`.
   C963/C965/C966 retain algorithmic work. The upgraded claims retain their stated
   imported-theorem dependencies and recorded review limits. Review and ordering:
   `../2026-09-07-cubic-astra-review-triage.md`. Tschinkel--Zhang v2 source

@@ -95,3 +95,9 @@ exists behind another manuscript interface. Reusing it is preferable to
 creating a duplicate formalization. The unresolved work is precisely the
 primary-interface connection and geometric hypothesis supply, not an unknown
 matrix identity. No new mathematical mystery arises from this audit.
+
+The final Lean README export is committed as `6452a20` from authority
+`32ad63cae`. The standalone `make check` passes, export verification passes,
+and both paper PDFs still match the authority byte for byte. Paper 2 remains
+at `b9876e6`, with its title unchanged. All requested local exports are
+current; nothing was pushed or deposited.
