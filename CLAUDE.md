@@ -118,6 +118,9 @@ literature comparison, or ordinary read-only review.
 Before any task that works directly on a manuscript under `papers/`, read
 `papers/style-guide.md` completely. This is a routed read, not startup context.
 
+Use `gpt-6-astra` for all cold-read sub-agents, including referee reads. Give
+them a fresh context without the drafting conversation or earlier reviews.
+
 ## Standalone paper mirrors
 
 ### Related repositories
