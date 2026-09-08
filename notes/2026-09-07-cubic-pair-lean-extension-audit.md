@@ -101,3 +101,13 @@ The final Lean README export is committed as `6452a20` from authority
 and both paper PDFs still match the authority byte for byte. Paper 2 remains
 at `b9876e6`, with its title unchanged. All requested local exports are
 current; nothing was pushed or deposited.
+
+## Completed first extension
+
+The first recommendation is implemented at authority `abf5b668a`: the new
+terminal proves irrationality after P1 and of the original threefold from
+a positive natural-number count and explicit product/factorization data.
+The source count is now 319 reviewer terminals, with coverage categories
+unchanged. See `2026-09-07-cubic-threefold-lean-stabilization.md` for the
+exact declaration, guarded builds, kernel axiom audit and export identity.
+The formal-germ interface connection is the next target.

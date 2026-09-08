@@ -80,3 +80,28 @@ No manuscript hypotheses or printed conclusions changed.
 
 Captured audit output SHA-256: `3a5ae22f32ea1b41ec1cae6bc803541a8888e05c07fc4d0e43114715e6001fea`.
 Its exact path is `/home/tavis/.cache/othello-lean-build/run-20260908-002510-5b39f70f/logs/TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Verification.AxiomAudit.quiet/20260908-002511-2ab13640/20260907-172518-taskset-c-20-23-choom-n-1000-time-v-nix-develop-command-bash-lc-export-LEAN_NUM_T/stdout.log`.
+
+The authority paper gate passed at
+`/tmp/claude-run-quiet/20260907-172655-make-C-cubic-stabilization-m1-check/`.
+The exported paper gate passed at
+`/tmp/claude-run-quiet/20260907-172800-make-C-cubic-stabilization-m1-check/`.
+The 18-page PDF remains byte-identical to the preceding draft, SHA-256
+`b4580e09aec3e91d6492217353ac6cf1d03af0177ac35caa09320c1f2721a57e`.
+Guarded export plan/audit/sync and manifest verification pass from authority
+`abf5b668a`, with zero reference findings and export content hash
+`e8e6ae0daad3d5c8b4ca7581f789a6122ad7b0d04794195b046d058306ea2b00`.
+
+A bounded check of the next interface fixes its sign convention: the main
+proof has `∂N = -q N + [N,B]`. The existing
+`Quantum.nilpotentCluster_sq_eq_zero_of_germ_evolution` in
+`Quantum/RankTwoClusterGermRigidity.lean` accepts this with grading zero,
+connection B and multiplier -q. This identifies the algebraic substitution;
+it does not yet supply the primary public terminal, regular-frame bridge,
+closed-point determinant input, or geometric spectral-cluster construction.
+
+The standalone forward commit is `3d200fc`. A separate guarded full Lean
+replay there is running at
+`/home/tavis/.cache/othello-lean-build/run-20260908-002759-521ee1b7`;
+it is rebuilding companion dependencies. This additional replay is not yet
+recorded as passed. The authority's full 319-terminal kernel audit and both
+paper gates have already passed.

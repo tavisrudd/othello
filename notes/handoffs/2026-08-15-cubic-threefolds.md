@@ -72,10 +72,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   stay open by author instruction. Finish the custom protocol requirements
   once located before considering the deferred email.
   Portfolio summary is updated and exported (`ea8f2e5a0` / `a8e17f7`).
-  The author retains Paper 2's current title. The follow-up Lean audit finds
-  no stale claim digests; the primary threefold endpoint and formal-germ
-  interface are the first useful extension targets. Existing persistence
-  algebra can be reused. Scope and larger targets:
+  The author retains Paper 2's current title. The general threefold Lean
+  endpoint now proves irrationality after P1 and of the base (`abf5b668a`),
+  with geometric inputs explicit and fragment coverage retained. The source
+  build and 319-terminal axiom audit pass; mirror commit `3d200fc` passes
+  the paper gate. Its additional full Lean replay is running at
+  `/home/tavis/.cache/othello-lean-build/run-20260908-002759-521ee1b7`. Report:
+  `../2026-09-07-cubic-threefold-lean-stabilization.md`.
+  Next connect the main persistence proof to the existing formal-germ
+  theorem. Scope and larger targets:
   `../2026-09-07-cubic-pair-lean-extension-audit.md`.
   C963/C965/C966 retain algorithmic work. The upgraded claims retain their stated
   imported-theorem dependencies and recorded review limits. Review and ordering:
