@@ -54,9 +54,12 @@ Mandatory inventory, cross-target conformance and native performance gates:
 `notes/2026-09-08-c1130-wasm-feature-completeness.md`.
 Initial concrete contract: `notes/2026-09-08-c1130-execution-contract-proposal.md`.
 Private loading/execution spike: `notes/2026-09-08-c1130-private-module-loading-spike.md`.
-Loading/conformance implemented: core `0af66d9`, private `3aafb81`; source-isolated
-native and actual browser LRC/QEC transcript gates pass. Performance/distribution
-acceptance remains open; ABI experimental. Results:
+Loading spike complete: core `5542688`, private `29a2fd8`/`2e90fa4`, contributor
+`9e49744`; source-isolated native and actual browser LRC/QEC gates, provider-side
+allocation audit, retained boundary counters and revised stripped-package loading
+pass. ABI remains experimental; full native performance acceptance remains open.
+Next: refine shareable immutable-plan / owned executor-workspace semantics, then
+third-family composition and CampaignSession/console integration. Results:
 `notes/2026-09-08-c1130-module-loading-results.md`.
 Preserve public-core loading of separately compiled/obfuscated private packages;
 canonical WASM engine plus extensions, not a mandatory private assembly build.

@@ -238,3 +238,17 @@ requirement. C1084 explicitly requires public core hosts to load independently
 compiled private capabilities; the proposal, task card and context map now retain
 canonical core plus native/WASM/IR extensions. No crate/build migration occurred.
 The superseded proposal is preserved in commit `20e532dbc`, not current guidance.
+
+## 2026-09-08 — C1130 private-module loading spike
+
+Core `5542688` (initial `0af66d9`), private `29a2fd8`/`2e90fa4` (initial
+`3aafb81`), contributor `9e49744`: source-isolated public native host and canonical
+browser Worker load independent private LRC/QEC providers. Real input transcripts,
+600 retained boundary-counter samples, loaded-provider zero-allocation audit,
+compatible revised stripped payloads under frozen native host bytes, bounded
+component and WASM-phase comparisons are recorded privately in
+`../2026-09-08-c1130-module-loading-results.md`. ABI stays experimental: ordinary
+WASM/batching is the provisional direction, shared immutable-plan/worker ownership
+needs refinement, and CampaignSession/console/third-family integration and full
+native performance acceptance remain open. C1130 and its later private glossary
+pass remain in progress. No production solver migration or full WASM parity claim.

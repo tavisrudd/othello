@@ -55,10 +55,13 @@ The **executor** applies a mathematical plan; **runtime** coordinates operations
 Witness readout, optimum readout and independently certified optimality differ.
 Updates need preservation/affected-dependency contracts, not merely new input bytes.
 
-This is the established semantic direction. A universal cross-family host execution
-interface is not yet implemented or frozen. C1130 should test its shape with existing
-contrasting families, retaining specialized APIs rather than replacing all of them
-with one optional-field Model object or universal trait.
+This is the established semantic direction. C1130 now has an experimental generic
+module host, tested with independently compiled LRC/QEC native and WASM providers.
+It runs alongside CampaignSession; runtime integration and a universal execution
+contract are not complete. Its exclusive provider ownership duplicates compiled
+plans across workers. Refine shareable immutable plans and owned executor workspaces
+before ABI adoption; retain specialized direct native APIs. Evidence and limits:
+`2026-09-08-c1130-module-loading-results.md`.
 
 ## Existing abstractions: reuse, with their limits
 
@@ -66,6 +69,7 @@ with one optional-field Model object or universal trait.
 |---|---|
 | Portable scalar language | C1085 extracted parsing/lowering/evaluation and bounded codecs; compilation for WASM is not automatically a JS binding. |
 | CampaignSession | C1087/C1088 shared service and browser Worker; its CampaignSpec remains the finite GF(2) restriction pilot on native too. It is not the universal mathematical model. |
+| Experimental module host | C1130 core ergodis-modules and module Worker load independent private LRC/QEC providers; source-isolated native and actual browser transcripts pass. Coarse batching amortizes boundary cost; plan sharing, third-family integration, updates/checkpoints and production ABI adoption remain open. |
 | OpenProblem / RetainedTree | Private `src/open_problem.rs`: context-bearing compiled problem, composition/identity/readout core with optional NormalizedProblem, TensorProblem and ReconstructProblem. Matrix, function, monoid-index and semiring-window adapters exist. This is retained composition, not every solver or a complete host lifecycle. |
 | RepairModel → RepairPlan → BudgetQuery | C1093 private LRC adapter: compile once, admit budget changes, count/threshold/witness readouts. Fixed known repair family; no universal recovery schema. |
 | CompositionShape | C1094 core structural geometry/budget admission; does not validate algebra, source lowering or query preservation. |

@@ -2,7 +2,10 @@
 
 **PRIVATE — contributor context only. Do not ship, export or publish.**
 **Lane**: `ergodis`. Date: 2026-09-08.
-**Status**: initial contract proposal; no API migration or kernel changes yet.
+**Status**: initial proposal tested by an experimental independent-module host;
+no production API migration or kernel changes. Loading/conformance and bounded
+cost/distribution results: `2026-09-08-c1130-module-loading-results.md`.
+Shared immutable-plan/worker ownership requires refinement before ABI adoption.
 
 ## Decision to review
 

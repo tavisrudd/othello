@@ -5,8 +5,10 @@
 Initial contract: `2026-09-08-c1130-execution-contract-proposal.md`.
 Experimental interface/package loading is implemented; no production kernel migration.
 Loading/execution spike design: `2026-09-08-c1130-private-module-loading-spike.md`.
-Independent LRC/QEC loading and native/browser transcript parity pass; retained
-performance and distribution gates remain open. Results:
+Independent LRC/QEC loading, native/browser parity, bounded cost measurements,
+provider allocation audits and revised stripped-package compatibility pass.
+ABI stays experimental: shared-plan/worker ownership, runtime integration and
+full native performance acceptance remain open. Results:
 `2026-09-08-c1130-module-loading-results.md`.
 
 ## Context prerequisites
