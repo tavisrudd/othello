@@ -169,3 +169,18 @@ essential-threshold equivalence, integral feasible-region transfer, empty-family
 price convention, explicit arithmetic/budget charges, and prototype trust
 boundary. These arose directly from the requested review, so none is an
 incidental discovery-track entry.
+
+## Recorded synchronization
+
+Authority manuscript commit: `82f252fcd`. Standalone forward commits remove
+93 obsolete bundled engine files (`634a610`) and their obsolete verifier
+(`40eddac`), then adopt the guarded export (`2ec7734`). The exporter first
+refused the obsolete verifier path; inspecting its bundled-engine-only contract
+and separately removing it resolved the refusal without a gate bypass.
+Exporter audit: zero findings. Export verification and the standalone clean
+PDF rebuild pass at 43 pages, 32 claims, four terminals.
+Canonical exported content SHA-256:
+`0a3de4cd4e92f54322c702f9fc1d59a16686eb40a3a4a98e4c261c02350f37b6`.
+Authority and mirror PDF SHA-256:
+`3f7915129e8fbffc48b7799dc959d4d490ea2bff7d28ee906b9ae4fd1bedcbc7`.
+The summary citation is absent from the final PDF. No push or deposit.

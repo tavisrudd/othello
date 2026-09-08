@@ -22,9 +22,9 @@ The remaining paper route is C325 then C953, with C955 after. No push or deposit
 - **Canonical identity**: `complete-ports` — *Exact Compositional Transfer of Bounded Linear
   Recovery*. Approved license MIT.
 - **Standalone paper repository**: `tavisrudd/compositional-recovery` at
-  `~/src/math-papers/compositional-recovery`, local commit `80c600f` (40-page revised manuscript,
-  verified, unpushed). The authority has since dropped `ergodis/`, so the next sync needs a prior
-  `git rm -r ergodis` commit there.
+  `~/src/math-papers/compositional-recovery`, local commit `2ec7734` (43-page
+  operational revision, verified, unpushed). The obsolete bundled engine and its
+  checker have been removed in separate forward commits.
 - **Ergodis engine**: the engine, its benchmark programme, and the C985 optimization sequel live in
   the [`ergodis`](2026-09-05-ergodis-lane.md) lane.
 - **Expert dossier** (read before nontrivial proof development or formalization):
