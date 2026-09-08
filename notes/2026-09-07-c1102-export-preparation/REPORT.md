@@ -88,3 +88,36 @@ The dependency closure, citation metadata and fresh-PDF gate address that issue.
 No new mathematical mystery is introduced; the open problems remain those in the
 manuscript and the referee-response mystery ledger. Blind audience comparison
 and author publication decisions remain separate from export readiness.
+
+## Committed export acceptance
+
+Authoritative package commit: `5412df7c7493e35251b86498a8640a8aa7f4d7b7`.
+The official exporter plan reports 125 source files, 2818318 bytes and zero
+reference findings. The private preflight confirms the previously approved
+citation exception and requires that same committed-tree audit.
+
+Guarded command:
+
+```
+python3 papers/scripts/export-paper-repos.py materialize --source-ref 5412df7c7 --repository clebsch-cubic-phase --out /home/tavis/.cache/cubic-phase-replays/export-5412df7c7
+```
+
+It creates a disposable candidate in the disk-backed cache, not in
+`~/src/math-papers`. The candidate has 127 tracked files including the exporter's
+provenance and manifest, content hash
+`78da79c97dea5cf4a7332cd00674ae6813439c6db3c989e8d5715927ff6e2e61`.
+Exporter `verify` passes before/after its `make pdf-check`, which runs the
+metadata, source, finite, shadow, factory and deterministic PDF checks using
+only candidate-local inputs. The candidate PDF equals the authoritative PDF:
+SHA256 `7e522ebb9940d80daa7686223268e6cadc85f96565cce83daf0af66bf474985f`.
+The title page and references were visually checked after adding the author
+and public companion DOI links.
+
+Negative controls in a separate disposable source copy reject a mismatched
+Zenodo title and a changed conic matrix source. Neither test changes the
+committed authority or exporter candidate.
+
+The package is prepared for a first guarded export. No actual downstream
+repository sync/materialization, remote creation, push or Zenodo deposit was
+performed. The next action is the author's first-export instruction; publication
+and the style guide's blind audience comparison remain distinct decisions.
