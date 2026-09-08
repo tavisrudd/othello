@@ -6,7 +6,7 @@ no separate discovery paper, primary-manuscript theorem change, or cross-lane
 application. C978/C956 remain open.
 **Status:** independent calculation, source-only gate and companion build
 pass. Rendered companion inspected (22 pages, previously 20; 193126 bytes).
-Local export pending.
+Local export complete; authority and standalone PDFs are byte-identical.
 
 ## Mathematical result and independent audit
 
@@ -123,3 +123,23 @@ The companion Makefile still referenced a parent-only linter and environment
 path in standalone exports. It now uses an identical public copy of the
 51-line linter and selects the existing manuscript environment in either
 layout. The check target and its acceptance conditions are unchanged.
+
+## Final validation and local revisions
+
+- Authority mathematical revision `78c50a60f`; portable build paths
+  `b62226270`. Local standalone revisions `9f63a4b`, then `64bc72e`.
+- Authority source-only annotation gate and independent exact checker pass.
+  Companion `make check PYTHON=python3` passes in both layouts; standalone
+  primary `make check PYTHON=python3` and the new checker also pass.
+- Rendered affected pages inspected; all TeX warning gates pass.
+  Companion PDF: 22 pages, 193126 bytes; SHA-256
+  `127b3a1ebf0de1b8c276e186538e83c80c2c7b6e14a260f91fc64bfd96222270`.
+- Export plan/audit have zero findings. Manifest verification passes; final
+  standalone worktree is clean. Content SHA-256
+  `a7b69274f64748ab9c7b7e4ad91d5d8a1a580d11f84429087022b133d7de867e`.
+- Primary and companion PDFs match their respective authority copies. The
+  primary manuscript's mathematics and PDF were unchanged. Nothing pushed.
+- During the same turn, the author requested the separate TZ email revision.
+  Its short unsent draft and context disposition were committed as
+  `a5db0a292`; only the definite model cross-reference typo and the direct
+  surface-theorem connection remain in the proposed email.
