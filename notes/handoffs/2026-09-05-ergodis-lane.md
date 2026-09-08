@@ -36,6 +36,17 @@ the C985 optimization-facing paper.
 
 ## Active frontiers
 
+### C1130 — full WASM feature completeness (queued)
+
+User requirement: WASM is a full Ergodis execution target, not a restricted subset.
+Close bindings, portability and host-adapter gaps across existing core/private
+capabilities; keep shared contracts and native optimized execution intact.
+Mandatory inventory, cross-target conformance and native performance gates:
+`notes/2026-09-08-c1130-wasm-feature-completeness.md`.
+Read both contributor performance documents in full on resume. Recovery/QEC/
+scheduling browser execution is part of this scope; the current lab restrictions
+are temporary implementation gaps, not intended WASM capability boundaries.
+
 ### C1111–C1113 — reconstruction-driven representation discovery
 
 C1111/C1112 have a bounded spike on private branch `spike/continuation-reconstruction`
