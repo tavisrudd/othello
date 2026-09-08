@@ -51,6 +51,21 @@ shared Cargo target. No Lean, core-kernel, publication or export work.
 
 ## ej+tt closeout / Mystery ledger
 
+Extra-value pass (private `20237c9`): frozen-sample cost accounting separates
+248.152 ms shared setup from 0.584 ms incremental label construction/admission.
+Linear reuse predicts incremental payback at 1030 queries (1340 under the observed
+extreme-round envelope, not a confidence bound). Replay and an independent rational
+arithmetic check pass; the expanded manifest verifies 46 files. No new timings.
+
+The user's benchmark-application steer selects W2/W3/L2 scheduler grouping and
+positive-grading discovery as the best next experiment. The optimized existing
+compiler remains the main control; merely rediscovering its reductions is not a
+new speedup. Ceph's existing reliability and scheduler readouts are the next reuse
+candidate. The complete six-application mapping, exact admission obligations,
+perturbation controls and evidence gates are in the worktree's
+`experiments/continuation/BENCHMARK-TRANSFER.md`. This is a proposed transfer test,
+not an executed application result or a change to the C1113 gate.
+
 The extension-field test settles the former coverage gap at the displayed
 models, including characteristics two, three and five. Uniform validity of the
 learned threshold remains unproved; no stronger clique theorem enters the paper.

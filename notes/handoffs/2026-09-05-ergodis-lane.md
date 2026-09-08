@@ -48,8 +48,11 @@ This is a bounded representation/admission pilot, not autonomous field-coordinat
 The frozen selector now also passes q=16,23,25,27. A q=16-trained incidence-query
 dispatch gives 1.108x warm-query improvement on a held-out q=27 Python mix; the modeled
 first-batch ratio is only 1.008. C1113 remains gated on native end-to-end benefit.
-Next: matched native readout measurements, preserving exact admission and the performance contract.
-Latest private commit `3847f33`; report:
+Benchmark review selects scheduler W2/W3/L2 for checked grouping/grading discovery;
+Ceph's existing reliability/scheduling readouts are the second reuse target.
+Next: bounded scheduler discovery against the current compiler, then matched native
+measurements preserving exact admission and the performance contract. Transfer remains gated.
+Latest private commit `20237c9`; report:
 `notes/2026-09-07-c1112-extension-fields-and-incidence-dispatch.md`.
 Reports: `notes/2026-09-07-c1111-reconstruction-contract-corpus.md` and
 `notes/2026-09-07-c1112-autonomous-representation-discovery.md`.
