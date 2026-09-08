@@ -9,7 +9,8 @@ trails belong in the dated task reports and in the archive companion,
 **Date**: 2026-09-08
 **Mode**: intent-based.
 **Status**: ACTIVE. C1127 is closed: the September 8 referee response and shared
-six-macro annotation audit are implemented in a 43-page manuscript with 32
+six-macro annotation audit are implemented; subsequent cold-referee repairs
+produce a 44-page manuscript with 32
 registered claims and four unchanged Lean terminals. The complete multilevel
 example, concrete instances, and economical interface family now accompany the
 main recovery → transfer → labelled composition route. Authority and standalone
@@ -25,8 +26,8 @@ deposit.
 - **Canonical identity**: `complete-ports` — *Exact Compositional Transfer of Bounded Linear
   Recovery*. Approved license MIT.
 - **Standalone paper repository**: `tavisrudd/compositional-recovery` at
-  `~/src/math-papers/compositional-recovery`, local commit `a5d65d3` (43-page
-  referee revision and six-macro audit, verified, unpushed). The obsolete bundled engine and its
+  `~/src/math-papers/compositional-recovery`, local commit `530213f` (44-page
+  cold-referee repairs and six-macro audit, verified, unpushed). The obsolete bundled engine and its
   checker have been removed in separate forward commits.
 - **Ergodis engine**: the engine, its benchmark programme, and the C985 optimization sequel live in
   the [`ergodis`](2026-09-05-ergodis-lane.md) lane.
@@ -114,8 +115,10 @@ hierarchy.
 The user-requested independent Astra cold read is complete; its report is in
 `notes/2026-09-08-complete-ports-cold-referee.md`, with provenance in
 `notes/2026-09-08-complete-ports-cold-referee-launch.md`. Citation/roadmap
-corrections and interface/presentation comments await disposition. This bounded
-early review does not complete C953.
+corrections and interface/presentation comments are addressed in
+`notes/2026-09-08-complete-ports-cold-referee-repair.md`. The browser could not
+access the public Ergodis URL; artifact accessibility and implementation audit
+remain part of C953. This bounded early review does not complete C953.
 
 ### C1127: closed referee response
 

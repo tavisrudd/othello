@@ -1131,3 +1131,11 @@ inspection, ej + tt, and the mystery ledger are in
 `notes/2026-09-08-c1127-complete-ports-revision.md`; the prior assessment is in
 `notes/2026-09-08-c1127-complete-ports-referee-response.md`. C325 is next, then
 C953 and C955. No incidental discovery entry was warranted.
+
+## 2026-09-08 — independent cold-read repairs
+
+The user-requested cold-read findings are addressed in
+`notes/2026-09-08-complete-ports-cold-referee-repair.md`. Theorem and proof
+statements remain unchanged; the revised 44-page authority and standalone
+release gates pass. Local standalone `530213f` is verified and unpushed.
+C325 and the aggregate C953 gate remain open, including public artifact access.

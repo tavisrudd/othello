@@ -2,7 +2,7 @@
 
 **Lane**: `complete-ports`
 **Date**: 2026-09-08
-**Status**: repairs implemented and authority validated; final synchronization pending.
+**Status**: complete; authority and standalone release checks pass.
 
 The user directed repair of the independent report in
 `notes/2026-09-08-complete-ports-cold-referee.md`. This is a bounded response
@@ -84,3 +84,15 @@ Ergodis source endpoint was not established (browser 404); the full artifact
 accessibility/implementation audit remains C953-owned. This task-owned finding
 needs no incidental discovery entry. C325 and the remaining aggregate C953 gates
 remain open.
+
+## Final artifact identity
+
+Committed authority `a1b9d469e` passed the exporter audit with zero findings.
+Guarded synchronization produced local standalone forward commit `530213f`.
+Both clean committed copies pass `make check`: 44 pages, warning-free, 32 claims,
+four unchanged Lean terminals. Export verification passes with 59 tracked files
+and content SHA-256
+`c28801f377d31384112fcbf5cac688e4c1d48bf4b9071ad2ecd8fce5cea1e8be`.
+Their PDFs agree at SHA-256
+`89df4bb7cbf9f16539d5faa8a26c13a28e12cf21bfc88eb83fea137d37342391`.
+The standalone worktree is clean. No push or deposit occurred.
