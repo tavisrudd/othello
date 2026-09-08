@@ -144,3 +144,14 @@ Next highest-value review is C978’s focused independent examination of the
 regular-lattice comparison and resonant application, alongside the retained
 C956 descent review. Locate and finish the custom protocol before calling those
 review tasks complete. C958 remains the operational parametrization successor.
+
+## Concurrent-index incident
+
+Closeout commit 0b7917ef2 also captured concurrently staged continuation-lane
+files. The intended six C1131 lifecycle/report paths were explicitly staged,
+but the subsequent ordinary commit consumed the shared index. No foreign source
+was reviewed, edited or reverted to repair this administrative mistake, and no
+history was rewritten. The two validated standalone paper commits remain
+unaffected. The incident was disclosed to the user; this record is committed
+with an explicit --only path so concurrent staged work cannot be captured again.
+C1131 has zero live queue rows and exactly one archived row.
