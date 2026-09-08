@@ -5,6 +5,10 @@
 **Status**: bounded loading/execution experiment complete; ABI remains experimental.
 C1130 full WASM completeness remains IN PROGRESS. No production migration accepted.
 
+Private legal-notice follow-up: `2026-09-08-c1130-private-module-legal-notice.md`.
+Tavis Rudd notice embedded and validated in subsequent payloads; the original
+measured spike payloads and evidence remain unchanged.
+
 ## Decision and next gate
 
 Public core hosts load and execute separately compiled private LRC and QEC providers

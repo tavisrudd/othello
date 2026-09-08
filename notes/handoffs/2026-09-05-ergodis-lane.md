@@ -59,7 +59,8 @@ Loading spike complete: core `5542688`, private `29a2fd8`/`2e90fa4`, contributor
 allocation audit, retained boundary counters and revised stripped-package loading
 pass. ABI remains experimental; full native performance acceptance remains open.
 Next: refine shareable immutable-plan / owned executor-workspace semantics, then
-third-family composition and CampaignSession/console integration. Results:
+third-family composition and CampaignSession/console integration. Private `5da6805`
+adds Tavis Rudd notices, verified in stripped native/WASM packages. Results:
 `notes/2026-09-08-c1130-module-loading-results.md`.
 Preserve public-core loading of separately compiled/obfuscated private packages;
 canonical WASM engine plus extensions, not a mandatory private assembly build.
