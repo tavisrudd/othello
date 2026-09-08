@@ -1,28 +1,22 @@
 # Section map
 
-`compositional_recovery.tex` is the active driver. Its modular sources follow
-the theorem dependency order:
+`compositional_recovery.tex` is the active driver. Its main sequence is:
 
-1. `01-complete-ports.tex` — recovery sets, normalized equations, bounded
-   reliability, and MDS reconstruction.
-2. `02-confinement-transfer.tex` — the associated nested code pair, relative
-   generalized Hamming weights, and the relative dimension/length profile.
-3. `03-positive-density.tex` — the block-functional decomposition and exact
-   objectwise and rank-stratified confinement thresholds.
-4. `03a-exact-recovery-optimization.tex` — the ergodis min--sum compiler,
-   support and pricing interfaces, complexity bounds, coefficient witnesses,
-   and bilinear task recovery.
-5. `04-reliability-exit.tex` — best-target generalized weights, cooperative
-   locality, MDS rigidity, positive-density realization, and service-rate
-   transfer.
-6. `05-pointed-tutte.tex` — reliability and coefficient-presentation
-   separations beyond the relative-weight hierarchy.
-7. `06-geometric-flagships.tex` — projective-simplex weights, thresholds,
-   reliability, and the equality case for the first recovery cost.
-8. `07-verification-provenance.tex` — the exact paper-local Lean coverage and
-   the role of finite arithmetic checks.
-9. `08-conclusion.tex` — equation confinement, operational transfer, and
-   the remaining interface-construction question.
+1. `01-complete-ports.tex`: recovery sets and normalized equations.
+2. `02-confinement-transfer.tex`: the associated nested pair and relative costs.
+3. `03-positive-density.tex`: exact equation and minimal-support transfer,
+   labelled composition, and the simultaneous rank-one criterion.
+4. `03a-exact-recovery-optimization.tex`: a complete three-level repair,
+   numerical/support optimization, boundary width, and bilinear recovery.
+5. `03b-related-work.tex`: theorem-specific inputs and additional conclusions.
 
-The filenames are retained for repository continuity. Their old private nouns
-and former subject headings are not manuscript terminology.
+The secondary sections are `05-pointed-tutte.tex` (separations),
+`03c-distance-specializations.tex` (outer-distance and singleton formulas),
+`04-reliability-exit.tex` (best-target, MDS, and service consequences), and
+`06-geometric-flagships.tex` (projective simplex applications).
+`07-verification-provenance.tex` states verification scope and
+`08-conclusion.tex` concludes. The optional contextual-state theory is in
+Appendix `09-contextual-refinement.tex`.
+
+Source filenames preserve repository continuity; semantic labels determine
+cross-references and evidence links.

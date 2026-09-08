@@ -37,6 +37,35 @@ was involved. Further exposition work remains before C1127 closure.
 
 ## Operational record
 
+## Example and exposition batch
+
+Added a complete 12-coordinate binary hierarchy with three encoding levels.
+The request normalization, binary leaf labels, intermediate tables, both outer
+choices, and backtracked equations show the optimum switching from one helper
+to two after a helper failure. The calculation is proved by its two exhaustive
+outer branches, independently of executable evidence.
+
+Added a connected adjacent-pair family with three physical helpers per block.
+Local tables enumerate `q^(3t)` coefficient maps and a supplied balanced interval
+tree has boundary dimension at most two. This accounts for construction and
+`O(n q^(4t))` combinations, compared with the stated ambient-state enumeration.
+The explicit Singer instance now gives the irreducible cubic, multiplier,
+multiplication matrix, four dual images, and outer parity equation.
+
+Moved contextual minimization to an appendix and distance specializations to
+a secondary section. Optimization and its complete example now immediately
+follow composition. Replaced repeated reading instructions with the actual
+section order, added the coordinate/functional notation table, and replaced
+overlapping related-work prose with theorem-specific contribution accounting.
+Stable theorem labels and 32-claim coverage are preserved. The deterministic
+build passes at 43 pages without warnings. The first table build exposed
+underfull justified cells; ragged-right table columns corrected them.
+
+The user's additional instruction to use the shared formalization macros
+consistently is part of C1127. Audit found all six definitions present but no
+import/evidence registries or uses of those two macros, and no statement digest
+or dependency-graph gate. Their adoption is the next owned change.
+
 One combined routed-read tool result exceeded the display budget and truncated.
 Replaced that display with bounded reads of the omitted Lean-guide tail and
 the reproducibility guide before acting on them. Future routed reads are split

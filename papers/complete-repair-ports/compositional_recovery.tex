@@ -202,9 +202,24 @@ information, as Figure~\ref{fig:information-hierarchy} records.
 
 \input{figures/information-hierarchy}
 
+\begin{center}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.26\linewidth}>{\raggedright\arraybackslash}p{0.67\linewidth}@{}}
+\toprule
+Space & Role in a recovery request\\ \midrule
+$\F_q^P,\F_q^J$ & Coefficients on physical target and helper coordinates.\\
+$U_P=\operatorname{im}G_P$ & Message functionals supplied by target coordinates.\\
+$T\leq W_P\leq U_P$ & Requested functionals; $W_P$ is the helper-recoverable part.\\
+$D_P/K_P\cong W_P$ & Helper coefficient lifts modulo target-free dual relations.\\
+$L^*=\operatorname{Hom}_{\F_q}(L,\F_q)$ & Functional labels passed from an inner block to its outer code.\\
+$\operatorname{FD}(O)\leq(L^*)^N$ & Compatible tuples of block functionals annihilating the outer code.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
 \paragraph{Outer-distance collapse.}
-Sufficient outer dual distance rules out every competing nonzero-label
-sector, leaving the relative-weight cost plus one inner-dual perturbation.
+Sufficient outer dual distance prevents a nonzero-label sector from improving
+the relative-weight cost plus one inner-dual perturbation.
 The exact characterization gives
 \[
  d(O^\perp)\geq M_t(D_P,K_P)+d(I^\perp)+1
@@ -284,32 +299,25 @@ failures and prices.  It also separates those capabilities from the additional
 information required for probability and optimality certificates.  Measurements
 and artifact details are collected in Section~\ref{sec:verification}.
 
-\paragraph{Reading routes.}
-For the main mechanism, read the recovery model in
-Section~\ref{sec:recovery-equations}, the two transfer theorems
-\ref{thm:ungated-ranked-confinement} and
-\ref{thm:minimal-support-confinement}, and the composition law
-\ref{prop:prescribed-coset-composition}.  For equation confinement, separate the zero and nonzero induced functionals.
-For composition, fix those functionals and lift independently in the blocks.
-For minimal supports, delete the external coefficients once the target-block
-part recovers the request on its own.
-Section~\ref{sec:relative-weights} identifies the local invariant and may
-initially be read for its definitions and statements.  The contextual minimization subsection
-\ref{sec:contextual-refinement} can be skipped until one asks how much further
-the numerical tables can be compressed; it is not needed for the preceding
-transfer or composition proofs.
-For operational uses, continue to Section~\ref{sec:exact-recovery-optimization};
-for necessity boundaries, read Section~\ref{sec:separations}.
-The projective-simplex family supplies a worked non-MDS application, and
-Section~\ref{sec:verification} collects the optional artifact and measurement
-layer.
+\paragraph{Organization.}
+Sections~\ref{sec:recovery-equations}--\ref{sec:confinement} develop the
+recovery model, local costs, equation and minimal-support transfer, and
+labelled composition.  Section~\ref{sec:multilevel-example} carries one
+request through three encoding levels, a helper failure, and coefficient
+reconstruction; the rest of Section~\ref{sec:exact-recovery-optimization}
+gives the corresponding algorithms.  Related work, separation examples,
+distance specializations, and geometric applications follow.
+Appendix~\ref{sec:contextual-refinement} treats the secondary question of
+minimal numerical state.  Verification scope is recorded in
+Section~\ref{sec:verification}.
 
 \input{sections/01-complete-ports}
 \input{sections/02-confinement-transfer}
 \input{sections/03-positive-density}
+\input{sections/03a-exact-recovery-optimization}
 \input{sections/03b-related-work}
 \input{sections/05-pointed-tutte}
-\input{sections/03a-exact-recovery-optimization}
+\input{sections/03c-distance-specializations}
 \input{sections/04-reliability-exit}
 \input{sections/06-geometric-flagships}
 \input{sections/07-verification-provenance}
@@ -324,6 +332,9 @@ computation, code and formal-proof development, verification, and manuscript
 drafting and revision. The author checked the resulting arguments,
 computations, code, and cited sources, reviewed and edited all AI-assisted
 material, and assumes responsibility for all content.
+
+\appendix
+\input{sections/09-contextual-refinement}
 
 \footnotesize
 \bibliographystyle{plain}

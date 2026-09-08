@@ -1,0 +1,290 @@
+\section{Contextual equivalence and rank reduction}
+\label{sec:contextual-refinement}
+
+The labelled composition law suffices for exact recovery optimization.
+This appendix asks which numerical distinctions can be removed when only
+escape costs at a fixed original leaf boundary are observed.  The resulting
+finite tests do not replace support families for availability or scheduling.
+
+We first record a normal form for outer functional duals.  It will let us
+replace an arbitrary outer code by the finite interface that a bounded-cost
+recovery actually touches.
+
+\begin{lemma}[Pointed column-type normal form]
+\label{lem:outer-column-types}
+\coverage{absent}%
+Let $D=O^\perp\leq L^N$ have $L$-dimension $s$, and choose an isomorphism
+$G:L^s\to D$.  There are $L$-linear coordinate covectors
+$a_h\in(L^s)^\vee$ such that
+\[
+ G(x)_h=a_h(x)\qquad(x\in L^s, 1\leq h\leq N).
+\]
+The outer code projects nontrivially onto the distinguished block $j$ if and
+only if the external covectors $\{a_h:h\ne j\}$ span $(L^s)^\vee$.
+Conversely, every pointed list $(a_j;(a_h)_{h\ne j})$ with spanning external
+part realizes such an outer context, uniquely up to change of basis in $L^s$.
+\end{lemma}
+
+\begin{proof}
+Take $a_h$ to be the $h$th coordinate functional of $G$.  The target
+projection of $O=D^\perp$ vanishes exactly when the target coordinate line is
+contained in $D$.  Under $G$, this happens exactly when the common kernel of
+the external covectors contains a vector on which $a_j$ is nonzero.  Since
+$G$ is injective, the common kernel of all $a_h$ is zero, so this is equivalent
+to the external covectors failing to span.  Conversely, the evaluation map
+defined by a pointed list with spanning external part is injective and has no
+nonzero target-supported image; taking its image as $D$ gives the required
+outer code.  Changing the basis of $L^s$ changes all covectors by the same
+linear automorphism and changes nothing else.
+\proves{lem:outer-column-types}%
+\end{proof}
+
+For rank-one targets, the exact quotient of the labelled functions observable
+by outer concatenation has a projective description.  Informally, two
+rank-one inner recovery problems are indistinguishable under every compatible
+outer concatenation exactly when they agree on the zero-sector cost and on the
+cheapest response to every projective functional line an outer code can probe.
+We now encode those probes.  Fix a line
+$T=\langle u\rangle\leq W_P$.  For $b\in L$, let
+$\tau_b:T\to L^*$ be defined by
+\[
+ \tau_b(au)(x)=a\Tr_{L/\F_q}(bx)
+ \qquad(a\in\F_q,\ x\in L),
+\]
+and put $z_{I,T}=\rho_T(I)+d(I^\perp)$.  If
+$[b]=[b_1:\cdots:b_N]\in\mathbf P(L^N)$ has a nonzero coordinate outside
+the target block $j$, its projective class records an outer functional-dual
+line.  Multiplying by $s\in L^\times$ changes the chosen generator of that
+line but not the outer context, so the probe minimizes over this scalar choice:
+\begin{equation}
+ \Theta_{I,T}([b])=
+ \min_{s\in L^\times}
+ \left(
+  \mu_{I,P,T}(\tau_{sb_j})+
+  \sum_{h\ne j}\lambda_{I,T}(\tau_{sb_h})
+ \right).
+ \label{eq:rank-one-line-probe}
+\end{equation}
+Changing $u$ or the projective representative of $[b]$ does not change this
+value.
+
+Here an \emph{outer context for the rank-one target $T$} is a triple $(N,j,O)$ with $N\geq2$,
+$O\leq L^N$ an $L$-linear code, and nonzero projection onto the distinguished
+block $j$.  The context family ranges over every such $N$ and $j$, while the
+inner target/helper split and the identified target line $T$ remain fixed.
+Thus ``rank one'' refers to $\dim_{\F_q}T=1$, not to the dimension of $O$.
+Operationally, two inner representations are indistinguishable at $T$ when
+every compatible outer code assigns them the same exact nonconfinement cost.
+The theorem below identifies exactly which numerical data determine that
+response.
+Two represented inner codes are \emph{contextually equivalent at $T$} when
+their values of $\Gamma_{j,T}$ agree in every member of this family.  A
+compatible further concatenation adds outer layers above the same
+distinguished leaf.  Throughout such an evaluation, the confinement region
+remains the entire original $I$-block containing the target: it is not enlarged
+to a newly formed composite block.  Target coordinates and normalization also
+remain fixed.  Compatibility requires that the composed outer code, viewed
+over $L$, belongs to the context family just defined.
+
+\begin{theorem}[Minimal contextual quotient at rank one]
+\label{thm:rank-one-contextual-state}
+\coverage{absent}%
+Let $D=O^\perp\leq L^N$ under the trace identification, and suppose the
+projection of $O$ onto block $j$ is nonzero.  Then
+\begin{equation}
+ \Gamma_{j,T}(O,I)=
+ \min\left\{
+ z_{I,T},
+ \min_{\substack{Lb\leq D\\b\ne0}}\Theta_{I,T}([b])
+ \right\},
+ \label{eq:rank-one-contextual-state}
+\end{equation}
+where $Lb$ is the one-dimensional $L$-subspace spanned by $b$, and the inner
+minimum is empty when $D=0$.
+
+Consequently, represented inner codes over the same extension field with
+identified target lines are contextually equivalent at $T$ if and only if
+their values $z_{I,T}$ agree and the family of truncated profiles
+\[
+ [b]\longmapsto\min\{z_{I,T},\Theta_{I,T}([b])\}
+\]
+agrees for every $N\geq2$, target block $j$, and projective tuple with nonzero
+external part.  Thus equality of this response family realizes the exact
+numerical contextual quotient at rank one: no coarser numerical summary can
+predict the costs in every outer context.  It is enough to test the full outer
+code and outer codes whose functional dual has $L$-dimension one.  The bounded
+higher-rank theorem below also shows that, after truncation at any fixed helper
+radius, only finitely many of these probes are needed.
+Moreover, equality of responses persists when the outer contexts are themselves
+formed by compatible further concatenation, with the original leaf confinement
+region fixed.
+\end{theorem}
+
+\begin{proof}
+A nonzero map from the one-dimensional $\F_q$-space $T$ into $D$ is determined
+by one nonzero tuple $b\in D$.  Partition $D\setminus\{0\}$ into its
+$L$-lines in the nonzero-functional sector of
+\eqref{eq:weighted-subspace-cost}.  Minimization on the line $Lb$ is exactly
+\eqref{eq:rank-one-line-probe}, which proves
+\eqref{eq:rank-one-contextual-state}.
+
+It remains to show that every stated probe is an actual outer-code context.
+The full outer code $O=L^N$ has $D=0$ and exposes $z_{I,T}$.  Given a
+projective tuple $[b]$ with nonzero external part, take
+$D=Lb$ and $O=D^\perp$.  Its target projection is nonzero: otherwise
+$D$ would contain the target coordinate line, forcing every external
+coordinate of $b$ to vanish.  This context exposes
+$\min\{z_{I,T},\Theta_{I,T}([b])\}$.  Equality in every context therefore
+forces equality of the displayed response family; the first part of the
+theorem gives the converse.
+
+For the closure statement, let $A$ and $C$ form a compatible outer context
+$C\circ A$.  Associativity identifies
+$C\circ(A\circ I_i)=(C\circ A)\circ I_i$ at the physical leaf coordinates.
+On both sides, measure escape from the same original $I_i$-block, with the
+same target coordinates and normalization.  Thus parenthesization preserves
+the recovery equations, their helper unions, and the requirement of a nonzero
+coefficient outside that region.  Since $C\circ A$ is an $L$-linear member
+of the quantified context family, contextual equivalence gives equal responses
+for $I_1$ and $I_2$ in this context.
+\uses{thm:ungated-ranked-confinement}%
+\proves{thm:rank-one-contextual-state}%
+\end{proof}
+
+This theorem compares numerical costs only.  Full coefficient witnesses still
+require the minimizing lifts described after
+Theorem~\ref{prop:prescribed-coset-composition}.
+It does not assert congruence of escape summaries recomputed at a composite
+block boundary.  In the binary code $(a,a,a,a,b,b,b,b)$ with target coordinate
+$1$, escape from $\{1,2\}$ costs one helper, using $x_1+x_3=0$.
+Escape from $\{1,2,3,4\}$ costs three: parity requires one helper in that
+region and at least two outside it, attained by $x_1+x_2+x_5+x_6=0$.
+
+When $\dim_{\F_q}T=t$, the image of any map
+$B:T\to\operatorname{FD}(O)$ lies in an $L$-subspace
+generated by at most $t$ images.  A bounded-cost map also uses only boundedly
+many external labels.  Together these observations give a finite
+small-context theorem.  For $c\in\mathbb N\cup\{\infty\}$ write
+$[c]_{r+1}=\min\{c,r+1\}$, with $[\infty]_{r+1}=r+1$.
+
+\begin{theorem}[Rank- and radius-bounded outer tests]
+\label{prop:rank-bounded-outer-tests}
+\coverage{absent}%
+Let $I$ be a represented inner code with $0<\dim I<|E|$, let
+$0\ne T\leq W_P$ have $\dim_{\F_q}T=t$, and let $r\geq0$.  Put
+$D=O^\perp\leq L^N$, where $N\geq2$ and $O$ projects nontrivially onto block
+$j$.  For $L$-subspaces $D'\leq D$, set $O_{D'}=(D')^\perp\leq L^N$.  Then
+\begin{equation}
+ \Gamma_{j,T}(O,I)=
+ \min_{\substack{D'\leq D\\\dim_LD'\leq t}}
+ \Gamma_{j,T}(O_{D'},I).
+ \label{eq:rank-bounded-outer-tests}
+\end{equation}
+Moreover, for $S\subseteq[N]\setminus\{j\}$ put
+$D_S=D\cap L^{\{j\}\cup S}$ and $O_S=D_S^\perp\leq L^N$, where $L^A$
+denotes the vectors supported on $A$.  Then
+\begin{equation}
+ [\Gamma_{j,T}(O,I)]_{r+1}
+ =\min_{\substack{S\subseteq[N]\setminus\{j\}\\|S|\leq r}}
+   [\Gamma_{j,T}(O_S,I)]_{r+1}.
+ \label{eq:radius-bounded-outer-tests}
+\end{equation}
+
+Consequently, if two such inner problems have different truncated responses
+in some compatible outer context, a separating context exists with length at
+most $\max\{2,r+1\}$ and functional-dual dimension at most
+$\min\{t,r\}$.  The target leaf and target image are kept fixed under the
+identifications used to compare the two problems.  The same bounds cover
+witnesses: every nonconfined normalized coefficient-level system of cost at
+most $r$ restricts to such a context and zero-extends back to the original
+system.
+\end{theorem}
+
+\begin{proof}
+For $B:T\to D$, let $D_B=\operatorname{span}_L B(T)$.  The image of an
+$\F_q$-basis of $T$ generates $D_B$ over $L$, so $\dim_LD_B\leq t$.
+Regarding $B$ as a map into $D_B$ changes none of its block labels or costs.
+Conversely, every map into $D'\leq D$ is a map into $D$.  Minimizing the same
+cost functional in both directions proves
+\eqref{eq:rank-bounded-outer-tests}; $D'=0$ supplies the zero-functional
+sector.  No $D'\leq D$ contains a nonzero target-supported vector, so every
+$O_{D'}$ retains nonzero target projection.
+
+For the truncated identity, a map $B:T\to D$ of cost at most $r$ has at most
+$r$ nonzero external labels.  If $S$ is their set, then $B(T)\leq D_S$, and
+all block costs are unchanged on passing to $O_S$.  Conversely every map into
+$D_S$ is a map into $D$.  These two inclusions prove
+\eqref{eq:radius-bounded-outer-tests}; maps of larger cost all truncate to
+$r+1$.
+
+Suppose now that two truncated responses differ, and choose a minimizing map
+for the smaller one.  If it is in the zero-functional sector, the full outer
+code of length two already separates the two inner problems.  Otherwise let
+$S$ be its nonzero external-label set and let
+$D_B=\operatorname{span}_L B(T)$.  Then $1\leq|S|\leq r$,
+$\dim_LD_B\leq t$, and the external-coordinate projection is injective on
+$D_B$, whence $\dim_LD_B\leq|S|$.  Delete every coordinate outside
+$\{j\}\cup S$ and take the punctured $D_B$ as the new functional dual.
+The chosen cost is unchanged.  Since this is a subcontext of the original
+one, the other inner problem cannot acquire a smaller value than it had
+there: every map into the punctured $D_B$ zero-extends to a map into the
+original $D$.  The resulting context therefore still separates, and it has the
+claimed length and functional-dual dimension.
+
+Finally, let $Y$ be a nonconfined normalized system of cost at most $r$, put
+$B_h=\Phi_IY_h$, and retain the target block together with the external blocks
+on which $Y_h\ne0$.  There are at most $r$ of the latter.  Replace the
+functional dual by $\operatorname{span}_L B(T)$ and delete the other blocks.
+The preceding dimension argument gives the same $\min\{t,r\}$ bound.  Keeping
+activity at the coefficient level, rather than retaining only blocks with
+$B_h\ne0$, preserves zero-label inner-dual lifts.  Thus $Y$ restricts to the
+smaller context and zero-extension recovers it exactly.
+\uses{thm:ungated-ranked-confinement}%
+\proves{prop:rank-bounded-outer-tests}%
+\end{proof}
+
+Over the finite fields fixed here, choose one representative of every
+compatible pointed context within the two bounds in the theorem, and list its
+truncated response.  This gives a finite vector
+$\mathcal R_{r,T}(I)$.
+
+\begin{corollary}[Finite coarsest bounded contextual quotient]
+\label{cor:bounded-contextual-state}
+\coverage{absent}%
+Two represented inner target/helper problems over the same base and extension
+fields, each with $0<\dim I<|E|$ and with identified target normalizations on
+a nonzero space $T$, have equal values of $\mathcal R_{r,T}$ if and only if
+their truncated nonconfinement costs agree in every compatible finite outer
+context.
+Equality of this vector is therefore the coarsest numerical equivalence that
+determines exact responses through helper radius $r$.  Equality persists under
+evaluation against composed outer contexts in the same family, with the
+original leaf confinement region, target coordinates, and normalization fixed.
+
+For exact, untruncated comparison, put
+$z_{I,T}=\rho_T(I)+d(I^\perp)$.  This is finite for every nonzero
+helper-recoverable $T$.  Two such inner problems are contextually equivalent
+in all finite outer contexts if and only if their $z$ values agree, say at
+$z$, and their exact responses agree on contexts of length at most
+$\max\{2,z\}$ and functional-dual dimension at most
+$\min\{t,z-1\}$.
+\end{corollary}
+
+\begin{proof}
+The theorem says that any unequal bounded responses have a representative
+among the listed contexts; the converse is immediate.  Hence equality of the
+finite response vector is precisely observational equivalence, and any
+numerical summary valid in all contexts must refine it.  Evaluation against a
+compatible composed outer context $C\circ A$ is already among these tests.
+Associativity and trace transitivity preserve the physical leaf coordinates
+and target normalization; fixing the original leaf region also preserves
+which equations leave it.  Equality therefore persists in these evaluations,
+without asserting equality of newly formed macroblock escape summaries.
+
+The full outer code of length two has response $z_{I,T}$ and separates unequal
+$z$ values.  When both values equal $z$, every exact response is at most $z$.
+Apply the theorem with $r=z-1$: equality after truncation at $z$ is then exact
+equality, and the stated finite bounds follow.
+\uses{lem:outer-column-types,prop:rank-bounded-outer-tests,prop:prescribed-coset-composition}%
+\proves{cor:bounded-contextual-state}%
+\end{proof}

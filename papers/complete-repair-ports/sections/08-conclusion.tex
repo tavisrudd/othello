@@ -13,6 +13,8 @@ The downstream question determines what the optimizer must retain.
 Numerical costs suffice for their declared contexts; support alternatives
 preserve reweighting, availability, and helper sharing.  Ergodis embodies
 these distinctions in executable recovery choices and checked optimization
-bounds.  The remaining algorithmic challenge is to construct the required
-interfaces economically, including local compilation and certification,
-rather than merely evaluate them after they have been built.
+bounds.  For adjacent-pair helper blocks, local tables and endpoint interfaces
+can both be constructed with work linear in the number of blocks at fixed
+field and target rank.  The remaining algorithmic question is which broader
+recovery families admit such economical interface construction, including
+local compilation and certification.

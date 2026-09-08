@@ -30,11 +30,13 @@ sections/02-confinement-transfer.tex
 sections/03-positive-density.tex
 sections/03a-exact-recovery-optimization.tex
 sections/03b-related-work.tex
+sections/03c-distance-specializations.tex
 sections/04-reliability-exit.tex
 sections/05-pointed-tutte.tex
 sections/06-geometric-flagships.tex
 sections/07-verification-provenance.tex
 sections/08-conclusion.tex
+sections/09-contextual-refinement.tex
 sections/README.md
 verification/README.md
 verification/artifact-versions.json

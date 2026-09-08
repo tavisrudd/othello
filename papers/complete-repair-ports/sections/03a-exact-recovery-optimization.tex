@@ -18,6 +18,89 @@ The cost counts participating scalar helper coordinates.
 
 \input{figures/ergodis-pipeline}
 
+\subsection{A complete three-level repair}
+\label{sec:multilevel-example}
+
+Two repetitions and one parity relation give a small hierarchy in which a
+failed helper changes the outer choice.  Over $\F_2$, let
+\[
+ B:z\longmapsto(z,z),\qquad A:z\longmapsto(z,z),\qquad
+ C:(u,v)\longmapsto(u,v,u+v).
+\]
+The code $C\circ(A\circ B)$ has coordinates $y_{gij}$, where
+$g\in\{a,b,c\}$ names the outer symbol, $i\in\{1,2\}$ its $A$ copy,
+and $j\in\{1,2\}$ its $B$ copy.  Thus all four coordinates with outer
+index $a,b,c$ equal $u,v,u+v$, respectively.  Target $y_{a11}=u$;
+the request space is $T=\F_2$, and its target coefficient is fixed to $1$.
+The same labels may be regarded as linear maps from $T$, determined by their
+values at $1$.
+
+Give the eleven helpers the following nonnegative prices; the dash marks
+the target, which is not a helper:
+\[
+\begin{array}{c|cc|cc}
+ & y_{g11}&y_{g12}&y_{g21}&y_{g22}\\ \hline
+ a&-&1&4&4\\
+ b&1&4&4&4\\
+ c&1&4&4&4
+\end{array}
+\]
+At an ordinary $B$ leaf with prices $(p_1,p_2)$, the restriction map is
+$(h_1,h_2)\mapsto h_1+h_2$.  Its labelled price table is
+$\lambda(0)=0$, $\lambda(1)=\min\{p_1,p_2\}$.
+At the target leaf, the total functional label $x$ satisfies $1+h_2=x$,
+so $\mu(0)=p_{a12}$ and $\mu(1)=0$.  This is the target-normalization
+constraint in~\eqref{eq:target-cost-composition}: the fixed target contribution
+is $1$, and helpers supply $x-1$.
+
+At the $A$ level, child labels add to the parent label $x$.
+For example,
+\[
+ \mu_a(x)=\min_{x_1+x_2=x}
+       \bigl(\mu_{a1}(x_1)+\lambda_{a2}(x_2)\bigr).
+\]
+The resulting tables, before and after helper $y_{a12}$ fails, are
+\[
+\begin{array}{c|cc|cc}
+ &\multicolumn{2}{c|}{\text{initial}}&\multicolumn{2}{c}{y_{a12}\text{ unavailable}}\\
+ x&0&1&0&1\\ \hline
+ \mu_a(x)&1&0&4&0\\
+ \lambda_b(x)&0&1&0&1\\
+ \lambda_c(x)&0&1&0&1
+\end{array}
+\]
+Only the target leaf table changes: its zero-label entry becomes $\infty$.
+The value $\mu_a(0)=4$ is then attained by child labels $(1,1)$, lifting
+the second label to $y_{a21}$ or $y_{a22}$.
+
+At the top, orthogonality to $(u,v,u+v)$ requires
+$X_a=X_b=X_c=\varepsilon$.  Hence the full repair price is
+\[
+ \min_{\varepsilon\in\F_2}
+ \bigl(\mu_a(\varepsilon)+\lambda_b(\varepsilon)
+                         +\lambda_c(\varepsilon)\bigr)
+ =\begin{cases}\min\{1,2\}=1,&\text{initially},\\
+                 \min\{4,2\}=2,&\text{after the failure}.
+   \end{cases}
+\]
+Initially the minimizing outer label is $(0,0,0)$ and the lifted equation is
+$y_{a11}+y_{a12}=0$.  After failure it is $(1,1,1)$; each $A$ block uses
+child labels $(1,0)$.  In block $a$ the target alone realizes the first
+label; in blocks $b,c$ choose helper coefficients $(1,0)$ at the first
+$B$ leaf.  Backtracking therefore returns
+\[
+ y_{a11}+y_{b11}+y_{c11}=0,
+ \qquad u+v+(u+v)=0.
+\]
+The two branches exhaust the top compatibility condition, and each local
+table is attained, proving both optima.  Reusing only the initial minimizing
+witness would miss the second repair.  The linear interfaces stay fixed;
+availability changes the local table and its ancestor messages.  Here the
+initial and replacement helper unions have sizes one and two, respectively;
+the objective in the calculation is their stated total price.
+
+\subsection{The labelled dynamic program}
+
 We first state the algorithm in flattened $\F_q$-linear coordinates.  Let
 $T$ have dimension $t$, let the outer message space have dimension $m$, and
 let the inner label space have dimension $s$.  For the $i$th outer coordinate,
@@ -282,6 +365,31 @@ a reconstructed witness alone supplies only an upper bound.  The sequential
 recursion~\eqref{eq:hierarchical-recovery-dp} instead has the usual path
 certificate, obtained by telescoping edge-potential inequalities on states
 $(i,c)$.
+
+\paragraph{An economical connected family.}
+Let $W=\F_q^{n+1}$ with basis $e_1,\ldots,e_{n+1}$, and give block $i$
+three disjoint physical helpers with columns
+$(e_i,e_{i+1},e_i+e_{i+1})$.  These store two adjacent message symbols
+and their sum; adjacent blocks share a message symbol but no physical helper.
+The query can be any fixed map $c:T\to W$, including, at rank one, the sum
+of all $n+1$ message symbols.  Each local coefficient map has $3t$ entries,
+so enumerating $q^{3t}$ maps constructs its entire labelled cost table,
+with witnesses, in polynomial arithmetic work per map.
+
+Use a balanced binary tree of contiguous intervals of blocks.  For an interval
+$S=[i,j]$, $U_S=\langle e_i,\ldots,e_{j+1}\rangle$.  Its intersection
+with the outside contribution space is spanned by at most the two endpoint
+vectors $e_i,e_{j+1}$; an endpoint is absent when that side has no outside
+block.  Thus $w\leq2$, and every boundary coordinate is an endpoint
+coefficient.  No search for a decomposition or implicit interface is needed.
+The local-table scans cost $O(nq^{3t})$ candidate maps, and the tree costs
+$O(nq^{4t})$ state-pair combinations, with polynomial arithmetic overhead.
+By comparison, the direct ambient-state enumeration in
+Proposition~\ref{prop:exact-hierarchical-optimizer} has
+$Q=q^{(n+1)t}$ and $S=q^{2t}$, hence $O(nq^{(n+3)t})$ transitions.
+For fixed $q,t$, this is an explicit family with linear table and combination
+counts instead of exponentially many ambient states.  The comparison is to
+that enumeration, not a lower bound for other algorithms.
 
 \subsection{A worked bilinear task reduction}
 

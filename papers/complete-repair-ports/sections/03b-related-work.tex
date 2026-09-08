@@ -1,85 +1,79 @@
 \subsection{Relation to adjacent formulations}
 \label{sec:related-work}
 
-\paragraph{Local recovery and workloads.}
+The main results specialize established support, duality, and elimination
+principles to recovery requests.  The table separates those inputs from the
+additional conclusions proved here.
+
+\begin{center}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.22\linewidth}>{\raggedright\arraybackslash}p{0.32\linewidth}>{\raggedright\arraybackslash}p{0.39\linewidth}@{}}
+\toprule
+Result & Established input & Recovery conclusion\\ \midrule
+Theorems~\ref{thm:relative-weight-recovery}, \ref{thm:ungated-ranked-confinement}
+& Relative weights and prescribed-tuple coset support
+& The canonical target/helper pair gives local costs; compatible outer labels and the nonzero inner-kernel cost give exact equation escape.\\[3pt]
+Theorem~\ref{thm:minimal-support-confinement}
+& Dual-word witnesses and component recovery transport
+& Target-touching distance forces every bounded minimal global support to be local, even when equations can escape.\\[3pt]
+Theorem~\ref{prop:prescribed-coset-composition}
+& Functional-dual decomposition and min--sum elimination
+& Target normalization and functional labels compose with attaining coefficient lifts.\\[3pt]
+Proposition~\ref{prop:boundary-width-compilation}
+& Linear cut-state compression
+& A fixed recovery query uses affine boundary coordinates; local compilation and output costs are charged separately.\\[3pt]
+Theorem~\ref{prop:rank-bounded-outer-tests}
+& Indistinguishability under exterior contexts
+& Helper radius and target rank bound the length and dual dimension of separating recovery contexts.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Support and recovery.}
 Relative generalized Hamming weights and relative dimension/length profiles
-describe support and access thresholds for nested codes
-\cite{LuoEtAl2005,KuriharaUyematsuMatsumoto2012,GeilEtAl2014,SanJose2025,
-Geil2026}; our identity $\mu_t(P)=M_t(D_P,K_P)$ specializes this theory to the
-canonical target/helper pair.  Recovery-set formulations retain the helper choices needed for
-availability and allocation \cite{GopalanEtAl2012,PamiesEtAl2013,RawatMazumdarVishwanath2015,
-AbdelGhaffarWeber2017,GruicaEtAl2026}.  Coefficient witnesses are also established:
-M\'arquez-Corbella, Mart\'inez-Moro, and Munuera
-\cite[Proposition~1 and Corollary~2]{MarquezCorbellaEtAl2019}
-characterize recovery by dual words and minimal recovery by minimal dual
-words, and compute sharp recovery structures with executable recovery
-methods.  Here those coefficients additionally determine the functional
-labels that couple blocks.  Disjoint
-simplex recovery optimizes the simultaneous use of such support families \cite{CheeEtAl2024}.  The physical-resource model also matters: regenerating codes optimize download
-and subpacketization \cite{ShahEtAl2010,YeBarg2016,GuruswamiWootters2016,
-MatthewsEtAl2026}.
+already describe support thresholds for nested codes
+\cite{LuoEtAl2005,KuriharaUyematsuMatsumoto2012,GeilEtAl2014,SanJose2025,Geil2026}.
+Recovery-set formulations retain the choices needed for availability and
+allocation \cite{GopalanEtAl2012,PamiesEtAl2013,RawatMazumdarVishwanath2015,
+AbdelGhaffarWeber2017,GruicaEtAl2026}.  Coefficients are also established:
+M\'arquez-Corbella, Mart\'inez-Moro, and Munuera characterize recovery by dual
+words and minimal recovery by minimal dual words, and give executable recovery
+methods \cite[Proposition~1 and Corollary~2]{MarquezCorbellaEtAl2019}.
+Galindo et al.\ transport a component recovery set and its coefficients to a
+matrix-product code \cite[Proposition~8]{GalindoEtAl2023v1}; concatenation
+also yields LRC constructions \cite{LiuEtAl2022,JinFu2026}.
+Our reverse-control question asks when every bounded global equation, or every
+bounded minimal support, must come from the target block.
 
-Service-rate regions allocate requests among recovery sets under capacities
-\cite{AktasEtAl2021,AlfaranoEtAl2024}.  Restricting to inclusion-minimal sets
-already preserves the region
+Service-rate regions allocate requests under helper capacities
+\cite{AktasEtAl2021,AlfaranoEtAl2024}; inclusion-minimal supports suffice
 \cite[Proposition~3.3]{AlfaranoRavagnaniSoljanin2022}.
-Theorem~\ref{thm:minimal-support-confinement} supplies the transfer step:
-target-touching outer dual distance preserves the entire bounded minimal
-family even when individual equations can leave the target block.
-Online and asynchronous batch recovery impose further constraints on
-successive choices \cite{DuzgunEtAl2026}; our allocation consequence concerns
-the stated simultaneous capacity problem.
+Our operational transfer preserves that bounded family.
+Disjoint simplex repair \cite{CheeEtAl2024}, online batch recovery
+\cite{DuzgunEtAl2026}, and download/subpacketization models
+\cite{ShahEtAl2010,YeBarg2016,GuruswamiWootters2016,MatthewsEtAl2026}
+pose distinct workload or resource constraints.
 
-\paragraph{What passes through concatenation.}
-Zhang et al.\ define the minimum union support for a prescribed tuple of
-cosets and then its maximum over tuples
-\cite{ZhangEtAl2019}.
-Generalized covering radii develop the latter invariant
-\cite{ElimelechFirerSchwartz2021}.
-Our ordinary local cost is the prescribed-tuple quantity; the transfer
-formula also retains target normalization, outer functional compatibility,
-and the separate cost of a nonzero inner-kernel equation.
+\paragraph{Composition and state.}
+Zhang et al.\ define minimum union support for a prescribed tuple of cosets
+\cite{ZhangEtAl2019}; maximizing over tuples gives generalized covering
+quantities \cite{ElimelechFirerSchwartz2021}.
+Functional-dual decomposition and min--sum elimination occur in concatenated
+decoding \cite{Forney1966,ChenLingXing2005,GuruswamiSudan2002,BlomqvistEtAl2020}.
+The generalized distributive law supplies the general message-passing principle
+\cite[Theorem~3.1]{AjiMcEliece2000}.  The recovery formula specifies its fibres,
+normalization, and coefficient lifts; it does not introduce min--sum elimination.
+Labelled soft information and presentation-dependent enumerators serve related
+decoding and enumeration tasks \cite{LoskotBeaulieu2006,Nogin2005}.
 
-Concatenation and matrix-product constructions produce LRCs with prescribed
-parameters \cite{LiuEtAl2022,JinFu2026}; Jin and Fu's Construction~3.2 fixes
-a binary $[3,2,2]$ inner code and an $\F_4$ outer code.
-Galindo et al.\ transport a component recovery set and its coefficients
-to a matrix-product code \cite[Proposition~8]{GalindoEtAl2023v1}.
-Our confinement question asks for the reverse control as well: at what
-radius must every global equation, or every minimal recovery support, come
-from the target block?  The labelled formula answers the equation question
-for the represented inner code and target split; the target-touching
-distance criterion answers the minimal-support question.
-
-The functional-dual decomposition is classical, and min--sum elimination also
-appears in concatenated decoding \cite{Forney1966,ChenLingXing2005,
-GuruswamiSudan2002,BlomqvistEtAl2020}.  The generalized distributive law
-\cite[Theorem~3.1]{AjiMcEliece2000} provides the general message-passing
-principle; our composition theorem specifies the recovery fibres,
-normalization, and coefficient lifts to which it applies.  Symbol-indexed soft
-information, presentation-dependent input--output enumerators, and message
-weights retain labels for decoding or enumeration
-\cite{LoskotBeaulieu2006,Nogin2005}; our target-normalized costs instead
-determine the least support size of a nonconfined recovery equation.
-
-\paragraph{How much interface information is necessary.}
-Contextual equivalence and congruence are established ideas in automata and
-finite-interface decomposition.  For deterministic weighted automata,
-future weighted behaviour, after weight normalization, gives state
-minimization under the applicable semiring hypotheses
-\cite[Section~6.4, Theorem~8]{Mohri2009}; analogous
-Myhill--Nerode statements exist for recognizable tree series
-\cite{Maletti2008}.  In coding and represented-matroid settings, minimal tree
-realizations and finite equivalence across separations likewise compress
-interface information.  Kashyap's cut-state quotient
-\cite[Section~2.2 and Theorem~3.4]{Kashyap2007} supplies the classical
-linear-code setting for the boundary dimension used in
-Proposition~\ref{prop:boundary-width-compilation}.
-Funk, Mayhew, and Newman define indistinguishability by all exterior
-extensions and prove its union congruence
+Kashyap's linear cut-state quotient provides the coding-theoretic setting for
+boundary compression \cite[Section~2.2 and Theorem~3.4]{Kashyap2007}.
+Contextual equivalence is likewise established in weighted automata and tree
+series \cite[Section~6.4, Theorem~8]{Mohri2009}, \cite{Maletti2008}.
+Funk, Mayhew, and Newman define indistinguishability by exterior extensions and
+prove its union congruence
 \cite[Definition~2.2 and Proposition~2.3]{FunkMayhewNewman2019}.
-In the recovery formulation, the contexts are outer linear codes,
-the response is the exact target-normalized recovery-support cost, and
-Theorem~\ref{prop:rank-bounded-outer-tests} proves a radius-controlled
-separator bound and bounded witness cover.  The witness-propagating min--sum
-composition is Theorem~\ref{prop:prescribed-coset-composition}.
+Appendix~\ref{sec:contextual-refinement} fixes the original leaf confinement
+boundary and derives concrete recovery probes and a radius-controlled
+separator bound.  Its numerical observations do not include arbitrary
+reweightings or escape from newly formed macroblocks.
