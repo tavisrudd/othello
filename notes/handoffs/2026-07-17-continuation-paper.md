@@ -2,7 +2,7 @@
 
 **Lane**: `continuation`
 
-**Date**: 2026-09-07
+**Date**: 2026-09-08
 
 Discovery companion: `notes/2026-07-19-continuation-discovery-track.md`.
 
@@ -50,6 +50,12 @@ reconstruction remains outside the headline under the existing N1-only ruling.
   Export/validation record: `notes/2026-09-07-c1110-continuation-upgraded-manuscript.md`.
 
 ## Next steps
+
+- **C1132** — address the new Astra/ChatGPT referee feedback, starting with
+  independent verification of the proposed five-clique bound and q>=9 cutoff;
+  then literature/proof corrections, explicit coding extension and verification
+  improvements. Claims remain unvalidated until this task runs. Specification:
+  `notes/2026-09-08-c1132-continuation-referee-revisions.md`.
 
 - **C1110** — complete publication-readiness review. The same-reader final pass
   finds the local exposition concerns resolved; preserve the current structure.
