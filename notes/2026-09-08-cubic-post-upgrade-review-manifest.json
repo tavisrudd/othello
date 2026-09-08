@@ -1,0 +1,1218 @@
+{
+  "baseline": "1f368b9e284c4ed4c2be09a86bfae256f26079f2",
+  "papers": {
+    "cubic-stabilization-irrationality": {
+      "files": {
+        "papers/cubic-stabilization-irrationality/.zenodo.json": {
+          "bytes": 2590,
+          "sha256": "f25b792e1443134517459064b0f0f446d41adc94d8e4cb0a739d19d3ce4a7273"
+        },
+        "papers/cubic-stabilization-irrationality/LICENSE": {
+          "bytes": 470,
+          "sha256": "55bd30dbbfb4a62d77bfd74a183e68ac3fa392c12802e0b56ad02613b9248d7c"
+        },
+        "papers/cubic-stabilization-irrationality/Makefile": {
+          "bytes": 1624,
+          "sha256": "efd9a76cb66b637eb691148dfa9c2f4b25f1d4bfdc377de0b821696d9f4676b1"
+        },
+        "papers/cubic-stabilization-irrationality/README.md": {
+          "bytes": 8449,
+          "sha256": "e95917f61524f186cfc7a3299a0a15cbafc190393846e4cacd114b279550c4f6"
+        },
+        "papers/cubic-stabilization-irrationality/REVIEWER_GUIDE.md": {
+          "bytes": 6482,
+          "sha256": "512071b4ba55d9e302d1027fe88f682b2db879290a192c67f7a171094d9fc882"
+        },
+        "papers/cubic-stabilization-irrationality/cubic_stabilization_irrationality.pdf": {
+          "bytes": 175769,
+          "sha256": "647a2b816ee1fdc1af5dde587a538d2ab93dcd3ff9b5192e469997bbe22f2dda"
+        },
+        "papers/cubic-stabilization-irrationality/cubic_stabilization_irrationality.tex": {
+          "bytes": 65517,
+          "sha256": "8ed36b23e9d5416a7ff40c452d572974dc9c5637d45c8a899cd4bfa703156d7c"
+        },
+        "papers/cubic-stabilization-irrationality/flake.lock": {
+          "bytes": 567,
+          "sha256": "9ae203c10f2e27ff1a11363a02ac43747d9766f8f17c975b5d825ed480d120cc"
+        },
+        "papers/cubic-stabilization-irrationality/flake.nix": {
+          "bytes": 663,
+          "sha256": "2d885f3cc77175ee2f4ec3a7933c6a3bda5176d9dbf05c1017614d427c382cdd"
+        },
+        "papers/cubic-stabilization-irrationality/formal-annotations.tex": {
+          "bytes": 272,
+          "sha256": "c45fe380482f45f6c9307b1906a28070d360283b8c173f298cd6aa7303d98227"
+        },
+        "papers/cubic-stabilization-irrationality/verification/SHA256SUMS": {
+          "bytes": 642,
+          "sha256": "9bfba909439582634dd467ce48a8fe8c40da7e8b9c8f90376ad4b5e806bb46b4"
+        },
+        "papers/cubic-stabilization-irrationality/verification/check_metadata.py": {
+          "bytes": 6632,
+          "sha256": "60e2c8e832f9f5277ed0c6a31823e2d6c58a775dc84ca6fa1317cb876141ae9c"
+        },
+        "papers/cubic-stabilization-irrationality/verification/check_rank_four.py": {
+          "bytes": 6554,
+          "sha256": "a87cba385c9a87cc23175f01926946cbd76ed9ca49180fc227a193fd6cc7b9b7"
+        },
+        "papers/cubic-stabilization-irrationality/verification/check_slice_cover.py": {
+          "bytes": 8973,
+          "sha256": "ba741fb3fa9d16b95caa7562381aa0d455a53525e9bf0566c57d05147283f02e"
+        },
+        "papers/cubic-stabilization-irrationality/verification/claim-map.json": {
+          "bytes": 12892,
+          "sha256": "20c3a533532cc614780cd70b86349a68ceac8f96bb81d7fdd587eee09cd9f3fe"
+        },
+        "papers/cubic-stabilization-irrationality/verification/derive_rank_four.py": {
+          "bytes": 6345,
+          "sha256": "d4739f696c33676e49969b2bbf766ae58b9f922223432e71130e5c14f54fa71a"
+        },
+        "papers/cubic-stabilization-irrationality/verification/derive_slice_cover.py": {
+          "bytes": 27355,
+          "sha256": "eab9a28c6a0c5c54087a99d6008baafc33d313d3ab6f7ff8d28696b60d7ad9ad"
+        },
+        "papers/cubic-stabilization-irrationality/verification/evidence.json": {
+          "bytes": 1677,
+          "sha256": "c9258207effa06c0537fa720cbb5e60ff3fc91a3784b6ba229221b5cdbde0ef5"
+        },
+        "papers/cubic-stabilization-irrationality/verification/generate_groebner_empty_certificates.py": {
+          "bytes": 3821,
+          "sha256": "cad05081601782add5971127895e6d0e31e02fdb541fd9f85e40f7f5f71c1c55"
+        },
+        "papers/cubic-stabilization-irrationality/verification/groebner-empty-certificates.json": {
+          "bytes": 92261,
+          "sha256": "9c0cf99e650a3db08d4adc926b893ddf13d5473a912721abd2a6efbc862472f0"
+        },
+        "papers/cubic-stabilization-irrationality/verification/imported-sources.json": {
+          "bytes": 11687,
+          "sha256": "970b9741642bcc18f13e20038e169dc26701b9788a334c0fb518199ba1be2322"
+        },
+        "papers/cubic-stabilization-irrationality/verification/rank-four-SHA256SUMS": {
+          "bytes": 596,
+          "sha256": "7b09706c88f7144ca95115a2eff709ea9ef50c0e091eed51f4a585d5776bc7dc"
+        },
+        "papers/cubic-stabilization-irrationality/verification/rank-four-certificate.json": {
+          "bytes": 6171,
+          "sha256": "b5cb0c283d549db17ea422b82683950d839d486f098ecd4525193b7dea45cd40"
+        },
+        "papers/cubic-stabilization-irrationality/verification/rank-four-values.tex": {
+          "bytes": 233,
+          "sha256": "7c9b07ef7ec736f166fa28ce0f4d3f639eb15727f23e0a159b33c27a9c999c91"
+        },
+        "papers/cubic-stabilization-irrationality/verification/rank-four.md": {
+          "bytes": 3463,
+          "sha256": "b56c6a9693dfa6fd427c6fff6e49915bfc79325f709ab31b10e715a697dfa01c"
+        },
+        "papers/cubic-stabilization-irrationality/verification/slice-cover-certificate.json": {
+          "bytes": 5527,
+          "sha256": "f827b273b04cfcf202fdbe0c7e3aa9cf2588660fddad3ac8aadb76a71c9fb4c4"
+        },
+        "papers/cubic-stabilization-irrationality/verification/slice-cover-values.tex": {
+          "bytes": 3198,
+          "sha256": "12db9466bb66620694b29deda09078462b86c305138afbb453fd8b9122091921"
+        }
+      },
+      "pdf": "papers/cubic-stabilization-irrationality/cubic_stabilization_irrationality.pdf",
+      "text_diff": {
+        "bytes": 28020,
+        "command": "git diff 1f368b9e284c4ed4c2be09a86bfae256f26079f2 ad952b6f4c2be0450cdbeaca47860cce9d1cb004 -- papers/cubic-stabilization-irrationality",
+        "sha256": "ab3e27ec578c1e0074c71996051d6176fe75ff164560a2d2d92bcbf40795c08e"
+      }
+    },
+    "cubic-stabilization-m1": {
+      "files": {
+        "papers/cubic-stabilization-m1/.gitignore": {
+          "bytes": 204,
+          "sha256": "8a8ba8d3e9bee327d84cef986f82c759fee126cc977852ea43220341487f1889"
+        },
+        "papers/cubic-stabilization-m1/.zenodo.json": {
+          "bytes": 2223,
+          "sha256": "8562f8699745c95226f1b7f82c0ac89d40f64ad1bef48ca0b1ac4590a3c5d375"
+        },
+        "papers/cubic-stabilization-m1/LICENSE": {
+          "bytes": 470,
+          "sha256": "55bd30dbbfb4a62d77bfd74a183e68ac3fa392c12802e0b56ad02613b9248d7c"
+        },
+        "papers/cubic-stabilization-m1/Makefile": {
+          "bytes": 1431,
+          "sha256": "1a8b23f045412e177300155685b4b737d3afd31b4ae33e74e62157791020f69b"
+        },
+        "papers/cubic-stabilization-m1/README.md": {
+          "bytes": 4997,
+          "sha256": "d589f574e996470877c5c078edb10fc0e459a453e5fba1e7ef0033f424194c29"
+        },
+        "papers/cubic-stabilization-m1/REVIEWER_GUIDE.md": {
+          "bytes": 7299,
+          "sha256": "49c4b983a68092de160bf6879517b5fc2ea5f7fde4ef91decce262810c9ffe1f"
+        },
+        "papers/cubic-stabilization-m1/blueprint/extract_bibliography.py": {
+          "bytes": 926,
+          "sha256": "17befb745584237c6cf6a2653ffdf9999b14ee2d81d5e0a5a68c690edea13ab9"
+        },
+        "papers/cubic-stabilization-m1/blueprint/src/blueprint.sty": {
+          "bytes": 64,
+          "sha256": "16d204e89cd06dd230d55d9c28837c88921289072c4d68f412d98b815ce4068a"
+        },
+        "papers/cubic-stabilization-m1/blueprint/src/content.tex": {
+          "bytes": 160,
+          "sha256": "0317660b0daaef87295b701e47e097de21d867ff090c81bdf1e77dc596a0f335"
+        },
+        "papers/cubic-stabilization-m1/blueprint/src/extra_styles.css": {
+          "bytes": 233,
+          "sha256": "3a931c0a8f2f8b1b6f2b1f8cb39ed71298cd9893b97d9e21e9b220d6c9687115"
+        },
+        "papers/cubic-stabilization-m1/blueprint/src/macros/common.tex": {
+          "bytes": 756,
+          "sha256": "6ff7c25677c506b9fd5281f1dd44b69fe86158ab1b3f139adbca5cf55eddf343"
+        },
+        "papers/cubic-stabilization-m1/blueprint/src/macros/web.tex": {
+          "bytes": 31,
+          "sha256": "1d1182e26422664c6335de6cab9eb52b5e7a199e8fb9a42a25f82479f41e6467"
+        },
+        "papers/cubic-stabilization-m1/blueprint/src/plastex.cfg": {
+          "bytes": 260,
+          "sha256": "088e4b2f7648a2aac4d4dbdc7fd9be28e587e2f5e15b85d2ed2448ff015c0463"
+        },
+        "papers/cubic-stabilization-m1/blueprint/src/web.tex": {
+          "bytes": 439,
+          "sha256": "1dd42d9bc8fa78d1433607de50c0283415de7aeeb713d96e0a4e59f62df7c1d5"
+        },
+        "papers/cubic-stabilization-m1/claim-proof-novelty-ledger.md": {
+          "bytes": 22024,
+          "sha256": "2eaeef744bb403bb47c0c197c9ae8f119eab35ed3ca33844a6e95a1327559f5b"
+        },
+        "papers/cubic-stabilization-m1/companions/cubic-framed-monodromy/LICENSE": {
+          "bytes": 470,
+          "sha256": "55bd30dbbfb4a62d77bfd74a183e68ac3fa392c12802e0b56ad02613b9248d7c"
+        },
+        "papers/cubic-stabilization-m1/companions/cubic-framed-monodromy/Makefile": {
+          "bytes": 1013,
+          "sha256": "b2549db723e7917c542aace081afb4a3cd626b8c20fc5af6021cf633c76853f6"
+        },
+        "papers/cubic-stabilization-m1/companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf": {
+          "bytes": 182655,
+          "sha256": "3afa68e3c062beb3394860b94b322321853d8763eb833de83f7d89839ed42aed"
+        },
+        "papers/cubic-stabilization-m1/companions/cubic-framed-monodromy/cubic_framed_monodromy.tex": {
+          "bytes": 5770,
+          "sha256": "5f9eeac8ba737fe9d62e33cb3cc01251613e97c46df939b2736a9bfef895436e"
+        },
+        "papers/cubic-stabilization-m1/companions/cubic-framed-monodromy/formal-annotations.tex": {
+          "bytes": 2666,
+          "sha256": "9e1ec64c66ac4adde61d6ae9b21cb241773978e82500a58757f420f6ece31c54"
+        },
+        "papers/cubic-stabilization-m1/companions/cubic-framed-monodromy/sections/01-introduction.tex": {
+          "bytes": 1777,
+          "sha256": "c6eb9fa5ded65879c5096036832cb6404894866dea8356e45f7cc8d299c12226"
+        },
+        "papers/cubic-stabilization-m1/companions/cubic-framed-monodromy/sections/02-framed-monodromy.tex": {
+          "bytes": 76051,
+          "sha256": "d0118cefc1daaf58c5b59fa124c3377d73670dd7e4d9c8b6ccbb3f91d7b2dc49"
+        },
+        "papers/cubic-stabilization-m1/companions/six-axis-cubic-pencil/LICENSE": {
+          "bytes": 470,
+          "sha256": "55bd30dbbfb4a62d77bfd74a183e68ac3fa392c12802e0b56ad02613b9248d7c"
+        },
+        "papers/cubic-stabilization-m1/companions/six-axis-cubic-pencil/Makefile": {
+          "bytes": 1011,
+          "sha256": "db6855ca6d4fdeb483ddba8a9cff53638ec207b0bb6538b4603a326bf2b1bac0"
+        },
+        "papers/cubic-stabilization-m1/companions/six-axis-cubic-pencil/formal-annotations.tex": {
+          "bytes": 2666,
+          "sha256": "9e1ec64c66ac4adde61d6ae9b21cb241773978e82500a58757f420f6ece31c54"
+        },
+        "papers/cubic-stabilization-m1/companions/six-axis-cubic-pencil/sections/01-introduction.tex": {
+          "bytes": 2794,
+          "sha256": "0ad8470652384ff26fa27f6db8c8911cd281023daaed9bc0ba8c9d45f45a0c9d"
+        },
+        "papers/cubic-stabilization-m1/companions/six-axis-cubic-pencil/sections/02-six-axis-polarization.tex": {
+          "bytes": 39696,
+          "sha256": "b48b8cb0c94313eaa31fbea20e2c854e74cdef6bb59dc59726ca7b7f6acc6594"
+        },
+        "papers/cubic-stabilization-m1/companions/six-axis-cubic-pencil/sections/03-divisor-products.tex": {
+          "bytes": 42836,
+          "sha256": "bf92121ed6f2dc7ee920cf8c65a4c65390e6653c9f3f08cdfae933cb1ec18dea"
+        },
+        "papers/cubic-stabilization-m1/companions/six-axis-cubic-pencil/sections/04-applications.tex": {
+          "bytes": 1225,
+          "sha256": "e18d7f9f6d5a509d72a2044cab2ded036dcf48653ecb731aa91bf229c374a561"
+        },
+        "papers/cubic-stabilization-m1/companions/six-axis-cubic-pencil/six_axis_cubic_pencil.pdf": {
+          "bytes": 202516,
+          "sha256": "87d05981a0ce0ddf98d99b1a0a0325721def786d484ad268034aa6672ef2c790"
+        },
+        "papers/cubic-stabilization-m1/companions/six-axis-cubic-pencil/six_axis_cubic_pencil.tex": {
+          "bytes": 6811,
+          "sha256": "c4474b056defc79121860528ef49fc7de054c4e8175a7c28bf141835336a49a4"
+        },
+        "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex": {
+          "bytes": 7445,
+          "sha256": "31041b90078f93a7c87a63c433dee88f2e021e733b3e13e7287d511bcaf55344"
+        },
+        "papers/cubic-stabilization-m1/flake.lock": {
+          "bytes": 1090,
+          "sha256": "61ac8d1e78aec5965ca36149359ac9fc44481dbebe86b44376df8f2e4385a60c"
+        },
+        "papers/cubic-stabilization-m1/flake.nix": {
+          "bytes": 2759,
+          "sha256": "36c6f41700c2acd0c2f8e6c9a335e9c61800ecd8c4c31819e6435efd3c716f05"
+        },
+        "papers/cubic-stabilization-m1/formal-annotations.tex": {
+          "bytes": 2666,
+          "sha256": "9e1ec64c66ac4adde61d6ae9b21cb241773978e82500a58757f420f6ece31c54"
+        },
+        "papers/cubic-stabilization-m1/irrationality_after_one_stabilization.pdf": {
+          "bytes": 188893,
+          "sha256": "c608cd95c9ceb7c43ed8867f2b1be6a60c607d191a26a8cc1951f861598ad093"
+        },
+        "papers/cubic-stabilization-m1/lean/.gitignore": {
+          "bytes": 8,
+          "sha256": "5375c2c5e323f40c0031aa8c82f66bb9197214001039e6a8c9ff2a5eb3aa24a9"
+        },
+        "papers/cubic-stabilization-m1/lean/README.md": {
+          "bytes": 49525,
+          "sha256": "ec4ec69290f7f631510edd71373e04b06cabc3e8d863a131a1391a2e892ffb79"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/CubicAtomOneStep.lean": {
+          "bytes": 8193,
+          "sha256": "dabc40397450ddfe9efbefe2200b9bcad223abf3b3d00c8c87fadfec748bbbf9"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/CubicFormalGermPacket.lean": {
+          "bytes": 5745,
+          "sha256": "bf7652f1ee3c0eb97b658c07ed10a3a27489ce313e90482527097e48203e828f"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/CubicFramedMarkerOneStep.lean": {
+          "bytes": 7903,
+          "sha256": "0e187e4fd4a7a6366e7b2d520a03ba7d6b9f5ea6fd34c744c2fd0c520ae5363a"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/CubicFramedOneStep.lean": {
+          "bytes": 5305,
+          "sha256": "9c6068eb7876c55f447765c5b8a6eef4be821e9d0504791d4a4dd2e3acec23f0"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/CubicPacketFormula.lean": {
+          "bytes": 7344,
+          "sha256": "c1bb81522853a5cfcaac6757efdd1d357419aa268da997aa5354f289c5dda788"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/CubicPacketFromBlockReduction.lean": {
+          "bytes": 3063,
+          "sha256": "0071686395c8eeb147091c553c11c03893644312ae777e89b51112e1bf5fa675"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/CubicResidueMarkerOneStep.lean": {
+          "bytes": 5430,
+          "sha256": "34c035b9da01bca5ee763ac0b3ded68c6fba49436eeb9c59f279df6ebc218b1b"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/CubicThreefold.lean": {
+          "bytes": 3304,
+          "sha256": "dec88292e486d73a8cac7c09099762c1c8899583f4f738212ce8114b1fad70c7"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/CubicZeroAtomRanks.lean": {
+          "bytes": 9387,
+          "sha256": "8cd4b205094efad39203b2f27826bfac34e8f94a4df51a607ea814a56498afb0"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/DirectSpecializedVanishing.lean": {
+          "bytes": 7169,
+          "sha256": "07be420227b446aa875906432a624bf44d8b89cff6f9ffc32a7d9b1bb077417e"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/DivisorTaggingVanishing.lean": {
+          "bytes": 5513,
+          "sha256": "caa1130a78d563bc6b1de2d6f45bc8caaea31d2870e98294bb52932d898a43e0"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/EckardtHessianRank.lean": {
+          "bytes": 14809,
+          "sha256": "b857c4631ac4cbdadbcd4114439a27f980d7663e4f30faa84c6b53b01525fd50"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/FramedOperationFormulas.lean": {
+          "bytes": 7411,
+          "sha256": "e548ff5db0f9900ec60e79a21603ade01a5227cd9b4b8fb8a4ad7f71b44dd9bb"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/FramedSixthLowDimensionalNullity.lean": {
+          "bytes": 4719,
+          "sha256": "db9190c3077573f578abe8d1b5acaecc365e811a938096b17078f9e974daaeb1"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/GenusEightCategorical.lean": {
+          "bytes": 7631,
+          "sha256": "dcbbfe0694d06277c26e74dc623c08f6894787750a21069e1270c1721b9b8b15"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/GenusEightThreefold.lean": {
+          "bytes": 12368,
+          "sha256": "ee396f44db7bbdc68cb8c775e1d2d3a61bc1b5dc31c2f89d56a41c28297c8d7d"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/HirzebruchSpecializedVanishing.lean": {
+          "bytes": 8088,
+          "sha256": "3ce0e419e62a1fa90dc30965671514bc71f63b4e008334279cbe310086fa3636"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/LowDimensionalVanishing.lean": {
+          "bytes": 9107,
+          "sha256": "0c49a8885eadfa4c5f9366cfaea04fd62dc5557b61895fee4990ced1012ea6c2"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/ProjectiveProductMultiplicity.lean": {
+          "bytes": 8436,
+          "sha256": "c9daccb0151aee726242d01ae261bf1aebd454c111aaf00d7543a4d16669e1b1"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/RankTwoResidueLowDimensionalNullity.lean": {
+          "bytes": 6894,
+          "sha256": "081cd693e85df65e87dfaf93f4b5cf00d3aebe81f131d69d0684ea96d2f33ec4"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/RelativeSixAxis.lean": {
+          "bytes": 60095,
+          "sha256": "c287fd4a10f226d7e77704d4b963f605edfeed1564c9c3a64b4503d70d148d85"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/SeparatedVariableCubicForms.lean": {
+          "bytes": 5308,
+          "sha256": "44cfef68b134e46ad3750addb4d1d87432347697d144d2bf003f32a9a3304ef7"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/SeparatedVariableModuliExclusion.lean": {
+          "bytes": 9231,
+          "sha256": "2b2ea7ea1fc3b0e41b12ddbb6d633b06eb827cbb8ad225f1c8b8142ab65b97b7"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/SeparationFamily.lean": {
+          "bytes": 8315,
+          "sha256": "cb8c110699d44ed92a159af6f5278d42f8b958d93feff5bc1ec9ca9879ce2451"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/UniversalCH0.lean": {
+          "bytes": 3811,
+          "sha256": "e8f0f21e0d10ed5e443ebd07a2eae913a1d85db0aee42c36de9fda99fa2a56da"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/UniversalCH0Separation.lean": {
+          "bytes": 12841,
+          "sha256": "e15caa27d2301ae4c2f705d7ec05fcff3967583f52bf95aa967f615de17d13a1"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/AllDegreeAssembly.lean": {
+          "bytes": 45211,
+          "sha256": "5d048afcce3d4062aaeb48d6dda7fbc4fdae411b1dd19b27747be94e007658fe"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/AlternatingFiveIdentification.lean": {
+          "bytes": 9401,
+          "sha256": "7e7db77651a587c387ffd1cd74c13c1287f9e5ca742b5674cd243ae986735a8f"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/CoefficientExtension.lean": {
+          "bytes": 4202,
+          "sha256": "ab1d73e90171e632a6f511a2e4714dd139eb9e6f3220db6e9cdbefecb79f11bf"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/ConnectedPacketPersistence.lean": {
+          "bytes": 7611,
+          "sha256": "a6bb35072c02e9ab446b4f29315fbc32dccc37d9de712f68bc7dadf68231f504"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/DVRRankOne.lean": {
+          "bytes": 10502,
+          "sha256": "f196e5ea2359f821dda60094e7c2f53f046d035fdcfe3037bf589b5d56328ef6"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/DepthOneSelfAdjointLift.lean": {
+          "bytes": 15482,
+          "sha256": "1097f919511fdf8303462183140ffd9e3cabcefb8a7fce9e961d2da974df7ce6"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/DividedPowers.lean": {
+          "bytes": 3005,
+          "sha256": "796aca65334acadd60842b3c4347ca82fe75a6011cb930b23d3bd9a3aa381415"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/EllipticSourceRealization.lean": {
+          "bytes": 6220,
+          "sha256": "4f90ccc6175631c83a8e1508d1537bab748a61d85119cf6c59b5cae622fe3379"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/ExoticStabilizerCore.lean": {
+          "bytes": 3591,
+          "sha256": "284f3ec690d9a0b72da867860ae0e7f1c7b11a74669f3db7a47fa040413771f8"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/FaithfullyFlatMembership.lean": {
+          "bytes": 1261,
+          "sha256": "170bda73b85472d91695901d266700cb4e2d9b0841cc60a09c3ef5f34624a2c2"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/FrobeniusNormalizer.lean": {
+          "bytes": 6622,
+          "sha256": "e886b8c22d0fe7c3a5c17cba5ec055e9c8c4351d57d09273e6dee051145626d5"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/FrobeniusPacket.lean": {
+          "bytes": 5189,
+          "sha256": "7e3c5030e51a555c282212bb9e9a8c5f515cb65e9ff5ed91e0f64eb988f0a7ae"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/GraphCoefficientBlocks.lean": {
+          "bytes": 17222,
+          "sha256": "390378ac6ed18b9947666a70da59618bb9a1b963f9d2f688048f0951abc3f3f8"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/GraphCoefficientDepth.lean": {
+          "bytes": 24563,
+          "sha256": "000a49d8fe5bb5a0375414b662bd17bd352cb53609f95b754b3db147523027cf"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/HeartOrthogonalLines.lean": {
+          "bytes": 6977,
+          "sha256": "b908b63753973d064a00f73cee01c6ec57a4574379ff4447e72b1fe704ea9add"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/IntegralDiscriminantGroup.lean": {
+          "bytes": 36424,
+          "sha256": "fac6e786dd2d9f7125a6585a46f4b696a6fcabf53cea36a37f4e4efa6ea79188"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/LocalGlobalMembership.lean": {
+          "bytes": 2789,
+          "sha256": "8af261872ffe68cbd5a9afd73c785a7e216785926dcbf409cb50c335adf05d09"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/MarkedGraphBasisChange.lean": {
+          "bytes": 5537,
+          "sha256": "5c032e70948abd4a6b5983389a92e7bd70e982de9ed0fdad2a62c2d79d8e8ba6"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/MarkedSplitPresentation.lean": {
+          "bytes": 8643,
+          "sha256": "805c51f04b47a023a2580c833c72c5b242e05f362c8c62a83b0ea08a14b7b536"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/MatrixOfIdeals.lean": {
+          "bytes": 20702,
+          "sha256": "5bc3193000110e0f07358f355fc5e1a6b439b094f8cdac54f84e0075fd3cffe9"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/OrdinaryProductBaseChange.lean": {
+          "bytes": 7592,
+          "sha256": "d1d3bffc685bb91a155409e8527d0f1ffa7c0341e54ba747275e9e9eb063fcc0"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/OrdinaryProducts.lean": {
+          "bytes": 3229,
+          "sha256": "94f04e6cc23c15a49009df19a9fdebd198875981ddd96a71da774c1fe1c2e505"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/PrimaryDiscriminantSplitting.lean": {
+          "bytes": 18901,
+          "sha256": "b4bc8294dbbe598a058c63fb30b840c8484298810e5e09b93872a4326d87c28e"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/PrincipalGluingPacket.lean": {
+          "bytes": 7796,
+          "sha256": "a632a041fdace8eca262eeb61bac41cb5f958d934b3df160c787ac52bc7c193c"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/RankOneGeneration.lean": {
+          "bytes": 10625,
+          "sha256": "93e33bf170c5fba74f500a8fc05d5354bce19b68b72bac9021ce5ad679efa154"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisDiscriminantGroup.lean": {
+          "bytes": 6096,
+          "sha256": "ae17690b7cedcdc13563dd24e7d4c8444e807513ba5b3f8c55e41439b4fe0e7c"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisDiscriminantSupport.lean": {
+          "bytes": 12904,
+          "sha256": "608d82c3ce5df0d692815f4336c9ce7834b3428c352961d2f6afdfae5d931b67"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisGram.lean": {
+          "bytes": 5622,
+          "sha256": "903d141021b07e8a2061f21706a1284c118c75559c67d4c4619819ef2dd21817"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisLocalChart.lean": {
+          "bytes": 11139,
+          "sha256": "0307336d8303d1a5e49b0e16d2c34244f923fe0ffef0a10230fdb495760ddeb2"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisMarkedPresentation.lean": {
+          "bytes": 46261,
+          "sha256": "f6f6c94de49984bdd9b205687f835c695f960d20c929a9d29cede00892b0c2e3"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisPrimaryDiscriminantSplitting.lean": {
+          "bytes": 22166,
+          "sha256": "ddfd57171ba887d4515e07721378415c32e2d7bcdeb49e30fe3439bb5e38bbd8"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisPrimaryKernelOrders.lean": {
+          "bytes": 7164,
+          "sha256": "845b92591d48abf2197b675ffb512563047443cfa874e929c6010f7d679f17fc"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisPrimaryKernelStability.lean": {
+          "bytes": 24604,
+          "sha256": "cfa167abce7ca3bca1ce2231ccad7d48a55a33262e9c087e6781618339a8d57f"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisSlopeModels.lean": {
+          "bytes": 25132,
+          "sha256": "a5042d04c8956b066893eea80c4862a56ec2ad561179e2529b1916c82b938f7b"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisSourcePermutationAction.lean": {
+          "bytes": 28808,
+          "sha256": "0a425265a92e8f32ecbae1c4f3f7bf4b5327a7aa485570fc8310f1e0abe12058"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisSourcePolarization.lean": {
+          "bytes": 24812,
+          "sha256": "541b818973e6a008acf8548c8f04a615e46ad8ffb4db67bb5f55fac032aae034"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisThreePrimaryHeartCoordinates.lean": {
+          "bytes": 23566,
+          "sha256": "653c2767176562e3e1a0ca652d58d1981c092360784916c1f3fa2759692b7166"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisThreePrimaryLatticeComparison.lean": {
+          "bytes": 17096,
+          "sha256": "0dbb949129aad5613d6d7aa4cb0697831394e637456247417ea5efe3005c81f1"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisThreePrimaryPairing.lean": {
+          "bytes": 17236,
+          "sha256": "ba2de3d203b56504190d2739dce20764919179e5c72ae127fefc415b7f6ab648"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisTwoPrimaryDiscriminant.lean": {
+          "bytes": 31040,
+          "sha256": "4392e2d0fda93d82536254dedc768e9f0ad09e951b26820abe261757decebb7c"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisTwoPrimaryExoticSelection.lean": {
+          "bytes": 5231,
+          "sha256": "d98169fc99397602f4fc0e0b4300914e46e57bcf768a85c50ddbe76e88e3104d"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisTwoPrimaryLatticeComparison.lean": {
+          "bytes": 16127,
+          "sha256": "0454ca71058aca0306b8885016ff89b5f91d7062991cfe9c0cf7fcf23193c529"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisTwoPrimaryPairing.lean": {
+          "bytes": 16176,
+          "sha256": "4bbcda1c1199bdb7ac7d8bf424ba3081853926f6195e8eb818e3292787ff8ca4"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisTwoPrimaryStandardCoordinates.lean": {
+          "bytes": 14624,
+          "sha256": "6464f16165dce5c2ecd2ffd412ee5bdf737a35a321239cdcb124bc6312688236"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointAlternatingAction.lean": {
+          "bytes": 17033,
+          "sha256": "87741cfa6359c5b13088c1d5daa963242e389ca164e8233c8f5ddab6b728bfc2"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointAxisDescent.lean": {
+          "bytes": 11131,
+          "sha256": "247033ab1bfa8665a216f9112746cfbd15e76e594316d2f3dddaf4859104150c"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointAxisFixedLine.lean": {
+          "bytes": 8051,
+          "sha256": "e7cb1806b4f05b7c6f8805b1b5a61b50336d80bdc8d9efa4e05ecd355fbf5793"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointAxisNorm.lean": {
+          "bytes": 6726,
+          "sha256": "303b99513ee6496c25fc160fbfae3d66600f17a9b81764eeef8329e42201fe44"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointAxisTransport.lean": {
+          "bytes": 3047,
+          "sha256": "d12214ae1a404cbc995492d7c128a672be1acce644e5cbe737fe087c4fc54f68"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointCoefficientHeart.lean": {
+          "bytes": 22717,
+          "sha256": "86e96278a1e5e3f7e8dcc849c8f55f8f67b86d424dab3864d6b4c6fcfd15a56f"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointDuadFactorization.lean": {
+          "bytes": 27851,
+          "sha256": "d045110d4d2170f64c1ace91181066e3b5b08533bc81b0dba056ae0467da7570"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointHeartEndomorphisms.lean": {
+          "bytes": 11971,
+          "sha256": "c6fab1b15fe1f2e719c8954ffd9466df538869bedc183772ac04f977862b33fc"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointIntegralQuotient.lean": {
+          "bytes": 17536,
+          "sha256": "df79d94dd380cd2cdcea6ce249068f4d8bb518563452459ef5ec13a31ab19875"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointLabelHeartMatrix.lean": {
+          "bytes": 11262,
+          "sha256": "5b1e1332268ebb44e6b02542f036cd0f4dc9bc295cb3dee3ca4202d3c1e8322d"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointOddLabelHeartAction.lean": {
+          "bytes": 40901,
+          "sha256": "df416d798b6423bafb36a5f40eabb4c1658b685e7e12e44ed502605230ba531f"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointPacketLabelGroup.lean": {
+          "bytes": 46168,
+          "sha256": "22631d888c6ee4c97ada3a6f96edfd1c68a26247f032bbfe10191ca7cad6be71"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointProjectiveLine.lean": {
+          "bytes": 7726,
+          "sha256": "9ce4ac1b885180659e8077b4b1de176dea00e471e593b05cdaf9045de9a3b11b"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointProjectiveSpecialLinearAction.lean": {
+          "bytes": 25748,
+          "sha256": "1fd26cf805c4fe958ca0e48fa3d747dae7c16f71f265895ceb8acd057cc9fc0a"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointStableHalfFrobenius.lean": {
+          "bytes": 18021,
+          "sha256": "94737279ce90a5190db2b49eb5260b393c7aaaf7e55346b0fb5877e6c646598e"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointStableHalves.lean": {
+          "bytes": 55628,
+          "sha256": "36198034f02f7d3aae93b41690d189c012841c995d4f03d7d153447de8496578"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointSylowFiveAction.lean": {
+          "bytes": 25905,
+          "sha256": "7773f949a928b896dd5f5b9ab58b6434529a4d27c970b8406fd834a8c0634131"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointThreePrimary.lean": {
+          "bytes": 65087,
+          "sha256": "3468255b57c8e6ea9c442c5d825762e2cb8d169b508d82216afe6226a07b99a8"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SplitCoordinateTransport.lean": {
+          "bytes": 8686,
+          "sha256": "0cd183ebdd19c943326c0d68993fd1d29fc68b6b7a39b7eae541bc93bc2e502b"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SquareZeroTransport.lean": {
+          "bytes": 3528,
+          "sha256": "a0f45041295c7d56d6d377fe1cfae6ebd85905e08616c4959633b7c994c22d3e"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SymmetricSixExclusion.lean": {
+          "bytes": 3766,
+          "sha256": "286a6fda3375f5512404037a58c47a501a864ee0df9c7aabdc9b74e383ab0afe"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/TraceDeterminantPairing.lean": {
+          "bytes": 9551,
+          "sha256": "acf7875862f2829d341f5e568aae249e5306ba15af82e40eae430f8832b3746b"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface.lean": {
+          "bytes": 1337,
+          "sha256": "d1e3eb110bd6df96119bc600929e43bd2495a3956042950f8ab15ec51dcbfe3b"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/CategoricalOneStep.lean": {
+          "bytes": 37188,
+          "sha256": "3a0b6cb78752faf68486605fb3a0708ca4c9fa692044e9aa07bbe655558f0b19"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/CoefficientTowers.lean": {
+          "bytes": 64996,
+          "sha256": "578a906bcd8e44f12e56bfc2c90dea10d46a509d27b3a3faac4ee3e214799c85"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/CubicFramedMonodromy.lean": {
+          "bytes": 670,
+          "sha256": "6a9ffdefc94c0f6b5d777f220370934c367f28facd3e4395f6c016e60e54ca65"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/Envelope.lean": {
+          "bytes": 119370,
+          "sha256": "e215e701ea45cf816f429ffa969e21c4ac0fd429d0161f47e58b7766849b6dcf"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/FormalConnections.lean": {
+          "bytes": 31678,
+          "sha256": "95d6997079dcd7bef34aa364bff31ab4d5954eb4e685e09fdfea4dba41af470d"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/FramedMonodromy.lean": {
+          "bytes": 89945,
+          "sha256": "43dc835452546d9ed3e5269274920c6d71e2fe4f805bfd37da4cafdedd0ddb70"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/Introduction.lean": {
+          "bytes": 19224,
+          "sha256": "e45602b857a34f08c0bc91f96128089d6b706f6a466cad22ba5d8ebf679c9847"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/Main.lean": {
+          "bytes": 748,
+          "sha256": "efafe58244645b6f557547fd4fb76185a44a65e38d0773f91a42b820db4cd837"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/MinimalClass.lean": {
+          "bytes": 102950,
+          "sha256": "975057266f956dba7a842ec23686631cbbdc6d75c6918b6df1d4e1db15454923"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/ResiduePairing.lean": {
+          "bytes": 54930,
+          "sha256": "65ed29477e6cc0f05db145481fc0d9daa53f8720ea386959af02e5ef2518e09b"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/SixAxisCubicPencil.lean": {
+          "bytes": 616,
+          "sha256": "26d836f82f7b6ec6dd0d86fd5c3b0ce266a95a4811a99ffbadd399f6efb58ed6"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/Synthesis.lean": {
+          "bytes": 174,
+          "sha256": "f7cfdf520bc690b74cd32c2d6a8930ece6d2c9fc94f74308cf03bba7188330f0"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/AssociatedGradedTagging.lean": {
+          "bytes": 6093,
+          "sha256": "41f0a33bcb6ec7a54534878a0b10f10f167acd6e9bf8fbe4abf9ad7c5c81eb8b"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/AtomicElementaryModification.lean": {
+          "bytes": 23834,
+          "sha256": "af76ad66d38ee28a26613d6621d18e20601d85c44ca57793b608ff4ca05c0271"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/AtomicRankTwoFlatRigidity.lean": {
+          "bytes": 26580,
+          "sha256": "cdca22fbac407ddf63ad96c1c8807218d690c32ac79abd4af60926cda770e3e9"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/AtomicResidueDiscriminant.lean": {
+          "bytes": 5737,
+          "sha256": "464dae1614575209c6c29f35f762678c0ca3a6abd30f206747284fc90f92e93b"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/BirationalDeduction.lean": {
+          "bytes": 6484,
+          "sha256": "9f1e77027e5c24f446f4b3e650ddb200f0ddc62e295f99b5c8c731a362ad71a5"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/BlockDiagonalHorizontalPairing.lean": {
+          "bytes": 17122,
+          "sha256": "04c81c1cdc11b035fd49247ff66cf8b17c756a4d8a1130a281d3a6201962a88a"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/BlockSylvesterSolvability.lean": {
+          "bytes": 32847,
+          "sha256": "5363fbb9e4255d60555127c906dbb09bf8560b4a88d85b779d19e07f19955a9b"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/BulkShiftFramedInvariance.lean": {
+          "bytes": 7366,
+          "sha256": "7d898674ee183c531afee6caef8b4a53463fbacab3da692fe8049261fd6aa336"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/CenterMonomialMap.lean": {
+          "bytes": 3281,
+          "sha256": "79d480365646abb87c6759fc06582cea544ca57e9a6b153dd6644cde628a788d"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/CompatibleConstantFlatGauge.lean": {
+          "bytes": 8182,
+          "sha256": "6ab5d33a3161d5da3c8e20dfa2455f29f61635770179d878f7e4e22b575d5733"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/CompatibleMonodromySystem.lean": {
+          "bytes": 3536,
+          "sha256": "5a8c78e4d07ad4daa805e8729837981fcff219a6e5546c20906a7e9ad76e0ff2"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/CompatibleVaryingFlatGauge.lean": {
+          "bytes": 8906,
+          "sha256": "eca452f38a1486047a5076702686adfba294ea5b8ba74d7fd2895520178f588e"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/CompletedDivisorSubstitution.lean": {
+          "bytes": 4889,
+          "sha256": "96b17bad1f9fb78c27836c4d1b075dd4927a5b9c82ce99379ba308de18ca7d4e"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/CompletedNovikovConvolution.lean": {
+          "bytes": 19990,
+          "sha256": "38a4298c3433951d2a8fd8cec45dd4df25372dc6bc1b627aeffab359d4897892"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/CompletedNovikovInverseLimit.lean": {
+          "bytes": 5211,
+          "sha256": "8c104712e961aa5657d734095b4de8891a5327893ed904e30719b55314600eb7"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/CompletedNovikovSupport.lean": {
+          "bytes": 13840,
+          "sha256": "48250527fffdd5df2fb3d2fe4c3f621d0294f3908d6c925bb48f1a7bb6e57b08"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/ConstantFlatGauge.lean": {
+          "bytes": 11174,
+          "sha256": "716e275d9372e2ced30b50c00868bb4c835678c8c2817e4ff12049ff924ef1b0"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/CubicPacket.lean": {
+          "bytes": 2437,
+          "sha256": "9bfdebe25aa772ce9247e8fc3c08304ac13350d077743eff2fe876ddd0900fd4"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/CubicSeparatedBlockGauge.lean": {
+          "bytes": 11050,
+          "sha256": "fc368d1ec7e76b033f000eb96f848167439e20b0ae08bec182f8b463fc4f1f29"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/CubicSmallEvenBlockReduction.lean": {
+          "bytes": 13156,
+          "sha256": "a82323c8f8de23a56734c03c1258865002c3c7035a22faa7fb0ae8b835dbcc2a"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/DifferentialConstantsBaseChange.lean": {
+          "bytes": 7668,
+          "sha256": "93c8f71484c4332aaf84e5ee2a6ec3c4b86103c5a3d550525db4288d7061ecad"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/EffectiveBlockLedger.lean": {
+          "bytes": 10447,
+          "sha256": "f707d851fe5540cddb71ebda237a6ca6d78d13c133380c24139f025f2258ef3e"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/EvenParityRestriction.lean": {
+          "bytes": 3575,
+          "sha256": "b313beb4da620a8022cb046f10051da362740fc0134cb02f43d4b036f6fed836"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/ExponentialDivisorTags.lean": {
+          "bytes": 9871,
+          "sha256": "be7f7deb442a6eb5bbc01b80834c4263b22b5c8cebcaa8578bf9afc664e1d15e"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/FilteredCoefficientQuotients.lean": {
+          "bytes": 19246,
+          "sha256": "9e4219dc9e62c67d3bb78e72d41984b111847d7a15fc4ce6d4b522848c25c987"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/FilteredFormalBaseShift.lean": {
+          "bytes": 16779,
+          "sha256": "3f4133698a5534271b6cb252fd7f11a6a9ea29c5367b93b2c5c9941660d43ed7"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/FilteredMultivariableFlatGauge.lean": {
+          "bytes": 10049,
+          "sha256": "284af80a017d359e3c349300452d0b0a54ffc3102635723e716b1ef06da2a30f"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/FilteredMultivariableLaurentFlatGauge.lean": {
+          "bytes": 9626,
+          "sha256": "88c5f22b44745e5b19d123b75199ffcc12e0a52e3642acfa22ab7e4b3fc0b98f"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/FilteredVaryingFlatGauge.lean": {
+          "bytes": 6055,
+          "sha256": "dbc16f07af8b0e1d55739f518595e1942ec6a8c766facb024cc6eb2772388a57"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/FormalBaseShift.lean": {
+          "bytes": 1809,
+          "sha256": "a5d27b2c4b76cd47518ccc121adfd27dbcc00736bfd7b6c64706fb69a4cb8689"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/FormalBaseShiftSystem.lean": {
+          "bytes": 8630,
+          "sha256": "01c4742e614fc9f173035d306d84d131b2f0d98addc52872c145c474a4b32342"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/FormalDifferentialModuleBaseChange.lean": {
+          "bytes": 9953,
+          "sha256": "8e16349c9e785d1b70c30859d01c41b562fc117f1ee3bebea33588f3ba6455d5"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/FormalLoopConnection.lean": {
+          "bytes": 19270,
+          "sha256": "cb0b2aed8be6abe0aad40bf0e67ff4a0b50dbba9d95a0b84a55965871e533d1c"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/FormalStringGauge.lean": {
+          "bytes": 4286,
+          "sha256": "79495a3417eaa0c300ea3e3c0b2926af2b7b5b165f5b1eb00668bf65ec5b2316"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/FramedMultiplicity.lean": {
+          "bytes": 4417,
+          "sha256": "09355f9b719f68eb67f8805fdeaa91ab299048ef060125d64fbc9c686ca105f6"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/FramedSixthMarker.lean": {
+          "bytes": 4544,
+          "sha256": "c6d4e41c4d61555ee93ca48f3db498348c825856eac3085eaeb9ca052ef8a437"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/HirzebruchEulerSpectrum.lean": {
+          "bytes": 23000,
+          "sha256": "c7e36c6b93031f80f5783d4b561816a9052e86a1d3fea683202a7895db7c1968"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/HodgeFixedSubalgebra.lean": {
+          "bytes": 6829,
+          "sha256": "bd60bb69e45c4e2f95b629e324b71904cbde1a538da8d780352cfaeeec270e4d"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/HorizontalMonodromyBaseChange.lean": {
+          "bytes": 43778,
+          "sha256": "ed2d18ee3583bea6cfffda57334bac55c5a777c0ed6d71dc3ea804615e58e2a9"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/LowDimensionalAtomRepresentatives.lean": {
+          "bytes": 7414,
+          "sha256": "126864397a7b381a40bdc5495ed29bb0fa2a7652bf90744ec8c02df4384bc181"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/LowDimensionalVanishingCore.lean": {
+          "bytes": 6121,
+          "sha256": "2d8007bd015c722802792b4bd48b7bddc79b73f2f253443218023abc43815d3c"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/ModuleSpectrumTransfer.lean": {
+          "bytes": 4949,
+          "sha256": "5c29e5986a4871338c9680e044a33632c972a231bf3e34b36b0747cdebadf1ca"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/MonodromyBaseChange.lean": {
+          "bytes": 1613,
+          "sha256": "341cfb1a4edd4e062ec8ab4dfe66059e44e281ce8c6ef2ca952253a08492bd73"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/MonomialSpecializationSeparation.lean": {
+          "bytes": 17023,
+          "sha256": "c6cb7b663e43704296c405dede7933056e6c006dab38071d0581c117a3aa0448"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/MultivariableFlatGaugeUniqueness.lean": {
+          "bytes": 78626,
+          "sha256": "a15d6993818b023aae83e950d76a11212868e3c6dab03d553db81810a33e6530"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/MultivariableLaurentBounds.lean": {
+          "bytes": 3853,
+          "sha256": "248b4fc7fe75aa93d26447b4fede6786b0571a86a9c9c3e571d1bf2bf6f2025b"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/NormalizedSylvesterGauge.lean": {
+          "bytes": 22434,
+          "sha256": "00633dd682148d1c6203af5082a7006b0b6c647d222aeb082681ebbb9c0f159f"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/NovikovAdmissibility.lean": {
+          "bytes": 2626,
+          "sha256": "09eb57a32a3600de96d4eea32899b4d412b3b4ec046e5b463da7fe6cef32c3e5"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/NovikovFiltrationContinuity.lean": {
+          "bytes": 5748,
+          "sha256": "9615cac376d3177ea3e8e8a154884c42d37b7c9ea4e08239efd9874104805eeb"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/NumericalCoefficientDescent.lean": {
+          "bytes": 10811,
+          "sha256": "81db345773e13001472ea131ce26d83833c3485e753764004358e501f4dd1467"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/NumericalInverseLimitPushforward.lean": {
+          "bytes": 3407,
+          "sha256": "f8c6b7c6ac06811e6352f262568571386cd1cb10daae60a365abd1b731fbc791"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/NumericalNovikov.lean": {
+          "bytes": 3613,
+          "sha256": "847a343c9f53c811a088e0efd81fef3173f636fa9cc66df6b780c546ae86d3c7"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/NumericalNovikovCompletion.lean": {
+          "bytes": 18858,
+          "sha256": "0d01e6afb273c67e3235465f5fa9896cfef6ba1921b94f6bf54e023909e15104"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/OccurrenceIndexedMarker.lean": {
+          "bytes": 18131,
+          "sha256": "094a7c82da87692b3f47ac8ff7cf5a18bb02316885555299e5f9f89066c15865"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/OrdinaryAtomLedger.lean": {
+          "bytes": 6939,
+          "sha256": "163926c7dfd445990833e1782dd558a6be503a5a548297a9bbce86a7f5399f78"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/OrthogonalRestrictionNondegeneracy.lean": {
+          "bytes": 10047,
+          "sha256": "69b62965febc21b9dcc8920cb31e09e56d9c04781bebd306fbdbd056ad271865"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/PacketInvariant.lean": {
+          "bytes": 2312,
+          "sha256": "94558238e9e39c7b4462d0774cf0bd8fbc2cb94fa2684937773b17c4aa9f59c2"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/PairingHorizontality.lean": {
+          "bytes": 21831,
+          "sha256": "a7150cdde3b3fe19bab27ffa15d69ca6fa6e448c0a98256d95b6c054b27704d2"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/ParityCorrectedUnipotentMonodromy.lean": {
+          "bytes": 15042,
+          "sha256": "05e32eaad156abb9977348677d6b51caaabdd2bd007674f6116c1d07eeb93c96"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/PositiveEvaluatedFormalBaseShift.lean": {
+          "bytes": 19816,
+          "sha256": "d2f3682440e75592e463e1a53f98075ed5cb9a9e4ad58654befcdf56fbe5a8ca"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/PositiveFiltrationBulkTruncation.lean": {
+          "bytes": 9354,
+          "sha256": "c9e6ac5918e0a885842e9851797a2a45b14df1f6bec575c2dcd24c766e06145b"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/PositiveFiltrationLaurentEvaluation.lean": {
+          "bytes": 48557,
+          "sha256": "63f0120086d2e87a3648dfe35cbd2d293e410cc8914b25625d67203c58d7b5ef"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/PowerSeriesLogarithmicVanishing.lean": {
+          "bytes": 7362,
+          "sha256": "f77ac2246c49854a9268a2b5fe0ae51de82c3f85254dacc3be1e9704be9036bc"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/ProLaurent.lean": {
+          "bytes": 4668,
+          "sha256": "f635bfdf418dffe3e003f6e452a782f796fa2d3d956195dd3e0a6d35240d8672"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/ProLaurentGaugeConjugacy.lean": {
+          "bytes": 6428,
+          "sha256": "2f44cb1c7428a847a69abf9443105c8d0de1a537c6060b6c354a143be7e16a44"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/ProjectiveSpaceEulerSpectrum.lean": {
+          "bytes": 4619,
+          "sha256": "073e8b23fdc8d2b0dc60cca310c3fe41e34fa0978417df9d2a507d342114ab0f"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/QuarticDiscriminantDerivations.lean": {
+          "bytes": 17065,
+          "sha256": "85f01b56a373d3bda61f2906d1dfe7fd9997b76f4d1d41a620d14bd003e7c1e4"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/QuarticSpectralSeparation.lean": {
+          "bytes": 15398,
+          "sha256": "766c78efca4ef43b98d05f988fd21f4629904bbf3743066d95d33842d58c8624"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/RankTwoClusterGermRigidity.lean": {
+          "bytes": 23948,
+          "sha256": "82be6e4a74141f8eeae6e9abeb7337871360550e579be9d7984a04eae16513c5"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/RankTwoResidueMarker.lean": {
+          "bytes": 7202,
+          "sha256": "163d77641c689c722709483436fc123c75def67d9939fd37d16087effc291ede"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/RankTwoResidueRigidity.lean": {
+          "bytes": 13521,
+          "sha256": "8b24233e3702e91849528b47454cceef20334051bcd04fd6d421bf00f22deea0"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/ResidueDiscriminantInvariance.lean": {
+          "bytes": 17305,
+          "sha256": "3dc83806786d17fc1c4817bfc87213c925367580b2bc2001eabe1c5fb2dfd198"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/SeparatedSpectralPairing.lean": {
+          "bytes": 9589,
+          "sha256": "e30dc350684a41c2f151cee64c281c5ebf3f7d80dc9e925f948923343e439c01"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/SimpleEulerBlock.lean": {
+          "bytes": 12554,
+          "sha256": "b1d13d58aaccaf2363949d6dabe9bf3a05db12ea864bf96ad8f4cfc2d368c8b2"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/SpectralConnectionSplitting.lean": {
+          "bytes": 7509,
+          "sha256": "80cc12ca192ddf57bfa2449e99749482d0aeef487b4c5b1d6007d08a51597edd"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/SpectralSignReversal.lean": {
+          "bytes": 8284,
+          "sha256": "73ef3fae8dda110d78bf9b02b9aa1c53b1cf7eacae4e81960162d5fc11784ab4"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/SuspensionInvariantLedger.lean": {
+          "bytes": 5826,
+          "sha256": "45c31f4e194365065f90e765cb9020a9c482ba70a80fdc238b71c927a3dbcc64"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/SylvesterOperator.lean": {
+          "bytes": 15456,
+          "sha256": "08c2704e86a872ced97971dc82bb3afaa4c39045d8df363d2de7b2b3eae5c191"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/VaryingFlatGauge.lean": {
+          "bytes": 16356,
+          "sha256": "998c57845753aec6bc5ac47939eb149fda1656db4d2e5dfdd64f4ad36dcbb3e3"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/WeakFactorization.lean": {
+          "bytes": 7159,
+          "sha256": "9142c3aecc774b8eb87f7c27441808c7ea903ede0262c4ac8b2a602c637117ed"
+        },
+        "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Verification/AxiomAudit.lean": {
+          "bytes": 36186,
+          "sha256": "8874453c99ff5f6788a9c544df83f7adadaeebd1e544ddd2d82e6701117a9c6a"
+        },
+        "papers/cubic-stabilization-m1/lean/flake.lock": {
+          "bytes": 567,
+          "sha256": "d09429301f88f348b7cbe8de2356bf024efa15063585c21c558afb515c3e77f5"
+        },
+        "papers/cubic-stabilization-m1/lean/flake.nix": {
+          "bytes": 777,
+          "sha256": "119a2a9eed3125c562518ff93b481b1e0f37f1a61e8581074fa24cde2d245935"
+        },
+        "papers/cubic-stabilization-m1/lean/lake-manifest.json": {
+          "bytes": 3171,
+          "sha256": "0665ce3a2d5c6a87b86602b0a606ac9f9a7449cb1458e2480580511f6a14664e"
+        },
+        "papers/cubic-stabilization-m1/lean/lakefile.toml": {
+          "bytes": 16480,
+          "sha256": "65cb1a8ee042aeaf115dc2568b004585ee1d514055ed71b99eb636bfd11ebd4f"
+        },
+        "papers/cubic-stabilization-m1/lean/lean-toolchain": {
+          "bytes": 29,
+          "sha256": "72681913b978b3f7c2f48229836771f736f6e97d833917726b2263afbc6108ed"
+        },
+        "papers/cubic-stabilization-m1/lean/verification/check_formal_artifact.py": {
+          "bytes": 26750,
+          "sha256": "774c4c50e9d6f1265fdf9c1ec22e3f5aacafd567a9d638e06c0de42ec20560cd"
+        },
+        "papers/cubic-stabilization-m1/lean/verification/claims.json": {
+          "bytes": 249379,
+          "sha256": "0e31e549b99aaee00f0362254bcbd8412cf31fb875332065048df928df8fac2b"
+        },
+        "papers/cubic-stabilization-m1/lean/verification/expected_axioms.txt": {
+          "bytes": 43350,
+          "sha256": "e921202a8e2b290974b2b38313ffe118b32357255653e64c5bd0e6f67352ba3f"
+        },
+        "papers/cubic-stabilization-m1/lean/verification/refresh_claim_digests.py": {
+          "bytes": 2944,
+          "sha256": "caba7a4d55fb471e74c4f68c77c3ccd2b19093ed0094b3cd02aaab8feb5c31d8"
+        },
+        "papers/cubic-stabilization-m1/sections/01-introduction.tex": {
+          "bytes": 7068,
+          "sha256": "e25eec00e77231de7521b97ec85b16cd05fc93924dc01b737ef27204a4dbe689"
+        },
+        "papers/cubic-stabilization-m1/sections/02-qdm-marker.tex": {
+          "bytes": 39227,
+          "sha256": "27c387471612ebde22666cd15581ddd685bc6a14e57169d38e01c57b8b365537"
+        },
+        "papers/cubic-stabilization-m1/sections/03-applications.tex": {
+          "bytes": 9081,
+          "sha256": "64d6dc39d0c75b19fa42d7ecdd10d1f03e3e1ce955cf2bf6d78f3c2b50c00950"
+        },
+        "papers/cubic-stabilization-m1/sections/04-motivic.tex": {
+          "bytes": 12727,
+          "sha256": "acb02d2256a9ff7a04453065a0e9d42bfa7c7b594ab63b3d2fdbb88af2b0ed0c"
+        },
+        "papers/cubic-stabilization-m1/sections/05-cubic-check.tex": {
+          "bytes": 3105,
+          "sha256": "642f3dfb065fa1a2111c5e81f7abc65c36348592fe95908d4e8491bce6c6b642"
+        },
+        "papers/cubic-stabilization-m1/verification/README.md": {
+          "bytes": 27787,
+          "sha256": "e78eaf0f9032f39de7304548c4d90344f46a45fcdf399a40a6610b519a6f01c4"
+        },
+        "papers/cubic-stabilization-m1/verification/a5-pencil-eckardt-locus-f32003.sing": {
+          "bytes": 3378,
+          "sha256": "a87edbf77b96261859006fd0072c96bfee026bbcd1eb9368de296c58eff9f42a"
+        },
+        "papers/cubic-stabilization-m1/verification/a5-pencil-eckardt-locus-f32003.txt": {
+          "bytes": 14855,
+          "sha256": "9d8d304636833fd5a8e480168fd777dfba0aba003e4c80e0d7bf22ddd8aecb4a"
+        },
+        "papers/cubic-stabilization-m1/verification/a5-pencil-eckardt-locus.sha256": {
+          "bytes": 672,
+          "sha256": "6c0a00aa9c67e8c9bde6db6d1171a19090f2c68725aa41daba4e6043c19e5f0f"
+        },
+        "papers/cubic-stabilization-m1/verification/a5-pencil-eckardt-locus.sing": {
+          "bytes": 3374,
+          "sha256": "402915ed6adb6fe5b3e6b279111c103b5f7b799d4a64cfc9173f4f2d3e7f9756"
+        },
+        "papers/cubic-stabilization-m1/verification/a5-pencil-eckardt-locus.txt": {
+          "bytes": 13863,
+          "sha256": "677941e40e1b1d88cc8d681be691d5d2a806e83bb22272c7128fb13be5cb70b4"
+        },
+        "papers/cubic-stabilization-m1/verification/a5-pencil-eckardt-sweep.txt": {
+          "bytes": 4438,
+          "sha256": "d54bb12529c580674ebb1ec4a1483e7aceebc71604a338c165aeb2cc97db7a10"
+        },
+        "papers/cubic-stabilization-m1/verification/a5-pencil-eckardt.sha256": {
+          "bytes": 262,
+          "sha256": "afaa74a94619886ab840c8c73fad2730859db6e9b4a7621ec55dcc06aa320934"
+        },
+        "papers/cubic-stabilization-m1/verification/a5-pencil-eckardt.txt": {
+          "bytes": 1210,
+          "sha256": "92eda7020d2edfe6b1f397ee2b1bb27649430cbcccefcca3f0b9d7dc91051ba2"
+        },
+        "papers/cubic-stabilization-m1/verification/a5-pencil-models.txt": {
+          "bytes": 415,
+          "sha256": "145f17d58d5e4c5b22794645f633a7e01b6eb92cc2dfe7ae1f63fcba7606e94e"
+        },
+        "papers/cubic-stabilization-m1/verification/a5_pencil_eckardt.py": {
+          "bytes": 11182,
+          "sha256": "ab3f8d9621a4befa4af44c80224244665c8736312ce472af565bed6ef87de01a"
+        },
+        "papers/cubic-stabilization-m1/verification/a5_pencil_eckardt_locus.py": {
+          "bytes": 7116,
+          "sha256": "514652252d1439ac80a38ea25f85024e3c78e7141cfec308a36bc4855d7acf2b"
+        },
+        "papers/cubic-stabilization-m1/verification/a5_pencil_eckardt_sweep.py": {
+          "bytes": 12326,
+          "sha256": "611ef7fcdb527890b2636ea24e1610312ebb1f4c3c5e1867fd281012e87dd73f"
+        },
+        "papers/cubic-stabilization-m1/verification/check_universal_residue.py": {
+          "bytes": 814,
+          "sha256": "cb89890aee60390ae0f3739c056b6524d48614fa5e0e55085583de1330285686"
+        },
+        "papers/cubic-stabilization-m1/verification/dependency-graph.dot": {
+          "bytes": 15072,
+          "sha256": "09ff068001ac5d81f05decf62db3d4a66c8cde2245f09c1d6f8722a4a0175dcf"
+        },
+        "papers/cubic-stabilization-m1/verification/dependency_graph.py": {
+          "bytes": 4622,
+          "sha256": "f52e2cb9e0eea135d5afe9130e4c2d51772be69151da7d51d038bab004a717eb"
+        },
+        "papers/cubic-stabilization-m1/verification/evidence.json": {
+          "bytes": 6627,
+          "sha256": "177aa035cce36a25634e2b4930fc9f7a5b02d378e0bb0244a60c1b54ccd20020"
+        },
+        "papers/cubic-stabilization-m1/verification/hirzebruch-euler-spectrum.json": {
+          "bytes": 8344,
+          "sha256": "bfe35947562f53adf4c44619a497c8212638e3e80d93041a2aefd1e2908a78c2"
+        },
+        "papers/cubic-stabilization-m1/verification/hirzebruch-euler-spectrum.sha256": {
+          "bytes": 192,
+          "sha256": "e277d6feba3d7c9cf36cbd2fbc92df43737cc68c0b776a237788f509988159f6"
+        },
+        "papers/cubic-stabilization-m1/verification/hirzebruch_euler_spectrum.py": {
+          "bytes": 24898,
+          "sha256": "12a6599dc5f56cfdd828aba60639458ce19a16fb1281aaccc4340ff963d25efa"
+        },
+        "papers/cubic-stabilization-m1/verification/imported-sources.json": {
+          "bytes": 30638,
+          "sha256": "55ccd7ccaa25141e87c160bf1c14d1fd4bfe685afbf8885bc3bb57a5b1f1d3e0"
+        },
+        "papers/cubic-stabilization-m1/verification/small_even_block_reduction.py": {
+          "bytes": 4354,
+          "sha256": "90be857955e1342e11b1b7c76b481566f43fbaf9cb30ef59ef55da7c741f93cf"
+        },
+        "papers/cubic-stabilization-m1/verification/small_even_block_reduction.txt": {
+          "bytes": 2966,
+          "sha256": "10f9eddad73a6256466fbdf0ec318cf521e4bf38359bb77cfd43af41b641fe79"
+        },
+        "papers/cubic-stabilization-m1/verification/universal-residue/README.md": {
+          "bytes": 1140,
+          "sha256": "65ed62d561efad84c867cbc062aad975e19c42cb35a7012431746ea70d747be7"
+        },
+        "papers/cubic-stabilization-m1/verification/universal-residue/SHA256SUMS": {
+          "bytes": 576,
+          "sha256": "35e2fd6aa78bb2bae662344cfe61e7e3fbcccefdd03446c1997be2b19806e3cf"
+        },
+        "papers/cubic-stabilization-m1/verification/universal-residue/check_indicial.json": {
+          "bytes": 627,
+          "sha256": "8e93f2ecae8b05e8c2df538d682c1ca55c4e55db2e0305bc714ff3830d325e5c"
+        },
+        "papers/cubic-stabilization-m1/verification/universal-residue/check_indicial.py": {
+          "bytes": 2989,
+          "sha256": "493f9d70661b4ca809afdbfb0f8a5bef37255deaf188169dfd2063dc79521b45"
+        },
+        "papers/cubic-stabilization-m1/verification/universal-residue/derive.json": {
+          "bytes": 2734,
+          "sha256": "2d5a8ec8d53ec24b497b85515b3b2b4ab4774be0d96fff407825d9b5f69c8ecc"
+        },
+        "papers/cubic-stabilization-m1/verification/universal-residue/derive.py": {
+          "bytes": 4846,
+          "sha256": "57d49997bac362b84633ccb00ad84f85a606f6114bbc3aca9a636e2aa067d985"
+        },
+        "papers/cubic-stabilization-m1/verification/universal-residue/manifest.json": {
+          "bytes": 632,
+          "sha256": "8ab3eb922f763428c52d5c5a207e98ec4b2833e734159bd25b7344ec75183efe"
+        }
+      },
+      "pdf": "papers/cubic-stabilization-m1/irrationality_after_one_stabilization.pdf",
+      "text_diff": {
+        "bytes": 129326,
+        "command": "git diff 1f368b9e284c4ed4c2be09a86bfae256f26079f2 ad952b6f4c2be0450cdbeaca47860cce9d1cb004 -- papers/cubic-stabilization-m1",
+        "sha256": "c305a82921d5d0d826e98c22af5ccee99a405aa630cdedaae83809ffe956a298"
+      }
+    }
+  },
+  "reviewed_revision": "ad952b6f4c2be0450cdbeaca47860cce9d1cb004",
+  "reviewers": {
+    "paper_1": {
+      "context": "fresh, no prior conversation or reports",
+      "model": "gpt-6-astra",
+      "task": "C978"
+    },
+    "paper_2": {
+      "context": "fresh, no prior conversation or reports",
+      "model": "gpt-6-astra",
+      "task": "C956"
+    }
+  }
+}
