@@ -22,7 +22,9 @@ and FT10 competing-machine highlights follow the preview. Keyboard focus also
 previews; Enter/Space pin. In a runnable QEC session, double-clicking a detector
 uses the same parity mutation as the parity controls. Its first click pins without
 replacing detector DOM, allowing real browser double-click recognition. A parity
-change clears stale evidence but retains the compiled detector model.
+change clears stale evidence but retains the compiled detector model. Interactive
+charts, comparison cells and buttons disable text selection so clicks, drags and
+double-clicks do not accidentally select labels. Numeric fields remain editable.
 
 Results retain a distinct heading, status and large count above the resource chart.
 Detailed scheduling loads are available in the resource inspector and execution
