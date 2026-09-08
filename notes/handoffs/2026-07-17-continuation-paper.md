@@ -54,7 +54,7 @@ reconstruction remains outside the headline under the existing N1-only ruling.
 - **C1132** — referee revisions and authority checks complete: five-clique
   bound, optimal q>=9 uniform cutoff, explicit Hamming extension, corrected
   literature/proofs and extension-field recognition tests. Standalone export
-  and replay remain before closure. Response and validation:
+  and replay passed; its local commit is awaiting the configured GPG key. Response and validation:
   `notes/2026-09-08-c1132-continuation-referee-response.md`.
 
 - **C1110** — complete publication-readiness review. The same-reader final pass

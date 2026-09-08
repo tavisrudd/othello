@@ -142,3 +142,33 @@ from existing revised lemmas; they introduce no computation premise.
 
 All observations above were sought as task deliverables. No incidental lead
 requires a discovery-track entry. No new mystery is manufactured.
+
+## Standalone validation and release identity
+
+Authority source commit: `0b7917ef217d78df7c42f246b004d8486c41791f`.
+A concurrent session committed the shared index before the task's own commit
+ran, so the validated files occur under an unrelated cubic-lane commit message.
+Scoped checks confirmed the committed continuation tree matched the validated
+work. No foreign files or history were rewritten.
+
+The scoped exporter plan/audit reported zero findings and synchronized 16 paths
+to `~/src/math-papers/continuation-graph-rigidity`. Only scholarly source,
+verification and public provenance material were exported; this response stayed
+in private notes. Export verification initially required staging the two new
+verification files, then passed with 36 tracked files and content hash
+`aa45c0860ee5b4bfa53606631dbe087a90d0d5d8ef81dd1eb1893cc36823cc03`.
+The standalone `make check` and deterministic PDF check both passed.
+
+Byte-identical authority/standalone release surfaces:
+
+| Artifact | Bytes | SHA-256 |
+|---|---:|---|
+| PDF | 367918 | `aa488f9f51d3755d5ed42f9734830d6ecff4e0b36217b021ef4bd6fd957c52ed` |
+| SHA256SUMS | 2376 | `cc64b01650649c348edd919e194815c0c6d0079963509377d27df32186e6246f` |
+| recognition.json | 11562 | `8757ccbb0fe975f8df14035721b0702e1151a493f37bc949d1cffece88ff5798` |
+
+The final standalone forward commit is currently waiting for the GPG key
+configured by `/home/tavis/.config/git/signing.gitconfig`. Existing standalone
+commits are signed. Signing has not been disabled; the exact validated export
+is staged. The author was asked to unlock/approve the key or authorize an
+unsigned local commit. C1132 stays open until that final step completes.
