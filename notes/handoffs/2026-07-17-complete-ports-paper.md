@@ -118,6 +118,14 @@ hierarchy.
 
 ## Active frontiers
 
+### Cold-read corrections before the paper route
+
+The Astra cold read found interface/evidence corrections and two local
+mathematical/convention corrections; the central proofs survived the read.
+Address the findings in `notes/2026-09-07-complete-ports-astra-cold-referee.md`
+with the independent checks in `notes/2026-09-07-complete-ports-cold-read-assessment.md`.
+No manuscript changes were made during the review. This does not close C953.
+
 ### Paper route
 
 1. **C325** — appendix-only consolidated executable verifier reproducing every retained finite
