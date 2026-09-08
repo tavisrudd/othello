@@ -1,6 +1,6 @@
 {
   "Makefile": 575,
-  "continuation_graph_rigidity.tex": 61026,
+  "continuation_graph_rigidity.tex": 61561,
   "flake.lock": 567,
   "flake.nix": 578,
   "formal-annotations.tex": 234,
@@ -10,7 +10,7 @@
   "verification/check_geometric_witnesses.py": 8930,
   "verification/check_manuscript_build.py": 1436,
   "verification/check_recognition.py": 5009,
-  "verification/claims.json": 16239,
+  "verification/claims.json": 16268,
   "verification/dependency-graph.dot": 2975,
   "verification/dependency_graph.py": 262,
   "verification/evidence.json": 1681,

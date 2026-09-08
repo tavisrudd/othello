@@ -966,7 +966,7 @@ verification procedure.
 \end{proof}
 
 \begin{proposition}[Size of the coordinate representation]\label{prop:size}\coverage{absent}\uses{prop:normal}
-A frame graph has $(q-2)(q-3)$ vertices, degree $4(q-4)$, and
+For $q\ge4$, a frame graph has $(q-2)(q-3)$ vertices, degree $4(q-4)$, and
 $2(q-2)(q-3)(q-4)$ edges. Four field symbols per vertex determine
 adjacency by equality in one coordinate.
 \end{proposition}
@@ -1099,6 +1099,12 @@ The permutation certificate checks the displayed relations, $|H|=24$
 and $\rho\notin H$ directly; the group identifications then follow as above.
 \end{proof}
 
+Under these direct-product identifications, the action on the two
+resolutions is projection onto $C_2$ at $q=5$ and the sign of the $S_3$
+factor at $q=8$: by Proposition~\ref{prop:boundary}, its kernel is the
+ambient semilinear subgroup, respectively $S_4\times\{1\}$ and
+$S_4\times A_3$.
+
 Together with Theorem~\ref{thm:main}, the census proves semilinear rigidity
 for every prime power $q\ge5$ except $q=5,8$. This combined statement has
 a finite computational premise only at $q=7$; the theorem for $q\ge9$
@@ -1153,8 +1159,12 @@ $m(k)$ be the maximum size of a clique not contained in one tangent
 trace, taken over $k$-arcs in finite projective planes of all orders.
 Lemma~\ref{lem:frame-clique} gives the exact value five for the
 Desarguesian restriction of $m(4)$; the definition here also includes
-non-Desarguesian planes. Over the same class, let $r(k)$ be the maximum size of a disjointness
-clique of tangent traces using at least two selected centres. Set either parameter to zero
+non-Desarguesian planes. For $r(k)$, use the graph whose vertices are
+tangent lines with nonempty traces, joining two lines when their traces
+are disjoint. Each vertex retains its tangent line and its selected centre,
+even when distinct lines have the same trace. Over the same class of arcs
+and planes, let $r(k)$ be the maximum size of a clique in this graph
+using at least two centres. Set either parameter to zero
 if its defining class is empty. We proved
 \[
  m(k)\leq k(k-2)+1,

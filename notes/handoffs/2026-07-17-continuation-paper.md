@@ -44,6 +44,9 @@ reconstruction remains outside the headline under the existing N1-only ruling.
   (q=8), added their compact certificate and a recognition algorithm box.
   Current validated standalone: `e756a16` (authority `2ab38a7ac`).
   Report: `notes/2026-09-08-c1110-continuation-exceptional-groups.md`.
+- Latest local corrections qualify `prop:size` by q>=4, define the nonempty
+  tangent-line convention for r(k), and state the two-resolution quotient actions.
+  Report: `notes/2026-09-08-c1110-continuation-scope-corrections.md`.
 - Earlier C1110 reviews: the exported draft received a fresh-context sub-agent referee review.
   No main-result defect was found; all local findings R1–R5 are now corrected
   and the authority checks pass. The uncited Clebsch aside was removed.

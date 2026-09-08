@@ -170,10 +170,10 @@
       "conclusion": "Exact counts and four-symbol representation of adjacency",
       "coverage": "absent",
       "declarations": [],
-      "hypotheses": "Four-point frame normal form",
+      "hypotheses": "Four-point frame normal form over a field of order q >= 4",
       "label": "prop:size",
       "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
-      "statement_sha256": "3707148064f0d9665c808c98a3ef175c64c446f1be4b96409871bd8326c7101b",
+      "statement_sha256": "022f3727ca1429624c3d95e7a0572dafdc9c91657ddc6001027255a2f6a333ff",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     {
