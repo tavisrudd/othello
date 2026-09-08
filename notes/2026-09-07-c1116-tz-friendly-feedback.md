@@ -3,6 +3,14 @@
 **Lane:** `cubic-threefolds`
 **Status:** bounded source-review chunk complete; C1116 foundation audit remains open
 
+## Current email disposition (2026-09-08)
+
+The revised unsent draft now includes only the definite Example 5.2(2)
+cross-reference typo and the short application of our surface theorem to the
+new example. The Eckardt-section concern and coordinate-expansion suggestion
+below are retained as audit history, not proposed email content. The pinned
+v2 source was rechecked; the paper updates are complete. No message was sent.
+
 ## Scope and decision
 
 The author asked for errors or potential upgrades in Tschinkel--Zhang v2
