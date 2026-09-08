@@ -4787,8 +4787,17 @@
       "last": 1128,
       "purpose": "Audit and integrate Astra feedback, canonical-lattice and Fano extensions, torus consequences, and the proposed genus-two cubic moduli follow-on",
       "sequence": 532
+    },
+    {
+      "count": 1,
+      "first": 1129,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1129,
+      "purpose": "Dynamic loaded domain workspaces with explicit snapshot and runnable WASM contexts",
+      "sequence": 533
     }
   ],
-  "next_id": 1129,
+  "next_id": 1130,
   "schema": "codex-task-id-allocations-v1"
 }
