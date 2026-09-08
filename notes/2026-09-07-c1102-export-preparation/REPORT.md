@@ -121,3 +121,26 @@ The package is prepared for a first guarded export. No actual downstream
 repository sync/materialization, remote creation, push or Zenodo deposit was
 performed. The next action is the author's first-export instruction; publication
 and the style guide's blind audience comparison remain distinct decisions.
+
+## First standalone export — author authorized
+
+The author's `export` instruction authorized the first local standalone export.
+The guarded exporter materialized source commit
+`c3e248691596da154c8981abe9326b080e834eea` into
+`/home/tavis/src/math-papers/clebsch-cubic-phase` (previously absent).
+All 127 exported files were committed as standalone root commit
+`5ab613c10d431155468f5ec8505b7f7acea0792a`.
+The initial commit attempt encountered the destination's inherited signing setting;
+the successful commit used the authority's unsigned-commit setting for that command.
+No global signing configuration changed.
+
+The actual standalone tree passes `make pdf-check` in its pinned manuscript
+shell, including all lightweight source/metadata/finite/shadow/factory checks.
+Exporter verification passes after the commit. The working tree is clean.
+Content hash remains `78da79c97dea5cf4a7332cd00674ae6813439c6db3c989e8d5715927ff6e2e61`;
+PDF hash remains `7e522ebb9940d80daa7686223268e6cadc85f96565cce83daf0af66bf474985f`,
+identical to the authority and the prior disposable rehearsal.
+
+This completes the requested local export. No GitHub repository creation, push,
+Zenodo deposit or public-release claim occurred. Blind audience review remains
+separate from this successful artifact transfer.
