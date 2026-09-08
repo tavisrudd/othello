@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds. **Tasks:** C978 and C956 remain open.
 **User request:** one cold-read subagent on each paper, given access to the diff.
-**Status:** both full cold reports recommend acceptance after minor revision; corrections applied and both authority gates pass; local synchronization pending.
+**Status:** both full cold reports recommend acceptance after minor revision; corrections applied; all four gates pass; both local repositories are clean with matching PDFs.
 
 Each reviewer uses gpt-6-astra with a fresh context and no drafting conversation
 or previous reports. Each receives the complete current primary manuscript,
@@ -82,7 +82,7 @@ verification/imported-sources.json. Rebuilt PDFs will be committed with them.
 
 Both authoritative make check gates pass after the targeted corrections, with
 no TeX warning. Page counts remain 20 and 19. The changed source paragraphs and
-12 corresponding rendered pages were inspected, including the modified-pole
+13 corresponding rendered pages were inspected, including the modified-pole
 proof, grading convention, compressed setup, arithmetic paragraph, pointed Cox
 model, evaluation-open convention and linearization argument. The original
 full-page inspections remain recorded in the independent reports. No Lean
@@ -107,3 +107,19 @@ The first multi-file patch failed atomically on an exact-context mismatch;
 no partial manuscript edit resulted. It was replaced by explicit scoped edits.
 All commits in this review use --only with owned paths to avoid the shared-index
 incident from the preceding task.
+
+## Final committed state
+
+Authority repair commit: ba2636c80. Both exporter plans/audits report zero
+findings; both final verify commands pass. No push or external message was sent.
+
+- cubic-stabilization-m1: b156ec6; PDF 908548d5e1421c6e313a4e71d817020715b54912b24e1ed8b7f95eb0c69e201f (188889 bytes).
+- cubic-stabilization-irrationality: f46624d; PDF 88d6288cb2b69a6a4a1eadece407dc06f25c11263fcdcdcc333b812dc92cf043 (175989 bytes).
+
+Accepted gate logs: authority Paper 1 20260908-143122, authority Paper 2
+20260908-143123; local Paper 1 and Paper 2 20260908-143440 (distinct
+make-C command names), beneath /tmp/claude-run-quiet.
+
+This closes the requested paired cold-read and repair cycle, not the broader
+author-retained C978/C956 tasks. C958 remains the next constructive task for
+complete ground-field parametrizations.

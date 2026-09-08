@@ -4,6 +4,12 @@
 
 **Status:** active by author instruction; referee-accepted release candidate
 
+**Latest review (2026-09-08):** the author-requested fresh Astra full-paper
+cold review with the revision diff recommends acceptance after minor revision.
+The accepted fixes received targeted follow-up and both authority gates pass;
+joint report: `../2026-09-08-cubic-post-upgrade-cold-read.md`.
+This updates the review state below; the task remains open by author instruction.
+
 **Next exposition pass:** after the mathematical upgrades, audit terminology
 and symbols with C978 for standard specialist usage, unnecessary coined labels,
 and notation consistency (author instruction, 2026-09-07). Preserve precisely

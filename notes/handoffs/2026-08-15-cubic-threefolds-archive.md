@@ -59,3 +59,11 @@ The author-approved C1128 recommendations are integrated and locally synchronize
 All four gates pass; PDFs agree; C978/C956 remain open. Detailed placement,
 evidence, review limits and ej+tt closeout:
 `../2026-09-08-c1131-selective-manuscript-upgrades.md`.
+
+## 2026-09-08 — paired fresh cold reviews with revision diffs
+
+Two fresh-context Astra reviewers read the full upgraded papers and their
+diffs and recommended acceptance after minor revision. Their original reports
+and reproducible evidence are preserved unchanged; localized corrections
+received targeted follow-up. C978/C956 stay open by author instruction.
+Report: `../2026-09-08-cubic-post-upgrade-cold-read.md`.

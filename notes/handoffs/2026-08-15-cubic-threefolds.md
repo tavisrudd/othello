@@ -46,9 +46,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   upgrades are implemented; both authority and standalone gates pass with
   matching PDFs (20 and 19 pages), local commits b3da4cc/d72ad45. Report:
   `../2026-09-08-c1131-selective-manuscript-upgrades.md`.
-  Next prioritize C978’s regular-lattice/resonant-case review and C956’s descent
-  review, completing their custom protocol once located. C978/C956 stay open;
-  C958 retains complete ground-field maps. Final
+  The author-requested fresh full-paper cold reviews with diffs are complete:
+  both recommend acceptance after minor revision; their corrections and
+  targeted follow-up are recorded in
+  `../2026-09-08-cubic-post-upgrade-cold-read.md`.
+  C978/C956 stay open for the author-retained custom protocol once located;
+  C958 retains the next constructive work on complete ground-field maps. Final
   dispositions: `../2026-09-08-c1128-final-dispositions.md`; placement:
   `../2026-09-08-c1128-publication-scope.md`; evidence/report map in
   `../cubic-threefolds-tasks/c1128-astra-feedback-and-extensions.md`.
