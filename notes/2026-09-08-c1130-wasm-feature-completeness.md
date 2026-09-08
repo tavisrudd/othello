@@ -10,6 +10,9 @@ provider allocation audits and revised stripped-package compatibility pass.
 ABI stays experimental: shared-plan/worker ownership, runtime integration and
 full native performance acceptance remain open. Results:
 `2026-09-08-c1130-module-loading-results.md`.
+Browser application slice now runs full supplied QEC and LRC queries through
+those modules, private `5e22031`. CampaignSession/main-console integration is
+still open: `2026-09-08-c1130-application-wasm-workspace.md`.
 
 ## Context prerequisites
 

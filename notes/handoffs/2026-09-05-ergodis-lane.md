@@ -62,6 +62,10 @@ Next: refine shareable immutable-plan / owned executor-workspace semantics, then
 third-family composition and CampaignSession/console integration. Private `5da6805`
 adds Tavis Rudd notices, verified in stripped native/WASM packages. Results:
 `notes/2026-09-08-c1130-module-loading-results.md`.
+Private `5e22031` runs full supplied QEC and LRC queries in the application
+workspace (8769 and 8770), with retained plans and explicit snapshot/runnable
+contexts. Main campaign runtime/console integration remains open. Report:
+`notes/2026-09-08-c1130-application-wasm-workspace.md`.
 Preserve public-core loading of separately compiled/obfuscated private packages;
 canonical WASM engine plus extensions, not a mandatory private assembly build.
 Start with a concrete contract over composition, compiled LRC queries and QEC;

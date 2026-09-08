@@ -62,6 +62,9 @@ contract are not complete. Its exclusive provider ownership duplicates compiled
 plans across workers. Refine shareable immutable plans and owned executor workspaces
 before ABI adoption; retain specialized direct native APIs. Evidence and limits:
 `2026-09-08-c1130-module-loading-results.md`.
+Private browser Application subclasses now bind QEC/LRC to that module host,
+with query reuse and loaded-source gates. They are cold frontend adapters, not
+a generalized CampaignSession: `2026-09-08-c1130-application-wasm-workspace.md`.
 
 ## Existing abstractions: reuse, with their limits
 

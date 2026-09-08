@@ -252,3 +252,19 @@ WASM/batching is the provisional direction, shared immutable-plan/worker ownersh
 needs refinement, and CampaignSession/console/third-family integration and full
 native performance acceptance remain open. C1130 and its later private glossary
 pass remain in progress. No production solver migration or full WASM parity claim.
+
+## 2026-09-08 — C1130 application WASM workspace
+
+Private `5e22031` binds actual full-model QEC and LRC counted-repair readouts to the
+canonical module Worker in the application workspace. Native-reference and actual
+browser gates, plan/query reuse, independent LRC witness loads, raw DEM/domain
+imports, portable checkpoint/bundle compatibility and narrow layout pass. Ports
+8769 and 8770 serve the same page/modules. Report:
+`../2026-09-08-c1130-application-wasm-workspace.md`. No native solver changes;
+shared native plans, third-family composition, CampaignSession/main-console
+integration, wider parity and the private glossary remain C1130 work.
+
+Recovery UI follow-up, private `aefe3fb`: inverse minimum-extra-parity frontier uses batched queries
+on the retained WASM plan, with explicit unattainable targets and sampled large
+demand. Result panels now lead with count/target status and a direct budget
+conclusion. Full numerical/UI scope is recorded in the application workspace report.
