@@ -1,0 +1,113 @@
+{
+  "date": "2026-09-08",
+  "scope": "Positive mathematical/source audit; exact prior square-plus-cube torsion construction located; no absence/priority verdict for the cubic locus",
+  "full_text_sources": 0,
+  "sources": [
+    {
+      "key": "arXiv:2608.20029",
+      "version": "2608.20029v2",
+      "title": "Tschinkel–Zhang, Universal torsors over quartic del Pezzo surfaces and stable rationality",
+      "url": "https://arxiv.org/html/2608.20029v2",
+      "read_depth": "partial",
+      "passages": [
+        "Section 4: rulings, point blowup, Proposition 4.1, Lemma 4.2 statement and beginning of proof",
+        "Proposition 5.3 component and Galois argument through final type-I3 identification"
+      ],
+      "access": "Versioned source archive dp4.tex, cross-checked in official HTML; shared unversioned PDF cache remains v1",
+      "sha256": "cf71ff24da87db7b5d1ca80097f8a3da4b5ae9cbf8ff4d1e4b787b1941656095",
+      "bytes": 62302,
+      "archive_sha256": "73d2b294d6462982c64def61cfc4cbf44275c6585adb265190941fc124b860dd",
+      "archive_bytes": 22152
+    },
+    {
+      "key": "arXiv:2004.08161",
+      "version": "2004.08161v3",
+      "title": "Nicaise–Ottem, A refinement of the motivic volume, and specialization of birational types",
+      "url": "https://arxiv.org/pdf/2004.08161v3",
+      "read_depth": "partial",
+      "passages": [
+        "Section 4.1: Theorem 4.1.1, proof, Corollary 4.1.2 and warning about density"
+      ],
+      "access": "Cached PDF text; named arXiv HTML/abstract or publisher primary source also consulted",
+      "sha256": "9a9f835345f52384cb8e40a15428862feeb3a549f7306db64dba375db97b3b98",
+      "bytes": 361280
+    },
+    {
+      "key": "arXiv:2210.14397",
+      "version": "2210.14397v2",
+      "title": "Casalaina-Martin–Marquand–Zhang, The moduli space of cubic threefolds with a non-Eckardt type involution via intermediate Jacobians",
+      "url": "https://arxiv.org/pdf/2210.14397v2",
+      "read_depth": "partial",
+      "passages": [
+        "Introduction: Theorems 0.1–0.3 and period framework",
+        "Section 2.1: projection matrix (2.1)",
+        "Lemma 2.4 and discriminant cover description",
+        "Theorem 2.9 and polarization conventions"
+      ],
+      "access": "Cached PDF text; named arXiv HTML/abstract or publisher primary source also consulted",
+      "sha256": "6a8ce41af47def059a90f987f65cdda22c9540357d23ba80bdccc2dc8b351874",
+      "bytes": 406774
+    },
+    {
+      "key": "arXiv:math/0303037",
+      "version": "math/0303037v1",
+      "title": "Kuznetsov, Derived categories of cubic and V14 threefolds",
+      "url": "https://arxiv.org/pdf/math/0303037v1",
+      "read_depth": "partial",
+      "passages": [
+        "Remark 2.19 and immediate context; original Torelli sources not independently re-read"
+      ],
+      "access": "Cached PDF text; named arXiv HTML/abstract or publisher primary source also consulted",
+      "sha256": "3223183a958572759e6f8ac3a26a7801c1dd13c6e6edd04f917d1646b5ec2a74",
+      "bytes": 309170
+    },
+    {
+      "key": "arXiv:1401.0580",
+      "version": "1401.0580v1",
+      "title": "Bruin–Flynn–Testa, Descent via (3,3)-isogeny on Jacobians of genus 2 curves",
+      "url": "https://arxiv.org/pdf/1401.0580v1",
+      "read_depth": "partial",
+      "passages": [
+        "Introduction and Section 2 through proof of Lemma 3; adjoining level-structure discussion and Lemma 4 statement"
+      ],
+      "access": "Cached PDF text; named arXiv HTML/abstract or publisher primary source also consulted",
+      "sha256": "03389c8da53444bf51b1edf3c3d6ae430a18c23dbd8921e775aecc9f0c47062e",
+      "bytes": 236354
+    }
+  ],
+  "discovery_queries": [
+    "genus two curves rational 3 torsion y squared cubic squared quadratic cubed",
+    "genus two 3-torsion \"quadratic\" \"cubic\" Bruin",
+    "genus 2 torsion \"G(x)\" \"H(x)\" 3",
+    "\"genus\" \"3-torsion\" \"Bruin\" \"Flynn\"",
+    "\"Counting odd genus\" \"arxiv\"",
+    "\"Genus two curves\" \"G(x)\" \"H(x)\" \"3\" Bruin",
+    "\"Descent via (3, 3)-isogeny\" arxiv"
+  ],
+  "local_inputs": [
+    {
+      "path": "notes/cubic-threefolds-tasks/c1128-astra-feedback-inputs/followon_family_proof.md",
+      "sha256": "f206c5acfe8b7891e9f3503c31e8d91f511851f1e8f2a9bbdc2a5c6f37f6fcd4",
+      "bytes": 11115,
+      "role": "Supplied proof or previous audit dependency"
+    },
+    {
+      "path": "notes/2026-09-08-c1128-comparison-rigidity-audit.md",
+      "sha256": "0ff13c9248f8ccaabea7dbae02a1ca9355b4c5935251ecf28c2fd2a48ad88547",
+      "bytes": 21533,
+      "role": "Supplied proof or previous audit dependency"
+    },
+    {
+      "path": "notes/2026-09-08-c1128-torus-audit.md",
+      "sha256": "09333c064768f34ce89f89255e51fb9aa970dd335b52395dbde7c56c982b7103",
+      "bytes": 14613,
+      "role": "Supplied proof or previous audit dependency"
+    },
+    {
+      "path": "papers/cubic-stabilization-irrationality/cubic_stabilization_irrationality.tex",
+      "sha256": "463c18ec4a6750f7bc54bec6d0453a66510a70b74e138dd860262567619fba3a",
+      "bytes": 60414,
+      "role": "Inherited manuscript theorem input"
+    }
+  ]
+}

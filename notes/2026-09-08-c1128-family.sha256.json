@@ -1,0 +1,38 @@
+{
+  "notes/2026-09-08-c1128-family-audit.md": {
+    "sha256": "3319bb35eeedf4870d7760317a5e80cf6053f11b9c46a1f7f1d537fb6781d95c",
+    "bytes": 20146
+  },
+  "notes/2026-09-08-c1128-family-checks.py": {
+    "sha256": "5a0838eacdeed49c6107e539712733bf19b5baff68d24e9f264a66742e85a8f2",
+    "bytes": 3948
+  },
+  "notes/2026-09-08-c1128-family-checks.json": {
+    "sha256": "d4f10b530c0899fad7044ff60c77ff7d6b0c268edb0df4c64e77828542e2eb2a",
+    "bytes": 3542
+  },
+  "notes/2026-09-08-c1128-family-independent.py": {
+    "sha256": "138a23004e368eaaa5b0e3444079891ec3c3536cda2f3c22bc86c89cf971e21e",
+    "bytes": 5019
+  },
+  "notes/2026-09-08-c1128-family-independent.json": {
+    "sha256": "7c05057f35490cfceef2f37d55283cc4ed5a21c841d6822a2d35ef5b90d4d00c",
+    "bytes": 4209
+  },
+  "notes/2026-09-08-c1128-family-sources.json": {
+    "sha256": "9d75e8c63c5a41e9d0d007fa1a4d39ba6ea64a4304764f65f6f6eec9505653fe",
+    "bytes": 5105
+  },
+  "notes/cubic-threefolds-tasks/c1128-astra-feedback-inputs/followon_family_checks.py": {
+    "sha256": "144b3e47a0bd52a6d8371a36df6c52a0ed93126410faba455113e1a94c369994",
+    "bytes": 6493
+  },
+  "notes/cubic-threefolds-tasks/c1128-astra-feedback-inputs/followon_family_checks.json": {
+    "sha256": "1f50af9d2137407e7604f1fc469c4cb18b8dbd1d205766c417567cbff8268b66",
+    "bytes": 2309
+  },
+  "notes/cubic-threefolds-tasks/c1128-astra-feedback-inputs/followon_family_proof.md": {
+    "sha256": "f206c5acfe8b7891e9f3503c31e8d91f511851f1e8f2a9bbdc2a5c6f37f6fcd4",
+    "bytes": 11115
+  }
+}

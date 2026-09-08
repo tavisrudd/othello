@@ -1,0 +1,136 @@
+{
+  "status": "pass",
+  "sympy_version": "1.14.0",
+  "supplied_replay": "exact JSON equality",
+  "scope": "Finite identities and seed checks; geometric and moduli claims require the report",
+  "supplied": {
+    "sympy_version": "1.14.0",
+    "all_checks_passed": true,
+    "scope": "Exact algebra only; imports the geometric theorems stated in the proof note.",
+    "seed_cubic": "u**2*(-x + z) + 6*u*v*y + v**2*(3*x + 3*z) + y**3 - z**3 + z*(3*x**2/4 + 9*y**2/4)",
+    "seed_smoothness": {
+      "sixth_power_remainders": {
+        "u": "0",
+        "v": "0",
+        "x": "0",
+        "z": "0",
+        "y": "0"
+      },
+      "jacobian_groebner_basis": [
+        "u**2 + 3*x**2/8 - 3*x*z/4 + 9*y**2/8 - 3*z**2/2",
+        "u*v + y**2/2 + 3*y*z/4",
+        "u*x - u*z - 3*v*y",
+        "u*z**2 + 4*v*y**2",
+        "u*y + v*x + v*z",
+        "v**2 + x**2/8 + x*z/4 + 3*y**2/8 - z**2/2",
+        "v*x**2 + 3*v*y**2 - v*z**2",
+        "v*x*z**2",
+        "v*x*y + v*y*z - 3*v*z**2/4",
+        "-4*v*y**3 + v*z**3",
+        "-4*v*y**2*z/3 + v*y*z**2",
+        "v*y**3*z",
+        "v*y**4",
+        "x**3 - 2*x*z**2",
+        "x**2*z + 4*y**3/3 + 3*y**2*z - 4*z**3/3",
+        "x**2*y + 3*y**3 + 4*y**2*z/3 - 2*y*z**2",
+        "x*z**3",
+        "x*y**2",
+        "-2*y**4 - 5*y**3*z/2 + z**4",
+        "-y**4 - 4*y**3*z/3 + y*z**3",
+        "-3*y**4/2 - 2*y**3*z/3 + y**2*z**2",
+        "y**4*z",
+        "y**6"
+      ]
+    },
+    "cubic_moduli": {
+      "orbit_rank": 25,
+      "augmented_rank": 28,
+      "independent_directions": [
+        "x**3",
+        "x**2*y",
+        "y**3"
+      ],
+      "direction_remainders": [
+        "2*x*z**2",
+        "-3*y**3 - 4*y**2*z/3 + 2*y*z**2",
+        "y**3"
+      ]
+    },
+    "quartic_del_pezzo": {
+      "quadrics": [
+        "-a*u**2 + 3*a*v**2 + beta*w**2 - h*z + 6*u*v",
+        "h*w + u**2 + 3*v**2 + w**2*(3*a**2/4 + 9/4) - z**2"
+      ],
+      "pencil_determinant": "3*(-a**2 + t**2 - 3)*(-3*a**2*t - 4*beta + 4*t**3 - 9*t)/16",
+      "cubic_discriminant": "27*(a**6 + 9*a**4 + 27*a**2 - 16*beta**2 + 27)/16",
+      "component_norm_identity_remainder": "0"
+    },
+    "type_I3": {
+      "generators": [
+        [
+          1,
+          2,
+          3,
+          5,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          -4,
+          -5
+        ],
+        [
+          2,
+          3,
+          1,
+          4,
+          5
+        ],
+        [
+          -1,
+          -3,
+          -2,
+          4,
+          -5
+        ]
+      ],
+      "group_order": 24
+    },
+    "genus_two": {
+      "seed_sextic": "-x**6 - 9*x**4*y**2 - 27*x**2*y**4 - 11*y**6",
+      "squarefree_gcd": "1",
+      "orbit_rank": 4,
+      "augmented_rank": 7
+    }
+  },
+  "repairs": {
+    "component_line_matrix": [
+      [
+        "-a + r",
+        "d + 3"
+      ],
+      [
+        "3 - d",
+        "3*a + 3*r"
+      ]
+    ],
+    "exceptional_chart_rank": 1,
+    "point_not_on_lines_resultant": "36*(a**2 + 3)"
+  },
+  "closeout": {
+    "omitted_direction": "(3v*d_u-u*d_v-6y*d_x+2x*d_y)F_seed = 6*x*y^2",
+    "fixed_line_discriminant": "3*(z^2-x^2-3*y^2)*g",
+    "projected_branch_resultant": "16*B^2-(x^2+3*y^2)^3",
+    "trigonal_discriminant": "disc_z(z^3-(3/4)*q*z-B) = -(27/16)*(16*B^2-q^3)",
+    "cardano_cover": "W^3=4*B+eta, z=(W+q/W)/2",
+    "conic_parameterization": [
+      "1 - 3*t**2",
+      "2*t",
+      "3*t**2 + 1"
+    ],
+    "conic_double_cover_equation": "h^2 = -(3/2)*(4*B(1-3*t^2,2*t)-(1+3*t^2)^3)",
+    "conic_branch_seed": "-27*t**6 - 27*t**4 + 32*t**3 - 9*t**2 - 1"
+  }
+}

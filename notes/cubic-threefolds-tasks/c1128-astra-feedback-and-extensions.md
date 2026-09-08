@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 
-**Status:** active; foundations, Fano inputs, and torus/linearization audit complete, 2026-09-08
+**Status:** active; foundations, Fano, torus and family mathematics audited, 2026-09-08
 
 ## Goal and source
 
@@ -86,11 +86,12 @@ by this intake request.
 
 ## Next action
 
-Audit the proposed cubic family and moduli consequences: Galois containment,
-smoothness and moduli ranks, genus-two torsion, specialization, and Cremona
-nonconjugacy. Replay the supplied family checker and inspect each imported
-geometric claim before recommending a follow-on. Manuscript inclusion still
-awaits the author's decision after the audit.
+Audit the remaining structural proposals (rational coefficient spectrum,
+additive-method ceiling, stabilization bounds and diagonal torsion), then
+consolidate dispositions and manuscript recommendations. Preserve the
+intrinsic-moduli and novelty gates: accepted family mathematics alone does
+not establish a novel follow-on paper. Manuscript inclusion still awaits
+the author's decision after the audit.
 
 ## Accepted audit chunk: priorities 1–3
 
@@ -135,3 +136,18 @@ field-of-definition check before use as a ground-field algorithm.
 Independent stdlib and supplied SymPy replays agree. For full I3 the two
 étale algebras share a quadratic quotient, but the residual cubic is not
 the ordinary quartic resolvent. No novelty verdict or manuscript edit.
+
+## Accepted audit chunk: family and moduli mathematics
+
+Report: `notes/2026-09-08-c1128-family-audit.md`.
+The family theorem and three-dimensional image pass using the two manuscript
+inputs. The point off exceptional lines, component charts, standard-I3
+conjugacy and all allowed Galois signs are explicit. Independent modular
+Macaulay/rank certificates confirm the smooth seed and both moduli counts.
+Specialization and cubic birational Torelli sources support the closure
+and nonconjugacy deductions. Square-plus-cube 3-torsion is already in
+Bruin–Flynn–Testa; no standalone novelty claim survives for that construction.
+The marked elliptic projection explains C_B and its torsion over C, while
+the involution source supplies a separate explicit genus-two period curve.
+Their relationship, recovery of markings, moduli degrees and novelty of the
+cubic locus remain unproved. No manuscript changes or new task allocation.
