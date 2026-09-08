@@ -4778,8 +4778,17 @@
       "last": 1127,
       "purpose": "Critically assess and address the September 8 ChatGPT/Astra referee feedback on the compositional-recovery manuscript",
       "sequence": 531
+    },
+    {
+      "count": 1,
+      "first": 1128,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 1128,
+      "purpose": "Audit and integrate Astra feedback, canonical-lattice and Fano extensions, torus consequences, and the proposed genus-two cubic moduli follow-on",
+      "sequence": 532
     }
   ],
-  "next_id": 1128,
+  "next_id": 1129,
   "schema": "codex-task-id-allocations-v1"
 }
