@@ -7,7 +7,7 @@
   arrow/.style={->, semithick},
 ]
   \node[box, fill=gray!10] (full) at (0,0)
-    {recovery equations\\coefficients, supports,\\and induced block functionals};
+    {blockwise coefficient lifts\\with supports and\\induced functional labels};
   \node[box, fill=blue!8] (labels) at (-3.2,-1.65)
     {minimum support cost\\for each induced functional;\\nonzero-kernel cost $d(I^\perp)$};
   \node[box, fill=green!9] (supports) at (3.2,-1.65)
@@ -23,18 +23,16 @@
   \draw[arrow] (full) -- (supports);
   \draw[arrow] (labels) -- (compose);
   \draw[arrow] (supports) -- (reliability);
-  \draw[arrow, dashed] (labels.south east) to[bend left=17] (rghw.north west);
-  \draw[arrow, dashed] (supports.south west) to[bend right=17] (rghw.north east);
+  \draw[arrow, dashed] (labels.east) -- (-0.55,-1.65) -- ([xshift=-5.5mm]rghw.north);
+  \draw[arrow, dashed] (supports.west) -- (0.55,-1.65) -- ([xshift=5.5mm]rghw.north);
 \end{tikzpicture}
-\caption{Two projections of coefficient-labelled recovery equations answer
-different questions.  On the left, minimizing within each induced-functional
-class gives the labelled costs used for exact numerical composition.
-Nonconfinement also needs the separately retained nonzero-kernel cost; a solver
-must also retain a minimizing equation to propagate coefficient witnesses.  Exact support families
-retain the overlaps needed for stochastic and fractional recovery questions.  Relative
-weights are the common minimum-cost projection (dashed arrows), complete for
-helper-union minima but not for either richer question.  Labelled support
-antichains refine both branches for operational queries: they compose before
-forgetting labels and retain all nonnegative helper-price responses.}
+\caption{Blockwise lifts include nonzero functional fibres and zero-label
+inner equations.  Outer compatibility and target normalization select recovery
+systems.  Fibre minima and the separate nonzero-kernel cost determine numerical
+composition; retained minimizing lifts supply witnesses.  Exact support families
+retain overlaps for reliability and allocation.  Relative weights are the common
+minimum-cost projection (dashed arrows).  Labelled support antichains refine both
+branches, composing before labels are forgotten and retaining nonnegative-price
+responses.}
 \label{fig:information-hierarchy}
 \end{figure}

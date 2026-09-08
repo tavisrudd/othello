@@ -51,7 +51,7 @@
     },
     "Kashyap:linear-cut-state": {
       "citation": "Kashyap2007",
-      "pinpoint": "arXiv:0711.1383v1, Section 2.2 and Theorem 3.4",
+      "pinpoint": "arXiv:0711.1383v1, Section 2.4, equation (1), and Theorem 3.4",
       "used": "Classical linear cut-state setting for the explicitly derived affine contribution-space interface.",
       "conventions": [
         {

@@ -428,13 +428,14 @@ formal monomials need not be independent over a finite field.
 \subsection{From a compiled choice to a repair decision}
 
 For a single request, Ergodis returns the least helper cost and recovery
-coefficients.  In a tower, intermediate labels make the child repairs
-compatible; backtracking expands their lifts to physical helpers.
+coefficients (\path{DESIGN.md}, \path{src/composition.rs}); backtracking
+expands compatible intermediate labels to physical helper lifts.
 
 For a workload, Ergodis retains compressed support families and
 resource-load alternatives to select repairs that can coexist.  Pareto search and
 Lagrangian bounds use those alternatives to compare assignments under shared
-capacities.  The price formulation above explains a further integration:
+capacities (\path{OPTIMIZATION.md}, \path{src/scheduler.rs}, and
+\path{src/scheduler_bound.rs}).  The price formulation above explains a further integration:
 compositional pricing can supply a missing repair together with its
 coefficients, and exact pricing can establish that the fractional scheduler
 has omitted no improving option.  This implication requires an oracle for
@@ -444,11 +445,12 @@ does not establish it.
 Failures restrict choices and congestion changes their valuation; the
 ancestor-update bound localizes reevaluation on a fixed tree.  Ergodis also implements finite
 observational minimization and checks whether an additional readout is
-constant on the retained classes.  This makes the choice of observable
+constant on the retained classes (\path{src/contextual.rs}).
+This makes the choice of observable
 explicit: a quotient sufficient for an old numerical query may need refinement
 before it can answer a new price or availability query.
 
-Replaying coefficients establishes feasibility; a matching dual bound,
-checked transition potentials, or a complete exclusion argument establishes
-optimality.  Section~\ref{sec:verification} states the scope of Ergodis's
-independent checkers and the paper's formal companion.
+The named files and the composition checker
+\path{crates/verify/src/binary_composition.rs} have content identities in
+\path{verification/artifact-versions.json}.
+Section~\ref{sec:verification} states the checking scope and formal coverage; these source references do not record a fresh execution audit.

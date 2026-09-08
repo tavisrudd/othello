@@ -1,12 +1,13 @@
 \section{Exact confinement under concatenation}
 \label{sec:confinement}
 
-The argument has two stages.  First, every concatenated recovery system is
-classified by its outer functional label.  The zero label gives a local
-recovery system plus an inner-dual perturbation; each nonzero label prescribes
-a coset in every active block.  Minimizing these two sectors gives the exact
-finite nonconfinement cost.  Second, the full label-indexed cost functions,
-rather than their global scalar minima, are passed to the next concatenation
+Two confinement results govern the section.  Classifying recovery systems by
+their outer functional labels gives the exact equation escape cost
+(Theorem~\ref{thm:ungated-ranked-confinement}).  Deleting dispensable external
+coefficients instead gives minimal-support transfer under a target-touching
+distance hypothesis (Theorem~\ref{thm:minimal-support-confinement}).  The latter
+transfers availability and support-based allocations even when equations can
+escape.  Finally, the full label-indexed costs pass to the next concatenation
 level by an associative min--sum law.
 
 \paragraph{Represented inner code.}
@@ -34,7 +35,11 @@ Each block has a label map
 \qquad
 \Phi_I(y)(a)=\langle y,\iota(a)\rangle.
 \]
-Here $L^*=\operatorname{Hom}_{\F_q}(L,\F_q)$.
+Here $L^*=\operatorname{Hom}_{\F_q}(L,\F_q)$.  The chosen message coordinates
+identify each earlier generator column with the functional
+$a\mapsto\iota(a)_e$; equivalently, it is the unique trace coefficient $b_e$
+with $\iota(a)_e=\operatorname{Tr}_{L/\F_q}(b_ea)$.  We transport $T$ and
+$G_P\alpha=\operatorname{id}_T$ through this same identification.
 Two coefficient vectors receive the same label precisely when they differ by
 an inner dual word, because $\ker\Phi_I=I^\perp$.  The prescribed-coset costs
 below record the cheapest coefficient support in each fibre of this map.
@@ -76,7 +81,9 @@ Thus $\rho_T(I)<\infty$ exactly when $T\leq W_P$.  In a concatenation, a
 normalized system for $T$ means a linear family of dual equations whose
 target-block coefficient map $\alpha:T\to\F_q^P$ satisfies
 $G_P\alpha=\operatorname{id}_T$ under the fixed inner-message
-identification.  This agrees with the intrinsic target image of the
+identification.  This fixes a normalization condition, not a particular
+section $\alpha$: the admissible sections vary in the minimization.
+This agrees with the intrinsic target image of the
 concatenated generator whenever the outer projection onto the chosen block is
 surjective.  In particular, $d(O^\perp)>1$ guarantees surjectivity: an
 $L$-linear coordinate image is either $0$ or $L$, and a zero image would put a

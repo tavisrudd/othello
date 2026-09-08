@@ -174,6 +174,7 @@ $d(I^\perp)$ input: the ordinary zero-label minimum is zero.
 Section~\ref{sec:confinement} proves that each finite minimum is attained by a
 coefficient-level lift.
 
+\paragraph{Operational confinement: the second main result.}
 For operational recovery, this extra external equation is dispensable.
 Let $\delta_j(O^\perp)$ be the least weight of an outer dual word nonzero
 at $j$, with value $\infty$ if there is none.
@@ -189,7 +190,9 @@ most $r$.  The target-block part of any bounded recovery then recovers $T$
 on its own.  Deleting the external helpers proves the assertion, without
 requiring the additive inner-dual bound for equation confinement.  Equality
 of these minimal families transfers availability events under any law with
-the same local marginal, and transfers support-based capacity allocations.
+the same local marginal, and transfers support-based capacity allocations.  This target-touching
+condition is sufficient for operational transfer; unlike the equation
+threshold $\Gamma$, it does not characterize the first useful external repair.
 
 The local cost has a classical interpretation.  Puncturing the inner dual
 onto $J$ gives $D_P$, and shortening it onto $J$ gives $K_P$; shortening first
@@ -235,9 +238,8 @@ criterion to
 When this outer-distance condition and the displayed inequality both hold,
 zero-extension gives a bijection on the normalized recovery-equation systems
 and their exact helper supports.
-Consequently, for any outer family with dual distance tending to infinity,
-the same statement holds for all sufficiently long concatenations at every
-fixed $r$.
+This holds eventually at each fixed $r$ when the outer dual distance
+tends to infinity.
 
 The quotient-lifting law in Theorem~\ref{thm:quotient-lifting-composition}
 places recovery in a general nested-pair framework.  Its support-antichain
@@ -251,15 +253,9 @@ exact min--sum substitution.  Storing an argmin in each attained fibre also
 propagates one coefficient-level witness; the numerical state itself contains
 only the fibre minima.
 
-The labelled tables can be compressed when the future questions are fixed.
-Two numerical states, including their zero-sector costs, are equivalent if
-every compatible outer code gives
-the same bounded escape cost, with the original leaf confinement region,
-target coordinates, and normalization fixed.  Theorems~\ref{thm:rank-one-contextual-state} and
-\ref{prop:rank-bounded-outer-tests} give finite tests for this equivalence,
-with a projective description at rank one.  This is a secondary refinement
-of the composition law: it preserves numerical escape responses, whereas
-support overlap and future reweightings require richer data.
+Appendix~\ref{sec:contextual-refinement} gives finite tests for equivalence of
+numerical escape responses, with the original leaf boundary, target coordinates,
+and normalization fixed.  Support overlap and reweighting require richer data.
 
 The rank-one consequence is especially simple: a nonconfined recovery on a
 higher-dimensional target restricts to a nonconfined recovery on a target
@@ -292,12 +288,9 @@ coefficients.  The separation results identify information lost by coarser
 summaries.  Section~\ref{sec:related-work} compares these statements with
 concatenated decoding, covering costs, and finite-interface minimization.
 
-Ergodis embodies the labelled composition law as executable recovery
-optimization.  Section~\ref{sec:exact-recovery-optimization} explains how
-retained choices enable witnessed repairs, capacity sharing, and reuse under
-failures and prices.  It also separates those capabilities from the additional
-information required for probability and optimality certificates.  Measurements
-and artifact details are collected in Section~\ref{sec:verification}.
+Section~\ref{sec:exact-recovery-optimization} describes executable recovery
+choices in Ergodis.  Section~\ref{sec:verification} records verification scope
+and artifact references; measurements are in the software documentation.
 
 \paragraph{Organization.}
 Sections~\ref{sec:recovery-equations}--\ref{sec:confinement} develop the
