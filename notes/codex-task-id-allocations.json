@@ -4814,8 +4814,17 @@
       "last": 1131,
       "purpose": "Implement the author-approved C1128 selective manuscript upgrades and validate both local paper mirrors",
       "sequence": 535
+    },
+    {
+      "count": 1,
+      "first": 1132,
+      "kind": "reservation",
+      "lane": "continuation",
+      "last": 1132,
+      "purpose": "Address Astra/ChatGPT referee feedback: verify five-clique bound and q>=9 rigidity; correct literature and proofs; state coding extension and improve verification.",
+      "sequence": 536
     }
   ],
-  "next_id": 1132,
+  "next_id": 1133,
   "schema": "codex-task-id-allocations-v1"
 }
