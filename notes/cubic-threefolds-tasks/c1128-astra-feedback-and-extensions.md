@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 
-**Status:** active; priorities 1–3 and Fano-input audit complete, 2026-09-08
+**Status:** active; foundations, Fano inputs, and torus/linearization audit complete, 2026-09-08
 
 ## Goal and source
 
@@ -86,10 +86,11 @@ by this intake request.
 
 ## Next action
 
-Audit the selected and residual torus identifications, the explicit orbit
-normalization, and exact trivial-stabilization linearization thresholds.
-Check primary literature and existing C958/C963/C965/C966 ownership before
-recommending additions. Manuscript inclusion still awaits the author's decision.
+Audit the proposed cubic family and moduli consequences: Galois containment,
+smoothness and moduli ranks, genus-two torsion, specialization, and Cremona
+nonconjugacy. Replay the supplied family checker and inspect each imported
+geometric claim before recommending a follow-on. Manuscript inclusion still
+awaits the author's decision after the audit.
 
 ## Accepted audit chunk: priorities 1–3
 
@@ -120,3 +121,17 @@ the proposed complete index-two one-stabilization classification over C.
 Source verification is partial and positive; no novelty verdict or
 manuscript inclusion is authorized by this finding. The stronger spectrum
 also separates the three degrees after one stabilization.
+
+## Accepted audit chunk: torus structure and exact linearization
+
+Report: `notes/2026-09-08-c1128-torus-audit.md`.
+The selected augmentation character lattice and residual quotient character
+lattice identify the stated quartic quotient torus and cubic norm-one torus.
+The cofactor normalization and exact trivial-stabilization thresholds pass.
+Popov's Theorems 4–6 give the proper attribution; nonlinearizable rank-two
+tori in Cr5 are already there. The residual chart overlaps accepted C958
+work and is not reassigned. The displayed Cayley construction needs a
+field-of-definition check before use as a ground-field algorithm.
+Independent stdlib and supplied SymPy replays agree. For full I3 the two
+étale algebras share a quadratic quotient, but the residual cubic is not
+the ordinary quartic resolvent. No novelty verdict or manuscript edit.

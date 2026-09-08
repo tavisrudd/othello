@@ -1,0 +1,67 @@
+{
+  "date": "2026-09-08",
+  "scope": "Positive source attribution and mathematical audit; no exhaustive novelty verdict",
+  "full_text_sources": 0,
+  "sources": [
+    {
+      "key": "arXiv:1110.2410",
+      "version": "1110.2410v4",
+      "title": "Vladimir L. Popov, Some subgroups of the Cremona groups",
+      "url": "https://arxiv.org/pdf/1110.2410v4",
+      "read_depth": "partial",
+      "passages": [
+        "Section 1: conventions for rational actions, fixed-coordinate Cremona inclusions, linearizability",
+        "Section 2: Theorem 2 proof, Lemma 4, Theorem 4 and Lemma 5, Theorems 5–6 and Corollary 5"
+      ],
+      "access": "Cached PDF text; Popov also checked in arXiv HTML",
+      "pdf_sha256": "0d08a8504457aa1c9292b6174639d6b1516cb3351f75ae5c0b372226ef223ff1",
+      "pdf_bytes": 257865
+    },
+    {
+      "key": "arXiv:math/0409004",
+      "version": "math/0409004v2",
+      "title": "Nicole Lemire, Vladimir L. Popov, Zinovy Reichstein, Cayley groups",
+      "url": "https://arxiv.org/pdf/math/0409004v2",
+      "read_depth": "partial",
+      "passages": [
+        "Section 9.1: Proposition 9.1 and complete three-step proof; adjacent Section 9.2 opening not relied upon"
+      ],
+      "access": "Cached PDF text; Popov also checked in arXiv HTML",
+      "pdf_sha256": "f6402a9358e766f5cb557bc96fecb94c902855532fd6f7c1f73879bea85e8cb1",
+      "pdf_bytes": 463576
+    }
+  ],
+  "discovery_queries": [
+    "Lemire Popov Reichstein Cayley groups SL3 norm one torus S3 birational"
+  ],
+  "local_inputs": [
+    {
+      "path": "papers/cubic-stabilization-irrationality/verification/derive_slice_cover.py",
+      "sha256": "89eee9a9d04cb555e45c8b4f461bbf20ccb6b1d38cfabdad2b8ce67c1ff42373",
+      "bytes": 26936,
+      "read_depth": "partial",
+      "scope": "selected lattice/orbit theorem and generator"
+    },
+    {
+      "path": "papers/cubic-stabilization-irrationality/cubic_stabilization_irrationality.tex",
+      "sha256": "463c18ec4a6750f7bc54bec6d0453a66510a70b74e138dd860262567619fba3a",
+      "bytes": 60414,
+      "read_depth": "partial",
+      "scope": "selected lattice/orbit theorem and generator"
+    },
+    {
+      "path": "notes/2026-08-25-c958-type-i1-residual-norm-torus.md",
+      "sha256": "7fdd25eeee3c57cd6805c0aaed9ddbe9a4c0dc5fb293b9de6d87e0f132bce3e9",
+      "bytes": 5693,
+      "read_depth": "full text",
+      "scope": "entire dated report; underlying certificates not replayed in this chunk"
+    },
+    {
+      "path": "notes/2026-08-25-c958-uniform-cubic-norm-torus.md",
+      "sha256": "4b9240c11ab91f28d192bf5a9804e2bc569c1bfca3c95f08914da1168320bec4",
+      "bytes": 4347,
+      "read_depth": "full text",
+      "scope": "entire dated report; underlying certificates not replayed in this chunk"
+    }
+  ]
+}

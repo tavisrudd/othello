@@ -1,0 +1,26 @@
+{
+  "notes/2026-09-08-c1128-torus-audit.md": {
+    "sha256": "09333c064768f34ce89f89255e51fb9aa970dd335b52395dbde7c56c982b7103",
+    "bytes": 14613
+  },
+  "notes/2026-09-08-c1128-torus-checks.py": {
+    "sha256": "c5ee444833701f3af99ff57e6b3d768109232c3afc752d3d439e149e52d5d3b3",
+    "bytes": 8381
+  },
+  "notes/2026-09-08-c1128-torus-checks.json": {
+    "sha256": "20ccd27484d16282fd1e9db30bf368e6faffac84fc70d4e79dda2924582c7e90",
+    "bytes": 1810
+  },
+  "notes/2026-09-08-c1128-torus-sources.json": {
+    "sha256": "1fdaed13a8874d064e13c56223a97871ed32db86665e787dc1507b09ce4ef0d6",
+    "bytes": 2762
+  },
+  "notes/cubic-threefolds-tasks/c1128-astra-feedback-inputs/stabilization_extension_checks.py": {
+    "sha256": "47abeae50ab4e34f1a91d1d608dd35b085710532558697d0c8e4867fb24adbaf",
+    "bytes": 5318
+  },
+  "notes/cubic-threefolds-tasks/c1128-astra-feedback-inputs/stabilization_extension_checks.json": {
+    "sha256": "d4a2d9ca936dc41736afc638b3730602fa6626fa397deae3f52e7cce2ad6ea39",
+    "bytes": 2575
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "status": "pass",
+  "engine": "Python stdlib exact integer and Fraction arithmetic",
+  "scope": "Finite lattice and cofactor identities; geometric descent and linearization require the proof note",
+  "supplied_torus": {
+    "difference_matrix": [
+      [
+        1,
+        1,
+        1
+      ],
+      [
+        -1,
+        0,
+        0
+      ],
+      [
+        0,
+        -1,
+        0
+      ]
+    ],
+    "determinant": 1,
+    "affine_weight_permutations": [
+      [
+        3,
+        2,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        3,
+        2
+      ]
+    ],
+    "residual_character_actions": [
+      [
+        [
+          -1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          -1
+        ]
+      ]
+    ],
+    "orbit_correction": [
+      "k3/k0",
+      "k3/k1",
+      "k3/k2"
+    ]
+  },
+  "group_order": 24,
+  "selected_image_order": 8,
+  "residual_image_order": 6,
+  "combined_image_order": 24,
+  "residual_vector_permutations": [
+    [
+      0,
+      2,
+      1
+    ],
+    [
+      1,
+      2,
+      0
+    ]
+  ],
+  "residual_vectors": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      -1
+    ],
+    [
+      -1,
+      0
+    ]
+  ],
+  "quartic_resolvent_image_order": 2,
+  "common_quadratic": "quartic block system {0,1}|{2,3} equals sign of residual S3 action",
+  "cofactor_example": {
+    "matrix": [
+      [
+        1,
+        2,
+        3,
+        5
+      ],
+      [
+        2,
+        -1,
+        4,
+        1
+      ],
+      [
+        3,
+        1,
+        -2,
+        4
+      ]
+    ],
+    "kappa": [
+      41,
+      77,
+      10,
+      -45
+    ],
+    "correction": [
+      "-45/41",
+      "-45/77",
+      "-9/2"
+    ]
+  },
+  "primitive_pairs_checked": 176
+}

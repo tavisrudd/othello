@@ -38,7 +38,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C1128 — priorities 1–3 and Fano inputs audited (2026-09-08).** The primary comparisons
+- **C1128 — foundations, Fano and torus audits pass (2026-09-08).** The primary comparisons
   preserve the canonical modified lattice; persistence, residue regularity,
   and surface vanishing support the stronger count without nonresonance.
   The historical cubic-fourfold concern was not a counted whole-primary
@@ -46,10 +46,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   proposal only; manuscript inclusion still awaits the author's decision.
   The universal rational calculation and primary quantum normalizations pass;
   under these geometric inputs, the degree-one and degree-two extensions
-  support the index-two classification. No novelty verdict yet. Next audit
-  torus structure and exact linearization thresholds. Reports:
+  support the index-two classification. The torus identifications and exact
+  linearization thresholds pass; residual charts remain owned by C958.
+  Publication scope is recorded in `../2026-09-08-c1128-publication-scope.md`.
+  No novelty verdict yet. Next audit the proposed family/moduli claims. Reports:
   `../2026-09-08-c1128-comparison-rigidity-audit.md`,
-  `../2026-09-08-c1128-fano-audit.md`; card:
+  `../2026-09-08-c1128-fano-audit.md`,
+  `../2026-09-08-c1128-torus-audit.md`; card:
   `../cubic-threefolds-tasks/c1128-astra-feedback-and-extensions.md`.
 - **Astra review intake (2026-09-07):** **C1116 is complete**: the reduced
   graded coefficient proof was repaired, cyclic persistence and quotient
