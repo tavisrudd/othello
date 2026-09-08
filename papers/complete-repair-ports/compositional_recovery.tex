@@ -47,24 +47,20 @@
 \maketitle
 
 \begin{abstract}
-Linear recovery under concatenation depends on which intermediate functional
-an outer equation requires, not only on the least helper count.  We give
-an exact labelled min--sum formula for the first recovery equation leaving
-its target block and prove associative composition with coefficient witnesses.
-Within one block, relative generalized Hamming weights of the
-shortening--puncturing pair give the minimum helper unions in each recovered
-dimension.  Operational recovery admits a stronger transfer theorem: if every
-outer dual word touching the target block has weight greater than $r+1$,
-all inclusion-minimal recovery supports through radius $r$ remain local,
-without the additive inner-dual restriction needed for equation confinement.
-This transfers reliability under arbitrary availability laws with the same
-local marginal, fractional service regions, and integral support allocations.
-A general quotient-labelled lifting theorem composes prescribed operations
-in nested code pairs.  Support antichains preserve resource alternatives;
-all nonnegative price queries contain exactly the same information as the
-availability function.  Ergodis embodies these distinctions in witnessed recovery optimization,
-capacity sharing, and reuse under failures and prices.  The mathematical
-statements have human proofs independent of software execution.
+We study which local recovery information suffices to compose bounded linear
+repairs through concatenated codes.  The least helper count alone is insufficient:
+composition also requires the functional supplied by each local choice.  We
+determine the exact minimum helper cost of a recovery system that leaves its
+target block, and prove an associative composition law that reconstructs
+coefficient witnesses from local choices.  Equation escape need not create a
+new repair option, because external coefficients can be dispensable.  If every
+outer dual word touching the target block has weight greater than $r+1$, all
+inclusion-minimal recovery supports of size at most $r$ remain local, without
+an inner-dual-distance condition.  This preserves the available bounded repair
+choices and transfers reliability under arbitrary availability laws with the
+same local marginal, as well as fractional and integral support allocations.
+Equation confinement and confinement of minimal repairs therefore have different
+requirements.
 \end{abstract}
 
 \section{Introduction}
@@ -308,8 +304,7 @@ reconstruction; the rest of Section~\ref{sec:exact-recovery-optimization}
 gives the corresponding algorithms.  Related work, separation examples,
 distance specializations, and geometric applications follow.
 Appendix~\ref{sec:contextual-refinement} treats the secondary question of
-minimal numerical state.  Verification scope is recorded in
-Section~\ref{sec:verification}.
+minimal numerical state.
 
 \input{sections/01-complete-ports}
 \input{sections/02-confinement-transfer}
