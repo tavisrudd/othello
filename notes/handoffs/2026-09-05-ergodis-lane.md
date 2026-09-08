@@ -66,6 +66,9 @@ Private `5e22031` runs full supplied QEC and LRC queries in the application
 workspace (8769 and 8770), with retained plans and explicit snapshot/runnable
 contexts. Main campaign runtime/console integration remains open. Report:
 `notes/2026-09-08-c1130-application-wasm-workspace.md`.
+Private `5b327eb` adds exact native/WASM capacity design and editable recovery
+inputs with a two-axis map; native performance gates pass. User-selected next UI
+application: scheduling. Report: `notes/2026-09-08-c1130-capacity-design.md`.
 Preserve public-core loading of separately compiled/obfuscated private packages;
 canonical WASM engine plus extensions, not a mandatory private assembly build.
 Start with a concrete contract over composition, compiled LRC queries and QEC;

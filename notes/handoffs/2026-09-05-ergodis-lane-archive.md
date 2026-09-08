@@ -268,3 +268,11 @@ Recovery UI follow-up, private `aefe3fb`: inverse minimum-extra-parity frontier 
 on the retained WASM plan, with explicit unattainable targets and sampled large
 demand. Result panels now lead with count/target status and a direct budget
 conclusion. Full numerical/UI scope is recorded in the application workspace report.
+
+## 2026-09-08 — C1130 capacity-design readout and map
+
+Private `5b327eb` completes exact equal-unit-cost nine-domain upgrade design in
+native/WASM, editable capacities, forward-checked application and 2D map selection.
+Original six-repair target needs 20 added units. Rejected dispatch variants and
+accepted single/four-worker performance controls are retained. Report:
+`notes/2026-09-08-c1130-capacity-design.md`. User requested scheduling next.
