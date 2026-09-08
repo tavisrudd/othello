@@ -339,15 +339,17 @@ Then \(C\dashrightarrow Z/T\) is birational and
 \emph{Rationality of the section.}
 The image of \(\Lambda\) under \(\pi_p\) is a linear
 \(\PP^{n-r}\subset\PP^n\), because \(\Lambda\) contains the centre of the
-linear projection.  The irreducible variety \(C\) has dimension \(n-r\),
-and \(\pi_p\) is injective on the nonempty open \(C\cap U_p\).  Its image
-therefore has dimension \(n-r\) and is dense in the linear \(\PP^{n-r}\).
+linear projection.  The irreducible variety \(C\) has dimension \(n-r\).
+Since \(\pi_p\) is an isomorphism on \(U_p\), its restriction identifies
+\(C\cap U_p\) with a closed subset of the projection's image open.
+This subset lies in the linear \(\PP^{n-r}\) and has the same dimension,
+so it is the intersection of that linear space with the image open.
 Thus
 \begin{equation}
  \pi_p|_C:C\dashrightarrow\PP^{n-r}
  \label{eq:restricted-tangent-projection}
 \end{equation}
-is dominant and generically injective, hence birational.  Therefore \(Z/T\) is
+identifies dense open subsets and is birational.  Therefore \(Z/T\) is
 \(k\)-rational.
 
 We record the inverse and its domain.  Choose linear forms
@@ -513,10 +515,11 @@ Its underlying variety is the norm-nonzero open in \(\PP(E_4)\).
 This explains the simplex requirement; rationality of the quotient still
 requires the tangent-section argument.
 
-The determinant of the three weight differences from \((0,1,1)\) is one.
-Consequently the direct sum of the four selected weight spaces and the
-affine cone over \(B\) are complementary subspaces defined over the ground field, as
-required in Theorem~\ref{thm:torus-quotient}.  On the open where the four
+By Galois stability, the direct sum of the four selected weight spaces
+and the affine cone over \(B\) are complementary subspaces defined over
+\(k\), as required in Theorem~\ref{thm:torus-quotient}.
+The determinant of the three weight differences from \((0,1,1)\) is one,
+supplying the integral-basis condition.  On the open where the four
 selected weight-space components are nonzero, a projective stabilizer fixes
 their three ratios.  The three weight differences form a basis, so that
 stabilizer is trivial.  In particular, the \(T_3\)-action is generically free.

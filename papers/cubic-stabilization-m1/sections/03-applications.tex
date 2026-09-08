@@ -10,27 +10,27 @@ flop and combine it with criteria for universal \(CH_0\)-triviality.
 \coverage{fragment}%
 \lean{threefold_not_rational_of_occurrenceIndexedMarker,%
 threefold_projectiveLine_irrationality_of_positive_count}%
-Let \(Y\) be a smooth projective complex threefold.  If its generic even QDM
-contains a block counted by the exponent count defined in
-\eqref{eq:atomic-fold}, then \(Y\times\PP^1\) is irrational.  In particular,
-\(Y\) is irrational.
+Let \(Y\) be a smooth projective complex threefold.  If
+\(I_{\mathrm{lat}}(Y)>0\), then \(Y\times\PP^1\) is irrational, and so
+is \(Y\).  In particular, this holds when \(I_{\mathrm{exp}}(Y)>0\).
 \end{corollary}
 
 \begin{proof}[Proof of Corollary~\ref{cor:threefold-marker}]
-A counted block gives \(I_{\mathrm{exp}}(Y)>0\).  The projective-bundle
-formula gives
+The projective-bundle formula gives
 \[
- I_{\mathrm{exp}}(Y\times\PP^1)=2I_{\mathrm{exp}}(Y)>0.
+ I_{\mathrm{lat}}(Y\times\PP^1)=2I_{\mathrm{lat}}(Y)>0.
 \]
 Every center in projective weak factorization of fourfolds has dimension
 at most two, so Proposition~\ref{prop:atomic-lowdim} makes every correction
-zero.  Theorem~\ref{thm:marker-ledger} therefore makes the invariant
-birationally invariant in dimension four.  Since
-\(I_{\mathrm{exp}}(\PP^4)=0\) by \eqref{eq:atomic-projective-value},
-\(Y\times\PP^1\) is irrational.  Rationality of \(Y\) would imply
-rationality of this product, so \(Y\) is irrational as well.
+zero.  The intrinsic blowup formula therefore makes \(I_{\mathrm{lat}}\)
+birationally invariant in dimension four.  The generic even connection of
+\(\PP^4\) has only rank-one primary summands, so
+\(I_{\mathrm{lat}}(\PP^4)=0\).  Hence \(Y\times\PP^1\) is irrational.
+Rationality of \(Y\) would imply rationality of this product.
+Finally, \(I_{\mathrm{exp}}\le I_{\mathrm{lat}}\) gives the last assertion.
 \proves{cor:threefold-marker}%
-\uses{prop:atomic-lowdim, thm:marker-ledger, prop:qdm-operation-ledgers}%
+\uses{prop:atomic-lowdim,prop:intrinsic-count-formulas}%
+\imports{AKMW:weak-factorization}%
 \end{proof}
 
 \subsection{Index-two Fano threefolds}

@@ -71,9 +71,12 @@ Extend by sums over connected components and put
 \(I_{\mathrm{exp}}\).
 
 For the lattice count use instead
-\(\mathcal D_{\mathrm{lat}}=\C\setminus\{0\}\) and write
+\(\mathcal D_{\mathrm{lat}}=\C\setminus\{0\}\), with monoid
+\(M_{\mathrm{disc,lat}}\) and group \(G_{\mathrm{disc,lat}}\) defined as
+above over this index set.  Put
 \[\mathfrak S_{\mathrm{lat}}(Y)=\sum_{E\text{ eligible},\,\delta^\sharp(E)\ne0}
 e_{\delta^\sharp(E)}.\]
+Its augmentation \(\epsilon_{\mathrm{lat}}\) recovers \(I_{\mathrm{lat}}\).
 The constant-field and comparison proof above applies without change:
 its only use of exponent separation is the exclusion rule.  The operation
 formulas and additive extension below therefore hold for this spectrum too.
@@ -98,15 +101,17 @@ a rank-\(r\) vector bundle \(V\) on \(Y\),
  \mathfrak S(\Bl_ZY)=\mathfrak S(Y)+(c-1)\mathfrak S(Z),
  \qquad \mathfrak S(\PP_Y(V))=r\mathfrak S(Y).
 \]
-The same formulas hold for \(I_{\mathrm{exp}}\).  For centers of differing
+The same formulas hold for \(I_{\mathrm{exp}}\), and also for
+\(\mathfrak S_{\mathrm{lat}}\) and \(I_{\mathrm{lat}}\).  For centers of differing
 component dimensions, apply the formula separately to each component.
 \end{proposition}
 
 \begin{proof}
 Lemma~\ref{lem:faithful-center-base-change} identifies every center
 occurrence with a faithful extension of its intrinsic module in every
-dimension.  Lemma~\ref{lem:constant-residue-spectrum} preserves each
-summand's spectrum.  Independent unit coordinates separate the summands
+dimension.  The constant-field and regular-lattice argument of
+Lemma~\ref{lem:constant-residue-spectrum} preserves each discriminant
+for either exclusion rule.  Independent unit coordinates separate the summands
 generically, as in Proposition~\ref{prop:qdm-operation-ledgers}.
 Consequently their spectra add.  The projective-bundle comparison gives
 \(r\) copies in the same way.  Augmentation proves the scalar formulas.
@@ -130,6 +135,11 @@ agreeing with \(\mathfrak S\) and \(I_{\mathrm{exp}}\) on smooth projective
 varieties.  Here \(\mathbb L=[\mathbf A^1]\),
 \(\mathcal I(1)=\mathcal I(\mathbb L)=0\), and for a smooth cubic
 threefold \(X\), \(\mathcal S([X])=e_{4/9}\) and \(\mathcal I([X])=1\).
+The same assertions hold for unique additive extensions
+\(\mathcal S_{\mathrm{lat}}\) and
+\(\mathcal I_{\mathrm{lat}}=\epsilon_{\mathrm{lat}}\mathcal S_{\mathrm{lat}}\)
+of \(\mathfrak S_{\mathrm{lat}}\) and \(I_{\mathrm{lat}}\), with spectrum
+target \(G_{\mathrm{disc,lat}}\).
 \end{theorem}
 
 \begin{proof}
@@ -155,6 +165,8 @@ factorization through the indicated quotient, and augmentation gives
 \(\mathcal I\).  Points have no counted block, while the cubic has the
 single block of discriminant \(4/9\) computed in
 Section~\ref{subsec:shared-cubic-packet}.
+Applying the same argument to the lattice spectrum, with its own target
+and augmentation, proves the second assertion.
 \uses{prop:intrinsic-spectrum-formulas,prop:atomic-lowdim}%
 \imports{Bittner:blowup-presentation}%
 \end{proof}

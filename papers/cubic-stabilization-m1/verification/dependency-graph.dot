@@ -94,6 +94,7 @@ digraph manuscript {
   "a5-pencil-eckardt-locus" [shape=note, fillcolor="#eeeeee"];
   "hirzebruch-euler-spectrum" [shape=note, fillcolor="#eeeeee"];
   "AKMW:weak-factorization" -> "cor:factorization-spectrum" [style=dotted];
+  "AKMW:weak-factorization" -> "cor:threefold-marker" [style=dotted];
   "AKMW:weak-factorization" -> "thm:index-two-classification" [style=dotted];
   "AKMW:weak-factorization" -> "thm:marker-ledger" [style=dotted];
   "Batyrev:fano-toric-presentation" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
@@ -164,6 +165,7 @@ digraph manuscript {
   "prop:eckardt-reflection-group" -> "prop:A5-not-coprime" [style=solid];
   "prop:generic-spectral-connection-splitting" -> "lem:cyclic-primary-persistence" [style=dashed];
   "prop:generic-spectral-connection-splitting" -> "lem:cyclic-primary-persistence" [style=solid];
+  "prop:intrinsic-count-formulas" -> "cor:threefold-marker" [style=solid];
   "prop:intrinsic-count-formulas" -> "prop:qdm-operation-ledgers" [style=solid];
   "prop:intrinsic-count-formulas" -> "thm:index-two-classification" [style=dashed];
   "prop:intrinsic-count-formulas" -> "thm:index-two-classification" [style=solid];
@@ -175,7 +177,6 @@ digraph manuscript {
   "prop:intrinsic-spectrum-formulas" -> "thm:additive-motivic-marker" [style=solid];
   "prop:principal-gluing-packet" -> "prop:no-elliptic-product" [style=dashed];
   "prop:principal-gluing-packet" -> "prop:no-elliptic-product" [style=solid];
-  "prop:qdm-operation-ledgers" -> "cor:threefold-marker" [style=solid];
   "prop:qdm-operation-ledgers" -> "lem:constant-residue-spectrum" [style=dashed];
   "prop:qdm-operation-ledgers" -> "lem:constant-residue-spectrum" [style=solid];
   "prop:qdm-operation-ledgers" -> "prop:intrinsic-spectrum-formulas" [style=dashed];
@@ -198,5 +199,4 @@ digraph manuscript {
   "thm:every-cubic" -> "cor:v14-one-step" [style=solid];
   "thm:every-cubic" -> "cor:voisin-separation" [style=dashed];
   "thm:every-cubic" -> "cor:voisin-separation" [style=solid];
-  "thm:marker-ledger" -> "cor:threefold-marker" [style=solid];
 }
