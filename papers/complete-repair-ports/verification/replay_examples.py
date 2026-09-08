@@ -8,6 +8,7 @@ import itertools as it
 import json
 from pathlib import Path
 import random
+import re
 
 ROOT = Path(__file__).resolve().parent
 P = 101
@@ -163,7 +164,15 @@ def main():
     args=parser.parse_args()
     if args.write and args.check: parser.error('choose --write or --check')
     output=ROOT/'explicit-examples.json'
-    expected=serialized(generate())
+    data=generate()
+    source=(ROOT.parent/'sections/05-pointed-tutte.tex').read_text()
+    for name in ('A','B'):
+        pattern=r'G_\{\\mathcal '+name+r'\}=\\begin\{pmatrix\}(.*?)\\end\{pmatrix\}'
+        match=re.search(pattern,source,re.S)
+        assert match is not None,'missing displayed matrix'
+        rows=[[int(x.strip()) for x in row.split('&')] for row in match[1].strip().split('\\\\')]
+        assert rows==data['realizations'][name]['generator_rows'],'displayed matrix drift'
+    expected=serialized(data)
     if args.write: output.write_bytes(expected)
     else: assert output.read_bytes()==expected,'example certificate drift'
     names=['replay_examples.py','explicit-examples.json','explicit-examples.md']

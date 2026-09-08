@@ -5,6 +5,8 @@ To regenerate the canonical certificate and its checksum manifest, run the
 same command with `--write`. Python 3.11 or later and its standard library
 are sufficient. No external algebra package or Lean run is involved.
 
+The release gate runs this read-only replay and compares the displayed TeX
+matrices with the certificate, so numerical edits cannot silently drift.
 `explicit-examples.json` gives two 4-by-10 generator matrices over the prime
 field of order 101. Column 0 is the target; columns 1 through 9 are helpers
 labelled 0 through 8 in the manuscript. The five four-column circuits through

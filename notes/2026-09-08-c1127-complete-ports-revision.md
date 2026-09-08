@@ -135,6 +135,40 @@ The expanded 15-case annotation mutation suite also rejects a corrupted
 certificate. Generation and clean replay both passed, and the deterministic
 manuscript build remains warning-free at 43 pages.
 
+## Acceptance and ej + tt closeout
+
+The main acceptance gate passed: `make check` performs a deterministic clean
+build and bytewise tracked-PDF comparison, validates the public surface and all
+32 claims, resolves the six macros, checks registered evidence hashes, and now
+replays the explicit examples. The 15 mutation tests also pass. Visually
+inspected revised pages 3, 16, 17, 21, 22, 25, 30, 38, and 40: notation and
+contribution tables, both example pages, tree certificate and economical
+family, explicit matrices and multiplier, and contextual appendix placement.
+No clipping, broken table rows, or unresolved references were observed. The
+baseline PDF is retained in the local review cache; this was targeted rendered
+inspection, not the separate C953 blind referee or full submission audit.
+
+The explicit ej + tt pass after that gate asked whether the retained evidence
+could drift independently of the printed example. Settled: the finite replay
+now parses and compares both displayed TeX matrices with the generated data,
+and the release gate runs that replay. The earlier tie, target-image, and
+homogeneous-reliability distinctions remain explicit. All six mandatory referee
+groups and all six ranked suggestions have concrete dispositions: the complete
+example, contribution/notation tables, secondary-section separation, economical
+connected family, and explicit reliability/Singer instances are implemented.
+
+### Mystery ledger
+
+No genuine unresolved mathematical mystery remains in this bounded response.
+The observed boundary dependence is settled by fixing the original leaf;
+nonzero-sector ties are compatible with equality of the optimum; useful
+nonminimum supports explain why one predecessor is not an availability state.
+Broader economical-interface families remain the paper's stated research
+question, not an unfulfilled C1127 acceptance condition. Formal coverage is
+still limited to the exact sequence. C325 owns consolidated executable replay,
+and C953 owns aggregate fresh referee/export readiness. No incidental discovery
+entry was warranted.
+
 ## Operational record
 
 One combined routed-read tool result exceeded the display budget and truncated.

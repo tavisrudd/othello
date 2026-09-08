@@ -298,6 +298,9 @@ def main() -> int:
 
     check_public_surface()
     check_metadata_and_formal_boundary()
+    examples = run(["python3", "verification/replay_examples.py", "--check"], PAPER)
+    require(examples.returncode == 0,
+            "explicit-example replay failed:\n" + (examples.stderr or examples.stdout))
     with tempfile.TemporaryDirectory(prefix="complete-repair-ports-build-") as scratch:
         rebuilt = build_pdf(Path(scratch))
     if args.update_pdf:
