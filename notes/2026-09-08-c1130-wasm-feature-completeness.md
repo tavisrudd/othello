@@ -58,6 +58,16 @@ control logic in kernels. Earlier staged limitations are implementation history,
 not a license to narrow this task's full-parity objective. Preserve native64 hot
 layouts and specialization; do not route native through wasm32 representations.
 
+## Native interface review
+
+Read `2026-09-08-c1130-native-host-review.md` before implementing the parity bridge.
+Native non-GF(2) execution primarily uses field-dispatched CLI/library workflows,
+application-specific resource/span compilation and separately launched controlled
+searches; the new portable CampaignSession is a GF(2) pilot on native too. Native
+repository publication is not a universal solve endpoint. Reuse existing typed
+operations, compiled/query handles and witness semantics; do not treat a GF(256)
+byte decoder or FT10 job-shop solver as already implemented native interfaces.
+
 ## Required work
 
 1. Inventory existing native/core/private capability surfaces and their WASM
