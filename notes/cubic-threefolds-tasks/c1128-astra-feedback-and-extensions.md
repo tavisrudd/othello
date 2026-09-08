@@ -19,6 +19,9 @@ Detailed intake, formulas, priorities, evidence boundaries, and source pointers:
 `notes/2026-09-08-c1128-astra-feedback-intake.md`.
 Five verbatim attachments and their SHA-256 manifest:
 `notes/cubic-threefolds-tasks/c1128-astra-feedback-inputs/`.
+Publication/accessibility placement recommendation, recorded at the author's
+request: `notes/2026-09-08-c1128-publication-scope.md`. Continue the audit before
+implementing that recommendation.
 
 ## Ordered work
 
