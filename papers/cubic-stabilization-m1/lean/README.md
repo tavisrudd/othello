@@ -34,6 +34,24 @@ theorems imported from the literature occur as explicit hypotheses of
 conditional interfaces; they are not declared as Lean axioms and are not
 reported as independently formalized.
 
+## Manuscript notation and scope
+
+The Lean names use `marker` for the numerical exponent count denoted
+`I_exp` in the primary manuscript. In the cubic block calculation, the
+coefficient names `J₀`, `D₀`, and `E₀` correspond respectively to the
+manuscript's `N`, `A₀`, and `A₁`. The formal theorem identifiers are unchanged.
+
+The primary manuscript's strengthened threefold corollary asserts
+irrationality after multiplication by a projective line. Its listed
+threefold endpoint terminal proves only the unstabilized conclusion; the
+claim map records that distinction as fragment coverage. The additive
+Grothendieck-group and residue-spectrum extensions have absent coverage.
+The rank-two commutant and nilpotence-persistence algebra in
+`TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/RankTwoClusterGermRigidity.lean` is exposed through the
+framed-monodromy interface. It takes matrix flatness and unit-entry
+hypotheses; it does not construct the geometric spectral cluster or supply
+those hypotheses from the quantum connection.
+
 ## Interim coverage status
 
 This is a publishable partial companion, not a claim of complete
