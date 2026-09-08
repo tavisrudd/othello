@@ -4,6 +4,8 @@
 
 **Date**: 2026-09-08
 
+**Status**: completed; authority and local standalone release checks pass.
+
 The accepted starting assessment is
 `notes/2026-09-08-c1127-complete-ports-referee-response.md`.
 The user enabled intent-based mode and then directed execution with `go`.
@@ -169,7 +171,26 @@ still limited to the exact sequence. C325 owns consolidated executable replay,
 and C953 owns aggregate fresh referee/export readiness. No incidental discovery
 entry was warranted.
 
+## Standalone synchronization
+
+Authority source commit `c69f4913b` passed the guarded exporter audit with zero
+findings. The exporter synchronized the allowlisted scholarly surface; an
+ordinary forward commit `a5d65d3` records the result in the local standalone
+repository. Export verification passes with 59 tracked files and content SHA-256
+`28f49c20823f35d3b078fa9500444367c579717ec400070c2ad42c9aebdba667`.
+Both authority and standalone PDFs have SHA-256
+`329e77fb6ce1ca5b4acb93592a96a14c9f47cda9b018ab6d6711ea2dbf908167`.
+The clean standalone `make check` passes: 43 pages, warning-free, 32 claims,
+four unchanged Lean terminals. The standalone worktree is clean. No push or
+deposit occurred. C325 is the next routed task; C953 remains the fresh aggregate
+gate.
+
 ## Operational record
+
+The first standalone checks ran before newly exported files were staged and
+correctly refused a tracked-file/manifest mismatch. Staging exactly the exporter
+delta resolved that mismatch; export verification and the clean committed
+standalone release gate then passed. No source workaround was used.
 
 One combined routed-read tool result exceeded the display budget and truncated.
 Replaced that display with bounded reads of the omitted Lean-guide tail and

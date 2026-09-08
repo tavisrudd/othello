@@ -7,15 +7,14 @@ trails belong in the dated task reports and in the archive companion,
 [`2026-07-17-complete-ports-paper-archive.md`](2026-07-17-complete-ports-paper-archive.md).
 
 **Date**: 2026-09-08
-**Status**: ACTIVE. The operational revision has a 40-page manuscript and 32
-registered claims, with four unchanged Lean terminals. Minimal-support confinement,
-quotient-labelled lifting, pricing/availability, and boundary-width compilation
-are human-proved additions. Ergodis is presented through the mathematics it embodies and the repair,
-allocation, and reuse decisions that this enables. A binary running example motivates local cost, compatibility, and capacity
-choices before the exact main formula on page 2; detailed verification and benchmark records are in companion documentation.
-The next manuscript step is C1127, addressing the September 8 supplied referee
-report after critical assessment. The remaining route is C1127, C325, C953,
-then C955. No push or deposit.
+**Mode**: intent-based.
+**Status**: ACTIVE. C1127 is closed: the September 8 referee response and shared
+six-macro annotation audit are implemented in a 43-page manuscript with 32
+registered claims and four unchanged Lean terminals. The complete multilevel
+example, concrete instances, and economical interface family now accompany the
+main recovery → transfer → labelled composition route. Authority and standalone
+release checks pass. The remaining route is C325, C953, then C955. No push or
+deposit.
 
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
@@ -26,8 +25,8 @@ then C955. No push or deposit.
 - **Canonical identity**: `complete-ports` — *Exact Compositional Transfer of Bounded Linear
   Recovery*. Approved license MIT.
 - **Standalone paper repository**: `tavisrudd/compositional-recovery` at
-  `~/src/math-papers/compositional-recovery`, local commit `b9bbf4d` (40-page
-  tightened manuscript and literature audit, verified, unpushed). The obsolete bundled engine and its
+  `~/src/math-papers/compositional-recovery`, local commit `a5d65d3` (43-page
+  referee revision and six-macro audit, verified, unpushed). The obsolete bundled engine and its
   checker have been removed in separate forward commits.
 - **Ergodis engine**: the engine, its benchmark programme, and the C985 optimization sequel live in
   the [`ergodis`](2026-09-05-ergodis-lane.md) lane.
@@ -64,23 +63,13 @@ classical inputs.
 
 Title: *Exact Compositional Transfer of Bounded Linear Recovery*.
 
-1. recovery sets, normalized recovery equations, and stochastic repair as distinct forgetful layers;
-2. the associated nested code pair and its exact sequence;
-3. relative generalized Hamming weights as the exact minimum helper costs for recovering subspaces
-   of each dimension;
-4. exact ungated finite arbitrary-rank transfer from target-normalized joint coset-support costs
-   and the complete outer functional dual;
-5. the RGHW outer-distance criterion and the pointed weighted formula as specializations of that
-   exact optimization;
-6. the rank-one escape cost as the exact bottleneck for simultaneous bounded transfer across all
-   recoverable target dimensions;
-7. the best-target GHW identity, cooperative-locality min--max corollary, and MDS rigidity;
-8. positive-density realization and bounded service-rate-region transfer;
-9. reliability and coefficient-presentation separations beyond the RGHW hierarchy;
-10. the projective simplex code as the principal non-MDS application; and
-11. quotient-labelled lifting, support-antichain composition, price/availability
-    equivalence, fixed-query boundary width, and a worked bilinear reduction; and
-12. compact formal-verification and reproducibility appendices.
+1. recovery equations, helper supports, the associated nested pair, and relative weights;
+2. exact equation confinement and minimal-support transfer;
+3. quotient-labelled composition, pricing/availability, and exact tree optimization;
+4. a complete multilevel recovery calculation with a failed-helper alternative;
+5. theorem-specific related work, reliability and presentation separations;
+6. distance, best-target, MDS, positive-density, service-rate, and geometric consequences;
+7. formal-verification provenance and contextual refinement in a secondary appendix.
 
 Use only established coding-theory terminology. “Associated nested code pair” is a literal
 description of $K_P\subseteq D_P$, not a coined term. Research and referee reports must contain
@@ -109,7 +98,7 @@ Pareto, fixed-batch packing, and multi-target state algebras.
 
 Every paper is a fresh-history allowlisted export. Never publish, fork, history-filter, or broadly
 copy the private monorepo. This paper's formal companion is the paper-owned Lean 4 project, built
-against a pinned Mathlib revision and listed in its exact 43-file distribution manifest; monorepo
+against a pinned Mathlib revision and listed in its explicit distribution manifest; monorepo
 trust files and local `lean/AGENTS.md` norms are excluded. The shared Lean monorepo remains
 separately owned. Never copy raw build trees or selected `.olean` files.
 
@@ -122,18 +111,16 @@ hierarchy.
 
 ## Active frontiers
 
-### C1127: supplied referee response
+### C1127: closed referee response
 
-Critical assessment and the ordered revision plan are in
-`notes/2026-09-08-c1127-complete-ports-referee-response.md`.
-The six correction groups are supported by the inspected source. First repair
-contextual closure at the original leaf confinement boundary, then quantifiers,
-hypotheses, witness accounting, and the tree optimality certificate. Follow with
-one complete multilevel example and selective exposition work. The stronger
-region-indexed theory is outside the initial repair. Explicit instances and an
-economical interface family are bounded supporting attempts. Assessment is
-complete; manuscript edits and validation are pending. This report does not
-replace C325 or the fresh C953 aggregate gate.
+Critical assessment and implementation are recorded in
+`notes/2026-09-08-c1127-complete-ports-referee-response.md` and
+`notes/2026-09-08-c1127-complete-ports-revision.md`.
+The six correction groups, six ranked suggestions, and shared formal-annotation
+conventions have concrete dispositions. Contextual closure preserves the original
+leaf boundary; unrestricted macroblock congruence is expressly excluded. The
+release gate now also replays the concrete examples. Formal coverage remains
+unchanged. This closure does not replace C325 or the fresh C953 aggregate gate.
 
 ### Referee repair disposition
 
@@ -157,14 +144,12 @@ environments are unchanged.
 
 ### Paper route
 
-1. **C1127** — implement the assessed September 8 referee response, with fixed-leaf
-   observation semantics, precise optimizer claims, and a complete multilevel example.
-2. **C325** — appendix-only consolidated executable verifier reproducing every retained finite
+1. **C325** — appendix-only consolidated executable verifier reproducing every retained finite
    appendix table from a versioned manifest, with independent replay and per-claim evidence routes.
-3. **C953** — aggregate referee/export gate after C325: theorem, human-proof, Lean adequacy, axiom,
+2. **C953** — aggregate referee/export gate after C325: theorem, human-proof, Lean adequacy, axiom,
    terminology, literature, computation-independence, rendered-manuscript, and hostile referee
    audits, then the draft-readiness verdict.
-4. **C955** — coefficient-presentation spectrum, after C953.
+3. **C955** — coefficient-presentation spectrum, after C953.
 
 ## Lane ownership
 

@@ -1121,3 +1121,13 @@ statement/proof environments match the preceding audited revision exactly.
 Export content SHA-256:
 `5d071ebeafb9e063fd70934e47097731c7e5c311907290e88fbc2d7436bcd4fb`.
 No push, Lean execution, new benchmark, or change to C325/C953 status.
+
+## 2026-09-08 — C1127 closed
+
+The supplied referee response and shared six-macro audit are complete. The
+43-page authority and standalone release gates pass; local standalone commit
+`a5d65d3` is verified and unpushed. Critical dispositions, evidence, rendered
+inspection, ej + tt, and the mystery ledger are in
+`notes/2026-09-08-c1127-complete-ports-revision.md`; the prior assessment is in
+`notes/2026-09-08-c1127-complete-ports-referee-response.md`. C325 is next, then
+C953 and C955. No incidental discovery entry was warranted.

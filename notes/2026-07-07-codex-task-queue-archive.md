@@ -5641,3 +5641,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1126 `[ergodis]` [REPORTED 2026-09-07]** — Working campaign/library navigation and contextual inspection → `notes/2026-09-07-c1126-campaign-information-architecture.md`
 
 - **C1129 `[ergodis]` [REPORTED 2026-09-08]** — Loaded domain lab, explicit snapshot/runnable contexts and staged real WASM actions; browser gates pass → `notes/2026-09-08-c1129-runnable-domain-lab.md`.
+
+- **C1127 `[complete-ports]` [REPORTED 2026-09-08]** — completed critical referee assessment and revision, fixed-leaf contextual closure, precise quantifiers/hypotheses and optimizer certificates, full multilevel example, contribution/exposition work, concrete instances/economical interfaces, and shared six-macro validation; 43-page authority and standalone release gates pass, unchanged 32 claims/four Lean terminals, local mirror `a5d65d3`, no push or deposit → `notes/2026-09-08-c1127-complete-ports-revision.md`.

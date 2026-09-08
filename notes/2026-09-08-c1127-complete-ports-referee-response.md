@@ -4,7 +4,9 @@
 
 **Date**: 2026-09-08
 
-**Status**: assessment complete; manuscript revision pending.
+**Status**: completed. Assessment and plan below are the historical starting point;
+implementation and acceptance are recorded in
+[the revision report](2026-09-08-c1127-complete-ports-revision.md).
 
 ## Scope and evidence
 
