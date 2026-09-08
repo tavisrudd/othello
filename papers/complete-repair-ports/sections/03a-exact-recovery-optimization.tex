@@ -12,14 +12,9 @@ coefficients reconstruct the selected repair in the original code.
 The system is developed at
 \href{https://github.com/tavisrudd/ergodis}{\texttt{tavisrudd/ergodis}}.
 
-These operations require different mathematical data.  A minimum in each
-functional fibre suffices for the min--sum recursion.  Repricing needs the
-alternatives discarded by that minimum, and reliability needs their physical
-support overlaps.  The results below specify these distinctions, give a
-fixed-query width bound, and show how a bilinear worker task becomes a
-recovery query.  They explain what can be compiled and reused without making
-the correctness of the mathematics depend on a software execution.
-The cost here counts participating scalar helper coordinates.
+We develop the numerical recursion, its support-valued refinement, and a
+fixed-query width bound, then apply the interface to bilinear worker tasks.
+The cost counts participating scalar helper coordinates.
 
 \input{figures/ergodis-pipeline}
 
@@ -92,13 +87,10 @@ dynamic program above does not require it.
 
 The resulting fibre tables, together with the separately propagated
 nonzero-kernel cost in~\eqref{eq:dual-distance-composition}, supply the
-finite confinement formula.  The latter cost is needed for a nonzero
-external lift of the zero functional; the ordinary zero-label minimum is zero.
+finite confinement formula.
 The optimizer can therefore emit a replayable recovery witness when a threshold fails,
 or a complete exhausted-state certificate when the requested label is
-unreachable.  Iterating the compiler through a tower preserves the
-intermediate labels required at the next level; collapsing each table to one
-minimum would destroy precisely this compositional information.
+unreachable.
 
 \subsection{Interfaces for resource choices and availability}
 
@@ -309,17 +301,12 @@ formal monomials need not be independent over a finite field.
 
 \subsection{From a compiled choice to a repair decision}
 
-For a single request, the optimizer returns both the least helper cost and
-coefficients that recover the requested combinations.  In a tower, the
-intermediate labels ensure that the chosen child repairs agree with the
-parent equation; backtracking then expands the answer to physical helpers.
-This is the executable content of the fibre decomposition, and it is why a
-scalar locality parameter cannot serve as the compiler's input at the next
-level.
+For a single request, Ergodis returns the least helper cost and recovery
+coefficients.  In a tower, intermediate labels make the child repairs
+compatible; backtracking expands their lifts to physical helpers.
 
-For a workload, the question changes from the size of one repair to which
-repairs can coexist.  Ergodis retains compressed support families and
-resource-load alternatives for capacity-aware scheduling.  Pareto search and
+For a workload, Ergodis retains compressed support families and
+resource-load alternatives to select repairs that can coexist.  Pareto search and
 Lagrangian bounds use those alternatives to compare assignments under shared
 capacities.  The price formulation above explains a further integration:
 compositional pricing can supply a missing repair together with its
@@ -328,21 +315,14 @@ has omitted no improving option.  This implication requires an oracle for
 the full admitted family; supplying a list of options to a scheduler alone
 does not establish it.
 
-Failures restrict the feasible choices, while congestion changes their
-valuation.  Keeping a feasibility representation permits both changes to be
-answered without redefining the code or its functional labels.  The
-ancestor-update bound above explains the benefit when a changed leaf affects
-only a small part of a composition tree.  Ergodis also implements finite
+Failures restrict choices and congestion changes their valuation; the
+ancestor-update bound localizes reevaluation on a fixed tree.  Ergodis also implements finite
 observational minimization and checks whether an additional readout is
 constant on the retained classes.  This makes the choice of observable
 explicit: a quotient sufficient for an old numerical query may need refinement
 before it can answer a new price or availability query.
 
-Finally, reconstruction and optimality have separate mathematical roles.
-Replaying coefficients establishes that a selected repair works.  A matching
-dual bound, checked transition potentials, or complete exclusion argument
-establishes that a cheaper admissible choice was not missed.  Ergodis's
-independent checkers implement specified finite composition and transition
-contracts; the relation between a source recovery problem and the checked
-presentation must also be justified.  Section~\ref{sec:verification} records
-these evidence boundaries and the retained measurements.
+Replaying coefficients establishes feasibility; a matching dual bound,
+checked transition potentials, or a complete exclusion argument establishes
+optimality.  Section~\ref{sec:verification} states the scope of Ergodis's
+independent checkers and the paper's formal companion.

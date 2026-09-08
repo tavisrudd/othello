@@ -31,9 +31,9 @@ composition, and necessary interface information.
 Continue to the optimizer section for support alternatives, exact repricing,
 event-correct reliability, width, and executable decisions. Read the separation
 section to see why coarser data fail. The projective-simplex family is the
-worked non-MDS application. Measurements, source identities, and checker
-contracts are collected in verification scope and can be skipped on a first
-mathematical pass.
+worked non-MDS application. The short verification section states the exact
+coverage boundary; formal details and measurement identities are in the
+companion documentation.
 
 ## Checks against hidden assumptions
 
@@ -159,7 +159,7 @@ The paper-local Lean companion proves exactly the associated-pair sequence
 ```
 
 Its four reviewer terminals and axiom list are described in
-[`lean/README.md`](lean/README.md), while
+[`verification/README.md`](verification/README.md), while
 [`lean/verification/claims.json`](lean/verification/claims.json) marks the
 RGHW identity, the exact finite theorem and its confinement specializations,
 consequences, and projective family as
@@ -209,5 +209,3 @@ hold eventually for the stated outer families.
   witness probabilities is invalid. All-price equivalence is semantic and
   does not imply efficient probability extraction.
 - The bilinear example certifies the stated linear aggregation protocol.
-  The bandwidth paragraph assumes one-shot centralized repair and disjoint
-  physical-node ownership. Catalog compression is a distinct sequel direction.

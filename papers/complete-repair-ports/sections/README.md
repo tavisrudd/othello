@@ -10,8 +10,8 @@ the theorem dependency order:
 3. `03-positive-density.tex` — the block-functional decomposition and exact
    objectwise and rank-stratified confinement thresholds.
 4. `03a-exact-recovery-optimization.tex` — the ergodis min--sum compiler,
-   exact capacity scheduler, complexity bounds, witnesses, and fair CP-SAT
-   comparison.
+   support and pricing interfaces, complexity bounds, coefficient witnesses,
+   and bilinear task recovery.
 5. `04-reliability-exit.tex` — best-target generalized weights, cooperative
    locality, MDS rigidity, positive-density realization, and service-rate
    transfer.
@@ -21,8 +21,8 @@ the theorem dependency order:
    reliability, and the equality case for the first recovery cost.
 8. `07-verification-provenance.tex` — the exact paper-local Lean coverage and
    the role of finite arithmetic checks.
-9. `08-conclusion.tex` — mathematical synthesis and the distinction from
-   disjoint-packing and bandwidth-aware models.
+9. `08-conclusion.tex` — equation confinement, operational transfer, and
+   the remaining interface-construction question.
 
 The filenames are retained for repository continuity. Their old private nouns
 and former subject headings are not manuscript terminology.

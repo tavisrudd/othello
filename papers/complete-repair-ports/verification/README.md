@@ -52,15 +52,37 @@ Ergodis is developed at [tavisrudd/ergodis](https://github.com/tavisrudd/ergodis
 in the paper, each retained application record and raw sample file by SHA-256,
 and the measured executable, runners, and checking scripts recorded by those
 results. The three application records carry their exact sampling protocols:
-seven paired rounds for the six-application table and three paired rounds for
+seven paired rounds for the six-application benchmark and three paired rounds for
 the longer tower and Hamming-outer comparisons. They include replay details
 and tool versions. These identities distinguish the measured version from the
-later software description; no new timings are asserted by the paper build.
+later software description. Detailed timings and comparisons are retained in
+Ergodis's benchmark documentation rather than the manuscript; no new timings
+are asserted by the paper build.
 
 The same manifest pins the unchanged Lean sources to their published companion
 revision, with content hashes for the toolchain, dependency lock, and expected
 axiom inventory. A source hash identifies an artifact; it is not a new kernel
 execution or an independent verification of a benchmark result.
+
+## Formal companion details
+
+The four reviewer-facing declarations are:
+
+| Exact-sequence assertion | Declaration |
+|---|---|
+| `K_P ≤ D_P` | `helper_ker_le_helperCodeForTargetSpace` |
+| `G_J(D_P) = W_P` | `map_helperCodeForTargetSpace_eq_recoverableTargetMessageSpace` |
+| Surjectivity onto `W_P` | `recoverableTargetMap_surjective` |
+| Restricted kernel equals `K_P` | `mem_ker_recoverableTargetMap_iff` |
+
+The companion uses Lean `4.32.0-rc1` and Mathlib revision
+`571b8a8e54219b4d393f75f4b8653fac08197fcc`. Its recorded axiom audit lists
+only `Classical.choice`, `Quot.sound`, and `propext` for each terminal. These
+are standard logical and quotient principles, not assumptions about codes.
+The module entry points and rebuild instructions are in `lean/README.md`;
+the exact expected inventory is in `lean/verification/expected_axioms.txt`.
+
+## Deterministic manuscript build
 
 Refresh the tracked PDF only through the deterministic path:
 

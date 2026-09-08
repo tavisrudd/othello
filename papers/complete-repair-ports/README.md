@@ -81,8 +81,9 @@ and bounds that certify optimality, and why an interface sufficient for one
 numerical objective may not preserve reliability or later reweightings.
 
 The mathematical optimizer and its enabling interfaces are in the main
-algorithmic section. Detailed measurements and checker contracts are in the
-verification section. `verification/artifact-versions.json` identifies the
+algorithmic section. The short verification section states the trust boundary;
+companion documentation contains the formal details, while Ergodis's benchmark
+records contain the measurements. `verification/artifact-versions.json` identifies the
 software sources and historical measurements by content hash. The Lean
 companion has its own, narrower scope: the associated-pair exact sequence.
 
