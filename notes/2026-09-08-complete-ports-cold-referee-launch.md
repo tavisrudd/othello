@@ -2,7 +2,7 @@
 
 **Lane**: `complete-ports`
 **Date**: 2026-09-08
-**Status**: running; requested directly by the user after C1127 closure.
+**Status**: completed; requested directly by the user after C1127 closure.
 
 Agent `/root/cold_referee_complete_ports` uses `gpt-6-astra` with a fresh context
 (`fork_turns=none`). The instructions withhold previous reviews, revision
@@ -17,7 +17,9 @@ Artifact: `papers/complete-repair-ports`, latest paper-source commit
 `329e77fb6ce1ca5b4acb93592a96a14c9f47cda9b018ab6d6711ea2dbf908167`.
 The parent verified a clean paper worktree and this PDF identity at dispatch.
 
-Expected output: `notes/2026-09-08-complete-ports-cold-referee.md`.
+Completed output: `notes/2026-09-08-complete-ports-cold-referee.md`.
 This bounded early read does not close C953 or displace its remaining aggregate
-audits and C325 prerequisite. The parent will assess and commit the returned
-report separately.
+audits and C325 prerequisite. The parent read the returned report and committed it unchanged. The referee
+recommends acceptance subject to minor revision, with no demonstrated theorem
+error. Findings remain to be assessed and addressed; this record does not
+certify them independently. No manuscript changes were made during the read.

@@ -111,9 +111,11 @@ hierarchy.
 
 ## Active frontiers
 
-A user-requested independent Astra cold read is running on the current artifact;
-launch provenance is in `notes/2026-09-08-complete-ports-cold-referee-launch.md`.
-This is a bounded early review, not completion of C953.
+The user-requested independent Astra cold read is complete; its report is in
+`notes/2026-09-08-complete-ports-cold-referee.md`, with provenance in
+`notes/2026-09-08-complete-ports-cold-referee-launch.md`. Citation/roadmap
+corrections and interface/presentation comments await disposition. This bounded
+early review does not complete C953.
 
 ### C1127: closed referee response
 
