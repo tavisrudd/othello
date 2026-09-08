@@ -116,3 +116,10 @@ is promoted. Remaining mysteries are exactly the existing research gates:
 which collisions actual remaining center maps permit (restricted T), and
 reconstruction-tail invariance (R). Neither the counterexample nor its
 finite checker resolves either gate.
+
+## Export build-path repair
+
+The companion Makefile still referenced a parent-only linter and environment
+path in standalone exports. It now uses an identical public copy of the
+51-line linter and selects the existing manuscript environment in either
+layout. The check target and its acceptance conditions are unchanged.

@@ -1,7 +1,8 @@
 export SOURCE_DATE_EPOCH = 1767225600
 export FORCE_SOURCE_DATE = 1
 
-TEXSHELL ?= nix develop ../../..\#manuscript --command
+MANUSCRIPT_ENV := $(if $(wildcard ../../flake.nix),../..,../../..)
+TEXSHELL ?= nix develop $(MANUSCRIPT_ENV)\#manuscript --command
 LATEXMK ?= $(TEXSHELL) latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 PYTHON ?= nix shell nixpkgs\#python3 -c python3
@@ -15,10 +16,10 @@ all: lint manuscript
 check: lint manuscript warnings
 
 lint:
-	$(PYTHON) ../../../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex
+	$(PYTHON) ../../verification/lint_tex_spacing.py $(SOURCE) sections/*.tex
 
 manuscript: $(SOURCE) sections/*.tex
-	$(PYTHON) ../../../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex
+	$(PYTHON) ../../verification/lint_tex_spacing.py $(SOURCE) sections/*.tex
 	$(LATEXMK) $(LATEXMK_FLAGS) -jobname=$(JOBNAME) $(SOURCE)
 
 warnings: manuscript
