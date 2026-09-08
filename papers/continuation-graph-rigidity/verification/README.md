@@ -1,6 +1,6 @@
 # Verification scope
 
-The stable-range proofs are written mathematics. All 24 statement records are
+The stable-range proofs are written mathematics. All 25 statement records are
 marked `absent` for Lean coverage, including scope remarks and open problems.
 The annotations and claim hashes check source consistency; they do not prove
 mathematics. Dependency edges record the indicated statement-level dependencies,
@@ -108,3 +108,14 @@ The downloaded archive's boundary.json was compared byte-for-byte with the
 current certificate. `evidence.json` pins the archive URL, revision and hashes;
 the witness checker ensures the local census still matches this identity.
 The improved recognizer and manuscript are later changes, not part of that archive.
+
+## Exceptional group structure
+
+`exceptional-groups.json` records right-to-left permutation generators for the
+frame S4 and its commuting complement: C2 at q=5 and S3 at q=8. The existing
+witness checker regenerates the relations, factors and trivial intersections
+and verifies every product permutation on every edge; `--update-groups`
+intentionally regenerates the compact record. `--sage` independently computes
+subgroup orders/intersections with Sage/GAP, and also compares F8 arithmetic.
+The full group upper bounds come from the original census. This supplement is
+a later addition and is not claimed to belong to the original v0.1.0 archive.

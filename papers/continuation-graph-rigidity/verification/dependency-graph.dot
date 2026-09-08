@@ -4,6 +4,11 @@ digraph claims {
   "prop:normal" -> "cor:code-extension" [style=dashed];
   "cor:frame-traces" -> "cor:code-extension" [style=dashed];
   "lem:centre-seeds" -> "cor:code-extension" [style=dashed];
+  "cor:exceptional-groups" [color="gray"];
+  "prop:boundary" -> "cor:exceptional-groups" [style=dashed];
+  "prop:normal" -> "cor:exceptional-groups" [style=dashed];
+  "boundary" -> "cor:exceptional-groups" [style=dotted];
+  "exceptional_groups" -> "cor:exceptional-groups" [style=dotted];
   "cor:frame-traces" [color="gray"];
   "lem:frame-clique" -> "cor:frame-traces" [style=dashed];
   "prop:normal" -> "cor:frame-traces" [style=dashed];

@@ -862,6 +862,28 @@ $O(n^{7/2})$ elementary adjacency and field operations after rejecting
 $n\ne(q-2)(q-3)$. A supplied coordinate certificate can be checked using
 $O(n^2)$ field operations and adjacency tests.
 \end{theorem}
+\begin{center}
+\fbox{\begin{minipage}{0.93\linewidth}
+\textbf{Recognition over a supplied field $\F_q$, $q\ge9$.}
+\begin{enumerate}[leftmargin=*,nosep]
+\item \emph{Input checks.} Require a simple graph on $(q-2)(q-3)$
+vertices, all of degree $4(q-4)$; reject otherwise.
+\item \emph{Recover partitions.} Close four-clique seeds to obtain
+$4(q-2)$ traces of size $q-3$. Close edges of their disjointness graph
+to obtain four classes of size $q-2$. Check the required partitions;
+reject any failure.
+\item \emph{Construct candidates.} Complete the division table; reject
+inconsistencies. Stop at its first cyclic-generator witness and try each
+primitive field image. Discard candidates failing the fourth-partition test.
+\item \emph{Certify acceptance.} Accept a candidate only after checking
+that its coordinates biject onto $\Omega$ and reproduce adjacency for
+\emph{every} pair. Output this certificate; reject if no candidate passes.
+\end{enumerate}
+Steps 1--3 guide reconstruction. The final check certifies acceptance
+without a promise that the input is geometric.
+\end{minipage}}
+\end{center}
+
 \begin{proof}
 \emph{Recover the partitions.}
 First check that the graph is simple and every vertex has degree
@@ -1027,7 +1049,7 @@ so this map fails to preserve the geometric centre classes and is nonambient.
 
 At $q=8$, encode $\F_8=\F_2[a]/(a^3+a+1)$ by binary coefficient
 integers. Number the legal pairs lexicographically from $0$ to $29$.
-The certificate's exceptional representative is the involution
+The certificate's exceptional representative is the involution $\tau$
 \[
 \begin{split}
  &(2\ 21)(3\ 6)(4\ 9)(5\ 29)(7\ 19)(8\ 27)\\
@@ -1039,6 +1061,43 @@ $\{0,1,2,3,4\}$ to $\{0,1,6,9,21\}$, which is not a tangent trace.
 Its images of the four geometric parallel classes give the other
 resolution. Since it is an involution, it exchanges the two resolutions;
 they share no blocks. The bundle checks this permutation on every edge.
+
+\begin{corollary}[Exceptional group types]\label{cor:exceptional-groups}\coverage{absent}\uses{prop:boundary,prop:normal}\evidence{boundary,exceptional_groups}
+For a frame $K$,
+\[
+ \Aut(G_K)\cong
+ \begin{cases}
+ S_4\times C_2,&q=5,\\
+ S_4\times S_3,&q=8.
+ \end{cases}
+\]
+\end{corollary}
+\begin{proof}
+Use the three displayed frame projectivities $s_1,s_2,s_3$; their word
+formulas apply at these orders too. They generate $H\cong S_4$.
+At $q=8$, let $\sigma(x,y)=(x^2,y^2)$ and, composing right to left, put
+\[
+ s=s_2s_3s_2,\qquad z=s\tau.
+\]
+Here $s$ exchanges the second and fourth frame points. Direct permutation
+checks on the thirty indexed vertices give
+\[
+ z^2=1,\qquad zs_i=s_i z\ (i=1,2,3),\qquad
+ z\sigma z=\sigma^{-1}.
+\]
+Since $\sigma$ has order three and $z$ is a nonidentity involution,
+$L=\langle\sigma,z\rangle\cong S_3$. Both generators of $L$ centralize
+$H$, and $H\cap L$ lies in the trivial centre of $H$. Thus
+$HL\cong S_4\times S_3$ has order $144$, the full order in
+Proposition~\ref{prop:boundary}.
+
+At $q=5$, exchanging each vertex of the octahedral graph with its unique
+nonneighbour gives a central involution $\rho$. Since $H$ has trivial
+centre, $\rho$ is outside $H$,
+so $H\langle\rho\rangle\cong S_4\times C_2$ has the full order $48$.
+The permutation certificate checks the displayed relations, $|H|=24$
+and $\rho\notin H$ directly; the group identifications then follow as above.
+\end{proof}
 
 Together with Theorem~\ref{thm:main}, the census proves semilinear rigidity
 for every prime power $q\ge5$ except $q=5,8$. This combined statement has
@@ -1149,6 +1208,12 @@ finite census and deterministic recognition tests. \texttt{make boundary}
 regenerates the census with SageMath; \texttt{make benchmark} records a
 fresh timing sample. The verification README specifies the field models,
 versions, exact domains, relabelling seeds and trusted boundaries.
+
+The supplementary \texttt{verification/exceptional-groups.json} records
+the permutations used in Corollary~\ref{cor:exceptional-groups}.
+The witness checker verifies their relations and subgroup intersections;
+its Sage mode independently checks the subgroup orders using GAP.
+This supplement belongs to the revised bundle, not the original census archive.
 
 The reference recognizer accepts a supplied field with integer-encoded
 elements and supplies prime-field models and explicit models of orders

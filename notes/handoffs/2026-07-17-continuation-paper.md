@@ -21,7 +21,7 @@ reconstruction remains outside the headline under the existing N1-only ruling.
   repository-local commit signing is disabled by author instruction. Report:
   `notes/2026-09-08-c1132-continuation-referee-response.md`.
 
-- The 16-page revised draft is `papers/continuation-graph-rigidity/continuation_graph_rigidity.tex`
+- The 17-page revised draft is `papers/continuation-graph-rigidity/continuation_graph_rigidity.tex`
   and its deterministic PDF. The stable q>=9 proof is written mathematics; the graph
   determines q and every graph isomorphism extends uniquely semilinearly.
 - C1108 reconciled completed C295 with the paper and compared exact hypergraph/cross-ratio
@@ -40,6 +40,9 @@ reconstruction remains outside the headline under the existing N1-only ruling.
   uniform minimality calculations and a continuous frame proof. Authority and
   standalone checks pass; the current standalone revision is `f3c2e6c`. Report:
   `notes/2026-09-08-c1110-continuation-second-referee-revision.md`.
+- C1110 also verified the exceptional groups S4 x C2 (q=5) and S4 x S3
+  (q=8), added their compact certificate and a recognition algorithm box.
+  Report: `notes/2026-09-08-c1110-continuation-exceptional-groups.md`.
 - Earlier C1110 reviews: the exported draft received a fresh-context sub-agent referee review.
   No main-result defect was found; all local findings R1–R5 are now corrected
   and the authority checks pass. The uncited Clebsch aside was removed.
@@ -70,6 +73,8 @@ reconstruction remains outside the headline under the existing N1-only ruling.
   Feedback: `notes/2026-09-07-c1110-continuation-final-reader-polish.md`.
   Qualified external subject review and priority diligence remain distinct from
   the completed sub-agent review and local corrections.
+  At publication, archive the revised manuscript, recognizer and supplemental
+  group certificate together; the original archive remains the census evidence.
   The author handles GitHub and DOI actions. The manuscript now cites the
   verified census artifact, version DOI `10.5281/zenodo.22651106`, with its exact Git revision.
   Concept DOI `10.5281/zenodo.22651105` is verified and linked in the README.

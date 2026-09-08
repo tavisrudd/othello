@@ -263,6 +263,17 @@
       "objects": "Disjointness graph of recovered tangent traces and frame centre classes",
       "statement_sha256": "e2436986f05526369ed67b43158e30d2a71458666c0726e441fd2c36cba9ff5b",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written group-theoretic deduction from exact finite permutation checks and census upper bounds; no Lean formalization claimed.",
+      "conclusion": "S4 x C2 at q=5 and S4 x S3 at q=8",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "Desarguesian four-point frame, q=5 or q=8; finite census and permutation relations",
+      "label": "cor:exceptional-groups",
+      "objects": "Full automorphism groups of frame graphs at q=5 and q=8",
+      "statement_sha256": "8123593a66d6386af9c74ad37b4d6578b8afffb11e0055d1685f1fc312a804ea",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     }
   ],
   "schema": "continuation-claims-v1"

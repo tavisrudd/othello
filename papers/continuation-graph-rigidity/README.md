@@ -80,7 +80,8 @@ An exact finite census settles orders 5, 7 and 8 and cross-checks 9 and 11:
 
 | Field order | Resolutions into four parallel classes | Graph symmetries |
 |---|---:|---|
-| 5, 8 | 2 | The semilinear subgroup has index two |
+| 5 | 2 | Full group `S_4 × C_2`; semilinear subgroup has index two |
+| 8 | 2 | Full group `S_4 × S_3`; semilinear subgroup has index two |
 | 7, 9, 11 | 1 | Every automorphism is semilinear |
 
 A parallel class partitions the graph's vertices into `q−2` cliques of size

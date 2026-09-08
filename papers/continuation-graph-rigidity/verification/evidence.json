@@ -17,6 +17,14 @@
         "nix shell --inputs-from path:. nixpkgs#sage --command sage -python verification/generate_boundary.py --check"
       ],
       "role": "Complete four-pencil resolution census and full graph automorphism orders at q=5,7,8,9,11, with q=13 as a stable-range cross-check; independently replayed, not kernel-checked."
+    },
+    "exceptional_groups": {
+      "checksum_manifest": "verification/SHA256SUMS",
+      "commands": [
+        "python3 verification/check_geometric_witnesses.py",
+        "nix shell --inputs-from path:. nixpkgs#sage --command sage -python verification/check_geometric_witnesses.py --sage"
+      ],
+      "role": "Exact relations and commuting factors for the exceptional groups at q=5,8, with trivial intersections; full upper bounds remain the census."
     }
   },
   "schema": "continuation-evidence-v1"
