@@ -61,3 +61,28 @@ Step 7 of the style-guide revision protocol is complete with a positive
 result. The three specialist items are cheap manuscript edits and are the
 recommended pre-publication revision; the author publication decision remains
 open.
+
+## Edits applied (2026-09-08, commit after this report)
+
+1. `sections/01-trades.tex`: Bravyi–Haah triorthogonality sentence before the
+   Watson–Campbell–Anwar–Browne attribution, naming mixed logical triple
+   products and the coupled phase as the contribution. New reference
+   `bravyihaah` (Phys. Rev. A 86, 052329; arXiv:1209.2426). Read depth:
+   Definition 1 read at full text in the published article; a classical source
+   already used by the audit's N1 predecessors, no absence claim attached.
+2. `sections/03-factory.tex`, Lemma `lem:waring`: the span step now says a
+   nonzero common zero of all forms would have Hessian rank zero, against the
+   census entry `N_0 = 1` (both conic tables display it).
+3. `sections/01-trades.tex` and `sections/05-evidence.tex`: Appendix A no
+   longer promises the matrices; it names `supplement/reconstruction/common.py`
+   for the signed evaluation matrices, sheet signs and raw cubics, and
+   `verification/shadow-certificate.json` for the augmentation embedding,
+   conference matrix, both chordal representatives and the involution.
+4. `sections/03-factory.tex`, §3.1: costs count raw magic inputs only; ideal
+   operations are not priced.
+
+Build: 13 pages, all local checks green. The factory certificate pins the
+section's hash, so `supplement/factory/SHA256SUMS` and its entry in
+`verification/input-hashes.json` were refreshed; `certificate.json` is
+byte-identical. Exporter audit from HEAD: zero findings. `sync` refused: the
+standalone repository has no `origin` remote.

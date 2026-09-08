@@ -32,8 +32,14 @@ specialist (8 vs 7) and the adjacent reader (7 vs 5) chose the revised draft;
 cheap edits before acceptance (supplement locator for the finite evidence and an
 accurate Appendix A pointer; the `N_0 = 1` full-span step in Lemma 3.1; one
 Bravyi–Haah positioning sentence) plus a "raw states only" cost caveat in §3.1.
-Next: apply those edits, rebuild, forward-commit the standalone repository, then the
-author publication decision. No publication or mirror synchronization has occurred.
+Those four edits are applied and built (13 pages, all paper checks green; the
+factory certificate pin and `input-hashes.json` entry were refreshed for the edited
+section, certificate content unchanged). Exporter audit from HEAD has zero findings;
+`sync` refuses because `~/src/math-papers/clebsch-cubic-phase` has no `origin` remote
+(the exporter requires `github.com/tavisrudd/clebsch-cubic-phase`), so the standalone
+still holds the pre-edit export `5ab613c`. Next: author decides whether to create the
+GitHub repository and set the remote, then sync; then the publication decision.
+No publication or mirror synchronization has occurred.
 
 ## Read first (in this order, nothing else)
 
