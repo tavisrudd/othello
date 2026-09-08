@@ -4796,8 +4796,17 @@
       "last": 1129,
       "purpose": "Dynamic loaded domain workspaces with explicit snapshot and runnable WASM contexts",
       "sequence": 533
+    },
+    {
+      "count": 1,
+      "first": 1130,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1130,
+      "purpose": "Close all Ergodis WASM capability gaps with shared contracts and native performance preservation",
+      "sequence": 534
     }
   ],
-  "next_id": 1130,
+  "next_id": 1131,
   "schema": "codex-task-id-allocations-v1"
 }
