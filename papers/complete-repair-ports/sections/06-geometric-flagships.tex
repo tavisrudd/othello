@@ -4,7 +4,9 @@
 This non-MDS family realizes the paper's information hierarchy in one model.
 Its relative weights determine the minimum costs, its ambient inner dual gives
 the collapsed confinement thresholds, and the full projective rank distribution
-determines reliability.  Thus the family shows both what the RGHW hierarchy
+determines the probability that some $t$-dimensional target space remains
+recoverable.  This allows the target space to depend on the surviving helpers,
+unlike recovery of a prescribed $T$.  Thus the family shows both what the RGHW hierarchy
 captures and what it forgets.
 Assume $m\geq2$, put
 \[
@@ -193,7 +195,18 @@ its span and then its unordered projective bases gives $B_{m,m-t+1}$.
 \proves{thm:projective-reliability}%
 \end{proof}
 
-At the same helper length, attaining first recovery cost $q^{m-1}$
+For an $m$-dimensional helper code $D\leq\F_q^N$ with lower code
+$K=0$ and $N=(q^m-1)/(q-1)$, the equality $M_1(D,0)=q^{m-1}$
 characterizes the projective-simplex column multiset up to scaling and
-permutation.  This is the length-$N$, multiplicity-one specialization of
+permutation.  Averaging weights over the nonzero codewords gives at most
+$Nq^{m-1}(q-1)/(q^m-1)=q^{m-1}$, with strict inequality if a column is
+zero.  Thus equality of the minimum forces every column to be nonzero and
+every nonzero word to have weight $q^{m-1}$.  For $m\geq2$, every
+projective hyperplane consequently contains the same column multiplicity.
+Summing these multiplicities over the hyperplanes through a fixed point
+shows that its multiplicity is constant: that point lies in
+$(q^{m-1}-1)/(q-1)$ such hyperplanes and each other point in
+$(q^{m-2}-1)/(q-1)$.  Their difference is $q^{m-2}$.
+The total multiplicity is $N$, so each of the $N$ points occurs once.
+The case $m=1$ is immediate.  This is also the multiplicity-one case of
 Bonisoli's classification of linear equidistant codes~\cite{Bonisoli1984}.

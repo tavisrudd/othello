@@ -7,10 +7,10 @@
     text width=30mm, inner sep=4pt, font=\small},
   flow/.style={->, semithick},
 ]
-  \node[box, fill=blue!8] (input) {finite source model\\target and contexts\\supports and resources};
-  \node[box, fill=green!9, right=of input] (compile) {admitted state\\labels, spans, classes\\support choices\\symmetry and loads};
-  \node[box, fill=orange!10, right=of compile] (solve) {exact engines\\composition and search\\pricing and scheduling\\admitted updates};
-  \node[box, fill=violet!9, right=of solve] (output) {answer and evidence\\coefficient witnesses\\bounds and separators\\scoped verification};
+  \node[box, fill=blue!8] (input) {recovery problem\\code and target\\helper budget};
+  \node[box, fill=green!9, right=of input] (compile) {compiled choices\\functional labels\\helper supports\\coefficient lifts};
+  \node[box, fill=orange!10, right=of compile] (solve) {repair selection\\failures and prices\\shared capacities\\composition and search};
+  \node[box, fill=violet!9, right=of solve] (output) {executable decision\\physical helpers\\coefficients\\optimality evidence};
   \draw[flow] (input) -- (compile);
   \draw[flow] (compile) -- (solve);
   \draw[flow] (solve) -- (output);

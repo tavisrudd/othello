@@ -9,7 +9,7 @@
   \node[box, fill=gray!10] (full) at (0,0)
     {recovery equations\\coefficients, supports,\\and induced block functionals};
   \node[box, fill=blue!8] (labels) at (-3.2,-1.65)
-    {minimum support cost\\for each induced functional};
+    {minimum support cost\\for each induced functional;\\nonzero-kernel cost $d(I^\perp)$};
   \node[box, fill=green!9] (supports) at (3.2,-1.65)
     {exact helper-support families\\with their overlap pattern};
   \node[box, fill=orange!10] (compose) at (-3.2,-3.30)
@@ -28,7 +28,8 @@
 \end{tikzpicture}
 \caption{Two projections of coefficient-labelled recovery equations answer
 different questions.  On the left, minimizing within each induced-functional
-class gives the labelled costs used for exact numerical composition; a solver
+class gives the labelled costs used for exact numerical composition.
+Nonconfinement also needs the separately retained nonzero-kernel cost; a solver
 must also retain a minimizing equation to propagate coefficient witnesses.  Exact support families
 retain the overlaps needed for stochastic and fractional recovery questions.  Relative
 weights are the common minimum-cost projection (dashed arrows), complete for

@@ -72,26 +72,19 @@ compiler and exact solver for finite algebraic optimization. Its source and
 software license are maintained in that repository; the paper does not bundle
 the engine.
 
-The September 2026 development system includes labelled recovery composition
-and witness expansion; compressed support families; Pareto scheduling and
-Lagrangian bounds; finite observational minimization and admission of new
-readouts; algebraic and symmetry-based search, including bounded CSS distance;
-and portable campaign and saved-run interfaces for native and browser hosts.
-Release snapshots may expose a smaller surface. The repository's `DESIGN.md`,
-`OPTIMIZATION.md`, and interface documentation describe the implemented scope.
+Ergodis makes the paper's retained information executable. Functional labels
+permit exact composition through code towers, and stored lifts return repair
+coefficients on the original helpers. Compressed support families and resource
+alternatives permit failures, prices, and capacities to select among repairs.
+The manuscript explains how these data connect to scheduling, repeated queries,
+and bounds that certify optimality, and why an interface sufficient for one
+numerical objective may not preserve reliability or later reweightings.
 
-Independent verification has explicit contracts. `ergodis-verify` checks a
-bounded binary-composition restriction and, separately, authenticated min-plus
-summary transitions. Those checks do not establish every source lowering or
-every solver answer's optimality. A stored witness proves feasibility; a
-matching validated lower or dual bound is needed for an optimum certificate.
-The paper's Lean companion remains a separate artifact with narrower coverage.
-
-The manuscript retains the earlier recovery benchmark snapshot as bounded
-historical measurements. It does not extend those speedups to the expanded
-system. The empirical question is which interface widths, target ranks, block
-types, resource frontiers, and reuse patterns make compilation worthwhile,
-including compilation, query, witness, and verification costs.
+The mathematical optimizer and its enabling interfaces are in the main
+algorithmic section. Detailed measurements and checker contracts are in the
+verification section. `verification/artifact-versions.json` identifies the
+software sources and historical measurements by content hash. The Lean
+companion has its own, narrower scope: the associated-pair exact sequence.
 
 ## Main consequences
 

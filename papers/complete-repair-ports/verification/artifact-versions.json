@@ -1,0 +1,181 @@
+{
+  "ergodis": {
+    "described_sources": [
+      {
+        "bytes": 32869,
+        "path": "README.md",
+        "sha256": "178a575cac9fe66a4abc095665412c7ef9a21660ee202319a8e0e98efafe7fbf"
+      },
+      {
+        "bytes": 5688,
+        "path": "DESIGN.md",
+        "sha256": "b15c35f1664c3d659e795dcdebcf42316c9ce7509cc9037702156a3211c80344"
+      },
+      {
+        "bytes": 22530,
+        "path": "OPTIMIZATION.md",
+        "sha256": "3434f34bdfbfbd59ed0319201ef67da70e160581ec62513b92626678205d01ec"
+      },
+      {
+        "bytes": 60631,
+        "path": "src/composition.rs",
+        "sha256": "1e43bd74f395e9feeeb7eea0f9d53b6ccbceae70ed9d1f25b929c42e43f97185"
+      },
+      {
+        "bytes": 87039,
+        "path": "src/contextual.rs",
+        "sha256": "2982c2bf6761fd23a50850265f8771a1564225a81f54485020e65ddb87ab1d3b"
+      },
+      {
+        "bytes": 141968,
+        "path": "src/scheduler.rs",
+        "sha256": "be5ffdc3f84a067ec5b00928dd15cd89786c25cc1e454dbd1232763a9279a573"
+      },
+      {
+        "bytes": 31222,
+        "path": "src/scheduler_bound.rs",
+        "sha256": "4c13a7558f84f0dba36e1c5bb7fe2e2d9e48396f5ff231a077fb5150af68c64f"
+      },
+      {
+        "bytes": 1075,
+        "path": "crates/verify/src/lib.rs",
+        "sha256": "95aa934bdc9c1a86ba337c2c031bdb6d31ce417964e5464e890805e636af6718"
+      },
+      {
+        "bytes": 13923,
+        "path": "crates/verify/src/binary_composition.rs",
+        "sha256": "56055e28b7d0d4bd1a70cbc11e793ce97c64b572d20dfcea7ee955a670aee355"
+      }
+    ],
+    "description_date": "2026-09-07",
+    "identity_method": "SHA-256 of the listed source and evidence file bytes; measured binary and runner identities are recorded separately in each evidence record.",
+    "measurements": [
+      {
+        "bytes": 34523,
+        "measured_artifacts": {
+          "bench_kernels_source_sha256": "282abf26932c12c7a33df42d12476fbc6c0f1a83c00b5e295538368e999f837e",
+          "benchmark_python_sha256": "7b8f9e289c2d01bf0c9d2311cf2f9e0a7b2ed50cdd9b54f888b4a2d71b7d2813",
+          "checker_sha256": "fe30fa20d41e8c900c20f6c47a7259fe0bef0e3bf98ac82d33719fbc260c38f3",
+          "ergodis_sha256": "254dd3a3c2d490a41168488f101079fa6a1cd09f615a9175e1f3acc54809dae6",
+          "raw_jsonl_sha256": "14622b6522a24c84321e14c8f551ac2e02d0d09dbc420197e942f8b4a8032d87",
+          "runner_sha256": "1a82bbced885ca54fb1475add225f15e6a5aacd9ed0efb3d9074914d41b0cc39"
+        },
+        "path": "evidence/application-readme-ab.json",
+        "protocol": {
+          "cpu": 3,
+          "dependency_setup_excluded": true,
+          "fresh_process_per_sample": true,
+          "metric": "external wall time including implementation startup",
+          "profiles": {
+            "cold": 1,
+            "warm_batch": 8
+          },
+          "rotated_interleave": true,
+          "rounds": 7,
+          "timeout_policy": "report timeout/Ergodis-median lower bound",
+          "timeout_s": 10.0
+        },
+        "raw_samples": {
+          "bytes": 185604,
+          "path": "evidence/application-readme-ab.raw.jsonl",
+          "sha256": "14622b6522a24c84321e14c8f551ac2e02d0d09dbc420197e942f8b4a8032d87"
+        },
+        "sha256": "1b780b30b463a58bb463517e00734866a12eb332681feaaacb97ac67e0bf95a1"
+      },
+      {
+        "bytes": 9778,
+        "measured_artifacts": {
+          "benchmark_python_sha256": "7b8f9e289c2d01bf0c9d2311cf2f9e0a7b2ed50cdd9b54f888b4a2d71b7d2813",
+          "checker_sha256": "d2aa92e21e841f1f90fde6ce4c2347085a867ff74d607011ae79491b4cdfa60f",
+          "ergodis_sha256": "254dd3a3c2d490a41168488f101079fa6a1cd09f615a9175e1f3acc54809dae6",
+          "raw_jsonl_sha256": "381e6bead6f0cd8c7bc81a891153c1fd4c3dfdd749f080bf47c8f18a55c0fe8f",
+          "runner_sha256": "06d0d3c5585039c5e4d780b8ccaf7b24596437f281d57aafef94849c0460b0c7"
+        },
+        "path": "evidence/application-long-cold.json",
+        "protocol": {
+          "cpu": 3,
+          "fresh_process_per_sample": true,
+          "metric": "external wall time including implementation startup",
+          "profile": "cold",
+          "repetitions_per_process": 1,
+          "rotated_interleave": true,
+          "rounds": 3,
+          "timeout_s": 400.0
+        },
+        "raw_samples": {
+          "bytes": 9096,
+          "path": "evidence/application-long-cold.raw.jsonl",
+          "sha256": "381e6bead6f0cd8c7bc81a891153c1fd4c3dfdd749f080bf47c8f18a55c0fe8f"
+        },
+        "sha256": "f86fd6ba06d6caec811c2945a9c3744b50585f1c8033a687df6391f055f56745"
+      },
+      {
+        "bytes": 9464,
+        "measured_artifacts": {
+          "benchmark_python_sha256": "7b8f9e289c2d01bf0c9d2311cf2f9e0a7b2ed50cdd9b54f888b4a2d71b7d2813",
+          "checker_sha256": "d2aa92e21e841f1f90fde6ce4c2347085a867ff74d607011ae79491b4cdfa60f",
+          "ergodis_sha256": "254dd3a3c2d490a41168488f101079fa6a1cd09f615a9175e1f3acc54809dae6",
+          "raw_jsonl_sha256": "3b1bd1234ffece2703a0ddb76cdafeffb5dfb1066e238a69e137dc22268be3fb",
+          "runner_sha256": "06d0d3c5585039c5e4d780b8ccaf7b24596437f281d57aafef94849c0460b0c7"
+        },
+        "path": "evidence/application-long-warm.json",
+        "protocol": {
+          "cpu": 3,
+          "fresh_process_per_sample": true,
+          "metric": "external wall time including implementation startup",
+          "profile": "warm_batch",
+          "repetitions_per_process": 8,
+          "rotated_interleave": true,
+          "rounds": 3,
+          "timeout_s": 400.0
+        },
+        "raw_samples": {
+          "bytes": 8162,
+          "path": "evidence/application-long-warm.raw.jsonl",
+          "sha256": "3b1bd1234ffece2703a0ddb76cdafeffb5dfb1066e238a69e137dc22268be3fb"
+        },
+        "sha256": "3120be53d07e18a6a5748994ac0e26aca90870a017fc4b7ac0d98cfdfdb3c71d"
+      }
+    ],
+    "repository": "https://github.com/tavisrudd/ergodis"
+  },
+  "lean": {
+    "audit_boundary": "AxiomAudit.lean specifies the audit; expected_axioms.txt records its expected inventory. These content identities do not record a new Lean execution.",
+    "coverage": "Associated nested code pair exact sequence; four reviewer terminals.",
+    "files": [
+      {
+        "bytes": 3976,
+        "path": "lean/TavisRuddFiniteGeom/Papers/RecoveryStructures/AssociatedNestedCodePair.lean",
+        "sha256": "e365999c935bbf355dd691cf4df056f56b137795b6dc274063309b75becc907a"
+      },
+      {
+        "bytes": 342,
+        "path": "lean/TavisRuddFiniteGeom/Papers/RecoveryStructures/PaperInterface.lean",
+        "sha256": "0b6ef824e49537b786b4974cc953c398e24e43c6db1671a27ac4ad018abe1e92"
+      },
+      {
+        "bytes": 687,
+        "path": "lean/TavisRuddFiniteGeom/Papers/RecoveryStructures/Verification/AxiomAudit.lean",
+        "sha256": "05c5c62dfc1afec7117e250100dd0039d1b8c70671b06d11f98d63cae81ae797"
+      },
+      {
+        "bytes": 29,
+        "path": "lean/lean-toolchain",
+        "sha256": "72681913b978b3f7c2f48229836771f736f6e97d833917726b2263afbc6108ed"
+      },
+      {
+        "bytes": 3169,
+        "path": "lean/lake-manifest.json",
+        "sha256": "357b0a5c3ca651b30872e46aaf9341f0ec4590d65831bee5767784a673125e1b"
+      },
+      {
+        "bytes": 506,
+        "path": "lean/verification/expected_axioms.txt",
+        "sha256": "92a68be3753c08371018fe125ea31033e247052c1381d441e889447db58bbbac"
+      }
+    ],
+    "repository": "https://github.com/tavisrudd/compositional-recovery",
+    "source_revision": "2d90a8b9cbb8721ea984fcd0684589096d40f5fe"
+  },
+  "schema": "recovery-paper-artifact-identities-v1"
+}

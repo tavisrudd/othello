@@ -8,8 +8,8 @@ used to stand in for the relative-weight or concatenation proofs.
 
 ## A first pass
 
-Read the abstract, the information-hierarchy figure, `thm:main`, and the operational transfer
-discussion following it in [`compositional_recovery.tex`](compositional_recovery.tex).
+Read the abstract, the explicit two-sector formula and `thm:main`, the operational
+transfer discussion, and the information-hierarchy figure following them in [`compositional_recovery.tex`](compositional_recovery.tex).
 Then read the exact sequence, `prop:puncture-shorten-pair`, and
 `thm:relative-weight-recovery` in
 [`sections/02-confinement-transfer.tex`](sections/02-confinement-transfer.tex),
@@ -18,13 +18,13 @@ example, `prop:prescribed-coset-composition`, and `cor:all-rank-bottleneck` in
 [`sections/03-positive-density.tex`](sections/03-positive-density.tex). Then
 read its specializations under outer-distance conditions, `thm:objectwise-confinement` and
 `thm:ranked-confinement`. These statements give the exact finite criterion,
-its closure law, and its scalar collapse. The next section gives the two sharp
-information-loss results. Read `thm:minimal-support-confinement` separately:
+its closure law, and its scalar collapse. The separation section gives the two sharp information-loss results. Read `thm:minimal-support-confinement` separately:
 it excludes only target-touching checks and needs no inner additive bound.
 The quotient-lifting theorem in `sections/02-confinement-transfer.tex` and the
 pricing/availability and boundary-width propositions in the optimizer section
-provide the operational extension. The Ergodis overview describes a separately
-developed system with explicitly scoped verification contracts.
+provide the operational extension. The Ergodis discussion explains how the mathematical interfaces enable witnessed
+repairs, scheduling, and reuse under failures and prices. Measurements and checker
+contracts are secondary material in the verification section.
 
 ## Checks against hidden assumptions
 

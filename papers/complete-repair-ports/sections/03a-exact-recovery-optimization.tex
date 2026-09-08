@@ -1,67 +1,27 @@
 \section{Exact recovery optimization}
 \label{sec:exact-recovery-optimization}
 
-The closure law in Theorem~\ref{prop:prescribed-coset-composition} supplies an
-exact compiler state: its coordinates are the intermediate functionals that
-scalar summaries discard.  ergodis (Exact Recovery, Global Optimization, and
-Invariant Synthesis) has developed into a compiler and exact solver for
-finite algebraic optimization, with recovery as one application.  Its
-standalone repository is
-\href{https://github.com/tavisrudd/ergodis}{\texttt{tavisrudd/ergodis}};
-the software is developed and distributed separately from this manuscript.
-Numerical tables store fibrewise minima; predecessor labels and minimizing
-lifts reconstruct coefficient-level witnesses.
-Throughout this section, the algebraic cost counts participating scalar helper
-coordinates.  Repair bandwidth, subpacketization, and physical data movement
-are separate downstream objectives.
+The labelled composition law makes an exact local calculation reusable inside
+larger recovery problems.  Ergodis (Exact Recovery, Global Optimization, and
+Invariant Synthesis) embodies this construction: it retains the intermediate
+functionals needed to compose choices and the lifts needed to execute them.
+Its recovery interfaces connect three operations.  A compiled table answers
+prescribed-functional queries; retained support alternatives allow failures,
+helper prices, and capacity constraints to select different repairs; stored
+coefficients reconstruct the selected repair in the original code.
+The system is developed at
+\href{https://github.com/tavisrudd/ergodis}{\texttt{tavisrudd/ergodis}}.
+
+These operations require different mathematical data.  A minimum in each
+functional fibre suffices for the min--sum recursion.  Repricing needs the
+alternatives discarded by that minimum, and reliability needs their physical
+support overlaps.  The results below specify these distinctions, give a
+fixed-query width bound, and show how a bilinear worker task becomes a
+recovery query.  They explain what can be compiled and reused without making
+the correctness of the mathematics depend on a software execution.
+The cost here counts participating scalar helper coordinates.
 
 \input{figures/ergodis-pipeline}
-
-\paragraph{Implemented interfaces.}
-The development system examined in September 2026 includes the following
-layers.  Their contracts are documented in the software's optimization guide,
-architecture document, and interface-specific documentation; release snapshots
-can contain a smaller surface.
-\begin{itemize}[leftmargin=*,itemsep=2pt]
-\item Labelled composition and generated-span kernels support scalar and
-simultaneous recovery, compressed support families, and capacity-aware
-scheduling.  Pareto load search is complemented by Lagrangian bounds and
-branch-and-bound; an exact primal assignment and a matching rounded dual
-bound certify the number of repaired demands when that bound closes.
-\item Finite typed deterministic presentations admit observational
-minimization and replayable distinguishing contexts.  A separate readout
-admission operation checks whether a new observation is constant on each
-retained class, returning a concrete conflicting pair when it is not.
-This explicit-carrier path does not establish a construction bound for
-implicit presentations.
-\item Coordinate-orbit covers, invariant linear blocks, and connected-support
-CSS-distance search expose algebraic structure before residual search.
-Orbit coverage still requires the application to establish invariance of
-feasibility and of the current query's objective.  Changed failures or prices
-can reduce the admissible symmetry group.
-\item Portable campaign control, native and browser execution surfaces,
-and saved-run records support proposing, checking, executing, inspecting,
-and forking bounded investigations.  Candidate generation and persistence
-are separate from mathematical admission and the solver's hot loops.
-\end{itemize}
-
-\paragraph{Verification contracts.}
-The independent \texttt{ergodis-verify} crate has no optimizer dependency.
-Its bounded binary-composition checker establishes a specified
-necessary-coordinate restriction by direct finite checking.  Its separate
-min-plus transition checker authenticates supplied four-by-four summaries
-against a retained tree, with linear storage and logarithmic update work.
-The latter uses explicitly bounded saturating arithmetic.  It certifies
-summary composition and replacements, not the lowering of a source model
-or domain optimality.  Saved evidence must be checked under its declared
-contract; storing or reopening a record supplies no mathematical authority.
-These executable checkers are distinct from the paper's Lean formalization.
-
-The theory below isolates the recovery interfaces underlying this broader
-system.  In particular, witness reconstruction, numerical quotient
-minimization, preservation under all prices, and event-correct reliability
-are different requirements.  A capability of one engine does not establish
-all four for every adapter.
 
 We first state the algorithm in flattened $\F_q$-linear coordinates.  Let
 $T$ have dimension $t$, let the outer message space have dimension $m$, and
@@ -128,9 +88,11 @@ factors through the $L$-span generated by its image, whose dimension is at
 most $t$.  An exact search may therefore cache that generated span and discard
 states of larger dimension without losing an optimum or witness.
 
-The resulting table supplies all exact helper costs needed by the finite
-confinement formula, including its zero and nonzero outer-functional sectors.
-It can therefore emit a replayable recovery witness when a threshold fails,
+The resulting fibre tables, together with the separately propagated
+nonzero-kernel cost in~\eqref{eq:dual-distance-composition}, supply the
+finite confinement formula.  The latter cost is needed for a nonzero
+external lift of the zero functional; the ordinary zero-label minimum is zero.
+The optimizer can therefore emit a replayable recovery witness when a threshold fails,
 or a complete exhausted-state certificate when the requested label is
 unreachable.  Iterating the compiler through a tower preserves the
 intermediate labels required at the next level; collapsing each table to one
@@ -321,122 +283,42 @@ presentation can be used when it supplies this identification.  For repeated
 inputs or polynomial tasks, the space must be the actual function space;
 formal monomials need not be independent over a finite field.
 
-\subsection{Measured performance and solver choice}
+\subsection{From a compiled choice to a repair decision}
 
-The measurements below are the previously recorded recovery benchmark
-snapshot, not a measurement of every current engine.  They assess engineering reach and the
-point at which a general solver becomes preferable; they are not mathematical evidence or the
-principal contribution of the software.  The structural comparison is how
-interface width, target rank, field size, distinct block types, frontier size,
-and query reuse affect total cost.  Compilation, repeated queries, witness
-expansion, and verification must be charged separately; a fast retained-state
-query does not imply a fast construction of that state.
+For a single request, the optimizer returns both the least helper cost and
+coefficients that recover the requested combinations.  In a tower, the
+intermediate labels ensure that the chosen child repairs agree with the
+parent equation; backtracking then expands the answer to physical helpers.
+This is the executable content of the fibre decomposition, and it is why a
+scalar locality parameter cannot serve as the compiler's input at the next
+level.
 
-The specialized dynamic programs are most useful when compilation exposes a
-small algebraic state space.  They are not replacements for a general
-constraint solver when the residual model contains unrelated side
-constraints.  The appropriate deployment rule is therefore:
-\[
- \text{algebraic compilation}
- \longrightarrow
- \begin{cases}
-   \text{specialized exact DP},&\text{when the compiled state is sufficient},\\
-   \text{CP-SAT},&\text{for the remaining general constraints}.
- \end{cases}
-\]
-CP-SAT combines constraint programming, satisfiability, and linear-relaxation
-methods~\cite{PerronEtAl2023}; it is therefore an appropriate end-to-end
-baseline.  A second,
-\emph{structured CP-SAT} baseline receives the same symmetry reduction and
-algebraic preprocessing as ergodis, isolating the value of the specialized
-state engine from the value of compilation itself.
+For a workload, the question changes from the size of one repair to which
+repairs can coexist.  Ergodis retains compressed support families and
+resource-load alternatives for capacity-aware scheduling.  Pareto search and
+Lagrangian bounds use those alternatives to compare assignments under shared
+capacities.  The price formulation above explains a further integration:
+compositional pricing can supply a missing repair together with its
+coefficients, and exact pricing can establish that the fractional scheduler
+has omitted no improving option.  This implication requires an oracle for
+the full admitted family; supplying a list of options to a scheduler alone
+does not establish it.
 
-\paragraph{Measurement protocol.}
-The measurements were made on an AMD Ryzen AI 9 HX 370 under Linux.  Each
-paired program used the same selected logical CPU, and their order was rotated
-to limit ambient-load bias.  Elapsed times are monotonic in-process times and
-include construction of the compiled state or control model.  The application
-controls use eleven rounds and the Rust kernels seven; reported values are
-medians of the raw samples.  The only exceptions are explicitly identified
-single completed deterministic solves.  Peak memory is the process high-water
-resident set size.  Exact versions, checksums, raw samples, and replay commands
-are recorded in \texttt{evidence/benchmarks.json} of the ergodis repository
-(\url{https://github.com/tavisrudd/ergodis}).
+Failures restrict the feasible choices, while congestion changes their
+valuation.  Keeping a feasibility representation permits both changes to be
+answered without redefining the code or its functional labels.  The
+ancestor-update bound above explains the benefit when a changed leaf affects
+only a small part of a composition tree.  Ergodis also implements finite
+observational minimization and checks whether an additional readout is
+constant on the retained classes.  This makes the choice of observable
+explicit: a quotient sufficient for an old numerical query may need refinement
+before it can answer a new price or availability query.
 
-The cloud-LRC scheduling kernel in Table~\ref{tab:ergodis-applications}
-operates on the exact six-type quotient of the
-$100{,}000$ demands and is timed in a repeated inner loop; its displayed
-``$<1\,\mu$s'' value is therefore an amortized solve time for the
-preaggregated six-type instance, not a claim about parsing $100{,}000$ input records.  We use
-only the conservative ratio implied by that displayed upper bound.
-
-\paragraph{Compiler versus residual engine.}
-The benchmark suite separates the algebraic compiler from the residual state
-engine.  On four exact capacitated-scheduling profiles, ergodis was
-$2.5$--$377$ times faster than direct CP-SAT and $2.5$--$373$ times faster than
-structured CP-SAT receiving the same safe preprocessing.  The represented
-tower benchmark isolates the composition theorem: at depth six and fanout
-four, ergodis expands an exact coefficient witness over $4096$ leaves in a
-$4.559$ ms cold-process median.  Direct CP-SAT exceeded $400$ s in each of
-three paired rounds, giving a speedup greater than $87{,}743$; for equal
-eight-solve batches the bound is greater than $45{,}103$.  The labelled-table
-control has not been rerun under this corrected protocol.
-
-The same compilation pattern has been tested through six bundled application
-examples.  These are separate matched comparisons, not a ranking of unlike
-tasks.  Each row below states the question and the exact output checked against
-its formulation-specific open-source control.  The cold-process gaps range
-from $34$-fold to $190$-fold.
-The comparisons do not include commercial solvers or claim a universal
-ranking.
-
-\begin{table}[H]
-\centering
-\scriptsize
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{@{}llllrr@{}}
-\toprule
-example & question/output checked & bounded instance & exact control & cold faster & warm faster\\
-\midrule
-recursive XOR & complete minimal-support family & $8$ diamonds, $256$ supports & Graphillion ZDD~\cite{InoueEtAl2016} & $33.71\times$ & $22.94\times$\\
-cloud LRC & maximum served count and loads & $100{,}000$ demands, six types & HiGHS integer model & $160.45\times$ & $160.21\times$\\
-repair DAG & optimal makespan and schedule & $3\times21$ tasks & CP-SAT intervals & $167.12\times$ & $275.15\times$\\
-QC-LDPC & absence of a weight-four word & lift $50{,}000$ & CryptoMiniSat XOR & $190.45\times$ & $39.72\times$\\
-vector repair & minimum nodes and spanning set & $64$ nodes, $2$ symbols/node & CryptoMiniSat XOR & $75.72\times$ & $64.90\times$\\
-GPU MDS & feasible flow and helper assignment & $10{,}000$ shards, $64$ failures & OR-Tools max-flow & $102.42\times$ & $103.23\times$\\
-\bottomrule
-\end{tabular}
-}
-\caption{Six separate exact comparisons under the corrected process-symmetric
-protocol.  Cold runs perform one solve per fresh process; warm runs perform
-eight solves on both sides and normalize external wall time per solve.  ZDD means zero-suppressed decision
-diagram; LRC means locally repairable code; DAG means directed acyclic graph;
-QC-LDPC means quasi-cyclic low-density parity-check code; MDS means
-maximum-distance-separable code.  Ratios use unrounded paired samples.}
-\label{tab:ergodis-applications}
-\end{table}
-
-\input{figures/ergodis-benchmark-highlights}
-
-As a code-native check, ergodis also analyzes Jin and Fu's published
-$\F_4$ Hamming-outer family~\cite[Corollary~5.4]{JinFu2026}.  For its binary
-$[4095,2718,6;2]$ LRC, all backends obtain the same exact confinement cost.
-Three corrected cold-process pairs give a $442.573$ ms ergodis median and a
-$270.939$ s direct-CP-SAT median.  The paired speedup is $657.88$ with
-log-ratio $t=49.09$.  Each equal eight-solve direct-CP-SAT batch exceeded
-$400$ s, giving a separate warm speedup greater than $196.50$.  The
-labelled-table model has not been rerun under this protocol.  Exact
-inputs, outputs, tool versions, peak memory,
-replay commands, and raw timing samples are in the corrected application evidence
-under \texttt{evidence/} and in \texttt{BENCHMARKS.md} of the ergodis repository.
-
-General-purpose constraint solvers have also been used to construct binary
-codes~\cite{KochemazovEtAl2026}, and repair dependency graphs and scheduling
-predate this work~\cite{LinEtAl2021RepairBoost}.  The contribution here is the
-structure-aware compilation of linear-recovery fibres, with exact witnesses,
-before a specialized dynamic program or a residual solver is invoked.
-
-The optimizer changes no mathematical hypothesis: it evaluates the labelled
-state proved sufficient above.  We now return to consequences of the collapsed
-RGHW threshold, beginning with ordinary generalized weights and extremal inner
-codes.
+Finally, reconstruction and optimality have separate mathematical roles.
+Replaying coefficients establishes that a selected repair works.  A matching
+dual bound, checked transition potentials, or complete exclusion argument
+establishes that a cheaper admissible choice was not missed.  Ergodis's
+independent checkers implement specified finite composition and transition
+contracts; the relation between a source recovery problem and the checked
+presentation must also be justified.  Section~\ref{sec:verification} records
+these evidence boundaries and the retained measurements.

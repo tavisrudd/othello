@@ -62,141 +62,75 @@ local marginal, fractional service regions, and integral support allocations.
 A general quotient-labelled lifting theorem composes prescribed operations
 in nested code pairs.  Support antichains preserve resource alternatives;
 all nonnegative price queries contain exactly the same information as the
-availability function.  Boundary coordinates give fixed-query complexity
-bounds, and bilinear worker tasks supply a worked extension.
-The bounded numerical contextual quotient remains a coarser observation
-contract.  Ergodis implements related compilation, optimization, and
-verification interfaces; no proof depends on its execution.
+availability function.  Ergodis embodies these distinctions in witnessed recovery optimization,
+capacity sharing, and reuse under failures and prices.  The mathematical
+statements have human proofs independent of software execution.
 \end{abstract}
 
 \section{Introduction}
 
-Which recovery information survives concatenation?  A scalar locality or
-confinement threshold does not: the outer code can force an intermediate
-functional whose cost was discarded when the scalar minimum was taken.  The
-problem is therefore compositional.  We seek finite interfaces that compile recovery choices through successive
-concatenations while preserving the distinctions a specified objective observes.
+A recovery equation expresses a target combination as a linear combination
+of helper symbols.  Its cost is the number of distinct helpers used.
+Under concatenation, the outer code can require an intermediate functional
+whose cost a scalar locality parameter has discarded.  We retain the least
+support in each functional fibre and ask when a recovery can first use a
+helper outside its target block.
 
-A linear recovery equation expresses a target combination as a linear
-combination of helper symbols; its cost is the number of distinct helpers
-used.  It is \emph{confined} when every coefficient lies in the target's own
-inner block and \emph{nonconfined} when at least one helper lies in another
-block.
-
-The information loss can be seen before any coding notation.  Suppose an
-inner block can realize two intermediate functionals $a$ and $b$ at respective
-costs one and two.  The scalar minimum is one.  If an outer equation forces
-label $b$, however, the relevant cost is two; replacing the labelled table
-$(a\mapsto1,b\mapsto2)$ by its minimum has destroyed the answer.  The exact
-theory below makes this schematic example intrinsic and, in
-Proposition~\ref{prop:functional-label-separation}, realizes it while holding
-the unlabelled recovery data fixed.
-
-At the coefficient level, exact transfer means more than equality of a
-numerical parameter.  Under the equation-confinement criterion below, every global recovery is uniquely the zero-extension of a
-recovery inside the target block.  Formally, restriction to that block and
-zero-extension back into the concatenation are inverse bijections on
-normalized recovery-equation systems, preserving coefficients and exact
-helper supports.  Normalization means that the target coefficients act as the
-identity on the recovered subspace.  Operational queries need only minimal
-supports.  Theorem~\ref{thm:minimal-support-confinement} transfers those
-under the weaker condition $\delta_j(O^\perp)>r+1$, where $\delta_j$ is
-the least weight of an outer dual word touching the target block.  Unrelated
-external equations can violate coefficient confinement without creating a
-new minimal recovery option.
-
-Three projections of the recovery data answer different questions.  Relative
-generalized Hamming weights give the minimum helper union at each recovered
-dimension.  Exact helper-support families retain the overlap data needed for
-reliability.  Labelled prescribed-coset support functions start from the same
-equations but fix the induced intermediate functional before minimizing, which
-keeps the labels needed for concatenation.  Figure
-\ref{fig:information-hierarchy} shows how these projections meet; neither the
-support-family branch nor the labelled-cost branch contains the other.
-
-\input{figures/information-hierarchy}
-
-\begin{table}[H]
-\centering
-\small
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.31\linewidth}
-                    >{\raggedright\arraybackslash}p{0.62\linewidth}@{}}
-\toprule
-Question & Retained information and exact result \\
-\midrule
-How many helpers recover a $t$-dimensional subspace inside one block?
-& The associated nested pair gives an exact relative generalized Hamming
-weight. \\
-When can a recovery first leave its target block?
-& Minimum support in each induced-functional class gives an exact two-sector
-nonconfinement cost. \\
-What must pass to the next concatenation level?
-& The same labelled costs compose by exact associative min--sum substitution;
-minimizing lifts propagate a witness. \\
-What is the smallest exact bounded state?
-& A finite contextual response vector identifies exactly the states
-indistinguishable to every compatible outer problem; at rank one it has an
-explicit projective description. \\
-When is every recovered dimension confined through radius $r$?
-& The rank-one escape cost suffices: every rank is confined if and only if
-rank one is confined. \\
-What determines bounded reliability and capacity sharing?
-& Exact minimal helper supports and their overlaps determine the corresponding
-block-local statistics; target-touching distance suffices for their transfer. \\
-\bottomrule
-\end{tabular}
-\caption{Six questions answered by different projections of the recovery data.
-The last row needs no equation-confinement hypothesis once minimal supports agree.}
-\label{tab:intro-question-map}
-\end{table}
-
-Let $q$ be a prime power, let $I\leq\F_q^E$, and partition the coordinates as
-$E=P\sqcup J$ into targets and helpers.  The associated nested code pair is
-\[
- D_P=\operatorname{punct}_J(I^\perp),
- \qquad K_P=\operatorname{short}_J(I^\perp).
-\]
-Here $\operatorname{punct}_J$ restricts a word to the helper coordinates
-$J$, whereas $\operatorname{short}_J$ first requires the target coordinates
-$P$ to vanish and then restricts to $J$.
-For a full-row-rank encoder $G=(G_P\mid G_J)$, put
+Let $I\leq\F_q^E$ have a full-row-rank encoder $G=(G_P\mid G_J)$,
+where $E=P\sqcup J$ partitions targets and helpers, and assume
+$0<\dim I<|E|$.  Put
 $W_P=\operatorname{im}G_P\cap\operatorname{im}G_J$.
-The exact sequence in Proposition~\ref{prop:associated-pair} identifies
-$D_P/K_P\cong W_P$, the space of target combinations recoverable from the
-helpers.
-We assume $0<\dim I<|E|$, so both the represented message space and
-$I^\perp$ are nonzero.
-We use the convention $d(0)=\infty$ for the zero code.
-Here $t$ is the dimension of a recovered subspace of $W_P$, not the number
-of erased coordinate positions.  Recovering all values on $P$ is the special
-case $\operatorname{im}G_P\subseteq\operatorname{im}G_J$ and
-$t=\dim\operatorname{im}G_P$; dependent target columns may make this dimension
-smaller than $|P|$.
+A normalized recovery system for $0\ne T\leq W_P$ consists of linear maps
+$\alpha:T\to\F_q^P$ and $\beta:T\to\F_q^J$ satisfying
+$G_P\alpha=\operatorname{id}_T$ and $G_J\beta=-\operatorname{id}_T$.
+Its helper cost is $|\supp\beta(T)|$.  Thus $\dim T$ counts independent
+target combinations, which may be fewer than the erased positions.
 
-The first layer is classical nested-code support theory in recovery language:
-the minimum helper union for recovered dimension $t$ is
-$M_t(D_P,K_P)$, the $t$th relative generalized Hamming weight of the pair.
-Theorem~\ref{thm:relative-weight-recovery} gives the exact
-support-preserving correspondence.  The principal result begins at the next
-layer, where the outer code can distinguish functional labels having the same
-minimum support.
-
-For concatenation, identify the message space of $I$ with a finite extension
-field $L/\F_q$ and retain the chosen encoder $L\to I$.  We call this encoder
-together with its image a \emph{represented inner code}; the representation
-matters because it assigns field functionals to coefficient fibres.
-Section~\ref{sec:confinement} groups recovery equations by the functional
-induced on each block and minimizes support within every such class.  Its exact
-two-sector value is denoted by $\Gamma_{j,T}(O,I)$; schematically,
+Identify the message space with a finite extension $L/\F_q$ and fix its
+encoder $\iota:L\xrightarrow{\sim}I$.  The \emph{represented inner code}
+retains this identification.  Its functional map is
 \[
- \Gamma_{j,T}
- =\min\{\text{zero-label sector},\
-          \text{least compatible nonzero-label block sum}\}.
+ \Phi_I:\F_q^E\longrightarrow L^*,\qquad
+ \Phi_I(y)(a)=\langle y,\iota(a)\rangle,
+ \quad L^*=\operatorname{Hom}_{\F_q}(L,\F_q).
 \]
-The zero-label sector is one inner recovery plus a least inner-dual
-perturbation in another block; a nonzero label prescribes one coefficient
-class in every selected block.  Put
-$\Gamma_{j,t}(O,I)=\min\{\Gamma_{j,T}(O,I):T\leq W_P,\ \dim T=t\}$.
+For a linear map $b:T\to L^*$, record the two fibre minima
+\[
+ \lambda_{I,T}(b)=\min_{\Phi_IY=b}|\supp Y(T)|,
+ \qquad
+ \mu_{I,P,T}(b)=
+ \min_{\substack{G_P\alpha=\operatorname{id}_T\\
+                  \Phi_I(\alpha,\beta)=b}}|\supp\beta(T)|.
+\]
+All minimizing maps are $\F_q$-linear, with domains
+$Y:T\to\F_q^E$, $\alpha:T\to\F_q^P$, and $\beta:T\to\F_q^J$.
+Only the displayed constraints are imposed in each minimum; empty minima
+are $\infty$.
+The target block pays only for helpers, whereas an external block pays for
+all coordinates it uses.
+
+For an $L$-linear outer code $O\leq L^N$, define
+\[
+ \operatorname{FD}(O)=
+ \{(b_h)\in(L^*)^N:\textstyle\sum_h b_h(a_h)=0
+                              \text{ for every }a\in O\}.
+\]
+These are the compatible block functionals.  Trace duality identifies this
+space with $O^\perp$ and preserves block support.  Write
+$O\circ I=\{(\iota(a_h))_{h=1}^N:a\in O\}$.
+A global normalized recovery system is a linear map
+$Y:T\to(O\circ I)^\perp$ whose target coefficient map
+$\alpha:T\to\F_q^P$ satisfies $G_P\alpha=\operatorname{id}_T$.
+For a target block $j$, put
+\[
+ \Gamma_{j,T}(O,I)=\min\left\{
+ \mu_{I,P,T}(0)+d(I^\perp),\quad
+ \min_{\substack{0\ne B:T\to\operatorname{FD}(O)\\B\ \mathrm{linear}}}
+ \left[\mu_{I,P,T}(B_j)+\sum_{h\ne j}\lambda_{I,T}(B_h)\right]
+ \right\},
+\]
+and set $\Gamma_{j,t}=\min_{T\leq W_P,\,\dim T=t}\Gamma_{j,T}$.
+We use $d(0)=\infty$.
 
 \begin{theorem}[Main characterization: exact finite transfer]
 \label{thm:main}
@@ -212,10 +146,41 @@ $\Gamma_{j,t}(O,I)$.  Hence confinement through radius $r$ holds exactly when
 $r<\Gamma_{j,t}(O,I)$.
 \end{theorem}
 
-The content is the correspondence behind the formula: every global recovery
-system determines exactly one compatible labelled family in one of its two
-terms, and every such family lifts to a global recovery with the displayed
-sum of block supports.
+Every global recovery induces a compatible family of block functionals.
+When that family is nonzero, fixing it lets the blocks minimize independently.
+When it is zero, leaving the target block requires an additional nonzero
+inner-dual equation.  This explains the two terms and the separate
+$d(I^\perp)$ input: the ordinary zero-label minimum is zero.
+Section~\ref{sec:confinement} proves that each finite minimum is attained by a
+coefficient-level lift.
+
+For operational recovery, this extra external equation is dispensable.
+Let $\delta_j(O^\perp)$ be the least weight of an outer dual word nonzero
+at $j$, with value $\infty$ if there is none.
+Theorem~\ref{thm:minimal-support-confinement} proves
+\[
+ \delta_j(O^\perp)>r+1
+ \quad\Longrightarrow\quad
+ \mathcal M_{j,T}^{(\leq r)}(O\circ I)
+ =\text{the embedded }\mathcal M_T^{(\leq r)}(I),
+\]
+where $\mathcal M$ denotes inclusion-minimal recovery supports of size at
+most $r$.  The target-block part of any bounded recovery then recovers $T$
+on its own.  Deleting the external helpers proves the assertion, without
+requiring the additive inner-dual bound for equation confinement.  Equality
+of these minimal families transfers availability events under any law with
+the same local marginal, and transfers support-based capacity allocations.
+
+The local cost has a classical interpretation.  Puncturing the inner dual
+onto $J$ gives $D_P$, and shortening it onto $J$ gives $K_P$; shortening first
+requires the coordinates on $P$ to vanish.  The associated exact sequence
+identifies $D_P/K_P\cong W_P$.  Its $t$th relative generalized Hamming
+weight $M_t(D_P,K_P)$ is the minimum helper union for recovering a
+$t$-dimensional subspace (Theorem~\ref{thm:relative-weight-recovery}).
+These weights, labelled costs, and physical supports retain different
+information, as Figure~\ref{fig:information-hierarchy} records.
+
+\input{figures/information-hierarchy}
 
 \paragraph{Outer-distance collapse.}
 Sufficient outer dual distance rules out every competing nonzero-label
@@ -259,7 +224,9 @@ each projective functional line an outer code can probe.  In optimization
 language, this is a Myhill--Nerode-type minimization theorem: two rank-one
 states are equivalent exactly when no compatible outer problem distinguishes
 their optimal costs, and the resulting coarsest quotient is a congruence for
-further concatenation.  The higher-rank statement is finite but less explicit.
+further compatible concatenation at the same target leaf and induced target
+image.  The observation is the numerical escape response; it does not include
+physical support overlap or future reweightings.  The higher-rank statement is finite but less explicit.
 Through helper radius $r$, Theorem~\ref{prop:rank-bounded-outer-tests} shows
 that contexts of length at most $\max\{2,r+1\}$ and functional-dual dimension
 at most $\min\{t,r\}$ detect every distinction.  Their finite response vector
@@ -283,7 +250,7 @@ Proposition~\ref{prop:functional-label-separation} gives the calculation before
 the closure theorem.  Thus every unlabelled and scalar explanation is held
 fixed; only alignment with the intermediate functional labels changes.
 
-The transfer statements in the last row are block-local: irrelevant
+The operational transfer statements are block-local: irrelevant
 cross-block supersets do not change a minimal support, bounded success event,
 or bounded allocation problem.  The one-coordinate specialization and its
 total-word-weight convention are recorded after the general transfer theorem.
@@ -299,15 +266,12 @@ automata minimization
 \cite{GopalanEtAl2012,AjiMcEliece2000,BlomqvistEtAl2020,Mohri2009}.
 Section~\ref{sec:related-work} gives the detailed comparisons and citations.
 
-ergodis (Exact Recovery, Global Optimization, and Invariant Synthesis) is an
-separately developed compiler and exact solver for finite algebraic
-optimization, initially motivated by these reductions.  From finite linear
-recovery data and optional capacity constraints it composes labelled costs,
-computes confinement thresholds and schedules, and returns replayable
-coefficient-level witnesses.  Section~\ref{sec:exact-recovery-optimization}
-gives correctness and complexity bounds and evaluates representative storage,
-graph, code-design, and tower applications against matched exact controls.
-No mathematical result depends on the implementation or its measurements.
+Ergodis embodies the labelled composition law as executable recovery
+optimization.  Section~\ref{sec:exact-recovery-optimization} explains how
+retained choices enable witnessed repairs, capacity sharing, and reuse under
+failures and prices.  It also separates those capabilities from the additional
+information required for probability and optimality certificates.  Measurements
+and artifact details are collected in Section~\ref{sec:verification}.
 
 For a first pass, Sections~\ref{sec:recovery-equations}--\ref{sec:confinement}
 give the proof spine, and Section~\ref{sec:separations} shows what its coarser

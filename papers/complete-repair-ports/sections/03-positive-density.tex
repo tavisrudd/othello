@@ -332,7 +332,11 @@ $K_P=0\subseteq D_P=\langle(1,0)\rangle$, $M_1=1$, and the same unique
 minimal helper support.  Their recoverable target space is one-dimensional,
 so their complete zero-functional profile is the common value $1+2=3$.
 
-In the label order $(1,\omega,\omega^2)$, the ordinary coset costs are
+For this table identify a column $c$ with the functional
+$a\mapsto\Tr(\omega^2ca)$.  This is the coordinate-dot-product pairing
+in the basis $(1,\omega)$; the corresponding trace coefficient is
+$\omega^2c$.  The common rescaling preserves every outer $L$-linear dual
+subspace.  In this column-label order $(1,\omega,\omega^2)$, the ordinary coset costs are
 $(1,1,2)$ for $I_1$ and $(1,2,1)$ for $I_2$; the normalized target costs are
 respectively $(0,2,1)$ and $(0,1,2)$.  Take the fixed outer code whose
 functional dual is the line spanned by $(1,\omega)$.  Its nonzero multiples
@@ -967,7 +971,9 @@ target column is zero, the same condition follows directly from the exact minimu
 already proved.  In either case, below the minimum every equation is confined,
 so restriction and zero-extension are inverse.  In one dimension every exact
 helper support is the support of its normalized equation; the equivalence also
-holds for exact helper-support families and their inclusion-minimal members.
+holds for exact helper-support families.  It implies equality of their
+inclusion-minimal members, but minimal-support equality need not imply
+equation confinement, as Theorem~\ref{thm:minimal-support-confinement} shows.
 \uses{thm:ungated-ranked-confinement}%
 \proves{thm:weighted-pointed-confinement}%
 \end{proof}
@@ -1056,8 +1062,11 @@ RGHW threshold in every recovered dimension.  Restricting instead to one
 target coordinate gives Theorem~\ref{thm:weighted-pointed-confinement} without
 that condition.
 
-The labelled functions are sufficient for exact numerical composition;
-minimizing lifts must also be stored to propagate witnesses.  Their
-coarsenings answer different questions.  The next section shows sharply that
+The labelled functions suffice to compose fibre minima.  Computing
+nonconfinement also retains the nonzero-kernel cost $d(I^\perp)$ through
+\eqref{eq:dual-distance-composition}; its ordinary zero-label minimum is
+zero and does not encode this cost.  Minimizing lifts must also be stored
+to propagate witnesses.  Coarser summaries answer different questions.
+Section~\ref{sec:separations} shows that
 relative-weight minima do not determine recovery reliability and that the
 abstract nested pair does not determine confinement.

@@ -37,6 +37,7 @@ sections/07-verification-provenance.tex
 sections/08-conclusion.tex
 sections/README.md
 verification/README.md
+verification/artifact-versions.json
 verification/distribution-files.txt
 verification/formal-boundary.json
 verification/verify_release.py

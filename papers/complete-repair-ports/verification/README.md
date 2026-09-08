@@ -7,7 +7,7 @@ revision, proves the exact sequence attached
 to the target/helper split. Its reviewer interface contains four terminals,
 and its kernel axiom audit reports exactly `Classical.choice`, `Quot.sound`,
 and `propext`. The claim map in `lean/verification/claims.json` records one
-Lean-complete manuscript statement and twenty-five statements with no Lean
+Lean-complete manuscript statement and thirty-one statements with no Lean
 coverage. In particular, the relative-weight identity, exact prescribed-coset
 transfer theorem, and its confinement specializations have human proofs only.
 
@@ -47,20 +47,20 @@ to equal that manifest, apart from the exporter's optional `.gitignore`,
 `PROVENANCE.md`, and `export-manifest.json`.  Those files are scanned when
 present; any other unlisted tracked file fails the release check.
 
-The ergodis software is not part of this repository; it lives at
-`https://github.com/tavisrudd/ergodis`, and the measurements quoted in the
-manuscript are those of its `BENCHMARKS.md` and `evidence/benchmarks.json`.
-The algorithm evidence has an independent canonical replay in a clone of that
-repository:
+Ergodis is developed at [tavisrudd/ergodis](https://github.com/tavisrudd/ergodis).
+`verification/artifact-versions.json` identifies the software sources described
+in the paper, each retained application record and raw sample file by SHA-256,
+and the measured executable, runners, and checking scripts recorded by those
+results. The three application records carry their exact sampling protocols:
+seven paired rounds for the six-application table and three paired rounds for
+the longer tower and Hamming-outer comparisons. They include replay details
+and tool versions. These identities distinguish the measured version from the
+later software description; no new timings are asserted by the paper build.
 
-```text
-python3 python/test_algorithms.py
-python3 python/generate_evidence.py --check
-cargo fmt --check
-cargo clippy --all-targets --all-features -- -D warnings
-cargo test --all-features
-python3 python/generate_fixtures.py --check
-```
+The same manifest pins the unchanged Lean sources to their published companion
+revision, with content hashes for the toolchain, dependency lock, and expected
+axiom inventory. A source hash identifies an artifact; it is not a new kernel
+execution or an independent verification of a benchmark result.
 
 Refresh the tracked PDF only through the deterministic path:
 
