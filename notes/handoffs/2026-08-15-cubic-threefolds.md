@@ -38,25 +38,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C1128 — foundations, Fano, torus and family mathematics audited (2026-09-08).** The primary comparisons
-  preserve the canonical modified lattice; persistence, residue regularity,
-  and surface vanishing support the stronger count without nonresonance.
-  The historical cubic-fourfold concern was not a counted whole-primary
-  counterexample. Exact local checks pass. The first-reading revision is a
-  proposal only; manuscript inclusion still awaits the author's decision.
-  The universal rational calculation and primary quantum normalizations pass;
-  under these geometric inputs, the degree-one and degree-two extensions
-  support the index-two classification. The torus identifications and exact
-  linearization thresholds pass; residual charts remain owned by C958.
-  Publication scope is recorded in `../2026-09-08-c1128-publication-scope.md`.
-  The three-dimensional family and stated moduli/closure consequences pass
-  with explicit chart and geometric clarifications. Genus-two 3-torsion
-  construction is prior art; intrinsic recovery and locus novelty remain
-  gated. Next audit the remaining structural proposals and consolidate. Reports:
-  `../2026-09-08-c1128-comparison-rigidity-audit.md`,
-  `../2026-09-08-c1128-fano-audit.md`,
-  `../2026-09-08-c1128-torus-audit.md`,
-  `../2026-09-08-c1128-family-audit.md`; card:
+- **C1128 is complete (2026-09-08):** the bounded feedback/extension audit
+  supports the comparison/rigidity repairs, unified Fano application, torus
+  explanations and selective structural corollaries. The family mathematics
+  passes under both manuscripts; intrinsic recovery and locus novelty remain
+  separate follow-on gates. **Next: author inclusion decision before edits**;
+  C978/C956 stay open and C958 retains complete ground-field maps. Final
+  dispositions: `../2026-09-08-c1128-final-dispositions.md`; placement:
+  `../2026-09-08-c1128-publication-scope.md`; evidence/report map in
   `../cubic-threefolds-tasks/c1128-astra-feedback-and-extensions.md`.
 - **Astra review intake (2026-09-07):** **C1116 is complete**: the reduced
   graded coefficient proof was repaired, cyclic persistence and quotient

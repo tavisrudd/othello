@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 
-**Status:** active; foundations, Fano, torus and family mathematics audited, 2026-09-08
+**Status:** complete; bounded audit and inclusion recommendations delivered, 2026-09-08
 
 ## Goal and source
 
@@ -84,14 +84,21 @@ by this intake request.
 - A final report records residual gates, an explicit ej+tt pass, and the
   Mystery ledger required for substantial research work.
 
-## Next action
+## Completion and next gate
 
-Audit the remaining structural proposals (rational coefficient spectrum,
-additive-method ceiling, stabilization bounds and diagonal torsion), then
-consolidate dispositions and manuscript recommendations. Preserve the
-intrinsic-moduli and novelty gates: accepted family mathematics alone does
-not establish a novel follow-on paper. Manuscript inclusion still awaits
-the author's decision after the audit.
+Final dispositions: `notes/2026-09-08-c1128-final-dispositions.md`.
+The structural report completes the remaining rational-spectrum, additive
+ceiling, stabilization-bound, diagonal-torsion and spreading deductions.
+Every supplied proposal is accepted under its named inputs, corrected,
+already covered or deferred to an explicit owner/gate. Independent finite
+checks, source depths and residual proof/novelty boundaries are recorded.
+
+Recommend the proof-presentation repairs and unified Fano application, with
+concise torus/descent explanations and selective supporting corollaries.
+The author now decides inclusion; no manuscript implementation is authorized
+by this audit closeout. C978/C956 remain open. Intrinsic-moduli and novelty
+gates remain: accepted family mathematics alone does not establish a novel
+follow-on paper. C958 and the existing algorithmic owners retain their work.
 
 ## Accepted audit chunk: priorities 1–3
 

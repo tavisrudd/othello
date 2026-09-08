@@ -1,0 +1,46 @@
+{
+  "schema": "c1128-structural-closeout-v1",
+  "task": "C1128",
+  "files": [
+    {
+      "file": "notes/2026-09-08-c1128-structural-audit.md",
+      "bytes": 17471,
+      "sha256": "a2d486fba2d548b708e93fc5c8e3b4ce26a073c35b42d66704c21680a9bb75eb"
+    },
+    {
+      "file": "notes/2026-09-08-c1128-structural-sources.json",
+      "bytes": 5152,
+      "sha256": "c8bd54b0871a43987656886a8f5acffaf65343ff0a6a8b98dc83f363a9fa1d6c"
+    },
+    {
+      "file": "notes/2026-09-08-c1128-final-dispositions.md",
+      "bytes": 16268,
+      "sha256": "d6bbcd3bae6de17879c934bd47e8e1dadd6d19bca3fdd87d48d61e9fb5fde7f0"
+    },
+    {
+      "file": "notes/2026-09-08-c1128-publication-scope.md",
+      "bytes": 4758,
+      "sha256": "3373a61d3f4666ffaa7f7a2ac1c04ebd3c0ec5ce31f6c71162e7b9ddff2c92b4"
+    },
+    {
+      "file": "notes/2026-09-08-c1128-audit.sha256.json",
+      "bytes": 785,
+      "sha256": "29ddb1b9116386c85713e185ed3d7e91b75b3e17a4a0f26e3f7ab0dfa6f8ec80"
+    },
+    {
+      "file": "notes/2026-09-08-c1128-fano.sha256.json",
+      "bytes": 1327,
+      "sha256": "0deab43a6a901837b54d38573d5eb41c1d0a5b8dd1b9dfa539ec85797eaacc5f"
+    },
+    {
+      "file": "notes/2026-09-08-c1128-torus.sha256.json",
+      "bytes": 1020,
+      "sha256": "15906b073a2d7411ce122dddef47754315458c44b64c4b8ce864395d028c0217"
+    },
+    {
+      "file": "notes/2026-09-08-c1128-family.sha256.json",
+      "bytes": 1519,
+      "sha256": "8eb611af4e0f61242d56b994ef45b0bc83c6fe78e3490758a2ce324449a2b3c8"
+    }
+  ]
+}

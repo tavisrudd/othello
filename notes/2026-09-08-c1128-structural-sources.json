@@ -1,0 +1,98 @@
+{
+  "date": "2026-09-08",
+  "task": "C1128",
+  "scope": "Positive source and mathematical deduction audit; no novelty/priority absence claim",
+  "full_text_sources": 0,
+  "sources": [
+    {
+      "key": "arXiv:2307.13555",
+      "version": "2307.13555v3",
+      "title": "Iritani, Quantum cohomology of blowups",
+      "read_depth": "partial",
+      "passages": "Sections 2.1–2.2: rational insertions, rational virtual class and invariants, graded completions; Section 2.3 and comparison passages inherited from the earlier audit",
+      "url": "https://arxiv.org/html/2307.13555v3",
+      "access": "Cached primary PDF text, with official arXiv HTML/PDF where available",
+      "sha256": "c16f56b283863322df04dadaeb0780889abd67a664f56a74fea39bc7ba8a934b",
+      "bytes": 1203210
+    },
+    {
+      "key": "arXiv:1407.7261",
+      "version": "1407.7261v2",
+      "title": "Voisin, On the universal CH0 group of cubic hypersurfaces",
+      "read_depth": "partial",
+      "passages": "Introduction, generic-point equality and localization argument around equation (1)",
+      "url": "https://arxiv.org/html/1407.7261v2",
+      "access": "Cached primary PDF text, with official arXiv HTML/PDF where available",
+      "sha256": "514e5634d920f4b8e9c6797f3de5ad34afea65624ba23cc764d329ebcdd2c4e4",
+      "bytes": 368160
+    },
+    {
+      "key": "arXiv:1605.01913",
+      "version": "1605.01913v3",
+      "title": "Chatzistamatiou–Levine, Torsion orders of complete intersections",
+      "read_depth": "partial",
+      "passages": "Definition 1.1, Remarks 1.2, Lemma 1.3 and proof through the localization/field-extension argument; PDF pages 4–7",
+      "url": "https://arxiv.org/pdf/1605.01913v3",
+      "access": "Cached primary PDF text, with official arXiv HTML/PDF where available",
+      "sha256": "a17393ffaaa755bc9dcbcde12ce11ce52537e5a54bff174b8ccb23071476afb5",
+      "bytes": 517692
+    },
+    {
+      "key": "arXiv:2608.01577",
+      "version": "2608.01577v1",
+      "title": "Cai, The cubic threefold is symplectically irrational",
+      "read_depth": "partial",
+      "passages": "Section 3, page 4: original matrix, nonzero-eigenvalue sentence and following Jordan matrix",
+      "url": "https://arxiv.org/pdf/2608.01577v1",
+      "access": "Cached primary PDF text, with official arXiv HTML/PDF where available",
+      "sha256": "06bfccf9b67ed8cf224f5e7cc6ba2088271577787e2f8e0dd895c0ef3b404a9e",
+      "bytes": 277560
+    },
+    {
+      "key": "arXiv:2312.12685",
+      "version": "2312.12685v1",
+      "title": "Duff–Korotynskiy–Pajdla–Regan, Using monodromy to recover symmetries of polynomial systems",
+      "read_depth": "partial",
+      "passages": "Abstract, Sections 1–2 via official HTML; Section 5.2 shifted exponent matrix and Smith form through definition of continuous scaling group; beginning of Section 6 and example headings; no software/benchmark replay",
+      "url": "https://arxiv.org/html/2312.12685v1",
+      "access": "Cached primary PDF text, with official arXiv HTML/PDF where available",
+      "sha256": "aa85f92fab347aedf3f37fe98e633f46c604eba91d8fb6ca2982d2ac78616be5",
+      "bytes": 823159
+    }
+  ],
+  "local_inputs": [
+    {
+      "path": "papers/cubic-stabilization-m1/sections/02-qdm-marker.tex",
+      "sha256": "3ea4d7a5ef5b283aab4b068b975f6f6646ff6a3a219f4bc1721eb59c6ff1357d",
+      "bytes": 38415
+    },
+    {
+      "path": "papers/cubic-stabilization-m1/sections/04-motivic.tex",
+      "sha256": "ee4754066281a1e5d8e3ae6e54a6a5f87395e3d8a30f10d7ebbfb0a0225bee05",
+      "bytes": 11396
+    },
+    {
+      "path": "papers/cubic-stabilization-irrationality/cubic_stabilization_irrationality.tex",
+      "sha256": "463c18ec4a6750f7bc54bec6d0453a66510a70b74e138dd860262567619fba3a",
+      "bytes": 60414
+    }
+  ],
+  "coverage_limits": [
+    "Original geometric comparison inputs remain inherited from prior audits; not independently re-proved",
+    "No full-paper reads, no new repository verification suite or Lean run",
+    "No global novelty or forward-citation closure; family locus novelty remains gated",
+    "No algorithm implementation, software benchmark replay or commercial-performance evidence"
+  ],
+  "access_notes": [
+    "1605.01913v2 HTML returned a cache miss; the cached PDF is v3 and is the version actually used",
+    "2312.12685 HTML and PDF use different numbering for the continuous-scaling definition; attribution is to Section 5.2 and equations (14)–(15), not an inferred common definition number"
+  ],
+  "discovery_queries": [
+    "universal CH0 torsion order decomposition diagonal generic point annihilated integer Chatzistamatiou Levine",
+    "site.arxiv.org Iritani quantum cohomology rational Gromov Witten invariants virtual fundamental class",
+    "site.arxiv.org \"Torsion orders of complete intersections\"",
+    "site.arxiv.org \"Gromov-Witten invariants\" \"rational numbers\" \"virtual\" Iritani",
+    "Duff Korotynskiy Pajdla Regan scaling symmetries Smith normal form polynomial systems"
+  ],
+  "query_boundary": "Search results served discovery only; unselected snippets are not characterized or treated as a screened exhaustive literature set."
+}

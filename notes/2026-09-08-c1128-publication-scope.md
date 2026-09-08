@@ -20,7 +20,7 @@ question and include extensions when they strengthen its answer.
 | Sharpness paper, main text | Intrinsic motivation for the selected torus; étale-algebra interpretation; explicit orbit normalization; separated geometric, tangent-open and arithmetic descent claims; residual action matrices with basis conventions. |
 | Short corollaries or remarks | Cross-degree spectral separation; the ceiling on the additive method; exact trivial-stabilization linearization thresholds if the mathematical and attribution audit supports them. |
 | Appendices or supporting notes | Alternative residue checks; arithmetic spectrum; detailed lattice certificates; executable parametrization inputs; finite-index/diagonal-torsion refinements. Each remains subject to its own audit. |
-| Separate follow-on project | Proposed cubic moduli locus, genus-two torsion correspondence, intrinsic moduli/period geometry, and associated Cremona families. The family and nonconjugacy claims remain unaccepted pending audit. |
+| Separate follow-on project | The audited cubic family and Cremona consequences, with intrinsic moduli/period geometry still open. The basic genus-two torsion construction is prior art; novelty of the cubic locus and intrinsic correspondence remain separate gates. |
 | Research roadmap outside the manuscripts | Higher stabilization levels, positive characteristic, algorithmic benchmarks and commercial possibilities. |
 
 ## How to gain breadth without sacrificing accessibility
@@ -46,7 +46,7 @@ question and include extensions when they strengthen its answer.
 The Fano extension could occupy only a few net pages if it replaces the
 specialized calculation and shares the foundational argument. This is an
 editorial estimate, not a page-budget guarantee. No comparable estimate is
-appropriate for the unaudited moduli proposal.
+appropriate for the separate moduli/period project.
 
 ## Status and next gate
 
@@ -55,8 +55,14 @@ The comparison and Fano audits are recorded in
 `2026-09-08-c1128-fano-audit.md`; the first-reading proposal is in
 `2026-09-08-c1128-proposed-proof-presentation.md`.
 
-Continue C1128 with torus structure, orbit normalization, and exact
-linearization thresholds, followed by the family/moduli audit. Revisit this
-placement map using the completed dispositions before implementing manuscript
-changes. Existing C958 owns executable ground-field maps; C963/C965/C966 own
-the later algorithmic work. No new allocation or reassignment is made here.
+C1128's bounded audit is now complete. Full dispositions and residual gates
+are in `2026-09-08-c1128-final-dispositions.md`; the torus, family and structural
+reports provide their detailed evidence. Recommend repairs first, the unified
+Fano application second, and only concise supporting consequences. Arithmetic
+spectrum, diagonal torsion and the action corollary are optional supporting
+material, not reasons to enlarge the main proof routes.
+
+The author still decides inclusion before manuscript changes. Existing C958
+owns executable ground-field maps; C963/C965/C966 own the later algorithmic
+work. C978/C956 remain open by author instruction. No new allocation,
+reassignment, manuscript edit or novelty claim is made here.
