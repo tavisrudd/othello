@@ -15,6 +15,12 @@ reconstruction remains outside the headline under the existing N1-only ruling.
 
 ## Current status
 
+- C1132 completed the referee revision: sharp five-clique bound, optimal q>=9
+  uniform cutoff, explicit Hamming extension, literature/proof corrections and
+  extension-field recognition tests. The validated standalone is `6e7afbf`;
+  repository-local commit signing is disabled by author instruction. Report:
+  `notes/2026-09-08-c1132-continuation-referee-response.md`.
+
 - The 15-page revised draft is `papers/continuation-graph-rigidity/continuation_graph_rigidity.tex`
   and its deterministic PDF. The stable q>=9 proof is written mathematics; the graph
   determines q and every graph isomorphism extends uniquely semilinearly.
@@ -51,14 +57,10 @@ reconstruction remains outside the headline under the existing N1-only ruling.
 
 ## Next steps
 
-- **C1132** — referee revisions and authority checks complete: five-clique
-  bound, optimal q>=9 uniform cutoff, explicit Hamming extension, corrected
-  literature/proofs and extension-field recognition tests. Standalone export
-  and replay passed; its local commit is awaiting the configured GPG key. Response and validation:
-  `notes/2026-09-08-c1132-continuation-referee-response.md`.
 
 - **C1110** — complete publication-readiness review. The same-reader final pass
-  finds the local exposition concerns resolved; preserve the current structure.
+  resolved the earlier local exposition concerns. Assess the strengthened
+  C1132 draft next, including its new geometric bound and coding corollary.
   Feedback: `notes/2026-09-07-c1110-continuation-final-reader-polish.md`.
   Qualified external subject review and priority diligence remain distinct from
   the completed sub-agent review and local corrections.

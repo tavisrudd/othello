@@ -1,8 +1,7 @@
 # C1132 — continuation referee revisions
 
 **Lane**: `continuation`
-**Status**: revisions, authority checks, standalone export and replay complete;
-standalone local commit awaiting GPG signing.
+**Status**: complete; validated standalone revision committed as `6e7afbf`.
 Response: `notes/2026-09-08-c1132-continuation-referee-response.md`.
 
 ## Objective and provenance

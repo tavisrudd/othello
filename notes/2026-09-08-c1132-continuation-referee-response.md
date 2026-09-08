@@ -167,8 +167,9 @@ Byte-identical authority/standalone release surfaces:
 | SHA256SUMS | 2376 | `cc64b01650649c348edd919e194815c0c6d0079963509377d27df32186e6246f` |
 | recognition.json | 11562 | `8757ccbb0fe975f8df14035721b0702e1151a493f37bc949d1cffece88ff5798` |
 
-The final standalone forward commit is currently waiting for the GPG key
-configured by `/home/tavis/.config/git/signing.gitconfig`. Existing standalone
-commits are signed. Signing has not been disabled; the exact validated export
-is staged. The author was asked to unlock/approve the key or authorize an
-unsigned local commit. C1132 stays open until that final step completes.
+The author explicitly authorized repository-local disabling of GPG signing.
+Set `commit.gpgsign=false` in the standalone repository's `.git/config` and
+completed the forward commit as `6e7afbf`. The standalone worktree is clean;
+export verification still passes with the same content hash. No global signing
+setting was changed and nothing was pushed. C1132 is complete. C1110 is next
+for publication-readiness review of the strengthened draft.

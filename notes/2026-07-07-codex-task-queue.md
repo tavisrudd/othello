@@ -215,7 +215,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `continuation`
 
-- **C1132 `[continuation]` [IN PROGRESS]** — address Astra/ChatGPT referee feedback: independently verify five-clique bound and optimal q>=9 cutoff, correct literature/proofs, state coding extension, and improve recognition coverage/exposition → `notes/2026-09-08-c1132-continuation-referee-revisions.md`.
 - **C1110 `[continuation]` [IN PROGRESS; COLD AGENT REVIEW AND LOCAL REVISIONS COMPLETE]** — assemble and independently review upgraded reconstruction manuscript, exact boundary and algorithm; C273 remains the Lean release requirement → `notes/2026-09-07-continuation-ergodis-reconstruction-plan.md` (C1110).
 - **C271 `[continuation]` [QUEUED]** — N2-gate literature closure: obtain full texts of Drake–Sané and Metsch (LNM 1490) and run the MathSciNet/zbMATH forward-citation check, then record the outcome in the audit note (implements the audit's recorded residual diligence for the N2 SOFTEN verdict; does not re-decide N1 SURVIVES) → `notes/2026-07-11-continuation-rigidity-audit-scope.md`.
 - **C273 `[continuation]` [QUEUED]** — build the `ContinuationRigidity` Lean library per the Phase 3 plan (implement, do not re-decide it); collaborator route is the recorded fallback if formalization stalls per the #7 gate → `notes/2026-07-17-c273-continuation-lean-library.md`.
