@@ -43,6 +43,7 @@ digraph manuscript {
   "prop:cubic-packet" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:direct-specialized-lowdim" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:eckardt-reflection-group" [fillcolor="#ffffff", tooltip="absent"];
+  "prop:f1-tagging-counterexample" [fillcolor="#ffffff", tooltip="absent"];
   "prop:framed-operations" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:generic-spectral-connection-splitting" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:hirzebruch-specialized-vanishing" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
@@ -92,6 +93,7 @@ digraph manuscript {
   "YYZ:coprime-degrees-persist" [shape=note, fillcolor="#eeeeee"];
   "a5-pencil-eckardt" [shape=note, fillcolor="#eeeeee"];
   "a5-pencil-eckardt-locus" [shape=note, fillcolor="#eeeeee"];
+  "framed-specialization" [shape=note, fillcolor="#eeeeee"];
   "hirzebruch-euler-spectrum" [shape=note, fillcolor="#eeeeee"];
   "AKMW:weak-factorization" -> "cor:factorization-spectrum" [style=dotted];
   "AKMW:weak-factorization" -> "cor:threefold-marker" [style=dotted];
@@ -126,6 +128,7 @@ digraph manuscript {
   "cor:universal-ch0" -> "prop:A5-nonseparated" [style=solid];
   "cor:universal-ch0" -> "thm:separation-family" [style=solid];
   "def:framed-sixth-multiplicity" -> "lem:exact-low-degree-shifts" [style=dashed];
+  "framed-specialization" -> "prop:f1-tagging-counterexample" [style=dotted];
   "hirzebruch-euler-spectrum" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
   "lem:A0preserve" -> "prop:rank2-rigidity" [style=solid];
   "lem:A0preserve" -> "prop:universal-rank-two-residue" [style=dashed];
@@ -147,8 +150,10 @@ digraph manuscript {
   "lem:faithful-center-base-change" -> "prop:intrinsic-count-formulas" [style=solid];
   "lem:faithful-center-base-change" -> "prop:intrinsic-spectrum-formulas" [style=dashed];
   "lem:faithful-center-base-change" -> "prop:intrinsic-spectrum-formulas" [style=solid];
+  "lem:hirzebruch-euler-spectrum" -> "prop:f1-tagging-counterexample" [style=solid];
   "lem:relative-six-axis" -> "prop:no-elliptic-product" [style=dashed];
   "lem:relative-six-axis" -> "prop:no-elliptic-product" [style=solid];
+  "lem:simple-euler-block" -> "prop:f1-tagging-counterexample" [style=solid];
   "prop:A5-nonseparated" -> "thm:separation-family" [style=solid];
   "prop:A5-not-coprime" -> "lem:pencil-loci-coordinates" [style=dashed];
   "prop:A5-not-coprime" -> "lem:pencil-loci-coordinates" [style=solid];

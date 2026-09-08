@@ -124,8 +124,10 @@ eigenvalue of \(M_{\mathrm f,V}\) is independent of the complement \(V\), the
 Levelt--Turrittin ramification and decomposition, and the algebraic closure
 \(\Omega_V\).  It is also unchanged when the chosen algebraic closure of the
 original coefficient field is replaced by a common algebraically closed
-overfield.  When \(K=\C\), it is the usual multiplicity in the analytic
-formal monodromy on the original \(z\)-disc.
+overfield.  When \(K=\C\), it is the usual multiplicity in formal monodromy
+on the original \(z\)-disc. This is distinct from full analytic monodromy
+of an irregular connection, whose comparison of sectorial solutions also
+involves Stokes matrices \cite[Lecture~5]{SabbahStokes}.
 We use here the functoriality and uniqueness of the ramified formal
 decomposition.  That statement holds over any algebraically closed coefficient
 field of characteristic zero, which is the algebraic form we need, and in that
@@ -526,10 +528,10 @@ have the initial form
 with $\lambda_j=\zeta_j u^{-1}$
 \cite[Section~5.8.2 and (5.27)--(5.30)]{IritaniBlowup}, with numerical
 specialization
-\[
+\begin{equation}
  \chi_j(Q_C^d)=Q^{i_*d}u^{\rho_C\cdot d}.
  \label{eq:center-novikov-specialization}
-\]
+\end{equation}
 Lemma~\ref{lem:exact-low-degree-shifts} removes the scalar term and the fixed
 divisor \(h_{C,j}\) exactly.  The latter character descends through
 \eqref{eq:center-novikov-specialization} because $h_{C,j}$ is a scalar
@@ -1109,7 +1111,17 @@ surfaces and is not available for such a center.
 \end{remark}
 
 \begin{hypothesisT}[Divisor-tagging specialization invariance]
-Let $\chi:\Lambda_T\to A$ be strictly Novikov-admissible.  Choose integral
+Let \(i:T\hookrightarrow Y\) be an actual smooth blowup center in a smooth
+projective variety of dimension at most four, with \(T\) a surface that is
+neither minimal nor geometrically ruled. Consider precisely its maps
+\[
+ \chi_j(Q_T^d)=Q^{i_*d}u^{\rho_T\cdot d},\qquad u=q^{-1/(c-1)},
+\]
+from \eqref{eq:center-novikov-specialization}, in the coefficient completion
+of that comparison, where \(c=\operatorname{codim}(T,Y)\). Allow the
+faithful coefficient-field extensions used there, but no further arbitrary
+specializations of the Novikov or exceptional variables. Write \(\chi\)
+for one of these strictly Novikov-admissible maps. Choose integral
 divisors $D_1,\ldots,D_\rho$ whose pairings separate $N_1(T)$ and define
 \[
  \chi_{\boldsymbol t}(Q^d)
@@ -1122,8 +1134,118 @@ $e^{\pi i/3}$ and $e^{-\pi i/3}$.
 
 This hypothesis concerns only the specialization step in this tagging
 family.  It does not assert reconstruction invariance or invariance under
-an arbitrary divisor-valued bulk deformation.
+an arbitrary divisor-valued bulk deformation. Graded monomiality of these
+maps is proved in Lemma~\ref{lem:center-maps-monomial}; it does not by itself
+prove this hypothesis for arbitrary surfaces.
 \end{hypothesisT}
+
+\begin{proposition}[Failure of unrestricted tagging invariance on \(F_1\)]
+\label{prop:f1-tagging-counterexample}
+\coverage{absent}%
+\evidence{framed-specialization}%
+For the fibre \(f\) and negative section \(s\) of \(F_1\), the map
+\[
+ \chi(Q^f)=-27t^2,\qquad \chi(Q^s)=16t
+ \quad\text{in }\C[[t]]
+\]
+is strictly Novikov-admissible but not graded-monomial. Its repeated Euler
+eigenvalue has a scalar rank-two leading block. The framed monodromy satisfies
+\begin{equation}
+ \det(\lambda I-M_{\mathrm f})
+  =(\lambda-1)^2(\lambda^2-\lambda+1),\qquad \nu_6(F_1;\chi)=2.
+ \label{eq:f1-specialized-monodromy}
+\end{equation}
+Independent divisor tags \(Q^f=-27t^2e^\alpha\), \(Q^s=16te^\beta\)
+give simple Euler spectrum and \(\nu_6=0\). Thus Hypothesis~T with
+unrestricted quantification over strictly admissible maps is false.
+\end{proposition}
+
+\begin{proof}
+The valuation of the image of \(Q^{mf+ns}\) is \(2m+n\), positive and
+proper on \(\mathbf N^2\). Every monomial image is nonzero and
+\(\operatorname{gr}\C[[t]]=\C[t]\) is a domain. The initial forms
+\(-27t^2\) and \(256t^2\) of \(Q^f\) and \(Q^{2s}\) are distinct and
+proportional, so cannot both belong to a \(\C\)-basis.
+
+Put \(u=Q^f\), \(w=Q^s\). The quantum relations used in
+Lemma~\ref{lem:hirzebruch-euler-spectrum} give
+\(p=S\star F+wS\), where \(p\) is the fixed point class. In the fixed
+cohomology basis \((1,F,S,p)\), the horizontal equation is
+\[
+ z^2\partial_z y=(U+zD)y,\qquad
+ U=\begin{pmatrix}
+ 0&0&2u&3uw\\3&0&0&2u\\2&w&-w&0\\0&2&1&0
+ \end{pmatrix},\qquad D=\diag(1,0,0,-1).
+\]
+The basis \((1,F,S,S\star F)\) used for the earlier Euler quartic is
+related by \(P=I-wE_{34}\). Its grading is \(P^{-1}DP\), with entry
+\((3,4)=-w\); it must not be replaced by a diagonal grading in that basis.
+Direct multiplication gives
+\[
+ \begin{gathered}
+ \det(xI-U)=x^4+wx^3-8ux^2-36uwx+16u^2-27uw^2,\\
+ \disc_x\det(xI-U)=-u^2w^2(256u+27w^2)^3.
+ \end{gathered}
+\]
+At the stated specialization this factors as
+\((x+18t)^2(x^2-20tx+612t^2)\).
+For \(L_t=\diag(1,t^{-1},t^{-1},t^{-2})\), one has
+\(U(-27t^2,16t)=tL_tU(-27,16)L_t^{-1}\) and \(L_tD=DL_t\).
+These are changes of coefficients, independent of \(z\), so it suffices to
+compute the residue at \(t=1\).
+
+Write \(U_0=U(-27,16)\). The projector onto the double eigenspace is
+\[
+ E=\frac{U_0^2-20U_0+612I}{1296},\qquad
+ E^2=E,\quad\rk E=2,\quad (U_0+18I)E=0.
+\]
+In its basis \((3,-1/2,1,0)^t,(72,-9,0,1)^t\), the compression of
+\(D\) is
+\[
+ R=\begin{pmatrix}-1/18&4/3\\1/54&1/18\end{pmatrix},
+ \qquad R^2=\frac1{36}I,\quad\tr R=0.
+\]
+Splitting the distinct leading clusters by a gauge \(I+O(z)\) leaves this
+compressed coefficient unchanged: the first commutator has zero diagonal
+block against a scalar leading term. Removing the scalar irregular
+exponential therefore leaves a regular-singular block with residue
+eigenvalues \(\pm1/6\). The other clusters are rank one and have zero
+residue by Lemma~\ref{lem:simple-euler-block}. There is no loop ramification,
+so these four exponents give \eqref{eq:f1-specialized-monodromy}.
+
+The divisors \(S+F,F\) pair dually with \(f,s\). Their independent tags give
+\[
+ 256Q^f+27(Q^s)^2
+   =6912t^2(e^{2\beta}-e^\alpha)\ne0.
+\]
+The tagged quartic is separable over the fraction field of
+\(\C[[t,\alpha,\beta]]\); all four leading blocks have rank one, hence
+zero primitive-sixth multiplicity. Specializing \(\alpha=\beta=0\) gives
+the asserted jump.
+\uses{lem:hirzebruch-euler-spectrum,lem:simple-euler-block}%
+\end{proof}
+
+This example does not meet the graded-monomial hypothesis of the direct
+\(F_1\) vanishing result and does not refute restricted Hypothesis~T.
+Its scalar double block has zero nilpotent part, so it also lies outside the
+nonzero-nilpotent-block criterion of \cite{RuddM1} and the cyclic-block
+persistence argument here. Faithful transport to the tagged coefficient
+field and preservation upon setting its tags to zero are different claims.
+
+The collision mechanism belongs to existing caustic theory.
+Reyes \cite[Proposition~5.3]{ReyesCaustic} computes the nonzero exponents
+\(\pm(m-2)/(2m)\) along an \(I_2(m)\) caustic under his Frobenius-manifold
+and nondegeneracy hypotheses. At \(m=3\) these are \(\pm1/6\).
+His strong isomonodromy theorem concerns motion along the caustic, not
+specialization from its complement. The calculation above establishes this
+\(F_1\) example directly, without claiming the general collision phenomenon
+or importing the geometric hypotheses of that theorem.
+
+The remaining target is a geometrically checkable specialization criterion
+for the actual center maps in Hypothesis~T, including control of the
+permitted eigenvalue collisions. Graded monomiality alone is not such a
+criterion for every surface. Removing restricted Hypothesis~T would still
+leave the reconstruction-tail Hypothesis~R unresolved.
 
 \begin{lemma}[Divisor tagging, conditional]
 \label{lem:divisor-tagging}
@@ -1138,7 +1260,8 @@ an arbitrary divisor-valued bulk deformation.
   associatedGradedTagging_taggedImage_eq_zero_iff,%
   associatedGradedTagging_taggedImage_injective}%
 Assume Hypothesis~T.
-Let \(\chi:\Lambda_T\to A\) be strictly Novikov-admissible.  If the intrinsic
+Let \(\chi:\Lambda_T\to A\) be an actual remaining surface-center map
+in the class specified in Hypothesis~T. If the intrinsic
 small even quantum connection of \(T\) has no primitive-sixth framed
 monodromy, neither does its specialization along \(\chi\).
 \end{lemma}
@@ -1232,11 +1355,13 @@ Assume Hypothesis~R, and Hypothesis~T only for surface centers that are
 neither minimal nor geometrically ruled.  Let \(T\) be a point, a smooth
 projective curve, or a smooth projective
 surface, and let \(\chi\) be a strictly Novikov-admissible specialization,
-graded-monomial when \(T\cong F_1\).  Then
-\[
+graded-monomial when \(T\cong F_1\). If \(T\) is a surface that is neither
+minimal nor geometrically ruled, require in addition that \(\chi\) be an
+actual center map in the class specified in Hypothesis~T. Then
+\begin{equation}
  \nu_6(T;\chi)=0.
  \label{eq:low-dimensional-vanishing}
-\]
+\end{equation}
 \end{proposition}
 
 \begin{proof}
@@ -1431,16 +1556,17 @@ Hypothesis~T.
 We recall the small-even block data needed for its proof.  Over
 \(F_X=\overline{\operatorname{Frac}\C[[q]]}\), put \(r=(3q)^{1/2}\).
 The calculation in \cite[Section~2]{RuddM1} separates the two scalar blocks
-with leading terms \(6r\) and \(-6r\) from a rank-two block satisfying
+with leading terms \(6r\) and \(-6r\) from a rank-two block on
+\(\widetilde{\mathbf S}=(\widetilde S_3,\widetilde S_4)^t\) satisfying
 \begin{equation}
  z^2\partial_z
- \begin{pmatrix}\widetilde S_3\\\widetilde S_4\end{pmatrix}
+ \widetilde{\mathbf S}
  =\left[
  \begin{pmatrix}0&2\\0&0\end{pmatrix}
  +z\begin{pmatrix}-19/18&0\\0&19/18\end{pmatrix}
  +z^2\begin{pmatrix}0&-14/(81r^2)\\-8/81&0\end{pmatrix}
  +O(z^3)\right]
- \begin{pmatrix}\widetilde S_3\\\widetilde S_4\end{pmatrix}.
+ \widetilde{\mathbf S}.
  \label{eq:framed-cubic-block-reduction}
 \end{equation}
 The normalized splitting gauge and its inverse use only integral powers of

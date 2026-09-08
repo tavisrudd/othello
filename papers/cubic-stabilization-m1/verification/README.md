@@ -149,7 +149,7 @@ the aggregate to import each one, and computes terminal and signature coverage
 across their union.  This keeps the manuscript split visible without weakening
 the exact terminal census.
 
-Checked coverage snapshot: 66 claims; 13 absent; 26 fragmentary; 26 conditional; 1 complete; 319 reviewer terminals, of which 83 are machinery serving no current manuscript claim.
+Checked coverage snapshot: 67 claims; 14 absent; 26 fragmentary; 26 conditional; 1 complete; 319 reviewer terminals, of which 83 are machinery serving no current manuscript claim.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -425,3 +425,17 @@ and proved by exact matrix arithmetic in the Lean module
 `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.CubicSmallEvenBlockReduction`,
 whose theorems are checked by the Lean kernel independently of any symbolic
 algebra system.
+
+## Framed companion: specialization counterexample
+
+The companion restricts Hypothesis T to actual remaining surface-center maps.
+Its F1 example disproves unrestricted strict-admissibility invariance;
+faithfulness of independent divisor tags does not preserve monodromy after
+setting those tags to zero. Neither restricted T nor R is discharged.
+The new proposition has absent Lean coverage. Replay the independent finite
+algebra from this paper root with
+`uv run --with sympy==1.14.0 python verification/framed_specialization.py --check`.
+The adjacent JSON and SHA-256 manifest record the fixed cohomology basis,
+correct grading, spectral projector, residue and tagged collision factor.
+This supplements the printed proof and establishes no geometric comparison
+theorem.

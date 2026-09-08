@@ -38,6 +38,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
+- **Framed companion specialization boundary (2026-09-08):** the independently
+  checked F1 example refutes unrestricted T. The companion now restricts T
+  and its downstream uses to actual remaining center maps; R and restricted
+  T remain open. Report: `../2026-09-08-framed-specialization-repair.md`.
 - **C1128 is complete (2026-09-08):** the bounded feedback/extension audit
   supports the comparison/rigidity repairs, unified Fano application, torus
   explanations and selective structural corollaries. The family mathematics

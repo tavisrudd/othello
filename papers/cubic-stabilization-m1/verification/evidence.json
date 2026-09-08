@@ -37,6 +37,13 @@
       "commands": [
         "uv run --with sympy==1.14.0 python verification/check_universal_residue.py"
       ]
+    },
+    "framed-specialization": {
+      "role": "Supporting exact algebra for the companion F1 tagging counterexample: independent quotient-ring reconstruction in the fixed cohomology basis, moving-basis grading correction, polynomial spectral projector, compressed residue and tagged discriminant. Formal classification, admissibility and geometric quantum input are argued in the companion; restricted T and R remain hypotheses.",
+      "checksum_manifest": "verification/framed_specialization.sha256",
+      "commands": [
+        "uv run --with sympy==1.14.0 python verification/framed_specialization.py --check"
+      ]
     }
   }
 }
