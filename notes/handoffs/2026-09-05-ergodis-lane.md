@@ -52,6 +52,10 @@ retire divergent active demo build paths after migration. The task card indexes
 the Sunday/Monday architecture and implementation notes already loaded.
 Mandatory inventory, cross-target conformance and native performance gates:
 `notes/2026-09-08-c1130-wasm-feature-completeness.md`.
+Start with a concrete contract over composition, compiled LRC queries and QEC;
+extract the smallest shared interface, bind canonical WASM, then expand to full
+parity. A private glossary reconciliation follows initial integration and is
+refreshed at closeout; these context/terminology docs must not ship.
 Read both contributor performance documents in full on resume. Recovery/QEC/
 scheduling browser execution is part of this scope; the current lab restrictions
 are temporary implementation gaps, not intended WASM capability boundaries.
