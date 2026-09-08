@@ -1,18 +1,26 @@
 {
+  "verification/check_metadata.py": {
+    "bytes": 1584,
+    "sha256": "e5e839cd0b593ba163735c714cac55a6c2cdfd9df4108e3989afb8b885e5f44c"
+  },
+  "verification/check_pdf.py": {
+    "bytes": 1410,
+    "sha256": "e931e0a3d8580bb3ca7f69edb7c8448bad8f25811cd7e26af101a3db43fd66cc"
+  },
   "verification/finite-certificate.json": {
     "bytes": 909,
     "sha256": "92ec7f144a1434f00c2098453343a9c4c6957a550b105e24186db8162ac4cbe6"
   },
   "verification/finite_check.py": {
-    "bytes": 4840,
-    "sha256": "aad01b9ba5b25ea7ef932c928a55ac01343ab3aa46d82160ad2c10c1ad2de07b"
+    "bytes": 4826,
+    "sha256": "191903d0b99490c95bc67a924fbed2324cd9a7ee9e9a13bf242fbef32e893b55"
   },
   "verification/shadow-certificate.json": {
     "bytes": 3785,
     "sha256": "5e0bb60ae11373afb4ff7398fe11990990f4e0b03da13bcfb5d1608a9102d045"
   },
   "verification/shadow_check.py": {
-    "bytes": 3128,
-    "sha256": "6360661a69ee16b37e4e83e52cd24c7f6784cb49427b9121925f02aeaeeb4f63"
+    "bytes": 3105,
+    "sha256": "bf8371fd9d504c3f9b37c773b5552048b5cb8fe017f9dcd29c28032446b16a06"
   }
 }

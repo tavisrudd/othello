@@ -1,0 +1,6 @@
+trades p=5 : 3 translation classes (all)
+# p=5 classes=3 pairs-checked=0 hits(m0..m2 equal, m3 different)=0 strength3(m3 also equal)=0 bucket-size-distribution=[(1, 3)]
+
+real	0m0.003s
+user	0m0.003s
+sys	0m0.004s

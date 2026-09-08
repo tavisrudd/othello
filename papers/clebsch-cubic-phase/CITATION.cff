@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Please cite the accompanying preprint when using this artifact."
+type: article
+title: "Strength-two trades and transversal cubic gates: the Clebsch cubic-phase codes and their magic"
+authors:
+  - family-names: Rudd
+    given-names: Tavis
+    orcid: "https://orcid.org/0009-0003-6405-3275"
+    affiliation: Independent researcher
+license: CC-BY-4.0

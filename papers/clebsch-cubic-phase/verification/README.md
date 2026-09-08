@@ -1,60 +1,63 @@
-# Draft verification
+# Verification and trust boundary
 
-Run from the paper directory:
+Run from the artifact root:
 
-```
+```sh
 nix develop .#manuscript --command make check
-nix develop .#manuscript --command make pdf
+nix develop .#manuscript-pdf --command make pdf-check
 ```
 
-The paper is an unnumbered research companion; every statement's formal coverage
-is `absent`. No Lean command or terminal is used. This small source checker
-implements the absent-coverage portion of the annotation conventions; it is not
-a kernel-proof or public-release gate. `dependency_graph.py` records authored
-statement edges and proof edges, with imports/evidence distinguished. The main
-bibliographic source registry carries read depths, pinpoints and convention
-boundaries; the canonical novelty authority remains the explicitly linked N1–N9
-ledger in the C1102 literature audit, not a duplicated paper ledger.
+Every theorem-like statement has formal coverage `absent`: no Lean declaration
+or kernel-checked proof is claimed. `check.py` verifies ten statement digests,
+annotation/claim agreement, proof identities, citation and label references,
+dependency-graph freshness, package-local hashes, and exact rational spectrum,
+product and factory inequalities. The source map records conventions and
+read depths; it does not certify novelty or unexamined literature.
 
-`check.py` checks ten statement digests, annotation/claim agreement, unique proof
-identities, citations and references, dependency-graph freshness, all registered
-input hashes, the approved citation exception, and exact rational arithmetic.
-`finite_check.py --check` independently re-expands the normal forms from the
-matrix input, verifies signed moments and Schur ranks, repeats all 19608
-projective p=7 Hessian ranks, and tests the translation family at seven primes.
-Its certificate is generated with `--write`; it is not hand-edited. Python
-standard library only, deterministic exact arithmetic, no random seed. A complete
-small-prime enumeration does not certify the unrun p=11 census or global code
-classification. The translation-family statement has a proof in the manuscript.
+`finite_check.py --check` derives the cubic tensor from the evaluation matrices,
+re-expands both normal forms, checks signed moments and Schur ranks, enumerates
+all `19608` projective points for the six-variable `p=7` Hessian census, and
+tests seven primes in the translation family. The resulting vector census is
+`(1,48,2940,26502,88158)` at ranks `0,3,4,5,6`.
 
-`input-hashes.json` pins the 107 existing files actually inventoried under the
-four task-owned bundles and the key citation/shadow reports. The source scripts
-and outputs remain at their monorepo paths. It does not inventory original
-copyrighted paper PDFs: scan/PDF hashes live in the literature register.
-Three committed shadow intermediates are pinned for the supplementary check;
-the original sequence can regenerate them. `local-hashes.json` pins both new
-checkers and their certificates.
-`shadow_check.py --check` reproduces the scalar 2 normalization and actual
-involutory exchange, then tests all 1320 geometric actions. Exactly 60 preserve
-the shadow; all their restrictions have determinant 1 and differ from q.
-It reuses the original field/substitution utilities and does not independently
-rederive the representation. Its certificate contains the explicit embedding,
-coefficient vectors and q, so the normalization can be checked separately.
-Full replay commands and limits are in `evidence.json` and the source reports.
-Some historical scripts retain obsolete scratch-directory search-path additions;
-run from the documented bundle directory so sibling imports resolve there.
-No standalone export is claimed; resolve/copy all dependencies before release.
+`shadow_check.py --check` checks the actual/projective scalar `2`, the
+involutory exchange, and every one of `1320` geometric actions. Exactly `60`
+preserve the five-dimensional space, and their determinant-one restrictions
+exclude the specified determinant-minus-one involution. It reads three pinned
+serialized intermediates and reuses the included finite-field substitution
+utilities. It does not independently derive the geometric representation.
+[`../supplement/replay_shadow.py`](../supplement/replay_shadow.py) regenerates
+that representation and the Hankel identification in an isolated copy.
 
-The original p=7 census had two implementations. The new draft check gives a
-fresh third traversal, deriving its tensor directly from the matrix rather than
-reading the stored tensor. The factory's original independent checks compare
-primal enumeration with MacWilliams and synthesis kernels with Fourier sums.
-The p=11 census and fixed-space distance negative do not have independent full
-second implementations. Their trust boundaries are explicit in the manuscript.
+`../supplement/factory/benchmark.py --check` regenerates exact enumerators and
+rational interval constants. It compares direct enumeration with MacWilliams
+transforms and synthesis-kernel enumeration with the Fourier formula. There
+is no floating-point decision or random seed in this certificate.
 
-After any statement change, review its mathematics and claim row, then run
-`python3 verification/refresh_claim_digests.py semantic-label ...`.
-Regenerate the dependency graph separately. Never use digest refresh to hide an
-unreviewed discrepancy. The draft checker rejects statement drift, missing
-annotation identifiers, citation failures and source-hash changes. Negative
-checks are recorded in the dated drafting report.
+`check_pdf.py` copies TeX sources to a fresh directory, builds twice using the
+pinned epoch and toolchain, rejects layout/reference warnings, and requires
+byte equality with `companion.pdf`. It writes no manuscript source.
+
+## Evidence identity
+
+`input-hashes.json` pins the public supplementary scripts, data and compact
+records. `local-hashes.json` pins lightweight checker sources and certificates.
+The original large `p=11` census and distance-three subspace search remain
+recorded exhaustive executions rather than independently repeated full searches.
+Their commands, finite domains, sampled branches and costs are described in
+[`../supplement/REPRODUCING.md`](../supplement/REPRODUCING.md).
+
+`dependency_graph.py` records authored conceptual statement dependencies and
+logical proof dependencies. The graph is not inferred from cross-references.
+The statement digest strips annotation macros and normalizes layout, so a
+mathematical edit requires explicit review before its digest is refreshed:
+
+```sh
+python3 verification/refresh_claim_digests.py semantic-label
+python3 verification/dependency_graph.py verification/dependency-graph.dot
+```
+
+The finite and shadow certificates can be regenerated using each script's
+`--write` mode; the factory certificate uses the same option. Regenerate a
+whole affected certificate, then update its checksum record. A checksum match
+establishes file identity, not an independent mathematical proof.

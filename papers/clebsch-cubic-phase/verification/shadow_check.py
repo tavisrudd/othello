@@ -7,7 +7,7 @@ import json
 import pickle
 import sys
 from check import REPO,V
-SOURCE=REPO/'notes/2026-09-07-c1099-cubic-phase-strengthening/paperv'
+SOURCE=REPO/'supplement/classification/shadow'
 sys.path.insert(0,str(SOURCE))
 from geom11 import matmul,matinv,identity
 from step4_bridge import subst_cubic,pnorm,BASIS3

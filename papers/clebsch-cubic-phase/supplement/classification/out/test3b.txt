@@ -1,0 +1,12 @@
+p= 5 explicit translation trade: n=10 dimL=5 distinct=True isotropic=True cubic_nonzero=True signed moments zero (orders 0,1,2,3) = [True, True, True, False]  dimL2=9 (rigid iff 9) dimL3=10 d_X=4 (exact) d_Z=2
+      random point-reflection member: dimL=5 isotropic=True cubic_nonzero=True moments zero=[True, True, True, False] dimL2=9
+p= 7 explicit translation trade: n=14 dimL=7 distinct=True isotropic=True cubic_nonzero=True signed moments zero (orders 0,1,2,3) = [True, True, True, False]  dimL2=13 (rigid iff 13) dimL3=14 d_X=4 (exact) d_Z=2
+      random point-reflection member: dimL=7 isotropic=True cubic_nonzero=True moments zero=[True, True, True, False] dimL2=13
+      p=7 logical cubic Hessian census (exact): {0: 1, 2: 16806, 5: 14406, 6: 86436}  r_min=2  M2=5.8303  sum|<P>|^4=2419/7
+p=11 explicit translation trade: n=22 dimL=11 distinct=True isotropic=True cubic_nonzero=True signed moments zero (orders 0,1,2,3) = [True, True, True, False]  dimL2=21 (rigid iff 21) dimL3=22 d_X=10 (sampled bound) d_Z=2
+      random point-reflection member: dimL=11 isotropic=True cubic_nonzero=True moments zero=[True, True, True, False] dimL2=21
+p=13 explicit translation trade: n=26 dimL=13 distinct=True isotropic=True cubic_nonzero=True signed moments zero (orders 0,1,2,3) = [True, True, True, False]  dimL2=25 (rigid iff 25) dimL3=26 d_X=12 (sampled bound) d_Z=2
+      random point-reflection member: dimL=13 isotropic=True cubic_nonzero=True moments zero=[True, True, True, False] dimL2=25
+p=17 explicit translation trade: n=34 dimL=17 distinct=True isotropic=True cubic_nonzero=True signed moments zero (orders 0,1,2,3) = [True, True, True, False]  dimL2=33 (rigid iff 33) dimL3=34 d_X=24 (sampled bound) d_Z=2
+p=19 explicit translation trade: n=38 dimL=19 distinct=True isotropic=True cubic_nonzero=True signed moments zero (orders 0,1,2,3) = [True, True, True, False]  dimL2=37 (rigid iff 37) dimL3=38 d_X=26 (sampled bound) d_Z=2
+p=23 explicit translation trade: n=46 dimL=23 distinct=True isotropic=True cubic_nonzero=True signed moments zero (orders 0,1,2,3) = [True, True, True, False]  dimL2=45 (rigid iff 45) dimL3=46 d_X=34 (sampled bound) d_Z=2

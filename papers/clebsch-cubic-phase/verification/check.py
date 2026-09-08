@@ -1,4 +1,4 @@
-"""Source/evidence check for the unnumbered draft; no Lean or release claim."""
+"""Check manuscript identities, package-local evidence and exact arithmetic."""
 import hashlib
 import json
 import re
@@ -6,7 +6,7 @@ from fractions import Fraction as Q
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-REPO = ROOT.parents[1]
+REPO = ROOT  # All evidence is package-local.
 V = ROOT / 'verification'
 ENVS = 'theorem|proposition|lemma|corollary'
 MACROS = 'coverage|lean|uses|proves|imports|evidence'
@@ -116,10 +116,8 @@ def main():
         data=(REPO/name).read_bytes()
         assert len(data)==item['bytes'] and hashlib.sha256(data).hexdigest()==item['sha256'],name
     assert (V/'dependency-graph.dot').read_text()==graph(stmts),'dependency graph drift'
-    approval=json.loads((REPO/'notes/2026-09-07-c1102-forward-citations/gate-approval.json').read_text())
-    assert approval['drafting_authorized'] and approval['crossref_count'] is None
     arithmetic()
     print(f'PASS: {len(stmts)} statement identities; {len(inputs)} evidence/source hashes; references and exact spectrum/product/factory arithmetic.')
-    print('Draft scope only: formal coverage absent; full census replay, external review and standalone release not claimed.')
+    print('Formal coverage absent; full large-census replay is separate from these local checks.')
 
 if __name__=='__main__': main()

@@ -1,0 +1,39 @@
+outer permutation tau = [1, 0, 4, 5, 2, 3]
+logical cubic lies in Pi: True
+conference triangle cubic lies in Pi: True
+
+member | #singular F_11-points | role
+   0 |     0 | 
+   1 |    10 | 
+   2 |     0 | 
+   3 |     0 | 
+   4 |     0 | 
+   5 |    12 | 
+   6 |     0 | 
+   7 |     0 | 
+   8 |     0 | 
+   9 |    12 | logical F_11|_W
+  10 |     6 | conference
+  11 |     0 | 
+
+members with 12 singular points in general position (rational normal quartic): [5, 9]
+members with exactly six singular points: [10]
+logical cubic is chordal: True; is conference: False
+
+Hessian-rank censuses over F_11^5 (N_0, N_1, ..., N_5):
+  logical F_11|_W      (1, 0, 0, 120, 27720, 133210)
+  conference c_B       (1, 0, 0, 300, 22260, 138490)
+  chordal #5           (1, 0, 0, 120, 27720, 133210)
+  chordal #9           (1, 0, 0, 120, 27720, 133210)
+
+q sends the logical member to member index 5
+q fixes the conference member: True
+q exchanges the two chordal members: True
+
+q_Pi in the basis (c_B, h) [c_B is the pentagon triangle cubic, h the logical cubic]:
+  q(c_B) = 10 c_B + 0 h
+  q(h)   = 6 c_B + 1 h
+  (q - 1)h = 6 c_B   with beta = 1
+
+global negation -I: c -> -c, same projective member: True; as actual cubics equal: False
+wrote out/pencil.pkl

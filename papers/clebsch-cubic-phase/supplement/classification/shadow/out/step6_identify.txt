@@ -1,0 +1,22 @@
+axis relabellings carrying our restricted cubic onto Paper V's projected_sheet_cubic: 60  e.g. (0, 1, 4, 3, 5, 2)
+axis relabellings carrying our triangle cubic onto Paper V's conference_triangle_cubic: 120  e.g. (0, 1, 2, 4, 3, 5)
+  (the other chordal member also matches under 60 relabellings)
+
+singular points of the restricted cubic: 12
+stabilizer orders on the singular points: [5]
+stabilizer orders on P^1(F_11): [5]
+parameter points with the same C_5 stabilizer as one singular point: [4, 9]
+equivariance twist that works: outer; base parameter t_0 = 2
+projectivity L carries the standard rational normal quartic onto the singular locus, and c(L z) = 8 * det Hankel(z)
+  L = [[1, 2, 1, 0, 0], [0, 0, 1, 9, 1], [3, 7, 7, 6, 4], [4, 5, 7, 4, 3], [5, 4, 4, 7, 5]]
+
+Hankel determinant: 12 singular F_11-points, in general position: True
+Hankel Hessian-rank census over F_11^5: (1, 0, 0, 120, 27720, 133210)
+
+monomial x_0^2 x_1 is BASIS3 index 1
+[x_0^2x_1] of q(h) after normalization: 5
+(q-1)h = 4 * c_B in the pivot normalization (consistent: True)
+the same with the opposite conference sign: 7
+Paper V's tau matrix equals ours for [0,1,3,4,5,2]: [[1, 0, 0, 0, 0], [0, 1, 0, 0, 0], [10, 10, 10, 10, 10], [0, 0, 1, 0, 0], [0, 0, 0, 1, 0]]
+  after relabelling to Paper V's axes: [x_0^2x_1]q(h) = 9, (q-1)h = 8 c_B for the conference sign +
+  after relabelling to Paper V's axes: [x_0^2x_1]q(h) = 9, (q-1)h = 3 c_B for the conference sign -

@@ -1,0 +1,8 @@
+F_11(u(s,z)) = 4 s I_2(z) + 2 I_3(z) at 200 random points: True
+s-row of the V_5 summand in (s,z) coordinates: [0, 0, 0, 0, 0]  (zero means W lies in the octavic space)
+s-coordinate of the A_5-trivial summand: 1 (nonzero)
+s-coordinates of the V_4 summand's spanning set: [0]
+
+F_7(u(s,a,b,c,d,e)) = 4 s I + 3 J at 200 random points: True
+J over F_7: 8 singular projective points (|P^1(F_7)| = 8), in general position: True
+Hessian-rank census of J over F_7^5: (1, 0, 0, 48, 4368, 12390)

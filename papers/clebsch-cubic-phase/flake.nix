@@ -48,6 +48,14 @@
             packages = base ++ [ pkgs.poppler-utils ];
           };
 
+          # Symbolic reconstruction and optional Rust census/search replays.
+          manuscript-compute = pkgs.mkShell {
+            packages = with pkgs; [
+              (python3.withPackages (ps: [ ps.sympy ps.numpy ]))
+              rustc cargo git coreutils
+            ];
+          };
+
           # Adds sympy to the Python environment.
           manuscript-sympy = pkgs.mkShell {
             packages = with pkgs;

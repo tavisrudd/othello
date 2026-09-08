@@ -1,0 +1,7 @@
+|PGL_2(11)| = 1320
+a=[[0,1],[2,3]] fixes M_11: True; b=[[0,1],[7,8]] fixes M_11: True
+elements acting affinely on the 22 points: 1320 (failures 0)
+elements with nonzero translation part: 1260
+F(rho(g)u) = chi(g)F(u): PSL ok 660/660, outer-coset ok 660/660, failures 0
+rho(g)rho(h) = rho(gh) on 3600 sampled pairs: True
+wrote out/action.pkl

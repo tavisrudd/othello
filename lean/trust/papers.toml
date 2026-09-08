@@ -321,3 +321,9 @@ id = "secant_hyperplane_defects"
 dir = "papers/secant_hyperplane_defects"
 main = "secant_hyperplane_defects.tex"
 lane = "relconic"
+
+[[paper]]
+id = "clebsch_cubic_phase"
+dir = "papers/clebsch-cubic-phase"
+main = "main.tex"
+lane = "clebsch"

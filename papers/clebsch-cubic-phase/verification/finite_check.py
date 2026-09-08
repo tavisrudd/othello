@@ -9,7 +9,7 @@ from math import factorial
 import runpy
 from check import REPO, V
 
-DATA=runpy.run_path(str(REPO/'notes/2026-09-06-clebsch-quantum-replay/common.py'))
+DATA=runpy.run_path(str(REPO/'supplement/reconstruction/common.py'))
 
 def rank(rows,p):
     a=[list(row) for row in rows]; k=0

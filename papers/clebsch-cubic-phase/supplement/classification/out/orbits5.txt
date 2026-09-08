@@ -1,0 +1,8 @@
+# PGL_2 p=5 : 2 orbits, size distribution [(5, 1), (10, 1)]
+# PGL_2 p=5 hits=0
+# PSL_2 p=5 : 2 orbits, size distribution [(5, 1), (10, 1)]
+# PSL_2 p=5 hits=0
+
+real	0m0.003s
+user	0m0.004s
+sys	0m0.007s

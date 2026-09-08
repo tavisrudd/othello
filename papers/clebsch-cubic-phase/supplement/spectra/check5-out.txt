@@ -1,0 +1,30 @@
+== 1. the decomposition read off from E_7 ==
+  rows of E_7: 14; nonzero rows: 13 (row [1] is identically zero)
+  F_7 == sum of the 13 cubes: True
+  rank of those 13 cubes in the 56-dim cubic space: 13  -> representation unique: True
+  => no sub-multiset of these 13 cubes represents F_7; upper bound r <= 13.
+
+== 2. apolarity ==
+  rank Cat_(1,2) (span of the 6 first partials) = 6  -> classical lower bound r >= 6
+  rank of (y_iy_j -> H_ij) = 6; dim F^perp_2 = 15
+  |V(F^perp_2)| = 0 projective points
+
+== 3. the 4sI + 3J normal form ==
+  F_7(u(a,b,c,d,e,s)) == 4 s I + 3 J mod 7: True
+  rank of the Gram matrix of I over F_7 = 5 (memo claims 5)
+  I diagonalised: lambda = [3, 3, 1, 1, 5]  (nonzero entries 5)
+  #nonzero lambda_i == rank(Gram): True
+  s*y^2 = ((s+y)^3 + (s-y)^3 - 2 s^3)/6  =>  4 s I costs 11 cubes
+  rank Cat_(1,2)(J) = 5  ->  Waring rank of J is at least 5
+  so this route needs at least 11 + 5 = 16 cubes: worse than the 13 already available.
+
+== 4. sparse search over cubes of {0,+-1} linear forms ==
+  candidate linear forms with coefficients in {0,+-1}: 3^6-1 = 728 nonzero, 364 up to sign
+  rank of their cubes = 56 (cubic space has dim 56)
+  F_7 in span of all 364 cubes: True
+  [{0,+-1} forms] 10000 random-column-order eliminations in 44.5s
+    support sizes seen: min=37 max=56 (distribution head: [(37, 2), (38, 2), (39, 6), (40, 25)])
+    after greedy pruning of the best: 37 cubes
+  [{0,+-1} forms + the 13 rows of E_7] 10000 random-column-order eliminations in 55.0s
+    support sizes seen: min=37 max=56 (distribution head: [(37, 2), (38, 3), (39, 8), (40, 26)])
+    after greedy pruning of the best: 37 cubes

@@ -1,0 +1,9 @@
+trades p=11 : 945 translation classes (all)
+HIT p=11 classes [1, 0, 5, 7, 9, 2, 8, 3, 6, 4, 11, 10] | [1, 0, 10, 9, 8, 7, 11, 5, 4, 3, 2, 6]  affine-rank(1+dim)=11
+HIT p=11 classes [1, 0, 5, 7, 9, 2, 8, 3, 6, 4, 11, 10] | [1, 0, 11, 8, 6, 9, 4, 10, 3, 5, 7, 2]  affine-rank(1+dim)=11
+HIT p=11 classes [1, 0, 10, 9, 8, 7, 11, 5, 4, 3, 2, 6] | [1, 0, 11, 8, 6, 9, 4, 10, 3, 5, 7, 2]  affine-rank(1+dim)=11
+# p=11 classes=945 pairs-checked=3 hits(m0..m2 equal, m3 different)=3 strength3(m3 also equal)=0 bucket-size-distribution=[(1, 942), (3, 1)]
+
+real	0m0.005s
+user	0m0.040s
+sys	0m0.006s
