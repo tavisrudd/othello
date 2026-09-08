@@ -1,0 +1,113 @@
+{
+  "schema": "compositional-recovery-imported-sources-v1",
+  "sources": {
+    "Luo:relative-profile": {
+      "citation": "LuoEtAl2005",
+      "pinpoint": "Section III, Theorem 3 and Proposition 2 (p. 1225)",
+      "used": "Relative support-profile inversion and strict growth of relative generalized Hamming weights.",
+      "conventions": [
+        {
+          "aspect": "domain and interpretation",
+          "requirement": "Nested linear codes on one finite coordinate set; relative index between one and the quotient dimension.",
+          "matched": "The helper pair K_P <= D_P uses the helper coordinate universe J and ranks 1 through dim W_P. Strict growth concerns dimension-wise minima, not prescribed nested requests."
+        }
+      ]
+    },
+    "Luo:relative-Singleton": {
+      "citation": "LuoEtAl2005",
+      "pinpoint": "Section IV, Theorem 4, equation (23) (p. 1226)",
+      "used": "Relative Singleton bound M_t(D,K) <= length(D)-dim(D)+t.",
+      "conventions": [
+        {
+          "aspect": "domain and interpretation",
+          "requirement": "K is a linear subcode of D, with 1 <= t <= dim D-dim K.",
+          "matched": "Here length(D_P)=|J| and dim D_P=|J|-rank G_J+dim W_P, giving b-ell+t."
+        }
+      ]
+    },
+    "Zhang:tuple-coset-support": {
+      "citation": "ZhangEtAl2019",
+      "pinpoint": "arXiv:1804.02692v1, Section IV-B, definition preceding Lemma 7",
+      "used": "Minimum union support of representatives of a prescribed tuple of cosets, before maximization over tuples.",
+      "conventions": [
+        {
+          "aspect": "domain and interpretation",
+          "requirement": "One fixed linear code and a prescribed tuple; repeated or zero cosets are permitted.",
+          "matched": "A basis of T turns a prescribed map into a tuple of cosets of the represented inner dual. Target normalization is an additional constraint proved in this manuscript."
+        }
+      ]
+    },
+    "Aji:distributive-law": {
+      "citation": "AjiMcEliece2000",
+      "pinpoint": "Theorem 3.1 and Section III",
+      "used": "Conceptual message-passing principle specialized to finite min-sum elimination; the recovery recurrence is proved directly.",
+      "conventions": [
+        {
+          "aspect": "domain and interpretation",
+          "requirement": "The combination and elimination operations satisfy the applicable distributive law.",
+          "matched": "Finite label sets use minimum and additive cost, with infinity for infeasibility; disjoint helper ownership makes costs additive."
+        }
+      ]
+    },
+    "Kashyap:linear-cut-state": {
+      "citation": "Kashyap2007",
+      "pinpoint": "arXiv:0711.1383v1, Section 2.2 and Theorem 3.4",
+      "used": "Classical linear cut-state setting for the explicitly derived affine contribution-space interface.",
+      "conventions": [
+        {
+          "aspect": "domain and interpretation",
+          "requirement": "A supplied tree decomposition and linear state spaces; construction cost must be accounted for separately.",
+          "matched": "The fixed-query proof derives U_S intersection V_S directly and charges local tables plus polynomial linear algebra. No equality with a minimal trellis for every recovery workload is claimed."
+        }
+      ]
+    },
+    "Singer:projective-cycle": {
+      "citation": "Singer1938",
+      "pinpoint": "Cyclic projective collineation construction, pp. 377--385",
+      "used": "Multiplication modulo base-field scalars acts regularly on projective points.",
+      "conventions": [
+        {
+          "aspect": "domain and interpretation",
+          "requirement": "A finite extension L/F_q, and projective points of its one-dimensional base-field subspaces or their duals.",
+          "matched": "The represented inner message space is L; multiplication pulls back coordinate functionals. The manuscript also gives the unique-ratio argument and a concrete multiplication matrix."
+        }
+      ]
+    },
+    "Stanley:subspace-Mobius": {
+      "citation": "Stanley2012",
+      "pinpoint": "Proposition 3.7.1 and Example 3.10.2, equation (3.34)",
+      "used": "Finite-poset inversion and the subspace-interval value (-1)^d q^(d choose 2).",
+      "conventions": [
+        {
+          "aspect": "domain and interpretation",
+          "requirement": "A finite subspace lattice over F_q; d is the dimension difference. The inversion coefficients can be taken over the real numbers.",
+          "matched": "Failed projective sets are grouped by their vector-space span; the cumulative weight inside a v-space is s^(N-N_v). The empty failed set spans the zero space."
+        }
+      ]
+    },
+    "Alfarano:minimal-service": {
+      "citation": "AlfaranoRavagnaniSoljanin2022",
+      "pinpoint": "arXiv:2201.07503v2, Proposition 3.3",
+      "used": "Replacing a recovery support by an inclusion-minimal sub-support does not increase helper load.",
+      "conventions": [
+        {
+          "aspect": "domain and interpretation",
+          "requirement": "Recovery-set flow variables and nonnegative per-helper capacities.",
+          "matched": "The manuscript repeats the load-decreasing reassignment with a finite demand family and a radius cap; taking a sub-support preserves the cap."
+        }
+      ]
+    },
+    "MacWilliams:linear-GV": {
+      "citation": "MacWilliamsSloane1977",
+      "pinpoint": "Chapter 17, linear Gilbert--Varshamov argument",
+      "used": "Hamming-ball entropy estimate used in the displayed primal and dual first-moment construction.",
+      "conventions": [
+        {
+          "aspect": "domain and interpretation",
+          "requirement": "Fixed finite alphabet Q, rates strictly between zero and one, and strictly negative entropy exponents.",
+          "matched": "Choose H_Q(delta)<1-R and H_Q(delta_dual)<R; the two expected low-weight counts tend to zero simultaneously."
+        }
+      ]
+    }
+  }
+}

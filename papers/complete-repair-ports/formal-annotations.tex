@@ -5,14 +5,21 @@
 %
 %   \coverage{...}  absent, fragment, conditional_deduction, or complete;
 %   \lean{...}      reviewer terminals, without the common namespace;
-%   \uses{...}      semantic labels of manuscript dependencies;
+%   \uses{...}      manuscript dependencies: conceptual in a statement,
+%                   logical at the end of its proof;
 %   \proves{...}    the label established by a detached proof;
 %   \imports{...}   external-result identifiers resolved by the source registry;
 %   \evidence{...}  computational bundles resolved by the evidence registry.
 %
-% The annotation checker, claim map, source registry, and evidence registry own
-% the details. An absent statement carries no \lean annotation. The present
-% paper has no theorem whose proof rests on computational evidence.
+% Details live in lean/verification/claims.json, verification/imported-sources.json,
+% and verification/evidence.json. The source-only checker resolves every identifier
+% and checks the declared dependency graph and reviewed statement/source-signature
+% digests. Hashing does not elaborate Lean. An absent statement carries no \lean.
+% Proof annotations are grouped at the end, before \end{proof}, so the empty
+% macros do not change the run-in proof heading. The present paper has no theorem
+% whose proof rests on computational evidence; its evidence registry says so.
+% The uses/lean/proves vocabulary follows the Lean blueprint conventions; the
+% conceptual/logical distinction follows KnowTeX. All macros take identifiers only.
 \newcommand{\lean}[1]{}
 \newcommand{\coverage}[1]{}
 \newcommand{\uses}[1]{}

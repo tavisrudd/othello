@@ -35,8 +35,6 @@ terminals. The deterministic repair build had no TeX warnings and measured
 expected page count preserves the exact-count gate. No Lean source or build
 was involved. Further exposition work remains before C1127 closure.
 
-## Operational record
-
 ## Example and exposition batch
 
 Added a complete 12-coordinate binary hierarchy with three encoding levels.
@@ -64,7 +62,51 @@ underfull justified cells; ragged-right table columns corrected them.
 The user's additional instruction to use the shared formalization macros
 consistently is part of C1127. Audit found all six definitions present but no
 import/evidence registries or uses of those two macros, and no statement digest
-or dependency-graph gate. Their adoption is the next owned change.
+or dependency-graph gate.
+
+## Six-macro consistency audit
+
+Completed adoption of the shared six empty one-argument macros. The source gate
+now resolves imported inputs and evidence, enforces end-of-proof placement,
+checks the actual input tree, binds each reviewed correspondence row to its
+statement digest, binds the four terminals to source-signature digests, and
+rejects a stale authored dependency graph. The 32 rows now state objects,
+hypotheses, conclusions, and cautions. Source-signature hashes are explicitly
+not described as new elaboration or full semantic-dependency hashes.
+
+Nine imported-input entries distinguish conceptual use of established methods
+from logical proof inputs. The relative-weight/Singleton locators were checked
+against cached Luo et al. (2005), Section III, Proposition 2 and Theorem 3,
+and Section IV, Theorem 4, equation (23), pp. 1225--1226:
+`10.1109/TIT.2004.842763`, PDF SHA-256
+`eecbc9e01441c1a6955eeb60d17536856957c9d8b3b5ce110dbd1226d9276fd1`.
+Geil et al., `arXiv:1403.7985`, Section 2 equation (3) and Section 3's bound
+discussion were also consulted (PDF SHA-256
+`25e31e23e4238ae33a08b4730c558fe071861a87c6e4fc0e1161d4bbcda581e7`).
+These were partial passage reads, not full readings.
+
+Added the missing source for the subspace-lattice inversion formula: Stanley,
+*Enumerative Combinatorics*, volume 1, second edition, Proposition 3.7.1 and
+Example 3.10.2, equation (3.34), from the author's PDF at
+`https://math.mit.edu/~rstan/ec/ec1.pdf` (PDF pages 303 and 317; partial browser
+text access). The general inversion screenshot succeeded; the subspace-formula
+screenshot timed out, so the latter was checked in extracted mathematical text.
+The publisher's Singer PDF returned HTTP 403. Its existing attribution is
+retained without inventing a theorem number; the regular-action step is now
+proved directly by the unique multiplier class `[g/f]`. Other established
+method locators reuse the precise prior audit at
+`notes/2026-09-07-complete-ports-literature-audit.md`; they were not reread as
+new literature evidence. No new novelty-negative claim is made.
+
+All 14 mutation tests pass, including a clean baseline, unknown imports and
+evidence, coverage/terminal mismatch, unknown dependency/proof target, misplaced
+proof annotations, nonempty macro definitions, incomplete source conventions,
+stale statement/terminal digests and graph, and an omitted input section.
+Replay from the paper root: `python3 verification/test_annotations.py`.
+The source-only gate and deterministic build pass at 43 warning-free pages,
+32 claims, and four unchanged Lean terminals. No Lean run was needed.
+
+## Operational record
 
 One combined routed-read tool result exceeded the display budget and truncated.
 Replaced that display with bounded reads of the omitted Lean-guide tail and

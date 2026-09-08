@@ -11,7 +11,11 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "verification"))
+from annotation_support import check_provenance, clean, manuscript_paths
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -75,11 +79,10 @@ def claimed_terminals(data: dict) -> set[str]:
 
 
 def manuscript_environments() -> dict[str, str]:
-    paths = [PAPER_ROOT / "compositional_recovery.tex"]
-    paths.extend(sorted((PAPER_ROOT / "sections").glob("*.tex")))
+    paths = manuscript_paths()
     result: dict[str, str] = {}
     for path in paths:
-        text = path.read_text()
+        text = clean(path.read_text())
         for _, body in MANUSCRIPT_ENV.findall(text):
             labels = [
                 label
@@ -142,10 +145,7 @@ def check_manuscript_annotations(data: dict) -> None:
             )
 
     known_labels = set(environments)
-    all_text = (PAPER_ROOT / "compositional_recovery.tex").read_text()
-    all_text += "\n".join(
-        path.read_text() for path in sorted((PAPER_ROOT / "sections").glob("*.tex"))
-    )
+    all_text = "\n".join(clean(path.read_text()) for path in manuscript_paths())
     proved: set[str] = set()
     for body in PROOF_ENV.findall(all_text):
         matches = re.findall(r"\\proves\{([^}]*)\}", body, re.DOTALL)
@@ -170,6 +170,7 @@ def check_manuscript_annotations(data: dict) -> None:
         for used in (item.strip() for item in payload.replace("%", "").split(",")):
             if used and used not in known_labels:
                 raise SystemExit(f"unknown manuscript dependency in \\uses: {used}")
+    check_provenance(data, environments)
 
 
 def expected_axioms() -> dict[str, set[str]]:

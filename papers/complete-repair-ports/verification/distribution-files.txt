@@ -24,6 +24,7 @@ lean/lean-toolchain
 lean/verification/check_formal_artifact.py
 lean/verification/claims.json
 lean/verification/expected_axioms.txt
+lean/verification/refresh_claim_digests.py
 refs.bib
 sections/01-complete-ports.tex
 sections/02-confinement-transfer.tex
@@ -39,7 +40,13 @@ sections/08-conclusion.tex
 sections/09-contextual-refinement.tex
 sections/README.md
 verification/README.md
+verification/annotation_support.py
 verification/artifact-versions.json
+verification/dependency-graph.dot
+verification/dependency_graph.py
 verification/distribution-files.txt
+verification/evidence.json
 verification/formal-boundary.json
+verification/imported-sources.json
+verification/test_annotations.py
 verification/verify_release.py

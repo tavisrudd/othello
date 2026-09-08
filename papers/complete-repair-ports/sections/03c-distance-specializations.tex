@@ -168,6 +168,7 @@ though ordinary distance sees no margin.
 \begin{proposition}[A family from a Singer cycle without the outer-distance condition]
 \label{prop:strict-weighted-transfer}
 \coverage{absent}%
+\imports{Singer:projective-cycle}%
 Let $k\geq2$ and suppose
 \begin{equation}
  \frac{q^k-1}{q-1}>(k+1)^2.
@@ -194,8 +195,9 @@ The $k+1$ coordinate functionals of the encoder give a set $S$ of $k+1$
 points in the projective space on $L^*$.  The multiplication maps of $L$,
 modulo $\F_q^*$, induce on that projective space a Singer cycle of order
 $(q^k-1)/(q-1)$, acting regularly on its points~\cite{Singer1938}.
-Here regular means that a unique cycle element sends any chosen point to any
-other.  Each ordered pair of points of $S$ therefore forbids at most one cycle
+Indeed, under the trace identification, the multiplier class sending a
+nonzero functional class $[f]$ to $[g]$ is uniquely $[g/f]$.
+Each ordered pair of points of $S$ therefore forbids at most one cycle
 element, so at most $|S|^2=(k+1)^2$ elements send a point of $S$ to a point
 of $S$.  Thus~\eqref{eq:singer-disjointness} permits a multiplication map
 $a:L\to L$, explicitly $a(u)=\gamma u$ for some $\gamma\in L^\times$, whose

@@ -17,12 +17,45 @@ The source-only annotation check is
 python3 lean/verification/check_formal_artifact.py --source-only
 ```
 
-It checks that every theorem-like environment has exactly one claim-map row,
+It follows the manuscript's actual TeX input tree and checks that every
+theorem-like environment has exactly one claim-map row,
 that coverage and reviewer-terminal annotations agree, that every `uses`
 reference resolves, that each detached proof names exactly one statement with
 `proves`, that the terminal inventory partitions the Lean source, and that the
-expected-axiom inventory covers the same four terminals. This mode does not
-invoke Lean.
+expected-axiom inventory covers the same four terminals. All six annotation
+macros must remain empty one-argument commands. Imported-result identifiers
+resolve in `verification/imported-sources.json`, with bibliography keys,
+pinpoints, uses, and matched conventions; evidence identifiers resolve in
+`verification/evidence.json`, with roles, checksum manifests, and replay commands.
+Proof annotations must occur together at the end of the proof.
+
+Each claim row records its objects, hypotheses, conclusion, and cautions.
+Its digest binds the reviewed row to the mathematical statement text while
+ignoring annotations and layout. For the four Lean terminals, a second digest
+binds the explicit source signatures and ambient variable declarations.
+This is a source-text check, not an elaboration or a hash of the full semantic
+dependency closure. Prose and arguments outside theorem environments are not
+covered by statement digests. This mode does not invoke Lean.
+
+After reviewing an affected correspondence row, refresh only its exact label:
+
+```text
+python3 lean/verification/refresh_claim_digests.py thm:objectwise-confinement
+python3 verification/dependency_graph.py
+```
+
+The refresher's `--all` option establishes a reviewed baseline; it must not be
+used merely to silence a stale-digest failure. The deterministic dependency
+graph records authored conceptual dependencies as dashed edges, proof
+dependencies as solid edges, and imported inputs or evidence as dotted edges.
+It does not infer dependencies from ordinary citations or cross-references.
+The gate rejects a stale graph. Mutation tests exercise unknown identifiers,
+coverage and terminal mismatches, moved proof annotations, nonempty macro
+definitions, stale digests, missing conventions, and unreferenced sections:
+
+```text
+python3 verification/test_annotations.py
+```
 
 The standalone Lean companion can be rebuilt from `lean/` using the pinned
 toolchain and Mathlib revision described in `lean/README.md`. Its axiom-audit

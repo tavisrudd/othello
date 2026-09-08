@@ -1,0 +1,5 @@
+{
+  "schema": "compositional-recovery-evidence-v1",
+  "note": "No theorem in the manuscript relies on enumeration, generated certificates, or software execution. Illustrative arithmetic and tables have human derivations. Source and release checks validate the artifact, not the mathematical theorems.",
+  "evidence": {}
+}
