@@ -90,9 +90,7 @@ truncated Chern class arithmetic, the Betti numbers, the degree count placing th
 whole odd cohomology in that packet, and the constancy of rank on a connected
 component.
 
-Checked coverage snapshot: 62 claims; 9 absent; 25 fragmentary; 27 conditional;
-1 complete; 319 reviewer terminals, of which 83 are machinery serving no current
-manuscript claim.
+Checked coverage snapshot: 66 claims; 13 absent; 26 fragmentary; 26 conditional; 1 complete; 319 reviewer terminals, of which 83 are machinery serving no current manuscript claim.
 
 Those machinery terminals are kernel-checked and reusable, and the claim map records for each one
 why no current claim rests on it.  They formalize the pro-Laurent gauge tower,

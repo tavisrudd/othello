@@ -466,7 +466,7 @@
       "objects": "The connection of a centered rank-two factor as a formal object: the loop and base connection matrices, each with a simple pole, are represented by the power series obtained from them by clearing that pole, so that flatness and horizontality of the sesquilinear pairing are single identities of formal power series with matrix coefficients; the canonical elementary modification, constructed as the gauge diag(1, u) and applied to both directions without inverses or Laurent series; the residue of the modified lattice and its discriminant, the square of the trace minus four times the determinant; a map of the coefficient ring that is additive and satisfies the Leibniz rule, applied entrywise, modelling a base vector field; and, for the germ statement, the ring of multivariate formal power series in the coordinates of the germ over a field of characteristic zero, with its formal partial derivatives as the coordinate directions.",
       "hypotheses": "The frame is adapted: the leading coefficient of the loop direction is the square-zero matrix whose only nonzero entry is an invertible upper-right entry, the unit coming from the leading Euler operator. Two is invertible in the coefficient ring, which over the germ ring is automatic. The pairing is horizontal for the loop direction and its leading coefficient has invertible determinant, which is nondegeneracy in the form the germ ring supports; and the pair of connection matrices is flat, in every coordinate direction for the germ statement. The two final terminals instead assume the coefficient equations directly: for the first, that the upper-right entry of the residue is invertible and that the order minus-one coefficient of flatness in the modified lattice vanishes; for the second, that the entrywise derivation carries the residue to its commutator with a supplied regular matrix.",
       "conclusion": "Flatness forces the leading coefficient of the modified base direction to vanish, so the modified connection is regular in that direction; the next order of flatness is then the Lax equation, with the regular coefficient of the modified base direction itself as the conjugating matrix rather than a supplied one; consequently every derivation of the coefficient ring annihilates the residue discriminant, and over the germ that discriminant equals the constant series with its own constant coefficient, so it does not vary over the germ. Horizontality of the pairing, not an assumption on the connection, supplies the property of the regular coefficient that the modification needs. The two final terminals record the same vanishing of the residual pole and the same annihilation of the discriminant from the supplied coefficient equations alone.",
-      "cautions": "The geometry is not constructed and remains the input, exposed as typed premises: that a rank-two formal connection block of the A-model F-bundle supplies a connection of this shape in an adapted frame, that the Poincare pairing of that block is the horizontal pairing of the connection, and that the formal power-series model computes the germ of the spectral component. Lean builds no F-bundle, spectral cover, connected component of one, or geometric lattice, and the centering of the scalar irregular part is part of the presentation rather than a formalized step. Constancy is proved over the formal germ, not analytic local constancy on a rigid chart. The preliminary continuation of the separated cluster, the cyclic-centralizer argument before nilpotence is known, and the recursion proving persistence of N squared equal to zero are manuscript arguments, not conclusions of these terminals.",
+      "cautions": "The geometry is not constructed and remains the input, exposed as typed premises: that a rank-two formal connection block of the A-model F-bundle supplies a connection of this shape in an adapted frame, that the Poincare pairing of that block is the horizontal pairing of the connection, and that the formal power-series model computes the germ of the spectral component. Lean builds no F-bundle, spectral cover, connected component of one, or geometric lattice, and the centering of the scalar irregular part is part of the presentation rather than a formalized step. Constancy is proved over the formal germ, not analytic local constancy on a rigid chart. The preliminary continuation of the separated cluster, the cyclic-centralizer argument before nilpotence is known, and the recursion proving persistence of N squared equal to zero are manuscript arguments, not conclusions of these terminals. Cluster persistence is stated separately with absent coverage. Conjugation on the modified lattice can depend on the first jet of the original gauge.",
       "statement_digest": "a9e102c963f5aedef2c9fb90f0eb1b5fa447b70a6914aa8cb3996af8c59522d9",
       "terminal_digest": "b00cc1f9bab60ae27069c500c8fbeab2130c6537b9b1a87fc3b13f22fe1a1259"
     },
@@ -892,11 +892,11 @@
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.faithfulCenterBaseChange_targetOnly_injective"
       ],
-      "objects": "Iritani's divisor-equation-reduced completed coefficient ring for a blowup center, its combined Novikov-divisor generators, the independent center coordinates in the external direct-sum target, the common Laurent comparison ring, and the intrinsic generic even quantum D-module of the center together with its separately recorded scalar extensions in the center summands.",
+      "objects": "Iritani's divisor-equation-reduced completed coefficient ring for a blowup center, its combined Novikov-divisor generators, the independent center coordinates in the external direct-sum target, the common Laurent comparison ring, and the intrinsic generic even quantum D-module of the center together with its separately recorded scalar extensions in the center summands. The source uses a graded completed z-enhancement, not an ordinary C[z] tensor extension.",
       "hypotheses": "Divisor pairings separate numerical curve classes; fibres of the untagged center monomial map are finite in every bounded ample-degree slice; the reduced source does not contain the independent target coordinates as coefficients; Iritani's reduced center connection and external direct-sum comparison are defined over the stated rings; and the combined bulk Jacobian is invertible. The source uses graded completion and polynomial unit dependence; at fixed curve class its other even nondivisor coefficients are polynomial. The initial form is taken only in Novikov degree, retaining full divisor exponentials.",
       "conclusion": "The pullback from the reduced source to the external direct-sum target is injective because the exponential characters in the independent target coordinates separate every finite collision fibre. After passage to generic fraction fields, every center summand is a faithful scalar extension and formal reparametrization of the intrinsic generic numerical even QDM of the center.",
       "cautions": "Fragment. Lean proves the completed-series injection from the stated initial-form hypotheses involving independent target coordinates, and the source type deliberately contains no target coordinate variables. It does not construct the geometric reduced source, the independent target coordinates, the completed filtrations and initial-form detector from Iritani's rings, the comparison and inverse, the bulk Jacobian, or the claimed QDM base-change diagram.",
-      "statement_digest": "3ad0369ee31cb82ff4fb3a40172ceeb7a4ce08bc0632fc2b91091b440b097fcd",
+      "statement_digest": "f4df859785bc1925094e5390fe4af08bd6c47acbbfd4652382ef1aeb1fcb7d65",
       "terminal_digest": "be590125a3df1d1b3fcc5f61b18adae20fb8fb14cb93839ae248b8c14c566ff7"
     },
     {
@@ -919,15 +919,15 @@
     },
     {
       "manuscript_label": "prop:atomic-lowdim",
-      "coverage": "conditional_deduction",
+      "coverage": "fragment",
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankTwoResidueMarker_lowDimensionalOccurrenceNullity"
       ],
       "objects": "The rank-two formal-exponent marker, smooth centers and their dimensions, individual specialized center summands in the QDM comparison, the intrinsic marker of a center, minimal surfaces with nef canonical class, projective two-space, ruled surfaces, positive-rank projective bundles, and point blowups.",
       "hypotheses": "Every smooth center of dimension at most two is obtained from a minimal surface with nef canonical class, projective two-space, or a ruled surface by point blowups; the intrinsic formal-exponent marker vanishes in those initial cases, is multiplied by bundle rank, and is preserved by point blowup; and the marker of every individual center summand equals the intrinsic marker of its source center.",
-      "conclusion": "Every QDM center summand whose smooth source has dimension at most two has zero rank-two formal-exponent marker, exactly the vanishing premise needed for birational descent in dimension four.",
-      "cautions": "Conditional deduction. Lean proves the classification induction and its application to each individual center summand, but does not construct the geometric QDM blocks, classify the surfaces, prove the initial calculations or operation formulas, or construct the faithful comparison for each center summand.",
-      "statement_digest": "8537c121f53992f1723ebcd290313be05adc3ce66ea78da2df973f2e036a4850",
+      "conclusion": "Both intrinsic counts vanish on centers of dimension at most two and their comparison copies; the registered terminal concerns the exponent marker only.",
+      "cautions": "Conditional deduction. Lean proves the classification induction and its application to each individual center summand, but does not construct the geometric QDM blocks, classify the surfaces, prove the initial calculations or operation formulas, or construct the faithful comparison for each center summand. The manuscript also proves I_lat vanishing; the registered exponent-marker terminal does not formalize this stronger count, so coverage is fragmentary.",
+      "statement_digest": "300935b8a61b91fe775d62e504999606cbea01fb46727649b77e9908988084c0",
       "terminal_digest": "5ba89ca7cb2e71e08172b3d6baff7ab9c7ec980d2c21ef45e620c96f0d63225c"
     },
     {
@@ -979,6 +979,46 @@
       "conclusion": "Blowdown contributions minus blowup contributions equal (m+1)e_(4/9); at m=2 only codimension-two threefold centers contribute, with net scalar count three.",
       "cautions": "Absent. This is a necessary condition on an existing rationalization, not a construction, a count of distinct centers, or an identification of centers as cubic threefolds.",
       "statement_digest": "67f2944f3c42c798af4b2030d071208b706de5206426174777321d6c43ff25ff"
+    },
+    {
+      "manuscript_label": "lem:cyclic-primary-persistence",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "A separated rank-two cluster in a characteristic-zero formal bulk germ.",
+      "hypotheses": "Flat QDM base equations have at most a simple z-pole; the centered leading operator is nonzero square-zero at the closed point.",
+      "conclusion": "Cyclicity and nonzero square-zero type persist throughout the formal germ.",
+      "cautions": "No terminal is registered for this cluster-persistence statement.",
+      "statement_digest": "601dc96121a51f71966f08f93e483e6690e8aad4e3f9fe2bfd9d358a0096b0af"
+    },
+    {
+      "manuscript_label": "prop:intrinsic-count-formulas",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The exponent and canonical-lattice counts on smooth projective varieties.",
+      "hypotheses": "Reduced-source comparisons and their inverses preserve the original z-lattices; whole primary summands are formed after splitting and copies have independent unit coordinates.",
+      "conclusion": "Blowup adds codimension minus one center counts; projectivization multiplies either count by the bundle rank.",
+      "cautions": "No terminal constructs these intrinsic comparisons or the stronger lattice count.",
+      "statement_digest": "e11f4bb8989c5f5615acdfd1cb25c06a5695305241dc365dde0340e0d98ada4c"
+    },
+    {
+      "manuscript_label": "prop:universal-rank-two-residue",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The matrix U_(a,b), grading D and its rank-two zero-primary block.",
+      "hypotheses": "Characteristic zero, s=2a+b and sq nonzero; a,b,q z-constant; normalized off-diagonal gauge.",
+      "conclusion": "The canonical residue is R_(a,b) and its discriminant is 4(b-2a)/(b+2a).",
+      "cautions": "The rational calculation and independent executable checks are not Lean formalizations.",
+      "statement_digest": "cca7673683e8adf2469c7ee94a15859fd7eb700ae9f6353b37f8d8f1678b6702"
+    },
+    {
+      "manuscript_label": "thm:index-two-classification",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Smooth complex Picard-rank-one index-two Fano threefolds.",
+      "hypotheses": "The quantum matrix inputs, lattice transport, low-dimensional vanishing, weak factorization and classical degree-four/five rationality.",
+      "conclusion": "Rationality after P1 is equivalent to rationality and to degree 4 or 5.",
+      "cautions": "No Lean terminal is registered for the lattice count, additional Fano inputs or classification.",
+      "statement_digest": "1be6644b50a66d5f897c5240af3afd16b9d3180b60a025412fa0770e9c93da3e"
     }
   ],
   "machinery": [

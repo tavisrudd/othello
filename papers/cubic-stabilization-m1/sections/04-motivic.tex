@@ -70,6 +70,23 @@ Extend by sums over connected components and put
 \(\epsilon:G_{\mathrm{disc}}\to\Z\), \(e_\delta\mapsto1\), recovers
 \(I_{\mathrm{exp}}\).
 
+For the lattice count use instead
+\(\mathcal D_{\mathrm{lat}}=\C\setminus\{0\}\) and write
+\[\mathfrak S_{\mathrm{lat}}(Y)=\sum_{E\text{ eligible},\,\delta^\sharp(E)\ne0}
+e_{\delta^\sharp(E)}.\]
+The constant-field and comparison proof above applies without change:
+its only use of exponent separation is the exclusion rule.  The operation
+formulas and additive extension below therefore hold for this spectrum too.
+In particular, for the three families in
+Theorem~\ref{thm:index-two-classification},
+\[
+ \mathfrak S_{\mathrm{lat}}(V_d\times\PP^1)=2e_{\delta_d},
+ \qquad (\delta_1,\delta_2,\delta_3)=(16/9,1,4/9).
+\]
+These fourfolds are not birational across different degrees.  Degrees one
+and three have the same unordered exponent classes modulo \(\Z\), but
+different canonical discriminants.
+
 \begin{proposition}[Intrinsic operation formulas]
 \label{prop:intrinsic-spectrum-formulas}
 \coverage{absent}%
@@ -155,6 +172,15 @@ For example, embed a cubic threefold \(X\subset\PP^4\subset\PP^5\).
 Then \(\mathcal I([\Bl_X\PP^5])=1\), whereas
 \(\mathcal I([\PP^5])=0\).  Thus birational invariance already fails
 in dimension five.
+
+The dimensional limit is shared by every abelian-group-valued invariant
+with the global blowup formula \(J(\Bl_ZY)=J(Y)+(c-1)J(Z)\).
+If such an invariant were birationally invariant in dimension \(n+2\),
+blowing up \(X\times\PP^2\) along \(X\times\{p\}\) would give
+\(J(X\times\PP^2)=J(X\times\PP^2)+J(X)\), hence \(J(X)=0\) for every
+smooth projective \(n\)-fold.  This argument requires no projective-bundle
+formula.  Adding further block types while retaining that architecture
+cannot give an obstruction after two stabilizations.
 
 \begin{proposition}[Equal Hodge diamonds, different invariant values]
 \label{prop:hodge-marker-separation}

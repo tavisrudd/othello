@@ -24,7 +24,7 @@ can wait until after this first pass.
 1. **What is being counted?** Start with the generalized eigenspaces of Euler
    multiplication.  `prop:generic-spectral-connection-splitting` upgrades
    their separated leading decomposition to formal connection blocks.
-   `thm:marker-ledger` turns an additive block invariant satisfying the QDM
+   `prop:intrinsic-count-formulas` turns an additive block invariant satisfying the QDM
    operation formulas and the stated invariance conditions into a birational
    invariant once every center summand has value zero.  The summands are kept
    separate, even when they come from the same center.
@@ -35,19 +35,20 @@ can wait until after this first pass.
    center coordinates occur only on the external direct-sum comparison target
    in Iritani's Section 5.8.  This source/target asymmetry is essential to the
    injectivity argument.
-   `prop:qdm-operation-ledgers` then brings in
+   `prop:intrinsic-count-formulas` then brings in
    Iritani's blowup comparison and Iritani--Koto's projective-bundle
    comparison.  The points to check are the common coefficient fields, the
    restriction to even cohomology, regularity in $z$, grading shifts, and the
    retention of the individual center summands.
 3. **Why does the rank-two test survive the allowed changes?** By
    `lem:A0preserve`, the only possible new pole in the elementary modification
-   vanishes.  `prop:rank2-rigidity` shows that the modified residue moves by
+   vanishes. The separately named cyclic-primary persistence lemma first
+   preserves the cluster. `prop:rank2-rigidity` shows that the modified residue moves by
    conjugation.  `prop:residue-discriminant-exponents` identifies its
-   eigenvalues modulo $\mathbb Z$ with the formal exponent classes.  The count
-   requires distinct exponent classes: nonzero residue discriminant alone
-   would also admit resonant blocks.
-4. **Does a cubic carry a counted block?** `prop:cubic-block-data` starts from
+   eigenvalues modulo $\mathbb Z$ with the formal exponent classes.  I_exp
+   requires distinct exponent classes; I_lat counts every nonzero canonical
+   discriminant, including resonance, and requires lattice preservation.
+4. **Does a cubic carry a counted block?** `prop:universal-rank-two-residue` applies to the matrix from
    Beauville's three displayed quantum products.  The resulting zero block has
    exponent representatives $-1/6$ and $-5/6$.  Their difference is $2/3$, so
    the cubic exponent count is one.
@@ -60,7 +61,7 @@ can wait until after this first pass.
 6. **Finish at the two endpoints.** The projective-bundle formula gives value
    two on $X\times\mathbb P^1$.  The generic quantum product of
    $\mathbb P^4$ is semisimple, so its value is zero.  Weak factorization,
-   `thm:marker-ledger`, and `prop:atomic-lowdim` make those values incompatible
+   `prop:intrinsic-count-formulas`, and `prop:atomic-lowdim` make those values incompatible
    with rationality.
 
 ## What is proved where
@@ -73,10 +74,11 @@ gives a source location and the convention match for each use.  No
 computational evidence bundle enters `thm:every-cubic`.
 
 The repository also contains a Lean 4 companion built against Mathlib; it is
-not part of Mathlib.  For the primary paper, its claims file classifies the 20
-labelled statements as five absent, six fragments and nine conditional
-deductions; none is classified as complete. The five absent rows are the
-new residue-spectrum, intrinsic-operation and motivic consequences.
+not part of Mathlib.  For the primary paper, its claims file classifies the 24
+labelled statements as nine absent, seven fragments and eight conditional
+deductions; none is complete. The Fano classification, universal residue and
+intrinsic lattice-count formulas have absent coverage. The stronger
+low-dimensional statement is fragmentary: the terminal concerns the exponent count.
 Lean proves the free commutative-monoid construction, the factorization
 argument with individual center summands kept separate, and the
 completed-series injectivity argument using independent target coordinates.

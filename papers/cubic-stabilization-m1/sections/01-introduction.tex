@@ -18,27 +18,23 @@ For every smooth complex cubic threefold \(X\), the fourfold
 \(X\times\PP^1\) is irrational.
 \end{theorem}
 
-The birational argument is short.  We construct an integer-valued
-\emph{exponent count} \(I_{\mathrm{exp}}\) with
+We construct an integer-valued \emph{exponent count} \(I_{\mathrm{exp}}\)
+from selected rank-two primary summands of the even quantum connection.
+It vanishes on smooth projective varieties of dimension at most two and
+satisfies
 \[
- I_{\mathrm{exp}}(X)=1,\qquad
- I_{\mathrm{exp}}(X\times\PP^1)=2,\qquad
- I_{\mathrm{exp}}(\PP^4)=0.
+ I_{\mathrm{exp}}(\Bl_ZY)=I_{\mathrm{exp}}(Y)+(c-1)I_{\mathrm{exp}}(Z),
+ \qquad
+ I_{\mathrm{exp}}(\PP_Y(V))=\rk(V)I_{\mathrm{exp}}(Y),
 \]
-For a blowup along a smooth center of codimension \(c\), its change is
-\[
- I_{\mathrm{exp}}(\Bl_ZY)
- =I_{\mathrm{exp}}(Y)+\sum_{j=0}^{c-2}c_{\mathrm{exp}}(\omega_j).
-\]
-Here each \(\omega_j\) records one center summand in the quantum blowup
-comparison.  Every such contribution vanishes when \(\dim Z\leq2\).
-Weak factorization of smooth projective fourfolds uses only these centers,
-so the count is birationally invariant in dimension four.  Its values
-above rule out a birational map \(X\times\PP^1\dashrightarrow\PP^4\).
-Section~\ref{sec:atomic-one-step} constructs the count and proves these
-properties.  This also explains the dimensional limit: a factorization
-in dimension five may use threefold centers, whose contributions need
-not vanish.
+where \(c=\operatorname{codim}_YZ\).  Its value on a cubic threefold is one.
+Thus its value on \(X\times\PP^1\) is two, whereas its value on \(\PP^4\)
+is zero.  Every nontrivial center in projective weak factorization between
+smooth fourfolds has dimension at most two.  The blowup formula makes the
+count unchanged along such a factorization, ruling out rationality of
+\(X\times\PP^1\).  Section~\ref{sec:atomic-one-step} proves these properties.
+The main issue is faithful transport of the center connection and its
+canonical lattice through the quantum comparisons.
 
 The stable-rationality picture varies across the moduli space.  Hassett and
 Tschinkel identified varieties birational to cubic threefolds as the
@@ -107,6 +103,20 @@ multiplicativity for Hodge atoms \cite{GyengeProduct}.  Cai independently
 computes the same two exponent representatives and uses them with Iritani's
 blowup theorem to prove symplectic irrationality of cubic threefolds
 \cite{Cai}; that argument does not address stabilization.
+
+Keeping distinct eigenvalues of the canonical modified residue, even when
+their difference is integral, defines the stronger lattice count
+\(I_{\mathrm{lat}}\).  The same comparison and vanishing proofs apply.
+A rational calculation then treats degrees one, two and three together:
+for a smooth complex Picard-rank-one Fano threefold \(V\) with
+\(-K_V=2H\),
+\[
+ V\times\PP^1\text{ is rational}\quad\Longleftrightarrow\quad
+ V\text{ is rational}\quad\Longleftrightarrow\quad H^3\in\{4,5\}.
+\]
+The degree-two case uses the lattice count; its exponent classes coincide.
+The proof and classical degree-four and degree-five inputs appear in
+Theorem~\ref{thm:index-two-classification}.
 
 The same argument applies to any smooth projective threefold with positive
 exponent count.  It also gives irrationality after one stabilization for

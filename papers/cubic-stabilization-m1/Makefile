@@ -12,7 +12,7 @@ JOBNAME := irrationality_after_one_stabilization
 
 all: lint manuscript
 
-check: lint formal-static manuscript warnings
+check: lint formal-static residue-check manuscript warnings
 
 lint:
 	$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex
@@ -38,3 +38,7 @@ clean:
 
 distclean:
 	$(LATEXMK) -C -jobname=$(JOBNAME) $(SOURCE)
+
+.PHONY: residue-check
+residue-check:
+	uv run --with sympy==1.14.0 python verification/check_universal_residue.py

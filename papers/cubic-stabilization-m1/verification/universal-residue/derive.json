@@ -1,0 +1,158 @@
+{
+  "status": "pass",
+  "sympy_version": "1.14.0",
+  "scope": "Finite algebra; geometric transport and source theorems require prose audit.",
+  "domain": "q*(2*a+b) != 0; a,b,q constant under z differentiation",
+  "det_C": "-q**2*(2*a + b)**2",
+  "first_gauge": [
+    [
+      "0",
+      "0",
+      "2*a/(2*a + b)",
+      "0"
+    ],
+    [
+      "0",
+      "0",
+      "0",
+      "2/(q*(2*a + b))"
+    ],
+    [
+      "-2/(q*(2*a + b))",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "0",
+      "-2*a/(2*a + b)",
+      "0",
+      "0"
+    ]
+  ],
+  "residue": [
+    [
+      "-(2*a + 3*b)/(2*(2*a + b))",
+      "1"
+    ],
+    [
+      "-4*a**2/(2*a + b)**2",
+      "-(2*a - b)/(2*(2*a + b))"
+    ]
+  ],
+  "indicial_polynomial": "(8*T**2*a + 4*T**2*b + 8*T*a + 4*T*b + 10*a - 3*b)/(4*(2*a + b))",
+  "discriminant": "-4*(2*a - b)/(2*a + b)",
+  "checks": [
+    "rational primary splitting",
+    "both Sylvester equations",
+    "general F correction and derivative term",
+    "direct Frobenius recurrence",
+    "cubic anticanonical basis and residue bridges"
+  ],
+  "cases": {
+    "degree_one_del_Pezzo_threefold": {
+      "a": 240,
+      "b": 1248,
+      "residue": [
+        [
+          "-11/9",
+          "1"
+        ],
+        [
+          "-25/324",
+          "2/9"
+        ]
+      ],
+      "polynomial_coefficients": [
+        "1",
+        "1",
+        "-7/36"
+      ],
+      "eigenvalues": [
+        "1/6",
+        "-7/6"
+      ],
+      "discriminant": "16/9",
+      "I_exp": 1,
+      "I_lat": 1
+    },
+    "quartic_double_solid": {
+      "a": 48,
+      "b": 160,
+      "residue": [
+        [
+          "-9/8",
+          "1"
+        ],
+        [
+          "-9/64",
+          "1/8"
+        ]
+      ],
+      "polynomial_coefficients": [
+        "1",
+        "1",
+        "0"
+      ],
+      "eigenvalues": [
+        "0",
+        "-1"
+      ],
+      "discriminant": "1",
+      "I_exp": 0,
+      "I_lat": 1
+    },
+    "cubic_threefold": {
+      "a": 24,
+      "b": 60,
+      "residue": [
+        [
+          "-19/18",
+          "1"
+        ],
+        [
+          "-16/81",
+          "1/18"
+        ]
+      ],
+      "polynomial_coefficients": [
+        "1",
+        "1",
+        "5/36"
+      ],
+      "eigenvalues": [
+        "-1/6",
+        "-5/6"
+      ],
+      "discriminant": "4/9",
+      "I_exp": 1,
+      "I_lat": 1
+    },
+    "two_quadrics_control": {
+      "a": 16,
+      "b": 32,
+      "residue": [
+        [
+          "-1",
+          "1"
+        ],
+        [
+          "-1/4",
+          "0"
+        ]
+      ],
+      "polynomial_coefficients": [
+        "1",
+        "1",
+        "1/4"
+      ],
+      "eigenvalues": [
+        "-1/2",
+        "-1/2"
+      ],
+      "discriminant": "0",
+      "I_exp": 0,
+      "I_lat": 0
+    }
+  }
+}

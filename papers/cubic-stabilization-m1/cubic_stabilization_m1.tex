@@ -47,6 +47,9 @@ for smooth projective fourfolds: every point, curve, and surface center
 contributes zero to the blowup formula.  The count is one on a cubic
 threefold.  Iritani--Koto's projective-bundle decomposition shows that it is
 two on \(X\times\PP^1\), whereas it is zero on \(\PP^4\).
+Retaining the canonical residue also detects resonant blocks.  A unified
+calculation proves that, for smooth complex Picard-rank-one index-two Fano
+threefolds, rationality is unchanged by one stabilization.
 Applications include prime Fano threefolds of genus eight and universally
 \(CH_0\)-trivial irrational fourfolds.  The count also extends to an additive
 invariant of the Grothendieck group of varieties.
@@ -60,15 +63,16 @@ weak factorization; Fano threefolds.
 \input{sections/02-qdm-marker}
 \input{sections/03-applications}
 \input{sections/04-motivic}
+\input{sections/05-cubic-check}
 
 \section*{AI assistance disclosure}
 
 This project was developed with extensive assistance from OpenAI Codex and
 Anthropic Claude in proof exploration, literature research, exact computation,
 formal verification, and drafting.  AI-assisted adversarial review identified,
-in particular, the need to restrict to even cohomology and to replace the
-preliminary nonzero-discriminant test by distinct formal exponent classes in
-Section~2.
+in particular, the need to restrict to even cohomology and to distinguish
+the exponent-class count from the stronger count requiring canonical-lattice
+preservation.
 The author checked the arguments, computations, code, and cited sources,
 reviewed and edited all AI-assisted material, and assumes responsibility for
 all content.
@@ -179,6 +183,18 @@ A.~Kuznetsov,
 \emph{Derived categories of cubic and \(V_{14}\) threefolds},
 Proc. Steklov Inst. Math. 246 (2004), 171--194;
 arXiv:math/0303037v1.
+
+\bibitem{Przyjalkowski}
+V.~Przyjalkowski,
+\emph{Quantum cohomology of smooth complete intersections in weighted
+projective spaces and singular toric varieties},
+arXiv:math/0507232v3.
+
+\bibitem{KuznetsovProkhorov}
+\begingroup\raggedright
+A.~Kuznetsov and Yu.~Prokhorov,
+\emph{Rationality of Fano threefolds over non-closed fields},
+arXiv:1911.08949v3.\par\endgroup
 
 \bibitem{PutSinger}
 M.~van der Put and M.~F.~Singer,

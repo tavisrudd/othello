@@ -24,6 +24,11 @@ Groebner bundles that determined the locus remain tracked and are now attached
 to `lem:pencil-loci-coordinates`, which records the members' coordinates on the
 parameter line and which no other statement uses.
 
+The supporting universal-residue bundle independently replays the printed
+rational reduction and Fano specializations. Its manifest records hashes and
+byte counts; a separate rational indicial calculation cross-checks the answer.
+The paper gate replays both. These finite checks supply no geometric input.
+
 Nothing on the unconditional rank-two residue route rests on any evidence
 bundle, so the
 irrationality theorem `thm:every-cubic` does not.  The conditional framed
@@ -143,9 +148,7 @@ the aggregate to import each one, and computes terminal and signature coverage
 across their union.  This keeps the manuscript split visible without weakening
 the exact terminal census.
 
-Checked coverage snapshot: 62 claims; 9 absent; 25 fragmentary; 27 conditional;
-1 complete; 319 reviewer terminals, of which 83 are machinery serving no current
-manuscript claim.
+Checked coverage snapshot: 66 claims; 13 absent; 26 fragmentary; 26 conditional; 1 complete; 319 reviewer terminals, of which 83 are machinery serving no current manuscript claim.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to

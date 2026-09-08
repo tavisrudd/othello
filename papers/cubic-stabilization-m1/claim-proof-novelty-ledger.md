@@ -6,8 +6,9 @@ manuscripts.  Each manuscript uses restrained related-work prose and does not
 make an uncaveated “first” claim.
 
 The paper proves irrationality after one stabilization for every smooth cubic
-threefold unconditionally, through an occurrence-indexed categorical QDM
-ledger and its rank-two formal-exponent marker.  The unconditional equations
+threefold unconditionally, through intrinsic rank-two counts and their blowup and projective-bundle
+formulas. The nonzero canonical-discriminant count also detects the resonant
+degree-two del Pezzo case.  The unconditional equations
 `nu_6(X) = 2` and `nu_6(X x P^1) = 4` belong to the framed-monodromy companion;
 the cycle-theoretic universal-`CH_0`-triviality results belong to the
 six-axis-pencil companion.  Hypotheses R and T occur only in the framed
@@ -29,6 +30,17 @@ independently of whether the claim is conditional.
 | Every smooth `V_14` has small-even `nu_6=2`, and `V_14 x P^1` is irrational | **STATUS: MIXED — irrationality of `V_14 x P^1` UNCONDITIONAL; the count `nu_6(V)=2` CONDITIONAL on Hypothesis 5.7R and on Hypothesis 5.7T for surface centers that are neither minimal nor geometrically ruled.** Both conclusions run through Kuznetsov's all-smooth flop between genuine rank-two projective bundles: irrationality from the unconditional one-stabilization theorem, and the count from the exact cubic count through the conditional projective-bundle operation formula; now Corollary `cor:v14-one-step` | the classical `V_14`--cubic birationality is not claimed. The bounded source/citation audit and the 200-row Scholar screen located no earlier all-smooth one-step irrationality theorem. MathSciNet remains uncovered | printed as the sole noncubic quantum application, with the flop attributed to Kuznetsov and the invariant conclusion proved locally |
 | No elliptic-product route into Voisin's components | **STATUS: UNCONDITIONAL given the paper's own packet proposition and the non-CM generic elliptic factor.** Lattice proof at the prime two: the exotic two-primary gluing kernel forces every summand of an odd-index orthogonal splitting to be an `F_4`-subspace of the coefficient heart, every `F_4`-line is its own perpendicular for the trace-determinant pairing, so the only product shape is one plus four, and that shape is realized at odd index by every axis. The five-elliptic-factor conclusion drops the polarization hypothesis: no product of five elliptic curves admits an odd-degree isogeny onto the intermediate Jacobian, even though that Jacobian is isogenous to `E^5`; now `prop:no-elliptic-product` | closest neighbour is Hartlieb's Remark 5.8 with its footnote, where van Geemen and Yamauchi split the intermediate Jacobian of a cubic threefold with an automorphism of order five as an elliptic curve times the square of an abelian surface up to isogeny; that is an isogeny statement without polarization control, and the obstruction here is about realizing such a splitting by an odd-degree isogeny. For a product of principally polarized factors under which the polarization pulls back to an odd multiple of the product polarization, only the shapes one and one-plus-four survive, which already rules out every factor having dimension at most three; for a product of five elliptic curves nothing beyond odd degree is assumed. No bounded literature search for a predecessor of the obstruction has been run, so no absence claim is made | supporting proposition in Section 2, cited from the introduction's cycle-side paragraph; no novelty adjective, and the open residual question is stated in the same place |
 | Six-axis polarization and principal gluing packet | complete manuscript derivation from Roulleau’s intersections, reduced-norm Riemann--Roch, the `F_4` heart, and strong Torelli; the proof uses only scalarity of the three-primary block | constituent ingredients are credited to Roulleau, Grieve, Hartlieb, and classical Torelli; the exact packet synthesis was not located in inspected sources | supporting geometric theorem; no global novelty adjective. The unused `Gamma_0(3)` selection clause has been removed |
+
+## Index-two application
+
+The primary paper now proves that one stabilization preserves rationality for
+smooth complex Picard-rank-one index-two Fano threefolds. Przyjalkowski supplies
+the degree-one and degree-two counting matrices; Kuznetsov and Prokhorov supply
+the classification and the rational degree-four and degree-five cases. The
+unified residue calculation is printed, and its arithmetic has two exact
+replays. The degree-two obstruction additionally uses canonical-lattice
+preservation throughout the comparison argument. This is a stated application,
+with no global priority or literature-exhaustion claim.
 
 ## Current audit boundary
 
@@ -91,7 +103,9 @@ threefold from the zero spectral piece enhanced by Serre/formal-monodromy
 data.  The invariant claimed here is instead the rank-two formal-exponent
 marker: after the canonical elementary modification, it requires the two
 residue eigenvalues to be distinct modulo the integers.  A merely nonzero
-residue discriminant is insufficient because it also permits resonant blocks.
+residue discriminant is insufficient for that exponent-class marker. The
+stronger lattice count now used for quartic double solids instead relies on
+regular comparison maps and inverses preserving the canonical modification.
 The contribution is localized to the uniform one-stabilization theorem, the
 faithful specialization of individual center summands, vanishing for every
 point, curve, and surface center, and the projective-bundle comparison used

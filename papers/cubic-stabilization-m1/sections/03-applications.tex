@@ -1,10 +1,9 @@
 \section{Consequences}
 \label{sec:applications}
 
-No new quantum calculation is needed in this section.  We first apply the
-invariant to products of threefolds with \(\PP^1\), then transfer the stabilization theorem
-through Kuznetsov's flop, and finally combine it with known criteria for
-universal \(CH_0\)-triviality.
+The rank-two calculation applies uniformly to Picard-rank-one index-two
+Fano threefolds.  We then transfer the cubic obstruction through Kuznetsov's
+flop and combine it with criteria for universal \(CH_0\)-triviality.
 
 \begin{corollary}[Threefold criterion]
 \label{cor:threefold-marker}
@@ -33,6 +32,74 @@ rationality of this product, so \(Y\) is irrational as well.
 \proves{cor:threefold-marker}%
 \uses{prop:atomic-lowdim, thm:marker-ledger, prop:qdm-operation-ledgers}%
 \end{proof}
+
+\subsection{Index-two Fano threefolds}
+
+\begin{theorem}[Rationality after one stabilization in index two]
+\label{thm:index-two-classification}
+\coverage{absent}%
+\uses{prop:universal-rank-two-residue,prop:intrinsic-count-formulas,prop:atomic-lowdim,lem:cyclic-primary-persistence,prop:rank2-rigidity}%
+\imports{Przyjalkowski:counting-matrices,KuznetsovProkhorov:index-two,AKMW:weak-factorization}%
+Let \(V\) be a smooth complex Fano threefold with Picard rank one and
+\(-K_V=2H\), where \(H\) generates \(\operatorname{Pic}(V)\).  Then
+\[
+ V\times\PP^1\text{ is rational}
+ \quad\Longleftrightarrow\quad V\text{ is rational}
+ \quad\Longleftrightarrow\quad H^3\in\{4,5\}.
+\]
+\end{theorem}
+
+\begin{proof}
+The possible degrees \(d=H^3\) are \(1,\ldots,5\); degrees four and five
+are rational over \(\C\)
+\cite[Section~2.3, Theorems~2.7, 3.3 and~3.5]{KuznetsovProkhorov}.
+For degrees one and two, Przyjalkowski's counting matrices give the
+small Euler matrix \(U_{a,b}\) in the classical anticanonical-power basis,
+with parameters in the table below
+\cite[Proposition~2.6.4 and Theorem~2.6.6]{Przyjalkowski}.
+The Novikov variable \(q\) records \(H\)-degree one; an anticanonical-degree
+variable \(t\) would give \(q=t^2\).  The cubic normalization was checked
+above.  These are smooth deformation families, and the matrix formulas
+apply to every smooth member.
+\begin{center}
+\small
+\begin{tabular}{@{}clrrcc@{}}
+\toprule
+\(d\)&Model&\((a,b)\)&\(\delta^\sharp\)&\(I_{\rm exp}\)&\(I_{\rm lat}\)\\
+\midrule
+1&Sextic in \(\PP(1,1,1,2,3)\)&\((240,1248)\)&\(16/9\)&1&1\\
+2&Quartic double solid&\((48,160)\)&\(1\)&0&1\\
+3&Cubic threefold&\((24,60)\)&\(4/9\)&1&1\\
+\bottomrule
+\end{tabular}
+\end{center}
+The even cohomology in each case is exactly the rank-four space in this
+matrix.  Its zero-primary block is therefore a whole primary summand;
+the other two eigenvalues are simple.  Lemma~\ref{lem:cyclic-primary-persistence}
+continues the separated cyclic block from the small point, and
+Proposition~\ref{prop:rank2-rigidity} preserves its residue.  The residue
+eigenvalues in degrees one, two and three are respectively
+\[
+ \{1/6,-7/6\},\qquad \{0,-1\},\qquad \{-1/6,-5/6\}.
+\]
+Thus \(I_{\mathrm{lat}}(V)=1\).  Its value on \(V\times\PP^1\) is two.
+By Proposition~\ref{prop:atomic-lowdim} and weak factorization this count
+is birationally invariant on fourfolds, while its value on \(\PP^4\)
+is zero.  This proves irrationality in degrees one through three.
+\uses{prop:universal-rank-two-residue,prop:intrinsic-count-formulas,prop:atomic-lowdim,lem:cyclic-primary-persistence,prop:rank2-rigidity}%
+\imports{Przyjalkowski:counting-matrices,KuznetsovProkhorov:index-two,AKMW:weak-factorization}%
+\end{proof}
+
+The degree-one case already uses \(I_{\mathrm{exp}}\).  The degree-two
+case uses the canonical lattice: the two exponent classes coincide but
+their canonical residue representatives are distinct.  The negative
+conclusions also hold for forms over any characteristic-zero field.
+Indeed, a hypothetical rationalization and its inverse descend with the
+variety to a finitely generated field, which embeds into \(\C\).
+The rationality assertions for degree-four and degree-five forms require
+separate arithmetic hypotheses.
+
+\subsection{Birational partners and zero-cycles}
 
 Kuznetsov's associated Pfaffian cubic and flop supply the next application.
 Tschinkel and Zhang study equivariant and twisted forms of this correspondence

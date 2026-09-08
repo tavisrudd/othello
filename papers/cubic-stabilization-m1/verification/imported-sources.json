@@ -385,6 +385,40 @@
           "matched": "The manuscript proves annihilation on every smooth projective generator from the P1 bundle formula, then extends additively to all classes."
         }
       ]
+    },
+    "Przyjalkowski:counting-matrices": {
+      "citation": "Przyjalkowski",
+      "pinpoint": "arXiv:math/0507232v3, Proposition 2.6.4 and Theorem 2.6.6",
+      "used": "Small Euler matrices for degree-one and degree-two Picard-rank-one index-two Fano threefolds.",
+      "conventions": [
+        {
+          "aspect": "basis",
+          "requirement": "Classical anticanonical powers and multiplication by c1.",
+          "matched": "U_(240,1248) and U_(48,160) use that basis; no additional factor two."
+        },
+        {
+          "aspect": "Novikov degree",
+          "requirement": "Counting-matrix degrees are anticanonical degrees.",
+          "matched": "q records H-degree one, so the anticanonical-degree variable satisfies q=t^2."
+        },
+        {
+          "aspect": "family",
+          "requirement": "Smooth V1 and V2, anticanonical volumes 8 and 16.",
+          "matched": "Degrees H^3=1 and 2; the distinct index-one V2-prime family is not used."
+        }
+      ]
+    },
+    "KuznetsovProkhorov:index-two": {
+      "citation": "KuznetsovProkhorov",
+      "pinpoint": "arXiv:1911.08949v3, Section 2.3, Theorems 2.7, 3.3 and 3.5",
+      "used": "Degrees 1 through 5 and rationality in degrees 4 and 5 over C.",
+      "conventions": [
+        {
+          "aspect": "ground field",
+          "requirement": "Arithmetic rationality has point/line conditions over nonclosed fields.",
+          "matched": "The equivalence is over C, where these hold; only negative conclusions extend to arbitrary characteristic-zero forms."
+        }
+      ]
     }
   }
 }

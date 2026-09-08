@@ -1,0 +1,89 @@
+\appendix
+\section{An independent split-basis cubic calculation}
+The notation \(U_X,D_X\) is as in \eqref{eq:cubic-small-even-connection};
+put \(r=(3q)^{1/2}\).  This calculation splits the two nonzero eigenlines
+as well as the zero-primary block and checks the rational calculation
+independently.
+
+\begin{proposition}[Small-even cubic block reduction]
+\label{prop:cubic-block-data}
+\coverage{fragment}%
+\lean{cubicSmallEven_blockReduction,%
+  cubicZeroBlock_modifiedResidue_indicialPolynomial,%
+  cubicSmallEven_normalizedGauge_exists_and_unique,%
+  cubicSmallEven_normalizedGauge_coefficients,%
+  cubicExponentDifference_nonintegral}%
+\imports{Beauville:quantum-products}%
+The characteristic and minimal polynomials of \(U_X\) are both
+\(T^2(T^2-108q)\).  After adjoining \(r\), its eigenvalues are
+\(6r,-6r,0,0\), and the zero generalized eigenspace is one rank-two Jordan
+block.  A normalized gauge regular in \(z\) gives
+\begin{equation}
+ \begin{aligned}
+ z^2\partial_z\widetilde y_+&=(6r+O(z^2))\widetilde y_+,\\
+ z^2\partial_z\widetilde y_-&=(-6r+O(z^2))\widetilde y_-,\\
+ z^2\partial_z
+ \begin{pmatrix}\widetilde y_3\\\widetilde y_4\end{pmatrix}
+ &=\bigl[N+zA_0+z^2A_1+O(z^3)\bigr]
+ \begin{pmatrix}\widetilde y_3\\\widetilde y_4\end{pmatrix},
+ \end{aligned}
+ \label{eq:cubic-integral-block-reduction}
+\end{equation}
+where
+\begin{equation}
+ N=\begin{pmatrix}0&2\\0&0\end{pmatrix},\quad
+ A_0=\begin{pmatrix}-19/18&0\\0&19/18\end{pmatrix},\quad
+ A_1=\begin{pmatrix}0&-14/(81r^2)\\-8/81&0\end{pmatrix}.
+ \label{eq:cubic-shared-block-data}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The matrix
+\[
+ C=\begin{pmatrix}
+ 6r^3&-6r^3&0&-7r^2\\7r^2&7r^2&-2r^2&0\\
+ 3r&-3r&0&1\\1&1&1&0
+ \end{pmatrix},
+ \qquad \det C=-486r^5,
+\]
+puts \(U_X\) into
+\[
+ C^{-1}U_XC=
+ \begin{pmatrix}6r&0&0&0\\0&-6r&0&0\\0&0&0&2\\0&0&0&0\end{pmatrix}.
+\]
+Partition as \(1\mid1\mid2\).  At each positive order in \(z\), the
+off-diagonal gauge coefficient is the unique solution of a Sylvester
+equation between blocks with disjoint scalar spectra.  The gauge and inverse
+are regular in \(z\); explicitly, it has the normalized form
+\begin{equation}
+ G(z)=I+\sum_{n\ge1}G_nz^n,
+ \qquad G_n\text{ block-off-diagonal}.
+ \label{eq:cubic-integral-block-gauge}
+\end{equation}
+To extract the coefficient used in the residue, write
+\(y=CG(z)\widetilde y\), \(J=C^{-1}U_XC\) and \(B=C^{-1}D_XC\).
+Label the blocks by \(+,-,0\).  If the transformed coefficient is
+\(J+z\widehat A_0+z^2\widehat A_1+\cdots\), then
+\[
+ (J+zB)G-z^2G'=G(J+z\widehat A_0+z^2\widehat A_1+\cdots).
+\]
+Thus \((\widehat A_0)_{ii}=B_{ii}\), while the first Sylvester equations are
+\[
+ J_i(G_1)_{ij}-(G_1)_{ij}J_j=-B_{ij}\qquad(i\ne j).
+\]
+At the next order,
+\[
+ \widehat A_1=[J,G_2]+BG_1-G_1-G_1\widehat A_0.
+\]
+Since \(G_1,G_2\) are block off-diagonal and \(\widehat A_0\) is block
+diagonal, the zero block is simply
+\[
+ A_1=(\widehat A_1)_{00}
+ =B_{0+}(G_1)_{+0}+B_{0-}(G_1)_{-0}
+ =\begin{pmatrix}0&-14/(81r^2)\\-8/81&0\end{pmatrix}.
+\]
+This computes the needed coefficient without solving for \(G_2\), and proves
+\eqref{eq:cubic-shared-block-data}.
+\end{proof}
+

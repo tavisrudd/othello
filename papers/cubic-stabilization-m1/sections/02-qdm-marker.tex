@@ -1,23 +1,12 @@
 \section{Quantum connections and one stabilization}
 \label{sec:atomic-one-step}
 
-We prove the theorem by applying the quantum \(D\)-module
-decomposition formulas directly.  The common argument is stated first for an
-arbitrary additive invariant.  We then construct the specific invariant used for a
-cubic threefold and prove that it vanishes on points, curves, and surfaces.
+We first define the two rank-two counts, then establish their intrinsic
+blowup and projective-bundle formulas.  Low-dimensional vanishing and one
+explicit residue calculation give the cubic obstruction.  The abstract
+additive formulation follows that proof.
 
-Here is the concrete invariant before the general construction.  Split the
-generic even quantum \(D\)-module into formal connection blocks.  A block
-contributes one if it has rank two, its centered leading term \(N\) is nonzero
-with \(N^2=0\), and the two residue eigenvalues after the canonical elementary
-modification are distinct modulo \(\Z\).  These eigenvalues represent the
-block's two formal exponent classes.  Every other block contributes zero, and
-the sum of the contributions is \(I_{\mathrm{exp}}\).  The rest of the section
-shows that this count is intrinsic and additive, vanishes on points, curves,
-and surfaces, equals one on a cubic threefold, doubles after product with
-\(\PP^1\), and vanishes on \(\PP^4\).
-
-\subsection{Block multisets and a single blowup}
+\subsection{Whole primary connection blocks}
 
 Let \(Y\) be smooth and projective.  We first make three setup choices.
 Pass to numerical Novikov variables, set the odd bulk variables to zero, and
@@ -98,96 +87,215 @@ retained data and are regular connection isomorphisms after scalar extension
 and formal change of bulk coordinates.  In particular, their gauges use
 neither negative nor fractional powers of the connection variable \(z\).
 
-Fix the retained data \(\mathcal T\).  Write \(\mathcal L_{\mathcal T}\)
-for the monoid of finite multisets of regular-isomorphism classes of blocks
-with these data.  Its addition is multiset union.  Direct
-sum gives each \(Y\) its block multiset
-\(\mathcal B_{\mathcal T}(Y)\in\mathcal L_{\mathcal T}\).  An
-\emph{additive invariant} is a commutative-monoid homomorphism
+\subsection{Rank-two residues and two counts}
+
+Let \(E\) be a generic even block with centered connection
+\begin{equation}
+ z\partial_z y=A(z)y,
+ \qquad A(z)=z^{-1}N+A_0+zA_1+z^2A_2+\cdots.
+ \label{eq:atomic-block-expansion}
+\end{equation}
+Assume \(\rk E=2\), \(N\ne0\), and \(N^2=0\).  Then
+\(L=\im N=\ker N\) is a line.  The following matrix calculation explains
+the modification.  In a frame adapted to \(L\), suppose that \(A_0\)
+preserves this line, so that
 \[
- w:\mathcal L_{\mathcal T}\longrightarrow A,
- \qquad I_w(Y):=w(\mathcal B_{\mathcal T}(Y)),
+ N=\begin{pmatrix}0&\nu\\0&0\end{pmatrix},\qquad
+ A_0=\begin{pmatrix}a&b\\0&d\end{pmatrix},\qquad
+ (A_1)_{21}=c.
 \]
-where \(A\) is a commutative monoid.  This formulation also allows values
-in monoids without subtraction.  The additive group-valued extension of
-the exponent count is treated after the main theorem.
-
-We use the following notation.
-\begin{table}[ht]
-\centering
-\begin{tabular}{@{}ll@{}}
-\toprule
-Symbol & Meaning \\
-\midrule
-\(\mathcal L_{\mathcal T}\) &
-  finite multisets of regular-isomorphism classes of blocks \\
-\(\mathcal B_{\mathcal T}(Y)\) & multiset of block isomorphism classes for \(Y\) \\
-\(w:\mathcal L_{\mathcal T}\to A\) & additive invariant with values in \(A\) \\
-\(\omega_j\) & data attached to the \(j\)-th center summand \\
-\(c_w(\omega_j)\) & invariant contribution of that center summand \\
-\bottomrule
-\end{tabular}
-\caption{Notation for the block monoid and center summands.}
-\label{tab:marker-notation}
-\end{table}
-
-Consider one blowup
-\(\beta:\widetilde Y=\Bl_ZY\to Y\) along a smooth center of codimension
-\(c\ge2\).  Iritani's comparison has one ambient summand and \(c-1\) center
-summands.  Distinct copies of the same center must remain distinct in the
-blowup formula.  We therefore retain separate data for each center summand:
-for the \(j\)-th, record
+Changing the frame by \(S=\diag(1,z)\) removes the pole and gives residue
 \[
- \omega_j=(\beta,Z,j,\varsigma_j,\chi_j),
- \qquad 0\le j\le c-2,
+ R=\begin{pmatrix}a&\nu\\c&d-1\end{pmatrix}.
 \]
-where \(\varsigma_j\) is Iritani's center reconstruction parameter and
-\(\chi_j\) is the induced numerical Novikov specialization.  Its correction
-is \(c_w(\omega_j):=w(\mathcal B_{\mathcal T}(Z;\omega_j))\).  The comparison
-will give equality only after applying \(w\); distinct block multisets may
-have the same invariant.
+The lower-left entry explains why the first-order coefficient \(A_1\)
+is needed; the subtraction of one comes from differentiating the new
+frame.  Eigenvalues \(0,1\) represent the same class modulo \(\Z\)
+and do not qualify, whereas \(0,2/3\) represent distinct classes.
 
-\begin{theorem}[A birational invariance criterion]
-\label{thm:marker-ledger}
+The canonical elementary modification along
+this line is
+\begin{equation}
+ E^\sharp=\{s\in E:s\bmod z\in L\}.
+ \label{eq:atomic-modification}
+\end{equation}
+
+For this modification to remove the pole, the regular coefficient \(A_0\) must
+preserve \(L\).  Pairing horizontality supplies exactly that condition.
+
+\begin{lemma}[The regular coefficient preserves the nilpotent line]
+\label{lem:A0preserve}
 \coverage{conditional_deduction}%
-\lean{effectiveBlockLedger_fold_unique,%
-  occurrenceIndexedMarker_eq_of_birational,%
-  occurrenceIndexedMarker_descends_to_birationalClasses}%
-\imports{AKMW:weak-factorization}%
-Let \(w:\mathcal L_{\mathcal T}\to A\) be an additive invariant unchanged by the
-allowed regular scalar extensions and formal coordinate changes.  Suppose
-\begin{align}
- I_w(\PP_Y(V))&=rI_w(Y),
- &&\rk V=r,                                      \label{eq:marker-pbundle}\\
- I_w(\Bl_ZY)&=I_w(Y)+\sum_{j=0}^{c-2}c_w(\omega_j),
- &&\operatorname{codim}_YZ=c\ge2.                \label{eq:marker-blowup}
-\end{align}
-If every summand associated with a smooth center of dimension at most \(d-2\)
-has zero correction, then \(I_w\) is a birational invariant of smooth
-projective \(d\)-folds.
-\end{theorem}
+\lean{atomicRankTwo_regularCoefficient_preserves_nilpotentLine,%
+  atomicRankTwo_pairingEquations_of_loopHorizontality}%
+Horizontality of the Poincar\'e pairing implies \(A_0L\subset L\).
+\end{lemma}
 
 \begin{proof}
-Projective weak factorization writes a birational map of smooth projective
-\(d\)-folds as a zigzag of blowups and blowdowns along smooth centers of
-codimension at least two \cite[Theorem~0.3.1]{AKMW}.  By
-\eqref{eq:marker-blowup} and the vanishing of every center correction, the
-invariant is unchanged at each step; the equalities therefore telescope.
-Disconnected centers are treated componentwise, while a divisor blowup is an
-isomorphism.
+Separated spectral factors are orthogonal for the horizontal Poincar\'e
+pairing: coefficientwise horizontality kills every off-diagonal block by an
+invertible Sylvester operator.  Hence the restriction to \(E\) is
+nondegenerate.  Write it as \(P(z)=P_0+zP_1+\cdots\).  Horizontality gives
+\[
+ z\partial_zP(z)+A(z)^TP(z)+P(z)A(-z)=0.
+\]
+The \(z^{-1}\) coefficient gives \(N^TP_0=P_0N\).  Thus \(L\) is isotropic
+and, in dimension two, \(L^\perp=L\).  The constant coefficient is
+\[
+ A_0^TP_0+P_0A_0+N^TP_1-P_1N=0.
+\]
+Evaluating this identity on \((x,x)\), where \(x\in L=\ker N\), gives
+\((A_0x,x)=0\).  Hence \(A_0x\in L^\perp=L\).
 \end{proof}
 
-Equivalently, the invariant descends on object sets:
+Choose a frame with \(L=\langle e_1\rangle\) and
+\(Ne_2=\nu e_1\), \(\nu\ne0\).  The modified lattice has frame
+\(e_1,ze_2\), so
 \begin{equation}
-\begin{CD}
- \operatorname{Ob}(\mathsf{SmProj}_d) @>{I_w}>> A\\
- @VVV @|\\
- \operatorname{Ob}(\mathsf{SmProj}_d)/{\sim_{\mathrm{bir}}}
- @>>{\overline I_w}> A.
-\end{CD}
-\label{diag:marker-descent}
+ A^\sharp=S^{-1}AS-S^{-1}z\partial_zS,
+ \qquad S=\diag(1,z).
+ \label{eq:Asharp}
 \end{equation}
-This square reformulates the proof; it is not an additional input.
+The term \(z^{-1}N\) becomes regular.  The only possible new pole is the
+\(E_{21}\)-coefficient of \(A_0\), which vanishes by
+Lemma~\ref{lem:A0preserve}.  Thus
+\(A^\sharp=R+zR_1+\cdots\).  Define
+\begin{equation}
+ \delta^\sharp(E):=(\tr R)^2-4\det R.
+ \label{eq:res-disc}
+\end{equation}
+
+\begin{lemma}[Persistence of a cyclic double-primary cluster]
+\label{lem:cyclic-primary-persistence}
+\coverage{absent}%
+\uses{prop:generic-spectral-connection-splitting}%
+Over a characteristic-zero formal bulk germ, let a rank-two spectral
+cluster of a flat QDM be separated from its complement at the closed point.
+Suppose its centered leading operator specializes to a nonzero square-zero
+operator, and its scalar-centered base equations have at most a simple
+\(z\)-pole.  The cluster remains cyclic and its centered leading operator
+remains nonzero square-zero throughout the germ.
+\end{lemma}
+
+\begin{proof}
+Write a centered base equation as
+\(\partial y=(z^{-1}C_\partial+C_{\partial,0}+O(z))y\).  The
+\(z^{-2}\) coefficient of flatness gives \([N,C_\partial]=0\), and the trace
+of the \(z^{-1}\) coefficient gives \(\tr C_\partial=0\); here the base
+equation has been scalar-centered.  Nilpotence of \(N\) away from the
+base point is not yet known, so the commutant is computed over the
+complete local ring \(\mathcal O\) of the formal bulk germ.  The rank-two
+spectral cluster continues over \(\mathcal O\) because it is separated
+from the complementary spectral clusters at the base point; \(N\) is the centered
+\(z^{-1}\) coefficient of that continuation, so \(\tr N=0\), and it
+specializes at the closed point to a nonzero rank-one nilpotent.  Choose
+\(v\) with \(v,Nv\) a basis modulo the maximal ideal; by Nakayama it is a
+basis over \(\mathcal O\), so \(N\) is cyclic.  Any \(C\) commuting with a
+cyclic \(N\) is determined by \(Cv=\alpha v+\beta Nv\) and equals
+\(\alpha I+\beta N\), whether or not \(N\) is nilpotent.  Hence
+\([N,C_\partial]=0\) and \(\tr C_\partial=0=\tr N\) give
+\(C_\partial=q_\partial N\) with \(q_\partial\in\mathcal O\).  The same
+\(z^{-1}\) coefficient gives
+\[
+ \partial N=-q_\partial N+
+ [N,q_\partial A_0-C_{\partial,0}].
+\]
+Writing \(B=q_\partial A_0-C_{\partial,0}\), one has
+\(\partial(N^2)=-2q_\partial N^2+[N^2,B]\); uniqueness for the formal
+coefficient recursion preserves \(N^2=0\).  An entry nonzero at the closed
+point remains a unit, so \(N\) has rank one throughout the formal germ.
+\uses{prop:generic-spectral-connection-splitting}%
+\end{proof}
+
+\begin{proposition}[Invariance of the modified residue]
+\label{prop:rank2-rigidity}
+\coverage{conditional_deduction}%
+\lean{atomicRankTwo_modifiedBase_regular_of_flat_connection,%
+  atomicRankTwo_modifiedResidue_lax_of_flat_connection,%
+  atomicRankTwo_residueDiscriminant_frozen_by_horizontality_and_flatness,%
+  atomicRankTwo_residueDiscriminant_constant_over_formal_germ,%
+  atomicRankTwo_modifiedBase_pole_eq_zero,%
+  atomicRankTwo_residueDiscriminant_constant_along_base}%
+Under formal change of even bulk coordinates, the modified connection is
+regular in every base direction and
+\begin{equation}
+ \partial R=[G_\partial,R]
+ \label{eq:atomic-lax}
+\end{equation}
+for a regular matrix \(G_\partial\).  Consequently
+\(\partial(\delta^\sharp)=0\).  Regular connection isomorphisms preserve the
+domain and value of \(\delta^\sharp\).
+\end{proposition}
+
+\begin{proof}
+Lemma~\ref{lem:cyclic-primary-persistence} preserves the nilpotent line.
+After modification, the only possible base
+pole is \(z^{-1}kE_{21}\).  If
+\(R=\left(\begin{smallmatrix}a&\nu\\c&d\end{smallmatrix}\right)\), the
+\(z^{-1}\) flatness equation is
+\(kE_{21}+[R,kE_{21}]=0\).  Its diagonal entries are \(\nu k\) and
+\(-\nu k\), so \(k=0\).  The constant term of the flatness equation is now
+\eqref{eq:atomic-lax}; trace and determinant are constant under infinitesimal
+conjugation.  A regular isomorphism carries \(N\), \(L\), and the modified
+lattice to their counterparts and conjugates the residue.  Indeed, if
+\(G,G^{-1}\) are regular on the original lattices, the induced map
+\(S_{\rm target}^{-1}GS_{\rm source}\) and its inverse are regular on the
+modified lattices.  Reduction modulo \(z\) gives the conjugating matrix;
+its lower-left entry can involve the first coefficient of \(G\), so it
+need not be \(G(0)\) in the original frames.
+\uses{lem:cyclic-primary-persistence,lem:A0preserve}%
+\end{proof}
+
+\begin{proposition}[Exponent interpretation]
+\label{prop:residue-discriminant-exponents}
+\coverage{fragment}%
+\lean{residueDiscriminant_eq_squared_eigenvalue_separation}%
+\imports{PutSinger:ch-3}%
+If \(\rho_1,\rho_2\) are the eigenvalues of \(R\), their classes modulo
+\(\Z\) are the formal exponent classes of the original centered block and
+\[
+ \delta^\sharp=(\rho_1-\rho_2)^2.
+\]
+\end{proposition}
+
+\begin{proof}
+The elementary modification uses integral powers of \(z\), so it preserves
+formal exponent classes modulo \(\Z\).  The modified connection is regular
+singular with residue \(R\); the regular-singular classification identifies
+the exponent classes with the residue eigenvalues modulo \(\Z\)
+\cite[Chapter~3]{PutSinger}.  The displayed identity is the quadratic
+discriminant formula.
+\end{proof}
+
+For such a block \(E\), write \(\rho_1,\rho_2\) for the eigenvalues of its
+modified residue in the
+fixed algebraic closure \(\overline K\) of the generic coefficient field.
+Define the invariant on each block by
+\begin{equation}
+ w_{\mathrm{exp}}(E)=
+ \begin{cases}
+ 1,&\rk E=2,\ N\ne0,\ N^2=0,\
+      [\rho_1]\ne[\rho_2]\text{ in }\overline K/\Z,\\
+ 0,&\text{otherwise},
+ \end{cases}
+ \label{eq:atomic-fold}
+\end{equation}
+and put \(I_{\mathrm{exp}}(Y)=\sum_E w_{\mathrm{exp}}(E)\).
+Call a block \emph{eligible} if it has rank two and \(N\ne0\), \(N^2=0\).
+Define the \emph{lattice count} by
+\[
+ I_{\mathrm{lat}}(Y)
+ =\#\{E\text{ eligible}:\delta^\sharp(E)\ne0\}.
+\]
+Nonzero discriminant means that the two eigenvalues of the canonical
+modified residue are distinct.  The stronger test
+\(\delta^\sharp\notin\{n^2:n\in\Z\}\) means that their classes modulo
+\(\Z\) are distinct.  Thus \(I_{\mathrm{exp}}\leq I_{\mathrm{lat}}\).
+Both counts are preserved by regular lattice isomorphisms and by common
+scalar shifts of the residue.  For \(I_{\mathrm{lat}}\), preservation of
+the canonical modified lattice is essential: separate integral shifts of
+the two residue eigenvalues need not preserve their difference.
+Neither cyclic persistence nor residue conjugacy uses nonresonance.
 
 \subsection{Compatibility with blowups and projective bundles}
 
@@ -239,9 +347,11 @@ inverses use no negative powers of \(z\); see also
 degree zero: the projective-bundle map has degree \(-(r-1)\), while Iritani's
 ambient and center components have degrees \(0\) and \(-c\), respectively
 \cite[Theorem~5.1(3)]{IritaniKoto}\cite[Theorem~5.18(3)]{IritaniBlowup}.
-Because the block type used here does not retain absolute grading, these shifts
-do not change its component.  For a graded refinement they are recorded as
-integral suspensions, and the operation formula applies only to an invariant under those suspensions.
+These homogeneous shifts alter the residue only by a common scalar and
+preserve its discriminant.  They do not allow separate changes of the two
+residue representatives.  The graded completed rings embed coefficientwise
+in \(\overline K[[z]]\); no identification with an ordinary tensor-product
+completion is needed.
 
 \paragraph{Faithful center coordinates.}
 Iritani's center map need not be injective
@@ -269,13 +379,41 @@ and the center parameter is identified as
 independent target coordinates retain the curve-class information lost by
 \eqref{eq:center-novikov-map-atomic}.
 
+The distinction is modeled by \(x,y\mapsto q\), which identifies two
+generators, and \(x\mapsto qe^s,\ y\mapsto qe^t\), which retains independent
+characters.  Source coefficients must not already depend on the target
+variables \(s,t\).  The comparison uses the following conventions:
+\begin{center}
+\small
+\begin{tabular}{@{}p{.22\linewidth}p{.72\linewidth}@{}}
+\toprule
+Object & Required data \\
+\midrule
+Source & Reduced graded coefficients \(\C[[X_d,\sigma']]_{\rm gr}[\sigma^0]\);
+no independent source divisor variables. \\
+Target & Independent ambient and center-copy coordinates \(t,s_0,\ldots,s_{c-2}\);
+all center divisor directions retained. \\
+Scalars & The displayed exceptional or fibre Novikov Laurent extensions and
+ramification; their \(z\)-free fraction fields in a common algebraic closure. \\
+Connections & Graded completed \(z\)-enhancements embedded coefficientwise
+in the common field's \(\overline K[[z]]\); comparison and inverse regular. \\
+Derivations & Bulk partials, numerical Novikov logarithmic derivatives and
+the actual \(z\)-connection, with coordinate-change chain rules. \\
+Grading & Only common scalar residue shifts; no independent shifts of residue
+eigenlines. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
 \begin{lemma}[Faithful center base change]
 \label{lem:faithful-center-base-change}
 \coverage{fragment}%
 \lean{faithfulCenterBaseChange_targetOnly_injective}%
-Let \(R_{Z,\mathrm{src}}^{\mathrm{red}}\) be the coefficient domain whose
-\(\C[z]\)-extension is Iritani's divisor-equation-reduced source ring
-\(\C[z][[Q_Ze^{\sigma^{(2)}},\sigma']][\sigma^0]\).  Let \(A_j\) be the
+Let \(R_{Z,\mathrm{src}}^{\mathrm{red}}
+=\C[[X_d,\sigma']]_{\mathrm{gr}}[\sigma^0]\) be the coefficient domain
+whose graded completed \(z\)-enhancement is Iritani's reduced source ring
+\[\C[z][[Q_Ze^{\sigma^{(2)}},\sigma']][\sigma^0].\]
+Let \(A_j\) be the
 numerical coefficient domain of the external direct sum in Section~5.8.2,
 with the independent target coordinates \(t,s_0,\ldots,s_{c-2}\) and with
 \(z\) omitted.  The pullback determined by the center Novikov map and
@@ -367,22 +505,20 @@ Theorem~5.18(7) and Section~5.8.2, transports the same statement to the
 original blowup coordinates.
 \end{proof}
 
-\begin{proposition}[Marker formulas for the QDM comparisons]
-\label{prop:qdm-operation-ledgers}
-\coverage{conditional_deduction}%
-\lean{qdmComparison_evenCarrierEquiv,%
-  qdmProjectiveBundle_markerFormula_of_suspensionComparison,%
-  qdmBlowup_markerFormula_of_suspensionComparison,%
-  qdmProjectiveBundle_markerFormula_of_blockComparison,%
-  qdmBlowup_markerFormula_of_occurrenceBlockComparison,%
-  qdmBlowup_step_of_occurrenceBlockComparison}%
+\begin{proposition}[Intrinsic formulas for the two counts]
+\label{prop:intrinsic-count-formulas}
+\coverage{absent}%
+\uses{lem:faithful-center-base-change,prop:rank2-rigidity}%
 \imports{IritaniKoto:thm-5.1,IritaniBlowup:thm-5.18}%
-Let an additive invariant be preserved by the regular scalar extensions and formal
-coordinate changes described above, and by every recorded grading suspension
-if its block type retains grading.  The projective-bundle and blowup QDM
-comparisons on even cohomology then supply \eqref{eq:marker-pbundle} and
-\eqref{eq:marker-blowup}; the contribution of the \(j\)-th center summand is
-evaluated using its separate data \(\omega_j\).
+For either \(I=I_{\mathrm{exp}}\) or \(I=I_{\mathrm{lat}}\), a smooth
+codimension-\(c\) center \(Z\subset Y\) and a rank-\(r\) vector bundle \(V\)
+satisfy
+\begin{equation}
+ I(\Bl_ZY)=I(Y)+(c-1)I(Z),\qquad
+ I(\PP_Y(V))=rI(Y).
+ \label{eq:intrinsic-count-formulas}
+\end{equation}
+The formulas are componentwise for disconnected centers.
 \end{proposition}
 
 \begin{proof}
@@ -396,9 +532,9 @@ spectra, the resultant of their translated characteristic polynomials is a
 nonzero polynomial in \(u_i-u_j\), with leading coefficient one.  Hence the
 spectra of distinct factors are disjoint at the generic point: their primary
 blocks do not fuse when the direct sum is formed.  Regularity, restriction to
-even cohomology, the fixed splitting field, and suspension invariance therefore
+even cohomology, the fixed splitting field, and invariance under common scalar grading shifts therefore
 carry the invariant blockwise across the comparison, and additivity gives
-\eqref{eq:marker-pbundle}.  Tensoring the bundle by a line bundle, when needed
+\eqref{eq:intrinsic-count-formulas}.  Tensoring the bundle by a line bundle, when needed
 for the global-generation convention, changes neither the projective bundle
 nor the intrinsic Novikov embedding
 \cite[Remark~1.2 and Remark~5.2]{IritaniKoto}.
@@ -412,219 +548,84 @@ parameters, and the invertible combined bulk Jacobian, respectively.  The
 independent unit coordinates supplied by part~(7) give the same nonzero
 resultant argument, so the spectra of the ambient and individual center
 summands are pairwise disjoint generically.  Regularity, restriction to even
-cohomology, the fixed splitting field, suspension invariance, and
+cohomology, the fixed splitting field, invariance under common scalar grading shifts, and
 Lemma~\ref{lem:faithful-center-base-change} for each center copy then give
-\eqref{eq:marker-blowup}.  Each comparison is evaluated over its own common
+\eqref{eq:intrinsic-count-formulas}.  Faithful center base change identifies each of the \(c-1\) contributions
+with \(I(Z)\).  Each comparison is evaluated over its own common
 coefficient ring; the proof never composes Laurent comparisons recursively.
+\uses{lem:faithful-center-base-change,prop:rank2-rigidity}%
+\imports{IritaniKoto:thm-5.1,IritaniBlowup:thm-5.18}%
 \end{proof}
 
-The QDM comparisons need not identify the underlying elements of the block
-monoid.  They identify their images under the additive invariant \(w\), whose
-additivity is expressed by the square
-\begin{equation}
-\begin{CD}
- \mathcal L_{\mathcal T}\times\mathcal L_{\mathcal T}
- @>{+}>> \mathcal L_{\mathcal T}\\
- @V{w\times w}VV @VV{w}V\\
- A\times A @>>{+}> A.
-\end{CD}
-\label{diag:marker-fold-additivity}
-\end{equation}
-Proposition~\ref{prop:qdm-operation-ledgers} supplies the resulting equalities
-in \(A\).  Its blowup statement also retains the data distinguishing the
-center summands, as required by Theorem~\ref{thm:marker-ledger}.
+\subsection{A rational rank-two calculation}
 
-\subsection{The rank-two exponent count}
+The zero-primary block can be separated without splitting the complementary
+eigenlines.  This gives one calculation for three Fano families.
 
-We now specialize the general construction to \(A=\mathbf N\).  The block
-type \(\mathcal T_{\mathrm{exp}}\) retains the connection, pairing, and centered
-Euler endomorphism on \(H^{\mathrm{ev}}\), and forgets absolute
-grading.  Let \(E\) be a generic even
-block with centered connection
-\begin{equation}
- z\partial_z y=A(z)y,
- \qquad A(z)=z^{-1}N+A_0+zA_1+z^2A_2+\cdots.
- \label{eq:atomic-block-expansion}
-\end{equation}
-Assume \(\rk E=2\), \(N\ne0\), and \(N^2=0\).  Then
-\(L=\im N=\ker N\) is a line.  The following matrix calculation explains
-the modification.  In a frame adapted to \(L\), suppose that \(A_0\)
-preserves this line, so that
+\begin{proposition}[A universal modified residue]
+\label{prop:universal-rank-two-residue}
+\coverage{absent}%
+\uses{lem:A0preserve}%
+For \(s=2a+b\), \(sq\ne0\), consider
 \[
- N=\begin{pmatrix}0&\nu\\0&0\end{pmatrix},\qquad
- A_0=\begin{pmatrix}a&b\\0&d\end{pmatrix},\qquad
- (A_1)_{21}=c.
+ z^2\partial_z y=(U_{a,b}+zD)y,\qquad
+ U_{a,b}=\begin{pmatrix}
+ 0&aq&0&a^2q^2\\1&0&bq&0\\0&1&0&aq\\0&0&1&0
+ \end{pmatrix},\qquad D=\tfrac12\diag(3,1,-1,-3).
 \]
-Changing the frame by \(S=\diag(1,z)\) removes the pole and gives residue
-\[
- R=\begin{pmatrix}a&\nu\\c&d-1\end{pmatrix}.
-\]
-The lower-left entry explains why the first-order coefficient \(A_1\)
-is needed; the subtraction of one comes from differentiating the new
-frame.  Eigenvalues \(0,1\) represent the same class modulo \(\Z\)
-and do not qualify, whereas \(0,2/3\) represent distinct classes.
-
-The canonical elementary modification along
-this line is
+Its characteristic polynomial is \(T^2(T^2-sq)\).  Its zero-primary block
+has rank two, nonzero square-zero leading term and canonical modified residue
 \begin{equation}
- E^\sharp=\{s\in E:s\bmod z\in L\}.
- \label{eq:atomic-modification}
+ R_{a,b}=
+ \begin{pmatrix}
+ -(2a+3b)/(2s)&1\\
+ -4a^2/s^2&(b-2a)/(2s)
+ \end{pmatrix},\qquad
+ \delta^\sharp(a,b)=\frac{4(b-2a)}{b+2a}.
+ \label{eq:universal-residue}
 \end{equation}
-
-For this modification to remove the pole, the regular coefficient \(A_0\) must
-preserve \(L\).  Pairing horizontality supplies exactly that condition.
-
-\begin{lemma}[The regular coefficient preserves the nilpotent line]
-\label{lem:A0preserve}
-\coverage{conditional_deduction}%
-\lean{atomicRankTwo_regularCoefficient_preserves_nilpotentLine,%
-  atomicRankTwo_pairingEquations_of_loopHorizontality}%
-Horizontality of the Poincar\'e pairing implies \(A_0L\subset L\).
-\end{lemma}
-
-\begin{proof}
-Separated spectral factors are orthogonal for the horizontal Poincar\'e
-pairing: coefficientwise horizontality kills every off-diagonal block by an
-invertible Sylvester operator.  Hence the restriction to \(E\) is
-nondegenerate.  Write it as \(P(z)=P_0+zP_1+\cdots\).  Horizontality gives
-\[
- z\partial_zP(z)+A(z)^TP(z)+P(z)A(-z)=0.
-\]
-The \(z^{-1}\) coefficient gives \(N^TP_0=P_0N\).  Thus \(L\) is isotropic
-and, in dimension two, \(L^\perp=L\).  The constant coefficient is
-\[
- A_0^TP_0+P_0A_0+N^TP_1-P_1N=0.
-\]
-Evaluating this identity on \((x,x)\), where \(x\in L=\ker N\), gives
-\((A_0x,x)=0\).  Hence \(A_0x\in L^\perp=L\).
-\end{proof}
-
-Choose a frame with \(L=\langle e_1\rangle\) and
-\(Ne_2=\nu e_1\), \(\nu\ne0\).  The modified lattice has frame
-\(e_1,ze_2\), so
-\begin{equation}
- A^\sharp=S^{-1}AS-S^{-1}z\partial_zS,
- \qquad S=\diag(1,z).
- \label{eq:Asharp}
-\end{equation}
-The term \(z^{-1}N\) becomes regular.  The only possible new pole is the
-\(E_{21}\)-coefficient of \(A_0\), which vanishes by
-Lemma~\ref{lem:A0preserve}.  Thus
-\(A^\sharp=R+zR_1+\cdots\).  Define
-\begin{equation}
- \delta^\sharp(E):=(\tr R)^2-4\det R.
- \label{eq:res-disc}
-\end{equation}
-
-\begin{proposition}[Invariance of the modified residue]
-\label{prop:rank2-rigidity}
-\coverage{conditional_deduction}%
-\lean{atomicRankTwo_modifiedBase_regular_of_flat_connection,%
-  atomicRankTwo_modifiedResidue_lax_of_flat_connection,%
-  atomicRankTwo_residueDiscriminant_frozen_by_horizontality_and_flatness,%
-  atomicRankTwo_residueDiscriminant_constant_over_formal_germ,%
-  atomicRankTwo_modifiedBase_pole_eq_zero,%
-  atomicRankTwo_residueDiscriminant_constant_along_base}%
-Under formal change of even bulk coordinates, the modified connection is
-regular in every base direction and
-\begin{equation}
- \partial R=[G_\partial,R]
- \label{eq:atomic-lax}
-\end{equation}
-for a regular matrix \(G_\partial\).  Consequently
-\(\partial(\delta^\sharp)=0\).  Regular connection isomorphisms preserve the
-domain and value of \(\delta^\sharp\).
+Here \(a,b,q\) are constant under \(\partial_z\).
 \end{proposition}
 
 \begin{proof}
-There are two steps.  Flatness first preserves the nonzero square-zero orbit of
-\(N\).  After the elementary modification, it removes the possible base pole
-and gives the Lax equation for the residue.
-Write a centered base equation as
-\(\partial y=(z^{-1}C_\partial+C_{\partial,0}+O(z))y\).  The
-\(z^{-2}\) coefficient of flatness gives \([N,C_\partial]=0\), and the trace
-of the \(z^{-1}\) coefficient gives \(\tr C_\partial=0\); here the base
-equation has been scalar-centered.  Nilpotence of \(N\) away from the
-base point is not yet known, so the commutant is computed over the
-complete local ring \(\mathcal O\) of the formal bulk germ.  The rank-two
-spectral cluster continues over \(\mathcal O\) because it is separated
-from the complementary spectral clusters at the base point; \(N\) is the centered
-\(z^{-1}\) coefficient of that continuation, so \(\tr N=0\), and it
-specializes at the closed point to a nonzero rank-one nilpotent.  Choose
-\(v\) with \(v,Nv\) a basis modulo the maximal ideal; by Nakayama it is a
-basis over \(\mathcal O\), so \(N\) is cyclic.  Any \(C\) commuting with a
-cyclic \(N\) is determined by \(Cv=\alpha v+\beta Nv\) and equals
-\(\alpha I+\beta N\), whether or not \(N\) is nilpotent.  Hence
-\([N,C_\partial]=0\) and \(\tr C_\partial=0=\tr N\) give
-\(C_\partial=q_\partial N\) with \(q_\partial\in\mathcal O\).  The same
-\(z^{-1}\) coefficient gives
+The columns of
 \[
- \partial N=-q_\partial N+
- [N,q_\partial A_0-C_{\partial,0}].
+ C=\begin{pmatrix}
+ aq&0&0&-(a+b)q\\
+ 0&(a+b)q&-aq&0\\
+ 1&0&0&1\\0&1&1&0
+ \end{pmatrix},\qquad \det C=-s^2q^2,
 \]
-Writing \(B=q_\partial A_0-C_{\partial,0}\), one has
-\(\partial(N^2)=-2q_\partial N^2+[N^2,B]\); uniqueness for the formal
-coefficient recursion preserves \(N^2=0\).  An entry nonzero at the closed
-point remains a unit, so \(N\) has rank one throughout the formal germ.
-Thus formal bulk
-transport preserves the nonzero square-zero orbit and its
-image line.  After modification, the only possible base
-pole is \(z^{-1}kE_{21}\).  If
-\(R=\left(\begin{smallmatrix}a&\nu\\c&d\end{smallmatrix}\right)\), the
-\(z^{-1}\) flatness equation is
-\(kE_{21}+[R,kE_{21}]=0\).  Its diagonal entries are \(\nu k\) and
-\(-\nu k\), so \(k=0\).  The constant term of the flatness equation is now
-\eqref{eq:atomic-lax}; trace and determinant are constant under infinitesimal
-conjugation.  A regular isomorphism carries \(N\), \(L\), and the modified
-lattice to their counterparts and conjugates the residue.
-\end{proof}
-
-\begin{proposition}[Exponent interpretation]
-\label{prop:residue-discriminant-exponents}
-\coverage{fragment}%
-\lean{residueDiscriminant_eq_squared_eigenvalue_separation}%
-\imports{PutSinger:ch-3}%
-If \(\rho_1,\rho_2\) are the eigenvalues of \(R\), their classes modulo
-\(\Z\) are the formal exponent classes of the original centered block and
+give \(\im U^2\oplus\ker U^2\).  Direct multiplication gives
 \[
- \delta^\sharp=(\rho_1-\rho_2)^2.
+ J=C^{-1}UC=J_+\oplus N,\qquad
+ J_+=\begin{pmatrix}0&sq\\1&0\end{pmatrix},\quad
+ N=\begin{pmatrix}0&1\\0&0\end{pmatrix}.
 \]
-\end{proposition}
-
-\begin{proof}
-The elementary modification uses integral powers of \(z\), so it preserves
-formal exponent classes modulo \(\Z\).  The modified connection is regular
-singular with residue \(R\); the regular-singular classification identifies
-the exponent classes with the residue eigenvalues modulo \(\Z\)
-\cite[Chapter~3]{PutSinger}.  The displayed identity is the quadratic
-discriminant formula.
+Put \(B=C^{-1}DC\).  The normalized gauge \(G=I+zX+z^2Y+\cdots\),
+with zero diagonal blocks in positive orders, starts with
+\[
+ X_{+0}=\diag(2a/s,2/(qs)),\qquad
+ X_{0+}=\diag(-2/(qs),-2a/s).
+\]
+These matrices solve \(J_iX_{ij}-X_{ij}J_j=-B_{ij}\).
+Writing the transformed coefficient as \(J+zB_1+z^2B_2+\cdots\), its
+gauge equation gives
+\[
+ B_1=B+[J,X],\qquad B_2=BX-XB_1-X+[J,Y].
+\]
+The derivative contributes \(-X\).  Its diagonal blocks vanish, as do
+those of \(XB_1\) and \([J,Y]\), so
+\[
+ (B_1)_{00}=\diag\left(-\frac{2a+3b}{2s},\frac{2a+3b}{2s}\right),
+ \qquad ((B_2)_{00})_{21}=(B_{0+}X_{+0})_{21}
+ =-\frac{4a^2}{s^2}.
+\]
+Modification by \(\diag(1,z)\) gives \(R_{a,b}\).  Its characteristic
+polynomial is \(T^2+T+(10a-3b)/(4s)\), proving the discriminant formula.
+For an original \(z^2F\) term, add \((C^{-1}FC)_{ii}\) to \((B_2)_{ii}\).
+Thus only the first off-diagonal gauge coefficient is needed.
 \end{proof}
-
-For such a block \(E\), write \(\rho_1,\rho_2\) for the eigenvalues of its
-modified residue in the
-fixed algebraic closure \(\overline K\) of the generic coefficient field.
-Define the invariant on each block by
-\begin{equation}
- w_{\mathrm{exp}}(E)=
- \begin{cases}
- 1,&\rk E=2,\ N\ne0,\ N^2=0,\
-      [\rho_1]\ne[\rho_2]\text{ in }\overline K/\Z,\\
- 0,&\text{otherwise},
- \end{cases}
- \label{eq:atomic-fold}
-\end{equation}
-and extend it additively to
-\(w_{\mathrm{exp}}:\mathcal L_{\mathcal T_{\mathrm{exp}}}\to\mathbf N\).  Put
-\(I_{\mathrm{exp}}(Y)=
-w_{\mathrm{exp}}(\mathcal B_{\mathcal T_{\mathrm{exp}}}(Y))\).
-Propositions~\ref{prop:rank2-rigidity} and
-\ref{prop:residue-discriminant-exponents} make this a well-defined additive
-invariant for Proposition~\ref{prop:qdm-operation-ledgers}: conjugation preserves
-the residue eigenvalues, and a common scalar shift preserves their
-difference.  The use of exponent classes also makes the scalar test
-insensitive to integral changes of representatives.  The condition
-\(\delta^\sharp\ne0\) is insufficient: it says only
-\(\rho_1\ne\rho_2\) and therefore also marks resonant blocks.
 
 \subsection{The cubic block}
 \label{subsec:shared-cubic-packet}
@@ -634,7 +635,7 @@ threefold, the calculation below isolates the unique such candidate and then
 computes the residue of its elementary modification.
 
 Let \(X\subset\PP^4\) be a smooth cubic threefold, let \(P=H|_X\), and put
-\(q=Q^\ell\) for the line class and \(r=(3q)^{1/2}\).  Beauville's formulas
+\(q=Q^\ell\) for the line class.  Beauville's formulas
 give \cite[main theorem and (2.1)--(2.3)]{Beauville}
 \begin{equation}
  P\star P=P^2+6q,\qquad
@@ -653,92 +654,12 @@ Thus, in the basis \((1,P,P^2,P^3)\),
 and \(z^2\partial_zy=(U_X+zD_X)y\).  This agrees with
 \cite[Section~3]{Cai}.
 
-\begin{proposition}[Small-even cubic block reduction]
-\label{prop:cubic-block-data}
-\coverage{fragment}%
-\lean{cubicSmallEven_blockReduction,%
-  cubicZeroBlock_modifiedResidue_indicialPolynomial,%
-  cubicSmallEven_normalizedGauge_exists_and_unique,%
-  cubicSmallEven_normalizedGauge_coefficients,%
-  cubicExponentDifference_nonintegral}%
-\imports{Beauville:quantum-products}%
-The characteristic and minimal polynomials of \(U_X\) are both
-\(T^2(T^2-108q)\).  After adjoining \(r\), its eigenvalues are
-\(6r,-6r,0,0\), and the zero generalized eigenspace is one rank-two Jordan
-block.  A normalized gauge regular in \(z\) gives
-\begin{equation}
- \begin{aligned}
- z^2\partial_z\widetilde y_+&=(6r+O(z^2))\widetilde y_+,\\
- z^2\partial_z\widetilde y_-&=(-6r+O(z^2))\widetilde y_-,\\
- z^2\partial_z
- \begin{pmatrix}\widetilde y_3\\\widetilde y_4\end{pmatrix}
- &=\bigl[N+zA_0+z^2A_1+O(z^3)\bigr]
- \begin{pmatrix}\widetilde y_3\\\widetilde y_4\end{pmatrix},
- \end{aligned}
- \label{eq:cubic-integral-block-reduction}
-\end{equation}
-where
-\begin{equation}
- N=\begin{pmatrix}0&2\\0&0\end{pmatrix},\quad
- A_0=\begin{pmatrix}-19/18&0\\0&19/18\end{pmatrix},\quad
- A_1=\begin{pmatrix}0&-14/(81r^2)\\-8/81&0\end{pmatrix}.
- \label{eq:cubic-shared-block-data}
-\end{equation}
-\end{proposition}
-
-\begin{proof}
-The matrix
-\[
- C=\begin{pmatrix}
- 6r^3&-6r^3&0&-7r^2\\7r^2&7r^2&-2r^2&0\\
- 3r&-3r&0&1\\1&1&1&0
- \end{pmatrix},
- \qquad \det C=-486r^5,
-\]
-puts \(U_X\) into
-\[
- C^{-1}U_XC=
- \begin{pmatrix}6r&0&0&0\\0&-6r&0&0\\0&0&0&2\\0&0&0&0\end{pmatrix}.
-\]
-Partition as \(1\mid1\mid2\).  At each positive order in \(z\), the
-off-diagonal gauge coefficient is the unique solution of a Sylvester
-equation between blocks with disjoint scalar spectra.  The gauge and inverse
-are regular in \(z\); explicitly, it has the normalized form
-\begin{equation}
- G(z)=I+\sum_{n\ge1}G_nz^n,
- \qquad G_n\text{ block-off-diagonal}.
- \label{eq:cubic-integral-block-gauge}
-\end{equation}
-To extract the coefficient used in the residue, write
-\(y=CG(z)\widetilde y\), \(J=C^{-1}U_XC\) and \(B=C^{-1}D_XC\).
-Label the blocks by \(+,-,0\).  If the transformed coefficient is
-\(J+z\widehat A_0+z^2\widehat A_1+\cdots\), then
-\[
- (J+zB)G-z^2G'=G(J+z\widehat A_0+z^2\widehat A_1+\cdots).
-\]
-Thus \((\widehat A_0)_{ii}=B_{ii}\), while the first Sylvester equations are
-\[
- J_i(G_1)_{ij}-(G_1)_{ij}J_j=-B_{ij}\qquad(i\ne j).
-\]
-At the next order,
-\[
- \widehat A_1=[J,G_2]+BG_1-G_1-G_1\widehat A_0.
-\]
-Since \(G_1,G_2\) are block off-diagonal and \(\widehat A_0\) is block
-diagonal, the zero block is simply
-\[
- A_1=(\widehat A_1)_{00}
- =B_{0+}(G_1)_{+0}+B_{0-}(G_1)_{-0}
- =\begin{pmatrix}0&-14/(81r^2)\\-8/81&0\end{pmatrix}.
-\]
-This computes the needed coefficient without solving for \(G_2\), and proves
-\eqref{eq:cubic-shared-block-data}.
-\end{proof}
-
-For the zero block, \(N=2E_{12}\).  With \(S=\diag(1,z)\),
+The change of basis \(\diag(1,2,4,8)\) changes \(U_X=2U_{6,15}\)
+to \(U_{24,60}\) and leaves \(D_X\) unchanged.  The universal calculation
+therefore applies.  Conjugating its residue by \(\diag(2,1)\)
+gives the original cubic normalization:
 \begin{equation}
  R_X
- =2E_{12}+A_0-\frac8{81}E_{21}-\diag(0,1)
  =\begin{pmatrix}-19/18&2\\-8/81&1/18\end{pmatrix}.
  \label{eq:RX}
 \end{equation}
@@ -754,7 +675,7 @@ Its characteristic polynomial is
 \paragraph{From the small connection to the generic block.}
 After inverting \(q\), at the small quantum point the rank-two cluster is separated from the
 other eigenvalues.  The cyclic-centralizer argument in
-Proposition~\ref{prop:rank2-rigidity} continues that cluster over the formal
+Lemma~\ref{lem:cyclic-primary-persistence} continues that cluster over the formal
 bulk ring and proves that its centered leading term remains nonzero and
 square-zero.  The modified residue is then preserved by flatness.  Thus
 the small calculation determines the exponent count at generic quantum
@@ -764,16 +685,18 @@ parameters, for every smooth cubic threefold.
 
 \begin{proposition}[Vanishing on low-dimensional centers]
 \label{prop:atomic-lowdim}
-\coverage{conditional_deduction}%
+\coverage{fragment}%
 \lean{rankTwoResidueMarker_lowDimensionalOccurrenceNullity}%
 \uses{prop:rank2-rigidity}%
 \imports{BeauvilleSurfaces:minimal-surface-classification}%
-For every smooth projective \(Z\) of dimension at most two and every center
-summand specified by comparison data \(\omega\),
-\(I_{\mathrm{exp}}(Z;\omega)=0\).
+For every smooth projective \(Z\) of dimension at most two,
+\(I_{\mathrm{exp}}(Z)=I_{\mathrm{lat}}(Z)=0\).  The same vanishing holds
+for every center copy in a quantum comparison.
 \end{proposition}
 
 \begin{proof}
+It suffices to prove vanishing for \(I_{\mathrm{lat}}\), since
+\(I_{\mathrm{exp}}\leq I_{\mathrm{lat}}\).
 \emph{Points and curves.}
 A point has one rank-one block.  For \(\PP^1\), the relation
 \(p\star p=Qe^{t_p}\) gives two rank-one generic blocks.
@@ -808,9 +731,9 @@ zero.
 A minimal surface with non-nef canonical class is \(\PP^2\) or a ruled
 surface \(\PP_C(V)\) \cite[Chapter~VI]{BeauvilleSurfaces}.  The relation
 \(H^{\star3}=Q\) makes \(\PP^2\) generically semisimple.  Formula
-\eqref{eq:marker-pbundle} and the curve case give zero for ruled surfaces.
+\eqref{eq:intrinsic-count-formulas} and the curve case give zero for ruled surfaces.
 Every nonminimal surface is obtained from a minimal one by point blowups;
-formula~\eqref{eq:marker-blowup} adds only zero point terms.  This proves
+formula~\eqref{eq:intrinsic-count-formulas} adds only zero point terms.  This proves
 intrinsic vanishing for every surface.
 Lemma~\ref{lem:faithful-center-base-change} identifies every separate center
 summand with a faithful scalar extension of the corresponding intrinsic generic
@@ -819,7 +742,7 @@ block, and the invariant is unchanged by that extension.
 
 \subsection{The projective endpoint and the contradiction}
 
-Formula~\eqref{eq:marker-pbundle} applied to
+Formula~\eqref{eq:intrinsic-count-formulas} applied to
 \(X\times\PP^1=\PP_X(\OO_X^{\oplus2})\) gives
 \begin{equation}
  I_{\mathrm{exp}}(X\times\PP^1)=2.
@@ -837,7 +760,8 @@ by \(5H\) has five distinct eigenvalues after algebraic closure.  Thus
 \begin{proof}[Proof of Theorem~\ref{thm:every-cubic}]
 Proposition~\ref{prop:atomic-lowdim} makes every actual center correction zero
 in a weak factorization of smooth projective fourfolds.  Hence
-Theorem~\ref{thm:marker-ledger} makes \(I_{\mathrm{exp}}\) birationally
+projective weak factorization and
+\eqref{eq:intrinsic-count-formulas} make \(I_{\mathrm{exp}}\) birationally
 invariant.  If \(X\times\PP^1\) were rational, then
 \[
  2=I_{\mathrm{exp}}(X\times\PP^1)
@@ -845,4 +769,94 @@ invariant.  If \(X\times\PP^1\) were rational, then
 \]
 a contradiction.
 \proves{thm:every-cubic}%
+\end{proof}
+\subsection{The additive formulation}
+The same comparison argument applies to other additive functions of the
+retained block data.  We record this formulation for the extensions below.
+
+Fix the retained data \(\mathcal T\).  Write \(\mathcal L_{\mathcal T}\)
+for the monoid of finite multisets of regular-isomorphism classes of blocks
+with these data.  Its addition is multiset union.  Direct
+sum gives each \(Y\) its block multiset
+\(\mathcal B_{\mathcal T}(Y)\in\mathcal L_{\mathcal T}\).  An
+\emph{additive invariant} is a commutative-monoid homomorphism
+\[
+ w:\mathcal L_{\mathcal T}\longrightarrow A,
+ \qquad I_w(Y):=w(\mathcal B_{\mathcal T}(Y)),
+\]
+where \(A\) is a commutative monoid.  This formulation also allows values
+in monoids without subtraction.  The additive group-valued extension of
+the exponent count is treated after the main theorem.
+
+Consider one blowup
+\(\beta:\widetilde Y=\Bl_ZY\to Y\) along a smooth center of codimension
+\(c\ge2\).  Iritani's comparison has one ambient summand and \(c-1\) center
+summands.  Distinct copies of the same center must remain distinct in the
+blowup formula.  We therefore retain separate data for each center summand:
+for the \(j\)-th, record
+\[
+ \omega_j=(\beta,Z,j,\varsigma_j,\chi_j),
+ \qquad 0\le j\le c-2,
+\]
+where \(\varsigma_j\) is Iritani's center reconstruction parameter and
+\(\chi_j\) is the induced numerical Novikov specialization.  Its correction
+is \(c_w(\omega_j):=w(\mathcal B_{\mathcal T}(Z;\omega_j))\).  The comparison
+will give equality only after applying \(w\); distinct block multisets may
+have the same invariant.
+
+\begin{theorem}[A birational invariance criterion]
+\label{thm:marker-ledger}
+\coverage{conditional_deduction}%
+\lean{effectiveBlockLedger_fold_unique,%
+  occurrenceIndexedMarker_eq_of_birational,%
+  occurrenceIndexedMarker_descends_to_birationalClasses}%
+\imports{AKMW:weak-factorization}%
+Let \(w:\mathcal L_{\mathcal T}\to A\) be an additive invariant unchanged by the
+allowed regular scalar extensions and formal coordinate changes.  Suppose
+\begin{align}
+ I_w(\PP_Y(V))&=rI_w(Y),
+ &&\rk V=r,                                      \label{eq:marker-pbundle}\\
+ I_w(\Bl_ZY)&=I_w(Y)+\sum_{j=0}^{c-2}c_w(\omega_j),
+ &&\operatorname{codim}_YZ=c\ge2.                \label{eq:marker-blowup}
+\end{align}
+If every summand associated with a smooth center of dimension at most \(d-2\)
+has zero correction, then \(I_w\) is a birational invariant of smooth
+projective \(d\)-folds.
+\end{theorem}
+
+\begin{proof}
+Projective weak factorization writes a birational map of smooth projective
+\(d\)-folds as a zigzag of blowups and blowdowns along smooth centers of
+codimension at least two \cite[Theorem~0.3.1]{AKMW}.  By
+\eqref{eq:marker-blowup} and the vanishing of every center correction, the
+invariant is unchanged at each step; the equalities therefore telescope.
+Disconnected centers are treated componentwise, while a divisor blowup is an
+isomorphism.
+\end{proof}
+
+\begin{proposition}[Marker formulas for the QDM comparisons]
+\label{prop:qdm-operation-ledgers}
+\coverage{conditional_deduction}%
+\lean{qdmComparison_evenCarrierEquiv,%
+  qdmProjectiveBundle_markerFormula_of_suspensionComparison,%
+  qdmBlowup_markerFormula_of_suspensionComparison,%
+  qdmProjectiveBundle_markerFormula_of_blockComparison,%
+  qdmBlowup_markerFormula_of_occurrenceBlockComparison,%
+  qdmBlowup_step_of_occurrenceBlockComparison}%
+\imports{IritaniKoto:thm-5.1,IritaniBlowup:thm-5.18}%
+Let an additive invariant be preserved by the regular scalar extensions and formal
+coordinate changes described above, and by every recorded grading suspension
+if its block type retains grading.  The projective-bundle and blowup QDM
+comparisons on even cohomology then supply \eqref{eq:marker-pbundle} and
+\eqref{eq:marker-blowup}; the contribution of the \(j\)-th center summand is
+evaluated using its separate data \(\omega_j\).
+\end{proposition}
+
+\begin{proof}
+The comparison proof of Proposition~\ref{prop:intrinsic-count-formulas}
+uses only regular transport, generic separation and additivity.
+Apply it to \(w\), retaining each center occurrence and any grading
+suspensions in its block data.
+\uses{prop:intrinsic-count-formulas}%
+\imports{IritaniKoto:thm-5.1,IritaniBlowup:thm-5.18}%
 \end{proof}

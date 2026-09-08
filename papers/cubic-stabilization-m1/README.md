@@ -12,13 +12,15 @@
 
 For every smooth complex cubic threefold `X`, the paper proves that
 `X x P^1` is irrational.  The proof decomposes the generic even quantum
-`D`-module into blocks and records their isomorphism classes in a free
-commutative monoid.  An additive rank-two exponent count vanishes on
+`D`-module into whole primary blocks. An intrinsic rank-two exponent count vanishes on
 every center that can occur in weak factorization in dimension four, doubles
 under product with `P^1`, detects the cubic block, and vanishes on projective
 space.  The same construction gives an irrationality criterion for smooth
 projective threefolds after one stabilization and the one-stabilization theorem for smooth prime Fano
-threefolds of genus eight.
+threefolds of genus eight. The canonical-lattice count also detects resonant
+blocks. A unified calculation proves that rationality is unchanged by one
+stabilization for smooth complex Picard-rank-one index-two Fano threefolds:
+precisely degrees four and five are rational.
 
 The count and the multiset of exact residue discriminants extend additively
 to `K0(Var_C)/(L-1)`. They distinguish certain threefolds with equal Hodge
