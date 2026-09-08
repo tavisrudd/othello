@@ -28,8 +28,9 @@ verdict, and the source-read limitations above remain unchanged.
 
 - **CP-S01 — headline:** Labelled recovery costs compose, while equations and
   minimal repairs have different confinement conditions.
-- **CP-S02 — composition:** Functional-labelled costs determine the exact first
-  equation escape cost and compose associatively with coefficient witnesses.
+- **CP-S02 — composition:** Labelled recovery costs determine the exact first
+  equation escape cost and compose associatively; retaining minimizing lifts
+  reconstructs coefficient witnesses.
 - **CP-S03 — operational transfer:** If every outer dual word touching the target
   block has weight greater than `r+1`, every inclusion-minimal recovery support
   of size at most `r` is local. This requires no inner-dual-distance condition

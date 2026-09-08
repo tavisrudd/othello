@@ -198,24 +198,13 @@ results.
   transversal group is `Fq² ⋊ SL₂(q)` or the smaller split-torus branch.
   [Exact Transversal Logical Groups of Quantum MDS–CSS Codes](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf).
 
-- **Relative weights are exact local recovery costs, and the labelled cost
-  functions compose.** Shortening and puncturing the inner dual onto the helpers give
-  `K_P = short_J(I⊥) ⊆ D_P = punct_J(I⊥)`; `M_t(D_P,K_P)` is the minimum
-  helper union recovering `t` independent target combinations. For each fixed
-  nonzero target-message subspace, prescribed-coset costs over the complete
-  outer functional dual give the exact first nonconfined cost without a
-  distance hypothesis. The labelled costs compose associatively through
-  compatible finite concatenation towers. Through helper radius `r`, contexts
-  of length at most `max(2,r+1)` and functional-dual dimension at most
-  `min(t,r)` detect every numerical distinction; their finite response vector
-  is the coarsest exact bounded numerical state. At rank one this quotient has
-  an explicit projective line-probe description. Under `d(O⊥) > r + 1`, confinement
-  through radius `r` is equivalent to `r < M_t(D_P,K_P) + d(I⊥)`.
-  ergodis (Exact Recovery, Global Optimization, and Invariant Synthesis)
-  executes this recursion, stores minimizing lifts to return witnesses, and
-  schedules repairs exactly under heterogeneous capacities.
-  [Exact Compositional Transfer of Bounded Linear Recovery](https://github.com/tavisrudd/compositional-recovery/blob/main/compositional_recovery.pdf) ·
-  [ergodis](https://github.com/tavisrudd/ergodis).
+- **Labelled recovery costs compose, while equations and minimal repairs have different confinement conditions.**
+  Labelled recovery costs determine the exact first equation escape cost and compose associatively; retaining minimizing lifts reconstructs coefficient witnesses. If every outer dual word touching the target
+  block has weight greater than `r+1`, every inclusion-minimal recovery support of size
+  at most `r` is local. This requires no inner-dual-distance condition and transfers
+  reliability under availability laws with the same local marginal, as well as
+  fractional and integral support allocations.
+  [Exact Compositional Transfer of Bounded Linear Recovery](https://github.com/tavisrudd/compositional-recovery/blob/main/compositional_recovery.pdf).
 
 - **Order six is the unique nontrivial cut-rigid symmetric conference
   order.** For a balanced half (Y) of a symmetric conference matrix, the
@@ -270,8 +259,8 @@ the theorem column.
 | Robust Local-Unitary Rigidity of Stabilizer AME States | Every product-unitary intertwiner between stabilizer `AME(2m,q)` states is Clifford on each party. | Every prime power `q = pᵉ` and `m ≥ 2`. |
 | Exact Transversal Logical Groups of Quantum MDS–CSS Codes | The code-conductor dimension fixes the transversal logical group. | All `[2m,m,m+1]q` MDS codes over odd prime fields. |
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Order six is the unique nontrivial realized symmetric conference order whose normalized balanced cross-block Gram spectrum is cut-independent. | Every symmetric conference matrix and every balanced half. |
-| Exact Compositional Transfer of Bounded Linear Recovery | For `u=min(k,|P|)`, `b=min(k,|J|)`, and `ell=u+b-k`, an MDS inner code has `M_t(D_P,K_P)=k-u+t` at every recoverable rank; helper-span gives equality in the global ceiling, and rank-one ceiling equality is rigid. | Every proper MDS inner code and every target/helper split with `1 ≤ t ≤ ell`. |
-| Exact Compositional Transfer of Bounded Linear Recovery | `K_P=short_J(I⊥) ⊆ D_P=punct_J(I⊥)`, and `M_t(D_P,K_P)` is the exact minimum helper-union cost for rank-`t` recovery. For any fixed nonzero target-message subspace, joint prescribed-coset support costs over the complete outer functional dual give the exact finite first nonconfined cost. Under `N ≥ 2` and `d(O⊥)>r+1`, this reduces to `r<M_t(D_P,K_P)+d(I⊥)`, and normalized equations and exact supports transfer. The labelled ordinary coset-support functions compose exactly under repeated concatenation; helper-restriction costs and target images give the normalized recursion. | Every proper inner code and every nonzero target-message subspace, for outer codes with at least two blocks and nonzero projection onto the target block; the RGHW specialization uses `1 ≤ t ≤ dim W_P`, and the composition law applies to every finite field tower. |
+| Exact Compositional Transfer of Bounded Linear Recovery | For `u=min(k,\|P\|)`, `b=min(k,\|J\|)`, and `ell=u+b-k`, an MDS inner code has `M_t(D_P,K_P)=k-u+t` at every recoverable rank; helper-span gives equality in the global ceiling, and rank-one ceiling equality is rigid. | Every proper MDS inner code and every target/helper split with `1 ≤ t ≤ ell`. |
+| Exact Compositional Transfer of Bounded Linear Recovery | Labelled recovery costs determine the exact first equation escape cost and compose associatively; retaining minimizing lifts reconstructs coefficient witnesses. If every outer dual word touching the target block has weight greater than `r+1`, every inclusion-minimal recovery support of size at most `r` is local. This requires no inner-dual-distance condition and transfers reliability under availability laws with the same local marginal, as well as fractional and integral support allocations. | Represented inner encoders, compatible outer codes, and a fixed nonzero helper-recoverable target space. The exact equation formula assumes at least two outer blocks and nonzero target-block projection; the radius counts scalar helper coordinates. |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | The integral middle lattice has rank `130` and saturation quotient `(Z/2)^10`; the integral resolution complex has central Smith factor three, a length-three mod-three Loewy chain, and modular relative-hard-Lefschetz failure. | The theta divisor of every smooth complex cubic threefold. |
 
 ## Papers and entry points
@@ -302,7 +291,7 @@ boundary, and reproducible entry points.
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Matrix theory / algebraic combinatorics / mathematical physics | Order six is the unique nontrivial cut-independent case; Hermitian triangle holonomy controls the degree-three frontier and rigidity. | [PDF](https://github.com/tavisrudd/conference-cut-spectra/blob/main/conference_cut_spectra.pdf) · [repo](https://github.com/tavisrudd/conference-cut-spectra) |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | Algebraic geometry / topology | The rank-130 integral middle lattice has canonical mod-two glue, while the same resolution carries a factor-three integral perverse attachment, a length-three modular Loewy chain, and failure of relative hard Lefschetz modulo three. | [PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [repo](https://github.com/tavisrudd/blown-up-theta-lattice) |
 | Frobenius-equivariant Pair Extension and Robust Repair of Eight-Arcs | Finite geometry / coding theory | Fixed mate-line carriers and exact collision corrections give Frobenius-compatible paired MDS extensions, including the exact two-fixed-point minimum over F₂₅. | [PDF](https://github.com/tavisrudd/equivariant-robust-completion/blob/main/equivariant-robust-completion.pdf) · [repo](https://github.com/tavisrudd/equivariant-robust-completion) |
-| Exact Compositional Transfer of Bounded Linear Recovery | Coding theory / distributed storage | Prescribed-coset optimization gives the exact finite nonconfinement cost; labelled costs compose through finite towers, and ergodis evaluates them with witnesses and exact capacity-aware repair scheduling. | [PDF](https://github.com/tavisrudd/compositional-recovery/blob/main/compositional_recovery.pdf) · [repo](https://github.com/tavisrudd/compositional-recovery) · [ergodis](https://github.com/tavisrudd/compositional-recovery/tree/main/ergodis) |
+| Exact Compositional Transfer of Bounded Linear Recovery | Coding theory / distributed storage | Exact labelled composition reconstructs recovery witnesses; target-touching outer dual distance confines bounded minimal repair supports even when equations can escape. | [PDF](https://github.com/tavisrudd/compositional-recovery/blob/main/compositional_recovery.pdf) · [repo](https://github.com/tavisrudd/compositional-recovery) · [Ergodis](https://github.com/tavisrudd/ergodis) |
 
 The repository for *Reconstructing the Clebsch Code from Its Deep-Hole
 Syndrome Locus* also contains the computational companion
@@ -314,8 +303,8 @@ a separate series paper.
 
 ### ergodis — Exact Recovery, Global Optimization, and Invariant Synthesis
 
-[Source, installation, and CLI guide](https://github.com/tavisrudd/compositional-recovery/tree/main/ergodis) ·
-[benchmark methodology and evidence](https://github.com/tavisrudd/compositional-recovery/blob/main/ergodis/BENCHMARKS.md) ·
+[Source, installation, and CLI guide](https://github.com/tavisrudd/ergodis) ·
+[software documentation and evidence](https://github.com/tavisrudd/ergodis) ·
 [mathematical paper](https://github.com/tavisrudd/compositional-recovery/blob/main/compositional_recovery.pdf)
 
 ergodis is a standalone Rust finite-domain compiler and exact solver for
@@ -808,70 +797,43 @@ a fixed code.
 
 #### Exact Compositional Transfer of Bounded Linear Recovery
 
-[PDF](https://github.com/tavisrudd/compositional-recovery/blob/main/compositional_recovery.pdf) · [Repository](https://github.com/tavisrudd/compositional-recovery) · [ergodis](https://github.com/tavisrudd/compositional-recovery/tree/main/ergodis) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051903-blue.svg)](https://doi.org/10.5281/zenodo.22051903)
+[PDF](https://github.com/tavisrudd/compositional-recovery/blob/main/compositional_recovery.pdf) · [Repository](https://github.com/tavisrudd/compositional-recovery) · [ergodis](https://github.com/tavisrudd/ergodis) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051903-blue.svg)](https://doi.org/10.5281/zenodo.22051903)
 
-**Standout result.** For a target/helper split, shortening and puncturing the
-inner dual onto the helper coordinates give
-`K_P = short_J(I^perp) <= D_P = punct_J(I^perp)`.
-Its relative generalized Hamming weights are exactly the minimum helper-union
-costs for recovering independent target combinations. For every fixed nonzero
-target-message subspace, prescribed-coset optimization over the complete outer
-functional dual gives the exact finite first nonconfined cost. The labelled
-costs compose associatively through compatible finite concatenation towers;
-storing minimizing lifts separately returns coefficient-level witnesses. Under
-`N >= 2` and
-`d(O^perp) > r + 1`, confinement through radius `r` is equivalent to
-`r < M_t(D_P,K_P) + d(I^perp)`. ergodis turns these formulas into an exact
-hierarchical optimizer and capacity-aware repair scheduler.
+**Standout result.** Labelled recovery costs determine the exact first equation escape cost and compose associatively; retaining minimizing lifts reconstructs coefficient witnesses. If every outer dual word touching the target
+block has weight greater than `r+1`, every inclusion-minimal recovery support of size at
+most `r` is local. This requires no inner-dual-distance condition and transfers
+reliability under availability laws with the same local marginal, as well as fractional
+and integral support allocations.
 
-> *Abstract* In a concatenated linear code, an outer equation selects which
-> inner functional each block must realize. The least helper count forgets that
-> label and can give the wrong finite threshold. Within one block, relative
-> generalized Hamming weights of the canonical shortening–puncturing pair are
-> exactly the minimum helper unions for each dimension. For concatenation, the
-> minimum cost of a recovery leaving the target block is instead a labelled
-> min–sum formula whose local terms are target-normalized prescribed-coset
-> support costs. These costs compose associatively through finite towers.
-> Sufficient outer dual distance excludes the nonzero-label terms and recovers
-> the scalar formula `M_t(D_P,K_P) + d(I^perp)`. Below this threshold,
-> restriction and zero-extension preserve every normalized recovery equation
-> and exact helper support. The labelled costs form a closed but redundant
-> state. Through helper radius `r`, every numerical distinction is witnessed by
-> an outer context of length at most `max(2,r+1)` and functional-dual dimension
-> at most `min(t,r)`. The resulting finite contextual quotient is the coarsest
-> exact bounded numerical state and a congruence; at rank one it has an explicit
-> projective description. An exact companion implementation evaluates the
-> recursion and reconstructs witnesses; no proof depends on it.
+> *Abstract* We study which local recovery information suffices to compose bounded
+> linear repairs through concatenated codes. The least helper count alone is
+> insufficient: composition also requires the functional supplied by each local choice.
+> We determine the exact minimum helper cost of a recovery system that leaves its target
+> block, and prove an associative composition law that reconstructs coefficient
+> witnesses from local choices. Equation escape need not create a new repair option,
+> because external coefficients can be dispensable. If every outer dual word touching
+> the target block has weight greater than `r+1`, all inclusion-minimal recovery
+> supports of size at most `r` remain local, without an inner-dual-distance condition.
+> This preserves the available bounded repair choices and transfers reliability under
+> arbitrary availability laws with the same local marginal, as well as fractional and
+> integral support allocations. Equation confinement and confinement of minimal repairs
+> therefore have different requirements.
 
-**Delivers.** The associated nested code pair and its exact relative-weight
-interpretation; an exact ungated arbitrary-rank prescribed-coset theorem;
-finite and eventual rank-stratified confinement after the outer-distance gate;
-finite small-context tests and the coarsest bounded contextual quotient at
-every target rank;
-best-target generalized-weight and cooperative-locality consequences; an MDS
-staircase and rigidity theorem; positive-density and bounded service-rate
-transfer; reliability and coefficient-sensitive separations; and explicit
-projective-simplex formulas; exact min--sum composition through finite
-concatenation towers; and ergodis's witness-retaining hierarchical optimizer
-and exact capacitated scheduler. The paper-local Lean companion proves the
-associated exact sequence only; the stronger results are human-proved and
-explicitly marked absent from Lean coverage.
+**Delivers.** An exact equation escape cost, associative labelled composition
+with recovery witnesses, and a sufficient condition confining every bounded
+minimal repair support. A complete multilevel example follows local labels
+through helper failure and reconstruction. The paper-local Lean companion
+covers only the associated-pair exact sequence; the confinement and composition
+results have human proofs and remain outside its formal coverage.
 
-**Who cares.** Coding theorists working on locally recoverable and cooperative
-codes, distributed storage, concatenation, generalized Hamming weights,
-service rate, or stochastic repair reliability; and optimization practitioners
-solving structured helper-selection and repair-scheduling problems.
+**Who cares.** Coding theorists studying concatenation and local recovery;
+distributed-storage researchers choosing repairs under failures or shared helper
+capacities; and optimization researchers working with structured linear repairs.
 
-**Why it matters.** Relative weights give the zero-functional numerical spine
-of bounded linear recovery, while exact finite transfer also depends on the
-complete outer functional dual and the minimum joint supports of compatible
-inner coset representatives. The paper combines these data in one exact
-arbitrary-rank optimization and shows when its coarser RGHW specialization
-transports normalized equations and exact supports. The same labelled cost
-data, augmented by target images for normalized demands, can be reused at the
-next concatenation level without collapsing to a distance-only bound.
-ergodis compiles that algebraic state before specialized dynamic programming
-or CP-SAT, preserving exact costs, witnesses, and confinement thresholds.
+**Why it matters.** An equation can use external helpers without creating a
+useful new repair. Distinguishing equations, support alternatives, and their
+minimum costs identifies which information must survive composition and which
+locality guarantees preserve the available repair choices.
 
 ---
 
