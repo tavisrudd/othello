@@ -1,6 +1,13 @@
 \section{Puncturing, shortening, and relative recovery costs}
 \label{sec:relative-weights}
 
+The local problem forgets the outer code and asks how many helpers realize
+a prescribed target combination.  In the running example, the helper
+coefficient vectors $(1,0,0,0)$, $(0,1,0,0)$, and $(0,0,1,1)$ all realize
+$u$.  Their differences lie in the kernel of the helper generator map.
+Passing to its quotient identifies the requested combination while leaving
+the cost of its different physical realizations to be minimized.
+
 Continue with $G=(G_P\mid G_J)$, viewed as
 $G_P:\F_q^P\to\F_q^k$ and $G_J:\F_q^J\to\F_q^k$, and set
 \[

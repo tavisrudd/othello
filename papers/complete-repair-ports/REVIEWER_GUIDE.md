@@ -8,23 +8,32 @@ used to stand in for the relative-weight or concatenation proofs.
 
 ## A first pass
 
-Read the abstract, the explicit two-sector formula and `thm:main`, the operational
-transfer discussion, and the information-hierarchy figure following them in [`compositional_recovery.tex`](compositional_recovery.tex).
-Then read the exact sequence, `prop:puncture-shorten-pair`, and
-`thm:relative-weight-recovery` in
-[`sections/02-confinement-transfer.tex`](sections/02-confinement-transfer.tex),
-followed by `thm:ungated-ranked-confinement`, the explicit F2/F4 scalar-loss
-example, `prop:prescribed-coset-composition`, and `cor:all-rank-bottleneck` in
-[`sections/03-positive-density.tex`](sections/03-positive-density.tex). Then
-read its specializations under outer-distance conditions, `thm:objectwise-confinement` and
-`thm:ranked-confinement`. These statements give the exact finite criterion,
-its closure law, and its scalar collapse. The separation section gives the two sharp information-loss results. Read `thm:minimal-support-confinement` separately:
-it excludes only target-touching checks and needs no inner additive bound.
-The quotient-lifting theorem in `sections/02-confinement-transfer.tex` and the
-pricing/availability and boundary-width propositions in the optimizer section
-provide the operational extension. The Ergodis discussion explains how the mathematical interfaces enable witnessed
-repairs, scheduling, and reuse under failures and prices. Measurements and checker
-contracts are secondary material in the verification section.
+Start with the binary running example: target `u`, helpers `u,u,v,u+v`.
+Its three minimal supports explain why a local minimum forgets both failure
+alternatives and capacity choices. Equal helper costs also need not supply
+the same functional. The example recurs in the quotient interpretation,
+equation-versus-operational transfer, and pricing/reliability discussion.
+
+Read the introductory two-sector formula and `thm:main`, followed by the
+minimal-support conclusion. For proofs, the main route is the recovery model,
+`thm:ungated-ranked-confinement`, `thm:minimal-support-confinement`, and
+`prop:prescribed-coset-composition`. The mechanisms are respectively the
+zero/nonzero functional split, deletion of external coefficients, and independent
+block lifts once labels are fixed.
+
+Read the relative-weight section initially for the exact sequence and recovery
+interpretation. The contextual-equivalence subsection can be deferred: its
+normal form and separator bounds justify further numerical compression but are
+not needed for the preceding transfer and composition proofs. The related-work
+subsection organizes the neighboring theories around local recovery/workloads,
+composition, and necessary interface information.
+
+Continue to the optimizer section for support alternatives, exact repricing,
+event-correct reliability, width, and executable decisions. Read the separation
+section to see why coarser data fail. The projective-simplex family is the
+worked non-MDS application. Measurements, source identities, and checker
+contracts are collected in verification scope and can be skipped on a first
+mathematical pass.
 
 ## Checks against hidden assumptions
 

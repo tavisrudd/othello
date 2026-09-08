@@ -199,29 +199,24 @@ coefficients and supports unchanged.
 \proves{thm:ungated-ranked-confinement}%
 \end{proof}
 
-\paragraph{A complete small instance.}
-Let $I\leq\F_2^3$ have generator columns
-$G=(e_1\mid e_2,e_1+e_2)$, with the first coordinate targeted.  Then
-$K_P=0$, $D_P=\langle(1,1)\rangle$, and
-$M_1(D_P,K_P)=2$: the target is recovered from exactly the two helpers.
-Moreover $I^\perp=\langle(1,1,1)\rangle$, so the zero-functional nonconfinement cost
-is $2+3=5$.
+\paragraph{The running example: equations versus useful repairs.}
+For the code in the introduction,
+$G=(e_1\mid e_1,e_1,e_2,e_1+e_2)$.
+Its inner-dual distance is two: two repeated columns give a weight-two
+relation, and no column is zero.  The local recovery cost for $u$ is one.
+Identify its message space with $L=\F_4$ and take $O=L^N$, $N\geq2$.
+There are no nonzero outer-dual labels, so the exact formula gives
+$\Gamma_{j,1}=1+2=3$.  A cost-three nonconfined equation adds the relation
+$u+u=0$ in another block to the local recovery of $u$.
+Deleting those two external coefficients leaves the original repair.
 
-Identify the two-dimensional message space with $L=\F_4$ and concatenate with
-the length-six single-parity-check code over $L$.  Its functional dual is the
-repetition line.  Every nonzero label is active in all five blocks outside the
-target block.  An active block has a nonzero functional label, so every lift
-has nonempty support and costs at least one helper.  Thus its
-nonzero-functional sector also costs at least five, so
-$\Gamma_{j,1}=5$.  Every recovery system of cost at most four is therefore
-confined, while a cost-five witness is obtained by adjoining the inner-dual
-word $(1,1,1)$ in another block.
-
-The later scheduler uses the same support data but asks a different question.
-Two demands in distinct blocks fit unit helper capacities, whereas two demands
-in one block compete for the same helper pair.  Thus this instance will serve
-as the model case for both composition and scheduling without identifying the
-two optimizations.
+Nevertheless every minimal repair remains in its own block at every radius:
+the outer messages are independent, so external coefficients cannot supply
+any part of the target functional.  The three local choices remain
+$\{1\}$, $\{2\}$, and $\{3,4\}$.  This example exhibits the zero sector
+of the exact formula and the difference between its coefficient threshold
+and the operational theorem below.  The nonzero-sector alignment obstruction
+is exhibited separately in Proposition~\ref{prop:functional-label-separation}.
 
 \subsection{Minimal supports and operational transfer}
 
@@ -495,7 +490,61 @@ and nondegeneracy of the trace pairing identifies the composite restriction
 map with $\phi_A\circ\phi_B^{E_A}$, where $\phi_B^{E_A}$ applies $\phi_B$
 blockwise.
 
+\paragraph{Simultaneous confinement in every dimension.}
+\begin{corollary}[Rank-one criterion for complete bounded transfer]
+\label{cor:all-rank-bottleneck}
+\coverage{absent}%
+For every target block $j$ with nonzero outer projection,
+\begin{equation}
+ \min_{0\ne T\leq W_P}\Gamma_{j,T}(O,I)=\Gamma_{j,1}(O,I).
+ \label{eq:all-rank-bottleneck}
+\end{equation}
+For every integer $r\geq0$, the following are equivalent:
+\begin{enumerate}
+ \item every cost-$\leq r$ system on every helper-recoverable target line
+ is confined;
+ \item every cost-$\leq r$ system on every nonzero helper-recoverable
+ target subspace is confined; and
+ \item $r<\Gamma_{j,1}(O,I)$.
+\end{enumerate}
+Under these conditions, restriction and zero-extension are inverse bijections
+simultaneously for every nonzero $T\leq W_P$, preserving every coefficient and
+exact helper support through radius $r$.
+
+Consequently, any statistic defined solely from these bounded systems and
+invariant under this bijection is preserved.  In particular, the bounded
+reliability laws and the capacity and scheduling regions defined later from
+their coefficients or supports agree.  Targetwise and rankwise minimum costs
+also agree after truncation $c\mapsto\min\{c,r+1\}$ (with
+$\min\{\infty,r+1\}=r+1$).  If every relevant inner minimum is at most $r$,
+then the untruncated minima agree as well.
+\end{corollary}
+
+\begin{proof}
+If a system on $0\ne T\leq W_P$ is nonconfined, some external block map is
+nonzero on a vector $u\in T$.  Restriction to $\langle u\rangle$ remains
+nonconfined and cannot enlarge its helper union.  This proves the displayed
+equality, and Theorem~\ref{thm:ungated-ranked-confinement} gives the three
+equivalent conditions.  When they hold, every bounded system is confined, so
+restriction deletes only zero external blocks and zero-extension is its
+inverse.  The coefficient, support, reliability, capacity, and scheduling
+assertions follow from this bijection.  For a minimum helper-union cost, either
+the inner minimum is at most $r$ and the bijection gives equality, or both
+inner and concatenated minima exceed $r$; this is precisely equality after
+truncation at $r+1$.
+\uses{thm:ungated-ranked-confinement}%
+\proves{cor:all-rank-bottleneck}%
+\end{proof}
+
 \subsection{Contextual equivalence and rank reduction}
+\label{sec:contextual-refinement}
+
+This subsection asks which numerical distinctions can be removed after the
+composition law is established.  Its output is a finite test for equality of
+bounded escape responses, not a replacement for the support families used in
+scheduling.  On a first pass, one may retain this observation contract and
+skip to Section~\ref{sec:outer-distance-collapse}.  The normal form and
+separator arguments below are needed to prove that the test is complete.
 
 We first record a normal form for outer functional duals.  It will let us
 replace an arbitrary outer code by the finite interface that a bounded-cost
@@ -774,52 +823,8 @@ equality, and the stated finite bounds follow.
 The simultaneous confinement criterion across all recoverable ranks has a single
 bottleneck.
 
-\begin{corollary}[Rank-one criterion for complete bounded transfer]
-\label{cor:all-rank-bottleneck}
-\coverage{absent}%
-For every target block $j$ with nonzero outer projection,
-\begin{equation}
- \min_{0\ne T\leq W_P}\Gamma_{j,T}(O,I)=\Gamma_{j,1}(O,I).
- \label{eq:all-rank-bottleneck}
-\end{equation}
-For every integer $r\geq0$, the following are equivalent:
-\begin{enumerate}
- \item every cost-$\leq r$ system on every helper-recoverable target line
- is confined;
- \item every cost-$\leq r$ system on every nonzero helper-recoverable
- target subspace is confined; and
- \item $r<\Gamma_{j,1}(O,I)$.
-\end{enumerate}
-Under these conditions, restriction and zero-extension are inverse bijections
-simultaneously for every nonzero $T\leq W_P$, preserving every coefficient and
-exact helper support through radius $r$.
-
-Consequently, any statistic defined solely from these bounded systems and
-invariant under this bijection is preserved.  In particular, the bounded
-reliability laws and the capacity and scheduling regions defined later from
-their coefficients or supports agree.  Targetwise and rankwise minimum costs
-also agree after truncation $c\mapsto\min\{c,r+1\}$ (with
-$\min\{\infty,r+1\}=r+1$).  If every relevant inner minimum is at most $r$,
-then the untruncated minima agree as well.
-\end{corollary}
-
-\begin{proof}
-If a system on $0\ne T\leq W_P$ is nonconfined, some external block map is
-nonzero on a vector $u\in T$.  Restriction to $\langle u\rangle$ remains
-nonconfined and cannot enlarge its helper union.  This proves the displayed
-equality, and Theorem~\ref{thm:ungated-ranked-confinement} gives the three
-equivalent conditions.  When they hold, every bounded system is confined, so
-restriction deletes only zero external blocks and zero-extension is its
-inverse.  The coefficient, support, reliability, capacity, and scheduling
-assertions follow from this bijection.  For a minimum helper-union cost, either
-the inner minimum is at most $r$ and the bijection gives equality, or both
-inner and concatenated minima exceed $r$; this is precisely equality after
-truncation at $r+1$.
-\uses{thm:ungated-ranked-confinement}%
-\proves{cor:all-rank-bottleneck}%
-\end{proof}
-
 \subsection{Outer-distance collapse and bounded transfer}
+\label{sec:outer-distance-collapse}
 
 The exact optimization also recovers the outer-distance collapse without
 choosing a radius.  Indeed, every nonzero functional sector costs at least

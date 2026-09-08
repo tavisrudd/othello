@@ -7,12 +7,12 @@ trails belong in the dated task reports and in the archive companion,
 [`2026-07-17-complete-ports-paper-archive.md`](2026-07-17-complete-ports-paper-archive.md).
 
 **Date**: 2026-09-07
-**Status**: ACTIVE. The operational revision has a 43-page manuscript and 32
+**Status**: ACTIVE. The operational revision has a 44-page manuscript and 32
 registered claims, with four unchanged Lean terminals. Minimal-support confinement,
 quotient-labelled lifting, pricing/availability, and boundary-width compilation
 are human-proved additions. Ergodis is presented through the mathematics it embodies and the repair,
-allocation, and reuse decisions that this enables. The exact main formula and
-minimal-support transfer appear on page 2; measurements are in verification scope.
+allocation, and reuse decisions that this enables. A binary running example motivates local cost, compatibility, and capacity
+choices before the exact main formula on page 2; measurements are in verification scope.
 The remaining paper route is C325 then C953, with C955 after. No push or deposit.
 
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
@@ -123,12 +123,15 @@ hierarchy.
 ### Referee repair disposition
 
 The Astra technical and journal-style findings have been repaired and the
-43-page deterministic manuscript gate passes. The exposition review against
+44-page deterministic manuscript gate passes. The exposition review against
 `papers/style-guide.md` and exact dispositions are in
 `notes/2026-09-07-complete-ports-referee-repair.md`.
 Astra's source follow-up confirms the improved mathematical focus; it is not
 a fresh cold read or the aggregate C953 verdict. Public artifact identities
-are in `verification/artifact-versions.json`. No new Lean or benchmark run.
+are in `verification/artifact-versions.json`. No new Lean or benchmark run. The further layered-exposition pass and resumed
+Astra feedback are recorded in
+`notes/2026-09-07-complete-ports-layered-exposition.md`; its running example
+recurs through quotient costs, transfer, pricing and reliability.
 
 ### Paper route
 

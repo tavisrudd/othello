@@ -69,12 +69,32 @@ statements have human proofs independent of software execution.
 
 \section{Introduction}
 
-A recovery equation expresses a target combination as a linear combination
-of helper symbols.  Its cost is the number of distinct helpers used.
-Under concatenation, the outer code can require an intermediate functional
-whose cost a scalar locality parameter has discarded.  We retain the least
-support in each functional fibre and ask when a recovery can first use a
-helper outside its target block.
+A failed coded symbol may have several linear repairs.  Choosing one with
+few helpers answers a local question; composing that repair with another
+code, or sharing helpers among requests, can require choices that the local
+minimum discarded.  We ask which recovery data must be retained to answer
+these later questions exactly.
+
+\paragraph{A running example.}
+\label{ex:running-recovery}
+Let $u,v\in\F_2$ be independent message symbols.  Store target $u$ and four
+helpers
+\[
+ (h_1,h_2,h_3,h_4)=(u,u,v,u+v).
+\]
+The minimal repairs of $u$ are $\{1\}$, $\{2\}$, and $\{3,4\}$: without
+either copy of $u$, both remaining helpers are necessary.  Locality records
+only the minimum size, one.  Keeping both size-one repairs still loses the
+option needed when helpers 1 and 2 fail.  If each request consumes one unit at every helper it contacts, unit
+capacities allow the three disjoint repairs to serve three requests at once;
+size-one repairs alone serve only two.
+
+Composition asks another question: which message functional does a helper
+supply?  Here $h_1$ supplies $u$, while $h_3$ supplies $v$.  Both cost one,
+but a surrounding equation requiring $v$ cannot substitute $h_1$.
+Functional labels preserve that compatibility; physical supports preserve
+failure and capacity choices; coefficients make the chosen repair executable.
+The example will recur at each of these changes of viewpoint.
 
 Let $I\leq\F_q^E$ have a full-row-rank encoder $G=(G_P\mid G_J)$,
 where $E=P\sqcup J$ partitions targets and helpers, and assume
@@ -216,24 +236,15 @@ exact min--sum substitution.  Storing an argmin in each attained fibre also
 propagates one coefficient-level witness; the numerical state itself contains
 only the fibre minima.
 
-The closed labelled state is generally redundant.  At rank one,
-Theorem~\ref{thm:rank-one-contextual-state} quotients it by indistinguishability
-under every compatible finite outer context and identifies the minimal
-numerical response exactly: the zero-sector cost and the cheapest response to
-each projective functional line an outer code can probe.  In optimization
-language, this is a Myhill--Nerode-type minimization theorem: two rank-one
-states are equivalent exactly when no compatible outer problem distinguishes
-their optimal costs, and the resulting coarsest quotient is a congruence for
-further compatible concatenation at the same target leaf and induced target
-image.  The observation is the numerical escape response; it does not include
-physical support overlap or future reweightings.  The higher-rank statement is finite but less explicit.
-Through helper radius $r$, Theorem~\ref{prop:rank-bounded-outer-tests} shows
-that contexts of length at most $\max\{2,r+1\}$ and functional-dual dimension
-at most $\min\{t,r\}$ detect every distinction.  Their finite response vector
-therefore gives the coarsest exact bounded numerical quotient at rank $t$, and
-the same semantic argument makes it a congruence.  Thus the closed labelled
-state supplies a convenient recursion, whereas contextual equivalence removes
-exactly the numerical information that no compatible outer problem can see.
+The labelled tables can be compressed when the future questions are fixed.
+Two numerical states, including their zero-sector costs, are equivalent if
+every compatible outer code gives
+the same bounded escape cost, at the same target leaf and induced target
+image.  Theorems~\ref{thm:rank-one-contextual-state} and
+\ref{prop:rank-bounded-outer-tests} give finite tests for this equivalence,
+with a projective description at rank one.  This is a secondary refinement
+of the composition law: it preserves numerical escape responses, whereas
+support overlap and future reweightings require richer data.
 
 The rank-one consequence is especially simple: a nonconfined recovery on a
 higher-dimensional target restricts to a nonconfined recovery on a target
@@ -241,30 +252,30 @@ line without increasing its helper support.  Hence confinement through a
 fixed radius holds at every recoverable rank if and only if it holds at rank
 one (Corollary~\ref{cor:all-rank-bottleneck}).
 
-The label loss is already visible over $\F_2\subseteq\F_4$.  Two
-three-column encoders have the same binary image code, dual, abstract nested
-pair, complete relative-weight hierarchy, dual distance, and unlabelled
-helper-support family.  Their functional labels differ, and one fixed outer
-functional-dual line gives exact nonconfinement costs one and two.
-Proposition~\ref{prop:functional-label-separation} gives the calculation before
-the closure theorem.  Thus every unlabelled and scalar explanation is held
-fixed; only alignment with the intermediate functional labels changes.
+Even identical image codes, relative-weight hierarchies, and unlabelled
+helper-support families can give different recovery costs with one fixed
+outer code.  Proposition~\ref{prop:functional-label-separation} realizes this
+over $\F_2\subseteq\F_4$ by changing only the encoder's alignment with the
+functional labels.  This is the compatibility issue in the running example,
+now with the unlabelled invariants held fixed.
 
-The operational transfer statements are block-local: irrelevant
-cross-block supersets do not change a minimal support, bounded success event,
-or bounded allocation problem.  The one-coordinate specialization and its
-total-word-weight convention are recorded after the general transfer theorem.
+\paragraph{Relation to existing viewpoints.}
+Relative generalized Hamming weights and relative dimension/length profiles
+answer support and access questions for a nested pair
+\cite{LuoEtAl2005,KuriharaUyematsuMatsumoto2012,GeilEtAl2014}.
+Recovery sets and service-rate regions describe feasible helper choices and
+their use under capacities \cite{GopalanEtAl2012,AktasEtAl2021}.
+These viewpoints explain the local cost and workload questions in the example.
+To pass from a local choice to an outer recovery equation, the interface must
+also retain the functional supplied by that choice.
 
-\paragraph{Closest precedents.}
-RGHWs and RDLPs describe single-block support and access thresholds for nested
-codes \cite{LuoEtAl2005,KuriharaUyematsuMatsumoto2012,GeilEtAl2014}; our first
-identity specializes that theory to the canonical target/helper pair.  Unlike
-recovery-set summaries, the compositional state retains functional labels; its
-min--sum propagation has a different objective from concatenated decoding, and
-its contextual quotient is analogous to, but not derived from, weighted
-automata minimization
-\cite{GopalanEtAl2012,AjiMcEliece2000,BlomqvistEtAl2020,Mohri2009}.
-Section~\ref{sec:related-work} gives the detailed comparisons and citations.
+The mechanism uses classical duality and min--sum elimination
+\cite{AjiMcEliece2000}.  The recovery-specific content is the target
+normalization, the exact distinction between equation and minimal-support
+confinement, and the labelled lift law that reconstructs the selected
+coefficients.  The separation results identify information lost by coarser
+summaries.  Section~\ref{sec:related-work} compares these statements with
+concatenated decoding, covering costs, and finite-interface minimization.
 
 Ergodis embodies the labelled composition law as executable recovery
 optimization.  Section~\ref{sec:exact-recovery-optimization} explains how
@@ -273,11 +284,25 @@ failures and prices.  It also separates those capabilities from the additional
 information required for probability and optimality certificates.  Measurements
 and artifact details are collected in Section~\ref{sec:verification}.
 
-For a first pass, Sections~\ref{sec:recovery-equations}--\ref{sec:confinement}
-give the proof spine, and Section~\ref{sec:separations} shows what its coarser
-summaries lose.  Section~\ref{sec:related-work} collects the detailed
-literature comparison and may be skipped on that pass.  The later sections
-give the executable reduction, consequences, a worked family, and verification.
+\paragraph{Reading routes.}
+For the main mechanism, read the recovery model in
+Section~\ref{sec:recovery-equations}, the two transfer theorems
+\ref{thm:ungated-ranked-confinement} and
+\ref{thm:minimal-support-confinement}, and the composition law
+\ref{prop:prescribed-coset-composition}.  For equation confinement, separate the zero and nonzero induced functionals.
+For composition, fix those functionals and lift independently in the blocks.
+For minimal supports, delete the external coefficients once the target-block
+part recovers the request on its own.
+Section~\ref{sec:relative-weights} identifies the local invariant and may
+initially be read for its definitions and statements.  The contextual minimization subsection
+\ref{sec:contextual-refinement} can be skipped until one asks how much further
+the numerical tables can be compressed; it is not needed for the preceding
+transfer or composition proofs.
+For operational uses, continue to Section~\ref{sec:exact-recovery-optimization};
+for necessity boundaries, read Section~\ref{sec:separations}.
+The projective-simplex family supplies a worked non-MDS application, and
+Section~\ref{sec:verification} collects the optional artifact and measurement
+layer.
 
 \input{sections/01-complete-ports}
 \input{sections/02-confinement-transfer}
