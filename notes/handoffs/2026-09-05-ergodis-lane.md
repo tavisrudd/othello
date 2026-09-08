@@ -45,8 +45,12 @@ pinned at `67d929b`. Main-checkout code is untouched. All run/log/temp data use 
 The existing proposer learns and repairs a trace selector; partition certificates pass on
 q=13,17,19, with triangle joint-legality failure and frame/Clebsch marking ambiguity controls.
 This is a bounded representation/admission pilot, not autonomous field-coordinate discovery.
-Direct adjacency queries beat partition-word queries; C1113 transfer remains gated on useful
-end-to-end benefit. Next: adversarial field-family tests and a query using recovered incidence.
+The frozen selector now also passes q=16,23,25,27. A q=16-trained incidence-query
+dispatch gives 1.108x warm-query improvement on a held-out q=27 Python mix; the modeled
+first-batch ratio is only 1.008. C1113 remains gated on native end-to-end benefit.
+Next: matched native readout measurements, preserving exact admission and the performance contract.
+Latest private commit `3847f33`; report:
+`notes/2026-09-07-c1112-extension-fields-and-incidence-dispatch.md`.
 Reports: `notes/2026-09-07-c1111-reconstruction-contract-corpus.md` and
 `notes/2026-09-07-c1112-autonomous-representation-discovery.md`.
 Acceptance criteria: `notes/2026-09-07-continuation-ergodis-reconstruction-plan.md`.
