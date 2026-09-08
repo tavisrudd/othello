@@ -83,3 +83,24 @@ C1110 remains open for qualified external subject review and priority diligence.
 
 PDF inspection: pages 12, 14 and 15 checked visually; the algorithm box,
 exceptional corollary and proof are legible without clipping. Final PDF: 17 pages.
+
+## Export identity
+
+Authority revision: `2ab38a7ac4dd030e7c22db18b0d7eba51a19bf3a`.
+Exporter plan/audit: 35 scholarly/public files, zero private-reference findings.
+Canonical content SHA-256:
+`65819d6acdf7d6930ad949c5b77cc09ffb36247ea3213f8a323dca542f042bcd`.
+Authority and standalone PDF, checksum manifest, new group certificate and
+unchanged recognition certificate agree byte-for-byte. The recognizer certificate
+remains SHA-256 `8757ccbb0fe975f8df14035721b0702e1151a493f37bc949d1cffece88ff5798`.
+The standalone retains local `commit.gpgsign=false` as requested.
+
+```sh
+python3 papers/scripts/export-paper-repos.py plan --source-ref 2ab38a7ac --repository continuation-graph-rigidity
+python3 papers/scripts/export-paper-repos.py audit --source-ref 2ab38a7ac --repository continuation-graph-rigidity
+python3 papers/scripts/export-paper-repos.py sync --source-ref 2ab38a7ac --repository continuation-graph-rigidity --root /home/tavis/src/math-papers/continuation-graph-rigidity
+```
+
+Standalone forward commit: `e756a16`. Standalone `make check`, deterministic PDF
+check, and exporter tracked-tree verification all pass with the canonical hash
+above. No remote push or archive release was performed.
