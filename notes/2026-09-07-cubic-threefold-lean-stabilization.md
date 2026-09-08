@@ -99,9 +99,14 @@ connection B and multiplier -q. This identifies the algebraic substitution;
 it does not yet supply the primary public terminal, regular-frame bridge,
 closed-point determinant input, or geometric spectral-cluster construction.
 
-The standalone forward commit is `3d200fc`. A separate guarded full Lean
-replay there is running at
-`/home/tavis/.cache/othello-lean-build/run-20260908-002759-521ee1b7`;
-it is rebuilding companion dependencies. This additional replay is not yet
-recorded as passed. The authority's full 319-terminal kernel audit and both
-paper gates have already passed.
+The standalone forward commit is `3d200fc`. Its separate guarded full Lean
+replay passed at
+`/home/tavis/.cache/othello-lean-build/run-20260908-002759-521ee1b7`.
+The dependency rebuild took 11:27.88, with peak 8,086,204 kB; the aggregate
+trace check passed. The exported checker's captured-axiom-log mode passes
+for all 319 terminals against the same expected records. Thus both roots
+have a successful full kernel audit, as well as passing paper gates and
+matching PDFs. Nothing was pushed or deposited.
+
+Standalone captured audit SHA-256: `5d7ff313c17c9b88fb6d964f0305173771697d52a55ac36fd4ecf2e9757db7cc`.
+Exact log path: `/home/tavis/.cache/othello-lean-build/run-20260908-002759-521ee1b7/logs/TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Verification.AxiomAudit.quiet/20260908-002759-57b3a78d/20260907-172817-taskset-c-20-23-choom-n-1000-time-v-nix-develop-command-bash-lc-export-LEAN_NUM_T/stdout.log`.

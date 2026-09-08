@@ -74,10 +74,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Portfolio summary is updated and exported (`ea8f2e5a0` / `a8e17f7`).
   The author retains Paper 2's current title. The general threefold Lean
   endpoint now proves irrationality after P1 and of the base (`abf5b668a`),
-  with geometric inputs explicit and fragment coverage retained. The source
-  build and 319-terminal axiom audit pass; mirror commit `3d200fc` passes
-  the paper gate. Its additional full Lean replay is running at
-  `/home/tavis/.cache/othello-lean-build/run-20260908-002759-521ee1b7`. Report:
+  with geometric inputs explicit and fragment coverage retained. Both source
+  and standalone 319-terminal kernel audits pass, as do the paper gates;
+  mirror commit `3d200fc` has the matching PDF. Report:
   `../2026-09-07-cubic-threefold-lean-stabilization.md`.
   Next connect the main persistence proof to the existing formal-germ
   theorem. Scope and larger targets:
