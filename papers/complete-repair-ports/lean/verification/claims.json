@@ -192,25 +192,25 @@
       "id": "fixed-target-confinement",
       "manuscript_label": "thm:objectwise-confinement",
       "status": "absent",
-      "statement": "For a nonzero internally realizable target subspace, under d(O^perp)>r+1 and N>=2, every radius-r normalized system is confined exactly when r is below the local target cost plus inner dual distance; dual-distance growth gives the eventual family form.",
+      "statement": "For a nonzero helper-recoverable target subspace, N>=2 and d(O^perp)>r+1 imply that all radius-r normalized systems are confined exactly when r<rho_T(I)+d(I^perp). In an outer family with growing dual distance, only the outer-distance hypothesis becomes automatic; the bijection still requires that inner inequality.",
       "terminals": [],
       "objects": "Fixed-target coefficient confinement and support-preserving bijection.",
       "hypotheses": "0 != T <= W_P, N>=2, and d(O^perp)>r+1 for a nonnegative integer r.",
-      "conclusion": "For a nonzero internally realizable target subspace, under d(O^perp)>r+1 and N>=2, every radius-r normalized system is confined exactly when r is below the local target cost plus inner dual distance; dual-distance growth gives the eventual family form.",
-      "cautions": "Human proof only; no Lean terminal or computational evidence is asserted for this statement.",
-      "statement_digest": "ed3ffbe1dec08e86cae9e676113a812a09897eafd083d06c6761b58b15a0ab49"
+      "conclusion": "For a nonzero helper-recoverable target subspace, N>=2 and d(O^perp)>r+1 imply that all radius-r normalized systems are confined exactly when r<rho_T(I)+d(I^perp). In an outer family with growing dual distance, only the outer-distance hypothesis becomes automatic; the bijection still requires that inner inequality.",
+      "cautions": "Human proof only; no Lean terminal or computational evidence is asserted. Growth of outer dual distance does not remove the inner inequality. This is a finite-radius confinement equivalence, not an unconditional exact escape-threshold formula under the radius-dependent outer bound.",
+      "statement_digest": "dd867af229e52695bd3e9889f074a9f707df991366ab6b4554190529a8fd6abb"
     },
     {
       "id": "rank-stratified-confinement",
       "manuscript_label": "thm:ranked-confinement",
       "status": "absent",
-      "statement": "Under the finite outer gate, the uniform rank-t nonconfinement helper threshold is the t-th relative generalized Hamming weight plus the inner dual distance; the same holds eventually in outer families of growing dual distance.",
+      "statement": "For N>=2 and d(O^perp)>r+1, all radius-r normalized systems on every recoverable rank-t target are confined exactly when r<M_t(D_P,K_P)+d(I^perp). In an outer family with growing dual distance, only the outer-distance hypothesis becomes automatic; uniform support-preserving transfer still requires that inner inequality.",
       "terminals": [],
       "objects": "Uniform rank-t coefficient confinement and relative helper weights.",
       "hypotheses": "1 <= t <= dim W_P, N>=2, and the stated finite outer-distance gate; minimization is over all recoverable rank-t targets.",
-      "conclusion": "Under the finite outer gate, the uniform rank-t nonconfinement helper threshold is the t-th relative generalized Hamming weight plus the inner dual distance; the same holds eventually in outer families of growing dual distance.",
-      "cautions": "Human proof only; no Lean terminal or computational evidence is asserted for this statement.",
-      "statement_digest": "34ce8754661d6b055183467e5c962299a56a5272d1fd6b65cb77d52766ce6a5b"
+      "conclusion": "For N>=2 and d(O^perp)>r+1, all radius-r normalized systems on every recoverable rank-t target are confined exactly when r<M_t(D_P,K_P)+d(I^perp). In an outer family with growing dual distance, only the outer-distance hypothesis becomes automatic; uniform support-preserving transfer still requires that inner inequality.",
+      "cautions": "Human proof only; no Lean terminal or computational evidence is asserted. Growth of outer dual distance does not remove the inner inequality. This is a finite-radius confinement equivalence, not an unconditional exact escape-threshold formula under the radius-dependent outer bound.",
+      "statement_digest": "235113b11028a9cb9c8065c18b37bd79dcec6546a4eff31614ed7329d3e86fdb"
     },
     {
       "id": "weighted-pointed-confinement",
@@ -324,13 +324,13 @@
       "id": "projective-simplex-thresholds",
       "manuscript_label": "thm:projective-thresholds",
       "status": "absent",
-      "statement": "The projective-simplex family has the displayed relative-weight staircase and confinement thresholds.",
+      "statement": "The projective-simplex family has the displayed relative-weight staircase and collapsed threshold C_t. Once outer dual distance is at least C_t+1, Gamma_{j,t}=C_t; in a family of growing outer dual distance, the eventual confinement criterion at fixed radius r remains r<C_t.",
       "terminals": [],
       "objects": "Projective-simplex helper code and graph-code inner dual.",
       "hypotheses": "Prime-power q, m>=2, one representative of every projective point, targets the first m coordinates; 1<=t<=m.",
-      "conclusion": "The projective-simplex family has the displayed relative-weight staircase and confinement thresholds.",
-      "cautions": "Human proof only; no Lean terminal or computational evidence is asserted for this statement.",
-      "statement_digest": "c169063556276952650c65acdb8759ea79aeeafeedf750c74f415588af7faf06"
+      "conclusion": "The projective-simplex family has the displayed relative-weight staircase and collapsed threshold C_t. Once outer dual distance is at least C_t+1, Gamma_{j,t}=C_t; in a family of growing outer dual distance, the eventual confinement criterion at fixed radius r remains r<C_t.",
+      "cautions": "Human proof only; no Lean terminal or computational evidence is asserted. Increasing outer dual distance does not remove the inner threshold C_t.",
+      "statement_digest": "8cc5af29c4d27684f042f23539fb0fd75f9dc537ad0a258ee5ff7b790bbd4a71"
     },
     {
       "id": "projective-rank-reliability",
