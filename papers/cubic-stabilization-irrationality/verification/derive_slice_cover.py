@@ -185,6 +185,7 @@ def type_i3_lattice_data():
             for weight in window_weights
         ],
         "boundary_generators": boundary,
+        "residual_character_actions": residual_actions,
     }
 
 
@@ -398,11 +399,17 @@ def build_certificate():
         "first_three_branch_outcomes": outcomes,
         "fourth_product_on_survivor_line_factorization": str(fourth_factor),
         "human_coprimality_checks": {key: str(value) for key, value in checks.items()},
-        "schema": "quartic-del-pezzo-two-variable-slice-cover-v4",
+        "schema": "quartic-del-pezzo-two-variable-slice-cover-v5",
         "type_i3_action_matrices": [
             [[int(entry) for entry in matrix.row(row)] for row in range(3)]
             for matrix in lattice["type_i3_action_matrices"]
         ],
+        "residual_character_actions": [
+            [[int(entry) for entry in matrix.row(row)] for row in range(2)]
+            for matrix in lattice["residual_character_actions"]
+        ],
+        "residual_character_basis": ["E1-E5", "E2-E5"],
+        "residual_action_convention": "columns; character action; same generator order as type_i3_action_matrices",
         "selected_weight_blocks": lattice["selected_weight_blocks"],
         "boundary_generators": lattice["boundary_generators"],
         "symbolic_four_hyperplane_evaluation_determinants": [str(value) for value in determinants],

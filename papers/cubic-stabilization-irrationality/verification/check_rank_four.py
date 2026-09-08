@@ -65,7 +65,7 @@ def det_columns(columns):
 def main():
     c = json.loads((HERE / "rank-four-certificate.json").read_text())
     assert c["schema"] == "cox-rank-four-v1"
-    assert c["input_sha256"] == "89eee9a9d04cb555e45c8b4f461bbf20ccb6b1d38cfabdad2b8ce67c1ff42373"
+    assert c["input_sha256"] == "eab9a28c6a0c5c54087a99d6008baafc33d313d3ab6f7ff8d28696b60d7ad9ad"
     assert sha256((HERE / "derive_slice_cover.py").read_bytes()).hexdigest() == c["input_sha256"]
     generators = [
         [[-1,0,0,-1,-1],[1,1,1,0,2],[0,0,-1,-1,-1],[0,0,0,0,1],[0,0,0,1,0]],

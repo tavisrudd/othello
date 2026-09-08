@@ -73,6 +73,14 @@ def build_certificate():
     assert abs(int(weight_differences.det())) == 1
     type_i3_actions = [sp.Matrix(value) for value in source["type_i3_action_matrices"]]
     assert all(abs(int(value.det())) == 1 for value in type_i3_actions)
+    assert source["residual_character_basis"] == ["E1-E5", "E2-E5"]
+    assert source["residual_action_convention"] == "columns; character action; same generator order as type_i3_action_matrices"
+    residual = [sp.Matrix(value) for value in source["residual_character_actions"]]
+    assert residual == [sp.Matrix([[-1, 0], [1, 1]]), sp.Matrix([[0, 1], [-1, -1]])]
+    vectors = [(0, 1), (1, -1), (-1, 0)]
+    assert all({tuple(g*sp.Matrix(v)) for v in vectors} == set(vectors) for g in residual)
+    assert sum((sp.Matrix(v) for v in vectors), sp.zeros(2, 1)) == sp.zeros(2, 1)
+    assert abs(sp.Matrix.hstack(*[sp.Matrix(v) for v in vectors[:2]]).det()) == 1
     selected_blocks = source["selected_weight_blocks"]
     assert len(selected_blocks) == 4
     assert sorted(
@@ -108,6 +116,9 @@ def build_certificate():
         "human_coprimality_checks": {key: str(value) for key, value in checks.items()},
         "schema": source["schema"],
         "type_i3_action_matrices": source["type_i3_action_matrices"],
+        "residual_character_actions": source["residual_character_actions"],
+        "residual_character_basis": source["residual_character_basis"],
+        "residual_action_convention": source["residual_action_convention"],
         "selected_weight_blocks": source["selected_weight_blocks"],
         "boundary_generators": source["boundary_generators"],
         "symbolic_four_hyperplane_evaluation_determinants": source[

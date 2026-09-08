@@ -93,3 +93,18 @@ nix develop --command make check
 
 It reconstructs and independently checks the certificate, validates the
 claim and source metadata, rebuilds the PDF, and rejects TeX warnings.
+
+## Coordinates and scope of explicitness
+
+The selected simplex identifies T3 with Res_(E4/k) Gm/Gm. The printed
+three-ratio formula gives its orbit correction in splitting-field coordinates;
+uniqueness descends the corrected point. The residual character actions use
+column coordinates in (E1-E5,E2-E5) and identify a cubic norm-one torus.
+The certificate records both matrices and that basis.
+
+An executable parametrization over a specified number field additionally
+needs a descended pair p,x, slice equations, a generic torsor trivialization,
+residual-torus coordinates and composed forward/inverse maps with their opens.
+The inverse graph establishes rationality but is not a list of these expanded
+maps. The short action corollary concerns rational actions and exact numbers
+of trivially acted-on variables; it does not assert regular affine actions.

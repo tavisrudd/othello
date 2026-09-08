@@ -157,3 +157,10 @@ the metadata for a new deposit; it does not create or update a Zenodo record.
 
 The manuscript and repository contents are licensed under CC BY 4.0; see
 [`LICENSE`](LICENSE).
+
+The slice certificate also records the two residual character matrices, in
+column coordinates for (E1-E5,E2-E5), and verifies their permutation action
+on three generators with a single sum relation. This identifies the residual
+cubic norm-one torus. The manuscript prints the splitting-field orbit
+correction; complete ground-field forward/inverse maps require the additional
+inputs specified beside the inverse-graph construction.

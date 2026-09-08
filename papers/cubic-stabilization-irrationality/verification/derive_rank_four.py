@@ -15,7 +15,7 @@ if sys.flags.optimize:
     raise RuntimeError("assertions must be enabled")
 
 HERE = Path(__file__).resolve().parent
-INPUT_HASH = "89eee9a9d04cb555e45c8b4f461bbf20ccb6b1d38cfabdad2b8ce67c1ff42373"
+INPUT_HASH = "eab9a28c6a0c5c54087a99d6008baafc33d313d3ab6f7ff8d28696b60d7ad9ad"
 
 
 def rows(matrix):

@@ -76,7 +76,34 @@
     "fourth_quadratic_at_26_over_3": "7918133/9",
     "quadratic_resultant": "-48353381094689774718359510"
   },
-  "schema": "quartic-del-pezzo-two-variable-slice-cover-v4",
+  "residual_action_convention": "columns; character action; same generator order as type_i3_action_matrices",
+  "residual_character_actions": [
+    [
+      [
+        -1,
+        0
+      ],
+      [
+        1,
+        1
+      ]
+    ],
+    [
+      [
+        0,
+        1
+      ],
+      [
+        -1,
+        -1
+      ]
+    ]
+  ],
+  "residual_character_basis": [
+    "E1-E5",
+    "E2-E5"
+  ],
+  "schema": "quartic-del-pezzo-two-variable-slice-cover-v5",
   "selected_weight_blocks": [
     {
       "generators": [
