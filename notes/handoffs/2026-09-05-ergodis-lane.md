@@ -41,6 +41,9 @@ the C985 optimization-facing paper.
 User requirement: WASM is a full Ergodis execution target, not a restricted subset.
 Close bindings, portability and host-adapter gaps across existing core/private
 capabilities; keep shared contracts and native optimized execution intact.
+Consolidate consumers on one canonical feature-complete WASM build; audit and
+retire divergent active demo build paths after migration. The task card indexes
+the Sunday/Monday architecture and implementation notes already loaded.
 Mandatory inventory, cross-target conformance and native performance gates:
 `notes/2026-09-08-c1130-wasm-feature-completeness.md`.
 Read both contributor performance documents in full on resume. Recovery/QEC/

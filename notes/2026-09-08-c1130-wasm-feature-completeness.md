@@ -17,6 +17,47 @@ Platform-specific performance optimizations may be disabled where unavailable.
 Browser resource limits must be explicit admission/resource errors, not arbitrary
 feature restrictions or silently substituted smaller problems.
 
+## Canonical WASM build and prior work
+
+User clarification: maintain one canonical feature-complete Ergodis WASM build.
+Audit current demo/server/build consumers against the Sunday/Monday work; migrate
+any divergent demo-specific build to the canonical package, then remove obsolete
+active build paths and references. Do not create another reduced browser engine.
+Preserve historical source/evidence and unrelated worktrees; consolidation is not
+permission for destructive history cleanup. Keep private domain packages behind
+the existing one-way dependency boundary.
+
+Loaded in full on 2026-09-08 as required implementation context:
+
+- Sunday: `2026-09-06-c1079-wasm-capability-audit.md` and
+  `2026-09-06-c1079-ergodis-evolve-review.md`.
+- Monday: `2026-09-07-c1080-admission-pilot.md`,
+  `2026-09-07-c1081-language-semantics.md`,
+  `2026-09-07-c1083-campaign-transitions.md`,
+  `2026-09-07-c1084-portable-control-architecture.md` (complete),
+  `2026-09-07-c1085-portable-scalar-language.md`,
+  `2026-09-07-c1086-independent-verification.md`,
+  `2026-09-07-c1087-portable-campaign-runtime.md`,
+  `2026-09-07-c1088-browser-campaign-control.md`,
+  `2026-09-07-c1105-offline-browser-inspection.md`,
+  `2026-09-07-c1106-offline-verification-forks.md`,
+  `2026-09-07-c1114-browser-repository.md` and
+  `2026-09-07-c1125-portable-console.md`.
+
+The Sunday audit records a historical C1032 adapter absent after the repository
+split. C1080 restored it into current core `wasm/`; later Monday work extended
+that adapter with the portable runtime and repository bindings. C1125 explicitly
+reused the existing core package, without a separate solver build. C1129 likewise
+serves sibling core clients and `wasm/www/pkg` through an allowlist. These records
+do not establish current artifact freshness or an exhaustive absence of duplicate
+build paths; check consumers/manifests/digests before deleting or rebuilding.
+
+C1084 is the architectural baseline: portable scalar/compiler, independent verifier,
+runtime above solver, thin hosts, explicit repository/activation semantics and no
+control logic in kernels. Earlier staged limitations are implementation history,
+not a license to narrow this task's full-parity objective. Preserve native64 hot
+layouts and specialization; do not route native through wasm32 representations.
+
 ## Required work
 
 1. Inventory existing native/core/private capability surfaces and their WASM
