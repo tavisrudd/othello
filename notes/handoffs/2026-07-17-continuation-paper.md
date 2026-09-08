@@ -21,7 +21,7 @@ reconstruction remains outside the headline under the existing N1-only ruling.
   repository-local commit signing is disabled by author instruction. Report:
   `notes/2026-09-08-c1132-continuation-referee-response.md`.
 
-- The revised draft is `papers/continuation-graph-rigidity/continuation_graph_rigidity.tex`
+- The 16-page revised draft is `papers/continuation-graph-rigidity/continuation_graph_rigidity.tex`
   and its deterministic PDF. The stable q>=9 proof is written mathematics; the graph
   determines q and every graph isomorphism extends uniquely semilinearly.
 - C1108 reconciled completed C295 with the paper and compared exact hypergraph/cross-ratio
@@ -37,8 +37,8 @@ reconstruction remains outside the headline under the existing N1-only ruling.
   The prototype recognizer is slower than generic graph isomorphism on the recorded controls.
 - C1110 addressed the follow-up referee feedback: exact archived census citation,
   edge-seed centre recovery and O(n^(7/2)) recognition, explicit Hamming generators,
-  uniform minimality calculations and a continuous frame proof. Authority checks
-  pass; standalone synchronization remains for this revision. Report:
+  uniform minimality calculations and a continuous frame proof. Authority and
+  standalone checks pass; the current standalone revision is `f3c2e6c`. Report:
   `notes/2026-09-08-c1110-continuation-second-referee-revision.md`.
 - Earlier C1110 reviews: the exported draft received a fresh-context sub-agent referee review.
   No main-result defect was found; all local findings R1–R5 are now corrected
@@ -64,8 +64,9 @@ reconstruction remains outside the headline under the existing N1-only ruling.
 
 
 - **C1110** — complete publication-readiness review. The same-reader final pass
-  resolved the earlier local exposition concerns. Assess the strengthened
-  C1132 draft next, including its new geometric bound and coding corollary.
+  resolved the earlier local exposition concerns. The follow-up review found
+  no theorem-level error in the q>=9 draft; its requested corrections and
+  algorithm/action refinements are now implemented and validated.
   Feedback: `notes/2026-09-07-c1110-continuation-final-reader-polish.md`.
   Qualified external subject review and priority diligence remain distinct from
   the completed sub-agent review and local corrections.

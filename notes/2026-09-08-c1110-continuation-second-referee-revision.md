@@ -169,3 +169,25 @@ No further verification infrastructure or speculative theorem was added.
 All observations were sought for this revision; no incidental discovery-track
 entry was needed. Standalone synchronization and final identity are recorded
 below after export.
+
+## Standalone completion
+
+Authority revision: `bee185fe1bd1a1ff81daf01cd715fb9a03975045`.
+Scoped exporter plan and audit returned zero findings; synchronization updated
+13 public paths. Standalone `make check`, deterministic PDF comparison and
+export verification passed. Forward commit: `f3c2e6c`; standalone worktree clean.
+Repository-local signing remains disabled as the author requested. Nothing pushed.
+
+The final PDF is 16 pages and 399217 bytes. Both trees agree on:
+
+| Surface | SHA-256 |
+|---|---|
+| Exported content | 5c98d3bdc86981e975e964239c3b70881e50fa594d24866af522b20f25bf5cd0 |
+| PDF | 7b57dac355d47d70c5d78bfcca3e494da746c1bbe5efe957e3dd7d7b1d4def7b |
+| Evidence manifest | eb7f79f5e1f30d9f303830b1feae1268a6b65c214070c13086b0ae42a2edf4d2 |
+| Unchanged recognition certificate | 8757ccbb0fe975f8df14035721b0702e1151a493f37bc949d1cffece88ff5798 |
+
+This feedback revision is complete. C1110 remains the publication-readiness
+item for qualified external review; C271 and C273 remain separate. The
+structural boundary remains an open research priority rather than an unallocated
+concrete task or a prerequisite silently added to publication.
