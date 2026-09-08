@@ -1,0 +1,155 @@
+{
+  "scope": "Exact finite algebra only; does not certify QDM comparisons or geometry.",
+  "quantum": {
+    "domain": "q*(2*a+b) != 0",
+    "det_C": "-q**2*(2*a + b)**2",
+    "sylvester_solution": [
+      [
+        "2*a/(2*a + b)",
+        "0"
+      ],
+      [
+        "0",
+        "2/(q*(2*a + b))"
+      ]
+    ],
+    "residue": [
+      [
+        "-(2*a + 3*b)/(2*(2*a + b))",
+        "1"
+      ],
+      [
+        "-4*a**2/(2*a + b)**2",
+        "-(2*a - b)/(2*(2*a + b))"
+      ]
+    ],
+    "discriminant": "-4*(2*a - b)/(2*a + b)",
+    "cases": {
+      "degree_one_del_Pezzo_threefold": {
+        "a": 240,
+        "b": 1248,
+        "residue": [
+          [
+            "-11/9",
+            "1"
+          ],
+          [
+            "-25/324",
+            "2/9"
+          ]
+        ],
+        "indicial_polynomial": "(6*T - 1)*(6*T + 7)/36",
+        "discriminant": "16/9"
+      },
+      "quartic_double_solid": {
+        "a": 48,
+        "b": 160,
+        "residue": [
+          [
+            "-9/8",
+            "1"
+          ],
+          [
+            "-9/64",
+            "1/8"
+          ]
+        ],
+        "indicial_polynomial": "T*(T + 1)",
+        "discriminant": "1"
+      },
+      "cubic_threefold": {
+        "a": 24,
+        "b": 60,
+        "residue": [
+          [
+            "-19/18",
+            "1"
+          ],
+          [
+            "-16/81",
+            "1/18"
+          ]
+        ],
+        "indicial_polynomial": "(6*T + 1)*(6*T + 5)/36",
+        "discriminant": "4/9"
+      },
+      "two_quadrics_control": {
+        "a": 16,
+        "b": 32,
+        "residue": [
+          [
+            "-1",
+            "1"
+          ],
+          [
+            "-1/4",
+            "0"
+          ]
+        ],
+        "indicial_polynomial": "(2*T + 1)**2/4",
+        "discriminant": "0"
+      }
+    }
+  },
+  "torus": {
+    "difference_matrix": [
+      [
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "-1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "-1",
+        "0"
+      ]
+    ],
+    "determinant": 1,
+    "affine_weight_permutations": [
+      [
+        3,
+        2,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        3,
+        2
+      ]
+    ],
+    "residual_character_actions": [
+      [
+        [
+          "-1",
+          "0"
+        ],
+        [
+          "1",
+          "1"
+        ]
+      ],
+      [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "-1",
+          "-1"
+        ]
+      ]
+    ],
+    "orbit_correction": [
+      "k3/k0",
+      "k3/k1",
+      "k3/k2"
+    ]
+  }
+}

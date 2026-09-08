@@ -1,0 +1,37 @@
+{
+  "task": "C1128",
+  "provenance": "User-supplied Astra/ChatGPT artifacts, received 2026-09-08",
+  "status": "Preserved verbatim; JSON parsing and Python syntax checked; mathematical computations not replayed or independently verified at intake",
+  "files": [
+    {
+      "file": "stabilization_extension_checks.json",
+      "source": "/home/tavis/Downloads/stabilization_extension_checks.json",
+      "bytes": 2575,
+      "sha256": "d4a2d9ca936dc41736afc638b3730602fa6626fa397deae3f52e7cce2ad6ea39"
+    },
+    {
+      "file": "stabilization_extension_checks.py",
+      "source": "/home/tavis/Downloads/stabilization_extension_checks.py",
+      "bytes": 5318,
+      "sha256": "47abeae50ab4e34f1a91d1d608dd35b085710532558697d0c8e4867fb24adbaf"
+    },
+    {
+      "file": "followon_family_checks.json",
+      "source": "/home/tavis/Downloads/followon_family_checks.json",
+      "bytes": 2309,
+      "sha256": "1f50af9d2137407e7604f1fc469c4cb18b8dbd1d205766c417567cbff8268b66"
+    },
+    {
+      "file": "followon_family_checks.py",
+      "source": "/home/tavis/Downloads/followon_family_checks.py",
+      "bytes": 6493,
+      "sha256": "144b3e47a0bd52a6d8371a36df6c52a0ed93126410faba455113e1a94c369994"
+    },
+    {
+      "file": "followon_family_proof.md",
+      "source": "/home/tavis/Downloads/followon_family_proof.md",
+      "bytes": 11115,
+      "sha256": "f206c5acfe8b7891e9f3503c31e8d91f511851f1e8f2a9bbdc2a5c6f37f6fcd4"
+    }
+  ]
+}
