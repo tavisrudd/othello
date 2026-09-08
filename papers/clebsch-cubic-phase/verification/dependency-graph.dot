@@ -34,6 +34,8 @@ digraph dependencies {
   "rank-census" -> "prop:spectra" [style=dotted, label="evidence"];
   "shadow" -> "prop:shadow" [style=dotted, label="evidence"];
   "shadow" -> "prop:shadow" [style=dotted, label="evidence"];
+  "shadow-normalization" -> "prop:shadow" [style=dotted, label="evidence"];
+  "shadow-normalization" -> "prop:shadow" [style=dotted, label="evidence"];
   "thm:hessian" -> "prop:shadow" [style=solid, label="logical"];
   "thm:hessian" -> "prop:shadow" [style=dashed, label="uses"];
   "thm:hessian" -> "prop:spectra" [style=solid, label="logical"];

@@ -17,3 +17,9 @@ coverage exception for the preprint arXiv:2602.23687. Read depths and positionin
 remain in `../../notes/2026-09-07-c1102-forward-citations/`: the canonical ledger
 is `CLAIM-PROOF-NOVELTY.md`, rows N1–N9, and `gate-approval.json` records approval.
 No three-source absence claim follows from the preprint's absent Crossref record.
+
+The independent agent cold review and targeted editorial reread are preserved in
+`../../notes/2026-09-07-c1102-cold-referee.md` and
+`../../notes/2026-09-07-c1102-referee-reread.md`. The revision response records
+resolved mathematical and exposition issues. These are internal agent reviews,
+not external peer review or the style guide's blind specialist/generalist test.

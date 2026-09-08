@@ -27,12 +27,19 @@ standard library only, deterministic exact arithmetic, no random seed. A complet
 small-prime enumeration does not certify the unrun p=11 census or global code
 classification. The translation-family statement has a proof in the manuscript.
 
-`input-hashes.json` pins the 104 existing files actually inventoried under the
+`input-hashes.json` pins the 107 existing files actually inventoried under the
 four task-owned bundles and the key citation/shadow reports. The source scripts
 and outputs remain at their monorepo paths. It does not inventory original
-copyrighted paper PDFs or opaque serialized intermediates: scan/PDF hashes live
-in the literature register; shadow intermediates are regenerated in the recorded
-order. `local-hashes.json` pins the new finite checker and certificate.
+copyrighted paper PDFs: scan/PDF hashes live in the literature register.
+Three committed shadow intermediates are pinned for the supplementary check;
+the original sequence can regenerate them. `local-hashes.json` pins both new
+checkers and their certificates.
+`shadow_check.py --check` reproduces the scalar 2 normalization and actual
+involutory exchange, then tests all 1320 geometric actions. Exactly 60 preserve
+the shadow; all their restrictions have determinant 1 and differ from q.
+It reuses the original field/substitution utilities and does not independently
+rederive the representation. Its certificate contains the explicit embedding,
+coefficient vectors and q, so the normalization can be checked separately.
 Full replay commands and limits are in `evidence.json` and the source reports.
 Some historical scripts retain obsolete scratch-directory search-path additions;
 run from the documented bundle directory so sibling imports resolve there.

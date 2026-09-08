@@ -6,5 +6,13 @@
   "verification/finite_check.py": {
     "bytes": 4840,
     "sha256": "aad01b9ba5b25ea7ef932c928a55ac01343ab3aa46d82160ad2c10c1ad2de07b"
+  },
+  "verification/shadow-certificate.json": {
+    "bytes": 3785,
+    "sha256": "5e0bb60ae11373afb4ff7398fe11990990f4e0b03da13bcfb5d1608a9102d045"
+  },
+  "verification/shadow_check.py": {
+    "bytes": 3128,
+    "sha256": "6360661a69ee16b37e4e83e52cd24c7f6784cb49427b9121925f02aeaeeb4f63"
   }
 }

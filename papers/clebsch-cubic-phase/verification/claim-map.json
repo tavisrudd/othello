@@ -31,22 +31,22 @@
   },
   "prop:conic-input": {
     "cautions": "No Lean proof is claimed. Finite computations retain the recorded evidence limits; source checking is not an independent full census.",
-    "conclusion": "For the stated matchings the construction has distinct points, $\\dim L=p$, and $\\dim L^{\\circ2}=2p-1$. It gives $[[14,6,2]]_7$ and $[[22,10,2]]_{11}$. In invertible logical coordinates the phases are \\begin{equation} F_7=4sI+3J,\\qquad F_{11}=4sI_2+2I_3. \\end{equation} Here $I=ae-4bd+3c^2$ and $J=\\det\\left(\\begin{smallmatrix}a&b&c\\\\b&c&d\\\\c&d&e\\end{smallmatrix}\\right)$ are binary-quartic invariants. For the binary octavic $f(S,T)=\\sum_{i=0}^8\\binom8i z_iS^{8-i}T^i$, $I_2=(f,f)_8$ and $I_3=((f,f)_4,f)_8$ use normalized transvectants.",
+    "conclusion": "For the stated matchings the construction has distinct points, $\\dim L=p$, and $\\dim L^{\\circ2}=2p-1$. It gives $[[14,6,2]]_7$ and $[[22,10,2]]_{11}$. In invertible logical coordinates, consisting of a scalar coordinate $s$ and five quartic or nine octavic coordinates, the phases are \\begin{equation} F_7=4sI+3J,\\qquad F_{11}=4sI_2+2I_3. \\end{equation} Here $I=ae-4bd+3c^2$ and $J=\\det\\left(\\begin{smallmatrix}a&b&c\\\\b&c&d\\\\c&d&e\\end{smallmatrix}\\right)$ are binary-quartic invariants. For the binary octavic $f(S,T)=\\sum_{i=0}^8\\binom8i z_iS^{8-i}T^i$, $I_2=(f,f)_8$ and $I_3=((f,f)_4,f)_8$ use normalized transvectants.",
     "coverage": "absent",
     "declarations": [],
     "hypotheses": "The field, dimensional and configuration/noise assumptions stated below.",
     "objects": "prop:conic-input",
-    "statement_sha256": "0695a06e1fd07130112f0a61c9899f21936b8724e4f8c964bb14ab13fd90e7f1",
+    "statement_sha256": "a1ef80f17a4ee98112f00e42f3d98fa0f4feaae80eff3c8a131b9541aa42f1de",
     "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
   },
   "prop:shadow": {
     "cautions": "No Lean proof is claimed. Finite computations retain the recorded evidence limits; source checking is not an independent full census.",
-    "conclusion": "Over $\\mathbb F_{11}$ the stabilizer $A_5$ of the base matching acts on the logical space as $\\one\\oplus V_4\\oplus V_5$. The restriction to its unique five-dimensional constituent is, in the recorded coordinates, \\[ 8\\det\\begin{pmatrix}z_0&z_1&z_2\\\\z_1&z_2&z_3\\\\z_2&z_3&z_4\\end{pmatrix}. \\] It is a chordal member of the invariant pencil. Its rank census at ranks $0,3,4,5$ is $(1,120,27720,133210)$; the conference member has $(1,300,22260,138490)$, so their five-qudit phase states are not Clifford-equivalent. At $p=7$ the restriction $s=0$ in \\eqref{eq:normal-forms} is $3J$. Reversing the sheets sends $U_F$ to $U_F^{-1}$. The residual involution exchanging the two chordal members acts as a linear Clifford change of frame on the five shadow variables.",
+    "conclusion": "Over $\\mathbb F_{11}$ the stabilizer $A_5$ of the base matching acts on the logical space as $\\one\\oplus V_4\\oplus V_5$. The restriction to its unique five-dimensional constituent is, in the recorded coordinates, \\[ 8\\det\\begin{pmatrix}v_0&v_1&v_2\\\\v_1&v_2&v_3\\\\v_2&v_3&v_4\\end{pmatrix}. \\] Here $v_0,\\ldots,v_4$ are new linear coordinates on $A$. The restriction is a chordal member of the invariant pencil. At ranks $0,3,4,5$, the chordal and conference censuses are respectively \\[ (1,120,27720,133210),\\qquad (1,300,22260,138490). \\] Thus their five-qudit phase states are not Clifford-equivalent. At $p=7$ the restriction $s=0$ in \\eqref{eq:normal-forms} is $3J$. Reversing the sheets sends $U_F$ to $U_F^{-1}$, a Clifford-conjugate gate. Let $q$ be the involution on $A$ induced by the permutation $(01)(24)(35)$ of these ordered pairs. With actual representatives $h$ and $h_2=h\\circ q$, $q$ exchanges the two chordal members and gives a linear Clifford equivalence of their five-qudit states.",
     "coverage": "absent",
     "declarations": [],
     "hypotheses": "The field, dimensional and configuration/noise assumptions stated below.",
     "objects": "prop:shadow",
-    "statement_sha256": "19a3efe47ac75e2ad4de5be7d70ca920940bbc9c1fdcb5d1f9e962d451883e63",
+    "statement_sha256": "136bddb92e795169f6351624b1cfae30242d65ce6879ac34e44fc77323eff84a",
     "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
   },
   "prop:spectra": {

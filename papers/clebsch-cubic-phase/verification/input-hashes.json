@@ -271,6 +271,18 @@
     "bytes": 6532,
     "sha256": "d6c16367fe94af5707537c387d95832f1fa741b1cc184784442c2cf92ccc18d3"
   },
+  "notes/2026-09-07-c1099-cubic-phase-strengthening/paperv/out/action.pkl": {
+    "bytes": 705249,
+    "sha256": "32a3bd23a834b394d991665927a6fa7041375ebf4f7e4858603938701c4b14d8"
+  },
+  "notes/2026-09-07-c1099-cubic-phase-strengthening/paperv/out/bridge.pkl": {
+    "bytes": 6961,
+    "sha256": "83ca0a6120e75c46f559e836c4fa5d1f80f0d59cb1f12dafa222461fc5aeaccc"
+  },
+  "notes/2026-09-07-c1099-cubic-phase-strengthening/paperv/out/pencil.pkl": {
+    "bytes": 1101,
+    "sha256": "0720f23e6f5eadc0bdc4f897dbaa777f65275f35754eae02801101eaa0383d72"
+  },
   "notes/2026-09-07-c1099-cubic-phase-strengthening/paperv/out/step1_config.txt": {
     "bytes": 253,
     "sha256": "6179ed2784855a9098f4ed925ac0e905089529567942bb93d978ec5292d7c144"

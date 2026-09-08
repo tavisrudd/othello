@@ -44,7 +44,15 @@
     "commands": [
       "cd notes/2026-09-07-c1099-cubic-phase-strengthening/paperv && for f in step1_config.py step2_action.py step3_decomp.py step4_bridge.py step5_pencil.py step6_identify.py step7_invariants.py step8_torsors.py step9_survey.py; do uv run --with numpy --with sympy python \"$f\"; done"
     ],
-    "limits": "Finite-field computations, not a classification of all full-gate lifts; scripts regenerate serialized intermediates in sequence. Report distinguishes exact coefficients from sampled probes; about 30 seconds.",
+    "limits": "Finite-field computations, not a classification of all full-gate lifts; scripts regenerate serialized intermediates in sequence. Report distinguishes exact coefficients from sampled probes; about 30 seconds. The non-equivariance inference in the historical torsor script is not used: geometric non-lifting is checked by all preserving restrictions in shadow-normalization.",
     "role": "A5 decomposition, explicit Hankel identity, pencil counts and scoped lift tests"
+  },
+  "shadow-normalization": {
+    "checksum_manifest": "verification/local-hashes.json",
+    "commands": [
+      "cd papers/clebsch-cubic-phase && python3 verification/shadow_check.py --check"
+    ],
+    "limits": "Reads three pinned committed serialized intermediates and reuses finite-field substitution utilities; independently checks all 1320 restrictions, 60 preserve V5, all determinant1, q determinant-1. Does not rederive the geometric representation or rerun shadow rank censuses. Deterministic standard-library computation, under one second.",
+    "role": "Exact actual/projective scalar, involutory exchange, explicit coefficient and embedding certificate, exhaustive geometric restriction test"
   }
 }

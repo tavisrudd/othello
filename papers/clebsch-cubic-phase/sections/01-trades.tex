@@ -1,8 +1,31 @@
 \section{Signed trades as quantum codes}\label{sec:trades}
-The same cancellation that makes two point configurations agree on quadratics
-can make a cubic phase insensitive to a stabilizer coordinate. The surviving
-third moment is then a logical gate. Our examples use perfect matchings of a
-conic, but the cancellation mechanism applies to any signed configuration.
+A transversal gate acts separately at each physical site, yet it can induce a
+phase coupling many logical qudits. Such a gate can prepare a whole multiqudit
+resource in one error-detecting block. This raises two questions: how can the
+resulting resource be distinguished from independently prepared cubic states,
+and when does joint preparation save raw resources at a common output error?
+We use finite geometry to choose the logical phase and exact Pauli data to
+answer these questions for two small codes.
+
+The examples give different answers. The $[[22,10,2]]_{11}$ code prepares a
+state that cannot become a product across any bipartition, even after an
+entangling Clifford change of coordinates
+(Corollary~\ref{cor:product-exclusion}). For the $[[14,6,2]]_7$ code,
+Theorem~\ref{thm:factory} proves a preparation advantage over a specified
+separate-distillation menu. The same product-exclusion test does not settle
+that six-qudit state. These are high-rate error-detecting resource factories;
+distance two is used to reject errors, not to correct an arbitrary single-site
+fault.
+
+The common mechanism is simple. Two signed point sets agree on all quadratics,
+so a cubic phase cannot see the stabilizer coordinate. Its surviving third
+moment becomes the logical phase. This is the signed-orthogonality mechanism
+of qudit transversal-gate constructions~\cite{watson,cab,krishna}, expressed
+below for an arbitrary coupled cubic in Theorem~\ref{thm:trade-code}.
+Our contributions are the resource
+interpretation of the conic phases, their exact spectra and product consequences,
+and the bounded preparation comparison. The translation example shows why the
+code parameters alone do not distinguish the geometry.
 
 Fix a prime $p\geq5$ and write $\omega=\exp(2\pi i/p)$. A qudit has basis
 $\{|x\rangle:x\in\Fp\}$, with $X(a)|x\rangle=|x+a\rangle$ and
@@ -16,6 +39,10 @@ such that
 These equalities are in $\Fp$. Let $E$ have rows $x_i^T$ and let
 $L=\{a\one+Eu:a\in\Fp,\ u\in\Fp^k\}\subseteq\Fp^n$.
 The coordinatewise product span is denoted by $L^{\circ2}$.
+A Calderbank--Shor--Steane (CSS) code is specified here by commuting X- and
+Z-stabilizer spaces: vectors in those spaces prescribe products of the corresponding
+Pauli operators whose common $+1$ eigenspace is the code. The notation
+$[[n,k,d]]_p$ means $n$ physical qudits, $k$ logical qudits and distance $d$.
 
 \begin{theorem}[Trade-to-code dictionary]\label{thm:trade-code}
 \coverage{absent}
@@ -59,21 +86,18 @@ This condition also kills the lower terms because $s\in L$, proving sufficiency.
 \proves{thm:trade-code}
 \end{proof}
 
-This is a specialization of the signed qudit orthogonality mechanism in
-Watson--Campbell--Anwar--Browne~\cite[Definition 2 and Lemmas 6--8]{watson},
-with related divisible-code and prime-qudit constructions
-in~\cite{haah,cab,krishna}. The contribution considered here is the choice of
-configuration and the resulting logical resource. Our positioning follows the
-bounded comparison recorded in ledger rows N1--N4 of the accompanying literature
-audit; no classification of all CSS codes with these parameters is asserted.
-The Schur-square conductor also governs the MDS--CSS transversal-group
-classification~\cite{mds}. The distinction is the full product
-$S\circ L\circ L$ in Theorem~\ref{thm:trade-code}: Schur-square codimension
-one alone does not imply a non-Clifford gate. Here the X-space is only
-$\langle\one\rangle$.
+Watson--Campbell--Anwar--Browne~\cite[Definition 2 and Lemmas 6--8]{watson}
+impose signed orthogonality conditions that also restrict logical triple products.
+The proof above retains precisely the condition needed for a possibly coupled
+logical cubic. Related divisible-code and prime-qudit constructions
+appear in~\cite{haah,cab,krishna}. The Schur-square conductor also governs the
+MDS--CSS transversal-group classification~\cite{mds}; here the full product
+$S\circ L\circ L$ matters, and the X-space is only $\langle\one\rangle$.
 
 \subsection{An elementary family at every prime}
-An example separates parameter existence from the conic geometry.
+The following calibration example requires no conic. It supplies both the code
+parameters and uniqueness of the preserving cubic weight, leaving the logical
+phase and its resource properties as the distinctions to investigate.
 Let $V=\Fp^p/\langle\one\rangle$, write $a_i$ for the image of the $i$th
 standard basis vector, and set $t=a_0$. The functional
 $\sigma([z])=\sum_i z_i$ is well-defined because $p=0$ in $\Fp$.
@@ -120,6 +144,14 @@ The annihilator of $L^{\circ2}$ is therefore exactly the sign line.
 \end{proof}
 
 \subsection{The conic configurations}
+The matching construction has three stages. Products of secant equations give
+a finite list of evaluation points; their signed moments supply the code; a
+change of logical coordinates expresses the resulting phase through binary-form
+invariants. A reader interested in the resource calculation may retain
+Proposition~\ref{prop:conic-input} and defer the coefficient conventions to the
+appendix. We call these the Clebsch examples after their underlying matching
+geometry~\cite{tradegeometry}.
+
 For the two symmetric examples take $Q=XZ-Y^2$ and label its points by
 $a\mapsto(1:a:a^2)$ and $\infty\mapsto(0:0:1)$.
 For a perfect matching $M$ of $\mathbb P^1(\Fp)$ define
@@ -145,7 +177,8 @@ Quotients}~\cite{tradegeometry}.
 For the stated matchings the construction has distinct points,
 $\dim L=p$, and $\dim L^{\circ2}=2p-1$. It gives
 $[[14,6,2]]_7$ and $[[22,10,2]]_{11}$.
-In invertible logical coordinates the phases are
+In invertible logical coordinates, consisting of a scalar coordinate $s$ and
+five quartic or nine octavic coordinates, the phases are
 \begin{equation}\label{eq:normal-forms}
  F_7=4sI+3J,\qquad F_{11}=4sI_2+2I_3.
 \end{equation}
@@ -164,5 +197,4 @@ the evidence record gives the independent reconstruction and its limits.
 \proves{prop:conic-input}\uses{thm:trade-code}\evidence{conic-input}
 \end{proof}
 The invariant here is the logical phase itself. This differs from using
-invariant theory to study weight enumerators~\cite{kalra}; it is not a claim
-that invariant-defined gates in general originate with these examples.
+invariant theory to study weight enumerators~\cite{kalra}; the comparison concerns these particular binary-form phases.

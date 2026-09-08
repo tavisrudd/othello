@@ -5,7 +5,7 @@ single-qudit primitives and then compiling it. This is the synthillation
 strategy of Campbell--Howard~\cite{campbellhoward}; Li--Yeh~\cite[Section 4.4
 and Appendix C.1]{liyeh} already connects signed physical qutrit gates to a
 coupled logical resource and its distillation. Our claim is the following
-finite, same-target comparison (ledger N8).
+finite, same-target comparison.
 
 \subsection{Noise and allowed operations}
 Every raw input is
@@ -53,6 +53,7 @@ $L=S+\langle\ell\rangle$ and the logical coefficient is $-1$;
 coordinate negation supplies $+1$. Parameters are respectively
 $[[4,1,2]]_7$, $[[6,1,2]]_7$, and $[[7,1,3]]_7$.}\label{tab:modules}
 \end{table}
+Here QRM means quantum Reed--Muller and RS means Reed--Solomon.
 The six-site row is the prime-qudit QRM construction~\cite{cab,campbell2014};
 the length-seven RS row is checked separately. We distinguish raw supplies.
 In the \emph{sign-only menu}, only $c=\pm1$ has unit cost. The four-site
@@ -61,6 +62,12 @@ Its two middle error rates are
 $\delta_3=(6/7)[1-(1-7\delta/6)^3]$.
 In the \emph{weighted relaxation}, every nonzero cubic coefficient has unit
 raw cost and error $\delta$. This relaxation favors the separate architecture.
+
+Define the weighted cubic rank $r(F)$ as the least number of nonzero terms in
+$F=\sum_i c_i\ell_i^3$, with $c_i\in\Fp^*$ and nonzero linear forms $\ell_i$
+over the same field. In linear-form synthesis each term consumes a primitive.
+The spectral calculation therefore has a second use: it limits how few
+independently prepared primitives can realize the target.
 
 \begin{lemma}[Cubic synthesis lower bound]\label{lem:waring}
 \coverage{absent}\uses{prop:spectra}\evidence{rank-census,conic-input}
@@ -89,12 +96,14 @@ preserves every input to the lower-bound argument.
 A weighted cube is implemented by Clifford computation of $\ell_i$, one
 weighted cubic gate, and uncomputation. This signature-tensor synthesis
 framework is explicit in Heyfron--Campbell~\cite[Section IV]{heyfron};
-the rank bound is for that model, not arbitrary circuits (ledger N7).
-For these matching configurations, the signed cubic line is also the Macaulay
-inverse system of the Artinian reduction with Hilbert function
-$(1,p-1,p-1,1)$~\cite[Corollary on self-association and cubic duality]{tradegeometry}.
-Thus the same cubic enters the geometric duality and the linear-form
-compilation problem.
+the rank bound is for that model, not arbitrary circuits.
+
+
+The comparison uses three steps. Native error detection brings the block error
+below the raw input error. Independence then prevents any unpurified synthesis
+term from meeting that target, even if errors from different terms can cancel.
+Finally, the rank bound forces at least nine independently purified terms.
+The proof retains the exact interval bounds and both raw-resource supplies.
 
 \begin{theorem}[Same-target resource comparison]\label{thm:factory}
 \coverage{absent}\uses{thm:trade-code,lem:waring}\evidence{factory}
@@ -133,7 +142,8 @@ $\|\mu*\nu\|_\infty\leq\|\mu\|_\infty$, since each convolution value
 is an average. An unpurified raw term therefore forces final error at least
 $\delta$, even with cancellations or a fixed Pauli correction.
 The states $Z(\eta)|F\rangle$ are orthogonal, so this probability is exactly
-a block-infidelity statement. Since $q<\delta$, all synthesis terms must
+a block-infidelity statement. An allowed final Clifford maps the ideal and
+errored outputs together and preserves their overlaps. Since $q<\delta$, all synthesis terms must
 be purified. Each independent tree has at least six raw leaves in the
 sign-only menu and four in the weighted menu. Retrying cannot lower those
 counts. Lemma~\ref{lem:waring} requires at least nine terms, giving $54$

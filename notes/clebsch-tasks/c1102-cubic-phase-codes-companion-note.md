@@ -4,10 +4,11 @@
 
 **Date:** 2026-09-07
 
-**Status:** first 11-page draft exists at `papers/clebsch-cubic-phase/companion.pdf`;
+**Status:** revised 12-page draft exists at `papers/clebsch-cubic-phase/companion.pdf`;
 local source, finite and PDF checks pass. Gate 1 passed with the explicitly
-approved Crossref coverage exception. Active for manuscript review and packaging.
+approved Crossref coverage exception. Internal cold referee and targeted reread addressed; active for packaging.
 Draft report: `notes/2026-09-07-c1102-companion-draft.md`.
+Revision response: `notes/2026-09-07-c1102-referee-response.md`.
 Citation dispositions are banked in
 `notes/2026-09-07-c1102-forward-citations/ADJUDICATION.md`: all 336 promotions have
 explicit dispositions, with 20 additional partial primary readings. This is not
@@ -20,8 +21,8 @@ The user confirmed that the added Hessian source is preprint-only and approved
 recording Crossref as not covered, retaining the OpenAlex/Semantic Scholar zeros
 without a three-source absence verdict. Scope and restrictions are recorded in
 `notes/2026-09-07-c1102-forward-citations/gate-approval.json` and `GATE-DECISION.md`.
-Next: critical manuscript review, then standalone artifact packaging and author
-metadata decisions. No publication or mirror synchronization has occurred.
+Next: standalone artifact packaging, author metadata and the style guide’s blind
+specialist/adjacent-reader comparison. No publication or mirror synchronization has occurred.
 
 ## Read first (in this order, nothing else)
 

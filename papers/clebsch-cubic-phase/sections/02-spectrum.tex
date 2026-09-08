@@ -1,4 +1,10 @@
 \section{The Hessian spectrum and product exclusion}\label{sec:spectrum}
+Clifford operations permute Pauli operators up to phase. The moduli of a state's
+Pauli expectations therefore survive every Clifford change of frame and can
+obstruct conversion to independent resources. Their fourth moment will give a
+product-state obstruction; their rare largest nontrivial values will later
+obstruct a short sum-of-cubes synthesis.
+
 For a homogeneous cubic $F$ on $\Fp^k$, put
 $|F\rangle=p^{-k/2}\sum_u\omega^{F(u)}|u\rangle$ and
 $H_F(v)=(\partial_i\partial_jF)(v)$. We use natural logarithms and define
@@ -7,7 +13,8 @@ $H_F(v)=(\partial_i\partial_jF)(v)$. We use natural logarithms and define
  \log\left(p^{-k}\sum_{v,w}|\langle\psi|X(v)Z(w)|\psi\rangle|^{2\alpha}\right)
  \quad(\alpha>0,\ \alpha\ne1).
 \]
-These are stabilizer R\'enyi entropies with the normalization in
+These stabilizer R\'enyi entropies quantify nonstabilizerness, usually called
+magic, with the normalization in
 \cite{leone,wangli}; they vanish on pure stabilizer states and are additive
 under tensor products. The following quadratic-sum calculation makes them
 accessible without enumerating all $p^{2k}$ Paulis.
@@ -46,7 +53,11 @@ Kagamihara--Tsuchiya~\cite[Theorem 1]{kagamihara} give the binary
 rank-reduction formula, with $C(x)+C(x)^T$ replacing the odd-characteristic
 Hessian. Chen--Yan--Zhou~\cite{chen} supply related hypergraph-state moment
 methods. We use the established rank-reduction method in odd characteristic;
-no first rank-formula or first odd-prime extension claim is made (ledger N5).
+the contribution below is the geometric evaluation and its resource consequences.
+For example, a single-qudit cubic $F(u)=u^3$ has rank zero at $u=0$ and rank
+one at all other points. Thus $N_0=1$, $N_1=p-1$, and
+$M_2=\log(p^2/(2p-1))$. Tensor products add these entropies. The same formula
+now turns the multivariate rank counts into an exact resource comparison.
 
 \begin{proposition}[Exact conic spectra]\label{prop:spectra}
 \coverage{absent}\uses{prop:conic-input,thm:hessian}\evidence{rank-census}
@@ -102,8 +113,7 @@ factorizes, so the entropies add.
 \proves{lem:product-ceiling}
 \end{proof}
 The product-ceiling method has predecessors in the characteristic-function
-and qudit entropy literature~\cite{dai,wangli}. The argument above needs no
-assumption that a SIC fiducial exists or attains the bound.
+and qudit entropy literature~\cite{dai,wangli}. The bound need not be attained.
 
 \begin{corollary}[Clifford-product exclusion]\label{cor:product-exclusion}
 \coverage{absent}\uses{prop:spectra,lem:product-ceiling}\evidence{magic-comparison}
@@ -125,8 +135,7 @@ Pauli moduli, so it preserves $M_2$.
 \proves{cor:product-exclusion}\uses{prop:spectra,lem:product-ceiling}\evidence{magic-comparison}
 \end{proof}
 
-For comparison, independent cubic qudits have
-$M_2=k\log(p^2/(2p-1))$. Two disjoint $xyz$ phases at $p=7$ have
+Two disjoint $xyz$ phases at $p=7$ have
 $M_2=8.8047\ldots$, also below $F_7$.
 The trace cubic $F(u)=\Tr_{\mathbb F_{p^k}/\Fp}(u^3)$ has full Hessian rank
 at every nonzero $u$, by nondegeneracy of the trace pairing, and hence
@@ -136,4 +145,4 @@ Feng--Luo~\cite[Proposition 2 and Appendix C]{feng} prove single-prime
 L1 optimality among diagonal gates. Neither that result nor the L1 ceiling
 of~\cite{damski} is an unrestricted $M_2$ maximality theorem.
 The conjecture in~\cite{knipfer} concerns two prime-dimensional qudits;
-we do not extend its attribution to arbitrary $k$ (ledger N9).
+we do not extend its attribution to arbitrary $k$.

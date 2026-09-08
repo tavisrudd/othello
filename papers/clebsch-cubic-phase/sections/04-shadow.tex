@@ -3,25 +3,52 @@ The logical cubic also provides an interface with the invariant pencil in
 \emph{Chordal and Conference Cubics: Reconstruction and a Residual
 $C_2$-Torsor}~\cite{shadowgeometry}. A restriction of a logical polynomial
 is a resource on fewer variables; it does not by itself construct a subcode.
+The useful question is whether this smaller resource retains a distinction
+that the Clifford-invariant spectrum can detect.
+
+Write $A=\{y\in\mathbb F_{11}^6:\sum_i y_i=0\}$ for the
+five-dimensional augmentation space of the six matching pairs, ordered as
+\[
+ (\{0,1\},\{10,\infty\},\{2,5\},\{3,7\},\{4,9\},\{6,8\}).
+\]
+The geometric
+construction supplies an embedding $\psi:A\longrightarrow V_5$ and two
+$A_5$-invariant cubics: the restriction $h=F\circ\psi$ and a conference
+cubic $c$. Here a conference cubic is obtained from the signed triangle
+sum $\sum_{i<j<k}B_{ij}B_{jk}B_{ki}y_i y_j y_k$, restricted to $A$,
+where $B$ is the chosen symmetric conference matrix: its diagonal is zero,
+its off-diagonal entries are $\pm1$, and $B^2=5I$.
+The chosen signing has $A_5$-invariant triangle products.
+The coefficient certificate uses the basis $e_i-e_5$ ($0\leq i<5$) of $A$.
+A chordal cubic is the secant hypersurface of a rational normal quartic;
+the Hankel determinant below is its standard equation.
+The span of $h$ and $c$ is the invariant pencil, a two-dimensional space of cubics
+considered up to nonzero scalar. The supplied coefficient certificate fixes
+actual representatives, since scalar multiples can define different phase
+functions in fixed coordinates.
 
 \begin{proposition}[Chordal shadow and sign choices]\label{prop:shadow}
-\coverage{absent}\uses{prop:conic-input,thm:hessian}\evidence{shadow}
+\coverage{absent}\uses{prop:conic-input,thm:hessian}\evidence{shadow,shadow-normalization}
 Over $\mathbb F_{11}$ the stabilizer $A_5$ of the base matching acts on the
 logical space as $\one\oplus V_4\oplus V_5$. The restriction to its unique
 five-dimensional constituent is, in the recorded coordinates,
 \[
- 8\det\begin{pmatrix}z_0&z_1&z_2\\z_1&z_2&z_3\\z_2&z_3&z_4\end{pmatrix}.
+ 8\det\begin{pmatrix}v_0&v_1&v_2\\v_1&v_2&v_3\\v_2&v_3&v_4\end{pmatrix}.
 \]
-It is a chordal member of the invariant pencil. At ranks $0,3,4,5$, the
+Here $v_0,\ldots,v_4$ are new linear coordinates on $A$.
+The restriction is a chordal member of the invariant pencil. At ranks $0,3,4,5$, the
 chordal and conference censuses are respectively
 \[
  (1,120,27720,133210),\qquad (1,300,22260,138490).
 \]
 Thus their five-qudit phase states are not Clifford-equivalent. At $p=7$ the restriction $s=0$ in
 \eqref{eq:normal-forms} is $3J$.
-Reversing the sheets sends $U_F$ to $U_F^{-1}$. The residual involution
-exchanging the two chordal members acts as a linear Clifford change of frame
-on the five shadow variables.
+Reversing the sheets sends $U_F$ to $U_F^{-1}$, a Clifford-conjugate gate.
+Let $q$ be the involution on $A$ induced by the permutation $(01)(24)(35)$
+of these ordered pairs.
+With actual representatives $h$ and $h_2=h\circ q$,
+$q$ exchanges the two chordal members and gives a linear Clifford equivalence
+of their five-qudit states.
 \end{proposition}
 \begin{proof}[Finite identification and operational deduction]
 Character idempotents in the reconstructed $A_5$ action have ranks $1,4,5$.
@@ -33,23 +60,35 @@ Theorem~\ref{thm:hessian}. The $p=7$ restriction follows directly from
 Sheet reversal changes every sign in~\eqref{eq:logical}, hence negates $F$.
 For an invertible linear map $q$, the basis permutation $|z\rangle\mapsto|qz\rangle$
 is Clifford: it sends $X(v)$ to $X(qv)$ and $Z(w)$ to $Z(q^{-T}w)$.
-The recorded involution exchanges the two chordal polynomials, giving the stated
-frame change. The identity is on the shadow, not a claim about all extensions
+In the coefficient certificate, $h\circ q=2\widehat h_2$, where
+$\widehat h_2$ is the projectively normalized second chordal cubic.
+Taking $h_2=h\circ q$ gives $h_2\circ q=h$ because $q^2=I$;
+the basis permutation for $q$ therefore exchanges $|h\rangle$ and
+$|h_2\rangle$. If normalized representatives are preferred, the basis
+permutation for $7q$ sends $|h\rangle$ to $|\widehat h_2\rangle$:
+its inverse is $8q$, and $2\cdot8^3=1$ in $\mathbb F_{11}$.
+For sheet reversal, homogeneity gives $F(-u)=-F(u)$, so coordinate
+negation conjugates $U_F$ to $U_F^{-1}$ and sends $|F\rangle$ to
+$|-F\rangle$. The $q$-exchange identity is on the shadow, not a claim about all extensions
 to the full ten-qudit gate.
-\proves{prop:shadow}\uses{prop:conic-input,thm:hessian}\evidence{shadow}
+\proves{prop:shadow}\uses{prop:conic-input,thm:hessian}\evidence{shadow,shadow-normalization}
 \end{proof}
 The singular scheme of the Hankel cubic is a rational normal quartic;
 its twelve $\mathbb F_{11}$-points are not the entire scheme.
-The existing lift tests rule out the identity-on-complement extension and
-geometric $\PGL_2(11)$ lifts of the residual involution. They do not classify
-arbitrary full-gate lifts. These boundaries are part of ledger N4.
+The existing lift test rules out the identity-on-complement extension.
+For geometric lifts, checking all $1320$ elements of $\PGL_2(11)$ gives
+exactly $60$ that preserve $V_5$, namely the reconstructed $A_5$.
+Their restrictions have determinant $1$, whereas $\det q=-1$ on $A$.
+Thus none restricts to $q$. This excludes the specified geometric lifts;
+it does not classify arbitrary full-gate lifts.
 
 \subsection*{Questions suggested by the construction}
 The translation family shows that the parameters and cubic-weight rigidity
 alone do not select the symmetric examples. Their distinction lies in the
-phase geometry and its spectrum. It remains to explain the observed stopping
-of the conic translation-class source beyond $p=13$, rather than merely
-extend a matching enumeration. A second question is whether a balanced
+phase geometry and its spectrum. The conic translation-class search finds
+no examples at $p=17$ or $19$, after finding examples at $7$, $11$ and $13$.
+Does this finite pattern reflect an obstruction at larger primes, or do
+examples recur? A second question is whether a balanced
 $2p$-point trade can realize a trace-cubic resource on $p-1$ logical qudits.
 Finally, the distance-three search inside the fixed $p=7$ evaluation space
 fails, while the elementary distance-three RS examples do not establish the
