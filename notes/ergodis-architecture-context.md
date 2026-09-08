@@ -14,6 +14,10 @@ relevant handoff/task context. Follow links selectively; do not preload all repo
   execution target; missing bindings/portability are gaps, not product boundaries.
   Consolidate on one canonical WASM build. Private domain implementations remain
   private behind the one-way dependency boundary; do not introduce a demo engine.
+  Public core hosts must consume separately compiled/obfuscated private packages
+  without private source or rebuilding core privately. Reuse the C1084 extension
+  boundary: canonical engine plus native/WASM/IR packages, not a mandatory private
+  monolithic assembly. Multiple extension payloads are not multiple core engines.
 - Preserve native performance and specialized layouts/kernels. Read the complete
   sibling `ergodis-contrib/PERFORMANCE.md` and `performance-playbook.md` before
   Rust design/implementation/profiling, as required by core/private AGENTS.md.

@@ -12,18 +12,55 @@ current reduction-family semantics compatible. Add the general execution surface
 alongside it, then make campaign orchestration a consumer of that surface.
 Do not extend the existing GF(2) Problem with unrelated optional fields.
 
-Use one private WASM composition root to assemble core and private capabilities.
-Core exports only domain-neutral library/binding support; private assembly depends
-inward on core, runtime, verifier and private domain modules. Migrate all browser
-consumers to its generated package, retiring the existing core-owned demo package
-as an active product build after conformance passes. Preserve its tests and history.
-This changes assembly ownership, not mathematical implementations. The decision
-requires review before moving crates or changing active build paths.
+Keep one canonical public-core-capable Ergodis WASM engine/host and expose the
+versioned extension boundary required by C1079/C1084/C1091. Private domain
+implementations are independently compiled packages, usable by that host without
+private source or a private rebuild of core. A mandatory private assembly crate
+is not the solution: it would fail the already stated recipient-use requirement.
 
-This is how one feature-complete assembled WASM product can respect the existing
-prohibition on core depending on private code. Source modules and optional future
-extension payloads do not imply separate competing Ergodis engines. There is no
-new public distribution or private-source export in this task.
+Public core owns generic registration, language/compiler and execution contracts;
+host adapters own module discovery/instantiation. Private packages provide opaque
+identities/manifests and native libraries, WASM executable payloads or prepared IR
+as applicable. The same logical package/capability identity binds separately
+identified target implementations. Core builds/tests without any private package;
+generic conformance uses public fixtures and private package tests remain private.
+
+One canonical WASM Ergodis engine does not mean statically baking every industry
+implementation into one module. Additional executable extension payloads are
+packages loaded by that same engine, not competing demo-specific engines. All
+browser consumers must use the canonical engine and extension mechanism.
+
+C1084's Extensions and public/private boundary and C1079's runtime/IR analysis
+already state this requirement. User reaffirmed it on 2026-09-08; there is no
+pending permission question about replacing it with private assembly ownership.
+Concrete ABI mechanics still need a bounded design grounded in actual consumers.
+
+## Compiled/private package boundary
+
+- Manifest: opaque package/capability identity, logical schema/IR version,
+  target payload digest, ABI version, required imports/dependencies, operation
+  entries, resource requirements and evidence/replay interpretation.
+- Native payload: versioned coarse C ABI, fixed-width scalars and buffer/handle
+  ownership, no Rust layout/ownership/unwind assumptions. Bind before execution;
+  a module owns its specialized hot loop.
+- WASM payload: explicit module imports/exports and buffer/handle ABI. Separate
+  memory/ownership is accounted for at coarse calls; no per-state JS/import
+  dispatch and no assumption a native .so can execute in the browser.
+- Prepared source/IR: same validated frontend and semantic contracts. Source-
+  withheld packages may use compiled/opaque IR; opaque scalar PlanSpec alone
+  does not implement an arbitrary new kernel or establish a theorem.
+- Private producer pipeline: strip/obfuscate chosen recipient artifacts and
+  inspect the assembled payload, symbols, diagnostics, source maps, embedded
+  paths, manifests and example data for unintended source disclosure. Preserve
+  full build/replay provenance privately. Obfuscation is not an assurance that
+  recipient-controlled code cannot be reverse engineered.
+- Admission: registration establishes availability, not mathematical authority.
+  Bind model/query/claim and checker requirements explicitly. Historical receipts
+  never become local opaque admission by decoding or module loading.
+- Required package gate: build the core host without private source, then load a
+  compiled private package through the same generic contract and run actual
+  native/WASM fixtures. Reject wrong ABI/schema/target, missing imports, corrupt
+  payloads and stale handles; preserve native hot-path performance.
 
 ## Three concrete family mappings
 
@@ -80,7 +117,7 @@ at JS boundaries. Do not dump native structs into wire payloads.
 Native Rust adapters call typed family operations directly. Wire payload decoding
 and dynamic family lookup happen only at cold entry. A registry entry holds
 operation/schema metadata and coarse adapter calls, not per-state callbacks.
-The assembly registers private families; core must not enumerate their names or
+The host registers loaded package families; core must not enumerate their names or
 import their Rust types. Do not add a framework or foundational crate until a
 concrete dependency requires it; prefer narrow modules in existing layers.
 
@@ -141,8 +178,8 @@ Do not declare native performance preserved merely because no source loop moved.
 
 ## First implementation and acceptance slices
 
-1. Finalize this contract against the three family fixtures and review assembly
-   ownership. Inventory current public modules and exposed commands separately;
+1. Finalize this contract against the three family fixtures and validate compiled-package
+   compatibility. Inventory current public modules and exposed commands separately;
    module presence is not capability coverage.
 2. Extract/bind retained labelled composition first: legacy native JSON remains
    compatible, primes/GF4 and rectangular shapes preserved, two targets reuse one

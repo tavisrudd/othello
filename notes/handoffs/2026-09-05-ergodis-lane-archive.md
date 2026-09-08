@@ -229,3 +229,12 @@ loading, portable bundle inspection, explicit read-only and runnable contexts, a
 staged real QEC projection WASM actions. Two Chromium gates pass. Report:
 `../2026-09-08-c1129-runnable-domain-lab.md`. Supersedes the static-only lab
 disposition at `aa659a7`; full scheduling/recovery WASM remains unimplemented.
+
+## 2026-09-08 — C1130 compiled package requirement reaffirmed
+
+The initial contract proposed a mandatory private WASM composition root and asked
+for approval. Tavis pointed back to yesterday's compiled/obfuscated package
+requirement. C1084 explicitly requires public core hosts to load independently
+compiled private capabilities; the proposal, task card and context map now retain
+canonical core plus native/WASM/IR extensions. No crate/build migration occurred.
+The superseded proposal is preserved in commit `20e532dbc`, not current guidance.

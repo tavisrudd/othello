@@ -3,7 +3,7 @@
 **Lane**: `ergodis`
 **Status**: IN PROGRESS, started by Tavis’s `go` on 2026-09-08.
 Initial contract: `2026-09-08-c1130-execution-contract-proposal.md`.
-Assembly ownership and concrete interface are proposed; no kernel migration yet.
+Concrete interface/package ABI design is in progress; no kernel migration yet.
 
 ## Context prerequisites
 
@@ -37,6 +37,13 @@ active build paths and references. Do not create another reduced browser engine.
 Preserve historical source/evidence and unrelated worktrees; consolidation is not
 permission for destructive history cleanup. Keep private domain packages behind
 the existing one-way dependency boundary.
+Public core/native/WASM hosts must be able to use separately compiled/obfuscated
+private packages without private source or a mandatory private rebuild of core.
+Implement the established package/registration/IR and target-module boundary from
+C1079/C1084/C1091. One canonical WASM engine may load multiple extension payloads;
+those are not separate restricted Ergodis builds. Core-independent package loading
+and recipient-artifact inspection are explicit acceptance gates.
+
 
 Loaded in full on 2026-09-08 as required implementation context:
 
