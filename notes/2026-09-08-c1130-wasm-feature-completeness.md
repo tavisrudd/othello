@@ -4,6 +4,9 @@
 **Status**: IN PROGRESS, started by Tavis’s `go` on 2026-09-08.
 Initial contract: `2026-09-08-c1130-execution-contract-proposal.md`.
 Concrete interface/package ABI design is in progress; no kernel migration yet.
+Loading/execution spike design: `2026-09-08-c1130-private-module-loading-spike.md`.
+Next implementation gate: independently loaded private LRC/QEC providers in an
+unchanged public host, with native/WASM parity and retained native cost evidence.
 
 ## Context prerequisites
 

@@ -34,6 +34,10 @@ C1084's Extensions and public/private boundary and C1079's runtime/IR analysis
 already state this requirement. User reaffirmed it on 2026-09-08; there is no
 pending permission question about replacing it with private assembly ownership.
 Concrete ABI mechanics still need a bounded design grounded in actual consumers.
+The private experiment is specified in
+`2026-09-08-c1130-private-module-loading-spike.md`: real LRC/QEC providers,
+source-free recipient loading, native/WASM parity and retained performance gates.
+It tests candidate bindings without freezing the production ABI.
 
 ## Compiled/private package boundary
 

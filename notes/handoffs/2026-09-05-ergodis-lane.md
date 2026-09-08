@@ -53,6 +53,9 @@ the Sunday/Monday architecture and implementation notes already loaded.
 Mandatory inventory, cross-target conformance and native performance gates:
 `notes/2026-09-08-c1130-wasm-feature-completeness.md`.
 Initial concrete contract: `notes/2026-09-08-c1130-execution-contract-proposal.md`.
+Private loading/execution spike: `notes/2026-09-08-c1130-private-module-loading-spike.md`.
+Design ready; test independent LRC/QEC package loading and native/WASM execution
+before freezing the ABI. No spike implementation or measurements yet.
 Preserve public-core loading of separately compiled/obfuscated private packages;
 canonical WASM engine plus extensions, not a mandatory private assembly build.
 Start with a concrete contract over composition, compiled LRC queries and QEC;
