@@ -101,3 +101,9 @@ Rendered inspection covered the opening and reading routes, quotient callback,
 confinement callback, relocated all-rank consequence, related-work groups, and
 price/reliability callbacks (pages 1–4, 6, 12, 15, 22, 28–29). Before/after
 PDFs are frozen in `~/.cache/complete-ports-layered/`.
+
+Synchronization: authority `0ae040e02`, mirror forward commit `65d096b`.
+Mirror deterministic gate and exporter verification pass. All 43 distributed
+files agree byte-for-byte; exported content SHA-256:
+`ffbf83f07bd1abfec8752ad53aa00c42a548baddd4c093f2e57cd1dd451fdf32`.
+No push or deposit.

@@ -24,8 +24,8 @@ The remaining paper route is C325 then C953, with C955 after. No push or deposit
 - **Canonical identity**: `complete-ports` — *Exact Compositional Transfer of Bounded Linear
   Recovery*. Approved license MIT.
 - **Standalone paper repository**: `tavisrudd/compositional-recovery` at
-  `~/src/math-papers/compositional-recovery`, local commit `2d5b252` (43-page
-  referee repair and mathematical software exposition, verified, unpushed). The obsolete bundled engine and its
+  `~/src/math-papers/compositional-recovery`, local commit `65d096b` (44-page
+  layered exposition and resumed Astra feedback, verified, unpushed). The obsolete bundled engine and its
   checker have been removed in separate forward commits.
 - **Ergodis engine**: the engine, its benchmark programme, and the C985 optimization sequel live in
   the [`ergodis`](2026-09-05-ergodis-lane.md) lane.

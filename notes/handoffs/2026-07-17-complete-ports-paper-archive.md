@@ -1088,3 +1088,13 @@ minimal-support consequence appear on page 2; Ergodis is explained through the
 repair and optimization questions enabled by the retained mathematics.
 Authority `2f4f82de5`, mirror `2d5b252`; both 43-page deterministic gates pass.
 No new Lean or benchmark execution, push, or deposit. C325/C953 remain open.
+
+
+## 2026-09-07 — Running example and layered reading routes
+
+The follow-on exposition pass and resumed Astra assessment are recorded in
+`notes/2026-09-07-complete-ports-layered-exposition.md`. A binary example now
+motivates the local, compositional and operational questions before notation
+and recurs through quotient costs, transfer, pricing and reliability. The
+all-rank corollary precedes the optional contextual machinery. Authority
+`0ae040e02`, mirror `65d096b`; 44-page deterministic gates pass, no push.
