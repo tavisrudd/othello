@@ -2,7 +2,7 @@
 
 **Lane**: `complete-ports`
 **Date**: 2026-09-08
-**Status**: bounded editorial edits implemented; validation pending.
+**Status**: complete; authority and standalone release gates pass.
 
 The user supplied a follow-up on standalone `530213f`. It reports all six
 previous substantive objections resolved and no new theorem-level error in the
@@ -56,3 +56,15 @@ editorial follow-up. Equation escape and new-repair escape remain distinct;
 coarseness remains relative to fixed numerical observations. Full final copy-edit,
 possible larger optimizer rearrangement, and artifact/implementation audits
 remain C953-owned. No incidental discovery entry is warranted.
+
+## Final validation and export
+
+Authority commit `15f19ef21` passed the guarded export audit with zero findings.
+Local standalone forward commit `7dec7fe` records the synchronized revision.
+Both copies pass the release gate at 44 pages without TeX warnings, with 32
+claims and four unchanged Lean terminals. Export verification passes for 59
+tracked files and content SHA-256
+`b27ece61723a7c6e962dc45fae3b9358625db50df2a147fc64a7fd8acca56e2b`.
+The matching PDF SHA-256 is
+`664919356a20ba4e2082657e4dd34dc0f796d05dd94209d3e579037e622b5419`.
+The standalone worktree is clean; no push or deposit occurred.

@@ -26,8 +26,8 @@ deposit.
 - **Canonical identity**: `complete-ports` — *Exact Compositional Transfer of Bounded Linear
   Recovery*. Approved license MIT.
 - **Standalone paper repository**: `tavisrudd/compositional-recovery` at
-  `~/src/math-papers/compositional-recovery`, local commit `530213f` (44-page
-  cold-referee repairs and six-macro audit, verified, unpushed). The obsolete bundled engine and its
+  `~/src/math-papers/compositional-recovery`, local commit `7dec7fe` (44-page
+  editorial follow-up and six-macro audit, verified, unpushed). The obsolete bundled engine and its
   checker have been removed in separate forward commits.
 - **Ergodis engine**: the engine, its benchmark programme, and the C985 optimization sequel live in
   the [`ergodis`](2026-09-05-ergodis-lane.md) lane.
@@ -116,7 +116,9 @@ The user-requested independent Astra cold read is complete; its report is in
 `notes/2026-09-08-complete-ports-cold-referee.md`, with provenance in
 `notes/2026-09-08-complete-ports-cold-referee-launch.md`. Citation/roadmap
 corrections and interface/presentation comments are addressed in
-`notes/2026-09-08-complete-ports-cold-referee-repair.md`. The browser could not
+`notes/2026-09-08-complete-ports-cold-referee-repair.md`. The supplied revision
+follow-up and bounded terminology/navigation edits are recorded in
+`notes/2026-09-08-complete-ports-editorial-followup.md`. The browser could not
 access the public Ergodis URL; artifact accessibility and implementation audit
 remain part of C953. This bounded early review does not complete C953.
 

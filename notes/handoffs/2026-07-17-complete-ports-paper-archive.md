@@ -1139,3 +1139,12 @@ The user-requested cold-read findings are addressed in
 statements remain unchanged; the revised 44-page authority and standalone
 release gates pass. Local standalone `530213f` is verified and unpushed.
 C325 and the aggregate C953 gate remain open, including public artifact access.
+
+## 2026-09-08 — revision-follow-up editorial pass
+
+The supplied follow-up reports the original substantive objections resolved.
+Bounded terminology, information-level, conclusion, and optimizer-navigation
+edits are documented in `notes/2026-09-08-complete-ports-editorial-followup.md`.
+The 44-page release gates pass with unchanged theorem/proof statements and
+formal coverage; standalone `7dec7fe` is verified and unpushed. C325 and the
+remaining C953 aggregate gates stay open.
