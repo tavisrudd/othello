@@ -1,7 +1,9 @@
 # C1130 — Full Ergodis WASM capability parity
 
 **Lane**: `ergodis`
-**Status**: QUEUED, explicitly requested by Tavis on 2026-09-08.
+**Status**: IN PROGRESS, started by Tavis’s `go` on 2026-09-08.
+Initial contract: `2026-09-08-c1130-execution-contract-proposal.md`.
+Assembly ownership and concrete interface are proposed; no kernel migration yet.
 
 ## Context prerequisites
 

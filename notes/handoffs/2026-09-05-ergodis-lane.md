@@ -42,7 +42,7 @@ the C985 optimization-facing paper.
 
 ## Active frontiers
 
-### C1130 — full WASM feature completeness (queued)
+### C1130 — full WASM feature completeness (in progress)
 
 User requirement: WASM is a full Ergodis execution target, not a restricted subset.
 Close bindings, portability and host-adapter gaps across existing core/private
@@ -52,6 +52,8 @@ retire divergent active demo build paths after migration. The task card indexes
 the Sunday/Monday architecture and implementation notes already loaded.
 Mandatory inventory, cross-target conformance and native performance gates:
 `notes/2026-09-08-c1130-wasm-feature-completeness.md`.
+Initial concrete contract: `notes/2026-09-08-c1130-execution-contract-proposal.md`.
+Review private assembly ownership before moving build roots.
 Start with a concrete contract over composition, compiled LRC queries and QEC;
 extract the smallest shared interface, bind canonical WASM, then expand to full
 parity. A private glossary reconciliation follows initial integration and is

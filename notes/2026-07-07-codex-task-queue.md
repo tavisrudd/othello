@@ -329,4 +329,4 @@ All completed rows, original rankings, amendments, and detailed task bodies are 
 `2026-07-07-codex-task-queue-archive.md`. Do not copy them
 back into this live registry.
 
-- **C1130 `[ergodis]` [QUEUED]** — Full WASM feature parity across Ergodis with shared engine/contracts, real domain execution and mandatory native performance preservation → `notes/2026-09-08-c1130-wasm-feature-completeness.md`.
+- **C1130 `[ergodis]` [IN PROGRESS]** — Full WASM feature parity across Ergodis with shared engine/contracts, real domain execution and mandatory native performance preservation → `notes/2026-09-08-c1130-wasm-feature-completeness.md`.
