@@ -106,6 +106,35 @@ Replay from the paper root: `python3 verification/test_annotations.py`.
 The source-only gate and deterministic build pass at 43 warning-free pages,
 32 claims, and four unchanged Lean terminals. No Lean run was needed.
 
+## Concrete-instance evidence
+
+Both reliability families now have displayed 4-by-10 generators over F_101.
+The atomic bundle is `papers/complete-repair-ports/verification/` followed by
+`replay_examples.py`, `explicit-examples.json`, `explicit-examples.md`, and
+`explicit-examples.checksums.json`. The last file records exact SHA-256 hashes
+and byte counts. Working directory: the paper root. Replay:
+`python3 verification/replay_examples.py --check`; deterministic regeneration:
+`python3 verification/replay_examples.py --write`.
+
+Replay used Python 3.13.12 and the standard library. Inputs are the manuscript's
+two five-triple families, p=101, deterministic
+projective-point order, and height RNG seeds 1938/2005, capped at 10000 trials.
+The first accepted height trials are 0 and 2. All 120 triples and 210 quadruples
+per matrix are crosschecked by independent permutation determinants versus
+Gaussian elimination (660 subset checks). Direct enumeration of all 512
+availability sets per matrix verifies both displayed reliability polynomials
+and their difference. All 2048 helper coefficient choices in each of the two
+hierarchy scenarios independently confirm costs 1 and 2 and supports a12 and
+b11,c11. The generic existence proof and two-branch worked derivation remain
+independent of execution.
+
+The prose-level `evidence` annotation resolves to this illustrative bundle;
+no theorem or proof is marked as depending on it. The checker verifies its
+JSON checksum manifest and the graph shows its isolated evidence node.
+The expanded 15-case annotation mutation suite also rejects a corrupted
+certificate. Generation and clean replay both passed, and the deterministic
+manuscript build remains warning-free at 43 pages.
+
 ## Operational record
 
 One combined routed-read tool result exceeded the display budget and truncated.

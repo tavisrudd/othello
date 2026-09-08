@@ -1,5 +1,14 @@
 {
   "schema": "compositional-recovery-evidence-v1",
-  "note": "No theorem in the manuscript relies on enumeration, generated certificates, or software execution. Illustrative arithmetic and tables have human derivations. Source and release checks validate the artifact, not the mathematical theorems.",
-  "evidence": {}
+  "note": "No theorem relies on enumeration, generated certificates, or software execution. The registered bundle audits explicitly identified illustrations only; no theorem or proof carries an evidence dependency on it.",
+  "evidence": {
+    "explicit-recovery-examples": {
+      "role": "Audits the two displayed GF(101) reliability-separation matrices and the two price/availability scenarios of the twelve-coordinate hierarchy. The general existence and composition proofs are independent of these executions.",
+      "checksum_manifest": "verification/explicit-examples.checksums.json",
+      "commands": [
+        "python3 verification/replay_examples.py --check",
+        "python3 verification/replay_examples.py --write"
+      ]
+    }
+  }
 }

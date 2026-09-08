@@ -42,6 +42,7 @@ digraph manuscript {
   "Singer:projective-cycle" [shape=note, fillcolor="#eeeeee"];
   "Stanley:subspace-Mobius" [shape=note, fillcolor="#eeeeee"];
   "Zhang:tuple-coset-support" [shape=note, fillcolor="#eeeeee"];
+  "explicit-recovery-examples" [shape=note, fillcolor="#eeeeee"];
   "Aji:distributive-law" -> "prop:exact-hierarchical-optimizer" [style=dotted];
   "Aji:distributive-law" -> "prop:prescribed-coset-composition" [style=dotted];
   "Alfarano:minimal-service" -> "cor:service-rate-transfer" [style=dotted];

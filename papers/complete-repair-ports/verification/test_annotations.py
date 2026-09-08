@@ -101,6 +101,11 @@ class AnnotationGate(unittest.TestCase):
         p.write_text(p.read_text() + "// stale\n")
         self.gate("stale dependency graph")
 
+    def test_corrupt_example_certificate(self):
+        path = self.root / "verification/explicit-examples.json"
+        path.write_text(path.read_text() + " ")
+        self.gate("evidence checksum mismatch")
+
     def test_nonempty_macro(self):
         self.edit("formal-annotations.tex", r"\newcommand{\coverage}[1]{}",
                   r"\newcommand{\coverage}[1]{#1}")

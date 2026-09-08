@@ -87,9 +87,12 @@ def load_registry(name: str, key: str) -> dict:
 def graph() -> str:
     colors = {"absent": "#ffffff", "fragment": "#fde8c8",
               "conditional_deduction": "#d6e8f7", "complete": "#cdeccd"}
-    nodes, edges = {}, set()
+    nodes, edges, external = {}, set(), set()
     for path in manuscript_paths():
         text = clean(path.read_text())
+        for macro in ("imports", "evidence"):
+            for payload in re.findall(r"\\" + macro + r"\{([^}]+)\}", text):
+                external.update(value.strip() for value in payload.split(","))
         bodies = [(m[2], False) for m in ENV.finditer(text)]
         bodies += [(m[1], True) for m in PROOF.finditer(text)]
         for body, proof in bodies:
@@ -104,7 +107,7 @@ def graph() -> str:
     lines = ['digraph manuscript {', '  rankdir=BT;', '  node [shape=box, style=filled];']
     for node, color in sorted(nodes.items()):
         lines.append(f'  "{node}" [fillcolor="{color}"];')
-    for dep in sorted({d for d, _, kind in edges if kind == "dotted"}):
+    for dep in sorted(external):
         lines.append(f'  "{dep}" [shape=note, fillcolor="#eeeeee"];')
     for dep, label, kind in sorted(edges):
         lines.append(f'  "{dep}" -> "{label}" [style={kind}];')
@@ -136,6 +139,18 @@ def check_provenance(data: dict, environments: dict[str, str]) -> None:
         checksum = (PAPER / entry.get("checksum_manifest", "")).resolve()
         if not checksum.is_relative_to(PAPER) or not checksum.is_file():
             raise SystemExit(f"evidence {name} has no safe checksum manifest")
+        if checksum.suffix == ".json":
+            files = json.loads(checksum.read_text())
+            if not files or not isinstance(files, dict):
+                raise SystemExit(f"evidence {name} has an empty checksum manifest")
+            for relative, identity in files.items():
+                file = (checksum.parent / relative).resolve()
+                if not file.is_relative_to(PAPER) or not file.is_file():
+                    raise SystemExit(f"evidence {name} has an unsafe or missing file")
+                contents = file.read_bytes()
+                if (identity.get("bytes") != len(contents) or
+                        identity.get("sha256") != hashlib.sha256(contents).hexdigest()):
+                    raise SystemExit(f"evidence checksum mismatch: {relative}")
     for path in manuscript_paths():
         text = clean(path.read_text())
         # Definitions of the empty macros are not uses of those macros.

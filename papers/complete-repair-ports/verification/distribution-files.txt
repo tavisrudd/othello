@@ -46,7 +46,11 @@ verification/dependency-graph.dot
 verification/dependency_graph.py
 verification/distribution-files.txt
 verification/evidence.json
+verification/explicit-examples.checksums.json
+verification/explicit-examples.json
+verification/explicit-examples.md
 verification/formal-boundary.json
 verification/imported-sources.json
+verification/replay_examples.py
 verification/test_annotations.py
 verification/verify_release.py

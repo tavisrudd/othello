@@ -28,6 +28,9 @@ resolve in `verification/imported-sources.json`, with bibliography keys,
 pinpoints, uses, and matched conventions; evidence identifiers resolve in
 `verification/evidence.json`, with roles, checksum manifests, and replay commands.
 Proof annotations must occur together at the end of the proof.
+The explicit-example bundle records concrete matrices and arithmetic replays;
+its prose-level evidence annotation creates no theorem dependency. Its JSON
+checksum manifest is checked for file containment, byte counts, and SHA-256.
 
 Each claim row records its objects, hypotheses, conclusion, and cautions.
 Its digest binds the reviewed row to the mathematical statement text while
@@ -49,6 +52,7 @@ used merely to silence a stale-digest failure. The deterministic dependency
 graph records authored conceptual dependencies as dashed edges, proof
 dependencies as solid edges, and imported inputs or evidence as dotted edges.
 It does not infer dependencies from ordinary citations or cross-references.
+An isolated evidence node records an illustration with no theorem dependency.
 The gate rejects a stale graph. Mutation tests exercise unknown identifiers,
 coverage and terminal mismatches, moved proof annotations, nonempty macro
 definitions, stale digests, missing conventions, and unreferenced sections:
@@ -56,6 +60,16 @@ definitions, stale digests, missing conventions, and unreferenced sections:
 ```text
 python3 verification/test_annotations.py
 ```
+
+The concrete reliability matrices and the complete hierarchy example also have
+an independent finite replay:
+
+```text
+python3 verification/replay_examples.py --check
+```
+
+See `verification/explicit-examples.md` for the finite domains, independent
+minor checks, direct availability enumeration, inputs, and trust boundary.
 
 The standalone Lean companion can be rebuilt from `lean/` using the pinned
 toolchain and Mathlib revision described in `lean/README.md`. Its axiom-audit
