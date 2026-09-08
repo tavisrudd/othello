@@ -1,7 +1,10 @@
 """Certified frame recognition for the field models provided by frame_model.
 
 The mathematical algorithm works over any supplied finite field. This reference
-implementation supports prime fields and the explicit extension fields below.
+implementation defaults to prime fields and explicit orders 8,9,16,25.
+The optional field object supplies q, sub(x,y), div(x,y), power(x,k), with
+field elements encoded by range(q) and zero/one encoded by 0/1. Its finite-field
+axioms are a supplied premise, as in the mathematical theorem.
 """
 from math import isqrt
 from frame_model import Field,adjacency,fixed_cliques
@@ -18,8 +21,9 @@ def closed_common(adj,seed):
 def is_clique(adj,mask):
     return all((adj[i]|(1<<i))&mask==mask for i in members(mask))
 
-def verify_transport(adj,q,coordinates):
-    f=Field(q)
+def verify_transport(adj,q,coordinates, *, field=None):
+    f=Field(q) if field is None else field
+    if f.q!=q:return False
     expected={(x,y) for x in range(2,q) for y in range(2,q) if x!=y}
     if len(coordinates)!=len(adj) or len(coordinates)!=len(expected) or set(coordinates)!=expected:return False
     if any(a<0 or a>>len(adj) for a in adj):return False
@@ -31,14 +35,15 @@ def verify_transport(adj,q,coordinates):
             if bool(adj[i]>>j&1)!=same or bool(adj[j]>>i&1)!=same:return False
     return True
 
-def recognize(adj):
+def recognize(adj, *, field=None):
     """Return (q, coordinate transport) or None. Does not consult source labels."""
     n=len(adj);root=isqrt(1+4*n)
     if root*root!=1+4*n or (5+root)%2:return None
     q=(5+root)//2
-    if q<13:return None
-    try:f=Field(q)
+    if q<9:return None
+    try:f=Field(q) if field is None else field
     except ValueError:return None
+    if f.q!=q:return None
     if any(a>>n or a>>i&1 or a.bit_count()!=4*(q-4) for i,a in enumerate(adj)):return None
     if any(bool(adj[i]>>j&1)!=bool(adj[j]>>i&1) for i in range(n) for j in range(i)):return None
     traces=set()
@@ -108,5 +113,5 @@ def recognize(adj):
             z=f.div(f.sub(x,1),f.sub(y,1));c=ids[3][v]
             if c in values and values[c]!=z:valid=False;break
             values[c]=z
-        if valid and len(set(values.values()))==m and verify_transport(adj,q,coordinates):return q,coordinates
+        if valid and len(set(values.values()))==m and verify_transport(adj,q,coordinates,field=f):return q,coordinates
     return None

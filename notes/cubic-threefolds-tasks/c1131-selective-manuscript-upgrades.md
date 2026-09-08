@@ -1,6 +1,6 @@
 # C1131: selective stabilization manuscript upgrades
 
-Lane: `cubic-threefolds`. Status: active, 2026-09-08.
+Lane: `cubic-threefolds`. Status: complete, 2026-09-08.
 
 The author accepted C1128’s final recommendation and instructed implementation.
 Apply comparison/rigidity repairs and the unified Fano application to Paper 1;
@@ -20,4 +20,7 @@ page counts, exposition effects, residual review limits and ej+tt/Mystery
 closeout. No new Lean theorem is claimed.
 
 Inputs: `notes/2026-09-08-c1128-final-dispositions.md` and its evidence map.
-Next: implement and validate the approved package, starting with Paper 1.
+Result: both papers updated; all four gates pass; local mirrors b3da4cc and
+d72ad45 are clean with matching PDFs. Report:
+`../2026-09-08-c1131-selective-manuscript-upgrades.md`.
+Next: C978/C956 focused review under their retained protocol obligations.

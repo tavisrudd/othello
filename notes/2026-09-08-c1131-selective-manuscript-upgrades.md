@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds. **Date:** 2026-09-08.
 **Authorization:** the author accepted C1128’s selective inclusion recommendation and said go.
-**Status:** both authoritative paper gates passed; local mirror synchronization pending.
+**Status:** complete. Both authority and local standalone gates pass; matching PDFs and clean forward commits verified.
 
 ## Result and placement
 
@@ -65,7 +65,7 @@ updated, and the independent checker passed. No acceptance gate was weakened.
 
 Initial checks exposed three TeX layout warnings and the dependent rank-four
 input pins. These were repaired before the passing gates. A final whitespace
-cleanup is followed by a fresh Paper 2 gate. Build logs are recorded in the
+cleanup was followed by a fresh passing Paper 2 gate. Build logs are recorded in the
 local run-quiet cache; the durable evidence is the committed sources, outputs,
 replay commands and hashes.
 
@@ -108,3 +108,39 @@ patches were atomic, and one JavaScript parsing error executed nothing. Two
 simultaneous run-quiet invocations initially shared a command-derived log name;
 subsequent gates used distinct full make -C paths. These were command-shaping
 errors, not mathematical evidence. The final accepted runs have separate logs.
+
+## Committed authority and export audit
+
+Paper 1 implementation: 736c88eba; standalone make-rule mapping: aff6a63b6.
+Paper 2 implementation: ad952b6f4. Both exporter plans/audits report zero
+private-reference findings. The exporter initially refused the stale Paper 1
+Makefile rewrite; its literal old/new mapping was updated to preserve the
+new residue-check target downstream. No exclusion or safety gate was added.
+
+Canonical PDF hashes:
+
+- Paper 1: c608cd95c9ceb7c43ed8867f2b1be6a60c607d191a26a8cc1951f861598ad093 (188893 bytes).
+- Paper 2: 647a2b816ee1fdc1af5dde587a538d2ab93dcd3ff9b5192e469997bbe22f2dda (175769 bytes).
+
+## Final local synchronization
+
+- Paper 1: b3da4cc; exporter content hash
+  0a8e7b6af3d159acb530169a142345d5d53e2fc687cd3988acc88fd8222e8ac2.
+- Paper 2: d72ad45; exporter content hash
+  5168925b2bb279df681371cdfa2a9bb79baddaf4c6ffb8810303f38e30d8d33b.
+
+Both standalone make check gates passed. The final exporter verification passed
+and each rebuilt standalone PDF is byte-identical to its authority PDF. Both
+standalone working trees are clean. The first Paper 1 verify ran before its new
+exported files had been staged and correctly reported those tracked paths as
+missing; staging the exporter-owned files resolved it, with no content change.
+No push or external message was sent.
+
+Accepted gate logs: authority Paper 1 20260908-135927; authority Paper 2
+20260908-140244; standalone Paper 1 20260908-140438; standalone Paper 2
+20260908-140516, all beneath /tmp/claude-run-quiet with distinct make-C names.
+
+Next highest-value review is C978’s focused independent examination of the
+regular-lattice comparison and resonant application, alongside the retained
+C956 descent review. Locate and finish the custom protocol before calling those
+review tasks complete. C958 remains the operational parametrization successor.

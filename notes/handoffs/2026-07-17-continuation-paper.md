@@ -15,8 +15,8 @@ reconstruction remains outside the headline under the existing N1-only ruling.
 
 ## Current status
 
-- The 12-page first draft is `papers/continuation-graph-rigidity/continuation_graph_rigidity.tex`
-  and its deterministic PDF. The stable q>=13 proof is written mathematics; the graph
+- The 15-page revised draft is `papers/continuation-graph-rigidity/continuation_graph_rigidity.tex`
+  and its deterministic PDF. The stable q>=9 proof is written mathematics; the graph
   determines q and every graph isomorphism extends uniquely semilinearly.
 - C1108 reconciled completed C295 with the paper and compared exact hypergraph/cross-ratio
   reconstruction hypotheses. This was not a comprehensive renewed priority audit. Report:
@@ -51,11 +51,11 @@ reconstruction remains outside the headline under the existing N1-only ruling.
 
 ## Next steps
 
-- **C1132** — address the new Astra/ChatGPT referee feedback, starting with
-  independent verification of the proposed five-clique bound and q>=9 cutoff;
-  then literature/proof corrections, explicit coding extension and verification
-  improvements. Claims remain unvalidated until this task runs. Specification:
-  `notes/2026-09-08-c1132-continuation-referee-revisions.md`.
+- **C1132** — referee revisions and authority checks complete: five-clique
+  bound, optimal q>=9 uniform cutoff, explicit Hamming extension, corrected
+  literature/proofs and extension-field recognition tests. Standalone export
+  and replay remain before closure. Response and validation:
+  `notes/2026-09-08-c1132-continuation-referee-response.md`.
 
 - **C1110** — complete publication-readiness review. The same-reader final pass
   finds the local exposition concerns resolved; preserve the current structure.

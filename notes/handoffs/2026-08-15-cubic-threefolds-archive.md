@@ -52,3 +52,10 @@ post-strict table at length three therefore does not prove the still-open
 threefold case.  At lengths two, three, four, five, and fourteen the full
 pre-strict tables and the smaller post-strict tables are kernel-reduced in
 `Comparison.ThreefoldKummerCompatibility`.
+
+## 2026-09-08 — C1131 selective integration complete
+
+The author-approved C1128 recommendations are integrated and locally synchronized.
+All four gates pass; PDFs agree; C978/C956 remain open. Detailed placement,
+evidence, review limits and ej+tt closeout:
+`../2026-09-08-c1131-selective-manuscript-upgrades.md`.

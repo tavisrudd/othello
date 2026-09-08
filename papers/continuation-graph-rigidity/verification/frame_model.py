@@ -4,11 +4,14 @@ from itertools import combinations
 class Field:
     def __init__(self,q):
         self.q=q
-        if q not in (8,9) and (q<2 or any(q%d==0 for d in range(2,int(q**0.5)+1))):
-            raise ValueError('reference field model supports primes and orders 8,9')
-        self.p=2 if q==8 else 3 if q==9 else q
-        self.e=3 if q==8 else 2 if q==9 else 1
-        self.mod=(1,1,0,1) if q==8 else (1,0,1) if q==9 else (0,1)
+        extensions={8:(2,3,(1,1,0,1)),9:(3,2,(1,0,1)),
+                    16:(2,4,(1,1,0,0,1)),25:(5,2,(2,0,1))}
+        if q in extensions:
+            self.p,self.e,self.mod=extensions[q]
+        elif q>=2 and all(q%d for d in range(2,int(q**0.5)+1)):
+            self.p,self.e,self.mod=q,1,(0,1)
+        else:
+            raise ValueError('reference field model supports primes and orders 8,9,16,25')
     def digits(self,x):
         return [(x//self.p**i)%self.p for i in range(self.e)]
     def encode(self,v):return sum((x%self.p)*self.p**i for i,x in enumerate(v))
@@ -32,8 +35,9 @@ class Field:
         if not y:raise ZeroDivisionError
         return self.mul(x,self.power(y,self.q-2))
 
-def model(q):
-    f=Field(q)
+def model(q, *, field=None):
+    f=Field(q) if field is None else field
+    if f.q!=q:raise ValueError("supplied field order mismatch")
     points=[(x,y) for x in range(2,q) for y in range(2,q) if x!=y]
     words=[(x,y,f.div(x,y),f.div(f.sub(x,1),f.sub(y,1))) for x,y in points]
     edges=[(i,j) for i,j in combinations(range(len(points)),2) if any(a==b for a,b in zip(words[i],words[j]))]

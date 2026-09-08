@@ -42,9 +42,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   supports the comparison/rigidity repairs, unified Fano application, torus
   explanations and selective structural corollaries. The family mathematics
   passes under both manuscripts; intrinsic recovery and locus novelty remain
-  separate follow-on gates. The author approved selective inclusion; **C1131**
-  implements and validates it (card `../cubic-threefolds-tasks/c1131-selective-manuscript-upgrades.md`);
-  C978/C956 stay open and C958 retains complete ground-field maps. Final
+  separate follow-on gates. **C1131 is complete:** selective manuscript
+  upgrades are implemented; both authority and standalone gates pass with
+  matching PDFs (20 and 19 pages), local commits b3da4cc/d72ad45. Report:
+  `../2026-09-08-c1131-selective-manuscript-upgrades.md`.
+  Next prioritize C978’s regular-lattice/resonant-case review and C956’s descent
+  review, completing their custom protocol once located. C978/C956 stay open;
+  C958 retains complete ground-field maps. Final
   dispositions: `../2026-09-08-c1128-final-dispositions.md`; placement:
   `../2026-09-08-c1128-publication-scope.md`; evidence/report map in
   `../cubic-threefolds-tasks/c1128-astra-feedback-and-extensions.md`.

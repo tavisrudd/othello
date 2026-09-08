@@ -1,14 +1,23 @@
 digraph claims {
+  "cor:code-extension" [color="gray"];
+  "thm:main" -> "cor:code-extension" [style=dashed];
+  "prop:normal" -> "cor:code-extension" [style=dashed];
+  "cor:frame-traces" -> "cor:code-extension" [style=dashed];
+  "thm:centres" -> "cor:code-extension" [style=dashed];
+  "cor:frame-traces" [color="gray"];
+  "lem:frame-clique" -> "cor:frame-traces" [style=dashed];
+  "prop:normal" -> "cor:frame-traces" [style=dashed];
   "cor:reconstruction" [color="gray"];
   "thm:main" -> "cor:reconstruction" [style=dashed];
   "prop:normal" -> "cor:reconstruction" [style=dashed];
   "lem:clique" [color="gray"];
+  "lem:frame-clique" [color="gray"];
   "lem:frobenius" [color="gray"];
   "lem:isotopy" -> "lem:frobenius" [style=dashed];
   "lem:isotopy" [color="gray"];
   "lem:seeds" [color="gray"];
   "prop:normal" -> "lem:seeds" [style=dashed];
-  "lem:clique" -> "lem:seeds" [style=dashed];
+  "lem:frame-clique" -> "lem:seeds" [style=dashed];
   "prob:boundary-proof" [color="gray"];
   "prop:boundary" -> "prob:boundary-proof" [style=dashed];
   "prob:extremal" [color="gray"];
@@ -31,9 +40,10 @@ digraph claims {
   "prop:boundary" -> "rem:small-order" [style=dashed];
   "lem:isotopy" -> "rem:small-order" [style=dashed];
   "thm:centres" [color="gray"];
+  "cor:frame-traces" -> "thm:centres" [style=dashed];
   "thm:traces" -> "thm:centres" [style=dashed];
   "thm:main" [color="gray"];
-  "thm:traces" -> "thm:main" [style=dashed];
+  "cor:frame-traces" -> "thm:main" [style=dashed];
   "thm:centres" -> "thm:main" [style=dashed];
   "prop:normal" -> "thm:main" [style=dashed];
   "lem:frobenius" -> "thm:main" [style=dashed];

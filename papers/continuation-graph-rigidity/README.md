@@ -14,14 +14,14 @@ join two of them when they cannot both be added. Now erase the plane, the
 chosen points, and all labels. Can the remaining graph recover the geometry?
 
 The paper answers this question for four-point projective frames over finite
-fields of order at least 13. The graph determines the field order and the
+fields of order at least 9. The graph determines the field order and the
 plane with its frame, up to semilinear equivalence. Every graph isomorphism
 extends uniquely to an equivalence of the underlying planes carrying one
 frame to the other.
 
 ## Main result
 
-Let `K` be a projective frame in `PG(2,q)`, where `q = p^e ≥ 13`. Its
+Let `K` be a projective frame in `PG(2,q)`, where `q = p^e ≥ 9`. Its
 **continuation graph** `G_K` has one vertex for each point that can be added
 to `K` while preserving the no-three-collinear condition. Two vertices are
 adjacent when they cannot both be added.
@@ -34,12 +34,12 @@ Aut(G_K) = Stab_{PΓL(3,q)}(K),        |Aut(G_K)| = 24e.
 
 Here `PΓL(3,q)` consists of projective linear transformations together with
 field automorphisms; the stabilizer may permute the four frame points.
-The factor 24 comes from those permutations, and the factor `e` from the
-field automorphisms.
+The abstract group is `S_4 × C_e`: normalized frame permutations commute
+with Frobenius. The action on legal vertices is faithful.
 
 The extension statement controls each individual graph isomorphism. It also
 leads to a polynomial-time recognition algorithm: given an arbitrary graph
-and a finite field of order at least 13, the algorithm either rejects or
+and a finite field of order at least 9, the algorithm either rejects or
 returns coordinates that certify a frame-graph representation.
 
 ## How the graph recovers the geometry
@@ -48,8 +48,8 @@ A tangent is a line meeting the frame in exactly one point. Its legal
 continuation points form a clique, called its **tangent trace**. The proof
 recovers the information lost when those cliques became unlabelled edges:
 
-1. **Recover the traces.** Tangent traces have `q−3` vertices. For `q ≥ 13`,
-   a clique spread across several tangents is smaller, so the graph identifies
+1. **Recover the traces.** Tangent traces have `q−3` vertices. For `q ≥ 9`,
+   a clique spread across several tangents has at most five vertices, so the graph identifies
    the traces by their size.
 2. **Recover the four classes.** Traces through the same frame point partition
    the vertices. A second clique argument, now using disjointness of traces,
@@ -69,11 +69,13 @@ For example, over `F_13`, the points `(2,3)` and `(2,4)` give the words
 `(2,3,5,7)` and `(2,4,7,9)`. Their first coordinates agree, so they are
 adjacent. The reconstruction recovers the coordinate positions from adjacency
 alone. This also describes the graph as a length-four nonlinear code: distinct
-words have Hamming distance three when adjacent and four otherwise.
+words have Hamming distance three when adjacent and four otherwise. Every
+code isometry extends uniquely to a Hamming-space isometry. The natural
+`q−2` symbol alphabet gives `(q−2)(q−3)` words, so this code is not MDS.
 
 ## Small fields
 
-An exact finite census settles the remaining orders studied in the paper:
+An exact finite census settles orders 5, 7 and 8 and cross-checks 9 and 11:
 
 | Field order | Resolutions into four parallel classes | Graph symmetries |
 |---|---:|---|
@@ -88,11 +90,12 @@ where the graph fails to distinguish the original geometric resolution.
 
 ## Proof and evidence boundary
 
-The uniform theorem for `q ≥ 13` and the recognition algorithm are proved in
+The uniform theorem for `q ≥ 9` and the recognition algorithm are proved in
 the manuscript independently of the finite census. No theorem is claimed to
 be Lean-formalized.
 
-The small-order results are exact computations. Sage constructs the graphs
+Only the positive q=7 boundary case depends on computation; q=9 and 11
+also follow from the uniform proof. The census itself is an exact computation. Sage constructs the graphs
 from incidence; a separate Python implementation constructs them from
 coordinate equality and uses nauty to check full automorphism-group orders.
 Both enumerate the resolutions to exhaustion. The two routes share the
@@ -108,11 +111,12 @@ requires comparing every pair of vertices, independently of the search that
 found it. The paper gives an `O(n^6)` recognition bound and an `O(n²)`
 certificate check for a graph with `n` vertices over a supplied field.
 
-The reference recognizer is tested on relabelled graphs at orders 13, 17 and
-19, together with corrupted coordinates and edges. Its implemented field
-models do not cover all extension fields allowed by the theorem. The recorded
-prototype is slower than the generic graph-isomorphism control at these three
-orders; it demonstrates reconstruction rather than a performance advantage.
+The reference recognizer is tested at orders 9, 11, 13, 16, 17, 19 and 25,
+including nontrivial Frobenius transports, corrupted coordinates and edges,
+and an alternate supplied F16 model. Call `recognize(adj, field=f)` and
+`verify_transport(adj, q, coordinates, field=f)` with the same field object;
+the verification guide specifies its interface. The previously recorded
+prototype timings at orders 13, 17 and 19 are slower than the generic control; it demonstrates reconstruction rather than a performance advantage.
 
 ## Verification
 

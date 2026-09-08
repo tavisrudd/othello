@@ -2,13 +2,13 @@
   "claims": [
     {
       "cautions": "Written argument or scope remark; no Lean formalization claimed.",
-      "conclusion": "Automorphisms equal the ambient semilinear stabilizer, order 24e",
+      "conclusion": "Faithful ambient semilinear stabilizer action; abstract group S4 x C_e and order 24e",
       "coverage": "absent",
       "declarations": [],
-      "hypotheses": "Projective frame, q=p^e>=13",
+      "hypotheses": "Projective frame, q=p^e>=9",
       "label": "thm:main",
       "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
-      "statement_sha256": "e968b59051bf8244e752741433ec5f502fa711c9e501522b9bbb4486b488e924",
+      "statement_sha256": "5053d51c0f877e3866608cd5fcfd2bc9718815f3f83b9eb4b054b6ecac785143",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     {
@@ -16,10 +16,10 @@
       "conclusion": "Each graph isomorphism extends uniquely; field order and geometry are recovered",
       "coverage": "absent",
       "declarations": [],
-      "hypotheses": "Two Desarguesian frames with q,qprime>=13",
+      "hypotheses": "Two Desarguesian frames with q,qprime>=9",
       "label": "cor:reconstruction",
       "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
-      "statement_sha256": "25711f6e1712f89766474d22b9a791d901cdf0a92f3cc03528f69295e62f8da7",
+      "statement_sha256": "1bf8a676db948aa19b2ac9c42b43807d2fc0e5a112e1208f095116cc5bbfc6e8",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     {
@@ -60,10 +60,10 @@
       "conclusion": "Large disjointness cliques recover centre classes",
       "coverage": "absent",
       "declarations": [],
-      "hypotheses": "Trace recovery and q+2-k>k binomial(k-2,2)",
+      "hypotheses": "Nonempty recovered tangent traces and q+2-k>k binomial(k-2,2)",
       "label": "thm:centres",
       "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
-      "statement_sha256": "e59e08d062773e5154801d890061897cf53be5377c1ffb02877aa87be5cf4bef",
+      "statement_sha256": "cb3fe7453eec31c2d433381f37a3c6c70fdb0d1b907f83e7e97b5bf241635df8",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     {
@@ -134,13 +134,13 @@
     },
     {
       "cautions": "Written argument or scope remark; no Lean formalization claimed.",
-      "conclusion": "The stable bound is a pencil-recovery threshold",
+      "conclusion": "Uniform recovery for q>=9; exact computation settles q=7,8 and the q=5 exception is octahedral",
       "coverage": "absent",
       "declarations": [],
-      "hypotheses": "Isotopy range q>=5, uniform intrinsic recovery range q>=13",
+      "hypotheses": "Isotopy range q>=5, uniform intrinsic recovery range q>=9",
       "label": "rem:small-order",
       "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
-      "statement_sha256": "7c1b5307dc9cd79ea4117f6a46ec1e590c684f533d5d0f4145e10699f83bff0e",
+      "statement_sha256": "60766d062c9b9f13acd4ac1c9d52289265f3b315e1ed871f25f28b83edcb4e47",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     {
@@ -148,10 +148,10 @@
       "conclusion": "Four vertices determine a tangent trace by common neighbourhood",
       "coverage": "absent",
       "declarations": [],
-      "hypotheses": "Four-point frame; final recovery statement q>=13",
+      "hypotheses": "Four-point frame; final recovery statement q>=9",
       "label": "lem:seeds",
       "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
-      "statement_sha256": "37d3e865478775a8a3ad77b29da3fbcb62865066cc8a56793679414a3c4e6a8d",
+      "statement_sha256": "de2d8fa85ffa42eedd9044b4dee2e04700c82ae7a858a84f8cf4d25e29145b83",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     {
@@ -159,10 +159,10 @@
       "conclusion": "Polynomial recognition with a quadratic-time coordinate-certificate check",
       "coverage": "absent",
       "declarations": [],
-      "hypotheses": "Arbitrary graph and supplied finite field, q>=13",
+      "hypotheses": "Arbitrary graph and supplied finite field, q>=9",
       "label": "thm:recognition",
       "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
-      "statement_sha256": "806008752691a4798d67fda316b43ead495c3c5920f8b5215c22c8ec7fd32526",
+      "statement_sha256": "7a5c80ebb1d1d9e6af81bfe45fa594cca9b43af94b5b64c57c5113acbc395887",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     },
     {
@@ -218,6 +218,39 @@
       "label": "prob:larger-arcs",
       "objects": "Continuation graphs and the projective or algebraic structures specified in the statement.",
       "statement_sha256": "72e140da8572ad6e7f6284ba73986d9bd4cff7eba584d4503d034e782eace85c",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written mathematical proof; no Lean formalization claimed.",
+      "conclusion": "At most five vertices; attained over F7",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "Projective frame; clique not contained in a tangent trace",
+      "label": "lem:frame-clique",
+      "objects": "Cliques in Desarguesian frame continuation graphs",
+      "statement_sha256": "0b96efbb158caf3aa654038529f4cc646ff3ffece122f2583915f0c3760be3b0",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written mathematical proof; no Lean formalization claimed.",
+      "conclusion": "Traces are exactly maximal cliques with more than five vertices",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "Projective frame in PG(2,q), q>=9",
+      "label": "cor:frame-traces",
+      "objects": "Tangent traces and maximal cliques of frame graphs",
+      "statement_sha256": "e9bb1bd0e515566f204c6560ba0ac5475719ef2c808f424616c68f26000aa2eb",
+      "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "cautions": "Written mathematical proof; no Lean formalization claimed.",
+      "conclusion": "Size Q(Q-1), minimum distance three; restriction from ambient stabilizer is an isomorphism to code isometries, group S4 x C_e",
+      "coverage": "absent",
+      "declarations": [],
+      "hypotheses": "q=p^e>=9, D=Fq minus {0,1}, Q=q-2",
+      "label": "cor:code-extension",
+      "objects": "The four-coordinate code in D^4 and its Hamming isometries",
+      "statement_sha256": "bfcb97d0380d2253b091d170075cd47f738073081fcde4bcf27ac00d01d902a3",
       "terminal_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     }
   ],

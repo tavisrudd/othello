@@ -1,6 +1,6 @@
 # Verification scope
 
-The stable-range proofs are written mathematics. All 20 statement records are
+The stable-range proofs are written mathematics. All 23 statement records are
 marked `absent` for Lean coverage, including scope remarks and open problems.
 The annotations and claim hashes check source consistency; they do not prove
 mathematics. Dependency edges record the indicated statement-level dependencies,
@@ -46,20 +46,35 @@ for subsequent replays. `SHA256SUMS` records load-bearing source and output hash
 
 ## Recognition and controls
 
-`recognize.py` receives only adjacency, recovers the four partitions, completes a cyclic
-quotient table, and tries generator images in a supplied field. Its finite-field
-reference implementation supports prime fields and explicit orders 8,9;
-recognition itself requires q>=13. Unsupported extension-field models return no
-result, rather than claiming a negative recognition verdict for those fields.
-The mathematical algorithm is not restricted to the implemented field models.
+`recognize.py` receives adjacency and an optional `field` object, recovers
+four partitions, completes a cyclic quotient table, and tries generator images.
+Recognition requires q>=9. `recognize(adj, field=f)` and
+`verify_transport(adj, q, coordinates, field=f)` use the supplied model throughout.
+The field object provides `q`, `sub(x,y)`, `div(x,y)`, and `power(x,k)`;
+elements are the integers `range(q)`, with 0 and 1 representing zero and one.
+The finite-field axioms are a premise of this interface, not a recognition
+output. Default models support primes and explicit orders 8,9,16,25.
+Unsupported default models return no result; that is not a mathematical
+negative verdict for an unsupported field.
 
-Deterministic tests use q=13,17,19 and seeds 20260907+q. They check arbitrary
-relabelled inputs, a duplicated coordinate, a deleted edge, and a degree-preserving
-edge switch. Coordinate validation checks every vertex and every adjacency pair.
+Additional encodings are F16=F2[a]/(a^4+a+1) and F25=F5[a]/(a^2+2).
+Deterministic tests use q=9,11,13,16,17,19,25 and seeds 20260907+q. They
+check arbitrary relabellings, duplicate coordinates, a deleted edge and a
+degree-preserving switch. Extension-field tests check a nonidentity Frobenius
+vertex permutation on every edge and Frobenius-transformed certificates.
+A supplied alternate F16=F2[a]/(a^4+a^3+1) checks that helpers retain the
+supplied arithmetic; its coordinates deliberately fail with the default model.
+Field-order mismatches are rejected. `recognition.json` stores the deterministic
+coordinate certificates; normal tests reproduce them byte-for-byte. Regenerate
+intentionally with `check_recognition.py --update-certificate`.
+`check_geometric_witnesses.py` checks the displayed five-clique and exceptional witnesses;
+its `--sage` mode independently compares all arithmetic pairs in the new field
+models with Sage. Coordinate verification is independent of reconstruction
+search but shares the supplied arithmetic, whose field axioms remain trusted.
 
 `benchmark.json` records one wall-time sample comparing reconstruction and Sage
 isomorphism with an explicit isomorphism, excluding graph construction. Reproduce
-with `make benchmark`; times will vary and are not byte-replayed. The recorded
+with `make benchmark`; times will vary and are not byte-replayed. The pre-revision recorded
 reconstruction implementation is slower than the generic control at these three
 orders. This prototype demonstrates correctness and exposes structure; it does not
 establish a performance advantage. Regenerating timings requires refreshing their
@@ -78,5 +93,7 @@ references and overfull boxes are rejected.
 `check_formal_artifact.py` checks statement hashes, absent coverage, source/evidence
 links, the boundary table, the dependency graph and artifact hashes. After reviewing
 an altered statement, update its record with `refresh_claim_digests.py LABEL`;
-`--all` is for an explicitly reviewed baseline. All cited external reconstruction
+`--all` is for an explicitly reviewed baseline. The uniform q>=9 proof uses no census; q=9,11 are now cross-checks,
+and the positive boundary at q=7 still uses enumeration.
+All cited external reconstruction
 results are comparisons, not imported premises of the proofs.
