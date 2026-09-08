@@ -24,8 +24,8 @@ The remaining paper route is C325 then C953, with C955 after. No push or deposit
 - **Canonical identity**: `complete-ports` — *Exact Compositional Transfer of Bounded Linear
   Recovery*. Approved license MIT.
 - **Standalone paper repository**: `tavisrudd/compositional-recovery` at
-  `~/src/math-papers/compositional-recovery`, local commit `2ec7734` (43-page
-  operational revision, verified, unpushed). The obsolete bundled engine and its
+  `~/src/math-papers/compositional-recovery`, local commit `2d5b252` (43-page
+  referee repair and mathematical software exposition, verified, unpushed). The obsolete bundled engine and its
   checker have been removed in separate forward commits.
 - **Ergodis engine**: the engine, its benchmark programme, and the C985 optimization sequel live in
   the [`ergodis`](2026-09-05-ergodis-lane.md) lane.
@@ -107,7 +107,7 @@ Pareto, fixed-batch packing, and multi-target state algebras.
 
 Every paper is a fresh-history allowlisted export. Never publish, fork, history-filter, or broadly
 copy the private monorepo. This paper's formal companion is the paper-owned Lean 4 project, built
-against a pinned Mathlib revision and listed in its exact 37-file distribution manifest; monorepo
+against a pinned Mathlib revision and listed in its exact 43-file distribution manifest; monorepo
 trust files and local `lean/AGENTS.md` norms are excluded. The shared Lean monorepo remains
 separately owned. Never copy raw build trees or selected `.olean` files.
 

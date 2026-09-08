@@ -1077,3 +1077,14 @@ task identifier in its name. Its task report is
 
 Local standalone synchronization was recorded complete at `6bfc17d` before the 40-page revision
 exported as `80c600f`.
+
+
+## 2026-09-07 — Astra referee repairs and mathematical Ergodis exposition
+
+Closed the local mathematical, interface, evidence-description, and exposition
+repairs in `notes/2026-09-07-complete-ports-referee-repair.md`. The journal-style
+report and source follow-up are retained privately. The exact main formula and
+minimal-support consequence appear on page 2; Ergodis is explained through the
+repair and optimization questions enabled by the retained mathematics.
+Authority `2f4f82de5`, mirror `2d5b252`; both 43-page deterministic gates pass.
+No new Lean or benchmark execution, push, or deposit. C325/C953 remain open.

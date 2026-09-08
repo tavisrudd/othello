@@ -141,3 +141,10 @@ The next acceptance boundary remains the lane's existing C325/C953 route.
 
 Final authority gate: PASS (deterministic update plus fresh comparison).
 Final PDF SHA-256: `ab3b881acc1fce532f9414d1c6e1ff84fb3f02f5eb06adee9e78a449513d3df9`.
+
+Mirror synchronization: authority `2f4f82de5` exported through the guarded tool
+and adopted by ordinary forward commit `2d5b252` in compositional-recovery.
+All 43 distributed files agree byte-for-byte. Mirror `make check` and exporter
+verification pass; exported content SHA-256 is
+`e7ac0fd66044f95c0c8f85fa56a99c1266dcc8c9f2774b6940d90b533564bff2`.
+No push or deposit was performed.
