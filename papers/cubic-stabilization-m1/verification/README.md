@@ -144,7 +144,7 @@ across their union.  This keeps the manuscript split visible without weakening
 the exact terminal census.
 
 Checked coverage snapshot: 62 claims; 9 absent; 25 fragmentary; 27 conditional;
-1 complete; 318 reviewer terminals, of which 83 are machinery serving no current
+1 complete; 319 reviewer terminals, of which 83 are machinery serving no current
 manuscript claim.
 
 The Lean modules and axiom audit can be built with the pinned package command

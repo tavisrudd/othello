@@ -41,10 +41,12 @@ The Lean names use `marker` for the numerical exponent count denoted
 coefficient names `J₀`, `D₀`, and `E₀` correspond respectively to the
 manuscript's `N`, `A₀`, and `A₁`. The formal theorem identifiers are unchanged.
 
-The primary manuscript's strengthened threefold corollary asserts
-irrationality after multiplication by a projective line. Its listed
-threefold endpoint terminal proves only the unstabilized conclusion; the
-claim map records that distinction as fragment coverage. The additive
+The primary manuscript's threefold corollary has a terminal deriving both
+irrationality after multiplication by a projective line and irrationality
+of the threefold itself. The product formula supplies the doubled positive
+count and dimension four. Varieties, quantum comparisons, weak factorization,
+center vanishing and rationality comparisons remain explicit data, so the
+claim retains fragment coverage. The additive
 Grothendieck-group and residue-spectrum extensions have absent coverage.
 The rank-two commutant and nilpotence-persistence algebra in
 `TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/RankTwoClusterGermRigidity.lean` is exposed through the
@@ -89,7 +91,7 @@ whole odd cohomology in that packet, and the constancy of rank on a connected
 component.
 
 Checked coverage snapshot: 62 claims; 9 absent; 25 fragmentary; 27 conditional;
-1 complete; 318 reviewer terminals, of which 83 are machinery serving no current
+1 complete; 319 reviewer terminals, of which 83 are machinery serving no current
 manuscript claim.
 
 Those machinery terminals are kernel-checked and reusable, and the claim map records for each one

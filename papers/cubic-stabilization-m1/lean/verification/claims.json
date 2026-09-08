@@ -36,14 +36,15 @@
       "manuscript_label": "cor:threefold-marker",
       "coverage": "fragment",
       "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.threefold_not_rational_of_occurrenceIndexedMarker"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.threefold_not_rational_of_occurrenceIndexedMarker",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.threefold_projectiveLine_irrationality_of_positive_count"
       ],
-      "objects": "An additive marker on block multisets for smooth projective threefolds, a projective-three-space endpoint, a selected threefold, and a rationality predicate.",
-      "hypotheses": "Assumed weak-factorization data and marker formulas in dimension three supply the blowup and blowdown formulas; every point or curve center summand has zero marker; both endpoints are smooth of dimension three; projective three-space has marker zero; the selected threefold has nonzero marker; and rationality supplies the birational comparison with projective three-space.",
-      "conclusion": "The selected threefold is not rational.",
-      "cautions": "Fragment. Lean proves the endpoint contradiction while retaining each center summand separately, but does not construct the generic even QDM, identify a counted block with a nonzero additive marker, supply weak factorization or vanishing on centers, calculate projective space, or construct the rationality comparison. The manuscript now proves the stronger irrationality of Y times P1 via the dimension-four ledger and the projective-bundle formula. This terminal proves only the unstabilized conclusion; the strengthened statement retains fragment coverage.",
+      "objects": "An occurrence-indexed effective block ledger with a natural-number fold, a selected threefold and its projective-line product, a projective-four-space endpoint, a birational equivalence relation and a rationality predicate. The older terminal also covers an unstabilized dimension-three endpoint.",
+      "hypotheses": "For the stabilized terminal: explicit dimension-four weak-factorization data and low-dimensional occurrence nullity; dimension three for the base; the rank-two projective-bundle formula supplies smoothness, product dimension and count doubling; projective four-space is smooth of dimension four with count zero; the threefold count is positive; rationality supplies the product birational comparison and persists under the projective-line product. The older terminal has its dimension-three factorization and endpoint hypotheses.",
+      "conclusion": "The projective-line product is not rational, and the threefold itself is not rational. The stabilized positive count and dimension-four contradiction are derived from the supplied product and factorization data.",
+      "cautions": "Fragment. Lean now proves the strengthened projective-line conclusion and its unstabilized consequence while retaining every center occurrence. It does not construct varieties or the generic even QDM, identify a counted block with a positive count, supply the geometric comparison formulas, weak factorization or low-dimensional center vanishing, calculate the projective-space count, or construct the rationality comparisons. These remain explicit typed premises; matching the stronger conclusion does not make the geometric statement completely formalized.",
       "statement_digest": "28ac5e653d2e922798d9498f70494624ca723f63988c5e2278f39b49a1717202",
-      "terminal_digest": "fd742b8caba6eed5b20aef7a07c8938baaf30d65f49d16b708ffa6b525fb0ec7"
+      "terminal_digest": "76d80e267e0efeb14093e25fe59df9049ce7544912fb3d04625b0f3364ee70e8"
     },
     {
       "manuscript_label": "thm:every-cubic-conditional",

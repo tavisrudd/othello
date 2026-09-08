@@ -99,6 +99,49 @@ theorem threefold_not_rational_of_occurrenceIndexedMarker
     threefoldSmooth projectiveSmooth threefoldDimension projectiveDimension
     (rationalComparison rational)
   exact threefoldMarker (markerEquality.trans projectiveMarker)
+/-- A positive natural-number exponent count obstructs rationality of a
+threefold after multiplication by a projective line, and therefore of the
+threefold itself. The rank-two projective-bundle formula doubles the count
+and supplies smoothness and dimension four for the product. A supplied weak
+factorization and vanishing of its low-dimensional center contributions
+preserve that count, whereas projective four-space has count zero.
+The varieties, quantum comparison, factorization, center vanishing and
+rationality comparisons are explicit data; no geometric object is constructed. -/
+theorem threefold_projectiveLine_irrationality_of_positive_count
+    {Variety Center Occurrence : Type*}
+    {presentation : Quantum.BlockPresentation}
+    (data : Quantum.OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    (fold : presentation.EffectiveLedger →+ ℕ)
+    (birational : Setoid Variety)
+    (provider : Quantum.BirationalFactorizationProvider data fold 4 birational)
+    (nullity : Quantum.LowDimensionalOccurrenceNullity data fold 4)
+    (Rational : Variety → Prop) (productWithProjectiveLine : Variety → Variety)
+    (projectiveFourSpace threefold : Variety)
+    (threefoldDimension : data.dimension threefold = 3)
+    (projectiveLineFormula : Quantum.ProjectiveBundleMarkerFormula data fold
+      threefold (productWithProjectiveLine threefold) 2)
+    (projectiveSmooth : data.smoothProjective projectiveFourSpace)
+    (projectiveDimension : data.dimension projectiveFourSpace = 4)
+    (projectiveCount : data.varietyMarker fold projectiveFourSpace = 0)
+    (positiveCount : 0 < data.varietyMarker fold threefold)
+    (rationalComparison : Rational (productWithProjectiveLine threefold) →
+      birational.r (productWithProjectiveLine threefold) projectiveFourSpace)
+    (rationalityPersists : Rational threefold →
+      Rational (productWithProjectiveLine threefold)) :
+    ¬ Rational (productWithProjectiveLine threefold) ∧ ¬ Rational threefold := by
+  have productDimension : data.dimension (productWithProjectiveLine threefold) = 4 := by
+    rw [projectiveLineFormula.dimensionFormula, threefoldDimension]
+  have productPositive : 0 < data.varietyMarker fold (productWithProjectiveLine threefold) := by
+    rw [projectiveLineFormula.markerFormula]
+    simpa only [smul_eq_mul] using Nat.mul_pos (by decide : 0 < 2) positiveCount
+  have productIrrational : ¬ Rational (productWithProjectiveLine threefold) := by
+    intro rational
+    have equality := provider.marker_eq_of_related data fold 4 birational nullity
+      projectiveLineFormula.totalSmooth projectiveSmooth productDimension projectiveDimension
+      (rationalComparison rational)
+    have productZero := equality.trans projectiveCount
+    exact (Nat.ne_of_gt productPositive) productZero
+  exact ⟨productIrrational, fun rational => productIrrational (rationalityPersists rational)⟩
 /-- Reviewer-facing direct-QDM one-step conclusion with the exact stabilized
 marker value and irrationality exposed together. -/
 theorem cubicThreefold_oneProjectiveLine_conclusion_of_residueMarker
