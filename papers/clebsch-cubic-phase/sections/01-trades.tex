@@ -86,10 +86,15 @@ This condition also kills the lower terms because $s\in L$, proving sufficiency.
 \proves{thm:trade-code}
 \end{proof}
 
+For qubits, Bravyi--Haah triorthogonality~\cite[Definition 1]{bravyihaah}
+requires even overlaps of all row pairs and row triples of a generator matrix,
+so each logical qubit receives an independent $T$ gate.
 Watson--Campbell--Anwar--Browne~\cite[Definition 2 and Lemmas 6--8]{watson}
-impose signed orthogonality conditions that also restrict logical triple products.
+carry this to prime qudits with signed orthogonality conditions that also
+restrict logical triple products.
 The proof above retains precisely the condition needed for a possibly coupled
-logical cubic. Related divisible-code and prime-qudit constructions
+logical cubic: mixed triple products $T_w(u,u',u'')$ over the logical space are
+allowed, and the coupled phase $F$ is the contribution. Related divisible-code and prime-qudit constructions
 appear in~\cite{haah,cab,krishna}. The Schur-square conductor also governs the
 MDS--CSS transversal-group classification~\cite{mds}; here the full product
 $S\circ L\circ L$ matters, and the X-space is only $\langle\one\rangle$.
@@ -189,7 +194,9 @@ $f(S,T)=\sum_{i=0}^8\binom8i z_iS^{8-i}T^i$,
 $I_2=(f,f)_8$ and $I_3=((f,f)_4,f)_8$ use normalized transvectants.
 \end{proposition}
 \begin{proof}[Finite verification]
-Appendix~\ref{sec:finite-data} specifies the matrices and substitutions.
+Appendix~\ref{sec:finite-data} fixes the coordinate conventions and
+substitutions; the signed evaluation matrices themselves are in the
+supplement's reconstruction module.
 Exact finite-field expansion checks the moments,
 ranks and both polynomial identities. The signed-trade theorem then supplies
 the code and gate. These are finite polynomial and linear-algebra checks;

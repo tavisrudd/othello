@@ -17,6 +17,8 @@ Every raw input is
 Inputs are independent; stabilizer preparation, Clifford operations,
 measurements, feed-forward and storage are ideal. Uniformity of the six
 nonzero labels is an assumption, not a consequence of diagonal twirling.
+Every cost below counts raw magic inputs only; the ideal operations are not
+priced, so the comparison is not a total implementation-overhead statement.
 
 The native factory prepares $|+_L\rangle=7^{-7/2}\sum_{z\in L}|z\rangle$,
 injects the fourteen signed cubic gates, measures the code stabilizers,
@@ -78,7 +80,9 @@ qudits Clifford-equivalent to $|F_7\rangle$.
 \end{lemma}
 \begin{proof}
 In a shortest decomposition $F=\sum_{i=1}^r c_i\ell_i^3$, the coefficient
-vectors span the logical space and are projectively distinct.
+vectors are projectively distinct, and they span the logical space: a nonzero
+common zero $v$ of all $\ell_i$ would have Hessian rank zero, but the census
+has $N_0=1$.
 The Hessian at $v$ has rank at most the number of $\ell_i(v)\ne0$.
 For $F_7$, killing five independent forms gives $r\geq8$.
 If $r=8$, every six coefficient vectors must be independent, or a common
