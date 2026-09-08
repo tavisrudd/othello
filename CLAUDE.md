@@ -120,6 +120,10 @@ Before any task that works directly on a manuscript under `papers/`, read
 
 Use `gpt-6-astra` for all cold-read sub-agents, including referee reads. Give
 them a fresh context without the drafting conversation or earlier reviews.
+Cold referee reads must request a journal-style report from the outset:
+summary and contribution, significance and scope, correctness, exposition and
+organization, major and minor comments, and a reasoned editorial recommendation.
+A defect checklist alone is not a complete referee report.
 
 ## Standalone paper mirrors
 
