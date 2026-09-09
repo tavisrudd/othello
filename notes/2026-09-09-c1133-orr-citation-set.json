@@ -1,0 +1,1064 @@
+{
+  "seed": "doi:10.1515/crelle-2013-0058",
+  "request": "https://api.semanticscholar.org/graph/v1/paper/34bb923f1038280219c29145de90bbcc7b5dee5d/citations?fields=title,externalIds,year,abstract&limit=100",
+  "queried_utc": "2026-09-09T20:12:58.970746+00:00",
+  "cache": "/tmp/persistent/tavis/lit-search/c1133-publication-alias-probe/orr-citations.json",
+  "sha256": "6a0426a729338367a437d1ac4e1efc761dc1861910f4d68adb11af8082edc140",
+  "response": {
+    "offset": 0,
+    "data": [
+      {
+        "citingPaper": {
+          "paperId": "5cac71a9322203fb72112e1b959f90a9c9b88ca1",
+          "externalIds": {
+            "ArXiv": "2607.27746",
+            "CorpusId": 290690398
+          },
+          "title": "Families of curves separating points",
+          "year": 2026,
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2607.27746, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2273928034",
+              "name": "Wojciech Porowski"
+            }
+          ],
+          "abstract": "We show that for a hyperbolic curve X over an algebraically closed field k of characteristic zero and a finite set S of k-rational points of X, after replacing X by a finite \\'etale cover, there exists a family of curves over X whose fibres over points in S have pairwise nonisogenous Jacobians. We also give an application of our results to a problem concerning Galois sections."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "140e69d0530d8423aaa069752767c7c14c3a3064",
+          "externalIds": {
+            "ArXiv": "2507.16827",
+            "CorpusId": 283071647
+          },
+          "title": "Parameter Height bounds for the Zilber Pink conjecture for PEL types III and IV",
+          "year": 2025,
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2507.16827, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2125490139",
+              "name": "B. R. Bhatta"
+            }
+          ],
+          "abstract": "We prove the Zilber-Pink conjecture to the intersection of an irreducible Hodge generic algebraic subvariety $ V \\subset \\mathcal{A}_g$ with special subvarieties of all simple PEL types other than $\\mathbb{Z}$, under the assumption of the Large Galois Orbits conjecture. In particular, we establish parameter height bounds for the arithmetic ingredients of the Pila-Zannier strategy in the case of Albert types III and IV. This paper is a sequel to Daw and Orr's paper\"Lattices with skew-Hermitian forms over division algebras and unlikely intersections\"2023."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "ed3789691afcecd13c1726e0081603d747918835",
+          "externalIds": {
+            "ArXiv": "2506.02900",
+            "CorpusId": 279118662
+          },
+          "title": "Unlikely intersections in Shimura varieties and beyond: a survey",
+          "year": 2025,
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2506.02900, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2365037093",
+              "name": "C. Daw"
+            }
+          ],
+          "abstract": "The aim of this note is to provide a concise introduction to so-called problems of unlikely intersections for (pure) Shimura varieties and to review the current state-of-the-art. In the process, we will touch upon more general settings and some of the results in those contexts."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "e9d24733693d29826aea3745ba904ec31a42f03f",
+          "externalIds": {
+            "ArXiv": "2505.12521",
+            "CorpusId": 278739551
+          },
+          "title": "A characteristic p analogue of the Andr\\'e--Pink--Zannier conjecture",
+          "year": 2025,
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2505.12521, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "1656712267",
+              "name": "Y. Lam"
+            },
+            {
+              "authorId": "144677157",
+              "name": "A. Shankar"
+            }
+          ],
+          "abstract": "We investigate the analogue of the Andr\\'e--Pink--Zannier conjecture in characteristic $p$. Precisely, we prove it for ordinary function field-valued points with big monodromy, in Shimura varieties of Hodge type. We also prove an algebraic characteristic $p$ analogue of Hecke-equidistribution (as formulated by Mazur) for Shimura varieties of Hodge type. We prove our main results by a global and local analysis of prime-to-$p$ Hecke correspondences, and by showing that Weyl special points are abundant in positive characterstic."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "74bae647c218d165743151a050dcfe9ef9ca2e1c",
+          "externalIds": {
+            "DOI": "10.1007/s10240-025-00154-4",
+            "CorpusId": 280131539
+          },
+          "title": "Generalised Andr\u00e9-Pink-Zannier conjecture for Shimura varieties of Abelian type",
+          "year": 2025,
+          "openAccessPdf": {
+            "url": "https://doi.org/10.1007/s10240-025-00154-4",
+            "status": "HYBRID",
+            "license": "CCBY",
+            "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1007/s10240-025-00154-4?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1007/s10240-025-00154-4, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2066092519",
+              "name": "R. Richard"
+            },
+            {
+              "authorId": "72529793",
+              "name": "A. Yafaev"
+            }
+          ],
+          "abstract": "In this paper we prove the generalised Andr\u00e9-Pink-Zannier conjecture (an important case of the Zilber-Pink conjecture) for all Shimura varieties of abelian type. Questions of this type were first asked by Y. Andr\u00e9 in 1989. We actually prove a general statement for all Shimura varieties, subject to certain assumptions that are satisfied for Shimura varieties of abelian type and are expected to hold in general. We also prove another result, a p\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$p$\\end{document}-adic Kempf-Ness theorem, on the relation between good reduction of homogeneous spaces over p\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$p$\\end{document}-adic integers with Mumford stability property in p\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$p$\\end{document}-adic geometric invariant theory."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "366698f31bee192ac47aefa82509c7f1d47327d1",
+          "externalIds": {
+            "DOI": "10.1112/s0010437x2400722x",
+            "CorpusId": 238198151
+          },
+          "title": "Height functions on Hecke orbits and the generalised Andr\u00e9\u2013Pink\u2013Zannier conjecture",
+          "year": 2024,
+          "openAccessPdf": {
+            "url": "https://doi.org/10.1112/s0010437x2400722x",
+            "status": "HYBRID",
+            "license": "CCBY",
+            "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1112/s0010437x2400722x?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1112/s0010437x2400722x, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2066092519",
+              "name": "R. Richard"
+            },
+            {
+              "authorId": "72529793",
+              "name": "A. Yafaev"
+            }
+          ],
+          "abstract": "We introduce and study the notion of a generalised Hecke orbit in a Shimura variety. We define a height function on such an orbit and study its properties. We obtain lower bounds for the sizes of Galois orbits of points in a generalised Hecke orbit in terms of this height function, assuming the \u2018weakly adelic Mumford\u2013Tate hypothesis\u2019 and prove the generalised Andr\u00e9\u2013Pink\u2013Zannier conjecture under this assumption, using Pila\u2013Zannier strategy."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "3bbf9f3a4610081bfe20149bc6264a48ca3a173f",
+          "externalIds": {
+            "ArXiv": "2401.11193",
+            "DOI": "10.1016/j.jnt.2026.01.004",
+            "CorpusId": 267069304
+          },
+          "title": "Hecke orbits and the Mordell-Lang conjecture in distinguished categories",
+          "year": 2024,
+          "openAccessPdf": {
+            "url": "https://doi.org/10.1016/j.jnt.2026.01.004",
+            "status": "HYBRID",
+            "license": "CCBY",
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2401.11193, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "93193803",
+              "name": "Fabrizio Barroero"
+            },
+            {
+              "authorId": "144010827",
+              "name": "Gabriel A. Dill"
+            }
+          ],
+          "abstract": "Inspired by recent work of Aslanyan and Daw, we introduce the notion of $\\Sigma$-orbits in the general framework of distinguished categories. In the setting of connected Shimura varieties, this concept contains many instances of (generalized) Hecke orbits from the literature. In the setting of semiabelian varieties, a $\\Sigma$-orbit is a subgroup of finite rank. We show that our $\\Sigma$-orbits have useful functorial properties and we use them to formulate two general statements of Mordell-Lang type (one of them implying the other one). We prove an analogue of a recent theorem of Aslanyan and Daw in this general setting, which we apply to deduce an unconditional result about unlikely intersections in a fibered power of the Legendre family. In an appendix, we prove an unconditional Zilber-Pink result for subvarieties of $\\mathcal{A}_g$ that cannot be defined over the algebraic numbers."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "5373cde8ee623a75d17d82e64a61d09e76c8c75d",
+          "externalIds": {
+            "DOI": "10.5802/crmath.491",
+            "CorpusId": 266492608
+          },
+          "title": "On the generalised Andr\u00e9\u2013Pink\u2013Zannier conjecture.",
+          "year": 2023,
+          "openAccessPdf": {
+            "url": "https://comptes-rendus.academie-sciences.fr/mathematique/item/10.5802/crmath.491.pdf",
+            "status": "GOLD",
+            "license": "CCBY",
+            "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.5802/crmath.491?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.5802/crmath.491, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2066092519",
+              "name": "R. Richard"
+            },
+            {
+              "authorId": "72529793",
+              "name": "A. Yafaev"
+            }
+          ],
+          "abstract": null
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "5feee1bf0784113ef08eb6797c16d0fae248523c",
+          "externalIds": {
+            "ArXiv": "2202.04023",
+            "CorpusId": 246652251
+          },
+          "title": "Ax-Schanuel and exceptional integrability",
+          "year": 2022,
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2202.04023, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2906025",
+              "name": "J. Pila"
+            },
+            {
+              "authorId": "3130599",
+              "name": "Jacob Tsimerman"
+            }
+          ],
+          "abstract": "When can a primitive of a given algebraic function be constructed by iteratively solving algebraic equations and composing with the primitives of some other given algebraic functions or their inverses? We establish some results in this direction. Specifically, we establish decision procedures for determining whether a given primitive can be expressed in terms of finitely many others, or in terms of elliptic integrals."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "f31ac9b61132317b5384789ac188a1f9facbe7b8",
+          "externalIds": {
+            "ArXiv": "2111.13056",
+            "DOI": "10.5802/jep.240",
+            "CorpusId": 244709512
+          },
+          "title": "Lattices with skew-Hermitian forms over division algebras and unlikely intersections",
+          "year": 2021,
+          "openAccessPdf": {
+            "url": "https://jep.centre-mersenne.org/item/10.5802/jep.240.pdf",
+            "status": "GOLD",
+            "license": "CCBY",
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2111.13056, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "102825712",
+              "name": "Christopher Daw"
+            },
+            {
+              "authorId": "143670616",
+              "name": "M. Orr"
+            }
+          ],
+          "abstract": "This paper has two objectives. First, we study lattices with skew-Hermitian forms over division algebras with positive involutions. For division algebras of Albert types I and II, we show that such a lattice contains an\"orthogonal\"basis for a sublattice of effectively bounded index. Second, we apply this result to obtain new results in the field of unlikely intersections. More specifically, we prove the Zilber-Pink conjecture for the intersection of curves with special subvarieties of simple PEL type I and II under a large Galois orbits conjecture. We also prove this Galois orbits conjecture for certain cases of type II."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "b41e0d4d241973212ac46bbcc2d6086a163fa790",
+          "externalIds": {
+            "ArXiv": "2109.13718",
+            "CorpusId": 274273749
+          },
+          "title": "Height functions on Hecke orbits and the generalised Andr\\'e-Pink-Zannier conjecture",
+          "year": 2021,
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2109.13718, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2066092519",
+              "name": "R. Richard"
+            },
+            {
+              "authorId": "72529793",
+              "name": "A. Yafaev"
+            }
+          ],
+          "abstract": "We introduce and study the notion of a generalised Hecke orbit in a Shimura variety. We define a height function on such an orbit and study its properties. We obtain a lower bounds for the size of Galois orbits of points in a generalised Hecke orbit in terms of these height, assuming a version of the Mumford-Tate conjecture. We then use it to prove the generalised Andr\\'e-Pink-Zannier conjecture under this assumption by implementing the Pila-Zannier strategy."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "b4953d6c7f9e750ce467f347991b84be40078717",
+          "externalIds": {
+            "MAG": "3103081085",
+            "ArXiv": "2011.05815",
+            "DOI": "10.1112/S0010437X22007400",
+            "CorpusId": 226299563
+          },
+          "title": "Torsion points on isogenous abelian varieties",
+          "year": 2020,
+          "openAccessPdf": {
+            "url": "https://arxiv.org/pdf/2011.05815",
+            "status": "GREEN",
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2011.05815, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "144010827",
+              "name": "Gabriel A. Dill"
+            }
+          ],
+          "abstract": "Investigating a conjecture of Zannier, we study irreducible subvarieties of abelian schemes that dominate the base and contain a Zariski dense set of torsion points that lie on pairwise isogenous fibers. If everything is defined over the algebraic numbers and the abelian scheme has maximal variation, we prove that the geometric generic fiber of such a subvariety is a union of torsion cosets. We go on to prove fully or partially explicit versions of this result in fibered powers of the Legendre family of elliptic curves. Finally, we apply a recent result of Galateau and Mart\u00ednez to obtain uniform bounds on the number of maximal torsion cosets in the Manin\u2013Mumford problem across a given isogeny class. For the proofs, we adapt the strategy, due to Lang, Serre, Tate, and Hindry, of using Galois automorphisms that act on the torsion as homotheties to the family setting."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "cdb2e4d82833130f5ded2888c0f4355ab95159fa",
+          "externalIds": {
+            "DOI": "10.1007/s00208-020-02024-2",
+            "CorpusId": 253716842
+          },
+          "title": "Unlikely intersections with isogeny orbits in a product of elliptic schemes",
+          "year": 2020,
+          "openAccessPdf": {
+            "url": "https://arxiv.org/pdf/1902.01323",
+            "status": "GREEN",
+            "license": null,
+            "disclaimer": "Notice: The following paper fields have been elided by the publisher: {'abstract'}. Paper or abstract available at https://api.unpaywall.org/v2/10.1007/s00208-020-02024-2?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1007/s00208-020-02024-2, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "144010827",
+              "name": "Gabriel A. Dill"
+            }
+          ],
+          "abstract": null
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "00e9d68f84690e76da116dd5d42edd6d33899fc4",
+          "externalIds": {
+            "ArXiv": "1911.05618",
+            "MAG": "2987507908",
+            "DOI": "10.1093/imrn/rnab173",
+            "CorpusId": 207930513
+          },
+          "title": "Quantitative Reduction Theory and Unlikely Intersections",
+          "year": 2019,
+          "openAccessPdf": {
+            "url": "https://academic.oup.com/imrn/article-pdf/2022/20/16138/46563697/rnab173.pdf",
+            "status": "HYBRID",
+            "license": "CCBY",
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/1911.05618, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "102825712",
+              "name": "Christopher Daw"
+            },
+            {
+              "authorId": "143670616",
+              "name": "M. Orr"
+            }
+          ],
+          "abstract": "\n We prove quantitative versions of Borel and Harish-Chandra\u2019s theorems on reduction theory for arithmetic groups. Firstly, we obtain polynomial bounds on the lengths of reduced integral vectors in any rational representation of a reductive group. Secondly, we obtain polynomial bounds in the construction of fundamental sets for arithmetic subgroups of reductive groups, as the latter vary in a real conjugacy class of subgroups of a fixed reductive group. Our results allow us to apply the Pila\u2013Zannier strategy to the Zilber\u2013Pink conjecture for the moduli space of principally polarised abelian surfaces. Building on our previous paper, we prove this conjecture under a Galois orbits hypothesis. Finally, we establish the Galois orbits hypothesis for points corresponding to abelian surfaces with quaternionic multiplication, under certain geometric conditions."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "fd2a9021a6dec4d453892c5427f733cb49d1a991",
+          "externalIds": {
+            "MAG": "3016512464",
+            "DOI": "10.1016/J.CRMA.2019.01.013",
+            "CorpusId": 127643759
+          },
+          "title": "Topological and equidistributional refinement of the Andr\u00e9\u2013Pink\u2013Zannier conjecture at finitely many places",
+          "year": 2019,
+          "openAccessPdf": {
+            "url": "https://comptes-rendus.academie-sciences.fr/mathematique/item/10.1016/j.crma.2019.01.013.pdf",
+            "status": "GREEN",
+            "license": "other-oa",
+            "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1016/J.CRMA.2019.01.013?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1016/J.CRMA.2019.01.013, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2066092519",
+              "name": "R. Richard"
+            },
+            {
+              "authorId": "72529793",
+              "name": "A. Yafaev"
+            }
+          ],
+          "abstract": "Abstract We present some applications of recent results in homogeneous dynamics to an unlikely intersections problem in Shimura varieties (the Andre\u2013Pink\u2013Zannier conjecture) and its refinements."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "f69245706e60f0531535b6f5a98c1d3ca34436fe",
+          "externalIds": {
+            "MAG": "3103441385",
+            "ArXiv": "1902.01323",
+            "DOI": "10.1007/S00208-020-02024-2",
+            "CorpusId": 119124298
+          },
+          "title": "Unlikely intersections with isogeny orbits in a product of elliptic schemes",
+          "year": 2019,
+          "openAccessPdf": {
+            "url": "https://arxiv.org/pdf/1902.01323",
+            "status": "GREEN",
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/1902.01323, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "144010827",
+              "name": "Gabriel A. Dill"
+            }
+          ],
+          "abstract": "Fix an elliptic curve $$E_0$$ E 0 without CM and a non-isotrivial elliptic scheme over a smooth irreducible curve, both defined over the algebraic numbers. Consider the union of all images of a fixed finite-rank subgroup (of arbitrary rank) of $$E_0^g$$ E 0 g , also defined over the algebraic numbers, under all isogenies between $$E_0^g$$ E 0 g and some fiber of the g -th fibered power $$\\mathcal {A}$$ A of the elliptic scheme, where g is a fixed natural number. As a special case of a slightly more general result, we characterize the subvarieties (of arbitrary dimension) inside $$\\mathcal {A}$$ A that have potentially Zariski dense intersection with this set. In the proof, we combine a generalized Vojta\u2013R\u00e9mond inequality with the Pila\u2013Zannier strategy."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "65db07ac325ee9172c1fb2865400c046c909d59b",
+          "externalIds": {
+            "MAG": "2901570317",
+            "ArXiv": "1811.06583",
+            "DOI": "10.4007/annals.2020.192.3.2",
+            "CorpusId": 119164707
+          },
+          "title": "Ax-Lindemann-Weierstrass with derivatives and the genus 0 Fuchsian\n groups",
+          "year": 2018,
+          "openAccessPdf": {
+            "url": "https://hal.science/hal-01928620",
+            "status": "GREEN",
+            "license": "other-oa",
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/1811.06583, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "46185679",
+              "name": "G. Casale"
+            },
+            {
+              "authorId": "35110993",
+              "name": "J. Freitag"
+            },
+            {
+              "authorId": "2207709",
+              "name": "Joel Nagloo"
+            }
+          ],
+          "abstract": "We prove the Ax-Lindemann-Weierstrass theorem with derivatives for the uniformizing functions of genus zero Fuchsian groups of the first kind. Our proof relies on differential Galois theory, monodromy of linear differential equations, the study of algebraic and Liouvillian solutions, differential algebraic work of Nishioka towards the Painleve irreducibility of certain Schwarzian equations, and considerable machinery from the model theory of differentially closed fields. \nOur techniques allow for certain generalizations of the Ax-Lindemann-Weierstrass theorem which have interesting consequences. In particular, we apply our results to answer a question of Painleve (1895). We also answer certain cases of the Andre-Pink conjecture, namely in the case of orbits of commensurators of Fuchsian groups."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "15bae89cc696825c054a515186013af08c901740",
+          "externalIds": {
+            "MAG": "2890857839",
+            "ArXiv": "1809.03802",
+            "CorpusId": 119330376
+          },
+          "title": "Homogeneous Dynamics and Unlikely Intersections",
+          "year": 2018,
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/1809.03802, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2066092519",
+              "name": "R. Richard"
+            },
+            {
+              "authorId": "72529793",
+              "name": "A. Yafaev"
+            },
+            {
+              "authorId": "102455502",
+              "name": "T. Zamojski"
+            }
+          ],
+          "abstract": "This is a preliminary version of a monograph on homogeneous dynamics and application to some problems of unlikely intersections in Shimura varieties. It consists of four articles, which can be read independently. The first one, by the two first named authors, discuss the main application, to some refinement of the Andr\\'{e}-Pink-Zannier conjecture about closures of subsets of restricted Hecke orbits in Shimura varieties. The second article, by the first and last named author, establishes results about the dynamics of sequences translates of some measures in spaces of $S$-arithmetic lattices. These results are the cornerstone of the methods in the first article. The last two articles, by the first named author, establish results which are crucial for the second article. The third article gives an ultrametric analogue of archimedean results of Richard and Shah, and contains methods of independent interest about stability, Berkovich spaces and Bruhat-Tits buildings. The last article is set in the same context as the second article, and discusses non-divergence of the studied sequences of translates."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "9e9c8b45c2a54cef9463dedddd64205855c6d2c8",
+          "externalIds": {
+            "MAG": "2925085276",
+            "DOI": "10.1090/PSPUM/097.2/01709",
+            "CorpusId": 106406609
+          },
+          "title": "Bi-algebraic geometry and the Andr\u00e9-Oort\n conjecture",
+          "year": 2018,
+          "openAccessPdf": {
+            "url": "",
+            "status": "CLOSED",
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1090/PSPUM/097.2/01709?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1090/PSPUM/097.2/01709, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "101188727",
+              "name": "B. Klingler"
+            },
+            {
+              "authorId": "2083294782",
+              "name": "E. Ullmo"
+            },
+            {
+              "authorId": "72529793",
+              "name": "A. Yafaev"
+            }
+          ],
+          "abstract": null
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "533e20a3a9b9c6210182ed7fb137845ac2bb6fe5",
+          "externalIds": {
+            "ArXiv": "1803.04946",
+            "MAG": "3030217644",
+            "DOI": "10.5802/aif.3317",
+            "CorpusId": 56397923
+          },
+          "title": "On a conjecture of Buium and Poonen",
+          "year": 2018,
+          "openAccessPdf": {
+            "url": "https://aif.centre-mersenne.org/item/10.5802/aif.3317.pdf",
+            "status": "GOLD",
+            "license": "CCBYND",
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/1803.04946, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "90721397",
+              "name": "G. Baldi"
+            }
+          ],
+          "abstract": "Given a correspondence between a modular curve $S$ and an elliptic curve $A$, we prove that the intersection of any finite-rank subgroup of $A$ with the set of points on $A$ corresponding to an isogeny class on $S$ is finite. The problem was conjectured by A. Buium and B. Poonen in 2009. We follow the strategy proposed by the authors, using a result about the equidistribution of Hecke points on Shimura varieties and Serre's open image theorem. The result is an instance of the Zilber-Pink conjecture."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "77c80a20486f5afb1029dbce341950a67b33d438",
+          "externalIds": {
+            "MAG": "3137155317",
+            "ArXiv": "1801.05701",
+            "DOI": "10.4171/jems/1057",
+            "CorpusId": 119120338
+          },
+          "title": "Unlikely intersections between isogeny orbits and curves",
+          "year": 2018,
+          "openAccessPdf": {
+            "url": "https://ems.press/content/serial-article-files/12261",
+            "status": "GOLD",
+            "license": "CCBY",
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/1801.05701, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "144010827",
+              "name": "Gabriel A. Dill"
+            }
+          ],
+          "abstract": "Fix an abelian variety $A_0$ and a non-isotrivial abelian scheme over a smooth irreducible curve, both defined over the algebraic numbers. Consider the union of all images of translates of a fixed finite-rank subgroup of $A_0$, also defined over the algebraic numbers, by abelian subvarieties of $A_0$ of codimension at least $k$ under all isogenies between $A_0$ and some fiber of the abelian scheme. We characterize the curves inside the abelian scheme which are defined over the algebraic numbers, dominate the base curve and potentially intersect this set in infinitely many points. Our proof follows the Pila-Zannier strategy."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "dbea6cc8aeef55c67116a415bb2ded969e4500fc",
+          "externalIds": {
+            "MAG": "2767764424",
+            "ArXiv": "1711.03009",
+            "CorpusId": 119149053
+          },
+          "title": "Inner Galois Equidistribution in S-Hecke orbits",
+          "year": 2017,
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/1711.03009, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2066092519",
+              "name": "R. Richard"
+            },
+            {
+              "authorId": "72529793",
+              "name": "A. Yafaev"
+            }
+          ],
+          "abstract": "We obtain results on the so-called Andre-Pink-Zannier conjecture which is a special case of a the Zilber-Pink conjecture on unlikely intersections in Shimura varieties. Our methods rely on an ergodic theorem of Richard-Zamojski and we are able to obtain stronger conclusions that those of the Andre-Pink-Zannier conjecture in the special case we consider. We work under the assumption of the S-Shafarevich conjecture and S-semisimplicity conjecture which hold for Shimura varieties of abelian type."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "4cd31d4f500b2fb0083904f3fbece8c12f6b7a4a",
+          "externalIds": {
+            "MAG": "3092575356",
+            "ArXiv": "1710.04092",
+            "DOI": "10.4171/JEMS/1005",
+            "CorpusId": 119671232
+          },
+          "title": "Unlikely intersections with Hecke translates of a special subvariety",
+          "year": 2017,
+          "openAccessPdf": {
+            "url": "http://www.ems-ph.org/journals/show_pdf.php?issn=1435-9855&vol=23&iss=1&rank=1",
+            "status": "BRONZE",
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/1710.04092, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "143670616",
+              "name": "M. Orr"
+            }
+          ],
+          "abstract": "We prove some cases of the Zilber-Pink conjecture on unlikely intersections in Shimura varieties. Firstly, we prove that the Zilber-Pink conjecture holds for intersections between a curve and the union of the Hecke translates of a fixed special subvariety, conditional on arithmetic conjectures. Secondly, we prove the conjecture unconditionally for intersections between a curve and the union of Hecke correspondences on the moduli space of principally polarised abelian varieties, subject to some technical hypotheses. This generalises results of Habegger and Pila on the Zilber-Pink conjecture for products of modular curves. \nThe conditional proof uses the Pila-Zannier method, relying on a point-counting theorem of Habegger and Pila and a functional transcendence result of Gao. The unconditional results are deduced from this using a variety of arithmetic ingredients: the Masser-W\\\"ustholz isogeny theorem, comparison between Faltings and Weil heights, a super-approximation theorem of Salehi Golsefidy, and a result on expansion and gonality due to Ellenberg, Hall and Kowalski."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "b6ae733b838421dd8def62f91ca951f5ad5a5ccf",
+          "externalIds": {
+            "MAG": "2731866411",
+            "ArXiv": "1609.01315",
+            "DOI": "10.2140/ant.2018.12.455",
+            "CorpusId": 119684179
+          },
+          "title": "Height bounds and the Siegel property",
+          "year": 2016,
+          "openAccessPdf": {
+            "url": "https://arxiv.org/pdf/1609.01315",
+            "status": "GREEN",
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/1609.01315, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "143670616",
+              "name": "M. Orr"
+            }
+          ],
+          "abstract": "Let $G$ be a reductive group defined over $\\mathbb{Q}$ and let $\\mathfrak{S}$ be a Siegel set in $G(\\mathbb{R})$. The Siegel property tells us that there are only finitely many $\\gamma \\in G(\\mathbb{Q})$ of bounded determinant and denominator for which the translate $\\gamma.\\mathfrak{S}$ intersects $\\mathfrak{S}$. We prove a bound for the height of these $\\gamma$ which is polynomial with respect to the determinant and denominator. The bound generalises a result of Habegger and Pila dealing with the case of $GL_2$, and has applications to the Zilber-Pink conjecture on unlikely intersections in Shimura varieties. \nIn addition we prove that if $H$ is a subset of $G$, then every Siegel set for $H$ is contained in a finite union of $G(\\mathbb{Q})$-translates of a Siegel set for $G$."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "d7dc8215da77a2875ec719d1aed6cee19f1cd809",
+          "externalIds": {
+            "MAG": "2483250434",
+            "ArXiv": "1607.07843",
+            "DOI": "10.1017/fms.2019.10",
+            "CorpusId": 119161729
+          },
+          "title": "ENLARGED MIXED SHIMURA VARIETIES, BI-ALGEBRAIC SYSTEM AND SOME AX TYPE TRANSCENDENTAL RESULTS",
+          "year": 2016,
+          "openAccessPdf": {
+            "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/45CEAA9A630A07C8756619DB2E0DFA03/S2050509419000100a.pdf/div-class-title-enlarged-mixed-shimura-varieties-bi-algebraic-system-and-some-ax-type-transcendental-results-div.pdf",
+            "status": "GOLD",
+            "license": "CCBY",
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/1607.07843, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "51145651",
+              "name": "Ziyang Gao"
+            }
+          ],
+          "abstract": "We develop a theory of enlarged mixed Shimura varieties, putting the universal vectorial bi-extension defined by Coleman into this framework to study some functional transcendental results of Ax type. We study their bi-algebraic systems, formulate the Ax-Schanuel conjecture and explain its relation with the logarithmic Ax theorem and the Ax-Lindemann theorem which we shall prove. All these bi-algebraic and transcendental results extend their counterparts for mixed Shimura varieties. In the end we briefly discuss the Andr\u00e9\u2013Oort and Zilber\u2013Pink type problems for enlarged mixed Shimura varieties."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "83a2ed06445dbfb81a796aeff53872e343048b21",
+          "externalIds": {
+            "ArXiv": "1506.04011",
+            "MAG": "2201896418",
+            "DOI": "10.1142/S1793042117500348",
+            "CorpusId": 119608383
+          },
+          "title": "On compatibility between isogenies and polarizations of abelian varieties",
+          "year": 2015,
+          "openAccessPdf": {
+            "url": "https://arxiv.org/pdf/1506.04011",
+            "status": "GREEN",
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/1506.04011, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "143670616",
+              "name": "M. Orr"
+            }
+          ],
+          "abstract": "We discuss the notion of polarized isogenies of abelian varieties, that is, isogenies which are compatible with given principal polarizations. This is motivated by problems of unlikely intersections in Shimura varieties. Our aim is to show that certain questions about polarized isogenies can be reduced to questions about unpolarized isogenies or vice versa. Our main theorem concerns abelian varieties B which are isogenous to a fixed abelian variety A. It establishes the existence of a polarized isogeny A \u2192 B whose degree is polynomially bounded in n, if there exist both an unpolarized isogeny A \u2192 B of degree n and a polarized isogeny A \u2192 B of unknown degree. As a further result, we prove that given any two principally polarized abelian varieties related by an unpolarized isogeny, there exists a polarized isogeny between their fourth powers. The proofs of both theorems involve calculations in the endomorphism algebras of the abelian varieties, using the Albert classification of these endomorphism algebras ..."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "13c4bff0df37aa870f83a44e710714022bf61809",
+          "externalIds": {
+            "MAG": "2396515174",
+            "DOI": "10.70675/826f36b6z2e5bz4155z9e68z78f93f5b2de6",
+            "CorpusId": 124621044
+          },
+          "title": "Le th\u00e9or\u00e8me d\u2019Ax-Lindemann mixte et ses applications \u00e0 la conjecture de Zilber-Pink",
+          "year": 2014,
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.70675/826f36b6z2e5bz4155z9e68z78f93f5b2de6?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.70675/826f36b6z2e5bz4155z9e68z78f93f5b2de6, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2111125698",
+              "name": "Ziyang Gao"
+            }
+          ],
+          "abstract": "La conjecture de Zilber-Pink est une conjecture diophantienne concernant les intersections atypiques dans les vari\u00e9t\u00e9s de Shimura mixtes. C\u2019est une g\u00e9n\u00e9ralisation commune de la conjecture d\u2019Andr\u00e9-Oort et de la conjecture de Mordell-Lang. Le but de cette th\u00e8se est d\u2019\u00e9tudier Zilber-Pink. Plus concr\u00e8tement, nous \u00e9tudions la conjecture d\u2019Andr\u00e9-Oort, selon laquelle une sous-vari\u00e9t\u00e9 d\u2019une vari\u00e9t\u00e9 de Shimura mixte est sp\u00e9ciale si son intersection avec l\u2019ensemble des points sp\u00e9ciaux est dense, et la conjecture d\u2019Andr\u00e9-Pink-Zannier, selon laquelle une sous-vari\u00e9t\u00e9 d\u2019une vari\u00e9t\u00e9 de Shimura mixte est faiblement sp\u00e9ciale si son intersection avec une orbite de Hecke g\u00e9n\u00e9ralis\u00e9e est dense. Cette derni\u00e8re conjecture g\u00e9n\u00e9ralise Mordell-Lang comme expliqu\u00e9 par Pink.Dans la m\u00e9thode de Pila-Zannier, un point clef pour \u00e9tudier la conjecture de Zilber-Pink est de d\u00e9montrer le th\u00e9or\u00e8me d\u2019Ax-Lindemann qui est une g\u00e9n\u00e9ralisation du th\u00e9or\u00e8me classique de Lindemann-Weierstrass dans un cadre fonctionnel. Un des r\u00e9sultats principaux de cette th\u00e8se est la d\u00e9monstration du th\u00e9or\u00e8me d\u2019Ax-Lindemann dans sa forme la plus g\u00e9n\u00e9rale, c\u2019est- \u00e0-dire le th\u00e9or\u00e8me d\u2019Ax-Lindemann mixte. Ceci g\u00e9n\u00e9ralise les r\u00e9sultats de Pila, Pila-Tsimerman, Ullmo-Yafaev et Klingler-Ullmo-Yafaev concernant Ax-Lindemann pour les vari\u00e9t\u00e9s de Shimura pures.Un autre r\u00e9sultat de cette th\u00e8se est la d\u00e9monstration de la conjecture d\u2019Andr\u00e9-Oort pour une grande collection de vari\u00e9t\u00e9s de Shimura mixtes : in- conditionnellement pour une vari\u00e9t\u00e9 de Shimura mixte arbitraire dont la par- tie pure est une sous-vari\u00e9t\u00e9 de AN6 (par exemple les produits des familles universelles des vari\u00e9t\u00e9s ab\u00e9liennes de dimension 6 et le fibr\u00e9 de Poincar\u00e9 sur A6) et sous GRH pour toutes les vari\u00e9t\u00e9s de Shimura mixtes de type ab\u00e9lien. Ceci g\u00e9n\u00e9ralise des th\u00e9or\u00e8mes connus de Klinger-Ullmo-Yafaev, Pila, Pila-Tsimerman et Ullmo pour les vari\u00e9t\u00e9s de Shimura pures.Quant \u00e0 la conjecture d\u2019Andr\u00e9-Pink-Zannier, nous d\u00e9montrons plusieurs cas valables lorsque la vari\u00e9t\u00e9 de Shimura mixte ambiante est la famille universelle des vari\u00e9t\u00e9s ab\u00e9liennes. Tout d\u2019abord nous d\u00e9montrons l\u2019intersection d\u2019Andr\u00e9-Oort et Andr\u00e9-Pink-Zannier, c\u2019est-\u00e0-dire que l\u2019on \u00e9tudie l\u2019orbite de Hecke g\u00e9n\u00e9ralis\u00e9e d\u2019un point sp\u00e9cial. Ceci g\u00e9n\u00e9ralise des r\u00e9sultats d\u2019Edixhoven-Yafaev et Klingler-Ullmo-Yafaev pour Ag. Nous prouvons ensuite la conjecture dans le cas suivant : une sous-vari\u00e9t\u00e9 d\u2019un sch\u00e9ma ab\u00e9lien au dessus d\u2019une courbe est faiblement sp\u00e9ciale si son intersection avec l\u2019orbite de Hecke g\u00e9n\u00e9ralis\u00e9e d\u2019un point de torsion d\u2019une fibre non CM est Zariski dense. Finalement pour une orbite de Hecke g\u00e9n\u00e9ralis\u00e9e d\u2019un point alg\u00e9brique arbitraire, nous d\u00e9montrons la conjecture pour toutes les courbes. Ces deux derniers cas g\u00e9n\u00e9ralisent des r\u00e9sultats de Habegger-Pila et Orr pour Ag.Dans toutes les d\u00e9monstrations, la th\u00e9orie o-minimale, en particulier le th\u00e9or\u00e8me de comptage de Pila-Wilkie, joue un r\u00f4le important."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "c211414c5fd9148bd6e47e26eaa07f6662575f4f",
+          "externalIds": {
+            "MAG": "656082578",
+            "CorpusId": 118219132
+          },
+          "title": "Around the Andr\u00e9-Oort conjecture",
+          "year": 2014,
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null
+          },
+          "authors": [
+            {
+              "authorId": "102825712",
+              "name": "Christopher Daw"
+            }
+          ],
+          "abstract": null
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "26ddcd67027eb50ced14d3197ddddd1b274ecaf6",
+          "externalIds": {
+            "ArXiv": "1407.5578",
+            "MAG": "2172257294",
+            "CorpusId": 119173818
+          },
+          "title": "A special point problem of Andr\\'e-Pink-Zannier in the universal family of abelian varieties",
+          "year": 2014,
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/1407.5578, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "51145651",
+              "name": "Ziyang Gao"
+            }
+          ],
+          "abstract": "The Andr\\'e-Pink-Zannier conjecture concerns the intersection of subvarieties and the generalized Hecke orbit of a given point in mixed Shimura varieties. It is part of the Zilber-Pink conjecture. In this paper we focus on the universal family of principally polarized abelian varieties. We explain the moduli interpretation of the conjecture in this case and prove several different cases for this conjecture: its overlap with the Andr\\'e-Oort conjecture; when the subvariety is contained in an abelian scheme over a curve and the point is a torsion point on its fiber; when the subvariety is a curve."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "abdc07580ee6a02fe31f3d9eabf2c83ec060a397",
+          "externalIds": {
+            "ArXiv": "1402.4588",
+            "MAG": "2962889401",
+            "DOI": "10.4171/JEMS/761",
+            "CorpusId": 47986672
+          },
+          "title": "Strong minimality and the j-function",
+          "year": 2014,
+          "openAccessPdf": {
+            "url": "https://arxiv.org/pdf/1402.4588",
+            "status": "GREEN",
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/1402.4588, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "35110993",
+              "name": "J. Freitag"
+            },
+            {
+              "authorId": "13017127",
+              "name": "Thomas Scanlon"
+            }
+          ],
+          "abstract": "We show that the order three algebraic differential equation over ${\\mathbb Q}$ satisfied by the analytic $j$-function defines a non-$\\aleph_0$-categorical strongly minimal set with trivial forking geometry relative to the theory of differentially closed fields of characteristic zero answering a long-standing open problem about the existence of such sets. The theorem follows from Pila's modular Ax-Lindemann-Weierstrass with derivatives theorem using Seidenberg's embedding theorem and a theorem of Nishioka on the differential equations satisfied by automorphic functions. As a by product of this analysis, we obtain a more general version of the modular Ax-Lindemann-Weierstrass theorem, which, in particular, applies to automorphic functions for arbitrary arithmetic subgroups of $SL_2 ({\\mathbb Z})$. We then apply the results to prove effective finiteness results for intersections of subvarieties of products of modular curves with isogeny classes. For example, we show that if $\\psi:{\\mathbb P}^1 \\to {\\mathbb P}^1$ is any non-identity automorphism of the projective line and $t \\in {\\mathbb A}^1({\\mathbb C}) \\smallsetminus {\\mathbb A}^1({\\mathbb Q}^\\text{alg})$, then the set of $s \\in {\\mathbb A}^1({\\mathbb C})$ for which the elliptic curve with $j$-invariant $s$ is isogenous to the elliptic curve with $j$-invariant $t$ and the elliptic curve with $j$-invariant $\\psi(s)$ is isogenous to the elliptic curve with $j$-invariant $\\psi(t)$ has size at most $36^7$. In general, we prove that if $V$ is a Kolchin-closed subset of ${\\mathbb A}^n$, then the Zariski closure of the intersection of $V$ with the isogeny class of a tuple of transcendental elements is a finite union of weakly special subvarieties. We bound the sum of the degrees of the irreducible components of this union by a function of the degree and order of $V$."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "91d57d5eae5c70cd9f070655499565369fa64e05",
+          "externalIds": {
+            "MAG": "2953039063",
+            "ArXiv": "1310.1302",
+            "DOI": "10.1515/CRELLE-2014-0127",
+            "CorpusId": 119733771
+          },
+          "title": "Towards the Andr\\'e-Oort conjecture for mixed Shimura varieties: the Ax-Lindemann theorem and lower bounds for Galois orbits of special points",
+          "year": 2013,
+          "openAccessPdf": {
+            "url": "http://arxiv.org/pdf/1310.1302",
+            "status": "GREEN",
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/1310.1302, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "51145651",
+              "name": "Ziyang Gao"
+            }
+          ],
+          "abstract": "We prove in this paper the Ax-Lindemann-Weierstrass theorem for all mixed Shimura varieties and discuss the lower bounds for Galois orbits of special points of mixed Shimura varieties. In particular we reprove a result of Silverberg in a different approach. Then combining these results we prove the Andr\\'e-Oort conjecture for any mixed Shimura variety whose pure part is a subvariety of A_6^n."
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "2a477e2a10a55b613886106de9917a691ac8eb04",
+          "externalIds": {
+            "MAG": "3008616723",
+            "DOI": "10.5451/UNIBAS-007171198",
+            "CorpusId": 212977774
+          },
+          "title": "Unlikely intersections with isogeny orbits",
+          "year": 2019,
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: The following paper fields have been elided by the publisher: {'abstract'}. Paper or abstract available at https://api.unpaywall.org/v2/10.5451/UNIBAS-007171198?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.5451/UNIBAS-007171198, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "144010827",
+              "name": "Gabriel A. Dill"
+            }
+          ],
+          "abstract": null
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "11172bdd11f81f3e1c0726c39d33e2453fdbe568",
+          "externalIds": {
+            "MAG": "2504809864",
+            "DOI": "10.1017/CBO9781316106839.004",
+            "CorpusId": 124180575
+          },
+          "title": "O-Minimality and Diophantine Geometry: Functional transcendence via o-minimality",
+          "year": 2015,
+          "openAccessPdf": {
+            "url": "",
+            "status": "CLOSED",
+            "license": null,
+            "disclaimer": "Notice: The following paper fields have been elided by the publisher: {'abstract'}. Paper or abstract available at https://api.unpaywall.org/v2/10.1017/CBO9781316106839.004?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1017/CBO9781316106839.004, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2906025",
+              "name": "J. Pila"
+            }
+          ],
+          "abstract": null
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "2a7d7f7729cfe030eabda2b17f161b1e210a0a0d",
+          "externalIds": {
+            "CorpusId": 170076184
+          },
+          "title": "From Mordell to Zilber-Pink The Mordell conjecture",
+          "year": 2014,
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null
+          },
+          "authors": [
+            {
+              "authorId": "2906025",
+              "name": "J. Pila"
+            }
+          ],
+          "abstract": null
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "a7ffa1da6f3566094cba0cb3efce205e9df80a2a",
+          "externalIds": {
+            "CorpusId": 287837137
+          },
+          "title": "Height bounds and the Siegel property",
+          "year": null,
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null
+          },
+          "authors": [
+            {
+              "authorId": "143670616",
+              "name": "M. Orr"
+            },
+            {
+              "authorId": "2906025",
+              "name": "J. Pila"
+            },
+            {
+              "authorId": "2242553156",
+              "name": "Bjorn Poonen"
+            },
+            {
+              "authorId": "2319872361",
+              "name": "David Eisenbud"
+            },
+            {
+              "authorId": "2262176038",
+              "name": "Philippe Michel"
+            },
+            {
+              "authorId": "102975378",
+              "name": "\u00c9. Polytechnique"
+            },
+            {
+              "authorId": null,
+              "name": "F\u00e9d\u00e9rale de Lausanne"
+            },
+            {
+              "authorId": "2262175026",
+              "name": "Joseph H. Silverman"
+            },
+            {
+              "authorId": null,
+              "name": "S. Hulim K. Aliman"
+            },
+            {
+              "authorId": null,
+              "name": "X. Ianchang M. Eng"
+            },
+            {
+              "authorId": null,
+              "name": "D. Anny S. Carponi"
+            },
+            {
+              "authorId": null,
+              "name": "S. Tefan S. Chreieder"
+            },
+            {
+              "authorId": null,
+              "name": "V. AN C. N. Guyen"
+            },
+            {
+              "authorId": null,
+              "name": "S. Arah W. Itherspoon"
+            }
+          ],
+          "abstract": null
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "4496cecd08fdb0ce30ae02038e375e4ae5554ce5",
+          "externalIds": {
+            "CorpusId": 17090513
+          },
+          "title": "Questions about Isogenies, Automorphisms and Bounds",
+          "year": null,
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null
+          },
+          "authors": [],
+          "abstract": null
+        }
+      },
+      {
+        "citingPaper": {
+          "paperId": "4a80c64eb760bcf7eb1bd1023b0e0413cd147976",
+          "externalIds": {
+            "CorpusId": 264484339
+          },
+          "title": "Topological and equidistributional re\ufb01nement of the Andr\u00e9\u2013Pink\u2013Zannier conjecture at \ufb01nitely many places",
+          "year": null,
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null
+          },
+          "authors": [
+            {
+              "authorId": "93752287",
+              "name": "C. Acad"
+            },
+            {
+              "authorId": "88511639",
+              "name": "Sci."
+            },
+            {
+              "authorId": "2239327083",
+              "name": "Ser. I. Paris"
+            },
+            {
+              "authorId": "2066092519",
+              "name": "R. Richard"
+            },
+            {
+              "authorId": "72529793",
+              "name": "A. Yafaev"
+            }
+          ],
+          "abstract": null
+        }
+      }
+    ]
+  },
+  "screen_fields": [
+    "title"
+  ],
+  "screen_discriminator": "Promote bounded-degree geometric isogeny finiteness, polarization finiteness, cubic partner finiteness, and any ambiguous closely related statement for primary-text comparison; do not infer source content from titles alone."
+}

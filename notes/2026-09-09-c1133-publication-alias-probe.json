@@ -1,0 +1,112 @@
+[
+  {
+    "seed": "doi:10.1112/S0010437X21007727",
+    "service": "OpenAlex",
+    "query": "https://api.openalex.org/works/https://doi.org/10.1112/S0010437X21007727",
+    "queried_utc": "2026-09-09T20:12:20.348249+00:00",
+    "citation_count": 6,
+    "http_status": 200,
+    "raw_path": "/tmp/persistent/tavis/lit-search/c1133-publication-alias-probe/voisin-published-openalex.json",
+    "raw_sha256": "d85e8d96a399e2990acd613b8756c2740e1a6e671a6b587d13385fcabed3d414",
+    "resolved_id": "https://openalex.org/W3017183890",
+    "title": "Schiffer variations and the generic Torelli theorem for hypersurfaces",
+    "ids": {
+      "openalex": "https://openalex.org/W3017183890",
+      "doi": "https://doi.org/10.1112/s0010437x21007727",
+      "mag": "3017183890"
+    },
+    "status": "resolved-count",
+    "alias_verified_at": "zbMATH document 7481799"
+  },
+  {
+    "seed": "doi:10.1112/S0010437X21007727",
+    "service": "Crossref",
+    "query": "https://api.crossref.org/works/10.1112%2FS0010437X21007727",
+    "queried_utc": "2026-09-09T20:12:20.349656+00:00",
+    "citation_count": 6,
+    "http_status": 200,
+    "raw_path": "/tmp/persistent/tavis/lit-search/c1133-publication-alias-probe/voisin-published-crossref.json",
+    "raw_sha256": "d9e919401bdbb42256159ced777db3f5065bca055afae403b9db05156fb33432",
+    "resolved_id": "10.1112/s0010437x21007727",
+    "title": [
+      "Schiffer variations and the generic Torelli theorem for hypersurfaces"
+    ],
+    "status": "resolved-count",
+    "alias_verified_at": "zbMATH document 7481799"
+  },
+  {
+    "seed": "doi:10.1112/S0010437X21007727",
+    "service": "Semantic Scholar",
+    "query": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1112/S0010437X21007727?fields=paperId,title,externalIds,citationCount",
+    "queried_utc": "2026-09-09T20:12:20.350051+00:00",
+    "citation_count": 10,
+    "http_status": 200,
+    "raw_path": "/tmp/persistent/tavis/lit-search/c1133-publication-alias-probe/voisin-published-semantic-scholar.json",
+    "raw_sha256": "abd68e6d2c9ce1823d62c2026ced9c7ae1b817efa67c2ca1491b5f3d7c5b3cb6",
+    "resolved_id": "f08f7699ad0f4c3295c4a1edc94c25d63386bf18",
+    "title": "Schiffer variations and the generic Torelli theorem for hypersurfaces",
+    "ids": {
+      "MAG": "3017183890",
+      "ArXiv": "2004.09310",
+      "DOI": "10.1112/S0010437X21007727",
+      "CorpusId": 215827582
+    },
+    "status": "resolved-count",
+    "alias_verified_at": "zbMATH document 7481799"
+  },
+  {
+    "seed": "doi:10.1515/crelle-2013-0058",
+    "service": "OpenAlex",
+    "query": "https://api.openalex.org/works/https://doi.org/10.1515/crelle-2013-0058",
+    "queried_utc": "2026-09-09T20:12:20.594364+00:00",
+    "citation_count": 21,
+    "http_status": 200,
+    "raw_path": "/tmp/persistent/tavis/lit-search/c1133-publication-alias-probe/orr-published-openalex.json",
+    "raw_sha256": "1dfe93b0858dbde81ce6f26a77e1b7b001fd73bb210b5596ea2ee10ea5382833",
+    "resolved_id": "https://openalex.org/W2115002472",
+    "title": "Families of abelian varieties with many isogenous fibres",
+    "ids": {
+      "openalex": "https://openalex.org/W2115002472",
+      "doi": "https://doi.org/10.1515/crelle-2013-0058",
+      "mag": "2115002472"
+    },
+    "status": "resolved-count",
+    "alias_verified_at": "https://arxiv.org/abs/1209.3653"
+  },
+  {
+    "seed": "doi:10.1515/crelle-2013-0058",
+    "service": "Crossref",
+    "query": "https://api.crossref.org/works/10.1515%2Fcrelle-2013-0058",
+    "queried_utc": "2026-09-09T20:12:20.942550+00:00",
+    "citation_count": 13,
+    "http_status": 200,
+    "raw_path": "/tmp/persistent/tavis/lit-search/c1133-publication-alias-probe/orr-published-crossref.json",
+    "raw_sha256": "65d3d54e6f03cff42a0e89a45783e8c14c4db079286896a2b40561b7b3128195",
+    "resolved_id": "10.1515/crelle-2013-0058",
+    "title": [
+      "Families of abelian varieties with many isogenous fibres"
+    ],
+    "status": "resolved-count",
+    "alias_verified_at": "https://arxiv.org/abs/1209.3653"
+  },
+  {
+    "seed": "doi:10.1515/crelle-2013-0058",
+    "service": "Semantic Scholar",
+    "query": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1515/crelle-2013-0058?fields=paperId,title,externalIds,citationCount",
+    "queried_utc": "2026-09-09T20:12:20.972985+00:00",
+    "citation_count": 37,
+    "http_status": 200,
+    "raw_path": "/tmp/persistent/tavis/lit-search/c1133-publication-alias-probe/orr-published-semantic-scholar.json",
+    "raw_sha256": "e37c2c79b5021fda63fcd297168c0dd23c51200bd9301c36dbb1dc4c5a5b54e3",
+    "resolved_id": "34bb923f1038280219c29145de90bbcc7b5dee5d",
+    "title": "Families of abelian varieties with many isogenous fibres",
+    "ids": {
+      "ArXiv": "1209.3653",
+      "MAG": "2115002472",
+      "DOI": "10.1515/crelle-2013-0058",
+      "CorpusId": 119165200
+    },
+    "status": "resolved-count",
+    "alias_verified_at": "https://arxiv.org/abs/1209.3653"
+  }
+]

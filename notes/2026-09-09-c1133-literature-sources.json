@@ -254,7 +254,13 @@
       "read_scope": "v3; rational generic Torelli formulation, Theorem 0.2 and Remarks 0.1–0.4, lines 35–105; official arXiv metadata/history.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Schiffer variations and the generic Torelli theorem for hypersurfaces",
-      "version_in_cached_header": "arXiv:2004.09310v3 [math.AG] 30 May 2021"
+      "version_in_cached_header": "arXiv:2004.09310v3 [math.AG] 30 May 2021",
+      "publication_alias": {
+        "doi": "10.1112/S0010437X21007727",
+        "verified_at": "zbMATH document 7481799",
+        "read_depth": "abstract/metadata only",
+        "scope": "Published alias metadata; mathematical read remains cached arXiv v3."
+      }
     },
     {
       "access": {
@@ -269,7 +275,13 @@
       "read_scope": "v4; Theorem 5.1 and complete proof, lines 1103–1185; correction notice located; official arXiv metadata/history.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Families of abelian varieties with many isogenous fibres",
-      "version_in_cached_header": "arXiv:1209.3653v4 [math.AG] 13 Sep 2016"
+      "version_in_cached_header": "arXiv:1209.3653v4 [math.AG] 13 Sep 2016",
+      "publication_alias": {
+        "doi": "10.1515/crelle-2013-0058",
+        "verified_at": "https://arxiv.org/abs/1209.3653",
+        "read_depth": "abstract/metadata only",
+        "scope": "Published alias metadata; mathematical read remains corrected arXiv v4."
+      }
     },
     {
       "access": {
@@ -575,6 +587,68 @@
         "url": "https://arxiv.org/pdf/2603.04518v1",
         "sha256": "eb84753911c97a6b618975be5da4dc3b5bdec2b66edf11063d09d75e475abfdc",
         "bytes": 497477
+      }
+    },
+    {
+      "key": "arXiv:1506.04011",
+      "title": "On compatibility between isogenies and polarizations of abelian varieties",
+      "read_depth": "partial",
+      "read_scope": "v3 (18 March 2016); introduction through Theorems 1.1, 1.2, 1.3, 1.4 and opening strategy, lines 1–200. Main proofs not read.",
+      "access": {
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_1506.04011.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_1506.04011.txt",
+        "url": "https://arxiv.org/pdf/1506.04011v3",
+        "sha256": "40140f770a7bdd96078a563e9d0fe3f94c484c4c4da821dd72a04699d837566e",
+        "bytes": 347491
+      }
+    },
+    {
+      "key": "author:Milne-AV-2008",
+      "title": "Abelian Varieties, course notes v2.00",
+      "read_depth": "partial",
+      "read_scope": "v2.00 (March 2008); browser title/contents and Chapter I Section 15, Theorem 15.1 and surrounding reduction statements, browser lines 3647–3789. Used only to corroborate the fixed-degree polarization-finiteness statement; reduction-theory proof not verified. Cached PDF acquired after default GET 406 by supplying standard PDF Accept/browser User-Agent headers.",
+      "access": {
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/author_Milne-AV-2008.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/author_Milne-AV-2008.txt",
+        "url": "https://www.jmilne.org/math/CourseNotes/AV.pdf",
+        "sha256": "f5ca4e63e5092a4b102daad1470e4cbed5fe8f82115e3a28c8881e3f67f6aaef",
+        "bytes": 1291594
+      }
+    },
+    {
+      "key": "arXiv:2607.27746",
+      "title": "Families of curves separating points",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Title and abstract read from the 37-record Orr forward-citation set.",
+      "access": {
+        "metadata_set": "notes/2026-09-09-c1133-orr-citation-set.json",
+        "entry_index": 0,
+        "raw_cache": "/tmp/persistent/tavis/lit-search/c1133-publication-alias-probe/orr-citations.json",
+        "raw_sha256": "6a0426a729338367a437d1ac4e1efc761dc1861910f4d68adb11af8082edc140"
+      }
+    },
+    {
+      "key": "arXiv:2011.05815",
+      "title": "Torsion points on isogenous abelian varieties",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Title and abstract read from the 37-record Orr forward-citation set.",
+      "access": {
+        "metadata_set": "notes/2026-09-09-c1133-orr-citation-set.json",
+        "entry_index": 11,
+        "raw_cache": "/tmp/persistent/tavis/lit-search/c1133-publication-alias-probe/orr-citations.json",
+        "raw_sha256": "6a0426a729338367a437d1ac4e1efc761dc1861910f4d68adb11af8082edc140"
+      }
+    },
+    {
+      "key": "S2:4496cecd08fdb0ce30ae02038e375e4ae5554ce5",
+      "title": "Questions about Isogenies, Automorphisms and Bounds",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Title/identifiers only; no abstract returned. Unresolved lead.",
+      "access": {
+        "metadata_set": "notes/2026-09-09-c1133-orr-citation-set.json",
+        "entry_index": 35,
+        "raw_cache": "/tmp/persistent/tavis/lit-search/c1133-publication-alias-probe/orr-citations.json",
+        "raw_sha256": "6a0426a729338367a437d1ac4e1efc761dc1861910f4d68adb11af8082edc140"
       }
     }
   ],

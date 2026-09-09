@@ -24,6 +24,10 @@ surface-vanishing proofs are now written in
 `notes/2026-09-09-c1133-transport-vanishing-audit.md`. Guéré’s surface nilpotence
 and Cai’s persistence arguments are explicitly credited as precedents.
 
+The arithmetic deduction and a fourth-power polarized-isogeny cross-check are
+in `notes/2026-09-09-c1133-arithmetic-audit.md`. Publication-alias checks enlarge
+the Orr forward set to 37 records; title screening is recorded.
+
 Next finish the remaining geometric/source obligations and the complete
 literature audit. Current coverage, precise access gaps, source read-depth
 register and citation sets:

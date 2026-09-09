@@ -3,7 +3,7 @@
 **Date:** 2026-09-09. **Lane:** `cubic-threefolds`.
 **Status:** incomplete; no global novelty or priority verdict is issued.
 **External sources read at full text: 3 — one paper and two source scripts.**
-The source register contains 40 individual entries, with exact read depths,
+The source register contains 45 individual entries, with exact read depths,
 versions, cache access and hashes. Most papers have partial read depth.
 Iritani’s ten-page Hodge refinement has now been read completely.
 The author-supplied packet has been read completely, including its checker.
@@ -88,7 +88,8 @@ The pinned-seed probe script is `2026-09-09-c1133-citation-probe.py`; its record
 output gives every request verbatim, status, resolved identity, count and raw
 response hash. It uses arXiv identifiers for Semantic Scholar and corresponding
 DataCite arXiv DOIs for OpenAlex/Crossref. A missing DOI record is not a zero
-citation count. A publication-DOI alias check is still needed where appropriate.
+citation count. Publication aliases for Voisin and Orr have now been checked below; other
+aliases remain open where appropriate.
 
 | Pinned arXiv seed | OpenAlex | Crossref | Semantic Scholar |
 |---|---:|---|---|
@@ -187,8 +188,8 @@ negative follows. The title discriminator is the same as the forward-citation
 screen above. Existing Hodge-atom, quantum-period and irrationality entries and
 method-adjacent leads remain in the reading queue. Review bodies were not used
 for theorem claims. The exact-title records resolve the NN DOI and Voisin’s
-published DOI `10.1112/S0010437X21007727`; publication-alias citation checks remain
-open. MathSciNet and Scholar are still not covered.
+published DOI `10.1112/S0010437X21007727`; publication-alias citation checks for Voisin and Orr are recorded in the
+arithmetic follow-up below. MathSciNet and Scholar are still not covered.
 
 ## Transport and closest-predecessor follow-up
 
@@ -221,6 +222,23 @@ screens. The source index exposes NN Theorem 1.1, but new direct IAS requests
 still return 403 and the repository download request returns 404. Exact URLs
 and results are saved in `2026-09-09-c1133-nn-access.json`; no facsimile reading
 or cached primary PDF is claimed.
+
+## Arithmetic and publication-alias follow-up
+
+`2026-09-09-c1133-arithmetic-audit.md` checks the finite-kernel argument and a
+second route using Orr’s fourth-power polarized-isogeny theorems. The latter
+source was found in the largest forward-citation set, not in the packet.
+Milne’s Theorem 15.1 supplies additional statement-level corroboration of
+polarization finiteness; NN’s original PDF remains inaccessible.
+
+Verified publication aliases resolve to OpenAlex/Crossref/Semantic Scholar
+counts **6/6/10 for Voisin** and **21/13/37 for Orr**. The former largest set
+was already retrieved. Orr’s 37-record set was retrieved completely and all
+titles screened; three abstracts were read, one other promoted entry has no
+abstract, and the polarization-compatibility paper was promoted to partial
+primary text. Exact discriminator, URLs, source identities, counts, records
+and raw hashes are in `2026-09-09-c1133-orr-citation-set.json` and the
+publication-alias probe files. No general citation-graph closure is claimed.
 
 ## Novelty ownership and current surface state
 
