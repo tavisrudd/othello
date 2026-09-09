@@ -336,3 +336,10 @@ separate discovery Worker and atomic queued-query promotion. Report:
 must adopt ready reductions as on native; queued-query promotion does not close
 that gap. The native reference and implementation gate are in
 `../2026-09-08-c1130-live-solve-promotion.md`; this is C1130's next priority.
+
+## 2026-09-08 — live promotion design refinement
+
+`../2026-09-08-c1130-live-promotion-design.md` narrows the first continuation spike
+to capacity Fit and identifies counted-relaxation and objective-tie-break hazards.
+The optional mailbox can share control bytes without sharing the WASM solver heap.
+No code or native performance gates changed.

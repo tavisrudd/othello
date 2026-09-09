@@ -69,3 +69,7 @@ Solve completion and background discovery completion have separate timestamps.
 
 This is the next C1130 integration slice. The runnable grammar/inspector work does
 not close it, full WASM parity, or the production module ABI gates.
+
+Deeper design review: `2026-09-08-c1130-live-promotion-design.md`. Start with the
+existing capacity-fit explicit search; admit backend use separately from theorem
+validity. The counted scheduler relaxation makes universal pruning unsafe.

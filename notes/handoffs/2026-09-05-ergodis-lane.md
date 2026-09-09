@@ -99,6 +99,10 @@ matching native watcher/epoch/safe-point semantics. Queued-query cuts do NOT mee
 this requirement. Current scheduling EXECUTE is blocking and lacks resumable
 logical state. Concrete native reference, residual-cover obligations and required
 performance/parity gates: `notes/2026-09-08-c1130-live-solve-promotion.md`.
+Refined proposal: `notes/2026-09-08-c1130-live-promotion-design.md` — first extract
+capacity-fit continuation, then checked bound adoption; backend-use admission is
+separate from theorem validity. Optional shared control mailbox need not share the
+solver heap. This is a proposal, not an implemented execution capability.
 Preview: 8769/8770 `/evolve`, bound to 0.0.0.0; LAN HTTP crypto adapter retained.
 Preserve public-core loading of separately compiled/obfuscated private packages;
 canonical WASM engine plus extensions, not a mandatory private assembly build.
