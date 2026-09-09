@@ -1,0 +1,17 @@
+[
+  {
+    "bytes": 3058,
+    "path": "notes/2026-09-09-c1133-framing-counterexample.py",
+    "sha256": "59c596f3daecae7c6b72f95a0e13251c94181891453ce91862667449d88fea90"
+  },
+  {
+    "bytes": 5445,
+    "path": "notes/2026-09-09-c1133-framing-counterexample.json",
+    "sha256": "b5307705958cf054dd64e39cef1998223eb4be0807639c8ab3b5a4a313ce03c2"
+  },
+  {
+    "bytes": 5387,
+    "path": "notes/2026-09-09-c1133-independent-checks.py",
+    "sha256": "fa8198b4870f6e40366b76e86e52aca34b19ae03e17883ea078bc636d607fd9e"
+  }
+]
