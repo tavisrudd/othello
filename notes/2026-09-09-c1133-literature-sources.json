@@ -251,7 +251,7 @@
       },
       "key": "arXiv:2004.09310",
       "read_depth": "partial",
-      "read_scope": "v3; rational generic Torelli formulation, Theorem 0.2 and Remarks 0.1–0.4, lines 35–105; official arXiv metadata/history.",
+      "read_scope": "v3; rational generic Torelli formulation, Theorem 0.2 and Remarks 0.1–0.4, lines 35–105; official arXiv metadata/history. Additional read: introduction lines 48–73 and Section 1.1 opening lines 338–397; algebraicity of rational-Hodge isomorphism relation and dominance argument verified.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Schiffer variations and the generic Torelli theorem for hypersurfaces",
       "version_in_cached_header": "arXiv:2004.09310v3 [math.AG] 30 May 2021",
@@ -523,14 +523,19 @@
     },
     {
       "access": {
-        "method": "user-supplied packet only"
+        "url": "https://arxiv.org/abs/math/0111062",
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_math_0111062.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_math_0111062.txt",
+        "bytes": 232720,
+        "sha256": "484d2c3586977503dc6f1b43fca158af059cd0f9c5322731d0ebae6d643e160c"
       },
-      "key": "packet:Bit",
-      "read_depth": "secondary only",
-      "read_scope": "Named as an intended input in the author-supplied packet, which was read in full; primary text not yet consulted in C1133. No source-level verdict.",
+      "key": "arXiv:math/0111062",
+      "read_depth": "partial",
+      "read_scope": "v1; introduction extraction lines 20–37 and Section 3 opening/Theorem 3.1 lines 132–166. Proof of the presentation not read. Publisher metadata confirms DOI 10.1112/S0010437X03000617.",
       "secondary_source": "notes/cubic-threefolds-tasks/c1133-m1-upgrade-proof-packet.md, Part XI; full text",
       "title": "The universal Euler characteristic for varieties of characteristic zero",
-      "version_in_cached_header": "not accessed"
+      "version_in_cached_header": "not accessed",
+      "role_status": "Projective-generator blowup presentation statement verified; spectrum relations and annihilation of (L−1) independently checked in optional audit."
     },
     {
       "key": "arXiv:1303.3288",

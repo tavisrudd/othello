@@ -35,7 +35,8 @@ Optional-claim dispositions, the rank-three local proof and uniform odd-cubic
 formula are written in `notes/2026-09-09-c1133-optional-claims-audit.md`.
 Countability and constant coarse moduli need no arithmetic finiteness input.
 Next close the explicitly listed optional source gates and the literature audit;
-the GG corrigendum is still inaccessible. Current coverage, precise access gaps, source read-depth
+the GG corrigendum is still inaccessible. Voisin algebraic correspondence loci
+and Bittner’s additive extension are now checked in the optional audit. Current coverage, precise access gaps, source read-depth
 register and citation sets:
 `notes/2026-09-09-c1133-literature-audit.md`.
 No global novelty verdict or manuscript promotion has passed. Review of

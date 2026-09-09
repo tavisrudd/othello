@@ -310,3 +310,23 @@ Hartlieb arXiv PDFs were retrieved from the shared cache. The SGA reproduced
 HTML was saved with a hash. No new PDF was fetched successfully in this pass.
 The conjectural/conditional source gates in the optional report must not be
 silently converted into accepted manuscript claims.
+
+### Algebraic loci and additive extension
+
+Voisin v3 §1.1 and introduction explicitly supply algebraic rational-Hodge
+correspondence loci, closing the exceptional-locus source obligation.
+Bittner arXiv:math/0111062v1 Theorem 3.1 gives smooth projective generators
+with exactly the relations satisfied by the spectrum. The optional audit
+now proves that its additive extension kills the whole ideal (L−1).
+The packet-only Bittner entry is replaced by its pinned partial-text entry;
+total sources and full-text counts are unchanged.
+
+One discovery query, verbatim, 2026-09-09:
+
+```text
+Bittner universal Euler characteristic varieties characteristic zero blow up presentation 0111062
+```
+
+The cached Bittner PDF was used. The publisher's linked PDF metadata verifies
+DOI 10.1112/S0010437X03000617, but that publication PDF was not fetched or
+read. No citation-graph closure is inferred from this input check.

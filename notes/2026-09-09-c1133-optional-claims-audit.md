@@ -9,7 +9,7 @@ It does not mean formal verification or a novelty verdict.
 
 | Packet location | Disposition | Exact boundary |
 |---|---|---|
-| §27 exceptional loci | Conditional source gate | Needs algebraic finite-type components of the rational-Hodge relation in Voisin §1.1, beyond generic Torelli. |
+| §27 exceptional loci | Accepted deduction | Voisin introduction and §1.1 supply algebraic rational-Hodge correspondences; generic Torelli excludes dominant off-diagonal components. |
 | §28 countability and families | Accepted deduction | Countably many geometric cubic classes; constant coarse moduli, without claiming a product family over the original base. |
 | §30 potential reduction | Accepted deduction with classical imports | Compare after a common extension defining the isogeny and giving semistable reduction. |
 | §§30–31 special pencil | Conditional companion import | Local toric ranks, surface upper bound and pencil isogeny theorem are not proved here. |
@@ -19,7 +19,7 @@ It does not mean formal verification or a novelty verdict.
 | §34 dimensional obstruction | Accepted | Blowup additivity plus birational invariance in dimension n+2 kills the invariant on every n-fold. |
 | §35 integral boundary | Accepted limitation | Rational projectors and pairing supply neither an integral lattice nor integral cancellation. |
 | Appendix I rank three | Accepted local construction | Cyclic whole rank-three even block, pairing, flat bulk family, and original regular comparison and inverse. No arbitrary-rank theorem. |
-| Appendix II odd cubics | Accepted formula; conditional global applications | Uniform formula for odd n≥3. Grothendieck-group use needs its global additive extension and Bittner source gate. |
+| Appendix II odd cubics | Accepted formula and additive applications | Uniform formula for odd n≥3; Bittner Theorem 3.1 supplies the extension. No arbitrary-dimensional birational invariance. |
 | Appendix III motives | Conditional source gate | Displayed rational motive calculation checks; GG corrigendum and prior motive/L-equivalence comparison remain to audit. |
 
 The finite rank-three values and gauge identities already have committed
@@ -43,9 +43,21 @@ constant coarse moduli; no trivialization over the original base is asserted.
 Neither Orr nor Narasimhan–Nori is needed for these two deductions.
 
 Countability for each fixed source does not by itself prove the exceptional
-locus assertion. That assertion needs algebraic finite-type components of the
-rational-Hodge correspondence. Only then does nondominance imply that the
-source image has proper closure.
+locus assertion. Voisin v3 introduction (extraction lines 48–73) explicitly
+states that the rational-Hodge isomorphism relation is a countable union of
+closed algebraic subsets; §1.1 (lines 352–397) explains the Hodge-locus argument.
+Her Remark 0.1 addresses the unpolarized generic formulation. For an irreducible
+component not contained in the diagonal, remove its diagonal intersection.
+If its source projection were dominant, its constructible image would contain
+an open set, meeting the very-general locus where rational generic Torelli
+forces the pair to be diagonal, a contradiction. Thus its source image has
+proper closure. The resulting countably many proper closed subsets contain
+all nontrivial one-stable partners. The source statement is imported; the
+underlying Cattani–Deligne–Kaplan theorem has not separately been read here.
+For dominant cubic families on an irreducible base, the inverse images of these
+proper exceptional loci remain proper. The coarse moduli maps agree at very
+general points and hence on a dense set; separatedness makes the equalizer
+closed, so they agree everywhere they are both defined.
 
 ## Potential reduction
 
@@ -165,13 +177,25 @@ finite-jet formula therefore gives
 The n=3 case is the already independently audited cubic block. This is a
 uniform proof, not numerical extrapolation.
 
-Conditional on extension through the smooth-projective blowup presentation
-of K0(Var_C), the projective-bundle formula makes L act as one. For
+Bittner arXiv:math/0111062v1 Theorem 3.1 (lines 139–164) explicitly permits
+smooth projective generators with the blowup relation. If S denotes the
+spectrum, its already audited formulas give
+
+    S(Bl_Z Y)−S(P(N_Z/Y))
+      = S(Y)+(c−1)S(Z)−cS(Z) = S(Y)−S(Z).
+
+Set S(empty)=0 and add over connected components. This verifies every relation
+and defines an additive homomorphism on K0(Var_C). Moreover, for every smooth
+projective generator X,
+
+    S((L−1)[X]) = S([X×P¹]−2[X]) = 0.
+
+Because these generators span the whole group, S kills the entire ideal
+(L−1). This proves the extension without presuming multiplicativity. For
 V_n=Bl_(X_n) P^(n+2), codimension is two and the ambient spectrum vanishes,
 so S(V_n)=e_((n−1)²/9). The spectral homomorphism to the subgroup on these
 distinct labels has a section sending the basis vector to [V_n]. This proves
-the split infinite-rank statement once that global extension and its Bittner
-source are checked. These rational varieties have different dimensions.
+the split infinite-rank statement using the now-verified global extension. These rational varieties have different dimensions.
 There is no assertion of arbitrary-dimensional birational invariance.
 
 ## Rational-motive example
@@ -188,8 +212,8 @@ Five pairwise disjoint translated plane elliptic curves in P³ exist: for each
 new translate the incidence condition with finitely many previously chosen
 curves is proper, since 1+1<3. The motivic blowup formula gives six copies
 of each L and L² and the five h¹(E)⊗L summands on both sides, as claimed.
-Point/curve vanishing gives spectrum difference e_(4/9). Once the additive
-extension is established, P(L)([X']−[Y]) maps to P(1)e_(4/9), proving the
+Point/curve vanishing gives spectrum difference e_(4/9). The additive
+extension sends P(L)([X']−[Y]) to P(1)e_(4/9), proving the
 annihilator restriction without multiplicativity of the spectrum.
 
 The two-page GG corrigendum has DOI 10.1090/S1056-3911-2013-00634-7.
@@ -211,9 +235,11 @@ polarized or algebra-object motive conclusion is asserted.
 - **Settled boundary:** apply blowup additivity to X×P² along X×{p}.
   Birational invariance in dimension n+2 forces J(X)=0. Adding higher-rank
   selectors cannot evade this while preserving the same additive contract.
-- **Open source gates:** algebraic Hodge-correspondence loci; minimal-surface
-  c2≥0; cone correspondence; Bittner presentation; GG corrigendum; exact pencil
-  imports and the motive/L-equivalence prior-work comparison. These are
+- **Settled:** Voisin supplies algebraic correspondence loci; Bittner supplies
+  the exact projective-generator presentation. The additive spectrum kills the
+  full ideal (L−1), without a multiplicativity assumption.
+- **Open source gates:** minimal-surface c2≥0; cone correspondence; GG
+  corrigendum; exact pencil imports and the motive/L-equivalence comparison. These are
   obligations, not counterexamples or grounds for a novelty claim.
 
 No manuscript or formal-annotation registry has been changed. Inclusion and
