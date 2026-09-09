@@ -103,6 +103,16 @@ Refined proposal: `notes/2026-09-08-c1130-live-promotion-design.md` — first ex
 capacity-fit continuation, then checked bound adoption; backend-use admission is
 separate from theorem validity. Optional shared control mailbox need not share the
 solver heap. This is a proposal, not an implemented execution capability.
+Capacity Fit now has native/WASM resumable execution and checked same-run bound
+adoption, with parity/allocation/performance evidence and live proof markers.
+Report: `notes/2026-09-08-c1130-live-fit-spike.md`. `/live-fit` is available on both
+preview ports and linked from the main Evolve page. **User clarification:**
+this does not satisfy live promotion in the EXISTING 96/72/24-job Evolve grid
+queries; preserve those questions and connect their forward execution paths next.
+Browser race performance audit (private `7050e88`): `ergodis-private/analysis/module-loading/race-performance.md`. CPU/GPU race expanded to 216 modeled jobs; native/WASM matching boundary measurements show controller round trips and redundant bound evaluations, not missing WASM kernels, dominate the observed penalty. Served runner now caches each bound per query and uses 65536-unit safe-point slices; the existing live ResourceExecution/provider integration and runner remain uncommitted pending native hardware-counter acceptance. Both public previews use `active-grid-initial` packages; all three original races and live Fit complete. Native/WASM query answers and resumable work counts agree in the audit. The final 216-job run had queued exclusions but no in-flight adoptions; do not overclaim its promotion evidence.
+Also requested: a huge-space benchmark demonstration. BENCHMARKS.md's Ceph XOR
+80-diamond 2^80 compressed support family is the leading candidate; actual WASM
+execution and domain visualizations are required, not static benchmark artwork.
 Preview: 8769/8770 `/evolve`, bound to 0.0.0.0; LAN HTTP crypto adapter retained.
 Preserve public-core loading of separately compiled/obfuscated private packages;
 canonical WASM engine plus extensions, not a mandatory private assembly build.
