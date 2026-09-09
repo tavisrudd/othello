@@ -650,6 +650,31 @@
         "raw_cache": "/tmp/persistent/tavis/lit-search/c1133-publication-alias-probe/orr-citations.json",
         "raw_sha256": "6a0426a729338367a437d1ac4e1efc761dc1861910f4d68adb11af8082edc140"
       }
+    },
+    {
+      "key": "arXiv:2312.13782",
+      "title": "One-nodal Fano threefolds with Picard number one",
+      "version_in_cached_header": "arXiv:2312.13782v2 [math.AG] 13 Nov 2024",
+      "read_depth": "partial",
+      "read_scope": "Introduction extraction lines 120–151; p. 13 definition (2.5) and Table 5 (visual verification from cached PDF); bibliography [IP99] lines 5930–5932. Publisher HTML metadata verifies DOI 10.4213/im9585e; published PDF not read.",
+      "role_status": "Imported smooth seventeen-family exhaustion and all-family Hodge numbers; not an audit of the nodal classification theorem or a forward-citation negative.",
+      "access": {
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2312.13782.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2312.13782.txt",
+        "url": "https://arxiv.org/pdf/2312.13782v2",
+        "sha256": "a5d34feec13bbbe2c65399edbda1d957f4a35363a0d3794ff6fd45b00e0ce9f2",
+        "bytes": 1162944
+      }
+    },
+    {
+      "key": "book:Iskovskikh-Prokhorov-1999",
+      "title": "Fano varieties, Algebraic geometry V, Encyclopaedia Math. Sci. 47",
+      "read_depth": "secondary only",
+      "read_scope": "Bibliographic entry [IP99] and explicit classification/Table §12.2 attribution in KP arXiv:2312.13782v2; book itself not accessed or read.",
+      "role_status": "Original classification overview behind the inspected KP statement.",
+      "access": {
+        "via": "arXiv:2312.13782v2, introduction p. 3, Table 5 p. 13 and bibliography"
+      }
     }
   ],
   "external_full_text_breakdown": {

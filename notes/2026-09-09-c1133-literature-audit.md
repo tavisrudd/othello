@@ -3,7 +3,7 @@
 **Date:** 2026-09-09. **Lane:** `cubic-threefolds`.
 **Status:** incomplete; no global novelty or priority verdict is issued.
 **External sources read at full text: 3 — one paper and two source scripts.**
-The source register contains 45 individual entries, with exact read depths,
+The source register contains 47 individual entries, with exact read depths,
 versions, cache access and hashes. Most papers have partial read depth.
 Iritani’s ten-page Hodge refinement has now been read completely.
 The author-supplied packet has been read completely, including its checker.
@@ -35,7 +35,9 @@ The author-supplied packet has been read completely, including its checker.
    complete classification proof. The later provenance check matches all fifteen
    index-one/two archive matrices entrywise and checks their period inputs through
    degree eight. The special quartic and GM deformation bridges are written in
-   `2026-09-09-c1133-geometric-source-audit.md`; imported exhaustion remains open.
+   `2026-09-09-c1133-geometric-source-audit.md`; KP arXiv:2312.13782v2
+   now supplies explicit smooth seventeen-family exhaustion and Table 5 verifies
+   all seventeen Hodge numbers. The original IP99 book remains secondary-only.
 5. The packet omits two close comparison sources found through forward citations.
    Lee–Przyjalkowski, `arXiv:2510.21222v1`, Theorems 1.2 and 1.4 concern ordinary
    rationality of general Fano threefolds through mirror monodromy. They must
@@ -259,3 +261,23 @@ is changed by this checkpoint.
 - **Open:** source alias/service coverage, complete promoted-source reading,
   all-family geometric inputs and final claim-by-claim novelty dispositions.
   These remain C1133 work, before manuscript and hierarchy review.
+
+## Smooth-family source follow-up
+
+Queries on 2026-09-09, recorded verbatim:
+
+```text
+Fano threefolds Picard rank one table h12 52 30 20 14 Kuznetsov
+Fano threefolds classification genus 6 8 rational Kuznetsov Prokhorov table hodge numbers
+```
+
+These discovery queries located KP arXiv:2312.13782, then pinned to v2 through
+its arXiv metadata. The publisher page
+https://www.mathnet.ru/php/archive.phtml?jrnid=im&option_lang=eng&paperid=9585&wshow=paper
+verifies DOI 10.4213/im9585e. Only the selected KP source was promoted for the
+geometric check; this is not an exhaustive search-result screen or a negative
+search. Other displayed results have not been promoted as read sources.
+The arXiv PDF was cache-queried before fetching and ingested with its hash.
+Web screenshot returned cache miss; local pdftoppm was unavailable. The cached
+PDF p. 13 was instead rendered with PyMuPDF and visually inspected successfully.
+Full-text count is unchanged. No citation-graph negative is asserted here.

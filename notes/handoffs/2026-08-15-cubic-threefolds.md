@@ -44,8 +44,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Fifteen external matrix reconstructions and their period inputs now match;
   special-model bridges: `../2026-09-09-c1133-geometric-source-audit.md`.
   Operation and surface proofs: `../2026-09-09-c1133-transport-vanishing-audit.md`.
-  Finish geometric/source validation and complete literature coverage before
-  manuscript upgrades and hierarchy review. No global novelty verdict yet. Card:
+  Seventeen-family exhaustion and Hodge numbers are source-verified. Finish
+  optional-claim dispositions and literature coverage before manuscript upgrades
+  and hierarchy review. Collaborator discussion is parked per author. No global novelty verdict yet. Card:
   `../cubic-threefolds-tasks/c1133-m1-major-upgrade-audit.md`; audit:
   `../2026-09-09-c1133-literature-audit.md`.
 

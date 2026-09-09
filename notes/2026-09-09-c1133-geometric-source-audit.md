@@ -70,8 +70,55 @@ models in sections 7 and 12–17. These are source identifications, not a new pr
 of the classification. Transport of the full small quantum product uses smooth
 deformation invariance and the marked ample generator; transporting Hodge
 representations themselves along a deformation is neither asserted nor needed.
-The all-family acceptance record still needs to state precisely which imported
-classification results supply exhaustion of these models and families.
+The imported exhaustion and all-family Hodge-number check are recorded below.
+
+## Classification exhaustion and Hodge numbers
+
+Kuznetsov–Prokhorov, *One-nodal Fano threefolds with Picard number one*,
+arXiv:2312.13782v2, introduction p. 3, explicitly recalls that there are exactly
+seventeen smooth Picard-rank-one deformation families, uniquely determined by
+index and genus/degree. This is the smooth classification recalled in their
+introduction, not their new classification of singular degenerations. Their
+Table 5, p. 13, explicitly applies to all smooth members and supplies the
+following values. The table was checked visually against the cached PDF because
+the plain text extraction interleaves its index headers.
+
+| Index | Packet family labels, in order | h^(2,1), in the same order |
+|---|---|---|
+| 1 | g=2,3,4,5,6,7,8,9,10,12 | 52,30,20,14,10,7,5,3,2,0 |
+| 2 | d=1,2,3,4,5 | 21,10,5,2,0 |
+| 3 | quadric | 0 |
+| 4 | projective space | 0 |
+
+These seventeen entries agree with packet section 20. The source uses
+anticanonical genus g=4d+1 in its index-two columns; converting those labels is
+essential. In particular every one of the nine detected families has nonzero
+H^3. Nonzero H^3 alone is not an irrationality test: rational controls g=7,9,10
+and d=4 also have nonzero H^3.
+
+The source attributes the classification and its table to Iskovskikh–Prokhorov,
+*Fano varieties*, Encyclopaedia of Mathematical Sciences 47 (1999), especially
+Table §12.2. That book has not been independently read here; its role is an
+explicitly secondary imported source through the inspected KP passages. The
+source obligation for exhaustion is satisfied at the level of an established
+classification statement, not by a new proof or a claim to have read the entire
+classification literature. Combine it with the CCGK family identifications,
+smooth deformation invariance, and the special-model bridges above.
+
+For the eight rational controls, KP arXiv:1911.08949v3 §1.1 explicitly lists
+P^3, Q^3, V4, V5, X12, X16, X18, X22 as the geometrically rational families;
+these are packet d=4,5 and g=7,9,10,12 in addition to P^3 and Q^3. Its Theorem
+1.1 concerns forms over nonclosed fields and supplies finer rationality criteria.
+Over C the imported geometric rationality statement applies to all smooth
+members. We do not use deformation invariance of rationality. The theorem's
+proof throughout the remainder of that paper has not been read in full.
+
+Read depth for the new KP source: **partial**, cached v2 (83 pages), introduction
+extraction lines 120–151, p. 13 definition (2.5) and Table 5, and bibliography
+entry [IP99] lines 5930–5932. PDF SHA-256:
+`a5d34feec13bbbe2c65399edbda1d957f4a35363a0d3794ff6fd45b00e0ce9f2`.
+The publisher verifies the publication alias DOI 10.4213/im9585e; the
+publication PDF has not been read. No forward-citation closure is inferred.
 
 ## Two source-positioning corrections
 
@@ -105,8 +152,12 @@ of Theorem 5.3. The packet's scalar shifts agree with the algebra relation.
   the cone perturbation gives the analogous GM bridge.
 - **Settled:** the GM-announcement lead concerns fourfolds, and Cai supplies
   a persistence precedent that must be credited.
-- **Open:** imported classification exhaustion, the complete operation and
-  vanishing proofs, all optional branches, and the full literature verdict.
-  Finite reconstruction is not a substitute for these gates.
+- **Settled:** imported seventeen-family exhaustion and all seventeen Hodge
+  numbers; the rational-control input has all-member geometric scope. The
+  operation and vanishing proofs are written in the separate transport audit.
+- **EJ+TT refinement:** positive Hodge number does not separate rational controls
+  from detected families. The selector and retained lattice remain essential.
+- **Open:** optional branches and the full literature verdict. Finite
+  reconstruction is not a substitute for these gates.
 
 No manuscript or public novelty statement is changed by this checkpoint.

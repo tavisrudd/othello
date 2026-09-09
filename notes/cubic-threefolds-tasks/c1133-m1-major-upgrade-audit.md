@@ -28,8 +28,10 @@ The arithmetic deduction and a fourth-power polarized-isogeny cross-check are
 in `notes/2026-09-09-c1133-arithmetic-audit.md`. Publication-alias checks enlarge
 the Orr forward set to 37 records; title screening is recorded.
 
-Next finish the remaining geometric/source obligations and the complete
-literature audit. Current coverage, precise access gaps, source read-depth
+Seventeen-family classification exhaustion and all seventeen Hodge numbers
+are now source-verified in the geometric audit; the eight rational controls
+have all-member geometric scope. Collaborator discussion is parked per author.
+Next finish optional-claim dispositions and the complete literature audit. Current coverage, precise access gaps, source read-depth
 register and citation sets:
 `notes/2026-09-09-c1133-literature-audit.md`.
 No global novelty verdict or manuscript promotion has passed. Review of
