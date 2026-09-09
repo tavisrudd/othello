@@ -47,7 +47,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Seventeen-family exhaustion and Hodge numbers are source-verified. Finish
   optional source gates and literature coverage before manuscript upgrades
   and hierarchy review. Dispositions and rank-three/odd-cubic proofs:
-  `../2026-09-09-c1133-optional-claims-audit.md`. Collaborator discussion is parked per author. No global novelty verdict yet. Card:
+  `../2026-09-09-c1133-optional-claims-audit.md` (cone and GG correction checked;
+  broad motive/L-equivalence distinction credited). Collaborator discussion is parked per author. No global novelty verdict yet. Card:
   `../cubic-threefolds-tasks/c1133-m1-major-upgrade-audit.md`; audit:
   `../2026-09-09-c1133-literature-audit.md`.
 

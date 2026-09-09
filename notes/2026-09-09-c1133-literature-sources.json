@@ -1,5 +1,5 @@
 {
-  "external_full_text_count": 3,
+  "external_full_text_count": 4,
   "sources": [
     {
       "access": {
@@ -324,7 +324,7 @@
       "key": "arXiv:0806.0173",
       "read_depth": "partial",
       "read_scope": "Cached original preprint: Theorem 8 and proof excerpts 769–890 and 900–936, including Corollary 9 and Section 6 opening. Gap 891–899 and earlier proof dependencies not read.",
-      "role_status": "Rational motive decomposition and applicability to Fano threefolds statement-verified; published corrigendum remains inaccessible.",
+      "role_status": "Rational motive decomposition and Fano applicability statement-verified. Full author-uploaded corrigendum now read; corrected property suffices and results are unchanged.",
       "title": "Motives and representability of algebraic cycles on threefolds over a field",
       "version_in_cached_header": "arXiv:0806.0173v3 [math.AG] 12 Nov 2012"
     },
@@ -337,9 +337,9 @@
         "url": "https://arxiv.org/pdf/1705.04063v4"
       },
       "key": "arXiv:1705.04063",
-      "read_depth": "abstract/metadata only",
-      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
-      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "read_depth": "partial",
+      "read_scope": "v4; introduction through extraction line 135 (Theorems 0.1 and 0.2), and 646–680 (Corollary 3.2 and explicit L-equivalence correction/credit to Efimov).",
+      "role_status": "Established rational Chow-motive isomorphism for isogenous K3s, and explicit acknowledgment of non-L-equivalent predecessors; no full-paper absence claim.",
       "title": "Motives of isogenous K3 surfaces",
       "version_in_cached_header": "arXiv:1705.04063v4 [math.AG] 14 Mar 2018"
     },
@@ -352,9 +352,9 @@
         "url": "https://arxiv.org/pdf/2605.30875"
       },
       "key": "arXiv:2605.30875",
-      "read_depth": "abstract/metadata only",
-      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
-      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "read_depth": "partial",
+      "read_scope": "v1; introduction extraction lines 1–85, including Theorems 1.1–1.3 and Corollary 1.4.",
+      "role_status": "Cone criterion corroboration and all-member cylindrical rational controls g=9,10. Historical all/general irrationality distinctions read, not treated as current exhaustive classification.",
       "title": "Cylinders in Fano threefolds of genus 9 and 10",
       "version_in_cached_header": "arXiv:2605.30875v1 [math.AG] 29 May 2026"
     },
@@ -702,9 +702,9 @@
     {
       "key": "10.1090/S1056-3911-2013-00634-7",
       "title": "Corrigendum to Motives and representability of algebraic cycles on threefolds over a field",
-      "read_depth": "abstract/metadata only",
-      "read_scope": "Search metadata and indexed abstract identify correction to Lemma 3.1(5), JAG 22 (2013), 795–796. No body of correction read.",
-      "role_status": "Required correction audit unresolved; no assertion that the correction affects only integral conclusions.",
+      "read_depth": "full text",
+      "read_scope": "Complete author-uploaded two-page corrigendum reproduced in ResearchGate HTML, web lines 45–249: corrected Lemma 1, proof, acknowledgement and all references. Original AMS facsimile and author PDF not obtained.",
+      "role_status": "Correction changes isomorphism to injectivity with finite cokernel; authors explain that results are unaffected. Complete proof read, closing the rational-motive correction gate.",
       "access": {
         "metadata_url": "https://www.researchgate.net/publication/264913196_Corrigendum_to_Motives_and_representability_of_algebraic_cycles_on_threefolds_over_a_field",
         "attempts": [
@@ -719,8 +719,55 @@
           {
             "url": "https://pcwww.liv.ac.uk/~guletski/",
             "status": "502 via web"
+          },
+          {
+            "url": "https://www.researchgate.net/profile/Vladimir-Guletskii/publication/264913196_Corrigendum_to_Motives_and_representability_of_algebraic_cycles_on_threefolds_over_a_field/links/590f0fc8a6fdccad7b12442c/Corrigendum-to-Motives-and-representability-of-algebraic-cycles-on-threefolds-over-a-field.pdf",
+            "status": "403 via curl; web click cache miss; HTML author-upload reproduction succeeds"
           }
-        ]
+        ],
+        "web_response": "/tmp/persistent/tavis/lit-search/c1133-intake/gg-corrigendum-web-response.json",
+        "sha256": "ec9e1bf11e4fd2a7f415c1d92edb675638f591f3898b3bedd8203459f0c0f069",
+        "author_upload": "ResearchGate identifies uploader Vladimir Guletskii, 7 May 2017"
+      }
+    },
+    {
+      "key": "arXiv:1212.4249",
+      "title": "Ga-actions on affine cones",
+      "read_depth": "partial",
+      "read_scope": "v3; extraction lines 46–91 (Proposition 0.5, Theorem 0.6 and normality caveat) and 751–770 (Corollary 3.2 and its proof).",
+      "role_status": "Forward cone-to-polar-cylinder implication verified under normal-base hypothesis; matches projectively normal ample embeddings.",
+      "access": {
+        "url": "https://arxiv.org/pdf/1212.4249v3",
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_1212.4249.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_1212.4249.txt",
+        "bytes": 278721,
+        "sha256": "b049f90283cf35798a7b5339d04aee5f7f9a7c6a9783c01f9f0614a6c686eaaa"
+      }
+    },
+    {
+      "key": "arXiv:1707.08997",
+      "title": "Some remarks on L-equivalence of algebraic varieties",
+      "read_depth": "partial",
+      "read_scope": "v3; introduction lines 1–115 and Section 3 lines 455–505 (Theorem 3.4, Corollaries 3.5–3.6 and proofs).",
+      "role_status": "Direct primary predecessor for non-L-equivalent isogenous K3/Kummer surfaces; combined with Huybrechts gives rational-motive counterexamples. No blanket novelty for this distinction.",
+      "access": {
+        "url": "https://arxiv.org/pdf/1707.08997v3",
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_1707.08997.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_1707.08997.txt",
+        "bytes": 168990,
+        "sha256": "1bb301b12a3a5e006fe8025b48fe277ffe6ee3e68d877b4150108519e062dc3f"
+      }
+    },
+    {
+      "key": "10.2969/aspm/01010449",
+      "title": "The Chern Classes and Kodaira Dimension of a Minimal Variety",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Metadata confirms Miyaoka, ASPM 10 (1987), 449–476; no theorem body obtained.",
+      "role_status": "Intended source for c2≥0 of minimal nef-canonical surfaces; still open, no negative conclusion.",
+      "access": {
+        "url": "https://doi.org/10.2969/aspm/01010449",
+        "redirect": "https://projecteuclid.org/euclid.aspm/1525310279",
+        "status": "web safe-open failure; curl HTTP response is Incapsula anti-bot HTML (1156 bytes), not paper; modern chapter URL exposes iframe only"
       }
     }
   ],

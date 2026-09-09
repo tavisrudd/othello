@@ -15,12 +15,12 @@ It does not mean formal verification or a novelty verdict.
 | §§30–31 special pencil | Conditional companion import | Local toric ranks, surface upper bound and pencil isogeny theorem are not proved here. |
 | §32 odd excess | Conditional source gate | Needs the precise minimal-nef-surface inequality c2≥0 and its source. |
 | §33 cylinders | Accepted geometric deduction | A dominated surface of a rationally connected Fano threefold is rational. |
-| §33 affine cones | Conditional source gate | Needs the polarized-cylinder/additive-action correspondence with exact embedding hypotheses. |
+| §33 affine cones | Accepted imported deduction | KPZ Proposition 0.5 and Theorem 0.6(a): an additive action forces a polar cylinder on the normal projective base. |
 | §34 dimensional obstruction | Accepted | Blowup additivity plus birational invariance in dimension n+2 kills the invariant on every n-fold. |
 | §35 integral boundary | Accepted limitation | Rational projectors and pairing supply neither an integral lattice nor integral cancellation. |
 | Appendix I rank three | Accepted local construction | Cyclic whole rank-three even block, pairing, flat bulk family, and original regular comparison and inverse. No arbitrary-rank theorem. |
 | Appendix II odd cubics | Accepted formula and additive applications | Uniform formula for odd n≥3; Bittner Theorem 3.1 supplies the extension. No arbitrary-dimensional birational invariance. |
-| Appendix III motives | Conditional source gate | Displayed rational motive calculation checks; GG corrigendum and prior motive/L-equivalence comparison remain to audit. |
+| Appendix III motives | Accepted imported deduction | GG correction preserves the results; the broad motive/L-equivalence distinction already occurs in Efimov and Huybrechts. Novelty of the explicit threefold pair remains unclaimed. |
 
 The finite rank-three values and gauge identities already have committed
 packet-checker evidence in the finite audit. The following are symbolic proofs,
@@ -217,11 +217,56 @@ extension sends P(L)([X']−[Y]) to P(1)e_(4/9), proving the
 annihilator restriction without multiplicativity of the spectrum.
 
 The two-page GG corrigendum has DOI 10.1090/S1056-3911-2013-00634-7.
-Metadata identifies a correction to Lemma 3.1(5). The AMS article page and
-direct PDF returned 403; the author homepage returned 502. We have not read
-the correction. The rational-motive calculation is accepted conditionally on
-the corrected imported theorem; this source gate remains open. No integral,
-polarized or algebra-object motive conclusion is asserted.
+The author-uploaded reproduction on ResearchGate is now read completely,
+including proof and references (web lines 45–249). It corrects the integral
+cycle-class claim to injectivity with finite cokernel and explicitly explains
+that this is the property used downstream, leaving the results unaffected.
+The proof uses the decomposition-of-diagonal integer N to put N times the
+cohomology group in the cycle-class image; the remaining quotient maps into
+finite étale cohomology with finite coefficients. This closes the correction
+check. The original AMS PDF and the author-upload PDF remained inaccessible;
+the exact web response is cached and hashed. No integral isomorphism of the
+corrected cycle-class map is being imported.
+
+### Exact prior-work comparison
+
+Huybrechts arXiv:1705.04063v4 Theorem 0.2 gives isomorphic rational Chow motives
+for isogenous K3 surfaces. The discussion after Corollary 3.2 explicitly
+withdraws the stronger L-equivalence expectation and credits Efimov.
+Efimov arXiv:1707.08997v3 Corollary 3.5 supplies isogenous Kummer surfaces
+which are not L-equivalent; Corollary 3.6 also supplies twisted-derived
+examples. Together these sources already separate rational Chow motives from
+L-equivalence. The packet itself acknowledges the broad precedent, so this
+confirms its stated boundary rather than refuting a claimed new result.
+
+The task's candidate contribution is the explicit pair of smooth projective
+threefolds, one rational and the other irrational after one stabilization,
+with the same rational Chow motive and an explicit lattice-spectrum
+obstruction. No search-exhaustion or first-example claim is made. The stronger
+annihilator statement in the packet follows from its (L−1)-quotient invariant;
+it should not be presented as the first failure of rational motives to detect
+L-equivalence. The original K3 papers use integral Hodge realizations to study
+L-equivalence, not the packet's surface-vanishing spectral selector.
+
+## Cylinder and cone source check
+
+KPZ arXiv:1212.4249v3 Proposition 0.5 identifies nonzero locally nilpotent
+derivations with effective additive-group actions and principal cylinders
+on an affine variety. Theorem 0.6(a) sends a cylinder on an affine quasicone
+to a polar cylinder on its normal projective base. Only this forward direction
+is needed. For the packet's projectively normal ample embedding, its graded
+coordinate ring is a finitely generated domain and Proj is the smooth Fano
+threefold. Thus the hypotheses match, and absence of any cylinder on the
+base rules out every nontrivial additive action on that cone. Corollary 3.2
+also states the equivalence for an integral ample divisor; no converse or
+Veronese-lifting assertion is needed in this application.
+
+Virin arXiv:2605.30875v1 introduction/Theorem 1.1 independently recalls the
+Picard-rank-one criterion. Its main Theorem 1.3 proves all-member cylindricity
+for genera 9 and 10, which are rational controls, not detected families.
+The inspected introduction distinguishes all-member irrationality in genera
+2,3,5,8 from general-member results in 4,6. This is useful scope evidence,
+not a proof that no newer all-member result exists.
 
 ## EJ+TT and Mystery ledger
 
@@ -238,8 +283,13 @@ polarized or algebra-object motive conclusion is asserted.
 - **Settled:** Voisin supplies algebraic correspondence loci; Bittner supplies
   the exact projective-generator presentation. The additive spectrum kills the
   full ideal (L−1), without a multiplicativity assumption.
-- **Open source gates:** minimal-surface c2≥0; cone correspondence; GG
-  corrigendum; exact pencil imports and the motive/L-equivalence comparison. These are
+- **Settled:** the cone implication uses only KPZ’s forward direction. The GG
+  correction preserves the rational decomposition; Efimov/Huybrechts already
+  establish the broad motive/L-equivalence distinction.
+- **Open source gates:** minimal-surface c2≥0 and exact pencil imports. The
+  first Miyaoka publisher attempt returned an anti-bot page, not source text.
+  Full citation coverage and novelty of the specific threefold construction
+  remain separate open obligations. These are
   obligations, not counterexamples or grounds for a novelty claim.
 
 No manuscript or formal-annotation registry has been changed. Inclusion and

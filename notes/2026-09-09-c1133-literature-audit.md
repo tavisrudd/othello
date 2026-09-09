@@ -2,8 +2,8 @@
 
 **Date:** 2026-09-09. **Lane:** `cubic-threefolds`.
 **Status:** incomplete; no global novelty or priority verdict is issued.
-**External sources read at full text: 3 — one paper and two source scripts.**
-The source register contains 49 individual entries, with exact read depths,
+**External sources read at full text: 4 — two papers and two source scripts.**
+The source register contains 52 individual entries, with exact read depths,
 versions, cache access and hashes. Most papers have partial read depth.
 Iritani’s ten-page Hodge refinement has now been read completely.
 The author-supplied packet has been read completely, including its checker.
@@ -330,3 +330,49 @@ Bittner universal Euler characteristic varieties characteristic zero blow up pre
 The cached Bittner PDF was used. The publisher's linked PDF metadata verifies
 DOI 10.1112/S0010437X03000617, but that publication PDF was not fetched or
 read. No citation-graph closure is inferred from this input check.
+
+## Cone and rational-motive source closeout
+
+KPZ arXiv:1212.4249v3 closes the affine-cone implication with the packet's
+normality hypotheses. The full author-uploaded GG corrigendum is now read
+through its ResearchGate reproduction and cached as the exact web response.
+The correction preserves the paper's results. Earlier entries recording failed
+AMS access describe those attempts; they no longer mean the correction is unread.
+The full-text count increases to four: two papers (including this two-page
+correction) and two scripts. Both newly fetched PDFs, KPZ and Efimov, were
+cache-queried first and ingested with hashes. They have partial read depth.
+
+Huybrechts Theorem 0.2 plus Efimov Corollary 3.5 already give isomorphic rational
+Chow motives without L-equivalence. The packet acknowledges this broad prior
+phenomenon. The optional audit now specifies the actual threefold/one-stabilization
+comparison, without asserting firstness for it. Virin's g=9,10 theorem concerns
+rational controls; his introduction supplies a useful all-member/general-member
+scope distinction. The Miyaoka theorem text remains unavailable at the attempted
+publisher routes, so the optional odd-excess inequality source gate stays open.
+
+Verbatim discovery/access queries, 2026-09-09:
+
+```text
+"Guletskii" "corrigendum" motives pdf -site:researchgate.net -site:scispace.com
+"affine cones" "cylinders" additive group action Kishimoto Prokhorov Zaidenberg
+"Motives" "corrigendum" "Gorchinskiy" site:livrepository.liverpool.ac.uk
+"Motives" "corrigendum" "Gorchinskiy" site:mi.ras.ru
+Miyaoka second Chern class minimal surface nef canonical c2 nonnegative theorem
+"The Chern Classes and Kodaira Dimension of a Minimal Variety" Miyaoka pdf
+```
+
+These queries locate inputs and access routes; no exhaustive result-set or
+citation-graph negative is asserted. The promoted sources have individual
+read-depth records. Other displayed titles have not been promoted as read.
+
+### Repeating-surface inventory started
+
+The owning novelty ledger is
+`papers/cubic-stabilization-m1/claim-proof-novelty-ledger.md` (identified and
+its opening current-claim rows inspected). It already rejects blanket novelty
+for Hodge localization and uses qualified predecessor wording. C1133 has not
+changed it or authorized new novelty text there. Intended later review surfaces:
+main manuscript and bibliography; that ledger; paper README/public summary;
+results/coverage snapshots (exact novelty-bearing snapshot still to identify);
+and the standalone mirror copies. This inventory is not yet complete. No new
+absence/firstness sentence is being promoted ahead of its owning ledger row.
