@@ -176,3 +176,19 @@ they do not introduce universal types or expand the shipping glossary.
 Current reference: private ADR0002 and `2026-09-09-c1130-overnight-evolve.md`.
 The finite capacity compiler does not yet combine proofs into new symbolic
 inequalities; the CSS quotient does compose multiple checked generators.
+
+## Host parity and cache vocabulary — September 9
+
+See `2026-09-09-c1130-js-wasm-parity-review.md` for the paired migration plan.
+
+| Distinction | Meaning |
+|---|---|
+| Capability parity / workflow parity / performance parity | Same mathematical operations / equivalent lifecycle and evidence workflows / measured execution cost. None implies the others. |
+| Compiled code cache / mathematical plan reuse | Engine-compiled WASM code versus source-specific Ergodis compilation. Neither automatically retains learned rules or answers. |
+| Backend profile / operation contract | Target ISA and execution choices versus the question and guarantees. Optional profiles must preserve full capabilities. |
+| Workload identity / implementation identity | Bound input/query semantics versus target payload and recipe; preserve both in records. |
+| Worker readiness / problem setup / compilation / solve | Loaded provider ready; source preparation; mathematical plan compilation within setup; measured execution after readiness. WASM loading is not problem setup. |
+| Learned-only rerun | Rechecked prior knowledge with fresh search state and discovery off; distinct from ordinary plan reuse. |
+
+Native typed APIs, CLI/control protocols and portable service adapters must use
+these same distinctions; a browser terminology cleanup alone leaves fragmentation.

@@ -123,54 +123,16 @@ byte decoder or FT10 job-shop solver as already implemented native interfaces.
 
 ## Implementation sequence
 
-User requested this sequence on 2026-09-08. The immediate deliverable is a small,
-reviewable contract proposal grounded in existing implementations, not another
-broad architecture report or a new framework. Keep this plan and its terminology
-work private and not-to-ship.
+The September 9 source review supersedes the original sequence:
+`2026-09-09-c1130-js-wasm-parity-review.md` (P0–P6). Every phase pairs native and
+JS adapters against shared semantics and transcripts. Native CLI/control/runtime
+fragmentation is part of the same work, not a separate later cleanup.
 
-1. **Draft the shared contract using the established vocabulary.** Extend C1091's
-   model/query/representation/compiled-plan/executor distinctions and C1084's
-   runtime/host boundary. Reuse OpenProblem for retained composition where it
-   applies; do not require every solver to implement it. Keep early definitions
-   provisional until the contrasting workflows establish their requirements.
-2. **Map three existing workflows before extracting code:** field-valued
-   composition, compiled LRC budget queries and QEC decoding. For each, record
-   model/query types, compilation and retained state, supported readouts/updates,
-   resource bounds, witness lifting, evidence obligations and native entry points.
-   Show repeated queries and rejected reuse, not just one successful solve.
-3. **Extract the smallest shared execution interface.** Share cold loading,
-   capability discovery, compilation, query/update admission, operation dispatch
-   and result envelopes. Preserve typed family payloads, optional capabilities,
-   specialized kernels and existing native wire compatibility. Orchestration
-   stays above mathematical execution. Input validation, claim checking, solving
-   and result verification remain distinct; Check→Execute is not mandatory for
-   every family. Retain native baselines before changes and apply the performance
-   gates below throughout, not only at the end.
-4. **Expose those same operations through the canonical WASM build.** Bind real
-   compiled/query/update handles and actual native recovery contracts into the
-   console. Check cross-target answers, witness semantics, admission/errors,
-   resource failures and supported checkpoint/replay behavior. Do not substitute
-   a reduced projection or new browser-only solver for the native operation.
-5. **Run a glossary reconciliation pass after the first three-family integration.**
-   Reconcile the private terminology review against the implemented interface,
-   existing core glossary and ADRs. Define or clarify model/problem/query,
-   target/objective, representation/compiled plan/executor, spaces/bases/transports,
-   resource/valuation, query family/preservation contract, answer contract,
-   update contract, witness lifting, Source and qualified Capability meanings.
-   Reuse existing Observable, Query admission, Witness, Certificate and Composition
-   shape entries rather than adding synonyms. Identify API/wire naming mappings
-   and stale implementation-status labels. Record implemented, proposed and
-   family-limited meanings explicitly. Deliver the reconciled glossary in private
-   contributor notes; shipping documentation changes require separate user scope.
-6. **Expand to full parity and consolidate consumers.** Use the complete inventory
-   to migrate remaining native workflows and retire divergent active frontend/build
-   paths after their replacements pass. Update the private architecture context
-   map as the frontier changes. At closeout, refresh the glossary pass for later
-   families and ensure one term has not silently acquired incompatible meanings.
-
-The three workflows are an abstraction/integration gate, not the completion
-boundary for full WASM parity. C1130 remains open until the full inventory,
-conformance, native performance, console and private glossary deliverables pass.
+P0 hardens operation identity and lifecycle; P1 integrates portable application
+records; P2 exposes retained composition and fields; P3 closes family inventory;
+P4 benchmarks portable performance alternatives; P5 handles durable knowledge,
+continuation and storage; P6 consolidates interfaces and verifies full parity.
+Existing architectural requirements and performance gates below remain binding.
 
 ## Mandatory performance rules and native regression gate
 

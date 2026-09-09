@@ -42,114 +42,29 @@ the C985 optimization-facing paper.
 
 ## Active frontiers
 
-### C1130 — full WASM feature completeness (in progress)
+### C1130 — full native/JS/WASM capability and workflow parity (in progress)
 
-**Current user priority (September 9):** general source-driven Evolve discovery,
-independently checked live admission, learned-only reruns, real loaded benchmark
-applications and inspectable proof/compilation evidence. No fixture answers or
-control-arm results may guide discovery. Overnight continuation is recorded in
-`notes/2026-09-09-c1130-overnight-evolve.md` and private
-`analysis/module-loading/overnight-demo-review.md`; ADR
-`ergodis-private/docs/adr/0002-checked-rule-compilation-and-warm-start.md` owns the
-composition/warm-start tradeoffs.
+Current authority: `../2026-09-09-c1130-js-wasm-parity-review.md`; task requirements:
+`../2026-09-08-c1130-wasm-feature-completeness.md`. Private capability matrix and
+performance experiments: `ergodis-private/analysis/interface-review/`.
 
-Accepted native gates now cover optional ResourceExecution and Hadamard filtering
-(private `db73684`, `8094302`); existing optimized core paths remain intact.
-Core `e0f77ef` exposes cooperative CSS root partitions over the existing kernel.
-Private `953ac91` adds reusable incidence-symmetry discovery via the same native
-and WASM provider; `52f9a48` supplies loaded CSS/full Hadamard races, quotient
-inspection, timed proof replay and primary QDistSAT comparison context. Private
-`55668ac` adds learned-only Hadamard/repair reruns, complementing capacity/CSS.
-No discovered distance, prior witness or solve cursor is reused in those reruns.
+Delivered family modules include LRC, QEC, scheduling, CSS, Hadamard and repair.
+Demos support independent discovery, checked live admission, learned-only reruns
+with discovery off, and certificate verification. Race timing starts in ready
+workers; problem setup reports compilation separately. CSS ordinary repeats reuse
+plans but reset search/discovery state; learned-only reuse is explicit.
 
-Preview ports 8769/8770 remain bound to 0.0.0.0 and use the canonical core WASM;
-private providers load lazily. Private `6408bf4` bounds progress retention and batches cold CSS ABI calls;
-`9754808` retains late source-checked knowledge for learned-only reruns.
-Next gates: campaign knowledge lifetimes beyond current queries, broader
-incidence/row-space proposal grammars, general multiplicity execution and
-portable learned-artifact persistence. Full WASM
-feature completeness and main CampaignSession integration remain open.
+Next: P0 shared immutable operation/result identity, bounded requests and native/JS
+conformance; P1 paired LRC recorded workflow, then other families. P2 retained
+labelled composition/fields is the contrasting-family abstraction gate. P3 closes
+remaining inventory; P4 evaluates WASM SIMD/build/cache options; P5 continuation
+and storage; P6 consolidates adapters and validates the complete capability matrix.
 
-
-User requirement: WASM is a full Ergodis execution target, not a restricted subset.
-Close bindings, portability and host-adapter gaps across existing core/private
-capabilities; keep shared contracts and native optimized execution intact.
-Consolidate consumers on one canonical feature-complete WASM build; audit and
-retire divergent active demo build paths after migration. The task card indexes
-the Sunday/Monday architecture and implementation notes already loaded.
-Mandatory inventory, cross-target conformance and native performance gates:
-`notes/2026-09-08-c1130-wasm-feature-completeness.md`.
-Initial concrete contract: `notes/2026-09-08-c1130-execution-contract-proposal.md`.
-Private loading/execution spike: `notes/2026-09-08-c1130-private-module-loading-spike.md`.
-Loading spike complete: core `5542688`, private `29a2fd8`/`2e90fa4`, contributor
-`9e49744`; source-isolated native and actual browser LRC/QEC gates, provider-side
-allocation audit, retained boundary counters and revised stripped-package loading
-pass. ABI remains experimental; full native performance acceptance remains open.
-Next: refine shareable immutable-plan / owned executor-workspace semantics, then
-third-family composition and CampaignSession/console integration. Private `5da6805`
-adds Tavis Rudd notices, verified in stripped native/WASM packages. Results:
-`notes/2026-09-08-c1130-module-loading-results.md`.
-Private `5e22031` runs full supplied QEC and LRC queries in the application
-workspace (8769 and 8770), with retained plans and explicit snapshot/runnable
-contexts. Main campaign runtime/console integration remains open. Report:
-`notes/2026-09-08-c1130-application-wasm-workspace.md`.
-Private `5b327eb` adds exact native/WASM capacity design and editable recovery
-inputs with a two-axis map; native performance gates pass. Report:
-`notes/2026-09-08-c1130-capacity-design.md`. Private `ec3185c` adds native/WASM
-resource scheduling, draggable capacities/targets, hover previews with click pins,
-and QEC double-click parity. Browser and native gates pass; accepted LRC/QEC
-payloads remain unchanged. FT10 is still inspect-only; default scheduling executes
-GPU checkpoint batches. Next: CampaignSession/composition integration and the
-private glossary reconciliation. Report:
-`notes/2026-09-08-c1130-scheduling-and-direct-inputs.md`.
-Private `6d81ee2` / core `f9faafd` add Fit target and Optimize capacity, including
-reductions for scheduling and recovery. Exact native/WASM and bounded-search
-status gates pass; retained forward native performance remains within noise.
-Report: `notes/2026-09-08-c1130-fit-and-optimize-capacity.md`.
-Private glossary reconciliation and campaign-boundary review are complete:
-`notes/2026-09-08-c1130-campaign-integration-review.md`. Next: record application
-queries/results through existing portable run records with snapshot-only reopening,
-then attach the execution boundary to campaign control. Labelled composition is
-still unbound; three application modules do not close that original family gate.
-User-prioritized web expansion now supplies 60/600-repair and 24/72-job workloads,
-plus a live 81-point WASM capacity surface with weighted CPU/GPU objectives and
-partial stop. Browser/independent scheduling gates pass; native payloads unchanged.
-Report: `notes/2026-09-08-c1130-larger-workloads-live-surfaces.md`.
-Evolve's harder demo now runs 96 mixed-affinity jobs with a structural resource-cover
-proof grammar and clickable/recheckable reduction evidence. Private 6e5bd13 /
-319ea95: 37 proposals, four useful rules, 339/625 capacity configurations excluded;
-independent oracle, full browser, receipt and mobile-width gates pass. Separate
-Evolve/solve Workers promote rules to queued queries immediately; in-flight work
-is not double counted. Report: `notes/2026-09-08-c1130-theorem-demo.md`.
-**User-prioritized next:** promote checked reductions into an already-running solve,
-matching native watcher/epoch/safe-point semantics. Queued-query cuts do NOT meet
-this requirement. Current scheduling EXECUTE is blocking and lacks resumable
-logical state. Concrete native reference, residual-cover obligations and required
-performance/parity gates: `notes/2026-09-08-c1130-live-solve-promotion.md`.
-Refined proposal: `notes/2026-09-08-c1130-live-promotion-design.md` — first extract
-capacity-fit continuation, then checked bound adoption; backend-use admission is
-separate from theorem validity. Optional shared control mailbox need not share the
-solver heap. This is a proposal, not an implemented execution capability.
-Capacity Fit now has native/WASM resumable execution and checked same-run bound
-adoption, with parity/allocation/performance evidence and live proof markers.
-Report: `notes/2026-09-08-c1130-live-fit-spike.md`. `/live-fit` is available on both
-preview ports and linked from the main Evolve page. **User clarification:**
-this does not satisfy live promotion in the EXISTING 96/72/24-job Evolve grid
-queries; preserve those questions and connect their forward execution paths next.
-Browser race performance audit (private `7050e88`): `ergodis-private/analysis/module-loading/race-performance.md`. CPU/GPU race expanded to 216 modeled jobs; native/WASM matching boundary measurements show controller round trips and redundant bound evaluations, not missing WASM kernels, dominate the observed penalty. Served runner now caches each bound per query and uses 65536-unit safe-point slices; the existing live ResourceExecution/provider integration and runner remain uncommitted pending native hardware-counter acceptance. Both public previews use `active-grid-initial` packages; all three original races and live Fit complete. Native/WASM query answers and resumable work counts agree in the audit. The final 216-job run had queued exclusions but no in-flight adoptions; do not overclaim its promotion evidence.
-Also requested: a huge-space benchmark demonstration. BENCHMARKS.md's Ceph XOR
-80-diamond 2^80 compressed support family is the leading candidate; actual WASM
-execution and domain visualizations are required, not static benchmark artwork.
-Preview: 8769/8770 `/evolve`, bound to 0.0.0.0; LAN HTTP crypto adapter retained.
-Preserve public-core loading of separately compiled/obfuscated private packages;
-canonical WASM engine plus extensions, not a mandatory private assembly build.
-Start with a concrete contract over composition, compiled LRC queries and QEC;
-extract the smallest shared interface, bind canonical WASM, then expand to full
-parity. A private glossary reconciliation follows initial integration and is
-refreshed at closeout; these context/terminology docs must not ship.
-Read both contributor performance documents in full on resume. Recovery/QEC/
-scheduling browser execution is part of this scope; the current lab restrictions
-are temporary implementation gaps, not intended WASM capability boundaries.
+Native CLI/control/runtime fragmentation must converge in these same phases.
+Preserve typed native kernels and all contributor performance gates. Full parity,
+production module ABI and complete native/browser workflow integration remain open.
+No forked subset WASM engine, embedded answers or weakened verification. All design
+notes remain private. Prior chronological map is in the companion archive.
 
 ### C1111–C1113 — reconstruction-driven representation discovery
 

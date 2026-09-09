@@ -1,5 +1,9 @@
 # Ergodis architecture context
 
+Current paired native/JS capability inventory and implementation ordering:
+`2026-09-09-c1130-js-wasm-parity-review.md`. Resolve host fragmentation together;
+preserve typed native execution. This is private, not-to-ship context.
+
 **PRIVATE — contributor context only. Do not ship, export or publish.**
 **Lane**: `ergodis`. Reviewed: 2026-09-09.
 
