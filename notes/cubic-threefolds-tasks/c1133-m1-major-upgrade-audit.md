@@ -14,7 +14,12 @@ monodromy; this does not refute the packet's rank-two construction. Report:
 The fixed-base injection proof and downstream audit are written in
 `notes/2026-09-09-c1133-fixed-base-proof.md`.
 
-Next finish the all-family geometric/source obligations and the complete
+The fifteen external matrix reconstructions now match entrywise after explicit
+normalization, and all their period inputs through degree eight match CCGK.
+Special quartic and GM deformation bridges and source corrections are recorded
+in `notes/2026-09-09-c1133-geometric-source-audit.md`.
+
+Next finish the remaining geometric/source obligations and the complete
 literature audit. Current coverage, precise access gaps, source read-depth
 register and citation sets:
 `notes/2026-09-09-c1133-literature-audit.md`.

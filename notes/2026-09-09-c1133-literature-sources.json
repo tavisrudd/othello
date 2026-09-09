@@ -1,5 +1,5 @@
 {
-  "external_full_text_count": 0,
+  "external_full_text_count": 3,
   "sources": [
     {
       "access": {
@@ -11,7 +11,7 @@
       },
       "key": "arXiv:2307.13555",
       "read_depth": "partial",
-      "read_scope": "v3; introduction lines 1\u201320; Remark 2.3 lines 828\u2013865; Theorem 5.18 and opening of 5.8 lines 5622\u20135760. Other search hits located but not treated as read.",
+      "read_scope": "v3; introduction lines 1–20; Remark 2.3 lines 828–865; Theorem 5.18 and opening of 5.8 lines 5622–5760. Other search hits located but not treated as read.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Quantum cohomology of blowups",
       "version_in_cached_header": "arXiv:2307.13555v3 [math.AG] 4 Feb 2025"
@@ -26,7 +26,7 @@
       },
       "key": "arXiv:2307.03696",
       "read_depth": "partial",
-      "read_scope": "v4; header; Theorem 5.1, Remarks 5.2\u20135.4 and opening of 5.3, extraction lines 2338\u20132465.",
+      "read_scope": "v4; header; Theorem 5.1, Remarks 5.2–5.4 and opening of 5.3, extraction lines 2338–2465. Introduction 110–185 and Section 5.2 through Remark 5.4, lines 2350–2440, also read.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Quantum cohomology of projective bundles",
       "version_in_cached_header": "arXiv:2307.03696v4 [math.AG] 31 Jan 2026"
@@ -40,8 +40,8 @@
         "url": "https://arxiv.org/pdf/2604.10028"
       },
       "key": "arXiv:2604.10028",
-      "read_depth": "partial",
-      "read_scope": "v2; introduction and notation lines 1\u2013140; Section 3 through Proposition 8 and most of Lemma 10, lines 520\u2013740 and 750\u2013870. Not full text.",
+      "read_depth": "full text",
+      "read_scope": "Complete cached v2 text, all 10 pages including references. In particular Remark 2, Section 2(a,d), Proposition 8, Lemma 10 and Corollary 11. Read in bounded contiguous chunks, including the previously omitted 740–750 interval.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Notes on the decomposition theorem for blowups",
       "version_in_cached_header": "arXiv:2604.10028v2 [math.AG] 19 Apr 2026"
@@ -56,7 +56,7 @@
       },
       "key": "arXiv:2508.05105",
       "read_depth": "partial",
-      "read_scope": "v2 cache; Sections 4.3 and opening of 5.1 (3710\u20133795), fixed-locus definitions and 5.2.2 (3900\u20133985), 5.2.5\u20135.2.6 (4366\u20134430).",
+      "read_scope": "v2 cache; Sections 4.3 and opening of 5.1 (3710–3795), fixed-locus definitions and 5.2.2 (3900–3985), 5.2.5–5.2.6 (4366–4430).",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Birational Invariants from Hodge Structures and Quantum Multiplication",
       "version_in_cached_header": "arXiv:2508.05105v2 [math.AG] 6 Mar 2026"
@@ -86,7 +86,7 @@
       },
       "key": "arXiv:math/0410327",
       "read_depth": "partial",
-      "read_scope": "Theorem 6.1.1 and start of proof, extraction lines 530\u2013580.",
+      "read_scope": "Theorem 6.1.1 and start of proof, extraction lines 530–580.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Gromov-Witten invariants of Fano threefolds of genera 6 and 8",
       "version_in_cached_header": "arXiv:math/0410327v4 [math.AG] 7 Jan 2007"
@@ -116,7 +116,7 @@
       },
       "key": "arXiv:2606.17884",
       "read_depth": "partial",
-      "read_scope": "Section 10 introduction and first part of table, lines 1843\u20132005; separately lines 2390\u20132455 (Verra-family passage, not Fano deformation evidence).",
+      "read_scope": "Section 10 introduction and first part of table, lines 1843–2005; separately lines 2390–2455 (Verra-family passage, not Fano deformation evidence). Section 10 opening 1840–1908 and bibliography 3060–3155 now read to resolve matrix provenance.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Naive atoms of blowups: examples",
       "version_in_cached_header": "arXiv:2606.17884v2 [math.AG] 19 Jun 2026"
@@ -130,8 +130,8 @@
         "url": "https://arxiv.org/pdf/2605.29143"
       },
       "key": "arXiv:2605.29143",
-      "read_depth": "abstract/metadata only",
-      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
+      "read_depth": "partial",
+      "read_scope": "v2; introduction/conventions extraction lines 1–160; section 5 complete, lines 3054–3225; additional blowup passage 2300–2440. Cyclic persistence precedent and simple-eigenvalue typo noted, no full-paper verdict.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "The quartic threefold is symplectically irrational",
       "version_in_cached_header": "arXiv:2605.29143v2 [math.SG] 9 Jun 2026"
@@ -146,7 +146,7 @@
       },
       "key": "arXiv:2608.01577",
       "read_depth": "partial",
-      "read_scope": "v1; abstract, introduction and beginning of Section 2, lines 1\u2013100.",
+      "read_scope": "v1; abstract, introduction and beginning of Section 2, lines 1–100.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "The cubic threefold is symplectically irrational",
       "version_in_cached_header": "arXiv:2608.01577v1 [math.SG] 3 Aug 2026"
@@ -161,7 +161,7 @@
       },
       "key": "arXiv:1911.08949",
       "read_depth": "partial",
-      "read_scope": "v3; contents, Section 1.1 and opening of 1.2, lines 1\u2013150.",
+      "read_scope": "v3; contents, Section 1.1 and opening of 1.2, lines 1–150.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Rationality of Fano threefolds over non-closed fields",
       "version_in_cached_header": "arXiv:1911.08949v3 [math.AG] 27 Apr 2021"
@@ -191,7 +191,7 @@
       },
       "key": "arXiv:2001.03485",
       "read_depth": "partial",
-      "read_scope": "v2; Theorem 3.7 and discussion including ordinary/special strata, lines 565\u2013610.",
+      "read_scope": "v2; Theorem 3.7 and discussion including ordinary/special strata, lines 565–610.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Gushel-Mukai varieties",
       "version_in_cached_header": "arXiv:2001.03485v2 [math.AG] 1 Jul 2025"
@@ -251,7 +251,7 @@
       },
       "key": "arXiv:2004.09310",
       "read_depth": "partial",
-      "read_scope": "v3; rational generic Torelli formulation, Theorem 0.2 and Remarks 0.1\u20130.4, lines 35\u2013105; official arXiv metadata/history.",
+      "read_scope": "v3; rational generic Torelli formulation, Theorem 0.2 and Remarks 0.1–0.4, lines 35–105; official arXiv metadata/history.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Schiffer variations and the generic Torelli theorem for hypersurfaces",
       "version_in_cached_header": "arXiv:2004.09310v3 [math.AG] 30 May 2021"
@@ -266,7 +266,7 @@
       },
       "key": "arXiv:1209.3653",
       "read_depth": "partial",
-      "read_scope": "v4; Theorem 5.1 and complete proof, lines 1103\u20131185; correction notice located; official arXiv metadata/history.",
+      "read_scope": "v4; Theorem 5.1 and complete proof, lines 1103–1185; correction notice located; official arXiv metadata/history.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Families of abelian varieties with many isogenous fibres",
       "version_in_cached_header": "arXiv:1209.3653v4 [math.AG] 13 Sep 2016"
@@ -281,7 +281,7 @@
       },
       "key": "arXiv:1005.2131",
       "read_depth": "partial",
-      "read_scope": "v4; Theorem B and introductory arithmetic discussion, lines 35\u2013100.",
+      "read_scope": "v4; Theorem B and introductory arithmetic discussion, lines 35–100.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Arithmetic Torelli maps for cubic surfaces and threefolds",
       "version_in_cached_header": "arXiv:1005.2131v4 [math.AG] 3 Oct 2012"
@@ -296,7 +296,7 @@
       },
       "key": "arXiv:2412.01676",
       "read_depth": "partial",
-      "read_scope": "v1; introduction and Theorem 1.1, lines 1\u201360. Secondary recollection of Narasimhan\u2013Nori, not a primary proof of that theorem.",
+      "read_scope": "v1; introduction and Theorem 1.1, lines 1–60. Secondary recollection of Narasimhan–Nori, not a primary proof of that theorem.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Counting polarizations on abelian varieties with group action",
       "version_in_cached_header": "arXiv:2412.01676v1 [math.AG] 2 Dec 2024"
@@ -371,7 +371,7 @@
       },
       "key": "arXiv:2607.26718",
       "read_depth": "partial",
-      "read_scope": "v1; abstract, introduction and beginning of Section 2, lines 1\u2013170.",
+      "read_scope": "v1; abstract, introduction and beginning of Section 2, lines 1–170.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "An atomic criterion for irrationality without quantum computations",
       "version_in_cached_header": "arXiv:2607.26718v1 [math.AG] 29 Jul 2026"
@@ -386,7 +386,7 @@
       },
       "key": "arXiv:2607.22074",
       "read_depth": "partial",
-      "read_scope": "v1; introduction, Section 2 including Proposition 2.1 and proof, opening of Section 3 through part of Proposition 3.1 proof, lines 1\u2013415.",
+      "read_scope": "v1; introduction, Section 2 including Proposition 2.1 and proof, opening of Section 3 through part of Proposition 3.1 proof, lines 1–415.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Moduli of atoms of complex projective varieties",
       "version_in_cached_header": "arXiv:2607.22074v1 [math.AG] 24 Jul 2026"
@@ -401,7 +401,7 @@
       },
       "key": "arXiv:2510.21222",
       "read_depth": "partial",
-      "read_scope": "v1; introduction including Theorems 1.2 and 1.4, examples and scope, lines 1\u2013170.",
+      "read_scope": "v1; introduction including Theorems 1.2 and 1.4, examples and scope, lines 1–170.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Fibers of Landau-Ginzburg models and rationality",
       "version_in_cached_header": "arXiv:2510.21222v1 [math.AG] 24 Oct 2025"
@@ -513,6 +513,60 @@
       "secondary_source": "notes/cubic-threefolds-tasks/c1133-m1-upgrade-proof-packet.md, Part XI; full text",
       "title": "The universal Euler characteristic for varieties of characteristic zero",
       "version_in_cached_header": "not accessed"
+    },
+    {
+      "key": "arXiv:1303.3288",
+      "title": "Quantum periods for 3-dimensional Fano manifolds",
+      "read_depth": "partial",
+      "read_scope": "v3, introduction lines 1–240; sections 1–12 and opening of 13, lines 1820–2275; end of 13 and sections 14–17, lines 2330–2478. Not full text; intervening bundle construction and general GW preliminaries unread.",
+      "access": {
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_1303.3288.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_1303.3288.txt",
+        "url": "https://arxiv.org/pdf/1303.3288v3",
+        "sha256": "a01ad88951e72c9b6ef16e8be2e08408bc6e6cf20e9133befe009d62782d9686",
+        "bytes": 1528940
+      }
+    },
+    {
+      "key": "author:Debarre-GM-2026",
+      "title": "Gushel–Mukai varieties (2026 author revision)",
+      "read_depth": "partial",
+      "read_scope": "Author 2026 revision; introduction/definitions and section 4.2 including footnote 7 via browser PDF text; cached extraction 565–610 for Theorem 3.7. Not full text.",
+      "access": {
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/author_Debarre-GM-2026.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/author_Debarre-GM-2026.txt",
+        "url": "https://perso.imj-prg.fr/olivier-debarre/wp-content/uploads/sites/34/2026/05/GM-varieties-2026.pdf",
+        "sha256": "eac65eff7ff6c21b77492bcd18a51433b5e1e85c5429b450e97fca8ef33739c3",
+        "bytes": 496940
+      }
+    },
+    {
+      "key": "10.5281/zenodo.20625923#fano_threefolds_rk1index1.py",
+      "title": "Picard-rank-one index-1 matrix reconstruction script",
+      "read_depth": "full text",
+      "read_scope": "Complete script, including period data, reconstruction equations, matrix conventions and final display loop; inspected before execution. Zenodo record revision 4, created 2026-06-16. Non-PDF source stored in shared cache intake with metadata in this register.",
+      "access": {
+        "path": "/tmp/persistent/tavis/lit-search/c1133-intake/fano_threefolds_rk1index1.py",
+        "url": "https://zenodo.org/api/records/20625923/files/fano_threefolds_rk1index1.py/content",
+        "sha256": "a8e94d07b549657cfc69ae3f7cd2236cef083d3d327c9b34b24e785ac2b91b0e",
+        "bytes": 3389
+      }
+    },
+    {
+      "key": "10.5281/zenodo.20625923#fano_threefolds_rk1index2.py",
+      "title": "Picard-rank-one index-2 matrix reconstruction script",
+      "read_depth": "full text",
+      "read_scope": "Complete script, including period data, reconstruction equations, matrix conventions and final display loop; inspected before execution. Zenodo record revision 4, created 2026-06-16. Non-PDF source stored in shared cache intake with metadata in this register.",
+      "access": {
+        "path": "/tmp/persistent/tavis/lit-search/c1133-intake/fano_threefolds_rk1index2.py",
+        "url": "https://zenodo.org/api/records/20625923/files/fano_threefolds_rk1index2.py/content",
+        "sha256": "d4b4db2f194913049e57fbf389fd6cdb68d15e2431b315eee845aa9d7c4a4a22",
+        "bytes": 2688
+      }
     }
-  ]
+  ],
+  "external_full_text_breakdown": {
+    "papers": 1,
+    "source_scripts": 2
+  }
 }

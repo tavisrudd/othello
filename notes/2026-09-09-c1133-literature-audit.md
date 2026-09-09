@@ -2,9 +2,10 @@
 
 **Date:** 2026-09-09. **Lane:** `cubic-threefolds`.
 **Status:** incomplete; no global novelty or priority verdict is issued.
-**External sources read at full text: 0.** The source register contains 35
-individual entries, with exact read depths, versions, cache access and hashes.
-The work so far checks selected primary passages rather than entire papers.
+**External sources read at full text: 3 — one paper and two source scripts.**
+The source register contains 39 individual entries, with exact read depths,
+versions, cache access and hashes. Most papers have partial read depth.
+Iritani’s ten-page Hodge refinement has now been read completely.
 The author-supplied packet has been read completely, including its checker.
 
 ## Accepted source-level findings
@@ -29,8 +30,10 @@ The author-supplied packet has been read completely, including its checker.
    matrices and scalar shifts. Kuznetsov–Prokhorov Section 1.1 matches the eight
    geometrically rational families. Debarre Theorem 3.7 includes ordinary and
    special GM varieties in an irreducible moduli space. These checks are not a
-   complete source-by-source audit of all seventeen matrices or all special
-   anticanonical presentations.
+   complete classification proof. The later provenance check matches all fifteen
+   index-one/two archive matrices entrywise and checks their period inputs through
+   degree eight. The special quartic and GM deformation bridges are written in
+   `2026-09-09-c1133-geometric-source-audit.md`; imported exhaustion remains open.
 5. The packet omits two close comparison sources found through forward citations.
    Lee–Przyjalkowski, `arXiv:2510.21222v1`, Theorems 1.2 and 1.4 concern ordinary
    rationality of general Fano threefolds through mirror monodromy. They must
@@ -129,12 +132,13 @@ coverage and promoted readings remain open.
 
 ## Access and remaining coverage
 
-- zbMATH web and API attempts returned tool-access errors, not search results.
+- Initial zbMATH browser attempts returned tool-access errors. Direct API access
+  subsequently succeeded; see the bounded coverage record below. Initial URLs:
   URLs attempted: `https://zbmath.org/?q=an%3A2004.09310`,
   `https://zbmath.org/?q=ti%3A%22one-stabilization%22`, and
   `https://api.zbmath.org/v1/document/_search?search_string=2004.09310`.
   The first query used an unsuitable accession field for an arXiv identifier;
-  it is not evidence of absence. An appropriate reachable interface remains needed.
+  it is not evidence of absence. The direct API was subsequently reached.
 - MathSciNet: NOT COVERED. The publication-search URL with query `2004.09310`
   returned a tool-access error; no authenticated review search was available.
 - Google Scholar: NOT COVERED. The query URL for `"one stabilization" "threefold"`
@@ -142,17 +146,48 @@ coverage and promoted readings remain open.
 - Narasimhan–Nori: IAS PDF GET returned 404; publisher PDF GET returned non-PDF
   bytes. Browser metadata opened the four-page PDF but page rendering failed
   with cache miss. The primary text is therefore not marked read or cached.
-- Unfinished source work includes all matrix provenance and deformation inputs,
+- Unfinished source work includes classification exhaustion and remaining geometry,
   precise projective-bundle equivariance, framing precedents, relevant promoted
   citation sources, the motive corrigendum and optional applications. The packet's
   Hartlieb, weak-factorization and Bittner references still need their own access
   records before those optional/presentation branches are called audited.
-- A newer author-hosted GM survey surfaced an announcement of all-member
-  irrationality. Its primary passage and announced result must be checked;
-  neither the announcement nor an abstract establishes one-stabilization priority.
+- The newer author-hosted GM survey lead has been checked and corrected: its
+  announcement is about very general GM fourfolds, not all GM threefolds. It
+  supplies no predecessor for the proposed all-member threefold assertion.
 
 Every newly downloaded arXiv PDF was ingested into the shared cache. Failure
 to access a source is recorded separately from finding no predecessor.
+
+## Later source and zbMATH checkpoint
+
+`2026-09-09-c1133-geometric-source-audit.md` records the exact matrix comparison,
+period-input verification, special-model bridges, and corrected GM announcement.
+Cai’s quartic Theorem 5.3 is a direct persistence predecessor, now checked in
+Section 5. It must be credited in positioning the packet’s trace argument. Its
+simple-eigenvalue typo does not change its repeated-root claim.
+
+The direct zbMATH API returned a single record for the exact quantum-period
+paper title query and then the following scope queries, recorded verbatim in
+`2026-09-09-c1133-zbmath-probe.json` with URLs, timestamps, response hashes,
+raw-cache paths, total counts and returned counts:
+
+| Query | Total | Retrieved/title-screened |
+|---|---:|---:|
+| `"one-stabilization"` | 32 | 32 |
+| `"quantum" & "birational"` | 274 | 100 |
+| `ti:"Polarisations on an abelian variety"` | 1 | 1 |
+| `ti:"Schiffer variations and the generic Torelli theorem for hypersurfaces"` | 1 | 1 |
+
+The 32-title screen mainly retrieves topological stabilization and numerical
+analysis; its ambiguous algebraic-variety title remains a lead. It is not a
+content-level exclusion. The quantum/birational query is explicitly a **partial
+100-of-274 screen**, even though its response has a null last-id field. No global
+negative follows. The title discriminator is the same as the forward-citation
+screen above. Existing Hodge-atom, quantum-period and irrationality entries and
+method-adjacent leads remain in the reading queue. Review bodies were not used
+for theorem claims. The exact-title records resolve the NN DOI and Voisin’s
+published DOI `10.1112/S0010437X21007727`; publication-alias citation checks remain
+open. MathSciNet and Scholar are still not covered.
 
 ## Novelty ownership and current surface state
 

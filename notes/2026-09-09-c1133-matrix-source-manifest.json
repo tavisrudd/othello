@@ -1,0 +1,27 @@
+[
+  {
+    "path": "notes/2026-09-09-c1133-matrix-source-check.py",
+    "bytes": 5288,
+    "sha256": "049abd60816fa58963dc94b81436877440bf7441d0a62ae6d502818af59055c0"
+  },
+  {
+    "path": "notes/2026-09-09-c1133-matrix-source-check.json",
+    "bytes": 4990,
+    "sha256": "1c8726ccf3c2eccd19945f9c2920c097952fc1f15f03b0d8308917c29569e654"
+  },
+  {
+    "path": "notes/2026-09-09-c1133-finite-checks.py",
+    "bytes": 12223,
+    "sha256": "b9a5df0bad96e351a8db278350f5fc1edc5345960f70c1bff1d63a339aecbda9"
+  },
+  {
+    "path": "/tmp/persistent/tavis/lit-search/c1133-intake/fano_threefolds_rk1index1.py",
+    "bytes": 3389,
+    "sha256": "a8e94d07b549657cfc69ae3f7cd2236cef083d3d327c9b34b24e785ac2b91b0e"
+  },
+  {
+    "path": "/tmp/persistent/tavis/lit-search/c1133-intake/fano_threefolds_rk1index2.py",
+    "bytes": 2688,
+    "sha256": "d4b4db2f194913049e57fbf389fd6cdb68d15e2431b315eee845aa9d7c4a4a22"
+  }
+]

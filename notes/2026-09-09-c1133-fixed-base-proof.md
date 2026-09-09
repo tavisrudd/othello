@@ -78,9 +78,9 @@ primary decompositions on the full even base and the fixed base.
 ## What equivariance supplies, and what must still be matched
 
 Iritani's Hodge refinement, Proposition 8, supplies equivariance of the full
-blowup maps; its Lemma 10 supplies fixed initial shifts. The central Hodge-group
-element acting by cohomological parity then gives parity preservation after
-odd bulk variables are set to zero. The fibers remain full cohomology fibers.
+blowup maps; its Lemma 10 supplies fixed initial shifts. Section 2(a,d) explicitly states parity preservation, and Remark 2
+distinguishes parity from the degree of ramified scalars. The central Hodge-group
+element gives the same conclusion after odd bulk variables are set to zero. The fibers remain full cohomology fibers.
 The same parity conclusion in the projective-bundle construction is compatible
 with its algebraic pull/push, characteristic-class and reconstruction operations.
 It should be written explicitly when integrating the full-super statement.

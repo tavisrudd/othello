@@ -1,0 +1,655 @@
+[
+  {
+    "query": "\"one-stabilization\"",
+    "url": "https://api.zbmath.org/v1/document/_search?search_string=%22one-stabilization%22",
+    "queried_utc": "2026-09-09T19:55:21.807613+00:00",
+    "status": {
+      "execution": "successful request",
+      "execution_bool": true,
+      "internal_code": "ok",
+      "last_id": null,
+      "nr_total_results": 32,
+      "nr_request_results": 32,
+      "query_execution_time_in_seconds": 1.340806245803833,
+      "status_code": 200,
+      "time_stamp": "2026-09-09T19:55:22Z"
+    },
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-scope-0.json",
+    "sha256": "7fd93f24d511db297e0a7eab42d85781b78885173e4b451c5a6de6314b46e074",
+    "titles": [
+      {
+        "id": 2069787,
+        "title": "Numerical aspects of one stabilization method"
+      },
+      {
+        "id": 1031499,
+        "title": "An infinite collection of Heegaard splittings that are equivalent after one stabilization"
+      },
+      {
+        "id": 8202199,
+        "title": "Modified heuristic criterion for parameter choice for one stabilization scheme of the finite element method"
+      },
+      {
+        "id": 5252435,
+        "title": "Morita classes in the homology of \\(\\Aut(F_n)\\) vanish after one stabilization."
+      },
+      {
+        "id": 6133898,
+        "title": "Stabilizing and destabilizing Heegaard splittings of sufficiently complicated 3-manifolds"
+      },
+      {
+        "id": 1901938,
+        "title": "Families of four-dimensional manifolds that become mutually diffeomorphic after one stabilization"
+      },
+      {
+        "id": 7466872,
+        "title": "A \\(p\\)-robust polygonal discontinuous Galerkin method with minus one stabilization"
+      },
+      {
+        "id": 7325935,
+        "title": "Stabilization of probabilistic Boolean networks via pinning control strategy"
+      },
+      {
+        "id": 7395689,
+        "title": "A polygonal discontinuous Galerkin method with minus one stabilization"
+      },
+      {
+        "id": 903133209,
+        "title": "Nielsen classes in outer automorphism groups of free groups"
+      },
+      {
+        "id": 6272195,
+        "title": "Round handles, logarithmic transforms and smooth 4-manifolds"
+      },
+      {
+        "id": 7055212,
+        "title": "An accurate FIC-FEM formulation for the 1D advection-diffusion-reaction equation"
+      },
+      {
+        "id": 902576506,
+        "title": "Bypass moves in convex hypersurface theory"
+      },
+      {
+        "id": 1526959,
+        "title": "The dynamics of control. With an appendix by Lars Gr\u00fcne"
+      },
+      {
+        "id": 8212933,
+        "title": "For exotic surfaces with boundary, one stabilization is not enough"
+      },
+      {
+        "id": 1985431,
+        "title": "Heegaard splittings of the Brieskorn homology spheres that are equivalent after one stabilization"
+      },
+      {
+        "id": 900548979,
+        "title": "One stabilization is not enough for contractible 4-manifolds"
+      },
+      {
+        "id": 8242685,
+        "title": "Homological stability for symplectic groups via algebraic arc complexes"
+      },
+      {
+        "id": 900586646,
+        "title": "One stabilization is not enough for closed knotted surfaces"
+      },
+      {
+        "id": 2052994,
+        "title": "One stabilization method for the 1-D steady solute transport equation"
+      },
+      {
+        "id": 8251004,
+        "title": "Invariant splitting principles for the Lipshitz-Ozsv\u00e1th-Thurston correspondence"
+      },
+      {
+        "id": 2078321,
+        "title": "Dissolving four-manifolds and positive scalar curvature"
+      },
+      {
+        "id": 5211182,
+        "title": "\\(\\theta\\)-curves inducing two different knots with the same 2-fold branched covering spaces"
+      },
+      {
+        "id": 903154966,
+        "title": "Characterization of Stanley-Reisner varieties by their automorphism group"
+      },
+      {
+        "id": 8125788,
+        "title": "A note on embeddings of 3-manifolds in symplectic 4-manifolds"
+      },
+      {
+        "id": 900596108,
+        "title": "Exotic Dehn twists on 4-manifolds"
+      },
+      {
+        "id": 5363858,
+        "title": "Stabilizing Heegaard splittings of composite tunnel number two knots"
+      },
+      {
+        "id": 2173257,
+        "title": "Common stabilizations of Heegaard splittings of link exteriors"
+      },
+      {
+        "id": 6540793,
+        "title": "\\textit{A priori} error analysis of stabilized mixed finite element method for reaction-diffusion optimal control problems"
+      },
+      {
+        "id": 2003166,
+        "title": "7th Zaragoza-Pau conference on applied and statistical mathematics, Jaca (Huesca), September 17--18, 2001"
+      },
+      {
+        "id": 900028416,
+        "title": "Stabilizations of Heegaard splittings of graph manifolds"
+      },
+      {
+        "id": 6666105,
+        "title": "Stabilizing Heegaard splittings of high-distance knots"
+      }
+    ],
+    "screen_fields": [
+      "title"
+    ],
+    "screen_discriminator": "Promote titles addressing quantum or Hodge birational invariants, F-bundle/lattice/framing constructions, Fano rationality, or rational Torelli; retain ambiguous method-adjacent titles as unresolved leads rather than content-level negatives."
+  },
+  {
+    "query": "\"quantum\" & \"birational\"",
+    "url": "https://api.zbmath.org/v1/document/_search?search_string=%22quantum%22+%26+%22birational%22",
+    "queried_utc": "2026-09-09T19:55:21.808355+00:00",
+    "status": {
+      "execution": "successful request",
+      "execution_bool": true,
+      "internal_code": "ok",
+      "last_id": null,
+      "nr_total_results": 274,
+      "nr_request_results": 100,
+      "query_execution_time_in_seconds": 4.145132303237915,
+      "status_code": 200,
+      "time_stamp": "2026-09-09T19:55:24Z"
+    },
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-scope-1.json",
+    "sha256": "24d2a80a598d1eac79fdf5f418c67304a4335690f3d17f597c05e58feef3db2f",
+    "titles": [
+      {
+        "id": 1421310,
+        "title": "Surgery, quantum cohomology and birational geometry"
+      },
+      {
+        "id": 1655744,
+        "title": "Symplectic surgery and Gromov-Witten invariants of Calabi-Yau 3-folds"
+      },
+      {
+        "id": 902802238,
+        "title": "Birational Invariants from Hodge Structures and Quantum Multiplication"
+      },
+      {
+        "id": 1933189,
+        "title": "HyperK\u00e4hler manifolds and birational transformations"
+      },
+      {
+        "id": 5635076,
+        "title": "Symplectic birational geometry"
+      },
+      {
+        "id": 6116035,
+        "title": "Tetrahedron and 3D reflection equations from quantized algebra of functions"
+      },
+      {
+        "id": 1903031,
+        "title": "zbMATH Open Web Interface contents unavailable due to conflicting licenses."
+      },
+      {
+        "id": 5267039,
+        "title": "Birational cobordism invariance of uniruled symplectic manifolds"
+      },
+      {
+        "id": 1948679,
+        "title": "Yang-Baxter maps and integrable dynamics"
+      },
+      {
+        "id": 6484997,
+        "title": "Quantum Chevalley groups"
+      },
+      {
+        "id": 1982581,
+        "title": "The K\u00e4hler cone of a compact hyperk\u00e4hler manifold"
+      },
+      {
+        "id": 7420101,
+        "title": "Quantum representation of affine Weyl groups and associated quantum curves"
+      },
+      {
+        "id": 2152785,
+        "title": "Tropical Robinson-Schensted-Knuth correspondence and birational Weyl group action"
+      },
+      {
+        "id": 5852674,
+        "title": "Non-birational twisted derived equivalences in abelian GLSMs"
+      },
+      {
+        "id": 7955779,
+        "title": "Coupled cluster degree of the Grassmannian"
+      },
+      {
+        "id": 6949427,
+        "title": "Quantum cohomology under birational maps and transitions"
+      },
+      {
+        "id": 6861875,
+        "title": "Birational invariance in logarithmic Gromov-Witten theory"
+      },
+      {
+        "id": 1126797,
+        "title": "Notes on stable maps and quantum cohomology"
+      },
+      {
+        "id": 6615326,
+        "title": "F-theory compactifications with multiple U(1)-factors: constructing elliptic fibrations with rational sections"
+      },
+      {
+        "id": 7406625,
+        "title": "Many-variable identities for the dilogarithm and the dual resonance model"
+      },
+      {
+        "id": 902834793,
+        "title": "Atoms meet symbols"
+      },
+      {
+        "id": 903047802,
+        "title": "Toric Landau-Ginzburg models in threefold divisorial contractions"
+      },
+      {
+        "id": 1473549,
+        "title": "Unity of superstring dualities."
+      },
+      {
+        "id": 5380135,
+        "title": "GLSMs for partial flag manifolds"
+      },
+      {
+        "id": 6493585,
+        "title": "The Pfaffian-Grassmannian equivalence revisited"
+      },
+      {
+        "id": 834321,
+        "title": "Beyond the K\u00e4hler cone"
+      },
+      {
+        "id": 1658401,
+        "title": "Gromov-Witten invariants of blow-ups"
+      },
+      {
+        "id": 1217284,
+        "title": "Poisson structures and birational morphisms associated with bundles on elliptic curves"
+      },
+      {
+        "id": 5019084,
+        "title": "On the complexity of some birational transformations"
+      },
+      {
+        "id": 5769089,
+        "title": "Coherent sheaves and categorical \\(\\mathfrak{sl}_2\\) actions"
+      },
+      {
+        "id": 5642247,
+        "title": "Stability conditions, wall-crossing and weighted Gromov-Witten invariants"
+      },
+      {
+        "id": 1799485,
+        "title": "Discretization of the Schr\u00f6dinger spectral problem."
+      },
+      {
+        "id": 7287242,
+        "title": "Non-commutative birational maps satisfying Zamolodchikov equation, and Desargues lattices"
+      },
+      {
+        "id": 903058126,
+        "title": "Quantum cohomology and birational geometry of Verra fourfolds"
+      },
+      {
+        "id": 8091845,
+        "title": "Blow-ups and the quantum spectrum of surfaces"
+      },
+      {
+        "id": 5896135,
+        "title": "A singular limit theorem in statistical learning theory"
+      },
+      {
+        "id": 5789914,
+        "title": "On the crepant resolution conjecture in the local case"
+      },
+      {
+        "id": 6741282,
+        "title": "Invariance of quantum rings under ordinary flops. I: Quantum corrections and reduction to local models"
+      },
+      {
+        "id": 903118039,
+        "title": "An atomic criterion for irrationality without quantum computations"
+      },
+      {
+        "id": 1347705,
+        "title": "Functional relations in lattice statistical mechanics, enumerative combinatorics and discrete dynamical systems"
+      },
+      {
+        "id": 6656230,
+        "title": "Invariance of quantum rings under ordinary flops. III: A quantum splitting principle"
+      },
+      {
+        "id": 8156819,
+        "title": "Derived categories and zero-brane stability"
+      },
+      {
+        "id": 6505848,
+        "title": "Non-commutative width and Gopakumar-Vafa invariants"
+      },
+      {
+        "id": 6221950,
+        "title": "Uniruled symplectic divisors"
+      },
+      {
+        "id": 6869616,
+        "title": "Movable vs monodromy nilpotent cones of Calabi-Yau manifolds"
+      },
+      {
+        "id": 5382035,
+        "title": "Birational Calabi-Yau threefolds and BPS state counting"
+      },
+      {
+        "id": 6485000,
+        "title": "Monodromy of the trigonometric Casimir connection for \\(\\mathfrak{sl}_2\\)"
+      },
+      {
+        "id": 1638174,
+        "title": "Let's Baxterise"
+      },
+      {
+        "id": 1645819,
+        "title": "Geometric and unipotent crystals."
+      },
+      {
+        "id": 5907268,
+        "title": "Perverse coherent sheaves on blowup. III: Blow-up formula from wall-crossing"
+      },
+      {
+        "id": 900263115,
+        "title": "Quantum Mirror Symmetry for Borcea-Voisin Threefolds"
+      },
+      {
+        "id": 6010983,
+        "title": "Quantum groups and quantization of Weyl group symmetries of Painlev\u00e9 systems"
+      },
+      {
+        "id": 1754952,
+        "title": "\\(W(E_{10}\\)) symmetry, M-theory and Painlev\u00e9 equations"
+      },
+      {
+        "id": 2064976,
+        "title": "Gromov-Witten invariants and quantum cohomology"
+      },
+      {
+        "id": 555849,
+        "title": "Mirror symmetry for two-parameter models. I"
+      },
+      {
+        "id": 2054548,
+        "title": "Tropical \\(R\\) and tau functions"
+      },
+      {
+        "id": 1476285,
+        "title": "D3-branes on partial resolutions of abelian quotient singularities of Calabi-Yau threefolds"
+      },
+      {
+        "id": 7595433,
+        "title": "Birational geometry for d-critical loci and wall-crossing in Calabi-Yau 3-folds"
+      },
+      {
+        "id": 6921693,
+        "title": "Gopakumar-Vafa invariants do not determine flops"
+      },
+      {
+        "id": 8083260,
+        "title": "Birational equivalences and generalized Weyl algebras"
+      },
+      {
+        "id": 5875458,
+        "title": "Graph hypersurfaces and a dichotomy in the Grothendieck ring"
+      },
+      {
+        "id": 6275356,
+        "title": "Dimers and cluster integrable systems"
+      },
+      {
+        "id": 5872332,
+        "title": "Ruan's conjecture and integral structures in quantum cohomology"
+      },
+      {
+        "id": 604758,
+        "title": "Dynamical systems from quantum integrability"
+      },
+      {
+        "id": 6242523,
+        "title": "Flops and about: a guide"
+      },
+      {
+        "id": 7822624,
+        "title": "Gamma classes and quantum cohomology"
+      },
+      {
+        "id": 7357360,
+        "title": "Semiorthogonal decompositions of stable pair moduli spaces via d-critical flips"
+      },
+      {
+        "id": 5218989,
+        "title": "Hitchin and Beauville-Mukai system: classical and quantum correspondence"
+      },
+      {
+        "id": 7228754,
+        "title": "How to construct CSIDH on Edwards curves"
+      },
+      {
+        "id": 6488165,
+        "title": "Noncommutative geometry and Painlev\u00e9 equations"
+      },
+      {
+        "id": 902986064,
+        "title": "Relating Hodge Atoms, Spectral Triples, and BPS Flows"
+      },
+      {
+        "id": 6553429,
+        "title": "Quantum periods for 3-dimensional Fano manifolds"
+      },
+      {
+        "id": 6741283,
+        "title": "Invariance of quantum rings under ordinary flops. II: A quantum Leray-Hirsch theorem"
+      },
+      {
+        "id": 6937529,
+        "title": "Geometric classification of 4d \\( \\mathcal{N}=2 \\) SCFTs"
+      },
+      {
+        "id": 7863199,
+        "title": "Birational equivalences and Kac-Moody algebras"
+      },
+      {
+        "id": 604733,
+        "title": "On the symmetries of integrability"
+      },
+      {
+        "id": 902931444,
+        "title": "Birational morphisms in quantum toric geometry"
+      },
+      {
+        "id": 1341973,
+        "title": "Flops, type III contractions and Gromov-Witten invariants on Calabi-Yau threefolds."
+      },
+      {
+        "id": 6103522,
+        "title": "Quantum invariance under flop transitions"
+      },
+      {
+        "id": 7142778,
+        "title": "Torelli problem for Calabi-Yau threefolds with GLSM description"
+      },
+      {
+        "id": 5361864,
+        "title": "Motivic and quantum invariance under stratified Mukai flops"
+      },
+      {
+        "id": 1553918,
+        "title": "Discrete symmetry groups of vertex models in statistical mechanics."
+      },
+      {
+        "id": 6506878,
+        "title": "A security analysis of uniformly-layered Rainbow defined over non-commutative rings"
+      },
+      {
+        "id": 5008877,
+        "title": "Quantizations of the Hitchin and Beauville-Mukai integrable systems"
+      },
+      {
+        "id": 6012494,
+        "title": "Invariance of Gromov-Witten theory under a simple flop"
+      },
+      {
+        "id": 5234055,
+        "title": "Cluster \\(\\chi\\)-varieties, amalgamation, and Poisson-Lie groups"
+      },
+      {
+        "id": 7471415,
+        "title": "Peterson isomorphism in \\(K\\)-theory and relativistic Toda lattice"
+      },
+      {
+        "id": 4134437,
+        "title": "Stratifying monopoles and rational maps"
+      },
+      {
+        "id": 6885170,
+        "title": "Tall sections from non-minimal transformations"
+      },
+      {
+        "id": 902812903,
+        "title": "Quantum cohomology of variations of GIT quotients and flips"
+      },
+      {
+        "id": 7336159,
+        "title": "Mirror symmetry for quasi-smooth Calabi-Yau hypersurfaces in weighted projective spaces"
+      },
+      {
+        "id": 7255725,
+        "title": "Gromov-Witten invariants and rationally connectedness"
+      },
+      {
+        "id": 5982253,
+        "title": "Open/closed string dualities and Seiberg duality from geometric transitions in M-theory"
+      },
+      {
+        "id": 5218125,
+        "title": "A structure theorem for the Gromov-Witten invariants of K\u00e4hler surfaces"
+      },
+      {
+        "id": 6769487,
+        "title": "Beijing lectures on the grade restriction rule"
+      },
+      {
+        "id": 6059309,
+        "title": "Analytic continuations of quantum cohomology"
+      },
+      {
+        "id": 900578182,
+        "title": "The noncommutative minimal model program"
+      },
+      {
+        "id": 1669270,
+        "title": "Blowing up of non-commutative smooth surfaces"
+      },
+      {
+        "id": 7142340,
+        "title": "The crepant transformation conjecture implies the monodromy conjecture"
+      },
+      {
+        "id": 719246,
+        "title": "Baxterization, dynamical systems, and the symmetries of integrability"
+      }
+    ],
+    "screen_fields": [
+      "title"
+    ],
+    "screen_discriminator": "Promote titles addressing quantum or Hodge birational invariants, F-bundle/lattice/framing constructions, Fano rationality, or rational Torelli; retain ambiguous method-adjacent titles as unresolved leads rather than content-level negatives."
+  },
+  {
+    "query": "ti:\"Polarisations on an abelian variety\"",
+    "url": "https://api.zbmath.org/v1/document/_search?search_string=ti%3A%22Polarisations+on+an+abelian+variety%22",
+    "queried_utc": "2026-09-09T19:55:21.808878+00:00",
+    "status": {
+      "execution": "successful request",
+      "execution_bool": true,
+      "internal_code": "ok",
+      "last_id": null,
+      "nr_total_results": 1,
+      "nr_request_results": 1,
+      "query_execution_time_in_seconds": 0.10140490531921387,
+      "status_code": 200,
+      "time_stamp": "2026-09-09T19:55:22Z"
+    },
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-scope-2.json",
+    "sha256": "27f6a7769ce8bf0e53a3a623ee73b57e69931938c083e2556dac589766b359c8",
+    "titles": [
+      {
+        "id": 3803647,
+        "title": "Polarisations on an abelian variety"
+      }
+    ],
+    "screen_fields": [
+      "title"
+    ],
+    "screen_discriminator": "Promote titles addressing quantum or Hodge birational invariants, F-bundle/lattice/framing constructions, Fano rationality, or rational Torelli; retain ambiguous method-adjacent titles as unresolved leads rather than content-level negatives."
+  },
+  {
+    "query": "ti:\"Schiffer variations and the generic Torelli theorem for hypersurfaces\"",
+    "url": "https://api.zbmath.org/v1/document/_search?search_string=ti%3A%22Schiffer+variations+and+the+generic+Torelli+theorem+for+hypersurfaces%22",
+    "queried_utc": "2026-09-09T19:55:21.809137+00:00",
+    "status": {
+      "execution": "successful request",
+      "execution_bool": true,
+      "internal_code": "ok",
+      "last_id": null,
+      "nr_total_results": 1,
+      "nr_request_results": 1,
+      "query_execution_time_in_seconds": 0.09652256965637207,
+      "status_code": 200,
+      "time_stamp": "2026-09-09T19:55:22Z"
+    },
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-scope-3.json",
+    "sha256": "1a6b4711be8de1c83cf44963de04f33caa86cd2974a5c1eb106038cbb2782284",
+    "titles": [
+      {
+        "id": 7481799,
+        "title": "Schiffer variations and the generic Torelli theorem for hypersurfaces"
+      }
+    ],
+    "screen_fields": [
+      "title"
+    ],
+    "screen_discriminator": "Promote titles addressing quantum or Hodge birational invariants, F-bundle/lattice/framing constructions, Fano rationality, or rational Torelli; retain ambiguous method-adjacent titles as unresolved leads rather than content-level negatives."
+  },
+  {
+    "query": "ti:\"Quantum periods for 3-dimensional Fano manifolds\"",
+    "url": "https://api.zbmath.org/v1/document/_search?search_string=ti%3A%22Quantum%20periods%20for%203-dimensional%20Fano%20manifolds%22",
+    "status": {
+      "execution": "successful request",
+      "execution_bool": true,
+      "internal_code": "ok",
+      "last_id": null,
+      "nr_total_results": 1,
+      "nr_request_results": 1,
+      "query_execution_time_in_seconds": 0.09044957160949707,
+      "status_code": 200,
+      "time_stamp": "2026-09-09T19:51:28Z"
+    },
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath.json",
+    "sha256": "a4f3758cdaaf678acbaeb7cc7a8cb41514e7d673a00b47f7c37c9e0ee466699c",
+    "screen_fields": [
+      "title"
+    ],
+    "scope": "Exact source resolution; no review-based theorem claim."
+  }
+]
