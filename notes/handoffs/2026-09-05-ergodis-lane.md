@@ -84,6 +84,10 @@ Private glossary reconciliation and campaign-boundary review are complete:
 queries/results through existing portable run records with snapshot-only reopening,
 then attach the execution boundary to campaign control. Labelled composition is
 still unbound; three application modules do not close that original family gate.
+User-prioritized web expansion now supplies 60/600-repair and 24/72-job workloads,
+plus a live 81-point WASM capacity surface with weighted CPU/GPU objectives and
+partial stop. Browser/independent scheduling gates pass; native payloads unchanged.
+Report: `notes/2026-09-08-c1130-larger-workloads-live-surfaces.md`.
 Preserve public-core loading of separately compiled/obfuscated private packages;
 canonical WASM engine plus extensions, not a mandatory private assembly build.
 Start with a concrete contract over composition, compiled LRC queries and QEC;

@@ -303,3 +303,11 @@ and portable run history, and keeps labelled composition explicitly open. Report
 `notes/2026-09-08-c1130-campaign-integration-review.md`. No executable changes,
 provider rebuild, preview restart or new performance claim. Next is portable
 application run recording/snapshot reopening, followed by campaign control.
+
+## 2026-09-08 — Larger workloads and incremental objective surfaces
+
+Private `017f2f1`/`7403a6e` deliver loaded 60/600 LRC batches, 24/72-job CPU/GPU
+allocation, a center-out live capacity grid, weighted ranking and stop/partial
+results. Real browser incremental updates and independent scheduling checks pass.
+Native/WASM provider binaries unchanged. Report:
+`notes/2026-09-08-c1130-larger-workloads-live-surfaces.md`.
