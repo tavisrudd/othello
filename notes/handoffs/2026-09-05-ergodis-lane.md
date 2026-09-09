@@ -44,6 +44,32 @@ the C985 optimization-facing paper.
 
 ### C1130 — full WASM feature completeness (in progress)
 
+**Current user priority (September 9):** Evolve must discover general reductions from
+source structure/own observations, not receive fixture answers, supplied batch
+partitions or preferred coefficients. Shared cold proposal/checker capabilities now
+cover equivalent additive choice blocks, dominated alternatives, bounded integer
+relations, resource bottleneck grouping and exact capacity plateaus. Commits
+`3cbb5df`, `5685801`, `0f9e90d`; private report
+`ergodis-private/analysis/module-loading/source-discovery.md` records generated,
+adversarial and actual WASM checks and exact remaining paths/gates. Informative
+source-geometry query selection lets the 216-job race infer 428/625 answers,
+exclude 151 and directly solve 46, agreeing with its control. This is query reuse,
+not multiplicity execution. The native DP already merges equal resource states.
+Next: general checked multiplicity/representative lowering and native binding,
+measured against existing DP, then general GF(2) helper equivalence. Do not encode
+the inference batches' three classes or the Ceph diamond's pairing as hints.
+
+Full Hadamard orders 84/92 are in the preview. Order 84 now discovers its integer
+row relation through the shared library and independently verifies the entire
+matrix. Order 92 control takes about 163 s here, exceeding the requested 1–2 min;
+its latest shared-discovery timing remains open. Private
+`analysis/module-loading/hadamard-preview.md` records status. New browser integration,
+Hadamard provider/kernel and earlier ResourceExecution changes remain uncommitted
+pending their native performance gates; exact paths are listed in the reports.
+Preview ports 8769/8770 use current routes and canonical core WASM; Hadamard loads
+lazily, so its module failure cannot prevent the other Evolve examples loading.
+
+
 User requirement: WASM is a full Ergodis execution target, not a restricted subset.
 Close bindings, portability and host-adapter gaps across existing core/private
 capabilities; keep shared contracts and native optimized execution intact.
