@@ -38,6 +38,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
+- **C1133 — queued, author-selected next (2026-09-09):** solidify the supplied
+  m=1 major-upgrade mathematics and complete the literature audit before reviewing
+  manuscript upgrades and theorem hierarchy with the author. The exact packet is
+  preserved; proposed claims remain unvalidated. Card:
+  `../cubic-threefolds-tasks/c1133-m1-major-upgrade-audit.md`.
+
 - **Framed companion specialization boundary (2026-09-08):** the independently
   checked F1 example refutes unrestricted T. The companion now restricts T
   and its downstream uses to actual remaining center maps; R and restricted

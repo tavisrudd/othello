@@ -329,3 +329,5 @@ All completed rows, original rankings, amendments, and detailed task bodies are 
 back into this live registry.
 
 - **C1130 `[ergodis]` [IN PROGRESS]** — Full WASM feature parity across Ergodis with shared engine/contracts, real domain execution and mandatory native performance preservation → `notes/2026-09-08-c1130-wasm-feature-completeness.md`.
+
+- **C1133 `[cubic-threefolds]` [QUEUED]** — Audit the m=1 major-upgrade proof packet and complete literature coverage; solidify mathematics before author review of manuscript upgrades and theorem hierarchy → `notes/cubic-threefolds-tasks/c1133-m1-major-upgrade-audit.md`.
