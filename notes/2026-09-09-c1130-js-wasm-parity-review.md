@@ -3,8 +3,9 @@
 **PRIVATE — contributor context only. Do not ship, export or publish.**
 **Lane**: `ergodis`. Reviewed: 2026-09-09.
 **Status**: review and implementation plan; full parity remains open.
-Source baseline: core `6cf56db`, private `3b0eb1f`. This pass changes documentation
-and a browser feature probe, not runtime contracts, algorithms or release settings.
+Original review baseline: core `6cf56db`, private `3b0eb1f`. Implementation now
+includes shared host validation, provider readout catalogs and portable application
+records. See current delivery section below; full parity is still open.
 
 ## Conclusion and binding direction
 
@@ -251,3 +252,53 @@ reattach after close. Ten Node lifecycle tests and actual Chromium recovery
 prepare/run/optimize pass. Native service revision/retry tests and exclusive direct
 provider calls were inspected, not newly rerun. Shared operation descriptors and
 paired application record transcripts remain next; full P0/P1 are not closed.
+
+
+## Current delivery — September 9 two-hour implementation window
+
+Core `7b7e278`/`15bf1ee`/`7a9bef6`: native/browser manifest, malformed readout and
+descriptor conformance; retained admitted native descriptor. Private `205c3e6`
+adds bounded variable outputs and explicit effects alongside fixed readouts.
+LRC/QEC/scheduling/CSS/Hadamard now use provider-owned command catalogs. Both
+hosts pass LRC24/QEC20/scheduling11/CSS9/Hadamard13 loaded transcripts; native
+Hadamard packaging is present and one canonical WASM engine is used. Legacy
+providers remain explicitly opaque. Full lifecycle/checkpoint semantics are not
+implied by the execution catalog.
+
+Core `b69abec`: bounded generic record capture uses existing RunSpec, RunRecord and
+Bundle codecs; native/browser inputs produce identical bytes. Private `9a76124`
+and follow-up add application save/reopen/explicit replay; actual recovery, QEC
+and scheduling browser bundles match native typed replay outputs. Reopening
+starts no provider, and imported answers are inert unverified data. Generic bundle
+verification continues to report unsupported application evidence honestly.
+
+This closes a record/replay slice, not the portable CampaignSession's family
+limitation. Campaign update/checkpoint history, independent application certificate
+checkers, generic family dispatch and complete inventory remain open. Private
+`analysis/interface-review/` owns detailed scripts, evidence and current matrix.
+Full core gates, provider allocation tests and family transcript tests passed.
+Private tools tests pass; its broader clippy gate is blocked by an existing warning
+in `leakage_dual_tower.rs:116`, left untouched. No kernel or native settings changed.
+
+
+User steering during the two-hour window: CSS first discovery opportunity before
+its first evolved advance; sparse checker and coalesced/step chart updates; small
+code examples moved to a direct single-worker application. Native 360-qubit
+Evolve completed at 33.79 s for radius 20, versus the user's 36.7 s browser
+observation. Controlled runner ABBA samples did not reveal a first-round regression.
+See private css-performance-observations.md for scope, hashes and exact counters.
+
+Private 3408bb1 adds general fixed-coordinate symmetry discovery and offline
+checked residual-bound experiments. Source projections did not yield useful
+additional cuts in the tested prefix; a residual available-column charge bound
+pruned 491/4443 surviving sampled states. This is not an actual native frontier
+replay or a speedup claim. The ADR proposes source/epoch-bound admission, cheap
+threshold tests and unchanged no-bound native dispatch. Integration remains open.
+
+Validation caveat: the full browser smoke reaches the structural comparison then
+fails its old nonlinear-partition-usefulness assertion. The trace contains 34
+checked capped live rules but no capped rule with new grid coverage; newer weighted
+rules dominate that coverage. The gate has not been weakened. Targeted application,
+CSS race/repeat/warm/stop/certificate tests pass. Intermittent fetch/worker-start
+failures seen in earlier full attempts did not recur in the latest stable run;
+network diagnostics now retain request-level failures for investigation.

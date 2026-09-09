@@ -54,21 +54,28 @@ with discovery off, and certificate verification. Race timing starts in ready
 workers; problem setup reports compilation separately. CSS ordinary repeats reuse
 plans but reset search/discovery state; learned-only reuse is explicit.
 
-P0 transport slice: private `bb8ceaa` bounds ModuleSession pending requests,
-cleans failed sends, and terminates on deadline/deserialization failure; five
-lifecycle tests pass. Native Provider::call is synchronous/exclusive, so no parallel
-pending-queue fix applies. Details: private `analysis/interface-review/module-client-lifecycle.md`.
+P0 delivered: bounded JS request lifecycle and immutable operation identity;
+paired native/JS manifest/readout/descriptor validation (core `7a9bef6`); fixed and
+bounded-variable provider-owned execution catalogs for all five module families
+(private `205c3e6`). Loaded native/browser transcripts pass: LRC24, QEC20,
+scheduling11, CSS9, Hadamard13; one canonical WASM engine. No solver hot loop changed.
 
-P0 operation identity: private `b69ab79` captures input/query/session identity before
-awaits, rejects late answers after close/replacement, and prevents preparation from
-resurrecting a closed application. Ten Node lifecycle tests and actual Chromium
-recovery Run/Optimize pass. Native revision/retry and exclusive-call counterparts
-were reviewed; no Rust kernel or settings changed. Same private lifecycle report.
+P1 delivered slice: generic RunSpec/RunRecord capture factory (core `b69abec`),
+byte-identical native/browser bundles, and application save/reopen/explicit replay
+(private `9a76124`/`f8bad94`, including QEC/scheduling). Imported answers
+remain inert unverified records. Actual browser bundles agree with native typed
+replays; this is execution equivalence, not independent proof verification.
 
-Next: remaining P0 shared operation descriptors/codecs and paired native/JS
-transcripts; P1 LRC recorded workflow, then other families. P2 retained labelled
-composition/fields remains the contrasting-family gate. P3 inventory; P4 portable
-performance experiments; P5 continuation/storage; P6 complete conformance.
+Next: checked residual bounds within active CSS roots, with paired native/WASM
+continuation admission and a native performance gate (private ADR below); paired
+campaign updates/checkpoints and application certificate checkers remain open. P2 retained labelled
+composition/fields remains the contrasting-family gate; P3 inventory, P4 portable
+performance experiments, P5 continuation/storage and P6 complete conformance.
+Private current evidence/design: `analysis/interface-review/application-records.md`,
+`provider-readout-contracts.md`, `capability-matrix.json`, and
+`adr-css-residual-reductions.md`. Generic fixed-coordinate discovery and offline
+residual-bound spikes are private `3408bb1`, not active-kernel pruning. Small
+50/128-qubit examples now live in Applications at `/code-distance`.
 
 Native CLI/control/runtime fragmentation must converge in these same phases.
 Preserve typed native kernels and all contributor performance gates. Full parity,
