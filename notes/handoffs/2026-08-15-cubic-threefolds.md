@@ -45,8 +45,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   special-model bridges: `../2026-09-09-c1133-geometric-source-audit.md`.
   Operation and surface proofs: `../2026-09-09-c1133-transport-vanishing-audit.md`.
   Seventeen-family exhaustion and Hodge numbers are source-verified. Finish
-  optional-claim dispositions and literature coverage before manuscript upgrades
-  and hierarchy review. Collaborator discussion is parked per author. No global novelty verdict yet. Card:
+  optional source gates and literature coverage before manuscript upgrades
+  and hierarchy review. Dispositions and rank-three/odd-cubic proofs:
+  `../2026-09-09-c1133-optional-claims-audit.md`. Collaborator discussion is parked per author. No global novelty verdict yet. Card:
   `../cubic-threefolds-tasks/c1133-m1-major-upgrade-audit.md`; audit:
   `../2026-09-09-c1133-literature-audit.md`.
 

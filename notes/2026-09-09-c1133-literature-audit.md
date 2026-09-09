@@ -3,7 +3,7 @@
 **Date:** 2026-09-09. **Lane:** `cubic-threefolds`.
 **Status:** incomplete; no global novelty or priority verdict is issued.
 **External sources read at full text: 3 — one paper and two source scripts.**
-The source register contains 47 individual entries, with exact read depths,
+The source register contains 49 individual entries, with exact read depths,
 versions, cache access and hashes. Most papers have partial read depth.
 Iritani’s ten-page Hodge refinement has now been read completely.
 The author-supplied packet has been read completely, including its checker.
@@ -281,3 +281,32 @@ The arXiv PDF was cache-queried before fetching and ingested with its hash.
 Web screenshot returned cache miss; local pdftoppm was unavailable. The cached
 PDF p. 13 was instead rendered with PyMuPDF and visually inspected successfully.
 Full-text count is unchanged. No citation-graph negative is asserted here.
+
+## Optional-claims source pass
+
+The mathematical dispositions and symbolic arguments are in
+`2026-09-09-c1133-optional-claims-audit.md`. Beauville's cubic multiplication
+inputs, GG's stated rational decomposition, and Hartlieb's explicit Fermat
+isogeny are now partial-text checked. The GG corrigendum remains unread after
+AMS returned 403 and the author homepage returned 502. The source register
+records the SGA English reproduction's limited provenance; no original French
+facsimile read is claimed. Full-text count remains three (one paper, two scripts).
+
+Verbatim web queries on 2026-09-09:
+
+```text
+abelian varieties isogeny invariant potential good reduction toric rank semistable reduction monodromy rank
+Gorchinskiy Guletskii corrigendum motives representability algebraic cycles threefolds Theorem 8
+Hartlieb Fermat cubic intermediate Jacobian Remark 23 isogenous elliptic
+"Gorchinskiy" "Guletskii" "corrigendum"
+"S1056-3911-2013-00634-7" pdf
+site:pcwww.liv.ac.uk/~guletski corrigendum
+```
+
+These were input-discovery and access queries, not exhaustive screens or
+citation-graph negatives. Promoted sources are individually registered; other
+search results were not promoted as read sources. Existing Beauville, GG and
+Hartlieb arXiv PDFs were retrieved from the shared cache. The SGA reproduced
+HTML was saved with a hash. No new PDF was fetched successfully in this pass.
+The conjectural/conditional source gates in the optional report must not be
+silently converted into accepted manuscript claims.

@@ -31,7 +31,11 @@ the Orr forward set to 37 records; title screening is recorded.
 Seventeen-family classification exhaustion and all seventeen Hodge numbers
 are now source-verified in the geometric audit; the eight rational controls
 have all-member geometric scope. Collaborator discussion is parked per author.
-Next finish optional-claim dispositions and the complete literature audit. Current coverage, precise access gaps, source read-depth
+Optional-claim dispositions, the rank-three local proof and uniform odd-cubic
+formula are written in `notes/2026-09-09-c1133-optional-claims-audit.md`.
+Countability and constant coarse moduli need no arithmetic finiteness input.
+Next close the explicitly listed optional source gates and the literature audit;
+the GG corrigendum is still inaccessible. Current coverage, precise access gaps, source read-depth
 register and citation sets:
 `notes/2026-09-09-c1133-literature-audit.md`.
 No global novelty verdict or manuscript promotion has passed. Review of
