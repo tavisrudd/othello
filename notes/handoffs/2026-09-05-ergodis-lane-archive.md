@@ -327,3 +327,12 @@ Core b5e2210 / private 2046e91 deliver checked capacity-grid reductions and live
 baseline comparisons. Supersedes the observer-only frontier. Report:
 `../2026-09-08-c1130-wasm-evolve-reductions.md`. Preview bind changed to 0.0.0.0
 on user request; C1130 remains open.
+
+## 2026-09-08 — structural theorem demo and live-solve requirement
+
+Private 6e5bd13 / 319ea95 add resource-cover grammar, checked proof inspector,
+separate discovery Worker and atomic queued-query promotion. Report:
+`../2026-09-08-c1130-theorem-demo.md`. User clarified that actual running solves
+must adopt ready reductions as on native; queued-query promotion does not close
+that gap. The native reference and implementation gate are in
+`../2026-09-08-c1130-live-solve-promotion.md`; this is C1130's next priority.

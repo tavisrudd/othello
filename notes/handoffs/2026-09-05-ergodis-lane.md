@@ -88,17 +88,18 @@ User-prioritized web expansion now supplies 60/600-repair and 24/72-job workload
 plus a live 81-point WASM capacity surface with weighted CPU/GPU objectives and
 partial stop. Browser/independent scheduling gates pass; native payloads unchanged.
 Report: `notes/2026-09-08-c1130-larger-workloads-live-surfaces.md`.
-Evolve now runs a real bounded WASM capacity-reduction comparison at ports
-8769/8770 `/evolve`, bound to `0.0.0.0` on user request. The private demo
-HTTP adapter now supplies missing SHA-256/randomUUID APIs for LAN Safari;
-forced-missing-API browser workflow and Worker hash checks pass. Core `b5e2210` exposes
-the shared ranked proposal driver; private `2046e91` adds independently checked
-resource bounds and measured baseline/comparison traces. The 72-job grid removes
-78/289 configurations (42 seed, 36 evolved), leaving 211 forward solves. These
-are capacity configurations, not internal solver states; timings vary. Browser,
-checker oracle, receipt replay and core gates pass. Campaign integration and
-broader reduction families remain open. Report:
-`notes/2026-09-08-c1130-wasm-evolve-reductions.md`.
+Evolve's harder demo now runs 96 mixed-affinity jobs with a structural resource-cover
+proof grammar and clickable/recheckable reduction evidence. Private 6e5bd13 /
+319ea95: 37 proposals, four useful rules, 339/625 capacity configurations excluded;
+independent oracle, full browser, receipt and mobile-width gates pass. Separate
+Evolve/solve Workers promote rules to queued queries immediately; in-flight work
+is not double counted. Report: `notes/2026-09-08-c1130-theorem-demo.md`.
+**User-prioritized next:** promote checked reductions into an already-running solve,
+matching native watcher/epoch/safe-point semantics. Queued-query cuts do NOT meet
+this requirement. Current scheduling EXECUTE is blocking and lacks resumable
+logical state. Concrete native reference, residual-cover obligations and required
+performance/parity gates: `notes/2026-09-08-c1130-live-solve-promotion.md`.
+Preview: 8769/8770 `/evolve`, bound to 0.0.0.0; LAN HTTP crypto adapter retained.
 Preserve public-core loading of separately compiled/obfuscated private packages;
 canonical WASM engine plus extensions, not a mandatory private assembly build.
 Start with a concrete contract over composition, compiled LRC queries and QEC;
