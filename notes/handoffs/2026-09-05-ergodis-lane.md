@@ -59,11 +59,16 @@ cleans failed sends, and terminates on deadline/deserialization failure; five
 lifecycle tests pass. Native Provider::call is synchronous/exclusive, so no parallel
 pending-queue fix applies. Details: private `analysis/interface-review/module-client-lifecycle.md`.
 
-Next: P0 shared immutable operation/result identity, bounded requests and native/JS
-conformance; P1 paired LRC recorded workflow, then other families. P2 retained
-labelled composition/fields is the contrasting-family abstraction gate. P3 closes
-remaining inventory; P4 evaluates WASM SIMD/build/cache options; P5 continuation
-and storage; P6 consolidates adapters and validates the complete capability matrix.
+P0 operation identity: private `b69ab79` captures input/query/session identity before
+awaits, rejects late answers after close/replacement, and prevents preparation from
+resurrecting a closed application. Ten Node lifecycle tests and actual Chromium
+recovery Run/Optimize pass. Native revision/retry and exclusive-call counterparts
+were reviewed; no Rust kernel or settings changed. Same private lifecycle report.
+
+Next: remaining P0 shared operation descriptors/codecs and paired native/JS
+transcripts; P1 LRC recorded workflow, then other families. P2 retained labelled
+composition/fields remains the contrasting-family gate. P3 inventory; P4 portable
+performance experiments; P5 continuation/storage; P6 complete conformance.
 
 Native CLI/control/runtime fragmentation must converge in these same phases.
 Preserve typed native kernels and all contributor performance gates. Full parity,

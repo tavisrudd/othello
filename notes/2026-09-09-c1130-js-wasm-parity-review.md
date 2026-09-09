@@ -241,3 +241,13 @@ Provider::call uses a synchronous exclusive borrow and has no matching pending
 queue. See private `analysis/interface-review/module-client-lifecycle.md` for
 limits. Immutable result identity and paired family transcripts remain open; this
 slice does not close P0 or claim native cancellation parity.
+
+## P0 implementation status — captured operation identity
+
+Private `b69ab79` captures application query, prepared source and result identity
+before awaiting, enforces single-flight workspace use, suppresses stale progress
+and rejects stale completion. Preparation/replacement snapshots inputs and cannot
+reattach after close. Ten Node lifecycle tests and actual Chromium recovery
+prepare/run/optimize pass. Native service revision/retry tests and exclusive direct
+provider calls were inspected, not newly rerun. Shared operation descriptors and
+paired application record transcripts remain next; full P0/P1 are not closed.
