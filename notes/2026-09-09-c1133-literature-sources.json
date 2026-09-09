@@ -26,7 +26,7 @@
       },
       "key": "arXiv:2307.03696",
       "read_depth": "partial",
-      "read_scope": "v4; header; Theorem 5.1, Remarks 5.2–5.4 and opening of 5.3, extraction lines 2338–2465. Introduction 110–185 and Section 5.2 through Remark 5.4, lines 2350–2440, also read.",
+      "read_scope": "v4; header; Theorem 5.1, Remarks 5.2–5.4 and opening of 5.3, extraction lines 2338–2465. Introduction 110–185 and Section 5.2 through Remark 5.4, lines 2350–2440, also read. Additional v4 reads: introduction 1–107 (global-generation hypothesis and twisting Remark 1.2), Section 5.3 opening 2440–2515, and Section 5.8 complete 3219–3330, plus start of references through 3375. Initial data (5.11)/(5.12) and unique Birkhoff factorization supply the written equivariance adaptation.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Quantum cohomology of projective bundles",
       "version_in_cached_header": "arXiv:2307.03696v4 [math.AG] 31 Jan 2026"
@@ -355,8 +355,8 @@
         "url": "https://arxiv.org/pdf/2509.15831"
       },
       "key": "arXiv:2509.15831",
-      "read_depth": "abstract/metadata only",
-      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
+      "read_depth": "partial",
+      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet. v4; introduction opening 1–80. Conditional Chen–Ruan blowup framework and separate geometric finite-group invariants; no full-paper exclusion.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Atoms meet symbols",
       "version_in_cached_header": "arXiv:2509.15831v4 [math.AG] 1 Apr 2026"
@@ -371,7 +371,7 @@
       },
       "key": "arXiv:2607.26718",
       "read_depth": "partial",
-      "read_scope": "v1; abstract, introduction and beginning of Section 2, lines 1–170.",
+      "read_scope": "v1; abstract, introduction and beginning of Section 2, lines 1–170. v1; extended read through surface section, lines 1–210; Theorem 4.1 and opening proof 327–397; reference [8] resolved. Exact criterion requires b3(X)=0.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "An atomic criterion for irrationality without quantum computations",
       "version_in_cached_header": "arXiv:2607.26718v1 [math.AG] 29 Jul 2026"
@@ -415,8 +415,8 @@
         "url": "https://arxiv.org/pdf/2511.07101"
       },
       "key": "arXiv:2511.07101",
-      "read_depth": "abstract/metadata only",
-      "read_scope": "Cache bibliographic metadata and Semantic Scholar forward-citation abstract; no primary-text judgment yet.",
+      "read_depth": "partial",
+      "read_scope": "Cache bibliographic metadata and Semantic Scholar forward-citation abstract; no primary-text judgment yet. v2; introduction and early generalities, lines 1–180. Finite-group equivariant IJ/Burnside setting, no read of later application proofs.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Intermediate Jacobians and Burnside invariants",
       "version_in_cached_header": "arXiv:2511.07101v2 [math.AG] 23 Dec 2025"
@@ -430,8 +430,8 @@
         "url": "https://arxiv.org/pdf/2509.07407"
       },
       "key": "arXiv:2509.07407",
-      "read_depth": "abstract/metadata only",
-      "read_scope": "Cache bibliographic metadata and Semantic Scholar forward-citation abstract; no primary-text judgment yet.",
+      "read_depth": "partial",
+      "read_scope": "Cache bibliographic metadata and Semantic Scholar forward-citation abstract; no primary-text judgment yet. v1; introduction 1–170, Proposition 4.2/Lemma 4.3/Theorem 4.4, lines 805–875; Section 4.3 and opening of Section 5, lines 1109–1235. Formal product result compared at stated depth; its regular-lattice and coefficient contract is not established by this read.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "The quantum D-module of product varieties",
       "version_in_cached_header": "arXiv:2509.07407v1 [math.AG] 9 Sep 2025"
@@ -445,8 +445,8 @@
         "url": "https://arxiv.org/pdf/2608.27441"
       },
       "key": "arXiv:2608.27441",
-      "read_depth": "abstract/metadata only",
-      "read_scope": "Cache bibliographic metadata and Semantic Scholar forward-citation abstract; no primary-text judgment yet.",
+      "read_depth": "partial",
+      "read_scope": "Cache bibliographic metadata and Semantic Scholar forward-citation abstract; no primary-text judgment yet. v1; introduction and Theorems A–D, lines 1–170. K-trivial and klt Calabi–Yau-pair hypotheses inspected; later proofs not read.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Towards the Global Torelli Theorem",
       "version_in_cached_header": "arXiv:2608.27441v1 [math.AG] 27 Aug 2026"
@@ -476,7 +476,7 @@
       },
       "key": "10.1007/BF02837283",
       "read_depth": "secondary only",
-      "read_scope": "Recollection in arXiv:2412.01676v1 introduction (read partial); original DOI metadata and search excerpt consulted. Primary PDF not read: IAS direct GET returned 404, publisher PDF returned non-PDF bytes, browser opened metadata but page screenshot failed with cache miss.",
+      "read_scope": "Recollection in arXiv:2412.01676v1 introduction (read partial); original DOI metadata and search excerpt consulted. Primary PDF not read: IAS direct GET returned 404, publisher PDF returned non-PDF bytes, browser opened metadata but page screenshot failed with cache miss. Additional 2026-09-09 primary access attempts: IAS article and archive URLs returned 403; repository download query returned 404. Search index displayed the primary Theorem 1.1 excerpt, but no PDF/text extraction was acquired; primary facsimile gate remains open.",
       "secondary_source": "arXiv:2412.01676",
       "title": "Polarisations on an abelian variety",
       "version_in_cached_header": "1981 original not read"
@@ -562,6 +562,19 @@
         "url": "https://zenodo.org/api/records/20625923/files/fano_threefolds_rk1index2.py/content",
         "sha256": "d4b4db2f194913049e57fbf389fd6cdb68d15e2431b315eee845aa9d7c4a4a22",
         "bytes": 2688
+      }
+    },
+    {
+      "key": "arXiv:2603.04518",
+      "title": "On the irrationality of cubic fourfolds",
+      "read_depth": "partial",
+      "read_scope": "v1; introduction 1–105; complete Example 15, 540–739. Minimal nef-canonical surface Euler nilpotence is prior work. Later proof of Theorem 56 not read.",
+      "access": {
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2603.04518.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2603.04518.txt",
+        "url": "https://arxiv.org/pdf/2603.04518v1",
+        "sha256": "eb84753911c97a6b618975be5da4dc3b5bdec2b66edf11063d09d75e475abfdc",
+        "bytes": 497477
       }
     }
   ],

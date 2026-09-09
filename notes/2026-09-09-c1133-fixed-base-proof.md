@@ -81,9 +81,10 @@ Iritani's Hodge refinement, Proposition 8, supplies equivariance of the full
 blowup maps; its Lemma 10 supplies fixed initial shifts. Section 2(a,d) explicitly states parity preservation, and Remark 2
 distinguishes parity from the degree of ramified scalars. The central Hodge-group
 element gives the same conclusion after odd bulk variables are set to zero. The fibers remain full cohomology fibers.
-The same parity conclusion in the projective-bundle construction is compatible
-with its algebraic pull/push, characteristic-class and reconstruction operations.
-It should be written explicitly when integrating the full-super statement.
+Projective-bundle equivariance and parity are now proved from its fixed initial
+data and unique Birkhoff factorization in
+`2026-09-09-c1133-transport-vanishing-audit.md`, including the source twisting
+hypothesis. This completes the previously pending written adaptation.
 
 The source comparison theorems give isomorphisms over graded z-polynomial
 completed rings, and Iritani–Koto Remark 5.3 spells out their coefficientwise
@@ -112,8 +113,8 @@ a polynomial in the shift difference. Thus these occurrences remain distinct
 at the generic comparison point. Together with the fixed-base injection above,
 this gives the needed mechanism for the fixed-base operation formulas.
 
-The remaining audit work is to finish the source-level comparison across both
-operations, all numerical Fano inputs and all-member deformation statements,
+The operation and surface-vanishing proofs are now written in the transport
+audit. Remaining work includes imported geometric exhaustion, optional branches,
 and the novelty/forward-citation coverage. The paper-facing theorem must include
 the exact ring conventions above; this note is not a claim that the packet's
 placeholder Proposition 24.1 has already been integrated or independently

@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-09",
+  "attempts": [
+    {
+      "url": "https://www.ias.ac.in/article/fulltext/math/090/02/0125-0128",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://www.ias.ac.in/public/Volumes/pmsc/090/02/0125-0128.pdf",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://repository.ias.ac.in/36463/1/36463.pdf?download=1",
+      "error": "HTTP Error 404: Not Found"
+    }
+  ]
+}

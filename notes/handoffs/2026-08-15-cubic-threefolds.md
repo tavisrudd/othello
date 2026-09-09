@@ -43,6 +43,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   written, and a rank-three framing-source proposition has exact counterexamples.
   Fifteen external matrix reconstructions and their period inputs now match;
   special-model bridges: `../2026-09-09-c1133-geometric-source-audit.md`.
+  Operation and surface proofs: `../2026-09-09-c1133-transport-vanishing-audit.md`.
   Finish geometric/source validation and complete literature coverage before
   manuscript upgrades and hierarchy review. No global novelty verdict yet. Card:
   `../cubic-threefolds-tasks/c1133-m1-major-upgrade-audit.md`; audit:

@@ -3,7 +3,7 @@
 **Date:** 2026-09-09. **Lane:** `cubic-threefolds`.
 **Status:** incomplete; no global novelty or priority verdict is issued.
 **External sources read at full text: 3 — one paper and two source scripts.**
-The source register contains 39 individual entries, with exact read depths,
+The source register contains 40 individual entries, with exact read depths,
 versions, cache access and hashes. Most papers have partial read depth.
 Iritani’s ten-page Hodge refinement has now been read completely.
 The author-supplied packet has been read completely, including its checker.
@@ -14,7 +14,9 @@ The author-supplied packet has been read completely, including its checker.
    are statements about the full quantum D-module with pairing and regular
    z-polynomial completed comparison maps. Iritani's Hodge Proposition 8 supplies
    equivariance of the full blowup maps, not just their invariant subspaces.
-   The fixed-base faithfulness adaptation is written separately in
+   Projective-bundle equivariance now has an explicit uniqueness proof in
+   `2026-09-09-c1133-transport-vanishing-audit.md`, which also verifies surface
+   vanishing. The fixed-base faithfulness adaptation is written separately in
    `2026-09-09-c1133-fixed-base-proof.md`. Its exact graded reduced domains must
    remain part of the eventual theorem.
 2. Voisin's rational generic Torelli formulation has exactly the cubic/quartic
@@ -122,9 +124,8 @@ title discriminator was:
 The five additionally abstract-screened leads were moduli of atoms
 (`2607.22074`), intermediate Jacobians and Burnside invariants (`2511.07101`),
 mirror fibers and rationality (`2510.21222`), product quantum D-modules
-(`2509.07407`), and global Torelli (`2608.27441`). The first and third were
-promoted to partial primary-text reads. The other three are cached and retain
-abstract/metadata-only depth until their relevant statements are read.
+(`2509.07407`), and global Torelli (`2608.27441`). All five now have partial primary-text reads. Their statements and exact
+read scopes are in the source register; none has a full-paper exclusion verdict.
 
 The disagreement 0 versus 23 for the Hodge-atoms seed demonstrates an indexing
 gap. None of the three graph trees is closed while the unresolved service/alias
@@ -147,7 +148,7 @@ coverage and promoted readings remain open.
   bytes. Browser metadata opened the four-page PDF but page rendering failed
   with cache miss. The primary text is therefore not marked read or cached.
 - Unfinished source work includes classification exhaustion and remaining geometry,
-  precise projective-bundle equivariance, framing precedents, relevant promoted
+  framing precedents, relevant promoted
   citation sources, the motive corrigendum and optional applications. The packet's
   Hartlieb, weak-factorization and Bittner references still need their own access
   records before those optional/presentation branches are called audited.
@@ -188,6 +189,38 @@ method-adjacent leads remain in the reading queue. Review bodies were not used
 for theorem claims. The exact-title records resolve the NN DOI and Voisin’s
 published DOI `10.1112/S0010437X21007727`; publication-alias citation checks remain
 open. MathSciNet and Scholar are still not covered.
+
+## Transport and closest-predecessor follow-up
+
+The written operation/surface gate is in
+`2026-09-09-c1133-transport-vanishing-audit.md`. Guéré’s Example 15 already
+establishes the relevant nef-surface nilpotence on the Hodge-fixed base. This
+must be credited; the proposed contribution is not that surface calculation.
+
+The inspected fourfold criterion of Benedetti–Fay–Guéré–Manivel–Perrin,
+Theorem 4.1, requires b3=0, whereas the proposed detected X×P1 endpoints have
+nonzero H3. Thus that theorem does not directly apply to these endpoints.
+Kresch–Tanimoto–Tschinkel’s inspected introduction concerns finite-group
+IJ/Burnside invariants of threefolds. Serebrennikov’s Theorems A–D assume
+K-trivial varieties or Calabi–Yau pairs, rather than the Fano partners here.
+These are comparisons of the inspected statements, not exclusions of all
+results in the papers. Gyenge’s product Theorem 4.6 claims formal QDM
+factorization, but the inspected proof refers to a leading-order proposition;
+this read has not supplied the stronger faithful original-lattice contract
+needed here. It is retained as a comparison source, not used as a shortcut.
+
+Additional literal searches:
+
+```text
+Narasimhan Nori Polarisations 125 128 site:ias.ac.in
+"Polarisations on an abelian variety" "pdf" -site:researchgate.net -site:scribd.com
+```
+
+These are discovery searches over returned metadata/snippets, not exhaustive
+screens. The source index exposes NN Theorem 1.1, but new direct IAS requests
+still return 403 and the repository download request returns 404. Exact URLs
+and results are saved in `2026-09-09-c1133-nn-access.json`; no facsimile reading
+or cached primary PDF is claimed.
 
 ## Novelty ownership and current surface state
 

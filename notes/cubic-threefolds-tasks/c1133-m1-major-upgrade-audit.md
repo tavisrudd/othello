@@ -19,6 +19,11 @@ normalization, and all their period inputs through degree eight match CCGK.
 Special quartic and GM deformation bridges and source corrections are recorded
 in `notes/2026-09-09-c1133-geometric-source-audit.md`.
 
+The full-fiber projective-bundle equivariance, local transport and noncircular
+surface-vanishing proofs are now written in
+`notes/2026-09-09-c1133-transport-vanishing-audit.md`. Guéré’s surface nilpotence
+and Cai’s persistence arguments are explicitly credited as precedents.
+
 Next finish the remaining geometric/source obligations and the complete
 literature audit. Current coverage, precise access gaps, source read-depth
 register and citation sets:
