@@ -1,7 +1,7 @@
 # Ergodis architecture context
 
 **PRIVATE — contributor context only. Do not ship, export or publish.**
-**Lane**: `ergodis`. Reviewed: 2026-09-08.
+**Lane**: `ergodis`. Reviewed: 2026-09-09.
 
 This is the short architecture map, not a second glossary or a transcript. Read
 it after the lane handoff for architecture, shared API/schema, execution, model/
@@ -58,9 +58,10 @@ Updates need preservation/affected-dependency contracts, not merely new input by
 This is the established semantic direction. C1130 now has an experimental generic
 module host, tested with independently compiled LRC/QEC native and WASM providers.
 It runs alongside CampaignSession; runtime integration and a universal execution
-contract are not complete. Its exclusive provider ownership duplicates compiled
-plans across workers. Refine shareable immutable plans and owned executor workspaces
-before ABI adoption; retain specialized direct native APIs. Evidence and limits:
+contract are not complete. The provider separates immutable Arc plans from owned workspaces natively;
+separate browser workers still prepare independent plans. CSS learned reruns may
+retain immutable loaded providers on both arms while recreating workspaces.
+Broader cross-worker plan sharing remains open before ABI adoption; retain specialized direct native APIs. Evidence and limits:
 `2026-09-08-c1130-module-loading-results.md`.
 Private browser Application subclasses now bind QEC/LRC to that module host,
 with query reuse and loaded-source gates; resource scheduling and capacity
@@ -77,7 +78,7 @@ composition remains a separate unclosed extraction gate.
 | Portable scalar language | C1085 extracted parsing/lowering/evaluation and bounded codecs; compilation for WASM is not automatically a JS binding. |
 | CampaignSession | C1087/C1088 shared service and browser Worker; its CampaignSpec remains the finite GF(2) restriction pilot on native too. It is not the universal mathematical model. |
 | Experimental module host | C1130 core ergodis-modules and module Worker load independent private LRC/QEC providers; source-isolated native and actual browser transcripts pass. Coarse batching amortizes boundary cost; plan sharing, labelled composition, campaign integration, updates/checkpoints and production ABI adoption remain open. |
-| Bounded WASM Evolve | Shared ranked Rust/WASM driver; separate discovery Worker synthesizes resource-cover expressions with an independent source checker. Current promotions affect queued capacity queries. Active-solver injection remains unbound; native alignment watcher/epoch/safe-point control is the reference. See `2026-09-08-c1130-theorem-demo.md` and `2026-09-08-c1130-live-solve-promotion.md`. |
+| Bounded WASM Evolve | Shared ranked Rust/WASM proposals and independent family checkers; separate discovery workers. Checked capacity bounds, Hadamard row relations and CSS source symmetries now apply to active execution at declared safe points as well as queued queries. Learned-only reruns recheck retained proofs with discovery off; already-arrived late proposals can be retained as future knowledge without changing completed race evidence. These delivered families do not establish universal CampaignSession integration. See `2026-09-09-c1130-overnight-evolve.md` and private ADR0002. |
 | OpenProblem / RetainedTree | Private `src/open_problem.rs`: context-bearing compiled problem, composition/identity/readout core with optional NormalizedProblem, TensorProblem and ReconstructProblem. Matrix, function, monoid-index and semiring-window adapters exist. This is retained composition, not every solver or a complete host lifecycle. |
 | RepairModel → RepairPlan → BudgetQuery | C1093 private LRC adapter: compile once, admit budget changes, count/threshold/witness readouts. Fixed known repair family; no universal recovery schema. |
 | CompositionShape | C1094 core structural geometry/budget admission; does not validate algebra, source lowering or query preservation. |
@@ -105,6 +106,7 @@ All monorepo report paths below are relative to `notes/`.
 | What did C985 already decide? | `2026-09-01-c985-evolve-proposal-admission-architecture.md` §§Decision/Common protocol/Runtime and performance boundary; `2026-08-30-c985-ergodis-adaptive-search-learning-adr.md` §§Decision summary/Deployment ownership. Typed family admission → compiled consumer; proposal/evaluation/performance separate. |
 | What concrete semantic corpus and admission can we reuse? | `2026-09-07-c1092-query-specialization-corpus.md`, C1093 dynamic-query report, C1094 core-composition report, C1095 observable-admission report. |
 | What is actually missing from current native/WASM integration? | `2026-09-08-c1130-native-host-review.md` and `2026-09-08-c1130-wasm-feature-completeness.md`. The task card indexes Sunday/Monday implementation reports and canonical-build history. |
+| How do learned rules compile and rerun? | Private `docs/adr/0002-checked-rule-compilation-and-warm-start.md`: finite capacity envelopes, composed CSS root orbits, source-bound learned-only reruns, and proof-scope/cost limits. |
 | Which terminology needs clarification? | Shipping core `docs/glossary.md` for compatibility names; private `2026-09-08-ergodis-private-terminology-review.md` for missing distinctions. Keep this review private unless the user separately requests public documentation. |
 
 ## Maintenance rule

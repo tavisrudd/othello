@@ -154,3 +154,25 @@ per capability when a separately authorized shipping-doc pass occurs.
 Refresh this review when composition, campaign history and further families land.
 The current integration boundary and acceptance sequence are in
 `2026-09-08-c1130-campaign-integration-review.md`.
+
+## Evolve execution and compilation pass — September 9
+
+These are private clarifications for C1130, reconciled against delivered demos;
+they do not introduce universal types or expand the shipping glossary.
+
+| Term | Required distinction |
+|---|---|
+| Proposal / checked reduction | A source-derived suggestion versus an independently admitted semantic claim. A score, source hash or successful solve is not admission. |
+| Promotion / adoption | Publishing an admitted reduction versus an executor applying it at a declared safe point. The trace should report both timing and scope; queued-query use differs from active-subtree use. |
+| Compiled rule set | A consumer representation of multiple admitted consequences. Capacity demos compile a finite upper envelope; CSS combines permutation generators into root orbits. This is not yet a general symbolic theorem optimizer. |
+| Root quotient | Support-root anchors modulo checked source automorphisms. One representative per orbit does not mean one candidate or a quotient of every inner search state. |
+| Query reuse | An answer inferred using checked witness/bound closure or explicitly conditional monotone endpoint evidence. It is not a newly discovered theorem or a kernel solve. |
+| Learned-only rerun | Fresh execution with retained source-bound proofs rechecked before solving and discovery off. It does not import prior answers, witnesses or search cursors. |
+| Prepared-plan reuse | Reusing immutable loaded providers/plans while replacing mutable workspaces. Account for it separately from mathematical reductions. |
+| Certificate scope | The exact obligations independently replayed: source witness, source preservation, orbit transversal, lower-bound closure, full construction, or exhaustive negative search. One does not imply all the others. |
+| Progress sample / evidence event | A sampled view of execution counters versus an admission, proof or terminal event. Coalescing routine samples must retain evidence events and must never invent intermediate work. |
+| Optional discovery budget | Limits proposal exploration or retained representation. Exhaustion can weaken optimization but must not reject an otherwise admitted solve or certify the proposal grammar complete. |
+
+Current reference: private ADR0002 and `2026-09-09-c1130-overnight-evolve.md`.
+The finite capacity compiler does not yet combine proofs into new symbolic
+inequalities; the CSS quotient does compose multiple checked generators.

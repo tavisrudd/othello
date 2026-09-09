@@ -44,30 +44,31 @@ the C985 optimization-facing paper.
 
 ### C1130 — full WASM feature completeness (in progress)
 
-**Current user priority (September 9):** Evolve must discover general reductions from
-source structure/own observations, not receive fixture answers, supplied batch
-partitions or preferred coefficients. Shared cold proposal/checker capabilities now
-cover equivalent additive choice blocks, dominated alternatives, bounded integer
-relations, resource bottleneck grouping and exact capacity plateaus. Commits
-`3cbb5df`, `5685801`, `0f9e90d`; private report
-`ergodis-private/analysis/module-loading/source-discovery.md` records generated,
-adversarial and actual WASM checks and exact remaining paths/gates. Informative
-source-geometry query selection lets the 216-job race infer 428/625 answers,
-exclude 151 and directly solve 46, agreeing with its control. This is query reuse,
-not multiplicity execution. The native DP already merges equal resource states.
-Next: general checked multiplicity/representative lowering and native binding,
-measured against existing DP, then general GF(2) helper equivalence. Do not encode
-the inference batches' three classes or the Ceph diamond's pairing as hints.
+**Current user priority (September 9):** general source-driven Evolve discovery,
+independently checked live admission, learned-only reruns, real loaded benchmark
+applications and inspectable proof/compilation evidence. No fixture answers or
+control-arm results may guide discovery. Overnight continuation is recorded in
+`notes/2026-09-09-c1130-overnight-evolve.md` and private
+`analysis/module-loading/overnight-demo-review.md`; ADR
+`ergodis-private/docs/adr/0002-checked-rule-compilation-and-warm-start.md` owns the
+composition/warm-start tradeoffs.
 
-Full Hadamard orders 84/92 are in the preview. Order 84 now discovers its integer
-row relation through the shared library and independently verifies the entire
-matrix. Order 92 control takes about 163 s here, exceeding the requested 1–2 min;
-its latest shared-discovery timing remains open. Private
-`analysis/module-loading/hadamard-preview.md` records status. New browser integration,
-Hadamard provider/kernel and earlier ResourceExecution changes remain uncommitted
-pending their native performance gates; exact paths are listed in the reports.
-Preview ports 8769/8770 use current routes and canonical core WASM; Hadamard loads
-lazily, so its module failure cannot prevent the other Evolve examples loading.
+Accepted native gates now cover optional ResourceExecution and Hadamard filtering
+(private `db73684`, `8094302`); existing optimized core paths remain intact.
+Core `e0f77ef` exposes cooperative CSS root partitions over the existing kernel.
+Private `953ac91` adds reusable incidence-symmetry discovery via the same native
+and WASM provider; `52f9a48` supplies loaded CSS/full Hadamard races, quotient
+inspection, timed proof replay and primary QDistSAT comparison context. Private
+`55668ac` adds learned-only Hadamard/repair reruns, complementing capacity/CSS.
+No discovered distance, prior witness or solve cursor is reused in those reruns.
+
+Preview ports 8769/8770 remain bound to 0.0.0.0 and use the canonical core WASM;
+private providers load lazily. Private `6408bf4` bounds progress retention and batches cold CSS ABI calls;
+`9754808` retains late source-checked knowledge for learned-only reruns.
+Next gates: campaign knowledge lifetimes beyond current queries, broader
+incidence/row-space proposal grammars, general multiplicity execution and
+portable learned-artifact persistence. Full WASM
+feature completeness and main CampaignSession integration remain open.
 
 
 User requirement: WASM is a full Ergodis execution target, not a restricted subset.
