@@ -1,0 +1,1155 @@
+{
+  "status": "all assertions passed",
+  "scope": "Exact finite algebra only; geometric comparison, surface vanishing, and deformation arguments are written proofs.",
+  "families": {
+    "g2": {
+      "shifted_counting_matrix": [
+        [
+          "120",
+          "137520",
+          "119681280",
+          "21690374400"
+        ],
+        [
+          "1",
+          "744",
+          "650016",
+          "119681280"
+        ],
+        [
+          "0",
+          "1",
+          "744",
+          "137520"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "120"
+        ]
+      ],
+      "characteristic": "t**3*(t - 1728)",
+      "primary_even_dimensions": [
+        "3",
+        1
+      ],
+      "h21": 52,
+      "rank_two_certificates": [],
+      "lattice_count": 0,
+      "O3": 52,
+      "detected_after_one_stabilization": true
+    },
+    "g3": {
+      "shifted_counting_matrix": [
+        [
+          "24",
+          "3888",
+          "504576",
+          "18323712"
+        ],
+        [
+          "1",
+          "104",
+          "13600",
+          "504576"
+        ],
+        [
+          "0",
+          "1",
+          "104",
+          "3888"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "24"
+        ]
+      ],
+      "characteristic": "t**3*(t - 256)",
+      "primary_even_dimensions": [
+        "3",
+        1
+      ],
+      "h21": 30,
+      "rank_two_certificates": [],
+      "lattice_count": 0,
+      "O3": 30,
+      "detected_after_one_stabilization": true
+    },
+    "g4": {
+      "shifted_counting_matrix": [
+        [
+          "12",
+          "792",
+          "43632",
+          "793152"
+        ],
+        [
+          "1",
+          "42",
+          "2340",
+          "43632"
+        ],
+        [
+          "0",
+          "1",
+          "42",
+          "792"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "12"
+        ]
+      ],
+      "characteristic": "t**3*(t - 108)",
+      "primary_even_dimensions": [
+        "3",
+        1
+      ],
+      "h21": 20,
+      "rank_two_certificates": [],
+      "lattice_count": 0,
+      "O3": 20,
+      "detected_after_one_stabilization": true
+    },
+    "g5": {
+      "shifted_counting_matrix": [
+        [
+          "8",
+          "304",
+          "9984",
+          "121088"
+        ],
+        [
+          "1",
+          "24",
+          "800",
+          "9984"
+        ],
+        [
+          "0",
+          "1",
+          "24",
+          "304"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "8"
+        ]
+      ],
+      "characteristic": "t**3*(t - 64)",
+      "primary_even_dimensions": [
+        "3",
+        1
+      ],
+      "h21": 14,
+      "rank_two_certificates": [],
+      "lattice_count": 0,
+      "O3": 14,
+      "detected_after_one_stabilization": true
+    },
+    "g6": {
+      "shifted_counting_matrix": [
+        [
+          "6",
+          "156",
+          "3600",
+          "33120"
+        ],
+        [
+          "1",
+          "16",
+          "380",
+          "3600"
+        ],
+        [
+          "0",
+          "1",
+          "16",
+          "156"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "6"
+        ]
+      ],
+      "characteristic": "t**2*(t**2 - 44*t - 16)",
+      "primary_even_dimensions": [
+        "2",
+        1,
+        1
+      ],
+      "h21": 10,
+      "rank_two_certificates": [
+        {
+          "characteristic": "t**2*(t**2 - 44*t - 16)",
+          "kappa": "-9/2",
+          "off_diagonal_trace": "45/16",
+          "correction_trace": "0",
+          "delta": "1"
+        }
+      ],
+      "lattice_count": 1,
+      "O3": 0,
+      "detected_after_one_stabilization": true
+    },
+    "g7": {
+      "shifted_counting_matrix": [
+        [
+          "5",
+          "96",
+          "1692",
+          "12816"
+        ],
+        [
+          "1",
+          "12",
+          "216",
+          "1692"
+        ],
+        [
+          "0",
+          "1",
+          "12",
+          "96"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "5"
+        ]
+      ],
+      "characteristic": "t**2*(t**2 - 34*t + 1)",
+      "primary_even_dimensions": [
+        "2",
+        1,
+        1
+      ],
+      "h21": 7,
+      "rank_two_certificates": [
+        {
+          "characteristic": "t**2*(t**2 - 34*t + 1)",
+          "kappa": "23",
+          "off_diagonal_trace": "144",
+          "correction_trace": "0",
+          "delta": "0"
+        }
+      ],
+      "lattice_count": 0,
+      "O3": 0,
+      "detected_after_one_stabilization": false
+    },
+    "g8": {
+      "shifted_counting_matrix": [
+        [
+          "4",
+          "64",
+          "924",
+          "5936"
+        ],
+        [
+          "1",
+          "9",
+          "140",
+          "924"
+        ],
+        [
+          "0",
+          "1",
+          "9",
+          "64"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "4"
+        ]
+      ],
+      "characteristic": "t**2*(t - 27)*(t + 1)",
+      "primary_even_dimensions": [
+        "2",
+        1,
+        1
+      ],
+      "h21": 5,
+      "rank_two_certificates": [
+        {
+          "characteristic": "t**2*(t - 27)*(t + 1)",
+          "kappa": "-73/27",
+          "off_diagonal_trace": "448/729",
+          "correction_trace": "0",
+          "delta": "4/9"
+        }
+      ],
+      "lattice_count": 1,
+      "O3": 0,
+      "detected_after_one_stabilization": true
+    },
+    "g9": {
+      "shifted_counting_matrix": [
+        [
+          "4",
+          "48",
+          "576",
+          "3328"
+        ],
+        [
+          "1",
+          "8",
+          "96",
+          "576"
+        ],
+        [
+          "0",
+          "1",
+          "8",
+          "48"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "4"
+        ]
+      ],
+      "characteristic": "t**2*(t**2 - 24*t + 16)",
+      "primary_even_dimensions": [
+        "2",
+        1,
+        1
+      ],
+      "h21": 3,
+      "rank_two_certificates": [
+        {
+          "characteristic": "t**2*(t**2 - 24*t + 16)",
+          "kappa": "-1",
+          "off_diagonal_trace": "0",
+          "correction_trace": "0",
+          "delta": "0"
+        }
+      ],
+      "lattice_count": 0,
+      "O3": 0,
+      "detected_after_one_stabilization": false
+    },
+    "g10": {
+      "shifted_counting_matrix": [
+        [
+          "3",
+          "36",
+          "378",
+          "1944"
+        ],
+        [
+          "1",
+          "6",
+          "72",
+          "378"
+        ],
+        [
+          "0",
+          "1",
+          "6",
+          "36"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "3"
+        ]
+      ],
+      "characteristic": "t**2*(t**2 - 18*t - 27)",
+      "primary_even_dimensions": [
+        "2",
+        1,
+        1
+      ],
+      "h21": 2,
+      "rank_two_certificates": [
+        {
+          "characteristic": "t**2*(t**2 - 18*t - 27)",
+          "kappa": "-7/3",
+          "off_diagonal_trace": "4/9",
+          "correction_trace": "0",
+          "delta": "0"
+        }
+      ],
+      "lattice_count": 0,
+      "O3": 0,
+      "detected_after_one_stabilization": false
+    },
+    "g12": {
+      "shifted_counting_matrix": [
+        [
+          "12/5",
+          "24",
+          "198",
+          "880"
+        ],
+        [
+          "1",
+          "22/5",
+          "44",
+          "198"
+        ],
+        [
+          "0",
+          "1",
+          "22/5",
+          "24"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "12/5"
+        ]
+      ],
+      "characteristic": "(5*t + 8)*(125*t**3 - 1900*t**2 - 40*t - 188)/625",
+      "primary_even_dimensions": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "h21": 0,
+      "rank_two_certificates": [],
+      "lattice_count": 0,
+      "O3": 0,
+      "detected_after_one_stabilization": false
+    },
+    "d1": {
+      "shifted_counting_matrix": [
+        [
+          "0",
+          "240",
+          "0",
+          "57600"
+        ],
+        [
+          "1",
+          "0",
+          "1248",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "240"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ],
+      "characteristic": "t**2*(t**2 - 1728)",
+      "primary_even_dimensions": [
+        "2",
+        1,
+        1
+      ],
+      "h21": 21,
+      "rank_two_certificates": [
+        {
+          "characteristic": "t**2*(t**2 - 1728)",
+          "kappa": "-22/9",
+          "off_diagonal_trace": "25/324",
+          "correction_trace": "0",
+          "delta": "16/9"
+        }
+      ],
+      "lattice_count": 1,
+      "O3": 0,
+      "detected_after_one_stabilization": true
+    },
+    "d2": {
+      "shifted_counting_matrix": [
+        [
+          "0",
+          "48",
+          "0",
+          "2304"
+        ],
+        [
+          "1",
+          "0",
+          "160",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "48"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ],
+      "characteristic": "t**2*(t - 16)*(t + 16)",
+      "primary_even_dimensions": [
+        "2",
+        1,
+        1
+      ],
+      "h21": 10,
+      "rank_two_certificates": [
+        {
+          "characteristic": "t**2*(t - 16)*(t + 16)",
+          "kappa": "-9/4",
+          "off_diagonal_trace": "9/64",
+          "correction_trace": "0",
+          "delta": "1"
+        }
+      ],
+      "lattice_count": 1,
+      "O3": 0,
+      "detected_after_one_stabilization": true
+    },
+    "d3": {
+      "shifted_counting_matrix": [
+        [
+          "0",
+          "24",
+          "0",
+          "576"
+        ],
+        [
+          "1",
+          "0",
+          "60",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "24"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ],
+      "characteristic": "t**2*(t**2 - 108)",
+      "primary_even_dimensions": [
+        "2",
+        1,
+        1
+      ],
+      "h21": 5,
+      "rank_two_certificates": [
+        {
+          "characteristic": "t**2*(t**2 - 108)",
+          "kappa": "-19/9",
+          "off_diagonal_trace": "16/81",
+          "correction_trace": "0",
+          "delta": "4/9"
+        }
+      ],
+      "lattice_count": 1,
+      "O3": 0,
+      "detected_after_one_stabilization": true
+    },
+    "d4": {
+      "shifted_counting_matrix": [
+        [
+          "0",
+          "16",
+          "0",
+          "256"
+        ],
+        [
+          "1",
+          "0",
+          "32",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "16"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ],
+      "characteristic": "t**2*(t - 8)*(t + 8)",
+      "primary_even_dimensions": [
+        "2",
+        1,
+        1
+      ],
+      "h21": 2,
+      "rank_two_certificates": [
+        {
+          "characteristic": "t**2*(t - 8)*(t + 8)",
+          "kappa": "-2",
+          "off_diagonal_trace": "1/4",
+          "correction_trace": "0",
+          "delta": "0"
+        }
+      ],
+      "lattice_count": 0,
+      "O3": 0,
+      "detected_after_one_stabilization": false
+    },
+    "d5": {
+      "shifted_counting_matrix": [
+        [
+          "0",
+          "12",
+          "0",
+          "160"
+        ],
+        [
+          "1",
+          "0",
+          "20",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "12"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ],
+      "characteristic": "t**4 - 44*t**2 - 16",
+      "primary_even_dimensions": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "h21": 0,
+      "rank_two_certificates": [],
+      "lattice_count": 0,
+      "O3": 0,
+      "detected_after_one_stabilization": false
+    },
+    "quadric": {
+      "shifted_counting_matrix": [
+        [
+          "0",
+          "0",
+          "54",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "54"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ],
+      "characteristic": "t*(t**3 - 108)",
+      "primary_even_dimensions": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "h21": 0,
+      "rank_two_certificates": [],
+      "lattice_count": 0,
+      "O3": 0,
+      "detected_after_one_stabilization": false
+    },
+    "projective_space": {
+      "shifted_counting_matrix": [
+        [
+          "0",
+          "0",
+          "0",
+          "256"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ],
+      "characteristic": "(t - 4)*(t + 4)*(t**2 + 16)",
+      "primary_even_dimensions": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "h21": 0,
+      "rank_two_certificates": [],
+      "lattice_count": 0,
+      "O3": 0,
+      "detected_after_one_stabilization": false
+    }
+  },
+  "rank_three": {
+    "g2": {
+      "separated_jets": [
+        [
+          [
+            "0",
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        [
+          [
+            "-14857/10368",
+            "5209/17915904",
+            "67/214990848"
+          ],
+          [
+            "-25/6",
+            "25/10368",
+            "67/124416"
+          ],
+          [
+            "0",
+            "25/6",
+            "103/72"
+          ]
+        ],
+        [
+          [
+            "-695/11943936",
+            "-41/143327232",
+            "-1/2293235712"
+          ],
+          [
+            "-28495/746496",
+            "-1681/8957952",
+            "-41/143327232"
+          ],
+          [
+            "-483025/62208",
+            "-28495/746496",
+            "-695/11943936"
+          ]
+        ],
+        [
+          [
+            "3267455/213986410758144",
+            "-431263/2567836929097728",
+            "-33287/41085390865563648"
+          ],
+          [
+            "133965655/13374150672384",
+            "-17681783/160489808068608",
+            "-1364767/2567836929097728"
+          ],
+          [
+            "2270881225/1114512556032",
+            "-299727785/13374150672384",
+            "-23134465/213986410758144"
+          ]
+        ]
+      ],
+      "pole_obstruction": "0",
+      "residue": [
+        [
+          "-14857/10368",
+          "1",
+          "0"
+        ],
+        [
+          "-745/20736",
+          "-10343/10368",
+          "1"
+        ],
+        [
+          "2264851225/1114512556032",
+          "-4233505/107495424",
+          "-41/72"
+        ]
+      ],
+      "centered_characteristic": "t*(3*t - 1)*(3*t + 1)/9",
+      "eigenvalues": [
+        "-1",
+        "-2/3",
+        "-4/3"
+      ],
+      "nonconstant_gauge_test": true
+    },
+    "g3": {
+      "separated_jets": [
+        [
+          [
+            "0",
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        [
+          [
+            "-2889/2048",
+            "1033/524288",
+            "29/2097152"
+          ],
+          [
+            "-9/8",
+            "9/2048",
+            "29/8192"
+          ],
+          [
+            "0",
+            "9/8",
+            "45/32"
+          ]
+        ],
+        [
+          [
+            "-549/1048576",
+            "-57/4194304",
+            "-9/67108864"
+          ],
+          [
+            "-3477/65536",
+            "-361/262144",
+            "-57/4194304"
+          ],
+          [
+            "-33489/16384",
+            "-3477/65536",
+            "-549/1048576"
+          ]
+        ],
+        [
+          [
+            "494541/549755813888",
+            "-119679/2199023255552",
+            "-59439/35184372088832"
+          ],
+          [
+            "3132093/34359738368",
+            "-757967/137438953472",
+            "-376447/2199023255552"
+          ],
+          [
+            "30167001/8589934592",
+            "-7300419/34359738368",
+            "-3625779/549755813888"
+          ]
+        ]
+      ],
+      "pole_obstruction": "0",
+      "residue": [
+        [
+          "-2889/2048",
+          "1",
+          "0"
+        ],
+        [
+          "-201/4096",
+          "-2039/2048",
+          "1"
+        ],
+        [
+          "30016665/8589934592",
+          "-231825/4194304",
+          "-19/32"
+        ]
+      ],
+      "centered_characteristic": "t*(4*t - 1)*(4*t + 1)/16",
+      "eigenvalues": [
+        "-1",
+        "-3/4",
+        "-5/4"
+      ],
+      "nonconstant_gauge_test": true
+    },
+    "g4": {
+      "separated_jets": [
+        [
+          [
+            "0",
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        [
+          [
+            "-113/81",
+            "41/8748",
+            "1/13122"
+          ],
+          [
+            "-2/3",
+            "1/162",
+            "2/243"
+          ],
+          [
+            "0",
+            "2/3",
+            "25/18"
+          ]
+        ],
+        [
+          [
+            "-17/11664",
+            "-11/139968",
+            "-1/559872"
+          ],
+          [
+            "-187/2916",
+            "-121/34992",
+            "-11/139968"
+          ],
+          [
+            "-289/243",
+            "-187/2916",
+            "-17/11664"
+          ]
+        ],
+        [
+          [
+            "1187/204073344",
+            "-1843/2448880128",
+            "-131/2448880128"
+          ],
+          [
+            "13057/51018336",
+            "-20273/612220032",
+            "-1441/612220032"
+          ],
+          [
+            "20179/4251528",
+            "-31331/51018336",
+            "-2227/51018336"
+          ]
+        ]
+      ],
+      "pole_obstruction": "0",
+      "residue": [
+        [
+          "-113/81",
+          "1",
+          "0"
+        ],
+        [
+          "-19/324",
+          "-161/162",
+          "1"
+        ],
+        [
+          "20035/4251528",
+          "-1765/26244",
+          "-11/18"
+        ]
+      ],
+      "centered_characteristic": "t*(6*t - 1)*(6*t + 1)/36",
+      "eigenvalues": [
+        "-1",
+        "-5/6",
+        "-7/6"
+      ],
+      "nonconstant_gauge_test": true
+    },
+    "g5": {
+      "separated_jets": [
+        [
+          [
+            "0",
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        [
+          [
+            "-177/128",
+            "65/8192",
+            "7/32768"
+          ],
+          [
+            "-1/2",
+            "1/128",
+            "7/512"
+          ],
+          [
+            "0",
+            "1/2",
+            "11/8"
+          ]
+        ],
+        [
+          [
+            "-45/16384",
+            "-15/65536",
+            "-9/1048576"
+          ],
+          [
+            "-75/1024",
+            "-25/4096",
+            "-15/65536"
+          ],
+          [
+            "-225/256",
+            "-75/1024",
+            "-45/16384"
+          ]
+        ],
+        [
+          [
+            "2445/134217728",
+            "-2001/536870912",
+            "-3735/8589934592"
+          ],
+          [
+            "4075/8388608",
+            "-3335/33554432",
+            "-6225/536870912"
+          ],
+          [
+            "12225/2097152",
+            "-10005/8388608",
+            "-18675/134217728"
+          ]
+        ]
+      ],
+      "pole_obstruction": "0",
+      "residue": [
+        [
+          "-177/128",
+          "1",
+          "0"
+        ],
+        [
+          "-17/256",
+          "-127/128",
+          "1"
+        ],
+        [
+          "12113/2097152",
+          "-1265/16384",
+          "-5/8"
+        ]
+      ],
+      "centered_characteristic": "t**3",
+      "eigenvalues": [
+        "-1"
+      ],
+      "nonconstant_gauge_test": true
+    }
+  },
+  "rank_three_formal_flatness": {
+    "pole_evolution_multiplier": "-b0 + b2*(b - e) + b8 + (b2*(a - c - 1) + b5)*(a - f - 1)",
+    "normalized_gauge_constraint": "G1[3,1] = 0",
+    "base_pole_vanishes_when_connection_pole_vanishes": true
+  },
+  "nine_detected_families": [
+    "g2",
+    "g3",
+    "g4",
+    "g5",
+    "g6",
+    "g8",
+    "d1",
+    "d2",
+    "d3"
+  ],
+  "eight_rational_families": [
+    "d4",
+    "d5",
+    "g10",
+    "g12",
+    "g7",
+    "g9",
+    "projective_space",
+    "quadric"
+  ]
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "bytes": 12223,
+    "path": "notes/2026-09-09-c1133-finite-checks.py",
+    "sha256": "b9a5df0bad96e351a8db278350f5fc1edc5345960f70c1bff1d63a339aecbda9"
+  },
+  {
+    "bytes": 21027,
+    "path": "notes/2026-09-09-c1133-finite-checks.json",
+    "sha256": "1c8981941cfb035a3a09f07edfcee64c4cd6c3518e37e66be410910d6b30a477"
+  },
+  {
+    "bytes": 5387,
+    "path": "notes/2026-09-09-c1133-independent-checks.py",
+    "sha256": "fa8198b4870f6e40366b76e86e52aca34b19ae03e17883ea078bc636d607fd9e"
+  },
+  {
+    "bytes": 4432,
+    "path": "notes/2026-09-09-c1133-independent-checks.json",
+    "sha256": "bc00e21333a66788cd6974b7aa8c5a786b121f58d6d59217cfa3b016659c77f2"
+  }
+]
