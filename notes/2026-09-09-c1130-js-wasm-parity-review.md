@@ -231,3 +231,13 @@ Next implementation is P0's shared frozen operation/result identity and bounded
 request lifecycle, with paired native and JS adapters validated against the same
 repeated-query and edit-during-run transcripts,
 then P1's portable LRC save/reopen/replay workflow. Full capability parity stays open.
+
+## P0 implementation status — bounded transport slice
+
+Private `bb8ceaa` adds bounded pending operations, failed-send cleanup, configurable
+request deadlines with fail-closed worker termination, deserialization failure
+handling and safe-integer ID exhaustion. Five focused lifecycle tests pass. Native
+Provider::call uses a synchronous exclusive borrow and has no matching pending
+queue. See private `analysis/interface-review/module-client-lifecycle.md` for
+limits. Immutable result identity and paired family transcripts remain open; this
+slice does not close P0 or claim native cancellation parity.

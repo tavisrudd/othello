@@ -54,6 +54,11 @@ with discovery off, and certificate verification. Race timing starts in ready
 workers; problem setup reports compilation separately. CSS ordinary repeats reuse
 plans but reset search/discovery state; learned-only reuse is explicit.
 
+P0 transport slice: private `bb8ceaa` bounds ModuleSession pending requests,
+cleans failed sends, and terminates on deadline/deserialization failure; five
+lifecycle tests pass. Native Provider::call is synchronous/exclusive, so no parallel
+pending-queue fix applies. Details: private `analysis/interface-review/module-client-lifecycle.md`.
+
 Next: P0 shared immutable operation/result identity, bounded requests and native/JS
 conformance; P1 paired LRC recorded workflow, then other families. P2 retained
 labelled composition/fields is the contrasting-family abstraction gate. P3 closes
