@@ -311,3 +311,12 @@ allocation, a center-out live capacity grid, weighted ranking and stop/partial
 results. Real browser incremental updates and independent scheduling checks pass.
 Native/WASM provider binaries unchanged. Report:
 `notes/2026-09-08-c1130-larger-workloads-live-surfaces.md`.
+
+## 2026-09-08 — Evolve progress visualization slice
+
+Private `a9e4793` adds native discovery observation and bounded imported solve
+traces with separate remaining/coverage/processing metrics, cumulative reduction
+cascade and optional baseline payoff. Node/browser tests pass. No real admitted
+solver-state trace exists for the current corpus campaign; full live demonstration
+and WASM Evolve binding remain open. Report:
+`notes/2026-09-08-c1130-evolve-progress-view.md`.
