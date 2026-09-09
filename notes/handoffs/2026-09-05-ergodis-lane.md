@@ -89,7 +89,9 @@ plus a live 81-point WASM capacity surface with weighted CPU/GPU objectives and
 partial stop. Browser/independent scheduling gates pass; native payloads unchanged.
 Report: `notes/2026-09-08-c1130-larger-workloads-live-surfaces.md`.
 Evolve now runs a real bounded WASM capacity-reduction comparison at ports
-8769/8770 `/evolve`, bound to `0.0.0.0` on user request. Core `b5e2210` exposes
+8769/8770 `/evolve`, bound to `0.0.0.0` on user request. The private demo
+HTTP adapter now supplies missing SHA-256/randomUUID APIs for LAN Safari;
+forced-missing-API browser workflow and Worker hash checks pass. Core `b5e2210` exposes
 the shared ranked proposal driver; private `2046e91` adds independently checked
 resource bounds and measured baseline/comparison traces. The 72-job grid removes
 78/289 configurations (42 seed, 36 evolved), leaving 211 forward solves. These

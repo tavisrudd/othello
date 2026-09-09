@@ -49,3 +49,21 @@ native tests/clippy, and canonical wasm-pack release build pass.
 
 Next C1130: campaign integration, reuse of checked discoveries and additional
 reduction families. Full WASM parity and production module ABI gates remain open.
+
+## iPhone / LAN HTTP compatibility
+
+User opened firewall port 8769; Safari then exposed a missing `crypto.subtle`
+on plain LAN HTTP. Private demo server now installs an HTTP-only missing-API
+adapter before JS module evaluation in windows and Workers. Vendored unmodified
+MIT @noble/hashes 2.0.1 supplies SHA-256; random UUIDs use browser
+getRandomValues. Existing HTTPS/localhost Web Crypto remains untouched.
+Payload digest comparison is retained. No core, WASM binary, or native kernel
+changes. This adapter does not confer transport authentication on HTTP.
+
+Native hash cross-checks cover empty/block-boundary/1MiB data and sliced views;
+unsupported algorithms are rejected. Full browser application suite passes with
+subtle/randomUUID explicitly absent from the page, plus a missing-API Worker
+known-answer hash test. Log: `/tmp/claude-run-quiet/20260908-211206-nix-shell-nixpkgsnodejs-nixpkgschromium-command-node-run-smoke.mjs-url-127.0.0.18/stdout.log`.
+Direct LAN browser validation was blocked before page load with
+ERR_BLOCKED_BY_CLIENT in the automation environment; actual Safari retry remains
+user validation. Both live servers were restarted with the compatibility adapter.
