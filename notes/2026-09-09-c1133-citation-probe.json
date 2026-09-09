@@ -1,0 +1,468 @@
+{
+  "records": [
+    {
+      "citation_count": 0,
+      "http_status": 200,
+      "ids": {
+        "doi": "https://doi.org/10.48550/arxiv.2307.13555",
+        "openalex": "https://openalex.org/W4385292744"
+      },
+      "queried_utc": "2026-09-09T19:31:54.404381+00:00",
+      "query": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2307.13555",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2307.13555-openalex.json",
+      "raw_sha256": "0f706cb0b34c2b7675e86f5a1e344b5a29de9d5a99d04244f305e372e2a4e64d",
+      "resolved_id": "https://openalex.org/W4385292744",
+      "seed": "arXiv:2307.13555",
+      "service": "OpenAlex",
+      "status": "resolved-count",
+      "title": "Quantum cohomology of blowups"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 404: Not Found",
+      "http_status": 404,
+      "queried_utc": "2026-09-09T19:31:54.405078+00:00",
+      "query": "https://api.crossref.org/works/10.48550%2FarXiv.2307.13555",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2307.13555-crossref.error",
+      "raw_sha256": "ae8462e3af85ca7577aaa97ff22a194f9dfd7fada58cf4944b53d2fdfa7b1f92",
+      "seed": "arXiv:2307.13555",
+      "service": "Crossref",
+      "status": "http-error"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 429: ",
+      "http_status": 429,
+      "queried_utc": "2026-09-09T19:31:54.405429+00:00",
+      "query": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2307.13555?fields=paperId,title,externalIds,citationCount",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2307.13555-semantic-scholar.error",
+      "raw_sha256": "65ab993d12c5c2cc9b68e6da2bb79b326930283e520363ffcdc145f88cd5a148",
+      "seed": "arXiv:2307.13555",
+      "service": "Semantic Scholar",
+      "status": "http-error"
+    },
+    {
+      "citation_count": 0,
+      "http_status": 200,
+      "ids": {
+        "doi": "https://doi.org/10.48550/arxiv.2307.03696",
+        "openalex": "https://openalex.org/W4383860835"
+      },
+      "queried_utc": "2026-09-09T19:31:54.405706+00:00",
+      "query": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2307.03696",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2307.03696-openalex.json",
+      "raw_sha256": "0390c19b23e2afcb9eb85b4b35ebb9bd18ea0135f06561df064005aece4e244a",
+      "resolved_id": "https://openalex.org/W4383860835",
+      "seed": "arXiv:2307.03696",
+      "service": "OpenAlex",
+      "status": "resolved-count",
+      "title": "Quantum cohomology of projective bundles"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 404: Not Found",
+      "http_status": 404,
+      "queried_utc": "2026-09-09T19:31:54.525740+00:00",
+      "query": "https://api.crossref.org/works/10.48550%2FarXiv.2307.03696",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2307.03696-crossref.error",
+      "raw_sha256": "ae8462e3af85ca7577aaa97ff22a194f9dfd7fada58cf4944b53d2fdfa7b1f92",
+      "seed": "arXiv:2307.03696",
+      "service": "Crossref",
+      "status": "http-error"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 429: ",
+      "http_status": 429,
+      "queried_utc": "2026-09-09T19:31:54.693501+00:00",
+      "query": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2307.03696?fields=paperId,title,externalIds,citationCount",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2307.03696-semantic-scholar.error",
+      "raw_sha256": "65ab993d12c5c2cc9b68e6da2bb79b326930283e520363ffcdc145f88cd5a148",
+      "seed": "arXiv:2307.03696",
+      "service": "Semantic Scholar",
+      "status": "http-error"
+    },
+    {
+      "citation_count": 0,
+      "http_status": 200,
+      "ids": {
+        "doi": "https://doi.org/10.48550/arxiv.2604.10028",
+        "openalex": "https://openalex.org/W7154372603"
+      },
+      "queried_utc": "2026-09-09T19:31:54.751981+00:00",
+      "query": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2604.10028",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2604.10028-openalex.json",
+      "raw_sha256": "07695d72527050d4c01a0eee139f6f2c5e05d33cc751a3c3b36d827a04c8b417",
+      "resolved_id": "https://openalex.org/W7154372603",
+      "seed": "arXiv:2604.10028",
+      "service": "OpenAlex",
+      "status": "resolved-count",
+      "title": "Notes on the decomposition theorem for blowups"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 404: Not Found",
+      "http_status": 404,
+      "queried_utc": "2026-09-09T19:31:54.782714+00:00",
+      "query": "https://api.crossref.org/works/10.48550%2FarXiv.2604.10028",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2604.10028-crossref.error",
+      "raw_sha256": "ae8462e3af85ca7577aaa97ff22a194f9dfd7fada58cf4944b53d2fdfa7b1f92",
+      "seed": "arXiv:2604.10028",
+      "service": "Crossref",
+      "status": "http-error"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 429: ",
+      "http_status": 429,
+      "queried_utc": "2026-09-09T19:31:55.016084+00:00",
+      "query": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2604.10028?fields=paperId,title,externalIds,citationCount",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2604.10028-semantic-scholar.error",
+      "raw_sha256": "65ab993d12c5c2cc9b68e6da2bb79b326930283e520363ffcdc145f88cd5a148",
+      "seed": "arXiv:2604.10028",
+      "service": "Semantic Scholar",
+      "status": "http-error"
+    },
+    {
+      "citation_count": 0,
+      "http_status": 200,
+      "ids": {
+        "doi": "https://doi.org/10.48550/arxiv.2508.05105",
+        "openalex": "https://openalex.org/W6967543441"
+      },
+      "queried_utc": "2026-09-09T19:31:55.032446+00:00",
+      "query": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2508.05105",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2508.05105-openalex.json",
+      "raw_sha256": "1aa1a599ba9b557ccb885529cbf2b363a974d34a198b42144863252ef2d87d5b",
+      "resolved_id": "https://openalex.org/W6967543441",
+      "seed": "arXiv:2508.05105",
+      "service": "OpenAlex",
+      "status": "resolved-count",
+      "title": "Birational Invariants from Hodge Structures and Quantum Multiplication"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 404: Not Found",
+      "http_status": 404,
+      "queried_utc": "2026-09-09T19:31:55.042506+00:00",
+      "query": "https://api.crossref.org/works/10.48550%2FarXiv.2508.05105",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2508.05105-crossref.error",
+      "raw_sha256": "ae8462e3af85ca7577aaa97ff22a194f9dfd7fada58cf4944b53d2fdfa7b1f92",
+      "seed": "arXiv:2508.05105",
+      "service": "Crossref",
+      "status": "http-error"
+    },
+    {
+      "citation_count": 23,
+      "http_status": 200,
+      "ids": {
+        "ArXiv": "2508.05105",
+        "CorpusId": 280546019
+      },
+      "queried_utc": "2026-09-09T19:31:55.096069+00:00",
+      "query": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2508.05105?fields=paperId,title,externalIds,citationCount",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2508.05105-semantic-scholar.json",
+      "raw_sha256": "8a237d6b23c19be9d7eee1f9ff1476b724e80e8a45a095b703944d592e118cb2",
+      "resolved_id": "5d0db92070100e6ff1dfd91da6f014daa737b3ce",
+      "seed": "arXiv:2508.05105",
+      "service": "Semantic Scholar",
+      "status": "resolved-count",
+      "title": "Birational Invariants from Hodge Structures and Quantum Multiplication"
+    },
+    {
+      "citation_count": 0,
+      "http_status": 200,
+      "ids": {
+        "doi": "https://doi.org/10.48550/arxiv.2605.29143",
+        "openalex": "https://openalex.org/W7162789306"
+      },
+      "queried_utc": "2026-09-09T19:31:55.117034+00:00",
+      "query": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2605.29143",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2605.29143-openalex.json",
+      "raw_sha256": "6e31a9b79b278efc127ff2df25909cff65999c4e709ba0b319b0ccba6aad5c31",
+      "resolved_id": "https://openalex.org/W7162789306",
+      "seed": "arXiv:2605.29143",
+      "service": "OpenAlex",
+      "status": "resolved-count",
+      "title": "The quartic threefold is symplectically irrational"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 404: Not Found",
+      "http_status": 404,
+      "queried_utc": "2026-09-09T19:31:55.178692+00:00",
+      "query": "https://api.crossref.org/works/10.48550%2FarXiv.2605.29143",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2605.29143-crossref.error",
+      "raw_sha256": "ae8462e3af85ca7577aaa97ff22a194f9dfd7fada58cf4944b53d2fdfa7b1f92",
+      "seed": "arXiv:2605.29143",
+      "service": "Crossref",
+      "status": "http-error"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 429: ",
+      "http_status": 429,
+      "queried_utc": "2026-09-09T19:31:55.192104+00:00",
+      "query": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2605.29143?fields=paperId,title,externalIds,citationCount",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2605.29143-semantic-scholar.error",
+      "raw_sha256": "65ab993d12c5c2cc9b68e6da2bb79b326930283e520363ffcdc145f88cd5a148",
+      "seed": "arXiv:2605.29143",
+      "service": "Semantic Scholar",
+      "status": "http-error"
+    },
+    {
+      "citation_count": 0,
+      "http_status": 200,
+      "ids": {
+        "doi": "https://doi.org/10.48550/arxiv.2608.01577",
+        "openalex": "https://openalex.org/W7172418083"
+      },
+      "queried_utc": "2026-09-09T19:31:55.256706+00:00",
+      "query": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2608.01577",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2608.01577-openalex.json",
+      "raw_sha256": "86f653376968d7a4567e3dd2e47873b84bbbaa4557fd936a0040585fb2e33f8e",
+      "resolved_id": "https://openalex.org/W7172418083",
+      "seed": "arXiv:2608.01577",
+      "service": "OpenAlex",
+      "status": "resolved-count",
+      "title": "The cubic threefold is symplectically irrational"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 404: Not Found",
+      "http_status": 404,
+      "queried_utc": "2026-09-09T19:31:55.263565+00:00",
+      "query": "https://api.crossref.org/works/10.48550%2FarXiv.2608.01577",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2608.01577-crossref.error",
+      "raw_sha256": "ae8462e3af85ca7577aaa97ff22a194f9dfd7fada58cf4944b53d2fdfa7b1f92",
+      "seed": "arXiv:2608.01577",
+      "service": "Crossref",
+      "status": "http-error"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 429: ",
+      "http_status": 429,
+      "queried_utc": "2026-09-09T19:31:55.273285+00:00",
+      "query": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2608.01577?fields=paperId,title,externalIds,citationCount",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2608.01577-semantic-scholar.error",
+      "raw_sha256": "65ab993d12c5c2cc9b68e6da2bb79b326930283e520363ffcdc145f88cd5a148",
+      "seed": "arXiv:2608.01577",
+      "service": "Semantic Scholar",
+      "status": "http-error"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 404: Not Found",
+      "http_status": 404,
+      "queried_utc": "2026-09-09T19:31:55.354616+00:00",
+      "query": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2411.02266",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2411.02266-openalex.error",
+      "raw_sha256": "e9639e3c4681ce85f852fbac48e2eeee5ba51296dbfec57c200d59b76237ab80",
+      "seed": "arXiv:2411.02266",
+      "service": "OpenAlex",
+      "status": "http-error"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 404: Not Found",
+      "http_status": 404,
+      "queried_utc": "2026-09-09T19:31:55.409781+00:00",
+      "query": "https://api.crossref.org/works/10.48550%2FarXiv.2411.02266",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2411.02266-crossref.error",
+      "raw_sha256": "ae8462e3af85ca7577aaa97ff22a194f9dfd7fada58cf4944b53d2fdfa7b1f92",
+      "seed": "arXiv:2411.02266",
+      "service": "Crossref",
+      "status": "http-error"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 429: ",
+      "http_status": 429,
+      "queried_utc": "2026-09-09T19:31:55.420813+00:00",
+      "query": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2411.02266?fields=paperId,title,externalIds,citationCount",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2411.02266-semantic-scholar.error",
+      "raw_sha256": "65ab993d12c5c2cc9b68e6da2bb79b326930283e520363ffcdc145f88cd5a148",
+      "seed": "arXiv:2411.02266",
+      "service": "Semantic Scholar",
+      "status": "http-error"
+    },
+    {
+      "citation_count": 0,
+      "http_status": 200,
+      "ids": {
+        "doi": "https://doi.org/10.48550/arxiv.2606.17884",
+        "openalex": "https://openalex.org/W7164987236"
+      },
+      "queried_utc": "2026-09-09T19:31:55.484838+00:00",
+      "query": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2606.17884",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2606.17884-openalex.json",
+      "raw_sha256": "3b86685665280f48aad2fc10189da4da22b5702cce09d8bd547f297e3d8947c3",
+      "resolved_id": "https://openalex.org/W7164987236",
+      "seed": "arXiv:2606.17884",
+      "service": "OpenAlex",
+      "status": "resolved-count",
+      "title": "Naive atoms of blowups: examples"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 404: Not Found",
+      "http_status": 404,
+      "queried_utc": "2026-09-09T19:31:55.486914+00:00",
+      "query": "https://api.crossref.org/works/10.48550%2FarXiv.2606.17884",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2606.17884-crossref.error",
+      "raw_sha256": "ae8462e3af85ca7577aaa97ff22a194f9dfd7fada58cf4944b53d2fdfa7b1f92",
+      "seed": "arXiv:2606.17884",
+      "service": "Crossref",
+      "status": "http-error"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 429: ",
+      "http_status": 429,
+      "queried_utc": "2026-09-09T19:31:55.488968+00:00",
+      "query": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2606.17884?fields=paperId,title,externalIds,citationCount",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2606.17884-semantic-scholar.error",
+      "raw_sha256": "65ab993d12c5c2cc9b68e6da2bb79b326930283e520363ffcdc145f88cd5a148",
+      "seed": "arXiv:2606.17884",
+      "service": "Semantic Scholar",
+      "status": "http-error"
+    },
+    {
+      "citation_count": 1,
+      "http_status": 200,
+      "ids": {
+        "doi": "https://doi.org/10.48550/arxiv.2004.09310",
+        "openalex": "https://openalex.org/W4287813616"
+      },
+      "queried_utc": "2026-09-09T19:31:55.577636+00:00",
+      "query": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2004.09310",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2004.09310-openalex.json",
+      "raw_sha256": "d890564282120b3726e8c89c5fdc125ac424c709b2ee13469e4a7d8e58eac6af",
+      "resolved_id": "https://openalex.org/W4287813616",
+      "seed": "arXiv:2004.09310",
+      "service": "OpenAlex",
+      "status": "resolved-count",
+      "title": "Schiffer variations and the generic Torelli theorem for hypersurfaces"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 404: Not Found",
+      "http_status": 404,
+      "queried_utc": "2026-09-09T19:31:55.658952+00:00",
+      "query": "https://api.crossref.org/works/10.48550%2FarXiv.2004.09310",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2004.09310-crossref.error",
+      "raw_sha256": "ae8462e3af85ca7577aaa97ff22a194f9dfd7fada58cf4944b53d2fdfa7b1f92",
+      "seed": "arXiv:2004.09310",
+      "service": "Crossref",
+      "status": "http-error"
+    },
+    {
+      "citation_count": 10,
+      "http_status": 200,
+      "ids": {
+        "ArXiv": "2004.09310",
+        "CorpusId": 215827582,
+        "DOI": "10.1112/S0010437X21007727",
+        "MAG": "3017183890"
+      },
+      "queried_utc": "2026-09-09T19:31:55.744022+00:00",
+      "query": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2004.09310?fields=paperId,title,externalIds,citationCount",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2004.09310-semantic-scholar.json",
+      "raw_sha256": "abd68e6d2c9ce1823d62c2026ced9c7ae1b817efa67c2ca1491b5f3d7c5b3cb6",
+      "resolved_id": "f08f7699ad0f4c3295c4a1edc94c25d63386bf18",
+      "seed": "arXiv:2004.09310",
+      "service": "Semantic Scholar",
+      "status": "resolved-count",
+      "title": "Schiffer variations and the generic Torelli theorem for hypersurfaces"
+    },
+    {
+      "citation_count": 0,
+      "http_status": 200,
+      "ids": {
+        "doi": "https://doi.org/10.48550/arxiv.1209.3653",
+        "openalex": "https://openalex.org/W6966856005"
+      },
+      "queried_utc": "2026-09-09T19:31:55.815518+00:00",
+      "query": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.1209.3653",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/1209.3653-openalex.json",
+      "raw_sha256": "d53b54bb0cb8223605dac3b78f336acf3de80ea00a9837625a9b25790c41c8da",
+      "resolved_id": "https://openalex.org/W6966856005",
+      "seed": "arXiv:1209.3653",
+      "service": "OpenAlex",
+      "status": "resolved-count",
+      "title": "Families of abelian varieties with many isogenous fibres"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 404: Not Found",
+      "http_status": 404,
+      "queried_utc": "2026-09-09T19:31:55.840790+00:00",
+      "query": "https://api.crossref.org/works/10.48550%2FarXiv.1209.3653",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/1209.3653-crossref.error",
+      "raw_sha256": "ae8462e3af85ca7577aaa97ff22a194f9dfd7fada58cf4944b53d2fdfa7b1f92",
+      "seed": "arXiv:1209.3653",
+      "service": "Crossref",
+      "status": "http-error"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 429: ",
+      "http_status": 429,
+      "queried_utc": "2026-09-09T19:31:55.895615+00:00",
+      "query": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:1209.3653?fields=paperId,title,externalIds,citationCount",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/1209.3653-semantic-scholar.error",
+      "raw_sha256": "65ab993d12c5c2cc9b68e6da2bb79b326930283e520363ffcdc145f88cd5a148",
+      "seed": "arXiv:1209.3653",
+      "service": "Semantic Scholar",
+      "status": "http-error"
+    },
+    {
+      "citation_count": 0,
+      "http_status": 200,
+      "ids": {
+        "doi": "https://doi.org/10.48550/arxiv.2509.15831",
+        "openalex": "https://openalex.org/W7082656554"
+      },
+      "queried_utc": "2026-09-09T19:31:55.940200+00:00",
+      "query": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2509.15831",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2509.15831-openalex.json",
+      "raw_sha256": "dac8fb6fa4701a1a4890e9000d4c5be1925aa6dae52c472b303efb3484287b24",
+      "resolved_id": "https://openalex.org/W7082656554",
+      "seed": "arXiv:2509.15831",
+      "service": "OpenAlex",
+      "status": "resolved-count",
+      "title": "Atoms meet symbols"
+    },
+    {
+      "citation_count": null,
+      "error": "HTTP Error 404: Not Found",
+      "http_status": 404,
+      "queried_utc": "2026-09-09T19:31:55.979004+00:00",
+      "query": "https://api.crossref.org/works/10.48550%2FarXiv.2509.15831",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2509.15831-crossref.error",
+      "raw_sha256": "ae8462e3af85ca7577aaa97ff22a194f9dfd7fada58cf4944b53d2fdfa7b1f92",
+      "seed": "arXiv:2509.15831",
+      "service": "Crossref",
+      "status": "http-error"
+    },
+    {
+      "citation_count": 1,
+      "http_status": 200,
+      "ids": {
+        "ArXiv": "2509.15831",
+        "CorpusId": 281411213
+      },
+      "queried_utc": "2026-09-09T19:31:55.985934+00:00",
+      "query": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2509.15831?fields=paperId,title,externalIds,citationCount",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/2509.15831-semantic-scholar.json",
+      "raw_sha256": "706fed882d6587fda9685fe0ba772f261b21867e6b40a4b678cc92dbdbdedb8f",
+      "resolved_id": "9102def9d7141a2cf7810c2855d78b2ffa227aaa",
+      "seed": "arXiv:2509.15831",
+      "service": "Semantic Scholar",
+      "status": "resolved-count",
+      "title": "Atoms meet symbols"
+    }
+  ],
+  "scope": "identifier resolution and independent citation counts only; no citing-set screen"
+}

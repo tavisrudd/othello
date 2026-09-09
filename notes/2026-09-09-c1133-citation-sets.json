@@ -1,0 +1,1043 @@
+[
+  {
+    "data": {
+      "data": [
+        {
+          "citingPaper": {
+            "abstract": "The compatibility of the semiorthogonal decomposition of a cubic fourfold with Bridgeland stability beyond a generic point is the missing ingredient in the conjectured dynamical protection of the K3 atom $\\AX$. We analyze it in the exactly solvable models of the noncommutative minimal model program. In the uncoupled Fano models ($\\PP^1$; $\\PP^1 \\times \\PP^1$ at resonance) the quantum cohomology path exits the geometric chamber at an explicit finite time, enters the selection region of the gluing, and never leaves; perturbing the resonance shows the $\\varepsilon$-crossover is not a wall. The $A_2$ quiver provides a coupled counterpart. We examine the deformed cubic oscillator, Painlev\\'e~I, and formulate a tau-JLO dictionary as a determinant identification and establish its perturbative layer, including computing closed-form quantum periods through $Z_4$, all-orders flatness with exact curvature the tau-divisor current, identifying it with the zeta determinant's zero divisor along a Painlev\\'e~I trajectory. We close by conjecturing that the determinant's nonperturbative jumps are automorphisms of the underlying Joyce structure.",
+            "authors": [
+              {
+                "authorId": "2319469",
+                "name": "Mark Raugas"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2608.12191",
+              "CorpusId": 291037068
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2608.12191, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "26b08ca7202e1a501370b8aca29e13ce5be3d125",
+            "title": "K3 atoms of the cubic fourfold and the BPS structure of the Painlev\\'e I determinant line",
+            "year": 2026
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "The birational invariants introduced by Katzarkov-Kontsevich-Pantev-Yu allows one to obtain irrationality results for varieties whose quantum cohomology is well-behaved. We observe that under certain cohomological conditions, we can deduce irrationality of a very general member from the theory of atoms without actually computing them, using only monodromy equivariance of quantum multiplication and irreducibility of the monodromy representation. Our criterion applies to the very general cubic and Gushel-Mukai fourfolds, whose irrationalities were already known, but also to the very general K{\\\"u}chle fourfold of type (c5), which is a Fano manifold of index one.",
+            "authors": [
+              {
+                "authorId": "103299714",
+                "name": "Vladimiro Benedetti"
+              },
+              {
+                "authorId": "2304453974",
+                "name": "Aideen Fay"
+              },
+              {
+                "authorId": "102884283",
+                "name": "J'er'emy Gu'er'e"
+              },
+              {
+                "authorId": "2301966377",
+                "name": "L. Manivel"
+              },
+              {
+                "authorId": "2058314724",
+                "name": "N. Perrin"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2607.26718",
+              "CorpusId": 290644556
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2607.26718, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "e1b88ba13cfb7721a8d58daf9894a018f9a495f7",
+            "title": "An atomic criterion for irrationality without quantum computations",
+            "year": 2026
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "The category of constituent pieces of Dubrovin connection of varieties is introduced and shown to be representable in affine space.",
+            "authors": [
+              {
+                "authorId": "12136559",
+                "name": "M. Kontsevich"
+              },
+              {
+                "authorId": "2056209193",
+                "name": "Szil'ard Szab'o"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2607.22074",
+              "CorpusId": 290583294,
+              "DOI": "10.1142/q0592"
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2607.22074, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": "CCBY",
+              "status": "GREEN",
+              "url": "https://arxiv.org/pdf/2607.22074"
+            },
+            "paperId": "57ce9d1b468db6be1a219630c5bd3578c8cead11",
+            "title": "Moduli of atoms of complex projective varieties",
+            "year": 2026
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "We prove that for any two birationally equivalent del Pezzo surfaces of Picard rank one over a perfect field there is a birational map between them such that it is decomposed in a composition of at most two Sarkisov links.",
+            "authors": [
+              {
+                "authorId": "146216410",
+                "name": "Anastasia V. Vikulova"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2607.13270",
+              "CorpusId": 290179038
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2607.13270, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "9d1e0e4521ab8e752b69eacb4ebbf4771fe5e811",
+            "title": "Composition of Sarkisov links between del Pezzo surfaces",
+            "year": 2026
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "We define naive atomic decompositions of smooth projective varieties. We show that they satisfy a naive version of Iritani's blowup formula in several examples that are complicated enough to show most interesting features of the general theory while being simple enough to be computable by elementary methods.",
+            "authors": [
+              {
+                "authorId": "101662072",
+                "name": "Christian Bohning"
+              },
+              {
+                "authorId": "102748181",
+                "name": "H. G. Bothmer"
+              },
+              {
+                "authorId": "2444877981",
+                "name": "Zac Su'a"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2606.17884",
+              "CorpusId": 289628668
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2606.17884, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "d3ffce40b207e6424511a405d76068e175cfe7f1",
+            "title": "Naive atoms of blowups: examples",
+            "year": 2026
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "For a Fano manifold $X$, Gamma conjecture II aims to use $\\mathcal{D}_{\\rm{coh}}^b(X)$ to describe the asymptotic behavior of its Dubrovin connection via $\\widehat{\\Gamma}$-integral structure. It was proposed by Galkin, Golyshev and Iritani, and can be regarded as a quantitative refinement of Dubrovin's conjecture on Fano manifolds with semisimple big quantum cohomology. As a step toward Gamma conjecture II, we define the Gamma-I property at points satisfying the (SR) condition, arising from the original Gamma conjecture I. We prove that the property holds globally in the following sense: if it holds at one such point, then it holds throughout the connected component of the (SR)-region containing that point. Based on this global Gamma-I property, we establish a strategy-type theorem relating Gamma conjecture II to the Gamma-I property at a possibly non-semisimple point, together with an analysis of small quantum cohomology. We further apply this theorem to prove Gamma conjecture II for del Pezzo surfaces; the proof combines Iritani's Galois action with addtional elementary operations on exceptional collections, and its most technically involved step consists in verifying the required global Gamma-I property.",
+            "authors": [
+              {
+                "authorId": "2303461774",
+                "name": "Jianxun Hu"
+              },
+              {
+                "authorId": "2277762389",
+                "name": "Huazhong Ke"
+              },
+              {
+                "authorId": "2304695220",
+                "name": "Changzheng Li"
+              },
+              {
+                "authorId": "2303395792",
+                "name": "Zhitong Su"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2606.07418",
+              "CorpusId": 288985614
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2606.07418, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "35afb4942f59505f04f412dd0f25959115e8c0cc",
+            "title": "Gamma conjecture II via global Gamma-I",
+            "year": 2026
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "We compute the small quantum cohomology ring of a Verra fourfold. Using the theory of atoms recently developped by Katzarkov--Kontsevich--Pantev--Yu, and building on recent papers of the authors, we deduce that a Verra fourfold is never birational to a very general cubic fourfold, nor to a very general Gushel--Mukai fourfold, whereas it was previously known that a general Verra fourfold is birational to a general nodal Gushel--Mukai fourfold. More precisely, we show that for every smooth cubic fourfold or smooth Gushel--Mukai fourfold that is birational to some Verra fourfold, the primitive cohomology is isomorphic, as a rational Hodge structure, to the middle cohomology of some projective K3 surface.",
+            "authors": [
+              {
+                "authorId": "103299714",
+                "name": "Vladimiro Benedetti"
+              },
+              {
+                "authorId": "102884283",
+                "name": "J'er'emy Gu'er'e"
+              },
+              {
+                "authorId": "2301966377",
+                "name": "L. Manivel"
+              },
+              {
+                "authorId": "2058314724",
+                "name": "N. Perrin"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2605.30450",
+              "CorpusId": 288813913
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2605.30450, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "32a3925fa2a7b27f75b95a6116fb3ad2d793ad75",
+            "title": "Quantum cohomology and birational geometry of Verra fourfolds",
+            "year": 2026
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "We prove that a very general complex symmetric Verra fourfold is not \\(\\ZZ/2\\)-birational to \\(\\PP^4\\), using the \\emph{theory of atoms} introduced by Katzarkov--Kontsevich--Pantev--Yu~\\citep{Katzarkov2025BirationalIF} in the equivariant setting as in Cavenaghi--Katzarkov--Kontsevich~\\citep{cavenaghi2026atomsmeetsymbols}.",
+            "authors": [
+              {
+                "authorId": "2304453974",
+                "name": "Aideen Fay"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2605.30439",
+              "CorpusId": 288813856
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2605.30439, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "4ebe4f3f17573360a688c5cec5bec33ea1911258",
+            "title": "Equivariant irrationality of very general symmetric Verra fourfolds",
+            "year": 2026
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "We prove that smooth quartic threefolds are symplectically irrational: they cannot be related to projective space by a sequence of symplectic blow-ups, blow-downs, and deformations. This recovers the classical irrationality theorem of Iskovskikh-Manin. The obstruction is constructed from big quantum cohomology, using the multiplicities of eigenvalues of quantum multiplication by the Euler vector field. To prove its invariance, we establish a decomposition theorem for quantum cohomology under symplectic blow-ups, following the work of Iritani.",
+            "authors": [
+              {
+                "authorId": "2307989880",
+                "name": "Jiajie Cai"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2605.29143",
+              "CorpusId": 288741493
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2605.29143, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "bab31ac28b3b466253920bd6847af5f423fefae2",
+            "title": "The quartic threefold is symplectically irrational",
+            "year": 2026
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "We extend the Hodge atoms framework of Katzarkov--Kontsevich--Pantev--Yu to one-parameter conifold degenerations of Calabi--Yau threefolds. For a degeneration $\\pi\\colon X \\to \\Delta$ whose central fiber $X_0$ has $r$ ordinary double points, we construct a canonical rigid-flexible decomposition of the Hodge atoms of the nearby smooth fiber attached to the corrected degeneration object. The rigid atom $A(\\IC^H_{X_0})$ is preserved across the degeneration, while the flexible atoms $A(i_{k*}\\QQ^H_{\\{p_k\\}}(-1))$ are rank-one contributions, one for each vanishing cycle. The total degeneration atom $A(P^H)$ is the atom of the corrected mixed Hodge module $P^H\\in\\MHM(X_0)$ and fits into an exact sequence of atoms whose non-split structure is controlled by the intersection matrix $(\\langle\\delta_i,\\delta_j\\rangle)$. The technical core is the Stokes--Extension Identification, which identifies the Stokes matrix of the Dubrovin connection at the conifold locus with the matrix of the variation morphism $\\varF\\colon\\varphi_\\pi(F) \\to \\psi_\\pi(F)$ under mixed Hodge module realization.",
+            "authors": [
+              {
+                "authorId": "2322366937",
+                "name": "Abdul Rahman"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2604.17754",
+              "CorpusId": 287634799
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2604.17754, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "0ef49a34dc0c4f00fe3617cdfcaf5f2a663aa95b",
+            "title": "Hodge Atoms at Conifold Degenerations: F-Bundles, Limiting Mixed Hodge Modules, and the Rigid-Flexible Decomposition",
+            "year": 2026
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "We show that the very general Verra fourfold is irrational, using the Hodge atom framework of Katzarkov--Kontsevich--Pantev--Yu. Two novel points are: a refined analysis of Hodge atoms, based on the involution on the cohomology of $X$, and a derivation of the quantum multiplication matrix from the quantum differential operator. This gives the first successful application of the method of Hodge atoms to a space with Picard rank greater than one.",
+            "authors": [
+              {
+                "authorId": "2304453974",
+                "name": "Aideen Fay"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2604.14850",
+              "CorpusId": 287508796
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2604.14850, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "b9afbcb7d80690745560f528dd00788b71182b30",
+            "title": "The Very General Verra Fourfold is Irrational",
+            "year": 2026
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "We discuss arithmetic and Hodge-theoretic properties of the isomorphisms appearing in the decomposition theorem for quantum cohomology of blowups. These properties underpin the application to the rationality questions by Katzarkov-Kontsevich-Pantev-Yu.",
+            "authors": [
+              {
+                "authorId": "3684345",
+                "name": "H. Iritani"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2604.10028",
+              "CorpusId": 287425237
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2604.10028, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "6c569cc006e356530e0f033989bd5258768718c5",
+            "title": "Notes on the decomposition theorem for blowups",
+            "year": 2026
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "We compute the small quantum cohomology of Gushel-Mukai fourfolds. Following [13], our computations imply that the very general ones are not rational. Following [8], and thanks to a suitable deformation of the small quantum cohomology ring, we also deduce that a rational Gushel-Mukai fourfold has the same rational cohomology as some K3 surface.",
+            "authors": [
+              {
+                "authorId": "103299714",
+                "name": "Vladimiro Benedetti"
+              },
+              {
+                "authorId": "2301966377",
+                "name": "L. Manivel"
+              },
+              {
+                "authorId": "2058314724",
+                "name": "N. Perrin"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2603.17487",
+              "CorpusId": 286643431
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2603.17487, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "68929f355c4f155d82abfcc709bedcd003e52ba0",
+            "title": "Quantum cohomology and irrationality of Gushel-Mukai fourfolds",
+            "year": 2026
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "We compare algebraic and analytic pictures relevant to the study of birational invariants. Motivated by recent advances in the development of non-commutative Hodge structures, we examine their implication for quiver gauge field theory on the cubic fourfold. By interpreting the semiorthogonal property as a dynamical selection rule, we conjecture that the K3 Hodge atom of the cubic fourfold represents a protected quantum phase whose spectra remain invariant under non-perturbative tunneling processes.",
+            "authors": [
+              {
+                "authorId": "2319469",
+                "name": "Mark Raugas"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2603.16639",
+              "CorpusId": 286584166
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2603.16639, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "d681c75efa02d140b20e7c9edd81e0a2596f21ef",
+            "title": "Relating Hodge Atoms, Spectral Triples, and BPS Flows",
+            "year": 2026
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "Following the work of Katzarkov--Kontsevich--Pantev--Yu concerning the irrationality of the very general complex cubic fourfold, we prove the following: for every rational smooth complex cubic fourfold, the primitive cohomology is isomorphic as a Hodge structure to the (twisted) middle cohomology of a projective K3 surface.",
+            "authors": [
+              {
+                "authorId": "102884283",
+                "name": "J'er'emy Gu'er'e"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2603.04518",
+              "CorpusId": 286255543
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2603.04518, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "d8b2f71fc2c7b88ce21b2d8d3431915fcc21b4fe",
+            "title": "On the irrationality of cubic fourfolds",
+            "year": 2026
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "This paper investigates the geometric and algebraic interplay between F-manifolds and a newly defined class of structures termed F$_\\text{man}$-algebras. We specialize our study to the category of F-Lie groups, characterized by a Lie group whose associated commutative and associative product of vector fields is left-invariant. We construct a canonical connection on Lie groups uniquely determined by the F$_\\text{man}$-algebraic data, and subsequently characterize its curvature tensor and holonomy Lie algebra. A central feature of our investigation is the introduction of the Poisson-algebra distribution, arising from a canonical Poisson subalgebra within the F$_\\text{man}$-algebra. We establish the integrability of this distribution, which induces a foliation of the F-Lie group and facilitates a local splitting theorem. The theoretical framework is illustrated through an in-depth analysis of the Heisenberg Lie algebra.",
+            "authors": [
+              {
+                "authorId": "2395540191",
+                "name": "Santiago Casta\u00f1eda-Montoya"
+              },
+              {
+                "authorId": "2395537564",
+                "name": "Alexander Torres-Gomez"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2511.22795",
+              "CorpusId": 283438824
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2511.22795, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "88844e88009ceb1727bc8abd7f3661ff804d9366",
+            "title": "$\\text{F-manifolds}$, F$_\\text{man}$-algebras and $\\text{Poisson-algebra}$ Distributions",
+            "year": 2025
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "We propose new invariants in equivariant birational geometry, combining equivariant intermediate Jacobians and the Burnside formalism, for smooth rationally connected threefolds with actions of finite groups.",
+            "authors": [
+              {
+                "authorId": "3197862",
+                "name": "A. Kresch"
+              },
+              {
+                "authorId": "2700571",
+                "name": "Sho Tanimoto"
+              },
+              {
+                "authorId": "1989750",
+                "name": "Y. Tschinkel"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2511.07101",
+              "CorpusId": 282911899,
+              "DOI": "10.2969/jmsj/96599659"
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2511.07101, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": "CCBY",
+              "status": "GREEN",
+              "url": "https://arxiv.org/pdf/2511.07101"
+            },
+            "paperId": "14399521286f20c465e8ca1e73542859c0f41dbd",
+            "title": "Intermediate Jacobians and Burnside invariants",
+            "year": 2025
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "In this article, we study how the rationality of a Fano threefold is reflected in its standard mirror Landau-Ginzburg model and its deformations. The main result is that a Fano threefold is rational if and only if the monodromy around every reducible fiber of its generic mirror Landau-Ginzburg model is unipotent.",
+            "authors": [
+              {
+                "authorId": "2316443732",
+                "name": "Sukjoo Lee"
+              },
+              {
+                "authorId": "93735715",
+                "name": "V. Przyjalkowski"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2510.21222",
+              "CorpusId": 282384123
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2510.21222, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "8474a7417e56d745b1082db182f0f6ed641d22f8",
+            "title": "Fibers of Landau-Ginzburg models and rationality",
+            "year": 2025
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "We introduce horizontal and vertical motivic invariants of birational maps between rational dominant maps and study their basic properties. As a first application, we show that the (usual) motivic invariants vanish for birational automorphisms of threefolds over algebraically closed fields of characteristic zero. On the other hand, we prove that the motivic invariants of the birational automorphism group of many types of varieties, including projective spaces of dimension at least four over a field of characteristic zero, do not form a bounded family, even after extending scalars to the algebraic closure of the field. For such varieties, we further show that their birational automorphism groups are not generated by maps preserving a conic bundle or a rational surface fibration structure, and their abelianizations do not stabilize.",
+            "authors": [
+              {
+                "authorId": "2263620562",
+                "name": "Hsueh-Yung Lin"
+              },
+              {
+                "authorId": "72616701",
+                "name": "Evgeny Shinder"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2510.00290",
+              "CorpusId": 281705728
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2510.00290, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "9f8f20e47eb735bdc2cf8f6a1b8e81c5780a58fa",
+            "title": "Unboundedness for motivic invariants of birational automorphisms",
+            "year": 2025
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "We study the quantum connection of product varieties in the framework of quantum cohomology. Our first main result shows that, near the origin of the Novikov variables, the quantum spectrum of \\(X \\times Y\\) converges to the set of pairwise sums of the spectra of \\(X\\) and \\(Y\\). This arises from the leading contribution of the connection matrices \\(K_X \\otimes \\mathrm{id}\\) and \\(\\mathrm{id} \\otimes K_Y\\), while mixed curve classes contribute only at higher order. Our second main result establishes a formal isomorphism of quantum \\(D\\)-modules $ \\mathrm{QDM}(X \\times Y)^{\\mathrm{la}} \\cong \\mathrm{QDM}(X)^{\\mathrm{la}} \\otimes \\mathrm{QDM}(Y)^{\\mathrm{la}}$, compatible with the quantum connection. As applications, we show that atoms, birational invariants arising from quantum cohomology, factor multiplicatively for product varieties, and we deduce the existence of a motivic measure associated with atoms.",
+            "authors": [
+              {
+                "authorId": "1390058806",
+                "name": "'Ad'am Gyenge"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2509.07407",
+              "CorpusId": 281218258
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2509.07407, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "d333d899aeb5cc1d0bf8062460d367d50372583b",
+            "title": "The quantum D-module of product varieties",
+            "year": 2025
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "We consider the decision problem of whether a particular Gromov--Witten invariant on a partial flag variety is zero. We prove that for the $3$-pointed, genus zero invariants, this problem is in the complexity class ${\\sf AM}$ assuming the Generalized Riemann Hypothesis (GRH), and therefore lies in the second level of polynomial hierarchy ${\\sf PH}$. For the proof, we construct an explicit system of polynomial equations through a translation of the defining equations. We also need to prove an extension of the Parametric Hilbert's Nullstellensatz to obtain our central reduction.",
+            "authors": [
+              {
+                "authorId": "2306631409",
+                "name": "Igor Pak"
+              },
+              {
+                "authorId": "2306445043",
+                "name": "Colleen Robichaux"
+              },
+              {
+                "authorId": "2374929301",
+                "name": "Weihong Xu"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2508.15715",
+              "CorpusId": 280699785,
+              "DBLP": "journals/corr/abs-2508-15715",
+              "DOI": "10.48550/arXiv.2508.15715"
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2508.15715, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "0ec89f23784b1c0f27d5f7cb8e4d4ad654953000",
+            "title": "On Vanishing of Gromov-Witten Invariants",
+            "year": 2025
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "In the moduli space $\\mathcal{C}$ of complex cubic hypersurfaces $X\\subset\\mathbb{P}^5$, we study the condition that $X$ admits a net of polar quadrics whose discriminant locus is a $10$-nodal irreducible plane sextic curve. Our main result is that such a condition defines an irreducible divisor in $\\mathcal{C}$ which is not of Noether-Lefschetz type.",
+            "authors": [
+              {
+                "authorId": "7784393",
+                "name": "E. Sammarco"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2505.13187",
+              "CorpusId": 278769821
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2505.13187, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "d6ad1170987ee30f7402f6c12f11c30895292967",
+            "title": "A nonspecial divisor in the moduli space of cubic fourfolds via 10-nodal plane sextics",
+            "year": 2025
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "We show that the natural nc-space attached to an intersection of three quadrics in P^7 is truly non-commutative. In particular, its associated numerical K-lattice is not isomorphic to the K-lattice of any smooth projective surface, so the relevant derived category is not equivalent to the derived category of any smooth projective surface. Using the new theory of Hodge atoms, this reproves the irrationality of a very general intersection of three quadrics in P7.",
+            "authors": [
+              {
+                "authorId": "2282138169",
+                "name": "R. Donagi"
+              },
+              {
+                "authorId": "2257347630",
+                "name": "T. Pantev"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2503.19039",
+              "CorpusId": 277313394
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2503.19039, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "357b8616f50c3a41cd20c13143739dee25fa3d8d",
+            "title": "The intersection of three quadrics in P^7 revisited",
+            "year": 2025
+          }
+        }
+      ],
+      "offset": 0
+    },
+    "expected_count": 23,
+    "query": "https://api.semanticscholar.org/graph/v1/paper/5d0db92070100e6ff1dfd91da6f014daa737b3ce/citations?fields=title,externalIds,year,abstract&limit=100",
+    "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/arXiv_2508.05105-citations.json",
+    "raw_sha256": "f692612257b3ff1ac2ac9c947c8191b3a8a08081c555ed073f6116f6372f2451",
+    "screen": {
+      "discriminator": "Promote titles addressing quantum or Hodge birational invariants, F-bundle/lattice/framing constructions, Fano rationality, or rational Torelli; retain ambiguous method-adjacent titles as unresolved leads rather than content-level negatives.",
+      "fields": [
+        "title"
+      ],
+      "result": "Title screen complete; individual promoted-source reading is incomplete. No forward-citation closure verdict.",
+      "set_size": 23
+    },
+    "seed": "arXiv:2508.05105",
+    "status": "retrieved"
+  },
+  {
+    "data": {
+      "data": [
+        {
+          "citingPaper": {
+            "abstract": "In this paper, we prove finiteness results for K-trivial varieties in all dimensions. In dimension 2, these results are corollaries of the Global Torelli Theorem for polarized K3 surfaces. In particular, we establish a sufficient condition when two fibers of a projective family of K-trivial varieties are isomorphic via the Hodge theory. As applications, we prove that if a projective family of K-trivial varieties has a dense subset of birationally equivalent fibers, then all fibers are isomorphic.",
+            "authors": [
+              {
+                "authorId": "2353853151",
+                "name": "D. Serebrennikov"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2608.27441",
+              "CorpusId": 291387140
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2608.27441, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "fb3237acee9f18e0722d1f59173f66598fb24d82",
+            "title": "Towards the Global Torelli Theorem",
+            "year": 2026
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "We study the Griffiths heights associated to the middle-dimensional cohomology of pencils of projective hypersurfaces, by comparing them to heights defined by means of geometric invariant theory (GIT). Kato and Koshikawa have conjectured a Northcott property for the Kato heights attached to motives over number fields, and investigated its consequences. Bounding these Griffiths heights in terms of the GIT heights would constitute a geometric counterpart, valid over function fields of characteristic zero, of Kato and Koshikawa's conjecture. Part of our results follows from our earlier works on the computation of these Griffiths heights in the case of pencils with generic singularities, and on semistability criteria for singular projective hypersurfaces, combined with a general formalism of GIT heights over function fields. We also establish estimates between the Griffiths and GIT heights associated to pencils of projective hypersurfaces, which are valid beyond the case of generic singularities. To achieve this, we establish diverse results of independent interest. Notably we extend our previous computations of Griffiths heights to pencils of projective hypersurfaces with semihomogeneous singularities, and we show the lower semicontinuity of the stable Griffiths height attached to polarized variations of Hodge structures over complex algebraic curves.",
+            "authors": [
+              {
+                "authorId": "2197667682",
+                "name": "Thomas Mordant"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2506.15334",
+              "CorpusId": 279447875
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2506.15334, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "a3ac86e4323a16b0d9f2167cb90d463d62eb7e0a",
+            "title": "Pencils of projective hypersurfaces, Griffiths heights and geometric invariant theory. I",
+            "year": 2025
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "We study the cohomology of a 1-parameter family Y_t of Calabi-Yau 3-folds introduced by Aspinwall and Morrison, related to the mirror quintic family. Szendr\\H{o}i proved that Y_t, Y_{xi t}, ..., Y_{xi^4 t}, where xi is a fifth root of unity, have the same rational Hodge structure but are not isomorphic, and conjectured that they are not birational or even derived equivalent. We confirm this by proving that their integral Hodge structures are different, and discuss how this fits with known Torelli-type theorems and counterexamples.",
+            "authors": [
+              {
+                "authorId": "3424197",
+                "name": "N. Addington"
+              },
+              {
+                "authorId": "2190751922",
+                "name": "B. Tighe"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2407.11176",
+              "CorpusId": 271218189
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2407.11176, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "58b385fa6aa56dbe0afd7beeabb317671bc146ad",
+            "title": "On an example of Aspinwall, Morrison, and Szendr\\H{o}i",
+            "year": 2024
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "Let $\\Sigma_{g'}\\to \\Sigma_g$ be a cover of an orientable surface of genus g by an orientable surface of genus g', branched at n points, with Galois group H. Such a cover induces a virtual action of the mapping class group $\\text{Mod}_{g,n+1}$ of a genus g surface with n+1 marked points on $H^1(\\Sigma_{g'}, \\mathbb{C})$. When g is large in terms of the group H, we calculate precisely the connected monodromy group of this action. The methods are Hodge-theoretic and rely on a\"generic Torelli theorem with coefficients.\"",
+            "authors": [
+              {
+                "authorId": "21033473",
+                "name": "Aaron Landesman"
+              },
+              {
+                "authorId": "81119117",
+                "name": "Daniel Litt"
+              },
+              {
+                "authorId": "2401832309",
+                "name": "Will Sawin"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2401.13906",
+              "CorpusId": 267211696,
+              "DOI": "10.2140/gt.2025.29.2733"
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2401.13906, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": "CCBY",
+              "status": "HYBRID",
+              "url": "https://msp.org/gt/2025/29-5/gt-v29-n5-p11-s.pdf"
+            },
+            "paperId": "3c72c1d9c2e28030b292c11e08f3ef77da968b23",
+            "title": "Big monodromy for higher Prym representations",
+            "year": 2024
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "\n Let $Y$ admit a rectangular Lefschetz decomposition of its derived category, and consider a cyclic cover $X\\to Y$ ramified over a divisor $Z$. In a setting not considered by Kuznetsov and Perry [31], we define a subcategory $\\mathcal{A}_{Z}$ of the equivariant derived category of $X$, which contains, rather than is contained in, $\\textrm{D}^{b}(Z)$. We then show that the equivariant category of the Kuznetsov component of $X$ is decomposed into copies of $\\mathcal{A}_{Z}$. As an application, we relate $\\mathcal{A}_{Z}$ with the cohomology of $Z$ under some numerical assumptions. In particular, we obtain categorical Torelli theorems for the lowest degree prime Fano three-folds of index 1 and 2.",
+            "authors": [
+              {
+                "authorId": "2221012199",
+                "name": "Hannah Dell"
+              },
+              {
+                "authorId": "2158366361",
+                "name": "Augustinas Jacovskis"
+              },
+              {
+                "authorId": "2261085325",
+                "name": "Franco Rota"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2310.13651",
+              "CorpusId": 264406081,
+              "DOI": "10.1093/imrn/rnaf120"
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2310.13651, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": "CCBYSA",
+              "status": "GREEN",
+              "url": "http://eprints.gla.ac.uk/view/author/63340.html>"
+            },
+            "paperId": "e63bd26feebca3217cf05285b1330f50c3e31d20",
+            "title": "Cyclic Covers: Hodge Theory and Categorical Torelli Theorems",
+            "year": 2023
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "Let $n$ be an even natural number. We compute the periods of any $\\frac{n}{2}$-dimensional complete intersection algebraic cycle inside an $n$-dimensional non-degenerated intersection of a projective simplicial toric variety. Using this information we determine the cycle class of such algebraic cycles. As part of the proof we develop a toric generalization of a classical theorem of Macaulay about complete intersection Artin Gorenstein rings, and we generalize an algebraic cup formula for residue forms due to Carlson and Griffiths to the toric setting.",
+            "authors": [
+              {
+                "authorId": null,
+                "name": "Roberto Villaflor Loyola"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2306.12931",
+              "CorpusId": 259224396,
+              "DOI": "10.1016/j.jalgebra.2023.12.021"
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2306.12931, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": "CLOSED",
+              "url": ""
+            },
+            "paperId": "cff7f7f165cf5d0811004e64f0867d2387446396",
+            "title": "Toric differential forms and periods of complete intersections",
+            "year": 2023
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "Abstract The goal of this paper is to describe certain nonlinear topological obstructions for the existence of first-order smoothings of mildly singular Calabi\u2013Yau varieties of dimension at least \n$4$\n . For nodal Calabi\u2013Yau threefolds, a necessary and sufficient linear topological condition for the existence of a first-order smoothing was first given in [Fri86]. Subsequently, Rollenske\u2013Thomas [RT09] generalized this picture to nodal Calabi\u2013Yau varieties of odd dimension by finding a necessary nonlinear topological condition for the existence of a first-order smoothing. In a complementary direction, in [FL22a], the linear necessary and sufficient conditions of [Fri86] were extended to Calabi\u2013Yau varieties in every dimension with \n$1$\n -liminal singularities (which are exactly the ordinary double points in dimension \n$3$\n but not in higher dimensions). In this paper, we give a common formulation of all of these previous results by establishing analogues of the nonlinear topological conditions of [RT09] for Calabi\u2013Yau varieties with weighted homogeneous k-liminal hypersurface singularities, a broad class of singularities that includes ordinary double points in odd dimensions.",
+            "authors": [
+              {
+                "authorId": "50781008",
+                "name": "R. Friedman"
+              },
+              {
+                "authorId": "73352622",
+                "name": "R. Laza"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2302.08488",
+              "CorpusId": 256900709,
+              "DOI": "10.1017/fms.2024.44"
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2302.08488, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": "CCBY",
+              "status": "GOLD",
+              "url": "https://doi.org/10.1017/fms.2024.44"
+            },
+            "paperId": "14cda0a00e1d09a878af602b1ed32ca21c951f11",
+            "title": "Deformations of Calabi\u2013Yau varieties with k-liminal singularities",
+            "year": 2023
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "Using a refinement of the differential method introduced by Oguiso and Yu, we provide effective conditions under which the automorphisms of a smooth degree $d$ hypersurface of $\\mathbf{P}^{n+1}$ are given by generalized triangular matrices. Applying this criterion we compute all the remaining automorphism groups of Klein hypersurfaces of dimension $n\\geq 1$ and degree $d\\geq 3$ with $(n,d)\\neq (2,4)$. We introduce the concept of extremal polarized Hodge structures, which are structures that admit an automorphism of large prime order. Using this notion, we compute the automorphism group of the polarized Hodge structure of certain Klein hypersurfaces that we call of Wagstaff type, which are characterized by the existence of an automorphism of large prime order. For cubic hypersurfaces and some other values of $(n,d)$, we show that both groups coincide (up to involution) as predicted by the Torelli Principle.",
+            "authors": [
+              {
+                "authorId": "1405140495",
+                "name": "V'ictor Gonz'alez-Aguilera"
+              },
+              {
+                "authorId": "32914103",
+                "name": "Alvaro Liendo"
+              },
+              {
+                "authorId": "144821817",
+                "name": "Pedro Montero"
+              },
+              {
+                "authorId": "88741260",
+                "name": "Roberto Villaflor Loyola"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2212.13308",
+              "CorpusId": 255186010
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2212.13308, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "701b327e92740b40a41ff66349f1cee81b14ada2",
+            "title": "On a Torelli Principle for automorphisms of Klein hypersurfaces",
+            "year": 2022
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "Using our recent results on the algebraicity of the Hodge locus for variations of Hodge structures of level at least $3$, we improve the results of Lawrence-Venkatesh in direction of the refined Bombieri-Lang conjecture.",
+            "authors": [
+              {
+                "authorId": "90721397",
+                "name": "G. Baldi"
+              },
+              {
+                "authorId": "101188727",
+                "name": "B. Klingler"
+              },
+              {
+                "authorId": "2083294782",
+                "name": "E. Ullmo"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2112.13040",
+              "CorpusId": 245502413,
+              "DOI": "10.1016/j.exmath.2023.05.001"
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2112.13040, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": "publisher-specific-oa",
+              "status": "BRONZE",
+              "url": "https://www.sciencedirect.com/science/article/am/pii/S0723086923000439"
+            },
+            "paperId": "445e369d86eebb65da88f16c431c7c5fa2ea273a",
+            "title": "On the Geometric Zilber\u2013Pink theorem and the Lawrence\u2013Venkatesh method",
+            "year": 2021
+          }
+        },
+        {
+          "citingPaper": {
+            "abstract": "In this paper we introduce some variation functions associated to the rank of the Infinitesimal Variations of Hodge Structure for a family of smooth projective complex curves. We give some bounds and inequalities and, in particular, we prove that if X is a smooth plane curve, then, there exists a first order deformation \u03be\u2208H1(TX)\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$\\xi \\in H^1(T_X)$$\\end{document} which deforms X as plane curve and such that \u03be\u00b7:H0(\u03c9X)\u2192H1(OX)\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$\\xi \\cdot :H^0(\\omega _X)\\rightarrow H^1({\\mathcal O}_{X})$$\\end{document} is an isomorphism. We also generalize the notions of variation functions to higher dimensional case and we analyze the link between IVHS and the weak and strong Lefschetz properties of the Jacobian ring of a smooth hypersurface.",
+            "authors": [
+              {
+                "authorId": "88726700",
+                "name": "F. F. Favale"
+              },
+              {
+                "authorId": "87945841",
+                "name": "G. Pirola"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2108.02157",
+              "CorpusId": 236912978,
+              "DOI": "10.1007/s00032-022-00353-2"
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2108.02157, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": "CCBY",
+              "status": "HYBRID",
+              "url": "https://link.springer.com/content/pdf/10.1007/s00032-022-00353-2.pdf"
+            },
+            "paperId": "dc5c24075731a980dd952e69c1c9ac15699fdc57",
+            "title": "Infinitesimal Variation Functions for Families of Smooth Varieties",
+            "year": 2021
+          }
+        }
+      ],
+      "offset": 0
+    },
+    "expected_count": 10,
+    "query": "https://api.semanticscholar.org/graph/v1/paper/f08f7699ad0f4c3295c4a1edc94c25d63386bf18/citations?fields=title,externalIds,year,abstract&limit=100",
+    "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/arXiv_2004.09310-citations.json",
+    "raw_sha256": "9c69a657ce4c158b730ab5cd4b735a01b436798f57498fcf10e8502a5f8cc90e",
+    "screen": {
+      "discriminator": "Promote titles addressing quantum or Hodge birational invariants, F-bundle/lattice/framing constructions, Fano rationality, or rational Torelli; retain ambiguous method-adjacent titles as unresolved leads rather than content-level negatives.",
+      "fields": [
+        "title"
+      ],
+      "result": "Title screen complete; individual promoted-source reading is incomplete. No forward-citation closure verdict.",
+      "set_size": 10
+    },
+    "seed": "arXiv:2004.09310",
+    "status": "retrieved"
+  },
+  {
+    "data": {
+      "data": [
+        {
+          "citingPaper": {
+            "abstract": "We compute the small quantum cohomology ring of a Verra fourfold. Using the theory of atoms recently developped by Katzarkov--Kontsevich--Pantev--Yu, and building on recent papers of the authors, we deduce that a Verra fourfold is never birational to a very general cubic fourfold, nor to a very general Gushel--Mukai fourfold, whereas it was previously known that a general Verra fourfold is birational to a general nodal Gushel--Mukai fourfold. More precisely, we show that for every smooth cubic fourfold or smooth Gushel--Mukai fourfold that is birational to some Verra fourfold, the primitive cohomology is isomorphic, as a rational Hodge structure, to the middle cohomology of some projective K3 surface.",
+            "authors": [
+              {
+                "authorId": "103299714",
+                "name": "Vladimiro Benedetti"
+              },
+              {
+                "authorId": "102884283",
+                "name": "J'er'emy Gu'er'e"
+              },
+              {
+                "authorId": "2301966377",
+                "name": "L. Manivel"
+              },
+              {
+                "authorId": "2058314724",
+                "name": "N. Perrin"
+              }
+            ],
+            "externalIds": {
+              "ArXiv": "2605.30450",
+              "CorpusId": 288813913
+            },
+            "openAccessPdf": {
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2605.30450, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use.",
+              "license": null,
+              "status": null,
+              "url": ""
+            },
+            "paperId": "32a3925fa2a7b27f75b95a6116fb3ad2d793ad75",
+            "title": "Quantum cohomology and birational geometry of Verra fourfolds",
+            "year": 2026
+          }
+        }
+      ],
+      "offset": 0
+    },
+    "expected_count": 1,
+    "query": "https://api.semanticscholar.org/graph/v1/paper/9102def9d7141a2cf7810c2855d78b2ffa227aaa/citations?fields=title,externalIds,year,abstract&limit=100",
+    "raw_path": "/tmp/persistent/tavis/lit-search/c1133-citation-probe/arXiv_2509.15831-citations.json",
+    "raw_sha256": "69d0e2d9be20834992a760995edffb10555801e23a9fb46b6ab4a90940d23c88",
+    "screen": {
+      "discriminator": "Promote titles addressing quantum or Hodge birational invariants, F-bundle/lattice/framing constructions, Fano rationality, or rational Torelli; retain ambiguous method-adjacent titles as unresolved leads rather than content-level negatives.",
+      "fields": [
+        "title"
+      ],
+      "result": "Title screen complete; individual promoted-source reading is incomplete. No forward-citation closure verdict.",
+      "set_size": 1
+    },
+    "seed": "arXiv:2509.15831",
+    "status": "retrieved"
+  }
+]

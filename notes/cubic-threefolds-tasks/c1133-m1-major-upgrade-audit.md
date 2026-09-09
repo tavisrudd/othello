@@ -1,7 +1,25 @@
 # C1133 — m=1 major upgrade: mathematics and complete literature audit
 
 **Lane:** `cubic-threefolds`
-**Status:** QUEUED, author-selected next research task (2026-09-09).
+**Status:** ACTIVE, author-selected research task (2026-09-09).
+
+## Current frontier
+
+The complete packet has been read. The seventeen-matrix and nine-rank-two
+finite gate passes two implementations; report:
+`notes/2026-09-09-c1133-finite-audit.md`. A new framing-source Proposition 2.1
+is refuted in rank three by two exact witnesses, including distinct nonunit
+monodromy; this does not refute the packet's rank-two construction. Report:
+`notes/2026-09-09-c1133-framing-source-audit.md`.
+The fixed-base injection proof and downstream audit are written in
+`notes/2026-09-09-c1133-fixed-base-proof.md`.
+
+Next finish the all-family geometric/source obligations and the complete
+literature audit. Current coverage, precise access gaps, source read-depth
+register and citation sets:
+`notes/2026-09-09-c1133-literature-audit.md`.
+No global novelty verdict or manuscript promotion has passed. Review of
+manuscript upgrades and hierarchy remains after these gates.
 
 ## Objective and order
 
@@ -27,8 +45,8 @@ accepted conclusion. This task does not close C978 or C956.
 - SHA-256: `3d5c0899977f7a57b9c8cd74ac20b8b481453f926581e8506248a30123f8b75b`.
 - Packet baseline: `cubic-stabilization-m1`, revision `b156ec6`;
   establish its correspondence to the current authority before using edit instructions.
-- Intake read scope: reading map, Parts I–II and XI–XII. The complete proof and
-  embedded checker remain to be audited; copying the packet certifies no claim.
+- The complete packet has now been read and its embedded checker replayed.
+  Accepted finite checks and remaining geometric obligations are separated above.
 - Proposed core: numerical classification of all seventeen Picard-rank-one Fano
   families after one stabilization; rational Hodge conservation for the nine
   detected families; very-general cubic/quartic cancellation; bounded-degree

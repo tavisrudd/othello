@@ -1,0 +1,518 @@
+{
+  "external_full_text_count": 0,
+  "sources": [
+    {
+      "access": {
+        "bytes": 1203210,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2307.13555.pdf",
+        "sha256": "c16f56b283863322df04dadaeb0780889abd67a664f56a74fea39bc7ba8a934b",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2307.13555.txt",
+        "url": "https://arxiv.org/pdf/2307.13555"
+      },
+      "key": "arXiv:2307.13555",
+      "read_depth": "partial",
+      "read_scope": "v3; introduction lines 1\u201320; Remark 2.3 lines 828\u2013865; Theorem 5.18 and opening of 5.8 lines 5622\u20135760. Other search hits located but not treated as read.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Quantum cohomology of blowups",
+      "version_in_cached_header": "arXiv:2307.13555v3 [math.AG] 4 Feb 2025"
+    },
+    {
+      "access": {
+        "bytes": 819521,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2307.03696.pdf",
+        "sha256": "5139f8e0c9d46f8ccb8cb415396a0fb1fb357719b7dcfbca46234a9735b57624",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2307.03696.txt",
+        "url": "https://arxiv.org/pdf/2307.03696"
+      },
+      "key": "arXiv:2307.03696",
+      "read_depth": "partial",
+      "read_scope": "v4; header; Theorem 5.1, Remarks 5.2\u20135.4 and opening of 5.3, extraction lines 2338\u20132465.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Quantum cohomology of projective bundles",
+      "version_in_cached_header": "arXiv:2307.03696v4 [math.AG] 31 Jan 2026"
+    },
+    {
+      "access": {
+        "bytes": 489078,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2604.10028.pdf",
+        "sha256": "0114923576b2ec3a78fc346fd9f61eb65cfe63f8cc7087881d11626cdb9883c3",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2604.10028.txt",
+        "url": "https://arxiv.org/pdf/2604.10028"
+      },
+      "key": "arXiv:2604.10028",
+      "read_depth": "partial",
+      "read_scope": "v2; introduction and notation lines 1\u2013140; Section 3 through Proposition 8 and most of Lemma 10, lines 520\u2013740 and 750\u2013870. Not full text.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Notes on the decomposition theorem for blowups",
+      "version_in_cached_header": "arXiv:2604.10028v2 [math.AG] 19 Apr 2026"
+    },
+    {
+      "access": {
+        "bytes": 1443923,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2508.05105.pdf",
+        "sha256": "2c5c9f0a2f9eaf230605eaf844c3b7d08e0181e6dbc921153156a071d616ff64",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2508.05105.txt",
+        "url": "https://arxiv.org/pdf/2508.05105"
+      },
+      "key": "arXiv:2508.05105",
+      "read_depth": "partial",
+      "read_scope": "v2 cache; Sections 4.3 and opening of 5.1 (3710\u20133795), fixed-locus definitions and 5.2.2 (3900\u20133985), 5.2.5\u20135.2.6 (4366\u20134430).",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Birational Invariants from Hodge Structures and Quantum Multiplication",
+      "version_in_cached_header": "arXiv:2508.05105v2 [math.AG] 6 Mar 2026"
+    },
+    {
+      "access": {
+        "bytes": 300695,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_math_0510287.pdf",
+        "sha256": "eae5ffa17114b5b05f932aa257d80c41ecaaaf798fd51f2324eb572a3f0d62f8",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_math_0510287.txt",
+        "url": "https://arxiv.org/pdf/math/0510287"
+      },
+      "key": "arXiv:math/0510287",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Classification Problems and Mirror Duality",
+      "version_in_cached_header": "arXiv:math/0510287v1 [math.AG] 13 Oct 2005"
+    },
+    {
+      "access": {
+        "bytes": 213714,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_math_0410327.pdf",
+        "sha256": "39c13194bcc63073d38f403a739f403028c3a5516ba72934ee03ba99179fbde2",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_math_0410327.txt",
+        "url": "https://arxiv.org/pdf/math/0410327"
+      },
+      "key": "arXiv:math/0410327",
+      "read_depth": "partial",
+      "read_scope": "Theorem 6.1.1 and start of proof, extraction lines 530\u2013580.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Gromov-Witten invariants of Fano threefolds of genera 6 and 8",
+      "version_in_cached_header": "arXiv:math/0410327v4 [math.AG] 7 Jan 2007"
+    },
+    {
+      "access": {
+        "bytes": 258222,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_math_0507232.pdf",
+        "sha256": "62e3e974bbddb580acade0728bf6513076c4548c15c3cf885c809f6eb8052e0c",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_math_0507232.txt",
+        "url": "https://arxiv.org/pdf/math/0507232v3"
+      },
+      "key": "arXiv:math/0507232",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Quantum cohomology of smooth complete intersections in weighted projective spaces and singular toric varieties",
+      "version_in_cached_header": "arXiv:math/0507232v3 [math.AG] 25 Jul 2007"
+    },
+    {
+      "access": {
+        "bytes": 568186,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2606.17884.pdf",
+        "sha256": "d346bb0300a78e766386519b90dec93120f76e0f67c6ac22341c4eaead66762b",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2606.17884.txt",
+        "url": "https://arxiv.org/pdf/2606.17884"
+      },
+      "key": "arXiv:2606.17884",
+      "read_depth": "partial",
+      "read_scope": "Section 10 introduction and first part of table, lines 1843\u20132005; separately lines 2390\u20132455 (Verra-family passage, not Fano deformation evidence).",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Naive atoms of blowups: examples",
+      "version_in_cached_header": "arXiv:2606.17884v2 [math.AG] 19 Jun 2026"
+    },
+    {
+      "access": {
+        "bytes": 657907,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2605.29143.pdf",
+        "sha256": "5d5f5b9858e795e2a376e2bbf57a6d6b393995ab0642f0498add69e9f2e438c3",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2605.29143.txt",
+        "url": "https://arxiv.org/pdf/2605.29143"
+      },
+      "key": "arXiv:2605.29143",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "The quartic threefold is symplectically irrational",
+      "version_in_cached_header": "arXiv:2605.29143v2 [math.SG] 9 Jun 2026"
+    },
+    {
+      "access": {
+        "bytes": 277560,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2608.01577.pdf",
+        "sha256": "06bfccf9b67ed8cf224f5e7cc6ba2088271577787e2f8e0dd895c0ef3b404a9e",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2608.01577.txt",
+        "url": "https://arxiv.org/pdf/2608.01577"
+      },
+      "key": "arXiv:2608.01577",
+      "read_depth": "partial",
+      "read_scope": "v1; abstract, introduction and beginning of Section 2, lines 1\u2013100.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "The cubic threefold is symplectically irrational",
+      "version_in_cached_header": "arXiv:2608.01577v1 [math.SG] 3 Aug 2026"
+    },
+    {
+      "access": {
+        "bytes": 789442,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_1911.08949.pdf",
+        "sha256": "0cdc0dd962fb6af047976dea0976566d9a256b801842aad388133cc677b9e203",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_1911.08949.txt",
+        "url": "https://arxiv.org/pdf/1911.08949"
+      },
+      "key": "arXiv:1911.08949",
+      "read_depth": "partial",
+      "read_scope": "v3; contents, Section 1.1 and opening of 1.2, lines 1\u2013150.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Rationality of Fano threefolds over non-closed fields",
+      "version_in_cached_header": "arXiv:1911.08949v3 [math.AG] 27 Apr 2021"
+    },
+    {
+      "access": {
+        "bytes": 232941,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_1601.07074.pdf",
+        "sha256": "6f1cca9679110e2fdc0393e70dfd818f7543ce04157798b60e4c8bded26fc894",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_1601.07074.txt",
+        "url": "https://arxiv.org/pdf/1601.07074"
+      },
+      "key": "arXiv:1601.07074",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "On stable rationality of Fano threefolds and del Pezzo fibrations",
+      "version_in_cached_header": "arXiv:1601.07074v1 [math.AG] 26 Jan 2016"
+    },
+    {
+      "access": {
+        "bytes": 626758,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2001.03485.pdf",
+        "sha256": "778fe5c9baa0076e3bf425b3dc7872a98ae48911b3be7295868c281221bf468c",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2001.03485.txt",
+        "url": "https://arxiv.org/pdf/2001.03485v2"
+      },
+      "key": "arXiv:2001.03485",
+      "read_depth": "partial",
+      "read_scope": "v2; Theorem 3.7 and discussion including ordinary/special strata, lines 565\u2013610.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Gushel-Mukai varieties",
+      "version_in_cached_header": "arXiv:2001.03485v2 [math.AG] 1 Jul 2025"
+    },
+    {
+      "access": {
+        "bytes": 130143,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_alg-geom_9501008.pdf",
+        "sha256": "9d022796aefa01fd601820e415c5462bdfc255b3b4fe158af64b51f7bf0a83e3",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_alg-geom_9501008.txt",
+        "url": "https://arxiv.org/pdf/alg-geom/9501008"
+      },
+      "key": "arXiv:alg-geom/9501008",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Quantum cohomology of complete intersections",
+      "version_in_cached_header": "arXiv:alg-geom/9501008v1 17 Jan 1995"
+    },
+    {
+      "access": {
+        "bytes": 346339,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_1411.4553.pdf",
+        "sha256": "7a4a81f95091e19c4eb9aa6b82fb993f61ac365090c1435eed42c9c141a3e818",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_1411.4553.txt",
+        "url": "https://arxiv.org/abs/1411.4553"
+      },
+      "key": "arXiv:1411.4553",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Regular F-manifolds: initial conditions and Frobenius metrics",
+      "version_in_cached_header": "arXiv:1411.4553v2 [math.DG] 20 Jul 2015"
+    },
+    {
+      "access": {
+        "bytes": 963692,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2411.02266.pdf",
+        "sha256": "a11a093f790890804c7d4f7559b30ed2a6da87811de46f2aa0d29026e343e6bd",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2411.02266.txt",
+        "url": "https://arxiv.org/pdf/2411.02266"
+      },
+      "key": "arXiv:2411.02266",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Decomposition and framing of F-bundles and applications to quantum cohomology",
+      "version_in_cached_header": "arXiv:2411.02266v2 [math.AG] 28 Mar 2025"
+    },
+    {
+      "access": {
+        "bytes": 446146,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2004.09310.pdf",
+        "sha256": "8e15cfb5439d54aac3563fdd563bc7d96974abe27ef34f4a88bdcd993966ac6a",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2004.09310.txt",
+        "url": "https://arxiv.org/pdf/2004.09310v3"
+      },
+      "key": "arXiv:2004.09310",
+      "read_depth": "partial",
+      "read_scope": "v3; rational generic Torelli formulation, Theorem 0.2 and Remarks 0.1\u20130.4, lines 35\u2013105; official arXiv metadata/history.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Schiffer variations and the generic Torelli theorem for hypersurfaces",
+      "version_in_cached_header": "arXiv:2004.09310v3 [math.AG] 30 May 2021"
+    },
+    {
+      "access": {
+        "bytes": 336940,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_1209.3653.pdf",
+        "sha256": "ee06d6d046ed402746a95b697d94213f2daaebb5662bc9d8ec57287f2ebd515e",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_1209.3653.txt",
+        "url": "https://arxiv.org/pdf/1209.3653v4"
+      },
+      "key": "arXiv:1209.3653",
+      "read_depth": "partial",
+      "read_scope": "v4; Theorem 5.1 and complete proof, lines 1103\u20131185; correction notice located; official arXiv metadata/history.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Families of abelian varieties with many isogenous fibres",
+      "version_in_cached_header": "arXiv:1209.3653v4 [math.AG] 13 Sep 2016"
+    },
+    {
+      "access": {
+        "bytes": 263313,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_1005.2131.pdf",
+        "sha256": "68d98147d7d06de410a7dfd29c95efb0653554231f9e1b507591751d8e71fe64",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_1005.2131.txt",
+        "url": "https://arxiv.org/pdf/1005.2131v4"
+      },
+      "key": "arXiv:1005.2131",
+      "read_depth": "partial",
+      "read_scope": "v4; Theorem B and introductory arithmetic discussion, lines 35\u2013100.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Arithmetic Torelli maps for cubic surfaces and threefolds",
+      "version_in_cached_header": "arXiv:1005.2131v4 [math.AG] 3 Oct 2012"
+    },
+    {
+      "access": {
+        "bytes": 217678,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2412.01676.pdf",
+        "sha256": "99440bed485527e3d13ee35b1eee137194b519f2519145a041d6e609ad21bf32",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2412.01676.txt",
+        "url": "https://arxiv.org/pdf/2412.01676v1"
+      },
+      "key": "arXiv:2412.01676",
+      "read_depth": "partial",
+      "read_scope": "v1; introduction and Theorem 1.1, lines 1\u201360. Secondary recollection of Narasimhan\u2013Nori, not a primary proof of that theorem.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Counting polarizations on abelian varieties with group action",
+      "version_in_cached_header": "arXiv:2412.01676v1 [math.AG] 2 Dec 2024"
+    },
+    {
+      "access": {
+        "bytes": 281448,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_0806.0173.pdf",
+        "sha256": "4b6f0ddf962a05eb88864ea5d6c03b10e3b3229069aad5a9cf46590c1caf6f10",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_0806.0173.txt",
+        "url": "https://arxiv.org/pdf/0806.0173"
+      },
+      "key": "arXiv:0806.0173",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Motives and representability of algebraic cycles on threefolds over a field",
+      "version_in_cached_header": "arXiv:0806.0173v3 [math.AG] 12 Nov 2012"
+    },
+    {
+      "access": {
+        "bytes": 234216,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_1705.04063.pdf",
+        "sha256": "4c4796eae69c8d216c3f8d5172b3063d78ea25f382378e6ba1c12ad465de3a6d",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_1705.04063.txt",
+        "url": "https://arxiv.org/pdf/1705.04063v4"
+      },
+      "key": "arXiv:1705.04063",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Motives of isogenous K3 surfaces",
+      "version_in_cached_header": "arXiv:1705.04063v4 [math.AG] 14 Mar 2018"
+    },
+    {
+      "access": {
+        "bytes": 432122,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2605.30875.pdf",
+        "sha256": "45b1e2cc132e1b2d603af7a163519c36f6568e2747c0b8cb49e44aeb70a969c6",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2605.30875.txt",
+        "url": "https://arxiv.org/pdf/2605.30875"
+      },
+      "key": "arXiv:2605.30875",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Cylinders in Fano threefolds of genus 9 and 10",
+      "version_in_cached_header": "arXiv:2605.30875v1 [math.AG] 29 May 2026"
+    },
+    {
+      "access": {
+        "bytes": 1009594,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2509.15831.pdf",
+        "sha256": "cb4260a1f7e1407e9dda5c090d82f0cef99bfb7c704363c518d00c36b8614119",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2509.15831.txt",
+        "url": "https://arxiv.org/pdf/2509.15831"
+      },
+      "key": "arXiv:2509.15831",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Atoms meet symbols",
+      "version_in_cached_header": "arXiv:2509.15831v4 [math.AG] 1 Apr 2026"
+    },
+    {
+      "access": {
+        "bytes": 312528,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2607.26718.pdf",
+        "sha256": "bb1ee656bd55008a5403e057d0856e65c81b100f2fa07d1c90e184766dd0f407",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2607.26718.txt",
+        "url": "https://arxiv.org/pdf/2607.26718"
+      },
+      "key": "arXiv:2607.26718",
+      "read_depth": "partial",
+      "read_scope": "v1; abstract, introduction and beginning of Section 2, lines 1\u2013170.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "An atomic criterion for irrationality without quantum computations",
+      "version_in_cached_header": "arXiv:2607.26718v1 [math.AG] 29 Jul 2026"
+    },
+    {
+      "access": {
+        "bytes": 370140,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2607.22074.pdf",
+        "sha256": "2986902b3281489b47c6a36a63e356b8265910542d09ac69c7239ffc9f615ec9",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2607.22074.txt",
+        "url": "https://arxiv.org/pdf/2607.22074v1"
+      },
+      "key": "arXiv:2607.22074",
+      "read_depth": "partial",
+      "read_scope": "v1; introduction, Section 2 including Proposition 2.1 and proof, opening of Section 3 through part of Proposition 3.1 proof, lines 1\u2013415.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Moduli of atoms of complex projective varieties",
+      "version_in_cached_header": "arXiv:2607.22074v1 [math.AG] 24 Jul 2026"
+    },
+    {
+      "access": {
+        "bytes": 566850,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2510.21222.pdf",
+        "sha256": "bca35bdf852a96a29da970dee8d245c713c3e53932655e395fca035eb4961d83",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2510.21222.txt",
+        "url": "https://arxiv.org/pdf/2510.21222v1"
+      },
+      "key": "arXiv:2510.21222",
+      "read_depth": "partial",
+      "read_scope": "v1; introduction including Theorems 1.2 and 1.4, examples and scope, lines 1\u2013170.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Fibers of Landau-Ginzburg models and rationality",
+      "version_in_cached_header": "arXiv:2510.21222v1 [math.AG] 24 Oct 2025"
+    },
+    {
+      "access": {
+        "bytes": 363649,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2511.07101.pdf",
+        "sha256": "e81f528d49569b4af9f86f27c4f4abcfc9c204923451eeda54c690e5424aee8b",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2511.07101.txt",
+        "url": "https://arxiv.org/pdf/2511.07101"
+      },
+      "key": "arXiv:2511.07101",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Cache bibliographic metadata and Semantic Scholar forward-citation abstract; no primary-text judgment yet.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Intermediate Jacobians and Burnside invariants",
+      "version_in_cached_header": "arXiv:2511.07101v2 [math.AG] 23 Dec 2025"
+    },
+    {
+      "access": {
+        "bytes": 419272,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2509.07407.pdf",
+        "sha256": "f2e5c6e92b2a7edf6cd436d94edd88d29f866eee924d64d96d4c137ca8a9deb5",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2509.07407.txt",
+        "url": "https://arxiv.org/pdf/2509.07407"
+      },
+      "key": "arXiv:2509.07407",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Cache bibliographic metadata and Semantic Scholar forward-citation abstract; no primary-text judgment yet.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "The quantum D-module of product varieties",
+      "version_in_cached_header": "arXiv:2509.07407v1 [math.AG] 9 Sep 2025"
+    },
+    {
+      "access": {
+        "bytes": 693474,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2608.27441.pdf",
+        "sha256": "01e75b145094754f2f77ceb46c35d36343cb761f563c3ee20f344fc90fe0d78c",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2608.27441.txt",
+        "url": "https://arxiv.org/pdf/2608.27441"
+      },
+      "key": "arXiv:2608.27441",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Cache bibliographic metadata and Semantic Scholar forward-citation abstract; no primary-text judgment yet.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Towards the Global Torelli Theorem",
+      "version_in_cached_header": "arXiv:2608.27441v1 [math.AG] 27 Aug 2026"
+    },
+    {
+      "access": {
+        "bytes": 332419,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2603.17487.pdf",
+        "sha256": "6eb4d6f338907e41d5999dbd2901d9dd713aedb7e954997648e0921772d36530",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2603.17487.txt",
+        "url": "https://arxiv.org/pdf/2603.17487"
+      },
+      "key": "arXiv:2603.17487",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
+      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "title": "Quantum cohomology and irrationality of Gushel-Mukai fourfolds",
+      "version_in_cached_header": "arXiv:2603.17487v2 [math.AG] 27 May 2026"
+    },
+    {
+      "access": {
+        "failed_urls": [
+          "https://repository.ias.ac.in/36463/1/36463.pdf",
+          "https://link.springer.com/content/pdf/10.1007/BF02837283.pdf"
+        ],
+        "url": "https://link.springer.com/article/10.1007/BF02837283"
+      },
+      "key": "10.1007/BF02837283",
+      "read_depth": "secondary only",
+      "read_scope": "Recollection in arXiv:2412.01676v1 introduction (read partial); original DOI metadata and search excerpt consulted. Primary PDF not read: IAS direct GET returned 404, publisher PDF returned non-PDF bytes, browser opened metadata but page screenshot failed with cache miss.",
+      "secondary_source": "arXiv:2412.01676",
+      "title": "Polarisations on an abelian variety",
+      "version_in_cached_header": "1981 original not read"
+    },
+    {
+      "access": {
+        "method": "user-supplied packet only"
+      },
+      "key": "10.1007/s00209-025-03745-3",
+      "read_depth": "secondary only",
+      "read_scope": "Named as an intended input in the author-supplied packet, which was read in full; primary text not yet consulted in C1133. No source-level verdict.",
+      "secondary_source": "notes/cubic-threefolds-tasks/c1133-m1-upgrade-proof-packet.md, Part XI; full text",
+      "title": "Special subvarieties in the locus of intermediate Jacobians of cubic threefolds",
+      "version_in_cached_header": "not accessed"
+    },
+    {
+      "access": {
+        "method": "user-supplied packet only"
+      },
+      "key": "packet:WF",
+      "read_depth": "secondary only",
+      "read_scope": "Named as an intended input in the author-supplied packet, which was read in full; primary text not yet consulted in C1133. No source-level verdict.",
+      "secondary_source": "notes/cubic-threefolds-tasks/c1133-m1-upgrade-proof-packet.md, Part XI; full text",
+      "title": "Torification and factorization of birational maps",
+      "version_in_cached_header": "not accessed"
+    },
+    {
+      "access": {
+        "method": "user-supplied packet only"
+      },
+      "key": "packet:Bit",
+      "read_depth": "secondary only",
+      "read_scope": "Named as an intended input in the author-supplied packet, which was read in full; primary text not yet consulted in C1133. No source-level verdict.",
+      "secondary_source": "notes/cubic-threefolds-tasks/c1133-m1-upgrade-proof-packet.md, Part XI; full text",
+      "title": "The universal Euler characteristic for varieties of characteristic zero",
+      "version_in_cached_header": "not accessed"
+    }
+  ]
+}

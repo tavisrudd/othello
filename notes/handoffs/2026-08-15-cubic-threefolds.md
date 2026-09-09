@@ -38,11 +38,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C1133 — queued, author-selected next (2026-09-09):** solidify the supplied
-  m=1 major-upgrade mathematics and complete the literature audit before reviewing
-  manuscript upgrades and theorem hierarchy with the author. The exact packet is
-  preserved; proposed claims remain unvalidated. Card:
-  `../cubic-threefolds-tasks/c1133-m1-major-upgrade-audit.md`.
+- **C1133 — active, author-selected (2026-09-09):** the finite Fano matrix and
+  rank-two residue gate passes independent replay; the fixed-base adaptation is
+  written, and a rank-three framing-source proposition has exact counterexamples.
+  Finish geometric/source validation and complete literature coverage before
+  manuscript upgrades and hierarchy review. No global novelty verdict yet. Card:
+  `../cubic-threefolds-tasks/c1133-m1-major-upgrade-audit.md`; audit:
+  `../2026-09-09-c1133-literature-audit.md`.
 
 - **Framed companion specialization boundary (2026-09-08):** the independently
   checked F1 example refutes unrestricted T. The companion now restricts T
