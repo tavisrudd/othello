@@ -75,6 +75,10 @@ payloads remain unchanged. FT10 is still inspect-only; default scheduling execut
 GPU checkpoint batches. Next: CampaignSession/composition integration and the
 private glossary reconciliation. Report:
 `notes/2026-09-08-c1130-scheduling-and-direct-inputs.md`.
+Private `6d81ee2` / core `f9faafd` add Fit target and Optimize capacity, including
+reductions for scheduling and recovery. Exact native/WASM and bounded-search
+status gates pass; retained forward native performance remains within noise.
+Report: `notes/2026-09-08-c1130-fit-and-optimize-capacity.md`.
 Preserve public-core loading of separately compiled/obfuscated private packages;
 canonical WASM engine plus extensions, not a mandatory private assembly build.
 Start with a concrete contract over composition, compiled LRC queries and QEC;

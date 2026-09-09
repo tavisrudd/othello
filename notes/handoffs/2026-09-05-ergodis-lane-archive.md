@@ -284,3 +284,11 @@ allocation imports, direct capacity grips/target sliders, shared hover/click pin
 and QEC double-click parity. Native and actual browser gates pass; LRC/QEC
 accepted payloads preserved. Report: ../2026-09-08-c1130-scheduling-and-direct-inputs.md.
 Full C1130 remains open for CampaignSession/composition integration and glossary.
+
+## 2026-09-08 — C1130 capacity fitting and overprovisioning
+
+Core `f9faafd`, private `6d81ee2`: generic scheduling Fit/Optimize readouts,
+recovery reductions using its existing native design query, explicit proposal/apply,
+and bounded optimality status. Native/browser/performance gates pass with retained
+negative and accepted variants. Report: ../2026-09-08-c1130-fit-and-optimize-capacity.md.
+Full C1130 remains open.
