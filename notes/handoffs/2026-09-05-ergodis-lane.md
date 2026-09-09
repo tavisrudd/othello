@@ -88,12 +88,15 @@ User-prioritized web expansion now supplies 60/600-repair and 24/72-job workload
 plus a live 81-point WASM capacity surface with weighted CPU/GPU objectives and
 partial stop. Browser/independent scheduling gates pass; native payloads unchanged.
 Report: `notes/2026-09-08-c1130-larger-workloads-live-surfaces.md`.
-Evolve progress observer/trace viewer is available at 8769/8770 `/evolve`
-(private `a9e4793`). Actual campaign has discovery counters but no admitted solver
-reduction trace. The requested live reduction/rate demonstration remains open:
-next bind an admitted solver consumer and its measured baseline/progress events,
-then expose Evolve execution in WASM. Report:
-`notes/2026-09-08-c1130-evolve-progress-view.md`.
+Evolve now runs a real bounded WASM capacity-reduction comparison at ports
+8769/8770 `/evolve`, bound to `0.0.0.0` on user request. Core `b5e2210` exposes
+the shared ranked proposal driver; private `2046e91` adds independently checked
+resource bounds and measured baseline/comparison traces. The 72-job grid removes
+78/289 configurations (42 seed, 36 evolved), leaving 211 forward solves. These
+are capacity configurations, not internal solver states; timings vary. Browser,
+checker oracle, receipt replay and core gates pass. Campaign integration and
+broader reduction families remain open. Report:
+`notes/2026-09-08-c1130-wasm-evolve-reductions.md`.
 Preserve public-core loading of separately compiled/obfuscated private packages;
 canonical WASM engine plus extensions, not a mandatory private assembly build.
 Start with a concrete contract over composition, compiled LRC queries and QEC;

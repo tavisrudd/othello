@@ -320,3 +320,10 @@ cascade and optional baseline payoff. Node/browser tests pass. No real admitted
 solver-state trace exists for the current corpus campaign; full live demonstration
 and WASM Evolve binding remain open. Report:
 `notes/2026-09-08-c1130-evolve-progress-view.md`.
+
+## 2026-09-08 — runnable WASM Evolve
+
+Core b5e2210 / private 2046e91 deliver checked capacity-grid reductions and live
+baseline comparisons. Supersedes the observer-only frontier. Report:
+`../2026-09-08-c1130-wasm-evolve-reductions.md`. Preview bind changed to 0.0.0.0
+on user request; C1130 remains open.
