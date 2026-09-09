@@ -13,6 +13,10 @@ full native performance acceptance remain open. Results:
 Browser application slice now runs full supplied QEC and LRC queries through
 those modules, private `5e22031`. CampaignSession/main-console integration is
 still open: `2026-09-08-c1130-application-wasm-workspace.md`.
+Recovery/QEC/resource-scheduling modules and Fit/Optimize are now delivered.
+The private glossary pass and campaign integration review are complete:
+`2026-09-08-c1130-campaign-integration-review.md`. Portable application run
+recording, campaign control integration and labelled composition remain open.
 
 ## Context prerequisites
 

@@ -292,3 +292,14 @@ recovery reductions using its existing native design query, explicit proposal/ap
 and bounded optimality status. Native/browser/performance gates pass with retained
 negative and accepted variants. Report: ../2026-09-08-c1130-fit-and-optimize-capacity.md.
 Full C1130 remains open.
+
+## 2026-09-08 — C1130 private glossary and campaign integration review
+
+Private terminology reconciliation now maps the delivered recovery/QEC/scheduling
+module ABI and Fit/Optimize semantics, including spaces/transports, answer and
+preservation contracts, and stale shipping-glossary implementation labels. Public
+docs are unchanged. Source review separates module loading from CampaignSession
+and portable run history, and keeps labelled composition explicitly open. Report:
+`notes/2026-09-08-c1130-campaign-integration-review.md`. No executable changes,
+provider rebuild, preview restart or new performance claim. Next is portable
+application run recording/snapshot reopening, followed by campaign control.

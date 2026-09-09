@@ -79,6 +79,11 @@ Private `6d81ee2` / core `f9faafd` add Fit target and Optimize capacity, includi
 reductions for scheduling and recovery. Exact native/WASM and bounded-search
 status gates pass; retained forward native performance remains within noise.
 Report: `notes/2026-09-08-c1130-fit-and-optimize-capacity.md`.
+Private glossary reconciliation and campaign-boundary review are complete:
+`notes/2026-09-08-c1130-campaign-integration-review.md`. Next: record application
+queries/results through existing portable run records with snapshot-only reopening,
+then attach the execution boundary to campaign control. Labelled composition is
+still unbound; three application modules do not close that original family gate.
 Preserve public-core loading of separately compiled/obfuscated private packages;
 canonical WASM engine plus extensions, not a mandatory private assembly build.
 Start with a concrete contract over composition, compiled LRC queries and QEC;

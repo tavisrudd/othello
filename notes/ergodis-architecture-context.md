@@ -63,8 +63,12 @@ plans across workers. Refine shareable immutable plans and owned executor worksp
 before ABI adoption; retain specialized direct native APIs. Evidence and limits:
 `2026-09-08-c1130-module-loading-results.md`.
 Private browser Application subclasses now bind QEC/LRC to that module host,
-with query reuse and loaded-source gates. They are cold frontend adapters, not
-a generalized CampaignSession: `2026-09-08-c1130-application-wasm-workspace.md`.
+with query reuse and loaded-source gates; resource scheduling and capacity
+Fit/Optimize now use the same loading boundary. They are cold frontend adapters,
+not a generalized CampaignSession. Current integration boundary and acceptance
+sequence: `2026-09-08-c1130-campaign-integration-review.md`. The private terminology
+review has been reconciled against these three application modules; labelled
+composition remains a separate unclosed extraction gate.
 
 ## Existing abstractions: reuse, with their limits
 
@@ -72,7 +76,7 @@ a generalized CampaignSession: `2026-09-08-c1130-application-wasm-workspace.md`.
 |---|---|
 | Portable scalar language | C1085 extracted parsing/lowering/evaluation and bounded codecs; compilation for WASM is not automatically a JS binding. |
 | CampaignSession | C1087/C1088 shared service and browser Worker; its CampaignSpec remains the finite GF(2) restriction pilot on native too. It is not the universal mathematical model. |
-| Experimental module host | C1130 core ergodis-modules and module Worker load independent private LRC/QEC providers; source-isolated native and actual browser transcripts pass. Coarse batching amortizes boundary cost; plan sharing, third-family integration, updates/checkpoints and production ABI adoption remain open. |
+| Experimental module host | C1130 core ergodis-modules and module Worker load independent private LRC/QEC providers; source-isolated native and actual browser transcripts pass. Coarse batching amortizes boundary cost; plan sharing, labelled composition, campaign integration, updates/checkpoints and production ABI adoption remain open. |
 | OpenProblem / RetainedTree | Private `src/open_problem.rs`: context-bearing compiled problem, composition/identity/readout core with optional NormalizedProblem, TensorProblem and ReconstructProblem. Matrix, function, monoid-index and semiring-window adapters exist. This is retained composition, not every solver or a complete host lifecycle. |
 | RepairModel → RepairPlan → BudgetQuery | C1093 private LRC adapter: compile once, admit budget changes, count/threshold/witness readouts. Fixed known repair family; no universal recovery schema. |
 | CompositionShape | C1094 core structural geometry/budget admission; does not validate algebra, source lowering or query preservation. |
