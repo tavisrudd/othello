@@ -66,15 +66,22 @@ byte-identical native/browser bundles, and application save/reopen/explicit repl
 remain inert unverified records. Actual browser bundles agree with native typed
 replays; this is execution equivalence, not independent proof verification.
 
-Next: checked residual bounds within active CSS roots, with paired native/WASM
-continuation admission and a native performance gate (private ADR below); paired
+Next: general Evolve producers and zone-aware admission for checked CSS residual
+bounds; resolve disabled two-worker native timing before changing native defaults.
+Opt-in available-neighborhood packing now has a shared native/WASM provider
+operation (core `8b4b944`, private `156ee36`); browser CSS races apply it equally
+to both arms, with source tables
+compiled once per Plan before race timing. The cached-cover utility guard remains
+a private prototype. See `2026-09-09-css-residual-evaluation.md` in the private
+interface-review directory for retained evidence and validation limits. Paired
 campaign updates/checkpoints and application certificate checkers remain open. P2 retained labelled
 composition/fields remains the contrasting-family gate; P3 inventory, P4 portable
 performance experiments, P5 continuation/storage and P6 complete conformance.
 Private current evidence/design: `analysis/interface-review/application-records.md`,
 `provider-readout-contracts.md`, `capability-matrix.json`, and
 `adr-css-residual-reductions.md`. Generic fixed-coordinate discovery and offline
-residual-bound spikes are private `3408bb1`, not active-kernel pruning. Small
+residual-bound spikes are private `3408bb1`; the newer packing evaluator is a
+built-in checked bound, not an Evolve-synthesized theorem. Small
 50/128-qubit examples now live in Applications at `/code-distance`.
 
 Native CLI/control/runtime fragmentation must converge in these same phases.
