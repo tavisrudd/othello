@@ -51,7 +51,11 @@ and hashed baseline in `notes/2026-09-09-c1133-lean-baseline.json`.
 The first formal matrix-series transport slice now passes guarded kernel and
 320-terminal axiom gates; report `notes/2026-09-09-c1133-lean-transport-progress.md`.
 Exact residue conjugacy is derived from regular comparisons, including resonance.
-No geometric coverage is promoted. Next formal slice: universal residue reduction. The old exponent-class
+The parameterized finite residue calculation now passes a 322-terminal audit,
+including the four discriminants and actual characteristic polynomials; report
+`notes/2026-09-09-c1133-lean-parameterized-progress.md`. No geometric coverage is
+promoted. Next: full-gauge bridge, all seventeen matrix certificates and the
+super-primary selectors. The old exponent-class
 marker misses the discriminant-one cases; genera 2–5 instead use the main
 rank-three odd selector, independent of optional rank-three residue theory.
 The zbMATH query now has 274/274 distinct records title-screened, with both

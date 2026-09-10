@@ -1451,6 +1451,16 @@
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankTwo_modifiedResidueDiscriminant_invariant_under_regular_comparison",
       "reason": "Proves exact modified-residue discriminant transport from regular horizontal comparison series and horizontal nondegenerate pairings. No current manuscript claim is assigned this terminal: the constant-spectrum statement additionally needs geometric factors, coefficient-domain transport and common-constant-field descent, which this formal matrix statement does not construct.",
       "terminal_digest": "b72dde7df32e86ed0b5e2330735add3fe0cc69c9b5b092c44d44e5afc8baaac6"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.parameterizedRankTwo_finiteReduction",
+      "reason": "Finite coefficient identities for an explicit parameterized four-dimensional matrix system. No current manuscript claim states this universal calculation; geometric input identification and extension to a complete normalized formal gauge remain outside the terminal.",
+      "terminal_digest": "9cdd5f08f536a242954639bda63b3dc067789e94b4f4b62111c6d252870328bd"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.parameterizedRankTwo_fourDiscriminants",
+      "reason": "Exact rational specializations of the parameterized modified residue, including discriminant one. No geometric Fano family identification or one-stabilization classification is proved by these evaluations, and no current manuscript claim is discharged.",
+      "terminal_digest": "6c3100899f1cea4915a4a24179acba48a025d1a8e8cdaf815bda798a49b01aad"
     }
   ]
 }

@@ -11,7 +11,11 @@ was performed for this map.
 The first L1 matrix-series transport slice is now proved and guarded-audited;
 see `2026-09-09-c1133-lean-transport-progress.md`. The baseline below is the
 pre-implementation snapshot. L1 still lacks the separate sheaf construction
-and general coefficient-extension interfaces; L2–L8 remain as planned.
+and general coefficient-extension interfaces. L2 now has a kernel-checked
+parameterized finite-coefficient reduction, both characteristic polynomials,
+and four exact discriminants; see `2026-09-09-c1133-lean-parameterized-progress.md`.
+The complete formal-gauge bridge and seventeen-family certificate interface
+remain. L3–L8 remain as planned.
 
 ## Recommendation
 

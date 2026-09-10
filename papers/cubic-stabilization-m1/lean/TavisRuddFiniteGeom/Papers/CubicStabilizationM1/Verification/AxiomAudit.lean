@@ -328,3 +328,5 @@ currently exported by the reviewer interface.
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationM1.twoPrimaryHeart_smallStableSubspace_eq_bot
 
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankTwo_modifiedResidueDiscriminant_invariant_under_regular_comparison
+#print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationM1.parameterizedRankTwo_finiteReduction
+#print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationM1.parameterizedRankTwo_fourDiscriminants

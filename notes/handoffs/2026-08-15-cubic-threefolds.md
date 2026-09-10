@@ -53,7 +53,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Lean addition map: `../2026-09-09-c1133-lean-upgrade-map.md`; exact source
   baseline recorded. Formal rank-two comparison transport now passes guarded
   kernel and 320-terminal axiom checks: `../2026-09-09-c1133-lean-transport-progress.md`.
-  Next formal work: universal residue reduction;
+  Parameterized finite reduction and four discriminants now pass a 322-terminal
+  audit: `../2026-09-09-c1133-lean-parameterized-progress.md`.
+  Next formal work: full-gauge bridge and seventeen-matrix certificates;
   preserve resonant discriminant-one cases and the independent rank-three odd
   selector. Next audit work: exact sharpness/moduli imports and remaining
   novelty/citation coverage. Collaborator discussion is parked per author.

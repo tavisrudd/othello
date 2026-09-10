@@ -172,6 +172,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.AtomicElementaryModification",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.AtomicRankTwoFlatRigidity",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RankTwoLatticeTransport",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ParameterizedRankTwoResidue",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SylvesterOperator",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.BlockSylvesterSolvability",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.NormalizedSylvesterGauge",

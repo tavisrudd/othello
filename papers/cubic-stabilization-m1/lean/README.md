@@ -90,7 +90,7 @@ truncated Chern class arithmetic, the Betti numbers, the degree count placing th
 whole odd cohomology in that packet, and the constancy of rank on a connected
 component.
 
-Checked coverage snapshot: 67 claims; 14 absent; 26 fragmentary; 26 conditional; 1 complete; 320 reviewer terminals, of which 84 are machinery serving no current manuscript claim.
+Checked coverage snapshot: 67 claims; 14 absent; 26 fragmentary; 26 conditional; 1 complete; 322 reviewer terminals, of which 86 are machinery serving no current manuscript claim.
 
 The exact rank-two modified-residue discriminant is also preserved under
 regular horizontal comparisons and their regular inverses, with the
