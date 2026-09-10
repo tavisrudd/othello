@@ -55,6 +55,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   kernel and 320-terminal axiom checks: `../2026-09-09-c1133-lean-transport-progress.md`.
   Parameterized finite reduction and four discriminants now pass a 322-terminal
   audit: `../2026-09-09-c1133-lean-parameterized-progress.md`.
+  The first super-algebra lemmas pass a 324-terminal audit:
+  `../2026-09-09-c1133-lean-super-progress.md`.
   Next formal work: full-gauge bridge and seventeen-matrix certificates;
   preserve resonant discriminant-one cases and the independent rank-three odd
   selector. Next audit work: exact sharpness/moduli imports and remaining

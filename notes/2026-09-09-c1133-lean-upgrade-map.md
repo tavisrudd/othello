@@ -15,7 +15,10 @@ and general coefficient-extension interfaces. L2 now has a kernel-checked
 parameterized finite-coefficient reduction, both characteristic polynomials,
 and four exact discriminants; see `2026-09-09-c1133-lean-parameterized-progress.md`.
 The complete formal-gauge bridge and seventeen-family certificate interface
-remain. L3–L8 remain as planned.
+remain. The first L3 algebra lemmas now prove scalar-even odd vanishing and
+polynomial-identity transfer from the even part to the whole algebra; see
+`2026-09-09-c1133-lean-super-progress.md`. The remaining L3 construction and
+L4–L8 remain as planned.
 
 ## Recommendation
 

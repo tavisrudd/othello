@@ -321,3 +321,5 @@ TavisRuddFiniteGeom.Papers.CubicStabilizationM1.twoPrimaryHeart_smallStableSubsp
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankTwo_modifiedResidueDiscriminant_invariant_under_regular_comparison: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.parameterizedRankTwo_finiteReduction: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.parameterizedRankTwo_fourDiscriminants: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_scalarEven_odd_eq_bot: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_eulerPolynomial_transfers_from_even: propext, Classical.choice, Quot.sound

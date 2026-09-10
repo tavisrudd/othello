@@ -1,5 +1,6 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RankTwoLatticeTransport
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ParameterizedRankTwoResidue
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SuperRankOneVanishing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.Introduction
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.CategoricalOneStep
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.FormalConnections
@@ -95,5 +96,38 @@ theorem parameterizedRankTwo_fourDiscriminants :
       Quantum.residueDiscriminant (Quantum.parameterizedModifiedResidue (24 : ℚ) 60) = 4/9 ∧
       Quantum.residueDiscriminant (Quantum.parameterizedModifiedResidue (16 : ℚ) 32) = 0 :=
   Quantum.parameterizedModifiedResidue_fano_values
+
+/-- In an associative algebra whose even part is scalar, supercommutativity
+and a nondegenerate even Frobenius trace force the odd part to vanish. Scalar
+even part means explicitly that odd products are scalar and that scalars
+and odd elements span the entire algebra. The proof derives vanishing of odd
+products; it does not assume nondegeneracy of a restricted odd pairing. These
+are algebraic hypotheses, without a constructed geometric primary factor. -/
+theorem superPrimary_scalarEven_odd_eq_bot
+    {K A : Type*} [Field K] [CharZero K] [Ring A] [Algebra K A] [Nontrivial A]
+    {odd : Submodule K A}
+    (anticommute : ∀ x ∈ odd, ∀ y ∈ odd, x*y = -(y*x))
+    (scalarProduct : ∀ x ∈ odd, ∀ y ∈ odd, ∃ c : K, x*y = algebraMap K A c)
+    (spanning : ∀ y : A, ∃ (c : K) (v : A), v ∈ odd ∧ y = algebraMap K A c + v)
+    (trace : A →ₗ[K] K) (traceOdd : ∀ x ∈ odd, trace x = 0)
+    (nondegenerate : ∀ x : A, (∀ y : A, trace (x*y) = 0) → x = 0) :
+    odd = ⊥ :=
+  Quantum.odd_eq_bot_of_scalar_even_frobenius anticommute scalarProduct spanning
+    trace traceOdd nondegenerate
+
+/-- A polynomial identity for the actual left-multiplication operator that
+annihilates a submodule containing the unit annihilates the whole algebra.
+Applied to the even part of a superalgebra, this retains the full odd fiber.
+No identity on the odd part is a premise. The statement constructs neither
+primary projectors nor a geometric quantum multiplication. -/
+theorem superPrimary_eulerPolynomial_transfers_from_even
+    {K A : Type*} [Field K] [Ring A] [Algebra K A]
+    (even : Submodule K A) (unitEven : (1 : A) ∈ even) (euler : A)
+    (polynomial : Polynomial K)
+    (annihilates : ∀ x ∈ even,
+      (Polynomial.aeval (Algebra.lmul K A euler) polynomial) x = 0) :
+    Polynomial.aeval (Algebra.lmul K A euler) polynomial = 0 :=
+  Quantum.euler_polynomial_eq_zero_of_annihilates_unit_submodule even unitEven
+    euler polynomial annihilates
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationM1

@@ -54,8 +54,11 @@ Exact residue conjugacy is derived from regular comparisons, including resonance
 The parameterized finite residue calculation now passes a 322-terminal audit,
 including the four discriminants and actual characteristic polynomials; report
 `notes/2026-09-09-c1133-lean-parameterized-progress.md`. No geometric coverage is
-promoted. Next: full-gauge bridge, all seventeen matrix certificates and the
-super-primary selectors. The old exponent-class
+promoted. Two initial super-algebra lemmas now pass a 324-terminal audit:
+scalar-even factors have no odd part, and Euler polynomial identities transfer
+from the even part to the whole algebra; report
+`notes/2026-09-09-c1133-lean-super-progress.md`. Next: full-gauge bridge, all
+seventeen matrix certificates and the remaining super-primary selectors. The old exponent-class
 marker misses the discriminant-one cases; genera 2–5 instead use the main
 rank-three odd selector, independent of optional rank-three residue theory.
 The zbMATH query now has 274/274 distinct records title-screened, with both

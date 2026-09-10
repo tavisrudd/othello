@@ -84,8 +84,9 @@ restrictions. No full-chapter negative or pre-emption decision on A–D is made.
 **Formal boundary.** Exact rank-two modified-residue conjugacy now follows in
 Lean from regular horizontal comparisons and inverse comparisons, including
 resonance. The parameterized four-dimensional finite reduction and the four
-rational discriminants are also checked. The public audit has 322 terminals,
-with the three additions registered as machinery. No manuscript claim has
+rational discriminants are also checked. Scalar-even odd vanishing and polynomial transfer to the whole algebra are
+also checked. The public audit has 324 terminals, with the five additions
+registered as machinery. No manuscript claim has
 been promoted: geometric QDM identification, the complete parameterized gauge
 bridge, all seventeen certificates, super-primary selectors, rank-three
 cluster persistence and faithful fixed-base constructions remain separately
