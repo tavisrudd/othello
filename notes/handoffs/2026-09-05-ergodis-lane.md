@@ -49,7 +49,7 @@ Current authority: `../2026-09-09-c1130-js-wasm-parity-review.md`; task requirem
 performance experiments: `ergodis-private/analysis/interface-review/`.
 
 JS/WASM conformance entry point: `make -C analysis/js-wasm-tests all` in
-`ergodis-private`. Fast/browser/extended tiers, 46 checks, JSON/Markdown/JUnit
+`ergodis-private`. Fast/browser/extended tiers, 48 checks, JSON/Markdown/JUnit
 reports. Stop/history responsiveness: `../2026-09-10-c1130-stop-responsiveness.md`. Solve clock and adaptive log axis: `../2026-09-10-c1130-solve-clock-axis.md`. Generated core/module contracts, independent oracles, shrinking and
 regressions: `../2026-09-09-c1130-property-testing.md`; private design and current
 validation: `analysis/property-tests/`. Retained intermittent browser-loading
@@ -128,8 +128,10 @@ JS race lifecycle review fixed stale selection mounting, cancellation during
 preparation/final discovery, sibling worker cleanup and bounded discovery readiness
 (private `a55cca3`). Repair/Hadamard saved traces now reopen read-only with stale-import isolation
 (private `2fb0dad`); ModuleSession initialization/reset guards are `e6f33ed`.
-Example-specific batch units remain intentional; discovery failure policy still
-needs a named, documented distinction. Review and remaining consolidation boundary:
+Example-specific batch units remain intentional. Typed provider rejection and
+host-failure fanout, with explicit existing family policies and browser fault
+injection, are covered in private `analysis/interface-review/2026-09-10-race-failure-contracts.md`.
+Review and remaining consolidation boundary:
 `ergodis-private/analysis/interface-review/2026-09-09-js-race-review.md`.
 
 Native CLI/control/runtime fragmentation must converge in these same phases.
