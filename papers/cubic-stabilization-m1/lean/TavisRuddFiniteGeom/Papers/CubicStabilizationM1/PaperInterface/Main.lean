@@ -1,3 +1,6 @@
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RankTwoCanonicalLattice
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SeventeenCountingMatrices
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.PrimaryPolynomialProjectors
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.TwoByTwoBlockGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.CyclicRankThreePersistence
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RankTwoLatticeTransport
@@ -210,5 +213,81 @@ theorem parameterizedRankTwo_normalizedGauge_and_modifiedResidue
       rfl normalized other
   · rw [residue]
     exact Quantum.parameterizedModifiedResidue_discriminant sumNonzero
+
+
+/-- The actual preimage lattice equals the range of its injective elementary
+modification and is preserved by a regular horizontal adapted comparison.
+The leading nilpotent line is derived from the matrix horizontality identity. -/
+theorem rankTwo_canonicalLattice_preserved_by_regularComparison
+    {B : Type*} [CommRing B]
+    {source target comparison : PowerSeries (Matrix (Fin 2) (Fin 2) B)}
+    {sourceUnit targetUnit : B}
+    (horizontal : Quantum.IsHorizontalLoopComparison source target comparison)
+    (sourceAdapted : PowerSeries.coeff 0 source = Quantum.adaptedLeadingOperator sourceUnit)
+    (targetAdapted : PowerSeries.coeff 0 target = Quantum.adaptedLeadingOperator targetUnit)
+    (targetInvertible : IsUnit targetUnit)
+    (v : Fin 2 → PowerSeries B) (hv : v ∈ Quantum.adaptedCanonicalLattice) :
+    Quantum.adaptedCanonicalLattice (B := B) = LinearMap.range Quantum.adaptedLatticeEmbedding ∧
+      Function.Injective (Quantum.adaptedLatticeEmbedding (B := B)) ∧
+      Quantum.formalRankTwoMatrixAction comparison v ∈ Quantum.adaptedCanonicalLattice :=
+  ⟨Quantum.adaptedCanonicalLattice_eq_range, Quantum.adaptedLatticeEmbedding_injective,
+    Quantum.horizontalComparison_preserves_adaptedCanonicalLattice horizontal sourceAdapted
+      targetAdapted targetInvertible v hv⟩
+
+/-- Injective coefficient extension preserves and reflects lattice membership;
+the modified residue and its exact discriminant commute with coefficient maps. -/
+theorem rankTwo_canonicalLattice_and_residue_coefficientExtension
+    {B C : Type*} [CommRing B] [CommRing C]
+    (f : B →+* C) (injective : Function.Injective f)
+    (v : Fin 2 → PowerSeries B) (loop : PowerSeries (Matrix (Fin 2) (Fin 2) B)) :
+    ((fun i => PowerSeries.map f (v i)) ∈ Quantum.adaptedCanonicalLattice ↔
+      v ∈ Quantum.adaptedCanonicalLattice) ∧
+      Quantum.modifiedResidue (PowerSeries.map (f.mapMatrix : Matrix (Fin 2) (Fin 2) B →+*
+        Matrix (Fin 2) (Fin 2) C) loop) = (Quantum.modifiedResidue loop).map f ∧
+      Quantum.residueDiscriminant ((Quantum.modifiedResidue loop).map f) =
+        f (Quantum.residueDiscriminant (Quantum.modifiedResidue loop)) :=
+  ⟨Quantum.adaptedCanonicalLattice_mem_map_iff f injective v,
+    Quantum.modifiedResidue_coefficient_map f loop,
+    Quantum.residueDiscriminant_coefficient_map f (Quantum.modifiedResidue loop)⟩
+
+/-- Exhaustive characteristic-polynomial and determinant-one cyclic-basis
+certificates for the seventeen explicit rational counting matrices. The labels
+supply no geometric classification or quantum-product identification. -/
+theorem seventeenCountingMatrices_charpoly_and_cyclicBasis :
+    Fintype.card Quantum.CountingMatrixLabel = 17 ∧
+      ∀ label : Quantum.CountingMatrixLabel,
+      (Quantum.labeledCountingMatrix label).charpoly = Quantum.labeledCountingPolynomial label ∧
+      (let p := Quantum.countingMatrixParameters label
+       let basis := Quantum.countingMatrixCyclicBasis (p 0) (p 1) (p 2) (p 3) (p 4)
+       basis.det = 1 ∧ ∀ column : Fin 4,
+         (fun row => basis row column) =
+           ((Quantum.labeledCountingMatrix label)^column.val).mulVec ![1,0,0,0]) :=
+  ⟨Quantum.countingMatrixLabel_card, fun label =>
+    ⟨Quantum.labeledCountingMatrix_charpoly label, Quantum.labeledCountingMatrix_cyclicBasis label⟩⟩
+
+/-- A coprime annihilating factorization constructs complementary orthogonal
+idempotents, with the first killed by the first polynomial and the second by
+the second polynomial. No projectors are supplied as hypotheses. -/
+theorem superPrimary_polynomialProjectors_exist {K A : Type*} [Field K] [Ring A] [Algebra K A]
+    (euler : A) (f g : Polynomial K) (coprime : IsCoprime f g)
+    (annihilates : Polynomial.aeval euler (f*g) = 0) :
+    ∃ p q : A, p+q=1 ∧ p*q=0 ∧ q*p=0 ∧ p*p=p ∧ q*q=q ∧
+      Polynomial.aeval euler f*p=0 ∧ Polynomial.aeval euler g*q=0 ∧
+      (∃ r : Polynomial K, p=Polynomial.aeval euler r) ∧
+      (∃ r : Polynomial K, q=Polynomial.aeval euler r) :=
+  Quantum.exists_primaryPolynomial_idempotents euler f g coprime annihilates
+
+/-- The Frobenius trace pairing restricted to a central idempotent's image is
+nondegenerate if the original trace pairing is nondegenerate. The restricted
+nondegeneracy is derived using projection of arbitrary test vectors. -/
+theorem superPrimary_tracePairing_restricts_nondegenerately
+    {K A : Type*} [Field K] [Ring A] [Algebra K A]
+    (e : A) (idempotent : e*e=e) (central : ∀ x : A, Commute e x)
+    (trace : A →ₗ[K] K)
+    (nondegenerate : ∀ x : A, (∀ y : A, trace (x*y)=0) → x=0)
+    {x : A} (member : x ∈ LinearMap.range (Algebra.lmul K A e))
+    (orthogonal : ∀ y ∈ LinearMap.range (Algebra.lmul K A e), trace (x*y)=0) :
+    x=0 :=
+  Quantum.centralIdempotent_tracePairing_nondegenerate e idempotent central trace nondegenerate member orthogonal
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationM1

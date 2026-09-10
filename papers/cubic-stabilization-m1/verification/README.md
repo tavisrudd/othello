@@ -149,7 +149,7 @@ the aggregate to import each one, and computes terminal and signature coverage
 across their union.  This keeps the manuscript split visible without weakening
 the exact terminal census.
 
-Checked coverage snapshot: 67 claims; 14 absent; 26 fragmentary; 26 conditional; 1 complete; 327 reviewer terminals, of which 91 are machinery serving no current manuscript claim.
+Checked coverage snapshot: 67 claims; 14 absent; 26 fragmentary; 26 conditional; 1 complete; 332 reviewer terminals, of which 96 are machinery serving no current manuscript claim.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to

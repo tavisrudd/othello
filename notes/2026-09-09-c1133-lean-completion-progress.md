@@ -78,3 +78,41 @@ exact declarations
 The cyclic determinant is one for every six-parameter matrix over a commutative
 ring, not just the seventeen rational instances. The table specialization and
 lattice module remain separate uncommitted work at this checkpoint.
+
+## Canonical lattice, exhaustive matrix table, primary projectors
+
+The 332-terminal public gate passes at `run-20260910-025531-0f37ed0d`,
+run ID `20260910-025532-28858dd4`, with only the standard three axioms on the
+five added terminals. Coverage remains 67 manuscript claims, 96 machinery,
+22 imported sources and five evidence bundles; no claim promotion.
+
+Exact public declarations in `PaperInterface/Main.lean`, with common prefix
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.`:
+
+- `rankTwo_canonicalLattice_preserved_by_regularComparison` — the actual
+  preimage lattice equals the image of an injective modification map and is
+  preserved by a regular horizontal comparison. Source:
+  `Quantum/RankTwoCanonicalLattice.lean`.
+- `rankTwo_canonicalLattice_and_residue_coefficientExtension` — injective
+  coefficient extension preserves and reflects membership, and residues and
+  discriminants commute with coefficient maps. Same source.
+- `seventeenCountingMatrices_charpoly_and_cyclicBasis` — exhaustive matrix
+  characteristic polynomials and actual cyclic bases of determinant one over
+  the seventeen-constructor domain. Source: `Quantum/SeventeenCountingMatrices.lean`.
+- `superPrimary_polynomialProjectors_exist` — actual polynomial idempotents
+  are constructed from a coprime annihilating factorization. Source:
+  `Quantum/PrimaryPolynomialProjectors.lean`.
+- `superPrimary_tracePairing_restricts_nondegenerately` — derives trace-pairing
+  nondegeneracy on the full central-idempotent image, from whole-algebra
+  nondegeneracy. Same source.
+
+The seventeen-entry proof initially exposed an opaque six-coordinate vector
+application. A single reducible evaluator `sixCountingParameters` resolved
+that bottleneck; the full table then elaborated in about twelve seconds without
+warnings. The exact table inputs remain authored source definitions. No native
+execution or external certificate is part of their proofs.
+
+At this checkpoint the uncommitted continuations are
+`Quantum/RankThreeCountingSplits.lean`, `Quantum/SuperPrimaryPairing.lean`, and
+`Quantum/PrimarySummandDecomposition.lean`. Their claims are not included in the
+332-terminal gate. L4–L7 and the remaining L2/L3 assembly are still open.

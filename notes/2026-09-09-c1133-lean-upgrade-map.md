@@ -14,13 +14,15 @@ pre-implementation snapshot. L1 still lacks the separate sheaf construction
 and general coefficient-extension interfaces. L2 now has a kernel-checked
 parameterized finite-coefficient reduction, both characteristic polynomials,
 and four exact discriminants; see `2026-09-09-c1133-lean-parameterized-progress.md`.
-The complete formal-gauge bridge and seventeen-family certificate interface
-remain. The first L3 algebra lemmas now prove scalar-even odd vanishing and
+The complete rational formal-gauge bridge, uniqueness and actual power-series
+modified residue now pass the 327-terminal audit; see
+`2026-09-09-c1133-lean-completion-progress.md`. The seventeen-family certificate
+interface remains. The first L3 algebra lemmas now prove scalar-even odd vanishing and
 polynomial-identity transfer from the even part to the whole algebra; see
 `2026-09-09-c1133-lean-super-progress.md`. The remaining L3 construction and
-L4–L8 remain as planned. The rank-three cyclic commutant, characteristic
-polynomial and trace formulas now pass a 325-terminal audit; the exact remaining
-differential bridge is recorded in `2026-09-09-c1133-lean-rank-three-progress.md`.
+L4–L8 remain as planned. The rank-three differential-ideal bridge and formal nilpotent persistence are
+now proved and publicly audited; see the completion-progress report for exact
+Lean declarations. Geometric cyclic-frame construction remains external.
 
 ## Recommendation
 

@@ -59,7 +59,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-09-09-c1133-lean-super-progress.md`.
   Rank-three centralizer and trace identities pass a 325-terminal audit:
   `../2026-09-09-c1133-lean-rank-three-progress.md`.
-  Next formal work: full-gauge bridge and seventeen-matrix certificates;
+  Full rational normalized gauge, its actual modified residue, and rank-three
+  formal nilpotent persistence pass a 327-terminal audit:
+  `../2026-09-09-c1133-lean-completion-progress.md`.
+  Next formal work: seventeen-matrix certificates and super-primary selectors;
   preserve resonant discriminant-one cases and the independent rank-three odd
   selector. Next audit work: exact sharpness/moduli imports and remaining
   novelty/citation coverage. Collaborator discussion is parked per author.

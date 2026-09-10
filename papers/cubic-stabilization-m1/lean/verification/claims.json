@@ -1486,6 +1486,31 @@
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.parameterizedRankTwo_normalizedGauge_and_modifiedResidue",
       "reason": "Constructs the full unique normalized formal two-block gauge over the original field and computes the elementary-modification residue of its actual power-series zero block. The geometric primary-factor and canonical-lattice identification needed for the universal-residue manuscript proposition is not constructed by this terminal.",
       "terminal_digest": "c01ab5686b2f674adf857eb96c1fca10ad70ba8850968793015425b401940df3"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankTwo_canonicalLattice_preserved_by_regularComparison",
+      "reason": "The adapted preimage lattice is constructed as a submodule and proved equal to the image of an injective elementary-modification map; regular horizontal comparison preserves it. No geometric sheaf is constructed.",
+      "terminal_digest": "fca69fba70fe9f6803c8f009c58e0ca5182a413888280bee5f5bfb2a7606f3e4"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankTwo_canonicalLattice_and_residue_coefficientExtension",
+      "reason": "Injective ring extension preserves and reflects canonical-lattice membership; actual modified residues and exact discriminants commute with coefficient maps. This is a free adapted formal model, without a geometric base-change theorem.",
+      "terminal_digest": "ba747b8092ed67b84ccb3ce9dbbbd461cd6523e8fe5eed2bbbf0ad2c91391a07"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.seventeenCountingMatrices_charpoly_and_cyclicBasis",
+      "reason": "Exhaustively checks characteristic polynomials and actual determinant-one cyclic bases for seventeen explicitly defined rational matrices. Geometric quantum-product identification, primary-rank interpretation, family classification and rationality do not follow from this numerical table alone.",
+      "terminal_digest": "95fe28b4321722dd9b794c155ccb9b6946540481c8034e9569008a936d2d2108"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_polynomialProjectors_exist",
+      "reason": "Constructs actual complementary orthogonal idempotents by polynomial evaluation from a coprime annihilating factorization. Geometric quantum algebras and their primary factors are not supplied by this algebraic construction.",
+      "terminal_digest": "7af3988b8fa72d4dadf1560f400b1eebc124d1a83c8794013a19691b53067e24"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_tracePairing_restricts_nondegenerately",
+      "reason": "Derives nondegeneracy of the trace pairing on the actual multiplication image of a central idempotent from whole-algebra nondegeneracy. No primary quantum factor is geometrically constructed.",
+      "terminal_digest": "651f894d9ada43011c2e5a9cddbe3cf88ae8e787f90b184f227491836c202573"
     }
   ]
 }

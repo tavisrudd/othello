@@ -74,6 +74,11 @@ and separate moduli theorem are still not source-verified.
 No global novelty verdict or manuscript promotion has passed. Review of
 manuscript upgrades and hierarchy remains after these gates.
 
+The complete rational normalized gauge, actual power-series modified residue,
+and rank-three formal nilpotent persistence now pass a 327-terminal axiom gate.
+See `notes/2026-09-09-c1133-lean-completion-progress.md` for exact declarations.
+The user has requested completion of the core Lean map; C1133 remains active.
+
 One-hour continuation summary:
 `notes/2026-09-09-c1133-one-hour-checkpoint.md`.
 
