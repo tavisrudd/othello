@@ -235,9 +235,9 @@
         "url": "https://arxiv.org/pdf/2411.02266"
       },
       "key": "arXiv:2411.02266",
-      "read_depth": "abstract/metadata only",
-      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet. Additional zbMATH follow-up: Primary landing-page abstract and bibliographic metadata read; no paper body read.",
-      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "read_depth": "partial",
+      "read_scope": "Cached v2 extracted text lines 1–305 (introduction and stated decomposition/framing/application results) and 3150–3214 (Definition 4.33, Theorem 4.34, Corollary 4.35 and proof opening). No complete proof or complete paper read.",
+      "role_status": "Formal spectral decomposition and framing precursor. Nonsimple framing classification in Theorem 4.34 has explicit coefficient-ring and grading hypotheses; the simple-spectrum corollary does not supply unrestricted rank-three framing rigidity.",
       "title": "Decomposition and framing of F-bundles and applications to quantum cohomology",
       "version_in_cached_header": "arXiv:2411.02266v2 [math.AG] 28 Mar 2025"
     },
@@ -838,7 +838,7 @@
       "title": "Interpretations of Spectra",
       "read_depth": "metadata only",
       "read_scope": "Publisher landing abstract lines 40–44 and displayed references 139–219 read; subscription chapter body not read.",
-      "role_status": "Close spectral/monodromy precursor. Publisher abstract and references inspected; chapter body unread. Needs theorem-level follow-up.",
+      "role_status": "Close spectral/monodromy precursor. Published body still unread. An author-hosted thesis chapter of the same title is now partially read and separately registered as Katzarkov-DSciThesis-v2; it is not byte- or version-matched to this published chapter.",
       "access": {
         "url": "https://api.crossref.org/works/10.1007/978-3-031-17859-7_20",
         "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-7828755.json",
@@ -1024,6 +1024,21 @@
         "sha256": "28cc0b81b3f1b612317f98036ac595c6a292c385158f36118886bf85cb99a597",
         "status": "retrieved"
       }
+    },
+    {
+      "key": "Katzarkov-DSciThesis-v2",
+      "title": "Katzarkov DSc thesis v2, chapter Interpretations of spectra",
+      "read_depth": "partial",
+      "read_scope": "Author-hosted thesis extracted text LF lines 16870–18145, 18160–18595, and 19055–19095. This covers the spectra chapter introduction, cubic equation/exponents, ordinary-irrationality statements and their sketches, arithmetic examples, topology comparisons, multispectra and opening orbifoldization discussion, plus selected references. Fifteen intervening lines and the rest of chapter/thesis are not claimed read. Targeted keyword screening over lines 16889–18830 is discovery only.",
+      "role_status": "Concrete precursor for cubic exponent values and the broad quantum-spectrum irrationality program. Birational splitting and several details are attributed to reference [142], Blow up formulae, in preparation. The author-hosted chapter is not version-matched to the Springer 2023 publication. No comprehensive correctness or pre-emption verdict on the proposed one-stabilization/Hodge/arithmetic upgrade.",
+      "access": {
+        "url": "https://www.math.bas.bg/omi/IMIdocs/ZRASRB/docs/Lyudmil_Katzarkov_dmn/DSciThesis-Katzarkov-v2.pdf",
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/Katzarkov-DSciThesis-v2.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/Katzarkov-DSciThesis-v2.txt",
+        "sha256": "b3490fc8e6c93f3095ca217eb1d31e07af6623c94b8744f7dbbdc13dcac6287d",
+        "bytes": 2358787
+      },
+      "version_in_cached_header": "Author-hosted filename DSciThesis-Katzarkov-v2.pdf; publication-version equivalence not established."
     }
   ],
   "external_full_text_breakdown": {

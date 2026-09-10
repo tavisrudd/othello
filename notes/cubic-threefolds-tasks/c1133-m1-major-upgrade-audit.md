@@ -59,7 +59,10 @@ super-primary selectors. The old exponent-class
 marker misses the discriminant-one cases; genera 2–5 instead use the main
 rank-three odd selector, independent of optional rank-three residue theory.
 The zbMATH query now has 274/274 distinct records title-screened, with both
-licensed-out titles resolved. Historical spectra chapter bodies remain unread.
+licensed-out titles resolved. An author-hosted spectra chapter is now partially read and explicitly credits
+the older cubic exponents and spectral irrationality program in the owning
+novelty ledger. Its published-version match and the categorical base-loci body
+remain open; the source register has 73 entries at explicit read depths.
 The local sharpness surface theorem is pinned; the packet-pencil hypotheses
 and separate moduli theorem are still not source-verified.
 No global novelty verdict or manuscript promotion has passed. Review of

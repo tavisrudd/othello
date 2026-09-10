@@ -3,7 +3,7 @@
 **Date:** 2026-09-09. **Lane:** `cubic-threefolds`.
 **Status:** incomplete; no global novelty or priority verdict is issued.
 **External sources read at full text: 5 — three papers and two source scripts.**
-The source register contains 72 individual entries, with exact read depths,
+The source register contains 73 individual entries, with exact read depths,
 versions, cache access and hashes. Most papers have partial read depth.
 Iritani’s ten-page Hodge refinement has now been read completely.
 The author-supplied packet has been read completely, including its checker.
@@ -451,7 +451,7 @@ punctured logarithmic comparisons; and You's relative I-functions. Those scope
 summaries are at abstract depth. Gyenge's product paper and Hinault–Yu–Zhang–Zhang
 are already registered; their earlier limitations are retained, not reset.
 
-**A close historical lead remains open:** Katzarkov–Lee–Svoboda–Petkov,
+**Historical lead at this pagination checkpoint (updated by the next section):** Katzarkov–Lee–Svoboda–Petkov,
 *Interpretations of Spectra*, Springer 2023, pp. 371–407,
 DOI 10.1007/978-3-031-17859-7_20. The publisher abstract concerns monodromy of
 categorical linear systems and noncommutative spectra, and its displayed
@@ -500,3 +500,96 @@ fibration and stable-permutation/rational-point hypotheses. The local toric-rank
 profile and special-pencil isogeny theorem are not supplied by the inspected
 statements. The sharpness theorem has now been located and pinned, but the
 pencil-specific inputs remain open; neither is used in A–D.
+
+
+## Historical spectra chapter: accessible author version and exact overlap
+
+An additional search recovered an author-hosted DSc thesis containing a chapter
+with the title *Interpretations of spectra*. The published Springer chapter
+body remains inaccessible; no version-equivalence assertion is made. The cached
+thesis PDF has SHA-256
+`b3490fc8e6c93f3095ca217eb1d31e07af6623c94b8744f7dbbdc13dcac6287d`.
+The separate source-register entry `Katzarkov-DSciThesis-v2` records URL, bytes,
+cache paths and exact partial-read intervals. Full-text count remains five.
+
+Additional verbatim searches:
+
+- `"Interpretations of spectra" pdf Katzarkov 2023`
+- `"Categorical base loci" "01473" pdf`
+
+The author-hosted chapter explicitly displays the cubic threefold quantum
+system and exponent representatives **−1/6 and −5/6** (printed p. 285).
+Sections 2.1–2.4 develop its noncommutative spectrum and use the spectrum in
+ordinary-irrationality statements for Fano hypersurfaces and complete
+intersections. Theorem 2.14 includes the three-dimensional hypersurface case;
+Theorem 2.15 states a weighted-complete-intersection analogue. This is concrete
+historical credit, not merely a vaguely related abstract. The chapter's
+`δ=5/3` for the cubic is its asymptotic-dimension quantity; it is **not** the
+packet's exact squared exponent gap `δ♯=4/9`.
+
+The chapter attributes the birational splitting theorem and further details
+to [142], Katzarkov–Kontsevich–Pantev–Yu, *Blow up formulae*, **in preparation**.
+Section 2.1 also discusses convergence/Gamma and decomposition conjectures;
+Theorem 2.14's higher-dimensional statement has an upper-semicontinuity
+condition. These qualifications belong to the source comparison. This read
+neither certifies all the chapter's arguments nor dismisses them for containing
+conjectures. Its explicit cubic exponents and broad method must be credited
+regardless of the final evaluation of those dependencies.
+
+Section 3's arithmetic concerns rationality over nonclosed fields subject to
+restrictions on algebraic-cycle images. It is not the bounded-degree geometric
+partner-finiteness deduction used in D at the inspected statement loci.
+Sections 5–6 discuss multispectra and orbifoldization, with a cubic example and
+further prospective birational invariants. The exact partial scope is recorded;
+no full-chapter negative is inferred from a keyword search. Reference [144]
+identifies the categorical base-loci precursor, whose original body remains
+an open access/read obligation.
+
+The owning claim–proof–novelty ledger now records this predecessor before any
+manuscript priority language changes. The intended manuscript-phase correction
+is explicit older attribution of the cubic exponents and the broad spectral
+program. The one-stabilization classification, Hodge conservation, very-general
+cancellation and bounded-degree finiteness still need their own complete
+statement comparisons; their novelty is not settled by this partial read.
+
+## F-bundle framing source: precise partial read
+
+Hinault–Yu–Zhang–Zhang, arXiv:2411.02266v2 (28 March 2025), is now read at the
+introduction's principal statements and at Definition 4.33/Theorem 4.34/Corollary
+4.35. The exact LF-line scopes are in the register. The source supplies formal
+spectral decomposition and framing results. Its nonsimple classification
+requires its specific commuting-nilpotent coefficient algebra, grading and
+parameter restrictions; the simpler corollary assumes simple eigenvalues.
+Those statements cannot be imported as unrestricted rank-three framing
+rigidity. Their projective-bundle uniqueness statements are useful precedent,
+with base-point and coordinate qualifications retained. Neither reading closes
+the fixed-base faithful-map construction or the regular-comparison obligations
+in the present upgrade by itself.
+
+
+## Repeating-surface inventory for the manuscript-review phase
+
+The owning novelty ledger has been read completely and updated before any
+new priority posture is propagated. The following are concrete surfaces,
+not a claim that external releases were edited or fully inspected:
+
+| Surface | Inspected content and required later action |
+|---|---|
+| `papers/cubic-stabilization-m1/claim-proof-novelty-ledger.md` | Whole file read; older cubic-exponent credit and candidate A–D boundaries updated now. Existing historical audit entries retained with the current boundary made explicit |
+| `sections/01-introduction.tex` | Related-work paragraph lines 78–116 read: currently credits KKPY, Guéré and collaborators, Gyenge, Cai. Add the older spectra chapter and the published mirror note after exact bibliography/version resolution |
+| `sections/02-qdm-marker.tex` | Universal-residue statement/proof lines 560–648 read: already contains the parameterized mathematical proposition. New Lean identities are related finite algebra, but do not yet construct its canonical formal block; coverage remains unchanged pending a correspondence review |
+| `companions/cubic-framed-monodromy/sections/02-framed-monodromy.tex` | Targeted exponent-reference search; the discussion around lines 39–51 is a later attribution-update locus. This was a location screen, not a new full-section read |
+| `README.md` and `REVIEWER_GUIDE.md` | Both read completely. Current scope is cubic, genus eight and index-two applications, not A–D. Guide must acquire the two-selector and full-fiber explanations if the upgrade is accepted |
+| `.zenodo.json` | Whole local metadata file read. Its description repeats the existing theorem scope; update only with a reviewed release. No remote deposit read or changed here |
+| `blueprint/src/content.tex`, `blueprint/src/generated-references.tex` | Targeted reference search only. Regenerate from accepted TeX/bibliography rather than independently editing generated claims |
+| `lean/verification/claims.json`, Lean README, verification README | Exact checked formal boundary and new machinery rows updated. The 67 current manuscript statuses are unchanged. Baseline JSON is a historical snapshot and must not be rewritten as current coverage |
+| `papers/summary/README.md`, `papers/summary/VERIFICATION.md` | Cubic entry and matching verification row inspected; current summary repeats the cubic/genus-eight result. Later synchronize reviewed theorem scope and partial formalization boundary |
+| Lane handoff and task card | Current research frontier updated, with no global novelty verdict. Historical handoff rows contain older all-m/companion descriptions; do not use them as current theorem authorities |
+| Standalone GitHub repositories, rendered PDFs/blueprint and archival release | Known repeating outputs from README links and prior export reports. Not synchronized or freshly fetched in this research checkpoint; release review must compare them with the accepted authority |
+
+No dedicated paper file named `snapshot` was found in the bounded filename
+inventory. This is not a global inventory of external summaries. The principal
+open literature obligations remain the published spectra-version comparison,
+the categorical base-loci body, outstanding graph/publication-alias checks,
+original Narasimhan–Nori access and the already recorded MathSciNet/Scholar
+coverage limits. The exact pencil hypotheses remain separate optional imports.

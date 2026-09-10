@@ -1454,7 +1454,7 @@
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.parameterizedRankTwo_finiteReduction",
-      "reason": "Finite coefficient identities for an explicit parameterized four-dimensional matrix system. No current manuscript claim states this universal calculation; geometric input identification and extension to a complete normalized formal gauge remain outside the terminal.",
+      "reason": "Finite coefficient identities related to prop:universal-rank-two-residue. The terminal does not construct its normalized zero-primary formal connection or identify that connection’s canonical modified residue. Kept as unassigned machinery pending the full-gauge bridge and a separate claim-correspondence review; the current claim coverage is unchanged.",
       "terminal_digest": "9cdd5f08f536a242954639bda63b3dc067789e94b4f4b62111c6d252870328bd"
     },
     {
