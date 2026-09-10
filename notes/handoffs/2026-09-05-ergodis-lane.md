@@ -49,7 +49,7 @@ Current authority: `../2026-09-09-c1130-js-wasm-parity-review.md`; task requirem
 performance experiments: `ergodis-private/analysis/interface-review/`.
 
 JS/WASM conformance entry point: `make -C analysis/js-wasm-tests all` in
-`ergodis-private`. Fast/browser/extended tiers, 51 checks, JSON/Markdown/JUnit
+`ergodis-private`. Fast/browser/extended tiers, 52 checks, JSON/Markdown/JUnit
 reports. Stop/history responsiveness: `../2026-09-10-c1130-stop-responsiveness.md`. Solve clock and adaptive log axis: `../2026-09-10-c1130-solve-clock-axis.md`. Generated core/module contracts, independent oracles, shrinking and
 regressions: `../2026-09-09-c1130-property-testing.md`; private design and current
 validation: `analysis/property-tests/`. Generated module-client schedules and
@@ -71,7 +71,10 @@ censored after >15 s. Private results and replay:
 A new source-derived JS capacity-surface prototype beats Evolve on all three
 measured 192/288-job rounds: 88/102 ms versus 1235/1944 ms, including full
 surface construction and all 625 query witnesses. Native/WASM promotion and
-scheduling UI integration remain open. Results, oracle checks and design:
+scheduling UI integration remain open. Uncommitted native promotion draft:
+`ergodis/src/allocation_surface.rs` and its `src/lib.rs` export. Its first scoped
+test build fails at the allocation-event assertion type; no accepted native/WASM
+artifact or performance claim yet. Preserve this task-owned draft on resume. Results, oracle checks and design:
 `analysis/interface-review/2026-09-10-direct-xor-and-capacity-surface.md` and
 `analysis/interface-review/adr-capacity-surface-specialization.md` (`d94b2a5`).
 Intermittent Chromium worker import cancellation remains open. Safari/iOS, Firefox,
@@ -149,6 +152,12 @@ JS race lifecycle review fixed stale selection mounting, cancellation during
 preparation/final discovery, sibling worker cleanup and bounded discovery readiness
 (private `a55cca3`). Repair/Hadamard saved traces now reopen read-only with stale-import isolation
 (private `2fb0dad`); ModuleSession initialization/reset guards are `e6f33ed`.
+Result rows now share `race-ui.mjs` across capacity, repair, CSS and Hadamard.
+Selection clears old panels, immediately releases controls and fences late result
+publication; capacity races now share the two-arm timer panel. Node and Chromium
+selection/repair/Hadamard checks pass. Private report:
+`analysis/interface-review/2026-09-10-race-ui-consolidation.md` (`15725f8`).
+The full page-controller consolidation remains open.
 Example-specific batch units remain intentional. Typed provider rejection and
 host-failure fanout, with explicit existing family policies and browser fault
 injection, are covered in private `analysis/interface-review/2026-09-10-race-failure-contracts.md`.
