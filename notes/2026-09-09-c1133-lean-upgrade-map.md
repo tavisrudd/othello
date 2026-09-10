@@ -1,29 +1,53 @@
 # C1133 — Lean additions for the m=1 upgrade
 
-**Date:** 2026-09-09. **Disposition:** implementation map, not new Lean coverage.
+**Date:** 2026-09-09. **Disposition:** implementation map with guarded completion checkpoint.
 The mathematical scope is [the acceptance map](2026-09-09-c1133-acceptance-map.md); the literature
-and exact sharpness/moduli companion imports remain open. No manuscript
-promotion, Lean implementation, kernel build, export, or collaborator outreach
-was performed for this map.
+and exact sharpness/moduli companion imports remain open. The initial map
+performed no implementation; the checkpoint below records the subsequent
+authorized Lean work. No manuscript promotion, export or outreach followed.
 
 ## Implementation checkpoint
 
-The current guarded checkpoint is 346 public terminals, with 108 machinery
-terminals. L1 has actual canonical adapted lattices, regular comparison
-transport and coefficient extension. L2 has all seventeen characteristic
-polynomials and cyclic bases, all nine complete rank-two residue certificates,
-and all four rank-three splitting/gauge certificates. L3 has primary
-projectors, restricted pairings, odd allocation, rank-three persistence,
-exact-residue and full-odd selectors, and their comparison-derived ledger.
-Exact declarations and trust boundaries are recorded in
+The guarded public checkpoint is **365 terminals, 127 machinery terminals,
+239 sources**. The aggregate build and actual axiom comparison pass. All
+new terminals use only `propext`, `Classical.choice`, and `Quot.sound`.
+The core algebra and conditional A–D assemblies are implemented. Exact
+fully qualified declarations, validation runs and limitations are in
 `2026-09-09-c1133-lean-completion-progress.md`.
 
-L4 now has a proved injective family of directional pushforwards on actual
-completed series, fixed-locus coordinate equivalences and polynomial
-translations. The actual multivariate completed map now has a public injectivity theorem;
-its convolution-ring and occurrence-separation extensions remain under implementation. L5–L7 remain open; no geometric classification or Hodge
-conservation theorem is claimed complete. The baseline below is frozen
-pre-implementation evidence, not the current coverage count.
+- L1–L3: actual canonical adapted lattices and regular comparison transport;
+  all seventeen matrix polynomials and cyclic bases; nine full rank-two
+  gauge/residue certificates; four rank-three splittings; full super-primary
+  projectors, pairings, odd allocation, persistence and exact selectors.
+- L4: actual completed exponential ring maps, grading-derived polynomial bulk
+  layers and faithful graded center maps, fixed-locus coordinate equivalences,
+  faithful localizations and independent occurrence determinant separation.
+- L5: point/curve/surface block nullity is derived before factorization;
+  normalized counting endpoint connections feed the nine/eight rationality
+  deduction through actual endpoint and projective-line ledger realizations.
+- L6: full equivariant image objects, formal idempotent conjugacy, actual
+  semisimple objects and categorical doubled cancellation, whole-object
+  occurrence conservation, fixed-weight periodization and rational morphism
+  descent. A supplied category equivalence transports conservation to actual
+  target Hodge objects.
+- L7: source-restricted reconstruction has a very general source and arbitrary
+  smooth target; arithmetic finiteness ranges over all model extensions of
+  bounded degree and counts geometric classes through finite kernels and
+  polarization fibers.
+
+**Boundary:** this is not a complete construction of geometric quantum or
+Hodge theory in Lean. Varieties, geometric block/comparison realizations,
+Hodge categories and their semisimplicity, rational controls, classification,
+Torelli and arithmetic source theorems remain explicit inputs. The actual
+graded source is represented by its coefficient-family subtype; its inherited
+ring closure is not asserted. The universal residue manuscript proposition
+still has fragment coverage beyond its checked matrix reductions. No existing
+manuscript claim was promoted by the conditional A–D assemblies: coverage
+remains 13 absent, 27 fragment, 26 conditional deduction, 1 complete.
+
+L8 remains optional. Full literature closure and manuscript/hierarchy review
+remain open under C1133. The baseline below is frozen pre-implementation
+evidence, not the current coverage count.
 
 ## Recommendation
 
@@ -334,7 +358,7 @@ paper gates. Standalone synchronization remains a later authorized operation.
 
 ## Open boundary
 
-The main Lean work is mapped; the L1 matrix-series slice is implemented as noted above. The complete literature
+The core algebra and conditional assemblies are implemented at the boundary above. The complete literature
 audit remains unfinished, and no new priority or novelty conclusion follows
 from this formal plan. Companion source verification and author hierarchy
 review retain the order specified by the task card.

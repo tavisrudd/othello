@@ -1,3 +1,14 @@
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RealizedHodgeConservation
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.CountingStabilizationObstruction
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ArithmeticStabilizationPartners
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.StabilizedWholeOddConservation
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.PureWeightPeriodization
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.InvertibleMorphismDescent
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SemisimplePrimaryLedger
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.GradedCompletedBulkCenterMap
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SemisimpleCoordinateObjects
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.EquivariantProjectorImages
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.FormalIdempotentConjugacy
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ExactPrimaryOccurrenceDescent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SeventeenExactSignatures
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.LowDimensionalPrimaryExpressions
@@ -623,5 +634,176 @@ theorem seventeenExactSignatures_nine_positive_eight_controls :
   ⟨Quantum.countingExactSignature_label_counts,fun label =>
     ⟨Quantum.countingExactSignature_ne_zero_iff label,
       Quantum.countingExactSignature_double_ne_zero_iff label⟩⟩
+
+section CompletedPrimaryApplications
+
+open Quantum
+universe u v w
+
+/-- An idempotent over a multivariate formal base is conjugate to its constant
+idempotent by a unit whose constant coefficient is one. The coefficient ring
+may be a noncommutative ring of equivariant endomorphisms. -/
+theorem formalIdempotent_conjugacy_over_multivariateBase
+    {A σ : Type*} [Ring A] (p : MvPowerSeries σ A) (idempotent : p*p=p) :
+    ∃ u : (MvPowerSeries σ A)ˣ, MvPowerSeries.constantCoeff (u : MvPowerSeries σ A)=1 ∧
+      p=(u : MvPowerSeries σ A) * MvPowerSeries.C (MvPowerSeries.constantCoeff p) * (↑(u⁻¹) : MvPowerSeries σ A) := by
+  exact Quantum.multivariateFormalIdempotent_conjugate_constant p idempotent
+
+/-- The transported full images are isomorphic as representations, with an
+actual bundled inverse intertwining map. -/
+def fullEquivariantProjectorImages_representationEquiv
+    {K G V : Type*} [Field K] [Monoid G] [AddCommGroup V] [Module K V]
+    (representation : Representation K G V) (source target : Module.End K V)
+    (sourceEquivariant : ∀ g x, source (representation g x)=representation g (source x))
+    (targetEquivariant : ∀ g x, target (representation g x)=representation g (target x))
+    (equiv : V ≃ₗ[K] V)
+    (equivariant : ∀ g x, equiv (representation g x)=representation g (equiv x))
+    (intertwines : ∀ x, target (equiv x)=equiv (source x)) :
+    ((equivariantEndomorphismImage representation source sourceEquivariant).toRepresentation).Equiv
+      ((equivariantEndomorphismImage representation target targetEquivariant).toRepresentation) := by
+  exact Quantum.equivariantImageRepresentationEquiv representation source target sourceEquivariant targetEquivariant equiv equivariant intertwines
+
+/-- Doubled cancellation expressed entirely as actual category isomorphisms. -/
+noncomputable def semisimpleObjects_cancel_doubled_iso
+    {ι : Type u} {division : ι → Type v} [∀ i, DivisionRing (division i)]
+    (left right : SemisimpleCoordinateObject ι division)
+    (doubled : CategoryTheory.Iso (left.sum left) (right.sum right)) :
+    CategoryTheory.Iso left right := by
+  exact Quantum.SemisimpleCoordinateObject.cancelDoubleCategoryIso left right doubled
+
+/-- The actual map on the graded bulk completion is injective. The proof
+derives polynomial coefficient finiteness from grading bounds and constructs
+every intermediate coefficient map; source-map injectivity is not a premise. -/
+theorem gradedBulkCenterMap_injective
+    {Curve TargetCurve K : Type*} [AddCommMonoid Curve] [AddCommMonoid TargetCurve]
+    [Field K] [CharZero K] {bulkRank divisorRank : ℕ}
+    (data : CompletedNumericalQuotient Curve TargetCurve)
+    (curveGrade : Curve →+ ℤ) (bulkDegree : Fin bulkRank → ℕ)
+    (pairing : Curve →+ (Fin divisorRank → ℤ)) (injective : Function.Injective pairing)
+    (exceptionalDegree : Curve →+ ℤ)
+    (parameter : FractionRing (MvPolynomial (Option (Fin bulkRank)) K)) (nonzero : parameter ≠ 0) :
+    Function.Injective (gradedCompletedBulkCenterMap data curveGrade bulkDegree pairing exceptionalDegree parameter nonzero) := by
+  exact Quantum.gradedCompletedBulkCenterMap_injective data curveGrade bulkDegree pairing injective exceptionalDegree parameter nonzero
+
+/-- Vanishing of the effective numerical fold forces vanishing of the full
+semisimple-object fold, with no cancellation among occurrences. -/
+theorem wholeOddLedger_zero_of_numericZero
+    {K : Type*} [Field K] [CharZero K] {ι : Type u} {division : ι → Type v}
+    [∀ i, DivisionRing (division i)] (presentation : SemisimplePrimaryPresentation K ι division)
+    (ledger : presentation.toBlockPresentation.EffectiveLedger)
+    (numericZero : presentation.numericFold ledger=0) : presentation.fold ledger=0 := by
+  exact Quantum.SemisimplePrimaryPresentation.fold_zero_of_numericFold_zero presentation ledger numericZero
+
+/-- Invertibility descends inside an actual linear subspace of matrices when
+the extended invertible matrix is expressed using finitely many of its members. -/
+theorem rationalMorphismSpace_contains_invertible
+    {K L ι n : Type*} [Field K] [Infinite K] [CommRing L]
+    [Fintype ι] [Fintype n] [DecidableEq n]
+    (morphisms : Submodule K (Matrix n n K))
+    (family : ι → Matrix n n K) (members : ∀ t, family t ∈ morphisms)
+    (extension : K →+* L) (extendedCoefficient : ι → L)
+    (extendedInvertible : (∑ t, extendedCoefficient t • (family t).map extension).det ≠ 0) :
+    ∃ matrix ∈ morphisms, matrix.det ≠ 0 := by
+  exact Quantum.matrixMorphismSubspace_contains_invertible morphisms family members extension extendedCoefficient extendedInvertible
+
+/-- Finite simple multiplicities in one fixed weight are recovered uniquely
+from their periodized multiplicities. No nonzero Tate twist is discarded
+when lifting the equality back to the pure category. -/
+theorem pureWeightPeriodization_injective
+    {Label : Type*} (action : IntegralTwistAction Label) (weight : Label → ℤ)
+    (shift : ∀ n label, weight (action.twist n label)=weight label-2*n) (fixedWeight : ℤ) :
+    Function.Injective (Finsupp.mapDomain (action.pureWeightMap weight fixedWeight) :
+      ({label // weight label=fixedWeight} →₀ ℕ) → Quotient action.orbitSetoid →₀ ℕ) := by
+  exact Quantum.IntegralTwistAction.pureWeightMultiplicity_injective action weight shift fixedWeight
+
+/-- Stabilized birationality conserves the whole odd object, using the actual
+low-dimensional block computations and cancellation in the semisimple category. -/
+noncomputable def wholeOddObjects_conserved_under_stabilizedBirationality
+    {K Variety Center Occurrence Family : Type*} [Field K] [CharZero K]
+    {ι : Type u} {division : ι → Type v} [∀ i, DivisionRing (division i)]
+    (data : StabilizedWholeOddData K Variety Center Occurrence Family ι division)
+    {left right : Family} (leftSmooth : data.smooth left) (rightSmooth : data.smooth right)
+    (related : data.birational.r (data.stabilized left) (data.stabilized right)) :
+    CategoryTheory.Iso (data.wholeOdd left) (data.wholeOdd right) := by
+  exact Quantum.StabilizedWholeOddData.wholeOddIso data leftSmooth rightSmooth related
+
+/-- A source-restricted Torelli implication gives geometric reconstruction
+for a very general source and an arbitrary smooth target in the same family.
+The target has no very-generality hypothesis. -/
+theorem veryGeneralSource_stabilizedCancellation
+    {K Variety Center Occurrence Family : Type*} [Field K] [CharZero K]
+    {ι : Type u} {division : ι → Type v} [∀ i, DivisionRing (division i)]
+    (data : StabilizedWholeOddData K Variety Center Occurrence Family ι division)
+    (veryGeneral : Family → Prop) (geometricIso : Family → Family → Prop)
+    (sourceTorelli : ∀ left right, data.smooth left → data.smooth right → veryGeneral left →
+      Nonempty (CategoryTheory.Iso (data.wholeOdd left) (data.wholeOdd right)) → geometricIso left right)
+    {left right : Family} (leftSmooth : data.smooth left) (rightSmooth : data.smooth right)
+    (generalSource : veryGeneral left)
+    (related : data.birational.r (data.stabilized left) (data.stabilized right)) :
+    geometricIso left right := by
+  exact Quantum.StabilizedWholeOddData.geometricIso_of_veryGeneral_source data veryGeneral geometricIso sourceTorelli leftSmooth rightSmooth generalSource related
+
+/-- Finiteness of stabilized geometric partner classes with models over any
+extension of bounded degree. Conservation, isogeny existence, degree bounds,
+finite torsion, polarization finiteness and Torelli are composed explicitly. -/
+theorem arithmeticStabilizationPartners_finite_geometricClasses
+    {K Variety Center Occurrence Family Extension A Unpolarized Polarized : Type*}
+    [Field K] [CharZero K] [AddCommGroup A]
+    {ι : Type u} {division : ι → Type v} [∀ i, DivisionRing (division i)]
+    (data : StabilizedWholeOddData K Variety Center Occurrence Family ι division)
+    (base : Family) (baseSmooth : data.smooth base)
+    (extensionDegree : Extension → ℕ) (degreeBound : ℕ)
+    (hasModel : Extension → Family → Prop)
+    (modelSmooth : ∀ extension object, hasModel extension object → data.smooth object)
+    (geometricallyIsogenous : Family → Prop)
+    (hodgeToIsogeny : ∀ object, data.smooth object →
+      Nonempty (CategoryTheory.Iso (data.wholeOdd base) (data.wholeOdd object)) →
+      geometricallyIsogenous object)
+    (quotientClass : Set A → Unpolarized)
+    (forgetPolarization : Polarized → Unpolarized)
+    (invariant : Family → Polarized)
+    (uniformKernelBound : ∃ bound : ℕ, ∀ extension object,
+      extensionDegree extension ≤ degreeBound → hasModel extension object →
+      geometricallyIsogenous object → ∃ kernel : AddSubgroup A,
+        Finite kernel ∧ Nat.card kernel ≤ bound ∧
+        forgetPolarization (invariant object)=quotientClass (kernel : Set A))
+    (finiteTorsion : ∀ n : ℕ, Set.Finite {x : A | n • x=0})
+    (finitePolarizations : ∀ target, Set.Finite {p | forgetPolarization p=target})
+    (geometricTorelli : Function.Injective invariant) :
+    Set.Finite {object : Family | ∃ extension : Extension,
+      extensionDegree extension ≤ degreeBound ∧ hasModel extension object ∧
+      data.birational.r (data.stabilized base) (data.stabilized object)} := by
+  exact Quantum.finite_arithmetic_stabilizationPartners data base baseSmooth extensionDegree degreeBound hasModel modelSmooth geometricallyIsogenous hodgeToIsogeny quotientClass forgetPolarization invariant uniformKernelBound finiteTorsion finitePolarizations geometricTorelli
+
+/-- Once rationality of the eight zero controls and the geometric implication
+from rationality to stabilized birationality are supplied, the seventeen
+family labels satisfy the claimed rational/nonrational dichotomy. -/
+theorem seventeenFamilies_rational_iff_control
+    {Variety Center Occurrence : Type*} (data : CountingStabilizationData Variety Center Occurrence)
+    (rational : CountingMatrixLabel → Prop)
+    (rationalStabilizes : ∀ label, rational label →
+      data.birational.r (data.stabilized label) data.projectiveFourSpace)
+    (rationalControls : ∀ label, label.detected=false → rational label)
+    (label : CountingMatrixLabel) : rational label ↔ label.detected=false := by
+  exact Quantum.CountingStabilizationData.rational_iff_control data rational rationalStabilizes rationalControls label
+
+/-- The conserved whole odd objects give an actual isomorphism of endpoint
+objects in any supplied equivalent semisimple category. For a rational Hodge
+realization the endpoints are the full third-cohomology objects. -/
+noncomputable def realizedHodgeObjects_conserved_under_stabilizedBirationality
+    {K Variety Center Occurrence Family : Type*} [Field K] [CharZero K]
+    {ι : Type u} {division : ι → Type v} [∀ i, DivisionRing (division i)]
+    (data : StabilizedWholeOddData K Variety Center Occurrence Family ι division)
+    {Hodge : Type w} [CategoryTheory.Category Hodge]
+    (realization : CategoryTheory.Equivalence (SemisimpleCoordinateObject ι division) Hodge)
+    {left right : Family} (leftSmooth : data.smooth left) (rightSmooth : data.smooth right)
+    (related : data.birational.r (data.stabilized left) (data.stabilized right))
+    (leftHodge rightHodge : Hodge)
+    (leftIdentification : CategoryTheory.Iso (realization.functor.obj (data.wholeOdd left)) leftHodge)
+    (rightIdentification : CategoryTheory.Iso (realization.functor.obj (data.wholeOdd right)) rightHodge) :
+    CategoryTheory.Iso leftHodge rightHodge := by
+  exact Quantum.StabilizedWholeOddData.realizedWholeOddIso data realization leftSmooth rightSmooth related leftHodge rightHodge leftIdentification rightIdentification
+
+end CompletedPrimaryApplications
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationM1

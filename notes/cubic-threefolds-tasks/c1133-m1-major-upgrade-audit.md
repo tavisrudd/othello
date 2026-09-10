@@ -48,17 +48,21 @@ register and citation sets:
 Lean additions are now mapped in
 `notes/2026-09-09-c1133-lean-upgrade-map.md`, with exact reusable declarations
 and hashed baseline in `notes/2026-09-09-c1133-lean-baseline.json`.
-Current formal checkpoint: 346 public terminals and 108 machinery. The core
-matrix/algebra results now include exact original-lattice comparison transport,
-all seventeen characteristic polynomials and cyclic bases, all nine complete
-rank-two gauge/residue certificates, four rank-three splittings, full-odd
-allocation and persistence, and the comparison-derived exact-primary ledger.
-Discriminant-one cases are retained. Completed directional maps, fixed-locus
-coordinate equivalences and polynomial translations are also kernel-built.
-Exact declarations and geometric boundaries are in
-`notes/2026-09-09-c1133-lean-completion-progress.md`. Active work is L4's
-actual multivariate completed map, followed by L5–L7. This does not claim
-complete geometric classification or Hodge conservation coverage.
+Current formal checkpoint: **365 public terminals, 127 machinery, 239 sources**;
+the aggregate kernel build and actual axiom comparison pass. Exact lattices,
+all seventeen matrix certificates, full primary selectors, actual completed
+graded center maps, low-dimensional vanishing and conditional A–D assemblies
+are implemented. The Hodge conclusion is an actual target-category isomorphism
+through an explicitly supplied semisimple realization; arithmetic finiteness
+counts geometric classes over all model extensions of bounded degree.
+Exact declarations and remaining formal boundaries are in
+`notes/2026-09-09-c1133-lean-completion-progress.md` and the updated Lean map.
+Geometric constructions and imported source theorems remain supplied;
+no complete geometric A–D formalization or manuscript coverage promotion is
+claimed. In particular the raw graded-source ring closure and the universal
+residue proposition beyond the proved matrix reductions are not certified.
+Next work is the outstanding source/literature closure before manuscript
+upgrades and hierarchy review.
 The zbMATH query now has 274/274 distinct records title-screened, with both
 licensed-out titles resolved. An author-hosted spectra chapter is now partially read and explicitly credits
 the older cubic exponents and spectral irrationality program in the owning

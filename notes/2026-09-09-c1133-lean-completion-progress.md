@@ -476,12 +476,12 @@ added to the 353-terminal count.
 
 Guarded queue `run-20260910-045853-989a6cc8` passed the four consumers `SemisimplePrimaryLedger`, `GradedCompletedBulkCenterMap`, `InvertibleMorphismDescent`, and `PureWeightPeriodization`; queue `run-20260910-044915-4fe2c717` passed their new object and coefficient-finiteness dependencies. All module names below have prefix `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum`.
 
-- `GradedCompletedBulkCenterMap.gradedCompletedBulkCenterMap_injective` derives each polynomial bulk coefficient layer from actual graded formal coefficients, allowing negative bulk powers unbounded across curve classes. Ring closure of the raw graded source is not asserted.
-- `SemisimplePrimaryLedger.SemisimplePrimaryPresentation.fold_zero_of_numericFold_zero` derives vanishing of the whole semisimple odd-object fold from numerical vanishing, parity and faithful realization dimension bounds.
-- `SemisimpleCoordinateObjects.SemisimpleCoordinateObject.cancelDoubleCategoryIso` cancels doubling for actual objects and categorical isomorphisms in the explicit semisimple coordinate category. Geometric Hodge realization remains external.
-- `InvertibleMorphismDescent.matrixMorphismSubspace_contains_invertible` constructs an invertible original-field matrix in the given morphism subspace.
-- `PureWeightPeriodization.IntegralTwistAction.pureWeightMultiplicity_injective` recovers fixed-weight multiplicities from the actual integral-twist orbit quotient.
-- `FormalIdempotentConjugacy.multivariateFormalIdempotent_conjugate_constant` and `EquivariantProjectorImages.equivariantImageRepresentationEquiv` retain full images and equivariance.
+- `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.gradedCompletedBulkCenterMap_injective` derives each polynomial bulk coefficient layer from actual graded formal coefficients, allowing negative bulk powers unbounded across curve classes. Ring closure of the raw graded source is not asserted.
+- `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SemisimplePrimaryPresentation.fold_zero_of_numericFold_zero` derives vanishing of the whole semisimple odd-object fold from numerical vanishing, parity and faithful realization dimension bounds.
+- `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SemisimpleCoordinateObject.cancelDoubleCategoryIso` cancels doubling for actual objects and categorical isomorphisms in the explicit semisimple coordinate category. Geometric Hodge realization remains external.
+- `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.matrixMorphismSubspace_contains_invertible` constructs an invertible original-field matrix in the given morphism subspace.
+- `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.IntegralTwistAction.pureWeightMultiplicity_injective` recovers fixed-weight multiplicities from the actual integral-twist orbit quotient.
+- `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.multivariateFormalIdempotent_conjugate_constant` and `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.equivariantImageRepresentationEquiv` retain full images and equivariance.
 
 These eight leaves are compiled; their new public reviewer exports and audit rows are not yet added. Public audited count remains 353. `BoundedIsogenyFiniteness.lean` is separately uncommitted while its first elaboration is pending.
 
@@ -489,7 +489,7 @@ Validation invocation correction: the await for queue `run-20260910-050650-38271
 
 ### Full-object conservation and endpoint assembly
 
-Queues `run-20260910-050319-afa09e2f` and `run-20260910-050650-38271d48` passed four more leaves. Under full prefix `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum`, `SemisimpleOccurrenceConservation.semisimple_lowDimensionalOccurrenceNullity` derives full-object nullity from actual block realizations; `StabilizedWholeOddConservation.StabilizedWholeOddData.wholeOddIso` assembles dimension-four factorization and endpoint doubled-object identifications into an actual categorical isomorphism. Its `geometricIso_of_veryGeneral_source` keeps the target arbitrary smooth and the source very general. `BoundedIsogenyFiniteness.finite_geometricClasses_of_bounded_kernels` proves the finite torsion/kernel/quotient/polarization/reconstruction chain. `CountingPrimaryEndpoints.countingEndpointBlocks_weight` derives every endpoint signature from block expressions; rank-two records carry actual normalized gauge equations, not supplied discriminants. Geometric and source realization inputs remain explicit.
+Queues `run-20260910-050319-afa09e2f` and `run-20260910-050650-38271d48` passed four more leaves. Under full prefix `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum`, `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.semisimple_lowDimensionalOccurrenceNullity` derives full-object nullity from actual block realizations; `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.StabilizedWholeOddData.wholeOddIso` assembles dimension-four factorization and endpoint doubled-object identifications into an actual categorical isomorphism. Its `geometricIso_of_veryGeneral_source` keeps the target arbitrary smooth and the source very general. `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.finite_geometricClasses_of_bounded_kernels` proves the finite torsion/kernel/quotient/polarization/reconstruction chain. `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.countingEndpointBlocks_weight` derives every endpoint signature from block expressions; rank-two records carry actual normalized gauge equations, not supplied discriminants. Geometric and source realization inputs remain explicit.
 
 The premature consumer elaboration recorded above failed solely on the not-yet-built `CountingPrimaryEndpoints.olean`; after the queue success it was retried against the now-built dependency. The uncommitted consumer is `CountingStabilizationObstruction.lean`. Public audited coverage still remains 353 pending reviewer export integration.
 
@@ -498,3 +498,70 @@ The premature consumer elaboration recorded above failed solely on the not-yet-b
 Guarded queue `run-20260910-051028-f35b3b35` passed `CountingStabilizationObstruction` and `ArithmeticStabilizationPartners`. Fully qualified terminals: `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.CountingStabilizationData.rational_iff_control` derives the nine/eight dichotomy from actual normalized endpoint blocks, projective-line ledger doubling, point/curve/surface realizations and weak factorization; rationality of controls remains supplied. `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.finite_arithmetic_stabilizationPartners` composes whole-odd conservation with separately supplied cohomology-to-geometric-isogeny and uniform bounded-kernel inputs, finite torsion, polarization fibers and geometric Torelli. It unions models over every extension with degree at most the prescribed bound and counts geometric classes only.
 
 `RealizedHodgeConservation.lean` is separately being elaborated to expose an actual target-category isomorphism via a supplied semisimple realization equivalence and endpoint identifications. None of these deductions certifies the external geometric or literature inputs.
+
+### Public checkpoint: 365 terminals
+
+The twelve new explicit reviewer wrappers and their imported closures pass
+queue `run-20260910-051429-6635c703` (run id
+`20260910-051429-5ef99b0d`). The package checker against the actual saved audit
+log passes: **239 sources, 365 terminals, 127 machinery**, 67 manuscript claims,
+22 source imports and 5 evidence records. Coverage remains 13 absent,
+27 fragment, 26 conditional deductions and 1 complete. Each new terminal uses
+only `propext`, `Classical.choice`, and `Quot.sound`; no project axiom, `sorry`,
+or native evaluation axiom enters this checkpoint.
+
+All names below have the exact prefix
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.` and are in
+`PaperInterface/Main.lean`:
+
+- `formalIdempotent_conjugacy_over_multivariateBase`
+- `fullEquivariantProjectorImages_representationEquiv`
+- `semisimpleObjects_cancel_doubled_iso`
+- `gradedBulkCenterMap_injective`
+- `wholeOddLedger_zero_of_numericZero`
+- `rationalMorphismSpace_contains_invertible`
+- `pureWeightPeriodization_injective`
+- `wholeOddObjects_conserved_under_stabilizedBirationality`
+- `veryGeneralSource_stabilizedCancellation`
+- `arithmeticStabilizationPartners_finite_geometricClasses`
+- `seventeenFamilies_rational_iff_control`
+- `realizedHodgeObjects_conserved_under_stabilizedBirationality`
+
+The last terminal constructs an actual target-category endpoint isomorphism
+using the supplied category equivalence and endpoint identifications. The
+category and its geometric interpretation are not created by naming it Hodge.
+The rationality terminal derives the detected obstruction from actual gauge
+and block realizations; it does not assume the nine irrationality conclusions.
+The source-only checker initially stopped on the twelve deliberately missing
+axiom expectations; those were entered only after reading the actual audit,
+and the complete comparison now passes.
+
+### Mystery ledger — explicit ej + tt pass after the aggregate gate
+
+- **Settled:** negative bulk exponents need no global bound across curve
+  classes. A lower cohomological bound and a unit-exponent bound imply finite
+  monomial support separately at each curve class. The upper grading bound
+  is not needed for that injection argument. Exact evidence:
+  `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.gradedBulkPowerSeries_finite_support`.
+- **Settled:** formal projector conjugacy needs neither semisimplicity nor
+  a commutative endomorphism ring. The explicit intertwiner has constant
+  coefficient one and is therefore a formal unit. Exact evidence:
+  `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.formalIdempotent_conjugacy_over_multivariateBase`.
+- **Settled:** doubled cancellation must retain simple multiplicities, not
+  just total dimension. The terminal
+  `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.semisimpleObjects_cancel_doubled_iso`
+  constructs the actual categorical inverse data.
+- **Settled direction only:** numerical zero forces safe-object zero, but
+  no converse is claimed: a nonzero rank-two numerical atom need not imply
+  a nonzero odd object without an endpoint realization. Exact evidence:
+  `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.wholeOddLedger_zero_of_numericZero`.
+- **Explicit formal boundary:** ring closure of the raw graded-family source
+  and a fully intrinsic universal residue identification are not asserted by
+  the current terminals. The existing completed ambient ring maps and adapted
+  matrix residue calculations are proved. These are proof-strength boundaries,
+  not missing axioms disguised as conclusions.
+- **External gates:** geometric QDM and Hodge realizations, the precisely
+  scoped reconstruction/arithmetic imports, and full novelty/citation closure
+  remain owned by C1133. Optional rank-three residue and uniform odd-cubic
+  refinements remain L8. No additional unexplained numerical phenomenon was
+  found in this closeout pass.

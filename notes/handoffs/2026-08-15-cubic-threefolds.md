@@ -51,15 +51,17 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   broad motive/L-equivalence distinction credited). Main mathematical map:
   `../2026-09-09-c1133-acceptance-map.md`; surface Chern inequality checked.
   Lean addition map: `../2026-09-09-c1133-lean-upgrade-map.md`.
-  Current guarded checkpoint: 346 public terminals; exact rank-two lattice
-  transport, all seventeen matrix polynomials, nine complete rank-two residue
-  certificates, four rank-three splittings, full-odd allocation and
-  comparison-derived exact-primary ledger pass. Completed directional
-  pushforwards and fixed-locus/polynomial coordinate equivalences also compile.
-  Exact declarations and limitations:
+  Current guarded checkpoint: **365 public terminals, 127 machinery, 239 sources**;
+  aggregate kernel build and actual axiom comparison pass. Core matrix/lattice,
+  full-primary, graded completed-map and low-dimensional vanishing algebra,
+  plus conditional numerical classification, whole-Hodge conservation,
+  source-restricted reconstruction and geometric partner finiteness assemblies
+  are implemented. Exact declarations and formal boundaries:
   `../2026-09-09-c1133-lean-completion-progress.md`.
-  Active formal work: complete the actual multivariate fixed-base map, then
-  surface nullity/classification and Hodge-valued/downstream L5–L7 deductions.
+  Geometric/source realizations remain explicit inputs; no complete geometric
+  A–D formalization or manuscript claim promotion is asserted. Raw graded-source
+  ring closure and the universal residue proposition beyond checked matrix
+  reductions remain outside the certified statements. Optional L8 is unclaimed.
   Next audit work: exact sharpness/moduli imports and remaining
   novelty/citation coverage. Collaborator discussion is parked per author.
   One-hour checkpoint: `../2026-09-09-c1133-one-hour-checkpoint.md`.

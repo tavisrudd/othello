@@ -1610,6 +1610,66 @@
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.seventeenExactSignatures_nine_positive_eight_controls",
       "reason": "The exact finite table has nine positive and eight zero labels, and doubling preserves positivity; geometric endpoint identifications remain external.",
       "terminal_digest": "9e39e4e2d20f2a72407583dd6eeee7b0a723da07e0eb65a4fc1a1acf7bf64d7b"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.formalIdempotent_conjugacy_over_multivariateBase",
+      "reason": "Proves conjugacy of actual multivariate formal idempotents over a possibly noncommutative coefficient ring. A geometric equivariant endomorphism realization is not constructed.",
+      "terminal_digest": "f1210d03ea0c6e0b52a4fe073550f11740da8312f5edf401efcece358d8b593a"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.fullEquivariantProjectorImages_representationEquiv",
+      "reason": "Constructs an actual bundled representation equivalence of full images from an equivariant intertwining linear equivalence. Geometric projector and comparison realizations remain external.",
+      "terminal_digest": "933fd0db7cd8cd9acafa555dd201deaa099cdd6b5204166578b0406800478fb7"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.semisimpleObjects_cancel_doubled_iso",
+      "reason": "Cancels doubling for actual categorical objects in an explicit semisimple coordinate category of finite division-ring modules; realization by rational Hodge structures is separate.",
+      "terminal_digest": "a4e2faaa3206ec4c5ca675c5d1d4c391036783bc695c8df115007e3aab426193"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.gradedBulkCenterMap_injective",
+      "reason": "Proves faithfulness on actual graded completed bulk families with polynomial layers derived from grading bounds. Geometric QDM-base identification and inherited ring closure of the raw source subtype are not asserted.",
+      "terminal_digest": "5c9c40300fea60891ca6d11a6de95e652abaf9342291c40323208f3078684cab"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.wholeOddLedger_zero_of_numericZero",
+      "reason": "Derives vanishing of the full semisimple-object fold from numerical vanishing using odd-rank parity and faithful realization dimension bounds, with no supplied Hodge-weight vanishing.",
+      "terminal_digest": "b3650b40b153a5375132b306b58849c4af189af14760c5bee65830dd6b4fae4c"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rationalMorphismSpace_contains_invertible",
+      "reason": "Descends an invertible scalar-extended finite matrix combination to an actual invertible matrix in the original infinite-field morphism subspace. Geometric scalar extension of Hodge morphism spaces remains external.",
+      "terminal_digest": "fbd7a975a11b3aae1de2c21af506674701b3bc5770ffec01290213a7fbad2bbb"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.pureWeightPeriodization_injective",
+      "reason": "Proves injectivity of multiplicity periodization on one fixed weight for an actual integral twist action with weight shift minus twice the twist. Hodge simple labels and weights remain external.",
+      "terminal_digest": "f17025a6d3e5578b5e98725e152dad346a47421d2101131f19436041e75bd573"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.wholeOddObjects_conserved_under_stabilizedBirationality",
+      "reason": "Assembles actual low-dimensional primary realizations, dimension-four weak factorization, doubled endpoint objects and semisimple categorical cancellation. Geometric quantum and Hodge realization inputs remain supplied.",
+      "terminal_digest": "05a8ab3f7cdc37c75865c52388a5679026d837489ad7fc6fffdadd53190b8805"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.veryGeneralSource_stabilizedCancellation",
+      "reason": "Composes the proved whole-object conservation with an explicitly source-restricted reconstruction premise. The source is very general and the target arbitrary smooth in the family; the source theorem itself remains external.",
+      "terminal_digest": "31241f770c04c545c7d0205c0abe5d3f3153a1d6e007dd49f2c0d1cfb769e97b"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.arithmeticStabilizationPartners_finite_geometricClasses",
+      "reason": "Proves finiteness of geometric partner classes over all model extensions of bounded degree, using proved conservation and finite-kernel bookkeeping. Cohomology-to-isogeny, uniform kernel bound, finite torsion, finite polarization fibers and geometric Torelli are separate supplied hypotheses.",
+      "terminal_digest": "98a0de598e2ca01bd52081ccc3c3a56aaf97d6aec2ccb00b81392a6bda0e40df"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.seventeenFamilies_rational_iff_control",
+      "reason": "Derives the nine/eight dichotomy from actual normalized counting endpoint blocks, low-dimensional realizations and weak factorization. Geometric family identification, rationality of the eight controls and rational stabilization remain supplied; no nine-case irrationality premise occurs.",
+      "terminal_digest": "577938ddbb72c1e9f4bac6a772f8bec71fd24080c96c65c6b1e6527cb99aaa7e"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.realizedHodgeObjects_conserved_under_stabilizedBirationality",
+      "reason": "Transports proved whole-object conservation to actual target-category endpoint objects through a supplied semisimple category equivalence. The rational Hodge category and endpoint realizations remain explicit imports; integral and polarized isomorphisms are not inferred.",
+      "terminal_digest": "54effa3f481292ac5b79cd93554c661c505c7d75c8999c30d059a5bcc4ca2e0b"
     }
   ]
 }
