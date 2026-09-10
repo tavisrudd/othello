@@ -90,7 +90,14 @@ truncated Chern class arithmetic, the Betti numbers, the degree count placing th
 whole odd cohomology in that packet, and the constancy of rank on a connected
 component.
 
-Checked coverage snapshot: 67 claims; 14 absent; 26 fragmentary; 26 conditional; 1 complete; 319 reviewer terminals, of which 83 are machinery serving no current manuscript claim.
+Checked coverage snapshot: 67 claims; 14 absent; 26 fragmentary; 26 conditional; 1 complete; 320 reviewer terminals, of which 84 are machinery serving no current manuscript claim.
+
+The exact rank-two modified-residue discriminant is also preserved under
+regular horizontal comparisons and their regular inverses, with the
+nilpotent-line condition derived from horizontal nondegenerate pairings.
+The comparison on the modification contains the first jet of the original
+gauge; no nonresonance assumption is used. This is formal matrix-series
+transport, without a construction of geometric quantum comparison maps.
 
 Those machinery terminals are kernel-checked and reusable, and the claim map records for each one
 why no current claim rests on it.  They formalize the pro-Laurent gauge tower,

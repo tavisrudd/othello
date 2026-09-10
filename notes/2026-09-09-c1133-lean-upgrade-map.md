@@ -6,6 +6,13 @@ and exact sharpness/moduli companion imports remain open. No manuscript
 promotion, Lean implementation, kernel build, export, or collaborator outreach
 was performed for this map.
 
+## Implementation checkpoint
+
+The first L1 matrix-series transport slice is now proved and guarded-audited;
+see `2026-09-09-c1133-lean-transport-progress.md`. The baseline below is the
+pre-implementation snapshot. L1 still lacks the separate sheaf construction
+and general coefficient-extension interfaces; L2–L8 remain as planned.
+
 ## Recommendation
 
 Extend the existing package in `papers/cubic-stabilization-m1/lean/`.
@@ -315,7 +322,7 @@ paper gates. Standalone synchronization remains a later authorized operation.
 
 ## Open boundary
 
-The main Lean work is now mapped, not implemented. The complete literature
+The main Lean work is mapped; the L1 matrix-series slice is implemented as noted above. The complete literature
 audit remains unfinished, and no new priority or novelty conclusion follows
 from this formal plan. Companion source verification and author hierarchy
 review retain the order specified by the task card.

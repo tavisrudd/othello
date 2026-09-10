@@ -48,9 +48,10 @@ register and citation sets:
 Lean additions are now mapped in
 `notes/2026-09-09-c1133-lean-upgrade-map.md`, with exact reusable declarations
 and hashed baseline in `notes/2026-09-09-c1133-lean-baseline.json`.
-The source-only gate passes (319 terminals / 67 claims); no new Lean proof or
-kernel replay is claimed. First implementation slice: canonical rank-two
-lattice transport and universal residue reduction. The old exponent-class
+The first formal matrix-series transport slice now passes guarded kernel and
+320-terminal axiom gates; report `notes/2026-09-09-c1133-lean-transport-progress.md`.
+Exact residue conjugacy is derived from regular comparisons, including resonance.
+No geometric coverage is promoted. Next formal slice: universal residue reduction. The old exponent-class
 marker misses the discriminant-one cases; genera 2–5 instead use the main
 rank-three odd selector, independent of optional rank-three residue theory.
 No global novelty verdict or manuscript promotion has passed. Review of

@@ -326,3 +326,5 @@ currently exported by the reviewer interface.
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationM1.borderedHessian_rank_le_two_iff_borderDivides
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationM1.twoPrimaryHeart_orthogonal_lines_coincide
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationM1.twoPrimaryHeart_smallStableSubspace_eq_bot
+
+#print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankTwo_modifiedResidueDiscriminant_invariant_under_regular_comparison

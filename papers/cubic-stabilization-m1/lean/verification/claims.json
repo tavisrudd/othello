@@ -1446,6 +1446,11 @@
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.atomicResidueDiscriminant_invariant_under_frame_change",
       "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "76485992b885237b206670214c62cb9ea4fe2968be6580b70ac7769972b03638"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankTwo_modifiedResidueDiscriminant_invariant_under_regular_comparison",
+      "reason": "Proves exact modified-residue discriminant transport from regular horizontal comparison series and horizontal nondegenerate pairings. No current manuscript claim is assigned this terminal: the constant-spectrum statement additionally needs geometric factors, coefficient-domain transport and common-constant-field descent, which this formal matrix statement does not construct.",
+      "terminal_digest": "b72dde7df32e86ed0b5e2330735add3fe0cc69c9b5b092c44d44e5afc8baaac6"
     }
   ]
 }

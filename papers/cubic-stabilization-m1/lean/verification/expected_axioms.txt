@@ -318,3 +318,4 @@ TavisRuddFiniteGeom.Papers.CubicStabilizationM1.divisorSubstitution_sixthMultipl
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.borderedHessian_rank_le_two_iff_borderDivides: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.twoPrimaryHeart_orthogonal_lines_coincide: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.twoPrimaryHeart_smallStableSubspace_eq_bot: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankTwo_modifiedResidueDiscriminant_invariant_under_regular_comparison: propext, Classical.choice, Quot.sound
