@@ -49,13 +49,17 @@ Current authority: `../2026-09-09-c1130-js-wasm-parity-review.md`; task requirem
 performance experiments: `ergodis-private/analysis/interface-review/`.
 
 JS/WASM conformance entry point: `make -C analysis/js-wasm-tests all` in
-`ergodis-private`. Fast/browser/extended tiers, 49 checks, JSON/Markdown/JUnit
+`ergodis-private`. Fast/browser/extended tiers, 50 checks, JSON/Markdown/JUnit
 reports. Stop/history responsiveness: `../2026-09-10-c1130-stop-responsiveness.md`. Solve clock and adaptive log axis: `../2026-09-10-c1130-solve-clock-axis.md`. Generated core/module contracts, independent oracles, shrinking and
 regressions: `../2026-09-09-c1130-property-testing.md`; private design and current
 validation: `analysis/property-tests/`. Generated module-client schedules and
 mutation controls: `analysis/property-tests/2026-09-10-module-schedule-validation.md`.
-Retained intermittent browser-loading
-failures remain a separate limitation; see the dated validation report. Safari/iOS, Firefox,
+Offline bundle/repository workers share compiled engine code with isolated heaps;
+loading consumes the existing action deadline. Source fingerprints reject
+mixed-revision validation. Review and retained loading diagnostics:
+`analysis/interface-review/2026-09-10-offline-worker-loading.md`.
+Implementation and validation disposition: `../2026-09-10-c1130-offline-worker-loading.md`.
+Intermittent Chromium worker import cancellation remains open. Safari/iOS, Firefox,
 performance A/B and screenshot regression coverage remain open. The suite does
 not rebuild or replace canonical artifacts and does not replace native perf gates.
 
