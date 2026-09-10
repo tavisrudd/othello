@@ -157,6 +157,14 @@ Selection clears old panels, immediately releases controls and fences late resul
 publication; capacity races now share the two-arm timer panel. Node and Chromium
 selection/repair/Hadamard checks pass. Private report:
 `analysis/interface-review/2026-09-10-race-ui-consolidation.md` (`15725f8`).
+Shared `createRacePanels` now owns pending/results visibility for all selections
+and imports; empty cards stay hidden (`f7b69e8`). CSS preserves its first 32
+boundary samples before steady-state throttling. Shared chart layout avoids
+log-label collisions and clipped finish labels; candidate curves interpolate
+measurements while root changes remain steps. All 14 races / 41 charts visually
+reviewed, plus five QDistSAT sources at phone width. Long runs were inspected
+while active, not benchmarked to completion. Report and replay:
+`analysis/interface-review/2026-09-10-race-chart-visual-review.md` (`624f0ff`).
 The full page-controller consolidation remains open.
 Example-specific batch units remain intentional. Typed provider rejection and
 host-failure fanout, with explicit existing family policies and browser fault
