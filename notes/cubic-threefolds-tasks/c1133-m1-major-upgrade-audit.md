@@ -54,6 +54,10 @@ Exact residue conjugacy is derived from regular comparisons, including resonance
 No geometric coverage is promoted. Next formal slice: universal residue reduction. The old exponent-class
 marker misses the discriminant-one cases; genera 2–5 instead use the main
 rank-three odd selector, independent of optional rank-three residue theory.
+The zbMATH query now has 274/274 distinct records title-screened, with both
+licensed-out titles resolved. Historical spectra chapter bodies remain unread.
+The local sharpness surface theorem is pinned; the packet-pencil hypotheses
+and separate moduli theorem are still not source-verified.
 No global novelty verdict or manuscript promotion has passed. Review of
 manuscript upgrades and hierarchy remains after these gates.
 

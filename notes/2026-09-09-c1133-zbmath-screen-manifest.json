@@ -1,0 +1,34 @@
+{
+  "scope": "Finite retrieval and human metadata screen; no mathematical or novelty certificate",
+  "commands": [
+    "python3 notes/2026-09-09-c1133-zbmath-pagination.py",
+    "python3 notes/2026-09-09-c1133-zbmath-lead-probe.py"
+  ],
+  "files": [
+    {
+      "path": "2026-09-09-c1133-zbmath-pagination.py",
+      "sha256": "c9922fb7318206b078862553ccb9bcb4be3466aecd737f771aa782842b180f12",
+      "bytes": 2910
+    },
+    {
+      "path": "2026-09-09-c1133-zbmath-pagination.json",
+      "sha256": "9aa184c7617c8cb7ea52dc74b479a4233fd0c2d10da4f939ce2a03d61ffb36b7",
+      "bytes": 201560
+    },
+    {
+      "path": "2026-09-09-c1133-zbmath-lead-probe.py",
+      "sha256": "188e8afb52b1039aa53f34133809e3a0754e81fc4e1b2d516d923b952e6cff7e",
+      "bytes": 3458
+    },
+    {
+      "path": "2026-09-09-c1133-zbmath-lead-probe.json",
+      "sha256": "fee0b403bd44162ba829c2625809f4168704cf8c2a09e28bf609fc0bc441a351",
+      "bytes": 15264
+    },
+    {
+      "path": "2026-09-09-c1133-zbmath-screening.json",
+      "sha256": "3cbed2465e640fd675252268920bbe3b8c4dcbad87a919e8ec2e846b08a26ae1",
+      "bytes": 37135
+    }
+  ]
+}

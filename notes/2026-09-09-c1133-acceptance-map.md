@@ -102,10 +102,11 @@ The closest inspected lines of work have distinct roles:
 - The rank-three counterexamples refute the precise framing proposition
   identified in `framing-source-audit.md`, not its source's entire program.
 
-The audit is still incomplete. In particular the recorded 100/274 zbMATH
-quantum/birational result screen, unresolved citation leads, publication-identity
-coverage, and repeating-surface inventory must be completed or explicitly
-bounded in the final verdict. MathSciNet and Google Scholar access gaps do
+The audit is still incomplete. The zbMATH quantum/birational title screen is
+now complete at 274/274 distinct records, including separate resolution of two
+licensed-out titles. The historical spectra/categorical-base-loci chapter bodies,
+other unresolved citation leads, publication-identity coverage and repeating-
+surface inventory must still be completed or explicitly bounded in the final verdict. MathSciNet and Google Scholar access gaps do
 not count as negative evidence. The four main mathematical dispositions above
 do not certify novelty.
 

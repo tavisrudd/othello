@@ -236,7 +236,7 @@
       },
       "key": "arXiv:2411.02266",
       "read_depth": "abstract/metadata only",
-      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
+      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet. Additional zbMATH follow-up: Primary landing-page abstract and bibliographic metadata read; no paper body read.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Decomposition and framing of F-bundles and applications to quantum cohomology",
       "version_in_cached_header": "arXiv:2411.02266v2 [math.AG] 28 Mar 2025"
@@ -443,7 +443,7 @@
       },
       "key": "arXiv:2509.07407",
       "read_depth": "partial",
-      "read_scope": "Cache bibliographic metadata and Semantic Scholar forward-citation abstract; no primary-text judgment yet. v1; introduction 1–170, Proposition 4.2/Lemma 4.3/Theorem 4.4, lines 805–875; Section 4.3 and opening of Section 5, lines 1109–1235. Formal product result compared at stated depth; its regular-lattice and coefficient contract is not established by this read.",
+      "read_scope": "Cache bibliographic metadata and Semantic Scholar forward-citation abstract; no primary-text judgment yet. v1; introduction 1–170, Proposition 4.2/Lemma 4.3/Theorem 4.4, lines 805–875; Section 4.3 and opening of Section 5, lines 1109–1235. Formal product result compared at stated depth; its regular-lattice and coefficient contract is not established by this read. Additional zbMATH follow-up: Primary landing-page abstract and bibliographic metadata read; no paper body read.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "The quantum D-module of product varieties",
       "version_in_cached_header": "arXiv:2509.07407v1 [math.AG] 9 Sep 2025"
@@ -807,6 +807,222 @@
       "access": {
         "via": "notes/2026-09-09-c1133-lp-citation-set.json",
         "url": "https://arxiv.org/abs/2510.23143"
+      }
+    },
+    {
+      "key": "arXiv:1601.05119",
+      "title": "Some Landau--Ginzburg models viewed as rational maps",
+      "read_depth": "metadata only",
+      "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
+      "role_status": "Adjoint-orbit Landau–Ginzburg compactification; abstract-level neighboring construction.",
+      "access": {
+        "url": "https://arxiv.org/abs/1601.05119",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-6722461.html",
+        "sha256": "08fb67627e920e956bf1cda89f88379b71463a4c3ce96c33610f05fb9f850efe",
+        "status": "retrieved"
+      }
+    },
+    {
+      "key": "zbMATH:6490755",
+      "title": "Categorical base loci and spectral gaps, via Okounkov bodies and Nevanlinna theory",
+      "read_depth": "metadata only",
+      "read_scope": "Bibliographic title metadata only; no paper body read.",
+      "role_status": "Categorical base loci/Orlov spectra; primary text unresolved; do not claim absence of an exact overlap.",
+      "access": {
+        "status": "no linked primary identifier; needs manual resolution",
+        "additional_primary_locator": "https://doi.org/10.1090/pspum/088/01473"
+      }
+    },
+    {
+      "key": "doi:10.1007/978-3-031-17859-7_20",
+      "title": "Interpretations of Spectra",
+      "read_depth": "metadata only",
+      "read_scope": "Publisher landing abstract lines 40–44 and displayed references 139–219 read; subscription chapter body not read.",
+      "role_status": "Close spectral/monodromy precursor. Publisher abstract and references inspected; chapter body unread. Needs theorem-level follow-up.",
+      "access": {
+        "url": "https://api.crossref.org/works/10.1007/978-3-031-17859-7_20",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-7828755.json",
+        "sha256": "ac7181dcf1d9e697c84892dcac2c09616f37969dd0c4e0d97ffd929b0d09cf75",
+        "status": "retrieved",
+        "additional_primary_locator": "https://link.springer.com/chapter/10.1007/978-3-031-17859-7_20"
+      }
+    },
+    {
+      "key": "arXiv:1806.01752",
+      "title": "Birational Calabi-Yau manifolds have the same small quantum products",
+      "read_depth": "metadata only",
+      "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
+      "role_status": "Birational projective Calabi–Yau small quantum rings after Novikov changes; abstract-level adjacent comparison, not imported here.",
+      "access": {
+        "url": "https://arxiv.org/abs/1806.01752",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-7168644.html",
+        "sha256": "329afc0afa92cfa2515a9f8fb6209b9052e24cfc4ca6f960cb277b5353ec2fea",
+        "status": "retrieved"
+      }
+    },
+    {
+      "key": "arXiv:1504.04396",
+      "title": "Quantum Cohomology of Toric Blowups and Landau-Ginzburg Correspondences",
+      "read_depth": "metadata only",
+      "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
+      "role_status": "Noncrepant toric blowup/LG correspondence; historical comparison input, abstract only.",
+      "access": {
+        "url": "https://arxiv.org/abs/1504.04396",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-6999237.html",
+        "sha256": "b666bd7f9aa133314ea7752e8b0c04a935b8ddc61faf8a763468a7afbdc14b91",
+        "status": "retrieved"
+      }
+    },
+    {
+      "key": "arXiv:2405.16979",
+      "title": "Revisiting Gamma conjecture I: counterexamples and modifications",
+      "read_depth": "metadata only",
+      "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
+      "role_status": "Gamma conjecture counterexamples for projective bundles; abstract-level caution against importing asymptotic hypotheses without verification.",
+      "access": {
+        "url": "https://arxiv.org/abs/2405.16979",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-902487887.html",
+        "sha256": "26cb39a061b0e01317b8be9e6d31d0c24b966d0703f17a26dd474bb82ce24bfa",
+        "status": "retrieved"
+      }
+    },
+    {
+      "key": "arXiv:2210.06079",
+      "title": "Birational Invariance in Punctured Log Gromov-Witten Theory",
+      "read_depth": "metadata only",
+      "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
+      "role_status": "Log étale modifications and punctured log GW theory; abstract-level neighboring invariance.",
+      "access": {
+        "url": "https://arxiv.org/abs/2210.06079",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-8141796.html",
+        "sha256": "a450902926b7151caeb6190a14c2be763def17a9fd9fe6ad6aff7967668d3167",
+        "status": "retrieved"
+      }
+    },
+    {
+      "key": "arXiv:1604.03491",
+      "title": "Gromov-Witten Theory of Toric Birational Transformations",
+      "read_depth": "metadata only",
+      "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
+      "role_status": "Toric wall-crossing I-functions through asymptotic expansion; abstract-level prior comparison technology.",
+      "access": {
+        "url": "https://arxiv.org/abs/1604.03491",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-7319811.html",
+        "sha256": "f4145c54744f8ed227bceb83e69d413a20b3dfc49432aba207e0595169d9c72b",
+        "status": "retrieved"
+      }
+    },
+    {
+      "key": "zbMATH:6490757",
+      "title": "Singular fibers and Coulomb phases",
+      "read_depth": "metadata only",
+      "read_scope": "Author seminar listing/abstract in Oxford search result read; proceedings chapter body not read.",
+      "role_status": "Elliptic Calabi–Yau fibers and Coulomb phases; author seminar abstract provides context, chapter body unread.",
+      "access": {
+        "status": "no linked primary identifier; needs manual resolution",
+        "additional_primary_locator": "https://www.maths.ox.ac.uk/node/13859"
+      }
+    },
+    {
+      "key": "arXiv:1208.4340",
+      "title": "Towards the symplectic Graber-Harris-Starr theorems",
+      "read_depth": "metadata only",
+      "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
+      "role_status": "Symplectic GHS analogues via GW-detectable sections of RC fibrations; abstract only.",
+      "access": {
+        "url": "https://arxiv.org/abs/1208.4340",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-8197586.html",
+        "sha256": "b20a37ee26ff8993a6d5a440b0772d7b371dd1c9aed130151432b244c021fc8e",
+        "status": "retrieved"
+      }
+    },
+    {
+      "key": "arXiv:0710.3968",
+      "title": "Gromov-Witten invariants of blow-ups along submanifolds with convex normal bundles",
+      "read_depth": "metadata only",
+      "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
+      "role_status": "GW blowup comparison with convex normal-bundle hypotheses and counterexamples to unrestricted extension; abstract only.",
+      "access": {
+        "url": "https://arxiv.org/abs/0710.3968",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-5530174.html",
+        "sha256": "c311290fe5288a8488631ddd067ad5c0023d0d95f3976008de862b75f22a7e3d",
+        "status": "retrieved"
+      }
+    },
+    {
+      "key": "arXiv:2204.00509",
+      "title": "Relative quantum cohomology under birational transformations",
+      "read_depth": "metadata only",
+      "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
+      "role_status": "Relative I-functions of toric complete intersections under birational changes; abstract only.",
+      "access": {
+        "url": "https://arxiv.org/abs/2204.00509",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-900530165.html",
+        "sha256": "683263a08943b2f1204a84aeb07273a59263ba6b9e4883a33a0fbc43db81772a",
+        "status": "retrieved"
+      }
+    },
+    {
+      "key": "arXiv:1608.07917",
+      "title": "Birationality and Landau-Ginzburg models",
+      "read_depth": "metadata only",
+      "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
+      "role_status": "Multiple-mirror Calabi–Yau nef-partition birationality; abstract-level scope distinction.",
+      "access": {
+        "url": "https://arxiv.org/abs/1608.07917",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-6745500.html",
+        "sha256": "cec733dd91ce4bfbf8d7b54aa5c9225a86ab4916c72582dfcaa77a3fc467d411",
+        "status": "retrieved"
+      }
+    },
+    {
+      "key": "doi:10.4171/ICM2022/13",
+      "title": "Floer cohomology, singularities, and birational geometry",
+      "read_depth": "metadata only",
+      "read_scope": "Bibliographic title metadata only; no paper body read.",
+      "role_status": "McLean ICM survey; Crossref title metadata only; precise statements not read.",
+      "access": {
+        "url": "https://api.crossref.org/works/10.4171/ICM2022/13",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-7822627.json",
+        "sha256": "7b3e9aba86abf9e1be92ed0300ce09d454955a7e6063d57ce486e380f8d19fe7",
+        "status": "retrieved"
+      }
+    },
+    {
+      "key": "zbMATH:5270821",
+      "title": "Semisimple quantum cohomology, deformations of stability conditions and the derived category",
+      "read_depth": "metadata only",
+      "read_scope": "Author-PDF and university-repository search-result summary read. Direct repository open returned anti-bot page; thesis body not read.",
+      "role_status": "Bayer thesis: author/repository summary describes semisimplicity under point blowups. Full thesis unread; landing page anti-bot on direct open.",
+      "access": {
+        "status": "no linked primary identifier; needs manual resolution",
+        "additional_primary_locator": "https://hdl.handle.net/20.500.11811/3038"
+      }
+    },
+    {
+      "key": "doi:10.1080/00927872.2018.1498870",
+      "title": "Geometry of moduli space of sheaves on del Pezzo surfaces via Maruyama transform",
+      "read_depth": "metadata only",
+      "read_scope": "Bibliographic title metadata only; no paper body read.",
+      "role_status": "Previously licensed-out title resolved by Crossref: Geometry of moduli space of sheaves on del Pezzo surfaces via Maruyama transform. Title metadata only.",
+      "access": {
+        "url": "https://api.crossref.org/works/10.1080/00927872.2018.1498870",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-7051836.json",
+        "sha256": "eabcfac749047ed718bd414a2adfa34c240e7e5011aa931bf6602734ff88fdd3",
+        "status": "retrieved"
+      }
+    },
+    {
+      "key": "arXiv:0907.3597",
+      "title": "Vector bundles and monads on abelian threefolds",
+      "read_depth": "metadata only",
+      "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
+      "role_status": "Previously licensed-out title resolved by arXiv: Vector bundles and monads on abelian threefolds. Abstract describes bundle moduli, not a cubic-partner theorem.",
+      "access": {
+        "url": "https://arxiv.org/abs/0907.3597",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-6194734.html",
+        "sha256": "28cc0b81b3f1b612317f98036ac595c6a292c385158f36118886bf85cb99a597",
+        "status": "retrieved"
       }
     }
   ],

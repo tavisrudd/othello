@@ -1,0 +1,415 @@
+[
+  {
+    "zbmath_id": 6722461,
+    "zbmath_title": "Some Landau-Ginzburg models viewed as rational maps",
+    "queried_utc": "2026-09-10T01:00:59.118115+00:00",
+    "read_depth": "metadata only",
+    "arxiv": "1601.05119",
+    "doi": "10.1016/j.indag.2017.01.007",
+    "url": "https://arxiv.org/abs/1601.05119",
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-6722461.html",
+    "sha256": "08fb67627e920e956bf1cda89f88379b71463a4c3ce96c33610f05fb9f850efe",
+    "status": "retrieved",
+    "title": "Some Landau--Ginzburg models viewed as rational maps",
+    "abstract_present": true,
+    "abstract_word_count": 58,
+    "abstract_sha256": "bcc35e95a5f7468f62dc5b719e65e86bc968402bd3e23b6805eee0147f980bfd"
+  },
+  {
+    "zbmath_id": 6490755,
+    "zbmath_title": "Categorical base loci and spectral gaps, via Okounkov bodies and Nevanlinna theory",
+    "queried_utc": "2026-09-10T01:00:59.118266+00:00",
+    "read_depth": "metadata only",
+    "arxiv": null,
+    "doi": null,
+    "status": "no linked primary identifier; needs manual resolution",
+    "abstract_present": false
+  },
+  {
+    "zbmath_id": 7828755,
+    "zbmath_title": "Interpretations of spectra",
+    "queried_utc": "2026-09-10T01:00:59.118582+00:00",
+    "read_depth": "metadata only",
+    "arxiv": null,
+    "doi": "10.1007/978-3-031-17859-7_20",
+    "url": "https://api.crossref.org/works/10.1007/978-3-031-17859-7_20",
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-7828755.json",
+    "sha256": "ac7181dcf1d9e697c84892dcac2c09616f37969dd0c4e0d97ffd929b0d09cf75",
+    "status": "retrieved",
+    "title": [
+      "Interpretations of\u00a0Spectra"
+    ],
+    "authors": [
+      {
+        "given": "L.",
+        "family": "Katzarkov",
+        "sequence": "first",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "K. S.",
+        "family": "Lee",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "J.",
+        "family": "Svoboda",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "A.",
+        "family": "Petkov",
+        "sequence": "additional",
+        "affiliation": [],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      }
+    ],
+    "publication_date": {
+      "date-parts": [
+        [
+          2023
+        ]
+      ]
+    },
+    "abstract_present": false
+  },
+  {
+    "zbmath_id": 7168644,
+    "zbmath_title": "Birational Calabi-Yau manifolds have the same small quantum products",
+    "queried_utc": "2026-09-10T01:00:59.118411+00:00",
+    "read_depth": "metadata only",
+    "arxiv": "1806.01752",
+    "doi": "10.4007/annals.2020.191.2.4",
+    "url": "https://arxiv.org/abs/1806.01752",
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-7168644.html",
+    "sha256": "329afc0afa92cfa2515a9f8fb6209b9052e24cfc4ca6f960cb277b5353ec2fea",
+    "status": "retrieved",
+    "title": "Birational Calabi-Yau manifolds have the same small quantum products",
+    "abstract_present": true,
+    "abstract_word_count": 84,
+    "abstract_sha256": "74972b25a6a0342ef50835b2a3eb1e340a74abbeaf88171667cf52fd9a527547"
+  },
+  {
+    "zbmath_id": 6999237,
+    "zbmath_title": "Quantum cohomology of toric blowups and Landau-Ginzburg correspondences",
+    "queried_utc": "2026-09-10T01:00:59.119053+00:00",
+    "read_depth": "metadata only",
+    "arxiv": "1504.04396",
+    "doi": "10.14231/AG-2018-008",
+    "url": "https://arxiv.org/abs/1504.04396",
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-6999237.html",
+    "sha256": "b666bd7f9aa133314ea7752e8b0c04a935b8ddc61faf8a763468a7afbdc14b91",
+    "status": "retrieved",
+    "title": "Quantum Cohomology of Toric Blowups and Landau-Ginzburg Correspondences",
+    "abstract_present": true,
+    "abstract_word_count": 63,
+    "abstract_sha256": "8590fafa83a8022e2bd0a0b50c247e62a35c1a5e0258b5383879d17775f6ef81"
+  },
+  {
+    "zbmath_id": 902826367,
+    "zbmath_title": "The quantum D-module of product varieties",
+    "queried_utc": "2026-09-10T01:00:59.119246+00:00",
+    "read_depth": "metadata only",
+    "arxiv": "2509.07407",
+    "doi": null,
+    "url": "https://arxiv.org/abs/2509.07407",
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-902826367.html",
+    "sha256": "c303f742456be7c6993acc79d9a16ab665301a5259d922f3fb53128aa9cfaae3",
+    "status": "retrieved",
+    "title": "The quantum D-module of product varieties",
+    "abstract_present": true,
+    "abstract_word_count": 128,
+    "abstract_sha256": "621fd0ae94b5dd2762947b5d079977c315728c0c3132f239df49a3c7d5eda8e7"
+  },
+  {
+    "zbmath_id": 902487887,
+    "zbmath_title": "Revisiting Gamma conjecture I: counterexamples and modifications",
+    "queried_utc": "2026-09-10T01:00:59.119440+00:00",
+    "read_depth": "metadata only",
+    "arxiv": "2405.16979",
+    "doi": null,
+    "url": "https://arxiv.org/abs/2405.16979",
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-902487887.html",
+    "sha256": "26cb39a061b0e01317b8be9e6d31d0c24b966d0703f17a26dd474bb82ce24bfa",
+    "status": "retrieved",
+    "title": "Revisiting Gamma conjecture I: counterexamples and modifications",
+    "abstract_present": true,
+    "abstract_word_count": 121,
+    "abstract_sha256": "05b6a93a3b469a45b032c5b105aad5db8ee4d1b05bc4095d9c5fc027cd15eaef"
+  },
+  {
+    "zbmath_id": 8141796,
+    "zbmath_title": "Birational invariance in punctured log Gromov-Witten theory",
+    "queried_utc": "2026-09-10T01:00:59.119786+00:00",
+    "read_depth": "metadata only",
+    "arxiv": "2210.06079",
+    "doi": "10.14231/AG-2026-003",
+    "url": "https://arxiv.org/abs/2210.06079",
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-8141796.html",
+    "sha256": "a450902926b7151caeb6190a14c2be763def17a9fd9fe6ad6aff7967668d3167",
+    "status": "retrieved",
+    "title": "Birational Invariance in Punctured Log Gromov-Witten Theory",
+    "abstract_present": true,
+    "abstract_word_count": 84,
+    "abstract_sha256": "657be776b27f3b6a255c5d8b79bd8652f45f5be33bc1e1193e8f8589a8049c6d"
+  },
+  {
+    "zbmath_id": 7319811,
+    "zbmath_title": "Gromov-Witten theory of toric birational transformations",
+    "queried_utc": "2026-09-10T01:00:59.119852+00:00",
+    "read_depth": "metadata only",
+    "arxiv": "1604.03491",
+    "doi": "10.1093/imrn/rnz001",
+    "url": "https://arxiv.org/abs/1604.03491",
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-7319811.html",
+    "sha256": "f4145c54744f8ed227bceb83e69d413a20b3dfc49432aba207e0595169d9c72b",
+    "status": "retrieved",
+    "title": "Gromov-Witten Theory of Toric Birational Transformations",
+    "abstract_present": true,
+    "abstract_word_count": 101,
+    "abstract_sha256": "8fbc3d7f13c5150f82b5f0a88b34a09cffb21675637553e5761cf61bd07f7ae4"
+  },
+  {
+    "zbmath_id": 6490757,
+    "zbmath_title": "Singular fibers and Coulomb phases",
+    "queried_utc": "2026-09-10T01:00:59.119997+00:00",
+    "read_depth": "metadata only",
+    "arxiv": null,
+    "doi": null,
+    "status": "no linked primary identifier; needs manual resolution",
+    "abstract_present": false
+  },
+  {
+    "zbmath_id": 902598444,
+    "zbmath_title": "Decomposition and framing of F-bundles and applications to quantum cohomology",
+    "queried_utc": "2026-09-10T01:00:59.120008+00:00",
+    "read_depth": "metadata only",
+    "arxiv": "2411.02266",
+    "doi": null,
+    "url": "https://arxiv.org/abs/2411.02266",
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-902598444.html",
+    "sha256": "ce05d649fe1de44e9eea6752d494a50a5646e38eb3d1a44e2fed4974bf292d17",
+    "status": "retrieved",
+    "title": "Decomposition and framing of F-bundles and applications to quantum cohomology",
+    "abstract_present": true,
+    "abstract_word_count": 140,
+    "abstract_sha256": "07f7ada45d30bea4cece953dcd55bb9f431208fe278a8a1de8b3bc7a9982fd73"
+  },
+  {
+    "zbmath_id": 8197586,
+    "zbmath_title": "Towards the symplectic Graber-Harris-Starr theorems",
+    "queried_utc": "2026-09-10T01:00:59.120104+00:00",
+    "read_depth": "metadata only",
+    "arxiv": "1208.4340",
+    "doi": "10.1007/s10114-026-5298-z",
+    "url": "https://arxiv.org/abs/1208.4340",
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-8197586.html",
+    "sha256": "b20a37ee26ff8993a6d5a440b0772d7b371dd1c9aed130151432b244c021fc8e",
+    "status": "retrieved",
+    "title": "Towards the symplectic Graber-Harris-Starr theorems",
+    "abstract_present": true,
+    "abstract_word_count": 126,
+    "abstract_sha256": "9fab8d53ebe3470fa78c4159d87d8dbbfa46459eaa22959f1e8acc95fc93e44b"
+  },
+  {
+    "zbmath_id": 5530174,
+    "zbmath_title": "Gromov-Witten invariants of blow-ups along submanifolds with convex normal bundles",
+    "queried_utc": "2026-09-10T01:00:59.120235+00:00",
+    "read_depth": "metadata only",
+    "arxiv": "0710.3968",
+    "doi": "10.2140/gt.2009.13.1",
+    "url": "https://arxiv.org/abs/0710.3968",
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-5530174.html",
+    "sha256": "c311290fe5288a8488631ddd067ad5c0023d0d95f3976008de862b75f22a7e3d",
+    "status": "retrieved",
+    "title": "Gromov-Witten invariants of blow-ups along submanifolds with convex normal bundles",
+    "abstract_present": true,
+    "abstract_word_count": 90,
+    "abstract_sha256": "e9c7c73ee4e7089caf2e5dc149ad0d1c8f87a4cde82119e3ce60b14b6f6b513a"
+  },
+  {
+    "zbmath_id": 900530165,
+    "zbmath_title": "Relative quantum cohomology under birational transformations",
+    "queried_utc": "2026-09-10T01:00:59.120344+00:00",
+    "read_depth": "metadata only",
+    "arxiv": "2204.00509",
+    "doi": null,
+    "url": "https://arxiv.org/abs/2204.00509",
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-900530165.html",
+    "sha256": "683263a08943b2f1204a84aeb07273a59263ba6b9e4883a33a0fbc43db81772a",
+    "status": "retrieved",
+    "title": "Relative quantum cohomology under birational transformations",
+    "abstract_present": true,
+    "abstract_word_count": 72,
+    "abstract_sha256": "3f195508ca9770d3fd9d5e7dc43a7baea7718381b4c61b210496584875ae7240"
+  },
+  {
+    "zbmath_id": 6745500,
+    "zbmath_title": "Birationality and Landau-Ginzburg models",
+    "queried_utc": "2026-09-10T01:00:59.120401+00:00",
+    "read_depth": "metadata only",
+    "arxiv": "1608.07917",
+    "doi": "10.1007/s00220-017-2830-0",
+    "url": "https://arxiv.org/abs/1608.07917",
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-6745500.html",
+    "sha256": "cec733dd91ce4bfbf8d7b54aa5c9225a86ab4916c72582dfcaa77a3fc467d411",
+    "status": "retrieved",
+    "title": "Birationality and Landau-Ginzburg models",
+    "abstract_present": true,
+    "abstract_word_count": 84,
+    "abstract_sha256": "ccd92e99dc7937b52758483c390ed7d2b8a8b32ca1edb20354d4118f58b47702"
+  },
+  {
+    "zbmath_id": 7822627,
+    "zbmath_title": "Floer cohomology, singularities, and birational geometry",
+    "queried_utc": "2026-09-10T01:00:59.120529+00:00",
+    "read_depth": "metadata only",
+    "arxiv": null,
+    "doi": "10.4171/ICM2022/13",
+    "url": "https://api.crossref.org/works/10.4171/ICM2022/13",
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-7822627.json",
+    "sha256": "7b3e9aba86abf9e1be92ed0300ce09d454955a7e6063d57ce486e380f8d19fe7",
+    "status": "retrieved",
+    "title": [
+      "Floer cohomology, singularities, and birational geometry"
+    ],
+    "authors": [
+      {
+        "given": "Mark",
+        "family": "McLean",
+        "sequence": "first",
+        "affiliation": [
+          {
+            "name": "Stony Brook Mathematics Department, Stony Brook University, 100 Nicolls Rd, Stony Brook, NY 11794, USA"
+          }
+        ],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      }
+    ],
+    "publication_date": {
+      "date-parts": [
+        [
+          2023,
+          12,
+          15
+        ]
+      ]
+    },
+    "abstract_present": false
+  },
+  {
+    "zbmath_id": 5270821,
+    "zbmath_title": "Semisimple quantum cohomology, deformations of stability conditions and the derived category",
+    "queried_utc": "2026-09-10T01:00:59.120636+00:00",
+    "read_depth": "metadata only",
+    "arxiv": null,
+    "doi": null,
+    "status": "no linked primary identifier; needs manual resolution",
+    "abstract_present": false
+  },
+  {
+    "zbmath_id": 7051836,
+    "zbmath_title": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+    "queried_utc": "2026-09-10T01:00:59.120644+00:00",
+    "read_depth": "metadata only",
+    "arxiv": null,
+    "doi": "10.1080/00927872.2018.1498870",
+    "url": "https://api.crossref.org/works/10.1080/00927872.2018.1498870",
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-7051836.json",
+    "sha256": "eabcfac749047ed718bd414a2adfa34c240e7e5011aa931bf6602734ff88fdd3",
+    "status": "retrieved",
+    "title": [
+      "Geometry of moduli space of sheaves on del Pezzo surfaces via Maruyama transform"
+    ],
+    "authors": [
+      {
+        "given": "Jinwon",
+        "family": "Choi",
+        "sequence": "first",
+        "affiliation": [
+          {
+            "name": "Department of Mathematics &amp; Research Institute of Natural Sciences, Sookmyung Women\u2019s University, Seoul, Republic of Korea;"
+          }
+        ],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      },
+      {
+        "given": "Kiryong",
+        "family": "Chung",
+        "sequence": "additional",
+        "affiliation": [
+          {
+            "name": "Department of Mathematics Education, Kyungpook National University, Daegu, South Korea"
+          }
+        ],
+        "role": [
+          {
+            "role": "author",
+            "vocabulary": "crossref"
+          }
+        ]
+      }
+    ],
+    "publication_date": {
+      "date-parts": [
+        [
+          2018,
+          11,
+          19
+        ]
+      ]
+    },
+    "abstract_present": false
+  },
+  {
+    "zbmath_id": 6194734,
+    "zbmath_title": "zbMATH Open Web Interface contents unavailable due to conflicting licenses.",
+    "queried_utc": "2026-09-10T01:00:59.120770+00:00",
+    "read_depth": "metadata only",
+    "arxiv": "0907.3597",
+    "doi": "10.1080/00927872.2011.645977",
+    "url": "https://arxiv.org/abs/0907.3597",
+    "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-6194734.html",
+    "sha256": "28cc0b81b3f1b612317f98036ac595c6a292c385158f36118886bf85cb99a597",
+    "status": "retrieved",
+    "title": "Vector bundles and monads on abelian threefolds",
+    "abstract_present": true,
+    "abstract_word_count": 79,
+    "abstract_sha256": "81887f649cd4bfcddb7c0cb11bcb3e48ddd853715c6c45ff82d2418a358327c1"
+  }
+]

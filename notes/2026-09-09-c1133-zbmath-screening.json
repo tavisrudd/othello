@@ -1,0 +1,1127 @@
+{
+  "date": "2026-09-09 local / 2026-09-10 UTC",
+  "query": "\"quantum\" & \"birational\"",
+  "records_retrieved": 274,
+  "unique_ids": 274,
+  "title_screened": 274,
+  "screen_depth": "100 titles in prior checkpoint; 174 remaining records screened here. Two hidden titles separately resolved from primary identifiers. No full-text negative claim.",
+  "primary_followups": {
+    "6722461": "Adjoint-orbit Landau–Ginzburg compactification; abstract-level neighboring construction.",
+    "6490755": "Categorical base loci/Orlov spectra; primary text unresolved; do not claim absence of an exact overlap.",
+    "7828755": "Close spectral/monodromy precursor. Publisher abstract and references inspected; chapter body unread. Needs theorem-level follow-up.",
+    "7168644": "Birational projective Calabi–Yau small quantum rings after Novikov changes; abstract-level adjacent comparison, not imported here.",
+    "6999237": "Noncrepant toric blowup/LG correspondence; historical comparison input, abstract only.",
+    "902826367": "Already registered and partially read; retain the prior original-lattice/base-contract limitation.",
+    "902487887": "Gamma conjecture counterexamples for projective bundles; abstract-level caution against importing asymptotic hypotheses without verification.",
+    "8141796": "Log étale modifications and punctured log GW theory; abstract-level neighboring invariance.",
+    "7319811": "Toric wall-crossing I-functions through asymptotic expansion; abstract-level prior comparison technology.",
+    "6490757": "Elliptic Calabi–Yau fibers and Coulomb phases; author seminar abstract provides context, chapter body unread.",
+    "902598444": "Already registered foundation; arXiv landing abstract additionally inspected. Decomposition and framing-extension uniqueness, no new proof-level read.",
+    "8197586": "Symplectic GHS analogues via GW-detectable sections of RC fibrations; abstract only.",
+    "5530174": "GW blowup comparison with convex normal-bundle hypotheses and counterexamples to unrestricted extension; abstract only.",
+    "900530165": "Relative I-functions of toric complete intersections under birational changes; abstract only.",
+    "6745500": "Multiple-mirror Calabi–Yau nef-partition birationality; abstract-level scope distinction.",
+    "7822627": "McLean ICM survey; Crossref title metadata only; precise statements not read.",
+    "5270821": "Bayer thesis: author/repository summary describes semisimplicity under point blowups. Full thesis unread; landing page anti-bot on direct open.",
+    "7051836": "Previously licensed-out title resolved by Crossref: Geometry of moduli space of sheaves on del Pezzo surfaces via Maruyama transform. Title metadata only.",
+    "6194734": "Previously licensed-out title resolved by arXiv: Vector bundles and monads on abelian threefolds. Abstract describes bundle moduli, not a cubic-partner theorem."
+  },
+  "records": [
+    {
+      "id": 1421310,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1655744,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 902802238,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1933189,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5635076,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6116035,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1903031,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5267039,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1948679,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6484997,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1982581,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 7420101,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 2152785,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5852674,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 7955779,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6949427,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6861875,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1126797,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6615326,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 7406625,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 902834793,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 903047802,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1473549,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5380135,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6493585,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 834321,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1658401,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1217284,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5019084,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5769089,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5642247,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1799485,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 7287242,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 903058126,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 8091845,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5896135,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5789914,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6741282,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 903118039,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1347705,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6656230,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 8156819,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6505848,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6221950,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6869616,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5382035,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6485000,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1638174,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1645819,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5907268,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 900263115,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6010983,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1754952,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 2064976,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 555849,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 2054548,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1476285,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 7595433,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6921693,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 8083260,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5875458,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6275356,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5872332,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 604758,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6242523,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 7822624,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 7357360,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5218989,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 7228754,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6488165,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 902986064,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6553429,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6741283,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6937529,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 7863199,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 604733,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 902931444,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1341973,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6103522,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 7142778,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5361864,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1553918,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6506878,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5008877,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6012494,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5234055,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 7471415,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 4134437,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6885170,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 902812903,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 7336159,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 7255725,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5982253,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 5218125,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6769487,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 6059309,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 900578182,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 1669270,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 7142340,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 719246,
+      "disposition": "prior checkpoint title screen; retain earlier source dispositions"
+    },
+    {
+      "id": 398981,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 934303,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6262457,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5661747,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 8113906,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 903047131,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7152161,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 1671066,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5980333,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6722461,
+      "disposition": "Adjoint-orbit Landau–Ginzburg compactification; abstract-level neighboring construction."
+    },
+    {
+      "id": 1134984,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6490755,
+      "disposition": "Categorical base loci/Orlov spectra; primary text unresolved; do not claim absence of an exact overlap."
+    },
+    {
+      "id": 7640875,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7828755,
+      "disposition": "Close spectral/monodromy precursor. Publisher abstract and references inspected; chapter body unread. Needs theorem-level follow-up."
+    },
+    {
+      "id": 5604776,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 902342716,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 2226964,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7168644,
+      "disposition": "Birational projective Calabi–Yau small quantum rings after Novikov changes; abstract-level adjacent comparison, not imported here."
+    },
+    {
+      "id": 900049754,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6999237,
+      "disposition": "Noncrepant toric blowup/LG correspondence; historical comparison input, abstract only."
+    },
+    {
+      "id": 5614507,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 1474126,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6553437,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 2204425,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6842126,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 900122266,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7110748,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 1001625,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 8109611,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7573752,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5548157,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7299664,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 8196821,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7174392,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 900586921,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7694758,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5572637,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 900461989,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 2145334,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 1385253,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6298940,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 617416,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 902826367,
+      "disposition": "Already registered and partially read; retain the prior original-lattice/base-contract limitation."
+    },
+    {
+      "id": 7602034,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 558964,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7334522,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7118652,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 902487887,
+      "disposition": "Gamma conjecture counterexamples for projective bundles; abstract-level caution against importing asymptotic hypotheses without verification."
+    },
+    {
+      "id": 1326848,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 900503838,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5876253,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5901953,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6254154,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 902988786,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 902940491,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 8141796,
+      "disposition": "Log étale modifications and punctured log GW theory; abstract-level neighboring invariance."
+    },
+    {
+      "id": 6010985,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7606767,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6784048,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6711991,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7319811,
+      "disposition": "Toric wall-crossing I-functions through asymptotic expansion; abstract-level prior comparison technology."
+    },
+    {
+      "id": 6490757,
+      "disposition": "Elliptic Calabi–Yau fibers and Coulomb phases; author seminar abstract provides context, chapter body unread."
+    },
+    {
+      "id": 6030248,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7940012,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6636669,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7342204,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 902342480,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5363240,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 2008523,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5170174,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6550630,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6277432,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6601672,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 902598444,
+      "disposition": "Already registered foundation; arXiv landing abstract additionally inspected. Decomposition and framing-extension uniqueness, no new proof-level read."
+    },
+    {
+      "id": 8197586,
+      "disposition": "Symplectic GHS analogues via GW-detectable sections of RC fibrations; abstract only."
+    },
+    {
+      "id": 1414894,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7673343,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 1019764,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 4218831,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5530174,
+      "disposition": "GW blowup comparison with convex normal-bundle hypotheses and counterexamples to unrestricted extension; abstract only."
+    },
+    {
+      "id": 7434660,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7036781,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 2245440,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 8245711,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5172475,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5663697,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 900530165,
+      "disposition": "Relative I-functions of toric complete intersections under birational changes; abstract only."
+    },
+    {
+      "id": 7060785,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7309959,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6530914,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7142412,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 42731,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6745500,
+      "disposition": "Multiple-mirror Calabi–Yau nef-partition birationality; abstract-level scope distinction."
+    },
+    {
+      "id": 8192755,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 900596312,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 8081148,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6126103,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 2132946,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5883384,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6688407,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6557840,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7683503,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7683352,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7121375,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 1747276,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7404767,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5039161,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7516332,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6822099,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7222105,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7304655,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7822627,
+      "disposition": "McLean ICM survey; Crossref title metadata only; precise statements not read."
+    },
+    {
+      "id": 7442180,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 900552416,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 8204144,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 8012071,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6290391,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7828762,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5942149,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6433087,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7805880,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 900271843,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6357532,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 8103192,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7075302,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7160971,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 3207075,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 8053082,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7720730,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6495593,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 1167757,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6202658,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7816358,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6563879,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 900142499,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7056198,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6896959,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 1344571,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6142526,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5654881,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7423420,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 2116097,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5270821,
+      "disposition": "Bayer thesis: author/repository summary describes semisimplicity under point blowups. Full thesis unread; landing page anti-bot on direct open."
+    },
+    {
+      "id": 5042433,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 900285606,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7051836,
+      "disposition": "Previously licensed-out title resolved by Crossref: Geometry of moduli space of sheaves on del Pezzo surfaces via Maruyama transform. Title metadata only."
+    },
+    {
+      "id": 1602793,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 8027627,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6896973,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6194734,
+      "disposition": "Previously licensed-out title resolved by arXiv: Vector bundles and monads on abelian threefolds. Abstract describes bundle moduli, not a cubic-partner theorem."
+    },
+    {
+      "id": 1341968,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6833209,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 1390378,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6695054,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7392699,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6758852,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6174467,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6897880,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7729695,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 8082977,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6655978,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6763225,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7860317,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 6285149,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5825234,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7415184,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5764251,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 770579,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 1596603,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 2172962,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 7988493,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 2120429,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 52808,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    },
+    {
+      "id": 5606421,
+      "disposition": "title screened; no close A–D claim identified at title depth"
+    }
+  ]
+}

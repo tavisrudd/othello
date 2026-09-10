@@ -3,7 +3,7 @@
 **Date:** 2026-09-09. **Lane:** `cubic-threefolds`.
 **Status:** incomplete; no global novelty or priority verdict is issued.
 **External sources read at full text: 5 — three papers and two source scripts.**
-The source register contains 55 individual entries, with exact read depths,
+The source register contains 72 individual entries, with exact read depths,
 versions, cache access and hashes. Most papers have partial read depth.
 Iritani’s ten-page Hodge refinement has now been read completely.
 The author-supplied packet has been read completely, including its checker.
@@ -418,3 +418,85 @@ versions, the remaining registered citation/topical screens, and completion of
 the repeating-surface inventory/owning novelty ledger. Optional source
 acceptance is no longer waiting on the cone criterion, GG correction, or
 minimal-surface Chern inequality.
+
+
+## Completed pagination and primary lead screen
+
+The quantum/birational zbMATH query is now fully retrieved: **274 records,
+274 distinct IDs, all titles screened**. The OpenAPI schema specifies zero-based
+`page` and `results_per_page`; its `last_id: null` was not an exhaustion signal.
+The previously read page 0 has 100 records; pages 1 and 2 have 100 and 74.
+The exact query remains `"quantum" & "birational"`. Raw response timestamps,
+hashes, identifiers and URLs are recorded by `2026-09-09-c1133-zbmath-pagination.py`
+and its JSON. Replay uses the persistent cached bytes. The compact tracked
+records omit the database's full reviews and reference lists.
+
+The remaining 174 records were title-screened in three bounded chunks.
+Two title fields were hidden by licensing restrictions. Both are now resolved:
+zbMATH 7051836 is the sheaf-moduli/Maruyama-transform article identified by
+Crossref DOI 10.1080/00927872.2018.1498870; 6194734 is Gulbrandsen's
+*Vector bundles and monads on abelian threefolds*, arXiv:0907.3597. The latter's
+arXiv abstract was read. Neither masked field was treated as a negative hit.
+
+Nineteen leads were followed against primary metadata; thirteen arXiv abstracts
+were read. Exact accesses and errors are in `2026-09-09-c1133-zbmath-lead-probe.py`
+and its JSON; dispositions for all 274 records are in
+`2026-09-09-c1133-zbmath-screening.json`. This completes the finite title screen,
+not theorem-level screening of every paper or the entire literature audit.
+
+The follow-up confirms several historical strands: McLean's birational
+Calabi–Yau small quantum products; Acosta–Shoemaker's discrepant toric
+comparisons; Lai's blowup formulas with normal-bundle restrictions; Johnston's
+punctured logarithmic comparisons; and You's relative I-functions. Those scope
+summaries are at abstract depth. Gyenge's product paper and Hinault–Yu–Zhang–Zhang
+are already registered; their earlier limitations are retained, not reset.
+
+**A close historical lead remains open:** Katzarkov–Lee–Svoboda–Petkov,
+*Interpretations of Spectra*, Springer 2023, pp. 371–407,
+DOI 10.1007/978-3-031-17859-7_20. The publisher abstract concerns monodromy of
+categorical linear systems and noncommutative spectra, and its displayed
+references include Fano irrationality and prospective blowup/atom work. The
+chapter body is behind subscription access and has not been read. Its relevance
+cannot be disposed of by the abstract alone. Katzarkov–Liu's categorical
+base-loci chapter is another recorded body-unread precursor. These are
+follow-up obligations, not claims of pre-emption.
+
+The exact additional web queries were:
+
+- `"Categorical base loci and spectral gaps" Katzarkov Liu`
+- `"Interpretations of spectra" Katzarkov Lee Svoboda Petkov`
+- `"Semisimple quantum cohomology, deformations of stability conditions" Bayer`
+- `"Singular fibers and Coulomb phases" Schafer Nameki`
+
+Primary landing accesses also inspected Springer chapter 10.1007/978-3-031-17859-7_20.
+The AMS chapter URL and an Oxford direct open returned tool errors; the Bonn
+repository direct open returned an anti-bot page. Author/repository search-result
+summaries for Bayer and the Oxford seminar remain explicitly metadata-depth.
+No extra source has been counted as fully read. The unresolved historical chapter
+bodies, other citation leads, publication aliases and repeating novelty surfaces
+still prevent a global novelty verdict.
+
+
+## Local sharpness import: exact scope check
+
+The current monorepo authority `papers/cubic-stabilization-irrationality/`
+is titled *Sharpness of Irrationality after One Stabilization for Cubic
+Threefolds*. Its last source commit is
+`f879abf243ac2c02ffd16117e25b075b16e0339d`; the TeX SHA-256 inspected here is
+`ec0509629e3978b5f728dcfc8b00563d87b036c43723a026e68a54197dba7274`.
+Read depth for this checkpoint: README lines 1–100 and TeX lines 80–174,
+not the complete manuscript or its proof/evidence bundle.
+
+The exact usable surface statement is `thm:two-variable`: characteristic-zero
+k, a smooth quartic del Pezzo surface S/k, S(k) nonempty, and geometric Picard
+lattice stably permutation imply S×P² is k-rational. Its annotations expose
+classical imports and the quartic-del-Pezzo slice-cover evidence bundle.
+`thm:cubic-level` applies to two displayed cubics X1,X3; `cor:cubics` covers
+the corresponding two Tschinkel–Zhang higher-dimensional series.
+
+This does **not** by itself verify the packet's entire rational-parameter
+pencil. An application to that pencil still needs its own generic del Pezzo
+fibration and stable-permutation/rational-point hypotheses. The local toric-rank
+profile and special-pencil isogeny theorem are not supplied by the inspected
+statements. The sharpness theorem has now been located and pinned, but the
+pencil-specific inputs remain open; neither is used in A–D.
