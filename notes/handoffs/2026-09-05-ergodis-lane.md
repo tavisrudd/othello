@@ -105,7 +105,8 @@ preparation/final discovery, sibling worker cleanup and bounded discovery readin
 (private `a55cca3`). Repair/Hadamard saved traces now reopen read-only with stale-import isolation
 (private `2fb0dad`); ModuleSession initialization/reset guards are `e6f33ed`.
 Example-specific batch units remain intentional; discovery failure policy still
-needs a named, documented distinction.
+needs a named, documented distinction. Review and remaining consolidation boundary:
+`ergodis-private/analysis/interface-review/2026-09-09-js-race-review.md`.
 
 Native CLI/control/runtime fragmentation must converge in these same phases.
 Preserve typed native kernels and all contributor performance gates. Full parity,
