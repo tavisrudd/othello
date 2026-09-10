@@ -580,3 +580,33 @@ is coefficientwise equivalent to the original formal-family source, with no
 additional support hypothesis, and its actual unital ring map agrees with the
 previous center map. Guarded queues `run-20260910-052329-da06ad4a` and
 `run-20260910-052436-e77a540b` pass. Public reviewer export integration follows.
+
+### Whole-object rational descent strengthening
+
+The closeout review separated two valid but different interfaces: transport
+through a supplied category equivalence, and descent of one whole complex
+comparison to a rational Hodge isomorphism. The second does not require an
+equivalence of an entire complex representation category with a rational Hodge
+category, or rational descent of separately labelled scalar branches.
+
+`Quantum/RationalHodgeMatrixDescent.lean` constructs effective pure weight-three
+rational Hodge objects in chosen rational bases, with four orthogonal complex
+projectors summing to one and conjugation exchanging p with 3-p. Rational
+intertwining matrices form an actual rational submodule. The exact terminal
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.rationalHodgeMatrixIso_of_extendedCombination`
+uses determinant-polynomial descent to construct a rational unit matrix;
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RationalWeightThreeHodgeMatrixIso.symm`
+proves that its rational inverse intertwines all projectors. Queue
+`run-20260910-053019-21561a99` passes.
+
+`Quantum/RationalWholeHodgeConservation.lean` supplies
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.rationalWholeHodgeIso_of_stabilizedBirationality`.
+Only the whole conserved comparison is realized over the complex numbers and
+placed in the scalar extension of the actual rational Hodge-morphism space.
+The rational isomorphism is derived, not supplied. Its single-file elaboration
+passes; the dependency build is `run-20260910-053251-41e1ff7b`.
+`Quantum/RationalHodgeApplications.lean` is uncommitted while assembling the
+source-restricted reconstruction and arithmetic applications with this actual
+rational Hodge premise. Source geometric identification and equivariant Hom
+scalar-extension fullness remain explicit; arbitrary complex Hodge maps are
+not assumed to descend.
