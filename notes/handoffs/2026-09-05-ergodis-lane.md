@@ -90,9 +90,13 @@ lifting and CLI/schema convergence remain open. P3 inventory, P4 portable
 performance experiments, P5 continuation/storage and P6 complete conformance.
 The first SIMD composition screen found no convincing compilation-time gain;
 served/native defaults are unchanged (`2026-09-09-composition-simd-screen.md`).
-All-field scalar and optional SIMD conformance both pass. Proposed next cold
-admission refinement: `adr-composition-span-admission.md`; source affine spans
-tighten 43 of 660 exhaustively checked prefix estimates, with no runtime change.
+All-field scalar and earlier optional SIMD conformance pass. Source-affine-span
+admission now handles otherwise rejected low-rank sources through a bounded cold
+fallback; 12,373 native/WASM calls and63 overlapping CLI queries pass. Previously
+accepted sources skip span computation; native preparation diagnostic is unchanged
+within measurement noise. Current report: `2026-09-09-composition-span-admission.md`.
+Next tower slice must include native source-to-base-table preparation and source
+witness lifting, not only the existing CompositionTower kernel.
 Private current evidence/design: `analysis/interface-review/application-records.md`,
 `provider-readout-contracts.md`, `capability-matrix.json`, and
 `adr-css-residual-reductions.md`. Generic fixed-coordinate discovery and offline
