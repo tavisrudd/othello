@@ -49,7 +49,7 @@ Current authority: `../2026-09-09-c1130-js-wasm-parity-review.md`; task requirem
 performance experiments: `ergodis-private/analysis/interface-review/`.
 
 JS/WASM conformance entry point: `make -C analysis/js-wasm-tests all` in
-`ergodis-private`. Fast/browser/extended tiers, 57 checks, JSON/Markdown/JUnit
+`ergodis-private`. Fast/browser/extended tiers, 62 checks, JSON/Markdown/JUnit
 reports. Stop/history responsiveness: `../2026-09-10-c1130-stop-responsiveness.md`. Solve clock and adaptive log axis: `../2026-09-10-c1130-solve-clock-axis.md`. Generated core/module contracts, independent oracles, shrinking and
 regressions: `../2026-09-09-c1130-property-testing.md`; private design and current
 validation: `analysis/property-tests/`. Generated module-client schedules and
@@ -68,9 +68,24 @@ independent minima / bounded two-resource surfaces replace the JS prototype for
 execution. Native/JS/WASM oracle, allocation, counter and browser gates are recorded
 in `analysis/interface-review/2026-09-10-wasm-specialized-solvers.md`; design:
 `analysis/interface-review/adr-capacity-surface-specialization.md`.
-No uncommitted allocation-surface draft remains. Next: make source/query-shape
-selection available to the general planner; do not preserve a default/Evolve
-capability gap to manufacture a race ranking. WASM all-target Clippy's existing
+Specialized progress now uses scalar kernel checkpoints and bounded publication
+(core `e21bffa`); fit/XOR races use compact native/WASM checkpoints (`4d11fe9`),
+a worker-owned loop and early telemetry ring (core `8fa619e`). Reports:
+`analysis/interface-review/2026-09-10-specialized-progress-and-worker-overhead.md`
+and `2026-09-10-worker-owned-fit-checkpoints.md`. Source-derived witness-prefix
+reuse and objective-first proposals: `2026-09-10-specialized-transfer-review.md`.
+Shared-memory solver/Evolve threads with a separate telemetry observer are a
+specified target, not implemented: `adr-shared-memory-execution-and-telemetry.md`.
+Private allocation now has shared native/WASM upfront selection and checked active
+representation admission (`844cb0a`, `35a433e`): explicit per-query restart, independently
+recheckable applicability receipts, generated source/permutation checks, and preserved
+original witness coordinates. Design/status: `analysis/interface-review/2026-09-10-adaptive-representation-plan.md`.
+Measured cold-overhead correction: `dfa284b`; retained single/two-worker counters
+and misses: `2026-09-10-adaptive-representation-performance.md`. Decision:
+`adr-checked-execution-representation-changes.md` (`c124a98`).
+Next: amortize retained budget tables across query domains and recognize independent
+minimum-cost choices for XOR; broader plan contracts and shared-memory telemetry
+remain open. Do not preserve a default/Evolve capability gap to manufacture a race ranking. WASM all-target Clippy's existing
 `bundle.rs` items-after-test-module finding remains; library Clippy/tests pass.
 Asset loading now uses revisioned immutable URLs, speculative post-paint JS/WASM
 cache fills and HTML-hidden empty results (`b65f0b3`). Warm source-switch races

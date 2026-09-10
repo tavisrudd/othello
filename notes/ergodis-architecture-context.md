@@ -8,9 +8,14 @@ Specialized representation transfer and adaptive plan switching:
 `ergodis-private/analysis/interface-review/2026-09-10-specialization-representation-and-evolve.md`
 (sibling repository). Cheap recognition belongs in initial compilation; Evolve
 must also recognize, independently admit and switch active general executions to
-specialized representations. This is a design requirement, not delivered general
-switching. The document inventories measured advantages, proposed transfers and
-preservation, timing and performance gates.
+specialized representations. A first private allocation implementation now shares
+native/WASM automatic selection and checked active admission into the existing
+budget-envelope kernel. Admission explicitly restarts one query, preserving prior
+work; it does not convert the old dynamic-programming state. See private
+`analysis/interface-review/2026-09-10-adaptive-representation-plan.md` and its
+performance report; decision: `analysis/interface-review/adr-checked-execution-representation-changes.md`. Whole-query-domain table reuse, XOR minimum-cost recognition,
+and a universal representation-switch contract remain open. The design document
+inventories broader transfers and preservation, timing and performance gates.
 
 Conformance runner: private `analysis/js-wasm-tests/README.md`; use its
 fast/browser/extended tiers and retained reports when changing JS/WASM contracts.
