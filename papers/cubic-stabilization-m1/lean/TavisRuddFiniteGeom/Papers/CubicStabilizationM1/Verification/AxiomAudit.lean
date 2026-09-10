@@ -333,3 +333,4 @@ currently exported by the reviewer interface.
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_scalarEven_odd_eq_bot
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_eulerPolynomial_transfers_from_even
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankThree_cyclicCentralizer_and_traceIdentities
+#print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankThree_cyclicNilpotent_persists_on_formal_germ

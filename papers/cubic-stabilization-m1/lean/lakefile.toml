@@ -9,6 +9,7 @@ rev = "571b8a8e54219b4d393f75f4b8653fac08197fcc"
 [[lean_lib]]
 name = "CubicStabilizationM1"
 roots = [
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.CyclicRankThreePersistence",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.FormalDifferentialSystemVanishing",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.GraphLattices.RankOneGeneration",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.GraphLattices.MatrixOfIdeals",

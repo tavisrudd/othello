@@ -1,3 +1,4 @@
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.CyclicRankThreePersistence
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RankTwoLatticeTransport
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ParameterizedRankTwoResidue
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SuperRankOneVanishing
@@ -155,5 +156,26 @@ theorem rankThree_cyclicCentralizer_and_traceIdentities
   ⟨Quantum.centeredCyclicRankThree_charpoly b c,
     Quantum.centeredCyclicRankThree_commutant comparison commutes,
     Quantum.centeredCyclicRankThree_commuting_traces comparison commutes⟩
+
+/-- A centered cyclic rank-three block satisfying compressed flatness and
+commutation in every coordinate direction remains a single nilpotent block
+on a formal germ if its characteristic coefficients vanish at the origin.
+The connection matrices and their identities are explicit hypotheses. -/
+theorem rankThree_cyclicNilpotent_persists_on_formal_germ
+    {σ K : Type*} [CommRing K] [NoZeroDivisors K] [CharZero K]
+    (b c : MvPowerSeries σ K)
+    (comparison a connection : σ → Matrix (Fin 3) (Fin 3) (MvPowerSeries σ K))
+    (initialB : MvPowerSeries.coeff 0 b = 0)
+    (initialC : MvPowerSeries.coeff 0 c = 0)
+    (commutes : ∀ i, comparison i * Quantum.centeredCyclicRankThree b c =
+      Quantum.centeredCyclicRankThree b c * comparison i)
+    (flat : ∀ i,
+      !![0,0,Quantum.formalPartialDerivative i c; 0,0,Quantum.formalPartialDerivative i b; 0,0,0] =
+      -comparison i + (comparison i*a i-a i*comparison i) +
+      (connection i*Quantum.centeredCyclicRankThree b c-Quantum.centeredCyclicRankThree b c*connection i)) :
+    b = 0 ∧ c = 0 ∧ (Quantum.centeredCyclicRankThree b c)^3 = 0 ∧
+      (Quantum.centeredCyclicRankThree b c)^2 ≠ 0 :=
+  Quantum.centeredCyclicRankThree_nilpotent_persists b c comparison a connection
+    initialB initialC commutes flat
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationM1

@@ -1476,6 +1476,11 @@
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankThree_cyclicCentralizer_and_traceIdentities",
       "reason": "Finite cyclic rank-three centralizer and trace identities for the planned cluster-persistence argument. Differential-ideal stability, formal lowest-degree vanishing and geometric cluster realization are not constructed; this algebra does not discharge a current manuscript claim.",
       "terminal_digest": "6a86d96164092c3cc492d8fca004282dda2a8287b2b4e1a3b371e88e10624d12"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankThree_cyclicNilpotent_persists_on_formal_germ",
+      "reason": "Formal rank-three nilpotent persistence follows from explicit commuting matrices and compressed flatness identities over a characteristic-zero power-series domain. The cyclic matrix, differential ideal stability and lowest-degree vanishing are proved; constructing a geometric quantum cluster and its cyclic frame is outside the statement. No current manuscript claim is discharged.",
+      "terminal_digest": "2b822427c79d406f6dac0b6645df2adc189939b1f31c5a57456404ba22376f2a"
     }
   ]
 }
