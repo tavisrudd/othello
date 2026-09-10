@@ -345,3 +345,4 @@ currently exported by the reviewer interface.
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_fullSummandDecomposition
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankThreeCountingMatrices_split_and_formalGauge
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_evenRankOne_forces_odd_zero
+#print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_fullOdd_allocates_to_distinguished_factor

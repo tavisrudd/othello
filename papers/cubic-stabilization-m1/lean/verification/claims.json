@@ -1002,13 +1002,17 @@
     },
     {
       "manuscript_label": "prop:universal-rank-two-residue",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The matrix U_(a,b), grading D and its rank-two zero-primary block.",
-      "hypotheses": "Characteristic zero, s=2a+b and sq nonzero; a,b,q z-constant; normalized off-diagonal gauge.",
-      "conclusion": "The canonical residue is R_(a,b) and its discriminant is 4(b-2a)/(b+2a).",
-      "cautions": "The rational calculation and independent executable checks are not Lean formalizations.",
-      "statement_digest": "cca7673683e8adf2469c7ee94a15859fd7eb700ae9f6353b37f8d8f1678b6702"
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.parameterizedRankTwo_finiteReduction",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.parameterizedRankTwo_normalizedGauge_and_modifiedResidue"
+      ],
+      "objects": "The explicit four-dimensional matrices, their rational invertible block basis, complete normalized coefficient-sequence gauge, and actual extracted rank-two power series.",
+      "hypotheses": "An arbitrary characteristic-zero field, parameters a,b,q with (2a+b) and q nonzero; no finite-gauge or discriminant identity is supplied.",
+      "conclusion": "The original Euler characteristic polynomial and basis identities hold; a full unique normalized two-block gauge exists and its extracted zero-block elementary-modification residue is R_(a,b), with exact discriminant 4(b-2a)/(2a+b).",
+      "cautions": "The full gauge and actual residue calculation are proved. The terminal does not identify the extracted block as the intrinsic generalized zero eigenspace of the original operator or assemble its coordinate-free canonical-lattice characterization; coverage therefore remains a fragment of the entire proposition.",
+      "statement_digest": "cca7673683e8adf2469c7ee94a15859fd7eb700ae9f6353b37f8d8f1678b6702",
+      "terminal_digest": "91968ab2621123f077f1fdaa34d2d2b84ff716654afbf7bc335c5cc404562e64"
     },
     {
       "manuscript_label": "thm:index-two-classification",
@@ -1453,11 +1457,6 @@
       "terminal_digest": "b72dde7df32e86ed0b5e2330735add3fe0cc69c9b5b092c44d44e5afc8baaac6"
     },
     {
-      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.parameterizedRankTwo_finiteReduction",
-      "reason": "Finite coefficient identities related to prop:universal-rank-two-residue. The terminal does not construct its normalized zero-primary formal connection or identify that connection’s canonical modified residue. Kept as unassigned machinery pending the full-gauge bridge and a separate claim-correspondence review; the current claim coverage is unchanged.",
-      "terminal_digest": "9cdd5f08f536a242954639bda63b3dc067789e94b4f4b62111c6d252870328bd"
-    },
-    {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.parameterizedRankTwo_fourDiscriminants",
       "reason": "Exact rational specializations of the parameterized modified residue, including discriminant one. No geometric Fano family identification or one-stabilization classification is proved by these evaluations, and no current manuscript claim is discharged.",
       "terminal_digest": "6c3100899f1cea4915a4a24179acba48a025d1a8e8cdaf815bda798a49b01aad"
@@ -1481,11 +1480,6 @@
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankThree_cyclicNilpotent_persists_on_formal_germ",
       "reason": "Formal rank-three nilpotent persistence follows from explicit commuting matrices and compressed flatness identities over a characteristic-zero power-series domain. The cyclic matrix, differential ideal stability and lowest-degree vanishing are proved; constructing a geometric quantum cluster and its cyclic frame is outside the statement. No current manuscript claim is discharged.",
       "terminal_digest": "2b822427c79d406f6dac0b6645df2adc189939b1f31c5a57456404ba22376f2a"
-    },
-    {
-      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.parameterizedRankTwo_normalizedGauge_and_modifiedResidue",
-      "reason": "Constructs the full unique normalized formal two-block gauge over the original field and computes the elementary-modification residue of its actual power-series zero block. The geometric primary-factor and canonical-lattice identification needed for the universal-residue manuscript proposition is not constructed by this terminal.",
-      "terminal_digest": "c01ab5686b2f674adf857eb96c1fca10ad70ba8850968793015425b401940df3"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankTwo_canonicalLattice_preserved_by_regularComparison",
@@ -1536,6 +1530,11 @@
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_evenRankOne_forces_odd_zero",
       "reason": "Derives zero odd subspace for an actual central-idempotent image with even dimension one. Scalar spanning and restricted trace nondegeneracy are proved from the dimension and whole-algebra hypotheses, not assumed.",
       "terminal_digest": "b97266ce9fd65cc9ac5841a5887934ea4e08dc3877370eac65b91fcf3aa5e215"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_fullOdd_allocates_to_distinguished_factor",
+      "reason": "Derives allocation of the full odd subspace to the distinguished image from a finite parity-preserving central-idempotent decomposition and even dimension one of all other images. Vanishing of the other odd images and restricted trace nondegeneracy are proved, not supplied. Geometric primary decomposition remains external.",
+      "terminal_digest": "9a3c7dfd3c49752d200c43087258986aa44624f8433b044fdfb7aa3725930b16"
     }
   ]
 }

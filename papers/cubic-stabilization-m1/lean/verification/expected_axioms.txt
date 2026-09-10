@@ -336,3 +336,4 @@ TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_polynomialProjectio
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_fullSummandDecomposition: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankThreeCountingMatrices_split_and_formalGauge: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_evenRankOne_forces_odd_zero: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_fullOdd_allocates_to_distinguished_factor: propext, Classical.choice, Quot.sound

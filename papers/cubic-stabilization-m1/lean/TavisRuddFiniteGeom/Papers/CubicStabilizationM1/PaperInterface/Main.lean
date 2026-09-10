@@ -1,3 +1,4 @@
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.PrimaryOddAllocation
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SuperPrimaryPairing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.PrimarySummandDecomposition
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RankThreeCountingSplits
@@ -369,5 +370,31 @@ theorem superPrimary_evenRankOne_forces_odd_zero
     odd=⊥ :=
   Quantum.primary_odd_eq_bot_of_even_finrank_one e idempotent central nonzero even odd
     unitEven rankOne oddImage spanning oddProductEven anticommute trace traceOdd nondegenerate
+
+/-- If all other even primary summands have dimension one, the full odd
+subspace equals its intersection with the distinguished primary image. This
+covers both a `2+1+1` and a `3+1` even-rank pattern, without fixing the number
+of summands or assuming any odd allocation. -/
+theorem superPrimary_fullOdd_allocates_to_distinguished_factor
+    {K A ι : Type*} [Field K] [CharZero K] [Ring A] [Algebra K A]
+    [FiniteDimensional K A] [Fintype ι]
+    (even odd : Submodule K A) (e : ι → A) (selected : ι)
+    (sum : ∑ i, e i = 1)
+    (idempotent : ∀ i, e i*e i=e i)
+    (central : ∀ i x, Commute (e i) x) (nonzero : ∀ i, e i ≠ 0)
+    (unitEven : ∀ i, e i ∈ even)
+    (evenStable : ∀ i x, x ∈ even → e i*x ∈ even)
+    (oddStable : ∀ i x, x ∈ odd → e i*x ∈ odd)
+    (rankOne : ∀ i, i ≠ selected →
+      Module.finrank K ↥(even ⊓ LinearMap.range (Algebra.lmul K A (e i))) = 1)
+    (spanning : ∀ y : A, ∃ u ∈ even, ∃ v ∈ odd, y=u+v)
+    (oddProductEven : ∀ x ∈ odd, ∀ y ∈ odd, x*y ∈ even)
+    (anticommute : ∀ x ∈ odd, ∀ y ∈ odd, x*y=-(y*x))
+    (trace : A →ₗ[K] K) (traceOdd : ∀ x ∈ odd, trace x=0)
+    (nondegenerate : ∀ x : A, (∀ y : A, trace (x*y)=0) → x=0) :
+    odd = odd ⊓ LinearMap.range (Algebra.lmul K A (e selected)) :=
+  Quantum.odd_eq_distinguished_primary_intersection even odd e selected sum idempotent central nonzero
+    unitEven evenStable oddStable rankOne spanning oddProductEven anticommute
+    trace traceOdd nondegenerate
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationM1

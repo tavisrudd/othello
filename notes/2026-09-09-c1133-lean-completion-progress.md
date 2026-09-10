@@ -156,3 +156,62 @@ and `Quantum/InvertibleComplementGauge.lean`. Neither is included in the
 337-terminal gate. The latter extends the rational Sylvester solver to a
 complementary companion block of arbitrary trace, needed for the five genus
 rank-two cases alongside the four degree cases.
+
+## Current validation window
+
+The next aggregate run is `run-20260910-031640-d57f0a75`. It builds the already
+elaborated `Quantum/RankTwoCountingBases.lean` (nine actual rational split bases
+and inverses) and `Quantum/InvertibleComplementResidue.lean` (full-gauge residue
+extraction), then the public odd-allocation audit. These remain uncommitted
+until the scoped queue and correspondence gate pass. The public allocation
+source is `Quantum/PrimaryOddAllocation.lean`; its leaf and the generalized
+solver `Quantum/InvertibleComplementGauge.lean` already passed the prior queue.
+`Quantum/NineRankTwoResidues.lean` is authored but has not yet elaborated; it
+is deliberately outside the aggregate import path.
+
+The annotation for `prop:universal-rank-two-residue` is being corrected from
+absent to fragment, attaching the two exact public declarations
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.parameterizedRankTwo_finiteReduction`
+and `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.parameterizedRankTwo_normalizedGauge_and_modifiedResidue`.
+They now serve that claim rather than being classified as unassigned machinery.
+The remaining formal limitation is intrinsic zero-primary submodule and
+coordinate-free canonical-lattice identification, not construction of varieties:
+this manuscript proposition itself concerns explicit matrices. This metadata
+change does not alter the proposition or promote it to complete coverage.
+
+## Odd allocation and generalized rational residue bridge
+
+The 338-terminal public audit and annotation gate now pass at
+`run-20260910-031640-d57f0a75`, run ID `20260910-031640-2c165182`.
+The added public terminal in `PaperInterface/Main.lean` is
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_fullOdd_allocates_to_distinguished_factor`.
+Its source, `Quantum/PrimaryOddAllocation.lean`, derives the actual full-odd
+submodule equality for any finite central-idempotent decomposition whose other
+even images have dimension one. Both the 2+1+1 and 3+1 patterns are covered.
+It uses only the three standard axioms.
+
+The general arbitrary-trace Sylvester solver and its full-gauge residue bridge
+are also kernel-built, in `Quantum/InvertibleComplementGauge.lean` and
+`Quantum/InvertibleComplementResidue.lean`. Exact source declarations:
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.invertibleComplement_exists_normalizedGauge`,
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.invertibleComplementGaugeStep_unique`,
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.invertibleComplementNormalizedGauge_modifiedResidue`,
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.invertibleComplement_exists_gauge_with_residue`.
+The nine actual basis and inverse identities are built in
+`Quantum/RankTwoCountingBases.lean`, principally
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.rankTwoCountingBasis_inverse` and
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.rankTwoCountingBasis_intertwines`.
+
+The universal-residue annotation correction is now checked, including the
+regenerated dependency graph. Current counts: 67 manuscript claims,
+13 absent / 27 fragment / 26 conditional / 1 complete; 338 public terminals,
+100 machinery. The two parameterized terminals now serve the existing claim.
+Reproduction of the graph:
+`python3 verification/dependency_graph.py verification/dependency-graph.dot`
+from the paper directory. The script treats its first argument as an output
+path; an initial `--help` probe created a file with that name, which was removed
+immediately before the correct explicit-output invocation.
+
+Uncommitted continuations are `Quantum/NineRankTwoResidues.lean` (currently
+elaborating the exact finite discriminants) and `Quantum/ExactResidueSelectors.lean`
+(not yet elaborated). These are not part of the 338-terminal claim.

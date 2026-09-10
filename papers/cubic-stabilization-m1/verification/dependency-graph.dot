@@ -59,7 +59,7 @@ digraph manuscript {
   "prop:ranktwo-framed-germ" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:residue-discriminant-exponents" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:six-axis-polarization" [fillcolor="#fde8c8", tooltip="fragment"];
-  "prop:universal-rank-two-residue" [fillcolor="#ffffff", tooltip="absent"];
+  "prop:universal-rank-two-residue" [fillcolor="#fde8c8", tooltip="fragment"];
   "thm:additive-motivic-marker" [fillcolor="#ffffff", tooltip="absent"];
   "thm:all-degree-graph-saturation" [fillcolor="#fde8c8", tooltip="fragment"];
   "thm:every-cubic" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
