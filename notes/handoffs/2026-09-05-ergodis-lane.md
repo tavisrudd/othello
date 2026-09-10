@@ -85,18 +85,23 @@ campaign updates/checkpoints and application certificate checkers remain open.
 P2 retained labelled composition now supports all 54 prime fields plus GF(4), rectangular labels,
 a distinct target table and repeated witness readouts through one native/WASM
 adapter (private `9aefed8`). 8,172 ABI calls and independent cost/witness checks pass;
-report: `2026-09-09-retained-composition-portability.md`. Towers, source helper
-lifting and CLI/schema convergence remain open. P3 inventory, P4 portable
+report: `2026-09-09-retained-composition-portability.md`. General-field towers, compact witnesses
+and CLI/schema convergence remain open. P3 inventory, P4 portable
 performance experiments, P5 continuation/storage and P6 complete conformance.
 The first SIMD composition screen found no convincing compilation-time gain;
 served/native defaults are unchanged (`2026-09-09-composition-simd-screen.md`).
 All-field scalar and earlier optional SIMD conformance pass. Source-affine-span
 admission now handles otherwise rejected low-rank sources through a bounded cold
-fallback; 12,373 native/WASM calls and63 overlapping CLI queries pass. Previously
+fallback; 12,373 native/WASM calls and 63 overlapping CLI queries pass. Previously
 accepted sources skip span computation; native preparation diagnostic is unchanged
 within measurement noise. Current report: `2026-09-09-composition-span-admission.md`.
-Next tower slice must include native source-to-base-table preparation and source
-witness lifting, not only the existing CompositionTower kernel.
+Represented GF(4)/binary towers now retain source preparation, tower compilation
+and source-coefficient witness readout through the same native/WASM provider
+(private `5521692`). Combined 12,979-call browser transcript and 19 tower CLI
+comparisons pass; package schema `composition-source.v2` requires explicit client
+migration. Report: `2026-09-09-retained-tower-portability.md`. Next: native
+CLI/source-query convergence; broader tower fields and compact witness readouts
+remain separate gaps.
 Private current evidence/design: `analysis/interface-review/application-records.md`,
 `provider-readout-contracts.md`, `capability-matrix.json`, and
 `adr-css-residual-reductions.md`. Generic fixed-coordinate discovery and offline
