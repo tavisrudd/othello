@@ -50,21 +50,17 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-09-09-c1133-optional-claims-audit.md` (cone and GG correction checked;
   broad motive/L-equivalence distinction credited). Main mathematical map:
   `../2026-09-09-c1133-acceptance-map.md`; surface Chern inequality checked.
-  Lean addition map: `../2026-09-09-c1133-lean-upgrade-map.md`; exact source
-  baseline recorded. Formal rank-two comparison transport now passes guarded
-  kernel and 320-terminal axiom checks: `../2026-09-09-c1133-lean-transport-progress.md`.
-  Parameterized finite reduction and four discriminants now pass a 322-terminal
-  audit: `../2026-09-09-c1133-lean-parameterized-progress.md`.
-  The first super-algebra lemmas pass a 324-terminal audit:
-  `../2026-09-09-c1133-lean-super-progress.md`.
-  Rank-three centralizer and trace identities pass a 325-terminal audit:
-  `../2026-09-09-c1133-lean-rank-three-progress.md`.
-  Full rational normalized gauge, its actual modified residue, and rank-three
-  formal nilpotent persistence pass a 327-terminal audit:
+  Lean addition map: `../2026-09-09-c1133-lean-upgrade-map.md`.
+  Current guarded checkpoint: 346 public terminals; exact rank-two lattice
+  transport, all seventeen matrix polynomials, nine complete rank-two residue
+  certificates, four rank-three splittings, full-odd allocation and
+  comparison-derived exact-primary ledger pass. Completed directional
+  pushforwards and fixed-locus/polynomial coordinate equivalences also compile.
+  Exact declarations and limitations:
   `../2026-09-09-c1133-lean-completion-progress.md`.
-  Next formal work: seventeen-matrix certificates and super-primary selectors;
-  preserve resonant discriminant-one cases and the independent rank-three odd
-  selector. Next audit work: exact sharpness/moduli imports and remaining
+  Active formal work: complete the actual multivariate fixed-base map, then
+  surface nullity/classification and Hodge-valued/downstream L5–L7 deductions.
+  Next audit work: exact sharpness/moduli imports and remaining
   novelty/citation coverage. Collaborator discussion is parked per author.
   One-hour checkpoint: `../2026-09-09-c1133-one-hour-checkpoint.md`.
   No global novelty verdict yet. Card:

@@ -1,3 +1,5 @@
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.CompletedMultivariatePushforward
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.FixedBaseCoordinateEquivalences
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ExactPrimaryLedger
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.NineRankTwoResidues
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ExactResidueSelectors
@@ -479,5 +481,39 @@ theorem exactPrimaryLedger_fold_from_regularComparisons
       ∀ left right : presentation.toBlockPresentation.EffectiveLedger,
         presentation.fold (left+right)=presentation.fold left+presentation.fold right :=
   ⟨presentation.fold_singleton, presentation.fold.map_add⟩
+
+/-- The actual multivariate exponential pushforward on completed coefficient
+families is injective when the integral divisor pairing separates effective
+classes and every scalar weight is nonzero. Finite fibers are derived from
+the supplied degree-compatible quotient. No geometric base identification,
+initial-form compatibility, or injectivity premise for this map is supplied. -/
+theorem completedMultivariateExponentialPushforward_injective
+    {Curve TargetCurve K : Type*} [AddCommMonoid Curve] [AddCommMonoid TargetCurve]
+    [Field K] [CharZero K] {rank : ℕ}
+    (data : Quantum.NumericallyFiniteEffectiveQuotient
+      (Homology := Curve) (Numerical := TargetCurve))
+    (vector : Curve → Fin rank → ℤ) (injective : Function.Injective vector)
+    (weight : Curve → K) (nonzero : ∀ curve, weight curve ≠ 0) :
+    Function.Injective (Quantum.completedMultivariateTaggedPushforward data vector weight) :=
+  Quantum.completedMultivariateTaggedPushforward_injective data vector injective weight nonzero
+
+/-- Equivariance of a coordinate equivalence yields an actual equivalence of
+fixed coordinate loci; inverse equivariance follows from the forward map.
+The statement concerns base coordinates and performs no invariant-vector
+operation on a cohomology fiber. -/
+def equivariantCoordinateChange_fixedLoci
+    {G X Y : Type*} [Monoid G] [MulAction G X] [MulAction G Y]
+    (equiv : X ≃ Y) (equivariant : ∀ (g : G) (x : X), equiv (g • x)=g • equiv x) :
+    Quantum.FixedCoordinateLocus G X ≃ Quantum.FixedCoordinateLocus G Y :=
+  Quantum.coordinateEquiv_fixedLoci equiv equivariant
+
+/-- Injective coefficient extension followed by independent polynomial
+coordinate translation remains injective, with the variables polynomial. -/
+theorem polynomialCoordinateExtension_and_translation_injective
+    {R S σ : Type*} [CommRing R] [CommRing S]
+    (f : R →+* S) (injective : Function.Injective f) (shift : σ → S) :
+    Function.Injective (fun p : MvPolynomial σ R =>
+      Quantum.polynomialCoordinateTranslation shift (MvPolynomial.map f p)) :=
+  Quantum.polynomialCoefficientExtension_translation_injective f injective shift
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationM1

@@ -261,3 +261,31 @@ at paper root. A failed README path occurred after registry changes; the
 correct file was updated before the green registry gate. Finite-fiber summation
 required the explicit `Finset.sum_coe_sort` equality, and the fixed-locus subtype
 uses a reducible abbreviation so subtype coercions elaborate.
+
+The multivariate line-restriction proof now kernel-builds in
+`Quantum/MultivariateExponentialCharacters.lean`, exact terminal
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.integralLineRestriction_character`.
+The first implicit substitution coercion exceeded 200,000 and 800,000
+heartbeats; replacing the unfolding with explicit substitution equalities
+restored the default heartbeat budget and a three-second build. Its completed
+map consumer also kernel-builds in `Quantum/CompletedMultivariatePushforward.lean`:
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.completedMultivariateTaggedPushforward_injective`.
+Runs: `run-20260910-034508-e3a5d08d` and `run-20260910-034654-884e7b21`.
+These modules plus their Lake roots and new public/audit terminals are awaiting
+the combined 346-terminal gate. Current map/card/handoff edits refresh the
+stale 327-terminal frontier. Independent uncommitted extensions are
+`Quantum/MultiplicativeDivisorCharacters.lean` and
+`Quantum/CompletedCoefficientExtension.lean`; they have no passing gate yet.
+
+The public 346-terminal gate passed at `run-20260910-034815-2decb595`,
+run ID `20260910-034815-18b77272`, and the registry/axiom comparison passes.
+New public declarations in `PaperInterface/Main.lean`:
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.completedMultivariateExponentialPushforward_injective`,
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.equivariantCoordinateChange_fixedLoci`,
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.polynomialCoordinateExtension_and_translation_injective`.
+The fixed-locus equivalence uses only `Quot.sound`; the other two use the
+three standard axioms. Counts: 346 public terminals / 108 machinery; unchanged
+manuscript claim coverage. This closes the actual multivariate completed
+coefficient-family injection, without claiming ring compatibility or geometric
+base realization. The two multiplicative/ring extension leaves remain
+uncommitted and are not included in this checkpoint.

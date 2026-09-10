@@ -11,6 +11,8 @@ name = "CubicStabilizationM1"
 roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ExactPrimaryLedger",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.CompletedExponentialPushforward",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.MultivariateExponentialCharacters",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.CompletedMultivariatePushforward",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.FixedBaseCoordinateEquivalences",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.NineRankTwoResidues",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ExactResidueSelectors",

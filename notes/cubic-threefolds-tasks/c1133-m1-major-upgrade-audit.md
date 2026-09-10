@@ -48,22 +48,17 @@ register and citation sets:
 Lean additions are now mapped in
 `notes/2026-09-09-c1133-lean-upgrade-map.md`, with exact reusable declarations
 and hashed baseline in `notes/2026-09-09-c1133-lean-baseline.json`.
-The first formal matrix-series transport slice now passes guarded kernel and
-320-terminal axiom gates; report `notes/2026-09-09-c1133-lean-transport-progress.md`.
-Exact residue conjugacy is derived from regular comparisons, including resonance.
-The parameterized finite residue calculation now passes a 322-terminal audit,
-including the four discriminants and actual characteristic polynomials; report
-`notes/2026-09-09-c1133-lean-parameterized-progress.md`. No geometric coverage is
-promoted. Two initial super-algebra lemmas now pass a 324-terminal audit:
-scalar-even factors have no odd part, and Euler polynomial identities transfer
-from the even part to the whole algebra; report
-`notes/2026-09-09-c1133-lean-super-progress.md`. Next: full-gauge bridge, all
-seventeen matrix certificates and the remaining super-primary selectors.
-The rank-three cyclic centralizer and trace formulas now pass a 325-terminal
-audit; the remaining differential persistence bridge is explicit in
-`notes/2026-09-09-c1133-lean-rank-three-progress.md`. The old exponent-class
-marker misses the discriminant-one cases; genera 2–5 instead use the main
-rank-three odd selector, independent of optional rank-three residue theory.
+Current formal checkpoint: 346 public terminals and 108 machinery. The core
+matrix/algebra results now include exact original-lattice comparison transport,
+all seventeen characteristic polynomials and cyclic bases, all nine complete
+rank-two gauge/residue certificates, four rank-three splittings, full-odd
+allocation and persistence, and the comparison-derived exact-primary ledger.
+Discriminant-one cases are retained. Completed directional maps, fixed-locus
+coordinate equivalences and polynomial translations are also kernel-built.
+Exact declarations and geometric boundaries are in
+`notes/2026-09-09-c1133-lean-completion-progress.md`. Active work is L4's
+actual multivariate completed map, followed by L5–L7. This does not claim
+complete geometric classification or Hodge conservation coverage.
 The zbMATH query now has 274/274 distinct records title-screened, with both
 licensed-out titles resolved. An author-hosted spectra chapter is now partially read and explicitly credits
 the older cubic exponents and spectral irrationality program in the owning
@@ -74,9 +69,6 @@ and separate moduli theorem are still not source-verified.
 No global novelty verdict or manuscript promotion has passed. Review of
 manuscript upgrades and hierarchy remains after these gates.
 
-The complete rational normalized gauge, actual power-series modified residue,
-and rank-three formal nilpotent persistence now pass a 327-terminal axiom gate.
-See `notes/2026-09-09-c1133-lean-completion-progress.md` for exact declarations.
 The user has requested completion of the core Lean map; C1133 remains active.
 
 One-hour continuation summary:

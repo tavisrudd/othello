@@ -8,21 +8,22 @@ was performed for this map.
 
 ## Implementation checkpoint
 
-The first L1 matrix-series transport slice is now proved and guarded-audited;
-see `2026-09-09-c1133-lean-transport-progress.md`. The baseline below is the
-pre-implementation snapshot. L1 still lacks the separate sheaf construction
-and general coefficient-extension interfaces. L2 now has a kernel-checked
-parameterized finite-coefficient reduction, both characteristic polynomials,
-and four exact discriminants; see `2026-09-09-c1133-lean-parameterized-progress.md`.
-The complete rational formal-gauge bridge, uniqueness and actual power-series
-modified residue now pass the 327-terminal audit; see
-`2026-09-09-c1133-lean-completion-progress.md`. The seventeen-family certificate
-interface remains. The first L3 algebra lemmas now prove scalar-even odd vanishing and
-polynomial-identity transfer from the even part to the whole algebra; see
-`2026-09-09-c1133-lean-super-progress.md`. The remaining L3 construction and
-L4–L8 remain as planned. The rank-three differential-ideal bridge and formal nilpotent persistence are
-now proved and publicly audited; see the completion-progress report for exact
-Lean declarations. Geometric cyclic-frame construction remains external.
+The current guarded checkpoint is 346 public terminals, with 108 machinery
+terminals. L1 has actual canonical adapted lattices, regular comparison
+transport and coefficient extension. L2 has all seventeen characteristic
+polynomials and cyclic bases, all nine complete rank-two residue certificates,
+and all four rank-three splitting/gauge certificates. L3 has primary
+projectors, restricted pairings, odd allocation, rank-three persistence,
+exact-residue and full-odd selectors, and their comparison-derived ledger.
+Exact declarations and trust boundaries are recorded in
+`2026-09-09-c1133-lean-completion-progress.md`.
+
+L4 now has a proved injective family of directional pushforwards on actual
+completed series, fixed-locus coordinate equivalences and polynomial
+translations. The actual multivariate completed map now has a public injectivity theorem;
+its convolution-ring and occurrence-separation extensions remain under implementation. L5–L7 remain open; no geometric classification or Hodge
+conservation theorem is claimed complete. The baseline below is frozen
+pre-implementation evidence, not the current coverage count.
 
 ## Recommendation
 
