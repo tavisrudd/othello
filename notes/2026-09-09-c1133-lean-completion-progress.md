@@ -49,3 +49,32 @@ rotation; the corrected module passed without warnings.
   this must not be described as construction of a geometric quantum cluster.
 - Core completion gate remains the L1–L7 map; this checkpoint closes only the
   formal rank-three persistence component of L3.
+
+## Complete parameterized formal gauge
+
+`Quantum/TwoByTwoBlockGauge.lean` now constructs the unique normalized gauge
+for every formal system with leading blocks `[[0,t],[1,0]]` and
+`[[0,1],[0,0]]`, assuming `t=(2a+b)q≠0`. The explicit rational Sylvester inverse
+uses no square root. Its exact public terminal is
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.parameterizedRankTwo_normalizedGauge_and_modifiedResidue`
+in `PaperInterface/Main.lean`. It constructs the full gauge, identifies its
+first coefficient and the second reduced lower-left entry, extracts an actual
+rank-two power series, and proves its elementary-modification residue equals
+`parameterizedModifiedResidue`, with discriminant `4(b-2a)/(2a+b)`.
+The exact source declarations are
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.twoByTwo_exists_normalizedGauge`,
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.twoByTwo_normalizedGauge_unique`,
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.parameterizedNormalizedGauge_coefficients`, and
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.parameterizedNormalizedGauge_modifiedResidue`.
+The guarded leaf build passed at `run-20260910-023805-7361a5d0` and the
+327-terminal public axiom gate at `run-20260910-024310-661790fa`. The added
+terminal uses only the three standard axioms. No manuscript coverage promotion.
+
+The same queue compiled `Quantum/FourDimensionalCountingMatrix.lean`, with
+exact declarations
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.countingMatrixCyclicBasis_column`,
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.countingMatrixCyclicBasis_det`, and
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.fourDimensionalCountingMatrix_charpoly`.
+The cyclic determinant is one for every six-parameter matrix over a commutative
+ring, not just the seventeen rational instances. The table specialization and
+lattice module remain separate uncommitted work at this checkpoint.

@@ -1,3 +1,4 @@
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.TwoByTwoBlockGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.CyclicRankThreePersistence
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RankTwoLatticeTransport
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ParameterizedRankTwoResidue
@@ -177,5 +178,37 @@ theorem rankThree_cyclicNilpotent_persists_on_formal_germ
       (Quantum.centeredCyclicRankThree b c)^2 ≠ 0 :=
   Quantum.centeredCyclicRankThree_nilpotent_persists b c comparison a connection
     initialB initialC commutes flat
+
+
+/-- The parameterized four-dimensional formal system admits a unique normalized
+split into its complementary rank-two block and its rank-two zero block over
+the original field. The actual power-series zero block has exactly the
+parameterized elementary-modification residue and its exact discriminant.
+The system is given explicitly; its identification with a geometric quantum
+connection is not a hypothesis or a conclusion of this algebraic statement. -/
+theorem parameterizedRankTwo_normalizedGauge_and_modifiedResidue
+    {K : Type*} [Field K] [CharZero K] {a b q : K}
+    (sumNonzero : 2*a+b ≠ 0) (qNonzero : q ≠ 0) :
+    ∃ gauge reduced : ℕ → Matrix (Fin 4) (Fin 4) K,
+      Quantum.IsNormalizedGauge Quantum.twoByTwoBlockLabel
+        (Quantum.parameterizedSeparatedSystem a b q) gauge reduced ∧
+      (∀ otherGauge otherReduced,
+        Quantum.IsNormalizedGauge Quantum.twoByTwoBlockLabel
+          (Quantum.parameterizedSeparatedSystem a b q) otherGauge otherReduced →
+        ∀ n, gauge n = otherGauge n ∧ reduced n = otherReduced n) ∧
+      Quantum.modifiedResidue (Quantum.lastRankTwoBlockSeries reduced) =
+        Quantum.parameterizedModifiedResidue a b ∧
+      Quantum.residueDiscriminant
+        (Quantum.modifiedResidue (Quantum.lastRankTwoBlockSeries reduced)) =
+        4*(b-2*a)/(2*a+b) := by
+  obtain ⟨gauge, reduced, normalized⟩ := Quantum.twoByTwo_exists_normalizedGauge
+    (mul_ne_zero sumNonzero qNonzero) (Quantum.parameterizedSeparatedSystem a b q) rfl
+  have residue := Quantum.parameterizedNormalizedGauge_modifiedResidue sumNonzero qNonzero normalized
+  refine ⟨gauge, reduced, normalized, ?_, residue, ?_⟩
+  · intro otherGauge otherReduced other
+    exact Quantum.twoByTwo_normalizedGauge_unique (mul_ne_zero sumNonzero qNonzero)
+      rfl normalized other
+  · rw [residue]
+    exact Quantum.parameterizedModifiedResidue_discriminant sumNonzero
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationM1
