@@ -66,7 +66,12 @@ byte-identical native/browser bundles, and application save/reopen/explicit repl
 remain inert unverified records. Actual browser bundles agree with native typed
 replays; this is execution equivalence, not independent proof verification.
 
-Next: general Evolve producers and zone-aware admission for checked CSS residual
+Cold rational residual-charge discovery now runs through the same native/WASM CSS
+provider, with 120 identical loaded-source transcripts and independent certificate
+checks. Completed CSS races include an explicit below-the-fold explorer. These
+bounds are checked but not automatically admitted to the solver; report:
+`ergodis-private/analysis/interface-review/2026-09-09-residual-charge-discovery.md`.
+Next: compiled-residual mapping and zone-aware admission for those discovered
 bounds; resolve disabled two-worker native timing before changing native defaults.
 Opt-in available-neighborhood packing now has a shared native/WASM provider
 operation (core `8b4b944`, private `156ee36`); browser CSS races apply it equally

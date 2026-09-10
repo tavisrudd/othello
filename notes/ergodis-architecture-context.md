@@ -65,7 +65,7 @@ It runs alongside CampaignSession; runtime integration and a universal execution
 contract are not complete. The provider separates immutable Arc plans from owned workspaces natively;
 separate browser workers still prepare independent plans. CSS learned reruns may
 retain immutable loaded providers on both arms while recreating workspaces.
-Broader cross-worker plan sharing remains open before ABI adoption; retain specialized direct native APIs. Evidence and limits:
+Cold residual-charge discovery now uses the same native/WASM CSS operation with independent certificate checks; actual inner-root charge admission remains gated (private `analysis/interface-review/2026-09-09-residual-charge-discovery.md`). Broader cross-worker plan sharing remains open before ABI adoption; retain specialized direct native APIs. Evidence and limits:
 `2026-09-08-c1130-module-loading-results.md`.
 Private browser Application subclasses now bind QEC/LRC to that module host,
 with query reuse and loaded-source gates; resource scheduling and capacity
