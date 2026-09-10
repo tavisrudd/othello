@@ -49,7 +49,7 @@ Current authority: `../2026-09-09-c1130-js-wasm-parity-review.md`; task requirem
 performance experiments: `ergodis-private/analysis/interface-review/`.
 
 JS/WASM conformance entry point: `make -C analysis/js-wasm-tests all` in
-`ergodis-private`. Fast/browser/extended tiers, 50 checks, JSON/Markdown/JUnit
+`ergodis-private`. Fast/browser/extended tiers, 51 checks, JSON/Markdown/JUnit
 reports. Stop/history responsiveness: `../2026-09-10-c1130-stop-responsiveness.md`. Solve clock and adaptive log axis: `../2026-09-10-c1130-solve-clock-axis.md`. Generated core/module contracts, independent oracles, shrinking and
 regressions: `../2026-09-09-c1130-property-testing.md`; private design and current
 validation: `analysis/property-tests/`. Generated module-client schedules and
@@ -62,11 +62,18 @@ Implementation and validation disposition: `../2026-09-10-c1130-offline-worker-l
 Repair race terminal status now flushes before successful worker cleanup cancels
 pending paints; completed and work-limited controls pass browser DOM checks.
 Private report: `analysis/interface-review/2026-09-10-terminal-race-paint.md` (`521374b`).
-Three-round screening of seven specialized alternatives finds wins only for the
-two direct XOR helper-choice cases. Existing adaptive scheduling is slower than
+Both XOR examples now have a direct JS third arm, shared readiness, checked
+witnesses, purple finish markers, saved-trace compatibility and final resize.
+Existing adaptive scheduling is slower than
 the resumable/Evolve paths on all five measured grids; four adaptive sweeps were
 censored after >15 s. Private results and replay:
 `analysis/interface-review/2026-09-10-specialized-race-measurement.md`.
+A new source-derived JS capacity-surface prototype beats Evolve on all three
+measured 192/288-job rounds: 88/102 ms versus 1235/1944 ms, including full
+surface construction and all 625 query witnesses. Native/WASM promotion and
+scheduling UI integration remain open. Results, oracle checks and design:
+`analysis/interface-review/2026-09-10-direct-xor-and-capacity-surface.md` and
+`analysis/interface-review/adr-capacity-surface-specialization.md` (`d94b2a5`).
 Intermittent Chromium worker import cancellation remains open. Safari/iOS, Firefox,
 performance A/B and screenshot regression coverage remain open. The suite does
 not rebuild or replace canonical artifacts and does not replace native perf gates.
