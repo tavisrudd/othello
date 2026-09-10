@@ -422,3 +422,65 @@ and `Quantum/SemisimpleCoordinateObjects.lean`. The latter retains actual
 vector spaces, has componentwise linear maps as categorical morphisms,
 constructs isomorphisms from multiplicities, and proves doubled cancellation;
 its elaboration and public gate have not yet passed.
+
+The multivariate extension now elaborates in
+`Quantum/FormalIdempotentConjugacy.lean`, exact declaration
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.multivariateFormalIdempotent_conjugate_constant`.
+The unit inverse coercion and the multivariate constant-series type are
+explicit, avoiding ambiguity in the noncommutative coefficient ring.
+`Quantum/EquivariantProjectorImages.lean` also elaborates:
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.equivariantEndomorphismImage`,
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.intertwiningLinearEquiv_images`,
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.intertwiningLinearEquiv_images_equivariant`.
+These construct full image subrepresentations and their actual equivariant
+linear equivalences. The new Lake roots and three L6 leaves remain uncommitted
+until the dependency and public gates; the semisimple-coordinate leaf is
+still under elaboration.
+
+The coordinate-object category and multiplicity reconstruction kernel-built at
+`run-20260910-043517-2e4b2ab8`. Exact declarations already elaborated include
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SemisimpleCoordinateObject.isoOfDoubleIso`,
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SemisimpleCoordinateObject.branchSumReindex`,
+and `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SemisimpleCoordinateObject.categoryIso`.
+The actual representation-equivalence wrapper now elaborates in
+`Quantum/EquivariantProjectorImages.lean` as
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.equivariantImageRepresentationEquiv`.
+Additional category-isomorphism cancellation wrappers are under elaboration.
+
+The first semisimple primary ledger elaborated, and now adds parity/dimension
+compatibility to derive safe-object nullity from numerical nullity. This
+expanded leaf has not yet passed. Newly authored, untested end-of-proof leaves
+are `Quantum/InvertibleMorphismDescent.lean` and `Quantum/PureWeightPeriodization.lean`.
+The graded completion development is also uncommitted:
+`Quantum/GradedBulkCoefficientFiniteness.lean` and
+`Quantum/GradedCompletedBulkCenterMap.lean`. The former is under elaboration;
+the latter has not been compiled. It derives polynomiality per curve from
+actual formal-series grading bounds, rather than imposing global polynomial
+bulk support. None of these continuations is covered by the 353-terminal gate.
+
+The coordinate-category doubled-isomorphism wrapper and the bundled full-image
+representation equivalence now elaborate. The graded coefficient-finiteness
+lemma also elaborates, with no global polynomial-bulk-support hypothesis:
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.finite_bulkMonomials_of_lowerGrade_and_unitBound`
+and `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.gradedBulkCoefficientPolynomial_coeff`.
+A lower grading bound and a bounded unit exponent suffice; the upper grading
+bound is not needed for this finiteness step. This is a useful hypothesis
+weakening found during the planned L4 completion, not a separate discovery task.
+The constructed `GradedCompletedBulkSource` retains raw formal bulk series
+and only derives polynomial coefficients per curve. Its center-map consumer
+and safe-object numerical-nullity bridge await their guards and public gate.
+The two end-of-proof leaves also remain untested. No new source has yet been
+added to the 353-terminal count.
+
+### Graded bulk faithfulness and full semisimple objects
+
+Guarded queue `run-20260910-045853-989a6cc8` passed the four consumers `SemisimplePrimaryLedger`, `GradedCompletedBulkCenterMap`, `InvertibleMorphismDescent`, and `PureWeightPeriodization`; queue `run-20260910-044915-4fe2c717` passed their new object and coefficient-finiteness dependencies. All module names below have prefix `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum`.
+
+- `GradedCompletedBulkCenterMap.gradedCompletedBulkCenterMap_injective` derives each polynomial bulk coefficient layer from actual graded formal coefficients, allowing negative bulk powers unbounded across curve classes. Ring closure of the raw graded source is not asserted.
+- `SemisimplePrimaryLedger.SemisimplePrimaryPresentation.fold_zero_of_numericFold_zero` derives vanishing of the whole semisimple odd-object fold from numerical vanishing, parity and faithful realization dimension bounds.
+- `SemisimpleCoordinateObjects.SemisimpleCoordinateObject.cancelDoubleCategoryIso` cancels doubling for actual objects and categorical isomorphisms in the explicit semisimple coordinate category. Geometric Hodge realization remains external.
+- `InvertibleMorphismDescent.matrixMorphismSubspace_contains_invertible` constructs an invertible original-field matrix in the given morphism subspace.
+- `PureWeightPeriodization.IntegralTwistAction.pureWeightMultiplicity_injective` recovers fixed-weight multiplicities from the actual integral-twist orbit quotient.
+- `FormalIdempotentConjugacy.multivariateFormalIdempotent_conjugate_constant` and `EquivariantProjectorImages.equivariantImageRepresentationEquiv` retain full images and equivariance.
+
+These eight leaves are compiled; their new public reviewer exports and audit rows are not yet added. Public audited count remains 353. `BoundedIsogenyFiniteness.lean` is separately uncommitted while its first elaboration is pending.
