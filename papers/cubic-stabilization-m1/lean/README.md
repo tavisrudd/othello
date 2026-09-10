@@ -90,7 +90,30 @@ truncated Chern class arithmetic, the Betti numbers, the degree count placing th
 whole odd cohomology in that packet, and the constancy of rank on a connected
 component.
 
-Checked coverage snapshot: 67 claims; 13 absent; 27 fragmentary; 26 conditional; 1 complete; 365 reviewer terminals, of which 127 are machinery serving no current manuscript claim.
+Checked coverage snapshot: 67 claims; 13 absent; 27 fragmentary; 26 conditional; 1 complete; 371 reviewer terminals, of which 133 are machinery serving no current manuscript claim.
+
+The main reviewer interface includes `gradedBulkSource_equiv_completedSubring`
+and `gradedBulkCenterRingHom_injective`: the formal graded coefficient families
+are equivalent to a proved convolution subring, and the center map is an
+injective unital ring homomorphism. Negative bulk exponents may grow across
+curve classes; polynomiality of each coefficient layer is derived.
+
+`rationalWholeHodge_conservation` constructs a rational Hodge isomorphism of
+whole endpoints in rational bases with independently specified ranks.
+`rationalHodgeIsomorphism_inverse` verifies that the rational inverse preserves
+every Hodge projector. The complex comparison and rational Hodge-morphism
+scalar-extension identification concern the whole objects; no separate
+rational descent of splitting branches is required. The strengthened
+`rationalHodge_veryGeneralSource_cancellation` and
+`rationalHodge_arithmeticPartners_finite_geometricClasses` terminals use these
+actual rational Hodge isomorphisms. All these names lie in
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1`.
+
+The geometric endpoint realizations, source-restricted Torelli, geometric
+isogeny implication, uniform degree bound, finite torsion and polarization
+finiteness remain explicit premises. These algebraic and conditional terminals
+do not promote geometric manuscript claims to complete coverage.
+
 
 The exact rank-two modified-residue discriminant is also preserved under
 regular horizontal comparisons and their regular inverses, with the

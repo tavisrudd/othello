@@ -1628,7 +1628,7 @@
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.gradedBulkCenterMap_injective",
-      "reason": "Proves faithfulness on actual graded completed bulk families with polynomial layers derived from grading bounds. Geometric QDM-base identification and inherited ring closure of the raw source subtype are not asserted.",
+      "reason": "Proves faithfulness on actual graded completed bulk families with polynomial layers derived from grading bounds. This terminal is stated on coefficient families; the graded source ring model and injective unital homomorphism are separately verified. Geometric QDM-base identification remains external.",
       "terminal_digest": "5c9c40300fea60891ca6d11a6de95e652abaf9342291c40323208f3078684cab"
     },
     {
@@ -1670,6 +1670,36 @@
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.realizedHodgeObjects_conserved_under_stabilizedBirationality",
       "reason": "Transports proved whole-object conservation to actual target-category endpoint objects through a supplied semisimple category equivalence. The rational Hodge category and endpoint realizations remain explicit imports; integral and polarized isomorphisms are not inferred.",
       "terminal_digest": "54effa3f481292ac5b79cd93554c661c505c7d75c8999c30d059a5bcc4ca2e0b"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.gradedBulkSource_equiv_completedSubring",
+      "reason": "Constructs a coefficient-preserving equivalence between actual formal graded bulk families and a proved subring of the completed polynomial-coefficient ring. Polynomial layer finiteness and convolution closure are derived from grading bounds, not imposed as extra support premises.",
+      "terminal_digest": "b33f68c78dac2bbdb3c623cdaf40ab08ac5b126fe33afaa2330961bb88361aea"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.gradedBulkCenterRingHom_injective",
+      "reason": "Proves injectivity of the actual unital ring homomorphism on the graded completed source subring, which is coefficientwise equivalent to the original raw formal-family source. Geometric identification with QDM bases remains external.",
+      "terminal_digest": "08441cc938c0f3ef6e09418b174d6d5cbd5f78abd0e424f3ded05fba7dde1471"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rationalHodgeIsomorphism_inverse",
+      "reason": "Constructs the actual rational inverse of an isomorphism of effective pure weight-three rational Hodge objects represented by orthogonal conjugate complex projectors in rational bases. Every Hodge projector is intertwined; no integral or polarized isomorphism is asserted.",
+      "terminal_digest": "2ed8c4e613aca717540da92336b04f8c769e891926c0a2081073b8f6aff3ce3c"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rationalWholeHodge_conservation",
+      "reason": "Derives an actual rational Hodge matrix isomorphism for whole stabilized endpoints with independently specified ranks, using actual conserved semisimple objects, a whole complex comparison and scalar-extension fullness of the rational Hodge-morphism space. No rational descent of individually labelled branches or global complex-to-rational category equivalence is required. Geometric endpoint and comparison realization remains supplied.",
+      "terminal_digest": "67eafda64ec6aa63b4d65fa4104b53569ab21034a3e8ab1b5fc411106ef0f4fb"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rationalHodge_veryGeneralSource_cancellation",
+      "reason": "Composes the constructed rational Hodge isomorphism with an explicit source-restricted Torelli premise: very general source and arbitrary smooth target in the fixed-rank family. Geometric endpoint realization and the Torelli source theorem remain external.",
+      "terminal_digest": "771e0afafc48f15d740fd7c7901c925e9d9a68d51a58e5613e7c5ee54503dfd0"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rationalHodge_arithmeticPartners_finite_geometricClasses",
+      "reason": "Uses the constructed rational Hodge isomorphism as input to the separate geometric-isogeny premise, then proves geometric partner finiteness over all model extensions of bounded degree through bounded kernels, finite torsion, polarization fibers and Torelli. Geometric realization and arithmetic source bounds remain explicit; twists and the isogeny field of definition are not bounded.",
+      "terminal_digest": "40a4efe02ec03b02c48d28da692c387439c4391e6ea7c19d50cfd4407c3829b1"
     }
   ]
 }

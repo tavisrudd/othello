@@ -48,19 +48,22 @@ register and citation sets:
 Lean additions are now mapped in
 `notes/2026-09-09-c1133-lean-upgrade-map.md`, with exact reusable declarations
 and hashed baseline in `notes/2026-09-09-c1133-lean-baseline.json`.
-Current formal checkpoint: **365 public terminals, 127 machinery, 239 sources**;
+Current formal checkpoint: **371 public terminals, 133 machinery, 245 sources**;
 the aggregate kernel build and actual axiom comparison pass. Exact lattices,
 all seventeen matrix certificates, full primary selectors, actual completed
 graded center maps, low-dimensional vanishing and conditional A–D assemblies
-are implemented. The Hodge conclusion is an actual target-category isomorphism
-through an explicitly supplied semisimple realization; arithmetic finiteness
+are implemented. The graded source is a proved convolution subring. The Hodge
+conclusion constructs an actual rational Hodge isomorphism and inverse by
+descending the whole complex comparison, with independent endpoint ranks;
+arithmetic finiteness
 counts geometric classes over all model extensions of bounded degree.
 Exact declarations and remaining formal boundaries are in
 `notes/2026-09-09-c1133-lean-completion-progress.md` and the updated Lean map.
 Geometric constructions and imported source theorems remain supplied;
 no complete geometric A–D formalization or manuscript coverage promotion is
-claimed. In particular the raw graded-source ring closure and the universal
-residue proposition beyond the proved matrix reductions are not certified.
+claimed. The universal residue proposition beyond the proved matrix
+reductions retains fragment coverage; geometric identifications and source
+Hom scalar-extension fullness remain supplied.
 Next work is the outstanding source/literature closure before manuscript
 upgrades and hierarchy review.
 The zbMATH query now has 274/274 distinct records title-screened, with both

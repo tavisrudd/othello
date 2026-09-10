@@ -1,3 +1,7 @@
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RationalHodgeApplications
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RationalHodgeVaryingRank
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RationalHodgeMatrixDescent
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.GradedBulkSourceRing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RealizedHodgeConservation
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.CountingStabilizationObstruction
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ArithmeticStabilizationPartners
@@ -803,6 +807,113 @@ noncomputable def realizedHodgeObjects_conserved_under_stabilizedBirationality
     (rightIdentification : CategoryTheory.Iso (realization.functor.obj (data.wholeOdd right)) rightHodge) :
     CategoryTheory.Iso leftHodge rightHodge := by
   exact Quantum.StabilizedWholeOddData.realizedWholeOddIso data realization leftSmooth rightSmooth related leftHodge rightHodge leftIdentification rightIdentification
+
+/-- The formal-family model is equivalent to the actual graded completed
+subring; both directions preserve every curve and bulk coefficient. -/
+noncomputable def gradedBulkSource_equiv_completedSubring
+    {Curve K : Type*} [AddCommMonoid Curve] [CommRing K] {rank : ℕ}
+    (grading : FiniteDegreeAddCommMonoid Curve) (curveGrade : Curve →+ ℤ)
+    (bulkDegree : Fin rank → ℕ) :
+    GradedCompletedBulkSource (K := K) curveGrade bulkDegree ≃
+      gradedCompletedBulkSubring (K := K) grading curveGrade bulkDegree := by
+  exact Quantum.gradedCompletedBulkSource_equivSubring grading curveGrade bulkDegree
+
+/-- The center homomorphism on the full graded completed source ring is
+injective, with polynomial coefficient finiteness and ring closure proved. -/
+theorem gradedBulkCenterRingHom_injective
+    {Curve TargetCurve K : Type*} [AddCommMonoid Curve] [AddCommMonoid TargetCurve]
+    [Field K] [CharZero K] {bulkRank divisorRank : ℕ}
+    (data : CompletedNumericalQuotient Curve TargetCurve)
+    (curveGrade : Curve →+ ℤ) (bulkDegree : Fin bulkRank → ℕ)
+    (pairing : Curve →+ (Fin divisorRank → ℤ)) (injective : Function.Injective pairing)
+    (exceptionalDegree : Curve →+ ℤ)
+    (parameter : FractionRing (MvPolynomial (Option (Fin bulkRank)) K)) (nonzero : parameter ≠ 0) :
+    Function.Injective (gradedCompletedBulkCenterRingHom data curveGrade bulkDegree pairing exceptionalDegree parameter nonzero) := by
+  exact Quantum.gradedCompletedBulkCenterRingHom_injective data curveGrade bulkDegree pairing injective exceptionalDegree parameter nonzero
+
+/-- The inverse rational matrix also preserves all Hodge projectors, so the
+constructed morphism is an isomorphism of the full rational Hodge objects. -/
+def rationalHodgeIsomorphism_inverse {rank : ℕ}
+    {source target : RationalWeightThreeHodgeMatrices rank}
+    (equiv : RationalWeightThreeHodgeMatrixIso source target) :
+    RationalWeightThreeHodgeMatrixIso target source := by
+  exact Quantum.RationalWeightThreeHodgeMatrixIso.symm equiv
+
+/-- Whole-object rational Hodge conservation for endpoints whose ranks are
+specified independently. Rank equality is part of the realized complex
+comparison; the rational isomorphism is derived by determinant descent. -/
+noncomputable def rationalWholeHodge_conservation
+    {K Variety Center Occurrence Family : Type*} [Field K] [CharZero K]
+    {ι : Type u} {division : ι → Type v} [∀ i, DivisionRing (division i)]
+    (data : StabilizedWholeOddData K Variety Center Occurrence Family ι division)
+    {left right : Family} (leftSmooth : data.smooth left) (rightSmooth : data.smooth right)
+    (related : data.birational.r (data.stabilized left) (data.stabilized right))
+    {leftRank rightRank : ℕ} {Index : Type*} [Fintype Index]
+    (leftHodge : RationalWeightThreeHodgeMatrices leftRank)
+    (rightHodge : RationalWeightThreeHodgeMatrices rightRank)
+    (family : (equality : leftRank=rightRank) → Index → Matrix (Fin leftRank) (Fin leftRank) ℚ)
+    (members : ∀ (equality : leftRank=rightRank) (i : Index), family equality i ∈
+      rationalHodgeMorphismSubspace leftHodge (equality.symm ▸ rightHodge))
+    (realizeWholeComparison : CategoryTheory.Iso (data.wholeOdd left) (data.wholeOdd right) →
+      PSigma (fun _ : leftRank=rightRank => (Matrix (Fin leftRank) (Fin leftRank) ℂ)ˣ))
+    (scalarExtensionFull : ∀ comparison, ∃ coefficient : Index → ℂ,
+      ∑ i, coefficient i • (family (realizeWholeComparison comparison).1 i).map (algebraMap ℚ ℂ)=
+        ((realizeWholeComparison comparison).2 : Matrix (Fin leftRank) (Fin leftRank) ℂ)) :
+    PSigma (fun equality : leftRank=rightRank =>
+      RationalWeightThreeHodgeMatrixIso leftHodge (equality.symm ▸ rightHodge)) := by
+  exact Quantum.rationalWholeHodgeIso_of_stabilizedBirationality_varyingRanks data leftSmooth rightSmooth related leftHodge rightHodge family members realizeWholeComparison scalarExtensionFull
+
+/-- Reconstruction for a very general source and arbitrary smooth target,
+using an actual rational Hodge isomorphism as the Torelli premise. -/
+theorem rationalHodge_veryGeneralSource_cancellation
+    {K Variety Center Occurrence Family : Type*} [Field K] [CharZero K]
+    {ι : Type u} {division : ι → Type v} [∀ i, DivisionRing (division i)]
+    {data : StabilizedWholeOddData K Variety Center Occurrence Family ι division}
+    {rank : ℕ} {Index : Type*} [Fintype Index]
+    (realization : RationalHodgeEndpointRealization data rank Index)
+    (veryGeneral : Family → Prop) (geometricIso : Family → Family → Prop)
+    (sourceTorelli : ∀ left right, data.smooth left → data.smooth right → veryGeneral left →
+      Nonempty (RationalWeightThreeHodgeMatrixIso (realization.hodge left) (realization.hodge right)) →
+      geometricIso left right)
+    {left right : Family} (leftSmooth : data.smooth left) (rightSmooth : data.smooth right)
+    (generalSource : veryGeneral left)
+    (related : data.birational.r (data.stabilized left) (data.stabilized right)) :
+    geometricIso left right := by
+  exact Quantum.RationalHodgeEndpointRealization.genericCancellation realization veryGeneral geometricIso sourceTorelli leftSmooth rightSmooth generalSource related
+
+/-- Bounded-degree arithmetic partner finiteness with an actual rational
+Hodge-isomorphism premise for geometric isogeny existence. All eligible model
+extensions are included in the same finite set of geometric classes. -/
+theorem rationalHodge_arithmeticPartners_finite_geometricClasses
+    {K Variety Center Occurrence Family Extension A Unpolarized Polarized : Type*}
+    [Field K] [CharZero K] [AddCommGroup A]
+    {ι : Type u} {division : ι → Type v} [∀ i, DivisionRing (division i)]
+    {data : StabilizedWholeOddData K Variety Center Occurrence Family ι division}
+    {rank : ℕ} {Index : Type*} [Fintype Index]
+    (realization : RationalHodgeEndpointRealization data rank Index)
+    (base : Family) (baseSmooth : data.smooth base)
+    (extensionDegree : Extension → ℕ) (degreeBound : ℕ)
+    (hasModel : Extension → Family → Prop)
+    (modelSmooth : ∀ extension object, hasModel extension object → data.smooth object)
+    (geometricallyIsogenous : Family → Prop)
+    (hodgeToIsogeny : ∀ object, data.smooth object →
+      Nonempty (RationalWeightThreeHodgeMatrixIso (realization.hodge base) (realization.hodge object)) →
+      geometricallyIsogenous object)
+    (quotientClass : Set A → Unpolarized)
+    (forgetPolarization : Polarized → Unpolarized)
+    (invariant : Family → Polarized)
+    (uniformKernelBound : ∃ bound : ℕ, ∀ extension object,
+      extensionDegree extension ≤ degreeBound → hasModel extension object →
+      geometricallyIsogenous object → ∃ kernel : AddSubgroup A,
+        Finite kernel ∧ Nat.card kernel ≤ bound ∧
+        forgetPolarization (invariant object)=quotientClass (kernel : Set A))
+    (finiteTorsion : ∀ n : ℕ, Set.Finite {x : A | n • x=0})
+    (finitePolarizations : ∀ target, Set.Finite {p | forgetPolarization p=target})
+    (geometricTorelli : Function.Injective invariant) :
+    Set.Finite {object : Family | ∃ extension : Extension,
+      extensionDegree extension ≤ degreeBound ∧ hasModel extension object ∧
+      data.birational.r (data.stabilized base) (data.stabilized object)} := by
+  exact Quantum.RationalHodgeEndpointRealization.finiteArithmeticPartners realization base baseSmooth extensionDegree degreeBound hasModel modelSmooth geometricallyIsogenous hodgeToIsogeny quotientClass forgetPolarization invariant uniformKernelBound finiteTorsion finitePolarizations geometricTorelli
 
 end CompletedPrimaryApplications
 

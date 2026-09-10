@@ -51,7 +51,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   broad motive/L-equivalence distinction credited). Main mathematical map:
   `../2026-09-09-c1133-acceptance-map.md`; surface Chern inequality checked.
   Lean addition map: `../2026-09-09-c1133-lean-upgrade-map.md`.
-  Current guarded checkpoint: **365 public terminals, 127 machinery, 239 sources**;
+  Current guarded checkpoint: **371 public terminals, 133 machinery, 245 sources**;
   aggregate kernel build and actual axiom comparison pass. Core matrix/lattice,
   full-primary, graded completed-map and low-dimensional vanishing algebra,
   plus conditional numerical classification, whole-Hodge conservation,
@@ -59,9 +59,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   are implemented. Exact declarations and formal boundaries:
   `../2026-09-09-c1133-lean-completion-progress.md`.
   Geometric/source realizations remain explicit inputs; no complete geometric
-  A–D formalization or manuscript claim promotion is asserted. Raw graded-source
-  ring closure and the universal residue proposition beyond checked matrix
-  reductions remain outside the certified statements. Optional L8 is unclaimed.
+  A–D formalization or manuscript claim promotion is asserted. Graded-source
+  convolution closure and actual rational Hodge descent/inverses are proved;
+  individual branches need not descend rationally. The universal residue
+  proposition beyond checked matrix reductions retains fragment coverage.
+  Optional L8 is unclaimed.
   Next audit work: exact sharpness/moduli imports and remaining
   novelty/citation coverage. Collaborator discussion is parked per author.
   One-hour checkpoint: `../2026-09-09-c1133-one-hour-checkpoint.md`.

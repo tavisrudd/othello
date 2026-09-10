@@ -8,8 +8,8 @@ authorized Lean work. No manuscript promotion, export or outreach followed.
 
 ## Implementation checkpoint
 
-The guarded public checkpoint is **365 terminals, 127 machinery terminals,
-239 sources**. The aggregate build and actual axiom comparison pass. All
+The guarded public checkpoint is **371 terminals, 133 machinery terminals,
+245 sources**. The aggregate build and actual axiom comparison pass. All
 new terminals use only `propext`, `Classical.choice`, and `Quot.sound`.
 The core algebra and conditional A–D assemblies are implemented. Exact
 fully qualified declarations, validation runs and limitations are in
@@ -20,7 +20,8 @@ fully qualified declarations, validation runs and limitations are in
   gauge/residue certificates; four rank-three splittings; full super-primary
   projectors, pairings, odd allocation, persistence and exact selectors.
 - L4: actual completed exponential ring maps, grading-derived polynomial bulk
-  layers and faithful graded center maps, fixed-locus coordinate equivalences,
+  layers, an equivalent graded source subring and faithful unital center ring
+  homomorphisms, fixed-locus coordinate equivalences,
   faithful localizations and independent occurrence determinant separation.
 - L5: point/curve/surface block nullity is derived before factorization;
   normalized counting endpoint connections feed the nine/eight rationality
@@ -28,19 +29,23 @@ fully qualified declarations, validation runs and limitations are in
 - L6: full equivariant image objects, formal idempotent conjugacy, actual
   semisimple objects and categorical doubled cancellation, whole-object
   occurrence conservation, fixed-weight periodization and rational morphism
-  descent. A supplied category equivalence transports conservation to actual
-  target Hodge objects.
+  descent. Actual rational Hodge projector objects and rational inverse
+  matrices give whole-object conservation through complex comparison and
+  rational Hom scalar-extension fullness, without separate rational descent
+  of splitting branches. Endpoint ranks may be specified independently.
+  Transport through a supplied category equivalence is also available.
 - L7: source-restricted reconstruction has a very general source and arbitrary
   smooth target; arithmetic finiteness ranges over all model extensions of
   bounded degree and counts geometric classes through finite kernels and
-  polarization fibers.
+  polarization fibers. The reconstruction and isogeny inputs receive actual
+  rational Hodge isomorphisms in the strengthened application interfaces.
 
 **Boundary:** this is not a complete construction of geometric quantum or
 Hodge theory in Lean. Varieties, geometric block/comparison realizations,
 Hodge categories and their semisimplicity, rational controls, classification,
 Torelli and arithmetic source theorems remain explicit inputs. The actual
-graded source is represented by its coefficient-family subtype; its inherited
-ring closure is not asserted. The universal residue manuscript proposition
+graded coefficient-family source is now equivalent to a proved subring, with
+an injective unital ring map. The universal residue manuscript proposition
 still has fragment coverage beyond its checked matrix reductions. No existing
 manuscript claim was promoted by the conditional A–D assemblies: coverage
 remains 13 absent, 27 fragment, 26 conditional deduction, 1 complete.

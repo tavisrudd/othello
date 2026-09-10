@@ -622,3 +622,63 @@ application. A separately uncommitted `RationalHodgeVaryingRank.lean` exposes
 the pairwise conservation conclusion with independently specified endpoint
 ranks, obtaining their equality from the whole complex comparison rather
 than prescribing one rank to all nine Fano families.
+
+### Final core implementation checkpoint: 371 terminals
+
+**Disposition:** the core algebra and conditional A–D implementation is
+complete at its explicit geometric-input boundary. This does not construct
+all geometric QDM/Hodge theory in Lean or complete every manuscript claim.
+The universal residue proposition beyond the checked adapted matrix reductions
+retains fragment coverage. Full literature closure and manuscript/hierarchy
+review remain open under C1133; optional L8 is unclaimed.
+
+Guarded aggregate `run-20260910-054242-9e0e8e07`, run id
+`20260910-054242-0ef63e7e`, builds `PaperInterface.Main` and
+`Verification.AxiomAudit` and passes the aggregate gate. The checker against
+its actual log passes: **245 sources, 371 terminals, 133 machinery**;
+67 manuscript claims, 22 imports and 5 evidence records. Coverage remains
+13 absent, 27 fragment, 26 conditional deduction and 1 complete. Every one of
+the six strengthened terminals uses exactly `propext`, `Classical.choice`,
+`Quot.sound`; no project axiom, `sorry`, or native evaluation axiom was added.
+
+The six added public names in `PaperInterface/Main.lean` have exact prefix
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.`:
+
+- `gradedBulkSource_equiv_completedSubring`
+- `gradedBulkCenterRingHom_injective`
+- `rationalHodgeIsomorphism_inverse`
+- `rationalWholeHodge_conservation`
+- `rationalHodge_veryGeneralSource_cancellation`
+- `rationalHodge_arithmeticPartners_finite_geometricClasses`
+
+The varying-rank leaf passes `run-20260910-054054-e6404373`. Its exact lemma
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.complexLinearComparison_rank_eq`
+derives rank equality from an actual complex linear equivalence. Pairwise
+rational conservation accepts separately specified ranks and a whole complex
+comparison; it does not impose one cohomology rank on all nine Fano families.
+The fixed-rank downstream models are used for cubic or quartic families.
+
+### Final Mystery ledger — ej + tt after the strengthened gate
+
+- **Settled:** raw-family ring closure is proved through the coefficientwise
+  equivalent convolution subring, with an injective unital center map and no
+  additional support hypothesis.
+- **Settled:** whole-object rational descent constructs an actual Hodge
+  isomorphism and rational inverse without a global complex-to-rational
+  category equivalence or rational descent of individual branches. The whole
+  equivariant Hom scalar-extension identification remains an explicit input;
+  arbitrary complex Hodge maps are not assumed to descend.
+- **Settled:** the pairwise Hodge theorem allows independently specified
+  endpoint ranks; fixed rank is confined to its cubic/quartic applications.
+- **External gates:** geometric realizations, source reconstruction/arithmetic
+  theorems, full novelty/citation closure, and the universal residue statement
+  beyond the checked matrix scope remain as recorded above. No further
+  unexplained feature remains in the implemented core. No incidental
+  out-of-scope discovery was promoted.
+
+The final source review covers the added modules and typed wrappers, their
+actual inverse constructions and quantifier/import boundaries. The axiom and
+source-correspondence checks agree. No manuscript source, mirror, exported
+companion or outreach was changed by this final checkpoint. A first attempt
+to append this section used a relative notes path from the paper directory
+and failed without writing; this append uses the absolute owned report path.
