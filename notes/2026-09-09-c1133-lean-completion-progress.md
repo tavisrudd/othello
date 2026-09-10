@@ -565,3 +565,18 @@ and the complete comparison now passes.
   remain owned by C1133. Optional rank-three residue and uniform odd-cubic
   refinements remain L8. No additional unexplained numerical phenomenon was
   found in this closeout pass.
+
+### Graded-ring closure strengthening
+
+The raw-source ring boundary at the 365-terminal checkpoint is now closed by
+`Quantum/GradedBulkSubring.lean` and `Quantum/GradedBulkSourceRing.lean`.
+Exact declarations are
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.gradedCompletedBulkSource_equivSubring`
+and
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.gradedCompletedBulkCenterRingHom_injective`.
+Convolution adds the cohomological intervals and unit bounds; every nonzero
+coefficient has actual curve and polynomial-monomial witnesses. The subring
+is coefficientwise equivalent to the original formal-family source, with no
+additional support hypothesis, and its actual unital ring map agrees with the
+previous center map. Guarded queues `run-20260910-052329-da06ad4a` and
+`run-20260910-052436-e77a540b` pass. Public reviewer export integration follows.
