@@ -48,6 +48,13 @@ Current authority: `../2026-09-09-c1130-js-wasm-parity-review.md`; task requirem
 `../2026-09-08-c1130-wasm-feature-completeness.md`. Private capability matrix and
 performance experiments: `ergodis-private/analysis/interface-review/`.
 
+JS/WASM conformance entry point: `make -C analysis/js-wasm-tests all` in
+`ergodis-private`. Fast/browser/extended tiers, 27 checks, JSON/Markdown/JUnit
+reports; final full run passes. Coverage limits and retained intermittent browser
+failures: `analysis/js-wasm-tests/2026-09-09-suite.md`. Safari/iOS, Firefox,
+performance A/B and screenshot regression coverage remain open. The suite does
+not rebuild or replace canonical artifacts and does not replace native perf gates.
+
 Delivered family modules include LRC, QEC, scheduling, CSS, Hadamard and repair.
 Demos support independent discovery, checked live admission, learned-only reruns
 with discovery off, and certificate verification. Race timing starts in ready
