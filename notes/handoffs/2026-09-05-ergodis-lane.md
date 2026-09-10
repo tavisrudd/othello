@@ -62,6 +62,11 @@ Implementation and validation disposition: `../2026-09-10-c1130-offline-worker-l
 Repair race terminal status now flushes before successful worker cleanup cancels
 pending paints; completed and work-limited controls pass browser DOM checks.
 Private report: `analysis/interface-review/2026-09-10-terminal-race-paint.md` (`521374b`).
+Three-round screening of seven specialized alternatives finds wins only for the
+two direct XOR helper-choice cases. Existing adaptive scheduling is slower than
+the resumable/Evolve paths on all five measured grids; four adaptive sweeps were
+censored after >15 s. Private results and replay:
+`analysis/interface-review/2026-09-10-specialized-race-measurement.md`.
 Intermittent Chromium worker import cancellation remains open. Safari/iOS, Firefox,
 performance A/B and screenshot regression coverage remain open. The suite does
 not rebuild or replace canonical artifacts and does not replace native perf gates.
