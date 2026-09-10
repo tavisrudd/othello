@@ -4,6 +4,14 @@ Current paired native/JS capability inventory and implementation ordering:
 `2026-09-09-c1130-js-wasm-parity-review.md`. Resolve host fragmentation together;
 preserve typed native execution. This is private, not-to-ship context.
 
+Specialized representation transfer and adaptive plan switching:
+`ergodis-private/analysis/interface-review/2026-09-10-specialization-representation-and-evolve.md`
+(sibling repository). Cheap recognition belongs in initial compilation; Evolve
+must also recognize, independently admit and switch active general executions to
+specialized representations. This is a design requirement, not delivered general
+switching. The document inventories measured advantages, proposed transfers and
+preservation, timing and performance gates.
+
 Conformance runner: private `analysis/js-wasm-tests/README.md`; use its
 fast/browser/extended tiers and retained reports when changing JS/WASM contracts.
 Generated contract tests: private `analysis/property-tests/design.md` and
