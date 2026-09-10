@@ -71,16 +71,22 @@ provider, with 120 identical loaded-source transcripts and independent certifica
 checks. Completed CSS races include an explicit below-the-fold explorer. These
 bounds are checked but not automatically admitted to the solver; report:
 `ergodis-private/analysis/interface-review/2026-09-09-residual-charge-discovery.md`.
-Next: compiled-residual mapping and zone-aware admission for those discovered
-bounds; resolve disabled two-worker native timing before changing native defaults.
+Compiled-residual screening found no held-out gain from the learned charge or
+parity-projection banks; do not add them to the inner loop. The retained disabled
+two-worker timing discrepancy did not reproduce. Evidence and next utility gate:
+`ergodis-private/analysis/interface-review/2026-09-09-compiled-residual-utility.md`.
 Opt-in available-neighborhood packing now has a shared native/WASM provider
 operation (core `8b4b944`, private `156ee36`); browser CSS races apply it equally
 to both arms, with source tables
 compiled once per Plan before race timing. The cached-cover utility guard remains
 a private prototype. See `2026-09-09-css-residual-evaluation.md` in the private
 interface-review directory for retained evidence and validation limits. Paired
-campaign updates/checkpoints and application certificate checkers remain open. P2 retained labelled
-composition/fields remains the contrasting-family gate; P3 inventory, P4 portable
+campaign updates/checkpoints and application certificate checkers remain open.
+P2 retained labelled composition now supports seven fields, rectangular labels,
+a distinct target table and repeated witness readouts through one native/WASM
+adapter (private `164ea91`). 972 ABI calls and independent cost/witness checks pass;
+report: `2026-09-09-retained-composition-portability.md`. Towers, source helper
+lifting and CLI/schema convergence remain open. P3 inventory, P4 portable
 performance experiments, P5 continuation/storage and P6 complete conformance.
 Private current evidence/design: `analysis/interface-review/application-records.md`,
 `provider-readout-contracts.md`, `capability-matrix.json`, and
@@ -88,6 +94,11 @@ Private current evidence/design: `analysis/interface-review/application-records.
 residual-bound spikes are private `3408bb1`; the newer packing evaluator is a
 built-in checked bound, not an Evolve-synthesized theorem. Small
 50/128-qubit examples now live in Applications at `/code-distance`.
+
+JS race lifecycle review fixed stale selection mounting, cancellation during
+preparation/final discovery, sibling worker cleanup and bounded discovery readiness
+(private `a55cca3`). Example-specific batch units remain intentional; discovery
+failure policies and saved-trace parity require explicit review.
 
 Native CLI/control/runtime fragmentation must converge in these same phases.
 Preserve typed native kernels and all contributor performance gates. Full parity,
