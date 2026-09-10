@@ -57,6 +57,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   audit: `../2026-09-09-c1133-lean-parameterized-progress.md`.
   The first super-algebra lemmas pass a 324-terminal audit:
   `../2026-09-09-c1133-lean-super-progress.md`.
+  Rank-three centralizer and trace identities pass a 325-terminal audit:
+  `../2026-09-09-c1133-lean-rank-three-progress.md`.
   Next formal work: full-gauge bridge and seventeen-matrix certificates;
   preserve resonant discriminant-one cases and the independent rank-three odd
   selector. Next audit work: exact sharpness/moduli imports and remaining

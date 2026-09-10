@@ -3,7 +3,7 @@
 **Date:** 2026-09-09. **Lane:** `cubic-threefolds`.
 **Status:** incomplete; no global novelty or priority verdict is issued.
 **External sources read at full text: 5 — three papers and two source scripts.**
-The source register contains 73 individual entries, with exact read depths,
+The source register contains 78 individual entries, with exact read depths,
 versions, cache access and hashes. Most papers have partial read depth.
 Iritani’s ten-page Hodge refinement has now been read completely.
 The author-supplied packet has been read completely, including its checker.
@@ -593,3 +593,61 @@ open literature obligations remain the published spectra-version comparison,
 the categorical base-loci body, outstanding graph/publication-alias checks,
 original Narasimhan–Nori access and the already recorded MathSciNet/Scholar
 coverage limits. The exact pencil hypotheses remain separate optional imports.
+
+
+## Final access probes in the one-hour checkpoint
+
+The following additional searches were run verbatim, as discovery screens of
+tool-returned titles and excerpts:
+
+- `Narasimhan Nori Polarisations on an abelian variety 1981 pdf`
+- `"Categorical base loci and spectral gaps" pdf Katzarkov Liu`
+- `"Narasimhan" "Nori" "Polarisations" filetype:pdf -site:researchgate.net -site:repository.ias.ac.in`
+- `"Polarisations on an abelian variety" "pdf" "ias"`
+- `"Categorical base loci" "Katzarkov" site:math.bas.bg pdf`
+
+The IAS search index again returned Theorem 1.1 of Narasimhan–Nori, and browser
+open identified a four-page PDF at `https://repository.ias.ac.in/36463/1/36463.pdf`,
+but extraction returned zero lines and screenshots of all four pages failed
+with cache misses. Cache lookup confirmed no original PDF under
+`10.1007/BF02837283`. The original-facsimile read gap therefore remains; this
+is not promoted to a full or partial original-paper read. Earlier secondary
+statement corroboration remains available.
+
+The plausible AMS chapter PDF URL
+`https://www.ams.org/books/pspum/088/01473/pspum088-01473.pdf` and INSPIRE API
+record `https://inspirehep.net/api/literature/1337888` returned browser access
+errors. Neither supplies chapter text. Additional search hits were discovery
+metadata only and were not used as mathematical authorities. No new source was
+counted as read in full and no negative literature conclusion follows.
+
+
+## Institutional and author metadata: equivariant successors
+
+Lee's author publication list and CKGA's institutional papers list corroborate
+the 2023 spectra chapter authorship, volume 409 and pages 371–407, but provide
+no alternate chapter body. Their cached HTML and the following arXiv landing
+snapshots are pinned by `2026-09-09-c1133-equivariant-leads.json`. These accesses
+followed already identified links; no new topical query was used.
+
+CKGA entries 28–30 list three historical preprint/in-preparation titles about
+Chen–Ruan blowup, nc Hodge birational invariants and equivariant atomic contents.
+They are individually registered at metadata depth. Their identifiers, current
+status and possible aliases to subsequent work remain unresolved; they are
+not presumed to be three distinct current papers.
+
+Following CKGA's arXiv:2405.07322 link gives a useful version correction:
+*A Gromov-Witten approach to G-equivariant birational invariants* is withdrawn.
+The current v4 notice points to *Atoms meet symbols*, arXiv:2509.15831, and future
+work. The current v4 abstract of the latter was read. Its Chen–Ruan atom
+extension explicitly assumes the quantum Chen–Ruan blowup formula, and it also
+describes a separate geometric construction for finite-group actions. This is
+an equivariant/orbifold precursor requiring body-level comparison, not an
+unconditional geometric QDM input for A–D. Withdrawal alone is not a correctness
+verdict on the older text. The institutional list's older “submitted” label
+must not override the current arXiv notice.
+
+The register now has **78 entries**, including these five metadata/abstract
+leads; full-text count stays **five**. This expansion improves the audit's
+coverage and version control but leaves the listed body and alias obligations
+open. No assertion of comprehensive absence is made.

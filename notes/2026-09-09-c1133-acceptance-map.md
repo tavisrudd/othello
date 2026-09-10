@@ -57,7 +57,9 @@ The original AKMW proof has not been independently read here.
 8. **G8:** cancel in the rational semisimple category; no integral or principally
    polarized identification is inferred.
 9. **G9:** numerical checks and written geometric proofs are distinguished.
-   This audit performed no Lean replay or manuscript rebuild.
+   The original acceptance checkpoint performed no Lean replay. Subsequent
+   guarded algebraic implementation is tracked in `lean-upgrade-map.md`; no
+   geometric manuscript coverage is promoted by those separate checks.
 
 These are conditions the eventual revision must print and preserve. A later
 rewrite omitting them would not be covered by this acceptance map.
@@ -90,6 +92,10 @@ The closest inspected lines of work have distinct roles:
 
 - Iritani/Iritani–Koto and KKPY supply the quantum comparison foundations and
   Hodge/atom framework. Do not claim the broad Hodge-localization idea.
+- The author-hosted *Interpretations of spectra* chapter already displays the
+  cubic exponents −1/6 and −5/6 and develops spectral ordinary-irrationality
+  applications. Its published 2023 version has not been matched; exact partial
+  read scopes and prior-work credit are in the owning novelty ledger.
 - Cai supplies persistence and a cubic monodromy calculation; Guéré supplies
   the nef-surface nilpotence precedent. These must be credited directly.
 - Lee–Przyjalkowski's fully read published three-page note concerns rationality
@@ -104,9 +110,12 @@ The closest inspected lines of work have distinct roles:
 
 The audit is still incomplete. The zbMATH quantum/birational title screen is
 now complete at 274/274 distinct records, including separate resolution of two
-licensed-out titles. The historical spectra/categorical-base-loci chapter bodies,
-other unresolved citation leads, publication-identity coverage and repeating-
-surface inventory must still be completed or explicitly bounded in the final verdict. MathSciNet and Google Scholar access gaps do
+licensed-out titles. The spectra chapter now has a primary author-version partial read; its published-
+version match, the categorical-base-loci body, other unresolved citation leads
+and publication-identity coverage remain. The repeating-surface inventory is
+now written in the literature audit, with external release inspection deferred
+to manuscript review. Remaining source gaps must be completed or explicitly
+bounded in the final verdict. MathSciNet and Google Scholar access gaps do
 not count as negative evidence. The four main mathematical dispositions above
 do not certify novelty.
 

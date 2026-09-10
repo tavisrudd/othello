@@ -488,7 +488,7 @@
       },
       "key": "10.1007/BF02837283",
       "read_depth": "secondary only",
-      "read_scope": "Recollection in arXiv:2412.01676v1 introduction (read partial); original DOI metadata and search excerpt consulted. Primary PDF not read: IAS direct GET returned 404, publisher PDF returned non-PDF bytes, browser opened metadata but page screenshot failed with cache miss. Additional 2026-09-09 primary access attempts: IAS article and archive URLs returned 403; repository download query returned 404. Search index displayed the primary Theorem 1.1 excerpt, but no PDF/text extraction was acquired; primary facsimile gate remains open.",
+      "read_scope": "Recollection in arXiv:2412.01676v1 introduction (read partial); original DOI metadata and search excerpt consulted. Primary PDF not read: IAS direct GET returned 404, publisher PDF returned non-PDF bytes, browser opened metadata but page screenshot failed with cache miss. Additional 2026-09-09 primary access attempts: IAS article and archive URLs returned 403; repository download query returned 404. Search index displayed the primary Theorem 1.1 excerpt, but no PDF/text extraction was acquired; primary facsimile gate remains open. Final one-hour checkpoint: browser again identified four PDF pages but returned zero extracted lines; all four screenshots failed with cache misses. Original PDF remains absent from shared cache. No read-depth promotion.",
       "secondary_source": "arXiv:2412.01676",
       "title": "Polarisations on an abelian variety",
       "version_in_cached_header": "1981 original not read"
@@ -830,21 +830,39 @@
       "role_status": "Categorical base loci/Orlov spectra; primary text unresolved; do not claim absence of an exact overlap.",
       "access": {
         "status": "no linked primary identifier; needs manual resolution",
-        "additional_primary_locator": "https://doi.org/10.1090/pspum/088/01473"
+        "additional_primary_locator": "https://doi.org/10.1090/pspum/088/01473",
+        "additional_failed_probes": [
+          "https://www.ams.org/books/pspum/088/01473/pspum088-01473.pdf",
+          "https://inspirehep.net/api/literature/1337888"
+        ]
       }
     },
     {
       "key": "doi:10.1007/978-3-031-17859-7_20",
       "title": "Interpretations of Spectra",
       "read_depth": "metadata only",
-      "read_scope": "Publisher landing abstract lines 40–44 and displayed references 139–219 read; subscription chapter body not read.",
+      "read_scope": "Publisher landing abstract lines 40–44 and displayed references 139–219 read; subscription chapter body not read. Lee’s publication list and CKGA entry 22 corroborate authors, 2023 publication, volume 409 and pages 371–407, but supply no alternate PDF link.",
       "role_status": "Close spectral/monodromy precursor. Published body still unread. An author-hosted thesis chapter of the same title is now partially read and separately registered as Katzarkov-DSciThesis-v2; it is not byte- or version-matched to this published chapter.",
       "access": {
         "url": "https://api.crossref.org/works/10.1007/978-3-031-17859-7_20",
         "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-7828755.json",
         "sha256": "ac7181dcf1d9e697c84892dcac2c09616f37969dd0c4e0d97ffd929b0d09cf75",
         "status": "retrieved",
-        "additional_primary_locator": "https://link.springer.com/chapter/10.1007/978-3-031-17859-7_20"
+        "additional_primary_locator": "https://link.springer.com/chapter/10.1007/978-3-031-17859-7_20",
+        "author_metadata": {
+          "url": "https://sites.google.com/site/kyoungseogleemath/publications-and-preprints",
+          "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/lee-publications.html",
+          "bytes": 115027,
+          "sha256": "f7ac4bebdf13506829556c2cb9cc57f193bf4f872e022a0b15e9a71814e2b201",
+          "status": "retrieved"
+        },
+        "institutional_metadata": {
+          "url": "https://icms.bg/ckga/ckga-papers/",
+          "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/ckga-papers.html",
+          "bytes": 112026,
+          "sha256": "9f069311a5e37ab7f197e66051f73b088063abc4c9dc9f584ca60f2c318ee84d",
+          "status": "retrieved"
+        }
       }
     },
     {
@@ -1039,6 +1057,78 @@
         "bytes": 2358787
       },
       "version_in_cached_header": "Author-hosted filename DSciThesis-Katzarkov-v2.pdf; publication-version equivalence not established."
+    },
+    {
+      "key": "arXiv:2405.07322",
+      "title": "A Gromov-Witten approach to G-equivariant birational invariants",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Current v4 landing abstract, withdrawal notice and version history read; no v1/v2 body read.",
+      "role_status": "Historical equivariant-atom lead, withdrawn in September 2025 with v4 notice October 2025. Notice points to arXiv:2509.15831 and future work; withdrawal is not treated as a blanket refutation.",
+      "version_in_cached_header": "arXiv:2405.07322v4, 2 October 2025, withdrawn",
+      "access": {
+        "url": "https://arxiv.org/abs/2405.07322v4",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/equivariant-withdrawn.html",
+        "bytes": 40665,
+        "sha256": "51aad6624901697100614676165ad227e782471ba7afbd45b4183aa8b24b908a",
+        "status": "retrieved"
+      }
+    },
+    {
+      "key": "arXiv:2509.15831",
+      "title": "Atoms meet symbols",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "Current v4 landing abstract and bibliographic/version metadata read; paper body unread.",
+      "role_status": "Close equivariant/Chen-Ruan atom lead reached from withdrawal notice. Abstract explicitly assumes a quantum Chen-Ruan blowup formula for the atom extension and separately describes purely geometric invariants. No conclusion on overlap with A–D without body comparison.",
+      "version_in_cached_header": "arXiv:2509.15831v4, 1 April 2026",
+      "access": {
+        "url": "https://arxiv.org/abs/2509.15831v4",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/atoms-meet-symbols.html",
+        "bytes": 40366,
+        "sha256": "7c250d563f8d2b7f6d74267a69fa60172051ac9f6fead6ee844e234c767c0c17",
+        "status": "retrieved"
+      }
+    },
+    {
+      "key": "CKGA:28",
+      "title": "A (Multiplicative) Blow-Up Formula for the Chen-Ruan Cohomology and Applications",
+      "read_depth": "metadata only",
+      "read_scope": "Institutional CKGA papers list, entries 28–30, title/authorship/status labels only; no manuscript obtained or read.",
+      "role_status": "Listed as a preprint; identifier, current status and relationship to later work unresolved. Historical discovery lead, not an imported theorem or a confirmed distinct current publication.",
+      "access": {
+        "url": "https://icms.bg/ckga/ckga-papers/",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/ckga-papers.html",
+        "bytes": 112026,
+        "sha256": "9f069311a5e37ab7f197e66051f73b088063abc4c9dc9f584ca60f2c318ee84d",
+        "status": "retrieved"
+      }
+    },
+    {
+      "key": "CKGA:29",
+      "title": "Birational invariants from nc Hodge theory",
+      "read_depth": "metadata only",
+      "read_scope": "Institutional CKGA papers list, entries 28–30, title/authorship/status labels only; no manuscript obtained or read.",
+      "role_status": "Listed as a preprint; identifier, current status and relationship to KKPY/later work unresolved. Historical discovery lead, not an imported theorem or a confirmed distinct current publication.",
+      "access": {
+        "url": "https://icms.bg/ckga/ckga-papers/",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/ckga-papers.html",
+        "bytes": 112026,
+        "sha256": "9f069311a5e37ab7f197e66051f73b088063abc4c9dc9f584ca60f2c318ee84d",
+        "status": "retrieved"
+      }
+    },
+    {
+      "key": "CKGA:30",
+      "title": "Atomic Contents and Equivariant Birational Geometry",
+      "read_depth": "metadata only",
+      "read_scope": "Institutional CKGA papers list, entries 28–30, title/authorship/status labels only; no manuscript obtained or read.",
+      "role_status": "Listed as in preparation; identifier, current status and relationship to Atoms meet symbols unresolved. Historical discovery lead, not an imported theorem or a confirmed distinct current publication.",
+      "access": {
+        "url": "https://icms.bg/ckga/ckga-papers/",
+        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/ckga-papers.html",
+        "bytes": 112026,
+        "sha256": "9f069311a5e37ab7f197e66051f73b088063abc4c9dc9f584ca60f2c318ee84d",
+        "status": "retrieved"
+      }
     }
   ],
   "external_full_text_breakdown": {

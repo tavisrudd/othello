@@ -174,6 +174,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RankTwoLatticeTransport",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ParameterizedRankTwoResidue",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SuperRankOneVanishing",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.CyclicRankThreeCentralizer",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SylvesterOperator",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.BlockSylvesterSolvability",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.NormalizedSylvesterGauge",

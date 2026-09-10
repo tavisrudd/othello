@@ -49,7 +49,7 @@ audit; it does not change the manuscript's current theorem hierarchy or formal
 coverage. The detailed scope is in
 [`2026-09-09-c1133-acceptance-map.md`](../../notes/2026-09-09-c1133-acceptance-map.md).
 The complete literature audit is still open. Its source register currently has
-73 entries; only five external sources (three papers and two source scripts)
+78 entries; only five external sources (three papers and two source scripts)
 are read in full. Every other entry records its actual partial or metadata
 scope. The earlier bounded absence statements above must be read with this
 expanded, still incomplete coverage boundary.
@@ -85,12 +85,20 @@ restrictions. No full-chapter negative or pre-emption decision on A–D is made.
 Lean from regular horizontal comparisons and inverse comparisons, including
 resonance. The parameterized four-dimensional finite reduction and the four
 rational discriminants are also checked. Scalar-even odd vanishing and polynomial transfer to the whole algebra are
-also checked. The public audit has 324 terminals, with the five additions
-registered as machinery. No manuscript claim has
+also checked, as are the cyclic rank-three commutant and trace identities.
+The public audit has 325 terminals, with the six additions registered as machinery. No manuscript claim has
 been promoted: geometric QDM identification, the complete parameterized gauge
 bridge, all seventeen certificates, super-primary selectors, rank-three
 cluster persistence and faithful fixed-base constructions remain separately
 listed obligations.
+
+**Further equivariant leads.** The institutional CKGA list led to withdrawn
+arXiv:2405.07322 and its stated successor, *Atoms meet symbols*,
+arXiv:2509.15831v4. Only abstracts and metadata have been read. The latter
+explicitly makes its Chen–Ruan atom extension conditional on the relevant
+blowup formula. Three older institutional preprint labels have unresolved
+identities/aliases. They remain audit obligations, not negative evidence or
+new imported hypotheses for A–D.
 
 **Repeating surfaces.** The primary introduction's related-work paragraph and
 the framed companion's exponent discussion need the older-source attribution

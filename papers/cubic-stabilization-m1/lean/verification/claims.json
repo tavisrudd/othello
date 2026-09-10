@@ -1471,6 +1471,11 @@
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_eulerPolynomial_transfers_from_even",
       "reason": "Polynomial identity transfer through the actual regular representation of an associative algebra. No primary decomposition or geometric parity model is constructed; this supports the planned whole-super-primary selection and serves no current manuscript claim.",
       "terminal_digest": "7fb82ab0d7d0124bec71146f9fb9296a7a81ee3153e499fb2d5c369b041ae859"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankThree_cyclicCentralizer_and_traceIdentities",
+      "reason": "Finite cyclic rank-three centralizer and trace identities for the planned cluster-persistence argument. Differential-ideal stability, formal lowest-degree vanishing and geometric cluster realization are not constructed; this algebra does not discharge a current manuscript claim.",
+      "terminal_digest": "6a86d96164092c3cc492d8fca004282dda2a8287b2b4e1a3b371e88e10624d12"
     }
   ]
 }

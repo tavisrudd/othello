@@ -1,0 +1,34 @@
+{
+  "accessed_utc": "2026-09-10T01:33:42.633758+00:00",
+  "scope": "Primary metadata and abstract snapshots only. No paper body read. Institutional preprint labels are not treated as current publication status.",
+  "records": {
+    "ckga-papers": {
+      "url": "https://icms.bg/ckga/ckga-papers/",
+      "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/ckga-papers.html",
+      "bytes": 112026,
+      "sha256": "9f069311a5e37ab7f197e66051f73b088063abc4c9dc9f584ca60f2c318ee84d",
+      "status": "retrieved"
+    },
+    "lee-publications": {
+      "url": "https://sites.google.com/site/kyoungseogleemath/publications-and-preprints",
+      "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/lee-publications.html",
+      "bytes": 115027,
+      "sha256": "f7ac4bebdf13506829556c2cb9cc57f193bf4f872e022a0b15e9a71814e2b201",
+      "status": "retrieved"
+    },
+    "equivariant-withdrawn": {
+      "url": "https://arxiv.org/abs/2405.07322v4",
+      "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/equivariant-withdrawn.html",
+      "bytes": 40665,
+      "sha256": "51aad6624901697100614676165ad227e782471ba7afbd45b4183aa8b24b908a",
+      "status": "retrieved"
+    },
+    "atoms-meet-symbols": {
+      "url": "https://arxiv.org/abs/2509.15831v4",
+      "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/atoms-meet-symbols.html",
+      "bytes": 40366,
+      "sha256": "7c250d563f8d2b7f6d74267a69fa60172051ac9f6fead6ee844e234c767c0c17",
+      "status": "retrieved"
+    }
+  }
+}
