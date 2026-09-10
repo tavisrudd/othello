@@ -484,3 +484,11 @@ Guarded queue `run-20260910-045853-989a6cc8` passed the four consumers `Semisimp
 - `FormalIdempotentConjugacy.multivariateFormalIdempotent_conjugate_constant` and `EquivariantProjectorImages.equivariantImageRepresentationEquiv` retain full images and equivariance.
 
 These eight leaves are compiled; their new public reviewer exports and audit rows are not yet added. Public audited count remains 353. `BoundedIsogenyFiniteness.lean` is separately uncommitted while its first elaboration is pending.
+
+Validation invocation correction: the await for queue `run-20260910-050650-38271d48` returned 124 while the subsequent consumer guard had already been placed sequentially in the same tool call. The wrapper must serialize/refuse that invocation; its outcome is not a completed dependency gate. Subsequent consumer elaboration is conditional on the queue terminal success. No direct Lean or process intervention was used.
+
+### Full-object conservation and endpoint assembly
+
+Queues `run-20260910-050319-afa09e2f` and `run-20260910-050650-38271d48` passed four more leaves. Under full prefix `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum`, `SemisimpleOccurrenceConservation.semisimple_lowDimensionalOccurrenceNullity` derives full-object nullity from actual block realizations; `StabilizedWholeOddConservation.StabilizedWholeOddData.wholeOddIso` assembles dimension-four factorization and endpoint doubled-object identifications into an actual categorical isomorphism. Its `geometricIso_of_veryGeneral_source` keeps the target arbitrary smooth and the source very general. `BoundedIsogenyFiniteness.finite_geometricClasses_of_bounded_kernels` proves the finite torsion/kernel/quotient/polarization/reconstruction chain. `CountingPrimaryEndpoints.countingEndpointBlocks_weight` derives every endpoint signature from block expressions; rank-two records carry actual normalized gauge equations, not supplied discriminants. Geometric and source realization inputs remain explicit.
+
+The premature consumer elaboration recorded above failed solely on the not-yet-built `CountingPrimaryEndpoints.olean`; after the queue success it was retried against the now-built dependency. The uncommitted consumer is `CountingStabilizationObstruction.lean`. Public audited coverage still remains 353 pending reviewer export integration.
