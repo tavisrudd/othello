@@ -1,0 +1,70 @@
+{
+  "discriminator": "Promote quantum/atomic invariants, stabilization, Fano rationality, Hodge/isogeny conservation, or ambiguity about those topics; retain a merely related title without a content-level exclusion.",
+  "sets": [
+    {
+      "name": "framing-citing-set",
+      "request": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2607.22074/citations?fields=title,externalIds,abstract&limit=100",
+      "raw_sha256": "c6c27213d6c88df913f073fe6e103a269832452759e742bb1af2bf045214e16b",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-final-access/ebac30c1303b8c813340.response",
+      "size": 1,
+      "next": null,
+      "service_total": null,
+      "fields_read": "title and abstract",
+      "records": [
+        {
+          "paperId": "d333d899aeb5cc1d0bf8062460d367d50372583b",
+          "title": "The quantum D-module of product varieties",
+          "externalIds": {
+            "ArXiv": "2509.07407",
+            "CorpusId": 281218258
+          }
+        }
+      ],
+      "coverage": "Complete retrieved set; missing service/alias coverage does not license citation-tree closure."
+    },
+    {
+      "name": "lp-lead-citing-set",
+      "request": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2510.23143/citations?fields=title,externalIds,abstract&limit=100",
+      "raw_sha256": "7dec63116dc6c4c6886de06755e488adac0b4185138dad1a7fd74a391b167136",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-final-access/092a7fcccd895881b066.response",
+      "size": 1,
+      "next": null,
+      "service_total": null,
+      "fields_read": "title and abstract",
+      "records": [
+        {
+          "paperId": "cd809dbccc4235eac2635b2fbf1f9c73e27f5623",
+          "title": "Landau-Ginzburg models for Fano threefolds of Picard rank one and exceptional collections",
+          "externalIds": {
+            "ArXiv": "2601.16497",
+            "CorpusId": 284982183
+          }
+        }
+      ],
+      "coverage": "Complete retrieved set; missing service/alias coverage does not license citation-tree closure."
+    },
+    {
+      "name": "base-openalex-set",
+      "request": "https://api.openalex.org/works?filter=cites:W4254843644&per-page=100",
+      "raw_sha256": "94a621e959b2eab8196223329dddd6e76b4ed0a2931a43e1e84e2982ca1baf5b",
+      "raw_path": "/tmp/persistent/tavis/lit-search/c1133-final-access/c2775f0f6d18e0fce9c1.response",
+      "size": 2,
+      "next": null,
+      "service_total": 2,
+      "fields_read": "title only",
+      "records": [
+        {
+          "id": "https://openalex.org/W2315020440",
+          "title": "Newton–Okounkov bodies and complexity functions",
+          "doi": "https://doi.org/10.1016/j.crma.2016.02.004"
+        },
+        {
+          "id": "https://openalex.org/W4377236228",
+          "title": "Interpretations of Spectra",
+          "doi": "https://doi.org/10.1007/978-3-031-17859-7_20"
+        }
+      ],
+      "coverage": "Complete retrieved set; missing service/alias coverage does not license citation-tree closure."
+    }
+  ]
+}

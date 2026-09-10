@@ -49,8 +49,8 @@ audit; it does not change the manuscript's current theorem hierarchy or formal
 coverage. The detailed scope is in
 [`2026-09-09-c1133-acceptance-map.md`](../../notes/2026-09-09-c1133-acceptance-map.md).
 The complete literature audit is still open. Its source register currently has
-77 entries; only five external sources (three papers and two source scripts)
-are read in full. Every other entry records its actual partial or metadata
+79 entries (78 external and one local); eight external sources (six papers
+and two source scripts) are read in full. Every other entry records its actual partial or metadata
 scope. The earlier bounded absence statements above must be read with this
 expanded, still incomplete coverage boundary.
 
@@ -59,7 +59,7 @@ expanded, still incomplete coverage boundary.
 | A: one stabilization preserves rationality for all seventeen smooth complex Picard-rank-one Fano threefold families | Exact seventeen-matrix arithmetic, geometric input normalization, all-member rational controls and the source-level family exhaustion have been checked. Written operation, persistence and center-vanishing arguments remain explicit dependencies; Lean only covers specified algebraic portions | Ordinary irrationality, quantum spectral methods and much of the underlying Fano data are prior work. Lee–Przyjalkowski's published mirror note addresses ordinary rationality for general Fanos. No global priority verdict on the all-member one-stabilization classification |
 | B: among the nine detected families, one-stable birationality implies isomorphism of rational Hodge structures H³ | Written full-fiber equivariance and faithful Hodge-fixed-base adaptation; the exact coefficient-domain and common-field hypotheses must be retained. No replacement of the fiber by its invariant vectors | Hodge atoms and equivariant quantum comparisons are established precursors, including KKPY and Iritani. A claim to originate Hodge-enhanced spectral localization is excluded. Exact conservation statement comparison remains open |
 | C: very-general cubic/quartic source, arbitrary smooth same-family target, one-stable birationality implies isomorphism | Deduction from B and Voisin's precise rational generic Torelli statement; source quantifiers checked | Credit Voisin for the rational/unpolarized Torelli input. The cancellation application is a candidate consequence, not a new Torelli theorem; no final novelty verdict |
-| D: bounded-degree extensions of a fixed finitely generated characteristic-zero field yield finitely many geometric cubic partner classes | Written deduction from B, Orr v4, arithmetic intermediate Jacobians, finite kernels, polarization finiteness and Torelli. Original Narasimhan–Nori access remains a source gap, with secondary statement corroboration | Credit those finiteness and Torelli inputs. This is geometric-class finiteness, not finiteness of twists or an effective bound. Earlier arithmetic-spectrum rationality criteria have a different inspected conclusion; comprehensive comparison remains open |
+| D: bounded-degree extensions of a fixed finitely generated characteristic-zero field yield finitely many geometric cubic partner classes | Written deduction from B, Orr v4, arithmetic intermediate Jacobians, finite kernels, polarization finiteness and Torelli. Original Narasimhan–Nori Theorem 1.1 is now verified from all four original scanned pages (2026-09-10 source closeout) | Credit those finiteness and Torelli inputs. This is geometric-class finiteness, not finiteness of twists or an effective bound. Earlier arithmetic-spectrum rationality criteria have a different inspected conclusion; comprehensive comparison remains open |
 
 **Concrete older precursor.** A primary author-hosted DSc thesis contains
 *Interpretations of spectra*: printed p. 285 displays the cubic connection
@@ -84,25 +84,38 @@ explicit computation or to certify the entire chapter. Its inspected
 arithmetic examples concern nonrationality over nonclosed fields with cycle
 restrictions. No full-chapter negative or pre-emption decision on A–D is made.
 
-**Formal boundary.** Exact rank-two modified-residue conjugacy now follows in
-Lean from regular horizontal comparisons and inverse comparisons, including
-resonance. The parameterized four-dimensional finite reduction and the four
-rational discriminants are also checked. Scalar-even odd vanishing and polynomial transfer to the whole algebra are
-also checked, as are the cyclic rank-three commutant and trace identities.
-The public audit has 325 terminals, with the six additions registered as machinery. No manuscript claim has
-been promoted: geometric QDM identification, the complete parameterized gauge
-bridge, all seventeen certificates, super-primary selectors, rank-three
-cluster persistence and faithful fixed-base constructions remain separately
-listed obligations.
+**Formal boundary.** The latest recorded guarded checkpoint is 371 public
+terminals, 133 machinery and 245 sources; exact scope is in
+`../../notes/2026-09-09-c1133-lean-completion-progress.md`. This source audit
+performed no Lean replay and promotes no manuscript coverage. Geometric QDM
+realizations and imported source theorems remain explicit inputs.
 
-**Further equivariant leads.** The institutional CKGA list led to withdrawn
-arXiv:2405.07322 and its stated successor, *Atoms meet symbols*,
-arXiv:2509.15831v4. The withdrawn source has abstract/metadata depth; the successor already had
-a partial introduction read, which is retained alongside this metadata check. The latter
-explicitly makes its Chen–Ruan atom extension conditional on the relevant
-blowup formula. Three older institutional preprint labels have unresolved
-identities/aliases. They remain audit obligations, not negative evidence or
-new imported hypotheses for A–D.
+**Equivariant stabilization and isogeny predecessors (2026-09-10).**
+Cavenaghi–Katzarkov–Kontsevich, *Atoms meet symbols*, arXiv:2509.15831v4,
+Theorems E/F (Examples 2.14/2.19) already use doubling of atomic content
+under a P¹ product to obstruct equivariant linearization. Theorem H/3.7
+retains curve-Jacobian isogeny classes in an equivariant threefold invariant.
+Read depth: **partial**, exact introduction and body passages recorded in the
+C1133 source register. These are in ordinary equivariant-atom Sections 2–3;
+the quantum Chen–Ruan blowup conjectures concern the separate Section 4
+construction. Do not transfer that caveat to these preceding statements.
+The proposed nonequivariant nine-family whole-H³ conservation statement is a
+different, precisely scoped candidate. No claim to originate atomic
+stabilization obstructions or isogeny-sensitive atom refinements is warranted.
+The withdrawn arXiv:2405.07322 points to this successor; the three older
+institutional labels remain unresolved metadata rather than additional
+verified sources.
+
+**Current source/coverage disposition.**
+`../../notes/2026-09-10-c1133-source-literature-closeout.md` records the original
+NN read, full Cai and atomic-criterion reads, two mirror lead comparisons,
+and 48 graph requests. The framing paper's DOI alias resolves to a whole
+volume in two services, so their zeros are rejected as paper-level counts.
+The exact pencil companion, published spectra-version match, categorical
+base-loci chapter body and graph/service gaps remain. A–D priority is
+undecided; the complete literature gate remains open. The mathematical
+acceptance map retains its precise deductions, not a comprehensive novelty
+verdict. No new firstness or absence claim is introduced here.
 
 **Repeating surfaces.** The primary introduction's related-work paragraph and
 the framed companion's exponent discussion need the older-source attribution
@@ -230,10 +243,10 @@ that every classical Hodge-theoretic obstruction fails.
   to them, and the opening of Section 1.
 - Vladimiro Benedetti, Aideen Fay, Jeremy Guere, Laurent Manivel, and
   Nicolas Perrin, *An atomic criterion for irrationality without quantum
-  computations*, arXiv:2607.26718v1. **Read depth: partial.** Read the
-  abstract, the introduction, and the statement of Theorem 4.1 with its
-  three hypotheses; Remark 4.2's maximal-spectrum subtlety was noted but is
-  not used here, since Section 4 does not use their evaluation argument.
+  computations*, arXiv:2607.26718v1. **Read depth: full text** on
+  2026-09-10, all seven pages including references. Theorem 4.1, Remark 4.2
+  and the additional birational comparison Corollary 5.3 are recorded in the
+  C1133 source closeout; their evaluation argument is not imported here.
 - Alexander Kuznetsov, *Derived categories of cubic and `V_14`
   threefolds*, arXiv:math/0303037v1. **Read depth: full text.** Section 2,
   especially Theorems 2.2 and 2.17--2.18 and Remark 2.19, is load-bearing.

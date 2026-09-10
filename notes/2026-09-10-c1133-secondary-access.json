@@ -1,0 +1,24 @@
+[
+  {
+    "name": "base-book-pdf",
+    "url": "https://www.ams.org/books/pspum/088/pspum088.pdf",
+    "utc": "2026-09-10T14:10:25.391408+00:00",
+    "status": 200,
+    "content_type": "text/html; charset=UTF-8",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-final-access/b10f9b31244a87ed0c44.response",
+    "sha256": "86233c0b10e146dd556f77ab20064bd971087970d99ab740279090daa44a9f97",
+    "bytes": 5632,
+    "pdf": false
+  },
+  {
+    "name": "fano-exceptional-body",
+    "url": "https://arxiv.org/pdf/2601.16497v1",
+    "utc": "2026-09-10T14:10:25.392742+00:00",
+    "status": 200,
+    "content_type": "application/pdf",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-final-access/1f08109f627fbc551af7.response",
+    "sha256": "5412541d8449b270454daf09f3bc4744b61d785752ef6abded417f00e04e73d3",
+    "bytes": 421670,
+    "pdf": true
+  }
+]

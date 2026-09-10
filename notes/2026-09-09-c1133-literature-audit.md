@@ -7,7 +7,7 @@ Current continuation: `2026-09-10-c1133-source-literature-closeout.md`.
 The original Narasimhan–Nori scan is now fully read; earlier failed access
 entries below are historical. Cai’s cubic and the atomic-criterion paper
 are also now fully read.
-The source register contains 77 individual entries, with exact read depths,
+The source register contains 79 individual entries (78 external and one local), with exact read depths,
 versions, cache access and hashes. Most papers have partial read depth.
 Iritani’s ten-page Hodge refinement has now been read completely.
 The author-supplied packet has been read completely, including its checker.

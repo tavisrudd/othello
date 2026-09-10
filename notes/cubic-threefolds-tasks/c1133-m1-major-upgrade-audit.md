@@ -5,81 +5,53 @@
 
 ## Current frontier
 
-The complete packet has been read. The seventeen-matrix and nine-rank-two
-finite gate passes two implementations; report:
-`notes/2026-09-09-c1133-finite-audit.md`. A new framing-source Proposition 2.1
-is refuted in rank three by two exact witnesses, including distinct nonunit
-monodromy; this does not refute the packet's rank-two construction. Report:
-`notes/2026-09-09-c1133-framing-source-audit.md`.
-The fixed-base injection proof and downstream audit are written in
-`notes/2026-09-09-c1133-fixed-base-proof.md`.
+The core mathematical acceptance map is
+`notes/2026-09-09-c1133-acceptance-map.md`: seventeen-matrix provenance,
+all-family/Hodge inputs, operation/surface vanishing, fixed-base faithfulness,
+full-Hodge conservation and the A–D deductions are audited at the recorded
+proof/source boundaries. Finite checks have independent replay. Optional
+rank-three, odd-cubic, motive and cone dispositions are separate; no optional
+result becomes a core premise.
 
-The fifteen external matrix reconstructions now match entrywise after explicit
-normalization, and all their period inputs through degree eight match CCGK.
-Special quartic and GM deformation bridges and source corrections are recorded
-in `notes/2026-09-09-c1133-geometric-source-audit.md`.
+**Latest source pass (2026-09-10):**
+`notes/2026-09-10-c1133-source-literature-closeout.md`. The original
+Narasimhan–Nori theorem is verified from all four scanned pages, closing the
+arithmetic source gap. Cai's cubic paper and the atomic-criterion paper are
+now fully read. The register has 79 sources (78 external and one local),
+including eight external full-text reads (six papers, two source scripts).
+The ordinary equivariant P¹-stabilization and isogeny-sensitive results in
+*Atoms meet symbols* are credited separately from its conjectural Chen–Ruan
+extension. The owning novelty ledger is updated. Two further mirror papers
+have primary statement reads. Forty-eight graph requests expose persistent
+service gaps and a rejected edited-volume DOI alias.
 
-The full-fiber projective-bundle equivariance, local transport and noncircular
-surface-vanishing proofs are now written in
-`notes/2026-09-09-c1133-transport-vanishing-audit.md`. Guéré’s surface nilpotence
-and Cai’s persistence arguments are explicitly credited as precedents.
+**Exact remaining literature/source gates:** published spectra chapter
+version match; categorical-base-loci chapter body; outstanding graph/service
+coverage; and the unidentified special-pencil companion for packet §§30–31.
+The local sharpness theorem is pinned to its exact rational-point and
+stable-permutation hypotheses; it does not establish those pencil imports.
+The author has been asked for the companion's exact local path/link.
+MathSciNet and Google Scholar remain NOT COVERED. No complete literature
+clearance, global novelty verdict or manuscript promotion is asserted.
 
-The arithmetic deduction and a fourth-power polarized-isogeny cross-check are
-in `notes/2026-09-09-c1133-arithmetic-audit.md`. Publication-alias checks enlarge
-the Orr forward set to 37 records; title screening is recorded.
+The proposed presentation order is A, then B, then its consequences C and D;
+A has its separate numerical route. This is a concrete option for later
+author review. Withhold
+unverified pencil applications. Collaborator discussion remains parked.
 
-Seventeen-family classification exhaustion and all seventeen Hodge numbers
-are now source-verified in the geometric audit; the eight rational controls
-have all-member geometric scope. Collaborator discussion is parked per author.
-Optional-claim dispositions, the rank-three local proof and uniform odd-cubic
-formula are written in `notes/2026-09-09-c1133-optional-claims-audit.md`.
-Countability and constant coarse moduli need no arithmetic finiteness input.
-Next close the explicitly listed optional source gates and the literature audit;
-Voisin algebraic correspondence loci, Bittner’s additive extension, the cone
-criterion and the full GG corrigendum are now checked in the optional audit.
-The broad motive/L-equivalence distinction is established prior work; the
-specific threefold comparison remains the candidate contribution. The optional
-odd-excess inequality is now checked via Iwai–Matsumura–Müller; exact pencil
-imports remain. Main dispositions F0–A1/G1–G9 and theorem scopes are consolidated
-in `notes/2026-09-09-c1133-acceptance-map.md`. The published mirror note is
-fully read and its one-record citation set screened against three graph counts. Current coverage, precise access gaps, source read-depth
-register and citation sets:
-`notes/2026-09-09-c1133-literature-audit.md`.
-Lean additions are now mapped in
-`notes/2026-09-09-c1133-lean-upgrade-map.md`, with exact reusable declarations
-and hashed baseline in `notes/2026-09-09-c1133-lean-baseline.json`.
-Current formal checkpoint: **371 public terminals, 133 machinery, 245 sources**;
-the aggregate kernel build and actual axiom comparison pass. Exact lattices,
-all seventeen matrix certificates, full primary selectors, actual completed
-graded center maps, low-dimensional vanishing and conditional A–D assemblies
-are implemented. The graded source is a proved convolution subring. The Hodge
-conclusion constructs an actual rational Hodge isomorphism and inverse by
-descending the whole complex comparison, with independent endpoint ranks;
-arithmetic finiteness
-counts geometric classes over all model extensions of bounded degree.
-Exact declarations and remaining formal boundaries are in
-`notes/2026-09-09-c1133-lean-completion-progress.md` and the updated Lean map.
-Geometric constructions and imported source theorems remain supplied;
-no complete geometric A–D formalization or manuscript coverage promotion is
-claimed. The universal residue proposition beyond the proved matrix
-reductions retains fragment coverage; geometric identifications and source
-Hom scalar-extension fullness remain supplied.
-Next work is the outstanding source/literature closure before manuscript
-upgrades and hierarchy review.
-The zbMATH query now has 274/274 distinct records title-screened, with both
-licensed-out titles resolved. An author-hosted spectra chapter is now partially read and explicitly credits
-the older cubic exponents and spectral irrationality program in the owning
-novelty ledger. Its published-version match and the categorical base-loci body
-remain open; the source register has 77 entries at explicit read depths.
-The local sharpness surface theorem is pinned; the packet-pencil hypotheses
-and separate moduli theorem are still not source-verified.
-No global novelty verdict or manuscript promotion has passed. Review of
-manuscript upgrades and hierarchy remains after these gates.
+Latest formal checkpoint: **371 public terminals, 133 machinery, 245 sources**;
+aggregate kernel build and actual axiom comparison passed in the prior
+implementation session. Exact boundaries and declarations:
+`notes/2026-09-09-c1133-lean-completion-progress.md` and
+`notes/2026-09-09-c1133-lean-upgrade-map.md`. No Lean replay occurred in the
+2026-09-10 source pass. Geometric constructions and imported source theorems
+remain inputs; universal residue coverage beyond checked matrix reductions
+remains fragmentary. Optional L8 is unclaimed.
 
-The user has requested completion of the core Lean map; C1133 remains active.
-
-One-hour continuation summary:
-`notes/2026-09-09-c1133-one-hour-checkpoint.md`.
+The historical search record and precise source register are
+`notes/2026-09-09-c1133-literature-audit.md` and its `-sources.json` companion.
+C1133 stays ACTIVE for the remaining source gates and author review; C978 and
+C956 are not closed by this work.
 
 ## Objective and order
 

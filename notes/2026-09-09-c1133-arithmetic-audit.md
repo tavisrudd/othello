@@ -4,6 +4,12 @@
 written Hodge-conservation gate and the imported statements below. Literature
 closure and manuscript review remain open.
 
+**2026-09-10 source update:** the original Narasimhan–Nori scan, pages
+125–128, is now fully read; Theorem 1.1 and its principal-polarization
+consequence match the input below. The original-access gap is closed. See
+`2026-09-10-c1133-source-literature-closeout.md` for its hash and read record.
+Earlier inaccessible-source wording below records the previous checkpoint.
+
 ## The bounded-degree deduction
 
 Fix a smooth cubic threefold X over a finitely generated characteristic-zero

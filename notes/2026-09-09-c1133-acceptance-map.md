@@ -108,16 +108,16 @@ The closest inspected lines of work have distinct roles:
 - The rank-three counterexamples refute the precise framing proposition
   identified in `framing-source-audit.md`, not its source's entire program.
 
-The audit is still incomplete. The zbMATH quantum/birational title screen is
-now complete at 274/274 distinct records, including separate resolution of two
-licensed-out titles. The spectra chapter now has a primary author-version partial read; its published-
-version match, the categorical-base-loci body, other unresolved citation leads
-and publication-identity coverage remain. The repeating-surface inventory is
-now written in the literature audit, with external release inspection deferred
-to manuscript review. Remaining source gaps must be completed or explicitly
-bounded in the final verdict. MathSciNet and Google Scholar access gaps do
-not count as negative evidence. The four main mathematical dispositions above
-do not certify novelty.
+The complete literature gate remains open. The latest source/coverage
+and attribution dispositions are in
+`2026-09-10-c1133-source-literature-closeout.md`. Original NN access is closed;
+ordinary equivariant stabilization and isogeny-sensitive atom precedents are
+now explicitly credited. The zbMATH screen remains 274/274 titles. Published
+spectra-version matching, categorical-base-loci body access, graph/service
+coverage and the exact optional pencil imports remain outstanding. The
+repeating-surface inventory identifies later manuscript/export actions.
+MathSciNet and Scholar access gaps are not negatives. A–D mathematical
+acceptance does not certify priority or authorize manuscript promotion.
 
 ## EJ+TT and Mystery ledger
 

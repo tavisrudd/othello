@@ -38,38 +38,28 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C1133 — active, author-selected (2026-09-09):** the finite Fano matrix and
-  rank-two residue gate passes independent replay; the fixed-base adaptation is
-  written, and a rank-three framing-source proposition has exact counterexamples.
-  Fifteen external matrix reconstructions and their period inputs now match;
-  special-model bridges: `../2026-09-09-c1133-geometric-source-audit.md`.
-  Operation and surface proofs: `../2026-09-09-c1133-transport-vanishing-audit.md`.
-  Seventeen-family exhaustion and Hodge numbers are source-verified. Finish
-  optional source gates and literature coverage before manuscript upgrades
-  and hierarchy review. Dispositions and rank-three/odd-cubic proofs:
-  `../2026-09-09-c1133-optional-claims-audit.md` (cone and GG correction checked;
-  broad motive/L-equivalence distinction credited). Main mathematical map:
-  `../2026-09-09-c1133-acceptance-map.md`; surface Chern inequality checked.
-  Lean addition map: `../2026-09-09-c1133-lean-upgrade-map.md`.
-  Current guarded checkpoint: **371 public terminals, 133 machinery, 245 sources**;
-  aggregate kernel build and actual axiom comparison pass. Core matrix/lattice,
-  full-primary, graded completed-map and low-dimensional vanishing algebra,
-  plus conditional numerical classification, whole-Hodge conservation,
-  source-restricted reconstruction and geometric partner finiteness assemblies
-  are implemented. Exact declarations and formal boundaries:
-  `../2026-09-09-c1133-lean-completion-progress.md`.
-  Geometric/source realizations remain explicit inputs; no complete geometric
-  A–D formalization or manuscript claim promotion is asserted. Graded-source
-  convolution closure and actual rational Hodge descent/inverses are proved;
-  individual branches need not descend rationally. The universal residue
-  proposition beyond checked matrix reductions retains fragment coverage.
-  Optional L8 is unclaimed.
-  Next audit work: exact sharpness/moduli imports and remaining
-  novelty/citation coverage. Collaborator discussion is parked per author.
-  One-hour checkpoint: `../2026-09-09-c1133-one-hour-checkpoint.md`.
-  No global novelty verdict yet. Card:
-  `../cubic-threefolds-tasks/c1133-m1-major-upgrade-audit.md`; audit:
-  `../2026-09-09-c1133-literature-audit.md`.
+- **C1133 — active, author-selected:** core A–D deductions and the
+  seventeen-family finite/geometric inputs are audited at the recorded
+  boundaries: `../2026-09-09-c1133-acceptance-map.md`. The 2026-09-10 source
+  pass closes original Narasimhan–Nori access, fully reads Cai and the atomic
+  criterion, and credits the ordinary equivariant stabilization/isogeny
+  precedents in *Atoms meet symbols*. Source register: 79 entries, eight
+  external full-text reads. Forty-eight graph requests retain service gaps
+  and reject an edited-volume DOI as a paper-level citation alias.
+  Latest report: `../2026-09-10-c1133-source-literature-closeout.md`.
+  Remaining: published spectra version match, categorical-base-loci body,
+  graph/service coverage and the exact special-pencil companion for packet
+  §§30–31 (path/link requested from author). The local sharpness surface
+  theorem does not alone verify the pencil hypotheses. No full literature
+  clearance or global novelty verdict; manuscript upgrades/hierarchy review
+  remain later. Collaborator discussion stays parked.
+  Prior guarded formal checkpoint: **371 public terminals, 133 machinery,
+  245 sources**; aggregate kernel and actual axiom comparison passed.
+  `../2026-09-09-c1133-lean-completion-progress.md` records exact declarations
+  and supplied geometric/source inputs. Universal residue coverage beyond
+  checked matrix reductions remains fragmentary; optional L8 unclaimed.
+  No new Lean replay or manuscript claim promotion in this source pass.
+  Card: `../cubic-threefolds-tasks/c1133-m1-major-upgrade-audit.md`.
 
 - **Framed companion specialization boundary (2026-09-08):** the independently
   checked F1 example refutes unrestricted T. The companion now restricts T

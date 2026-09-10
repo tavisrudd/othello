@@ -1,0 +1,68 @@
+[
+  {
+    "name": "base-book",
+    "url": "https://www.ams.org/books/pspum/088/",
+    "utc": "2026-09-10T14:09:33.361630+00:00",
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-final-access/1ded78d3c96a856123dc.response",
+    "sha256": "488aeff90f3979631347988c8c9d5ad3bf096b9d611b49b86fd4eaec60f32f63",
+    "bytes": 443038,
+    "pdf": false
+  },
+  {
+    "name": "lp-citing-body",
+    "url": "https://arxiv.org/pdf/2510.23143v1",
+    "utc": "2026-09-10T14:09:33.362390+00:00",
+    "status": 200,
+    "content_type": "application/pdf",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-final-access/4192de819990662344b7.response",
+    "sha256": "96d8ca7fb1dbb265448128a54896a8c5c999fe8294fa34929d073e9d5c59b0ab",
+    "bytes": 334659,
+    "pdf": true
+  },
+  {
+    "name": "base-doi",
+    "url": "https://doi.org/10.1090/pspum/088/01473",
+    "utc": "2026-09-10T14:09:33.362800+00:00",
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-final-access/726aed0c15ba828a8991.response",
+    "sha256": "6129dc0326e6d1691127e3417622c6f4d128a7213046f3160dc1ee99de9ff41f",
+    "bytes": 443038,
+    "pdf": false
+  },
+  {
+    "name": "framing-citing-set",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2607.22074/citations?fields=title,externalIds,abstract&limit=100",
+    "utc": "2026-09-10T14:09:33.504735+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-final-access/ebac30c1303b8c813340.response",
+    "sha256": "c6c27213d6c88df913f073fe6e103a269832452759e742bb1af2bf045214e16b",
+    "bytes": 1573,
+    "pdf": false
+  },
+  {
+    "name": "lp-lead-citing-set",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2510.23143/citations?fields=title,externalIds,abstract&limit=100",
+    "utc": "2026-09-10T14:09:33.817677+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-final-access/092a7fcccd895881b066.response",
+    "sha256": "7dec63116dc6c4c6886de06755e488adac0b4185138dad1a7fd74a391b167136",
+    "bytes": 1071,
+    "pdf": false
+  },
+  {
+    "name": "base-openalex-set",
+    "url": "https://api.openalex.org/works?filter=cites:W4254843644&per-page=100",
+    "utc": "2026-09-10T14:09:34.059883+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-final-access/c2775f0f6d18e0fce9c1.response",
+    "sha256": "94a621e959b2eab8196223329dddd6e76b4ed0a2931a43e1e84e2982ca1baf5b",
+    "bytes": 29771,
+    "pdf": false
+  }
+]

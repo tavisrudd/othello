@@ -56,7 +56,7 @@
       },
       "key": "arXiv:2508.05105",
       "read_depth": "partial",
-      "read_scope": "v2 cache; Sections 4.3 and opening of 5.1 (3710–3795), fixed-locus definitions and 5.2.2 (3900–3985), 5.2.5–5.2.6 (4366–4430).",
+      "read_scope": "v2 cache; Sections 4.3 and opening of 5.1 (3710–3795), fixed-locus definitions and 5.2.2 (3900–3985), 5.2.5–5.2.6 (4366–4430). On 2026-09-10: lines 1–205 and 6710–6805, including Example 6.21 and nearby source references.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Birational Invariants from Hodge Structures and Quantum Multiplication",
       "version_in_cached_header": "arXiv:2508.05105v2 [math.AG] 6 Mar 2026"
@@ -375,8 +375,8 @@
       },
       "key": "arXiv:2509.15831",
       "read_depth": "partial",
-      "read_scope": "v4 introduction opening, extracted lines 1–80, read at an earlier checkpoint. Conditional Chen–Ruan blowup framework and separate geometric finite-group invariants; no full-paper exclusion. Current v4 landing abstract and version history also read during the one-hour continuation. Earlier partial-text depth is retained.",
-      "role_status": "Equivariant/Chen–Ruan atom precursor. The withdrawn arXiv:2405.07322 notice now independently points to this already registered source. Its conditional blowup framework and separate geometric construction are retained; no full-paper exclusion or comprehensive A–D overlap verdict.",
+      "read_scope": "v4 introduction opening, extracted lines 1–80, read at an earlier checkpoint. Conditional Chen–Ruan blowup framework and separate geometric finite-group invariants; no full-paper exclusion. Current v4 landing abstract and version history also read during the one-hour continuation. Earlier partial-text depth is retained. On 2026-09-10: lines 1–295, 321–351, 1518–1598, 1739–1810, 2228–2297; Theorems E/F/H, Examples 2.14/2.19 and Theorem 3.7 with the separate Section 4 scope.",
+      "role_status": "Direct ordinary equivariant-atom precedents for one-P1 stabilization obstructions and isogeny-sensitive threefold invariants. These sections 2–3 statements are not dismissed by the separate Section 4 quantum Chen–Ruan blowup conjectures. Exact nonequivariant A–D not identified with those statements; partial source reading, not a full-paper negative.",
       "title": "Atoms meet symbols",
       "version_in_cached_header": "arXiv:2509.15831v4 [math.AG] 1 Apr 2026"
     },
@@ -401,7 +401,11 @@
         "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2607.22074.pdf",
         "sha256": "2986902b3281489b47c6a36a63e356b8265910542d09ac69c7239ffc9f615ec9",
         "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2607.22074.txt",
-        "url": "https://arxiv.org/pdf/2607.22074v1"
+        "url": "https://arxiv.org/pdf/2607.22074v1",
+        "rejected_publication_alias": {
+          "doi": "10.1142/q0592",
+          "reason": "OpenAlex/Crossref resolve the edited volume; S2 resolves the individual paper. The 0/0/1 counts compare different identities. See final-source-probe JSON."
+        }
       },
       "key": "arXiv:2607.22074",
       "read_depth": "partial",
@@ -810,13 +814,16 @@
     {
       "key": "arXiv:2510.23143",
       "title": "Singularities of Landau–Ginzburg Models for Complete Intersections and Derived Categories",
-      "read_depth": "abstract/metadata only",
-      "read_scope": "S2 citing record: complete title and abstract read; paper text not read. Verified graph metadata alias DOI 10.1134/s1061920825601405.",
-      "role_status": "Numerical correspondence between ordinary-double-point fibers and exceptional collections for Fano complete intersections. Retained as adjacent mirror input; inspected abstract contains no one-stabilization/Hodge-conservation statement. No full-paper negative.",
+      "read_depth": "partial",
+      "read_scope": "arXiv v1, lines 1–205, introduction, Theorem 1.2, Remarks 1.3–1.4 and start of proof, read 2026-09-10.",
+      "role_status": "Mirror isolated-singularity count for Fano complete intersections; statement-level comparison, no full-paper exclusion of stabilization applications.",
       "access": {
-        "via": "notes/2026-09-09-c1133-lp-citation-set.json",
-        "url": "https://arxiv.org/abs/2510.23143"
-      }
+        "url": "https://arxiv.org/pdf/2510.23143v1",
+        "sha256": "96d8ca7fb1dbb265448128a54896a8c5c999fe8294fa34929d073e9d5c59b0ab",
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2510.23143.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2510.23143.txt"
+      },
+      "version_in_cached_header": "arXiv:2510.23143v1, 27 Oct 2025"
     },
     {
       "key": "arXiv:1601.05119",
@@ -836,14 +843,15 @@
       "title": "Categorical base loci and spectral gaps, via Okounkov bodies and Nevanlinna theory",
       "read_depth": "abstract/metadata only",
       "read_scope": "Bibliographic title metadata only; no paper body read.",
-      "role_status": "Categorical base loci/Orlov spectra; primary text unresolved; do not claim absence of an exact overlap.",
+      "role_status": "Published chapter identity resolved by DOI/INSPIRE/AMS. Body unread: guessed chapter PDF 404, linked book PDF non-PDF access response. Retrieved endmatter is not chapter text. Full-content overlap remains an access gap.",
       "access": {
         "status": "no linked primary identifier; needs manual resolution",
         "additional_primary_locator": "https://doi.org/10.1090/pspum/088/01473",
         "additional_failed_probes": [
           "https://www.ams.org/books/pspum/088/01473/pspum088-01473.pdf",
           "https://inspirehep.net/api/literature/1337888"
-        ]
+        ],
+        "final_access_manifest": "notes/2026-09-10-c1133-followup-access.json; notes/2026-09-10-c1133-secondary-access.json"
       }
     },
     {
@@ -871,7 +879,8 @@
           "bytes": 112026,
           "sha256": "9f069311a5e37ab7f197e66051f73b088063abc4c9dc9f584ca60f2c318ee84d",
           "status": "retrieved"
-        }
+        },
+        "final_access_manifest": "notes/2026-09-10-c1133-final-source-probe.json"
       }
     },
     {
@@ -1056,7 +1065,7 @@
       "key": "Katzarkov-DSciThesis-v2",
       "title": "Katzarkov DSc thesis v2, chapter Interpretations of spectra",
       "read_depth": "partial",
-      "read_scope": "Author-hosted thesis extracted text LF lines 16870–18145, 18160–18595, and 19055–19095. This covers the spectra chapter introduction, cubic equation/exponents, ordinary-irrationality statements and their sketches, arithmetic examples, topology comparisons, multispectra and opening orbifoldization discussion, plus selected references. Fifteen intervening lines and the rest of chapter/thesis are not claimed read. Targeted keyword screening over lines 16889–18830 is discovery only.",
+      "read_scope": "Author-hosted thesis extracted text LF lines 16870–18145, 18160–18595, and 19055–19095. This covers the spectra chapter introduction, cubic equation/exponents, ordinary-irrationality statements and their sketches, arithmetic examples, topology comparisons, multispectra and opening orbifoldization discussion, plus selected references. Fifteen intervening lines and the rest of chapter/thesis are not claimed read. Targeted keyword screening over lines 16889–18830 is discovery only. On 2026-09-10 the omitted lines 18146–18159 and 18596–19054 were read. Recorded scopes now cover the contiguous chapter-body interval 16870–18760 and further thesis conclusions/references. Still partial at whole-thesis level; published chapter unmatched.",
       "role_status": "Concrete precursor for cubic exponent values and the broad quantum-spectrum irrationality program. Birational splitting and several details are attributed to reference [142], Blow up formulae, in preparation. The author-hosted chapter is not version-matched to the Springer 2023 publication. No comprehensive correctness or pre-emption verdict on the proposed one-stabilization/Hodge/arithmetic upgrade.",
       "access": {
         "url": "https://www.math.bas.bg/omi/IMIdocs/ZRASRB/docs/Lyudmil_Katzarkov_dmn/DSciThesis-Katzarkov-v2.pdf",
@@ -1123,6 +1132,33 @@
         "sha256": "9f069311a5e37ab7f197e66051f73b088063abc4c9dc9f584ca60f2c318ee84d",
         "status": "retrieved"
       }
+    },
+    {
+      "key": "arXiv:2601.16497",
+      "title": "Landau–Ginzburg models for Fano threefolds of Picard rank one and exceptional collections",
+      "read_depth": "partial",
+      "read_scope": "v1, lines 1–200; introduction through Conjecture 1.13, Theorem 1.5 and Corollary 1.6. Read 2026-09-10.",
+      "version_in_cached_header": "arXiv:2601.16497v1, 23 Jan 2026",
+      "access": {
+        "url": "https://arxiv.org/pdf/2601.16497v1",
+        "sha256": "5412541d8449b270454daf09f3bc4744b61d785752ef6abded417f00e04e73d3",
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2601.16497.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2601.16497.txt"
+      },
+      "role_status": "Promoted from the one-record forward set of 2510.23143. All-seventeen mirror isolated-singularity/exceptional-collection comparison, not the same numerical invariant as A. No full-paper negative; no recursive citation sweep."
+    },
+    {
+      "key": "local:cubic-sharpness-f879abf243",
+      "external": false,
+      "title": "Sharpness of Irrationality after One Stabilization for Cubic Threefolds",
+      "read_depth": "partial",
+      "read_scope": "Authority TeX lines 80–174 reread 2026-09-10; earlier README lines 1–100 recorded in prior audit. thm:two-variable, thm:cubic-level, cor:cubics. No new full-proof/certificate review.",
+      "version_in_cached_header": "Source commit f879abf243ac2c02ffd16117e25b075b16e0339d",
+      "access": {
+        "path": "papers/cubic-stabilization-irrationality/cubic_stabilization_irrationality.tex",
+        "sha256": "ec0509629e3978b5f728dcfc8b00563d87b036c43723a026e68a54197dba7274"
+      },
+      "role_status": "Surface and two-TZ-series statements verified. Does not identify source for packet sections 30–31 special pencil; companion-specific imports withheld."
     }
   ],
   "external_full_text_breakdown": {
