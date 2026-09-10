@@ -85,3 +85,8 @@ stress separate from deterministic Worker schedules. Extend mutation sensitivity
 when adding a new semantic assertion family; do not substitute large case counts
 for an oracle. Follow up the minimal Chromium fetch-abort reproducer before
 calling browser lifecycle reliability closed.
+
+Concrete verifier follow-up is specified in the private design: binary-composition
+`verify`/`replay` with independent assignment enumeration, followed by authenticated
+min-plus snapshot/transition replay with an independent small tree model. These
+are explicitly planned properties, not included in the delivered coverage count.
