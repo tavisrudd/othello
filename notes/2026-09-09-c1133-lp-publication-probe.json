@@ -1,0 +1,54 @@
+[
+  {
+    "seed": "doi:10.4213/rm10239e",
+    "service": "OpenAlex",
+    "query": "https://api.openalex.org/works/https://doi.org/10.4213/rm10239e",
+    "queried_utc": "2026-09-10T00:21:35.552438+00:00",
+    "citation_count": 1,
+    "http_status": 200,
+    "raw_path": "/tmp/persistent/tavis/lit-search/c1133-lp-publication-probe/lp-published-openalex.json",
+    "raw_sha256": "680736d17c347c08dbcfa187082cb904d57ecf6197438feb15a089b60e99e16e",
+    "resolved_id": "https://openalex.org/W7131356101",
+    "title": "Rationality of smooth Fano threefolds via Mirror Symmetry",
+    "ids": {
+      "openalex": "https://openalex.org/W7131356101",
+      "doi": "https://doi.org/10.4213/rm10239e"
+    },
+    "status": "resolved-count",
+    "identifier_verified_at": "https://www.mathnet.ru/eng/rm10239"
+  },
+  {
+    "seed": "doi:10.4213/rm10239e",
+    "service": "Crossref",
+    "query": "https://api.crossref.org/works/10.4213%2Frm10239e",
+    "queried_utc": "2026-09-10T00:21:35.553684+00:00",
+    "citation_count": 1,
+    "http_status": 200,
+    "raw_path": "/tmp/persistent/tavis/lit-search/c1133-lp-publication-probe/lp-published-crossref.json",
+    "raw_sha256": "814498084df03bd0a6e253690e9593014528cf9a91283622493fdb0a023aae9d",
+    "resolved_id": "10.4213/rm10239e",
+    "title": [
+      "Rationality of smooth Fano threefolds via Mirror Symmetry"
+    ],
+    "status": "resolved-count",
+    "identifier_verified_at": "https://www.mathnet.ru/eng/rm10239"
+  },
+  {
+    "seed": "doi:10.4213/rm10239e",
+    "service": "Semantic Scholar",
+    "query": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.4213/rm10239e?fields=paperId,title,externalIds,citationCount",
+    "queried_utc": "2026-09-10T00:21:35.554398+00:00",
+    "citation_count": 1,
+    "http_status": 200,
+    "raw_path": "/tmp/persistent/tavis/lit-search/c1133-lp-publication-probe/lp-published-semantic-scholar.json",
+    "raw_sha256": "5e48b7bd3aa286ae6311e433c2c23ef8295c28b75ef166d2868cb24d2b7404fa",
+    "resolved_id": "e10b9aad143b0ee239f4a9d941b7b6c5ce43dfac",
+    "title": "Rationality of smooth Fano threefolds via Mirror Symmetry",
+    "ids": {
+      "DOI": "10.4213/rm10239e",
+      "CorpusId": 286109711
+    },
+    "status": "resolved-count",
+    "identifier_verified_at": "https://www.mathnet.ru/eng/rm10239"
+  }
+]

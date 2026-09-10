@@ -2,8 +2,8 @@
 
 **Date:** 2026-09-09. **Lane:** `cubic-threefolds`.
 **Status:** incomplete; no global novelty or priority verdict is issued.
-**External sources read at full text: 4 — two papers and two source scripts.**
-The source register contains 52 individual entries, with exact read depths,
+**External sources read at full text: 5 — three papers and two source scripts.**
+The source register contains 55 individual entries, with exact read depths,
 versions, cache access and hashes. Most papers have partial read depth.
 Iritani’s ten-page Hodge refinement has now been read completely.
 The author-supplied packet has been read completely, including its checker.
@@ -376,3 +376,45 @@ main manuscript and bibliography; that ledger; paper README/public summary;
 results/coverage snapshots (exact novelty-bearing snapshot still to identify);
 and the standalone mirror copies. This inventory is not yet complete. No new
 absence/firstness sentence is being promoted ahead of its owning ledger row.
+
+## Consolidated acceptance and published mirror-note check
+
+`2026-09-09-c1133-acceptance-map.md` consolidates A–D, F0–A1 and G1–G9,
+with exact proof dependencies and remaining source/novelty boundaries. This
+accepts mathematical deductions from inspected imported statements; it does
+not certify novelty or replace the owning manuscript ledger.
+
+The Lee–Przyjalkowski published short note, DOI 10.4213/rm10239e, has now been
+read completely through the publisher's HTML and PDF extraction (three pages,
+including references). The exact web response is cached and hashed. Local PDF
+attempts returned 403 or non-PDF content; no PDF bytes were falsely ingested.
+It is separately registered from the longer arXiv paper. The English version
+was published 25 February 2026 in the 2025 volume, received/accepted 12 March
+2025, according to the publisher. The precise comparison is general-member
+ordinary rationality via mirror monodromy, not the packet's all-member
+one-stabilization/Hodge-conservation statements. Its Theorem 2 is not imported
+as a shortcut in our proof, and its entire mathematical proof has not been
+independently reverified merely because its text was read.
+
+Independent published-ID counts: OpenAlex **1**, Crossref **1**, Semantic
+Scholar **1**. The matching titles identify the same short publication.
+`2026-09-09-c1133-lp-publication-probe.py/.json` records all URLs, timestamps,
+IDs, raw-cache paths and hashes; replay from repository root with
+`python3 notes/2026-09-09-c1133-lp-publication-probe.py`.
+The S2 set was retrieved completely (one record, no next page) and title/abstract
+screened in `2026-09-09-c1133-lp-citation-set.json`. It leads to
+arXiv:2510.23143, registered at abstract/metadata depth. This is closure of this
+retrieved screen only, not a global absence claim. No new topical query was
+needed: the publisher page was an already recorded lead.
+
+The optional c2≥0 gate is closed by Iwai–Matsumura–Müller, published Theorem
+1.2(A), DOI 10.1112/plms.70104. This is an accessible primary theorem statement;
+the original Miyaoka access failure remains honestly recorded. Bittner's
+Theorem 2.1 also supplies the precise projective weak-factorization statement
+needed by the operation deduction, at secondary depth for original AKMW.
+
+The outstanding final-audit work is now concentrated in exact companion-import
+versions, the remaining registered citation/topical screens, and completion of
+the repeating-surface inventory/owning novelty ledger. Optional source
+acceptance is no longer waiting on the cone criterion, GG correction, or
+minimal-surface Chern inequality.

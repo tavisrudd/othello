@@ -13,7 +13,7 @@ It does not mean formal verification or a novelty verdict.
 | §28 countability and families | Accepted deduction | Countably many geometric cubic classes; constant coarse moduli, without claiming a product family over the original base. |
 | §30 potential reduction | Accepted deduction with classical imports | Compare after a common extension defining the isogeny and giving semistable reduction. |
 | §§30–31 special pencil | Conditional companion import | Local toric ranks, surface upper bound and pencil isogeny theorem are not proved here. |
-| §32 odd excess | Conditional source gate | Needs the precise minimal-nef-surface inequality c2≥0 and its source. |
+| §32 odd excess | Accepted imported deduction | Iwai–Matsumura–Müller Theorem 1.2(A), smooth dimension two: 3c2≥K²≥0. |
 | §33 cylinders | Accepted geometric deduction | A dominated surface of a rationally connected Fano threefold is rational. |
 | §33 affine cones | Accepted imported deduction | KPZ Proposition 0.5 and Theorem 0.6(a): an additive action forces a polar cylinder on the normal projective base. |
 | §34 dimensional obstruction | Accepted | Blowup additivity plus birational invariance in dimension n+2 kills the invariant on every n-fold. |
@@ -286,8 +286,10 @@ not a proof that no newer all-member result exists.
 - **Settled:** the cone implication uses only KPZ’s forward direction. The GG
   correction preserves the rational decomposition; Efimov/Huybrechts already
   establish the broad motive/L-equivalence distinction.
-- **Open source gates:** minimal-surface c2≥0 and exact pencil imports. The
-  first Miyaoka publisher attempt returned an anti-bot page, not source text.
+- **Settled:** the minimal-surface inequality follows from the accessible
+  Iwai–Matsumura–Müller Theorem 1.2(A), as detailed in the acceptance map.
+  The original Miyaoka paper remains unread after the anti-bot response.
+- **Open source gates:** exact companion pencil imports.
   Full citation coverage and novelty of the specific threefold construction
   remain separate open obligations. These are
   obligations, not counterexamples or grounds for a novelty claim.

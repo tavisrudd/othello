@@ -48,7 +48,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   optional source gates and literature coverage before manuscript upgrades
   and hierarchy review. Dispositions and rank-three/odd-cubic proofs:
   `../2026-09-09-c1133-optional-claims-audit.md` (cone and GG correction checked;
-  broad motive/L-equivalence distinction credited). Collaborator discussion is parked per author. No global novelty verdict yet. Card:
+  broad motive/L-equivalence distinction credited). Main mathematical map:
+  `../2026-09-09-c1133-acceptance-map.md`; surface Chern inequality checked.
+  Next: exact companion imports and remaining novelty/citation coverage. Collaborator discussion is parked per author. No global novelty verdict yet. Card:
   `../cubic-threefolds-tasks/c1133-m1-major-upgrade-audit.md`; audit:
   `../2026-09-09-c1133-literature-audit.md`.
 

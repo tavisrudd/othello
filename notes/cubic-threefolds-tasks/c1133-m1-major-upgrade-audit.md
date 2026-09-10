@@ -39,7 +39,10 @@ Voisin algebraic correspondence loci, Bittner’s additive extension, the cone
 criterion and the full GG corrigendum are now checked in the optional audit.
 The broad motive/L-equivalence distinction is established prior work; the
 specific threefold comparison remains the candidate contribution. The optional
-odd-excess inequality and precise pencil imports remain source gates. Current coverage, precise access gaps, source read-depth
+odd-excess inequality is now checked via Iwai–Matsumura–Müller; exact pencil
+imports remain. Main dispositions F0–A1/G1–G9 and theorem scopes are consolidated
+in `notes/2026-09-09-c1133-acceptance-map.md`. The published mirror note is
+fully read and its one-record citation set screened against three graph counts. Current coverage, precise access gaps, source read-depth
 register and citation sets:
 `notes/2026-09-09-c1133-literature-audit.md`.
 No global novelty verdict or manuscript promotion has passed. Review of

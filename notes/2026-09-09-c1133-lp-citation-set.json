@@ -1,0 +1,53 @@
+{
+  "seed": "doi:10.4213/rm10239e",
+  "query": "https://api.semanticscholar.org/graph/v1/paper/e10b9aad143b0ee239f4a9d941b7b6c5ce43dfac/citations?fields=title,abstract,externalIds,year&limit=100",
+  "queried_utc": "2026-09-10T00:22:10.854748+00:00",
+  "http_status": 200,
+  "raw_path": "/tmp/persistent/tavis/lit-search/c1133-lp-publication-probe/citations.json",
+  "sha256": "84a47d9721bc0c5ffe6fec195ba6f5f92ca48f77317e667e9c244612aa70db34",
+  "response": {
+    "offset": 0,
+    "data": [
+      {
+        "citingPaper": {
+          "paperId": "0b80609545c40622e83df1023d1e60c2065fe8f3",
+          "externalIds": {
+            "ArXiv": "2510.23143",
+            "DOI": "10.1134/s1061920825601405",
+            "CorpusId": 282390065
+          },
+          "title": "Singularities of Landau\u2013Ginzburg Models for Complete Intersections and Derived Categories",
+          "year": 2025,
+          "openAccessPdf": {
+            "url": "",
+            "status": "CLOSED",
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2510.23143, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "93735715",
+              "name": "V. Przyjalkowski"
+            }
+          ],
+          "abstract": "Mirror symmetry predicts that bounded derived category of a smooth Fano variety is equivalent to Fukaya-Seidel category of its Landau-Ginzburg model. It is expected that fibers of Landau-Ginzburg model with ordinary double points correspond to an exceptional collection of a Fano variety. We verify this expectation on a numerical level for Fano complete intersections and Calabi-Yau compactifications of their toric Landau-Ginzburg models of Givental's type."
+        }
+      }
+    ]
+  },
+  "screened_fields": [
+    "title",
+    "abstract",
+    "externalIds"
+  ],
+  "retrieved_count": 1,
+  "screened_count": 1,
+  "pagination": "offset 0, no next field; one citing record matches count one from all three services",
+  "screening": [
+    {
+      "paper_id": "0b80609545c40622e83df1023d1e60c2065fe8f3",
+      "disposition": "Adjacent mirror-input source; numerical ODP/exceptional-collection correspondence per abstract. Not an exact-claim match at abstract depth; no full-paper negative.",
+      "promoted_source": "arXiv:2510.23143"
+    }
+  ]
+}
