@@ -1600,6 +1600,16 @@
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.lowDimensionalPrimaryExpressions_exactSelector_zero",
       "reason": "Computes zero exact-primary weight for curve and surface block expressions, including scalar-leading rank-two blocks with full odd fibers.",
       "terminal_digest": "6419cf9554a18959f4f40e0d25f04584047ec5bad8a059dc35f541f94ca93b9b"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.exactPrimaryMarker_birational_from_lowDimensional_realizations",
+      "reason": "Derives exact-primary birational invariance from low-dimensional block-ledger realizations and projective weak factorization, without zero-marker inputs.",
+      "terminal_digest": "7b5b5368e602e932d7face13bfd78932a41485841b0ce45253ab72866355ad63"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.seventeenExactSignatures_nine_positive_eight_controls",
+      "reason": "The exact finite table has nine positive and eight zero labels, and doubling preserves positivity; geometric endpoint identifications remain external.",
+      "terminal_digest": "9e39e4e2d20f2a72407583dd6eeee7b0a723da07e0eb65a4fc1a1acf7bf64d7b"
     }
   ]
 }

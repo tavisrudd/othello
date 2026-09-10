@@ -377,3 +377,48 @@ inputs to the finite table, not new geometric proofs. This leaf is not yet
 in the public gate. Uncommitted continuations also include
 `Quantum/ExactPrimaryOccurrenceDescent.lean` (under elaboration) and
 `Quantum/FormalIdempotentConjugacy.lean` (authored, untested).
+
+`Quantum/ExactPrimaryOccurrenceDescent.lean` now elaborates the direct
+low-dimensional occurrence-nullity and dimension-three/four birational
+invariance deduction. Exact declarations:
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.exactPrimary_lowDimensionalOccurrenceNullity`
+and `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.exactPrimary_marker_eq_of_birational`.
+Inputs identify actual occurrence ledgers with the proved block expressions;
+there is no seed-marker-zero field. A local typed component map was required
+to expose the domain to multiset rewriting; `Multiset.singleton_add` supplies
+the actual cons/add identity. This leaf and `SeventeenExactSignatures.lean`
+have Lake roots and await their combined dependency/public gate.
+
+`Quantum/FormalIdempotentConjugacy.lean` proves the one-variable conjugacy
+and is being extended to a multivariate formal base. The explicit unit is
+`p e + (1-p)(1-e)` with `e` the constant idempotent. It works over a
+noncommutative coefficient ring, hence inside an equivariant endomorphism
+ring. `Quantum/SemisimpleCoordinateObjects.lean` is authored but untested:
+actual finite-support division-ring vector spaces and actual linear
+isomorphisms, with doubled cancellation derived coordinatewise. Neither
+leaf is part of the 351-terminal public gate.
+
+The occurrence-descent and seventeen-signature leaves kernel-built at
+`run-20260910-042217-2e7b3169`, run ID `20260910-042217-f4108d1f`.
+Their two public terminals have been added and await the 353-terminal audit.
+Uncommitted paths for this checkpoint are those two leaves, their Lake roots,
+`PaperInterface/Main.lean`, `Verification/AxiomAudit.lean`, and this report.
+The independent formal-idempotent and semisimple-coordinate leaves remain
+under elaboration, outside that public gate.
+
+The 353-terminal public gate passed at `run-20260910-042430-af5a3674`,
+run ID `20260910-042430-8c146417`, with a matching registry/axiom gate.
+Public additions:
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.exactPrimaryMarker_birational_from_lowDimensional_realizations`
+and `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.seventeenExactSignatures_nine_positive_eight_controls`.
+Both use the three standard axioms. Counts: 353 public / 115 machinery;
+67 manuscript claims retain coverage 13 absent / 27 fragment /
+26 conditional / 1 complete. Exact geometric endpoint/block realizations are
+not inferred from the table. The actual all-seventeen geometric rationality
+assembly and the full graded-bulk substitution remain open.
+
+The two L6 continuations remain uncommitted: `Quantum/FormalIdempotentConjugacy.lean`
+and `Quantum/SemisimpleCoordinateObjects.lean`. The latter retains actual
+vector spaces, has componentwise linear maps as categorical morphisms,
+constructs isomorphisms from multiplicities, and proves doubled cancellation;
+its elaboration and public gate have not yet passed.

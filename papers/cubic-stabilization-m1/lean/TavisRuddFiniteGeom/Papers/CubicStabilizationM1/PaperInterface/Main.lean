@@ -1,3 +1,5 @@
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ExactPrimaryOccurrenceDescent
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SeventeenExactSignatures
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.LowDimensionalPrimaryExpressions
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.FaithfulLocalizedCoefficientMaps
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.FaithfulCompletedExponentialRingMap
@@ -583,5 +585,43 @@ theorem lowDimensionalPrimaryExpressions_exactSelector_zero
     Quantum.primaryBlockMultisetWeight curve.blocks=0 ∧
       Quantum.primaryBlockMultisetWeight surface.blocks=0 :=
   ⟨curve.weight_zero,surface.weight_zero⟩
+
+/-- Actual occurrence-ledger realizations by proved point/curve/surface
+block models yield birational exact-primary invariance in dimensions three
+and four. The factorization and geometric ledger realizations are inputs;
+low-dimensional zero weights and birational invariance are derived. -/
+theorem exactPrimaryMarker_birational_from_lowDimensional_realizations
+    {K Variety Center Occurrence : Type*} [Field K] [CharZero K]
+    (presentation : Quantum.ExactPrimaryPresentation K)
+    (data : Quantum.OccurrenceIndexedLedger Variety Center Occurrence presentation.toBlockPresentation)
+    (realizations : ∀ occurrence,
+      data.smoothCenter (data.occurrenceSource occurrence) →
+      data.centerDimension (data.occurrenceSource occurrence) ≤ 2 →
+      ∃ model : Quantum.LowDimensionalPrimaryModel K,
+        data.occurrenceLedger occurrence=model.blocks.map presentation.toBlockPresentation.component)
+    (dimension : ℕ) (threeOrFour : dimension=3 ∨ dimension=4)
+    (birational : Setoid Variety)
+    (provider : Quantum.BirationalFactorizationProvider data presentation.fold dimension birational)
+    {left right : Variety}
+    (leftSmooth : data.smoothProjective left) (rightSmooth : data.smoothProjective right)
+    (leftDimension : data.dimension left=dimension) (rightDimension : data.dimension right=dimension)
+    (related : birational.r left right) :
+    data.varietyMarker presentation.fold left=data.varietyMarker presentation.fold right :=
+  Quantum.exactPrimary_marker_eq_of_birational presentation data realizations dimension threeOrFour
+    birational provider leftSmooth rightSmooth leftDimension rightDimension related
+
+/-- The finite exact-signature table has nine positive labels and eight zero
+controls; doubling preserves exactly those positive labels. Rank-two entries
+come from the computed residue matrices. The four half-odd dimensions and
+geometric endpoint/control identifications are outside this finite statement. -/
+theorem seventeenExactSignatures_nine_positive_eight_controls :
+    (Fintype.card {label : Quantum.CountingMatrixLabel // label.detected=true}=9 ∧
+      Fintype.card {label : Quantum.CountingMatrixLabel // label.detected=false}=8) ∧
+    ∀ label : Quantum.CountingMatrixLabel,
+      (Quantum.countingExactSignature label ≠ 0 ↔ label.detected=true) ∧
+      (2 • Quantum.countingExactSignature label ≠ 0 ↔ label.detected=true) :=
+  ⟨Quantum.countingExactSignature_label_counts,fun label =>
+    ⟨Quantum.countingExactSignature_ne_zero_iff label,
+      Quantum.countingExactSignature_double_ne_zero_iff label⟩⟩
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationM1
