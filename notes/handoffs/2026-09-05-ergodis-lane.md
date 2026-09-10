@@ -49,9 +49,11 @@ Current authority: `../2026-09-09-c1130-js-wasm-parity-review.md`; task requirem
 performance experiments: `ergodis-private/analysis/interface-review/`.
 
 JS/WASM conformance entry point: `make -C analysis/js-wasm-tests all` in
-`ergodis-private`. Fast/browser/extended tiers, 27 checks, JSON/Markdown/JUnit
-reports; final full run passes. Coverage limits and retained intermittent browser
-failures: `analysis/js-wasm-tests/2026-09-09-suite.md`. Safari/iOS, Firefox,
+`ergodis-private`. Fast/browser/extended tiers, 43 checks, JSON/Markdown/JUnit
+reports. Generated core/module contracts, independent oracles, shrinking and
+regressions: `../2026-09-09-c1130-property-testing.md`; private design and current
+validation: `analysis/property-tests/`. Retained intermittent browser-loading
+failures remain a separate limitation; see the dated validation report. Safari/iOS, Firefox,
 performance A/B and screenshot regression coverage remain open. The suite does
 not rebuild or replace canonical artifacts and does not replace native perf gates.
 

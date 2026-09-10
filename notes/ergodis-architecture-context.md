@@ -6,6 +6,9 @@ preserve typed native execution. This is private, not-to-ship context.
 
 Conformance runner: private `analysis/js-wasm-tests/README.md`; use its
 fast/browser/extended tiers and retained reports when changing JS/WASM contracts.
+Generated contract tests: private `analysis/property-tests/design.md` and
+`README.md`; independent bounded oracles, native/WASM replay, structured shrinking
+and retained regressions. No expected oracle answer is supplied to an engine.
 A passing prebuilt-artifact test does not establish that artifacts match unbuilt
 source changes. Safari/iOS and performance gates remain separate requirements.
 
