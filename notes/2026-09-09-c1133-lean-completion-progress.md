@@ -116,3 +116,43 @@ At this checkpoint the uncommitted continuations are
 `Quantum/RankThreeCountingSplits.lean`, `Quantum/SuperPrimaryPairing.lean`, and
 `Quantum/PrimarySummandDecomposition.lean`. Their claims are not included in the
 332-terminal gate. L4–L7 and the remaining L2/L3 assembly are still open.
+
+## Full primary images and the four rank-three splits
+
+The public gate now passes at 337 terminals (101 machinery), with no manuscript
+coverage change: `run-20260910-030654-bc3256e0`, run ID
+`20260910-030654-c65a7d27`. All five additions have only the standard three
+axioms, verified in the captured audit and annotation check.
+
+Exact public declarations in `PaperInterface/Main.lean`, prefix
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.`:
+
+- `superPrimary_oddPairing_nondegenerate_and_even`: whole-algebra trace and
+  parity hypotheses imply nondegeneracy of the full odd pairing and even
+  odd-dimension. Source: `Quantum/SuperPrimaryPairing.lean`.
+- `superPrimary_polynomialProjection_preserves_submodule`: polynomial
+  projectors preserve Euler-stable parity submodules. Source:
+  `Quantum/PrimarySummandDecomposition.lean`.
+- `superPrimary_fullSummandDecomposition`: an actual linear equivalence
+  identifies the entire algebra with complementary multiplication images;
+  its forward map is proved to be multiplication by the idempotents. Same source.
+- `rankThreeCountingMatrices_split_and_formalGauge`: all four genus 2–5
+  rational matrices have explicit invertible bases giving the 3+1 block
+  form, and systems with these leading blocks have full normalized gauges.
+  Source: `Quantum/RankThreeCountingSplits.lean`.
+- `superPrimary_evenRankOne_forces_odd_zero`: a genuine central-idempotent
+  image with even dimension one has zero odd subspace. Scalar spanning is
+  derived from dimension one and restricted pairing nondegeneracy from the
+  whole pairing. Source: `Quantum/PrimaryScalarEvenVanishing.lean`.
+
+The four leaf builds passed at `run-20260910-030357-0d03b2ed`. The rank-three
+matrix proof uses 64 entry checks and its basis determinant is the nonzero
+complementary eigenvalue cubed. Geometric family and Hodge-number identifications
+are not inferred. The primary splitting and parity lemmas act on full vector
+spaces, never invariant vectors.
+
+Uncommitted continuation at this checkpoint: `Quantum/PrimaryOddAllocation.lean`
+and `Quantum/InvertibleComplementGauge.lean`. Neither is included in the
+337-terminal gate. The latter extends the rational Sylvester solver to a
+complementary companion block of arbitrary trace, needed for the five genus
+rank-two cases alongside the four degree cases.

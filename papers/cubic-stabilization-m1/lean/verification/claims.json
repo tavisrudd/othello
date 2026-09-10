@@ -1511,6 +1511,31 @@
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_tracePairing_restricts_nondegenerately",
       "reason": "Derives nondegeneracy of the trace pairing on the actual multiplication image of a central idempotent from whole-algebra nondegeneracy. No primary quantum factor is geometrically constructed.",
       "terminal_digest": "651f894d9ada43011c2e5a9cddbe3cf88ae8e787f90b184f227491836c202573"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_oddPairing_nondegenerate_and_even",
+      "reason": "Derives nondegeneracy and even dimension of the full odd part from the whole finite-dimensional algebra trace pairing and explicit parity axioms. No geometric super-primary factor is constructed.",
+      "terminal_digest": "5776532d53061796002391caa98463c465e2754c58374fb906b93633060b5d43"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_polynomialProjection_preserves_submodule",
+      "reason": "Polynomial evaluation preserves any submodule stable under Euler multiplication, including an explicit parity submodule. Geometric Euler and projector identifications remain outside the statement.",
+      "terminal_digest": "1b6ae2999cbd298a683d10310a114ebe569583f2deaa3b8df4599b5236ad4ff4"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_fullSummandDecomposition",
+      "reason": "Constructs the actual linear equivalence from the full algebra to complementary orthogonal idempotent images, with the forward action proved equal to multiplication. It is not a fixed-vector construction.",
+      "terminal_digest": "6fe33af180b8caedbb0080cab0a5143631a2ba48e83c3bd9379b3277b4f59ee9"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankThreeCountingMatrices_split_and_formalGauge",
+      "reason": "Exhaustively checks actual invertible bases and leading rank-three-plus-one matrix forms for four rational table entries, and constructs full normalized gauges for systems with those leading blocks. No Hodge numbers, geometric family identification or quantum deformation is inferred.",
+      "terminal_digest": "93e08d8eb3f5ed39553912fe305c81847f8b45f1be52175b94fc0bcee0c86758"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_evenRankOne_forces_odd_zero",
+      "reason": "Derives zero odd subspace for an actual central-idempotent image with even dimension one. Scalar spanning and restricted trace nondegeneracy are proved from the dimension and whole-algebra hypotheses, not assumed.",
+      "terminal_digest": "b97266ce9fd65cc9ac5841a5887934ea4e08dc3877370eac65b91fcf3aa5e215"
     }
   ]
 }

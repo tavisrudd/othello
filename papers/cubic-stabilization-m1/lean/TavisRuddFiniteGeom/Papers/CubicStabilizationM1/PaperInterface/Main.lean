@@ -1,3 +1,7 @@
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SuperPrimaryPairing
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.PrimarySummandDecomposition
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RankThreeCountingSplits
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.PrimaryScalarEvenVanishing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RankTwoCanonicalLattice
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SeventeenCountingMatrices
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.PrimaryPolynomialProjectors
@@ -289,5 +293,81 @@ theorem superPrimary_tracePairing_restricts_nondegenerately
     (orthogonal : ∀ y ∈ LinearMap.range (Algebra.lmul K A e), trace (x*y)=0) :
     x=0 :=
   Quantum.centralIdempotent_tracePairing_nondegenerate e idempotent central trace nondegenerate member orthogonal
+
+
+/-- The full odd trace pairing is nondegenerate, and its dimension is even.
+The spanning and parity assumptions derive restricted nondegeneracy from the
+whole-algebra trace pairing; no restricted nondegeneracy is a premise. -/
+theorem superPrimary_oddPairing_nondegenerate_and_even
+    {K A : Type*} [Field K] [CharZero K] [Ring A] [Algebra K A]
+    [FiniteDimensional K A]
+    (even odd : Submodule K A)
+    (spanning : ∀ y : A, ∃ u ∈ even, ∃ v ∈ odd, y=u+v)
+    (oddEven : ∀ x ∈ odd, ∀ y ∈ even, x*y ∈ odd)
+    (anticommute : ∀ x ∈ odd, ∀ y ∈ odd, x*y=-(y*x))
+    (trace : A →ₗ[K] K) (traceOdd : ∀ x ∈ odd, trace x=0)
+    (nondegenerate : ∀ x : A, (∀ y : A, trace (x*y)=0) → x=0) :
+    (Quantum.submoduleTracePairing odd trace).Nondegenerate ∧ Even (Module.finrank K odd) :=
+  Quantum.oddTracePairing_nondegenerate_and_even even odd spanning oddEven anticommute trace traceOdd nondegenerate
+
+/-- Polynomial multiplication in the Euler element preserves every submodule
+stable under multiplication by that element. This derives parity preservation
+for polynomial primary projectors from the parity of Euler multiplication. -/
+theorem superPrimary_polynomialProjection_preserves_submodule
+    {K A : Type*} [Field K] [Ring A] [Algebra K A]
+    (euler : A) (sub : Submodule K A)
+    (stable : ∀ x ∈ sub, euler*x ∈ sub)
+    (p : Polynomial K) {x : A} (hx : x ∈ sub) :
+    Polynomial.aeval euler p*x ∈ sub :=
+  Quantum.polynomial_projector_preserves_submodule euler sub stable p hx
+
+/-- Complementary orthogonal primary idempotents give a linear equivalence
+of the entire algebra with their full multiplication images. The forward map
+is exactly multiplication by the two idempotents on every vector. -/
+theorem superPrimary_fullSummandDecomposition
+    {K A : Type*} [Field K] [Ring A] [Algebra K A]
+    (p q : A) (sum : p+q=1) (pp : p*p=p) (qq : q*q=q)
+    (pq : p*q=0) (qp : q*p=0) :
+    ∃ equiv : A ≃ₗ[K] LinearMap.range (Algebra.lmul K A p) ×
+        LinearMap.range (Algebra.lmul K A q),
+      ∀ x : A, ((equiv x).1 : A)=p*x ∧ ((equiv x).2 : A)=q*x :=
+  ⟨Quantum.complementaryIdempotents_linearEquiv p q sum pp qq pq qp, fun _ => ⟨rfl,rfl⟩⟩
+
+/-- Each of the four explicit rank-three counting cases has an invertible
+basis intertwining its matrix with a size-three nilpotent block plus a nonzero
+scalar. Every formal system with that split leading term has a normalized
+all-orders two-block gauge. No geometric or Hodge-number identification is made. -/
+theorem rankThreeCountingMatrices_split_and_formalGauge
+    (label : Quantum.RankThreeCountingLabel) :
+    (Quantum.rankThreeCountingBasis label).det = label.complement^3 ∧
+      label.complement ≠ 0 ∧
+      Quantum.labeledCountingMatrix label.toCountingLabel * Quantum.rankThreeCountingBasis label =
+        Quantum.rankThreeCountingBasis label * Quantum.rankThreeCountingBlocks label.complement ∧
+      ∀ system : ℕ → Matrix (Fin 4) (Fin 4) ℚ,
+        system 0 = Quantum.rankThreeCountingBlocks label.complement →
+        ∃ gauge reduced, Quantum.IsNormalizedGauge Quantum.rankThreeCountingBlockLabel
+          system gauge reduced :=
+  ⟨(Quantum.rankThreeCountingBasis_det label).1, (Quantum.rankThreeCountingBasis_det label).2,
+    Quantum.rankThreeCountingBasis_intertwines label,
+    Quantum.rankThreeCounting_exists_normalizedGauge label⟩
+
+/-- A primary image with one-dimensional even part has zero odd subspace.
+All vectors and products belong to the original algebra; the identity of the
+primary image is the supplied nonzero central idempotent. -/
+theorem superPrimary_evenRankOne_forces_odd_zero
+    {K A : Type*} [Field K] [CharZero K] [Ring A] [Algebra K A]
+    [FiniteDimensional K A]
+    (e : A) (idempotent : e*e=e) (central : ∀ x : A, Commute e x) (nonzero : e ≠ 0)
+    (even odd : Submodule K A) (unitEven : e ∈ even) (rankOne : Module.finrank K even = 1)
+    (oddImage : ∀ x ∈ odd, x ∈ LinearMap.range (Algebra.lmul K A e))
+    (spanning : ∀ y ∈ LinearMap.range (Algebra.lmul K A e),
+      ∃ u ∈ even, ∃ v ∈ odd, y=u+v)
+    (oddProductEven : ∀ x ∈ odd, ∀ y ∈ odd, x*y ∈ even)
+    (anticommute : ∀ x ∈ odd, ∀ y ∈ odd, x*y=-(y*x))
+    (trace : A →ₗ[K] K) (traceOdd : ∀ x ∈ odd, trace x=0)
+    (nondegenerate : ∀ x : A, (∀ y : A, trace (x*y)=0) → x=0) :
+    odd=⊥ :=
+  Quantum.primary_odd_eq_bot_of_even_finrank_one e idempotent central nonzero even odd
+    unitEven rankOne oddImage spanning oddProductEven anticommute trace traceOdd nondegenerate
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationM1

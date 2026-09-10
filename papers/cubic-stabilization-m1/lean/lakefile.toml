@@ -9,6 +9,10 @@ rev = "571b8a8e54219b4d393f75f4b8653fac08197fcc"
 [[lean_lib]]
 name = "CubicStabilizationM1"
 roots = [
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.PrimaryScalarEvenVanishing",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RankThreeCountingSplits",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.PrimarySummandDecomposition",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SuperPrimaryPairing",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SeventeenCountingMatrices",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.PrimaryPolynomialProjectors",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RankTwoCanonicalLattice",
