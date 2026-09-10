@@ -52,7 +52,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   sources, still eight external full-text reads. Cross-service gaps remain.
   Remaining: published spectra version match, categorical-base-loci body,
   graph/service coverage and the exact special-pencil companion for packet
-  §§30–31 (path/link requested from author). The local sharpness surface
+  §§30–31 (path/link requested from author). Exact source request:
+  `../2026-09-10-c1133-missing-source-request.md`. The local sharpness surface
   theorem does not alone verify the pencil hypotheses. No full literature
   clearance or global novelty verdict; manuscript upgrades/hierarchy review
   remain later. Collaborator discussion stays parked.

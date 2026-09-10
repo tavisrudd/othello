@@ -846,7 +846,7 @@
       "key": "zbMATH:6490755",
       "title": "Categorical base loci and spectral gaps, via Okounkov bodies and Nevanlinna theory",
       "read_depth": "abstract/metadata only",
-      "read_scope": "Bibliographic title metadata only; no paper body read.",
+      "read_scope": "Bibliographic title metadata only; no paper body read. Additional 2026-09-10 check: Crossref DOI record and current AMS volume landing links; no chapter body.",
       "role_status": "Published chapter identity resolved by DOI/INSPIRE/AMS. Body unread: guessed chapter PDF 404, linked book PDF non-PDF access response. Retrieved endmatter is not chapter text. Full-content overlap remains an access gap.",
       "access": {
         "status": "no linked primary identifier; needs manual resolution",
@@ -855,7 +855,9 @@
           "https://www.ams.org/books/pspum/088/01473/pspum088-01473.pdf",
           "https://inspirehep.net/api/literature/1337888"
         ],
-        "final_access_manifest": "notes/2026-09-10-c1133-followup-access.json; notes/2026-09-10-c1133-secondary-access.json"
+        "final_access_manifest": "notes/2026-09-10-c1133-followup-access.json; notes/2026-09-10-c1133-secondary-access.json",
+        "current_primary_landing": "https://www.ams.org/pspum/088",
+        "current_access_manifest": "notes/2026-09-10-c1133-chapter-access.json"
       }
     },
     {
@@ -1076,7 +1078,8 @@
         "pdf": "/tmp/persistent/tavis/lit-search/pdf/Katzarkov-DSciThesis-v2.pdf",
         "text": "/tmp/persistent/tavis/lit-search/text/Katzarkov-DSciThesis-v2.txt",
         "sha256": "b3490fc8e6c93f3095ca217eb1d31e07af6623c94b8744f7dbbdc13dcac6287d",
-        "bytes": 2358787
+        "bytes": 2358787,
+        "published_identity_followup": "notes/2026-09-10-c1133-chapter-access.json: HSE record links only to Springer; Springer abstract, metadata and reference list accessible, chapter body subscription-only. Reference 29 is Blow up formulae, in preparation. This does not establish body equivalence."
       },
       "version_in_cached_header": "Author-hosted filename DSciThesis-Katzarkov-v2.pdf; publication-version equivalence not established."
     },

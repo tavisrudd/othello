@@ -1,0 +1,56 @@
+[
+  {
+    "name": "ams",
+    "url": "https://www.ams.org/books/pspum/088/01473/",
+    "utc": "2026-09-10T17:43:20.245681+00:00",
+    "status": 404,
+    "path": "/tmp/persistent/tavis/lit-search/c1133-chapters/a2ece24e121a36143d42.response",
+    "sha256": "41686172f135edf296d365a4ae28cacfc6330f09cb63ffb53ad5c65c1ab8ef84",
+    "bytes": 89423,
+    "pdf": false
+  },
+  {
+    "name": "hse",
+    "url": "https://publications.hse.ru/chapters/835898702",
+    "utc": "2026-09-10T17:43:20.246921+00:00",
+    "status": 200,
+    "content_type": null,
+    "path": "/tmp/persistent/tavis/lit-search/c1133-chapters/2b8529b879ad1b5cd52c.response",
+    "sha256": "f3dfacdf09b700676cea7eecec68286ddf206b673ed0e7f5619e096e6d8ce67d",
+    "bytes": 155311,
+    "pdf": false
+  },
+  {
+    "name": "cr",
+    "url": "https://api.crossref.org/works/10.1090%2Fpspum%2F088%2F01473",
+    "utc": "2026-09-10T17:43:20.247492+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-chapters/1161d16b476c81172776.response",
+    "sha256": "7a5ad9e0b954655f77af995a24be0fea51900d91e01b1b85175c70d88857bcf3",
+    "bytes": 18109,
+    "pdf": false
+  },
+  {
+    "name": "ams-current",
+    "url": "https://www.ams.org/pspum/088",
+    "utc": "2026-09-10T17:43:51.556436+00:00",
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-chapters/bfaf4cad3231025a16b5.response",
+    "sha256": "a1d4fa254e8cad549cff25e8356f01ebe9574cff171b5f528b347f17687dec65",
+    "bytes": 443038,
+    "pdf": false
+  },
+  {
+    "name": "springer",
+    "url": "https://link.springer.com/chapter/10.1007/978-3-031-17859-7_20",
+    "utc": "2026-09-10T17:43:51.557088+00:00",
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-chapters/4693e15b2d363da6f93f.response",
+    "sha256": "e8c59ef546787de23619d27570806038a48f9c54f8655589cc6e20c22a9469a2",
+    "bytes": 337718,
+    "pdf": false
+  }
+]

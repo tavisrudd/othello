@@ -30,7 +30,8 @@ version match; categorical-base-loci chapter body; outstanding graph/service
 coverage; and the unidentified special-pencil companion for packet §§30–31.
 The local sharpness theorem is pinned to its exact rational-point and
 stable-permutation hypotheses; it does not establish those pencil imports.
-The author has been asked for the companion's exact local path/link.
+The author has been asked for the companion's exact local path/link. Exact missing-source list and exhausted publisher routes:
+`notes/2026-09-10-c1133-missing-source-request.md`.
 MathSciNet and Google Scholar remain NOT COVERED. No complete literature
 clearance, global novelty verdict or manuscript promotion is asserted.
 
