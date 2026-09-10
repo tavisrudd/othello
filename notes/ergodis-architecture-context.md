@@ -77,14 +77,17 @@ composition now has a private retained full-prime/GF(4) provider using existing 
 Its native/WASM transcript and independent cost/witness tests pass. Represented
 GF(4)/binary towers now retain source preparation and source-coefficient witness
 readout in that same provider (`composition-source.v2`). General-field tower
-inputs, compact witnesses and native CLI/source-query extraction remain open. See
+inputs, compact witnesses and retained source/query normalization remain open. See
 `ergodis-private/analysis/interface-review/2026-09-09-retained-tower-portability.md`.
-Native `compose` and the provider now share all 54 prime specializations and
-ordinary/distinct-target-table capability. Their wire envelopes and lifecycle
-still differ; the old core `solveCompositionJson` WASM entry point remains a
-separate GF(2)-only schema. The next convergence slice includes that legacy
-entry point. Current report:
-`ergodis-private/analysis/interface-review/2026-09-09-native-composition-convergence.md`.
+Native `compose` and the provider share all 54 prime specializations and
+ordinary/distinct-target-table capability. Core `composition_io` now owns the
+native one-shot schema and wrapper, shared by WASM `composeJson`; legacy
+`solveCompositionJson` normalizes into it and supports those fields too. Browser
+geometry limits are checked before compilation. Retained provider source/query
+normalization remains separate; preserve prepare-once/query-many semantics when
+converging it. Current report and private decision:
+`ergodis-private/analysis/interface-review/2026-09-09-composition-codec-convergence.md`
+and `adr-composition-codecs.md` in that directory.
 
 ## Existing abstractions: reuse, with their limits
 

@@ -101,10 +101,13 @@ source-coefficient witness readout through the same provider (`5521692`). Native
 cold dispatch catalogue (core `d016451`, private `58c433b`). 1,980 sequential/parallel
 CLI comparisons, 19 tower comparisons and 12,979 native/browser calls pass.
 Package schema `composition-source.v2` requires explicit client migration.
-Current report: `2026-09-09-native-composition-convergence.md`; tower details:
-`2026-09-09-retained-tower-portability.md`. Next: shared source/query codecs,
-including the legacy GF(2)-only `solveCompositionJson` entry point. General-field
-tower sources and compact witness readouts remain separate gaps.
+Native/WASM one-shot composition now shares core `composition_io` (core `0bb290d`).
+WASM `composeJson` accepts the native schema; legacy `solveCompositionJson` adapts
+into it with all supported fields. Browser output geometry is preflighted before
+compilation. Current report: `2026-09-09-composition-codec-convergence.md`; tower
+details: `2026-09-09-retained-tower-portability.md`. Next: shared retained
+source/query normalization while preserving prepare-once/query-many behavior.
+General-field tower sources and compact witness readouts remain separate gaps.
 Private current evidence/design: `analysis/interface-review/application-records.md`,
 `provider-readout-contracts.md`, `capability-matrix.json`, and
 `adr-css-residual-reductions.md`. Generic fixed-coordinate discovery and offline
