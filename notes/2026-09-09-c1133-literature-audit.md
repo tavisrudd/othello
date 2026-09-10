@@ -2,7 +2,11 @@
 
 **Date:** 2026-09-09. **Lane:** `cubic-threefolds`.
 **Status:** incomplete; no global novelty or priority verdict is issued.
-**External sources read at full text: 5 — three papers and two source scripts.**
+**External sources read at full text: 8 — six papers and two source scripts.**
+Current continuation: `2026-09-10-c1133-source-literature-closeout.md`.
+The original Narasimhan–Nori scan is now fully read; earlier failed access
+entries below are historical. Cai’s cubic and the atomic-criterion paper
+are also now fully read.
 The source register contains 77 individual entries, with exact read depths,
 versions, cache access and hashes. Most papers have partial read depth.
 Iritani’s ten-page Hodge refinement has now been read completely.

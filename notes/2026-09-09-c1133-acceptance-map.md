@@ -12,7 +12,7 @@ owning claim–proof–novelty ledger or its formal-coverage registry.
 | A: one stabilization preserves rationality for Picard-rank-one Fano threefolds | Accepted as a deduction from the audited comparison contract and established geometric inputs | Every smooth complex member of all seventeen families. Nine detected families, eight rational controls. Uses numerical selectors only, not B–D or optional rank three. |
 | B: rational Hodge conservation | Accepted as a deduction on the stated Hodge-fixed bases | For X,Y among the nine detected families, birationality of X×P¹ and Y×P¹ forces H³(X,Q)≅H³(Y,Q). Retain full fibers, use whole-primary selection first, then rational semisimple cancellation. |
 | C: generic cubic/quartic cancellation | Accepted deduction from B and Voisin | Very-general source; arbitrary smooth target in the same hypersurface family. Neither every-source cancellation nor integral Torelli is asserted. |
-| D: bounded-degree arithmetic cubic partners | Accepted deduction with an explicit source-access gap | Fixed X/K, K finitely generated of characteristic zero, [L:K] bounded; finitely many geometric partner classes. Orr v4, Achter, fixed-degree polarization finiteness and cubic Torelli. Original NN PDF unread; Milne Theorem 15.1 corroborates its statement. No effectivity, height bound or twist count. |
+| D: bounded-degree arithmetic cubic partners | Accepted deduction with primary arithmetic inputs checked | Fixed X/K, K finitely generated of characteristic zero, [L:K] bounded; finitely many geometric partner classes. Orr v4, Achter, fixed-degree polarization finiteness and cubic Torelli. Original NN Theorem 1.1 and principal-polarization consequence now verified from all four scanned pages; see the 2026-09-10 source closeout. No effectivity, height bound or twist count. |
 
 “Accepted” records this auditor's mathematical disposition, not an independent
 cold referee report, a Lean-complete claim, or a global novelty verdict. The
@@ -35,7 +35,7 @@ All filenames below have prefix `notes/2026-09-09-c1133-`.
 | Q1 matrix input | Seventeen matrices and nine rank-two discriminants checked by two implementations; fifteen index-one/two source matrices matched entrywise and their period coefficients verified through degree eight. `finite-audit.md`, `geometric-source-audit.md` and manifests. |
 | D1 every smooth member | Classification exhaustion and all seventeen Hodge numbers verified in KP; CCGK identifies the families, with explicit special quartic and GM smooth bridges. Eight rational controls have all-member geometric scope. `geometric-source-audit.md`. |
 | T1 rational generic Torelli | Voisin v3 Theorem 0.2 and Remarks 0.1/0.3, with exact (d,n)=(3,4),(4,4) and source/target quantifiers checked. |
-| A1 arithmetic inputs | Achter arithmetic Jacobian, corrected Orr v4 Theorem 5.1, and finite polarization classes give `arithmetic-audit.md`. NN original-access gap remains recorded; Orr's fourth-power alternative is a separate cross-check. |
+| A1 arithmetic inputs | Achter arithmetic Jacobian, corrected Orr v4 Theorem 5.1, and finite polarization classes give `arithmetic-audit.md`. NN original-source gap closed on 2026-09-10; Orr's fourth-power alternative is a separate cross-check. |
 
 Classical projective weak factorization is the final imported geometric step.
 Bittner v1 Theorem 2.1, extraction lines 66–111, recalls its characteristic-zero

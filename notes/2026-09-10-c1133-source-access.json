@@ -1,0 +1,80 @@
+[
+  {
+    "name": "nn",
+    "url": "https://repository.ias.ac.in/36463/1/36463.pdf",
+    "utc": "2026-09-10T14:04:24.069300+00:00",
+    "status": 200,
+    "content_type": "application/pdf",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-final-access/nn.response",
+    "sha256": "2710fad133c91c6e57f16b6e842d2db875a76b057e9551ccf9b2de8de303410b",
+    "bytes": 911429,
+    "pdf": true
+  },
+  {
+    "name": "nn-publisher",
+    "url": "https://www.ias.ac.in/article/fulltext/pmsc/090/02/0125-0128",
+    "utc": "2026-09-10T14:04:24.070737+00:00",
+    "status": 403,
+    "path": "/tmp/persistent/tavis/lit-search/c1133-final-access/nn-publisher.response",
+    "sha256": "58bf2215b395dcac74c009aa98701854e43cbe54a1cd3a95fee6a647ca9910d4",
+    "bytes": 118,
+    "pdf": false
+  },
+  {
+    "name": "base-inspire",
+    "url": "https://inspirehep.net/api/literature/1337888",
+    "utc": "2026-09-10T14:04:24.071463+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-final-access/base-inspire.response",
+    "sha256": "086706228017824e6afbb1e69dc60a3875b487993326e44683165bd94df92b30",
+    "bytes": 2248,
+    "pdf": false
+  },
+  {
+    "name": "base-crossref",
+    "url": "https://api.crossref.org/works/10.1090%2Fpspum%2F088%2F01473",
+    "utc": "2026-09-10T14:04:24.072088+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-final-access/base-crossref.response",
+    "sha256": "7a5ad9e0b954655f77af995a24be0fea51900d91e01b1b85175c70d88857bcf3",
+    "bytes": 18109,
+    "pdf": false
+  },
+  {
+    "name": "spectra-crossref",
+    "url": "https://api.crossref.org/works/10.1007%2F978-3-031-17859-7_20",
+    "utc": "2026-09-10T14:04:24.073240+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-final-access/spectra-crossref.response",
+    "sha256": "ac7181dcf1d9e697c84892dcac2c09616f37969dd0c4e0d97ffd929b0d09cf75",
+    "bytes": 13208,
+    "pdf": false
+  },
+  {
+    "name": "nn-page-1",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-final-access/nn-page-1.png",
+    "sha256": "045b3ef46aae6e27c2d5decfcdde61bc21dd2f0a30d72a3bed21bde488d3bee8",
+    "source_pdf_sha256": "2710fad133c91c6e57f16b6e842d2db875a76b057e9551ccf9b2de8de303410b"
+  },
+  {
+    "name": "nn-page-2",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-final-access/nn-page-2.png",
+    "sha256": "34b8d1387e23098ec8b758d3e99cb77c7fadc5e80d8e7357b0d1051a69af47f9",
+    "source_pdf_sha256": "2710fad133c91c6e57f16b6e842d2db875a76b057e9551ccf9b2de8de303410b"
+  },
+  {
+    "name": "nn-page-3",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-final-access/nn-page-3.png",
+    "sha256": "7a9ffae5d25c74d4e2c33202141056fd174d67b44b56eef0ace64fa26edfedb4",
+    "source_pdf_sha256": "2710fad133c91c6e57f16b6e842d2db875a76b057e9551ccf9b2de8de303410b"
+  },
+  {
+    "name": "nn-page-4",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-final-access/nn-page-4.png",
+    "sha256": "17fd52ec258735bad0d572ee8d496aa0d5ca78d13a122a6aa59eee458bc239ed",
+    "source_pdf_sha256": "2710fad133c91c6e57f16b6e842d2db875a76b057e9551ccf9b2de8de303410b"
+  }
+]

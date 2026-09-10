@@ -1,5 +1,5 @@
 {
-  "external_full_text_count": 5,
+  "external_full_text_count": 8,
   "sources": [
     {
       "access": {
@@ -145,8 +145,8 @@
         "url": "https://arxiv.org/pdf/2608.01577"
       },
       "key": "arXiv:2608.01577",
-      "read_depth": "partial",
-      "read_scope": "v1; abstract, introduction and beginning of Section 2, lines 1–100.",
+      "read_depth": "full text",
+      "read_scope": "v1; abstract, introduction and beginning of Section 2, lines 1–100. On 2026-09-10 the entire pinned v1 was read, including all proofs and references: lines 1–592 (8 pages).",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "The cubic threefold is symplectically irrational",
       "version_in_cached_header": "arXiv:2608.01577v1 [math.SG] 3 Aug 2026"
@@ -389,8 +389,8 @@
         "url": "https://arxiv.org/pdf/2607.26718"
       },
       "key": "arXiv:2607.26718",
-      "read_depth": "partial",
-      "read_scope": "v1; abstract, introduction and beginning of Section 2, lines 1–170. v1; extended read through surface section, lines 1–210; Theorem 4.1 and opening proof 327–397; reference [8] resolved. Exact criterion requires b3(X)=0.",
+      "read_depth": "full text",
+      "read_scope": "v1; abstract, introduction and beginning of Section 2, lines 1–170. v1; extended read through surface section, lines 1–210; Theorem 4.1 and opening proof 327–397; reference [8] resolved. Exact criterion requires b3(X)=0. On 2026-09-10 the entire pinned v1 was read, including all proofs and references: lines 1–772 (7 pages).",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "An atomic criterion for irrationality without quantum computations",
       "version_in_cached_header": "arXiv:2607.26718v1 [math.AG] 29 Jul 2026"
@@ -487,18 +487,20 @@
     },
     {
       "access": {
-        "failed_urls": [
-          "https://repository.ias.ac.in/36463/1/36463.pdf",
-          "https://link.springer.com/content/pdf/10.1007/BF02837283.pdf"
-        ],
-        "url": "https://link.springer.com/article/10.1007/BF02837283"
+        "url": "https://repository.ias.ac.in/36463/1/36463.pdf",
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/10.1007_BF02837283.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/10.1007_BF02837283.txt",
+        "sha256": "2710fad133c91c6e57f16b6e842d2db875a76b057e9551ccf9b2de8de303410b",
+        "pages": 4,
+        "read_method": "Original scanned PDF rendered locally; pages 1–4 visually read."
       },
       "key": "10.1007/BF02837283",
-      "read_depth": "secondary only",
-      "read_scope": "Recollection in arXiv:2412.01676v1 introduction (read partial); original DOI metadata and search excerpt consulted. Primary PDF not read: IAS direct GET returned 404, publisher PDF returned non-PDF bytes, browser opened metadata but page screenshot failed with cache miss. Additional 2026-09-09 primary access attempts: IAS article and archive URLs returned 403; repository download query returned 404. Search index displayed the primary Theorem 1.1 excerpt, but no PDF/text extraction was acquired; primary facsimile gate remains open. Final one-hour checkpoint: browser again identified four PDF pages but returned zero extracted lines; all four screenshots failed with cache misses. Original PDF remains absent from shared cache. No read-depth promotion.",
+      "read_depth": "full text",
+      "read_scope": "Published original, all four scanned pages 125–128 visually read on 2026-09-10, including Sections 1–3 and references. Theorem 1.1 and the principal-polarization consequence verified against page 125; degree convention on page 126. Empty text extraction; no OCR used.",
       "secondary_source": "arXiv:2412.01676",
       "title": "Polarisations on an abelian variety",
-      "version_in_cached_header": "1981 original not read"
+      "version_in_cached_header": "Original published scan, 1981, volume 90 number 2, pages 125–128",
+      "role_status": "Primary source verified: finite Aut-orbits of fixed nonzero-degree NS classes, in particular principal polarizations. Original-source access gate for A1/D closed."
     },
     {
       "access": {
@@ -819,7 +821,7 @@
     {
       "key": "arXiv:1601.05119",
       "title": "Some Landau--Ginzburg models viewed as rational maps",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
       "role_status": "Adjoint-orbit Landau–Ginzburg compactification; abstract-level neighboring construction.",
       "access": {
@@ -832,7 +834,7 @@
     {
       "key": "zbMATH:6490755",
       "title": "Categorical base loci and spectral gaps, via Okounkov bodies and Nevanlinna theory",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Bibliographic title metadata only; no paper body read.",
       "role_status": "Categorical base loci/Orlov spectra; primary text unresolved; do not claim absence of an exact overlap.",
       "access": {
@@ -847,7 +849,7 @@
     {
       "key": "doi:10.1007/978-3-031-17859-7_20",
       "title": "Interpretations of Spectra",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Publisher landing abstract lines 40–44 and displayed references 139–219 read; subscription chapter body not read. Lee’s publication list and CKGA entry 22 corroborate authors, 2023 publication, volume 409 and pages 371–407, but supply no alternate PDF link.",
       "role_status": "Close spectral/monodromy precursor. Published body still unread. An author-hosted thesis chapter of the same title is now partially read and separately registered as Katzarkov-DSciThesis-v2; it is not byte- or version-matched to this published chapter.",
       "access": {
@@ -875,7 +877,7 @@
     {
       "key": "arXiv:1806.01752",
       "title": "Birational Calabi-Yau manifolds have the same small quantum products",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
       "role_status": "Birational projective Calabi–Yau small quantum rings after Novikov changes; abstract-level adjacent comparison, not imported here.",
       "access": {
@@ -888,7 +890,7 @@
     {
       "key": "arXiv:1504.04396",
       "title": "Quantum Cohomology of Toric Blowups and Landau-Ginzburg Correspondences",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
       "role_status": "Noncrepant toric blowup/LG correspondence; historical comparison input, abstract only.",
       "access": {
@@ -901,7 +903,7 @@
     {
       "key": "arXiv:2405.16979",
       "title": "Revisiting Gamma conjecture I: counterexamples and modifications",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
       "role_status": "Gamma conjecture counterexamples for projective bundles; abstract-level caution against importing asymptotic hypotheses without verification.",
       "access": {
@@ -914,7 +916,7 @@
     {
       "key": "arXiv:2210.06079",
       "title": "Birational Invariance in Punctured Log Gromov-Witten Theory",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
       "role_status": "Log étale modifications and punctured log GW theory; abstract-level neighboring invariance.",
       "access": {
@@ -927,7 +929,7 @@
     {
       "key": "arXiv:1604.03491",
       "title": "Gromov-Witten Theory of Toric Birational Transformations",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
       "role_status": "Toric wall-crossing I-functions through asymptotic expansion; abstract-level prior comparison technology.",
       "access": {
@@ -940,7 +942,7 @@
     {
       "key": "zbMATH:6490757",
       "title": "Singular fibers and Coulomb phases",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Author seminar listing/abstract in Oxford search result read; proceedings chapter body not read.",
       "role_status": "Elliptic Calabi–Yau fibers and Coulomb phases; author seminar abstract provides context, chapter body unread.",
       "access": {
@@ -951,7 +953,7 @@
     {
       "key": "arXiv:1208.4340",
       "title": "Towards the symplectic Graber-Harris-Starr theorems",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
       "role_status": "Symplectic GHS analogues via GW-detectable sections of RC fibrations; abstract only.",
       "access": {
@@ -964,7 +966,7 @@
     {
       "key": "arXiv:0710.3968",
       "title": "Gromov-Witten invariants of blow-ups along submanifolds with convex normal bundles",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
       "role_status": "GW blowup comparison with convex normal-bundle hypotheses and counterexamples to unrestricted extension; abstract only.",
       "access": {
@@ -977,7 +979,7 @@
     {
       "key": "arXiv:2204.00509",
       "title": "Relative quantum cohomology under birational transformations",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
       "role_status": "Relative I-functions of toric complete intersections under birational changes; abstract only.",
       "access": {
@@ -990,7 +992,7 @@
     {
       "key": "arXiv:1608.07917",
       "title": "Birationality and Landau-Ginzburg models",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
       "role_status": "Multiple-mirror Calabi–Yau nef-partition birationality; abstract-level scope distinction.",
       "access": {
@@ -1003,7 +1005,7 @@
     {
       "key": "doi:10.4171/ICM2022/13",
       "title": "Floer cohomology, singularities, and birational geometry",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Bibliographic title metadata only; no paper body read.",
       "role_status": "McLean ICM survey; Crossref title metadata only; precise statements not read.",
       "access": {
@@ -1016,7 +1018,7 @@
     {
       "key": "zbMATH:5270821",
       "title": "Semisimple quantum cohomology, deformations of stability conditions and the derived category",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Author-PDF and university-repository search-result summary read. Direct repository open returned anti-bot page; thesis body not read.",
       "role_status": "Bayer thesis: author/repository summary describes semisimplicity under point blowups. Full thesis unread; landing page anti-bot on direct open.",
       "access": {
@@ -1027,7 +1029,7 @@
     {
       "key": "doi:10.1080/00927872.2018.1498870",
       "title": "Geometry of moduli space of sheaves on del Pezzo surfaces via Maruyama transform",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Bibliographic title metadata only; no paper body read.",
       "role_status": "Previously licensed-out title resolved by Crossref: Geometry of moduli space of sheaves on del Pezzo surfaces via Maruyama transform. Title metadata only.",
       "access": {
@@ -1040,7 +1042,7 @@
     {
       "key": "arXiv:0907.3597",
       "title": "Vector bundles and monads on abelian threefolds",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Primary landing-page abstract and bibliographic metadata read; no paper body read.",
       "role_status": "Previously licensed-out title resolved by arXiv: Vector bundles and monads on abelian threefolds. Abstract describes bundle moduli, not a cubic-partner theorem.",
       "access": {
@@ -1083,7 +1085,7 @@
     {
       "key": "CKGA:28",
       "title": "A (Multiplicative) Blow-Up Formula for the Chen-Ruan Cohomology and Applications",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Institutional CKGA papers list, entries 28–30, title/authorship/status labels only; no manuscript obtained or read.",
       "role_status": "Listed as a preprint; identifier, current status and relationship to later work unresolved. Historical discovery lead, not an imported theorem or a confirmed distinct current publication.",
       "access": {
@@ -1097,7 +1099,7 @@
     {
       "key": "CKGA:29",
       "title": "Birational invariants from nc Hodge theory",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Institutional CKGA papers list, entries 28–30, title/authorship/status labels only; no manuscript obtained or read.",
       "role_status": "Listed as a preprint; identifier, current status and relationship to KKPY/later work unresolved. Historical discovery lead, not an imported theorem or a confirmed distinct current publication.",
       "access": {
@@ -1111,7 +1113,7 @@
     {
       "key": "CKGA:30",
       "title": "Atomic Contents and Equivariant Birational Geometry",
-      "read_depth": "metadata only",
+      "read_depth": "abstract/metadata only",
       "read_scope": "Institutional CKGA papers list, entries 28–30, title/authorship/status labels only; no manuscript obtained or read.",
       "role_status": "Listed as in preparation; identifier, current status and relationship to Atoms meet symbols unresolved. Historical discovery lead, not an imported theorem or a confirmed distinct current publication.",
       "access": {
@@ -1124,7 +1126,7 @@
     }
   ],
   "external_full_text_breakdown": {
-    "papers": 1,
+    "papers": 6,
     "source_scripts": 2
   }
 }
