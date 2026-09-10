@@ -1535,6 +1535,31 @@
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.superPrimary_fullOdd_allocates_to_distinguished_factor",
       "reason": "Derives allocation of the full odd subspace to the distinguished image from a finite parity-preserving central-idempotent decomposition and even dimension one of all other images. Vanishing of the other odd images and restricted trace nondegeneracy are proved, not supplied. Geometric primary decomposition remains external.",
       "terminal_digest": "9a3c7dfd3c49752d200c43087258986aa44624f8433b044fdfb7aa3725930b16"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.nineRankTwoConnections_exactResidue_certificates",
+      "reason": "Exact finite matrix and complete formal-gauge certificates for all nine rank-two counting cases; geometric identifications are separate.",
+      "terminal_digest": "a103fe07992cef7cbf3c67af2de28edb355ead453c3dee0732e8b9350ac5c74f"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.exactResidueSpectrum_detects_one_and_extends_coefficients",
+      "reason": "Effective exact-residue spectrum retains discriminant one and transports labels along injective coefficient maps.",
+      "terminal_digest": "bc9cdb16ef28a1109f5a054ea4ab9db3658adaf84c435a0841f7bb428c286065"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.exactResidueSpectrum_invariant_under_regularComparison",
+      "reason": "Exact-spectrum invariance follows from actual regular horizontal comparisons and inverses.",
+      "terminal_digest": "da69a9b9c9312fe952fc34806384b9050bed732937ce5286144af3c78387210f"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankThreeOddSelector_invariant_under_fullFiberEquivalence",
+      "reason": "The odd selector uses full even and odd subspaces and is preserved by their linear equivalences.",
+      "terminal_digest": "2a73507c0cbefeb5022a3d15a418a7d5d2823b6240c109f1fa36fa02f9a672ae"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.exactPrimaryLedger_fold_from_regularComparisons",
+      "reason": "Constructs the additive exact-primary fold from concrete comparison evidence and computes singleton weights.",
+      "terminal_digest": "1b4936c338c8d8b201fbfe4cfc54e29288eaa35536952ce2a24f2a85c275d19d"
     }
   ]
 }

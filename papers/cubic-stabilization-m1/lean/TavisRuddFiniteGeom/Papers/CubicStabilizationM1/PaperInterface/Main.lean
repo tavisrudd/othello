@@ -1,3 +1,6 @@
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ExactPrimaryLedger
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.NineRankTwoResidues
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ExactResidueSelectors
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.PrimaryOddAllocation
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SuperPrimaryPairing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.PrimarySummandDecomposition
@@ -396,5 +399,85 @@ theorem superPrimary_fullOdd_allocates_to_distinguished_factor
   Quantum.odd_eq_distinguished_primary_intersection even odd e selected sum idempotent central nonzero
     unitEven evenStable oddStable rankOne spanning oddProductEven anticommute
     trace traceOdd nondegenerate
+
+
+/-- All nine rational rank-two cases have actual invertible splitting bases,
+intertwining Euler and grading coefficients, and complete normalized formal
+gauges with regularly modifiable zero blocks and their computed exact
+residue discriminants. The finite label domain has exactly nine elements;
+no geometric quantum-product identification is asserted. -/
+theorem nineRankTwoConnections_exactResidue_certificates :
+    Fintype.card Quantum.RankTwoCountingLabel=9 ∧ ∀ label : Quantum.RankTwoCountingLabel,
+      (Quantum.rankTwoCountingBasis label * Quantum.rankTwoCountingBasisInverse label=1 ∧
+        Quantum.rankTwoCountingBasisInverse label * Quantum.rankTwoCountingBasis label=1) ∧
+      Quantum.labeledCountingMatrix label.toCountingLabel * Quantum.rankTwoCountingBasis label =
+        Quantum.rankTwoCountingBasis label *
+          Quantum.invertibleComplementBlocks label.complementTrace label.complementParameter ∧
+      Quantum.parameterizedGradingMatrix * Quantum.rankTwoCountingBasis label =
+        Quantum.rankTwoCountingBasis label * Quantum.rankTwoCountingRegular label ∧
+      ∃ gauge reduced, Quantum.IsNormalizedGauge Quantum.twoByTwoBlockLabel
+        (Quantum.invertibleComplementSystem label.complementTrace label.complementParameter
+          (Quantum.rankTwoCountingRegular label)) gauge reduced ∧
+        PowerSeries.coeff 0 (Quantum.lastRankTwoBlockSeries reduced) = Quantum.adaptedLeadingOperator 1 ∧
+        (PowerSeries.coeff 1 (Quantum.lastRankTwoBlockSeries reduced)) 1 0=0 ∧
+        Quantum.residueDiscriminant (Quantum.modifiedResidue (Quantum.lastRankTwoBlockSeries reduced)) =
+          Quantum.rankTwoCountingDiscriminant label :=
+  ⟨Quantum.rankTwoCountingLabel_card, fun label =>
+    ⟨Quantum.rankTwoCountingBasis_inverse label, Quantum.rankTwoCountingBasis_intertwines label,
+      Quantum.rankTwoCountingRegular_intertwines label,
+      Quantum.rankTwoCounting_exists_gauge_with_exact_discriminant label⟩⟩
+
+/-- The effective exact-spectrum target detects discriminant one and transports
+its actual labels and multiplicities along injective coefficient extension. -/
+theorem exactResidueSpectrum_detects_one_and_extends_coefficients
+    {B C : Type*} [CommRing B] [CommRing C]
+    (f : B →+* C) (injective : Function.Injective f) (δ : B) :
+    Quantum.exactSpectrumAugmentation (Quantum.exactDiscriminantAtom (1 : ℚ))=1 ∧
+      Finsupp.mapDomain f (Quantum.exactDiscriminantAtom δ) = Quantum.exactDiscriminantAtom (f δ) :=
+  ⟨Quantum.exactDiscriminantAtom_one_detected,
+    Quantum.exactDiscriminantAtom_coefficientExtension f injective δ⟩
+
+/-- Regular horizontal comparisons with regular inverses preserve the exact
+rank-two spectrum. The discriminant equality is derived from the comparison,
+its adapted leading terms, and horizontal nondegenerate pairings. -/
+theorem exactResidueSpectrum_invariant_under_regularComparison
+    {B : Type*} [CommRing B]
+    {source target comparison inverse sourcePairing targetPairing :
+      PowerSeries (Matrix (Fin 2) (Fin 2) B)}
+    {sourceUnit targetUnit : B} (twoUnit : IsUnit (2 : B))
+    (horizontal : Quantum.IsHorizontalLoopComparison source target comparison)
+    (inverseHorizontal : Quantum.IsHorizontalLoopComparison target source inverse)
+    (sourceAdapted : PowerSeries.coeff 0 source = Quantum.adaptedLeadingOperator sourceUnit)
+    (targetAdapted : PowerSeries.coeff 0 target = Quantum.adaptedLeadingOperator targetUnit)
+    (sourceInvertible : IsUnit sourceUnit) (targetInvertible : IsUnit targetUnit)
+    (sourceNondegenerate : IsUnit ((PowerSeries.coeff 0 sourcePairing).det))
+    (targetNondegenerate : IsUnit ((PowerSeries.coeff 0 targetPairing).det))
+    (sourceHorizontal : Quantum.IsHorizontalPairing source sourcePairing)
+    (targetHorizontal : Quantum.IsHorizontalPairing target targetPairing)
+    (leftInverse : comparison * inverse = 1) (rightInverse : inverse * comparison = 1) :
+    Quantum.rankTwoExactSpectrumAtom target = Quantum.rankTwoExactSpectrumAtom source :=
+  Quantum.rankTwoExactSpectrumAtom_regularComparison twoUnit horizontal inverseHorizontal sourceAdapted targetAdapted sourceInvertible targetInvertible sourceNondegenerate targetNondegenerate sourceHorizontal targetHorizontal leftInverse rightInverse
+
+/-- Isomorphisms of the full even and odd subspaces preserve the odd selector. -/
+theorem rankThreeOddSelector_invariant_under_fullFiberEquivalence
+    {K A B : Type*} [Field K] [AddCommGroup A] [Module K A]
+    [AddCommGroup B] [Module K B]
+    (evenA oddA : Submodule K A) (evenB oddB : Submodule K B)
+    (evenEquiv : evenA ≃ₗ[K] evenB) (oddEquiv : oddA ≃ₗ[K] oddB) :
+    Quantum.rankThreeFullOddWeight evenA oddA = Quantum.rankThreeFullOddWeight evenB oddB :=
+  Quantum.rankThreeFullOddWeight_linearEquiv evenA oddA evenB oddB evenEquiv oddEquiv
+
+
+/-- Concrete regular matrix comparisons and full even/odd coordinate
+isomorphisms produce an additive exact-primary ledger fold. Its singleton
+values are the computed weights; invariance of these weights is derived
+from the comparison evidence rather than supplied as a premise. -/
+theorem exactPrimaryLedger_fold_from_regularComparisons
+    {K : Type*} [Field K] [CharZero K] (presentation : Quantum.ExactPrimaryPresentation K) :
+    (∀ block : Quantum.ExactPrimaryBlock K,
+      presentation.fold {presentation.toBlockPresentation.component block} = block.weight) ∧
+      ∀ left right : presentation.toBlockPresentation.EffectiveLedger,
+        presentation.fold (left+right)=presentation.fold left+presentation.fold right :=
+  ⟨presentation.fold_singleton, presentation.fold.map_add⟩
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationM1

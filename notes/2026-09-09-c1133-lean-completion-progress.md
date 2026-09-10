@@ -215,3 +215,49 @@ immediately before the correct explicit-output invocation.
 Uncommitted continuations are `Quantum/NineRankTwoResidues.lean` (currently
 elaborating the exact finite discriminants) and `Quantum/ExactResidueSelectors.lean`
 (not yet elaborated). These are not part of the 338-terminal claim.
+
+## Exact selectors and completed-map continuation
+
+The 342-terminal kernel audit passed at `run-20260910-032858-16f38a04`.
+It includes the nine complete residue certificates and actual regular-comparison
+invariance, not the older modulo-integer marker. The additional singleton/additive
+ledger terminal is being gated with this batch. Pending owned paths are
+`Quantum/NineRankTwoResidues.lean`, `Quantum/ExactResidueSelectors.lean`,
+`Quantum/ExactPrimaryLedger.lean`, `PaperInterface/Main.lean`,
+`Verification/AxiomAudit.lean`, and `lakefile.toml`; registration waits for the
+new terminal's actual axiom output. Two independent L4 leaves are under
+elaboration: `Quantum/CompletedExponentialPushforward.lean` and
+`Quantum/FixedBaseCoordinateEquivalences.lean`. They are not covered by the
+342-terminal result. Finite-fiber exponential independence proves joint
+injectivity directly on actual completed series; the multivariate geometric
+center-map identification is a separate boundary.
+
+The 343-terminal gate and registry comparison passed at
+`run-20260910-034014-aaf0bed4`, run ID `20260910-034014-8d3ad87e`.
+The five additional public declarations, all in `PaperInterface/Main.lean`, are:
+- `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.nineRankTwoConnections_exactResidue_certificates`;
+- `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.exactResidueSpectrum_detects_one_and_extends_coefficients`;
+- `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.exactResidueSpectrum_invariant_under_regularComparison`;
+- `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankThreeOddSelector_invariant_under_fullFiberEquivalence`;
+- `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.exactPrimaryLedger_fold_from_regularComparisons`.
+All use only `propext`, `Classical.choice`, and `Quot.sound`. Counts are
+343 public terminals / 105 machinery; manuscript coverage remains
+13 absent / 27 fragment / 26 conditional / 1 complete.
+
+The same run kernel-built the two L4 leaves. Exact declarations are
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.completedDirectionalTaggedPushforward_jointly_injective`
+in `Quantum/CompletedExponentialPushforward.lean`, and
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.coordinateEquiv_fixedLoci`,
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.polynomialCoordinateTranslationEquiv`,
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.polynomialCoefficientExtension_translation_injective`
+in `Quantum/FixedBaseCoordinateEquivalences.lean`.
+These are exact completed-coefficient and actual coordinate-equivalence results,
+not the geometric center maps. The next uncommitted leaf is
+`Quantum/MultivariateExponentialCharacters.lean`, currently under elaboration.
+
+Minor invocation corrections: the public interface lives under
+`PaperInterface/Main.lean`; the second README is `verification/README.md`
+at paper root. A failed README path occurred after registry changes; the
+correct file was updated before the green registry gate. Finite-fiber summation
+required the explicit `Finset.sum_coe_sort` equality, and the fixed-locus subtype
+uses a reducible abbreviation so subtype coercions elaborate.
