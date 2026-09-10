@@ -1,0 +1,35 @@
+[
+  {
+    "name": "landing:2604.14850",
+    "url": "https://arxiv.org/abs/2604.14850",
+    "utc": "2026-09-10T17:04:37.019233+00:00",
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/81dc9a595f9514de2d9a.response",
+    "sha256": "035e7370585f2cba5e2ce6b757aad6d5d3a53f2ca8b8ddf3d85e056690cb4c49",
+    "bytes": 38628,
+    "pdf": false
+  },
+  {
+    "name": "landing:2609.10353",
+    "url": "https://arxiv.org/abs/2609.10353",
+    "utc": "2026-09-10T17:04:37.020467+00:00",
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/fe6351f3c8d3539411ef.response",
+    "sha256": "7b17595c76abef18a62d7c8c832ce549d122dbd52e0f2a911762a40046f3404c",
+    "bytes": 40027,
+    "pdf": false
+  },
+  {
+    "name": "landing:2608.12191",
+    "url": "https://arxiv.org/abs/2608.12191",
+    "utc": "2026-09-10T17:04:37.020924+00:00",
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/1ca85f0057d418aeeacc.response",
+    "sha256": "7044b442375b232576ab3c66030ec4dc1f1fc99c6f1023586e96e2e8025aa503",
+    "bytes": 41157,
+    "pdf": false
+  }
+]

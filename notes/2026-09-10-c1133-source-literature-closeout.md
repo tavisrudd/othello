@@ -3,6 +3,11 @@
 **Date:** 2026-09-10. **Lane:** `cubic-threefolds`.
 **Status:** bounded continuation complete; the complete C1133 literature gate
 has not passed. Exact remaining access and companion-source obligations are below.
+**Current continuation:** `2026-09-10-c1133-citation-followup.md` recovers
+the twelve S2 seed sets (59 memberships, 39 distinct works), adds nine
+source records and resolves the withdrawn Verra lead. Current register: 88.
+The counts and service failures below describe the earlier pass.
+
 **External sources read at full text: eight — six papers and two source scripts.**
 Read depths and access records live in `2026-09-09-c1133-literature-sources.json`.
 Earlier dated access failures remain historical records, not current source statuses.

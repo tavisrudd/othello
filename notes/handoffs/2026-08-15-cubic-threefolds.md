@@ -43,10 +43,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   boundaries: `../2026-09-09-c1133-acceptance-map.md`. The 2026-09-10 source
   pass closes original Narasimhan–Nori access, fully reads Cai and the atomic
   criterion, and credits the ordinary equivariant stabilization/isogeny
-  precedents in *Atoms meet symbols*. Source register: 79 entries, eight
-  external full-text reads. Forty-eight graph requests retain service gaps
-  and reject an edited-volume DOI as a paper-level citation alias.
-  Latest report: `../2026-09-10-c1133-source-literature-closeout.md`.
+  precedents in *Atoms meet symbols*. An edited-volume DOI is rejected as
+  a paper-level citation alias.
+  Latest report: `../2026-09-10-c1133-citation-followup.md`: twelve S2 seed
+  sets recovered, 59 memberships/39 distinct works title-screened; explicit
+  equivariant/Hodge-partner precedents credited and withdrawn Verra claim
+  distinguished. F-bundle publication DOI resolved. Current register: 88
+  sources, still eight external full-text reads. Cross-service gaps remain.
   Remaining: published spectra version match, categorical-base-loci body,
   graph/service coverage and the exact special-pencil companion for packet
   §§30–31 (path/link requested from author). The local sharpness surface

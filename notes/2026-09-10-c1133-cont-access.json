@@ -1,0 +1,184 @@
+[
+  {
+    "name": "citations:2307.13555",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/5597e290c452f8a00fc52c1aed777942c6eab434/citations?fields=title,externalIds,abstract&limit=100",
+    "utc": "2026-09-10T16:58:10.307658+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/0de4e5c2f96f732652c4.response",
+    "sha256": "7fa2b22d7a2ecb9298a0f2d00744c21d6b279bb9a47849a830271305546608dc",
+    "bytes": 21022,
+    "pdf": false
+  },
+  {
+    "name": "citations:2307.03696",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/25e286a5a9bb25b1f089da1394800e6c1a7f9674/citations?fields=title,externalIds,abstract&limit=100",
+    "utc": "2026-09-10T16:58:10.308678+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/8a43a1e98f85169ff070.response",
+    "sha256": "3b9171f80de7f3fc78112038b5887cbeeffe5e83de9f0f02be050c0b243225c6",
+    "bytes": 7841,
+    "pdf": false
+  },
+  {
+    "name": "citations:2604.10028",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/6c569cc006e356530e0f033989bd5258768718c5/citations?fields=title,externalIds,abstract&limit=100",
+    "utc": "2026-09-10T16:58:10.309185+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/4a231af5d97a97fbaea1.response",
+    "sha256": "cb4dc20528b1fd928e7981b39cd12db5c0a219572bb4e53611b2d8d26b54a551",
+    "bytes": 3483,
+    "pdf": false
+  },
+  {
+    "name": "citations:2508.05105",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/5d0db92070100e6ff1dfd91da6f014daa737b3ce/citations?fields=title,externalIds,abstract&limit=100",
+    "utc": "2026-09-10T16:58:10.449735+00:00",
+    "status": 429,
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/86168fac40795567651e.response",
+    "sha256": "65ab993d12c5c2cc9b68e6da2bb79b326930283e520363ffcdc145f88cd5a148",
+    "bytes": 174,
+    "pdf": false
+  },
+  {
+    "name": "citations:2605.29143",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/bab31ac28b3b466253920bd6847af5f423fefae2/citations?fields=title,externalIds,abstract&limit=100",
+    "utc": "2026-09-10T16:58:10.456356+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/1874b3a296609d234edb.response",
+    "sha256": "b890c0f15f5c03ba84c2ef5ace10d4d63f07c6388916be8151f53ffbb7a0b479",
+    "bytes": 26,
+    "pdf": false
+  },
+  {
+    "name": "citations:2608.01577",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/2a5f72abaabac8e84c1d8e12d2f4a454bc0c55f0/citations?fields=title,externalIds,abstract&limit=100",
+    "utc": "2026-09-10T16:58:10.469930+00:00",
+    "status": 429,
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/293ff906bc8bb1bd4584.response",
+    "sha256": "65ab993d12c5c2cc9b68e6da2bb79b326930283e520363ffcdc145f88cd5a148",
+    "bytes": 174,
+    "pdf": false
+  },
+  {
+    "name": "citations:2411.02266",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/13c0d4086f94b05cae8d229269b36d1898c66c1f/citations?fields=title,externalIds,abstract&limit=100",
+    "utc": "2026-09-10T16:58:10.558563+00:00",
+    "status": 429,
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/aee350d4184d22ff2c63.response",
+    "sha256": "65ab993d12c5c2cc9b68e6da2bb79b326930283e520363ffcdc145f88cd5a148",
+    "bytes": 174,
+    "pdf": false
+  },
+  {
+    "name": "citations:2606.17884",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/d3ffce40b207e6424511a405d76068e175cfe7f1/citations?fields=title,externalIds,abstract&limit=100",
+    "utc": "2026-09-10T16:58:10.564126+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/134006ff10ecd3e9b00a.response",
+    "sha256": "b890c0f15f5c03ba84c2ef5ace10d4d63f07c6388916be8151f53ffbb7a0b479",
+    "bytes": 26,
+    "pdf": false
+  },
+  {
+    "name": "citations:2509.15831",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/9102def9d7141a2cf7810c2855d78b2ffa227aaa/citations?fields=title,externalIds,abstract&limit=100",
+    "utc": "2026-09-10T16:58:10.571858+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/e6f68b52258a424bf815.response",
+    "sha256": "798750a2e15c8b0a7d9503639b59215893ff436bcc604607b513d3dfbf7ec623",
+    "bytes": 1518,
+    "pdf": false
+  },
+  {
+    "name": "citations:2607.26718",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/e1b88ba13cfb7721a8d58daf9894a018f9a495f7/citations?fields=title,externalIds,abstract&limit=100",
+    "utc": "2026-09-10T16:58:10.634454+00:00",
+    "status": 429,
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/484ff74da346a590e2ef.response",
+    "sha256": "65ab993d12c5c2cc9b68e6da2bb79b326930283e520363ffcdc145f88cd5a148",
+    "bytes": 174,
+    "pdf": false
+  },
+  {
+    "name": "citations:2607.22074",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/57ce9d1b468db6be1a219630c5bd3578c8cead11/citations?fields=title,externalIds,abstract&limit=100",
+    "utc": "2026-09-10T16:58:10.666793+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/3f4eb7067d0dfea1ee94.response",
+    "sha256": "c6c27213d6c88df913f073fe6e103a269832452759e742bb1af2bf045214e16b",
+    "bytes": 1573,
+    "pdf": false
+  },
+  {
+    "name": "citations:2510.21222",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/8474a7417e56d745b1082db182f0f6ed641d22f8/citations?fields=title,externalIds,abstract&limit=100",
+    "utc": "2026-09-10T16:58:10.679213+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/1914d2f6993cae0526dd.response",
+    "sha256": "1eadf1a3c30632269f83fc30b6336baef022398ff6e4ac53bb5c62b8c78e6832",
+    "bytes": 1437,
+    "pdf": false
+  },
+  {
+    "name": "iritani-author",
+    "url": "https://www.math.kyoto-u.ac.jp/~iritani/research.html",
+    "utc": "2026-09-10T16:58:10.711906+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/18d8d4961e8e0bb75054.response",
+    "sha256": "60d044f50f7c21ee1aa89b13691bf07738dd2e4c22bcf1ecff48c6f61ccbde6f",
+    "bytes": 16854,
+    "pdf": false
+  },
+  {
+    "name": "miami-thesis",
+    "url": "https://scholarship.miami.edu/esploro/outputs/doctoral/Hodge-Theoretic-Aspects-of-Categorical-Spectrum/991031447535002976",
+    "utc": "2026-09-10T16:58:10.760381+00:00",
+    "status": 200,
+    "content_type": "text/html",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/6925dbf7b5e0bef1bf07.response",
+    "sha256": "31bccb50357843e33e44444c6dadcbe9f040e23cbbfc62a3e28d07eeea45a435",
+    "bytes": 2328,
+    "pdf": false
+  },
+  {
+    "name": "framing-published",
+    "url": "https://doi.org/10.1112/plms.70209",
+    "utc": "2026-09-10T16:58:10.773213+00:00",
+    "status": 403,
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/4125d9a53c7d5366499a.response",
+    "sha256": "3946c5bcd97d8170b5b6ccd806bb8f0733e0808627c25c7a96f8b1bc602c5236",
+    "bytes": 5577,
+    "pdf": false
+  },
+  {
+    "name": "framing-oa",
+    "url": "https://api.openalex.org/works/https://doi.org/10.1112/plms.70209",
+    "utc": "2026-09-10T16:58:10.867930+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/b98c3144677d1ec1a7ce.response",
+    "sha256": "9cfa6238a50e36f4d2f6aa8ca3e40f2d48eb916942a5f7e5c16b89556ee398df",
+    "bytes": 16088,
+    "pdf": false
+  },
+  {
+    "name": "framing-cr",
+    "url": "https://api.crossref.org/works/10.1112%2Fplms.70209",
+    "utc": "2026-09-10T16:58:11.086156+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/0e8d25ef273c04cd9ac9.response",
+    "sha256": "21063af55f5f28c34a265703c79619eed65368b44f2c246aeb657b0391befb38",
+    "bytes": 14753,
+    "pdf": false
+  }
+]

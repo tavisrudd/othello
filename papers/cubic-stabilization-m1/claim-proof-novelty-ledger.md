@@ -49,7 +49,7 @@ audit; it does not change the manuscript's current theorem hierarchy or formal
 coverage. The detailed scope is in
 [`2026-09-09-c1133-acceptance-map.md`](../../notes/2026-09-09-c1133-acceptance-map.md).
 The complete literature audit is still open. Its source register currently has
-79 entries (78 external and one local); eight external sources (six papers
+88 entries (87 external and one local); eight external sources (six papers
 and two source scripts) are read in full. Every other entry records its actual partial or metadata
 scope. The earlier bounded absence statements above must be read with this
 expanded, still incomplete coverage boundary.
@@ -57,9 +57,20 @@ expanded, still incomplete coverage boundary.
 | Candidate | Mathematical audit status | Literature and attribution boundary |
 |---|---|---|
 | A: one stabilization preserves rationality for all seventeen smooth complex Picard-rank-one Fano threefold families | Exact seventeen-matrix arithmetic, geometric input normalization, all-member rational controls and the source-level family exhaustion have been checked. Written operation, persistence and center-vanishing arguments remain explicit dependencies; Lean only covers specified algebraic portions | Ordinary irrationality, quantum spectral methods and much of the underlying Fano data are prior work. Lee–Przyjalkowski's published mirror note addresses ordinary rationality for general Fanos. No global priority verdict on the all-member one-stabilization classification |
-| B: among the nine detected families, one-stable birationality implies isomorphism of rational Hodge structures H³ | Written full-fiber equivariance and faithful Hodge-fixed-base adaptation; the exact coefficient-domain and common-field hypotheses must be retained. No replacement of the fiber by its invariant vectors | Hodge atoms and equivariant quantum comparisons are established precursors, including KKPY and Iritani. A claim to originate Hodge-enhanced spectral localization is excluded. Exact conservation statement comparison remains open |
+| B: among the nine detected families, one-stable birationality implies isomorphism of rational Hodge structures H³ | Written full-fiber equivariance and faithful Hodge-fixed-base adaptation; the exact coefficient-domain and common-field hypotheses must be retained. No replacement of the fiber by its invariant vectors | Hodge atoms and equivariant quantum comparisons are established precursors, including KKPY and Iritani. Fay's arXiv:2605.30439 Theorem 5.2 explicitly proves finite-group-equivariant blowup decomposition; Benedetti–Guéré–Manivel–Perrin arXiv:2605.30450 Theorem 1 imposes rational-Hodge restrictions on birational fourfold partners. Neither general equivariant comparison nor rational-Hodge partner restrictions originate here. Exact whole-H³ one-stable conservation comparison remains open |
 | C: very-general cubic/quartic source, arbitrary smooth same-family target, one-stable birationality implies isomorphism | Deduction from B and Voisin's precise rational generic Torelli statement; source quantifiers checked | Credit Voisin for the rational/unpolarized Torelli input. The cancellation application is a candidate consequence, not a new Torelli theorem; no final novelty verdict |
 | D: bounded-degree extensions of a fixed finitely generated characteristic-zero field yield finitely many geometric cubic partner classes | Written deduction from B, Orr v4, arithmetic intermediate Jacobians, finite kernels, polarization finiteness and Torelli. Original Narasimhan–Nori Theorem 1.1 is now verified from all four original scanned pages (2026-09-10 source closeout) | Credit those finiteness and Torelli inputs. This is geometric-class finiteness, not finiteness of twists or an effective bound. Earlier arithmetic-spectrum rationality criteria have a different inspected conclusion; comprehensive comparison remains open |
+
+**Citation continuation (2026-09-10).** The twelve pinned core seeds now have
+59 returned Semantic Scholar memberships (39 distinct works), all screened by
+title/identifier; nine individual additions have explicit read scopes in the
+register. This is not full-text or cross-service closure. The published
+F-bundle DOI is `10.1112/plms.70209` (OpenAlex/Crossref/Semantic Scholar
+counts 0/0/5). Fay's `arXiv:2604.14850v2` is withdrawn: the author identifies
+an equivariance gap in the ordinary-irrationality argument and points to the
+equivariant replacement. Do not import its withdrawn conclusion. These
+source distinctions and the partial reads underlying the B-row additions are
+recorded in `notes/2026-09-10-c1133-citation-followup.md`.
 
 **Concrete older precursor.** A primary author-hosted DSc thesis contains
 *Interpretations of spectra*: printed p. 285 displays the cubic connection

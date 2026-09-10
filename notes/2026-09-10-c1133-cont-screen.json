@@ -1,0 +1,1455 @@
+{
+  "date": "2026-09-10",
+  "scope": "First forward layer of twelve pinned core seeds; no recursive closure claimed. Crossref arXiv-DOI 404 is unavailable, not zero.",
+  "sets": [
+    {
+      "seed": "arXiv:2307.13555",
+      "counts": {
+        "OpenAlex": {
+          "count": 0,
+          "status": 200,
+          "resolved_id": "https://openalex.org/W4385292744",
+          "url": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2307.13555"
+        },
+        "Crossref": {
+          "count": null,
+          "status": 404,
+          "resolved_id": null,
+          "url": "https://api.crossref.org/works/10.48550%2FarXiv.2307.13555"
+        },
+        "Semantic Scholar": {
+          "count": 16,
+          "status": 200,
+          "resolved_id": "5597e290c452f8a00fc52c1aed777942c6eab434",
+          "title": "Quantum cohomology of blowups",
+          "request_manifest": "2026-09-10-c1133-cont-batch.json"
+        }
+      },
+      "retrieval": {
+        "name": "citations:2307.13555",
+        "url": "https://api.semanticscholar.org/graph/v1/paper/5597e290c452f8a00fc52c1aed777942c6eab434/citations?fields=title,externalIds,abstract&limit=100",
+        "utc": "2026-09-10T16:58:10.307658+00:00",
+        "status": 200,
+        "content_type": "application/json",
+        "path": "/tmp/persistent/tavis/lit-search/c1133-cont/0de4e5c2f96f732652c4.response",
+        "sha256": "7fa2b22d7a2ecb9298a0f2d00744c21d6b279bb9a47849a830271305546608dc",
+        "bytes": 21022,
+        "pdf": false
+      },
+      "members": [
+        {
+          "paperId": "57ce9d1b468db6be1a219630c5bd3578c8cead11",
+          "externalIds": {
+            "ArXiv": "2607.22074",
+            "DOI": "10.1142/q0592",
+            "CorpusId": 290583294
+          },
+          "title": "Moduli of atoms of complex projective varieties",
+          "openAccessPdf": {
+            "url": "https://arxiv.org/pdf/2607.22074",
+            "status": "GREEN",
+            "license": "CCBY",
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2607.22074, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "12136559",
+              "name": "M. Kontsevich"
+            },
+            {
+              "authorId": "2056209193",
+              "name": "Szil'ard Szab'o"
+            }
+          ],
+          "abstract": "The category of constituent pieces of Dubrovin connection of varieties is introduced and shown to be representable in affine space."
+        },
+        {
+          "paperId": "35afb4942f59505f04f412dd0f25959115e8c0cc",
+          "externalIds": {
+            "ArXiv": "2606.07418",
+            "CorpusId": 288985614
+          },
+          "title": "Gamma conjecture II via global Gamma-I",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2606.07418, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2303461774",
+              "name": "Jianxun Hu"
+            },
+            {
+              "authorId": "2277762389",
+              "name": "Huazhong Ke"
+            },
+            {
+              "authorId": "2304695220",
+              "name": "Changzheng Li"
+            },
+            {
+              "authorId": "2303395792",
+              "name": "Zhitong Su"
+            }
+          ],
+          "abstract": "For a Fano manifold $X$, Gamma conjecture II aims to use $\\mathcal{D}_{\\rm{coh}}^b(X)$ to describe the asymptotic behavior of its Dubrovin connection via $\\widehat{\\Gamma}$-integral structure. It was proposed by Galkin, Golyshev and Iritani, and can be regarded as a quantitative refinement of Dubrovin's conjecture on Fano manifolds with semisimple big quantum cohomology. As a step toward Gamma conjecture II, we define the Gamma-I property at points satisfying the (SR) condition, arising from the original Gamma conjecture I. We prove that the property holds globally in the following sense: if it holds at one such point, then it holds throughout the connected component of the (SR)-region containing that point. Based on this global Gamma-I property, we establish a strategy-type theorem relating Gamma conjecture II to the Gamma-I property at a possibly non-semisimple point, together with an analysis of small quantum cohomology. We further apply this theorem to prove Gamma conjecture II for del Pezzo surfaces; the proof combines Iritani's Galois action with addtional elementary operations on exceptional collections, and its most technically involved step consists in verifying the required global Gamma-I property."
+        },
+        {
+          "paperId": "4ebe4f3f17573360a688c5cec5bec33ea1911258",
+          "externalIds": {
+            "ArXiv": "2605.30439",
+            "CorpusId": 288813856
+          },
+          "title": "Equivariant irrationality of very general symmetric Verra fourfolds",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2605.30439, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2304453974",
+              "name": "Aideen Fay"
+            }
+          ],
+          "abstract": "We prove that a very general complex symmetric Verra fourfold is not \\(\\ZZ/2\\)-birational to \\(\\PP^4\\), using the \\emph{theory of atoms} introduced by Katzarkov--Kontsevich--Pantev--Yu~\\citep{Katzarkov2025BirationalIF} in the equivariant setting as in Cavenaghi--Katzarkov--Kontsevich~\\citep{cavenaghi2026atomsmeetsymbols}."
+        },
+        {
+          "paperId": "b9afbcb7d80690745560f528dd00788b71182b30",
+          "externalIds": {
+            "ArXiv": "2604.14850",
+            "CorpusId": 287508796
+          },
+          "title": "The Very General Verra Fourfold is Irrational",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2604.14850, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2304453974",
+              "name": "Aideen Fay"
+            }
+          ],
+          "abstract": "We show that the very general Verra fourfold is irrational, using the Hodge atom framework of Katzarkov--Kontsevich--Pantev--Yu. Two novel points are: a refined analysis of Hodge atoms, based on the involution on the cohomology of $X$, and a derivation of the quantum multiplication matrix from the quantum differential operator. This gives the first successful application of the method of Hodge atoms to a space with Picard rank greater than one."
+        },
+        {
+          "paperId": "6c569cc006e356530e0f033989bd5258768718c5",
+          "externalIds": {
+            "ArXiv": "2604.10028",
+            "CorpusId": 287425237
+          },
+          "title": "Notes on the decomposition theorem for blowups",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2604.10028, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "3684345",
+              "name": "H. Iritani"
+            }
+          ],
+          "abstract": "We discuss arithmetic and Hodge-theoretic properties of the isomorphisms appearing in the decomposition theorem for quantum cohomology of blowups. These properties underpin the application to the rationality questions by Katzarkov-Kontsevich-Pantev-Yu."
+        },
+        {
+          "paperId": "515efa4f5037e0a0383b6d6b7ae79686f0503960",
+          "externalIds": {
+            "ArXiv": "2602.09602",
+            "CorpusId": 285462948
+          },
+          "title": "A mirror theorem for partial flag bundles",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2602.09602, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "1404101646",
+              "name": "I. Ciocan-Fontanine"
+            },
+            {
+              "authorId": "1704209378",
+              "name": "Y. Koto"
+            }
+          ],
+          "abstract": "We construct a family of points on the Lagrangian cone of a partial flag bundle associated to a (possibly non-split) vector bundle from any Weyl-invariant $I$-function of a prequotient. This result can be seen as the nonabelian analogue of the mirror theorem for projective bundles in arXiv:2307.03696, and generalizes Oh's mirror theorem for split partial flag bundles in arXiv:1607.08326."
+        },
+        {
+          "paperId": "d333d899aeb5cc1d0bf8062460d367d50372583b",
+          "externalIds": {
+            "ArXiv": "2509.07407",
+            "CorpusId": 281218258
+          },
+          "title": "The quantum D-module of product varieties",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2509.07407, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "1390058806",
+              "name": "'Ad'am Gyenge"
+            }
+          ],
+          "abstract": "We study the quantum connection of product varieties in the framework of quantum cohomology. Our first main result shows that, near the origin of the Novikov variables, the quantum spectrum of \\(X \\times Y\\) converges to the set of pairwise sums of the spectra of \\(X\\) and \\(Y\\). This arises from the leading contribution of the connection matrices \\(K_X \\otimes \\mathrm{id}\\) and \\(\\mathrm{id} \\otimes K_Y\\), while mixed curve classes contribute only at higher order. Our second main result establishes a formal isomorphism of quantum \\(D\\)-modules $ \\mathrm{QDM}(X \\times Y)^{\\mathrm{la}} \\cong \\mathrm{QDM}(X)^{\\mathrm{la}} \\otimes \\mathrm{QDM}(Y)^{\\mathrm{la}}$, compatible with the quantum connection. As applications, we show that atoms, birational invariants arising from quantum cohomology, factor multiplicatively for product varieties, and we deduce the existence of a motivic measure associated with atoms."
+        },
+        {
+          "paperId": "b56c295653b6da552ac32e0f126c600c8764d991",
+          "externalIds": {
+            "ArXiv": "2502.08762",
+            "CorpusId": 276317498
+          },
+          "title": "Quantum spectrum and Gamma structure for standard flips",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2502.08762, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "9190242",
+              "name": "Yefeng Shen"
+            },
+            {
+              "authorId": "2072732519",
+              "name": "M. Shoemaker"
+            }
+          ],
+          "abstract": "We investigate the quantum spectrum and Gamma structure for projective bundles, blow-ups, and standard flips. After restricting the quantum multiplication to the exceptional curve direction, we obtain a decomposition of the quantum cohomology of standard flips into asymptotic Gamma classes. We then show that this decomposition is compatible with the semi-orthogonal decompositions for these spaces constructed in work of Orlov and Belmans-Fu-Raedschelders. The proof involves a sequence of reductions to a local model and the asymptotic behavior of Meijer G-functions."
+        },
+        {
+          "paperId": "95e9974e5527640abbe039ddb0a035bb40f2dcdf",
+          "externalIds": {
+            "ArXiv": "2501.18849",
+            "CorpusId": 276079281
+          },
+          "title": "Fourier analysis of equivariant quantum cohomology",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2501.18849, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "3684345",
+              "name": "H. Iritani"
+            }
+          ],
+          "abstract": "Equivariant quantum cohomology possesses the structure of a difference module by shift operators (Seidel representation) of equivariant parameters. Teleman's conjecture suggests that shift operators and equivariant parameters acting on QH_T(X) should be identified, respectively, with the Novikov variables and the quantum connection of the GIT quotient X//T. This can be interpreted as a form of Fourier duality between equivariant quantum cohomology (D-module) of X and quantum cohomology (D-module) of the GIT quotient X//T. We introduce the notion of\"quantum volume,\"derived from Givental's path integral over the Floer fundamental cycle, and present a conjectural Fourier duality relationship between the T-equivariant quantum volume of X and the quantum volume of X//T. We also explore the\"reduction conjecture,\"developed in collaboration with Fumihiko Sanda, which expresses the I-function of X//T as a discrete Fourier transform of the equivariant J-function of X. Furthermore, we demonstrate how to use Fourier analysis of equivariant quantum cohomology to observe toric mirror symmetry and prove a decomposition of quantum cohomology D-modules of projective bundles or blowups."
+        },
+        {
+          "paperId": "ef8a5b65bcc1c6583cbcd881bde32eed55449039",
+          "externalIds": {
+            "ArXiv": "2501.14222",
+            "CorpusId": 275906400
+          },
+          "title": "Mirror symmetric Gamma conjecture for toric GIT quotients via Fourier transform",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2501.14222, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2342274671",
+              "name": "Konstantin Aleshkin"
+            },
+            {
+              "authorId": null,
+              "name": "Bohan Fang"
+            },
+            {
+              "authorId": "2238015807",
+              "name": "Junxiao Wang"
+            }
+          ],
+          "abstract": "Let $\\mathcal X=[(\\mathbb C^r\\setminus Z)/G]$ be a toric Fano orbifold. We compute the Fourier transform of the $G$-equivariant quantum cohomology central charge of any $G$-equivariant line bundle on $\\mathbb C^r$ with respect to certain choice of parameters. This gives the quantum cohomology central charge of the corresponding line bundle on $\\mathcal X$, while in the oscillatory integral expression it becomes the oscillatory integral in the mirror Landau-Ginzburg mirror of $\\mathcal X$. Moving these parameters to real numbers simultaneously deforms the integration cycle to the mirror Lagrangian cycle of that line bundle. This computation produces a new proof the mirror symmetric Gamma conjecture for $\\mathcal X$."
+        },
+        {
+          "paperId": "13c0d4086f94b05cae8d229269b36d1898c66c1f",
+          "externalIds": {
+            "ArXiv": "2411.02266",
+            "DOI": "10.1112/plms.70209",
+            "CorpusId": 273821156
+          },
+          "title": "Decomposition and framing of F‐bundles and applications to quantum cohomology",
+          "openAccessPdf": {
+            "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1112/plms.70209",
+            "status": "BRONZE",
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2411.02266, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2204649261",
+              "name": "Thorgal Hinault"
+            },
+            {
+              "authorId": "2304254846",
+              "name": "Tony Yue Yu"
+            },
+            {
+              "authorId": "2329637035",
+              "name": "Chi Zhang"
+            },
+            {
+              "authorId": "2303858191",
+              "name": "Shaowu Zhang"
+            }
+          ],
+          "abstract": "\n F‐bundle is a formal/nonarchimedean version of variation of nc‐Hodge structures that plays a crucial role in the theory of atoms as birational invariants from Gromov–Witten theory. In this paper, we establish the spectral decomposition theorem for F‐bundles according to the generalized eigenspaces of the Euler vector field action. The proof relies on solving systems of partial differential equations recursively in terms of power series, and on estimating the size of the coefficients for nonarchimedean convergence. The same technique allows us to establish the existence and uniqueness of the extension of framing for logarithmic F‐bundles. As an application, we prove the uniqueness of the decomposition map for the A‐model F‐bundle (hence quantum D‐module and quantum cohomology) associated to a projective bundle, as well as to a blowup of an algebraic variety. This complements the existence results by Iritani–Koto and Iritani."
+        },
+        {
+          "paperId": "0d71b685191b6d4ea8c9384ce7a289cc3ad3eefc",
+          "externalIds": {
+            "ArXiv": "2410.09709",
+            "DOI": "10.1016/j.geomphys.2026.105931",
+            "CorpusId": 273345817
+          },
+          "title": "Dubrovin conjecture and the second structure connection",
+          "openAccessPdf": {
+            "url": "https://arxiv.org/pdf/2410.09709",
+            "status": "GREEN",
+            "license": "CCBYSA",
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2410.09709, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2066710524",
+              "name": "J. Morales"
+            },
+            {
+              "authorId": "100732038",
+              "name": "T. Milanov"
+            }
+          ],
+          "abstract": "We give a reformulation of the Dubrovin conjecture about the semisimplicity of quantum cohomology in terms of the so-called second structure connection of quantum cohomology. The key ingredient in our work is the notion of a twisted reflection vector which allows us to give an elegant description of the monodromy data of the quantum connection in terms of the monodromy data of its Laplace transform."
+        },
+        {
+          "paperId": "411651def28a2ae18212d42afed8f04c42d6dbd8",
+          "externalIds": {
+            "ArXiv": "2310.09888",
+            "CorpusId": 282933157
+          },
+          "title": "A mirror theorem for non-split toric bundles",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2310.09888, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "1704209378",
+              "name": "Y. Koto"
+            }
+          ],
+          "abstract": "We construct an I-function for toric bundles obtained as a fiberwise GIT quotient of a (not necessarily split) vector bundle. This is a generalization of Brown's I-function for split toric bundles and the I-function for non-split projective bundles. In order to prove the mirror theorem, we establish a characterization of points on the Givental Lagrangian cones of toric bundles and prove a mirror theorem for the twisted Gromov-Witten theory of a fiber product of projective bundles. The former result generalizes Brown's characterization for split toric bundles to the non-split case."
+        },
+        {
+          "paperId": "25e286a5a9bb25b1f089da1394800e6c1a7f9674",
+          "externalIds": {
+            "ArXiv": "2307.03696",
+            "CorpusId": 259375847
+          },
+          "title": "Quantum cohomology of projective bundles",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2307.03696, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "3684345",
+              "name": "H. Iritani"
+            },
+            {
+              "authorId": null,
+              "name": "Koto Yuki"
+            }
+          ],
+          "abstract": "We construct an I-function of the projective bundle P(V) associated with a not necessarily split vector bundle V\\to B as a Fourier transform of the S^1-equivariant J-function of the total space of V and show that it lies on the Givental Lagrangian cone of P(V). Using this result, we show that the quantum cohomology D-module of P(V) splits into the direct sum of the quantum cohomology D-modules of the base space B. This has applications to the semisimplicity of big quantum cohomology."
+        },
+        {
+          "paperId": "7760c790b98b0978146e15154662bbf3bb08f751",
+          "externalIds": {
+            "ArXiv": "2210.08939",
+            "DOI": "10.1016/j.aim.2025.110432",
+            "CorpusId": 252918852
+          },
+          "title": "Blow-ups and the quantum spectrum of surfaces",
+          "openAccessPdf": {
+            "url": "https://doi.org/10.1016/j.aim.2025.110432",
+            "status": "HYBRID",
+            "license": "CCBY",
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2210.08939, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "1390058806",
+              "name": "'Ad'am Gyenge"
+            },
+            {
+              "authorId": "2056209193",
+              "name": "Szil'ard Szab'o"
+            }
+          ],
+          "abstract": "We investigate the behaviour of the spectrum of the quantum (or Dubrovin) connection of smooth projective surfaces under blow-ups. Our main result is that for small values of the parameters, the quantum spectrum of such a surface is asymptotically the union of the quantum spectrum of a minimal model of the surface and a finite number of additional points located\"close to infinity\", that correspond bijectively to the exceptional divisors. This proves a conjecture of Kontsevich in the surface case."
+        },
+        {
+          "paperId": "97e3bf878d834b93c956ee36dfd1b0b14603f461",
+          "externalIds": {
+            "ArXiv": "2002.08524",
+            "MAG": "3008308639",
+            "DOI": "10.4310/jdg/1747062764",
+            "CorpusId": 211205179
+          },
+          "title": "The Open Crepant Transformation Conjecture for toric Calabi-Yau 3-orbifolds",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2002.08524, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2116495298",
+              "name": "Song Yu"
+            }
+          ],
+          "abstract": "We prove an open version of Ruan's Crepant Transformation Conjecture for toric Calabi-Yau 3-orbifolds, which is an identification of disk invariants of K-equivalent semi-projective toric Calabi-Yau 3-orbifolds relative to corresponding Lagrangian suborbifolds of Aganagic-Vafa type. Our main tool is a mirror theorem of Fang-Liu-Tseng that relates these disk invariants to local coordinates on the B-model mirror curves. Treating toric crepant transformations as wall-crossings in the GKZ secondary fan, we establish the identification of disk invariants through constructing a global family of mirror curves over charts of the secondary variety and understanding analytic continuation on local coordinates. Our work generalizes previous results of Brini-Cavalieri-Ross on disk invariants of threefold type-A singularities and of Ke-Zhou on crepant resolutions with effective outer branes."
+        }
+      ],
+      "screened_fields": [
+        "title",
+        "externalIds"
+      ],
+      "screen_method": "Manual title/identifier triage: promote direct birational/rationality comparisons, blowup or framing machinery and potentially overlapping Fano invariants; retain other titles as background leads, not content-level exclusions. No proof-level negative follows from a title screen.",
+      "retrieval_status": "complete returned S2 set"
+    },
+    {
+      "seed": "arXiv:2307.03696",
+      "counts": {
+        "OpenAlex": {
+          "count": 0,
+          "status": 200,
+          "resolved_id": "https://openalex.org/W4383860835",
+          "url": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2307.03696"
+        },
+        "Crossref": {
+          "count": null,
+          "status": 404,
+          "resolved_id": null,
+          "url": "https://api.crossref.org/works/10.48550%2FarXiv.2307.03696"
+        },
+        "Semantic Scholar": {
+          "count": 6,
+          "status": 200,
+          "resolved_id": "25e286a5a9bb25b1f089da1394800e6c1a7f9674",
+          "title": "Quantum cohomology of projective bundles",
+          "request_manifest": "2026-09-10-c1133-cont-batch.json"
+        }
+      },
+      "retrieval": {
+        "name": "citations:2307.03696",
+        "url": "https://api.semanticscholar.org/graph/v1/paper/25e286a5a9bb25b1f089da1394800e6c1a7f9674/citations?fields=title,externalIds,abstract&limit=100",
+        "utc": "2026-09-10T16:58:10.308678+00:00",
+        "status": 200,
+        "content_type": "application/json",
+        "path": "/tmp/persistent/tavis/lit-search/c1133-cont/8a43a1e98f85169ff070.response",
+        "sha256": "3b9171f80de7f3fc78112038b5887cbeeffe5e83de9f0f02be050c0b243225c6",
+        "bytes": 7841,
+        "pdf": false
+      },
+      "members": [
+        {
+          "paperId": "515efa4f5037e0a0383b6d6b7ae79686f0503960",
+          "externalIds": {
+            "ArXiv": "2602.09602",
+            "CorpusId": 285462948
+          },
+          "title": "A mirror theorem for partial flag bundles",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2602.09602, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "1404101646",
+              "name": "I. Ciocan-Fontanine"
+            },
+            {
+              "authorId": "1704209378",
+              "name": "Y. Koto"
+            }
+          ],
+          "abstract": "We construct a family of points on the Lagrangian cone of a partial flag bundle associated to a (possibly non-split) vector bundle from any Weyl-invariant $I$-function of a prequotient. This result can be seen as the nonabelian analogue of the mirror theorem for projective bundles in arXiv:2307.03696, and generalizes Oh's mirror theorem for split partial flag bundles in arXiv:1607.08326."
+        },
+        {
+          "paperId": "b56c295653b6da552ac32e0f126c600c8764d991",
+          "externalIds": {
+            "ArXiv": "2502.08762",
+            "CorpusId": 276317498
+          },
+          "title": "Quantum spectrum and Gamma structure for standard flips",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2502.08762, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "9190242",
+              "name": "Yefeng Shen"
+            },
+            {
+              "authorId": "2072732519",
+              "name": "M. Shoemaker"
+            }
+          ],
+          "abstract": "We investigate the quantum spectrum and Gamma structure for projective bundles, blow-ups, and standard flips. After restricting the quantum multiplication to the exceptional curve direction, we obtain a decomposition of the quantum cohomology of standard flips into asymptotic Gamma classes. We then show that this decomposition is compatible with the semi-orthogonal decompositions for these spaces constructed in work of Orlov and Belmans-Fu-Raedschelders. The proof involves a sequence of reductions to a local model and the asymptotic behavior of Meijer G-functions."
+        },
+        {
+          "paperId": "5f2136f68aecd9746df39f72179c681ab65a7228",
+          "externalIds": {
+            "ArXiv": "2412.03273",
+            "DOI": "10.1112/blms.70371",
+            "CorpusId": 274464827
+          },
+          "title": "Quantum modules of semipositive toric varieties",
+          "openAccessPdf": {
+            "url": "https://arxiv.org/pdf/2412.03273",
+            "status": "GREEN",
+            "license": "CCBYNCND",
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2412.03273, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2277679347",
+              "name": "Jae Hwang Lee"
+            }
+          ],
+          "abstract": "A smooth projective toric variety X=XΣ$X=X_\\Sigma$ has a geometric quotient description V//T$V /\\!/T$ . Using 2|1$2|1$ ‐pointed quasimap invariants, one can define a quantum HT∗$H_T^*$ ‐module QM(X)$QM(X)$ , which deforms a natural module structure given by the Kirwan map HT∗→H∗(X)$H_T^* \\rightarrow H^*(X)$ . The Batyrev ring of X$X$ , defined from combinatorial data of the fan Σ$\\Sigma$ , has its natural module structure given by the quotient of a polynomial ring, say BatM (X)$(X)$ . In this paper, we prove that QM(X)$QM(X)$ and BatM (X)$(X)$ are naturally isomorphic when X$X$ is semipositive."
+        },
+        {
+          "paperId": "13c0d4086f94b05cae8d229269b36d1898c66c1f",
+          "externalIds": {
+            "ArXiv": "2411.02266",
+            "DOI": "10.1112/plms.70209",
+            "CorpusId": 273821156
+          },
+          "title": "Decomposition and framing of F‐bundles and applications to quantum cohomology",
+          "openAccessPdf": {
+            "url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1112/plms.70209",
+            "status": "BRONZE",
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2411.02266, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2204649261",
+              "name": "Thorgal Hinault"
+            },
+            {
+              "authorId": "2304254846",
+              "name": "Tony Yue Yu"
+            },
+            {
+              "authorId": "2329637035",
+              "name": "Chi Zhang"
+            },
+            {
+              "authorId": "2303858191",
+              "name": "Shaowu Zhang"
+            }
+          ],
+          "abstract": "\n F‐bundle is a formal/nonarchimedean version of variation of nc‐Hodge structures that plays a crucial role in the theory of atoms as birational invariants from Gromov–Witten theory. In this paper, we establish the spectral decomposition theorem for F‐bundles according to the generalized eigenspaces of the Euler vector field action. The proof relies on solving systems of partial differential equations recursively in terms of power series, and on estimating the size of the coefficients for nonarchimedean convergence. The same technique allows us to establish the existence and uniqueness of the extension of framing for logarithmic F‐bundles. As an application, we prove the uniqueness of the decomposition map for the A‐model F‐bundle (hence quantum D‐module and quantum cohomology) associated to a projective bundle, as well as to a blowup of an algebraic variety. This complements the existence results by Iritani–Koto and Iritani."
+        },
+        {
+          "paperId": "c9fef890554f009d601d508a8be24747634f6ba4",
+          "externalIds": {
+            "ArXiv": "2401.13603",
+            "CorpusId": 267200014
+          },
+          "title": "Curved Fukaya algebras and the Dubrovin spectrum",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2401.13603, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "102464381",
+              "name": "Marco Castronovo"
+            }
+          ],
+          "abstract": "Under simplified axioms on moduli spaces of pseudo-holomorphic curves, we show that weakly unobstructed Fukaya algebras of Floer-nontrivial Lagrangians in a compact symplectic manifold must have curvature in the spectrum of an operator introduced by Dubrovin, which acts on the big quantum cohomology. We use the example of the complex Grassmannian $\\operatorname{Gr}(2,4)$ to illustrate a decoupling phenomenon, where the eigenvalues of finite energy truncations become simple under explicit bulk-deformations."
+        },
+        {
+          "paperId": "411651def28a2ae18212d42afed8f04c42d6dbd8",
+          "externalIds": {
+            "ArXiv": "2310.09888",
+            "CorpusId": 282933157
+          },
+          "title": "A mirror theorem for non-split toric bundles",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2310.09888, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "1704209378",
+              "name": "Y. Koto"
+            }
+          ],
+          "abstract": "We construct an I-function for toric bundles obtained as a fiberwise GIT quotient of a (not necessarily split) vector bundle. This is a generalization of Brown's I-function for split toric bundles and the I-function for non-split projective bundles. In order to prove the mirror theorem, we establish a characterization of points on the Givental Lagrangian cones of toric bundles and prove a mirror theorem for the twisted Gromov-Witten theory of a fiber product of projective bundles. The former result generalizes Brown's characterization for split toric bundles to the non-split case."
+        }
+      ],
+      "screened_fields": [
+        "title",
+        "externalIds"
+      ],
+      "screen_method": "Manual title/identifier triage: promote direct birational/rationality comparisons, blowup or framing machinery and potentially overlapping Fano invariants; retain other titles as background leads, not content-level exclusions. No proof-level negative follows from a title screen.",
+      "retrieval_status": "complete returned S2 set"
+    },
+    {
+      "seed": "arXiv:2604.10028",
+      "counts": {
+        "OpenAlex": {
+          "count": 0,
+          "status": 200,
+          "resolved_id": "https://openalex.org/W7154372603",
+          "url": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2604.10028"
+        },
+        "Crossref": {
+          "count": null,
+          "status": 404,
+          "resolved_id": null,
+          "url": "https://api.crossref.org/works/10.48550%2FarXiv.2604.10028"
+        },
+        "Semantic Scholar": {
+          "count": 3,
+          "status": 200,
+          "resolved_id": "6c569cc006e356530e0f033989bd5258768718c5",
+          "title": "Notes on the decomposition theorem for blowups",
+          "request_manifest": "2026-09-10-c1133-cont-batch.json"
+        }
+      },
+      "retrieval": {
+        "name": "citations:2604.10028",
+        "url": "https://api.semanticscholar.org/graph/v1/paper/6c569cc006e356530e0f033989bd5258768718c5/citations?fields=title,externalIds,abstract&limit=100",
+        "utc": "2026-09-10T16:58:10.309185+00:00",
+        "status": 200,
+        "content_type": "application/json",
+        "path": "/tmp/persistent/tavis/lit-search/c1133-cont/4a231af5d97a97fbaea1.response",
+        "sha256": "cb4dc20528b1fd928e7981b39cd12db5c0a219572bb4e53611b2d8d26b54a551",
+        "bytes": 3483,
+        "pdf": false
+      },
+      "members": [
+        {
+          "paperId": "19649eaa5b820b9f61fb5ddf19e3bdd7ef96a1c0",
+          "externalIds": {
+            "ArXiv": "2609.06759",
+            "CorpusId": 291871509
+          },
+          "title": "Hasse Obstructions to Rationality for Special Fourfolds",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2609.06759, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [],
+          "abstract": "For every nonempty Hassett divisor $\\mathcal C_d$ parameterizing special cubic fourfolds, we consider the quaternion class $\\beta_d=(d/2,-3)$ in the two-torsion Brauer group. We prove that if a Hodge-general member of ${C}_d$ is rational then $\\beta_d=0$ -- or, equivalently, that Huybrechts'twisted-K3 condition $(**')$ holds. Consequently, a very general member of $\\mathcal C_d$ is irrational if $\\beta_d\\ne0$. Thus, a very general cubic fourfold containing a smooth cubic scroll or a Veronese surface is irrational, and hence so is a very general K\\\"uchle fourfold of type $(\\mathrm{c7})$. We also obtain an analogous obstruction for Hodge--special Gushel--Mukai fourfolds: a very general member in the discriminant--$d$ locus can be rational only if $d$ is a sum of two squares. Consequently, a very general Gushel--Mukai fourfold containing a cubic scroll is irrational."
+        },
+        {
+          "paperId": "68929f355c4f155d82abfcc709bedcd003e52ba0",
+          "externalIds": {
+            "ArXiv": "2603.17487",
+            "CorpusId": 286643431
+          },
+          "title": "Quantum cohomology and irrationality of Gushel-Mukai fourfolds",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2603.17487, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "103299714",
+              "name": "Vladimiro Benedetti"
+            },
+            {
+              "authorId": "2301966377",
+              "name": "L. Manivel"
+            },
+            {
+              "authorId": "2058314724",
+              "name": "N. Perrin"
+            }
+          ],
+          "abstract": "We compute the small quantum cohomology of Gushel-Mukai fourfolds. Following [13], our computations imply that the very general ones are not rational. Following [8], and thanks to a suitable deformation of the small quantum cohomology ring, we also deduce that a rational Gushel-Mukai fourfold has the same rational cohomology as some K3 surface."
+        },
+        {
+          "paperId": "d8b2f71fc2c7b88ce21b2d8d3431915fcc21b4fe",
+          "externalIds": {
+            "ArXiv": "2603.04518",
+            "CorpusId": 286255543
+          },
+          "title": "On the irrationality of cubic fourfolds",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2603.04518, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "102884283",
+              "name": "J'er'emy Gu'er'e"
+            }
+          ],
+          "abstract": "Following the work of Katzarkov--Kontsevich--Pantev--Yu concerning the irrationality of the very general complex cubic fourfold, we prove the following: for every rational smooth complex cubic fourfold, the primitive cohomology is isomorphic as a Hodge structure to the (twisted) middle cohomology of a projective K3 surface."
+        }
+      ],
+      "screened_fields": [
+        "title",
+        "externalIds"
+      ],
+      "screen_method": "Manual title/identifier triage: promote direct birational/rationality comparisons, blowup or framing machinery and potentially overlapping Fano invariants; retain other titles as background leads, not content-level exclusions. No proof-level negative follows from a title screen.",
+      "retrieval_status": "complete returned S2 set"
+    },
+    {
+      "seed": "arXiv:2508.05105",
+      "counts": {
+        "OpenAlex": {
+          "count": 0,
+          "status": 200,
+          "resolved_id": "https://openalex.org/W6967543441",
+          "url": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2508.05105"
+        },
+        "Crossref": {
+          "count": null,
+          "status": 404,
+          "resolved_id": null,
+          "url": "https://api.crossref.org/works/10.48550%2FarXiv.2508.05105"
+        },
+        "Semantic Scholar": {
+          "count": 25,
+          "status": 200,
+          "resolved_id": "5d0db92070100e6ff1dfd91da6f014daa737b3ce",
+          "title": "Birational Invariants from Hodge Structures and Quantum Multiplication",
+          "request_manifest": "2026-09-10-c1133-cont-batch.json"
+        }
+      },
+      "retrieval": {
+        "name": "hodge-citations-reduced",
+        "url": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2508.05105/citations?fields=title,externalIds&limit=100&offset=0",
+        "utc": "2026-09-10T16:59:27.303388+00:00",
+        "status": 200,
+        "content_type": "application/json",
+        "path": "/tmp/persistent/tavis/lit-search/c1133-cont/8b6ef436ca345b3dbc47.response",
+        "sha256": "3ae2a0c1005ac281d8add61a803cdd85e216f23c26d00bb53153a0ec1194a23a",
+        "bytes": 5361,
+        "pdf": false
+      },
+      "members": [
+        {
+          "paperId": "d7b46d5e2439bb76e17b610e84a231a5870a99bf",
+          "externalIds": {
+            "ArXiv": "2609.10353",
+            "CorpusId": 291876435
+          },
+          "title": "Birational cubic fourfolds via an Enriques Cremona transformation"
+        },
+        {
+          "paperId": "19649eaa5b820b9f61fb5ddf19e3bdd7ef96a1c0",
+          "externalIds": {
+            "ArXiv": "2609.06759",
+            "CorpusId": 291871509
+          },
+          "title": "Hasse Obstructions to Rationality for Special Fourfolds"
+        },
+        {
+          "paperId": "26b08ca7202e1a501370b8aca29e13ce5be3d125",
+          "externalIds": {
+            "ArXiv": "2608.12191",
+            "CorpusId": 291037068
+          },
+          "title": "K3 atoms of the cubic fourfold and the BPS structure of the Painlev\\'e I determinant line"
+        },
+        {
+          "paperId": "e1b88ba13cfb7721a8d58daf9894a018f9a495f7",
+          "externalIds": {
+            "ArXiv": "2607.26718",
+            "CorpusId": 290644556
+          },
+          "title": "An atomic criterion for irrationality without quantum computations"
+        },
+        {
+          "paperId": "57ce9d1b468db6be1a219630c5bd3578c8cead11",
+          "externalIds": {
+            "ArXiv": "2607.22074",
+            "DOI": "10.1142/q0592",
+            "CorpusId": 290583294
+          },
+          "title": "Moduli of atoms of complex projective varieties"
+        },
+        {
+          "paperId": "9d1e0e4521ab8e752b69eacb4ebbf4771fe5e811",
+          "externalIds": {
+            "ArXiv": "2607.13270",
+            "CorpusId": 290179038
+          },
+          "title": "Composition of Sarkisov links between del Pezzo surfaces"
+        },
+        {
+          "paperId": "d3ffce40b207e6424511a405d76068e175cfe7f1",
+          "externalIds": {
+            "ArXiv": "2606.17884",
+            "CorpusId": 289628668
+          },
+          "title": "Naive atoms of blowups: examples"
+        },
+        {
+          "paperId": "35afb4942f59505f04f412dd0f25959115e8c0cc",
+          "externalIds": {
+            "ArXiv": "2606.07418",
+            "CorpusId": 288985614
+          },
+          "title": "Gamma conjecture II via global Gamma-I"
+        },
+        {
+          "paperId": "32a3925fa2a7b27f75b95a6116fb3ad2d793ad75",
+          "externalIds": {
+            "ArXiv": "2605.30450",
+            "CorpusId": 288813913
+          },
+          "title": "Quantum cohomology and birational geometry of Verra fourfolds"
+        },
+        {
+          "paperId": "4ebe4f3f17573360a688c5cec5bec33ea1911258",
+          "externalIds": {
+            "ArXiv": "2605.30439",
+            "CorpusId": 288813856
+          },
+          "title": "Equivariant irrationality of very general symmetric Verra fourfolds"
+        },
+        {
+          "paperId": "bab31ac28b3b466253920bd6847af5f423fefae2",
+          "externalIds": {
+            "ArXiv": "2605.29143",
+            "CorpusId": 288741493
+          },
+          "title": "The quartic threefold is symplectically irrational"
+        },
+        {
+          "paperId": "0ef49a34dc0c4f00fe3617cdfcaf5f2a663aa95b",
+          "externalIds": {
+            "ArXiv": "2604.17754",
+            "CorpusId": 287634799
+          },
+          "title": "Hodge Atoms at Conifold Degenerations: F-Bundles, Limiting Mixed Hodge Modules, and the Rigid-Flexible Decomposition"
+        },
+        {
+          "paperId": "b9afbcb7d80690745560f528dd00788b71182b30",
+          "externalIds": {
+            "ArXiv": "2604.14850",
+            "CorpusId": 287508796
+          },
+          "title": "The Very General Verra Fourfold is Irrational"
+        },
+        {
+          "paperId": "6c569cc006e356530e0f033989bd5258768718c5",
+          "externalIds": {
+            "ArXiv": "2604.10028",
+            "CorpusId": 287425237
+          },
+          "title": "Notes on the decomposition theorem for blowups"
+        },
+        {
+          "paperId": "68929f355c4f155d82abfcc709bedcd003e52ba0",
+          "externalIds": {
+            "ArXiv": "2603.17487",
+            "CorpusId": 286643431
+          },
+          "title": "Quantum cohomology and irrationality of Gushel-Mukai fourfolds"
+        },
+        {
+          "paperId": "d681c75efa02d140b20e7c9edd81e0a2596f21ef",
+          "externalIds": {
+            "ArXiv": "2603.16639",
+            "CorpusId": 286584166
+          },
+          "title": "Relating Hodge Atoms, Spectral Triples, and BPS Flows"
+        },
+        {
+          "paperId": "d8b2f71fc2c7b88ce21b2d8d3431915fcc21b4fe",
+          "externalIds": {
+            "ArXiv": "2603.04518",
+            "CorpusId": 286255543
+          },
+          "title": "On the irrationality of cubic fourfolds"
+        },
+        {
+          "paperId": "88844e88009ceb1727bc8abd7f3661ff804d9366",
+          "externalIds": {
+            "ArXiv": "2511.22795",
+            "CorpusId": 283438824
+          },
+          "title": "$\\text{F-manifolds}$, F$_\\text{man}$-algebras and $\\text{Poisson-algebra}$ Distributions"
+        },
+        {
+          "paperId": "14399521286f20c465e8ca1e73542859c0f41dbd",
+          "externalIds": {
+            "ArXiv": "2511.07101",
+            "DOI": "10.2969/jmsj/96599659",
+            "CorpusId": 282911899
+          },
+          "title": "Intermediate Jacobians and Burnside invariants"
+        },
+        {
+          "paperId": "8474a7417e56d745b1082db182f0f6ed641d22f8",
+          "externalIds": {
+            "ArXiv": "2510.21222",
+            "CorpusId": 282384123
+          },
+          "title": "Fibers of Landau-Ginzburg models and rationality"
+        },
+        {
+          "paperId": "9f8f20e47eb735bdc2cf8f6a1b8e81c5780a58fa",
+          "externalIds": {
+            "ArXiv": "2510.00290",
+            "CorpusId": 281705728
+          },
+          "title": "Unboundedness for motivic invariants of birational automorphisms"
+        },
+        {
+          "paperId": "d333d899aeb5cc1d0bf8062460d367d50372583b",
+          "externalIds": {
+            "ArXiv": "2509.07407",
+            "CorpusId": 281218258
+          },
+          "title": "The quantum D-module of product varieties"
+        },
+        {
+          "paperId": "0ec89f23784b1c0f27d5f7cb8e4d4ad654953000",
+          "externalIds": {
+            "ArXiv": "2508.15715",
+            "DBLP": "journals/corr/abs-2508-15715",
+            "DOI": "10.48550/arXiv.2508.15715",
+            "CorpusId": 280699785
+          },
+          "title": "On Vanishing of Gromov-Witten Invariants"
+        },
+        {
+          "paperId": "d6ad1170987ee30f7402f6c12f11c30895292967",
+          "externalIds": {
+            "ArXiv": "2505.13187",
+            "CorpusId": 278769821
+          },
+          "title": "A nonspecial divisor in the moduli space of cubic fourfolds via 10-nodal plane sextics"
+        },
+        {
+          "paperId": "357b8616f50c3a41cd20c13143739dee25fa3d8d",
+          "externalIds": {
+            "ArXiv": "2503.19039",
+            "CorpusId": 277313394
+          },
+          "title": "The intersection of three quadrics in P^7 revisited"
+        }
+      ],
+      "screened_fields": [
+        "title",
+        "externalIds"
+      ],
+      "screen_method": "Manual title/identifier triage: promote direct birational/rationality comparisons, blowup or framing machinery and potentially overlapping Fano invariants; retain other titles as background leads, not content-level exclusions. No proof-level negative follows from a title screen.",
+      "retrieval_status": "complete returned S2 set"
+    },
+    {
+      "seed": "arXiv:2605.29143",
+      "counts": {
+        "OpenAlex": {
+          "count": 0,
+          "status": 200,
+          "resolved_id": "https://openalex.org/W7162789306",
+          "url": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2605.29143"
+        },
+        "Crossref": {
+          "count": null,
+          "status": 404,
+          "resolved_id": null,
+          "url": "https://api.crossref.org/works/10.48550%2FarXiv.2605.29143"
+        },
+        "Semantic Scholar": {
+          "count": 0,
+          "status": 200,
+          "resolved_id": "bab31ac28b3b466253920bd6847af5f423fefae2",
+          "title": "The quartic threefold is symplectically irrational",
+          "request_manifest": "2026-09-10-c1133-cont-batch.json"
+        }
+      },
+      "retrieval": {
+        "name": "citations:2605.29143",
+        "url": "https://api.semanticscholar.org/graph/v1/paper/bab31ac28b3b466253920bd6847af5f423fefae2/citations?fields=title,externalIds,abstract&limit=100",
+        "utc": "2026-09-10T16:58:10.456356+00:00",
+        "status": 200,
+        "content_type": "application/json",
+        "path": "/tmp/persistent/tavis/lit-search/c1133-cont/1874b3a296609d234edb.response",
+        "sha256": "b890c0f15f5c03ba84c2ef5ace10d4d63f07c6388916be8151f53ffbb7a0b479",
+        "bytes": 26,
+        "pdf": false
+      },
+      "members": [],
+      "screened_fields": [
+        "title",
+        "externalIds"
+      ],
+      "screen_method": "Manual title/identifier triage: promote direct birational/rationality comparisons, blowup or framing machinery and potentially overlapping Fano invariants; retain other titles as background leads, not content-level exclusions. No proof-level negative follows from a title screen.",
+      "retrieval_status": "complete returned S2 set"
+    },
+    {
+      "seed": "arXiv:2608.01577",
+      "counts": {
+        "OpenAlex": {
+          "count": 0,
+          "status": 200,
+          "resolved_id": "https://openalex.org/W7172418083",
+          "url": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2608.01577"
+        },
+        "Crossref": {
+          "count": null,
+          "status": 404,
+          "resolved_id": null,
+          "url": "https://api.crossref.org/works/10.48550%2FarXiv.2608.01577"
+        },
+        "Semantic Scholar": {
+          "count": 0,
+          "status": 200,
+          "resolved_id": "2a5f72abaabac8e84c1d8e12d2f4a454bc0c55f0",
+          "title": "The cubic threefold is symplectically irrational",
+          "request_manifest": "2026-09-10-c1133-cont-batch.json"
+        }
+      },
+      "retrieval": null,
+      "members": [],
+      "screened_fields": [
+        "title",
+        "externalIds"
+      ],
+      "screen_method": "Manual title/identifier triage: promote direct birational/rationality comparisons, blowup or framing machinery and potentially overlapping Fano invariants; retain other titles as background leads, not content-level exclusions. No proof-level negative follows from a title screen.",
+      "retrieval_status": "batch count zero; listing request 429"
+    },
+    {
+      "seed": "arXiv:2411.02266",
+      "counts": {
+        "OpenAlex": {
+          "count": 0,
+          "status": 200,
+          "resolved_id": "https://openalex.org/W4404355286",
+          "title": "Decomposition and framing of F‐bundles and applications to quantum cohomology",
+          "url": "https://api.openalex.org/works/https://doi.org/10.1112/plms.70209"
+        },
+        "Crossref": {
+          "count": 0,
+          "status": 200,
+          "resolved_id": "10.1112/plms.70209",
+          "title": [
+            "Decomposition and framing of F‐bundles and applications to quantum cohomology"
+          ],
+          "url": "https://api.crossref.org/works/10.1112%2Fplms.70209"
+        },
+        "Semantic Scholar": {
+          "count": 5,
+          "status": 200,
+          "resolved_id": "13c0d4086f94b05cae8d229269b36d1898c66c1f",
+          "title": "Decomposition and framing of F‐bundles and applications to quantum cohomology",
+          "request_manifest": "2026-09-10-c1133-cont-batch.json"
+        }
+      },
+      "retrieval": {
+        "name": "framing-citations-published",
+        "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1112/plms.70209/citations?fields=title,externalIds&limit=100",
+        "utc": "2026-09-10T16:59:27.417483+00:00",
+        "status": 200,
+        "content_type": "application/json",
+        "path": "/tmp/persistent/tavis/lit-search/c1133-cont/fb049424d62bc0559f74.response",
+        "sha256": "0edd18522d5b352ac21481ab385256723b7e2d70f0b140d216c89df68d032508",
+        "bytes": 1091,
+        "pdf": false
+      },
+      "members": [
+        {
+          "paperId": "26b08ca7202e1a501370b8aca29e13ce5be3d125",
+          "externalIds": {
+            "ArXiv": "2608.12191",
+            "CorpusId": 291037068
+          },
+          "title": "K3 atoms of the cubic fourfold and the BPS structure of the Painlev\\'e I determinant line"
+        },
+        {
+          "paperId": "6c569cc006e356530e0f033989bd5258768718c5",
+          "externalIds": {
+            "ArXiv": "2604.10028",
+            "CorpusId": 287425237
+          },
+          "title": "Notes on the decomposition theorem for blowups"
+        },
+        {
+          "paperId": "43ef1206439696dbc69101b14adfd78e91820f66",
+          "externalIds": {
+            "ArXiv": "2505.09950",
+            "CorpusId": 278636471
+          },
+          "title": "Unfolding of equivariant F-bundles and application to the mirror symmetry of flag varieties"
+        },
+        {
+          "paperId": "95e9974e5527640abbe039ddb0a035bb40f2dcdf",
+          "externalIds": {
+            "ArXiv": "2501.18849",
+            "CorpusId": 276079281
+          },
+          "title": "Fourier analysis of equivariant quantum cohomology"
+        },
+        {
+          "paperId": "25e286a5a9bb25b1f089da1394800e6c1a7f9674",
+          "externalIds": {
+            "ArXiv": "2307.03696",
+            "CorpusId": 259375847
+          },
+          "title": "Quantum cohomology of projective bundles"
+        }
+      ],
+      "screened_fields": [
+        "title",
+        "externalIds"
+      ],
+      "screen_method": "Manual title/identifier triage: promote direct birational/rationality comparisons, blowup or framing machinery and potentially overlapping Fano invariants; retain other titles as background leads, not content-level exclusions. No proof-level negative follows from a title screen.",
+      "retrieval_status": "complete returned S2 set"
+    },
+    {
+      "seed": "arXiv:2606.17884",
+      "counts": {
+        "OpenAlex": {
+          "count": 0,
+          "status": 200,
+          "resolved_id": "https://openalex.org/W7164987236",
+          "url": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2606.17884"
+        },
+        "Crossref": {
+          "count": null,
+          "status": 404,
+          "resolved_id": null,
+          "url": "https://api.crossref.org/works/10.48550%2FarXiv.2606.17884"
+        },
+        "Semantic Scholar": {
+          "count": 0,
+          "status": 200,
+          "resolved_id": "d3ffce40b207e6424511a405d76068e175cfe7f1",
+          "title": "Naive atoms of blowups: examples",
+          "request_manifest": "2026-09-10-c1133-cont-batch.json"
+        }
+      },
+      "retrieval": {
+        "name": "citations:2606.17884",
+        "url": "https://api.semanticscholar.org/graph/v1/paper/d3ffce40b207e6424511a405d76068e175cfe7f1/citations?fields=title,externalIds,abstract&limit=100",
+        "utc": "2026-09-10T16:58:10.564126+00:00",
+        "status": 200,
+        "content_type": "application/json",
+        "path": "/tmp/persistent/tavis/lit-search/c1133-cont/134006ff10ecd3e9b00a.response",
+        "sha256": "b890c0f15f5c03ba84c2ef5ace10d4d63f07c6388916be8151f53ffbb7a0b479",
+        "bytes": 26,
+        "pdf": false
+      },
+      "members": [],
+      "screened_fields": [
+        "title",
+        "externalIds"
+      ],
+      "screen_method": "Manual title/identifier triage: promote direct birational/rationality comparisons, blowup or framing machinery and potentially overlapping Fano invariants; retain other titles as background leads, not content-level exclusions. No proof-level negative follows from a title screen.",
+      "retrieval_status": "complete returned S2 set"
+    },
+    {
+      "seed": "arXiv:2509.15831",
+      "counts": {
+        "OpenAlex": {
+          "count": 0,
+          "status": 200,
+          "resolved_id": "https://openalex.org/W7082656554",
+          "url": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2509.15831"
+        },
+        "Crossref": {
+          "count": null,
+          "status": 404,
+          "resolved_id": null,
+          "url": "https://api.crossref.org/works/10.48550%2FarXiv.2509.15831"
+        },
+        "Semantic Scholar": {
+          "count": 1,
+          "status": 200,
+          "resolved_id": "9102def9d7141a2cf7810c2855d78b2ffa227aaa",
+          "title": "Atoms meet symbols",
+          "request_manifest": "2026-09-10-c1133-cont-batch.json"
+        }
+      },
+      "retrieval": {
+        "name": "citations:2509.15831",
+        "url": "https://api.semanticscholar.org/graph/v1/paper/9102def9d7141a2cf7810c2855d78b2ffa227aaa/citations?fields=title,externalIds,abstract&limit=100",
+        "utc": "2026-09-10T16:58:10.571858+00:00",
+        "status": 200,
+        "content_type": "application/json",
+        "path": "/tmp/persistent/tavis/lit-search/c1133-cont/e6f68b52258a424bf815.response",
+        "sha256": "798750a2e15c8b0a7d9503639b59215893ff436bcc604607b513d3dfbf7ec623",
+        "bytes": 1518,
+        "pdf": false
+      },
+      "members": [
+        {
+          "paperId": "32a3925fa2a7b27f75b95a6116fb3ad2d793ad75",
+          "externalIds": {
+            "ArXiv": "2605.30450",
+            "CorpusId": 288813913
+          },
+          "title": "Quantum cohomology and birational geometry of Verra fourfolds",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2605.30450, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "103299714",
+              "name": "Vladimiro Benedetti"
+            },
+            {
+              "authorId": "102884283",
+              "name": "J'er'emy Gu'er'e"
+            },
+            {
+              "authorId": "2301966377",
+              "name": "L. Manivel"
+            },
+            {
+              "authorId": "2058314724",
+              "name": "N. Perrin"
+            }
+          ],
+          "abstract": "We compute the small quantum cohomology ring of a Verra fourfold. Using the theory of atoms recently developped by Katzarkov--Kontsevich--Pantev--Yu, and building on recent papers of the authors, we deduce that a Verra fourfold is never birational to a very general cubic fourfold, nor to a very general Gushel--Mukai fourfold, whereas it was previously known that a general Verra fourfold is birational to a general nodal Gushel--Mukai fourfold. More precisely, we show that for every smooth cubic fourfold or smooth Gushel--Mukai fourfold that is birational to some Verra fourfold, the primitive cohomology is isomorphic, as a rational Hodge structure, to the middle cohomology of some projective K3 surface."
+        }
+      ],
+      "screened_fields": [
+        "title",
+        "externalIds"
+      ],
+      "screen_method": "Manual title/identifier triage: promote direct birational/rationality comparisons, blowup or framing machinery and potentially overlapping Fano invariants; retain other titles as background leads, not content-level exclusions. No proof-level negative follows from a title screen.",
+      "retrieval_status": "complete returned S2 set"
+    },
+    {
+      "seed": "arXiv:2607.26718",
+      "counts": {
+        "OpenAlex": {
+          "count": 0,
+          "status": 200,
+          "resolved_id": "https://openalex.org/W7171829935",
+          "url": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2607.26718"
+        },
+        "Crossref": {
+          "count": null,
+          "status": 404,
+          "resolved_id": null,
+          "url": "https://api.crossref.org/works/10.48550%2FarXiv.2607.26718"
+        },
+        "Semantic Scholar": {
+          "count": 1,
+          "status": 200,
+          "resolved_id": "e1b88ba13cfb7721a8d58daf9894a018f9a495f7",
+          "title": "An atomic criterion for irrationality without quantum computations",
+          "request_manifest": "2026-09-10-c1133-cont-batch.json"
+        }
+      },
+      "retrieval": {
+        "name": "atomic-citations-reduced",
+        "url": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2607.26718/citations?fields=title,externalIds&limit=100",
+        "utc": "2026-09-10T16:59:27.472226+00:00",
+        "status": 200,
+        "content_type": "application/json",
+        "path": "/tmp/persistent/tavis/lit-search/c1133-cont/6e18553f26ed07f0a654.response",
+        "sha256": "17576a139b8ba23bc6588ae72a7a9c7176cb61da794fe0e759c72a6b0761d20d",
+        "bytes": 229,
+        "pdf": false
+      },
+      "members": [
+        {
+          "paperId": "19649eaa5b820b9f61fb5ddf19e3bdd7ef96a1c0",
+          "externalIds": {
+            "ArXiv": "2609.06759",
+            "CorpusId": 291871509
+          },
+          "title": "Hasse Obstructions to Rationality for Special Fourfolds"
+        }
+      ],
+      "screened_fields": [
+        "title",
+        "externalIds"
+      ],
+      "screen_method": "Manual title/identifier triage: promote direct birational/rationality comparisons, blowup or framing machinery and potentially overlapping Fano invariants; retain other titles as background leads, not content-level exclusions. No proof-level negative follows from a title screen.",
+      "retrieval_status": "complete returned S2 set"
+    },
+    {
+      "seed": "arXiv:2607.22074",
+      "counts": {
+        "OpenAlex": {
+          "count": 0,
+          "status": 200,
+          "resolved_id": "https://openalex.org/W7171402105",
+          "url": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2607.22074"
+        },
+        "Crossref": {
+          "count": null,
+          "status": 404,
+          "resolved_id": null,
+          "url": "https://api.crossref.org/works/10.48550%2FarXiv.2607.22074"
+        },
+        "Semantic Scholar": {
+          "count": 1,
+          "status": 200,
+          "resolved_id": "57ce9d1b468db6be1a219630c5bd3578c8cead11",
+          "title": "Moduli of atoms of complex projective varieties",
+          "request_manifest": "2026-09-10-c1133-cont-batch.json"
+        }
+      },
+      "retrieval": {
+        "name": "citations:2607.22074",
+        "url": "https://api.semanticscholar.org/graph/v1/paper/57ce9d1b468db6be1a219630c5bd3578c8cead11/citations?fields=title,externalIds,abstract&limit=100",
+        "utc": "2026-09-10T16:58:10.666793+00:00",
+        "status": 200,
+        "content_type": "application/json",
+        "path": "/tmp/persistent/tavis/lit-search/c1133-cont/3f4eb7067d0dfea1ee94.response",
+        "sha256": "c6c27213d6c88df913f073fe6e103a269832452759e742bb1af2bf045214e16b",
+        "bytes": 1573,
+        "pdf": false
+      },
+      "members": [
+        {
+          "paperId": "d333d899aeb5cc1d0bf8062460d367d50372583b",
+          "externalIds": {
+            "ArXiv": "2509.07407",
+            "CorpusId": 281218258
+          },
+          "title": "The quantum D-module of product varieties",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2509.07407, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "1390058806",
+              "name": "'Ad'am Gyenge"
+            }
+          ],
+          "abstract": "We study the quantum connection of product varieties in the framework of quantum cohomology. Our first main result shows that, near the origin of the Novikov variables, the quantum spectrum of \\(X \\times Y\\) converges to the set of pairwise sums of the spectra of \\(X\\) and \\(Y\\). This arises from the leading contribution of the connection matrices \\(K_X \\otimes \\mathrm{id}\\) and \\(\\mathrm{id} \\otimes K_Y\\), while mixed curve classes contribute only at higher order. Our second main result establishes a formal isomorphism of quantum \\(D\\)-modules $ \\mathrm{QDM}(X \\times Y)^{\\mathrm{la}} \\cong \\mathrm{QDM}(X)^{\\mathrm{la}} \\otimes \\mathrm{QDM}(Y)^{\\mathrm{la}}$, compatible with the quantum connection. As applications, we show that atoms, birational invariants arising from quantum cohomology, factor multiplicatively for product varieties, and we deduce the existence of a motivic measure associated with atoms."
+        }
+      ],
+      "screened_fields": [
+        "title",
+        "externalIds"
+      ],
+      "screen_method": "Manual title/identifier triage: promote direct birational/rationality comparisons, blowup or framing machinery and potentially overlapping Fano invariants; retain other titles as background leads, not content-level exclusions. No proof-level negative follows from a title screen.",
+      "retrieval_status": "complete returned S2 set"
+    },
+    {
+      "seed": "arXiv:2510.21222",
+      "counts": {
+        "OpenAlex": {
+          "count": 0,
+          "status": 200,
+          "resolved_id": "https://openalex.org/W4417326007",
+          "url": "https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2510.21222"
+        },
+        "Crossref": {
+          "count": null,
+          "status": 404,
+          "resolved_id": null,
+          "url": "https://api.crossref.org/works/10.48550%2FarXiv.2510.21222"
+        },
+        "Semantic Scholar": {
+          "count": 1,
+          "status": 200,
+          "resolved_id": "8474a7417e56d745b1082db182f0f6ed641d22f8",
+          "title": "Fibers of Landau-Ginzburg models and rationality",
+          "request_manifest": "2026-09-10-c1133-cont-batch.json"
+        }
+      },
+      "retrieval": {
+        "name": "citations:2510.21222",
+        "url": "https://api.semanticscholar.org/graph/v1/paper/8474a7417e56d745b1082db182f0f6ed641d22f8/citations?fields=title,externalIds,abstract&limit=100",
+        "utc": "2026-09-10T16:58:10.679213+00:00",
+        "status": 200,
+        "content_type": "application/json",
+        "path": "/tmp/persistent/tavis/lit-search/c1133-cont/1914d2f6993cae0526dd.response",
+        "sha256": "1eadf1a3c30632269f83fc30b6336baef022398ff6e4ac53bb5c62b8c78e6832",
+        "bytes": 1437,
+        "pdf": false
+      },
+      "members": [
+        {
+          "paperId": "f12121b1556f05f39a34f870fa819cb5d995ecb1",
+          "externalIds": {
+            "ArXiv": "2604.26592",
+            "CorpusId": 287902104
+          },
+          "title": "On Arithmetic Mirror Symmetry for smooth Fano fourfolds",
+          "openAccessPdf": {
+            "url": "",
+            "status": null,
+            "license": null,
+            "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2604.26592, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+          },
+          "authors": [
+            {
+              "authorId": "2400304735",
+              "name": "M.S. Ovcharenko"
+            }
+          ],
+          "abstract": "We introduce an explicit class of tempered Laurent polynomials in the sense of Villegas and Doran--Kerr in $n \\leqslant 4$ variables including all Landau--Ginzburg models for smooth Fano threefolds with very ample anticanonical class. We check that it contains Landau--Ginzburg models for various Fano fourfolds which are complete intersections in smooth toric varieties and Grassmannians of planes, or are quiver flag zero loci. We discuss implications to Arithmetic Mirror Symmetry conjecture, a Hodge-theoretic approach to the study of Ap\\'{e}ry constants of Fano varieties proposed by Golyshev--Kerr--Sasaki. Using the partial case of Arithmetic Mirror Symmetry conjecture proved by Kerr, we construct two examples of a Mirror Symmetry correspondence between specific algebraic classes."
+        }
+      ],
+      "screened_fields": [
+        "title",
+        "externalIds"
+      ],
+      "screen_method": "Manual title/identifier triage: promote direct birational/rationality comparisons, blowup or framing machinery and potentially overlapping Fano invariants; retain other titles as background leads, not content-level exclusions. No proof-level negative follows from a title screen.",
+      "retrieval_status": "complete returned S2 set"
+    }
+  ],
+  "membership_total": 59,
+  "unique_papers": 39,
+  "coverage": "All returned S2 memberships title-screened. Published F-bundle aliases resolved; edited-volume DOI for Moduli of atoms excluded. Cross-service and body-read gates remain."
+}

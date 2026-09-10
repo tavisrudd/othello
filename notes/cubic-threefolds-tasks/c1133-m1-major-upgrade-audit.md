@@ -14,16 +14,16 @@ rank-three, odd-cubic, motive and cone dispositions are separate; no optional
 result becomes a core premise.
 
 **Latest source pass (2026-09-10):**
-`notes/2026-09-10-c1133-source-literature-closeout.md`. The original
-Narasimhan–Nori theorem is verified from all four scanned pages, closing the
-arithmetic source gap. Cai's cubic paper and the atomic-criterion paper are
-now fully read. The register has 79 sources (78 external and one local),
-including eight external full-text reads (six papers, two source scripts).
-The ordinary equivariant P¹-stabilization and isogeny-sensitive results in
-*Atoms meet symbols* are credited separately from its conjectural Chen–Ruan
-extension. The owning novelty ledger is updated. Two further mirror papers
-have primary statement reads. Forty-eight graph requests expose persistent
-service gaps and a rejected edited-volume DOI alias.
+`notes/2026-09-10-c1133-citation-followup.md`. Twelve exact S2 seed sets now
+supply 59 memberships (39 distinct works), title/identifier-screened. The
+register has 88 sources (87 external, one local), eight external full-text
+reads (six papers, two source scripts). The F-bundle publication DOI is
+resolved. The withdrawn ordinary Verra claim is distinguished from its
+equivariant replacement; new partial primary reads credit explicit
+finite-group-equivariant blowup comparison and rational-Hodge restrictions
+on birational fourfold partners in the owning novelty ledger. The earlier
+closeout verifies original Narasimhan–Nori and fully reads Cai and the atomic
+criterion. Crossref arXiv-DOI failures remain unavailable, not zeros.
 
 **Exact remaining literature/source gates:** published spectra chapter
 version match; categorical-base-loci chapter body; outstanding graph/service

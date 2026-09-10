@@ -1,0 +1,24 @@
+{
+  "url": "https://api.semanticscholar.org/graph/v1/paper/batch?fields=paperId,title,externalIds,citationCount",
+  "method": "POST",
+  "body": {
+    "ids": [
+      "ARXIV:2307.13555",
+      "ARXIV:2307.03696",
+      "ARXIV:2604.10028",
+      "ARXIV:2508.05105",
+      "ARXIV:2605.29143",
+      "ARXIV:2608.01577",
+      "ARXIV:2411.02266",
+      "ARXIV:2606.17884",
+      "ARXIV:2509.15831",
+      "ARXIV:2607.26718",
+      "ARXIV:2607.22074",
+      "ARXIV:2510.21222"
+    ]
+  },
+  "utc": "2026-09-10T16:57:40.468704+00:00",
+  "status": 200,
+  "path": "/tmp/persistent/tavis/lit-search/c1133-cont/s2-batch.response",
+  "sha256": "a97ffc15471a12a3ff085cb28ef1e3ff2a749d8781b86234a9bab5ead0f1977c"
+}

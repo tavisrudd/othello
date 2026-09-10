@@ -1,0 +1,110 @@
+[
+  {
+    "name": "body:2210.08939",
+    "url": "https://arxiv.org/pdf/2210.08939",
+    "utc": "2026-09-10T16:59:27.051641+00:00",
+    "status": 200,
+    "content_type": "application/pdf",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/0e179804baee07108434.response",
+    "sha256": "b05529c1d5ae9d12c47d58802b87e09407a90a79eb3336b1ab643bdcebc5279e",
+    "bytes": 459802,
+    "pdf": true
+  },
+  {
+    "name": "body:2605.30439",
+    "url": "https://arxiv.org/pdf/2605.30439",
+    "utc": "2026-09-10T16:59:27.052660+00:00",
+    "status": 200,
+    "content_type": "application/pdf",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/16d2f878efe51b516537.response",
+    "sha256": "6c74f3debc43e1c51bfa1ac61e0f20715535252850badef248899d8d18e2215c",
+    "bytes": 563194,
+    "pdf": true
+  },
+  {
+    "name": "body:2604.14850",
+    "url": "https://arxiv.org/pdf/2604.14850",
+    "utc": "2026-09-10T16:59:27.053039+00:00",
+    "status": 404,
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/85d5f0c8d3e671d2af71.response",
+    "sha256": "4e96ac8688711b95e1ea78aefcd3db048e1580cf1d1bd261ebd39aa98d5ec755",
+    "bytes": 7705,
+    "pdf": false
+  },
+  {
+    "name": "body:2609.06759",
+    "url": "https://arxiv.org/pdf/2609.06759",
+    "utc": "2026-09-10T16:59:27.210182+00:00",
+    "status": 200,
+    "content_type": "application/pdf",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/e510c898b75ead3d9db0.response",
+    "sha256": "33be1da8f8a6a9922e783ff119d4d67f414578573eca585f8f5c2de926958d60",
+    "bytes": 308338,
+    "pdf": true
+  },
+  {
+    "name": "body:2604.26592",
+    "url": "https://arxiv.org/pdf/2604.26592",
+    "utc": "2026-09-10T16:59:27.261170+00:00",
+    "status": 200,
+    "content_type": "application/pdf",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/227d7f11ce6a0c8e6e34.response",
+    "sha256": "b0382947554e1b3489332968c240758510cf6aff97cbbbfd045e4d30a3a60a1f",
+    "bytes": 914025,
+    "pdf": true
+  },
+  {
+    "name": "body:2605.30450",
+    "url": "https://arxiv.org/pdf/2605.30450",
+    "utc": "2026-09-10T16:59:27.285133+00:00",
+    "status": 200,
+    "content_type": "application/pdf",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/f32272f01328bf303276.response",
+    "sha256": "623d505a6e7de518e58d05fccc817ec7f56d795af09e681bbbcc390e00621e51",
+    "bytes": 382083,
+    "pdf": true
+  },
+  {
+    "name": "hodge-citations-reduced",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2508.05105/citations?fields=title,externalIds&limit=100&offset=0",
+    "utc": "2026-09-10T16:59:27.303388+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/8b6ef436ca345b3dbc47.response",
+    "sha256": "3ae2a0c1005ac281d8add61a803cdd85e216f23c26d00bb53153a0ec1194a23a",
+    "bytes": 5361,
+    "pdf": false
+  },
+  {
+    "name": "framing-citations-published",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1112/plms.70209/citations?fields=title,externalIds&limit=100",
+    "utc": "2026-09-10T16:59:27.417483+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/fb049424d62bc0559f74.response",
+    "sha256": "0edd18522d5b352ac21481ab385256723b7e2d70f0b140d216c89df68d032508",
+    "bytes": 1091,
+    "pdf": false
+  },
+  {
+    "name": "atomic-citations-reduced",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:2607.26718/citations?fields=title,externalIds&limit=100",
+    "utc": "2026-09-10T16:59:27.472226+00:00",
+    "status": 200,
+    "content_type": "application/json",
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/6e18553f26ed07f0a654.response",
+    "sha256": "17576a139b8ba23bc6588ae72a7a9c7176cb61da794fe0e759c72a6b0761d20d",
+    "bytes": 229,
+    "pdf": false
+  },
+  {
+    "name": "miami-mirror",
+    "url": "https://citeseerx.ist.psu.edu/document?doi=9cc2fff5a2a0559bf6ba851ad083494c111f8f0a&repid=rep1&type=pdf",
+    "utc": "2026-09-10T16:59:27.548303+00:00",
+    "status": 404,
+    "path": "/tmp/persistent/tavis/lit-search/c1133-cont/fb041d62289bd9e0dd73.response",
+    "sha256": "e72310208281107970eafb7d2ca8fe74cef6778e103555f20f823ba764987857",
+    "bytes": 142303,
+    "pdf": false
+  }
+]

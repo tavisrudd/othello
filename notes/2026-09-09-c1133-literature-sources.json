@@ -239,7 +239,11 @@
       "read_scope": "Cached v2 extracted text lines 1–305 (introduction and stated decomposition/framing/application results) and 3150–3214 (Definition 4.33, Theorem 4.34, Corollary 4.35 and proof opening). No complete proof or complete paper read.",
       "role_status": "Formal spectral decomposition and framing precursor. Nonsimple framing classification in Theorem 4.34 has explicit coefficient-ring and grading hypotheses; the simple-spectrum corollary does not supply unrestricted rank-three framing rigidity.",
       "title": "Decomposition and framing of F-bundles and applications to quantum cohomology",
-      "version_in_cached_header": "arXiv:2411.02266v2 [math.AG] 28 Mar 2025"
+      "version_in_cached_header": "arXiv:2411.02266v2 [math.AG] 28 Mar 2025",
+      "publication_identity_followup": {
+        "doi": "10.1112/plms.70209",
+        "evidence": "2026-09-10-c1133-cont-screen.json; matching S2/OpenAlex/Crossref title and pinned DOI; published body not read"
+      }
     },
     {
       "access": {
@@ -1159,6 +1163,138 @@
         "sha256": "ec0509629e3978b5f728dcfc8b00563d87b036c43723a026e68a54197dba7274"
       },
       "role_status": "Surface and two-TZ-series statements verified. Does not identify source for packet sections 30–31 special pencil; companion-specific imports withheld."
+    },
+    {
+      "key": "arXiv:2501.18849",
+      "title": "Fourier analysis of equivariant quantum cohomology",
+      "read_depth": "partial",
+      "read_scope": "v2; extracted lines 1–130: abstract and introduction.",
+      "role_status": "Survey of Fourier/shift machinery; general reduction/GIT proposal is conjectural; proved projective-bundle/blowup cases are credited. No full-paper comparison.",
+      "access": {
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2501.18849.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2501.18849.txt",
+        "sha256": "7a949edc17fe87f2af306dc663a95056e4636e8c312df09303c6f6f702afdc39",
+        "url": "https://arxiv.org/pdf/2501.18849"
+      }
+    },
+    {
+      "key": "arXiv:2210.08939",
+      "title": "Blow-ups and the quantum spectrum of surfaces",
+      "read_depth": "partial",
+      "read_scope": "v3; extracted lines 1–170, introduction through Theorem 1.1 and comparison to Iritani.",
+      "role_status": "Primary surface spectral blowup predecessor: analytic asymptotics of eigenvalues along a conical parameter domain, not an audited general-center original-lattice comparison.",
+      "access": {
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2210.08939.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2210.08939.txt",
+        "sha256": "b05529c1d5ae9d12c47d58802b87e09407a90a79eb3336b1ab643bdcebc5279e",
+        "url": "https://arxiv.org/pdf/2210.08939"
+      }
+    },
+    {
+      "key": "arXiv:2605.30439",
+      "title": "Equivariant irrationality of very general symmetric Verra fourfolds",
+      "read_depth": "partial",
+      "read_scope": "v1; extracted lines 1–155 and 563–655, including Theorem 5.2 and its proof; end of Remark 5.4 not read.",
+      "role_status": "Credit explicit finite-group-equivariant Iritani decomposition and evaluated Z/2-irrationality with regular involution on target. Does not assert ordinary irrationality of Verra fourfolds.",
+      "access": {
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2605.30439.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2605.30439.txt",
+        "sha256": "6c74f3debc43e1c51bfa1ac61e0f20715535252850badef248899d8d18e2215c",
+        "url": "https://arxiv.org/pdf/2605.30439"
+      }
+    },
+    {
+      "key": "arXiv:2605.30450",
+      "title": "Quantum cohomology and birational geometry of Verra fourfolds",
+      "read_depth": "partial",
+      "read_scope": "v1; extracted lines 1–180, Theorem 1 and comparison to Fay.",
+      "role_status": "Credit birational-partner restrictions in rational Hodge structures and distinction between ordinary and equivariant rationality. Fourfold comparison is prior; whole-H3 one-stable conservation remains a differently scoped candidate.",
+      "access": {
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2605.30450.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2605.30450.txt",
+        "sha256": "623d505a6e7de518e58d05fccc817ec7f56d795af09e681bbbcc390e00621e51",
+        "url": "https://arxiv.org/pdf/2605.30450"
+      }
+    },
+    {
+      "key": "arXiv:2609.06759",
+      "title": "Hasse Obstructions to Rationality for Special Fourfolds",
+      "read_depth": "partial",
+      "read_scope": "v1; extracted lines 1–155, Theorem 1.1 and Corollary 1.2.",
+      "role_status": "Hodge-general special cubic fourfold rationality forces vanishing of a quaternion Brauer class. Arithmetic of rational quadratic Hodge forms, not the bounded-degree geometric threefold-partner finiteness statement D; this distinction is the auditor inference from the read statements.",
+      "access": {
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2609.06759.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2609.06759.txt",
+        "sha256": "33be1da8f8a6a9922e783ff119d4d67f414578573eca585f8f5c2de926958d60",
+        "url": "https://arxiv.org/pdf/2609.06759"
+      }
+    },
+    {
+      "key": "arXiv:2604.26592",
+      "title": "On Arithmetic Mirror Symmetry for smooth Fano fourfolds",
+      "read_depth": "partial",
+      "read_scope": "v3; extracted lines 1–155, abstract and introduction including Theorem 1.1 and Proposition 1.2.",
+      "role_status": "Tempered Laurent polynomials and motivic extensions for mirror families. Its use of arithmetic and irrationality does not identify the read statements with D; not a full-paper exclusion.",
+      "access": {
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2604.26592.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2604.26592.txt",
+        "sha256": "b0382947554e1b3489332968c240758510cf6aff97cbbbfd045e4d30a3a60a1f",
+        "url": "https://arxiv.org/pdf/2604.26592"
+      }
+    },
+    {
+      "key": "arXiv:2604.14850",
+      "title": "The Very General Verra Fourfold is Irrational",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "v2; arXiv abstract and author withdrawal comment, 2026-05-29 revision.",
+      "role_status": "Withdrawn. Author identifies ordinary weak factorization used as if symmetry-compatible; replacement is arXiv:2605.30439. No body read and no ordinary-irrationality theorem imported.",
+      "access": {
+        "name": "landing:2604.14850",
+        "url": "https://arxiv.org/abs/2604.14850",
+        "utc": "2026-09-10T17:04:37.019233+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "path": "/tmp/persistent/tavis/lit-search/c1133-cont/81dc9a595f9514de2d9a.response",
+        "sha256": "035e7370585f2cba5e2ce6b757aad6d5d3a53f2ca8b8ddf3d85e056690cb4c49",
+        "bytes": 38628,
+        "pdf": false
+      }
+    },
+    {
+      "key": "arXiv:2609.10353",
+      "title": "Birational cubic fourfolds via an Enriques Cremona transformation",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "v1; arXiv abstract/metadata, submitted 2026-09-09.",
+      "role_status": "Abstract reports birational equivalence of a very general discriminant-44 cubic fourfold with its Fourier–Mukai partner. Dimension/scope differ from B/C; body not read.",
+      "access": {
+        "name": "landing:2609.10353",
+        "url": "https://arxiv.org/abs/2609.10353",
+        "utc": "2026-09-10T17:04:37.020467+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "path": "/tmp/persistent/tavis/lit-search/c1133-cont/fe6351f3c8d3539411ef.response",
+        "sha256": "7b17595c76abef18a62d7c8c832ce549d122dbd52e0f2a911762a40046f3404c",
+        "bytes": 40027,
+        "pdf": false
+      }
+    },
+    {
+      "key": "arXiv:2608.12191",
+      "title": "K3 atoms of the cubic fourfold and the BPS structure of the Painlevé I determinant line",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "v1; arXiv abstract/metadata.",
+      "role_status": "Abstract concerns dynamical protection conjecture and solvable models/Painlevé dictionary; not used as a theorem input or content-level exclusion.",
+      "access": {
+        "name": "landing:2608.12191",
+        "url": "https://arxiv.org/abs/2608.12191",
+        "utc": "2026-09-10T17:04:37.020924+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "path": "/tmp/persistent/tavis/lit-search/c1133-cont/1ca85f0057d418aeeacc.response",
+        "sha256": "7044b442375b232576ab3c66030ec4dc1f1fc99c6f1023586e96e2e8025aa503",
+        "bytes": 41157,
+        "pdf": false
+      }
     }
   ],
   "external_full_text_breakdown": {
