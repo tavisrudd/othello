@@ -68,11 +68,14 @@ The zbMATH query now has 274/274 distinct records title-screened, with both
 licensed-out titles resolved. An author-hosted spectra chapter is now partially read and explicitly credits
 the older cubic exponents and spectral irrationality program in the owning
 novelty ledger. Its published-version match and the categorical base-loci body
-remain open; the source register has 78 entries at explicit read depths.
+remain open; the source register has 77 entries at explicit read depths.
 The local sharpness surface theorem is pinned; the packet-pencil hypotheses
 and separate moduli theorem are still not source-verified.
 No global novelty verdict or manuscript promotion has passed. Review of
 manuscript upgrades and hierarchy remains after these gates.
+
+One-hour continuation summary:
+`notes/2026-09-09-c1133-one-hour-checkpoint.md`.
 
 ## Objective and order
 

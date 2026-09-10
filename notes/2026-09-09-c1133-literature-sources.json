@@ -364,12 +364,19 @@
         "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_2509.15831.pdf",
         "sha256": "cb4260a1f7e1407e9dda5c090d82f0cef99bfb7c704363c518d00c36b8614119",
         "text": "/tmp/persistent/tavis/lit-search/text/arXiv_2509.15831.txt",
-        "url": "https://arxiv.org/pdf/2509.15831"
+        "url": "https://arxiv.org/pdf/2509.15831",
+        "landing_snapshot": {
+          "url": "https://arxiv.org/abs/2509.15831v4",
+          "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/atoms-meet-symbols.html",
+          "bytes": 40366,
+          "sha256": "7c250d563f8d2b7f6d74267a69fa60172051ac9f6fead6ee844e234c767c0c17",
+          "status": "retrieved"
+        }
       },
       "key": "arXiv:2509.15831",
       "read_depth": "partial",
-      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet. v4; introduction opening 1–80. Conditional Chen–Ruan blowup framework and separate geometric finite-group invariants; no full-paper exclusion.",
-      "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
+      "read_scope": "v4 introduction opening, extracted lines 1–80, read at an earlier checkpoint. Conditional Chen–Ruan blowup framework and separate geometric finite-group invariants; no full-paper exclusion. Current v4 landing abstract and version history also read during the one-hour continuation. Earlier partial-text depth is retained.",
+      "role_status": "Equivariant/Chen–Ruan atom precursor. The withdrawn arXiv:2405.07322 notice now independently points to this already registered source. Its conditional blowup framework and separate geometric construction are retained; no full-paper exclusion or comprehensive A–D overlap verdict.",
       "title": "Atoms meet symbols",
       "version_in_cached_header": "arXiv:2509.15831v4 [math.AG] 1 Apr 2026"
     },
@@ -1070,21 +1077,6 @@
         "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/equivariant-withdrawn.html",
         "bytes": 40665,
         "sha256": "51aad6624901697100614676165ad227e782471ba7afbd45b4183aa8b24b908a",
-        "status": "retrieved"
-      }
-    },
-    {
-      "key": "arXiv:2509.15831",
-      "title": "Atoms meet symbols",
-      "read_depth": "abstract/metadata only",
-      "read_scope": "Current v4 landing abstract and bibliographic/version metadata read; paper body unread.",
-      "role_status": "Close equivariant/Chen-Ruan atom lead reached from withdrawal notice. Abstract explicitly assumes a quantum Chen-Ruan blowup formula for the atom extension and separately describes purely geometric invariants. No conclusion on overlap with A–D without body comparison.",
-      "version_in_cached_header": "arXiv:2509.15831v4, 1 April 2026",
-      "access": {
-        "url": "https://arxiv.org/abs/2509.15831v4",
-        "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/atoms-meet-symbols.html",
-        "bytes": 40366,
-        "sha256": "7c250d563f8d2b7f6d74267a69fa60172051ac9f6fead6ee844e234c767c0c17",
         "status": "retrieved"
       }
     },

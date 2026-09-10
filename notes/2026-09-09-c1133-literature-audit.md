@@ -3,7 +3,7 @@
 **Date:** 2026-09-09. **Lane:** `cubic-threefolds`.
 **Status:** incomplete; no global novelty or priority verdict is issued.
 **External sources read at full text: 5 — three papers and two source scripts.**
-The source register contains 78 individual entries, with exact read depths,
+The source register contains 77 individual entries, with exact read depths,
 versions, cache access and hashes. Most papers have partial read depth.
 Iritani’s ten-page Hodge refinement has now been read completely.
 The author-supplied packet has been read completely, including its checker.
@@ -647,7 +647,22 @@ unconditional geometric QDM input for A–D. Withdrawal alone is not a correctne
 verdict on the older text. The institutional list's older “submitted” label
 must not override the current arXiv notice.
 
-The register now has **78 entries**, including these five metadata/abstract
-leads; full-text count stays **five**. This expansion improves the audit's
+The register now has **77 entries**, including four new metadata/abstract
+leads and the corroborating link to an already registered source; full-text count stays **five**. This expansion improves the audit's
 coverage and version control but leaves the listed body and alias obligations
 open. No assertion of comprehensive absence is made.
+
+
+### Explicit convention bridge for the older cubic computation
+
+The author-hosted chapter's printed p. 285 gives `K=2U_(6,15)` at q=1 and
+`G=diag(-3,-1,1,3)/2` in `(∂u+K/u²+G/u)ψ=0`. This is a direct text-level
+check, not a bibliography inference. Setting `u=-z` changes the equation to
+`z²∂z y=(K+zD)y` with `D=-G`, exactly the grading sign used in the present
+parameterized calculation. With the constant basis change
+`S=diag(1,2,4,8)`, direct entrywise multiplication gives
+`S⁻¹ K S=U_(24,60)` and `S⁻¹DS=D`. Thus the older displayed system matches the
+cubic numerical input of the new Lean calculation, not just its final exponent
+values. This normalization is the auditor's explicit algebraic inference from
+the printed matrices. It makes no additional claim about the chapter's
+birational comparison foundations or its published-version equivalence.

@@ -49,7 +49,7 @@ audit; it does not change the manuscript's current theorem hierarchy or formal
 coverage. The detailed scope is in
 [`2026-09-09-c1133-acceptance-map.md`](../../notes/2026-09-09-c1133-acceptance-map.md).
 The complete literature audit is still open. Its source register currently has
-78 entries; only five external sources (three papers and two source scripts)
+77 entries; only five external sources (three papers and two source scripts)
 are read in full. Every other entry records its actual partial or metadata
 scope. The earlier bounded absence statements above must be read with this
 expanded, still incomplete coverage boundary.
@@ -72,7 +72,10 @@ URL are recorded under `Katzarkov-DSciThesis-v2` in the
 [source register](../../notes/2026-09-09-c1133-literature-sources.json).
 Do not claim that the cubic exponent values first appeared in the present
 paper or Cai's work. The chapter's cubic quantity δ=5/3 is its asymptotic
-dimension, not the squared residue gap 4/9 used here.
+dimension, not the squared residue gap 4/9 used here. The displayed matrix
+also matches: after u=−z and the constant basis diag(1,2,4,8), its K=2U_(6,15)
+becomes U_(24,60), with the present grading. This explicit normalization is
+recorded as an auditor inference in the literature audit.
 
 The chapter attributes its birational splitting theorem and several detailed
 arguments to *Blow up formulae*, reference [142], in preparation. This is an
@@ -94,7 +97,8 @@ listed obligations.
 
 **Further equivariant leads.** The institutional CKGA list led to withdrawn
 arXiv:2405.07322 and its stated successor, *Atoms meet symbols*,
-arXiv:2509.15831v4. Only abstracts and metadata have been read. The latter
+arXiv:2509.15831v4. The withdrawn source has abstract/metadata depth; the successor already had
+a partial introduction read, which is retained alongside this metadata check. The latter
 explicitly makes its Chen–Ruan atom extension conditional on the relevant
 blowup formula. Three older institutional preprint labels have unresolved
 identities/aliases. They remain audit obligations, not negative evidence or

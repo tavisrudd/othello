@@ -63,6 +63,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   preserve resonant discriminant-one cases and the independent rank-three odd
   selector. Next audit work: exact sharpness/moduli imports and remaining
   novelty/citation coverage. Collaborator discussion is parked per author.
+  One-hour checkpoint: `../2026-09-09-c1133-one-hour-checkpoint.md`.
   No global novelty verdict yet. Card:
   `../cubic-threefolds-tasks/c1133-m1-major-upgrade-audit.md`; audit:
   `../2026-09-09-c1133-literature-audit.md`.
