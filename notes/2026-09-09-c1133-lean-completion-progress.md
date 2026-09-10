@@ -328,3 +328,52 @@ completion needs an additional coefficient-finiteness/substitution argument.
 The geometric QDM base identification and comparison isomorphisms remain
 separate imports as required by the implementation map. No claim of complete
 L4 coverage follows from the 348-terminal checkpoint.
+
+The localization, degree-raising nilpotence, positive-line isotropic vanishing,
+and actual classical-curve loop residue leaves now pass guarded elaboration.
+The corresponding Lake roots are added but the combined gate is not yet run.
+During the surface assembly, the exact-primary datatype was found not to
+represent centered rank-two blocks with zero leading operator (the elliptic
+case). `Quantum/ExactPrimaryLedger.lean` now explicitly retains those blocks,
+their actual loops and full odd dimensions with zero selector weight, and
+requires regular horizontal comparisons plus odd-space equivalence in that
+case. This is an eligibility-domain repair, not an assertion that their odd
+cohomology vanishes. Its guard and affected public audit must pass before
+this change is committed. The four new leaves, this ledger edit and Lake roots
+are the owned uncommitted source set.
+
+The five-leaf dependency gate passed at `run-20260910-040536-1aa423ef`:
+localization, strict-degree nilpotence, positive-line isotropic vanishing,
+classical curve residue, and the scalar-leading eligibility repair to the
+exact-primary ledger. `Quantum/NefSurfacePrimarySeed.lean` passed
+`run-20260910-040921-4012c425`, with exact declarations
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.NefSurfacePrimarySeed.nilpotent`
+and `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.NefSurfacePrimarySeed.weight_zero`.
+The complete `Quantum/LowDimensionalPrimaryExpressions.lean` elaborates:
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.SurfacePrimaryExpression.weight_zero`
+and `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.CurvePrimarySeed.weight_zero`.
+The new three public terminals are awaiting their 351-terminal audit.
+Additional authored, untested leaves are
+`Quantum/ExactPrimaryOccurrenceDescent.lean` and `Quantum/SeventeenExactSignatures.lean`.
+No actual-variety classification or Hodge-conservation coverage is promoted.
+
+The 351-terminal gate passed at `run-20260910-041430-9da2ee98`, run ID
+`20260910-041430-fa535e02`, followed by the axiom/registry comparison.
+Public additions in `PaperInterface/Main.lean`:
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.faithfulCoefficientMap_on_imageLocalizations`,
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.nefSurfaceLinearSeed_nilpotence_and_exactSelector_zero`,
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.lowDimensionalPrimaryExpressions_exactSelector_zero`.
+Each uses only the three standard axioms. Counts: 351 public / 113 machinery,
+with unchanged manuscript coverage. This includes the scalar-leading
+rank-two eligibility repair and the six new localization/surface leaves.
+It does not identify those linear/block models with geometric QDMs.
+
+`Quantum/SeventeenExactSignatures.lean` now elaborates its finite nine/eight
+label count and doubled nonvanishing; exact declarations
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.countingExactSignature_ne_zero_iff`
+and `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.countingExactSignature_label_counts`.
+Its four half-odd dimensions and simple-control interpretation are stated
+inputs to the finite table, not new geometric proofs. This leaf is not yet
+in the public gate. Uncommitted continuations also include
+`Quantum/ExactPrimaryOccurrenceDescent.lean` (under elaboration) and
+`Quantum/FormalIdempotentConjugacy.lean` (authored, untested).

@@ -1,3 +1,5 @@
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.LowDimensionalPrimaryExpressions
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.FaithfulLocalizedCoefficientMaps
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.FaithfulCompletedExponentialRingMap
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.IndependentOccurrenceSeparation
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.CompletedMultivariatePushforward
@@ -549,5 +551,37 @@ theorem independentOccurrenceShifts_separate_finiteOperator
     extension (Quantum.independentParameterDifference operator.charpoly) ≠ 0 :=
   ⟨Quantum.independentOccurrence_shiftedOperator_det_ne_zero operator,
     Quantum.independentOccurrence_obstruction_faithfulExtension operator extension injective⟩
+
+/-- An injective coefficient map remains injective after localizing source
+denominators and precisely their target images. Both maps are actual
+localization maps, with no arbitrary quotient of an injection. -/
+theorem faithfulCoefficientMap_on_imageLocalizations
+    {R S L M : Type*} [CommRing R] [CommRing S] [CommRing L] [CommRing M]
+    (f : R →+* S) (injective : Function.Injective f) (denominators : Submonoid R)
+    [Algebra R L] [IsLocalization denominators L]
+    [Algebra S M] [IsLocalization (denominators.map f) M] :
+    Function.Injective (IsLocalization.map M f denominators.le_comap_map : L →+* M) :=
+  Quantum.faithfulCoefficientMap_imageLocalization f injective denominators
+
+/-- Strict cohomological degree increase makes the centered Euler operator
+nilpotent, and the positive-line isotropic contradiction makes the nef-surface
+linear seed's exact-primary weight zero. The geometric filtration and
+isotropic-class construction are explicit data, not zero-weight premises. -/
+theorem nefSurfaceLinearSeed_nilpotence_and_exactSelector_zero
+    {K : Type*} [Field K] (seed : Quantum.NefSurfacePrimarySeed K) :
+    seed.centeredEuler^seed.bound=0 ∧ seed.block.weight=0 :=
+  ⟨seed.nilpotent,seed.weight_zero⟩
+
+/-- Curve and surface primary expressions have zero exact-primary weight,
+including scalar-leading elliptic-type blocks with their full odd dimension.
+This is proved from actual classical loop residues, nef-surface linear data,
+and occurrence-preserving projective-bundle and point-blowup expressions;
+geometric realization of those expressions remains outside the statement. -/
+theorem lowDimensionalPrimaryExpressions_exactSelector_zero
+    {K : Type*} [Field K] [CharZero K]
+    (curve : Quantum.CurvePrimarySeed K) (surface : Quantum.SurfacePrimaryExpression K) :
+    Quantum.primaryBlockMultisetWeight curve.blocks=0 ∧
+      Quantum.primaryBlockMultisetWeight surface.blocks=0 :=
+  ⟨curve.weight_zero,surface.weight_zero⟩
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationM1

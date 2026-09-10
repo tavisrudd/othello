@@ -7,7 +7,9 @@ An adapted rank-two block carries its actual loop matrix series and horizontal
 nondegenerate pairing. Its comparison data are regular horizontal matrix series
 with regular inverses, rather than an assumed invariant weight. Other blocks
 retain the dimensions of their full even and odd coordinate spaces, and their
-comparisons are linear equivalences of those spaces. These data prove invariance
+comparisons are linear equivalences of those spaces. Centered rank-two blocks
+with zero leading operator are retained with zero weight; they do not define
+an adapted nilpotent line or a canonical residue selector. These data prove invariance
 of the pair consisting of the exact discriminant spectrum and the rank-three
 odd weight. The universal effective-ledger fold retains all occurrences.
 
@@ -39,10 +41,13 @@ structure RegularRankTwoComparison {K : Type*} [Field K]
   leftInverse : comparison*inverse=1
   rightInverse : inverse*comparison=1
 
-/-- An adapted rank-two block, or a block of a different full even rank with
-its full odd coordinate dimension. -/
+/-- An eligible adapted rank-two block, an ineligible centered rank-two
+block with zero leading operator, or a block of a different full even rank.
+The scalar-leading case retains its actual loop and full odd dimension. -/
 inductive ExactPrimaryBlock (K : Type*) [Field K]
   | rankTwo (connection : AdaptedRankTwoConnection K)
+  | scalarRankTwo (loop : PowerSeries (Matrix (Fin 2) (Fin 2) K))
+      (centered : PowerSeries.coeff 0 loop=0) (oddRank : ℕ)
   | other (evenRank oddRank : ℕ) (notTwo : evenRank ≠ 2)
 
 /-- The exact spectrum and the half-odd-dimension selector form an additive
@@ -50,6 +55,7 @@ pair of effective weights. -/
 noncomputable def ExactPrimaryBlock.weight {K : Type*} [Field K] :
     ExactPrimaryBlock K → (K →₀ ℕ) × ℕ
   | .rankTwo connection => (rankTwoExactSpectrumAtom connection.loop,0)
+  | .scalarRankTwo _ _ _ => 0
   | .other evenRank oddRank _ => (0,if evenRank=3 then oddRank/2 else 0)
 
 /-- Comparison evidence is matrix horizontality in rank two and full coordinate
@@ -59,6 +65,16 @@ inductive ExactPrimaryBlockComparison {K : Type*} [Field K] :
   | rankTwo {source target : AdaptedRankTwoConnection K}
       (comparison : RegularRankTwoComparison source target) :
       ExactPrimaryBlockComparison (.rankTwo source) (.rankTwo target)
+  | scalarRankTwo {source target : PowerSeries (Matrix (Fin 2) (Fin 2) K)}
+      {sourceZero : PowerSeries.coeff 0 source=0} {targetZero : PowerSeries.coeff 0 target=0}
+      {sourceOdd targetOdd : ℕ}
+      (comparison inverse : PowerSeries (Matrix (Fin 2) (Fin 2) K))
+      (horizontal : IsHorizontalLoopComparison source target comparison)
+      (inverseHorizontal : IsHorizontalLoopComparison target source inverse)
+      (leftInverse : comparison*inverse=1) (rightInverse : inverse*comparison=1)
+      (oddEquiv : (Fin sourceOdd → K) ≃ₗ[K] (Fin targetOdd → K)) :
+      ExactPrimaryBlockComparison (.scalarRankTwo source sourceZero sourceOdd)
+        (.scalarRankTwo target targetZero targetOdd)
   | other {e o e' o' : ℕ} {ne : e ≠ 2} {ne' : e' ≠ 2}
       (evenEquiv : (Fin e → K) ≃ₗ[K] (Fin e' → K))
       (oddEquiv : (Fin o → K) ≃ₗ[K] (Fin o' → K)) :
@@ -79,6 +95,7 @@ theorem ExactPrimaryBlockComparison.weight_eq {K : Type*} [Field K] [CharZero K]
         source.horizontalPairing target.horizontalPairing
         comparison.leftInverse comparison.rightInverse).symm
     · rfl
+  | scalarRankTwo => rfl
   | other evenEquiv oddEquiv =>
     have he := evenEquiv.finrank_eq
     have ho := oddEquiv.finrank_eq
