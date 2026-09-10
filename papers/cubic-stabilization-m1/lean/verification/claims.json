@@ -1575,6 +1575,16 @@
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.polynomialCoordinateExtension_and_translation_injective",
       "reason": "Injective coefficient extension followed by polynomial coordinate translation remains injective.",
       "terminal_digest": "3cd887bb01c546be0265a5b7ee9df742b7809a09535bef1a277130c31c32a86a"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.faithfulCompletedExponentialRingMap_with_polynomialCoordinates",
+      "reason": "The explicitly constructed unital completed convolution-ring map and its polynomial translation extension are injective.",
+      "terminal_digest": "77e2202fa378a4a5bef3572a8111a9ad2160e806af6e85fd909b74200e807a8f"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.independentOccurrenceShifts_separate_finiteOperator",
+      "reason": "The actual independent-shift operator determinant is nonzero and remains so under faithful scalar extension.",
+      "terminal_digest": "904a769b6a3c9b0f2043a41718bf971f4b764d559e866b040fcae2fc2ed747b9"
     }
   ]
 }

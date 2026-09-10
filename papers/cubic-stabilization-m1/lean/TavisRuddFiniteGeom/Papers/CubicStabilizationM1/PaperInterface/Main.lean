@@ -1,3 +1,5 @@
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.FaithfulCompletedExponentialRingMap
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.IndependentOccurrenceSeparation
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.CompletedMultivariatePushforward
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.FixedBaseCoordinateEquivalences
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ExactPrimaryLedger
@@ -515,5 +517,37 @@ theorem polynomialCoordinateExtension_and_translation_injective
     Function.Injective (fun p : MvPolynomial σ R =>
       Quantum.polynomialCoordinateTranslation shift (MvPolynomial.map f p)) :=
   Quantum.polynomialCoefficientExtension_translation_injective f injective shift
+
+/-- The constructed completed exponential ring homomorphism is faithful,
+and stays faithful after adding and translating polynomial coordinates.
+The effective-class quotient has finite degree fibers; the additive integral
+pairing is injective and the multiplicative scalar weights are nonzero. -/
+theorem faithfulCompletedExponentialRingMap_with_polynomialCoordinates
+    {Curve TargetCurve K σ : Type*} [AddCommMonoid Curve] [AddCommMonoid TargetCurve]
+    [Field K] [CharZero K] {rank : ℕ}
+    (data : Quantum.CompletedNumericalQuotient Curve TargetCurve)
+    (pairing : Curve →+ (Fin rank → ℤ)) (injective : Function.Injective pairing)
+    (weight : Multiplicative Curve →* K) (nonzero : ∀ curve, weight (.ofAdd curve) ≠ 0)
+    (shift : σ → data.numericalGrading.CompletedNovikovRing (MvPowerSeries (Fin rank) K)) :
+    Function.Injective (Quantum.completedExponentialRingHom data pairing weight) ∧
+    Function.Injective (fun p : MvPolynomial σ (data.homologicalGrading.CompletedNovikovRing K) =>
+      Quantum.polynomialCoordinateTranslation shift
+        (MvPolynomial.map (Quantum.completedExponentialRingHom data pairing weight) p)) :=
+  ⟨Quantum.completedExponentialRingHom_injective data pairing injective weight nonzero,
+    Quantum.completedExponentialRingHom_polynomialTranslation_injective data pairing injective weight nonzero shift⟩
+
+/-- Independent occurrence parameters give an actually nonzero shifted-operator
+determinant. An injective extension preserves the same obstruction; no
+spectral separation or resultant nonvanishing is assumed. -/
+theorem independentOccurrenceShifts_separate_finiteOperator
+    {R S ι : Type*} [CommRing R] [Nontrivial R] [CommRing S]
+    [Fintype ι] [DecidableEq ι]
+    (operator : Matrix ι ι R) (extension : MvPolynomial (Fin 2) R →+* S)
+    (injective : Function.Injective extension) :
+    (Matrix.scalar ι (MvPolynomial.X 0 - MvPolynomial.X 1) -
+      operator.map (MvPolynomial.C : R →+* MvPolynomial (Fin 2) R)).det ≠ 0 ∧
+    extension (Quantum.independentParameterDifference operator.charpoly) ≠ 0 :=
+  ⟨Quantum.independentOccurrence_shiftedOperator_det_ne_zero operator,
+    Quantum.independentOccurrence_obstruction_faithfulExtension operator extension injective⟩
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationM1

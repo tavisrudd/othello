@@ -289,3 +289,42 @@ manuscript claim coverage. This closes the actual multivariate completed
 coefficient-family injection, without claiming ring compatibility or geometric
 base realization. The two multiplicative/ring extension leaves remain
 uncommitted and are not included in this checkpoint.
+
+The multiplicative character and completed coefficient-extension leaves passed
+`run-20260910-035157-d5b4f420`. Exact declarations:
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.integralPairingCharacter`,
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.integralLineRestriction_multiplicativeCharacter`,
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.completedCoefficientExtensionRingHom_injective`.
+`Quantum/FaithfulCompletedExponentialRingMap.lean` now elaborates the actual
+injective unital ring map and its polynomial translation extension; exact
+terminal `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.completedExponentialRingHom_polynomialTranslation_injective`.
+`Quantum/IndependentOccurrenceSeparation.lean` elaborates the actual nonzero
+shifted-operator determinant, exact declaration
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.independentOccurrence_shiftedOperator_det_ne_zero`.
+These four leaves and their Lake roots remain uncommitted until their combined
+public gate. Two independent L5 leaves, `Quantum/StrictDegreeNilpotence.lean`
+and `Quantum/PositiveLineIsotropicVanishing.lean`, are authored but untested.
+
+The 348-terminal gate passed at `run-20260910-035706-1d4c860a`,
+run ID `20260910-035706-74af0b00`, followed by the axiom/registry gate.
+Added public declarations:
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.faithfulCompletedExponentialRingMap_with_polynomialCoordinates`
+and `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.independentOccurrenceShifts_separate_finiteOperator`.
+Both use only the three standard axioms. Counts: 348 public / 110 machinery;
+claim coverage is unchanged. The exact source statements are fully reviewed.
+The four L4 leaves, interface/audit, Lake roots and registry are committed at
+this checkpoint. The authored localization and three surface leaves remain
+outside it: `Quantum/FaithfulLocalizedCoefficientMaps.lean`,
+`Quantum/StrictDegreeNilpotence.lean`, `Quantum/PositiveLineIsotropicVanishing.lean`,
+and `Quantum/ClassicalCurveExactResidue.lean`.
+
+### Scope correction retained for L4
+
+The proved polynomial extension has a global finite polynomial support.
+It is not yet the graded source with unbounded negative-degree bulk powers
+across increasing curve degree. Faithfulness of the actual completed
+curve-coefficient ring is now proved, but translating the full graded bulk
+completion needs an additional coefficient-finiteness/substitution argument.
+The geometric QDM base identification and comparison isomorphisms remain
+separate imports as required by the implementation map. No claim of complete
+L4 coverage follows from the 348-terminal checkpoint.
