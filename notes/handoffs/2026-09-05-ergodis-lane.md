@@ -59,6 +59,9 @@ loading consumes the existing action deadline. Source fingerprints reject
 mixed-revision validation. Review and retained loading diagnostics:
 `analysis/interface-review/2026-09-10-offline-worker-loading.md`.
 Implementation and validation disposition: `../2026-09-10-c1130-offline-worker-loading.md`.
+Repair race terminal status now flushes before successful worker cleanup cancels
+pending paints; completed and work-limited controls pass browser DOM checks.
+Private report: `analysis/interface-review/2026-09-10-terminal-race-paint.md` (`521374b`).
 Intermittent Chromium worker import cancellation remains open. Safari/iOS, Firefox,
 performance A/B and screenshot regression coverage remain open. The suite does
 not rebuild or replace canonical artifacts and does not replace native perf gates.
