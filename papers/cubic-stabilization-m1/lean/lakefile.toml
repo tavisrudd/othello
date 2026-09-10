@@ -44,6 +44,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.GradedBulkSourceRing",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RationalHodgeMatrixDescent",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RationalWholeHodgeConservation",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RationalHodgeApplications",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.FixedBaseCoordinateEquivalences",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.NineRankTwoResidues",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ExactResidueSelectors",

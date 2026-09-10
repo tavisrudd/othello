@@ -610,3 +610,15 @@ source-restricted reconstruction and arithmetic applications with this actual
 rational Hodge premise. Source geometric identification and equivariant Hom
 scalar-extension fullness remain explicit; arbitrary complex Hodge maps are
 not assumed to descend.
+
+The whole rational Hodge applications pass queue
+`run-20260910-053511-f808dd94`. Exact declarations in
+`Quantum/RationalHodgeApplications.lean` have prefix
+`TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RationalHodgeEndpointRealization.`:
+`conservedIso`, `genericCancellation`, and `finiteArithmeticPartners`.
+The Torelli and isogeny premises now receive actual rational Hodge matrix
+isomorphisms. The fixed-rank family model suffices for each cubic or quartic
+application. A separately uncommitted `RationalHodgeVaryingRank.lean` exposes
+the pairwise conservation conclusion with independently specified endpoint
+ranks, obtaining their equality from the whole complex comparison rather
+than prescribing one rank to all nine Fano families.
