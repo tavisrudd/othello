@@ -82,12 +82,17 @@ compiled once per Plan before race timing. The cached-cover utility guard remain
 a private prototype. See `2026-09-09-css-residual-evaluation.md` in the private
 interface-review directory for retained evidence and validation limits. Paired
 campaign updates/checkpoints and application certificate checkers remain open.
-P2 retained labelled composition now supports seven fields, rectangular labels,
+P2 retained labelled composition now supports all 54 prime fields plus GF(4), rectangular labels,
 a distinct target table and repeated witness readouts through one native/WASM
-adapter (private `164ea91`). 972 ABI calls and independent cost/witness checks pass;
+adapter (private `9aefed8`). 8,172 ABI calls and independent cost/witness checks pass;
 report: `2026-09-09-retained-composition-portability.md`. Towers, source helper
 lifting and CLI/schema convergence remain open. P3 inventory, P4 portable
 performance experiments, P5 continuation/storage and P6 complete conformance.
+The first SIMD composition screen found no convincing compilation-time gain;
+served/native defaults are unchanged (`2026-09-09-composition-simd-screen.md`).
+All-field scalar and optional SIMD conformance both pass. Proposed next cold
+admission refinement: `adr-composition-span-admission.md`; source affine spans
+tighten 43 of 660 exhaustively checked prefix estimates, with no runtime change.
 Private current evidence/design: `analysis/interface-review/application-records.md`,
 `provider-readout-contracts.md`, `capability-matrix.json`, and
 `adr-css-residual-reductions.md`. Generic fixed-coordinate discovery and offline
@@ -97,8 +102,10 @@ built-in checked bound, not an Evolve-synthesized theorem. Small
 
 JS race lifecycle review fixed stale selection mounting, cancellation during
 preparation/final discovery, sibling worker cleanup and bounded discovery readiness
-(private `a55cca3`). Example-specific batch units remain intentional; discovery
-failure policies and saved-trace parity require explicit review.
+(private `a55cca3`). Repair/Hadamard saved traces now reopen read-only with stale-import isolation
+(private `2fb0dad`); ModuleSession initialization/reset guards are `e6f33ed`.
+Example-specific batch units remain intentional; discovery failure policy still
+needs a named, documented distinction.
 
 Native CLI/control/runtime fragmentation must converge in these same phases.
 Preserve typed native kernels and all contributor performance gates. Full parity,

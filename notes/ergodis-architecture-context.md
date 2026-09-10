@@ -73,7 +73,7 @@ Fit/Optimize now use the same loading boundary. They are cold frontend adapters,
 not a generalized CampaignSession. Current integration boundary and acceptance
 sequence: `2026-09-08-c1130-campaign-integration-review.md`. The private terminology
 review has been reconciled against these three application modules; labelled
-composition now has a private retained seven-field provider using existing kernels.
+composition now has a private retained full-prime/GF(4) provider using existing kernels.
 Its native/WASM transcript and independent cost/witness tests pass; towers, source
 helper lifting and native CLI/source-query contract extraction remain open. See
 `ergodis-private/analysis/interface-review/2026-09-09-retained-composition-portability.md`.
@@ -84,7 +84,7 @@ helper lifting and native CLI/source-query contract extraction remain open. See
 |---|---|
 | Portable scalar language | C1085 extracted parsing/lowering/evaluation and bounded codecs; compilation for WASM is not automatically a JS binding. |
 | CampaignSession | C1087/C1088 shared service and browser Worker; its CampaignSpec remains the finite GF(2) restriction pilot on native too. It is not the universal mathematical model. |
-| Experimental module host | C1130 core ergodis-modules and module Worker load independent private LRC/QEC providers; source-isolated native and actual browser transcripts pass. Coarse batching amortizes boundary cost; retained seven-field composition now has paired native/WASM tests; cross-worker plan sharing, towers, campaign integration, updates/checkpoints and production ABI adoption remain open. |
+| Experimental module host | C1130 core ergodis-modules and module Worker load independent private LRC/QEC providers; source-isolated native and actual browser transcripts pass. Coarse batching amortizes boundary cost; retained full-prime/GF(4) composition now has paired native/WASM tests; cross-worker plan sharing, towers, campaign integration, updates/checkpoints and production ABI adoption remain open. |
 | Bounded WASM Evolve | Shared ranked Rust/WASM proposals and independent family checkers; separate discovery workers. Checked capacity bounds, Hadamard row relations and CSS source symmetries now apply to active execution at declared safe points as well as queued queries. Learned-only reruns recheck retained proofs with discovery off; already-arrived late proposals can be retained as future knowledge without changing completed race evidence. These delivered families do not establish universal CampaignSession integration. See `2026-09-09-c1130-overnight-evolve.md` and private ADR0002. |
 | OpenProblem / RetainedTree | Private `src/open_problem.rs`: context-bearing compiled problem, composition/identity/readout core with optional NormalizedProblem, TensorProblem and ReconstructProblem. Matrix, function, monoid-index and semiring-window adapters exist. This is retained composition, not every solver or a complete host lifecycle. |
 | RepairModel → RepairPlan → BudgetQuery | C1093 private LRC adapter: compile once, admit budget changes, count/threshold/witness readouts. Fixed known repair family; no universal recovery schema. |
