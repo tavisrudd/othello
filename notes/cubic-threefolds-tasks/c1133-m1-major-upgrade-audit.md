@@ -45,6 +45,14 @@ in `notes/2026-09-09-c1133-acceptance-map.md`. The published mirror note is
 fully read and its one-record citation set screened against three graph counts. Current coverage, precise access gaps, source read-depth
 register and citation sets:
 `notes/2026-09-09-c1133-literature-audit.md`.
+Lean additions are now mapped in
+`notes/2026-09-09-c1133-lean-upgrade-map.md`, with exact reusable declarations
+and hashed baseline in `notes/2026-09-09-c1133-lean-baseline.json`.
+The source-only gate passes (319 terminals / 67 claims); no new Lean proof or
+kernel replay is claimed. First implementation slice: canonical rank-two
+lattice transport and universal residue reduction. The old exponent-class
+marker misses the discriminant-one cases; genera 2–5 instead use the main
+rank-three odd selector, independent of optional rank-three residue theory.
 No global novelty verdict or manuscript promotion has passed. Review of
 manuscript upgrades and hierarchy remains after these gates.
 

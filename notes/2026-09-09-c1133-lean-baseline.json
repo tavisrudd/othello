@@ -1,0 +1,121 @@
+{
+  "date": "2026-09-09",
+  "scope": "Read-only source baseline; declarations located and source-only correspondence checked. No fresh Lean kernel replay.",
+  "repository_head": "b0d1f8db16c4ab611fa1f3b44fea6dfcc5aacaa6",
+  "package": "papers/cubic-stabilization-m1/lean",
+  "source_check": {
+    "command": "python3 lean/verification/check_formal_artifact.py --source-only",
+    "cwd": "papers/cubic-stabilization-m1",
+    "result": "PASS",
+    "sources": 186,
+    "terminals": 319,
+    "manuscript_claims": 67,
+    "machinery": 83,
+    "imported_sources": 22,
+    "evidence": 5
+  },
+  "coverage": {
+    "conditional_deduction": 26,
+    "fragment": 26,
+    "complete": 1,
+    "absent": 14
+  },
+  "selected_declarations": [
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.rankTwo_commutant_of_unit_offDiagonal",
+      "path": "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/RankTwoClusterGermRigidity.lean",
+      "line": 74,
+      "sha256": "82be6e4a74141f8eeae6e9abeb7337871360550e579be9d7984a04eae16513c5"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.atomicRankTwo_residueDiscriminant_constant_over_formal_germ",
+      "path": "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/CategoricalOneStep.lean",
+      "line": 463,
+      "sha256": "3a0b6cb78752faf68486605fb3a0708ca4c9fa692044e9aa07bbe655558f0b19"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.atomicRankTwo_residueDiscriminant_frozen_by_horizontality_and_flatness",
+      "path": "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/CategoricalOneStep.lean",
+      "line": 439,
+      "sha256": "3a0b6cb78752faf68486605fb3a0708ca4c9fa692044e9aa07bbe655558f0b19"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.atomicResidueDiscriminant_invariant_under_frame_change",
+      "path": "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/ResiduePairing.lean",
+      "line": 91,
+      "sha256": "65ed29477e6cc0f05db145481fc0d9daa53f8720ea386959af02e5ef2518e09b"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.cubicSmallEven_blockReduction",
+      "path": "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/CategoricalOneStep.lean",
+      "line": 284,
+      "sha256": "3a0b6cb78752faf68486605fb3a0708ca4c9fa692044e9aa07bbe655558f0b19"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.cubicZeroBlock_modifiedResidue_indicialPolynomial",
+      "path": "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/CategoricalOneStep.lean",
+      "line": 310,
+      "sha256": "3a0b6cb78752faf68486605fb3a0708ca4c9fa692044e9aa07bbe655558f0b19"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.effectiveBlockLedger_fold_unique",
+      "path": "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/CategoricalOneStep.lean",
+      "line": 45,
+      "sha256": "3a0b6cb78752faf68486605fb3a0708ca4c9fa692044e9aa07bbe655558f0b19"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.genericSpectralConnection_normalizedSplitting",
+      "path": "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/CategoricalOneStep.lean",
+      "line": 62,
+      "sha256": "3a0b6cb78752faf68486605fb3a0708ca4c9fa692044e9aa07bbe655558f0b19"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.hodgeFixedSubalgebra_closed_under_eulerMultiplication",
+      "path": "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/ResiduePairing.lean",
+      "line": 557,
+      "sha256": "65ed29477e6cc0f05db145481fc0d9daa53f8720ea386959af02e5ef2518e09b"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.occurrenceIndexedMarker_eq_of_birational",
+      "path": "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/CategoricalOneStep.lean",
+      "line": 234,
+      "sha256": "3a0b6cb78752faf68486605fb3a0708ca4c9fa692044e9aa07bbe655558f0b19"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankTwoCluster_nilpotent_persists_on_formal_germ",
+      "path": "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/FramedMonodromy.lean",
+      "line": 779,
+      "sha256": "43dc835452546d9ed3e5269274920c6d71e2fe4f805bfd37da4cafdedd0ddb70"
+    }
+  ],
+  "baseline_files": [
+    {
+      "path": "papers/cubic-stabilization-m1/lean/verification/claims.json",
+      "sha256": "bd3a7212bb4edccccf1f67e3560974eac609115fb906146e7cdf59642a723c6b"
+    },
+    {
+      "path": "papers/cubic-stabilization-m1/lean/verification/expected_axioms.txt",
+      "sha256": "e921202a8e2b290974b2b38313ffe118b32357255653e64c5bd0e6f67352ba3f"
+    },
+    {
+      "path": "papers/cubic-stabilization-m1/lean/lean-toolchain",
+      "sha256": "72681913b978b3f7c2f48229836771f736f6e97d833917726b2263afbc6108ed"
+    },
+    {
+      "path": "papers/cubic-stabilization-m1/lean/lakefile.toml",
+      "sha256": "65cb1a8ee042aeaf115dc2568b004585ee1d514055ed71b99eb636bfd11ebd4f"
+    },
+    {
+      "path": "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/RankTwoResidueMarker.lean",
+      "sha256": "163d77641c689c722709483436fc123c75def67d9939fd37d16087effc291ede"
+    },
+    {
+      "path": "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/HodgeFixedSubalgebra.lean",
+      "sha256": "bd60bb69e45c4e2f95b629e324b71904cbde1a538da8d780352cfaeeec270e4d"
+    },
+    {
+      "path": "papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/EffectiveBlockLedger.lean",
+      "sha256": "f707d851fe5540cddb71ebda237a6ca6d78d13c133380c24139f025f2258ef3e"
+    }
+  ]
+}
