@@ -79,6 +79,12 @@ GF(4)/binary towers now retain source preparation and source-coefficient witness
 readout in that same provider (`composition-source.v2`). General-field tower
 inputs, compact witnesses and native CLI/source-query extraction remain open. See
 `ergodis-private/analysis/interface-review/2026-09-09-retained-tower-portability.md`.
+Native `compose` and the provider now share all 54 prime specializations and
+ordinary/distinct-target-table capability. Their wire envelopes and lifecycle
+still differ; the old core `solveCompositionJson` WASM entry point remains a
+separate GF(2)-only schema. The next convergence slice includes that legacy
+entry point. Current report:
+`ergodis-private/analysis/interface-review/2026-09-09-native-composition-convergence.md`.
 
 ## Existing abstractions: reuse, with their limits
 

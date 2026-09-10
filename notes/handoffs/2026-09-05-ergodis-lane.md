@@ -95,13 +95,16 @@ admission now handles otherwise rejected low-rank sources through a bounded cold
 fallback; 12,373 native/WASM calls and 63 overlapping CLI queries pass. Previously
 accepted sources skip span computation; native preparation diagnostic is unchanged
 within measurement noise. Current report: `2026-09-09-composition-span-admission.md`.
-Represented GF(4)/binary towers now retain source preparation, tower compilation
-and source-coefficient witness readout through the same native/WASM provider
-(private `5521692`). Combined 12,979-call browser transcript and 19 tower CLI
-comparisons pass; package schema `composition-source.v2` requires explicit client
-migration. Report: `2026-09-09-retained-tower-portability.md`. Next: native
-CLI/source-query convergence; broader tower fields and compact witness readouts
-remain separate gaps.
+Represented GF(4)/binary towers retain source preparation, compilation and
+source-coefficient witness readout through the same provider (`5521692`). Native
+`compose` now accepts all prime fields and distinct target tables through a shared
+cold dispatch catalogue (core `d016451`, private `58c433b`). 1,980 sequential/parallel
+CLI comparisons, 19 tower comparisons and 12,979 native/browser calls pass.
+Package schema `composition-source.v2` requires explicit client migration.
+Current report: `2026-09-09-native-composition-convergence.md`; tower details:
+`2026-09-09-retained-tower-portability.md`. Next: shared source/query codecs,
+including the legacy GF(2)-only `solveCompositionJson` entry point. General-field
+tower sources and compact witness readouts remain separate gaps.
 Private current evidence/design: `analysis/interface-review/application-records.md`,
 `provider-readout-contracts.md`, `capability-matrix.json`, and
 `adr-css-residual-reductions.md`. Generic fixed-coordinate discovery and offline
