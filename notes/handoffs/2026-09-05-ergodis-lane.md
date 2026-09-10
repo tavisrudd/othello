@@ -49,7 +49,7 @@ Current authority: `../2026-09-09-c1130-js-wasm-parity-review.md`; task requirem
 performance experiments: `ergodis-private/analysis/interface-review/`.
 
 JS/WASM conformance entry point: `make -C analysis/js-wasm-tests all` in
-`ergodis-private`. Fast/browser/extended tiers, 52 checks, JSON/Markdown/JUnit
+`ergodis-private`. Fast/browser/extended tiers, 57 checks, JSON/Markdown/JUnit
 reports. Stop/history responsiveness: `../2026-09-10-c1130-stop-responsiveness.md`. Solve clock and adaptive log axis: `../2026-09-10-c1130-solve-clock-axis.md`. Generated core/module contracts, independent oracles, shrinking and
 regressions: `../2026-09-09-c1130-property-testing.md`; private design and current
 validation: `analysis/property-tests/`. Generated module-client schedules and
@@ -62,22 +62,23 @@ Implementation and validation disposition: `../2026-09-10-c1130-offline-worker-l
 Repair race terminal status now flushes before successful worker cleanup cancels
 pending paints; completed and work-limited controls pass browser DOM checks.
 Private report: `analysis/interface-review/2026-09-10-terminal-race-paint.md` (`521374b`).
-Both XOR examples now have a direct JS third arm, shared readiness, checked
-witnesses, purple finish markers, saved-trace compatibility and final resize.
-Existing adaptive scheduling is slower than
-the resumable/Evolve paths on all five measured grids; four adaptive sweeps were
-censored after >15 s. Private results and replay:
-`analysis/interface-review/2026-09-10-specialized-race-measurement.md`.
-A new source-derived JS capacity-surface prototype beats Evolve on all three
-measured 192/288-job rounds: 88/102 ms versus 1235/1944 ms, including full
-surface construction and all 625 query witnesses. Native/WASM promotion and
-scheduling UI integration remain open. Uncommitted native promotion draft:
-`ergodis/src/allocation_surface.rs` and its `src/lib.rs` export. Its first scoped
-test build fails at the allocation-event assertion type; no accepted native/WASM
-artifact or performance claim yet. Preserve this task-owned draft on resume. Results, oracle checks and design:
-`analysis/interface-review/2026-09-10-direct-xor-and-capacity-surface.md` and
-`analysis/interface-review/adr-capacity-surface-specialization.md` (`d94b2a5`).
-Intermittent Chromium worker import cancellation remains open. Safari/iOS, Firefox,
+XOR and eligible capacity-grid demos now have a canonical WASM Specialized Solver
+third arm (`ergodis` core `0a69013`, private `b937f6d`). General native source-derived
+independent minima / bounded two-resource surfaces replace the JS prototype for
+execution. Native/JS/WASM oracle, allocation, counter and browser gates are recorded
+in `analysis/interface-review/2026-09-10-wasm-specialized-solvers.md`; design:
+`analysis/interface-review/adr-capacity-surface-specialization.md`.
+No uncommitted allocation-surface draft remains. Next: make source/query-shape
+selection available to the general planner; do not preserve a default/Evolve
+capability gap to manufacture a race ranking. WASM all-target Clippy's existing
+`bundle.rs` items-after-test-module finding remains; library Clippy/tests pass.
+Asset loading now uses revisioned immutable URLs, speculative post-paint JS/WASM
+cache fills and HTML-hidden empty results (`b65f0b3`). Warm source-switch races
+pass offline / 400 ms latency with zero server requests. Report:
+`analysis/interface-review/2026-09-10-demo-asset-caching.md`.
+Stalled specialized imports now abort their readiness gate; the Fetch-paused
+module regression passes. Other intermittent Chromium worker import cancellation
+remains open. Safari/iOS, Firefox,
 performance A/B and screenshot regression coverage remain open. The suite does
 not rebuild or replace canonical artifacts and does not replace native perf gates.
 
