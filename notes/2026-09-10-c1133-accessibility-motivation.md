@@ -94,7 +94,16 @@ The pre-revision 32-page PDF is recoverable from `27d59bfd0^`; the initial
 accessibility-only revision is commit `27d59bfd0`. The combined motivation
 revision and its PDF are committed together with this report.
 
-Standalone synchronization and replay are recorded in the final closeout below.
+Authority motivation/source commit: `c58359142` (following accessibility
+commit `27d59bfd0`). Export audit: zero findings. Guarded exporter synchronized
+the existing standalone; its `make check` passes and its rebuilt PDF is
+byte-identical to the authority. Standalone forward commit: `e5dd415`.
+Exporter verification passes for all 349 tracked files, content SHA-256
+`4ab6d21153eb019f20cf1d6e8897fa4bc63068ae07ec4f033b38ca09941c8c6f`.
+The owning novelty ledger stays internal, as prescribed by the existing
+export allowlist; public source attribution is in the manuscript. Nothing
+was pushed. Final theorem/proposition environments and annotation comparison
+also includes the Fano endpoint file touched solely for page-break control.
 
 ## EJ + TT closeout and mystery ledger
 

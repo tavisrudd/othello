@@ -57,6 +57,16 @@ remains a publication gate. Broader source/priority closure and author
 publication review remain the C1133 frontier. Pencil claims stay conditional;
 collaborator discussion is parked.
 
+**Accessibility and motivation pass complete (2026-09-10):**
+`notes/2026-09-10-c1133-accessibility-motivation.md`. The cubic title and
+unconditional headline are retained; abstract below 200 words. The opening
+explains the one-step question, surface-center difficulty, complete Fano
+scope and Hodge recovery payoff. Three audited close precedents are now
+credited in the primary introduction. Local glosses and safe skips clarify
+the proof route. Final PDF remains 32 pages with the cubic proof on page 13.
+Theorem statements and formal coverage are unchanged; current release
+identity and mirror validation are in the report.
+
 Latest formal checkpoint: **371 public terminals, 133 machinery, 245 sources**;
 aggregate kernel build and actual axiom comparison passed in the prior
 implementation session. Exact boundaries and declarations:

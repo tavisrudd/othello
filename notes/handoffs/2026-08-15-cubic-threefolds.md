@@ -69,9 +69,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Fresh specialist and adjacent-reader reports find no major defect at
   their stated read boundaries; concrete minor requests are repaired.
   Authority and standalone gates pass with byte-identical PDFs; export
-  verification passes at standalone `d1b2999`. Twelve added
+  verification passes; current release details are in the accessibility report below. Twelve added
   geometric claims are accurately absent from Lean; no new kernel run.
   General IK dependencies remain explicit in optional broader results.
+  Accessibility and motivation pass complete:
+  `../2026-09-10-c1133-accessibility-motivation.md`. Title retained, abstract
+  below 200 words, cubic-first route clarified, and three audited spectral/
+  atomic/Hodge predecessors credited. The PDF remains 32 pages, cubic proof
+  through page 13; theorem statements and formal coverage are unchanged.
   Next: close the remaining bounded source/priority coverage and author
   publication review. The before/after preferences were nonblind;
   a fully blinded comparison remains a publication gate. Pencil claims
