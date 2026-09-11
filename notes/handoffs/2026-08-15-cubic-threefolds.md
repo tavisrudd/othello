@@ -209,6 +209,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   descent/domain/geometry repairs and pin companion/reduction references
   before restrained integration. Literature comparisons are bounded, not a
   priority verdict. Report: `../2026-09-11-c956-sharpness-upgrade-audit.md`.
+  Follow-up consequences and integration priorities:
+  `../2026-09-11-c956-sharpness-ej-tt.md`.
   The older acceptance described below covers the existing manuscript only.
   Cross-specialty review repaired the characteristic-zero scope, the
   singular-compatible tangent-projection citation, the relative evaluation

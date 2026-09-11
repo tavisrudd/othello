@@ -11,6 +11,9 @@ gate pass. Integration has not begun. First repair the nonsplit evaluation
 wording, new-family Picard bridge, field/S-unit domains, and precise companion
 and reduction citations. Bounded topical search is not a priority verdict.
 Report: `../2026-09-11-c956-sharpness-upgrade-audit.md`.
+The follow-up `ej`/`tt` pass extracts the combined fourfold consequence,
+finite rational pencil fibres, and the minimal arithmetic theorem interface:
+`../2026-09-11-c956-sharpness-ej-tt.md`.
 The earlier accepted paper review remains in
 `../2026-09-08-cubic-post-upgrade-cold-read.md`; it does not cover this packet.
 The task remains open by author instruction.
