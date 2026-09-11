@@ -1,7 +1,7 @@
 # C1016: wider margin-neighbourhood diagnostics
 
 Native authority: `~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`,
-branch `c1016-full-2092-campaign`, checkpoint `04cdadb`.
+branch `c1016-full-2092-campaign`, checkpoint `30e86df`.
 The scheduled native phase runs until 2026-09-11 13:33 UTC.
 
 The banked score-14,800 state has no improving or neutral six-cycle preserving
@@ -37,16 +37,19 @@ random points inside that known-containing fibre. No larger-neighbourhood
 descent has yet passed it. The detailed extra-juice/Tao mystery ledger is in
 the private census report.
 
-## Current unaccepted experiment
+## Threshold-walk result
 
-The threshold-walk implementation is in the authority worktree but remains
-uncommitted pending the revised full workspace gate, retained-binary counter
-A/B and frozen-control quality comparison. Initial gate: 746 tests passed.
-The pending owned paths are `src/order6_margin_walk.rs`, `src/lib.rs`,
-`tasks/hadamard-2092/{Cargo.toml,src/main.rs,src/order6/mod.rs,src/order6/threshold_walk.rs}`,
-`Cargo.lock`, `tests/order6_margin_fibre_allocations.rs`,
-`scripts/{margin_cycle_ab.py,margin_walk_quality.py}`, and
-`evidence/margin-threshold-walk-design.md`. No performance or quality result is
-claimed yet. Red-team checks prompted private fields, explicit antipodal replay,
-calibration CPU timing and cooling-epoch/budget-overrun telemetry. The native
-kernel retains modulo and doubled-row instantiations for exact A/B comparison.
+Private checkpoint `30e86df` adds a replayed zero-allocation random rectangle
+walk and cold source-derived threshold calibration. The 747-test release gate
+passes; doubled-row indexing measures about 1.8x faster than its exact modulo
+reference on one and twelve cores. The frozen three-policy quality experiment
+is negative: threshold improves only one of 36 repeated worker-runs, greedy
+none, while unchanged tabu improves 23 and reaches 22,736. These are repeated
+runs of twelve fixed states, not 36 independent initial states. The randomized
+14,800 control gate remains open. Detailed scope/counters/replay are in private
+`evidence/margin-walk-report.md`.
+
+Next: compare a generic best-observed-score travel bound against the current
+local-delta threshold, with the same source-derived tolerance. Investigate the
+measured bounds-check overhead via resolved contiguous streams, retaining exact
+trajectory A/B and recording any quality failure without relabeling it a win.
