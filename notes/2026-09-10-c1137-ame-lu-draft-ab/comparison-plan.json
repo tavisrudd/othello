@@ -1,0 +1,10 @@
+{
+  "baseline_commit": "afc7919766bffc5bf9f06fb53807ca7f5b9ce3dd",
+  "baseline_pdf_sha256": "3618593bf9f1cffacac897b0b6f21ebcaf0dc3f9a25d412034d3e45a144f1f03",
+  "comparison": "current paper vs focused certification draft; readers not told chronology",
+  "audiences": [
+    "quantum-information specialist",
+    "adjacent mathematical physicist",
+    "coding-theory specialist"
+  ]
+}

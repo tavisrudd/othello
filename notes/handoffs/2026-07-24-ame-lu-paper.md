@@ -10,6 +10,10 @@ Discovery companion:
 
 ## Current status
 
+**Active: C1137.** Draft the user-approved focused certification integration
+and compare frozen before/after papers with fresh cold readers. Report:
+`2026-09-10-c1137-ame-lu-draft-ab.md`.
+
 **C1136 completed (2026-09-10): bounded literature audit, priority qualified.**
 Nine identifier-pinned seeds have three graph counts and eighteen retrieved
 lists (602 normalized-title records); exact zbMATH queries and first-page
