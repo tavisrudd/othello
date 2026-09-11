@@ -4832,8 +4832,17 @@
       "last": 1133,
       "purpose": "Audit m=1 upgrade proof packet: mathematics and complete literature audit before manuscript upgrades and hierarchy review",
       "sequence": 537
+    },
+    {
+      "count": 1,
+      "first": 1134,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 1134,
+      "purpose": "Review and remediate Astra ChatGPT referee feedback on Paper I, including quantitative sharpening and exposition",
+      "sequence": 538
     }
   ],
-  "next_id": 1134,
+  "next_id": 1135,
   "schema": "codex-task-id-allocations-v1"
 }
