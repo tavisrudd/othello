@@ -10,6 +10,13 @@ Discovery companion:
 
 ## Current status
 
+**C1134 queued (2026-09-10), next for Paper I.** Review and remediate the
+user-supplied Astra/ChatGPT referee report: five precision corrections, two
+proposed quantitative improvements, and the worked-example, recognition,
+framing, and formal-artifact requests. Verify the proposed bounds before
+adoption. Card: `2026-09-10-c1134-ame-lu-astra-referee-revision.md`.
+C979 remains user-held open and untouched.
+
 **C1089 completed (2026-09-07).**  Paper I now has a marginal-certification
 proposition (the `m` reductions on `B∪{j}` determine the state among all
 density operators, with the iff spanning criterion, both sharpness
@@ -149,7 +156,7 @@ Corollary 5.4 and the synchronized trust maps pass the 36-page release gate.
 The clean standalone mirror is synchronized at `6de1178` and unpushed.
 Full report: `2026-08-01-c787-relativized-intertwiner-stability.md`.
 
-**No quantitative successor is allocated.**  The highest-EV theorem bank is
+**C1134 owns the newly queued Paper I quantitative referee proposals.**  The highest-EV theorem bank is
 C889's prime-field inter-code LU-orbit theorem for a focused Paper-II revision,
 but that requires a separately allocated literature/adoption item.
 
