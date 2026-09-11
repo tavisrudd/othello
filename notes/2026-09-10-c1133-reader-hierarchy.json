@@ -15,13 +15,13 @@
   "residue_discriminant": "1",
   "residue_trace": "-1",
   "sha256": {
-    "papers/cubic-stabilization-m1/.zenodo.json": "8976b74a15515add50fd9349031d8dab93434dc8515ad05d17b4c7c6bb021dcb",
-    "papers/cubic-stabilization-m1/README.md": "4bc8e03abb1d6b08208acd13117ba4fc8a68d260d0c0fc213816c41c90d9c93c",
-    "papers/cubic-stabilization-m1/companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf": "13cdf12d70f7803780b9dc375aafa2dab6206c4c4e90f6491aef8208f1175679",
+    "papers/cubic-stabilization-m1/.zenodo.json": "2073b9f1c37b57cba4f4a49b3e7c3f4d681550876d82ed7422162e1e103c34df",
+    "papers/cubic-stabilization-m1/README.md": "68f02f424b5566c602c076c3c5450aa416c62bd61114f3ca1f67933e0ad8a35b",
+    "papers/cubic-stabilization-m1/companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf": "fc49fa4166af26d674459153d17b4fb060694900e998490b04ae2c2dc437c370",
     "papers/cubic-stabilization-m1/companions/six-axis-cubic-pencil/Makefile": "3a129d4d17491d5601353b1d9c7d7878f2f5ea2d6f5a2c2d4b8519672c25c881",
-    "papers/cubic-stabilization-m1/companions/six-axis-cubic-pencil/six_axis_cubic_pencil.pdf": "bf80fb8e73e096dcf84dc81571c16f55df1fe64a5328b8541326127dc5be01cc",
-    "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex": "50c88e3038358599a7eb6fbcf24b5cf690c200b4e3ec630a411a9c879478c742",
-    "papers/cubic-stabilization-m1/irrationality_after_one_stabilization.pdf": "f771e0242accac52f69a24ef140a5aed75fceb937cc413fc93464d376557f15a",
+    "papers/cubic-stabilization-m1/companions/six-axis-cubic-pencil/six_axis_cubic_pencil.pdf": "051a5351bceb0e051da8e2e5ee2e45340d6220e06f78d371faeca64ea1d877e3",
+    "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex": "d305584faf5654f36f49be0b02825d22b95cd43bb0f1e8ed316884ff6b5b5a08",
+    "papers/cubic-stabilization-m1/irrationality_after_one_stabilization.pdf": "6d22e150d28926981792e02bf30fe3bdf950b33bdb636b1f48676c9bd5a8bc6e",
     "papers/cubic-stabilization-m1/sections/01-introduction.tex": "9e200b5f425159d34ebf74ed053147c7dc7715995161aebd8de8591a321bd3c2",
     "papers/cubic-stabilization-m1/sections/02-qdm-marker.tex": "fe78e24ee9409ba9a1238c6365976bce330bcf672701ac558e1fe455d694bb32",
     "papers/cubic-stabilization-m1/sections/03-applications.tex": "38f7703eed39374a0d587e708d947f60d1fa67e063fe92be2a540dbcf18469e9",
@@ -36,8 +36,8 @@
     "papers/cubic-stabilization-m1/sections/10-fano-data.tex": "dac995c5981f4f8a8e8566c751976ba4751c72fc9ca4f8b79c12b4946d855db2",
     "papers/cubic-stabilization-m1/sections/11-arithmetic-partners.tex": "0aba40d95c8810cf745bd996f64d46b15bdaccbaf7bb0ba46283e6d2e8b1d385",
     "papers/cubic-stabilization-m1/verification/fano-matrices/finite_checks.py": "e0d38f02bec3021888bcb8edc628f42d4795d9cc74bac14f563559fe9e1bc3b7",
-    "papers/summary/README.md": "6e59a41cf5a77d0c38b7fd7a9b755fad9f9353e998c9b4d0f127054e27360a21"
+    "papers/summary/README.md": "52f57539d0d9e1cf98b834017f62f84111786cf4a8dcf7dcd5a6f362c2a3d11f"
   },
   "status": "PASS",
-  "title": "One-stabilization irrationality and Hodge conservation for Fano threefolds"
+  "title": "One-Stabilization Irrationality and Hodge Conservation for Fano Threefolds"
 }

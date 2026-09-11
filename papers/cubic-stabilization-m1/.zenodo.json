@@ -1,5 +1,5 @@
 {
-  "title": "One-stabilization irrationality and Hodge conservation for Fano threefolds",
+  "title": "One-Stabilization Irrationality and Hodge Conservation for Fano Threefolds",
   "description": "The paper proves that X times P1 is irrational for every smooth complex cubic threefold X, and that rationality is unchanged by one stabilization for every smooth complex Fano threefold of Picard rank one. For the nine irrational families, birational first stabilizations preserve rational third cohomology as a Hodge structure. Numerical invariants from quantum multiplication and the quantum blowup formula give the irrationality proofs independently of the Hodge refinement. The repository contains exact computational checks and a partial Lean formalization with explicit geometric inputs; it does not claim an end-to-end formal verification of the geometric theorems. Two separate companion manuscripts concern minimal classes on cubic pencils and a conditional framed-monodromy refinement.",
   "creators": [
     {

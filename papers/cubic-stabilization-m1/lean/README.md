@@ -1,4 +1,4 @@
-# Lean companion to *One-stabilization irrationality and Hodge conservation for Fano threefolds*
+# Lean companion to *One-Stabilization Irrationality and Hodge Conservation for Fano Threefolds*
 
 This Mathlib-only package is the shared formal companion to the primary paper
 and the two companion manuscripts in this repository.  Its reviewer-facing

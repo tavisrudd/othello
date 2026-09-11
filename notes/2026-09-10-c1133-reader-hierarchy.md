@@ -97,3 +97,11 @@ the committed authority README. Nothing was pushed.
 
 Next C1133 work: match the supplied geometric coefficient embedding and regular
 comparison realizations to the written proof and Hodge-fixed-base hypotheses.
+
+## Title-page correction
+
+The author requested title capitalization and the current month. The title
+now uses title case: *One-Stabilization Irrationality and Hodge Conservation
+for Fano Threefolds*. The primary title page is dated September 2026.
+The title is synchronized across metadata, READMEs, blueprint, portfolio and
+companion citations. Companion manuscript dates are unchanged.

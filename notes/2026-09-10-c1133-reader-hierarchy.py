@@ -13,7 +13,7 @@ parser.add_argument('--check', action='store_true')
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
 paper = root / 'papers/cubic-stabilization-m1'
-title = 'One-stabilization irrationality and Hodge conservation for Fano threefolds'
+title = 'One-Stabilization Irrationality and Hodge Conservation for Fano Threefolds'
 source = (paper/'cubic_stabilization_m1.tex').read_text()
 assert '\\title{' + title + '}' in source
 abstract = source.split('\\begin{abstract}', 1)[1].split('\\end{abstract}', 1)[0]
