@@ -29,7 +29,6 @@ ordering and detail.
 
 ### `ame-lu`
 
-- **C1135 `[ame-lu]` [RUNNING]** — Verify and independently red-team the two-star AME verification packet; audit prior literature and propose motivated, citation-supported paper changes → `notes/2026-09-10-c1135-ame-lu-two-star-verification-audit.md`.
 
 Source material for C774--C777 is the external Fable session note
 `approximate_rigidity_of_2uniform_states.md`, catalogued against the local corpus in

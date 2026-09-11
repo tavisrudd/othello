@@ -10,11 +10,15 @@ Discovery companion:
 
 ## Current status
 
-**Active: C1135 running (2026-09-10).** Verify and independently red-team the
-two-star marginal-verification packet, audit the literature, and deliver a
-concrete revision proposal with supported contribution claims and motivation.
-Task: `2026-09-10-c1135-ame-lu-two-star-verification-audit.md`.
-This is an audit/proposal gate before manuscript adoption.
+**C1135 completed (2026-09-10).** The two-star verification packet passes
+independent proof/red-team review; the concrete proposal includes corrected
+literature positioning, exact setting/weighted gaps, a stronger universal
+weighted lower bound, and an observable-rounding corollary. Nine primary
+sources were read partially; publication priority is not closed. No manuscript
+changes were applied. Report: `2026-09-10-c1135-ame-lu-two-star-verification-audit.md`.
+Proposal: `2026-09-10-c1135-ame-lu-two-star-verification-audit-proposal.md`.
+**Next decision:** adopt the bounded proposal, then allocate an implementation
+and manuscript-validation task. No successor is allocated.
 
 **C1134 completed (2026-09-10).** Paper I's referee corrections and both
 quantitative improvements are validated in the warning-free 40-page revision;

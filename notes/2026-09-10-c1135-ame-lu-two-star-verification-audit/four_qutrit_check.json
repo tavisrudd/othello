@@ -1,0 +1,21 @@
+{
+  "state": "AME(4,3) from revised manuscript, four-qutrit example",
+  "label_count": 81,
+  "pairwise_symplectic_commutation": true,
+  "minimum_nonzero_support": 3,
+  "each_triple_support_subgroup_size": 9,
+  "every_pair_of_test_subgroups_spans": true,
+  "nontrivial_character_failure_histogram": {
+    "3": 32,
+    "4": 48
+  },
+  "all_15_nonempty_test_subsets_match_tradeoff": true,
+  "weighted_gap_check": true,
+  "Z1_shift_failure_pattern": [
+    true,
+    true,
+    true,
+    false
+  ],
+  "Z1_shift_rejection_probability": "3/4"
+}

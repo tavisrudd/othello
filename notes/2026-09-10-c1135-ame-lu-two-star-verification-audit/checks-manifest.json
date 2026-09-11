@@ -1,0 +1,22 @@
+{
+  "files": {
+    "check_four_qutrits.py": {
+      "bytes": 2419,
+      "sha256": "4f2640fec3743082d1a64dc5494e1a86f6b02408a1fde43048e9ea8cf363fe4d"
+    },
+    "check_six_qubits.py": {
+      "bytes": 2853,
+      "sha256": "169a5958c4ae361da3d0e6a6ce6dd7e9796b54895544809fa2d159dd1d38471f"
+    },
+    "four_qutrit_check.json": {
+      "bytes": 536,
+      "sha256": "f7c83f38c99e40c349967f2860bff8bc4ff12a5868810f4e5ade8a1429d1bab6"
+    },
+    "six_qubit_check.json": {
+      "bytes": 505,
+      "sha256": "11e1d257d699d7f08a30ce127f318c1e5b1d289bf332384504642152620b7da1"
+    }
+  },
+  "python": "3.13.15",
+  "scope": "Optional finite sanity checks, not proof dependencies"
+}
