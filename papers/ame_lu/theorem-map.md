@@ -32,6 +32,15 @@ This map covers Paper I after the two-paper split. Results owned by
 | C786/C795 | stabilizer overlap gap and balanced-cut residual stability; former `k`-uniform generator-coordinate comparison | the two load-bearing estimates are proved in Section 6; the independent `k`-uniform radius study was retired in C993 |
 | C796 | stability under per-site spectral control from a balanced cut | canonical statement and proof are Proposition 6.4 in Section 6 |
 
+## C1137 verification addition
+
+| Stable label | Statement and boundary | Evidence |
+|---|---|---|
+| `prop:complementary-marginal-tests` | uniform complementary library gap `(m+1)/(2m)`, optimal for perfectly complete effects touching at most `m+1` parties, with fidelity certificate | C1135 character proof; manuscript only |
+| `cor:marginal-certified-rounding` | rejection bound enters the existing global rounding radius for promised product-unitary outputs; no new radius | fidelity-to-pure-defect identity; manuscript only |
+| `prop:weighted-marginal-tests` | exact sorted-weight formula and at-most-s binary-test curve for stabilizer AME targets | character constraints and one-party-error upper bound; Appendix C, manuscript only |
+| `prop:universal-marginal-verification` | universal weighted lower bound, any-m library marginal determination, and optimal uniform full-library gap; arbitrary integer q; no universal exact weighted attainment | opposite-half error filtration; Appendix C, manuscript only |
+
 ## Stable body labels
 
 - `thm:lu-lc-rigidity`: arbitrary-additive stabilizer-AME LU rigidity.

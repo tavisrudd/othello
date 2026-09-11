@@ -593,14 +593,13 @@ all four sites permutes the summands and fixes the state.  The label map
 \(\operatorname{Sp}_4(\F_3)\) and would be lost by restricting to
 \(\mathrm{SL}_2(\F_9)\).
 
-\subsection{Marginal certification and stochastic conversion}
+\subsection{Determination from marginals}
 \label{subsec:marginal-certification}
 
-The atlas has two consequences outside the equivalence problem.  The
-first says which reductions of a stabilizer AME state determine it among
-all density operators and gives the matching parent Hamiltonian; the
-second removes the unitarity hypothesis from
-Theorem~\ref{thm:lu-lc-rigidity}.  For a party set \(A\), write
+The support constraints determine the state among all density operators
+and give a parent Hamiltonian.  We first prove exact determination, then
+ask how reliably the constraints detect an imperfect preparation.
+For a party set \(A\), write
 \(\sigma_A\) for the reduction of a density operator \(\sigma\) to \(A\),
 and \(\|X\|_1=\Tr|X|\).  An operator on a party set is identified with its
 tensor product by the identity on the remaining parties.
@@ -746,6 +745,12 @@ witness of \cite{TothGuhne2005} applied to a frustration-free Hamiltonian,
 and the state \(\sigma\) need not be pure, stabilizer, or AME, which
 separates it from the approximate product-symmetry statements of
 Section~\ref{sec:quantitative}.
+
+\input{sections/03a-marginal-verification}
+
+\subsection{Stochastic conversion}
+
+The next consequence removes the unitarity assumption from exact rigidity.
 
 \begin{corollary}[Stochastic conversion]
 \label{cor:stochastic-conversion}

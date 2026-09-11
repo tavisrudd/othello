@@ -14,6 +14,12 @@ future paper-specific semantic gate.
 | `prop:robust-linear-atlas`; `cor:logical-clifford-rounding` | Input-plane surjectivity follows from `StabilizerAMESupport`; `EncoderTransversal` checks the inverse-transpose Choi orientation. | Robust compatibility, stabilizer cancellation on the chosen input leg, and the quantitative logical corollary are manuscript compositions. |
 | Section 6 overlap gap and residual stability; Appendix B local stability | only the multipartite core named above | Overlap quantization, balanced-cut residual stability, and Appendix B's local quadratic constants are not formalized. |
 
+The C1137 statements `prop:complementary-marginal-tests`,
+`cor:marginal-certified-rounding`, `prop:weighted-marginal-tests`, and
+`prop:universal-marginal-verification` have **no formal coverage**. Their
+character, spectral and error-filtration arguments are complete manuscript
+proofs and introduce no computational premise.
+
 ## Current audit boundary
 
 The relevant declarations have been checked under Lean `v4.32.0-rc1`. In the

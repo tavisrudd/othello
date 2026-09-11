@@ -76,36 +76,6 @@ hence to be Clifford.  In ordinary language,
  \text{every local factor is Clifford}.                 \tag{1.1}
 \]
 
-The operational code consequence follows by treating one party as the
-logical input of the associated quantum MDS encoder.  Throughout,
-\emph{transversal} means a tensor product of one-site physical operators
-with the physical coordinates fixed.  Such gates limit the direct spread
-of errors between physical subsystems, which makes them central to
-fault-tolerant constructions.  The Eastin--Knill theorem rules out a
-universal transversal gate set for an exact finite-dimensional code
-\cite{EastinKnill2009}; the natural family-specific question is therefore
-which transversal gates remain.
-
-\begin{corollary}[Factorwise transversal rigidity]
-\label{cor:transversal-clifford}
-Let \(m\geq2\), and let \(V_\psi,V_\phi:\mathbb C^q\to
-(\mathbb C^q)^{\otimes(2m-1)}\) be encoders whose normalized Choi states
-are stabilizer \(\AME(2m,q)\) states.  If \(U_i\in U(q)\) and
-\[
- (U_1\otimes\cdots\otimes U_{2m-1})V_\psi=V_\phi L,
-\]
-then \(L\) and every \(U_i\) are Clifford.  In particular, no code in
-this family admits a transversal non-Clifford logical unitary.
-\end{corollary}
-
-General cleaning arguments already constrain the \emph{logical} action of
-a transversal gate \cite[Lemma~5]{PastawskiYoshida2015}.
-Corollary~\ref{cor:transversal-clifford} is stronger in
-a different direction: it identifies every physical one-site factor as
-Clifford as well as the induced logical gate.  This factorwise conclusion
-is what turns LU equivalence of the Choi states into finite local
-symplectic data.
-
 \subsection*{Quantitative question}
 
 Exact rigidity does not by itself say what happens when a product unitary
@@ -181,7 +151,39 @@ geometry gives correctable regions, which feed the robust rounding theorem.
 Appendix~\ref{sec:two-uniform} isolates the weaker consequences of pairwise
 maximal mixing alone and is not used to prove either branch.
 
-\subsection*{Transition maps and the remaining obstruction}
+\subsection*{Consequences of the exact theorem}
+
+The operational code consequence follows by treating one party as the
+logical input of the associated quantum MDS encoder.  Throughout,
+\emph{transversal} means a tensor product of one-site physical operators
+with the physical coordinates fixed.  Such gates limit the direct spread
+of errors between physical subsystems, which makes them central to
+fault-tolerant constructions.  The Eastin--Knill theorem rules out a
+universal transversal gate set for an exact finite-dimensional code
+\cite{EastinKnill2009}; the natural family-specific question is therefore
+which transversal gates remain.
+
+\begin{corollary}[Factorwise transversal rigidity]
+\label{cor:transversal-clifford}
+Let \(m\geq2\), and let \(V_\psi,V_\phi:\mathbb C^q\to
+(\mathbb C^q)^{\otimes(2m-1)}\) be encoders whose normalized Choi states
+are stabilizer \(\AME(2m,q)\) states.  If \(U_i\in U(q)\) and
+\[
+ (U_1\otimes\cdots\otimes U_{2m-1})V_\psi=V_\phi L,
+\]
+then \(L\) and every \(U_i\) are Clifford.  In particular, no code in
+this family admits a transversal non-Clifford logical unitary.
+\end{corollary}
+
+General cleaning arguments already constrain the \emph{logical} action of
+a transversal gate \cite[Lemma~5]{PastawskiYoshida2015}.
+Corollary~\ref{cor:transversal-clifford} is stronger in
+a different direction: it identifies every physical one-site factor as
+Clifford as well as the induced logical gate.  This factorwise conclusion
+is what turns LU equivalence of the Choi states into finite local
+symplectic data.
+
+\paragraph{Transition maps.}
 
 The support bijections retain how the local Weyl frames are related.  For an
 \((m+1)\)-party support \(A\), projection at party \(i\) gives a bijection
@@ -227,9 +229,11 @@ conversion when stabilizer phases are supplied.  These data also determine
 an intrinsic endomorphism algebra in prime dimension
 (Section~\ref{sec:endomorphism-algebra}), certify the state from \(m\)
 minimum-support marginals, and decide stochastic local conversion
-(Section~\ref{subsec:marginal-certification}).  These are consequences of
-the exact support geometry; neither their classification nor their
-algorithms are needed for robust rigidity.
+(Section~\ref{subsec:marginal-certification}).  Complementary marginal tests also give a fidelity certificate with gap
+\((m+1)/(2m)\), supplying an observable sufficient condition for robust
+rigidity when the preparation is promised to be a product-unitary image
+(Section~\ref{subsec:optimal-marginal-verification}).  These consequences
+are optional on a first reading of the two rigidity proofs.
 
 At the radius
 \[
@@ -328,21 +332,21 @@ Lakshminarayan give an orthogonal-array criterion producing such families
 operator pushing and the encoder interpretation are used explicitly in
 holographic codes \cite[Eq.~(2.3) and Section~5.7]{PastawskiYoshidaHarlowPreskill2015}.
 
-\subsection*{Organization}
+\subsection*{Reading the paper}
 
-Section~\ref{sec:dictionary} fixes the additive stabilizer conventions and
-derives the AME support formula.  Sections~\ref{sec:rigidity} and
-\ref{sec:atlas} prove exact rigidity, the transition-map classification,
-marginal certification, stochastic conversion, and the encoder corollary.  Section~\ref{sec:endomorphism-algebra} gives the
-endomorphism-algebra refinement and the low-party theorem in prime dimension.
-Section~\ref{sec:quantitative} proves cleaning-based
-rounding, robust transition compatibility, and the stabilizer-character
-obstruction.  Section~\ref{sec:conclusion} summarizes the scaling and open
-problem.
+For the two main results, read the support dictionary in
+Section~\ref{sec:dictionary}, the exact proof in
+Section~\ref{sec:rigidity}, and the robust proof in
+Section~\ref{sec:quantitative}.  The four-qutrit example in
+Section~\ref{subsec:four-qutrit-example} makes the support, frame and
+character data explicit.  Its marginal tests in
+Section~\ref{subsec:optimal-marginal-verification} lead to the observable
+rounding criterion in Corollary~\ref{cor:marginal-certified-rounding}.
 
-The appendices prove the five-type module claims
-(Appendix~\ref{app:endomorphism-code-structures}), derive stabilizer-independent
-two-uniform discreteness and local stability
-(Appendix~\ref{sec:two-uniform}; not needed for the main theorems), and state
-the trust boundary
-(Appendix~\ref{sec:verification}).
+The finite classification and encoder consequences occupy the rest of
+Section~\ref{sec:atlas}; Section~\ref{sec:endomorphism-algebra} refines
+the classification in prime dimension.  These sections can be skipped on
+the first route.  The appendices give the associated code structures,
+stabilizer-independent infinitesimal estimates, weighted and nonstabilizer
+marginal-test refinements, and the formal trust boundary.  They are not
+needed for either headline rigidity theorem.

@@ -1,0 +1,14 @@
+{
+  "qi": {
+    "X": "draft-tested",
+    "Y": "baseline"
+  },
+  "mathphys": {
+    "X": "baseline",
+    "Y": "draft-tested"
+  },
+  "coding": {
+    "X": "draft-tested",
+    "Y": "baseline"
+  }
+}

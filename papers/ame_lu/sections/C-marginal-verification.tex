@@ -1,0 +1,140 @@
+\section{Weighted tests and the universal AME bound}
+\label{app:marginal-verification}
+
+This appendix refines Proposition~\ref{prop:complementary-marginal-tests}.
+The first result quantifies the effect of selecting or reweighting tests.
+The second removes the stabilizer assumption from the uniform gap and
+weighted lower bound.  Neither refinement is needed for the rigidity
+proofs or the observable criterion in
+Corollary~\ref{cor:marginal-certified-rounding}.
+
+For a perfectly complete verification operator \(\Omega\), write
+\[
+ \nu(\Omega)=\min_{v\perp\psi,\ \|v\|=1}
+                  \langle v|(I-\Omega)|v\rangle.
+\]
+A permitted binary effect is \(E_S\otimes I_{S^c}\), with
+\(0\leq E_S\leq I\), \(|S|\leq m+1\), and
+\((E_S\otimes I)\psi=\psi\).  Randomization chooses among these fixed
+supports before testing the copy.  Positivity implies that \(I-E_S\)
+annihilates the marginal support.  Consequently \(E_S\otimes I\geq\Pi_S\)
+when \(|S|=m+1\); for \(|S|\leq m\), full marginal rank forces
+\(E_S=I\).  This is why half-plus-one is the first informative support size.
+
+\begin{proposition}[Weights and number of tests]
+\label{prop:weighted-marginal-tests}
+For a stabilizer \(\AME(2m,q)\), \(m\geq2\), assign probabilities
+\(w_S\) to the complementary library \(\mathcal S\), including zero
+weights, and order them as \(w_{(1)}\leq\cdots\leq w_{(2m)}\).  Then
+\begin{equation}
+ \nu\!\left(\sum_{S\in\mathcal S}w_S\Pi_S\right)
+       =\sum_{a=1}^{m+1}w_{(a)}.
+ \label{eq:weighted-marginal-gap}
+\end{equation}
+Among all permitted protocols with at most \(s\) binary tests,
+\begin{equation}
+ \nu_{\max}(s)=
+ \begin{cases}
+ 0,&1\leq s<m,\\
+ 1-(m-1)/s,&m\leq s\leq2m,\\
+ (m+1)/(2m),&s\geq2m.
+ \end{cases}
+ \label{eq:marginal-test-tradeoff}
+\end{equation}
+Any \(s\) distinct library tests sampled uniformly attain the middle
+branch; the full library attains the last.
+\end{proposition}
+
+\begin{proof}
+The character argument in Proposition~\ref{prop:complementary-marginal-tests}
+shows that every nontrivial character fails at least \(m+1\) tests, and
+that any prescribed \(m-1\) tests are exactly the pass set of some
+nontrivial character.  Let it pass the \(m-1\) heaviest weights to obtain
+\eqref{eq:weighted-marginal-gap}.
+
+For an arbitrary collection of permitted supports, each contributes at
+most \(2e\) independent character constraints.  Fewer than \(m\) tests
+therefore have a common nontrivial passing character.  If there are
+\(t\geq m\) positive weights, a nontrivial character passes the support
+projectors of the \(m-1\) heaviest tests, and hence their effects.  Its
+rejection probability is at most \(1-(m-1)/t\).  Combine this with the
+one-site-error cap \((m+1)/(2m)\) proved in the body.  Uniform sampling
+from the library attains both bounds in their stated ranges.
+\end{proof}
+
+In particular, uniform weights uniquely maximize the gap within the full
+library.  If \(f\leq m\) tests become unavailable, the remaining tests
+still give gap \((m+1-f)/(2m-f)\) when sampled uniformly.  Here the
+parties remain available; only the list of tests is reduced.
+The general minimum-test gap bound and common-eigenbasis optimization
+precede this calculation \cite[Proposition~1 and Section~V.B]{DangniamHanZhu2020}.
+
+\begin{proposition}[Arbitrary AME targets]
+\label{prop:universal-marginal-verification}
+Let \(\psi\) be any \(\AME(2m,q)\), with integers \(q\geq2,m\geq2\).
+For the same complementary library and arbitrary probability weights,
+\begin{equation}
+ I-\sum_{S\in\mathcal S}w_S\Pi_S
+ \geq\left(\sum_{a=1}^{m+1}w_{(a)}\right)
+       (I-|\psi\rangle\langle\psi|).
+ \label{eq:universal-weighted-gap}
+\end{equation}
+Any \(m\) library marginals determine \(\psi\) among all density
+operators.  The uniform full library has gap exactly \((m+1)/(2m)\),
+optimal among permitted tests.  Exact weighted attainment and the
+finite-test upper bound above retain their stabilizer hypothesis.
+\end{proposition}
+
+\begin{proof}
+We replace stabilizer characters by errors on a half-set.  Choose on each
+site a unitary operator basis orthonormal for normalized Hilbert--Schmidt
+inner product, with identity distinguished.  Maximal mixing on \(B\)
+makes the \(q^{2m}\) vectors \(W_B\psi\) an orthonormal basis.  The
+projector \(\Pi_{C\cup\{i\}}\) has rank \(q^{2m-2}\); it fixes the
+\(q^{2m-2}\) basis vectors whose error at \(i\) is identity, since those
+errors act on its complement.  These vectors therefore span its range.
+Each star is consequently a commuting family, testing one error coordinate
+at a time, with product \(|\psi\rangle\langle\psi|\).
+Equivalently, a half-unitary taking \(\psi\) to \(m\) Bell pairs
+conjugates these projectors to the pair projectors.  This is the
+virtual-factor picture of parent constraints
+\cite[Sections~IV--V]{JohnsonTicozziViola2017}
+\cite[Sections~2 and~5]{KaruvadeJohnsonTicozziViola2018}.
+
+Select \(r\) tests from this star and \(t\) from the other, where
+\(s=r+t\geq m\), and put \(d=s-m\).  On \(\psi^\perp\), let \(A,D\)
+be the respective sums of rejection projectors and let
+\(E_k=\mathbf1_{A\leq k}\), \(F_l=\mathbf1_{D\leq l}\).
+The range of \(E_k\) is spanned by nonidentity errors on \(B\) with at
+most \(k\) errors on the \(r\) tested coordinates, hence total weight at
+most \(m-r+k\).  The analogous bound for \(F_l\) is \(m-t+l\).
+If \(k+l\leq d\), the combined support of two such opposite-half errors
+has size at most \(m\).  Maximal mixing makes their inner product zero:
+the errors are on disjoint halves and each vector has a nonidentity factor
+of trace zero.  Thus \(E_kF_l=0\).
+
+In particular \(E_k+F_{d-k}\leq I\) for \(0\leq k\leq d\).
+The spectra of \(A,D\) are nonnegative integers, so spectral calculus gives
+\[
+ \sum_{k=0}^d E_k=(d+1)I-\min\{A,(d+1)I\}.
+\]
+Summing the projection inequalities yields \(A+D\geq(d+1)I\).
+Restoring the target ray, every selected family of \(s\geq m\) tests
+therefore satisfies
+\[
+ \sum_{S\text{ selected}}(I-\Pi_S)
+       \geq(s-m+1)(I-|\psi\rangle\langle\psi|).
+\]
+Order the weights, write \(w_0=0\), and expand the weighted sum as
+\[
+ \sum_{i=1}^{2m}w_i(I-\Pi_i)
+  =\sum_{k=1}^{2m}(w_k-w_{k-1})
+                    \sum_{i=k}^{2m}(I-\Pi_i).
+\]
+Apply the selected-family bound to tails of size at least \(m\), and
+positivity to the rest.  The coefficient telescopes to
+\(\sum_{i=1}^{m+1}w_i\), proving \eqref{eq:universal-weighted-gap}.
+A positive gap for any \(m\) selected tests gives marginal determination.
+Uniform full sampling attains the one-site-error upper bound from the body,
+whose proof uses only one-party maximal mixing.
+\end{proof}

@@ -1,0 +1,100 @@
+\subsection{Testing the marginal constraints}
+\label{subsec:optimal-marginal-verification}
+
+Determination is an exact statement.  To use the marginals as a certificate,
+we also need to know how reliably they detect a deviation from the target.
+Sampling the \(m\) projectors above uniformly gives a worst-case rejection
+rate of only \(1/m\) on states orthogonal to \(\psi\).  We can improve
+this by using the complementary half as well.
+
+Fix complementary halves \(B,C\), and put
+\[
+ \mathcal S=\{B\cup\{j\}:j\in C\}
+       \cup\{C\cup\{i\}:i\in B\},\qquad
+ \Pi_S=q^{m-1}\rho_S^\psi\otimes I_{S^c}.
+\]
+In one round, choose \(S\) uniformly from these \(2m\) supports and
+measure the binary test \(\{\Pi_S,I-\Pi_S\}\), accepting on \(\Pi_S\).
+This requires access to \(m+1\) parties of one copy.  Joint operations
+within that subset are allowed.  The restriction is on the \emph{total
+support} of a test; it differs from measuring all parties separately and
+combining their outcomes.  A binary test need not be one laboratory
+measurement basis.
+
+The verification-operator and spectral-gap framework is standard
+\cite{PallisterLindenMontanaro2018,DangniamHanZhu2020}, as are fidelity
+certificates from stabilizer generators and frustration-free Hamiltonians
+\cite{KalevKyrillidisLinke2019,ZhuLiChen2024}.  Setting minimization and
+qudit stabilizer witnesses have also been studied
+\cite{LiZhangLiZhu2021,SzczepaniakMakutaAugusiak2026}.
+Here the AME support geometry lets us calculate the optimal rejection
+rate under the stated support restriction.
+
+\begin{proposition}[Complementary marginal tests]
+\label{prop:complementary-marginal-tests}
+Let \(\psi\) be a stabilizer \(\AME(2m,q)\) state with \(m\geq2\).
+The verification operator and its gap are
+\begin{equation}
+ \Omega_* = \frac1{2m}\sum_{S\in\mathcal S}\Pi_S,
+ \qquad \nu_* = \frac{m+1}{2m},\qquad
+ I-\Omega_*\geq\nu_*(I-|\psi\rangle\langle\psi|).
+ \label{eq:complementary-gap}
+\end{equation}
+The coefficient \(\nu_*\) is optimal among randomized perfectly complete
+binary tests, each supported on at most \(m+1\) parties.  For every density
+operator \(\sigma\), its rejection probability
+\(r(\sigma)=\Tr[(I-\Omega_*)\sigma]\) satisfies
+\begin{equation}
+ 1-\langle\psi|\sigma|\psi\rangle
+ \leq\frac{r(\sigma)}{\nu_*}
+ \leq\frac1{m+1}\sum_{S\in\mathcal S}
+       \frac12\|\sigma_S-\rho_S^\psi\|_1.
+ \label{eq:complementary-fidelity}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The key is that \emph{any} \(m\) of the supported spaces \(L(S)\)
+form a direct sum equal to \(L\).  To see this, select
+\(I\subset B,J\subset C\) with \(|I|+|J|=m\).  In a relation
+\(\sum_{i\in I}u_i=-\sum_{j\in J}v_j\), with
+\(u_i\in L(C\cup\{i\})\) and \(v_j\in L(B\cup\{j\})\), the common
+sum is supported in \(I\cup J\).  The support theorem makes it zero.
+Projection to \(i\) isolates \(u_i\) and is injective on its subgroup,
+so every term vanishes; likewise for \(v_j\).  Each subgroup has dimension
+\(2e\) over \(\F_p\), so the dimensions add to \(\dim L\).
+
+Use the actual stabilizer lifts fixing \(\psi\).  Their joint eigenbasis
+is indexed by characters of \(L\).  A projector \(\Pi_S\) accepts
+exactly those characters trivial on \(L(S)\).  A nontrivial character
+cannot pass \(m\) tests, hence fails at least \(m+1\).  This proves the
+operator inequality.  It is sharp: any \(m-1\) chosen subgroups have a
+nonzero annihilating character, which passes exactly those tests.
+
+For optimality in the larger class of allowed tests, a perfectly complete
+effect \(E\) satisfies \(E\psi=\psi\).  A traceless one-site unitary
+\(V_i\) makes \(V_i\psi\) orthogonal to \(\psi\), and every test omitting
+\(i\) still accepts it.  Thus the gap is at most the probability of
+including party \(i\).  Averaging over \(2m\) parties bounds that
+probability, for some \(i\), by \((m+1)/(2m)\).
+Finally take the expectation of the operator inequality.  Testing a
+marginal discrepancy against its support projector bounds each rejection
+probability by \(\tfrac12\|\sigma_S-\rho_S^\psi\|_1\); average and divide
+by \(\nu_*\).
+\end{proof}
+
+For the four-qutrit state of Section~\ref{subsec:four-qutrit-example},
+the two tests on \(123\) and \(124\) have gap \(1/2\); using all four
+three-party tests raises it to \(3/4\).  The state
+\(Z_1(1)\psi\) passes the test omitting party 1 and fails the other
+three: on each support containing party 1, surjectivity onto its Weyl
+labels makes the induced character nontrivial.  These tests detect exactly
+the character change that left the transition maps unchanged in the example.
+
+Only acceptance probabilities are needed for the first fidelity bound;
+full marginal tomography is unnecessary.  If the prepared state is promised
+to be \(U\psi\) for a product unitary \(U\), the same certificate enters
+the robust rigidity theorem through
+Corollary~\ref{cor:marginal-certified-rounding}.
+Appendix~\ref{app:marginal-verification} gives the exact tradeoff for fewer
+or unequally weighted tests and extends the uniform gap to every AME state.

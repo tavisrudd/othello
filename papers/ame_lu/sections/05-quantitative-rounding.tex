@@ -706,3 +706,41 @@ The cleaning radius is the governing bound.  Its \(n^{-1/2}\) scale is a
 proved lower bound, not an optimality claim; no
 product-unitary family is known to saturate the collective frame-error
 estimate (6.6).
+
+
+\subsection{An observable sufficient condition}
+
+The defect in the rounding theorem can be bounded from the marginal tests
+of Proposition~\ref{prop:complementary-marginal-tests}.  No reconstruction
+of the local unitaries is needed to establish this entry condition.
+
+\begin{corollary}[Marginal-certified rounding]
+\label{cor:marginal-certified-rounding}
+Let \(\psi\) be a stabilizer \(\AME(2m,q)\), \(m\geq2\), and suppose
+the tested state is \(U|\psi\rangle\langle\psi|U^\dagger\) for a product
+unitary \(U\).  Put \(R=R^{\mathrm{clean}}_{2m,q}\) and
+\(\nu_*=(m+1)/(2m)\).  If its rejection probability satisfies
+\[
+ r\leq\gamma<\nu_*(R^2-R^4/4),
+\]
+then Theorem~\ref{thm:cleaning-global-rounding} applies with defect bound
+\[
+ \varepsilon(U)\leq\eta(\gamma)
+   :=\sqrt{2\bigl(1-\sqrt{1-\gamma/\nu_*}\bigr)}<R.
+\]
+In particular, every factor rounds within \(8\eta(\gamma)\), and the
+collective residual bound is \(\pi\sqrt q\,\eta(\gamma)\).
+\end{corollary}
+
+\begin{proof}
+Write \(F=|\langle\psi|U|\psi\rangle|^2\).
+Equation~\eqref{eq:complementary-fidelity} gives \(F\geq1-\gamma/\nu_*\),
+and \(\varepsilon(U)^2=2(1-\sqrt F)\).  Since \(0<R<\sqrt2\), the
+assumed bound on \(\gamma\) gives \(\eta(\gamma)<R\).
+\end{proof}
+
+Here \(\gamma\) must be a valid upper bound on the rejection probability,
+for example a statistical confidence bound under the chosen sampling
+assumptions; a bare observed failure frequency is not such a bound.
+For arbitrary mixed preparations the tests still certify fidelity, but
+the Clifford conclusion requires the product-unitary promise.
