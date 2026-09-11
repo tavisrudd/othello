@@ -38,6 +38,7 @@ numerical claim must be regenerated here under
 `notes/research-reproducibility-conventions.md`.
 
 
+- **C1138 `[ame-lu]` [RUNNING]** — Verify and integrate second referee corrections and focused strengthenings; omit gradings → `notes/2026-09-10-c1138-ame-lu-second-referee.md`.
 - **C979 `[ame-lu]` [RUNNING; USER-HELD OPEN UNTIL EXPLICIT CLOSE]** — revise *Diagonal Isoduality and Transversal Clifford Groups of MDS--CSS Codes* for a stabilizer-code reader: make the nullity-zero/nullity-one dichotomy the core, rebuild the introduction and Section 3 around the operational question, and drop the README's Clebsch affiliation claim, preserving the exact mathematics → `notes/2026-08-27-c979-mds-css-exposition-revision.md`.
 
 - **C986 `[ame-lu]` [QUEUED; CSS BOREL CLASSIFICATION AND REALIZABILITY]** — develop C982's torus/Borel/full-`SL_2` projection theorem into a standalone classification package: classify coordinatewise Clifford stabilizers of pure CSS states, construct nontrivial Borel families, give a recognition algorithm, and audit novelty; stop at an outlook result if no realizability layer emerges → `notes/2026-08-27-c986-css-borel-classification.md`.
