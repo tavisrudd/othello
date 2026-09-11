@@ -105,3 +105,9 @@ now uses title case: *One-Stabilization Irrationality and Hodge Conservation
 for Fano Threefolds*. The primary title page is dated September 2026.
 The title is synchronized across metadata, READMEs, blueprint, portfolio and
 companion citations. Companion manuscript dates are unchanged.
+
+Title/date correction validated in all three authority and standalone paper
+gates; PDFs match byte for byte. Authority `8cfb5b467`, standalone `26447e7`;
+352-file export verifies with content SHA-256
+`348955e34937e85f4f12c32ada8d40aa4df80e3b768563f1f2d1ae13abbe3bda`.
+The rendered title page was inspected. No push.
