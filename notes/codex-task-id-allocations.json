@@ -4913,8 +4913,17 @@
       "last": 1142,
       "purpose": "Sharpness exposition: uninterrupted proof order, named universal tangent-cover lemma, compressed optional consequences",
       "sequence": 546
+    },
+    {
+      "count": 5,
+      "first": 1143,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1147,
+      "purpose": "Ordered external benchmark programme: BB circuit distance; held-out QLDPC distance; hypergraph decoding; multidimensional allocation; temporal scheduling",
+      "sequence": 547
     }
   ],
-  "next_id": 1143,
+  "next_id": 1148,
   "schema": "codex-task-id-allocations-v1"
 }
