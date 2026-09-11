@@ -1,0 +1,141 @@
+{
+  "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.4310/PAMQ.2016.v12.n1.a5?fields=paperId,title,externalIds,citationCount",
+  "accessed_utc": "2026-09-11T08:12:12.696420+00:00",
+  "http_status": 200,
+  "data": {
+    "paperId": "12007562ba7542ee6d02d9c291828d76fe9baf1d",
+    "externalIds": {
+      "MAG": "575073093",
+      "ArXiv": "1506.05346",
+      "DOI": "10.4310/PAMQ.2016.V12.N1.A5",
+      "CorpusId": 118542520
+    },
+    "title": "On intermediate Jacobians of cubic threefolds admitting an automorphism of order five",
+    "citationCount": 4
+  },
+  "outcome": "success",
+  "citations": {
+    "url": "https://api.semanticscholar.org/graph/v1/paper/12007562ba7542ee6d02d9c291828d76fe9baf1d/citations?fields=title,year,externalIds,abstract&limit=1000",
+    "accessed_utc": "2026-09-11T08:12:12.928455+00:00",
+    "http_status": 200,
+    "data": {
+      "offset": 0,
+      "data": [
+        {
+          "citingPaper": {
+            "paperId": "d5fa8b4524be1741d3f9956d1afb4a8ff58bcdde",
+            "externalIds": {
+              "ArXiv": "2304.03214",
+              "DOI": "10.1007/s00209-025-03745-3",
+              "CorpusId": 257985245
+            },
+            "title": "Special subvarieties in the locus of intermediate Jacobians of cubic threefolds",
+            "year": 2023,
+            "openAccessPdf": {
+              "url": "https://link.springer.com/content/pdf/10.1007/s00209-025-03745-3.pdf",
+              "status": "HYBRID",
+              "license": "other-oa",
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2304.03214, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+            },
+            "authors": [
+              {
+                "authorId": "2213714120",
+                "name": "Moritz Hartlieb"
+              }
+            ],
+            "abstract": "We study special subvarieties, i.e., subvarieties containing a dense subset of CM points, of the moduli space A5\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$A_5$$\\end{document} of principally polarized abelian varieties of dimension five, generically contained in the locus of intermediate Jacobians of cubic threefolds. The analogous question for Jacobians of curves is related to a conjecture of Coleman-Oort and has been studied by Shimura, Mostow, De Jong-Noot, Rohde, Moonen, Oort, Frediani, Ghigi and others. Adapting methods of Frediani, Ghigi and Penegini, we give a sufficient condition ensuring that the closure of the image of a family of smooth cubic threefolds with prescribed automorphisms via the period map is a special subvariety of A5\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$A_5$$\\end{document} and classify the positive-dimensional families of cubic threefolds satisfying our condition. In particular, we discover two examples of positive-dimensional special subvarieties in the intermediate Jacobian locus that contain the intermediate Jacobian of the Klein cubic threefold."
+          }
+        },
+        {
+          "citingPaper": {
+            "paperId": "6aca53d03a9f5f091fde0a54e8568090ef54328c",
+            "externalIds": {
+              "MAG": "3110682427",
+              "ArXiv": "2002.09861",
+              "DOI": "10.1112/jlms.12419",
+              "CorpusId": 211259355
+            },
+            "title": "The moduli space of cubic surface pairs via the intermediate Jacobians of Eckardt cubic threefolds",
+            "year": 2020,
+            "openAccessPdf": {
+              "url": "https://arxiv.org/pdf/2002.09861",
+              "status": "GREEN",
+              "license": null,
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/2002.09861, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+            },
+            "authors": [
+              {
+                "authorId": "1405137360",
+                "name": "Sebastian Casalaina-Martin"
+              },
+              {
+                "authorId": "2148904644",
+                "name": "Zhenghe Zhang"
+              }
+            ],
+            "abstract": "We study the moduli space of pairs consisting of a smooth cubic surface and a smooth hyperplane section, via a Hodge theoretic period map due to Laza, Pearlstein, and the second\u2010named author. The construction associates to such a pair a so\u2010called Eckardt cubic threefold, admitting an involution, and the period map sends the pair to the anti\u2010invariant part of the intermediate Jacobian of this cubic threefold, with respect to this involution. Our main result is that the global Torelli theorem holds for this period map; that is, the period map is injective. To prove the result, we describe the anti\u2010invariant part of the intermediate Jacobian as a Prym variety of a branched cover. Our proof uses results of Naranjo\u2013Ortega, Bardelli\u2013Ciliberto\u2013Verra, and Nagaraj\u2013Ramanan, on related Prym maps. In fact, we are able to recover the degree of one of these Prym maps by describing positive\u2010dimensional fibers, in the same spirit as a result of Donagi\u2013Smith on the degree of the Prym map for connected \u00e9tale double covers of genus 6 curves."
+          }
+        },
+        {
+          "citingPaper": {
+            "paperId": "b6f0d821e65f4b5ceb6ad8983dc9d49559b49a29",
+            "externalIds": {
+              "DOI": "10.1007/s00229-018-1018-z",
+              "CorpusId": 253773861
+            },
+            "title": "On Prym varieties for the coverings of some singular plane curves",
+            "year": 2018,
+            "openAccessPdf": {
+              "url": "https://arxiv.org/pdf/1609.03981",
+              "status": "GREEN",
+              "license": null,
+              "disclaimer": "Notice: The following paper fields have been elided by the publisher: {'abstract'}. Paper or abstract available at https://api.unpaywall.org/v2/10.1007/s00229-018-1018-z?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1007/s00229-018-1018-z, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+            },
+            "authors": [
+              {
+                "authorId": "2427729",
+                "name": "L. Beshaj"
+              },
+              {
+                "authorId": "2702901",
+                "name": "Takuya Yamauchi"
+              }
+            ],
+            "abstract": null
+          }
+        },
+        {
+          "citingPaper": {
+            "paperId": "f7b357d2c35d56f1fb6b65d21cc5295fd1105841",
+            "externalIds": {
+              "ArXiv": "1609.03981",
+              "MAG": "2963073409",
+              "DOI": "10.1007/s00229-018-1018-z",
+              "CorpusId": 119150544
+            },
+            "title": "On Prym varieties for the coverings of some singular plane curves",
+            "year": 2016,
+            "openAccessPdf": {
+              "url": "https://arxiv.org/pdf/1609.03981",
+              "status": "GREEN",
+              "license": null,
+              "disclaimer": "Notice: Paper or abstract available at https://arxiv.org/abs/1609.03981, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+            },
+            "authors": [
+              {
+                "authorId": "2427729",
+                "name": "L. Beshaj"
+              },
+              {
+                "authorId": "2702901",
+                "name": "Takuya Yamauchi"
+              }
+            ],
+            "abstract": "Let k be a field of characteristic zero containing a primitive nth root of unity. Let $$C^0_n$$Cn0 be a singular plane curve of degree n over k admitting an order n automorphism, n nodes as the singularities, and $$C_n$$Cn be its normalization. In this paper we study the factors of Prym variety $$\\text{ Prym }(\\widetilde{C}_n/C_n)$$Prym(C~n/Cn) associated to the double cover $$\\widetilde{C}_n$$C~n of $$C_n$$Cn exactly ramified at the points obtained by the blow-up of the singularities. We provide explicit models of some algebraic curves related to the construction of $$\\text{ Prym }(\\widetilde{C}_n/C_n)$$Prym(C~n/Cn) as a Prym variety and determine the interesting simple factors other than elliptic curves or hyperelliptic curves with small genus which come up in $$J_n$$Jn so that the endomorphism rings contains the totally real field $$\\mathbb {Q}(\\zeta _n+\\zeta ^{-1}_n)$$Q(\u03b6n+\u03b6n-1)."
+          }
+        }
+      ]
+    },
+    "outcome": "success"
+  }
+}

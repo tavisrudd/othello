@@ -1,0 +1,1674 @@
+{
+  "seed": "vanGeemenYamauchi-published",
+  "arxiv": "1506.05346",
+  "doi": "10.4310/PAMQ.2016.v12.n1.a5",
+  "services": {
+    "OpenAlex": {
+      "url": "https://api.openalex.org/works/https://doi.org/10.4310/PAMQ.2016.v12.n1.a5",
+      "accessed_utc": "2026-09-11T08:10:01.927905+00:00",
+      "http_status": 200,
+      "data": {
+        "id": "https://openalex.org/W2963929032",
+        "doi": "https://doi.org/10.4310/pamq.2016.v12.n1.a5",
+        "title": "On intermediate Jacobians of cubic threefolds admitting an automorphism of order five",
+        "display_name": "On intermediate Jacobians of cubic threefolds admitting an automorphism of order five",
+        "publication_year": 2016,
+        "publication_date": "2016-01-01",
+        "ids": {
+          "openalex": "https://openalex.org/W2963929032",
+          "doi": "https://doi.org/10.4310/pamq.2016.v12.n1.a5",
+          "mag": "2963929032"
+        },
+        "language": "en",
+        "primary_location": {
+          "id": "doi:10.4310/pamq.2016.v12.n1.a5",
+          "is_oa": false,
+          "landing_page_url": "https://doi.org/10.4310/pamq.2016.v12.n1.a5",
+          "pdf_url": null,
+          "source": {
+            "id": "https://openalex.org/S17324590",
+            "display_name": "Pure and Applied Mathematics Quarterly",
+            "issn_l": "1558-8599",
+            "issn": [
+              "1558-8599",
+              "1558-8602"
+            ],
+            "is_oa": false,
+            "is_in_doaj": false,
+            "is_core": true,
+            "host_organization": "https://openalex.org/P4327904645",
+            "host_organization_name": "International Press of Boston",
+            "host_organization_lineage": [
+              "https://openalex.org/P4327904645"
+            ],
+            "host_organization_lineage_names": [
+              "International Press of Boston"
+            ],
+            "type": "journal"
+          },
+          "license": null,
+          "license_id": null,
+          "version": "publishedVersion",
+          "is_accepted": true,
+          "is_published": true,
+          "raw_source_name": "Pure and Applied Mathematics Quarterly",
+          "raw_type": "journal-article"
+        },
+        "type": "article",
+        "indexed_in": [
+          "crossref"
+        ],
+        "open_access": {
+          "is_oa": false,
+          "oa_status": "closed",
+          "oa_url": null,
+          "any_repository_has_fulltext": false
+        },
+        "authorships": [
+          {
+            "author_position": "first",
+            "author": {
+              "id": "https://openalex.org/A5048141295",
+              "display_name": "Bert van Geemen",
+              "orcid": null
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I189158943",
+                "display_name": "University of Milan",
+                "ror": "https://ror.org/00wjc7c48",
+                "country_code": "IT",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I189158943"
+                ]
+              }
+            ],
+            "countries": [
+              "IT"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Bert van Geemen",
+            "raw_affiliation_strings": [
+              "Dipartimento di Matematica, Universit\u00e0 di Milano, Italy"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Dipartimento di Matematica, Universit\u00e0 di Milano, Italy",
+                "institution_ids": [
+                  "https://openalex.org/I189158943"
+                ]
+              }
+            ]
+          },
+          {
+            "author_position": "last",
+            "author": {
+              "id": "https://openalex.org/A5101187074",
+              "display_name": "Takuya Yamauchi",
+              "orcid": null
+            },
+            "institutions": [
+              {
+                "id": "https://openalex.org/I201537933",
+                "display_name": "Tohoku University",
+                "ror": "https://ror.org/01dq60k83",
+                "country_code": "JP",
+                "type": "education",
+                "lineage": [
+                  "https://openalex.org/I201537933"
+                ]
+              }
+            ],
+            "countries": [
+              "JP"
+            ],
+            "is_corresponding": false,
+            "raw_author_name": "Takuya Yamauchi",
+            "raw_affiliation_strings": [
+              "Mathematical Institute, Tohoku University, Aoba-Ku, Sendai, Japan"
+            ],
+            "raw_orcid": null,
+            "affiliations": [
+              {
+                "raw_affiliation_string": "Mathematical Institute, Tohoku University, Aoba-Ku, Sendai, Japan",
+                "institution_ids": [
+                  "https://openalex.org/I201537933"
+                ]
+              }
+            ]
+          }
+        ],
+        "institutions": [],
+        "countries_distinct_count": 2,
+        "institutions_distinct_count": 2,
+        "corresponding_author_ids": [],
+        "corresponding_institution_ids": [],
+        "apc_list": null,
+        "apc_paid": null,
+        "fwci": 0.0,
+        "has_fulltext": false,
+        "cited_by_count": 2,
+        "citation_normalized_percentile": {
+          "value": 0.26104237,
+          "is_in_top_1_percent": false,
+          "is_in_top_10_percent": false
+        },
+        "cited_by_percentile_year": {
+          "min": 89,
+          "max": 95
+        },
+        "biblio": {
+          "volume": "12",
+          "issue": "1",
+          "first_page": "141",
+          "last_page": "164"
+        },
+        "is_retracted": false,
+        "is_paratext": false,
+        "is_xpac": false,
+        "primary_topic": {
+          "id": "https://openalex.org/T12396",
+          "display_name": "Advanced Differential Equations and Dynamical Systems",
+          "score": 0.9937000274658203,
+          "subfield": {
+            "id": "https://openalex.org/subfields/2608",
+            "display_name": "Geometry and Topology"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/26",
+            "display_name": "Mathematics"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/3",
+            "display_name": "Physical Sciences"
+          }
+        },
+        "topics": [
+          {
+            "id": "https://openalex.org/T12396",
+            "display_name": "Advanced Differential Equations and Dynamical Systems",
+            "score": 0.9937000274658203,
+            "subfield": {
+              "id": "https://openalex.org/subfields/2608",
+              "display_name": "Geometry and Topology"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/26",
+              "display_name": "Mathematics"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/3",
+              "display_name": "Physical Sciences"
+            }
+          },
+          {
+            "id": "https://openalex.org/T10061",
+            "display_name": "Algebraic Geometry and Number Theory",
+            "score": 0.9817000031471252,
+            "subfield": {
+              "id": "https://openalex.org/subfields/2608",
+              "display_name": "Geometry and Topology"
+            },
+            "field": {
+              "id": "https://openalex.org/fields/26",
+              "display_name": "Mathematics"
+            },
+            "domain": {
+              "id": "https://openalex.org/domains/3",
+              "display_name": "Physical Sciences"
+            }
+          }
+        ],
+        "keywords": [
+          {
+            "id": "https://openalex.org/keywords/mathematics",
+            "display_name": "Mathematics",
+            "score": 0.9142504930496216
+          },
+          {
+            "id": "https://openalex.org/keywords/automorphism",
+            "display_name": "Automorphism",
+            "score": 0.6870694756507874
+          },
+          {
+            "id": "https://openalex.org/keywords/pure-mathematics",
+            "display_name": "Pure mathematics",
+            "score": 0.6297668218612671
+          },
+          {
+            "id": "https://openalex.org/keywords/order",
+            "display_name": "Order (exchange)",
+            "score": 0.6187167763710022
+          }
+        ],
+        "concepts": [
+          {
+            "id": "https://openalex.org/C33923547",
+            "wikidata": "https://www.wikidata.org/wiki/Q395",
+            "display_name": "Mathematics",
+            "level": 0,
+            "score": 0.9142504930496216
+          },
+          {
+            "id": "https://openalex.org/C118712358",
+            "wikidata": "https://www.wikidata.org/wiki/Q782566",
+            "display_name": "Automorphism",
+            "level": 2,
+            "score": 0.6870694756507874
+          },
+          {
+            "id": "https://openalex.org/C202444582",
+            "wikidata": "https://www.wikidata.org/wiki/Q837863",
+            "display_name": "Pure mathematics",
+            "level": 1,
+            "score": 0.6297668218612671
+          },
+          {
+            "id": "https://openalex.org/C182306322",
+            "wikidata": "https://www.wikidata.org/wiki/Q1779371",
+            "display_name": "Order (exchange)",
+            "level": 2,
+            "score": 0.6187167763710022
+          },
+          {
+            "id": "https://openalex.org/C10138342",
+            "wikidata": "https://www.wikidata.org/wiki/Q43015",
+            "display_name": "Finance",
+            "level": 1,
+            "score": 0.0
+          },
+          {
+            "id": "https://openalex.org/C162324750",
+            "wikidata": "https://www.wikidata.org/wiki/Q8134",
+            "display_name": "Economics",
+            "level": 0,
+            "score": 0.0
+          }
+        ],
+        "mesh": [],
+        "locations_count": 1,
+        "locations": [
+          {
+            "id": "doi:10.4310/pamq.2016.v12.n1.a5",
+            "is_oa": false,
+            "landing_page_url": "https://doi.org/10.4310/pamq.2016.v12.n1.a5",
+            "pdf_url": null,
+            "source": {
+              "id": "https://openalex.org/S17324590",
+              "display_name": "Pure and Applied Mathematics Quarterly",
+              "issn_l": "1558-8599",
+              "issn": [
+                "1558-8599",
+                "1558-8602"
+              ],
+              "is_oa": false,
+              "is_in_doaj": false,
+              "is_core": true,
+              "host_organization": "https://openalex.org/P4327904645",
+              "host_organization_name": "International Press of Boston",
+              "host_organization_lineage": [
+                "https://openalex.org/P4327904645"
+              ],
+              "host_organization_lineage_names": [
+                "International Press of Boston"
+              ],
+              "type": "journal"
+            },
+            "license": null,
+            "license_id": null,
+            "version": "publishedVersion",
+            "is_accepted": true,
+            "is_published": true,
+            "raw_source_name": "Pure and Applied Mathematics Quarterly",
+            "raw_type": "journal-article"
+          }
+        ],
+        "best_oa_location": null,
+        "sustainable_development_goals": [],
+        "awards": [
+          {
+            "id": "https://openalex.org/G3866046411",
+            "display_name": "A experimental study of arithmetic local systems with geometric origins and unsolved problems in arithmetic geometry",
+            "funder_award_id": "15K13422",
+            "funder_id": "https://openalex.org/F4320334764",
+            "funder_display_name": "Japan Society for the Promotion of Science"
+          }
+        ],
+        "funders": [
+          {
+            "id": "https://openalex.org/F4320334764",
+            "display_name": "Japan Society for the Promotion of Science",
+            "ror": "https://ror.org/00hhkn466"
+          }
+        ],
+        "has_content": {
+          "pdf": false,
+          "grobid_xml": false
+        },
+        "content_urls": null,
+        "referenced_works_count": 0,
+        "referenced_works": [],
+        "related_works": [
+          "https://openalex.org/W2114124567",
+          "https://openalex.org/W1979597421",
+          "https://openalex.org/W2998724919",
+          "https://openalex.org/W161787318",
+          "https://openalex.org/W2007980826",
+          "https://openalex.org/W180735356",
+          "https://openalex.org/W2091450008",
+          "https://openalex.org/W4289543790",
+          "https://openalex.org/W2891457673",
+          "https://openalex.org/W2886377156"
+        ],
+        "abstract_inverted_index": {
+          "Let": [
+            0,
+            15
+          ],
+          "$k$": [
+            1
+          ],
+          "be": [
+            2,
+            17
+          ],
+          "a": [
+            3,
+            9,
+            18,
+            33,
+            45,
+            97,
+            102
+          ],
+          "field": [
+            4,
+            38
+          ],
+          "of": [
+            5,
+            13,
+            25,
+            36,
+            47,
+            57,
+            64,
+            72,
+            86,
+            94,
+            106,
+            108
+          ],
+          "characteristic": [
+            6
+          ],
+          "zero": [
+            7
+          ],
+          "containing": [
+            8
+          ],
+          "primitive": [
+            10
+          ],
+          "fifth": [
+            11
+          ],
+          "root": [
+            12
+          ],
+          "unity.": [
+            14
+          ],
+          "$X/k$": [
+            16
+          ],
+          "smooth": [
+            19
+          ],
+          "cubic": [
+            20
+          ],
+          "threefold": [
+            21
+          ],
+          "with": [
+            22,
+            77
+          ],
+          "an": [
+            23,
+            65,
+            73
+          ],
+          "automorphism": [
+            24
+          ],
+          "order": [
+            26
+          ],
+          "five,": [
+            27
+          ],
+          "then": [
+            28
+          ],
+          "we": [
+            29
+          ],
+          "observe": [
+            30
+          ],
+          "that": [
+            31,
+            52
+          ],
+          "over": [
+            32
+          ],
+          "finite": [
+            34
+          ],
+          "extension": [
+            35
+          ],
+          "the": [
+            37,
+            40,
+            53,
+            62,
+            70,
+            92,
+            116
+          ],
+          "actually": [
+            39
+          ],
+          "dihedral": [
+            41
+          ],
+          "group": [
+            42
+          ],
+          "$D_5$": [
+            43
+          ],
+          "is": [
+            44,
+            59
+          ],
+          "subgroup": [
+            46
+          ],
+          "${\\rm": [
+            48
+          ],
+          "Aut}(X)$.": [
+            49
+          ],
+          "We": [
+            50,
+            82
+          ],
+          "find": [
+            51
+          ],
+          "intermediate": [
+            54
+          ],
+          "Jacobian": [
+            55
+          ],
+          "$J(X)$": [
+            56,
+            95
+          ],
+          "$X$": [
+            58
+          ],
+          "isogenous": [
+            60,
+            114
+          ],
+          "to": [
+            61,
+            91,
+            115
+          ],
+          "product": [
+            63
+          ],
+          "elliptic": [
+            66
+          ],
+          "curve": [
+            67
+          ],
+          "$E$": [
+            68
+          ],
+          "and": [
+            69
+          ],
+          "self-product": [
+            71
+          ],
+          "abelian": [
+            74,
+            117
+          ],
+          "surface": [
+            75
+          ],
+          "$B$": [
+            76
+          ],
+          "real": [
+            78
+          ],
+          "multiplication": [
+            79
+          ],
+          "by": [
+            80
+          ],
+          "$\\mathbb{Q}(\\sqrt{5})$.": [
+            81
+          ],
+          "give": [
+            83
+          ],
+          "explicit": [
+            84
+          ],
+          "models": [
+            85
+          ],
+          "some": [
+            87
+          ],
+          "algebraic": [
+            88
+          ],
+          "curves": [
+            89,
+            107
+          ],
+          "related": [
+            90
+          ],
+          "construction": [
+            93
+          ],
+          "as": [
+            96,
+            120
+          ],
+          "Prym": [
+            98
+          ],
+          "variety.": [
+            99
+          ],
+          "This": [
+            100
+          ],
+          "includes": [
+            101
+          ],
+          "two": [
+            103
+          ],
+          "parameter": [
+            104
+          ],
+          "family": [
+            105
+          ],
+          "genus": [
+            109
+          ],
+          "2": [
+            110
+          ],
+          "whose": [
+            111
+          ],
+          "Jacobians": [
+            112
+          ],
+          "are": [
+            113
+          ],
+          "surfaces": [
+            118
+          ],
+          "mentioned": [
+            119
+          ],
+          "above.": [
+            121
+          ]
+        },
+        "counts_by_year": [
+          {
+            "year": 2025,
+            "cited_by_count": 1
+          },
+          {
+            "year": 2020,
+            "cited_by_count": 1
+          }
+        ],
+        "updated_date": "2026-08-21T09:56:20.448147",
+        "created_date": "2025-10-10T00:00:00"
+      },
+      "outcome": "success",
+      "count": 2,
+      "citing_pages": [
+        {
+          "url": "https://api.openalex.org/works?filter=cites%3AW2963929032&per-page=200&cursor=%2A&select=id%2Cdoi%2Ctitle%2Cpublication_year%2Cabstract_inverted_index%2Cprimary_location",
+          "accessed_utc": "2026-09-11T08:10:02.358014+00:00",
+          "http_status": 200,
+          "data": {
+            "meta": {
+              "count": 2,
+              "db_response_time_ms": 24,
+              "page": null,
+              "per_page": 200,
+              "next_cursor": null,
+              "groups_count": null,
+              "x_query": {
+                "oql": "works where it cites (W2963929032)",
+                "oqo": {
+                  "get_rows": "works",
+                  "filter_rows": [
+                    {
+                      "column_id": "referenced_works",
+                      "value": "W2963929032"
+                    }
+                  ]
+                },
+                "url": "/works?filter=referenced_works:W2963929032&per_page=200&cursor=%2A"
+              },
+              "cost_usd": 0.0001
+            },
+            "results": [
+              {
+                "id": "https://openalex.org/W3007951135",
+                "doi": "https://doi.org/10.1112/jlms.12419",
+                "title": "The moduli space of cubic surface pairs via the intermediate Jacobians of Eckardt cubic threefolds",
+                "publication_year": 2020,
+                "abstract_inverted_index": {
+                  "We": [
+                    0
+                  ],
+                  "study": [
+                    1
+                  ],
+                  "the": [
+                    2,
+                    29,
+                    48,
+                    52,
+                    55,
+                    59,
+                    76,
+                    87,
+                    94,
+                    98,
+                    102,
+                    133,
+                    146,
+                    155,
+                    158
+                  ],
+                  "moduli": [
+                    3
+                  ],
+                  "space": [
+                    4
+                  ],
+                  "of": [
+                    5,
+                    8,
+                    58,
+                    62,
+                    101,
+                    109,
+                    117,
+                    135,
+                    137,
+                    152,
+                    157,
+                    166
+                  ],
+                  "pairs": [
+                    6
+                  ],
+                  "consisting": [
+                    7
+                  ],
+                  "a": [
+                    9,
+                    14,
+                    19,
+                    37,
+                    39,
+                    106,
+                    110,
+                    150
+                  ],
+                  "smooth": [
+                    10,
+                    15
+                  ],
+                  "cubic": [
+                    11,
+                    42,
+                    64
+                  ],
+                  "surface": [
+                    12
+                  ],
+                  "and": [
+                    13,
+                    28,
+                    47,
+                    120
+                  ],
+                  "hyperplane": [
+                    16
+                  ],
+                  "section,": [
+                    17
+                  ],
+                  "via": [
+                    18
+                  ],
+                  "Hodge": [
+                    20
+                  ],
+                  "theoretic": [
+                    21
+                  ],
+                  "period": [
+                    22,
+                    49,
+                    83,
+                    88
+                  ],
+                  "map": [
+                    23,
+                    50,
+                    89,
+                    160
+                  ],
+                  "due": [
+                    24
+                  ],
+                  "to": [
+                    25,
+                    35,
+                    54,
+                    68,
+                    131
+                  ],
+                  "Laza,": [
+                    26
+                  ],
+                  "Pearlstein,": [
+                    27
+                  ],
+                  "second-named": [
+                    30
+                  ],
+                  "author.": [
+                    31
+                  ],
+                  "The": [
+                    32
+                  ],
+                  "construction": [
+                    33
+                  ],
+                  "associates": [
+                    34
+                  ],
+                  "such": [
+                    36
+                  ],
+                  "pair": [
+                    38,
+                    53
+                  ],
+                  "so-called": [
+                    40
+                  ],
+                  "Eckardt": [
+                    41
+                  ],
+                  "threefold,": [
+                    43,
+                    65
+                  ],
+                  "admitting": [
+                    44
+                  ],
+                  "an": [
+                    45
+                  ],
+                  "involution,": [
+                    46
+                  ],
+                  "sends": [
+                    51
+                  ],
+                  "anti-invariant": [
+                    56,
+                    99
+                  ],
+                  "part": [
+                    57,
+                    100
+                  ],
+                  "intermediate": [
+                    60,
+                    103
+                  ],
+                  "Jacobian": [
+                    61,
+                    104
+                  ],
+                  "this": [
+                    63,
+                    69,
+                    82
+                  ],
+                  "with": [
+                    66
+                  ],
+                  "respect": [
+                    67
+                  ],
+                  "involution.": [
+                    70
+                  ],
+                  "Our": [
+                    71,
+                    113
+                  ],
+                  "main": [
+                    72
+                  ],
+                  "result": [
+                    73,
+                    151
+                  ],
+                  "is": [
+                    74,
+                    90
+                  ],
+                  "that": [
+                    75,
+                    85
+                  ],
+                  "global": [
+                    77
+                  ],
+                  "Torelli": [
+                    78
+                  ],
+                  "theorem": [
+                    79
+                  ],
+                  "holds": [
+                    80
+                  ],
+                  "for": [
+                    81,
+                    161
+                  ],
+                  "map;": [
+                    84
+                  ],
+                  "is,": [
+                    86
+                  ],
+                  "injective.": [
+                    91
+                  ],
+                  "To": [
+                    92
+                  ],
+                  "prove": [
+                    93
+                  ],
+                  "result,": [
+                    95
+                  ],
+                  "we": [
+                    96,
+                    128
+                  ],
+                  "describe": [
+                    97
+                  ],
+                  "as": [
+                    105,
+                    149
+                  ],
+                  "Prym": [
+                    107,
+                    124,
+                    139,
+                    159
+                  ],
+                  "variety": [
+                    108
+                  ],
+                  "branched": [
+                    111
+                  ],
+                  "cover.": [
+                    112
+                  ],
+                  "proof": [
+                    114
+                  ],
+                  "uses": [
+                    115
+                  ],
+                  "results": [
+                    116
+                  ],
+                  "Naranjo\u2013Ortega,": [
+                    118
+                  ],
+                  "Bardelli\u2013Ciliberto\u2013Verra,": [
+                    119
+                  ],
+                  "Nagaraj\u2013Ramanan,": [
+                    121
+                  ],
+                  "on": [
+                    122,
+                    154
+                  ],
+                  "related": [
+                    123
+                  ],
+                  "maps.": [
+                    125
+                  ],
+                  "In": [
+                    126
+                  ],
+                  "fact,": [
+                    127
+                  ],
+                  "are": [
+                    129
+                  ],
+                  "able": [
+                    130
+                  ],
+                  "recover": [
+                    132
+                  ],
+                  "degree": [
+                    134,
+                    156
+                  ],
+                  "one": [
+                    136
+                  ],
+                  "these": [
+                    138
+                  ],
+                  "maps": [
+                    140
+                  ],
+                  "by": [
+                    141
+                  ],
+                  "describing": [
+                    142
+                  ],
+                  "positive-dimensional": [
+                    143
+                  ],
+                  "fibers,": [
+                    144
+                  ],
+                  "in": [
+                    145
+                  ],
+                  "same": [
+                    147
+                  ],
+                  "spirit": [
+                    148
+                  ],
+                  "Donagi\u2013Smith": [
+                    153
+                  ],
+                  "connected": [
+                    162
+                  ],
+                  "\u00e9tale": [
+                    163
+                  ],
+                  "double": [
+                    164
+                  ],
+                  "covers": [
+                    165
+                  ],
+                  "genus": [
+                    167
+                  ],
+                  "6": [
+                    168
+                  ],
+                  "curves.": [
+                    169
+                  ]
+                },
+                "primary_location": {
+                  "id": "doi:10.1112/jlms.12419",
+                  "is_oa": false,
+                  "landing_page_url": "https://doi.org/10.1112/jlms.12419",
+                  "pdf_url": null,
+                  "source": {
+                    "id": "https://openalex.org/S4210207695",
+                    "display_name": "Journal of the London Mathematical Society",
+                    "issn_l": "0024-6107",
+                    "issn": [
+                      "0024-6107",
+                      "1469-7750"
+                    ],
+                    "is_oa": false,
+                    "is_in_doaj": false,
+                    "is_core": true,
+                    "host_organization": "https://openalex.org/P4310320595",
+                    "host_organization_name": "Wiley",
+                    "host_organization_lineage": [
+                      "https://openalex.org/P4310320595"
+                    ],
+                    "host_organization_lineage_names": [
+                      "Wiley"
+                    ],
+                    "type": "journal"
+                  },
+                  "license": null,
+                  "license_id": null,
+                  "version": "publishedVersion",
+                  "is_accepted": true,
+                  "is_published": true,
+                  "raw_source_name": "Journal of the London Mathematical Society",
+                  "raw_type": "journal-article"
+                }
+              },
+              {
+                "id": "https://openalex.org/W4410242858",
+                "doi": "https://doi.org/10.1007/s00209-025-03745-3",
+                "title": "Special subvarieties in the locus of intermediate Jacobians of cubic threefolds",
+                "publication_year": 2025,
+                "abstract_inverted_index": {
+                  "Abstract": [
+                    0
+                  ],
+                  "We": [
+                    1
+                  ],
+                  "study": [
+                    2
+                  ],
+                  "special": [
+                    3,
+                    105,
+                    130
+                  ],
+                  "subvarieties,": [
+                    4
+                  ],
+                  "i.e.,": [
+                    5
+                  ],
+                  "subvarieties": [
+                    6,
+                    131
+                  ],
+                  "containing": [
+                    7
+                  ],
+                  "a": [
+                    8,
+                    50,
+                    79,
+                    90,
+                    104
+                  ],
+                  "dense": [
+                    9
+                  ],
+                  "subset": [
+                    10
+                  ],
+                  "of": [
+                    11,
+                    14,
+                    21,
+                    26,
+                    34,
+                    37,
+                    45,
+                    52,
+                    72,
+                    86,
+                    89,
+                    92,
+                    107,
+                    116,
+                    128,
+                    142
+                  ],
+                  "CM": [
+                    12
+                  ],
+                  "points,": [
+                    13
+                  ],
+                  "the": [
+                    15,
+                    32,
+                    84,
+                    87,
+                    100,
+                    113,
+                    133,
+                    139,
+                    143
+                  ],
+                  "moduli": [
+                    16
+                  ],
+                  "space": [
+                    17
+                  ],
+                  "$$A_5$$": [
+                    18,
+                    108
+                  ],
+                  "A": [
+                    19,
+                    109
+                  ],
+                  "5": [
+                    20,
+                    110
+                  ],
+                  "principally": [
+                    22
+                  ],
+                  "polarized": [
+                    23
+                  ],
+                  "abelian": [
+                    24
+                  ],
+                  "varieties": [
+                    25
+                  ],
+                  "dimension": [
+                    27
+                  ],
+                  "five,": [
+                    28
+                  ],
+                  "generically": [
+                    29
+                  ],
+                  "contained": [
+                    30
+                  ],
+                  "in": [
+                    31,
+                    132
+                  ],
+                  "locus": [
+                    33,
+                    136
+                  ],
+                  "intermediate": [
+                    35,
+                    134,
+                    140
+                  ],
+                  "Jacobians": [
+                    36,
+                    44
+                  ],
+                  "cubic": [
+                    38,
+                    94,
+                    117,
+                    145
+                  ],
+                  "threefolds.": [
+                    39
+                  ],
+                  "The": [
+                    40
+                  ],
+                  "analogous": [
+                    41
+                  ],
+                  "question": [
+                    42
+                  ],
+                  "for": [
+                    43
+                  ],
+                  "curves": [
+                    46
+                  ],
+                  "is": [
+                    47,
+                    103
+                  ],
+                  "related": [
+                    48
+                  ],
+                  "to": [
+                    49
+                  ],
+                  "conjecture": [
+                    51
+                  ],
+                  "Coleman-Oort": [
+                    53
+                  ],
+                  "and": [
+                    54,
+                    68,
+                    75,
+                    111
+                  ],
+                  "has": [
+                    55
+                  ],
+                  "been": [
+                    56
+                  ],
+                  "studied": [
+                    57
+                  ],
+                  "by": [
+                    58
+                  ],
+                  "Shimura,": [
+                    59
+                  ],
+                  "Mostow,": [
+                    60
+                  ],
+                  "De": [
+                    61
+                  ],
+                  "Jong-Noot,": [
+                    62
+                  ],
+                  "Rohde,": [
+                    63
+                  ],
+                  "Moonen,": [
+                    64
+                  ],
+                  "Oort,": [
+                    65
+                  ],
+                  "Frediani,": [
+                    66,
+                    73
+                  ],
+                  "Ghigi": [
+                    67,
+                    74
+                  ],
+                  "others.": [
+                    69
+                  ],
+                  "Adapting": [
+                    70
+                  ],
+                  "methods": [
+                    71
+                  ],
+                  "Penegini,": [
+                    76
+                  ],
+                  "we": [
+                    77,
+                    124
+                  ],
+                  "give": [
+                    78
+                  ],
+                  "sufficient": [
+                    80
+                  ],
+                  "condition": [
+                    81
+                  ],
+                  "ensuring": [
+                    82
+                  ],
+                  "that": [
+                    83,
+                    137
+                  ],
+                  "closure": [
+                    85
+                  ],
+                  "image": [
+                    88
+                  ],
+                  "family": [
+                    91
+                  ],
+                  "smooth": [
+                    93
+                  ],
+                  "threefolds": [
+                    95,
+                    118
+                  ],
+                  "with": [
+                    96
+                  ],
+                  "prescribed": [
+                    97
+                  ],
+                  "automorphisms": [
+                    98
+                  ],
+                  "via": [
+                    99
+                  ],
+                  "period": [
+                    101
+                  ],
+                  "map": [
+                    102
+                  ],
+                  "subvariety": [
+                    106
+                  ],
+                  "classify": [
+                    112
+                  ],
+                  "positive-dimensional": [
+                    114,
+                    129
+                  ],
+                  "families": [
+                    115
+                  ],
+                  "satisfying": [
+                    119
+                  ],
+                  "our": [
+                    120
+                  ],
+                  "condition.": [
+                    121
+                  ],
+                  "In": [
+                    122
+                  ],
+                  "particular,": [
+                    123
+                  ],
+                  "discover": [
+                    125
+                  ],
+                  "two": [
+                    126
+                  ],
+                  "examples": [
+                    127
+                  ],
+                  "Jacobian": [
+                    135,
+                    141
+                  ],
+                  "contain": [
+                    138
+                  ],
+                  "Klein": [
+                    144
+                  ],
+                  "threefold.": [
+                    146
+                  ]
+                },
+                "primary_location": {
+                  "id": "doi:10.1007/s00209-025-03745-3",
+                  "is_oa": true,
+                  "landing_page_url": "https://doi.org/10.1007/s00209-025-03745-3",
+                  "pdf_url": "https://link.springer.com/content/pdf/10.1007/s00209-025-03745-3.pdf",
+                  "source": {
+                    "id": "https://openalex.org/S104894821",
+                    "display_name": "Mathematische Zeitschrift",
+                    "issn_l": "0025-5874",
+                    "issn": [
+                      "0025-5874",
+                      "1432-1823"
+                    ],
+                    "is_oa": false,
+                    "is_in_doaj": false,
+                    "is_core": true,
+                    "host_organization": "https://openalex.org/P4310319900",
+                    "host_organization_name": "Springer Science+Business Media",
+                    "host_organization_lineage": [
+                      "https://openalex.org/P4310319900",
+                      "https://openalex.org/P4310319965"
+                    ],
+                    "host_organization_lineage_names": [
+                      "Springer Science+Business Media",
+                      "Springer Nature"
+                    ],
+                    "type": "journal"
+                  },
+                  "license": "other-oa",
+                  "license_id": "https://openalex.org/licenses/other-oa",
+                  "version": "publishedVersion",
+                  "is_accepted": true,
+                  "is_published": true,
+                  "raw_source_name": "Mathematische Zeitschrift",
+                  "raw_type": "journal-article"
+                }
+              }
+            ],
+            "group_by": []
+          },
+          "outcome": "success"
+        }
+      ]
+    },
+    "Crossref": {
+      "url": "https://api.crossref.org/works/10.4310/PAMQ.2016.v12.n1.a5",
+      "accessed_utc": "2026-09-11T08:10:02.717706+00:00",
+      "http_status": 200,
+      "data": {
+        "status": "ok",
+        "message-type": "work",
+        "message-version": "1.0.0",
+        "message": {
+          "indexed": {
+            "date-parts": [
+              [
+                2025,
+                6,
+                12
+              ]
+            ],
+            "date-time": "2025-06-12T08:07:44Z",
+            "timestamp": 1749715664951
+          },
+          "reference-count": 0,
+          "publisher": "International Press of Boston",
+          "issue": "1",
+          "content-domain": {
+            "domain": [],
+            "crossmark-restriction": false
+          },
+          "short-container-title": [],
+          "published-print": {
+            "date-parts": [
+              [
+                2016
+              ]
+            ]
+          },
+          "DOI": "10.4310/pamq.2016.v12.n1.a5",
+          "type": "journal-article",
+          "created": {
+            "date-parts": [
+              [
+                2017,
+                2,
+                15
+              ]
+            ],
+            "date-time": "2017-02-15T19:30:01Z",
+            "timestamp": 1487187001000
+          },
+          "page": "141-164",
+          "source": "Crossref",
+          "is-referenced-by-count": 2,
+          "title": [
+            "On intermediate Jacobians of cubic threefolds admitting an automorphism of order five"
+          ],
+          "prefix": "10.4310",
+          "volume": "12",
+          "author": [
+            {
+              "given": "Bert",
+              "family": "van Geemen",
+              "sequence": "first",
+              "affiliation": [
+                {
+                  "name": "Dipartimento di Matematica, Universit\u00e0 di Milano, Italy"
+                }
+              ],
+              "role": [
+                {
+                  "role": "author",
+                  "vocabulary": "crossref"
+                }
+              ]
+            },
+            {
+              "given": "Takuya",
+              "family": "Yamauchi",
+              "sequence": "additional",
+              "affiliation": [
+                {
+                  "name": "Mathematical Institute, Tohoku University, Aoba-Ku, Sendai, Japan"
+                }
+              ],
+              "role": [
+                {
+                  "role": "author",
+                  "vocabulary": "crossref"
+                }
+              ]
+            }
+          ],
+          "member": "2902",
+          "container-title": [
+            "Pure and Applied Mathematics Quarterly"
+          ],
+          "original-title": [],
+          "language": "en",
+          "deposited": {
+            "date-parts": [
+              [
+                2024,
+                10,
+                9
+              ]
+            ],
+            "date-time": "2024-10-09T06:53:02Z",
+            "timestamp": 1728456782000
+          },
+          "score": 1,
+          "resource": {
+            "primary": {
+              "URL": "https://link.intlpress.com/JDetail/1806164275276230657"
+            }
+          },
+          "subtitle": [],
+          "short-title": [],
+          "issued": {
+            "date-parts": [
+              [
+                2016
+              ]
+            ]
+          },
+          "references-count": 0,
+          "journal-issue": {
+            "issue": "1",
+            "published-print": {
+              "date-parts": [
+                [
+                  2016
+                ]
+              ]
+            }
+          },
+          "URL": "https://doi.org/10.4310/pamq.2016.v12.n1.a5",
+          "relation": {},
+          "ISSN": [
+            "1558-8599",
+            "1558-8602"
+          ],
+          "issn-type": [
+            {
+              "type": "print",
+              "value": "1558-8599"
+            },
+            {
+              "type": "electronic",
+              "value": "1558-8602"
+            }
+          ],
+          "subject": [],
+          "published": {
+            "date-parts": [
+              [
+                2016
+              ]
+            ]
+          }
+        }
+      },
+      "outcome": "success",
+      "count": 2,
+      "enumeration_note": "Public works API supplies a count, not the citing works list."
+    },
+    "SemanticScholar": {
+      "url": "https://api.semanticscholar.org/graph/v1/paper/ARXIV:1506.05346?fields=paperId,title,externalIds,citationCount",
+      "accessed_utc": "2026-09-11T08:10:02.963278+00:00",
+      "http_status": 429,
+      "outcome": "http_error",
+      "error": "{\"message\": \"Too Many Requests. Please wait and try again or apply for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form\", \"code\": \"429\"}"
+    }
+  }
+}
