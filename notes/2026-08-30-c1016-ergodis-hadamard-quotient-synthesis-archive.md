@@ -3302,3 +3302,13 @@ Twenty-seven successful runs at orders 28–124 verify as full matrices; no
 668/716/2092 solution. Groups/model supplied, no automatic discovery claim.
 The row-sum-only probe does not pass the strict-margin 14,800 gate.
 Current conclusions: `2026-09-11-c1016-cross-order-residual-repair.md`.
+
+## 2026-09-11 — automatic local response structure
+
+Private quadratic support/invariant analysis now derives additive components;
+models remain supplied. Sparse compilation lowers measured cycles; optional hull
+projection has a bounded 2092 win, while span projection and capped exchange
+region selection have recorded negatives. No 668/716/2092 solution and no
+strict-margin 14,800 gate passed. Dated authority:
+`2026-09-11-c1016-inferred-repair-structure.md`; exact evidence and scope in the
+private `evidence/structure-repair/REPORT.md`. No public-core or WASM change.

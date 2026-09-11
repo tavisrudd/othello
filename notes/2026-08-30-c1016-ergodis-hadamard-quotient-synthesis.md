@@ -165,14 +165,16 @@ the current instrument remains available and has not been tried since.
 
 ## Open moves, in the order they are worth doing
 
-The user-expanded general-capability frontier is cross-order exact additive
-repair. Its private operator and four region policies are validated; the model
-and response groups are still supplied. Next derive groups from vector residual
-IR and invariant-preserving regions from linear maps, with non-Hadamard controls
-and matched-CPU comparisons. Small orders through 124 produced verified matrices;
-668, 716 and 2092 remain unsolved. See
-`2026-09-11-c1016-cross-order-residual-repair.md`. These row-sum-only experiments
-do not pass or replace the separate strict-margin fibre gate below.
+The user-expanded general-capability frontier is cross-order exact repair from
+quadratic vector IR and supplied linear invariants. Automatic support components,
+sparse response compilation, generic priorities and checked four-sign exchange
+proposals are validated. Optional exact hull-projection bounds help the measured
+2092 local workload but are not consistently profitable at 668. Next select
+representations by measured bound lift/cost and test richer invariant-preserving
+moves and barrier-crossing schedules. Construction models remain supplied;
+668/716/2092 remain unsolved. See
+`2026-09-11-c1016-inferred-repair-structure.md` and the prior cross-order operator
+report. Row-sum-only experiments do not pass or replace the strict-margin gate.
 
 Current diagnostic: the complete six-cycle and cross-block four-cycle-pair
 neighbourhoods at the banked 14,800 state have no improving or neutral move.

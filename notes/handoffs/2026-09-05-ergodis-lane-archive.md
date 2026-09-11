@@ -454,3 +454,13 @@ refreshed at closeout; these context/terminology docs must not ship.
 Read both contributor performance documents in full on resume. Recovery/QEC/
 scheduling browser execution is part of this scope; the current lab restrictions
 are temporary implementation gaps, not intended WASM capability boundaries.
+
+## 2026-09-11 — C1016 inferred additive components
+
+Private quadratic support/invariant analysis now derives additive components;
+models remain supplied. Sparse compilation lowers measured cycles; optional hull
+projection has a bounded 2092 win, while span projection and capped exchange
+region selection have recorded negatives. No 668/716/2092 solution and no
+strict-margin 14,800 gate passed. Dated authority:
+`2026-09-11-c1016-inferred-repair-structure.md`; exact evidence and scope in the
+private `evidence/structure-repair/REPORT.md`. No public-core or WASM change.

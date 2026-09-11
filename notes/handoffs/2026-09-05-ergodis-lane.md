@@ -240,13 +240,14 @@ with its append-only companion
 [archive](../2026-08-30-c1016-ergodis-hadamard-quotient-synthesis-archive.md). Read the card on
 resume; it is the current-state map for this task.
 
-**Next**: discover additive response groups from vector residual IR and derive
-invariant-preserving repair regions; compare general alternatives on smaller
-controls before order 2092. The private operator is validated, but the current
-adapter still supplies the groups. Cross-order evidence and capability gates:
-`notes/2026-09-11-c1016-cross-order-residual-repair.md` (27 verified small-order
-matrices; 668/716/2092 remain unsolved). The separate strict-margin 14,800 gate
-remains open. Reading plan: `notes/2026-09-11-c1016-structure-literature-plan.md`.
+**Next**: coverage-aware region proposals, cost-aware selection of exact local
+representations and richer invariant-preserving repair schedules. The private quadratic compiler now derives
+additive groups from supports; models remain supplied. Checked convex-hull
+projections help the measured 2092 workload, while span projections and capped
+four-flip region sampling are recorded negatives. Current map:
+`notes/2026-09-11-c1016-inferred-repair-structure.md`. Orders 668/716/2092 remain
+unsolved; the separate strict-margin 14,800 recovery gate remains open. Reading
+plan: `notes/2026-09-11-c1016-structure-literature-plan.md`.
 Private shrinking coverage landed at `b966a7d` (769 passed, 1 ignored); automatic
 kick/tabu-policy properties remain open. See
 `notes/2026-09-11-c1016-state-machine-properties.md`. All related retention
