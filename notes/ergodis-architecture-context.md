@@ -13,7 +13,15 @@ native/WASM automatic selection and checked active admission into the existing
 budget-envelope kernel. Admission explicitly restarts one query, preserving prior
 work; it does not convert the old dynamic-programming state. See private
 `analysis/interface-review/2026-09-10-adaptive-representation-plan.md` and its
-performance report; decision: `analysis/interface-review/adr-checked-execution-representation-changes.md`. Whole-query-domain table reuse, XOR minimum-cost recognition,
+performance report; decision: `analysis/interface-review/adr-checked-execution-representation-changes.md`.
+Independent minimum-cost recognition is now shared by both normal XOR race arms
+(private `d33579b`, core flat-source constructor `d7e938e`). Shape/target and flat
+coordinate screens precede representation allocation; selected aggregate loads
+must fit u32 before committing the exact witness. Cold source recognition is not
+a discovered theorem generation. General traversal remains an explicit labelled
+ablation, not a deliberately weaker default. Report:
+`analysis/interface-review/2026-09-10-independent-fit-recognition.md`.
+Whole-query-domain table reuse, first-fit compilation/materialization overhead,
 and a universal representation-switch contract remain open. The design document
 inventories broader transfers and preservation, timing and performance gates.
 

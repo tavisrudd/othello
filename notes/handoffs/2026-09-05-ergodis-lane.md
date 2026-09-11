@@ -83,9 +83,13 @@ original witness coordinates. Design/status: `analysis/interface-review/2026-09-
 Measured cold-overhead correction: `dfa284b`; retained single/two-worker counters
 and misses: `2026-09-10-adaptive-representation-performance.md`. Decision:
 `adr-checked-execution-representation-changes.md` (`c124a98`).
-Next: amortize retained budget tables across query domains and recognize independent
-minimum-cost choices for XOR; broader plan contracts and shared-memory telemetry
-remain open. Do not preserve a default/Evolve capability gap to manufacture a race ranking. WASM all-target Clippy's existing
+Independent minimum-cost recognition for XOR is now shared by both normal race
+arms; cheap shape/coordinate screens precede allocation, then the existing kernel
+uses the core flat-source constructor (`d7e938e`; private `d33579b`). Native/WASM certificates replay
+against original choices. Private report: `analysis/interface-review/2026-09-10-independent-fit-recognition.md`.
+Next: separate lazy fit compilation/result materialization from remaining first-call
+cost, and amortize retained budget tables across query domains. Broader plan
+contracts and shared-memory telemetry remain open. Do not preserve a default/Evolve capability gap to manufacture a race ranking. WASM all-target Clippy's existing
 `bundle.rs` items-after-test-module finding remains; library Clippy/tests pass.
 Asset loading now uses revisioned immutable URLs, speculative post-paint JS/WASM
 cache fills and HTML-hidden empty results (`b65f0b3`). Warm source-switch races
