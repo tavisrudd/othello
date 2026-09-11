@@ -4904,8 +4904,17 @@
       "last": 1141,
       "purpose": "Complete sharpness upgrade novelty and citation audit with recorded source depths and propagated ledger verdicts",
       "sequence": 545
+    },
+    {
+      "count": 1,
+      "first": 1142,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 1142,
+      "purpose": "Sharpness exposition: uninterrupted proof order, named universal tangent-cover lemma, compressed optional consequences",
+      "sequence": 546
     }
   ],
-  "next_id": 1142,
+  "next_id": 1143,
   "schema": "codex-task-id-allocations-v1"
 }
