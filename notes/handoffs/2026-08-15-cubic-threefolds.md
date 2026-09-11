@@ -65,7 +65,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-09-10-c1133-ab-integration.md`. Cubic headline unchanged;
   numerical classification completes Part I, full Hodge proof is in Part II.
   C is short, D is an arithmetic appendix. The 32-page PDF retains the
-  direct cubic stopping point on page 13; Hodge material occupies five pages.
+  direct cubic stopping point; the current pagination is recorded below.
   Fresh specialist and adjacent-reader reports find no major defect at
   their stated read boundaries; concrete minor requests are repaired.
   Authority and standalone gates pass with byte-identical PDFs; export
@@ -76,17 +76,24 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-09-10-c1133-accessibility-motivation.md`. Title retained, abstract
   below 200 words, cubic-first route clarified, and three audited spectral/
   atomic/Hodge predecessors credited. The PDF remains 32 pages, cubic proof
-  through page 13; theorem statements and formal coverage are unchanged.
-  Fresh-context cold read complete:
-  `../2026-09-10-c1133-cold-exposition-referee.md`. All source and 32 PDF
-  pages read; specialist comprehension 4/5, adjacent accessibility 3/5.
-  Targeted revision recommended. No demonstrated internal defect; external
-  imports were not verified. Next: make Appendix D.2's reconstruction premise
-  and §3's imported/local comparison boundary precise, then add the minimal
-  residue model and first-pass route. Broader source/priority coverage and
-  author publication review remain open. The before/after preferences were nonblind;
-  a fully blinded comparison remains a publication gate. Pencil claims
-  stay conditional. This integration does not close C1133, C978 or C956.
+  through its direct proof; current pagination is recorded below.
+  Fresh-context cold read and response complete:
+  `../2026-09-10-c1133-cold-exposition-referee.md` and
+  `../2026-09-10-c1133-cold-referee-response.md`. The reconstruction premise
+  now names Przyjalkowski Proposition 6.2.2 and checks its nonvanishing
+  condition for all four relevant families. The printed older genus-two
+  entry disagrees with the period; the current matrix is confirmed unchanged.
+  Imported/local comparison outputs and the first-pass residue model are
+  explicit; identified redundant prose and a duplicate proof are removed.
+  Current PDF: 32 pages, cubic proof through page 14. Theorem statements,
+  title, abstract and formal coverage remain unchanged. Authority gate passes;
+  exact release and standalone validation are in the response report.
+  The cold referee found no demonstrated internal defect but did not verify
+  external imports; this response has not received another independent read.
+  Next: finish bounded source/priority coverage and author publication review.
+  Prior comparison preferences were nonblind; a fully blinded comparison
+  remains a publication gate. Pencil claims stay conditional.
+  This integration does not close C1133, C978 or C956.
   Collaborator discussion stays parked.
   Prior guarded formal checkpoint: **371 public terminals, 133 machinery,
   245 sources**; aggregate kernel and actual axiom comparison passed.

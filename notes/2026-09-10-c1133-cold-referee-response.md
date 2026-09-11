@@ -156,7 +156,14 @@ and corollary environments in all six edited sections.
 
 PDF: 32 pages, 251037 bytes; SHA-256
 `4b7c631e4715d200960ce5327ac66eb6ee280ba6c2d2eae5d469634af49ebcfc`.
-Standalone synchronization is recorded in the closeout below.
+Authority commit: `705ab66b7`. Export audit reports zero findings.
+Standalone forward commit: `69722ad`; its full `make check` passes
+(`/tmp/claude-run-quiet/20260910-220526-make-C-cubic-stabilization-m1-check`).
+The rebuilt standalone PDF is byte-identical to the authority PDF.
+Exporter verification passes with 351 tracked files and content SHA-256
+`cfbb93e034c30e1764c005456eaadac6e41913f331266170f5a985f839cbbbbd`.
+Nothing was pushed. No new Lean kernel replay or independent referee
+acceptance of the revision is claimed.
 
 Process note: an unnecessary full handoff re-read after context recovery
 exceeded the output budget and was truncated. No further broad read was

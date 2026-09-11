@@ -74,8 +74,22 @@ adjacent accessibility 3/5. Targeted revision before acceptance: exact
 reconstruction premise in D.2, imported/local comparison outputs in §3,
 earlier model and explicit first-pass route. No demonstrated internal proof
 defect; external sources were not verified. The review does not supersede
-prior source audits or establish correctness/priority. Respond to these
-concrete points next; manuscript unchanged during this review.
+prior source audits or establish correctness/priority. The response to these
+concrete points is complete in the response below.
+
+**Cold-referee response and repetition pass complete (2026-09-10):**
+`notes/2026-09-10-c1133-cold-referee-response.md`. Reconstruction is grounded
+in Przyjalkowski Proposition 6.2.2, with its nonvanishing criterion checked
+for all four families by a committed exact replay. The older printed
+genus-two discrepancy is resolved at the period-coefficient level; the
+current matrix is unchanged. Comparison outputs, the elementary residue
+preview and safe reading routes are explicit. Duplicate explanations and a
+repeated proof are removed without changing theorem statements or formal
+coverage. The current PDF has 32 pages, cubic proof ending on page 14;
+title and abstract are unchanged. Authority `705ab66b7` passes the full gate.
+Standalone release details are in the response report. No independent
+re-review of these revisions is claimed; broader bounded source/priority
+coverage and author publication review remain open.
 
 Latest formal checkpoint: **371 public terminals, 133 machinery, 245 sources**;
 aggregate kernel build and actual axiom comparison passed in the prior
