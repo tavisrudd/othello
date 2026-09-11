@@ -10,6 +10,16 @@ Discovery companion:
 
 ## Current status
 
+**C1138 complete (2026-09-10).** Second referee corrections and verified
+strengthenings are in the warning-free 45-page paper: fixed-q length bound,
+full prime-dimensional four-party algebra, spectral-chart dimension obstruction,
+universal-proof clarification and explicit sampling rule. README rebuilt to the
+GRS paper's standard. Clean standalone `9d9306f` matches the authority; PDF and
+source ZIP are in Downloads. No push. Report:
+`2026-09-10-c1138-ame-lu-second-referee.md`.
+Optional next refinement: faster prime-field determinant normalization with
+explicit arithmetic/bit bounds; no successor C-ID allocated.
+
 **C1137 complete (2026-09-10).** Focused certification integration is in the
 validated 43-page authority draft. All three fresh cold readers preferred it
 moderately or narrowly; targeted feedback is repaired. Exact and robust rigidity

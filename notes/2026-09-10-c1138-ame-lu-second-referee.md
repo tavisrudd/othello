@@ -1,7 +1,7 @@
 # C1138 — second AME referee revision
 
 **Lane:** `ame-lu`
-**Status:** RUNNING.
+**Status:** COMPLETE (2026-09-10).
 
 Review the supplied mathematical corrections and suggestions against exported `ae3e7ba`, excluding all gradings from the record. Verify fixed-dimension length restrictions, Appendix B boundary, four-party algebra identification, spectral-spread obstruction, universal verification exposition and sampling prescription. Check stale numbering, bibliography and README claims against exact local/exported bytes before changing them. Preserve the two-headline organization; evaluate the optional growing-field algorithm separately. No publication-priority claim or formal-coverage extension is authorized by the referee's assessment alone.
 
@@ -49,3 +49,18 @@ The revised paper built warning-free at 45 pages, versus the 43-page export. Roo
 | Universal exact weighted attainment | Still unproved; the appendix continues to claim only a lower bound outside stabilizer targets. |
 
 These were requested investigations, so no incidental discovery-track entry is warranted.
+
+## Final release and closeout
+
+Authority manuscript commit: `63d3e194c`. The final semantic-label rebuild passed warning-free at 45 pages (`/tmp/claude-run-quiet/20260910-221114-make-C-ame_lu-check/`). Exporter plan and audit found zero coupling issues. Only the registered public paths were synchronized; private task reports and ledgers are excluded.
+
+Standalone commit: `9d9306fc1f7283c958d0a76955db27a7ab67c4d0`. Its own warning-free rebuild passed (`/tmp/claude-run-quiet/20260910-221212-make-C-ame-lu-check/`), and its PDF, README and release manifest are byte-identical to the authority. The canonical public release hash is `2d1ce5138ae8bad0bea90beb2be3ce741044f6db27a49d8cdb03c3ed65086f56`; the exporter content hash is `00309d42e22592e5e96ea848832789fbb9dc276dfc8960acc729dadab62ae5e0`. The paper-only checkout correctly reports that it cannot inspect the formal companion. No new formal work or push occurred.
+
+Downloads:
+
+- `/home/tavis/Downloads/ame-lu-9d9306f.pdf`, SHA-256 `b39e9c39cdf62381fcf58ba562a37a87e5eb661f703b2b7ca53602c5f59d737b`.
+- `/home/tavis/Downloads/ame-lu-9d9306f-source.zip`, SHA-256 `7f45005176b58f4e77ca3d420e1e1b1ef9c173983a303d002f126b2a015d45f4`.
+
+The source ZIP is a Git archive of the standalone commit; ZIP CRC, embedded PDF and embedded README checks pass. README relative links resolve. Gradings from the supplied feedback were not copied into any task artifact.
+
+Vibe: the two new short arguments sharpen the scope, and the README now explains the paper rather than merely listing it. The optional determinant-normalization algorithm is the next distinct mathematical refinement; it has no allocated successor. Existing party-count/character and literature-coverage boundaries remain explicit.

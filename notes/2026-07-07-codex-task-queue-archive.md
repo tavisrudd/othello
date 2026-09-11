@@ -5656,3 +5656,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1136 `[ame-lu]` [COMPLETED 2026-09-10]** — Expanded AME verification literature audit: three graph counts for nine pinned seeds, eighteen lists/602 title records, exact zbMATH and first-page Scholar screening, seventeen partial primary reads, prospective novelty ledger and concrete wording; priority remains qualified by explicit access/read-depth gaps; no manuscript adoption → `notes/2026-09-10-c1136-ame-lu-priority-audit.md`.
 
 - **C1137 `[ame-lu]` [REPORTED 2026-09-10]** — Draft focused certification integration and cold-reader A/B comparison → `notes/2026-09-10-c1137-ame-lu-draft-ab.md`.
+
+- **C1138 `[ame-lu]` [REPORTED 2026-09-10]** — Verify and integrate second referee corrections and focused strengthenings; omit gradings → `notes/2026-09-10-c1138-ame-lu-second-referee.md`.
