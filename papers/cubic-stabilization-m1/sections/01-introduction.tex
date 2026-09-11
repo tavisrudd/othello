@@ -1,13 +1,10 @@
 \section{Introduction}
 
-Let \(X\) be a smooth complex cubic threefold.  Clemens and
-Griffiths proved that \(X\) is irrational \cite{CG}, but their
-intermediate-Jacobian argument does not directly obstruct the rationality of
-\(X\times\PP^1\): in a weak factorization of a birational map between smooth
-fourfolds, the blowup formula for a surface center \(S\) contributes
-\(H^3(S)(-1)\) in degree five, while \(H^3(X)(-1)\) occurs in
-\(H^5(X\times\PP^1)\).  We prove that the stabilized fourfold is nevertheless
-irrational.
+We study whether irrationality survives product with one projective line.
+Stable rationality allows a projective-space factor of arbitrary dimension;
+here the dimension of the factor matters. Let \(X\) be a smooth complex cubic
+threefold. Clemens and Griffiths proved that \(X\) is irrational \cite{CG}.
+We prove that its first stabilization is irrational as well.
 
 \begin{theorem}[One-step irrationality]
 \label{thm:every-cubic}
@@ -25,9 +22,18 @@ curve and surface contributes zero to this count in the quantum blowup
 formula. Weak factorization then makes the count a birational invariant
 of fourfolds, proving the theorem.
 
-The numerical construction extends to all smooth Fano threefolds of Picard
-rank one. Here ``one stabilization'' always means product with $\PP^1$.
+Surface centers explain the difficulty. In the classical blowup formula,
+a surface $S$ contributes $H^3(S)(-1)$ in degree five, where
+$H^3(X)(-1)$ also occurs in $H^5(X\times\PP^1)$. The direct
+intermediate-Jacobian argument therefore gives no obstruction to the
+product's rationality. The quantum selection separates the cubic
+contribution from every possible center contribution.
 
+The cubic calculation is the model case of a construction covering the
+entire classification of smooth Fano threefolds of Picard rank one.
+Here ``one stabilization'' always means product with $\PP^1$.
+
+\Needspace{10\baselineskip}
 \begin{theorem}[Rationality after one stabilization]
 \label{thm:fano-one-step-classification}\coverage{absent}%
 For every smooth complex Picard-rank-one Fano threefold $X$,
@@ -40,8 +46,9 @@ $4,5$, and index-one genera $7,9,10,12$. The other nine families have
 irrational first stabilization.
 \end{theorem}
 
-A second result keeps the odd Hodge structure carried by the selected
-factors. It concerns precisely the nine families detected by the numerical
+Beyond detecting irrationality, we ask what the first stabilization
+remembers about the original threefold. A second result recovers its
+rational third cohomology for the nine families detected by the numerical
 argument, denoted by $\mathcal F$.
 
 \begin{theorem}[Rational Hodge conservation]
@@ -56,10 +63,12 @@ as rational Hodge structures.
 \end{theorem}
 
 Both theorems apply to every smooth member of the stated families.
-The Hodge isomorphism carries no assertion about integral lattices or
-polarizations. Its proof introduces a Hodge-fixed parameter base while
-retaining the full cohomology fiber; the numerical theorem does not require
-that construction.
+The retained Hodge structure can distinguish birational classes among
+irrational products. Combined with a separate rational Torelli theorem,
+it recovers a very general cubic or quartic from its first stabilization
+among smooth hypersurfaces of the same degree (Section~\ref{sec:torelli}). The Hodge isomorphism carries no assertion about
+integral lattices or polarizations. The numerical theorem is independent
+of this refinement.
 
 The stable-rationality picture varies across the moduli space.  Hassett and
 Tschinkel identified varieties birational to cubic threefolds as the
@@ -97,9 +106,11 @@ while flatness gives a Lax equation for its residue, whose eigenvalues are
 therefore preserved.  We count the block when the two residue eigenvalues are
 distinct modulo \(\Z\), equivalently when the two formal exponent classes are
 distinct.
-Using Beauville's quantum product formulas, we compute the exponent
-representatives \(-1/6\) and \(-5/6\) for the cubic block, with difference
-\(2/3\).  The resulting invariant
+Beauville's quantum product formulas give exponent representatives
+\(-1/6\) and \(-5/6\) for the cubic block, with difference \(2/3\).
+These values already appear in Katzarkov--Lee--Svoboda--Petkov
+\cite[pp.~375--376]{InterpretationsSpectra}; we give the residue calculation
+in our conventions.  The resulting invariant
 vanishes on points, curves, and surfaces and on projective space.
 The small Gromov--Witten product formula and flatness in all even bulk
 directions show that it doubles after product with \(\PP^1\); see
@@ -122,7 +133,7 @@ comparison so that the center summands remain distinct, and compute the
 product with one projective line from its small quantum connection
 \cite{IritaniBlowup,Behrend}.  Gyenge gives a complementary
 formal tensor-product theorem for quantum \(D\)-modules of products and proves
-multiplicativity for Hodge atoms \cite{GyengeProduct}.  Cai independently
+multiplicativity for Hodge atoms \cite{GyengeProduct}.  Cai also
 computes the same two exponent representatives and uses them with Iritani's
 blowup theorem to prove symplectic irrationality of cubic threefolds
 \cite{Cai}; that argument does not address stabilization.
@@ -135,8 +146,14 @@ five the repeated factor has even rank three, and its odd dimension gives
 the obstruction. Cai's quartic persistence theorem is a precedent for the
 cyclic-cluster argument \cite[Theorem~5.3]{CaiQuartic}.
 For the Hodge refinement we use Iritani's equivariant blowup comparison
-\cite{IritaniHodge}; the Hodge-atom framework and product results above supply
-its surrounding context.
+\cite{IritaniHodge}. Cavenaghi--Katzarkov--Kontsevich already use atomic
+doubling under a $\PP^1$ product to obstruct equivariant linearization,
+and retain curve-Jacobian isogeny classes in equivariant threefold invariants
+\cite[Theorems~E, F and H]{AtomsSymbols}. Benedetti--Gu\'er\'e--Manivel--Perrin
+obtain rational-Hodge restrictions on cubic and Gushel--Mukai fourfolds
+birational to a Verra fourfold \cite[Theorem~1]{VerraPartners}.
+Here the selected factors recover the whole rational $H^3$ for any smooth
+members of the nine stated families whose first stabilizations are birational.
 
 A reader interested in the cubic theorem can stop after
 Section~\ref{sec:cubic-proof}. Section~\ref{sec:fano-classification} completes
