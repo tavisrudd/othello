@@ -91,12 +91,24 @@ Standalone release details are in the response report. No independent
 re-review of these revisions is claimed; broader bounded source/priority
 coverage and author publication review remain open.
 
+**Latest repairs and Lean trust review:**
+`notes/2026-09-10-c1133-reconstruction-transcription-repair.md` and
+`notes/2026-09-10-c1133-lean-trust-review.md`. The source criterion is corrected
+and nonzero in all four families; Python O3 is full odd dimension, with
+regression checks and regenerated hashes. The manuscript is unchanged by the
+O3 repair. Current abstract is quoted in both paper and portfolio READMEs.
+The fresh guarded axiom audit matches all 371 terminals, using only standard
+axioms. The main paper has 20 absent, 8 fragment and 8 conditional claims.
+Lean numerical O3 normalization is still half dimension; complete geometric
+comparison and Hodge-realization maps remain supplied. Next formal work:
+align the selector, then assemble the exact center-map/lattice interface.
+
 Latest formal checkpoint: **371 public terminals, 133 machinery, 245 sources**;
 aggregate kernel build and actual axiom comparison passed in the prior
 implementation session. Exact boundaries and declarations:
 `notes/2026-09-09-c1133-lean-completion-progress.md` and
-`notes/2026-09-09-c1133-lean-upgrade-map.md`. No Lean replay occurred in the
-2026-09-10 source pass. Geometric constructions and imported source theorems
+`notes/2026-09-09-c1133-lean-upgrade-map.md`. The later 2026-09-10 trust review freshly elaborated the public axiom audit;
+the library aggregate was trace-current. Geometric constructions and imported source theorems
 remain inputs; universal residue coverage beyond checked matrix reductions
 remains fragmentary. Optional L8 is unclaimed.
 

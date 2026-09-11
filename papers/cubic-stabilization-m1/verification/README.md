@@ -8,8 +8,10 @@ supporting replays of printed proofs. The computations used as premises are
 trusted executions, cross-checked as their registry entries record. The
 conditional framed route uses `lem:hirzebruch-euler-spectrum`; the coordinate
 statement `lem:pencil-loci-coordinates` uses the pencil calculations described
-below. The universal-residue bundle supports the printed algebra and is not a
-proof premise.
+below. The Fano endpoint proposition uses `fano-matrices` for finite matrix
+and reconstruction-criterion checks; geometric period and reconstruction
+results remain imported. The universal-residue bundle supports the printed
+algebra and is not a proof premise.
 
 The pencil's Eckardt locus used to be a second such place.  It no longer is.
 `prop:A5-not-coprime` is proved from `lem:eckardt-involution` and
@@ -30,9 +32,9 @@ rational reduction and Fano specializations. Its manifest records hashes and
 byte counts; a separate rational indicial calculation cross-checks the answer.
 The paper gate replays both. These finite checks supply no geometric input.
 
-Nothing on the unconditional rank-two residue route rests on any evidence
-bundle, so the
-irrationality theorem `thm:every-cubic` does not.  The conditional framed
+The direct cubic proof of `thm:every-cubic` does not rest on an evidence
+bundle. The broader Fano classification uses the finite endpoint checks
+identified above.  The conditional framed
 route's second proof of one-step irrationality does, through
 `lem:hirzebruch-euler-spectrum`.
 
@@ -80,10 +82,10 @@ framing, coordinates, and normalization that must be matched for the use to be
 valid, together with how this manuscript matches each one.  `\evidence` names
 the computational evidence bundles a statement rests on, resolved in
 `verification/evidence.json`; each entry there records the bundle's role, its
-tracked checksum manifest, and the commands that replay it.  Two statements
-carry one: `lem:hirzebruch-euler-spectrum`, whose premise is a symbolic
-computation, and `lem:pencil-loci-coordinates`, whose exact elimination nothing
-else depends on.  The checker
+tracked checksum manifest, and the commands that replay it.  Three statements carry one: `lem:hirzebruch-euler-spectrum`, whose premise is
+a symbolic computation; `lem:pencil-loci-coordinates`, whose exact elimination
+nothing else depends on; and `prop:fano-endpoints`, whose matrix and
+reconstruction arithmetic is checked by `fano-matrices`.  The checker
 resolves every annotated identifier and rejects an unknown one, a bibliography
 key absent from the manuscript, an imported source with no recorded conventions,
 and an evidence bundle with no checksum manifest or no replay command.
@@ -472,9 +474,26 @@ selector, nine-family endpoints, Hodge comparison, and the Torelli/arithmetic
 consequences. Their twelve new geometric statements carry absent coverage;
 no existing terminal is promoted by their prose proofs.
 
-`make check` replays `verification/fano-matrices/finite_checks.py --check`
-and the independent Fraction implementation, then checks SHA256SUMS. The
+`make check` replays `verification/fano-matrices/finite_checks.py --check`,
+the independent Fraction implementation, and `reconstruction_check.py --check`,
+then checks SHA256SUMS. The
 source-normalization replay needs the two externally pinned source scripts;
 its exact command and finite scope are in the bundle README. Mathematical
 classification, GW identification, deformation and actual comparison maps
 remain imported results or written proofs, not certificate conclusions.
+
+The Lean numerical exact-primary ledger uses half the odd dimension on
+rank-three factors, whereas the manuscript's `O_3` uses the full dimension.
+Thus its four endpoint values are 52, 30, 20, 14, compared with the printed
+104, 60, 40, 28. Both detect the same four nonzero endpoints. This numerical
+normalization is not an exact formal realization of the printed selector;
+those geometric claims retain absent coverage. The semisimple-object selector
+retains the entire odd object and does not divide it by two.
+
+The reconstruction criterion and its period inputs are external arithmetic
+and source evidence, not dependencies of a Lean proof identifying geometric
+quantum matrices. Kernel-checked matrix identities concern the literal Lean
+matrices; their interpretation as the geometric family matrices is supplied.
+An axiom audit establishes the dependencies of the registered terminals, not
+the truth of their supplied geometric hypotheses or an end-to-end formal
+proof of the manuscript's unconditional headline.

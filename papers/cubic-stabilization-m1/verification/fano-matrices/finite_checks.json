@@ -37,7 +37,7 @@
       "h21": 52,
       "rank_two_certificates": [],
       "lattice_count": 0,
-      "O3": 52,
+      "O3": 104,
       "detected_after_one_stabilization": true
     },
     "g3": {
@@ -75,7 +75,7 @@
       "h21": 30,
       "rank_two_certificates": [],
       "lattice_count": 0,
-      "O3": 30,
+      "O3": 60,
       "detected_after_one_stabilization": true
     },
     "g4": {
@@ -113,7 +113,7 @@
       "h21": 20,
       "rank_two_certificates": [],
       "lattice_count": 0,
-      "O3": 20,
+      "O3": 40,
       "detected_after_one_stabilization": true
     },
     "g5": {
@@ -151,7 +151,7 @@
       "h21": 14,
       "rank_two_certificates": [],
       "lattice_count": 0,
-      "O3": 14,
+      "O3": 28,
       "detected_after_one_stabilization": true
     },
     "g6": {

@@ -208,7 +208,9 @@ def run() -> dict:
                     rank_two.append(certificate)
         row['rank_two_certificates'] = rank_two
         row['lattice_count'] = sum(int(certificate['delta'] != 0) for certificate in rank_two)
-        row['O3'] = H21[name] if dimensions == [3, 1] else 0
+        row['O3'] = 2 * H21[name] if dimensions == [3, 1] else 0
+        # Full odd dimension, matching the manuscript rather than h^(2,1).
+        assert row['O3'] == {'g2': 104, 'g3': 60, 'g4': 40, 'g5': 28}.get(name, 0)
         row['detected_after_one_stabilization'] = bool(row['lattice_count'] or row['O3'])
         if row['detected_after_one_stabilization']:
             detected.append(name)

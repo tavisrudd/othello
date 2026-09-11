@@ -90,7 +90,17 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   exact release and standalone validation are in the response report.
   The cold referee found no demonstrated internal defect but did not verify
   external imports; this response has not received another independent read.
-  Next: finish bounded source/priority coverage and author publication review.
+  Follow-up transcription and O3 repairs are complete:
+  `../2026-09-10-c1133-reconstruction-transcription-repair.md` and
+  `../2026-09-10-c1133-lean-trust-review.md`. Source polynomial corrected;
+  Python O3 now records full odd dimension with regression assertions.
+  Fresh guarded 371-terminal axiom comparison passes. Main-paper coverage:
+  20 absent, 8 fragments, 8 conditional deductions. The Lean selector still
+  uses half odd dimension; geometric comparison realizations remain supplied.
+  Paper README and portfolio summary/abstract now reflect A–D and these limits.
+  Next: align the Lean selector normalization, then assemble the explicit
+  center-map/lattice comparison interface. Broader source/priority coverage
+  and author publication review remain open.
   Prior comparison preferences were nonblind; a fully blinded comparison
   remains a publication gate. Pencil claims stay conditional.
   This integration does not close C1133, C978 or C956.

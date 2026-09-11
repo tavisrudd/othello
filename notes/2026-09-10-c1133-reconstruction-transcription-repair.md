@@ -79,7 +79,12 @@ Full theorem/lemma/proposition/corollary environment comparisons pass; abstract
 unchanged and below 200 words. Changed pages 1, 5, 8, 29, 32 visually checked.
 PDF: 32 pages, 251259 bytes, SHA-256
 `33d39d37048a7c99c2d01c1b8ee14d8265a604bb9a50fc969219e79ba2e18472`.
-Standalone export identity follows in the closeout record.
+Exported from authority `03279a7e8` to standalone `b3316b7`.
+Both full paper gates pass, with byte-identical PDFs; exporter verification
+passes (351 tracked files), content SHA-256
+`999d0975a3cb65eedebaf740e7606dca0807b2e170de6d59776be0cee5de0789`.
+No push. Subsequent O3 normalization and documentation changes are recorded
+in `2026-09-10-c1133-lean-trust-review.md`.
 
 ## EJ + TT closeout / Mystery ledger
 

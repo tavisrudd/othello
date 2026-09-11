@@ -20,7 +20,8 @@ space. The cubic proof finishes before the other applications.
 The numerical part proves that rationality is unchanged by one stabilization
 for all seventeen smooth complex Picard-rank-one Fano families. Five families
 are detected by the canonical rank-two residue, including resonant blocks;
-four are detected by the odd dimension on an even-rank-three factor.
+four are detected by the full odd dimension on an even-rank-three factor
+(`104, 60, 40, 28` in genera `2, 3, 4, 5`).
 The other eight families are rational.
 
 The second part proves that birational first stabilizations of members of
@@ -38,6 +39,10 @@ proofs use the specialized P1 argument and an explicit ruled-product potential.
 For the rank-two counts, *even* means both an even bulk base and the even
 cohomology fiber. The odd-dimension and Hodge refinements keep the full fiber.
 *Generic* refers to quantum parameters, not to a general moduli point.
+
+## Abstract
+
+We prove that X × P¹ is irrational for every smooth complex cubic threefold X. More generally, for every smooth complex Fano threefold of Picard rank one, X × P¹ is rational if and only if X is rational. The proof constructs numerical birational invariants of fourfolds from selected generalized eigenspaces of quantum multiplication. The key step is to show that points, curves, and surfaces contribute zero to these invariants in the quantum blowup formula. Weak factorization then gives birational invariance, and quantum product calculations determine the invariants after product with P¹. For the nine irrational families, a refinement retaining Hodge structures shows that birationality of X × P¹ and Y × P¹ forces an isomorphism of their rational third cohomology as Hodge structures. The numerical irrationality proofs are independent of this refinement.
 
 ## Companion papers
 
@@ -73,7 +78,8 @@ make -C companions/cubic-framed-monodromy check
 ```
 
 The root check validates the shared manuscript-to-Lean claim inventory,
-replays the finite Fano certificate with two independent implementations,
+replays the finite Fano matrix checks and the reconstruction criterion
+(including modular regression checks),
 builds the primary PDF in the pinned environment, and rejects manuscript
 warnings.  It does not build Lean or replay a captured axiom audit;
 [`lean/README.md`](lean/README.md) documents the separate artifact and checker
@@ -95,6 +101,13 @@ The claim-level trust boundary is recorded in
 [`lean/verification/claims.json`](lean/verification/claims.json), with
 kernel-reported dependencies checked against
 [`lean/verification/expected_axioms.txt`](lean/verification/expected_axioms.txt).
+The primary paper has 36 registered statements: 20 absent from Lean,
+8 fragments and 8 conditional deductions. Its unconditional mathematical
+headline is not an end-to-end Lean theorem. The numerical Lean ledger uses
+half the rank-three odd dimension; the manuscript and finite `O3` certificate
+use the full dimension. The semisimple Hodge selector retains the whole odd
+object. See [`verification/README.md`](verification/README.md) for these
+normalization and geometric-realization boundaries.
 
 ## Repository contents
 

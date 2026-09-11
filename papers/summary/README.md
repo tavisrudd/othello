@@ -46,20 +46,21 @@ results.
 
 ### Algebraic geometry and rationality
 
-- **One-stabilization irrationality for every smooth cubic threefold.** The
-  fourfold `X × P¹` is irrational for every smooth complex cubic threefold
-  `X`, and likewise `V × P¹` for every smooth prime Fano
-  threefold `V` of genus eight. The proof constructs an exponent count that vanishes on
-  every blow-up centre available in dimension four but not on the cubic
-  contribution; the blow-up and projective-bundle formulas then rule out a
-  birational map from `X × P¹` to `P⁴`. Technically, the invariant counts
-  rank-two blocks of the generic even quantum `D`-module whose centered
-  leading Euler operator is nonzero square-zero and whose formal exponent
-  classes differ modulo the integers. Any smooth projective threefold with positive count also remains irrational
-  after multiplication by `P¹`. The count and its spectrum-valued refinement
-  extend additively to `K₀(Var_C)/(L − 1)`; they are not ring homomorphisms.
-  The resulting blow-up formulas constrain the contributions of centers in
-  every weak factorization of a rationalization.
+- **One-stabilization irrationality and Hodge conservation.** Every smooth
+  complex cubic threefold remains irrational after multiplication by `P¹`.
+  More generally, for every smooth complex Fano threefold of Picard rank one,
+  `X × P¹` is rational if and only if `X` is rational. This covers all
+  seventeen families: nine remain irrational and eight are rational.
+  The numerical proof uses two counts on whole quantum primary factors:
+  canonical rank-two residues and full odd dimension in even rank three.
+  Points, curves and surfaces contribute zero, so weak factorization gives
+  birational invariance. A separate Hodge refinement shows that birational
+  first stabilizations of members of the nine irrational families force an
+  isomorphism of their rational third cohomology as Hodge structures.
+  It gives neither an integral lattice nor a polarization identification.
+  The numerical proof is independent of the Hodge refinement; both use the
+  specialized projective-line argument. General projective-bundle machinery
+  is confined to optional extensions.
   [Irrationality of Cubic Threefolds after One Stabilization](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/irrationality_after_one_stabilization.pdf).
 
 - **Sharpness at the next stabilization.** The preceding universal bound is
@@ -184,13 +185,14 @@ results.
   [High-Weight Cosets of Generalized and Extended Reed–Solomon Codes](https://github.com/tavisrudd/high-weight-grs-cosets/blob/main/high-weight-grs-cosets.pdf).
 
 - **Exact and quantitative AME rigidity.** Every product-unitary intertwiner
-  between stabilizer `AME(2m,q)` states is local Clifford for every prime power
-  `q` and `m ≥ 2`. In prime dimension, the intrinsic local endomorphism
-  algebra has five possible types and is necessarily nonscalar through six
-  parties. A separate quantitative argument places sufficiently approximate
-  local symmetries near exact Clifford symmetries; its rounding and robust
-  transition-map arguments remain manuscript-level, as stated in the paper's
-  formal boundary. [Robust Local-Unitary Rigidity](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf).
+  between additive stabilizer `AME(2m,q)` states is Clifford on each party,
+  for prime powers `q` and `m≥2`. Robust rigidity has certified radius
+  `min{1/(4 sqrt(2q)),1/(8π sqrt(2m))}`; the dimension exponent is order-sharp
+  on existing families with `2m≤Cq` when the stated spectral-spread and
+  collective bounds are retained. In prime dimension, recognition reduces to
+  four variables and costs `O(m³+log q)` field operations. The proof is
+  deterministic for decision; exact witness construction has that expected
+  cost. [Robust Local-Unitary Rigidity](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf).
 
 - **A Schur-square test determines MDS–CSS transversal groups.** For odd-prime
   `[2m,m,m+1]q` MDS codes, the code conductor `Cond(C,C⊥)=(C^(star 2))⊥` has
@@ -233,7 +235,10 @@ the theorem column.
 |---|---|---|
 | Irrationality of Cubic Threefolds after One Stabilization | `X × P¹` is irrational, detected by a rank-two generic-even-QDM block with distinct formal exponent classes modulo the integers. | Every smooth complex cubic threefold `X`. |
 | Irrationality of Cubic Threefolds after One Stabilization | A smooth projective threefold with positive exponent count remains irrational after multiplication by `P¹`. | Every smooth projective complex threefold. |
-| Irrationality of Cubic Threefolds after One Stabilization | `V × P¹` is irrational. | Every smooth prime Fano threefold `V` of genus eight. |
+| Irrationality of Cubic Threefolds after One Stabilization | `X × P¹` is rational if and only if `X` is rational. | Every smooth complex Fano threefold of Picard rank one, across all seventeen families. |
+| Irrationality of Cubic Threefolds after One Stabilization | Birational first stabilizations imply `H³(X,Q) ≅ H³(Y,Q)` as rational Hodge structures. | Any two smooth members of the nine irrational Picard-rank-one Fano families. |
+| Irrationality of Cubic Threefolds after One Stabilization | Birational first stabilizations imply `X ≅ Y`. | A very general complex cubic or quartic threefold `X` and any smooth threefold `Y` of the same degree. |
+| Irrationality of Cubic Threefolds after One Stabilization | Finitely many geometric cubic partner classes after first stabilization. | A fixed cubic over a finitely generated characteristic-zero field and partners over extensions of bounded degree; no finiteness of twists asserted. |
 | Irrationality of Cubic Threefolds after One Stabilization | The exponent count and residue spectrum extend to additive homomorphisms on `K₀(Var_C)/(L − 1)`. | All complex varieties, via the smooth-projective blow-up relations; no multiplicativity asserted. |
 | Sharpness of Irrationality after One Stabilization for Cubic Threefolds | `S × A²`, equivalently `S × P²`, is rational. | Every smooth quartic del Pezzo surface over a characteristic-zero field with a rational point and stably permutation geometric Picard lattice. |
 | Sharpness of Irrationality after One Stabilization for Cubic Threefolds | `X_{j,r} × P²` is rational over `Q`. | Both Tschinkel--Zhang cubic series, for every `r ≥ 0` and `j ∈ {1,3}`. |
@@ -271,12 +276,12 @@ boundary, and reproducible entry points.
 
 | Paper | Area | Central result | Public entry |
 |---|---|---|---|
-| Irrationality of Cubic Threefolds after One Stabilization | Algebraic geometry / birational geometry | Every smooth cubic threefold stays irrational after multiplication by `P¹`, detected by a rank-two block of the generic even quantum `D`-module with distinct formal exponent classes modulo the integers. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
+| Irrationality of Cubic Threefolds after One Stabilization | Algebraic geometry / birational geometry | Every smooth cubic remains irrational after `P¹`; one stabilization preserves rationality across all seventeen Picard-rank-one Fano families, and birational first stabilizations in the nine irrational families conserve rational `H³`. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
 | Sharpness of Irrationality after One Stabilization for Cubic Threefolds | Algebraic geometry / birational geometry | The universal one-stabilization irrationality bound is sharp: two specified smooth cubic threefolds have exact stable-rationality level two over every characteristic-zero field; the reusable surface theorem proves `S × A²` rational from a rational point and a stably permutation geometric Picard lattice. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | Integral Divisor Products on the Nonstandard A₅-Invariant Cubic Pencil | Algebraic geometry / algebraic cycles | Every smooth member of the non-isotrivial pencil is universally `CH₀`-trivial; after multiplication by `P¹`, it remains universally `CH₀`-trivial and is irrational. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/six-axis-cubic-pencil/six_axis_cubic_pencil.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
 | Framed Formal Monodromy of Cubic Threefolds | Algebraic geometry / quantum cohomology | The unconditional count is `ν₆(X) = 2` and satisfies the projective-space product formula; its operation formulas and birational invariance remain conditional on two explicit hypotheses. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
 | High-Weight Cosets of Generalized and Extended Reed–Solomon Codes | Coding theory | Arbitrary-redundancy classification of the top two coset-weight shells for point-deleted GRS/EGRS codes, with exact deep-hole, MDS/NMDS extension, and aggregate enumerator consequences. | [PDF](https://github.com/tavisrudd/high-weight-grs-cosets/blob/main/high-weight-grs-cosets.pdf) · [repo](https://github.com/tavisrudd/high-weight-grs-cosets) |
-| Robust Local-Unitary Rigidity of Stabilizer AME States | Quantum information | Exact local-unitary rigidity has a quantitative stability theorem. | [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [repo](https://github.com/tavisrudd/ame-lu) |
+| Robust Local-Unitary Rigidity of Stabilizer AME States | Quantum information | Exact and robust factorwise rigidity; prime-field recognition and marginal verification. | [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [repo](https://github.com/tavisrudd/ame-lu) |
 | Reconstructing projective frames from their continuation graphs | Finite geometry / graph reconstruction | Pairwise incompatibility determines a projective frame up to unique semilinear extension for `q ≥ 13`, with polynomial recognition and exact small-field exceptions. | [PDF](https://github.com/tavisrudd/continuation-graph-rigidity/blob/main/continuation_graph_rigidity.pdf) · [repo](https://github.com/tavisrudd/continuation-graph-rigidity) |
 | Reconstructing the Clebsch Code from Its Deep-Hole Syndrome Locus | Finite geometry / coding | Deep-hole data recognize the Clebsch code and recover its conference matrix up to switching and global negation. | [PDF](https://github.com/tavisrudd/clebsch-rigidity/blob/main/clebsch_rigidity.pdf) · [repo](https://github.com/tavisrudd/clebsch-rigidity) |
 | Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients | Algebraic combinatorics | On the matching carrier, a two-valued quadratic trade classifies two exceptional geometries and a cubic orients their sheets. | [PDF](https://github.com/tavisrudd/clebsch-factorization/blob/main/clebsch_factorization.pdf) · [repo](https://github.com/tavisrudd/clebsch-factorization) |
@@ -339,39 +344,39 @@ then read the abstract for the paper's technical statement.
 [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/irrationality_after_one_stabilization.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-m1) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21909943-blue.svg)](https://doi.org/10.5281/zenodo.21909943)
 
 **Standout results.** Every smooth complex cubic threefold stays irrational
-after multiplication by a projective line, and the same holds
-for every smooth prime Fano threefold of genus eight. The invariant counts
-rank-two blocks of the generic even quantum `D`-module whose centered leading
-Euler operator is nonzero square-zero and whose two formal exponent classes
-differ modulo the integers. It also gives an irrationality criterion for
-smooth projective threefolds.
+after multiplication by `P¹`. The numerical classification covers all
+seventeen smooth complex Picard-rank-one Fano families. Among the nine
+irrational families, birational first stabilizations conserve the entire
+rational third Hodge structure.
 
-> *Abstract* We prove that X × P¹ is irrational for every smooth complex cubic threefold X. On the generic even quantum D-module, our invariant counts rank-two formal connection blocks whose centered leading Euler operator is nonzero square-zero and whose two formal exponent classes differ modulo the integers. Blowup and projective-bundle decompositions make this count birationally invariant because all low-dimensional centers contribute zero. It distinguishes X × P¹ from P⁴. The same count gives an irrationality criterion for smooth projective threefolds, the one-stabilization theorem for prime Fano threefolds of genus eight, and separation results on known universally CH₀-trivial loci.
+> *Abstract* We prove that X × P¹ is irrational for every smooth complex cubic threefold X. More generally, for every smooth complex Fano threefold of Picard rank one, X × P¹ is rational if and only if X is rational. The proof constructs numerical birational invariants of fourfolds from selected generalized eigenspaces of quantum multiplication. The key step is to show that points, curves, and surfaces contribute zero to these invariants in the quantum blowup formula. Weak factorization then gives birational invariance, and quantum product calculations determine the invariants after product with P¹. For the nine irrational families, a refinement retaining Hodge structures shows that birationality of X × P¹ and Y × P¹ forces an isomorphism of their rational third cohomology as Hodge structures. The numerical irrationality proofs are independent of this refinement.
 
-**Delivers.** An unconditional birational obstruction after one
-projective-line stabilization for every smooth cubic threefold; a QDM-side
-irrationality criterion for smooth projective threefolds; the same
-one-stabilization result for prime Fano threefolds of genus eight; and
-separation from universal `CH₀`-triviality on several known loci.
+**Delivers.** An unconditional cubic theorem, an all-member Fano rationality
+classification after one stabilization, and a separate rational-Hodge
+conservation theorem. Consequences include cancellation for a very general
+cubic or quartic source against any smooth target of the same degree, and
+finitely many geometric cubic partner classes over extensions of bounded
+degree of a fixed finitely generated characteristic-zero field.
 
 **Who cares.** Algebraic geometers working on rationality, stable rationality,
 intermediate Jacobians, algebraic cycles, quantum connections, or weak
 factorization.
 
-**Why it matters.** Failure of universal `CH₀`-triviality is a standard
-obstruction to stable rationality, but its validity is not a parametrization.
-This paper makes that limitation concrete after an actual stabilization, and
-its formal-exponent marker is a direct quantum-`D`-module invariant that
-applies to every smooth cubic threefold. The classical route stops short here:
-after one
-stabilization the direct Clemens–Griffiths mechanism gives no contradiction,
-because `H³(X × P¹)` is still `H³(X)`, which the Fano surface of lines
-already carries as its `H¹` up to twist, while the middle `H⁴` is Tate.  The
-recent fourfold criteria that read Hodge data through quantum spectral
-packets do not reach this geometry either, since they assume `b₃ = 0` and a
-large vanishing middle `H⁴`.  The paper claims no novelty for that broad
-philosophy; what is new is the formal-exponent marker and the operation ledger
-that carries it through one stabilization.
+**Why it matters.** The first stabilization allows surface centers in weak
+factorization, so classical threefold obstructions do not directly settle
+it. The numerical selectors isolate contributions that every such center
+misses. Hodge conservation then recovers information about the original
+threefolds from a birational map between their fourfold products. The cubic
+proof can be read on its own; the numerical classification precedes the
+Hodge argument and its consequences.
+
+**Attribution boundary.** The paper's claim ledger records “Ordinary irrationality, quantum spectral methods and much of the
+underlying Fano data are prior work” and “Exact whole-H³ one-stable
+conservation priority comparison remains open.”
+
+**Verification.** Exact finite checks and a partial Lean companion support
+specified steps. Geometric comparison maps and endpoint realizations remain
+written proofs or cited inputs; this is not an end-to-end Lean proof.
 
 ---
 
@@ -507,25 +512,54 @@ same syndrome geometry into exact MDS/NMDS extension data.
 
 [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [Repository](https://github.com/tavisrudd/ame-lu) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21681856-blue.svg)](https://doi.org/10.5281/zenodo.21681856)
 
-**Standout results.** Every product-unitary equivalence between stabilizer AME
-states is local Clifford. A half-set systematic form reduces recognition to
-`m` minimum supports; over prime fields, a block-determinant array and the
-simultaneous conjugacy class of `(m-1)^2` four-cycle holonomies are complete.
-Their common centralizer is an intrinsic local endomorphism algebra with five
-prime-field types and is necessarily nonscalar through six parties.
-The same `m` supports determine the state among all mixed states, with a
-parent Hamiltonian at the smallest possible locality, and stochastic local
-conversions between such states are Clifford up to scalars.
-A quantitative rounding theorem places sufficiently approximate symmetries
-near exact Clifford symmetries.
+**Standout results.** Every product-unitary equivalence between additive
+stabilizer `AME(2m,q)` states, `m≥2`, has Clifford factors. Approximate product
+symmetries admit an exact-symmetry decomposition with an explicit collective
+residual bound. The radius is a uniform two-parameter statement; the length
+restriction `2m≤2(q²−1)` excludes unbounded fixed-`q` families.
 
-> *Abstract* Let q = pᵉ and m ≥ 2. We prove that every product unitary mapping one stabilizer AME(2m,q) state to another is Clifford on each party, and the same holds when a party relabelling is allowed. The result covers arbitrary additive stabilizers. Here Clifford is meant in the additive prime-field sense: on Weyl labels a local factor acts through Sp₂ₑ(𝔽ₚ), with no 𝔽q-linearity assumption. Thus local-unitary and local-Clifford equivalence coincide for these states. The proof is a support count: stabilizers contained in any (m + 1)-party set project bijectively onto the full Weyl-label space at each retained party, so the corresponding reduced operator determines every local Weyl axis. Via the Choi-state correspondence, every transversal conversion between the associated [[2m−1,1,m]]q encoders is therefore Clifford on every physical and logical factor. Their transition maps between local Weyl-label spaces form a complete LU invariant, modulo local trace-symplectic frame changes and party relabelling. A half-set systematic form compresses this invariant to m minimum supports and gives a constructive fixed-label recognition algorithm that is polynomial in m for fixed q. The same m supports carry the reductions that determine the state among all density operators, with a commuting-projector parent Hamiltonian that no m-local Hamiltonian can replace, and every stochastic local conversion between two such states is Clifford up to scalars. In prime dimension, the same data determine an intrinsic endomorphism algebra, whose dimension is at least two for four and six parties.
+The half-set invariant gives deterministic prime-field recognition in
+`O(m³+log q)` field operations and exact randomized witnesses with the same
+expected cost. In prime dimension, four-party endomorphism algebras are
+`M_2(F_q)`, with compatible group `SL_2(q)`; six-party algebras are nonscalar.
+Complementary marginal tests give optimal uniform verification gap
+`(m+1)/(2m)`, also for nonstabilizer AME targets. Weighted exact tradeoffs
+remain stabilizer-specific. Independent repetitions give an explicit
+confidence-based entry rule for robust rigidity under a product-unitary
+preparation promise.
+
+> *Abstract.* Let q=pᵉ and m≥2. We prove that every product unitary mapping
+> one stabilizer AME(2m,q) state to another is Clifford on each party, also
+> when party relabelling is allowed. The result covers arbitrary additive
+> stabilizers: local Clifford actions lie in Sp₂ₑ(Fₚ), with no Fq-linearity
+> assumption. The proof is a support count. Stabilizers contained in any
+> (m+1)-party set project bijectively onto every retained party's Weyl labels,
+> so the reduced operator determines all local Weyl axes.
 >
-> We also prove robust rigidity for approximate product symmetries. If the state-vector defect ε is below an explicit threshold of order min{p⁻¹, q⁻¹ᐟ², (2m)⁻¹ᐟ²}, every local factor lies within normalized Hilbert–Schmidt distance 8ε of a Clifford, and the product unitary decomposes into an exact symmetry and a residual whose collective generator norm is at most π√q ε. The proof combines three-region cleaning, finite Weyl–Fourier concentration, the quantized overlap of stabilizer states, and a balanced-cut estimate.
+> We also prove robust rigidity. Below an explicit state-vector defect
+> threshold of order min{q⁻¹ᐟ²,(2m)⁻¹ᐟ²}, a product unitary decomposes into an
+> exact symmetry and a residual whose collective generator norm is at most
+> π√q ε. Each local factor first rounds to a Clifford within normalized
+> Hilbert–Schmidt distance 8ε. Three-region cleaning and Weyl–Fourier
+> concentration give these frames; quantized stabilizer overlaps and a
+> balanced-cut estimate control the residual.
 >
-**Delivers.** Exact product-unitary changes between a broad class of highly
-entangled quantum states must come from the code's discrete symmetry group;
-approximate changes are quantitatively close to that group.
+> The exact proof also gives a complete finite transition-map invariant and
+> factorwise Clifford rigidity for transversal encoder conversions. For
+> promised stabilizer-AME check matrices, fixed-label recognition returns
+> compact symplectic witnesses with an explicit field-operation bound; in
+> prime dimension, a four-variable quadratic reduction gives deterministic
+> decision in O(m³+log q) field operations and exact witnesses with the same
+> expected cost. Stabilizer phases determine a Clifford–Pauli conversion.
+> Selected marginal tests give fidelity certificates and an observable
+> sufficient condition for the robust theorem.
+
+**Delivers.** An exact classification, a quantitative rounding theorem,
+and marginal tests linking measured rejection to certified fidelity. The
+[reference implementation](https://github.com/tavisrudd/ame-lu/tree/main/software/prime-recognition)
+returns compact prime-field symplectic witnesses and includes independent
+small-field test oracles. The theorems have manuscript proofs; these tests
+and the partial formalizations do not constitute end-to-end formal coverage.
 
 **Who cares.** Quantum-information theorists, stabilizer-code researchers, and
 people studying robust classifications of entangled states.
