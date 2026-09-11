@@ -44,3 +44,13 @@ Paper II.
 ## C1138 scope updates
 
 The four-party identification, dimension obstruction and independent all-pass sampling prescription are analytical manuscript arguments, not computations or new Lean coverage. `eq:ame-length-bound` is a direct support-count proof of the known QMDS restriction, with Huber–Grassl Theorem 10 cited. The verification extension retains C1136's incomplete literature-coverage limits; no new priority search or closure is claimed. The README reports theorem content and these same scope limits.
+
+## Fast prime-field recognition — C1139
+
+| Claim | Proof / evidence | Literature posture | Public wording |
+|---|---|---|---|
+| `cor:fast-prime-recognition`: deterministic decision and Las Vegas exact witness construction, O(m³+log q) field operations from promised prime-field check matrices | complete manuscript proof by determinant restriction; no Lean coverage; reference implementation independently tested, tests not used in proof | efficient nonbinary LC recognition credited to Bahramgiri–Beigi (both 2007 v2 preprints); residuosity and Cipolla extraction are classical; C1139 consulted four sources partially, zero full works, and makes no absence/priority claim | AME reduction to at most four variables, explicit growing-prime arithmetic/bit bounds; not a first polynomial-time LC algorithm; not an extension-field additive solver |
+
+The C1139 report owns the bounded literature check and exact read depths. The
+manuscript, introduction, conclusion and README use the theorem-content and
+attribution wording in this row; no portfolio priority statement is added.

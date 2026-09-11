@@ -108,6 +108,24 @@ This map covers Paper I after the two-paper split. Results owned by
 |---|---|---|
 | `eq:ame-length-bound` | support count gives `m≤q²−1`; known QMDS bound, Huber–Grassl Theorem 10 | manuscript deduction |
 | `thm:low-party-endomorphisms` | four-party prime-dimensional algebra is `M_2(F_q)`, compatible group `SL_2(q)`; weighted two-by-two block anti-isometry; six-party conclusion unchanged | manuscript only |
-| `prop:spectral-chart-obstruction` | one-party cube-root spectrum at defect `sqrt(6/q)` excludes the joint spectral-spread and collective conclusion for `q>6(pi+1)^2/(2−sqrt2)` | manuscript only |
+| `prop:spectral-chart-obstruction` | for prime powers `q=p^e`, even `n=2m`, `m≥2`, a one-party cube-root spectrum at defect `sqrt(6/q)` excludes the joint spectral-spread and collective conclusion for `q>6(pi+1)^2/(2−sqrt2)` | manuscript only |
 | `eq:selected-family-verification` | nonstabilizer selected-family bound, with explicit separate spectral truncations; no cross-star commutation | manuscript only |
 | sampling paragraph after `cor:marginal-certified-rounding` | independent repetitions of one fixed preparation; all-pass confidence bound and sufficient copy count; implementation cost separate | manuscript deduction |
+
+## C1139 fast prime-field recognition
+
+`cor:fast-prime-recognition` solves determinant one on the four-entry
+intertwiner space by its quadratic rank. Prime-field decision is deterministic;
+exact construction is Las Vegas, both O(m³+log q) field operations from check
+matrices (expected for construction), with schoolbook bit bound
+O(m³ b²+b³). Primality and AME are input promises, and labels are fixed.
+The manuscript proof is independent of the software tests. The software
+bundle supplies exhaustive small-field reference checks and verified witnesses;
+there is no new formal coverage. Prior nonbinary LC algorithms and classical
+root extraction are credited explicitly.
+
+Latest scope repair: `prop:spectral-chart-obstruction` explicitly assumes
+prime-power q and even n=2m with m≥2. `rem:radius-sandwich` combines the
+existing lower and upper bounds and gives Theta_C(q^(-1/2)) on every existing
+family with n≤Cq. The odd-party cubic-phase example supplied in feedback
+confirms that the exact-Clifford inference cannot be used without parity.

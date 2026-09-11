@@ -531,15 +531,7 @@ lifts this to LU equivalence.  Taking \(G=H\) gives the centralizer
 statement.
 \end{proof}
 
-The final determinant condition has a direct finite decision procedure.
-First solve the homogeneous linear system for its subspace of \(M_2(\F_q)\).
-One can then test its defining equations on the \(q(q^2-1)\) matrices of
-\(\mathrm{SL}_2(q)\): for \(a\ne0\), choose \(a,b,c\) and set
-\(d=(1+bc)/a\); for \(a=0\), choose \(b\ne0,d\) and set \(c=-b^{-1}\).
-This gives the explicit arithmetic bound above, with four unknowns
-regardless of party count.  It is not a polynomial bound in \(\log q\).
-Faster determinant solving in the intertwiner space is a separate
-algorithmic refinement.
+\input{sections/03b-fast-recognition}
 
 \subsection{A four-qutrit example}
 \label{subsec:four-qutrit-example}

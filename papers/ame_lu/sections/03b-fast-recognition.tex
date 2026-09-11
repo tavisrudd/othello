@@ -1,0 +1,83 @@
+\paragraph{Solving the determinant condition.}
+Efficient local-Clifford recognition for nonbinary graph states is already
+established \cite[Section~IV]{BahramgiriBeigi2007Graph}
+\cite[Section~6]{BahramgiriBeigi2007Algorithm}.  Here the AME geometry reduces
+the determinant constraint to a quadratic form on at most four variables,
+giving an explicit dependence on a growing prime dimension.  Quadratic
+residuosity and square-root extraction are standard finite-field algorithms
+\cite[Section~12.4.1]{Shoup2008}
+\cite[Section~2.2]{AdiguzelGoktasOzdemir2024}; no new root algorithm is needed.
+
+\begin{corollary}[Fast prime-field recognition]
+\label{cor:fast-prime-recognition}
+For prime \(q\), fixed-party LU equivalence of promised stabilizer
+\(\AME(2m,q)\) check matrices can be decided deterministically in
+\(O(m^3+\log q)\) operations in \(\F_q\).  Compatible symplectic frames
+can be constructed by a Las Vegas algorithm with the same expected bound:
+every returned witness is exact, and randomness affects only its running time.
+Given the systematic matrices, both bounds improve to
+\(O(m^2+\log q)\).
+With schoolbook integer arithmetic and \(b=\lceil\log_2 q\rceil\), a
+bit-operation bound is \(O(m^3b^2+b^3)\), deterministic for decision and
+expected for construction.  Primality and the stabilizer-AME property are
+input promises; party permutations are not searched.
+\end{corollary}
+
+\begin{proof}
+Form the systematic maps in \(O(m^3)\) field operations.  Test their block
+determinants and form the fundamental cycles in \(O(m^2)\) operations.
+The intertwining equations of Corollary~\ref{cor:prime-systematic-recognition}
+have four unknowns, so Gaussian elimination finds their solution space
+\(W\leq M_2(\F_q)\) in \(O(m^2)\) operations.  It remains to solve
+\(\det A=1\) in \(W\).  For \(q=2\), inspect the at most sixteen matrices
+in \(W\).
+
+Suppose \(q\) is odd.  Restrict the homogeneous quadratic form
+\(Q(A)=\det A\) to a basis of \(W\).  Symmetric elimination in dimension
+at most four diagonalizes it, using a constant number of field operations:
+\[
+ Q= a_1x_1^2+\cdots+a_rx_r^2,\qquad a_i\ne0.
+\]
+This works for degenerate forms too.  If every diagonal entry vanishes but
+an off-diagonal entry is nonzero, the sum of the corresponding basis
+vectors supplies a nonzero pivot; when the remaining bilinear form is zero,
+its quadratic form is zero because the characteristic is odd.
+
+For \(r=0\) the answer is negative.  For \(r=1\), it is positive exactly
+when \(a_1\) is a square, decided by Euler's criterion in \(O(\log q)\)
+operations.  For \(r\geq2\), the answer is always positive.  Indeed, for
+nonzero \(a,b\), the number of solutions to \(ax^2+by^2=1\) is
+\(q-\chi(-ab)\), where \(\chi\) is the quadratic character extended by
+\(\chi(0)=0\).  The identity
+\(\sum_x\chi(x^2-c)=-1\) for \(c\ne0\) follows by counting
+\((x-y)(x+y)=c\), and gives this formula.  Thus uniformly sampled \(x\)
+makes \((1-ax^2)/b\) a square or zero with probability at least
+\((q-1)/(2q)\geq1/3\).  Extract a square root \(y\) and set the other
+coordinates to zero.  Rank one requires just a square root of \(a_1^{-1}\).
+
+For completeness, the required expected \(O(\log q)\) root bound follows
+directly from Cipolla's construction.  For a nonzero square \(c\), sample
+\(t\) until \(d=t^2-c\) is a nonsquare.  The same character count gives
+success probability \((q-1)/(2q)\).  In \(\F_q[z]/(z^2-d)\), compute
+\[
+ y=(t+z)^{(q+1)/2}.
+\]
+Frobenius sends \(z\) to \(-z\), so \(y^2=c\); since \(c\) is a square
+in \(\F_q\), both roots lie in \(\F_q\).  Binary exponentiation costs
+\(O(\log q)\) base-field operations.  Each sampling stage has bounded
+expected trials, giving the claimed witness cost.  Undo the basis change,
+propagate the frames, and verify all determinant and block equations.
+
+A base-field product, reduction or inverse costs \(O(b^2)\) bit operations
+with classical arithmetic; exponentiation uses \(O(b)\) products.  Uniform
+sampling by rejection from \(b\) random bits has bounded expected cost.
+These observations give the stated bit bounds.
+\end{proof}
+
+If an invertible intertwiner \(A_0\) is already known, then
+\(W=A_0\mathcal E\), where \(\mathcal E\) is the common centralizer.
+The same calculation is determinant normalization in that algebra:
+\(\det(A_0B)=\det(A_0)\det B\).  The scalar and dual-number cases give a
+rank-one square-class test, the split and field cases give a rank-two form,
+and the full matrix algebra gives rank four.  Working directly in \(W\)
+avoids first finding \(A_0\) or classifying \(\mathcal E\).

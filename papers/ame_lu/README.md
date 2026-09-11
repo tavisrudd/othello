@@ -50,7 +50,8 @@ The radius is a two-parameter statement. The support count implies
 with `n≤q+1`, the certified scale is `Theta(q^(-1/2))`. A one-party
 three-eigenvalue perturbation shows that this dimension exponent is necessary
 when the spectral-spread requirement and collective coefficient are both
-retained. Sharp party-count dependence remains open.
+retained. The upper and lower bounds match in order on every existing family with
+`n≤Cq`; their general party-count dependence remains open.
 
 ## Why the proofs work
 
@@ -85,17 +86,31 @@ a complete invariant for fixed-party local-unitary equivalence.
 **Output:** inequivalence or compact symplectic witnesses. When stabilizer
 phases are supplied, a linear solve supplies a Clifford–Pauli conversion.
 
-Using classical matrix arithmetic, recognition takes
+Over a prime field, the four-entry intertwiner space turns the determinant
+condition into one quadratic form. Decision is deterministic; exact witnesses
+are constructed by a Las Vegas algorithm, whose randomness affects runtime
+only. Using classical matrix arithmetic:
+
+```text
+O(m³ + log q) field operations from check matrices,
+O(m² + log q) field operations from systematic matrices.
+```
+
+The witness bounds are expected. With `b=ceil(log_2 q)`, a sufficient bit bound
+is `O(m³ b²+b³)`. Efficient nonbinary local-Clifford recognition was already
+established by Bahramgiri and Beigi; the paper gives the AME reduction and
+explicit growing-prime cost using classical quadratic-form methods.
+
+For arbitrary additive prime-power dimension `q=p^e`, the general enumeration
+bound remains
 
 ```text
 O((me)^3 + |Sp(2e,F_p)| m² e³) operations in F_p.
 ```
 
 Unknown party relabelling introduces a separate exhaustive-search factor of
-at most `(2m)!`. Over a prime field, the decision reduces to homogeneous
-linear equations in four entries of a `2×2` matrix and one determinant
-condition. The paper gives an explicit finite decision procedure; its field
-operation count is not a polynomial-time claim in `log q`.
+at most `(2m)!`. The prime-field improvement does not replace the full
+additive symplectic problem over extension fields.
 
 The compatible symmetry group is controlled by an intrinsic endomorphism
 algebra. In prime local dimension there are five possible algebra types.
@@ -152,8 +167,9 @@ logical groups and six-point applications are treated separately.
 ## Proof and evidence boundary
 
 The results have manuscript proofs, with standard inputs cited at their use.
-There is no computational census, numerical experiment or certificate
-dependency. Selected support, axis, holonomy, character, Choi and second-moment
+The theorem proofs do not depend on a computation or certificate. The
+companion recognition implementation has exhaustive small-field regression
+tests and independent reference oracles. Selected support, axis, holonomy, character, Choi and second-moment
 algebraic cores have partial Lean formalizations. The principal rigidity,
 verification, low-party algebra and spectral-chart theorems are not
 end-to-end formalized. Appendix D states the precise boundary; the paper does
@@ -165,15 +181,28 @@ From this directory:
 
 ```text
 make check
+make software-check
 python3 release/verify_release.py
 ```
 
 `make check` lints the sources, rebuilds the PDF and rejects TeX warnings.
 The default build uses Nix to obtain XeLaTeX and latexmk; an existing TeX
 installation can be selected with `make check LATEXMK=latexmk`.
-The release verifier checks the recorded public-source and PDF hashes. In a
+`make software-check` replays the exact recognition tests and verifies their
+source/output hashes. The release verifier checks the recorded public-source,
+software and PDF hashes. In a
 paper-only checkout it reports that the formal companion is absent; it does
 not claim to have checked those recorded formal artifacts.
+
+## Companion implementation
+
+[`software/prime-recognition/`](software/prime-recognition/) contains the
+reference algorithm, a JSON example using the four-qutrit state, independent
+exhaustive oracles, and a reproducible test record. It accepts promised
+prime-field check matrices or systematic block arrays and returns compact
+symplectic frames. It does not construct dense Clifford lifts or perform the
+subsequent character repair. See its README for the exact input convention,
+commands, test domains and evidence boundary.
 
 ## Files
 

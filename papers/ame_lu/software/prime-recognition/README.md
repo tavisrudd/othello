@@ -54,7 +54,7 @@ Party permutations are not searched.
 
 Solve the homogeneous intertwining equations in four matrix entries. Restrict
 `det` to that solution space. In odd characteristic diagonalize the quadratic
-form: rank zero is impossible, rank one needs a square-class test, and rank at
+form: rank zero has no solution, rank one needs a square-class test, and rank at
 least two always represents one. Sampling a binary subform and using Cipolla's
 square-root method constructs a witness in expected `O(log q)` field operations.
 At `q=2`, at most sixteen matrices suffice.

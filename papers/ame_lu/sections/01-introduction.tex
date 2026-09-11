@@ -223,7 +223,10 @@ minimum-support subgroups can span it
 (Proposition~\ref{prop:half-set-direct-sum}).  Fixed-label recognition then
 enumerates one base symplectic frame and checks each candidate by finite
 linear algebra.  Over a prime field it reduces to homogeneous linear
-equations in four entries and one determinant equation.  Corollary~\ref{cor:finite-recognition} gives the explicit
+equations in four entries and one determinant equation.  Solving its
+quadratic restriction gives deterministic decision and exact randomized
+witnesses in \(O(m^3+\log q)\) field operations, with the latter bound
+in expectation (Corollary~\ref{cor:fast-prime-recognition}).  Corollary~\ref{cor:finite-recognition} gives the explicit
 candidate count and the separate cost of unknown party relabelling.
 The input is promised stabilizer-AME check matrices with fixed party labels;
 the output is a compact symplectic witness, upgraded to a Clifford--Pauli
@@ -260,6 +263,12 @@ transversal-gate hierarchy bounds
 \cite{BravyiKonig2013,JochymOConnorKubicaYoder2018}.  We use only the exact
 cleaning and localization consequences and prove the leakage estimate,
 finite Weyl--Fourier rounding, and explicit AME composition here.
+
+Efficient local-Clifford recognition for nonbinary graph states predates
+this work \cite{BahramgiriBeigi2007Graph,BahramgiriBeigi2007Algorithm}.
+Our prime-field recognition corollary uses the AME structure to reduce the
+search to a quadratic form on at most four variables and makes its
+field-size dependence explicit.
 
 For exact LU rigidity, Rains recovered the three Pauli axes from a diagonal
 correlation tensor, and Van den Nest, Dehaene, and De Moor used that mechanism
@@ -307,10 +316,9 @@ sharpens the generator-support criterion for qubit stabilizer states
 Kempf--Ness equality of SLOCC and LU classes for AME states
 \cite[Corollary~1]{BurchardtRaissi2020}.
 The exact result also identifies, in prime dimension, the intrinsic
-endomorphism algebra behind the symmetry calculation.  To our knowledge, no
-earlier result forces this algebra to be nonscalar for every four- or
-six-party stabilizer AME state; Tan's four-qutrit computation is an important
-special case.  The
+endomorphism algebra behind the symmetry calculation: it is the full
+\(M_2(\F_q)\) for four parties and is nonscalar for six.  Tan's four-qutrit
+computation supplies the corresponding example.  The
 quantitative result supplies an explicit neighborhood in which an
 approximate product symmetry can be assigned to an exact Clifford branch,
 while distinguishing symplectic compatibility from the remaining

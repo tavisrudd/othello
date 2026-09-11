@@ -709,7 +709,8 @@ with the collective coefficient in the theorem.
 
 \begin{proposition}[Dimension obstruction for the spectral chart]
 \label{prop:spectral-chart-obstruction}
-Let \(\psi\) be a stabilizer \(\AME(n,q)\), \(n\geq4\), with
+Let \(q=p^e\), \(n=2m\), and \(m\geq2\).  Let \(\psi\) be a
+stabilizer \(\AME(n,q)\) state with
 \[
  q>\frac{6(\pi+1)^2}{2-\sqrt2}.
 \]
@@ -748,9 +749,24 @@ The assumed bound on \(q\) forces all factors to be scalar, leaving the
 semicircle obstruction on the first party.
 \end{proof}
 
-This obstruction applies, for example, along four-party Reed--Solomon
-families as \(q\to\infty\).  It does not obstruct local Clifford rounding
-alone or a conclusion allowing a larger logarithm chart.
+\begin{remark}[Matching bounds on linearly growing families]
+\label{rem:radius-sandwich}
+For a fixed stabilizer \(\AME(2m,q)\) target, let \(R_{\mathrm{opt}}(\psi)\)
+be the supremal radius for which every product unitary of smaller defect
+admits the exact-symmetry decomposition with spectral spread at most \(\pi\)
+and collective bound \(\pi\sqrt q\,\varepsilon\).
+Theorem~\ref{thm:cleaning-global-rounding} and
+Proposition~\ref{prop:spectral-chart-obstruction} give, for the latter's
+range of \(q\),
+\[
+ \min\left\{\frac1{4\sqrt{2q}},\frac1{8\pi\sqrt n}\right\}
+ \leq R_{\mathrm{opt}}(\psi)\leq\sqrt{\frac6q},\qquad n=2m.
+\]
+Thus \(R_{\mathrm{opt}}(\psi)=\Theta_C(q^{-1/2})\) along every existing
+family with \(n\leq Cq\), including the Reed--Solomon regime.  These bounds
+need not match when \(n/q\) grows.  The obstruction does not apply to local
+Clifford rounding alone or a conclusion allowing a larger logarithm chart.
+\end{remark}
 
 \subsection{An observable sufficient condition}
 

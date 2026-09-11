@@ -37,3 +37,10 @@ updating the public formal repository belong to the formal-split phase.
 ## C1138 scope boundary
 
 The strengthened four-party conclusion in `thm:low-party-endomorphisms`, the spectral-chart obstruction `prop:spectral-chart-obstruction`, the length-bound support deduction, and the independent all-pass sampling prescription have no Lean coverage. Their proofs are in the manuscript. The existing formal artifacts are unchanged. The universal selected-family proof has only an expository expansion, with no change to its formal status.
+
+## C1139 algorithm
+
+`cor:fast-prime-recognition` and its arithmetic/bit analysis are manuscript
+proofs, not Lean theorems. The independent Python exhaustive oracles check
+finite implementation domains only; they do not change the formal coverage
+of recognition, determinant normalization or the AME promise.

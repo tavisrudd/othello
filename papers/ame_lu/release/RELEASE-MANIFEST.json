@@ -6,14 +6,14 @@
   "public_export": {
     "artifacts": [
       {
-        "bytes": 1107,
+        "bytes": 1257,
         "path": "Makefile",
-        "sha256": "2b6a65af3d935ac153c41d6cd00975f6165869b573bd65ba9ea6c418f36cd15d"
+        "sha256": "a240f0c0f8426c27f4f5f31f3887a464fa0c5af3a5784ed5c332934ef69e9d53"
       },
       {
-        "bytes": 342388,
+        "bytes": 353969,
         "path": "ame-lu.pdf",
-        "sha256": "b39e9c39cdf62381fcf58ba562a37a87e5eb661f703b2b7ca53602c5f59d737b"
+        "sha256": "e7789e3b2c847e51edcf05f8e81ea924604f4b024a3a1cacfbb7a8af6369d55c"
       },
       {
         "bytes": 2650,
@@ -36,24 +36,24 @@
         "sha256": "187e03eb0106383ebcd2aebcd0c728bb0a265591ca1ceffda277c90302044723"
       },
       {
-        "bytes": 5090,
+        "bytes": 5169,
         "path": "main.tex",
-        "sha256": "a2c83867d81547992fddd2582bedb54b10d27e47d6e3b3de220f3895b648a1e4"
+        "sha256": "ae2f868410ad7f9f59fffeded17558d67c490025c761c7f9fa6e5db32281d85b"
       },
       {
-        "bytes": 30253,
+        "bytes": 31265,
         "path": "refs.bib",
-        "sha256": "4b616fb847dc2f31e8fe5a3499d997e002c6bcd9ba9a1a9189e7db5198c19202"
+        "sha256": "13d886607d571b259a03a9ecec58cc5689080a3710b32186ec1799fa69231dd9"
       },
       {
-        "bytes": 8689,
+        "bytes": 9029,
         "path": "release/verify_release.py",
-        "sha256": "942457a6080e47c70e0157d208cc79dda0c122a8701cf32d8229b551dbca8033"
+        "sha256": "a9aa8eafaa736ec687771338e4b9134d6a54ff24b50eae07469c9c4b2c6a1781"
       },
       {
-        "bytes": 19298,
+        "bytes": 19790,
         "path": "sections/01-introduction.tex",
-        "sha256": "23e0c9fb171c2d6d31da3937b58c6b043016af5462f1bddb16e146e0f24914bc"
+        "sha256": "6b9f73e911ea6f128f71a99c6357a6189176176b51fb897a2bab5cc960832c00"
       },
       {
         "bytes": 3682,
@@ -61,9 +61,9 @@
         "sha256": "3269f501922c555009d18110d7b6d760cf6b57fd1d27417fe53189c8d5521c86"
       },
       {
-        "bytes": 41960,
+        "bytes": 41414,
         "path": "sections/03-exact-rigidity-atlas.tex",
-        "sha256": "225e619b7d27e8d253757650b9b96713bffb1ea8e79e6ee70da4d24e572283c8"
+        "sha256": "f74218b139c9b4558570b6c32a1a85fb850dfd76299a0a42a1ed65a356963228"
       },
       {
         "bytes": 5640,
@@ -71,24 +71,29 @@
         "sha256": "74e922dc68cef7941fa25e623e7c39806fd47f872c25cd9e1bf7160b86b9537d"
       },
       {
-        "bytes": 10844,
+        "bytes": 4551,
+        "path": "sections/03b-fast-recognition.tex",
+        "sha256": "2c118026c6c08876936e822c937ef39364515e6e7faf3d91caf4faff57b96b07"
+      },
+      {
+        "bytes": 10864,
         "path": "sections/04-prime-endomorphism-algebra.tex",
-        "sha256": "933dad54dc6f3fb534b8f70ae145a169bbc9d786cd44e7cb9b0a701dc0718c45"
+        "sha256": "b0f4bc5e3b4f8a8890a7e84959c5969c51e8f3836c4da816e1851715784132f1"
       },
       {
-        "bytes": 33472,
+        "bytes": 34245,
         "path": "sections/05-quantitative-rounding.tex",
-        "sha256": "c871810eb873a36499f45be4806907358576592e71baaadf34e011259dd42b9b"
+        "sha256": "27555dd62d7b9b1ef55cd87c04cbe896a328982b2e40d5ec4728aa970e2145b8"
       },
       {
-        "bytes": 3213,
+        "bytes": 3526,
         "path": "sections/07-conclusion.tex",
-        "sha256": "483478751acf2cbcb5e020fea122e0aabe7045ccb1703d0cfc80a30e86ffba05"
+        "sha256": "2bb2a51650ae66dd1365a9727d11e34a2bf7ff116f712e4ddc289349586f7b01"
       },
       {
-        "bytes": 3977,
+        "bytes": 4407,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "ac4de968b3ccb34bac52d96daf39f05a3daa0715d9f618e95d7e47ca4654590d"
+        "sha256": "213e118df0344ca7d8852709015147932e20d8967098c7566d05be14c8d8ddcc"
       },
       {
         "bytes": 11843,
@@ -104,9 +109,44 @@
         "bytes": 6966,
         "path": "sections/C-marginal-verification.tex",
         "sha256": "de8acdc431ebc12a0d0ec47609d6101607fd88605d7ee941e2dc572b06bd8442"
+      },
+      {
+        "bytes": 4348,
+        "path": "software/prime-recognition/README.md",
+        "sha256": "04e6398794f5a18e8455b5e2aa7cd1f1a492060e0395114ee980f11070af67f4"
+      },
+      {
+        "bytes": 842,
+        "path": "software/prime-recognition/SHA256SUMS.json",
+        "sha256": "f5197fca4f17c12110f32ecafadf3c6af5c8b3de4b197acecad400cf3c5fffa6"
+      },
+      {
+        "bytes": 1164,
+        "path": "software/prime-recognition/bundle.py",
+        "sha256": "c77d2a6306ad2dd2a3cb809746f4eadfe373963234722dcd62ea65e7bdb88e22"
+      },
+      {
+        "bytes": 757,
+        "path": "software/prime-recognition/example.json",
+        "sha256": "306646f388681e5162f8edcc94b3838c4947c9d1ba7abd9f7b1257cd03dab048"
+      },
+      {
+        "bytes": 10336,
+        "path": "software/prime-recognition/recognition.py",
+        "sha256": "4eb56cd2b00dc8c3e6caabb625a1912068394e5caf9a7489af0da6a17f27691b"
+      },
+      {
+        "bytes": 2369,
+        "path": "software/prime-recognition/test-results.json",
+        "sha256": "c19be79dbb38c1cbd09dc2d3901f8de92197ec9e1c5203dd62e839aab4ae92dc"
+      },
+      {
+        "bytes": 13977,
+        "path": "software/prime-recognition/test_recognition.py",
+        "sha256": "463b2b3e9e674f69c5449ade4f0d3fc99a42c1a39ba9760fbb71ad7a78c881ce"
       }
     ],
-    "tree_sha256": "2d1ce5138ae8bad0bea90beb2be3ce741044f6db27a49d8cdb03c3ed65086f56"
+    "tree_sha256": "ba6d222764f5685e95b11a4722efe2e20735ab87a8fcf7b2f8a1055f4dafe72f"
   },
   "formal_companion": {
     "artifacts": [

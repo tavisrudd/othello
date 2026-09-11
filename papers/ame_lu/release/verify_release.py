@@ -32,6 +32,13 @@ PAPER_FILES = (
     "main.tex",
     "refs.bib",
     "release/verify_release.py",
+    "software/prime-recognition/README.md",
+    "software/prime-recognition/recognition.py",
+    "software/prime-recognition/test_recognition.py",
+    "software/prime-recognition/test-results.json",
+    "software/prime-recognition/example.json",
+    "software/prime-recognition/bundle.py",
+    "software/prime-recognition/SHA256SUMS.json",
 )
 
 def digest(path: Path) -> tuple[int, str]:

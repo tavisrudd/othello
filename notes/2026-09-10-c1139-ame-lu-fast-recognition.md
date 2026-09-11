@@ -63,3 +63,81 @@ finite field quadratic form represent scalar randomized algorithm Ivanyos Ronyai
 The author names in the query were corrected from the retrieved primary texts to Bahramgiri and Beigi. Initial search hits included more general matrix-congruence/function-field algorithms; they were not read as proofs or used to assert stronger finite-field recognition results. No screened search set is claimed exhaustive.
 
 Manuscript positioning: efficient LC recognition and the finite-field quadratic/root operations are established. The paper supplies the AME reduction to four unknowns, its direct determinant-form criterion and explicit prime-dimension cost. This is theorem-content wording, with no first/priority claim. The claim ledger, body algorithm paragraph, introduction and README are to carry that same boundary.
+
+## Additional referee feedback received during implementation
+
+The spectral-chart proposition's standalone scope omitted even parity. This
+was a real hypothesis omission: the exact-rigidity input applies to n=2m,
+m≥2, not arbitrary n≥4. Corrected the statement to q=p^e and n=2m, m≥2.
+The supplied five-party example is consistent: any two distinct evaluation
+coordinates determine (x,y), any traced triple removes off-diagonal terms,
+and the linear support gives a CSS stabilizer state. For primes q≥7, the
+fourth finite difference annihilates the cubic phase, while each local
+conjugated shift has nonzero quadratic coefficient 3c_j. Thus its factors
+are not Clifford. This shows the prior proof inference lacked scope; it is
+not itself a counterexample to the obstruction's conclusion.
+
+Added `rem:radius-sandwich`: R_clean≤R_opt(psi)≤sqrt(6/q) in the corrected
+class and stated large-q range, with both spectral spread and collective
+coefficient retained. Consequently R_opt=Theta_C(q^(-1/2)) on every existing
+n≤Cq family. The remaining two-parameter gap is stated without assuming
+existence of an unbounded fixed-q family.
+
+Reordered the low-party theorem to give the full four-party algebra/group
+first, followed by six-party nonscalarity. Replaced the weaker introductory
+summary and removed its stale absence-of-prior-work sentence to match the
+ledger's theorem-content policy. The faster algorithm requested in this
+active task is now proved and tested, so the feedback's optional-enumeration
+suggestion is superseded by completed work. No new introductory overview was
+added for this later feedback.
+
+A post-test review strengthened the large-field checks to use the independent
+matrix-product oracle, rather than the production frame verifier, for every
+returned frame family. Canonical outputs remained identical.
+
+## Portfolio synchronization
+
+The user explicitly added `papers/summary/README.md` to scope. Updated its
+AME headline, entry-point row, detailed results and abstract to match the
+current manuscript: removed the old characteristic loss and fixed-q
+scalability language; added the fast prime-field bound, sharp linear-family
+radius interpretation, four-party full algebra and universal uniform tests.
+The embedded abstract tracks the current manuscript abstract in plain-text
+notation. Other paper entries are untouched. The portfolio wording states
+theorems and scope, not a new priority claim; the owning AME ledger records
+the same attribution boundary.
+
+## Final acceptance and ej + tt closeout
+
+The final authority `make check` passes (47 pages; run-quiet
+`20260910-223512-make-C-ame_lu-check`). Independently inspected rendered title,
+algorithm pages and parity/sandwich page. All seven Section 4 equation links
+resolve to named PDF destinations; the new bibliography identifiers render
+(the cs/0702057 URL wraps across lines). The independent-oracle software
+replay passes with unchanged canonical results. Release repinning verifies
+28 public artifacts and the unchanged 83-file formal companion; no Lean
+build or new formal coverage is claimed.
+
+**ej:** the quadratic-form approach avoids both preliminary invertible
+intertwiner search and five-algebra case classification; this simplification
+is already included. **tt:** decision and witness construction have different
+randomness requirements. Euler's criterion makes decision deterministic;
+Cipolla gives exact Las Vegas construction, not a claimed deterministic
+polylogarithmic square-root algorithm. Strengthened the witness tests with
+independent matrix multiplication, and checked the sharp-radius deduction
+against the exact even-party hypothesis.
+
+### Mystery ledger
+
+- Settled: determinant restriction can be solved without algebra-type
+  identification; the constant-dimensional quadratic proof gives the bound.
+- Settled: odd-party scope was too broad for the obstruction proof; the
+  statement now requires n=2m with m>=2.
+- Open outside this task: growing extension-degree recognition complexity;
+  the four-entry reduction here uses prime local dimension. Any extension
+  requires a separate proof/implementation gate, not extrapolation.
+- Open outside this task: optimal radius when n/q grows; the present lower
+  and upper bounds need not match there.
+- Literature boundary: positive attribution is checked, not exhaustive
+  priority closure. Four primary works were partially read, none fully.
+No incidental discovery beyond the requested work was identified.

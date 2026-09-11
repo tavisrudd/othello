@@ -84,6 +84,12 @@ def oracle_systematic(g, h, p):
     return False
 
 
+def oracle_frames(g, h, rows, columns, p):
+    return (all(oracle_det(a, p) == 1 for a in rows+columns)
+            and all(oracle_product(rows[i], g[i][j], p) == oracle_product(h[i][j], columns[j], p)
+                    for i in range(len(g)) for j in range(len(g))))
+
+
 def classical_check(m, p):
     # CSS state of the systematic classical MDS code [I | Cauchy].
     if 2*m > p:
@@ -190,7 +196,7 @@ def evaluate():
                 assert answer['equivalent'] == expected
                 assert fast.recognize(g, h, p, witness=False)['equivalent'] == expected
                 if expected:
-                    assert fast.verify_frames(g, h, answer['row_frames'], answer['column_frames'], p)
+                    assert oracle_frames(g, h, answer['row_frames'], answer['column_frames'], p)
                 count += 1
                 positive += expected
         output['systematic'].append({'prime': p, 'cases': count, 'positive': positive})
@@ -209,7 +215,7 @@ def evaluate():
                 h = fast.systematic_from_check(target, half, p)
                 result = fast.recognize(g, h, p, rng=rng)
                 assert result['equivalent']
-                assert fast.verify_frames(g, h, result['row_frames'], result['column_frames'], p)
+                assert oracle_frames(g, h, result['row_frames'], result['column_frames'], p)
                 ame_cases += 1
     output['ame_positive_cases'] = ame_cases
     # Positive and negative fixed-party comparisons of genuine four-party AME states.
@@ -240,7 +246,7 @@ def evaluate():
         g = fast.systematic_from_check(check, [0, 2, 4, 6], p)
         h = fast.systematic_from_check(target, [0, 2, 4, 6], p)
         answer = fast.recognize(g, h, p, rng=rng)
-        assert answer['equivalent'] and fast.verify_frames(g, h, answer['row_frames'], answer['column_frames'], p)
+        assert answer['equivalent'] and oracle_frames(g, h, answer['row_frames'], answer['column_frames'], p)
         output['large_prime_cases'].append({'prime': str(p), 'bits': p.bit_length(), 'square_roots': 16,
                                             'witness_verified': True})
     return output

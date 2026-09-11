@@ -10,7 +10,7 @@ PDF := $(PDF_BASENAME).pdf
 
 LINT_TEX := python3 scripts/lint_tex_spacing.py
 
-.PHONY: all check lint release-check clean
+.PHONY: all check lint software-check release-check clean
 
 all: lint $(PDF)
 
@@ -26,6 +26,10 @@ check: lint
 	$(LATEXMK) $(LATEXMK_FLAGS) -jobname=$(PDF_BASENAME) main.tex
 	@test -f $(PDF_BASENAME).log
 	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' $(PDF_BASENAME).log; then exit 1; fi
+
+software-check:
+	python3 software/prime-recognition/test_recognition.py --check
+	python3 software/prime-recognition/bundle.py --check
 
 release-check: check
 	python3 release/verify_release.py --require-formal
