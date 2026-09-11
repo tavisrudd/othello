@@ -1,5 +1,12 @@
 # C956 source and claim ledger
 
+Historical record of the August manuscript and source reads. Current
+contribution/novelty ownership has moved to
+`papers/cubic-stabilization-irrationality/LITERATURE.md`, rows N1–N4;
+the September audit is `notes/2026-09-11-c1141-literature-audit.md`.
+The version and read-depth statements below are preserved as history,
+not asserted to describe the current revision.
+
 ## Source boundary
 
 The theorem statements do not depend on a literature-absence claim.  The

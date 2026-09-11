@@ -1199,9 +1199,13 @@ it now has several manuscript outputs of its own. The **one-stabilization epilog
 that \(X\times\mathbf P^1\) is irrational for every smooth complex cubic
 threefold \(X\), and carries the universal \(CH_0\)-triviality of Roulleau's
 pencil alongside it; it is an unnumbered epilogue to the numbered series and
-deliberately not a sixth numbered paper.  *Sharpness of Irrationality after One
-Stabilization for Cubic Threefolds* proves exact stabilization level two for
-two displayed smooth cubic threefolds.  An older all-\(m\) manuscript remains
+deliberately not a sixth numbered paper. *Two-Variable Rationalization and
+Sharp Stabilization of Cubic Threefolds* proves exact stabilization level two
+for a three-parameter smooth cubic family and separates the first
+stabilizations of a positive-density arithmetic pencil family. Its
+contribution and literature qualifications are owned by
+`papers/cubic-stabilization-irrationality/LITERATURE.md`, rows N1–N4.
+An older all-\(m\) manuscript remains
 explicitly conditional on two stated hypotheses about marked continuation
 across the thresholds of one equivariant cobordism. None has been submitted,
 and priority closure is not complete for the surrounding research material.
@@ -1212,14 +1216,17 @@ stably permutation geometric Picard lattice, then \(S\times\mathbf A^2\) is
 rational.  The engine is a descended unimodular tangent section for a
 projectively linear torus action, producing a rational Rosenlicht quotient.
 Applied to both explicit Tschinkel--Zhang cubic families, it gives
-\(X_{j,r}\times\mathbf P^2\) rational for every member.  For the two displayed
-smooth cubic threefolds \(X/\mathbf Q\), the one-stabilization theorem supplies
-the lower bound and the quotient construction supplies the upper bound:
+\(X_{j,r}\times\mathbf P^2\) rational for every member. For every smooth
+member \(X\) of the displayed three-parameter family, the one-stabilization
+theorem supplies the lower bound and the quotient construction supplies the
+upper bound over every extension of its characteristic-zero coefficient
+field. In particular, for the rational pencil members:
 \[
  \ell_{\mathbf Q}(X)=\ell_{\mathbf C}(X_{\mathbf C})=2.
 \]
-Equivalently, \(Y=X\times\mathbf P^1\) is nonrational over both fields while
-\(Y\times\mathbf A^1\) is rational over \(\mathbf Q\).  Exact Cox-weight,
+The positive squarefree parameters prime to six give pairwise nonbirational
+irrational fourfolds \(Y_n=X_n\times\mathbf P^1\) over \(\mathbf C\), while
+every \(Y_n\times\mathbf P^1\) is rational over \(\mathbf Q\). Exact Cox-weight,
 saturation, tangent-matrix, localized-branch, inverse-graph, and Bézout checks
 support the human proof; no Lean formalization of this new theorem is claimed.
 
@@ -4871,10 +4878,13 @@ organizing lemma rather than a headline.
   outside the Yang–Yu–Zhu coprime-degree locus because Eckardt points separate
   them, and no elliptic-product route reaches Voisin's criterion. The second
   exact-level-two paper proves
-  \(\ell_{\mathbf Q}(X)=\ell_{\mathbf C}(X_{\mathbf C})=2\) for two explicit
-  smooth cubic threefolds and gives a two-variable rationality theorem for
+  exact level two for the smooth members of a three-parameter cubic family,
+  separates the first stabilizations of a positive-density arithmetic pencil
+  family, and gives a two-variable rationality theorem for
   quartic del Pezzo surfaces with a rational point and stably permutation
-  geometric Picard lattice. A modular-resolvent companion identifies the
+  geometric Picard lattice. Its literature qualifications are in
+  `papers/cubic-stabilization-irrationality/LITERATURE.md`, rows N1–N4.
+  A modular-resolvent companion identifies the
   signed cubic parameter with the elliptic two-division discriminant cover over
   \(X_0(6)\). The older all-\(m\) manuscript states its claim conditionally, on a marked continuation
   across the thresholds of one equivariant cobordism; the endpoint contrast

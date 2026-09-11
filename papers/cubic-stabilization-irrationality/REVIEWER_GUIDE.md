@@ -6,6 +6,9 @@ proves the upper bounds independently. The companion lower bound proves
 exactness; its separate Hodge theorem turns arithmetic Jacobian separation
 into nonbirationality of first stabilizations.
 
+The [literature ledger](LITERATURE.md), rows N1–N4, separates the contribution
+from the known ambient symmetry loci and records source depths and access gaps.
+
 ## Main proof routes
 
 - **Quotient and surface:** Sections 2–4. Check saturation, the integral

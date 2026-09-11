@@ -119,7 +119,9 @@ preprint revisions; the ledger explicitly gives the actual version read.
 | arXiv:2106.08683 | 6058d121f53e12f5b1dbd4c015f1fb7a676bd255a341c076e8282e5fdc0718d8 |
 
 The Roulleau Klein-four normal form was checked against rendered PDF page 13,
-not extraction alone. These are digital PDFs, not user-supplied OCR scans.
+and van Geemen–Yamauchi Proposition 1.5 against rendered page 4,
+not extraction alone. All ten listed cached PDF hashes were rechecked.
+These are digital PDFs, not user-supplied OCR scans.
 The reused companion and arithmetic theorem sources retain their byte pins
 in the paper's imported-source registry and arithmetic verification report;
 no fresh full-text read is credited for reuse. The current audit does not
@@ -177,7 +179,16 @@ Still open: complete placement among *all* subfamilies of the known
 Klein-four locus; this would require a separate moduli/classification task,
 not a stronger title-screen negative. Original-source access to
 Shepherd-Barron and MathSciNet coverage are literature gaps, not new
-mathematical conjectures. An explicit ej+tt closeout follows the paper gate.
+mathematical conjectures.
+
+After the successful paper gate, the explicit **ej+tt** closeout asked
+whether the separation really needed squarefreeness and whether ambient
+symmetry was being mistaken for novelty. The first exclusion uses only
+positive integral n prime to six, as now stated in the owning ledger;
+squarefreeness is needed for the pairwise density/separation theorem, not
+this prior-family exclusion. The coordinate comparison settles the second
+question. No extra theorem or new assumption is needed, and no incidental
+discovery-log entry is warranted: both questions were task-owned.
 
 ## Process defects
 

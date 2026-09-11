@@ -72,6 +72,8 @@ results.
   family. Hodge conservation gives pairwise nonbirational irrational
   fourfolds whose products with one further projective line are all rational.
   [Two-Variable Rationalization and Sharp Stabilization of Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
+  [Literature ledger, N1–N4](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/LITERATURE.md)
+  records the contribution against prior families and the audit's coverage gaps.
 
 - **Integral divisor products on the nonstandard `A₅` cubic pencil.** An
   all-degree graph-saturation theorem makes the primitive minimal class of
