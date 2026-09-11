@@ -3276,3 +3276,14 @@ Private checkpoint `b417e8d` closes the planned kick/tenure confound experiment.
 ## 2026-09-11: kick retention repaired and measured
 
 Private checkpoint `15bc0d3` validates the margin-fibre repair: 756 release tests, 624 independently replayed witnesses and seven artifact mutation checks. One/twelve-worker cycles/step rose 0.2–0.4%, also on the no-kick control; no speedup claim. Related carrier, phase-two and column-margin paths still need the same correctness invariant. Profiles locate candidate selection and temporary scoring-array traffic as later optimization leads. See `2026-09-11-c1016-kick-retention.md`.
+
+## 2026-09-11: related kick repairs and certified narrow carrier scoring
+
+Private checkpoint `96e04d5` closes the related-path retention audit. The initial
+layout regression and unsuccessful cold-annotation trial are retained; the final
+bounded-i32 scorer lowers carrier cycles 35.5–35.9% across one/twelve cores and
+three stall policies. 765 release tests, 6,552 final replayed witness occurrences
+and eleven mutation tests pass. Q29 parallel cost +0.4% and Phase Full variability
+remain explicit limitations. No quality or order-2092 construction gain claimed.
+Next is shrinking private state-machine property testing. See
+`2026-09-11-c1016-related-kicks-and-carrier-ranges.md`.

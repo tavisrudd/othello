@@ -22,10 +22,11 @@ changes, and no public core, WASM or live-demo changes.
 
 ## Next priority and mystery ledger
 
-The ej/tt related-path audit found the same unretained-kick pattern in carrier,
-phase-two and column-margin tabu. Those three paths remain unchanged. Repair
-them with independent trajectory regressions and retained counter gates before
-further quality comparisons using them. This takes priority over optimization.
+The related-path audit is now closed at private checkpoint `96e04d5`: carrier,
+phase-two and column-margin retention are repaired, and bounded carrier
+arithmetic lowers measured cycles 35.5–35.9%. See
+`2026-09-11-c1016-related-kicks-and-carrier-ranges.md` for the 765-test gate,
+independent replay, measured limitations and next property-testing frontier.
 
 Profiles put about 95% of sampled cycles in candidate selection and about 5% in
 potential refresh. Temporary scoring arrays incur substantial sampled stack

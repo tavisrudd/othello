@@ -240,10 +240,13 @@ with its append-only companion
 [archive](../2026-08-30-c1016-ergodis-hadamard-quotient-synthesis-archive.md). Read the card on
 resume; it is the current-state map for this task.
 
-**Next**: extend the validated margin-fibre kick-best retention repair to the
-carrier, phase-two and column-margin paths, with independent trajectory and
-counter gates. Then address measured candidate-scoring costs. The matched
-no-kick/tenure-support comparison remains full 14/48 improved; sampled 0/48. Concurrent public-core edits remain foreign.
+**Next**: add shrinking state-machine properties for the private tabu kernels,
+then address remaining measured candidate-scoring costs. All related retention
+repairs are validated at `96e04d5`; bounded carrier arithmetic lowers measured
+cycles 35.5–35.9%, with limitations recorded in
+`notes/2026-09-11-c1016-related-kicks-and-carrier-ranges.md`. The matched no-kick
+quality comparison remains full 14/48 improved; sampled 0/48. Concurrent
+public-core edits remain foreign.
 Complete six-cycle and cross-block four-cycle-pair neighbourhoods are closed
 locally at banked 14,800. Combined strict descent on twelve frozen controls
 bottoms out at 23,152. Faster threshold, record and sampled-tabu policies all
