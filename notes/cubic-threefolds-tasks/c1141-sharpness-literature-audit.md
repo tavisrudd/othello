@@ -2,7 +2,15 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; user authorized completion on 2026-09-11.
+**Status:** complete, 2026-09-11, at the recorded bounded scope.
+
+Report: `notes/2026-09-11-c1141-literature-audit.md`.
+Owning novelty ledger: `papers/cubic-stabilization-irrationality/LITERATURE.md`.
+Two external full-text reads; pinned three-service citation comparison,
+zbMATH and web screens recorded. MathSciNet, Google Scholar and the original
+Shepherd-Barron chapter remain access gaps, not negative search results.
+Authority and standalone gates pass; full export including provenance committed
+as `2a4e1cb`, summary as `0566e2f`. C956 and C1133 remain open.
 
 Complete the recorded novelty audit of the C1140 upgrade. Audit the general
 two-variable surface bound, the three-parameter cubic family and its pencil,

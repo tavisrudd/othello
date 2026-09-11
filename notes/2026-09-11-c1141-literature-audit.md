@@ -161,13 +161,44 @@ certificate or a new Lean-coverage claim.
 
 ## Propagation and completion gate
 
-Pending at the initial evidence checkpoint: add concise manuscript credit
-for the Klein-four ambient family; point README, reviewer guide, public
-summary and results snapshot at the owning ledger; mark the old source
-ledger historical. Preserve abstract, theorem statements and AI disclosure.
-Run the existing paper gate, export the committed authority, verify and
-commit the complete export including PROVENANCE.md, and refresh the summary
-mirror. Record final identities in the completion section below.
+All task-owned surfaces are now updated:
+
+| Surface | Completed action |
+| --- | --- |
+| Owning ledger | Public LITERATURE.md, N1–N4, owns the qualified novelty assertions and the worked prior-family comparison. |
+| Manuscript | Short existing related-work paragraph credits the known Klein-four locus and points to N1–N3; bibliography pins the actually read preprint. Shepherd-Barron attribution follows the consulted secondary account. |
+| Paper README and reviewer guide | Link to the owning ledger; no independent priority assertion added. |
+| Results snapshot | Both sharpness passages now describe the three-parameter and arithmetic results and point to the ledger. Foreign companion claims were not revised. |
+| Public summary | Existing current abstract retained; a ledger pointer added. |
+| Historical C956 source ledger | Marked historical and redirected to the current owner; old source-depth statements preserved. |
+| Handoff and task card | Current bounded-completion status and remaining access gaps recorded. |
+
+The abstract and every theorem-like environment were compared byte-for-byte
+with the prior source and are unchanged. The AI disclosure is byte-identical.
+The paper remains 24 pages; rendered pages 2–3 were inspected. No Lean work,
+annotation change, grading record, push or deposit was performed.
+
+`make check` passed in the authority (run-quiet log directory
+`20260911-012406-make-C-cubic-stabilization-irrationality-check`) and in the
+standalone repository (`20260911-012627-make-C-cubic-stabilization-irrationality-check`).
+Both logs are under `/tmp/claude-run-quiet/`; the command's acceptance includes
+the exact symbolic certificates, metadata and warning-free manuscript gate.
+Environment deprecation notices were not manuscript warnings.
+
+| Identity | Value |
+| --- | --- |
+| Initial audit bundle commit | 198f9f6d1 |
+| Exported authority source commit | 6e7f77682 |
+| Standalone paper commit | 2a4e1cb |
+| Standalone summary commit | 0566e2f |
+| PDF SHA-256 (210412 bytes) | 48f9cfa6b5ef6bb19f10f59bc36037e8afc97c66b1246f7c0f460441ed80079b |
+| Export content SHA-256 | 4ed117f20a820636841a5c09642fe09998e175c101240cb7b85325fab6bf4b64 |
+
+Guarded exporter audit: zero findings. Verify: 36 tracked files match the
+manifest. The complete seven-file export delta, including PROVENANCE.md and
+export-manifest.json, is committed. Authority and standalone PDF bytes agree;
+summary README bytes agree. Both downstream task-owned surfaces are clean.
+This closes C1141; it does not close the author-held C956 or C1133.
 
 ## Mystery ledger
 

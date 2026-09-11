@@ -208,6 +208,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   source/referee and reader repairs accepted. The 24-page paper and portfolio
   are locally exported, all gates pass, and PDF bytes agree. C956 stays open.
   Report: `../2026-09-11-c1140-integration.md`.
+- **C1141 — bounded sharpness literature audit complete.** The owning ledger
+  is `papers/cubic-stabilization-irrationality/LITERATURE.md`, N1–N4; source
+  depths, three-service citation comparison and access gaps are recorded in
+  `../2026-09-11-c1141-literature-audit.md`. Manuscript and summary pointers
+  are current; both paper gates and full committed export pass. MathSciNet,
+  Google Scholar and Shepherd-Barron's original chapter remain access gaps.
+  C956 and C1133 remain open; this is not exhaustive priority closure.
 - **C956 — existing exact-level-two manuscript referee cycle.** New upgrades
   are owned by C1140; the older acceptance below covers the previous manuscript.
   Cross-specialty review repaired the characteristic-zero scope, the

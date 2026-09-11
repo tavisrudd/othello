@@ -5662,3 +5662,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1139 `[ame-lu]` [REPORTED 2026-09-10]** — Faster prime-field recognition: proof, implementation, exhaustive tests and literature attribution → `notes/2026-09-10-c1139-ame-lu-fast-recognition.md`.
 
 - **C1140 `[cubic-threefolds]` [REPORTED 2026-09-11]** — integrated and locally exported the sharpness family/arithmetic upgrade; mathematical and cold-reader repairs accepted; authority/standalone checks and byte identity pass → `notes/2026-09-11-c1140-integration.md`
+
+- **C1141 `[cubic-threefolds]` [REPORTED 2026-09-11]** — bounded sharpness literature audit complete; qualified ledger, prior-family comparison, checked and committed export → `notes/cubic-threefolds-tasks/c1141-sharpness-literature-audit.md`
