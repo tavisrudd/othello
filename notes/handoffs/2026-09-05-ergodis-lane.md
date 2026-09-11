@@ -240,17 +240,17 @@ with its append-only companion
 [archive](../2026-08-30-c1016-ergodis-hadamard-quotient-synthesis-archive.md). Read the card on
 resume; it is the current-state map for this task.
 
-**Next**: the card's open moves: discriminate candidate selection from escape
-policy against the known-containing-fibre gate, or return to the plain `Z/523`
-spin shard. Concurrent public-core edits remain foreign.
+**Next**: repair intermediate-best retention during tabu kicks, then profile
+exact candidate selection against the known-containing-fibre gate. The matched
+no-kick/tenure-support comparison is complete (full 14/48 improved; sampled 0/48). Concurrent public-core edits remain foreign.
 Complete six-cycle and cross-block four-cycle-pair neighbourhoods are closed
 locally at banked 14,800. Combined strict descent on twelve frozen controls
 bottoms out at 23,152. Faster threshold, record and sampled-tabu policies all
 lose to unchanged full-neighbourhood tabu at matched CPU budgets. The forty-case
 shell replication does not validate the prior five-leader ranking. No negative
 coverage follows from these misses. Active native authority:
-`~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`, checkpoint `9ccdb98`;
-[current evidence and remaining gate](../2026-09-11-c1016-cycle-neighborhoods.md).
+`~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`, checkpoint `b417e8d`;
+[current evidence and remaining gate](../2026-09-11-c1016-matched-escape.md).
 Provenance rules stand: proved structural and exact computational reductions grant negative
 coverage, observed/evolved and heuristic predicates never do. Every resume first reads
 `../ergodis-contrib/PERFORMANCE.md` and the shared playbook.

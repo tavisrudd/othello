@@ -3268,3 +3268,7 @@ is retained as a private reproducible negative experiment. Current evidence:
 Historical g41 cache inputs are still absent, while current native experiment
 caches exist. Neither umbrella task nor either unrestricted existence question
 is closed.
+
+## 2026-09-11: matched escape comparison
+
+Private checkpoint `b417e8d` closes the planned kick/tenure confound experiment. Full no-kick tenure-6–12 search improves 14/48 repeated development runs; sampled improves 0/48. All 384 witnesses independently replay. Existing kick-best retention defect is the next correctness priority, not fixed in the frozen comparison. See `2026-09-11-c1016-matched-escape.md` and authority `evidence/margin-escape-report.md`.

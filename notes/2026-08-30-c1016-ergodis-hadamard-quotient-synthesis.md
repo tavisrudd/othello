@@ -186,12 +186,15 @@ See [native cycle checkpoint](2026-09-11-c1016-cycle-neighborhoods.md).
    diagnostic first: at the deep state neither the swap nor the complete
    six-cycle neighbourhood offers an improving move. Test coupled moves and
    barrier-crossing schedules before drawing conclusions about the fibre.
-2. **Separate candidate selection from escape policy.** Sampled tabu with 4,096
-   attempted rectangles per step improves none of 48 repeated development runs;
-   full-neighbourhood tabu improves 30. The sampled prototype has no restart/kick
-   policy, so a matched-policy comparison or an exact residual-candidate index
-   is needed before assigning the failure to sampling itself. Do not tune to
-   stored coordinates of the known 14,800 witness.
+2. **Repair kick-best retention, then profile exact selection.** The frozen
+   matched comparison is complete: with kicks disabled and tenure support 6–12,
+   full-neighbourhood tabu improves 14/48 repeated development runs versus 0/48
+   sampled. These confounds alone do not explain the deficit. Existing kicks
+   can lose intermediate best states; repair that with an independent trajectory
+   regression and native performance gates before further escape comparisons.
+   Then measure scan versus candidate-index refresh costs. Do not tune to stored
+   coordinates of the known 14,800 witness. See
+   [matched escape diagnosis](2026-09-11-c1016-matched-escape.md).
 3. **Return to the plain `Z/523` spin shard** with the full-neighbourhood step,
    as the standing alternative to the bordered ladder.
 4. **The multiplier remainder**, if the unrestricted arm stalls: invariance
