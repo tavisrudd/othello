@@ -240,9 +240,12 @@ with its append-only companion
 [archive](../2026-08-30-c1016-ergodis-hadamard-quotient-synthesis-archive.md). Read the card on
 resume; it is the current-state map for this task.
 
-**Next**: extend the private shrinking properties to automatic-kick and tabu-policy
-transitions, then address measured candidate-scoring costs. Eight scopes now have
-generated step/kick/reset checks; see `notes/2026-09-11-c1016-state-machine-properties.md`. All related retention
+**Next**: return to usable order-2092 structure: bounded exact repair and
+integer-fibre geometry, followed by checked quotient/lift explanations. Reading
+and experiment plan: `notes/2026-09-11-c1016-structure-literature-plan.md`.
+Private shrinking coverage landed at `b966a7d` (769 passed, 1 ignored); automatic
+kick/tabu-policy properties remain open. See
+`notes/2026-09-11-c1016-state-machine-properties.md`. All related retention
 repairs are validated at `96e04d5`; bounded carrier arithmetic lowers measured
 cycles 35.5–35.9%, with limitations recorded in
 `notes/2026-09-11-c1016-related-kicks-and-carrier-ranges.md`. The matched no-kick
