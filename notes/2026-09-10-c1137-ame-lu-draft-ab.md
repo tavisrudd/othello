@@ -57,3 +57,9 @@ Final `make -C papers/ame_lu check` passed, warning-free, 43 pages (baseline 40)
 | Publication priority of the verification package | C1136 remains qualified; seventeen partial reads, zero full reads, and its recorded database/citation gaps are unchanged. |
 
 No incidental discovery-track entry is warranted: these were the planned editorial and review questions. Highest-EV next action is to synchronize/export the selected revised draft when the user resumes the lane; no successor C-ID allocated. Vibe: a useful, restrained improvement, with the remaining brevity tradeoff visible.
+
+## User-requested export (2026-09-10)
+
+Exported immutable authority `bda03d84b` through `export-paper-repos.py sync` after a zero-finding audit. Standalone forward commit: `ae3e7ba`. Its warning-free 43-page rebuild is byte-identical to the authority; the release verifier checks all 20 public artifacts with canonical public hash `94a6f3591a2d975f9baa44aea83414d4bf623afb799f4e86452dd2cd1ce9efc2`. Exporter verification passes with 30 tracked files and export-content hash `4ac513e3f3f06deab8a2eaeae90dd09b36623bbfecbc5b0ddeb62613186474b8`. Initial exporter verification preceded staging the two new source files and reported them absent from its tracked set; explicit staging resolved this. The standalone checkout has no formal companion; its recorded formal identity is unchanged, not independently replayed here.
+
+Downloads: `ame-lu-ae3e7ba.pdf` and `ame-lu-ae3e7ba-source.zip`. PDF SHA-256: `6b61d2cdb5d47fd094d078f94192fc7cedfc8297fdebb55240c9b517ec6672d1`. ZIP SHA-256: `3269ecad058b96703512f8aa0712a47317cc279e196a07e2d7ef2f2bea6dc1a5`. ZIP is a Git archive of the standalone commit; CRC validation and its embedded PDF identity pass. No push performed.

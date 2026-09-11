@@ -15,8 +15,8 @@ validated 43-page authority draft. All three fresh cold readers preferred it
 moderately or narrowly; targeted feedback is repaired. Exact and robust rigidity
 remain the two headlines, with weighted/universal refinements in Appendix C.
 Report and frozen A/B artifacts: `2026-09-10-c1137-ame-lu-draft-ab.md`.
-Next: synchronize/export the selected revision; no successor C-ID allocated.
-The standalone mirror remains at `55e70c4`; no push was performed.
+Export complete: clean standalone `ae3e7ba` rebuilds byte-identically; PDF and
+source ZIP are in Downloads. No push performed; no successor C-ID allocated.
 
 **C1136 completed (2026-09-10): bounded literature audit, priority qualified.**
 Nine identifier-pinned seeds have three graph counts and eighteen retrieved
