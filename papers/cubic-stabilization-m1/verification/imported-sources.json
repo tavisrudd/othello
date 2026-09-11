@@ -567,8 +567,8 @@
         },
         {
           "aspect": "nonvanishing",
-          "requirement": "-495*d3*d5+261*d2*d3^2-312*d4*d2^2+432*d2^4+56*d4^2 is nonzero.",
-          "matched": "reconstruction_check.py verifies this for all four families, using a separate cleared-denominator computation; the matrix period agrees through degree eight."
+          "requirement": "-495*d3*d5+261*d2*d3^2-312*d4*d2^2+432*d4^2+56*d2^4 is nonzero.",
+          "matched": "reconstruction_check.py verifies this for all four families, using a separate cleared-denominator computation and four externally supplied modular regression values; the matrix period agrees through degree eight."
         }
       ]
     },

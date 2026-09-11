@@ -62,16 +62,25 @@ def generate():
                  F(c*c,64)+F(h*h*c,96)+F(7*h*e,576)+F(c*d,128)+F(f,256)]
         assert first == actual[2:5]
         d2,d3,d4,d5 = expected[2:6]
-        delta = -495*d3*d5 + 261*d2*d3*d3 - 312*d4*d2*d2 + 432*d2**4 + 56*d4*d4
+        delta = -495*d3*d5 + 261*d2*d3*d3 - 312*d4*d2*d2 + 432*d4*d4 + 56*d2**4
         # Separately clear factorial denominators: 144*delta in regularized coefficients.
         r2,r3,r4,r5 = regularized[2*genus-2][:4]
-        numerator = -99*r3*r5 + 522*r2*r3*r3 - 468*r4*r2*r2 + 3888*r2**4 + 14*r4*r4
+        numerator = -99*r3*r5 + 522*r2*r3*r3 - 468*r4*r2*r2 + 504*r2**4 + 108*r4*r4
         assert numerator == 144*delta
         assert delta != 0
+        # Externally supplied regression values, checked by direct field arithmetic.
+        prime, residue = {2: (19, 7), 3: (13, 3), 4: (11, 9), 5: (7, 4)}[genus]
+        x2,x3,x4,x5 = [r * pow(factorial(n), -1, prime) % prime
+                       for n,r in enumerate((r2,r3,r4,r5), start=2)]
+        modular = (-495*x3*x5 + 261*x2*x3*x3 - 312*x4*x2*x2
+                   + 432*x4*x4 + 56*x2**4) % prime
+        assert modular == residue
+        assert delta.numerator * pow(delta.denominator, -1, prime) % prime == residue
         rows.append({'genus': genus, 'unshifted_counting_matrix': matrix,
                      'period_0_through_8': [str(x) for x in actual],
                      'source_example_5_4_matches': True,
                      'reconstruction_discriminant': str(delta),
+                     'modular_regression': {'prime': prime, 'residue': modular},
                      'independent_cleared_numerator': numerator})
     # Printed V2-prime entry in arXiv:math/0507232v3, Theorem 2.6.6.
     # It is not imported: the normalized cubic coefficient detects the discrepancy.

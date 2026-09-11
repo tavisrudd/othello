@@ -56,7 +56,12 @@ either script. After subtracting the scalar Euler shift it solves the counting
 matrix differential recursion through degree eight. Independently, it checks
 the degree-two-through-four formulas in the source's Example 5.4 and the
 reconstruction discriminant by clearing factorial denominators to an integer
-polynomial. The JSON pins its input hashes and records the exact results.
+polynomial. It also checks externally supplied nonzero residues for genera
+2, 3, 4, 5: respectively 7 modulo 19, 3 modulo 13, 9 modulo 11, and 4 modulo 7.
+These regression values are recomputed directly in the finite fields from
+the period inputs. The last two source terms are `432*d4^2 + 56*d2^4`;
+their coefficients must not be transposed. The JSON pins its input hashes
+and records the exact results.
 The `--check` mode compares regenerated data without writing; omit it to
 regenerate the certificate. This is a trusted exact execution with explicit
 cross-checks, not a proof of the imported geometric periods or reconstruction.

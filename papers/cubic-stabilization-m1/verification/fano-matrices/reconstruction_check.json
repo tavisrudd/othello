@@ -11,7 +11,11 @@
   "rows": [
     {
       "genus": 2,
-      "independent_cleared_numerator": -277862841449212453200000,
+      "independent_cleared_numerator": -3104211384931456800000,
+      "modular_regression": {
+        "prime": 19,
+        "residue": 7
+      },
       "period_0_through_8": [
         "1",
         "0",
@@ -23,7 +27,7 @@
         "22703573464248960",
         "60193132626617561025/16"
       ],
-      "reconstruction_discriminant": "-1929603065619530925000",
+      "reconstruction_discriminant": "-21557023506468450000",
       "source_example_5_4_matches": true,
       "unshifted_counting_matrix": [
         [
@@ -54,7 +58,11 @@
     },
     {
       "genus": 3,
-      "independent_cleared_numerator": -69905701222162560,
+      "independent_cleared_numerator": -1134991239959808,
+      "modular_regression": {
+        "prime": 13,
+        "residue": 3
+      },
       "period_0_through_8": [
         "1",
         "0",
@@ -66,7 +74,7 @@
         "39673474944",
         "15199465236417/16"
       ],
-      "reconstruction_discriminant": "-485456258487240",
+      "reconstruction_discriminant": "-7881883610832",
       "source_example_5_4_matches": true,
       "unshifted_counting_matrix": [
         [
@@ -97,7 +105,11 @@
     },
     {
       "genus": 4,
-      "independent_cleared_numerator": -57447331829280,
+      "independent_cleared_numerator": -1429884767808,
+      "modular_regression": {
+        "prime": 11,
+        "residue": 9
+      },
       "period_0_through_8": [
         "1",
         "0",
@@ -109,7 +121,7 @@
         "97228080",
         "30860033157/32"
       ],
-      "reconstruction_discriminant": "-398939804370",
+      "reconstruction_discriminant": "-9929755332",
       "source_example_5_4_matches": true,
       "unshifted_counting_matrix": [
         [
@@ -140,7 +152,11 @@
     },
     {
       "genus": 5,
-      "independent_cleared_numerator": -555066990720,
+      "independent_cleared_numerator": -25019700480,
+      "modular_regression": {
+        "prime": 7,
+        "residue": 4
+      },
       "period_0_through_8": [
         "1",
         "0",
@@ -152,7 +168,7 @@
         "7511168/3",
         "2087783881/144"
       ],
-      "reconstruction_discriminant": "-3854631880",
+      "reconstruction_discriminant": "-173747920",
       "source_example_5_4_matches": true,
       "unshifted_counting_matrix": [
         [

@@ -2,8 +2,8 @@
   "schema": "fano-matrix-evidence-v1",
   "files": {
     "verification/fano-matrices/README.md": {
-      "sha256": "99e19ac12c35458416c533063b3990e4da73fa9ce716d156703b1e493418bf9a",
-      "bytes": 3683
+      "sha256": "3a63c173b5646b967a885fb08fc75d64499cd5483771188d99181d0f3b4903b2",
+      "bytes": 4014
     },
     "verification/fano-matrices/finite_checks.json": {
       "sha256": "1c8981941cfb035a3a09f07edfcee64c4cd6c3518e37e66be410910d6b30a477",
@@ -22,12 +22,12 @@
       "bytes": 5565
     },
     "verification/fano-matrices/reconstruction_check.json": {
-      "sha256": "91321ad2264e18746bdf8b654cda8f94d2954c27bb960f3ff850fabc1e92012c",
-      "bytes": 3594
+      "sha256": "f2de9a9ee222bf8ce61a19a0d951decc418f264ab17e784b5cad788166e1b149",
+      "bytes": 3905
     },
     "verification/fano-matrices/reconstruction_check.py": {
-      "sha256": "2863d0328a8662b016e4530e08ead670b9616fe2f6da027c05cc06477f182919",
-      "bytes": 4719
+      "sha256": "83ffe14b347a3cbb72f01af094f78e027f8a1d4314eb5dec8f47de82c97203ae",
+      "bytes": 5329
     },
     "verification/fano-matrices/source_check.json": {
       "sha256": "1c8726ccf3c2eccd19945f9c2920c097952fc1f15f03b0d8308917c29569e654",

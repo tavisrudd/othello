@@ -1,5 +1,13 @@
 # C1133 — response to the cold referee and repetition pass
 
+> Correction: the reconstruction criterion and discriminant values recorded
+> in this historical report used transposed final coefficients. See
+> `2026-09-10-c1133-reconstruction-transcription-repair.md` for the corrected
+> source comparison, exact values and certificate. The endpoint matrices
+> are unchanged; the former denominator cross-check repeated the same
+> transcription error and did not independently validate the source formula.
+
+
 **Lane:** `cubic-threefolds`. **Date:** 2026-09-10.
 **Scope:** author-authorized response to the fresh-context report in
 `2026-09-10-c1133-cold-exposition-referee.md`, including the subsequent request
