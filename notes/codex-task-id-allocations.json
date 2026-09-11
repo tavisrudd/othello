@@ -4859,8 +4859,17 @@
       "last": 1136,
       "purpose": "Extend C1135 to publication-priority audit with three citation graphs and broader database coverage",
       "sequence": 540
+    },
+    {
+      "count": 1,
+      "first": 1137,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 1137,
+      "purpose": "Draft focused certification integration and cold-reader A/B comparison",
+      "sequence": 541
     }
   ],
-  "next_id": 1137,
+  "next_id": 1138,
   "schema": "codex-task-id-allocations-v1"
 }
