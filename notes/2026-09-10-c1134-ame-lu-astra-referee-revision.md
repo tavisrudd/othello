@@ -1,7 +1,7 @@
 # C1134 — AME-LU Astra/ChatGPT referee revision
 
 **Lane:** `ame-lu`
-**Status:** QUEUED (2026-09-10); allocation and task specification only.
+**Status:** RUNNING (2026-09-10); user instructed “begin”.
 **Request:** queue a new C item to review and work on the referee feedback
 supplied by the user on 2026-09-10. All conclusions below are referee
 proposals pending independent checking against the authoritative manuscript.
@@ -156,3 +156,151 @@ No mathematical proposal was verified or adopted during queuing.
 Command-shaping failure: the initial handoff read exceeded the output limit;
 the full handoff was subsequently read in bounded chunks. An aggregate chunk
 display also truncated, and was replaced by individual bounded displays.
+
+
+## Execution record — authority revision
+
+Baseline: `4ffd0546e0d0df957946b6836ba359883451cfcb`; the pre-edit PDF is
+preserved at `/tmp/persistent/tavis/c1134/before.pdf` for visual comparison.
+
+All five proposed corrections are accepted and applied. The same unitary
+hypothesis omission in `prop:full-weyl-marginal` was repaired, and the
+relative-rounding corollary now explicitly takes a product unitary.
+Both quantitative improvements reconstruct from the existing inequalities:
+additivity plus averaging gives the characteristic-free Fourier threshold,
+and two-site maximal mixing gives the normalized commutator bound. The
+constant `3/4<d_2` provides a simple exact overlap-gap comparison. The
+local-rounding threshold is `1/24`; the universal transition radius is
+`sqrt(2)/68`; the global radius remains the two-clause minimum. These are
+sufficient bounds, with no optimality claim.
+
+The example is a manuscript calculation, not computational evidence. Its
+systematic blocks are `[[2I,2I],[2I,I]]`, its cycle is `2I`, its character
+repair is `Z_1(-1)`, and the F9 variant supplies a genuine Frobenius
+symmetry. A sentence marks the scalar cycle as a simple propagation example
+rather than a model for restrictive holonomy. A forward reference supplies
+an early route through the definitions.
+
+Recognition now explicitly states the AME promise, fixed labels, compact
+symplectic output, and tableau/lift requirements for a Clifford–Pauli
+conversion. Abstract/introduction prioritize exact and robust rigidity;
+secondary results remain in the body and are signposted. Appendix C takes
+the referee's disclosure-only option: the table of partial formal coverage
+remains, but internal gate/count/toolchain narration no longer masquerades
+as an independently replayable formal artifact. No Lean theorem was edited,
+built, or promoted to stronger coverage.
+
+The new prior-work sentence was checked against the proof of Theorem 1 in
+Van den Nest–Dehaene–De Moor, arXiv:quant-ph/0411115v2 (PDF p. 4): it
+explicitly proves that each factor of the given LU is Clifford. Cached
+source SHA-256: `c0f8e192552369d5af9304ebf08995f59b6917e243a570f37ff1b29f3b4cb735`.
+Read depth: Theorem 1 and its proof, not a new exhaustive literature audit.
+The primary arXiv HTML was also opened; no new absence-of-prior-work claim
+was introduced. Existing quantitative and recognition ledgers are updated.
+
+### Independent reviews
+
+A fresh Astra bounded source referee read covered the quantitative proofs,
+new example, encoder bridge, and headline statements. Recommendation:
+minor revision, no mathematical blocker. It independently checked Fourier
+concentration, additivity/character averaging, the m=2 residual bound,
+logarithm and overlap constants, universal transition compatibility,
+qutrit arithmetic, F9 Frobenius, and logical frame conventions. Its four
+exposition findings are repaired: even-party scope, prime-field dimension
+gloss, explanation of the deliberate `5H/16` to `H/4` weakening, and the
+correct role of second moments versus balanced-cut coercivity. Its scope
+excluded the unchanged endomorphism classification, external-source audit,
+Lean replay, and PDF layout.
+
+Two fresh anonymous source comparisons (primary QI specialist and adjacent
+mathematical-physics reader) both prefer B, the revision, decisively/high
+confidence. They independently highlight the example, encoder distinction,
+recognition promise/output, and formalization disclosure. Both name reduced
+early visibility of the algebra consequences and loss of internal toolchain
+information as tradeoffs. The former is intentional hierarchy; the latter
+follows the chosen disclosure-only option. They explicitly do not validate
+the stronger quantitative assertions, which the separate mathematical read
+does. Packets: `/tmp/persistent/tavis/c1134/version-A.tex` and
+`version-B.tex` (source comparisons, not PDF comparisons).
+
+### Validation in progress
+
+Spacing lint passes. The first `make check` acquired a large TeX distribution
+through Nix and was interrupted by this agent before TeX began; it was not a
+mathematical/source failure. The same gate is running with the offline
+cached Nix invocation. Its final PDF, warnings, release identity, visual
+comparison, and downstream synchronization remain outstanding.
+The task-owned manuscript/README/ledger changes remain uncommitted while
+that source/PDF validation bundle is incomplete; no foreign work is staged.
+
+
+### Explicit ej + tt closeout pass (after the mathematical acceptance gate)
+
+The free upgrades are already incorporated: the logical-rounding corollary
+inherits the universal transition radius; explicit unitary hypotheses are
+also supplied in the reusable full-Weyl marginal and relative-intertwiner
+statements; the example demonstrates both scalar-cycle propagation and the
+affine character ambiguity. No additional theorem or numerical tightening
+is needed. The useful structural distinction is now three separate steps:
+local Clifford recovery, exact symplectic compatibility, and nearby exact
+state symmetry. Only the last retains the dimension/party entry cost.
+
+### Mystery ledger
+
+- **Settled: apparent characteristic dependence.** It came from testing
+  a smallest individual root-of-unity chord, although all scalar multiples
+  were available. Character orthogonality removes it in both arguments.
+- **Settled: local-dimension loss in the atlas commutator.** The two-site
+  reduced state is maximally mixed, so normalized Hilbert–Schmidt control
+  is exact on the state and operator-norm conversion was unnecessary.
+- **Settled: why the example has unrestricted base frames.** Its unique
+  fundamental cycle is scalar `2I`; the text now says this explicitly.
+- **Open: character control at a universal radius.** Localized commutators
+  are exactly invariant under local Pauli changes; the missing evidence is
+  an estimate controlling the character discrepancy or a collective
+  pre-branch frame estimate. C1134 does not prove that such a radius is
+  impossible and does not allocate a speculative successor.
+- **Open: optimal order of the global radius.** The current q and n factors
+  enter through logarithm selection and pre-branch accumulation. There is
+  no matching obstruction family in this task. Keep this as the paper's
+  existing open problem, not a sharpness claim.
+- **Disclosure boundary, not a mathematical mystery:** no pinned public
+  statement-to-declaration replay contract is supplied here. Appendix C is
+  explicitly a partial-formalization disclosure; constructing the formal
+  release artifact would require its own allocated work.
+
+These are task-owned findings; no incidental discovery-track entry is
+manufactured.
+
+
+### Authority acceptance gate
+
+The warning-free 40-page `make check` passes with the same Makefile gate
+and `LATEXMK="nix shell --offline nixpkgs#texlive.combined.scheme-full -c latexmk"`.
+The final cached rerun confirmed that all source targets were current.
+The first visual helper failed because the persistent cache mount forbids
+executable shared-object mappings; moving only the uv package cache under
+`~/.cache/c1134-uv` fixed it. Rendered outputs remain on persistent storage.
+
+All 38 baseline and 40 revised pages were visually compared in paired
+contact sheets; the six affected pages 14, 18, 23, 26, 29, and 36 were also
+inspected at reading resolution. Equations, example blocks, diagrams,
+references, and the trust table are legible without clipping or collisions.
+PDF text confirms the final source glosses are present. The example occupies
+one complete page. The total two-page growth is accepted for the added
+example, precise hypotheses, and expanded quantitative proof.
+
+The release verifier passes: 18 public artifacts and 83 formal companion
+artifacts. Final PDF SHA-256:
+`3618593bf9f1cffacac897b0b6f21ebcaf0dc3f9a25d412034d3e45a144f1f03`.
+Public release tree:
+`4ee700f38f5a11f2148e5a4e77cebf1739a7b4f68200105ebd621a8b5a39e7b5`.
+The formal tree remains exactly
+`8edfd61de5701e231d09f897f668bdeac82889d49dd787087e3847f4b9434434`.
+This is hash verification, not a new Lean elaboration or axiom audit.
+
+Post-build `ej`+`tt` recheck confirms the earlier Mystery ledger: the cheap
+logical-radius and hypothesis clarifications are adopted, the remaining
+character/optimal-radius questions remain open, and no further scope is
+added. Authority changes are ready for their forward commit; mirror
+synchronization is the remaining release step.

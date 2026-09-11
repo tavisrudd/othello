@@ -56,22 +56,14 @@ kernel checked; the local quadratic constants are manuscript only \\
 \end{tabular}
 \end{table}
 
-The formal source namespace is
-\texttt{RelativeConicArcs.AMELU}.  In the checked Lean toolchain
-\texttt{v4.32.0-rc1}, the relevant exact cores lie in the support-profile,
-tensor-rigidity, holonomy-centralizer, stabilizer-dictionary,
-encoder-transversal, and multipartite modules.  The dedicated
-\texttt{AMELUTwoUniformRigidity} gate now audits twenty-two quantitative-core
-declarations, including the exact-base relative reduction, with only
-\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.
-The pre-split aggregate spans a wider development than this
-paper: it also carries the six-party MDS--CSS applications that appear in the
-companion paper \cite{RuddMDSCSSTransversalGroups2026}, so it is not a
-closure specific to the results here, and no content-addressed contract
-identifies a subset of it as this paper's own.  Each row of
-Table~\ref{tab:trust-boundary} therefore states which algebraic core is
-kernel checked, and the paper claims no end-to-end formalization of any
-theorem family.
+Table~\ref{tab:trust-boundary} is a disclosure of partial formalization,
+not an independently reproducible formal artifact for the principal theorems.
+The selected cores were developed in the Lean namespace
+\texttt{RelativeConicArcs.AMELU}.  The paper does not supply a self-contained
+replay contract matching its statements to a pinned public set of formal
+declarations, and claims no end-to-end formalization of any theorem family.
+All principal results are proved in the manuscript independently of these
+partial formal developments.
 
 The cleaning theorem uses three cited exact inputs: stabilizer cleaning,
 localization of nested commutators, and the exact three-cleanable-region

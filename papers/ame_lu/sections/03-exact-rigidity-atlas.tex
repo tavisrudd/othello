@@ -62,7 +62,7 @@ Weyl basis at every party.  Neither \(P\) nor the bijections need be
 Let \(R\) and \(R'\) be Weyl-diagonal operators with complete local support
 on the same
 \(r\geq3\) parties, possibly with different indexing sets, bijections,
-and coefficients.  If
+and coefficients.  If \(U_i\in U(q)\) and
 \[
  R'=(U_1\otimes\cdots\otimes U_r)R
        (U_1\otimes\cdots\otimes U_r)^\dagger ,
@@ -133,7 +133,7 @@ nonidentity element of \(L(A)\) has full support \(A\).
 \begin{proposition}[A stabilizer-AME marginal fixes the local Weyl axes]
 \label{prop:marginal-axes}
 Let \(\lvert\psi\rangle,\lvert\phi\rangle\) be stabilizer
-\(\AME(2m,q)\) states.  If a product unitary on an \((m+1)\)-set \(A\)
+\(\AME(2m,q)\) states with \(m\geq2\).  If a product unitary on an \((m+1)\)-set \(A\)
 carries \(\rho^\psi_A\) to \(\rho^\phi_A\), then every local factor on
 \(A\) is Clifford.
 \end{proposition}
@@ -182,7 +182,9 @@ weight-\(m+1\) projective stabilizers is
 \(\binom{2m}{m+1}(q^2-1)\).  The following systematic form strengthens
 minimum-weight generation: recognition needs only \(m\) of these supports,
 and that number is optimal among spanning families of minimum-support
-subgroups.
+subgroups.  Section~\ref{subsec:four-qutrit-example} works out these
+constructions for one four-qutrit state and can be read alongside the
+following definitions.
 
 \begin{proposition}[Half-set systematic decomposition]
 \label{prop:half-set-direct-sum}
@@ -392,7 +394,8 @@ label lies in \(L_\psi^\perp=L_\psi\).  Thus the displayed injection of
 \label{cor:finite-recognition}
 Let \(\psi\) and \(\phi\) be stabilizer \(\AME(2m,q)\) states,
 \(q=p^e\) and \(m\geq2\), given by check matrices for their additive
-label spaces.  With the party labels fixed, choose any \(m\)-party set
+label spaces.  The AME property is an input promise, not a condition
+verified by this algorithm.  With the party labels fixed, choose any \(m\)-party set
 \(B\), and write their half-set systematic maps as
 \(K_B^\psi,K_B^\phi\).  The states are LU equivalent if and only if
 there are \(F_i\in\operatorname{Sp}_{2e}(\F_p)\) satisfying
@@ -406,8 +409,9 @@ This can be decided by testing at most
  =p^{e^2}\prod_{r=1}^e(p^{2r}-1)
 \]
 base symplectic frames.  In the arithmetic-operation model over \(\F_p\),
-each candidate requires polynomial work in the check-matrix size.  The
-stabilizer phases need not be supplied for this decision:
+each candidate requires polynomial work in the check-matrix size.  The output is either
+inequivalence or the compatible symplectic frames \((F_i)_i\).
+The stabilizer phases need not be supplied for this decision:
 Lemma~\ref{lem:pauli-phase-correction} guarantees a character repair after
 the label spaces are matched.  If the two characters are supplied, then for
 any chosen \(m\)-party set the repair is the unique Pauli label on that
@@ -510,6 +514,84 @@ symplectically equivalent, and Corollary~\ref{cor:finite-recognition}
 lifts this to LU equivalence.  Taking \(G=H\) gives the centralizer
 statement.
 \end{proof}
+
+\subsection{A four-qutrit example}
+\label{subsec:four-qutrit-example}
+
+The state
+\[
+ |\psi\rangle=\frac13\sum_{x,y\in\F_3}|x,y,x+y,x+2y\rangle
+\]
+connects the support, transition, and character constructions.  The four
+coordinate forms have coefficient columns
+\((1,0),(0,1),(1,1),(1,2)\); every pair is independent over \(\F_3\).
+Thus any two coordinates determine \((x,y)\).  Tracing out any two parties
+kills all off-diagonal terms and leaves each pair value once, giving
+\(\rho_A=I/9\) for \(|A|=2\).
+
+For vectors \(a,b\in\F_3^4\), abbreviate
+\(X(a)=\bigotimes_iX(a_i)\) and similarly for \(Z(b)\).
+Four independent commuting stabilizer generators, all with eigenvalue one,
+are
+\[
+ X(1,0,1,1),\quad X(0,1,1,2),\quad
+ Z(2,2,1,0),\quad Z(2,1,0,1).
+\]
+The two \(X\) labels generate the computational-support code; the two
+\(Z\) labels generate its orthogonal complement.  Hence a general label
+has
+\[
+ a=(x,y,x+y,x+2y),\qquad b=(-u-v,-u-2v,u,v).
+\]
+Choose \(B=\{1,2\}\) and write local labels as columns \(v_i=(a_i,b_i)\).
+Solving for the first two parties gives the systematic graph map
+\[
+ \begin{pmatrix}v_1\\v_2\end{pmatrix}
+ =K_B\begin{pmatrix}v_3\\v_4\end{pmatrix},\qquad
+ K_B=\begin{pmatrix}2I_2&2I_2\\2I_2&I_2\end{pmatrix}.
+\]
+The row-generator check matrix is therefore \([K_B^{\mathsf T}\mid I_4]\)
+in the party order \(1,2,3,4\).  Its two coordinate summands are
+\[
+ L(\{1,2,3\})=\{(2w,2w,w,0):w\in\F_3^2\},\qquad
+ L(\{1,2,4\})=\{(2w,w,0,w):w\in\F_3^2\}.
+\]
+They intersect trivially and span \(L\).  The first subgroup is generated
+by \(X(1,1,2,0)\) and \(Z(2,2,1,0)\).  In particular,
+\(M_{\{1,2,3\}}(3,1)=2I_2\): one local Weyl label fixes the other two.
+
+For the base row \(b=1\) and column \(c=3\), there is just one
+fundamental cycle.  With \(G=K_B\), it is
+\[
+ Q_{24}=G_{14}G_{24}^{-1}G_{23}G_{13}^{-1}
+       =(2I_2)I_2(2I_2)(2I_2)=2I_2.
+\]
+Thus every \(A\in\mathrm{SL}_2(3)\) commutes with the cycle; propagation
+gives the same frame \(A\) at all four sites.  This illustrates how one
+base frame determines the compatible tuple.  Here the cycle is scalar, so
+it imposes no further restriction on the base frame; nonscalar cycles
+constrain that choice in the general recognition problem.
+
+Finally let \(|\phi\rangle=Z_1(1)|\psi\rangle\) and
+\(\omega=e^{2\pi i/3}\).  Its label space and transition maps are unchanged,
+but the first displayed \(X\) generator has eigenvalue \(\omega^{-1}\)
+on \(\phi\); the other three still have eigenvalue one.  The identity
+symplectic witness alone therefore does not identify the state ray.
+The correction \(Z_1(-1)\) carries \(\phi\) to \(\psi\), and is the
+unique correcting label supported on the prescribed half-set \(\{1,2\}\).
+
+There is also an elementary extension-field variant.  Replace \(\F_3\) by
+\(\F_9\) and the normalization by \(1/9\).  The same pairwise independence
+proves AME.  The basis permutation \(C|x\rangle=|x^3\rangle\) satisfies
+\[
+ CX(a)C^\dagger=X(a^3),\qquad CZ(b)C^\dagger=Z(b^3),
+\]
+because the field trace is invariant under Frobenius.  Applying \(C\) at
+all four sites permutes the summands and fixes the state.  The label map
+\((a,b)\mapsto(a^3,b^3)\) is trace-symplectic over \(\F_3\), but is not
+\(\F_9\)-linear.  This actual local symmetry belongs to
+\(\operatorname{Sp}_4(\F_3)\) and would be lost by restricting to
+\(\mathrm{SL}_2(\F_9)\).
 
 \subsection{Marginal certification and stochastic conversion}
 \label{subsec:marginal-certification}
@@ -751,11 +833,21 @@ it a one-logical-qudit stabilizer code.  AME corrects erasure of any
 bound gives equality.  This is the standard perfect-tensor/quantum-MDS
 correspondence used in \cite[Theorems~3.5 and 3.6]{Tan2026}.
 
+These particular encodings are Pauli-compatible.  For a stabilizer lift
+\(A\otimes T\) of the Choi state, vectorization gives
+\(TV=V(A^{\mathsf T})^{-1}\).  Surjectivity onto the reference labels
+therefore supplies a physical Pauli representative of every input Weyl,
+with its scalar adjusted to give equality.  This property concerns the
+specified encoder, not just its image: replacing \(V\) by \(VR\) for an
+arbitrary logical unitary \(R\) need not preserve it.
+
 Let \(\lvert\Phi\rangle=q^{-1/2}\sum_x\lvert x,x\rangle\), and use the
 Choi convention
 \(\lvert\psi\rangle=(I\otimes V_\psi)\lvert\Phi\rangle\) and
 \(\lvert\phi\rangle=(I\otimes V_\phi)\lvert\Phi\rangle\).
-Writing \(U_{\mathrm{phys}}=\bigotimes_iU_i\), the relation
+Writing \(U_{\mathrm{phys}}=\bigotimes_iU_i\), unitarity and the
+isometry relation give \(L^\dagger L=I\), hence \(L\in U(q)\).
+The relation
 \(U_{\mathrm{phys}}V_\psi=V_\phi L\) gives
 \[
  (I\otimes U_{\mathrm{phys}})\lvert\psi\rangle
@@ -781,8 +873,15 @@ Corollary~\ref{cor:finite-recognition} decides whether a transversal conversion
 exists and returns compact symplectic-frame witnesses within the same
 arithmetic bound.  If full stabilizer tableaux and chosen Clifford lifts are
 also supplied, one further linear solve returns a compact Clifford--Pauli
-conversion: the reference frame \(R\) gives logical frame
-\((R^{\mathsf T})^{-1}\), and
+conversion.  If the reference Clifford lift is \(C\) with symplectic
+label map \(F\), its logical unitary and label map are respectively
+\[
+ (C^{\mathsf T})^{-1}=\overline C,
+ \qquad F_{\mathrm{logical}}=\tau F\tau,
+ \qquad \tau(a,b)=(a,-b).
+\]
+Indeed \(\overline{W_{(a,b)}}=W_{\tau(a,b)}\).
+The label formula is generally different from \(F^{-\mathsf T}\).
 Lemma~\ref{lem:pauli-phase-correction} allows the character repair to be
 supported on any prescribed \(m\) physical outputs.  Thus the repair need not
 alter the logical factor.  Moreover, \(m\) is the smallest size of a

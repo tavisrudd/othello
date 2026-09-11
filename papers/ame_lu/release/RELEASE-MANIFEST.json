@@ -11,9 +11,9 @@
         "sha256": "2b6a65af3d935ac153c41d6cd00975f6165869b573bd65ba9ea6c418f36cd15d"
       },
       {
-        "bytes": 302065,
+        "bytes": 306024,
         "path": "ame-lu.pdf",
-        "sha256": "bb25c09631f13fa1d0a3ad7155ad372b54e8ee8bf3410dafdecb1b78cad1f825"
+        "sha256": "3618593bf9f1cffacac897b0b6f21ebcaf0dc3f9a25d412034d3e45a144f1f03"
       },
       {
         "bytes": 2650,
@@ -36,9 +36,9 @@
         "sha256": "187e03eb0106383ebcd2aebcd0c728bb0a265591ca1ceffda277c90302044723"
       },
       {
-        "bytes": 5685,
+        "bytes": 5085,
         "path": "main.tex",
-        "sha256": "e5c4e98e0d6d73739f93d5b3b6d58d77e3e0d5b9e5d430045d108089983cebbf"
+        "sha256": "6587a2bf49bf859d2c569ea506f7568dba2a82f5a907edd844cf1836253688a2"
       },
       {
         "bytes": 27392,
@@ -51,9 +51,9 @@
         "sha256": "942457a6080e47c70e0157d208cc79dda0c122a8701cf32d8229b551dbca8033"
       },
       {
-        "bytes": 18593,
+        "bytes": 18563,
         "path": "sections/01-introduction.tex",
-        "sha256": "bc87d34e3a047148cb3ac20a2a7ff5fd138fb7bf1145d7e591c4362be645725c"
+        "sha256": "f1098143b75b1f9d3d539cce044ade5e9398a06abf4514c71bb691024949e660"
       },
       {
         "bytes": 3101,
@@ -61,9 +61,9 @@
         "sha256": "0f5f42eb9f281a171c67cb5a2985da49976091aee0af9fae941157e5402e6c17"
       },
       {
-        "bytes": 35683,
+        "bytes": 40189,
         "path": "sections/03-exact-rigidity-atlas.tex",
-        "sha256": "fbf28b6d592c29139ff5ebae63d1a1b916d42e155835b00e50f24d2e56c156f1"
+        "sha256": "e585a1c200775c2e10291486bdc04f1a83cf748b69ed74a8aa3eb922a3e31390"
       },
       {
         "bytes": 10079,
@@ -71,19 +71,19 @@
         "sha256": "22fff229abf8419d0523822aa2b1e5f14f726df8aa1f937bcaf65e576303b158"
       },
       {
-        "bytes": 28248,
+        "bytes": 29159,
         "path": "sections/05-quantitative-rounding.tex",
-        "sha256": "48c7d76e88603a8b205849fd5e175563588a9ea9cb731a91b554ce0bcc3ee83f"
+        "sha256": "d1488bde84ed4b104cfd5a137591cfaaf504b7fa56a1347ba7cae824419a0a93"
       },
       {
-        "bytes": 2828,
+        "bytes": 2831,
         "path": "sections/07-conclusion.tex",
-        "sha256": "a8b52a49fb4786bd533d4f618bd12ba74cdd1d0c3efbbdcf136bd78b59d0904e"
+        "sha256": "9ce469dae5b260bf870b74575a87df6f0908c552c789a8b50fc3408a8f6bf61b"
       },
       {
-        "bytes": 4618,
+        "bytes": 4142,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "e22002ac4798db0799162333cbe06a06b2f12c2da257b948f63f233c56ab7f3c"
+        "sha256": "d038f05c2aae9cca7d0b40667bffa201b09702d5618c9db18edab80ab1acfbfa"
       },
       {
         "bytes": 11772,
@@ -96,7 +96,7 @@
         "sha256": "f5747e9f3a2eac151eea1a7d766f7b96b3f56c6f18667e348c634351d3bacfd8"
       }
     ],
-    "tree_sha256": "28a02ee59ad4d64e4fa8cc889594fffef407d56faa598d1803c8f8868e97703f"
+    "tree_sha256": "4ee700f38f5a11f2148e5a4e77cebf1739a7b4f68200105ebd621a8b5a39e7b5"
   },
   "formal_companion": {
     "artifacts": [

@@ -34,15 +34,18 @@ For an encoding isometry \(V:\mathbb C^q\to\mathcal H\), write
 \[
  E(T,L)=q^{-1/2}\lVert TV-VL\rVert_{\mathrm{HS}}.
 \]
-It satisfies
+For physical unitaries \(T,S\) and logical unitaries \(L,M\), it satisfies
 \(E(TS,LM)\leq E(T,L)+E(S,M)\) and
 \(E(T^\dagger,L^\dagger)=E(T,L)\).
 
 \begin{lemma}[Quantitative cleaning commutator]
 \label{lem:quantitative-cleaning-commutator}
-Let \(V\) encode one logical qudit in a stabilizer code whose physical
-parties have a partition into three correctable regions.  Let \(T\) be
-transversal, and suppose \(E(T,L)\leq\varepsilon\).  For all logical Weyl
+Let \(V\) be a Pauli-compatible encoding of one logical qudit in a
+stabilizer code: every input Weyl \(P\) has a physical Pauli representative
+\(\widetilde P\) with \(\widetilde PV=VP\).  Suppose the physical parties
+have a partition into three correctable regions.  Let \(T\) be a
+transversal unitary and \(L\in U(q)\), with \(E(T,L)\leq\varepsilon\).
+For all logical Weyl
 operators \(P,Q\),
 \[
  q^{-1/2}\min_{|z|=1}
@@ -91,8 +94,7 @@ that
 \]
 If
 \[
- \eta<\tau_p:=\min\left\{\frac13,
-       \frac{\sin(\pi/p)}{2\sqrt2}\right\},
+ \eta<\frac13,
 \]
 then some additive one-qudit Clifford \(K\) satisfies
 \[
@@ -140,10 +142,17 @@ four-factor telescoping estimate give
 \]
 The phases \(\alpha,\beta\) cancel in the commutator.  Its two sides are
 scalar \(p\)-th roots of unity: the first has the original Weyl commutator
-phase, while the second has the phase determined by \(F(v),F(u)\).  The
-least nontrivial \(p\)-th-root chord is \(2\sin(\pi/p)\), whereas the stated
-bound gives \(4\eta<\sqrt2\sin(\pi/p)<2\sin(\pi/p)\).  The two phases must
-therefore agree, so \(F\) is trace-symplectic.
+phase, while the second has the phase determined by \(F(v),F(u)\).
+Put \(d=[F(v),F(u)]-[v,u]\in\F_p\) and \(\omega=e^{2\pi i/p}\).
+Additivity makes \(F\) \(\F_p\)-linear, so applying the same estimate to
+\((tv,u)\) gives \(|1-\omega^{td}|\leq4\eta\) for every \(t\in\F_p\).
+If \(d\ne0\), character orthogonality gives
+\[
+ 2=\frac1p\sum_{t\in\F_p}|1-\omega^{td}|^2
+ \leq16\eta^2<\frac{16}{9}<2,
+\]
+a contradiction.  Thus \(F\) preserves the trace-symplectic form.
+Nondegeneracy then makes \(F\) injective, hence invertible.
 
 Choose an additive Clifford \(K_0\) inducing \(F\).  Then
 \(K_0^\dagger L\) approximately fixes every Weyl axis, so all its Weyl
@@ -311,7 +320,8 @@ while
 \]
 Therefore
 \(H/2-3P\geq H/2-3H^2/4\geq5H/16\).
-Thus in all cases \(\varepsilon(U)^2\geq H/4\), proving the first statement.
+Thus in all cases \(\varepsilon(U)^2\geq5H/16\).  We use the weaker
+\(H/4\) bound to simplify the subsequent constants.
 
 \medskip\noindent\emph{Spectral contraction.}
 It remains to compare \(H\) with \(D\).  If \(X\) is uniform on the
@@ -370,16 +380,11 @@ its square over the eigenvalues proves the norm bound.
 \begin{theorem}[Cleaning-based global rounding]
 \label{thm:cleaning-global-rounding}
 Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state,
-\(q=p^e\), \(m\geq2\), and \(n=2m\).  Put
-\[
- d_p=(2-2p^{-1/2})^{1/2},
-\]
-and
+\(q=p^e\), \(m\geq2\), and \(n=2m\).  Let
+\(U=\bigotimes_iU_i\) be a product unitary, and put
 \[
  R^{\mathrm{clean}}_{n,q}=\min\left\{
-  \frac{\tau_p}{8},\frac1{4\sqrt{2q}},
-  \frac1{8\pi\sqrt n},
-  \frac{d_p}{1+4\pi\sqrt n}
+  \frac1{4\sqrt{2q}},\frac1{8\pi\sqrt n}
  \right\}.                                           \tag{6.3}
 \]
 If \(\varepsilon(U)<R^{\mathrm{clean}}_{n,q}\), then, up to a global
@@ -406,9 +411,14 @@ conditional on existence of the stated AME states.
 \medskip\noindent\emph{Local Clifford frames.}
 Choose party \(i\) as the logical leg and write the AME Choi form as
 \(q^{-1/2}\sum_a|a\rangle\otimes V_i|a\rangle\).  The other local
-factors form a transversal physical unitary \(T_i\), and vectorization
-gives a logical unitary \(L_i\), obtained from \(U_i\) by transpose and
-inverse, with \(E(T_i,L_i)=\varepsilon(U)\).  Lemmas
+factors form a transversal physical unitary \(T_i\).  Choose \(z\) attaining
+\(\varepsilon(U)=\lVert U\psi-z\psi\rVert\).  Vectorization gives
+\[
+ L_i=z(U_i^{\mathsf T})^{-1},\qquad E(T_i,L_i)=\varepsilon(U).
+\]
+These encoders are Pauli-compatible by the Choi argument in
+Section~\ref{sec:atlas}.  Since \(n\geq4\), (6.3) implies
+\(8\varepsilon(U)<1/(\pi\sqrt n)<1/3\).  Lemmas
 \ref{lem:quantitative-cleaning-commutator} and
 \ref{lem:nested-weyl-rounding}, with \(\eta=8\varepsilon(U)\), give
 (6.5); transpose and inverse preserve the additive Clifford group.
@@ -426,7 +436,7 @@ Rephase \(K_i\) by \(z_ie^{i\bar a_i}\); this changes
 projective Clifford action.  After this rephasing,
 \(K_i^\dagger U_i=e^{ih_i}\), each \(h_i\) is traceless, centering does not
 increase its Frobenius norm, and its spectral spread is unchanged.  By the
-second clause of (6.3), the bound (6.5) satisfies the hypothesis of
+first clause of (6.3), the bound (6.5) satisfies the hypothesis of
 Lemma~\ref{lem:chord-centered-logarithm}; hence every spectral spread is at
 most \(\pi\).  Let \(D^2=\sum_i\lVert h_i\rVert_F^2\).  The same lemma gives
 \[
@@ -435,7 +445,7 @@ most \(\pi\).  Let \(D^2=\sum_i\lVert h_i\rVert_F^2\).  The same lemma gives
    \lVert U_i-zK_i\rVert_{\mathrm{HS}}\right)^2
  \leq16\pi^2qn\varepsilon(U)^2.                      \tag{6.6}
 \]
-The third clause of (6.3) gives \(D\leq\sqrt q/2\).
+The second clause of (6.3) gives \(D\leq\sqrt q/2\).
 
 \medskip\noindent\emph{Exact branch selection.}
 Put \(M=\sum_i h_i^{(i)}\), so that
@@ -450,9 +460,12 @@ The integral identity
  \lVert(K^\dagger U-I)\psi\rVert\leq D/\sqrt q
  \leq4\pi\sqrt n\,\varepsilon(U).
 \]
-The fourth clause and the triangle
-inequality put \(K\psi\) less than \(d_p\) from \(\psi\), so
-Lemma~\ref{lem:stabilizer-overlap-gap} makes \(K\) an exact symmetry.
+The triangle inequality and \(n\geq4\) give
+\[
+ \varepsilon(K)\leq(1+4\pi\sqrt n)\varepsilon(U)
+ <\frac12+\frac1{8\pi\sqrt n}<\frac34<d_2\leq d_p.
+\]
+Thus Lemma~\ref{lem:stabilizer-overlap-gap} makes \(K\) an exact symmetry.
 Apply Proposition~\ref{prop:main-residual-stability} to obtain (6.4).
 \end{proof}
 
@@ -479,12 +492,12 @@ Let \(\lvert\psi\rangle,\lvert\phi\rangle\) be stabilizer
 \(\AME(2m,q)\) states as in
 Theorem~\ref{thm:cleaning-global-rounding}, and suppose that
 \(B=\bigotimes_iB_i\) is an exact product-unitary intertwiner from
-\(\psi\) to \(\phi\).  For \(U=\bigotimes_iU_i\), put
+\(\psi\) to \(\phi\).  For a product unitary \(U=\bigotimes_iU_i\), put
 \[
  \varepsilon_{\psi\to\phi}(U)=
  \min_{|z|=1}\lVert U\psi-z\phi\rVert.
 \]
-If \(\varepsilon_{\psi\to\phi}(U)<\tau_p/8\), then each \(U_i\) is within
+If \(\varepsilon_{\psi\to\phi}(U)<1/24\), then each \(U_i\) is within
 normalized Hilbert--Schmidt distance
 \(8\varepsilon_{\psi\to\phi}(U)\) of \(B_iK_i\) for a one-qudit Clifford
 \(K_i\).  If, in addition,
@@ -514,7 +527,7 @@ Set \(W=B^\dagger U=\bigotimes_iB_i^\dagger U_i\).  Since \(B\psi\) and
 \(\phi\) span the same ray,
 \(\varepsilon(W)=\varepsilon_{\psi\to\phi}(U)\).  The first paragraph of
 the proof of Theorem~\ref{thm:cleaning-global-rounding} gives the local
-\(8\varepsilon\) estimate under \(\varepsilon(W)<\tau_p/8\).  Under the
+\(8\varepsilon\) estimate under \(\varepsilon(W)<1/24\).  Under the
 stronger radius hypothesis, apply the theorem and (6.7) to \(W\).  If
 \(W=g\bigotimes_i e^{ih_i}\) with \(g\in G(\psi)\), then \(H=Bg\) is an
 exact intertwiner from \(\psi\) to \(\phi\), and left multiplication by
@@ -536,17 +549,15 @@ input is therefore compatibility of the recovered discrete Clifford data,
 not a sharper final norm summation.
 
 The linear part of that compatibility can in fact be recovered without a
-party-count loss.
+party-count or local-dimension loss.
 
 \begin{proposition}[Robust compatibility of the transition maps]
 \label{prop:robust-linear-atlas}
 Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state,
-\(q=p^e\), and let \(U=\bigotimes_iU_i\) be a product unitary.  Suppose
+\(q=p^e\), \(m\geq2\), and let \(U=\bigotimes_iU_i\) be a product unitary.  Suppose
 \[
  \varepsilon(U)<
- R_q^{\mathrm{trans}}
- :=\min\left\{\frac{\tau_p}{8},
-   \frac{2\sin(\pi/p)}{4+64\sqrt q}\right\}.
+ R^{\mathrm{trans}}:=\frac{\sqrt2}{68}.
 \]
 The cleaning and Fourier lemmas give local Cliffords \(K_i\) satisfying
 (6.5).  Let \(F_i\) be their symplectic maps.  Then
@@ -581,16 +592,31 @@ After choosing the phase of \(U\) realizing its defect,
 \]
 
 The commutator is supported only on \(A\cap B=\{i,j\}\).
+Since \(R^{\mathrm{trans}}<1/24\), the cleaning and Fourier lemmas apply.
 Choose phases so that
-\(\lVert U_s-K_s\rVert_{\mathrm{HS}}\leq8\sqrt q\,\varepsilon(U)\).
+\(\delta_s=q^{-1/2}\lVert U_s-K_s\rVert_{\mathrm{HS}}
+\leq8\varepsilon(U)\).
 Replacing \(U_sW_{\ell_s}U_s^\dagger\) by its \(K_s\)-conjugate costs at
-most \(16\sqrt q\,\varepsilon(U)\) in operator norm, and replacing its
-commutator with \(W_{r_s}\) costs at most twice that.  On the two sites,
-the total cost is therefore at most
-\(64\sqrt q\,\varepsilon(U)\).  The Clifford commutator is a scalar
-\(p\)-th root \(\zeta\), so (6.8) gives
+most \(2\delta_s\) in normalized Hilbert--Schmidt norm, and replacing its
+commutator with \(W_{r_s}\) costs at most \(4\delta_s\).
+Let \(C_K=[KW_\ell K^\dagger,W_r]\).  Both commutators are supported on
+\(S=\{i,j\}\); telescoping their two unitary factors and using
+\(\rho_S=q^{-2}I\) gives
 \[
- |\zeta-1|\leq(4+64\sqrt q)\varepsilon(U)<2\sin(\pi/p).
+ \lVert(C-C_K)\psi\rVert
+ =q^{-1}\lVert C-C_K\rVert_{\mathrm{HS},S}
+ \leq4(\delta_i+\delta_j)\leq64\varepsilon(U).
+\]
+Here the Hilbert--Schmidt norm is taken on the two-site space.
+The Clifford commutator is a scalar \(p\)-th root \(\zeta\), so (6.8)
+gives \(|1-\zeta|\leq68\varepsilon(U)\).
+Replacing \(\ell\) by \(t\ell\), for every \(t\in\F_p\), leaves these
+bounds unchanged and replaces \(\zeta\) by \(\zeta^t\), because the
+Clifford label maps and the commutator pairing are \(\F_p\)-linear.
+If \(\zeta\ne1\), character orthogonality would give
+\[
+ 2=\frac1p\sum_{t\in\F_p}|1-\zeta^t|^2
+ \leq(68\varepsilon(U))^2<2.
 \]
 Hence \(\zeta=1\).
 
@@ -619,8 +645,8 @@ chosen encoder.
 \label{cor:logical-clifford-rounding}
 Under the hypotheses and radius of
 Proposition~\ref{prop:robust-linear-atlas}, choose party \(i\) as the logical
-leg, and let \(L_i\) be the logical unitary induced by the other \(2m-1\)
-factors as in the proof of Theorem~\ref{thm:cleaning-global-rounding}.  There
+leg, and let \(L_i\) be the Choi-associated logical unitary approximately
+implemented by the other \(2m-1\) factors as in the proof of Theorem~\ref{thm:cleaning-global-rounding}.  There
 is an exactly transversally realizable logical Clifford \(L_i'\) such that
 \[
  q^{-1/2}\min_{|z|=1}\lVert L_i-zL_i'\rVert_{\mathrm{HS}}
@@ -656,34 +682,25 @@ does not improve (6.3).  Controlling the character discrepancy is the
 same remaining branch-selection problem isolated by the collective
 estimate above.
 
-The exact formula, rather than a fixed-dimension slogan, controls scaling.
 Uniformly over prime powers \(q=p^e\) and existing tensors,
 \[
  R^{\mathrm{clean}}_{n,q}
- =\Theta\!\left(\min\{p^{-1},q^{-1/2},n^{-1/2}\}\right),              \tag{6.10}
+ =\Theta\!\left(\min\{q^{-1/2},n^{-1/2}\}\right),              \tag{6.10}
 \]
-with absolute implied constants.  Indeed
-\(\sin(\pi/p)=\Theta(p^{-1})\), while \(d_p\) is bounded above and below
-by positive absolute constants.  An asymptotic use of (6.10) must specify
-an existing family.
+with absolute implied constants.  Character averaging removes any separate
+dependence on the characteristic.  An asymptotic use of (6.10) must still
+specify an existing family.
 
-For the explicit generalized and extended generalized Reed--Solomon
-construction \cite{SeroussiRoth1986}, together with the standard
-MDS-to-AME construction \cite{RaissiGogolinRieraAcin2018},
-\(n=2m\leq q+1\), so the party-count term cannot be smaller
-than the local-dimension term.  Hence
+For the generalized and extended generalized Reed--Solomon construction
+\cite{SeroussiRoth1986}, together with the standard MDS-to-AME construction
+\cite{RaissiGogolinRieraAcin2018}, \(n=2m\leq q+1\).  Hence
 \[
- R^{\mathrm{clean}}_{n,q}
- =\begin{cases}
-   \Theta(q^{-1}),&q=p,\\
-   \Theta(q^{-1/2}),&q=p^e,\ e\geq2.
-  \end{cases}                                                        \tag{6.11}
+ R^{\mathrm{clean}}_{n,q}=\Theta(q^{-1/2})                 \tag{6.11}
 \]
-On a length-saturating subfamily \(n\asymp q\), these are
-\(\Theta(n^{-1})\) and \(\Theta(n^{-1/2})\), respectively.  For fixed
-characteristic and growing extension degree, the second line applies.
-The earlier fixed-\(q\), \(n^{-1/2}\) reading of the exact minimum remains
-a conditional formal slice only; it is not an AME-existence claim.
+over both prime and extension fields.  On a length-saturating subfamily
+\(n\asymp q\), this is \(\Theta(n^{-1/2})\).
+The fixed-\(q\), \(n^{-1/2}\) reading of the minimum is conditional on
+existence; it is not an AME-existence claim.
 
 The cleaning radius is the governing bound.  Its \(n^{-1/2}\) scale is a
 proved lower bound, not an optimality claim; no

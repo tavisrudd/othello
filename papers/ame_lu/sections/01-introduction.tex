@@ -34,7 +34,7 @@ transversal conversion can contain a genuinely non-Clifford factor.  A
 quantitative version is needed when the conversion or symmetry is only
 approximately realized.
 
-Within the stabilizer AME class on at least four parties, maximal
+Within the stabilizer AME class on an even number of at least four parties, maximal
 entanglement removes that difference.
 
 For \(q=p^e\), ``Clifford'' below always means the normalizer of the
@@ -65,8 +65,8 @@ does not assume CSS form, equal stabilizer phases, classical linearity over
 
 The proof uses one elementary support calculation.  On any \((m+1)\)-party
 set, the stabilizer labels supported there form a group of order \(q^2\).
-Projection onto the two-dimensional Weyl-label space of any retained party
-is bijective.  Consequently the reduced operator contains every local Weyl
+Projection onto the Weyl-label space \(\F_q^2\) of any retained party
+is bijective; this space has dimension \(2e\) over \(\F_p\).  Consequently the reduced operator contains every local Weyl
 axis exactly once in a matched diagonal decomposition.  The uniqueness of
 that decomposition forces each local unitary to permute the Weyl axes and
 hence to be Clifford.  In ordinary language,
@@ -88,9 +88,9 @@ which transversal gates remain.
 
 \begin{corollary}[Factorwise transversal rigidity]
 \label{cor:transversal-clifford}
-Let \(V_\psi,V_\phi:\mathbb C^q\to
+Let \(m\geq2\), and let \(V_\psi,V_\phi:\mathbb C^q\to
 (\mathbb C^q)^{\otimes(2m-1)}\) be encoders whose normalized Choi states
-are stabilizer \(\AME(2m,q)\) states.  If
+are stabilizer \(\AME(2m,q)\) states.  If \(U_i\in U(q)\) and
 \[
  (U_1\otimes\cdots\otimes U_{2m-1})V_\psi=V_\phi L,
 \]
@@ -130,16 +130,11 @@ of \(\lvert\psi\rangle\).
 
 \begin{theorem}[Quantitative rounding]\label{thm:quantitative-rounding}
 Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(n,q)\) state with
-\(n=2m\), \(m\geq2\), and let \(U=\bigotimes_iU_i\).  Put
-\[
- \tau_p=\min\left\{\frac13,\frac{\sin(\pi/p)}{2\sqrt2}\right\},
- \qquad d_p=(2-2p^{-1/2})^{1/2},
-\]
+\(n=2m\), \(m\geq2\), and let \(U=\bigotimes_iU_i\) be a product
+unitary.  Put
 \[
  R^{\mathrm{clean}}_{n,q}=
- \min\left\{\frac{\tau_p}{8},\frac1{4\sqrt{2q}},
-             \frac1{8\pi\sqrt n},
-             \frac{d_p}{1+4\pi\sqrt n}\right\}.       \tag{1.2}
+ \min\left\{\frac1{4\sqrt{2q}},\frac1{8\pi\sqrt n}\right\}.       \tag{1.2}
 \]
 If \(\varepsilon(U)<R^{\mathrm{clean}}_{n,q}\), then, up to phase,
 \[
@@ -155,7 +150,7 @@ within normalized Hilbert--Schmidt distance \(8\varepsilon(U)\) of a
 one-qudit Clifford.  Uniformly over prime powers and existing AME states,
 \[
  R^{\mathrm{clean}}_{n,q}
- =\Theta\!\left(\min\{p^{-1},q^{-1/2},n^{-1/2}\}\right).
+ =\Theta\!\left(\min\{q^{-1/2},n^{-1/2}\}\right).
 \]
 \end{theorem}
 
@@ -164,8 +159,9 @@ nested logical Weyl commutator within \(8\varepsilon\) of a scalar.
 Second, Fourier concentration on the finite Weyl group produces a nearby
 local Clifford at each party.  Third, the quantized overlap of stabilizer
 states separates distinct product-Clifford branches by the uniform gap
-\(d_p\).  Once the correct exact branch is known, the AME second moment
-gives the collective residual estimate in \((1.3)\).  The radius is a
+\(d_p=(2-2p^{-1/2})^{1/2}\).  The AME second moment bounds the distance to the rounded Clifford branch;
+a balanced-cut estimate using minimum-support labels then gives the
+collective residual bound in \((1.3)\).  The radius is a
 certified lower bound, not an optimality claim.
 
 Here approximation refers to the state-vector defect of a product unitary
@@ -225,26 +221,21 @@ enumerates one base symplectic frame and checks each candidate by finite
 linear algebra.  In particular, it is polynomial in \(m\) for fixed local
 dimension.  Corollary~\ref{cor:finite-recognition} gives the explicit
 candidate count and the separate cost of unknown party relabelling.
-Over a prime field, Corollary~\ref{cor:prime-systematic-recognition}
-first compares the block-determinant arrays and then replaces enumeration by
-linear intertwining equations for
-\((m-1)^2\) fundamental four-cycles and the single condition
-\(\det A=1\).  The common centralizer of these cycles is intrinsic: it is
-the algebra of block-diagonal one-party label endomorphisms preserving the
-stabilizer space.  In prime local dimension this algebra has five possible
-types.  Its determinant-one units give the compatible symmetry group, while
-its module action explains the corresponding CSS, Hermitian, and
-nonsemisimple code structures.  A further rigidity phenomenon occurs at low
-party number: for four and six parties the algebra is necessarily nonscalar.
-For prime \(q\geq5\), every such state therefore has a noncentral compatible
-symplectic symmetry.  These prime-dimensional refinements do not restrict the
-all-prime-power LU theorem.
+The input is promised stabilizer-AME check matrices with fixed party labels;
+the output is a compact symplectic witness, upgraded to a Clifford--Pauli
+conversion when stabilizer phases are supplied.  These data also determine
+an intrinsic endomorphism algebra in prime dimension
+(Section~\ref{sec:endomorphism-algebra}), certify the state from \(m\)
+minimum-support marginals, and decide stochastic local conversion
+(Section~\ref{subsec:marginal-certification}).  These are consequences of
+the exact support geometry; neither their classification nor their
+algorithms are needed for robust rigidity.
 
-At the dimension-dependent radius
+At the radius
 \[
- \min\left\{\frac{\tau_p}{8},
-   \frac{2\sin(\pi/p)}{4+64\sqrt q}\right\},           \tag{1.4}
+ R^{\mathrm{trans}}=\frac{\sqrt2}{68},                 \tag{1.4}
 \]
+independent of both party count and local dimension,
 the symplectic maps recovered by cleaning already preserve every transition
 map exactly.  This does not yet identify the exact product symmetry.
 Localized commutators cancel Weyl-translation phases, so they determine the
@@ -269,6 +260,10 @@ correlation tensor, and Van den Nest, Dehaene, and De Moor used that mechanism
 in a minimum-support criterion for qubit stabilizer states
 \cite[Theorem~13]{Rains1999}
 \cite[Theorem~1 and Corollary~1]{VanDenNestDehaeneDeMoor2005}.
+Under their qubit minimum-support hypotheses, their proof already makes
+the factors of the given LU Clifford.  Our extension is the automatic
+complete-Weyl-support condition for arbitrary additive prime-power AME
+states, together with the constructive and quantitative conclusions.
 Subsequent work developed further sufficient conditions and exposed the
 limits of the LU--LC conjecture
 \cite{ZengChungCrossChuang2007,GrossVanDenNest2008,JiChenWeiYing2008}.

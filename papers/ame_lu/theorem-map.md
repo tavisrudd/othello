@@ -11,7 +11,7 @@ This map covers Paper I after the two-paper split. Results owned by
 | C649 | every product-unitary intertwiner between additive stabilizer `AME(2m,q)` states is Clifford factor by factor | every prime power `q=p^e`, every `m≥2`, standard additive Weyl system; Bell pairs excluded sharply | AME support counting, complete Weyl-basis marginal, intrinsic tensor axes; manuscript proof with kernel-checked cores |
 | C649 | minimum-support transition maps classify LU equivalence up to local trace-symplectic frames; exact sequence for the fixed-party projective symmetry group | same state class | minimum-support generation, transition equations, product-Pauli character correction |
 | current revision | every half-set gives a systematic graph `[K_B^T|I]`; AME is equivalent to invertibility of one block from every complementary pair of party-aligned square submatrices; `m` minimum-support subgroups form an optimal spanning direct sum | arbitrary additive label spaces over `F_p`; optimal only among spanning families of minimum-support subgroups | half-set projection, isotropy, symplectic complementarity, and block-kernel argument; manuscript only |
-| current revision | fixed-label LU recognition is the block orbit equation `F_B K_psi = K_phi F_C`, with an explicit field-operation bound; over prime fields it reduces to `(m-1)^2` four-cycle intertwining equations and `det A=1` | `m≥2`; polynomial in `m` for fixed `q`; unknown party relabelling adds at most `(2m)!`; no bit-complexity claim | systematic reduction, tree propagation, and fundamental-cycle proof; manuscript only |
+| current revision | fixed-label LU recognition is the block orbit equation `F_B K_psi = K_phi F_C`, with an explicit field-operation bound; over prime fields it reduces to `(m-1)^2` four-cycle intertwining equations and `det A=1` | promised stabilizer-AME check matrices and `m≥2`; compact symplectic witnesses, upgraded with phase/tableau data; polynomial in `m` for fixed `q`; unknown party relabelling adds at most `(2m)!`; no bit-complexity claim | systematic reduction, tree propagation, and fundamental-cycle proof; manuscript only |
 | C1089 | the `m` reductions to `B∪{j}` determine the state among all density operators, with a family of `(m+1)`-party reductions sufficient iff its supported subgroups span `L`; reductions to `≤m` parties and fewer than `m` such reductions do not suffice; `H=Σ(I−Π_j)` is an `(m+1)`-local commuting-projector parent Hamiltonian with unit gap and the marginal fidelity certificate `1−F ≤ Tr(Hσ) ≤ Σ δ_j`; no nonscalar `m`-local Hamiltonian has the state as a ground state | every stabilizer `AME(2m,q)`, `m≥2`; mixed-state (UDA) determination; no claim about non-stabilizer AME states | half-set direct sum, support theorem, and `(2.2)`--`(2.3)`; manuscript only |
 | C1089 | every product operator `⊗A_i` carrying one stabilizer `AME(2m,q)` state to a nonzero multiple of another is Clifford up to scalars factor by factor; SLOCC, LU, and LC equivalence coincide and exact single-copy conversion has success probability one or zero, decided by the finite recognition bound | `m≥2`; the scalar-unitary step holds for every two-uniform state, the Clifford step is the rigidity theorem | polar decomposition and the convexity of `log‖e^{tH}ψ‖²` with two-uniform second moments; manuscript only |
 | C989 | the algebra of block-diagonal one-party label-space endomorphisms preserving `L` is intrinsically the common holonomy centralizer; in prime dimension its determinant-one units are the fixed-party linear symmetry group and have five possible algebra types | algebra/centralizer identification over the underlying `F_p` spaces for every prime power; determinant-one and five-type conclusions only for `q=p` | graph propagation and elementary subalgebras of `M_2(F_q)`; manuscript only |
@@ -19,9 +19,9 @@ This map covers Paper I after the two-paper split. Results owned by
 | C649 | every transversal conversion between associated `[[2m-1,1,m]]_q` encoders is Clifford on every physical and logical factor; check matrices return symplectic witnesses, while full tableaux construct compact Clifford--Pauli data whose phase repair can be confined to any chosen `m` physical outputs | every prime power and `m≥2`; one logical qudit; no dense-matrix output bound | AME Choi correspondence, transpose/inverse Clifford closure, finite recognition, and half-supported character correction |
 | C833 | cleaning-based global rounding at explicit radius `R_clean`, with local `8ε` Clifford rounding and residual `D≤π√q ε` | every stabilizer `AME(2m,q)`, `m≥2`; asymptotics conditional on AME existence | leakage-aware three-region commutator, Weyl--Fourier concentration, stabilizer overlap gap, AME second moment; no computation |
 | C787 | relative two-state rounding over an exact base intertwiner, with the same local `8ε` and collective `π√q ε` constants | two stabilizer `AME(2m,q)` states on one exact product-unitary orbit; radius remains `R_clean` | exact-base line transport, defect identity, product-intertwiner torsor, and lossless conditional decomposition are kernel checked; the cleaning radius and coefficient remain manuscript inputs |
-| C836 | uniform scale `Theta(min{p^-1,q^-1/2,n^-1/2})`; Reed--Solomon scale `Theta(q^-1)` over prime fields and `Theta(q^-1/2)` at extension degree at least two | explicit existing families only; no fixed-`q` existence claim | closed-form comparison of the four terms in `R_clean` |
+| C836 / C1134 | uniform scale `Theta(min{q^-1/2,n^-1/2})`; Reed--Solomon scale `Theta(q^-1/2)` over prime and extension fields | explicit existing families only; no fixed-`q` existence claim | character averaging and closed-form comparison of the two terms in `R_clean` |
 | C837 | after exact branch selection, local frame errors satisfy the collective squared estimate `≤π²ε²` | conclusion of cleaning theorem | chord bound applied to the collective residual norm |
-| C838 | cleaning-rounded symplectic maps satisfy every minimum-support transition at a dimension-only radius; localized commutators cannot control the stabilizer character | every stabilizer AME state; exact product-Pauli correction may be nonlocal in the rounding metric | two intersecting minimum supports and commutator-phase separation; manuscript proof only |
+| C838 / C1134 | cleaning-rounded symplectic maps satisfy every minimum-support transition at a universal radius `sqrt(2)/68`; localized commutators cannot control the stabilizer character | every stabilizer AME state with `m>=2`; exact product-Pauli correction may be nonlocal in the rounding metric | two intersecting minimum supports, normalized two-site Hilbert--Schmidt control, and character averaging; manuscript proof only |
 | C889 | the induced action on any chosen encoder is within \\(8\\varepsilon\\) of an exactly transversally realizable logical Clifford at the transition-compatibility radius | every stabilizer AME state; controls the logical image, not local distance of the full physical correction | robust transition compatibility, surjectivity onto the input Weyl plane, and stabilizer cancellation |
 
 ## Appendix hierarchy
@@ -62,14 +62,14 @@ This map covers Paper I after the two-paper split. Results owned by
   conversions.
 - `thm:quantitative-rounding`: introduction-level quantitative theorem.
 - `lem:quantitative-cleaning-commutator` and `lem:nested-weyl-rounding`:
-  leakage-aware cleaning and finite Weyl--Fourier concentration.
+  Pauli-compatible leakage-aware cleaning and finite Weyl--Fourier concentration for `eta<1/3`, uniformly in characteristic.
 - `thm:cleaning-global-rounding`: explicit proof and constants for the
   quantitative theorem.
 - `cor:relative-intertwiner-rounding`: lossless transfer of global rounding
   to two states over an exact base intertwiner.
 - `prop:robust-linear-atlas`: exact symplectic compatibility of the transition
   maps and the stabilizer-character boundary.
-- `cor:logical-clifford-rounding`: dimension-only rounding of the induced
+- `cor:logical-clifford-rounding`: dimension-independent rounding of the induced
   encoder action despite the uncontrolled global Pauli correction.
 - `lem:stabilizer-overlap-gap`: exact branch separation used by every
   defect-only route.
@@ -82,7 +82,7 @@ This map covers Paper I after the two-paper split. Results owned by
 
 - No global LU--LC conjecture and no result for arbitrary stabilizer states.
 - No classification of nonstabilizer or arbitrary minimal-support AME states.
-- No party-count-independent defect-ball radius.
+- No party-count-independent defect-ball radius for a nearby exact product symmetry.
 - No optimality or self-testing claim for `R_clean`.
 - No semilinear, split-torus, code-reconstruction, diagonal-isoduality,
   six-point-pencil, finite-census, transport, or party-extension theorem;

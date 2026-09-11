@@ -10,7 +10,7 @@ Discovery companion:
 
 ## Current status
 
-**C1134 queued (2026-09-10), next for Paper I.** Review and remediate the
+**C1134 running (2026-09-10), current Paper I task.** Review and remediate the
 user-supplied Astra/ChatGPT referee report: five precision corrections, two
 proposed quantitative improvements, and the worked-example, recognition,
 framing, and formal-artifact requests. Verify the proposed bounds before

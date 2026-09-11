@@ -28,18 +28,17 @@ The quantitative conclusion is uniform only when all varying parameters
 are displayed:
 \[
  R^{\mathrm{clean}}_{n,q}
- =\Theta\!\left(\min\{p^{-1},q^{-1/2},n^{-1/2}\}\right),
+ =\Theta\!\left(\min\{q^{-1/2},n^{-1/2}\}\right),
  \qquad q=p^e.
 \]
 For fixed local dimension this gives the conditional \(n^{-1/2}\) scale
 along any existing stabilizer-AME family.  On generalized and extended
 Reed--Solomon constructions, where \(n\leq q+1\), the scale is
-\(\Theta(q^{-1})\) over prime fields and \(\Theta(q^{-1/2})\) when
-\(e\geq2\).  These are certified radii; their optimal order is open.
+\(\Theta(q^{-1/2})\) over both prime and extension fields.  These are certified radii; their optimal order is open.
 
 The robust transition-map result identifies the remaining bottleneck.
-Linear symplectic compatibility becomes exact at a radius depending only on the
-local dimension, but commutators discard the affine Weyl phases.  They
+Linear symplectic compatibility becomes exact for
+\(\varepsilon<\sqrt2/68\), independently of party count and local dimension, but commutators discard the affine Weyl phases.  They
 therefore determine the stabilizer label group and not its character.  The
 logical action of any chosen encoder can nevertheless be rounded within
 \(8\varepsilon\) to an exactly transversally realizable Clifford, because a

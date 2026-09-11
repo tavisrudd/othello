@@ -18,7 +18,9 @@ equivalence, and every transversal conversion between the associated
 \([[2m-1,1,m]]_q\) stabilizer encoders is Clifford factor by factor.
 Every half-set gives a systematic stabilizer matrix whose party-aligned
 square blocks are all invertible, and only \(m\) minimum supports are needed
-for recognition.  With party labels fixed, equivalence reduces to testing at
+for recognition. The input is promised stabilizer-AME check matrices; the
+output is a compact symplectic witness, with a Clifford--Pauli conversion
+when phase/tableau data is supplied. With party labels fixed, equivalence reduces to testing at
 most \(\lvert\operatorname{Sp}_{2e}(\mathbb F_p)\rvert\) base frames.  Over a
 prime field it reduces further to linear intertwining equations for
 \((m-1)^2\) fundamental four-cycles and one determinant equation.  The same
@@ -34,9 +36,9 @@ parties.
 A leakage-aware three-region cleaning argument gives a quantitative theorem:
 defect \(\varepsilon\) puts every local factor within \(8\varepsilon\) of a
 Clifford throughout the certified radius
-\(\Theta(\min\{p^{-1},q^{-1/2},n^{-1/2}\})\).  Weyl--Fourier concentration and
+\(\Theta(\min\{q^{-1/2},n^{-1/2}\})\).  Weyl--Fourier concentration and
 the stabilizer overlap gap select an exact symmetry.  At a separate
-local-dimension-dependent radius, localized commutators recover the linear
+universal radius \(\sqrt2/68\), localized commutators recover the linear
 transition data but do not control the stabilizer-character, or
 product-Pauli phase, correction.  Exact MDS--CSS logical groups
 and six-point applications belong to the separate
@@ -69,21 +71,21 @@ prime-dimensional and do not narrow the all-prime-power LU theorem.
 The Choi interpretation gives factorwise transversal Clifford rigidity for
 conversions between the associated stabilizer `[[2m-1,1,m]]_q` encoders.
 
-For an approximate product symmetry with defect `ε`, three-region cleaning
+For an approximate product symmetry with defect `ε<1/24`, three-region cleaning
 and Weyl--Fourier rounding put every local factor within normalized
 Hilbert--Schmidt distance `8ε` of a Clifford. Stabilizer-overlap quantization
 then selects an exact branch and gives a certified radius
 
 ```text
-Theta(min{p^-1, q^-1/2, n^-1/2}),  n=2m,
+Theta(min{q^-1/2, n^-1/2}),  n=2m,
 ```
 
 with collective residual generator norm at most `pi sqrt(q) ε`. At a
-dimension-only radius, the rounded symplectic maps already satisfy the exact
+universal radius `sqrt(2)/68`, the rounded symplectic maps already satisfy the exact
 transition system. Localized commutators do not see the stabilizer character, so
 the remaining product-Pauli correction need not be locally small.
 
-The appendices retain detailed two- and `k`-uniform stability and the module
+The appendices retain two-uniform stability and the module
 proof behind the prime-field algebra table. They are not competing headline
 theorems.
 
@@ -94,8 +96,5 @@ stabilizer-character, Choi, and second-moment cores are kernel checked in the
 shared `RelativeConicArcs.AMELU` namespace. The cleaning constants, Fourier
 rounding, global quantitative theorem, robust transition compatibility, and
 stabilizer-character correction are manuscript proofs without Lean or
-certificate coverage. The
-corrected local release surface now includes the repaired (m=2) proof bridge,
-the phase-convention clarification, and the current related-work boundary.
-The standalone mirror is synchronized locally but remains unpushed; public
-deposit and submission are author decisions.
+certificate coverage. Appendix C discloses partial formalization; the paper
+claims no end-to-end formalization or self-contained formal replay contract.
