@@ -10,15 +10,20 @@ Discovery companion:
 
 ## Current status
 
-**C1138 complete (2026-09-10).** Second referee corrections and verified
-strengthenings are in the warning-free 45-page paper: fixed-q length bound,
-full prime-dimensional four-party algebra, spectral-chart dimension obstruction,
-universal-proof clarification and explicit sampling rule. README rebuilt to the
-GRS paper's standard. Clean standalone `9d9306f` matches the authority; PDF and
-source ZIP are in Downloads. No push. Report:
+**C1139 complete (2026-09-10).** Fast prime-field recognition is proved:
+deterministic decision in O(m³+log q) field operations, exact Las Vegas
+witnesses at the same expected cost. Independent exhaustive tests and
+large-prime checks pass; classical methods and prior nonbinary recognition
+are credited, without a priority claim. Latest referee parity correction,
+matching-radius display and four-party-first presentation are integrated.
+The 47-page paper and portfolio README are aligned. Clean standalone
+`fda31f6` rebuilds identically; PDF/source ZIP are in Downloads. No push.
+Report: `2026-09-10-c1139-ame-lu-fast-recognition.md`.
+No successor allocated; extension-field fast recognition and the n/q-growing
+radius gap require separate scope/proof gates.
+
+C1138's prior corrections and README revision are retained; report:
 `2026-09-10-c1138-ame-lu-second-referee.md`.
-Optional next refinement: faster prime-field determinant normalization with
-explicit arithmetic/bit bounds; no successor C-ID allocated.
 
 **C1137 complete (2026-09-10).** Focused certification integration is in the
 validated 43-page authority draft. All three fresh cold readers preferred it

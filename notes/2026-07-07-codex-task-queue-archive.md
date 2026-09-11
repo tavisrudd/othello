@@ -5658,3 +5658,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1137 `[ame-lu]` [REPORTED 2026-09-10]** — Draft focused certification integration and cold-reader A/B comparison → `notes/2026-09-10-c1137-ame-lu-draft-ab.md`.
 
 - **C1138 `[ame-lu]` [REPORTED 2026-09-10]** — Verify and integrate second referee corrections and focused strengthenings; omit gradings → `notes/2026-09-10-c1138-ame-lu-second-referee.md`.
+
+- **C1139 `[ame-lu]` [REPORTED 2026-09-10]** — Faster prime-field recognition: proof, implementation, exhaustive tests and literature attribution → `notes/2026-09-10-c1139-ame-lu-fast-recognition.md`.

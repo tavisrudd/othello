@@ -1,7 +1,7 @@
 # C1139 — faster prime-field recognition
 
 **Lane:** `ame-lu`
-**Status:** RUNNING.
+**Status:** COMPLETE (2026-09-10).
 
 User requests the faster algorithm's mathematics, implementation/tests, and a literature check. Primary candidate: restrict the determinant to the at-most-four-dimensional homogeneous intertwiner space, diagonalize the resulting quadratic form in odd characteristic, decide representation of one by rank and a quadratic-character test, and construct a witness by Las Vegas square-root sampling. Handle the prime two by exhaustive constant-size enumeration. Prove arithmetic and bit bounds, check against independent exhaustive small-field oracles, and test propagated systematic witnesses. Literature check attributes standard quadratic-form and finite-field root algorithms; no absence-of-prior-work verdict is assumed.
 
@@ -141,3 +141,24 @@ against the exact even-party hypothesis.
 - Literature boundary: positive attribution is checked, not exhaustive
   priority closure. Four primary works were partially read, none fully.
 No incidental discovery beyond the requested work was identified.
+
+## Release and portfolio completion
+
+Authority source revision: `94ba122eb1600ed49d60156f17ae2ff30d800b52`.
+Exporter plan/audit: 35 public source files, zero private-coupling findings.
+Standalone `fda31f6` passes `make check software-check`; its rebuilt PDF is
+byte-identical to the authority. Export verification passes all 38 tracked
+files. No push performed.
+
+Downloads:
+- `ame-lu-fda31f6.pdf`: SHA-256
+  `e7789e3b2c847e51edcf05f8e81ea924604f4b024a3a1cacfbb7a8af6369d55c`.
+- `ame-lu-fda31f6-source.zip`: SHA-256
+  `fb8a36cecd40ccc8b60fdf119affd8768d92cf826b34c1dffcad9d6f224ddf64`.
+The archive passes CRC validation and embedded PDF/README/code byte checks.
+
+The requested portfolio README changes were already captured by concurrent
+forward authority commit `c0f7eee42` and summary-mirror commit `2d4d918` before
+this task's final synchronization. Copying the current authority README to
+the clean summary mirror produced no diff; exact bytes match. No foreign
+summary changes were staged or reverted by this task.
