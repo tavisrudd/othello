@@ -3287,3 +3287,9 @@ and eleven mutation tests pass. Q29 parallel cost +0.4% and Phase Full variabili
 remain explicit limitations. No quality or order-2092 construction gain claimed.
 Next is shrinking private state-machine property testing. See
 `2026-09-11-c1016-related-kicks-and-carrier-ranges.md`.
+
+## 2026-09-11 — shrinking state-machine properties
+
+The first four properties cover eight private scopes with independently rebuilt
+scores, witnesses, margins and value domains. Automatic-kick/tabu policy remains
+the next coverage frontier. See `2026-09-11-c1016-state-machine-properties.md`.

@@ -186,13 +186,15 @@ See [native cycle checkpoint](2026-09-11-c1016-cycle-neighborhoods.md).
    diagnostic first: at the deep state neither the swap nor the complete
    six-cycle neighbourhood offers an improving move. Test coupled moves and
    barrier-crossing schedules before drawing conclusions about the fibre.
-2. **Add shrinking state-machine properties, then optimize measured costs.**
+2. **Extend policy properties, then optimize measured costs.**
    All four audited tabu paths retain intermediate kick improvements. Private
    checkpoint `96e04d5` validates 765 release tests, independent replay and
    retained one/twelve-core counters. Certified 32-bit carrier arithmetic lowers
    measured carrier cycles 35.5–35.9%; Q29 has a small 0.4% parallel cost increase.
-   The private kernels still lack shrinking property-based action sequences.
-   Close that correctness gap before further kernel changes. Then investigate
+   Four shrinking properties now cover eight scopes with independent score,
+   witness, margin and value-domain checks over steps, kicks and resets.
+   Automatic-kick scheduling and tabu-policy transitions remain open; see
+   `2026-09-11-c1016-state-machine-properties.md`. Then investigate
    temporary scoring-array traffic and repeated Gram evaluations before adding
    a residual index. The matched no-kick quality comparison remains full 14/48
    improved versus sampled 0/48. No witness-coordinate tuning.

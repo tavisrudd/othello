@@ -240,8 +240,9 @@ with its append-only companion
 [archive](../2026-08-30-c1016-ergodis-hadamard-quotient-synthesis-archive.md). Read the card on
 resume; it is the current-state map for this task.
 
-**Next**: add shrinking state-machine properties for the private tabu kernels,
-then address remaining measured candidate-scoring costs. All related retention
+**Next**: extend the private shrinking properties to automatic-kick and tabu-policy
+transitions, then address measured candidate-scoring costs. Eight scopes now have
+generated step/kick/reset checks; see `notes/2026-09-11-c1016-state-machine-properties.md`. All related retention
 repairs are validated at `96e04d5`; bounded carrier arithmetic lowers measured
 cycles 35.5–35.9%, with limitations recorded in
 `notes/2026-09-11-c1016-related-kicks-and-carrier-ranges.md`. The matched no-kick
