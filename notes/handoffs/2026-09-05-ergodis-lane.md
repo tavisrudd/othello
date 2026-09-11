@@ -48,11 +48,14 @@ User-selected next order: C1143 BB circuit distance (active), C1144 held-out
 QLDPC distance, C1145 hypergraph decoding, C1146 multidimensional allocation,
 C1147 temporal scheduling. Common protocol, historical corrections and sources:
 `../2026-09-11-ergodis-external-benchmark-programme.md`.
-C1143 input gate passed: seven pinned circuits and independent filter/census replay.
-Even the smallest filtered model has 2,592 fault coordinates, beyond the current
-1,792-coordinate provider. Next: bounded sparse fault-column execution preserving
-existing fast kernels; native solve remains open. Report:
-`../2026-09-11-c1143-bb-circuit-input-gate.md`.
+C1143 has a private sparse native pilot for intact fault columns; the existing
+dense provider remains unchanged. Development filtered model: six-fault witness
+independently replayed, weight-five exclusion agrees with the existing dense
+algorithm; independent negative oracle currently reaches three. Full model has
+a verified six-fault witness, with lower-bound search still open. Next: retained
+terminal-residual A/B and deeper bounds before frozen holdout evaluation. Reports:
+`../2026-09-11-c1143-bb-circuit-input-gate.md` and private
+`analysis/external-benchmarks/2026-09-11-sparse-pilot.md`.
 Use **TigerBlossom** for the decoder; legacy paths retain their historical names.
 
 ### C1130 — full native/JS/WASM capability and workflow parity (in progress)
