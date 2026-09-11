@@ -4868,8 +4868,17 @@
       "last": 1137,
       "purpose": "Draft focused certification integration and cold-reader A/B comparison",
       "sequence": 541
+    },
+    {
+      "count": 1,
+      "first": 1138,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 1138,
+      "purpose": "Review second Astra feedback without gradings; verify and integrate focused corrections and strengthenings",
+      "sequence": 542
     }
   ],
-  "next_id": 1138,
+  "next_id": 1139,
   "schema": "codex-task-id-allocations-v1"
 }
