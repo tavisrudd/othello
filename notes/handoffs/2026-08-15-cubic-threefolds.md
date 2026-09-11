@@ -110,7 +110,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-09-09-c1133-lean-completion-progress.md` records exact declarations
   and supplied geometric/source inputs. Universal residue coverage beyond
   checked matrix reductions remains fragmentary; optional L8 unclaimed.
-  No new Lean replay or manuscript claim promotion in this source pass.
+  The fresh audit replay above does not promote manuscript claim coverage.
   Card: `../cubic-threefolds-tasks/c1133-m1-major-upgrade-audit.md`.
 
 - **Framed companion specialization boundary (2026-09-08):** the independently

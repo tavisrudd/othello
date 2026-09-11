@@ -217,3 +217,17 @@ then assemble the already-proved center-ring and lattice transport into one
 explicit comparison interface with every geometric premise listed. This does
 not replace a focused mathematical audit of Lemmas 3.1 and 7.1. No full-source
 prose audit or blanket referee-readiness verdict is claimed.
+
+## Final release closeout
+
+Authority bundle `c0f7eee42`; full `make check` passes after all finite and
+README changes (`/tmp/claude-run-quiet/20260910-223659-make-C-cubic-stabilization-m1-check`).
+Standalone paper commit `76a54e5` passes its full gate
+(`/tmp/claude-run-quiet/20260910-223851-make-C-cubic-stabilization-m1-check`).
+Exporter verification passes: 351 tracked files, content SHA-256
+`ed6ee2728f97f34423b0d5bc521d9bb95d2115ef0e6062b8809862652503898b`.
+The 32-page authority and standalone PDFs are byte-identical, SHA-256
+`33d39d37048a7c99c2d01c1b8ee14d8265a604bb9a50fc969219e79ba2e18472`.
+Portfolio summary commit `2d4d918` contains a byte-identical README to its
+authority. Both quoted abstracts match the manuscript after notation
+conversion; all read-only replays and whitespace checks pass. Nothing pushed.
