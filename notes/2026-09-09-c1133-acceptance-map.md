@@ -14,10 +14,14 @@ owning claim–proof–novelty ledger or its formal-coverage registry.
 | C: generic cubic/quartic cancellation | Accepted deduction from B and Voisin | Very-general source; arbitrary smooth target in the same hypersurface family. Neither every-source cancellation nor integral Torelli is asserted. |
 | D: bounded-degree arithmetic cubic partners | Accepted deduction with primary arithmetic inputs checked | Fixed X/K, K finitely generated of characteristic zero, [L:K] bounded; finitely many geometric partner classes. Orr v4, Achter, fixed-degree polarization finiteness and cubic Torelli. Original NN Theorem 1.1 and principal-polarization consequence now verified from all four scanned pages; see the 2026-09-10 source closeout. No effectivity, height bound or twist count. |
 
-“Accepted” records this auditor's mathematical disposition, not an independent
-cold referee report, a Lean-complete claim, or a global novelty verdict. The
-finite evidence is reproducible; the geometric statements remain proofs from
-identified imported theorems.
+“Accepted” originally recorded this auditor's mathematical disposition. The
+2026-09-10 independent cold referee now supports the tested transport,
+vanishing, Hodge and downstream interfaces, and separately accepts the P¹
+replacement: `2026-09-10-c1133-hostile-referee.md`. Its independent reread did
+not cover the entire seventeen-family geometric package. This is not a
+Lean-complete claim, a global novelty verdict, or acceptance of an unassembled
+manuscript. The finite evidence is reproducible; the geometric statements
+remain proofs from identified imported theorems.
 
 ## Input ledger F0–A1
 
@@ -26,13 +30,13 @@ All filenames below have prefix `notes/2026-09-09-c1133-`.
 | Gate | Disposition and exact evidence |
 |---|---|
 | F0 reduced formal domains | Retain graded divisor-equation-reduced domains, polynomial occurrence units and the specified formal completions. `fixed-base-proof.md` supplies the operative fixed coordinates; the baseline/source QDM construction is imported. |
-| F1 operation comparisons | Iritani blowup Theorem 5.18 and Iritani–Koto projective-bundle Theorem 5.1 matched at partial-text depth. Global-generation/twisting and completed regular comparison hypotheses are explicit in `transport-vanishing-audit.md`. |
+| F1 operation comparisons | Core A–D now use Iritani blowup Theorem 5.18 plus the specialized P¹ proof in `2026-09-10-c1133-transport-input-reduction.md`: small GW product, full mixed-bulk persistence and explicit ruled-product potential. The independently reviewed replacement removes IK from core A–D. General projective-bundle statements retain IK and the older twisting/completion match. |
 | F2 faithful center transport | Direct proof using independent divisor characters and occurrence variables in `fixed-base-proof.md`. This is not an assertion that arbitrary quotienting preserves injection. |
 | F3 separation and lattices | Independent occurrence-unit shifts separate spectra. The original comparison and inverse are regular; the canonical rank-two modification is preserved. `transport-vanishing-audit.md`. |
 | P1 full supermodule | Odd bulk coordinates are set to zero while odd cohomology remains in the fiber. Full comparison, parity and pairing checked in `transport-vanishing-audit.md`. |
-| H1 equivariance/fixed base | Iritani's Hodge refinement fully read; projective-bundle equivariance proved by uniqueness of normalized Birkhoff factorization. The fixed-base injection is reproved directly. |
+| H1 equivariance/fixed base | Iritani's Hodge refinement fully read; fixed-base injection reproved directly. Core B uses small tensor identification and equivariant projector continuation for P¹, so no separate IK-equivariance adaptation is required. That adaptation remains available for the general bundle theorem. |
 | H2 representation constancy | Equivariant projectors and rational semisimple cancellation, with the unlabelled safe sum invariant under splitting-branch permutations. No separate rational descent of every scalar-labelled summand is needed. |
-| Q1 matrix input | Seventeen matrices and nine rank-two discriminants checked by two implementations; fifteen index-one/two source matrices matched entrywise and their period coefficients verified through degree eight. `finite-audit.md`, `geometric-source-audit.md` and manifests. |
+| Q1 matrix input | Seventeen matrices and nine rank-two discriminants checked by two implementations; fifteen index-one/two source matrices matched entrywise and periods verified through degree eight. Only the nine detected-family matrices are core premises; eight rational-control matrices are cross-checks. `finite-audit.md`, `geometric-source-audit.md` and manifests. |
 | D1 every smooth member | Classification exhaustion and all seventeen Hodge numbers verified in KP; CCGK identifies the families, with explicit special quartic and GM smooth bridges. Eight rational controls have all-member geometric scope. `geometric-source-audit.md`. |
 | T1 rational generic Torelli | Voisin v3 Theorem 0.2 and Remarks 0.1/0.3, with exact (d,n)=(3,4),(4,4) and source/target quantifiers checked. |
 | A1 arithmetic inputs | Achter arithmetic Jacobian, corrected Orr v4 Theorem 5.1, and finite polarization classes give `arithmetic-audit.md`. NN original-source gap closed on 2026-09-10; Orr's fourth-power alternative is a separate cross-check. |
@@ -42,7 +46,9 @@ Bittner v1 Theorem 2.1, extraction lines 66–111, recalls its characteristic-ze
 statement and projectivity over one endpoint for every intermediate variety.
 For projective endpoints this gives projective intermediates, so actual centers
 are smooth projective and the audited point/curve/surface vanishing applies.
-The original AKMW proof has not been independently read here.
+The 2026-09-10 referee and root also checked AKMW v4 Theorems 0.1.1 and
+0.3.1 directly (extraction 1–165), including projectivity. The full AKMW
+proof has not been independently read here.
 
 ## Integration gates G1–G9
 
@@ -132,4 +138,3 @@ acceptance does not certify priority or authorize manuscript promotion.
 - **Open:** priority of the precise A–D combinations and explicit motive pair;
   exact companion-import versions; final manuscript placement. Owners are the
   remaining C1133 literature and author-review stages.
-

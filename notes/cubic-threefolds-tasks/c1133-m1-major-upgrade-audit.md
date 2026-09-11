@@ -18,7 +18,7 @@ result becomes a core premise.
 exact published *Interpretations of Spectra* chapter. All 37 pages are read;
 cubic matrix/exponents, ordinary-irrationality statements and deferred
 proof references match the inspected thesis passages. Published access and
-load-bearing passage comparison are closed. Register: 89 sources (88
+load-bearing passage comparison are closed. Current register: 91 sources (90
 external, one local), nine external full-text reads (seven papers, two
 source scripts). The twelve S2 seed sets remain 59 memberships/39 works.
 
@@ -28,18 +28,25 @@ secondary credit, now via the fully read published source. Neither chapter
 is an A–D proof premise. Missing service coverage and unread base-loci body
 remain disclosed; no exhaustive priority claim is made.
 
-**Current user-requested scrutiny:**
-`notes/2026-09-10-c1133-hypothesis-economy.md` distinguishes public scope
-from the substantive faithful-map/lattice proof obligations. A is numerical;
-B carries Hodge transport; C/D reuse it. D's fourth-power route is optional.
-A narrower P¹-product proof could replace general projective-bundle machinery,
-but full mixed-bulk control (including elliptic curves) is not yet supplied.
-Do not remove that input on the strength of a small-locus computation.
-Highest-value next check: actual geometric occurrence maps versus the
-claimed reduced domains, regular inverse and common comparison field.
-The A/B/C/D hierarchy remains available for author assessment with bounded
-literature coverage. Pencil claims stay conditional; no new manuscript or
-independent-referee acceptance is asserted. Collaborator discussion is parked.
+**Completed user-requested scrutiny:**
+`notes/2026-09-10-c1133-transport-input-reduction.md` checks the actual maps
+and replaces the general projective-bundle input for core A–D, including
+full mixed-bulk and elliptic control. The independent baseline and focused
+referee passes accept the tested interfaces and replacement at their stated
+read boundaries: `notes/2026-09-10-c1133-hostile-referee.md`. No major flaw
+was demonstrated. Only nine quantum matrices are mandatory; exact Hodge
+dimensions and residue labels support optional finer signatures. A remains
+numerical, B supplies Hodge transport, C/D reuse B; D's fourth-power route
+is optional. Stronger general-bundle statements still require IK.
+
+**Next, author's integration question:**
+`notes/2026-09-10-c1133-integration-outline.md` proposes retaining the
+unconditional cubic headline and a short numerical main proof, complete
+technical appendices, a compact A section and a B–D Hodge companion.
+This is an editorial proposal, not an enacted manuscript reorganization.
+Consolidation and the separate all-member geometric read boundaries remain;
+no manuscript or formal-coverage promotion is asserted. Pencil claims stay
+conditional. Collaborator discussion is parked.
 
 Latest formal checkpoint: **371 public terminals, 133 machinery, 245 sources**;
 aggregate kernel build and actual axiom comparison passed in the prior

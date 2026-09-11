@@ -1,9 +1,13 @@
 # C1133 — actual transport maps and a narrower P¹ proof
 
 **Lane:** `cubic-threefolds`. **Date:** 2026-09-10.
-**Status:** replacement proof written; focused hostile review pending.
+**Status:** replacement proof accepted by the separate focused hostile review;
+core A–D lose the general projective-bundle input without weaker quantifiers.
 This is a mathematical audit supplement, not a manuscript or Lean promotion.
 The independent baseline referee owns `2026-09-10-c1133-hostile-referee.md`.
+No new external full-text read was completed by the root in this pass.
+The cumulative source register has 91 entries (90 external, one local),
+with nine external full-text reads (seven papers, two source scripts).
 
 ## 1. Actual maps, with the internal obligations exposed
 
@@ -120,6 +124,10 @@ continuation. The eight rational controls require only rational geometry.
 Let C have genus g≥1, set κ=2−2g, and use the flat even basis
 1,h,p,hp, where h is the point class of C and p that of P¹, with ∫hp=1.
 Write the full even bulk as v·1+a h+b p+c hp and Q=q_f exp(b).
+The horizontal numerical Novikov variable remains an independent spectator
+scalar in the intrinsic coefficient field; its absence from the potential
+below means all positive horizontal-degree genus-zero coefficients vanish,
+not that the variable has been specialized to zero or one.
 
 Every genus-zero map to C is constant, including maps from nodal trees.
 The degree-d moduli space is C times the corresponding P¹ space, with
@@ -176,7 +184,7 @@ blowup reduction finish the original surface-vanishing proof unchanged.
 
 ## 3. Dependency economy and unchanged scope
 
-If the focused review accepts §2, core A–D can omit the general
+The focused review accepts §2, so core A–D can omit the general
 Iritani–Koto projective-bundle reconstruction theorem and the separate
 equivariance adaptation for it. They use the elementary ruled calculation
 and small GW product formula instead. The endpoint statements retain
@@ -195,6 +203,36 @@ Rank-three logarithmic lattice theory, Stokes/Gamma enhancements and the
 conditional pencil companion are not core inputs. The remaining blowup,
 weak factorization, finite/geometric, rational Torelli and arithmetic inputs
 are doing actual work and are not removed by this argument.
+
+The finite/geometric packet can also be made smaller **without changing
+A–D**. Its seventeen-family table remains useful validation, but:
+
+- Only the **nine detected quantum matrices** are mandatory. The eight
+  rational-control matrices are consistency checks; their products are
+  rational from the geometric rationality input alone.
+- Exact values of all seventeen h^(2,1) are unnecessary. For A it suffices
+  that H³ is nonzero in the four even-rank-three cases g=2,3,4,5; the five
+  rank-two cases are detected numerically without an H³ dimension input.
+  B identifies the entire H³ representation and needs no numerical value
+  for its dimension. General Fano cohomological shape is still used.
+- Even the five nonzero discriminants need not be retained as separate
+  labels for A–D: the positive rank-two selector and its odd Hodge class
+  use only **δ≠0**. Their actual values and the four Hodge dimensions
+  support the additional signature-separation corollaries, so keep the
+  existing certified table available for those stronger optional outputs.
+- Ordinary irrationality theorems for the nine detected families are
+  historical comparison, not premises: one-stable irrationality implies
+  ordinary irrationality because a rational X has rational X×P¹.
+
+Classification exhaustion, every-member family/matrix identification and
+the eight all-member rationality assertions cannot be replaced by this
+dependency pruning. In particular, no deformation-invariance claim for
+rationality is introduced.
+The rational-control zeros in the checked table are then forced by
+dimension-three birational invariance (point and curve centers suffice)
+and their geometric rationality, since P³ has simple generic blocks.
+This explains the zeros independently of the numerical table; it does not
+recover rationality from those zeros.
 
 ## 4. Reproducible algebra check and boundary
 
@@ -216,10 +254,30 @@ arguments above and their identified inputs. No Lean replay occurred.
 
 ## 5. EJ + TT and Mystery ledger
 
-Closeout is pending the focused review. The useful unexpected feature is
-the exact cancellation of mixed c-dependence from the Euler operator after
-changing p to p′; the potential and Euler weight −1 explain it explicitly.
-The elliptic obstruction is thereby settled at the written-proof level.
-The remaining gate is independent scrutiny of the replacement's full-bulk
-continuation and source/lattice matching; no broader projective-bundle
-claim follows from this special calculation.
+Both hostile passes are complete: baseline `e8ad70084`, focused replacement
+`76269bc67`. The reviewer found no demonstrated major flaw in the audited
+interfaces and accepted the replacement. The only requested refinement was
+to keep horizontal Novikov parameters as independent spectators; §2.2 now
+does so. The reviewer independently derived the potential and tensor-lattice
+argument, rather than accepting the script's potential as an oracle.
+
+The explicit EJ + TT pass then pruned the finite premises in §3 and traced
+the rational-control zeros to geometric rationality and dimension-three
+invariance. These are task-owned improvements, not new research tasks.
+
+- **Settled:** actual independent occurrence coordinates, reduced-domain
+  injection and regular inverse at the inspected source interfaces.
+- **Settled:** the elliptic mixed-bulk obstruction. The exact Euler weight
+  −1 explains cancellation after p→p′; no accidental specialization is used.
+- **Settled:** the full-bulk endpoint continuation and original-lattice
+  matching needed for the narrower P¹ proof.
+- **Settled:** why control-table zeros need not be additional premises.
+- **Remaining gate:** consolidate the proved lemmas and dependencies into
+  the manuscript, using `2026-09-10-c1133-integration-outline.md` for the
+  author's requested accessible structure. The all-member geometric input
+  audit retains its existing read boundaries; this referee did not redo it.
+
+No genuine new mathematical mystery remains in the replacement argument.
+The independent baseline still recommends revision/consolidation before
+submission, not blanket acceptance of an unassembled paper. No broader
+projective-bundle claim follows from the special calculation.

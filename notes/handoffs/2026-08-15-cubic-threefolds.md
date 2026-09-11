@@ -49,17 +49,23 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Published spectra chapter supplied and fully read (37 pages); cubic and
   theorem passages match the inspected thesis, closing that source gap.
   Deferred proofs remain attributed to the in-preparation reference [29].
-  Current register: 89 sources, nine external full-text reads. Twelve S2
+  Current register: 91 sources, nine external full-text reads. Twelve S2
   seed sets: 59 memberships/39 works. The user-authorized triangulation
   still covers base-loci attribution through an explicit secondary chain;
   neither chapter is an A–D proof premise. No comprehensive priority verdict.
-  Current scrutiny: `../2026-09-10-c1133-hypothesis-economy.md`.
-  Next: check actual occurrence maps, reduced domains and regular inverses
-  for hidden specialization assumptions. A numerical/B Hodge separation
-  and the short D route reduce inputs. Replacing general projective-bundle
-  machinery by a P¹-product lemma remains a candidate, pending mixed-bulk
-  control. Core hierarchy remains reviewable; pencil claims conditional.
-  No independent-referee acceptance or manuscript promotion is asserted.
+  Actual-map and input reduction complete:
+  `../2026-09-10-c1133-transport-input-reduction.md`. Independent baseline
+  and focused referee passes accept the tested interfaces and P¹ replacement:
+  `../2026-09-10-c1133-hostile-referee.md`. Core A–D omit general IK bundle
+  reconstruction, including its equivariance adaptation; full mixed-bulk and
+  elliptic cases are proved. Nine quantum matrices suffice; exact signatures
+  remain optional. General-bundle statements retain IK. All-member geometric
+  inputs keep their separate read boundaries; no blanket paper acceptance.
+  Next: author's accessible integration proposal in
+  `../2026-09-10-c1133-integration-outline.md`: unchanged unconditional
+  cubic headline, short numerical proof, complete technical appendices,
+  compact A section and B–D Hodge companion. Architecture not enacted;
+  no manuscript/formal promotion. Pencil claims remain conditional.
   Collaborator discussion stays parked.
   Prior guarded formal checkpoint: **371 public terminals, 133 machinery,
   245 sources**; aggregate kernel and actual axiom comparison passed.

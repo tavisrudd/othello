@@ -1341,6 +1341,21 @@
       "read_scope": "2026-09-10: extracted lines 30–145, including formula (1), and 280–340, including Theorem 1. No full-proof read. Used for n=3 small quantum Künneth in the narrowed P¹ argument, not tensor factorization at mixed big bulk.",
       "role_status": "Primary source for the small GW product formula in the C1133 input-reduction proof.",
       "title": "The product formula for Gromov–Witten invariants"
+    },
+    {
+      "access": {
+        "bytes": 451510,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_math_9904135.pdf",
+        "sha256": "55bbc2c58f29d4b9dbe965035f80f3844f6968eaf98076ac625132ac3b3977a5",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_math_9904135.txt",
+        "url": "https://arxiv.org/pdf/math/9904135"
+      },
+      "key": "arXiv:math/9904135",
+      "read_depth": "partial",
+      "read_scope": "2026-09-10: independent hostile referee and root each read cached v4 extraction 1–165: Theorems 0.1.1 and 0.3.1, especially projectivity of intermediate varieties for projective endpoints. Neither independently read the full factorization proof. See hostile-referee.md read record.",
+      "role_status": "Primary statement check of the weak-factorization input; supersedes Bittner-only secondary attribution at this interface.",
+      "title": "Torification and factorization of birational maps",
+      "version_in_cached_header": "arXiv:math/9904135v4 [math.AG] 31 May 2000"
     }
   ],
   "external_full_text_breakdown": {

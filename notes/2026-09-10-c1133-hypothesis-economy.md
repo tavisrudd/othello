@@ -3,6 +3,11 @@
 **Lane:** `cubic-threefolds`. **Date:** 2026-09-10.
 **Question:** are A–D's hypotheses natural, do they conceal the conclusion,
 and can the input burden be reduced?
+**Later same-day resolution:** the candidate below is now proved and
+independently reviewed in `2026-09-10-c1133-transport-input-reduction.md`
+and `2026-09-10-c1133-hostile-referee.md`. Core A–D can remove the general
+projective-bundle input. The pending language below records the earlier
+design review; it is not the current frontier.
 **Disposition:** dependency/proof-design review, not a new certification of
 the combined argument. Existing mathematical acceptance remains at its
 recorded written-audit boundary. No new theorem or formal coverage is promoted.
