@@ -16,6 +16,40 @@
     "pinpoint": "Section 1.2, pp. 5--7 of the author PDF, especially the paragraph after Theorem 1.4",
     "used": "Birational invariance of A0 for smooth proper varieties, moving zero-cycles off a proper closed subset, and universal annihilation of A0 by a unirational parametrization degree."
   },
+  "beukers-schlickewei": {
+    "citation": "BeukersSchlickewei",
+    "conventions": [
+      {
+        "aspect": "group rank",
+        "matched": "Conjugate pairs of S_L-units have rank 1+|S_L|; S is explicitly finite.",
+        "requirement": "Finite rank subgroup of (C*)^2."
+      },
+      {
+        "aspect": "parameter domain",
+        "matched": "The unit group enforces this, and x!=y excludes the infinite parameter; recovery is injective.",
+        "requirement": "Solutions must have nonzero coordinates."
+      }
+    ],
+    "pinpoint": "Author version dated 8 January 2007, Theorem 1.1",
+    "used": "At most 2^(8(r+1)) solutions of x+y=1 in a multiplicative subgroup of rank r."
+  },
+  "cmz-prym": {
+    "citation": "CMZ",
+    "conventions": [
+      {
+        "aspect": "involution",
+        "matched": "The sign involution and discriminants are explicit; all nonzero rational t are smooth.",
+        "requirement": "A non-Eckardt involution fixes a line; cubic and conic discriminant components are smooth and transverse."
+      },
+      {
+        "aspect": "covers and polarization",
+        "matched": "The S3 closure is identified by its square class. Only geometric isogeny is claimed; arithmetic twists are -3 and -6.",
+        "requirement": "Use the actual component double covers, retaining the source polarization if asserting it."
+      }
+    ],
+    "pinpoint": "arXiv:2210.14397v2, Theorem 2.9",
+    "used": "Isogeny from the quotient of the genus-four Jacobian by the elliptic pullback, times the conic-cover Jacobian, to the cubic intermediate Jacobian."
+  },
   "ctcoray-unirational-degree": {
     "citation": "CTCoray",
     "conventions": [
@@ -49,6 +83,18 @@
     ],
     "pinpoint": "Corollary 1.4",
     "used": "A very general smooth complex cubic threefold is not stably rational."
+  },
+  "elliptic-potential-reduction": {
+    "citation": "Snowden",
+    "conventions": [
+      {
+        "aspect": "local field",
+        "matched": "Apply over number-field completions to each geometric elliptic factor; p is at least five.",
+        "requirement": "Elliptic curve over a DVR fraction field, allowing finite extension."
+      }
+    ],
+    "pinpoint": "Lecture 8, reduction under extensions and potentially good reduction criterion",
+    "used": "Elliptic potential toric rank is zero exactly when j is integral."
   },
   "high-degree-del-pezzo": {
     "citation": "VarillyAlvarado",
@@ -118,12 +164,46 @@
     "pinpoint": "arXiv:1110.2410v4, Theorem 4 and Lemma 5; Theorem 5 and Corollary 5 for prior examples",
     "used": "A birationally linear split-torus action has rational invariant field; prior nonlinearizable rank-two actions."
   },
+  "reduction-rank": {
+    "citation": "Reduction",
+    "conventions": [
+      {
+        "aspect": "base",
+        "matched": "Use rings of integers in finite extensions of Q_p and a common semistabilizing extension; no tame restriction.",
+        "requirement": "Regular noetherian integral one-dimensional base and dominant extension; semistability for base-change identity components."
+      },
+      {
+        "aspect": "invariant",
+        "matched": "The isogeny/quasi-inverse proof restricts to tori; arithmetic comparisons use only their dimensions.",
+        "requirement": "Identity components and torus dimensions, not entire Neron models or conductors."
+      }
+    ],
+    "pinpoint": "SGA 7 I, Expose IX, Proposition 2.2.6, Corollaries 2.2.7 and 3.3, Theorem 3.6",
+    "used": "Potential toric rank exists, is unchanged after further finite extension once semistable, and is invariant under geometric isogeny."
+  },
+  "rudd-hodge-conservation": {
+    "citation": "RuddM1",
+    "conventions": [
+      {
+        "aspect": "all members",
+        "matched": "Every smooth cubic threefold is included; no very-general hypothesis is introduced.",
+        "requirement": "Both cubics must belong to the listed detected Fano families."
+      },
+      {
+        "aspect": "rational structure",
+        "matched": "Only geometric isogeny is used; the companion proof is imported, not independently formalized here.",
+        "requirement": "The conclusion is a rational Hodge isomorphism, not an integral polarized identification."
+      }
+    ],
+    "pinpoint": "September 2026 manuscript, Theorem 1.3; bundled references/one-stabilization-september-2026.pdf",
+    "used": "Birational first stabilizations of smooth cubics have isomorphic rational third Hodge structures, hence isogenous intermediate Jacobians."
+  },
   "rudd-one-stabilization": {
     "citation": "RuddM1",
     "conventions": [
       {
         "aspect": "domain",
-        "matched": "The two displayed cubic threefolds are smooth after base change to C. For arbitrary F the manuscript descends a birational map and its inverse together to a finitely generated field embeddable in C.",
+        "matched": "All cubic applications are smooth; finite descent includes the coefficients, map, inverse and identities before embedding in C.",
         "requirement": "The theorem applies to every smooth complex cubic threefold."
       },
       {
@@ -132,8 +212,8 @@
         "requirement": "The cited theorem supplies irrationality of X times P1, and no part of the upper-bound argument depends on its quantum-D-module proof."
       }
     ],
-    "pinpoint": "Version 0.16.0, Theorem 1.1",
-    "used": "Irrationality of X times P1 for the two explicit cubic threefolds."
+    "pinpoint": "September 2026 manuscript, Theorem 1.1; bundled references/one-stabilization-september-2026.pdf",
+    "used": "Irrationality after one stabilization for every smooth member of the displayed three-parameter cubic family, and for the named TZ cubics."
   },
   "tz-cox-model": {
     "citation": "TZ",
@@ -168,6 +248,23 @@
     ],
     "pinpoint": "Propositions 5.1 and 5.3",
     "used": "The two cubic series and their quartic del Pezzo generic fibres."
+  },
+  "tz-family-action": {
+    "citation": "TZ",
+    "conventions": [
+      {
+        "aspect": "geometry",
+        "matched": "The family proof excludes exceptional lines through P.",
+        "requirement": "Blowing up the rational point gives the smooth cubic/conic-bundle model."
+      },
+      {
+        "aspect": "signed representation",
+        "matched": "The four generators are the exact source generators; stable permutation restricts to subgroups.",
+        "requirement": "The Picard representation, not merely abstract group order, must match."
+      }
+    ],
+    "pinpoint": "arXiv:2608.20029v2, Section 4 and end of Proposition 5.3",
+    "used": "The signed components encode the five ruling pairs, and the exact subgroup displayed is the I3 Picard action."
   },
   "tz-tangent-projection": {
     "citation": "TZ",

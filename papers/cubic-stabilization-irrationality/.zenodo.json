@@ -1,6 +1,6 @@
 {
-  "title": "Sharpness of Irrationality after One Stabilization for Cubic Threefolds",
-  "description": "The irrationality of X times P^1 for every smooth complex cubic threefold X is sharp: two explicit smooth cubic threefolds over Q are rational after multiplication by P^2. For each example, the least m for which X times P^m is rational is exactly two, over every characteristic-zero ground field. We prove more generally that if k has characteristic zero and S/k is a smooth quartic del Pezzo surface that has a rational point and whose geometric Picard lattice is stably permutation, then S times A^2, equivalently S times P^2, is k-rational. Applying this theorem to both Tschinkel–Zhang series of smooth cubic hypersurfaces gives a uniform P^2 rationality bound. Consequently there are smooth projective nonrational fourfolds Y over Q for which Y times A^1 is rational, answering the affine-line stabilization question raised there. The release includes an exact-arithmetic certificate, identities certifying the six empty localized cases, and generated manuscript values for the four-open tangent-section calculation; the new rationality theorem is not formalized in Lean.",
+  "title": "Two-Variable Rationalization and Sharp Stabilization of Cubic Threefolds",
+  "description": "A three-parameter family of smooth cubic threefolds has exact stabilization level two over every extension of its characteristic-zero ground field. The independent construction proves two-variable rationality for every stably rational smooth quartic del Pezzo surface via a saturated rank-three torus quotient of its projective Cox model. In an explicit rational pencil, five elliptic isogeny factors give a local toric-rank formula separating a positive-density squarefree integer family. The companion irrationality and Hodge-conservation theorems give exact levels and infinitely many pairwise nonbirational irrational fourfolds, all rational after one further projective-line factor. Exact computations accompany the conventional proof; no end-to-end Lean formalization is claimed.",
   "creators": [
     {
       "name": "Rudd, Tavis",
@@ -25,17 +25,14 @@
     "constructive rational quotients",
     "cubic threefolds",
     "birational geometry",
-    "affine-line stabilization"
+    "affine-line stabilization",
+    "intermediate Jacobians",
+    "potential toric rank"
   ],
   "notes": "Correspondence: tavisrudd@damnsimple.com. Main source: cubic_stabilization_irrationality.tex; manuscript PDF: cubic_stabilization_irrationality.pdf. Reproduce the manuscript and exact certificate with `nix develop --command make check`.",
   "related_identifiers": [
     {
       "identifier": "https://doi.org/10.48550/arXiv.2608.20029",
-      "relation": "references",
-      "resource_type": "publication-preprint"
-    },
-    {
-      "identifier": "https://doi.org/10.5281/zenodo.22132303",
       "relation": "references",
       "resource_type": "publication-preprint"
     },

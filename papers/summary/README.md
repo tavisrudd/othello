@@ -63,22 +63,15 @@ results.
   is confined to optional extensions.
   [One-Stabilization Irrationality and Hodge Conservation for Fano Threefolds](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/irrationality_after_one_stabilization.pdf).
 
-- **Sharpness at the next stabilization.** The preceding universal bound is
-  sharp: two explicit smooth cubic threefolds over `Q` have stabilization
-  level exactly two over every characteristic-zero ground field.  The reusable theorem proves that
-  every smooth quartic del Pezzo surface over a characteristic-zero field
-  with a rational point and stably permutation geometric Picard lattice
-  becomes rational after adjoining two variables.  Applied to the two
-  Tschinkel--Zhang series, it proves that every member is rational over `Q`
-  after multiplication by `P²` and produces nonrational smooth projective
-  fourfolds `Y` with `Y × A¹` rational, answering the affine-line stabilization
-  question raised in that paper. The associated generic del Pezzo surfaces
-  also have exact level two. A finite-index version of the slice criterion
-  gives parametrization degrees dividing the lattice index, with universal
-  `CH₀`-triviality when admissible indices are coprime. An exact lattice
-  calculation excludes a descended rank-four weight selection for the
-  full `I₃` action in this Cox embedding.
-  [Sharpness of Irrationality after One Stabilization for Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
+- **Sharpness at the next stabilization.** A three-parameter family of smooth
+  cubic threefolds has exact stabilization level two over every extension of
+  its characteristic-zero ground field. The independent surface theorem
+  rationalizes every stably rational smooth quartic del Pezzo surface after
+  two variables. In an explicit rational pencil, potential toric ranks of
+  intermediate Jacobians distinguish a positive-density squarefree integer
+  family. Hodge conservation gives pairwise nonbirational irrational
+  fourfolds whose products with one further projective line are all rational.
+  [Two-Variable Rationalization and Sharp Stabilization of Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
 
 - **Integral divisor products on the nonstandard `A₅` cubic pencil.** An
   all-degree graph-saturation theorem makes the primitive minimal class of
@@ -240,10 +233,10 @@ the theorem column.
 | One-Stabilization Irrationality and Hodge Conservation for Fano Threefolds | Birational first stabilizations imply `X ≅ Y`. | A very general complex cubic or quartic threefold `X` and any smooth threefold `Y` of the same degree. |
 | One-Stabilization Irrationality and Hodge Conservation for Fano Threefolds | Finitely many geometric cubic partner classes after first stabilization. | A fixed cubic over a finitely generated characteristic-zero field and partners over extensions of bounded degree; no finiteness of twists asserted. |
 | One-Stabilization Irrationality and Hodge Conservation for Fano Threefolds | The exponent count and residue spectrum extend to additive homomorphisms on `K₀(Var_C)/(L − 1)`. | All complex varieties, via the smooth-projective blow-up relations; no multiplicativity asserted. |
-| Sharpness of Irrationality after One Stabilization for Cubic Threefolds | `S × A²`, equivalently `S × P²`, is rational. | Every smooth quartic del Pezzo surface over a characteristic-zero field with a rational point and stably permutation geometric Picard lattice. |
-| Sharpness of Irrationality after One Stabilization for Cubic Threefolds | `X_{j,r} × P²` is rational over `Q`. | Both Tschinkel--Zhang cubic series, for every `r ≥ 0` and `j ∈ {1,3}`. |
-| Sharpness of Irrationality after One Stabilization for Cubic Threefolds | The two specified cubics have exact stabilization level two, as do their associated generic del Pezzo surfaces. | Every characteristic-zero field `F`; the generic surfaces are over `F(t)`. |
-| Sharpness of Irrationality after One Stabilization for Cubic Threefolds | A lattice index `d` gives a dominant rational parametrization of degree dividing `d`; coprime admissible indices imply universal `CH₀`-triviality of a smooth proper model. | Torus quotients satisfying all the stated descent, tangent-projection and transversality hypotheses, in characteristic zero. |
+| Two-Variable Rationalization and Sharp Stabilization of Cubic Threefolds | `S × A²`, equivalently `S × P²`, is rational. | Every smooth quartic del Pezzo surface over a characteristic-zero field with a rational point and stably permutation geometric Picard lattice. |
+| Two-Variable Rationalization and Sharp Stabilization of Cubic Threefolds | `X_{j,r} × P²` is rational over `Q`. | Both Tschinkel--Zhang cubic series, for every `r ≥ 0` and `j ∈ {1,3}`. |
+| Two-Variable Rationalization and Sharp Stabilization of Cubic Threefolds | The smooth three-parameter cubic family has exact stabilization level two. | Every extension of the characteristic-zero coefficient field; smoothness is required. |
+| Two-Variable Rationalization and Sharp Stabilization of Cubic Threefolds | A lattice index `d` gives a dominant rational parametrization of degree dividing `d`; coprime admissible indices imply universal `CH₀`-triviality of a smooth proper model. | Torus quotients satisfying all the stated descent, tangent-projection and transversality hypotheses, in characteristic zero. |
 | Integral Divisor Products on the Nonstandard A₅-Invariant Cubic Pencil | Finite-etale graph slopes make every divided power of the marked graph divisor lattice an ordinary integral divisor product. | Every marked finite-etale graph quotient of an elliptic power satisfying the stated local depth and self-adjointness hypotheses, in every degree. |
 | Integral Divisor Products on the Nonstandard A₅-Invariant Cubic Pencil | Every smooth pencil member is universally `CH₀`-trivial; after multiplication by `P¹`, it remains universally `CH₀`-trivial and is irrational. | Every smooth member of the nonstandard `A₅`-invariant cubic pencil. |
 | Framed Formal Monodromy of Cubic Threefolds | The primitive-sixth framed-monodromy count of the numerical small even quantum connection equals two. | Every smooth complex cubic threefold `X`. |
@@ -277,7 +270,7 @@ boundary, and reproducible entry points.
 | Paper | Area | Central result | Public entry |
 |---|---|---|---|
 | One-Stabilization Irrationality and Hodge Conservation for Fano Threefolds | Algebraic geometry / birational geometry | Every smooth cubic remains irrational after `P¹`; one stabilization preserves rationality across all seventeen Picard-rank-one Fano families, and birational first stabilizations in the nine irrational families conserve rational `H³`. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
-| Sharpness of Irrationality after One Stabilization for Cubic Threefolds | Algebraic geometry / birational geometry | The universal one-stabilization irrationality bound is sharp: two specified smooth cubic threefolds have exact stable-rationality level two over every characteristic-zero field; the reusable surface theorem proves `S × A²` rational from a rational point and a stably permutation geometric Picard lattice. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
+| Two-Variable Rationalization and Sharp Stabilization of Cubic Threefolds | Algebraic geometry / birational geometry | A three-parameter smooth cubic family has exact level two; an explicit pencil gives pairwise nonbirational first stabilizations on a positive-density integer set, while all second stabilizations are rational. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | Integral Divisor Products on the Nonstandard A₅-Invariant Cubic Pencil | Algebraic geometry / algebraic cycles | Every smooth member of the non-isotrivial pencil is universally `CH₀`-trivial; after multiplication by `P¹`, it remains universally `CH₀`-trivial and is irrational. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/six-axis-cubic-pencil/six_axis_cubic_pencil.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
 | Framed Formal Monodromy of Cubic Threefolds | Algebraic geometry / quantum cohomology | The unconditional count is `ν₆(X) = 2` and satisfies the projective-space product formula; its operation formulas and birational invariance remain conditional on two explicit hypotheses. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
 | High-Weight Cosets of Generalized and Extended Reed–Solomon Codes | Coding theory | Arbitrary-redundancy classification of the top two coset-weight shells for point-deleted GRS/EGRS codes, with exact deep-hole, MDS/NMDS extension, and aggregate enumerator consequences. | [PDF](https://github.com/tavisrudd/high-weight-grs-cosets/blob/main/high-weight-grs-cosets.pdf) · [repo](https://github.com/tavisrudd/high-weight-grs-cosets) |
@@ -380,44 +373,26 @@ written proofs or cited inputs; this is not an end-to-end Lean proof.
 
 ---
 
-#### Sharpness of Irrationality after One Stabilization for Cubic Threefolds
+#### Two-Variable Rationalization and Sharp Stabilization of Cubic Threefolds
 
 [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-irrationality)
 
-**Standout result.** The theorem that every smooth complex cubic threefold
-remains irrational after multiplication by `P¹` is sharp.  Two explicit
-smooth cubic threefolds over `Q` become rational after multiplication by
-`P²`, so their stabilization level is exactly two over both `Q` and `C`.
+**Standout result.** A three-parameter family has exact stabilization level
+ two. An explicit pencil gives infinitely many pairwise nonbirational
+ irrational fourfolds, each rational after one further projective-line factor.
 
-> *Abstract.* The irrationality of `X × P¹` for every smooth complex cubic
-> threefold `X` is sharp: two explicit smooth cubic threefolds over `Q` are
-> rational after multiplication by `P²`. For each, the least `m` such that
-> `X × P^m` is rational is two, over both `Q` and `C`. We prove more generally
-> that if `k` has characteristic zero, `S` is a smooth quartic del Pezzo
-> surface with `S(k)` nonempty, and `Pic(S_kbar)` is a stably permutation
-> Galois module, then `S × A²` is `k`-rational. We identify a rational quotient
-> of the projective Cox model by a saturated rank-three subtorus; the residual
-> two-dimensional torus is rational. Applying this theorem to the quartic del
-> Pezzo fibrations of Tschinkel and Zhang, we prove that every member of both
-> cubic series is rational over `Q` after multiplication by `P²`, giving a
-> uniform two-dimensional bound for their stable-rationality results.
-> Consequently the stabilization level is two on explicit examples in
-> cubic-threefold moduli and infinite at a very general point. We also obtain
-> smooth projective fourfolds `Y/Q` that remain nonrational over `C` but for
-> which `Y × A¹` is rational over `Q`.
+> *Abstract.* We construct a three-parameter family of smooth cubic threefolds whose least rational stabilization has dimension two over every extension of their characteristic-zero ground field. The construction rests on a surface theorem: every stably rational smooth quartic del Pezzo surface becomes rational after multiplication by the affine plane. A saturated rank-three subtorus of the projective Cox model has rational quotient, and equivariant torsor splitting leaves a rational two-dimensional torus. The cubic lower bound is supplied by the one-stabilization irrationality theorem. In an explicit rational pencil, we decompose intermediate Jacobians up to geometric isogeny into five elliptic factors and compute their potential toric ranks. These ranks separate a positive-density set of squarefree integral parameters. Hodge conservation then gives infinitely many pairwise nonbirational irrational fourfolds, each rational after one further projective-line factor. The rationalization and arithmetic calculations are independent of the two companion obstruction theorems.
 
-**Delivers.** Exact stabilization level two for two explicit cubic
-threefolds; a two-variable rationality theorem for quartic del Pezzo surfaces;
-a constructive rational-torus-quotient criterion; a uniform `P²` bound for
-both Tschinkel--Zhang series; and the affine-line fourfold consequence.
+**Delivers.** Uniform two-variable rationalization, exact cubic stabilization
+levels, geometric isogeny separation and finite rational pencil partner sets.
+The appendices retain finite-index quotient and torus-action consequences.
 
-**Who cares.** Researchers in cubic hypersurfaces, rationality questions,
-quartic del Pezzo surfaces, universal torsors, Cox rings, and algebraic tori.
+**Who cares.** Researchers in cubic hypersurfaces, birational geometry,
+quartic del Pezzo surfaces, universal torsors and arithmetic Jacobians.
 
-**Why it matters.** It identifies the first rational stabilization of
-explicit stably rational but nonrational cubic threefolds.  Together with the
-very-general stable-irrationality theorem, it shows that the stabilization
-level on smooth cubic-threefold moduli takes both the values two and infinity.
+**Why it matters.** The family identifies the first rational stabilization;
+its arithmetic subfamily exhibits infinitely many birational distinctions
+that disappear after one further projective-line factor.
 
 ---
 

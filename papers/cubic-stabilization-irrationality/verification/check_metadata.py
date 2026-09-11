@@ -46,7 +46,6 @@ assert zenodo["creators"] == [{
 }]
 assert {item["identifier"] for item in zenodo["related_identifiers"]} == {
     "https://doi.org/10.48550/arXiv.2608.20029",
-    "https://doi.org/10.5281/zenodo.22132303",
     "https://doi.org/10.48550/arXiv.2507.15704",
 }
 assert "cubic threefolds" in zenodo["keywords"]
@@ -102,6 +101,8 @@ statement_pattern = re.compile(
 )
 statements = {}
 expected_statement_evidence = {
+    "thm:uniform-cubic-family": {"sharpness-family-arithmetic"},
+    "prop:pencil-local-rank": {"sharpness-family-arithmetic"},
     "thm:cubic-level": {"quartic-del-pezzo-slice-cover"},
     "thm:two-variable": {"quartic-del-pezzo-slice-cover"},
     "prop:tangent-section": {"quartic-del-pezzo-slice-cover"},

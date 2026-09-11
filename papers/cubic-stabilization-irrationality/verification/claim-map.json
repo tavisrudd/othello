@@ -59,6 +59,16 @@
     "hypotheses": "F has characteristic zero and V times P1 is F-birational to X_j times P1 for j=1 or 3.",
     "objects": "A geometrically integral threefold V/F and one specified cubic X_j after extension to F."
   },
+  "cor:rational-pencil-partners": {
+    "cautions": "Finite necessary candidate set, not an implemented solver or exact classification; no assertion for all complex parameters.",
+    "conclusion": "Only finitely many rational parameters can be partners.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "474261774291ff2749504628dfd5c612a39f2314eb3096aa137c220c954c1c76",
+    "environment": "corollary",
+    "hypotheses": "Fix a nonzero rational parameter in this pencil.",
+    "objects": "Rational parameters with isogenous intermediate Jacobian or birational first stabilization."
+  },
   "cor:torus-linearization-level": {
     "cautions": "Uses the cubic lower and upper bounds. These are rational actions, not regular polynomial actions. The existence of nonlinearizable rank-two examples was already known to Popov.",
     "conclusion": "Exact trivial-stabilization levels two for the rank-two action and one for each rank-one restriction; every finite-subgroup quotient over C is rational.",
@@ -78,6 +88,16 @@
     "environment": "proposition",
     "hypotheses": "The field has characteristic zero; the generic fibre is birational over k(B) to a smooth quartic del Pezzo surface with a rational point and stably permutation geometric Picard lattice.",
     "objects": "A dominant rational map Y to B of geometrically integral varieties and their stabilization levels."
+  },
+  "prop:pencil-local-rank": {
+    "cautions": "Use geometric isogeny and potential reduction, not original-field conductor or untwisted Frobenius traces.",
+    "conclusion": "Smoothness and ranks 1 at numerator primes, 3 at discriminant primes, 0 otherwise.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "9afa6c8a2cfd8f2eccee4e98c93c5de3a8c020a29c48abee1a636d2c5b086834",
+    "environment": "proposition",
+    "hypotheses": "Nonzero reduced rational t=a/b, b>0, p>=5.",
+    "objects": "Intermediate Jacobian and eventual semistable toric ranks of the rational pencil."
   },
   "prop:rank-four-descent": {
     "cautions": "Exact program-checked lattice assertions and a descent proof in the text, not a Lean theorem. This excludes only the stated weight-space criterion in this embedding with full I3, not other embeddings, nonlinear sections, or smaller Galois images.",
@@ -149,6 +169,16 @@
     "hypotheses": "Characteristic zero and all hypotheses of the unimodular quotient criterion, replacing the basis condition by a sublattice of finite index d.",
     "objects": "A generically free projectively linear torus action, selected weights, tangent projection and descended linear section."
   },
+  "thm:separated-pencil": {
+    "cautions": "Separation of products imports rational Hodge conservation. Density is elementary; no height theorem or all-parameter cancellation.",
+    "conclusion": "Jacobians geometrically nonisogenous, first stabilizations nonbirational over C, second stabilizations rational over Q; density 3/pi^2.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "89c6092608994a715b57183177e22cc11efc7878ad4b6282b8062eb3018d25b1",
+    "environment": "theorem",
+    "hypotheses": "Positive distinct squarefree integers prime to six.",
+    "objects": "Squarefree integral parameters in the explicit cubic pencil."
+  },
   "thm:torus-quotient": {
     "cautions": "A finite-index set of weight differences would give a finite orbit cover and does not suffice.",
     "conclusion": "The Rosenlicht quotient Z/T is k-rational.",
@@ -168,5 +198,15 @@
     "environment": "theorem",
     "hypotheses": "Characteristic zero, S smooth quartic del Pezzo, S(k) nonempty, and geometric Picard lattice stably permutation.",
     "objects": "A quartic del Pezzo surface and a two-dimensional stabilization."
+  },
+  "thm:uniform-cubic-family": {
+    "cautions": "Upper bound independent of companion; lower bound imported. Signed Picard representation checked in text; moduli rank is exact symbolic computation.",
+    "conclusion": "Exact level two after every extension; complex moduli image dimension three.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "6a1a278802a9182e91eb9cfc2276bbec301da60578ae9dbf5d6acf6c3482ccec",
+    "environment": "theorem",
+    "hypotheses": "Characteristic-zero k; lambda,mu,nu in k; cubic smooth; any K/k. Moduli-image clause concerns the parameter family over C.",
+    "objects": "Smooth displayed three-parameter cubic and its complex moduli image."
   }
 }

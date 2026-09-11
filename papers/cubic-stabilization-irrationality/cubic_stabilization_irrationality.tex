@@ -20,11 +20,11 @@
 \newcommand{\ks}{k^{\mathrm s}}
 \newcommand{\Pic}{\operatorname{Pic}}
 
-\title{Sharpness of Irrationality after One Stabilization for Cubic Threefolds}
+\title{Two-Variable Rationalization and Sharp Stabilization of Cubic Threefolds}
 \author{Tavis Rudd\thanks{\texttt{tavisrudd@damnsimple.com}}}
-\date{August 2026}
+\date{September 2026}
 \hypersetup{
-  pdftitle={Sharpness of Irrationality after One Stabilization for Cubic Threefolds},
+  pdftitle={Two-Variable Rationalization and Sharp Stabilization of Cubic Threefolds},
   pdfauthor={Tavis Rudd},
   pdfsubject={Exact stable-rationality level of explicit cubic threefolds},
   pdfkeywords={cubic threefolds, quartic del Pezzo surfaces, stable rationality, universal torsors, Neron-Severi tori, constructive rational quotients, birational geometry}
@@ -34,25 +34,21 @@
 \maketitle
 
 \begin{abstract}
-The irrationality of \(X\times\PP^1\) for every smooth complex cubic
-threefold \(X\) is sharp: two explicit smooth cubic threefolds over
-\(\mathbf Q\) are rational after multiplication by \(\PP^2\).  For each,
-the least \(m\) such that \(X\times\PP^m\) is rational is two over every
-characteristic-zero ground field.  We prove more
-generally that if \(k\) has characteristic zero, \(S\) is a smooth quartic del
-Pezzo surface with \(S(k)\ne\varnothing\), and \(\Pic(S_{\bar k})\) is a
-stably permutation Galois module, then \(S\times\A^2\) is \(k\)-rational.  We
-construct a saturated rank-three subtorus acting on the projective Cox model
-and prove that the resulting quotient is rational; the residual two-dimensional
-torus is rational.  Applying
-this theorem to the quartic del Pezzo fibrations of Tschinkel and Zhang, we
-prove that every member of both cubic series is rational over \(\mathbf Q\)
-after multiplication by \(\PP^2\), showing uniformly that two stabilizing
-dimensions suffice.  Consequently
-the stabilization level is two on explicit examples in cubic-threefold moduli
-and infinite at a very general point.  We also obtain smooth projective
-fourfolds \(Y/\mathbf Q\) that remain nonrational over \(\mathbf C\) but for
-which \(Y\times\A^1\) is rational over \(\mathbf Q\).
+We construct a three-parameter family of smooth cubic threefolds whose
+least rational stabilization has dimension two over every extension of
+their characteristic-zero ground field. The construction rests on a
+surface theorem: every stably rational smooth quartic del Pezzo surface
+becomes rational after multiplication by the affine plane. A saturated
+rank-three subtorus of the projective Cox model has rational quotient,
+and equivariant torsor splitting leaves a rational two-dimensional torus.
+The cubic lower bound is supplied by the one-stabilization irrationality
+theorem. In an explicit rational pencil, we decompose intermediate
+Jacobians up to geometric isogeny into five elliptic factors and compute
+their potential toric ranks. These ranks separate a positive-density set
+of squarefree integral parameters. Hodge conservation then gives infinitely
+many pairwise nonbirational irrational fourfolds, each rational after one
+further projective-line factor. The rationalization and arithmetic
+calculations are independent of the two companion obstruction theorems.
 \end{abstract}
 
 \noindent\textbf{Keywords.} cubic threefold; quartic del Pezzo surface;
@@ -61,51 +57,43 @@ point; algebraic torus; rationality after affine-line stabilization.
 
 \section{Introduction and main results}
 
-Tschinkel and Zhang constructed explicit stably rational smooth cubic
-threefolds over \(\mathbf Q\) \cite[Theorem~1.3]{TZ}.  On the other hand, the
-one-stabilization theorem shows that every smooth complex cubic threefold
-remains irrational after multiplication by \(\PP^1\)
-\cite[Theorem~1.1]{RuddM1}.  Thus the stabilization level of the examples of
-Tschinkel and Zhang is at least two.  We prove that this lower bound is
-attained by two of their examples.
-
-For a geometrically integral variety \(V/k\), put
+We ask for the least dimension of a projective-space factor that makes a
+stably rational variety rational. For a geometrically integral variety \(V/k\), write
 \[
- \ell_k(V)=\min\{m\geq0:V\times\A^m\text{ is }k\text{-rational}\}.
+ \ell_k(V)=\min\{m\geq0:V\times\PP^m\text{ is }k\text{-rational}\},
 \]
-If the set is empty, put \(\ell_k(V)=\infty\).  Since \(\A^m\) and
-\(\PP^m\) are birational, either factor gives the same invariant.  This is
-the level of stable rationality considered by Tschinkel and Zhang
-\cite[p.~13]{TZ}.
-Rationality is preserved by extension of the ground field, so
-\(\ell_{\mathbf Q}(V)\geq\ell_{\C}(V_{\C})\) for \(V/\mathbf Q\).
+with value infinity if the set is empty. Affine space gives the same
+definition. We determine this level on a three-parameter family of smooth
+cubic threefolds and distinguish infinitely many of their first stabilizations.
 
-Consider the smooth cubic threefolds
-\begin{align}
-X_1:\quad &(x_4-2x_3)x_1^2+3(x_4+2x_3)x_2^2
- +3x_3^2x_4-x_4^3+x_5^3=0, \label{eq:cubic-one}\\
-X_3:\quad &x_4(x_1^2+2x_1x_2)+x_3(x_1^2+x_1x_2+x_2^2)
- +x_3^3-x_3x_4^2+x_4^3+2x_5^3=0. \label{eq:cubic-three}
-\end{align}
+Let \(k\) have characteristic zero and put
+\(B(x,y)=\lambda x^3+\mu x^2y+\nu y^3\), with \(\lambda,\mu,\nu\in k\).
+Consider the cubic \(\mathcal X_B\subset\PP^4_k\) given by
+\begin{equation}
+ (z-x)u^2+6yuv+3(z+x)v^2-z^3
+ +\tfrac34(x^2+3y^2)z+B(x,y)=0.
+ \label{eq:uniform-cubic-family}
+\end{equation}
 
-\begin{theorem}[Exact level for the cubic threefolds]
-\label{thm:cubic-level}
+\begin{theorem}[A family of exact level two]
+\label{thm:uniform-cubic-family}
 \coverage{absent}%
-\imports{rudd-one-stabilization,tz-cubic-series}%
-\evidence{quartic-del-pezzo-slice-cover}%
-For every field \(F\) of characteristic zero and \(j\in\{1,3\}\),
+\uses{thm:two-variable}%
+\imports{rudd-one-stabilization,tz-type-classification,tz-family-action}%
+\evidence{sharpness-family-arithmetic}%
+If \(\mathcal X_B\) is smooth, then for every field extension \(K/k\),
 \[
- \ell_F((X_j)_F)=2.
+ \ell_K((\mathcal X_B)_K)=2.
 \]
-Thus \((X_j)_F\times\PP^1\) is not \(F\)-rational, whereas
-\((X_j)_F\times\PP^2\) is \(F\)-rational.
+The family over \(\C\) has a three-dimensional image in cubic moduli.
 \end{theorem}
 
-The following surface theorem supplies the upper bound in
-Theorem~\ref{thm:cubic-level}.
-
-Recall that a Galois lattice \(M\) is stably permutation if
-\(M\oplus P\simeq P'\) for some permutation Galois lattices \(P\) and \(P'\).
+The upper bound comes from a quartic del Pezzo fibration. We construct a
+rational quotient of its projective Cox model by a rank-three torus; the
+remaining torus has dimension two and is rational. This proves the following
+surface theorem independently of any irrationality obstruction. A Galois
+lattice is \emph{stably permutation} if it becomes a permutation lattice
+after adding a permutation lattice.
 
 \begin{theorem}[Two-dimensional stabilization]
 \label{thm:two-variable}
@@ -123,100 +111,102 @@ are \(k\)-rational.  In particular, this holds for every stably
 \(k\)-rational smooth quartic del Pezzo surface.
 \end{theorem}
 
-Write \(Z\) for the projective Cox model attached to the universal torsor
-trivial over a fixed point of \(S(k)\).  The new ingredient is a saturated rank-three subtorus \(T_3\) of the
-rank-five torus acting on \(Z\), chosen so that \(Z/T_3\) is rational and the
-residual torus has dimension two.  The dimensions are
+
+The lower bound is the theorem that every smooth complex cubic threefold
+remains irrational after multiplication by \(\PP^1\), proved in
+\emph{One-Stabilization Irrationality and Hodge Conservation for Fano
+Threefolds} \cite[Theorem~1.1]{RuddM1}. Finite descent transfers that
+obstruction to characteristic-zero fields. Thus the rationalization proved
+here attains the first possible level.
+
+An arithmetic subfamily shows that the first stabilization retains many
+distinctions which the second erases. Write \(\mathcal X_t\) for
+\eqref{eq:uniform-cubic-family} with \(B=ty^3\), and let
+\(\mathcal T\) be the positive squarefree integers prime to six.
+
+\begin{theorem}[Separated first stabilizations]
+\label{thm:separated-pencil}
+\coverage{absent}%
+\uses{thm:uniform-cubic-family,prop:pencil-local-rank}%
+\imports{rudd-hodge-conservation}%
+For distinct \(m,n\in\mathcal T\), the intermediate Jacobians
+\(J(\mathcal X_m)\) and \(J(\mathcal X_n)\) are not isogenous over
+\(\C\), and \(\mathcal X_m\times\PP^1\) and
+\(\mathcal X_n\times\PP^1\) are not birational over \(\C\).
+Every \(\mathcal X_n\times\PP^2\) is rational over \(\mathbf Q\).
+Moreover,
 \[
- \dim(Z/T_3)=7-3=4=2+2=\dim S+\dim(T_0/T_3).
+ \#\{n\leq H:n\in\mathcal T\}
+ =\frac{3}{\pi^2}H+O(\sqrt H).
 \]
-This identifies the two stabilizing dimensions in the construction.
+\end{theorem}
 
-The use of universal torsors to prove stable rationality goes back to
-Beauville, Colliot-Th\'el\`ene, Sansuc, and Swinnerton-Dyer \cite{BCTSSD}.
-Tschinkel and Zhang prove the rationality of universal torsors over quartic del
-Pezzo surfaces and classify the four minimal Galois types relevant to stable
-rationality.  We use their Cox model and its one-apparent-double-point
-property, Galois classification, and generic splitting of the universal torsor
-\cite{TZ}.  The tangent-projection theorem for smooth varieties with one
-apparent double point is due to Ciliberto, Mella, and Russo
-\cite[Corollary~4.2]{CMR}.  Because \(Z\) may be singular, we use the stronger
-form proved in \cite[Theorem~2.4]{TZ}.
-
-When \(S(k)\ne\varnothing\), the stable-permutation hypothesis is condition~(1)
-of \cite[Corollary~4.3]{TZ}; \cite[Proposition~4.1 and Lemma~4.2]{TZ}
-identify its equivalent forms, and stable rationality implies it by
-\cite[Theorem~2.2]{Manin1966}.  The resolution in \cite[p.~13]{TZ} gives a
-uniform stabilization bound of eleven.  We lower this bound to two for all
-four Galois types.  For type \(I_0\), this bound was already proved by
-Shepherd-Barron \cite{ShepherdBarron}; see also \cite[Remark~4.4]{TZ}.
-
-For \(r\geq0\), let \(X_{j,r}\subset\PP^{r+4}_{\mathbf Q}\) be obtained
-from equation \eqref{eq:cubic-one} or \eqref{eq:cubic-three} by adding
-\(w_1^3+\cdots+w_r^3\) to its left-hand side.  Thus \(X_{j,0}=X_j\).
-
-\begin{corollary}[Two series of cubic hypersurfaces]
-\label{cor:cubics}
-\coverage{absent}%
-\uses{thm:two-variable}%
-\imports{tz-cubic-series,tz-type-classification}%
-For every \(r\geq0\) and \(j\in\{1,3\}\), the variety
-\(X_{j,r}\times\PP^2\) is rational over \(\mathbf Q\).
-\end{corollary}
-
-Tschinkel and Zhang supply the smoothness, fibrations, and generic-fibre
-Galois types in \cite[Propositions~5.1 and~5.3]{TZ}.  Applying
-Theorem~\ref{thm:two-variable} over the two base function fields proves
-Corollary~\ref{cor:cubics} and sharpens their stable-rationality conclusions
-to \(X_{j,r}\times\PP^2\) rational.
-
-\begin{corollary}[Rationality after affine-line stabilization]
-\label{cor:affine-line}
-\coverage{absent}%
-\uses{thm:cubic-level}%
-For \(j\in\{1,3\}\), the variety \(Y_j=X_j\times\PP^1\) is a smooth
-projective fourfold over \(\mathbf Q\) which remains nonrational over
-\(\C\), while \(Y_j\times\A^1\) is rational over \(\mathbf Q\).
-\end{corollary}
-
-The fourfolds \(Y_j\) answer the question posed in \cite[p.~13]{TZ}: find a
-nonrational variety \(Y\) such that \(Y\times\A^1\) is rational.  This is a
-birational statement, not Zariski cancellation for isomorphic affine
+The Jacobian calculation gives a local invariant with values zero, one and
+three: the dimension of the torus in eventual semistable reduction. A prime
+dividing exactly one of two squarefree parameters distinguishes their
+Jacobians. Rational Hodge conservation
+\cite[Theorem~1.3]{RuddM1} then distinguishes the first stabilizations.
+Consequently the smooth fourfolds
+\(Y_n=\mathcal X_n\times\PP^1\), \(n\in\mathcal T\), are pairwise
+nonbirational and irrational even over \(\C\), while every
+\(Y_n\times\PP^1\) is rational over \(\mathbf Q\).
+These are birational assertions about products, not isomorphisms of affine
 cylinders.
 
-\begin{corollary}[Variation in the moduli of cubic threefolds]
-\label{cor:moduli}
-\coverage{absent}%
-\uses{thm:cubic-level}%
-\imports{egfs-very-general-cubic}%
-On the moduli space of smooth complex cubic threefolds,
-\(\ell_{\C}((X_j)_{\C})=2\) for \(j\in\{1,3\}\), whereas
-\(\ell_{\C}\) is infinite at a very general point.
-\end{corollary}
+The use of universal torsors in stable rationality begins with
+Beauville, Colliot-Th\'el\`ene, Sansuc and Swinnerton-Dyer \cite{BCTSSD}.
+Tschinkel and Zhang supply the quartic del Pezzo Cox geometry, its
+one-apparent-double-point property, and the four minimal Galois types with
+stably permutation Picard lattice \cite{TZ}. Their general stabilization
+bound is eleven; Theorem~\ref{thm:two-variable} lowers it to two. For their
+type \(I_0\), the bound two was already proved by Shepherd-Barron
+\cite{ShepherdBarron}. Their explicit cubic fibrations also give the named
+examples and higher-dimensional series in Section~\ref{sec:rationality}.
 
-Here is the proof of the surface theorem.  Let \(Z\) be the projective Cox
-model of \(S\).  The rank-five torus \(T_0\) acting on \(Z\) contains a
-  saturated rank-three subtorus \(T_3\).  Four of its weight spaces form a
-Galois-stable set, and their weight differences form a \(\mathbf Z\)-basis of
-the character lattice.  A codimension-three tangent section cuts a general
-\(T_3\)-orbit in one point.  The proof identifies the same quotient in
-two ways:
+The Jacobian argument uses the conic-bundle isogeny theorem of
+Casalaina-Martin, Marquand and Zheng Zhang \cite[Theorem~2.9]{CMZ}.
+Explicit decompositions for special cubic threefolds have precedents
+\cite{Roulleau,vanGeemenYamauchi}; here the five elliptic factors give
+the local separation formula. We use geometric isogenies and do not assert
+a product principal polarization.
+
+Let \(Z\) be the seven-dimensional projective Cox model attached to a
+rational point of \(S\), let \(T_0\) be its rank-five acting torus, and
+let \(T_3\subset T_0\) be the saturated rank-three subtorus we construct.
+The quotient has dimension \(7-3=4=2+(5-3)\) and two descriptions:
 \[
- \underbrace{Z/T_3\sim_k\PP^4}_{\text{tangent section}},
- \qquad
- \underbrace{Z/T_3\sim_k S\times(T_0/T_3)}_{\text{equivariant torsor trivialization}}.
+ \underbrace{Z/T_3\sim_k\PP^4}_{\text{tangent section}},\qquad
+ \underbrace{Z/T_3\sim_k S\times(T_0/T_3)}_{\text{equivariant torsor splitting}}.
 \]
-The residual torus \(T_0/T_3\) has dimension two and is rational; the two
-descriptions of the quotient therefore give the rationality of
-\(S\times\A^2\).  Applying the argument over the two base function fields
-proves Corollary~\ref{cor:cubics}.  In Section~2 we prove the quotient
-criterion, in Section~3 we construct the required Cox-model section, and in
-Section~4 we deduce the rationality statements.  The subsequent sections
-collect further consequences, the finite-index extension of the quotient
-criterion, and the limitation of the Cox-weight construction.  These may be
-read after the proofs of the main theorems.
+Four weight spaces with integral-basis differences make a codimension-three
+tangent section meet a general orbit once. Since the Cox model may be
+singular, we use the tangent-projection theorem in
+\cite[Theorem~2.4]{TZ}, extending the smooth theorem of
+\cite[Corollary~4.2]{CMR}.
 
-\section{A criterion for rational torus quotients}
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Result & Construction here & Additional input\\
+\midrule
+Two-variable upper bound & Sections~\ref{sec:quotient}--\ref{sec:uniform-family}
+ & Cox geometry and tori\\
+Exact cubic level & Section~\ref{sec:uniform-family} & One-step irrationality\\
+Separated family & Section~\ref{sec:arithmetic} & Hodge conservation\\
+\bottomrule
+\end{tabular}
+\end{center}
+Readers following the family theorem may proceed from the proof of
+Theorem~\ref{thm:two-variable} to Section~\ref{sec:uniform-family}, postponing
+the named examples in Section~\ref{sec:rationality}.
+Appendices~\ref{sec:additional}--\ref{sec:limits} give optional consequences,
+finite-index extensions and the limits of the Cox-weight construction.
+Appendix~\ref{sec:tangent-certificate} supplies the finite nonemptiness
+calculation used in Proposition~\ref{prop:tangent-section}; its coordinate
+details may be postponed on a first reading. Appendix~\ref{sec:verification}
+records the verification scope.
+
+\section{A criterion for rational torus quotients}\label{sec:quotient}
 
 The criterion below turns a linear section into a rational quotient.  Choose
 \(r+1\) weight spaces whose weight differences form a basis of the character
@@ -440,10 +430,7 @@ is the pullback of a line in \(\PP^2\), fix the character basis
  b_i=E_i-E_5\quad(1\leq i\leq4),\qquad b_5=H-3E_5
 \]
 of \(X^*(T_{0,\bar k})=(-K_S)^\perp\subset\Pic(S_{\bar k})\), and
-write \(e_1,\ldots,e_5\) for the dual cocharacter basis.  The ambient
-character matrices in this basis are the inputs
-\texttt{CHARACTER\_GENERATORS} of the reconstruction program.
-For the type
+write \(e_1,\ldots,e_5\) for the dual cocharacter basis. For the type
 \(I_3\) Galois image, the sublattice
 \begin{equation}
  N_3=\Z e_3\oplus\Z e_4\oplus\Z e_5\subset X_*(T_{0,\bar k})
@@ -676,7 +663,7 @@ leaves exactly the four types \(I_0,\ldots,I_3\)
 arbitrary subgroups of \(W(D_5)\).
 \end{proof}
 
-\section{Proofs of the rationality statements}
+\section{Proofs of the rationality statements}\label{sec:rationality}
 
 \begin{proof}[Proof of Theorem~\ref{thm:two-variable}]
 We first treat the minimal case by taking a quotient of the projective Cox
@@ -748,6 +735,73 @@ recalled immediately before \cite[Proposition~4.1]{TZ} and included in
 \imports{high-degree-del-pezzo,manin-stable-permutation,tz-torsor-splitting,tz-type-classification,voskresenskii-rank-two}%
 \end{proof}
 
+We first apply the surface theorem to the named examples and higher-dimensional
+series of Tschinkel and Zhang. Section~\ref{sec:uniform-family} treats the
+three-parameter family of Theorem~\ref{thm:uniform-cubic-family}.
+Consider the smooth cubic threefolds
+\begin{align}
+X_1:\quad &(x_4-2x_3)x_1^2+3(x_4+2x_3)x_2^2
+ +3x_3^2x_4-x_4^3+x_5^3=0, \label{eq:cubic-one}\\
+X_3:\quad &x_4(x_1^2+2x_1x_2)+x_3(x_1^2+x_1x_2+x_2^2)
+ +x_3^3-x_3x_4^2+x_4^3+2x_5^3=0. \label{eq:cubic-three}
+\end{align}
+
+\begin{theorem}[Exact level for the cubic threefolds]
+\label{thm:cubic-level}
+\coverage{absent}%
+\imports{rudd-one-stabilization,tz-cubic-series}%
+\evidence{quartic-del-pezzo-slice-cover}%
+For every field \(F\) of characteristic zero and \(j\in\{1,3\}\),
+\[
+ \ell_F((X_j)_F)=2.
+\]
+Thus \((X_j)_F\times\PP^1\) is not \(F\)-rational, whereas
+\((X_j)_F\times\PP^2\) is \(F\)-rational.
+\end{theorem}
+
+For \(r\geq0\), let \(X_{j,r}\subset\PP^{r+4}_{\mathbf Q}\) be obtained
+from equation \eqref{eq:cubic-one} or \eqref{eq:cubic-three} by adding
+\(w_1^3+\cdots+w_r^3\) to its left-hand side.  Thus \(X_{j,0}=X_j\).
+
+\begin{corollary}[Two series of cubic hypersurfaces]
+\label{cor:cubics}
+\coverage{absent}%
+\uses{thm:two-variable}%
+\imports{tz-cubic-series,tz-type-classification}%
+For every \(r\geq0\) and \(j\in\{1,3\}\), the variety
+\(X_{j,r}\times\PP^2\) is rational over \(\mathbf Q\).
+\end{corollary}
+
+Tschinkel and Zhang supply the smoothness, fibrations, and generic-fibre
+Galois types in \cite[Propositions~5.1 and~5.3]{TZ}.  Applying
+Theorem~\ref{thm:two-variable} over the two base function fields proves
+Corollary~\ref{cor:cubics} and sharpens their stable-rationality conclusions
+to \(X_{j,r}\times\PP^2\) rational.
+
+\begin{corollary}[Rationality after affine-line stabilization]
+\label{cor:affine-line}
+\coverage{absent}%
+\uses{thm:cubic-level}%
+For \(j\in\{1,3\}\), the variety \(Y_j=X_j\times\PP^1\) is a smooth
+projective fourfold over \(\mathbf Q\) which remains nonrational over
+\(\C\), while \(Y_j\times\A^1\) is rational over \(\mathbf Q\).
+\end{corollary}
+
+The fourfolds \(Y_j\) answer the question posed in \cite[p.~13]{TZ}: find a
+nonrational variety \(Y\) such that \(Y\times\A^1\) is rational.  This is a
+birational statement, not Zariski cancellation for isomorphic affine
+cylinders.
+
+\begin{corollary}[Variation in the moduli of cubic threefolds]
+\label{cor:moduli}
+\coverage{absent}%
+\uses{thm:cubic-level}%
+\imports{egfs-very-general-cubic}%
+On the moduli space of smooth complex cubic threefolds,
+\(\ell_{\C}((X_j)_{\C})=2\) for \(j\in\{1,3\}\), whereas
+\(\ell_{\C}\) is infinite at a very general point.
+\end{corollary}
+
 \begin{proof}[Proof of Corollary~\ref{cor:cubics}]
 The argument takes place entirely over the function field of the projection
 base.  This avoids any specialization or fibrewise rationality claim.
@@ -817,7 +871,324 @@ admit a decomposition of the diagonal and hence is not stably rational
 \imports{egfs-very-general-cubic}%
 \end{proof}
 
-\section{Generic surfaces, partners, and fibrations}
+\section{The uniform cubic family}\label{sec:uniform-family}
+
+The surface theorem applies to every smooth member of
+\eqref{eq:uniform-cubic-family}. The point to check is the Galois action on
+the generic surface: special coefficients may shrink the splitting group,
+so we prove containment in a fixed signed action rather than assume generic
+monodromy persists.
+
+\begin{proof}[Proof of Theorem~\ref{thm:uniform-cubic-family}]
+We contract the distinguished line in the cubic-surface fibre to obtain a
+quartic del Pezzo model. The following equations make the birational map
+explicit.
+Put \(a=x/y\), \(A=a^2+3\), \(\beta=B(a,1)\), and \(F=k(a)\).
+Projection to \([x:y]\) has generic fibre birational to
+\(S=\{Q_1=Q_2=0\}\subset\PP^4_F\), where
+\begin{align}
+ Q_1&=-au^2+6uv+3av^2+\beta w^2-zh,\nonumber\\
+ Q_2&=u^2+3v^2+\tfrac34Aw^2-z^2+wh.
+ \label{eq:family-quadrics}
+\end{align}
+Indeed, \(wQ_1+zQ_2\) gives the cubic-surface equation, and on
+\(w\ne0\) the second quadric recovers \(h\). The point
+\(P=[0:0:0:0:1]\) is rational and smooth. With symmetric matrices for
+the quadrics, put \(c(T)=T^3-\tfrac34AT-\beta\); then
+\begin{equation}
+ \det(Q_1+TQ_2)=\tfrac34(T^2-A)c(T),\qquad
+ \operatorname{disc}(c)=\tfrac{27}{16}A^3-27\beta^2.
+ \label{eq:family-determinant}
+\end{equation}
+The rational function \(A^3\) has odd valuation at the simple zeros of
+\(a^2+3\), even after extending constants, and so is not a square.
+Thus the cubic discriminant is nonzero. If \(s^2=A\), then
+\(c(s)c(-s)=\beta^2-A^3/16\ne0\). The pencil has five distinct roots,
+so \(S\) is a smooth quartic del Pezzo surface.
+
+A line on \(S\) through \(P\) would have direction in \(w=z=0\).
+The remaining equations give
+\(u^2+3v^2=0\) and \(-au^2+6uv+3av^2=0\).
+A nonzero direction would force \(u=-av\) and \(a^2+3=0\), impossible
+in \(F\). Thus \(P\) lies on no exceptional line. Its blowup is a smooth
+cubic surface, and projection from the distinguished line gives the conic
+bundle
+\begin{equation}
+ (T-a)u^2+6uv+3(T+a)v^2=c(T)w^2.
+ \label{eq:family-conic-bundle}
+\end{equation}
+The components of its five singular fibres encode the five pairs of ruling
+classes of \(S\), as in \cite[Section~4]{TZ}.
+
+Let \(\rho_1,\rho_2,\rho_3\) be the roots of \(c\), with cyclic
+differences \(d_1=\rho_2-\rho_3\), \(d_2=\rho_3-\rho_1\),
+\(d_3=\rho_1-\rho_2\). The coefficient relations give
+\(d_i^2=3(A-\rho_i^2)\). At \(T=\rho_i\) the component equations are
+\[
+ (\rho_i-a)u+(3\pm d_i)v=0.
+\]
+They are nonzero: \(c(a)=a^3/4-9a/4-\beta\) cannot vanish identically,
+because \(\beta=\lambda a^3+\mu a^2+\nu\) has no linear term.
+For the other two fibres choose square roots
+\(e_+^2=(s-a)c(s)\), \(e_-^2=(-s-a)c(-s)\). Their components are
+\[
+ (s-a)u+3v=\pm e_+w,\qquad
+ (-s-a)u+3v=\pm e_-w.
+\]
+The compatibility relation is
+\begin{equation}
+ e_+^2e_-^2=\frac{\operatorname{disc}(c)}9
+           =\frac{(d_1d_2d_3)^2}{9}.
+ \label{eq:family-sign-compatibility}
+\end{equation}
+Choose signs so that \(e_+e_-=d_1d_2d_3/3\).
+An even root permutation permutes the \(d_i\), while an odd permutation
+also negates all three. Relation~\eqref{eq:family-sign-compatibility}
+forces the corresponding parity of exchanges in the last two fibre pairs.
+These five pairs of singular-fibre components encode the del Pezzo ruling
+data. Label them by \(\rho_1,\rho_2,\rho_3,s,-s\), and let \(c_i\)
+exchange the two components in pair \(i\). The action is contained in
+\begin{equation}
+ \langle(4\,5),\ c_4c_5,\ (1\,2\,3),\
+ c_1c_2c_3c_5(2\,3)\rangle\subset W(D_5).
+ \label{eq:family-signed-group}
+\end{equation}
+This is the signed Picard action identified as type \(I_3\) at the end of
+\cite[Proposition~5.3]{TZ}. Its Picard lattice is stably permutation by
+\cite[Lemma~4.2]{TZ}, and remains so on restriction to any subgroup.
+Theorem~\ref{thm:two-variable} therefore applies over \(F\), giving
+\[
+ k(\mathcal X_B)(r_1,r_2)=F(S)(r_1,r_2)
+ \simeq k(a,z_1,z_2,z_3,z_4).
+\]
+This proves the upper bound over \(k\) and hence over every extension.
+
+An alleged rationalization after at most one variable over \(K\) would
+descend, together with the cubic equation, its inverse and the composition
+identities, to a finitely generated subfield of characteristic zero.
+Embedding that subfield in \(\C\) contradicts
+\cite[Theorem~1.1]{RuddM1}. Smoothness is preserved in this descent.
+Thus the exact level is two.
+
+Finally consider the member \((\lambda,\mu,\nu)=(0,0,1)\). The exact
+Jacobian calculation shows it is smooth: the sixth power of each homogeneous
+coordinate lies in the ideal generated by its five partial derivatives.
+In the 35-dimensional space of cubic forms, the infinitesimal
+\(\mathrm{GL}_5\)-orbit has rank 25; adjoining the three coefficient
+directions \(x^3,x^2y,y^3\) raises the rank to 28. Hence the moduli map
+has rank three there, and its image has dimension three. The finite rank
+and ideal-membership checks are described in the verification appendix.
+\uses{thm:two-variable}%
+\imports{rudd-one-stabilization,tz-type-classification,tz-family-action}%
+\evidence{sharpness-family-arithmetic}%
+\end{proof}
+
+\section{An arithmetic pencil with separated first stabilizations}
+\label{sec:arithmetic}
+
+The separation proof uses one output of the Jacobian calculation: a local
+rank formula. For \(t=a/b\in\mathbf Q^*\) in lowest terms with \(b>0\),
+put \(D_t=16a^2-27b^2\). Let \(\rho_p(t)\) be the dimension of the torus
+in the semistable reduction of \(J(\mathcal X_t)\) after a sufficiently
+large finite extension of \(\mathbf Q_p\). This is the
+\emph{potential toric rank}. It is invariant under geometric isogeny.
+
+\begin{proposition}[Local rank formula]
+\label{prop:pencil-local-rank}
+\coverage{absent}%
+\imports{cmz-prym,reduction-rank,elliptic-potential-reduction}%
+\evidence{sharpness-family-arithmetic}%
+Every \(\mathcal X_t\), \(t\in\mathbf Q^*\), is smooth. For \(p\geq5\),
+\begin{equation}
+ \rho_p(t)=
+ \begin{cases}
+ 1,&p\mid a,\\
+ 3,&p\mid D_t,\\
+ 0,&\text{otherwise}.
+ \end{cases}
+ \label{eq:pencil-rank}
+\end{equation}
+The two nonzero cases are disjoint; denominator primes have rank zero.
+\end{proposition}
+
+We prove the formula by reducing the intermediate Jacobian to five elliptic
+curves. No independence or pairwise nonisogeny of those factors is required.
+
+\subsection{The discriminant and its covers}
+
+The involution \((u,v)\mapsto(-u,-v)\) fixes the line \(x=y=z=0\)
+and the plane cubic \(E_t:g=0\), where
+\[
+ g=-z^3+\tfrac34(x^2+3y^2)z+ty^3.
+\]
+The quadratic form in \(u,v\) has matrix
+\[
+ M=\begin{pmatrix}z-x&3y\\3y&3(z+x)\end{pmatrix},
+\]
+whose determinant conic is \(Q:z^2=x^2+3y^2\).
+For \(t\ne0\), the substitution
+\([X:Y:Z]=[-12ty-9z:36tx:z]\) gives a Weierstrass equation for \(E_t\):
+\begin{equation}
+ Y^2=X^3-243X+(1728t^2-1458),\qquad
+ \Delta(E_t)=-2^{12}3^9t^2(16t^2-27).
+ \label{eq:pencil-elliptic}
+\end{equation}
+Parametrizing \(Q\) by
+\((x,y,z)=(r^2-3s^2,2rs,r^2+3s^2)\) restricts \(4g\) to
+\(32tr^3s^3-(r^2+3s^2)^3\), whose sextic discriminant is
+\(2^{26}3^{12}t^4(16t^2-27)\).
+Thus \(E_t\) is smooth and meets \(Q\) transversely when
+\(t(16t^2-27)\ne0\).
+
+These conditions also prove smoothness of \(\mathcal X_t\). At a putative
+singular point with \(M\) invertible, the \(u,v\) derivatives force
+\(u=v=0\), and the point would be singular on \(E_t\). If \(M\) has
+rank one and \((u,v)\ne0\), its adjugate is proportional to
+\((u,v)(u,v)^{\mathsf t}\); the remaining derivatives would force
+nontransversality of \(E_t\) and \(Q\). The case \((u,v)=0\) again
+would make \(E_t\) singular. If \(M=0\), then \(x=y=z=0\), and the
+three derivatives \(-u^2+3v^2,6uv,u^2+3v^2\) have no common projective
+zero. Conversely, each excluded parameter gives a singular point on the
+fixed plane cubic and hence on \(\mathcal X_t\). In particular all
+nonzero rational parameters are smooth.
+
+Projection of \(E_t\) to \([x:y]\) is a connected degree-three map with
+six simple branch values. Its Galois closure \(W\) has group \(S_3\)
+and genus four. The alternating quotient has genus two and, geometrically,
+equation
+\begin{equation}
+ C_t:\ \eta^2=16t^2-(x^2+3)^3.
+ \label{eq:pencil-genus-two-C}
+\end{equation}
+Write \(f_2:W\to E_t\) for the quotient by a transposition.
+This is also the component double cover over \(E_t\) in the conic bundle:
+if \(z\) is one root of
+\(z^3-\tfrac34(x^2+3y^2)z-ty^3\), the difference of the other two roots
+has square \(3(x^2+3y^2-z^2)\), exactly the square class splitting the
+binary quadratic form. The component double cover over \(Q\) has
+geometric equation
+\begin{equation}
+ H_t:\ \xi^2=32tx^3-(x^2+3)^3.
+ \label{eq:pencil-genus-two-H}
+\end{equation}
+
+The conic-bundle theorem \cite[Theorem~2.9]{CMZ} supplies an isogeny
+\[
+ \bigl(J(W)/f_2^*J(E_t)\bigr)\times J(H_t)\longrightarrow J(\mathcal X_t).
+\]
+For the \(S_3\)-action on \(J(W)\), the invariant part has dimension
+zero, the sign part dimension two, and the standard part dimension two.
+Here dimensions are dimensions of abelian varieties. The standard rational
+representation has dimension two, with one-dimensional transposition
+invariants. Its elliptic multiplicity factor is therefore \(E_t\), occurring
+twice in the standard part. Thus
+\begin{equation}
+ J(W)\sim J(C_t)\times E_t^2,\qquad
+ J(\mathcal X_t)\sim E_t\times J(C_t)\times J(H_t).
+ \label{eq:pencil-prym-isogeny}
+\end{equation}
+These are geometric isogenies. Over \(\mathbf Q\), the displayed
+genus-two equations require twists by \(-3\) and \(-6\), respectively:
+the cubic discriminant is square-equivalent to \(-3C_t\); on \(Q\) the
+quadratic form is \(6(su+rv)^2\), giving component square class
+\(-H_t/24\). Twists disappear after finite extension, so they do not
+affect potential ranks. They must be retained for arithmetic point counts.
+
+\subsection{Elliptic quotients and reduction}
+
+The maps \((x,\eta)\mapsto(x^2,\eta)\) and
+\((x,\eta)\mapsto(x^2,x\eta)\) give elliptic quotients
+\[
+ E_0:Y^2=16t^2-(U+3)^3,\qquad
+ E_2:Y^2=U\bigl(16t^2-(U+3)^3\bigr).
+\]
+Their differential pullbacks are independent, whence
+\(J(C_t)\sim E_0\times E_2\); put \(E_1=E_t\).
+Set \(s=4t/(3\sqrt3)\). After geometric scaling, \(H_t\) has equation
+\(y^2=(x^2+1)^3-8sx^3\). Its two elliptic quotient maps are
+\[
+ U=x+x^{-1},\qquad V_\pm=y(x\pm1)/x^2,
+ \qquad E_\pm:V_\pm^2=(U\pm2)(U^3-8s).
+\]
+Their differential pullbacks are again independent. Thus
+\begin{equation}
+ J(\mathcal X_t)\sim E_0\times E_1\times E_2\times E_+\times E_-.
+ \label{eq:pencil-five-factors}
+\end{equation}
+The \(j\)-invariants, obtained from these equations, are
+\begin{center}
+\begin{tabular}{@{}ccccc@{}}
+\toprule
+\(E_0\)&\(E_1\)&\(E_2\)&\(E_+\)&\(E_-\)\\
+\midrule
+\(0\)&\(\dfrac{432}{s^2(1-s^2)}\)&
+\(\dfrac{-6912s^2}{(s^2-1)^2}\)&
+\(\dfrac{6912s}{(s+1)^2}\)&\(\dfrac{-6912s}{(s-1)^2}\)\\
+\bottomrule
+\end{tabular}
+\end{center}
+Writing \(c=j(E_2)\), the last two invariants have sum \(4c\) and product
+\(6912c\).
+
+\begin{proof}[Proof of Proposition~\ref{prop:pencil-local-rank}]
+Smoothness was proved above. Potential toric rank is preserved by isogeny:
+an isogeny and a quasi-inverse extend to N\'eron models and induce maps on
+their torus parts whose composites are multiplication by a nonzero integer.
+The torus dimensions are therefore equal. After semistable reduction, they
+are unchanged by further finite extension; see \cite[Corollary~3.3]{Reduction}.
+An elliptic curve is potentially good precisely when its \(j\)-invariant
+is integral \cite{Snowden}, and otherwise has potential toric rank one.
+
+In terms of \(t=a/b\),
+\[
+ j(E_1)=-\frac{19683b^4}{a^2D_t},\qquad
+ c=-\frac{2985984a^2b^2}{D_t^2}.
+\]
+At \(p\geq5\), if \(c\) is integral, both roots of
+\(Z^2-4cZ+6912c\) are integral. If \(v_p(c)<0\), its Newton polygon
+gives root valuations \(v_p(c)\) and zero. Since \(j(E_0)=0\),
+\eqref{eq:pencil-five-factors} gives
+\[
+ \rho_p(t)=\mathbf1_{v_p(j(E_1))<0}+2\mathbf1_{v_p(c)<0}.
+\]
+If \(p\mid a\), then \(D_t\) is a unit and only the first term
+contributes. If \(p\mid D_t\), both \(a,b\) are units and both terms
+contribute. If \(p\mid b\), or none of \(a,b,D_t\) is divisible by
+\(p\), both invariants are integral. This proves \eqref{eq:pencil-rank}.
+Any complex isogeny between the Jacobians, which are defined over
+\(\mathbf Q\), descends to a finite number-field extension. Choosing a
+place over \(p\) therefore shows that different potential ranks rule out
+isogeny even over \(\C\).
+\imports{cmz-prym,reduction-rank,elliptic-potential-reduction}%
+\evidence{sharpness-family-arithmetic}%
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:separated-pencil}]
+For distinct \(m,n\in\mathcal T\), some prime \(p\geq5\) divides exactly
+one, say \(m\). Then \(\rho_p(m)=1\) but
+\(\rho_p(n)\in\{0,3\}\). Proposition~\ref{prop:pencil-local-rank}
+therefore rules out geometric isogeny. If the first stabilizations were
+birational, rational Hodge conservation \cite[Theorem~1.3]{RuddM1} would
+identify their rational third cohomology, and hence their intermediate
+Jacobians up to isogeny, a contradiction. The upper bound is
+Theorem~\ref{thm:uniform-cubic-family}.
+
+For the count, use \(\mathbf1_{\text{squarefree}}(n)=\sum_{d^2\mid n}\mu(d)\).
+Restricting to integers prime to six gives
+\[
+ \#\{n\leq H:n\in\mathcal T\}
+ =\frac H3\sum_{(d,6)=1}\frac{\mu(d)}{d^2}+O(\sqrt H)
+ =\frac{3H}{\pi^2}+O(\sqrt H).
+\]
+Truncation at \(d\leq\sqrt H\) contributes the stated error, as does
+counting residue classes prime to six. This count uses no binary-form sieve.
+\uses{thm:uniform-cubic-family,prop:pencil-local-rank}%
+\imports{rudd-hodge-conservation}%
+\end{proof}
+
+\appendix
+
+\section{Generic surfaces, partners, and fibrations}\label{sec:additional}
 
 The same function-field argument shows that the surface bound itself is
 sharp.  Let \(S_j/\mathbf Q(t)\) be the generic quartic del Pezzo surface
@@ -973,6 +1344,64 @@ Nonlinearizable rank-two rational torus actions on \(\A^5\) already occur
 in Popov's Theorem~5 and Corollary~5; the assertion here specifies their
 exact trivial-stabilization levels for these cubic constructions.
 These are rational actions, not assertions about regular polynomial actions.
+
+The same construction applied to \(\mathcal X_n\), \(n\in\mathcal T\),
+gives infinitely many rank-one rational actions on \(\A^5_{\mathbf Q}\)
+which are pairwise nonconjugate even over \(\C\): their invariant fields
+are the function fields of the pairwise nonbirational fourfolds
+\(\mathcal X_n\times\PP^1\). After one invariant variable is adjoined,
+each action is conjugate to the same diagonal action on \(\A^6\).
+
+\section{Finite rational partner sets in the pencil}
+\label{sec:rational-partners}
+
+The squarefree parameters give explicit distinct classes. On the entire
+rational pencil, the same local formula gives a different conclusion:
+each geometric isogeny class has only finitely many parameters.
+
+\begin{corollary}[Finiteness within the rational pencil]
+\label{cor:rational-pencil-partners}
+\coverage{absent}%
+\uses{prop:pencil-local-rank}%
+\imports{beukers-schlickewei,rudd-hodge-conservation}%
+Fix \(t\in\mathbf Q^*\). There are only finitely many \(u\in\mathbf Q^*\)
+such that \(J(\mathcal X_u)\) is geometrically isogenous to
+\(J(\mathcal X_t)\). In particular only finitely many rational parameters
+\(u\) have \(\mathcal X_u\times\PP^1\) birational over \(\C\) to
+\(\mathcal X_t\times\PP^1\).
+\end{corollary}
+
+\begin{proof}
+Let \(S\) be the finite set consisting of 2, 3 and the primes of positive
+potential toric rank for \(J(\mathcal X_t)\). Every isogeny partner is
+potentially good outside \(S\). Put \(L=\mathbf Q(\sqrt3)\) and let
+\(S_L\) be the finite places above \(S\). For such a parameter \(u\), set
+\[
+ w=\frac{3\sqrt3}{4u},\qquad x=\frac{1+w}{2},\qquad y=\frac{1-w}{2}.
+\]
+Outside \(S\), formula~\eqref{eq:pencil-rank} gives \(v(u)\leq0\).
+Thus \(w\) is integral. If \(v(w)>0\), both \(1+w\) and \(1-w\)
+are units. If \(v(w)=0\), their product
+\((16u^2-27)/(16u^2)\) is a unit by the same rank formula.
+Consequently
+\[
+ x+y=1,\qquad x,y\in\mathcal O_{L,S_L}^{*},\qquad
+ \sigma(x)=y,\qquad x\ne y,
+\]
+where \(\sigma\) is the nontrivial automorphism of \(L/\mathbf Q\).
+The unit-equation theorem \cite[Theorem~1.1]{BeukersSchlickewei}
+gives only finitely many such pairs. The inverse formula
+\(u=3\sqrt3/(4(x-y))\) makes the parameter map injective.
+The group of conjugate pairs has rank \(1+|S_L|\), giving the coarse
+bound \(2^{8(|S_L|+2)}\) for this candidate set. Hodge conservation
+\cite[Theorem~1.3]{RuddM1} gives the last assertion.
+\uses{prop:pencil-local-rank}%
+\imports{beukers-schlickewei,rudd-hodge-conservation}%
+\end{proof}
+
+The finite set contains necessary candidates, not a classification of the
+partners. No implemented unit-equation solver or affirmative birationality
+test is required for the corollary.
 
 \section{Finite-index slices and zero-cycles}
 \label{sec:finite-index}
@@ -1142,7 +1571,7 @@ The coprime-index conclusion is a criterion for future constructions.
 The scroll above illustrates the degree calculation on a rational quotient;
 it does not supply a new nonrational example with coprime-index slices.
 
-\section{Limits of the Cox-weight criterion}
+\section{Limits of the Cox-weight criterion}\label{sec:limits}
 
 The rank-three construction uses four weight spaces, each of dimension
 three.  Their multiplicities are essential to descent.  For the full
@@ -1219,9 +1648,7 @@ full-\(I_3\) Cox representation.  The proposition applies to this Cox embedding 
 \(I_3\) action; it makes no assertion about other embeddings, nonlinear
 sections, or smaller Galois images.
 
-\appendix
-
-\section{Exact tangent-section certificate}
+\section{Exact tangent-section certificate}\label{sec:tangent-certificate}
 \label{app:slice-certificate}
 
 The four constructions below depend symbolically on the surface parameters
@@ -1318,7 +1745,7 @@ opens \(D_iM_i\ne0\) cover \(\Delta\ne0\).  The retained certificate gives,
 for each empty case, an identity expressing a nonzero constant in the
 corresponding localized ideal.
 
-\section{Verification and scope}
+\section{Verification and scope}\label{sec:verification}
 
 Using exact integer and rational arithmetic, the reconstruction program starts
 from the two type-\(I_3\) character matrices and the twenty Cox quadrics in
@@ -1344,7 +1771,21 @@ integer arithmetic without SymPy.  It also checks the affine actions and
 the rank-three weight multiplicities.  Negative controls detect an
 unsaturated character generator and omission of the affine translations.
 
-No Lean development formalizes Theorem~\ref{thm:cubic-level}, Theorem
+An additional exact-arithmetic program checks
+\eqref{eq:family-quadrics}--\eqref{eq:family-sign-compatibility}, the seed
+Jacobian ideal and the ranks 25 and 28 used for the moduli image. For the
+arithmetic pencil it checks the discriminants, elliptic quotient equations,
+five \(j\)-invariants, and the corrected arithmetic twists against direct
+point counts. Its finite parameter tests use the bound 240. The symbolic
+program is a trusted SymPy execution; unlike the Cox and rank-four
+certificates, its entire calculation has not been reproduced by a second
+implementation. In particular, the signed Picard identification, Prym
+comparison, reduction theorem and all-parameter deductions are written
+arguments and cited inputs, not consequences of sampled point counts.
+The command and hashes are in the accompanying verification guide.
+
+No Lean development formalizes Theorem~\ref{thm:uniform-cubic-family},
+Theorem~\ref{thm:separated-pencil}, Theorem~\ref{thm:cubic-level}, Theorem
 \ref{thm:two-variable}, Theorem~\ref{thm:torus-quotient},
 Proposition~\ref{prop:tangent-section}, or the stated corollaries.  The
 formal-coverage annotations therefore say
@@ -1406,10 +1847,37 @@ Publ. Math. IH\'ES 30 (1966), 55--113,
 {doi:10.1007/BF02684357}.
 
 \bibitem{RuddM1} T.~Rudd,
-\emph{Irrationality of cubic threefolds after one stabilization},
-version 0.16.0, Zenodo, 2026,
-\href{https://doi.org/10.5281/zenodo.22132303}
-{doi:10.5281/zenodo.22132303}.
+\emph{One-Stabilization Irrationality and Hodge Conservation for Fano
+Threefolds}, September 2026 manuscript, Theorems~1.1 and~1.3.
+The accompanying source package includes the cited revision.
+
+\bibitem{CMZ} S.~Casalaina-Martin, L.~Marquand, and Z.~Zhang,
+\emph{The moduli space of cubic threefolds with a non-Eckardt type
+involution via intermediate Jacobians}, arXiv:2210.14397v2.
+
+\bibitem{Roulleau} X.~Roulleau,
+\emph{Fano surfaces with 12 or 30 elliptic curves}, arXiv:1001.4855v2.
+
+\bibitem{vanGeemenYamauchi} B.~van Geemen and T.~Yamauchi,
+\emph{On intermediate Jacobians of cubic threefolds admitting an
+automorphism of order five}, arXiv:1506.05346v3.
+
+\bibitem{Reduction} A.~Grothendieck,
+\emph{Mod\`eles de N\'eron et monodromie}, Expos\'e~IX in
+\emph{Groupes de monodromie en g\'eom\'etrie alg\'ebrique, I (SGA~7~I)},
+Lecture Notes in Mathematics 288, Springer, 1972,
+Proposition~2.2.6, Corollary~2.2.7 and Corollary~3.3,
+\href{https://library.slmath.org/nonmsri/sga/sga/pdf/sga7-1.pdf}{original scan}.
+
+\bibitem{Snowden} A.~Snowden,
+\emph{Lecture 8: Elliptic curves over DVRs}, Math~679 course notes, 2013,
+\href{https://websites.umich.edu/~asnowden/teaching/2013/679/L08.html}
+{potentially good reduction criterion}.
+
+\bibitem{BeukersSchlickewei} F.~Beukers and H.~P.~Schlickewei,
+\emph{The equation \(x+y=1\) in finitely generated groups},
+author version dated 8 January 2007, Theorem~1.1,
+\href{https://webspace.science.uu.nl/~beuke106/s-units.pdf}{author PDF}.
 
 \bibitem{ShepherdBarron} N.~I.~Shepherd-Barron,
 \emph{Stably rational irrational varieties},

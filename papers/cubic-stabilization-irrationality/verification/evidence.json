@@ -14,5 +14,12 @@
       "uv run --with sympy==1.14.0 python3 verification/check_slice_cover.py --check-certificate verification/slice-cover-certificate.json --check-empty-certificates verification/groebner-empty-certificates.json"
     ],
     "role": "Exact reconstruction of the saturated type-I3 lattice, Cox weights, residual quotient, tangent Jacobian, the linear section defined by the kernel of evaluation at x, four symbolic evaluation determinants, a four-open cover of the smooth parameter locus, retained Nullstellensatz identities for all six empty localized cases, and the TeX values printed in the manuscript from transcribed source matrices and the twenty Cox quadrics, followed by an independent consequence check."
+  },
+  "sharpness-family-arithmetic": {
+    "checksum_manifest": "verification/family-arithmetic-SHA256SUMS",
+    "commands": [
+      "uv run --with sympy==1.14.0 python3 verification/check_family_arithmetic.py --check-output verification/family-arithmetic.json"
+    ],
+    "role": "Exact family equations, seed smoothness and moduli ranks, elliptic invariants and twists, and finite local arithmetic tests. Trusted symbolic execution; not independent verification of the Picard, Prym, reduction or companion theorems."
   }
 }

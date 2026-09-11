@@ -1,4 +1,4 @@
-export SOURCE_DATE_EPOCH = 1787875200
+export SOURCE_DATE_EPOCH = 1789084800
 export FORCE_SOURCE_DATE = 1
 
 TEXSHELL ?= nix develop ..\#manuscript --command
@@ -27,6 +27,7 @@ verify:
 		--check-empty-certificates verification/groebner-empty-certificates.json
 	$(PYTHON) verification/derive_rank_four.py
 	$(LINT_PYTHON) verification/check_rank_four.py
+	$(PYTHON) verification/check_family_arithmetic.py --check-output verification/family-arithmetic.json
 	$(LINT_PYTHON) verification/check_metadata.py
 
 manuscript: $(SOURCE) formal-annotations.tex verification/slice-cover-values.tex verification/rank-four-values.tex

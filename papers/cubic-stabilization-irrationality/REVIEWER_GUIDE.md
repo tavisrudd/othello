@@ -1,110 +1,63 @@
 # A referee's route through the proof
 
-The paper proves that two explicit smooth cubic threefolds have stabilization
-level exactly two over every characteristic-zero ground field.  The lower bound is imported from the
-separate one-stabilization theorem.  The new proof is the upper bound: a
-quartic del Pezzo surface satisfying the stated Picard-lattice hypothesis
-becomes rational after multiplication by `A²`.
+The three results to locate first are `thm:uniform-cubic-family`,
+`thm:two-variable`, and `thm:separated-pencil`. The surface construction
+proves the upper bounds independently. The companion lower bound proves
+exactness; its separate Hodge theorem turns arithmetic Jacobian separation
+into nonbirationality of first stabilizations.
 
-## A first pass
+## Main proof routes
 
-Read Theorems `thm:cubic-level` and `thm:two-variable` in the introduction,
-followed by its final proof summary.  Section 2 states and proves the general
-torus-quotient criterion.  In Section 3, the weight calculation through
-Proposition `prop:tangent-section` verifies its hypotheses for the four
-relevant Galois types.  Section 4 then turns the quotient into the surface and
-cubic rationality statements. Section 5 gives the generic-surface,
-specified-partner, and quantitative fibration consequences. The appendices contain the exact finite
-calculation and the evidence boundary.
+- **Quotient and surface:** Sections 2–4. Check saturation, the integral
+  weight differences, the actual tangent-projection isomorphism open and
+  uniqueness-based descent. The generic torsor section is equivariant;
+  quotienting it leaves a rational two-dimensional torus.
+- **Uniform cubic family:** Section 5. The determinant has five distinct
+  roots for every constant coefficient choice. The rational point lies on
+  no exceptional line. Component equations and their signs identify a
+  subgroup of the precise I3 Picard action; the argument allows the Galois
+  group to shrink at special coefficients. The seed ranks 25 and 28 give
+  three-dimensional moduli image.
+- **Arithmetic separation:** Section 6. Keep the local rank proposition in
+  view while reading the Prym and elliptic calculations. The component
+  double cover is identified with the S3 closure by its square class, not
+  by genus alone. Geometric twists disappear for potential reduction but
+  must remain in arithmetic trace checks. Toric rank is unchanged by
+  isogeny and arbitrary further extensions after semistability.
 
-## Five checks
+The squarefree integer argument needs neither generic independence of the
+elliptic factors nor an analytic binary-form sieve. The fixed rational
+pencil-partner corollary uses a unit equation and gives only necessary
+candidates, not a classification or an implemented solver.
 
-1. **Why is the quotient rational?** In `thm:torus-quotient`, the differences
-   among `r+1` selected weights form a `Z`-basis of the character lattice.
-   Signed maximal minors therefore determine a unique translate of a general
-   torus orbit lying in the codimension-`r` linear section.  Uniqueness gives
-   Galois descent.  The same section contains the centre of tangent
-   projection and meets its isomorphism open, so its quotient component is
-   birational to projective space.  The proof writes both directions of the
-   birational parametrization.
-2. **Why is the integral-basis hypothesis essential?** Remark
-   `rem:saturation` identifies the index-two lattice produced by the three
-   visible sign cocharacters and saturates it.  Without saturation, the
-   equations parametrize a finite cover of an orbit rather than a rational
-   section.
-3. **Why does the criterion apply to quartic del Pezzo surfaces?** Section 3
-   imports the projective Cox model and the descended form of its birational
-   tangent projection from Tschinkel--Zhang.  The smooth tangent-projection
-   theorem for varieties with one apparent double point is due to
-   Ciliberto--Mella--Russo; the possibly singular Cox model uses the stronger
-   form in Tschinkel--Zhang, Theorem 2.4.  The section constructs a
-   Galois-stable saturated rank-three subtorus, four selected weight spaces
-   whose weight differences form a basis, and the complementary subspace `B`.
-   Proposition `prop:tangent-section` constructs the required tangent linear section and
-   explains its descent for types `I0`--`I3`.  To make the openness condition
-   uniform in the tangent point `p`, the proof packages the tangent projections
-   into a rational map over the `p`-parameter space and uses its relative
-   isomorphism locus before applying density of rational points.
-4. **What does the computation prove?** The four rows in the parameter table
-   give evaluation determinants `D_i` and smoothness minors `M_i`.  Appendix A
-   proves that the opens `D_i M_i != 0` cover the smooth parameter locus
-   `Delta != 0`.  The exact certificate retains the six empty localized cases
-   and the final Bezout identity.  It does not prove the quotient theorem, Galois
-   descent, torsor splitting, or the function-field deductions.
-5. **How does the surface result imply the cubic result?** In Section 4, a
-   rational section of the universal torsor gives
-   `Z/T3 ~ S × (T0/T3)`.  The left side is rational by the tangent-section
-   argument, while the residual rank-two torus is rational.  Applying this
-   over the generic-fibre fields of the two cubic fibrations yields
-   `X × P²` rational.  The separately cited one-stabilization theorem gives
-   irrationality of `X_C × P¹`. A putative rationalization over an arbitrary
-   characteristic-zero field descends, together with its inverse and their
-   identities, to a finitely generated subfield embeddable in `C`. This gives
-   the lower bound over every such field; the upper bound base-changes from `Q`.
+## Optional arguments
 
-## Evidence and replay
+Appendices A–D give optional generic-surface and fibration consequences,
+torus actions, finite rational partner sets, finite-index slices and the
+rank-four method limitation. Appendix E supplies the finite nonemptiness
+calculation used by the main surface proof; its coordinate details may be
+postponed on a first pass. Appendix F records the verification boundary.
+For finite index, distinguish lattice index from component degree: the
+latter divides the former but need not equal it. The zero-cycle conclusion
+does not assert rationality. The original constant-kernel argument is retained.
 
-For the finite-index extension, check three distinct steps: the rational
-component is defined by the tangent-projection open over the ground field;
-the orbit directions are transverse there, proving dominance; and after
-algebraic closure of constants, the generic intersection is a torsor under
-a constant finite group, proving degree divisibility. The scroll example
-has index two and degree one. The zero-cycle corollary separately supplies
-a degree-one cycle and annihilates the degree-zero group after every field
-extension. No new nonrational coprime-index example is claimed.
+## Evidence and source boundary
 
-The concluding limitation for full type I3 has a separate, finite audit:
-check the contravariant character kernel, the primitive generator, and the
-affine weight permutations. The two weight orbits exclude descended sets of
-five or six weights. The 1992 unimodular five-subsets demonstrate why a
-lattice-basis check alone does not settle descent. Exact conventions and
-independent replay are in `verification/rank-four.md`.
+`make check` reconstructs and independently checks the Cox and rank-four
+certificates, replays the family/arithmetic symbolic program, checks all
+statement digests and source conventions, and builds the paper with no TeX
+warnings. It is not a Lean kernel replay. All formal coverage is absent.
+The full new symbolic calculation has not been duplicated in a second CAS.
 
-No Lean development formalizes the new results.  Formal coverage is recorded
-as `absent` in `verification/claim-map.json`.  The imported results and their
-conventions are listed in `verification/imported-sources.json`; the exact
-calculation is described in the README and Appendix B.
+The precise companion revision is bundled as
+`references/one-stabilization-september-2026.pdf`. Its Theorems 1.1 and 1.3
+are imports; neither follows from this package's computations.
+`verification/family-arithmetic.md` records the added evidence, source
+pinpoints, commands and trust boundaries. The other evidence and imported
+results resolve through the two JSON registries.
 
-From the paper directory, the complete deterministic gate is:
-
-```text
-nix develop --command make check
-```
-
-It reconstructs and independently checks the certificate, validates the
-claim and source metadata, rebuilds the PDF, and rejects TeX warnings.
-
-## Coordinates and scope of explicitness
-
-The selected simplex identifies T3 with Res_(E4/k) Gm/Gm. The printed
-three-ratio formula gives its orbit correction in splitting-field coordinates;
-uniqueness descends the corrected point. The residual character actions use
-column coordinates in (E1-E5,E2-E5) and identify a cubic norm-one torus.
-The certificate records both matrices and that basis.
-
-An executable parametrization over a specified number field additionally
-needs a descended pair p,x, slice equations, a generic torsor trivialization,
-residual-torus coordinates and composed forward/inverse maps with their opens.
-The inverse graph establishes rationality but is not a list of these expanded
-maps. The short action corollary concerns rational actions and exact numbers
-of trivially acted-on variables; it does not assert regular affine actions.
+An explicit expanded ground-field rationalization would require chosen
+descended points, slice equations, a generic torsor section and residual-torus
+coordinates. The inverse-graph proof establishes rationality without printing
+all those composed maps. Torus actions here are rational actions, not regular
+polynomial actions.

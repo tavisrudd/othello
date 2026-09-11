@@ -1,111 +1,71 @@
-# Sharpness of Irrationality after One Stabilization for Cubic Threefolds
+# Two-Variable Rationalization and Sharp Stabilization of Cubic Threefolds
 
-## Read the paper
+[**Open the manuscript (PDF) →**](cubic_stabilization_irrationality.pdf) · [Referee guide](REVIEWER_GUIDE.md)
 
-[**Open the manuscript (PDF) →**](cubic_stabilization_irrationality.pdf)
+A three-parameter family of smooth cubic threefolds has exact stabilization
+level two over every extension of its characteristic-zero ground field.
+An explicit rational pencil contains a positive-density squarefree integer
+family whose first stabilizations are pairwise nonbirational even over C.
+Their second stabilizations are all rational over Q.
 
-Referees may also use the focused [referee guide](REVIEWER_GUIDE.md).
+## The theorem hierarchy
 
-The theorem that every smooth complex cubic threefold remains irrational
-after multiplication by `P¹` is sharp. Write `ell_k(V)` for the least
-nonnegative integer `m` such that `V × P^m` is `k`-rational, or infinity if no
-such integer exists. For each of two displayed smooth cubic threefolds `X/Q`,
-this paper proves
+1. **Independent construction.** Every stably rational smooth quartic del
+   Pezzo surface in characteristic zero becomes rational after product with
+   A². A saturated rank-three subtorus of the projective Cox model has rational
+   quotient, and equivariant torsor splitting leaves a rational rank-two torus.
+   This proves the cubic family's upper bound uniformly.
+2. **Exact level.** The separately proved one-stabilization irrationality
+   theorem supplies the lower bound for every smooth cubic member.
+3. **Arithmetic separation.** Five elliptic isogeny factors of the pencil's
+   intermediate Jacobian give potential toric ranks 1 at numerator primes,
+   3 at primes dividing 16a²−27b², and 0 otherwise, for p≥5.
+   Hodge conservation then distinguishes the first stabilizations.
 
-```text
-ell_F(X_F) = 2 for every characteristic-zero field F.
-```
+The companion inputs are Theorems 1.1 and 1.3 of *One-Stabilization
+Irrationality and Hodge Conservation for Fano Threefolds*, September 2026.
+The [exact cited manuscript](references/one-stabilization-september-2026.pdf)
+is bundled and byte-pinned. An older deposit is not used as a citation for
+the newly added Hodge theorem.
 
-Thus `X_F × P¹` is not `F`-rational while `X_F × P²` is `F`-rational.
-The lower bound is the separately cited one-stabilization theorem for every
-smooth complex cubic threefold, pinned here to
-[version 0.16.0](https://doi.org/10.5281/zenodo.22132303); this paper proves
-the upper bound.
+## Consequences and scope
 
-## Main results and consequences
+For Y_n = X_n × P¹ in the squarefree pencil family, the Y_n are pairwise
+nonbirational irrational fourfolds even over C, but every Y_n × P¹ is rational
+over Q. The parameter set has counting function 3H/π² + O(√H).
+The cubic family has three-dimensional image in complex cubic moduli.
 
-- If `k` has characteristic zero and `S/k` is a smooth quartic del Pezzo
-  surface such that `S(k)` is nonempty and its geometric Picard lattice is
-  stably permutation, then `S × A²`, equivalently `S × P²`, is `k`-rational.
-  In particular, this holds for every stably `k`-rational smooth quartic del
-  Pezzo surface.
-- The proof gives a reusable rational-quotient criterion for a generically
-  free torus action on a variety with birational generic tangent projection.
-  The differences among selected weight spaces form a basis of the character
-  lattice; a tangent linear section then meets a general orbit once and is
-  identified with projective space by tangent projection.
-- In characteristic zero, weight differences of finite index `d` instead
-  give a rational slice component whose degree over the quotient divides
-  `d`. Constructions with coprime indices imply universal `CH₀`-triviality
-  of smooth proper quotient models. A scroll example shows that the
-  component degree can be strictly smaller than the index.
-- For both Tschinkel–Zhang series `X_{j,r}` of smooth cubic hypersurfaces,
-  `X_{j,r} × P²` is rational over `Q` for every `r ≥ 0` and `j ∈ {1,3}`.
-  Their stable-rationality conclusions therefore hold with a uniform `P²`
-  bound.
-- For either cubic threefold `X`, the smooth projective fourfold
-  `Y = X × P¹` is nonrational even over `C`, while `Y × A¹` is rational over
-  `Q`. This answers the affine-line stabilization question raised by
-  Tschinkel and Zhang.
-- On the moduli space of smooth complex cubic threefolds,
-  `ell_C((X_j)_C) = 2` for `j ∈ {1,3}`, while the stabilization level is
-  infinite at a very general point.
-- The associated generic quartic del Pezzo surfaces have exact level two
-  over `F(t)` for every characteristic-zero field `F`. The same level
-  transfers to any threefold with a birational `P¹` correspondence to one
-  of the two specified cubics, including genus-eight Fano partners where
-  that correspondence is defined.
-- For a fibration satisfying the surface theorem over `k(B)`,
-  `Y × A² ~ B × A⁴`, hence
-  `max(ell_k(Y)-2,0) = max(ell_k(B)-4,0)`, including infinite levels.
-- For the full type-`I₃` Galois image, the unique rank-four subtorus has
-  sixteen distinct coordinate weights in orbits of sizes four and twelve.
-  No five weight spaces have a descended direct sum, so the same quotient
-  criterion cannot apply at rank four in this Cox embedding.
+The appendices retain generic-surface and fibration consequences, exact
+linearization levels of rational torus actions, finite rational pencil partner
+sets, finite-index slices and zero-cycles, and the rank-four limitation of this
+Cox construction. No analytic height theorem is needed by the main proof.
+The unit-equation result supplies finitely many necessary candidates; a
+complete solver and affirmative birationality test are not implemented.
 
-The paper does not claim that every smooth cubic threefold has finite
-stabilization level. The fourfold consequence concerns birational rationality
-after multiplication by `A¹`; it is not a statement about Zariski cancellation
-for isomorphic affine cylinders.
+The statements concern the displayed smooth families, not all cubic
+threefolds. The fourfold result concerns birational products, not isomorphism
+cancellation for affine cylinders. Isogenies are geometric; no product
+principal polarization is asserted.
 
-## Proof and evidence boundary
+## Proof and evidence
 
-We prove the quotient, Galois descent, quartic del Pezzo reduction, and
-generic-fibre function-field arguments in the manuscript. We use the Cox and
-one-apparent-double-point geometry, universal-torsor splitting, four-type
-Galois classification, and explicit cubic fibrations of Tschinkel and Zhang
-at their stated pinpoints.
+The manuscript proves the quotient, descent, torsor and family arguments,
+using the cited Cox geometry and Picard classification of Tschinkel–Zhang.
+It identifies the actual signed family action and the actual Prym covers;
+group order and finite point counts alone would not establish those steps.
 
-The exact-arithmetic generator
-[`verification/derive_slice_cover.py`](verification/derive_slice_cover.py)
-starts from the transcribed type-`I₃` matrices and twenty Cox quadrics. It
-reconstructs the saturated rank-three lattice, Cox weights, residual rank-two
-quotient, tangent Jacobian, four symbolic evaluation determinants, and the
-four-open cover of the smooth parameter locus. It also constructs the linear
-section from the three-dimensional kernel of the functional
-`H_p -> k`, `lambda |-> lambda(x)`. For each of the six empty localized cases,
-[`verification/groebner-empty-certificates.json`](verification/groebner-empty-certificates.json)
-retains an exact identity expressing a nonzero constant in the corresponding
-localized ideal. The generator renders all computation-derived values printed
-in the manuscript into the checked
-[`verification/slice-cover-values.tex`](verification/slice-cover-values.tex)
-artifact. A second program,
-[`verification/check_slice_cover.py`](verification/check_slice_cover.py),
-independently checks the resulting certificate and quotient minors. Both
-programs reject optimized Python execution so that assertion checks cannot be
-disabled.
+The original twenty-quadric Cox derivation and independent checker remain
+in the full gate, as does the independent rank-four check. The new
+[family/arithmetic checker](verification/check_family_arithmetic.py) checks
+exact equations, seed smoothness, moduli ranks, elliptic quotients and
+arithmetic normalizations. Its complete symbolic calculation has not been
+independently reimplemented. Details, replay and hashes are in
+[verification/family-arithmetic.md](verification/family-arithmetic.md).
 
-The separate [rank-four certificate](verification/rank-four.md) reconstructs
-the character kernel and affine weight actions and exhausts all five-subsets.
-Its generator uses SymPy; its independent checker uses rational elimination
-and ambient integer determinants. Both are included in `make check`.
-
-No Lean development formalizes the new quotient theorem, the surface theorem,
-or their corollaries. Their formal coverage is recorded as `absent` in
-[`verification/claim-map.json`](verification/claim-map.json). The exact
-boundary between proved, imported, and computationally certified claims is
-recorded there and in
-[`verification/imported-sources.json`](verification/imported-sources.json).
+All theorem coverage is `absent` in [the claim map](verification/claim-map.json).
+No end-to-end Lean formalization or new independent validation of the
+companion's geometric proof is claimed. Imported conventions are recorded in
+[the source registry](verification/imported-sources.json).
 
 ## Verification
 
