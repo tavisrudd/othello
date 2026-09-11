@@ -38,6 +38,12 @@ A passing prebuilt-artifact test does not establish that artifacts match unbuilt
 source changes. Safari/iOS and performance gates remain separate requirements.
 
 **PRIVATE — contributor context only. Do not ship, export or publish.**
+
+Certificate interoperability direction (C1148, queued): private
+`ergodis-private/docs/adr/0003-certificate-interoperability.md`. Shared cold
+inspection/verification/export with family-specific claim preservation; explicit
+reproof is separate from format conversion. VIPR, VeriPB and SAT proof ecosystems
+are candidate targets, not current universal compatibility.
 **Lane**: `ergodis`. Reviewed: 2026-09-09.
 
 This is the short architecture map, not a second glossary or a transcript. Read

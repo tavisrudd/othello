@@ -42,6 +42,15 @@ the C985 optimization-facing paper.
 
 ## Active frontiers
 
+### C1148 — certificate interoperability (queued)
+
+All certificate families, not only C1143: common cold inspect/verify/export
+interface, explicit reproof when external evidence must be regenerated, and
+claim/source-preserving adapters to justified industry formats/checkers.
+Private decision: `ergodis-private/docs/adr/0003-certificate-interoperability.md`.
+Inventory and implementation are queued; no universal VIPR compatibility is
+claimed. C1143 remains active and resumes its SCIP exact/VIPR comparison.
+
 ### C1143–C1147 — external benchmark programme
 
 User-selected next order: C1143 BB circuit distance (active), C1144 held-out
