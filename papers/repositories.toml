@@ -294,8 +294,8 @@ reason = "the monorepo-wide TeX lint helper is outside the standalone repository
 
 [[repository.rewrite]]
 path = "Makefile"
-old = "all: lint manuscript\n\ncheck: lint formal-static residue-check manuscript warnings"
-new = "all: manuscript\n\ncheck: formal-static residue-check manuscript warnings"
+old = "all: lint manuscript\n\ncheck: lint formal-static residue-check fano-check manuscript warnings"
+new = "all: manuscript\n\ncheck: formal-static residue-check fano-check manuscript warnings"
 expected_count = 1
 reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
 
