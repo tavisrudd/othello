@@ -48,15 +48,17 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Latest report: `../2026-09-10-c1133-citation-followup.md`: twelve S2 seed
   sets recovered, 59 memberships/39 distinct works title-screened; explicit
   equivariant/Hodge-partner precedents credited and withdrawn Verra claim
-  distinguished. F-bundle publication DOI resolved. Current register: 88
+  distinguished. F-bundle publication DOI resolved. Current register: 89
   sources, still eight external full-text reads. Cross-service gaps remain.
-  Remaining: published spectra version match, categorical-base-loci body,
-  graph/service coverage and the exact special-pencil companion for packet
-  §§30–31 (path/link requested from author). Exact source request:
-  `../2026-09-10-c1133-missing-source-request.md`. The local sharpness surface
-  theorem does not alone verify the pencil hypotheses. No full literature
-  clearance or global novelty verdict; manuscript upgrades/hierarchy review
-  remain later. Collaborator discussion stays parked.
+  User-authorized triangulation now permits bounded core assessment:
+  `../2026-09-10-c1133-triangulation.md`. Neither paid chapter is an A–D
+  premise; direct/secondary precursor credit is explicit. Current register:
+  89 sources, eight external full-text reads. Published-body/version and
+  service gaps remain disclosed; no comprehensive priority verdict.
+  Next: author assessment of A, B, then C/D with that coverage boundary.
+  Exact pencil claims remain conditional and outside the core. No further
+  purchase/access request is required for core review. Collaborator
+  discussion stays parked; manuscript promotion remains a later decision.
   Prior guarded formal checkpoint: **371 public terminals, 133 machinery,
   245 sources**; aggregate kernel and actual axiom comparison passed.
   `../2026-09-09-c1133-lean-completion-progress.md` records exact declarations

@@ -845,9 +845,9 @@
     {
       "key": "zbMATH:6490755",
       "title": "Categorical base loci and spectral gaps, via Okounkov bodies and Nevanlinna theory",
-      "read_depth": "abstract/metadata only",
-      "read_scope": "Bibliographic title metadata only; no paper body read. Additional 2026-09-10 check: Crossref DOI record and current AMS volume landing links; no chapter body.",
-      "role_status": "Published chapter identity resolved by DOI/INSPIRE/AMS. Body unread: guessed chapter PDF 404, linked book PDF non-PDF access response. Retrieved endmatter is not chapter text. Full-content overlap remains an access gap.",
+      "read_depth": "secondary only",
+      "read_scope": "Chapter body unread. Triangulation from Katzarkov-DSciThesis-v2 (partial primary read), chapter opening printed pp. 281–282, extracted lines 16895–16970: explicit attribution to reference [144] for categorical linear systems, monodromy and perverse-sheaf-of-categories setup. Chapter bibliographic metadata separately checked at Crossref/AMS. This is not full-content or theorem verification.",
+      "role_status": "Broad conceptual precursor credited through the identified author-hosted secondary chain. No theorem from this chapter is used as an input to A–D. Body-level overlap and publication details beyond metadata remain unverified; no content-level negative.",
       "access": {
         "status": "no linked primary identifier; needs manual resolution",
         "additional_primary_locator": "https://doi.org/10.1090/pspum/088/01473",
@@ -887,7 +887,8 @@
           "status": "retrieved"
         },
         "final_access_manifest": "notes/2026-09-10-c1133-final-source-probe.json"
-      }
+      },
+      "triangulation": "Publisher identity/abstract/references and HSE locator corroborate identity. Content attribution uses the separately pinned author-hosted thesis, not presumed verbatim equivalence. Printed p. 285 and §§2.1–2.4 support prior exponent and spectral-method credit. Published body remains unread."
     },
     {
       "key": "arXiv:1806.01752",
@@ -1296,6 +1297,24 @@
         "path": "/tmp/persistent/tavis/lit-search/c1133-cont/1ca85f0057d418aeeacc.response",
         "sha256": "7044b442375b232576ab3c66030ec4dc1f1fc99c6f1023586e96e2e8025aa503",
         "bytes": 41157,
+        "pdf": false
+      }
+    },
+    {
+      "key": "FWF:P27784",
+      "title": "Categorical base loci and Orlov spectra — project abstract and report summary",
+      "read_depth": "abstract/metadata only",
+      "read_scope": "FWF grant page, project identity and summary paragraphs (browser lines 241–266); surrounding output list not audited. German summary read directly. Not the inaccessible chapter or its proof.",
+      "role_status": "Primary institutional project summary corroborates the broad categorical base-locus/Orlov-spectrum program. Same investigator, so not an independent mathematical verification; no specific theorem imported.",
+      "access": {
+        "name": "FWF:P27784",
+        "url": "https://www.fwf.ac.at/forschungsradar/10.55776/P27784",
+        "utc": "2026-09-11T02:03:29.167633+00:00",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "path": "/tmp/persistent/tavis/lit-search/c1133-triangulation/09b0898cc6284eef4dd8.response",
+        "sha256": "5ce6ba1a82371caf1043cdeb13132e4222f8a50b83613d712d521a5a3da216fa",
+        "bytes": 133572,
         "pdf": false
       }
     }

@@ -16,7 +16,7 @@ result becomes a core premise.
 **Latest source pass (2026-09-10):**
 `notes/2026-09-10-c1133-citation-followup.md`. Twelve exact S2 seed sets now
 supply 59 memberships (39 distinct works), title/identifier-screened. The
-register has 88 sources (87 external, one local), eight external full-text
+register has 89 sources (88 external, one local), eight external full-text
 reads (six papers, two source scripts). The F-bundle publication DOI is
 resolved. The withdrawn ordinary Verra claim is distinguished from its
 equivariant replacement; new partial primary reads credit explicit
@@ -25,20 +25,20 @@ on birational fourfold partners in the owning novelty ledger. The earlier
 closeout verifies original Narasimhan–Nori and fully reads Cai and the atomic
 criterion. Crossref arXiv-DOI failures remain unavailable, not zeros.
 
-**Exact remaining literature/source gates:** published spectra chapter
-version match; categorical-base-loci chapter body; outstanding graph/service
-coverage; and the unidentified special-pencil companion for packet §§30–31.
-The local sharpness theorem is pinned to its exact rational-point and
-stable-permutation hypotheses; it does not establish those pencil imports.
-The author has been asked for the companion's exact local path/link. Exact missing-source list and exhausted publisher routes:
-`notes/2026-09-10-c1133-missing-source-request.md`.
-MathSciNet and Google Scholar remain NOT COVERED. No complete literature
-clearance, global novelty verdict or manuscript promotion is asserted.
+**Current decision — user-authorized triangulation:**
+`notes/2026-09-10-c1133-triangulation.md` supplies a bounded source-role
+assessment. Neither paywalled chapter is a proof premise of A–D. The spectra
+thesis supports direct prior-work credit; categorical base loci receives
+explicit secondary-source credit. Register: 89 sources, eight external
+full-text reads. Published-body/version uncertainty and missing service
+coverage remain disclosed; no exhaustive priority claim is made.
 
-The proposed presentation order is A, then B, then its consequences C and D;
-A has its separate numerical route. This is a concrete option for later
-author review. Withhold
-unverified pencil applications. Collaborator discussion remains parked.
+The next action is author assessment of the concrete core hierarchy A, B,
+then consequences C and D, with the bounded literature statement in that
+report. The exact pencil inputs remain unverified and optional applications
+stay conditional. No purchase or repeated source-access request is needed
+for this core review. This does not mark comprehensive literature coverage
+complete or promote manuscript claims. Collaborator discussion stays parked.
 
 Latest formal checkpoint: **371 public terminals, 133 machinery, 245 sources**;
 aggregate kernel build and actual axiom comparison passed in the prior

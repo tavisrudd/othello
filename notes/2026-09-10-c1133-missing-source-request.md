@@ -21,6 +21,12 @@ The following concrete items are needed to finish the corresponding gates:
    squarefree-parameter separation and the special isogeny restriction.
    The known local sharpness theorem alone does not supply these inputs.
 
+**Superseding operational decision:** the user requested triangulation rather
+than paid access. `2026-09-10-c1133-triangulation.md` distinguishes proof
+inputs from attribution/version limitations. The two chapters no longer
+block bounded A–D assessment; the optional pencil imports remain conditional.
+This historical request is not a renewed request to purchase or supply files.
+
 ## Final bounded access pass
 
 Exact discovery queries:

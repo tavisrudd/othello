@@ -51,7 +51,7 @@ def main():
     assert len(unique) == screen['unique_papers'] == 39
     register = read('2026-09-09-c1133-literature-sources.json')
     sources = register['sources']
-    assert len(sources) == len({s['key'] for s in sources}) == 88
+    assert len(sources) == len({s['key'] for s in sources}) == 89
     vocabulary = {'full text', 'partial', 'review only', 'secondary only',
                   'abstract/metadata only'}
     assert all(s['read_depth'] in vocabulary and s['read_scope'] and s['access'] for s in sources)
@@ -66,7 +66,7 @@ def main():
             assert hashlib.sha256(pdf).hexdigest() == access['sha256']
             assert Path(access['text']).is_file()
     print('Verified: 12 identities, 59 memberships, 39 distinct works;')
-    print('88 source records, eight full-text reads; response and new PDF hashes.')
+    print(f'{len(sources)} source records, eight full-text reads; response and new PDF hashes.')
 
 
 if __name__ == '__main__':
