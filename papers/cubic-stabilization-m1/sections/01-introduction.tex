@@ -18,23 +18,48 @@ For every smooth complex cubic threefold \(X\), the fourfold
 \(X\times\PP^1\) is irrational.
 \end{theorem}
 
-We construct an integer-valued \emph{exponent count} \(I_{\mathrm{exp}}\)
-from selected rank-two primary summands of the even quantum connection.
-It vanishes on smooth projective varieties of dimension at most two and
-satisfies
+The proof attaches an integer to the quantum connection. It counts certain
+rank-two primary factors of Euler multiplication, distinguished by the
+residue of a canonical lattice. The count is two on $X\times\PP^1$ and
+zero on $\PP^4$. The essential step is to show that every point, curve and
+surface contributes zero in the quantum blowup formula. Weak factorization
+then makes the count a birational invariant of fourfolds.
+
+The numerical construction extends to all smooth Fano threefolds of Picard
+rank one. Here ``one stabilization'' always means product with $\PP^1$.
+
+\begin{theorem}[Rationality after one stabilization]
+\label{thm:fano-one-step-classification}\coverage{absent}%
+For every smooth complex Picard-rank-one Fano threefold $X$,
 \[
- I_{\mathrm{exp}}(\Bl_ZY)=I_{\mathrm{exp}}(Y)+(c-1)I_{\mathrm{exp}}(Z),
- \qquad
- I_{\mathrm{exp}}(\PP_Y(V))=\rk(V)I_{\mathrm{exp}}(Y),
+ X\times\PP^1\text{ is rational}\quad\Longleftrightarrow\quad
+ X\text{ is rational}.
 \]
-where \(c=\operatorname{codim}_YZ\).  Its value on a cubic threefold is one.
-Thus its value on \(X\times\PP^1\) is two, whereas its value on \(\PP^4\)
-is zero.  Every nontrivial center in projective weak factorization between
-smooth fourfolds has dimension at most two.  The blowup formula makes the
-count unchanged along such a factorization, ruling out rationality of
-\(X\times\PP^1\).  Section~\ref{sec:atomic-one-step} proves these properties.
-The main issue is faithful transport of the center connection and its
-canonical lattice through the quantum comparisons.
+The rational families are $\PP^3$, the smooth quadric, index-two degrees
+$4,5$, and index-one genera $7,9,10,12$. The other nine families have
+irrational first stabilization.
+\end{theorem}
+
+A second result keeps the odd Hodge structure carried by the selected
+factors. It concerns precisely the nine families detected by the numerical
+argument, denoted by $\mathcal F$.
+
+\begin{theorem}[Rational Hodge conservation]
+\label{thm:hodge-conservation}\coverage{absent}%
+Let $X,Y$ be smooth complex Picard-rank-one Fano threefolds, each of index
+two and degree $1,2,3$, or of index one and genus $2,3,4,5,6,8$.
+If $X\times\PP^1$ and $Y\times\PP^1$ are birational, then
+\[
+ H^3(X,\Q)\cong H^3(Y,\Q)
+\]
+as rational Hodge structures.
+\end{theorem}
+
+Both theorems apply to every smooth member of the stated families.
+The Hodge isomorphism carries no assertion about integral lattices or
+polarizations. Its proof introduces a Hodge-fixed parameter base while
+retaining the full cohomology fiber; the numerical theorem does not require
+that construction.
 
 The stable-rationality picture varies across the moduli space.  Hassett and
 Tschinkel identified varieties birational to cubic threefolds as the
@@ -76,8 +101,9 @@ Using Beauville's quantum product formulas, we compute the exponent
 representatives \(-1/6\) and \(-5/6\) for the cubic block, with difference
 \(2/3\).  The resulting invariant
 vanishes on points, curves, and surfaces and on projective space.
-Iritani--Koto's projective-bundle theorem shows that it doubles after product
-with \(\PP^1\).  This proves the theorem.
+The small Gromov--Witten product formula and flatness in all even bulk
+directions show that it doubles after product with \(\PP^1\); see
+Lemma~\ref{lem:special-projective-line}. This proves the cubic theorem.
 
 This use of Euler eigenspace blocks in birational geometry belongs to the same
 circle of ideas as the Hodge-atom framework of
@@ -91,13 +117,13 @@ include work on cubic, Gushel--Mukai, and K\"uchle fourfolds
 \cite{GuereCubicFourfold,BenedettiManivelPerrin,
 BenedettiFayGuereManivelPerrin}.
 
-The invariant used here retains less structure: it uses no Hodge structure and
+The numerical exponent count uses no Hodge structure and
 records only the rank-two formal-exponent condition above.  Its purpose is the
 one-stabilization problem.  For this purpose, we specialize Iritani's blowup
 comparison in a way that keeps the center summands distinct, prove that the
-invariant vanishes on points, curves, and surfaces, and use Iritani--Koto's
-projective-bundle comparison for stabilization
-\cite{IritaniBlowup,IritaniKoto}.  Gyenge gives a complementary
+invariant vanishes on points, curves, and surfaces, and compute the product
+with one projective line from its small quantum connection
+\cite{IritaniBlowup,Behrend}.  Gyenge gives a complementary
 formal tensor-product theorem for quantum \(D\)-modules of products and proves
 multiplicativity for Hodge atoms \cite{GyengeProduct}.  Cai independently
 computes the same two exponent representatives and uses them with Iritani's
@@ -105,23 +131,22 @@ blowup theorem to prove symplectic irrationality of cubic threefolds
 \cite{Cai}; that argument does not address stabilization.
 
 Keeping distinct eigenvalues of the canonical modified residue, even when
-their difference is integral, defines the stronger lattice count
-\(I_{\mathrm{lat}}\).  The same comparison and vanishing proofs apply.
-A rational calculation then treats degrees one, two and three together:
-for a smooth complex Picard-rank-one Fano threefold \(V\) with
-\(-K_V=2H\),
-\[
- V\times\PP^1\text{ is rational}\quad\Longleftrightarrow\quad
- V\text{ is rational}\quad\Longleftrightarrow\quad H^3\in\{4,5\}.
-\]
-The degree-two case uses the lattice count; its exponent classes coincide.
-The proof and classical degree-four and degree-five inputs appear in
-Theorem~\ref{thm:index-two-classification}.
+their difference is integral, defines the stronger count $I_{\mathrm{lat}}$.
+It detects index-two degree two and index-one genus six, where exponent
+classes alone do not distinguish the repeated factor. In genera two through
+five the repeated factor has even rank three, and its odd dimension gives
+the obstruction. Cai's quartic persistence theorem is a precedent for the
+cyclic-cluster argument \cite[Theorem~5.3]{CaiQuartic}.
+For the Hodge refinement we use Iritani's equivariant blowup comparison
+\cite{IritaniHodge}; the Hodge-atom framework and product results above supply
+its surrounding context.
 
-The same argument applies to any smooth projective threefold with positive
-exponent count.  It also gives irrationality after one stabilization for
-prime Fano threefolds of genus eight, and universally \(CH_0\)-trivial
-irrational fourfolds.  These consequences are stated and proved in
-Section~\ref{sec:applications}.  The additive and spectral extensions in
-Section~\ref{sec:motivic} follow the proof of the cubic theorem and its
-applications.
+A reader interested in the cubic theorem can stop after
+Section~\ref{sec:cubic-proof}. Section~\ref{sec:fano-classification} completes
+the numerical classification, followed by its geometric consequences.
+Part~\ref{part:hodge} proves Hodge conservation, including the fixed-base
+comparison and rational descent. The finite-data appendix supplies the computations and family provenance
+needed to audit the classification and Hodge endpoints. The other appendices
+contain an independent cubic calculation, an arithmetic application, and
+optional general-bundle and additive extensions. Those extensions
+retain Iritani--Koto's general theorem; it is not a premise of either part.

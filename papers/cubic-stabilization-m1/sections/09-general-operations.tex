@@ -1,0 +1,217 @@
+\section{General bundle formulas and additive invariants}
+\label{sec:general-operations}
+The results in this appendix use the general projective-bundle theorem of
+Iritani--Koto. For product computations, the cubic proof and the classification and Hodge
+theorems use only Lemma~\ref{lem:special-projective-line} and the ruled-product
+calculation.
+
+\paragraph{Coefficient fields.}
+The intrinsic ample-adic completion and the Laurent neighborhood of a
+fibre or exceptional cusp need not map to one another.  Iritani's
+display~(1.1) supplies the required common coefficient maps
+\cite[(1.1)]{IritaniBlowup}; injectivity for each center summand is
+proved in Lemma~\ref{lem:faithful-center-base-change}.  For projective bundles the common source is
+\(\C[z,q][[Q,\widehat\tau]]\).  On the blowup side the ambient term uses the
+corresponding graded source.  A center term begins with its intrinsic reduced
+coefficient ring from Remark~2.3, maps to the possibly smaller image ring of
+Remark~5.6, and is then pulled to a separate target ring for that summand in
+the external direct sum.  Embed the generic fields of the ambient common image
+and of these separate center images in a fixed algebraically closed overfield
+and form every primary block there.  Base
+change after this splitting extension preserves the rank, nilpotent Jordan
+type, regular formal gauge, and formal exponent classes of each block; forming
+primary factors over a nonsplitting field before extension would not.
+
+\paragraph{Restriction to even cohomology.}
+The comparison is restricted to even cohomology, not merely to the
+even bulk base.  The supermodule conventions and the pull-push and Fourier
+formulas in Iritani's Section~5.8 and Iritani--Koto's construction are
+parity-preserving.  After the odd bulk variables are set to zero, the
+comparison and its inverse therefore restrict to mutually inverse maps on
+\(H^{\mathrm{ev}}\).  This is the QDM on which the additive invariant is defined.
+
+\paragraph{Regularity in \(z\).}
+The comparisons are regular in \(z\).  Iritani's Theorem~5.18 and
+Iritani--Koto's Theorem~5.1 are respectively defined over rings of the form
+\[
+ \C[z]((q_{\mathrm{exc}}^{-1/\mathfrak s}))[[Q,\widetilde\tau]],
+ \qquad
+ \C[z]((q_{\mathrm{fib}}^{-1/r'}))[[Q,\widehat\tau]],
+\]
+where Iritani--Koto take \(r'=r\) when \(r-1\) is even and \(r'=2r\) when
+\(r-1\) is odd.  Here \(\mathfrak s\in\{c-1,2(c-1)\}\) is Iritani's
+parity-dependent ramification index from \cite[(5.11)]{IritaniBlowup}.  Their
+inverses use no negative powers of \(z\); see also
+\cite[Remark~5.3]{IritaniKoto}.  The maps are homogeneous but need not have
+degree zero: the projective-bundle map has degree \(-(r-1)\), while Iritani's
+ambient and center components have degrees \(0\) and \(-c\), respectively
+\cite[Theorem~5.1(3)]{IritaniKoto}\cite[Theorem~5.18(3)]{IritaniBlowup}.
+The cited maps intertwine the actual \(z\)-connections.  A common grading
+normalization can translate the residue by a scalar, preserving its
+discriminant; no eigenline is independently regraded.  The graded completed rings embed coefficientwise
+in \(\overline K[[z]]\); no identification with an ordinary tensor-product
+completion is needed.
+
+\begin{proposition}[Intrinsic formulas for the two counts]
+\label{prop:intrinsic-count-formulas}
+\coverage{absent}%
+\uses{lem:faithful-center-base-change,prop:rank2-rigidity}%
+\imports{IritaniKoto:thm-5.1,IritaniBlowup:thm-5.18}%
+For either \(I=I_{\mathrm{exp}}\) or \(I=I_{\mathrm{lat}}\), a smooth
+codimension-\(c\) center \(Z\subset Y\) and a rank-\(r\) vector bundle \(V\)
+satisfy
+\begin{equation}
+ I(\Bl_ZY)=I(Y)+(c-1)I(Z),\qquad
+ I(\PP_Y(V))=rI(Y).
+ \label{eq:intrinsic-count-formulas}
+\end{equation}
+The formulas are componentwise for disconnected centers.
+\end{proposition}
+
+\begin{proof}
+\emph{Projective bundles.}
+For a rank-\(r\) bundle, Iritani--Koto's Theorem~5.1 gives \(r\) copies of
+the base QDM after Laurent extension \cite[Theorem~5.1]{IritaniKoto}.  Its
+invertible joint bulk Jacobian gives independent unit coordinates on the
+\(r\) target factors.  In the \(j\)-th factor, changing its unit coordinate
+adds an independent scalar \(u_jI\) to Euler multiplication.  For two finite
+spectra, the resultant of their translated characteristic polynomials is a
+nonzero polynomial in \(u_i-u_j\), with leading coefficient one.  Hence the
+spectra of distinct factors are disjoint at the generic point: their primary
+blocks do not fuse when the direct sum is formed.  Regularity, restriction to
+even cohomology, the fixed splitting field, and invariance under common scalar grading shifts therefore
+carry the invariant blockwise across the comparison, and additivity gives
+\eqref{eq:intrinsic-count-formulas}.  Tensoring the bundle by a line bundle, when needed
+for the global-generation convention, changes neither the projective bundle
+nor the intrinsic Novikov embedding
+\cite[Remark~1.2 and Remark~5.2]{IritaniKoto}.
+
+\smallskip
+\noindent\emph{Blowups.}
+For a codimension-\(c\) blowup, Iritani's Theorem~5.18 gives one ambient QDM
+and \(c-1\) center QDMs \cite[Theorem~5.18]{IritaniBlowup}.  Parts (4), (6),
+and (7) give the comparison asymptotics, the leading reconstruction
+parameters, and the invertible combined bulk Jacobian, respectively.  The
+independent unit coordinates supplied by part~(7) give the same nonzero
+resultant argument, so the spectra of the ambient and individual center
+summands are pairwise disjoint generically.  Regularity, restriction to even
+cohomology, the fixed splitting field, invariance under common scalar grading shifts, and
+Lemma~\ref{lem:faithful-center-base-change} for each center copy then give
+\eqref{eq:intrinsic-count-formulas}.  Faithful center base change identifies each of the \(c-1\) contributions
+with \(I(Z)\).  Each comparison is evaluated over its own common
+coefficient ring; the proof never composes Laurent comparisons recursively.
+\uses{lem:faithful-center-base-change,prop:rank2-rigidity}%
+\imports{IritaniKoto:thm-5.1,IritaniBlowup:thm-5.18}%
+\end{proof}
+
+\subsection{The additive formulation}
+For retained block data \(\mathcal T\), let \(\mathcal L_{\mathcal T}\)
+be the monoid of finite multisets of regular-isomorphism classes of blocks,
+with addition by multiset union.  Write \(\mathcal B_{\mathcal T}(Y)\) for the
+block multiset of \(Y\).  An \emph{additive invariant} is a homomorphism
+\[
+ w:\mathcal L_{\mathcal T}\longrightarrow A,
+ \qquad I_w(Y):=w(\mathcal B_{\mathcal T}(Y)),
+\]
+where \(A\) is a commutative monoid, possibly without subtraction.  For a blowup
+\(\beta:\Bl_ZY\to Y\) of codimension \(c\ge2\), retain the data of each
+center occurrence separately:
+\[
+ \omega_j=(\beta,Z,j,\varsigma_j,\chi_j),
+ \qquad 0\le j\le c-2.
+\]
+Here \(\varsigma_j\) is the reconstruction parameter and \(\chi_j\) its
+numerical Novikov specialization.  Set
+\(c_w(\omega_j):=w(\mathcal B_{\mathcal T}(Z;\omega_j))\);
+equality of these values need not identify the block multisets.
+
+\begin{theorem}[A birational invariance criterion]
+\label{thm:marker-ledger}
+\coverage{conditional_deduction}%
+\lean{effectiveBlockLedger_fold_unique,%
+  occurrenceIndexedMarker_eq_of_birational,%
+  occurrenceIndexedMarker_descends_to_birationalClasses}%
+\imports{AKMW:weak-factorization}%
+Let \(w:\mathcal L_{\mathcal T}\to A\) be an additive invariant unchanged by the
+allowed regular scalar extensions and formal coordinate changes.  Suppose
+\begin{equation}
+ I_w(\Bl_ZY)=I_w(Y)+\sum_{j=0}^{c-2}c_w(\omega_j),
+ \qquad\operatorname{codim}_YZ=c\ge2.\label{eq:marker-blowup}
+\end{equation}
+If every summand associated with a smooth center of dimension at most \(d-2\)
+has zero correction, then \(I_w\) is a birational invariant of smooth
+projective \(d\)-folds.
+\end{theorem}
+
+\begin{proof}
+Projective weak factorization writes a birational map of smooth projective
+\(d\)-folds as a zigzag of blowups and blowdowns along smooth centers of
+codimension at least two \cite[Theorem~0.3.1]{AKMW}.  By
+\eqref{eq:marker-blowup} and the vanishing of every center correction, the
+invariant is unchanged at each step; the equalities therefore telescope.
+Disconnected centers are treated componentwise, while a divisor blowup is an
+isomorphism.
+\end{proof}
+
+For the quantum comparisons one also has the bundle formula
+\begin{equation}
+ I_w(\PP_Y(V))=rI_w(Y),\qquad\rk V=r.
+ \label{eq:marker-pbundle}
+\end{equation}
+It is not a hypothesis of the birational invariance criterion.
+
+\begin{proposition}[Marker formulas for the QDM comparisons]
+\label{prop:qdm-operation-ledgers}
+\coverage{conditional_deduction}%
+\lean{qdmComparison_evenCarrierEquiv,%
+  qdmProjectiveBundle_markerFormula_of_suspensionComparison,%
+  qdmBlowup_markerFormula_of_suspensionComparison,%
+  qdmProjectiveBundle_markerFormula_of_blockComparison,%
+  qdmBlowup_markerFormula_of_occurrenceBlockComparison,%
+  qdmBlowup_step_of_occurrenceBlockComparison}%
+\imports{IritaniKoto:thm-5.1,IritaniBlowup:thm-5.18}%
+Let an additive invariant be preserved by the regular scalar extensions and formal
+coordinate changes described above, and by every recorded grading suspension
+if its block type retains grading.  The projective-bundle and blowup QDM
+comparisons on even cohomology then supply \eqref{eq:marker-pbundle} and
+\eqref{eq:marker-blowup}; the contribution of the \(j\)-th center summand is
+evaluated using its separate data \(\omega_j\).
+\end{proposition}
+
+\begin{proof}
+The comparison proof of Proposition~\ref{prop:intrinsic-count-formulas}
+uses only regular transport, generic separation and additivity.
+Apply it to \(w\), retaining each center occurrence and any grading
+suspensions in its block data.
+\uses{prop:intrinsic-count-formulas}%
+\imports{IritaniKoto:thm-5.1,IritaniBlowup:thm-5.18}%
+\end{proof}
+
+\begin{corollary}[Threefold criterion]
+\label{cor:threefold-marker}
+\coverage{fragment}%
+\lean{threefold_not_rational_of_occurrenceIndexedMarker,%
+threefold_projectiveLine_irrationality_of_positive_count}%
+Let \(Y\) be a smooth projective complex threefold.  If
+\(I_{\mathrm{lat}}(Y)>0\), then \(Y\times\PP^1\) is irrational, and so
+is \(Y\).  In particular, this holds when \(I_{\mathrm{exp}}(Y)>0\).
+\end{corollary}
+
+\begin{proof}[Proof of Corollary~\ref{cor:threefold-marker}]
+The projective-bundle formula gives
+\[
+ I_{\mathrm{lat}}(Y\times\PP^1)=2I_{\mathrm{lat}}(Y)>0.
+\]
+Every center in projective weak factorization of fourfolds has dimension
+at most two, so Proposition~\ref{prop:atomic-lowdim} makes every correction
+zero.  The intrinsic blowup formula therefore makes \(I_{\mathrm{lat}}\)
+birationally invariant in dimension four.  The generic even connection of
+\(\PP^4\) has only rank-one primary summands, so
+\(I_{\mathrm{lat}}(\PP^4)=0\).  Hence \(Y\times\PP^1\) is irrational.
+Rationality of \(Y\) would imply rationality of this product.
+Finally, \(I_{\mathrm{exp}}\le I_{\mathrm{lat}}\) gives the last assertion.
+\proves{cor:threefold-marker}%
+\uses{prop:atomic-lowdim,prop:intrinsic-count-formulas}%
+\imports{AKMW:weak-factorization}%
+\end{proof}
+

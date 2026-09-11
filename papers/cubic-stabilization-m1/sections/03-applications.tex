@@ -1,44 +1,15 @@
 \section{Consequences}
 \label{sec:applications}
 
-The rank-two calculation applies uniformly to Picard-rank-one index-two
-Fano threefolds.  We then transfer the cubic obstruction through Kuznetsov's
-flop and combine it with criteria for universal \(CH_0\)-triviality.
-
-\begin{corollary}[Threefold criterion]
-\label{cor:threefold-marker}
-\coverage{fragment}%
-\lean{threefold_not_rational_of_occurrenceIndexedMarker,%
-threefold_projectiveLine_irrationality_of_positive_count}%
-Let \(Y\) be a smooth projective complex threefold.  If
-\(I_{\mathrm{lat}}(Y)>0\), then \(Y\times\PP^1\) is irrational, and so
-is \(Y\).  In particular, this holds when \(I_{\mathrm{exp}}(Y)>0\).
-\end{corollary}
-
-\begin{proof}[Proof of Corollary~\ref{cor:threefold-marker}]
-The projective-bundle formula gives
-\[
- I_{\mathrm{lat}}(Y\times\PP^1)=2I_{\mathrm{lat}}(Y)>0.
-\]
-Every center in projective weak factorization of fourfolds has dimension
-at most two, so Proposition~\ref{prop:atomic-lowdim} makes every correction
-zero.  The intrinsic blowup formula therefore makes \(I_{\mathrm{lat}}\)
-birationally invariant in dimension four.  The generic even connection of
-\(\PP^4\) has only rank-one primary summands, so
-\(I_{\mathrm{lat}}(\PP^4)=0\).  Hence \(Y\times\PP^1\) is irrational.
-Rationality of \(Y\) would imply rationality of this product.
-Finally, \(I_{\mathrm{exp}}\le I_{\mathrm{lat}}\) gives the last assertion.
-\proves{cor:threefold-marker}%
-\uses{prop:atomic-lowdim,prop:intrinsic-count-formulas}%
-\imports{AKMW:weak-factorization}%
-\end{proof}
+We record the index-two specialization and the genus-eight correspondence,
+then combine the cubic theorem with criteria for universal \(CH_0\)-triviality.
 
 \subsection{Index-two Fano threefolds}
 
 \begin{theorem}[Rationality after one stabilization in index two]
 \label{thm:index-two-classification}
 \coverage{absent}%
-\uses{prop:universal-rank-two-residue,prop:intrinsic-count-formulas,prop:atomic-lowdim,lem:cyclic-primary-persistence,prop:rank2-rigidity}%
+\uses{prop:universal-rank-two-residue,lem:special-projective-line,prop:numerical-blowup,prop:atomic-lowdim,lem:cyclic-primary-persistence,prop:rank2-rigidity}%
 \imports{Przyjalkowski:counting-matrices,KuznetsovProkhorov:index-two,AKMW:weak-factorization}%
 Let \(V\) be a smooth complex Fano threefold with Picard rank one and
 \(-K_V=2H\), where \(H\) generates \(\operatorname{Pic}(V)\).  Then
@@ -50,44 +21,12 @@ Let \(V\) be a smooth complex Fano threefold with Picard rank one and
 \end{theorem}
 
 \begin{proof}
-The possible degrees \(d=H^3\) are \(1,\ldots,5\); degrees four and five
-are rational over \(\C\)
+Apply Theorem~\ref{thm:fano-one-step-classification} to the five index-two
+families. The table in Proposition~\ref{prop:fano-endpoints} gives the
+three nonzero residue discriminants; degrees four and five are rational
 \cite[Section~2.3, Theorems~2.7, 3.3 and~3.5]{KuznetsovProkhorov}.
-For degrees one and two, Przyjalkowski's counting matrices give the
-small Euler matrix \(U_{a,b}\) in the classical anticanonical-power basis,
-with parameters in the table below
-\cite[Proposition~2.6.4 and Theorem~2.6.6]{Przyjalkowski}.
-The Novikov variable \(q\) records \(H\)-degree one; an anticanonical-degree
-variable \(t\) would give \(q=t^2\).  The cubic normalization was checked
-above.  These are smooth deformation families, and the matrix formulas
-apply to every smooth member.
-\begin{center}
-\small
-\begin{tabular}{@{}clrrcc@{}}
-\toprule
-\(d\)&Model&\((a,b)\)&\(\delta^\sharp\)&\(I_{\rm exp}\)&\(I_{\rm lat}\)\\
-\midrule
-1&Sextic in \(\PP(1,1,1,2,3)\)&\((240,1248)\)&\(16/9\)&1&1\\
-2&Quartic double solid&\((48,160)\)&\(1\)&0&1\\
-3&Cubic threefold&\((24,60)\)&\(4/9\)&1&1\\
-\bottomrule
-\end{tabular}
-\end{center}
-The even cohomology in each case is exactly the rank-four space in this
-matrix.  Its zero-primary block is therefore a whole primary summand;
-the other two eigenvalues are simple.  Lemma~\ref{lem:cyclic-primary-persistence}
-continues the separated cyclic block from the small point, and
-Proposition~\ref{prop:rank2-rigidity} preserves its residue.  The residue
-eigenvalues in degrees one, two and three are respectively
-\[
- \{1/6,-7/6\},\qquad \{0,-1\},\qquad \{-1/6,-5/6\}.
-\]
-Thus \(I_{\mathrm{lat}}(V)=1\).  Its value on \(V\times\PP^1\) is two.
-By Proposition~\ref{prop:atomic-lowdim} and weak factorization this count
-is birationally invariant on fourfolds, while its value on \(\PP^4\)
-is zero.  This proves irrationality in degrees one through three.
-\uses{prop:universal-rank-two-residue,prop:intrinsic-count-formulas,prop:atomic-lowdim,lem:cyclic-primary-persistence,prop:rank2-rigidity}%
-\imports{Przyjalkowski:counting-matrices,KuznetsovProkhorov:index-two,AKMW:weak-factorization}%
+\uses{thm:fano-one-step-classification,prop:fano-endpoints}%
+\imports{KuznetsovProkhorov:index-two}%
 \end{proof}
 
 The degree-one case already uses \(I_{\mathrm{exp}}\).  The degree-two
@@ -200,5 +139,5 @@ of the diagonal and hence universal \(CH_0\)-triviality
 \end{proof}
 
 In dimension five, threefold centers can contribute to weak factorization.
-The next section retains those contributions and places the blowup formulas
-in the additive Grothendieck group.
+Appendix~\ref{sec:motivic} retains those contributions and places the blowup
+formulas in the additive Grothendieck group.

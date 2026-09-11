@@ -12,7 +12,7 @@ JOBNAME := irrationality_after_one_stabilization
 
 all: lint manuscript
 
-check: lint formal-static residue-check manuscript warnings
+check: lint formal-static residue-check fano-check manuscript warnings
 
 lint:
 	$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex
@@ -42,3 +42,9 @@ distclean:
 .PHONY: residue-check
 residue-check:
 	uv run --with sympy==1.14.0 python verification/check_universal_residue.py
+
+.PHONY: fano-check
+fano-check:
+	uv run --with sympy==1.14.0 python verification/fano-matrices/finite_checks.py --check
+	$(PYTHON) verification/fano-matrices/independent_checks.py --check
+	sha256sum --quiet -c verification/fano-matrices/SHA256SUMS

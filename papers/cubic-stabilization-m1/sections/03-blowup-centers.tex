@@ -1,0 +1,312 @@
+\section{Blowups and surface centers}\label{sec:blowup-centers}
+
+To use the cited decomposition theorems, we must check that they preserve all
+the data seen by the invariant.  Four issues arise: coefficient fields,
+restriction to even cohomology, regularity in \(z\), and faithful embedding of
+the center coefficients.
+The last issue is the delicate one: Iritani's center Novikov map may have a
+kernel, so the independent target coordinates must recover the missing
+numerical curve-class data.
+\paragraph{The comparison and its lattice.}
+Use Iritani's reduced graded source, its ambient and separate center images,
+and the independent external coordinates of Section~5.8.2
+\cite[Remarks~2.3 and~5.6, Theorem~5.18]{IritaniBlowup}.
+Their generic fields embed in a common algebraically closed overfield after
+the prescribed exceptional Novikov Laurent extension and ramification.
+This does not identify two differently directed Novikov completions.
+The comparison is parity preserving; on the even bulk base it and its inverse
+restrict to even cohomology. The same maps act on the full supermodule when
+odd dimensions are retained below.
+
+Theorem~5.18 gives mutually inverse maps of the specified graded completed
+$\C[z]$-modules, intertwining the actual $z$-connections. Their positive
+coefficientwise realization is regular in $z$ in both directions. Hence they
+preserve the original lattices, and their leading terms conjugate $N$ and
+$\im N$. They therefore preserve the elementary modification and conjugate
+its residue. A common grading normalization can add a scalar residue;
+it leaves the discriminant unchanged, including in the resonant case.
+
+\paragraph{Faithful center coordinates.}
+Iritani's center map need not be injective
+\cite[(5.15)]{IritaniBlowup}.  After numerical reduction it has the form
+\begin{equation}
+ Q_Z^d\longmapsto
+ Q^{i_*d}q_{\mathrm{exc}}^{-\rho_Z\cdot d/(c-1)}.
+ \label{eq:center-novikov-map-atomic}
+\end{equation}
+Here \(\rho_Z=c_1(N_{Z/Y})\).
+The raw map is not the coefficient map used below.  Remark~2.3 gives the
+intrinsic divisor-equation-reduced coefficient ring, whose Novikov generators
+are the combined symbols
+\[
+ X_d=Q_Z^d\exp\!\bigl(\sigma^{(2)}\cdot d\bigr);
+\]
+the divisor coordinates \(\sigma^{(2)}\) are not separate elements of this
+ring.  Remark~5.6 places its pushforward under the raw Novikov map over the
+image of that reduced ring \cite[Remarks~2.3 and~5.6]{IritaniBlowup}.  In the
+external direct sum of Section~5.8.2, by contrast, the variables
+\(s_j\in H^*(Z)\) are independent coordinates on the common comparison target,
+and the center parameter is identified as
+\(\varsigma_j=\varsigma_j^\circ+s_j\)
+\cite[(5.47)--(5.48)]{IritaniBlowup}.  The divisor components of these
+independent target coordinates retain the curve-class information lost by
+\eqref{eq:center-novikov-map-atomic}.
+
+The distinction is modeled by \(x,y\mapsto q\), which identifies two
+generators, and \(x\mapsto qe^s,\ y\mapsto qe^t\), which retains independent
+characters.  Source coefficients must not already depend on the target
+variables \(s,t\).  The comparison uses the following conventions:
+\begin{center}
+\small
+\begin{tabular}{@{}p{.22\linewidth}p{.72\linewidth}@{}}
+\toprule
+Object & Required data \\
+\midrule
+Source & Reduced graded coefficients \(\C[[X_d,\sigma']]_{\rm gr}[\sigma^0]\);
+no independent source divisor variables. \\
+Target & Independent ambient and center-copy coordinates \(t,s_0,\ldots,s_{c-2}\);
+all center divisor directions retained. \\
+Scalars & The displayed exceptional or fibre Novikov Laurent extensions and
+ramification; their \(z\)-free fraction fields in a common algebraic closure. \\
+Connections & Graded completed \(z\)-enhancements embedded coefficientwise
+in the common field's \(\overline K[[z]]\); comparison and inverse regular. \\
+Derivations & Bulk partials, numerical Novikov logarithmic derivatives and
+the actual \(z\)-connection, with coordinate-change chain rules. \\
+Grading & Only common scalar residue shifts; no independent shifts of residue
+eigenlines. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{lemma}[Faithful center base change]
+\label{lem:faithful-center-base-change}
+\coverage{fragment}%
+\lean{faithfulCenterBaseChange_targetOnly_injective}%
+Let \(R_{Z,\mathrm{src}}^{\mathrm{red}}
+=\C[[X_d,\sigma']]_{\mathrm{gr}}[\sigma^0]\) be the coefficient domain
+whose graded completed \(z\)-enhancement is Iritani's reduced source ring
+\[\C[z][[Q_Ze^{\sigma^{(2)}},\sigma']][\sigma^0].\]
+Let \(A_j\) be the
+numerical coefficient domain of the external direct sum in Section~5.8.2,
+with the independent target coordinates \(t,s_0,\ldots,s_{c-2}\) and with
+\(z\) omitted.  The pullback determined by the center Novikov map and
+\(\varsigma_j=\varsigma_j^\circ+s_j\) gives a continuous homomorphism
+\[
+ \iota_j:R_{Z,\mathrm{src}}^{\mathrm{red}}\longrightarrow A_j.
+\]
+On a combined divisor-equation generator it is
+\begin{equation}
+ X_d=Q_Z^d\exp\!\bigl(\sigma^{(2)}\cdot d\bigr)
+ \longmapsto
+ Q^{i_*d}q_{\mathrm{exc}}^{-\rho_Z\cdot d/(c-1)}
+ \exp\!\bigl((\varsigma_j^{\circ,(2)}+s_j^{(2)})\cdot d\bigr).
+ \label{eq:faithful-center-map}
+\end{equation}
+This map is injective.  In particular, it induces a field embedding
+\[
+ \operatorname{Frac}(R_{Z,\mathrm{src}}^{\mathrm{red}})
+ \lhook\joinrel\longrightarrow
+ \operatorname{Frac}(A_j).
+\]
+After this field extension, each center summand in Iritani's comparison is the
+faithful scalar extension, followed by the formal coordinate change
+\(\varsigma_j\), of the intrinsic generic numerical even QDM of \(Z\).
+\end{lemma}
+
+\begin{proof}
+All completions here use the graded convention of
+\cite[Section~2.2]{IritaniBlowup}.  The pullback is defined on the reduced
+ring by the String and Divisor Equations, as explained after (5.36) and
+(5.47) there.  It need not be defined on the unrestricted bulk power-series
+ring.  We prove injectivity using the first nonzero Novikov degree, retaining
+the full exponentials in the target divisor coordinates.
+Choose integral divisors \(D_1,\ldots,D_\rho\) whose pairings separate
+\(N_1(Z)\), and use their dual coordinates in \(s_j^{(2)}\).  The variables
+\(s_j\) occur only in the target \(A_j\), not as coefficients in
+\(R_{Z,\mathrm{src}}^{\mathrm{red}}\).  This asymmetry is essential.
+
+Filter by an integral ample degree pulled back from \(Y\).  Every fibre of
+the untagged monomial map in a bounded piece is finite: the restriction
+of an ample divisor from \(Y\) is
+ample on \(Z\), and its bounded slice of \(\overline{NE}(Z)\) contains only
+finitely many lattice points.  This filtration is respected by the target
+map because \(H\cdot i_*d=(i^*H)\cdot d\), and the fixed shifts have
+nonnegative Novikov degree.
+
+For a fixed curve class, the coefficient of an element of the reduced ring
+is polynomial in the nondivisor and unit coordinates.  Indeed, an element
+has finitely many homogeneous degrees and bounded unit degree; every other
+even nondivisor coordinate has strictly negative degree.  Thus only
+finitely many of its monomials occur at that curve class.  This is where
+the reduced, graded source is essential.
+
+Suppose a nonzero source element maps to zero and take its first nonzero
+Novikov-degree part.  At that degree only the Novikov-degree-zero part of
+\(\varsigma_j^\circ\) enters.  Translation by its nondivisor and unit
+components is an injective substitution on the polynomial coefficients,
+over the target Laurent coefficient field.  Its divisor component
+multiplies each exponential by a nonzero scalar.  Group the terms by their
+common untagged target monomial.  On one nonzero group the
+remaining relation has the form
+\[
+ \sum_{d\in F}a_d
+ \exp\!\left(\sum_{k=1}^\rho(D_k\cdot d)s_{j,k}\right)=0,
+ \qquad a_d\ne0,
+\]
+over a characteristic-zero coefficient domain, including the remaining bulk
+coordinates, that does not contain the variables \(s_{j,k}\).
+The exponent vectors are distinct.  Choose an integral
+one-parameter restriction on which they remain distinct.  Derivatives of
+orders \(0,\ldots,|F|-1\) at the origin give a Vandermonde matrix, hence every
+\(a_d\) is zero, a contradiction.  This proves injectivity on the full
+reduced source.  We have not truncated the divisor exponentials by bulk
+order; doing so could lose the distinction between curve classes.
+
+Remark~2.3 of \cite{IritaniBlowup} gives the intrinsic reduced source, and
+Remark~5.6 gives its image under the raw Novikov map~(5.15).
+Although that map can be noninjective on the unrestricted source, it retains
+the independent \(\sigma^{(2)}\) coordinates in its target.  Its restriction
+to the reduced source is injective by the same argument, with zero shift.
+Equations~(5.47)--(5.48) then pull that image into the external direct sum over
+\(A_j\), where the variables \(s_j\) are independent, and identify the direct
+sum with the blowup module.  Associativity of scalar extension therefore
+identifies the center summand with scalar extension directly along the
+injective composite \(\iota_j\).  Passing to fraction fields is faithfully
+flat.  Finally, the inverse of the combined formal coordinate change
+\((\tau,\varsigma_0,\ldots,\varsigma_{c-2})\), supplied by
+Theorem~5.18(7) and Section~5.8.2, transports the same statement to the
+original blowup coordinates.
+\end{proof}
+
+\begin{proposition}[Blowup formula]
+\label{prop:numerical-blowup}\coverage{absent}%
+For $I=I_{\mathrm{exp}}$ or $I_{\mathrm{lat}}$, a smooth center
+$Z\subset Y$ of codimension $c\ge2$ satisfies
+\begin{equation}
+ I(\Bl_ZY)=I(Y)+(c-1)I(Z).
+ \label{eq:numerical-blowup}
+\end{equation}
+For a disconnected center the correction is summed componentwise.
+\end{proposition}
+\begin{proof}
+Iritani's comparison has one ambient and $c-1$ center copies.
+Its joint coordinate map has an inverse, so their unit coordinates are
+independent. The resultant of two scalar-translated characteristic
+polynomials is a nonzero polynomial in the difference of the unit shifts.
+Thus their spectra are disjoint generically. Regular lattice transport
+preserves each selection condition, and
+Lemma~\ref{lem:faithful-center-base-change} identifies each center copy with
+its intrinsic generic connection. Contributions therefore add.
+Each operation uses its own common field; no successive Laurent expansions
+are composed.
+\uses{lem:faithful-center-base-change,prop:rank2-rigidity}%
+\imports{IritaniBlowup:thm-5.18}%
+\end{proof}
+
+\begin{lemma}[The ruled product in full even bulk]
+\label{lem:ruled-product}\coverage{absent}%
+For a smooth projective curve $C$, the two counts vanish on $C\times\PP^1$.
+Its generic even primary factors have rank at most two.
+If $g(C)=1$, every rank-two centered operator is zero; if $g(C)>1$,
+every rank-two canonical residue discriminant is zero.
+\end{lemma}
+\begin{proof}
+For $g=g(C)\ge1$, use the flat even basis $1,h,p,hp$, with $h$ and $p$
+the point classes of the factors and $\int hp=1$. Write the bulk as
+$v\,1+ah+bp+chp$, set $Q=q_f e^b$ and $\kappa=2-2g$.
+The horizontal Novikov variable remains an independent spectator.
+Every genus-zero map to $C$ is constant. The positive-degree moduli space
+is $C$ times the corresponding $\PP^1$ moduli space, with no $H^1$
+obstruction from the constant factor. A nonzero invariant has exactly one
+$h$ factor. An insertion $h$ alone gives a unit on the second factor and
+vanishes by the string equation. Otherwise there is one $hp$ insertion;
+all other nonunit insertions are $p$, and the dimension equation forces
+fiber degree one. Its three-point invariant is one; the divisor equation
+handles the remaining $p$ insertions. The full even potential, modulo
+terms of degree at most two, is therefore
+\[
+ F=\tfrac12v^2c+vab+cQ.
+\]
+Its third derivatives give $h\star h=0$, $h\star p=hp$ and
+$p\star p=Q(1+ch)$. The centered Euler element is $\kappa h+2p-chp$.
+Put $p'=(1-ch/2)\star p$. Then $(p')^{\star2}=Q$ and
+$U=\kappa h+2p'$. After adjoining $\sqrt Q$, the two projectors
+$(1\pm p'/\sqrt Q)/2$ have even rank two, with centered operator
+$\kappa h$ throughout the full even bulk.
+For $g=1$ this is identically zero. For $g>1$ it has rank one; at the
+small point the product connection is the tensor connection, whose curve
+factor has modified residue $\kappa E_{21}-\tfrac12I$.
+Regular rank-one separation of the $\PP^1$ factor changes this residue
+only by a scalar. Proposition~\ref{prop:rank2-rigidity} keeps its
+discriminant zero in all bulk directions.
+For $C=\PP^1$, the small product has four distinct eigenvalues over the
+independent Novikov field; its rank-one factors persist in all even bulk
+directions by Proposition~\ref{prop:generic-spectral-connection-splitting}.
+\uses{prop:rank2-rigidity,lem:cyclic-primary-persistence}%
+\imports{Behrend:product}%
+\end{proof}
+
+\subsection{Vanishing on centers through dimension two}
+
+\begin{proposition}[Vanishing on low-dimensional centers]
+\label{prop:atomic-lowdim}
+\coverage{fragment}%
+\lean{rankTwoResidueMarker_lowDimensionalOccurrenceNullity}%
+\uses{prop:rank2-rigidity}%
+\imports{BeauvilleSurfaces:minimal-surface-classification}%
+For every smooth projective \(Z\) of dimension at most two,
+\(I_{\mathrm{exp}}(Z)=I_{\mathrm{lat}}(Z)=0\).  The same vanishing holds
+for every center copy in a quantum comparison.
+\end{proposition}
+
+\begin{proof}
+It suffices to prove vanishing for \(I_{\mathrm{lat}}\), since
+\(I_{\mathrm{exp}}\leq I_{\mathrm{lat}}\).
+\emph{Points and curves.}
+A point has one rank-one block.  For \(\PP^1\), the relation
+\(p\star p=Qe^{t_p}\) gives two rank-one generic blocks.
+
+Let \(C\) have genus \(g\ge1\).  There is no nonconstant genus-zero map to
+\(C\), so its even big quantum product is classical.  With
+\(\int_Cp=1\) and \(a=2-2g\), its centered even connection is
+\[
+ z\partial_zY=
+ \left[z^{-1}aE_{21}+\diag(1/2,-1/2)\right]Y.
+\]
+For \(g=1\), \(N=0\).  For \(g>1\), the modification
+\(S=\diag(z,1)\) gives residue \(aE_{21}-\tfrac12I\), of discriminant zero.
+Its two eigenvalues, and therefore its two exponent classes, are equal.  Thus
+every curve has zero invariant.
+
+\smallskip
+\noindent\emph{Surfaces with nef canonical class.}
+Let \(S\) be a surface with \(K_S\) nef.  For a quantum-product term with
+input degree \(b\), non-scalar Euler degree \(a\ge2\), curve class \(d\), and
+nonunit even bulk degrees \(e_\nu\ge2\), the dimension axiom gives output
+degree
+\[
+ a+b-2c_1(S)\cdot d+\sum_\nu(e_\nu-2)\ge b+2.
+\]
+The centered Euler operator strictly raises ordinary degree.  Its only block
+is the whole even cohomology, of rank \(b_0+b_2+b_4\ge3\), so its invariant is
+zero.
+
+\smallskip
+\noindent\emph{Other surfaces.}
+A minimal surface with non-nef canonical class is \(\PP^2\) or a ruled
+surface \(\PP_C(V)\) \cite[Chapter~VI]{BeauvilleSurfaces}.  The relation
+\(H^{\star3}=Q\) makes \(\PP^2\) generically semisimple.  A ruled surface is birational to $C\times\PP^1$: its defining vector
+bundle is trivial over the generic point of $C$.
+Lemma~\ref{lem:ruled-product} gives zero on that product. Projective surface
+factorization has only point centers, whose contributions in
+\eqref{eq:numerical-blowup} are zero. Thus every ruled surface has zero count.
+Every nonminimal surface is obtained from a minimal one by point blowups;
+formula~\eqref{eq:numerical-blowup} adds only zero point terms.  This proves
+intrinsic vanishing for every surface.
+Lemma~\ref{lem:faithful-center-base-change} identifies every separate center
+summand with a faithful scalar extension of the corresponding intrinsic generic
+block, and the invariant is unchanged by that extension.
+\uses{prop:numerical-blowup,lem:ruled-product,prop:rank2-rigidity,lem:faithful-center-base-change}%
+\imports{AKMW:weak-factorization,BeauvilleSurfaces:minimal-surface-classification}%
+\end{proof}
+

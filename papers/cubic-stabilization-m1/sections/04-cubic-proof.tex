@@ -1,0 +1,187 @@
+\section{The cubic calculation and one stabilization}\label{sec:cubic-proof}
+\subsection{A rational rank-two calculation}
+
+The zero-primary block can be separated without splitting the complementary
+eigenlines.  This gives one calculation for three Fano families.
+
+\begin{proposition}[A universal modified residue]
+\label{prop:universal-rank-two-residue}
+\coverage{fragment}%
+\lean{parameterizedRankTwo_finiteReduction,parameterizedRankTwo_normalizedGauge_and_modifiedResidue}%
+\uses{lem:A0preserve}%
+For \(s=2a+b\), \(sq\ne0\), consider
+\[
+ z^2\partial_z y=(U_{a,b}+zD)y,\qquad
+ U_{a,b}=\begin{pmatrix}
+ 0&aq&0&a^2q^2\\1&0&bq&0\\0&1&0&aq\\0&0&1&0
+ \end{pmatrix},\qquad D=\tfrac12\diag(3,1,-1,-3).
+\]
+Its characteristic polynomial is \(T^2(T^2-sq)\).  Its zero-primary block
+has rank two, nonzero square-zero leading term and canonical modified residue
+\begin{equation}
+ R_{a,b}=
+ \begin{pmatrix}
+ -(2a+3b)/(2s)&1\\
+ -4a^2/s^2&(b-2a)/(2s)
+ \end{pmatrix},\qquad
+ \delta^\sharp(a,b)=\frac{4(b-2a)}{b+2a}.
+ \label{eq:universal-residue}
+\end{equation}
+Here \(a,b,q\) are constant under \(\partial_z\).
+\end{proposition}
+
+\begin{proof}
+The columns of
+\[
+ C=\begin{pmatrix}
+ aq&0&0&-(a+b)q\\
+ 0&(a+b)q&-aq&0\\
+ 1&0&0&1\\0&1&1&0
+ \end{pmatrix},\qquad \det C=-s^2q^2,
+\]
+give \(\im U^2\oplus\ker U^2\).  Direct multiplication gives
+\[
+ J=C^{-1}UC=J_+\oplus N,\qquad
+ J_+=\begin{pmatrix}0&sq\\1&0\end{pmatrix},\quad
+ N=\begin{pmatrix}0&1\\0&0\end{pmatrix}.
+\]
+Put \(B=C^{-1}DC\).  The normalized gauge \(G=I+zX+z^2Y+\cdots\),
+with zero diagonal blocks in positive orders, starts with
+\[
+ X_{+0}=\diag(2a/s,2/(qs)),\qquad
+ X_{0+}=\diag(-2/(qs),-2a/s).
+\]
+These matrices solve \(J_iX_{ij}-X_{ij}J_j=-B_{ij}\).
+Writing the transformed coefficient as \(J+zB_1+z^2B_2+\cdots\), its
+gauge equation gives
+\[
+ B_1=B+[J,X],\qquad B_2=BX-XB_1-X+[J,Y].
+\]
+The derivative contributes \(-X\).  Its diagonal blocks vanish, as do
+those of \(XB_1\) and \([J,Y]\), so
+\[
+ (B_1)_{00}=\diag\left(-\frac{2a+3b}{2s},\frac{2a+3b}{2s}\right),
+ \qquad ((B_2)_{00})_{21}=(B_{0+}X_{+0})_{21}
+ =-\frac{4a^2}{s^2}.
+\]
+Modification by \(\diag(1,z)\) gives \(R_{a,b}\).  Its characteristic
+polynomial is \(T^2+T+(10a-3b)/(4s)\), proving the discriminant formula.
+For an original \(z^2F\) term, add \((C^{-1}FC)_{ii}\) to \((B_2)_{ii}\).
+Thus only the first off-diagonal gauge coefficient is needed.
+\end{proof}
+
+\subsection{The cubic block}
+\label{subsec:shared-cubic-packet}
+
+Only a rank-two block can contribute to \(I_{\mathrm{exp}}\).  For a cubic
+threefold, the calculation below isolates the unique such candidate and then
+computes the residue of its elementary modification.
+
+Let \(X\subset\PP^4\) be a smooth cubic threefold, let \(P=H|_X\), and put
+\(q=Q^\ell\) for the line class.  Beauville's formulas
+give \cite[main theorem and (2.1)--(2.3)]{Beauville}
+\begin{equation}
+ P\star P=P^2+6q,\qquad
+ P\star P^2=P^3+15qP,\qquad
+ P\star P^3=6qP^2+36q^2.
+ \label{eq:beauville-cubic-products}
+\end{equation}
+Thus, in the basis \((1,P,P^2,P^3)\),
+\begin{equation}
+ U_X=2\begin{pmatrix}
+ 0&6q&0&36q^2\\1&0&15q&0\\0&1&0&6q\\0&0&1&0
+ \end{pmatrix},
+ \qquad D_X=\frac12\diag(3,1,-1,-3),
+ \label{eq:cubic-small-even-connection}
+\end{equation}
+and \(z^2\partial_zy=(U_X+zD_X)y\).  This agrees with
+\cite[Section~3]{Cai}.
+
+The change of basis \(\diag(1,2,4,8)\) changes \(U_X=2U_{6,15}\)
+to \(U_{24,60}\) and leaves \(D_X\) unchanged.  The universal calculation
+therefore applies.  Conjugating its residue by \(\diag(2,1)\)
+gives the original cubic normalization:
+\begin{equation}
+ R_X
+ =\begin{pmatrix}-19/18&2\\-8/81&1/18\end{pmatrix}.
+ \label{eq:RX}
+\end{equation}
+Its characteristic polynomial is
+\((T+1/6)(T+5/6)\).  Thus the two exponent classes differ by
+\(2/3\notin\Z\), so the block is counted.  Equivalently,
+\begin{equation}
+ \boxed{\delta^\sharp(X)=\frac49},
+ \qquad I_{\mathrm{exp}}(X)=1.
+ \label{eq:cubic-delta}
+\end{equation}
+
+\paragraph{From the small connection to the generic block.}
+After inverting \(q\), at the small quantum point the rank-two cluster is separated from the
+other eigenvalues.  The cyclic-centralizer argument in
+Lemma~\ref{lem:cyclic-primary-persistence} continues that cluster over the formal
+bulk ring and proves that its centered leading term remains nonzero and
+square-zero.  The modified residue is then preserved by flatness.  Thus
+the small calculation determines the exponent count at generic quantum
+parameters, for every smooth cubic threefold.
+
+\begin{lemma}[Product with one projective line]
+\label{lem:special-projective-line}\coverage{absent}%
+Let $T$ be a smooth member of the nine families $\mathcal F$ listed in
+Theorem~\ref{thm:hodge-conservation}. Suppose at
+the small quantum point over the generic Novikov field its even
+Euler operator has separated cyclic
+primary factors of ranks at most three. On $T\times\PP^1$ each such factor occurs twice with the
+same even rank and cyclic centered operator in the full even bulk germ.
+A rank-two factor keeps its canonical modified residue discriminant.
+Consequently both rank-two counts double.
+\end{lemma}
+\begin{proof}
+The small genus-zero product formula identifies the full connection and
+original lattice with the tensor product: Euler multiplication and grading
+are sums of those on the factors \cite[formula~(1)]{Behrend}.
+The two $\PP^1$ eigenvalues are $\pm2\sqrt{q_f}$. All shifted $T$ clusters
+are distinct, since equality between opposite shifts would make the
+independent $q_f$ algebraic over the coefficient field of $T$.
+The regular splitting of each rank-one $\PP^1$ factor preserves its original
+lattice. Tensoring with it adds only scalar connection coefficients, so
+rank-two residue discriminants are unchanged.
+Lemmas~\ref{lem:cyclic-primary-persistence} and~\ref{lem:triple-primary-persistence} continue each cyclic cluster in
+all even bulk coordinates, including the mixed classes $\alpha\otimes p$.
+Proposition~\ref{prop:rank2-rigidity} continues the discriminant.
+This uses flatness in the transverse directions; a big quantum tensor
+formula at mixed bulk is not required.
+\uses{prop:generic-spectral-connection-splitting,lem:cyclic-primary-persistence,lem:triple-primary-persistence,prop:rank2-rigidity}%
+\imports{Behrend:product}%
+\end{proof}
+
+\subsection{The projective endpoint and the contradiction}
+
+Lemma~\ref{lem:special-projective-line} gives
+\begin{equation}
+ I_{\mathrm{exp}}(X\times\PP^1)=2.
+ \label{eq:atomic-product-value}
+\end{equation}
+On the other hand, over the generic numerical Novikov field
+\(\Lambda=\operatorname{Frac}\C[[Q]]\),
+\(QH^\bullet(\PP^4)=\Lambda[H]/(H^5-Q)\).  At \(Q\ne0\), multiplication
+by \(5H\) has five distinct eigenvalues after algebraic closure.  Thus
+\begin{equation}
+ I_{\mathrm{exp}}(\PP^4)=0.
+ \label{eq:atomic-projective-value}
+\end{equation}
+
+\begin{proof}[Proof of Theorem~\ref{thm:every-cubic}]
+Proposition~\ref{prop:atomic-lowdim} makes every actual center correction zero
+in a weak factorization of smooth projective fourfolds.  Hence
+projective weak factorization and
+\eqref{eq:numerical-blowup} make \(I_{\mathrm{exp}}\) birationally
+invariant.  If \(X\times\PP^1\) were rational, then
+\[
+ 2=I_{\mathrm{exp}}(X\times\PP^1)
+ =I_{\mathrm{exp}}(\PP^4)=0,
+\]
+a contradiction.
+\proves{thm:every-cubic}%
+\uses{prop:atomic-lowdim,prop:numerical-blowup,lem:special-projective-line,prop:universal-rank-two-residue}%
+\imports{AKMW:weak-factorization,Beauville:quantum-products}%
+\end{proof}

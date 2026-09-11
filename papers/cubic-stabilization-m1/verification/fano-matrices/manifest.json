@@ -1,0 +1,33 @@
+{
+  "schema": "fano-matrix-evidence-v1",
+  "files": {
+    "verification/fano-matrices/README.md": {
+      "sha256": "578468c0b836ccdf1f04774a71d60252652d2205acbd32c772d8f37532c72dac",
+      "bytes": 2140
+    },
+    "verification/fano-matrices/finite_checks.json": {
+      "sha256": "1c8981941cfb035a3a09f07edfcee64c4cd6c3518e37e66be410910d6b30a477",
+      "bytes": 21027
+    },
+    "verification/fano-matrices/finite_checks.py": {
+      "sha256": "b0203ae22d6eb45076a9bd1894b53faa5a36a3640d2e135b97c15697794ff9b0",
+      "bytes": 12386
+    },
+    "verification/fano-matrices/independent_checks.json": {
+      "sha256": "bc00e21333a66788cd6974b7aa8c5a786b121f58d6d59217cfa3b016659c77f2",
+      "bytes": 4432
+    },
+    "verification/fano-matrices/independent_checks.py": {
+      "sha256": "f694fc965582df5d5f9b7715221855f529e086939cfc15a0ee45e58f6568a286",
+      "bytes": 5565
+    },
+    "verification/fano-matrices/source_check.json": {
+      "sha256": "1c8726ccf3c2eccd19945f9c2920c097952fc1f15f03b0d8308917c29569e654",
+      "bytes": 4990
+    },
+    "verification/fano-matrices/source_check.py": {
+      "sha256": "8dd229bf5b0ec8ede65ecdfe834779799a3fbefea73a3071eb2a733f1c8bdc65",
+      "bytes": 5228
+    }
+  }
+}

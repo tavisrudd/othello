@@ -5,7 +5,7 @@
 \usepackage{lmodern}
 \usepackage{microtype}
 \usepackage{amsmath,amssymb,amsthm,amscd,mathtools}
-\usepackage{booktabs}
+\usepackage{booktabs,needspace}
 \usepackage[hidelinks]{hyperref}
 
 \numberwithin{equation}{section}
@@ -21,6 +21,10 @@
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\ev}{\mathrm{ev}}
+\newcommand{\odd}{\mathrm{odd}}
+\newcommand{\Hom}{\operatorname{Hom}}
 \newcommand{\C}{\mathbf C}
 \newcommand{\Z}{\mathbf Z}
 \newcommand{\PP}{\mathbf P}
@@ -39,20 +43,17 @@
 \maketitle
 
 \begin{abstract}
-We prove that \(X\times\PP^1\) is irrational for every smooth complex cubic
-threefold \(X\).  We define an integer-valued count from the formal exponents
-of certain rank-two summands of the quantum \(D\)-module.  Iritani's blowup
-decomposition and weak factorization make this count birationally invariant
-for smooth projective fourfolds: every point, curve, and surface center
-contributes zero to the blowup formula.  The count is one on a cubic
-threefold.  Iritani--Koto's projective-bundle decomposition shows that it is
-two on \(X\times\PP^1\), whereas it is zero on \(\PP^4\).
-Retaining the canonical residue also detects resonant blocks.  A unified
-calculation proves that, for smooth complex Picard-rank-one index-two Fano
-threefolds, rationality is unchanged by one stabilization.
-Applications include prime Fano threefolds of genus eight and universally
-\(CH_0\)-trivial irrational fourfolds.  The count also extends to an additive
-invariant of the Grothendieck group of varieties.
+We prove that $X\times\PP^1$ is irrational for every smooth complex cubic
+threefold $X$. More generally, rationality is unchanged by one stabilization
+for all smooth Picard-rank-one Fano threefolds. The numerical obstruction
+uses the canonical residue on even-rank-two primary factors of the quantum
+connection, and the odd dimension on even-rank-three factors. These factors contribute zero on every
+surface center, so the blowup formula and weak factorization give birational
+invariants of fourfolds. A small quantum product calculation and flatness
+compute their values after product with $\PP^1$. For the nine irrational
+families, retaining the odd Hodge representations proves that birational
+first stabilizations have isomorphic rational third cohomology as Hodge
+structures. The numerical proof is independent of this Hodge refinement.
 \end{abstract}
 
 \noindent\textbf{Keywords.} cubic threefold; universal \(CH_0\)-triviality;
@@ -60,10 +61,21 @@ irrationality; quantum \(D\)-modules; formal exponents; birational invariants;
 weak factorization; Fano threefolds.
 
 \input{sections/01-introduction}
+\part{Numerical obstruction}\label{part:numerical}
 \input{sections/02-qdm-marker}
+\input{sections/03-blowup-centers}
+\input{sections/04-cubic-proof}
+\input{sections/05-fano-classification}
 \input{sections/03-applications}
+\part{Hodge conservation}\label{part:hodge}
+\input{sections/06-hodge-conservation}
+\input{sections/07-torelli}
+\appendix
+\input{sections/09-general-operations}
 \input{sections/04-motivic}
 \input{sections/05-cubic-check}
+\input{sections/10-fano-data}
+\input{sections/11-arithmetic-partners}
 
 \section*{AI assistance disclosure}
 
@@ -226,6 +238,47 @@ S.~Yang, X.~Yu, and Z.~Zhu,
 \emph{Nonrational varieties with unirational parametrizations of coprime
 degrees}, arXiv:2508.03623v2 (2025).
 
+
+\bibitem{Behrend}
+K.~Behrend, \emph{The product formula for Gromov--Witten invariants},
+arXiv:alg-geom/9710014v1.
+\bibitem{IritaniHodge}
+H.~Iritani, \emph{Notes on the decomposition theorem for blowups},
+arXiv:2604.10028v2 (2026).
+\bibitem{CaiQuartic}
+J.~Cai, \emph{The quartic threefold is symplectically irrational},
+arXiv:2605.29143v2 (2026).
+\bibitem{CCGK}
+T.~Coates, A.~Corti, S.~Galkin, and A.~Kasprzyk,
+\emph{Quantum periods for 3-dimensional Fano manifolds},
+arXiv:1303.3288v3.
+\begingroup\raggedright
+\bibitem{NaiveAtoms}
+C.~B\"ohning, H.-C.~Graf von Bothmer, and Z.~Su'a,
+\emph{Naive atoms of blowups: examples}, arXiv:2606.17884;
+associated reconstruction data, \href{https://doi.org/10.5281/zenodo.20625923}{doi:10.5281/zenodo.20625923}.
+\bibitem{PrzyjalkowskiGenera}
+V.~Przyjalkowski, \emph{Gromov--Witten invariants of Fano threefolds of
+genera 6 and 8}, arXiv:math/0410327v4.
+\bibitem{KuznetsovProkhorovNodal}
+A.~Kuznetsov and Yu.~Prokhorov, \emph{One-nodal Fano threefolds with Picard
+number one}, arXiv:2312.13782v2.
+\bibitem{DebarreGM}
+O.~Debarre, \emph{Gushel--Mukai varieties}, arXiv:2001.03485v2.
+\bibitem{VoisinTorelli}
+C.~Voisin, \emph{Schiffer variations and the generic Torelli theorem for
+hypersurfaces}, arXiv:2004.09310v3.
+\bibitem{AchterTorelli}
+J.~Achter, \emph{Arithmetic Torelli maps for cubic surfaces and threefolds},
+arXiv:1005.2131v4.
+\bibitem{OrrIsogenies}
+M.~Orr, \emph{Families of abelian varieties with many isogenous fibres},
+arXiv:1209.3653v4 (corrected version).
+\bibitem{NarasimhanNori}
+M.~S.~Narasimhan and M.~V.~Nori, \emph{Polarisations on an abelian variety},
+Proc. Indian Acad. Sci. Math. Sci. 90 (1981), 125--128.
+
+\par\endgroup
 \end{thebibliography}
 
 \end{document}

@@ -15,21 +15,29 @@ For every smooth complex cubic threefold `X`, the paper proves that
 `D`-module into whole primary blocks. An intrinsic rank-two exponent count vanishes on
 every center that can occur in weak factorization in dimension four, doubles
 under product with `P^1`, detects the cubic block, and vanishes on projective
-space.  The same construction gives an irrationality criterion for smooth
-projective threefolds after one stabilization and the one-stabilization theorem for smooth prime Fano
-threefolds of genus eight. The canonical-lattice count also detects resonant
-blocks. A unified calculation proves that rationality is unchanged by one
-stabilization for smooth complex Picard-rank-one index-two Fano threefolds:
-precisely degrees four and five are rational.
+space. The cubic proof finishes before the other applications.
+
+The numerical part proves that rationality is unchanged by one stabilization
+for all seventeen smooth complex Picard-rank-one Fano families. Five families
+are detected by the canonical rank-two residue, including resonant blocks;
+four are detected by the odd dimension on an even-rank-three factor.
+The other eight families are rational.
+
+The second part proves that birational first stabilizations of members of
+the nine detected families have isomorphic rational third Hodge structures.
+It retains the full cohomology fiber over a Hodge-fixed parameter base.
+This theorem adds no integral or polarized identification. Very-general
+cubic/quartic cancellation is a short Torelli consequence; bounded-degree
+geometric cubic-partner finiteness is an arithmetic appendix.
 
 The count and the multiset of exact residue discriminants extend additively
-to `K0(Var_C)/(L-1)`. They distinguish certain threefolds with equal Hodge
-diamonds and constrain the centers in any rationalizing weak factorization.
-These extensions are proved in Section 4; they are not formalized in Lean.
+to `K0(Var_C)/(L-1)` in an optional appendix. These broader bundle and additive
+results retain Iritani–Koto's general theorem. The main numerical and Hodge
+proofs use the specialized P1 argument and an explicit ruled-product potential.
 
-Here *even* means that odd bulk variables are set to zero and the connection
-is restricted to even cohomology.  *Generic* means that the numerical Novikov
-and even bulk coefficient ring is replaced by its fraction field.
+For the rank-two counts, *even* means both an even bulk base and the even
+cohomology fiber. The odd-dimension and Hodge refinements keep the full fiber.
+*Generic* refers to quantum parameters, not to a general moduli point.
 
 ## Companion papers
 
@@ -65,6 +73,7 @@ make -C companions/cubic-framed-monodromy check
 ```
 
 The root check validates the shared manuscript-to-Lean claim inventory,
+replays the finite Fano certificate with two independent implementations,
 builds the primary PDF in the pinned environment, and rejects manuscript
 warnings.  It does not build Lean or replay a captured axiom audit;
 [`lean/README.md`](lean/README.md) documents the separate artifact and checker

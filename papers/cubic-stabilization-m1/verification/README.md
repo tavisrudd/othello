@@ -149,7 +149,7 @@ the aggregate to import each one, and computes terminal and signature coverage
 across their union.  This keeps the manuscript split visible without weakening
 the exact terminal census.
 
-Checked coverage snapshot: 67 claims; 13 absent; 27 fragmentary; 26 conditional; 1 complete; 371 reviewer terminals, of which 133 are machinery serving no current manuscript claim.
+Checked coverage snapshot: 79 claims; 25 absent; 27 fragmentary; 26 conditional; 1 complete; 371 reviewer terminals, of which 133 are machinery serving no current manuscript claim.
 
 The main reviewer interface includes `gradedBulkSource_equiv_completedSubring`
 and `gradedBulkCenterRingHom_injective`: the formal graded coefficient families
@@ -462,3 +462,19 @@ The adjacent JSON and SHA-256 manifest record the fixed cohomology basis,
 correct grading, spectral projector, residue and tagged collision factor.
 This supplements the printed proof and establishes no geometric comparison
 theorem.
+
+## Numerical classification and Hodge conservation
+
+The two-part main manuscript separates the numerical blowup proof from the
+Hodge-fixed-base refinement. The dependency graph records the specialized P1
+lemma, full even-bulk ruled calculation, rank-three persistence and odd
+selector, nine-family endpoints, Hodge comparison, and the Torelli/arithmetic
+consequences. Their twelve new geometric statements carry absent coverage;
+no existing terminal is promoted by their prose proofs.
+
+`make check` replays `verification/fano-matrices/finite_checks.py --check`
+and the independent Fraction implementation, then checks SHA256SUMS. The
+source-normalization replay needs the two externally pinned source scripts;
+its exact command and finite scope are in the bundle README. Mathematical
+classification, GW identification, deformation and actual comparison maps
+remain imported results or written proofs, not certificate conclusions.

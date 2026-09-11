@@ -28,7 +28,7 @@
       "objects": "An abstract block record over a supplied commutative coefficient ring: in rank two it stores a leading matrix, a modified-residue matrix, and a supplied exponent difference, while in every other rank it stores that rank and a proof that it is not two. The remaining objects are the free commutative monoid of these block classes and its natural-number-valued additive marker, smooth projective varieties through dimension four, smooth centers with their individual specialized QDM summands, projective-line stabilization, projective four-space, and a rationality predicate.",
       "hypotheses": "The supplied relation called regular isomorphism preserves the entire zero-or-one marker weight; assumed weak-factorization data and marker formulas supply every blowup and blowdown formula while retaining the individual center summands; every summand from a smooth center of dimension at most two has zero marker; the cubic marker equals one; the projective-line formula doubles it; projective four-space has marker zero; and rationality supplies the birational comparison.",
       "conclusion": "The stabilized cubic has nonzero marker, whereas projective four-space has marker zero; birational invariance therefore implies that the cubic threefold times one projective line is not rational.",
-      "cautions": "Conditional deduction. Lean defines the marker from the stored leading matrix and supplied exponent difference, constructs the quotient by the supplied regular-isomorphism relation, extends the marker to the free commutative monoid, proves the telescoping factorization argument with individual center summands kept separate, and obtains descent to birational classes. It does not prove that the stored matrices and exponent difference arise from a formal connection or from residue eigenvalues. Nor does it construct the cubic QDM, the Iritani or Iritani–Koto comparisons, weak factorization, or the geometric proofs of vanishing on low-dimensional centers. Those inputs remain explicit hypotheses of the formal theorem.",
+      "cautions": "Conditional deduction. Lean defines the marker from the stored leading matrix and supplied exponent difference, constructs the quotient by the supplied regular-isomorphism relation, extends the marker to the free commutative monoid, proves the telescoping factorization argument with individual center summands kept separate, and obtains descent to birational classes. It does not prove that the stored matrices and exponent difference arise from a formal connection or from residue eigenvalues. Nor does it construct the cubic QDM, the Iritani blowup comparison or the specialized small-product and full-bulk argument, weak factorization, or the geometric proofs of vanishing on low-dimensional centers. Those inputs remain explicit hypotheses of the formal theorem.",
       "statement_digest": "90fbb0916c1f7b4e7b7e57bb8ea581e3d45f3914e6a6f66d4aba23e241428af4",
       "terminal_digest": "c76771330994e3bf76753fc318ed5c8045703600a05a6f9c128db153d5eae0fa"
     },
@@ -880,10 +880,10 @@
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.occurrenceIndexedMarker_descends_to_birationalClasses"
       ],
       "objects": "Regular-isomorphism classes of typed blocks, their effective multisets, an additive marker valued in an arbitrary commutative additive monoid, abstract varieties and smooth centers, and a separately indexed family of specialized center summands.",
-      "hypotheses": "Assumed weak-factorization data and marker formulas supply blowup and blowdown chains in ambient dimension d, each blowup records its codimension and a separately indexed family of c-1 center summands, and every summand from a smooth center of dimension at most d-2 has zero marker contribution.",
+      "hypotheses": "Assumed weak-factorization data and blowup marker formulas supply blowup and blowdown chains in ambient dimension d, each blowup records its codimension and a separately indexed family of c-1 center summands, and every summand from a smooth center of dimension at most d-2 has zero marker contribution. No projective-bundle formula is required.",
       "conclusion": "The marker is the unique additive extension of its value on each block class; birationally related endpoints have equal markers; and the marker descends to the quotient set of birational classes.",
       "cautions": "Conditional deduction. Lean proves the free commutative-monoid construction, the arbitrary-monoid and arbitrary-dimension telescoping argument, preservation of the individual center summands, and descent to birational classes. Weak factorization and the geometric operation formulas are supplied as typed inputs rather than formalized from algebraic geometry. The QDM comparisons that produce those formulas remain outside this row and are registered under prop:qdm-operation-ledgers.",
-      "statement_digest": "9940726e078ec3a7f1f12b7d957025ed7b29d154e2a817db34b4d44b77b2bbba",
+      "statement_digest": "ce60f2403ec3a740825802036b7fd4cc9dfa5e7646318720f8d67074864c304d",
       "terminal_digest": "f8a38d7c98c400a29332ad3f24cebfe48c60bc38ea82dfa62f0f4850e602b042"
     },
     {
@@ -1033,6 +1033,126 @@
       "conclusion": "The specialization is strictly admissible but not graded-monomial; its scalar rank-two cluster has residue eigenvalues +/-1/6 and nu6=2, whereas the generic tagged connection has nu6=0. Unrestricted Hypothesis T is false.",
       "cautions": "No Lean formalization. The independent exact checker reconstructs the multiplication matrix from quantum relations and computes a polynomial spectral projector; the manuscript proves admissibility and the formal-monodromy interpretation. It neither refutes nor proves restricted T or R.",
       "statement_digest": "0f3166b80efdcaa89321705b5be917d8354884cf88b690fe828c144054c907d1"
+    },
+    {
+      "manuscript_label": "prop:numerical-blowup",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The two intrinsic rank-two counts on smooth projective varieties.",
+      "hypotheses": "A smooth center of codimension at least two.",
+      "conclusion": "The blowup correction is codimension minus one copies of the center count.",
+      "cautions": "No reviewer terminal is assigned to this geometric statement. The written proof and imported sources establish the manuscript claim; finite certificates only check their stated algebraic domains. No additional Lean coverage is claimed by this integration.",
+      "statement_digest": "420ba8d2e14f267f3d68ab12c7560bf94d549aec1385b66668c986cea82f173e"
+    },
+    {
+      "manuscript_label": "lem:ruled-product",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The full even bulk quantum connection of a curve times P1.",
+      "hypotheses": "A smooth projective complex curve, with independent numerical Novikov parameters.",
+      "conclusion": "Rank-two counts vanish; factors have rank at most two, with zero elliptic centered operator and zero higher-genus residue discriminant.",
+      "cautions": "No reviewer terminal is assigned to this geometric statement. The written proof and imported sources establish the manuscript claim; finite certificates only check their stated algebraic domains. No additional Lean coverage is claimed by this integration.",
+      "statement_digest": "208796178a5c252156d2667d199daffd13a5943061d2bd2d97efc461f4a2dc79"
+    },
+    {
+      "manuscript_label": "lem:special-projective-line",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Small tensor quantum connections and original lattices.",
+      "hypotheses": "A smooth member of the nine detected Fano families with separated cyclic small even primary factors of ranks at most three over the generic Novikov field.",
+      "conclusion": "Each primary factor occurs twice after product with P1, with its rank and rank-two discriminant retained in all even bulk directions.",
+      "cautions": "No reviewer terminal is assigned to this geometric statement. The written proof and imported sources establish the manuscript claim; finite certificates only check their stated algebraic domains. No additional Lean coverage is claimed by this integration.",
+      "statement_digest": "0d0d076e0747a86a7a6bfbbda5ae04ef8fbd6191792186bcc6349030187e319b"
+    },
+    {
+      "manuscript_label": "lem:triple-primary-persistence",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "A separated rank-three formal quantum-connection cluster.",
+      "hypotheses": "Characteristic zero, full flatness and simple base poles; regular nilpotent centered operator at the closed point.",
+      "conclusion": "Cyclicity and nilpotence persist throughout the formal bulk germ.",
+      "cautions": "No reviewer terminal is assigned to this geometric statement. The written proof and imported sources establish the manuscript claim; finite certificates only check their stated algebraic domains. No additional Lean coverage is claimed by this integration.",
+      "statement_digest": "2033ac517b184f3e5943d92d927548141603a7db2590fdc1c9c89e15da99ca28"
+    },
+    {
+      "manuscript_label": "lem:odd-selector",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Whole primary factors of full Frobenius supermodules over even bulk.",
+      "hypotheses": "Smooth projective complex varieties and smooth centers.",
+      "conclusion": "Even-rank-one factors have no odd part; rank-three odd dimension satisfies the blowup formula, vanishes through dimension two and is invariant on fourfolds.",
+      "cautions": "No reviewer terminal is assigned to this geometric statement. The written proof and imported sources establish the manuscript claim; finite certificates only check their stated algebraic domains. No additional Lean coverage is claimed by this integration.",
+      "statement_digest": "d5edb4b2eebddbebf59b71858726611b74d742fd5b5946f878c221bc9e695cba"
+    },
+    {
+      "manuscript_label": "prop:fano-endpoints",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Nine detected Picard-rank-one Fano deformation families and their quantum connections.",
+      "hypotheses": "Every smooth complex member of index-two degrees 1,2,3 and index-one genera 2,3,4,5,6,8.",
+      "conclusion": "The repeated whole even factors, cyclicity, five residue discriminants and numerical counts are those in the displayed table.",
+      "cautions": "No reviewer terminal is assigned to this geometric statement. The written proof and imported sources establish the manuscript claim; finite certificates only check their stated algebraic domains. No additional Lean coverage is claimed by this integration.",
+      "statement_digest": "94019182977807135ccb696447bbb138ac1e5a266ec0526fd520b9229757870d"
+    },
+    {
+      "manuscript_label": "lem:hodge-fixed-comparison",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Full cohomology fibers over Hodge-fixed reduced graded coefficient domains.",
+      "hypotheses": "One common rational reductive Hodge-group quotient and a smooth blowup center.",
+      "conclusion": "Actual comparisons faithfully transport primary factors, full representations and original and modified rank-two lattices.",
+      "cautions": "No reviewer terminal is assigned to this geometric statement. The written proof and imported sources establish the manuscript claim; finite certificates only check their stated algebraic domains. No additional Lean coverage is claimed by this integration.",
+      "statement_digest": "4e3d8beaf627a5a1d86c757882795f5939a18d2f6c864e5fa28c9ad3007af01e"
+    },
+    {
+      "manuscript_label": "prop:hodge-operations",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The unlabelled sum of odd representations on selected rank-two and rank-three primary factors.",
+      "hypotheses": "One common rational reductive group for a projective weak factorization.",
+      "conclusion": "Blowup additivity, vanishing on points, curves and surfaces, and fourfold birational invariance.",
+      "cautions": "No reviewer terminal is assigned to this geometric statement. The written proof and imported sources establish the manuscript claim; finite certificates only check their stated algebraic domains. No additional Lean coverage is claimed by this integration.",
+      "statement_digest": "c27cb1a96f1b199f6c7e2b802fc81f5471aee94e5bdf21cfc277d4027ca7987f"
+    },
+    {
+      "manuscript_label": "thm:fano-one-step-classification",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Smooth complex Picard-rank-one Fano threefolds.",
+      "hypotheses": "All seventeen smooth deformation families.",
+      "conclusion": "Rationality is equivalent to rationality after product with P1; exactly the eight listed families are rational.",
+      "cautions": "No reviewer terminal is assigned to this geometric statement. The written proof and imported sources establish the manuscript claim; finite certificates only check their stated algebraic domains. No additional Lean coverage is claimed by this integration.",
+      "statement_digest": "7be57b8715bd1d5d946d4a68504ec1b2b3f90fb8edbc5f223a5eea4719cd5434"
+    },
+    {
+      "manuscript_label": "thm:hodge-conservation",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Rational third Hodge structures of the nine detected Fano families.",
+      "hypotheses": "Birational first stabilizations of any two smooth members in these families.",
+      "conclusion": "Their rational third Hodge structures are isomorphic, without integral or polarized identification.",
+      "cautions": "No reviewer terminal is assigned to this geometric statement. The written proof and imported sources establish the manuscript claim; finite certificates only check their stated algebraic domains. No additional Lean coverage is claimed by this integration.",
+      "statement_digest": "503c244a99b540171517e4922a5091b5cd62d81658155fc6aada3650252b63e0"
+    },
+    {
+      "manuscript_label": "cor:generic-cancellation",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Smooth cubic or quartic hypersurfaces in P4.",
+      "hypotheses": "Very general source, arbitrary smooth target of the same degree.",
+      "conclusion": "Birational first stabilizations are equivalent to isomorphic sources.",
+      "cautions": "No reviewer terminal is assigned to this geometric statement. The written proof and imported sources establish the manuscript claim; finite certificates only check their stated algebraic domains. No additional Lean coverage is claimed by this integration.",
+      "statement_digest": "57776a827ffda96de224cbabb2c5b0f336a4a169319ff26aaefbbae26cfb2a35"
+    },
+    {
+      "manuscript_label": "cor:bounded-degree-partners",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Smooth cubic threefolds over finite extensions of a fixed finitely generated characteristic-zero field.",
+      "hypotheses": "A fixed cubic and a positive bound on the extension degrees.",
+      "conclusion": "Finitely many geometric cubic isomorphism classes have geometrically birational first stabilization.",
+      "cautions": "No reviewer terminal is assigned to this geometric statement. The written proof and imported sources establish the manuscript claim; finite certificates only check their stated algebraic domains. No additional Lean coverage is claimed by this integration.",
+      "statement_digest": "c0e25a9c30c7fd3a75f86b9bd78f952a33a0ce6fd4d1aec1afee433417a372d7"
     }
   ],
   "machinery": [

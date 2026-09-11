@@ -1,0 +1,275 @@
+{
+  "families": {
+    "d1": {
+      "characteristic_coefficients": [
+        "1",
+        "0",
+        "-1728",
+        "0",
+        "0"
+      ],
+      "cyclic_determinant": "1",
+      "delta": "16/9",
+      "residue": [
+        [
+          "-11/9",
+          "1"
+        ],
+        [
+          "-25/324",
+          "2/9"
+        ]
+      ]
+    },
+    "d2": {
+      "characteristic_coefficients": [
+        "1",
+        "0",
+        "-256",
+        "0",
+        "0"
+      ],
+      "cyclic_determinant": "1",
+      "delta": "1",
+      "residue": [
+        [
+          "-9/8",
+          "1"
+        ],
+        [
+          "-9/64",
+          "1/8"
+        ]
+      ]
+    },
+    "d3": {
+      "characteristic_coefficients": [
+        "1",
+        "0",
+        "-108",
+        "0",
+        "0"
+      ],
+      "cyclic_determinant": "1",
+      "delta": "4/9",
+      "residue": [
+        [
+          "-19/18",
+          "1"
+        ],
+        [
+          "-16/81",
+          "1/18"
+        ]
+      ]
+    },
+    "d4": {
+      "characteristic_coefficients": [
+        "1",
+        "0",
+        "-64",
+        "0",
+        "0"
+      ],
+      "cyclic_determinant": "1",
+      "delta": "0",
+      "residue": [
+        [
+          "-1",
+          "1"
+        ],
+        [
+          "-1/4",
+          "0"
+        ]
+      ]
+    },
+    "d5": {
+      "characteristic_coefficients": [
+        "1",
+        "0",
+        "-44",
+        "0",
+        "-16"
+      ],
+      "cyclic_determinant": "1"
+    },
+    "g10": {
+      "characteristic_coefficients": [
+        "1",
+        "-18",
+        "-27",
+        "0",
+        "0"
+      ],
+      "cyclic_determinant": "1",
+      "delta": "0",
+      "residue": [
+        [
+          "-7/6",
+          "1"
+        ],
+        [
+          "-4/9",
+          "1/6"
+        ]
+      ]
+    },
+    "g12": {
+      "characteristic_coefficients": [
+        "1",
+        "-68/5",
+        "-616/25",
+        "-252/125",
+        "-1504/625"
+      ],
+      "cyclic_determinant": "1"
+    },
+    "g2": {
+      "characteristic_coefficients": [
+        "1",
+        "-1728",
+        "0",
+        "0",
+        "0"
+      ],
+      "cyclic_determinant": "1"
+    },
+    "g3": {
+      "characteristic_coefficients": [
+        "1",
+        "-256",
+        "0",
+        "0",
+        "0"
+      ],
+      "cyclic_determinant": "1"
+    },
+    "g4": {
+      "characteristic_coefficients": [
+        "1",
+        "-108",
+        "0",
+        "0",
+        "0"
+      ],
+      "cyclic_determinant": "1"
+    },
+    "g5": {
+      "characteristic_coefficients": [
+        "1",
+        "-64",
+        "0",
+        "0",
+        "0"
+      ],
+      "cyclic_determinant": "1"
+    },
+    "g6": {
+      "characteristic_coefficients": [
+        "1",
+        "-44",
+        "-16",
+        "0",
+        "0"
+      ],
+      "cyclic_determinant": "1",
+      "delta": "1",
+      "residue": [
+        [
+          "-9/4",
+          "1"
+        ],
+        [
+          "-45/16",
+          "5/4"
+        ]
+      ]
+    },
+    "g7": {
+      "characteristic_coefficients": [
+        "1",
+        "-34",
+        "1",
+        "0",
+        "0"
+      ],
+      "cyclic_determinant": "1",
+      "delta": "0",
+      "residue": [
+        [
+          "23/2",
+          "1"
+        ],
+        [
+          "-144",
+          "-25/2"
+        ]
+      ]
+    },
+    "g8": {
+      "characteristic_coefficients": [
+        "1",
+        "-26",
+        "-27",
+        "0",
+        "0"
+      ],
+      "cyclic_determinant": "1",
+      "delta": "4/9",
+      "residue": [
+        [
+          "-73/54",
+          "1"
+        ],
+        [
+          "-448/729",
+          "19/54"
+        ]
+      ]
+    },
+    "g9": {
+      "characteristic_coefficients": [
+        "1",
+        "-24",
+        "16",
+        "0",
+        "0"
+      ],
+      "cyclic_determinant": "1",
+      "delta": "0",
+      "residue": [
+        [
+          "-1/2",
+          "1"
+        ],
+        [
+          "0",
+          "-1/2"
+        ]
+      ]
+    },
+    "projective_space": {
+      "characteristic_coefficients": [
+        "1",
+        "0",
+        "0",
+        "0",
+        "-256"
+      ],
+      "cyclic_determinant": "1"
+    },
+    "quadric": {
+      "characteristic_coefficients": [
+        "1",
+        "0",
+        "0",
+        "-108",
+        "0"
+      ],
+      "cyclic_determinant": "1"
+    }
+  },
+  "scope": "17 characteristic polynomials and cyclicity; 9 independently separated rank-two residues",
+  "status": "PASS"
+}

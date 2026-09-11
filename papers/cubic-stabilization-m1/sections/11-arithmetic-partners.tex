@@ -1,0 +1,36 @@
+\section{Cubic partners over extensions of bounded degree}
+\label{sec:arithmetic-partners}
+\begin{corollary}[Geometric finiteness]
+\label{cor:bounded-degree-partners}\coverage{absent}%
+Fix a finitely generated field $K\subset\C$ of characteristic zero, a smooth
+cubic threefold $X/K$ and a positive integer $D$. There are finitely many
+geometric isomorphism classes of smooth cubic threefolds $Y/L$, where
+$L/K$ is finite of degree at most $D$, for which
+$X_{\overline K}\times\PP^1$ and $Y_{\overline K}\times\PP^1$ are birational.
+\end{corollary}
+\begin{proof}
+Achter's arithmetic intermediate Jacobian gives $A=J(X)/K$ and $J(Y)/L$
+\cite[Theorem~B]{AchterTorelli}. Theorem~\ref{thm:hodge-conservation} gives
+an isogeny of their complex abelian varieties. Homomorphisms of abelian
+varieties do not change under extension of algebraically closed fields,
+so the isogeny exists over $\overline K$.
+Orr's bounded-degree theorem, in its corrected version, supplies an isogeny
+\[
+ A_{\overline K}\longrightarrow J(Y)_{\overline K},\qquad
+ \deg\le c(A,K)D^\kappa
+\]
+\cite[Theorem~5.1]{OrrIsogenies}. The isogeny itself need not be defined
+over an extension of degree at most $D$.
+
+Choose an integer $N\ge c(A,K)D^\kappa$ and put
+$M=\operatorname{lcm}(1,\ldots,N)$. Every possible kernel is a subgroup of
+the finite group $A[M](\overline K)$. Hence there are finitely many possible
+quotients $A/H$. Each quotient has finitely many principal polarizations
+modulo automorphisms \cite[Theorem~1.1]{NarasimhanNori}.
+Cubic Torelli \cite{CG} identifies at most one cubic geometric class for
+each resulting principally polarized intermediate Jacobian.
+\uses{thm:hodge-conservation}%
+\imports{Achter:intermediate-jacobian,Orr:bounded-isogenies,NN:polarizations,CG:cubic-torelli}%
+\end{proof}
+The count is of geometric classes. It gives neither twist finiteness over
+$K$ nor an effective number of partners.

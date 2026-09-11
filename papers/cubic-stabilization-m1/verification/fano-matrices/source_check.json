@@ -1,0 +1,222 @@
+{
+  "status": "PASS",
+  "sympy": "1.14.0",
+  "source_record": "https://doi.org/10.5281/zenodo.20625923",
+  "source_hashes": {
+    "fano_threefolds_rk1index1.py": "a8e94d07b549657cfc69ae3f7cd2236cef083d3d327c9b34b24e785ac2b91b0e",
+    "fano_threefolds_rk1index2.py": "d4b4db2f194913049e57fbf389fd6cdb68d15e2431b315eee845aa9d7c4a4a22"
+  },
+  "scope": "15 index-one/two matrices and period inputs; no GW or deformation proof",
+  "rows": [
+    {
+      "family": "g2",
+      "source_file": "fano_threefolds_rk1index1.py",
+      "degree": 2,
+      "basis_diagonal": [
+        1,
+        1,
+        2,
+        2
+      ],
+      "scalar_shift": "120",
+      "period_coefficients_0_through_8_match": true,
+      "exact_matrix_equality": true
+    },
+    {
+      "family": "g3",
+      "source_file": "fano_threefolds_rk1index1.py",
+      "degree": 4,
+      "basis_diagonal": [
+        1,
+        1,
+        4,
+        4
+      ],
+      "scalar_shift": "24",
+      "period_coefficients_0_through_8_match": true,
+      "exact_matrix_equality": true
+    },
+    {
+      "family": "g4",
+      "source_file": "fano_threefolds_rk1index1.py",
+      "degree": 6,
+      "basis_diagonal": [
+        1,
+        1,
+        6,
+        6
+      ],
+      "scalar_shift": "12",
+      "period_coefficients_0_through_8_match": true,
+      "exact_matrix_equality": true
+    },
+    {
+      "family": "g5",
+      "source_file": "fano_threefolds_rk1index1.py",
+      "degree": 8,
+      "basis_diagonal": [
+        1,
+        1,
+        8,
+        8
+      ],
+      "scalar_shift": "8",
+      "period_coefficients_0_through_8_match": true,
+      "exact_matrix_equality": true
+    },
+    {
+      "family": "g6",
+      "source_file": "fano_threefolds_rk1index1.py",
+      "degree": 10,
+      "basis_diagonal": [
+        1,
+        1,
+        10,
+        10
+      ],
+      "scalar_shift": "6",
+      "period_coefficients_0_through_8_match": true,
+      "exact_matrix_equality": true
+    },
+    {
+      "family": "g7",
+      "source_file": "fano_threefolds_rk1index1.py",
+      "degree": 12,
+      "basis_diagonal": [
+        1,
+        1,
+        12,
+        12
+      ],
+      "scalar_shift": "5",
+      "period_coefficients_0_through_8_match": true,
+      "exact_matrix_equality": true
+    },
+    {
+      "family": "g8",
+      "source_file": "fano_threefolds_rk1index1.py",
+      "degree": 14,
+      "basis_diagonal": [
+        1,
+        1,
+        14,
+        14
+      ],
+      "scalar_shift": "4",
+      "period_coefficients_0_through_8_match": true,
+      "exact_matrix_equality": true
+    },
+    {
+      "family": "g9",
+      "source_file": "fano_threefolds_rk1index1.py",
+      "degree": 16,
+      "basis_diagonal": [
+        1,
+        1,
+        16,
+        16
+      ],
+      "scalar_shift": "4",
+      "period_coefficients_0_through_8_match": true,
+      "exact_matrix_equality": true
+    },
+    {
+      "family": "g10",
+      "source_file": "fano_threefolds_rk1index1.py",
+      "degree": 18,
+      "basis_diagonal": [
+        1,
+        1,
+        18,
+        18
+      ],
+      "scalar_shift": "3",
+      "period_coefficients_0_through_8_match": true,
+      "exact_matrix_equality": true
+    },
+    {
+      "family": "g12",
+      "source_file": "fano_threefolds_rk1index1.py",
+      "degree": 22,
+      "basis_diagonal": [
+        1,
+        1,
+        22,
+        22
+      ],
+      "scalar_shift": "12/5",
+      "period_coefficients_0_through_8_match": true,
+      "exact_matrix_equality": true
+    },
+    {
+      "family": "d1",
+      "source_file": "fano_threefolds_rk1index2.py",
+      "degree": 1,
+      "basis_diagonal": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "scalar_shift": "0",
+      "period_coefficients_0_through_8_match": true,
+      "exact_matrix_equality": true
+    },
+    {
+      "family": "d2",
+      "source_file": "fano_threefolds_rk1index2.py",
+      "degree": 2,
+      "basis_diagonal": [
+        1,
+        2,
+        8,
+        16
+      ],
+      "scalar_shift": "0",
+      "period_coefficients_0_through_8_match": true,
+      "exact_matrix_equality": true
+    },
+    {
+      "family": "d3",
+      "source_file": "fano_threefolds_rk1index2.py",
+      "degree": 3,
+      "basis_diagonal": [
+        1,
+        2,
+        12,
+        24
+      ],
+      "scalar_shift": "0",
+      "period_coefficients_0_through_8_match": true,
+      "exact_matrix_equality": true
+    },
+    {
+      "family": "d4",
+      "source_file": "fano_threefolds_rk1index2.py",
+      "degree": 4,
+      "basis_diagonal": [
+        1,
+        2,
+        16,
+        32
+      ],
+      "scalar_shift": "0",
+      "period_coefficients_0_through_8_match": true,
+      "exact_matrix_equality": true
+    },
+    {
+      "family": "d5",
+      "source_file": "fano_threefolds_rk1index2.py",
+      "degree": 5,
+      "basis_diagonal": [
+        1,
+        2,
+        20,
+        40
+      ],
+      "scalar_shift": "0",
+      "period_coefficients_0_through_8_match": true,
+      "exact_matrix_equality": true
+    }
+  ]
+}

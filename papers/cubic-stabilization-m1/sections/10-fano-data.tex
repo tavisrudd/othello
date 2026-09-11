@@ -1,0 +1,111 @@
+\section{Finite Fano data and their geometric scope}
+\label{sec:fano-data}
+The numerical classification uses nine small matrices and eight classical
+rationality assertions. The matrix calculation establishes the spectral
+conditions; the cited family identifications and smooth deformation bridges
+establish their every-member scope.
+
+\subsection{Matrices and residues}
+In the classical anticanonical-power basis, up to a scalar Euler shift,
+write the matrix at Novikov parameter one as
+\[
+ U=\begin{pmatrix}a&c&e&f\\1&b&d&e\\0&1&b&c\\0&0&1&a\end{pmatrix},
+ \qquad D=\tfrac12\diag(3,1,-1,-3).
+\]
+The nine inputs are:
+\begin{center}\small
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+Family & $a$ & $b$ & $c$ & $d$ & $e$ & $f$\\\midrule
+g=2 & 120&744&137520&650016&119681280&21690374400\\
+g=3 & 24&104&3888&13600&504576&18323712\\
+g=4 & 12&42&792&2340&43632&793152\\
+g=5 & 8&24&304&800&9984&121088\\
+g=6 & 6&16&156&380&3600&33120\\
+g=8 & 4&9&64&140&924&5936\\
+d=1 & 0&0&240&1248&0&57600\\
+d=2 & 0&0&48&160&0&2304\\
+d=3 & 0&0&24&60&0&576\\
+\bottomrule
+\end{tabular}
+\end{center}
+The columns $(1,U1,U^21,U^31)$ have determinant one, so the matrix is cyclic.
+For genera $2,3,4,5$ the characteristic polynomial is $T^3(T-s)$, with
+$s=1728,256,108,64$, respectively. For genera $6,8$ it is
+$T^2(T^2-44T-16)$ and $T^2(T-27)(T+1)$.
+For degrees $1,2,3$ it is $T^2(T^2-s)$, with $s=1728,256,108$.
+Thus the displayed repeated factors are whole primary factors.
+Restoring the anticanonical-degree parameter $t$ gives
+$tB(t)UB(t)^{-1}$, where $B(t)=\diag(1,t^{-1},t^{-2},t^{-3})$;
+in index two the integral Novikov variable is $q=t^2$.
+This homogeneous substitution, after inverting $t$, preserves primary ranks
+and the canonical residue discriminant. A scalar Euler shift changes only
+the removed exponential.
+
+For a repeated rank-two factor, choose a Jordan chain and a complementary
+invariant frame. In that frame let $J$ be the leading matrix and $B$ the
+grading coefficient. Solve the off-diagonal Sylvester equation
+$[J,X]+B_{\rm off}=0$ for the first regular gauge coefficient.
+The next diagonal coefficient is $(BX)_{ii}$: the derivative term $-X$
+is off-diagonal. Applying the elementary modification to this finite jet
+gives exactly the five discriminants in Proposition~\ref{prop:fano-endpoints}.
+The independent checker constructs the frame by rational elimination;
+the other checker computes the projector and reduced inverse directly.
+Neither requires a higher-rank logarithmic lattice.
+
+\subsection{Sources and all smooth members}
+The counting matrices agree entrywise with the reconstructions accompanying
+B\"ohning--Graf von Bothmer--Su'a \cite[Sections~9--10 and associated data]{NaiveAtoms}.
+If $M$ denotes a source matrix at parameter one, the displayed matrix is
+$D_0^{-1}M^{\mathsf t}D_0+aI$. For index one of degree $k=2g-2$,
+$D_0=\diag(1,1,k,k)$; for index two of degree $k$,
+$D_0=\diag(1,2,4k,8k)$ and $a=0$.
+The input period coefficients through degree eight agree with the formulas
+and tables in Coates--Corti--Galkin--Kasprzyk
+\cite[Sections~3--17]{CCGK}. The genus-six and genus-eight quantum
+inputs are proved in \cite[Theorem~6.1.1]{PrzyjalkowskiGenera}; the weighted
+and complete-intersection inputs are identified in the cited period tables.
+The reconstruction constrains the quantum-product matrix by degree, classical
+products and pairing, then determines its coefficients from the period equation.
+The finite coefficient comparison checks normalization; the GW identification
+is the imported reconstruction result.
+
+The smooth classification has seventeen deformation families, indexed by
+index and degree or genus; we use its statement and Hodge numbers as recalled
+in \cite[Introduction and Table~5]{KuznetsovProkhorovNodal}, which attributes
+them to Iskovskikh--Prokhorov. The family presentations in
+\cite[Sections~3--17]{CCGK} include the weighted models.
+Smooth deformation invariance transports the quantum products with the ample
+generator marked. It does not transport rationality or identify Hodge
+structures of different members.
+
+Two presentations require an explicit bridge. The special genus-three model
+and the quartic are smooth intersections of type $(2,4)$ in
+$\PP(1,1,1,1,1,2)$ \cite[Section~9]{CCGK}. Perturbing the degree-two equation
+to have nonzero coefficient of the weight-two coordinate gives a quartic
+by elimination. Smoothness is open and the smooth parameter locus is
+connected. For a special Gushel--Mukai threefold, its linear section of the
+cone passes through the vertex, while its smooth quadric section avoids the
+vertex \cite[Sections~2--3]{DebarreGM}. Perturb the linear section to miss
+the vertex. Properness and openness of smoothness give a smooth local family
+with ordinary general member; ordinary presentations form an open subset of
+an irreducible parameter space. Thus both special strata have the same
+small quantum matrix as their ordinary smooth family.
+
+The remaining eight families are rational for every smooth complex member
+\cite[Section~1.1]{KuznetsovProkhorov}. No quantum matrix for those controls
+is a premise of the classification theorem.
+
+\subsection{Reproduction and formal boundary}
+The bundle \texttt{verification/fano-matrices/} contains the exact rational
+inputs, the symbolic projector calculation, an independent rational-elimination
+checker, and the source-normalization comparison. Its README specifies
+commands, pinned source hashes, finite domains and trust limits.
+The two implementations agree on all seventeen characteristic polynomials
+and cyclic frames and all nine rank-two residues, including four zero
+controls. Only the nine detected inputs above are needed here.
+The computations do not establish the cited Gromov--Witten formulas,
+classification, deformation invariance or geometric transport.
+The manuscript's claim map records the new geometric theorems as absent
+from the formalization; existing algebraic fragments retain their stated
+boundaries.

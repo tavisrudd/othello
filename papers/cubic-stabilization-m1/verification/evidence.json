@@ -44,6 +44,15 @@
       "commands": [
         "uv run --with sympy==1.14.0 python verification/framed_specialization.py --check"
       ]
+    },
+    "fano-matrices": {
+      "role": "Exact small Euler matrices: 17 characteristic polynomials and cyclic frames, nine rank-two discriminants independently recomputed; 15 source matrix and period-input comparisons. Only nine detected families enter the main theorems. No geometric theorem is checked.",
+      "checksum_manifest": "verification/fano-matrices/SHA256SUMS",
+      "commands": [
+        "uv run --with sympy==1.14.0 python verification/fano-matrices/finite_checks.py",
+        "python3 verification/fano-matrices/independent_checks.py",
+        "uv run --with sympy==1.14.0 python verification/fano-matrices/source_check.py --source-dir SOURCE_DIR"
+      ]
     }
   }
 }

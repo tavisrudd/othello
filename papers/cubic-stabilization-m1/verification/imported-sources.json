@@ -419,6 +419,162 @@
           "matched": "The equivalence is over C, where these hold; only negative conclusions extend to arbitrary characteristic-zero forms."
         }
       ]
+    },
+    "Behrend:product": {
+      "citation": "Behrend",
+      "pinpoint": "Formula (1), Theorem 1",
+      "used": "Small quantum Kunneth and the constant-curve-factor product calculation.",
+      "conventions": [
+        {
+          "aspect": "scope and transport",
+          "requirement": "Small quantum Kunneth and the constant-curve-factor product calculation.",
+          "matched": "Only the small tensor connection is used; full mixed bulk is treated by flatness or explicit potential, not by a big tensor formula."
+        }
+      ]
+    },
+    "IritaniHodge:equivariance": {
+      "citation": "IritaniHodge",
+      "pinpoint": "Section 3, Lemmas 7 and 10, Proposition 8",
+      "used": "Universal Hodge group, quantum equivariance, equivariant blowup maps and fixed shifts.",
+      "conventions": [
+        {
+          "aspect": "scope and transport",
+          "requirement": "Universal Hodge group, quantum equivariance, equivariant blowup maps and fixed shifts.",
+          "matched": "One rational reductive quotient handles the finite factorization; parameters are fixed while the full fiber is retained, and Tate twists are forgotten."
+        }
+      ]
+    },
+    "Fano:quantum-data": {
+      "citation": "CCGK",
+      "pinpoint": "Sections 3--17, with cited weighted and homogeneous-model GW formulas",
+      "used": "The small quantum input for the Picard-rank-one deformation families.",
+      "conventions": [
+        {
+          "aspect": "scope and transport",
+          "requirement": "The small quantum input for the Picard-rank-one deformation families.",
+          "matched": "The source-normalization certificate checks all entries against the pinned reconstruction scripts; special genus-three and GM models have explicit smooth bridges in the appendix."
+        }
+      ]
+    },
+    "Fano:classification": {
+      "citation": "KuznetsovProkhorovNodal",
+      "pinpoint": "Introduction p. 3 and Table 5 p. 13",
+      "used": "Seventeen smooth Picard-rank-one deformation families and their Hodge numbers, recalled from Iskovskikh--Prokhorov.",
+      "conventions": [
+        {
+          "aspect": "scope and transport",
+          "requirement": "Seventeen smooth Picard-rank-one deformation families and their Hodge numbers, recalled from Iskovskikh--Prokhorov.",
+          "matched": "Use the smooth classification, not the nodal classification; convert index-two anticanonical genus to degree. This is an explicitly secondary classification statement."
+        }
+      ]
+    },
+    "Fano:rational-controls": {
+      "citation": "KuznetsovProkhorov",
+      "pinpoint": "Section 1.1",
+      "used": "All-member geometric rationality of P3, Q3, degrees 4 and 5, and genera 7, 9, 10 and 12.",
+      "conventions": [
+        {
+          "aspect": "scope and transport",
+          "requirement": "All-member geometric rationality of P3, Q3, degrees 4 and 5, and genera 7, 9, 10 and 12.",
+          "matched": "The ground field is complex; no rationality deformation principle or rationality assertion for arbitrary forms is inferred."
+        }
+      ]
+    },
+    "Voisin:rational-torelli": {
+      "citation": "VoisinTorelli",
+      "pinpoint": "Theorem 0.2, Remarks 0.1 and 0.3",
+      "used": "Rational generic Torelli for cubic and quartic hypersurfaces in P4.",
+      "conventions": [
+        {
+          "aspect": "scope and transport",
+          "requirement": "Rational generic Torelli for cubic and quartic hypersurfaces in P4.",
+          "matched": "The source is very general; the target is any smooth hypersurface of the same degree; H3 is primitive and the listed exceptions do not apply."
+        }
+      ]
+    },
+    "Achter:intermediate-jacobian": {
+      "citation": "AchterTorelli",
+      "pinpoint": "Theorem B",
+      "used": "Intermediate Jacobian over the field of definition of a smooth cubic threefold.",
+      "conventions": [
+        {
+          "aspect": "scope and transport",
+          "requirement": "Intermediate Jacobian over the field of definition of a smooth cubic threefold.",
+          "matched": "The fields are finitely generated of characteristic zero and the varieties are smooth cubics."
+        }
+      ]
+    },
+    "Orr:bounded-isogenies": {
+      "citation": "OrrIsogenies",
+      "pinpoint": "Theorem 5.1, corrected arXiv v4",
+      "used": "A geometric isogeny from a fixed abelian variety to each isogenous target with degree polynomially bounded by the target field degree.",
+      "conventions": [
+        {
+          "aspect": "scope and transport",
+          "requirement": "A geometric isogeny from a fixed abelian variety to each isogenous target with degree polynomially bounded by the target field degree.",
+          "matched": "The source and finitely generated field are fixed; targets are defined over degree-bounded finite extensions. The isogeny is geometric and need not have that field-degree bound."
+        }
+      ]
+    },
+    "NN:polarizations": {
+      "citation": "NarasimhanNori",
+      "pinpoint": "Theorem 1.1",
+      "used": "Finitely many polarizations of fixed degree on a fixed abelian variety, modulo automorphisms.",
+      "conventions": [
+        {
+          "aspect": "scope and transport",
+          "requirement": "Finitely many polarizations of fixed degree on a fixed abelian variety, modulo automorphisms.",
+          "matched": "Apply degree one to the finitely many geometric quotient abelian varieties; no polarized initial isogeny is assumed."
+        }
+      ]
+    },
+    "CG:cubic-torelli": {
+      "citation": "CG",
+      "pinpoint": "Cubic Torelli theorem",
+      "used": "A smooth complex cubic threefold is determined by its principally polarized intermediate Jacobian.",
+      "conventions": [
+        {
+          "aspect": "scope and transport",
+          "requirement": "A smooth complex cubic threefold is determined by its principally polarized intermediate Jacobian.",
+          "matched": "A principal polarization is supplied only after the finite-polarization step; Hodge conservation itself is unpolarized."
+        }
+      ]
+    },
+    "Fano:reconstruction": {
+      "citation": "NaiveAtoms",
+      "pinpoint": "Section 9 Proposition 9.1 reconstruction explanation; Section 10 and associated DOI 10.5281/zenodo.20625923 data",
+      "used": "Actual counting matrices reconstructed from quantum periods using the quantum-product ansatz.",
+      "conventions": [
+        {
+          "aspect": "geometric identification",
+          "requirement": "Actual counting matrices reconstructed from quantum periods using the quantum-product ansatz.",
+          "matched": "The exact basis and scalar shifts are printed in the appendix; finite agreement checks normalization, while GW identification is imported."
+        }
+      ]
+    },
+    "Fano:genus-six-eight": {
+      "citation": "PrzyjalkowskiGenera",
+      "pinpoint": "Theorem 6.1.1",
+      "used": "The genus-six and genus-eight small quantum matrices and shifts 6 and 4.",
+      "conventions": [
+        {
+          "aspect": "geometric identification",
+          "requirement": "The genus-six and genus-eight small quantum matrices and shifts 6 and 4.",
+          "matched": "The displayed normalized matrices add the stated scalar shifts in the classical anticanonical-power basis."
+        }
+      ]
+    },
+    "Fano:gm-models": {
+      "citation": "DebarreGM",
+      "pinpoint": "Sections 2--3, including ordinary/special cone presentations and Theorem 3.7",
+      "used": "Ordinary and special smooth Gushel--Mukai presentations.",
+      "conventions": [
+        {
+          "aspect": "geometric identification",
+          "requirement": "Ordinary and special smooth Gushel--Mukai presentations.",
+          "matched": "Perturb the linear cone section while the quadric avoids the vertex; openness of smoothness gives the local bridge used for GW deformation invariance."
+        }
+      ]
     }
   }
 }

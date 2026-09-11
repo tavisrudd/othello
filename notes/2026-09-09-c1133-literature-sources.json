@@ -116,7 +116,7 @@
       },
       "key": "arXiv:2606.17884",
       "read_depth": "partial",
-      "read_scope": "Section 10 introduction and first part of table, lines 1843–2005; separately lines 2390–2455 (Verra-family passage, not Fano deformation evidence). Section 10 opening 1840–1908 and bibliography 3060–3155 now read to resolve matrix provenance.",
+      "read_scope": "Section 10 introduction and first part of table, lines 1843–2005; separately lines 2390–2455 (Verra-family passage, not Fano deformation evidence). Section 10 opening 1840–1908 and bibliography 3060–3155 now read to resolve matrix provenance. Fresh assembled specialist review: Section 9 Proposition 9.1 reconstruction explanation, extracted lines 1750–1795 (especially 1776–1784); Section 10 opening/data attribution rechecked. Partial read, no external full-read increment.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Naive atoms of blowups: examples",
       "version_in_cached_header": "arXiv:2606.17884v2 [math.AG] 19 Jun 2026"

@@ -1,0 +1,30 @@
+\section{A Torelli consequence}
+\label{sec:torelli}
+Hodge conservation applies to every member of the nine families.
+Recovering a hypersurface from the resulting rational Hodge structure uses
+a separate generic Torelli theorem, and its very-general qualification.
+
+\begin{corollary}[Very-general cancellation]
+\label{cor:generic-cancellation}\coverage{absent}%
+Let $X\subset\PP^4$ be a very general smooth cubic or quartic threefold,
+and let $Y\subset\PP^4$ be any smooth hypersurface of the same degree.
+Then
+\[
+ X\times\PP^1\text{ is birational to }Y\times\PP^1
+ \quad\Longleftrightarrow\quad X\cong Y.
+\]
+\end{corollary}
+\begin{proof}
+Theorem~\ref{thm:hodge-conservation} identifies the rational third Hodge
+structures. Here $H^3$ is the entire primitive middle cohomology.
+Voisin's rational generic Torelli theorem applies to both degrees
+\cite[Theorem~0.2 and Remarks~0.1, 0.3]{VoisinTorelli}, and gives $X\cong Y$.
+The reverse implication is immediate.
+\uses{thm:hodge-conservation}%
+\imports{Voisin:rational-torelli}%
+\end{proof}
+
+The arithmetic consequence in Appendix~\ref{sec:arithmetic-partners} uses
+Hodge conservation with bounded-degree isogeny and polarization-finiteness
+theorems. Neither application strengthens the integral or polarized content
+of Theorem~\ref{thm:hodge-conservation}.

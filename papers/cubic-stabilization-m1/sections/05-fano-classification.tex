@@ -1,0 +1,130 @@
+\section{Picard-rank-one Fano threefolds}
+\label{sec:fano-classification}
+The cubic is the rank-two model for a larger numerical obstruction.
+Five families are detected by the canonical rank-two residue. Four more
+have a repeated factor of even rank three; there we count its odd
+cohomology. No Hodge group is needed for either construction.
+
+\subsection{Odd dimension on rank-three factors}
+Use the full quantum cohomology supermodule over the same even bulk base.
+The even Frobenius algebra acts on it. Its spectral projectors split both
+parities, and the full even rank determines the primary factor.
+Define
+\[
+ O_3(T)=\sum_{\rk E^{\mathrm{ev}}=3}\dim E^{\mathrm{odd}},
+\]
+where the sum runs over whole primary factors. We use the full odd dimension,
+so no divisibility convention is needed.
+
+\begin{lemma}[Odd dimension and surface vanishing]
+\label{lem:odd-selector}\coverage{absent}%
+An even-rank-one primary factor of a Frobenius superalgebra has zero odd
+part. The count $O_3$ satisfies
+\[
+ O_3(\Bl_ZT)=O_3(T)+(c-1)O_3(Z)
+\]
+for a smooth codimension-$c$ center. It vanishes in dimensions at most two
+and is a birational invariant of smooth projective fourfolds.
+\end{lemma}
+\begin{proof}
+Let $e$ be the unit of an even-rank-one factor. For odd $a,b$ write
+$ab=\gamma e$. Supercommutativity gives $(ab)^2=0$, hence $\gamma=0$.
+The odd Frobenius pairing is therefore zero; nondegeneracy forces the odd
+part to be zero.
+
+The blowup comparison and its inverse preserve parity on the full fiber.
+They preserve full even ranks; independent occurrence-unit shifts separate
+their primary factors as in Proposition~\ref{prop:numerical-blowup}.
+The odd dimensions consequently add, and Tate suspensions preserve parity.
+Points and curves have even rank at most two. The ruled-product computation
+in Lemma~\ref{lem:ruled-product} has no even-rank-three factor.
+Point blowups and surface factorization extend this to all ruled surfaces.
+Projective space has simple generic factors.
+
+For a minimal surface with nef canonical class, the degree argument in
+Proposition~\ref{prop:atomic-lowdim} gives one whole even factor of rank
+$b_2+2$. It is selected only if $b_2=1$. In that case a nonzero holomorphic
+one-form $\alpha$ would give a nonzero real class
+$[i\alpha\wedge\bar\alpha]$ of square zero: its product with a K\"ahler
+class has positive integral. This is impossible when $H^2$ is generated
+by an ample class. Thus $H^1=0$ and, by duality, $H^3=0$.
+The selected odd dimension is zero. Surface classification and point
+blowups finish the vanishing proof. Weak factorization in dimension four
+then has zero correction at every step.
+\uses{prop:numerical-blowup,prop:atomic-lowdim,lem:ruled-product}%
+\imports{IritaniBlowup:thm-5.18,AKMW:weak-factorization,BeauvilleSurfaces:minimal-surface-classification}%
+\end{proof}
+
+\subsection{The nine detected families}
+For index two put $d=H^3$, where $-K_X=2H$. For index one put
+$g=\tfrac12(-K_X)^3+1$. Let $\mathcal F$ be the nine families in the
+following table. The even cohomology of each member has rank four, and
+its only odd cohomology is $H^3$.
+
+\begin{proposition}[Fano endpoint data]
+\label{prop:fano-endpoints}\coverage{absent}%
+Every smooth member of the indicated family has the following repeated
+small even primary factor; all complementary factors have rank one.
+The repeated factor is cyclic. The last two columns give the generic
+counts after continuation.
+\begin{center}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Family & Repeated even rank & $\delta^\sharp$ & $I_{\rm lat}$ & $O_3$\\
+\midrule
+Index two, $d=1$ &2&$16/9$&1&0\\
+Index two, $d=2$ &2&$1$&1&0\\
+Index two, $d=3$ &2&$4/9$&1&0\\
+Index one, $g=2$ &3&---&0&104\\
+Index one, $g=3$ &3&---&0&60\\
+Index one, $g=4$ &3&---&0&40\\
+Index one, $g=5$ &3&---&0&28\\
+Index one, $g=6$ &2&$1$&1&0\\
+Index one, $g=8$ &2&$4/9$&1&0\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{proposition}
+\begin{proof}
+Appendix~\ref{sec:fano-data} gives the nine matrices, their source
+normalizations and the exact finite calculation. The degree-one, two and
+three residue computation is also Proposition~\ref{prop:universal-rank-two-residue}.
+The family formulas apply to every smooth member by smooth deformation
+invariance of Gromov--Witten invariants, including the special quartic and
+Gushel--Mukai presentations discussed in that appendix.
+The general Fano cohomological shape and the positive $H^3$ dimensions in
+genera two through five are those of the smooth classification
+\cite[Introduction and Table~5]{KuznetsovProkhorovNodal}.
+Lemmas~\ref{lem:cyclic-primary-persistence} and~\ref{lem:triple-primary-persistence}
+continue the repeated factors in all even bulk directions;
+Proposition~\ref{prop:rank2-rigidity} continues the rank-two residues.
+By Lemma~\ref{lem:odd-selector}, no rank-one complement carries odd
+cohomology. Hence all of $H^3$ belongs to the repeated factor, giving $O_3$.
+Only its positivity is needed for irrationality.
+\uses{prop:universal-rank-two-residue,lem:cyclic-primary-persistence,lem:triple-primary-persistence,prop:rank2-rigidity,lem:odd-selector}%
+\imports{Fano:quantum-data,Fano:classification,Fano:reconstruction,Fano:genus-six-eight,Fano:gm-models,Przyjalkowski:counting-matrices}%
+\evidence{fano-matrices}%
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:fano-one-step-classification}]
+The smooth classification has seventeen families
+\cite[Introduction]{KuznetsovProkhorovNodal}.
+The eight families outside $\mathcal F$ are rational: $\PP^3$, the smooth
+quadric, index-two degrees four and five, and index-one genera seven,
+nine, ten and twelve \cite[Section~1.1]{KuznetsovProkhorov}.
+Their products with $\PP^1$ are rational.
+
+For each of the remaining nine families, Proposition~\ref{prop:fano-endpoints}
+gives $I_{\rm lat}>0$ or $O_3>0$.
+Lemma~\ref{lem:special-projective-line} doubles the former.
+For the latter, its tensor-product proof doubles the odd dimension at the
+small point; a continued projector has constant rank on a formal germ,
+so the same value holds in all even bulk directions.
+Both counts vanish on surface centers and on $\PP^4$, and are birationally
+invariant in dimension four. Thus these nine products are irrational.
+A rational threefold has rational product with $\PP^1$, proving the reverse
+implication as well. No deformation invariance of rationality is used.
+\proves{thm:fano-one-step-classification}%
+\uses{prop:fano-endpoints,lem:special-projective-line,lem:odd-selector,prop:numerical-blowup,prop:atomic-lowdim}%
+\imports{Fano:classification,Fano:rational-controls,AKMW:weak-factorization}%
+\end{proof}
