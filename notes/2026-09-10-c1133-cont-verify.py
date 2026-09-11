@@ -55,7 +55,7 @@ def main():
     vocabulary = {'full text', 'partial', 'review only', 'secondary only',
                   'abstract/metadata only'}
     assert all(s['read_depth'] in vocabulary and s['read_scope'] and s['access'] for s in sources)
-    assert sum(s['read_depth'] == 'full text' for s in sources) == register['external_full_text_count'] == 8
+    assert sum(s['read_depth'] == 'full text' for s in sources) == register['external_full_text_count'] == 9
     additions = {'2501.18849', '2210.08939', '2605.30439', '2605.30450',
                  '2609.06759', '2604.26592'}
     for source in sources:
@@ -65,8 +65,11 @@ def main():
             assert pdf.startswith(b'%PDF')
             assert hashlib.sha256(pdf).hexdigest() == access['sha256']
             assert Path(access['text']).is_file()
+    published = read('2026-09-10-c1133-published-spectra-source.json')['source']
+    assert hashlib.sha256(Path(published['pdf']).read_bytes()).hexdigest() == published['sha256']
+    assert published['pages'] == 37
     print('Verified: 12 identities, 59 memberships, 39 distinct works;')
-    print(f'{len(sources)} source records, eight full-text reads; response and new PDF hashes.')
+    print(f'{len(sources)} source records, nine full-text reads; response and new PDF hashes.')
 
 
 if __name__ == '__main__':

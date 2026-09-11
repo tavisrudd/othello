@@ -45,16 +45,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   criterion, and credits the ordinary equivariant stabilization/isogeny
   precedents in *Atoms meet symbols*. An edited-volume DOI is rejected as
   a paper-level citation alias.
-  Latest report: `../2026-09-10-c1133-citation-followup.md`: twelve S2 seed
-  sets recovered, 59 memberships/39 distinct works title-screened; explicit
-  equivariant/Hodge-partner precedents credited and withdrawn Verra claim
-  distinguished. F-bundle publication DOI resolved. Current register: 89
-  sources, still eight external full-text reads. Cross-service gaps remain.
-  User-authorized triangulation now permits bounded core assessment:
-  `../2026-09-10-c1133-triangulation.md`. Neither paid chapter is an A–D
-  premise; direct/secondary precursor credit is explicit. Current register:
-  89 sources, eight external full-text reads. Published-body/version and
-  service gaps remain disclosed; no comprehensive priority verdict.
+  Latest report: `../2026-09-10-c1133-published-spectra-audit.md`.
+  Published spectra chapter supplied and fully read (37 pages); cubic and
+  theorem passages match the inspected thesis, closing that source gap.
+  Deferred proofs remain attributed to the in-preparation reference [29].
+  Current register: 89 sources, nine external full-text reads. Twelve S2
+  seed sets: 59 memberships/39 works. The user-authorized triangulation
+  still covers base-loci attribution through an explicit secondary chain;
+  neither chapter is an A–D proof premise. No comprehensive priority verdict.
   Next: author assessment of A, B, then C/D with that coverage boundary.
   Exact pencil claims remain conditional and outside the core. No further
   purchase/access request is required for core review. Collaborator

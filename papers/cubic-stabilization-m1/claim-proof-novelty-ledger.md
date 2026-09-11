@@ -21,7 +21,7 @@ independently of whether the claim is conditional.
 |---|---|---|---|
 | Irrationality of `X x P^1` for every smooth complex cubic threefold | **STATUS: UNCONDITIONAL.** The occurrence-indexed categorical QDM ledger transports additive block markers through Iritani's blowup comparison and Iritani--Koto's projective-bundle comparison.  Its rank-two formal-exponent fold has value one on the Beauville-derived cubic zero block, vanishes for every actual point, curve, or surface center occurrence, doubles on `X x P^1`, and vanishes on `P^4`.  The framed fold is developed separately under Hypothesis R and the residual part of T | Beauville supplies the cubic quantum products; Iritani and Iritani--Koto supply the QDM comparisons. The author-hosted *Interpretations of spectra* chapter already displays the cubic exponent representatives; Cai gives a corroborating cubic formal-monodromy calculation. See the 2026-09-09 audit update below for the exact older-source access boundary. No inspected source states the one-stabilization theorem. A 2020 MathOverflow question records the problem as then open. Current absence claim remains “no predecessor located” pending the audit breadth recorded below | lead theorem `thm:every-cubic`; present the categorical ledger as the reusable mechanism and keep the framed count in its companion manuscript |
 | Non-isotrivial family with `X` universally `CH_0`-trivial while `X x P^1` is irrational | **STATUS: UNCONDITIONAL on both halves.** The universal `CH_0`-triviality proof rests only on the printed six-axis geometric realization and the cited Voisin criterion; the irrationality half is now the unconditional one-stabilization theorem | Voisin gives the exact minimal-class criterion; Hartlieb identifies the one-dimensional special period locus; Roulleau supplies the Fano-surface configuration. **Pre-empted as an existence statement:** Yang--Yu--Zhu (arXiv:2508.03623, August 2025) give a two-dimensional family of smooth cubic threefolds with unirational parametrizations of degrees two and three, state that such parametrizations force universal `CH_0`-triviality, and extend the parametrizations to `X x P^m`. With `thm:every-cubic` their family separates the two properties on a larger locus than the `A_5`-pencil, which is one-dimensional in coarse moduli. **Pre-empted earlier still:** Voisin's own Theorem 4.5 with Lemma 4.6 gives components of codimension at most three in the moduli space along which `theta^4/4!` is algebraic, and Colliot-Thélène summarizes that theorem as producing explicit universally `CH_0`-trivial cubic threefolds including the Fermat hypersurface (arXiv:1607.05673, page 1). The pencil itself contains the Fermat cubic threefold: Hartlieb's Lemma 5.5, already cited in the introduction, records that the two `A_5`-components meet exactly in the Fermat cubic and one further member, and C914 re-derives it from the induced-character description of `W_5`. That member is also covered by Colliot-Thélène's almost-diagonal theorem and by the degree-three parametrization of Yang--Yu--Zhu Remark 3.6. **What is not pre-empted** is the separation itself: no prior source knew that `X x P^1` is irrational, so `thm:every-cubic` is what converts every one of these `CH_0`-loci into a separation locus, which is the content of `cor:voisin-separation`, `cor:fermat-separation`, and `cor:coprime-separation`. Also not pre-empted is the mechanism: algebraicity of the primitive minimal class along the whole pencil, proved from the six-axis lattice rather than from a decomposition of the diagonal or an odd-degree isogeny to a curve Jacobian. **Position of the pencil, settled 2026-08-18 (C914):** all but finitely many of its moduli points lie outside the explicit family of Yang--Yu--Zhu Theorem 3.3, by the Eckardt criterion `lem:eckardt-rank` together with the registered computation (`prop:A5-not-coprime`); their own Question 1.3 leaves open whether that family exhausts the coprime-degree locus, so no larger claim is made. Its intermediate Jacobian receives no odd-degree isogeny from a product of five elliptic curves, with no condition imposed on the pulled-back polarization, and none from a product of factors of dimension at most three under which the polarization pulls back to an odd multiple of the product polarization (`prop:no-elliptic-product`), so Voisin's construction does not reach the pencil that way. Whether the pencil lies in one of her components is open along exactly two routes: the four-dimensional factor being the Jacobian of an irreducible genus-four curve, or the intermediate Jacobian being odd-degree isogenous to the Jacobian of an irreducible genus-five curve | second theorem `thm:separation-family`; cite Yang--Yu--Zhu in the introduction, present the family as a separate mechanism, and make no existence-priority claim |
-| Exact cubic packet `nu_6(X) = 2` for every smooth cubic threefold | **STATUS: UNCONDITIONAL — `nu_6(X) = 2`.** Complete internal derivation: Beauville's products give the small-even matrix; the integral-`z` block reduction, the indicial polynomial `rho^2 + rho + 5/36`, its roots `-1/6` and `-5/6`, the two unramified rank-one blocks, and the nonresonant Frobenius recursion are then carried out in the paper; now Proposition `prop:cubic-packet` | Beauville is the input for the matrix. The author-hosted *Interpretations of spectra* chapter, printed p. 285, already gives the cubic exponent representatives −1/6 and −5/6. No priority is claimed for these values or their immediate primitive-sixth eigenvalues. Cai is a further corroborating computation. The manuscript supplies its own integral-lattice reduction and stated multiplicity derivation; the older chapter is not yet version-matched to the published 2023 chapter | printed with an explicit sentence that the proposition uses neither Hypothesis 5.7R nor 5.7T, and with the Beauville derivation before the comparison to Cai |
+| Exact cubic packet `nu_6(X) = 2` for every smooth cubic threefold | **STATUS: UNCONDITIONAL — `nu_6(X) = 2`.** Complete internal derivation: Beauville's products give the small-even matrix; the integral-`z` block reduction, the indicial polynomial `rho^2 + rho + 5/36`, its roots `-1/6` and `-5/6`, the two unramified rank-one blocks, and the nonresonant Frobenius recursion are then carried out in the paper; now Proposition `prop:cubic-packet` | Beauville is the input for the matrix. The author-hosted *Interpretations of spectra* chapter, printed p. 285, already gives the cubic exponent representatives −1/6 and −5/6. No priority is claimed for these values or their immediate primitive-sixth eigenvalues. Cai is a further corroborating computation. The manuscript supplies its own integral-lattice reduction and stated multiplicity derivation; the published 2023 chapter is now read in full and its cubic passage verified on pp. 375–376 | printed with an explicit sentence that the proposition uses neither Hypothesis 5.7R nor 5.7T, and with the Beauville derivation before the comparison to Cai |
 | All-degree marked finite-etale graph saturation | **STATUS: UNCONDITIONAL.** Complete standalone proof, now Theorem `thm:all-degree-graph-saturation`. The theorem retains the marked elliptic ruling, orthogonal depth blocks, `B^{-1}`-self-adjoint graph slopes, exact cross ideals, signed rank-one straightening, square-zero realization, and faithful-flat descent | no exact predecessor was located in the bounded literature search. Classical tropical midpoint inequalities, unweighted integral Pluecker straightening, rational divisor generation, and divided-power/Fourier technology are credited only at their actual ranges. MathSciNet and a full citation-graph closure remain uncovered | printed without “first” or unqualified “to our knowledge” language |
 | Full integral Hodge/product saturation for the non-CM six-axis packet | not a claim of this paper | prior six-axis and period-locus sources supply the geometry, not the repeated-root weighted Pluecker calculation or `Hdg^{2k}=P^k` in all degrees | omitted from the manuscript and its theorem inventory |
 | Exact distinct-root rank-five middle defect | not a claim of this paper | the neighboring calculation is a weighted graph-lattice statement, not a novelty claim for unweighted Pluecker theory | omitted from the manuscript and its theorem inventory |
@@ -49,7 +49,7 @@ audit; it does not change the manuscript's current theorem hierarchy or formal
 coverage. The detailed scope is in
 [`2026-09-09-c1133-acceptance-map.md`](../../notes/2026-09-09-c1133-acceptance-map.md).
 The complete literature audit is still open. Its source register currently has
-89 entries (88 external and one local); eight external sources (six papers
+89 entries (88 external and one local); nine external sources (seven papers
 and two source scripts) are read in full. Every other entry records its actual partial or metadata
 scope. The earlier bounded absence statements above must be read with this
 expanded, still incomplete coverage boundary.
@@ -60,6 +60,11 @@ expanded, still incomplete coverage boundary.
 | B: among the nine detected families, one-stable birationality implies isomorphism of rational Hodge structures H³ | Written full-fiber equivariance and faithful Hodge-fixed-base adaptation; the exact coefficient-domain and common-field hypotheses must be retained. No replacement of the fiber by its invariant vectors | Hodge atoms and equivariant quantum comparisons are established precursors, including KKPY and Iritani. Fay's arXiv:2605.30439 Theorem 5.2 explicitly proves finite-group-equivariant blowup decomposition; Benedetti–Guéré–Manivel–Perrin arXiv:2605.30450 Theorem 1 imposes rational-Hodge restrictions on birational fourfold partners. Neither general equivariant comparison nor rational-Hodge partner restrictions originate here. Exact whole-H³ one-stable conservation comparison remains open |
 | C: very-general cubic/quartic source, arbitrary smooth same-family target, one-stable birationality implies isomorphism | Deduction from B and Voisin's precise rational generic Torelli statement; source quantifiers checked | Credit Voisin for the rational/unpolarized Torelli input. The cancellation application is a candidate consequence, not a new Torelli theorem; no final novelty verdict |
 | D: bounded-degree extensions of a fixed finitely generated characteristic-zero field yield finitely many geometric cubic partner classes | Written deduction from B, Orr v4, arithmetic intermediate Jacobians, finite kernels, polarization finiteness and Torelli. Original Narasimhan–Nori Theorem 1.1 is now verified from all four original scanned pages (2026-09-10 source closeout) | Credit those finiteness and Torelli inputs. This is geometric-class finiteness, not finiteness of twists or an effective bound. Earlier arithmetic-spectrum rationality criteria have a different inspected conclusion; comprehensive comparison remains open |
+
+**Published-source update:** the user has now supplied *Interpretations of
+Spectra*, and the full read closes its body-access and load-bearing passage
+comparison gaps. The triangulation below remains the method for the
+unread categorical-base-loci chapter; the optional pencil remains separate.
 
 **User-authorized triangulation (2026-09-10).** Paid chapter access is no
 longer a prerequisite for the bounded attribution assessment of A–D. Their
@@ -86,24 +91,29 @@ equivariant replacement. Do not import its withdrawn conclusion. These
 source distinctions and the partial reads underlying the B-row additions are
 recorded in `notes/2026-09-10-c1133-citation-followup.md`.
 
-**Concrete older precursor.** A primary author-hosted DSc thesis contains
-*Interpretations of spectra*: printed p. 285 displays the cubic connection
-and exponent representatives −1/6 and −5/6; Sections 2.1–2.4 develop the
-quantum/noncommutative spectrum and ordinary-irrationality applications.
-The same-title Springer chapter is by Katzarkov–Lee–Svoboda–Petkov (2023,
-DOI 10.1007/978-3-031-17859-7_20), but the accessible thesis text has not been
-version-matched to that publication. The exact read scopes, PDF hash and access
-URL are recorded under `Katzarkov-DSciThesis-v2` in the
-[source register](../../notes/2026-09-09-c1133-literature-sources.json).
-Do not claim that the cubic exponent values first appeared in the present
-paper or Cai's work. The chapter's cubic quantity δ=5/3 is its asymptotic
-dimension, not the squared residue gap 4/9 used here. The displayed matrix
-also matches: after u=−z and the constant basis diag(1,2,4,8), its K=2U_(6,15)
-becomes U_(24,60), with the present grading. This explicit normalization is
-recorded as an auditor inference in the literature audit.
+**Concrete published precursor — source gap closed 2026-09-10.**
+Katzarkov–Lee–Svoboda–Petkov, *Interpretations of Spectra* (2023,
+DOI 10.1007/978-3-031-17859-7_20), is now read in full, all 37 published
+pages 371–407. Pages 375–376 explicitly display the cubic matrix, exponent
+representatives −1/6 and −5/6, and δ=5/3. Section 2.4 gives ordinary
+irrationality statements; Section 3 gives arithmetic nonrationality
+statements with restricted algebraic-cycle hypotheses. The previously
+inspected thesis passages correspond in substantive content: thesis
+Theorems 2.14/2.15 are published Theorems 2.8/2.9. This is a passage-level
+comparison, not a claim of whole-file identity. The PDF hash, exact page map
+and read record are in `notes/2026-09-10-c1133-published-spectra-audit.md`.
+
+Do not claim priority for the cubic exponent values, spectral
+ordinary-irrationality method, or restricting quantum deformations to
+algebraic classes. The chapter does not state the exact A–D combinations;
+this is a conclusion about this fully read chapter, not a global novelty
+verdict. Its δ=5/3 is not the squared residue gap 4/9 used here. The prior
+matrix-normalization check applies to the same published matrix: after
+u=−z and the constant basis diag(1,2,4,8), K=2U_(6,15) becomes U_(24,60),
+with the present grading.
 
 The chapter attributes its birational splitting theorem and several detailed
-arguments to *Blow up formulae*, reference [142], in preparation. This is an
+arguments to *Blow up formulae*, published reference [29] (thesis [142]), in preparation. This is an
 exact source-level dependency to investigate, not grounds to erase the prior
 explicit computation or to certify the entire chapter. Its inspected
 arithmetic examples concern nonrationality over nonclosed fields with cycle

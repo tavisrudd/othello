@@ -14,24 +14,19 @@ rank-three, odd-cubic, motive and cone dispositions are separate; no optional
 result becomes a core premise.
 
 **Latest source pass (2026-09-10):**
-`notes/2026-09-10-c1133-citation-followup.md`. Twelve exact S2 seed sets now
-supply 59 memberships (39 distinct works), title/identifier-screened. The
-register has 89 sources (88 external, one local), eight external full-text
-reads (six papers, two source scripts). The F-bundle publication DOI is
-resolved. The withdrawn ordinary Verra claim is distinguished from its
-equivariant replacement; new partial primary reads credit explicit
-finite-group-equivariant blowup comparison and rational-Hodge restrictions
-on birational fourfold partners in the owning novelty ledger. The earlier
-closeout verifies original Narasimhan–Nori and fully reads Cai and the atomic
-criterion. Crossref arXiv-DOI failures remain unavailable, not zeros.
+`notes/2026-09-10-c1133-published-spectra-audit.md`. The user supplied the
+exact published *Interpretations of Spectra* chapter. All 37 pages are read;
+cubic matrix/exponents, ordinary-irrationality statements and deferred
+proof references match the inspected thesis passages. Published access and
+load-bearing passage comparison are closed. Register: 89 sources (88
+external, one local), nine external full-text reads (seven papers, two
+source scripts). The twelve S2 seed sets remain 59 memberships/39 works.
 
-**Current decision — user-authorized triangulation:**
-`notes/2026-09-10-c1133-triangulation.md` supplies a bounded source-role
-assessment. Neither paywalled chapter is a proof premise of A–D. The spectra
-thesis supports direct prior-work credit; categorical base loci receives
-explicit secondary-source credit. Register: 89 sources, eight external
-full-text reads. Published-body/version uncertainty and missing service
-coverage remain disclosed; no exhaustive priority claim is made.
+**User-authorized bounded triangulation remains in force:**
+`notes/2026-09-10-c1133-triangulation.md`. The base-loci chapter still receives
+secondary credit, now via the fully read published source. Neither chapter
+is an A–D proof premise. Missing service coverage and unread base-loci body
+remain disclosed; no exhaustive priority claim is made.
 
 The next action is author assessment of the concrete core hierarchy A, B,
 then consequences C and D, with the bounded literature statement in that

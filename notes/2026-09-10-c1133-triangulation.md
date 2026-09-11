@@ -8,6 +8,13 @@ exhaustive literature coverage. **Full-text sources: eight external**
 (six papers, two source scripts), unchanged; register now 89 entries
 (88 external, one local). New FWF material is abstract/metadata only.
 
+**Published-source update:** the user subsequently supplied the spectra
+chapter. `2026-09-10-c1133-published-spectra-audit.md` records the full
+37-page read and closes its body-access/passage-comparison gap. Current
+register has nine external full-text reads. The evidence matrix below
+records the earlier triangulation checkpoint; it still applies to the
+unread base-loci source and conditional pencil claims.
+
 ## Evidence and decisions
 
 | Missing item | Accessible evidence and actual depth | What this supports | What remains unverified |

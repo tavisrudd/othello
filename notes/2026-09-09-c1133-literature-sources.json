@@ -1,5 +1,5 @@
 {
-  "external_full_text_count": 8,
+  "external_full_text_count": 9,
   "sources": [
     {
       "access": {
@@ -846,7 +846,7 @@
       "key": "zbMATH:6490755",
       "title": "Categorical base loci and spectral gaps, via Okounkov bodies and Nevanlinna theory",
       "read_depth": "secondary only",
-      "read_scope": "Chapter body unread. Triangulation from Katzarkov-DSciThesis-v2 (partial primary read), chapter opening printed pp. 281–282, extracted lines 16895–16970: explicit attribution to reference [144] for categorical linear systems, monodromy and perverse-sheaf-of-categories setup. Chapter bibliographic metadata separately checked at Crossref/AMS. This is not full-content or theorem verification.",
+      "read_scope": "Chapter body unread. Triangulation from Katzarkov-DSciThesis-v2 (partial primary read), chapter opening printed pp. 281–282, extracted lines 16895–16970: explicit attribution to reference [144] for categorical linear systems, monodromy and perverse-sheaf-of-categories setup. Chapter bibliographic metadata separately checked at Crossref/AMS. This is not full-content or theorem verification. Stronger secondary witness now available: published Interpretations of Spectra, read full text, pp. 371–373 and reference [31] on p. 407 explicitly credit the chapter for categorical linear systems and the monodromy/perverse-category setup. Original base-loci chapter remains unread.",
       "role_status": "Broad conceptual precursor credited through the identified author-hosted secondary chain. No theorem from this chapter is used as an input to A–D. Body-level overlap and publication details beyond metadata remain unverified; no content-level negative.",
       "access": {
         "status": "no linked primary identifier; needs manual resolution",
@@ -863,10 +863,21 @@
     {
       "key": "doi:10.1007/978-3-031-17859-7_20",
       "title": "Interpretations of Spectra",
-      "read_depth": "abstract/metadata only",
-      "read_scope": "Publisher landing abstract lines 40–44 and displayed references 139–219 read; subscription chapter body not read. Lee’s publication list and CKGA entry 22 corroborate authors, 2023 publication, volume 409 and pages 371–407, but supply no alternate PDF link.",
-      "role_status": "Close spectral/monodromy precursor. Published body still unread. An author-hosted thesis chapter of the same title is now partially read and separately registered as Katzarkov-DSciThesis-v2; it is not byte- or version-matched to this published chapter.",
+      "read_depth": "full text",
+      "read_scope": "Published 2023 chapter, all 37 pages 371–407 including references, extracted lines 1–2215 read in contiguous bounded ranges. Formula/theorem pages 375, 376, 381 and 383 additionally inspected as rendered page images. All text read; figures outside these pages read through text extraction/captions, not individually verified as images. No independent proof verification of all results.",
+      "role_status": "Published primary precursor verified for cubic matrix/exponents, algebraic-class deformation restriction, ordinary irrationality, arithmetic-cycle hypotheses and deferred blowup proof dependencies. Load-bearing thesis passages mapped to published pages and numbering. No exact A–D combination stated in this chapter; this is source-specific, not a global priority verdict.",
       "access": {
+        "cache_key": "10.1007/978-3-031-17859-7_20",
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/10.1007_978-3-031-17859-7_20.pdf",
+        "text": "/tmp/persistent/tavis/lit-search/text/10.1007_978-3-031-17859-7_20.txt",
+        "sha256": "62c7f8f01c91b71bc499c534089cb2a4022f94faecbf7a8ac7661b9c44267754",
+        "bytes": 516708,
+        "pages": 37,
+        "url": "https://doi.org/10.1007/978-3-031-17859-7_20",
+        "acquisition": "User supplied /home/tavis/Downloads/birational-geometry-k-hler-einstein-metrics-and.pdf; exact bytes preserved in shared cache."
+      },
+      "triangulation": "Superseded for published content by full text on 2026-09-10; comparison report notes/2026-09-10-c1133-published-spectra-audit.md. Whole-file identity with thesis not asserted.",
+      "historical_metadata_access": {
         "url": "https://api.crossref.org/works/10.1007/978-3-031-17859-7_20",
         "cache": "/tmp/persistent/tavis/lit-search/c1133-intake/zbmath-lead-7828755.json",
         "sha256": "ac7181dcf1d9e697c84892dcac2c09616f37969dd0c4e0d97ffd929b0d09cf75",
@@ -887,8 +898,7 @@
           "status": "retrieved"
         },
         "final_access_manifest": "notes/2026-09-10-c1133-final-source-probe.json"
-      },
-      "triangulation": "Publisher identity/abstract/references and HSE locator corroborate identity. Content attribution uses the separately pinned author-hosted thesis, not presumed verbatim equivalence. Printed p. 285 and §§2.1–2.4 support prior exponent and spectral-method credit. Published body remains unread."
+      }
     },
     {
       "key": "arXiv:1806.01752",
@@ -1073,7 +1083,7 @@
       "title": "Katzarkov DSc thesis v2, chapter Interpretations of spectra",
       "read_depth": "partial",
       "read_scope": "Author-hosted thesis extracted text LF lines 16870–18145, 18160–18595, and 19055–19095. This covers the spectra chapter introduction, cubic equation/exponents, ordinary-irrationality statements and their sketches, arithmetic examples, topology comparisons, multispectra and opening orbifoldization discussion, plus selected references. Fifteen intervening lines and the rest of chapter/thesis are not claimed read. Targeted keyword screening over lines 16889–18830 is discovery only. On 2026-09-10 the omitted lines 18146–18159 and 18596–19054 were read. Recorded scopes now cover the contiguous chapter-body interval 16870–18760 and further thesis conclusions/references. Still partial at whole-thesis level; published chapter unmatched.",
-      "role_status": "Concrete precursor for cubic exponent values and the broad quantum-spectrum irrationality program. Birational splitting and several details are attributed to reference [142], Blow up formulae, in preparation. The author-hosted chapter is not version-matched to the Springer 2023 publication. No comprehensive correctness or pre-emption verdict on the proposed one-stabilization/Hodge/arithmetic upgrade.",
+      "role_status": "Primary accessible precursor; published chapter now fully read and load-bearing passage content matched. Reference [142] maps to published [29], still in preparation. See 2026-09-10-c1133-published-spectra-audit.md; no whole-thesis or global pre-emption verdict.",
       "access": {
         "url": "https://www.math.bas.bg/omi/IMIdocs/ZRASRB/docs/Lyudmil_Katzarkov_dmn/DSciThesis-Katzarkov-v2.pdf",
         "pdf": "/tmp/persistent/tavis/lit-search/pdf/Katzarkov-DSciThesis-v2.pdf",
@@ -1082,7 +1092,7 @@
         "bytes": 2358787,
         "published_identity_followup": "notes/2026-09-10-c1133-chapter-access.json: HSE record links only to Springer; Springer abstract, metadata and reference list accessible, chapter body subscription-only. Reference 29 is Blow up formulae, in preparation. This does not establish body equivalence."
       },
-      "version_in_cached_header": "Author-hosted filename DSciThesis-Katzarkov-v2.pdf; publication-version equivalence not established."
+      "version_in_cached_header": "Author-hosted DSciThesis-Katzarkov-v2.pdf; load-bearing passages now compared to published chapter, not claimed identical as a whole."
     },
     {
       "key": "arXiv:2405.07322",
@@ -1320,7 +1330,7 @@
     }
   ],
   "external_full_text_breakdown": {
-    "papers": 6,
+    "papers": 7,
     "source_scripts": 2
   }
 }

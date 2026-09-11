@@ -1,0 +1,47 @@
+{
+  "date": "2026-09-10",
+  "source": {
+    "cache_key": "10.1007/978-3-031-17859-7_20",
+    "pdf": "/tmp/persistent/tavis/lit-search/pdf/10.1007_978-3-031-17859-7_20.pdf",
+    "text": "/tmp/persistent/tavis/lit-search/text/10.1007_978-3-031-17859-7_20.txt",
+    "sha256": "62c7f8f01c91b71bc499c534089cb2a4022f94faecbf7a8ac7661b9c44267754",
+    "bytes": 516708,
+    "pages": 37,
+    "url": "https://doi.org/10.1007/978-3-031-17859-7_20",
+    "acquisition": "User supplied /home/tavis/Downloads/birational-geometry-k-hler-einstein-metrics-and.pdf; exact bytes preserved in shared cache."
+  },
+  "read_scope": "Published 2023 chapter, all 37 pages 371–407 including references, extracted lines 1–2215 read in contiguous bounded ranges. Formula/theorem pages 375, 376, 381 and 383 additionally inspected as rendered page images. All text read; figures outside these pages read through text extraction/captions, not individually verified as images. No independent proof verification of all results.",
+  "thesis_pdf_sha256": "b3490fc8e6c93f3095ca217eb1d31e07af6623c94b8744f7dbbdc13dcac6287d",
+  "passage_map": [
+    {
+      "topic": "cubic matrix and exponents",
+      "thesis": "p. 285",
+      "published": "pp. 375–376"
+    },
+    {
+      "topic": "hypersurface irrationality",
+      "thesis": "Theorem 2.14, pp. 290–292",
+      "published": "Theorem 2.8, pp. 381–383"
+    },
+    {
+      "topic": "complete intersections",
+      "thesis": "Theorem 2.15, p. 292",
+      "published": "Theorem 2.9, p. 383"
+    },
+    {
+      "topic": "arithmetic criterion",
+      "thesis": "Theorem 3.1, p. 293",
+      "published": "Theorem 3.1, p. 384"
+    },
+    {
+      "topic": "deferred blowup source",
+      "thesis": "reference [142]",
+      "published": "reference [29], p. 407"
+    },
+    {
+      "topic": "base-loci source",
+      "thesis": "reference [144]",
+      "published": "reference [31], p. 407"
+    }
+  ]
+}
