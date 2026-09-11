@@ -10,9 +10,13 @@ Discovery companion:
 
 ## Current status
 
-**Active: C1137.** Draft the user-approved focused certification integration
-and compare frozen before/after papers with fresh cold readers. Report:
-`2026-09-10-c1137-ame-lu-draft-ab.md`.
+**C1137 complete (2026-09-10).** Focused certification integration is in the
+validated 43-page authority draft. All three fresh cold readers preferred it
+moderately or narrowly; targeted feedback is repaired. Exact and robust rigidity
+remain the two headlines, with weighted/universal refinements in Appendix C.
+Report and frozen A/B artifacts: `2026-09-10-c1137-ame-lu-draft-ab.md`.
+Next: synchronize/export the selected revision; no successor C-ID allocated.
+The standalone mirror remains at `55e70c4`; no push was performed.
 
 **C1136 completed (2026-09-10): bounded literature audit, priority qualified.**
 Nine identifier-pinned seeds have three graph counts and eighteen retrieved
@@ -22,8 +26,7 @@ none completely. Crossref's largest V1 list, MathSciNet, one blank record and
 unread sections prevent exhaustive priority closure. The prospective ledger
 rows and concrete model/attribution repairs support theorem-content wording.
 Report: `2026-09-10-c1136-ame-lu-priority-audit.md`.
-Next: adoption decision on the compact C1135 package with C1136 repairs;
-no manuscript-implementation C-ID is allocated.
+C1137 integrated the compact package with these attribution limits.
 
 **C1135 completed (2026-09-10).** The two-star verification packet passes
 independent proof/red-team review; the concrete proposal includes corrected
@@ -32,8 +35,7 @@ weighted lower bound, and an observable-rounding corollary. Nine primary
 sources were read partially; publication priority is not closed. No manuscript
 changes were applied. Report: `2026-09-10-c1135-ame-lu-two-star-verification-audit.md`.
 Proposal: `2026-09-10-c1135-ame-lu-two-star-verification-audit-proposal.md`.
-The bounded proposal awaits an adoption decision under C1136's explicit coverage limits;
-no manuscript implementation task is allocated.
+The bounded proposal is implemented by C1137 under C1136's explicit coverage limits.
 
 **C1134 completed (2026-09-10).** Paper I's referee corrections and both
 quantitative improvements are validated in the warning-free 40-page revision;

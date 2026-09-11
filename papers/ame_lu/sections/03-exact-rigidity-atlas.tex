@@ -161,6 +161,9 @@ party \(i\), choose such a set containing it and apply
 Proposition~\ref{prop:marginal-axes}.  Thus every \(U_i\) is Clifford.
 \end{proof}
 
+Readers continuing to robust rigidity can turn to Section~\ref{sec:quantitative},
+using the Choi-encoder construction in Section~\ref{subsec:encoder-consequences}.
+
 \section{Minimum-support transition maps and encoder consequences}
 \label{sec:atlas}
 
@@ -172,9 +175,9 @@ global state gives
 and Weyl orthogonality give
 \(\Tr((\rho^\psi_A)^2)=q^{-|A|}|L(A)|\).  Hence, for every party set
 \(A\),
-\[
- |L(A)|=q^{2\max(|A|-m,0)}.                              \tag{4.1}
-\]
+\begin{equation}
+ |L(A)|=q^{2\max(|A|-m,0)}.                              \label{eq:atlas-support-size}
+\end{equation}
 M\"obius inversion is the stabilizer-state specialization of the
 quantum-MDS Shor--Laflamme distribution of Huber and Grassl
 \cite[Theorems~8 and 9]{HuberGrassl2020}; in particular the number of
@@ -289,10 +292,10 @@ operator-pushing transition
 For two states \(\psi,\phi\) on the same labelled parties, a
 \emph{symplectic equivalence of the transition systems} is a tuple
 \(F_i\in\operatorname{Sp}(P_i)\) satisfying
-\[
+\begin{equation}
  F_jM_A^\psi(i,j)=M_A^\phi(i,j)F_i
- \quad\text{for every \(A\) and \(i,j\in A\)}.           \tag{4.2}
-\]
+ \quad\text{for every \(A\) and \(i,j\in A\)}.           \label{eq:atlas-frame-compatibility}
+\end{equation}
 Here
 \(\operatorname{Sp}(P_i)=\operatorname{Sp}_{2e}(\F_p)\) is the action
 induced by the standard
@@ -364,9 +367,9 @@ First fix the party labels.  A block symplectic map
 \(F=\bigoplus_iF_i\) carrying \(L_\psi\) to \(L_\phi\) carries every
 supported subgroup \(L_\psi(A)\) to \(L_\phi(A)\).  Writing these
 subgroups as graphs through any projection \(p_i\) gives exactly
-\((4.2)\).
+\eqref{eq:atlas-frame-compatibility}.
 
-Conversely, suppose \((4.2)\) holds.  Fix \(A\) and \(i\in A\).  Every
+Conversely, suppose \eqref{eq:atlas-frame-compatibility} holds.  Fix \(A\) and \(i\in A\).  Every
 element of \(L_\psi(A)\) is uniquely determined by its \(i\)-coordinate,
 and the equations with \(j\in A\) show that its image under \(F\) is the
 unique element of \(L_\phi(A)\) with \(i\)-coordinate \(F_i p_i(\ell)\).
@@ -399,10 +402,10 @@ verified by this algorithm.  With the party labels fixed, choose any \(m\)-party
 \(B\), and write their half-set systematic maps as
 \(K_B^\psi,K_B^\phi\).  The states are LU equivalent if and only if
 there are \(F_i\in\operatorname{Sp}_{2e}(\F_p)\) satisfying
-\[
+\begin{equation}
  \left(\bigoplus_{i\in B}F_i\right)K_B^\psi
- =K_B^\phi\left(\bigoplus_{j\notin B}F_j\right).       \tag{4.3}
-\]
+ =K_B^\phi\left(\bigoplus_{j\notin B}F_j\right).       \label{eq:systematic-orbit-equation}
+\end{equation}
 This can be decided by testing at most
 \[
  |\operatorname{Sp}_{2e}(\F_p)|
@@ -439,14 +442,14 @@ factor \((2m)!\).  For one state,
 
 \begin{proof}
 Mapping the two graph subspaces into one another is exactly the block
-equation \((4.3)\).  By Theorem~\ref{thm:atlas-classification} and
+equation \eqref{eq:systematic-orbit-equation}.  By Theorem~\ref{thm:atlas-classification} and
 Lemma~\ref{lem:pauli-phase-correction}, its locally symplectic solutions
 are exactly the LU equivalences.
 
 Write \(K^\psi_{ij}\) and \(K^\phi_{ij}\) for the party blocks.  They are
 invertible by Proposition~\ref{prop:half-set-direct-sum}.  Choose
 \(i_0\in B\) and \(j_0\notin B\).  Once \(F_{j_0}\) is fixed, the
-\((i,j_0)\)-blocks of \((4.3)\) determine every \(F_i\), and the
+\((i,j_0)\)-blocks of \eqref{eq:systematic-orbit-equation} determine every \(F_i\), and the
 \((i_0,j)\)-blocks then determine every remaining \(F_j\).  Enumerate
 \(F_{j_0}\in\operatorname{Sp}_{2e}(\F_p)\), test that the propagated
 frames are symplectic, and check all \(m^2\) block equations.  Forming the
@@ -749,6 +752,7 @@ Section~\ref{sec:quantitative}.
 \input{sections/03a-marginal-verification}
 
 \subsection{Stochastic conversion}
+\label{subsec:stochastic-conversion}
 
 The next consequence removes the unitarity assumption from exact rigidity.
 
@@ -825,6 +829,7 @@ For qubit stabilizer states, compare the local-symmetry classification of
 \cite{EnglbrechtKraus2020}.
 
 \subsection{Encoder consequences}
+\label{subsec:encoder-consequences}
 
 \begin{proof}[Proof of Corollary~\ref{cor:transversal-clifford}]
 The input marginal of each AME Choi state is \(q^{-1}I\), so one-leg

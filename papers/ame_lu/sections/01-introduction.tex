@@ -96,7 +96,9 @@ finite Fourier argument rounds that action to a Clifford.
 The exact constants are useful for applications, so we state them once in
 the introduction.  Their scaling and proof mechanism are the main points.
 Write \(G(\psi)\) for the group of product unitaries that preserve the ray
-of \(\lvert\psi\rangle\).
+of \(\lvert\psi\rangle\).  We use the unnormalized Frobenius norm
+\(\|h\|_F=(\Tr h^\dagger h)^{1/2}\); the normalized Hilbert--Schmidt
+norm on one party is \(q^{-1/2}\|h\|_F\).
 
 \begin{theorem}[Quantitative rounding]\label{thm:quantitative-rounding}
 Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(n,q)\) state with
@@ -229,7 +231,7 @@ conversion when stabilizer phases are supplied.  These data also determine
 an intrinsic endomorphism algebra in prime dimension
 (Section~\ref{sec:endomorphism-algebra}), certify the state from \(m\)
 minimum-support marginals, and decide stochastic local conversion
-(Section~\ref{subsec:marginal-certification}).  Complementary marginal tests also give a fidelity certificate with gap
+(Sections~\ref{subsec:marginal-certification} and~\ref{subsec:stochastic-conversion}).  Complementary marginal tests also give a fidelity certificate with gap
 \((m+1)/(2m)\), supplying an observable sufficient condition for robust
 rigidity when the preparation is promised to be a product-unitary image
 (Section~\ref{subsec:optimal-marginal-verification}).  These consequences
@@ -299,7 +301,7 @@ bound above.  The same half-set geometry shows that \(m\) reductions to
 numbers optimal and an explicit parent Hamiltonian, and that the unitarity
 hypothesis can be dropped: every invertible product operator between two
 such states is Clifford up to scalars
-(Section~\ref{subsec:marginal-certification}).  The first statement
+(Sections~\ref{subsec:marginal-certification} and~\ref{subsec:stochastic-conversion}).  The first statement
 sharpens the generator-support criterion for qubit stabilizer states
 \cite[Theorem~2]{WuYangWangWenQin2015}; the second strengthens the
 Kempf--Ness equality of SLOCC and LU classes for AME states
@@ -345,8 +347,10 @@ rounding criterion in Corollary~\ref{cor:marginal-certified-rounding}.
 
 The finite classification and encoder consequences occupy the rest of
 Section~\ref{sec:atlas}; Section~\ref{sec:endomorphism-algebra} refines
-the classification in prime dimension.  These sections can be skipped on
-the first route.  The appendices give the associated code structures,
+the classification in prime dimension.  The robust proof uses the Pauli-compatible Choi encoder from
+Section~\ref{subsec:encoder-consequences}; its transition-map refinement
+also uses the atlas and character repair in Section~\ref{sec:atlas}.
+The remaining classification material is optional on the first route.  The appendices give the associated code structures,
 stabilizer-independent infinitesimal estimates, weighted and nonstabilizer
 marginal-test refinements, and the formal trust boundary.  They are not
 needed for either headline rigidity theorem.

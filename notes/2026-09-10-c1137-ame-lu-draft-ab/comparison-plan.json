@@ -7,5 +7,8 @@
     "adjacent mathematical physicist",
     "coding-theory specialist"
   ],
-  "tested_draft_pdf_sha256": "530d1a74db442de3474e4ed1a0b130e111da79e4151af99c6add15c599f59042"
+  "tested_draft_pdf_sha256": "530d1a74db442de3474e4ed1a0b130e111da79e4151af99c6add15c599f59042",
+  "final_pdf_sha256": "6b61d2cdb5d47fd094d078f94192fc7cedfc8297fdebb55240c9b517ec6672d1",
+  "final_pages": 43,
+  "post_test_repairs": "See parent report; frozen tested draft retained."
 }
