@@ -3293,3 +3293,12 @@ Next is shrinking private state-machine property testing. See
 The first four properties cover eight private scopes with independently rebuilt
 scores, witnesses, margins and value domains. Automatic-kick/tabu policy remains
 the next coverage frontier. See `2026-09-11-c1016-state-machine-properties.md`.
+
+## 2026-09-11 — cross-order additive repair
+
+Private commits b1166b6, 258f93c, cd23113 and 2ac6ab3 bank a general exact
+response-table optimizer, four region policies and 453 replayed records.
+Twenty-seven successful runs at orders 28–124 verify as full matrices; no
+668/716/2092 solution. Groups/model supplied, no automatic discovery claim.
+The row-sum-only probe does not pass the strict-margin 14,800 gate.
+Current conclusions: `2026-09-11-c1016-cross-order-residual-repair.md`.

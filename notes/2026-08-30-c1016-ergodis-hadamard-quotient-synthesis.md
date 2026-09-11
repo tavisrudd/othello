@@ -165,6 +165,15 @@ the current instrument remains available and has not been tried since.
 
 ## Open moves, in the order they are worth doing
 
+The user-expanded general-capability frontier is cross-order exact additive
+repair. Its private operator and four region policies are validated; the model
+and response groups are still supplied. Next derive groups from vector residual
+IR and invariant-preserving regions from linear maps, with non-Hadamard controls
+and matched-CPU comparisons. Small orders through 124 produced verified matrices;
+668, 716 and 2092 remain unsolved. See
+`2026-09-11-c1016-cross-order-residual-repair.md`. These row-sum-only experiments
+do not pass or replace the separate strict-margin fibre gate below.
+
 Current diagnostic: the complete six-cycle and cross-block four-cycle-pair
 neighbourhoods at the banked 14,800 state have no improving or neutral move.
 On twelve randomized-fibre control states, complete combined strict descent
