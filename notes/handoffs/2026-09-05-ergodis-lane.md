@@ -62,6 +62,13 @@ cost-aware provider/Evolve integration and matched published comparisons. Gurobi
 13.0.2 runner is validated but all three development formulations are rejected by
 the local restricted license; no Gurobi timing exists. An unrestricted license is
 needed to run it. Private `analysis/external-benchmarks/2026-09-11-gurobi-circuit-comparison.md`.
+SCIP 10.0.2: all nine development controls (full/filtered/projected × XOR/linear/both)
+remain unresolved at 30 s with measured three-worker concurrency. Private
+`analysis/external-benchmarks/2026-09-11-scip-circuit-comparison.md` records results
+and the proof-output comparison. Next certification gate: Ergodis exhaustive
+lower-bound certificates versus SCIP exact/VIPR, including original-source coverage,
+proof bytes, completion and independent verification cost. Ordinary SCIP runs did
+not enable proof logging; checked reductions alone are not an exclusion proof.
 Report:
 private `analysis/external-benchmarks/2026-09-11-coordinate-retraction.md`;
 policy/evidence under the same directory. Initial gate:
