@@ -77,8 +77,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   below 200 words, cubic-first route clarified, and three audited spectral/
   atomic/Hodge predecessors credited. The PDF remains 32 pages, cubic proof
   through page 13; theorem statements and formal coverage are unchanged.
-  Next: close the remaining bounded source/priority coverage and author
-  publication review. The before/after preferences were nonblind;
+  Fresh-context cold read complete:
+  `../2026-09-10-c1133-cold-exposition-referee.md`. All source and 32 PDF
+  pages read; specialist comprehension 4/5, adjacent accessibility 3/5.
+  Targeted revision recommended. No demonstrated internal defect; external
+  imports were not verified. Next: make Appendix D.2's reconstruction premise
+  and §3's imported/local comparison boundary precise, then add the minimal
+  residue model and first-pass route. Broader source/priority coverage and
+  author publication review remain open. The before/after preferences were nonblind;
   a fully blinded comparison remains a publication gate. Pencil claims
   stay conditional. This integration does not close C1133, C978 or C956.
   Collaborator discussion stays parked.

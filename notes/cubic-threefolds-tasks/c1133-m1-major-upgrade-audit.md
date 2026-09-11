@@ -67,6 +67,16 @@ the proof route. Final PDF remains 32 pages with the cubic proof on page 13.
 Theorem statements and formal coverage are unchanged; current release
 identity and mirror validation are in the report.
 
+**Fresh-context cold read (2026-09-10):**
+`notes/2026-09-10-c1133-cold-exposition-referee.md`. Whole manuscript and
+32-page PDF read without earlier evaluations. Specialist comprehension 4/5;
+adjacent accessibility 3/5. Targeted revision before acceptance: exact
+reconstruction premise in D.2, imported/local comparison outputs in §3,
+earlier model and explicit first-pass route. No demonstrated internal proof
+defect; external sources were not verified. The review does not supersede
+prior source audits or establish correctness/priority. Respond to these
+concrete points next; manuscript unchanged during this review.
+
 Latest formal checkpoint: **371 public terminals, 133 machinery, 245 sources**;
 aggregate kernel build and actual axiom comparison passed in the prior
 implementation session. Exact boundaries and declarations:
