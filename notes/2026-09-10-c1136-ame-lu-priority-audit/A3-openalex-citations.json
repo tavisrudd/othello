@@ -1,0 +1,428 @@
+{
+  "seed": "A3",
+  "service": "openalex",
+  "status": "ok",
+  "count_reported": 51,
+  "count_retrieved": 52,
+  "queries": [
+    "https://api.openalex.org/works?filter=cites:W2962111392&per-page=200&cursor=*"
+  ],
+  "records": [
+    {
+      "id": "https://openalex.org/W3092954427",
+      "title": "Entropic Proofs of Singleton Bounds for Quantum Error-Correcting Codes",
+      "year": 2022,
+      "doi": "https://doi.org/10.1109/tit.2022.3149291",
+      "abstract": "We show that a relatively simple reasoning using von Neumann entropy inequalities yields a robust proof of the quantum Singleton bound for quantum error-correcting codes (QECC). For entanglement-assisted quantum error-correcting codes (EAQECC) and catalytic codes (CQECC), a type of generalized quantum Singleton bound [Brunet al., IEEE Trans. Inf. Theory 60(6):3073\u20133089 (2014)] was believed to hold for many years until recently one of us found a counterexample [MG, Phys. Rev. A 103, 020601 (2021)]. Here, we rectify this state of affairs by proving the correct generalized quantum Singleton bound, extending the above-mentioned proof method for QECC; we also prove information-theoretically tight bounds on the entanglement-communication tradeoff for EAQECC. All of the bounds relate block length$n$and code length$k$for given minimum distance$d$and we show that they are robust, in the sense that they hold with small perturbations for codes which only correct most of the erasure errors of less than$d$letters. In contrast to the classical case, the bounds take on qualitatively different forms depending on whether the minimum distance is smaller or larger than half the block length. We also provide a propagation rule: any pure QECC yields an EAQECC with the same distance and dimension, but of shorter block length.",
+      "url": "https://doi.org/10.1109/tit.2022.3149291"
+    },
+    {
+      "id": "https://openalex.org/W3191729695",
+      "title": "Thirty-six Entangled Officers of Euler: Quantum Solution to a Classically Impossible Problem",
+      "year": 2022,
+      "doi": "https://doi.org/10.1103/physrevlett.128.080507",
+      "abstract": "The negative solution to the famous problem of 36 officers of Euler implies that there are no two orthogonal Latin squares of order six. We show that the problem has a solution, provided the officers are entangled, and construct orthogonal quantum Latin squares of this size. As a consequence, we find an example of the long-elusive Absolutely Maximally Entangled state AME(4,6) of four subsystems with six levels each, equivalently a 2-unitary matrix of size 36, which maximizes the entangling power among all bipartite unitary gates of this dimension, or a perfect tensor with four indices, each running from one to six. This special state deserves the appellation golden AME state, as the golden ratio appears prominently in its elements. This result allows us to construct a pure nonadditive quhex quantum error detection code ((3,6,2))_{6}, which saturates the Singleton bound and allows one to encode a six-level state into a triplet of such states.",
+      "url": "https://doi.org/10.1103/physrevlett.128.080507"
+    },
+    {
+      "id": "https://openalex.org/W3202718886",
+      "title": "MDS Codes With Galois Hulls of Arbitrary Dimensions and the Related Entanglement-Assisted Quantum Error Correction",
+      "year": 2021,
+      "doi": "https://doi.org/10.1109/tit.2021.3117562",
+      "abstract": "Let$q=p^{e}$be a prime power and$\\ell $be an integer with$0\\leq \\ell \\leq e-1$. The$\\ell $-Galois hull of classical linear codes is a generalization of the Euclidean hull and Hermitian hull. We provide a necessary and sufficient condition under which a codeword of a GRS code or an extended GRS code belongs to its$\\ell $-Galois dual code, generalizing both the Euclidean case and Hermitian case in the literature. By using four different tools: 1) the norm mapping from$\\mathbb {F}_{q}^{\\ast }$to$\\mathbb {F}_{p^{\\ell }}^{\\ast }$; 2) the direct product of two cyclic subgroups; 3) the coset decomposition of a cyclic group; 4) an additive subgroup of$\\mathbb {F}_{q}$and its cosets, we construct eleven families of$q$-ary MDS codes with$\\ell $-Galois hulls of arbitrary dimensions, and give the related eleven families of$[[n,k,d;c]]_{q}$entanglement-assisted quantum error-correcting codes (EAQECCs) with relatively large minimum distance in the sense that$2d=n-k+2+c$. We show that developing the theory on$\\ell $-Galois hulls of$q$-ary MDS codes in this paper enables us to obtain new$q$-ary EAQECCs with different kinds of length sets via different$\\ell $, where$2\\ell \\mid e$.",
+      "url": "https://doi.org/10.1109/tit.2021.3117562"
+    },
+    {
+      "id": "https://openalex.org/W3197847074",
+      "title": "k -uniform quantum information masking",
+      "year": 2021,
+      "doi": "https://doi.org/10.1103/physreva.104.032601",
+      "abstract": "It is impossible to mask an arbitrary quantum state into the correlations between two subsystems such that the original information is completely unknown to each local system. This is the no-masking theorem proposed by Modi et al. [K. Modi, A. K. Pati, A. Sen(De), and U. Sen, Phys. Rev. Lett. 120, 230501 (2018)]. In this work, we propose the concept of $k$-uniform quantum information masking in multipartite systems and indicate the relation between quantum error-correcting codes (QECCs) in heterogeneous systems and quantum information masking. As a consequence, we show that the no-masking theorem is a special case of the quantum Singleton bound for QECCs in heterogeneous systems essentially, and we give a more general no-masking theorem in multipartite systems based on the quantum Singleton bound. We also solve two open questions proposed by Li and Wang [M.-S. Li and Y.-L. Wang, Phys. Rev. A 98, 062306 (2018)]. That is, an arbitrary state of level $d$ cannot be masked in a tripartite system of level $d$ such that the marginal states are not proportional to identity, and an arbitrary state of level $d$ cannot be masked in a tripartite system of level $n$ with $n",
+      "url": "https://doi.org/10.1103/physreva.104.032601"
+    },
+    {
+      "id": "https://openalex.org/W3191186496",
+      "title": "Application of Hermitian self-orthogonal GRS codes to some quantum MDS codes",
+      "year": 2021,
+      "doi": "https://doi.org/10.1016/j.ffa.2021.101901",
+      "abstract": "",
+      "url": "https://doi.org/10.1016/j.ffa.2021.101901"
+    },
+    {
+      "id": "https://openalex.org/W3215166315",
+      "title": "Universal construction of genuinely entangled subspaces of any size",
+      "year": 2022,
+      "doi": "https://doi.org/10.22331/q-2022-11-10-854",
+      "abstract": "We put forward a simple construction of genuinely entangled subspaces \u2013 subspaces supporting only genuinely multipartite entangled states \u2013 of any permissible dimensionality for any number of parties and local dimensions. The method uses nonorthogonal product bases, which are built from totally nonsingular matrices with a certain structure. We give an explicit basis for the constructed subspaces. An immediate consequence of our result is the possibility of constructing in the general multiparty scenario genuinely multiparty entangled mixed states with ranks up to the maximal dimension of a genuinely entangled subspace.",
+      "url": "https://doi.org/10.22331/q-2022-11-10-854"
+    },
+    {
+      "id": "https://openalex.org/W4323644369",
+      "title": "On the Probabilistic Quantum Error Correction",
+      "year": 2023,
+      "doi": "https://doi.org/10.1109/tit.2023.3254054",
+      "abstract": "Probabilistic quantum error correction is an error-correcting procedure which uses postselection to determine if the encoded information was successfully restored. In this work, we analyze the probabilistic version of the error-correcting procedure for general noise. We generalize the Knill-Laflamme conditions for probabilistically correctable errors. We show that for some noise channels, the initial information has to be encoded into a mixed state to maximize the probability of successful error correction. Finally, the probabilistic error-correcting procedure offers an advantage over the deterministic procedure. Reducing the probability of successful error correction allows for correcting errors generated by a broader class of noise channels. Significantly, if the errors are caused by a unitary interaction with an auxiliary qubit system, we can probabilistically restore a qubit state by using only one additional physical qubit.",
+      "url": "https://doi.org/10.1109/tit.2023.3254054"
+    },
+    {
+      "id": "https://openalex.org/W4409292873",
+      "title": "Near-Term Spin-Qubit Architecture Design via Multipartite Maximally Entangled States",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/prxquantum.6.020307",
+      "abstract": "The design and benchmarking of quantum computer architectures traditionally rely on practical hardware restrictions, such as gate fidelities, control, and cooling. At the theoretical and software levels, numerous approaches have been proposed for benchmarking quantum devices, ranging from, , quantum volume to randomized benchmarking. In this work, we utilize the quantum information-theoretic properties of multipartite maximally entangled quantum states, in addition to their correspondence with quantum error-correction codes, permitting us to quantify the entanglement generated on near-term bilinear spin-qubit architectures. For this aim, we introduce four metrics that ascertain the quality of genuine multipartite quantum entanglement, along with circuit-level fidelity measures. As part of the task of executing a quantum circuit on a device, we devise simulations, which combine expected hardware characteristics of spin-qubit devices with appropriate compilation techniques; we then analyze three different architectural choices of varying lattice sizes for bilinear arrays, under three increasingly realistic noise models. We find that if the use of a compiler is assumed, sparsely connected spin-qubit lattices can approach comparable values of our metrics to those of the most highly connected device architecture. Even more surprisingly, by incorporating crosstalk into our last noise model, we find that, as error rates for crosstalk approach realistic values, the benefits of utilizing a bilinear array with advanced connectivity vanish. Our results highlight the limitations of adding local connectivity to near-term spin-qubit devices, and can be readily adapted to other qubit technologies. The framework developed here can be used for analyzing quantum entanglement on a device before fabrication, informing experimentalists on concomitant realistic expectations.",
+      "url": "https://doi.org/10.1103/prxquantum.6.020307"
+    },
+    {
+      "id": "https://openalex.org/W2965864959",
+      "title": "Absolutely maximally entangled states, quantum-maximum-distance-separable codes, and quantum repeaters",
+      "year": 2021,
+      "doi": "https://doi.org/10.1103/physreva.103.022402",
+      "abstract": "We address the relation between absolutely maximally entangled (AME) states and quantum- maximum-distance-separable (QMDS) codes by constructing whole families of QMDS codes from AME states that have stabilizer representations. We introduce a generic reduction-friendly form for the generator set of the stabilizer representation of an AME state, from which the stabilizer form for children codes, all QMDS, can be obtained. Our method would work for relevant high-dimensional codes as well as qubit-based codes. We then relate this to optimal codes for one-way quantum repeaters, by minimizing the short-term infrastructure cost as well as the long-term running cost of such quantum repeaters. This would allow us to obtain the optimal QMDS code, derived from an AME parent state, that can be used in such quantum repeaters.",
+      "url": "https://doi.org/10.1103/physreva.103.022402"
+    },
+    {
+      "id": "https://openalex.org/W3176234222",
+      "title": "Determining When a Truncated Generalised Reed-Solomon Code Is Hermitian Self-Orthogonal",
+      "year": 2022,
+      "doi": "https://doi.org/10.1109/tit.2022.3150277",
+      "abstract": "We prove that there is a Hermitian self-orthogonal$k$-dimensional truncated generalised Reed-Solomon code of length$n \\leqslant q^{2}$over${\\mathbb F}_{q^{2}}$if and only if there is a polynomial$g \\in {\\mathbb F}_{q^{2}}$of degree at most$(q-k)q-1$such that$g+g^{q}$has$q^{2}-n$distinct zeros. This allows us to determine the smallest$n$for which there is a Hermitian self-orthogonal$k$-dimensional truncated generalised Reed-Solomon code of length$n$over${\\mathbb F}_{q^{2}}$, verifying a conjecture of Grassl and R\u00f6tteler. We also provide examples of Hermitian self-orthogonal$k$-dimensional generalised Reed-Solomon codes of length$q^{2}+1$over${\\mathbb F}_{q^{2}}$, for$k=q-1$and$q$an odd power of two.",
+      "url": "https://doi.org/10.1109/tit.2022.3150277"
+    },
+    {
+      "id": "https://openalex.org/W3084354931",
+      "title": "Positive maps and trace polynomials from the symmetric group",
+      "year": 2021,
+      "doi": "https://doi.org/10.1063/5.0028856",
+      "abstract": "With techniques borrowed from quantum information theory, we develop a method to systematically obtain operator inequalities and identities in several matrix variables. These take the form of trace polynomials: polynomial-like expressions that involve matrix monomials X\u03b11,\u2026,X\u03b1r and their traces tr(X\u03b11,\u2026,X\u03b1r). Our method rests on translating the action of the symmetric group on tensor product spaces into that of matrix multiplication. As a result, we extend the polarized Cayley\u2013Hamilton identity to an operator inequality on the positive cone, characterize the set of multilinear equivariant positive maps in terms of Werner state witnesses, and construct permutation polynomials and tensor polynomial identities on tensor product spaces. We give connections to concepts in quantum information theory and invariant theory.",
+      "url": "https://doi.org/10.1063/5.0028856"
+    },
+    {
+      "id": "https://openalex.org/W3101366048",
+      "title": "Algebraic quantum codes: linking quantum mechanics and discrete mathematics",
+      "year": 2020,
+      "doi": "https://doi.org/10.1080/23799927.2020.1850530",
+      "abstract": "We discuss the connection between quantum error-correcting codes (QECCS) and algebraic coding theory. We start with an introduction to the relevant concepts of quantum mechanics, including the general error model. A quantum error-correcting code is a subspace of a complex Hilbert space, and its error-correcting properties are characterized by the Knill-Laflamme conditions. Using the stabilizer formalism, we illustrate how QECCs for can be constructed using techniques from algebraic coding theory. We also sketch how the information obtained via a quantum measurement can be interpreted as syndrome of the related classical code. Additionally, we present secondary constructions for QECCs, leading to propagation rules for the parameters of QECCs. This includes the puncture code by Rains and construction X for quantum codes.",
+      "url": "https://doi.org/10.1080/23799927.2020.1850530"
+    },
+    {
+      "id": "https://openalex.org/W4379382637",
+      "title": "Unified Approach to Secret Sharing and Symmetric Private Information Retrieval With Colluding Servers in Quantum Systems",
+      "year": 2023,
+      "doi": "https://doi.org/10.1109/tit.2023.3282940",
+      "abstract": "This paper unifiedly addresses two kinds of key quantum secure tasks, i.e., quantum versions of secret sharing (SS) and symmetric private information retrieval (SPIR) by using multi-target monotone span program (MMSP), which characterizes the classical linear protocols of SS and SPIR. SS has two quantum extensions; One is the classical-quantum (CQ) setting, in which the secret to be sent is classical information and the shares are quantum systems. The other is the quantum-quantum (QQ) setting, in which the secret to be sent is a quantum state and the shares are quantum systems. The relation between these quantum protocols and MMSP has not been studied sufficiently. We newly introduce the third setting, i.e., the entanglement-assisted (EA) setting, which is defined by modifying the CQ setting with allowing prior entanglement between the dealer and the end-user who recovers the secret by collecting the shares. Showing that the linear version of SS with the EA setting is directly linked to MMSP, we characterize linear quantum versions of SS with the CQ ad QQ settings via MMSP. Further, we introduce the EA setting of SPIR, which is shown to link to MMSP. In addition, we discuss the quantum version of maximum distance separable codes.",
+      "url": "https://doi.org/10.1109/tit.2023.3282940"
+    },
+    {
+      "id": "https://openalex.org/W4319736121",
+      "title": "Fully non-positive-partial-transpose genuinely entangled subspaces",
+      "year": 2023,
+      "doi": "https://doi.org/10.22331/q-2023-02-09-915",
+      "abstract": "Genuinely entangled subspaces are a class of subspaces in the multipartite Hilbert spaces that are composed of only genuinely entangled states. They are thus an interesting object of study in the context of multipartite entanglement. Here we provide a construction of multipartite subspaces that are not only genuinely entangled but also fully non-positive-partial-transpose (NPT) in the sense that any mixed state supported on them has non-positive partial transpose across any bipartition. Our construction originates from the stabilizer formalism known for its use in quantum error correction. To this end, we first introduce a couple of criteria allowing to assess whether any state from a given non-trivial stabilizer subspace is genuinely multipartite entangled. We then use these criteria to construct genuinely entangled stabilizer subspaces for any number of parties and arbitrary local dimension and conjecture them to be of maximal dimension achievable within the stabilizer formalism. At the same time, we prove that every genuinely entangled subspace is fully NPT in the above sense, which implies a quite surprising fact that no genuinely entangled stabilizer subspace can support PPT entangled states.",
+      "url": "https://doi.org/10.22331/q-2023-02-09-915"
+    },
+    {
+      "id": "https://openalex.org/W4313266499",
+      "title": "Complete hierarchy of linear systems for certifying quantum entanglement of subspaces",
+      "year": 2022,
+      "doi": "https://doi.org/10.1103/physreva.106.062443",
+      "abstract": "We introduce a hierarchy of linear systems for showing that a given subspace of pure quantum states is entangled (i.e., contains no product states). This hierarchy outperforms known methods already at the first level, and it is complete in the sense that every entangled subspace is shown to be so at some finite level of the hierarchy. It straightforwardly generalizes to the case of higher Schmidt rank, as well as the multipartite cases of completely and genuinely entangled subspaces. These hierarchies work extremely well in practice even in very large quantum systems, as they can be implemented via elementary linear algebra techniques rather than the semidefinite programming techniques that are required by previously known hierarchies.",
+      "url": "https://doi.org/10.1103/physreva.106.062443"
+    },
+    {
+      "id": "https://openalex.org/W4386161109",
+      "title": "Multipartite entanglement and quantum error identification in D -dimensional cluster states",
+      "year": 2023,
+      "doi": "https://doi.org/10.1103/physreva.108.022426",
+      "abstract": "An entangled state is said to be $m$-uniform if the reduced density matrix of any $m$ qubits is maximally mixed. This is intimately linked to pure quantum error correction codes (QECCs), which allow us not only to correct errors but also to identify their precise nature and location. Here, we show how to create $m$-uniform states using local gates or interactions and elucidate several QECC applications. We first show that $D$-dimensional cluster states are $m$-uniform with $m=2D$. This zero-correlation-length cluster state does not have finite-size corrections to its $m=2D$ uniformity, which is exact both for infinite lattices and for large enough, but finite, lattices. Yet at some finite value of the lattice extension in each of the $D$ dimensions, which we bound, the uniformity is degraded due to finite support operators which wind around the system. We also outline how to achieve larger $m$ values using quasi-$D$-dimensional cluster states. This opens the possibility to use cluster states to benchmark errors on quantum computers. We demonstrate this ability on a superconducting quantum computer, focusing on the one-dimensional cluster state, which, as we show, allows us to detect and identify one-qubit errors, distinguishing $X, Y$, and $Z$ errors.",
+      "url": "https://doi.org/10.1103/physreva.108.022426"
+    },
+    {
+      "id": "https://openalex.org/W4323313528",
+      "title": "Lower Bounds for Quasi-Cyclic Codes and New Binary Quantum Codes",
+      "year": 2023,
+      "doi": "https://doi.org/10.3390/sym15030643",
+      "abstract": "This paper considers three kinds of quasi-cyclic codes of index two with one generator or two generators and their applications in quantum code construction. In accordance with the algebraic structure of linear codes, we determine the lower bounds of the symplectic weights of these quasi-cyclic codes. Quasi-cyclic codes with the dual-containing property enable the construction of quantum codes. Defining the coefficient symmetric polynomials of the generator polynomials gives a concise condition for the dual-containing of the quasi-cyclic codes. The lower bound results can significantly reduce the scope of the search for a larger minimum distance of quasi-cyclic codes. With these algebraic results and computer supports, we obtain classical quasi-cyclic codes with better parameters and some new quantum codes under the symplectic construction. In particular, two examples of the new quantum codes [[63,42,6]]2,[[51,35,5]]2 improve the corresponding codes in Grassl\u2019s code table.",
+      "url": "https://doi.org/10.3390/sym15030643"
+    },
+    {
+      "id": "https://openalex.org/W4400883916",
+      "title": "Quantifying subspace entanglement with geometric measures",
+      "year": 2024,
+      "doi": "https://doi.org/10.1103/physreva.110.012452",
+      "abstract": "Determining whether a subspace spanned by certain quantum states is entangled and its entanglement dimensionality remains a fundamental challenge in quantum information science. This paper introduces a geometric measure of $r$-bounded rank, ${E}_{r}(\\mathcal{S})$, for a given subspace $\\mathcal{S}$. Derived from the established geometric measure of entanglement, this measure is specifically designed to assess the entanglement within $\\mathcal{S}$. It not only serves as a tool for determining the entanglement dimensionality but also illuminates the subspace's capacity to preserve such entanglement. By employing developed nonconvex optimization techniques utilized in machine learning area, we can accurately calculate ${E}_{r}(\\mathcal{S})$ within the manifold optimization framework. Our approach demonstrates notable advantages over existing hierarchical methods, PPT relaxation techniques, and the seesaw strategy, particularly by combining computational efficiency with broad applicability. More importantly, it paves the way for high-dimensional entanglement certification, which is crucial for numerous quantum information tasks. We showcase its effectiveness in validating high-dimensional entangled subspaces in bipartite systems, determining the border rank of multipartite pure states, and identifying genuinely or completely entangled subspaces.",
+      "url": "http://dx.doi.org/10.1103/physreva.110.012452"
+    },
+    {
+      "id": "https://openalex.org/W4411228087",
+      "title": "Four-qubit critical states",
+      "year": 2025,
+      "doi": "https://doi.org/10.1088/1751-8121/ade410",
+      "abstract": "Abstract Verstraete et al (2003 Phys. Rev. A 68 012103) showed that SLOCC invariants provide entanglement monotones. We observe that many highly entangled or useful four-qubit states that appear in prior literature are stationary points of such entanglement measures. This motivates the search for more stationary points. We use the notion of critical points (in the sense of the Kempf-Ness theorem) together with Vinberg theory to reduce the complexity of the problem significantly. We solve the corresponding systems utilizing modern numerical nonlinear algebra methods and reduce the solutions by natural symmetries. This method produces an extended list of four-qubit stationary points, which includes all the critical states in the survey by Enr\u00edquez et al (2016 J. Phys.: Conf. Ser. 698 012003). To illustrate the potential for application, we discuss the use of these states to generate pure five-qubit and six-qubit quantum error correcting codes by reversing a construction of Rains (1996 IEEE Trans. Inf. Theory 44 1388\u201394).",
+      "url": "https://doi.org/10.1088/1751-8121/ade410"
+    },
+    {
+      "id": "https://openalex.org/W4400198798",
+      "title": "Completely entangled subspaces of entanglement depth k",
+      "year": 2024,
+      "doi": "https://doi.org/10.1103/physreva.110.012403",
+      "abstract": "We introduce a class of entangled subspaces: completely entangled subspaces of entanglement depth $k$ $(k\\text{\\ensuremath{-}}\\text{CESs})$. These are subspaces of multipartite Hilbert spaces containing only pure states with an entanglement depth of at least $k$. We present an efficient construction of $k\\text{\\ensuremath{-}}\\text{CESs}$ of any achievable dimensionality in any multipartite scenario. Further, we discuss the relation between these subspaces and unextendible product bases (UPBs). In particular, we establish that there is a nontrivial bound on the cardinality of a UPB whose orthocomplement is a $k\\text{\\ensuremath{-}}\\text{CES}$. Further, we discuss the existence of such UPBs for qubit systems.",
+      "url": "https://doi.org/10.1103/physreva.110.012403"
+    },
+    {
+      "id": "https://openalex.org/W4408319724",
+      "title": "Local unitary equivalence of absolutely maximally entangled states constructed from orthogonal arrays",
+      "year": 2025,
+      "doi": "https://doi.org/10.1088/1751-8121/adbf75",
+      "abstract": "Abstract The classification of multipartite entanglement is essential as it serves as a resource for various quantum information processing tasks. This study concerns a particular class of highly entangled multipartite states, the so-called absolutely maximally entangled (AME) states. These are characterized by maximal entanglement across all possible bipartitions. In particular we analyze the local unitary (LU) equivalence among AME states using invariants. One of our main findings is that the existence of special irredundant orthogonal arrays implies the existence of an infinite number of equivalence classes of AME states constructed from these. In particular, we show that there are infinitely many LU inequivalent three-party AME states for local dimension d > 2 and five-party AME states for d \u2a7e 2 .",
+      "url": "https://doi.org/10.1088/1751-8121/adbf75"
+    },
+    {
+      "id": "https://openalex.org/W4417398106",
+      "title": "Performance Analysis of Quantum CSS Error-Correcting Codes via MacWilliams Identities",
+      "year": 2025,
+      "doi": "https://doi.org/10.22331/q-2025-12-16-1950",
+      "abstract": "We analyze the performance of quantum stabilizer codes, one of the most important classes for practical implementations, on both symmetric and asymmetric quantum channels. To this aim, we first derive the weight enumerator (WE) for the undetectable errors based on the quantum MacWilliams identities. The WE is then used to evaluate tight upper bounds on the error rate of CSS quantum codes with minimum weight decoding. For surface codes we also derive a simple closed form expression of the bounds over the depolarizing channel. We introduce a novel approach that combines the knowledge of WE with a logical operator analysis, allowing the derivation of the exact asymptotic error rate for short codes. For example, on a depolarizing channel with physical error rate \u03c1 \u2192 0 , the logical error rate \u03c1 L is asymptotically \u03c1 L \u2248 16 \u03c1 2 for the [ [ 9 , 1 , 3 ] ] Shor code, \u03c1 L \u2248 16.3 \u03c1 2 for the [ [ 7 , 1 , 3 ] ] Steane code, \u03c1 L \u2248 18.7 \u03c1 2 for the [ [ 13 , 1 , 3 ] ] surface code, and \u03c1 L \u2248 149.3 \u03c1 3 for the [ [ 41 , 1 , 5 ] ] surface code. For larger codes our bound provides \u03c1 L \u2248 1215 \u03c1 4 and \u03c1 L \u2248 663 \u03c1 5 for the [ [ 85 , 1 , 7 ] ] and the [ [ 181 , 1 , 10 ] ] surface codes, respectively. Finally, we extend our analysis to include realistic, noisy syndrome extraction circuits by modeling error propagation throughout gadgets. This enables estimation of logical error rates under faulty measurements. The performance analysis serves as a design tool for developing fault-tolerant quantum systems by guiding the selection of quantum codes based on their error correction capability. Additionally, it offers a novel perspective on quantum degeneracy, showing it represents the fraction of non-correctable error patterns shared by multiple logical operators.",
+      "url": "https://doi.org/10.22331/q-2025-12-16-1950"
+    },
+    {
+      "id": "https://openalex.org/W3202552455",
+      "title": "Simple sufficient condition for subspace to be completely or genuinely entangled",
+      "year": 2021,
+      "doi": "https://doi.org/10.1088/1367-2630/ac2a5c",
+      "abstract": "Abstract We introduce a simple sufficient criterion, which allows one to tell whether a subspace of a bipartite or multipartite Hilbert space is entangled. The main ingredient of our criterion is a bound on the minimal entanglement of a subspace in terms of entanglement of vectors spanning that subspace expressed for geometrical measures of entanglement. The criterion is applicable to both completely and genuinely entangled subspaces. We explore its usefulness in several important scenarios. Further, an entanglement criterion for mixed states following directly from the condition is stated. As an auxiliary result we provide a formula for the generalized geometric measure of entanglement of the d -level Dicke states.",
+      "url": "https://doi.org/10.1088/1367-2630/ac2a5c"
+    },
+    {
+      "id": "https://openalex.org/W3212457635",
+      "title": "Construction of genuinely entangled subspaces and the associated bounds on entanglement measures for mixed states",
+      "year": 2021,
+      "doi": "https://doi.org/10.1088/1751-8121/ac37e5",
+      "abstract": "Abstract Genuine entanglement is the strongest form of multipartite entanglement. Genuinely entangled pure states contain entanglement in every bipartition and as such can be regarded as a valuable resource in the protocols of quantum information processing. A recent direction of research is the construction of genuinely entangled subspaces (GESs)\u2014the class of subspaces consisting entirely of genuinely entangled pure states. In this paper we present methods of construction of such subspaces including those of maximal possible dimension. The approach is based on the composition of bipartite entangled subspaces and quantum channels of certain types. The examples include maximal subspaces for systems of three qubits, four qubits, three qutrits. We also provide lower bounds on two entanglement measures for mixed states, the concurrence and the convex-roof extended negativity, which are directly connected with the projection on GESs.",
+      "url": "https://doi.org/10.1088/1751-8121/ac37e5"
+    },
+    {
+      "id": "https://openalex.org/W4281639514",
+      "title": "Construction of genuinely entangled multipartite subspaces from bipartite ones by reducing the total number of separated parties",
+      "year": 2022,
+      "doi": "https://doi.org/10.1016/j.physleta.2022.128248",
+      "abstract": "",
+      "url": "https://doi.org/10.1016/j.physleta.2022.128248"
+    },
+    {
+      "id": "https://openalex.org/W4390098046",
+      "title": "Computing linear sections of varieties: quantum entanglement, tensor decompositions and beyond",
+      "year": 2023,
+      "doi": "https://doi.org/10.1109/focs57990.2023.00079",
+      "abstract": "We study the problem of finding elements in the intersection of an arbitrary conic variety in $\\mathbb{F}^{n}$ with a given linear subspace (where $\\mathbb{F}$ can be the real or complex field). This problem captures a rich family of algorithmic problems under different choices of the variety. The special case of the variety consisting of rank-1 matrices already has strong connections to central problems in different areas like quantum information theory and tensor decompositions. This problem is known to be NP-hard in the worst case, even for the variety of rank-1 matrices.In this work, we propose and analyze an algorithm for solving this problem. Surprisingly, despite the above hardness results we show that our algorithm solves this problem efficiently for \u201ctypical\u201d subspaces. Here, the subspace $\\mathcal{U} \\subseteq \\mathbb{F}^{n}$ is chosen generically of a certain dimension, potentially with some generic elements of the variety contained in it. Our main result is a guarantee that our algorithm recovers all the elements of $\\mathcal{U}$ that lie in the variety, under some mild non-degeneracy assumptions on the variety. As corollaries, we obtain the following new results:\u2022Polynomial time algorithms for several entangled subspaces problems in quantum entanglement, including determining r-entanglement, complete entanglement, and genuine entanglement of a subspace. While all of these problems are NP-hard in the worst case, our algorithm solves them in polynomial time for generic subspaces of dimension up to a constant multiple of the maximum possible.\u2022Uniqueness results and polynomial time algorithmic guarantees for generic instances of a broad class of low-rank decomposition problems that go beyond tensor decompositions. Here, we recover a decomposition of the form $\\sum_{i=1}^{R} v_{i} \\otimes w_{i}$, where the $v_{i}$ are elements of the given variety $\\mathcal{X}$. This implies new uniqueness results and genericity guarantees even in the special case of tensor decompositions.",
+      "url": "https://doi.org/10.1109/focs57990.2023.00079"
+    },
+    {
+      "id": "https://openalex.org/W4321789567",
+      "title": "Construction of quaternary quantum error-correcting codes via orthogonal arrays",
+      "year": 2023,
+      "doi": "https://doi.org/10.3389/fphy.2023.1148398",
+      "abstract": "This paper presents a method based on orthogonal arrays of constructing pure quaternary quantum error-correcting codes. As an application of the method, some infinite classes of quantum error-correcting codes with distances 2, 3, and 4 can be obtained. Moreover, the infinite class of quantum codes with distance 2 is optimal. The advantage of our method also lies in the fact that the quantum codes we obtain have less items for a basis quantum state than existing ones.",
+      "url": "https://doi.org/10.3389/fphy.2023.1148398"
+    },
+    {
+      "id": "https://openalex.org/W4392885364",
+      "title": "Several families of MDS QECCs and MDS EAQECCs from Hermitian self-orthogonal GRS codes",
+      "year": 2024,
+      "doi": "https://doi.org/10.1007/s11128-024-04319-8",
+      "abstract": "",
+      "url": "https://doi.org/10.1007/s11128-024-04319-8"
+    },
+    {
+      "id": "https://openalex.org/W4405661627",
+      "title": "Quantum decoder design for subsystem surface code based on multi-head graph attention and edge weighting",
+      "year": 2024,
+      "doi": "https://doi.org/10.1088/1674-1056/ada1c7",
+      "abstract": "Abstract Quantum error-correcting codes are essential for fault-tolerant quantum computing, as they effectively detect and correct noise-induced errors by distributing information across multiple physical qubits. The subsystem surface code with three-qubit check operators demonstrates significant application potential due to its simplified measurement operations and low logical error rates. However, the existing minimum-weight perfect matching (MWPM) algorithm exhibits high computational complexity and lacks flexibility in large-scale systems. Therefore, this paper proposes a decoder based on a graph attention network (GAT), representing error syndromes as undirected graphs with edge weights, and employing a multi-head attention mechanism to efficiently aggregate node features and enable parallel computation. Compared to MWPM, the GAT decoder exhibits linear growth in computational complexity, adapts to different quantum code structures, and demonstrates stronger robustness under high physical error rates. The experimental results demonstrate that the proposed decoder achieves an overall accuracy of 89.95% under various small code lattice sizes (L = 2,3,4,5), with the logical error rate threshold increasing to 0.0078, representing an improvement of approximately 13.04% compared to the MWPM decoder. This result significantly outperforms traditional methods, showcasing superior performance under small code lattice sizes and providing a more efficient decoding solution for large-scale quantum error correction.",
+      "url": "https://doi.org/10.1088/1674-1056/ada1c7"
+    },
+    {
+      "id": "https://openalex.org/W4313296041",
+      "title": "On the complete weight distributions of quantum error-correcting codes",
+      "year": 2022,
+      "doi": "https://doi.org/10.1088/1674-1056/acac09",
+      "abstract": "In a recent paper, Hu et al. defined the complete weight distributions of quantum codes and proved the MacWilliams identities, and as applications they showed how such weight distributions may be used to obtain the singleton-type and hamming-type bounds for asymmetric quantum codes. In this paper we extend their study much further and obtain several new results concerning the complete weight distributions of quantum codes and applications. In particular, we provide a new proof of the MacWilliams identities of the complete weight distributions of quantum codes. We obtain new information about the weight distributions of quantum MDS codes and the double weight distribution of asymmetric quantum MDS codes. We get new identities involving the complete weight distributions of two different quantum codes. We estimate the complete weight distributions of quantum codes under special conditions and show that quantum BCH codes by the Hermitian construction from primitive, narrow-sense BCH codes satisfy these conditions and hence these estimate applies.",
+      "url": "https://doi.org/10.1088/1674-1056/acac09"
+    },
+    {
+      "id": "https://openalex.org/W4410142734",
+      "title": "Certification of genuinely entangled subspaces of the five qubit code via robust self-testing",
+      "year": 2025,
+      "doi": "https://doi.org/10.1088/1361-6633/add560",
+      "abstract": "Self-testing provides a device-independent framework for certifying quantum properties based solely on input-output statistics while treating quantum devices as black boxes. It has evolved significantly from its origins in bipartite systems to applications in multipartite entanglement and, more recently, genuinely entangled subspaces. Notably, It has been revealed that the logical subspaces of numerous stabilizer quantum error correction codes are exclusively composed of genuinely multipartite entangled states, opening new avenues for developing device-independent tools to characterize these subspaces. In this work, we leverage the self-testing technique to certify genuinely entangled logical subspaces within the five-qubit code using both photonic and superconducting platforms. This is achieved by preparing informationally complete logical states, simulating Pauli errors on a physical qubit, and testing several stabilizer-formalized Bell inequalities. Our certification is supported by an extractability measure of at least0.828\u00b10.006and0.621\u00b10.007for the photonic and superconducting systems, respectively. Our results demonstrate the feasibility of device-independent certification of general entangled quantum structures in experimental settings, extending beyond quantum states and quantum measurements.",
+      "url": "https://doi.org/10.1088/1361-6633/add560"
+    },
+    {
+      "id": "https://openalex.org/W4416659795",
+      "title": "On two maximally entangled couples",
+      "year": 2025,
+      "doi": "https://doi.org/10.1088/2058-9565/ae23f4",
+      "abstract": "Abstract In a seminal article, Higuchi and Sudbery showed that a pure four-qubit state cannot be maximally entangled across every bipartition. Such states are now known as absolutely maximally entangled (AME) states. Here we give a series of old and new proofs of the fact that no four-qubit AME state exists. These are based on invariant theory, methods from coding theory, and basic properties from linear algebra such as the Pauli commutation relations.",
+      "url": "https://doi.org/10.1088/2058-9565/ae23f4"
+    },
+    {
+      "id": "https://openalex.org/W4417320723",
+      "title": "Entangled Subspaces through Algebraic Geometry",
+      "year": 2025,
+      "doi": "https://doi.org/10.22331/q-2025-12-15-1947",
+      "abstract": "We propose an algebraic geometry-inspired approach for constructing entangled subspaces within the Hilbert space of a multipartite quantum system. Specifically, our method employs a modified Veronese embedding, restricted to the conic, to define subspaces within the symmetric part of the Hilbert space. By utilizing this technique, we construct the minimal-dimensional, non-orthogonal yet Unextendible Product Basis (nUPB), enabling the decomposition of the multipartite Hilbert space into a two-dimensional subspace, complemented by a Genuinely Entangled Subspace (GES) and a maximal-dimensional Completely Entangled Subspace (CES). In multiqudit systems, we determine the maximum achievable dimension of a symmetric GES and demonstrate its realization through this construction. Furthermore, we systematically investigate the transition from the conventional Veronese embedding to the modified one by imposing various constraints on the affine coordinates, which, in turn, increases the CES dimension while reducing that of the GES.",
+      "url": "https://doi.org/10.22331/q-2025-12-15-1947"
+    },
+    {
+      "id": "https://openalex.org/W4391177594",
+      "title": "Multiparticle singlet states cannot be maximally entangled for the bipartitions",
+      "year": 2024,
+      "doi": "https://doi.org/10.1063/5.0159105",
+      "abstract": "One way to explore multiparticle entanglement is to ask for maximal entanglement with respect to different bipartitions, leading to the notion of absolutely maximally entangled states or perfect tensors. A different path uses unitary invariance and symmetries, resulting in the concept of multiparticle singlet states. We show that these two concepts are incompatible in the sense that the space of pure multiparticle singlet states does not contain any state for which all partitions of two particles vs the rest are maximally entangled. This puts restrictions on the construction of quantum codes and contributes to discussions in the context of the anti-de Sitter/conformal field theory correspondence and quantum gravity.",
+      "url": "https://doi.org/10.1063/5.0159105"
+    },
+    {
+      "id": "https://openalex.org/W7116852209",
+      "title": "Error-correcting codes and absolutely maximally entangled states for mixed-dimensional Hilbert spaces",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/yqck-92fb",
+      "abstract": "",
+      "url": "https://doi.org/10.1103/yqck-92fb"
+    },
+    {
+      "id": "https://openalex.org/W2960838860",
+      "title": "Some constructions of quantum MDS codes",
+      "year": 2021,
+      "doi": "https://doi.org/10.1007/s10623-021-00846-y",
+      "abstract": "",
+      "url": "https://doi.org/10.1007/s10623-021-00846-y"
+    },
+    {
+      "id": "https://openalex.org/W4400978993",
+      "title": "Semidefinite Programming Bounds on the Size of Entanglement-Assisted Codeword Stabilized Quantum Codes",
+      "year": 2024,
+      "doi": "https://doi.org/10.1109/tit.2024.3433550",
+      "abstract": "In this paper, we explore the application of semidefinite programming to the realm of quantum codes, specifically focusing on codeword stabilized (CWS) codes with entanglement assistance. Notably, we utilize the isotropic subgroup of the CWS group and the set of word operators of a CWS-type quantum code to derive an upper bound on the minimum distance. Furthermore, this characterization can be incorporated into the associated distance enumerators, enabling us to construct semidefinite constraints that lead to SDP bounds on the minimum distance or size of CWS-type quantum codes. We illustrate several instances where SDP bounds outperform LP bounds, and there are even cases where LP fails to yield meaningful results, while SDP consistently provides tighter and relevant bounds. Finally, we also provide interpretations of the Shor-Laflamme weight enumerators and shadow enumerators for codeword stabilized codes, enhancing our understanding of quantum codes.",
+      "url": "https://doi.org/10.1109/tit.2024.3433550"
+    },
+    {
+      "id": "https://openalex.org/W4386168827",
+      "title": "Bell Inequalities with Overlapping Measurements",
+      "year": 2023,
+      "doi": "https://doi.org/10.1103/physrevlett.131.080201",
+      "abstract": "Which nonlocal correlations can be obtained, when a party has access to more than one subsystem? While traditionally nonlocality deals with spacelike separated parties, this question becomes important with quantum technologies that connect devices by means of small shared systems. Here, we study Bell inequalities where measurements of different parties can have overlap. This allows us to accommodate problems in quantum information such as the existence of quantum error correction codes in the framework of nonlocality. The scenarios considered show an interesting behavior with respect to Hilbert space dimension, overlap, and symmetry.",
+      "url": "https://doi.org/10.1103/physrevlett.131.080201"
+    },
+    {
+      "id": "https://openalex.org/W4389482778",
+      "title": "New entanglement-assisted quantum error-correcting codes from negacyclic codes",
+      "year": 2023,
+      "doi": "https://doi.org/10.1007/s10623-023-01335-0",
+      "abstract": "",
+      "url": "https://doi.org/10.1007/s10623-023-01335-0"
+    },
+    {
+      "id": "https://openalex.org/W4400878889",
+      "title": "Sequentially Encodable Codeword Stabilized Codes",
+      "year": 2024,
+      "doi": "https://doi.org/10.1109/isit-w61686.2024.10591769",
+      "abstract": "$n$-qubit,$m$-uniform states are$[[n,\\ 0,\\ m+1]]$nonde-generate quantum error correcting codes (QECC). The codeword stabilized (CWS) codes use [$n, k, d\\geq m+1$] classical codes and$m$-uniform graph states to construct$[[n,\\ k,\\ m+1]]$QECCs. We provide a set of conditions on the classical codes to obtain CWS codes, which can be encoded in a proposed measurement-based approach. We arrive at an explicit construction of a CWS code when the starting$m$-uniform graph state is a cluster state of qubits on a one-dimensional lattice. The proposed encoding protocol admits sequential encoding of logical qubits, making it suitable for quantum memory applications.",
+      "url": "http://dx.doi.org/10.1109/isit-w61686.2024.10591769"
+    },
+    {
+      "id": "https://openalex.org/W3115030751",
+      "title": "Quantum multipartite entangled states, classical and quantum error correction",
+      "year": 2020,
+      "doi": "https://doi.org/10.5821/dissertation-2117-332751",
+      "abstract": "Studying entanglement is essential for our understanding of such diverse areas as high-energy physics, condensed matter physics, and quantum optics. Moreover, entanglement allows us to surpass classical physics and technologies enabling better information processing, computation, and improved metrology. Recently, entanglement also played a prominent role in characterizing and simulating quantum many-body states and in this way deepened our understanding of quantum matter. While bipartite entanglement is well understood, multipartite entanglement is much richer and leads to stronger contradictions with classical physics. Among all possible entangled states, a special class of states has attracted attention for a wide range of tasks. These states are called k-uniform states and are pure multipartite quantum states of n parties and local dimension q with the property that all of their reductions to k parties are maximally mixed. Operationally, in a k-uniform state any subset of at most k parties is maximally entangled with the rest. The k = bn/2c-uniform states are called absolutely maximally entangled because they are maximally entangled along any splitting of the n parties into two groups. These states find applications in several protocols and, in particular, are the building blocks of quantum error correcting codes with a holographic geometry, which has provided valuable insight into the connections between quantum information theory and conformal field theory. Their properties and the applications are however intriguing, as we know little about them: when they exist, how to construct them, how they relate to other multipartite entangled states, such as graph states, or how they connect under local operations and classical communication. With this motivation in mind, in this thesis we first study the properties of k-uniform states and then present systematic methods to construct closed-form expressions of them. The structure of our methods proves to be particularly fruitful in understanding the structure of these quantum states, their graph-state representation and classification under local operations and classical communication. We also construct several examples of absolutely maximally entangled states whose existence was open so far. Finally, we explore a new family of quantum error correcting codes that generalize and improve the link between classical error correcting codes, multipartite entangled states, and the stabilizer formalism. The results of this thesis can have a role in characterizing and studying the following three topics: multipartite entanglement, classical error correcting codes and quantum error correcting codes. The multipartite entangled states can provide a link to find different resources for quantum information processing tasks and quantify entanglement. Constructing two sets of highly entangled multipartite states, it is important to know if they are equivalent under local operations and classical communication. By understanding which states belong to the same class of quantum resource, one may discuss the role they play in some certain quantum information tasks like quantum key distribution, teleportation and constructing optimum quantum error correcting codes. They can also be used to explore the connection between the Antide Sitter/Conformal Field Theory holographic correspondence and quantum error correction, which will then allow us to construct better quantum error correcting codes. At the same time, their roles in the characterization of quantum networks will be essential to design functional networks, robust against losses and local noise. El estudio del entrelazamiento cu\u00e1ntico es esencial para la comprensi\u00f3n de diversas \u00e1reas como la \u00f3ptica cu\u00e1ntica, la materia condensada e incluso la f\u00edsica de altas energ\u00edas. Adem\u00e1s, el entrelazamiento nos permite superar la f\u00edsica y tecnolog\u00edas cl\u00e1sicas llevando a una mejora en el procesado de la informaci\u00f3n, la computaci\u00f3n y la metrolog\u00eda. Recientemente se ha descubierto que el entrelazamiento desarrolla un papel central en la caracterizaci\u00f3n y simulaci\u00f3n de sistemas cu\u00e1nticos de muchos cuerpos, de esta manera facilitando nuestra comprensi\u00f3n de la materia cu\u00e1ntica. Mientras que se tiene un buen conocimiento del entrelazamiento en estados puros bipartitos, nuestra comprensi\u00f3n del caso de muchas partes es mucho m\u00e1s limitada, a pesar de que sea un escenario m\u00e1s rico y que presenta un contraste m\u00e1s fuerte con la f\u00edsica cl\u00e1sica. De entre todos los posibles estados entrelazados, una clase especial ha llamado la atenci\u00f3n por su amplia gama de aplicaciones. Estos estados se llaman k-uniformes y son los estados multipartitos de n cuerpos con dimensi\u00f3n local q con la propiedad de que todas las reducciones a k cuerpos son m\u00e1ximamente desordenadas. Operacionalmente, en un estado k-uniforme cualquier subconjunto de hasta k cuerpos est\u00e1 m\u00e1ximamente entrelazado con el resto. Los estados k = n/2 -uniformes se llaman estados absolutamente m\u00e1ximamente entrelazados porque son m\u00e1ximamente entrelazados respecto a cualquier partici\u00f3n de los n cuerpos en dos grupos. Estos estados encuentran aplicaciones en varios protocolos y, en particular, forman los elementos de base para la construcci\u00f3n de los c\u00f3digos de correcci\u00f3n de errores cu\u00e1nticos con geometr\u00eda hologr\u00e1fica, los cuales han aportado intuici\u00f3n importante sobre la conexi\u00f3n entre la teor\u00eda de la informaci\u00f3n cu\u00e1ntica y la teor\u00eda conforme de campos. Las propiedades y aplicaciones de estos estados son intrigantes porque conocemos poco sobre las mismas: cu\u00e1ndo existen, c\u00f3mo construirlos, c\u00f3mo se relacionan con otros estados con entrelazamiento multipartito, c\u00f3mo los estados grafo, o como se relacionan mediante operaciones locales y comunicaci\u00f3n cl\u00e1sica. Con esta motivaci\u00f3n en mente, en esta tesis primero estudiamos las propiedades de los estados k-uniformes y luego presentamos m\u00e9todos sistem\u00e1ticos para construir expresiones cerradas de los mismos. La naturaleza de nuestros m\u00e9todos resulta ser muy \u00fatil para entender la estructura de estos estados cu\u00e1nticos, su representaci\u00f3n como estados grafo y su clasificaci\u00f3n bajo operaciones locales y comunicaci\u00f3n cl\u00e1sica. Tambi\u00e9n construimos varios ejemplos de estados absolutamente m\u00e1ximamente entrelazados, cuya existencia era desconocida. Finalmente, exploramos una nueva familia de c\u00f3digos de correcci\u00f3n de errores cu\u00e1nticos que generalizan y mejoran la conexi\u00f3n entre los c\u00f3digos de correcci\u00f3n de errores cl\u00e1sicos, los estados entrelazados multipartitos y el formalismo de estabilizadores. Los resultados de esta tesis pueden desarrollar un papel importante en la caracterizaci\u00f3n y el estudio de las tres siguientes \u00e1reas: entrelazamiento multipartito, c\u00f3digos de correcci\u00f3n de errores cl\u00e1sicos y c\u00f3digos de correcci\u00f3n de errores cu\u00e1nticos. Los estados de entrelazamiento multipartito pueden aportar una conexi\u00f3n para encontrar diferentes recursos para tareas de procesamiento de la informaci\u00f3n cu\u00e1ntica y cuantificaci\u00f3n del entrelazamiento. Al construir dos conjuntos de estados multipartitos altamente entrelazados, es importante saber si son equivalentes entre operaciones locales y comunicaci\u00f3n cl\u00e1sica. Entendiendo qu\u00e9 estados pertenecen a la misma clase de recurso cu\u00e1ntico, se puede discutir qu\u00e9 papel desempe\u00f1an en ciertas tareas de informaci\u00f3n cu\u00e1ntica, como la distribuci\u00f3n de claves criptogr\u00e1ficas cu\u00e1nticas, la teleportaci\u00f3n y la construcci\u00f3n de c\u00f3digos de correcci\u00f3n de errores cu\u00e1nticos \u00f3ptimos. Tambi\u00e9n se pueden usar para explorar la conexi\u00f3n entre la correspondencia hologr\u00e1fica Anti-de Sitter/Conformal Field Theory y c\u00f3digos de correcci\u00f3n de errores cu\u00e1nticos, que nos permitir\u00eda construir mejores c\u00f3digos de correcci\u00f3n de errores. A la vez, su papel en la caracterizaci\u00f3n de redes cu\u00e1nticas ser\u00e1 esencial en el dise\u00f1o de redes funcionales, robustas ante p\u00e9rdidas y ruidos locales.",
+      "url": "https://doi.org/10.5821/dissertation-2117-332751"
+    },
+    {
+      "id": "https://openalex.org/W4383875749",
+      "title": "Two classes of quantum codes from almost MDS codes",
+      "year": 2023,
+      "doi": "https://doi.org/10.1142/s0219749923500326",
+      "abstract": "Hermitian dual-containing codes are an important class of linear codes which have important applications in the construction of quantum codes. In this paper, two classes of Hermitian dual-containing almost MDS codes over finite fields are studied. By employing the Hermitian construction, a class of quantum codes with minimum distance [Formula: see text] and a class of quantum codes with minimum distance [Formula: see text] are constructed.",
+      "url": "http://dx.doi.org/10.1142/s0219749923500326"
+    },
+    {
+      "id": "https://openalex.org/W4390699197",
+      "title": "On generating r-uniform subspaces with the isometric mapping method",
+      "year": 2024,
+      "doi": "https://doi.org/10.1142/s0217732323501857",
+      "abstract": "In this paper, we propose a compositional approach to construct subspaces consisting entirely of r-uniform states, i.e. states with each reduction to r subsystems being maximally mixed. The approach generates new objects from old ones by combining encoding isometries of pure quantum error correcting codes with entangled multipartite states and subspaces. Such a scheme allows for construction of states in heterogeneous systems, i.e. those having unequal local dimensions. The presented methods can be also used to obtain new pure quantum error correcting codes from certain combinations of old ones. The approach is illustrated with various examples including constructions of 2-, 3-, 4- and 5-uniform subspaces.",
+      "url": "https://doi.org/10.1142/s0217732323501857"
+    },
+    {
+      "id": "https://openalex.org/W4401694073",
+      "title": "Upper Bounds on the Size of Entanglement-Assisted Codeword Stabilized Codes Using Semidefinite Programming",
+      "year": 2024,
+      "doi": "https://doi.org/10.1109/isit57864.2024.10619303",
+      "abstract": "In this paper, we explore the application of semidef-inite programming to the realm of quantum codes, specifically focusing on codeword stabilized (CWS) codes with entanglement assistance. Notably, we utilize the isotropic subgroup of the CWS group and the set of word operators of a CWS-type quantum code to derive an upper bound on the minimum distance. Furthermore, this characterization can be incorporated into the associated distance enumerators, enabling us to construct semidefinite constraints that lead to SDP bounds on the minimum distance or size of CWS-type quantum codes. We illustrate several instances where SDP bounds outperform LP bounds.",
+      "url": "http://dx.doi.org/10.1109/isit57864.2024.10619303"
+    },
+    {
+      "id": "https://openalex.org/W4413556767",
+      "title": "Codeword Stabilized Codes From m -Uniform Graph States",
+      "year": 2025,
+      "doi": "https://doi.org/10.1109/jsait.2025.3602744",
+      "abstract": "An m-uniform quantum state on n qubits is an entangled state in which every m-qubit subsystem is maximally mixed. Starting with an m-uniform state realized as the graph state associated with an m-regular graph, and a classical n,k,d\u2265m+1 binary linear code with certain additional properties, we show that pure [n,k,m+1]]2 quantum error-correcting codes (QECCs) can be constructed within the codeword stabilized (CWS) code framework. As illustrations, we construct pure [[22r-1,22r-2r-3,3]]2 and [[(24r-1)2,(24r-1)2-32r-7,5]]2 QECCs. We also give measurement-based protocols for encoding into code states and for recovery of logical qubits from code states.",
+      "url": "https://doi.org/10.1109/jsait.2025.3602744"
+    },
+    {
+      "id": "https://openalex.org/W4416323813",
+      "title": "Exploring Quantum Weight Enumerators From the n -Qubit Parallelized SWAP Test",
+      "year": 2025,
+      "doi": "https://doi.org/10.1109/tit.2025.3634135",
+      "abstract": "Quantum weight enumerators are fundamental tools for analyzing quantum error-correcting codes and multipartite entanglement, offering insights into the existence of quantum error-correcting codes andk-uniform states. In this work, we establish a connection between quantum weight enumerators and then-qubit parallelized SWAP test. We demonstrate that each shadow enumerator corresponds to a probability derived from this test, providing a physical interpretation for the shadow enumerators. Leveraging the non-negativity of these probabilities, we present an elegant proof for the shadow inequalities. Additionally, we show that the Shor-Laflamme weight enumerators and the Rains unitary enumerators can be calculated using then-qubit parallelized SWAP test. For applications, we utilize this test to compute the distances of quantum error-correcting codes, determine thek-uniformity of pure states, and evaluate multipartite entanglement measures. Our results indicate that quantum weight enumerators can be efficiently estimated on quantum computers, opening a path to calculate and verify the distances of quantum error-correcting codes.",
+      "url": "https://doi.org/10.1109/tit.2025.3634135"
+    },
+    {
+      "id": "https://openalex.org/W4417268086",
+      "title": "Multiqubit monogamy relations beyond shadow inequalities",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/9fkf-hm8l",
+      "abstract": "International audience",
+      "url": "https://doi.org/10.1103/9fkf-hm8l"
+    },
+    {
+      "id": "https://openalex.org/W7130548166",
+      "title": "Minimal decomposition entropy and optimal representations of absolutely maximally entangled states",
+      "year": 2026,
+      "doi": "https://doi.org/10.1103/cvdl-1jw6",
+      "abstract": "",
+      "url": "https://doi.org/10.1103/cvdl-1jw6"
+    },
+    {
+      "id": "https://openalex.org/W7159585469",
+      "title": "Absolutely maximally entangled pure states of multipartite quantum systems",
+      "year": 2026,
+      "doi": "https://doi.org/10.1088/1361-6633/ae672a",
+      "abstract": "parties are distinguished by the property that for any splitting at least one partial trace is maximally mixed. Due to maximal possible correlations between any two selected subsystems these states have numerous applications in various fields of quantum information processing including multi-user teleportation, quantum error correction and secret sharing. We present an updated survey of various techniques to generate such strongly entangled states, including those going beyond the standard construction of graph and stabilizer states. Our contribution includes, in particular, analysis of the degree of entanglement of reduced states obtained by partial trace of AME projectors, states obtained by a symmetric superposition of GHZ states, an orthogonal frequency square representation of the 'golden' AME state and an updated summary of the number of local unitary equivalence classes.",
+      "url": "https://doi.org/10.1088/1361-6633/ae672a"
+    },
+    {
+      "id": "https://openalex.org/W7165691349",
+      "title": "Linear Programming Bounds on $k$ -Uniform States",
+      "year": 2026,
+      "doi": "https://doi.org/10.1109/tit.2026.3706667",
+      "abstract": "",
+      "url": "https://doi.org/10.1109/tit.2026.3706667"
+    },
+    {
+      "id": "https://openalex.org/W7165886473",
+      "title": "Transversal gates of the ((3,3,2)) qutrit code and local symmetries of the absolutely maximally entangled state of four qutrits",
+      "year": 2026,
+      "doi": "https://doi.org/10.1007/s44464-026-00021-z",
+      "abstract": "The group of transversal gates and the group of local symmetries are important features of quantum error correcting codes and pure quantum states, respectively; the former provides fault-tolerant operations on a code while the latter tells us about a state\u2019s reachability via stochastic local operations with classical communication. We prove that there exists a bijection between local unitary (LU) orbits of absolutely maximally entangled (AME) states in $$(\\mathbb {C}^D)^{\\otimes n}$$ where n is even, also known as perfect tensors, and LU orbits of $$((n-1,D,n/2))_D$$ quantum error correcting codes. Furthermore, there is a close connection between the local symmetries of an AME state and the transversal gates of its corresponding quantum error correcting code. We explore in detail the 4-qutrit AME state $$|\\Phi \\rangle $$ and its corresponding $$((3,3,2))_3$$ qutrit code $$\\mathcal {C}$$ . We show that $$|\\Phi \\rangle $$ and $$\\mathcal {C}$$ are both unique up to the action of the LU group. We find generators of the local symmetry group of $$|\\Phi \\rangle $$ and the group of transversal gates on $$\\mathcal {C}$$ . Our proofs rely on prior results by Huber and Grassl (2020), Hebenstreit et al. (2016), and Rather et al. (2023). We use Vinberg\u2019s theory of Lie algebras to study the special case of $$|\\Phi \\rangle $$ and $$\\mathcal {C}$$ .",
+      "url": "https://doi.org/10.1007/s44464-026-00021-z"
+    },
+    {
+      "id": "https://openalex.org/W7202120195",
+      "title": "Mixed-dimensional quantum MacWilliams identity: Bounds for codes and absolutely maximally entangled states in heterogeneous systems",
+      "year": 2026,
+      "doi": "https://doi.org/10.1103/fyq2-mpmm",
+      "abstract": "",
+      "url": "https://doi.org/10.1103/fyq2-mpmm"
+    }
+  ]
+}

@@ -1,0 +1,345 @@
+[
+  {
+    "seed": "V1",
+    "doi": "10.1103/PhysRevResearch.2.043323",
+    "arxiv": "2007.09713",
+    "service": "crossref",
+    "url": "https://api.crossref.org/works/10.1103/PhysRevResearch.2.043323",
+    "status": "ok",
+    "http_status": 200,
+    "initial_error": "HTTP Error 429: Too Many Requests",
+    "count": 44,
+    "title": [
+      "Optimal verification of stabilizer states"
+    ],
+    "id": "10.1103/physrevresearch.2.043323"
+  },
+  {
+    "seed": "V1",
+    "doi": "10.1103/PhysRevResearch.2.043323",
+    "arxiv": "2007.09713",
+    "service": "openalex",
+    "url": "https://api.openalex.org/works/https://doi.org/10.1103/PhysRevResearch.2.043323",
+    "http_status": 200,
+    "count": 41,
+    "title": "Optimal verification of stabilizer states",
+    "id": "https://openalex.org/W3042832883",
+    "status": "ok"
+  },
+  {
+    "seed": "V1",
+    "doi": "10.1103/PhysRevResearch.2.043323",
+    "arxiv": "2007.09713",
+    "service": "semantic_scholar",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1103/PhysRevResearch.2.043323?fields=title,citationCount,externalIds",
+    "http_status": 200,
+    "count": 41,
+    "title": "Optimal verification of stabilizer states",
+    "id": "1c748e6abd93a8d0a87b28db24a7251b46aa9b12",
+    "status": "ok"
+  },
+  {
+    "seed": "V2",
+    "doi": "10.1103/PhysRevLett.120.170502",
+    "arxiv": "1709.03353",
+    "service": "crossref",
+    "url": "https://api.crossref.org/works/10.1103/PhysRevLett.120.170502",
+    "http_status": 200,
+    "count": 118,
+    "title": [
+      "Optimal Verification of Entangled States with Local Measurements"
+    ],
+    "id": "10.1103/physrevlett.120.170502",
+    "status": "ok"
+  },
+  {
+    "seed": "V2",
+    "doi": "10.1103/PhysRevLett.120.170502",
+    "arxiv": "1709.03353",
+    "service": "openalex",
+    "url": "https://api.openalex.org/works/https://doi.org/10.1103/PhysRevLett.120.170502",
+    "http_status": 200,
+    "count": 133,
+    "title": "Optimal Verification of Entangled States with Local Measurements",
+    "id": "https://openalex.org/W2754616276",
+    "status": "ok"
+  },
+  {
+    "seed": "V2",
+    "doi": "10.1103/PhysRevLett.120.170502",
+    "arxiv": "1709.03353",
+    "service": "semantic_scholar",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1103/PhysRevLett.120.170502?fields=title,citationCount,externalIds",
+    "http_status": 200,
+    "count": 141,
+    "title": "Optimal Verification of Entangled States with Local Measurements.",
+    "id": "9fb06634e1a7e423830a36c96f80f36d6a8b6761",
+    "status": "ok"
+  },
+  {
+    "seed": "V3",
+    "doi": "10.1103/PhysRevA.99.042337",
+    "arxiv": "1808.10786",
+    "service": "crossref",
+    "url": "https://api.crossref.org/works/10.1103/PhysRevA.99.042337",
+    "http_status": 200,
+    "count": 12,
+    "title": [
+      "Validating and certifying stabilizer states"
+    ],
+    "id": "10.1103/physreva.99.042337",
+    "status": "ok"
+  },
+  {
+    "seed": "V3",
+    "doi": "10.1103/PhysRevA.99.042337",
+    "arxiv": "1808.10786",
+    "service": "openalex",
+    "url": "https://api.openalex.org/works/https://doi.org/10.1103/PhysRevA.99.042337",
+    "http_status": 200,
+    "count": 15,
+    "title": "Validating and certifying stabilizer states",
+    "id": "https://openalex.org/W2888905097",
+    "status": "ok"
+  },
+  {
+    "seed": "V3",
+    "doi": "10.1103/PhysRevA.99.042337",
+    "arxiv": "1808.10786",
+    "service": "semantic_scholar",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1103/PhysRevA.99.042337?fields=title,citationCount,externalIds",
+    "http_status": 200,
+    "count": 14,
+    "title": "Validating and certifying stabilizer states",
+    "id": "7494a07e4f176a0bc01837db310c8313545b02bf",
+    "status": "ok"
+  },
+  {
+    "seed": "V4",
+    "doi": "10.22331/q-2024-01-10-1221",
+    "arxiv": "2206.15292",
+    "service": "crossref",
+    "url": "https://api.crossref.org/works/10.22331/q-2024-01-10-1221",
+    "http_status": 200,
+    "count": 12,
+    "title": [
+      "Efficient Verification of Ground States of Frustration-Free Hamiltonians"
+    ],
+    "id": "10.22331/q-2024-01-10-1221",
+    "status": "ok"
+  },
+  {
+    "seed": "V4",
+    "doi": "10.22331/q-2024-01-10-1221",
+    "arxiv": "2206.15292",
+    "service": "openalex",
+    "url": "https://api.openalex.org/works/https://doi.org/10.22331/q-2024-01-10-1221",
+    "http_status": 200,
+    "count": 11,
+    "title": "Efficient Verification of Ground States of Frustration-Free Hamiltonians",
+    "id": "https://openalex.org/W4390695070",
+    "status": "ok"
+  },
+  {
+    "seed": "V4",
+    "doi": "10.22331/q-2024-01-10-1221",
+    "arxiv": "2206.15292",
+    "service": "semantic_scholar",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.22331/q-2024-01-10-1221?fields=title,citationCount,externalIds",
+    "http_status": 200,
+    "count": 15,
+    "title": "Efficient Verification of Ground States of Frustration-Free Hamiltonians",
+    "id": "da4b82dac63b3c0a671b716f9ab4d314207b1260",
+    "status": "ok"
+  },
+  {
+    "seed": "A1",
+    "doi": "10.1103/PhysRevA.92.012305",
+    "arxiv": "1503.05421",
+    "service": "crossref",
+    "url": "https://api.crossref.org/works/10.1103/PhysRevA.92.012305",
+    "http_status": 200,
+    "count": 5,
+    "title": [
+      "Determination of stabilizer states"
+    ],
+    "id": "10.1103/physreva.92.012305",
+    "status": "ok"
+  },
+  {
+    "seed": "A1",
+    "doi": "10.1103/PhysRevA.92.012305",
+    "arxiv": "1503.05421",
+    "service": "openalex",
+    "url": "https://api.openalex.org/works/https://doi.org/10.1103/PhysRevA.92.012305",
+    "http_status": 200,
+    "count": 5,
+    "title": "Determination of stabilizer states",
+    "id": "https://openalex.org/W1683683728",
+    "status": "ok"
+  },
+  {
+    "seed": "A1",
+    "doi": "10.1103/PhysRevA.92.012305",
+    "arxiv": "1503.05421",
+    "service": "semantic_scholar",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1103/PhysRevA.92.012305?fields=title,citationCount,externalIds",
+    "http_status": 200,
+    "count": 5,
+    "title": "Determination of stabilizer states",
+    "id": "ecb1ff60f7ef913d922149a7fa6d13738ca8e22d",
+    "status": "ok"
+  },
+  {
+    "seed": "A2",
+    "doi": "10.1103/PhysRevA.72.022340",
+    "arxiv": "quant-ph/0501020",
+    "service": "crossref",
+    "url": "https://api.crossref.org/works/10.1103/PhysRevA.72.022340",
+    "http_status": 200,
+    "count": 219,
+    "title": [
+      "Entanglement detection in the stabilizer formalism"
+    ],
+    "id": "10.1103/physreva.72.022340",
+    "status": "ok"
+  },
+  {
+    "seed": "A2",
+    "doi": "10.1103/PhysRevA.72.022340",
+    "arxiv": "quant-ph/0501020",
+    "service": "openalex",
+    "url": "https://api.openalex.org/works/https://doi.org/10.1103/PhysRevA.72.022340",
+    "http_status": 200,
+    "count": 282,
+    "title": "Entanglement detection in the stabilizer formalism",
+    "id": "https://openalex.org/W2081006977",
+    "status": "ok"
+  },
+  {
+    "seed": "A2",
+    "doi": "10.1103/PhysRevA.72.022340",
+    "arxiv": "quant-ph/0501020",
+    "service": "semantic_scholar",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1103/PhysRevA.72.022340?fields=title,citationCount,externalIds",
+    "http_status": 200,
+    "count": 222,
+    "title": "Entanglement detection in the stabilizer formalism",
+    "id": "9ef33fde7eaeb5980c1b1c307156de210ced418b",
+    "status": "ok"
+  },
+  {
+    "seed": "A3",
+    "doi": "10.22331/q-2020-06-18-284",
+    "arxiv": "1907.07733",
+    "service": "crossref",
+    "url": "https://api.crossref.org/works/10.22331/q-2020-06-18-284",
+    "http_status": 200,
+    "count": 53,
+    "title": [
+      "Quantum Codes of Maximal Distance and Highly Entangled Subspaces"
+    ],
+    "id": "10.22331/q-2020-06-18-284",
+    "status": "ok"
+  },
+  {
+    "seed": "A3",
+    "doi": "10.22331/q-2020-06-18-284",
+    "arxiv": "1907.07733",
+    "service": "openalex",
+    "url": "https://api.openalex.org/works/https://doi.org/10.22331/q-2020-06-18-284",
+    "http_status": 200,
+    "count": 51,
+    "title": "Quantum Codes of Maximal Distance and Highly Entangled Subspaces",
+    "id": "https://openalex.org/W2962111392",
+    "status": "ok"
+  },
+  {
+    "seed": "A3",
+    "doi": "10.22331/q-2020-06-18-284",
+    "arxiv": "1907.07733",
+    "service": "semantic_scholar",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.22331/q-2020-06-18-284?fields=title,citationCount,externalIds",
+    "http_status": 200,
+    "count": 65,
+    "title": "Quantum Codes of Maximal Distance and Highly Entangled Subspaces",
+    "id": "720763a44faaffc1d591c6a050e79a37abf7cb1a",
+    "status": "ok"
+  },
+  {
+    "seed": "A4",
+    "doi": "10.1103/PhysRevA.96.012308",
+    "arxiv": "1703.06183",
+    "service": "crossref",
+    "url": "https://api.crossref.org/works/10.1103/PhysRevA.96.012308",
+    "http_status": 200,
+    "count": 13,
+    "title": [
+      "Exact stabilization of entangled states in finite time by dissipative quantum circuits"
+    ],
+    "id": "10.1103/physreva.96.012308",
+    "status": "ok"
+  },
+  {
+    "seed": "A4",
+    "doi": "10.1103/PhysRevA.96.012308",
+    "arxiv": "1703.06183",
+    "service": "openalex",
+    "url": "https://api.openalex.org/works/https://doi.org/10.1103/PhysRevA.96.012308",
+    "http_status": 200,
+    "count": 20,
+    "title": "Exact stabilization of entangled states in finite time by dissipative quantum circuits",
+    "id": "https://openalex.org/W2615109912",
+    "status": "ok"
+  },
+  {
+    "seed": "A4",
+    "doi": "10.1103/PhysRevA.96.012308",
+    "arxiv": "1703.06183",
+    "service": "semantic_scholar",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1103/PhysRevA.96.012308?fields=title,citationCount,externalIds",
+    "http_status": 200,
+    "count": 14,
+    "title": "Exact stabilization of entangled states in finite time by dissipative quantum circuits",
+    "id": "7934ffec9eaf6a1f1998c57e90dea11de8f28168",
+    "status": "ok"
+  },
+  {
+    "seed": "A5",
+    "doi": "10.1088/1751-8121/aaad1a",
+    "arxiv": "1711.11142",
+    "service": "crossref",
+    "url": "https://api.crossref.org/works/10.1088/1751-8121/aaad1a",
+    "http_status": 200,
+    "count": 5,
+    "title": [
+      "Generic pure quantum states as steady states of quasi-local dissipative dynamics"
+    ],
+    "id": "10.1088/1751-8121/aaad1a",
+    "status": "ok"
+  },
+  {
+    "seed": "A5",
+    "doi": "10.1088/1751-8121/aaad1a",
+    "arxiv": "1711.11142",
+    "service": "openalex",
+    "url": "https://api.openalex.org/works/https://doi.org/10.1088/1751-8121/aaad1a",
+    "http_status": 200,
+    "count": 4,
+    "title": "Generic pure quantum states as steady states of quasi-local dissipative dynamics",
+    "id": "https://openalex.org/W2771289758",
+    "status": "ok"
+  },
+  {
+    "seed": "A5",
+    "doi": "10.1088/1751-8121/aaad1a",
+    "arxiv": "1711.11142",
+    "service": "semantic_scholar",
+    "url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1088/1751-8121/aaad1a?fields=title,citationCount,externalIds",
+    "http_status": 200,
+    "count": 7,
+    "title": "Generic pure quantum states as steady states of quasi-local dissipative dynamics",
+    "id": "f1bc5166a2a5ab4ca0cb376dce7bc27bc7b839fb",
+    "status": "ok"
+  }
+]

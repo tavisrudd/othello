@@ -1,0 +1,44 @@
+{
+  "seed": "A5",
+  "service": "openalex",
+  "status": "ok",
+  "count_reported": 4,
+  "count_retrieved": 4,
+  "queries": [
+    "https://api.openalex.org/works?filter=cites:W2771289758&per-page=200&cursor=*"
+  ],
+  "records": [
+    {
+      "id": "https://openalex.org/W3041696785",
+      "title": "Supervised learning in Hamiltonian reconstruction from local measurements on eigenstates",
+      "year": 2020,
+      "doi": "https://doi.org/10.1088/1361-648x/abc4cf",
+      "abstract": "Reconstructing a system Hamiltonian through measurements on its eigenstates is an important inverse problem in quantum physics. Recently, it was shown that generic many-body local Hamiltonians can be recovered by local measurements without knowing the values of the correlation functions. In this work, we discuss this problem in more depth for different systems and apply supervised learning method via neural networks to solve it. For low-lying eigenstates, the inverse problem is well-posed, neural networks turn out to be efficient and scalable even with a shallow network and a small data set. For middle-lying eigenstates, the problem is ill-posed, we present a modified method based on transfer learning accordingly. Neural networks can also efficiently generate appropriate initial points for numerical optimization based on the BFGS method.",
+      "url": "https://doi.org/10.1088/1361-648x/abc4cf"
+    },
+    {
+      "id": "https://openalex.org/W2950316578",
+      "title": "Uniquely determined pure quantum states need not be unique ground states of quasi-local Hamiltonians",
+      "year": 2019,
+      "doi": "https://doi.org/10.1103/physreva.99.062104",
+      "abstract": "We consider the problem of characterizing states of a multipartite quantum system from restricted, quasi-local information, with emphasis on uniquely determined pure states. By leveraging tools from dissipative quantum control theory, we show how the search for states consistent with an assigned list of reduced density matrices may be restricted to a proper subspace, which is determined solely by their supports. The existence of a quasi-local observable which attains its unique minimum over such a subspace further provides a sufficient criterion for a pure state to be uniquely determined by its reduced states. While the condition that a pure state is uniquely determined is necessary for it to arise as a nondegenerate ground state of a quasi-local Hamiltonian, we prove the opposite implication to be false in general, by exhibiting an explicit analytic counterexample. We show how the problem of determining whether a quasi-local parent Hamiltonian admitting a given pure state as its unique ground state is dual, in the sense of semidefinite programming, to the one of determining whether such a state is uniquely determined by the quasi-local information. Failure of this dual program to attain its optimal value is what prevents these two classes of states from coinciding.",
+      "url": "https://doi.org/10.1103/physreva.99.062104"
+    },
+    {
+      "id": "https://openalex.org/W3012062752",
+      "title": "The whole from the parts: Markovian stabilizing dynamics and ground-state cooling under locality constraints",
+      "year": 2019,
+      "doi": "https://doi.org/10.1109/cdc40024.2019.9030191",
+      "abstract": "We focus on two classes of pure states for a finite-dimensional multipartite quantum system: those that can be identified as unique ground states (UGS) of a locally-constrained Hamiltonian, and those that can be obtained as unique, asymptotically stable equilibria of a Markov quantum dynamics under the same quasi-locality constraints (QLS). While there is an equivalence between (strict) subsets of two classes, namely, states that are UGS of frustration-free Hamiltonians and unique equilibria of purely dissipative dynamics, two paradigmatic entangled states, GHZ and W, offer counterexamples to either implication in the general setting. The intuition that every UGS state can be obtained as the exact steady state of a Markovian cooling process is salvaged only if suitable non-local resources are added. We show that stochastic stabilization of the target UGS state can be achieved if we perform continuous measurement of the global Hamiltonian, while controlling the dynamics with a switching, filtering-based quantum feedback strategy.",
+      "url": "https://doi.org/10.1109/cdc40024.2019.9030191"
+    },
+    {
+      "id": "https://openalex.org/W4404315132",
+      "title": "Almost all even-particle pure states are determined by their half-body marginals",
+      "year": 2024,
+      "doi": "https://doi.org/10.1088/1751-8121/ad91fe",
+      "abstract": "Abstract Determining whether the original global state is uniquely determined by its local marginals is a prerequisite for some efficient tools for characterizing quantum states. In this paper, we show that almost all generic pure states of even N-particle with equal local dimension are uniquely determined among all pure states (UDP) by four of their half-body marginals. Furthermore, we give a graphical description of the marginals for determining genuinely multipartite entangled states, which leads to several lower bounds on the number of required marginals. Finally, we present a construction of N-qudit states obtained from certain combinatorial structures that cannot be UDP by their k-body marginals for some k \u2a7e \u230a N / 2 \u230b .",
+      "url": "https://doi.org/10.1088/1751-8121/ad91fe"
+    }
+  ]
+}

@@ -1,0 +1,1390 @@
+[
+  {
+    "query": "\"quantum state verification\"",
+    "urls": [
+      "https://api.zbmath.org/v1/document/_search?search_string=%22quantum+state+verification%22&page=0&results_per_page=100"
+    ],
+    "status": "ok",
+    "total": 10,
+    "records": [
+      {
+        "id": 7789869,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Optimizing measurements sequences for quantum state verification"
+        },
+        "year": "2023",
+        "links": [
+          {
+            "identifier": "10.1007/s11128-023-04167-y",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/s11128-023-04167-y"
+          },
+          {
+            "identifier": "2307.00881",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2307.00881"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7789869"
+      },
+      {
+        "id": 900497610,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Minimum number of experimental settings required to verify bipartite pure states and unitaries"
+        },
+        "year": "2021",
+        "links": [
+          {
+            "identifier": "2112.13638",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2112.13638"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/900497610"
+      },
+      {
+        "id": 900494056,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Optimal Verification of the Bell State and Greenberger-Horne-Zeilinger States in Untrusted Quantum Networks"
+        },
+        "year": "2021",
+        "links": [
+          {
+            "identifier": "10.1038/s41534-021-00499-8",
+            "type": "doi",
+            "url": "https://doi.org/10.1038/s41534-021-00499-8"
+          },
+          {
+            "identifier": "2111.02800",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2111.02800"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/900494056"
+      },
+      {
+        "id": 902386455,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Quantum memory assisted entangled state verification with local measurements"
+        },
+        "year": "2023",
+        "links": [
+          {
+            "identifier": "2312.11066",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2312.11066"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/902386455"
+      },
+      {
+        "id": 902820239,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Duality of extremal quantum states in verification and data hiding"
+        },
+        "year": "2025",
+        "links": [
+          {
+            "identifier": "2509.01281",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2509.01281"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/902820239"
+      },
+      {
+        "id": 8021608,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Quantum verification for a class of \\(n\\)-qubit quantum entangled states"
+        },
+        "year": "2025",
+        "links": [
+          {
+            "identifier": "10.1002/andp.202400305",
+            "type": "doi",
+            "url": "https://doi.org/10.1002/andp.202400305"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/8021608"
+      },
+      {
+        "id": 902600945,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Why quantum state verification cannot be both efficient and secure: a categorical approach"
+        },
+        "year": "2025",
+        "links": [
+          {
+            "identifier": "2411.04767",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2411.04767"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/902600945"
+      },
+      {
+        "id": 900181017,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "On the informational completeness of local observables"
+        },
+        "year": "2014",
+        "links": [
+          {
+            "identifier": "1405.0137",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/1405.0137"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/900181017"
+      },
+      {
+        "id": 7849171,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Eigenvalue-based quantum state verification of three-qubit W class states"
+        },
+        "year": "2024",
+        "links": [
+          {
+            "identifier": "10.1016/j.physa.2024.129681",
+            "type": "doi",
+            "url": "https://doi.org/10.1016/j.physa.2024.129681"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7849171"
+      },
+      {
+        "id": 8100221,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "A new general quantum state verification protocol by the classical shadow method"
+        },
+        "year": "2025",
+        "links": [
+          {
+            "identifier": "10.1007/s11128-025-04889-1",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/s11128-025-04889-1"
+          },
+          {
+            "identifier": "2410.15870",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2410.15870"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/8100221"
+      }
+    ]
+  },
+  {
+    "query": "\"absolutely maximally entangled\"",
+    "urls": [
+      "https://api.zbmath.org/v1/document/_search?search_string=%22absolutely+maximally+entangled%22&page=0&results_per_page=100"
+    ],
+    "status": "ok",
+    "total": 36,
+    "records": [
+      {
+        "id": 7870959,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Two-unitary complex Hadamard matrices of order 36"
+        },
+        "year": "2024",
+        "links": [
+          {
+            "identifier": "10.1515/spma-2024-0010",
+            "type": "doi",
+            "url": "https://doi.org/10.1515/spma-2024-0010"
+          },
+          {
+            "identifier": "2401.01671",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2401.01671"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7870959"
+      },
+      {
+        "id": 6882096,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Bounds on absolutely maximally entangled states from shadow inequalities, and the quantum MacWilliams identity"
+        },
+        "year": "2018",
+        "links": [
+          {
+            "identifier": "10.1088/1751-8121/aaade5",
+            "type": "doi",
+            "url": "https://doi.org/10.1088/1751-8121/aaade5"
+          },
+          {
+            "identifier": "1708.06298",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/1708.06298"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/6882096"
+      },
+      {
+        "id": 7640238,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Entangling power of multipartite unitary gates"
+        },
+        "year": "2020",
+        "links": [
+          {
+            "identifier": "10.1088/1751-8121/ab749a",
+            "type": "doi",
+            "url": "https://doi.org/10.1088/1751-8121/ab749a"
+          },
+          {
+            "identifier": "1909.07709",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/1909.07709"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7640238"
+      },
+      {
+        "id": 6856535,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Optimal quantum error correcting codes from absolutely maximally entangled states"
+        },
+        "year": "2018",
+        "links": [
+          {
+            "identifier": "10.1088/1751-8121/aaa151",
+            "type": "doi",
+            "url": "https://doi.org/10.1088/1751-8121/aaa151"
+          },
+          {
+            "identifier": "1701.03359",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/1701.03359"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/6856535"
+      },
+      {
+        "id": 902393111,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Quantum convolutional channels and multiparameter families of 2-unitary matrices"
+        },
+        "year": "2026",
+        "links": [
+          {
+            "identifier": "10.22331/q-2026-04-16-2072",
+            "type": "doi",
+            "url": "https://doi.org/10.22331/q-2026-04-16-2072"
+          },
+          {
+            "identifier": "2312.17719",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2312.17719"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/902393111"
+      },
+      {
+        "id": 7648017,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Multipartite entanglement states of higher uniformity"
+        },
+        "year": "2021",
+        "links": [
+          {
+            "identifier": "10.1088/1751-8121/abc9a4",
+            "type": "doi",
+            "url": "https://doi.org/10.1088/1751-8121/abc9a4"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7648017"
+      },
+      {
+        "id": 8033548,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Local unitary equivalence of absolutely maximally entangled states constructed from orthogonal arrays"
+        },
+        "year": "2025",
+        "links": [
+          {
+            "identifier": "10.1088/1751-8121/adbf75",
+            "type": "doi",
+            "url": "https://doi.org/10.1088/1751-8121/adbf75"
+          },
+          {
+            "identifier": "2411.04096",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2411.04096"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/8033548"
+      },
+      {
+        "id": 8253063,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Detecting entanglement from few partial transpose moments and their decay via weight enumerators"
+        },
+        "year": "2026",
+        "links": [
+          {
+            "identifier": "10.1088/1751-8121/ae98c6",
+            "type": "doi",
+            "url": "https://doi.org/10.1088/1751-8121/ae98c6"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/8253063"
+      },
+      {
+        "id": 903025269,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Mixed-dimensional quantum MacWilliams identity: Bounds for codes and absolutely maximally entangled states in heterogeneous systems"
+        },
+        "year": "2026",
+        "links": [
+          {
+            "identifier": "10.1103/fyq2-mpmm",
+            "type": "doi",
+            "url": "https://doi.org/10.1103/fyq2-mpmm"
+          },
+          {
+            "identifier": "2604.25790",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2604.25790"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/903025269"
+      },
+      {
+        "id": 8081464,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Four-qubit critical states"
+        },
+        "year": "2025",
+        "links": [
+          {
+            "identifier": "10.1088/1751-8121/ade410",
+            "type": "doi",
+            "url": "https://doi.org/10.1088/1751-8121/ade410"
+          },
+          {
+            "identifier": "2410.08317",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2410.08317"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/8081464"
+      },
+      {
+        "id": 900511173,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Thirty-six entangled officers of Euler: Quantum solution to a classically impossible problem"
+        },
+        "year": "2021",
+        "links": [
+          {
+            "identifier": "10.1103/PhysRevLett.128.080507",
+            "type": "doi",
+            "url": "https://doi.org/10.1103/PhysRevLett.128.080507"
+          },
+          {
+            "identifier": "2104.05122",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2104.05122"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/900511173"
+      },
+      {
+        "id": 7563156,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "The criterion of maximally four- and five-qubit entangled states via monogamy linear entropy relations"
+        },
+        "year": "2022",
+        "links": [
+          {
+            "identifier": "10.1007/s10773-022-05135-5",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/s10773-022-05135-5"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7563156"
+      },
+      {
+        "id": 900554992,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Absolutely maximally entangled state equivalence and the construction of infinite quantum solutions to the problem of 36 officers of Euler"
+        },
+        "year": "2022",
+        "links": [
+          {
+            "identifier": "10.1103/PhysRevA.108.032412",
+            "type": "doi",
+            "url": "https://doi.org/10.1103/PhysRevA.108.032412"
+          },
+          {
+            "identifier": "2212.06737",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2212.06737"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/900554992"
+      },
+      {
+        "id": 7050859,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Absolutely maximally entangled states from phase states"
+        },
+        "year": "2019",
+        "links": [
+          {
+            "identifier": "10.1142/S0219749919500096",
+            "type": "doi",
+            "url": "https://doi.org/10.1142/S0219749919500096"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7050859"
+      },
+      {
+        "id": 7628465,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Novel constructions of mutually unbiased tripartite absolutely maximally entangled bases"
+        },
+        "year": "2022",
+        "links": [
+          {
+            "identifier": "10.1007/s11128-022-03668-6",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/s11128-022-03668-6"
+          },
+          {
+            "identifier": "2209.08462",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2209.08462"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7628465"
+      },
+      {
+        "id": 7643605,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Planar \\(k\\)-uniform states: a generalization of planar maximally entangled states"
+        },
+        "year": "2021",
+        "links": [
+          {
+            "identifier": "10.1007/s11128-021-03204-y",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/s11128-021-03204-y"
+          },
+          {
+            "identifier": "2106.12209",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2106.12209"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7643605"
+      },
+      {
+        "id": 7801162,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Multiparticle singlet states cannot be maximally entangled for the bipartitions"
+        },
+        "year": "2024",
+        "links": [
+          {
+            "identifier": "10.1063/5.0159105",
+            "type": "doi",
+            "url": "https://doi.org/10.1063/5.0159105"
+          },
+          {
+            "identifier": "2211.03813",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2211.03813"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7801162"
+      },
+      {
+        "id": 8200060,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "A concurrence-based criterion for equal maximally entangled and absolutely maximally entangled states"
+        },
+        "year": "2026",
+        "links": [
+          {
+            "identifier": "10.1007/s11128-026-05060-0",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/s11128-026-05060-0"
+          },
+          {
+            "identifier": "2501.15477",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2501.15477"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/8200060"
+      },
+      {
+        "id": 902775419,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Classification of five-qubit absolutely maximally entangled states"
+        },
+        "year": "2026",
+        "links": [
+          {
+            "identifier": "2507.02185",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2507.02185"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/902775419"
+      },
+      {
+        "id": 8228116,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Hyperinvariant spin network states -- an AdS/CFT model from first principles"
+        },
+        "year": "2026",
+        "links": [
+          {
+            "identifier": "10.1007/JHEP06(2026)145",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/JHEP06(2026)145"
+          },
+          {
+            "identifier": "2510.06602",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2510.06602"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/8228116"
+      },
+      {
+        "id": 7420939,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Tripartite quantum operation sharing with a six-qubit absolutely maximally entangled state"
+        },
+        "year": "2021",
+        "links": [
+          {
+            "identifier": "10.1007/s10773-020-04652-5",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/s10773-020-04652-5"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7420939"
+      },
+      {
+        "id": 7555854,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "\\(k\\)-uniform states in heterogeneous systems"
+        },
+        "year": "2022",
+        "links": [
+          {
+            "identifier": "10.1109/TIT.2022.3147810",
+            "type": "doi",
+            "url": "https://doi.org/10.1109/TIT.2022.3147810"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7555854"
+      },
+      {
+        "id": 900546235,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "A Hierarchy of Multipartite Correlations Based on Concentratable Entanglement"
+        },
+        "year": "2022",
+        "links": [
+          {
+            "identifier": "10.1103/PhysRevResearch.6.023019",
+            "type": "doi",
+            "url": "https://doi.org/10.1103/PhysRevResearch.6.023019"
+          },
+          {
+            "identifier": "2209.07607",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2209.07607"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/900546235"
+      },
+      {
+        "id": 7421018,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Demonstrate absolutely maximally entangled of four- and eight-qubit states inexistence via simple constraint condition"
+        },
+        "year": "2021",
+        "links": [
+          {
+            "identifier": "10.1007/s10773-021-04924-8",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/s10773-021-04924-8"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7421018"
+      },
+      {
+        "id": 900567805,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Construction and local equivalence of dual-unitary operators: from dynamical maps to quantum combinatorial designs"
+        },
+        "year": "2022",
+        "links": [
+          {
+            "identifier": "10.1103/PRXQuantum.3.040331",
+            "type": "doi",
+            "url": "https://doi.org/10.1103/PRXQuantum.3.040331"
+          },
+          {
+            "identifier": "2205.08842",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2205.08842"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/900567805"
+      },
+      {
+        "id": 7658384,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Absolutely maximally entangled states in tripartite heterogeneous systems"
+        },
+        "year": "2021",
+        "links": [
+          {
+            "identifier": "10.1007/s11128-021-03034-y",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/s11128-021-03034-y"
+          },
+          {
+            "identifier": "2001.08821",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2001.08821"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7658384"
+      },
+      {
+        "id": 7869217,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "The fastest generation of multipartite entanglement with natural interactions"
+        },
+        "year": "2023",
+        "links": [
+          {
+            "identifier": "10.1088/1367-2630/acf953",
+            "type": "doi",
+            "url": "https://doi.org/10.1088/1367-2630/acf953"
+          },
+          {
+            "identifier": "2303.09238",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2303.09238"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7869217"
+      },
+      {
+        "id": 6984941,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "An algorithm to explore entanglement in small systems"
+        },
+        "year": "2018",
+        "links": [
+          {
+            "identifier": "10.1098/rspa.2018.0023",
+            "type": "doi",
+            "url": "https://doi.org/10.1098/rspa.2018.0023"
+          },
+          {
+            "identifier": "1711.07943",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/1711.07943"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/6984941"
+      },
+      {
+        "id": 7420944,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Efficient tripartite quantum operation sharing with five-qubit absolutely maximally entangled state"
+        },
+        "year": "2021",
+        "links": [
+          {
+            "identifier": "10.1007/s10773-020-04684-x",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/s10773-020-04684-x"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7420944"
+      },
+      {
+        "id": 7866330,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Scalable Bell inequalities for graph states of arbitrary prime local dimension and self-testing"
+        },
+        "year": "2023",
+        "links": [
+          {
+            "identifier": "10.1088/1367-2630/acd9e3",
+            "type": "doi",
+            "url": "https://doi.org/10.1088/1367-2630/acd9e3"
+          },
+          {
+            "identifier": "2212.07133",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2212.07133"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7866330"
+      },
+      {
+        "id": 8204407,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Multipartite entanglement measure: genuine to absolutely maximally entangled"
+        },
+        "year": "2026",
+        "links": [
+          {
+            "identifier": "10.1007/s11128-026-05141-0",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/s11128-026-05141-0"
+          },
+          {
+            "identifier": "2410.15864",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2410.15864"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/8204407"
+      },
+      {
+        "id": 900532725,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Symmetry and Classification of Multipartite Entangled States"
+        },
+        "year": "2022",
+        "links": [
+          {
+            "identifier": "2204.13441",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2204.13441"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/900532725"
+      },
+      {
+        "id": 902320427,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Construction of perfect tensors using biunimodular vectors"
+        },
+        "year": "2023",
+        "links": [
+          {
+            "identifier": "10.22331/q-2024-11-20-1528",
+            "type": "doi",
+            "url": "https://doi.org/10.22331/q-2024-11-20-1528"
+          },
+          {
+            "identifier": "2309.01504",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2309.01504"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/902320427"
+      },
+      {
+        "id": 902611258,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Constructing Multipartite Planar Maximally Entangled States from Phase States and Quantum Secret Sharing Protocol"
+        },
+        "year": "2024",
+        "links": [
+          {
+            "identifier": "2411.15077",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2411.15077"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/902611258"
+      },
+      {
+        "id": 900553555,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Families of Perfect Tensors"
+        },
+        "year": "2022",
+        "links": [
+          {
+            "identifier": "2211.15776",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2211.15776"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/900553555"
+      },
+      {
+        "id": 8099497,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "\\(\\chi\\)-colorable graph states: closed-form expressions and quantum orthogonal arrays"
+        },
+        "year": "2025",
+        "links": [
+          {
+            "identifier": "10.1088/1751-8121/adfe45",
+            "type": "doi",
+            "url": "https://doi.org/10.1088/1751-8121/adfe45"
+          },
+          {
+            "identifier": "2408.09515",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2408.09515"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/8099497"
+      }
+    ]
+  },
+  {
+    "query": "\"perfect tensor\"",
+    "urls": [
+      "https://api.zbmath.org/v1/document/_search?search_string=%22perfect+tensor%22&page=0&results_per_page=100"
+    ],
+    "status": "ok",
+    "total": 13,
+    "records": [
+      {
+        "id": 7202528,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Bit threads and holographic monogamy"
+        },
+        "year": "2020",
+        "links": [
+          {
+            "identifier": "10.1007/s00220-019-03510-8",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/s00220-019-03510-8"
+          },
+          {
+            "identifier": "1808.05234",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/1808.05234"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7202528"
+      },
+      {
+        "id": 6883674,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Chaos in quantum channels"
+        },
+        "year": "2016",
+        "links": [
+          {
+            "identifier": "10.1007/JHEP02(2016)004",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/JHEP02(2016)004"
+          },
+          {
+            "identifier": "1511.04021",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/1511.04021"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/6883674"
+      },
+      {
+        "id": 7171891,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Tsirelson's problem and an embedding theorem for groups arising from non-local games"
+        },
+        "year": "2020",
+        "links": [
+          {
+            "identifier": "10.1090/jams/929",
+            "type": "doi",
+            "url": "https://doi.org/10.1090/jams/929"
+          },
+          {
+            "identifier": "1606.03140",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/1606.03140"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7171891"
+      },
+      {
+        "id": 7687743,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "3XOR games with perfect commuting operator strategies have perfect tensor product strategies and are decidable in polynomial time"
+        },
+        "year": "2023",
+        "links": [
+          {
+            "identifier": "10.1007/s00220-022-04615-3",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/s00220-022-04615-3"
+          },
+          {
+            "identifier": "2010.16290",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2010.16290"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7687743"
+      },
+      {
+        "id": 7147172,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Holographic entropy relations repackaged"
+        },
+        "year": "2019",
+        "links": [
+          {
+            "identifier": "10.1007/JHEP10(2019)118",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/JHEP10(2019)118"
+          },
+          {
+            "identifier": "1905.06985",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/1905.06985"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7147172"
+      },
+      {
+        "id": 3728448,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Semilocal, semiperfect and perfect tensor products"
+        },
+        "year": "1980",
+        "links": [],
+        "keywords": [],
+        "url": "https://zbmath.org/3728448"
+      },
+      {
+        "id": 7695861,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Invariant perfect tensors"
+        },
+        "year": "2017",
+        "links": [
+          {
+            "identifier": "10.1088/1367-2630/aa7235",
+            "type": "doi",
+            "url": "https://doi.org/10.1088/1367-2630/aa7235"
+          },
+          {
+            "identifier": "1612.04504",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/1612.04504"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7695861"
+      },
+      {
+        "id": 7089683,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Homotopy techniques for tensor decomposition and perfect identifiability"
+        },
+        "year": "2019",
+        "links": [
+          {
+            "identifier": "10.1515/crelle-2016-0067",
+            "type": "doi",
+            "url": "https://doi.org/10.1515/crelle-2016-0067"
+          },
+          {
+            "identifier": "1501.00090",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/1501.00090"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7089683"
+      },
+      {
+        "id": 900511173,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Thirty-six entangled officers of Euler: Quantum solution to a classically impossible problem"
+        },
+        "year": "2021",
+        "links": [
+          {
+            "identifier": "10.1103/PhysRevLett.128.080507",
+            "type": "doi",
+            "url": "https://doi.org/10.1103/PhysRevLett.128.080507"
+          },
+          {
+            "identifier": "2104.05122",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2104.05122"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/900511173"
+      },
+      {
+        "id": 902717877,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Thirty-six officers, artisanally entangled"
+        },
+        "year": "2025",
+        "links": [
+          {
+            "identifier": "2504.15401",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2504.15401"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/902717877"
+      },
+      {
+        "id": 7647603,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Perfect tensor hyperthreads"
+        },
+        "year": "2022",
+        "links": [
+          {
+            "identifier": "10.1007/JHEP09(2022)239",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/JHEP09(2022)239"
+          },
+          {
+            "identifier": "2205.01140",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2205.01140"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7647603"
+      },
+      {
+        "id": 7865683,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Entanglement islands read perfect-tensor entanglement"
+        },
+        "year": "2024",
+        "links": [
+          {
+            "identifier": "10.1007/JHEP04(2024)113",
+            "type": "doi",
+            "url": "https://doi.org/10.1007/JHEP04(2024)113"
+          },
+          {
+            "identifier": "2312.14486",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2312.14486"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7865683"
+      },
+      {
+        "id": 902320427,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Construction of perfect tensors using biunimodular vectors"
+        },
+        "year": "2023",
+        "links": [
+          {
+            "identifier": "10.22331/q-2024-11-20-1528",
+            "type": "doi",
+            "url": "https://doi.org/10.22331/q-2024-11-20-1528"
+          },
+          {
+            "identifier": "2309.01504",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2309.01504"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/902320427"
+      }
+    ]
+  },
+  {
+    "query": "\"stabilizer\" & \"marginals\"",
+    "urls": [
+      "https://api.zbmath.org/v1/document/_search?search_string=%22stabilizer%22+%26+%22marginals%22&page=0&results_per_page=100"
+    ],
+    "status": "ok",
+    "total": 2,
+    "records": [
+      {
+        "id": 902408184,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Volterra equations with affine drift: looking for stationarity"
+        },
+        "year": "2025",
+        "links": [
+          {
+            "identifier": "2401.15021",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/2401.15021"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/902408184"
+      },
+      {
+        "id": 7031219,
+        "title": {
+          "addition": null,
+          "original": null,
+          "subtitle": null,
+          "title": "Some Ulam's reconstruction problems for quantum states"
+        },
+        "year": "2018",
+        "links": [
+          {
+            "identifier": "10.1088/1751-8121/aadd1e",
+            "type": "doi",
+            "url": "https://doi.org/10.1088/1751-8121/aadd1e"
+          },
+          {
+            "identifier": "1802.00783",
+            "type": "arxiv",
+            "url": "https://arxiv.org/abs/1802.00783"
+          }
+        ],
+        "keywords": [],
+        "url": "https://zbmath.org/7031219"
+      }
+    ]
+  }
+]

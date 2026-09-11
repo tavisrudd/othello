@@ -1,0 +1,108 @@
+{
+  "seed": "V4",
+  "service": "openalex",
+  "status": "ok",
+  "count_reported": 11,
+  "count_retrieved": 12,
+  "queries": [
+    "https://api.openalex.org/works?filter=cites:W4390695070&per-page=200&cursor=*"
+  ],
+  "records": [
+    {
+      "id": "https://openalex.org/W4410360260",
+      "title": "Models of interacting bosons with exact ground states: A unified approach",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/physrevb.111.174520",
+      "abstract": "We define an infinite class of ``frustration-free'' interacting lattice quantum Hamiltonians for bosons, constructed such that their exact ground states have a density distribution specified by the Boltzmann weight of a corresponding classical lattice gas problem. By appropriately choosing the classical weights, we obtain boson representations of various known solvable models, including quantum dimer and vertex models, toric code, and certain Levin-Wen string-net models. We also systematically construct solvable models with other interesting ground states, including quantum spin liquids, supersolids, ``Bose-Einstein insulators,'' Bose liquids with ``Bose surfaces,'' and Bose-Einstein condensates that permit adiabatic evolution from a noninteracting limit to a Gutzwiller-projected limit.",
+      "url": "https://doi.org/10.1103/physrevb.111.174520"
+    },
+    {
+      "id": "https://openalex.org/W4410028961",
+      "title": "Edge coloring lattice graphs",
+      "year": 2025,
+      "doi": "https://doi.org/10.1063/5.0243007",
+      "abstract": "We develop the theory of the edge coloring of lattice graphs. A central role is played by a necessary and sufficient condition for a proper edge coloring of a patch of a lattice graph to induce a proper edge coloring of the entire lattice graph by translation. Using this condition, we introduce a method that finds nearly minimal or minimal edge colorings of lattice graphs. For a nearly minimal edge coloring, the running time is O(\u03bc2D4), where \u03bc is the number of edges in one cell (or \u201cbasis graph\u201d) of the lattice graph and D is the maximum distance between two cells connected by an edge. Crucially, this complexity depends only on local properties of the lattice graph, making it independent of the total graph size. As a result, the method applies even to infinite lattice graphs with finite maximum degree. For minimal edge coloring, we lack a rigorous upper bound on the running time, which we find poses no limitation in practice; we use the method to minimally edge color the meshes of all k-uniform tilings of the plane for k \u2264 6 with modest computational resources. We find that all these lattice graphs belong to Vizing class I. By relating edge colorings to quantum circuits, our work has direct applications in quantum computation, including quantum simulation of condensed matter, cluster-state preparation, error characterization, and error correction.",
+      "url": "https://doi.org/10.1063/5.0243007"
+    },
+    {
+      "id": "https://openalex.org/W4410993258",
+      "title": "Experimental verification of entangled states in the adversarial scenario",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/physrevapplied.23.064005",
+      "abstract": "Efficient verification of entangled states is crucial to many applications in quantum information processing. However, the effectiveness of standard quantum state verification (QSV) is based on the condition of independent and identical distribution (IID), which impedes its applications in many practical scenarios. Here we demonstrate a defensive QSV protocol, which is effective in all kinds of non-IID scenarios, including the extremely challenging adversarial scenario. To this end, we build a high-speed preparation-and-measurement apparatus controlled by quantum random-number generators. Our experiments clearly show that standard QSV protocols often provide unreliable fidelity certificates in non-IID scenarios. In sharp contrast, the defensive QSV protocol based on a homogeneous strategy can provide reliable and nearly tight fidelity certificates at comparable high efficiency, even under malicious attacks. Moreover, our scheme is tolerant of the imperfections in a realistic experiment, which is very appealing to practical applications.",
+      "url": "https://doi.org/10.1103/physrevapplied.23.064005"
+    },
+    {
+      "id": "https://openalex.org/W4413365396",
+      "title": "A new general quantum state verification protocol by the classical shadow method",
+      "year": 2025,
+      "doi": "https://doi.org/10.1007/s11128-025-04889-1",
+      "abstract": "",
+      "url": "https://doi.org/10.1007/s11128-025-04889-1"
+    },
+    {
+      "id": "https://openalex.org/W4417034318",
+      "title": "Quantum Subspace Verification for Error Correction Codes",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/fyw6-lq1l",
+      "abstract": "Quantum error correction is pivotal in advancing toward large-scale quantum computation, and efficient verification is crucial for ensuring the high fidelity of code states. Traditional methodologies, such as state tomography, direct fidelity estimation, and state verification, either fall short in measurement efficiency, especially for large-scale systems, or are restricted to some specific states. In this work, we introduce a general framework for quantum subspace verification, enabling efficient and measurement-noise-robust fidelity estimation between a given state and the target subspace with a specified confidence level. By integrating the proposed subspace verification with direct fidelity estimation, we develop a composite protocol that significantly improves the efficiency of verifying the fidelity of general magic logical states, as demonstrated by intuitive numerical results. This improvement stems from the use of subspace verification, which leverages the knowledge of code subspaces to significantly reduce measurement costs. Additionally, we detail the construction of verification operators for typical error correction codes, including general stabilizer codes and quantum low-density parity-check codes, enabling their efficient implementation using practical local measurements. Notably, for certain codes, such as the Calderbank-Shor-Steane codes and quantum low-density parity-check stabilizer codes, we reduce the number of required measurement settings and sample complexity to a constant level using graphical methods. Our approach facilitates efficient and feasible verification of error correction codes and generic magic logical states, advancing their practical implementations on quantum platforms.",
+      "url": "https://doi.org/10.1103/fyw6-lq1l"
+    },
+    {
+      "id": "https://openalex.org/W4401172912",
+      "title": "Relative-belief inference in quantum information theory",
+      "year": 2024,
+      "doi": "https://doi.org/10.1103/physreva.110.012231",
+      "abstract": "We introduce the framework of Bayesian relative belief that directly evaluates whether or not the experimental data at hand support a given hypothesis regarding a quantum system by directly comparing the prior and posterior probabilities for the hypothesis. In model-dimension certification tasks, we show that the relative-belief procedure typically chooses Hilbert spaces that are never smaller in dimension than those selected from optimizing a broad class of information criteria, including Akaike's criterion. As a concrete and focused exposition of this powerful evidence-based technique, we apply the relative-belief procedure to an important application: . In particular, just by comparing prior and posterior probabilities based on data, we demonstrate its capability of tracking multiphoton emissions using (realistically lossy) single-photon detectors in order to assess the actual quality of photon sources without making assumptions, thereby reliably safeguarding source integrity for general quantum-information and communication tasks with Bayesian reasoning. Finally, we discuss how relative belief can be exploited to carry out parametric model certification and estimate the total dimension of the quantum state for the combined (measured) physical and interacting external systems described by the Tavis-Cummings model. Published by the American Physical Society 2024",
+      "url": "http://dx.doi.org/10.1103/physreva.110.012231"
+    },
+    {
+      "id": "https://openalex.org/W4414345792",
+      "title": "Bounding the sample fluctuation for pure-state certification with local random measurement",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/8zth-7n97",
+      "abstract": "",
+      "url": "https://doi.org/10.1103/8zth-7n97"
+    },
+    {
+      "id": "https://openalex.org/W4414945017",
+      "title": "Prescriptive preparation and verification of nonstabilizer states",
+      "year": 2026,
+      "doi": "https://doi.org/10.1103/4hxp-fswy",
+      "abstract": "High-fidelity quantum state preparation is a central task in quantum information science. In practice, it is commonly guided either by full quantum state tomography, which becomes prohibitively resource-intensive as system size grows, or by empirically chosen measurement settings that lack principled optimality. Here we show that quantum state verification (QSV) can be elevated from a purely diagnostic tool to a prescriptive framework for quantum state preparation, directly specifying experimentally optimal measurements and quantitative fidelity indicators without full state reconstruction. We experimentally realize this prescriptive paradigm using a three-qubit nonstabilizer $W$ state and a modified homogeneous QSV protocol. The verification measurements not only certify the prepared state with high confidence but also serve as a tomography-free indicator that systematically informs the preparation procedure. Using only nine measurement settings and $10^4$ samples, we achieve high-fidelity state preparation consistent with full tomography that requires orders of magnitude more resources. Beyond the present implementation, the prescriptive structure of QSV is naturally compatible with closed-loop feedback control, outlining a pathway toward genuine real-time quantum state preparation in future low-latency platforms.",
+      "url": "https://doi.org/10.1103/4hxp-fswy"
+    },
+    {
+      "id": "https://openalex.org/W4417016823",
+      "title": "Beating the optimal verification of entangled states via collective strategies",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/6yrh-9tzp",
+      "abstract": "This work presents a collective strategy for verifying entangled quantum states that can reach efficiencies beyond those obtainable with the standard global-measurement approach, while preserving unused copies. The protocol is scalable across various platforms and is able to provide information about noise in the system.",
+      "url": "https://doi.org/10.1103/6yrh-9tzp"
+    },
+    {
+      "id": "https://openalex.org/W7133510158",
+      "title": "Universal and Efficient Quantum State Verification via Schmidt Decomposition and Mutually Unbiased Bases",
+      "year": 2026,
+      "doi": "https://doi.org/10.22331/q-2026-03-04-2011",
+      "abstract": "Efficient verification of multipartite quantum states is crucial to many applications in quantum information processing. By virtue of Schmidt decomposition and mutually unbiased bases, here we propose a universal protocol to verify arbitrary multipartite pure quantum states using adaptive local projective measurements. Moreover, we establish a universal upper bound on the sample complexity that is independent of the local dimensions. Numerical calculations further indicate that Haar-random pure states can be verified with a constant sample cost, irrespective of the qudit number and local dimensions, even in the adversarial scenario in which the source cannot be trusted. As alternatives, we provide several simpler variants that can achieve similar high efficiencies without using Schmidt decomposition. The simplest variant consists of only two distinct tests.",
+      "url": "https://doi.org/10.22331/q-2026-03-04-2011"
+    },
+    {
+      "id": "https://openalex.org/W7153232611",
+      "title": "Robust Verification of Quantum States in the Adversarial Scenario",
+      "year": 2026,
+      "doi": "https://doi.org/10.1007/978-3-032-11153-1_16",
+      "abstract": "",
+      "url": "https://doi.org/10.1007/978-3-032-11153-1_16"
+    },
+    {
+      "id": "https://openalex.org/W7163156477",
+      "title": "Prescriptive preparation and verification of nonstabilizer states",
+      "year": 2026,
+      "doi": "https://doi.org/10.1103/4hxp-fswy",
+      "abstract": "",
+      "url": "https://doi.org/10.1103/4hxp-fswy"
+    }
+  ]
+}

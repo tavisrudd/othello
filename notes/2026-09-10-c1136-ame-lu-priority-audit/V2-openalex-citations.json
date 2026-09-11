@@ -1,0 +1,1108 @@
+{
+  "seed": "V2",
+  "service": "openalex",
+  "status": "ok",
+  "count_reported": 133,
+  "count_retrieved": 137,
+  "queries": [
+    "https://api.openalex.org/works?filter=cites:W2754616276&per-page=200&cursor=*"
+  ],
+  "records": [
+    {
+      "id": "https://openalex.org/W2905534667",
+      "title": "Entanglement certification from theory to experiment",
+      "year": 2018,
+      "doi": "https://doi.org/10.1038/s42254-018-0003-5",
+      "abstract": "",
+      "url": "https://doi.org/10.1038/s42254-018-0003-5"
+    },
+    {
+      "id": "https://openalex.org/W3036000280",
+      "title": "Quantum certification and benchmarking",
+      "year": 2020,
+      "doi": "https://doi.org/10.1038/s42254-020-0186-4",
+      "abstract": "",
+      "url": "https://doi.org/10.1038/s42254-020-0186-4"
+    },
+    {
+      "id": "https://openalex.org/W3101644211",
+      "title": "Quantum certification and benchmarking",
+      "year": 2020,
+      "doi": "https://doi.org/10.17169/refubium-30074",
+      "abstract": "With the rapid development of quantum technologies, a pressing need has emerged for a wide array of tools for the certification and characterization of quantum devices. Such tools are critical because the powerful applications of quantum information science will only be realized if stringent levels of precision of components can be reached and their functioning guaranteed. This Technical Review provides a brief overview of the known characterization methods for certification, benchmarking and tomographic reconstruction of quantum states and processes, and outlines their applications in quantum computing, simulation and communication.",
+      "url": "https://www.helmholtz-berlin.de/pubbin/oai_publication?VT=1ID=103188"
+    },
+    {
+      "id": "https://openalex.org/W4384935381",
+      "title": "Computational advantage of quantum random sampling",
+      "year": 2023,
+      "doi": "https://doi.org/10.1103/revmodphys.95.035001",
+      "abstract": "Quantum computers have improved and recent experiments have claimed quantum advantage -- completion of a computational task that is evidently hard for any conventional computer. The problem solved is that of obtaining samples, by quantum measurement, from a certain probability distribution. This review shows in what precise way quantum random sampling can be seen as a computation. It explains what that computation solves, in what way it outperforms classical computations, and what methods of verification are available. Quantum random sampling becomes a first test of the presumed exponential computational advantage of quantum computers over classical ones.",
+      "url": "https://doi.org/10.1103/revmodphys.95.035001"
+    },
+    {
+      "id": "https://openalex.org/W3092693562",
+      "title": "Theory of Quantum System Certification",
+      "year": 2021,
+      "doi": "https://doi.org/10.1103/prxquantum.2.010201",
+      "abstract": "The precise control of complex quantum systems promises numerous technological applications including digital quantum computing.The complexity of such devices renders the certification of their correct functioning a challenge.To address this challenge, numerous methods were developed in the last decade.In this tutorial, we explain prominent protocols for certifying the physical layer of quantum devices described by quantum states and processes.Such protocols are particularly important in the development of near-term devices.Specifically, we discuss methods of direct quantum-state certification, direct-fidelity estimation, shadow-fidelity estimation, direct quantum-process certification, randomized benchmarking, and cross-entropy benchmarking.Moreover, we provide an introduction to powerful mathematical methods, which are widely used in quantum-information theory, in order to derive theoretical guarantees for the protocols.",
+      "url": "https://doi.org/10.1103/prxquantum.2.010201"
+    },
+    {
+      "id": "https://openalex.org/W3129077658",
+      "title": "Theory of Quantum System Certification",
+      "year": 2021,
+      "doi": "https://doi.org/10.17169/refubium-32392",
+      "abstract": "The precise control of complex quantum systems promises numerous technological applications including digital quantum computing. The complexity of such devices renders the certification of their correct functioning a challenge. To address this challenge, numerous methods were developed in the last decade. In this tutorial, we explain prominent protocols for certifying the physical layer of quantum devices described by quantum states and processes. Such protocols are particularly important in the development of near-term devices. Specifically, we discuss methods of direct quantum-state certification, direct-fidelity estimation, shadow-fidelity estimation, direct quantum-process certification, randomized benchmarking, and cross-entropy benchmarking. Moreover, we provide an introduction to powerful mathematical methods, which are widely used in quantum-information theory, in order to derive theoretical guarantees for the protocols.",
+      "url": "https://refubium.fu-berlin.de/handle/fub188/32667"
+    },
+    {
+      "id": "https://openalex.org/W3020341346",
+      "title": "Single-Copies Estimation of Entanglement Negativity",
+      "year": 2020,
+      "doi": "https://doi.org/10.1103/physrevlett.125.200502",
+      "abstract": "Entanglement plays a central role in quantum information processing and quantum physics. However, few effective ways are known to detect the amount of entanglement of an unknown quantum state. Here, we propose a scheme to estimate the entanglement negativity for any bipartition of a composite system. The proposed scheme is based on the random unitary evolution and local measurements on a single-copy quantum state, which is more practical compared to former methods based on collective measurements on many copies of the identical state. Meanwhile, we generalize the scheme to quantify the total correlation. We demonstrate the efficiency of the scheme with statistical analyses and numerical simulations. Our scheme is quite suitable for state-of-the-art quantum platforms, which can serve as a useful benchmarking tool to advance quantum technologies and a probe to study fundamental quantum physics like entanglement dynamics.",
+      "url": "https://doi.org/10.1103/physrevlett.125.200502"
+    },
+    {
+      "id": "https://openalex.org/W2998659444",
+      "title": "Efficient Verification of Pure Quantum States in the Adversarial Scenario",
+      "year": 2019,
+      "doi": "https://doi.org/10.1103/physrevlett.123.260504",
+      "abstract": "Efficient verification of pure quantum states in the adversarial scenario is crucial to many applications in quantum information processing, such as blind measurement-based quantum computation and quantum networks. However, little is known about this topic so far. Here, we establish a general framework for verifying pure quantum states in the adversarial scenario and clarify the resource cost. Moreover, we propose a simple and general recipe to constructing efficient verification protocols for the adversarial scenario from protocols for the nonadversarial scenario. With this recipe, arbitrary pure states can be verified in the adversarial scenario with almost the same efficiency as in the nonadversarial scenario. Many important quantum states can be verified in the adversarial scenario using local projective measurements with unprecedented high efficiencies.",
+      "url": "https://doi.org/10.1103/physrevlett.123.260504"
+    },
+    {
+      "id": "https://openalex.org/W2943955321",
+      "title": "Vulnerability of quantum classification to adversarial perturbations",
+      "year": 2020,
+      "doi": "https://doi.org/10.1103/physreva.101.062331",
+      "abstract": "It is expected that the quantum advantage of certain classification problems, like quantum-enhanced machine learning algorithms, will become more pronounced as the Hilbert-space dimension grows, but care must be taken with perturbations on the system, as they lead to security breaches that can be explored by untrusted parties. Here it is shown that the amount of perturbation needed for an adversary to induce a misclassification scales inversely with the dimensionality of the space, but security can be restored if we restrict the class of states to be classified.",
+      "url": "https://doi.org/10.1103/physreva.101.062331"
+    },
+    {
+      "id": "https://openalex.org/W2808014964",
+      "title": "Efficient Verification of Hypergraph States",
+      "year": 2019,
+      "doi": "https://doi.org/10.1103/physrevapplied.12.054047",
+      "abstract": "Graph and hypergraph states are of wide interest in quantum information processing as well as fundamental physics, and efficient verification of these states is key to various applications. The authors propose a simple recipe for verifying hypergraph states that requires only two distinct Pauli measurements for each party, and is dramatically more efficient than conventional protocols based on local measurements. This approach enables verification of hypergraph states and genuine multipartite entanglement of thousands of qubits, even in an adversarial scenario.",
+      "url": "https://doi.org/10.1103/physrevapplied.12.054047"
+    },
+    {
+      "id": "https://openalex.org/W4321614083",
+      "title": "Nonstabilizerness determining the hardness of direct fidelity estimation",
+      "year": 2023,
+      "doi": "https://doi.org/10.1103/physreva.107.022429",
+      "abstract": "In this work, we show how the resource theory of nonstabilizerness quantifies the hardness of direct fidelity estimation protocols. In particular, the resources needed for a direct fidelity estimation conducted on generic states, such as Pauli fidelity estimation and shadow fidelity estimation protocols, grow exponentially with the stabilizer R\\'enyi entropy. Remarkably, these protocols are shown to be feasible only for those states that are useless to attain any quantum speedup or advantage. This result suggests the impossibility of estimating efficiently fidelity for generic states and, at the same time, leaves the window open to those protocols specialized at directly estimating the fidelity of particular states. We then extend our results to quantum evolutions, showing that the resources needed to certify the quality of the implementation of a given unitary $U$ are governed by the nonstabilizerness in the Choi state associated with $U$, which is shown to possess a profound connection with out-of-time order correlators.",
+      "url": "https://doi.org/10.1103/physreva.107.022429"
+    },
+    {
+      "id": "https://openalex.org/W3199970312",
+      "title": "Statistical Methods for Quantum State Verification and Fidelity Estimation",
+      "year": 2022,
+      "doi": "https://doi.org/10.1002/qute.202100126",
+      "abstract": "Abstract The efficient and reliable certification of quantum states is essential for various quantum information processing tasks as well as for the general progress on the implementation of quantum technologies. In the last few years several methods have been introduced which use advanced statistical methods to certify quantum states in a resource\u2010efficient manner. In this article, a review of the recent progress in this field is presented. How the verification and fidelity estimation of a quantum state can be discussed in the language of hypothesis testing is explained first. Then, various strategies for the verification of entangled states with local measurements or measurements assisted by local operations and classical communication are explained in detail. Finally, several extensions of the problem, such as the certification of quantum channels and the verification of entanglement are discussed.",
+      "url": "https://doi.org/10.1002/qute.202100126"
+    },
+    {
+      "id": "https://openalex.org/W2947696392",
+      "title": "Experimental Optimal Verification of Entangled States Using Local Measurements",
+      "year": 2020,
+      "doi": "https://doi.org/10.1103/physrevlett.125.030506",
+      "abstract": "The initialization of a quantum system into a certain state is a crucial aspect of quantum information science. While a variety of measurement strategies have been developed to characterize how well the system is initialized, for a given one, there is in general a trade-off between its efficiency and the accessible information of the quantum state. Conventional quantum state tomography can characterize unknown states while requiring exponentially expensive time-consuming postprocessing. Alternatively, recent theoretical breakthroughs show that quantum state verification provides a technique to quantify the prepared state with significantly fewer samples, especially for multipartite entangled states. In this Letter, we modify the original proposal to be robust to practical imperfections, and experimentally implement a scalable quantum state verification on two-qubit and four-qubit entangled states with nonadaptive local measurements. For all the tested states, the estimated infidelity is inversely proportional to the number of samples, which illustrates the power to characterize a quantum state with a small number of samples. Compared to the globally optimal strategy which requires nonlocal measurements, the efficiency in our experiment is only worse by a small constant factor (<2.5). We compare the performance difference between quantum state verification and quantum state tomography in an experiment to characterize a four-photon Greenberger-Horne-Zeilinger state, and the results indicate the advantage of quantum state verification in both the achieved efficiency and precision.",
+      "url": "https://doi.org/10.1103/physrevlett.125.030506"
+    },
+    {
+      "id": "https://openalex.org/W4407360708",
+      "title": "Entanglement Routing in Quantum Networks: A Comprehensive Survey",
+      "year": 2025,
+      "doi": "https://doi.org/10.1109/tqe.2025.3541123",
+      "abstract": "Entanglement routing in near-term quantum networks consists of choosing the optimal sequence of short-range entanglements to combine through swapping operations to establish end-to-end entanglement between two distant nodes. Similar to traditional routing technologies, a quantum routing protocol uses network information to choose the best paths to satisfy a set of end-to-end entanglement requests. However, in addition to network state information, a quantum routing protocol must also take into account the requested entanglement fidelity, the probabilistic nature of swapping operations, and the short lifetime of entangled states. In this work, we formulate a practical entanglement routing problem and analyze and categorize the main approaches to address it, drawing comparisons to, and inspiration from, classical network routing strategies where applicable. We classify and discuss the studied quantum routing schemes into reactive, proactive, and hybrid routing.",
+      "url": "https://doi.org/10.1109/tqe.2025.3541123"
+    },
+    {
+      "id": "https://openalex.org/W3126796861",
+      "title": "Direct Fidelity Estimation of Quantum States Using Machine Learning",
+      "year": 2021,
+      "doi": "https://doi.org/10.1103/physrevlett.127.130503",
+      "abstract": "In almost all quantum applications, one of the key steps is to verify that the fidelity of the prepared quantum state meets expectations. In this Letter, we propose a new approach solving this problem using machine-learning techniques. Compared to other fidelity estimation methods, our method is applicable to arbitrary quantum states, the number of required measurement settings is small, and this number does not increase with the size of the system. For example, for a general five-qubit quantum state, only four measurement settings are required to predict its fidelity with \u00b11% precision in a nonadversarial scenario. This machine-learning-based approach for estimating quantum state fidelity has the potential to be widely used in the field of quantum information.",
+      "url": "https://doi.org/10.1103/physrevlett.127.130503"
+    },
+    {
+      "id": "https://openalex.org/W3042832883",
+      "title": "Optimal verification of stabilizer states",
+      "year": 2020,
+      "doi": "https://doi.org/10.1103/physrevresearch.2.043323",
+      "abstract": "Statistical verification of a quantum state aims to certify whether a given unknown state is close to the target state with confidence. So far, sample-optimal verification protocols based on local measurements have been found only for disparate groups of states: bipartite pure states, GHZ states, and antisymmetric basis states. In this work, we investigate systematically optimal verification of entangled stabilizer states using Pauli measurements. First, we provide a lower bound on the sample complexity of any verification protocol based on separable measurements, which is independent of the number of qubits and the specific stabilizer state. Then we propose a simple algorithm for constructing optimal protocols based on Pauli measurements. Our calculations suggest that optimal protocols based on Pauli measurements can saturate the above bound for all entangled stabilizer states, and this claim is verified explicitly for states up to seven qubits. Similar results are derived when each party can choose only two measurement settings, say X and Z. Furthermore, by virtue of the chromatic number, we provide an upper bound for the minimum number of settings required to verify any graph state, which is expected to be tight. For experimentalists, optimal protocols and protocols with the minimum number of settings are explicitly provided for all equivalent classes of stabilizer states up to seven qubits. For theorists, general results on stabilizer states (including graph states in particular) and related structures derived here may be of independent interest beyond quantum state verification.",
+      "url": "https://doi.org/10.1103/physrevresearch.2.043323"
+    },
+    {
+      "id": "https://openalex.org/W4402919549",
+      "title": "Analysing quantum systems with randomised measurements",
+      "year": 2024,
+      "doi": "https://doi.org/10.1016/j.physrep.2024.09.009",
+      "abstract": "",
+      "url": "https://doi.org/10.1016/j.physrep.2024.09.009"
+    },
+    {
+      "id": "https://openalex.org/W4388655839",
+      "title": "Robust and efficient verification of graph states in blind measurement-based quantum computation",
+      "year": 2023,
+      "doi": "https://doi.org/10.1038/s41534-023-00783-9",
+      "abstract": "Abstract Blind quantum computation (BQC) is a secure quantum computation method that protects the privacy of clients. Measurement-based quantum computation (MBQC) is a promising approach for realizing BQC. To obtain reliable results in blind MBQC, it is crucial to verify whether the resource graph states are accurately prepared in the adversarial scenario. However, previous verification protocols for this task are too resource-consuming or noise-susceptible to be applied in practice. Here, we propose a robust and efficient protocol for verifying arbitrary graph states with any prime local dimension in the adversarial scenario, which leads to a robust and efficient protocol for verifying the resource state in blind MBQC. Our protocol requires only local Pauli measurements and is thus easy to realize with current technologies. Nevertheless, it can achieve optimal scaling behaviors with respect to the system size and the target precision as quantified by the infidelity and significance level, which has never been achieved before. Notably, our protocol can exponentially enhance the scaling behavior with the significance level.",
+      "url": "https://doi.org/10.1038/s41534-023-00783-9"
+    },
+    {
+      "id": "https://openalex.org/W4402960653",
+      "title": "Information processing at the speed of light",
+      "year": 2024,
+      "doi": "https://doi.org/10.1007/s12200-024-00133-3",
+      "abstract": "In recent years, quantum computing has made significant strides, particularly in light-based technology. The introduction of quantum photonic chips has ushered in an era marked by scalability, stability, and cost-effectiveness, paving the way for innovative possibilities within compact footprints. This article provides a comprehensive exploration of photonic quantum computing, covering key aspects such as encoding information in photons, the merits of photonic qubits, and essential photonic device components including light squeezers, quantum light sources, interferometers, photodetectors, and waveguides. The article also examines photonic quantum communication and internet, and its implications for secure systems, detailing implementations such as quantum key distribution and long-distance communication. Emerging trends in quantum communication and essential reconfigurable elements for advancing photonic quantum internet are discussed. The review further navigates the path towards establishing scalable and fault-tolerant photonic quantum computers, highlighting quantum computational advantages achieved using photons. Additionally, the discussion extends to programmable photonic circuits, integrated photonics and transformative applications. Lastly, the review addresses prospects, implications, and challenges in photonic quantum computing, offering valuable insights into current advancements and promising future directions in this technology.",
+      "url": "https://doi.org/10.1007/s12200-024-00133-3"
+    },
+    {
+      "id": "https://openalex.org/W2972024152",
+      "title": "General framework for verifying pure quantum states in the adversarial scenario",
+      "year": 2019,
+      "doi": "https://doi.org/10.1103/physreva.100.062335",
+      "abstract": "Bipartite and multipartite entangled states are of central interest in quantum information processing and foundational studies. Efficient verification of these states, especially in the adversarial scenario, is a key to various applications, including quantum computation, quantum simulation, and quantum networks. However, little is known about this topic in the adversarial scenario. Here we initiate a systematic study of pure-state verification in the adversarial scenario. In particular, we introduce a general method for determining the minimal number of tests required by a given strategy to achieve a given precision. In the case of homogeneous strategies, we can even derive an analytical formula. Furthermore, we propose a general recipe to verifying pure quantum states in the adversarial scenario by virtue of protocols for the nonadversarial scenario. Thanks to this recipe, the resource cost for verifying an arbitrary pure state in the adversarial scenario is comparable to the counterpart for the nonadversarial scenario, and the overhead is at most three times for high-precision verification. Our recipe can readily be applied to efficiently verify bipartite pure states, stabilizer states, hypergraph states, weighted graph states, and Dicke states in the adversarial scenario, even if only local projective measurements are accessible. This paper is an extended version of the companion paper Zhu and Hayashi, Phys. Rev. Lett. 123, 260504 (2019).",
+      "url": "https://doi.org/10.1103/physreva.100.062335"
+    },
+    {
+      "id": "https://openalex.org/W3104448454",
+      "title": "Efficient Verification of Hypergraph States",
+      "year": 2019,
+      "doi": null,
+      "abstract": "Graph states and hypergraph states are of wide interest in quantum information processing and foundational studies. Efficient verification of these states is a key to various applications. Here we propose a simple method for verifying hypergraph states, which requires only two distinct Pauli measurements for each party, yet its efficiency is comparable to the best strategy based on entangling measurements. For a given state, the overhead is bounded by the chromatic number and degree of the underlying hypergraph. Our protocol is dramatically more efficient than all previous protocols based on local measurements, including tomography and direct-fidelity estimation. It enables the verification of hypergraph states and genuine multipartite entanglement of thousands of qubits. The protocol can also be generalized to the adversarial scenario, while achieving almost the same efficiency. This merit is particularly appealing to demonstrating blind measurement-based quantum computation and quantum supremacy.",
+      "url": "https://kups.ub.uni-koeln.de/12737/"
+    },
+    {
+      "id": "https://openalex.org/W2911612599",
+      "title": "Optimal verification of two-qubit pure states",
+      "year": 2019,
+      "doi": "https://doi.org/10.1103/physreva.100.032315",
+      "abstract": "In a recent work [Pallister, Linden, and Montanaro, Phys. Rev. Lett. 120, 170502 (2018)], Pallister et al. proposed an optimal strategy to verify nonmaximally entangled two-qubit pure states under the constraint that the accessible measurements are locally projective and nonadaptive. Their good result leads naturally to the following question: What is the optimal strategy among general local operations and classical communication (LOCC) measurements? In this paper, we answer this problem completely for two-qubit pure states. To be specific, we give the optimal strategy for each of the following available classes of measurements: (i) local operations and one-way classical communication (one-way LOCC) measurements; (ii) local operations and two-way classical communication (two-way LOCC) measurements; and (iii) separable measurements. Surprisingly, our results reveal that for the two-qubit pure state verification problem two-way LOCC measurements remarkably outperform one-way LOCC measurements and have the same power as the separable measurements.",
+      "url": "https://doi.org/10.1103/physreva.100.032315"
+    },
+    {
+      "id": "https://openalex.org/W2912153369",
+      "title": "Optimal verification and fidelity estimation of maximally entangled states",
+      "year": 2019,
+      "doi": "https://doi.org/10.1103/physreva.99.052346",
+      "abstract": "We study the verification of maximally entangled states by virtue of the simplest measurement settings: local projective measurements without adaption. We show that optimal protocols are in one-to-one correspondence with complex projective 2-designs constructed from orthonormal bases. Optimal protocols with minimal measurement settings are in one-to-one correspondence with complete sets of mutually unbiased bases. Based on this observation, optimal protocols are constructed explicitly for any local dimension, which can also be applied to estimating the fidelity with the target state and to detecting entanglement. In addition, we show that incomplete sets of mutually unbiased bases are optimal for verifying maximally entangled states when the number of measurement settings is restricted. Moreover, we construct optimal protocols for the adversarial scenario in which state preparation is not trusted. The number of tests has the same scaling behavior as the counterpart for the nonadversarial scenario; the overhead is no more than three times. We also show that the entanglement of the maximally entangled state can be certified with any given significance level using only one test as long as the local dimension is large enough.",
+      "url": "https://doi.org/10.1103/physreva.99.052346"
+    },
+    {
+      "id": "https://openalex.org/W2911686166",
+      "title": "Efficient verification of bipartite pure states",
+      "year": 2019,
+      "doi": "https://doi.org/10.1103/physreva.100.032316",
+      "abstract": "We propose practical and efficient protocols for verifying bipartite pure states for any finite dimension, which can also be applied to fidelity estimation. Our protocols are based on adaptive local projective measurements with either one-way or two-way communications, which are very easy to implement in practice. They can extract the key information much more efficiently than known protocols based on tomography or direct fidelity estimation, and their efficiencies are comparable to the best protocols based on entangling measurements. These protocols highlight the significance of mutually unbiased bases and complex projective 2-designs in quantum state verification and fidelity estimation. Moreover, our protocols can be applied to the adversarial scenario, in which states are controlled by a malicious adversary. In this case, surprisingly, one of our protocols based on local measurements is even optimal among protocols without locality restriction.",
+      "url": "https://doi.org/10.1103/physreva.100.032316"
+    },
+    {
+      "id": "https://openalex.org/W2914211769",
+      "title": "Optimal verification of general bipartite pure states",
+      "year": 2019,
+      "doi": "https://doi.org/10.1038/s41534-019-0226-z",
+      "abstract": "Abstract The efficient and reliable verification of quantum states plays a crucial role in various quantum information processing tasks. We consider the task of verifying entangled states using one-way and two-way classical communication and completely characterize the optimal strategies via convex optimization. We solve these optimization problems using both analytical and numerical methods, and the optimal strategies can be constructed for any bipartite pure state. Compared with the nonadaptive approach, our adaptive strategies significantly improve the efficiency of quantum state verification. Moreover, these strategies are experimentally feasible, as only few local projective measurements are required.",
+      "url": "https://doi.org/10.1038/s41534-019-0226-z"
+    },
+    {
+      "id": "https://openalex.org/W2932301905",
+      "title": "Efficient Verification of Dicke States",
+      "year": 2019,
+      "doi": "https://doi.org/10.1103/physrevapplied.12.044020",
+      "abstract": "Efficient, reliable characterization of quantum states is a basic and important step in most tasks in quantum information processing, but standard approaches, including quantum tomography, are notoriously inefficient. This research offers solutions to the problem of verifying nonstabilizer states by proposing efficient, practical protocols for verifying arbitrary $n$-qubit Dicke states. These protocols require only two distinct settings based on Pauli measurements, and thus are readily applicable with current experimental techniques, and are able to verify the robust Dicke states of hundreds of qubits.",
+      "url": "https://doi.org/10.1103/physrevapplied.12.044020"
+    },
+    {
+      "id": "https://openalex.org/W2889946722",
+      "title": "Experimental few-copy multipartite entanglement detection",
+      "year": 2019,
+      "doi": "https://doi.org/10.1038/s41567-019-0550-4",
+      "abstract": "",
+      "url": "https://doi.org/10.1038/s41567-019-0550-4"
+    },
+    {
+      "id": "https://openalex.org/W2974072088",
+      "title": "Optimal Verification of Greenberger-Horne-Zeilinger States",
+      "year": 2020,
+      "doi": "https://doi.org/10.1103/physrevapplied.13.054002",
+      "abstract": "We construct optimal protocols for verifying qubit and qudit Greenberger-Horne-Zeilinger (GHZ) states using local projective measurements. When the local dimension is a prime, an optimal protocol is constructed from Pauli measurements only. Our protocols provide a highly efficient way to estimate the fidelity and to certify genuine multipartite entanglement. In particular, they enable the certification of genuine multipartite entanglement using only one test when the local dimension is sufficiently large. By virtue of adaptive local projective measurements, we then construct protocols for verifying GHZ-like states that are optimal over all protocols based on one-way communication. The efficiency can be improved further if additional communications are allowed. Finally, we construct optimal protocols for verifying GHZ states and nearly optimal protocols for GHZ-like states in the adversarial scenario.",
+      "url": "https://doi.org/10.1103/physrevapplied.13.054002"
+    },
+    {
+      "id": "https://openalex.org/W3048692662",
+      "title": "Estimating Quantum Entropy",
+      "year": 2020,
+      "doi": "https://doi.org/10.1109/jsait.2020.3015235",
+      "abstract": "The entropy of a quantum system is a measure of its randomness, and has applications in measuring quantum entanglement. We study the problem of estimating the von Neumann entropy, S(\u03c1), and R\u00e9nyi entropy, S\u03b1(\u03c1) of an unknown mixed quantum state \u03c1 in d dimensions, given access to independent copies of \u03c1. We provide algorithms with copy complexity O(d2/\u03b1) for estimating S\u03b1(\u03c1) for \u03b12) for estimating S(\u03c1), and S\u03b1(\u03c1) for non-integral \u03b1 > 1. These bounds are at least quadratic in d, which is the order dependence on the number of copies required for estimating the entire state \u03c1. For integral \u03b1 > 1, on the other hand, we provide an algorithm for estimating S\u03b1(\u03c1) with a sub-quadratic copy complexity of O(d2-2/\u03b1), and we show the optimality of the algorithms by providing a matching lower bound.",
+      "url": "https://doi.org/10.1109/jsait.2020.3015235"
+    },
+    {
+      "id": "https://openalex.org/W3003406237",
+      "title": "Towards the standardization of quantum state verification using optimal strategies",
+      "year": 2020,
+      "doi": "https://doi.org/10.1038/s41534-020-00317-7",
+      "abstract": "Abstract Quantum devices for generating entangled states have been extensively studied and widely used. As so, it becomes necessary to verify that these devices truly work reliably and efficiently as they are specified. Here we experimentally realize the recently proposed two-qubit entangled state verification strategies using both local measurements (nonadaptive) and active feed-forward operations (adaptive) with a photonic platform. About 3283/536 number of copies (N) are required to achieve a 99% confidence to verify the target quantum state for nonadaptive/adaptive strategies. These optimal strategies provide the Heisenberg scaling of the infidelity $${\\it{\\epsilon }}$$ \u03f5 as a function of N ( $${\\it{\\epsilon }}\\sim N^{r}$$ \u03f5 ~ N r ) with the parameter r = \u22121, exceeding the standard quantum limit with r = \u22120.5. We experimentally obtain the scaling parameters of r = \u22120.88 \u00b1 0.03 and \u22120.78 \u00b1 0.07 for nonadaptive and adaptive strategies, respectively. Our experimental work could serve as a standardized procedure for the verification of quantum states.",
+      "url": "https://doi.org/10.1038/s41534-020-00317-7"
+    },
+    {
+      "id": "https://openalex.org/W3128958221",
+      "title": "Verification of phased Dicke states",
+      "year": 2021,
+      "doi": "https://doi.org/10.1103/physreva.103.022601",
+      "abstract": "Dicke states are typical examples of quantum states with genuine multipartite entanglement. They are valuable resources in many quantum information processing tasks, including multiparty quantum communication and quantum metrology. Phased Dicke states are a generalization of Dicke states and include antisymmetric basis states as a special example. These states are useful in atomic and molecular physics besides quantum information processing. Here we propose practical and efficient protocols based on adaptive local projective measurements for verifying all phased Dicke states, including $W$ states and qudit Dicke states. To verify any $n$-partite phased Dicke state within infidelity $\\ensuremath{\\epsilon}$ and significance level $\\ensuremath{\\delta}$, the number of tests required is only $O(n{\\ensuremath{\\epsilon}}^{\\ensuremath{-}1}ln{\\ensuremath{\\delta}}^{\\ensuremath{-}1})$, which is linear in $n$ and is exponentially more efficient than traditional tomographic approaches. In the case of $W$ states, the number of tests can be further reduced to $O(\\sqrt{n}\\phantom{\\rule{0.16em}{0ex}}{\\ensuremath{\\epsilon}}^{\\ensuremath{-}1}ln{\\ensuremath{\\delta}}^{\\ensuremath{-}1})$. Moreover, we construct an optimal protocol for any antisymmetric basis state; the number of tests required decreases (rather than increases) monotonically with $n$. This is the only optimal protocol known for multipartite nonstabilizer states.",
+      "url": "https://doi.org/10.1103/physreva.103.022601"
+    },
+    {
+      "id": "https://openalex.org/W3016692031",
+      "title": "Efficient verification of quantum processes",
+      "year": 2020,
+      "doi": "https://doi.org/10.1103/physreva.101.042315",
+      "abstract": "Quantum processes, such as quantum circuits, quantum memories, and quantum channels, are essential ingredients in almost all quantum information processing tasks. However, the characterization of these processes remains a daunting task due to the exponentially increasing amount of resources required by traditional methods. Here, by first proposing the concept of quantum process verification, we establish two efficient and practical protocols for verifying quantum processes which can provide an exponential improvement over the standard quantum process tomography and a quadratic improvement over the method of direct fidelity estimation. The efficacy of our protocols is illustrated with the verification of various quantum gates as well as the processes of well-known quantum circuits. Moreover, our protocols are readily applicable with current experimental techniques since only local measurements are required. In addition, we show that our protocols for verifying quantum processes can be easily adapted to verify quantum measurements.",
+      "url": "https://doi.org/10.1103/physreva.101.042315"
+    },
+    {
+      "id": "https://openalex.org/W4206345530",
+      "title": "Robust Quantum Metrology With Explicit Symmetric States",
+      "year": 2021,
+      "doi": "https://doi.org/10.1109/tit.2021.3132634",
+      "abstract": "Quantum metrology is a promising practical use case for quantum technologies, where physical quantities can be measured with unprecedented precision. In lieu of quantum error correction procedures, near term quantum devices are expected to be noisy, and we have to make do with noisy probe states. We prove that, for a set of carefully chosen symmetric probe states that lie within certain quantum error correction codes, quantum metrology exhibits an advantage over classical metrology even after the probe states are corrupted by a constant number of erasure and dephasing errors. These probe states prove useful for robust metrology not only in the NISQ regime, but also in the asymptotic setting where they achieve Heisenberg scaling. This brings us closer towards making robust quantum metrology a technological reality.",
+      "url": "https://doi.org/10.1109/tit.2021.3132634"
+    },
+    {
+      "id": "https://openalex.org/W3163518880",
+      "title": "Sample-Efficient Device-Independent Quantum State Verification and Certification",
+      "year": 2022,
+      "doi": "https://doi.org/10.1103/prxquantum.3.010317",
+      "abstract": "Authentication of quantum sources is a crucial task in building reliable and efficient protocols for quantum-information processing.Steady progress vis-\u00e0-vis verification of quantum devices in the scenario with fully characterized measurement devices has been observed in recent years.When it comes to the scenario with uncharacterized measurements, the so-called black-box scenario, practical verification methods are still rather scarce.Development of self-testing methods is an important step forward, but these results so far have been used for reliable verification only by considering the asymptotic behavior of large, identically and independently distributed (IID) samples of a quantum resource.Such strong assumptions deprive the verification procedure of its truly device-independent character.In this paper, we develop a systematic approach to device-independent verification of quantum states free of IID assumptions in the finite copy regime.Remarkably, we show that device-independent verification can be performed with optimal sample efficiency.Finally, for the case of independent copies, we develop a device-independent protocol for quantum state certification: a protocol in which a fragment of the resource copies is measured to warrant the rest of the copies to be close to some target state.",
+      "url": "https://doi.org/10.1103/prxquantum.3.010317"
+    },
+    {
+      "id": "https://openalex.org/W2982671785",
+      "title": "Efficient verification of quantum gates with local operations",
+      "year": 2020,
+      "doi": "https://doi.org/10.1103/physreva.101.042316",
+      "abstract": "Efficient verification of the functioning of quantum devices is a key to the development of quantum technologies, but is a daunting task as the system size increases. Here we propose a simple and general framework for verifying unitary transformations that can be applied to both individual quantum gates and gate sets, including quantum circuits. This framework enables efficient verification of many important unitary transformations, including but not limited to all bipartite unitaries, Clifford unitaries, generalized controlled-$Z$ gates, generalized controlled-not gates, the controlled-swap gate, and permutation transformations. For all these unitaries, the sample complexity increases at most linearly with the system size and is often independent of the system size. Moreover, little overhead is incurred even if one can only prepare Pauli eigenstates and perform local measurements. Our approach is applicable in many scenarios in which randomized benchmarking (RB) does not apply and is thus instrumental to quantum computation and many other applications in quantum information processing.",
+      "url": "https://doi.org/10.1103/physreva.101.042316"
+    },
+    {
+      "id": "https://openalex.org/W4220905804",
+      "title": "Quantum Verification and Estimation with Few Copies",
+      "year": 2022,
+      "doi": "https://doi.org/10.1002/qute.202100118",
+      "abstract": "Abstract As quantum technologies advance, the ability to generate increasingly large quantum states has experienced rapid development. In this context, the verification and estimation of large entangled systems represent one of the main challenges in the employment of such systems for reliable quantum information processing. Though the most complete technique is undoubtedly full tomography, the inherent exponential increase of experimental and post\u2010processing resources with system size makes this approach infeasible even at moderate scales. For this reason, there is currently an urgent need to develop novel methods that surpass these limitations. This review article presents novel techniques focusing on a fixed number of resources (sampling complexity), and thus prove suitable for systems of arbitrary dimension. Specifically, a probabilistic framework requiring at best only a single copy for entanglement detection is reviewed, together with the concept of selective quantum state tomography, which enables the estimation of arbitrary elements of an unknown state with a number of copies that is low and independent of the system's size. These hyper\u2010efficient techniques define a dimensional demarcation for partial tomography and open a path for novel applications.",
+      "url": "https://doi.org/10.1002/qute.202100118"
+    },
+    {
+      "id": "https://openalex.org/W3112622921",
+      "title": "Efficient Verification of Continuous-Variable Quantum States and Devices without Assuming Identical and Independent Operations",
+      "year": 2021,
+      "doi": "https://doi.org/10.1103/physrevlett.126.240503",
+      "abstract": "Continuous-variable quantum information, encoded into infinite-dimensional quantum systems, is a promising platform for the realization of many quantum information protocols, including quantum computation, quantum metrology, quantum cryptography, and quantum communication. To successfully demonstrate these protocols, an essential step is the certification of multimode continuous-variable quantum states and quantum devices. This problem is well studied under the assumption that multiple uses of the same device result in identical and independently distributed (i.i.d.) operations. However, in realistic scenarios, identical and independent state preparation and calls to the quantum devices cannot be generally guaranteed. Important instances include adversarial scenarios and instances of time-dependent and correlated noise. In this Letter, we propose the first set of reliable protocols for verifying multimode continuous-variable entangled states and devices in these non-i.i.d scenarios. Although not fully universal, these protocols are applicable to Gaussian quantum states, non-Gaussian hypergraph states, as well as amplification, attenuation, and purification of noisy coherent states.",
+      "url": "https://doi.org/10.1103/physrevlett.126.240503"
+    },
+    {
+      "id": "https://openalex.org/W3044652860",
+      "title": "Verification of graph states in an untrusted network",
+      "year": 2022,
+      "doi": "https://doi.org/10.1103/physreva.105.052420",
+      "abstract": "Graph states are a large class of multipartite entangled quantum states that form the basis of schemes for quantum computation, communication, error correction, metrology, and more. In this work, we consider verification of graph states generated by an untrusted source and shared between a network of possibly dishonest parties. This has implications in certifying the application of graph states for various distributed tasks. We present a protocol which is globally efficient for a large family of useful graph states, including cluster states, GHZ states, cycle graph states, and more. For general graph states, efficiency with respect to the security parameter is maintained, though there is a cost increase with the size of the graph state. The protocols are practical, requiring only multiple copies of the graph state, local measurements, and classical communication.",
+      "url": "https://doi.org/10.1103/physreva.105.052420"
+    },
+    {
+      "id": "https://openalex.org/W4399530413",
+      "title": "Certifying the Topology of Quantum Networks: Theory and Experiment",
+      "year": 2024,
+      "doi": "https://doi.org/10.1103/physrevlett.132.240802",
+      "abstract": "Distributed quantum information in networks is paramount for global secure quantum communication. Moreover, it finds applications as a resource for relevant tasks, such as clock synchronization, magnetic field sensing, and blind quantum computation. For quantum network analysis and benchmarking of implementations, however, it is crucial to characterize the topology of networks in a way that reveals the nodes between which entanglement can be reliably distributed. Here, we demonstrate an efficient scheme for this topology certification. Our scheme allows for distinguishing, in a scalable manner, different networks consisting of bipartite and multipartite entanglement sources. It can be applied to semi-device-independent scenarios also, where the measurement devices and network nodes are not well characterized and trusted. We experimentally demonstrate our approach by certifying the topology of different six-qubit networks generated with polarized photons, employing active feed-forward and time multiplexing. Our methods can be used for general simultaneous tests of multiple hypotheses with few measurements, being useful for other certification scenarios in quantum technologies.",
+      "url": "https://doi.org/10.1103/physrevlett.132.240802"
+    },
+    {
+      "id": "https://openalex.org/W4297498604",
+      "title": "Dense Coding with Locality Restriction on Decoders: Quantum Encoders versus Superquantum Encoders",
+      "year": 2022,
+      "doi": "https://doi.org/10.1103/prxquantum.3.030346",
+      "abstract": "We investigate practical dense coding by imposing locality restrictions on decoders and symmetry restrictions on encoders within the resource theory of asymmetry framework. In this task, the sender Alice and the helper Fred preshare an entangled state. Alice encodes a classical message into the quantum state using a symmetric preserving encoder and sends the encoded state to Bob through a noiseless quantum channel. The receiver Bob and helper Fred are limited to performing quantum measurements satisfying certain locality restrictions to decode the classical message. We are interested in the ultimate dense coding capacity under these constraints. Our contributions are summarized as follows. First, we derive both one-shot and asymptotic optimal achievable transmission rates of the dense coding task under different encoder and decoder combinations. Surprisingly, our results reveal that the transmission rate cannot be improved even when the decoder is relaxed from one-way local operations and classical communication (LOCC) to two-way LOCC, separable measurements, and partial transpose positive measurements of the bipartite system. Second, depending on the class of allowed decoders with certain locality restrictions, we relax the class of encoding operations to superquantum encoders in the general probability theory framework and derive dense coding transmission rates under this setting. For example, when the decoder is fixed to a separable measurement, theoretically, a positive operation is allowed as an encoding operation. Remarkably, even under this superquantum relaxation, the transmission rate still cannot be lifted. This fact highlights the universal validity of our analysis on practical dense coding beyond quantum theory.",
+      "url": "https://doi.org/10.1103/prxquantum.3.030346"
+    },
+    {
+      "id": "https://openalex.org/W4321443572",
+      "title": "Efficient verification of Affleck-Kennedy-Lieb-Tasaki states",
+      "year": 2023,
+      "doi": "https://doi.org/10.1103/physreva.107.022616",
+      "abstract": "Affleck-Kennedy-Lieb-Tasaki (AKLT) states are an important class of many-body quantum states that are useful in quantum information processing, including measurement-based quantum computation in particular. Here we propose a general approach for constructing efficient verification protocols for AKLT states on arbitrary graphs with local spin measurements. Our verification protocols build on bond verification protocols and matching covers (including edge coloring) of the underlying graphs, which have a simple geometric and graphic picture. We also provide rigorous performance guarantee that is required for practical applications. With our approach, most AKLT states of wide interest, including those defined on one- and two-dimensional lattices, can be verified with a constant sample cost, which is independent of the system size and is dramatically more efficient than all previous approaches. As an illustration, we construct concrete verification protocols for AKLT states on various lattices and on arbitrary graphs up to five vertices.",
+      "url": "https://doi.org/10.1103/physreva.107.022616"
+    },
+    {
+      "id": "https://openalex.org/W4390695070",
+      "title": "Efficient Verification of Ground States of Frustration-Free Hamiltonians",
+      "year": 2024,
+      "doi": "https://doi.org/10.22331/q-2024-01-10-1221",
+      "abstract": "Ground states of local Hamiltonians are of key interest in many-body physics and also in quantum information processing. Efficient verification of these states are crucial to many applications, but very challenging. Here we propose a simple, but powerful recipe for verifying the ground states of general frustration-free Hamiltonians based on local measurements. Moreover, we derive rigorous bounds on the sample complexity by virtue of the quantum detectability lemma (with improvement) and quantum union bound. Notably, the number of samples required does not increase with the system size when the underlying Hamiltonian is local and gapped, which is the case of most interest. As an application, we propose a general approach for verifying Affleck-Kennedy-Lieb-Tasaki (AKLT) states on arbitrary graphs based on local spin measurements, which requires only a constant number of samples for AKLT states defined on various lattices. Our work is of interest not only to many tasks in quantum information processing, but also to the study of many-body physics.",
+      "url": "https://doi.org/10.22331/q-2024-01-10-1221"
+    },
+    {
+      "id": "https://openalex.org/W4414065186",
+      "title": "Certifying almost all quantum states with few single-qubit measurements",
+      "year": 2025,
+      "doi": "https://doi.org/10.1038/s41567-025-03025-1",
+      "abstract": "",
+      "url": "https://doi.org/10.1038/s41567-025-03025-1"
+    },
+    {
+      "id": "https://openalex.org/W4400494946",
+      "title": "Theory of versatile fidelity estimation with confidence",
+      "year": 2024,
+      "doi": "https://doi.org/10.1103/physreva.110.012431",
+      "abstract": "Estimating the fidelity with a target state is important in quantum information tasks. Many fidelity-estimation techniques present a suitable measurement scheme to perform the estimation. In contrast, we present techniques that allow the experimentalist to choose a convenient measurement setting. Our primary focus lies on a method that constructs an estimator with nearly minimax optimal confidence intervals for any specified measurement setting. We demonstrate, through a combination of theoretical and numerical results, various desirable properties of the method: robustness against experimental imperfections, competitive sample complexity, and accurate estimates in practice. We compare this method with maximum likelihood estimation and the associated profile likelihood method, a semi-definite programming based approach, direct fidelity estimation, quantum state verification, and classical shadows. Our method can also be used for estimating the expectation value of any observable with the same guarantees.",
+      "url": "https://doi.org/10.1103/physreva.110.012431"
+    },
+    {
+      "id": "https://openalex.org/W4417348384",
+      "title": "Symmetric quantum states: a review of recent progress",
+      "year": 2026,
+      "doi": "https://doi.org/10.1088/1361-6633/ae440a",
+      "abstract": "Symmetric quantum states are fascinating objects. They correspond to multipartite systems that remain invariant under particle permutations. This symmetry is reflected in their compact mathematical characterisation but also in their unique physical properties: they exhibit genuine multipartite entanglement and notable robustness against noise and perturbations. These features make such states particularly well-suited for a wide range of quantum information tasks. Here, we provide a pedagogic analysis of the mathematical structure and relevant physical properties of this class of states. Beyond the theoretical framework, robust tools for certifying and verifying the properties of symmetric states in experimental settings are essential. In this regard, we explore how standard techniques-such as quantum state tomography, Bell tests, and entanglement witnesses-can be specifically adapted for symmetric systems. Next, we provide an up-to-date overview of the most relevant applications in which these states outperform other classes of states in specific tasks. Specifically, we address their central role in quantum metrology, highlight their use in quantum error correction codes, and examine their contribution in computation and communication tasks. Finally, we present the current state-of-the-art in their experimental generation, ranging from systems of cold atoms to implementations via quantum algorithms. We also review the most significant results obtained in the different experimental realizations. Despite the notable progress made in recent years with regard to the characterisation and application of symmetric quantum states, several intriguing questions remain unsolved. We conclude this review by discussing some of these open problems and outlining promising directions for future research.",
+      "url": "https://doi.org/10.1088/1361-6633/ae440a"
+    },
+    {
+      "id": "https://openalex.org/W4405990613",
+      "title": "Quantum memory assisted entangled state verification with local measurements",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/physrevresearch.7.013003",
+      "abstract": "We consider the quantum memory assisted quantum state verification task, where an adversary prepares independent multipartite entangled states and sends them to the local verifiers, who then store several copies in the quantum memory and measure them collectively to make a decision. We establish an exact analytic formula for optimizing two-copy state verification, where the verifiers store two copies, and give a globally optimal two-copy strategy for multiqubit graph states involving only Bell measurements. When the verifiers can store arbitrarily many copies, we present a dimension expansion technique that designs efficient verification strategies for this case, showcasing its application to efficiently verifying Greenberger-Horne-Zeilinger (GHZ)-like states. These strategies become increasingly advantageous with growing memory resources, ultimately approaching the theoretical limit of efficiency. Our findings demonstrate that quantum memories enhance state verification efficiency, shedding light on error-resistant strategies and practical applications of large-scale quantum memory assisted verification.",
+      "url": "https://doi.org/10.1103/physrevresearch.7.013003"
+    },
+    {
+      "id": "https://openalex.org/W7128496605",
+      "title": "Symmetric quantum states: a review of recent progress",
+      "year": 2026,
+      "doi": "https://doi.org/10.1088/1361-6633/ae440a",
+      "abstract": "Symmetric quantum states are fascinating objects. They correspond to multipartite systems that remain invariant under particle permutations. This symmetry is reflected in their compact mathematical characterisation but also in their unique physical properties: they exhibit genuine multipartite entanglement and notable robustness against noise and perturbations. These features make such states particularly well-suited for a wide range of quantum information tasks. Here, we provide a pedagogic analysis of the mathematical structure and relevant physical properties of this class of states. Beyond the theoretical framework, robust tools for certifying and verifying the properties of symmetric states in experimental settings are essential. In this regard, we explore how standard techniques-such as quantum state tomography, Bell tests, and entanglement witnesses-can be specifically adapted for symmetric systems. Next, we provide an up-to-date overview of the most relevant applications in which these states outperform other classes of states in specific tasks. Specifically, we address their central role in quantum metrology, highlight their use in quantum error correction codes, and examine their contribution in computation and communication tasks. Finally, we present the current state-of-the-art in their experimental generation, ranging from systems of cold atoms to implementations via quantum algorithms. We also review the most significant results obtained in the different experimental realizations. Despite the notable progress made in recent years with regard to the characterisation and application of symmetric quantum states, several intriguing questions remain unsolved. We conclude this review by discussing some of these open problems and outlining promising directions for future research.",
+      "url": "https://doi.org/10.1088/1361-6633/ae440a"
+    },
+    {
+      "id": "https://openalex.org/W2988981135",
+      "title": "Quantum gate verification and its application in property testing",
+      "year": 2020,
+      "doi": "https://doi.org/10.1103/physrevresearch.2.023306",
+      "abstract": "This paper establishes a general framework of verifying a unitary gate based on few rounds of state preparation and measurements. The authors study the efficiency and optimality of the verification strategies in both non-adversarial and adversarial scenario. Furthermore, they provide examples for the commonly-used quantum gates and show the application in channel property testing",
+      "url": "https://doi.org/10.1103/physrevresearch.2.023306"
+    },
+    {
+      "id": "https://openalex.org/W3112861663",
+      "title": "Classical communication enhanced quantum state verification",
+      "year": 2020,
+      "doi": "https://doi.org/10.1038/s41534-020-00328-4",
+      "abstract": "Abstract Quantum state verification provides an efficient approach to characterize the reliability of quantum devices for generating certain target states. The figure of merit of a specific strategy is the estimated infidelity \u03f5 of the tested state to the target state, given a certain number of performed measurements n. Entangled measurements constitute the globally optimal strategy and achieve the scaling that \u03f5 is inversely proportional to n. Recent advances show that it is possible to achieve the same scaling simply with non-adaptive local measurements; however, the performance is still worse than the globally optimal bound up to a constant factor. In this work, by introducing classical communication, we experimentally implement an adaptive quantum state verification. The constant factor is minimized from ~2.5 to 1.5 in this experiment, which means that only 60% measurements are required to achieve a certain value of \u03f5 compared to optimal non-adaptive local strategy. Our results indicate that classical communication significantly enhances the performance of quantum state verification, and leads to an efficiency that further approaches the globally optimal bound.",
+      "url": "https://doi.org/10.1038/s41534-020-00328-4"
+    },
+    {
+      "id": "https://openalex.org/W3022581957",
+      "title": "Universally Optimal Verification of Entangled States with Nondemolition Measurements",
+      "year": 2021,
+      "doi": "https://doi.org/10.1103/physrevlett.126.090504",
+      "abstract": "The efficient and reliable characterization of quantum states plays a vital role in most, if not all, quantum information processing tasks. In this work, we present a universally optimal protocol for verifying entangled states by employing the so-called quantum nondemolition measurements, such that the verification efficiency is equivalent to that of the optimal global strategy. Instead of being probabilistic as the standard verification strategies, our protocol is constructed sequentially, which is thus more favorable for experimental realizations. In addition, the target states are preserved in the protocol after each measurement, so can be reused in any subsequent tasks. We demonstrate the power of our protocol for the optimal verification of Bell states, arbitrary two-qubit pure states, and stabilizer states. We also prove that our protocol is able to perform tasks including fidelity estimation and state preparation.",
+      "url": "https://doi.org/10.1103/physrevlett.126.090504"
+    },
+    {
+      "id": "https://openalex.org/W4225984642",
+      "title": "Quantum metrology with delegated tasks",
+      "year": 2022,
+      "doi": "https://doi.org/10.1103/physreva.106.052427",
+      "abstract": "A quantum metrology scheme can be decomposed into three quantum tasks: state preparation, parameter encoding, and measurements. Consequently, it is imperative to have access to the technologies which can execute the aforementioned tasks to fully implement a quantum metrology scheme. In the absence of one or more of these technologies, one can proceed by delegating the tasks to a third party. However, doing so has security ramifications: the third party can bias the result or leak information. In this paper, we outline different scenarios where one or more tasks are delegated to an untrusted (and possibly malicious) third party. In each scenario, we outline cryptographic protocols which can be used to circumvent malicious activity. Further, we link the effectiveness of the quantum metrology scheme to the soundness of the cryptographic protocols.",
+      "url": "https://doi.org/10.1103/physreva.106.052427"
+    },
+    {
+      "id": "https://openalex.org/W2941258589",
+      "title": "Efficient verification of bosonic quantum channels via benchmarking",
+      "year": 2019,
+      "doi": "https://doi.org/10.1088/1367-2630/ab2d3a",
+      "abstract": "Abstract We aim to devise feasible, efficient verification schemes for bosonic channels. To this end, we construct an average-fidelity witness that yields a tight lower bound for average fidelity plus a general framework for verifying optimal quantum channels. For both multi-mode unitary Gaussian channels and single-mode amplification channels, we present experimentally feasible average-fidelity witnesses and reliable verification schemes, for which sample complexity scales polynomially with respect to all channel specification parameters. Our verification scheme provides an approach to benchmark the performance of bosonic channels on a set of Gaussian-distributed coherent states by employing only two-mode squeezed vacuum states and local homodyne detections. Our results demonstrate how to perform feasible tests of quantum components designed for continuous-variable quantum information processing.",
+      "url": "https://doi.org/10.1088/1367-2630/ab2d3a"
+    },
+    {
+      "id": "https://openalex.org/W4307887696",
+      "title": "Certification of Genuine Multipartite Entanglement with General and Robust Device-Independent Witnesses",
+      "year": 2022,
+      "doi": "https://doi.org/10.1103/physrevlett.129.190503",
+      "abstract": "Genuine multipartite entanglement represents the strongest type of entanglement, which is an essential resource for quantum information processing. Standard methods to detect genuine multipartite entanglement, e.g., entanglement witnesses, state tomography, or quantum state verification, require full knowledge of the Hilbert space dimension and precise calibration of measurement devices, which are usually difficult to acquire in an experiment. The most radical way to overcome these problems is to detect entanglement solely based on the Bell-like correlations of measurement outcomes collected in the experiment, namely, device independently. However, it is difficult to certify genuine entanglement of practical multipartite states in this way, and even more difficult to quantify it, due to the difficulty in identifying optimal multipartite Bell inequalities and protocols tolerant to state impurity. In this Letter, we explore a general and robust device-independent method that can be applied to various realistic multipartite quantum states in arbitrary finite dimension, while merely relying on bipartite Bell inequalities. Our method allows us both to certify the presence of genuine multipartite entanglement and to quantify it. Several important classes of entangled states are tested with this method, leading to the detection of genuinely entangled states. We also certify genuine multipartite entanglement in weakly entangled Greenberger-Horne-Zeilinger states, showing that the method applies equally well to less standard states.",
+      "url": "https://doi.org/10.1103/physrevlett.129.190503"
+    },
+    {
+      "id": "https://openalex.org/W4317771787",
+      "title": "Pseudo standard entanglement structure cannot be distinguished from standard entanglement structure",
+      "year": 2023,
+      "doi": "https://doi.org/10.1088/1367-2630/acb565",
+      "abstract": "Abstract An experimental verification of the maximally entangled state ensures that the constructed state is close to the maximally entangled state, but it does not guarantee that the state is exactly the same as the maximally entangled state. Further, the entanglement structure is not uniquely determined in general probabilistic theories even if we impose that the local subsystems are fully equal to quantum systems. Therefore, the existence of the maximally entangled state depends on whether the standard entanglement structure (SES) is valid. To examine this issue, we introduce pseudo SES as a structure of quantum composite system under natural assumptions based on the existence of projective measurements and the existence of approximations of all maximally entangled standard states. Surprisingly, there exist infinitely many pseudo SESs different from the SES. In our setting, any maximally entangled state can be arbitrarily approximated by an entangled state that belongs to our obtained pseudo standard entanglement structure. That is, experimental verification does not exclude the possibility of our obtained pseudo standard entanglement structure that is different from the standard entanglement structure. On the other hand, such pseudo structures never possess global unitary symmetry, i.e. global unitary symmetry is essential condition for the SES.",
+      "url": "https://doi.org/10.1088/1367-2630/acb565"
+    },
+    {
+      "id": "https://openalex.org/W4400491929",
+      "title": "Versatile Fidelity Estimation with Confidence",
+      "year": 2024,
+      "doi": "https://doi.org/10.1103/physrevlett.133.020402",
+      "abstract": "As quantum devices become more complex and the requirements on these devices become more demanding, it is crucial to be able to verify the performance of such devices in a scalable and reliable fashion. A cornerstone task in this challenge is quantifying how close an experimentally prepared quantum state is to the desired one. Here we present a method to construct an estimator for the quantum state fidelity that is compatible with any measurement protocol. Our method provides a confidence interval on this estimator that is guaranteed to be nearly minimax optimal for the specified measurement protocol. For a well-chosen measurement scheme, our method is competitive in the number of measurement outcomes required for estimation. We demonstrate our method using simulations and experimental data from a trapped-ion quantum computer and compare the results to state-of-the-art techniques. Our method can be easily extended to estimate the expectation value of any observable, such as entanglement witnesses.",
+      "url": "https://doi.org/10.1103/physrevlett.133.020402"
+    },
+    {
+      "id": "https://openalex.org/W3180130458",
+      "title": "Efficient Experimental Verification of Quantum Gates with Local Operations",
+      "year": 2022,
+      "doi": "https://doi.org/10.1103/physrevlett.128.020502",
+      "abstract": "Verifying the correct functioning of quantum gates is a crucial step toward reliable quantum information processing, but it becomes an overwhelming challenge as the system size grows due to the dimensionality curse. Recent theoretical breakthroughs show that it is possible to verify various important quantum gates with the optimal sample complexity of O(1/\u03b5) using local operations only, where \u03b5 is the estimation precision. In this Letter, we propose a variant of quantum gate verification (QGV) that is robust to practical gate imperfections and experimentally realize efficient QGV on a 2-qubit controlled-not gate and a 3-qubit Toffoli gate using only local state preparations and measurements. The experimental results show that, by using only 1600 and 2600 measurements on average, we can verify with 95% confidence level that the implemented controlled-not gate and Toffoli gate have fidelities of at least 99% and 97%, respectively. Demonstrating the superior low sample complexity and experimental feasibility of QGV, our work promises a solution to the dimensionality curse in verifying large quantum devices in the quantum era.",
+      "url": "https://doi.org/10.1103/physrevlett.128.020502"
+    },
+    {
+      "id": "https://openalex.org/W3201889863",
+      "title": "Direct measurement of density-matrix elements using a phase-shifting technique",
+      "year": 2021,
+      "doi": "https://doi.org/10.1103/physreva.104.042403",
+      "abstract": "A direct measurement protocol allows reconstructing specific elements of the density matrix of a quantum state without using quantum state tomography. However, the direct measurement protocols to date are primarily based on weak or strong measurements with an ancillary pointer, which interacts with the investigated system to extract information about the specified elements. Here, we present a direct measurement scheme based on phase-shifting operations which do not need ancillary pointers. In this method, estimates of at most six expectation values of projective observables suffice to determine any specific element of an unknown quantum density matrix. A concrete quantum circuit to implement this direct measurement protocol for multiqubit states is provided, which is composed of just single-qubit gates and two multiqubit controlled-phase gates. This scheme is also extended for the direct measurement of the density matrix of continuous-variable quantum states. Our method can be used in quantum information applications where only partial information about the quantum state needs to be extracted, for example, problems such as entanglement witnessing, fidelity estimation of quantum systems, and quantum coherence estimation.",
+      "url": "https://doi.org/10.1103/physreva.104.042403"
+    },
+    {
+      "id": "https://openalex.org/W4292339975",
+      "title": "Experimental optimal verification of three-dimensional entanglement on a silicon chip",
+      "year": 2022,
+      "doi": "https://doi.org/10.1088/1367-2630/ac8a67",
+      "abstract": "Abstract High-dimensional entanglement is significant for the fundamental studies of quantum physics and offers unique advantages in various quantum information processing tasks. Integrated quantum devices have recently emerged as a promising platform for creating, processing, and detecting complex high-dimensional entangled states. A crucial step toward practical quantum technologies is to verify that these devices work reliably with an optimal strategy. In this work, we experimentally implement an optimal quantum verification strategy on a three-dimensional maximally entangled state using local projective measurements on a silicon photonic chip. A 95% confidence is achieved from 1190 copies to verify the target quantum state. The obtained scaling of infidelity as a function of the number of copies is \u22120.5497 \u00b1 0.0002, exceeding the standard quantum limit of \u22120.5 with 248 standard deviations. Our results indicate that quantum state verification could serve as an efficient tool for complex quantum measurement tasks.",
+      "url": "https://doi.org/10.1088/1367-2630/ac8a67"
+    },
+    {
+      "id": "https://openalex.org/W4380611789",
+      "title": "Efficient Verification of Arbitrary Entangled States with Homogeneous Local Measurements",
+      "year": 2023,
+      "doi": "https://doi.org/10.1002/qute.202300083",
+      "abstract": "Abstract Quantum state verification (QSV) is the task of relying on local measurements only to verify that a given quantum device does produce the desired target state. Up to now, certain types of entangled states can be verified efficiently or even optimally by QSV. However, given an arbitrary entangled state, how to design its verification protocol remains an open problem. This study presents a systematic strategy to tackle this problem by considering the locality of what it initiates as the choice\u2010independent measurement protocols, whose operators can be directly achieved when they are homogeneous. Taking several typical entangled states as examples, this study shows the explicit procedures of the protocol design using standard Pauli projections, demonstrating the superiority of the method for attaining better QSV strategies. Moreover, the framework can be naturally extended to other tasks such as the construction of entanglement witnesses, and even parameter estimation.",
+      "url": "https://doi.org/10.1002/qute.202300083"
+    },
+    {
+      "id": "https://openalex.org/W3185119351",
+      "title": "Proof-of-principle experimental demonstration of quantum gate verification",
+      "year": 2022,
+      "doi": "https://doi.org/10.1103/physreva.105.012614",
+      "abstract": "To employ a quantum device, the performance of the quantum gates in the device needs to be evaluated first. Since the dimensionality of a quantum gate grows exponentially with the number of qubits, evaluating the performance of a quantum gate is a challenging task. Recently, a scheme called quantum gate verification (QGV) has been proposed, which can verifies quantum gates with near-optimal efficiency. In this paper, we implement a proof-of-principle optical experiment to demonstrate this QGV scheme. We show that for a single-qubit quantum gate, only $\\ensuremath{\\sim}300$ samples are needed to confirm the fidelity of the quantum gate to be, at least, 97% with a 99% confidence level using the QGV method, whereas, at least, $\\ensuremath{\\sim}3000$ samples are needed to achieve the same result using the standard quantum process tomography method. The QGV method validated by this paper has the potential to be widely used for the evaluation of quantum devices in various quantum information applications.",
+      "url": "https://doi.org/10.1103/physreva.105.012614"
+    },
+    {
+      "id": "https://openalex.org/W4281754637",
+      "title": "Direct measurement of density-matrix elements with a phase-shifting technique on a quantum photonic chip",
+      "year": 2022,
+      "doi": "https://doi.org/10.1103/physreva.105.062414",
+      "abstract": "A direct measurement protocol allows reconstructing specific elements of the density matrix of a quantum state without using quantum state tomography. Until now, most direct measurement protocols have relied on ancillary pointers, which add complexity and are not always easy to implement experimentally. In this paper, we experimentally validate a direct measurement protocol requiring no ancillary pointers that calculates the value of a specific element of a quantum state's density matrix using only six projection measurements. We prepare path-encoded arbitrary four-dimensional quantum states on a silicon-based quantum photonic chip and measure the density-matrix elements of the four-dimensional quantum states using this protocol, with experimental results deviating from ideal values by an average of only $0.010\\ifmmode\\pm\\else\\textpm\\fi{}0.004$. This approach has the potential to be applied to quantum information applications where only partial information about the quantum state needs to be extracted, for example, problems such as entanglement witnessing, fidelity estimation of quantum systems, and quantum coherence estimation.",
+      "url": "https://doi.org/10.1103/physreva.105.062414"
+    },
+    {
+      "id": "https://openalex.org/W4404186289",
+      "title": "Learning properties of quantum states without the IID assumption",
+      "year": 2024,
+      "doi": "https://doi.org/10.1038/s41467-024-53765-6",
+      "abstract": "We develop a framework for learning properties of quantum states beyond the assumption of independent and identically distributed (i.i.d.) input states. We prove that, given any learning problem (under reasonable assumptions), an algorithm designed for i.i.d. input states can be adapted to handle input states of any nature, albeit at the expense of a polynomial increase in training data size (aka sample complexity). Importantly, this polynomial increase in sample complexity can be substantially improved to polylogarithmic if the learning algorithm in question only requires non-adaptive, single-copy measurements. Among other applications, this allows us to generalize the classical shadow framework to the non-i.i.d. setting while only incurring a comparatively small loss in sample efficiency. We leverage permutation invariance and randomized single-copy measurements to derive a new quantum de Finetti theorem that mainly addresses measurement outcome statistics and, in turn, scales much more favorably in Hilbert space dimension.",
+      "url": "https://doi.org/10.1038/s41467-024-53765-6"
+    },
+    {
+      "id": "https://openalex.org/W4319946815",
+      "title": "Nondestructive verification of entangled states via fidelity witnessing",
+      "year": 2023,
+      "doi": "https://doi.org/10.1103/physreva.107.022414",
+      "abstract": "Assessing the quality of an ensemble of noisy entangled states is a central task in quantum information processing. Usually, this is done by measuring and hence destroying multiple copies, from which state tomography or fidelity estimation can be employed to characterize states. Here we propose several methods to directly distinguish between two different sets of states, e.g., if their fidelity is above or below a certain threshold value. This turns out to be significantly more efficient and importantly keeps the verified states intact. We make use of auxiliary entanglement or an ensemble of larger size, where we operate on the whole ensemble, but measure only a small fraction where information has been concentrated. For certain state families, we demonstrate that such an approach can even outperform optimal methods that collectively measure directly a fixed fraction of the ensemble.",
+      "url": "https://doi.org/10.1103/physreva.107.022414"
+    },
+    {
+      "id": "https://openalex.org/W7129477492",
+      "title": "Many-body entanglement in solid-state emitters",
+      "year": 2026,
+      "doi": "https://doi.org/10.1038/s41578-026-00893-8",
+      "abstract": "",
+      "url": "https://doi.org/10.1038/s41578-026-00893-8"
+    },
+    {
+      "id": "https://openalex.org/W4414258629",
+      "title": "Efficient sampling for Pauli-measurement-based shadow tomography in direct fidelity estimation",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/4pzk-lznf",
+      "abstract": "A constant number of random Clifford measurements allows the classical shadow protocol to perform direct fidelity estimation (DFE) with high precision. However, estimating properties of an unknown quantum state is expected to be more feasible with random Pauli measurements than with random Clifford measurements in the near future. Inspired by the importance sampling technique applied to sampling Pauli measurements for DFE, we show that similar strategies can be derived from classical shadows. Specifically, we describe efficient methods using only local Pauli measurements to perform DFE with Greenberger-Horne-Zeilinger (GHZ), W , and Dicke states, establishing tighter bounds (by factors of 14.22 and 16 for GHZ and W /Dicke, respectively) on the number of measurements required for desired precision. These protocols are derived by adjusting the distribution of observables. Notably, they require no preprocessing steps other than the sampling algorithms.",
+      "url": "https://doi.org/10.1103/4pzk-lznf"
+    },
+    {
+      "id": "https://openalex.org/W2991597178",
+      "title": "Self-testing and certification using trusted quantum inputs",
+      "year": 2020,
+      "doi": "https://doi.org/10.1088/1367-2630/ab90d1",
+      "abstract": "Abstract Device-independent certification of quantum devices is of crucial importance for the development of secure quantum information protocols. So far, the most studied scenario corresponds to a system consisting of different non-characterized devices that observers probe with classical inputs to obtain classical outputs. The certification of relevant quantum properties follows from the observation of correlations between these events that do not have a classical counterpart. In the fully device-independent scenario no assumptions are made on the devices and therefore their non-classicality follows from Bell non-locality. There exist other scenarios, known as semi-device-independent, in which assumptions are made on the devices, such as their dimension, and non-classicality is associated to the observation of other types of correlations with no classical analogue. More recently, the use of trusted quantum inputs for certification has been introduced. The goal of this work is to study the power of this formalism and describe self-testing protocols in various settings using trusted quantum inputs. We also relate these different types of self-testing to some of the most basic quantum information protocols, such as quantum teleportation. Finally, we apply our findings to quantum networks and provide methods for estimating the quality of the whole network, as well as of parts of it.",
+      "url": "https://doi.org/10.1088/1367-2630/ab90d1"
+    },
+    {
+      "id": "https://openalex.org/W3087886958",
+      "title": "A Quantum Entanglement-Based Approach for Computing Sentence Similarity",
+      "year": 2020,
+      "doi": "https://doi.org/10.1109/access.2020.3025958",
+      "abstract": "It is important to learn directly from original texts in natural language processing (NLP). Many deep learning (DP) models needing a large number of manually annotated data are not effective in deriving much information from corpora with few annotated labels. Existing methods using unlabeled language information to provide valuable messages consume considerable time and cost. Our provided sentence representation based on quantum computation (called Model I) needs no prior knowledge except word2vec. To reduce some semantic noise caused by the tensor product on the entangled words vector, two improved models (called Model II and Model III) are proposed to reduce the dimensions of the sentence embedding stimulated by Model I. The provided models are evaluated in the STS tasks of 2012, 2014, 2015 and 2016, for a total of 21 corpora. Experimental results show that using quantum entanglement and dimensionality reduction in sentence embedding yields state-of-the-art performances on semantic relations and syntactic structures. Compared to the Pearson correlation coefficient (Pcc) and mean squared error (MSE), the results of 16 out of 16 corpora are better than the results of the comparative methods.",
+      "url": "https://doi.org/10.1109/access.2020.3025958"
+    },
+    {
+      "id": "https://openalex.org/W3104198689",
+      "title": "Self-testing and certification using trusted quantum inputs",
+      "year": 2020,
+      "doi": null,
+      "abstract": "Device-independent certification of quantum devices is of crucial importance for the development of secure quantum information protocols. So far, the most studied scenario corresponds to a system consisting of different non-characterized devices that observers probe with classical inputs to obtain classical outputs. The certification of relevant quantum properties follows from the observation of correlations between these events that do not have a classical counterpart. In the fully device-independent scenario no assumptions are made on the devices and therefore their non-classicality follows from Bell non-locality. There exist other scenarios, known as semi-device-independent, in which assumptions are made on the devices, such as their dimension, and non-classicality is associated to the observation of other types of correlations with no classical analogue. More recently, the use of trusted quantum inputs for certification has been introduced. The goal of this work is to study the power of this formalism and describe self-testing protocols in various settings using trusted quantum inputs. We also relate these different types of self-testing to some of the most basic quantum information protocols, such as quantum teleportation. Finally, we apply our findings to quantum networks and provide methods for estimating the quality of the whole network, as well as of parts of it.",
+      "url": "https://research.gold.ac.uk/id/eprint/29254/7/S%CC%8Cupic%CC%81%20et%20al%20%282020%29%20Self-testing%20and%20certi%20cation%20using%20trusted%20quantum%20inputs.pdf"
+    },
+    {
+      "id": "https://openalex.org/W2987789598",
+      "title": "Authenticated teleportation and verification in a noisy network",
+      "year": 2020,
+      "doi": "https://doi.org/10.1103/physreva.102.042401",
+      "abstract": "Authenticated teleportation aims to certify the transmission of a quantum state through teleportation, even in the presence of an adversary. This scenario can be pictured in terms of an untrusted source distributing a Bell state between two parties who wish to verify it using some simple tests. We propose a protocol that achieves this goal in a practical way and analyze its performance and security when the parties have noisy measurement devices. Further, we model a realistic experimental scenario where the state is subject to noise. We finally apply our analysis to the verification of graph states with noisy measurement devices.",
+      "url": "https://doi.org/10.1103/physreva.102.042401"
+    },
+    {
+      "id": "https://openalex.org/W4307888839",
+      "title": "Collective Operations Can Exponentially Enhance Quantum State Verification",
+      "year": 2022,
+      "doi": "https://doi.org/10.1103/physrevlett.129.190504",
+      "abstract": "Maximally entangled states are a key resource in many quantum communication and computation tasks, and their certification is a crucial element to guarantee the desired functionality. We introduce collective strategies for the efficient, local verification of ensembles of Bell pairs that make use of an initial information and noise transfer to few copies prior to their measurement. In this way the number of entangled pairs that need to be measured and hence destroyed is significantly reduced as compared to previous, even optimal, approaches that operate on individual copies. Moreover, the remaining states are directly certified. We show that our tools can be extended to other problems and larger classes of multipartite states.",
+      "url": "https://doi.org/10.1103/physrevlett.129.190504"
+    },
+    {
+      "id": "https://openalex.org/W3134293342",
+      "title": "Zero uncertainty states in the presence of quantum memory",
+      "year": 2021,
+      "doi": "https://doi.org/10.1038/s41534-021-00384-4",
+      "abstract": "Abstract The uncertainty principle imposes a fundamental limit on predicting the measurement outcomes of incompatible observables even if complete classical information of the system state is known. The situation is different if one can build a quantum memory entangled with the system. Zero uncertainty states (in contrast with minimum uncertainty states) are peculiar quantum states that can eliminate uncertainties of incompatible von Neumann observables once assisted by suitable measurements on the memory. Here we determine all zero uncertainty states of any given set of nondegenerate observables and determine the minimum entanglement required. It turns out all zero uncertainty states are maximally entangled in a generic case, and vice versa, even if these observables are only weakly incompatible. Our work establishes a simple and precise connection between zero uncertainty and maximum entanglement, which is of interest to foundational studies and practical applications, including quantum certification and verification.",
+      "url": "https://doi.org/10.1038/s41534-021-00384-4"
+    },
+    {
+      "id": "https://openalex.org/W4200421700",
+      "title": "Minimum number of experimental settings required to verify bipartite pure states and unitaries",
+      "year": 2021,
+      "doi": "https://doi.org/10.1103/physreva.104.062439",
+      "abstract": "Efficient verification of quantum states and gates is crucial to the development of quantum technologies. Although the sample complexities of quantum state verification and quantum gate verification have been studied by many researchers, the number of experimental settings has received little attention and is poorly understood. In this work we study systematically quantum state verification and quantum gate verification with a focus on the number of experimental settings. We show that any bipartite pure state can be verified by only two measurement settings based on local projective measurements. Any bipartite unitary in dimension $d$ can be verified by $2d$ experimental settings based on local operations. In addition, we introduce the concept of entanglement-free verification and clarify its connection with minimal-setting verification. Finally, we show that any two-qubit unitary can be verified with at most five experimental settings; moreover, a generic two-qubit unitary (except for a set of measure zero) can be verified by an entanglement-free protocol based on four settings. In the course of study we clarify the properties of Schmidt coefficients of two-qubit unitaries, which are of independent interest.",
+      "url": "https://doi.org/10.1103/physreva.104.062439"
+    },
+    {
+      "id": "https://openalex.org/W3005358692",
+      "title": "Constructing multipartite Bell inequalities from stabilizers",
+      "year": 2022,
+      "doi": "https://doi.org/10.1103/physrevresearch.4.043215",
+      "abstract": "Bell inequality with a self-testing property has played an important role in quantum information processing with both fundamental and practical significance. However, it is generally challenging to find Bell inequalities used for self-testing multipartite states, and actually, there are not many known candidates. In this work we propose a systematic framework to construct Bell inequalities from stabilizers which are maximally violated by general stabilizer states, with two observables for each local party. We show that the constructed Bell inequalities can self-test any stabilizer state if and only if these stabilizers can uniquely determine the state in a device-dependent manner. This bridges the gap between device-independent and device-dependent verification methods. Our framework can provide plenty of Bell inequalities for self-testing $N$-party stabilizer states. Among them, we give two families of Bell inequalities with different advantages: (1) a family of Bell inequalities with a constant ratio of quantum and classical bounds using $2N$ correlations, and (2) single pair inequalities improving on all previous robustness self-testing bounds using $N+1$ correlations, which are both efficient and robust for realizations in multipartite systems.",
+      "url": "https://doi.org/10.1103/physrevresearch.4.043215"
+    },
+    {
+      "id": "https://openalex.org/W3048714545",
+      "title": "Adaptive State Fidelity Estimation for Higher Dimensional Bipartite Entanglement",
+      "year": 2020,
+      "doi": "https://doi.org/10.3390/e22080886",
+      "abstract": "An adaptive method for quantum state fidelity estimation in bipartite higher dimensional systems is established. This method employs state verifier operators which are constructed by local POVM operators and adapted to the measurement statistics in the computational basis. Employing this method, the state verifier operators that stabilize Bell-type entangled states are constructed explicitly. Together with an error operator in the computational basis, one can estimate the lower and upper bounds on the state fidelity for Bell-type entangled states in few measurement configurations. These bounds can be tighter than the fidelity bounds derived in [Bavaresco et al., Nature Physics (2018), 14, 1032-1037], if one constructs more than one local POVM measurements additional to the measurement in the computational basis.",
+      "url": "https://doi.org/10.3390/e22080886"
+    },
+    {
+      "id": "https://openalex.org/W4390541624",
+      "title": "Cross-platform comparison of arbitrary quantum processes",
+      "year": 2024,
+      "doi": "https://doi.org/10.1038/s41534-023-00797-3",
+      "abstract": "Abstract In this work, we present a protocol for comparing the performance of arbitrary quantum processes executed on spatially or temporally disparate quantum platforms using Local Operations and Classical Communication (LOCC). The protocol involves sampling local unitary operators, which are then communicated to each platform via classical communication to construct quantum state preparation and measurement circuits. Subsequently, the local unitary operators are implemented on each platform, resulting in the generation of probability distributions of measurement outcomes. The max process fidelity is estimated from the probability distributions, which ultimately quantifies the relative performance of the quantum processes. Furthermore, we demonstrate that this protocol can be adapted for quantum process tomography. We apply the protocol to compare the performance of five quantum devices from IBM and the \u201cQianshi\" quantum computer from Baidu via the cloud. The experimental results unveil two notable aspects: Firstly, the protocol adeptly compares the performance of the quantum processes implemented on different quantum computers. Secondly, the protocol scales, although still exponentially, much more favorably with the number of qubits, when compared to the full quantum process tomography. We view our work as a catalyst for collaborative efforts in cross-platform comparison of quantum computers.",
+      "url": "https://doi.org/10.1038/s41534-023-00797-3"
+    },
+    {
+      "id": "https://openalex.org/W4400415936",
+      "title": "Efficient verification of two-colorable graph states",
+      "year": 2024,
+      "doi": "https://doi.org/10.1103/physreva.110.012606",
+      "abstract": "Graph states known as the resource states for measurement-based quantum computation play an important role in quantum information processing. Verifying the correctness of graph states in an efficient way is crucial to scalable quantum computing. In this paper, we propose an efficient method for verifying two-colorable graph states with Pauli measurements, where the number of required measurement settings is a constant that is independent of the size of graph states. In addition, the number of required tests is less than the existing protocols. We also present several examples, such as the brickwork state and the two-dimensional square lattice state, to show how to get the specific verification strategy. Furthermore, we propose a robust verification of graph states for resisting the noise acting on the measurement device. Finally, based on the verification of two-colorable graph states in the adversarial scenario, we propose a verifiable blind quantum computing protocol, which can realize the less resource overhead.",
+      "url": "https://doi.org/10.1103/physreva.110.012606"
+    },
+    {
+      "id": "https://openalex.org/W4407320638",
+      "title": "Noisy certification of continuous-variable graph states",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/physreva.111.022413",
+      "abstract": "Continuous variables (CV) offer a promising platform for the development of various applications, such as quantum communication, computing, and sensing, and CV graph states represent a family of powerful entangled resource states for all these areas. In many of these protocols, a crucial aspect is the certification of the quantum state subsequently used. While numerous protocols exist, most rely on assumptions unrealistic for physical continuous-variable states, such as infinite precision in quadrature measurement or the use of states requiring infinite squeezing. In this work, we adapt existing protocols to deal with these unavoidable considerations and use them to certify their application for different quantum information tasks. More specifically, we show how CV graph states can be efficiently verified and certified even in a noisy and imperfect setting. We then discuss how our findings impact the usability of states obtained after the protocol for different applications, including quantum teleportation, computing, and sensing.",
+      "url": "https://doi.org/10.1103/physreva.111.022413"
+    },
+    {
+      "id": "https://openalex.org/W4378375575",
+      "title": "Classical verification of quantum measurement for the computational basis and the XY -plane basis",
+      "year": 2023,
+      "doi": "https://doi.org/10.1103/physreva.107.052616",
+      "abstract": "Recent advances in quantum technologies raise the urgent need of verifying the correct functionality of a quantum device. Certifying the correctness of a quantum device in a fully classical manner is an important research branch. In this paper, we present a measurement protocol that allows a classical verifier to interact with an efficient quantum prover to verify the computational basis or the $XY$-plane basis measurement on a quantum state. With the help of two adaptive hardcore bit properties of a noisy trapdoor claw-free family, the security of measurement protocol is proved, which is under quantum hardness of the learning with error. The security characterizes the distance between the output distribution of measurement protocol and the distribution obtained by measuring certain quantum states in the designated basis, with or without the presence of honest behavior of the prover. Moreover, exploiting the measurement protocol, we present two device-noise-independent verification protocols of graph states and a classical verification protocol of delegated quantum computing whose soundness is 0.5757.",
+      "url": "https://doi.org/10.1103/physreva.107.052616"
+    },
+    {
+      "id": "https://openalex.org/W4392868665",
+      "title": "Eigenvalue-based quantum state verification of three-qubit W class states",
+      "year": 2024,
+      "doi": "https://doi.org/10.1016/j.physa.2024.129681",
+      "abstract": "",
+      "url": "https://doi.org/10.1016/j.physa.2024.129681"
+    },
+    {
+      "id": "https://openalex.org/W4410993258",
+      "title": "Experimental verification of entangled states in the adversarial scenario",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/physrevapplied.23.064005",
+      "abstract": "Efficient verification of entangled states is crucial to many applications in quantum information processing. However, the effectiveness of standard quantum state verification (QSV) is based on the condition of independent and identical distribution (IID), which impedes its applications in many practical scenarios. Here we demonstrate a defensive QSV protocol, which is effective in all kinds of non-IID scenarios, including the extremely challenging adversarial scenario. To this end, we build a high-speed preparation-and-measurement apparatus controlled by quantum random-number generators. Our experiments clearly show that standard QSV protocols often provide unreliable fidelity certificates in non-IID scenarios. In sharp contrast, the defensive QSV protocol based on a homogeneous strategy can provide reliable and nearly tight fidelity certificates at comparable high efficiency, even under malicious attacks. Moreover, our scheme is tolerant of the imperfections in a realistic experiment, which is very appealing to practical applications.",
+      "url": "https://doi.org/10.1103/physrevapplied.23.064005"
+    },
+    {
+      "id": "https://openalex.org/W4414504575",
+      "title": "Practical Advantage of Classical Communication in Entanglement Detection",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/hlcv-qcnw",
+      "abstract": "Entanglement is the cornerstone of quantum communication, yet conventional detection relies solely on local measurements. In this Letter, we present an experimental demonstration, based on an improved theoretical framework showing that one-way local operations and classical communication (1-LOCC) can significantly outperform purely local measurements in detecting quantum entanglement. By casting the entanglement detection problem as a semidefinite program, we derive protocols that minimize false negatives at fixed false-positive rates. A variational generative machine-learning algorithm efficiently searches over high-dimensional parameter spaces, identifying states and measurement strategies that exhibit a clear 1-LOCC advantage. Experimentally, we realize a genuine event-ready protocol on a three-dimensional photonic entanglement source, employing fiber delays as short-lived quantum memories. We implement rapid, field-programmable gate array-based sampling of the optimized probabilistic instructions, allowing Bob's measurement settings to adapt to Alice's outcomes in real time. Our results validate the predicted 1-LOCC advantage in a realistic noisy setting and reduce the experimental trials needed to certify entanglement. These findings mark a step toward scalable, adaptive entanglement detection methods crucial for quantum networks and computing, paving the way for more efficient generation and verification of high-dimensional entangled states.",
+      "url": "https://doi.org/10.1103/hlcv-qcnw"
+    },
+    {
+      "id": "https://openalex.org/W2601730604",
+      "title": "Nonadaptive fault-tolerant verification of quantum supremacy with noise",
+      "year": 2019,
+      "doi": "https://doi.org/10.22331/q-2019-07-12-164",
+      "abstract": "Quantum samplers are believed capable of sampling efficiently from distributions that are classically hard to sample from. We consider a sampler inspired by the classical Ising model. It is nonadaptive and therefore experimentally amenable. Under a plausible conjecture, classical sampling upto additive errors from this model is known to be hard. We present a trap-based verification scheme for quantum supremacy that only requires the verifier to prepare single-qubit states. The verification is done on the same model as the original sampler, a square lattice, with only a constant overhead. We next revamp our verification scheme in two distinct ways using fault tolerance that preserves the nonadaptivity. The first has a lower overhead based on error correction with the same threshold as universal quantum computation. The second has a higher overhead but an improved threshold ( 1.97% ) based on error detection. We show that classically sampling upto additive errors is likely hard in both these schemes. Our results are applicable to other sampling problems such as the Instantaneous Quantum Polynomial-time (IQP) computation model. They should also assist near-term attempts at experimentally demonstrating quantum supremacy and guide long-term ones.",
+      "url": "https://doi.org/10.22331/q-2019-07-12-164"
+    },
+    {
+      "id": "https://openalex.org/W2765560799",
+      "title": "Measuring Quantum Entropy",
+      "year": 2019,
+      "doi": "https://doi.org/10.1109/isit.2019.8849572",
+      "abstract": "The entropy of a quantum system is a measure of its randomness and is useful in quantifying entanglement. We study the problem of measuring the von Neumann and R\u00e9nyi entropies of an unknown mixed quantum state given access to independent copies of the state. For R\u00e9nyi entropy of integral order exceeding one, we determine the order-optimal copy complexity and show that it is strictly lower than the number of copies required to learn the underlying state. The main technical innovation is a concentration result for certain polynomials that arise in the Kerov algebra of Young diagrams, which is proven using the cycle structure of compositions of certain types of permutations. For von Neumann entropy and R\u00e9nyi entropy of non-integral orders, we provide upper and lower bounds on the sample complexity of the Empirical Young Diagram (EYD) algorithm, which is the analogue of the empirical plug-in estimator in classical estimation.",
+      "url": "https://doi.org/10.1109/isit.2019.8849572"
+    },
+    {
+      "id": "https://openalex.org/W4389950661",
+      "title": "Fidelity-estimation method for graph states with depolarizing noise",
+      "year": 2023,
+      "doi": "https://doi.org/10.1103/physrevresearch.5.043260",
+      "abstract": "Graph states are entangled states that are useful for several quantum information processing tasks, such as measurement-based quantum computation and quantum metrology. As the size of graph states realized in experiments increases, it becomes more essential to devise efficient methods for estimating the fidelity between the ideal graph state and an experimentally realized actual state. Any efficient fidelity-estimation method, in general, must use multiple experimental settings, i.e., needs to switch between at least two measurements. Recently, it has been shown that a single measurement is sufficient if the noise can be modeled as the phase-flip error. Since the bit-flip error should also occur in several experiments, it is desired to extend this simplest method to noise models that include phase and bit-flip errors. However, it seems to be nontrivial because their result strongly depends on properties of the phase-flip error. In this paper, by analyzing effects of the bit-flip error on stabilizer operators of graph states, we achieve the extension to the depolarizing noise, which is a major noise model including phase and bit-flip errors. We also numerically evaluate our simplest method for noise models interpolating between the phase-flip and depolarizing noises.",
+      "url": "https://doi.org/10.1103/physrevresearch.5.043260"
+    },
+    {
+      "id": "https://openalex.org/W4410077355",
+      "title": "Measuring quantum relative entropy with finite-size effect",
+      "year": 2025,
+      "doi": "https://doi.org/10.22331/q-2025-05-05-1725",
+      "abstract": "We study the estimation of relative entropy D ( \u03c1 \u2016 \u03c3 ) when \u03c3 is known. We show that the Cram\u00e9r-Rao type bound equals the relative varentropy. Our estimator attains the Cram\u00e9r-Rao type bound when the dimension d is fixed. It also achieves the sample complexity O ( d 2 ) when the dimension d increases. This sample complexity is optimal when \u03c3 is the completely mixed state. Also, it has time complexity O ( d 6 p o l y l o g d ) . Our proposed estimator unifiedly works under both settings.",
+      "url": "https://doi.org/10.22331/q-2025-05-05-1725"
+    },
+    {
+      "id": "https://openalex.org/W4410358458",
+      "title": "Computable Model-Independent Bounds for Adversarial Quantum Machine Learning",
+      "year": 2025,
+      "doi": "https://doi.org/10.1109/tqe.2025.3569922",
+      "abstract": "By leveraging the principles of quantum mechanics, QML opens doors to novel approaches in machine learning and offers potential speedup. However, machine learning models are well documented to be vulnerable to malicious manipulations, and this susceptibility extends to the models of QML. This situation necessitates a thorough understanding of QML's resilience against adversarial attacks, particularly in an era where quantum computing capabilities are expanding. In this regard, this paper examines model-independent bounds on adversarial performance for QML. To the best of our knowledge, we introduce the first computation of an approximate lower bound for adversarial error when evaluating model resilience against sophisticated quantum-based adversarial attacks. Experimental results are compared to the computed bound, demonstrating the potential of QML models to achieve high robustness. In the best case, the experimental error is only 10% above the estimated bound, offering evidence of the inherent robustness of quantum models. This work not only advances our theoretical understanding of quantum model resilience but also provides a precise reference bound for the future development of robust QML algorithms.",
+      "url": "https://doi.org/10.1109/tqe.2025.3569922"
+    },
+    {
+      "id": "https://openalex.org/W4413365396",
+      "title": "A new general quantum state verification protocol by the classical shadow method",
+      "year": 2025,
+      "doi": "https://doi.org/10.1007/s11128-025-04889-1",
+      "abstract": "",
+      "url": "https://doi.org/10.1007/s11128-025-04889-1"
+    },
+    {
+      "id": "https://openalex.org/W2982021416",
+      "title": "Worst-case Quantum Hypothesis Testing with Separable Measurements",
+      "year": 2020,
+      "doi": "https://doi.org/10.22331/q-2020-09-11-320",
+      "abstract": "For any pair of quantum states (the hypotheses), the task of binary quantum hypotheses testing is to derive the tradeoff relation between the probability p01 of rejecting the null hypothesis and p10 of accepting the alternative hypothesis. The case when both hypotheses are explicitly given was solved in the pioneering work by Helstrom. Here, instead, for any given null hypothesis as a pure state, we consider the worst-case alternative hypothesis that maximizes p10 under a constraint on the distinguishability of such hypotheses. Additionally, we restrict the optimization to separable measurements, in order to describe tests that are performed locally. The case p01=0 has been recently studied under the name of ``quantum state verification''. We show that the problem can be cast as a semi-definite program (SDP). Then we study in detail the two-qubit case. A comprehensive study in parameter space is done by solving the SDP numerically. We also obtain analytical solutions in the case of commuting hypotheses, and in the case where the two hypotheses can be orthogonal (in the latter case, we prove that the restriction to separable measurements generically prevents perfect distinguishability). In regards to quantum state verification, our work shows the existence of more efficient strategies for noisy measurement scenarios.",
+      "url": "https://doi.org/10.22331/q-2020-09-11-320"
+    },
+    {
+      "id": "https://openalex.org/W4385585341",
+      "title": "Scalable Experimental Bounds for Dicke and GHZ States Fidelities",
+      "year": 2023,
+      "doi": "https://doi.org/10.1145/3587135.3592197",
+      "abstract": "Estimating the state preparation fidelity of highly entangled states on noisy intermediate-scale quantum (NISQ) devices is an important task for benchmarking and application considerations. Unfortunately, exact fidelity measurements quickly become prohibitively expensive, as they scale exponentially as O(3N) for N-qubit states, using full state tomography with measurements in all Pauli bases combinations. However, Somma et al. [20] established that the complexity could be drastically reduced when looking at fidelity lower bounds for states that exhibit symmetries, such as Dicke States and GHZ States. For larger states, these bounds still need to be tight enough to provide reasonable estimations on NISQ devices.",
+      "url": "https://doi.org/10.1145/3587135.3592197"
+    },
+    {
+      "id": "https://openalex.org/W4306752036",
+      "title": "Robust one-sided self-testing of two-qubit states via quantum steering",
+      "year": 2022,
+      "doi": "https://doi.org/10.1103/physreva.106.042424",
+      "abstract": "Entangled two-qubit states are the core building blocks for constructing quantum communication networks. Their accurate verification is crucial to the functioning of the networks, especially for untrusted networks. In this work we study the self-testing of two-qubit entangled states via steering inequalities, with robustness analysis against noise. More precisely, steering inequalities are constructed from the tilted Clauser-Horne-Shimony-Holt inequality and its general form, to verify the general two-qubit entangled states. The study provides a good robustness bound, using both local extraction map and numerical semidefinite-programming methods. In particular, optimal local extraction maps are constructed in the analytical method, which yields the theoretical optimal robustness bound. To further improve the robustness of one-sided self-testing, we propose a family of three measurement settings steering inequalities. The result shows that three-setting steering inequality demonstrates an advantage over two-setting steering inequality on robust self-testing with noise. Moreover, to construct a practical verification protocol, we clarify the sample efficiency of our protocols in the one-sided device-independent scenario.",
+      "url": "https://doi.org/10.1103/physreva.106.042424"
+    },
+    {
+      "id": "https://openalex.org/W4404246439",
+      "title": "Scalable Experimental Bounds for Entangled Quantum State Fidelities",
+      "year": 2024,
+      "doi": "https://doi.org/10.1145/3700885",
+      "abstract": "Estimating the state preparation fidelity of highly entangled states on noisy intermediate-scale quantum (NISQ) devices is important for benchmarking and application considerations. Unfortunately, exact fidelity measurements quickly become prohibitively expensive, as they scale exponentially as O (3 N for N -qubit states, using full state tomography with measurements in all Pauli bases combinations. However, Somma et al.established that the complexity could be drastically reduced when looking at fidelity lower bounds for states that exhibit symmetries, such as Dicke states and GHZ states. These bounds must still be tight enough for larger states to provide reasonable estimations on NISQ devices. For the first time and more than 15 years after the theoretical introduction, we report meaningful lower bounds for the state preparation fidelity of all Dicke states up to N =10 and all GHZ states up to N =20 on Quantinuum H1 ion-trap systems using efficient implementations of recently proposed scalable circuits for these states. Our achieved lower bounds match or exceed previously reported exact fidelities on superconducting systems for much smaller states. Furthermore, we provide evidence that for large Dicke states \\(\\left|\\smash{D_{N/2}^{N}} \\right\\rangle\\) , we may resort to a GHZ-based approximate state preparation to achieve better fidelity. This work provides a path forward to benchmarking entanglement as NISQ devices improve in size and quality.",
+      "url": "https://doi.org/10.1145/3700885"
+    },
+    {
+      "id": "https://openalex.org/W4407666588",
+      "title": "Verification of Entangled States Under Noisy Measurements",
+      "year": 2025,
+      "doi": "https://doi.org/10.1002/qute.202400575",
+      "abstract": "Abstract Entanglement plays an indispensable role in numerous quantum information and quantum computation tasks, underscoring the need for efficiently verifying entangled states. In recent years, quantum state verification has received increasing attention, yet the challenge of addressing noise effects in implementing this approach remains unsolved. In this work, a systematic assessment of the performance of quantum state verification protocols is provided in the presence of measurement noise. Based on the analysis, a necessary and sufficient condition is provided to uniquely identify the target state under noisy measurements. Moreover, this work proposes a symmetric hypothesis testing verification algorithm with noisy measurements. Then, relying on states, a semidefinite program is demonstrated to calculate the infidelity threshold for arbitrary measurement noise. Subsequently, using a noisy nonadaptive verification strategy of Greenberger\u2013Horne\u2013Zeilinger and stabilizer states, the noise effects on the verification efficiency are analytically illustrated. From both analytical and numerical perspectives, this work demonstrates that the noisy verification protocol exhibits a negative quadratic relationship between the sample complexity and the infidelity. The method can be easily applied to real experimental settings, thereby demonstrating its promising prospects.",
+      "url": "https://doi.org/10.1002/qute.202400575"
+    },
+    {
+      "id": "https://openalex.org/W4417034318",
+      "title": "Quantum Subspace Verification for Error Correction Codes",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/fyw6-lq1l",
+      "abstract": "Quantum error correction is pivotal in advancing toward large-scale quantum computation, and efficient verification is crucial for ensuring the high fidelity of code states. Traditional methodologies, such as state tomography, direct fidelity estimation, and state verification, either fall short in measurement efficiency, especially for large-scale systems, or are restricted to some specific states. In this work, we introduce a general framework for quantum subspace verification, enabling efficient and measurement-noise-robust fidelity estimation between a given state and the target subspace with a specified confidence level. By integrating the proposed subspace verification with direct fidelity estimation, we develop a composite protocol that significantly improves the efficiency of verifying the fidelity of general magic logical states, as demonstrated by intuitive numerical results. This improvement stems from the use of subspace verification, which leverages the knowledge of code subspaces to significantly reduce measurement costs. Additionally, we detail the construction of verification operators for typical error correction codes, including general stabilizer codes and quantum low-density parity-check codes, enabling their efficient implementation using practical local measurements. Notably, for certain codes, such as the Calderbank-Shor-Steane codes and quantum low-density parity-check stabilizer codes, we reduce the number of required measurement settings and sample complexity to a constant level using graphical methods. Our approach facilitates efficient and feasible verification of error correction codes and generic magic logical states, advancing their practical implementations on quantum platforms.",
+      "url": "https://doi.org/10.1103/fyw6-lq1l"
+    },
+    {
+      "id": "https://openalex.org/W3130203062",
+      "title": "Quantum Entanglement Based Sentence Similarity Computation",
+      "year": 2020,
+      "doi": "https://doi.org/10.1109/pic50277.2020.9350744",
+      "abstract": "Sentence representation is one of the foundations of natural language processing. A quantum entanglement-based approach is provided to determine the sentence similarity. The sentence embedding based on quantum computation considers the semantic structure of a sentence, tensor product and attentive mechanism. Main components of modifiers of a complete sentence are obtained by using the attentive mechanism combining with quantum entanglement of two consecutive notional words. The semantic features and syntactic structures of sentences are extracted by the tensor product of two consecutive notional words without any big-corpus or prior knowledge. Experimental results implemented on 17 datasets with an excellent effect show that taking the quantum entanglement into the sentence embedding yields improvements on mining semantic relations and syntactic structures. These results shed new light on sentence representation with limited resources, and represent a new step towards the quantum entanglement-based application in natural language processing.",
+      "url": "https://doi.org/10.1109/pic50277.2020.9350744"
+    },
+    {
+      "id": "https://openalex.org/W3177598568",
+      "title": "Experimental Masking of Real Quantum States",
+      "year": 2021,
+      "doi": "https://doi.org/10.1103/physrevapplied.16.024052",
+      "abstract": "Masking of quantum information is a way of hiding information in correlations such that no information is accessible to any local observer. Although the set of all quantum states as a whole cannot be masked into bipartite correlations according to the no-masking theorem, the set of real states is maskable and is a maximal maskable set. In this work, we experimentally realize a masking protocol of the real ququart by virtue of a photonic quantum walk. Our experiment clearly demonstrates that quantum information of the real ququart can be completely hidden in bipartite correlations of two-qubit hybrid entangled states, which are encoded in two different degrees of freedom of a single photon. The hidden information is not accessible from each qubit alone, but can be faithfully retrieved with a fidelity of about 99% from correlation measurements. By contrast, any superset of the set of real density matrices cannot be masked.",
+      "url": "https://doi.org/10.1103/physrevapplied.16.024052"
+    },
+    {
+      "id": "https://openalex.org/W3194524837",
+      "title": "Synthesis and characterization of pure, two-qubit states encoded in path and polarization",
+      "year": 2021,
+      "doi": "https://doi.org/10.1088/2040-8986/ac1bbf",
+      "abstract": "Abstract We have designed and experimentally put to test a protocol to synthesize and characterize pure, two-qubit states encoded in polarization and momentum (path) of light beams. Because these degrees of freedom are common to both classical and quantum light, it was possible to implement our protocol with classical light, thereby offering an advantageous and versatile testing ground. The experimental setup is robust and does not require state-dependent scheme modifications. We exhibited the capabilities of our protocol by generating three types of two-qubit states: Bell states, states with variable phases, and states with variable amplitudes.",
+      "url": "https://doi.org/10.1088/2040-8986/ac1bbf"
+    },
+    {
+      "id": "https://openalex.org/W3101774651",
+      "title": "",
+      "year": null,
+      "doi": null,
+      "abstract": "Quantum samplers are believed capable of sampling efficiently from distributions that are classically hard to sample from. We consider a sampler inspired by the classical Ising model. It is nonadaptive and therefore experimentally amenable. Under a plausible conjecture, classical sampling upto additive errors from this model is known to be hard. We present a trap-based verification scheme for quantum supremacy that only requires the verifier to prepare single-qubit states. The verification is done on the same model as the original sampler, a square lattice, with only a constant overhead. We next revamp our verification scheme in two distinct ways using fault tolerance that preserves the nonadaptivity. The first has a lower overhead based on error correction with the same threshold as universal quantum computation. The second has a higher overhead but an improved threshold (1.97%) based on error detection. We show that classically sampling upto additive errors is likely hard in both these schemes. Our results are applicable to other sampling problems such as the Instantaneous Quantum Polynomial-time (IQP) computation model. They should also assist near-term attempts at experimentally demonstrating quantum supremacy and guide long-term ones.",
+      "url": "https://quantum-journal.org/papers/q-2019-07-12-164/"
+    },
+    {
+      "id": "https://openalex.org/W3205726374",
+      "title": "Efficient verification of entangled continuous-variable quantum states with local measurements",
+      "year": 2021,
+      "doi": "https://doi.org/10.1103/physrevresearch.3.l042004",
+      "abstract": "Continuous-variable quantum states are of particular importance in various quantum information processing tasks including quantum communication and quantum sensing. However, a bottleneck has emerged with the fast increasing in size of the quantum systems which severely hinders their efficient characterization. In this work, we establish a systematic framework for verifying entangled continuous-variable quantum states by employing local measurements only. Our protocol is able to achieve the unconditionally high verification efficiency which is quadratically better than quantum tomography as well as other nontomographic methods. Specifically, we demonstrate the power of our protocol by showing the efficient verification of entangled two-mode and multimode coherent states with local measurements.",
+      "url": "http://arxiv.org/abs/2103.16275"
+    },
+    {
+      "id": "https://openalex.org/W2964845392",
+      "title": "Robust quantum metrology with explicit symmetric states",
+      "year": 2019,
+      "doi": "https://doi.org/10.1109/tit.2021.3132634",
+      "abstract": "12 pages, 2 figures, double column, (New: typos corrected, improved figures)",
+      "url": "http://arxiv.org/abs/1908.02378"
+    },
+    {
+      "id": "https://openalex.org/W3198048564",
+      "title": "Quantum verification with few copies",
+      "year": 2021,
+      "doi": null,
+      "abstract": "As quantum technologies advance, the ability to generate increasingly large quantum states has experienced rapid development. In this context, the verification of large entangled systems represents one of the main challenges in the employment of such systems for reliable quantum information processing. Though the most complete technique is undoubtedly full tomography, the inherent exponential increase of experimental and post-processing resources with system size makes this approach unfeasible even at moderate scales. For this reason, there is currently an urgent need to develop novel methods that surpass these limitations. This review article presents novel techniques focusing on a fixed number of resources (sampling complexity), and thus prove suitable for systems of arbitrary dimension. Specifically, a probabilistic framework requiring at best only a single copy for entanglement detection is reviewed, together with the concept of shadow and selective quantum state tomography, which enables the estimation of arbitrary elements of an unknown state with a number of copies that is independent of the system's size. These hyper-efficient techniques define a dimensional demarcation for partial tomography and open a path for novel applications.",
+      "url": "https://arxiv.org/pdf/2109.03860"
+    },
+    {
+      "id": "https://openalex.org/W3202381445",
+      "title": "Dense Coding with Locality Restriction for Decoder: Quantum Encoders vs. Super-Quantum Encoders",
+      "year": 2021,
+      "doi": "https://doi.org/10.48550/arxiv.2109.12518",
+      "abstract": "We investigate dense coding by imposing various locality restrictions to our decoder by employing the resource theory of asymmetry framework. In this task, the sender Alice and the receiver Bob share an entangled state. She encodes the classical information into it using a symmetric preserving encoder and sends the encoded state to Bob through a noiseless quantum channel. The decoder is limited to a measurement to satisfy a certain locality condition on the bipartite system composed of the receiving system and the preshared entanglement half. Our contributions are summarized as follows: First, we derive an achievable transmission rate for this task dependently of conditions of encoder and decoder. Surprisingly, we show that the obtained rate cannot be improved even when the decoder is relaxed to local measurements, two-way LOCCs, separable measurements, or partial transpose positive (PPT) measurements for the bipartite system. Moreover, depending on the class of allowed measurements with a locality condition, we relax the class of encoding operations to super-quantum encoders in the framework of general probability theory (GPT). That is, when our decoder is restricted to a separable measurement, theoretically, a positive operation is allowed as an encoding operation. Surprisingly, even under this type of super-quantum relaxation, the transmission rate cannot be improved. This fact highlights the universal validity of our analysis beyond quantum theory.",
+      "url": "http://arxiv.org/abs/2109.12518"
+    },
+    {
+      "id": "https://openalex.org/W3205135548",
+      "title": "Greenberger-Horne-Zeilinger States: Their Identifications and Robust Violations",
+      "year": 2021,
+      "doi": "https://doi.org/10.1142/s0217732321502230",
+      "abstract": "The $N$-qubit Greenberger-Horne-Zeilinger (GHZ) states are the maximally entangled states of $N$ qubits, which have had many important applications in quantum information processing, such as quantum key distribution and quantum secret sharing. Thus how to distinguish the GHZ states from other quantum states becomes a significant problem. In this work, by presenting a family of the generalized Clauser-Horne-Shimony-Holt (CHSH) inequality, we show that the $N$-qubit GHZ states can be indeed identified by the maximal violations of the generalized CHSH inequality under some specific measurement settings. The generalized CHSH inequality is simple and contains only four correlation functions for any $N$-qubit system, thus has the merit of facilitating experimental verification. Furthermore, we present a quantum phenomenon of robust violations of the generalized CHSH inequality, in which the maximal violation of Bell's inequality can be robust under some specific noises adding to the $N$-qubit GHZ states.",
+      "url": "http://arxiv.org/abs/2106.01550"
+    },
+    {
+      "id": "https://openalex.org/W3111154694",
+      "title": "Sampling and the complexity of nature",
+      "year": 2020,
+      "doi": "https://doi.org/10.17169/refubium-28790",
+      "abstract": "Randomness is an intrinsic feature of quantum theory. The outcome of any measurement will be random, sampled from a probability distribution that is defined by the measured quantum state. The task of sampling from a prescribed probability distribution therefore seems to be a natural technological application of quantum devices. And indeed, certain random sampling tasks have been proposed to experimentally demonstrate the speedup of quantum over classical computation, so-called \u201cquantum computational supremacy\u201d. In the research presented in this thesis, I investigate the complexity-theoretic and physical foundations of quantum sampling algorithms. Using the theory of computational complexity, I assess the computational power of natural quantum simulators and close loopholes in the complexity-theoretic argument for the classical intractability of quantum samplers (Part I). In particular, I prove anticoncentration for quantum circuit families that give rise to a 2-design and review methods for proving average-case hardness. I present quantum random sampling schemes that are tailored to large-scale quantum simulation hardware but at the same time rise up to the highest standard in terms of their complexity-theoretic underpinning. Using methods from property testing and quantum system identification, I shed light on the question, how and under which conditions quantum sampling devices can be tested or verified in regimes that are not simulable on classical computers (Part II). I present a no-go result that prevents efficient verification of quantum random sampling schemes as well as approaches using which this no-go result can be circumvented. In particular, I develop fully efficient verification protocols in what I call the measurement-device-dependent scenario in which single-qubit measurements are assumed to function with high accuracy. Finally, I try to understand the physical mechanisms governing the computational boundary between classical and quantum computing devices by challenging their computational power using tools from computational physics and the theory of computational complexity (Part III). I develop efficiently computable measures of the infamous Monte Carlo sign problem and assess those measures both in terms of their practicability as a tool for alleviating or easing the sign problem and the computational complexity of this task. An overarching theme of the thesis is the quantum sign problem which arises due to destructive interference between paths \u2013 an intrinsically quantum effect. The (non-)existence of a sign problem takes on the role as a criterion which delineates the boundary between classical and quantum computing devices. I begin the thesis by identifying the quantum sign problem as a root of the computational intractability of quantum output probabilities. It turns out that the intricate structure of the probability distributions the sign problem gives rise to, prohibits their verification from few samples. In an ironic twist, I show that assessing the intrinsic sign problem of a quantum system is again an intractable problem.",
+      "url": "http://arxiv.org/abs/2012.07905"
+    },
+    {
+      "id": "https://openalex.org/W4393325636",
+      "title": "Information Processing at The Speed of Light",
+      "year": 2024,
+      "doi": "https://doi.org/10.2139/ssrn.4748781",
+      "abstract": "",
+      "url": "https://doi.org/10.2139/ssrn.4748781"
+    },
+    {
+      "id": "https://openalex.org/W3094389889",
+      "title": "Classical Communication Enhanced Quantum State Verification",
+      "year": 2020,
+      "doi": "https://doi.org/10.48550/arxiv.2010.10011",
+      "abstract": "Quantum state verification provides an efficient approach to characterize the reliability of quantum devices for generating certain target states. The figure of merit of a specific strategy is the estimated infidelity $\u03b5$ of the tested state to the target state, given a certain number of performed measurements n. Entangled measurements constitute the globally optimal strategy and achieve the scaling that \u03b5is inversely proportional to n. Recent advances show that it is possible to achieve the same scaling simply with non-adaptive local measurements, however, the performance is still worse than the globally optimal bound up to a constant factor. In this work, by introducing classical communication, we experimentally implement an adaptive quantum state verification. The constant-factor is minimized from ~2.5 to 1.5 in this experiment, which means that only 60% measurements are required to achieve a certain value of \u03b5compared to optimal non-adaptive local strategy. Our results indicate that classical communication significantly enhances the performance of quantum state verification, and leads to an efficiency that further approaches the globally optimal bound.",
+      "url": "http://arxiv.org/abs/2010.10011"
+    },
+    {
+      "id": "https://openalex.org/W3144601181",
+      "title": "Efficient verification of entangled continuous-variable quantum states with local measurements",
+      "year": 2021,
+      "doi": "https://doi.org/10.1103/physrevresearch.3.l042004",
+      "abstract": "The authors propose a verification framework for continuous-variable quantum states with local measurements and provide a demonstration of the protocol in cases of entangled two-mode and multi-mode coherent states.",
+      "url": "https://doi.org/10.1103/physrevresearch.3.l042004"
+    },
+    {
+      "id": "https://openalex.org/W3169847501",
+      "title": "Efficient verification and fidelity estimation of discrete bipartite squeezed states",
+      "year": 2021,
+      "doi": "https://doi.org/10.48550/arxiv.2106.00533",
+      "abstract": "To gain an advantage, quantum technologies utilize phenomena particular to quantum mechanics. Two such phenomena are squeezing and entanglement. Having generated states that exhibit these features, verification of their generation with local measurements can be a difficult process. Here we consider the states that are generated using the two-qudit single-axis squeezing Hamiltonian, that not only produces entangled two-qudit squeezed states but also results in various forms of interesting entangled states. We show how one can use local measurements to both efficiently verify and directly estimate the fidelity of these generated states.",
+      "url": "http://arxiv.org/abs/2106.00533"
+    },
+    {
+      "id": "https://openalex.org/W3170602229",
+      "title": "Greenberger\u2013Horne\u2013Zeilinger states: Their identifications and robust violations",
+      "year": 2021,
+      "doi": "https://doi.org/10.1142/s0217732321502230",
+      "abstract": "The [Formula: see text]-qubit Greenberger\u2013Horne\u2013Zeilinger (GHZ) states are the maximally entangled states of [Formula: see text] qubits, which have had many important applications in quantum information processing, such as quantum key distribution and quantum secret sharing. Thus how to distinguish the GHZ states from other quantum states becomes a significant problem. In this work, by presenting a family of the generalized Clauser\u2013Horne\u2013Shimony\u2013Holt (CHSH) inequality, we show that the [Formula: see text]-qubit GHZ states can be indeed identified by the maximal violations of the generalized CHSH inequality under some specific measurement settings. The generalized CHSH inequality is simple and contains only four correlation functions for any [Formula: see text]-qubit system, thus has the merit of facilitating experimental verification. Furthermore, we present a quantum phenomenon of robust violations of the generalized CHSH inequality in which the maximal violation of Bell\u2019s inequality can be robust under some specific noises adding to the [Formula: see text]-qubit GHZ states.",
+      "url": "https://doi.org/10.1142/s0217732321502230"
+    },
+    {
+      "id": "https://openalex.org/W3197150342",
+      "title": "Certification of Genuine Multipartite Entanglement with General and Robust Device-independent Witnesses",
+      "year": 2021,
+      "doi": "https://doi.org/10.48550/arxiv.2108.12764",
+      "abstract": "Genuine multipartite entanglement represents the strongest type of entanglement, which is an essential resource for quantum information processing. Standard methods to detect genuine multipartite entanglement, e.g., entanglement witnesses, state tomography, or quantum state verification, require full knowledge of the Hilbert space dimension and precise calibration of measurement devices, which are usually difficult to acquire in an experiment. The most radical way to overcome these problems is to detect entanglement solely based on the Bell-like correlations of measurement outcomes collected in the experiment, namely, device-independently (DI). However, it is difficult to certify genuine entanglement of practical multipartite states in this way, and even more difficult to quantify it, due to the difficulty to identify optimal multipartite Bell inequalities and protocols tolerant to state impurity. In this work, we explore a general and robust DI method which can be applied to various realistic multipartite quantum state in arbitrary finite dimension, while merely relying on bipartite Bell inequalities. Our method allows us both to certify the presence of genuine multipartite entanglement and to quantify it. Several important classes of entangled states are tested with this method, leading to the detection of genuinely entangled states. We also certify genuine multipartite entanglement in weakly-entangled GHZ states, thus showing that the method applies equally well to less standard states.",
+      "url": "http://arxiv.org/abs/2108.12764"
+    },
+    {
+      "id": "https://openalex.org/W3208659669",
+      "title": "Optimal verification of the Bell state and Greenberger\u2013Horne\u2013Zeilinger states in untrusted quantum networks",
+      "year": 2021,
+      "doi": "https://doi.org/10.1038/s41534-021-00499-8",
+      "abstract": "Abstract Bipartite and multipartite entangled states are basic ingredients for constructing quantum networks and their accurate verification is crucial to the functioning of the networks, especially for untrusted networks. Here we propose a simple approach for verifying the Bell state in an untrusted network in which one party is not honest. Only local projective measurements are required for the honest party. It turns out each verification protocol is tied to a probability distribution on the Bloch sphere and its performance has an intuitive geometric meaning. This geometric picture enables us to construct the optimal and simplest verification protocols, which are also very useful to detecting entanglement in the untrusted network. Moreover, we show that our verification protocols can achieve almost the same sample efficiencies as protocols tailored to standard quantum state verification. Furthermore, we establish an intimate connection between the verification of Greenberger\u2013Horne\u2013Zeilinger states and the verification of the Bell state. By virtue of this connection we construct the optimal protocol for verifying Greenberger\u2013Horne\u2013Zeilinger states and for detecting genuine multipartite entanglement.",
+      "url": "https://doi.org/10.1038/s41534-021-00499-8"
+    },
+    {
+      "id": "https://openalex.org/W4226072952",
+      "title": "Versatile fidelity estimation with confidence",
+      "year": 2021,
+      "doi": "https://doi.org/10.48550/arxiv.2112.07925",
+      "abstract": "As quantum devices become more complex and the requirements on these devices become more demanding, it is crucial to be able to verify the performance of such devices in a scalable and reliable fashion. A cornerstone task in this challenge is quantifying how close an experimentally prepared quantum state is to the desired one. Here we present a method to construct an estimator for the quantum state fidelity that is compatible with any measurement protocol. Our method provides a confidence interval on this estimator that is guaranteed to be nearly minimax optimal for the specified measurement protocol. For a well-chosen measurement scheme, our method is competitive in the number of measurement outcomes required for estimation. We demonstrate our method using simulations and experimental data from a trapped-ion quantum computer and compare the results to state-of-the-art techniques. Our method can be easily extended to estimate the expectation value of any observable, such as entanglement witnesses.",
+      "url": "http://arxiv.org/abs/2112.07925"
+    },
+    {
+      "id": "https://openalex.org/W4283779390",
+      "title": "Efficient Verification of Ground States of Frustration-Free Hamiltonians",
+      "year": 2022,
+      "doi": "https://doi.org/10.48550/arxiv.2206.15292",
+      "abstract": "Ground states of local Hamiltonians are of key interest in many-body physics and also in quantum information processing. Efficient verification of these states are crucial to many applications, but very challenging. Here we propose a simple, but powerful recipe for verifying the ground states of general frustration-free Hamiltonians based on local measurements. Moreover, we derive rigorous bounds on the sample complexity by virtue of the quantum detectability lemma (with improvement) and quantum union bound. Notably, the number of samples required does not increase with the system size when the underlying Hamiltonian is local and gapped, which is the case of most interest. As an application, we propose a general approach for verifying Affleck-Kennedy-Lieb-Tasaki (AKLT) states on arbitrary graphs based on local spin measurements, which requires only a constant number of samples for AKLT states defined on various lattices. Our work is of interest not only to many tasks in quantum information processing, but also to the study of many-body physics.",
+      "url": "http://arxiv.org/abs/2206.15292"
+    },
+    {
+      "id": "https://openalex.org/W4383176517",
+      "title": "Optimizing Measurements Sequences for Quantum State Verification",
+      "year": 2023,
+      "doi": "https://doi.org/10.48550/arxiv.2307.00881",
+      "abstract": "We consider the problem of deciding whether a given state preparation, i.e., a source of quantum states, is accurate, namely produces states close to a target one within a prescribed threshold. We show that, when multiple measurements need to be used, the order of measurements is critical for quickly assessing accuracy. We propose and compare different strategies to compute optimal or suboptimal measurement sequences either relying solely on a priori information, i.e., the target state for state preparation, or actively adapting the sequence to the previously obtained measurements. Numerical simulations show that the proposed algorithms reduce significantly the number of measurements needed for verification, and indicate an advantage for the adaptive protocol especially assessing faulty preparations.",
+      "url": "http://arxiv.org/abs/2307.00881"
+    },
+    {
+      "id": "https://openalex.org/W4387031639",
+      "title": "Certifying the Topology of Quantum Networks: Theory and Experiment",
+      "year": 2023,
+      "doi": "https://doi.org/10.48550/arxiv.2309.12907",
+      "abstract": "Distributed quantum information in networks is paramount for global secure quantum communication. Moreover, it finds applications as a resource for relevant tasks, such as clock synchronization, magnetic field sensing, and blind quantum computation. For quantum network analysis and benchmarking of implementations, however, it is crucial to characterize the topology of networks in a way that reveals the nodes between which entanglement can be reliably distributed. Here, we demonstrate an efficient scheme for this topology certification. Our scheme allows for distinguishing, in a scalable manner, different networks consisting of bipartite and multipartite entanglement sources. It can be applied to semi-device independent scenarios also, where the measurement devices and network nodes are not well characterized and trusted. We experimentally demonstrate our approach by certifying the topology of different six-qubit networks generated with polarized photons, employing active feed-forward and time multiplexing. Our methods can be used for general simultaneous tests of multiple hypotheses with few measurements, being useful for other certification scenarios in quantum technologies.",
+      "url": "http://arxiv.org/abs/2309.12907"
+    },
+    {
+      "id": "https://openalex.org/W4388900828",
+      "title": "Optimizing measurements sequences for quantum state verification",
+      "year": 2023,
+      "doi": "https://doi.org/10.1007/s11128-023-04167-y",
+      "abstract": "Abstract We consider the problem of deciding whether a given state preparation, i.e., a source of quantum states, is accurate; namely, it produces states close to a target one within a prescribed threshold. While most of the result in the literature considers the case in which the measurement operators can be arbitrarily chosen depending on the target state, obtaining favorable (Heisenberg) scaling, we focus on the case in which the measurements can be only chosen from a given set. We show that, in this case, the order of measurements is critical for quickly assessing accuracy. We propose and compare different strategies to compute optimal or suboptimal measurement sequences either relying solely on a priori information, i.e., the target state for state preparation, or actively adapting the sequence to the previously obtained measurements. Numerical simulations show that the proposed algorithms reduce significantly the number of measurements needed for verification and indicate an advantage for the adaptive protocol especially assessing faulty preparations.",
+      "url": "https://doi.org/10.1007/s11128-023-04167-y"
+    },
+    {
+      "id": "https://openalex.org/W4394992831",
+      "title": "Stability verification of quantum non-i.i.d. sources",
+      "year": 2024,
+      "doi": "https://doi.org/10.1088/1402-4896/ad41a1",
+      "abstract": "Abstract We introduce the problem of stability verification of quantum sources which are non-i.i.d.. The problem consists in ascertaining whether a given quantum source is stable or not, in the sense that it produces always a desired quantum state or if it suffers deviations. Stability is a statistical notion related to the sparsity of errors. This problem is closely related to the problem of quantum verification first proposed by Pallister et al (2018 Phys. Rev. Lett. 120), however, it extends the notion of the original problem. We introduce a family of states that come from these non-i.i.d. sources which we call a Markov state. These sources are more versatile than the i.i.d. ones as they allow statistical deviations from the norm instead of the more coarse previous approach. We prove in theorem 1 that the Markov states are not well described with tensor products over a changing source. In theorem 2 we further provide a lower bound on the trace distance between two Markov states, or conversely, an upper bound on the fidelity between these states. This is a bound on the capacity of determining the stability property of the source, which shows that it is exponentially easier to ascertain this with respect to n, the number of outcomes from the source.",
+      "url": "https://doi.org/10.1088/1402-4896/ad41a1"
+    },
+    {
+      "id": "https://openalex.org/W4396659266",
+      "title": "Measurement-device-independent verification of quantum states",
+      "year": 2024,
+      "doi": "https://doi.org/10.1103/physreva.109.052607",
+      "abstract": "Efficient and reliable verification of quantum states is central to quantum information processing applications. If using well-characterized measurement devices, effective methods have been developed for quantum state verification (QSV). In reality, however, measurement devices are generally imperfect or untrusted, which limits significantly the application of standard QSV protocols. Here, we propose the measurement-device-independent QSV (MDI-QSV) scheme for practice. With the help of trusted quantum inputs, we have developed a systematical approach to design MDI-QSV strategies for an arbitrary pure target state. We find that the number of required measurements has an optimal scaling with required accuracy and confidence level, similar to the standard QSV where trusted measurement devices are available. Our results offer a sample-efficient and realistic method for quantum state verification with virtues of a measurement-device-independent manner, and are within reach of current technology.",
+      "url": "https://doi.org/10.1103/physreva.109.052607"
+    },
+    {
+      "id": "https://openalex.org/W4403103262",
+      "title": "Quantum Verification for a Class of n$n$\u2010Qubit Quantum Entangled States",
+      "year": 2024,
+      "doi": "https://doi.org/10.1002/andp.202400305",
+      "abstract": "Abstract The quantum verification is to determine whether a quantum device is intentionally deceptive by assessing the proximity between the actual output state and the expected state. As a crucial step toward the advancement of quantum technology, numerous quantum state verification methods have been proposed. However, there remains a scarcity of methods for verifying states with an arbitrary number of qubits. A verification strategy for the entangled states with is proposed. Specifically, an average map is introduced and demonstrated that it simplifies the matrix form of the verification strategy while maintaining the verification efficiency. By optimizing the verification strategies, the strategy with local projective measurements is obtained.",
+      "url": "https://doi.org/10.1002/andp.202400305"
+    },
+    {
+      "id": "https://openalex.org/W4406766684",
+      "title": "Evaluating Quantum State Verification for d-Level Graph States",
+      "year": 2025,
+      "doi": "https://doi.org/10.1088/1742-6596/2934/1/012016",
+      "abstract": "Abstract The objective of Quantum State Verification (QSV) is to evaluate whether an unknown quantum state is sufficiently similar to a predetermined target state at a certain confidence level. The required number of identical and independent copies, N, of an unknown state for such a task is inversely proportional to the spectral gap of a verification operator. Stabilizer states form a foundational class of quantum states, extensively utilized in quantum computing. Defined through a group of stabilizer operators constructed from Pauli matrices in qubit systems, their structural properties not only simplify the mathematical representation and simulation of quantum states but also make them particularly suitable for verification protocols that rely on local measurements. Restricting the verification operator to be those that can be achieved by local measurements, previous researches had determined an upper bound for the spectral gap to be 2/3 in the cases of qubit stabilizer states. In this research, we show a similar upper bound of d/(d+1) in the cases of graph states of d-level systems by a technique from [1] but adapted to d-level graph states. In particular, we show that d-level graph states are maximally entangled across any bipartition of the graph, which allows us to reduce the problem to the case of a bipartite maximally entangled d-level systems for which the maximal spectral gap is known.",
+      "url": "https://doi.org/10.1088/1742-6596/2934/1/012016"
+    },
+    {
+      "id": "https://openalex.org/W4412376803",
+      "title": "GHZ-W genuinely entangled subspace verification with adaptive local measurements",
+      "year": 2025,
+      "doi": "https://doi.org/10.1007/s11432-024-4515-1",
+      "abstract": "",
+      "url": "https://doi.org/10.1007/s11432-024-4515-1"
+    },
+    {
+      "id": "https://openalex.org/W4412809150",
+      "title": "Robust Verification of Graph States Under Adversarial Scenario and Noisy Measurements",
+      "year": 2025,
+      "doi": "https://doi.org/10.1002/qute.202500352",
+      "abstract": "Abstract Graph states are resource states for measurement\u2010based quantum computation. Verification of graph states aims to certify whether a quantum state prepared by an untrusted device is close to an ideal graph state or not. Existing verification methods have not considered verifying graph states under an adversarial scenario and noisy measurements. In this paper, a robust verification method for graph states is proposed to overcome this issue. First, a verification model for graph states is designed. Then, two types of verification protocols based on this model are proposed. In addition, the completeness and soundness of the verification protocols are calculated when the measurement devices are affected by noises. Afterward, the measurement strategy of the robust verification protocols is extended from the specific case to the general case. In order to obtain the soundness that scales as , the verification method only requires copies of the graph state, where is the size of the graph state. Finally, several numerical examples are presented to demonstrate the effect of noises on the completeness and soundness of the verification protocols.",
+      "url": "https://doi.org/10.1002/qute.202500352"
+    },
+    {
+      "id": "https://openalex.org/W4414945017",
+      "title": "Prescriptive preparation and verification of nonstabilizer states",
+      "year": 2026,
+      "doi": "https://doi.org/10.1103/4hxp-fswy",
+      "abstract": "High-fidelity quantum state preparation is a central task in quantum information science. In practice, it is commonly guided either by full quantum state tomography, which becomes prohibitively resource-intensive as system size grows, or by empirically chosen measurement settings that lack principled optimality. Here we show that quantum state verification (QSV) can be elevated from a purely diagnostic tool to a prescriptive framework for quantum state preparation, directly specifying experimentally optimal measurements and quantitative fidelity indicators without full state reconstruction. We experimentally realize this prescriptive paradigm using a three-qubit nonstabilizer $W$ state and a modified homogeneous QSV protocol. The verification measurements not only certify the prepared state with high confidence but also serve as a tomography-free indicator that systematically informs the preparation procedure. Using only nine measurement settings and $10^4$ samples, we achieve high-fidelity state preparation consistent with full tomography that requires orders of magnitude more resources. Beyond the present implementation, the prescriptive structure of QSV is naturally compatible with closed-loop feedback control, outlining a pathway toward genuine real-time quantum state preparation in future low-latency platforms.",
+      "url": "https://doi.org/10.1103/4hxp-fswy"
+    },
+    {
+      "id": "https://openalex.org/W4415137722",
+      "title": "Existence of a robust optimal control process for efficient measurements in a two-qubit system",
+      "year": 2026,
+      "doi": "https://doi.org/10.1103/116x-1vfv",
+      "abstract": "The verification of quantum entanglement is essential for quality control in quantum communication. In this work, we propose an efficient protocol to directly verify the two-qubit entanglement of a known target state through a single expectation value measurement. Our method provides exact entanglement quantification using the currencence measure without performing quantum state tomography. We prove the existence of a unitary transformation that drives the initial state of a two-qubit system to a designated final state, where the trace over a chosen observable directly yields the concurrence of the initial state. Furthermore, we implement an optimal control process of that transformation and demonstrate its effectiveness through numerical simulations. We also show that this process is robust to environmental noise. Our approach offers advantages in directly verifying entanglement with low circuit depth, making it suitable for industrial-scale quality control of entanglement generation. Our results, presented here, provide mathematical justification for our earlier computational experiments.",
+      "url": "https://doi.org/10.1103/116x-1vfv"
+    },
+    {
+      "id": "https://openalex.org/W4416365725",
+      "title": "Rigorous maximum-likelihood estimation for quantum states",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/j5gh-hmtw",
+      "abstract": "Existing quantum state tomography methods are limited in scalability due to their high computation and memory demands, making them impractical for the recovery of large quantum states. In this work, we address these limitations by reformulating the maximum likelihood estimation problem using the Burer--Monteiro factorization, resulting in a nonconvex but low-rank parametrization of the density matrix. We derive a fully unconstrained formulation by analytically eliminating the trace-one and positive-semidefinite constraints, thereby avoiding the need for projection steps during optimization. Furthermore, we determine the Lagrange multiplier associated with the unit-trace constraint a priori, reducing computational overhead. The resulting formulation is amenable to scalable first-order optimization, and we demonstrate its tractability using the limited-memory Broyden-Fletcher-Goldfarb-Shanno method. Importantly, we also propose a low-memory version of the above algorithm to fully recover certain large quantum states with Pauli-based positive-operator-value measurements. Our low-memory algorithm avoids explicitly forming any density matrix, and does not require the density matrix to have a matrix product state or other tensor structure. For a fixed number of measurements and fixed rank, our algorithm requires just $O(d{log}_{2}d)$ complexity per iteration to recover a $d\\ifmmode\\times\\else\\texttimes\\fi{}d$ density matrix. Additionally, we derive a useful error bound that can be used to give a rigorous termination criterion. We numerically demonstrate that our method is competitive with state-of-the-art algorithms for moderately sized problems, and then demonstrate that our method can solve a 20-qubit problem on a laptop in under 5 hours.",
+      "url": "https://doi.org/10.1103/j5gh-hmtw"
+    },
+    {
+      "id": "https://openalex.org/W4417016823",
+      "title": "Beating the optimal verification of entangled states via collective strategies",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/6yrh-9tzp",
+      "abstract": "This work presents a collective strategy for verifying entangled quantum states that can reach efficiencies beyond those obtainable with the standard global-measurement approach, while preserving unused copies. The protocol is scalable across various platforms and is able to provide information about noise in the system.",
+      "url": "https://doi.org/10.1103/6yrh-9tzp"
+    },
+    {
+      "id": "https://openalex.org/W7119529156",
+      "title": "Why cut-and-choose quantum state verification cannot be both efficient and secure",
+      "year": 2026,
+      "doi": "https://doi.org/10.62056/ay11c3c2h",
+      "abstract": "Quantum state verification plays a vital role in many quantum cryptographic protocols, as it allows using quantum states from an untrusted source. While some progress has been made in this direction, the question of whether the most prevalent type of quantum state verification, namely cut-and-choose verification, can be efficient and secure, is still not answered in full generality. In this work, we show a fundamental limit for quantum state verification for all cut-and-choose approaches used to verify arbitrary quantum states. We provide a no-go result showing that the cut-and-choose techniques cannot lead to quantum state verification protocols that are both efficient and secure. We show this trade-off for stand-alone and composable security, where the scaling of the lower bound for the security parameters renders cut-and-choose quantum state verification effectively unusable.",
+      "url": "https://doi.org/10.62056/ay11c3c2h"
+    },
+    {
+      "id": "https://openalex.org/W7124179416",
+      "title": "Efficient Self\u2010Guided Estimation of Schmidt Number via Local Measurements",
+      "year": 2026,
+      "doi": "https://doi.org/10.1002/andp.202500201",
+      "abstract": "ABSTRACT Recent advances in experimental quantum platforms have enabled the development of devices capable of generating high\u2010dimensional quantum states, facilitating their use in quantum information processing tasks. High\u2010dimensional entangled states offer significant advantages in areas such as quantum key distribution, quantum communication, and quantum metrology. While the Schmidt rank (SR) characterizes entanglement for pure bipartite states in high\u2010dimensional spaces, its extension to mixed states is the Schmidt number (SN). However, experimentally determining the SN of unknown mixed states remains a significant challenge. Here, we propose an experimentally feasible method to determine the SN of unknown states, constructing a self\u2010guided SN witness scheme. Leveraging techniques from quantum state verification (QSV), this method allows SN estimation using only local measurements, thereby avoiding the need for direct projections onto high\u2010dimensional maximally entangled states. The self\u2010guided aspect is implemented through a Stochastic Gradient Algorithm (SGA) that systematically explores the space of local unitary operations to maximize a fidelity related to Schmidt number witnesses. We numerically demonstrate that for four\u2010dimensional entangled states, our scheme accurately estimates the SN, typically converging within approximately 200 iterations. Our results also show that the method is robust to realistic imperfections, highlighting its potential for practical applications in quantum information processing.",
+      "url": "https://doi.org/10.1002/andp.202500201"
+    },
+    {
+      "id": "https://openalex.org/W7124878056",
+      "title": "Efficient certification of high-dimensional entanglement",
+      "year": 2026,
+      "doi": "https://doi.org/10.1103/wfqb-rfl9",
+      "abstract": "",
+      "url": "https://doi.org/10.1103/wfqb-rfl9"
+    },
+    {
+      "id": "https://openalex.org/W7128512015",
+      "title": "Nearly-optimal CSS code subspace verification with local measurement",
+      "year": 2026,
+      "doi": "https://doi.org/10.1088/2058-9565/ae4420",
+      "abstract": "Abstract Quantum error correction (QEC) is the core mechanism enabling scalable and fault-tolerant quantum computation. Among various QEC schemes, Calderbank\u2013Shor\u2013Steane (CSS) codes play a central role. Efficiently verifying whether a quantum state remains within the target CSS code subspace is therefore essential both for understanding the theoretical performance of these codes and for assessing the error-correcting capability of practical quantum platforms. In this work, we develop an efficient framework for verifying whether a quantum system remains within the encoded subspace of a CSS code. We first show that the stabilizer structure of any CSS code can be mapped to a two-colorable graph, enabling the design of a hybrid verification strategy based solely on local Pauli measurements. We further analytically optimize the measurement probabilities and derive the resulting sample complexities for representative CSS codes. Specifically, for the Toric code, the efficiency of our hybrid strategy increases with lattice size and asymptotically approaches near-optimal performance. These results establish a unified and scalable approach to CSS code subspace verification, providing a foundation for certifiable and fault-tolerant quantum information processing.",
+      "url": "https://doi.org/10.1088/2058-9565/ae4420"
+    },
+    {
+      "id": "https://openalex.org/W7128595767",
+      "title": "Experimental quantum state certification by actively sampling photonic entangled states",
+      "year": 2026,
+      "doi": "https://doi.org/10.1126/sciadv.aea4144",
+      "abstract": "Entangled quantum states are essential ingredients for many quantum technologies, but they must be validated before they are used. As a full characterization is prohibitively resource intensive, recent work has focused on developing methods to efficiently extract a few parameters of interest, in a so-called verification framework. Most existing approaches are based on preparing an ensemble of nominally identical and independently distributed (IID) quantum states and then measuring each copy of the ensemble. However, this leaves no states left for the intended quantum tasks and the IID assumptions do not always hold experimentally. To overcome these challenges, we experimentally implement quantum state certification (QSC), which measures only a subset of the ensemble, certifying the fidelity of multiple copies of the remaining states. We use active optical switches to randomly sample from sources of two-photon Bell states and three-photon GHZ (Greenberger-Horn-Zeilinger) states, reporting statistically sound fidelities in real time without destroying the entire ensemble. In addition, our QSC protocol removes the assumption that the states are identically distributed (but still assumes independent copies); can achieve close N \u22121 scaling, in the number of states measured N ; and can be implemented in a device-independent manner. Together, these benefits make our QSC protocol suitable for benchmarking large-scale quantum computing devices and deployed quantum communication setups relying on entanglement in both standard and adversarial situations.",
+      "url": "https://doi.org/10.1126/sciadv.aea4144"
+    },
+    {
+      "id": "https://openalex.org/W7130552298",
+      "title": "Existence of a robust optimal control process for efficient measurements in a two-qubit system",
+      "year": 2026,
+      "doi": "https://doi.org/10.1103/116x-1vfv",
+      "abstract": "",
+      "url": "https://doi.org/10.1103/116x-1vfv"
+    },
+    {
+      "id": "https://openalex.org/W7133510158",
+      "title": "Universal and Efficient Quantum State Verification via Schmidt Decomposition and Mutually Unbiased Bases",
+      "year": 2026,
+      "doi": "https://doi.org/10.22331/q-2026-03-04-2011",
+      "abstract": "Efficient verification of multipartite quantum states is crucial to many applications in quantum information processing. By virtue of Schmidt decomposition and mutually unbiased bases, here we propose a universal protocol to verify arbitrary multipartite pure quantum states using adaptive local projective measurements. Moreover, we establish a universal upper bound on the sample complexity that is independent of the local dimensions. Numerical calculations further indicate that Haar-random pure states can be verified with a constant sample cost, irrespective of the qudit number and local dimensions, even in the adversarial scenario in which the source cannot be trusted. As alternatives, we provide several simpler variants that can achieve similar high efficiencies without using Schmidt decomposition. The simplest variant consists of only two distinct tests.",
+      "url": "https://doi.org/10.22331/q-2026-03-04-2011"
+    },
+    {
+      "id": "https://openalex.org/W7153232611",
+      "title": "Robust Verification of Quantum States in the Adversarial Scenario",
+      "year": 2026,
+      "doi": "https://doi.org/10.1007/978-3-032-11153-1_16",
+      "abstract": "",
+      "url": "https://doi.org/10.1007/978-3-032-11153-1_16"
+    },
+    {
+      "id": "https://openalex.org/W7160336617",
+      "title": "Phase Transitions and Noise Robustness of Quantum Graph States",
+      "year": 2026,
+      "doi": "https://doi.org/10.22331/q-2026-05-05-2094",
+      "abstract": "Graph states are entangled states that are essential for quantum information processing. As experimental advances enable the realization of large-scale graph states, efficient fidelity estimation methods are crucial for assessing their robustness against noise. However, calculations of exact fidelity become intractable for large systems due to the exponential growth in the number of stabilizers. In this work, we show that the fidelity between any ideal graph state and its noisy counterpart under IID Pauli noise can be mapped to the partition function of a classical spin system, enabling efficient computation via statistical mechanical techniques. Using this approach, we analyze the fidelity for regular graph states under depolarizing noise and uncover the emergence of phase transitions in fidelity between the pure-state regime and the noise-dominated regime. Specifically, in 2D, phase transitions occur only when the degree satisfies d \u2265 6 , while in 3D they already appear at d \u2265 5 . However, for graph states with excessively high degree, such as fully connected graphs, the phase transition disappears. Robustness of graph states against noise is thus determined by their connectivity and spatial dimensionality. Graph states with lower degree and/or dimensionality, which exhibit a smooth crossover, demonstrate greater robustness, while highly connected or higher-dimensional graph states are more fragile. Extreme connectivity, as the fully connected graph state possesses, restores robustness. Furthermore, we show that the fidelity can be rewritten in the form of the partition function of a constraint-percolation problem. Within this picture, we discuss the qualitative difference between 2D regular graph states with d = 6 and d = 5 regarding the presence or absence of a phase transition, as well as the suppressed critical behavior of fully connected graph states.",
+      "url": "https://doi.org/10.22331/q-2026-05-05-2094"
+    },
+    {
+      "id": "https://openalex.org/W7161245223",
+      "title": "QPing: A Quantum Ping Primitive for Quantum Networks",
+      "year": 2026,
+      "doi": "https://doi.org/10.1109/jsac.2026.3693981",
+      "abstract": "We introduce the concept of Quantum Ping (QPing) as a diagnostic primitive for future quantum networks, designed to assess whether two or more end nodes can establish practical quantum entanglement under given resource and time constraints, with controlled overhead and time-adaptive fidelity thresholds. Unlike classical ping, which probes network-layer connectivity through ICMP messages, our proposed quantum version is adapted to the unique features of quantum networks, where connectivity depends on the availability and quality of shared entanglement. We develop a formal framework for QPing and leverage tools such as sequential hypothesis testing to probe quantum connectivity. We present several strategies, including active strategies with path-based and segment-based variants, and resource-based strategies that utilize pre-shared entangled resources. We further provide a quantitative performance evaluation of these strategies, including diagnostic cost, latency, and feasibility under time-dependent decoherence. QPing can serve as a flexible diagnostic building block for quantum networks, designed to operate alongside fundamental network operations and to accommodate different architectural assumptions and protocol design approaches.",
+      "url": "https://doi.org/10.1109/jsac.2026.3693981"
+    },
+    {
+      "id": "https://openalex.org/W7163156477",
+      "title": "Prescriptive preparation and verification of nonstabilizer states",
+      "year": 2026,
+      "doi": "https://doi.org/10.1103/4hxp-fswy",
+      "abstract": "",
+      "url": "https://doi.org/10.1103/4hxp-fswy"
+    },
+    {
+      "id": "https://openalex.org/W7163925864",
+      "title": "A Blockchain\u2010Assisted Quantum Secret Sharing Framework with Function\u2010Level Dealer Reduction",
+      "year": 2026,
+      "doi": "https://doi.org/10.1002/qute.70325",
+      "abstract": "ABSTRACT A blockchain\u2010assisted quantum secret sharing (QSS) framework, denoted BQSS, is presented for function\u2010level dealer reduction. BQSS decomposes the conventional dealer/coordinator role into plaintext\u2010input, quantum\u2010resource, and classical\u2010coordination functions, and transfers the objectively verifiable coordination functions to a smart\u2010contract state machine. Candidate GHZ states are distributed off\u2010chain and sampled through stabilizer predicates; retained generation outcomes provide private mask components for a classical VSS sharing of the masked secret . The smart contract coordinates registration, active\u2010set freezing, commitments, deadlines, VSS evidence, reconstruction triggering, deposits, and mask openings, thereby producing a globally auditable transcript for the classical workflow. Security is analyzed under explicit system assumptions on blockchain execution, classical cryptographic soundness, measurement\u2010report authenticity, and dealer\u2010side masking correctness. The baseline instantiation adopts a public\u2010audit reconstruction mode for threshold\u2010authorized disclosure, with participant\u2010private opening treated as an extension. Performance is evaluated through an Ethereum\u2010style BN254/Groth16 on\u2010chain cost model and an analytical depolarizing\u2010plus\u2010loss quantum\u2010resource model.",
+      "url": "https://doi.org/10.1002/qute.70325"
+    }
+  ]
+}

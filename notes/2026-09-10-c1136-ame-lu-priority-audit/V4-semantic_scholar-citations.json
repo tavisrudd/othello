@@ -1,0 +1,147 @@
+{
+  "seed": "V4",
+  "service": "semantic_scholar",
+  "status": "ok",
+  "count_reported": 15,
+  "count_retrieved": 15,
+  "queries": [
+    "https://api.semanticscholar.org/graph/v1/paper/da4b82dac63b3c0a671b716f9ab4d314207b1260/citations?fields=title,year,abstract,externalIds,url&limit=1000"
+  ],
+  "records": [
+    {
+      "id": "b72d9d7b01c7813a5fa61cac564a891ec9dfb45e",
+      "title": "Measurement-Based Preparation of Higher-Dimensional AKLT States and Their Quantum Computational Power",
+      "year": 2026,
+      "doi": null,
+      "arxiv": "2602.07201",
+      "abstract": "We investigate a constant-time, fusion measurement-based scheme to create AKLT states beyond one dimension. We show that it is possible to prepare such states on a given graph up to random spin-1 `decorations', each corresponding to a probabilistic insertion of a vertex along an edge. In investigating their utility in measurement-based quantum computation, we demonstrate that any such randomly decorated AKLT state possesses at least the same computational power as non-random ones, such as those on trivalent planar lattices. For AKLT states on Bethe lattices and their decorated versions we show that there exists a deterministic, constant-time scheme for their preparation. In addition to randomly decorated AKLT states, we also consider random-bond AKLT states, whose construction involves any of the canonical Bell states in the bond degrees of freedom instead of just the singlet in the original construction. Such states naturally emerge upon measuring all the decorative spin-1 sites in the randomly decorated AKLT states. We show that those random-bond AKLT states on trivalent lattices can be converted to encoded random graph states after acting with the same POVM on all sites. We also argue that these random-bond AKLT states possess similar quantum computational power as the original singlet-bond AKLT states via the percolation perspective.",
+      "url": "https://www.semanticscholar.org/paper/b72d9d7b01c7813a5fa61cac564a891ec9dfb45e"
+    },
+    {
+      "id": "9801296e6137bacdf1a8c33861c0a8529c0f939d",
+      "title": "Verifcation of general multi-qudit pure states",
+      "year": 2025,
+      "doi": null,
+      "arxiv": "2511.17901",
+      "abstract": "Verifying prepared quantum states is crucial for hybrid systems whose subsystems may have different local dimensions. We present a generalized stabilizer framework and associated test that apply to general multi-qudit states, including composite-dimensional and hybrid architectures. Using only adaptive local measurements, our method verifies qutrit-qubit states, arbitrary two-qubit pure states, Bell/Bell-like, GHZ/GHZ-like, graph, hypergraph, multigraph, and multihypergraph states, with efficiencies matching or surpassing the best known schemes.",
+      "url": "https://www.semanticscholar.org/paper/9801296e6137bacdf1a8c33861c0a8529c0f939d"
+    },
+    {
+      "id": "b0fa4ca7bb1e7ad5fc86bfd6ac68cada02774f0b",
+      "title": "Universal and Efficient Quantum State Verification via Schmidt Decomposition and Mutually Unbiased Bases",
+      "year": 2025,
+      "doi": "10.22331/q-2026-03-04-2011",
+      "arxiv": "2506.19809",
+      "abstract": "Efficient verification of multipartite quantum states is crucial to many applications in quantum information processing. By virtue of Schmidt decomposition and mutually unbiased bases, here we propose a universal protocol to verify arbitrary multipartite pure quantum states using adaptive local projective measurements. Moreover, we establish a universal upper bound on the sample complexity that is independent of the local dimensions. Numerical calculations further indicate that Haar-random pure states can be verified with a constant sample cost, irrespective of the qudit number and local dimensions, even in the adversarial scenario in which the source cannot be trusted. As alternatives, we provide several simpler variants that can achieve similar high efficiencies without using Schmidt decomposition. The simplest variant consists of only two distinct tests.",
+      "url": "https://www.semanticscholar.org/paper/b0fa4ca7bb1e7ad5fc86bfd6ac68cada02774f0b"
+    },
+    {
+      "id": "b2927d4041dfebb8c8a4de9e69773eac3f70e544",
+      "title": "Experimental verification of entangled states in the adversarial scenario",
+      "year": 2025,
+      "doi": "10.1103/PhysRevApplied.23.064005",
+      "arxiv": "2506.10655",
+      "abstract": "Efficient verification of entangled states is crucial to many applications in quantum information processing. However, the effectiveness of standard quantum state verification (QSV) is based on the condition of independent and identical distribution (IID), which impedes its applications in many practical scenarios. Here we demonstrate a defensive QSV protocol, which is effective in all kinds of non-IID scenarios, including the extremely challenging adversarial scenario. To this end, we build a high-speed preparation-and-measurement apparatus controlled by quantum random-number generators. Our experiments clearly show that standard QSV protocols often provide unreliable fidelity certificates in non-IID scenarios. In sharp contrast, the defensive QSV protocol based on a homogeneous strategy can provide reliable and nearly tight fidelity certificates at comparable high efficiency, even under malicious attacks. Moreover, our scheme is robust against the imperfections in a realistic experiment, which is very appealing to practical applications.",
+      "url": "https://www.semanticscholar.org/paper/b2927d4041dfebb8c8a4de9e69773eac3f70e544"
+    },
+    {
+      "id": "6991d60804715bf050c8467699f00f501d44a8b4",
+      "title": "GHZ-W genuinely entangled subspace verification with adaptive local measurements",
+      "year": 2024,
+      "doi": "10.1007/s11432-024-4515-1",
+      "arxiv": "2412.19540",
+      "abstract": "Genuinely entangled subspaces (GESs) are valuable resources in quantum information science. Among these, the three-qubit GHZ-W GES, spanned by the three-qubit Greenberger-Horne-Zeilinger (GHZ) and W states, is a universal and crucial entangled subspace resource for three-qubit systems. In this work, we develop two adaptive verification strategies, the XZ strategy and the rotation strategy, for the three-qubit GHZ-W GES using local measurements and one-way classical communication. These strategies are experimentally feasible, efficient and possess a concise analytical expression for the sample complexity of the rotation strategy, which scales approximately as $2.248\\epsilon^{-1}\\ln\\delta^{-1}$, where $\\epsilon$ is the infidelity and $1-\\delta$ is the confidence level. Furthermore, we comprehensively analyze the two-dimensional two-qubit subspaces and classify them into three distinct types, which include unverifiable entangled subspaces, revealing intrinsic limitations in local verification of entangled subspaces.",
+      "url": "https://www.semanticscholar.org/paper/6991d60804715bf050c8467699f00f501d44a8b4"
+    },
+    {
+      "id": "2fb327ccf131f043cf38f79ec3054e90ff2d7bf0",
+      "title": "Bounding the sample fluctuation for pure-state certification with local random measurement",
+      "year": 2024,
+      "doi": "10.1103/8zth-7n97",
+      "arxiv": "2410.16635",
+      "abstract": "Remarkable breakthroughs in quantum science and technology are demanding for more efficient methods in analyzing quantum many-body states. A significant challenge in this field is to verify whether a quantum state prepared by quantum devices in the lab accurately matches the desired target pure state. Recent advancements in randomized measurement techniques have provided fresh insights in this area. Specifically, protocols such as classical shadow tomography and shadow overlap have been proposed. Building on these developments, we investigate the fundamental properties of schemes that certify pure quantum states through random local Haar measurements. We derive bounds for sample fluctuations that are applicable regardless of the specific estimator construction. These bounds depend on the operator size distribution of either the observable used to estimate fidelity or the valid variation of the reduced density matrix for arbitrary observables. Our results unveil the intrinsic interplay between operator complexity and the efficiency of quantum algorithms, serving as an obstacle to local certification of pure states with long-range entanglement.",
+      "url": "https://www.semanticscholar.org/paper/2fb327ccf131f043cf38f79ec3054e90ff2d7bf0"
+    },
+    {
+      "id": "bb7b6b0b713798e07f3686e092f488f7738f029a",
+      "title": "A new general quantum state verification protocol by the classical shadow method",
+      "year": 2024,
+      "doi": "10.1007/s11128-025-04889-1",
+      "arxiv": "2410.15870",
+      "abstract": "Verifying whether a quantum device produces a specific quantum state is a fundamental task in many applications of modern quantum technologies. In the conventional framework of quantum state verification, designing an optimal or efficient protocol for each type of state typically requires intricate, state-specific customization. Recently, Huang et al. (in: 2024 IEEE 65th annual symposium on foundations of computer science (FOCS), 2024) introduced a novel approach known as the shadow overlap protocol, which leverages classical shadows to efficiently verify multiple classes of quantum states simultaneously. In this work, we propose a new verification protocol that integrates key ideas from both the conventional framework and the shadow overlap protocol. To this end, we first reformulate the shadow overlap protocol using the formalism of hypothesis testing, which also underpins the conventional approach, and analyze the similarities and differences between the two. Our framework extends the capabilities of the shadow overlap protocol while addressing some of its limitations, yielding improved sample complexity and a more natural treatment of structured quantum states. We demonstrate the effectiveness of our protocol through applications to GHZ states and stabilizer states.",
+      "url": "https://www.semanticscholar.org/paper/bb7b6b0b713798e07f3686e092f488f7738f029a"
+    },
+    {
+      "id": "e35fce70166ee03838c0270cd5d44fa6940fe703",
+      "title": "Beating the Optimal Verification of Entangled States via Collective Strategies",
+      "year": 2024,
+      "doi": "10.1103/6yrh-9tzp",
+      "arxiv": "2410.00554",
+      "abstract": "In the realm of quantum information processing, the efficient characterization of entangled states poses an overwhelming challenge, rendering the traditional methods including quantum tomography unfeasible and impractical. To tackle this problem, we propose a new verification scheme using collective strategies, showcasing arbitrarily high efficiency that beats the optimal verification with global measurements. Our collective scheme can be implemented in various experimental platforms and scalable for large systems with a linear scaling on hardware requirement, and distributed operations are allowed. Notably, larger ensembles can always improve the efficiency further, but without increasing the quantum memory. More importantly, the approach consumes only a few copies of the entangled states, while ensuring the preservation of unmeasured ones, and even boosting their fidelity for any subsequent tasks. Furthermore, our protocol provides additional insight into the specific types of noise affecting the system, thereby facilitating potential targeted improvements. These advancements hold promise for a wide range of applications, offering a pathway towards more robust and efficient quantum information processing.",
+      "url": "https://www.semanticscholar.org/paper/e35fce70166ee03838c0270cd5d44fa6940fe703"
+    },
+    {
+      "id": "e3b72d11e4ff7f5a2d217768e50bdddc9a4e6fcc",
+      "title": "Spectral Gap Optimization for Enhanced Adiabatic State Preparation.",
+      "year": 2024,
+      "doi": "10.1103/cslt-x32n",
+      "arxiv": "2409.15433",
+      "abstract": "The preparation of nontrivial states is crucial to the study of quantum many-body physics. Such states can be prepared with adiabatic quantum algorithms, which are restricted by the minimum spectral gap along the path. In this Letter, we propose an efficient method to adiabatically prepare tensor network states (TNSs). We maximize the spectral gap leveraging degrees of freedom in the parent Hamiltonian construction. We demonstrate this efficient adiabatic algorithm for preparing TNSs, through examples of random TNSs in one dimension, AKLT (Affleck-Kennedy-Lieb-Tasaki), and GHZ states. The Hamiltonian optimization applies to both injective and non-injective tensors, in the latter case by exploiting symmetries present in the tensors.",
+      "url": "https://www.semanticscholar.org/paper/e3b72d11e4ff7f5a2d217768e50bdddc9a4e6fcc"
+    },
+    {
+      "id": "cf03f43b2e0ca676343c5335be5e6eaedf1f80c3",
+      "title": "Models of interacting bosons with exact ground states: A unified approach",
+      "year": 2024,
+      "doi": "10.1103/PhysRevB.111.174520",
+      "arxiv": "2408.15319",
+      "abstract": "We define an infinite class of ``frustration-free''interacting lattice quantum Hamiltonians for bosons, constructed such that their exact ground states have a density distribution specified by the Boltzmann weight of a corresponding classical lattice gas problem. By appropriately choosing the classical weights, we obtain boson representations of various known solvable models, including quantum dimer and vertex models, toric code, and certain Levin-Wen string-net models. We also systematically construct solvable models with other interesting ground states, including ``quantum spin liquids,''supersolids, ``Bose-Einstein insulators,''Bose liquids with ``Bose surfaces'', and Bose-Einstein condensates that permit adiabatic evolution from a non-interacting limit to a Gutzwiller-projected limit.",
+      "url": "https://www.semanticscholar.org/paper/cf03f43b2e0ca676343c5335be5e6eaedf1f80c3"
+    },
+    {
+      "id": "e03578fbaf049ffadd38d8d5fc3507d746f90793",
+      "title": "Relative-belief inference in quantum information theory",
+      "year": 2024,
+      "doi": "10.1103/PhysRevA.110.012231",
+      "arxiv": "2406.03343",
+      "abstract": "We introduce the framework of Bayesian relative belief that directly evaluates whether or not the experimental data at hand support a given hypothesis regarding a quantum system by directly comparing the prior and posterior probabilities for the hypothesis. In model-dimension certification tasks, we show that the relative-belief procedure typically chooses Hilbert spaces that are never smaller in dimension than those selected from optimizing a broad class of information criteria, including Akaike's criterion. As a concrete and focused exposition of this powerful evidence-based technique, we apply the relative-belief procedure to an important application: . In particular, just by comparing prior and posterior probabilities based on data, we demonstrate its capability of tracking multiphoton emissions using (realistically lossy) single-photon detectors in order to assess the actual quality of photon sources without making assumptions, thereby reliably safeguarding source integrity for general quantum-information and communication tasks with Bayesian reasoning. Finally, we discuss how relative belief can be exploited to carry out parametric model certification and estimate the total dimension of the quantum state for the combined (measured) physical and interacting external systems described by the Tavis-Cummings model.\n \n \n \n \n Published by the American Physical Society\n 2024\n \n \n",
+      "url": "https://www.semanticscholar.org/paper/e03578fbaf049ffadd38d8d5fc3507d746f90793"
+    },
+    {
+      "id": "8a81b4197b4dd6d3c8a9e82e06cf8670eeca3984",
+      "title": "Edge coloring lattice graphs",
+      "year": 2024,
+      "doi": "10.48550/arXiv.2402.08752",
+      "arxiv": "2402.08752",
+      "abstract": "We develop the theory of the edge coloring of lattice graphs. A central role is played by a necessary and sufficient condition for a proper edge coloring of a patch of a lattice graph to induce a proper edge coloring of the entire lattice graph by translation. Using this condition, we introduce a method that finds nearly minimal or minimal edge colorings of lattice graphs. For a nearly minimal edge coloring, the running time is O(\u03bc2D4), where \u03bc is the number of edges in one cell (or \u201cbasis graph\u201d) of the lattice graph and D is the maximum distance between two cells connected by an edge. Crucially, this complexity depends only on local properties of the lattice graph, making it independent of the total graph size. As a result, the method applies even to infinite lattice graphs with finite maximum degree. For minimal edge coloring, we lack a rigorous upper bound on the running time, which we find poses no limitation in practice; we use the method to minimally edge color the meshes of all k-uniform tilings of the plane for k \u2264 6 with modest computational resources. We find that all these lattice graphs belong to Vizing class I. By relating edge colorings to quantum circuits, our work has direct applications in quantum computation, including quantum simulation of condensed matter, cluster-state preparation, error characterization, and error correction.",
+      "url": "https://www.semanticscholar.org/paper/8a81b4197b4dd6d3c8a9e82e06cf8670eeca3984"
+    },
+    {
+      "id": "6cf7b913a79472325e3a86b1386f0eea43540117",
+      "title": "Robust and efficient verification of graph states in blind measurement-based quantum computation",
+      "year": 2023,
+      "doi": "10.1038/s41534-023-00783-9",
+      "arxiv": "2305.10742",
+      "abstract": "Blind quantum computation (BQC) is a secure quantum computation method that protects the privacy of clients. Measurement-based quantum computation (MBQC) is a promising approach for realizing BQC. To obtain reliable results in blind MBQC, it is crucial to verify whether the resource graph states are accurately prepared in the adversarial scenario. However, previous verification protocols for this task are too resource-consuming or noise-susceptible to be applied in practice. Here, we propose a robust and efficient protocol for verifying arbitrary graph states with any prime local dimension in the adversarial scenario, which leads to a robust and efficient protocol for verifying the resource state in blind MBQC. Our protocol requires only local Pauli measurements and is thus easy to realize with current technologies. Nevertheless, it can achieve optimal scaling behaviors with respect to the system size and the target precision as quantified by the infidelity and significance level, which has never been achieved before. Notably, our protocol can exponentially enhance the scaling behavior with the significance level.",
+      "url": "https://www.semanticscholar.org/paper/6cf7b913a79472325e3a86b1386f0eea43540117"
+    },
+    {
+      "id": "ab5cde9523bb80d4d8240d4fe1d5899bf89c44db",
+      "title": "Efficient Verification of Arbitrary Entangled States with Homogeneous Local Measurements",
+      "year": 2022,
+      "doi": "10.1002/qute.202300083",
+      "arxiv": "2208.01083",
+      "abstract": "Quantum state verification (QSV) is the task of relying on local measurements only to verify that a given quantum device does produce the desired target state. Up to now, certain types of entangled states can be verified efficiently or even optimally by QSV. However, given an arbitrary entangled state, how to design its verification protocol remains an open problem. This study presents a systematic strategy to tackle this problem by considering the locality of what it initiates as the choice\u2010independent measurement protocols, whose operators can be directly achieved when they are homogeneous. Taking several typical entangled states as examples, this study shows the explicit procedures of the protocol design using standard Pauli projections, demonstrating the superiority of the method for attaining better QSV strategies. Moreover, the framework can be naturally extended to other tasks such as the construction of entanglement witnesses, and even parameter estimation.",
+      "url": "https://www.semanticscholar.org/paper/ab5cde9523bb80d4d8240d4fe1d5899bf89c44db"
+    },
+    {
+      "id": "545dbf9896e3c89b9061e9a7a46661677e26ccce",
+      "title": "Efficient verification of Affleck-Kennedy-Lieb-Tasaki states",
+      "year": 2022,
+      "doi": "10.1103/PhysRevA.107.022616",
+      "arxiv": "2206.15307",
+      "abstract": "Affleck-Kennedy-Lieb-Tasaki (AKLT) states are an important class of many-body quantum states that are useful in quantum information processing, including measurement-based quantum computation in particular. Here we propose a general approach for constructing efficient verification protocols for AKLT states on arbitrary graphs with local spin measurements. Our verification protocols build on bond verification protocols and matching covers (including edge coloring) of the underlying graphs, which have a simple geometric and graphic picture. We also provide rigorous performance guarantee that is required for practical applications. With our approach, most AKLT states of wide interest, including those defined on 1D and 2D lattices, can be verified with a constant sample cost, which is independent of the system size and is dramatically more efficient than all previous approaches. As an illustration, we construct concrete verification protocols for AKLT states on various lattices and on arbitrary graphs up to five vertices.",
+      "url": "https://www.semanticscholar.org/paper/545dbf9896e3c89b9061e9a7a46661677e26ccce"
+    }
+  ]
+}

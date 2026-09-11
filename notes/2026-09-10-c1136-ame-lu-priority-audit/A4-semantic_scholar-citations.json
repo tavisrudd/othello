@@ -1,0 +1,138 @@
+{
+  "seed": "A4",
+  "service": "semantic_scholar",
+  "status": "ok",
+  "count_reported": 14,
+  "count_retrieved": 14,
+  "queries": [
+    "https://api.semanticscholar.org/graph/v1/paper/7934ffec9eaf6a1f1998c57e90dea11de8f28168/citations?fields=title,year,abstract,externalIds,url&limit=1000"
+  ],
+  "records": [
+    {
+      "id": "e3e9f326969ec9e69e515a11ed3e550a3c391090",
+      "title": "Reconstructing Quantum States from Local Observation: A Dynamical Viewpoint",
+      "year": 2024,
+      "doi": "10.1109/CDC56724.2024.10886855",
+      "arxiv": "2501.13668",
+      "abstract": "We analyze the problem of reconstructing an unknown quantum state of a multipartite system from repeated measurements of local observables. In particular, via a system-theoretic observability analysis, we show that, even when the initial state is not uniquely determined for a static system, this can be reconstructed if we leverage the system\u2019s dynamics. The choice of dynamical generators and the effect of finite samples is discussed, along with an illustrative example.",
+      "url": "https://www.semanticscholar.org/paper/e3e9f326969ec9e69e515a11ed3e550a3c391090"
+    },
+    {
+      "id": "58bfd90940fa6191fd674afeb76ca269b56a7219",
+      "title": "Experimentally probing entropy reduction via iterative quantum information transfer",
+      "year": 2024,
+      "doi": "10.1103/5lp2-9sps",
+      "arxiv": "2411.06709",
+      "abstract": "Thermodynamic principles governing energy and information are important tools for a deeper understanding and better control of quantum systems. In this work, we experimentally investigate the interplay of the thermodynamic costs and information flow in a quantum system undergoing iterative quantum measurement and feedback. Our study employs a state stabilization protocol involving repeated measurement and feedback on an electronic spin qubit associated with a Silicon-Vacancy center in diamond, which is strongly coupled to a diamond nanocavity. This setup allows us to verify the fundamental laws of nonequilibrium quantum thermodynamics, including the second law and the fluctuation theorem, both of which incorporate measures of quantum information flow induced by iterative measurement and feedback. We further assess the reducible entropy based on the feedback's causal structure and quantitatively demonstrate the thermodynamic advantages of non-Markovian feedback over Markovian feedback. For that purpose, we extend the theoretical framework of quantum thermodynamics to include the causal structure of the applied feedback protocol. Our work lays the foundation for investigating the entropic and energetic costs of real-time quantum control in various quantum systems.",
+      "url": "https://www.semanticscholar.org/paper/58bfd90940fa6191fd674afeb76ca269b56a7219"
+    },
+    {
+      "id": "41686a08e3030c48ffd680c63fe76dc39e0c8c8d",
+      "title": "Ergodicity bounds for stable Ornstein-Uhlenbeck systems in Wasserstein distance with applications to cutoff stability.",
+      "year": 2023,
+      "doi": "10.1063/5.0164204",
+      "arxiv": "2306.11616",
+      "abstract": "This article establishes cutoff stability also known as abrupt thermalization for generic multidimensional Hurwitz stable Ornstein-Uhlenbeck systems with (possibly degenerate) L\u00e9vy noise at fixed noise intensity. The results are based on several ergodicity quantitative lower and upper bounds some of which make use of the recently established shift linearity property of the Wasserstein-Kantorovich-Rubinstein distance by the authors. It covers such irregular systems like Jacobi chains and more general networks of coupled harmonic oscillators with a heat bath (including L\u00e9vy excitations) at constant temperature on the outer edges and the so-called Brownian gyrator.",
+      "url": "https://www.semanticscholar.org/paper/41686a08e3030c48ffd680c63fe76dc39e0c8c8d"
+    },
+    {
+      "id": "4ca241bf9eef0ca6408c46088a9074440ef859df",
+      "title": "Cutoff Ergodicity Bounds in Wasserstein Distance for a Viscous Energy Shell Model with L\u00e9vy Noise",
+      "year": 2023,
+      "doi": "10.1007/s10955-024-03308-6",
+      "arxiv": "2302.13968",
+      "abstract": "This article establishes explicit non-asymptotic ergodic bounds in the renormalized Wasserstein\u2013Kantorovich\u2013Rubinstein (WKR) distance for a viscous energy shell lattice model of turbulence with random energy injection. The system under consideration is driven either by a Brownian motion, a symmetric \u03b1\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$\\alpha $$\\end{document}-stable L\u00e9vy process, a stationary Gaussian or \u03b1\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$\\alpha $$\\end{document}-stable Ornstein\u2013Uhlenbeck process, or by a general L\u00e9vy process with second moments. The obtained non-asymptotic bounds establish asymptotically abrupt thermalization. The analysis is based on the explicit representation of the solution of the system in terms of convolutions of Bessel functions.",
+      "url": "https://www.semanticscholar.org/paper/4ca241bf9eef0ca6408c46088a9074440ef859df"
+    },
+    {
+      "id": "8d1c52920e752dda63ff08d8989d3897414ec089",
+      "title": "Quantum control of bosonic modes with superconducting circuits.",
+      "year": 2021,
+      "doi": "10.1016/j.scib.2021.05.024",
+      "arxiv": "2102.09668",
+      "abstract": "Bosonic modes have wide applications in various quantum technologies, such as optical photons for quantum communication, magnons in spin ensembles for quantum information storage and mechanical modes for reversible microwave-to-optical quantum transduction. There is emerging interest in utilizing bosonic modes for quantum information processing, with circuit quantum electrodynamics (circuit QED) as one of the leading architectures. Quantum information can be encoded into subspaces of a bosonic superconducting cavity mode with long coherence time. However, standard Gaussian operations (e.g., beam splitting and two-mode squeezing) are insufficient for universal quantum computing. The major challenge is to introduce additional nonlinear control beyond Gaussian operations without adding significant bosonic loss or decoherence. Here we review recent advances in universal control of a single bosonic code with superconducting circuits, including unitary control, quantum feedback control, driven-dissipative control and holonomic dissipative control. Various approaches to entangling different bosonic modes are also discussed.",
+      "url": "https://www.semanticscholar.org/paper/8d1c52920e752dda63ff08d8989d3897414ec089"
+    },
+    {
+      "id": "036b27134accdaa3ba3185ea10cd8c1a0e1cf089",
+      "title": "The modified logarithmic Sobolev inequality for quantum spin systems: classical and commuting nearest neighbour interactions",
+      "year": 2020,
+      "doi": null,
+      "arxiv": "2009.11817",
+      "abstract": "Given a uniform, frustration-free family of local Lindbladians defined on a quantum lattice spin system in any spatial dimension, we prove a strong exponential convergence in relative entropy of the system to equilibrium under a condition of spatial mixing of the stationary Gibbs states and the rapid decay of the relative entropy on finite-size blocks. Our result leads to the first examples of the positivity of the modified logarithmic Sobolev inequality for quantum lattice spin systems independently of the system size. Moreover, we show that our notion of spatial mixing is a consequence of the recent quantum generalization of Dobrushin and Shlosman's complete analyticity of the free-energy at equilibrium. The latter typically holds above a critical temperature. \nOur results have wide applications in quantum information processing. As an illustration, we discuss three of them: first, using techniques of quantum optimal transport, we show that a quantum annealer subject to a finite range classical noise will output an energy close to that of the fixed point after constant annealing time. Second, we prove a finite blocklength refinement of the quantum Stein lemma for the task of asymmetric discrimination of two Gibbs states of commuting Hamiltonians satisfying our conditions. In the same setting, our results imply the existence of a local quantum circuit of logarithmic depth to prepare Gibbs states of a class of commuting Hamiltonians.",
+      "url": "https://www.semanticscholar.org/paper/036b27134accdaa3ba3185ea10cd8c1a0e1cf089"
+    },
+    {
+      "id": "2297fe162b9e42cb2754353e7af1775cb3b98f51",
+      "title": "Cutoff Thermalization for Ornstein\u2013Uhlenbeck Systems with Small L\u00e9vy Noise in the Wasserstein Distance",
+      "year": 2020,
+      "doi": "10.1007/s10955-021-02815-0",
+      "arxiv": "2009.10590",
+      "abstract": "This article establishes cutoff thermalization (also known as the cutoff phenomenon) for a class of generalized Ornstein\u2013Uhlenbeck systems (Xt\u03b5(x))t\u2a7e0\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$(X^\\varepsilon _t(x))_{t\\geqslant 0}$$\\end{document} with \u03b5\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$\\varepsilon $$\\end{document}-small additive L\u00e9vy noise and initial value x. The driving noise processes include Brownian motion, \u03b1\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$\\alpha $$\\end{document}-stable L\u00e9vy flights, finite intensity compound Poisson processes, and red noises, and may be highly degenerate. Window cutoff thermalization is shown under mild generic assumptions; that is, we see an asymptotically sharp \u221e/0\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$\\infty /0$$\\end{document}-collapse of the renormalized Wasserstein distance from the current state to the equilibrium measure \u03bc\u03b5\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$\\mu ^\\varepsilon $$\\end{document} along a time window centered on a precise \u03b5\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$\\varepsilon $$\\end{document}-dependent time scale t\u03b5\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$\\mathfrak {t}_\\varepsilon $$\\end{document}. In many interesting situations such as reversible (L\u00e9vy) diffusions it is possible to prove the existence of an explicit, universal, deterministic cutoff thermalization profile. That is, for generic initial data x we obtain the stronger result Wp(Xt\u03b5+r\u03b5(x),\u03bc\u03b5)\u00b7\u03b5-1\u2192K\u00b7e-qr\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$\\mathcal {W}_p(X^\\varepsilon _{t_\\varepsilon + r}(x), \\mu ^\\varepsilon ) \\cdot \\varepsilon ^{-1} \\rightarrow K\\cdot e^{-q r}$$\\end{document} for any r\u2208R\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$r\\in \\mathbb {R}$$\\end{document} as \u03b5\u21920\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$\\varepsilon \\rightarrow 0$$\\end{document} for some spectral constants K,q>0\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$K, q>0$$\\end{document} and any p\u2a7e1\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$p\\geqslant 1$$\\end{document} whenever the distance is finite. The existence of this limit is characterized by the absence of non-normal growth patterns in terms of an orthogonality condition on a computable family of generalized eigenvectors of Q\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$\\mathcal {Q}$$\\end{document}. Precise error bounds are given. Using these results, this article provides a complete discussion of the cutoff phenomenon for the classical linear oscillator with friction subject to \u03b5\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$\\varepsilon $$\\end{document}-small Brownian motion or \u03b1\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$\\alpha $$\\end{document}-stable L\u00e9vy flights. Furthermore, we cover the highly degenerate case of a linear chain of oscillators in a generalized heat bath at low temperature.",
+      "url": "https://www.semanticscholar.org/paper/2297fe162b9e42cb2754353e7af1775cb3b98f51"
+    },
+    {
+      "id": "b8d258a699cd41ed5ee2a2ffc126dc40cb3e6efa",
+      "title": "Quantum feedback for measurement and control",
+      "year": 2020,
+      "doi": null,
+      "arxiv": "2004.09766",
+      "abstract": "Author(s): Martin, Leigh Samuel | Advisor(s): Siddiqi, Irfan; Whaley, K. Birgitta | Abstract: The standard quantum formalism introduced at the undergraduate level treats measurement as an instantaneous collapse. In reality however, no physical process can occur over a truly infinitesimal time interval. A more subtle investigation of open quantum systems lead to the theory of continuous measurement and quantum trajectories, in which wave function collapse occurs over a finite time scale associated with an interaction. Within this formalism, it becomes possible to ask many new questions that would be trivial or even ill-defined in the context of the more basic measurement model. In this thesis, we investigate both theoretically and experimentally what fundamentally new capabilities arise when an experimental apparatus can resolve the continuous dynamics of a measurement. Theoretically, we show that when one can perform feedback operations on the timescale of the measurement process, the resulting tools provide significantly more control over entanglement generation, and in some settings can generate it optimally. Experimentally, we show that continuous measurement allows one to observe the dynamics of a system undergoing simultaneous non-commuting measurements, which provides a reinterpretation of the Heisenberg uncertainty principle. Finally, we combine the theoretical focus on quantum feedback with the experimental capabilities of superconducting circuits to implement a feedback controlled quantum amplifier. The resulting system is capable of adaptive measurement, which we use to perform the first canonical phase measurement.",
+      "url": "https://www.semanticscholar.org/paper/b8d258a699cd41ed5ee2a2ffc126dc40cb3e6efa"
+    },
+    {
+      "id": "cf6d7f1c8bfae28ceecc2a618927d5bbee02308a",
+      "title": "Quantum Information Encoding from Stabilizing Dynamics",
+      "year": 2019,
+      "doi": "10.1109/CDC40024.2019.9029402",
+      "arxiv": null,
+      "abstract": "In order to ensure reliable quantum information processing in realistic noisy devices, it is necessary to resort to suitable error correction and avoidance strategies. A key aspect of these techniques is how the relevant information is logically mapped (encoded) in the noise-protected codewords. Here, we study how to engineer Markov dynamics that transfers the desired information from an \"upload\" subsystem to the target error-correcting or noiseless quantum code, effectively acting as a dissipative quantum encoder. Dissipative encoders offer advantages with respect to standard unitary encoding protocols based on quantum circuits, as they can associate the target states to non-trivial basins of attraction, and thus tolerate more general initializations in the upload qubits. In particular, we show that devising continuous-time dissipative encoders requires the target code to be invariant, making this task more delicate as compared to its discrete-time counterpart. Nonetheless, we show how this is always possible for stabilizer quantum error-correcting codes.",
+      "url": "https://www.semanticscholar.org/paper/cf6d7f1c8bfae28ceecc2a618927d5bbee02308a"
+    },
+    {
+      "id": "30036ed06b3e04c9e0235c8d6d5382b44969ca96",
+      "title": "Finite-time stabilization control of quantum systems",
+      "year": 2019,
+      "doi": "10.1016/j.automatica.2020.109327",
+      "arxiv": "1910.00208",
+      "abstract": "This paper proposes a non-smooth control scheme to achieve finite-time convergence to an eigenstate of the internal Hamiltonian of a given closed quantum system. First, we define finite-time stability for quantum systems, and then present a Lyapunov stability criterion to identify the finite-time stability of quantum systems. Second, we propose a new non-smooth control law for two-level quantum systems by selecting a distance between quantum states as a Lyapunov function and using the Lyapunov stability theory, and prove the existence and uniqueness of solutions of the quantum system under the action of the non-smooth controller in the framework of Bloch vectors. Further, an equivalent transformation is made for the system model and the control target by expressing quantum states in terms of complex exponentials, and the finite-time stability of the system is proved by combining the finite-time Lyapunov stability criterion with the homogeneity theorem. Finally, we perform numerical simulations on a spin-1/2 particle system and demonstrate the effectiveness of the finite-time stabilization control scheme.",
+      "url": "https://www.semanticscholar.org/paper/30036ed06b3e04c9e0235c8d6d5382b44969ca96"
+    },
+    {
+      "id": "f1bc5166a2a5ab4ca0cb376dce7bc27bc7b839fb",
+      "title": "Generic pure quantum states as steady states of quasi-local dissipative dynamics",
+      "year": 2017,
+      "doi": "10.1088/1751-8121/aaad1a",
+      "arxiv": "1711.11142",
+      "abstract": "We investigate whether a generic pure state on a multipartite quantum system can be the unique asymptotic steady state of locality-constrained purely dissipative Markovian dynamics. In the tripartite setting, we show that the problem is equivalent to characterizing the solution space of a set of linear equations and establish that the set of pure states obeying the above property has either measure zero or measure one, solely depending on the subsystems\u2019 dimension. A complete analytical characterization is given when the central subsystem is a qubit. In the N-partite case, we provide conditions on the subsystems\u2019 size and the nature of the locality constraint, under which random pure states cannot be quasi-locally stabilized generically. Also, allowing for the possibility to approximately stabilize entangled pure states that cannot be exact steady states in settings where stabilizability is generic, our results offer insights into the extent to which random pure states may arise as unique ground states of frustration-free parent Hamiltonians. We further argue that, to a high probability, pure quantum states sampled from a t-design enjoy the same stabilizability properties of Haar-random ones as long as suitable dimension constraints are obeyed and t is sufficiently large. Lastly, we demonstrate a connection between the tasks of quasi-local state stabilization and unique state reconstruction from local tomographic information, and provide a constructive procedure for determining a generic N-partite pure state based only on knowledge of the support of any two of the reduced density matrices of about half the parties, improving over existing results.",
+      "url": "https://www.semanticscholar.org/paper/f1bc5166a2a5ab4ca0cb376dce7bc27bc7b839fb"
+    },
+    {
+      "id": "4edc14ef4d8cd062c19a8e27abf6c9abe0771bf4",
+      "title": "Distributed finite-time stabilization of entangled quantum states on tree-like hypergraphs",
+      "year": 2017,
+      "doi": "10.1109/CDC.2017.8264477",
+      "arxiv": "1703.07679",
+      "abstract": "Preparation of pure states on networks of quantum systems by controlled dissipative dynamics offers important advantages with respect to circuit-based schemes. Unlike in continuous-time scenarios, when discrete-time dynamics are considered, dead-beat stabilization becomes possible in principle. Here, we focus on pure states that can be stabilized by distributed, unsupervised dynamics in finite time on a network of quantum systems subject to realistic locality constraints. In particular, we define a class of quasi-locality notions, that we name \u201ctree-like hypergraphs,\u201d and show that the states that are robustly stabilizable in finite time are then unique ground states of a frustration-free, commuting quasi-local Hamiltonian. A structural characterization of such states is also provided, building on a simple yet relevant example.",
+      "url": "https://www.semanticscholar.org/paper/4edc14ef4d8cd062c19a8e27abf6c9abe0771bf4"
+    },
+    {
+      "id": "97bb7aabf6234a2e3f16edf17d53f7e343b8f5ef",
+      "title": "Alternating Projections Methods for Discrete-Time Stabilization of Quantum States",
+      "year": 2016,
+      "doi": "10.1109/TAC.2017.2731903",
+      "arxiv": "1612.05554",
+      "abstract": "We study sequences (both cyclic and randomized) of idempotent completely positive trace-preserving quantum maps, and show how they asymptotically converge to the intersection of their fixed point sets via alternating projection methods, highlighting the robustness features of the protocol against randomization. The general results are then specialized to stabilizing entangled states in finite-dimensional multipartite quantum systems subject to locality constraints, a problem of key interest for quantum information applications.",
+      "url": "https://www.semanticscholar.org/paper/97bb7aabf6234a2e3f16edf17d53f7e343b8f5ef"
+    },
+    {
+      "id": "8d99bc8b81edded1b6c6e6286121c41bcc83ed50",
+      "title": "Quantum Information Decoding Using Dissipative Dynamics",
+      "year": 2023,
+      "doi": "10.1016/j.ifacol.2023.10.1783",
+      "arxiv": null,
+      "abstract": null,
+      "url": "https://www.semanticscholar.org/paper/8d99bc8b81edded1b6c6e6286121c41bcc83ed50"
+    }
+  ]
+}

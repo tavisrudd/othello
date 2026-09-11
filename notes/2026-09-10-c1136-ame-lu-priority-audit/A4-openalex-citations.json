@@ -1,0 +1,172 @@
+{
+  "seed": "A4",
+  "service": "openalex",
+  "status": "ok",
+  "count_reported": 20,
+  "count_retrieved": 20,
+  "queries": [
+    "https://api.openalex.org/works?filter=cites:W2615109912&per-page=200&cursor=*"
+  ],
+  "records": [
+    {
+      "id": "https://openalex.org/W3132531081",
+      "title": "Quantum control of bosonic modes with superconducting circuits",
+      "year": 2021,
+      "doi": "https://doi.org/10.1016/j.scib.2021.05.024",
+      "abstract": "",
+      "url": "https://doi.org/10.1016/j.scib.2021.05.024"
+    },
+    {
+      "id": "https://openalex.org/W3100357562",
+      "title": "Finite-time stabilization control of quantum systems",
+      "year": 2020,
+      "doi": "https://doi.org/10.1016/j.automatica.2020.109327",
+      "abstract": "",
+      "url": "https://doi.org/10.1016/j.automatica.2020.109327"
+    },
+    {
+      "id": "https://openalex.org/W2810313636",
+      "title": "Locally optimal measurement-based quantum feedback with application to multiqubit entanglement generation",
+      "year": 2020,
+      "doi": "https://doi.org/10.1103/physreva.102.062418",
+      "abstract": "We present a general approach to measurement-based quantum feedback that employs proportional and quantum state--(PaQS-) based feedback components to obtain locally optimal protocols. To demonstrate the power of the method, we first show that it reproduces many known feedback protocols and then apply it to generation of multipartite entanglement with an emphasis on remote entanglement, which requires spatially local feedback Hamiltonians. The symmetry of both measurement and feedback operators is found to be essential for construction of effective protocols. We show that under perfect measurement efficiency, entangled states can be reached with fidelity approaching unity under non-Markovian feedback control protocols, while Markovian protocols resulting from optimizing the feedback unitaries on ensemble-averaged states still yield fidelities above 94%. Application of the PaQS approach to generation of $N$-qubit $W$, general Dicke, and Greenberger-Horne-Zeilinger states shows that such entangled states can be efficiently generated with high fidelity, for up to $N=100$ in some cases.",
+      "url": "https://doi.org/10.1103/physreva.102.062418"
+    },
+    {
+      "id": "https://openalex.org/W4413074313",
+      "title": "Experimentally Probing Entropy Reduction via Iterative Quantum Information Transfer",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/5lp2-9sps",
+      "abstract": "Thermodynamic principles governing energy and information are important tools for a deeper understanding and better control of quantum systems. In this work, we experimentally investigate the interplay of the thermodynamic costs and information flow in a quantum system undergoing iterative quantum measurement and feedback. Our study employs a state stabilization protocol involving repeated measurement and feedback on an electronic spin qubit associated with a silicon-vacancy center in diamond, which is strongly coupled to a diamond nanocavity. This setup allows us to verify the fundamental laws of nonequilibrium quantum thermodynamics, including the second law and the fluctuation theorem, both of which incorporate measures of quantum information flow induced by iterative measurement and feedback. We further assess the reducible entropy based on the feedback\u2019s causal structure and quantitatively demonstrate the thermodynamic advantages of non-Markovian feedback over Markovian feedback. For that purpose, we extend the theoretical framework of quantum thermodynamics to include the causal structure of the applied feedback protocol. Our work lays the foundation for investigating the entropic and energetic costs of real-time quantum control in various quantum systems.",
+      "url": "https://doi.org/10.1103/5lp2-9sps"
+    },
+    {
+      "id": "https://openalex.org/W3198798353",
+      "title": "Cutoff Thermalization for Ornstein-Uhlenbeck Systems with Small Levy Noise in the Wasserstein Distance : Cutoff Thermalization for Ornstein\u2013Uhlenbeck Systems...",
+      "year": 2021,
+      "doi": "https://doi.org/10.1007/s10955-021-02815-0",
+      "abstract": "",
+      "url": "http://hdl.handle.net/10138/333819"
+    },
+    {
+      "id": "https://openalex.org/W2771289758",
+      "title": "Generic pure quantum states as steady states of quasi-local dissipative dynamics",
+      "year": 2018,
+      "doi": "https://doi.org/10.1088/1751-8121/aaad1a",
+      "abstract": "Abstract We investigate whether a generic pure state on a multipartite quantum system can be the unique asymptotic steady state of locality-constrained purely dissipative Markovian dynamics. In the tripartite setting, we show that the problem is equivalent to characterizing the solution space of a set of linear equations and establish that the set of pure states obeying the above property has either measure zero or measure one, solely depending on the subsystems\u2019 dimension. A complete analytical characterization is given when the central subsystem is a qubit. In the N -partite case, we provide conditions on the subsystems\u2019 size and the nature of the locality constraint, under which random pure states cannot be quasi-locally stabilized generically. Also, allowing for the possibility to approximately stabilize entangled pure states that cannot be exact steady states in settings where stabilizability is generic, our results offer insights into the extent to which random pure states may arise as unique ground states of frustration-free parent Hamiltonians. We further argue that, to a high probability, pure quantum states sampled from a t -design enjoy the same stabilizability properties of Haar-random ones as long as suitable dimension constraints are obeyed and t is sufficiently large. Lastly, we demonstrate a connection between the tasks of quasi-local state stabilization and unique state reconstruction from local tomographic information, and provide a constructive procedure for determining a generic N -partite pure state based only on knowledge of the support of any two of the reduced density matrices of about half the parties, improving over existing results.",
+      "url": "https://doi.org/10.1088/1751-8121/aaad1a"
+    },
+    {
+      "id": "https://openalex.org/W3011458867",
+      "title": "Quantum Information Encoding from Stabilizing Dynamics",
+      "year": 2019,
+      "doi": "https://doi.org/10.1109/cdc40024.2019.9029402",
+      "abstract": "In order to ensure reliable quantum information processing in realistic noisy devices, it is necessary to resort to suitable error correction and avoidance strategies. A key aspect of these techniques is how the relevant information is logically mapped (encoded) in the noise-protected codewords. Here, we study how to engineer Markov dynamics that transfers the desired information from an \"upload\" subsystem to the target error-correcting or noiseless quantum code, effectively acting as a dissipative quantum encoder. Dissipative encoders offer advantages with respect to standard unitary encoding protocols based on quantum circuits, as they can associate the target states to non-trivial basins of attraction, and thus tolerate more general initializations in the upload qubits. In particular, we show that devising continuous-time dissipative encoders requires the target code to be invariant, making this task more delicate as compared to its discrete-time counterpart. Nonetheless, we show how this is always possible for stabilizer quantum error-correcting codes.",
+      "url": "https://doi.org/10.1109/cdc40024.2019.9029402"
+    },
+    {
+      "id": "https://openalex.org/W4388761023",
+      "title": "Ergodicity bounds for stable Ornstein\u2013Uhlenbeck systems in Wasserstein distance with applications to cutoff stability",
+      "year": 2023,
+      "doi": "https://doi.org/10.1063/5.0164204",
+      "abstract": "This article establishes cutoff stability also known as abrupt thermalization for generic multidimensional Hurwitz stable Ornstein-Uhlenbeck systems with (possibly degenerate) L\u00e9vy noise at fixed noise intensity. The results are based on several ergodicity quantitative lower and upper bounds some of which make use of the recently established shift linearity property of the Wasserstein-Kantorovich-Rubinstein distance by the authors. It covers such irregular systems like Jacobi chains and more general networks of coupled harmonic oscillators with a heat bath (including L\u00e9vy excitations) at constant temperature on the outer edges and the so-called Brownian gyrator.",
+      "url": "https://doi.org/10.1063/5.0164204"
+    },
+    {
+      "id": "https://openalex.org/W2563109618",
+      "title": "Alternating Projections Methods for Discrete-Time Stabilization of Quantum States",
+      "year": 2017,
+      "doi": "https://doi.org/10.1109/tac.2017.2731903",
+      "abstract": "We study sequences (both cyclic and randomized) of idempotent completely positive trace-preserving quantum maps, and show how they asymptotically converge to the intersection of their fixed point sets via alternating projection methods, highlighting the robustness features of the protocol against randomization. The general results are then specialized to stabilizing entangled states in finite-dimensional multipartite quantum systems subject to locality constraints, a problem of key interest for quantum information applications.",
+      "url": "https://doi.org/10.1109/tac.2017.2731903"
+    },
+    {
+      "id": "https://openalex.org/W4388903475",
+      "title": "Quantum Information Decoding Using Dissipative Dynamics",
+      "year": 2023,
+      "doi": "https://doi.org/10.1016/j.ifacol.2023.10.1783",
+      "abstract": "In this paper, we deal with quantum information decoding. Quantum codes are a known technique for correcting errors of quantum information caused by noise or operational errors and one of the most popular types of codes is the so-called stabilizer code. Various implementation methods have been proposed to encode information into a stabilizer code, but there have been few studies on decoding to extract the original information from the code words. In this paper, we propose a decoding method for stabilizer codes using dissipation dynamics and show that the original information can be extracted from the code words.",
+      "url": "https://doi.org/10.1016/j.ifacol.2023.10.1783"
+    },
+    {
+      "id": "https://openalex.org/W4407951364",
+      "title": "Reconstructing Quantum States from Local Observation: A Dynamical Viewpoint",
+      "year": 2024,
+      "doi": "https://doi.org/10.1109/cdc56724.2024.10886855",
+      "abstract": "We analyze the problem of reconstructing an unknown quantum state of a multipartite system from repeated measurements of local observables. In particular, via a system-theoretic observability analysis, we show that, even when the initial state is not uniquely determined for a static system, this can be reconstructed if we leverage the system\u2019s dynamics. The choice of dynamical generators and the effect of finite samples is discussed, along with an illustrative example.",
+      "url": "https://doi.org/10.1109/cdc56724.2024.10886855"
+    },
+    {
+      "id": "https://openalex.org/W3088691476",
+      "title": "Cutoff Thermalization for Ornstein\u2013Uhlenbeck Systems with Small L\u00e9vy Noise in the Wasserstein Distance",
+      "year": 2021,
+      "doi": "https://doi.org/10.1007/s10955-021-02815-0",
+      "abstract": "Abstract This article establishescutoff thermalization(also known as thecutoff phenomenon) for a class of generalized Ornstein\u2013Uhlenbeck systems $$(X^\\varepsilon _t(x))_{t\\geqslant 0}$$ (Xt\u03b5(x))t\u2a7e0 with $$\\varepsilon $$ \u03b5 -small additive L\u00e9vy noise and initial valuex. The driving noise processes include Brownian motion, $$\\alpha $$ \u03b1 -stable L\u00e9vy flights, finite intensity compound Poisson processes, and red noises, and may be highly degenerate.Window cutoff thermalizationis shown under mild generic assumptions; that is, we see an asymptotically sharp $$\\infty /0$$ \u221e/0 -collapse of the renormalized Wasserstein distance from the current state to the equilibrium measure $$\\mu ^\\varepsilon $$ \u03bc\u03b5 along a time window centered on a precise $$\\varepsilon $$ \u03b5 -dependent time scale $$\\mathfrak {t}_\\varepsilon $$ t\u03b5 . In many interesting situations such as reversible (L\u00e9vy) diffusions it is possible to prove the existence of an explicit, universal, deterministiccutoff thermalization profile. That is, for generic initial dataxwe obtain the stronger result $$\\mathcal {W}_p(X^\\varepsilon _{t_\\varepsilon + r}(x), \\mu ^\\varepsilon ) \\cdot \\varepsilon ^{-1} \\rightarrow K\\cdot e^{-q r}$$ Wp(Xt\u03b5+r\u03b5(x),\u03bc\u03b5)\u00b7\u03b5-1\u2192K\u00b7e-qr for any $$r\\in \\mathbb {R}$$ r\u2208R as $$\\varepsilon \\rightarrow 0$$ \u03b5\u21920 for some spectral constants $$K, q>0$$ K,q>0 and any $$p\\geqslant 1$$ p\u2a7e1 whenever the distance is finite. The existence of this limit is characterized by the absence of non-normal growth patterns in terms of an orthogonality condition on a computable family of generalized eigenvectors of $$\\mathcal {Q}$$ Q . Precise error bounds are given. Using these results, this article provides a complete discussion of the cutoff phenomenon for the classical linear oscillator with friction subject to $$\\varepsilon $$ \u03b5 -small Brownian motion or $$\\alpha $$ \u03b1 -stable L\u00e9vy flights. Furthermore, we cover the highly degenerate case of a linear chain of oscillators in a generalized heat bath at low temperature.",
+      "url": "https://doi.org/10.1007/s10955-021-02815-0"
+    },
+    {
+      "id": "https://openalex.org/W3089270513",
+      "title": "The modified logarithmic Sobolev inequality for quantum spin systems: classical and commuting nearest neighbour interactions",
+      "year": 2020,
+      "doi": "https://doi.org/10.48550/arxiv.2009.11817",
+      "abstract": "Given a uniform, frustration-free family of local Lindbladians defined on a quantum lattice spin system in any spatial dimension, we prove a strong exponential convergence in relative entropy of the system to equilibrium under a condition of spatial mixing of the stationary Gibbs states and the rapid decay of the relative entropy on finite-size blocks. Our result leads to the first examples of the positivity of the modified logarithmic Sobolev inequality for quantum lattice spin systems independently of the system size. Moreover, we show that our notion of spatial mixing is a consequence of the recent quantum generalization of Dobrushin and Shlosman's complete analyticity of the free-energy at equilibrium. The latter typically holds above a critical temperature Tc. Our results have wide-ranging applications in quantum information. As an illustration, we discuss four of them: first, using techniques of quantum optimal transport, we show that a quantum annealer subject to a finite range classical noise will output an energy close to that of the fixed point after constant annealing time. Second, we prove Gaussian concentration inequalities for Lipschitz observables and show that the eigenstate thermalization hypothesis holds for certain high-temperture Gibbs states. Third, we prove a finite blocklength refinement of the quantum Stein lemma for the task of asymmetric discrimination of two Gibbs states of commuting Hamiltonians satisfying our conditions. Fourth, in the same setting, our results imply the existence of a local quantum circuit of logarithmic depth to prepare Gibbs states of a class of commuting Hamiltonians.",
+      "url": "http://arxiv.org/abs/2009.11817"
+    },
+    {
+      "id": "https://openalex.org/W2964144107",
+      "title": "Alternating Projections Methods for Discrete-time Stabilization of Quantum States",
+      "year": 2016,
+      "doi": "https://doi.org/10.1109/tac.2017.2731903",
+      "abstract": "We study sequences (both cyclic and randomized) of idempotent completely-positive trace-preserving quantum maps, and show how they asymptotically converge to the intersection of their fixed point sets via alternating projection methods. We characterize the robustness features of the protocol against randomization and provide basic bounds on its convergence speed. The general results are then specialized to stabilizing en- tangled states in finite-dimensional multipartite quantum systems subject to a resource constraint, a problem of key interest for quantum information applications. We conclude by suggesting further developments, including techniques to enlarge the set of stabilizable states and ensure efficient, finite-time preparation.",
+      "url": "http://arxiv.org/abs/1612.05554"
+    },
+    {
+      "id": "https://openalex.org/W2977731983",
+      "title": "Finite-time stabilization control of quantum systems",
+      "year": 2019,
+      "doi": "https://doi.org/10.48550/arxiv.1910.00208",
+      "abstract": "The finite-time control problem of quantum systems is investigated in this paper. We first define finite-time stability and present a finite-time Lyapunov stability criterion for finite-dimensional quantum systems in coherence vector representation. Then, for two-level quantum systems, we design a continuous non-smooth control law with a state-dependent fractional power and prove the uniqueness of solutions of the system dynamics with the controller via the concept of transversality. By combining the finite-time Lyapunov stability criterion with the homogeneity theory, the finite-time convergence of the system to an eigenstate of its internal Hamiltonian is proved. Numerical results on a spin-1/2 system demonstrate the effectiveness of the proposed finite-time stabilization control scheme.",
+      "url": "http://arxiv.org/abs/1910.00208"
+    },
+    {
+      "id": "https://openalex.org/W2644038806",
+      "title": "Distributed finite-time stabilization of entangled quantum states on tree-like hypergraphs",
+      "year": 2017,
+      "doi": "https://doi.org/10.1109/cdc.2017.8264477",
+      "abstract": "Preparation of pure states on networks of quantum systems by controlled dissipative dynamics offers important advantages with respect to circuit-based schemes. Unlike in continuous-time scenarios, when discrete-time dynamics are considered, dead-beat stabilization becomes possible in principle. Here, we focus on pure states that can be stabilized by distributed, unsupervised dynamics in finite time on a network of quantum systems subject to realistic locality constraints. In particular, we define a class of quasi-locality notions, that we name \u201ctree-like hypergraphs,\u201d and show that the states that are robustly stabilizable in finite time are then unique ground states of a frustration-free, commuting quasi-local Hamiltonian. A structural characterization of such states is also provided, building on a simple yet relevant example.",
+      "url": "https://doi.org/10.1109/cdc.2017.8264477"
+    },
+    {
+      "id": "https://openalex.org/W2949463887",
+      "title": "Distributed finite-time stabilization of entangled quantum states on tree-like hypergraphs",
+      "year": 2017,
+      "doi": "https://doi.org/10.48550/arxiv.1703.07679",
+      "abstract": "Preparation of pure states on networks of quantum systems by controlled dissipative dynamics offers important advantages with respect to circuit-based schemes. Unlike in continuous-time scenarios, when discrete-time dynamics are considered, dead-beat stabilization becomes possible in principle. Here, we focus on pure states that can be stabilized by distributed, unsupervised dynamics in finite time on a network of quantum systems subject to realistic quasi-locality constraints. In particular, we define a class of quasi-locality notions, that we name \"tree-like hypergraphs,\" and show that the states that are robustly stabilizable in finite time are then unique ground states of a frustration-free, commuting quasi-local Hamiltonian. A structural characterization of such states is also provided, building on a simple yet relevant example.",
+      "url": "http://arxiv.org/abs/1703.07679"
+    },
+    {
+      "id": "https://openalex.org/W2991326432",
+      "title": "Quantum feedback for measurement and control",
+      "year": 2020,
+      "doi": "https://doi.org/10.48550/arxiv.2004.09766",
+      "abstract": "The standard quantum formalism introduced at the undergraduate level treats measurement as an instantaneous collapse. In reality however, no physical process can occur over a truly infinitesimal time interval. A more subtle investigation of open quantum systems lead to the theory of continuous measurement and quantum trajectories, in which wave function collapse occurs over a finite time scale associated with an interaction. Within this formalism, it becomes possible to ask many new questions that would be trivial or even ill-defined in the context of the more basic measurement model. In this thesis, we investigate both theoretically and experimentally what fundamentally new capabilities arise when an experimental apparatus can resolve the continuous dynamics of a measurement. Theoretically, we show that when one can perform feedback operations on the timescale of the measurement process, the resulting tools provide significantly more control over entanglement generation, and in some settings can generate it optimally. We derive these results using a novel formalism which encompasses most known quantum feedback protocols. Experimentally, we show that continuous measurement allows one to observe the dynamics of a system undergoing simultaneous non-commuting measurements, which provides a reinterpretation of the Heisenberg uncertainty principle. Finally, we combine the theoretical focus on quantum feedback with the experimental capabilities of superconducting circuits to implement a feedback controlled quantum amplifier. The resulting system is capable of adaptive measurement, which we use to perform the first canonical phase measurement.",
+      "url": "http://arxiv.org/abs/2004.09766"
+    },
+    {
+      "id": "https://openalex.org/W4381586697",
+      "title": "Ergodicity bounds for stable Ornstein-Uhlenbeck systems in Wasserstein distance with applications to cutoff stability",
+      "year": 2023,
+      "doi": "https://doi.org/10.48550/arxiv.2306.11616",
+      "abstract": "This article establishes cutoff stability also known as abrupt thermalization for generic multidimensional Hurwitz stable Ornstein-Uhlenbeck systems with (possibly degenerate) L\u00e9vy noise at fixed noise intensity. The results are based on several ergodicity quantitative lower and upper bounds some of which make use of the recently established shift linearity property of the Wasserstein-Kantorovich-Rubinstein distance by the authors. It covers such irregular systems like Jacobi chains and more general networks of coupled harmonic oscillators with a heat bath (including L\u00e9vy excitations) at constant temperature on the outer edges and the so-called Brownian gyrator.",
+      "url": "http://arxiv.org/abs/2306.11616"
+    },
+    {
+      "id": "https://openalex.org/W4401917993",
+      "title": "Cutoff Ergodicity Bounds in Wasserstein Distance for a Viscous Energy Shell Model with L\u00e9vy Noise",
+      "year": 2024,
+      "doi": "https://doi.org/10.1007/s10955-024-03308-6",
+      "abstract": "Abstract This article establishes explicit non-asymptotic ergodic bounds in the renormalized Wasserstein\u2013Kantorovich\u2013Rubinstein (WKR) distance for a viscous energy shell lattice model of turbulence with random energy injection. The system under consideration is driven either by a Brownian motion, a symmetric $$\\alpha $$ \u03b1 -stable L\u00e9vy process, a stationary Gaussian or $$\\alpha $$ \u03b1 -stable Ornstein\u2013Uhlenbeck process, or by a general L\u00e9vy process with second moments. The obtained non-asymptotic bounds establish asymptotically abrupt thermalization. The analysis is based on the explicit representation of the solution of the system in terms of convolutions of Bessel functions.",
+      "url": "https://doi.org/10.1007/s10955-024-03308-6"
+    }
+  ]
+}

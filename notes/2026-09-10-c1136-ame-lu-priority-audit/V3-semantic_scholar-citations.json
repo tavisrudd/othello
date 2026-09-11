@@ -1,0 +1,138 @@
+{
+  "seed": "V3",
+  "service": "semantic_scholar",
+  "status": "ok",
+  "count_reported": 14,
+  "count_retrieved": 14,
+  "queries": [
+    "https://api.semanticscholar.org/graph/v1/paper/7494a07e4f176a0bc01837db310c8313545b02bf/citations?fields=title,year,abstract,externalIds,url&limit=1000"
+  ],
+  "records": [
+    {
+      "id": "6d5812da2e4156ab2b8b906008b6787e95b63d9e",
+      "title": "The EU Quantum Flagship's Key Performance Indicators for Quantum Computing",
+      "year": 2025,
+      "doi": null,
+      "arxiv": "2512.19653",
+      "abstract": "As quantum processors continue to scale in size and complexity, the need for well-defined, reproducible, and technology-agnostic performance metrics becomes increasingly critical. Here we present a suite of scalable quantum computing benchmarks developed as key performance indicators (KPIs) within the EU Quantum Flagship. These proposed benchmarks are designed to assess holistic system performance rather than isolated components, and to remain applicable across both noisy intermediate-scale quantum (NISQ) devices and future fault-tolerant architectures. We introduce four core benchmarks addressing complementary aspects of quantum computing capability: large multi-qubit circuit execution via a Clifford Volume benchmark, scalable multipartite entanglement generation through GHZ-state preparation, a benchmark based on the application of Shor's period-finding subroutine to simple functions, and a protocol quantifying the benefit of quantum error correction using Bell states. Each benchmark is accompanied by clearly specified protocols, reporting standards, and scalable evaluation methods. Together, these KPIs provide a coherent framework for transparent and fair performance assessment across quantum hardware platforms and for tracking progress late-NISQ toward early fault-tolerant quantum computation.",
+      "url": "https://www.semanticscholar.org/paper/6d5812da2e4156ab2b8b906008b6787e95b63d9e"
+    },
+    {
+      "id": "9801296e6137bacdf1a8c33861c0a8529c0f939d",
+      "title": "Verifcation of general multi-qudit pure states",
+      "year": 2025,
+      "doi": null,
+      "arxiv": "2511.17901",
+      "abstract": "Verifying prepared quantum states is crucial for hybrid systems whose subsystems may have different local dimensions. We present a generalized stabilizer framework and associated test that apply to general multi-qudit states, including composite-dimensional and hybrid architectures. Using only adaptive local measurements, our method verifies qutrit-qubit states, arbitrary two-qubit pure states, Bell/Bell-like, GHZ/GHZ-like, graph, hypergraph, multigraph, and multihypergraph states, with efficiencies matching or surpassing the best known schemes.",
+      "url": "https://www.semanticscholar.org/paper/9801296e6137bacdf1a8c33861c0a8529c0f939d"
+    },
+    {
+      "id": "d1b662b0ac0e40d67107c0d7adba9bdfd9dff3b6",
+      "title": "SYK model based $\\beta$ regime dependent two-qubit dynamical wormhole-inspired teleportation protocol simulation",
+      "year": 2025,
+      "doi": "10.1103/mcsm-sbcx",
+      "arxiv": "2506.15373",
+      "abstract": "We implement the Wormhole-Inspired Teleportation Protocol (WITP) in a pair of coupled Sachdev-Ye-Kitaev (SYK) models prepared in a thermofield-double state, forming a quantum analog of a traversable wormhole. By varying parameters (temperature, coupling strength, insertion site, and traversal time), we compare the teleportation fidelity against an analogous protocol using a transverse-field Ising model. We find that the chaotic SYK system consistently yields higher teleportation fidelity than the TFIM model, reflecting the SYK Hamiltonian's pronounced many-body chaos. These enhanced fidelities arise from the SYK's effectively random-matrix dynamics, which improve coherent information transfer through the wormhole channel. Unlike prior single-qubit benchmarks based on basis state inputs, the present work defines and evaluates a genuinely quantum-state fidelity for a maximally entangled two-qubit Bell input, using a Pauli-stabilizer formalism that captures entanglement-phase coherence. Our central result is achieved by teleporting a maximally entangled two-qubit Bell state through the wormhole. We introduce a Pauli-stabilizer fidelity measure for the two-qubit message and demonstrate that the Bell-state protocol produces a substantial fidelity boost compared to single-qubit teleportation. Furthermore, we examine the time-resolved fidelity for both single-qubit and two-qubit messages, revealing distinct fluctuation patterns that deepen the understanding of dynamical many-body teleportation processes. Finally, we present an argument that our Bell-state WITP simulations provide a concrete numerical testbed for aspects of the ER=EPR conjecture, by mapping entanglement structure and thermal/coupling dependence to traversability diagnostics in an emergent wormhole geometry.",
+      "url": "https://www.semanticscholar.org/paper/d1b662b0ac0e40d67107c0d7adba9bdfd9dff3b6"
+    },
+    {
+      "id": "d9ed4f663053162f427bafccd850ab32af8d969f",
+      "title": "Verifying a stabilizer state with few observables but many shots",
+      "year": 2024,
+      "doi": null,
+      "arxiv": "2412.16690",
+      "abstract": "We propose a quantum-state-certification protocol for stabilizer states, motivated by application in in-situ testing of NISQ-era quantum computer systems: The number of qubits is bounded, and in terms of cost of running the protocol, identical repetition of quantum circuits contribute negligibly compared to switching the measurement bases. The method builds on Direct Fidelity Estimation and work by Somma et al.~(2006), but replaces linear averages by a minimum over estimates of expectation values. We provide mathematically rigorous analysis of the false-negative and false-positive rates.",
+      "url": "https://www.semanticscholar.org/paper/d9ed4f663053162f427bafccd850ab32af8d969f"
+    },
+    {
+      "id": "a57eef5af27af297af7a64c71bfbb3a275be4759",
+      "title": "Benchmarking Quantum Gates and Circuits",
+      "year": 2024,
+      "doi": "10.1021/acs.chemrev.4c00870",
+      "arxiv": "2407.09942",
+      "abstract": "Accurate noise characterization in quantum gates and circuits is vital for the development of reliable quantum simulations for chemically relevant systems and fault-tolerant quantum computing. This paper reviews a variety of key benchmarking techniques, including Randomized Benchmarking, Quantum Process Tomography, Gate Set Tomography, Process Fidelity Estimation, Direct Fidelity Estimation, and Cross-Entropy Benchmarking. We evaluate each method\u2019s complexities, the resources they require, and their effectiveness in addressing coherent, incoherent, and state preparation and measurement (SPAM) errors. Furthermore, we introduce Deterministic Benchmarking (DB), a novel protocol that minimizes the number of experimental runs, exhibits resilience to SPAM errors, and effectively characterizes both coherent and incoherent errors. The implementation of DB is experimentally validated using a superconducting transmon qubit, and the results are substantiated with a simple analytical model and master equation simulations. With the addition of DB to the toolkit of available benchmarking methods, this article serves as a practical guide for choosing and applying benchmarking protocols to advance quantum computing technologies.",
+      "url": "https://www.semanticscholar.org/paper/a57eef5af27af297af7a64c71bfbb3a275be4759"
+    },
+    {
+      "id": "4330044efafcb422379fcb3aa20cb9225c374d9c",
+      "title": "Using non-convex optimization in quantum process tomography: Factored gradient descent is tough to beat",
+      "year": 2023,
+      "doi": "10.1109/ICRC60800.2023.10386455",
+      "arxiv": "2312.01311",
+      "abstract": "We propose a non-convex optimization algorithm, based on the Burer-Monteiro (BM) factorization, for the quantum process tomography problem, in order to estimate a low-rank process matrix \u03c7 for near-unitary quantum gates. In this work, we compare our approach against state of the art convex optimization approaches based on gradient descent. We use a reduced set of initial states and measurement operators that require 2 \u00b7 8n circuit settings, as well as $\\mathcal{O}(4^n)$ measurements for an underdetermined setting. We find our algorithm converges faster and achieves higher fidelities than state of the art, both in terms of measurement settings, as well as in terms of noise tolerance, in the cases of depolarizing and Gaussian noise models.",
+      "url": "https://www.semanticscholar.org/paper/4330044efafcb422379fcb3aa20cb9225c374d9c"
+    },
+    {
+      "id": "ac6cf90fe2c4e5ffe4873a29e8190dd14b2808a8",
+      "title": "Shadow Distillation: Quantum Error Mitigation with Classical Shadows for Near-Term Quantum Processors",
+      "year": 2022,
+      "doi": "10.1103/PRXQuantum.4.010303",
+      "arxiv": "2203.07309",
+      "abstract": "Mitigating errors in quantum information processing devices is especially important in the absence of fault tolerance. An effective method in suppressing state-preparation errors is using multiple copies to distill the ideal component from a noisy quantum state. Here, we use classical shadows and randomized measurements to circumvent the need for coherent access to multiple copies at an exponential cost. We study the scaling of resources using numerical simulations and find that the overhead is still favorable compared to full state tomography. We optimize measurement resources under realistic experimental constraints and apply our method to an experiment preparing Greenberger-Horne-Zeilinger (GHZ) state with trapped ions. In addition to improving stabilizer measurements, the analysis of the improved results reveals the nature of errors affecting the experiment. Hence, our results provide a directly applicable method for mitigating errors in near-term quantum computers.",
+      "url": "https://www.semanticscholar.org/paper/ac6cf90fe2c4e5ffe4873a29e8190dd14b2808a8"
+    },
+    {
+      "id": "fd0990f79a72bbde171e1170b9f6e05e2a426a88",
+      "title": "Minimum number of experimental settings required to verify bipartite pure states and unitaries",
+      "year": 2021,
+      "doi": "10.1103/physreva.104.062439",
+      "arxiv": "2112.13638",
+      "abstract": "Efficient verification of quantum states and gates is crucial to the development of quantum technologies. Although the sample complexities of quantum state verification and quantum gate verification have been studied by many researchers, the number of experimental settings has received little attention and is poorly understood. In this work we study systematically quantum state verification and quantum gate verification with a focus on the number of experimental settings. We show that any bipartite pure state can be verified by only two measurement settings based on local projective measurements. Any bipartite unitary in dimension $d$ can be verified by $2d$ experimental settings based on local operations. In addition, we introduce the concept of entanglement-free verification and clarify its connection with minimal-setting verification. Finally, we show that any two-qubit unitary can be verified with at most five experimental settings; moreover, a generic two-qubit unitary (except for a set of measure zero) can be verified by an entanglement-free protocol based on four settings. In the course of study we clarify the properties of Schmidt coefficients of two-qubit unitaries, which are of independent interest.",
+      "url": "https://www.semanticscholar.org/paper/fd0990f79a72bbde171e1170b9f6e05e2a426a88"
+    },
+    {
+      "id": "ac0cebb3354ccb5af0657fbe924040bd0a0db907",
+      "title": "Fast quantum state reconstruction via accelerated non-convex programming",
+      "year": 2021,
+      "doi": "10.3390/photonics10020116",
+      "arxiv": "2104.07006",
+      "abstract": "We propose a new quantum state reconstruction method that combines ideas from compressed sensing, non-convex optimization, and acceleration methods. The algorithm, called Momentum-Inspired Factored Gradient Descent (MiFGD), extends the applicability of quantum tomography for larger systems. Despite being a non-convex method, MiFGD converges provably close to the true density matrix at an accelerated linear rate asymptotically in the absence of experimental and statistical noise, under common assumptions. With this manuscript, we present the method, prove its convergence property and provide the Frobenius norm bound guarantees with respect to the true density matrix. From a practical point of view, we benchmark the algorithm performance with respect to other existing methods, in both synthetic and real (noisy) experiments, performed on the IBM\u2019s quantum processing unit. We find that the proposed algorithm performs orders of magnitude faster than the state-of-the-art approaches, with similar or better accuracy. In both synthetic and real experiments, we observed accurate and robust reconstruction, despite the presence of experimental and statistical noise in the tomographic data. Finally, we provide a ready-to-use code for state tomography of multi-qubit systems.",
+      "url": "https://www.semanticscholar.org/paper/ac0cebb3354ccb5af0657fbe924040bd0a0db907"
+    },
+    {
+      "id": "b43dd15c515a472b377d1da20141bf5e8d93a4de",
+      "title": "Sampling and the complexity of nature (Assessing, testing, and challenging the computational power of quantum devices)",
+      "year": 2020,
+      "doi": "10.17169/REFUBIUM-28790",
+      "arxiv": "2012.07905",
+      "abstract": "Randomness is an intrinsic feature of quantum theory. The outcome of any quantum measurement will be random, sampled from a probability distribution that is defined by the measured quantum state. The task of sampling from a prescribed probability distribution is therefore a natural technological application of quantum devices. In the research presented in this thesis, I investigate the complexity-theoretic and physical foundations of quantum sampling algorithms. I assess the computational power of natural quantum simulators and close loopholes in the complexity-theoretic argument for the classical intractability of quantum samplers (Part I). I shed light on how and under which conditions quantum sampling devices can be tested or verified in regimes that are not simulable on classical computers (Part II). Finally, I explore the computational boundary between classical and quantum computing devices (Part III). In particular, I develop efficiently computable measures of the infamous Monte Carlo sign problem and assess those measures both in terms of their practicability as a tool for alleviating or easing the sign problem and the computational complexity of this task. \nAn overarching theme of the thesis is the quantum sign problem which arises due to destructive interference between paths -- an intrinsically quantum effect. The (non-)existence of a sign problem takes on the role as a criterion which delineates the boundary between classical and quantum computing devices. I begin the thesis by identifying the quantum sign problem as a root of the computational intractability of quantum output probabilities. It turns out that the intricate structure of the probability distributions the sign problem gives rise to, prohibits their verification from few samples. In an ironic twist, I show that assessing the intrinsic sign problem of a quantum system is again an intractable problem.",
+      "url": "https://www.semanticscholar.org/paper/b43dd15c515a472b377d1da20141bf5e8d93a4de"
+    },
+    {
+      "id": "b71343c524e3f5721933d7e6597f05537e29d824",
+      "title": "Theory of Quantum System Certification",
+      "year": 2020,
+      "doi": "10.1103/PRXQuantum.2.010201",
+      "arxiv": "2010.05925",
+      "abstract": "The precise control of complex quantum systems promises numerous technological applications including digital quantum computing. The complexity of such devices renders the certification of their correct functioning a challenge. To address this challenge, numerous methods were developed in the last decade. \nIn this tutorial, we explain prominent protocols for certifying the physical layer of quantum devices described by quantum states and processes. Such protocols are particularly important in the development of near-term devices. Specifically, we discuss methods of direct quantum state certification, direct fidelity estimation, shadow fidelity estimation, direct quantum process certification, randomized benchmarking and cross-entropy benchmarking. Moreover, we provide an introduction to powerful mathematical methods, which are widely used in quantum information theory, in order to derive theoretical guarantees for the protocols.",
+      "url": "https://www.semanticscholar.org/paper/b71343c524e3f5721933d7e6597f05537e29d824"
+    },
+    {
+      "id": "1c748e6abd93a8d0a87b28db24a7251b46aa9b12",
+      "title": "Optimal verification of stabilizer states",
+      "year": 2020,
+      "doi": "10.1103/physrevresearch.2.043323",
+      "arxiv": "2007.09713",
+      "abstract": "Statistical verification of a quantum state aims to certify whether a given unknown state is close to the target state with confidence. So far, sample-optimal verification protocols based on local measurements have been found only for disparate groups of states: bipartite pure states, GHZ states, and antisymmetric basis states. In this work, we investigate systematically optimal verification of entangled stabilizer states using Pauli measurements. First, we provide a lower bound on the sample complexity of any verification protocol based on separable measurements, which is independent of the number of qubits and the specific stabilizer state. Then we propose a simple algorithm for constructing optimal protocols based on Pauli measurements. Our calculations suggest that optimal protocols based on Pauli measurements can saturate the above bound for all entangled stabilizer states, and this claim is verified explicitly for states up to seven qubits. Similar results are derived when each party can choose only two measurement settings, say X and Z. Furthermore, by virtue of the chromatic number, we provide an upper bound for the minimum number of settings required to verify any graph state, which is expected to be tight. For experimentalists, optimal protocols and protocols with the minimum number of settings are explicitly provided for all equivalent classes of stabilizer states up to seven qubits. For theorists, general results on stabilizer states (including graph states in particular) and related structures derived here may be of independent interest beyond quantum state verification.",
+      "url": "https://www.semanticscholar.org/paper/1c748e6abd93a8d0a87b28db24a7251b46aa9b12"
+    },
+    {
+      "id": "8d27d127ec2464edf11b3c54edf5fda1d581a8d1",
+      "title": "Optimal Verification of Greenberger-Horne-Zeilinger States",
+      "year": 2019,
+      "doi": "10.1103/PHYSREVAPPLIED.13.054002",
+      "arxiv": "1909.08979",
+      "abstract": "We construct optimal protocols for verifying qubit and qudit GHZ states using local projective measurements. When the local dimension is a prime, an optimal protocol is constructed from Pauli measurements only. Our protocols provide a highly efficient way for estimating the fidelity and certifying genuine multipartite entanglement. In particular, they enable the certification of genuine multipartite entanglement using only one test when the local dimension is sufficiently large. By virtue of adaptive local projective measurements, we then construct protocols for verifying GHZ-like states that are optimal over all protocols based on one-way communication. The efficiency can be improved further if additional communications are allowed. Finally, we construct optimal protocols for verifying GHZ states and nearly optimal protocols for GHZ-like states in the adversarial scenario.",
+      "url": "https://www.semanticscholar.org/paper/8d27d127ec2464edf11b3c54edf5fda1d581a8d1"
+    },
+    {
+      "id": "61cdabfbc08db91950a70e1b13c20c775d1567c4",
+      "title": "Lecture notes: Characterization, certification, and validation of quantum systems",
+      "year": 2020,
+      "doi": null,
+      "arxiv": null,
+      "abstract": null,
+      "url": "https://www.semanticscholar.org/paper/61cdabfbc08db91950a70e1b13c20c775d1567c4"
+    }
+  ]
+}

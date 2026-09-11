@@ -1,0 +1,38 @@
+[
+  {
+    "service": "zbmath_web",
+    "url": "https://zbmath.org/?q=%22quantum+state+verification%22",
+    "http_status": 403,
+    "error": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scal"
+  },
+  {
+    "service": "zbmath_api",
+    "url": "https://api.zbmath.org/v1/document/_search?search_string=quantum%20state%20verification",
+    "http_status": 200,
+    "bytes": 930915,
+    "content_type": "application/json",
+    "preview": "{\"result\":[{\"biographic_references\":[],\"contributors\":{\"authors\":[{\"aliases\":[],\"checked\":\"0\",\"codes\":[\"klyachko.alexander-a\"],\"name\":\"Klyachko, Alexander A.\"},{\"aliases\":[],\"check"
+  },
+  {
+    "service": "mathscinet",
+    "url": "https://mathscinet.ams.org/mathscinet/publications-search?query=quantum%20state%20verification",
+    "http_status": 200,
+    "bytes": 5625,
+    "content_type": "text/html; charset=UTF-8",
+    "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <title>Where Are Y"
+  },
+  {
+    "service": "scholar",
+    "url": "https://scholar.google.com/scholar?q=%22absolutely+maximally+entangled%22+verification",
+    "http_status": 200,
+    "bytes": 183883,
+    "content_type": "text/html; charset=ISO-8859-1",
+    "preview": "<!doctype html><html><head><title>Google Scholar</title><meta http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-1\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\">"
+  },
+  {
+    "service": "crossref_reverse",
+    "url": "https://api.crossref.org/works?filter=reference:10.1103/PhysRevResearch.2.043323&rows=1000",
+    "http_status": 400,
+    "error": "{\"status\":\"failed\",\"message-type\":\"validation-failure\",\"message\":[{\"type\":\"filter-not-available\",\"value\":\"reference\",\"message\":\"Filter 'reference' specified but there is no such filter for this route. Valid filters for this route are: until-approved-date, has-assertion, from-print-pub-date, until-de"
+  }
+]

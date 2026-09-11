@@ -1,0 +1,52 @@
+{
+  "seed": "A1",
+  "service": "openalex",
+  "status": "ok",
+  "count_reported": 5,
+  "count_retrieved": 5,
+  "queries": [
+    "https://api.openalex.org/works?filter=cites:W1683683728&per-page=200&cursor=*"
+  ],
+  "records": [
+    {
+      "id": "https://openalex.org/W3158150681",
+      "title": "Characterizing quantum simulations with quantum tomography on a spin quantum simulator",
+      "year": 2021,
+      "doi": "https://doi.org/10.1103/physreva.103.052403",
+      "abstract": "Developments of quantum techniques have drastically improved the control ability of current quantum processors. Characterizing quantum simulations performed on these processors has become a vital topic in quantum information processing. Traditional characterizing techniques such as quantum process and state tomography fully characterize quantum simulations, but always with the exponentially increased resource cost, unfortunately. It may place their applications only in small-scale quantum systems. Meanwhile, many potential characterizing methods have been put forward in the past decades. In this work we experimentally test and compare different methods for characterizing quantum simulations of Ising Hamiltonians on the nuclear magnetic resonance (NMR) platform, including the recent quantum Hamiltonian tomography with polynomial complexity to estimate the generator of quantum simulations and nonrepetitive direct fidelity estimation with the Monte Carlo method to estimate the fidelity of dynamical states. We also experimentally estimate the parameters of Hamiltonian via full quantum process tomography and quantum state tomography for the comparison. These methods have merits and demerits in accuracy, the required resource, and prior knowledge. Our experiments test the performance of different methods while providing a beneficial reference for characterizing quantum simulations in the future.",
+      "url": "https://doi.org/10.1103/physreva.103.052403"
+    },
+    {
+      "id": "https://openalex.org/W4407193193",
+      "title": "Entanglement Detection Length of Multipartite Quantum States",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/physrevlett.134.050201",
+      "abstract": "Multipartite entanglement is a valuable resource for quantum technologies. However, detecting this resource can be challenging: for genuine multipartite entanglement, the detection may require global measurements that are hard to implement experimentally. Here we introduce the concept of entanglement detection length, defined as the minimum number of particles that have to be jointly measured in order to detect genuine multipartite entanglement. For symmetric states, we show that the entanglement detection length can be determined by testing separability of the marginal states. For general states, we provide an upper bound on the entanglement detection length based on semidefinite programming. We show that the entanglement detection length is generally smaller than the minimum observable length needed to uniquely determine a multipartite state, and we provide examples achieving the maximum gap between these two quantities.",
+      "url": "https://doi.org/10.1103/physrevlett.134.050201"
+    },
+    {
+      "id": "https://openalex.org/W2950316578",
+      "title": "Uniquely determined pure quantum states need not be unique ground states of quasi-local Hamiltonians",
+      "year": 2019,
+      "doi": "https://doi.org/10.1103/physreva.99.062104",
+      "abstract": "We consider the problem of characterizing states of a multipartite quantum system from restricted, quasi-local information, with emphasis on uniquely determined pure states. By leveraging tools from dissipative quantum control theory, we show how the search for states consistent with an assigned list of reduced density matrices may be restricted to a proper subspace, which is determined solely by their supports. The existence of a quasi-local observable which attains its unique minimum over such a subspace further provides a sufficient criterion for a pure state to be uniquely determined by its reduced states. While the condition that a pure state is uniquely determined is necessary for it to arise as a nondegenerate ground state of a quasi-local Hamiltonian, we prove the opposite implication to be false in general, by exhibiting an explicit analytic counterexample. We show how the problem of determining whether a quasi-local parent Hamiltonian admitting a given pure state as its unique ground state is dual, in the sense of semidefinite programming, to the one of determining whether such a state is uniquely determined by the quasi-local information. Failure of this dual program to attain its optimal value is what prevents these two classes of states from coinciding.",
+      "url": "https://doi.org/10.1103/physreva.99.062104"
+    },
+    {
+      "id": "https://openalex.org/W2564783414",
+      "title": "Determination of Dicke states equivalent under stochastic local operations and classical communication",
+      "year": 2015,
+      "doi": "https://doi.org/10.1103/physreva.92.052338",
+      "abstract": "It has been proven by Rana et al. that the $n$-qubit generic Dicke states $|\\mathrm{GD}(n,\\ensuremath{\\ell})\\ensuremath{\\rangle}$ are uniquely determined, among arbitrary states, by their $(\\ensuremath{\\ell}+1)$-partite reduced density matrices, and $(\\begin{array}{c}n\\ensuremath{-}1\\\\ \\ensuremath{\\ell}\\end{array})$ number of them which have one party common to all are sufficient. We show that among arbitrary states, Dicke-type states are also uniquely determined by their $(\\ensuremath{\\ell}+1)$-partite reduced density matrices. Here, by Dicke-type states, we mean all multiqubit pure states that are stochastic local operations and classical communication equivalent to the $n$-qubit standard Dicke state $|D(n,\\ensuremath{\\ell})\\ensuremath{\\rangle}$. Moreover, we find two kinds of subsets of the $(\\ensuremath{\\ell}+1)$-partite reduced density matrices set, both of which can determine the Dicke-type states. More importantly, the number of elements in these two subsets is much smaller than $(\\begin{array}{c}n\\ensuremath{-}1\\\\ \\ensuremath{\\ell}\\end{array})$.",
+      "url": "https://doi.org/10.1103/physreva.92.052338"
+    },
+    {
+      "id": "https://openalex.org/W3107677122",
+      "title": "N-qudit SLOCC equivalent W states are determined by their bipartite reduced density matrices with tree form",
+      "year": 2020,
+      "doi": "https://doi.org/10.1007/s11128-020-02918-9",
+      "abstract": "",
+      "url": "https://doi.org/10.1007/s11128-020-02918-9"
+    }
+  ]
+}

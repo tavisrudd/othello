@@ -1,0 +1,58 @@
+{
+  "seed": "A1",
+  "service": "semantic_scholar",
+  "status": "ok",
+  "count_reported": 5,
+  "count_retrieved": 5,
+  "queries": [
+    "https://api.semanticscholar.org/graph/v1/paper/ecb1ff60f7ef913d922149a7fa6d13738ca8e22d/citations?fields=title,year,abstract,externalIds,url&limit=1000"
+  ],
+  "records": [
+    {
+      "id": "623b8fac1410e7f268181b8201cc0c502f9eadad",
+      "title": "Entanglement on Two Bloch Spheres: Exploring Two-Qubit Stabilizer Group Structure",
+      "year": 2024,
+      "doi": null,
+      "arxiv": "2406.05174",
+      "abstract": "In this paper, we explore the graphical representation of two-qubit entanglement on two Bloch Spheres via stabilizer formalism. We relate the density matrix to the graphical representation on two Bloch Spheres by showing how both may be derived from the stabilizer group structure of the state. Then we use the representation to explore the symmetries present in maximally entangled states.",
+      "url": "https://www.semanticscholar.org/paper/623b8fac1410e7f268181b8201cc0c502f9eadad"
+    },
+    {
+      "id": "60e5873c8ba3e7e10b76b5715b7c3f12d8f5c062",
+      "title": "Entanglement Detection Length of Multipartite Quantum States.",
+      "year": 2024,
+      "doi": "10.1103/physrevlett.134.050201",
+      "arxiv": "2401.03367",
+      "abstract": "Multipartite entanglement is a valuable resource for quantum technologies. However, detecting this resource can be challenging: for genuine multipartite entanglement, the detection may require global measurements that are hard to implement experimentally. Here we introduce the concept of entanglement detection length, defined as the minimum number of particles that have to be jointly measured in order to detect genuine multipartite entanglement. For symmetric states, we show that the entanglement detection length can be determined by testing separability of the marginal states. For general states, we provide an upper bound on the entanglement detection length based on semidefinite programming. We show that the entanglement detection length is generally smaller than the minimum observable length needed to uniquely determine a multipartite state, and we provide examples achieving the maximum gap between these two quantities.",
+      "url": "https://www.semanticscholar.org/paper/60e5873c8ba3e7e10b76b5715b7c3f12d8f5c062"
+    },
+    {
+      "id": "d33f6cf04b1c1ff4f401b722b02d2f54b817cef9",
+      "title": "Characterizing quantum simulations with quantum tomography on a spin quantum simulator",
+      "year": 2021,
+      "doi": "10.1103/PHYSREVA.103.052403",
+      "arxiv": null,
+      "abstract": null,
+      "url": "https://www.semanticscholar.org/paper/d33f6cf04b1c1ff4f401b722b02d2f54b817cef9"
+    },
+    {
+      "id": "5aa81d31e9fc328f2abe64738234bc435f0646cc",
+      "title": "N-qudit SLOCC equivalent W states are determined by their bipartite reduced density matrices with tree form",
+      "year": 2020,
+      "doi": "10.1007/s11128-020-02918-9",
+      "arxiv": null,
+      "abstract": null,
+      "url": "https://www.semanticscholar.org/paper/5aa81d31e9fc328f2abe64738234bc435f0646cc"
+    },
+    {
+      "id": "5c6522a4686bab09448e43c398926eb0222feb07",
+      "title": "Uniquely determined pure quantum states need not be unique ground states of quasi-local Hamiltonians",
+      "year": 2019,
+      "doi": "10.1103/PhysRevA.99.062104",
+      "arxiv": "1902.09481",
+      "abstract": "We consider the problem of characterizing states of a multipartite quantum system from restricted, quasi-local information, with emphasis on uniquely determined pure states. By leveraging tools from dissipative quantum control theory, we show how the search for states consistent with an assigned list of reduced density matrices may be restricted to a proper subspace, which is determined solely by their supports. The existence of a quasi-local observable which attains its unique minimum over such a subspace further provides a sufficient criterion for a pure state to be uniquely determined by its reduced states. While the condition that a pure state is uniquely determined is necessary for it to arise as a non-degenerate ground state of a quasi-local Hamiltonian, we prove the opposite implication to be false in general, by exhibiting an explicit analytic counterexample. We show how the problem of determining whether a quasi-local parent Hamiltonian admitting a given pure state as its unique ground state is dual, in the sense of semidefinite programming, to the one of determining whether such a state is uniquely determined by the quasi-local information. Failure of this dual program to attain its optimal value is what prevents these two classes of states to coincide.",
+      "url": "https://www.semanticscholar.org/paper/5c6522a4686bab09448e43c398926eb0222feb07"
+    }
+  ],
+  "initial_error": "HTTP Error 429: "
+}

@@ -1,0 +1,382 @@
+{
+  "seed": "V1",
+  "service": "semantic_scholar",
+  "status": "ok",
+  "count_reported": 41,
+  "count_retrieved": 41,
+  "queries": [
+    "https://api.semanticscholar.org/graph/v1/paper/1c748e6abd93a8d0a87b28db24a7251b46aa9b12/citations?fields=title,year,abstract,externalIds,url&limit=1000"
+  ],
+  "records": [
+    {
+      "id": "5f6213b84bc3f48a348ead8ca7bb3e838577fce4",
+      "title": "Learning unknown stabilizer codes using product measurements",
+      "year": 2026,
+      "doi": null,
+      "arxiv": "2609.04997",
+      "abstract": "Efficiently characterizing quantum error correcting codes is a key challenge on the path to fault-tolerant quantum computation. Stabilizer codes, a central class of such codes, are defined by a set of stabilizer generators. Here, we present an algorithm that uses random single-qubit measurements to learn the stabilizer generators of any stabilizer code from $N$ copies of stabilizer states in its codespace, requiring no prior knowledge of the code's structure. This also enables verification that a device implements its intended code. We derive a lower bound on $N$ needed to recover the stabilizer generators with high probability, together with a bound on the algorithm's overall probability of success. When applied to quantum low-density parity-check (qLDPC) codes, a leading candidate for practical fault-tolerant architectures, our approach requires a number of states that scales polylogarithmically with $n$, the number of qubits.",
+      "url": "https://www.semanticscholar.org/paper/5f6213b84bc3f48a348ead8ca7bb3e838577fce4"
+    },
+    {
+      "id": "ca10d347bcfa17aeff08893d489d93ac89818330",
+      "title": "Disjoint Bell measurements enable near-projective GHZ certification",
+      "year": 2026,
+      "doi": null,
+      "arxiv": "2606.09947",
+      "abstract": "Certifying multipartite entangled states is a basic task in quantum information processing, but the achievable copy complexity depends crucially on the measurements available to the verifier. The strongest possible certification measurement for a known pure target state $|\\psi\\rangle$ is the two-outcome projector $\\{|\\psi\\rangle\\langle\\psi|,\\mathsf{I}-|\\psi\\rangle\\langle\\psi|\\}$, which is copy-optimal but often experimentally unrealistic or outside the intended measurement model. In this work, we introduce BM-Cert, a single-copy verification protocol for the $n$-qubit Greenberger--Horne--Zeilinger (GHZ) state using only disjoint two-qubit Bell-basis measurements, together with one single-qubit $X$-basis measurement when $n$ is odd. Surprisingly, a simple combinatorial effect yields perfect completeness and a verification spectral gap $\\nu_\\mathrm{BM}(n)=1-O(1/n)$, so our depth-2 protocol already approaches the ideal projective verification asymptotically as $n$ grows. This contrasts with local Pauli GHZ verification, whose optimal spectral gap remains bounded away from $1$. Thus, allowing only two-qubit entangling measurements on disjoint pairs is enough to achieve asymptotically ideal projective certification. The same Bell-matching outcomes also yield BM-Fid, an unbiased estimator of the GHZ fidelity whose leading Hoeffding coefficient in the sample complexity tends to the ideal value achieved by direct projection. For the open-boundary linear nearest neighbor setting, we further introduce Brick-Cert, a disjoint 2-local certification protocol whose spectral gap $4/5$ is optimal within that restricted architecture.",
+      "url": "https://www.semanticscholar.org/paper/ca10d347bcfa17aeff08893d489d93ac89818330"
+    },
+    {
+      "id": "2f65e52bb1a7088a7b16ea07eddaa1c50a6ca35b",
+      "title": "Research on repeated quantum error detection based on surface codes",
+      "year": 2026,
+      "doi": "10.1117/12.3116350",
+      "arxiv": null,
+      "abstract": "Quantum computing has demonstrated tremendous potential in solving certain complex problems. However, quantum systems are highly susceptible to environmental noise, leading to computational errors. To address this challenge, quantum error correction techniques have been extensively investigated, among which surface codes stand out as one of the most promising approaches due to their high fault-tolerance threshold and relatively low hardware overhead. Nevertheless, there remains room for optimization in the stabilizer circuit and logical operator design of existing seven-qubit surface codes. Here, we propose an improved 7-qubit surface code architecture by reconstructing stabilizer circuits and optimizing logical operator paths, enabling detection of single-qubit errors in data qubits. Simulations via Qiskit demonstrate that the logical qubit's coherence time and lifetime exceed those of its constituent physical qubits while maintaining error-detection capability. This work provides a promising approach toward scalable fault-tolerant quantum computing",
+      "url": "https://www.semanticscholar.org/paper/2f65e52bb1a7088a7b16ea07eddaa1c50a6ca35b"
+    },
+    {
+      "id": "df83636bc0c02e567d8bd5ec85ba22081c2b727b",
+      "title": "Fault-Tolerant Hybrid Decoder for Quantum Surface Codes on Probabilistic Inference and Topological Clustering",
+      "year": 2026,
+      "doi": "10.3390/app16052586",
+      "arxiv": null,
+      "abstract": "Quantum error correction is a prerequisite for quantum computing; however, the performance critically depends on the accuracy of the decoding algorithm. To address these challenges, we propose a hybrid decoding architecture, BP + UF + BP. The protocol initiates with a truncated global BP stage to extract probabilistic gradients without requiring full convergence. This soft information guides a reliability-based Union-Find (UF) algorithm to prioritize high-likelihood error mechanisms. Finally, a local subgraph BP refinement maximizes correction accuracy. Numerical simulations on rotated surface codes under circuit-level depolarizing noise demonstrate a fault-tolerance threshold of approximately 0.72%. This significantly outperforms standard Minimum Weight Perfect Matching (MWPM) and Union-Find (UF) baselines. Notably, our method significantly reduces the logical error rate compared to the conventional decoders. With its empirically near-linear scaling under fixed iteration, the proposed architecture presents a scalable solution for real-time fault-tolerant quantum computing.",
+      "url": "https://www.semanticscholar.org/paper/df83636bc0c02e567d8bd5ec85ba22081c2b727b"
+    },
+    {
+      "id": "37ebc77751da288f67e26911e3e3c993d1012359",
+      "title": "Faster Optimal Decoder for Graph Codes with a Single Logical Qubit",
+      "year": 2026,
+      "doi": null,
+      "arxiv": "2602.14730",
+      "abstract": "In this work, we develop an efficient decoding method for graph codes, a class of stabilizer quantum error-correcting codes constructed from graph states. While optimal decoding is generally NP-hard, we propose a faster decoder exploiting the structural properties of the underlying graph states. Although distinct error patterns may yield the same syndrome, we demonstrate that the post-measurement state follows a well-defined structure determined by the projective syndrome measurement. Building on this idea, we introduce a hierarchical decoder in which each level can be solved in polynomial time. Additionally, this decoder achieves optimal decoding performance at the lower levels of the hierarchy. This strategy avoids the need for full maximum-likelihood decoding of graph codes. Numerical results illustrate the efficiency and effectiveness of the proposed approach.",
+      "url": "https://www.semanticscholar.org/paper/37ebc77751da288f67e26911e3e3c993d1012359"
+    },
+    {
+      "id": "0c01cc4b53d058fb597698efce1665cb6d80b916",
+      "title": "Many-body entanglement in solid-state emitters",
+      "year": 2025,
+      "doi": "10.1038/s41578-026-00893-8",
+      "arxiv": "2511.20797",
+      "abstract": "The preparation and control of quantum states lie at the heart of quantum information science. Recent advances in solid-state quantum emitters (QEs) and nanophotonics have transformed the landscape of quantum photonic technologies, enabling scalable generation of quantum states of light and matter. A new frontier in solid-state quantum photonics is the engineering of many-body interactions between QEs and photons to achieve robust coherence and controllable many-body entanglement. These entangled states, including photonic graph and cluster states, superradiant emission and emergent quantum phases, are promising for quantum computation, sensing and simulation. However, intrinsic inhomogeneities and decoherence in solid-state platforms pose considerable challenges in realizing such complex entangled states. This Review provides an overview of fundamental many-body interactions and dynamics at the light\u2013matter interfaces of solid-state QEs and discusses recent advances in mitigating decoherence and harnessing robust many-body coherence. Building scalable quantum technologies requires generating robust many-body entanglement in solid-state platforms. This Review highlights how engineered light\u2013matter interactions, optical nonlinearities and coupling to nanophotonic structures enable coherent many-body entangled states that are resilient to disorder and decoherence.",
+      "url": "https://www.semanticscholar.org/paper/0c01cc4b53d058fb597698efce1665cb6d80b916"
+    },
+    {
+      "id": "9801296e6137bacdf1a8c33861c0a8529c0f939d",
+      "title": "Verifcation of general multi-qudit pure states",
+      "year": 2025,
+      "doi": null,
+      "arxiv": "2511.17901",
+      "abstract": "Verifying prepared quantum states is crucial for hybrid systems whose subsystems may have different local dimensions. We present a generalized stabilizer framework and associated test that apply to general multi-qudit states, including composite-dimensional and hybrid architectures. Using only adaptive local measurements, our method verifies qutrit-qubit states, arbitrary two-qubit pure states, Bell/Bell-like, GHZ/GHZ-like, graph, hypergraph, multigraph, and multihypergraph states, with efficiencies matching or surpassing the best known schemes.",
+      "url": "https://www.semanticscholar.org/paper/9801296e6137bacdf1a8c33861c0a8529c0f939d"
+    },
+    {
+      "id": "bda44489bf71ffdb5118f534ba86d2fda343eaee",
+      "title": "Phase Transitions and Noise Robustness of Quantum Graph States",
+      "year": 2025,
+      "doi": "10.22331/q-2026-05-05-2094",
+      "arxiv": "2510.00548",
+      "abstract": "\n Graph states are entangled states that are essential for quantum information processing. As experimental advances enable the realization of large-scale graph states, efficient fidelity estimation methods are crucial for assessing their robustness against noise. However, calculations of exact fidelity become intractable for large systems due to the exponential growth in the number of stabilizers. In this work, we show that the fidelity between any ideal graph state and its noisy counterpart under IID Pauli noise can be mapped to the partition function of a classical spin system, enabling efficient computation via statistical mechanical techniques. Using this approach, we analyze the fidelity for regular graph states under depolarizing noise and uncover the emergence of phase transitions in fidelity between the pure-state regime and the noise-dominated regime. Specifically, in 2D, phase transitions occur only when the degree satisfies\n \n d\n \u2265\n 6\n \n , while in 3D they already appear at\n \n d\n \u2265\n 5\n \n . However, for graph states with excessively high degree, such as fully connected graphs, the phase transition disappears. Robustness of graph states against noise is thus determined by their connectivity and spatial dimensionality. Graph states with lower degree and/or dimensionality, which exhibit a smooth crossover, demonstrate greater robustness, while highly connected or higher-dimensional graph states are more fragile. Extreme connectivity, as the fully connected graph state possesses, restores robustness. Furthermore, we show that the fidelity can be rewritten in the form of the partition function of a constraint-percolation problem. Within this picture, we discuss the qualitative difference between 2D regular graph states with\n \n d\n =\n 6\n \n and\n \n d\n =\n 5\n \n regarding the presence or absence of a phase transition, as well as the suppressed critical behavior of fully connected graph states.\n",
+      "url": "https://www.semanticscholar.org/paper/bda44489bf71ffdb5118f534ba86d2fda343eaee"
+    },
+    {
+      "id": "dc61ac0a3fe0beab1cd62a8b0aa2758c43fe4991",
+      "title": "Certifying Quantum States with Uniform Measurements",
+      "year": 2025,
+      "doi": "10.1088/0256-307X/43/7/070601",
+      "arxiv": "2508.09259",
+      "abstract": "Qubit-resolved operations and measurements are required for most current quantum information processing schemes. However, these operations can be experimentally costly due to the need for local addressing, demanding significant classical control. A more resource-efficient alternative to extract information is uniform measurement, where a site-independent rotation of qubits is performed before measuring in the computational basis. This operation can be performed in parallel, or globally, in atom- and ion-based platforms, reducing resource cost and increasing fidelity. In this work, we initiate the exploration of the utility of this operation in quantum information processing. In particular, we demonstrate that uniform measurements can certify certain graph states, a family of highly entangled and broadly useful quantum states. We provide a sample-efficient certification algorithm with a proved performance guarantee, together with an experimental scheme based on analog-mode Rydberg atom arrays. Uniform measurements, therefore, allow direct and efficient characterization of quantum states on quantum platforms in a hitherto unexplored manner. More broadly, our work establishes \u201cuniformity\u201d as a meaningful and practically motivated resource rubric for quantum information processing, and offers new insights into the architectural design of quantum computing devices.",
+      "url": "https://www.semanticscholar.org/paper/dc61ac0a3fe0beab1cd62a8b0aa2758c43fe4991"
+    },
+    {
+      "id": "5705b58cf4fb5430a6cbc05e8962948d8ac60ee1",
+      "title": "Prescriptive preparation and verification of nonstabilizer states",
+      "year": 2025,
+      "doi": "10.1103/4hxp-fswy",
+      "arxiv": "2507.11180",
+      "abstract": "High-fidelity quantum state preparation is a central task in quantum information science. In practice, it is commonly guided either by full quantum state tomography, which becomes prohibitively resource-intensive as system size grows, or by empirically chosen measurement settings that lack principled optimality. Here we show that quantum state verification (QSV) can be elevated from a purely diagnostic tool to a prescriptive framework for quantum state preparation, directly specifying experimentally optimal measurements and quantitative fidelity indicators without full state reconstruction. We experimentally realize this prescriptive paradigm using a three-qubit nonstabilizer $W$ state and a modified homogeneous QSV protocol. The verification measurements not only certify the prepared state with high confidence but also serve as a tomography-free indicator that systematically informs the preparation procedure. Using only nine measurement settings and $10^4$ samples, we achieve high-fidelity state preparation consistent with full tomography that requires orders of magnitude more resources. Beyond the present implementation, the prescriptive structure of QSV is naturally compatible with closed-loop feedback control, outlining a pathway toward genuine real-time quantum state preparation in future low-latency platforms.",
+      "url": "https://www.semanticscholar.org/paper/5705b58cf4fb5430a6cbc05e8962948d8ac60ee1"
+    },
+    {
+      "id": "09f6d51f36b42a6bc1b3ce523d5b8807bb1ab47d",
+      "title": "Exploring entanglement, Wigner negativity and Bell nonlocality for anisotropic two-qutrit states",
+      "year": 2025,
+      "doi": "10.1088/1612-202X/ae18bc",
+      "arxiv": "2506.03879",
+      "abstract": "We introduce a family of anisotropic two-qutrit states (AITTSs). These AITTSs are expressed as \u03c1aiso=p|\u03c8(\u03b8,\u03d5)\u27e9\u27e8\u03c8(\u03b8,\u03d5)|+(1\u2212p)I99 with |\u03c8(\u03b8,\u03d5)\u27e9=sin\u2061\u03b8cos\u2061\u03d5|00\u27e9+sin\u2061\u03b8sin\u2061\u03d5|11\u27e9 +cos\u2061\u03b8|22\u27e9 and I9=\u2211j,k=02|jk\u27e9\u27e8jk|. For a given p\u2208[0,1], these states are adjustable in different ( \u03b8,\u03d5) directions. In the case of ( \u03b8,\u03d5) = ( arccos\u2061(1/3),\u03c0/4), the AITTS reduces to the isotropic two-qutrit state \u03c1iso. In addition, the AITTSs are severely affected by the white noise ( \u03c1noise=I99). Three properties of the AITTSs, including entanglement, Wigner negativity and Bell nonlocality, are explored detailedly in analytical and numerical ways. Each property is witnessed by an appropriate existing criterion. Especially, we analyzed the impact of noise on these properties.",
+      "url": "https://www.semanticscholar.org/paper/09f6d51f36b42a6bc1b3ce523d5b8807bb1ab47d"
+    },
+    {
+      "id": "b2927d4041dfebb8c8a4de9e69773eac3f70e544",
+      "title": "Experimental verification of entangled states in the adversarial scenario",
+      "year": 2025,
+      "doi": "10.1103/PhysRevApplied.23.064005",
+      "arxiv": "2506.10655",
+      "abstract": "Efficient verification of entangled states is crucial to many applications in quantum information processing. However, the effectiveness of standard quantum state verification (QSV) is based on the condition of independent and identical distribution (IID), which impedes its applications in many practical scenarios. Here we demonstrate a defensive QSV protocol, which is effective in all kinds of non-IID scenarios, including the extremely challenging adversarial scenario. To this end, we build a high-speed preparation-and-measurement apparatus controlled by quantum random-number generators. Our experiments clearly show that standard QSV protocols often provide unreliable fidelity certificates in non-IID scenarios. In sharp contrast, the defensive QSV protocol based on a homogeneous strategy can provide reliable and nearly tight fidelity certificates at comparable high efficiency, even under malicious attacks. Moreover, our scheme is robust against the imperfections in a realistic experiment, which is very appealing to practical applications.",
+      "url": "https://www.semanticscholar.org/paper/b2927d4041dfebb8c8a4de9e69773eac3f70e544"
+    },
+    {
+      "id": "9e470ea716b06a3f26f82839b538b351dad8b60b",
+      "title": "Efficient sampling for Pauli-measurement-based shadow tomography in direct fidelity estimation",
+      "year": 2025,
+      "doi": null,
+      "arxiv": "2501.03512",
+      "abstract": "A constant number of random Clifford measurements allows the classical shadow protocol to perform direct fidelity estimation (DFE) with high precision. However, estimating properties of an unknown quantum state is expected to be more feasible with random Pauli measurements than with random Clifford measurements in the near future. Inspired by the importance sampling technique applied to sampling Pauli measurements for DFE, we show that similar strategies can be derived from classical shadows. Specifically, we describe efficient methods using only local Pauli measurements to perform DFE with GHZ, W, and Dicke states, establishing tighter bounds (by factor of $14.22$ and $16$ for GHZ and W, respectively) on the number of measurements required for desired precision. These protocols are derived by adjusting the distribution of observables. Notably, they require no preprocessing steps other than the sampling algorithms.",
+      "url": "https://www.semanticscholar.org/paper/9e470ea716b06a3f26f82839b538b351dad8b60b"
+    },
+    {
+      "id": "6991d60804715bf050c8467699f00f501d44a8b4",
+      "title": "GHZ-W genuinely entangled subspace verification with adaptive local measurements",
+      "year": 2024,
+      "doi": "10.1007/s11432-024-4515-1",
+      "arxiv": "2412.19540",
+      "abstract": "Genuinely entangled subspaces (GESs) are valuable resources in quantum information science. Among these, the three-qubit GHZ-W GES, spanned by the three-qubit Greenberger-Horne-Zeilinger (GHZ) and W states, is a universal and crucial entangled subspace resource for three-qubit systems. In this work, we develop two adaptive verification strategies, the XZ strategy and the rotation strategy, for the three-qubit GHZ-W GES using local measurements and one-way classical communication. These strategies are experimentally feasible, efficient and possess a concise analytical expression for the sample complexity of the rotation strategy, which scales approximately as $2.248\\epsilon^{-1}\\ln\\delta^{-1}$, where $\\epsilon$ is the infidelity and $1-\\delta$ is the confidence level. Furthermore, we comprehensively analyze the two-dimensional two-qubit subspaces and classify them into three distinct types, which include unverifiable entangled subspaces, revealing intrinsic limitations in local verification of entangled subspaces.",
+      "url": "https://www.semanticscholar.org/paper/6991d60804715bf050c8467699f00f501d44a8b4"
+    },
+    {
+      "id": "d9ed4f663053162f427bafccd850ab32af8d969f",
+      "title": "Verifying a stabilizer state with few observables but many shots",
+      "year": 2024,
+      "doi": null,
+      "arxiv": "2412.16690",
+      "abstract": "We propose a quantum-state-certification protocol for stabilizer states, motivated by application in in-situ testing of NISQ-era quantum computer systems: The number of qubits is bounded, and in terms of cost of running the protocol, identical repetition of quantum circuits contribute negligibly compared to switching the measurement bases. The method builds on Direct Fidelity Estimation and work by Somma et al.~(2006), but replaces linear averages by a minimum over estimates of expectation values. We provide mathematically rigorous analysis of the false-negative and false-positive rates.",
+      "url": "https://www.semanticscholar.org/paper/d9ed4f663053162f427bafccd850ab32af8d969f"
+    },
+    {
+      "id": "74811c8d6d3a43d4d81f343116220a0769f5456a",
+      "title": "Nonstabilizerness Enhances Thrifty Shadow Estimation",
+      "year": 2024,
+      "doi": null,
+      "arxiv": "2410.23977",
+      "abstract": "Shadow estimation is a powerful approach for estimating the expectation values of many observables. Thrifty shadow estimation is a simple variant that is proposed to reduce the experimental overhead by reusing random circuits repeatedly. Although this idea is so simple, its performance is quite elusive. In this work we show that thrifty shadow estimation is effective on average whenever the unitary ensemble forms a 2-design, in sharp contrast with the previous expectation. In thrifty shadow estimation based on the Clifford group, the variance is inversely correlated with the degree of nonstabilizerness of the state and observable, which is a key resource in quantum information processing. For fidelity estimation, it decreases exponentially with the stabilizer 2-R\\'{e}nyi entropy of the target state, which endows the stabilizer 2-R\\'{e}nyi entropy with a clear operational meaning. In addition,we propose a simple circuit to enhance the efficiency, which requires only one layer of $T$ gates and is particularly appealing in the NISQ era.",
+      "url": "https://www.semanticscholar.org/paper/74811c8d6d3a43d4d81f343116220a0769f5456a"
+    },
+    {
+      "id": "bb7b6b0b713798e07f3686e092f488f7738f029a",
+      "title": "A new general quantum state verification protocol by the classical shadow method",
+      "year": 2024,
+      "doi": "10.1007/s11128-025-04889-1",
+      "arxiv": "2410.15870",
+      "abstract": "Verifying whether a quantum device produces a specific quantum state is a fundamental task in many applications of modern quantum technologies. In the conventional framework of quantum state verification, designing an optimal or efficient protocol for each type of state typically requires intricate, state-specific customization. Recently, Huang et al. (in: 2024 IEEE 65th annual symposium on foundations of computer science (FOCS), 2024) introduced a novel approach known as the shadow overlap protocol, which leverages classical shadows to efficiently verify multiple classes of quantum states simultaneously. In this work, we propose a new verification protocol that integrates key ideas from both the conventional framework and the shadow overlap protocol. To this end, we first reformulate the shadow overlap protocol using the formalism of hypothesis testing, which also underpins the conventional approach, and analyze the similarities and differences between the two. Our framework extends the capabilities of the shadow overlap protocol while addressing some of its limitations, yielding improved sample complexity and a more natural treatment of structured quantum states. We demonstrate the effectiveness of our protocol through applications to GHZ states and stabilizer states.",
+      "url": "https://www.semanticscholar.org/paper/bb7b6b0b713798e07f3686e092f488f7738f029a"
+    },
+    {
+      "id": "64f17b92864cbf12692a43c86a371ba182906947",
+      "title": "Quantum subspace verification for error correction codes",
+      "year": 2024,
+      "doi": null,
+      "arxiv": "2410.12551",
+      "abstract": "Benchmarking the performance of quantum error correction codes in physical systems is crucial for achieving fault-tolerant quantum computing. Current methodologies, such as (shadow) tomography or direct fidelity estimation, fall short in efficiency due to the neglect of possible prior knowledge about quantum states. To address the challenge, we introduce a framework of quantum subspace verification, employing the knowledge of quantum error correction code subspaces to reduce the potential measurement budgets. Specifically, we give the sample complexity to estimate the fidelity to the target subspace under some confidence level. Building on the framework, verification operators are developed, which can be implemented with experiment-friendly local measurements for stabilizer codes and quantum low-density parity-check (QLDPC) codes. Our constructions require $O(n-k)$ local measurement settings for both, and the sample complexity of $O(n-k)$ for stabilizer codes and of $O((n-k)^2)$ for generic QLDPC codes, where $n$ and $k$ are the numbers of physical and logical qubits, respectively. Notably, for certain codes like the notable Calderbank-Shor-Steane codes and QLDPC stabilizer codes, the setting number and sample complexity can be significantly reduced and are even independent of $n$. In addition, by combining the proposed subspace verification and direct fidelity estimation, we construct a protocol to verify the fidelity of general magic logical states with exponentially smaller sample complexity than previous methods. Our finding facilitates efficient and feasible verification of quantum error correction codes and also magical states, advancing the realization in practical quantum platforms.",
+      "url": "https://www.semanticscholar.org/paper/64f17b92864cbf12692a43c86a371ba182906947"
+    },
+    {
+      "id": "e35fce70166ee03838c0270cd5d44fa6940fe703",
+      "title": "Beating the Optimal Verification of Entangled States via Collective Strategies",
+      "year": 2024,
+      "doi": "10.1103/6yrh-9tzp",
+      "arxiv": "2410.00554",
+      "abstract": "In the realm of quantum information processing, the efficient characterization of entangled states poses an overwhelming challenge, rendering the traditional methods including quantum tomography unfeasible and impractical. To tackle this problem, we propose a new verification scheme using collective strategies, showcasing arbitrarily high efficiency that beats the optimal verification with global measurements. Our collective scheme can be implemented in various experimental platforms and scalable for large systems with a linear scaling on hardware requirement, and distributed operations are allowed. Notably, larger ensembles can always improve the efficiency further, but without increasing the quantum memory. More importantly, the approach consumes only a few copies of the entangled states, while ensuring the preservation of unmeasured ones, and even boosting their fidelity for any subsequent tasks. Furthermore, our protocol provides additional insight into the specific types of noise affecting the system, thereby facilitating potential targeted improvements. These advancements hold promise for a wide range of applications, offering a pathway towards more robust and efficient quantum information processing.",
+      "url": "https://www.semanticscholar.org/paper/e35fce70166ee03838c0270cd5d44fa6940fe703"
+    },
+    {
+      "id": "cf5568037ae1a733a8389c995c52b13042822944",
+      "title": "Verification of Entangled States Under Noisy Measurements",
+      "year": 2024,
+      "doi": "10.1002/qute.202400575",
+      "arxiv": "2406.01470",
+      "abstract": "Entanglement plays an indispensable role in numerous quantum information and quantum computation tasks, underscoring the need for efficiently verifying entangled states. In recent years, quantum state verification has received increasing attention, yet the challenge of addressing noise effects in implementing this approach remains unsolved. In this work, a systematic assessment of the performance of quantum state verification protocols is provided in the presence of measurement noise. Based on the analysis, a necessary and sufficient condition is provided to uniquely identify the target state under noisy measurements. Moreover, this work proposes a symmetric hypothesis testing verification algorithm with noisy measurements. Then, relying on W$W$ states, a semidefinite program is demonstrated to calculate the infidelity threshold for arbitrary measurement noise. Subsequently, using a noisy nonadaptive verification strategy of Greenberger\u2013Horne\u2013Zeilinger and stabilizer states, the noise effects on the verification efficiency are analytically illustrated. From both analytical and numerical perspectives, this work demonstrates that the noisy verification protocol exhibits a negative quadratic relationship between the sample complexity and the infidelity. The method can be easily applied to real experimental settings, thereby demonstrating its promising prospects.",
+      "url": "https://www.semanticscholar.org/paper/cf5568037ae1a733a8389c995c52b13042822944"
+    },
+    {
+      "id": "5844b5f564a560e4cdc95e4f3be9286f710e5f15",
+      "title": "Eigenvalue-based quantum state verification of three-qubit W class states",
+      "year": 2024,
+      "doi": "10.1016/j.physa.2024.129681",
+      "arxiv": null,
+      "abstract": null,
+      "url": "https://www.semanticscholar.org/paper/5844b5f564a560e4cdc95e4f3be9286f710e5f15"
+    },
+    {
+      "id": "038572f6b3e6a24641411e3a5cb8c4b020cbb63e",
+      "title": "Fast algorithms for classical specifications of stabiliser states and Clifford gates",
+      "year": 2023,
+      "doi": "10.22331/q-2025-01-08-1586",
+      "arxiv": "2311.10357",
+      "abstract": "The stabiliser formalism plays a central role in quantum computing, error correction, and fault tolerance. Conversions between and verifications of different specifications of stabiliser states and Clifford gates are important components of many classical algorithms in quantum information, e.g. for gate synthesis, circuit optimisation, and simulating quantum circuits. These core functions are also used in the numerical experiments critical to formulating and testing mathematical conjectures on the stabiliser formalism.We develop novel mathematical insights concerning stabiliser states and Clifford gates that significantly clarify their descriptions. We then utilise these to provide ten new fast algorithms which offer asymptotic advantages over any existing implementations. We show how to rapidly verify that a vector is a stabiliser state, and interconvert between its specification as amplitudes, a quadratic form, and a check matrix. These methods are leveraged to rapidly check if a given unitary matrix is a Clifford gate and to interconvert between the matrix of a Clifford gate and its compact specification as a stabiliser tableau.For example, we extract the stabiliser tableau of a 2n\u00d72n matrix, promised to be a Clifford gate, in O(n2n) time. Remarkably, it is not necessary to read all the elements of a Clifford gate matrix to extract its stabiliser tableau. This is an asymptotic speedup over the best-known method that is exponential in the number of qubits.We provide implementations of our algorithms in Python and C++ that exhibit vastly improved practical performance over existing algorithms in the cases where they exist.",
+      "url": "https://www.semanticscholar.org/paper/038572f6b3e6a24641411e3a5cb8c4b020cbb63e"
+    },
+    {
+      "id": "9fd63f22dbd4de17664760e869c779cc92eb6a00",
+      "title": "Verifiable measurement-based quantum random sampling with trapped ions",
+      "year": 2023,
+      "doi": "10.1038/s41467-024-55342-3",
+      "arxiv": "2307.14424",
+      "abstract": "Quantum computers are now on the brink of outperforming their classical counterparts. One way to demonstrate the advantage of quantum computation is through quantum random sampling performed on quantum computing devices. However, existing tools for verifying that a quantum device indeed performed the classically intractable sampling task are either impractical or not scalable to the quantum advantage regime. The verification problem thus remains an outstanding challenge. Here, we experimentally demonstrate efficiently verifiable quantum random sampling in the measurement-based model of quantum computation on a trapped-ion quantum processor. We create and sample from random cluster states, which are at the heart of measurement-based computing, up to a size of 4\u2009\u00d7\u20094 qubits. By exploiting the structure of these states, we are able to recycle qubits during the computation to sample from entangled cluster states that are larger than the qubit register. We then efficiently estimate the fidelity to verify the prepared states\u2014in single instances and on average\u2014and compare our results to cross-entropy benchmarking. Finally, we study the effect of experimental noise on the certificates. Our results and techniques provide a feasible path toward a verified demonstration of a quantum advantage. Demonstrations of quantum advantage relying on sampling hard-to-compute probability distributions are plagued by difficulties in efficiently confirming the correctness of their output, which is known as the verification problem. Here, the authors use a trapped-ion platform to demonstrate efficient verification of quantum random sampling in measurement-based quantum computing.",
+      "url": "https://www.semanticscholar.org/paper/9fd63f22dbd4de17664760e869c779cc92eb6a00"
+    },
+    {
+      "id": "9908d06a6c7a60934d47d7f5d23bd0872f0e5f69",
+      "title": "Optimizing measurements sequences for quantum state verification",
+      "year": 2023,
+      "doi": "10.1007/s11128-023-04167-y",
+      "arxiv": "2307.00881",
+      "abstract": "We consider the problem of deciding whether a given state preparation, i.e., a source of quantum states, is accurate; namely, it produces states close to a target one within a prescribed threshold. While most of the result in the literature considers the case in which the measurement operators can be arbitrarily chosen depending on the target state, obtaining favorable (Heisenberg) scaling, we focus on the case in which the measurements can be only chosen from a given set. We show that, in this case, the order of measurements is critical for quickly assessing accuracy. We propose and compare different strategies to compute optimal or suboptimal measurement sequences either relying solely on a priori information, i.e., the target state for state preparation, or actively adapting the sequence to the previously obtained measurements. Numerical simulations show that the proposed algorithms reduce significantly the number of measurements needed for verification and indicate an advantage for the adaptive protocol especially assessing faulty preparations.",
+      "url": "https://www.semanticscholar.org/paper/9908d06a6c7a60934d47d7f5d23bd0872f0e5f69"
+    },
+    {
+      "id": "6cf7b913a79472325e3a86b1386f0eea43540117",
+      "title": "Robust and efficient verification of graph states in blind measurement-based quantum computation",
+      "year": 2023,
+      "doi": "10.1038/s41534-023-00783-9",
+      "arxiv": "2305.10742",
+      "abstract": "Blind quantum computation (BQC) is a secure quantum computation method that protects the privacy of clients. Measurement-based quantum computation (MBQC) is a promising approach for realizing BQC. To obtain reliable results in blind MBQC, it is crucial to verify whether the resource graph states are accurately prepared in the adversarial scenario. However, previous verification protocols for this task are too resource-consuming or noise-susceptible to be applied in practice. Here, we propose a robust and efficient protocol for verifying arbitrary graph states with any prime local dimension in the adversarial scenario, which leads to a robust and efficient protocol for verifying the resource state in blind MBQC. Our protocol requires only local Pauli measurements and is thus easy to realize with current technologies. Nevertheless, it can achieve optimal scaling behaviors with respect to the system size and the target precision as quantified by the infidelity and significance level, which has never been achieved before. Notably, our protocol can exponentially enhance the scaling behavior with the significance level.",
+      "url": "https://www.semanticscholar.org/paper/6cf7b913a79472325e3a86b1386f0eea43540117"
+    },
+    {
+      "id": "041b569aae5d76b8d7ad26f942b08af315a90102",
+      "title": "Simplest fidelity-estimation method for graph states with depolarizing noise",
+      "year": 2023,
+      "doi": null,
+      "arxiv": "2304.10952",
+      "abstract": "Graph states are entangled states useful for several quantum information processing tasks such as measurement-based quantum computation and quantum metrology. As the size of graph states realized in experiments increases, it becomes more essential to devise efficient methods estimating the fidelity between the ideal graph state and an experimentally-realized actual state. Any efficient fidelity-estimation method, in general, must use multiple experimental settings, i.e., needs to switch between at least two measurements. Recently, it has been shown that a single measurement is sufficient if the noise can be modeled as the phase-flip error. Since the bit-flip error should also occur in several experiments, it is desired to extend this simplest method to noise models that include phase and bit-flip errors. However, it seems to be nontrivial because their result strongly depends on properties of the phase-flip error. In this paper, by analyzing effects of the bit-flip error on stabilizer operators of graph states, we achieve the extension to the depolarizing noise, which is a major noise model including phase and bit-flip errors. We also numerically evaluate our simplest method for noise models interpolating between the phase-flip and depolarizing noises.",
+      "url": "https://www.semanticscholar.org/paper/041b569aae5d76b8d7ad26f942b08af315a90102"
+    },
+    {
+      "id": "307a5e0ee81dd8e7809f962a7a12763eaeacacc0",
+      "title": "Counting stabiliser codes for arbitrary dimension",
+      "year": 2022,
+      "doi": "10.22331/q-2023-07-06-1048",
+      "arxiv": "2209.01449",
+      "abstract": "In this work, we compute the number of [[n,k]]d stabilizer codes made up of d-dimensional qudits, for arbitrary positive integers d. In a seminal work by Gross \\cite{Gross2006} the number of [[n,k]]d stabilizer codes was computed for the case when d is a prime (or the power of a prime, i.e., d=pm, but when the qudits are Galois-qudits). The proof in \\cite{Gross2006} is inapplicable to the non-prime case. For our proof, we introduce a group structure to [[n,k]]d codes, and use this in conjunction with the Chinese remainder theorem to count the number of [[n,k]]d codes. Our work overlaps with \\cite{Gross2006} when d is a prime and in this case our results match exactly, but the results differ for the more generic case. Despite that, the overall order of magnitude of the number of stabilizer codes scales agnostic of whether the dimension is prime or non-prime. This is surprising since the method employed to count the number of stabilizer states (or more generally stabilizer codes) depends on whether d is prime or not. The cardinality of stabilizer states, which was so far known only for the prime-dimensional case (and the Galois qudit prime-power dimensional case) plays an important role as a quantifier in many topics in quantum computing. Salient among these are the resource theory of magic, design theory, de Finetti theorem for stabilizer states, the study and optimisation of the classical simulability of Clifford circuits, the study of quantum contextuality of small-dimensional systems and the study of Wigner-functions. Our work makes available this quantifier for the generic case, and thus is an important step needed to place results for quantum computing with non-prime dimensional quantum systems on the same pedestal as prime-dimensional systems.",
+      "url": "https://www.semanticscholar.org/paper/307a5e0ee81dd8e7809f962a7a12763eaeacacc0"
+    },
+    {
+      "id": "ab5cde9523bb80d4d8240d4fe1d5899bf89c44db",
+      "title": "Efficient Verification of Arbitrary Entangled States with Homogeneous Local Measurements",
+      "year": 2022,
+      "doi": "10.1002/qute.202300083",
+      "arxiv": "2208.01083",
+      "abstract": "Quantum state verification (QSV) is the task of relying on local measurements only to verify that a given quantum device does produce the desired target state. Up to now, certain types of entangled states can be verified efficiently or even optimally by QSV. However, given an arbitrary entangled state, how to design its verification protocol remains an open problem. This study presents a systematic strategy to tackle this problem by considering the locality of what it initiates as the choice\u2010independent measurement protocols, whose operators can be directly achieved when they are homogeneous. Taking several typical entangled states as examples, this study shows the explicit procedures of the protocol design using standard Pauli projections, demonstrating the superiority of the method for attaining better QSV strategies. Moreover, the framework can be naturally extended to other tasks such as the construction of entanglement witnesses, and even parameter estimation.",
+      "url": "https://www.semanticscholar.org/paper/ab5cde9523bb80d4d8240d4fe1d5899bf89c44db"
+    },
+    {
+      "id": "ab3aa24e21e4e5fdecdb053567522586911d80fd",
+      "title": "Constant-time one-shot testing of large-scale graph states",
+      "year": 2022,
+      "doi": null,
+      "arxiv": "2201.11127",
+      "abstract": "Fault-tolerant measurement-based quantum computation (MBQC) with recent progress on quantum technologies leads to a promising scalable platform for realizing quantum computation, conducted by preparing a large-scale graph state over many qubits and performing single-qubit measurements on the state. With fault-tolerant MBQC, even if the graph-state preparation suffers from errors occurring at an unknown physical error rate, we can suppress the effect of the errors. Verifying graph states is vital to test whether we can conduct MBQC as desired even with such errors. However, problematically, existing state-of-the-art protocols for graph-state verification by fidelity estimation have required measurements on many copies of the entire graph state and hence have been prohibitively costly in terms of the number of qubits and the runtime. We here construct an efficient alternative framework for testing graph states for fault-tolerant MBQC based on the theory of property testing. Our test protocol accepts with high probability when the physical error rate is small enough to make fault-tolerant MBQC feasible and rejects when the rate is above the threshold of fault-tolerant MBQC. The novelty of our protocol is that we use only a single copy of the N -qubit graph state and single-qubit Pauli measurements only on a constant-sized subset of the qubits; thus, the protocol has a constant runtime independently of N . Furthermore, we can immediately use the rest of the graph state for fault-tolerant MBQC if the protocol accepts. These results achieve a significant advantage over prior art for graph-state verification in the number of qubits and the total runtime. Consequently, our work offers a new route to a fast and practical framework for benchmarking large-scale quantum state preparation.",
+      "url": "https://www.semanticscholar.org/paper/ab3aa24e21e4e5fdecdb053567522586911d80fd"
+    },
+    {
+      "id": "fd0990f79a72bbde171e1170b9f6e05e2a426a88",
+      "title": "Minimum number of experimental settings required to verify bipartite pure states and unitaries",
+      "year": 2021,
+      "doi": "10.1103/physreva.104.062439",
+      "arxiv": "2112.13638",
+      "abstract": "Efficient verification of quantum states and gates is crucial to the development of quantum technologies. Although the sample complexities of quantum state verification and quantum gate verification have been studied by many researchers, the number of experimental settings has received little attention and is poorly understood. In this work we study systematically quantum state verification and quantum gate verification with a focus on the number of experimental settings. We show that any bipartite pure state can be verified by only two measurement settings based on local projective measurements. Any bipartite unitary in dimension $d$ can be verified by $2d$ experimental settings based on local operations. In addition, we introduce the concept of entanglement-free verification and clarify its connection with minimal-setting verification. Finally, we show that any two-qubit unitary can be verified with at most five experimental settings; moreover, a generic two-qubit unitary (except for a set of measure zero) can be verified by an entanglement-free protocol based on four settings. In the course of study we clarify the properties of Schmidt coefficients of two-qubit unitaries, which are of independent interest.",
+      "url": "https://www.semanticscholar.org/paper/fd0990f79a72bbde171e1170b9f6e05e2a426a88"
+    },
+    {
+      "id": "a15921ffee8b066299c25028a81c28a7a0e2c5f8",
+      "title": "Optimal verification of the Bell state and Greenberger\u2013Horne\u2013Zeilinger states in untrusted quantum networks",
+      "year": 2021,
+      "doi": "10.1038/s41534-021-00499-8",
+      "arxiv": "2111.02800",
+      "abstract": "Bipartite and multipartite entangled states are basic ingredients for constructing quantum networks and their accurate verification is crucial to the functioning of the networks, especially for untrusted networks. Here we propose a simple approach for verifying the Bell state in an untrusted network in which one party is not honest. Only local projective measurements are required for the honest party. It turns out each verification protocol is tied to a probability distribution on the Bloch sphere and its performance has an intuitive geometric meaning. This geometric picture enables us to construct the optimal and simplest verification protocols, which are also very useful to detecting entanglement in the untrusted network. Moreover, we show that our verification protocols can achieve almost the same sample efficiencies as protocols tailored to standard quantum state verification. Furthermore, we establish an intimate connection between the verification of Greenberger\u2013Horne\u2013Zeilinger states and the verification of the Bell state. By virtue of this connection we construct the optimal protocol for verifying Greenberger\u2013Horne\u2013Zeilinger states and for detecting genuine multipartite entanglement.",
+      "url": "https://www.semanticscholar.org/paper/a15921ffee8b066299c25028a81c28a7a0e2c5f8"
+    },
+    {
+      "id": "13015d955e96da3a887dd50a43e9149e29d49515",
+      "title": "Statistical Methods for Quantum State Verification and Fidelity Estimation",
+      "year": 2021,
+      "doi": "10.1002/qute.202100126",
+      "arxiv": "2109.10805",
+      "abstract": "The efficient and reliable certification of quantum states is essential for various quantum information processing tasks as well as for the general progress on the implementation of quantum technologies. In the last few years several methods have been introduced which use advanced statistical methods to certify quantum states in a resource\u2010efficient manner. In this article, a review of the recent progress in this field is presented. How the verification and fidelity estimation of a quantum state can be discussed in the language of hypothesis testing is explained first. Then, various strategies for the verification of entangled states with local measurements or measurements assisted by local operations and classical communication are explained in detail. Finally, several extensions of the problem, such as the certification of quantum channels and the verification of entanglement are discussed.",
+      "url": "https://www.semanticscholar.org/paper/13015d955e96da3a887dd50a43e9149e29d49515"
+    },
+    {
+      "id": "58ed0928b1893f280285bbd0d9a4db2ec6958e10",
+      "title": "Proof-of-principle experimental demonstration of quantum gate verification",
+      "year": 2021,
+      "doi": "10.1103/PhysRevA.105.012614",
+      "arxiv": "2107.13466",
+      "abstract": "To employ a quantum device, the performance of the quantum gates in the device needs to be evaluated first. Since the dimensionality of a quantum gate grows exponentially with the number of qubits, evaluating the performance of a quantum gate is a challenging task. Recently, a scheme called quantum gate verification (QGV) has been proposed, which can verifies quantum gates with near-optimal efficiency. In this paper, we implement a proof-of-principle optical experiment to demonstrate this QGV scheme. We show that for a single-qubit quantum gate, only $\\sim300$ samples are needed to confirm the fidelity of the quantum gate to be at least $97\\%$ with a $99\\%$ confidence level using the QGV method, whereas, at least $\\sim3000$ samples are needed to achieve the same result using the standard quantum process tomography method. The QGV method validated by this paper has the potential to be widely used for the evaluation of quantum devices in various quantum information applications.",
+      "url": "https://www.semanticscholar.org/paper/58ed0928b1893f280285bbd0d9a4db2ec6958e10"
+    },
+    {
+      "id": "3b9232b5db7d5bb5df6bdef45465a833c5c9e3a4",
+      "title": "Fidelity measurement of a multiqubit cluster state with minimal effort",
+      "year": 2021,
+      "doi": "10.1103/PhysRevResearch.4.033162",
+      "arxiv": "2107.10386",
+      "abstract": "The size of the Hilbert space for a multiqubit state scales exponentially with the number of constituent qubits. Often this leads to a similar exponential scaling of the experimental resources required to characterize the state. Contrary to this, we propose a physically-motivated method for experimentally assessing the fidelity of an important class of entangled states known as cluster states. The proposed method always yields a lower bound of the fidelity with a number of measurement settings scaling only linearly with the system size, and is tailored to correctly account for the errors most likely to occur in experiments. For one-dimensional cluster states, the constructed fidelity measure is tight to lowest order in the error probability for experimentally realistic noise sources and thus closely matches the true fidelity. Furthermore, it is tight for the majority of higher-order errors, except for a small subset of certain non-local multiqubit errors irrelevant in typical experimental situations. The scheme also performs very well for higher-dimensional cluster states, including correctly the majority of experimentally relevant errors.",
+      "url": "https://www.semanticscholar.org/paper/3b9232b5db7d5bb5df6bdef45465a833c5c9e3a4"
+    },
+    {
+      "id": "f53c92fb18c36580be33b3e8954aca1bd56d38d0",
+      "title": "Graph states and the variety of principal minors",
+      "year": 2021,
+      "doi": "10.1007/s10231-023-01361-8",
+      "arxiv": "2107.02479",
+      "abstract": "In Quantum Information theory, graph states are quantum states defined by graphs. In this work we exhibit a correspondence between orbits of graph states and orbits in the variety of binary symmetric principal minors, under the action of SL $$(2,{\\mathbb {F}}_2)^{\\times n}\\rtimes {\\mathfrak {S}}_n$$ ( 2 , F 2 ) \u00d7 n \u22ca S n . First we study the orbits of maximal abelian subgroups of the n -fold Pauli group under the action of $${\\mathcal {C}}_n^{\\textrm{loc}}\\rtimes {\\mathfrak {S}}_n$$ C n loc \u22ca S n , where $${\\mathcal {C}}_n^{\\textrm{loc}}$$ C n loc is the n -fold local Clifford group, and we show that this action corresponds to the natural action of SL $$(2,{\\mathbb {F}}_2)^{\\times n}\\rtimes {\\mathfrak {S}}_n$$ ( 2 , F 2 ) \u00d7 n \u22ca S n on the variety $${\\mathcal {Z}}_n\\subset {\\mathbb {P}}({\\mathbb {F}}_2^{2^n})$$ Z n \u2282 P ( F 2 2 n ) of principal minors of binary symmetric $$n\\times n$$ n \u00d7 n matrices: the crucial step is in translating the action of SL $$(2,{\\mathbb {F}}_2)^{\\times n}$$ ( 2 , F 2 ) \u00d7 n into an action of the local symplectic group Sp $$_{2n}^{\\textrm{loc}}({\\mathbb {F}}_2)$$ 2 n loc ( F 2 ) . We conclude by showing how the former action restricts onto stabilizer groups, stabilizer states and graph states.",
+      "url": "https://www.semanticscholar.org/paper/f53c92fb18c36580be33b3e8954aca1bd56d38d0"
+    },
+    {
+      "id": "d6bf17419f796e41dc86d2fc478f544fc3a1e8ca",
+      "title": "Efficient verification of entangled continuous-variable quantum states with local measurements",
+      "year": 2021,
+      "doi": "10.1103/PhysRevResearch.3.L042004",
+      "arxiv": "2103.16275",
+      "abstract": "Continuous-variable quantum states are of particular importance in various quantum information processing tasks including quantum communication and quantum sensing. However, a bottleneck has emerged with the fast increasing in size of the quantum systems which severely hinders their efficient characterization. In this work, we establish a systematic framework for verifying entangled continuous-variable quantum states by employing local measurements only. Our protocol is able to achieve the unconditionally high verification efficiency which is quadratically better than quantum tomography as well as other nontomographic methods. Specifically, we demonstrate the power of our protocol by showing the efficient verification of entangled two-mode and multimode coherent states with local measurements.",
+      "url": "https://www.semanticscholar.org/paper/d6bf17419f796e41dc86d2fc478f544fc3a1e8ca"
+    },
+    {
+      "id": "bf5f9e22f310d8d1b7d3b98f57a31df391524833",
+      "title": "Verification of phased Dicke states",
+      "year": 2021,
+      "doi": "10.1103/PHYSREVA.103.022601",
+      "arxiv": null,
+      "abstract": "Dicke states are typical examples of quantum states with genuine multipartite entanglement. They are valuable resources in many quantum information processing tasks, including multiparty quantum communication and quantum metrology. Phased Dicke states are a generalization of Dicke states and include antisymmetric basis states as a special example. These states are useful in atomic and molecular physics besides quantum information processing. Here we propose practical and efficient protocols based on adaptive local projective measurements for verifying all phased Dicke states, including $W$ states and qudit Dicke states. To verify any $n$-partite phased Dicke state within infidelity $\\ensuremath{\\epsilon}$ and significance level $\\ensuremath{\\delta}$, the number of tests required is only $O(n{\\ensuremath{\\epsilon}}^{\\ensuremath{-}1}ln{\\ensuremath{\\delta}}^{\\ensuremath{-}1})$, which is linear in $n$ and is exponentially more efficient than traditional tomographic approaches. In the case of $W$ states, the number of tests can be further reduced to $O(\\sqrt{n}\\phantom{\\rule{0.16em}{0ex}}{\\ensuremath{\\epsilon}}^{\\ensuremath{-}1}ln{\\ensuremath{\\delta}}^{\\ensuremath{-}1})$. Moreover, we construct an optimal protocol for any antisymmetric basis state; the number of tests required decreases (rather than increases) monotonically with $n$. This is the only optimal protocol known for multipartite nonstabilizer states.",
+      "url": "https://www.semanticscholar.org/paper/bf5f9e22f310d8d1b7d3b98f57a31df391524833"
+    },
+    {
+      "id": "c20e7ba069d239615d18e7fc84d18d10f4beafff",
+      "title": "\u57fa\u4e8e\u8868\u9762\u7801\u7684\u91cd\u590d\u91cf\u5b50\u9519\u8bef\u68c0\u6d4b\u7406\u8bba\u7814\u7a76",
+      "year": 2025,
+      "doi": "10.3788/aos251364",
+      "arxiv": null,
+      "abstract": null,
+      "url": "https://www.semanticscholar.org/paper/c20e7ba069d239615d18e7fc84d18d10f4beafff"
+    },
+    {
+      "id": "ba450fccb8411110913c20b659e7507c40fc89c6",
+      "title": "Magic determines the hardness of direct \ufb01delity estimation",
+      "year": 2023,
+      "doi": null,
+      "arxiv": null,
+      "abstract": null,
+      "url": "https://www.semanticscholar.org/paper/ba450fccb8411110913c20b659e7507c40fc89c6"
+    },
+    {
+      "id": "9d59b3d3fd3230bae45a41b4452f9a5401505f59",
+      "title": "Counting stabilizer codes for arbitrary dimension",
+      "year": 2023,
+      "doi": null,
+      "arxiv": null,
+      "abstract": null,
+      "url": "https://www.semanticscholar.org/paper/9d59b3d3fd3230bae45a41b4452f9a5401505f59"
+    },
+    {
+      "id": "8632197771ee50b6d876a5067def230b4a12c179",
+      "title": "Resource-efficient shadow tomography using equatorial measurements",
+      "year": null,
+      "doi": null,
+      "arxiv": null,
+      "abstract": null,
+      "url": "https://www.semanticscholar.org/paper/8632197771ee50b6d876a5067def230b4a12c179"
+    }
+  ],
+  "initial_error": "HTTP Error 429: "
+}

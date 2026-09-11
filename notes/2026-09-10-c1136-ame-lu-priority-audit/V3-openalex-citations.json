@@ -1,0 +1,140 @@
+{
+  "seed": "V3",
+  "service": "openalex",
+  "status": "ok",
+  "count_reported": 15,
+  "count_retrieved": 16,
+  "queries": [
+    "https://api.openalex.org/works?filter=cites:W2888905097&per-page=200&cursor=*"
+  ],
+  "records": [
+    {
+      "id": "https://openalex.org/W4384935381",
+      "title": "Computational advantage of quantum random sampling",
+      "year": 2023,
+      "doi": "https://doi.org/10.1103/revmodphys.95.035001",
+      "abstract": "Quantum computers have improved and recent experiments have claimed quantum advantage -- completion of a computational task that is evidently hard for any conventional computer. The problem solved is that of obtaining samples, by quantum measurement, from a certain probability distribution. This review shows in what precise way quantum random sampling can be seen as a computation. It explains what that computation solves, in what way it outperforms classical computations, and what methods of verification are available. Quantum random sampling becomes a first test of the presumed exponential computational advantage of quantum computers over classical ones.",
+      "url": "https://doi.org/10.1103/revmodphys.95.035001"
+    },
+    {
+      "id": "https://openalex.org/W3092693562",
+      "title": "Theory of Quantum System Certification",
+      "year": 2021,
+      "doi": "https://doi.org/10.1103/prxquantum.2.010201",
+      "abstract": "The precise control of complex quantum systems promises numerous technological applications including digital quantum computing.The complexity of such devices renders the certification of their correct functioning a challenge.To address this challenge, numerous methods were developed in the last decade.In this tutorial, we explain prominent protocols for certifying the physical layer of quantum devices described by quantum states and processes.Such protocols are particularly important in the development of near-term devices.Specifically, we discuss methods of direct quantum-state certification, direct-fidelity estimation, shadow-fidelity estimation, direct quantum-process certification, randomized benchmarking, and cross-entropy benchmarking.Moreover, we provide an introduction to powerful mathematical methods, which are widely used in quantum-information theory, in order to derive theoretical guarantees for the protocols.",
+      "url": "https://doi.org/10.1103/prxquantum.2.010201"
+    },
+    {
+      "id": "https://openalex.org/W3129077658",
+      "title": "Theory of Quantum System Certification",
+      "year": 2021,
+      "doi": "https://doi.org/10.17169/refubium-32392",
+      "abstract": "The precise control of complex quantum systems promises numerous technological applications including digital quantum computing. The complexity of such devices renders the certification of their correct functioning a challenge. To address this challenge, numerous methods were developed in the last decade. In this tutorial, we explain prominent protocols for certifying the physical layer of quantum devices described by quantum states and processes. Such protocols are particularly important in the development of near-term devices. Specifically, we discuss methods of direct quantum-state certification, direct-fidelity estimation, shadow-fidelity estimation, direct quantum-process certification, randomized benchmarking, and cross-entropy benchmarking. Moreover, we provide an introduction to powerful mathematical methods, which are widely used in quantum-information theory, in order to derive theoretical guarantees for the protocols.",
+      "url": "https://refubium.fu-berlin.de/handle/fub188/32667"
+    },
+    {
+      "id": "https://openalex.org/W4221161984",
+      "title": "Shadow Distillation: Quantum Error Mitigation with Classical Shadows for Near-Term Quantum Processors",
+      "year": 2023,
+      "doi": "https://doi.org/10.1103/prxquantum.4.010303",
+      "abstract": "A method for mitigating errors in near-term quantum computers utilizing randomized measurements explores the trade-off between the number of measurement settings and the number of repetitions of each measurement.",
+      "url": "https://doi.org/10.1103/prxquantum.4.010303"
+    },
+    {
+      "id": "https://openalex.org/W3042832883",
+      "title": "Optimal verification of stabilizer states",
+      "year": 2020,
+      "doi": "https://doi.org/10.1103/physrevresearch.2.043323",
+      "abstract": "Statistical verification of a quantum state aims to certify whether a given unknown state is close to the target state with confidence. So far, sample-optimal verification protocols based on local measurements have been found only for disparate groups of states: bipartite pure states, GHZ states, and antisymmetric basis states. In this work, we investigate systematically optimal verification of entangled stabilizer states using Pauli measurements. First, we provide a lower bound on the sample complexity of any verification protocol based on separable measurements, which is independent of the number of qubits and the specific stabilizer state. Then we propose a simple algorithm for constructing optimal protocols based on Pauli measurements. Our calculations suggest that optimal protocols based on Pauli measurements can saturate the above bound for all entangled stabilizer states, and this claim is verified explicitly for states up to seven qubits. Similar results are derived when each party can choose only two measurement settings, say X and Z. Furthermore, by virtue of the chromatic number, we provide an upper bound for the minimum number of settings required to verify any graph state, which is expected to be tight. For experimentalists, optimal protocols and protocols with the minimum number of settings are explicitly provided for all equivalent classes of stabilizer states up to seven qubits. For theorists, general results on stabilizer states (including graph states in particular) and related structures derived here may be of independent interest beyond quantum state verification.",
+      "url": "https://doi.org/10.1103/physrevresearch.2.043323"
+    },
+    {
+      "id": "https://openalex.org/W2974072088",
+      "title": "Optimal Verification of Greenberger-Horne-Zeilinger States",
+      "year": 2020,
+      "doi": "https://doi.org/10.1103/physrevapplied.13.054002",
+      "abstract": "We construct optimal protocols for verifying qubit and qudit Greenberger-Horne-Zeilinger (GHZ) states using local projective measurements. When the local dimension is a prime, an optimal protocol is constructed from Pauli measurements only. Our protocols provide a highly efficient way to estimate the fidelity and to certify genuine multipartite entanglement. In particular, they enable the certification of genuine multipartite entanglement using only one test when the local dimension is sufficiently large. By virtue of adaptive local projective measurements, we then construct protocols for verifying GHZ-like states that are optimal over all protocols based on one-way communication. The efficiency can be improved further if additional communications are allowed. Finally, we construct optimal protocols for verifying GHZ states and nearly optimal protocols for GHZ-like states in the adversarial scenario.",
+      "url": "https://doi.org/10.1103/physrevapplied.13.054002"
+    },
+    {
+      "id": "https://openalex.org/W4410085656",
+      "title": "Benchmarking Quantum Gates and Circuits",
+      "year": 2025,
+      "doi": "https://doi.org/10.1021/acs.chemrev.4c00870",
+      "abstract": "(DB), a novel protocol that minimizes the number of experimental runs, exhibits resilience to SPAM errors, and effectively characterizes both coherent and incoherent errors. The implementation of DB is experimentally validated using a superconducting transmon qubit, and the results are substantiated with a simple analytical model and master equation simulations. With the addition of DB to the toolkit of available benchmarking methods, this article serves as a practical guide for choosing and applying benchmarking protocols to advance quantum computing technologies.",
+      "url": "https://doi.org/10.1021/acs.chemrev.4c00870"
+    },
+    {
+      "id": "https://openalex.org/W4417348384",
+      "title": "Symmetric quantum states: a review of recent progress",
+      "year": 2026,
+      "doi": "https://doi.org/10.1088/1361-6633/ae440a",
+      "abstract": "Symmetric quantum states are fascinating objects. They correspond to multipartite systems that remain invariant under particle permutations. This symmetry is reflected in their compact mathematical characterisation but also in their unique physical properties: they exhibit genuine multipartite entanglement and notable robustness against noise and perturbations. These features make such states particularly well-suited for a wide range of quantum information tasks. Here, we provide a pedagogic analysis of the mathematical structure and relevant physical properties of this class of states. Beyond the theoretical framework, robust tools for certifying and verifying the properties of symmetric states in experimental settings are essential. In this regard, we explore how standard techniques-such as quantum state tomography, Bell tests, and entanglement witnesses-can be specifically adapted for symmetric systems. Next, we provide an up-to-date overview of the most relevant applications in which these states outperform other classes of states in specific tasks. Specifically, we address their central role in quantum metrology, highlight their use in quantum error correction codes, and examine their contribution in computation and communication tasks. Finally, we present the current state-of-the-art in their experimental generation, ranging from systems of cold atoms to implementations via quantum algorithms. We also review the most significant results obtained in the different experimental realizations. Despite the notable progress made in recent years with regard to the characterisation and application of symmetric quantum states, several intriguing questions remain unsolved. We conclude this review by discussing some of these open problems and outlining promising directions for future research.",
+      "url": "https://doi.org/10.1088/1361-6633/ae440a"
+    },
+    {
+      "id": "https://openalex.org/W7128496605",
+      "title": "Symmetric quantum states: a review of recent progress",
+      "year": 2026,
+      "doi": "https://doi.org/10.1088/1361-6633/ae440a",
+      "abstract": "Symmetric quantum states are fascinating objects. They correspond to multipartite systems that remain invariant under particle permutations. This symmetry is reflected in their compact mathematical characterisation but also in their unique physical properties: they exhibit genuine multipartite entanglement and notable robustness against noise and perturbations. These features make such states particularly well-suited for a wide range of quantum information tasks. Here, we provide a pedagogic analysis of the mathematical structure and relevant physical properties of this class of states. Beyond the theoretical framework, robust tools for certifying and verifying the properties of symmetric states in experimental settings are essential. In this regard, we explore how standard techniques-such as quantum state tomography, Bell tests, and entanglement witnesses-can be specifically adapted for symmetric systems. Next, we provide an up-to-date overview of the most relevant applications in which these states outperform other classes of states in specific tasks. Specifically, we address their central role in quantum metrology, highlight their use in quantum error correction codes, and examine their contribution in computation and communication tasks. Finally, we present the current state-of-the-art in their experimental generation, ranging from systems of cold atoms to implementations via quantum algorithms. We also review the most significant results obtained in the different experimental realizations. Despite the notable progress made in recent years with regard to the characterisation and application of symmetric quantum states, several intriguing questions remain unsolved. We conclude this review by discussing some of these open problems and outlining promising directions for future research.",
+      "url": "https://doi.org/10.1088/1361-6633/ae440a"
+    },
+    {
+      "id": "https://openalex.org/W4417183432",
+      "title": "Sachdev-Ye-Kitaev-model\u2013based \u03b2 -regime-dependent two-qubit dynamical wormhole-inspired teleportation protocol simulation",
+      "year": 2025,
+      "doi": "https://doi.org/10.1103/mcsm-sbcx",
+      "abstract": "We implement the Wormhole-Inspired Teleportation Protocol (WITP) in a pair of coupled Sachdev-Ye-Kitaev (SYK) models prepared in a thermofield-double state, forming a quantum analog of a traversable wormhole. By varying parameters (temperature $\\ensuremath{\\beta}$, coupling strength $g$, insertion site, and traversal time $t$) we compare the teleportation fidelity against an analogous protocol using a transverse-field Ising model. We find that the chaotic SYK system consistently yields higher teleportation fidelity than the transverse field Ising model, reflecting the SYK Hamiltonian's pronounced many-body chaos. These enhanced fidelities arise from the SYK's effectively random-matrix dynamics, which improve the coherent information transfer through the wormhole channel. Unlike prior single-qubit benchmarks based on $|0\\ensuremath{\\rangle}$ inputs, the present work defines and evaluates a genuine quantum-state fidelity for a maximally entangled two-qubit Bell input, using a Pauli-stabilizer formalism that captures entanglement-phase coherence. Our central result is achieved by teleporting a maximally entangled two-qubit Bell state through the wormhole. We introduce a Pauli-stabilizer fidelity measure for the two-qubit message and demonstrate that the Bell-state protocol produces a substantial fidelity boost compared to single-qubit teleportation. Furthermore, we examine the time-resolved fidelity for both single-qubit and two-qubit messages, revealing distinct fluctuation patterns that deepen our understanding of dynamical many-body teleportation processes. Finally, we present an argument that our Bell-state WITP simulations provide a concrete numerical testbed for aspects of the ER = EPR conjecture, by mapping entanglement structure and thermal/coupling dependence to traversability diagnostics in an emergent wormhole geometry.",
+      "url": "https://doi.org/10.1103/mcsm-sbcx"
+    },
+    {
+      "id": "https://openalex.org/W3152780886",
+      "title": "Fast Quantum State Reconstruction via Accelerated Non-Convex Programming",
+      "year": 2023,
+      "doi": "https://doi.org/10.3390/photonics10020116",
+      "abstract": "We propose a new quantum state reconstruction method that combines ideas from compressed sensing, non-convex optimization, and acceleration methods. The algorithm, called Momentum-Inspired Factored Gradient Descent (MiFGD), extends the applicability of quantum tomography for larger systems. Despite being a non-convex method, MiFGD converges provably close to the true density matrix at an accelerated linear rate asymptotically in the absence of experimental and statistical noise, under common assumptions. With this manuscript, we present the method, prove its convergence property and provide the Frobenius norm bound guarantees with respect to the true density matrix. From a practical point of view, we benchmark the algorithm performance with respect to other existing methods, in both synthetic and real (noisy) experiments, performed on the IBM\u2019s quantum processing unit. We find that the proposed algorithm performs orders of magnitude faster than the state-of-the-art approaches, with similar or better accuracy. In both synthetic and real experiments, we observed accurate and robust reconstruction, despite the presence of experimental and statistical noise in the tomographic data. Finally, we provide a ready-to-use code for state tomography of multi-qubit systems.",
+      "url": "https://doi.org/10.3390/photonics10020116"
+    },
+    {
+      "id": "https://openalex.org/W4200421700",
+      "title": "Minimum number of experimental settings required to verify bipartite pure states and unitaries",
+      "year": 2021,
+      "doi": "https://doi.org/10.1103/physreva.104.062439",
+      "abstract": "Efficient verification of quantum states and gates is crucial to the development of quantum technologies. Although the sample complexities of quantum state verification and quantum gate verification have been studied by many researchers, the number of experimental settings has received little attention and is poorly understood. In this work we study systematically quantum state verification and quantum gate verification with a focus on the number of experimental settings. We show that any bipartite pure state can be verified by only two measurement settings based on local projective measurements. Any bipartite unitary in dimension $d$ can be verified by $2d$ experimental settings based on local operations. In addition, we introduce the concept of entanglement-free verification and clarify its connection with minimal-setting verification. Finally, we show that any two-qubit unitary can be verified with at most five experimental settings; moreover, a generic two-qubit unitary (except for a set of measure zero) can be verified by an entanglement-free protocol based on four settings. In the course of study we clarify the properties of Schmidt coefficients of two-qubit unitaries, which are of independent interest.",
+      "url": "https://doi.org/10.1103/physreva.104.062439"
+    },
+    {
+      "id": "https://openalex.org/W4390874832",
+      "title": "Using non-convex optimization in quantum process tomography: Factored gradient descent is tough to beat",
+      "year": 2023,
+      "doi": "https://doi.org/10.1109/icrc60800.2023.10386455",
+      "abstract": "We propose a non-convex optimization algorithm, based on the Burer-Monteiro (BM) factorization, for the quantum process tomography problem, in order to estimate a low-rank process matrix \u03c7 for near-unitary quantum gates. In this work, we compare our approach against state of the art convex optimization approaches based on gradient descent. We use a reduced set of initial states and measurement operators that require 2 \u00b7 8ncircuit settings, as well as $\\mathcal{O}(4^n)$ measurements for an underdetermined setting. We find our algorithm converges faster and achieves higher fidelities than state of the art, both in terms of measurement settings, as well as in terms of noise tolerance, in the cases of depolarizing and Gaussian noise models.",
+      "url": "http://dx.doi.org/10.1109/icrc60800.2023.10386455"
+    },
+    {
+      "id": "https://openalex.org/W3111154694",
+      "title": "Sampling and the complexity of nature",
+      "year": 2020,
+      "doi": "https://doi.org/10.17169/refubium-28790",
+      "abstract": "Randomness is an intrinsic feature of quantum theory. The outcome of any measurement will be random, sampled from a probability distribution that is defined by the measured quantum state. The task of sampling from a prescribed probability distribution therefore seems to be a natural technological application of quantum devices. And indeed, certain random sampling tasks have been proposed to experimentally demonstrate the speedup of quantum over classical computation, so-called \u201cquantum computational supremacy\u201d. In the research presented in this thesis, I investigate the complexity-theoretic and physical foundations of quantum sampling algorithms. Using the theory of computational complexity, I assess the computational power of natural quantum simulators and close loopholes in the complexity-theoretic argument for the classical intractability of quantum samplers (Part I). In particular, I prove anticoncentration for quantum circuit families that give rise to a 2-design and review methods for proving average-case hardness. I present quantum random sampling schemes that are tailored to large-scale quantum simulation hardware but at the same time rise up to the highest standard in terms of their complexity-theoretic underpinning. Using methods from property testing and quantum system identification, I shed light on the question, how and under which conditions quantum sampling devices can be tested or verified in regimes that are not simulable on classical computers (Part II). I present a no-go result that prevents efficient verification of quantum random sampling schemes as well as approaches using which this no-go result can be circumvented. In particular, I develop fully efficient verification protocols in what I call the measurement-device-dependent scenario in which single-qubit measurements are assumed to function with high accuracy. Finally, I try to understand the physical mechanisms governing the computational boundary between classical and quantum computing devices by challenging their computational power using tools from computational physics and the theory of computational complexity (Part III). I develop efficiently computable measures of the infamous Monte Carlo sign problem and assess those measures both in terms of their practicability as a tool for alleviating or easing the sign problem and the computational complexity of this task. An overarching theme of the thesis is the quantum sign problem which arises due to destructive interference between paths \u2013 an intrinsically quantum effect. The (non-)existence of a sign problem takes on the role as a criterion which delineates the boundary between classical and quantum computing devices. I begin the thesis by identifying the quantum sign problem as a root of the computational intractability of quantum output probabilities. It turns out that the intricate structure of the probability distributions the sign problem gives rise to, prohibits their verification from few samples. In an ironic twist, I show that assessing the intrinsic sign problem of a quantum system is again an intractable problem.",
+      "url": "http://arxiv.org/abs/2012.07905"
+    },
+    {
+      "id": "https://openalex.org/W4389363609",
+      "title": "Using non-convex optimization in quantum process tomography: Factored gradient descent is tough to beat",
+      "year": 2023,
+      "doi": "https://doi.org/10.48550/arxiv.2312.01311",
+      "abstract": "We propose a non-convex optimization algorithm, based on the Burer-Monteiro (BM) factorization, for the quantum process tomography problem, in order to estimate a low-rank process matrix $\u03c7$ for near-unitary quantum gates. In this work, we compare our approach against state of the art convex optimization approaches based on gradient descent. We use a reduced set of initial states and measurement operators that require $2 \\cdot 8^n$ circuit settings, as well as $\\mathcal{O}(4^n)$ measurements for an underdetermined setting. We find our algorithm converges faster and achieves higher fidelities than state of the art, both in terms of measurement settings, as well as in terms of noise tolerance, in the cases of depolarizing and Gaussian noise models.",
+      "url": "http://arxiv.org/abs/2312.01311"
+    },
+    {
+      "id": "https://openalex.org/W4411516579",
+      "title": "Universal Graph Theory Operations for Graph State Preparation",
+      "year": 2025,
+      "doi": "https://doi.org/10.1007/978-3-031-97063-4_5",
+      "abstract": "",
+      "url": "https://doi.org/10.1007/978-3-031-97063-4_5"
+    }
+  ]
+}
