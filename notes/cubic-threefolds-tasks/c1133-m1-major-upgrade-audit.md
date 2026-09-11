@@ -28,12 +28,18 @@ secondary credit, now via the fully read published source. Neither chapter
 is an A–D proof premise. Missing service coverage and unread base-loci body
 remain disclosed; no exhaustive priority claim is made.
 
-The next action is author assessment of the concrete core hierarchy A, B,
-then consequences C and D, with the bounded literature statement in that
-report. The exact pencil inputs remain unverified and optional applications
-stay conditional. No purchase or repeated source-access request is needed
-for this core review. This does not mark comprehensive literature coverage
-complete or promote manuscript claims. Collaborator discussion stays parked.
+**Current user-requested scrutiny:**
+`notes/2026-09-10-c1133-hypothesis-economy.md` distinguishes public scope
+from the substantive faithful-map/lattice proof obligations. A is numerical;
+B carries Hodge transport; C/D reuse it. D's fourth-power route is optional.
+A narrower P¹-product proof could replace general projective-bundle machinery,
+but full mixed-bulk control (including elliptic curves) is not yet supplied.
+Do not remove that input on the strength of a small-locus computation.
+Highest-value next check: actual geometric occurrence maps versus the
+claimed reduced domains, regular inverse and common comparison field.
+The A/B/C/D hierarchy remains available for author assessment with bounded
+literature coverage. Pencil claims stay conditional; no new manuscript or
+independent-referee acceptance is asserted. Collaborator discussion is parked.
 
 Latest formal checkpoint: **371 public terminals, 133 machinery, 245 sources**;
 aggregate kernel build and actual axiom comparison passed in the prior

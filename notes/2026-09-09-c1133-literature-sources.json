@@ -458,7 +458,7 @@
       },
       "key": "arXiv:2509.07407",
       "read_depth": "partial",
-      "read_scope": "Cache bibliographic metadata and Semantic Scholar forward-citation abstract; no primary-text judgment yet. v1; introduction 1–170, Proposition 4.2/Lemma 4.3/Theorem 4.4, lines 805–875; Section 4.3 and opening of Section 5, lines 1109–1235. Formal product result compared at stated depth; its regular-lattice and coefficient contract is not established by this read. Additional zbMATH follow-up: Primary landing-page abstract and bibliographic metadata read; no paper body read.",
+      "read_scope": "Cache bibliographic metadata and Semantic Scholar forward-citation abstract; no primary-text judgment yet. v1; introduction 1–170, Proposition 4.2/Lemma 4.3/Theorem 4.4, lines 805–875; Section 4.3 and opening of Section 5, lines 1109–1235. Formal product result compared at stated depth; its regular-lattice and coefficient contract is not established by this read. Additional zbMATH follow-up: Primary landing-page abstract and bibliographic metadata read; no paper body read. Hypothesis-economy review reread v1 extracted lines 1–170, introduction including Theorems 1.1–1.2. Not adopted as a replacement for the required regular-lattice comparison.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "The quantum D-module of product varieties",
       "version_in_cached_header": "arXiv:2509.07407v1 [math.AG] 9 Sep 2025"

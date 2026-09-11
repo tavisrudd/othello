@@ -53,10 +53,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   seed sets: 59 memberships/39 works. The user-authorized triangulation
   still covers base-loci attribution through an explicit secondary chain;
   neither chapter is an A–D proof premise. No comprehensive priority verdict.
-  Next: author assessment of A, B, then C/D with that coverage boundary.
-  Exact pencil claims remain conditional and outside the core. No further
-  purchase/access request is required for core review. Collaborator
-  discussion stays parked; manuscript promotion remains a later decision.
+  Current scrutiny: `../2026-09-10-c1133-hypothesis-economy.md`.
+  Next: check actual occurrence maps, reduced domains and regular inverses
+  for hidden specialization assumptions. A numerical/B Hodge separation
+  and the short D route reduce inputs. Replacing general projective-bundle
+  machinery by a P¹-product lemma remains a candidate, pending mixed-bulk
+  control. Core hierarchy remains reviewable; pencil claims conditional.
+  No independent-referee acceptance or manuscript promotion is asserted.
+  Collaborator discussion stays parked.
   Prior guarded formal checkpoint: **371 public terminals, 133 machinery,
   245 sources**; aggregate kernel and actual axiom comparison passed.
   `../2026-09-09-c1133-lean-completion-progress.md` records exact declarations
