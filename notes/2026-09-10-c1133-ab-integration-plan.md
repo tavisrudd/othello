@@ -6,6 +6,10 @@ recommends P with revisions; this version incorporates responses, not a
 second independent acceptance of the revised text. Planning only; no manuscript
 reorganization, new theorem promotion, Lean operation or export is authorized
 by this document. The user requested a plan and referee feedback on alternatives.
+**Prototype gate passed:** `2026-09-10-c1133-b-body-prototype.pdf` renders
+B's additional body in five pages, including brief references, using the
+paper's normal typography. `2026-09-10-c1133-b-prototype-assessment.md`
+supports proceeding with P; integrated length and cold-reader tests remain.
 
 ## 1. Objective and fixed mathematical boundaries
 
@@ -269,6 +273,7 @@ This resolves the statement-disposition gap at the planning level; final
 packaging can change only with an explicit updated disposition.
 
 **Mystery ledger:** no mathematical mystery is created by the exposition
-choice. The remaining editorial uncertainty is measured B length and
-duplication; the early prototype and assembled-PDF gate own it. The plan
-referee has not reread this revised plan or a newly assembled manuscript.
+choice. The early prototype now measures five pages and keeps B's essential
+proof in the body, supporting P. Final integrated duplication, total length
+and adjacent-reader comprehension remain owned by the assembled-PDF gate.
+The plan referee has not read the new prototype or assembled manuscript.

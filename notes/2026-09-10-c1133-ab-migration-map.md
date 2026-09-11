@@ -77,6 +77,8 @@ mathematical prose in the paper, not citations to audit conclusions.
 
 **Before manuscript migration:** draft the essential B proof in a working
 note and measure its additional exposition, as required by the revised plan.
+This gate now has a five-page prototype, including brief references:
+`2026-09-10-c1133-b-body-prototype.pdf`; see its assessment for exact scope.
 **Batch 1:** hierarchy/front matter and semantic-label inventory, then
 numerical rearrangement without claiming new coverage.
 **Batch 2:** actual reduced P¹/blowup proof, technical appendices and A.
@@ -103,6 +105,7 @@ The rank-three limitation concerns modified lattices, not A's parity
 selector; the plan must not make this old caution look like an unresolved
 premise of A. These points are settled at the planning level. The referee's
 comparison is complete in `2026-09-10-c1133-ab-plan-referee.md`; the revised
-plan records its objections and responses. The remaining editorial gate is
-the measured length of B's prototype and assembled proof. No new mathematical
+plan records its objections and responses. B's five-page prototype supports
+the single-paper plan; integrated length and cold-reader assessment remain.
+No new mathematical
 mystery or external literature claim is introduced.

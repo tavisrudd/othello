@@ -48,9 +48,14 @@ parity proofs, B's conceptual steps in the body and full length accounting;
 the plan incorporates those responses. C stays a short application; D's
 proof may move to an appendix before splitting B into a companion.
 `notes/2026-09-10-c1133-ab-migration-map.md` assigns current material and
-preserves general IK dependencies on retained legacy results. Next: draft
-B's central proof before file moves and measure additional exposition and
-duplication. A companion is a fallback if that draft warrants it.
+preserves general IK dependencies on retained legacy results. B's prototype
+is now drafted and rendered in five pages including brief references:
+`notes/2026-09-10-c1133-b-body-prototype.pdf` and
+`notes/2026-09-10-c1133-b-prototype-assessment.md`. It includes all essential
+body steps and supports proceeding with the single-paper plan. Next:
+integrate the numerical hierarchy and reduced proofs, then B, keeping owning
+annotations and dependencies accurate. Whole-paper length and assembled
+cold-reader gates remain; no new independent acceptance of this draft.
 This is a reviewed editorial direction, not an enacted reorganization.
 Consolidation and the separate all-member geometric read boundaries remain;
 no manuscript or formal-coverage promotion is asserted. Pencil claims stay

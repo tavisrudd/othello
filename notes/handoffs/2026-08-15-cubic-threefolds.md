@@ -67,8 +67,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-09-10-c1133-ab-plan-referee.md`; objections addressed in plan.
   C remains brief; D can move to an appendix before considering a B companion.
   Current-material inventory: `../2026-09-10-c1133-ab-migration-map.md`.
-  Next: prototype B's body proof before file moves; measure added exposition,
-  duplication and whole-paper length. Companion is fallback. No reorganization;
+  B's body prototype now renders in five pages including brief references:
+  `../2026-09-10-c1133-b-body-prototype.pdf` and its assessment
+  `../2026-09-10-c1133-b-prototype-assessment.md`. All essential steps remain
+  in the body; this supports the single-paper plan. Next: integrate the
+  numerical hierarchy/reduced proofs and B with accurate owning records.
+  Integrated length and assembled cold-reader gates remain. No reorganization;
   no manuscript/formal promotion. Pencil claims remain conditional.
   Collaborator discussion stays parked.
   Prior guarded formal checkpoint: **371 public terminals, 133 machinery,
