@@ -1,6 +1,6 @@
 # C1016 — order-2092 Hadamard reduction and search
 
-**Lane**: `ergodis` · **Task**: C1016 · card current 2026-09-05.
+**Lane**: `ergodis` · **Task**: C1016 · card current 2026-09-11.
 
 This is the live card for C1016: what the problem is, what is closed, what the
 frontier is, and which dated report owns each sub-problem. It carries no

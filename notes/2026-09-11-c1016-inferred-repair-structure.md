@@ -39,7 +39,7 @@ row-sum-only controls. It is not a complete circuit basis or connectivity proof.
 
 Private authority:
 `~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`.
-Implementation snapshot e8aca40; reproducibility bundle committed at 1dff719.
+Implementation snapshot e8aca40; reproducibility bundle committed at 7931e22 (initial bundle 1dff719).
 Reproducibility bundle: `evidence/structure-repair/REPORT.md`, with generated
 witnesses, counter samples, exact commands, retained hashes, paired log t-scores,
 profiles and CPU-budget overruns. Full-gate result is recorded there.
@@ -50,7 +50,7 @@ Mixed-policy medians are 90,872 / 44,416 / 25,776. These consecutive quality
 batches are not timing A/Bs. Search preserves row sums only. None passes the
 separate q18/q29 margin-fibre gate at 14,800.
 
-978 records independently replayed; four successful order-124 runs additionally
+1,026 records independently replayed; four successful order-124 runs additionally
 passed complete matrix row-orthogonality checks. Successful runs include repeated
 solutions, not four claimed inequivalent matrices. Orders 668/716/2092 remain
 unsolved by this probe. These known-feasible smaller models expose capability
@@ -66,8 +66,11 @@ even with all boundary ties included, can expose only 7–9% of variables there.
 That restricts proposal reach; it does not prove all eligible combinations fail.
 The next general mechanism should track failed regions/coverage and broaden
 exploration when progress stalls, with exact source-scope checks on any memo.
+At two seconds, pressure has the best measured median at 668; exact gain wins
+at 716 and narrowly at 2092. No one policy wins all orders. Use this to motivate
+feedback-driven allocation, never an order-to-policy lookup.
 
-The full release gate passed: 783 passed, zero failed, one ignored. All 978
+The full release gate passed: 783 passed, zero failed, one ignored. All 1,026
 records independently replay and 16 mutation controls are rejected. Two seconds
 still does not decide these hard models; all longer runs reached their CPU limit.
 
