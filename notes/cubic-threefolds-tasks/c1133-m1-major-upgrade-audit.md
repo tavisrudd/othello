@@ -3,6 +3,14 @@
 **Lane:** `cubic-threefolds`
 **Status:** ACTIVE, author-selected research task (2026-09-09).
 
+## Latest reader hierarchy
+
+`notes/2026-09-10-c1133-reader-hierarchy.md`: broader Fano/Hodge title,
+worked degree-two resonance, compact proof-route and evidence tables, shorter
+optional additive bookkeeping. All theorem statements and coverage unchanged.
+Primary PDF: 33 pages, abstract 133 words, cubic proof through page 14.
+Authority and both companion paper gates pass; export identity in the report.
+
 ## Latest formal alignment
 
 `notes/2026-09-10-c1133-lean-selector-comparison.md`: full odd selector values

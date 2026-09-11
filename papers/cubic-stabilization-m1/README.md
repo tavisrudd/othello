@@ -8,7 +8,7 @@
 
 [**Reviewer guide →**](REVIEWER_GUIDE.md)
 
-**Title:** *Irrationality of cubic threefolds after one stabilization.*
+**Title:** *One-stabilization irrationality and Hodge conservation for Fano threefolds.*
 
 For every smooth complex cubic threefold `X`, the paper proves that
 `X x P^1` is irrational.  The proof decomposes the generic even quantum

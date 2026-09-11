@@ -98,6 +98,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   20 absent, 8 fragments, 8 conditional deductions. Lean normalization and
   the composed comparison are now checked; geometric realizations remain supplied.
   Paper README and portfolio summary/abstract now reflect A–D and these limits.
+  Latest reader-hierarchy revision:
+  `../2026-09-10-c1133-reader-hierarchy.md`. Title now advertises
+  one-stabilization irrationality and Hodge conservation for Fano threefolds.
+  Worked degree-two resonance and proof-route table added; optional additive
+  bookkeeping shortened. Primary PDF is 33 pages, abstract 133 words, cubic
+  proof still through page 14. Authority and both companion paper gates pass.
   Lean normalization and composed comparison complete:
   `../2026-09-10-c1133-lean-selector-comparison.md`. Full odd values agree;
   parity is removed from semisimple nullity. The new interface proves faithful

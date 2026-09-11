@@ -61,7 +61,7 @@ results.
   The numerical proof is independent of the Hodge refinement; both use the
   specialized projective-line argument. General projective-bundle machinery
   is confined to optional extensions.
-  [Irrationality of Cubic Threefolds after One Stabilization](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/irrationality_after_one_stabilization.pdf).
+  [One-stabilization irrationality and Hodge conservation for Fano threefolds](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/irrationality_after_one_stabilization.pdf).
 
 - **Sharpness at the next stabilization.** The preceding universal bound is
   sharp: two explicit smooth cubic threefolds over `Q` have stabilization
@@ -233,13 +233,13 @@ the theorem column.
 
 | Paper | General theorem | Quantifier range |
 |---|---|---|
-| Irrationality of Cubic Threefolds after One Stabilization | `X × P¹` is irrational, detected by a rank-two generic-even-QDM block with distinct formal exponent classes modulo the integers. | Every smooth complex cubic threefold `X`. |
-| Irrationality of Cubic Threefolds after One Stabilization | A smooth projective threefold with positive exponent count remains irrational after multiplication by `P¹`. | Every smooth projective complex threefold. |
-| Irrationality of Cubic Threefolds after One Stabilization | `X × P¹` is rational if and only if `X` is rational. | Every smooth complex Fano threefold of Picard rank one, across all seventeen families. |
-| Irrationality of Cubic Threefolds after One Stabilization | Birational first stabilizations imply `H³(X,Q) ≅ H³(Y,Q)` as rational Hodge structures. | Any two smooth members of the nine irrational Picard-rank-one Fano families. |
-| Irrationality of Cubic Threefolds after One Stabilization | Birational first stabilizations imply `X ≅ Y`. | A very general complex cubic or quartic threefold `X` and any smooth threefold `Y` of the same degree. |
-| Irrationality of Cubic Threefolds after One Stabilization | Finitely many geometric cubic partner classes after first stabilization. | A fixed cubic over a finitely generated characteristic-zero field and partners over extensions of bounded degree; no finiteness of twists asserted. |
-| Irrationality of Cubic Threefolds after One Stabilization | The exponent count and residue spectrum extend to additive homomorphisms on `K₀(Var_C)/(L − 1)`. | All complex varieties, via the smooth-projective blow-up relations; no multiplicativity asserted. |
+| One-stabilization irrationality and Hodge conservation for Fano threefolds | `X × P¹` is irrational, detected by a rank-two generic-even-QDM block with distinct formal exponent classes modulo the integers. | Every smooth complex cubic threefold `X`. |
+| One-stabilization irrationality and Hodge conservation for Fano threefolds | A smooth projective threefold with positive exponent count remains irrational after multiplication by `P¹`. | Every smooth projective complex threefold. |
+| One-stabilization irrationality and Hodge conservation for Fano threefolds | `X × P¹` is rational if and only if `X` is rational. | Every smooth complex Fano threefold of Picard rank one, across all seventeen families. |
+| One-stabilization irrationality and Hodge conservation for Fano threefolds | Birational first stabilizations imply `H³(X,Q) ≅ H³(Y,Q)` as rational Hodge structures. | Any two smooth members of the nine irrational Picard-rank-one Fano families. |
+| One-stabilization irrationality and Hodge conservation for Fano threefolds | Birational first stabilizations imply `X ≅ Y`. | A very general complex cubic or quartic threefold `X` and any smooth threefold `Y` of the same degree. |
+| One-stabilization irrationality and Hodge conservation for Fano threefolds | Finitely many geometric cubic partner classes after first stabilization. | A fixed cubic over a finitely generated characteristic-zero field and partners over extensions of bounded degree; no finiteness of twists asserted. |
+| One-stabilization irrationality and Hodge conservation for Fano threefolds | The exponent count and residue spectrum extend to additive homomorphisms on `K₀(Var_C)/(L − 1)`. | All complex varieties, via the smooth-projective blow-up relations; no multiplicativity asserted. |
 | Sharpness of Irrationality after One Stabilization for Cubic Threefolds | `S × A²`, equivalently `S × P²`, is rational. | Every smooth quartic del Pezzo surface over a characteristic-zero field with a rational point and stably permutation geometric Picard lattice. |
 | Sharpness of Irrationality after One Stabilization for Cubic Threefolds | `X_{j,r} × P²` is rational over `Q`. | Both Tschinkel--Zhang cubic series, for every `r ≥ 0` and `j ∈ {1,3}`. |
 | Sharpness of Irrationality after One Stabilization for Cubic Threefolds | The two specified cubics have exact stabilization level two, as do their associated generic del Pezzo surfaces. | Every characteristic-zero field `F`; the generic surfaces are over `F(t)`. |
@@ -276,7 +276,7 @@ boundary, and reproducible entry points.
 
 | Paper | Area | Central result | Public entry |
 |---|---|---|---|
-| Irrationality of Cubic Threefolds after One Stabilization | Algebraic geometry / birational geometry | Every smooth cubic remains irrational after `P¹`; one stabilization preserves rationality across all seventeen Picard-rank-one Fano families, and birational first stabilizations in the nine irrational families conserve rational `H³`. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
+| One-stabilization irrationality and Hodge conservation for Fano threefolds | Algebraic geometry / birational geometry | Every smooth cubic remains irrational after `P¹`; one stabilization preserves rationality across all seventeen Picard-rank-one Fano families, and birational first stabilizations in the nine irrational families conserve rational `H³`. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
 | Sharpness of Irrationality after One Stabilization for Cubic Threefolds | Algebraic geometry / birational geometry | The universal one-stabilization irrationality bound is sharp: two specified smooth cubic threefolds have exact stable-rationality level two over every characteristic-zero field; the reusable surface theorem proves `S × A²` rational from a rational point and a stably permutation geometric Picard lattice. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | Integral Divisor Products on the Nonstandard A₅-Invariant Cubic Pencil | Algebraic geometry / algebraic cycles | Every smooth member of the non-isotrivial pencil is universally `CH₀`-trivial; after multiplication by `P¹`, it remains universally `CH₀`-trivial and is irrational. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/six-axis-cubic-pencil/six_axis_cubic_pencil.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
 | Framed Formal Monodromy of Cubic Threefolds | Algebraic geometry / quantum cohomology | The unconditional count is `ν₆(X) = 2` and satisfies the projective-space product formula; its operation formulas and birational invariance remain conditional on two explicit hypotheses. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
@@ -339,7 +339,7 @@ then read the abstract for the paper's technical statement.
 
 ### Highlights
 
-#### Irrationality of Cubic Threefolds after One Stabilization
+#### One-stabilization irrationality and Hodge conservation for Fano threefolds
 
 [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/irrationality_after_one_stabilization.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-m1) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21909943-blue.svg)](https://doi.org/10.5281/zenodo.21909943)
 

@@ -5,7 +5,18 @@ rationality assertions. The matrix calculation establishes the spectral
 conditions; the cited family identifications and smooth deformation bridges
 establish their every-member scope.
 
-\subsection{Matrices and residues}
+\begin{center}\small
+\begin{tabular}{@{}p{0.24\linewidth}p{0.68\linewidth}@{}}
+\toprule
+Task & Evidence required\\\midrule
+Check a supplied matrix & Exact characteristic polynomial, cyclic frame,
+regular gauge jet and residue calculation.\\
+\raggedright Geometric identification & Geometric quantum formulas; period
+reconstruction with its nonvanishing condition; smooth deformation bridges.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\subsection{Finite algebra: matrices and residues}
 In the classical anticanonical-power basis, up to a scalar Euler shift,
 write the matrix at Novikov parameter one as
 \[
@@ -54,7 +65,7 @@ The independent checker constructs the frame by rational elimination;
 the other checker computes the projector and reduced inverse directly.
 Neither requires a higher-rank logarithmic lattice.
 
-\subsection{Sources and all smooth members}
+\subsection{Geometric identification for every smooth member}
 For index-two degrees $1,2$, the counting matrices are
 \cite[Theorem~2.6.6]{Przyjalkowski}; degree $3$ is the cubic calculation
 from Beauville's theorem. For genera $6,8$, the matrices and scalar shifts
@@ -130,6 +141,9 @@ and cyclic frames and all nine rank-two residues, including four zero
 controls. Only the nine detected inputs above are needed here.
 The computations do not establish the cited Gromov--Witten formulas,
 classification, deformation invariance or geometric transport.
-The manuscript's claim map records the new geometric theorems as absent
-from the formalization; existing algebraic fragments retain their stated
-boundaries.
+The accompanying Lean artifact is a partial formalization of algebraic
+fragments and deductions with explicit geometric inputs. Its claim map
+records the geometric theorems without formal counterparts. A checked
+deduction does not verify its supplied geometric premises; those are proved
+in the manuscript or imported by citation. Thus the mathematical proof,
+exact computations and partial formalization have distinct roles.

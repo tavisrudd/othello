@@ -59,27 +59,19 @@ the same numerical value in \(\mathcal D\).
 \uses{prop:rank2-rigidity,lem:faithful-center-base-change,prop:qdm-operation-ledgers}%
 \end{proof}
 
-Let \(M_{\mathrm{disc}}=\bigoplus_{\delta\in\mathcal D}\mathbf N e_\delta\), with group completion
-\(G_{\mathrm{disc}}=\bigoplus_{\delta\in\mathcal D}\Z e_\delta\).  For a connected smooth projective
-variety put
+Put $G_{\mathrm{disc}}=\bigoplus_{\delta\in\mathcal D}\Z e_\delta$ and
 \[
- \mathfrak S(Y)=\sum_{E\text{ counted}}e_{\delta^\sharp(E)}\in M_{\mathrm{disc}}.
+ \mathfrak S(Y)=\sum_{E\text{ counted}}e_{\delta^\sharp(E)}
+ \in G_{\mathrm{disc}}.
 \]
-Extend by sums over connected components and put
-\(\mathfrak S(\varnothing)=0\).  The augmentation
-\(\epsilon:G_{\mathrm{disc}}\to\Z\), \(e_\delta\mapsto1\), recovers
-\(I_{\mathrm{exp}}\).
-
-For the lattice count use instead
-\(\mathcal D_{\mathrm{lat}}=\C\setminus\{0\}\), with monoid
-\(M_{\mathrm{disc,lat}}\) and group \(G_{\mathrm{disc,lat}}\) defined as
-above over this index set.  Put
-\[\mathfrak S_{\mathrm{lat}}(Y)=\sum_{E\text{ eligible},\,\delta^\sharp(E)\ne0}
-e_{\delta^\sharp(E)}.\]
-Its augmentation \(\epsilon_{\mathrm{lat}}\) recovers \(I_{\mathrm{lat}}\).
-The constant-field and comparison proof above applies without change:
-its only use of exponent separation is the exclusion rule.  The operation
-formulas and additive extension below therefore hold for this spectrum too.
+Sum over connected components and set $\mathfrak S(\varnothing)=0$.
+The augmentation $\epsilon(e_\delta)=1$ recovers $I_{\mathrm{exp}}$.
+For $I_{\mathrm{lat}}$, replace $\mathcal D$ by
+$\mathcal D_{\mathrm{lat}}=\C\setminus\{0\}$ and use the same definitions,
+written $G_{\mathrm{disc,lat}}$, $\mathfrak S_{\mathrm{lat}}$ and
+$\epsilon_{\mathrm{lat}}$. The preceding proof uses exponent separation
+only to exclude integer squares; with the lattice rule it instead excludes
+zero. All formulas below therefore apply to both spectra.
 In particular, for the three families in
 Theorem~\ref{thm:index-two-classification},
 \[
@@ -152,21 +144,14 @@ generators, the empty class, and the blowup relation
  =\mathfrak S(Y)-\mathfrak S(Z)
 \]
 in \(G_{\mathrm{disc}}\).  Thus the assignment extends uniquely and additively.
-For a smooth projective \(Y\), the scissor relation and the bundle formula
-give
-\[
- [Y\times\PP^1]=[Y]+\mathbb L[Y],\qquad
- \mathcal S(\mathbb L[Y])=
- \mathfrak S(Y\times\PP^1)-\mathfrak S(Y)=\mathfrak S(Y).
-\]
-Smooth projective classes generate the whole group, so
-\(\mathcal S((\mathbb L-1)a)=0\) for every \(a\).  This proves the
-factorization through the indicated quotient, and augmentation gives
-\(\mathcal I\).  Points have no counted block, while the cubic has the
+Since $[Y\times\PP^1]=[Y]+\mathbb L[Y]$ and
+$\mathfrak S(Y\times\PP^1)=2\mathfrak S(Y)$, we have
+$\mathcal S(\mathbb L[Y])=\mathcal S([Y])$ on smooth projective
+generators. Hence $\mathcal S$ factors through $(\mathbb L-1)$, and
+augmentation gives $\mathcal I$. Points have no counted block, while the cubic has the
 single block of discriminant \(4/9\) computed in
 Section~\ref{subsec:shared-cubic-packet}.
-Applying the same argument to the lattice spectrum, with its own target
-and augmentation, proves the second assertion.
+The same proof applies to the lattice spectrum.
 \uses{prop:intrinsic-spectrum-formulas,prop:atomic-lowdim}%
 \imports{Bittner:blowup-presentation}%
 \end{proof}

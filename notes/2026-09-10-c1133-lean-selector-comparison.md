@@ -93,3 +93,14 @@ finite implementations, reconstruction, hashes, TeX and warning rejection.
 No TeX or PDF content changed. The existing built PDF remains 32 pages with
 SHA-256 `33d39d37048a7c99c2d01c1b8ee14d8265a604bb9a50fc969219e79ba2e18472`.
 No incidental discovery was promoted or added during this bounded alignment.
+
+## Export closeout
+
+Authority `4b6ce3ed3` is exported as standalone `0a56ba0`. The standalone
+full guarded library build, fresh 373-terminal axiom audit and `make check`
+pass. Guarded build run: `run-20260911-060343-3ddad941`; axiom stdout:
+`/home/tavis/.cache/othello-lean-build/guarded-lean/20260910-231002-cd-lean-exec-taskset-c-20-23-env-LEAN_NUM_THREADS1-choom-n-1000-nix-develop-comma/stdout.log`.
+Exporter verification: 352 files, content SHA-256
+`2ba0657193e4cd100c396af4ad6b184bc21caee2ab8a1c87b93faa7c0217f526`.
+The exported 32-page PDF matches its authority byte for byte. Subsequent
+reader-hierarchy edits have their own report and release; no pushes occurred.
