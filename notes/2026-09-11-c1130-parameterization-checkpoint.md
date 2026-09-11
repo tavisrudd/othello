@@ -61,5 +61,6 @@ cost and broad held-out transfer. The 1/13 contingency result is a clear limit o
 current grammar coverage. Order140 is still an open structure-discovery application.
 Do not retroactively tune the frozen holdouts or label development examples held out.
 
-The timed work continues next with native-only C1016, following its task card and
-margin-fibre control gate. This checkpoint does not complete C1130 or the thread goal.
+The subsequent native-only C1016 phase and timed-block audit are recorded in
+`2026-09-11-ergodis-timed-work-audit.md`. This checkpoint does not complete C1130;
+the grammar, transfer and order-140 gaps above remain active.

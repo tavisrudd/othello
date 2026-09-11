@@ -10,11 +10,11 @@ This closes the timed work block, not umbrella C1130 or C1016.
 | Two-hour C1130 parameterization work before native transition | `2026-09-11-c1130-parameterization-checkpoint.md`; private shared provider, generic sparse/tensor hypotheses and modular rejection. Validated limited grammar, not complete CEGAR or unrestricted construction discovery. |
 | Native/WASM semantics and witness validity | `2026-09-11-array-partitions.json` records exact native/WASM maps and witnesses; independent original-equation replay repeated at closeout for 8×8 and 16×16, plus all 16 modular contradiction certificates. Browser lifecycle/verification evidence remains in its dated report. |
 | Measured optimizations without harming existing native paths | Retained C1130 parity/mod4 A/B and compatibility evidence; C1016 single/twelve-worker counter A/B and rejection-only controls. Ordinary sampled-apply refactor ratios 0.9977/1.0034; no material observed regression. |
-| Three-hour native-only order-2092 work | Private C1016 authority branch, final checkpoint `49cc0df`; complete cycle/pair diagnostics, faster exact pricing, fixed-CPU acceptance-policy experiments and forty-case shell replication. No browser/public-core change in this phase. |
+| Three-hour native-only order-2092 work | Private C1016 authority branch, final checkpoint `9ccdb98`; complete cycle/pair diagnostics, faster exact pricing, fixed-CPU acceptance-policy experiments and forty-case shell replication. No browser/public-core change in this phase. |
 | Required native validation | Full release workspace/all-target gate: 753 passed, zero failed. `evidence/margin-sampled-validation.json` binds final Rust source hashes; independently rechecked after commit. Real-loop zero-allocation tests and independent candidate-selection oracle included. |
 | Independent replay and fairness | Completed sampled artifact: 192 best/final witnesses replayed, five mutation controls pass. Shell artifact: 960 stage-worker states replayed, six analysis/integrity controls pass. Inputs, complete arms, CPU exposure, budgets, source hashes and policy differences retained. |
 | No answer baking / generality review | Independent red-team reviewed arithmetic, selection, continuation, evidence and scope. No target coordinates or solution seeds enter new proposal policies. Supplied models/grammars remain explicit; generic arithmetic laws are supplied checker knowledge. |
-| Private documents and forward commits | C1130 checkpoint and linked private ADR/plan/reports; native experiment/report commits through `49cc0df`; task card and handoff refreshed. No public export or new binary. |
+| Private documents and forward commits | C1130 checkpoint and linked private ADR/plan/reports; native experiment/report commits through `9ccdb98`; task card and handoff refreshed. No public export or new binary. |
 | Exact remaining gaps | Order 140 still uses a supplied Goethals–Seidel family. Frozen multi-factor holdout finds only 1/13 feasible cases. Order 2092 is unsolved and randomized known-containing-fibre recovery near 14,800 remains unmet. |
 
 ## Native outcome
@@ -59,3 +59,9 @@ it was corrected to report full-neighbourhood steps, then independently replayed
 Neither event changes native search evidence. All final owned source and evidence
 is committed; umbrella tasks remain open, so their retained experiment caches are
 not garbage-collected as a task closure.
+
+Final closeout additions: independent recomputation of all 36 native A/B paired
+time ratios matches the six retained summaries (`9ccdb98`). The generic box-bound
+proposal now requires a currently legal incumbent; red-team and three finite
+oracle tests cover the inequality, ties and an illegal-incumbent counterexample
+(`c1d0fb8`). These are private cold analysis/design changes, not new solver kernels.

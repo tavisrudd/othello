@@ -249,7 +249,7 @@ bottoms out at 23,152. Faster threshold, record and sampled-tabu policies all
 lose to unchanged full-neighbourhood tabu at matched CPU budgets. The forty-case
 shell replication does not validate the prior five-leader ranking. No negative
 coverage follows from these misses. Active native authority:
-`~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`, checkpoint `49cc0df`;
+`~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`, checkpoint `9ccdb98`;
 [current evidence and remaining gate](../2026-09-11-c1016-cycle-neighborhoods.md).
 Provenance rules stand: proved structural and exact computational reductions grant negative
 coverage, observed/evolved and heuristic predicates never do. Every resume first reads

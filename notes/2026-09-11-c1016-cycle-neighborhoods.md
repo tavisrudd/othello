@@ -1,7 +1,7 @@
 # C1016: wider margin-neighbourhood diagnostics
 
 Native authority: `~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`,
-branch `c1016-full-2092-campaign`, checkpoint `49cc0df`.
+branch `c1016-full-2092-campaign`, checkpoint `9ccdb98`.
 The scheduled native phase runs until 2026-09-11 13:33 UTC.
 
 The banked score-14,800 state has no improving or neutral six-cycle preserving
