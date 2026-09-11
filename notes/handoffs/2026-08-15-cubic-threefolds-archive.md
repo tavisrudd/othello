@@ -67,3 +67,21 @@ diffs and recommended acceptance after minor revision. Their original reports
 and reproducible evidence are preserved unchanged; localized corrections
 received targeted follow-up. C978/C956 stay open by author instruction.
 Report: `../2026-09-08-cubic-post-upgrade-cold-read.md`.
+
+## 2026-09-10 — A/B integration supersedes prototype frontier
+
+  Reviewed integration plan: `../2026-09-10-c1133-ab-integration-plan.md`.
+  Fresh editorial referee favors one two-part paper: cubic headline,
+  A completing the numerical part, B's essential proof in the Hodge part.
+  `../2026-09-10-c1133-ab-plan-referee.md`; objections addressed in plan.
+  C remains brief; D can move to an appendix before considering a B companion.
+  Current-material inventory: `../2026-09-10-c1133-ab-migration-map.md`.
+  B's body prototype now renders in five pages including brief references:
+  `../2026-09-10-c1133-b-body-prototype.pdf` and its assessment
+  `../2026-09-10-c1133-b-prototype-assessment.md`. All essential steps remain
+  in the body; this supports the single-paper plan. Next: integrate the
+  numerical hierarchy/reduced proofs and B with accurate owning records.
+  Integrated length and assembled cold-reader gates remain. No reorganization;
+  no manuscript/formal promotion. Pencil claims remain conditional.
+
+Implemented report: `../2026-09-10-c1133-ab-integration.md`.

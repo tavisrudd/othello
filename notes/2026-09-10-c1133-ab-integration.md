@@ -156,3 +156,20 @@ B occupies pages 17–21 including its transition and short Torelli application.
 The appendices begin on page 21 and references finish on page 32.
 Final affected front matter and all appendix/reference pages were visually
 rechecked after the last reflow; no clipped text or broken table was found.
+
+## Synchronization
+
+Authority integration commit: `e37fdef37`; exporter recipe update:
+`5de691401`. The exact owning Makefile rewrite was updated to preserve the
+new Fano gate in the standalone copy; no export exclusion or audit finding
+was bypassed. Export audit reports zero findings. Standalone forward commit:
+`d1b2999`. Its `make check` passes, and the rebuilt PDF is byte-identical to
+the authority hash above. Export content hash:
+`52d864cbd3e1146f8294a347ba5f526f644055249319c545c5505177385a7dcf`.
+
+The first exporter verification was invoked before new exported paths were
+tracked and correctly refused that candidate; after the explicit forward
+commit, the tracked-tree verification passes. Synchronization also carries
+the previously committed C1133 formal checkpoint that had not yet reached
+the standalone tree; no Lean source was edited in this integration and no
+fresh kernel replay is implied by the source-only check. Nothing was pushed.

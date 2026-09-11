@@ -39,27 +39,23 @@ dimensions and residue labels support optional finer signatures. A remains
 numerical, B supplies Hodge transport, C/D reuse B; D's fourth-power route
 is optional. Stronger general-bundle statements still require IK.
 
-**Integration plan and fresh referee complete:**
-`notes/2026-09-10-c1133-ab-integration-plan.md` proposes one paper with
-the unchanged cubic headline, A completing the numerical part and B's
-essential proof completing the Hodge part. The cold editorial report
-`notes/2026-09-10-c1133-ab-plan-referee.md` favors this with explicit
-parity proofs, B's conceptual steps in the body and full length accounting;
-the plan incorporates those responses. C stays a short application; D's
-proof may move to an appendix before splitting B into a companion.
-`notes/2026-09-10-c1133-ab-migration-map.md` assigns current material and
-preserves general IK dependencies on retained legacy results. B's prototype
-is now drafted and rendered in five pages including brief references:
-`notes/2026-09-10-c1133-b-body-prototype.pdf` and
-`notes/2026-09-10-c1133-b-prototype-assessment.md`. It includes all essential
-body steps and supports proceeding with the single-paper plan. Next:
-integrate the numerical hierarchy and reduced proofs, then B, keeping owning
-annotations and dependencies accurate. Whole-paper length and assembled
-cold-reader gates remain; no new independent acceptance of this draft.
-This is a reviewed editorial direction, not an enacted reorganization.
-Consolidation and the separate all-member geometric read boundaries remain;
-no manuscript or formal-coverage promotion is asserted. Pencil claims stay
-conditional. Collaborator discussion is parked.
+**A/B integration complete:**
+`notes/2026-09-10-c1133-ab-integration.md`. The unchanged cubic headline
+is proved directly before the all-seventeen numerical classification. B's
+fixed-base, full-fiber, selection, endpoint and rational-descent arguments
+are in the body. C is short; D and general IK-dependent results are appendices.
+The 32-page PDF passes `make check`, including independent finite replay,
+source-only formal correspondence and warning rejection. Fresh specialist
+and adjacent-reader reports find no major defect in their stated scopes;
+all concrete minor requests were repaired. Cubic proof still ends on page 13.
+Standalone `d1b2999` passes its gate and exporter verification with a
+byte-identical PDF; authority integration is `e37fdef37`. Nothing was pushed.
+Twelve added geometric rows have absent Lean coverage; existing terminals
+were not promoted and no new kernel replay is claimed.
+The two PDF preferences were explicitly nonblind; a fully blinded comparison
+remains a publication gate. Broader source/priority closure and author
+publication review remain the C1133 frontier. Pencil claims stay conditional;
+collaborator discussion is parked.
 
 Latest formal checkpoint: **371 public terminals, 133 machinery, 245 sources**;
 aggregate kernel build and actual axiom comparison passed in the prior

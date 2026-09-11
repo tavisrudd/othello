@@ -61,19 +61,21 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   elliptic cases are proved. Nine quantum matrices suffice; exact signatures
   remain optional. General-bundle statements retain IK. All-member geometric
   inputs keep their separate read boundaries; no blanket paper acceptance.
-  Reviewed integration plan: `../2026-09-10-c1133-ab-integration-plan.md`.
-  Fresh editorial referee favors one two-part paper: cubic headline,
-  A completing the numerical part, B's essential proof in the Hodge part.
-  `../2026-09-10-c1133-ab-plan-referee.md`; objections addressed in plan.
-  C remains brief; D can move to an appendix before considering a B companion.
-  Current-material inventory: `../2026-09-10-c1133-ab-migration-map.md`.
-  B's body prototype now renders in five pages including brief references:
-  `../2026-09-10-c1133-b-body-prototype.pdf` and its assessment
-  `../2026-09-10-c1133-b-prototype-assessment.md`. All essential steps remain
-  in the body; this supports the single-paper plan. Next: integrate the
-  numerical hierarchy/reduced proofs and B with accurate owning records.
-  Integrated length and assembled cold-reader gates remain. No reorganization;
-  no manuscript/formal promotion. Pencil claims remain conditional.
+  A/B integration implemented and reviewed:
+  `../2026-09-10-c1133-ab-integration.md`. Cubic headline unchanged;
+  numerical classification completes Part I, full Hodge proof is in Part II.
+  C is short, D is an arithmetic appendix. The 32-page PDF retains the
+  direct cubic stopping point on page 13; Hodge material occupies five pages.
+  Fresh specialist and adjacent-reader reports find no major defect at
+  their stated read boundaries; concrete minor requests are repaired.
+  Authority and standalone gates pass with byte-identical PDFs; export
+  verification passes at standalone `d1b2999`. Twelve added
+  geometric claims are accurately absent from Lean; no new kernel run.
+  General IK dependencies remain explicit in optional broader results.
+  Next: close the remaining bounded source/priority coverage and author
+  publication review. The before/after preferences were nonblind;
+  a fully blinded comparison remains a publication gate. Pencil claims
+  stay conditional. This integration does not close C1133, C978 or C956.
   Collaborator discussion stays parked.
   Prior guarded formal checkpoint: **371 public terminals, 133 machinery,
   245 sources**; aggregate kernel and actual axiom comparison passed.

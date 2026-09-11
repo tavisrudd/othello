@@ -1,15 +1,14 @@
 # C1133 — A/B integration plan and architectural alternatives
 
 **Lane:** `cubic-threefolds`. **Date:** 2026-09-10.
-**Status:** plan and fresh editorial referee feedback complete. The referee
-recommends P with revisions; this version incorporates responses, not a
-second independent acceptance of the revised text. Planning only; no manuscript
-reorganization, new theorem promotion, Lean operation or export is authorized
-by this document. The user requested a plan and referee feedback on alternatives.
-**Prototype gate passed:** `2026-09-10-c1133-b-body-prototype.pdf` renders
-B's additional body in five pages, including brief references, using the
-paper's normal typography. `2026-09-10-c1133-b-prototype-assessment.md`
-supports proceeding with P; integrated length and cold-reader tests remain.
+**Status:** implemented after the author's subsequent `go`.
+The controlling execution report is `2026-09-10-c1133-ab-integration.md`.
+The accepted two-part architecture retains the unchanged cubic headline,
+A in the numerical part and B's full essential proof in the Hodge part.
+The 32-page rendering and assembled specialist/adjacent reviews support the
+single-paper choice. Their before/after preferences were nonblind; a fully
+blinded comparison remains a publication gate. This document records the
+plan and its alternatives, not an independent mathematical acceptance.
 
 ## 1. Objective and fixed mathematical boundaries
 
