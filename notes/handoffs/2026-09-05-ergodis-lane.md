@@ -88,17 +88,21 @@ arms; cheap shape/coordinate screens precede allocation, then the existing kerne
 uses the core flat-source constructor (`d7e938e`; private `d33579b`). Native/WASM certificates replay
 against original choices. Private report: `analysis/interface-review/2026-09-10-independent-fit-recognition.md`.
 Checked whole-domain table reuse and checked family substitution are live on 8770
-in both ordinary allocation arms (core `8b0fab0`, private `d370b92`; WASM `c5a31a14775d…`).
+in both ordinary allocation arms (core `197dde3`, private `af5b5e5`; WASM `6fdb74c4f58fa…`).
 The compiler preserves original witness IDs and checks a source/domain cardinality
-bound before removing dominated families. The table hot loop is unchanged.
+bound plus a strict conditional coexistence obstruction before removing dominated
+families. Profile workloads retain 45/26/19 jobs; table work drops a further
+9.9%/0%/5.0%. The table hot loop is unchanged.
 Redundant direct-table reference arms are omitted automatically; explicit references
 remain test-only. Result rows separate table construction from cheap lookups.
-Private current report: `analysis/interface-review/2026-09-10-family-substitution-integration.md`;
+Private current report: `analysis/interface-review/2026-09-10-conditional-family-substitution.md`;
 decision: `adr-domain-family-substitution.md`. Larger profile inputs and source-only
 calibration: `2026-09-10-harder-profile-workloads.md`.
-Next: external certificate serialization/replay, then richer option matching and
-measured admission cost; bounded batch readout remains useful. Do not preserve a
-default/Evolve capability gap to manufacture a race ranking. Shared-memory telemetry
+Next: stronger checked option/representation reductions of remaining table work,
+external certificate serialization/replay, and measured admission cost; bounded batch readout remains useful. Do not preserve a
+default/Evolve capability gap to manufacture a race ranking. One preload-overlap
+manifest fetch failed in the regression harness; warmed-cache 18-race replay passed.
+Cause remains unconfirmed; no production loading fix is claimed. Shared-memory telemetry
 and broader plan contracts remain open. WASM all-target Clippy's existing
 `bundle.rs` items-after-test-module finding remains; library Clippy/tests pass.
 Asset loading now uses revisioned immutable URLs, speculative post-paint JS/WASM
