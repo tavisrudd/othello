@@ -203,15 +203,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Additional pencil-focused feedback is assessed in
   `../2026-09-07-cubic-six-axis-feedback-triage.md`; it is a proposed future
   project, not an allocated replacement for this order.
-- **C956 — exact level-two cubic manuscript; new upgrade audited, not integrated.**
-  The 2026-09-11 packet's surface and arithmetic cold reviews found no fatal
-  defect; packet and existing authority checks pass. Apply the recorded
-  descent/domain/geometry repairs and pin companion/reduction references
-  before restrained integration. Literature comparisons are bounded, not a
-  priority verdict. Report: `../2026-09-11-c956-sharpness-upgrade-audit.md`.
-  Follow-up consequences and integration priorities:
-  `../2026-09-11-c956-sharpness-ej-tt.md`.
-  The older acceptance described below covers the existing manuscript only.
+- **C1140 — sharpness upgrade, active.** Owns the new packet integration,
+  three-parameter family and arithmetic separation, following the author's
+  task-scope correction. Repair audited interfaces, retain a clear theorem
+  hierarchy, validate the evidence and obtain a fresh cold review.
+  Card: `../cubic-threefolds-tasks/c1140-sharpness-upgrade.md`.
+  Prior audit and ej/tt notes retain their C956 filenames as provenance.
+- **C956 — existing exact-level-two manuscript referee cycle.** New upgrades
+  are owned by C1140; the older acceptance below covers the previous manuscript.
   Cross-specialty review repaired the characteristic-zero scope, the
   singular-compatible tangent-projection citation, the relative evaluation
   construction, and specialist orientation.  The latest exposition pass

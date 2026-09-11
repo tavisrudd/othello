@@ -4,19 +4,13 @@
 
 **Status:** active by author instruction; referee-accepted release candidate
 
-**Latest review (2026-09-11):** the supplied sharpness upgrade packet received
-independent cold surface and arithmetic reviews plus a targeted source audit.
-No fatal defect was demonstrated; the packet checker and existing authority
-gate pass. Integration has not begun. First repair the nonsplit evaluation
-wording, new-family Picard bridge, field/S-unit domains, and precise companion
-and reduction citations. Bounded topical search is not a priority verdict.
-Report: `../2026-09-11-c956-sharpness-upgrade-audit.md`.
-The follow-up `ej`/`tt` pass extracts the combined fourfold consequence,
-finite rational pencil fibres, and the minimal arithmetic theorem interface:
-`../2026-09-11-c956-sharpness-ej-tt.md`.
-The earlier accepted paper review remains in
-`../2026-09-08-cubic-post-upgrade-cold-read.md`; it does not cover this packet.
-The task remains open by author instruction.
+**Scope correction (2026-09-11):** the new sharpness upgrade belongs to
+C1140, `c1140-sharpness-upgrade.md`, by explicit author instruction. C956
+retains the existing manuscript referee cycle and is not the upgrade task.
+The September 11 audit and ej/tt files retain their original names as immutable
+provenance; their implementation successor is C1140. The latest review of
+the existing manuscript is `../2026-09-08-cubic-post-upgrade-cold-read.md`.
+C956 remains open by author instruction.
 
 **Next exposition pass:** after the mathematical upgrades, audit terminology
 and symbols with C978 for standard specialist usage, unnecessary coined labels,
