@@ -11,9 +11,9 @@
         "sha256": "2b6a65af3d935ac153c41d6cd00975f6165869b573bd65ba9ea6c418f36cd15d"
       },
       {
-        "bytes": 333186,
+        "bytes": 342388,
         "path": "ame-lu.pdf",
-        "sha256": "6b61d2cdb5d47fd094d078f94192fc7cedfc8297fdebb55240c9b517ec6672d1"
+        "sha256": "b39e9c39cdf62381fcf58ba562a37a87e5eb661f703b2b7ca53602c5f59d737b"
       },
       {
         "bytes": 2650,
@@ -36,14 +36,14 @@
         "sha256": "187e03eb0106383ebcd2aebcd0c728bb0a265591ca1ceffda277c90302044723"
       },
       {
-        "bytes": 5014,
+        "bytes": 5090,
         "path": "main.tex",
-        "sha256": "4ff28d304e7b6d148dc28a3281a2fe8de11a2ddba5bfcdff0683c885e6e24315"
+        "sha256": "a2c83867d81547992fddd2582bedb54b10d27e47d6e3b3de220f3895b648a1e4"
       },
       {
-        "bytes": 30121,
+        "bytes": 30253,
         "path": "refs.bib",
-        "sha256": "2771a57ff18a1b37d2cbbb0774de856115ad6352793a64a8df1f14bdeb3213fa"
+        "sha256": "4b616fb847dc2f31e8fe5a3499d997e002c6bcd9ba9a1a9189e7db5198c19202"
       },
       {
         "bytes": 8689,
@@ -51,49 +51,49 @@
         "sha256": "942457a6080e47c70e0157d208cc79dda0c122a8701cf32d8229b551dbca8033"
       },
       {
-        "bytes": 19279,
+        "bytes": 19298,
         "path": "sections/01-introduction.tex",
-        "sha256": "079b4ffb1b36b1d074d23e8ce04fe0b70f8c336971614e5644c5d9e42f2a37a4"
+        "sha256": "23e0c9fb171c2d6d31da3937b58c6b043016af5462f1bddb16e146e0f24914bc"
       },
       {
-        "bytes": 3101,
+        "bytes": 3682,
         "path": "sections/02-geometry-ame-dictionary.tex",
-        "sha256": "0f5f42eb9f281a171c67cb5a2985da49976091aee0af9fae941157e5402e6c17"
+        "sha256": "3269f501922c555009d18110d7b6d760cf6b57fd1d27417fe53189c8d5521c86"
       },
       {
-        "bytes": 40743,
+        "bytes": 41960,
         "path": "sections/03-exact-rigidity-atlas.tex",
-        "sha256": "ff0a5b34fcdc652b7d9c1395785a799b137ffa5a395911feaa3e923357704a7b"
+        "sha256": "225e619b7d27e8d253757650b9b96713bffb1ea8e79e6ee70da4d24e572283c8"
       },
       {
-        "bytes": 5077,
+        "bytes": 5640,
         "path": "sections/03a-marginal-verification.tex",
-        "sha256": "64352b84170d2834e0031b31cc70c70a2cd53ea28887417567548b932624210a"
+        "sha256": "74e922dc68cef7941fa25e623e7c39806fd47f872c25cd9e1bf7160b86b9537d"
       },
       {
-        "bytes": 10078,
+        "bytes": 10844,
         "path": "sections/04-prime-endomorphism-algebra.tex",
-        "sha256": "742be0f8d49ead07c6a43b7498ecf3de9ec77755d6332c74be7d0c20ef018849"
+        "sha256": "933dad54dc6f3fb534b8f70ae145a169bbc9d786cd44e7cb9b0a701dc0718c45"
       },
       {
-        "bytes": 30924,
+        "bytes": 33472,
         "path": "sections/05-quantitative-rounding.tex",
-        "sha256": "50d9b4aa8841cf5bcca117c296004edcdea6574c220d7859c91877314b3dabb8"
+        "sha256": "c871810eb873a36499f45be4806907358576592e71baaadf34e011259dd42b9b"
       },
       {
-        "bytes": 3081,
+        "bytes": 3213,
         "path": "sections/07-conclusion.tex",
-        "sha256": "dcf997255011f0d89affed9323f9aad47754253d961a3ed1a61be3917c2191d2"
+        "sha256": "483478751acf2cbcb5e020fea122e0aabe7045ccb1703d0cfc80a30e86ffba05"
       },
       {
-        "bytes": 4277,
+        "bytes": 3977,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "d58e55511ad4af7a2072542016fe6cd5b4677a80b6e216ab2d626776409b70b6"
+        "sha256": "ac4de968b3ccb34bac52d96daf39f05a3daa0715d9f618e95d7e47ca4654590d"
       },
       {
-        "bytes": 11772,
+        "bytes": 11843,
         "path": "sections/A-secondary-quantitative.tex",
-        "sha256": "db159c62d95e8487bbc1f7ebcdd6ef57c780d8df55c0c84332acdf80af42b752"
+        "sha256": "0ed86b2ef8f3519da65b39d5ddf3a020e31591c917fdda91c72d9fd77005eb7b"
       },
       {
         "bytes": 2850,
@@ -101,12 +101,12 @@
         "sha256": "f5747e9f3a2eac151eea1a7d766f7b96b3f56c6f18667e348c634351d3bacfd8"
       },
       {
-        "bytes": 6701,
+        "bytes": 6966,
         "path": "sections/C-marginal-verification.tex",
-        "sha256": "3d8eb5e849ee07ed2709ac3aab04c453c00c5d408b49ff34545577b1b8b7649c"
+        "sha256": "de8acdc431ebc12a0d0ec47609d6101607fd88605d7ee941e2dc572b06bd8442"
       }
     ],
-    "tree_sha256": "94a6f3591a2d975f9baa44aea83414d4bf623afb799f4e86452dd2cd1ce9efc2"
+    "tree_sha256": "2d1ce5138ae8bad0bea90beb2be3ce741044f6db27a49d8cdb03c3ed65086f56"
   },
   "formal_companion": {
     "artifacts": [

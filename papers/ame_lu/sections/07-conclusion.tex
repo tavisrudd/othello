@@ -12,7 +12,7 @@ exponentially small amplitude of a single marginal.
 
 The exact classification is finite and constructive.  A half-set direct sum
 reduces the data to the dimensionally optimal \(m\) minimum supports and gives
-fixed-label recognition in polynomial time for fixed local dimension.  Over
+fixed-label recognition with an explicit field-operation bound.  Over
 prime fields, the common centralizer of the fundamental cycles is the
 intrinsic algebra of block-diagonal one-party label endomorphisms preserving
 the stabilizer.  Its five possible types determine both the symmetry group
@@ -34,10 +34,12 @@ are displayed:
  =\Theta\!\left(\min\{q^{-1/2},n^{-1/2}\}\right),
  \qquad q=p^e.
 \]
-For fixed local dimension this gives the conditional \(n^{-1/2}\) scale
-along any existing stabilizer-AME family.  On generalized and extended
+The length restriction \(n\leq2(q^2-1)\) excludes unbounded fixed-dimension
+families.  On generalized and extended
 Reed--Solomon constructions, where \(n\leq q+1\), the scale is
-\(\Theta(q^{-1/2})\) over both prime and extension fields.  These are certified radii; their optimal order is open.
+\(\Theta(q^{-1/2})\) over both prime and extension fields.  Proposition~\ref{prop:spectral-chart-obstruction} shows that the dimension
+exponent is necessary when both the spectral-spread condition and collective
+coefficient are retained.  Sharp party-count dependence remains open.
 
 The robust transition-map result identifies the remaining bottleneck.
 Linear symplectic compatibility becomes exact for

@@ -178,6 +178,18 @@ and Weyl orthogonality give
 \begin{equation}
  |L(A)|=q^{2\max(|A|-m,0)}.                              \label{eq:atlas-support-size}
 \end{equation}
+The same count gives the familiar AME length restriction
+\cite[Theorem~10]{HuberGrassl2020}.  On a fixed \((m+2)\)-set, the number
+of labels with exactly that support is
+\begin{equation}
+ q^4-1-(m+2)(q^2-1)=(q^2-1)(q^2-m-1)\geq0,
+ \qquad m\leq q^2-1.
+ \label{eq:ame-length-bound}
+\end{equation}
+Indeed, its distinct \((m+1)\)-subsets contribute disjoint sets of
+\(q^2-1\) nonzero labels, and smaller supports contribute none.
+Thus \(n\leq2(q^2-1)\): an unbounded family must have \(q\to\infty\).
+
 M\"obius inversion is the stabilizer-state specialization of the
 quantum-MDS Shor--Laflamme distribution of Huber and Grassl
 \cite[Theorems~8 and 9]{HuberGrassl2020}; in particular the number of
@@ -422,14 +434,15 @@ carrier realizing their discrepancy, and it is found by one linear solve.
 For prime \(q\),
 the number of base candidates is
 \(|\mathrm{SL}_2(q)|=q(q^2-1)\).
-In particular, fixed-label recognition is polynomial in \(m\) for fixed
-local dimension \(q\).
 With classical cubic matrix arithmetic, a concrete bound is
 \[
  O\!\left((me)^3+
  |\operatorname{Sp}_{2e}(\F_p)|\,m^2e^3\right)
 \]
-\(\F_p\)-operations.
+\(\F_p\)-operations.  This is an arithmetic bound; bit costs also depend
+on field representation and arithmetic in \(\F_p\).  Fixed \(q\) bounds
+\(m\) by \eqref{eq:ame-length-bound}, so it does not describe an
+unbounded family of promised AME inputs.
 
 If the party relabelling is unknown, exhaustive search introduces at most a
 factor \((2m)!\).  For one state,
@@ -517,6 +530,16 @@ symplectically equivalent, and Corollary~\ref{cor:finite-recognition}
 lifts this to LU equivalence.  Taking \(G=H\) gives the centralizer
 statement.
 \end{proof}
+
+The final determinant condition has a direct finite decision procedure.
+First solve the homogeneous linear system for its subspace of \(M_2(\F_q)\).
+One can then test its defining equations on the \(q(q^2-1)\) matrices of
+\(\mathrm{SL}_2(q)\): for \(a\ne0\), choose \(a,b,c\) and set
+\(d=(1+bc)/a\); for \(a=0\), choose \(b\ne0,d\) and set \(c=-b^{-1}\).
+This gives the explicit arithmetic bound above, with four unknowns
+regardless of party count.  It is not a polynomial bound in \(\log q\).
+Faster determinant solving in the intertwiner space is a separate
+algorithmic refinement.
 
 \subsection{A four-qutrit example}
 \label{subsec:four-qutrit-example}

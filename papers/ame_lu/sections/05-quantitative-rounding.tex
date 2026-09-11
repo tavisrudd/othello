@@ -403,8 +403,7 @@ Before the exact-symmetry step, the recovered local Cliffords obey
  q^{-1/2}\min_{|z|=1}\lVert U_i-zK_i\rVert_{\mathrm{HS}}
  \leq8\varepsilon(U)                                 \tag{6.5}
 \]
-at every party.  For fixed \(q\), (6.3) has order \(n^{-1/2}\),
-conditional on existence of the stated AME states.
+at every party.
 \end{theorem}
 
 \begin{proof}
@@ -699,14 +698,59 @@ For the generalized and extended generalized Reed--Solomon construction
 \]
 over both prime and extension fields.  On a length-saturating subfamily
 \(n\asymp q\), this is \(\Theta(n^{-1/2})\).
-The fixed-\(q\), \(n^{-1/2}\) reading of the minimum is conditional on
-existence; it is not an AME-existence claim.
+The radius is a uniform two-parameter bound.  Equation~\eqref{eq:ame-length-bound}
+excludes unbounded fixed-\(q\) families; asymptotic interpretations require
+a specified relation between \(n\) and \(q\).
 
-The cleaning radius is the governing bound.  Its \(n^{-1/2}\) scale is a
-proved lower bound, not an optimality claim; no
-product-unitary family is known to saturate the collective frame-error
-estimate (6.6).
+The party-count dependence remains an open sharpness question.  The local-dimension
+exponent, however, is forced by the spectral-spread requirement together
+with the collective coefficient in the theorem.
 
+
+\begin{proposition}[Dimension obstruction for the spectral chart]
+\label{prop:spectral-chart-obstruction}
+Let \(\psi\) be a stabilizer \(\AME(n,q)\), \(n\geq4\), with
+\[
+ q>\frac{6(\pi+1)^2}{2-\sqrt2}.
+\]
+There is a one-party unitary perturbation \(U\) with
+\(\varepsilon(U)=\sqrt{6/q}\) for which no decomposition in
+Theorem~\ref{thm:cleaning-global-rounding} satisfies both its spectral-spread
+condition and its collective bound.  Consequently a radius retaining both
+conditions is at most \(\sqrt{6/q}\) on every such family.
+\end{proposition}
+
+\begin{proof}
+Put \(\omega=e^{2\pi i/3}\) and
+\(V=\operatorname{diag}(1,\ldots,1,\omega,\omega^2)\), and let
+\(U=V\otimes I^{\otimes(n-1)}\).  Maximal one-party mixing gives
+\[
+ \varepsilon(U)^2=2-2|\Tr V|/q=6/q.
+\]
+The eigenvalues \(1,\omega,\omega^2\) lie in no closed semicircle, even
+after a common rotation.  Thus no rephasing of \(V\) is the exponential
+of a Hermitian matrix of spectral spread at most \(\pi\).
+
+To exclude absorption into another exact symmetry, write
+\(\delta(A,B)=q^{-1/2}\min_{|z|=1}\|A-zB\|_{\mathrm{HS}}\).
+A proposed decomposition \(U=g\bigotimes_i e^{ih_i}\) with the collective
+bound would imply
+\[
+ \delta(U_i,g_i)\leq q^{-1/2}\|h_i\|_F\leq\pi\varepsilon(U),
+ \qquad \delta(g_i,I)\leq(\pi+1)\varepsilon(U).
+\]
+Here \(\delta(U_1,I)=\varepsilon(U)\) and the other local distances vanish.
+Exact rigidity makes every \(g_i\) Clifford.  The normalized Choi states
+of \(g_i\) and \(I\) are stabilizer states, so
+Lemma~\ref{lem:stabilizer-overlap-gap} gives
+\(\delta(g_i,I)\geq\sqrt{2-\sqrt2}\) unless \(g_i\) is scalar.
+The assumed bound on \(q\) forces all factors to be scalar, leaving the
+semicircle obstruction on the first party.
+\end{proof}
+
+This obstruction applies, for example, along four-party Reed--Solomon
+families as \(q\to\infty\).  It does not obstruct local Clifford rounding
+alone or a conclusion allowing a larger logarithm chart.
 
 \subsection{An observable sufficient condition}
 
@@ -748,3 +792,19 @@ for example a statistical confidence bound under the chosen sampling
 assumptions; a bare observed failure frequency is not such a bound.
 For arbitrary mixed preparations the tests still certify fidelity, but
 the Clifford conclusion requires the product-unitary promise.
+
+For an explicit sampling rule, repeat the random test independently on
+\(N\) copies of the same fixed preparation.  If every test passes, the
+one-sided confidence-\(1-\alpha\) bound is
+\[
+ \gamma_N=1-\alpha^{1/N},\qquad 0<\alpha<1.
+\]
+Indeed, a fixed rejection probability \(r>\gamma_N\) yields an all-pass
+record with probability \((1-r)^N<\alpha\).  With
+\(\gamma_*=\nu_*(R^2-R^4/4)\), the corollary therefore applies whenever
+\[
+ N>\frac{\log\alpha}{\log(1-\gamma_*)}.
+\]
+A sufficient count has order
+\(O(\max\{q,n\}\log(1/\alpha))\), up to integer rounding.
+This counts copies tested, not the cost of implementing each joint test.

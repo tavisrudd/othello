@@ -33,3 +33,7 @@ The future semantic roots are planned as
 `RelativeConicArcs.Gates.AMEStabilizerRigidityAxioms`. Creating them,
 refactoring mixed modules if needed, validating the recursive closure, and
 updating the public formal repository belong to the formal-split phase.
+
+## C1138 scope boundary
+
+The strengthened four-party conclusion in `thm:low-party-endomorphisms`, the spectral-chart obstruction `prop:spectral-chart-obstruction`, the length-bound support deduction, and the independent all-pass sampling prescription have no Lean coverage. Their proofs are in the manuscript. The existing formal artifacts are unchanged. The universal selected-family proof has only an expository expansion, with no change to its formal status.

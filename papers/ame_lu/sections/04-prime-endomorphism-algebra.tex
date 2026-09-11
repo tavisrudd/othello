@@ -160,15 +160,32 @@ Let \(q=p\).  For every stabilizer \(\AME(2m,q)\) state with
 \[
  \dim_{\F_q}\mathcal E_L\geq2.                         \tag{5.6}
 \]
-Equivalently, all fundamental four-cycle holonomies commute, so the scalar
+For four parties the stronger identification holds:
+\[
+ \mathcal E_L\cong M_2(\F_q),\qquad
+ \operatorname{Aut}_{\mathrm{tr}}(\psi)\cong\mathrm{SL}_2(q).
+\]
+In both cases all fundamental four-cycle holonomies commute, so the scalar
 row of Table~\ref{tab:endomorphism-types} cannot occur.  If \(q\geq5\),
 the state consequently has a noncentral compatible local symplectic
 automorphism.
 \end{theorem}
 
 \begin{proof}
-For \(m=2\) there is only one fundamental holonomy, whose centralizer has
-dimension at least two.
+For \(m=2\), invertible block row and column changes normalize the
+systematic matrix to \(N=\left(\begin{smallmatrix}I&I\\I&A\end{smallmatrix}\right)\).
+Transporting the alternating forms gives
+\[
+ N^{\mathsf T}\operatorname{diag}(r_0J,r_1J)N
+ =-\operatorname{diag}(s_0J,s_1J),
+ \qquad r_i,s_j\ne0.
+\]
+The off-diagonal block is \(r_0J+r_1JA=0\), hence
+\(A=-(r_0/r_1)I\).  The sole fundamental holonomy is scalar; its
+centralizer is all of \(M_2(\F_q)\).  Theorem~\ref{thm:local-endomorphism-algebra}
+identifies its determinant-one units with the compatible group.
+This explains the full \(\mathrm{SL}_2(3)\) symmetry of the four-qutrit
+example: in prime dimension the four-party identification is universal.
 
 Let \(m=3\).  Independent invertible changes of block row and column bases
 put the \(3\times3\) block matrix \(G\) in the form

@@ -121,13 +121,19 @@ The spectra of \(A,D\) are nonnegative integers, so spectral calculus gives
 \[
  \sum_{k=0}^d E_k=(d+1)I-\min\{A,(d+1)I\}.
 \]
-Summing the projection inequalities yields \(A+D\geq(d+1)I\).
-Restoring the target ray, every selected family of \(s\geq m\) tests
-therefore satisfies
+Summing the projection inequalities gives
 \[
+ \min\{A,(d+1)I\}+\min\{D,(d+1)I\}\geq(d+1)I.
+\]
+Each truncated operator is bounded above by its untruncated counterpart,
+so \(A+D\geq(d+1)I\); no joint functional calculus is used.
+Restoring the target ray, every selected family of \(s\geq m\) tests
+therefore satisfies the \emph{selected-family bound}
+\begin{equation}
  \sum_{S\text{ selected}}(I-\Pi_S)
        \geq(s-m+1)(I-|\psi\rangle\langle\psi|).
-\]
+ \label{eq:selected-family-verification}
+\end{equation}
 Order the weights, write \(w_0=0\), and expand the weighted sum as
 \[
  \sum_{i=1}^{2m}w_i(I-\Pi_i)
