@@ -10,12 +10,18 @@ Discovery companion:
 
 ## Current status
 
+**Next: C1135 queued (2026-09-10).** Verify and independently red-team the
+two-star marginal-verification packet, audit the literature, and deliver a
+concrete revision proposal with supported contribution claims and motivation.
+Task: `2026-09-10-c1135-ame-lu-two-star-verification-audit.md`.
+This is an audit/proposal gate before manuscript adoption.
+
 **C1134 completed (2026-09-10).** Paper I's referee corrections and both
 quantitative improvements are validated in the warning-free 40-page revision;
 clean standalone `55e70c4` has a byte-identical PDF and remains unpushed.
 Report: `2026-09-10-c1134-ame-lu-astra-referee-revision.md`.
-The optional Paper I frontier is universal-radius character control; no
-successor is allocated. C979 remains user-held open and untouched.
+Universal-radius character control remains an optional separate Paper I
+frontier. C979 remains user-held open and untouched.
 
 **C1089 completed (2026-09-07).**  Paper I now has a marginal-certification
 proposition (the `m` reductions on `B∪{j}` determine the state among all
