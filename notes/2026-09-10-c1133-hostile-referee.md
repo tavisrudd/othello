@@ -6,6 +6,10 @@ vanishing, Hodge conservation and the C/D deductions. This is a fresh
 journal-style assessment of the proof sources, not an adoption of an earlier
 acceptance decision.
 
+**External full-text reads in this report: one** — Iritani's ten-page Hodge
+note. Every other external source below, including the follow-up's Behrend
+source, was read only at the explicitly recorded primary passages.
+
 ## Summary and contribution
 
 The proposed argument selects whole primary factors of quantum multiplication
@@ -393,3 +397,174 @@ the AKMW hash is its successful cache lookup's recorded digest.
 presented as one complete proof with its geometric inputs visible.
 
 go C1133 cubic-threefolds consolidate the audited A–D proof and finish input review
+
+## Focused follow-up: removal of IK from the core A–D proof
+
+This follow-up was requested only after the baseline report was completed
+and committed as `e8ad70084`. It reviews Section 2 of
+`notes/2026-09-10-c1133-transport-input-reduction.md`, plus the stated
+finite-input reductions in Section 3. The baseline judgment above was made
+without this replacement argument.
+
+**Verdict: the P1 replacement is valid for the core A–D statements, with
+their existing quantifiers.** I found no hidden mixed-bulk or lattice gap in
+the replacement. The general projective-bundle operation theorem still
+requires its own comparison input; this review authorizes no deletion of
+IK from that stronger theorem's dependency record.
+
+### Endpoint computation and transverse continuation
+
+Behrend's product formula at (g,n)=(0,3) gives the small quantum tensor
+product on the full supermodule. Because the second factor is P1, its
+cohomology is even and its second homology contributes an independent
+Novikov direction; there is no additional mixed homology class or Koszul
+sign to suppress. The Euler and grading endomorphisms of the product are
+the sums of those of its factors. Thus the small z-connection, pairing and
+original lattice have the asserted tensor identification.
+
+After a splitting coefficient extension, the P1 eigenvalues give two
+scalar shifts. An equality between eigenvalues from opposite shifts would
+make its independent Novikov parameter algebraic over the X parameter
+field. Their resultant is therefore nonzero. Regular formal separation of
+the P1 connection produces two rank-one lattices with regular inverses.
+Tensoring with either adds scalar connection coefficients to an X block.
+Its rank-two image line and modification are unchanged, and the residue
+changes only by a scalar matrix. Its discriminant is unchanged.
+
+The endpoint hypothesis needed next is exactly the finite one already used
+in the baseline: the repeated even block is cyclic of rank two or three,
+with rank-one complements. Each product cluster is therefore eligible for
+the arbitrary-even-bulk cyclic persistence theorem. Every mixed class is
+included among its formal derivatives. One is extending a separated
+cluster over a formal germ of the product's own QDM; one is not asserting
+that restriction to the tensor-product locus is a faithful coefficient
+map. Rank-two residue rigidity then supplies its numerical value. This
+does not invoke the projective-bundle reconstruction theorem.
+
+At the initial product point each repeated cluster carries one copy of
+the odd H3 representation, periodized as before. Equivariant continuation
+on the fixed base preserves its multiplicities. The safe sum therefore
+doubles H3. This proves exactly the endpoint input needed for B and
+consequently C/D. Simple initial projective-space clusters remain rank one
+and give the required zero endpoint.
+
+### The full even potential on C times P1
+
+I checked the proposed potential geometrically, independently of the
+symbolic checker. For genus(C) at least one, a map from every component of
+a connected genus-zero nodal tree to C is constant, and the constants
+agree at the nodes. Thus the degree-(0,d) stable-map stack is
+C times the stable-map stack for P1. The constant C direction has
+deformation space T_C and no obstruction, because H1(O_tree)=0. Its
+virtual class consequently has the ordinary [C] factor.
+
+For even insertions 1,h,p,hp, a nonzero invariant must have exactly one
+total h factor. Two such factors vanish on C. If the sole h occurs in an
+h insertion, its P1 component is the unit and the primary string equation
+kills the positive-degree invariant. If it occurs in hp, all remaining
+nonunit insertions must be p. The P1 degree sum is then n, whereas its
+virtual dimension is 2d+n-2, forcing d=1. The degree-one invariant with
+three p insertions is one; the divisor equation gives the same value with
+any further p insertions and also recovers the one-point hp term.
+This proves the positive-degree term c q_f exp(b), with no higher powers
+of c. Degree-zero maps give precisely the classical cubic terms. Hence,
+up to irrelevant quadratic terms,
+
+    F = v²c/2 + vab + cQ,    Q = q_f exp(b).
+
+The horizontal Novikov parameter should remain an independent spectator
+in the intrinsic coefficient field: its positive-degree coefficients vanish,
+but it is not being specialized to zero or one. This minor clarification
+was sent to the author and has been added to the replacement note.
+
+The third derivatives give
+
+    h²=0,    h*p=hp,    p²=Q(1+ch).
+
+The Euler element after removing its unit scalar is
+κh+2p-c hp, with κ=2-2g. With p'=(1-ch/2)p, direct multiplication gives
+
+    (p')²=(1-ch)Q(1+ch)=Q,
+    U=κh+2p'.
+
+The projectors (1±p'/sqrt(Q))/2 have even rank two; on each block the
+centered operator is κh. In genus one this operator is identically zero
+on the entire even base. Thus the elliptic case is genuinely handled
+without applying cyclic persistence to a noncyclic zero matrix. There is
+no rank-three factor, and the rank-two selector requires nonzero N.
+
+For genus greater than one, κ is nonzero and each block is cyclic of rank
+two. At c=0 the tensor connection has the curve's zero residue
+discriminant. The already audited rank-two Lax argument continues this
+value through all even bulk coordinates. For C=P1, independent small
+Novikov variables give four simple eigenvalues, so all four continued
+clusters remain rank one. These arguments cover the full even base, which
+equals the Hodge-fixed even base for C times P1.
+
+### Ruled centers, dependency pruning, and limits
+
+A projective-line bundle over C is birational to C times P1 by generic
+triviality of its vector bundle. Surface factorization uses point centers
+only, whose selectors are zero by the blowup formula. This proves ruled
+surface vanishing without any projective-bundle QDM theorem and without
+using the dimension-four birational invariant being constructed.
+
+The remaining surface cases and weak-factorization argument are unchanged.
+Therefore the core proof needs only the blowup comparison, its Hodge
+refinement for B, the local persistence/residue lemmas, the product formula
+at the small endpoint, and the elementary ruled calculation above. The
+general IK comparison and its separate equivariance adaptation can be
+removed from **this proof of A–D**. No all-member, same-family,
+characteristic-zero or bounded-field-degree quantifier has been weakened.
+
+The stated finite-input pruning is also logically sound. The eight
+rational-control matrices do not prove positive rationality and need not
+be premises once their geometric rationality is imported. A needs nonzero
+H3 only for the four rank-three detections and nonzero discriminant for
+the five rank-two detections. B needs the entire H3 representation, not
+its numerical dimension. Exact labels and Hodge numbers support the finer
+signature corollaries but are unnecessary for A–D. Exhaustion, every-member
+quantum identification/deformation, and all-member positive rationality
+remain geometric inputs. This is input pruning, not their verification.
+
+### Follow-up read depth, checks and closeout
+
+The complete replacement note and 100-line Python checker were read. The
+checker was not rerun by this referee: its finite relations were checked
+by the independent hand derivation above. In particular, its input
+potential was not treated as an oracle. No new formal or computational
+claim is being promoted by the referee report.
+
+[Behrend, *The product formula for Gromov–Witten invariants*](https://arxiv.org/abs/alg-geom/9710014),
+arXiv:alg-geom/9710014v1, was read **partially at primary text**: extraction
+1–165 and 275–350, including formula (1), its super sign, and Theorem 1's
+virtual-class statement. The proof of that theorem was not read in full.
+Its PDF hash was recomputed as
+`73d708012d4157f176a264940b80490f697f51aefd6a3913fbd7ccbbc1e0ed7d`.
+The external full-text count remains **one**.
+
+The checker and certificate bytes read have SHA-256
+`d9081b7ac895d04b6c2dcadfb8698fb6ca56df0fca96eb99a12db1e4c82586a8`
+and `4c42a309f763f78fd064f178ee703e65dce4c6b8eb73231a7e14133b9e14d196`,
+respectively. The replacement note at the substantive Section 2/3 read,
+before its spectator clarification and closeout updates, had SHA-256
+`0bdd0bdd5f231f2c5a7a01347e1aebb2080541d95ddfac2135eabe1ac9a8b2cd`.
+The stale present-tense comparison hash flagged in the baseline has also
+been corrected by the author; I read the revised opening. The baseline
+hash table records the original reviewed snapshot and is intentionally
+retained as provenance.
+
+The EJ+TT pass identifies why the elliptic calculation works: the precise
+Euler weight minus one of hp cancels the mixed c-deformation after the
+nilpotent change p to p'. This is the necessary mechanism, not an
+accidental special-fiber eigenvalue check. The spectator clarification is
+the only requested local refinement. **Mystery ledger update:** the
+elliptic noncyclic case and all mixed-bulk/lattice gates of this replacement
+are settled by the written argument; no genuine new mystery remains.
+The independent-read limits on the geometric input package remain as in
+the baseline report.
+
+**Vibe check:** the narrower proof works; IK remains needed only for the
+stronger general projective-bundle statements if those are retained.
+
+go C1133 cubic-threefolds consolidate the reduced A–D proof with explicit inputs
