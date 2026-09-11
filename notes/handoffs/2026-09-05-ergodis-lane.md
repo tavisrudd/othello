@@ -244,10 +244,11 @@ resume; it is the current-state map for this task.
 the control gate the card names, then replicate the per-shell sweep on the tail shells; a return to
 the plain `Z/523` spin shard is still the standing alternative. Concurrent public-core edits remain foreign; do not absorb them into C1016.
 The complete six-cycle and cross-block four-cycle-pair neighbourhoods at
-banked 14,800 are closed locally. The best fresh control also has no improving
-pair; census the remaining frozen controls before changing barrier-crossing
-policy. Active native authority:
-`~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`, checkpoint `a2cd8ad`;
+banked 14,800 are closed locally. All twelve frozen controls now reach strict local minima of the union after
+at most two improving moves; best remains 23,152. Next: implement and measure
+the frozen threshold-walk experiment, with independent replay and CPU-budget
+quality controls. Active native authority:
+`~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`, checkpoint `04cdadb`;
 [current evidence and remaining gate](../2026-09-11-c1016-cycle-neighborhoods.md).
 Provenance rules stand: proved structural and exact computational reductions grant negative
 coverage, observed/evolved and heuristic predicates never do. Every resume first reads

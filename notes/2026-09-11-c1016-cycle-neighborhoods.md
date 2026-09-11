@@ -1,7 +1,7 @@
 # C1016: wider margin-neighbourhood diagnostics
 
 Native authority: `~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`,
-branch `c1016-full-2092-campaign`, checkpoint `a2cd8ad`.
+branch `c1016-full-2092-campaign`, checkpoint `04cdadb`.
 The scheduled native phase runs until 2026-09-11 13:33 UTC.
 
 The banked score-14,800 state has no improving or neutral six-cycle preserving
@@ -24,8 +24,11 @@ or neutral moves: minimum 18,784. Its generic grouped residual-vector kernel
 uses exact partial squared-norm rejection, measuring 1.86x single-core and
 1.66x twelve-core speedups against its full-coordinate reference. Full source
 replay and 743 release tests pass. The best of twelve fresh randomized controls
-(score 23,152) also has no improving pair (minimum 24,720). The other frozen
-controls are the next discriminator; `evidence/margin-pair-census.md` owns
+(score 23,152) also has no improving pair (minimum 24,720). All twelve frozen controls now have complete two-neighbourhood strict-descent
+closure: only three improve, by small amounts; the best remains 23,152.
+Sixteen complete censuses suffice; none reaches its round cap. A cold-calibrated
+threshold-acceptance experiment is frozen before measurement in the private
+`evidence/margin-threshold-walk-design.md`. `evidence/margin-pair-census.md` owns
 precise scopes, counter evidence, replay commands and the mystery ledger. The pair objective is nearest-vector cancellation in residual
 space, enabling general safe coordinate-envelope and partial-sum bounds.
 
