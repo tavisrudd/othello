@@ -243,6 +243,10 @@ resume; it is the current-state map for this task.
 **Next**: the card's open moves, in its order — widen or replace the margin-fibre move set against
 the control gate the card names, then replicate the per-shell sweep on the tail shells; a return to
 the plain `Z/523` spin shard is still the standing alternative. Concurrent public-core edits remain foreign; do not absorb them into C1016.
+The complete six-cycle neighbourhood at banked 14,800 is closed locally;
+cross-block four-cycle pairs are the next diagnostic. Active native authority:
+`~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`, checkpoint `dac717e`;
+[current evidence and remaining gate](../2026-09-11-c1016-cycle-neighborhoods.md).
 Provenance rules stand: proved structural and exact computational reductions grant negative
 coverage, observed/evolved and heuristic predicates never do. Every resume first reads
 `../ergodis-contrib/PERFORMANCE.md` and the shared playbook.
@@ -545,8 +549,9 @@ weight-six discovery sweep with direct-sum rejection, seeking a Pareto survivor 
 `ergodis-private` is a library-only Cargo workspace root with three task crates (`tasks/tools`,
 `tasks/gem-hunt`, `tasks/hadamard-2092`); no `src/bin` anywhere. Builds go to
 `~/.cache/ergodis/target/`, A/B baselines are retained executables via `retain-bin.sh`, and
-`cache-gc.sh` runs at task close. The C1016 cache under `~/.cache/ergodis/c1016/` is absent on this
-host, so cold end-to-end `g41` replays need it regenerated first.
+`cache-gc.sh` runs at task close. Historical C1016 `g41` cache inputs remain absent;
+`~/.cache/ergodis/c1016/six-cycle-ab/` now holds the current native census profiles.
+Cold end-to-end `g41` replays still require their old inputs regenerated first.
 
 ## Lane ownership
 

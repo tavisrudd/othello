@@ -165,6 +165,12 @@ the current instrument remains available and has not been tried since.
 
 ## Open moves, in the order they are worth doing
 
+Current diagnostic: the complete six-cycle neighbourhood at the banked
+14,800 state has no improving/neutral move (minimum delta +2,928).
+Cross-block four-cycle pairs are next; the sampled retained pools missed,
+but the complete 359,987,561-pair neighbourhood remains open.
+See [native cycle checkpoint](2026-09-11-c1016-cycle-neighborhoods.md).
+
 1. **Widen the fibre move set, or replace it.** The 2-by-2 alternating swap
    descends the margin fibre badly enough that it cannot decide the question it
    was built for, and the control run names the acceptance gate exactly: reach
@@ -173,10 +179,9 @@ the current instrument remains available and has not been tried since.
    element of the fibre's move group; compositions of two or three swaps sharing
    a row or a column are the next shell, and the closed-form Gram entry that
    made the single swap affordable extends to them unchanged. The cheapest
-   diagnostic first: at the deep state the whole swap neighbourhood offers no
-   improving move, and nothing says whether that is the move's coarseness — it
-   changes four positions at once and cannot express a single transfer — or
-   something structural about the state.
+   diagnostic first: at the deep state neither the swap nor the complete
+   six-cycle neighbourhood offers an improving move. Test coupled moves and
+   barrier-crossing schedules before drawing conclusions about the fibre.
 2. **Replicate the per-shell sweep on the tail.** Shells 37, 23, 2, 9 and 10
    were the best of the 39 at one fifteen-second run each, with the best
    reaching carrier 13,648 — below anything the rotating corpus produced. Run
