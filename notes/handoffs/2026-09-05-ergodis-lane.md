@@ -51,13 +51,17 @@ C1147 temporal scheduling. Common protocol, historical corrections and sources:
 C1143 has private native sparse/indexed search and source-inferred, independently
 checked unit-cost coordinate retractions. Full development model: 17,244→2,232
 faults; computational distance six agrees across two search implementations, with
-an independently replayed lifted witness. No independent exhaustive lower-bound
-certificate yet. Native three-worker radius-five exclusion is ~76 ms after ~52 ms
+an independently replayed lifted witness. Standalone exhaustive replay capsule
+now verifies radius-five exclusion, reduction and lifted weight-six witness;
+independent zero-allocation Rust replay takes ~68 ms at three workers (~234 ms
+including cold capsule/reduction checks). Python oracle agrees. This is replay,
+not a succinct/formally verified proof. Private
+`analysis/external-benchmarks/2026-09-11-exclusion-certification.md`. Native three-worker radius-five exclusion is ~76 ms after ~52 ms
 inference; CP-SAT remains unresolved at 30 s even on the same reduced model (initial
 encoding, not tuned SOTA). Existing dense provider is unchanged.
 Frozen shallow hold-out probe: cases 2–4 admit checked reductions; 5–7 retain the
 predeclared 200k-fault proposal-limit decline. No post-outcome tuning or full-distance
-claim. Next: lower-bound certification, declared deeper hold-out evaluation,
+claim. Next: matched proof-mode comparison and declared deeper hold-out evaluation,
 cost-aware provider/Evolve integration and matched published comparisons. Gurobi
 13.0.2 runner is validated but all three development formulations are rejected by
 the local restricted license; no Gurobi timing exists. An unrestricted license is
@@ -65,8 +69,8 @@ needed to run it. Private `analysis/external-benchmarks/2026-09-11-gurobi-circui
 SCIP 10.0.2: all nine development controls (full/filtered/projected × XOR/linear/both)
 remain unresolved at 30 s with measured three-worker concurrency. Private
 `analysis/external-benchmarks/2026-09-11-scip-circuit-comparison.md` records results
-and the proof-output comparison. Next certification gate: Ergodis exhaustive
-lower-bound certificates versus SCIP exact/VIPR, including original-source coverage,
+and the proof-output comparison. Next certification gate: measure the accepted Ergodis
+exhaustive replay capsule against SCIP exact/VIPR, including original-source coverage,
 proof bytes, completion and independent verification cost. Ordinary SCIP runs did
 not enable proof logging; checked reductions alone are not an exclusion proof.
 Report:
