@@ -9,6 +9,11 @@ coverage-preserving proof contracts. Private design and staged acceptance plan:
 `../../ergodis-private/analysis/interface-review/adr-parameterization-synthesis.md` and
 `../../ergodis-private/analysis/interface-review/parameterization-synthesis-plan.md`.
 Current supplied Hadamard families are not discoveries of those constructions.
+Shared native/WASM discovery now covers sparse polynomial embeddings, generic
+multi-factor array hypotheses and checked modular contradictions, with 8×8/16×16
+original-constraint witnesses. Frozen cross-domain tests expose narrow grammar
+coverage; adaptive refinement and order-140 construction discovery remain open.
+Current checkpoint: `2026-09-11-c1130-parameterization-checkpoint.md`.
 
 Initial contract: `2026-09-08-c1130-execution-contract-proposal.md`.
 Experimental interface/package loading is implemented; no production kernel migration.

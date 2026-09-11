@@ -44,6 +44,11 @@ the C985 optimization-facing paper.
 
 ### C1130 — full native/JS/WASM capability and workflow parity (in progress)
 
+Parameterization frontier: shared sparse embeddings, multi-factor array discovery,
+checked modular rejection and 8×8/16×16 browser witnesses are validated. Frozen
+holdouts show narrow coverage; order-140 structure remains supplied. Current map:
+`../2026-09-11-c1130-parameterization-checkpoint.md`.
+
 Current authority: `../2026-09-09-c1130-js-wasm-parity-review.md`; task requirements:
 `../2026-09-08-c1130-wasm-feature-completeness.md`. Private capability matrix and
 performance experiments: `ergodis-private/analysis/interface-review/`.
