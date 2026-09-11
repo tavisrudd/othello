@@ -4850,8 +4850,17 @@
       "last": 1135,
       "purpose": "Verify and red-team two-star AME verification packet; audit literature and propose motivated manuscript revisions",
       "sequence": 539
+    },
+    {
+      "count": 1,
+      "first": 1136,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 1136,
+      "purpose": "Extend C1135 to publication-priority audit with three citation graphs and broader database coverage",
+      "sequence": 540
     }
   ],
-  "next_id": 1136,
+  "next_id": 1137,
   "schema": "codex-task-id-allocations-v1"
 }
