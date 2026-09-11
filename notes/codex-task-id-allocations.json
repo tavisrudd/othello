@@ -4922,8 +4922,17 @@
       "last": 1147,
       "purpose": "Ordered external benchmark programme: BB circuit distance; held-out QLDPC distance; hypergraph decoding; multidimensional allocation; temporal scheduling",
       "sequence": 547
+    },
+    {
+      "count": 1,
+      "first": 1148,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1148,
+      "purpose": "Certificate interoperability: claim-preserving export and independent verification across VIPR, VeriPB, SAT proof formats and native certificate families",
+      "sequence": 548
     }
   ],
-  "next_id": 1148,
+  "next_id": 1149,
   "schema": "codex-task-id-allocations-v1"
 }
