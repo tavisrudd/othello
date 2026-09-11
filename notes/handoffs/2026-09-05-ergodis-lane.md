@@ -87,19 +87,9 @@ Independent minimum-cost recognition for XOR is now shared by both normal race
 arms; cheap shape/coordinate screens precede allocation, then the existing kernel
 uses the core flat-source constructor (`d7e938e`; private `d33579b`). Native/WASM certificates replay
 against original choices. Private report: `analysis/interface-review/2026-09-10-independent-fit-recognition.md`.
-Checked whole-domain table reuse and checked family substitution are live on 8770
-in both ordinary allocation arms (core `197dde3`, private `af5b5e5`; WASM `6fdb74c4f58fa…`).
-The compiler preserves original witness IDs and checks a source/domain cardinality
-bound plus a strict conditional coexistence obstruction before removing dominated
-families. Profile workloads retain 45/26/19 jobs; table work drops a further
-9.9%/0%/5.0%. The table hot loop is unchanged.
-Redundant direct-table reference arms are omitted automatically; explicit references
-remain test-only. Result rows separate table construction from cheap lookups.
-Private current report: `analysis/interface-review/2026-09-10-conditional-family-substitution.md`;
-decision: `adr-domain-family-substitution.md`. Larger profile inputs and source-only
-calibration: `2026-09-10-harder-profile-workloads.md`.
-Next: stronger checked option/representation reductions of remaining table work,
-external certificate serialization/replay, and measured admission cost; bounded batch readout remains useful. Do not preserve a
+Checked domain reuse, conditional family substitution, count/resource envelopes and bounded batch readout are live on 8770 in both ordinary allocation arms (core `1127126`, private `5774a94`; WASM `b68b3f256463…`). Source/domain checks preserve original witness IDs. Count/resource selection uses conservative source-derived update and workspace estimates; the existing budget kernel is the fallback. Kernel loops allocate nothing; cold JSON readout still allocates. Groups of eight reduce 625 ordinary readout calls to 79, with cancellation and reordered-probe coverage.
+Private current report: `analysis/interface-review/2026-09-10-count-axis-and-readout.md`; decision: `adr-count-resource-envelope-and-batched-readout.md`. Conditional substitution: `adr-domain-family-substitution.md`. Larger profile inputs: `2026-09-10-harder-profile-workloads.md`.
+Next: calibrated admission cost, sparse envelopes/active-state conversion, and external certificate serialization/replay. Do not preserve a
 default/Evolve capability gap to manufacture a race ranking. One preload-overlap
 manifest fetch failed in the regression harness; warmed-cache 18-race replay passed.
 Cause remains unconfirmed; no production loading fix is claimed. Shared-memory telemetry
