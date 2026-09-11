@@ -9,7 +9,7 @@ trails belong in the dated task reports and in the archive companion,
 **Date**: 2026-09-05
 **Mode**: intent-based.
 **Status**: ACTIVE. Split out of `complete-ports` on 2026-09-05. C1016 (order-2092 Hadamard
-reduction), C1061 (compiled dynamic decision engines / Tiger decoder), and C1062 (structural causal
+reduction), C1061 (compiled dynamic decision engines / TigerBlossom decoder), and C1062 (structural causal
 models as a context language) are in progress; C1062 is ready to close on Tavis's call. C1017 (core
 performance-contract remediation) and C985 (optimization-facing paper) are in progress. The
 benchmark, evolve-capability, tooling, and visualization tasks (C1031-C1033, C1040-C1048, C1052)
@@ -41,6 +41,16 @@ engine, its performance contract, its benchmark and evidence programme, its expl
 the C985 optimization-facing paper.
 
 ## Active frontiers
+
+### C1143–C1147 — external benchmark programme
+
+User-selected next order: C1143 BB circuit distance (active), C1144 held-out
+QLDPC distance, C1145 hypergraph decoding, C1146 multidimensional allocation,
+C1147 temporal scheduling. Common protocol, historical corrections and sources:
+`../2026-09-11-ergodis-external-benchmark-programme.md`.
+C1143 first gate: pin published circuit inputs, validate full-hyperedge/logical-label
+lowering independently, then bounded native smoke and matched external controls.
+Use **TigerBlossom** for the decoder; legacy paths retain their historical names.
 
 ### C1130 — full native/JS/WASM capability and workflow parity (in progress)
 
@@ -277,7 +287,7 @@ tree lints clean. One inherited item from C1062: the deferred-verification artif
 unverified marker. Report:
 [C1017 core remediation](../2026-08-30-c1017-ergodis-core-performance-contract-remediation.md).
 
-### C1061 — compiled dynamic decision engines and the Tiger decoder
+### C1061 — compiled dynamic decision engines and the TigerBlossom decoder
 
 **Certificate authority caveat:** C1097 demonstrates a sibling-forgery acceptance in the legacy
 generic root-only checker and audits the same gap in the specialized checker. These paths must
@@ -285,7 +295,7 @@ not supply independent evidence authority. C1098 removed the old API names and g
 benchmark consumers behind explicit legacy replay; see the reports below.
 
 Probes through C1068 are closed. The default arm is `LEVEL_ROUTED`; on stim-generated weighted
-circuit-level detector error models Tiger is ahead of PyMatching in 27 of 33 operating cells in
+circuit-level detector error models TigerBlossom is ahead of PyMatching in 27 of 33 operating cells in
 instructions and 30 in cycles, with zero weight and zero prediction disagreements on all 33. Log:
 [`2026-09-03-c1061-exploration-log.md`](../2026-09-03-c1061-exploration-log.md), one companion
 report per probe.
@@ -303,7 +313,7 @@ non-observable stabilizer component; and the latency tail beyond the ninety-nint
 **Waiting on Tavis**: routing the unspecialized graph path; the C1066 queue-discipline tradeoff
 (compiling clearing/scanning from the graph's largest edge weight returns about half of what C1065
 cost the published phenomenological grid and costs the weighted grid at most 0.4 per cent); and the
-harness's PyMatching working-set asymmetry, which runs in Tiger's favour in cycles.
+harness's PyMatching working-set asymmetry, which runs in TigerBlossom's favour in cycles.
 
 Surface-family numbers taken before 2026-09-04 are invalid — `RotatedSurfaceCode::new` had a
 distance-one defect — and repetition numbers are untouched. Census and traffic runs need
