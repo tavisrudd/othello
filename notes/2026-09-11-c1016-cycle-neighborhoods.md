@@ -36,3 +36,17 @@ The existing control gate remains open: recover approximately 14,800 from
 random points inside that known-containing fibre. No larger-neighbourhood
 descent has yet passed it. The detailed extra-juice/Tao mystery ledger is in
 the private census report.
+
+## Current unaccepted experiment
+
+The threshold-walk implementation is in the authority worktree but remains
+uncommitted pending the revised full workspace gate, retained-binary counter
+A/B and frozen-control quality comparison. Initial gate: 746 tests passed.
+The pending owned paths are `src/order6_margin_walk.rs`, `src/lib.rs`,
+`tasks/hadamard-2092/{Cargo.toml,src/main.rs,src/order6/mod.rs,src/order6/threshold_walk.rs}`,
+`Cargo.lock`, `tests/order6_margin_fibre_allocations.rs`,
+`scripts/{margin_cycle_ab.py,margin_walk_quality.py}`, and
+`evidence/margin-threshold-walk-design.md`. No performance or quality result is
+claimed yet. Red-team checks prompted private fields, explicit antipodal replay,
+calibration CPU timing and cooling-epoch/budget-overrun telemetry. The native
+kernel retains modulo and doubled-row instantiations for exact A/B comparison.
