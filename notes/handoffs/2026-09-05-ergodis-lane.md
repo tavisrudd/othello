@@ -48,14 +48,20 @@ User-selected next order: C1143 BB circuit distance (active), C1144 held-out
 QLDPC distance, C1145 hypergraph decoding, C1146 multidimensional allocation,
 C1147 temporal scheduling. Common protocol, historical corrections and sources:
 `../2026-09-11-ergodis-external-benchmark-programme.md`.
-C1143 has a private sparse native pilot for intact fault columns; the existing
-dense provider remains unchanged. Development filtered model: six-fault witness
-independently replayed, weight-five exclusion agrees with the existing dense
-algorithm; independent negative oracle currently reaches three. Full model has
-a verified six-fault witness, with lower-bound search still open. Next: retained
-terminal-residual A/B and deeper bounds before frozen holdout evaluation. Reports:
-`../2026-09-11-c1143-bb-circuit-input-gate.md` and private
-`analysis/external-benchmarks/2026-09-11-sparse-pilot.md`.
+C1143 has private native sparse/indexed search and source-inferred, independently
+checked unit-cost coordinate retractions. Full development model: 17,244→2,232
+faults; computational distance six agrees across two search implementations, with
+an independently replayed lifted witness. No independent exhaustive lower-bound
+certificate yet. Native three-worker radius-five exclusion is ~76 ms after ~52 ms
+inference; CP-SAT remains unresolved at 30 s even on the same reduced model (initial
+encoding, not tuned SOTA). Existing dense provider is unchanged.
+Frozen shallow hold-out probe: cases 2–4 admit checked reductions; 5–7 retain the
+predeclared 200k-fault proposal-limit decline. No post-outcome tuning or full-distance
+claim. Next: lower-bound certification, declared deeper hold-out evaluation,
+cost-aware provider/Evolve integration and matched published comparisons. Report:
+private `analysis/external-benchmarks/2026-09-11-coordinate-retraction.md`;
+policy/evidence under the same directory. Initial gate:
+`../2026-09-11-c1143-bb-circuit-input-gate.md`.
 Use **TigerBlossom** for the decoder; legacy paths retain their historical names.
 
 ### C1130 — full native/JS/WASM capability and workflow parity (in progress)
