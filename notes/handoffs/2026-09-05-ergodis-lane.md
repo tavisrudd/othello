@@ -87,9 +87,15 @@ Independent minimum-cost recognition for XOR is now shared by both normal race
 arms; cheap shape/coordinate screens precede allocation, then the existing kernel
 uses the core flat-source constructor (`d7e938e`; private `d33579b`). Native/WASM certificates replay
 against original choices. Private report: `analysis/interface-review/2026-09-10-independent-fit-recognition.md`.
-Next: separate lazy fit compilation/result materialization from remaining first-call
-cost, and amortize retained budget tables across query domains. Broader plan
-contracts and shared-memory telemetry remain open. Do not preserve a default/Evolve capability gap to manufacture a race ranking. WASM all-target Clippy's existing
+Checked whole-domain table reuse is now live on 8770 in both ordinary allocation arms
+(private `8bcd7a8`; WASM `cd205df61997…`). It retains original witnesses, rejects
+out-of-domain queries, and counts construction once inside solve time. Native and
+loaded-WASM generated oracles/all-grid ablations pass; no core hot loop changed.
+Report: `2026-09-10-allocation-domain-reuse.md`. The rendered 288-job page measured
+231 ms Evolve versus 328 ms ordinary (runner-only median 105/180 ms); do not conflate
+these boundaries. Next: bounded native batch readout to amortize individual JSON
+worker calls, then remaining first-fit materialization. Broader plan contracts and
+shared-memory telemetry remain open. Do not preserve a default/Evolve capability gap to manufacture a race ranking. WASM all-target Clippy's existing
 `bundle.rs` items-after-test-module finding remains; library Clippy/tests pass.
 Asset loading now uses revisioned immutable URLs, speculative post-paint JS/WASM
 cache fills and HTML-hidden empty results (`b65f0b3`). Warm source-switch races

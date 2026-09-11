@@ -21,8 +21,12 @@ must fit u32 before committing the exact witness. Cold source recognition is not
 a discovered theorem generation. General traversal remains an explicit labelled
 ablation, not a deliberately weaker default. Report:
 `analysis/interface-review/2026-09-10-independent-fit-recognition.md`.
-Whole-query-domain table reuse, first-fit compilation/materialization overhead,
-and a universal representation-switch contract remain open. The design document
+Source-bound whole-query-domain table reuse is implemented in the private native/WASM
+provider (`8bcd7a8`), using the unchanged core AllocationSurface. Both ordinary arms
+build once over checked maxima; per-query reconstruction remains an explicit ablation.
+Report: `analysis/interface-review/2026-09-10-allocation-domain-reuse.md`. Remaining:
+bounded batch readout to reduce JSON/worker/UI overhead, first-fit materialization,
+and a universal representation-switch contract. The design document
 inventories broader transfers and preservation, timing and performance gates.
 
 Conformance runner: private `analysis/js-wasm-tests/README.md`; use its
