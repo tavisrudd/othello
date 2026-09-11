@@ -333,4 +333,5 @@ back into this live registry.
 
 - **C1130 `[ergodis]` [IN PROGRESS]** — Full WASM feature parity across Ergodis with shared engine/contracts, real domain execution and mandatory native performance preservation → `notes/2026-09-08-c1130-wasm-feature-completeness.md`.
 
+- **C1141 `[cubic-threefolds]` [ACTIVE]** — sharpness novelty audit: database/access coverage, citation triangulation, prior-family identification and ledger/surface propagation → `notes/cubic-threefolds-tasks/c1141-sharpness-literature-audit.md`
 - **C1133 `[cubic-threefolds]` [ACTIVE]** — Audit the m=1 major-upgrade proof packet and complete literature coverage; solidify mathematics before author review of manuscript upgrades and theorem hierarchy → `notes/cubic-threefolds-tasks/c1133-m1-major-upgrade-audit.md`.
