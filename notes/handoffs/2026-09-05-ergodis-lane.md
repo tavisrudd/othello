@@ -58,7 +58,11 @@ encoding, not tuned SOTA). Existing dense provider is unchanged.
 Frozen shallow hold-out probe: cases 2–4 admit checked reductions; 5–7 retain the
 predeclared 200k-fault proposal-limit decline. No post-outcome tuning or full-distance
 claim. Next: lower-bound certification, declared deeper hold-out evaluation,
-cost-aware provider/Evolve integration and matched published comparisons. Report:
+cost-aware provider/Evolve integration and matched published comparisons. Gurobi
+13.0.2 runner is validated but all three development formulations are rejected by
+the local restricted license; no Gurobi timing exists. An unrestricted license is
+needed to run it. Private `analysis/external-benchmarks/2026-09-11-gurobi-circuit-comparison.md`.
+Report:
 private `analysis/external-benchmarks/2026-09-11-coordinate-retraction.md`;
 policy/evidence under the same directory. Initial gate:
 `../2026-09-11-c1143-bb-circuit-input-gate.md`.
