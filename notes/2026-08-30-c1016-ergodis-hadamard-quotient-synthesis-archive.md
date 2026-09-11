@@ -3255,3 +3255,16 @@ mechanism without importing its QT-only theorem assumptions.
 
 C1016 changes are committed only in the private monorepo; no public Ergodis
 core change, publication, export, or external synchronization is approved.
+
+
+## 2026-09-11 native experiment disposition
+
+The live card no longer calls the five-shell prior ranking the next experiment:
+the four-repetition, ten-shell pipeline completed and did not validate it.
+Sampled tabu also failed the known-containing-fibre development controls; it
+is retained as a private reproducible negative experiment. Current evidence:
+`2026-09-11-c1016-cycle-neighborhoods.md`; private reports
+`evidence/shell-replication-report.md` and `evidence/margin-sampled-tabu-report.md`.
+Historical g41 cache inputs are still absent, while current native experiment
+caches exist. Neither umbrella task nor either unrestricted existence question
+is closed.

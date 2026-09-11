@@ -1,7 +1,7 @@
 # C1016: wider margin-neighbourhood diagnostics
 
 Native authority: `~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`,
-branch `c1016-full-2092-campaign`, checkpoint `f81b4ba`.
+branch `c1016-full-2092-campaign`, checkpoint `49cc0df`.
 The scheduled native phase runs until 2026-09-11 13:33 UTC.
 
 The banked score-14,800 state has no improving or neutral six-cycle preserving
@@ -54,13 +54,48 @@ score enters the new policy. The randomized 14,800 recovery gate remains open.
 Full evidence, including the caught rejection-path regression, is in private
 `evidence/margin-walk-streams-report.md`.
 
-## Current experiment
+## Replicated shell selection
 
-Checkpoint `f81b4ba` freezes a replicated shell-selection experiment: the five
-previous leaders against five fixed control shells, four fresh seeds each,
-with equal two-stage wall budgets and CPU counters. Existing q174 and carrier
-kernels are unchanged. Ten short smoke cases and a separate witness replay pass.
-The full 40-case run is active; no quality result is claimed yet. Protocol and
-runner are private `evidence/shell-replication-design.md` and
-`scripts/shell_replicated_sweep.py`. This measures the specified two-stage
-pipeline, not intrinsic shell difficulty or a ranking of all 39 shells.
+The complete forty-case replication is committed at `27e2f4b`: five prior
+leaders and five fixed control shells, four fresh seeds each, equal two-stage
+wall budgets and CPU counters. All 960 stage-worker states independently replay.
+Prior leaders have mean carrier score 72.8 worse than controls; no concentration
+on those leaders is justified. Best fresh score is 14,176 on control shell 24.
+This is a different set of fibres and does not pass the 14,800 recovery gate.
+The sample is too small to prove shell equivalence. The observed correlation
+between selected q174 and later carrier minima is −0.000499; it does not
+validate q174 score as a downstream predictor or compare alternative states
+within a case. Protocol, exact data and
+scope are in private `evidence/shell-replication-report.md`.
+
+## Sampled selection and current gate
+
+Checkpoint `0c2e445` adds an explicit private sampled-tabu experiment with
+753 passing release tests and five evidence-integrity mutation controls.
+Independent completed-artifact replay checks all 192 best/final witnesses.
+Contiguous/modulo pricing time ratios are 0.373 single-worker and 0.375 with
+12 workers. The ordinary common-apply refactor and rejection-only control show
+no material observed regression. Ordinary/default selection remains unchanged.
+
+Quality is negative: sampled tabu improves 0/48 repeated worker runs, versus
+30/48 for unchanged full-neighbourhood tabu. Best remains 23,152 versus 22,736;
+sampled median final score is 47,336. Its 54,211 median accepted moves show a
+higher-travel regime than record acceptance, with no improvement. The sampled
+prototype has no restart/kick policy, so this does not isolate sampling from
+escape behavior. Private authority: `evidence/margin-sampled-tabu-report.md`.
+
+## ej / tt and remaining frontier
+
+The reusable progress is exact residual-vector arithmetic and cheaper pricing,
+not a successful new heuristic or a solved 2092 matrix. Faster random proposals,
+record travel and sampled best-selection all fail the known-containing fibre.
+A matched escape-policy comparison or an exact residual-candidate index is the
+next useful discriminator; never guide it with stored target signs. Retain the
+plain-prime route as an alternative. The kernel representation, policy quality
+and evidence-coverage questions remain separate. A concrete unimplemented
+exact box-bound index proposal and its stale-source/interaction/performance
+gates are in private `evidence/residual-candidate-index-plan.md`.
+
+Order 2092 and the approximately 14,800 randomized-fibre recovery gate are open.
+No heuristic miss grants infeasibility. Public core, WASM and live demo were not
+changed during this native phase. Umbrella C1016 remains active.

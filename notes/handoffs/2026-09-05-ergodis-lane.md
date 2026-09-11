@@ -240,17 +240,16 @@ with its append-only companion
 [archive](../2026-08-30-c1016-ergodis-hadamard-quotient-synthesis-archive.md). Read the card on
 resume; it is the current-state map for this task.
 
-**Next**: the card's open moves, in its order — widen or replace the margin-fibre move set against
-the control gate the card names, then replicate the per-shell sweep on the tail shells; a return to
-the plain `Z/523` spin shard is still the standing alternative. Concurrent public-core edits remain foreign; do not absorb them into C1016.
-The complete six-cycle and cross-block four-cycle-pair neighbourhoods at
-banked 14,800 are closed locally. All twelve frozen controls now reach strict local minima of the union after
-at most two improving moves; best remains 23,152. The measured threshold walk is faster per proposal but loses the CPU-budget
-quality comparison to unchanged tabu (22,736). Record travel also fails the fixed
-controls. Contiguous pricing is validated, including rejection-path counters.
-The frozen forty-case shell replication is running; inspect its result before
-choosing the next search arm. Active native authority:
-`~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`, checkpoint `f81b4ba`;
+**Next**: the card's open moves: discriminate candidate selection from escape
+policy against the known-containing-fibre gate, or return to the plain `Z/523`
+spin shard. Concurrent public-core edits remain foreign.
+Complete six-cycle and cross-block four-cycle-pair neighbourhoods are closed
+locally at banked 14,800. Combined strict descent on twelve frozen controls
+bottoms out at 23,152. Faster threshold, record and sampled-tabu policies all
+lose to unchanged full-neighbourhood tabu at matched CPU budgets. The forty-case
+shell replication does not validate the prior five-leader ranking. No negative
+coverage follows from these misses. Active native authority:
+`~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`, checkpoint `49cc0df`;
 [current evidence and remaining gate](../2026-09-11-c1016-cycle-neighborhoods.md).
 Provenance rules stand: proved structural and exact computational reductions grant negative
 coverage, observed/evolved and heuristic predicates never do. Every resume first reads

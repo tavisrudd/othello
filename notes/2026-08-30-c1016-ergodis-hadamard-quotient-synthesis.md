@@ -169,10 +169,10 @@ Current diagnostic: the complete six-cycle and cross-block four-cycle-pair
 neighbourhoods at the banked 14,800 state have no improving or neutral move.
 On twelve randomized-fibre control states, complete combined strict descent
 still bottoms out at 23,152. Source-calibrated random threshold and record
-travel both lose to existing tabu at matched CPU budgets. The approximately
-14,800 randomized-fibre recovery gate remains open. Replicated shell selection
-is the next independent discriminator; no negative conclusion about the fibre
-follows from these heuristic misses.
+travel and sampled tabu lose to existing full-neighbourhood tabu at matched CPU
+budgets. The approximately 14,800 randomized-fibre recovery gate remains open.
+The forty-case shell replication does not validate the prior five-leader ranking.
+No negative conclusion about the fibre follows from these heuristic misses.
 See [native cycle checkpoint](2026-09-11-c1016-cycle-neighborhoods.md).
 
 1. **Widen the fibre move set, or replace it.** The 2-by-2 alternating swap
@@ -186,14 +186,12 @@ See [native cycle checkpoint](2026-09-11-c1016-cycle-neighborhoods.md).
    diagnostic first: at the deep state neither the swap nor the complete
    six-cycle neighbourhood offers an improving move. Test coupled moves and
    barrier-crossing schedules before drawing conclusions about the fibre.
-2. **Replicate the per-shell sweep on the tail.** Shells 37, 23, 2, 9 and 10
-   were the best of the 39 at one fifteen-second run each, with the best
-   reaching carrier 13,648 — below anything the rotating corpus produced. Run
-   enough rounds per shell to lift the between-shell variance above the
-   between-seed variance; if it survives, concentrate the budget on the
-   survivors instead of rotating all 39. Nothing cheap screens a shell today:
-   its order-six margin count predicts the carrier depth reached from it not at
-   all (r = 0.01) and its `q174` depth only weakly (r = 0.32).
+2. **Separate candidate selection from escape policy.** Sampled tabu with 4,096
+   attempted rectangles per step improves none of 48 repeated development runs;
+   full-neighbourhood tabu improves 30. The sampled prototype has no restart/kick
+   policy, so a matched-policy comparison or an exact residual-candidate index
+   is needed before assigning the failure to sampling itself. Do not tune to
+   stored coordinates of the known 14,800 witness.
 3. **Return to the plain `Z/523` spin shard** with the full-neighbourhood step,
    as the standing alternative to the bordered ladder.
 4. **The multiplier remainder**, if the unrestricted arm stalls: invariance
@@ -222,6 +220,7 @@ All paths are relative to `notes/`.
 | The character-domain move set, its census, and corpus width         | `2026-09-05-c1016-character-domain-move-set-and-corpus-width.md` |
 | The exact `q18` shell and its unobstructed 18-by-29 margin lift      | `2026-09-05-c1016-exact-q18-and-the-margin-lift.md`             |
 | The margin-fibre descent, its controls, and the swap's failure       | `2026-09-05-c1016-margin-fibre-descent.md`                     |
+| September 11 native cycle, pricing, policy and replicated-shell evidence | `2026-09-11-c1016-cycle-neighborhoods.md` |
 | Zero-cost witness handoff shared with C985                          | `2026-08-31-c985-c1016-zero-cost-witness-handoff.md`           |
 
 ## Workspace and replay
@@ -236,8 +235,9 @@ anywhere. Every crate builds into the one shared out-of-tree target directory
 per-A/B target directory and never keep one as a baseline. A baseline is a
 retained executable produced by `scripts/retain-bin.sh` and recorded in
 `~/.cache/ergodis/bin/MANIFEST.tsv`. Run `scripts/cache-gc.sh` at task close.
-The C1016 cache under `~/.cache/ergodis/c1016/` is absent on this host, so a
-cold end-to-end `g41` replay needs it regenerated first.
+Current native experiment caches exist under `~/.cache/ergodis/c1016/`. The
+historical `g41` inputs remain absent, so its cold end-to-end replay needs those
+specific inputs regenerated first.
 
 The acceptance gate for a coherent change:
 
@@ -267,7 +267,9 @@ reduction program, in the archive. What is open:
 - **Whether shells differ at all.** The best-to-worst spread across the 39
   shells is the same size as the seed-to-seed spread on a fixed corpus, and
   nothing the campaign records about a shell predicts the depth reached from
-  it. Gated on the replicated sweep in open move 2.
+  it. Four fresh repetitions of five prior leaders and five controls do not
+  validate the old ranking; small shell effects and the other 29 shells remain
+  unmeasured. See the private shell-replication report.
 - **Whether a descent restricted to the margin fibre reaches the unrestricted
   depth.** Still open, and now open for a sharper reason: the 2-by-2 alternating
   swap cannot descend a margin fibre whose floor is known, so the restriction
