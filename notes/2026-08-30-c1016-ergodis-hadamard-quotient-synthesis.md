@@ -186,15 +186,16 @@ See [native cycle checkpoint](2026-09-11-c1016-cycle-neighborhoods.md).
    diagnostic first: at the deep state neither the swap nor the complete
    six-cycle neighbourhood offers an improving move. Test coupled moves and
    barrier-crossing schedules before drawing conclusions about the fibre.
-2. **Repair kick-best retention, then profile exact selection.** The frozen
-   matched comparison is complete: with kicks disabled and tenure support 6–12,
-   full-neighbourhood tabu improves 14/48 repeated development runs versus 0/48
-   sampled. These confounds alone do not explain the deficit. Existing kicks
-   can lose intermediate best states; repair that with an independent trajectory
-   regression and native performance gates before further escape comparisons.
-   Then measure scan versus candidate-index refresh costs. Do not tune to stored
-   coordinates of the known 14,800 witness. See
-   [matched escape diagnosis](2026-09-11-c1016-matched-escape.md).
+2. **Finish retention repairs, then optimize measured candidate costs.**
+   Margin-fibre kick-best retention is repaired and validated (756 tests,
+   624 replayed witnesses; private checkpoint `15bc0d3`). The related audit
+   found the same unretained-kick pattern in carrier, phase-two and column-margin
+   tabu. Repair those paths with trajectory regressions and counter gates before
+   more quality comparisons. Profiles put about 95% of cycles in candidate
+   selection; investigate temporary scoring-array traffic and repeated Gram
+   evaluations before adding a residual index. The matched no-kick comparison
+   remains full 14/48 improved versus sampled 0/48. No witness-coordinate tuning.
+   See [retention repair and measured frontier](2026-09-11-c1016-kick-retention.md).
 3. **Return to the plain `Z/523` spin shard** with the full-neighbourhood step,
    as the standing alternative to the bordered ladder.
 4. **The multiplier remainder**, if the unrestricted arm stalls: invariance

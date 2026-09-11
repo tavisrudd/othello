@@ -3272,3 +3272,7 @@ is closed.
 ## 2026-09-11: matched escape comparison
 
 Private checkpoint `b417e8d` closes the planned kick/tenure confound experiment. Full no-kick tenure-6–12 search improves 14/48 repeated development runs; sampled improves 0/48. All 384 witnesses independently replay. Existing kick-best retention defect is the next correctness priority, not fixed in the frozen comparison. See `2026-09-11-c1016-matched-escape.md` and authority `evidence/margin-escape-report.md`.
+
+## 2026-09-11: kick retention repaired and measured
+
+Private checkpoint `15bc0d3` validates the margin-fibre repair: 756 release tests, 624 independently replayed witnesses and seven artifact mutation checks. One/twelve-worker cycles/step rose 0.2–0.4%, also on the no-kick control; no speedup claim. Related carrier, phase-two and column-margin paths still need the same correctness invariant. Profiles locate candidate selection and temporary scoring-array traffic as later optimization leads. See `2026-09-11-c1016-kick-retention.md`.
