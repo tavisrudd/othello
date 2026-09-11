@@ -1,7 +1,9 @@
 # C1133 — A/B integration plan and architectural alternatives
 
 **Lane:** `cubic-threefolds`. **Date:** 2026-09-10.
-**Status:** draft for a fresh editorial referee. Planning only; no manuscript
+**Status:** plan and fresh editorial referee feedback complete. The referee
+recommends P with revisions; this version incorporates responses, not a
+second independent acceptance of the revised text. Planning only; no manuscript
 reorganization, new theorem promotion, Lean operation or export is authorized
 by this document. The user requested a plan and referee feedback on alternatives.
 
@@ -16,6 +18,9 @@ transport properties. A says rationality is unchanged by one stabilization
 for every smooth complex Picard-rank-one Fano threefold (seventeen families).
 B says that for X,Y in the nine detected families, birationality of X×P¹
 and Y×P¹ implies H³(X,Q)≅H³(Y,Q) as rational Hodge structures.
+Identify those families in the introduction itself: index two, degrees
+1,2,3; and index one, genera 2,3,4,5,6,8. The B statement must not depend
+on an unexplained phrase “detected families” or a table twenty pages later.
 Do not silently enlarge B to all seventeen families, integral cohomology,
 polarized identification or cancellation for every cubic.
 
@@ -49,7 +54,10 @@ the Hodge branch requires additional fixed-base/full-fiber work.
 
     equivariant full-fiber transport on fixed bulk base
           + safe whole-primary selection + endpoint H³ recovery → B
-                                                                → C and D
+
+    B + rational generic Torelli → C
+    B + arithmetic intermediate Jacobian + bounded-degree isogeny theorem
+      + finite kernels + polarization finiteness + cubic Torelli → D
 
 This is a conceptual dependency sketch, not a statement that the full-even
 and Hodge-fixed generic decompositions are identical for arbitrary varieties.
@@ -70,6 +78,13 @@ to omit a necessary proof. Choose a target only after assembling the prose.
 | Part II / 6. Hodge conservation | State B and new obligations; fixed bulk base/full fiber distinction; equivariance, selection, cancellation; complete proof of B | 4–6 |
 | 7. Torelli and arithmetic consequences | State C/D with exact independent scope and give their short deductions; remove from body if they expand disproportionately | 2–3 |
 | Technical appendices | Full coefficient realizations; detailed local gauges and all-bulk continuation; finite provenance and exceptional model bridges | provisionally 8–12 |
+
+These budgets total **21–29 body pages and 8–12 technical appendix pages**,
+before references or retained legacy extensions. They are not a promise of
+a short paper. Record body, appendices, references and optional legacy
+material separately in the first assembled PDF; the total governs the
+packaging decision. Do not hide growth by moving substantive contributions
+to appendices or excluding their pages from the comparison.
 
 Do not repeat an introduction at every level. Section 1 explains the idea;
 the reading map identifies safe first-pass omissions; section openings state
@@ -97,7 +112,20 @@ the alternative architectures in §6 rather than compressing crucial proofs.
   small tensor identification alone does not prove the generic assertion.
 - In B, the fixed base retains the full cohomology fiber; direct fixed-base
   faithfulness, equivariance and rational cancellation have exact statements
-  in the body and proofs or explicit complete proof pointers.
+  and their essential proofs in the body. In particular, show whole-primary
+  selection, equality of twice the endpoint H³ classes, cancellation,
+  pure-weight recovery and descent to Q there. Appendices may carry longer
+  coefficient constructions; they do not substitute for B's reasoning.
+
+Section 5 must prove the additional parity selector's operation law and
+surface vanishing after introducing it. This is a separate finite-dimensional
+argument; the preceding even-fiber rank-two construction does not establish
+it automatically. Part I therefore moves from the even connection to the
+full supermodule over the even bulk base at exactly this point, without
+introducing a Hodge-group action. State that change explicitly. For the
+dangerous even-rank-three surface factor, explain why b₂=1 forces the odd
+fiber to vanish. The ruled-product case and blowup operation must cover
+this selector as well as the earlier rank-two count.
 
 ### Details that can move to appendices
 
@@ -152,6 +180,12 @@ to correctness. No result depends on a reader's accepting an assumption box.
 | R: numerical paper through A; separate B–D paper | Clean audience separation and short first paper | Splits the conceptual contribution; repeats common setup; companion must stand independently | If B's additional construction dominates the numerical paper or requires extensive independent development |
 | S: cubic/A main text; B's statement in introduction, full proof in appendix | Short main narrative while retaining all results in one object | Hides a principal contribution; may make B look insufficiently integrated or inspected | Only if B's additional argument is mostly technical and genuinely short conceptually |
 
+**Referee's additional option P′:** retain P with C in the body and D in a
+short application appendix. If arithmetic alone causes an overrun, this is
+the first adjustment to test before separating B. D keeps a precise
+discoverable statement in the consequences section and a complete proof in
+that appendix; its independent arithmetic inputs remain explicit.
+
 The referee should recommend an architecture, identify conditions that would
 reverse that recommendation, and propose a better alternative if appropriate.
 No venue prediction or prior favorable mathematical review should decide
@@ -167,6 +201,10 @@ certification of the underlying new geometric results.
 2. Draft the new introduction, theorem hierarchy and section openings first.
    A statement-only cold reader must recover exact scopes, the relation of
    the cubic theorem to A, independence of A from B, and B→C/D.
+   Before moving existing manuscript files, assemble a complete prototype
+   of B's essential body proof in a working note. This makes the P/R decision
+   concrete early, rather than discovering the need to split after a large
+   reorganization. The prototype is a drafting test, not an extra theorem.
 3. Consolidate the numerical proof and P¹ replacement. Remove only core IK
    dependencies actually replaced; any retained general bundle theorem
    keeps its own dependency. Prove the geometric instantiation of every
@@ -175,7 +213,11 @@ certification of the underlying new geometric results.
    coverage. The eight rational controls use geometric rationality, not
    inference from vanishing quantum signatures.
 5. Integrate B, explicitly adding the full-fiber fixed-base arguments.
-   Measure duplication and the new material before locking P versus R.
+   Confirm the prototype's measured duplication and new material before
+   locking P versus R.
+   A draft requiring more than roughly 6–8 genuinely additional body pages,
+   or substantial repeated setup, triggers review of R. This is a discussion
+   threshold, not a page cap or automatic instruction to split.
 6. Place C/D only after B; relocate optional additive, spectral, motive and
    pencil branches by explicit scope/ownership disposition, not silent
    deletion. Keep conditional companions out of the headline dependency path.
@@ -188,13 +230,45 @@ certification of the underlying new geometric results.
    pointers. Only then decide submission packaging and any synchronization.
 
 **Planning completion:** referee report obtained, material objections
-resolved in the plan, implementation map available, no manuscript mutation.
+addressed in the revised plan, implementation map available, no manuscript mutation.
 **Integration completion:** assembled paper passes the tests above. The
 plan's approval is not the assembled paper's final referee acceptance.
 
 ## 8. EJ + TT / Mystery ledger
 
-Pending the plan referee. The substantive open editorial question is whether
-B's additional machinery is compact enough to make P better than R; the
-assembly/duplication measurement in step 5 is the explicit decision gate.
-No mathematical mystery is created by choosing an exposition order.
+The complete cold report is `2026-09-10-c1133-ab-plan-referee.md`, commit
+`3ec4ac1b2`, reviewing the frozen draft `dcaf82257`. It favors P, with R as
+the fallback, Q requiring positive evidence of a shorter master proof, and
+S the least attractive default. It adds P′ above. No external sources or
+prior referee reports were read by this editorial referee; no theorem
+certification or venue verdict was attempted.
+
+| Referee objection | Response in this plan / migration map |
+|---|---|
+| Rank-three selector introduced after blanket vanishing | §4 now requires its own operation and surface proof at §5, and states the change to full supermodule explicitly |
+| B's body proof could disappear into appendices | §4 specifies the complete conceptual chain that stays in the body, through weight recovery and rational descent |
+| B→C/D conceals imported premises | §2 diagram now lists rational Torelli and the independent arithmetic inputs |
+| Total length and retained results undercounted | §3 reports 29–41 planned pages before references/legacy; migration map assigns every current section and named application |
+| Nine-family membership unexplained | §1 gives the exact family list for use before B |
+| Arithmetic might force unnecessary split | P′ moves D's proof before considering removal of B |
+| Need evidence before locking architecture | Step 2 adds a complete B body prototype before manuscript file moves |
+
+The EJ + TT pass exposed two cheap further improvements. Use one faithful-map
+lemma with explicit hypotheses and check them separately on each base;
+reuse proof logic without conflating numerical and Hodge-fixed decompositions.
+Measure three reader-facing quantities: pages to the completed cubic proof,
+pages added exclusively for B, and total pages including references and
+appendices. Count substantive repetitions separately. These measurements
+test the architecture's purpose better than a single total-page target.
+
+The implementation inventory is `2026-09-10-c1133-ab-migration-map.md`.
+It preserves the general threefold/motivic claims with their actual IK
+dependencies in optional material, distinguishes the CH₀ bundle formula,
+and separates the rank-three lattice limitation from A's parity argument.
+This resolves the statement-disposition gap at the planning level; final
+packaging can change only with an explicit updated disposition.
+
+**Mystery ledger:** no mathematical mystery is created by the exposition
+choice. The remaining editorial uncertainty is measured B length and
+duplication; the early prototype and assembled-PDF gate own it. The plan
+referee has not reread this revised plan or a newly assembled manuscript.

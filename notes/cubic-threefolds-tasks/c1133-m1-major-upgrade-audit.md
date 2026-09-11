@@ -39,11 +39,19 @@ dimensions and residue labels support optional finer signatures. A remains
 numerical, B supplies Hodge transport, C/D reuse B; D's fourth-power route
 is optional. Stronger general-bundle statements still require IK.
 
-**Next, author's integration question:**
-`notes/2026-09-10-c1133-integration-outline.md` proposes retaining the
-unconditional cubic headline and a short numerical main proof, complete
-technical appendices, a compact A section and a B–D Hodge companion.
-This is an editorial proposal, not an enacted manuscript reorganization.
+**Integration plan and fresh referee complete:**
+`notes/2026-09-10-c1133-ab-integration-plan.md` proposes one paper with
+the unchanged cubic headline, A completing the numerical part and B's
+essential proof completing the Hodge part. The cold editorial report
+`notes/2026-09-10-c1133-ab-plan-referee.md` favors this with explicit
+parity proofs, B's conceptual steps in the body and full length accounting;
+the plan incorporates those responses. C stays a short application; D's
+proof may move to an appendix before splitting B into a companion.
+`notes/2026-09-10-c1133-ab-migration-map.md` assigns current material and
+preserves general IK dependencies on retained legacy results. Next: draft
+B's central proof before file moves and measure additional exposition and
+duplication. A companion is a fallback if that draft warrants it.
+This is a reviewed editorial direction, not an enacted reorganization.
 Consolidation and the separate all-member geometric read boundaries remain;
 no manuscript or formal-coverage promotion is asserted. Pencil claims stay
 conditional. Collaborator discussion is parked.

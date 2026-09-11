@@ -2,6 +2,10 @@
 
 **Lane:** `cubic-threefolds`. **Date:** 2026-09-10.
 **Status:** concrete editorial proposal, not an enacted manuscript reorganization.
+**Superseded architecture:** the author's subsequent A/B discussion and fresh
+plan referee lead to the two-part single-paper proposal in
+`2026-09-10-c1133-ab-integration-plan.md`, with a measured companion fallback.
+The split recommendation below records the earlier option, not the current plan.
 The author asks how to retain the unconditional current headline while
 integrating the new proof material accessibly.
 

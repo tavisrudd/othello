@@ -61,10 +61,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   elliptic cases are proved. Nine quantum matrices suffice; exact signatures
   remain optional. General-bundle statements retain IK. All-member geometric
   inputs keep their separate read boundaries; no blanket paper acceptance.
-  Next: author's accessible integration proposal in
-  `../2026-09-10-c1133-integration-outline.md`: unchanged unconditional
-  cubic headline, short numerical proof, complete technical appendices,
-  compact A section and B–D Hodge companion. Architecture not enacted;
+  Reviewed integration plan: `../2026-09-10-c1133-ab-integration-plan.md`.
+  Fresh editorial referee favors one two-part paper: cubic headline,
+  A completing the numerical part, B's essential proof in the Hodge part.
+  `../2026-09-10-c1133-ab-plan-referee.md`; objections addressed in plan.
+  C remains brief; D can move to an appendix before considering a B companion.
+  Current-material inventory: `../2026-09-10-c1133-ab-migration-map.md`.
+  Next: prototype B's body proof before file moves; measure added exposition,
+  duplication and whole-paper length. Companion is fallback. No reorganization;
   no manuscript/formal promotion. Pencil claims remain conditional.
   Collaborator discussion stays parked.
   Prior guarded formal checkpoint: **371 public terminals, 133 machinery,
