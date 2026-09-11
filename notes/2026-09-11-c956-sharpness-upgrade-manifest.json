@@ -1,0 +1,50 @@
+{
+  "scope": "Private audit artifacts and pinned local theorem/baseline inputs; no full formalization",
+  "files": [
+    {
+      "path": "notes/2026-09-11-c956-sharpness-upgrade-input.md",
+      "bytes": 132833,
+      "sha256": "1a94740f634a6ef4495fa8d1b02ee09c36855698615c10c19576de25f55f8820"
+    },
+    {
+      "path": "notes/2026-09-11-c956-sharpness-upgrade-checks.py",
+      "bytes": 30960,
+      "sha256": "58f40b8258ad316ab1d11ca3d68095deab12324b2dbcf64b882d27c2489f0bc6"
+    },
+    {
+      "path": "notes/2026-09-11-c956-sharpness-upgrade-checks.json",
+      "bytes": 25482,
+      "sha256": "dcabce49653f38882052f71d88dce087151f3c73f698f08a18480efc01e050bb"
+    },
+    {
+      "path": "notes/2026-09-11-c956-sharpness-search-log.json",
+      "bytes": 89282,
+      "sha256": "d8992bae0cd501093e9f6ef8f6cd22f4e6609afca52e0a8add68d416794b0782"
+    },
+    {
+      "path": "notes/2026-09-11-c956-sharpness-surface-referee.md",
+      "bytes": 18304,
+      "sha256": "6f95e612a999dd7e5bbbc522fc05b8317aa84fe3ad65a32b07a4c6d659024904"
+    },
+    {
+      "path": "notes/2026-09-11-c956-sharpness-arithmetic-referee.md",
+      "bytes": 20019,
+      "sha256": "f97f770a8805ab27dfb70d7200df6042abab4853da1f80f3e47c9326beb113eb"
+    },
+    {
+      "path": "notes/2026-09-11-c956-sharpness-upgrade-audit.md",
+      "bytes": 18457,
+      "sha256": "e3827417edfbde58dd00a623bd703c99733f7d89514754e8c1330f1662247a23"
+    },
+    {
+      "path": "papers/cubic-stabilization-irrationality/cubic_stabilization_irrationality.tex",
+      "bytes": 65937,
+      "sha256": "ec0509629e3978b5f728dcfc8b00563d87b036c43723a026e68a54197dba7274"
+    },
+    {
+      "path": "papers/cubic-stabilization-m1/sections/01-introduction.tex",
+      "bytes": 9793,
+      "sha256": "9e200b5f425159d34ebf74ed053147c7dc7715995161aebd8de8591a321bd3c2"
+    }
+  ]
+}

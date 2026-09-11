@@ -4,11 +4,16 @@
 
 **Status:** active by author instruction; referee-accepted release candidate
 
-**Latest review (2026-09-08):** the author-requested fresh Astra full-paper
-cold review with the revision diff recommends acceptance after minor revision.
-The accepted fixes received targeted follow-up and both authority gates pass;
-joint report: `../2026-09-08-cubic-post-upgrade-cold-read.md`.
-This updates the review state below; the task remains open by author instruction.
+**Latest review (2026-09-11):** the supplied sharpness upgrade packet received
+independent cold surface and arithmetic reviews plus a targeted source audit.
+No fatal defect was demonstrated; the packet checker and existing authority
+gate pass. Integration has not begun. First repair the nonsplit evaluation
+wording, new-family Picard bridge, field/S-unit domains, and precise companion
+and reduction citations. Bounded topical search is not a priority verdict.
+Report: `../2026-09-11-c956-sharpness-upgrade-audit.md`.
+The earlier accepted paper review remains in
+`../2026-09-08-cubic-post-upgrade-cold-read.md`; it does not cover this packet.
+The task remains open by author instruction.
 
 **Next exposition pass:** after the mathematical upgrades, audit terminology
 and symbols with C978 for standard specialist usage, unnecessary coined labels,
