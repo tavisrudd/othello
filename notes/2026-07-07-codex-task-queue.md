@@ -29,7 +29,6 @@ ordering and detail.
 
 ### `ame-lu`
 
-- **C1136 `[ame-lu]` [RUNNING]** — Extend C1135 to publication-priority audit with identifier-pinned citation graphs, broader database searches and an evidence-qualified novelty ledger → `notes/2026-09-10-c1136-ame-lu-priority-audit.md`.
 
 
 Source material for C774--C777 is the external Fable session note

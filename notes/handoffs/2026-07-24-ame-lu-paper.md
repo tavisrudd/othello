@@ -10,9 +10,16 @@ Discovery companion:
 
 ## Current status
 
-**Active: C1136 (2026-09-10).** Complete C1135's open publication-priority
-audit with three citation graphs and broader database coverage before the
-manuscript-adoption decision. Report: `2026-09-10-c1136-ame-lu-priority-audit.md`.
+**C1136 completed (2026-09-10): bounded literature audit, priority qualified.**
+Nine identifier-pinned seeds have three graph counts and eighteen retrieved
+lists (602 normalized-title records); exact zbMATH queries and first-page
+Scholar results were screened. Seventeen primary sources were read partially,
+none completely. Crossref's largest V1 list, MathSciNet, one blank record and
+unread sections prevent exhaustive priority closure. The prospective ledger
+rows and concrete model/attribution repairs support theorem-content wording.
+Report: `2026-09-10-c1136-ame-lu-priority-audit.md`.
+Next: adoption decision on the compact C1135 package with C1136 repairs;
+no manuscript-implementation C-ID is allocated.
 
 **C1135 completed (2026-09-10).** The two-star verification packet passes
 independent proof/red-team review; the concrete proposal includes corrected
@@ -21,7 +28,7 @@ weighted lower bound, and an observable-rounding corollary. Nine primary
 sources were read partially; publication priority is not closed. No manuscript
 changes were applied. Report: `2026-09-10-c1135-ame-lu-two-star-verification-audit.md`.
 Proposal: `2026-09-10-c1135-ame-lu-two-star-verification-audit-proposal.md`.
-The bounded proposal awaits the C1136 priority audit and an adoption decision;
+The bounded proposal awaits an adoption decision under C1136's explicit coverage limits;
 no manuscript implementation task is allocated.
 
 **C1134 completed (2026-09-10).** Paper I's referee corrections and both
