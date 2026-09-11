@@ -31,6 +31,7 @@ trace=residue[0]+residue[3];det=residue[0]*residue[3]-residue[1]*residue[2]
 assert trace == -1 and det == 0 and trace*trace-4*det == 1
 files = [paper/'cubic_stabilization_m1.tex',paper/'.zenodo.json',paper/'README.md',root/'papers/summary/README.md',paper/'verification/fano-matrices/finite_checks.py']
 files += sorted((paper/'sections').glob('*.tex'))
+files += [paper/'companions/six-axis-cubic-pencil/Makefile']
 pdfs = [paper/'irrationality_after_one_stabilization.pdf',paper/'companions/six-axis-cubic-pencil/six_axis_cubic_pencil.pdf',paper/'companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf']
 files += pdfs
 result = {'status':'PASS','title':title,'abstract_whitespace_words':len(abstract.split()),'degree_two_residue':[str(x) for x in residue],'residue_trace':str(trace),'residue_determinant':str(det),'residue_discriminant':'1','pdf_pages':{str(p.relative_to(root)):len(pymupdf.open(p)) for p in pdfs},'sha256':{str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in files}}

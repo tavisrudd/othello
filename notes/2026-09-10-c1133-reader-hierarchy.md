@@ -70,3 +70,13 @@ No new mathematical mystery arises from this editorial pass. The explicit
 geometric comparison realization remains the formalization gap owned by
 C1133 and recorded in `2026-09-10-c1133-lean-selector-comparison.md`.
 No incidental discovery was promoted. Review scores were not recorded.
+
+## Standalone portability repair
+
+The final companion replay exposed an existing monorepo-relative linter and
+Nix path in the six-axis Makefile. The authority now uses the packaged linter
+and selects the manuscript environment by the same rule as the framed
+companion. Both authority execution and a standalone execution of that exact
+Makefile pass; all three PDFs agree byte for byte. No build gate is weakened.
+The initial editorial export is `504ffbc`; the final portable export follows
+this source fix. The portfolio title is synchronized at `69bfb01`.
