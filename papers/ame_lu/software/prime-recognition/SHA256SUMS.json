@@ -1,0 +1,29 @@
+{
+  "files": {
+    "README.md": {
+      "bytes": 4346,
+      "sha256": "2664d708d0f2680c28ee02cd7d134ea27151101407b5cc7df5e11e201cae0e8b"
+    },
+    "bundle.py": {
+      "bytes": 1164,
+      "sha256": "c77d2a6306ad2dd2a3cb809746f4eadfe373963234722dcd62ea65e7bdb88e22"
+    },
+    "example.json": {
+      "bytes": 757,
+      "sha256": "306646f388681e5162f8edcc94b3838c4947c9d1ba7abd9f7b1257cd03dab048"
+    },
+    "recognition.py": {
+      "bytes": 10336,
+      "sha256": "4eb56cd2b00dc8c3e6caabb625a1912068394e5caf9a7489af0da6a17f27691b"
+    },
+    "test-results.json": {
+      "bytes": 2369,
+      "sha256": "c19be79dbb38c1cbd09dc2d3901f8de92197ec9e1c5203dd62e839aab4ae92dc"
+    },
+    "test_recognition.py": {
+      "bytes": 13720,
+      "sha256": "82910cbc22bca43dfeb9307a4d2177c76c9e6f7fd7e3c5510b6729dc09d33dfd"
+    }
+  },
+  "schema": 1
+}
