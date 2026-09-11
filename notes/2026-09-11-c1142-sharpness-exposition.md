@@ -1,6 +1,6 @@
 # C1142 — sharpness exposition
 
-**Lane:** cubic-threefolds. **Status:** active, authorized 11 September 2026.
+**Lane:** cubic-threefolds. **Status:** complete, 11 September 2026.
 
 Implement the uninterrupted surface → uniform cubic → arithmetic narrative;
 move named examples and higher-dimensional series after it. Name the existing
@@ -69,3 +69,19 @@ The certificate interface was checked against its actual quantifiers:
 splitting-field nonemptiness is separated from the general-point and
 ground-field steps, and witness properties are restricted to smooth
 parameters. No additional result or hypothesis is needed.
+
+## Export and closeout
+
+- Authority source commit: `bff56acaa`.
+- Standalone commit: `1726b22`, including PROVENANCE.md and export-manifest.json.
+- Standalone `make check` passed; log directory under `/tmp/claude-run-quiet/`:
+  `20260911-024027-make-C-cubic-stabilization-irrationality-check`.
+- Export audit: zero findings; verify: 36 tracked files match.
+- Export content SHA-256:
+  `f58a3b42ea9f3b78f199ccf36617970b8c00d16db512654d617d68f64ce86c36`.
+- Authority and standalone PDF SHA-256 (211189 bytes, 24 pages):
+  `4486e2c688b440213165db52de68ccc2a6ac752db0b3f61c1f7482834f1efa7e`.
+- Rendered pages 10, 14 and 20 inspected for the new proof order and lemma.
+  All 21 prior claim-map rows are unchanged; the new lemma is the 22nd row.
+- No portfolio abstract or novelty claim changed, so those surfaces need no
+  new export. No Lean work, push or deposit. C956 and C1133 remain open.

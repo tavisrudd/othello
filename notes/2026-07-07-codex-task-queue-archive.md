@@ -5664,3 +5664,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1140 `[cubic-threefolds]` [REPORTED 2026-09-11]** — integrated and locally exported the sharpness family/arithmetic upgrade; mathematical and cold-reader repairs accepted; authority/standalone checks and byte identity pass → `notes/2026-09-11-c1140-integration.md`
 
 - **C1141 `[cubic-threefolds]` [REPORTED 2026-09-11]** — bounded sharpness literature audit complete; qualified ledger, prior-family comparison, checked and committed export → `notes/cubic-threefolds-tasks/c1141-sharpness-literature-audit.md`
+
+- **C1142 `[cubic-threefolds]` [REPORTED 2026-09-11]** — sharpness exposition complete, checked and exported: proof order, universal tangent-cover lemma and optional-material compression → `notes/2026-09-11-c1142-sharpness-exposition.md`

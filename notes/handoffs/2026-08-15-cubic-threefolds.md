@@ -215,6 +215,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   are current; both paper gates and full committed export pass. MathSciNet,
   Google Scholar and Shepherd-Barron's original chapter remain access gaps.
   C956 and C1133 remain open; this is not exhaustive priority closure.
+- **C1142 — sharpness exposition complete.** Surface rationalization,
+  uniform cubic family and arithmetic separation now run consecutively;
+  named examples follow. Appendix E has the universal tangent-cover lemma.
+  Optional prose is shorter; original statements and limitations are retained.
+  Both gates and the complete committed export pass. Report:
+  `../2026-09-11-c1142-sharpness-exposition.md`.
 - **C956 — existing exact-level-two manuscript referee cycle.** New upgrades
   are owned by C1140; the older acceptance below covers the previous manuscript.
   Cross-specialty review repaired the characteristic-zero scope, the
