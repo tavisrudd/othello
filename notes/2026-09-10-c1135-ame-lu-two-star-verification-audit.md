@@ -1,7 +1,7 @@
 # C1135 — AME two-star verification: proof, adversarial review, and literature audit
 
 **Lane:** `ame-lu`
-**Status:** QUEUED (2026-09-10).
+**Status:** RUNNING (2026-09-10).
 **User request:** verify, red-team, audit the literature, and propose paper changes with proper literature positioning and motivation.
 
 ## Inputs and baseline
@@ -27,3 +27,9 @@ This task is an audit and a concrete revision proposal; adopting the proposed ma
 ## Next action
 
 Read the lane handoff and routed conventions, confirm input hashes and current manuscript baseline, then prepare the claim inventory and independent review packets while beginning the primary-source audit.
+
+## Execution record
+
+Input Markdown preserved under the task output directory as `input-packet.md`; its hash is unchanged. Independent journal and mathematical attack readers and an adjacent-literature reader are running. No manuscript mutation is authorized by this proposal task.
+
+Command-shaping correction: an attempted combined ten-page primary-source read emitted 12,238 original tokens and was truncated. That output is not used as evidence of reading; replaced it with selected pages from cached text (DHZ pages 3, 8, 13; PLM page 4), with further bounded reads below.

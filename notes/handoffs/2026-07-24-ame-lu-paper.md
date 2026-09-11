@@ -10,7 +10,7 @@ Discovery companion:
 
 ## Current status
 
-**Next: C1135 queued (2026-09-10).** Verify and independently red-team the
+**Active: C1135 running (2026-09-10).** Verify and independently red-team the
 two-star marginal-verification packet, audit the literature, and deliver a
 concrete revision proposal with supported contribution claims and motivation.
 Task: `2026-09-10-c1135-ame-lu-two-star-verification-audit.md`.
