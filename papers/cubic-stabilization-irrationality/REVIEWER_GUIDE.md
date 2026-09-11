@@ -6,6 +6,9 @@ proves the upper bounds independently. The companion lower bound proves
 exactness; its separate Hodge theorem turns arithmetic Jacobian separation
 into nonbirationality of first stabilizations.
 
+These constructions run consecutively in Sections 4–6. The named examples
+and higher-dimensional series follow in Section 7.
+
 The [literature ledger](LITERATURE.md), rows N1–N4, separates the contribution
 from the known ambient symmetry loci and records source depths and access gaps.
 
@@ -37,9 +40,12 @@ candidates, not a classification or an implemented solver.
 
 Appendices A–D give optional generic-surface and fibration consequences,
 torus actions, finite rational partner sets, finite-index slices and the
-rank-four method limitation. Appendix E supplies the finite nonemptiness
-calculation used by the main surface proof; its coordinate details may be
-postponed on a first pass. Appendix F records the verification boundary.
+rank-four method limitation. Appendix E's **Universal tangent cover** lemma
+(`lem:universal-tangent-cover`) collects smoothness of the tangent point,
+full-rank evaluation and coverage of every smooth parameter. Its coordinate
+proof may be postponed on a first pass; general tangent projection and
+ground-field existence are handled in `prop:tangent-section`.
+Appendix F records the verification boundary.
 For finite index, distinguish lattice index from component degree: the
 latter divides the former but need not equal it. The zero-cycle conclusion
 does not assert rationality. The original constant-kernel argument is retained.

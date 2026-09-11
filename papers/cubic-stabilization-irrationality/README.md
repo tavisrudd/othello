@@ -52,10 +52,18 @@ principal polarization is asserted.
 
 ## Proof and evidence
 
+The main proof runs through surface rationalization, the uniform cubic
+family and arithmetic separation in Sections 4–6. Named examples and
+higher-dimensional series follow in Section 7.
+
 The manuscript proves the quotient, descent, torsor and family arguments,
 using the cited Cox geometry and Picard classification of Tschinkel–Zhang.
 It identifies the actual signed family action and the actual Prym covers;
 group order and finite point counts alone would not establish those steps.
+
+Appendix E's **Universal tangent cover** lemma supplies a smooth tangent
+point and invertible evaluation for every smooth surface parameter.
+The main proof then handles tangent projection and ground-field existence.
 
 The original twenty-quadric Cox derivation and independent checker remain
 in the full gate, as does the independent rank-four check. The new

@@ -9,6 +9,7 @@
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
@@ -199,14 +200,17 @@ Separated family & Section~\ref{sec:arithmetic} & Hodge conservation\\
 \bottomrule
 \end{tabular}
 \end{center}
-Readers following the family theorem may proceed from the proof of
-Theorem~\ref{thm:two-variable} to Section~\ref{sec:uniform-family}, postponing
-the named examples in Section~\ref{sec:rationality}.
+Sections~\ref{sec:surface-proof}--\ref{sec:arithmetic} prove surface
+rationalization, the uniform cubic theorem and arithmetic separation in that
+order. Section~\ref{sec:rationality} then gives the named examples and
+higher-dimensional series.
 Appendices~\ref{sec:additional}--\ref{sec:limits} give optional consequences,
 finite-index extensions and the limits of the Cox-weight construction.
-Appendix~\ref{sec:tangent-certificate} supplies the finite nonemptiness
-calculation used in Proposition~\ref{prop:tangent-section}; its coordinate
-details may be postponed on a first reading. Appendix~\ref{sec:verification}
+Lemma~\ref{lem:universal-tangent-cover} in
+Appendix~\ref{sec:tangent-certificate} supplies the smooth tangent point and
+full-rank evaluation for every smooth surface parameter, as needed in
+Proposition~\ref{prop:tangent-section}. Its coordinate proof may be postponed
+on a first reading. Appendix~\ref{sec:verification}
 records the verification scope.
 
 \section{A criterion for rational torus quotients}\label{sec:quotient}
@@ -553,7 +557,7 @@ does not require a particular displayed coordinate witness to descend.
 \begin{proposition}[A tangent section for the four Galois types]
 \label{prop:tangent-section}
 \coverage{absent}%
-\uses{thm:torus-quotient}%
+\uses{thm:torus-quotient,lem:universal-tangent-cover}%
 \imports{tz-cox-model,tz-tangent-projection,tz-torsor-splitting,tz-type-classification}%
 \evidence{quartic-del-pezzo-slice-cover}%
 Let \(k\) be a field of characteristic zero, let \(S/k\) be a smooth quartic
@@ -593,9 +597,8 @@ standard blowup points
  \qquad \Delta=ab(a-1)(b-1)(a-b)\ne0.
  \label{eq:moduli-discriminant}
 \end{equation}
-Appendix~\ref{app:slice-certificate} records four exact split-coordinate
-witnesses and proves that their evaluation-and-smoothness opens cover
-\(\{\Delta\ne0\}\), as stated in \eqref{eq:witness-cover}.  Hence
+Lemma~\ref{lem:universal-tangent-cover} supplies a smooth tangent point and
+full-rank evaluation for every \(\Delta\ne0\). Hence
 \(\mathcal E_{\mathrm{ev}}\) is nonempty.
 \paragraph{Compatibility with tangent projection.}
 We impose the tangent-projection condition uniformly in \(p\).  Let
@@ -666,7 +669,7 @@ leaves exactly the four types \(I_0,\ldots,I_3\)
 arbitrary subgroups of \(W(D_5)\).
 \end{proof}
 
-\section{Proofs of the rationality statements}\label{sec:rationality}
+\section{Surface rationalization}\label{sec:surface-proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:two-variable}]
 We first treat the minimal case by taking a quotient of the projective Cox
@@ -736,142 +739,6 @@ recalled immediately before \cite[Proposition~4.1]{TZ} and included in
 \cite[Corollary~4.3]{TZ}.  This proves the last assertion.
 \uses{prop:tangent-section,thm:torus-quotient}%
 \imports{high-degree-del-pezzo,manin-stable-permutation,tz-torsor-splitting,tz-type-classification,voskresenskii-rank-two}%
-\end{proof}
-
-We first apply the surface theorem to the named examples and higher-dimensional
-series of Tschinkel and Zhang. Section~\ref{sec:uniform-family} treats the
-three-parameter family of Theorem~\ref{thm:uniform-cubic-family}.
-Consider the smooth cubic threefolds
-\begin{align}
-X_1:\quad &(x_4-2x_3)x_1^2+3(x_4+2x_3)x_2^2
- +3x_3^2x_4-x_4^3+x_5^3=0, \label{eq:cubic-one}\\
-X_3:\quad &x_4(x_1^2+2x_1x_2)+x_3(x_1^2+x_1x_2+x_2^2)
- +x_3^3-x_3x_4^2+x_4^3+2x_5^3=0. \label{eq:cubic-three}
-\end{align}
-
-\begin{theorem}[Exact level for the cubic threefolds]
-\label{thm:cubic-level}
-\coverage{absent}%
-\imports{rudd-one-stabilization,tz-cubic-series}%
-\evidence{quartic-del-pezzo-slice-cover}%
-For every field \(F\) of characteristic zero and \(j\in\{1,3\}\),
-\[
- \ell_F((X_j)_F)=2.
-\]
-Thus \((X_j)_F\times\PP^1\) is not \(F\)-rational, whereas
-\((X_j)_F\times\PP^2\) is \(F\)-rational.
-\end{theorem}
-
-For \(r\geq0\), let \(X_{j,r}\subset\PP^{r+4}_{\mathbf Q}\) be obtained
-from equation \eqref{eq:cubic-one} or \eqref{eq:cubic-three} by adding
-\(w_1^3+\cdots+w_r^3\) to its left-hand side.  Thus \(X_{j,0}=X_j\).
-
-\begin{corollary}[Two series of cubic hypersurfaces]
-\label{cor:cubics}
-\coverage{absent}%
-\uses{thm:two-variable}%
-\imports{tz-cubic-series,tz-type-classification}%
-For every \(r\geq0\) and \(j\in\{1,3\}\), the variety
-\(X_{j,r}\times\PP^2\) is rational over \(\mathbf Q\).
-\end{corollary}
-
-Tschinkel and Zhang supply the smoothness, fibrations, and generic-fibre
-Galois types in \cite[Propositions~5.1 and~5.3]{TZ}.  Applying
-Theorem~\ref{thm:two-variable} over the two base function fields proves
-Corollary~\ref{cor:cubics} and sharpens their stable-rationality conclusions
-to \(X_{j,r}\times\PP^2\) rational.
-
-\begin{corollary}[Rationality after affine-line stabilization]
-\label{cor:affine-line}
-\coverage{absent}%
-\uses{thm:cubic-level}%
-For \(j\in\{1,3\}\), the variety \(Y_j=X_j\times\PP^1\) is a smooth
-projective fourfold over \(\mathbf Q\) which remains nonrational over
-\(\C\), while \(Y_j\times\A^1\) is rational over \(\mathbf Q\).
-\end{corollary}
-
-The fourfolds \(Y_j\) answer the question posed in \cite[p.~13]{TZ}: find a
-nonrational variety \(Y\) such that \(Y\times\A^1\) is rational.  This is a
-birational statement, not Zariski cancellation for isomorphic affine
-cylinders.
-
-\begin{corollary}[Variation in the moduli of cubic threefolds]
-\label{cor:moduli}
-\coverage{absent}%
-\uses{thm:cubic-level}%
-\imports{egfs-very-general-cubic}%
-On the moduli space of smooth complex cubic threefolds,
-\(\ell_{\C}((X_j)_{\C})=2\) for \(j\in\{1,3\}\), whereas
-\(\ell_{\C}\) is infinite at a very general point.
-\end{corollary}
-
-\begin{proof}[Proof of Corollary~\ref{cor:cubics}]
-The argument takes place entirely over the function field of the projection
-base.  This avoids any specialization or fibrewise rationality claim.
-
-For \(X=X_{j,r}\), Tschinkel and Zhang project from a plane containing a
-distinguished line.  The base is \(\PP^{r+1}_{\mathbf Q}\), with function
-field \(K=\mathbf Q(t_1,\ldots,t_{r+1})\), and the generic cubic-surface
-fibre is \(K\)-birational, after contracting the distinguished line, to a
-smooth quartic del Pezzo surface \(S/K\) with a \(K\)-point.  Their
-calculation identifies the Galois image as type \(I_1\) for \(j=1\) and type
-\(I_3\) for \(j=3\) \cite[Propositions~5.1 and~5.3]{TZ}.  Lemma~4.2 of
-\cite{TZ} then shows that \(\Pic(S_{\bar K})\) is stably permutation.  Theorem
-\ref{thm:two-variable} gives
-\[
- K(S)(u,v)\simeq K(z_1,z_2,z_3,z_4).
-\]
-Since \(\mathbf Q(X)=K(S)\) as extensions of \(K\),
-\[
- \mathbf Q(X)(u,v)
- \simeq\mathbf Q(t_1,\ldots,t_{r+1},z_1,z_2,z_3,z_4)
-\]
-is purely transcendental.  This is rationality of \(X\times\A^2\),
-equivalently of \(X\times\PP^2\).
-\uses{thm:two-variable}%
-\imports{tz-cubic-series}%
-\end{proof}
-
-\begin{proof}[Proof of Theorem~\ref{thm:cubic-level}]
-The one-stabilization theorem proves that
-\(X\times\PP^1\) is irrational for every smooth complex cubic threefold
-\(X\) \cite[Theorem~1.1]{RuddM1}.  It applies to
-\((X_j)_{\mathbf C}\).  Therefore
-\((X_j)_{\C}\) has no rational stabilization with \(m\leq1\).
-Suppose one existed over a characteristic-zero field \(F\).  A birational
-map to projective space, its inverse, and their composition identities use
-only finitely many coefficients.  They therefore descend together to a
-finitely generated subfield \(F_0/\mathbf Q\) of \(F\), including the
-nonzero denominators defining their domains.  An embedding
-\(F_0\hookrightarrow\C\) would give the forbidden rationalization over
-\(\C\).  No embedding of all of \(F\) is needed.
-Corollary~\ref{cor:cubics} gives rationality at \(m=2\) over
-\(\mathbf Q\), which base-changes to \(F\).  Hence the level is exactly two.
-\uses{cor:cubics}%
-\imports{rudd-one-stabilization,tz-cubic-series}%
-\end{proof}
-
-\begin{proof}[Proof of Corollary~\ref{cor:affine-line}]
-Theorem~\ref{thm:cubic-level} shows that \(Y_j=X_j\times\PP^1\) is nonrational,
-even after base change to \(\C\).  On the other hand,
-\[
- \mathbf Q(Y_j\times\A^1)=\mathbf Q(X_j)(u,t)
-\]
-is purely transcendental by Corollary~\ref{cor:cubics}.  Equivalently,
-\(\PP^1\times\A^1\) is birational to \(\A^2\).  Hence
-\(Y_j\times\A^1\) is rational.
-\uses{thm:cubic-level}%
-\end{proof}
-
-\begin{proof}[Proof of Corollary~\ref{cor:moduli}]
-Theorem~\ref{thm:cubic-level} gives the asserted value for \(X_1\) and
-\(X_3\).  Engel, de Gaay Fortman, and
-Schreieder prove that a very general smooth complex cubic threefold does not
-admit a decomposition of the diagonal and hence is not stably rational
-\cite[Corollary~1.4]{EGFS}.  For such a threefold no finite \(m\) makes
-\(X\times\PP^m\) rational, so \(\ell_{\C}(X)=\infty\).
-\uses{thm:cubic-level}%
-\imports{egfs-very-general-cubic}%
 \end{proof}
 
 \section{The uniform cubic family}\label{sec:uniform-family}
@@ -1189,6 +1056,121 @@ counting residue classes prime to six. This count uses no binary-form sieve.
 \imports{rudd-hodge-conservation}%
 \end{proof}
 
+\section{Named examples and higher-dimensional series}\label{sec:rationality}
+
+The surface theorem also sharpens the explicit constructions of Tschinkel
+and Zhang.
+Consider the smooth cubic threefolds
+\begin{align}
+X_1:\quad &(x_4-2x_3)x_1^2+3(x_4+2x_3)x_2^2
+ +3x_3^2x_4-x_4^3+x_5^3=0, \label{eq:cubic-one}\\
+X_3:\quad &x_4(x_1^2+2x_1x_2)+x_3(x_1^2+x_1x_2+x_2^2)
+ +x_3^3-x_3x_4^2+x_4^3+2x_5^3=0. \label{eq:cubic-three}
+\end{align}
+
+\begin{theorem}[Exact level for the cubic threefolds]
+\label{thm:cubic-level}
+\coverage{absent}%
+\imports{rudd-one-stabilization,tz-cubic-series}%
+\evidence{quartic-del-pezzo-slice-cover}%
+For every field \(F\) of characteristic zero and \(j\in\{1,3\}\),
+\[
+ \ell_F((X_j)_F)=2.
+\]
+Thus \((X_j)_F\times\PP^1\) is not \(F\)-rational, whereas
+\((X_j)_F\times\PP^2\) is \(F\)-rational.
+\end{theorem}
+
+For \(r\geq0\), let \(X_{j,r}\subset\PP^{r+4}_{\mathbf Q}\) be obtained
+from equation \eqref{eq:cubic-one} or \eqref{eq:cubic-three} by adding
+\(w_1^3+\cdots+w_r^3\) to its left-hand side.  Thus \(X_{j,0}=X_j\).
+
+\begin{corollary}[Two series of cubic hypersurfaces]
+\label{cor:cubics}
+\coverage{absent}%
+\uses{thm:two-variable}%
+\imports{tz-cubic-series,tz-type-classification}%
+For every \(r\geq0\) and \(j\in\{1,3\}\), the variety
+\(X_{j,r}\times\PP^2\) is rational over \(\mathbf Q\).
+\end{corollary}
+
+\begin{corollary}[Rationality after affine-line stabilization]
+\label{cor:affine-line}
+\coverage{absent}%
+\uses{thm:cubic-level}%
+For \(j\in\{1,3\}\), the variety \(Y_j=X_j\times\PP^1\) is a smooth
+projective fourfold over \(\mathbf Q\) which remains nonrational over
+\(\C\), while \(Y_j\times\A^1\) is rational over \(\mathbf Q\).
+\end{corollary}
+
+The fourfolds \(Y_j\) answer the question posed in \cite[p.~13]{TZ}: find a
+nonrational variety \(Y\) such that \(Y\times\A^1\) is rational.  This is a
+birational statement, not Zariski cancellation for isomorphic affine
+cylinders.
+
+\begin{corollary}[Variation in the moduli of cubic threefolds]
+\label{cor:moduli}
+\coverage{absent}%
+\uses{thm:cubic-level}%
+\imports{egfs-very-general-cubic}%
+On the moduli space of smooth complex cubic threefolds,
+\(\ell_{\C}((X_j)_{\C})=2\) for \(j\in\{1,3\}\), whereas
+\(\ell_{\C}\) is infinite at a very general point.
+\end{corollary}
+
+\begin{proof}[Proof of Corollary~\ref{cor:cubics}]
+For \(X=X_{j,r}\), Tschinkel and Zhang project from a plane containing a
+distinguished line.  The base is \(\PP^{r+1}_{\mathbf Q}\), with function
+field \(K=\mathbf Q(t_1,\ldots,t_{r+1})\), and the generic cubic-surface
+fibre is \(K\)-birational, after contracting the distinguished line, to a
+smooth quartic del Pezzo surface \(S/K\) with a \(K\)-point.  Their
+calculation identifies the Galois image as type \(I_1\) for \(j=1\) and type
+\(I_3\) for \(j=3\) \cite[Propositions~5.1 and~5.3]{TZ}.  Lemma~4.2 of
+\cite{TZ} then shows that \(\Pic(S_{\bar K})\) is stably permutation.  Theorem
+\ref{thm:two-variable} gives
+\[
+ K(S)(u,v)\simeq K(z_1,z_2,z_3,z_4).
+\]
+Since \(\mathbf Q(X)=K(S)\) as extensions of \(K\),
+\[
+ \mathbf Q(X)(u,v)
+ \simeq\mathbf Q(t_1,\ldots,t_{r+1},z_1,z_2,z_3,z_4)
+\]
+is purely transcendental.  This is rationality of \(X\times\A^2\),
+equivalently of \(X\times\PP^2\).
+\uses{thm:two-variable}%
+\imports{tz-cubic-series}%
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:cubic-level}]
+The one-stabilization theorem \cite[Theorem~1.1]{RuddM1} excludes
+rationality with \(m\leq1\) over \(\C\). The finite-coefficient descent
+argument in the proof of Theorem~\ref{thm:uniform-cubic-family} gives the
+same exclusion over every characteristic-zero field \(F\).
+Corollary~\ref{cor:cubics} gives rationality at \(m=2\) over
+\(\mathbf Q\), which base-changes to \(F\).  Hence the level is exactly two.
+\uses{cor:cubics}%
+\imports{rudd-one-stabilization,tz-cubic-series}%
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:affine-line}]
+Theorem~\ref{thm:cubic-level} gives nonrationality of \(Y_j\) over \(\C\)
+and rationality of \(X_j\times\PP^2\) over \(\mathbf Q\).
+Use \(\PP^1\times\A^1\sim\PP^2\) for the second assertion.
+\uses{thm:cubic-level}%
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:moduli}]
+Theorem~\ref{thm:cubic-level} gives the asserted value for \(X_1\) and
+\(X_3\).  Engel, de Gaay Fortman, and
+Schreieder prove that a very general smooth complex cubic threefold does not
+admit a decomposition of the diagonal and hence is not stably rational
+\cite[Corollary~1.4]{EGFS}.  For such a threefold no finite \(m\) makes
+\(X\times\PP^m\) rational, so \(\ell_{\C}(X)=\infty\).
+\uses{thm:cubic-level}%
+\imports{egfs-very-general-cubic}%
+\end{proof}
+
 \appendix
 
 \section{Generic surfaces, partners, and fibrations}\label{sec:additional}
@@ -1242,13 +1224,9 @@ then \(\ell_F(V)=2\).
 \end{corollary}
 
 \begin{proof}
-The displayed product is irrational by Theorem~\ref{thm:cubic-level}.
-Taking one further product with \(\PP^1\), and using
-\(\PP^1\times\PP^1\sim_F\PP^2\), gives
-\[
- V\times\PP^2\sim_F (X_j)_F\times\PP^2\sim_F\PP^5.
-\]
-Thus two stabilizations suffice and one does not.
+Theorem~\ref{thm:cubic-level} excludes one stabilization. Taking one
+further product with \(\PP^1\) and using
+\(\PP^1\times\PP^1\sim_F\PP^2\) proves rationality after two.
 \uses{thm:cubic-level}%
 \end{proof}
 
@@ -1268,9 +1246,7 @@ whenever that correspondence is defined over \(F\).  It is not an exact-level
 statement for arbitrary genus-eight Fano threefolds.
 \end{remark}
 
-For a general fibration the base contributes its own stabilization level.
-The following formula keeps track of the four free variables supplied by
-the surface rationalization.
+For a general fibration, the base contributes its own stabilization level.
 
 \begin{proposition}[Stabilization along a surface fibration]
 \label{prop:fibration-level}
@@ -1303,12 +1279,9 @@ the definition of the level gives
 \[
  \ell_k(W\times\A^a)=\max\{\ell_k(W)-a,0\}.
 \]
-Indeed, further stabilization by \(m\) makes this product rational exactly
-when stabilization of \(W\) by \(a+m\) does; rationality persists under
-additional affine factors.  This also proves the formula when the level
-is infinite.  Apply it to the two birational varieties above.  The stated
-consequences follow by considering whether \(\ell_k(B)\) is at most four,
-finite and greater than four, or infinite.
+Rationality persists under additional affine factors, so the formula also
+holds at infinite level. Applying it to the two birational varieties above
+gives all the assertions.
 \uses{thm:two-variable}%
 \end{proof}
 
@@ -1654,9 +1627,32 @@ sections, or smaller Galois images.
 \section{Exact tangent-section certificate}\label{sec:tangent-certificate}
 \label{app:slice-certificate}
 
-The four constructions below depend symbolically on the surface parameters
-\((a,b)\).  For every smooth parameter value, at least one has both the
-required evaluation rank and a nonzero smoothness minor.
+The finite calculation supplies the following geometric input to
+Proposition~\ref{prop:tangent-section}. Write
+\(\Delta=ab(a-1)(b-1)(a-b)\), as in
+\eqref{eq:moduli-discriminant}.
+
+\begin{lemma}[Universal tangent cover]\label{lem:universal-tangent-cover}
+\coverage{absent}%
+\evidence{quartic-del-pezzo-slice-cover}%
+Over an algebraically closed field \(\bar k\) of characteristic zero, for every
+\((a,b)\) with \(\Delta\ne0\), one of the four pairs \((p_i,x_i)\) below
+has \(p_i\in Z_{\mathrm{sm}}\), \(\dim H_{p_i}=4\), and an isomorphism
+\(\operatorname{ev}_{p_i,x_i}:H_{p_i}\to\bar k^4\).
+For each pair these properties hold on \(\Delta D_iM_i\ne0\), where \(M_i\)
+is the displayed smoothness minor and \(D_i\) the evaluation determinant;
+these four opens cover every smooth surface parameter:
+\begin{equation}
+ \{\Delta\ne0\}\subseteq\bigcup_{i=1}^4\{D_iM_i\ne0\}.
+ \label{eq:witness-cover}
+\end{equation}
+\end{lemma}
+
+The lemma establishes nonemptiness over the splitting field.
+Proposition~\ref{prop:tangent-section} then imposes the general
+tangent-projection condition and obtains ground-field data by density.
+
+\begin{proof}
 
 For a tangent point \(p\) parametrized by \(z=(z_1,z_2,z_3)\), the space
 \(H_p\) of tangent hyperplanes containing \(B\) has dimension four.
@@ -1728,11 +1724,6 @@ evaluation determinants are
 \SliceDeterminants
 and the corresponding smoothness minors are
 \SliceMinors
-The assertion used in Proposition~\ref{prop:tangent-section} is
-\begin{equation}
- \{\Delta\ne0\}\subseteq\bigcup_{i=1}^4\{D_iM_i\ne0\}.
- \label{eq:witness-cover}
-\end{equation}
 The opens \(D_iM_i\ne0\) are not contained in \(\{\Delta\ne0\}\); only the
 containment is claimed.
 
@@ -1747,6 +1738,7 @@ Thus \(D_4M_4\ne0\) in both remaining cases.  This proves that the four
 opens \(D_iM_i\ne0\) cover \(\Delta\ne0\).  The retained certificate gives,
 for each empty case, an identity expressing a nonzero constant in the
 corresponding localized ideal.
+\end{proof}
 
 \section{Verification and scope}\label{sec:verification}
 

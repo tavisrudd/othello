@@ -79,6 +79,16 @@
     "hypotheses": "Characteristic-zero ground field; the two cubic level theorem; adjoined variables fixed by the torus. Finite-subgroup conclusion over C.",
     "objects": "Rational rank-two torus actions on affine five-space from the two exact-level-two cubics."
   },
+  "lem:universal-tangent-cover": {
+    "cautions": "Finite nonemptiness over the splitting field only. General tangent-projection compatibility and ground-field existence remain in prop:tangent-section. No Lean coverage is claimed.",
+    "conclusion": "At least one witness has a smooth tangent point, four-dimensional H_p and invertible evaluation; the four determinant/minor opens cover all smooth parameters.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "a65c3e66af145b59c0d57e463c2701f443c2c40aa5cdc165cba239986626af4c",
+    "environment": "lemma",
+    "hypotheses": "Algebraically closed field of characteristic zero; Delta = ab(a-1)(b-1)(a-b) is nonzero.",
+    "objects": "The four split Cox-coordinate witness pairs, tangent hyperplane spaces, evaluation determinants and Jacobian minors."
+  },
   "prop:fibration-level": {
     "cautions": "The surface hypotheses are imposed over the generic function field. If ell(B) is at most four, the formula gives only an upper bound of two for ell(Y), not an exact value.",
     "conclusion": "Y times A2 is k-birational to B times A4; max(ell(Y)-2,0)=max(ell(B)-4,0), including infinity, with the stated finite-level consequences and equivalence of stable rationality.",
