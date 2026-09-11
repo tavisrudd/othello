@@ -95,18 +95,22 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-09-10-c1133-lean-trust-review.md`. Source polynomial corrected;
   Python O3 now records full odd dimension with regression assertions.
   Fresh guarded 371-terminal axiom comparison passes. Main-paper coverage:
-  20 absent, 8 fragments, 8 conditional deductions. The Lean selector still
-  uses half odd dimension; geometric comparison realizations remain supplied.
+  20 absent, 8 fragments, 8 conditional deductions. Lean normalization and
+  the composed comparison are now checked; geometric realizations remain supplied.
   Paper README and portfolio summary/abstract now reflect A–D and these limits.
-  Next: align the Lean selector normalization, then assemble the explicit
-  center-map/lattice comparison interface. Broader source/priority coverage
-  and author publication review remain open.
+  Lean normalization and composed comparison complete:
+  `../2026-09-10-c1133-lean-selector-comparison.md`. Full odd values agree;
+  parity is removed from semisimple nullity. The new interface proves faithful
+  coefficient extension, lattice membership iff, and exact residue transport.
+  Next: match the supplied geometric embedding and regular comparison inputs
+  to the manuscript and source hypotheses, including the Hodge-fixed base.
+  Broader source/priority coverage and author publication review remain open.
   Prior comparison preferences were nonblind; a fully blinded comparison
   remains a publication gate. Pencil claims stay conditional.
   This integration does not close C1133, C978 or C956.
   Collaborator discussion stays parked.
-  Prior guarded formal checkpoint: **371 public terminals, 133 machinery,
-  245 sources**; aggregate kernel and actual axiom comparison passed.
+  Current guarded formal checkpoint: **373 public terminals, 135 machinery,
+  246 sources**; aggregate kernel and actual axiom comparison passed.
   `../2026-09-09-c1133-lean-completion-progress.md` records exact declarations
   and supplied geometric/source inputs. Universal residue coverage beyond
   checked matrix reductions remains fragmentary; optional L8 unclaimed.

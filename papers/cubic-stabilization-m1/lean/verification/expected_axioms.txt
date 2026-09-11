@@ -370,3 +370,5 @@ TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rationalHodgeIsomorphism_inverse
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rationalWholeHodge_conservation: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rationalHodge_veryGeneralSource_cancellation: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rationalHodge_arithmeticPartners_finite_geometricClasses: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationM1.gradedCenterComparison_faithful_lattice_and_residue: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankThreeEndpoints_fullOddDimensions: propext, Classical.choice, Quot.sound

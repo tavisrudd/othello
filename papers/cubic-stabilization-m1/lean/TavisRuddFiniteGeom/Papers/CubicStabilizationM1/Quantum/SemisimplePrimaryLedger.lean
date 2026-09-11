@@ -52,10 +52,10 @@ structure SemisimplePrimaryBlock (K : Type*) [Field K]
     (ι : Type u) (division : ι → Type v) [∀ i, DivisionRing (division i)] where
   evenBlock : ExactPrimaryBlock K
   oddObject : SemisimpleCoordinateObject ι division
-  /-- The full odd rank is even, and bounds every simple multiplicity, as
-  follows from an alternating Frobenius pairing and a faithful realization. -/
+  /-- The full odd rank bounds every simple multiplicity, as follows from
+  a faithful realization. No parity assumption on that rank is needed. -/
   dimensionCompatible : match evenBlock with
-    | .other _ oddRank _ => Even oddRank ∧ ∀ i, oddObject.multiplicity i ≤ oddRank
+    | .other _ oddRank _ => ∀ i, oddObject.multiplicity i ≤ oddRank
     | _ => True
 
 /-- Effective simple multiplicities of the entire selected odd object. -/
@@ -130,7 +130,7 @@ noncomputable def SemisimplePrimaryPresentation.safeObjectIso
     simpa only [safeObject, SemisimpleCoordinateObject.multiplicity_ofMultiplicity] using equal)
 
 /-- Zero numerical exact-primary weight forces zero full-odd-object weight.
-In even rank three, parity turns a vanishing half-odd rank into odd rank zero;
+In even rank three, the numerical weight is the full odd rank;
 the actual object's simple multiplicities are then all zero. -/
 theorem SemisimplePrimaryBlock.weight_zero_of_numeric_zero
     {K : Type*} [Field K] {ι : Type u} {division : ι → Type v}
@@ -146,15 +146,12 @@ theorem SemisimplePrimaryBlock.weight_zero_of_numeric_zero
   | scalarRankTwo loop centered oddRank => simp [weight, ExactPrimaryBlock.selectsOddObject]
   | other evenRank oddRank notTwo =>
     by_cases rankThree : evenRank=3
-    · have halfZero := congrArg Prod.snd numericZero
-      change (if evenRank=3 then oddRank/2 else 0)=0 at halfZero
-      rw [if_pos rankThree] at halfZero
-      have oddZero : oddRank=0 := by
-        obtain ⟨n,hn⟩ := compatible.1
-        omega
+    · have oddZero := congrArg Prod.snd numericZero
+      change (if evenRank=3 then oddRank else 0)=0 at oddZero
+      rw [if_pos rankThree] at oddZero
       have multiplicityZero : oddObject.multiplicity=0 := by
         ext i
-        have bounded := compatible.2 i
+        have bounded := compatible i
         rw [oddZero] at bounded
         exact Nat.eq_zero_of_le_zero bounded
       simp [weight, ExactPrimaryBlock.selectsOddObject, rankThree, multiplicityZero]

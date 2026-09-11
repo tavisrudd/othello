@@ -55,14 +55,14 @@ theorem RankTwoCountingEndpoint.weight_eq
   simp [blocks, primaryBlockMultisetWeight, ExactPrimaryBlock.weight, pointPrimaryBlock,
     endpoint.atom_eq, rankTwoCountingExactSignature]
 
-/-- A full rank-three factor with odd rank twice the stated half-odd dimension,
+/-- A full rank-three factor with the stated full odd dimension,
 plus its rank-one complementary factor. -/
-def rankThreeEndpointBlocks (halfOdd : ℕ) : Multiset (ExactPrimaryBlock ℚ) :=
-  {.other 3 (2*halfOdd) (by decide), pointPrimaryBlock}
+def rankThreeEndpointBlocks (oddRank : ℕ) : Multiset (ExactPrimaryBlock ℚ) :=
+  {.other 3 oddRank (by decide), pointPrimaryBlock}
 
-/-- The rank-three block expression contributes exactly its half-odd dimension. -/
-theorem rankThreeEndpointBlocks_weight (halfOdd : ℕ) :
-    primaryBlockMultisetWeight (rankThreeEndpointBlocks halfOdd)=(0,halfOdd) := by
+/-- The rank-three block expression contributes exactly its full odd dimension. -/
+theorem rankThreeEndpointBlocks_weight (oddRank : ℕ) :
+    primaryBlockMultisetWeight (rankThreeEndpointBlocks oddRank)=(0,oddRank) := by
   simp [rankThreeEndpointBlocks, primaryBlockMultisetWeight, ExactPrimaryBlock.weight, pointPrimaryBlock]
 
 /-- Four simple rank-one factors form the simple-spectrum endpoint expression. -/
@@ -78,10 +78,10 @@ theorem simpleCountingEndpointBlocks_weight :
 using actual normalized rank-two endpoint connections. -/
 def countingEndpointBlocks (rankTwo : ∀ label, RankTwoCountingEndpoint label) :
     CountingMatrixLabel → Multiset (ExactPrimaryBlock ℚ)
-  | .genus2 => rankThreeEndpointBlocks 52
-  | .genus3 => rankThreeEndpointBlocks 30
-  | .genus4 => rankThreeEndpointBlocks 20
-  | .genus5 => rankThreeEndpointBlocks 14
+  | .genus2 => rankThreeEndpointBlocks 104
+  | .genus3 => rankThreeEndpointBlocks 60
+  | .genus4 => rankThreeEndpointBlocks 40
+  | .genus5 => rankThreeEndpointBlocks 28
   | .genus6 => (rankTwo .genus6).blocks
   | .genus7 => (rankTwo .genus7).blocks
   | .genus8 => (rankTwo .genus8).blocks

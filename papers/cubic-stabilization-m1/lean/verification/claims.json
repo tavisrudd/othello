@@ -1753,7 +1753,7 @@
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.wholeOddLedger_zero_of_numericZero",
-      "reason": "Derives vanishing of the full semisimple-object fold from numerical vanishing using odd-rank parity and faithful realization dimension bounds, with no supplied Hodge-weight vanishing.",
+      "reason": "Derives vanishing of the full semisimple-object fold from numerical vanishing using full odd-dimension bounds and faithful realization dimension bounds, with no supplied Hodge-weight vanishing.",
       "terminal_digest": "b3650b40b153a5375132b306b58849c4af189af14760c5bee65830dd6b4fae4c"
     },
     {
@@ -1820,6 +1820,16 @@
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rationalHodge_arithmeticPartners_finite_geometricClasses",
       "reason": "Uses the constructed rational Hodge isomorphism as input to the separate geometric-isogeny premise, then proves geometric partner finiteness over all model extensions of bounded degree through bounded kernels, finite torsion, polarization fibers and Torelli. Geometric realization and arithmetic source bounds remain explicit; twists and the isogeny field of definition are not bounded.",
       "terminal_digest": "40a4efe02ec03b02c48d28da692c387439c4391e6ea7c19d50cfd4407c3829b1"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.gradedCenterComparison_faithful_lattice_and_residue",
+      "reason": "Combines the constructed faithful graded center homomorphism with lattice membership preservation and reflection and exact residue transport. A faithful embedding of the target coefficient ring, literal connection realization, and regular horizontal comparison and inverse remain explicit inputs; no geometric comparison is instantiated.",
+      "terminal_digest": "57f7a2732cb1fbd8e8bb411096c559fc8dd39d5dcde32f1a695ef83605656b4e"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankThreeEndpoints_fullOddDimensions",
+      "reason": "Checks the full odd-dimension normalization 104, 60, 40, 28 for the four rank-three counting endpoint models by kernel reduction; geometric endpoint identification remains external.",
+      "terminal_digest": "a7cd71c13fd6acf1d3ab1326756380a797a9c7ed8b3ccd81cce6f117ead1faaf"
     }
   ]
 }

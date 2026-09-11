@@ -90,7 +90,7 @@ truncated Chern class arithmetic, the Betti numbers, the degree count placing th
 whole odd cohomology in that packet, and the constancy of rank on a connected
 component.
 
-Checked coverage snapshot: 79 claims; 25 absent; 27 fragmentary; 26 conditional; 1 complete; 371 reviewer terminals, of which 133 are machinery serving no current manuscript claim.
+Checked coverage snapshot: 79 claims; 25 absent; 27 fragmentary; 26 conditional; 1 complete; 373 reviewer terminals, of which 135 are machinery serving no current manuscript claim.
 
 The main reviewer interface includes `gradedBulkSource_equiv_completedSubring`
 and `gradedBulkCenterRingHom_injective`: the formal graded coefficient families

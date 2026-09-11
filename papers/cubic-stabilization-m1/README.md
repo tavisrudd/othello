@@ -103,9 +103,8 @@ kernel-reported dependencies checked against
 [`lean/verification/expected_axioms.txt`](lean/verification/expected_axioms.txt).
 The primary paper has 36 registered statements: 20 absent from Lean,
 8 fragments and 8 conditional deductions. Its unconditional mathematical
-headline is not an end-to-end Lean theorem. The numerical Lean ledger uses
-half the rank-three odd dimension; the manuscript and finite `O3` certificate
-use the full dimension. The semisimple Hodge selector retains the whole odd
+headline is not an end-to-end Lean theorem. The numerical Lean ledger, manuscript and finite `O3` certificate
+all use the full rank-three odd dimension: 104, 60, 40, 28. The semisimple Hodge selector retains the whole odd
 object. See [`verification/README.md`](verification/README.md) for these
 normalization and geometric-realization boundaries.
 

@@ -1,3 +1,4 @@
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.FaithfulCenterLatticeComparison
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RationalHodgeApplications
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RationalHodgeVaryingRank
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.RationalHodgeMatrixDescent
@@ -627,7 +628,7 @@ theorem exactPrimaryMarker_birational_from_lowDimensional_realizations
 
 /-- The finite exact-signature table has nine positive labels and eight zero
 controls; doubling preserves exactly those positive labels. Rank-two entries
-come from the computed residue matrices. The four half-odd dimensions and
+come from the computed residue matrices. The four full odd dimensions and
 geometric endpoint/control identifications are outside this finite statement. -/
 theorem seventeenExactSignatures_nine_positive_eight_controls :
     (Fintype.card {label : Quantum.CountingMatrixLabel // label.detected=true}=9 ∧
@@ -830,6 +831,46 @@ theorem gradedBulkCenterRingHom_injective
     (parameter : FractionRing (MvPolynomial (Option (Fin bulkRank)) K)) (nonzero : parameter ≠ 0) :
     Function.Injective (gradedCompletedBulkCenterRingHom data curveGrade bulkDegree pairing exceptionalDegree parameter nonzero) := by
   exact Quantum.gradedCompletedBulkCenterRingHom_injective data curveGrade bulkDegree pairing injective exceptionalDegree parameter nonzero
+
+/-- The constructed graded center homomorphism followed by a faithful target
+embedding transports the original lattice and exact residue together.
+The ring map's injectivity is derived from the separating integral divisor
+pairing and nonzero exceptional parameter. All connection realization and
+regular comparison data are supplied separately from that injectivity proof. -/
+theorem gradedCenterComparison_faithful_lattice_and_residue
+    {Curve TargetCurve K F : Type*} [AddCommMonoid Curve] [AddCommMonoid TargetCurve]
+    [Field K] [CharZero K] [Field F] [CharZero F] {bulkRank divisorRank : ℕ}
+    (quotient : CompletedNumericalQuotient Curve TargetCurve)
+    (curveGrade : Curve →+ ℤ) (bulkDegree : Fin bulkRank → ℕ)
+    (pairing : Curve →+ (Fin divisorRank → ℤ)) (separates : Function.Injective pairing)
+    (exceptionalDegree : Curve →+ ℤ)
+    (parameter : FractionRing (MvPolynomial (Option (Fin bulkRank)) K)) (nonzero : parameter ≠ 0)
+    (targetEmbedding : quotient.numericalGrading.CompletedNovikovRing
+      (MvPowerSeries (Fin divisorRank) (FractionRing (MvPolynomial (Option (Fin bulkRank)) K))) →+* F)
+    (embeddingInjective : Function.Injective targetEmbedding)
+    (data : RankTwoCoefficientComparison (targetEmbedding.comp
+      (gradedCompletedBulkCenterRingHom quotient curveGrade bulkDegree pairing exceptionalDegree parameter nonzero))) :
+    let coefficientMap := targetEmbedding.comp
+      (gradedCompletedBulkCenterRingHom quotient curveGrade bulkDegree pairing exceptionalDegree parameter nonzero)
+    Function.Injective coefficientMap ∧
+      (∀ v, formalRankTwoMatrixAction data.regular.comparison
+        (fun i => PowerSeries.map coefficientMap (v i)) ∈ adaptedCanonicalLattice ↔
+          v ∈ adaptedCanonicalLattice) ∧
+      residueDiscriminant (modifiedResidue data.target.loop) =
+        coefficientMap (residueDiscriminant (modifiedResidue data.originalLoop)) ∧
+      (residueDiscriminant (modifiedResidue data.target.loop) ≠ 0 ↔
+        residueDiscriminant (modifiedResidue data.originalLoop) ≠ 0) := by
+  exact Quantum.gradedCenterCoefficientComparison_transport quotient curveGrade bulkDegree
+    pairing separates exceptionalDegree parameter nonzero targetEmbedding embeddingInjective data
+
+/-- The rank-three selector records the full odd dimensions of the four
+rank-three endpoint models. These equalities are checked by kernel reduction. -/
+theorem rankThreeEndpoints_fullOddDimensions :
+    (Quantum.countingExactSignature .genus2).2 = 104 ∧
+    (Quantum.countingExactSignature .genus3).2 = 60 ∧
+    (Quantum.countingExactSignature .genus4).2 = 40 ∧
+    (Quantum.countingExactSignature .genus5).2 = 28 := by
+  norm_num [Quantum.countingExactSignature]
 
 /-- The inverse rational matrix also preserves all Hodge projectors, so the
 constructed morphism is an isomorphism of the full rational Hodge objects. -/

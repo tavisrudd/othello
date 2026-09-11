@@ -3,6 +3,16 @@
 **Lane:** `cubic-threefolds`
 **Status:** ACTIVE, author-selected research task (2026-09-09).
 
+## Latest formal alignment
+
+`notes/2026-09-10-c1133-lean-selector-comparison.md`: full odd selector values
+104, 60, 40, 28 now agree across Lean, manuscript and finite certificate.
+Semisimple nullity no longer assumes parity. The composed coefficient-map,
+lattice membership iff and exact residue theorem passes the guarded library
+and fresh 373-terminal axiom audit. Geometric embedding and regular comparison
+realizations remain supplied; manuscript coverage is unchanged. Next: match
+those inputs to the geometric proof and Hodge-fixed-base source hypotheses.
+
 ## Current frontier
 
 The core mathematical acceptance map is

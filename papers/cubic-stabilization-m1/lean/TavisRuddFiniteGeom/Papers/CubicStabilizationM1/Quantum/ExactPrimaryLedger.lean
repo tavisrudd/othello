@@ -50,13 +50,13 @@ inductive ExactPrimaryBlock (K : Type*) [Field K]
       (centered : PowerSeries.coeff 0 loop=0) (oddRank : ℕ)
   | other (evenRank oddRank : ℕ) (notTwo : evenRank ≠ 2)
 
-/-- The exact spectrum and the half-odd-dimension selector form an additive
+/-- The exact spectrum and the full-odd-dimension selector form an additive
 pair of effective weights. -/
 noncomputable def ExactPrimaryBlock.weight {K : Type*} [Field K] :
     ExactPrimaryBlock K → (K →₀ ℕ) × ℕ
   | .rankTwo connection => (rankTwoExactSpectrumAtom connection.loop,0)
   | .scalarRankTwo _ _ _ => 0
-  | .other evenRank oddRank _ => (0,if evenRank=3 then oddRank/2 else 0)
+  | .other evenRank oddRank _ => (0,if evenRank=3 then oddRank else 0)
 
 /-- Comparison evidence is matrix horizontality in rank two and full coordinate
 space equivalence in every other even rank. No weight equality is a field. -/

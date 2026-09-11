@@ -6,8 +6,8 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ExactPrimaryOccur
 
 Actual low-dimensional occurrence ledgers are realized by full primary
 blocks whose even-block multisets are point, curve or surface models. Their
-numerical weights vanish by the seed calculations, and positivity and odd
-parity force the entire semisimple-object weight to vanish. Weak factorization
+numerical weights vanish by the seed calculations, and positivity and the
+full odd-dimension bound force the entire semisimple-object weight to vanish. Weak factorization
 then produces an isomorphism of the reconstructed safe objects. Endpoint
 isomorphisms with doubled whole odd objects permit categorical cancellation.
 Geometric block realizations, operation comparisons and the realization of

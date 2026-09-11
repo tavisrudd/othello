@@ -6,7 +6,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ExactResidueSelec
 
 Rank-two signatures are computed from the verified residue matrices, with
 zero discriminants omitted and discriminant one retained. The four rank-three
-entries use the stated half-odd dimensions 52, 30, 20 and 14. The four
+entries use the stated full odd dimensions 104, 60, 40 and 28. The four
 simple-spectrum controls have zero signature. Exhaustive constructor proofs
 check the nine positive labels and eight controls. This is a finite algebraic
 table; its identification with geometric primary factors, the Hodge numbers,
@@ -20,12 +20,12 @@ noncomputable def rankTwoCountingExactSignature (label : RankTwoCountingLabel) :
   (exactDiscriminantAtom (residueDiscriminant (rankTwoCountingResidue label)),0)
 
 /-- The exact finite endpoint signature: actual rank-two residues, the four
-specified half-odd dimensions, and zero simple-spectrum controls. -/
+specified full odd dimensions, and zero simple-spectrum controls. -/
 noncomputable def countingExactSignature : CountingMatrixLabel → (ℚ →₀ ℕ) × ℕ
-  | .genus2 => (0,52)
-  | .genus3 => (0,30)
-  | .genus4 => (0,20)
-  | .genus5 => (0,14)
+  | .genus2 => (0,104)
+  | .genus3 => (0,60)
+  | .genus4 => (0,40)
+  | .genus5 => (0,28)
   | .genus6 => rankTwoCountingExactSignature .genus6
   | .genus7 => rankTwoCountingExactSignature .genus7
   | .genus8 => rankTwoCountingExactSignature .genus8

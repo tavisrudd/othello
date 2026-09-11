@@ -10,6 +10,7 @@ rev = "571b8a8e54219b4d393f75f4b8653fac08197fcc"
 name = "CubicStabilizationM1"
 roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.ExactPrimaryLedger",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.FaithfulCenterLatticeComparison",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.CompletedExponentialPushforward",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.MultivariateExponentialCharacters",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.CompletedMultivariatePushforward",

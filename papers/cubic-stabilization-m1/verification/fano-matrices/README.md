@@ -70,4 +70,4 @@ The certificate field `O3` is the full odd dimension on even-rank-three
 primary factors. It is twice `h21` for the four relevant Fano rows:
 104, 60, 40, 28 in genera 2, 3, 4, 5. Explicit regression assertions check
 these values and zero for all other rows. This is the manuscript's
-normalization; the separate Lean numerical ledger uses half this dimension.
+normalization, also used by the Lean numerical ledger.

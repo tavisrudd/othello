@@ -151,7 +151,7 @@ the aggregate to import each one, and computes terminal and signature coverage
 across their union.  This keeps the manuscript split visible without weakening
 the exact terminal census.
 
-Checked coverage snapshot: 79 claims; 25 absent; 27 fragmentary; 26 conditional; 1 complete; 371 reviewer terminals, of which 133 are machinery serving no current manuscript claim.
+Checked coverage snapshot: 79 claims; 25 absent; 27 fragmentary; 26 conditional; 1 complete; 373 reviewer terminals, of which 135 are machinery serving no current manuscript claim.
 
 The main reviewer interface includes `gradedBulkSource_equiv_completedSubring`
 and `gradedBulkCenterRingHom_injective`: the formal graded coefficient families
@@ -482,13 +482,19 @@ its exact command and finite scope are in the bundle README. Mathematical
 classification, GW identification, deformation and actual comparison maps
 remain imported results or written proofs, not certificate conclusions.
 
-The Lean numerical exact-primary ledger uses half the odd dimension on
-rank-three factors, whereas the manuscript's `O_3` uses the full dimension.
-Thus its four endpoint values are 52, 30, 20, 14, compared with the printed
-104, 60, 40, 28. Both detect the same four nonzero endpoints. This numerical
-normalization is not an exact formal realization of the printed selector;
-those geometric claims retain absent coverage. The semisimple-object selector
-retains the entire odd object and does not divide it by two.
+The Lean numerical exact-primary ledger, manuscript's `O_3`, and finite
+certificate use the same full odd dimensions: 104, 60, 40, 28. The public
+terminal `rankThreeEndpoints_fullOddDimensions` checks these four model values
+by kernel reduction. The semisimple selector retains the entire odd object;
+its dimension bound suffices for nullity, without a parity hypothesis.
+
+The terminal `gradedCenterComparison_faithful_lattice_and_residue` composes
+the constructed graded center homomorphism with an actual regular horizontal
+comparison. It proves injectivity, preservation and reflection of the source
+preimage lattice, and exact discriminant transport. A faithful target-ring
+embedding, literal connection realization, and regular comparison with regular
+inverse remain explicit inputs. This does not instantiate the geometric
+blowup comparison or the Hodge-fixed base; manuscript coverage is unchanged.
 
 The reconstruction criterion and its period inputs are external arithmetic
 and source evidence, not dependencies of a Lean proof identifying geometric
