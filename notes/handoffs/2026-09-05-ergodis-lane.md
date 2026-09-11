@@ -48,8 +48,11 @@ User-selected next order: C1143 BB circuit distance (active), C1144 held-out
 QLDPC distance, C1145 hypergraph decoding, C1146 multidimensional allocation,
 C1147 temporal scheduling. Common protocol, historical corrections and sources:
 `../2026-09-11-ergodis-external-benchmark-programme.md`.
-C1143 first gate: pin published circuit inputs, validate full-hyperedge/logical-label
-lowering independently, then bounded native smoke and matched external controls.
+C1143 input gate passed: seven pinned circuits and independent filter/census replay.
+Even the smallest filtered model has 2,592 fault coordinates, beyond the current
+1,792-coordinate provider. Next: bounded sparse fault-column execution preserving
+existing fast kernels; native solve remains open. Report:
+`../2026-09-11-c1143-bb-circuit-input-gate.md`.
 Use **TigerBlossom** for the decoder; legacy paths retain their historical names.
 
 ### C1130 — full native/JS/WASM capability and workflow parity (in progress)
