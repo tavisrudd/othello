@@ -40,7 +40,7 @@ row-sum-only controls. It is not a complete circuit basis or connectivity proof.
 Private authority:
 `~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`.
 Implementation snapshot e8aca40; reproducibility bundle committed at 7931e22; diagnostic hardening at 086574d
-(initial bundle 1dff719).
+(initial bundle 1dff719); projection-free arithmetic reuse design at 0ecef36.
 Reproducibility bundle: `evidence/structure-repair/REPORT.md`, with generated
 witnesses, counter samples, exact commands, retained hashes, paired log t-scores,
 profiles and CPU-budget overruns. Full-gate result is recorded there.
@@ -87,7 +87,12 @@ still does not decide these hard models; all longer runs reached their CPU limit
    neutral movement, composite exchanges and scope-bound repair explanations on
    smaller controls before the strict 2092 fibre-recovery gate. Exact local
    solving alone does not establish global reachability.
-4. Price duplicate-term canonicalization and reusable sparse priority workspaces.
+4. First test reuse of the already checked score lattice in ordinary interval
+   bounds, without a geometric projection: strict improvements are at most S-d,
+   so a box lower bound above S-d suffices. Cache the cutoff at incumbent changes.
+   This is designed, not implemented or timed; preserve the clean d=1 path and
+   run the full proof/allocation/retained-counter gates.
+5. Price duplicate-term canonicalization and reusable sparse priority workspaces.
    Priorities account for about 16% of sampled cycles. Neither proposed change
    has yet passed its own retained counter gate.
 
