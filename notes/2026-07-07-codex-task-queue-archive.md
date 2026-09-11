@@ -5648,3 +5648,5 @@ depth because this archive is in the same `notes/` directory.
 
 - **C1131 `[cubic-threefolds]` [REPORTED 2026-09-08]** — selective manuscript upgrades complete; four gates pass, PDFs match and local mirrors are clean; C978/C956 remain open → `notes/2026-09-08-c1131-selective-manuscript-upgrades.md`.
 - **C1132 `[continuation]` [REPORTED 2026-09-08]** — proved sharp five-clique bound and optimal q>=9 uniform rigidity/extension/recognition; referee corrections, coding corollary, extension-field tests and validated standalone export complete (6e7afbf) → `notes/2026-09-08-c1132-continuation-referee-response.md`.
+
+- **C1134 `[ame-lu]` [COMPLETED 2026-09-10]** — remediated Astra/ChatGPT Paper I referee feedback; characteristic-free global radius, universal transition compatibility, encoder/frame/phase hypotheses, worked examples, recognition contract, and partial-formalization disclosure; independent reads, warning-free 40-page authority/mirror gates and byte-identical PDF pass; unpushed mirror `55e70c4` → `notes/2026-09-10-c1134-ame-lu-astra-referee-revision.md`.

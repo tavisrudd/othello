@@ -1,7 +1,7 @@
 # C1134 — AME-LU Astra/ChatGPT referee revision
 
 **Lane:** `ame-lu`
-**Status:** RUNNING (2026-09-10); user instructed “begin”.
+**Status:** COMPLETED (2026-09-10). All referee items disposed; authority and standalone validated.
 **Request:** queue a new C item to review and work on the referee feedback
 supplied by the user on 2026-09-10. All conclusions below are referee
 proposals pending independent checking against the authoritative manuscript.
@@ -304,3 +304,28 @@ logical-radius and hypothesis clarifications are adopted, the remaining
 character/optimal-radius questions remain open, and no further scope is
 added. Authority changes are ready for their forward commit; mirror
 synchronization is the remaining release step.
+
+
+## Completion and downstream identity
+
+All five required corrections and all seven ranked suggestions are handled.
+The two quantitative suggestions were independently proved before adoption;
+formal reproducibility uses the explicitly offered shorter-disclosure option.
+Authority revision: `f6f342e24ae21ab2fdb6f1aef6fb4c006ebc1a5d`.
+Standalone forward commit: `55e70c4` in `~/src/math-papers/ame-lu`.
+Exporter plan/audit: 25 scholarly source files, zero findings. The final
+export verification covers 28 tracked files including provenance metadata;
+content SHA-256:
+`d28e862005353d762336eafe4b6bb1130716879601540a6d85ef572d483a1359`.
+The standalone warning-free build regenerates the same 40-page PDF byte for
+byte; its public release hash equals the authority hash above. The standalone
+correctly reports that the 83 formal artifacts are absent and not checked
+there. This task neither altered nor reran Lean.
+
+No push, deposit, tag, submission, or external message was made. C979,
+Paper II, other manuscripts, and the portfolio summary were untouched.
+There is no further required C1134 work. The optional next mathematical
+question is the already identified character-control bound; it requires a
+separate allocation, not an implied optimality claim or an invented C id.
+The discovery-track discriminator was reviewed at closeout; no incidental
+entry was warranted.

@@ -35,7 +35,6 @@ Source material for C774--C777 is the external Fable session note
 numerical claim must be regenerated here under
 `notes/research-reproducibility-conventions.md`.
 
-- **C1134 `[ame-lu]` [RUNNING]** — review and remediate Astra/ChatGPT Paper I referee feedback: statement/frame/phase repairs, prove and adopt justified robustness improvements, worked example, recognition contract, exposition and formal-artifact clarity → `notes/2026-09-10-c1134-ame-lu-astra-referee-revision.md`.
 
 - **C979 `[ame-lu]` [RUNNING; USER-HELD OPEN UNTIL EXPLICIT CLOSE]** — revise *Diagonal Isoduality and Transversal Clifford Groups of MDS--CSS Codes* for a stabilizer-code reader: make the nullity-zero/nullity-one dichotomy the core, rebuild the introduction and Section 3 around the operational question, and drop the README's Clebsch affiliation claim, preserving the exact mathematics → `notes/2026-08-27-c979-mds-css-exposition-revision.md`.
 
