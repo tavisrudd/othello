@@ -203,12 +203,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Additional pencil-focused feedback is assessed in
   `../2026-09-07-cubic-six-axis-feedback-triage.md`; it is a proposed future
   project, not an allocated replacement for this order.
-- **C1140 — sharpness upgrade, active.** Owns the new packet integration,
-  three-parameter family and arithmetic separation, following the author's
-  task-scope correction. Repair audited interfaces, retain a clear theorem
-  hierarchy, validate the evidence and obtain a fresh cold review.
-  Card: `../cubic-threefolds-tasks/c1140-sharpness-upgrade.md`.
-  Prior audit and ej/tt notes retain their C956 filenames as provenance.
+- **C1140 — sharpness upgrade complete.** Uniform cubic family, separated
+  arithmetic pencil and optional finite-partner corollary integrated; fresh
+  source/referee and reader repairs accepted. The 24-page paper and portfolio
+  are locally exported, all gates pass, and PDF bytes agree. C956 stays open.
+  Report: `../2026-09-11-c1140-integration.md`.
 - **C956 — existing exact-level-two manuscript referee cycle.** New upgrades
   are owned by C1140; the older acceptance below covers the previous manuscript.
   Cross-specialty review repaired the characteristic-zero scope, the

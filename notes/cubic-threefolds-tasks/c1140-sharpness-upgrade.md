@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; explicitly queued and authorized for execution on 2026-09-11.
+**Status:** complete, 2026-09-11; integrated, reviewed, checked and exported locally.
 
 ## Ownership
 
@@ -47,7 +47,12 @@ verified companion proof, or exhaustive priority certification.
 
 ## Current state
 
-The prior packet audit found no demonstrated fatal defect and both check pathways
-passed. The remaining reference placeholder is semistable reduction. Integration
-has not yet been performed at allocation. Bounded literature comparison is not
-a priority verdict. The implementation and new reviews belong here.
+All seven gates passed. The integrated paper has 24 pages and a 142-word
+abstract. Fresh mathematical review and two independent reader comparisons
+were followed by repairs and accepted targeted rechecks. SGA7 reduction
+pinpoints close the prior source placeholder. Authority and standalone checks
+pass; PDFs are byte-identical. Source bundle `a2e59e9eb`, standalone `c7576a7`,
+portfolio `b7cb8bb`. No push/deposit. No independent companion-proof or full
+symbolic second-implementation claim is made.
+
+Report: `../2026-09-11-c1140-integration.md`. C956 remains separately open.

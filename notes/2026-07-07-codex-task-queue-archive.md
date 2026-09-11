@@ -5660,3 +5660,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1138 `[ame-lu]` [REPORTED 2026-09-10]** — Verify and integrate second referee corrections and focused strengthenings; omit gradings → `notes/2026-09-10-c1138-ame-lu-second-referee.md`.
 
 - **C1139 `[ame-lu]` [REPORTED 2026-09-10]** — Faster prime-field recognition: proof, implementation, exhaustive tests and literature attribution → `notes/2026-09-10-c1139-ame-lu-fast-recognition.md`.
+
+- **C1140 `[cubic-threefolds]` [REPORTED 2026-09-11]** — integrated and locally exported the sharpness family/arithmetic upgrade; mathematical and cold-reader repairs accepted; authority/standalone checks and byte identity pass → `notes/2026-09-11-c1140-integration.md`
