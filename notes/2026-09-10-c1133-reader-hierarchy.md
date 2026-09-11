@@ -80,3 +80,20 @@ companion. Both authority execution and a standalone execution of that exact
 Makefile pass; all three PDFs agree byte for byte. No build gate is weakened.
 The initial editorial export is `504ffbc`; the final portable export follows
 this source fix. The portfolio title is synchronized at `69bfb01`.
+
+## Final release identity
+
+Editorial authority `0230c5381`, portability repair `885f0e947`; standalone
+`cfa8672`. Exporter verification passes for 352 files with content SHA-256
+`982abdd6166b9fa555c9a6872386157cc461efb5e6744cce6e74fb5e081079dd`.
+Primary and both companion checks pass in the standalone repository, with
+all three PDFs byte-identical to the authority. Primary PDF: 33 pages,
+252860 bytes, SHA-256
+`f771e0242accac52f69a24ef140a5aed75fceb937cc413fc93464d376557f15a`.
+The complete Lean source set is unchanged by the editorial revision; the
+preceding authority and standalone guarded full builds and 373-terminal audits
+remain the kernel validation for this artifact. Summary `69bfb01` matches
+the committed authority README. Nothing was pushed.
+
+Next C1133 work: match the supplied geometric coefficient embedding and regular
+comparison realizations to the written proof and Hodge-fixed-base hypotheses.
