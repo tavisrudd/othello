@@ -1,12 +1,20 @@
 \section{Numerical quantum invariants}
 \label{sec:atomic-one-step}
 
-We select two-dimensional primary factors by the eigenvalues of a
-residue matrix. For the cubic theorem, the two eigenvalues must be distinct
-modulo integers. The Fano extension also uses the stronger count that
-requires only distinct eigenvalues. The matrix calculation below explains
-both tests; the blowup and surface arguments follow in
-Section~\ref{sec:blowup-centers}.
+The model is the cubic residue, with eigenvalues $-1/6,-5/6$, compared
+with the residue for a curve of genus at least two, whose eigenvalues coincide.
+The cubic count requires two eigenvalues distinct modulo integers;
+the stronger Fano count requires only that they be distinct.
+Both tests apply to rank-two factors with nonzero square-zero centered
+Euler operator. Section~\ref{sec:blowup-centers} extends vanishing to surfaces.
+
+For a first pass, retain residue invariance
+(Proposition~\ref{prop:rank2-rigidity}), the blowup formula
+(Proposition~\ref{prop:numerical-blowup}) and center vanishing
+(Proposition~\ref{prop:atomic-lowdim}), then read the cubic calculation in
+Section~\ref{subsec:shared-cubic-packet} and the product
+Lemma~\ref{lem:special-projective-line}. The persistence arguments justify
+using those small calculations in all even bulk directions.
 
 \subsection{Whole primary connection blocks}
 
@@ -41,7 +49,8 @@ For a primary block with eigenvalue \(\lambda\), centering removes the
 scalar exponential factor \(e^{-\lambda/z}\); its leading operator becomes
 \(N=U-\lambda I\).
 
-After base change to \(\overline K_Y\), each generalized eigenspace of \(U\) is
+We always retain a whole generalized eigenspace, rather than individual
+Jordan blocks inside it. After base change to \(\overline K_Y\), each generalized eigenspace of \(U\) is
 a summand of the full formal connection, not just an invariant subspace of
 \(U\). The splitting uses a gauge, that is, a formal change of frame,
 regular at \(z=0\):
@@ -80,9 +89,7 @@ restriction nondegenerate.
 \end{proof}
 
 We call these factors the \emph{generic even QDM blocks} of \(Y\).
-Each is a whole primary spectral summand; individual Jordan blocks within
-one primary summand are not counted separately.  A block
-retains its connection, pairing, and centered Euler endomorphism, but not an
+A block retains its connection, pairing, and centered Euler endomorphism, but not an
 absolute cohomological grading. Its morphisms preserve these data and are
 regular connection isomorphisms after scalar extension and formal change
 of bulk coordinates.  In particular, their gauges use

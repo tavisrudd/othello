@@ -1,0 +1,188 @@
+{
+  "inputs": {
+    "finite_checks.py": "b0203ae22d6eb45076a9bd1894b53faa5a36a3640d2e135b97c15697794ff9b0",
+    "source_check.py": "8dd229bf5b0ec8ede65ecdfe834779799a3fbefea73a3071eb2a733f1c8bdc65"
+  },
+  "printed_g2_entry_comparison": {
+    "period_degree_three_difference": "40/27",
+    "printed": 119681240,
+    "reconstructed": 119681280
+  },
+  "rows": [
+    {
+      "genus": 2,
+      "independent_cleared_numerator": -277862841449212453200000,
+      "period_0_through_8": [
+        "1",
+        "0",
+        "34380",
+        "9200000",
+        "2543949225",
+        "596594909376",
+        "123345594415020",
+        "22703573464248960",
+        "60193132626617561025/16"
+      ],
+      "reconstruction_discriminant": "-1929603065619530925000",
+      "source_example_5_4_matches": true,
+      "unshifted_counting_matrix": [
+        [
+          0,
+          137520,
+          119681280,
+          21690374400
+        ],
+        [
+          1,
+          624,
+          650016,
+          119681280
+        ],
+        [
+          0,
+          1,
+          624,
+          137520
+        ],
+        [
+          0,
+          0,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "genus": 3,
+      "independent_cleared_numerator": -69905701222162560,
+      "period_0_through_8": [
+        "1",
+        "0",
+        "972",
+        "35968",
+        "1470633",
+        "49813056",
+        "1490959916",
+        "39673474944",
+        "15199465236417/16"
+      ],
+      "reconstruction_discriminant": "-485456258487240",
+      "source_example_5_4_matches": true,
+      "unshifted_counting_matrix": [
+        [
+          0,
+          3888,
+          504576,
+          18323712
+        ],
+        [
+          1,
+          80,
+          13600,
+          504576
+        ],
+        [
+          0,
+          1,
+          80,
+          3888
+        ],
+        [
+          0,
+          0,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "genus": 4,
+      "independent_cleared_numerator": -57447331829280,
+      "period_0_through_8": [
+        "1",
+        "0",
+        "198",
+        "2936",
+        "101421/2",
+        "710172",
+        "8819184",
+        "97228080",
+        "30860033157/32"
+      ],
+      "reconstruction_discriminant": "-398939804370",
+      "source_example_5_4_matches": true,
+      "unshifted_counting_matrix": [
+        [
+          0,
+          792,
+          43632,
+          793152
+        ],
+        [
+          1,
+          30,
+          2340,
+          43632
+        ],
+        [
+          0,
+          1,
+          30,
+          792
+        ],
+        [
+          0,
+          0,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "genus": 5,
+      "independent_cleared_numerator": -555066990720,
+      "period_0_through_8": [
+        "1",
+        "0",
+        "76",
+        "640",
+        "6569",
+        "53568",
+        "3500812/9",
+        "7511168/3",
+        "2087783881/144"
+      ],
+      "reconstruction_discriminant": "-3854631880",
+      "source_example_5_4_matches": true,
+      "unshifted_counting_matrix": [
+        [
+          0,
+          304,
+          9984,
+          121088
+        ],
+        [
+          1,
+          16,
+          800,
+          9984
+        ],
+        [
+          0,
+          1,
+          16,
+          304
+        ],
+        [
+          0,
+          0,
+          1,
+          0
+        ]
+      ]
+    }
+  ],
+  "scope": "Four index-one families g=2,3,4,5; finite uniqueness hypotheses and period agreement only",
+  "source": "arXiv:math/0410327v4, Proposition 6.2.2 and Example 5.4",
+  "status": "PASS"
+}

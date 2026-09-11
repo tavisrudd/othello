@@ -47,4 +47,5 @@ residue-check:
 fano-check:
 	uv run --with sympy==1.14.0 python verification/fano-matrices/finite_checks.py --check
 	$(PYTHON) verification/fano-matrices/independent_checks.py --check
+	$(PYTHON) verification/fano-matrices/reconstruction_check.py --check
 	sha256sum --quiet -c verification/fano-matrices/SHA256SUMS

@@ -60,7 +60,8 @@ multiplicities.
 
 The comparison must recover the intrinsic generic center connection, even
 when its raw Novikov map identifies curve classes. We check faithfulness
-on the fixed base directly.
+on the fixed base directly. The new check is that algebraic divisor
+coordinates are fixed, so they still recover the curve-class information.
 
 \begin{lemma}[Fixed-base comparison]
 \label{lem:hodge-fixed-comparison}\coverage{absent}%
@@ -227,11 +228,8 @@ repeated even primary factor: rank two with nonzero discriminant in
 index-two degrees $1,2,3$ and index-one genera $6,8$, or rank three in
 index-one genera $2,3,4,5$. All complements have even rank one.
 
-An even-rank-one factor of a Frobenius superalgebra has no odd part.
-Writing its even unit as $e$, odd elements satisfy $ab=ce$; supercommutativity
-gives $(ab)^2=0$, hence $c=0$. Nondegeneracy of the odd Frobenius pairing
-then forces the odd part to vanish. Consequently the entire $H^3(X)$
-lies in the unique retained repeated factor, and
+By Lemma~\ref{lem:odd-selector}, the rank-one complements have no odd
+part. Hence the entire $H^3(X)$ lies in the retained factor, and
 \[
  \mathcal H_G(X)=[H^3(X,\Q)_\C].
 \]
@@ -250,8 +248,6 @@ same $G$-representation. Therefore
 \[
  \mathcal H_G(X\times\PP^1)=2[H^3(X,\Q)_\C].
 \]
-This uses neither a big quantum tensor formula at mixed bulk nor a general
-projective-bundle comparison theorem.
 
 \Needspace{15\baselineskip}
 \begin{proof}[Proof of Theorem~\ref{thm:hodge-conservation}]

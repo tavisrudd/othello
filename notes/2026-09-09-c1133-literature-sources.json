@@ -86,7 +86,7 @@
       },
       "key": "arXiv:math/0410327",
       "read_depth": "partial",
-      "read_scope": "Theorem 6.1.1 and start of proof, extraction lines 530–580.",
+      "read_scope": "Theorem 6.1.1 and start of proof, extraction lines 530–580. On 2026-09-10 referee response: header/introduction lines 1--28, Definition 2.1.1 lines 214--247, Example 5.4 and Theorem 6.1.1 lines 530--603, reconstruction discussion, Theorem 6.2.1 and Proposition 6.2.2 lines 610--730.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Gromov-Witten invariants of Fano threefolds of genera 6 and 8",
       "version_in_cached_header": "arXiv:math/0410327v4 [math.AG] 7 Jan 2007"
@@ -100,8 +100,8 @@
         "url": "https://arxiv.org/pdf/math/0507232v3"
       },
       "key": "arXiv:math/0507232",
-      "read_depth": "abstract/metadata only",
-      "read_scope": "Cache bibliographic metadata only; no text-level judgment yet.",
+      "read_depth": "partial",
+      "read_scope": "v3: theorem 1.1 and conventions (90--170), reconstruction theorem 2.3.5 (390--450), counting conventions/families/matrices and proof (575--710). Direct d1/d2 matrices match; index-one V2-prime displayed e coefficient differs from the independently reconstructed value, recorded in referee response, and is not imported.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Quantum cohomology of smooth complete intersections in weighted projective spaces and singular toric varieties",
       "version_in_cached_header": "arXiv:math/0507232v3 [math.AG] 25 Jul 2007"
@@ -560,7 +560,7 @@
       "key": "arXiv:1303.3288",
       "title": "Quantum periods for 3-dimensional Fano manifolds",
       "read_depth": "partial",
-      "read_scope": "v3, introduction lines 1–240; sections 1–12 and opening of 13, lines 1820–2275; end of 13 and sections 14–17, lines 2330–2478. Not full text; intervening bundle construction and general GW preliminaries unread.",
+      "read_scope": "v3, introduction lines 1–240; sections 1–12 and opening of 13, lines 1820–2275; end of 13 and sections 14–17, lines 2330–2478. Not full text; intervening bundle construction and general GW preliminaries unread. On 2026-09-10 referee response: Assumptions D.1 (446--465), Corollary D.5 (645--700), Proposition D.9 (1008--1075), and family formulas Sections 8--11 (2020--2220) rechecked; intermediate D.2 material 530--565 also read.",
       "access": {
         "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_1303.3288.pdf",
         "text": "/tmp/persistent/tavis/lit-search/text/arXiv_1303.3288.txt",

@@ -25,8 +25,8 @@ of fourfolds, proving the theorem.
 Surface centers explain the difficulty. In the classical blowup formula,
 a surface $S$ contributes $H^3(S)(-1)$ in degree five, where
 $H^3(X)(-1)$ also occurs in $H^5(X\times\PP^1)$. The direct
-intermediate-Jacobian argument therefore gives no obstruction to the
-product's rationality. The quantum selection separates the cubic
+intermediate-Jacobian argument does not directly give the required
+obstruction. The quantum selection separates the cubic
 contribution from every possible center contribution.
 
 The cubic calculation is the model case of a construction covering the
@@ -100,19 +100,17 @@ generic coefficient field, its whole generalized eigenspaces, called
 \emph{primary factors}, decompose the formal connection into blocks.
 
 The count selects rank-two blocks for which the centered leading term \(N\) of
-Euler multiplication is nonzero and satisfies \(N^2=0\).  Horizontality of the
-Poincar\'e pairing makes a canonical elementary modification regular singular,
-while flatness gives a Lax equation for its residue, whose eigenvalues are
-therefore preserved.  We count the block when the two residue eigenvalues are
+Euler multiplication is nonzero and satisfies \(N^2=0\). The lattice
+modification in Section~\ref{sec:atomic-one-step} extracts two residue
+eigenvalues; flatness keeps their difference fixed as the quantum
+parameters vary.  We count the block when the two residue eigenvalues are
 distinct modulo \(\Z\), equivalently when the two formal exponent classes are
 distinct.
 Beauville's quantum product formulas give exponent representatives
 \(-1/6\) and \(-5/6\) for the cubic block, with difference \(2/3\).
 These values already appear in Katzarkov--Lee--Svoboda--Petkov
 \cite[pp.~375--376]{InterpretationsSpectra}; we give the residue calculation
-in our conventions.  The resulting invariant
-vanishes on points, curves, and surfaces and on projective space.
-The small Gromov--Witten product formula and flatness in all even bulk
+in our conventions.  The small Gromov--Witten product formula and flatness in all even bulk
 directions show that it doubles after product with \(\PP^1\); see
 Lemma~\ref{lem:special-projective-line}. This proves the cubic theorem.
 
@@ -159,8 +157,10 @@ A reader interested in the cubic theorem can stop after
 Section~\ref{sec:cubic-proof}. Section~\ref{sec:fano-classification} completes
 the numerical classification, followed by its geometric consequences.
 Part~\ref{part:hodge} proves Hodge conservation, including the fixed-base
-comparison and rational descent. The finite-data appendix supplies the computations and family provenance
-needed to audit the classification and Hodge endpoints. The other appendices
+comparison and rational descent. The finite-data appendix gives the matrix checks and their cited geometric
+inputs, with the limits of the accompanying formalization. The other appendices
 contain an independent cubic calculation, an arithmetic application, and
 optional general-bundle and additive extensions. Those extensions
 retain Iritani--Koto's general theorem; it is not a premise of either part.
+The ``Limits of the construction'' discussion in Appendix~\ref{sec:motivic}
+explains the obstruction to extending this argument to a second stabilization.

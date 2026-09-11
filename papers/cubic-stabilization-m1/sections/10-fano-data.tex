@@ -12,6 +12,7 @@ write the matrix at Novikov parameter one as
  U=\begin{pmatrix}a&c&e&f\\1&b&d&e\\0&1&b&c\\0&0&1&a\end{pmatrix},
  \qquad D=\tfrac12\diag(3,1,-1,-3).
 \]
+\Needspace{14\baselineskip}
 The nine inputs are:
 \begin{center}\small
 \begin{tabular}{@{}lrrrrrr@{}}
@@ -54,21 +55,43 @@ the other checker computes the projector and reduced inverse directly.
 Neither requires a higher-rank logarithmic lattice.
 
 \subsection{Sources and all smooth members}
-The counting matrices agree entrywise with the reconstructions accompanying
-B\"ohning--Graf von Bothmer--Su'a \cite[Sections~9--10 and associated data]{NaiveAtoms}.
-If $M$ denotes a source matrix at parameter one, the displayed matrix is
-$D_0^{-1}M^{\mathsf t}D_0+aI$. For index one of degree $k=2g-2$,
-$D_0=\diag(1,1,k,k)$; for index two of degree $k$,
-$D_0=\diag(1,2,4k,8k)$ and $a=0$.
-The input period coefficients through degree eight agree with the formulas
-and tables in Coates--Corti--Galkin--Kasprzyk
-\cite[Sections~3--17]{CCGK}. The genus-six and genus-eight quantum
-inputs are proved in \cite[Theorem~6.1.1]{PrzyjalkowskiGenera}; the weighted
-and complete-intersection inputs are identified in the cited period tables.
-The reconstruction constrains the quantum-product matrix by degree, classical
-products and pairing, then determines its coefficients from the period equation.
-The finite coefficient comparison checks normalization; the GW identification
-is the imported reconstruction result.
+For index-two degrees $1,2$, the counting matrices are
+\cite[Theorem~2.6.6]{Przyjalkowski}; degree $3$ is the cubic calculation
+from Beauville's theorem. For genera $6,8$, the matrices and scalar shifts
+are \cite[Theorem~6.1.1]{PrzyjalkowskiGenera}.
+
+For genera $2,3,4,5$, the geometric period formulas are those in
+\cite[Sections~8--11]{CCGK}. The sextic in $\PP(1,1,1,1,3)$ satisfies
+the divisibility hypothesis of Proposition~D.9 there. The quartic,
+the $(2,3)$ intersection and the $(2,2,2)$ intersection satisfy the
+ampleness hypotheses of Corollary~D.5. These results identify the
+normalized quantum period $G(q)=1+\sum_{n\geq2}d_nq^n$.
+The printed regularized coefficient of degree $n$ is $n!d_n$.
+
+The reconstruction input is \cite[Proposition~6.2.2]{PrzyjalkowskiGenera}.
+For a smooth Picard-rank-one, index-one Fano threefold, its map from the
+five counting-matrix coefficients to $d_2,\ldots,d_6$ is invertible when
+\[
+ -495d_3d_5+261d_2d_3^2-312d_4d_2^2+432d_2^4+56d_4^2\ne0.
+\]
+For each of the four families this condition holds. The finite check uses
+$M=U-aI$, with entries $M_{ij}(q)=M_{ij}(1)q^{j-i+1}$ and unit
+subdiagonal. It solves $q\partial_q y=M(q)y$, $y(0)=(0,0,0,1)^t$,
+and compares $y_3$ with $G$ through degree eight. At degree $n>0$ the
+recursion is uniquely solvable because $nI-M(0)$ is invertible.
+The resulting coefficients agree with the cited periods, and the
+reconstruction criterion identifies $M$ with the geometric counting matrix.
+The certificate also checks the source's independent low-order formulas
+\cite[Example~5.4]{PrzyjalkowskiGenera}. Thus the finite comparison is used
+within a stated uniqueness theorem; it does not replace the geometric
+period formula.
+
+As a further provenance check, these matrices agree entrywise with the
+reconstructions accompanying B\"ohning--Graf von Bothmer--Su'a
+\cite[Sections~9--10 and associated data]{NaiveAtoms}. If $M_0$ is a source
+matrix at parameter one, then $U=D_0^{-1}M_0^{\mathsf t}D_0+aI$.
+For index one of degree $k=2g-2$, $D_0=\diag(1,1,k,k)$; for index two
+of degree $k$, $D_0=\diag(1,2,4k,8k)$ and $a=0$.
 
 The smooth classification has seventeen deformation families, indexed by
 index and degree or genus; we use its statement and Hodge numbers as recalled
@@ -98,9 +121,10 @@ is a premise of the classification theorem.
 
 \subsection{Reproduction and formal boundary}
 The bundle \texttt{verification/fano-matrices/} contains the exact rational
-inputs, the symbolic projector calculation, an independent rational-elimination
-checker, and the source-normalization comparison. Its README specifies
-commands, pinned source hashes, finite domains and trust limits.
+inputs and checks by symbolic projectors, rational elimination, period
+recursion and source comparison. Its README specifies
+commands, pinned source hashes, finite domains and trust limits. It accompanies
+the manuscript in the \href{https://github.com/tavisrudd/cubic-stabilization-m1}{paper repository}.
 The two implementations agree on all seventeen characteristic polynomials
 and cyclic frames and all nine rank-two residues, including four zero
 controls. Only the nine detected inputs above are needed here.

@@ -46,12 +46,13 @@
       ]
     },
     "fano-matrices": {
-      "role": "Exact small Euler matrices: 17 characteristic polynomials and cyclic frames, nine rank-two discriminants independently recomputed; 15 source matrix and period-input comparisons. Only nine detected families enter the main theorems. No geometric theorem is checked.",
+      "role": "Exact small Euler matrices: 17 characteristic polynomials and cyclic frames, nine rank-two discriminants independently recomputed; 15 source matrix and period-input comparisons. Only nine detected families enter the main theorems. No geometric theorem is checked. For genera 2--5, the matrix differential recursion matches normalized periods through degree eight, and the Proposition 6.2.2 reconstruction discriminant is nonzero. Low-order source formulas and a separate denominator-clearing check provide cross-checks; geometric periods and reconstruction remain imported.",
       "checksum_manifest": "verification/fano-matrices/SHA256SUMS",
       "commands": [
-        "uv run --with sympy==1.14.0 python verification/fano-matrices/finite_checks.py",
-        "python3 verification/fano-matrices/independent_checks.py",
-        "uv run --with sympy==1.14.0 python verification/fano-matrices/source_check.py --source-dir SOURCE_DIR"
+        "uv run --with sympy==1.14.0 python verification/fano-matrices/finite_checks.py --check",
+        "python3 verification/fano-matrices/independent_checks.py --check",
+        "uv run --with sympy==1.14.0 python verification/fano-matrices/source_check.py --source-dir SOURCE_DIR",
+        "python3 verification/fano-matrices/reconstruction_check.py --check"
       ]
     }
   }
