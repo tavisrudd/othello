@@ -62,8 +62,8 @@ Implementation and validation disposition: `../2026-09-10-c1130-offline-worker-l
 Repair race terminal status now flushes before successful worker cleanup cancels
 pending paints; completed and work-limited controls pass browser DOM checks.
 Private report: `analysis/interface-review/2026-09-10-terminal-race-paint.md` (`521374b`).
-XOR and eligible capacity-grid demos now have a canonical WASM Specialized Solver
-third arm (`ergodis` core `0a69013`, private `b937f6d`). General native source-derived
+XOR has a canonical WASM Specialized Solver reference; capacity-table references
+are now test-only when ordinary execution selects the same algorithm. General native source-derived
 independent minima / bounded two-resource surfaces replace the JS prototype for
 execution. Native/JS/WASM oracle, allocation, counter and browser gates are recorded
 in `analysis/interface-review/2026-09-10-wasm-specialized-solvers.md`; design:
@@ -87,15 +87,19 @@ Independent minimum-cost recognition for XOR is now shared by both normal race
 arms; cheap shape/coordinate screens precede allocation, then the existing kernel
 uses the core flat-source constructor (`d7e938e`; private `d33579b`). Native/WASM certificates replay
 against original choices. Private report: `analysis/interface-review/2026-09-10-independent-fit-recognition.md`.
-Checked whole-domain table reuse is now live on 8770 in both ordinary allocation arms
-(private `8bcd7a8`; WASM `cd205df61997…`). It retains original witnesses, rejects
-out-of-domain queries, and counts construction once inside solve time. Native and
-loaded-WASM generated oracles/all-grid ablations pass; no core hot loop changed.
-Report: `2026-09-10-allocation-domain-reuse.md`. The rendered 288-job page measured
-231 ms Evolve versus 328 ms ordinary (runner-only median 105/180 ms); do not conflate
-these boundaries. Next: bounded native batch readout to amortize individual JSON
-worker calls, then remaining first-fit materialization. Broader plan contracts and
-shared-memory telemetry remain open. Do not preserve a default/Evolve capability gap to manufacture a race ranking. WASM all-target Clippy's existing
+Checked whole-domain table reuse and checked family substitution are live on 8770
+in both ordinary allocation arms (core `8b0fab0`, private `d370b92`; WASM `c5a31a14775d…`).
+The compiler preserves original witness IDs and checks a source/domain cardinality
+bound before removing dominated families. The table hot loop is unchanged.
+Redundant direct-table reference arms are omitted automatically; explicit references
+remain test-only. Result rows separate table construction from cheap lookups.
+Private current report: `analysis/interface-review/2026-09-10-family-substitution-integration.md`;
+decision: `adr-domain-family-substitution.md`. Larger profile inputs and source-only
+calibration: `2026-09-10-harder-profile-workloads.md`.
+Next: external certificate serialization/replay, then richer option matching and
+measured admission cost; bounded batch readout remains useful. Do not preserve a
+default/Evolve capability gap to manufacture a race ranking. Shared-memory telemetry
+and broader plan contracts remain open. WASM all-target Clippy's existing
 `bundle.rs` items-after-test-module finding remains; library Clippy/tests pass.
 Asset loading now uses revisioned immutable URLs, speculative post-paint JS/WASM
 cache fills and HTML-hidden empty results (`b65f0b3`). Warm source-switch races
