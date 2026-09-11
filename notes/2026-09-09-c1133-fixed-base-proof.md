@@ -4,11 +4,16 @@
 **Status:** written audit proof of the fixed-base adaptation; the complete
 geometric and literature acceptance gates remain open.
 
-The packet's comparison section at standalone revision `b156ec6` is byte-identical
-to the current authority's `sections/02-qdm-marker.tex`. Its SHA-256 is
+The original audit recorded the packet's comparison section at standalone
+revision `b156ec6` and the then-current authority's `sections/02-qdm-marker.tex`
+under SHA-256
 `ef2bd45dfcb1a679270c2432b4c8696724539bef7ca88c8c9166632f6d457fd2`.
-Thus this audit addresses the current coefficient argument, not a superseded
-manuscript. No manuscript edits are made here.
+That is a historical checkpoint, not a current byte-identity assertion.
+The 2026-09-10 actual-map audit and independent referee read the current
+authority at SHA-256
+`c7d397df80241fc2b0c35b22bb796552a0cace08aa4a79bb03b5e1f6e269695c`;
+see `2026-09-10-c1133-transport-input-reduction.md` and
+`2026-09-10-c1133-hostile-referee.md`. No manuscript edits are made here.
 
 ## Fixed-base faithfulness
 

@@ -11,7 +11,7 @@
       },
       "key": "arXiv:2307.13555",
       "read_depth": "partial",
-      "read_scope": "v3; introduction lines 1–20; Remark 2.3 lines 828–865; Theorem 5.18 and opening of 5.8 lines 5622–5760. Other search hits located but not treated as read.",
+      "read_scope": "v3; introduction lines 1–20; Remark 2.3 lines 828–865; Theorem 5.18 and opening of 5.8 lines 5622–5760. Other search hits located but not treated as read. Actual-map audit 2026-09-10: v3 graded completions and reduced ring, extraction 617–865; §5.6/Remark 5.6, 4250–4348; coordinate maps (5.33)–(5.43), Theorem 5.18 and §5.8 opening, 5300–5765; §5.8.2 inverse coordinates and (5.47)–(5.48), 5810–5960. These passages, not the whole proof, were read.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Quantum cohomology of blowups",
       "version_in_cached_header": "arXiv:2307.13555v3 [math.AG] 4 Feb 2025"
@@ -26,7 +26,7 @@
       },
       "key": "arXiv:2307.03696",
       "read_depth": "partial",
-      "read_scope": "v4; header; Theorem 5.1, Remarks 5.2–5.4 and opening of 5.3, extraction lines 2338–2465. Introduction 110–185 and Section 5.2 through Remark 5.4, lines 2350–2440, also read. Additional v4 reads: introduction 1–107 (global-generation hypothesis and twisting Remark 1.2), Section 5.3 opening 2440–2515, and Section 5.8 complete 3219–3330, plus start of references through 3375. Initial data (5.11)/(5.12) and unique Birkhoff factorization supply the written equivariance adaptation.",
+      "read_scope": "v4; header; Theorem 5.1, Remarks 5.2–5.4 and opening of 5.3, extraction lines 2338–2465. Introduction 110–185 and Section 5.2 through Remark 5.4, lines 2350–2440, also read. Additional v4 reads: introduction 1–107 (global-generation hypothesis and twisting Remark 1.2), Section 5.3 opening 2440–2515, and Section 5.8 complete 3219–3330, plus start of references through 3375. Initial data (5.11)/(5.12) and unique Birkhoff factorization supply the written equivariance adaptation. Actual-map audit 2026-09-10 reread 2338–2490, including positive z realization and twisting.",
       "role_status": "Individual audit where read_scope specifies passages; otherwise intended source, not audited.",
       "title": "Quantum cohomology of projective bundles",
       "version_in_cached_header": "arXiv:2307.03696v4 [math.AG] 31 Jan 2026"
@@ -1327,6 +1327,20 @@
         "bytes": 133572,
         "pdf": false
       }
+    },
+    {
+      "access": {
+        "bytes": 149246,
+        "pdf": "/tmp/persistent/tavis/lit-search/pdf/arXiv_alg-geom_9710014.pdf",
+        "sha256": "73d708012d4157f176a264940b80490f697f51aefd6a3913fbd7ccbbc1e0ed7d",
+        "text": "/tmp/persistent/tavis/lit-search/text/arXiv_alg-geom_9710014.txt",
+        "url": "https://arxiv.org/pdf/alg-geom/9710014"
+      },
+      "key": "arXiv:alg-geom/9710014",
+      "read_depth": "partial",
+      "read_scope": "2026-09-10: extracted lines 30–145, including formula (1), and 280–340, including Theorem 1. No full-proof read. Used for n=3 small quantum Künneth in the narrowed P¹ argument, not tensor factorization at mixed big bulk.",
+      "role_status": "Primary source for the small GW product formula in the C1133 input-reduction proof.",
+      "title": "The product formula for Gromov–Witten invariants"
     }
   ],
   "external_full_text_breakdown": {

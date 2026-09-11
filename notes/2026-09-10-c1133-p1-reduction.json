@@ -1,0 +1,35 @@
+{
+  "associativity_pairs_checked": 16,
+  "basis": [
+    "1",
+    "h",
+    "p",
+    "hp"
+  ],
+  "blocks": [
+    {
+      "even_rank": 2,
+      "nilpotent_rank_at_k_zero": 0,
+      "nilpotent_rank_over_Q_c_t_k": 1,
+      "sign": -1
+    },
+    {
+      "even_rank": 2,
+      "nilpotent_rank_at_k_zero": 0,
+      "nilpotent_rank_over_Q_c_t_k": 1,
+      "sign": 1
+    }
+  ],
+  "boundary": "Checks consequences of the supplied potential, not its GW derivation or transport.",
+  "characteristic_polynomial": "(x^2-4*Q)^2",
+  "potential_input": "v^2*c/2 + v*a*b + c*Q; d_b(Q)=Q",
+  "relations_verified": [
+    "h^2=0",
+    "h*p=hp",
+    "p^2=Q*(1+c*h)",
+    "p_prime^2=Q",
+    "U=k*h+2*p_prime"
+  ],
+  "schema": "c1133-ruled-product-v1",
+  "sympy": "1.14.0"
+}

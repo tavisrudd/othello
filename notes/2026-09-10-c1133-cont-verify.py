@@ -51,7 +51,7 @@ def main():
     assert len(unique) == screen['unique_papers'] == 39
     register = read('2026-09-09-c1133-literature-sources.json')
     sources = register['sources']
-    assert len(sources) == len({s['key'] for s in sources}) == 89
+    assert len(sources) == len({s['key'] for s in sources}) == 90
     vocabulary = {'full text', 'partial', 'review only', 'secondary only',
                   'abstract/metadata only'}
     assert all(s['read_depth'] in vocabulary and s['read_scope'] and s['access'] for s in sources)
@@ -59,7 +59,7 @@ def main():
     additions = {'2501.18849', '2210.08939', '2605.30439', '2605.30450',
                  '2609.06759', '2604.26592'}
     for source in sources:
-        if source['key'] in {'arXiv:' + a for a in additions}:
+        if source['key'] in {'arXiv:' + a for a in additions} | {'arXiv:alg-geom/9710014'}:
             access = source['access']
             pdf = Path(access['pdf']).read_bytes()
             assert pdf.startswith(b'%PDF')
