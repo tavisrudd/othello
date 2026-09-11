@@ -165,10 +165,14 @@ the current instrument remains available and has not been tried since.
 
 ## Open moves, in the order they are worth doing
 
-Current diagnostic: the complete six-cycle neighbourhood at the banked
-14,800 state has no improving/neutral move (minimum delta +2,928).
-Cross-block four-cycle pairs are next; the sampled retained pools missed,
-but the complete 359,987,561-pair neighbourhood remains open.
+Current diagnostic: the complete six-cycle and cross-block four-cycle-pair
+neighbourhoods at the banked 14,800 state have no improving or neutral move.
+On twelve randomized-fibre control states, complete combined strict descent
+still bottoms out at 23,152. Source-calibrated random threshold and record
+travel both lose to existing tabu at matched CPU budgets. The approximately
+14,800 randomized-fibre recovery gate remains open. Replicated shell selection
+is the next independent discriminator; no negative conclusion about the fibre
+follows from these heuristic misses.
 See [native cycle checkpoint](2026-09-11-c1016-cycle-neighborhoods.md).
 
 1. **Widen the fibre move set, or replace it.** The 2-by-2 alternating swap

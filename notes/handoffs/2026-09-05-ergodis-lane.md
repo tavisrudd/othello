@@ -246,9 +246,11 @@ the plain `Z/523` spin shard is still the standing alternative. Concurrent publi
 The complete six-cycle and cross-block four-cycle-pair neighbourhoods at
 banked 14,800 are closed locally. All twelve frozen controls now reach strict local minima of the union after
 at most two improving moves; best remains 23,152. The measured threshold walk is faster per proposal but loses the CPU-budget
-quality comparison to unchanged tabu (22,736). Next: best-observed-score travel
-bounds and measured contiguous-stream pricing, with unchanged replay/control gates. Active native authority:
-`~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`, checkpoint `30e86df`;
+quality comparison to unchanged tabu (22,736). Record travel also fails the fixed
+controls. Contiguous pricing is validated, including rejection-path counters.
+The frozen forty-case shell replication is running; inspect its result before
+choosing the next search arm. Active native authority:
+`~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`, checkpoint `f81b4ba`;
 [current evidence and remaining gate](../2026-09-11-c1016-cycle-neighborhoods.md).
 Provenance rules stand: proved structural and exact computational reductions grant negative
 coverage, observed/evolved and heuristic predicates never do. Every resume first reads
