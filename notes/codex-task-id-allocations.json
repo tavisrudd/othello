@@ -4877,8 +4877,17 @@
       "last": 1138,
       "purpose": "Review second Astra feedback without gradings; verify and integrate focused corrections and strengthenings",
       "sequence": 542
+    },
+    {
+      "count": 1,
+      "first": 1139,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 1139,
+      "purpose": "Derive faster prime-field recognition, implement and test against exhaustive oracles, and audit prior algorithms",
+      "sequence": 543
     }
   ],
-  "next_id": 1139,
+  "next_id": 1140,
   "schema": "codex-task-id-allocations-v1"
 }
