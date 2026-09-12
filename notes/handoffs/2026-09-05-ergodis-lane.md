@@ -127,6 +127,11 @@ Use **TigerBlossom** for the decoder; legacy paths retain their historical names
 
 ### C1130 — full native/JS/WASM capability and workflow parity (in progress)
 
+Parallel allocation surfaces and private scheduling integration are reviewed and
+committed (core `0922ff2`, private `8c6cff9`). Default-feature build guard,
+witness-oracle checks and mixed serial/parallel edge cases pass; retained evidence:
+private `analysis/interface-review/2026-09-10-allocation-parallel.md`.
+
 Parameterization frontier: shared sparse embeddings, multi-factor array discovery,
 checked modular rejection and 8×8/16×16 browser witnesses are validated. Frozen
 holdouts show narrow coverage; order-140 structure remains supplied. Current map:
