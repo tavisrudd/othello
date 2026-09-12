@@ -10,7 +10,7 @@
 C1150 was run with a literature-audit posture and an over-narrowed brief ("no gradient and
 no network"). Tavis's framing: the goal is improving what Ergodis can do, not novelty or
 academic priority. Gradient search and small simple neural networks are in scope; only
-methods that require deep/large nets or must run on a GPU are out. Prior art is a template
+methods that depend on deep/large nets are out. GPU acceleration (WebGPU / Rust GPU bindings) is available for larger Evolve structure searches, so GPU-specific cost models are in scope. Prior art is a template
 to absorb, never a gate.
 
 ## Scope
