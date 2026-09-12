@@ -4931,8 +4931,26 @@
       "last": 1148,
       "purpose": "Certificate interoperability: claim-preserving export and independent verification across VIPR, VeriPB, SAT proof formats and native certificate families",
       "sequence": 548
+    },
+    {
+      "count": 1,
+      "first": 1149,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1149,
+      "purpose": "Public release readiness review of ergodis: gap assessment and remediation plan (AGPL lib/cli on GitHub)",
+      "sequence": 549
+    },
+    {
+      "count": 1,
+      "first": 1150,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1150,
+      "purpose": "Category theory for ergodis core and Evolve: literature study (Abbott et al. and broad sweep) on optimization, regularization, structure learning/exploration, compiler design, search priors, solvers, normalization and evolution",
+      "sequence": 550
     }
   ],
-  "next_id": 1149,
+  "next_id": 1151,
   "schema": "codex-task-id-allocations-v1"
 }

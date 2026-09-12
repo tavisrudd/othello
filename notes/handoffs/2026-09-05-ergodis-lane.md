@@ -49,6 +49,14 @@ with docs and demos on GitHub: `../2026-09-11-c1149-ergodis-public-release-revie
 Phase 0 decisions (evidence publication, paper deposit, copyright/contact, product scope, public
 CI) are Tavis's; phases 1–5 are unallocated successor tasks.
 
+### C1150 — category theory for the core and Evolve (queued)
+
+Literature study, no engine edits: Vincent Abbott's recent work (arXiv:2604.07242 and
+related) plus a broad sweep across compiler design, non-neural search priors, solvers,
+optimization/regularization, normalization and evolution. Deliverable is a reading
+dossier and ranked absorption targets with evidence gates. Card:
+`../2026-09-12-c1150-category-theory-for-ergodis.md`.
+
 ### C1148 — certificate interoperability (queued)
 
 All certificate families, not only C1143: common cold inspect/verify/export
