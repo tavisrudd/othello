@@ -27,10 +27,13 @@ Current certificate boundary (2026-08-09):
 - `TavisRuddFiniteGeom.Papers.ClebschRigidity.CertificateCompatibility` is the cheap
   downstream bridge. It imports the pinned certificate and finitegeom revisions,
   proves equality of their witness and point tables, and exposes the frozen terminal.
-- Paper I's release metadata still names the superseded combined package at `930675c6`.
-  Repin it through the release verifier after that verifier accepts the separate
-  finitegeom, certificate, and bridge roots. Never rerun the retired combined aggregate
-  or rebuild Q11 for a finitegeom, bridge, paper, pin, or release-metadata change.
+- Paper I release metadata now names the separate certificate, finitegeom, and
+  bridge roots. The 2026-09-12 continuation updates finitegeom to `f7b9743`
+  (the 96-module human closure is unchanged from `b871c10`) and exports bridge
+  `b525f04`. The new guarded human-gate receipt passes at the clean current head.
+  Never rerun the retired combined aggregate or rebuild Q11 for a finitegeom,
+  bridge, paper, pin, or release-metadata change. Current release outcome:
+  `notes/2026-09-12-paper-i-release-continuation.md`.
 
 Trust-boundary hardening packet (2026-08-08): C893's mechanically actionable
 release findings are repaired in the authority and q11 package.  The verifier
