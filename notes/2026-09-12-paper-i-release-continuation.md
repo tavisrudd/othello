@@ -14,7 +14,10 @@ validator passes. Both PDFs remain warning-free at 29 and 14 pages.
 The standalone mirror is forward-committed at `302f1cb` and its exporter
 verification passes for 62 tracked files, content SHA-256
 `8e4f69ecd7843d9c8bcb5a8db6373bbc7a773320cbd58de18dd4884d32503e5c`.
-Its complete immutable replay is running. No repository was pushed.
+Its complete immutable replay passes all 27 checks and reproduces the exact
+authority release-surface hash. The two trust manifests, statement identities,
+attestations, and both PDFs are byte-identical. The mirror and all three formal
+repositories are clean. No repository was pushed. C943 is closed.
 
 Final formal pins: finitegeom `f7b9743`, certificate `0d964975` (unchanged),
 bridge `6f0b927`. The source-policy/ownership closure is 119 certificate,
@@ -145,3 +148,36 @@ Recovery scope: the snapshot restores the exact current committed source tree
 and its September 2 artifact cache. The new Paper I receipt proves its complete
 human closure is trace-current. This does not claim that every ignored cache
 entry produced after September 2 elsewhere in finitegeom was recovered.
+
+## Final acceptance and replay
+
+The authority run took 7m38s; the clean mirror run took 8m42s. Their bounded
+run records are under:
+
+- `~/.cache/othello-lean-build/paper-i-release-seal-20260912/`
+- `~/.cache/othello-lean-build/paper-i-mirror-clean-20260912/`
+
+From either paper root, the immutable replay command is:
+
+```sh
+nix run .#verify -- \
+  --certificate-root /home/tavis/src/lean/finitegeom-clebsch-q11-certificates \
+  --finitegeom-root /home/tavis/src/lean/finitegeom \
+  --bridge-root /home/tavis/src/lean/finitegeom-clebsch-rigidity-bridge \
+  --certificate-pack /home/tavis/.cache/othello-lean-build/packs/q11-0d964975ceef7ff0.lake-pack.tar.gz \
+  --guarded-finitegeom-run /home/tavis/.cache/othello-lean-build/run-20260912-210207-525e11fd \
+  --lean-build-queue /home/tavis/src/othello/lean/scripts/lean-build-queue.py
+```
+
+The final `ej` + `tt` pass checked that the release's output-hash refresh does
+not change its canonical identity, that the mirror carries the exact tested
+bytes, and that the safety fix preserves source/cache ownership. Those checks
+pass. No mathematical discovery arose outside this task, so no discovery-log
+entry is warranted. No new mathematical mystery remains. The known wider
+assertion-coverage and scholarly-closure obligations remain with C855.
+
+The first mirror replay was attempted before committing the exporter's 15
+changes and correctly refused the dirty source. After an explicit unsigned
+forward commit, the complete clean replay passed. An initial exporter-verify
+invocation used an unsupported repository flag and was corrected to its
+root-only interface before verification.

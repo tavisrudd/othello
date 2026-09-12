@@ -2,13 +2,13 @@
 
 **Lane:** `clebsch`
 **Paper stream:** five-paper Clebsch series and the unnumbered conference companion
-**State:** active at the final immutable mirror replay. All revised manuscripts
-retain their sealed cold-reader ACCEPT verdicts. Paper I's 27-check authority
-release passes, its formal pins and attestation are refreshed, and its clean
-standalone mirror is forward-committed at `302f1cb`. The exporter verifies all
-62 tracked files. The complete mirror replay is running; all other C943 mirrors
-were already exported and verified. Current evidence:
-`../2026-09-12-paper-i-release-continuation.md`.
+**State:** complete (2026-09-12). All revised manuscripts retain their sealed
+cold-reader ACCEPT verdicts; all C943 mirrors are exported and verified.
+Paper I's authority and clean standalone mirror pass all 27 release checks with
+the same canonical identity. Its mirror is committed at `302f1cb`; its formal
+pins, statement identity, and attestation are current. No public push or DOI
+version change was made. C855's broader formalization audit remains separate.
+Final evidence: `../2026-09-12-paper-i-release-continuation.md`.
 
 ## Objective
 
@@ -87,8 +87,9 @@ and must not be reused as mathematical terminology.
   golden-ratio keyword, Dye’s historical parameter, and three exact legacy
   Lean declaration names. Deterministic builds pass at 29 and 14 pages with
   zero warnings. Independent cold referee: MINOR, repaired, sealed ACCEPT.
-  The statement extractor is independently blocked by C855’s already-present
-  theorem `prop:fifteen-class-census`, which is absent from its claim map.
+  The census proposition `prop:fifteen-class-census` is now mapped; the
+  statement extractor, trust manifest, authority release, and clean mirror
+  replay all pass (2026-09-12 continuation report).
 - Paper III — *Hitchin’s Icosahedral Incidence Double Cover and Operator
   Realizations of the Clebsch Cubic*: mathematical prose now distinguishes
   incidence deck exchange, Galois conjugation, the configuration exchanger,
@@ -166,8 +167,9 @@ and must not be reused as mathematical terminology.
   `verification/statement_identity.json` was regenerated on 2026-09-12 once
   `prop:fifteen-class-census` was mapped; the stale “golden operator” phrase is
   gone with it, along with three claim identifiers the manuscripts had already
-  renamed. The export still waits on the release attestation described in
-  [`../2026-09-12-paper-i-statement-identity-remap.md`](../2026-09-12-paper-i-statement-identity-remap.md).
+  renamed. The attestation is refreshed and the clean Paper I mirror at `302f1cb`
+  passes the same 27-check release as the authority. Final evidence:
+  `../2026-09-12-paper-i-release-continuation.md`.
 
 ## Mystery ledger
 
@@ -177,13 +179,12 @@ and must not be reused as mathematical terminology.
   between the two Paper V torsors, and the noncanonical nature of the marked
   sheet comparison are consistent across papers, summaries, and eligible
   mirrors.
-- **Open evidence gap:** C855's theorem-map repair for
-  `prop:fifteen-class-census` landed on 2026-09-12 and Paper I's statement
-  identity and trust manifest regenerate cleanly. The standalone export now
-  waits on the release attestation alone: the pinned finitegeom and bridge
-  revisions differ from their checkouts, the recorded guarded receipt has aged
-  out of the build cache, and the finitegeom base remains unresealed. No
-  manuscript theorem or terminology judgment remains open in C943.
+- **Release evidence settled:** the census statement map, current formal pins,
+  fresh guarded human-gate receipt, repaired bridge verification, release
+  attestation, and clean Paper I mirror all pass. The base-manifest blocker
+  was stale. Source-link replacement and cache namespace-shadowing defects
+  exposed during replay are repaired and regression-tested. The exact
+  recovery scope and evidence are in the final continuation report.
 - **External publication state:** existing DOI/GitHub releases under former
   titles are not rewritten or pushed by this task. Forward public versioning
   remains the author's publication action.

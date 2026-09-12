@@ -17,7 +17,8 @@ headline row plus three renamed claim identifiers are re-recorded. The
 statement identity and trust manifest regenerate and pass their own `--check`
 modes. The re-pin, fresh guarded human-gate receipt, repaired bridge replay, and
 27-check authoritative release attestation now pass. The mirror is synchronized
-and forward-committed; its immutable replay is running. See
+and forward-committed; its immutable replay passes all 27 checks with the same
+release identity. C943 is closed. See
 `../2026-09-12-paper-i-release-continuation.md` for the exact pins, recovered
 finitegeom snapshot, safety repairs, and release identity.
 

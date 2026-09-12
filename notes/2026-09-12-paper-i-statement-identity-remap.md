@@ -1,5 +1,10 @@
 # Paper I statement identity: census mapping, restatement guard, and the remaining release blocker
 
+**Release follow-up:** the blocker diagnosis below is superseded by
+`2026-09-12-paper-i-release-continuation.md`. The base manifest was already
+consistent; current pins, guarded replay, attestation, and clean mirror now
+pass. The follow-up records the bridge repairs and recovery incident.
+
 **Lane:** `clebsch` · **Paper:** I — *Reconstructing the Clebsch Code from Its
 Deep-Hole Syndrome Locus* · **Date:** 2026-09-12
 

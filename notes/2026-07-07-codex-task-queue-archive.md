@@ -5675,3 +5675,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1153 `[ergodis]` [REPORTED 2026-09-12]** — order-2092 group quotient spike: symmetry group verified at 522⁴·516,096 (dossier undercounted 86,016×); exact canonical form merges nothing on 847 banked states; restart-seed dedup measured worthless-but-cheap; do not build corpus/seed dedup; measure the enumerating arm's subgroup and sampled orbit revisits first → `notes/2026-09-12-c1153-group-quotient-spike.md`
 
 - **C1160 `[ergodis]` [COMPLETE 2026-09-12]** — scalar stability and comparison minus; generic semi-naive DAG/cycle summary checker with safe retraction replay; authenticated tree compatibility preserved. Core `6284ca7`; full native/Python gates (895 passed) and WASM compilation pass → `notes/2026-09-12-c1160-verifier-stability.md`.
+
+- **C943 `[clebsch]` [REPORTED 2026-09-12]** — conventional terminology revision complete across the Clebsch series and companions; all mirrors verified, with Paper I authority and clean mirror `302f1cb` passing the same 27-check release. No push or DOI version change. → `notes/2026-09-12-paper-i-release-continuation.md`
