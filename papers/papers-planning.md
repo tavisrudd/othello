@@ -107,7 +107,7 @@ Clebsch hexagon code*, is not being published and is retained at
   adequacy/provenance pass, immutable checker/archive identity, exact shared-Lean pinning, and the
   final aggregate `RepairCodes` rebuild remain.
 
-**6 · Frobenius-equivariant pair extension and robust repair of eight-arcs** —
+**6 · Frobenius-Equivariant Pair Extension and Robust Repair of Eight-Arcs** —
 `equivariant-robust-completion`
 - *Lane:* `paper-frob-eq`.
 - *What:* focused quadratic-Frobenius criterion, exact collision theory, robust orbit replacement,
@@ -120,7 +120,7 @@ Clebsch hexagon code*, is not being published and is retained at
   closeout are complete. C318 and C319 own the remaining exact-minimum trust-manifest and
   canonicalizer/demotion decisions. C152's exchange graph is a release gate only if later adopted.
 
-**7 · Reconstructing projective frames from their continuation graphs** —
+**7 · Reconstructing Projective Frames from Their Continuation Graphs** —
 `continuation-graph-rigidity`
 - *What:* stable-range semilinear reconstruction, polynomial recognition over a supplied field,
   and an independently replayed exact small-order frame boundary. Full-complex reconstruction

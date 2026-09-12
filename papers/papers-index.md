@@ -57,8 +57,8 @@ Obstructions for Complete \((k,n)\)-Arcs*
 - *Contents:* manuscript, exact-arithmetic evidence bundle, partial Lean
   companion, imported-source registry, and referee guide.
 
-**3 · `arcs_complete_outside_conic`** — *Secant defects with prescribed holes: arcs, caps, and
-matching designs*
+**3 · `arcs_complete_outside_conic`** — *Secant Defects with Prescribed Holes: Arcs, Caps, and
+Matching Designs*
 - *Status:* self-contained manuscript + PDF + independent checkers + strict-trust Lean
   formalization; the 21-page paper has completed adversarial, style-guide, and repeated cold-prose
   review. The standard frame and optional-branch hierarchy are explicit. Its remaining
@@ -71,7 +71,7 @@ matching designs*
   classical inclusion `C subset U`; `arcs` publishes the exact equality, coding translation, and
   certificate as an apparently unrecorded synthesis.
 
-**`secant_hyperplane_defects`** — *Secant–hyperplane defects of complete caps*
+**`secant_hyperplane_defects`** — *Secant–Hyperplane Defects of Complete Caps*
 - *Contents:* manuscript, exact-arithmetic scan certificate, private claim ledger and literature
   audit (excluded from export). Third paper of the secant-defect series: the two-sided hyperplane
   loss identity for complete caps, secant–hyperplane moments, integer feasibility exclusions at the
@@ -112,8 +112,8 @@ Clebsch cubic*
   release gates are closed; submission still requires an immutable finitegeom
   release containing the supplemental golden-return sources.
 
-**Clebsch fourth paper · `q13-passant-code`** — *Reconstructing $\PG(2,13)$, its conic, and polarity
-from the minimum words of a binary conic code* (earlier titled *A binary [78,36,12] code from the passant lines of a conic over
+**Clebsch fourth paper · `q13-passant-code`** — *Reconstructing $\PG(2,13)$, Its Conic, and Polarity
+from the Minimum Words of a Binary Conic Code* (earlier titled *A binary [78,36,12] code from the passant lines of a conic over
 F13*)
 - *Status:* a manuscript-only pre-release was deposited 2026-08-03 as DOI
   `10.5281/zenodo.21783971`, with the Lean companion excluded and due as a forward version. C761 has
@@ -178,8 +178,8 @@ Geometric Structure*
   one-symbol-per-helper scalar protocol, not minimum bandwidth or access under subpacketization. Primary venue fit is Designs,
   Codes and Cryptography / Finite Fields and Their Applications, not IEEE-TIT in the present form.
 
-**6 · `equivariant-robust-completion`** — *Frobenius-equivariant pair extension and robust repair
-of eight-arcs*
+**6 · `equivariant-robust-completion`** — *Frobenius-Equivariant Pair Extension and Robust Repair
+of Eight-Arcs*
 - *Lane:* `paper-frob-eq`.
 - *Status:* focused LaTeX submission source + bibliography + cleanly compiled PDF; exact quadratic
   criterion, semantic global count, collision inverse, robust exchange, and uniform Q25 theorem
@@ -193,7 +193,7 @@ of eight-arcs*
   retired source view merged into this paper;
   `completion-core-rigidity` is reusable generic infrastructure outside the submission.
 
-**7 · `continuation-graph-rigidity`** — *Reconstructing projective frames from their continuation graphs*
+**7 · `continuation-graph-rigidity`** — *Reconstructing Projective Frames from Their Continuation Graphs*
 - *Status:* 11-page first draft with written stable-range reconstruction/recognition proofs and an
   independently replayed small-order census; source-only claim/evidence checks and local export
   packaging are present. Lean and independent external review remain open. No GitHub/DOI action
@@ -261,8 +261,8 @@ Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy*
 - *Lean:* the `conference_cut_spectra` export area is configured but is not adopted on the
   finitegeom repository, so this paper's Lean development currently sits outside the shared library.
 
-**Source programme, not a numbered paper · `golden-operator`** — *The golden conference operator and
-its shadow sisters*
+**Source programme, not a numbered paper · `golden-operator`** — *The Golden Conference Operator and
+Its Shadow Sisters*
 - *Lane:* `golden`.
 - *Status:* gated in the repository registry, on the ground that the source programme is not adopted
   as a standalone publication.
