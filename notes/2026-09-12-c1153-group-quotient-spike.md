@@ -1,6 +1,6 @@
 # C1153 — C1016 lossless group quotient: verification and prototype spike
 
-**Lane**: `ergodis` · **Task**: C1153 (slice 11 of the C1151 merged ranking) · **Status**: in progress
+**Lane**: `ergodis` · **Task**: C1153 (slice 11 of the C1151 merged ranking) · **Status**: COMPLETE (reported 2026-09-12)
 
 Bounded spike on the order-2092 Hadamard search (family C1016). Three deliverables: verify in
 code the symmetry group that C1151 part B §3.5 derived from the card's equation; prototype a
@@ -339,8 +339,8 @@ owner and is logged to the lane's discovery track.
       --workers 12 --seconds 90 --epoch-steps 200 --orbit-dedup --orbit-capacity 65536 \
       --seed 987654321 > ~/.cache/ergodis/c1153/collision-probe.json
 
-Acceptance gate, run on the final tree: `cargo test --release --workspace --all-targets --
---test-threads=1`, **792 passed, 0 failed**.
+Acceptance gate, run on the final tree at `b0b0648`: `cargo test --release --workspace
+--all-targets -- --test-threads=1`, **793 passed, 0 failed**.
 
 ## Step 4 — conclusions
 
