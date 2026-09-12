@@ -4967,8 +4967,17 @@
       "last": 1157,
       "purpose": "C1151 implementation slices: certificate/ban store with bounds; C1016 group quotient; FeatureDag interval+acyclicity; partition-refinement quotients and sentinel; Evolve learned ordering and Markov discipline; equality-saturation spike",
       "sequence": 552
+    },
+    {
+      "count": 2,
+      "first": 1158,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1159,
+      "purpose": "C1152/C1153 successors: acting-subgroup measurement on the two-transfer census enumeration (q18/q29); one-probe one-sided screen before completion search in the C1143 sparse provider",
+      "sequence": 553
     }
   ],
-  "next_id": 1158,
+  "next_id": 1160,
   "schema": "codex-task-id-allocations-v1"
 }

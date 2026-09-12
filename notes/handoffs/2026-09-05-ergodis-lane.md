@@ -73,9 +73,8 @@ branches `spike/c1152-certificate` and `spike/c1153-group-quotient` in `~/.cache
 Still queued: C1154 FeatureDag interval/acyclicity, C1155 sentinel/weight pushing/partition
 refinement, C1156 Evolve ordering, C1157 equality-saturation spike. RelationalAI/tensor-logic
 reading (Macready): `../2026-09-12-relationalai-datalog-reading.md`; bounded min-plus is 0-stable,
-so fixpoints converge polynomially, pending a code check. **Waiting on Tavis**: whether to allocate
-the C1152 successors (structured decline reason; one-probe one-sided screen where 57% pass and
-6.6% complete) and the C1153 successor (enumerating-arm subgroup measurement). Foreign issue:
+so fixpoints converge polynomially, pending a code check. Successors queued: C1158 acting-subgroup measurement on the two-transfer census (C1153) and
+C1159 one-probe one-sided screen in the C1143 sparse provider (C1152). Foreign issue:
 branch `c1016-full-2092-campaign` fails `cargo fmt --check` and has four clippy errors.
 
 ### C1148 — certificate interoperability (queued)
