@@ -162,7 +162,8 @@ def flake(bridge: dict) -> str:
               else
                 (cd "$finitegeom_root" && lake build {bridge["finitegeom_import"]})
               fi
-              lake env lean {module_path}
+              lake env python3 -c 'import os, sys; os.environ["LEAN_PATH"] = sys.argv[1] + os.pathsep + os.environ.get("LEAN_PATH", ""); os.execvp("lean", ["lean", sys.argv[2]])' \\
+                "$certificate_root/.lake/build/lib/lean" {module_path}
             '';
           }};
         in {{

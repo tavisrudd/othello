@@ -109,9 +109,11 @@ class PaperBridgeExportTests(unittest.TestCase):
         self.assertEqual(text.count("sha256sum --check --status"), 3)
         self.assertIn('(cd "$finitegeom_root" && lake build Human.Model)', text)
         self.assertIn(
-            "lake env lean TavisRuddFiniteGeom/Papers/Sample/CertificateCompatibility.lean",
+            '"$certificate_root/.lake/build/lib/lean" TavisRuddFiniteGeom/Papers/Sample/CertificateCompatibility.lean',
             text,
         )
+        self.assertIn('os.execvp("lean", ["lean", sys.argv[2]])', text)
+        self.assertIn('sys.argv[1] + os.pathsep + os.environ.get("LEAN_PATH", "")', text)
         self.assertNotIn(
             "lake build --no-build TavisRuddFiniteGeom.Certificates.Sample", text
         )
