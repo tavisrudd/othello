@@ -60,6 +60,19 @@ class StatementIdentityTests(unittest.TestCase):
 
 
 class ReleaseRunnerTests(unittest.TestCase):
+    def test_guarded_bridge_keeps_explicit_sources_and_pack(self) -> None:
+        roots = {name: Path('/sources') / name for name in
+                 ('bridge', 'finitegeom', 'certificate')}
+        guard = Path('/host/lean-build-queue.py')
+        pack = Path('/sealed/q11.tar.gz')
+        command = release.bridge_verify_command(guard, roots, pack)
+        self.assertEqual(command[:4], [sys.executable, str(guard), 'verify', str(pack)])
+        self.assertEqual(command[4:], [
+            '--lean-root', str(roots['bridge']),
+            '--finitegeom-source', str(roots['finitegeom']),
+            '--certificate-source', str(roots['certificate']),
+        ])
+
     def test_shell_commands_are_rejected(self) -> None:
         with self.assertRaisesRegex(ValueError, "may not invoke a shell"):
             release.command_argv(["bash", "-lc", "true"], "test")
@@ -443,7 +456,7 @@ class ReleaseRunnerTests(unittest.TestCase):
             manuscript.EXPECTED_PAGES,
             {
                 "clebsch_rigidity.tex": 29,
-                "clebsch_rigidity_computational_companion.tex": 13,
+                "clebsch_rigidity_computational_companion.tex": 14,
             },
         )
 

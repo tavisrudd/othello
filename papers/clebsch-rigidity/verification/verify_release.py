@@ -464,6 +464,23 @@ def manifest_axioms(
     return result
 
 
+def bridge_verify_command(
+    guard: Path | None, roots: dict[str, Path], pack: Path
+) -> list[str]:
+    """Use the same bridge contract through an optional host build guard."""
+    if guard is not None:
+        return [
+            sys.executable, str(guard.resolve()), "verify", str(pack),
+            "--lean-root", str(roots["bridge"]),
+            "--finitegeom-source", str(roots["finitegeom"]),
+            "--certificate-source", str(roots["certificate"]),
+        ]
+    return [
+        "nix", "run", ".#verify", "--", str(pack),
+        str(roots["finitegeom"]), str(roots["certificate"]),
+    ]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     paper_root = Path(__file__).resolve().parents[1]
@@ -505,6 +522,10 @@ def main() -> int:
         type=Path,
         required=True,
         help="successful guarded receipt for the pinned finitegeom human gate",
+    )
+    parser.add_argument(
+        "--lean-build-queue", type=Path,
+        help="optional host build-owner guard for the bridge verification app",
     )
     args = parser.parse_args()
     repositories = {
@@ -677,15 +698,9 @@ def main() -> int:
         elif check_id == "lean-certificate-compatibility":
             try:
                 result = run(
-                    [
-                        "nix",
-                        "run",
-                        ".#verify",
-                        "--",
-                        str(certificate_pack),
-                        str(repositories["finitegeom"]),
-                        str(repositories["certificate"]),
-                    ],
+                    bridge_verify_command(
+                        args.lean_build_queue, repositories, certificate_pack
+                    ),
                     repositories["bridge"],
                     timeout=timeout,
                 )

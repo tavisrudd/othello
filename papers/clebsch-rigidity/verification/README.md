@@ -20,8 +20,8 @@ the root-edge DAG and independent labelled replay.
 
 `statement_identity.json` contains the exact nineteen-row published claim
 map. Each theorem-like row includes the verbatim TeX environment and its
-SHA-256 digest; the introductory headline and complete-census sentence are
-likewise extracted verbatim. Regenerate or check it with
+SHA-256 digest; the introductory headline is likewise extracted verbatim.
+The complete census is recorded as its proposition. Regenerate or check it with
 `extract_statement_identity.py`.
 
 `trust_manifest.json` maps those nineteen rows to the admitted formal
@@ -121,3 +121,9 @@ without `--update-output`.  The certificate's own hash is excluded from the
 canonical release-surface hash, so this last manifest refresh does not
 invalidate it.  Update mode tolerates a pre-existing modification only at
 `verification/verify-release-output.json`.
+
+On a shared build host, pass `--lean-build-queue /absolute/path/to/lean-build-queue.py`
+to the verification command. This runs the bridge's same verification contract
+through the host's build-owner guard with the explicit source roots and sealed
+certificate pack. The host tool is operational coordination, not part of the
+mathematical evidence or deterministic release identity.

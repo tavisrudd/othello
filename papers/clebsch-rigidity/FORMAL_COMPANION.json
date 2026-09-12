@@ -1,7 +1,7 @@
 {
   "artifacts": [
     {
-      "commit": "b871c10b4a91200a0913644d39b9f0ce44f655ca",
+      "commit": "f7b974379b91cff98b6399312bf2030d9c2d6f1e",
       "kind": "shared-library",
       "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
       "manifest": "trust/manifests/clebsch_rigidity.json",
@@ -17,7 +17,7 @@
       "role": "certificate"
     },
     {
-      "commit": "a492fd8090ca5d11d68a3640b1600dbf672a11c2",
+      "commit": "b525f04b52c44a0315ac80f569761d133b8b48a2",
       "depends_on": [
         "shared-library",
         "certificate"
