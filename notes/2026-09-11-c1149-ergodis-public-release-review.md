@@ -1851,3 +1851,53 @@ guard is right and was not weakened or worked around, so no export ran: the crat
 `public` branch and no staging clone. Both come back with one command each once that tree is
 clean, and the export needs a tag — the crate is at version 0.1.0 and is not release-grade per
 this report, so the first snapshot should carry a preview tag rather than burn `v0.1.0`.
+
+## First public snapshot, 2026-09-12 (core `0934eae`, public `3291659`, tag `v0.1.0-preview1`)
+
+The crate's public branch was restarted as a single root snapshot, tagged `v0.1.0-preview1` on
+Tavis's call: a preview tag rather than `v0.1.0`, because the packaging is not release-grade by
+this report's own assessment and the release version should not be spent on a review snapshot.
+
+### What was exported
+
+`scripts/export-public.sh --new-public-history main <notes> v0.1.0-preview1` from private
+`23e1afe`, which is the first commit after the allocation-surface session's work landed. The
+result is one commit, `3291659`, with no parent: `git merge-base --is-ancestor main public` fails
+and so does the converse, so the published branch and the private history share nothing. 491
+files, and a grep for `AGENTS.md`, `CLAUDE.md`, `PERFORMANCE.md`, `EXPORTS.md`, `docs-private/`,
+`hooks/`, `staging/`, `.claude/`, `evidence/`, `proptest-regressions/` and the `.public*` control
+files finds none of them. `EXPORTS.md` on `main` records the private revision, the public commit
+and the tag; it is the only link between the two histories and never leaves `main`.
+
+### A lint fix the export needed first
+
+A read-only dry run — the filtered tree built from `HEAD` in the scratchpad, both rewrites
+applied, linted against the release-notes file — refused with two `private-path` findings:
+`scripts/check-verifier-dependencies.py` and `scripts/check-runtime-dependencies.py` each name the
+private-tier crate inside a **forbidden**-dependency set, so each check fails if such a package is
+reachable. The string is the opposite of a path into a private tree and deleting it would delete
+the guard, so both got path-qualified allowlist entries, which is the only form the private-path
+rule accepts (core `5eb1c79`). Running the dry run before the export is worth keeping as a habit:
+it turned a failed export into a one-line fix.
+
+### Staging rebuilt and validated
+
+`~/src/ergodis-public` was rebuilt by `configure-remotes.sh` from the new public branch: one
+branch named `public`, no `main`, no tags until one is published, no remote-tracking refs, a 1.9 MB
+object store rather than the 20 MB hardlinked one, and the `pre-receive` guard installed.
+`publish-to-staging.sh` then moved the snapshot and tag into it.
+
+`.publish/validate-release.sh` passes there in full — public lint on the tracked tree, every
+`BENCHMARKS.md` replay target resolving to a file that exists, `cargo build --release`, and
+`cargo test --all-features` including doctests. That is the first end-to-end confirmation that the
+published tree builds and tests standalone, from a checkout with no `.cargo/config.toml`, no
+evidence directory and no private sibling — a stranger's view. The 2.7 GB build tree it produced
+was deleted afterwards; a staging clone is disposable and holds no authority.
+
+### State
+
+Nothing has been pushed to GitHub, and nothing can be without Tavis running the final step: the
+private repository has no GitHub remote, the staging clone's pushurl is parked at
+`no-push://ergodis-public`, and `.claude/settings.json` denies `git push`. The evidence repository
+has not been exported yet; its first export is also `--new-public-history`, and it should carry
+the tag of whichever release it accompanies.
