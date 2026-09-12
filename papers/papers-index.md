@@ -161,7 +161,7 @@ Gates: The Clebsch Cubic-Phase Codes and Their Magic*
   subspaces of one fixed evaluation space.
 
 **Active unnumbered candidate — cubic-stabilization-irrationality** —
-*Sharpness of Irrationality after One Stabilization for Cubic Threefolds*
+*Two-Variable Rationalization and Sharp Stabilization of Cubic Threefolds*
 - *Status:* ten-page release candidate with an exact-arithmetic tangent-slice
   certificate, current claim/import ledgers, a clean standalone export, and
   cleared hostile geometry, quotient/computation, and public-surface review.
