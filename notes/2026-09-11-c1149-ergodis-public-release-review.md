@@ -1945,3 +1945,53 @@ Unchanged and still open: `BENCHMARKS.md` names no evidence file for the BB288, 
 families; the ship-or-drop calls on `sce-r2elite*`, `bb756`/`bb784` and
 `application-counted-type-ab.*`; and the Gurobi family's private-tier dependency, whose runner is
 held out of the export and whose evidence cannot be regenerated without an unrestricted license.
+
+## Evidence citation gap closed, 2026-09-12 (core `e0c97fe`)
+
+The audit's "only 11 evidence files are named by a public document" gap is closed for the three
+families it flagged, and the ship-or-drop question they raised is answered: **none of them should
+be dropped.** Reading the files rather than their names is what settled it.
+
+### What the uncited families actually are
+
+| Family | Instance | What the runs establish |
+|---|---|---|
+| `qdist-bb360-*` (4 files) | bivariate-bicycle `[[360,12,?]]` from the 27-instance QDistSAT suite | Nothing at or below weight 20 in either sector; minimum weight 24 with a witness in both, by exhaustive search to 24 |
+| `bb756-hx-gz-w{20,22}` | `[[756,16,?]]` | Nothing at or below weight 22 |
+| `bb784-hx-gz-w24` | `[[784,24,24]]` | Minimum weight 24 with a witness |
+| `sce-r2elite01-*` (5 files) | SCE lifted product over `Dic_11`, `[[1496,194,?]]` | Nothing at or below 18 in either sector; a supplied weight-20 operator verified separately |
+| `sce-r2elite02-*` (2 files) | SCE lifted product over `D_22`, `[[1496,198,?]]` | X sector nothing at or below 16; Z sector minimum weight 16 with a witness |
+
+The two SCE codes carry `reported_qdistrnd_upper` in their generator — 20 and 16 — so the
+published bounds come from QDistRnd, a randomized estimator, and these exhaustive searches turn
+each into an exact statement about the searched range. That is the strongest external result in
+the evidence directory, and it was shipping with no document naming it. The `[[756,16,?]]` run is
+an open lower bound rather than a closed distance, which is a result too. The audit's read that
+these were low-value offcuts came from the opaque `sce-r2elite01` labels; the code parameters
+inside the files are the real identity.
+
+### What was written
+
+`BENCHMARKS.md` gains a section giving one row per instance, sector and bound, each naming its
+evidence file, plus the build and replay commands and the independent checkers
+(`python/check_qdist_bb_pair.py` re-checks a paired result and the X/Z isomorphism). It states
+the limits rather than rounding them away: these are searches with recorded inputs, bounds and
+results, not formal proof artifacts, and the `Dic_11` Z-sector distance is bracketed to 19 or 20
+with 20 attained and 19 unsettled.
+
+`README.md`'s BB288 narrative — a dozen measurements, a 16.24x speedup chain and a Gurobi
+comparison — cited nothing at all. It now names `evidence/bb288-native-*`, its input, the Gurobi
+control file, and the two independent checkers.
+
+The documented replay commands were executed rather than assumed:
+`generate_sce_lp_native.py --candidate r2elite01 --direction z --maximum-weight 18` reproduces an
+input whose label and parameters match the cited evidence, and `check_bb_native.py` passes against
+the committed BB288 result.
+
+### Remaining
+
+`application-counted-type-ab.{json,raw.jsonl}` is the last uncited, unreferenced pair: scrubbed
+and now inside the manifest, but named by no document and produced by a script that hardcodes no
+output path. It is a diagnostic A/B of the counted-type application row; either `BENCHMARKS.md`
+gains a line for it or it goes. The Gurobi family's private-tier dependency is unchanged and
+remains the one real release blocker in the evidence programme.
