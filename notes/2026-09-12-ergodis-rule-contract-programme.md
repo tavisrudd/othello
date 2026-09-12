@@ -21,7 +21,7 @@ tensors, predicate logic and tensor networks. His stack is private and post-Rela
 published RelationalAI line (`datalog°`, Free Join, Rel) is a floor for what he uses, not his
 stack. He is modelling the IR in Lean; parts may use MLIR; whether the IR is his own is unclear.
 
-Two asks to him gate the benchmark and adapter choices:
+Three asks to him gate the benchmark and adapter choices:
 
 1. One concrete program he runs today, with data size and the tool it runs on.
 2. Which questions about his IR he currently axiomatizes or proves by hand (canonical forms,
@@ -45,7 +45,7 @@ the verifier code in `2026-09-12-c1152-certificate-spike.md`). Discovery-track e
 | 2b | C1164 | Ergodis as a Lean oracle: tactic/IO call, reflective Lean checker for the min-plus certificate, proof terms of optimality and least fixpoint; the first artifact to show Macready, since a Lean-modelled IR consumes it directly and it needs no benchmark | core C ABI + Lean under `lean/` |
 | 3 | C1161 | recursive plan queries as least fixpoints with the N-step bound and semi-naive incremental recomputation | core runtime |
 | 4 | unallocated | join engine: worst-case-optimal joins (Generic Join / Free Join) as the rule-body operator | core |
-| 5 | unallocated | benchmark suite: transitive closure, shortest paths, bill-of-materials over lifted reals, an einsum program, one exact-cover problem; comparators Soufflé, egglog, einsum, CP-SAT; protocol as in `2026-09-11-ergodis-external-benchmark-programme.md`; reshaped by Macready's named workload | harness private, results in `ergodis-evidence` |
+| 5 | unallocated | benchmark suite per `2026-09-12-datalog-benchmark-suites.md`: TC and SG (Boolean), SSSP and CC (min-plus), MLM over recursive trees (lifted reals, no cross-engine baseline exists), TC over the counting semiring, exact cover vs CP-SAT; local comparators Soufflé and egglog; RecStep, BigDatalog, DDlog, Umbra, VLog, RDFox, Rel citation-only (VFLog table is the only fully versioned one; FlowLog is broadest but unversioned; Rel has no published numbers); protocol as in `2026-09-11-ergodis-external-benchmark-programme.md`; reshaped by Macready's named workload | harness private, results in `ergodis-evidence` |
 | 6 | C1162 | FGH-square discharge of leaf lowering by counterexample-guided synthesis on the C1091 fixtures; mechanism core, each discharged family private | core + private |
 | 7 | C1158 | acting-subgroup measurement on the two-transfer census; if it pays, a generic group-action / canonical-form trait in core so the contract can carry a symmetry declaration | private task crate, then core |
 
