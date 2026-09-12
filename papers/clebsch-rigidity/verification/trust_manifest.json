@@ -109,13 +109,13 @@
         }
       ],
       "id": "rigidity-headline",
-      "paper_location": "source line 98",
+      "paper_location": "source line 85",
       "route": "mixed",
       "row": 2,
       "source": {
         "id": "rigidity-headline",
         "kind": "verbatim",
-        "sha256": "0f0c13c15894c5f98a5813ac99be6f94148cc87e0129b13847a57b1f6c3a959b"
+        "sha256": "103bc72973880ab429017bf26999e4c2d010471c0f5b7a3c6126c8f9c9c79924"
       },
       "trust_boundary": "Lean proves the conic-containment implication from definitions with only foundational logical axioms; the associated polarity and stabilizer identification remain cited classical consequences."
     },
@@ -234,7 +234,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 1002",
+      "paper_location": "source line 946",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -330,7 +330,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 960",
+      "paper_location": "source line 904",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -346,7 +346,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 977",
+      "paper_location": "source line 921",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -394,7 +394,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 1093",
+      "paper_location": "source line 1037",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -529,7 +529,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 1148",
+      "paper_location": "source line 1092",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -576,7 +576,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 658",
+      "paper_location": "source line 602",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -669,7 +669,7 @@
         }
       ],
       "id": "thm-rigidity+cor-conic-stabilizer-orbit",
-      "paper_location": "source line 188",
+      "paper_location": "source line 140",
       "route": "mixed",
       "row": 17,
       "source": {
@@ -740,7 +740,7 @@
         }
       ],
       "id": "prop-low-degree-rigidity",
-      "paper_location": "source line 219",
+      "paper_location": "source line 244",
       "route": "mixed",
       "row": 18,
       "source": {
@@ -798,7 +798,7 @@
         }
       ],
       "id": "cor-monomial-characterization",
-      "paper_location": "source line 245",
+      "paper_location": "source line 270",
       "route": "mixed",
       "row": 19,
       "source": {
@@ -869,7 +869,7 @@
         }
       ],
       "id": "thm-gap",
-      "paper_location": "source line 277",
+      "paper_location": "source line 302",
       "route": "mixed",
       "row": 20,
       "source": {
@@ -885,7 +885,7 @@
         "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 1284",
+      "paper_location": "source line 1228",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -974,7 +974,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 1334",
+      "paper_location": "source line 1278",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -1241,14 +1241,14 @@
           "subclaim": "intrinsic support sheets through rational and integral commutants"
         }
       ],
-      "id": "prop-invariant-support-bipartition+thm-orientation-two-graph+cor-orientation-cubic-geometry",
-      "paper_location": "source line 1350",
+      "id": "prop-invariant-support-bipartition+thm-conference-two-graphs+cor-conference-cubic-geometry",
+      "paper_location": "source line 1294",
       "route": "mixed",
       "row": 23,
       "source": {
-        "id": "prop:invariant-support-bipartition+thm:orientation-two-graph+cor:orientation-cubic-geometry",
+        "id": "prop:invariant-support-bipartition+thm:conference-two-graphs+cor:conference-cubic-geometry",
         "kind": "theorem-environment",
-        "sha256": "54a5a78c75a42f50c7ace57ad8bc610fdea522c24f230f230c1813c226a25d65"
+        "sha256": "60a333e74b8905fb7942f199c29039b933ce139b23225726e46d3b41b8e7c91d"
       },
       "trust_boundary": "The support bipartition and intrinsic orientation theorem have complete human proofs. The exact replay checks every finite identity independently. Lean kernel-checks the eight-step orientation spine, including the unconditional rational and integral commutant equalities from the explicit two-generator system."
     },
@@ -1364,7 +1364,7 @@
         }
       ],
       "id": "lem-chord-defect+prop-concurrence-spectrum+cor-conic-filling-window+lem-q9-polarity",
-      "paper_location": "source line 81",
+      "paper_location": "source line 97",
       "route": "mixed",
       "row": 24,
       "source": {
@@ -1454,7 +1454,7 @@
         }
       ],
       "id": "thm-why11",
-      "paper_location": "source line 350",
+      "paper_location": "source line 375",
       "route": "mixed",
       "row": 25,
       "source": {
@@ -1534,16 +1534,16 @@
           "subclaim": "q=19 specialization"
         }
       ],
-      "id": "prop-golden-normal-form+prop-clebsch-family-uncovered",
-      "paper_location": "source line 363",
+      "id": "prop-clebsch-normal-form+prop-clebsch-family-uncovered",
+      "paper_location": "source line 307",
       "route": "mixed",
       "row": 26,
       "source": {
-        "id": "prop:golden-normal-form+prop:clebsch-family-uncovered",
+        "id": "prop:clebsch-normal-form+prop:clebsch-family-uncovered",
         "kind": "theorem-environment",
-        "sha256": "f3dcbef54e4b246526504846213845f2bc50fece522116655bd36b008b102257"
+        "sha256": "88829419a2c99d3c0de670b82ec7252b95b3ce602e7ce2ae9511f865fa2a551b"
       },
-      "trust_boundary": "The golden normal form and the all-field formula are conceptual; q=19 is checked by an independent exact specialization."
+      "trust_boundary": "The Clebsch normal form and the all-field formula are conceptual; q=19 is checked by an independent exact specialization."
     },
     {
       "components": [
@@ -1844,7 +1844,7 @@
         }
       ],
       "id": "thm-q13-tangent-code+lem-pencil-saturation+thm-small-k-conic-filling",
-      "paper_location": "source line 453",
+      "paper_location": "source line 468",
       "route": "mixed",
       "row": 29,
       "source": {
@@ -1925,14 +1925,14 @@
           "subclaim": "complete census audit"
         }
       ],
-      "id": "fifteen-class-census-table",
-      "paper_location": "source line 140",
+      "id": "prop-fifteen-class-census",
+      "paper_location": "source line 156",
       "route": "mixed",
       "row": 58,
       "source": {
-        "id": "fifteen-class-census-table",
-        "kind": "verbatim",
-        "sha256": "4ba850c133bdb3d4cc052f32c8a4c56c020345b1d0ce66383a0e46eef2e6c7e6"
+        "id": "prop:fifteen-class-census",
+        "kind": "theorem-environment",
+        "sha256": "558b15c233253f830cbcb7e303a88b5a1ab38ea936300bca34585730b26265ca"
       },
       "trust_boundary": "The orbit ledger and local witnesses are the direct finite proof surface. The complete normalized enumerations and conic audit remain independent trusted executions."
     }
@@ -2003,12 +2003,12 @@
     "manuscript": {
       "path": "clebsch_rigidity_computational_companion.tex",
       "repository": "paper",
-      "sha256": "9f218d2e0f87e0e16390b1e8e122cc7edc9fc04c6a3eb32fef5bb71d4e882681"
+      "sha256": "9a37ad77460f6036cf930bb0e64e0afba5590c96dc6660b58a204df31973fe63"
     },
     "pdf": {
       "path": "clebsch_rigidity_computational_companion.pdf",
       "repository": "paper",
-      "sha256": "53c584ab8360aeab2e582abce6b1b34c59307fd5dd1c48d4b07579e61ab4aa18"
+      "sha256": "885acdc175a5db8aad31b5704f651193089f4fa26e0974886c533ae00a031495"
     },
     "trust_ledger": {
       "path": "verification/computational_companion_trust.json",
@@ -2030,7 +2030,7 @@
     "bridge_manifest": {
       "path": "MANIFEST.json",
       "repository": "bridge",
-      "sha256": "6a58da828d8c6b888ff9b674e2bcfce6684e962f8d236261c808522e0f66be0f"
+      "sha256": "e9c843e9293379d2c7c63fee6acc1c7eeb6d7228e90af22ef710b607a0be4199"
     },
     "certificate_manifest": {
       "path": "MANIFEST.json",
@@ -2056,19 +2056,19 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "85d6fa17475a6771027904c329bd5c10f04e5ed19553c7931d25810d27772a4f"
+    "sha256": "77b10c5e4c4e33bd636116a8b28ce908d2cdc9e45098b4bf20649b312743da40"
   },
-  "manuscript_sha256": "286c5ab2c9699092bc8359261c5db6966b05cdb5c16b34ac7f2f6bf4845c65dd",
+  "manuscript_sha256": "e5c70cf25dbe0d4f54761bef413637494fa08f5489f4d8c54449cd6f4d475b84",
   "public_documents": [
     {
       "path": "README.md",
       "repository": "paper",
-      "sha256": "e5eeab946af7f985ebd7abd31c7daf4183c05a9096ec40be39efadca47f57119"
+      "sha256": "8cdf2cfd2765705f2c52f1d990cdb2e9d2dc0f4a21cec019385fb0c3d0c00351"
     },
     {
       "path": "verification/README.md",
       "repository": "paper",
-      "sha256": "07bb0c20d2056d3eeae294b1ff798f39b0b9e576af72cd520bec5be2ebb873be"
+      "sha256": "9376731f3f04dd89d76bd878b5c434271edbfa31bba304a8e136a012c71bc79d"
     }
   ],
   "reproducibility_environment": {
@@ -2098,7 +2098,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "fe2808d667f260e5f1222b495902e92ce2dfc69696d53ccaf411c49430c16d50"
+    "sha256": "7d622e5202de6eccae54040ea3c8066e33c981ce7e7b9252cff5d088ef02b42c"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -2478,12 +2478,12 @@
       {
         "path": "verification/extract_statement_identity.py",
         "repository": "paper",
-        "sha256": "bcbcbfad393623b9eade58e8ebacf236f186f2461b6fd00b5f292955c511b185"
+        "sha256": "3443cd56d9947c4b0300e55320989cd3017bc8a731acc007b0e6fce6950c77a4"
       },
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "37a6322446ce24afbc913eb19bcdf00fd25d7d599fca8ce78f5a7fe141405e2e"
+        "sha256": "0ec1707b8ba600f0fa675243df1c150027d55268609b0bf97df78a0f3b971173"
       },
       {
         "path": "verification/verify_trust_manifest.py",
@@ -2498,7 +2498,7 @@
       {
         "path": "verification/check_manuscript_build.py",
         "repository": "paper",
-        "sha256": "d359e10d333b72d39fd8fe63df57cfeb4e099c75ef5524b13aaf579fa168229f"
+        "sha256": "3172845ebbd771cde21fa318a933e86b0280d248a451a6b2803037124aa8c8d1"
       },
       {
         "path": "verification/verify_computational_companion.py",

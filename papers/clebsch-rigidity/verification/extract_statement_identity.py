@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Extract the nineteen published claims of the Clebsch rigidity paper.
+"""Extract the published claims of the Clebsch rigidity paper.
 
-Seventeen rows are theorem-like environments.  The other two rows identify
-the introductory headline and the sentence that declares the scope of the
-complete fifteen-class census.  The output is deterministic and preserves
-the selected TeX byte-for-byte apart from its trailing newline.
+Most rows are theorem-like environments, including the proposition that
+states the complete fifteen-class census.  The remaining row identifies the
+introductory headline.  The output is deterministic and preserves the
+selected TeX byte-for-byte apart from its trailing newline.
 """
 
 from __future__ import annotations
@@ -60,19 +60,22 @@ ROW_LABELS = {
         "lem:pencil-saturation",
         "thm:small-k-conic-filling",
     ),
+    58: "prop:fifteen-class-census",
 }
 
-HEADLINE = (
-    "Its maximum-distance syndrome directions form a\n"
-    "conic, and that coarse locus already determines the projective code: its six\n"
-    "parity-check columns are projectively equivalent to the Clebsch hexagon,\n"
-    "with the associated polarity and $A_5$ symmetry.  No conic, polarity, group\n"
-    "action, or classical hexagon structure is assumed."
-)
-CENSUS = (
-    "Table~\\ref{tab:fifteen-classes} records the complete census needed below."
-)
+# The companion restates inputs of the geometric paper under their original
+# labels.  Only this label is carried by both manuscripts, and the companion's
+# restatement is the recorded statement for it.
+RESTATED_LABELS = ("lem:chord-defect",)
 
+HEADLINE = (
+    "For a six-arc in\n"
+    "$\\PG(2,11)$, containment of that locus in an arbitrary conic forces the\n"
+    "Clebsch hexagon; decoder data then recover its polarity, symmetry, and\n"
+    "conference structure up to switching and global negation.  The exceptional\n"
+    "configuration is therefore the output of a\n"
+    "recognition theorem, not part of its input."
+)
 
 @dataclass(frozen=True)
 class Statement:
@@ -150,9 +153,22 @@ def unique_snippet(text: str, snippet: str, name: str) -> int:
 def build_payload(source: Path) -> dict[str, object]:
     text = source.read_text(encoding="utf-8")
     companion = source.with_name("clebsch_rigidity_computational_companion.tex")
-    companion_text = companion.read_text(encoding="utf-8")
     statements = extract_environments(source) + extract_environments(companion)
+    repeated = sorted(
+        {
+            statement.label
+            for statement in statements
+            if sum(item.label == statement.label for item in statements) > 1
+        }
+    )
+    if tuple(repeated) != RESTATED_LABELS:
+        raise ValueError(
+            "repeated statement labels must be exactly the declared restatements"
+        )
     by_label = {statement.label: statement for statement in statements}
+    for label in RESTATED_LABELS:
+        if by_label[label].source != companion:
+            raise ValueError(f"restatement {label} must resolve to the companion")
     expected_labels = [
         label
         for labels in ROW_LABELS.values()
@@ -197,17 +213,6 @@ def build_payload(source: Path) -> dict[str, object]:
                 "tex": statement_tex,
             }
         )
-    claims.append(
-        {
-            "row": 58,
-            "id": "fifteen-class-census-table",
-            "kind": "verbatim",
-            "source_line": unique_snippet(companion_text, CENSUS, "census"),
-            "source": companion.name,
-            "sha256": digest(CENSUS),
-            "tex": CENSUS,
-        }
-    )
     return {
         "schema": "clebsch-rigidity-statement-identity-v1",
         "source": source.name,
@@ -222,7 +227,7 @@ def build_payload(source: Path) -> dict[str, object]:
 def main() -> int:
     paper_root = Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser(
-        description="Extract the nineteen published Clebsch rigidity claims."
+        description="Extract the published Clebsch rigidity claims."
     )
     parser.add_argument(
         "source",
