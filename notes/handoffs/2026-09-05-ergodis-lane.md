@@ -58,7 +58,9 @@ are in the report's 2026-09-12 sections.
 Goal, motivation (Macready), sequence, placement rule and deferred items:
 `../2026-09-12-ergodis-rule-contract-programme.md`. C1160 complete: scalar stability,
 semi-naive DAG/cycle verification and safe retractions; native/Python/WASM compilation gates pass
-(`../2026-09-12-c1160-verifier-stability.md`, core `6284ca7`). Order: C1163 → C1164 (Lean oracle) → C1161 → join engine
+(`../2026-09-12-c1160-verifier-stability.md`, core `6284ca7`). C1163 complete: Lean relational
+contract and certified recursive min-plus program through native/WASM ABI
+(`../2026-09-12-c1163-rule-contract.md`). Next: C1164 (Lean oracle) → C1161 → join engine
 (unallocated) → benchmark suite (unallocated) → C1162; C1158 any time. Literature cards:
 `../2026-09-12-c1150-category-theory-for-ergodis.md`,
 `../2026-09-12-c1151-category-theory-capability-pass.md`,
