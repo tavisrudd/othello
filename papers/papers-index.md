@@ -77,9 +77,8 @@ Matching Designs*
   loss identity for complete caps, secant–hyperplane moments, integer feasibility exclusions at the
   counting bound in `PG(4,q)` and `PG(6,q)`, and the degree-only countermodel.
 
-**4 · `clebsch-rigidity`** — *Reconstructing the Clebsch code and its golden orientation from its
-deep-hole syndrome locus*, with the companion *Computational strengthenings of Clebsch syndrome
-rigidity* in the same root
+**4 · `clebsch-rigidity`** — *Reconstructing the Clebsch Code from Its Deep-Hole Syndrome Locus*,
+with the companion *Computational Strengthenings of Clebsch Syndrome Rigidity* in the same root
 - *Status:* warning-free manuscript + PDF, split into a human core and the
   computational companion, each with its own build target, bibliography, claim
   ledger, and replay routes. Review cleared; C182 owns archive/release, whose
@@ -92,8 +91,8 @@ rigidity* in the same root
   dependency.** It reproves the shared deep-holes=conic input while citing
   `arcs` for public provenance.
 
-**Clebsch second paper · `clebsch-factorization`** — *Quadratic trade rigidity and cubic orientation
-in conic matching quotients*
+**Clebsch second paper · `clebsch-factorization`** — *Quadratic Trade Rigidity and Cubic Orientation
+in Conic Matching Quotients*
 - *Status:* C577 active. The `3,6,10` ranks and cubic survival now have
   conceptual proofs, and C665 adds the completeness theorem naming `B₃/F₇` and
   `H₃/F₁₁` as the only occurring orbits.
@@ -101,8 +100,8 @@ in conic matching quotients*
   cubic-first orientation, six-profile reconstruction, modular depth, and
   arithmetic splitting/gluing.
 
-**Clebsch third paper · `clebsch-passages`** — *Golden descent and operator realizations of the
-Clebsch cubic*
+**Clebsch third paper · `clebsch-passages`** — *The Clebsch Cubic: Hitchin's Icosahedral Double
+Cover and Conference-Matrix Rigidity*
 - *Status:* the rational square class `5J₀` supplies the golden orientation,
   the conference operator carries it through the classical Clebsch--Segre
   shadows, and the degree-six Petersen/Gaunt construction returns the same
@@ -141,6 +140,25 @@ F13*)
 - *Boundary:* the conference and chordal lines are distinct; the inverse
   requires a selected chordal line, and Paper IV remains an independent
   reconstruction branch.
+
+**Clebsch sixth paper · `clebsch-cubic-phase`** — *Strength-Two Trades and Transversal Cubic
+Gates: The Clebsch Cubic-Phase Codes and Their Magic*
+- *Lane:* `clebsch`.  Released as version `0.1.0`; concept DOI
+  `10.5281/zenodo.22666172`, version DOI `10.5281/zenodo.22666173`.
+- *Status:* complete manuscript with a paper-owned claim map, imported-source
+  registry, and lightweight finite, shadow, and factory certificates. The
+  statement-identity, hash, and deterministic-PDF gates all pass; no Lean
+  coverage is claimed.
+- *Scope:* strength-two signed trades give error-detecting qudit codes whose
+  surviving third moment is a transversal logical cubic phase; exact
+  Hessian-rank censuses identify the conic resources, the ten-qudit `F₁₁`
+  state admits no Clifford-product decomposition across any bipartition, and
+  joint preparation of the six-qudit `F₇` block beats the specified
+  independent distillation menu.
+- *Boundary:* the conic translation-class enumeration is bounded by the tested
+  primes, the preparation comparison assumes independent uniform Z noise and
+  ideal Clifford operations, and the distance-three negative concerns
+  subspaces of one fixed evaluation space.
 
 **Active unnumbered candidate — cubic-stabilization-irrationality** —
 *Sharpness of Irrationality after One Stabilization for Cubic Threefolds*
@@ -199,8 +217,8 @@ of Eight-Arcs*
   packaging are present. Lean and independent external review remain open. No GitHub/DOI action
   is included; full-complex reconstruction remains a scope remark.
 
-**Active unnumbered candidate · `high_weight_grs_cosets`** — *High-weight cosets of generalized and
-extended Reed--Solomon codes*
+**Active unnumbered candidate · `high_weight_grs_cosets`** — *High-Weight Cosets of Generalized and
+Extended Reed--Solomon Codes*
 - *Status:* 42-page archival manuscript and 31-page IEEE TIT version with a public verification
   bundle; the current revision is under final artifact packaging.
 - *Owns:* the arbitrary-redundancy classification of all weight-at-least-(r-1) cosets for
@@ -221,8 +239,8 @@ extended Reed--Solomon codes*
 - *Trust:* the marginal-to-rigidity chain is in the formal aggregate; the quantitative rounding and
   two-uniform estimates are manuscript proofs, and the Choi/encoder construction remains one.
 
-**Active unnumbered candidate · `mds_css_transversal_groups`** — *Diagonal Isoduality and
-Transversal Clifford Groups of MDS--CSS Codes*
+**Active unnumbered candidate · `mds_css_transversal_groups`** — *Exact Transversal Logical Groups
+of Quantum MDS--CSS Codes*
 - *Lane:* `ame-lu`.  Split from the AME rigidity paper above, which it cites and does not reprove.
 - *Status:* 23-page candidate, deposited as DOI `10.5281/zenodo.21766797`, with a standalone mirror;
   no submission has occurred.
