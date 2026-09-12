@@ -84,6 +84,34 @@ for entry in entries:
 '''
 
 
+def artifact_search_path() -> str:
+    """Expose only manifest-owned project artifacts to Lean's namespace lookup."""
+    return '''import json, os, pathlib, subprocess, sys, tempfile
+with tempfile.TemporaryDirectory(prefix="verification-artifacts-", dir=".lake") as temporary:
+    overlay = pathlib.Path(temporary).resolve()
+    owned = set()
+    for source, manifest in zip(sys.argv[1:3], ("TARGET_MANIFEST.json", "MANIFEST.json")):
+        root = pathlib.Path(source).resolve()
+        for entry in json.loads((root / manifest).read_text())["sources"]:
+            path = pathlib.Path(entry["path"])
+            if path.is_absolute() or ".." in path.parts or path.suffix != ".lean":
+                raise SystemExit("invalid manifest module path: " + str(path))
+            if path in owned:
+                raise SystemExit("duplicate manifest module ownership: " + str(path))
+            owned.add(path)
+            for suffix in (".olean", ".olean.server", ".olean.private", ".ir", ".ilean"):
+                relative = path.with_suffix(suffix)
+                artifact = root / ".lake/build/lib/lean" / relative
+                if artifact.is_file():
+                    target = overlay / relative
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.symlink_to(artifact)
+    os.environ["LEAN_PATH"] = str(overlay) + os.pathsep + os.environ.get("LEAN_PATH", "")
+    result = subprocess.run(["lean", sys.argv[3]])
+    raise SystemExit(result.returncode)
+'''
+
+
 def flake(bridge: dict) -> str:
     package = bridge["certificate_package"]
     gate_path = bridge["certificate_gate"].replace(".", "/")
@@ -162,8 +190,8 @@ def flake(bridge: dict) -> str:
               else
                 (cd "$finitegeom_root" && lake build {bridge["finitegeom_import"]})
               fi
-              lake env python3 -c 'import os, sys; os.environ["LEAN_PATH"] = sys.argv[1] + os.pathsep + os.environ.get("LEAN_PATH", ""); os.execvp("lean", ["lean", sys.argv[2]])' \\
-                "$certificate_root/.lake/build/lib/lean" {module_path}
+              lake env python3 -c '{artifact_search_path()}' \\
+                "$finitegeom_root" "$certificate_root" {module_path}
             '';
           }};
         in {{

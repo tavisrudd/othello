@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -21,6 +22,41 @@ SPEC.loader.exec_module(MODULE)
 
 
 class PaperBridgeExportTests(unittest.TestCase):
+    def test_manifest_artifact_view_excludes_stale_namespace_entries(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / ".lake").mkdir()
+            for name, manifest, module, other in (
+                ("human", "TARGET_MANIFEST.json", "Human", "Certificate"),
+                ("certificate", "MANIFEST.json", "Certificate", "Human"),
+            ):
+                package = root / name
+                artifacts = package / ".lake/build/lib/lean/Shared"
+                artifacts.mkdir(parents=True)
+                (artifacts / (module + ".olean")).write_text(module)
+                (artifacts / (other + ".olean")).write_text("stale")
+                (package / manifest).write_text(json.dumps({"sources": [
+                    {"path": "Shared/" + module + ".lean"}
+                ]}))
+            binary = root / "lean"
+            binary.write_text(
+                "#!" + sys.executable + "\n"
+                "import os, pathlib\n"
+                "p = pathlib.Path(os.environ['LEAN_PATH'].split(os.pathsep)[0])\n"
+                "assert (p / 'Shared/Human.olean').read_text() == 'Human'\n"
+                "assert (p / 'Shared/Certificate.olean').read_text() == 'Certificate'\n"
+            )
+            binary.chmod(0o755)
+            result = subprocess.run(
+                [sys.executable, "-c", MODULE.artifact_search_path(),
+                 str(root / "human"), str(root / "certificate"), "Bridge.lean"],
+                cwd=root, env={**os.environ, "PATH": str(root) + os.pathsep + os.environ["PATH"]},
+                capture_output=True, text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(list((root / ".lake").iterdir()), [])
+            self.assertEqual((root / "human/.lake/build/lib/lean/Shared/Certificate.olean").read_text(), "stale")
+
     def test_stale_local_lock_refuses_without_touching_source(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -109,11 +145,11 @@ class PaperBridgeExportTests(unittest.TestCase):
         self.assertEqual(text.count("sha256sum --check --status"), 3)
         self.assertIn('(cd "$finitegeom_root" && lake build Human.Model)', text)
         self.assertIn(
-            '"$certificate_root/.lake/build/lib/lean" TavisRuddFiniteGeom/Papers/Sample/CertificateCompatibility.lean',
+            '"$finitegeom_root" "$certificate_root" TavisRuddFiniteGeom/Papers/Sample/CertificateCompatibility.lean',
             text,
         )
-        self.assertIn('os.execvp("lean", ["lean", sys.argv[2]])', text)
-        self.assertIn('sys.argv[1] + os.pathsep + os.environ.get("LEAN_PATH", "")', text)
+        self.assertIn('subprocess.run(["lean", sys.argv[3]])', text)
+        self.assertIn('("TARGET_MANIFEST.json", "MANIFEST.json")', text)
         self.assertNotIn(
             "lake build --no-build TavisRuddFiniteGeom.Certificates.Sample", text
         )
