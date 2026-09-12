@@ -64,9 +64,19 @@ the capability-first second pass covering the dropped gradient material, Galois
 connections, partition refinement, symmetry, Lawvere theories, Markov categories, and
 algorithm-depth reads with reference implementations:
 `../2026-09-12-c1151-category-theory-capability-pass.md`; its merged 19-row ranking
-supersedes C1150's and proposes five implementation slices. Slices are allocated: C1152 certificate (first), C1153 C1016 group quotient, C1154
-FeatureDag interval/acyclicity, C1155 sentinel/weight pushing/partition refinement, C1156 Evolve
-ordering, C1157 equality-saturation spike after C1152/C1154. Gates in the queue rows and card.
+supersedes C1150's and proposes five implementation slices. Spikes C1152 and C1153 are closed as measured negatives with corrected facts:
+`../2026-09-12-c1152-certificate-spike.md` (dual bound sound but inert below half radius;
+hold-out declines are budget limits; verifier is a concrete u32 type whose saturating add
+collides with the absent sentinel) and `../2026-09-12-c1153-group-quotient-spike.md` (group is
+522⁴·516,096; orbits of banked states are all distinct; seed dedup not worth building). Spike
+branches `spike/c1152-certificate` and `spike/c1153-group-quotient` in `~/.cache/ergodis/worktrees/`.
+Still queued: C1154 FeatureDag interval/acyclicity, C1155 sentinel/weight pushing/partition
+refinement, C1156 Evolve ordering, C1157 equality-saturation spike. RelationalAI/tensor-logic
+reading (Macready): `../2026-09-12-relationalai-datalog-reading.md`; bounded min-plus is 0-stable,
+so fixpoints converge polynomially, pending a code check. **Waiting on Tavis**: whether to allocate
+the C1152 successors (structured decline reason; one-probe one-sided screen where 57% pass and
+6.6% complete) and the C1153 successor (enumerating-arm subgroup measurement). Foreign issue:
+branch `c1016-full-2092-campaign` fails `cargo fmt --check` and has four clippy errors.
 
 ### C1148 — certificate interoperability (queued)
 
