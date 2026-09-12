@@ -1,8 +1,8 @@
-# Reconstructing projective frames from their continuation graphs
+# Reconstructing Projective Frames from Their Continuation Graphs
 
 [![Concept DOI](https://img.shields.io/badge/Concept_DOI-10.5281%2Fzenodo.22651105-blue.svg)](https://doi.org/10.5281/zenodo.22651105)
 
-Tavis Rudd — revised draft, September 2026.
+Tavis Rudd — September 2026.
 
 ## Read the paper
 

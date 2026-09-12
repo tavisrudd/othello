@@ -1,5 +1,5 @@
 {
-  "title": "Reconstructing projective frames from their continuation graphs",
+  "title": "Reconstructing Projective Frames from Their Continuation Graphs",
   "creators": [{"name": "Rudd, Tavis"}],
   "description": "First draft. Semilinear reconstruction of four-point projective frames from uncoloured continuation graphs, polynomial recognition over a supplied finite field, and independently replayed small-order exceptions. The stable-range proof is written mathematics; no Lean formalization is claimed.",
   "upload_type": "publication",
