@@ -3,6 +3,55 @@
 **Date:** 2026-09-12. **Lane:** `ergodis`. **Disposition:** bounded reading and positioning study.
 No code written; nothing under `~/src/ergodis*` edited.
 
+## Opening summary
+
+Nine named sources: six at partial depth — Molly at algorithm depth, with its provenance rewrite,
+proof-tree extraction and SAT encoding read in full — and three at secondary only. Every
+identifier was resolved from an abstract page or venue record before fetching. Nothing was read at
+full text, and the two things this report most wants — Molly's soundness and completeness proofs,
+and its Figure 12 cells — were not read; both are flagged where they matter.
+
+**One correction changes the picture.** "Optimizing Distributed Protocols with Query Rewrites" is
+**SIGMOD 2024, not CIDR 2024, and Peter Alvaro is not an author** — it is Chu, Panchapakesan,
+Laddad, Katahanas, Liu, Shivakumar, Crooks, Hellerstein and Howard. Alvaro appears seven times in
+its bibliography, so the work stands on his line, but it is Hellerstein's group continuing it.
+
+**CALM monotonicity and `datalog°` stability are orthogonal, and the answer is clean.** They are
+properties of different objects answering different questions — the program's input-output map
+versus the semiring, coordination versus termination — and each has a witness the other lacks:
+transitive closure over the counting semiring is CALM-monotone and diverges; stratified Datalog¬
+over Boolean terminates in `N` steps and is non-monotone. Within `datalog°`, where monotonicity is
+presupposed for the least fixpoint to exist, stability is the strictly stronger additional
+requirement. The real alignment is with **Bloom^L**: a POPS's `⊕` is a bounded join semilattice
+exactly when it is idempotent, Ergodis's bounded min-plus qualifies, and Bloom^L's morphisms are
+the `⊕`-half of a Green–Karvounarakis–Tannen semiring homomorphism. Bloom^L has no `⊗` at all,
+which is precisely where Ergodis lives.
+
+**Molly's lineage is GKT provenance in `PosBool`, negated.** The proof forest gives
+`prov(g) = ⋁_proofs ⋀_messages x_m`; Molly's CNF is `¬prov(g)` with `¬x_m` realised as message-
+omission and crash variables. It deliberately drops multiplicity, which `N[X]` would keep —
+and recovering it is exactly what turns "which faults break all proofs" into "which *cheapest*
+faults break all proofs".
+
+**The Ergodis fit is the closest found in any of these studies, and the gap is precise.** Molly
+returns *a* satisfying fault set, and UNSAT as a fault-tolerance certificate; it does **not**
+minimise the fault set — "minimal" in the paper refers to the swept `⟨EOT, EFF, Crashes⟩`
+parameters. Restated exactly: a fault set breaks the outcome iff it is a **hitting set** of the
+proof-tree hypergraph, so minimum-cardinality is minimum hitting set and minimum-cost under fault
+weights is a min-plus optimisation over the same hypergraph — with "no cheaper set exists"
+discharged by the VeriPB-style `red` certificate from C1151. Ergodis's contribution is one
+sentence: replace "find a model" with "find a minimum-cost model plus a certificate that no
+cheaper one exists", over a hypergraph the Datalog fixpoint already produced. It inherits Molly's
+three preconditions — given inputs and topology, the `Fspec` bound, internal determinism — which
+Ergodis's glossary already requires be declared.
+
+**Eighth benchmark program: lineage-driven minimum-fault search over `ack-deliv`**, Molly's
+retry-until-ACK reliable broadcast, with source in its Figure 5 and lineage in Figure 7, measured
+on three numbers: agreement with Molly's answer, minimum fault-set cost versus Molly's first
+model, and certificate-check time as a fraction of search time. The demo needs one buggy and one
+bug-free protocol, and which of `ack-deliv` and `redun-deliv` is which could not be determined
+from the PDF.
+
 ## Corrections to the brief, up front
 
 Four of the details supplied from memory need fixing, and one of them changes the picture.
@@ -144,10 +193,17 @@ Ordinary Datalog is the special case where the merge function is fixed to set un
 **Bloom itself** — Peter Alvaro, Neil Conway, Joseph M. Hellerstein, William R. Marczak,
 "Consistency Analysis in Bloom: a CALM and Collected Approach", CIDR 2011, Asilomar, pp. 249–260.
 *Read depth: secondary only* — not read; bibliographic detail taken verbatim from reference [6]
-of Chu et al. (arXiv:2404.01593), at the depth recorded in §3. Likewise **Blazes** (Alvaro,
-Conway, Hellerstein, Maier, ACM TODS 42(4), Article 23, October 2017, 31 pages, DOI
-10.1145/3110214) and **Edelweiss** (Conway, Alvaro, Andrews, Hellerstein, 2014), both from the
-same bibliography and both unread.
+of Chu et al. (arXiv:2404.01593), whose own read depth is recorded in §3.
+
+**Blazes** — Peter Alvaro, Neil Conway, Joseph M. Hellerstein, David Maier, "Blazes: Coordination
+Analysis and Placement for Distributed Programs", ACM Transactions on Database Systems 42(4),
+Article 23 (October 2017), 31 pages, DOI 10.1145/3110214. *Read depth: secondary only* — not
+read; detail verbatim from reference [5] of Chu et al.
+
+**Edelweiss** — Neil Conway, Peter Alvaro, Emily Andrews, Joseph M. Hellerstein, "Edelweiss:
+Automatic storage reclamation …", 2014. *Read depth: secondary only* — not read; detail verbatim
+from reference [17] of Chu et al., which truncates the title in the extraction I read, so the
+title above is incomplete and the venue is unrecorded.
 
 ## 2. Molly and lineage-driven fault injection
 
@@ -388,3 +444,303 @@ shared intellectual neighbourhood (Datalog, provenance, worst-case-optimal joins
 recursion). Hellerstein's current industry affiliation on the Chu et al. paper is **Sutter Hill
 Ventures**, not RelationalAI. Any stronger claim about the lineage would be speculation and is not
 made here.
+
+## 5. Mapping onto Ergodis
+
+Inferences here are mine unless attributed. `datalog°` and Green–Karvounarakis–Tannen are used at
+the depths recorded in `2026-09-12-relationalai-datalog-reading.md`.
+
+### 5.1 CALM monotonicity versus `datalog°` stability
+
+They are **not the same condition, and neither is weaker or stronger than the other in general**,
+because they are properties of different objects answering different questions.
+
+| Aspect            | CALM monotonicity              | datalog-over-POPS stability      |
+|-------------------|--------------------------------|----------------------------------|
+| Property of       | the program input-output map   | the semiring P-plus-bottom       |
+| Statement         | S subset T implies P(S) ⊆ P(T) | u^(p) equals u^(p+1)             |
+| Question answered | is coordination needed?        | does naive iteration terminate?  |
+| Failure mode      | needs a coordination protocol  | diverges                         |
+
+Both directions of independence have witnesses.
+
+**Monotone but not stable.** A plain transitive-closure program over the counting semiring `ℕ`
+with `(⊕, ⊗) = (+, ×)` is monotone in CALM's sense — more input facts yield more derivations, and
+nothing is retracted — but `ℕ` is not stable: `u^(p) = 1 + u + … + u^p` strictly increases for
+`u ≥ 1`, so path-counting on a cyclic graph never reaches a fixpoint. CALM says no coordination is
+required; `datalog°` says the computation does not finish. *This is my construction from the two
+definitions, not a claim either paper makes.*
+
+**Stable but not monotone.** The Boolean semiring is 0-stable, so every `datalog°` program over it
+converges in `N` steps; but a stratified Datalog¬ program over Boolean uses set difference, which
+Keeping CALM identifies as "the sole non-monotonic operator", so CALM says it needs coordination.
+Termination is fine; coordination-freedom is not.
+
+**Where they do meet, and it is worth saying precisely.** `datalog°` *presupposes* that the rule
+function is monotone with respect to `⊑`, since otherwise the least fixpoint need not exist at
+all. Inside that setting stability is the **additional** requirement, so **every convergent
+`datalog°` program is monotone but not conversely** — within `datalog°`, stability is strictly
+stronger. What CALM adds is orthogonal to both: it is about the map from *distributed* inputs to
+outputs, which `datalog°` says nothing about.
+
+**The sharper alignment is with Bloom^L, not with CALM.** Keeping CALM's gloss that "monotonic
+programs simply accumulate beliefs" is the statement that state lives in a join semilattice and
+each step is a join, which is exactly Bloom^L's `⟨S, ⊔, ⊥⟩`. A POPS's `⊕` is a join semilattice
+precisely when `⊕` is **idempotent**. Three consequences:
+
+1. **Ergodis's bounded min-plus is a legitimate Bloom^L lattice.** `⊕ = min` is idempotent,
+   `⊥ = u32::MAX`, and the induced order `x ⊑ y ⇔ x ⊔ y = y` is the reverse of the numeric order,
+   which is exactly `datalog°`'s `Trop₊` convention. The C1151 finding that this algebra is
+   0-stable and the Bloom^L framing describe the same object from two sides.
+2. **Bloom^L's morphisms are `⊕`-semiring homomorphisms.** `g(⊥_X) = ⊥_Y` and
+   `g(a ⊔_X b) = g(a) ⊔_Y g(b)` is the additive half of a Green–Karvounarakis–Tannen semiring
+   homomorphism. GKT's Proposition 3.5 requires both halves — `⊕` and `⊗` — for a tagwise map to
+   commute with every positive query; Bloom^L needs only the `⊕` half because its state is
+   lattice-valued rather than relation-valued with products. So Bloom^L's
+   morphism/monotone/non-monotone trichotomy is *coarser* than semiring homomorphism: a
+   `⊗`-preserving map is automatically a Bloom^L morphism, not conversely.
+3. **`⊗` is where the two frameworks diverge and where Ergodis lives.** Bloom^L has no
+   multiplication; its lattices carry only a join. Everything Ergodis wants from min-plus — cost
+   accumulation along a path — is `⊗`. Bloom^L is therefore the right vocabulary for Ergodis's
+   *merge* semantics and says nothing about its *composition* semantics.
+
+### 5.2 Molly's provenance versus Green–Karvounarakis–Tannen semirings
+
+Molly's lineage **is** GKT provenance specialised to the positive-Boolean semiring and then
+negated. The correspondence is exact enough to write down.
+
+The derivation forest gives, for a goal `g`, proof trees `P_1, …, P_k` each with a set of
+contributing messages. In GKT terms the provenance of `g` in `PosBool(X)` over message variables
+`x_m` is
+
+```
+prov(g)   =  ⋁_{i=1..k}  ⋀_{m ∈ P_i}  x_m
+```
+
+Molly's CNF is its **negation**, with `¬x_m` realised as concrete fault variables:
+
+```
+¬prov(g)  =  ⋀_{i=1..k}  ⋁_{m ∈ P_i}  ( O_(from,to,time)  ∨  C_(node, t ≤ time) )
+```
+
+which is the shape of the paper's worked example
+`(O_(a,c,2) ∨ C_(a,2) ∨ C_(a,1)) ∧ (O_(b,c,1) ∨ C_(b,1))`. Crash variables are why a single
+literal appears in several clauses: a crash of `a` at time `t` falsifies every message `a` sends
+at or after `t`, so one fault variable covers many message literals.
+
+Two observations, mine.
+
+**Molly deliberately drops multiplicity, and that is the whole loss.** GKT's universal object is
+the polynomial semiring `N[X]`, which records not only *which* inputs contribute but *how many
+times and in what combination* — their example `2s² + rs` says the tuple is derived three ways, two
+of them using input `s` twice. `PosBool(X)` is the specialisation of `N[X]` that forgets
+coefficients and exponents, and GKT's Theorem 4.3 says every semiring's answer factors through
+`N[X]`. Molly only ever asks "does some proof survive", so `PosBool` suffices and is cheaper.
+Molly's bibliography cites GKT but the paper does not develop the connection.
+
+**Recovering multiplicity is exactly what turns Molly's question into Ergodis's question.** If the
+same derivation forest is annotated in a *tupled* semiring — `PosBool × Trop₊`, or `N[X]` itself —
+then each proof carries a cost as well as a support set, and "which faults break all proofs"
+becomes "which **cheapest** set of faults breaks all proofs". That is one extra component on the
+annotation, computed by the same fixpoint, using the semiring-polymorphic machinery C1151 row 4
+already proposes.
+
+### 5.3 The Ergodis fit: minimum fault set with an exclusion certificate
+
+This is the closest fit to Ergodis found in any of the recent studies, and the gap is precise.
+
+**What Molly provides.** A satisfying assignment — some fault set that falsifies all known proofs
+— and, the valuable half, **UNSAT as a certificate**: "if the resulting SAT problem is
+unsatisfiable, then there exists at least one proof that cannot be falsified by any allowable
+combination of message losses and crash failures — hence the program is fault-tolerant with
+respect to that goal!"
+
+**What Molly does not provide.** Any notion of a *smallest* fault set. §2.4 establishes that
+"minimal" in the paper refers to the swept `⟨EOT, EFF, Crashes⟩` parameters, not to the cardinality
+or cost of the fault set the solver returns. SAT returns *a* model; nothing asks for a minimum one.
+
+**The exact-optimisation restatement.** Let `F_i` be the set of fault variables that falsify proof
+`P_i`. A fault set `X` breaks the outcome iff `X ∩ F_i ≠ ∅` for every `i` — that is, **`X` is a
+hitting set of the hypergraph `{F_1, …, F_k}`**, and Molly's CNF is that hypergraph written as
+clauses. Therefore:
+
+- **minimum-cardinality fault set** = minimum hitting set, the dual of minimum set cover, NP-hard,
+  and exactly the shape of exact search Ergodis is built for;
+- **minimum-cost fault set** under per-fault weights (for instance `−log` of a fault probability)
+  = minimum-weight hitting set, a **min-plus** optimisation over the same hypergraph, landing in
+  the algebra Ergodis has already shown 0-stable;
+- **"no smaller set exists"** is an exclusion claim over all candidates of lower cost, which is the
+  contract the VeriPB-style `red` certificate from C1151 row 6 is built to discharge — the problem
+  is 0–1, the witness substitution is the lift, and the objective condition `f ≥ f↾ω` is the "does
+  not worsen the fault count" obligation.
+
+Ergodis's addition to Molly is one sentence: **replace "find a model" with "find a minimum-cost
+model, and emit a certificate that no cheaper one exists", over a hypergraph the Datalog fixpoint
+already produced.** Both halves of Ergodis's programme — rule input with a convergence bound, and
+exact search with exclusion coverage — are exercised by one workload.
+
+**The preconditions Ergodis would inherit, and must declare.** Molly's guarantee is relative to
+(i) the supplied inputs and topology, (ii) the `Fspec` bound, and (iii) internal determinism, which
+the authors state is what the completeness argument rests on. An Ergodis minimality certificate
+inherits all three: it would certify *"no fault set of cost below `c` breaks this invariant, for
+these inputs, within this `Fspec`, assuming internal determinism"* — not an absolute statement.
+Ergodis's glossary already demands exactly this kind of scoped claim, so this is a fit rather than
+a compromise.
+
+### 5.4 Candidate eighth benchmark program
+
+Proposed for `2026-09-12-datalog-benchmark-suites.md` as program 8, alongside the seven there.
+
+**Program: lineage-driven minimum-fault search over `ack-deliv`.** `ack-deliv` is the reliable
+broadcast protocol of Molly §3 "in which each agent retries only until it receives an ACK"; its
+Dedalus source is printed in Figure 5 and its failure-free lineage in Figure 7. With `redun-deliv`
+it is one of only two protocols Molly uses in its coverage study (Figure 11), so it carries the
+most published data in that corpus, and it is a handful of rules, which matters for a first port.
+
+| Field       | Value                                                |
+|-------------|------------------------------------------------------|
+| Semiring    | PosBool for support, min-plus for cost               |
+| Recursive   | yes, through the retry rule                          |
+| Inputs      | one broadcaster, two receivers, one bcast fact       |
+| Fault model | Fspec triple EOT, EFF, Crashes, swept as Molly does  |
+| Run locally | yes; both Molly and Ergodis are local prototypes     |
+
+**What Molly reports**, and what a run must reproduce before anything is claimed: at the minimal
+`⟨EOT, EFF, Crashes⟩` its sweep reaches, either a counterexample fault set or a bounded guarantee
+of absence; the number of possible failure combinations at those parameters; the number of
+concrete executions performed; and wall-clock seconds — all against random fault injection
+averaged over 25 runs. Molly's Figure 12 carries these per program.
+
+**What Ergodis would add**, and the three numbers that make the row worth running:
+
+1. **Agreement.** Does Ergodis find a fault set Molly's solver also admits? Reproducing Molly's
+   answer is the gate before any improvement is claimed.
+2. **Minimality.** The cardinality — and with fault weights, the cost — of Ergodis's minimum fault
+   set against the first model Molly's solver returns. If they coincide on this protocol the row
+   still earns its place by producing the *certificate*; if they differ, the difference is the
+   result.
+3. **Certificate cost.** Independent-check time as a fraction of search time. This is the number
+   Ergodis's positioning rests on and nothing in the Datalog benchmark literature measures it.
+
+For the certificate half the demo needs **one protocol from each of Molly's two classes** — a
+buggy one, where the answer is a minimum fault set, and a bug-free one, where the answer is the
+exclusion certificate ("7 critical bugs in 14 fault-tolerant systems; for the remaining 7 systems,
+it provides a guarantee that no invariant violations exist up to a bounded execution depth"). I
+could **not** determine from the PDF which of `ack-deliv` and `redun-deliv` falls in which class,
+because Figure 12's cells extract with scrambled columns; that must be settled by reading the
+figure directly before the pair is fixed.
+
+**Published Molly numbers to cite, and their caveats.**
+
+- **"7 critical bugs in 14 fault-tolerant systems"**, with a bounded absence guarantee for the
+  other 7. *Caveat:* "14 systems" counts protocol variants, several of which are five-line
+  delivery protocols; it is a corpus-size statement, not a difficulty statement.
+- **"in many cases using an order of magnitude fewer executions than random fault injection"**.
+  *Caveat:* the baseline is random fault injection averaged over 25 runs, weak by construction,
+  and the claim is hedged with "in many cases".
+- **Figure 12's per-program minimal `Fspec`, combination counts, execution counts and wall-clock
+  seconds.** *Caveat, disqualifying until fixed:* **I could not transcribe these cells** — the
+  multi-column extraction scrambles them, and the only value I could read cleanly was an
+  unattributable 0.12–9.60 second range. Anyone citing Figure 12 must read the figure directly.
+- **No hardware is stated anywhere I read**, and no SAT solver or Datalog evaluator is named beyond
+  "off-the-shelf components". Every timing in the paper is therefore uncomparable to a modern run,
+  and the row should be positioned as *capability* — minimum plus certificate versus any model —
+  not as speed.
+
+## 6. Three questions for Macready
+
+Each is grounded in something a source above actually defines.
+
+1. **Which half of Alvaro's line is the relevant one — the lattice condition or the provenance
+   loop?** They are separate results with separate uses. CALM plus Bloom^L give a *lattice*
+   condition on program state (`⟨S, ⊔, ⊥⟩` with a monotone/morphism/non-monotone classification of
+   methods) that decides whether coordination is needed; §5.1 shows this is the `⊕`-half of a POPS
+   and is orthogonal to `datalog°` stability. Molly gives a *provenance-to-SAT* loop that turns
+   proof trees into a fault hypergraph. If the interest is the first, the connection to tensor
+   logic is about which merge operators a distributed einsum may use without coordinating. If it
+   is the second, the connection is to certificates and exact search. **Which?**
+
+2. **Is Hydroflow a comparison point, a candidate backend, or a competitor for the same slot?**
+   Chu et al. compile Dedalus to **Hydroflow, a Rust dataflow runtime**, and apply rule-driven
+   rewrites — decoupling and partitioning — under correctness preconditions derived from
+   order-insensitivity and data-dependency analysis, reporting 2×, 5× and 3× throughput on voting,
+   2PC and Paxos. That is structurally the pipeline Macready describes: a declarative rule syntax,
+   a compiler applying rewrites under a correctness precondition, a Rust runtime. **Does his
+   categorical IR target something like Hydroflow, replace it, or sit above it?**
+
+3. **Does the categorical IR aim to subsume both rewrite disciplines, and does it discharge the
+   precondition by construction?** There are now two published rule-driven rewrite lines with
+   correctness preconditions: the **FGH-rule** (`G(F(X)) = H(G(X))`, semiring-algebraic,
+   discharged by counterexample-guided synthesis with z3) and **Chu et al.'s** spatiotemporal
+   rewrites (discharged by order-insensitivity and dependency analysis, and applied **manually** —
+   their automated optimiser is explicitly future work). Both are commuting-square conditions over
+   different structures. **Is the IR meant to cover both, and if so does it establish the square by
+   construction rather than by verification?** If by construction, that is strictly better than
+   either and is the first thing worth hearing about.
+
+## 7. Coverage and search record
+
+### Read-depth tally
+
+**Nine named sources.** Six at **partial**, one of those (Molly) at algorithm depth with §§4.1.2,
+4.2 and 4.3 read in their entirety: Molly, Keeping CALM, Bloom^L, Dedalus, Chu et al., LogicBlox.
+Three at **secondary only**, characterised from Chu et al.'s bibliography and not read: Bloom
+(CIDR 2011), Blazes (TODS 2017), Edelweiss (2014). Two further sources — `datalog°` and
+Green–Karvounarakis–Tannen — are reused at the depths recorded in
+`2026-09-12-relationalai-datalog-reading.md` and were not re-read. **Nothing was read at full
+text**, and the two things this report most depends on — Molly's soundness and completeness proofs
+in its appendix, and Figure 12's cells — were **not** read; both are flagged where they matter.
+
+### Identifier resolution
+
+Resolved from the arXiv abstract page before fetching: `1901.01930` (Keeping CALM, v2, with the
+CACM 63(9) reference), `2404.01593` (Chu et al., v2, recorded there as SIGMOD 2024). Resolved from
+venue records via search: Molly (SIGMOD 2015, DOI 10.1145/2723372.2723711, via ACM DL and dblp),
+Bloom^L (SoCC 2012, DOI 10.1145/2391229.2391230, via dblp and ACM), Keeping CALM's CACM DOI
+10.1145/3369736, and the LogicBlox SIGMOD 2015 paper. Dedalus's report number UCB/EECS-2009-173
+comes from the PDF's own title block; the 2011 *Datalog Reloaded* citation comes verbatim from Chu
+et al.'s reference [7]. **No identifier was written from memory.**
+
+### Cache additions
+
+New keys: `alvaro-2015-lineage-driven-fault-injection`, `arXiv:1901.01930`,
+`conway-2012-logic-and-lattices`, `alvaro-dedalus-datalog-in-time-and-space`, `arXiv:2404.01593`,
+`aref-2015-logicblox-sigmod`. SHA-256 values are quoted in each entry. Fetches went through
+`/tmp/persistent/tavis/lit-search/fetch_c1151b.sh`, which rejects any download whose magic bytes
+are not `%PDF` — it rejected one attempt at `people.ucsc.edu/~palvaro/dedalus.pdf`, which returned
+HTML, and the Berkeley technical report was used instead.
+
+### Load-bearing queries, verbatim
+
+1. `"Keeping CALM" "When Distributed Consistency is Easy" Hellerstein Alvaro arXiv CACM identifier`
+2. `Alvaro Rosen Hellerstein "Lineage-driven Fault Injection" Molly SIGMOD 2015 provenance SAT`
+3. `"Logic and Lattices for Distributed Programming" Conway Marczak Alvaro Hellerstein Maier SoCC
+   2012 Bloom^L`
+4. `Peter Alvaro 2024 2025 2026 publications UCSC Datalog BFT scaling protocol rewriting recent` —
+   **found no Alvaro work on protocol rewriting or BFT scaling.** Surfaced venues (SoCC 2025,
+   DBPL 2025, HotOS 2025, and a CIDR 2025 paper "Deterministic Record-and-Replay") and three BFT
+   papers (Clownfish, Beluga, Prefix Consensus) I did **not** verify as his and do not attribute.
+   Recorded as searched-and-found-nothing over web search only — a weak negative.
+5. `LogicBlox LogiQL Molham Aref RelationalAI founded lineage history Datalog company`
+
+### Not covered
+
+- **Molly's appendix** (Section B), containing the soundness and completeness proofs, was not
+  read. Every claim here about what LDFI *proves* is quoted from the body.
+- **Molly's Figures 11 and 12** could not be transcribed; see §5.4.
+- **Bloom (CIDR 2011), Blazes (TODS 2017) and Edelweiss (2014) were not read** — only their
+  bibliographic entries in Chu et al.
+- **The Dedalus version I read is the 2009 Berkeley technical report**, not the 2011 published
+  chapter; I did not compare them, so any statement here may not hold of the published version.
+- **Chu et al.'s rewrite rules and correctness arguments (§§3–4, Appendices A–B) were not read** —
+  only the framing, setup and results.
+- **No primary corporate record** was consulted for the LogicBlox-to-RelationalAI claim; it rests
+  on the RelationalAI resources page and a published interview surfaced by search, both at
+  abstract/metadata depth.
+- **No relation between Alvaro or Hellerstein and RelationalAI was established** beyond LogicBlox's
+  citation of Bloom (§4).
+- **Hydroflow itself was not read** — no Hydroflow paper or repository was consulted, only Chu et
+  al.'s description of it as "a Rust dataflow runtime for distributed systems".
+- **zbMATH Open, OpenAlex, Crossref and Semantic Scholar were not queried.** MathSciNet: NOT
+  COVERED (institutional authentication). Google Scholar: NOT COVERED (blocks automated access).
+- **Nothing was run.** No protocol was ported, no engine installed.
