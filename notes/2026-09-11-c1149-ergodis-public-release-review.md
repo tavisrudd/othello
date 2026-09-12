@@ -1901,3 +1901,47 @@ private repository has no GitHub remote, the staging clone's pushurl is parked a
 `no-push://ergodis-public`, and `.claude/settings.json` denies `git push`. The evidence repository
 has not been exported yet; its first export is also `--new-public-history`, and it should carry
 the tag of whichever release it accompanies.
+
+## Manifest coverage and its gate, 2026-09-12 (core `db64630`)
+
+Both halves of the audit's remaining item 5 are closed.
+
+### The check now runs
+
+`python/generate_evidence.py --check` was in no CI workflow, no Makefile target and no test, which
+is why `SHA256SUMS` sat stale for eighteen source entries until this task noticed. New
+`tests/evidence_manifest.rs` runs it inside `cargo test`, which the validation gate in `AGENTS.md`
+already requires before any change is reported, and that gate now says so explicitly: a change to
+a hashed source, fixture or evidence file needs `python3 python/generate_evidence.py --write` in
+the same commit.
+
+The test skips when `evidence/` is absent, because that directory is excluded from the public
+export and the test file itself ships. Both branches were verified rather than assumed: appending
+a byte to `evidence/l2-dominance-scaling.tsv` fails the test with the regeneration command in the
+message, and a detached worktree with `evidence/` removed skips with a message and passes, which
+is what a published checkout does.
+
+### Coverage is now total for published bytes
+
+`HASHED_PATHS` hashed 39 of the 118 evidence files. It keeps its itemised list for sources,
+fixtures and documents — adding one of those to the manifest should be a deliberate act — and a
+new `HASHED_TREES` hashes `evidence/` and `proptest-regressions/` in full, sorted, with a path
+that also appears in the itemised list never producing a second row. `SHA256SUMS` goes from 125
+rows to 204: 85 listed files, 118 evidence files, one proptest seed.
+
+The practical effect is that dropping, adding or editing any evidence file now fails `cargo test`
+until the manifest is regenerated, so the class of defect this task found cannot recur silently.
+
+### Gate run
+
+`cargo fmt --check`, `cargo clippy --all-targets --all-features -D warnings` and
+`cargo test --all-features` (53 suites, no failures) all pass, as do the 73 publication guards.
+The evidence export copy needs no refresh: its own `SHA256SUMS` covers only the copied files and
+none of those files changed.
+
+### Remaining C1149 items
+
+Unchanged and still open: `BENCHMARKS.md` names no evidence file for the BB288, qdist and sce
+families; the ship-or-drop calls on `sce-r2elite*`, `bb756`/`bb784` and
+`application-counted-type-ab.*`; and the Gurobi family's private-tier dependency, whose runner is
+held out of the export and whose evidence cannot be regenerated without an unrestricted license.
