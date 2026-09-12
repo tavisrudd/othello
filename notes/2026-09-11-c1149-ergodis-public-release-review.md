@@ -1311,9 +1311,12 @@ allowlist filter is line-scoped and a hardcoded fork of `.public-lint-allow`; `p
   - Payloads exceed the public lint's 1 MiB size cap (the public wasm alone is 1.36 MB raw), so
     either the cap is raised per path or payloads ship as GitHub release assets fetched by the
     page. Decide in Phase 4.
-  - The loader half is already public (`module-host.js`, `module-worker.js`; see the demos
-    section) but no public page consumes it; the private hash-named module packaging becomes a
-    release-build step. That is demo work.
+  - **Artifact snapshots only.** The public tree receives built payload artifacts (compiled
+    WASM and whatever glue the loader needs), produced privately and committed as opaque
+    snapshots. No private source, build script, packaging tool, Makefile, or fixture crosses
+    the boundary; the private build step stays in `ergodis-private` and is never exported. The
+    loader half is already public (`module-host.js`, `module-worker.js`; see the demos section)
+    but no public page consumes it yet. That is demo work.
   - **Demo files are owned by another active agent. No demo file is moved, renamed, or edited
     by C1149 or its successors without that agent's lane finishing first.** The demos section's
     recommendations (README Demos section, serve one-liner, Pages workflow, showcase page) are
@@ -1371,9 +1374,11 @@ Makefile with `wasm`, `serve`, `smoke` targets. `www/LICENSE` copy or footer sou
 
 ### Phase 5 — private-provider demo payloads (own task, after the demo agent's lane)
 
-Release-build the private family providers to WASM payloads, package them hash-named for the
-public `module-host.js` loader, add the separate payload license notice, and settle the size-cap
-or release-asset delivery. The earlier optional `AllocationKernel` showcase page is subsumed.
+Private side: release-build the family providers to WASM payloads and package them hash-named
+for the public `module-host.js` loader. Public side receives only the built artifact snapshots
+plus the separate payload license notice; no private source, scripts, or packaging tooling is
+exported, and the export filter must keep it that way. Settle the size-cap or release-asset
+delivery. The earlier optional `AllocationKernel` showcase page is subsumed.
 
 ### Phase 6 — release
 
