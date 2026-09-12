@@ -1,4 +1,4 @@
-# Reconstructing projective frames from their continuation graphs
+# Reconstructing Projective Frames from Their Continuation Graphs
 
 **Lane**: `continuation`
 

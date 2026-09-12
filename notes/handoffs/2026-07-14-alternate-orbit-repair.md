@@ -3,7 +3,7 @@
 **Lane**: `paper-frob-eq` — see CLAUDE.md § Lane routing.
 
 **Canonical paper:** `papers/equivariant-robust-completion/` —
-*Frobenius-equivariant pair extension and robust repair of eight-arcs*
+*Frobenius-Equivariant Pair Extension and Robust Repair of Eight-Arcs*
 
 **Date:** 2026-08-21
 **Status:** OPEN — C142, C143, C148–C151, C318–C319, C331, C363, C937–C938 reported. The exact Q25
