@@ -54,4 +54,11 @@ example : CheckedSolution selfLoop :=
 example : CheckedSolution selfLoop :=
   ergodis_solution selfLoop from "unsupported" via "WeightedRules/fixtures/rejection-oracle"
 
+private def differentProgram : Program Cost 1 := ⟨fun _ => ⟨7, by decide⟩, []⟩
+
+/-- error: Ergodis certificate failed kernel replay -/
+#guard_msgs in
+example : CheckedSolution differentProgram :=
+  ergodis_solution differentProgram from "valid" via "WeightedRules/fixtures/rejection-oracle"
+
 end WeightedRules
