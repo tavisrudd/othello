@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -euo pipefail
+exec nix shell nixpkgs#python3 -c python3 "$(dirname "$0")/rejection_oracle.py" "$@"
