@@ -1,7 +1,7 @@
-# The golden conference operator and its shadow sisters
+# The Golden Conference Operator and Its Shadow Sisters
 
-This directory contains the manuscript *The golden conference operator and
-its shadow sisters*.
+This directory contains the manuscript *The Golden Conference Operator and
+Its Shadow Sisters*.
 
 ## Headline
 

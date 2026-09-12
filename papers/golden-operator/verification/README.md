@@ -1,7 +1,7 @@
 # Verification surface
 
-This directory is the paper-owned trust boundary for *The golden conference
-operator and its shadow sisters*.
+This directory is the paper-owned trust boundary for *The Golden Conference
+Operator and Its Shadow Sisters*.
 
 The manuscript distinguishes:
 
