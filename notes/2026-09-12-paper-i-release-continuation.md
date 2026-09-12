@@ -37,8 +37,14 @@ at 29 and 14 pages, with no PDF byte changes.
 
 ## Release and mirror
 
-Full release replay is in progress. This report will be sealed with its outcome
-and matching mirror identity before closeout.
+The first aggregate replay passed its first 26 checks, including all exact
+computational replays and the human-gate axiom audit. The final bridge check
+failed because its ignored `lake-manifest.json` still pinned finitegeom at
+`b871c10`. Lake attempted to replace the source symlink while refreshing that
+stale lock and refused. This is local dependency-lock drift, not a failed Lean
+proof. The old symlink was unlinked without touching its target, and the
+existing guarded `update-lock finitegeom` entry point refreshes the lock.
+The bridge is retried separately before another aggregate replay.
 
 ## Mystery ledger / ej + tt
 
