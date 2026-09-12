@@ -4976,8 +4976,17 @@
       "last": 1159,
       "purpose": "C1152/C1153 successors: acting-subgroup measurement on the two-transfer census enumeration (q18/q29); one-probe one-sided screen before completion search in the C1143 sparse provider",
       "sequence": 553
+    },
+    {
+      "count": 4,
+      "first": 1160,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1163,
+      "purpose": "datalog-degree transfers: stability bits and semi-naive verifier; recursive plan queries with convergence bound; FGH-square leaf-lowering discharge by CEGIS; tensor-logic program to certified Ergodis plan",
+      "sequence": 554
     }
   ],
-  "next_id": 1160,
+  "next_id": 1164,
   "schema": "codex-task-id-allocations-v1"
 }
