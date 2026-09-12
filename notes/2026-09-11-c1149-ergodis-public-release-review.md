@@ -1560,3 +1560,145 @@ with `CARGO_TARGET_DIR` under `~/.cache/ergodis/target/c1149-*`, and wrote the s
 verbatim. The filtered tree was not passed through the export script's rewrite step, so the
 rewrite defects were established by reading the script and the affected lines, not by observing
 an export. Nothing under `~/src/ergodis*` or the staging clone was modified.
+
+## Evidence remediation, 2026-09-12 (core `4fb1a01`, export `3c4aaa5`)
+
+Executed the first four items of the audit's remediation list and the guard half of the fifth.
+`scripts/public-lint.sh evidence` went from **63 findings across 26 files to clean**; the export
+repository `~/src/ergodis-evidence` lints clean except for its own `AGENTS.md`, which is the
+pre-publication deletion decision below.
+
+### Dead files deleted (9 files, 3.2 MB)
+
+`layered-audit-v1.bin`, `layered-frozen-v1.bin`, `drat-proof-hashes.tsv`, `ab-binaries.txt`,
+`repair-dag-map-merge.tsv`, `regression-rows-ab.tsv`, `wide-batched-final.tsv`,
+`bb288-native-cost-trim-t16.jsonl`, `bb288-native-frame-t16.jsonl`. Confirmed first that no
+script, document or manifest names any of them. Evidence is now 118 files plus one proptest seed.
+
+### Host identity replaced by an anonymous, stable id
+
+New `python/provenance.py` in the core:
+
+- `machine_record()` replaces `platform.uname()._asdict()` in `run_benchmarks.py`,
+  `head_to_head_original_rust_benchmarks.py` and `rerun_original_rust_benchmarks.py`. It drops
+  `node` and records `host_id`, a random UUID generated once and kept in
+  `~/.config/ergodis/host-id` (override with `ERGODIS_HOST_ID_FILE`). Runs from the same machine
+  stay groupable and the id discloses nothing by itself. Alongside it the record now carries
+  `cpu_model`, `logical_cpus`, `physical_cores`, `total_memory_bytes`, plus the kernel release,
+  version and architecture already present — the facts a benchmark reader needs to judge a time.
+  This machine's id is `f461a508-9aa5-42b4-b445-770aa2f14576`; the mapping back to the machine is
+  local and is recorded nowhere in either repository.
+- `anonymize_host()` substitutes the host id for the node name inside captured third-party output.
+  Applied to `kissat_metadata` in `run_satcomp24_portfolio.py`, whose `--build` banner ends in a
+  `uname -a` line; the kernel and architecture survive, the node name does not.
+- `public_path()` renders a recorded path repository-relative when the file is inside the
+  repository and as a bare file name otherwise. Every provenance record pairs a path with a
+  SHA-256, so the name is what a reader needs. Applied in `run_repair_dag_contended_ab.py` and
+  `run_application_counted_type_ab.py`.
+
+Committed bytes were backfilled to the same shape: `"node": "grover"` became
+`"host_id": "f461a508-…"` in `benchmarks.json` and both `original-rust-*.json`, and the captured
+kissat banner in `vlsat2-prefix-ab.json` carries the id in place of `grover`. `grep -r grover
+evidence/` is now empty. `BENCHMARKS.md` explains the field in its methodology section.
+
+### Task identifiers stripped
+
+- `"label": "C997 Gross [[144,12,12]]"` → `"Gross [[144,12,12]]"` in the twelve
+  `native-*` / `certify-scale-v3-*` / `direct24-scale-v3-*` files. The current generator
+  (`export_bb_native.py`) already emits the short label, so the bytes had simply gone stale.
+- Schema `ergodis-c997-gurobi-v1/v2` → `ergodis-gross-gurobi-v1/v2` in the four `gurobi-13.0.2-*`
+  and three `parity-*-symbreak` files, and `ergodis-c997-support-orbits-v1` →
+  `ergodis-gross-support-orbits-v1`. The Gross code is the literature name for the
+  `[[144,12,12]]` bivariate-bicycle code, so the schema now says what the data is about. The
+  existing `ergodis-bb-gurobi-v1` belongs to the distinct BB288 family and is untouched, so the
+  rename creates no collision.
+- Field `c997_source` → `source` (the generator's bare file name, `gross_distance_experiment.py`)
+  and `c997_source_sha256` → `source_sha256`; the digest, which is the part that anchors
+  provenance, is unchanged.
+- Solver `log_path` values lost the `/home/tavis/.cache/ergodis/` prefix and the `c997-` directory
+  prefix: `gross-gurobi-official/v2-global/global.log`, `gross-parity-polytope/…`.
+- The top-level `"task"` key (`C1038`, `C1050`) is gone from `negative-control-tier.json`,
+  `repair-dag-contended-ab.json` and `application-counted-type-ab.json`. No generator has emitted
+  it for some time; only the bytes still carried it.
+- Absolute and monorepo paths in `optimal-support-orbits.json`, `repair-dag-contended-ab.json`,
+  `application-counted-type-ab.json` and `bb288-gurobi-binary-t8.jsonl` became repository-relative
+  paths or bare file names.
+
+Every rewrite went through a byte-exact JSON round trip first: the file was parsed, re-serialized
+with its own `indent`/`sort_keys` settings, and compared to the original before any mutation, so
+no unrelated byte moved. `vlsat2-prefix-ab.json` is insertion-ordered rather than key-sorted and
+was preserved that way.
+
+### Guard gaps closed
+
+- The task-id rule is now case-insensitive (`grep -oiE`), with the allowlist comparing
+  case-insensitively too so `C99`/`c99` stay exempt. It immediately found three shipped scripts
+  carrying lowercase identifiers that the old rule missed:
+  `scripts/check-observational-hierarchy-evidence.sh` (two error strings naming `c987`),
+  `scripts/check-observational-mata-evidence.sh` (`c983`), and
+  `scripts/negative_control_tier_run.py` (`tempfile.mkdtemp(prefix="c1038-")`). All three fixed.
+- The size cap is now path-aware: 1 MiB for the code tree, 4 MiB under `evidence/` and
+  `proptest-regressions/` or when the scanned tree is itself an evidence directory
+  (`PUBLIC_LINT_EVIDENCE_MAX_BYTES`). Evidence is bulk measurement data published as its own
+  repository, so the strict code-tree cap was the wrong instrument; `benchmarks.json` (1.4 MB),
+  `z3-weighted-trace-suite.json` (1.1 MB) and `layered-chain-audit-v2.bin` (2.4 MB) all sit under
+  the new cap. Four guard tests were added for the two changes; `tests/publication-guards.sh`
+  passes 51 of 51.
+
+### Validation
+
+`scripts/public-lint.sh evidence` clean · all 22 `scripts/check-*-evidence.sh` pass ·
+`python/generate_evidence.py --check` clean · `tests/publication-guards.sh` 51/51 ·
+the three `original-rust` and BB checkers pass · `sha256sum -c SHA256SUMS` verifies every file in
+the export repository, which `diff -rq` confirms byte-identical to the core.
+
+### Found while remediating
+
+1. **`SHA256SUMS` was already stale at `HEAD`.** Eighteen non-evidence entries — `README.md`,
+   `Cargo.toml`, `Cargo.lock`, ten `src/` files, `tests/cli.rs`, `tests/contextual_allocations.rs`
+   — did not match the committed blobs they hash, so `python/generate_evidence.py --check` had
+   been failing before any of this work. The regeneration in `4fb1a01` fixes the content, but
+   nothing runs that check: it is in no CI workflow, no Makefile target and no guard test. **A
+   release cannot rely on a manifest no gate verifies.**
+2. **`python/run_bb_gurobi.py` cannot run from a public checkout.** It imports
+   `run_c997_gurobi`, which no longer exists anywhere under that name; the module is now
+   `~/src/ergodis-private/python/run_gurobi.py`, so the public tier depends on the private tier,
+   against the stated one-way rule, and the import statement itself carries a task identifier.
+   The file is held in `.publicignore` with that reason recorded. It cannot simply be scrubbed:
+   the committed Gurobi evidence pins this file's SHA-256 in `runner_sha256`, and
+   `check_bb_gurobi.py` enforces it, so editing the runner breaks the checker. Regenerating that
+   evidence needs an unrestricted Gurobi license, which the lane does not have. Release needs
+   either the shared model and sink moved into the core and the family regenerated, or the Gurobi
+   comparison dropped.
+3. **`benchmarks.json`'s digest is recorded by two other evidence files.** Anonymizing the host
+   changed that digest, so `original-rust-rerun.json` (`baseline_sha256`) and
+   `original-rust-head-to-head.json` (`cases_sha256`) were re-pointed; their checkers both pass
+   again. Any future evidence scrub must re-run this cross-reference sweep — the check is to hash
+   each changed file's previous contents and grep the tree for that digest.
+4. **Absolute paths can re-enter through the Rust side.** `src/control/evolution.rs` writes
+   `source_evidence` from a caller-supplied path (`path.to_string_lossy()`), which is how
+   `optimal-support-orbits.json` acquired a monorepo path. The lint catches the result, but a
+   `public_path` equivalent on the Rust side would prevent it at the source.
+5. **A local timezone survives in the kissat build banner.** `vlsat2-prefix-ab.json` keeps
+   `Fri Aug 28 05:14:49 PM PDT 2026` from kissat's own `--build` output. It is the third-party
+   build date, worth keeping as provenance, and it discloses a rough geography. Left as is.
+
+### Still open from the audit's item 5
+
+- **Manifest coverage.** `HASHED_PATHS` still hashes 39 of the 118 evidence files, so 79
+  published files are outside the reproducibility bundle. Extending it to the whole directory —
+  a glob rather than a curated list — would cover every published byte and make the manifest
+  self-maintaining, at the cost of making `--check` fail whenever any evidence file changes,
+  which is the intent. Held for Tavis because it changes what a validation gate demands.
+- **Citation coverage.** `BENCHMARKS.md` still names no evidence file for the BB288, qdist and
+  sce families, so the export README's promise that it "names the evidence file behind each
+  benchmark row" holds for roughly eleven rows. Either add the rows or drop those families.
+- **Ship-or-drop calls.** `sce-r2elite0{1,2}-*.jsonl` (7 files, opaque labels, no citation),
+  `bb756-hx-gz-w{20,22}` and `bb784-hx-gz-w24` (3 files, no claim depends on them), and
+  `application-counted-type-ab.{json,raw.jsonl}` (160 KB, now scrubbed, still uncited and outside
+  the manifest).
+- **`ergodis-evidence/AGENTS.md` and its `CLAUDE.md` symlink** still name the private siblings,
+  the private `main`, the staging clone and the guard scripts. They must be deleted or moved into
+  `ergodis/docs-private/` before that repository becomes public. Left in place because that
+  checkout has no `.publicignore` mechanism and the file is the working guidance for agents there;
+  it is a release-gate deletion, not a code change.

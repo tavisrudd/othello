@@ -42,12 +42,14 @@ the C985 optimization-facing paper.
 
 ## Active frontiers
 
-### C1149 — public-release readiness review (review complete, remediation unallocated)
+### C1149 — public-release readiness review (evidence remediated, rest unallocated)
 
 Gap assessment and six-phase remediation plan for releasing the core as an AGPL library/CLI
 with docs and demos on GitHub: `../2026-09-11-c1149-ergodis-public-release-review.md`.
 Phase 0 decisions (evidence publication, paper deposit, copyright/contact, product scope, public
-CI) are Tavis's; phases 1–5 are unallocated successor tasks.
+CI) are Tavis's; phases 1–5 are unallocated successor tasks. Evidence hygiene is done: core
+`4fb1a01`, export `3c4aaa5`, lint clean. Open decisions and the remaining gaps are in the
+report's 2026-09-12 section.
 
 ### C1150 — category theory for the core and Evolve (queued)
 
