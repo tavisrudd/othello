@@ -1290,7 +1290,38 @@ allowlist filter is line-scoped and a hardcoded fork of `.public-lint-allow`; `p
 
 ## Remediation plan
 
-### Phase 0 — decisions (Tavis; block the export, not the work)
+### Phase 0 — decisions taken on 2026-09-11
+
+- **Companion paper (item 2)**: link the public repository
+  `https://github.com/tavisrudd/compositional-recovery`. Applied: ergodis `c36eded` replaces
+  all three `../compositional_recovery.pdf` links. Docs blocker B1 closed.
+- **Copyright holder, authors, contact (item 3)**: Tavis Rudd <tavis@damnsimple.com>. Applied:
+  ergodis `8f278a4` adds the copyright line and contact to the README license section,
+  `authors` to all six Cargo manifests and `pyproject.toml`, and `license`/`repository` to
+  `crates/modules`. Docs blocker B7 and API should-fix S5 closed.
+- **Product scope (item 4)**: engine + CLI + demo, where the demo ships **compiled WASM
+  payloads of the private family providers with no source access to them**. Consequences for
+  the plan:
+  - The public tree (or its release assets) carries binary module payloads that are not
+    AGPL-licensed. Tavis is the sole copyright holder, so distributing a combined AGPL core +
+    proprietary payload is his to license; but the public repository must carry a separate,
+    explicit license notice for the payloads (demo use only, no redistribution, no source
+    offer) so that AGPL recipients do not assume the payloads are covered by `LICENSE`. This is
+    a new Phase 2 item.
+  - Payloads exceed the public lint's 1 MiB size cap (the public wasm alone is 1.36 MB raw), so
+    either the cap is raised per path or payloads ship as GitHub release assets fetched by the
+    page. Decide in Phase 4.
+  - The loader half is already public (`module-host.js`, `module-worker.js`; see the demos
+    section) but no public page consumes it; the private hash-named module packaging becomes a
+    release-build step. That is demo work.
+  - **Demo files are owned by another active agent. No demo file is moved, renamed, or edited
+    by C1149 or its successors without that agent's lane finishing first.** The demos section's
+    recommendations (README Demos section, serve one-liner, Pages workflow, showcase page) are
+    routed to that agent, not executed here.
+- Still open: item 1 (evidence publication vs. rewording) and item 5 (public build CI and Pages
+  deploy on the `public` branch).
+
+### Phase 0 — decisions (original list)
 
 1. Evidence: publish `ergodis-evidence` and set `ERGODIS_EVIDENCE_BASE_URL` at export, or reword
    all evidence references as not public.
@@ -1338,10 +1369,11 @@ triage, then demote `root_execution`, `allocation_surface`, `scheduler_dominance
 gates, `cargo deny check licenses`. Pages workflow gated on `browser-smoke.mjs`. Top-level
 Makefile with `wasm`, `serve`, `smoke` targets. `www/LICENSE` copy or footer source link.
 
-### Phase 5 — optional showcase (1–2 days, own task)
+### Phase 5 — private-provider demo payloads (own task, after the demo agent's lane)
 
-Static capacity/allocation demo page over the public `AllocationKernel` with a checked-in
-synthetic input, in the `bundle.html` pattern.
+Release-build the private family providers to WASM payloads, package them hash-named for the
+public `module-host.js` loader, add the separate payload license notice, and settle the size-cap
+or release-asset delivery. The earlier optional `AllocationKernel` showcase page is subsumed.
 
 ### Phase 6 — release
 
