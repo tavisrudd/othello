@@ -2,6 +2,25 @@
 
 **Date:** 2026-09-12 · **Owners:** C855 release repair; C943 final mirror
 
+## Release result
+
+The authoritative aggregate passes all 27 checks at source seal `fadc258ca`.
+The refreshed attestation has release-surface SHA-256
+`f019fea5e24ca0fadac0fbf093ddcb144664897e5d75fcc2614a8944b53c1171`.
+Regenerating the trust manifest changes only the attestation's excluded hash;
+the canonical release identity remains unchanged, and the 19-claim trust
+validator passes. Both PDFs remain warning-free at 29 and 14 pages.
+
+The standalone mirror is forward-committed at `302f1cb` and its exporter
+verification passes for 62 tracked files, content SHA-256
+`8e4f69ecd7843d9c8bcb5a8db6373bbc7a773320cbd58de18dd4884d32503e5c`.
+Its complete immutable replay is running. No repository was pushed.
+
+Final formal pins: finitegeom `f7b9743`, certificate `0d964975` (unchanged),
+bridge `6f0b927`. The source-policy/ownership closure is 119 certificate,
+96 finitegeom, and one bridge module. C855's broader assertion-completeness
+and scholarly-artifact audit remains open; this is C943's local release closure.
+
 ## Verified corrections to the previous diagnosis
 
 The current finitegeom revision `f7b974379b91cff98b6399312bf2030d9c2d6f1e`

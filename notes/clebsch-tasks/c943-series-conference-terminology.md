@@ -2,20 +2,13 @@
 
 **Lane:** `clebsch`
 **Paper stream:** five-paper Clebsch series and the unnumbered conference companion
-**State:** active at one external trust-chain dependency; all five numbered
-papers and the unnumbered conference companion have sealed cold-referee ACCEPT
-verdicts and deterministic green manuscript builds. Paper III also passes the complete
-local release gate, including source-only replay of all three pinned Lean closures.
-Paper I’s statement identity and trust manifest now regenerate cleanly:
-`prop:fifteen-class-census` is mapped and no “golden” phrase survives in the
-generated identity (2026-09-12,
-[`../2026-09-12-paper-i-statement-identity-remap.md`](../2026-09-12-paper-i-statement-identity-remap.md)).
-Its trust projection and mirror export now wait only on the release
-attestation, whose pinned finitegeom and bridge revisions no longer match their
-checkouts and whose guarded receipt is no longer in the build cache. The shared portfolio
-summary has a sealed cold-reader ACCEPT. Papers II--V, the conference
-companion, the arcs paper, and the portfolio summary are exported to clean
-standalone repositories and verified; Paper I alone remains deferred.
+**State:** active at the final immutable mirror replay. All revised manuscripts
+retain their sealed cold-reader ACCEPT verdicts. Paper I's 27-check authority
+release passes, its formal pins and attestation are refreshed, and its clean
+standalone mirror is forward-committed at `302f1cb`. The exporter verifies all
+62 tracked files. The complete mirror replay is running; all other C943 mirrors
+were already exported and verified. Current evidence:
+`../2026-09-12-paper-i-release-continuation.md`.
 
 ## Objective
 

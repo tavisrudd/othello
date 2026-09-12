@@ -15,9 +15,11 @@ its trust route; the companion's `lem:chord-defect` restatement is now a
 declared, checked resolution rather than a silent dictionary overwrite; and the
 headline row plus three renamed claim identifiers are re-recorded. The
 statement identity and trust manifest regenerate and pass their own `--check`
-modes. The release attestation still needs a re-pin and a fresh guarded
-finitegeom receipt; both are recorded in
-[`../2026-09-12-paper-i-statement-identity-remap.md`](../2026-09-12-paper-i-statement-identity-remap.md).
+modes. The re-pin, fresh guarded human-gate receipt, repaired bridge replay, and
+27-check authoritative release attestation now pass. The mirror is synchronized
+and forward-committed; its immutable replay is running. See
+`../2026-09-12-paper-i-release-continuation.md` for the exact pins, recovered
+finitegeom snapshot, safety repairs, and release identity.
 
 Current certificate boundary (2026-08-09):
 
@@ -30,7 +32,7 @@ Current certificate boundary (2026-08-09):
 - Paper I release metadata now names the separate certificate, finitegeom, and
   bridge roots. The 2026-09-12 continuation updates finitegeom to `f7b9743`
   (the 96-module human closure is unchanged from `b871c10`) and exports bridge
-  `b525f04`. The new guarded human-gate receipt passes at the clean current head.
+  `6f0b927`. The new guarded human-gate receipt passes at the clean current head.
   Never rerun the retired combined aggregate or rebuild Q11 for a finitegeom,
   bridge, paper, pin, or release-metadata change. Current release outcome:
   `notes/2026-09-12-paper-i-release-continuation.md`.
