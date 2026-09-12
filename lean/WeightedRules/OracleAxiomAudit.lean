@@ -20,3 +20,4 @@ external elaboration entry point.
 #print axioms WeightedRules.oracleDistance_least
 #print axioms WeightedRules.oracleDistance_rounds
 #print axioms WeightedRules.oracleDistance_values
+#print axioms WeightedRules.oracleDistance_agrees

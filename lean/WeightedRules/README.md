@@ -87,6 +87,8 @@ remain outside the proof's trusted base because the theorem uses the caller's
 requires the explicit lowering obligations in `WeightedRules.Relations`.
 
 `ReflectionChecks` checks finite replay rejection by kernel reduction.
-`OracleRejections` invokes deliberate adversarial responses through
+`oracleDistance_agrees` also proves symbolic agreement with the independently
+defined internal certificate. `OracleRejections` invokes deliberate adversarial responses through
 `fixtures/rejection-oracle`, including a valid control and an unsupported cyclic
-fixed point. These fixtures are test inputs, not asserted certificates.
+fixed point and a certificate for the wrong caller program. These fixtures are
+test inputs, not asserted certificates.
