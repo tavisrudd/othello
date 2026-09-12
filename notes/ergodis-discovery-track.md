@@ -37,3 +37,35 @@ form would let an interface state the test's precision rather than only its soun
 **Evidence**: CHECKED on six ambient spaces with `k+m ≤ 4`, `q ∈ {2,3,5}`; certificate
 `notes/data/2026-09-06-c1070-probe6/transcript-leakage.report.json`.
 **Status**: open lead. It is subspace counting, not privacy; no C-ID allocated.
+
+## 2026-09-12 — Cai–Fürer–Immerman structures as an adversarial control for learned local repair (C1150)
+
+**Provenance**: Abramsky, Dawar and Wang, arXiv:1704.05124 §8 (partial read, recorded in
+`2026-09-12-c1150-part-b-compilers-solvers-normalization.md` §2.2); met while surveying game
+comonads for solver structure. **Was I looking for this?**: no — the sweep sought categorical
+solver formulations, not counterexample families.
+**Observation**: CFI structures defeat `k`-local consistency for every fixed `k` yet are solvable by
+Gaussian elimination. Ergodis's search space is GF(2) structure, so any learned local repair or
+kick rule in Evolve can look saturated on a CFI instance and be wrong.
+**Why it may matter**: a ready-made negative control for Evolve's local-rule discovery. **Evidence
+level**: literature statement, no Ergodis experiment. No C-ID allocated.
+
+## 2026-09-12 — interval and polynomial interpretations of the same FeatureDag term (C1150)
+
+**Provenance**: Elliott, *Compiling to Categories*, §7.7 and §7.8 (full text, recorded in the C1150
+part B dossier §1.1). **Was I looking for this?**: no — the read was for functorial compilation.
+**Observation**: a Cartesian term admits a drop-in interval interpretation (static overflow bounds)
+and, on the add/mul fragment, a polynomial interpretation with exact root and extremum analysis.
+The FeatureDag modulus, abs and norm nodes leave the polynomial fragment.
+**Why it may matter**: checked arithmetic already needs to know whether a subterm can overflow;
+interval analysis answers that statically. **Evidence level**: musing. No C-ID allocated.
+
+## 2026-09-12 — trace structure and the chase as e-graph relatives (C1150)
+
+**Provenance**: Tiurin et al. arXiv:2406.15882 §VII and Suciu, Wang and Zhang arXiv:2501.02413
+§1/§4 (both partial, C1150 part B dossier §1.2). **Was I looking for this?**: no.
+**Observation**: trace structure encodes infinite equivalence classes finitely in e-graphs;
+equality saturation and the database chase are the same procedure up to encoding.
+**Why it may matter**: an Ergodis representation wanting "equivalent for all n" rather than
+"equivalent up to the node bound", or incremental recomputation borrowed from the chase side.
+**Evidence level**: literature statement. No C-ID allocated.

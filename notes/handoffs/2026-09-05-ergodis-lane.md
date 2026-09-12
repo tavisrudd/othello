@@ -51,13 +51,15 @@ CI) are Tavis's; phases 1–5 are unallocated successor tasks. Evidence hygiene 
 `4fb1a01`, export `3c4aaa5`, lint clean. Open decisions and the remaining gaps are in the
 report's 2026-09-12 section.
 
-### C1150 — category theory for the core and Evolve (queued)
+### C1150 — category theory for the core and Evolve (complete, successors unallocated)
 
-Literature study, no engine edits: Vincent Abbott's recent work (arXiv:2604.07242 and
-related) plus a broad sweep across compiler design, non-neural search priors, solvers,
-optimization/regularization, normalization and evolution. Deliverable is a reading
-dossier and ranked absorption targets with evidence gates. Card:
-`../2026-09-12-c1150-category-theory-for-ergodis.md`.
+Literature study done, no engine edits. Abbott/Zardini's negative-information programme,
+a semiring-polymorphic verifier and VeriPB's redundance rule converge on one slice: a typed
+exclusion half for certificates with bound composition for `ordered_resource`. Two cheap
+offline checks (FeatureDag weak term acyclicity, weight-pushing canonical summaries) stand
+alone. Combined ranking, mystery ledger and the two proposed successor slices:
+`../2026-09-12-c1150-category-theory-for-ergodis.md`. **Waiting on Tavis**: allocate
+successor slices.
 
 ### C1148 — certificate interoperability (queued)
 

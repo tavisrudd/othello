@@ -5666,3 +5666,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1141 `[cubic-threefolds]` [REPORTED 2026-09-11]** — bounded sharpness literature audit complete; qualified ledger, prior-family comparison, checked and committed export → `notes/cubic-threefolds-tasks/c1141-sharpness-literature-audit.md`
 
 - **C1142 `[cubic-threefolds]` [REPORTED 2026-09-11]** — sharpness exposition complete, checked and exported: proof order, universal tangent-cover lemma and optional-material compression → `notes/2026-09-11-c1142-sharpness-exposition.md`
+
+- **C1150 `[ergodis]` [REPORTED 2026-09-12]** — category-theory literature study for the core and Evolve complete: Abbott/Zardini negative-information programme, cats4ai priors, compilers, sheaf/semiring solvers, normalization, certificates; 47 sources, combined 13-row absorption ranking → `notes/2026-09-12-c1150-category-theory-for-ergodis.md`
