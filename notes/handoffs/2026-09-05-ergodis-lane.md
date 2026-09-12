@@ -53,33 +53,18 @@ filtered snapshot: public `3291659`, tag `v0.1.0-preview1`, staging rebuilt and 
 build-and-test validation passing. Nothing is pushed to GitHub. Open decisions and remaining gaps
 are in the report's 2026-09-12 sections.
 
-### C1150 — category theory for the core and Evolve (complete, successors unallocated)
+### Rule-contract programme (active; C1150/C1151 literature closed)
 
-Literature study done, no engine edits. Abbott/Zardini's negative-information programme,
-a semiring-polymorphic verifier and VeriPB's redundance rule converge on one slice: a typed
-exclusion half for certificates with bound composition for `ordered_resource`. Two cheap
-offline checks (FeatureDag weak term acyclicity, weight-pushing canonical summaries) stand
-alone. Combined ranking, mystery ledger and the two proposed successor slices:
-`../2026-09-12-c1150-category-theory-for-ergodis.md`. Scope was corrected by Tavis:
-gradient and small-NN methods are in; only large nets are out; GPU acceleration is available for Evolve. C1151 (complete) is
-the capability-first second pass covering the dropped gradient material, Galois
-connections, partition refinement, symmetry, Lawvere theories, Markov categories, and
-algorithm-depth reads with reference implementations:
-`../2026-09-12-c1151-category-theory-capability-pass.md`; its merged 19-row ranking
-supersedes C1150's and proposes five implementation slices. Spikes C1152 and C1153 are closed as measured negatives with corrected facts:
-`../2026-09-12-c1152-certificate-spike.md` (dual bound sound but inert below half radius;
-hold-out sources exhaust radius three in seconds, so the frozen declines are proposal/candidate budget limits at that depth only, not evidence about deeper radii; verifier is a concrete u32 type whose saturating add
-collides with the absent sentinel) and `../2026-09-12-c1153-group-quotient-spike.md` (group is
-522⁴·516,096; orbits of banked states are all distinct; seed dedup not worth building). Spike
-branches `spike/c1152-certificate` and `spike/c1153-group-quotient` in `~/.cache/ergodis/worktrees/`.
-Still queued: C1154 FeatureDag interval/acyclicity, C1155 sentinel/weight pushing/partition
-refinement, C1156 Evolve ordering, C1157 equality-saturation spike. RelationalAI/tensor-logic
-reading (Macready): `../2026-09-12-relationalai-datalog-reading.md`; bounded min-plus is 0-stable
-(confirmed against the verifier code by C1152), so fixpoints converge polynomially. Queued
-transfers: C1160 stability/⊖ bits and semi-naive verifier, C1161 recursive plan queries, C1162
-FGH-square leaf-lowering discharge, C1163 tensor-logic program to certified plan. Successors queued: C1158 acting-subgroup measurement on the two-transfer census (C1153) and
-C1159 one-probe one-sided screen in the C1143 sparse provider (C1152). Foreign issue:
-branch `c1016-full-2092-campaign` fails `cargo fmt --check` and has four clippy errors.
+Goal, motivation (Macready), sequence, placement rule and deferred items:
+`../2026-09-12-ergodis-rule-contract-programme.md`. Order: C1160 → C1163 → C1161 → join engine
+(unallocated) → benchmark suite (unallocated) → C1162; C1158 any time. Literature cards:
+`../2026-09-12-c1150-category-theory-for-ergodis.md`,
+`../2026-09-12-c1151-category-theory-capability-pass.md`,
+`../2026-09-12-relationalai-datalog-reading.md`. Closed spikes: `../2026-09-12-c1152-certificate-spike.md`,
+`../2026-09-12-c1153-group-quotient-spike.md` (branches `spike/c1152-certificate`,
+`spike/c1153-group-quotient` under `~/.cache/ergodis/worktrees/`). Deferred speed/hygiene rows:
+C1154–C1157, C1159. Foreign issue: branch `c1016-full-2092-campaign` fails `cargo fmt --check`
+and has four clippy errors.
 
 ### C1148 — certificate interoperability (queued)
 
