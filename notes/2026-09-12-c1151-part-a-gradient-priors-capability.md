@@ -16,9 +16,10 @@ Absorption rows referenced as "C1150 row N" point at that file's § 6 table.
 
 ## Opening summary
 
-**Fifteen named sources, none read at full text**, which is the intended consequence of reading for
-algorithm depth rather than coverage: I read the definitions, theorems, cost formulas and result
-tables and say at each point which sections carry the claim. Four *code* files were read end to end,
+**Sixteen named sources, one read at full text** — Aksu's *Odds Law*, read end to end with its proofs
+checked. The other fifteen were read to algorithm depth rather than in full, which is the intended
+consequence of reading for capability: I read the definitions, theorems, cost formulas and result
+tables, and say at each point which sections carry the claim. Four *code* files were read end to end,
 across three repositories inspected at source. Full ledger in § 8.
 
 **The organising idea.** A gradient or a learned model is admissible inside an exact engine in
@@ -60,6 +61,25 @@ The largest thing I missed on the first pass is not categorical at all: **equali
 supplies the order-free rewrite search and cost-driven extraction that both the weaves line and the
 ZX line are missing, it is a Rust library, and its `e-class analysis` mechanism is a ready-made slot
 for a preservation contract.
+
+**On the *Odds Law* preprint.** Its mathematics checks out where I verified it — the odds law is
+Bayes' rule in odds form, the threshold dichotomy including the verdict-swap case for `Λ < 1` is
+correct, the information ceiling is correctly conditioned, and the recursion master theorem's union
+bound is sound. Two results rest on proof sketches I would not lean on: the "no universal
+decomposition advantage" corollary, whose sketch treats a verifier as a rewiring of base-solver calls
+when it is an extra information source, and the complete-lattice lemma, whose joins are an admitted
+idealisation — though the fixed-point theorem it supports also has a direct budget argument that does
+not need it. **For Ergodis the whole reliability half is vacuous**, because an exact checker has
+`α = 0`, so `Λ = ∞` and one gate suffices; the paper says this itself. What survives is the *cost*
+valuation, which is an exact semiring homomorphism where reliability is only lax, and it yields
+`(1/p)(c_propose + c_check)` per admitted proposal and `T ≥ ln δ / ln(1-p)` for a budget. The
+amplification theorem returns in one place only: cascading *independently implemented* checkers
+against implementation faults, which is the C1097 defect class. Asked specifically whether the
+algebra orders cheap screens before exact checks, the answer is that the paper's marginal-log-odds
+water-filling is the wrong tool in this regime, but two lines of its cost homomorphism give the right
+one — **a one-sided screen (`β_s = 1`, mandatory, or completeness dies) pays exactly when
+`c_s < c_x·(1-p)·(1-α_s)`**, which is the same object as the § 2.2 dual-bound prune and is decidable
+from one instrumented run.
 
 **On GPU.** The weaves cost model's entire hardware dependence is four numbers per level — capacity,
 transfer rate, level-graph edges, and bytes per value — so it retargets to WebGPU by substitution.
@@ -464,6 +484,238 @@ unchanged independent family checker.
 **Ergodis objects touched:** Evolve proposal ordering and admission; the structured-counterexample
 path; repair-schedule kick selection (a kick is a sample from a proposal distribution over
 perturbations, and points 2 and 3 apply verbatim).
+
+### 3.3 Aksu, *Odds Law: The Decomposition Algebra* (arXiv:2606.15712)
+
+**Citation (from the consulted source).** Hidayet Aksu, "Odds Law: The Decomposition Algebra — On How
+Intelligence Organizes Itself to Solve Difficult Problems Reliably", arXiv:2606.15712v1 [cs.CR],
+14 June 2026. Single author, contact address `hidayetaksu@gmail.com`, **no institutional affiliation
+given**. It announces itself as the theory half of a two-part programme ("Theory: Odds Law →
+Framework: Maestro Order"), with a companion report said to build a harness and measure the predicted
+laws; I did not look for the companion, so **every empirical claim in this line is unexamined here.**
+
+**Read depth: full text.** Version read: arXiv:2606.15712v1, the only version. Cached as
+`arXiv:2606.15712`, sha256 `d513d6bcaf86434ad5e451645376cc7041b8b72c9387ecdc0b54ba233a891168`,
+10 pages, 8,804 words, `pdftotext` extraction. All sections read: 1 Introduction, 2 The Solver Model
+(Defs 2.1–2.3), 3 The Decomposition Algebra (Def 3.1, Prop 3.2), 4 Reliability Composition Laws
+(Lemmas 4.1–4.4), 5 Amplification and the Threshold Dichotomy (Thms 5.1–5.2), 6 Self-Organization as
+a Fixed Point (Lemmas 6.1–6.2, Thm 6.3, Prop 6.4, Algorithm 1), 7 Fundamental Limits (Thms 7.1–7.2,
+Cors 7.3–7.4), 8 The Cost–Reliability Frontier (Prop 8.1, Tables 3–4), 9 Recursive Decomposition
+(Prop 9.1, Thm 9.2, Cor 9.3), 10 Selective Reliability (Def 10.1, Prop 10.2), 11 Generator–Verifier
+Games (Def 11.1, Thm 11.2), 12 Related Work, 13 Discussion, References. Figures 1 and 2 are not
+recoverable from the extraction and are characterised from captions.
+
+**Standing.** Weighed as instructed: single author, no affiliation, a `cs.CR` primary class that does
+not match the content, v1 only, and the measurements deferred to an unexamined companion. Against
+that: **I checked the proofs, and the mathematics I checked is correct.** The apparatus is elementary
+— Bayes in odds form, Hoeffding, the union bound, Knaster–Tarski, the data-processing inequality, a
+latent-factor variance decomposition — and correctly deployed. The framing is considerably grander
+than the content; the content is nonetheless usable. Details below.
+
+#### 3.3.1 The construction
+
+Solvers are Markov kernels `s : X ⇝ A ∪ {⊥}` where `⊥` is an explicit abstention symbol, composed in
+the Kleisli category of the subdistribution monad. Two scalar valuations are deliberately separated:
+**coverage** `cov(s) = P[s(x) ≠ ⊥]` (the probability of committing) and **reliability**
+`ρ(s) = P[a ∈ Y*(x) | a ≠ ⊥]` (conditional correctness *on committed answers*), with a distribution-free
+worst-case variant. The stated reason for the separation is that "a solver may raise reliability by
+abstaining more". Four combinators generate the free algebra `𝔄(B)` over a base set `B`: sequential
+composition `;`, parallel ensembling `⊕_A`, verification gating `V_v`, and recursion `μ`.
+
+A verifier is a kernel `v : X × A ⇝ {acc, rej}` summarised by **completeness** `β = P[acc | correct]`
+and **false-acceptance** `α = P[acc | wrong]`, with **discrimination** `Λ = β/α`. The gate `V_v(g,T)`
+resamples from the generator until acceptance, abstaining after `T` rejections.
+
+**Two valuations, and the asymmetry between them is the useful part.** Cost is an **exact
+homomorphism** into a commutative semiring, instantiated as `(ℝ≥0 ∪ {∞}, +, ·)` counting expected
+base-solver invocations: `c(s_k ; … ; s_1) = Σ_i c(s_i)`, `c(⊕_A(s,n)) = n·c(s) + c(A)`, and
+`c(V_v(g,T)) = E[N]·(c(g) + c(v))`. **Reliability is only a lax homomorphism** — it does not factor
+through structure exactly, and §4 gives upper and lower bounds instead. Proposition 3.2 then observes
+that on the sub-algebra generated by verification gates, log-odds `ℓ = log(ρ/(1-ρ))` *is* a monoid
+homomorphism, `ℓ ↦ ℓ + Σ_i log Λ_i`, and pairing it with cost gives a graded monoid
+`(ℝ × ℝ≥0, +)` whose slope `Δℓ/Δc` is the quantity optimised in §6.
+
+#### 3.3.2 The proofs I checked
+
+**Lemma 4.3, the odds law — correct, and it is Bayes' rule.** `o_post = o_pre · Λ` where
+`Λ = β/α`. The proof is one line: `P[corr|acc]/P[wrong|acc] = (P[acc|corr]/P[acc|wrong]) ·
+(P[corr]/P[wrong]) = (β/α)·(p/(1-p))`. That is the standard odds form of Bayes' theorem, correct as
+stated, requiring `α > 0` and independence of the verifier's errors from the generator's given
+correctness — both hypotheses are stated. It extends to the resampling gate because rounds are
+i.i.d., so conditioning on the accepting round gives the same posterior. **The paper calls this its
+"central tool" and names itself after it; it is a textbook identity.** The contribution is the
+framing — recognising `Λ` as the object to engineer — not the derivation.
+
+**Theorem 5.1, amplification — correct, on a strong hypothesis that the paper does not hide.** `k`
+gates multiply the odds by `Π Λ_i`, giving reliability `1-δ` at depth
+`k ≥ (log((1-δ)/δ) + log((1-p₀)/p₀))/log Λ = O(log(1/δ)/log Λ)`. The proof requires the gates'
+acceptances to be **conditionally independent given correctness**, which is the load-bearing and very
+strong assumption. §7.1 is explicit that gates re-reading the same evidence have their effective `Λ`
+collapse toward 1.
+
+**Theorem 5.2, the threshold dichotomy — correct, including the part that is easy to get wrong.**
+For verification: `Λ > 1` is Theorem 5.1. `Λ = 1` means `β = α`, so acceptance is independent of
+correctness and the posterior equals the prior, and composing uninformative gates preserves that —
+correct. For `Λ < 1` (that is, `β < α`) they **swap the verifier's verdicts**, giving discrimination
+`(1-β)/(1-α)`; I checked this, and `β < α` does imply `(1-β)/(1-α) > 1`, so the swapped verifier is
+informative and `Λ* = 1` is indeed the sole critical value. For voting, `p* = 1/2`: above it,
+Hoeffding gives `ρ ≥ 1 - exp(-2n(p-½)²)`; below it, the law of large numbers drives the majority to
+being *always wrong*; at exactly `½` the votes carry no information. All correct, and Lemma 4.2's
+Hoeffding application is the right form for `[0,1]`-bounded variables.
+
+**Theorem 7.1, the information ceiling — correct and carefully stated.**
+`E[log o_post - log o_pre] = D_KL(P_{W|C=1} ‖ P_{W|C=0})`, the expectation being *under the
+correct-candidate verdict distribution* — which is what makes it a KL divergence rather than a
+Jeffreys divergence, and the paper states the conditioning explicitly. The data-processing extension
+(no cascade of verifiers that are all functions of the same evidence `Z` beats the best decision
+based on `Z`) is the standard argument. This is the honest and general version of the paper's
+message, and in my view the strongest result in it.
+
+**Theorem 9.2, the recursion master theorem — correct.** Union bound over `N = (b^{d+1}-1)/(b-1)`
+nodes each verified to local error `η` gives overall error `≤ Nη`; setting `η = δ/N` gives per-node
+depth `O((log(1/δ) + d log b)/log Λ)` and total cost `O(b^d(log(1/δ) + d log b)/log Λ)`. Proposition
+9.1's unverified recurrence `r(d) = ρ_c·r(d-1)^b` unrolls to
+`r(d) = ρ_c^{(b^d-1)/(b-1)}·p^{b^d}`, which I verified, and which decays **doubly exponentially in
+depth**.
+
+**Two proofs that do not carry their weight, and I would not rely on either.**
+
+- **Corollary 7.4, "no universal decomposition advantage", is a proof *sketch* and is the weakest
+  claim in the paper.** The sketch asserts that "combinators are deterministic re-wirings of
+  base-solver calls", so uniform averaging over oracles leaves the marginal correctness distribution
+  unchanged. But a verifier is **not** a rewiring of base-solver calls — it is an additional
+  information source with its own `(β, α)`, and the whole paper is about what that source buys. The
+  claim is plausible in the sense that a *fixed* verifier averaged over all families has `Λ → 1`, but
+  that is Theorem 7.1's content, not a Wolpert–Macready transport. **The informative version of "no
+  free lunch" here is the information ceiling**, and the paper's own gloss concedes as much:
+  combinators "do not manufacture reliability; they transport the information already present".
+- **Lemma 6.1's complete lattice is a sketch with an admitted idealisation** — the join uses "an
+  idealized selector that returns a correct member if any branch is correct", and arbitrary
+  joins/meets come from a Dedekind–MacNeille completion whose adjoined elements need not be
+  strategies. So Knaster–Tarski in Theorem 6.3 is applied to a completion, not to the strategy set.
+  **This does not matter operationally**, because Theorem 6.3 also carries a direct finite-termination
+  argument: every step that changes the strategy spends at least the cost `c_min > 0` of the cheapest
+  combinator and the budget `κ` caps total spend, so the iteration is constant after at most
+  `⌈κ/c_min⌉` steps. The lattice apparatus is decoration on a budget argument. I note this because
+  the categorical framing is the reason this paper reached me, and it is the part that is least
+  load-bearing.
+
+**One presentational point worth recording rather than scoring.** The paper says both "Kleisli
+category of the subdistribution monad" and `Δ(A ∪ {⊥})`. These are equivalent presentations —
+adjoining an explicit `⊥` to the answer space turns subdistributions into genuine distributions — and
+the paper uses them interchangeably without comment. The equivalence matters for § 3.2 point 2 above:
+**making abstention an explicit answer is exactly the clean way to keep `del` natural when a generator
+can fail**, which is the normalisation obligation I flagged as an open design choice for Evolve. Aksu
+resolves it by construction. That is a direct, usable answer to a question I raised two sections ago.
+
+#### 3.3.3 What this means for Ergodis: α = 0 kills §5 and promotes §8
+
+**Ergodis' independent verification context has `α = 0` within a checker's declared scope.** The
+paper states the consequence itself: "a perfect verifier (`α = 0`, `Λ = ∞`) certifies correctness
+outright". So for Ergodis:
+
+- **The entire amplification apparatus is vacuous.** One gate takes the odds to infinity. Theorem 5.1's
+  `O(log(1/δ))` depth, Theorem 5.2's dichotomy, Proposition 3.2's log-odds cascade, Proposition 6.4's
+  water-filling over `Δ log o / Δc`, and Table 4's worked cascade all describe a regime Ergodis is not
+  in. **Do not import the log-odds objective.** Maximising log-odds gain per unit cost is the wrong
+  objective function when the log-odds are already infinite after the first exact check.
+- **`α = 0` is a claim about a specific checker implementation, not a law**, and that is where the
+  amplification theory becomes relevant again. Ergodis' own record makes the point: C1097 found a
+  legacy sibling-forgery gap — a checker that was not in fact sound. Two *independently implemented*
+  checkers with small nonzero implementation-fault rates `α₁, α₂` do give a genuine `Λ₁Λ₂` cascade,
+  and Theorem 5.1 then says what independent reimplementation buys. **This is the one place the
+  amplification theorem applies to Ergodis, and it applies to checker-implementation trust, not to
+  mathematical correctness.** Theorem 7.1's conditional-independence caveat bites hard here: two
+  checkers sharing a library share evidence, and their effective `Λ` collapses toward 1.
+- **What is left, and it is the useful half, is the cost homomorphism.** Cost is an *exact*
+  homomorphism, reliability only a lax one — so in the regime where reliability is settled by one
+  gate, the exact homomorphism is the whole content. With `α = 0` and a complete checker `β = 1`,
+  Lemma 4.4's per-round acceptance probability `q = pβ + (1-p)α` collapses to `q = p`, giving two
+  formulas Ergodis can use directly:
+  - **Expected cost per admitted proposal** `= (1/p)·(c_propose + c_check)`.
+  - **Budget for admission with probability `1-δ`**: commit probability is `1-(1-p)^T`, so
+    `T ≥ ln δ / ln(1-p)` proposals.
+  Those are exact, elementary, and immediately applicable to an Evolve campaign whose proposals
+  succeed with rate `p`.
+- **The recursion master theorem inverts.** With `α = 0` per node, `η = 0`, so `Nη = 0` and the union
+  bound is trivially satisfied: **a verified recursive campaign is exactly correct at any depth**, and
+  the paper's polylogarithmic reliability overhead vanishes. What remains is Proposition 9.1's
+  warning in cost form: the number of nodes is `b^d`, and total cost is
+  `Σ_v (1/p_v)(c_propose,v + c_check,v)`. The doubly-exponential collapse of unverified recursion
+  (`r(d) = ρ_c^{(b^d-1)/(b-1)} p^{b^d}`) is the precise statement of why an Evolve campaign that
+  decomposes without checking each level is worthless — and Ergodis already checks each level, so the
+  paper's content for Ergodis is the cost recurrence, not the reliability one.
+
+#### 3.3.4 Ordering cheap screens before exact checks — what the algebra does and does not say
+
+This was the specific question, and the answer has two halves.
+
+**What the paper says: not this.** Proposition 6.4's water-filling condition `∂ log o / ∂c_j = λ`
+allocates budget to equalise marginal log-odds gain per cost. With `α = 0` that objective is
+degenerate. Proposition 8.1's comparison ("verification dominates whenever a sufficiently
+discriminating checker exists") is about verification versus *voting*, not about screens versus exact
+checks. **The paper has no result on ordering an imprecise screen before an exact check**, because it
+never considers a verifier whose purpose is to save another verifier's cost rather than to raise
+reliability.
+
+**What the algebra gives once you ask the right question — this derivation is mine, from the paper's
+Lemma 4.3 and Lemma 4.4, and is not in the paper.** Put a cheap screen `(β_s, α_s)` at cost `c_s` in
+front of an exact check at cost `c_x` (`β = 1`, `α = 0`), with generation cost `c_g` and proposal
+correctness rate `p`. A candidate is admitted iff it is correct *and* passes the screen, so expected
+generations per admission is `1/(p β_s)`; by Wald, expected exact checks per admission is that times
+the screen pass rate `q_s = p β_s + (1-p) α_s`, which simplifies to
+
+```
+exact checks per admitted proposal  =  1 + 1/(o_pre * Lambda_s)         where o_pre = p/(1-p)
+```
+
+— a pleasing form, and it reduces to `1/p` when the screen is uninformative (`Λ_s = 1`), as it must.
+Total expected cost per admitted proposal is
+`C(screen) = (1/(p β_s))(c_g + c_s) + (q_s/(p β_s))·c_x`, against `C(none) = (1/p)(c_g + c_x)`.
+
+**Now the constraint that matters for an exact engine.** A screen with `β_s < 1` rejects some correct
+candidates. In Ergodis terms that destroys the coverage claim: the search is no longer complete over
+the admitted family, and a ProofGenerating run silently becomes Heuristic. **So `β_s = 1` is
+mandatory, not optional** — the screen must be *one-sided*, rejecting only candidates it can rule out.
+Setting `β_s = 1` and simplifying the inequality `C(screen) < C(none)` gives
+
+```
+    the screen pays  <=>   c_s  <  c_x * (1 - p) * (1 - alpha_s)
+```
+
+and since `Λ_s = 1/α_s` when `β_s = 1`, equivalently `c_s < c_x·(1-p)·(1 - 1/Λ_s)`.
+
+**Read it in words: a screen is worth running exactly when it costs less than the exact check times
+the fraction of exact checks it eliminates** — `(1-p)` being the share of proposals that are wrong,
+and `(1-α_s)` the share of those the screen catches. So `Λ` does enter, but only through
+`α_s = 1/Λ_s`, and **the decision rule is a cost inequality, not a log-odds rate**. That is the direct
+answer: the paper's marginal-rate machinery is the wrong tool, and the right tool is one line of its
+cost homomorphism.
+
+**And this closes a loop with § 2.2.** A one-sided screen with `β_s = 1`, `α_s < 1` is precisely a
+sound relaxation-based prune: a dual bound never rejects an optimal solution (`β_s = 1`) and rejects
+some non-optimal subtrees (`α_s < 1`). **The screen formalism and the dual-certificate formalism are
+the same object**, and `c_s < c_x(1-p)(1-α_s)` is the rule for when computing the bound is worth it.
+The `α_s` of a relaxation is one minus its prune rate, which is measurable from a single instrumented
+run.
+
+**On the no-free-lunch corollary and Ergodis.** Corollary 7.4 averages over *all* problem families.
+Ergodis is a compiled exact engine for specific declared families, which is the structured case the
+paper's own gloss exempts ("they only help on the structured problem families we actually face"). The
+usable residue is not a constraint but a measurement discipline: **`α_s` and `p` are family-specific,
+so the screen-ordering inequality must be evaluated per family and not assumed to transfer** — which
+is exactly how Ergodis' family-specific admission architecture is already organised.
+
+**Two further items worth carrying.** §10's Chow's-rule threshold (commit iff posterior correctness
+exceeds `1 - c_abs/c_err`) is the right shape for deciding when an Evolve campaign should abstain and
+escalate rather than keep proposing, and it needs only a calibrated score. §11's Λ-robustness is a
+sharper warning than it first appears: a verifier is `Λ`-robust if `β/α†(v) ≥ Λ` against a
+*worst-case* generator optimising for acceptance. The paper's observation that "proof checkers and
+type systems are robust in this sense (their false-acceptance is bounded by soundness, independent of
+how the prover was chosen); learned reward models and shallow heuristics often are not" is the
+argument for why a **learned** screen must still be one-sided by construction rather than by
+training: an Evolve loop that optimises proposals against a learned screen is a Stackelberg game the
+screen loses.
 
 ---
 
@@ -1040,11 +1292,18 @@ collision with C1150's numbering.
 | **C1151-12** | **`Para` tape as the admitted-parameter-change contract** (§ 6.2) | `RepairModel → RepairPlan → BudgetQuery`; retained provider source/query normalization | Mechanically derives which parameters a *composite* plan exposes, so "which changes are admitted without recompilation" is computed rather than documented | Compute the accumulated parameter object for two composed plans in the existing repair pilot and compare against the hand-maintained list of admitted budget changes | The computed tape must exactly match the hand-maintained admitted set, or the mismatch must be a real bug in one of them | **Neither** | **Medium** — the construction is trivial; the value is in whether the hand-maintained list is currently wrong anywhere |
 | **C1151-13** | **Learned branching/variable ordering inside exact kernels** (§ 2.4) | The hot loop of the exact kernels | The largest potential win in the table (Gasse et al. report SCIP default 1677 s → 1490 s with 70 vs 65 solved on their hard set) and the only row that touches a hot path | Offline only at first: log branching decisions and outcomes, fit a **linear** scorer over integer features, measure predicted vs realised improvement without deploying | Deployment gated on the full hot-loop discipline — zero allocation, retained single/parallel A/B counters, layout assertions — plus bad-tail regret, not mean time | **Small NN / small model**, and probably must be linear to survive the hot-loop gates | **Low-medium** — high value, but the published wins come from models that will not fit Ergodis' hot-loop constraints, and the linear variant is the untested one |
 
+| **C1151-14** | **One-sided screen ordering by the cost inequality `c_s < c_x·(1-p)·(1-α_s)`** (§ 3.3.4), derived from Aksu's cost homomorphism | Evolve proposal admission; the exact checker's invocation count; the § 2.2 dual-bound prune, which is the same object | Decides when a cheap imprecise screen in front of the exact check pays, by a measurable inequality rather than by judgement. Both quantities on the right are measurable from one instrumented run: `p` is the proposal success rate, `α_s` is one minus the screen's prune rate on wrong proposals | Instrument one Evolve family for a campaign: log `p`, the screen's `α_s`, `c_s` and `c_x`. Evaluate the inequality. If it predicts the screen pays, enable it and compare total checker invocations against the unscreened arm | Predicted versus realised reduction in exact-check invocations, with the prediction recorded **before** the run; and the admitted set must be **identical** to the unscreened arm, which is the test that `β_s = 1` actually holds | **Neither** (a learned screen is an optional upgrade, and must still be one-sided by construction) | **High** — the derivation is two lines of Wald plus Bayes, both quantities are measurable, and the identical-admitted-set check catches a non-one-sided screen immediately |
+| **C1151-15** | **Cost-recurrence master theorem for verified Evolve campaigns** (§ 3.3.3): with `α = 0` the reliability recursion is trivial and the live object is `Σ_v (1/p_v)(c_propose,v + c_check,v)`, with per-node admission budget `T ≥ ln δ / ln(1-p)` | Campaign budgeting; repair schedules; recursive decomposition in Evolve | Turns "how much budget does this campaign need" into a closed-form prediction from per-node proposal success rates, replacing a wall-clock guess. Also gives the abstain-and-escalate threshold (Chow's rule, § 3.3.4) a principled form | Fit `p_v`, `c_propose,v`, `c_check,v` from retained campaign logs for one decomposed campaign; predict total cost and the per-node budget `T`; compare against what the campaign actually spent | Predicted versus actual total invocations within a stated factor on retained campaigns, prediction recorded first; and the `T` budget must achieve the stated `1-δ` admission rate empirically | **Neither** | **Medium-high** — the formulas are exact under i.i.d. proposals, and the open question is whether Evolve proposals are close enough to i.i.d. for the prediction to hold; a large miss is itself a finding about proposal correlation |
+| **C1151-16** | **`Λ`-cascade across independently implemented checkers** (§ 3.3.3), i.e. Theorem 5.1 applied to checker-implementation trust rather than mathematical correctness | Independent verification; the C1097 sibling-forgery class of defect | Quantifies what a second, independently written checker buys: odds of an implementation fault multiply down by `Λ₁Λ₂`. Gives a reason to reimplement a checker that is stronger than "belt and braces" | Estimate `α` for one existing checker from its defect history (C1097 is one data point), then state what a second independent implementation would have to satisfy to reach a target fault odds | An estimate of `α` with its evidence, and an explicit check of the conditional-independence hypothesis: shared libraries, shared authors, and shared test corpora all collapse the effective `Λ` toward 1 | **Neither** | **Low-medium** — the theorem is correct and the application is real, but estimating `α` for a checker from a handful of historical defects is weak evidence, and the independence hypothesis is the hard part |
+
 **If only one thing is done:** C1151-1 and C1151-3 together. They are the same object — a ban with a
 reason — reached from the two directions this file is about, and between them they let a gradient
 method into the engine (as a certificate guesser) and make its output compose (as a transported ban)
 without touching a single evidence claim. C1151-4 is the cheapest standalone win. C1151-5 is the
-biggest architectural bet and the one whose payoff is least predictable from the outside.
+biggest architectural bet and the one whose payoff is least predictable from the outside. **C1151-14
+is the cheapest of all** — it is an inequality evaluated against two numbers a single instrumented
+campaign produces, and it decides a question (screen before exact check, or not) that recurs
+everywhere in the engine.
 
 ---
 
@@ -1068,14 +1327,21 @@ that is recorded as a weakness of these three records, not papered over.
 
 ### 8.2 Source ledger by read depth
 
-**Literature sources read at full text: 0 of 15 named in this file.** That is a deliberate
-consequence of the brief: the instruction was to read load-bearing sources *to algorithm depth*, and
-I read the sections carrying the algorithm — definitions, theorems, cost formulas, result tables —
-rather than whole papers. Every claim above names the sections it rests on. Four *code* files were
-read end to end.
+**Literature sources read at full text: 1 of 16 named in this file** — Aksu, `arXiv:2606.15712`, read
+end to end including every proof. The other fifteen were read to algorithm depth rather than in full,
+which is a deliberate consequence of the brief: I read the sections carrying the algorithm —
+definitions, theorems, cost formulas, result tables — and every claim above names the sections it
+rests on. Four *code* files were also read end to end.
 
 **New in this report:**
 
+- **Full text (1):** `arXiv:2606.15712` (Aksu, *Odds Law: The Decomposition Algebra*). All thirteen
+  sections plus references; proofs of Lemmas 4.1–4.4, Theorems 5.1–5.2, 7.1–7.2, 9.2, 11.2 and
+  Propositions 3.2, 8.1, 9.1, 10.2 checked rather than taken from the abstract, with the two
+  proof-sketch weaknesses recorded in § 3.3.2. Figures 1–2 unrecoverable from the text extraction and
+  characterised from captions. The companion "Maestro Order" report, which carries the paper's
+  empirical claims, was **not sought or read**, so nothing empirical from that programme is assessed
+  here.
 - **Partial (10):** `arXiv:1501.03791` (Willerton, Legendre-Fenchel); `arXiv:2111.03956`
   (Boisseau & Piedeleu, graphical piecewise-linear algebra); `10.1016/j.jlamp.2023.100892`
   (Wilson & Zanasi, polynomial circuits — the most substantially read, §§1, 4.1, 5, 6, 7);
@@ -1142,6 +1408,7 @@ OpenAlex (all HTTP 200 with a well-formed `meta`/`results` body):
 Other:
 
 ```
+https://arxiv.org/pdf/2606.15712  -> Aksu, "Odds Law"; supplied by Tavis as an arXiv id, not found by search
 https://www.w3.org/TR/webgpu/     -> 4.5 MB HTML; supported-limits table and feature list extracted
 https://arxiv.org/abs/2111.03956  -> title confirmed "Graphical Piecewise-Linear Algebra" before fetching the PDF
 https://link.springer.com/content/pdf/10.1007/978-3-030-99253-8_6.pdf -> returned 3 KB of HTML, not a PDF; superseded by the arXiv copy
@@ -1172,6 +1439,12 @@ https://link.springer.com/content/pdf/10.1007/978-3-030-99253-8_6.pdf -> returne
   — is a statement about *that* code, and the same conclusion should not be attributed to the authors
   of the theory without checking their own tooling.
 - **No commit SHAs pinned** on any of the three repositories.
+- **The companion report to `arXiv:2606.15712` ("Maestro Order") was not sought.** Aksu defers the
+  measurement of every predicted law to it. So the *Odds Law* assessment in § 3.3 rests entirely on
+  proofs I checked and on no empirical evidence whatsoever, and the absorption rows derived from it
+  (C1151-14, C1151-15, C1151-16) inherit that: their mathematics is elementary and verified, their
+  applicability to real proposal streams is untested by anyone. This is a **could-not-access-because-
+  not-attempted** gap, and a cheap one to close if the rows are pursued.
 - **MathSciNet: NOT COVERED** (institutional authentication, unreachable). **zbMATH Open: not
   queried.** Neither gates anything here.
 
