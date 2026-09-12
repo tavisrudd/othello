@@ -116,3 +116,13 @@ The repaired bridge passes its guarded verification at
 view resolves both package namespaces and Lean elaborates the unchanged
 `TavisRuddFiniteGeom.Papers.ClebschRigidity.CertificateCompatibility` module.
 The source snapshot is recovered and the frozen certificate was never rebuilt.
+
+The shared export conventions now require the lock preflight for explicit
+local-source replay and explain how to detach a stale dependency symlink before
+a guarded lock update. Existing exports of other bridges are not silently
+changed; they must adopt the hardened template before that replay mode.
+
+Recovery scope: the snapshot restores the exact current committed source tree
+and its September 2 artifact cache. The new Paper I receipt proves its complete
+human closure is trace-current. This does not claim that every ignored cache
+entry produced after September 2 elsewhere in finitegeom was recovered.

@@ -225,6 +225,20 @@ In the paper-bridge checkout, after the finitegeom revision is published:
    guarded queue, requiring the exact certificate cache and forbidding source fallback.
 3. Refresh the bridge's axiom audit and release identity.
 
+For a replay with explicit local source roots, the exported verifier must check
+the dependency lock before installing or using source symlinks. Lake's Git
+dependency replacement can recursively delete the target of a stale symlink.
+The current bridge exporter rejects stale direct pins and Git source symlinks
+before invoking Lake. Refresh older bridge exports before using this mode.
+If a lock needs updating, unlink the affected dependency symlink itself first,
+preserving its target, then use the guarded lock-update entry point. Do not
+run a Lake dependency update through an authority symlink.
+
+Bridge elaboration uses a temporary artifact directory assembled from the two
+sealed source manifests. This prevents obsolete cache namespace directories
+from hiding the other package's modules; it neither rebuilds certificates nor
+cleans either source package's cache.
+
 A finitegeom, paper, prose, manifest, or release change never rebuilds or reseals a
 certificate package. A certificate cold build is a separately approved operation
 after its full source, generated-prose, namespace, and dependency audit.
