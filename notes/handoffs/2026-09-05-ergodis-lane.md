@@ -92,9 +92,13 @@ The native/WASM sparse provider and independent-checking demo are live on
 private `analysis/external-benchmarks/2026-09-11-portable-circuit-demo.md`.
 Additional SCIP cardinality and HiGHS default/parallel controls:
 private `analysis/external-benchmarks/2026-09-11-mip-objective-controls.md`.
-No completed comparator exclusion or Gurobi timing is claimed. Next provider gate:
-resumable frontier and worker-owned telemetry; current sparse adapter is serial
-per arm and uses shard request/reply calls. Broader external-proof compatibility
+No completed comparator exclusion or Gurobi timing is claimed. Bounded native/WASM
+continuations now preserve exact candidate counts with zero allocations; the demo
+uses the shared worker-owned typed telemetry loop and has no 50-million-check cap.
+Native A/B and browser lifecycle evidence:
+private `analysis/external-benchmarks/2026-09-11-fault-continuation.md`.
+Next provider gate: deterministic subtree parallelism and deeper declared hold-outs;
+the sparse browser adapter remains serial per arm. Broader external-proof compatibility
 remains C1148. Checked reductions alone are not an exclusion proof.
 Report:
 private `analysis/external-benchmarks/2026-09-11-coordinate-retraction.md`;
