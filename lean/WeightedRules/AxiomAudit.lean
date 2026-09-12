@@ -1,4 +1,5 @@
 import WeightedRules.BoundedMinPlus
+import WeightedRules.Relations
 
 /-!
 # Axiom audit for finite weighted rule certificates
@@ -21,3 +22,5 @@ use kernel reduction rather than native evaluation or an external oracle.
 #print axioms WeightedRules.distanceCertificate
 #print axioms WeightedRules.distance_least
 #print axioms WeightedRules.distance_values
+#print axioms WeightedRules.relational_certificate_least
+#print axioms WeightedRules.distance_signature_count
