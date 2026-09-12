@@ -292,6 +292,7 @@ boundary, and reproducible entry points.
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | Algebraic geometry / topology | The rank-130 integral middle lattice has canonical mod-two glue, while the same resolution carries a factor-three integral perverse attachment, a length-three modular Loewy chain, and failure of relative hard Lefschetz modulo three. | [PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [repo](https://github.com/tavisrudd/blown-up-theta-lattice) |
 | Frobenius-equivariant Pair Extension and Robust Repair of Eight-Arcs | Finite geometry / coding theory | Fixed mate-line carriers and exact collision corrections give Frobenius-compatible paired MDS extensions, including the exact two-fixed-point minimum over F₂₅. | [PDF](https://github.com/tavisrudd/equivariant-robust-completion/blob/main/equivariant-robust-completion.pdf) · [repo](https://github.com/tavisrudd/equivariant-robust-completion) |
 | Exact Compositional Transfer of Bounded Linear Recovery | Coding theory / distributed storage | Exact labelled composition reconstructs recovery witnesses; target-touching outer dual distance confines bounded minimal repair supports even when equations can escape. | [PDF](https://github.com/tavisrudd/compositional-recovery/blob/main/compositional_recovery.pdf) · [repo](https://github.com/tavisrudd/compositional-recovery) · [Ergodis](https://github.com/tavisrudd/ergodis) |
+| Strength-two trades and transversal cubic gates: the Clebsch cubic-phase codes and their magic | Quantum coding / finite geometry | Strength-two signed trades give high-rate error-detecting qudit codes whose surviving third moment is a transversal logical cubic phase; the ten-qudit `F₁₁` resource has no Clifford-product decomposition across any bipartition, and joint preparation of the six-qudit `F₇` resource beats the specified independent distillation menu. | [PDF](https://github.com/tavisrudd/clebsch-cubic-phase/blob/main/companion.pdf) · [repo](https://github.com/tavisrudd/clebsch-cubic-phase) |
 
 The repository for *Reconstructing the Clebsch Code from Its Deep-Hole
 Syndrome Locus* also contains the computational companion
@@ -1066,6 +1067,42 @@ holonomy becomes an exact deformation coordinate: it controls the exchange
 tradeoff, detects the real switching class, and supplies a metric defect. The
 interferometric model shows how the same hierarchy separates intrinsic,
 oriented, and calibrated observables.
+
+---
+
+#### Strength-two trades and transversal cubic gates: the Clebsch cubic-phase codes and their magic
+
+[PDF](https://github.com/tavisrudd/clebsch-cubic-phase/blob/main/companion.pdf) · [Repository](https://github.com/tavisrudd/clebsch-cubic-phase) · [![Concept DOI](https://img.shields.io/badge/Concept_DOI-10.5281%2Fzenodo.22666172-blue.svg)](https://doi.org/10.5281/zenodo.22666172)
+
+**Standout result.** Two signed point sets that agree on every quadratic
+polynomial define an error-detecting qudit code whose surviving third moment is
+a transversal logical cubic phase. The ten-qudit phase state of the
+`[[22,10,2]]₁₁` conic code is not Clifford-equivalent to a product state across
+any bipartition, and for the `[[14,6,2]]₇` conic code joint preparation of the
+whole block costs fewer than `16.116` raw inputs per accepted block against
+lower bounds of `54`, or `36` when all weighted cubic types have unit cost.
+
+> *Abstract* Can a symmetric point configuration define a multiqudit phase resource whose structure and preparation cost can both be certified? We study this question through strength-two signed trades: cancellation of their quadratic moments makes the third moment a transversal logical phase. Conic matchings give error-detecting codes with binary-invariant logical cubics, while an elementary translation trade supplies the same [[2p,p−1,2]]_p parameters at every prime p ≥ 5. Exact Hessian-rank censuses identify the conic resources through their Pauli spectra. The ten-qudit example over F₁₁ is not Clifford-equivalent to a product across any bipartition. For the six-qudit example over F₇, joint preparation beats a specified independent primitive-distillation menu at the same target block infidelity: fewer than 16.116 raw inputs versus a lower bound of 54, or 36 when all weighted cubic types have unit cost. This comparison assumes independent uniform Z noise, ideal Clifford operations, and input error at most 1%. A chordal restriction of the logical phase explains how geometric sign choices act as gate inversion and changes of logical frame.
+
+**Delivers.** A dictionary from strength-two signed trades to high-rate
+error-detecting codes with transversal cubic logical gates; a translation
+family realizing `[[2p,p−1,2]]_p` at every prime `p ≥ 5`; exact Hessian-rank
+and Pauli spectra for the conic examples; a product-state fourth-moment
+exclusion for the ten-qudit resource; a rational interval comparison of joint
+preparation against a specified distillation menu; and an exact chordal
+restriction identifying the Clifford action of the geometric sign choices.
+
+**Who cares.** Quantum-coding theorists working on transversal gates and magic
+resources, magic-state distillation researchers, and finite geometers
+interested in configurations that carry logical structure.
+
+**Why it matters.** The logical phase is specified by geometry rather than
+chosen by hand, so the same finite data fix the code, its transversal gate, and
+its Pauli spectrum. The resource comparison is stated with its model boundary
+intact: it assumes independent uniform Z noise, ideal Clifford operations, and
+input error at most one percent, and it is not an unrestricted protocol lower
+bound. The preparation advantage shows that preparing a structured block
+directly can beat assembling it from separately purified pieces.
 
 ---
 

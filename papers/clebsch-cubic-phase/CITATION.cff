@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "Please cite the accompanying preprint when using this artifact."
+message: "Please cite the archived manuscript using the version DOI below."
 type: article
 title: "Strength-two trades and transversal cubic gates: the Clebsch cubic-phase codes and their magic"
 authors:
@@ -7,4 +7,12 @@ authors:
     given-names: Tavis
     orcid: "https://orcid.org/0009-0003-6405-3275"
     affiliation: Independent researcher
+version: 0.1.0
+date-released: 2026-09-08
 license: CC-BY-4.0
+doi: 10.5281/zenodo.22666173
+url: "https://github.com/tavisrudd/clebsch-cubic-phase"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22666172
+    description: Concept DOI for all versions

@@ -1,5 +1,7 @@
 # Strength-two trades and transversal cubic gates
 
+[![Concept DOI](https://img.shields.io/badge/Concept_DOI-10.5281%2Fzenodo.22666172-blue.svg)](https://doi.org/10.5281/zenodo.22666172)
+
 ## Read the paper
 
 [**Open the paper (PDF) →**](companion.pdf)
@@ -122,9 +124,12 @@ synthesis costs and unrestricted adaptive preparation remain open.
 
 ## Citation
 
-Use the title and author above, or [`CITATION.cff`](CITATION.cff).
-This preprint has no assigned DOI in this package. The deposit metadata does
-not assert publication or invent an archival identifier.
+The concept DOI for all versions is
+[10.5281/zenodo.22666172](https://doi.org/10.5281/zenodo.22666172).
+The archived first draft, version `0.1.0`, has version DOI
+[10.5281/zenodo.22666173](https://doi.org/10.5281/zenodo.22666173).
+Citation metadata is provided in [`CITATION.cff`](CITATION.cff).
+The repository is `tavisrudd/clebsch-cubic-phase` on GitHub.
 
 ## License
 
