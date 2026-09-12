@@ -60,7 +60,9 @@ Goal, motivation (Macready), sequence, placement rule and deferred items:
 semi-naive DAG/cycle verification and safe retractions; native/Python/WASM compilation gates pass
 (`../2026-09-12-c1160-verifier-stability.md`, core `6284ca7`). C1163 complete: Lean relational
 contract and certified recursive min-plus program through native/WASM ABI
-(`../2026-09-12-c1163-rule-contract.md`). Next: C1164 (Lean oracle) → C1161 → join engine
+(`../2026-09-12-c1163-rule-contract.md`). C1164 complete: live Lean oracle, proved
+checker and kernel-checked least-fixpoint witness (`../2026-09-12-c1164-lean-oracle.md`).
+Next: C1161 (recursive runtime) → join engine
 (unallocated) → benchmark suite (unallocated) → C1162; C1158 any time. Literature cards:
 `../2026-09-12-c1150-category-theory-for-ergodis.md`,
 `../2026-09-12-c1151-category-theory-capability-pass.md`,
