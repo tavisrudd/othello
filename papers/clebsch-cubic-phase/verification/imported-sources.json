@@ -263,7 +263,7 @@
         "requirement": "Half-rate [2m,m,m+1] MDS codes over odd prime fields."
       }
     ],
-    "pinpoint": "Abstract of Diagonal Isoduality and Transversal Clifford Groups of MDS\u2013CSS Codes",
+    "pinpoint": "Abstract of Exact Transversal Logical Groups of Quantum MDS\u2013CSS Codes",
     "read_depth": "abstract/metadata only",
     "used": "Context: Schur-square conductor and the Clifford classification under the half-rate MDS hypotheses.",
     "version": "Companion manuscript cited by DOI in the bibliography; source read 2026-09-07."

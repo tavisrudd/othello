@@ -3,8 +3,8 @@
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21652792-blue.svg)](https://doi.org/10.5281/zenodo.21652792)
 
 **Clebsch portfolio:** part of the five-paper *Clebsch: Rigidity from Sparse
-Shadows* series. Related companions include *Diagonal Isoduality and
-Transversal Clifford Groups of MDS--CSS Codes* and *Balanced Cuts of
+Shadows* series. Related companions include *Exact Transversal Logical Groups
+of Quantum MDS--CSS Codes* and *Balanced Cuts of
 Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy*. The shared
 progression is expository: this paper is logically independent of the other
 portfolio papers.
