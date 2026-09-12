@@ -1797,3 +1797,57 @@ main` succeeds — and no export has ever run (`EXPORTS.md` does not exist). Its
 `"node": "grover"` in it. Publishing that branch would publish those commits. The same remedy
 applies — restart `public` at a root commit with `--new-public-history` — and the release
 checklist now carries it as a decision to take before the first release.
+
+## Staging invariant and the crate's public history, 2026-09-12 (core `292ed8b`)
+
+Tavis, on finding that `~/src/ergodis-public` tracked the pre-scrub evidence: the crate's public
+history can be rewritten to a single snapshot since it has never been pushed, the staging clone
+should hold only the branch meant to go to GitHub, and it should never contain `main`.
+
+### Deleted
+
+`refs/heads/public` in `~/src/ergodis` (was `9ed76b3`, eleven ordinary `main` commits, no export
+ever recorded — `EXPORTS.md` does not exist) and the whole `~/src/ergodis-public` staging clone.
+Confirmed first that the clone had no remote-tracking refs and no reflog entry for `origin`, so it
+was built locally and never fetched from or pushed to GitHub; that it had no stashes, no extra
+branches and no commits of its own; and that its 20 MB object store came from a hardlinking local
+clone. The first export now starts a single root snapshot with `--new-public-history`.
+
+### `main` no longer exists outside the private repositories
+
+The staging checkout's branch was previously named `main` — the GitHub default-branch name —
+which is exactly what made the question "does it contain main?" ambiguous. Now `main` means
+private history everywhere in the topology and nothing else:
+
+| Repository | Branches |
+|------------|----------|
+| `~/src/ergodis`, `~/src/ergodis-evidence` | `main` (private), `public` (snapshots) |
+| `~/src/ergodis-public`, `~/src/ergodis-evidence-public` | `public` only, plus published tags |
+| GitHub | `main`, written by `refs/heads/public:refs/heads/main` at the final push |
+
+Three independent guards hold it:
+
+1. The staging clone is built with `--single-branch --no-tags --no-local`. The first two keep
+   private branches and private tags out; `--no-local` forces a real object transfer, because a
+   local clone hardlinks the source object store and would leave every private object on disk in
+   the checkout that is one `git push` from GitHub.
+2. `configure-remotes.sh` refuses to finish unless the staging checkout's branch list is exactly
+   `public`.
+3. A new untracked `pre-receive` hook, installed into the staging checkout from
+   `staging/pre-receive`, rejects any incoming ref that is not `refs/heads/public` or a tag. This
+   is the guard that does not depend on the sender: the evidence repository's fixture has no
+   sender-side hooks, and its `main` is refused at the destination.
+
+`publish-to-staging.sh` now pushes `refs/heads/public:refs/heads/public`, and the staging
+`publish.sh` maps to `main` only at the GitHub push, where it also re-checks the one-branch
+invariant. Guards pass 73 of 73, and `shellcheck -S warning` is clean.
+
+### Not done: the snapshot itself
+
+`export-public.sh` refuses a dirty worktree, and `~/src/ergodis` carries another session's
+uncommitted allocation-surface work (`src/allocation_surface.rs`,
+`src/allocation_surface/count_axis.rs`, `wasm/src/repository.rs`, plus untracked tests). That
+guard is right and was not weakened or worked around, so no export ran: the crate currently has no
+`public` branch and no staging clone. Both come back with one command each once that tree is
+clean, and the export needs a tag — the crate is at version 0.1.0 and is not release-grade per
+this report, so the first snapshot should carry a preview tag rather than burn `v0.1.0`.
