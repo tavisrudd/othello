@@ -9,6 +9,16 @@ recorded in [`../2026-08-02-c855-paper-i-assertion-inventory.md`](../2026-08-02-
 the formalization bullets of section 2 and all of sections 3--11 are open. Required before the Paper I formal artifact is called
 referee-ready or packaged for its next public release.
 
+Statement-map repair (2026-09-12): `prop:fifteen-class-census` is registered as
+the statement of ledger row 58, replacing that row's sentence form and keeping
+its trust route; the companion's `lem:chord-defect` restatement is now a
+declared, checked resolution rather than a silent dictionary overwrite; and the
+headline row plus three renamed claim identifiers are re-recorded. The
+statement identity and trust manifest regenerate and pass their own `--check`
+modes. The release attestation still needs a re-pin and a fresh guarded
+finitegeom receipt; both are recorded in
+[`../2026-09-12-paper-i-statement-identity-remap.md`](../2026-09-12-paper-i-statement-identity-remap.md).
+
 Current certificate boundary (2026-08-09):
 
 - `finitegeom-clebsch-q11-certificates` is the Mathlib-only certificate source at

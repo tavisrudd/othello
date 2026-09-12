@@ -6,8 +6,13 @@
 papers and the unnumbered conference companion have sealed cold-referee ACCEPT
 verdicts and deterministic green manuscript builds. Paper III also passes the complete
 local release gate, including source-only replay of all three pinned Lean closures.
-Paper I’s trust projection and mirror export remain deferred behind C855’s
-pre-existing unmapped `prop:fifteen-class-census`. The shared portfolio
+Paper I’s statement identity and trust manifest now regenerate cleanly:
+`prop:fifteen-class-census` is mapped and no “golden” phrase survives in the
+generated identity (2026-09-12,
+[`../2026-09-12-paper-i-statement-identity-remap.md`](../2026-09-12-paper-i-statement-identity-remap.md)).
+Its trust projection and mirror export now wait only on the release
+attestation, whose pinned finitegeom and bridge revisions no longer match their
+checkouts and whose guarded receipt is no longer in the build cache. The shared portfolio
 summary has a sealed cold-reader ACCEPT. Papers II--V, the conference
 companion, the arcs paper, and the portfolio summary are exported to clean
 standalone repositories and verified; Paper I alone remains deferred.
@@ -165,10 +170,11 @@ and must not be reused as mathematical terminology.
   manuscript gate; Paper V and the conference companion pass `make check`;
   the arcs manuscript, witness replay, and rank-three certificate pass. All
   seven downstream worktrees are clean. Paper I's generated
-  `verification/statement_identity.json` still contains one stale phrase,
-  “golden operator”; regeneration and export remain correctly blocked by
-  C855's unmapped `prop:fifteen-class-census`, so C943 does not hand-edit that
-  generated trust identity.
+  `verification/statement_identity.json` was regenerated on 2026-09-12 once
+  `prop:fifteen-class-census` was mapped; the stale “golden operator” phrase is
+  gone with it, along with three claim identifiers the manuscripts had already
+  renamed. The export still waits on the release attestation described in
+  [`../2026-09-12-paper-i-statement-identity-remap.md`](../2026-09-12-paper-i-statement-identity-remap.md).
 
 ## Mystery ledger
 
@@ -178,10 +184,13 @@ and must not be reused as mathematical terminology.
   between the two Paper V torsors, and the noncanonical nature of the marked
   sheet comparison are consistent across papers, summaries, and eligible
   mirrors.
-- **Open evidence gap:** Paper I's generated statement identity and standalone
-  export wait on C855's theorem-map repair for
-  `prop:fifteen-class-census`. C855 owns the exact gate; no manuscript theorem
-  or terminology judgment remains open in C943.
+- **Open evidence gap:** C855's theorem-map repair for
+  `prop:fifteen-class-census` landed on 2026-09-12 and Paper I's statement
+  identity and trust manifest regenerate cleanly. The standalone export now
+  waits on the release attestation alone: the pinned finitegeom and bridge
+  revisions differ from their checkouts, the recorded guarded receipt has aged
+  out of the build cache, and the finitegeom base remains unresealed. No
+  manuscript theorem or terminology judgment remains open in C943.
 - **External publication state:** existing DOI/GitHub releases under former
   titles are not rewritten or pushed by this task. Forward public versioning
   remains the author's publication action.
