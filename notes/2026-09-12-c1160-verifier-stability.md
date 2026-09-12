@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-12
-**Status**: implementation committed; broader validation in progress.
+**Status**: COMPLETE; native, Python-oracle and WASM compilation gates pass.
 **Core implementation**: `6284ca7` in `~/src/ergodis`.
 
 ## Delivered contract
@@ -88,13 +88,33 @@ Replay from the core checkout:
 nix shell nixpkgs#cargo nixpkgs#rustc nixpkgs#rustfmt nixpkgs#clippy nixpkgs#python3 -c sh -c 'cargo fmt --all --check && cargo test -p ergodis-verify && cargo clippy -p ergodis-verify --all-targets --all-features -- -D warnings'
 ```
 
-Broader native gate and existing Python fixture parity: pending below.
+The broader native gate also passes on the committed implementation:
+`cargo fmt --check`, `cargo clippy --all-targets --all-features -- -D warnings`,
+and `cargo test --all-features -- --test-threads=4`, with eight build jobs and
+four Rayon workers in the same Nix environment: 54 suites, 895 passed, zero
+failed, two ignored. Existing Python fixture tests include
+`checked_in_python_oracle_agrees_with_rust_metrics_and_witnesses` and
+`generated_spans_match_python_costs_and_supports`; both pass, as does the new
+live Python graph oracle. The full run took about two minutes; this is validation
+duration, not a performance comparison.
+
+`nix shell nixpkgs#cargo nixpkgs#rustc -c cargo check -p ergodis-verify
+--target wasm32-unknown-unknown` passes. This establishes library compilation,
+not a browser binding or executed browser graph certificate. Cache GC dry-run
+completed successfully without deleting anything.
+
+Local diagnostic logs: `/tmp/claude-run-quiet/20260912-140856-nix-shell-nixpkgscargo-nixpkgsrustc-nixpkgsrustfmt-nixpkgsclippy-nixpkgspython3-c/`
+for the full native gate, and
+`/tmp/claude-run-quiet/20260912-141144-nix-shell-nixpkgscargo-nixpkgsrustc-c-cargo-check-p-ergodis-verify-target-wasm32-/`
+for WASM. Durable replay authority is the committed test/oracle source and the
+commands above, not these ephemeral logs.
 No solver hot loop, worker communication or hot solver layout changed; no timing
 or speedup claim is made. The new graph API is cold, serial verification.
 
 ## ej + tt closeout / Mystery ledger
 
-After the scoped acceptance gate, the explicit ej+tt pass asked which assumptions
+After the scoped acceptance gate, and refreshed after the full native gate, the
+explicit ej+tt pass asked which assumptions
 would fail first when the next task lowers a recursive program. The cheap upgrades
 already incorporated are the executable matrix counterexample, cycle-retraction
 rejection, nonlinear cross-term control and transactional budget-exhaustion test.

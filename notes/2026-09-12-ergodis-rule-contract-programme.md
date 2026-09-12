@@ -40,7 +40,7 @@ the verifier code in `2026-09-12-c1152-certificate-spike.md`). Discovery-track e
 
 | Step | Task | What it delivers | Location |
 |---|---|---|---|
-| 1 | C1160 | stability class and ⊖ on the verifier weight type; leaf-delta as an explicit semi-naive step over DAGs and cycles | core `crates/verify` |
+| 1 (complete) | C1160 | scalar stability and ⊖; semi-naive DAG/cycle checking with full replay for retractions; native/Python/WASM compilation gates pass | core `crates/verify`; `2026-09-12-c1160-verifier-stability.md` |
 | 2 | C1163 | the rule/fixpoint/certificate contract, IR-agnostic, stated in Lean under this monorepo's `lean/`; serialization through the existing C ABI; MLIR dialect as optional adapter; one recursive program lowered end to end | core; Lean authority here |
 | 2b | C1164 | Ergodis as a Lean oracle: tactic/IO call, reflective Lean checker for the min-plus certificate, proof terms of optimality and least fixpoint; the first artifact to show Macready, since a Lean-modelled IR consumes it directly and it needs no benchmark | core C ABI + Lean under `lean/` |
 | 3 | C1161 | recursive plan queries as least fixpoints with the N-step bound and semi-naive incremental recomputation | core runtime |
@@ -51,6 +51,12 @@ the verifier code in `2026-09-12-c1152-certificate-spike.md`). Discovery-track e
 
 Steps 4 and 5 are allocated after C1163's first program shows where join cost lands and after
 Macready names a workload. Step 7 can run at any time; it is cheap and independent.
+
+C1163 is next. C1160's implementation sharpens the contract: 0-stability belongs
+to scalar weights, so count scalar coordinates when lowering matrices; comparison
+minus propagates improvements, while retractions require a separate sound policy.
+The typed graph checker establishes least summaries of supplied equations; source
+lowering, serialized graph identity and the portable runtime remain successor work.
 
 ## Placement rule
 
