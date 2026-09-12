@@ -29,4 +29,12 @@ theorem oracleDistance_rounds : oracleDistance.rounds = 4 := by rfl
 theorem oracleDistance_values :
     ((oracleDistance.values.drop 16).take 4).map Fin.val = [0, 3, 2, 6] := by rfl
 
+/-- The external witness agrees with the independently defined finite-iteration certificate. -/
+theorem oracleDistance_agrees :
+    listState oracleDistance.values = iterate boundedMinPlus distanceProgram 4 := by
+  funext i
+  exact info_antisymm boundedMinPlus
+    (oracleDistance.least.2 _ distance_least.1 i)
+    (distance_least.2 _ oracleDistance.least.1 i)
+
 end WeightedRules
