@@ -3,7 +3,78 @@
 **Date:** 2026-09-12. **Lane:** `ergodis`. **Disposition:** capability study. No code written; nothing
 under `~/src/ergodis*` edited.
 
-**Status: IN PROGRESS — written incrementally, source by source.**
+## Opening summary
+
+Twenty-six named sources: eleven papers read at partial depth with the sections recorded, ten at
+abstract or metadata only, and **five reference implementations read at source level** — Boa,
+`egg`, OpenFst, VeriPB and Catlab.jl. No paper was read at full text, which is the deliberate
+shape of a capability pass: the depth went into code and into the specific theorems the
+absorption rows rest on. Full tally and coverage statement in §8.
+
+**The largest capability gain is that Ergodis can compute quotients rather than check them.**
+`ValidatedQuotient` today verifies a supplied compiled quotient and explicitly declines to claim
+minimality. Coalgebraic partition refinement *produces* the coarsest behavioural quotient in
+`O(m log n)` from one implementation covering deterministic, weighted and polynomial
+presentations, and the fastest current tool is a 183-line Rust main loop over four flat vectors
+that minimized a 1.3-million-state automaton in 1.7 GB where a distributed predecessor needed a
+265 GB cluster. Its refinement interface is two functions and two equations, not a categorical
+framework.
+
+**Three findings exist only because the source was read, and two of them change a
+recommendation.**
+
+1. **Boa's signatures are 64-bit FxHash digests**, so the fastest generic minimizer is exact only
+   up to hash collision. Its own test suite hedges empirically against a naive reference. Any
+   Ergodis adoption must choose: exact keys, or a declared collision bound on the claim.
+2. **OpenFst's weight pushing requires `Divide` and explicitly skips arcs at `Zero`** because
+   `∞ − ∞` is meaningless. That relocates the blocker the first pass flagged: the tropical
+   semiring is fine and OpenFst supports it; what blocks Ergodis is the **saturating `u32::MAX`
+   sentinel**, which makes a large finite cost indistinguishable from absence. The first
+   experiment is therefore not weight pushing but settling the sentinel.
+3. **Catlab's coequalizer is union-find plus a sorted renumbering** — the same structure as
+   `egg`'s e-class union-find and Boa's signature renumbering. "Compute a colimit" costs a
+   union-find and a sort, so adopting the vocabulary is an API decision, not a performance one.
+
+**Four levers are new relative to the first pass and each is small.** *Interval analysis* over a
+`FeatureDag` is a single topological pass — the DAG is acyclic, so no fixpoint and no widening —
+and it decides statically whether a subterm can overflow, which is the question selected-root
+lowering must answer and currently answers only by test corpus. *Cousot–Cousot widening* supplies
+the bounded-probe step with what a budget counter cannot: soundness at the cut-off, plus a
+narrowing pass every intermediate term of which is already a valid bound. *McKay's canonical
+augmentation* outputs exactly one representative per isomorphism class with a coverage theorem,
+which matters for C1016 because its own provenance rule grants negative coverage only to exact
+enumerations. And `FeatureDag` **is** a presented Lawvere theory — free term algebra modulo the
+simplifier's identities — which turns "which identities may the simplifier use" into a definition
+(the relation must hold in the checked-integer model, error domain included) discharged once per
+identity instead of argued per rewrite.
+
+**The sharpest single distinction in this pass is in §3.0.** C1016's multiplier program *assumes*
+invariance under a subgroup, which is lossy and whose emptiness says nothing beyond that shard.
+Quotienting the search by the group that acts on the *unrestricted* problem is lossless and needs
+no `X_i` to be invariant under anything. The card's conclusion that "the search cannot inherit an
+orbit structure" is correct about the first and silent about the second. My own derivation from
+the card's equation gives a symmetry group of order at least `522⁴·3!` acting on the unrestricted
+bordered search — not verified against the private implementation, and absorption row 8 is
+conditional on that check. It is a lever on enumeration, corpus deduplication and restart seeding,
+and explicitly **not** on the inner tabu loop, whose incremental per-swap deltas a canonical-form
+computation would destroy.
+
+**On the widened scope.** Nothing in the top six absorption rows needs a gradient, a neural
+network, or a GPU. Where a GPU formulation exists it is recorded — signature-based refinement is
+a pure per-state map, 1-WL stable colouring has a linear-algebraic form that is matrix–vector
+multiplication, canonical rotation of fixed-length sign vectors is a uniform width-`k` map — but
+in every case the measured evidence says build the CPU version first. One row uses a *small
+model* with no network at all: a sliding-window upper-confidence-bound bandit for Evolve's
+proposal ordering, which attacks what `egg`'s `BackoffScheduler` attacks with a fixed heuristic,
+using a reward Ergodis already computes. One row needs gradients, and its risk is entirely in
+choosing a continuous relaxation, not in the differentiation.
+
+**A process note that belongs in the summary because it affects the cache everyone shares.** I
+guessed three arXiv identifiers from memory and all three were wrong — two fetched unrelated
+papers and one fetched a relevant paper under the wrong name. All three manifest entries were
+corrected with a recorded `note`. The magic-byte check cannot catch this class of error, because
+the bytes are a perfectly good PDF of the wrong paper. Resolve identifiers by search before
+fetching.
 
 ## Posture
 
@@ -819,15 +890,20 @@ enumeration algorithm), and §4.3.8 notes they can be halved by symmetry.
 The mapping is not an analogy; it is an identification, and each line of it is checkable against
 `scalar-plan-semantics.md`.
 
-| Polygraphs §13.1 | Ergodis |
-|-------------------------|-----------------------------------------------------------------|
-| sorts `P₀`              | the checked signed integer sort (plus the `u16` modulus sort)    |
-| signature `P₁`          | `Input`, `Constant`, `Add`, `Sub`, `Mul`, `Mod`, `Abs`, `GaussianNorm`, `EisensteinNorm`, with their arities |
-| free theory `P*`        | the `FeatureDag` term algebra — hash-consed, canonical topological order, sharing |
-| rules `P₂`              | the simplifier's "universal algebraic identities"                |
-| presented theory `P̄`    | the theory Ergodis intends `FeatureDag` to denote                |
-| model `C → Set`         | one evaluator: the checked Rust evaluator, `python/plan_semantics.py`, the interval abstraction of §1 |
-| normal form             | a chosen representative of a hom-set of `P̄`                      |
+| Polygraphs §13.1  | Ergodis                                       |
+|-------------------|-----------------------------------------------|
+| sorts `P0`        | checked signed integer, plus the u16 modulus  |
+| signature `P1`    | the nine FeatureDag node kinds, with arities  |
+| free theory `P*`  | the FeatureDag term algebra, hash-consed      |
+| rules `P2`        | the simplifier's universal identities         |
+| presented theory  | the theory FeatureDag is intended to denote   |
+| model into Set    | one evaluator (Rust, Python oracle, interval) |
+| normal form       | a chosen representative of a hom-set          |
+
+Expanding the two rows that do not fit a cell: the signature is `Input`, `Constant`, `Add`,
+`Sub`, `Mul`, `Mod`, `Abs`, `GaussianNorm` and `EisensteinNorm` with their arities; and the free
+theory `P*` is the `FeatureDag` term algebra with hash-consing, canonical topological order and
+sharing, while the presented theory is `P̄ = P*/P₂`.
 
 Four consequences.
 
@@ -1269,7 +1345,7 @@ deterministic dense renumbering, and return the projection. That is the same uni
 `egg`'s `src/unionfind.rs` implements for e-classes and the same canonical renumbering that
 Boa's `renumber` performs on signatures.
 
-**The honest reading, and it is a useful one.** The categorical vocabulary buys *uniformity* —
+**The plain reading, and it is a useful one.** The categorical vocabulary buys *uniformity* —
 one `coequalizer` that works for every model of the theory, and a `universal` property that makes
 the factorisation available rather than hand-written — not a new algorithm. For Ergodis this is a
 positive finding rather than a deflation: it means adopting "quotient = coequalizer" costs a
@@ -1281,8 +1357,621 @@ others.
 
 ## 6. Set aside on the first pass, reassessed on capability alone
 
+Each item below was named in the first pass and either deferred, marked low-confidence, or filed
+as an incidental lead. Reassessed here on the single question of what Ergodis could do with it,
+with the scope now including gradient-based search, small neural networks, and GPU compute.
+
+### 6.1 Promoted
+
+**Interval analysis.** Was incidental lead 4. Now §1.2(a): a single topological pass over a
+`FeatureDag` decides statically whether a subterm can overflow, which is the question the
+selected-root lowering already has to answer and currently answers only by test corpus. Cheapest
+item in either pass.
+
+**E-graph extraction cost.** Was the reason first-pass row 7 stayed medium. It is now a solved
+engineering problem rather than an open one.
+
+> **Jiaqi Yin, Zhan Song, Chen Chen, Yaohui Cai, Zhiru Zhang, Cunxi Yu, "e-boost: Boosted E-Graph
+> Extraction with Adaptive Heuristics and Exact Solving", arXiv:2508.13020v2 [cs.AI], 23 August
+> 2025.** *Read depth: abstract/metadata only* — arXiv PDF already in the cache, SHA-256 recorded
+> in the manifest under `arXiv:2508.13020`, 16 pages; abstract read. Three components, all in
+> scope and none needing a neural network: **parallelised heuristic extraction** exploiting "weak
+> data dependence to compute DAG costs concurrently"; **adaptive search-space pruning** with a
+> parameterised threshold retaining only promising candidates; and **initialised exact solving**
+> that formulates the reduced problem as an integer linear program with warm start. Reported:
+> "558× runtime speedup over traditional exact approaches (ILP)" and "19.04% performance
+> improvement over" the heuristic baseline. I have not verified those figures.
+
+The pattern — cheap parallel heuristic, threshold prune, warm-started exact solve on the residue
+— is directly reusable for any Ergodis step where an exact answer is wanted and a heuristic is
+affordable, which is most of the Evolve proposal path. It also happens to be the same shape as
+C1091's "bounded probes and exact fallback".
+
+**Reverse-mode automatic differentiation over a term graph.** Was out of scope in the first pass
+(optics were part A's territory, and gradients were not in scope). With gradient-based search
+admitted, one specific result becomes relevant.
+
+> **Mario Alvarez-Picallo, Dan R. Ghica, David Sprunger, Fabio Zanasi, "Functorial String Diagrams
+> for Reverse-Mode Automatic Differentiation", arXiv:2107.13433v1 [cs.PL], 28 July 2021 (CSL 2023
+> version cited elsewhere as LIPIcs 252, 6:1–6:20).** *Read depth: partial* — arXiv PDF, cached as
+> `arXiv:2107.13433`, SHA-256
+> `a08ba2a6b89db8d6048fef58dec51d076bda67dbb5337b5eb591645ab09d4a1d`, 28 pages; abstract and §1
+> Introduction read. They give a hierarchical string-diagram calculus capturing closed monoidal and
+> cartesian closed structure, formulate the Pearlmutter–Siskind reverse-AD algorithm in it, and
+> "prove for the first time its soundness"; the implementation vehicle is a class of hierarchical
+> hypergraphs they call **hypernets**, given as a sound and complete representation.
+
+Why this matters to Ergodis rather than to machine learning: hypernets are the same hierarchical
+hypergraph structure Tiurin et al. use for monoidal e-graphs (§1.2 of the first pass), so the
+rewriting substrate for AD and for equality saturation is one substrate. If Ergodis ever wants a
+gradient of a continuous relaxation of a `FeatureDag`-shaped objective — for Evolve parameter
+tuning, or for a continuous surrogate of a discrete search — this is the sound construction, and
+it reuses machinery already argued for. The obvious caveat is that `FeatureDag` is
+integer-valued with checked arithmetic, so differentiating it requires first choosing a
+continuous relaxation, and that choice is the real work; the AD machinery is not the hard part.
+
+**Bandit-based adaptive operator selection for Evolve.** Not in the first pass at all; surfaced
+here because "small simple models" are now in scope and because it needs no network whatsoever.
+
+> **Álvaro Fialho, Luis Da Costa, Marc Schoenauer, Michèle Sebag, "Analyzing bandit-based adaptive
+> operator selection mechanisms", Annals of Mathematics and Artificial Intelligence 60(1):25–64
+> (2010), DOI 10.1007/s10472-010-9213-y.** *Read depth: partial* — author's draft via HAL
+> (`inria-00519579`), already in the cache under the DOI key; abstract and author/venue front
+> matter read. Each genetic operator is an arm of a multi-armed bandit and the reward is the
+> fitness improvement it produced. Their point is that the standard Upper Confidence Bound
+> algorithm solves exploration-versus-exploitation optimally only in **static** settings while
+> operator selection is dynamic, so they propose a UCB variant using a **sliding time window** for
+> both the exploitation and the exploration terms, and build a testbed with smooth transitions
+> between reward regimes plus a real evolutionary algorithm on the Royal Road problem.
+
+The Ergodis object is O8, Evolve's **proposal ordering**, which the architecture context describes
+as "shared ranked Rust/WASM proposals". A sliding-window UCB is a few dozen lines, has no training
+phase, no model to ship, and no inference cost, and it directly attacks the thing `egg`'s
+`BackoffScheduler` attacks with a fixed heuristic (ban a rule, double its limit, double its ban
+time). It is also a strictly better fit than `BackoffScheduler` for Ergodis's case, because
+Ergodis's reward — did this proposal survive admission and improve the measured objective — is
+already computed and recorded.
+
+**GPU formulations of the quotient computations.** Newly in scope. Two concrete results.
+
+> **Jan Martens, Jan Friso Groote, Lars van den Haak, Pieter Hijma, Anton Wijs, "A linear parallel
+> algorithm to compute bisimulation and relational coarsest partitions", arXiv:2105.11788v1
+> [cs.DC], 25 May 2021.** *Read depth: partial* — arXiv PDF, cached as `arXiv:2105.11788`,
+> SHA-256 `0da1ef80db64cb03dd250d094322b3e43a6bd39e0ca24109cc0577066dddffeb`, 22 pages; abstract
+> and §1 opening read. "The first linear time algorithm to calculate strong bisimulation using
+> parallel random access machines": with `n` states, `m` transitions and `|Act| ≤ m` labels, on
+> `max(n, m)` processors, time `O(n + |Act|)` and space `O(n + m)`. Their motivation is precisely
+> the GPU question — "the best-known PRAM algorithm has time complexity `O(n log n)` on a smaller
+> number of processors making it less suitable for massive parallel devices such as GPUs" — and
+> they report a GPU implementation showing "the linear time-bound is achievable on contemporary
+> hardware."
+
+> **Filippo Biondi, Mirco Tribastone, Max Tschaikowski, "Scaling Weisfeiler–Leman Expressiveness
+> Analysis to Massive Graphs with GPUs", arXiv:2607.02603v1 [cs.DC], 1 July 2026.** *Read depth:
+> partial* — arXiv PDF, cached as `arXiv:2607.02603`, SHA-256
+> `8434f52b47ffde1b8cc84fecbe15d53e9ca3caa29745cdb1ae2ff8e54da625d1`, 22 pages; abstract and §1
+> opening read. They identify two bottlenecks in classical stable-colouring computation — it is
+> "inherently sequential" and "global", requiring the whole graph in memory — and answer both with
+> a **linear-algebraic interpretation of 1-WL stable colouring**: a randomized refinement
+> algorithm with tight probabilistic guarantees, plus a correctness-preserving batching scheme
+> that "decomposes the graph into independently processable subgraphs while provably returning a
+> stable coloring of the original graph". Their CUDA implementation reports "speedups up to two
+> orders of magnitude over classical CPU-based partition refinement" and stable colourings on
+> graphs with over 30 billion edges.
+
+The capability statement for Ergodis: the refinement step of §2 and the canonical-labelling inner
+loop of §3 have the same linear-algebraic reformulation, that reformulation is matrix–vector
+multiplication, and matrix–vector multiplication is what a `wgpu` compute kernel does well. The
+batching result matters more than the speedup for Ergodis, because it is what makes the
+computation work without holding the whole structure in device memory — the same constraint the
+browser target imposes.
+
+**The trust caveat that comes with both, and with Boa.** Biondi et al.'s refinement is
+*randomized* with probabilistic guarantees; Boa's signatures are 64-bit FxHash digests (§2.3).
+Every fast route to a quotient in this study trades exactness for speed somewhere. Ergodis's
+verification context forbids an unqualified "verified", so any adoption must state which: an
+exact CPU path as the authority and a fast randomized path as an accelerator whose output is
+re-checked, or a declared probabilistic bound recorded on the claim.
+
+### 6.2 Reassessed and still deferred, with the reason sharpened
+
+**String diagrams as an IR.** The first pass said do not adopt, because `FeatureDag` is Cartesian
+and pays none of the cost the machinery removes. That still holds for the plan language. What
+changed is that two *other* things Ergodis might want — reverse-mode AD (§6.1) and monoidal
+e-graphs — are built on the same hierarchical-hypergraph substrate, so if either is ever adopted
+the substrate arrives with it. The recommendation is therefore sharper than before: do not adopt
+string diagrams *for the plan IR*, and if AD or saturation is adopted, take the hypergraph
+representation from that work rather than inventing one.
+
+**Decorated cospans (first-pass row 11).** Still low confidence and still design-level. The
+capability reassessment does not move it: it gives the preservation contracts a composition law,
+which is valuable when writing the contracts down and worth nothing at run time. Keep as
+vocabulary.
+
+**Open games (first-pass row 12).** Unchanged: single-agent optimisation under information
+constraints is not a strategic game, and the transferable content remains the one interface
+decision (decision covers need bidirectional morphisms). The optics underneath are part A's.
+
+**Datalog and the chase (first-pass incidental lead 2).** Suciu–Wang–Zhang's two-way reduction
+between equality saturation and the chase means `egglog`-style unification of Datalog and
+equality saturation is available. The capability that would buy — incremental recomputation of
+derived facts when a source changes — maps onto Ergodis's update contracts and cache-validity
+question. I still set it aside, for a reason rather than by omission: Ergodis's update problem is
+about *authority* (which admissions survive an edit) more than about *recomputation*, and the
+chase gives the second without the first.
+
+**Provenance polynomials for dependency tracking (first-pass §2.5).** Reassessed and worth one
+sentence more than it got: Green–Karvounarakis–Tannen's `N[X]` semiring answers "which leaves
+does this root cost depend on, and with what multiplicity" without re-running anything, which is
+exactly the dependency-set half of Ergodis's cache-validity contract. It is a *different* weight
+type in the semiring-polymorphic verifier of §5.3, not a separate mechanism — so it costs nothing
+extra once row 3 lands. Promoted from "worth noting" to "free rider on row 3".
+
+**Squier's theorem as a stopping rule (first-pass §3.3).** Unchanged in substance but worth
+restating as capability: it is the result that tells Ergodis when to *stop* looking for a finite
+convergent presentation, via a computable homological obstruction. Negative results that bound
+effort are capability, not trivia.
+
+**The polynomial fragment of `FeatureDag` (first-pass incidental lead 5).** Elliott §7.8 notes
+that programs using only addition and multiplication compile to polynomials, which admit exact
+root, extremum, derivative and integral analysis and parallel-prefix evaluation. `FeatureDag`'s
+`Add`/`Sub`/`Mul`/`Constant`/`Input` nodes are exactly that fragment; `Mod`, `Abs`,
+`GaussianNorm` and `EisensteinNorm` leave it. With gradients in scope the derivative half is now
+interesting, but the realistic assessment is that the fragment is probably too small in practice —
+the norms are the point of the feature language. Worth a measurement (what fraction of live
+`FeatureDag`s are polynomial?) before anything else.
+
+### 6.3 Still out, and why
+
+The only hard exclusion is dependence on deep or large neural networks. Three lines of work fall
+there and are named so they are not rediscovered: neural-guided e-graph extraction and learned
+rewrite schedulers that require a trained network in the loop (e-boost's threshold heuristic is
+the in-scope alternative and reportedly beats the ILP baseline by 558× without one); graph neural
+network approaches to symmetry and isomorphism, which are additionally *bounded above* by 1-WL —
+which §6.1's GPU result computes exactly and far more cheaply; and learned surrogate objectives
+for combinatorial search, where C1016's own measurements already show the difficulty is the move
+set rather than the scoring.
+
+Two of those three are worth noting for a second reason: in both cases the classical algorithm is
+not merely adequate but strictly stronger. A GNN cannot distinguish what 1-WL cannot, so
+computing 1-WL directly is both exact and cheaper. That is an argument from capability, not from
+taste.
+
 ## 7. Absorption table
+
+Ordered by my estimate of value per unit of effort, best first. The **Requirement** column answers
+the scope question directly: `neither` means no gradient, no neural network and no GPU;
+`GPU optional` means a known data-parallel formulation exists but the CPU version should be built
+first; `GPU` means the parallel formulation is the point; `small model` means a small simple
+learner with no network; `gradient` means gradient-based search. Nothing here needs a deep or
+large neural network.
+
+The six required fields per row are written out under the index, because several do not compress
+to a table cell without losing the part that makes them actionable.
+
+| #  | Candidate                               | Ergodis object       | Requirement  | Confidence |
+|----|-----------------------------------------|----------------------|--------------|------------|
+| 1  | Interval abstraction over FeatureDag    | O2 FeatureDag        | neither      | high       |
+| 2  | Weak term acyclicity check              | O2 identities        | neither      | high       |
+| 3  | Sentinel fix, then weight pushing       | O5 summaries         | neither      | high       |
+| 4  | Semiring-polymorphic verifier           | O5 verifier, O4      | neither      | high       |
+| 5  | Coalgebraic partition refinement        | O3 quotients         | GPU optional | high       |
+| 6  | VeriPB-style omission certificate       | O3 catalogs, O4      | neither      | high       |
+| 7  | Widening-shaped bounded probe           | O4 probes            | neither      | medium     |
+| 8  | Canonical form + isomorph rejection     | C1016 search         | GPU optional | medium     |
+| 9  | Theory relations + critical branchings  | O2 simplifier        | neither      | medium     |
+| 10 | Sliding-window UCB proposal ordering    | O8 Evolve            | small model  | medium     |
+| 11 | Parallel heuristic + warm-started exact | O8 Evolve, O2        | neither      | medium     |
+| 12 | Campaign interface as a polynomial      | O6 campaigns         | neither      | medium     |
+| 13 | GPU linear-algebraic refinement         | O3 quotients, C1016  | GPU          | low        |
+| 14 | Reverse-mode AD on a relaxation         | O8 Evolve            | gradient     | low        |
+
+### Row detail
+
+**Row 1 — interval abstraction over `FeatureDag`** (Cousot–Cousot PLILP'92 Example 11's interval
+domain; Elliott §7.7's `IFun` instance for the transfer functions). *Expected benefit:* a static,
+per-term answer to "can this subterm overflow given declared input ranges", which is the question
+selected-root lowering must answer and currently answers only by test corpus. *Cheapest
+experiment:* one topological pass over the DAG carrying `[lo, hi]` per node — `Add` adds
+endpoints, `Mul` takes min and max of the four corner products, `Abs` and the norms take the
+monotone image, `Mod m` gives `[0, m−1]`. No fixpoint, no widening, because the DAG is acyclic.
+*Measured gate:* on the 1,984-row lowering corpus, every row the concrete evaluator faults must
+be flagged possible (zero false negatives, non-negotiable), and the count flagged-possible but
+not-actually-faulting is reported as the precision number; separately, for every discarded
+subterm in a selected-root lowering the abstraction must state whether it could have faulted, with
+the existing corpus as oracle. *Requirement: neither* — though propagating `k` independent input
+boxes through one fixed topological schedule is a width-`k` map and a plausible `wgpu` kernel if
+Evolve ever screens a large population. *Confidence: high* — smallest construction in either pass,
+exact soundness statement, and it discharges an obligation Ergodis has already written down.
+
+**Row 2 — weak term acyclicity of the identity set** (Suciu–Wang–Zhang, Definition 45 and
+Theorem 46; pseudocode in §5.1). *Expected benefit:* a static certificate that the simplifier's
+rule set saturates in polynomially many steps, or a named identity that forbids the claim.
+*Cheapest experiment:* build the position graph (at most a couple of dozen vertices for nine
+operations), run Tarjan, check no special edge lies inside an SCC. *Measured gate:* binary; if
+acyclic, additionally confirm the fixpoint is reached within the polynomial bound on the existing
+corpus, and if not, report the offending cycle and the identity that creates it. *Requirement:
+neither.* *Confidence: high* — minutes of work, returns a usable answer either way, and it is the
+one thing `egg`'s budget-based `StopReason` cannot give.
+
+**Row 3 — settle the min-plus sentinel, then weight pushing** (Mohri Theorem 8; OpenFst
+`reweight.h` inspection in §5.2). *Expected benefit:* a linear-time canonical form for
+cost-carrying representations, usable for cache keys and catalog deduplication — but only after
+the blocker is removed. *Cheapest experiment:* **not** weight pushing. First decide whether any
+reachable composition in the retained corpus saturates to `u32::MAX`, by instrumenting the
+existing verifier to count saturations; then either widen the accumulator with a proved bound or
+add an explicit absent flag distinct from the numeric maximum. Weight pushing is the second
+experiment, not the first. *Measured gate:* zero saturating compositions over the whole fixture
+set under the chosen representation, demonstrated rather than argued; then cost-equivalence of
+the pushed tree on every leaf assignment. *Requirement: neither.* *Confidence: high* that the
+blocker is real — OpenFst's code explicitly skips arcs at `Zero` because `∞ − ∞` is meaningless,
+and saturation makes that skip undecidable — and high that the repair is routine.
+
+**Row 4 — semiring-polymorphic verifier with a properties mask** (OpenFst's weight concept as the
+template; Green–Karvounarakis–Tannen Prop. 3.5 and Thm 4.3 for why it is sound;
+Little–He–Kayas §2.5 for the tupled instantiations). *Expected benefit:* one checker instead of
+one per algebra, with optimum, canonical witness, full witness set, top-`k` and provenance
+polynomials as instantiations; and algebraic preconditions declared rather than discovered.
+*Cheapest experiment:* parameterise the existing checker over `(carrier, ⊕, ⊗, 0, 1)` plus a
+`properties()` bitmask, re-run current min-plus fixtures through the generic path, then add the
+Viterbi tupled weight as a second instantiation. *Measured gate:* byte-identical results on every
+current fixture; the tupled instantiation's witness matches the existing witness readout; and no
+regression on the retained native A/B counter gates — no allocation, no dynamic dispatch in the
+hot loop. *Requirement: neither.* *Confidence: high* — OpenFst is the existence proof that a
+production library is built this way, and row 3's blocker becomes a declared property instead of
+a surprise.
+
+**Row 5 — compute the quotient rather than check it** (Wißmann–Dorsch–Milius–Schröder's
+refinement interface; Jacobs–Wißmann's Algorithm 2 and the Boa source read in §2.3). *Expected
+benefit:* Ergodis moves from verifying a supplied quotient to **producing the coarsest** one, in
+`O(m log n)`, from one implementation covering deterministic, weighted and polynomial
+presentations. This is the largest single capability gain in the study. *Cheapest experiment:*
+implement Algorithm 2 directly against Ergodis structures — the `RefinablePartition` design is
+four flat vectors plus a worklist and `refine` is a counting sort, so this is on the order of
+sixty lines — and run it on one existing `FinitePresentation`. *Measured gate:* the computed
+partition refines every quotient `ValidatedQuotient` currently accepts for that presentation and
+is no coarser than any of them; the number of extra classes the existing quotients retain is
+reported; and **exactness is established against a naive reference on the whole corpus rather
+than assumed** — Boa's signatures are 64-bit FxHash digests, so either use exact keys or record
+the collision bound as a declared precondition. *Requirement: GPU optional* — signature
+computation is a pure per-state map and Martens et al. give a PRAM-linear GPU algorithm, but
+Jacobs–Wißmann beat a 265 GB cluster with 1.7 GB single-machine Rust, so start on the CPU.
+*Confidence: high* — the algorithm is published, implemented, benchmarked, and in Rust.
+
+**Row 6 — a VeriPB-style omission certificate for representative catalogs** (VeriPB `red` rule;
+exact syntax and checker behaviour in §5.4). *Expected benefit:* a checkable certificate for
+"this reduction preserves the optimum but not the feasible set" — the catalog contract Ergodis
+states and cannot currently check, and the one VIPR-style feasibility proofs cannot express.
+*Cheapest experiment:* encode one bounded recovery-family catalog omission as a constraint plus a
+witness substitution `ω` in `red`-style syntax, and discharge the four goal families the checker
+generates: effected database constraints, the added constraint under `ω`, order conditions (skip
+when the witness misses the order variables), and the objective condition `f ≥ f↾ω`. *Measured
+gate:* an independent checker accepts the certificate and rejects a deliberately broken omission
+(C1091 fixture 4 — the single-failure-complete catalog that drops the only action safe under
+unresolved alternatives). Report the ratio of goal candidates to goals actually needing a
+subproof, which is what determines whether certificates stay small. *Requirement: neither.*
+*Confidence: high* — the format is implemented, in use for 0–1 integer linear programs, and
+Ergodis's GF(2)/binary families sit in exactly that setting.
+
+**Row 7 — a widening-shaped bounded probe** (Cousot–Cousot PLILP'92 axioms (6)–(8), (10)–(11),
+iterations (9) and (12)). *Expected benefit:* C1091's bounded-probe step gains a soundness
+statement at the cut-off, which a budget counter cannot give; and the narrowing pass makes
+**every intermediate answer** sound, so the probe can be truncated anywhere. *Cheapest
+experiment:* restructure one existing Evolve probe as `if F(X) ⊑ X then stop else X ∇ F(X)`, plus
+a truncatable downward `X Δ F(X)` pass. *Measured gate:* terminates in no more steps than the
+current budget cut-off on the retained fixtures, and — the new part — the answer at every
+truncation point of the narrowing pass is accepted as a sound bound by the existing independent
+checker. *Requirement: neither.* *Confidence: medium* — the mathematics is settled and small, but
+whether Ergodis's probes have a lattice structure to widen over is an implementation question
+this study could not settle from documentation.
+
+**Row 8 — canonical form and isomorph-free enumeration for C1016** (McKay's `scan` with
+conditions M1–M3 and Theorem 1; Devriendt et al.'s Theorems 1 and 2 for the lex-leader
+alternative). *Expected benefit:* the exact enumeration arms shrink by the orbit factor of a
+group of order at least `522⁴·3!`, **with a provable coverage statement** — which matters because
+C1016's own provenance rule says only exact enumerations grant negative coverage; and the
+inequivalent-shell corpus gets an exact incremental key instead of a pairwise test. *Cheapest
+experiment:* write down the group as implemented (including whatever the Goethals–Seidel array
+and border impose — my derivation in §3.5 is from the card's equation and must be checked against
+the private code), implement the canonical form (Booth's linear-time canonical rotation for
+translations, sort the three equal blocks, minimise over the surviving unit orbit), and
+recompute the 39-shell corpus's class count. *Measured gate:* the canonical key is a pure
+function of the shell, verified by canonicalising several random group translates of each shell
+and checking the key is identical; then the class count, where a change in either direction is
+the finding. A second gate for enumeration: re-running the two-transfer census as a canonical
+augmentation must reproduce the original result up to the equivalence, not merely approximate it.
+*Requirement: GPU optional* — canonical rotation of `k` fixed-length sign vectors is a uniform
+width-`k` map and a plausible `wgpu` kernel; the `scan` traversal itself is irregular and belongs
+on CPU threads, where McKay's Theorem 3 licenses independent parallel runs. *Confidence: medium*
+— the machinery is certain, but the size of the win depends on the real group, which I derived
+rather than verified, and the inner tabu loop is explicitly **not** a target (§3.5(c)).
+
+**Row 9 — validate the theory's relations, then its critical branchings** (Polygraphs §13.1.13 for
+model-validity, §4.3.7 for the critical branching lemma, §4.3.14 for the enumeration algorithm).
+*Expected benefit:* "which identities may the simplifier use" becomes a definition (the relation
+must hold in the checked-integer model, error domain included) discharged once per identity
+instead of argued per rewrite; and confluence of the destructive simplifier becomes a finite
+check. *Cheapest experiment:* write the signature and identity set as a term rewriting system;
+validate each rule in the checked-integer model; enumerate critical branchings and test each for
+confluence. *Measured gate:* every rule is either validated or moved to a declared-precondition
+list with its precondition written down, and no validated rule changes the fault set on the
+existing corpus; the critical-branching list is finite and each entry carries a confluence
+verdict, with non-confluent ones either completed (the added rule itself passing validation) or
+recorded as a known incompleteness. *Requirement: neither.* *Confidence: medium* — certain to
+produce a correct answer, uncertain whether the answer changes anything, since the identity set
+may already be sound and confluent. The value is that the claim becomes checkable.
+
+**Row 10 — sliding-window UCB for Evolve proposal ordering** (Fialho–Da Costa–Schoenauer–Sebag).
+*Expected benefit:* proposal ordering adapts to which operators are currently paying, rather than
+to a fixed heuristic; and unlike `egg`'s `BackoffScheduler` it uses the reward signal Ergodis
+already computes (did the proposal survive admission and improve the measured objective).
+*Cheapest experiment:* replace the current ranking with a UCB whose exploitation and exploration
+terms are both computed over a sliding window, on one delivered Evolve family. *Measured gate:*
+time-to-first-admitted-proposal and total admitted proposals per unit wall clock, against the
+current ranking, on the retained overnight fixtures — with the run-to-run spread reported, since
+C1016's card shows that spread can be the size of the effect. *Requirement: small model* — a few
+dozen lines, no training phase, no shipped artifact, no inference cost. *Confidence: medium* —
+the mechanism is simple and well-studied, but the paper's own point is that these algorithms are
+sensitive to their hyper-parameters, so a null result is a plausible outcome.
+
+**Row 11 — parallel heuristic, threshold prune, warm-started exact** (e-boost's three-part
+pattern). *Expected benefit:* a general shape for any Ergodis step that wants an exact answer and
+can afford a heuristic first, which is most of the Evolve proposal path and all of extraction if
+row 7 of the first pass is ever pursued. *Cheapest experiment:* apply it to one existing exact
+arm — compute the heuristic answer in parallel, prune to a parameterised threshold band, and
+warm-start the exact solver from the heuristic solution. *Measured gate:* the exact answer is
+unchanged (this is the whole point — pruning must be shown not to remove the optimum on the
+fixture set, or the threshold must be declared as an approximation), and wall clock against the
+unpruned exact run. *Requirement: neither* — CPU-parallel; e-boost's parallelism comes from "weak
+data dependence", not from a GPU. *Confidence: medium* — the pattern is reported to work well
+elsewhere and matches C1091's own "bounded probes and exact fallback" language, but the
+threshold's safety is problem-specific and is exactly what the gate has to establish.
+
+**Row 12 — campaign interface as a polynomial** (Niu–Spivak Definition 4.18 and Remark 4.20).
+*Expected benefit:* illegal commands become unrepresentable at the boundary instead of rejected
+inside it, and the frontend action table becomes a projection of one declaration rather than a
+hand-maintained parallel list — which is where native/WASM/browser divergence currently comes
+from. *Cheapest experiment:* write `p` for the campaign/run control interface: enumerate the
+observable states `p(1)` and, for each, the legal command set `p[i]`. Do not import a library.
+*Measured gate:* every command in the current control-plane surface appears in at least one
+`p[i]`, and every `(state, command)` pair the implementation currently rejects is absent from `p`.
+Discrepancies in either direction are the finding. *Requirement: neither.* *Confidence: medium*
+— the diagnosis is solid and the exercise is cheap, but the payoff is removed divergence, which
+is real and hard to measure in advance.
+
+**Row 13 — GPU linear-algebraic refinement** (Biondi–Tribastone–Tschaikowski; Martens et al.).
+*Expected benefit:* refinement and canonical labelling on structures too large for the sequential
+path, and — more important for Ergodis than the speedup — a **correctness-preserving batching
+scheme** that avoids holding the whole structure in device memory, which is the same constraint
+the browser target imposes. *Cheapest experiment:* none yet. This row is gated on row 5: build the
+CPU refinement first, measure where the time actually goes, and only then consider a `wgpu`
+kernel for the signature/matvec step. *Measured gate:* when attempted — identical partition to the
+exact CPU path on the whole corpus, since the published algorithm is randomized with probabilistic
+guarantees and Ergodis's verification context forbids an unqualified "verified". *Requirement:
+GPU.* *Confidence: low* — not because the work is doubtful but because Ergodis has no measured
+instance large enough to need it, and Jacobs–Wißmann's single-machine result argues the threshold
+is far away.
+
+**Row 14 — reverse-mode AD over a continuous relaxation** (Alvarez-Picallo–Ghica–Sprunger–Zanasi).
+*Expected benefit:* gradients of a continuous surrogate of a `FeatureDag`-shaped objective, for
+Evolve parameter tuning or a continuous relaxation of a discrete search, with a soundness proof
+for the algorithm and a hypergraph representation shared with the e-graph work. *Cheapest
+experiment:* before any AD, choose and justify a continuous relaxation of one integer-valued
+objective and check it correlates with the exact objective on banked states. The relaxation is
+the work; the differentiation is not. *Measured gate:* rank correlation between the relaxed and
+exact objectives on the banked C1016 plateau corpus, and whether gradient descent on the
+relaxation reaches states the discrete search does not. C1016's own evidence is a caution here:
+the card reports that the difficulty is the move set rather than the scoring, and that a
+descent operator can look better and still fail in a controlled fibre. *Requirement: gradient.*
+*Confidence: low* — the categorical machinery is sound and beside the point; the risk is entirely
+in the relaxation, and Ergodis's measured history says scoring changes have not been the lever.
+
+### Sequencing
+
+Rows 1, 2, 3 and 9 are all small, local to `FeatureDag` or the verifier, and independent of each
+other. Row 4 depends on row 3's sentinel decision. Row 5 is the largest capability gain and
+depends on nothing. Row 6 is independent. Rows 13 and 14 are explicitly gated on measurements
+that do not exist yet, and I would not start either.
 
 ## 8. Coverage and search record
 
+### Read-depth tally
+
+**Twenty-six named sources.** Eleven papers were read at **partial** depth, each with the
+sections relied on recorded in its entry — and for a capability pass "partial" means the
+definitions, theorems and algorithms this report uses were read in full while proofs generally
+were not. Ten carry **abstract/metadata only**. Five are **reference implementations read at
+source level**, with the files and line counts recorded in each entry: Boa, `egg`, OpenFst,
+VeriPB and Catlab.jl. **No paper was read at full text**, and that is a deliberate shape for this
+pass rather than an omission: the depth budget went into source code and into the specific
+theorem statements the absorption rows depend on. The companion first pass
+(`2026-09-12-c1150-part-b-compilers-solvers-normalization.md`) records its own tally, including
+two full-text paper reads, and several of its partial reads are reused here without re-reading —
+notably the Polygraphs preface and the Suciu–Wang–Zhang contribution statement.
+
+This is a capability study. No verdict here depends on the absence of prior work, and no novelty
+or priority claim is made or implied.
+
+### Reference implementations inspected
+
+| Tool    | Language | Files read                                       |
+|---------|----------|--------------------------------------------------|
+| Boa     | Rust     | optalg.rs, refpart.rs, coalg.rs, hmap.rs         |
+| egg     | Rust     | extract.rs, unionfind.rs, run.rs                 |
+| OpenFst | C++      | push.h, reweight.h, float-weight.h               |
+| VeriPB  | Python   | README.rst, rules_dominance.py, rules.py, a .pbp |
+| Catlab  | Julia    | Coequalizers.jl, skelfinsetcat/Colimits.jl       |
+
+All were fetched from `raw.githubusercontent.com` on 2026-09-12 into this session's scratchpad,
+except the OpenFst headers, taken from the `kkm000/openfst` mirror. Repository file listings were
+obtained through the GitHub trees API. Three findings in this report exist only because the code
+was read and contradict or sharpen what the papers say:
+
+1. **Boa's signatures are 64-bit FxHash digests**, so its minimization is exact only up to hash
+   collision; its own test suite hedges empirically against the naive algorithm.
+2. **OpenFst's `Reweight` requires `Divide`**, and explicitly skips arcs touching `Zero` — which
+   is what makes Ergodis's saturating `u32::MAX` sentinel, not the tropical semiring, the blocker
+   for weight pushing.
+3. **Catlab's coequalizer in skeletal finite sets is union-find plus a sorted renumbering** — the
+   same structure as `egg`'s e-class union-find and Boa's signature renumbering.
+
+A fourth is a documentation defect rather than a finding: Boa's `RefinablePartition::partition`
+field comment states the clean/dirty convention backwards relative to `new()` and `mark_dirty`.
+
+### Cache additions and corrections
+
+New keys added by this task: `10.1093/logcom/2.4.511`, `cousot-plilp-1992-galois-vs-widening`,
+`10.1145/512950.512973` (status `no-text` — see below), `arXiv:2004.03082`, `arXiv:1806.05654`,
+`arXiv:2204.06248`, `arXiv:1811.08850`, `mckay-1998-isomorph-free-exhaustive-generation`,
+`devriendt-2016-improved-static-symmetry-breaking-sat`, `arXiv:0908.3331`, `arXiv:2406.13557`,
+`arXiv:2312.00990`, `arXiv:2107.13433`, `arXiv:2105.11788`, `arXiv:2607.02603`. Reused without
+re-fetching: `arXiv:2204.12368`, `arXiv:2508.13020`, `arXiv:1301.1493`, `arXiv:2312.00429`,
+`10.1007/s10472-010-9213-y`. SHA-256 values are quoted in each source's entry. The fetch helper
+is `/tmp/persistent/tavis/lit-search/fetch_c1151b.sh`, which refuses any download whose magic
+bytes are not `%PDF`; the C1150 helper it was copied from had been removed from the cache
+directory between sessions.
+
+**Two corrections were written back into the shared cache manifest**, because a wrong title in a
+shared cache is worse than a missing entry. Both were fetched under guessed arXiv identifiers
+that turned out to belong to unrelated papers:
+
+- `arXiv:2006.09055` — requested as a coalgebraic partition-refinement paper; it is Biswas and
+  Dumitrescu, "Nonabelian Hodge theory for Fujiki class C manifolds".
+- `arXiv:2306.10863` — requested as Niu–Spivak on polynomial functors; it is Choksatchawathi et
+  al., "ApSense: Data-driven Algorithm in PPG-based Sleep Apnea Sensing".
+
+A third, `arXiv:0804.4881`, was fetched while looking for a Valmari paper and is Piperno's
+"Search Space Contraction in Canonical Labeling of Graphs" — a relevant paper, but not the one
+requested; its title was corrected too and it is cited in §3.2 under its real identity. Each
+corrected entry carries a `note` field recording the misfiling. **The lesson is worth stating: I
+guessed three arXiv identifiers from memory and all three were wrong.** Identifiers should be
+resolved by search before fetching, and the magic-byte check does not catch this class of error
+because the bytes are a perfectly good PDF of the wrong paper.
+
+`10.1145/512950.512973` (Cousot–Cousot POPL 1977) is cached with status `no-text`: the PDF is an
+image scan and `pdftotext` extracted zero words. I did not read it, and everything attributed to
+the 1976 and 1977 papers comes through the two 1992 papers.
+
+### Load-bearing queries, verbatim
+
+Web search was the only bibliographic service queried; every query returned results, so an empty
+result was never mistaken for an error.
+
+1. `Cousot "abstract interpretation frameworks" Galois connection widening narrowing journal
+   logic computation 1992 pdf` — resolved the JLC and PLILP papers and their author-site PDF URLs.
+2. `Valmari "bisimilarity minimization in O(m log n) time" 2009 refinable partition arXiv` —
+   established that the paper is LNCS 5606 pp. 123–142 and **not** on arXiv.
+3. `CoPaR coalgebraic partition refinement tool implementation github Wissmann Milius` — located
+   the CoPaR tool and the distributed and weighted-tree-automata follow-ups.
+4. `"orbital branching" Ostrowski Linderoth Rossi Smriglio pdf symmetric integer programs` —
+   resolved venue and page range; no obtainable PDF.
+5. `BreakID "improved static symmetry breaking" SAT Devriendt Bogaerts lex-leader row symmetry
+   pdf` — located the author-hosted PDF actually used.
+6. `Spivak Niu "Polynomial Functors: A Mathematical Theory of Interaction" arXiv number book pdf`
+   — corrected my wrong identifier to arXiv:2312.00990.
+7. `Lawvere theory free algebra normal form term rewriting "algebraic theory" presentation clone
+   survey pdf open access` — established that the Polygraphs book's §13.1 covers exactly the
+   needed material, after Hyland–Power proved unobtainable.
+8. `GPU parallel equality saturation e-graph OR GPU partition refinement bisimulation CUDA
+   data-parallel` — produced both GPU sources used in §6.1.
+
+### Could not access
+
+These license nothing and are carried forward as open gaps.
+
+- **François Margot, "Symmetry in Integer Linear Programming"** (the *50 Years of Integer
+  Programming* chapter). Three URLs attempted; each returned an HTML interstitial rejected by the
+  cache's magic-byte check. This is the standard survey for §3 and its absence is that section's
+  main coverage gap.
+- **Antti Valmari, "Bisimilarity Minimization in O(m log n) Time"** (LNCS 5606). Springer
+  paywall, no open preprint located. Its refinable-partition data structure and its claim that
+  the bound holds with an unbounded label alphabet are characterised in §2.2 only through
+  Wißmann et al.'s citations, and marked as such.
+- **Ostrowski, Linderoth, Rossi, Smriglio, "Orbital branching"** (Math. Prog. 126(1)). No PDF
+  obtainable; §3.3 uses only the Springer and Optimization Online landing-page descriptions, and
+  reports no speedups.
+- **Hyland and Power, "The Category Theoretic Understanding of Universal Algebra: Lawvere
+  Theories and Monads"**. Four URLs attempted, all HTML. Not needed in the end — the Polygraphs
+  book's §13.1 supplied the definitions at better depth for this purpose.
+- **Cousot–Cousot POPL 1977** — cached but unreadable (image scan, no OCR performed).
+
+### Not covered
+
+- **zbMATH Open, OpenAlex, Crossref and Semantic Scholar were not queried.** No verdict here
+  rests on a citation count or an enumerated citing set, so the citation-graph width requirement
+  is not triggered. **MathSciNet: NOT COVERED** (institutional authentication). **Google Scholar:
+  NOT COVERED** (blocks automated access).
+- **No Ergodis source code was read.** This remains a documentation-and-literature study. Several
+  mappings rest on statements in `scalar-plan-semantics.md`, `summary-transitions.md`,
+  `observable-admission.md` and the C1016 task card that may lag their implementations.
+- **The C1016 symmetry group in §3.5 is my own derivation** from the supplementary-difference-set
+  equation as the task card states it. I did not verify it against the private implementation,
+  and in particular I could not check whether the Goethals–Seidel array or the border kills the
+  block-permutation part. Everything in absorption row 8 is conditional on that check.
+- **Part A's territory was excluded by design** and remains so: Vincent Abbott's diagram papers,
+  categorical deep learning and cats4ai search priors, and optics/Para-style categorical
+  optimization. Row 14's automatic differentiation touches the boundary and is deliberately
+  scoped to the hypergraph representation rather than to the optics.
+- **The e-boost figures (558× over ILP, 19.04% over the heuristic baseline) are unverified**, read
+  from its abstract only. Likewise Biondi et al.'s "two orders of magnitude" and 30-billion-edge
+  claim, and Jacobs–Wißmann's 1.7 GB versus 265 GB comparison — that last one read from their
+  introduction rather than from the benchmark tables.
+
 ## 9. Incidental leads
+
+Observations met while searching that are outside this task's scope. Recorded with provenance,
+not written to the discovery track by me, and not promoted to any C-item.
+
+1. **Three quotient computations in this study share one data structure.** `egg`'s e-class
+   union-find (`src/unionfind.rs`, read in full), Catlab's coequalizer in skeletal finite sets
+   (`IntDisjointSets` plus `quotient_projection`, read in full), and Boa's dense signature
+   renumbering are the same union-find-plus-canonical-renumbering pattern. An Ergodis
+   implementation of any one is most of an implementation of the others. Noted because it changes
+   the cost estimate for adopting several absorption rows at once, and because nobody in the
+   sources says it.
+
+2. **`egg`'s greedy extractor is a Bellman–Ford relaxation with a documented monotonicity
+   precondition.** `Extractor::find_costs` (`src/extract.rs`, read in full) is a worklist over
+   e-classes re-enqueueing parents on improvement, and the `CostFunction` trait requires
+   "`cost` should return a `Cost` greater than any of the child costs". Ergodis's
+   `ordered_resource` finite ordered monoids are exactly the setting where that precondition
+   either holds by construction or fails informatively. Unpursued, but it is the cheapest possible
+   check on whether an Ergodis cost model is extraction-compatible.
+
+3. **`P_f P_f` is not zippable, and zippable functors are closed under neither composition nor
+   quotients** (Wißmann et al., Example 5.10). This is a sharp boundary on which representation
+   families admit the fast refinement step, and "nested nondeterminism" is exactly the shape that
+   fails. Worth holding as a rejection fixture if Ergodis ever composes representation families
+   automatically.
+
+4. **Boa's `refine` carries an unexploited optimisation as a `TODO`**: "assign the old ID to the
+   block with the fewest predecessors" rather than to the largest block. The Hopcroft bound is
+   stated in terms of block size, but the actual work is proportional to predecessor count, so the
+   two criteria differ. Noted as an open micro-optimisation in a published tool, not as an Ergodis
+   task.
+
+5. **VeriPB instruments its own cheap path.** `AddRedundant.compute` maintains
+   `stats.numGoalCandidates` against `stats.numSubgoals` — goals considered versus goals that
+   actually needed proof — and an `autoRUPstreak` counter that switches strategy after five
+   consecutive cheap successes. That is a small, general pattern for any checker with a fast path
+   and a slow path, and Ergodis's admission checks have exactly that shape.
+
+6. **Hypernets are the shared substrate for automatic differentiation and for monoidal
+   e-graphs.** Alvarez-Picallo–Ghica–Sprunger–Zanasi's hierarchical hypergraphs (arXiv:2107.13433,
+   read at the depth recorded in §6.1) and Tiurin et al.'s e-hypergraphs (first pass, §1.2) are
+   the same class of structure, from overlapping author groups. If Ergodis ever adopts either, the
+   representation arrives with it. Unpursued.
+
+7. **Randomized refinement with probabilistic guarantees is becoming the norm at scale.**
+   Biondi–Tribastone–Tschaikowski's GPU 1-WL (§6.1) is randomized; Boa's signatures are hashed.
+   Both are correct with high probability rather than certainly. For a system whose vocabulary
+   forbids an unqualified "verified", this is a category of trust boundary that will keep
+   recurring, and it may deserve a named policy — exact authority path plus fast accelerator with
+   recheck — rather than a per-adoption decision. Recorded as an observation about a pattern, not
+   as a proposal.
+
+8. **The 1-WL upper bound is an argument against graph neural networks here, not merely a
+   limitation of them.** Message-passing architectures cannot distinguish what 1-WL cannot, and
+   §6.1's GPU result computes 1-WL exactly at web scale. Wherever Ergodis might have reached for a
+   learned graph model for symmetry or isomorphism, the classical algorithm is both exact and
+   cheaper. Noted because it is a reusable argument, not a one-off.
