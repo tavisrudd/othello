@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import subprocess
+import sys
 import tempfile
 import tomllib
 import unittest
@@ -19,6 +21,28 @@ SPEC.loader.exec_module(MODULE)
 
 
 class PaperBridgeExportTests(unittest.TestCase):
+    def test_stale_local_lock_refuses_without_touching_source(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "source"
+            source.mkdir()
+            sentinel = source / "preserve"
+            sentinel.write_text("source and artifacts")
+            packages = root / ".lake/packages"
+            packages.mkdir(parents=True)
+            (packages / "finitegeom").symlink_to(source, target_is_directory=True)
+            (root / "lake-manifest.json").write_text(json.dumps({"packages": [
+                {"name": "finitegeom", "type": "git", "rev": "old", "inputRev": "old"}
+            ]}))
+            result = subprocess.run(
+                [sys.executable, "-c", MODULE.local_dependency_check(), "finitegeom", "new"],
+                cwd=root, capture_output=True, text=True,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("stale local dependency lock", result.stderr)
+            self.assertEqual(sentinel.read_text(), "source and artifacts")
+            self.assertTrue((packages / "finitegeom").is_symlink())
+
     def bridge(self) -> dict:
         return {
             "name": "sample-paper",

@@ -64,6 +64,26 @@ roots = ["{bridge["module"]}"]
 '''
 
 
+def local_dependency_check() -> str:
+    """Refuse stale Git locks before Lake can materialize a source symlink."""
+    return '''import json, pathlib, subprocess, sys
+manifest = pathlib.Path("lake-manifest.json")
+if not manifest.is_file():
+    raise SystemExit("local verification requires an up-to-date Lake lock")
+entries = json.loads(manifest.read_text())["packages"]
+for name, revision in zip(sys.argv[1::2], sys.argv[2::2]):
+    matches = [e for e in entries if e["name"].strip("«»") == name]
+    if len(matches) != 1 or matches[0].get("rev") != revision or matches[0].get("inputRev") != revision:
+        raise SystemExit("stale local dependency lock: " + name)
+for entry in entries:
+    path = pathlib.Path(".lake/packages") / entry["name"].strip("«»")
+    if path.is_symlink() and entry.get("type") == "git":
+        head = subprocess.check_output(["git", "-C", str(path), "rev-parse", "HEAD"], text=True).strip()
+        if head != entry["rev"]:
+            raise SystemExit("source symlink differs from dependency lock: " + str(path))
+'''
+
+
 def flake(bridge: dict) -> str:
     package = bridge["certificate_package"]
     gate_path = bridge["certificate_gate"].replace(".", "/")
@@ -83,7 +103,7 @@ def flake(bridge: dict) -> str:
           pkgs = nixpkgs.legacyPackages.${{system}};
           verify = pkgs.writeShellApplication {{
             name = "verify-paper-certificate-bridge";
-            runtimeInputs = with pkgs; [ elan git curl cacert gmp zlib coreutils ];
+            runtimeInputs = with pkgs; [ elan git curl cacert gmp zlib coreutils python3 ];
             text = ''
               if test "$#" -ne 1 && test "$#" -ne 3; then
                 echo "usage: nix run .#verify -- /path/to/certificate.lake-pack.tar.gz [finitegeom-source certificate-source]" >&2
@@ -102,6 +122,9 @@ def flake(bridge: dict) -> str:
                 test -z "$(git -C "$finitegeom_source" status --short --untracked-files=no)"
                 test "$(git -C "$certificate_source" rev-parse HEAD)" = '{bridge["certificate_commit"]}'
                 test -z "$(git -C "$certificate_source" status --short --untracked-files=no)"
+                python3 -c '{local_dependency_check()}' \\
+                  finitegeom '{bridge["finitegeom_commit"]}' \\
+                  '{package}' '{bridge["certificate_commit"]}'
                 local_sources=1
                 export GIT_CONFIG_COUNT=2
                 export GIT_CONFIG_KEY_0="url.file://$finitegeom_source/.insteadOf"
