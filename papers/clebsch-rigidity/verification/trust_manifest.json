@@ -2472,7 +2472,7 @@
     "output": {
       "path": "verification/verify-release-output.json",
       "repository": "paper",
-      "sha256": "202d19d2ef77c365a9b7bbaadb1be4ce6eecd0820b8145481d5cc331019fd93d"
+      "sha256": "c1224b343d3c1edf762d2cbc76e85441dc8443dec80bad8a86cddde3c319dcb2"
     },
     "verification_tools": [
       {
