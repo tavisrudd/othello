@@ -25,11 +25,11 @@ Workspaces:
 The campaign's live arm has three representations, all four-block and all scoring the same law
 at a different level of the quotient ladder `Z/522 -> Z/174 -> Z/87 -> Z/58 -> Z/29`.
 
-| Object | Rust type | Where | What an entry is |
-|---------------------|--------------------------|--------------------------------------|-----------------------------------------|
-| `q29` margin shell  | `[[i8; 29]; 4]`          | `src/order6_margin_tabu.rs:57-63`    | even coset sum of signs, `-18..18`      |
-| `q174` count state  | `[[u8; 174]; 4]`         | `src/order6_phase_two.rs:180`        | count of `+1` in a fibre of three, `0..3` |
-| carrier sign matrix | `[[i8; 522]; 4]`         | `src/order6_carrier.rs:147`          | one sign, `+-1`                         |
+| Object              | Rust type        | Where                             | What an entry is                          |
+|---------------------|------------------|-----------------------------------|-------------------------------------------|
+| `q29` margin shell  | `[[i8; 29]; 4]`  | `src/order6_margin_tabu.rs:57-63` | even coset sum of signs, `-18..18`        |
+| `q174` count state  | `[[u8; 174]; 4]` | `src/order6_phase_two.rs:180`     | count of `+1` in a fibre of three, `0..3` |
+| carrier sign matrix | `[[i8; 522]; 4]` | `src/order6_carrier.rs:147`       | one sign, `+-1`                           |
 
 The objective is the same function at every level: the combined periodic autocorrelation of the
 four blocks against a target that is **flat off the zero shift**. At the carrier it is `2088` at
@@ -73,13 +73,13 @@ own direct scorers (`src/order6_orbit_canonical.rs`, tests
 `every_generator_family_fixes_the_q29_objective` and
 `every_generator_family_fixes_the_carrier_objective`, both passing):
 
-| # | Family | Why it fixes the score | Count at level `N` |
-|---|---------------------------|-------------------------------------------------|------------------------|
-| 1 | per-block translation     | each `A_b` is shift-invariant                    | `N^4`                  |
-| 2 | per-block index inversion | `A_b(-g) = A_b(g)`; independent across blocks    | `2^4`                  |
-| 3 | common multiplier         | permutes shift classes; off-zero target is flat  | `|U(Z/N)| / 2` further |
-| 4 | per-block value negation  | `A_b` is quadratic in `y_b`                      | `2^4`                  |
-| 5 | block permutation         | the score is a symmetric sum over blocks         | `4! = 24`              |
+| #   | Family                    | Why it fixes the score                          | Count at level `N`      |
+|-----|---------------------------|-------------------------------------------------|-------------------------|
+| 1   | per-block translation     | each `A_b` is shift-invariant                   | `N^4`                   |
+| 2   | per-block index inversion | `A_b(-g) = A_b(g)`; independent across blocks   | `2^4`                   |
+| 3   | common multiplier         | permutes shift classes; off-zero target is flat | half the units of `Z/N` |
+| 4   | per-block value negation  | `A_b` is quadratic in `y_b`                     | `2^4`                   |
+| 5   | block permutation         | the score is a symmetric sum over blocks        | `4! = 24`               |
 
 Family 3 is counted after family 2 because `-1` is a unit, so the diagonal inversion is already
 in family 2. Families 1-3 compose as `p -> t (eps_b p) + s_b` with `t` common and `(eps_b, s_b)`
@@ -98,12 +98,12 @@ preserves the campaign's declared seeding law `signed_sum == (block == 0)`
 (`src/q29_inventory_scope.rs:494`), which pins block zero: value negation flips a row sum, so it
 is admitted on blocks one to three only, and the block permutation is the `S3` on those blocks.
 
-| Level | Scope | Verified order | C1151 part B claim | Ratio |
-|-----------|-----------|----------------------|--------------------|-----------|
-| carrier   | objective | `522^4 * 516,096`    | `522^4 * 6`        | `86,016x` |
-| carrier   | seed      | `522^4 * 64,512`     | `522^4 * 6`        | `10,752x` |
-| `q29`     | objective | `29^4 * 86,016`      | —                  | —         |
-| `q29`     | seed      | `29^4 * 10,752`      | —                  | —         |
+| Level   | Scope     | Verified order    | C1151 part B claim | Ratio     |
+|---------|-----------|-------------------|--------------------|-----------|
+| carrier | objective | `522^4 * 516,096` | `522^4 * 6`        | `86,016x` |
+| carrier | seed      | `522^4 * 64,512`  | `522^4 * 6`        | `10,752x` |
+| `q29`   | objective | `29^4 * 86,016`   | —                  | —         |
+| `q29`   | seed      | `29^4 * 10,752`   | —                  | —         |
 
 Gated by `the_group_orders_are_the_declared_products`. `|U(Z/522)| = 168` and `|U(Z/29)| = 28`,
 both computed rather than asserted.
@@ -145,14 +145,14 @@ The comparator is **plain equality on the banked state**, not the raw record cou
 merely repeats a record is deduplicated without any group at all. `|G|` is the verified group
 order at that level and scope.
 
-| Corpus | Level | Records | Distinct by equality | Distinct orbits | Merged by the group |
-|-------------------------------------|-------|---------|----------------------|-----------------|---------------------|
-| `q29-shell-corpus-wide.json` (the 39-shell corpus) | 29 | 39 | 39 | 39 | **0** |
-| `q29-shell-mine.jsonl`              | 29    | 624     | 409                  | 409             | **0**               |
-| `q29-margin-tabu-shell-hits.json`   | 29    | 12      | 12                   | 12              | **0**               |
-| all `q29` pooled                    | 29    | 675     | 421                  | 421             | **0**               |
-| phase-two, carrier and replication count states | 174 | 100 | 76               | 76              | **0**               |
-| carrier sign corpora pooled         | 522   | 72      | 72                   | 72              | **0**               |
+| Corpus                                             | Level | Records | Distinct by equality | Distinct orbits | Merged by the group |
+|----------------------------------------------------|-------|---------|----------------------|-----------------|---------------------|
+| `q29-shell-corpus-wide.json` (the 39-shell corpus) | 29    | 39      | 39                   | 39              | **0**               |
+| `q29-shell-mine.jsonl`                             | 29    | 624     | 409                  | 409             | **0**               |
+| `q29-margin-tabu-shell-hits.json`                  | 29    | 12      | 12                   | 12              | **0**               |
+| all `q29` pooled                                   | 29    | 675     | 421                  | 421             | **0**               |
+| phase-two, carrier and replication count states    | 174   | 100     | 76                   | 76              | **0**               |
+| carrier sign corpora pooled                        | 522   | 72      | 72                   | 72              | **0**               |
 
 **The headline is a negative, and it is clean.** Across 847 banked states at three levels, the
 group merges nothing that plain equality does not already merge. The 39-shell corpus really does
@@ -166,13 +166,13 @@ byte-identical records, not orbit relatives.
 Every banked state was measured for its exact stabiliser, and the stabiliser is trivial almost
 everywhere:
 
-| Level | Scope | `|G|` | States with trivial stabiliser |
-|-------|-----------|-----------------------|--------------------------------|
-| 29    | objective | `60,837,482,496`      | 672 of 675                     |
-| 29    | seed      | `7,604,685,312`       | 672 of 675                     |
-| 174   | objective | `157,690,754,629,632` | 100 of 100                     |
-| 522   | objective | `38,318,853,375,000,576` | 72 of 72                    |
-| 522   | seed      | `4,789,856,671,875,072`  | 72 of 72                    |
+| Level | Scope     | Group order              | States with trivial stabiliser |
+|-------|-----------|--------------------------|--------------------------------|
+| 29    | objective | 60,837,482,496           | 672 of 675                     |
+| 29    | seed      | 7,604,685,312            | 672 of 675                     |
+| 174   | objective | 157,690,754,629,632      | 100 of 100                     |
+| 522   | objective | 38,318,853,375,000,576   | 72 of 72                       |
+| 522   | seed      | 4,789,856,671,875,072    | 72 of 72                       |
 
 The three exceptions at `q29` have stabilisers of order two. So the group acts essentially freely
 on the states this campaign banks, and each orbit holds about `6.1e10` states at `q29` and about
@@ -191,13 +191,13 @@ on the states this campaign banks, and each orbit holds about `6.1e10` states at
 
 Measured on the census runs, single-threaded, release build:
 
-| Level | Scope | Microseconds per candidate |
-|-------|-----------|-----------|
-| 29    | objective | 145       |
-| 29    | seed      | 135       |
-| 174   | objective | 1,630     |
-| 522   | objective | 19,750    |
-| 522   | seed      | 16,690    |
+| Level | Scope     | Microseconds per candidate |
+|-------|-----------|----------------------------|
+| 29    | objective | 145                        |
+| 29    | seed      | 135                        |
+| 174   | objective | 1,630                      |
+| 522   | objective | 19,750                     |
+| 522   | seed      | 16,690                     |
 
 These include the exact stabiliser count, which costs a `least_period` scan over the divisors of
 `N` per block variant, and the per-state key allocation the census uses for its map. The
@@ -276,18 +276,18 @@ end-to-end matched-budget comparison below is reported instead.
 
 **Campaign-default epochs (4,000 steps), four workers, twenty seconds, five rounds:**
 
-| Round | Arm | Restarts | Orbit-duplicate seeds | Steps | Best `q29` score | Dedup ms |
-|-------|-----------|----|---|---------|----|----|
-| 1 | control   | 73 | — | 288,256 | 32 | — |
-| 1 | candidate | 72 | 0 | 285,536 | 32 | 15 |
-| 2 | control   | 78 | — | 308,256 | 64 | — |
-| 2 | candidate | 77 | 0 | 304,256 | 64 | 17 |
-| 3 | control   | 73 | — | 290,048 | 64 | — |
-| 3 | candidate | 73 | 0 | 288,512 | 64 | 16 |
-| 4 | control   | 76 | — | 300,256 | 64 | — |
-| 4 | candidate | 75 | 0 | 296,256 | 64 | 16 |
-| 5 | control   | 73 | — | 288,256 | 64 | — |
-| 5 | candidate | 73 | 0 | 288,256 | 64 | 16 |
+| Round | Arm       | Restarts | Orbit-duplicate seeds | Steps   | Best `q29` score | Dedup ms |
+|-------|-----------|----------|-----------------------|---------|------------------|----------|
+| 1     | control   | 73       | —                     | 288,256 | 32               | —        |
+| 1     | candidate | 72       | 0                     | 285,536 | 32               | 15       |
+| 2     | control   | 78       | —                     | 308,256 | 64               | —        |
+| 2     | candidate | 77       | 0                     | 304,256 | 64               | 17       |
+| 3     | control   | 73       | —                     | 290,048 | 64               | —        |
+| 3     | candidate | 73       | 0                     | 288,512 | 64               | 16       |
+| 4     | control   | 76       | —                     | 300,256 | 64               | —        |
+| 4     | candidate | 75       | 0                     | 296,256 | 64               | 16       |
+| 5     | control   | 73       | —                     | 288,256 | 64               | —        |
+| 5     | candidate | 73       | 0                     | 288,256 | 64               | 16       |
 
 Paired log-ratio of steps, candidate over control: mean `-0.0083` (a ratio of `0.9918`), standard
 deviation `0.0057`, `n = 5`, `t = -3.26`. Best `q29` score: both arms median 64, both arms
@@ -346,16 +346,16 @@ Acceptance gate, run on the final tree at `b0b0648`: `cargo test --release --wor
 
 ### Group verification: claim against code
 
-| C1151 part B §3.5 claim | Verdict in code |
-|---------------------------------------------------|-----------------------------------------------------|
-| Independent translation of each block, `522^4`     | Confirmed; `order6_galois.rs:27-31` already says so  |
-| Common unit multiplication is a symmetry           | Confirmed; `order6_galois.rs:36-39` already says so, but it was not carried into the claimed order |
-| Permutation of the three equal blocks, `3!`        | Confirmed, and understated: the objective admits all `4!` |
-| "the Goethals--Seidel array and the border impose extra conditions that kill (iii)" | Does not happen; the only thing distinguishing block zero is the declared seeding row-sum law |
-| Per-block index inversion                          | Not named in the claim; is a symmetry, `2^4`, independent across blocks |
-| Per-block value negation                           | Not named in the claim; is a symmetry, `2^4`         |
-| Claimed order `522^4 * 6`                          | Verified order `522^4 * 516,096` at the carrier, `86,016` times larger |
-| Per-block multiplier other than `+-1`              | Verified **not** a symmetry — the negative control    |
+| C1151 part B §3.5 claim                                                             | Verdict in code                                                                                    |
+|-------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| Independent translation of each block, `522^4`                                      | Confirmed; `order6_galois.rs:27-31` already says so                                                |
+| Common unit multiplication is a symmetry                                            | Confirmed; `order6_galois.rs:36-39` already says so, but it was not carried into the claimed order |
+| Permutation of the three equal blocks, `3!`                                         | Confirmed, and understated: the objective admits all `4!`                                          |
+| "the Goethals--Seidel array and the border impose extra conditions that kill (iii)" | Does not happen; the only thing distinguishing block zero is the declared seeding row-sum law      |
+| Per-block index inversion                                                           | Not named in the claim; is a symmetry, `2^4`, independent across blocks                            |
+| Per-block value negation                                                            | Not named in the claim; is a symmetry, `2^4`                                                       |
+| Claimed order `522^4 * 6`                                                           | Verified order `522^4 * 516,096` at the carrier, `86,016` times larger                             |
+| Per-block multiplier other than `+-1`                                               | Verified **not** a symmetry — the negative control                                                 |
 
 The declared seeding scope is not a lossy restriction. A zero of the objective forces exactly one
 block to have block sum `+-2`; negating that block and permuting it into position zero always
@@ -423,16 +423,16 @@ and their enumerations are the ones the card says grant negative coverage.
 
 ## Mystery ledger
 
-| Item | Settled by this spike? | Gap, gate, or owner |
-|------|------------------------|---------------------|
-| Is the C1151 part B group real, and how large? | **Settled.** Real, and `86,016` times larger at the carrier than claimed. Gated by `every_generator_family_fixes_the_*_objective` and `the_group_orders_are_the_declared_products`. | — |
-| Does the Goethals--Seidel border kill the block permutation? | **Settled.** No. The objective admits the full `S4`; only the declared seeding law pins block zero, at a cost of exactly eight. | — |
-| Are the 39 banked shells really inequivalent? | **Settled.** Yes, under a group `10,752` times larger than the one proposed to check them. | — |
-| Does orbit dedup help corpus management or restart seeding? | **Settled, negative.** Zero collisions over 847 banked states and about 660 restarts; cost at most 0.8% of steps. | — |
-| Is the verified group the full symmetry group of the objective? | **Open.** Five families proved; per-block multipliers other than `+-1` disproved. A non-affine position permutation preserving every block autocorrelation is not ruled out. | Would need a classification of the correlation-preserving permutations of `Z/N`; owner is whoever needs the group to be exactly this, which nothing here does — every claim above uses it as a lower bound. |
-| What is the real enumeration reduction factor? | **Open, and it is the question that matters.** `\|G\|` is an upper bound that a constrained enumeration will not reach. | Recommendation 1: measure the subgroup carrying the two-transfer census's enumerated set into itself, before writing canonical augmentation. |
-| Does one tabu run re-enter orbits it has already visited? | **Open.** The spike measured collisions *between* restarts, never *within* a run. | Recommendation 2: sampled canonicalisation at a power-of-two stride, hot loop untouched. |
-| Why is the restart budget sampler-bound? | **Open, incidental.** Epoch cost is about 0.3 CPU-seconds almost independently of step count. | Attribution is by elimination, not by a profile. Logged to the ergodis discovery track; no C-ID allocated. |
+| Item                                                            | Settled by this spike?                                                                                                                                                              | Gap, gate, or owner                                                                                                                                                                                         |                                                                    |                                                                                                                                              |
+|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| Is the C1151 part B group real, and how large?                  | **Settled.** Real, and `86,016` times larger at the carrier than claimed. Gated by `every_generator_family_fixes_the_*_objective` and `the_group_orders_are_the_declared_products`. | —                                                                                                                                                                                                           |                                                                    |                                                                                                                                              |
+| Does the Goethals--Seidel border kill the block permutation?    | **Settled.** No. The objective admits the full `S4`; only the declared seeding law pins block zero, at a cost of exactly eight.                                                     | —                                                                                                                                                                                                           |                                                                    |                                                                                                                                              |
+| Are the 39 banked shells really inequivalent?                   | **Settled.** Yes, under a group `10,752` times larger than the one proposed to check them.                                                                                          | —                                                                                                                                                                                                           |                                                                    |                                                                                                                                              |
+| Does orbit dedup help corpus management or restart seeding?     | **Settled, negative.** Zero collisions over 847 banked states and about 660 restarts; cost at most 0.8% of steps.                                                                   | —                                                                                                                                                                                                           |                                                                    |                                                                                                                                              |
+| Is the verified group the full symmetry group of the objective? | **Open.** Five families proved; per-block multipliers other than `+-1` disproved. A non-affine position permutation preserving every block autocorrelation is not ruled out.        | Would need a classification of the correlation-preserving permutations of `Z/N`; owner is whoever needs the group to be exactly this, which nothing here does — every claim above uses it as a lower bound. |                                                                    |                                                                                                                                              |
+| What is the real enumeration reduction factor?                  | **Open, and it is the question that matters.** `\                                                                                                                                   | G\                                                                                                                                                                                                          | ` is an upper bound that a constrained enumeration will not reach. | Recommendation 1: measure the subgroup carrying the two-transfer census's enumerated set into itself, before writing canonical augmentation. |
+| Does one tabu run re-enter orbits it has already visited?       | **Open.** The spike measured collisions *between* restarts, never *within* a run.                                                                                                   | Recommendation 2: sampled canonicalisation at a power-of-two stride, hot loop untouched.                                                                                                                    |                                                                    |                                                                                                                                              |
+| Why is the restart budget sampler-bound?                        | **Open, incidental.** Epoch cost is about 0.3 CPU-seconds almost independently of step count.                                                                                       | Attribution is by elimination, not by a profile. Logged to the ergodis discovery track; no C-ID allocated.                                                                                                  |                                                                    |                                                                                                                                              |
 
 ## Vibe check
 
