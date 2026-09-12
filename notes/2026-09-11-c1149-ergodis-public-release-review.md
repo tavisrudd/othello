@@ -1705,8 +1705,95 @@ the export repository, which `diff -rq` confirms byte-identical to the core.
   own because it is published whole. The release checklist gained two items: the evidence
   repository must lint clean, and nothing private may appear in its history.
 
-  **Open, needs a decision:** the deletion does not unpublish the file. `AGENTS.md` is still in
-  the export repository's history at `09b6168` (the initial import) and `8260e94`, so publishing
-  that repository with its history republishes the guide. The repository has only four commits,
-  so the options are cheap: publish a fresh single-commit history, or rewrite the existing one.
-  Both are history rewrites and need Tavis's explicit approval.
+  **Resolved by the publication workflow below (2026-09-12).** The deletion alone does not
+  unpublish the file — `AGENTS.md` remains in that repository's history at `09b6168` and
+  `8260e94` — but its published branch now starts at a root commit, so that history is never
+  reachable from what is published and no history rewrite is needed.
+
+## Evidence publication workflow, 2026-09-12 (core `927c618`, export `985698a`)
+
+Tavis's instruction: the evidence repository follows the same main/staging/public workflow the
+core uses (`~/src/ergodis/docs-private/README.md`). Implemented, with the guard tooling shared
+rather than duplicated.
+
+### Shape
+
+`~/src/ergodis-evidence` now has a private `main` carrying the full refresh history, a `public`
+branch that will hold filtered snapshots, a staging clone at
+`~/src/ergodis-evidence-public` owning the only GitHub URL
+(`git@github.com:tavisrudd/ergodis-evidence.git`), and the core's `pre-push`/`pre-commit` hooks
+through an absolute `core.hooksPath`. It carries no scripts, no hooks and no contributor
+documents — only data, a `.publicignore` and a `.publication-profile` — which is precisely what
+lets it be published whole.
+
+### One set of tooling, driven per repository
+
+Every publication-managed repository carries `.publication-profile` declaring its published URL,
+staging path, validation script, and which text rewrites apply on export. Each command now takes
+`--repo <path>`:
+
+```sh
+scripts/export-public.sh      --repo ../ergodis-evidence [--new-public-history] main <notes> <tag>
+scripts/configure-remotes.sh  --repo ../ergodis-evidence
+scripts/install-hooks.sh      --repo ../ergodis-evidence
+ERGODIS_PUBLISH=1 scripts/publish-to-staging.sh --repo ../ergodis-evidence <tag>
+```
+
+`scripts/publication-profile.sh` resolves the target repository and reads its profile; an
+unrecognized profile key is an error rather than a silent default, because each key controls a
+guard. `public-lint.sh` gained `--repo` so it can resolve a tree-ish inside another repository.
+The two rewrites the core needs — stripping the originating monorepo path, and turning
+`evidence/<name>` prose links into the evidence repository's URL — are now profile flags, because
+the evidence repository holds the real `evidence/` directory and must not rewrite its own paths
+away. `staging/publish.sh` reads its destination from `.publish/public-url`, written by
+`configure-remotes.sh`, so one copy serves both repositories with no URL compiled into it.
+
+### The history problem is solved by construction
+
+`export-public.sh --new-public-history` starts a `public` branch at a **root commit**. The
+evidence repository's first export will use it once, so its private history — which includes the
+revisions carrying the hostname, the monorepo paths, the task identifiers and the deleted agent
+guide — is unreachable from anything published. This closes the open question from the previous
+section: no history rewrite is needed, because the published branch never contains that history in
+the first place. The flag is explicit, so extending an existing public history can never silently
+become a fresh unrelated one, and a second `--new-public-history` on a repository that already has
+a `public` branch is refused.
+
+### Evidence-specific release validation
+
+`staging/validate-evidence-release.sh` is installed into the evidence staging checkout as
+`.publish/validate-release.sh`, replacing the crate's build-and-test gate for a repository that
+ships data. It requires the public lint on the tracked tree, `sha256sum -c SHA256SUMS`, every
+file under `evidence/` and `proptest-regressions/` covered by that manifest, and no tracked
+process document under any name — so an agent guide reappearing there fails the release rather
+than shipping.
+
+### Validation
+
+`tests/publication-guards.sh` grew eighteen fixture checks and passes 69 of 69. They cover the
+whole evidence path end to end against synthetic repositories: the first export refused without
+`--new-public-history`, the root commit having no parent, `main` unreachable from `public`, the
+profile and ignore list dropped from the export, a reappearing agent guide dropped, the second
+export refusing the flag, `configure-remotes` installing the evidence validation script and the
+right URL, the validation catching both a checksum mismatch and a file outside the manifest, the
+hook refusing a push of `main` to staging, and `publish-to-staging` moving the snapshot only with
+`ERGODIS_PUBLISH=1`. `shellcheck -S warning` is clean on every changed script.
+
+### Not done, deliberately
+
+No export, tag, staging clone or publication was created. There is no release tag in either
+repository yet, and evidence tags match the core release tag they belong to, so the first evidence
+export happens at the first core release. `docs-private/evidence-export.md` carries the exact
+command sequence, including that `configure-remotes.sh` must run after the first export, because
+the staging clone is built from the `public` branch while the GitHub repository does not exist.
+
+### Found while doing it
+
+**The core's own `public` branch predates the guards.** It holds eleven commits, all of them
+ordinary `main` commits rather than filtered snapshots — `git merge-base --is-ancestor public
+main` succeeds — and no export has ever run (`EXPORTS.md` does not exist). Its tip tree contains
+`evidence/benchmarks.json`, `evidence/contextual-state-ab.json` and `evidence/results.json`, which
+`.publicignore` excludes today; the `benchmarks.json` in that history is the pre-scrub file, with
+`"node": "grover"` in it. Publishing that branch would publish those commits. The same remedy
+applies — restart `public` at a root commit with `--new-public-history` — and the release
+checklist now carries it as a decision to take before the first release.
