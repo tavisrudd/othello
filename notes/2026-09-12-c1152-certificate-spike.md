@@ -507,8 +507,8 @@ Two negatives worth keeping so they are not retried blindly.
 
 The measured headroom is large and the linear-program family is not reaching it: on case 2, 57%
 of weight-two candidates pass the engine's rule and only 6.6% of those admit an exact
-completion, so a perfect refusal would remove about fifteen times more work than the dual
-multipliers do.
+completion. A perfect refusal would therefore remove 93% of the surviving candidates, against
+the 11.6% the multipliers remove — about eight times as much.
 
 ### Validation
 
@@ -549,7 +549,7 @@ foreign work and were reported, not fixed.
 | C1093 count readout | Yes — neither min-cost nor all-solutions, a closed-form saturating capacity count | Removes C1093 as a second instantiation for a polymorphic verifier |
 | Saturating multiply against the absent sentinel | New, and open | `saturating_add` can manufacture `u32::MAX`, which the verifier reads as no path; a properties mask cannot express it, so it needs a declared carrier-exactness flag. Owner: C1155, which already owns the sentinel |
 | Why the bound is inert at radius three | Yes — a residual after `w` columns has dual weight at most `w · scale`, so any bound of this family only acts once more than half the radius is spent | Shallow probes cannot evaluate a bound; gate depth accordingly |
-| Whether a stronger multiplier vector exists | Open | Fifteen times more headroom is measured than the linear program captures; ascent from uniform and frequency-fitted objectives are both closed negatives |
+| Whether a stronger multiplier vector exists | Open | About eight times more headroom is measured than the linear program captures; ascent from uniform and frequency-fitted objectives are both closed negatives |
 | Whether the accumulator can leave the toggle path | Open | It is the whole cost: +9.4% instructions for a 5.28% work saving |
 | `frame`'s full-bitmap scan | Open, adjacent | Throughput falls from about 60 to about 12 million candidates per second as detector count grows; C1143 provider work, not this slice |
 
