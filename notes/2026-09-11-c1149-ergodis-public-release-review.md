@@ -1306,8 +1306,12 @@ allowlist filter is line-scoped and a hardcoded fork of `.public-lint-allow`; `p
     AGPL-licensed. Tavis is the sole copyright holder, so distributing a combined AGPL core +
     proprietary payload is his to license; but the public repository must carry a separate,
     explicit license notice for the payloads (demo use only, no redistribution, no source
-    offer) so that AGPL recipients do not assume the payloads are covered by `LICENSE`. This is
-    a new Phase 2 item.
+    offer) so that AGPL recipients do not assume the payloads are covered by `LICENSE`. The
+    private payloads already carry embedded proprietary markers; the demo directory must
+    additionally state this in plain text, as a notice file placed beside the payloads (for
+    example `wasm/www/modules/NOTICE`) and a sentence in the README license section listing
+    which paths are proprietary. The notice file is written when the payloads land (Phase 5,
+    demo agent's territory); the README sentence is a Phase 2 item.
   - Payloads exceed the public lint's 1 MiB size cap (the public wasm alone is 1.36 MB raw), so
     either the cap is raised per path or payloads ship as GitHub release assets fetched by the
     page. Decide in Phase 4.
