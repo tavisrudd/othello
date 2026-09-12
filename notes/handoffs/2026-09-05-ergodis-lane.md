@@ -56,7 +56,7 @@ interface, explicit reproof when external evidence must be regenerated, and
 claim/source-preserving adapters to justified industry formats/checkers.
 Private decision: `ergodis-private/docs/adr/0003-certificate-interoperability.md`.
 Inventory and implementation are queued; no universal VIPR compatibility is
-claimed. C1143 remains active and resumes its SCIP exact/VIPR comparison.
+claimed. C1143 remains active on benchmark/provider improvements; exact/VIPR control evidence is linked below.
 
 ### C1143–C1147 — external benchmark programme
 
@@ -85,10 +85,17 @@ needed to run it. Private `analysis/external-benchmarks/2026-09-11-gurobi-circui
 SCIP 10.0.2: all nine development controls (full/filtered/projected × XOR/linear/both)
 remain unresolved at 30 s with measured three-worker concurrency. Private
 `analysis/external-benchmarks/2026-09-11-scip-circuit-comparison.md` records results
-and the proof-output comparison. Next certification gate: measure the accepted Ergodis
-exhaustive replay capsule against SCIP exact/VIPR, including original-source coverage,
-proof bytes, completion and independent verification cost. Ordinary SCIP runs did
-not enable proof logging; checked reductions alone are not an exclusion proof.
+and the proof-output comparison. Exact-SCIP/VIPR controls and generated independent
+proof checks are recorded in private `analysis/external-benchmarks/2026-09-11-scip-exact-proof-comparison.md`.
+The native/WASM sparse provider and independent-checking demo are live on
+`http://127.0.0.1:8770/circuit-distance`; scope, repeated timings and lifecycle tests:
+private `analysis/external-benchmarks/2026-09-11-portable-circuit-demo.md`.
+Additional SCIP cardinality and HiGHS default/parallel controls:
+private `analysis/external-benchmarks/2026-09-11-mip-objective-controls.md`.
+No completed comparator exclusion or Gurobi timing is claimed. Next provider gate:
+resumable frontier and worker-owned telemetry; current sparse adapter is serial
+per arm and uses shard request/reply calls. Broader external-proof compatibility
+remains C1148. Checked reductions alone are not an exclusion proof.
 Report:
 private `analysis/external-benchmarks/2026-09-11-coordinate-retraction.md`;
 policy/evidence under the same directory. Initial gate:
