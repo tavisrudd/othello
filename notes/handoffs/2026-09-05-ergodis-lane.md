@@ -47,9 +47,11 @@ the C985 optimization-facing paper.
 Gap assessment and six-phase remediation plan for releasing the core as an AGPL library/CLI
 with docs and demos on GitHub: `../2026-09-11-c1149-ergodis-public-release-review.md`.
 Phase 0 decisions (evidence publication, paper deposit, copyright/contact, product scope, public
-CI) are Tavis's; phases 1–5 are unallocated successor tasks. Evidence hygiene is done: core
-`4fb1a01`, export `3c4aaa5`, lint clean. Open decisions and the remaining gaps are in the
-report's 2026-09-12 section.
+CI) are Tavis's; phases 1–5 are unallocated successor tasks. Evidence hygiene is done, the
+evidence repository follows the same main/staging/public workflow, and the crate has its first
+filtered snapshot: public `3291659`, tag `v0.1.0-preview1`, staging rebuilt and its downstream
+build-and-test validation passing. Nothing is pushed to GitHub. Open decisions and remaining gaps
+are in the report's 2026-09-12 sections.
 
 ### C1150 — category theory for the core and Evolve (complete, successors unallocated)
 
