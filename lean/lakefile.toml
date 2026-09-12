@@ -56,3 +56,7 @@ roots = [
 # Hadamard matrices built from circulant sequences by the Goethals–Seidel array.
 [[lean_lib]]
 name = "HadamardMatrices"
+
+# Finite weighted polynomial rules and bounded convergence certificates.
+[[lean_lib]]
+name = "WeightedRules"
