@@ -5,7 +5,7 @@
   "LICENSE",
   "Makefile",
   "README.md",
-  "companion.pdf",
+  "clebsch-cubic-phase.pdf",
   "flake.lock",
   "flake.nix",
   "formal-annotations.tex",

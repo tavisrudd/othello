@@ -11,7 +11,7 @@
   "upload_type": "publication",
   "publication_type": "preprint",
   "notes": "Correspondence: tavis@damnsimple.com",
-  "title": "Strength-two trades and transversal cubic gates: the Clebsch cubic-phase codes and their magic",
+  "title": "Strength-Two Trades and Transversal Cubic Gates: The Clebsch Cubic-Phase Codes and Their Magic",
   "description": "Strength-two signed trades define high-rate error-detecting qudit codes whose surviving third moment is a transversal logical cubic phase. The paper studies conic-matching examples through exact Hessian-rank and Pauli spectra. The ten-qudit example over the field of eleven elements is not Clifford-equivalent to a product across any bipartition. For the six-qudit example over the field of seven elements, exact enumerators prove a resource advantage over specified independent primitive-distillation menus for independent uniform Z noise, ideal Clifford operations, and input error between zero and one percent. A chordal restriction identifies the Clifford action of geometric sign choices. The scholarly supplement records finite computations and their trust boundaries; no Lean coverage is claimed.",
   "keywords": [
     "quantum error detection",

@@ -292,7 +292,7 @@ boundary, and reproducible entry points.
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | Algebraic geometry / topology | The rank-130 integral middle lattice has canonical mod-two glue, while the same resolution carries a factor-three integral perverse attachment, a length-three modular Loewy chain, and failure of relative hard Lefschetz modulo three. | [PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [repo](https://github.com/tavisrudd/blown-up-theta-lattice) |
 | Frobenius-equivariant Pair Extension and Robust Repair of Eight-Arcs | Finite geometry / coding theory | Fixed mate-line carriers and exact collision corrections give Frobenius-compatible paired MDS extensions, including the exact two-fixed-point minimum over F₂₅. | [PDF](https://github.com/tavisrudd/equivariant-robust-completion/blob/main/equivariant-robust-completion.pdf) · [repo](https://github.com/tavisrudd/equivariant-robust-completion) |
 | Exact Compositional Transfer of Bounded Linear Recovery | Coding theory / distributed storage | Exact labelled composition reconstructs recovery witnesses; target-touching outer dual distance confines bounded minimal repair supports even when equations can escape. | [PDF](https://github.com/tavisrudd/compositional-recovery/blob/main/compositional_recovery.pdf) · [repo](https://github.com/tavisrudd/compositional-recovery) · [Ergodis](https://github.com/tavisrudd/ergodis) |
-| Strength-two trades and transversal cubic gates: the Clebsch cubic-phase codes and their magic | Quantum coding / finite geometry | Strength-two signed trades give high-rate error-detecting qudit codes whose surviving third moment is a transversal logical cubic phase; the ten-qudit `F₁₁` resource has no Clifford-product decomposition across any bipartition, and joint preparation of the six-qudit `F₇` resource beats the specified independent distillation menu. | [PDF](https://github.com/tavisrudd/clebsch-cubic-phase/blob/main/companion.pdf) · [repo](https://github.com/tavisrudd/clebsch-cubic-phase) |
+| Strength-Two Trades and Transversal Cubic Gates: The Clebsch Cubic-Phase Codes and Their Magic | Quantum coding / finite geometry | Strength-two signed trades give high-rate error-detecting qudit codes whose surviving third moment is a transversal logical cubic phase; the ten-qudit `F₁₁` resource has no Clifford-product decomposition across any bipartition, and joint preparation of the six-qudit `F₇` resource beats the specified independent distillation menu. | [PDF](https://github.com/tavisrudd/clebsch-cubic-phase/blob/main/clebsch-cubic-phase.pdf) · [repo](https://github.com/tavisrudd/clebsch-cubic-phase) |
 
 The repository for *Reconstructing the Clebsch Code from Its Deep-Hole
 Syndrome Locus* also contains the computational companion
@@ -1070,9 +1070,9 @@ oriented, and calibrated observables.
 
 ---
 
-#### Strength-two trades and transversal cubic gates: the Clebsch cubic-phase codes and their magic
+#### Strength-Two Trades and Transversal Cubic Gates: The Clebsch Cubic-Phase Codes and Their Magic
 
-[PDF](https://github.com/tavisrudd/clebsch-cubic-phase/blob/main/companion.pdf) · [Repository](https://github.com/tavisrudd/clebsch-cubic-phase) · [![Concept DOI](https://img.shields.io/badge/Concept_DOI-10.5281%2Fzenodo.22666172-blue.svg)](https://doi.org/10.5281/zenodo.22666172)
+[PDF](https://github.com/tavisrudd/clebsch-cubic-phase/blob/main/clebsch-cubic-phase.pdf) · [Repository](https://github.com/tavisrudd/clebsch-cubic-phase) · [![Concept DOI](https://img.shields.io/badge/Concept_DOI-10.5281%2Fzenodo.22666172-blue.svg)](https://doi.org/10.5281/zenodo.22666172)
 
 **Standout result.** Two signed point sets that agree on every quadratic
 polynomial define an error-detecting qudit code whose surviving third moment is

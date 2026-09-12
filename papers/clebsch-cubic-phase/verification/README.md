@@ -36,7 +36,7 @@ is no floating-point decision or random seed in this certificate.
 
 `check_pdf.py` copies TeX sources to a fresh directory, builds twice using the
 pinned epoch and toolchain, rejects layout/reference warnings, and requires
-byte equality with `companion.pdf`. It writes no manuscript source.
+byte equality with `clebsch-cubic-phase.pdf`. It writes no manuscript source.
 
 ## Evidence identity
 

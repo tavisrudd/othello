@@ -1,13 +1,13 @@
-# Strength-two trades and transversal cubic gates
+# Strength-Two Trades and Transversal Cubic Gates
 
 [![Concept DOI](https://img.shields.io/badge/Concept_DOI-10.5281%2Fzenodo.22666172-blue.svg)](https://doi.org/10.5281/zenodo.22666172)
 
 ## Read the paper
 
-[**Open the paper (PDF) →**](companion.pdf)
+[**Open the paper (PDF) →**](clebsch-cubic-phase.pdf)
 
-**Title:** *Strength-two trades and transversal cubic gates: the Clebsch
-cubic-phase codes and their magic*
+**Title:** *Strength-Two Trades and Transversal Cubic Gates: The Clebsch
+Cubic-Phase Codes and Their Magic*
 
 **Author:** Tavis Rudd ([ORCID](https://orcid.org/0009-0003-6405-3275)).
 
@@ -103,7 +103,8 @@ private checkout or account-specific file path.
 
 ## Files
 
-- `companion.pdf` is the paper; `main.tex` and `sections/` are its source.
+- `clebsch-cubic-phase.pdf` is the paper; `main.tex` and `sections/` are its
+  source.
 - `verification/` contains the claim, imported-source and evidence maps,
   checksums, deterministic lightweight checks and their certificates.
 - `supplement/reconstruction/` contains signed conic matrices and exact checks.

@@ -21,6 +21,6 @@ with tempfile.TemporaryDirectory(prefix='pdf-',dir=cache) as tmp:
     log=(copy/'pass1.log').read_text()
     warnings=[line for line in log.splitlines() if re.search(r'Overfull|Underfull|undefined|LaTeX Warning:',line)]
     assert not warnings,'TeX diagnostics: '+'; '.join(warnings)
-    actual=(ROOT/'companion.pdf').read_bytes()
-    assert actual==(copy/'build/main.pdf').read_bytes(),'companion.pdf differs from a fresh build; run make pdf'
+    actual=(ROOT/'clebsch-cubic-phase.pdf').read_bytes()
+    assert actual==(copy/'build/main.pdf').read_bytes(),'clebsch-cubic-phase.pdf differs from a fresh build; run make pdf'
     print('PASS: byte-identical PDF, no layout/reference warnings; SHA256 '+hashlib.sha256(actual).hexdigest())

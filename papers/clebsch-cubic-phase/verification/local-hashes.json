@@ -4,8 +4,8 @@
     "sha256": "e5e839cd0b593ba163735c714cac55a6c2cdfd9df4108e3989afb8b885e5f44c"
   },
   "verification/check_pdf.py": {
-    "bytes": 1410,
-    "sha256": "e931e0a3d8580bb3ca7f69edb7c8448bad8f25811cd7e26af101a3db43fd66cc"
+    "bytes": 1430,
+    "sha256": "c138f764efffe280ca5a6932b69f8d55c5360aef3e2d499383380f9fbe7f6ff6"
   },
   "verification/finite-certificate.json": {
     "bytes": 909,
