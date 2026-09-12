@@ -4958,8 +4958,17 @@
       "last": 1151,
       "purpose": "C1150 second pass, capability-first: gradient and small-NN methods allowed (no large nets/GPU); Galois connections, partition refinement, symmetry, Lawvere, Markov categories; algorithm-depth reads and reference implementations",
       "sequence": 551
+    },
+    {
+      "count": 6,
+      "first": 1152,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1157,
+      "purpose": "C1151 implementation slices: certificate/ban store with bounds; C1016 group quotient; FeatureDag interval+acyclicity; partition-refinement quotients and sentinel; Evolve learned ordering and Markov discipline; equality-saturation spike",
+      "sequence": 552
     }
   ],
-  "next_id": 1152,
+  "next_id": 1158,
   "schema": "codex-task-id-allocations-v1"
 }

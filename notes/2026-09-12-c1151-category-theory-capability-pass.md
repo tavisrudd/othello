@@ -156,6 +156,24 @@ broadcast (β = 1) shapes before any kernel is written.
    checkers reordered with a counted drop in wasted proposals; no evidence claim touched.
 5. **Rewrite bet**: row 9 as its own spike after slices 1–3.
 
+## Allocated slices (2026-09-12)
+
+Tavis queued all five slices plus the rewrite bet. Rows refer to the merged ranking above;
+each queue row carries the gate.
+
+| ID | Slice | Rows | Order |
+|---|---|---|---|
+| C1152 | certificate: ban store, bound law, polymorphic verifier, omission step | 2, 3, 4, 8 | first (highest EV) |
+| C1153 | C1016 lossless group quotient | 11 | second |
+| C1154 | FeatureDag interval pass + acyclicity | 1, 5 | runner-up |
+| C1155 | sentinel, weight pushing, partition refinement | 6, 7 | runner-up |
+| C1156 | Evolve learned ordering, Markov discipline, screen cost rule | 10, 13, Aksu | runner-up |
+| C1157 | equality-saturation spike | 9 | after C1152 and C1154 |
+
+Every slice begins by reading the Ergodis code for the assumptions the dossiers took from
+documentation (mystery ledger above). No evidence claim is touched by any slice; gradient,
+small-model and GPU components order, bound or propose, never certify.
+
 ### Mystery ledger
 
 | Item | Settled? | Gap or owner |

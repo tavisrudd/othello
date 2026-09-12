@@ -64,8 +64,9 @@ the capability-first second pass covering the dropped gradient material, Galois
 connections, partition refinement, symmetry, Lawvere theories, Markov categories, and
 algorithm-depth reads with reference implementations:
 `../2026-09-12-c1151-category-theory-capability-pass.md`; its merged 19-row ranking
-supersedes C1150's and proposes five implementation slices. **Waiting on Tavis**: allocate
-slices (recommended first: the offline FeatureDag slice, interval pass plus acyclicity check).
+supersedes C1150's and proposes five implementation slices. Slices are allocated: C1152 certificate (first), C1153 C1016 group quotient, C1154
+FeatureDag interval/acyclicity, C1155 sentinel/weight pushing/partition refinement, C1156 Evolve
+ordering, C1157 equality-saturation spike after C1152/C1154. Gates in the queue rows and card.
 
 ### C1148 — certificate interoperability (queued)
 
