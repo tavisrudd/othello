@@ -7,8 +7,8 @@ schema_version = 1
 [[bridge]]
 name = "clebsch-rigidity"
 repository = "finitegeom-clebsch-rigidity-bridge"
-bridge_commit = "b525f04b52c44a0315ac80f569761d133b8b48a2"
-export_source_commit = "e2e8cf03b4b7eee7ab39c242d619279b7ed589f8"
+bridge_commit = "d557f99a844926265a0ac493f665eab6e7b1f078"
+export_source_commit = "4c55fd9a6c77453b927121984c9c1b7c46b59b2a"
 lean_library = "ClebschRigidityBridge"
 source = "paper-bridges/clebsch-rigidity/TavisRuddFiniteGeom/Papers/ClebschRigidity/CertificateCompatibility.lean"
 license_source = "papers/clebsch-rigidity/LICENSE"

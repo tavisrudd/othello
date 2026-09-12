@@ -61,3 +61,24 @@ The first combined context read exceeded the workspace's output bound and was
 truncated. It was replaced by bounded reads of the required documents. One test
 edit used a repository-relative path from the paper directory and failed before
 writing; it was corrected with the proper root and all tests passed.
+
+## Recovery and prevention
+
+The failed Lake dependency materialization had followed the finitegeom symlink
+and recursively emptied its target, including `.git` and build artifacts,
+before refusing to replace the symlink. This was a destructive side effect of
+the existing exported verifier, triggered by this continuation's replay.
+
+Recovery copied the complete finitegeom checkout from the read-only filesystem
+snapshot `/home/.zfs/snapshot/2026-09-02--21-30/tavis/src/lean/finitegeom/`.
+That snapshot has exactly the current `f7b9743` head and includes its build
+artifacts. The restored tracked tree is clean. The certificate repository and
+its sealed artifacts survived unchanged. A fresh guarded revalidation uses
+`run-20260912-210207-525e11fd`.
+
+The bridge exporter now validates both direct dependency revisions and every
+Git dependency symlink against the lock before installing source links or
+invoking Lake. A stale lock fails without touching the source; a regression
+test verifies preservation of a sentinel behind the symlink. Exporter and
+audit suites pass (14 and 8 tests). The repaired bridge is `d557f99a`, exported
+from authority `4c55fd9a6`; the final paper pin names that revision.
