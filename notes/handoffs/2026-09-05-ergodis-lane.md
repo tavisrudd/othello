@@ -59,12 +59,13 @@ exclusion half for certificates with bound composition for `ordered_resource`. T
 offline checks (FeatureDag weak term acyclicity, weight-pushing canonical summaries) stand
 alone. Combined ranking, mystery ledger and the two proposed successor slices:
 `../2026-09-12-c1150-category-theory-for-ergodis.md`. Scope was corrected by Tavis:
-gradient and small-NN methods are in; only large nets are out; GPU acceleration is available for Evolve. C1151 (in progress) is
+gradient and small-NN methods are in; only large nets are out; GPU acceleration is available for Evolve. C1151 (complete) is
 the capability-first second pass covering the dropped gradient material, Galois
 connections, partition refinement, symmetry, Lawvere theories, Markov categories, and
 algorithm-depth reads with reference implementations:
-`../2026-09-12-c1151-category-theory-capability-pass.md`. Implementation slices are
-allocated after C1151 merges.
+`../2026-09-12-c1151-category-theory-capability-pass.md`; its merged 19-row ranking
+supersedes C1150's and proposes five implementation slices. **Waiting on Tavis**: allocate
+slices (recommended first: the offline FeatureDag slice, interval pass plus acyclicity check).
 
 ### C1148 — certificate interoperability (queued)
 

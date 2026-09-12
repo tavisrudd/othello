@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-12
-**Status**: IN PROGRESS (started 2026-09-12)
+**Status**: COMPLETE (reported 2026-09-12); implementation slices unallocated
 **Predecessor**: `2026-09-12-c1150-category-theory-for-ergodis.md`
 
 ## Why a second pass
@@ -122,6 +122,21 @@ GPU / small model / gradient. Nothing needs a deep or large network.
 | 17 | Learned branching inside exact kernels | hot loop | small model | medium, only hot-path row | A-13 |
 | 18 | PolyCirc reverse derivative over saturating/prime semirings; reverse-mode AD on a relaxation | Evolve discrete parameters | gradient | low | A-7, B-14 |
 | 19 | GPU linear-algebraic refinement | quotients, C1016 | GPU | low | B-13 |
+
+**Addendum, Aksu's *Odds Law* (arXiv:2606.15712, Tavis-supplied; part A §3.3, full text,
+proofs checked).** The odds law, threshold dichotomy, information ceiling and recursion
+theorem hold; the no-free-lunch corollary and the complete-lattice lemma rest on sketches.
+For Ergodis the reliability half is vacuous (α = 0, one gate certifies), so the log-odds
+objective must not be imported. What survives is the cost valuation, an exact semiring
+homomorphism: (1/p)(c_propose + c_check) per admitted proposal, T ≥ ln δ / ln(1−p) for an
+admission budget, and a verified campaign exactly correct at any depth with cost as the live
+recurrence. The paper does not treat screens that save another verifier's cost; the rule
+derived from its cost homomorphism (auditor's own) is that a screen must be one-sided
+(β_s = 1, else a proof-generating run silently becomes heuristic) and pays exactly when
+c_s < c_x · (1−p) · (1−α_s). That is the same object as the dual-bound prune in row 3.
+Amplification returns in one place: cascading independently implemented checkers against
+implementation faults, the C1097 defect class. Rows A-14/15/16 in part A; merged here as
+part of slice 2's gate (screen cost rule) and slice 4 (admission budget).
 
 **GPU design rule from part A**: WGSL has exact u32 and no f64, so the GPU filters and
 orders while the CPU certifies; the weaves cost model retargets by substituting four numbers

@@ -5668,3 +5668,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1142 `[cubic-threefolds]` [REPORTED 2026-09-11]** — sharpness exposition complete, checked and exported: proof order, universal tangent-cover lemma and optional-material compression → `notes/2026-09-11-c1142-sharpness-exposition.md`
 
 - **C1150 `[ergodis]` [REPORTED 2026-09-12]** — category-theory literature study for the core and Evolve complete: Abbott/Zardini negative-information programme, cats4ai priors, compilers, sheaf/semiring solvers, normalization, certificates; 47 sources, combined 13-row absorption ranking → `notes/2026-09-12-c1150-category-theory-for-ergodis.md`
+
+- **C1151 `[ergodis]` [REPORTED 2026-09-12]** — capability-first category-theory second pass complete: gradient/small-model/GPU scope, Galois connections, partition refinement, symmetry, Lawvere theories, Markov categories, Aksu odds law; 19-row merged ranking and five proposed implementation slices → `notes/2026-09-12-c1151-category-theory-capability-pass.md`
