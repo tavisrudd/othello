@@ -116,6 +116,12 @@ continuations now preserve exact candidate counts with zero allocations; the dem
 uses the shared worker-owned typed telemetry loop and has no 50-million-check cap.
 Native A/B and browser lifecycle evidence:
 private `analysis/external-benchmarks/2026-09-11-fault-continuation.md`.
+Large-domain frame selection can now scan the selected fault supports instead
+of all syndrome words, preserving exact ordering and zero allocations. The
+4,032-detector coordinate-spacing control improves ~4–5%; native/WASM and browser
+checks pass. Private `analysis/external-benchmarks/2026-09-12-sparse-frame-selection.md`.
+The quoted 60M→12M native slowdown still needs its exact workload reproduced;
+portable admission remains capped at 4,096 detectors.
 Next provider gate: deterministic subtree parallelism and deeper declared hold-outs;
 the sparse browser adapter remains serial per arm. Broader external-proof compatibility
 remains C1148. Checked reductions alone are not an exclusion proof.
