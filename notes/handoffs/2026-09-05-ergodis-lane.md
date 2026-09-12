@@ -66,7 +66,7 @@ algorithm-depth reads with reference implementations:
 `../2026-09-12-c1151-category-theory-capability-pass.md`; its merged 19-row ranking
 supersedes C1150's and proposes five implementation slices. Spikes C1152 and C1153 are closed as measured negatives with corrected facts:
 `../2026-09-12-c1152-certificate-spike.md` (dual bound sound but inert below half radius;
-hold-out declines are budget limits; verifier is a concrete u32 type whose saturating add
+hold-out sources exhaust radius three in seconds, so the frozen declines are proposal/candidate budget limits at that depth only, not evidence about deeper radii; verifier is a concrete u32 type whose saturating add
 collides with the absent sentinel) and `../2026-09-12-c1153-group-quotient-spike.md` (group is
 522⁴·516,096; orbits of banked states are all distinct; seed dedup not worth building). Spike
 branches `spike/c1152-certificate` and `spike/c1153-group-quotient` in `~/.cache/ergodis/worktrees/`.
