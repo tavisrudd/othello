@@ -226,7 +226,9 @@ class ReleaseRunnerTests(unittest.TestCase):
                     ".lake/build/lib/lean/TavisRuddFiniteGeom/Certificates/Q11.trace",
                     '(cd "$certificate_root" && lake unpack "$certificate_pack")',
                     "sha256sum --check --status",
-                    "lake env lean TavisRuddFiniteGeom/Papers/ClebschRigidity/CertificateCompatibility.lean",
+                    '"$finitegeom_root" "$certificate_root" TavisRuddFiniteGeom/Papers/ClebschRigidity/CertificateCompatibility.lean',
+                    'subprocess.run(["lean", sys.argv[3]])',
+                    '("TARGET_MANIFEST.json", "MANIFEST.json")',
                 )
             )
             (bridge / "flake.nix").write_text(safe_flake, encoding="utf-8")

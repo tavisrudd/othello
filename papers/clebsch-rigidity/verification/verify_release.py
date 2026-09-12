@@ -422,7 +422,9 @@ def validate_sealed_certificate_contract(
         ".lake/build/lib/lean/TavisRuddFiniteGeom/Certificates/Q11.trace",
         'cd "$certificate_root" && lake unpack',
         "sha256sum --check --status",
-        "lake env lean TavisRuddFiniteGeom/Papers/ClebschRigidity/CertificateCompatibility.lean",
+        '"$finitegeom_root" "$certificate_root" TavisRuddFiniteGeom/Papers/ClebschRigidity/CertificateCompatibility.lean',
+        'subprocess.run(["lean", sys.argv[3]])',
+        '("TARGET_MANIFEST.json", "MANIFEST.json")',
     )
     if any(fragment not in flake for fragment in required_fragments):
         raise ValueError("paper bridge verifier omits a sealed compatibility check")

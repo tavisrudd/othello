@@ -82,3 +82,37 @@ invoking Lake. A stale lock fails without touching the source; a regression
 test verifies preservation of a sentinel behind the symlink. Exporter and
 audit suites pass (14 and 8 tests). The repaired bridge is `d557f99a`, exported
 from authority `4c55fd9a6`; the final paper pin names that revision.
+
+The post-recovery human gate passes trace-current. The next isolated bridge
+attempt safely reached Lean, then exposed a namespace search-path collision:
+finitegeom now has its own `TavisRuddFiniteGeom` artifact directory, which hid
+the certificate package's `TavisRuddFiniteGeom.Certificates.Q11.PointOrbits`
+artifact. Its sealed file was present. The exported verifier now prepends the
+certificate artifact root to Lake's existing Lean search path and executes the
+same Lean compatibility module. No source, theorem, or certificate changes.
+The final bridge pin is `b9d0cb5445241726c242777eec366a5842ed4222`, exported
+from `5cbe69b57`. The paper's sealed-contract check and regression fixture
+follow the exact new invocation; all 29 paper tests pass.
+
+Reordering alone was insufficient because the certificate cache also retains
+an obsolete `RelativeConicArcs` directory. The final implementation composes a
+temporary import directory of symlinks to only the artifacts owned by the two
+sealed source manifests. This merges shared namespaces module by module,
+rejects duplicate ownership, preserves both caches, and cleans up after Lean
+exits. The regression fixture places mutually shadowing stale artifacts in
+both packages and checks correct module selection and cache preservation.
+The final bridge is `6f0b927b0546f3256a0d60c4318810d479864530`, exported
+from `ab749fc00`; exporter/audit/paper tests pass (15 / 8 / 29).
+
+One export attempt correctly refused because its newly adopted bridge pin was
+not committed in the registry. The shell then accidentally retried the old
+verifier, reproducing the same harmless namespace error. The registry was
+committed before the subsequent successful export; dependent command batches
+now stop on the first error. A regeneration command also used the repository
+root instead of the paper root and failed without writing; it was corrected.
+
+The repaired bridge passes its guarded verification at
+`verify-20260912-211222-793d2a56` (about three minutes). The temporary artifact
+view resolves both package namespaces and Lean elaborates the unchanged
+`TavisRuddFiniteGeom.Papers.ClebschRigidity.CertificateCompatibility` module.
+The source snapshot is recovered and the frozen certificate was never rebuilt.

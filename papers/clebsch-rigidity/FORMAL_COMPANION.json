@@ -17,7 +17,7 @@
       "role": "certificate"
     },
     {
-      "commit": "d557f99a844926265a0ac493f665eab6e7b1f078",
+      "commit": "6f0b927b0546f3256a0d60c4318810d479864530",
       "depends_on": [
         "shared-library",
         "certificate"

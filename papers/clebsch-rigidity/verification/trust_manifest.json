@@ -2019,7 +2019,7 @@
   "formal_companion": {
     "path": "FORMAL_COMPANION.json",
     "repository": "paper",
-    "sha256": "170aaf1ee4d534320dc1234a0245f3a018b3d9c5a3ab1987c7f69dd897fb846f"
+    "sha256": "50ede42f3cb831d2fbef71ef62ab06279627cdeda86a868c195013dcb6d3603d"
   },
   "formal_verification": {
     "bridge_gate": {
@@ -2030,7 +2030,7 @@
     "bridge_manifest": {
       "path": "MANIFEST.json",
       "repository": "bridge",
-      "sha256": "95de61e41ef9423be9353955bf5028ab6b370f862bf4787042b3f4c626902da9"
+      "sha256": "02e02c5f36fa018c77d7c7581faa3357619ba6e8217e5cf7ff022c8d3b2ad357"
     },
     "certificate_manifest": {
       "path": "MANIFEST.json",
@@ -2467,7 +2467,7 @@
     "entry_point": {
       "path": "verification/verify_release.py",
       "repository": "paper",
-      "sha256": "2f73424b79e6135608129caab7127c5d528e6e5f81a08b0098c2991891f5a1d5"
+      "sha256": "75300d6e6280113e5e8b76dac671be68f50b690aa0793193d23211753a854651"
     },
     "output": {
       "path": "verification/verify-release-output.json",
@@ -2493,7 +2493,7 @@
       {
         "path": "verification/test_verification_tools.py",
         "repository": "paper",
-        "sha256": "2a333108bec6f2e577c487a20ef6a5b02a6d51a06cd7585740338bded093ba0e"
+        "sha256": "5faf34e6a8504fd61587ebd05612c6a9f086fd9708f282c1153639924e743c7e"
       },
       {
         "path": "verification/check_manuscript_build.py",
