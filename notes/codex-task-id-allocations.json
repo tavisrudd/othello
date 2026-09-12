@@ -4949,8 +4949,17 @@
       "last": 1150,
       "purpose": "Category theory for ergodis core and Evolve: literature study (Abbott et al. and broad sweep) on optimization, regularization, structure learning/exploration, compiler design, search priors, solvers, normalization and evolution",
       "sequence": 550
+    },
+    {
+      "count": 1,
+      "first": 1151,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1151,
+      "purpose": "C1150 second pass, capability-first: gradient and small-NN methods allowed (no large nets/GPU); Galois connections, partition refinement, symmetry, Lawvere, Markov categories; algorithm-depth reads and reference implementations",
+      "sequence": 551
     }
   ],
-  "next_id": 1151,
+  "next_id": 1152,
   "schema": "codex-task-id-allocations-v1"
 }

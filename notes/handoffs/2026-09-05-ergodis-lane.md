@@ -58,8 +58,13 @@ a semiring-polymorphic verifier and VeriPB's redundance rule converge on one sli
 exclusion half for certificates with bound composition for `ordered_resource`. Two cheap
 offline checks (FeatureDag weak term acyclicity, weight-pushing canonical summaries) stand
 alone. Combined ranking, mystery ledger and the two proposed successor slices:
-`../2026-09-12-c1150-category-theory-for-ergodis.md`. **Waiting on Tavis**: allocate
-successor slices.
+`../2026-09-12-c1150-category-theory-for-ergodis.md`. Scope was corrected by Tavis:
+gradient and small-NN methods are in; only large nets/GPU are out. C1151 (in progress) is
+the capability-first second pass covering the dropped gradient material, Galois
+connections, partition refinement, symmetry, Lawvere theories, Markov categories, and
+algorithm-depth reads with reference implementations:
+`../2026-09-12-c1151-category-theory-capability-pass.md`. Implementation slices are
+allocated after C1151 merges.
 
 ### C1148 — certificate interoperability (queued)
 

@@ -62,7 +62,7 @@ evidence gate for each.
 
 - No edits under `~/src/ergodis*`; product framing per the lane rule: prior
   art informs, never gates.
-- No neural-network methods as deliverables; categorical structure only.
+- Scope correction (2026-09-12, Tavis): gradient search and small simple neural networks are in scope; only methods that depend on deep/large nets are out; GPU acceleration (WebGPU / Rust GPU bindings) is available for larger Evolve structure searches. The first pass over-narrowed this to "no gradient"; C1151 repairs it.
 
 ## Report (2026-09-12)
 
