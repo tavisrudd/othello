@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-12
-**Status**: IN PROGRESS.
+**Status**: IN PROGRESS; abstract Lean contract and scoped Rust gates pass.
 
 ## Scope and implementation
 
@@ -27,15 +27,27 @@ The first guarded elaboration refused an unavailable import named
 `Mathlib.Tactic.Omega`; it was replaced with the actual function-iteration import
 needed by the proof. No foreign Lean source or build was modified.
 
-Unvalidated owned Lean work: `lean/WeightedRules/Contract.lean` and the additive
-`WeightedRules` library declaration in `lean/lakefile.toml`. These are not yet
-committed as validated formal results. Build entry is exclusively
+The abstract contract and library declaration are committed at `1bc04c132`.
+The guarded queue built `WeightedRules.Contract` and its aggregate gate passed
+(run `run-20260912-213013-31cb0ca2`). Unvalidated owned Lean work is now
+`lean/WeightedRules/BoundedMinPlus.lean`, including the concrete bounded carrier
+and example; its scalar proofs passed elaboration while finite-kernel checks
+are being completed. Build entry is exclusively
 `lean/scripts/guarded-lean` / `lean/scripts/lean-build-queue.py`.
 
 Rust ownership: new rule contract/codec under `crates/verify`, and a reusable
 rule provider crate under the core workspace, with scoped workspace membership,
 tests and docs. No private adapters, served demo artifacts, other lane sources,
 or existing solver kernels are task-owned.
+
+Core implementation `f21e4e0` passes scoped tests, Clippy and formatting. It adds
+`ergodis-rules`, the independent `rule_contract` admission/codec, and the coarse
+provider ABI. Live Python oracle, source/claim/symmetry mutations, allocation
+counting and independent-workspace tests pass. Uncommitted core paths held for
+compiled-ABI validation: `crates/rules/tests/native_abi.py`,
+`crates/rules/tests/wasm_abi.mjs`, and `docs/rule-contract.md`. These are explicitly
+unvalidated until native/WASM artifacts have been built and executed; no ABI
+completion claim is made yet.
 
 ## Gates
 
