@@ -3,7 +3,47 @@
 **Date:** 2026-09-12. **Lane:** `ergodis`. **Disposition:** bounded survey.
 No code written; nothing under `~/src/ergodis*` edited.
 
-**Status: IN PROGRESS — written incrementally, source by source.**
+## Opening summary
+
+Eleven named sources: one at full text, eight at partial (six of those at table depth with setup,
+protocol, hardware and results read in full), one at abstract only, one secondary. Every arXiv and
+DOI identifier was resolved from an abstract page or venue record before fetching.
+
+**The field has converged on one program set and it is almost entirely Boolean.** Transitive
+closure, same generation, reachability, connected components, single-source shortest paths,
+Andersen's analysis, context-sensitive points-to and dataflow — these recur across RecStep (2018),
+the FGH-rule paper (2022), and FlowLog (2025), which describes its suite as subsuming "nearly all
+publicly available programs and datasets used in recent publications of RecStep, Soufflé, and
+DDlog". **The only non-Boolean algebra anywhere in it is `min`**, in CC and SSSP. There is no
+published suite with a counting, provenance or lifted-real semiring, which means Ergodis's
+distinguishing capability has no existing benchmark and the suite for it has to be assembled.
+
+**The best-documented cross-engine table is VFLog's** (Sun, Kumar, Gilray, Micinski, arXiv:
+2501.13051), because it is the only source that pins a version for every comparator — Nemo 0.5.1,
+Soufflé 2.4.1, RDFox 7.1a, VLog via Rulewerk — with full hardware. **The broadest is FlowLog's**
+(VLDB 2026): 41 program–dataset pairs across Soufflé, RecStep, DDlog, DuckDB and Umbra on
+2× AMD EPYC 7543, 256 GB, 900 s timeout, at 4 and 64 threads — but it gives no version numbers,
+and its runtimes are end-to-end including a CSV load it says disadvantages itself.
+
+**Two negatives correct the brief.** The `datalog°` paper has **no experimental section at all** —
+APSP and bill-of-materials are worked examples, and the measured versions are in the companion
+FGH-rule paper as programs BM and MLM. And the Rel paper has **no benchmark, no experiments and no
+performance numbers**; I located no RelationalAI-published benchmark result, so a Rel comparison
+would have to be run against a hosted Snowflake co-processor.
+
+**The single most useful citable sentence, and the one most at risk of being stale:** RecStep's
+"Since Soufflé does not support recursive aggregation (which shows in CC and SSSP), we only show
+the execution time results of our system and BigDatalog for CC and SSSP." That is the engine
+Ergodis will be measured against, unable to run the min-plus programs — but it is from 2018, and
+FlowLog's 2025 table does show Soufflé running CC and SSSP. **Verify against a current Soufflé
+release before this is used in any positioning claim.**
+
+**Recommended suite: seven programs** — TC and SG (Boolean, calibration and memory stress), SSSP
+and CC (min-plus, the centre), MLM over random recursive trees with exponential decay (the
+lifted-real case, from the FGH paper, with no cross-engine baseline available), TC re-run over the
+counting semiring (semiring-parametricity, no new data needed), and an exact-cover instance
+against CP-SAT (exact search with exclusion, explicitly not a Datalog result). Programs 1–4 run
+locally against Soufflé and egglog; the rest are Ergodis-only or citations.
 
 ## Purpose
 
@@ -565,7 +605,7 @@ note's own framing makes awkward, since the engine is "available as a co-process
 *Read depth: not consulted.* Neither library was read for this survey, and neither is a rule
 benchmark: MIPLIB is a mixed-integer programming instance library and XCSP is a constraint-network
 format. They enter only through the programme note's "one exact-cover problem" line and its CP-SAT
-comparator. The honest position is that **an exact-cover instance is not a Datalog benchmark and
+comparator. To be clear about it: **an exact-cover instance is not a Datalog benchmark and
 should not be cited as one**; it belongs in the Ergodis suite as a test of the exact-search side
 of the engine, expressed directly, with CP-SAT as the comparator. If a rule formulation is wanted
 later, the thing to look for is a published Datalog or ASP encoding of a specific MIPLIB or XCSP
@@ -584,7 +624,7 @@ Compiled from the sources above; every claim carries the source it came from.
 | FlowLog      | on Differential Dataflow     | yes (CC, SSSP)        | FlowLog §10          |
 | DuckDB       | SQL `WITH RECURSIVE`         | partial               | FlowLog §10          |
 | Umbra        | SQL, worst-case optimal join | partial               | FlowLog §10          |
-| Nemo         | Rust, columnar, restricted chase | not established   | Nemo, ICLP 2023      |
+| Nemo         | Rust, columnar chase         | not established       | Nemo, ICLP 2023      |
 | VLog         | columnar, via Rulewerk       | not established       | VFLog, Nemo          |
 | RDFox        | multicore, RDF-oriented      | not established       | VFLog                |
 | egglog       | Rust, lattice `:merge`       | lattice-valued        | egglog §3, §4.2      |
@@ -598,3 +638,195 @@ establish when or in what form. **DuckDB and Umbra cannot express nearly half of
 benchmarks** — "nearly half of our benchmarks cannot be directly executed on both databases due
 to unsupported mutual or nonlinear recursion" — which bounds how much of a suite a SQL comparator
 can cover.
+
+## 4. Recommended minimal suite for Ergodis
+
+Seven programs. Each is already published with printed rules, so none has to be invented, and each
+covers a distinct point in the space the programme note names. Column "run locally" means Ergodis
+plus at least one comparator can be run on one machine without a cluster or a hosted service.
+
+| # | Program                    | Semiring        | Recursive | Run locally |
+|---|----------------------------|-----------------|-----------|-------------|
+| 1 | TC transitive closure      | Boolean         | yes       | yes         |
+| 2 | SG same generation         | Boolean         | yes       | yes         |
+| 3 | SSSP shortest paths        | min-plus        | yes       | yes         |
+| 4 | CC connected components    | min             | yes       | yes         |
+| 5 | MLM multi-level marketing  | lifted reals    | yes       | yes         |
+| 6 | Path counting              | counting        | yes       | yes         |
+| 7 | Exact cover                | not a rule prog | no        | yes         |
+
+**1. Transitive closure (TC).** Rules printed in RecStep §6.2 and used identically by FlowLog and
+VFLog. Datasets: the `Gn-p` GTgraph family (`G10K-0.001`, `G20K-0.001`, `G40K-0.001` are the sizes
+FlowLog uses) and, for the version-pinned comparison, the SuiteSparse graphs VFLog uses
+(`vsp_finan`, `fe_ocean`, `usroads`, `com-dblp`, `Gnutella31`, `fe_sphere`). *Why:* it is the one
+program every engine in the survey runs, so it is the calibration point. *Comparator:* Soufflé
+locally; VFLog's Table 2 for the version-pinned citation.
+
+**2. Same generation (SG).** Rules in RecStep §6.2 and VFLog's Evaluation (the latter with an
+explicit `x ≠ y`). Datasets as for TC. *Why:* it is the memory-stress program — RecStep reports
+that every other system OOMed or timed out at >15 h on some `Gn-p` graphs — and Ergodis's
+bounded-memory claims should be tested where others fail. *Comparator:* Soufflé locally; VFLog's
+Table 1 for citation, which has all five engines with versions.
+
+**3. Single-source shortest paths (SSSP).** The min-plus case, and the centre of the suite. Rules
+printed in RecStep §6.2:
+`sssp2(y, MIN(d1+d2)) :- sssp2(x, d1), arc(x, y, d2)`. Datasets: `livejournal`, `orkut`, `arabic`,
+`twitter` (FlowLog and RecStep both use these), with RecStep's protocol of averaging over ten
+random source vertices. *Why:* this is exactly `datalog°`'s `Trop₊` program, exactly the algebra
+Ergodis proved 0-stable, and exactly where the `N`-step convergence bound is claimable. *Local
+comparator:* whichever of Soufflé's current releases supports recursive min-aggregation — **check
+this before planning, since RecStep's 2018 evaluation says it did not**.
+
+**4. Connected components (CC).** Second min program, rules in RecStep §6.2, same four real-world
+graphs. *Why:* it is the FGH paper's headline example of a semiring-level rewrite changing space
+complexity from `O(n²)` to `O(n)`, so it is the program where an Ergodis plan-level optimisation
+has a published target to match.
+
+**5. Multi-level marketing (MLM) — the lifted-real case.** From the FGH paper's Figure 10:
+six semiring operations, requires both a database constraint stating the data is a tree and a
+non-trivial loop invariant, run over random recursive trees with exponential decay "modeling the
+decay of association in multi-level marketing". *Why:* the programme note asks for
+bill-of-materials over lifted reals; `datalog°` Example 4.2 is the bill-of-materials program over
+`R⊥` and is the POPS that "is not naturally ordered", and MLM is the published measured analogue.
+This is the row that no Boolean Datalog suite contains, and the one that distinguishes Ergodis's
+contract. *Caveat:* the FGH paper reports only within-engine speedups, so there is **no
+cross-engine baseline to cite for this row** — it must be run locally or left as an
+Ergodis-only measurement.
+
+**6. Path counting — the counting semiring.** Not in any surveyed suite as a headline program;
+the closest published relative is the `Trop^p₊` top-`p` shortest paths variant named in
+`datalog°`'s Example 1.1 and the `∆`-product min-cost counting discussed in the C1150 pass. The
+suggestion is to run the TC program unchanged over the counting semiring `N`, on the same graphs,
+which makes the semiring the only variable. *Why:* it is the cheapest possible demonstration that
+the engine is semiring-parametric rather than min-plus-special-cased, and it needs no new data.
+*Comparator:* none published; this is an Ergodis-internal claim.
+
+**7. Exact cover.** Expressed directly, not as a rule program, with CP-SAT as the comparator, per
+the programme note. *Why in the suite at all:* it is the one program that exercises exact search
+with exclusion coverage — the thing §2.8 notes no Datalog suite tests, and the thing Ergodis's
+certificate is for. *Caveat:* do not present it as a Datalog benchmark result.
+
+### What can be run locally
+
+Programs 1–4 against **Soufflé** (open source, compiled, single machine) and **egglog** (open
+source, Rust) directly; programs 5–6 against Ergodis alone unless a `datalog°`-capable engine is
+obtainable; program 7 against CP-SAT. **RecStep, BigDatalog, DDlog, Umbra, VLog, RDFox and Rel
+should not be attempted locally** — BigDatalog needs Spark, Umbra and Rel are not freely
+deployable in the relevant configuration, and RecStep needs QuickStep. Their numbers are citations,
+not measurements.
+
+The GPU rows (GPUlog, VFLog, GDlog) need an H100-class card. The programme's invariants permit GPU
+components, so if one is available the TC and SG rows become directly comparable against VFLog's
+Tables 1 and 2 — that is the single best-documented target in this survey because it pins every
+version.
+
+### The specific published numbers to cite, with their caveats
+
+1. **"Soufflé does not support recursive aggregation (which shows in CC and SSSP)"** — RecStep,
+   PVLDB 12(6), §6.3. *Caveat:* 2018, no Soufflé version given, and FlowLog's 2025 table has
+   Soufflé running CC and SSSP, so this must be cited as a dated statement, not a current one.
+   **This is the most important sentence in the survey for Ergodis's positioning and also the one
+   most likely to be out of date; verify against a current Soufflé release before using it.**
+2. **VFLog Table 1 (same generation) and Table 2 (transitive closure)**, with Nemo 0.5.1,
+   Soufflé 2.4.1, RDFox 7.1a, VLog via Rulewerk, on AMD EPYC 9534 / NVIDIA H100, Ubuntu 22.04,
+   GCC 11. *Caveat:* cross-hardware GPU-versus-CPU; system paper reporting its own winner; do not
+   cite the sparse GPUJoin column.
+3. **FlowLog's CSPA-on-httpd figures — Soufflé 67.8 s versus FlowLog 112 s at 4 threads, reversing
+   to Soufflé 3.5× slower at 64 threads.** *Caveat:* "latest releases" with no version numbers;
+   end-to-end including CSV load, where FlowLog is disadvantaged; median of up to five join-order
+   variants.
+4. **FlowLog fastest in 21 of 41 pairs at 4 threads, 36 of 41 at 64 threads.** Same caveats. Use
+   this to characterise the field, not to characterise Soufflé.
+5. **RecStep's qualitative failure map:** Soufflé OOM on TC at `G80K`; bddbddb >10 h on `G20K`,
+   `G40K`, `G80K`; SG timeouts at >15 h for every system but RecStep; CSDA the one program where
+   RecStep loses to both Soufflé and BigDatalog. *Caveat:* 2018 hardware (two Xeon E5-2660 v3,
+   160 GB), and absolute numbers appear only in figures the paper itself says are incomplete.
+6. **egglog versus egg on egg's `math` suite: 3.34× with semi-naive disabled, 9.27× with it
+   enabled, at iteration 100**; and **Soufflé's `eqrel` timing out on all but one Steensgaard
+   benchmark at a 20 s limit**. *Caveat:* MacBook Pro M2 16 GB; no engine versions; the `math`
+   ruleset is reduced to remove analysis-dependent rules.
+7. **Herbie: 73.91 minutes with egglog's sound analysis versus 81.91 minutes unsound over 289
+   programs, with accuracy split 104 to 135.** *Caveat:* this is a soundness result with a
+   speed side-effect, not a speed result; cite it for the argument that soundness can be free,
+   which is Ergodis's own argument.
+8. **Distributed-BigDatalog's resource footprint: 15 worker nodes, 120 CPU cores, 450 GB total**,
+   against which RecStep "shows comparable performance using far less computational resource".
+   *Caveat:* reproduced by RecStep from BigDatalog's own paper, not measured by RecStep.
+
+### What not to cite
+
+The FGH paper's speedups, as cross-engine evidence — they are within-engine and the paper says
+runtimes for its commercial system X may not be reported at all. OpenRuleBench's timings — 2009,
+4 GB RAM, per-system hand tuning and hand-adapted rules. Nemo's Table 1 as a version-pinned
+comparison — it has no versions and no hardware beyond "a laptop"; use VFLog instead. Free Join's
+JOB and LSQB numbers as recursion evidence — those queries are not recursive.
+
+## 5. Coverage and search record
+
+### Read-depth tally
+
+**Eleven named sources.** One at **full text** (Nemo, a three-page system demonstration). Eight at
+**partial**, six of those at table depth with setup, protocol, hardware and results read in full
+and result figures not transcribed: FlowLog, RecStep, the FGH paper, Free Join, VFLog, egglog;
+plus OpenRuleBench and LDBC Graphalytics at partial without their result tables. One at
+**abstract/metadata only** (GPUlog). One at **secondary only** (Doop/DaCapo, characterised through
+FlowLog's §10). Two further sources — the `datalog°` paper and the Rel paper — were re-probed at
+their previously recorded depths solely to establish that they contain no experiments, and that
+negative is reported in §2.6 and §2.7.
+
+### Identifier resolution
+
+Resolved from arXiv abstract pages before fetching: `2511.00865` (FlowLog, v4, VLDB 2026),
+`1812.03975` (RecStep), `2311.02206` (GPUlog, v5), `2501.13051` (VFLog), `2308.15897` (Nemo,
+EPTCS 385 pp. 333–335, DOI 10.4204/EPTCS.385.35), `2011.15028` (Graphalytics, v6). Resolved from
+venue records via search: `2202.10390` and `2301.10841` (already held from the companion study),
+OpenRuleBench (WWW 2009, pp. 601–610, DOI 10.1145/1526709.1526790), and the PVLDB reference for
+RecStep (12(6), DOI 10.14778/3311880.3311886). **No identifier was written from memory.**
+
+### Cache additions
+
+New keys: `arXiv:2511.00865`, `arXiv:2311.02206`, `arXiv:1812.03975`, `arXiv:2501.13051`,
+`arXiv:2308.15897`, `arXiv:2011.15028`, `openrulebench-2009`. Reused without re-fetching:
+`arXiv:2202.10390`, `arXiv:2301.10841`, `arXiv:2304.04332`, `arXiv:2105.14435`,
+`arXiv:2504.10323`. SHA-256 values are quoted in each entry. Fetches went through
+`/tmp/persistent/tavis/lit-search/fetch_c1151b.sh`, which rejects any download whose magic bytes
+are not `%PDF`.
+
+### Load-bearing queries, verbatim
+
+1. `Soufflé Datalog benchmark comparison Ascent Flix DDlog performance evaluation OOPSLA "bring
+   your own data structures"` — surfaced FlowLog, GPUlog, VFLog and the GPU Datalog line;
+   **found no standalone Soufflé-versus-Flix-versus-Ascent-versus-DDlog comparison table**, which
+   is recorded as an open gap in §2.5.
+2. `RecStep "Scaling-Up In-Memory Datalog Processing" VLDB benchmark BigDatalog SociaLite
+   transitive closure same generation CSPA`
+3. `OpenRuleBench Liang Fodor Wan Kifer 2009 rule engine benchmark programs datasets availability`
+4. `Nemo rule engine VLog RDFox comparison benchmark LUBM reasoning evaluation 2023 2024 arXiv`
+5. `LDBC Graphalytics benchmark specification kernels BFS PageRank weakly connected components
+   single-source shortest paths arXiv`
+
+### Not covered
+
+- **Flix, Ascent and DDlog have no dedicated comparison table in this survey.** DDlog appears only
+  as a FlowLog baseline; Flix and Ascent appear only in search-result prose. If a Flix or Ascent
+  comparison is wanted, it needs its own search.
+- **No RelationalAI or Rel benchmark was located** (§2.7). Recorded as an open gap; a Rel
+  comparison would require running against a hosted Snowflake co-processor.
+- **GPUlog's experimental section was not read** — only its abstract's "up to 45x versus Soufflé"
+  claim, with no hardware, version or dataset detail.
+- **LDBC Graphalytics' validation and scoring sections were not read**, so whether its reference
+  output validates SSSP distances exactly is unresolved and is the thing to check first if that
+  suite is adopted for the certificate story.
+- **OpenRuleBench's current availability and licence were not verified** — only the 2009 paper's
+  statement that the materials are freely available.
+- **MIPLIB and XCSP were not consulted at all** (§2.8), and I did not search for published Datalog
+  or ASP encodings of their instance families.
+- **ChaseBench** appears only through VFLog's use of its LUBM scenario; the ChaseBench paper
+  itself was not read.
+- **No licence was verified for any suite except LDBC Graphalytics** (Creative Commons Attribution
+  4.0, stated in its own document) and the open-source status of Nemo (stated in its paper). The
+  Datalog suites are distributed through the papers' repositories and their terms were not checked.
+- **zbMATH Open, OpenAlex, Crossref and Semantic Scholar were not queried.** MathSciNet: NOT
+  COVERED (institutional authentication). Google Scholar: NOT COVERED (blocks automated access).
+- **Nothing was run.** Every number here is quoted from a paper, and no engine was installed,
+  built or executed.
