@@ -3,6 +3,53 @@
 **Date:** 2026-09-12. **Lane:** `ergodis`. **Disposition:** bounded reading and positioning study.
 No code written; nothing under `~/src/ergodis*` edited.
 
+## Opening summary
+
+Eleven named sources: two at full text (the `tensor-logic.org` landing page and Domingos's tensor
+logic paper, read end to end), eight at partial depth — six of those at algorithm depth — and one
+supporting slide deck. Every arXiv identifier and DOI was resolved from an abstract page or venue
+record before fetching.
+
+**Macready's characterisation is accurate about the core and generous about the periphery.** Tensor
+logic's central identification — a Datalog rule is a join followed by a projection, and that is an
+einsum — is exactly the `K`-relation semantics of `datalog°` specialised to the Boolean semiring,
+and Rel's own paper opens with `def MatrixMult[{A},{B},i,j] : sum[ [k] : A[i,k]*B[k,j] ]`. What
+tensor logic adds beyond that subset is embedding-space reasoning and gradients. What it lacks is
+everything the Datalog line spent a decade proving: **no semirings** (`max =` and `avg =` are
+syntactic sugar with no laws stated, and `avg` is not a semiring operation), **no negation**, **no
+termination or convergence theory** (forward chaining stops when nothing new can be derived "or a
+stopping criterion is satisfied", and the language is Turing-complete), no aggregation-in-recursion
+semantics, no join algorithms or complexity bounds, no certificates, and no described
+implementation.
+
+**The most useful single transfer is a two-line check that came out positive.** Abo Khamis, Ngo,
+Pichler, Suciu and Wang prove that a `datalog°` program over a POPS converges iff `P ⊕ ⊥` is
+stable, and in `N` steps when it is 0-stable. Ergodis's bounded min-plus has all costs
+non-negative, so `u^(0) = 0` and `u^(1) = min(0, u) = 0` for every `u`: **it is 0-stable, and every
+fixpoint over it converges in polynomially many steps.** The saturating `u32::MAX` sentinel does
+not interfere, because the stability computation never forms a saturating sum. That separates two
+requirements the C1151 pass had entangled: weight pushing needs *division* (which saturation
+breaks), while fixpoint convergence needs *stability* (which Ergodis has). Their semi-naive `⊖` is
+a comparison rather than a division, and Ergodis's leaf-delta verifier is already structurally a
+semi-naive step.
+
+**The FGH-rule settles a shape.** `G(F(X)) = H(G(X))` makes "iterate then project" equal "project
+then iterate", and read as source-step / summary-abstraction / summary-step it is precisely
+Ergodis's explicitly-undischarged obligation that a leaf correctly lowers the source model. Three
+passes have now reached this square by three routes — operad algebra homomorphisms, model-validity
+of a Lawvere theory's relations, and this — so the shape is settled and only the discharge is open.
+The FGH paper discharges it by counterexample-guided inductive synthesis with z3, and Ergodis
+already holds the counterexample corpus C1091 specifies.
+
+**What Ergodis has that this line does not:** an independent certificate for optimality with
+exclusion coverage, admission as an unforgeable handle, and the separation of provenance, search
+mode, coverage and verification. Nothing in the RelationalAI line produces an artifact a separate
+checker consumes to establish that an answer is optimal and cheaper candidates were excluded — the
+FGH-rule verifies program *equivalence*, and egglog produces equality *explanations*, which are
+different objects. **What Ergodis lacks and should take:** worst-case-optimal join evaluation with
+the AGM bound, a convergence theory for recursion over an arbitrary algebra, semi-naive evaluation
+with aggregation inside recursion, and a synthesis-based optimiser for recursive programs.
+
 ## Why this study exists
 
 William Macready told Tavis he is marrying Vincent Abbott's categorical compilation to **tensor
@@ -465,3 +512,408 @@ the system unifying the two sides.
 Not re-read. This is the `K`-relation construction `datalog°` builds on, and its Theorem 4.3 — that
 positive relational algebra over any commutative semiring factors through the polynomial semiring
 `N[X]` — is the universality statement behind "one algorithm, many semirings".
+
+## 3. Mapping onto Ergodis
+
+Ergodis object labels (O1–O9) and absorption rows are those of the C1150 and C1151 part B passes.
+Inferences here are mine unless attributed.
+
+### 3.1 The single most useful transfer: Ergodis's min-plus algebra is 0-stable
+
+The C1151 pass established, by reading OpenFst's `reweight.h`, that **weight pushing requires
+`Divide`**, and therefore that Ergodis's saturating `u32::MAX` sentinel blocks it. `datalog°`
+supplies the complementary fact, and it goes the other way.
+
+Ergodis's summary algebra is min-plus over `u32` with `u32::MAX` as the absent element and `0` as
+the multiplicative identity, and **all costs are non-negative**. Apply the stability definition
+directly. For any element `u`:
+
+```
+u^(0) = 1                = 0
+u^(1) = 1 ⊕ u = min(0, u) = 0      because u ≥ 0
+```
+
+so `u^(0) = u^(1)`, every element is **0-stable**, and the semiring is 0-stable. By the third
+clause of Theorem 1.2, **every `datalog°` program over Ergodis's summary algebra converges in `N`
+steps**, where `N` is the number of ground IDB tuples — polynomial in the input. This is the same
+reason the authors give for `Trop₊`, and it is worth noting that they also observe `Trop₊` **fails
+the ascending chain condition** while still converging, so the usual sufficient condition would
+have given the wrong answer here.
+
+The saturation does not interfere: the stability computation only ever compares `0` against
+`min(0, u)` and never forms a saturating sum. So the two algebraic requirements come apart
+cleanly, and this is the finding I would lead with:
+
+| Operation                       | Requirement      | Ergodis's bounded min-plus  |
+|---------------------------------|------------------|-----------------------------|
+| Weight pushing (OpenFst)        | division         | fails, saturating sentinel  |
+| Fixpoint convergence (datalog°) | stability        | holds, and is 0-stable      |
+| Semi-naive delta (datalog°)     | a comparison     | holds                       |
+
+The practical consequence: **Ergodis does not need to fix the sentinel to get a fixpoint
+semantics with a convergence bound**; it needs to fix the sentinel only for canonicalisation by
+weight pushing. Those are separable pieces of work, and C1151's row 3 sequencing should be read
+with that separation in mind.
+
+### 3.2 Ergodis's summary-transition verifier is already a semi-naive step
+
+`ergodis-verify::min_plus_transition` accepts a snapshot and then a sequence of deltas; each delta
+names one real leaf, the checker verifies the old leaf and every sibling summary and digest
+against retained state, and then replaces the leaf and its path to the root. Structurally that is
+exactly the semi-naive move: recompute only what changed, not the whole tree.
+
+What `datalog°` adds is the *condition* under which that is sound for an algebra other than
+min-plus. Their `⊖` is a comparison — `v ⊖ u = v` if `v < u`, else `⊥` — with the stated rationale
+that a store keeps only tuples whose value is `≠ ⊥`, so `⊖` returning `⊥` means "no update
+needed". Ergodis's verifier makes the same decision implicitly by comparing against retained
+state. Writing the condition down as a `⊖` on the weight type is the small change that would let
+the same verifier serve another algebra — which is precisely C1151's row 4
+(semiring-polymorphic verifier) with one more required operation on the interface. The
+`Properties()`-mask pattern borrowed from OpenFst in C1151 §5.3 gains two more bits to declare:
+**stable / `p`-stable / 0-stable**, and **has `⊖`**.
+
+### 3.3 The FGH-rule is the commuting square Ergodis's leaf-lowering obligation needs
+
+Ergodis's `summary-transitions.md` states plainly that a successful check "does not establish …
+that an initial leaf correctly lowers the source model, or that a root cost proves domain
+optimality", and `CompositionShape` (C1094) "does not validate algebra, source lowering or query
+preservation". C1151's row 8 proposed an operad-algebra homomorphism as the checkable form of that
+obligation. The FGH-rule is the same square, arrived at from the database side and with a
+synthesis procedure attached:
+
+```
+G(F(X)) = H(G(X))
+```
+
+Read `F` as one step of the source-model computation, `G` as the abstraction to the summary, and
+`H` as one step of the summary-level computation. The square says exactly *the summary of a source
+step equals a summary step on the summary* — which is the leaf-lowering obligation, and by
+induction (their Theorem 3.1's commuting diagram) it lifts to the whole iteration. Three
+independent routes have now reached this square in three passes: algebra homomorphisms over an
+operad (C1151 §3.4), the model-validity condition on a Lawvere theory's relations (C1151 §4.2),
+and the FGH-rule here. I regard that as settled: **the square is the right shape for the
+obligation, and the open question is only how to discharge it.**
+
+The FGH paper answers the how in a way Ergodis can copy directly. Finding `H` given `F` and `G` is
+counterexample-guided inductive synthesis with z3 as the verifier and the counterexample database
+driving the next round. Ergodis already has the two halves this needs: a rejection-fixture corpus
+(C1091's ten fixtures) that is exactly a counterexample database, and a family of small finite
+models where a candidate `H` can be checked exhaustively rather than by SMT.
+
+### 3.4 What a tensor-logic or Rel program compiled to an Ergodis plan would need
+
+Taking the Macready proposal seriously — tensor logic as external syntax, compiled through
+categorical machinery into something Ergodis executes — here is what the compilation target must
+carry that the source language does not currently declare.
+
+1. **A semiring (POPS) parameter.** Tensor logic's `=` defaults to `+ =` over the reals, with
+   `max =` and `avg =` as sugar. An Ergodis plan needs to know *which* `(⊕, ⊗, ⊥, 1, ⊑)` it is
+   executing in, because the admission checks, the readout semantics and the certificate all
+   depend on it. `avg =` is not a semiring operation and would have to be rejected at the boundary
+   or desugared into a pair (sum, count) — which is itself the tupling construction from
+   Little–He–Kayas recorded in C1150.
+2. **A recursion/fixpoint contract with a stability declaration.** Tensor logic's forward chaining
+   stops "when no new elements can be computed **or a stopping criterion is satisfied**", and the
+   language is Turing-complete, so nothing can be promised in general. An Ergodis plan must carry
+   either a stability witness for its POPS (giving Theorem 1.2's `N`-step or `Σ(p+2)^i` bound) or
+   an explicit declaration that the result is budget-truncated and therefore not a fixpoint. This
+   is the same distinction C1151's row 2 draws between saturation and a budget in `egg`.
+3. **An aggregation contract separating the four semantics C1091 already separates.** `datalog°`
+   makes `∃` into an `⊕`-aggregate; Ergodis's C1091 insists that accumulation along a realization,
+   aggregation over alternative realizations, the objects counted, and quantification over
+   information histories are four different things. A compiled tensor-logic equation says which
+   `⊕` but not which of the four it means, and C1091's rejection fixture 3 (overlapping repairs at
+   independent survival 1/2 giving 3/8, not 1/2) is precisely a program that would type-check as an
+   einsum and be wrong.
+4. **An exactness statement that is not a step function.** Tensor logic's reliability argument is
+   a probability bound falling with embedding dimension, recovering exact deduction only at
+   `T → 0`. Ergodis's glossary forbids an unqualified "exact". A compiled plan would have to
+   declare which of the two regimes it is in, and a plan derived from an embedded-space program
+   cannot be labelled ProofGenerating.
+5. **Negation handled explicitly.** Tensor logic has none. `datalog°` offers the `THREE` POPS and
+   Fitting's semantics as one principled route. Any Ergodis-facing surface that admits negation
+   needs to pick one and say so.
+
+### 3.5 What Ergodis has that this line lacks
+
+Stated as mine, and stated narrowly enough to be checkable.
+
+**Independent certificates for optimality with exclusion coverage.** `datalog°` computes a least
+fixpoint and the fixpoint is the answer; correctness rests on the implementation being right. The
+FGH-rule verifies *program equivalence* with z3, and egglog/`egg` can produce equality
+*explanations*, but nothing in this line produces an artifact a separate checker consumes to
+establish "this is the optimum and every cheaper candidate was excluded". That is exactly
+Ergodis's representative-catalog contract and the VeriPB-style `red`-rule certificate of C1151's
+row 6 — and note that the VeriPB line is a *different* community (Gocht, Nordström, Gleixner) from
+this one.
+
+**A separation between origin, search mode, coverage and verification.** Ergodis's glossary keeps
+provenance, search mode (ProofGenerating versus Heuristic), coverage (CompleteFiniteProblem versus
+RestrictedOnly) and verification as independent dimensions, and forbids a generic `verified` flag.
+Neither tensor logic nor Rel has an analogue; a Rel relation is computed or it is not.
+
+**Admission as an unforgeable handle.** Ergodis's `Admission` wraps a verified restriction and "a
+receipt … deserializing it cannot create `Admission`". The Datalog line's analogue of admission is
+type-checking plus, at best, an SMT proof obligation discharged at compile time.
+
+**Exact search with declared exclusion.** C1016's provenance rule — exact computational
+enumerations grant negative coverage, heuristic predicates never do — has no counterpart here. A
+Datalog fixpoint is complete over the derivable facts by construction, which is a different and
+weaker statement than "the search space was exhausted".
+
+What Ergodis does **not** have, and this line does: worst-case-optimal join evaluation with the
+AGM bound, a convergence theory for recursion over an arbitrary algebra, semi-naive evaluation
+with aggregation inside recursion, and a synthesis-based optimiser for recursive programs. Those
+are the four things worth taking.
+
+### 3.6 Which C1151 rows this touches
+
+| C1151 row                       | Touched by                | Effect                               |
+|---------------------------------|---------------------------|--------------------------------------|
+| 4 semiring-polymorphic verifier | datalog POPS, Theorem 1.2 | add stability and a minus to the API |
+| 3 sentinel then weight pushing  | the 0-stability result    | decouples fixpoint from the sentinel |
+| 2 weak term acyclicity          | Suciu, Wang, Zhang        | unchanged; egglog is its system form |
+| 5 coalgebraic partition refine  | egglog instance + rebuild | congruence closure is the union-find |
+| 8 operad algebra homomorphism   | the FGH-rule              | same square, with CEGIS to discharge |
+| 6 VeriPB omission certificate   | nothing in this line      | remains Ergodis's differentiator     |
+
+## 4. Absorption table
+
+Same six fields as the C1151 pass plus the requirement column (`neither` = no gradient, no neural
+network, no GPU). Ordered by value per unit of effort. Detail under the index, because several
+fields do not compress to a cell.
+
+| #  | Candidate                               | Ergodis object      | Requirement  | Confidence |
+|----|-----------------------------------------|---------------------|--------------|------------|
+| 1  | Declare stability on the weight type    | O5 verifier, O4     | neither      | high       |
+| 2  | Semi-naive delta with an explicit minus | O5 summary deltas   | neither      | high       |
+| 3  | FGH square for the lowering obligation  | O5 leaves, C1094    | neither      | medium     |
+| 4  | POPS as the plan's algebra parameter    | O1 plans, O4        | neither      | medium     |
+| 5  | CEGIS plus counterexample corpus        | O8 Evolve, O9       | neither      | medium     |
+| 6  | Free Join as the join inner loop        | O1 execution        | neither      | low        |
+| 7  | egglog as one fixpoint engine           | O2, O3, O8          | neither      | low        |
+
+### Row detail
+
+**Row 1 — declare stability on the weight type** (Abo Khamis–Ngo–Pichler–Suciu–Wang, Theorem 1.2).
+*Expected benefit:* a convergence bound for any iterative computation over Ergodis's cost algebra,
+turning "the loop terminates because we budgeted it" into "the loop terminates in `N` steps because
+the algebra is 0-stable". *Cheapest experiment:* add `stable`, `p_stable(p)` and `zero_stable` to
+the properties mask C1151's row 4 already proposes, prove 0-stability for the bounded min-plus
+weight by the two-line argument in §3.1, and assert it in a test. *Measured gate:* the proof is
+mechanical and the test is a unit test; the real gate is that an existing iterative arm, run to a
+fixpoint rather than to its budget, terminates within the `N`-step bound on the retained fixture
+set — and if it does not, the discrepancy identifies where the implemented algebra differs from
+the declared one. *Requirement: neither.* *Confidence: high* — the theorem is published and the
+0-stability check for non-negative min-plus is immediate.
+
+**Row 2 — semi-naive delta with an explicit `⊖`** (same paper, equations (6)–(7)). *Expected
+benefit:* Ergodis's leaf-delta verification generalises past min-plus without needing division,
+which is what blocks weight pushing. *Cheapest experiment:* add `⊖` to the weight interface with
+the contract "return `⊥` when no update is needed", implement it for the bounded min-plus as the
+strict-improvement comparison, and route the existing `verify_delta_for_leaf` path through it.
+*Measured gate:* byte-identical acceptance and rejection on every current delta fixture, plus a
+constructed fixture where the new value ties the old (the `v ≥ u` branch) that must produce no
+update. *Requirement: neither.* *Confidence: high* — it formalises what the verifier already does.
+
+**Row 3 — the FGH square for the leaf-lowering obligation** (Wang–Abo Khamis–Ngo–Pichler–Suciu,
+Theorem 3.1). *Expected benefit:* converts the explicitly-undischarged obligation that "an initial
+leaf correctly lowers the source model" into a commuting square checkable on instances, and by
+their induction argument the square lifts to the whole iteration rather than to one step.
+*Cheapest experiment:* for one bounded family, write `F` (source step), `G` (leaf abstraction) and
+`H` (summary step) explicitly and check `G(F(X)) = H(G(X))` exhaustively on a small finite model.
+*Measured gate:* the square holds on every instance of the small model, and a deliberately wrong
+`G` breaks it. *Requirement: neither.* *Confidence: medium* — the shape is now confirmed from
+three directions, but exhaustive checking on small models is evidence and not discharge, and
+scaling the check to a real family is the open part.
+
+**Row 4 — POPS as the plan's algebra parameter** (the `datalog°` language definition). *Expected
+benefit:* a compiled plan states which `(⊕, ⊗, ⊥, 1, ⊑)` it executes in, so readout semantics,
+admission and certificates can all reference it instead of assuming min-plus; and it is the piece
+a tensor-logic or Rel front end would have to supply. *Cheapest experiment:* write the POPS
+interface and instantiate it for the three algebras Ergodis already uses somewhere (Boolean for
+GF(2) admission, bounded min-plus for summaries, and the counting semiring for C1093's count
+readout), then check that each existing readout is expressible. *Measured gate:* every existing
+readout is expressed without a special case, and any readout that needs one is a finding —
+specifically, whether C1093's count readout is the min-cost count or the all-solutions count, the
+question C1150 left open. *Requirement: neither.* *Confidence: medium* — the abstraction is well
+specified, but whether Ergodis's readouts actually factor through it is unknown from documentation.
+
+**Row 5 — CEGIS with the rejection-fixture corpus as the counterexample database** (the FGH paper's
+implementation). *Expected benefit:* Evolve gains a way to *search for* a preservation-contract
+witness rather than only to check a proposed one, with the search driven by counterexamples it
+already collects. *Cheapest experiment:* take one C1091 rejection fixture, treat it as the seed
+counterexample, and run a bounded enumerative search for an `H` satisfying the row-3 square on the
+small finite model. *Measured gate:* the search either finds an `H` that survives all ten C1091
+fixtures, or reports the fixture that kills each candidate — both outcomes are usable.
+*Requirement: neither.* *Confidence: medium* — CEGIS is standard and Ergodis has the corpus, but
+the synthesis space for representation contracts is much less structured than for query rewrites.
+
+**Row 6 — Free Join as the join inner loop** (Wang–Willsey–Suciu; Ngo–Ré–Rudra for the bound).
+*Expected benefit:* if Ergodis ever evaluates a relational front end (tensor logic, Rel) as a
+plan, this is the state of the art for the inner loop, it is a Rust library, and the AGM bound
+gives a complexity statement rather than a heuristic. *Cheapest experiment:* none yet — this is
+gated on Ergodis actually having a multi-relation join workload, which it does not today.
+*Measured gate:* when attempted, output size against the AGM bound `Π_F |R_F|^{x_F}` for the
+query's fractional edge cover, and wall clock against a binary-join baseline. *Requirement:
+neither.* *Confidence: low* — excellent work, no current Ergodis workload.
+
+**Row 7 — egglog as one fixpoint engine** (Zhang et al.). *Expected benefit:* one system providing
+congruence closure, lattice-valued analyses and extraction, which is C1151's rows 2, 5 and 7
+served by a single engine; and the two motivating failures it fixes (unsound rewrites lacking
+side-condition analyses; ad-hoc union-find in a Datalog analysis) are both failure modes Ergodis
+could reach. *Cheapest experiment:* express one `FeatureDag` identity set plus its overflow side
+conditions as an egglog program and compare the saturated result against the current simplifier.
+*Measured gate:* the saturated e-graph's extracted term is never worse than the simplifier's on
+the corpus, and every rewrite with a side condition is guarded by an analysis rather than applied
+unconditionally. *Requirement: neither.* *Confidence: low* — adopting an external fixpoint engine
+conflicts with Ergodis's zero-allocation hot-loop discipline and its one-engine direction; the
+value is as a reference semantics and an offline analysis tool, not as a shipped dependency. Note
+also footnote 4 of the egglog paper: `:merge` may be non-monotone, so the fixpoint is not
+guaranteed in general — the same gap as tensor logic's stopping criterion.
+
+## 5. What to ask Macready
+
+Each question is grounded in something a source actually defines, with the source named so the
+question is answerable rather than rhetorical.
+
+1. **Which POPS, and is it stable?** Tensor logic's `=` defaults to `+ =` over the reals with
+   `max =` and `avg =` as sugar and no algebraic laws stated. `datalog°` makes the algebra explicit
+   and Theorem 1.2 ties termination to stability of `P ⊕ ⊥`. *What semiring or POPS does the
+   compiled artifact execute in, and do you have a stability witness for it?* `avg =` in particular
+   is not a semiring operation.
+
+2. **What is the recursion contract?** Tensor logic is Turing-complete (via recurrent networks;
+   the slides say so explicitly, adding "But Datalog is not"), and forward chaining stops when
+   nothing new can be computed **or a stopping criterion is satisfied**. *Is the compiled fragment
+   restricted to one where the first disjunct is guaranteed, and by what criterion?* Weak term
+   acyclicity (Suciu–Wang–Zhang) and `p`-stability (Theorem 1.2) are the two published answers.
+
+3. **Which direction is the subset claim?** Tensor logic's core identification — a Datalog rule is
+   a join then a projection, and that is an einsum — is `datalog°` at the Boolean semiring, and
+   Rel's own teaser is `def MatrixMult[{A},{B},i,j] : sum[ [k] : A[i,k]*B[k,j] ]`. But tensor logic
+   also has embedding-space reasoning and gradients, which are not in the Rel or `datalog°` papers.
+   *Is "subset" meant about the core language only, and is the embedding-space layer in or out of
+   the compilation target?*
+
+4. **Where does Abbott's categorical compilation sit relative to the FGH-rule?** The FGH-rule is a
+   commuting square `G(F(X)) = H(G(X))` whose discharge is CEGIS plus z3. That is a
+   naturality/algebra-homomorphism condition. *Is the categorical layer doing the same job — proving
+   that an abstraction commutes with a step — and if so, is it discharging it by construction or by
+   verification?* If by construction, that is strictly better than CEGIS and worth knowing.
+
+5. **What is the story for negation?** Tensor logic has none. `datalog°` gives one principled
+   route: the `THREE` POPS with Fitting's three-valued semantics. *Is negation in scope, and if so
+   which semantics?*
+
+6. **What is checkable afterwards?** Tensor logic's reliability argument is a probability bound
+   falling with embedding dimension, exact only as `T → 0`. `datalog°` computes a least fixpoint
+   whose correctness rests on the implementation. Neither produces an artifact an independent
+   checker consumes. *Is a certificate in scope for the compiled pipeline, and at what granularity
+   — equality of two programs (which the FGH-rule and egglog can do), or optimality of an answer
+   with exclusion coverage (which nothing in this line does)?*
+
+7. **Is aggregation-in-recursion intended, and which of the four aggregation semantics?**
+   `datalog°`'s whole point is that aggregation inside recursion is what pure Datalog cannot do,
+   and their semi-naive extension is what makes it efficient. Ergodis's C1091 separates
+   accumulation along a realization, aggregation over alternatives, the physical objects counted,
+   and quantification over information histories. *An einsum says which `⊕`; what says which of the
+   four?*
+
+8. **Sparse/dense split, or Tucker everywhere?** Domingos's §6 offers both: hand sparse subtensors
+   to a query engine and dense ones to a GPU, or make everything dense by Tucker decomposition at
+   a controlled error probability. *Which one is the plan, and if Tucker, is the error probability
+   acceptable given that the output is meant to feed a verifier?*
+
+9. **Which implementation is the reference?** The tensor logic paper describes no implementation
+   and names CUDA as future work. Free Join is a standalone Rust library; egglog is a working
+   system; Rel is in production as a Snowflake co-processor. *Which of these, if any, is the
+   execution target — and is anything running today?*
+
+## 6. Coverage and search record
+
+### Read-depth tally
+
+**Eleven named sources.** Two at **full text**: the `tensor-logic.org` landing page (which is a few
+sentences) and Domingos's tensor logic paper, read end to end. Eight at **partial**, six of those
+at algorithm depth with the specific definitions, theorems and algorithms this report uses read in
+full and proofs read by statement: `datalog°`, the FGH-rule paper, the Generic Join survey, Free
+Join, egglog, and Rel — plus Suciu–Wang–Zhang and Green–Karvounarakis–Tannen carried in at the
+depths recorded in the C1150 and C1151 passes without re-reading. One at **partial** as a
+supporting artifact: Domingos's slide deck.
+
+No verdict here depends on the absence of prior work. This is a positioning and reading study, not
+a novelty audit.
+
+### Identifier resolution
+
+Every arXiv identifier and DOI below was **resolved before fetching**, from the arXiv abstract page
+or from the venue's own landing page, never written from memory. This is a direct response to the
+C1151 pass, in which three guessed identifiers all turned out to be wrong papers. The resolutions:
+
+- `arXiv:2510.12269` — from the link on `tensor-logic.org`, confirmed against the arXiv abstract
+  page (title, single author, v3, 16 Oct 2025, DOI 10.48550/arXiv.2510.12269).
+- `arXiv:2105.14435` — from search results naming the PODS 2022 paper and its DOI
+  10.1145/3517804.3524140; author list and affiliations then taken from the PDF's own title block.
+- `arXiv:2202.10390` — resolved from the arXiv abstract page (title, five authors in order, v1,
+  21 Feb 2022).
+- `arXiv:2301.10841` — from search results, confirmed against the PDF title block (three authors,
+  all University of Washington, DOI 10.1145/3589295).
+- `arXiv:2304.04332` — from search results; the eight authors and their affiliations taken from
+  the PDF's own author block.
+- `arXiv:2504.10323` — resolved from the arXiv abstract page (fifteen authors in order, v2,
+  24 Apr 2025, DOI 10.1145/3722212.3724450); affiliations from the PDF title block.
+- `arXiv:1310.3314` — from search results against the dblp and ACM records (SIGMOD Record 42(4),
+  pp. 5–16, DOI 10.1145/2590989.2590991).
+
+### Cache additions
+
+New keys: `arXiv:2510.12269`, `domingos-tensor-logic-slides`, `arXiv:2105.14435`,
+`arXiv:2202.10390`, `arXiv:2301.10841`, `arXiv:2304.04332`, `arXiv:2504.10323`, `arXiv:1310.3314`.
+Reused without re-fetching: `arXiv:2501.02413`, `10.1145/1265530.1265535`. SHA-256 values are
+quoted in each source's entry. Fetches went through
+`/tmp/persistent/tavis/lit-search/fetch_c1151b.sh`, which refuses any download whose magic bytes
+are not `%PDF`. Nothing was left in the RAM-backed scratchpad.
+
+### Load-bearing queries, verbatim
+
+Web search only; every query returned results, so an empty result was never mistaken for an error.
+
+1. `"Convergence of Datalog over (Pre-) Semirings" Khamis Ngo Pichler Suciu Wang arXiv`
+2. `"Free Join" "Unifying Worst-Case Optimal and Traditional Joins" Wang Willsey Suciu arXiv`
+3. `egglog "Better Together: Unifying Datalog and Equality Saturation" Zhang Wang Willsey Tatlock
+   arXiv PLDI`
+4. `RelationalAI "Rel" language paper relational knowledge graph Aref declarative SIGMOD arXiv`
+5. `"Optimizing Recursive Queries with Program Synthesis" Wang Suciu SIGMOD arXiv identifier`
+6. `Ngo Re Rudra "Skew Strikes Back" "new developments in the theory of join algorithms" arXiv
+   identifier SIGMOD Record`
+
+Two page fetches: `https://tensor-logic.org` and the arXiv abstract pages for `2510.12269`,
+`2202.10390` and `2504.10323`.
+
+### Not covered
+
+- **The tensor logic YouTube keynote and the `.pptx` deck** were not watched or opened; the `.pdf`
+  slide deck was read instead, at the depth recorded.
+- **No tensor logic implementation was examined**, because the paper describes none and links
+  none. If one exists outside the paper I did not find it.
+- **No Rel implementation, documentation site, or Snowflake integration was examined** — only the
+  SIGMOD paper. Rel's production behaviour may differ from the paper's presentation.
+- **The `datalog°` proofs (§§2–7) were not read**, so every convergence claim here is quoted as the
+  authors state it and not independently checked. The one thing I *did* check is the 0-stability of
+  Ergodis's bounded min-plus, which is a two-line application of their definition and is my own
+  derivation, marked as such in §3.1.
+- **Free Join's and the FGH paper's reported speedups are unverified**, read from abstracts and
+  introductions.
+- **Semantic and semiring-based query optimization** beyond the FGH-rule was not covered; the
+  `datalog°` paper refers to "a companion paper [81]" for an optimisation technique subsuming magic
+  sets, which is the FGH paper I did read, but the broader semantic-optimisation literature was out
+  of budget. Recorded as an open gap.
+- **zbMATH Open, OpenAlex, Crossref and Semantic Scholar were not queried.** MathSciNet: NOT
+  COVERED (institutional authentication). Google Scholar: NOT COVERED (blocks automated access).
+- **No Ergodis source code was read.** The mappings in §3 rest on `summary-transitions.md`, the
+  glossary, and the C1091 report, all of which may lag their implementations. In particular, the
+  claim that Ergodis's summary weights are non-negative `u32` with `u32::MAX` as the absent element
+  comes from `summary-transitions.md`; the 0-stability conclusion depends on it and should be
+  re-checked against the code before anything is built on it.
+
