@@ -1,4 +1,4 @@
-# Secant defects with prescribed holes
+# Secant Defects with Prescribed Holes
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21682567-blue.svg)](https://doi.org/10.5281/zenodo.21682567)
 
@@ -7,7 +7,7 @@
 [**Open the paper (PDF) →**](arcs_complete_outside_conic.pdf)
 
 This repository contains the manuscript
-*Secant defects with prescribed holes: arcs, caps, and matching designs*
+*Secant Defects with Prescribed Holes: Arcs, Caps, and Matching Designs*
 by Tavis Rudd, together with its public
 computational evidence.
 
