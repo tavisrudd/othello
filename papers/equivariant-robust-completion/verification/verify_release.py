@@ -150,7 +150,7 @@ def check_metadata() -> dict[str, object]:
     metadata = json.loads((PAPER / ".zenodo.json").read_text(encoding="utf-8"))
     require(
         metadata.get("title")
-        == "Frobenius-equivariant pair extension and robust repair of eight-arcs",
+        == "Frobenius-Equivariant Pair Extension and Robust Repair of Eight-Arcs",
         "Zenodo title does not match the paper",
     )
     require(metadata.get("license") == "cc-by-4.0", "Zenodo license mismatch")

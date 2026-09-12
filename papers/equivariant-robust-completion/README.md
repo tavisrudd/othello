@@ -1,9 +1,10 @@
-# Frobenius-equivariant pair extension and robust repair of eight-arcs
+# Frobenius-Equivariant Pair Extension and Robust Repair of Eight-Arcs
 
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051735-blue.svg)](https://doi.org/10.5281/zenodo.22051735)
+[![Concept DOI](https://img.shields.io/badge/Concept_DOI-10.5281%2Fzenodo.22051735-blue.svg)](https://doi.org/10.5281/zenodo.22051735)
+[![Version DOI](https://img.shields.io/badge/Version_DOI-10.5281%2Fzenodo.22051736-blue.svg)](https://doi.org/10.5281/zenodo.22051736)
 
-**Title:** *Frobenius-equivariant pair extension and robust repair of
-eight-arcs.*
+**Title:** *Frobenius-Equivariant Pair Extension and Robust Repair of
+Eight-Arcs.*
 
 [Read the paper (PDF)](equivariant-robust-completion.pdf)
 
@@ -66,7 +67,10 @@ instructions.
 
 ## Citation
 
-The archival record is [doi:10.5281/zenodo.22051735](https://doi.org/10.5281/zenodo.22051735).
+The concept DOI for all versions is
+[10.5281/zenodo.22051735](https://doi.org/10.5281/zenodo.22051735), and the
+archived version has version DOI
+[10.5281/zenodo.22051736](https://doi.org/10.5281/zenodo.22051736).
 
 ## License
 
