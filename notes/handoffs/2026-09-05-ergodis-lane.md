@@ -56,7 +56,7 @@ are in the report's 2026-09-12 sections.
 ### Rule-contract programme (active; C1150/C1151 literature closed)
 
 Goal, motivation (Macready), sequence, placement rule and deferred items:
-`../2026-09-12-ergodis-rule-contract-programme.md`. Order: C1160 → C1163 → C1161 → join engine
+`../2026-09-12-ergodis-rule-contract-programme.md`. Order: C1160 → C1163 → C1164 (Lean oracle) → C1161 → join engine
 (unallocated) → benchmark suite (unallocated) → C1162; C1158 any time. Literature cards:
 `../2026-09-12-c1150-category-theory-for-ergodis.md`,
 `../2026-09-12-c1151-category-theory-capability-pass.md`,

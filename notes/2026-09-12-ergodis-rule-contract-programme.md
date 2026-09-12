@@ -24,7 +24,10 @@ stack. He is modelling the IR in Lean; parts may use MLIR; whether the IR is his
 Two asks to him gate the benchmark and adapter choices:
 
 1. One concrete program he runs today, with data size and the tool it runs on.
-2. Whether his Lean model has a semantics layer (a category of programs with a cost or semiring
+2. Which questions about his IR he currently axiomatizes or proves by hand (canonical forms,
+   rewrite existence, minimality of a lowering, counterexamples to a law) and would rather
+   have decided by an oracle with a checked certificate.
+3. Whether his Lean model has a semantics layer (a category of programs with a cost or semiring
    functor) that an Ergodis contract stated in Lean could be instantiated against.
 
 Literature basis: `2026-09-12-c1150-category-theory-for-ergodis.md`,
@@ -39,6 +42,7 @@ the verifier code in `2026-09-12-c1152-certificate-spike.md`). Discovery-track e
 |---|---|---|---|
 | 1 | C1160 | stability class and ⊖ on the verifier weight type; leaf-delta as an explicit semi-naive step over DAGs and cycles | core `crates/verify` |
 | 2 | C1163 | the rule/fixpoint/certificate contract, IR-agnostic, stated in Lean under this monorepo's `lean/`; serialization through the existing C ABI; MLIR dialect as optional adapter; one recursive program lowered end to end | core; Lean authority here |
+| 2b | C1164 | Ergodis as a Lean oracle: tactic/IO call, reflective Lean checker for the min-plus certificate, proof terms of optimality and least fixpoint; the first artifact to show Macready, since a Lean-modelled IR consumes it directly and it needs no benchmark | core C ABI + Lean under `lean/` |
 | 3 | C1161 | recursive plan queries as least fixpoints with the N-step bound and semi-naive incremental recomputation | core runtime |
 | 4 | unallocated | join engine: worst-case-optimal joins (Generic Join / Free Join) as the rule-body operator | core |
 | 5 | unallocated | benchmark suite: transitive closure, shortest paths, bill-of-materials over lifted reals, an einsum program, one exact-cover problem; comparators Soufflé, egglog, einsum, CP-SAT; protocol as in `2026-09-11-ergodis-external-benchmark-programme.md`; reshaped by Macready's named workload | harness private, results in `ergodis-evidence` |

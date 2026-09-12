@@ -4985,8 +4985,17 @@
       "last": 1163,
       "purpose": "datalog-degree transfers: stability bits and semi-naive verifier; recursive plan queries with convergence bound; FGH-square leaf-lowering discharge by CEGIS; tensor-logic program to certified Ergodis plan",
       "sequence": 554
+    },
+    {
+      "count": 1,
+      "first": 1164,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1164,
+      "purpose": "Ergodis as a Lean oracle: tactic/IO call over FFI or subprocess, certificate checked by a reflective Lean min-plus checker yielding proof terms of optimality and least fixpoint",
+      "sequence": 555
     }
   ],
-  "next_id": 1164,
+  "next_id": 1165,
   "schema": "codex-task-id-allocations-v1"
 }
