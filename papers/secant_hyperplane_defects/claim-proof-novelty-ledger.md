@@ -1,7 +1,7 @@
 # Claim, proof, and novelty ledger
 
-This is the owning surface for priority language in *Secant–hyperplane
-defects of complete caps*.  No manuscript, README, snapshot, or public
+This is the owning surface for priority language in *Secant–Hyperplane
+Defects of Complete Caps*.  No manuscript, README, snapshot, or public
 summary may strengthen these entries independently.
 
 | Claim family | Proof status | Literature posture | Manuscript action |

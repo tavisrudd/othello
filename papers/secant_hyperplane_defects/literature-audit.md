@@ -2,8 +2,8 @@
 
 ## Scope and bounded finding
 
-This audit supports the literature positioning of *Secant–hyperplane
-defects of complete caps*.  It consolidates two recorded audits: the
+This audit supports the literature positioning of *Secant–Hyperplane
+Defects of Complete Caps*.  It consolidates two recorded audits: the
 C1075 literature check of the three `PG(4,q)` exclusions and the
 hyperplane-excess constraint (`notes/2026-09-06-c1075-cap-exclusion-literature.md`,
 fifteen ledger entries, five at full text) and the C1078 citation

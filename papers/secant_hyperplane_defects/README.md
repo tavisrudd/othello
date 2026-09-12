@@ -1,10 +1,10 @@
-# Secant–hyperplane defects of complete caps
+# Secant–Hyperplane Defects of Complete Caps
 
 ## Read the paper
 
 [**Open the paper (PDF) →**](secant_hyperplane_defects.pdf)
 
-**Title:** *Secant–hyperplane defects of complete caps*
+**Title:** *Secant–Hyperplane Defects of Complete Caps*
 
 A `k`-cap in `PG(d,q)` is a set of `k` points, no three collinear. It is
 complete when every point off it lies on a secant, equivalently when the

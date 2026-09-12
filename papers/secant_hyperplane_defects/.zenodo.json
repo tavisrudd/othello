@@ -1,5 +1,5 @@
 {
-  "title": "Secant–hyperplane defects of complete caps",
+  "title": "Secant–Hyperplane Defects of Complete Caps",
   "description": "A cap in PG(d,q) is complete when every point off it lies on a secant. This preprint shows that the slack in the classical counting bound for complete caps, the overlap loss C(k,2)(q-1) - theta_d + k, is carried by every hyperplane in a prescribed amount: the loss inside a hyperplane meeting the cap in s points equals C(k,2) - theta_{d-1} + q C(s,2) - (k-2)s. Since this quantity lies between zero and the total loss, the hyperplane sections of a complete cap have sizes in a small admissible set near the counting bound. Feeding that set into the hyperplane character equations, globally and through a fixed secant, gives integer feasibility conditions and a lower bound on the number of coplanar quadruples through every secant. These exclude complete caps of sizes 31, 37, 97, 293, and 387 in PG(4,7), PG(4,8), PG(4,16), PG(6,8), and PG(6,9), each equal to the counting bound. A formal model shows that the degree constraints on coplanar quadruples cannot by themselves force collisions on a positive proportion of secants. The identity extends to caps complete outside a prescribed set of holes.",
   "creators": [
     {

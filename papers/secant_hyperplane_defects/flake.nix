@@ -1,5 +1,5 @@
 {
-  description = "Pinned toolchain for Secant–hyperplane defects of complete caps";
+  description = "Pinned toolchain for Secant–Hyperplane Defects of Complete Caps";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
