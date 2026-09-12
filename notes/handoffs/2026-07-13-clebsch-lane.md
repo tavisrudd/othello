@@ -214,12 +214,12 @@ cluster — do not split it into one-line cards — and retire this section.
 
 ## Companion-export chain
 
-Paper III's formal companion export (`lean/trust/export/clebsch_passages.toml`)
-is blocked by drift in the canonical base, not by anything Paper III owns:
-`TARGET_MANIFEST.json` in `~/src/lean/finitegeom` disagrees with its own tree
-at four paths because three base commits landed without resealing it. Every
-companion export refuses until the base is resealed — raise the reseal before
-the next export of any area.
+The previously recorded four-path base-manifest blocker is cleared:
+`TARGET_MANIFEST.json` matches every listed source at finitegeom `f7b9743`
+(verified 2026-09-12). Paper I's 96-module human-gate closure is unchanged from
+`b871c10`, and a fresh guarded current-head receipt passes. See
+`../2026-09-12-paper-i-release-continuation.md`. Check each area's current
+export gate when exporting; the old base-reseal diagnosis is not a live blocker.
 
 ## Lane boundaries
 
