@@ -302,6 +302,9 @@ that its idea is visible.
   word after a colon, both halves of a hyphenated compound, and every noun,
   pronoun, verb, adjective, and adverb; lowercase articles, coordinating
   conjunctions, and short prepositions.
+- Update the front-matter date whenever the manuscript changes: `\date{...}`
+  and any README byline must name the current month, not the month of the
+  previous draft.
 - Before they are needed, state domains, quantifiers, equivalence relations,
   action conventions, projectivization conventions, and excluded degenerate
   cases. Keep theorem statements, examples, tables, computations, and formal
