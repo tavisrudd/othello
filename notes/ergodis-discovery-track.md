@@ -69,3 +69,17 @@ equality saturation and the database chase are the same procedure up to encoding
 **Why it may matter**: an Ergodis representation wanting "equivalent for all n" rather than
 "equivalent up to the node bound", or incremental recomputation borrowed from the chase side.
 **Evidence level**: literature statement. No C-ID allocated.
+
+## 2026-09-12 — Macready's tensor-logic external syntax over a categorical IR (C1150/C1151 adjacent)
+
+**Provenance**: Tavis's correspondence with William Macready, 2026-09-12, after Tavis forwarded the
+Abbott–Zardini material. **Was I looking for this?**: no.
+**Observation**: Macready is marrying Abbott's neural-circuit compilation to tensor logic
+(https://tensor-logic.org, Domingos; einsum-syntax Datalog, a subset of RelationalAI's Datalog work)
+as an external syntax, over a categorical foundation broader than Abbott's that represents
+symmetries, generalized tensors, predicate logic and tensor networks.
+**Why it may matter**: tensor logic programs are semiring Datalog, so they evaluate under the same
+semiring-polymorphic machinery C1151 ranks (rows 2, 4, 7) and the chase/e-graph equivalence already
+logged; his symmetry representation is adjacent to the C1153 group quotient. A tensor-logic front
+end compiled to an Ergodis plan with exact semiring evaluation and a certificate would be a concrete
+shared object. **Evidence level**: correspondence only; no source read. No C-ID allocated.
