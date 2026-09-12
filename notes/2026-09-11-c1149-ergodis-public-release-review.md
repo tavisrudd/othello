@@ -1697,8 +1697,16 @@ the export repository, which `diff -rq` confirms byte-identical to the core.
   `bb756-hx-gz-w{20,22}` and `bb784-hx-gz-w24` (3 files, no claim depends on them), and
   `application-counted-type-ab.{json,raw.jsonl}` (160 KB, now scrubbed, still uncited and outside
   the manifest).
-- **`ergodis-evidence/AGENTS.md` and its `CLAUDE.md` symlink** still name the private siblings,
-  the private `main`, the staging clone and the guard scripts. They must be deleted or moved into
-  `ergodis/docs-private/` before that repository becomes public. Left in place because that
-  checkout has no `.publicignore` mechanism and the file is the working guidance for agents there;
-  it is a release-gate deletion, not a code change.
+- ~~`ergodis-evidence/AGENTS.md`~~ — settled 2026-09-12 (Tavis): the agent guide must stay
+  private and never publish. Done in core `38ee686` and export `3624a52`. `AGENTS.md` and its
+  `CLAUDE.md` symlink are deleted from the export repository, which now lints clean; the refresh
+  procedure and visibility rules moved to the core's private `docs-private/evidence-export.md`,
+  and the core `AGENTS.md` records that the export repository carries no process document of its
+  own because it is published whole. The release checklist gained two items: the evidence
+  repository must lint clean, and nothing private may appear in its history.
+
+  **Open, needs a decision:** the deletion does not unpublish the file. `AGENTS.md` is still in
+  the export repository's history at `09b6168` (the initial import) and `8260e94`, so publishing
+  that repository with its history republishes the guide. The repository has only four commits,
+  so the options are cheap: publish a fresh single-commit history, or rewrite the existing one.
+  Both are history rewrites and need Tavis's explicit approval.
