@@ -298,6 +298,10 @@ that its idea is visible.
   defensive remarks around similar terms.
 - Define acronyms at first use unless they are universal for the target venue.
 - Prefer semantic notation over notation tied to an implementation.
+- Set the title in title case: capitalize the first and last words, the first
+  word after a colon, both halves of a hyphenated compound, and every noun,
+  pronoun, verb, adjective, and adverb; lowercase articles, coordinating
+  conjunctions, and short prepositions.
 - Before they are needed, state domains, quantifiers, equivalence relations,
   action conventions, projectivization conventions, and excluded degenerate
   cases. Keep theorem statements, examples, tables, computations, and formal
