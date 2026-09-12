@@ -358,6 +358,26 @@ carrier must declare whether its multiply is *exact* or *saturating*, because a 
 path into no path. An algorithm that depends on distinguishing them refuses on the mask instead
 of discovering it.
 
+### Against the two C1091 rejection fixtures this slice has to survive
+
+Fixture 9 — *a feasible witness with unverified exclusion of cheaper candidates is an upper
+bound, not a certified optimum* — is the reason the bound's one-sidedness is a construction
+rather than a test. Every refusal the prototype makes is justified by an inequality over a
+multiplier vector whose feasibility was discharged against the source model before search began,
+so an exclusion produced with the bound enabled rests on the same footing as one produced
+without it. The engineering consequence is the `search_indexed_dual` entry point refusing to run
+when no checked vector is installed, instead of quietly falling back to the constant rule: a
+silent fallback would make the two runs indistinguishable in the evidence record.
+
+Fixture 3 — *overlapping repairs at independent survival one half give exact availability 3/8,
+not 1/2* — is the arithmetic warning that applies directly to the bound's soundness argument.
+The odd-detector residual is covered by columns whose supports overlap, and the step
+`sum over d in O of y[d] <= sum over chosen c of sum over d in support(c) of y[d]` is a union
+bound, valid in exactly one direction because the multipliers are nonnegative. Reading it as an
+equality — treating the covering columns as disjoint — would give a larger apparent bound and an
+unsound refusal. The implementation keeps the inequality's direction explicit in both the module
+documentation and the check, and the null control is what would catch a sign error in practice.
+
 ### The omission certificate
 
 Merged row 8 (VeriPB-style `red` with a witness substitution) is designed but not prototyped
