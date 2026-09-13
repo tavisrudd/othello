@@ -46,6 +46,11 @@ can be reused. An exact quotient, a one-sided bound, a witness-generating parame
 a source update and a cheaper execution plan have different obligations. The paper should
 make their relationship legible without pretending they are the same mathematical object.
 
+The September 13 user additions make **performance engineering** and **interactive Evolve
+campaigns** explicit parts of this account. The system must turn discovered structure into
+efficient machine execution and support people exploring, inspecting and steering that
+discovery over time. Both belong in the first paper's integrated explanation and evaluation.
+
 This frame contains the earlier recovery, contextual-state, invariant-synthesis and
 dynamic-query accounts. It also gives the newer recursive contracts a clear role. It does
 not require every problem to be recursive, every representation to be a quotient, or every
@@ -100,6 +105,73 @@ showing where each pays. Count one-time construction and checking costs and the 
 in repeated use. If general reification is not yet delivered, identify a bounded existing
 path or the exact implementation/evidence gap rather than dropping it from the system's
 framing or pretending it already exists. C985 owns that demonstration decision.
+
+## Performance engineering and interactive campaigns
+
+The spectrum has two independent dimensions: **how much computation is specialized** and
+**how much the user steers the investigation**. An interactive campaign can compare already
+specialized kernels; an unattended campaign can continue adapting. A campaign is a durable
+investigation involving questions, candidates, runs, evidence and choices, with particular
+persistence/control capabilities determined by the implementation. It is not merely a
+visualization of a single solve or a compulsory preliminary step before static deployment.
+
+### Engineering as part of the contribution
+
+The research question includes whether discovered mathematical structure survives the
+costs of its implementation. A representation can remove states yet lose through memory
+traffic, compilation, repeated checking or orchestration. Engineering therefore belongs
+inside the explanatory argument and the measurements, rather than appearing only as a
+list of optimizations after the mathematics.
+
+The contributor contracts provide concrete internal requirements:
+
+- Resolve run-constant choices before entering specialized execution; preallocate workspace
+  and keep the solve loop iterative and allocation-free.
+- Use compact contiguous state and explicit layout bounds, with worker-owned mutable data
+  and measured communication at safe boundaries.
+- Keep discovery, checking, telemetry, serialization and host effects at explicit boundaries
+  so the ordinary execution path has a measurable cost and scope.
+- Measure mathematical state/work reduction separately from kernel cost, cold construction,
+  warm reuse, memory and parallel scaling. Keep rejected variants and clean misses visible.
+- Use retained interleaved comparisons, exact result/work accounting, independent checks
+  where applicable, and hardware counters to explain a performance conclusion.
+
+These are requirements, not a claim that every current path satisfies them or that the
+methods themselves are new. Evidence for a paper must name the implemented path and
+measured outcome. The private contributor guides are not public prose sources to copy:
+write any publishable engineering account from the approved implementation and retained
+evidence, without exporting the process documents or private operational details.
+
+### Campaigns as a way to use the system
+
+An operator can formulate a question, inspect proposed structures and their evidence,
+compare runs, redirect exploration, retain useful discoveries and decide whether a
+specialization merits further use. Depending on the supported workflow, stop/resume,
+forks, source changes and learned-only reruns make this an ongoing investigation. The
+UI must distinguish an observed result, a checked claim and an unresolved search; steering
+does not grant a candidate mathematical authority.
+
+Existing evidence includes the real-workload campaign console and candidate inspector
+(C1124/C1126), learned-only execution and explicit verification (C1130), and repairs to
+stop responsiveness when hidden history rendering consumed main-thread time. These support
+specific interactive workflows, not a universal campaign host or an established improvement
+in human productivity. C1084's broader session/repository direction remains a separate
+source of design requirements.
+
+For the first paper, show a **campaign-to-kernel narrative** on one admitted family:
+the operator poses a goal, Evolve explores structure, results and counterexamples guide
+the next step, retained knowledge supports another solve, and specialization is selected
+when worthwhile. Include an unattended version where supported. The narrative connects
+interactive use to the same contracts and kernels rather than introducing a separate demo
+engine. Static reification remains optional and its implementation gap must be explicit.
+
+Evaluation should ask whether control, telemetry and discovery interfere with useful solve
+work. Compare the same computation with supported headless/interactive and telemetry
+configurations, state the responsiveness and cancellation boundaries, and retain intervention
+sequences for repeatable comparisons. Claims about operator effectiveness require separate
+evidence; a responsive screen alone does not establish them. A systems-focused follow-on
+may study these questions more deeply, but the first paper should already explain and
+demonstrate both engineering discipline and interactive campaigns.
 
 ## Ranked first-paper frames
 
@@ -260,6 +332,8 @@ part of the example, and its literature assertions are not re-certified here.
    cost-aware selection, admission at safe boundaries, execution and retained knowledge.
    Keep semantic facts and performance priors distinct. Explain what happens after a failed
    check or a poor performance prediction, including direct solving and explicit restart.
+   Show the same mechanisms in an interactive campaign and explain how the performance
+   architecture preserves efficient execution while users inspect and steer discovery.
 4. **Concrete instantiations.** Recovery anchors composition and witness reconstruction;
    privacy supplies an independently checked distinguishing-context example; allocation
    and another genuinely noncoding family must expose the same substantive mechanisms.
@@ -270,6 +344,8 @@ part of the example, and its literature assertions are not re-certified here.
    and engineering ablations. Add discovery-off, supplied-structure, learned-only and
    miss/rejection controls; comparable arms receive the same initial information. Include
    compilation, checker and restart costs, held-out instances, work counts and negative cases.
+   Account for telemetry/control overhead and the interactive responsiveness boundary;
+   distinguish semantic gains from machine-level engineering and operator intervention.
 6. **Limits and related work.** Explain which inputs supply structure, what is discovered,
    what is proved and when no gain is expected. Locate the specific contribution relative
    to automated modelling, abstraction refinement, synthesis, adaptive execution and
@@ -323,7 +399,9 @@ scope must be stated together when a draft is promoted.
 > queries, or be materialized as a specialized kernel. Evolve searches for that structure;
 > preservation contracts specify its admissible questions, contexts and answer-reconstruction
 > obligations. Witnesses, counterexamples and execution measurements guide further discovery
-> and the choice of how much computation to specialize.
+> and the choice of how much computation to specialize. Interactive campaigns let users
+> inspect and steer this process, while the execution architecture separates discovery and
+> control from specialized solve kernels whose costs can be measured independently.
 
 This is an opening, not a fabricated finished results abstract. The final abstract must
 add the precise principal result, admitted families and measured outcome once C985's
@@ -355,7 +433,8 @@ provider implements every step of this loop.
 > Evolve searches for useful problem structure. That structure can guide an ongoing solve,
 > be retained for repeated queries, or be materialized into a specialized kernel where
 > supported. The system tracks the conditions under which each specialization preserves
-> the required answer.
+> the required answer. Interactive campaigns support inspecting and steering discovery;
+> specialized execution and explicit control boundaries make performance part of the design.
 
 For a **core-library README**, immediately add:
 

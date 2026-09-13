@@ -60,6 +60,17 @@ reads or fresh validation of the capabilities they describe.
 
 ## External comparison register
 
+September 13 engineering/campaign supplement: contributor `PERFORMANCE.md` (302 lines)
+and `performance-playbook.md` (147 lines) were read in full. They establish internal
+requirements, not implementation compliance or publishable performance results. Their
+private-only status forbids copying them into public documentation. Campaign reports
+`notes/2026-09-07-c1124-real-campaign-console.md` and
+`notes/2026-09-07-c1126-campaign-information-architecture.md` were read partially (opening
+result/user-direction sections); `notes/2026-09-10-c1130-stop-responsiveness.md` was read
+partially (opening cause and implemented lifecycle repair). These support the framing of
+interactive investigation and its overhead; no user-productivity study or performance
+benchmark was run for this supplement.
+
 Comparisons below identify established mechanisms. They do not claim that those systems
 lack some Ergodis feature. The relation to the proposed Ergodis frame is the author's
 inference, not the external authors' characterization of Ergodis.
