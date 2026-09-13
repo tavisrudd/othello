@@ -53,3 +53,24 @@ Tree-sitter/editor integration and an executable semantics reference (PLT
 Redex or similar) are deferred, not prerequisites. No foreign evaluator or
 join runtime is an allowed shortcut. No new runtime dependency, performance
 claim or backend policy change is made by this queue entry.
+
+## Validated checkpoint — 2026-09-13 05:49 UTC
+
+Private commit `cfae073` contains the original owned scanner, iterative Pratt
+parser, preallocated span/ID pools, compact failures, error-only escaped source
+excerpts, versioned ten-family coverage manifest and 11 integration tests.
+Targeted tests and strict Clippy pass. Thread-local allocation instrumentation
+observed zero allocations across 100 repeated success, syntax-failure and
+invalid-UTF-8 cycles after workspace preparation. No parser speedup is claimed.
+
+The manifest and implementation README live under
+`ergodis-private/analysis/rel-frontend/`. Unsupported interpolation and complex
+escapes reject explicitly. Semantic admission and execution remain absent.
+Rich recovery trees, complete rich-error quality, retained interleaved
+measurements/hardware counters and native/WASM parity remain acceptance work.
+C1170 remains open at this validated checkpoint.
+
+The user clarified that the two-hour continuation is for any of today's
+queued Ergodis work, not frontend-only. After this checkpoint the active
+work switches to C1154's offline FeatureDag interval/acyclicity slice; the
+original 07:24:50 UTC stop target remains unchanged.
