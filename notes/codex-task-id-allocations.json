@@ -5003,8 +5003,17 @@
       "last": 1165,
       "purpose": "Formalize the scalar N-round convergence theorem for existing bounded min-plus rule programs",
       "sequence": 556
+    },
+    {
+      "count": 1,
+      "first": 1166,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1166,
+      "purpose": "Kernel-check the existing finite privacy lowering certificate and its packed observation semantics in Lean",
+      "sequence": 557
     }
   ],
-  "next_id": 1166,
+  "next_id": 1167,
   "schema": "codex-task-id-allocations-v1"
 }
