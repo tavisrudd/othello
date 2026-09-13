@@ -440,3 +440,18 @@ Good spike, clean result, and the headline is a negative worth having: the group
 the dossier claimed and the campaign is already using a slice of it, but the use the slice was
 proposed for — corpus dedup and restart seeding — is measurably worthless, and the one use that
 could pay was never measured and now has an exact, cheap gate in front of it.
+
+
+## Successor clarification — 2026-09-12
+
+C1158 (`2026-09-12-c1158-acting-subgroup.md`) separates the acted-on sets and
+carrier projection kernels. The implemented two-transfer census is q174,
+not the older q18 multiplier-41 source-interface enumeration. On its twelve
+banked neighborhoods, the q29 stabilizer and q174 setwise subgroup are trivial;
+center separation also excludes ambient-orbit collisions beyond equality.
+The243 carrier elements remaining there act identically on every q174 row.
+The q18 interface subgroup has order36,864 with kernel48 and effective action768;
+that closed shard does not motivate a new solve. Effective subgroup order is
+not an orbit count. Conversely, trivial setwise stabilizer alone does not rule
+out ambient-orbit equivalences inside a constrained set; C1158 proves the
+stronger negative for these neighborhoods explicitly.

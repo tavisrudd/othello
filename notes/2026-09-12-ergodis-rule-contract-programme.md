@@ -47,13 +47,15 @@ the verifier code in `2026-09-12-c1152-certificate-spike.md`). Discovery-track e
 | 4 | unallocated | join engine: worst-case-optimal joins (Generic Join / Free Join) as the rule-body operator | core |
 | 5 | unallocated | benchmark suite per `2026-09-12-datalog-benchmark-suites.md`: TC and SG (Boolean), SSSP and CC (min-plus), MLM over recursive trees (lifted reals, no cross-engine baseline exists), TC over the counting semiring, exact cover vs CP-SAT, and lineage-driven minimum-fault search over Molly's `ack-deliv` protocol (minimum hitting set of the proof-tree hypergraph with an exclusion certificate; capability row, no published speed baseline; `2026-09-12-alvaro-datalog-reading.md`); local comparators Soufflé and egglog; RecStep, BigDatalog, DDlog, Umbra, VLog, RDFox, Rel citation-only (VFLog table is the only fully versioned one; FlowLog is broadest but unversioned; Rel has no published numbers); protocol as in `2026-09-11-ergodis-external-benchmark-programme.md`; reshaped by Macready's named workload | harness private, results in `ergodis-evidence` |
 | 6 (complete) | C1162 | FGH-square discharge of leaf lowering by counterexample-guided synthesis on the C1091 fixtures; mechanism core, each discharged family private | core + private |
-| 7 | C1158 | acting-subgroup measurement on the two-transfer census; if it pays, a generic group-action / canonical-form trait in core so the contract can carry a symmetry declaration | private task crate, then core |
+| 7 (complete) | C1158 | acting-subgroup measurement on the two-transfer census; if it pays, a generic group-action / canonical-form trait in core so the contract can carry a symmetry declaration | private task crate, then core |
 
 Steps 4 and 5 are allocated after C1163's first program shows where join cost lands and after
 Macready names a workload. Step 7 can run at any time; it is cheap and independent.
 
-C1161 is complete (`2026-09-12-c1161-recursive-runtime.md`). C1162 is complete (`2026-09-12-c1162-leaf-lowering-square.md`). C1158 is the
-next allocated independent task while join/benchmark allocation awaits the concrete workload. C1163 completed the finite relational contract and portable provider
+C1161 is complete (`2026-09-12-c1161-recursive-runtime.md`). C1162 is complete (`2026-09-12-c1162-leaf-lowering-square.md`). C1158 is complete (`2026-09-12-c1158-acting-subgroup.md`): the live paired census
+has no ambient-orbit reduction; the closed q18 interface family has effective
+action order 768. No group trait or augmentation is promoted. All allocated
+active steps are complete; join/benchmark allocation awaits the concrete workload. C1163 completed the finite relational contract and portable provider
 (`2026-09-12-c1163-rule-contract.md`); C1164 adds a live Lean oracle, proved checker
 and kernel-checked least-fixpoint proof (`2026-09-12-c1164-lean-oracle.md`). C1161 now supplies recursive and incremental runtime with a real campaign readout. Scalar 0-stability counts all tuple coordinates,
 and retractions retain a separate sound policy. General automation integration

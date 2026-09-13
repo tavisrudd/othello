@@ -5685,3 +5685,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1161 `[ergodis]` [COMPLETE 2026-09-12]** — checked recursive runtime, sparse incremental propagation and safe retractions; actual campaign fork-depth catalogue readout, independent Python and native/WASM agreement; retained hardware-counter evidence → `notes/2026-09-12-c1161-recursive-runtime.md`.
 
 - **C1162 `[ergodis]` [COMPLETE 2026-09-12]** — finite lowering-square checker and counterexample-guided H synthesis; exhaustive binary privacy discharge, leakage-only obstruction, minimal 15-state readout quotient, symbolic Lean span/trace/fiber theorems with axiom audit → `notes/2026-09-12-c1162-leaf-lowering-square.md`.
+
+- **C1158 `[ergodis]` [COMPLETE 2026-09-12]** — acting-set scope corrected and measured: q18 interface subgroup36,864/kernel48/effective768; actual q29/q174 paired-census actions trivial, with ambient collisions excluded; independent Rust/Python certificates → `notes/2026-09-12-c1158-acting-subgroup.md`.

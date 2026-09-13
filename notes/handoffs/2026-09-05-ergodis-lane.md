@@ -66,9 +66,12 @@ C1161 complete: checked recursive sessions and real campaign fork-depth readout,
 incremental propagation, independent Python/native/WASM agreement and retained perf evidence
 (`../2026-09-12-c1161-recursive-runtime.md`). C1162 complete: checked finite lowering squares,
 exhaustive privacy family and minimal readout quotient, symbolic Lean span/trace laws
-(`../2026-09-12-c1162-leaf-lowering-square.md`). Next allocated work: C1158
-(acting-subgroup measurement). Join engine and broader benchmarks remain unallocated
-behind a concrete workload. Existing WASM test-target Clippy warning: `src/bundle.rs:101`
+(`../2026-09-12-c1162-leaf-lowering-square.md`). C1158 complete: q18 effective action 768 on the closed
+interface family, no ambient-orbit reduction for the live paired census
+(`../2026-09-12-c1158-acting-subgroup.md`; isolated branch `task/c1158-acting-subgroup`,
+private `3d52f12`). All currently allocated active rule-contract steps are complete.
+Next: concrete workload/IR-obligation gate; join engine and broader benchmarks
+remain unallocated. Deferred speed/hygiene tasks are not implicitly resumed. Existing WASM test-target Clippy warning: `src/bundle.rs:101`
 items after test module; production-library Clippy and unit tests pass. Literature cards:
 `../2026-09-12-c1150-category-theory-for-ergodis.md`,
 `../2026-09-12-c1151-category-theory-capability-pass.md`,
