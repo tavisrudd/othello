@@ -33,8 +33,11 @@ transports it to finite event sequences. The span instance is symbolic and
 general; the private finite privacy instance is checked separately by Rust and
 an independent Python oracle. Its JSON certificate is not yet imported into
 Lean. Likewise, these results do not formally verify the Rust implementation.
-The Lean companion proves bounded reflection for checked concrete iterations;
-the universal scalar N-round convergence argument is not yet a Lean theorem.
+The universal scalar N-round convergence theorem is now proved in
+`lean/WeightedRules/Convergence.lean`,
+`WeightedRules.boundedMinPlus_iterate_fixed` (C1165), with sharpness for every
+positive scalar count and reflective certificate completeness. The finite
+privacy JSON import remains a separate proof boundary.
 
 The current oracle also has a workflow limit: its synchronous local subprocess
 has no timeout or isolation, and Lean enforces the output-size limit after

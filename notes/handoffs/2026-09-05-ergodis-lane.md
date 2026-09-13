@@ -69,9 +69,9 @@ exhaustive privacy family and minimal readout quotient, symbolic Lean span/trace
 (`../2026-09-12-c1162-leaf-lowering-square.md`). C1158 complete: q18 effective action 768 on the closed
 interface family, no ambient-orbit reduction for the live paired census
 (`../2026-09-12-c1158-acting-subgroup.md`; isolated branch `task/c1158-acting-subgroup`,
-private `3d52f12`). C1165 is active: formalize universal scalar N-round
-convergence for the existing bounded min-plus contract
-(`../2026-09-12-c1165-min-plus-convergence.md`).
+private `3d52f12`). C1165 complete: universal scalar N-round convergence,
+sharpness and reflective certificate completeness
+(`../2026-09-12-c1165-min-plus-convergence.md`, proof `e6ddc6e57`).
 Lean automation integration and remaining proof boundaries:
 `../2026-09-12-lean-automation-integration.md`.
 Next: concrete workload/IR-obligation gate; join engine and broader benchmarks

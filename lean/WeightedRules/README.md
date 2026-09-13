@@ -62,6 +62,22 @@ against `distanceProgram`; it does not use that retained response as an oracle.
 
 ## Verification boundary
 
+`WeightedRules.Convergence` proves that every bounded min-plus program on `n`
+scalar coordinates is fixed after `n` synchronous rounds from infinity.
+`boundedMinPlus_iterate_fixed` includes empty programs, cycles, repeated product
+factors and saturation. `boundedMinPlus_iterate_least` establishes leastness.
+The module `WeightedRules.ConvergenceSharpness` defines
+`WeightedRules.zeroChainProgram`; its theorem
+`WeightedRules.zeroChain_requires_scalar_rounds` proves the bound sharp for
+every positive scalar count.
+
+`WeightedRules.ConvergenceReflection` proves `checkCertificate_complete` for
+the exact list of N-round values. `iteratedCheckedSolution` constructs that
+accepted result internally, and `CheckedSolution.eq_iterate` proves that every
+accepted certificate denotes the same valuation. Build
+`WeightedRules.ConvergenceAxiomAudit` through the supported guarded entry point
+to check these proofs, the sharpness family and the finite boundary controls.
+
 `checkCertificate` checks exact coordinate coverage, a round count at most the
 number of scalars, equality with iteration from infinity, and fixedness under
 the supplied formal equations. `checkCertificate_sound` proves that acceptance
