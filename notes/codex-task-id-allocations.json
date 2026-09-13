@@ -5084,8 +5084,17 @@
       "last": 1179,
       "purpose": "Datalog transitive-closure ballpark: Ergodis rules path vs Souffle and Nemo on matched inputs",
       "sequence": 565
+    },
+    {
+      "count": 2,
+      "first": 1180,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1181,
+      "purpose": "Categorical lift-fold-lower investigation and gated cross-domain Evolve continuation pilot",
+      "sequence": 566
     }
   ],
-  "next_id": 1180,
+  "next_id": 1182,
   "schema": "codex-task-id-allocations-v1"
 }
