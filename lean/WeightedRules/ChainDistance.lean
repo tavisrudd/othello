@@ -50,4 +50,18 @@ theorem chainDistanceBaseline_values :
       [0, 1, 2, 3, 4, 5] := by
   decide +kernel
 
+/-- Externally obtained improved values, checked by two synchronous replay steps
+from the baseline: the first lowers the edge coordinate, the second the distance
+to vertex five. -/
+def chainDistanceImproved : CheckedImprovement chainDistanceBaseline chainDistanceImprovedProgram :=
+  ergodis_improvement chainDistanceBaseline to chainDistanceImprovedProgram
+    from "WeightedRules/fixtures/chain-distance-improved.json" replay 2
+
+/-- The improved distances reach vertex five through the free last edge. -/
+theorem chainDistanceImproved_values :
+    ((List.finRange 6).map fun i =>
+      (listState chainDistanceImproved.values (⟨36 + i.val, by omega⟩ : Fin 43)).val) =
+      [0, 1, 2, 3, 4, 4] := by
+  decide +kernel
+
 end WeightedRules

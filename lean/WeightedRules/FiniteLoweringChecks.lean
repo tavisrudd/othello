@@ -63,10 +63,23 @@ example : List Nat := nat_table_from_json "fixtures/finite-tables.json" at ["too
 #guard_msgs in
 example : List Nat := nat_table_from_json "fixtures/finite-tables.json" at ["not_array"]
 
+/-- info: 'WeightedRules.EventLowering.checkLoweringCertificate_sound' depends on axioms: [propext] -/
+#guard_msgs in
 #print axioms WeightedRules.EventLowering.checkLoweringCertificate_sound
+/-- info: 'WeightedRules.EventLowering.CheckedLowering.square' depends on axioms: [propext] -/
+#guard_msgs in
+#print axioms WeightedRules.EventLowering.CheckedLowering.square
+/-- info: 'WeightedRules.EventLowering.CheckedLowering.trace' depends on axioms: [propext] -/
+#guard_msgs in
 #print axioms WeightedRules.EventLowering.CheckedLowering.trace
+/-- info: 'WeightedRules.EventLowering.parity_table_accepted' depends on axioms: [propext] -/
+#guard_msgs in
 #print axioms WeightedRules.EventLowering.parity_table_accepted
+/-- info: 'WeightedRules.EventLowering.lowering_rejection_controls' depends on axioms: [propext] -/
+#guard_msgs in
 #print axioms WeightedRules.EventLowering.lowering_rejection_controls
+/-- info: 'WeightedRules.EventLowering.separated_readouts_card_le' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
 #print axioms WeightedRules.EventLowering.separated_readouts_card_le
 
 end WeightedRules.EventLowering
