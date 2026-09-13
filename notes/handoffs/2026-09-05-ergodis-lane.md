@@ -164,6 +164,13 @@ Pareto survivor with `k d^2 / n > 19.2`. Reports:
 `../2026-08-30-c985-completion-compression-and-wide-search.md` and
 `../2026-08-30-c985-ergodis-private-adapters-and-parallel-roots.md`.
 
+### C1178 — framing for the optimization paper and documentation (queued)
+
+Initial private source map, recovery motivation, alternative framings and audience-specific
+drafts: `../2026-09-13-c1178-ergodis-framing.md`. Next: complete the C985-onward provenance
+pass and select the paper/README narratives with explicit evidence and publication boundaries.
+The complete-ports paper is a read-only recovery source; C985 retains manuscript ownership.
+
 ## Additional routed work
 
 - C1111/C1112 reconstruction-driven representation discovery remains a bounded private spike;
