@@ -34,14 +34,17 @@ not-to-ship contributor guidance. Narrow UI/admin work does not require the full
 
 ### C1170 — owned Rel-rich frontend (in progress)
 
-Current contract and measurements: `../2026-09-12-c1170-owned-rel-frontend.md`; source study:
-`../2026-09-12-c1169-datalog-frontends.md`. Private `a644dad` establishes finite native/WASM
-parity on 142 cases / 325,403 canonical bytes, including the reviewed lexer repairs. This is a
-finite parity gate, not a grammar oracle or complete syntax/admission claim.
+Contract: `../2026-09-12-c1170-owned-rel-frontend.md`; source study:
+`../2026-09-12-c1169-datalog-frontends.md`; measurements, cost model and bounded recovery:
+`../2026-09-13-c1170-frontend-measurements.md` (private `99281a2` … `f820daf`).
+The native/WASM parity gate now carries recovery records (146 cases); it is a finite parity
+gate, not a grammar oracle or complete syntax/admission claim. Instruction counts are the
+decision metric on this shared box; cycle ratios are reported only with intervals.
 
-**Next:** retain interleaved parser-performance measurements, then close recovery and remaining
-syntax/admission gaps. Ergodis retains lowering, rules, joins and execution; no external evaluator
-or backend is adopted. Tree-sitter and executable reference semantics remain deferred.
+**Next:** the parser half of the ASCII cost (Pratt continuation loop), a cold-start stage, then
+the remaining syntax gaps by manifest family and first semantic admission checks. Ergodis retains
+lowering, rules, joins and execution; no external evaluator or backend is adopted. Tree-sitter
+and executable reference semantics remain deferred.
 
 ### Rule-contract programme — closed
 
@@ -73,11 +76,11 @@ Earlier C1154–C1168 increments and exact boundaries are indexed by the program
 reproduce their history here. Open programme follow-ups need allocation: the C1176 decisions for
 Tavis (identity/ownership redesign, evaluator policy, `Invariance` ABI code) and, only if count-axis
 parallelism is ever wanted, a merge-free core tile kernel (discovery track, 2026-09-13).
-Foreign issues: private `cargo clippy --all-targets` fails in the `williamson_parallel_profile`
-target (dead code in unmodified files) and `cargo fmt --check` reports diffs in
-`src/hadamard_execution.rs` and `src/partitioned_additive_join.rs`; the shared Cargo target
-directory produced a stale-rlib build failure under concurrent checkouts during C1176; the
-worktree `~/.cache/ergodis/worktrees/c1176-props` holds regenerated tracked `__pycache__` files.
+Foreign issues: private workspace Clippy was repaired under C1170 (2026-09-13); `cargo fmt
+--check` still reports pre-existing drift in eight untouched files (formatting them is a
+separate decision); the shared Cargo target directory produced a stale-rlib build failure under
+concurrent checkouts during C1176; the worktree `~/.cache/ergodis/worktrees/c1176-props` holds
+regenerated tracked `__pycache__` files.
 
 ### C1149 — public-release readiness
 
