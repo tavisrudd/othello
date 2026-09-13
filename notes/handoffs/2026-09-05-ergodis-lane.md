@@ -89,6 +89,13 @@ performance and rich diagnostic requirements
 coverage contract and parser/diagnostic performance prototype
 (`../2026-09-12-c1170-owned-rel-frontend.md`). Ergodis retains all backend and
 rules handling; Tree-sitter and executable reference semantics are deferred.
+C1171 review complete: no mathematical defect in the day's work; evidence-path
+leak and task-id lint fixed (core `2e1bab2`); six generated-program properties
+(core `47a8c05`); three open C1170 lexer bugs (`a^b`, `0x1f`, zero-width `1e`
+span) routed to C1170; successors C1172 (Lean audit gate), C1173
+(support-witness certificate), C1174 (generic carrier + Boolean), C1175
+(release hygiene), C1176 (contract semantics), C1177 (private kernels) queued
+(`../2026-09-12-c1171-rule-programme-review.md`).
 Next: C1154 offline interval/acyclicity slice, explicitly resumed under the
 lane-wide two-hour authorization. C1170 retains performance/parity/recovery gates.
 The concrete workload/IR-obligation gate still governs joins and

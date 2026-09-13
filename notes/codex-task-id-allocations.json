@@ -5057,8 +5057,17 @@
       "last": 1171,
       "purpose": "Review pass over 2026-09-12 ergodis rule-contract programme work: remediation, extension, property-based tests, ej",
       "sequence": 562
+    },
+    {
+      "count": 6,
+      "first": 1172,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1177,
+      "purpose": "C1171 review successors: Lean audit gate, support-witness certificate, generic carrier, release-hygiene follow-ups, rule-contract semantics follow-ups, private kernel follow-ups",
+      "sequence": 563
     }
   ],
-  "next_id": 1172,
+  "next_id": 1178,
   "schema": "codex-task-id-allocations-v1"
 }
