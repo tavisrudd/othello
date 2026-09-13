@@ -33,7 +33,8 @@ private theorem info_cost {a b : Cost} :
     change min a.val b.val = b.val
     omega
 
-private theorem iterate_succ_cost (P : Program Cost n) (k : Nat) (i : Fin n) :
+/-- Numerical costs never increase along from-zero bounded min-plus iteration. -/
+theorem boundedMinPlus_iterate_succ_cost (P : Program Cost n) (k : Nat) (i : Fin n) :
     (iterate boundedMinPlus P (k + 1) i).val ≤
       (iterate boundedMinPlus P k i).val := by
   have h : StateLe boundedMinPlus (iterate boundedMinPlus P k)
@@ -101,9 +102,12 @@ private theorem contributions_witness (rs : List (ProductRule n))
       change (costMul (x q.left) (x q.right)).val = min 4294967295 _
       omega
 
-private theorem step_improvement (P : Program Cost n) (x y : State Cost n) (i : Fin n)
+/-- A strict step improvement occurs at a rule output and has an improving
+prior coordinate whose cost is no greater than the new output cost. -/
+theorem boundedMinPlus_step_improvement (P : Program Cost n) (x y : State Cost n) (i : Fin n)
     (h : (step boundedMinPlus P x i).val < (step boundedMinPlus P y i).val) :
-    ∃ j, (x j).val < (y j).val ∧ (x j).val ≤ (step boundedMinPlus P x i).val := by
+    i ∈ P.rules.map (·.output) ∧
+      ∃ j, (x j).val < (y j).val ∧ (x j).val ≤ (step boundedMinPlus P x i).val := by
   have hi : (step boundedMinPlus P y i).val ≤ (P.inputs i).val := min_le_left _ _
   have hy := (step boundedMinPlus P y i).isLt
   have hc : (contributions boundedMinPlus P.rules x i).val < 4294967295 := by
@@ -120,6 +124,7 @@ private theorem step_improvement (P : Program Cost n) (x y : State Cost n) (i : 
     le_trans (min_le_right _ _) (contributions_le_rule P.rules y i r hr ho)
   have hprod : (costMul (x r.left) (x r.right)).val <
       (costMul (y r.left) (y r.right)).val := by omega
+  refine ⟨List.mem_map.mpr ⟨r, hr, ho⟩, ?_⟩
   by_cases hl : (x r.left).val < (y r.left).val
   · refine ⟨r.left, hl, ?_⟩
     have := mul_left_cost (x r.left) (x r.right)
@@ -140,7 +145,7 @@ private theorem improvement_coordinates (P : Program Cost n) (k : Nat) (i : Fin 
   induction k generalizing i with
   | zero => exact ⟨{i}, by simp, by simp⟩
   | succ k ih =>
-    obtain ⟨j, hj, hjcost⟩ := step_improvement P
+    obtain ⟨_, j, hj, hjcost⟩ := boundedMinPlus_step_improvement P
       (iterate boundedMinPlus P (k + 1)) (iterate boundedMinPlus P k) i h
     obtain ⟨s, hcard, hs⟩ := ih j hj
     have hnot : i ∉ s := by
@@ -156,7 +161,7 @@ private theorem improvement_coordinates (P : Program Cost n) (k : Nat) (i : Fin 
     · intro a ha
       rcases Finset.mem_insert.mp ha with rfl | ha
       · exact le_rfl
-      · exact le_trans (iterate_succ_cost P (k + 1) a) (le_trans (hs a ha) hjcost)
+      · exact le_trans (boundedMinPlus_iterate_succ_cost P (k + 1) a) (le_trans (hs a ha) hjcost)
 
 /-- A strict improvement in round `k + 1` requires at least `k + 1` scalar
 coordinates, independently of the number of rules and of represented costs. -/
@@ -175,7 +180,7 @@ theorem boundedMinPlus_iterate_fixed (P : Program Cost n) :
       iterate boundedMinPlus P n := by
   funext i
   apply Fin.ext
-  have hle := iterate_succ_cost P n i
+  have hle := boundedMinPlus_iterate_succ_cost P n i
   change (iterate boundedMinPlus P (n + 1) i).val = _
   by_contra hne
   have hlt : (iterate boundedMinPlus P (n + 1) i).val <

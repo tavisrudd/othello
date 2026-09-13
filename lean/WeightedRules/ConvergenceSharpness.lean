@@ -16,7 +16,9 @@ enumerated size cutoff or native decision procedure.
 
 namespace WeightedRules
 
-private theorem indexed_contributions {n : Nat} (indices : List (Fin n))
+/-- Contributions of one indexed rule per listed output reduce to that rule's
+product; repeated output indices are harmless by idempotence. -/
+theorem indexed_contributions {n : Nat} (indices : List (Fin n))
     (left right : Fin n → Fin n) (x : State Cost n) (i : Fin n) :
     contributions boundedMinPlus
       (indices.map fun j => ⟨j, left j, right j⟩) x i =

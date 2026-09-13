@@ -52,6 +52,14 @@ distance witnesses and incremental rejection controls. `CheckedImprovement`
 requires a typed old `CheckedSolution`; calling the raw local replay predicate
 on an unauthenticated seed does not establish leastness.
 
+Import `WeightedRules.OutputConvergenceReflection` to use
+`improved.toRuleOutputSolution`. This optional conversion keeps the values and
+uses the from-zero bound `min N (M + 1)`, where M is the number of distinct rule
+outputs. The same bound suffices for replay from any seed proved below the new
+least solution. It is a uniform bound; a particular witness can stop earlier.
+For the four-vertex example the bounds are 21 and 5, while the incremental
+witness actually needs three replay steps.
+
 ## Execution
 
 Build the `ergodis-rules` native shared library using the core repository's
@@ -108,6 +116,19 @@ accepted result internally, and `CheckedSolution.eq_iterate` proves that every
 accepted certificate denotes the same valuation. Build
 `WeightedRules.ConvergenceAxiomAudit` through the supported guarded entry point
 to check these proofs, the sharpness family and the finite boundary controls.
+
+`WeightedRules.OutputConvergence` proves the tighter structural bound
+`ruleOutputBound P = min n ((ruleOutputs P).card + 1)`. The first round loads
+facts; later improvements can occur only at rule outputs. Duplicate rules and
+immutable input coordinates do not inflate the distinct-output count.
+`ruleOutputCheckedSolution` constructs a certificate at this bound;
+`CheckedSolution.withRuleOutputBound` changes an existing certificate's round
+count by proof while preserving its values. Build
+`WeightedRules.OutputConvergenceAxiomAudit` for the structural theorem,
+safe-seed replay, conversions, sharpness and distance controls. The ordinary
+checker still admits any valid certificate within the scalar-count bound.
+`WeightedRules.outputChainProgram` in `OutputConvergenceSharpness` has M
+outputs and needs M+1 rounds for every M, including zero.
 
 `checkCertificate` checks exact coordinate coverage, a round count at most the
 number of scalars, equality with iteration from infinity, and fixedness under
