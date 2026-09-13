@@ -148,3 +148,23 @@ checks complete consumption and rejects four corrupt controls. Its census finds
 (4,097 tokens, 3,584 nodes). This approximately 14.9× logical representation
 ratio is not a traffic/RSS measurement. It sharpens the next cost model:
 measure materialization, retained capacity and setup alongside ASCII dispatch.
+
+
+### Measurement handoff
+
+For the next C1170 run, freeze separate ASCII-heavy, Unicode-heavy, comment/
+string-heavy and malformed early/late source cohorts before comparing variants.
+Use identical limits, original source bytes, token/node outputs and rejection
+codes. Keep corpus generation and full output equality checks outside timing;
+prevent dead-code elimination without charging a full fingerprint traversal to
+only one arm. Report preparation, repeated UTF-8 validation plus scan/parse,
+optional error enrichment and rendering separately, then their actual composed
+cost. Admission/lowering is absent and must not be represented by a zero-cost
+stub in an end-to-end claim.
+
+Retain release executables in the shared cache, pin equal work to physical
+cores, alternate paired runs, and collect cycles/instructions/branches/misses/
+cache events under the existing performance playbook. Keep allocation and
+instrumented profiling runs separate from throughput. Report distributions,
+null drift, source hashes, occupied records and retained capacity. A win confined
+to one synthetic cohort does not authorize general frontend promotion.

@@ -45,3 +45,9 @@ logical record size, not measured traffic or resident memory.
 No Lean commands, foreign evaluator adoption, publication or push occurred.
 Foreign campaign-console/interface edits were preserved. Completed task rows
 were archived and removed from the live queue; C1170 remains allocated/open.
+
+
+Final bookkeeping verifies each closed row is archived exactly once and absent
+from the live queue; C1170 is still in progress. All eight final parser receipt
+source hashes match. The task-close cache-GC audit completed in dry-run mode;
+no cache entries were deleted. Owned source and report paths are committed.
