@@ -15,6 +15,14 @@ and evidence; otherwise report best found or a Pareto frontier.
 
 ## Private inspiration and scope clarification
 
+Tavis names **Vincent Abbott's work** and **Cats4AI** as related inspirations alongside
+Macready's broader categorical lens. Preserve all three in the investigation's provenance;
+do not frame the programme as arising from the correspondence alone. C1180 should identify
+the relevant Cats4AI material and its authors/constructions before attributing specific
+technical results. The name here records user direction, not a reviewed source or a claim
+that Cats4AI denotes one particular implementation. Reuse C1150/C1151's recorded Abbott–Zardini
+reading as a starting point, with source-level verification for any adopted mechanism.
+
 Tavis supplied William Macready's September 12, 2026, 1:06 PM email in this conversation.
 The category-theory lens is partially inspired by its description of a foundation broader
 than neural circuits, including symmetries, generalized tensors, predicate logic and tensor

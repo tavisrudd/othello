@@ -265,6 +265,10 @@ needs—and how best to realize that structure**. Neither replaces the broad lea
 Category theory is a candidate organizing language for the transformations and their laws,
 not by itself a novelty claim or the proposed first-paper headline.
 
+Tavis explicitly names Vincent Abbott's work and Cats4AI as related inspirations alongside
+Macready's broader categorical lens. C1180 must resolve the relevant Cats4AI sources before
+making technical attributions; its inclusion here records inspiration, not a source review.
+
 The C1150 synthesis of Abbott–Zardini separates a semantic layer from an algorithmic layer:
 different realizations can have the same meaning and different costs. The Ergodis framing
 adds a search role for Evolve, a preservation obligation for admission, and operational cost
