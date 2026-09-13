@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-13
-**Status**: IN PROGRESS; source comparison and first-paper recommendation.
+**Status**: Framing synthesis delivered; first-paper recommendation and draft prose below.
 **Visibility**: PRIVATE contributor/editorial context. This document is not an export source.
 
 ## Purpose and scope
@@ -16,7 +16,68 @@ This task owns the framing synthesis and proposed audience-specific prose. C985 
 to own the optimization manuscript. The complete-ports manuscript remains in its own lane
 and is a read-only source here. Public documentation is a downstream destination: its
 wording requires a separate check against the actual exported capabilities and evidence.
-No manuscript, public README, export or publication is changed by this initial document.
+No manuscript, public README, export or publication is changed by this task.
+
+## Recommendation
+
+Lead the first paper with **discovering and compiling structure for exact optimization**.
+Use **query-preserving adaptive compilation** as the technical organizing idea. Evolve is
+the system's discovery and adaptation component throughout the paper, from the opening
+example to the evaluation. Its interaction with exact computation is the subject.
+
+Working title:
+
+> **Ergodis: Discovering and Compiling Structure for Exact Optimization**
+
+Working thesis:
+
+> Ergodis searches both for solutions and for structure that makes solving cheaper.
+> Evolve proposes and selects that structure; query-specific preservation contracts
+> determine how it may change representations, execution and reuse. Solves return
+> answers and evidence that can guide subsequent discovery.
+
+The unifying object is an **admitted change to a computation**: what question it serves,
+what it preserves, what must be checked, how the answer is recovered, and where the change
+can be reused. An exact quotient, a one-sided bound, a witness-generating parameterization,
+a source update and a cheaper execution plan have different obligations. The paper should
+make their relationship legible without pretending they are the same mathematical object.
+
+This frame contains the earlier recovery, contextual-state, invariant-synthesis and
+dynamic-query accounts. It also gives the newer recursive contracts a clear role. It does
+not require every problem to be recursive, every representation to be a quotient, or every
+Evolve action to have the same proof format.
+
+**Judgment and scope.** This is a recommendation about the strongest story supported by
+the project's mechanisms and direction, not a claim of priority. No external research paper
+was newly read at full text in this pass. The external comparison uses official documentation,
+abstracts and earlier internal studies at the read depths recorded in
+`2026-09-13-c1178-ergodis-framing-sources.md`. The contribution's novelty remains for a
+claim-specific audit under C985. The framing task can close while that paper evidence is open.
+
+**Strongest objection.** A referee can reasonably say: this combines algorithm selection,
+constraint reformulation, abstraction refinement and compiler optimization behind a common
+interface. A good answer must show a shared admission mechanism doing substantive work
+across different transformations, plus a measured benefit from coupling discovery to
+execution. A catalogue of examples and a generic loop diagram will not answer the objection.
+
+## Ranked first-paper frames
+
+Ranking is editorial, against this project's goals; it is not a numerical novelty score.
+Every candidate includes Evolve as core. Ranks below one are useful supporting accounts
+and possible deeper papers, not proposals to remove Evolve from Ergodis.
+
+| Rank | Frame | Strength and breadth | Main risk / disposition |
+|---|---|---|---|
+| 1 | Discover and compile structure under query-preservation contracts | Unifies discovery, exact answers, representations, witness lifting, updates and reuse. Makes the operational role of Evolve unavoidable. | Requires evidence that the common contracts and feedback actually connect implementations; recommend as first-paper thesis. |
+| 2 | Discover the distinctions sufficient for future questions | Sharp conceptual connection to recovery labels, observables, contextual refinement and privacy traces. Excellent opening mechanism. | A coarsest quotient alone does not explain useful non-quotient reductions or their acquisition cost; use within rank 1. |
+| 3 | Compile dynamic decision problems and retain reusable knowledge | Makes repeated queries, updates, certificates and cross-run reuse central. Natural systems emphasis. | Universal dynamic-policy and source-edit support exceed delivered families; possible systems-focused follow-on. |
+| 4 | Discover and admit theorem-guided search improvements | Closely fits predicate synthesis, symmetry/bound admission and learned-only reruns. Concrete and evaluable. | Can understate query and representation choices; a strong empirical strand of the first paper and possible follow-on. |
+| 5 | Exact compositional optimization over finite interfaces | Most direct connection to the existing recovery theory and original C985 theorem spine. | Too narrow as the whole system identity; retain as a mathematical foundation and one family demonstration. |
+| 6 | Recursive optimization as a checked computational oracle | A coherent contract, convergence/proof results and executable certificate boundary. | Focuses on one backend and proof consumer; substantial candidate for a separate technical paper, subject to its own literature work. |
+
+An unrestricted “optimizer of all questions, designs and algorithms” is not a competing
+first-paper frame: it lacks a bounded evaluation contract. The broader design space belongs
+in the system explanation, with implemented subsets and open work identified precisely.
 
 ## Editorial direction — September 13 clarification
 
@@ -86,7 +147,7 @@ measured evidence beneath this sentence.
 | Framing | Central idea and use | Source and boundary |
 |---|---|---|
 | Exact recovery information that composes | Scalar minima discard needed labels. Preserve functionals, costs, supports and lifts at the appropriate level. Best concrete motivation. | `papers/complete-repair-ports/compositional_recovery.tex`, abstract and introduction; `sections/03a-exact-recovery-optimization.tex`; paper README. Distinguish equation confinement from confinement of minimal supports; retain the hypotheses of each. |
-| Contextual quotient compiler | Derive the interface state, identify equivalent decisions, compose or search the resulting finite problem, reconstruct a witness. Natural mathematical center for the optimization paper. | `notes/2026-08-27-c985-ergodis-optimization-paper.md`, Objective and Proposed theorem and algorithm spine; core `OPTIMIZATION.md` opening. Quotient construction, algorithmic improvement and engineering require separate ablations. |
+| Contextual quotient compiler | Derive the interface state, identify equivalent decisions, compose or search the resulting finite problem, reconstruct a witness. Mathematical foundation within the unified frame. | `notes/2026-08-27-c985-ergodis-optimization-paper.md`, Objective and Proposed theorem and algorithm spine; core `OPTIMIZATION.md` opening. Quotient construction, algorithmic improvement and engineering require separate ablations. |
 | Algebraic dynamic programming and exact resource fronts | Finite ordered-monoid and fixed-dimensional Pareto states support witness-preserving composition. Express what the common kernel actually shares across domains. | C985 task specification, theorem/algorithm spine and evidence gate. Fixed-dimensional additive resources must not be conflated with per-helper packing/capacity states. Recheck theorem hypotheses before manuscript use. |
 | Compile structure before search | Source algebra, conserved gradings, spans, symmetries and reconstructible blocks expose cheaper exact problems. Accessible README/optimization-doc entry. | Core `README.md` and `OPTIMIZATION.md`; `notes/2026-08-30-c985-residual-hitting-positioning-and-extension-plan.md`. A classical residual solver can sit below an interesting compiler; identify where the contribution lies. |
 | Discover useful necessary conditions and invariants | Finite labelled corpora support exact candidate discrimination, semantic niches and counterexample-guided refinement. A concrete early Evolve framing. | `notes/2026-09-01-c985-evolve-sota-synthesis-lineages.md`, Ergodis shorthand and research lineages. Exactness on the corpus is not a proof over a larger deployment domain. This is a historical implementation description. |
@@ -95,6 +156,8 @@ measured evidence beneath this sentence.
 | Recursive exact backend and checked oracle | Finite weighted rules, least fixpoints and independently checked certificates connect compilation to recursive queries and proof consumers. | `notes/2026-09-12-c1163-rule-contract.md`, C1164 oracle report, C1173 support-certificate report and C1174 generic-carrier report. Distinguish the supported carriers/programs, proof statements, ABI exposure and broader frontend ambitions. |
 | Operational system with retained knowledge | Compilation, solve, verification, updates and history become reusable workflows with explicit identities and scopes. | C1084 portable-control architecture and the architecture map's records/repository routes. Opening a record does not establish execution or proof authority. This supports the product story rather than replacing the mathematical result. |
 | Joint meta-optimization under preservation contracts | Optimize queries, observables, representation, execution and evidence cost together, using actual solves as feedback. | September 13 discussion plus C1091/C1092. This is a synthesis of established ideas and project direction; distinguish delivered family mechanisms from autonomous end-to-end integration. |
+| Semantic sensitivity | Retain sufficient signatures so admitted future cost/feasibility edits can reuse a compiled family. Connects query contracts to reuse. | September 5 brainstorm, Semantic sensitivity and final red-team verdict; reconciled by C1091. Fixed-family coverage and edit factorization are hypotheses; arbitrary code mutation is not admitted. |
+| Decision-sufficient observation and design synthesis | Select what to observe, or which source system to build, according to operational utility and information order. | September 4 design-synthesis/event-vocabulary passages; September 5 query-budget discussion; C1091/C1092. Broad research direction, not universal autonomous query/design discovery. |
 
 Paths beginning `notes/` and `papers/` refer to the Othello monorepo. Core paths refer to
 `~/src/ergodis`. Older C985 reports still carry historical `complete-ports` pegs and
@@ -117,29 +180,192 @@ preserve availability probabilities, all minimal supports or an implementable po
 Complete-ports supplies precise recovery theorems; their extension to another family needs
 its own correspondence and preservation argument.
 
-## Different openings for different readers
+## What the historical sources change
 
-**First optimization paper.** Select the strongest unified thesis using the criteria above.
-One candidate opening is a concrete failure of an insufficient state and the mathematical
-state that repairs it; another opens with checked discovery and query-directed specialization.
-Both must explain Evolve as core to the integrated Ergodis system. Compare which opening
-best exposes the connection between discovery, preservation contracts and exact computation.
-C985's original gate requires material reduction
-from the shared kernel on two noncoding models; a shared wrapper is insufficient. A broader
-thesis must identify its additional evidence obligations rather than quietly weakening
-this existing gate.
+The September 4 proposal emphasizes an optimization congruence and finite-state dynamic
+execution. Its architecture is useful provenance, but its broad theorem package and informal
+ratings are proposals, not evidence. The September 5 text supplies the decisive correction:
+budget compilation around the query, refine a proved relaxation when needed, and include
+construction, updates and verification in total cost. C1091 explicitly broadens representation
+contracts to catalogs, envelopes, event circuits, policies and bounds. It also separates
+executor, runtime and host; historical crate sketches must not overwrite that distinction.
 
-**README.** Start with problems a reader can solve, required structure, the returned answer,
-and one runnable example. Candidate wording for later validation: “Ergodis compiles
-structured finite optimization problems into reusable exact computations, retaining the
-information needed to reconstruct answers in the original problem.” Then state the
-supported families and where Evolve is available. Do not use an unrestricted “every answer
-is independently certified” claim.
+The same September 5 source retracts overly broad pricing, reliability and arbitrary-code-edit
+claims. Semantic sensitivity survives as a conditional research direction. C1062's reviewed
+causal results make the cost warning concrete: carrier construction can lose to memoized
+direct solving, and raw state ratios were not valid performance evidence. This is a useful
+negative for a paper about choosing computation, not a reason to conceal the causal work.
 
-**Conceptual documentation.** Explain model, query, observable, objective, representation,
-compiled plan and evidence using one model with two questions and one rejected reuse.
-Use the public glossary as terminology authority. Explain Evolve through a concrete
-proposal → check → admit → execute → measure → reuse workflow with explicit scope.
+The current complete-ports manuscript keeps labelled composition in the main exposition and
+minimal numerical state in a secondary appendix. That editorial choice fits its recovery
+question; it does not set the first Ergodis paper's scope. C1070 supplies another reading of
+the recovery interface: legitimate reconstruction and adversarial disclosure ask related
+questions of the same linear model. Its linear-uniform and randomness assumptions remain
+part of the example, and its literature assertions are not re-certified here.
+
+## First-paper structure and evidence obligations
+
+1. **Problem and concrete opening.** Explain that a fast exact optimizer must choose which
+   distinctions to retain and which structure to discover. Use recovery labels as the
+   first miniature: a local cost alone cannot tell an outer composition which functional
+   was supplied. Immediately show how discovery, a counterexample and admission enter the
+   system, rather than postponing Evolve to an applications section.
+2. **Semantic contracts.** Specify source, query, observation/context family, objective,
+   representation, answer lift, updates and evidence. Distinguish full answer preservation,
+   a sound bound and feasible-witness construction. State existing family results and the
+   precise shared proposition needed for composition of admitted transformations. Do not
+   invent a universal theorem from the diagram.
+3. **Evolve and exact execution.** Explain candidate generation, challenge/checking,
+   cost-aware selection, admission at safe boundaries, execution and retained knowledge.
+   Keep semantic facts and performance priors distinct. Explain what happens after a failed
+   check or a poor performance prediction, including direct solving and explicit restart.
+4. **Concrete instantiations.** Recovery anchors composition and witness reconstruction;
+   privacy supplies an independently checked distinguishing-context example; allocation
+   and another genuinely noncoding family must expose the same substantive mechanisms.
+   Recursive rules show how the contracts support a different mathematical execution path.
+   Choose a few examples that demonstrate the mechanism rather than listing every adapter.
+5. **Evaluation.** Measure correctness, discovery utility, total cost and reuse on declared
+   families. Preserve C985's two-noncoding-model gate and its separate quotient, algorithm
+   and engineering ablations. Add discovery-off, supplied-structure, learned-only and
+   miss/rejection controls; comparable arms receive the same initial information. Include
+   compilation, checker and restart costs, held-out instances, work counts and negative cases.
+6. **Limits and related work.** Explain which inputs supply structure, what is discovered,
+   what is proved and when no gain is expected. Locate the specific contribution relative
+   to automated modelling, abstraction refinement, synthesis, adaptive execution and
+   metareasoning. Discuss broader query/design search as an extension of the core system.
+
+**Recommended second miniature.** In the admitted binary privacy fixture, observing a mask
+and observing nothing currently disclose the same secret information. Appending the masked
+secret separates them. The five-state leakage-only summary fails transition admission;
+the full joint-span representation admits it, and a fifteen-state readout quotient has a
+kernel-checked minimality result for its declared append/readout semantics. C1162 and C1166
+provide the exact definitions and evidence. C1162 synthesizes the summary transition for a
+supplied lowering; it does not establish autonomous discovery of the optimal lowering.
+This example explains why the question includes future contexts and why checks matter.
+It is a private evidence candidate, not content authorized for automatic public export.
+
+## Evidence supporting the integrated account
+
+These are dispositions of existing reports, not newly reproduced computations. Exact inputs,
+hashes and validation records remain in their owning reports; do not copy their results into
+a manuscript without checking the full evidence and release scope.
+
+| Mechanism | Current evidence | What must not be inferred |
+|---|---|---|
+| Query-specific reuse and rejection | C1092 privacy/causal/QEC examples; C1093 concrete LRC model/plan/query adapter | A universal public query schema, autonomous selection of queries, or independent optimality certification for that adapter |
+| Counterexample-guided summary synthesis | C1162 finite lowering checker and supplied privacy family | Synthesis of arbitrary models or lowerings; hot-loop performance gains |
+| Meaning and minimality of an observation state | C1166 physical-world readout/trace proof and finite fifteen-state result | A universal minimal-representation algorithm or a timing claim |
+| Discovery admitted into execution and reused | C1130 overnight source-only proposals, checked root reductions and learned-only reruns | An independently certified minimum distance from a symmetry certificate |
+| Checked execution-representation change | C1130 allocation plan/performance reports: setup selection and active admission through the same applicability check | Conversion of the old dynamic-programming state; a restart is explicit and has cost |
+| Parameterization discovery | C1130 parameterization checkpoint: checked substitutions and original-equation witness replay | Coverage of the original search space from a witness-preserving embedding |
+| Recursive exact certificates | C1163/C1164/C1173/C1174; C1176 settles rounds, invariance and algebra gates | All semirings, arbitrary recursion, or a complete public Rel frontend |
+| Cost of choosing a representation | C1062 causal compilation negative; C1130 recognition/miss overhead; C1176 dense-frontier negative control | A universal winning policy; the selector still needs a matched end-to-end study |
+
+The most valuable missing experiment is a **coupling ablation**: do discovery, admission
+and reuse together beat a strong system with those pieces available but chosen statically?
+A second, stronger target varies the query/observable requirement while preserving a
+declared operational goal, then measures whether a different admitted representation pays.
+Existing results establish ingredients; this report does not claim that either complete
+experiment has already passed. C985 owns deciding and allocating the extra evidence work.
+
+## Audience-specific draft prose
+
+The following are editorial drafts stored privately. They contain no internal task IDs or
+private paths, but they are not approved publication text. Product identity and delivery
+scope must be stated together when a draft is promoted.
+
+### Paper abstract opening
+
+> Exact optimization depends on how a problem is represented and on which properties of
+> its solutions a query requires. Ergodis integrates the discovery of useful structure with
+> compilation and exact execution. Its Evolve system proposes candidate structure and
+> execution changes; preservation contracts specify their admissible questions, contexts
+> and answer-reconstruction obligations. This organization connects contextual state
+> reduction, compositional optimization, checked bounds and reusable computations.
+> Witnesses, counterexamples and execution measurements guide subsequent discovery.
+
+This is an opening, not a fabricated finished results abstract. The final abstract must
+add the precise principal result, admitted families and measured outcome once C985's
+paper evidence is fixed. Do not fill those slots with “broadly faster” or “fully verified.”
+
+### Paper introduction opening
+
+> An optimizer may spend most of its time distinguishing states that the requested answer
+> cannot distinguish. It may also discard a distinction that a later query needs. Linear
+> recovery exhibits both problems: a local minimum cost omits the functional supplied by
+> the chosen repair, while retaining every coefficient choice can preserve much more than
+> an outer composition requires. Efficient exact computation therefore depends on finding
+> a useful representation together with the conditions under which it remains sufficient.
+>
+> Ergodis brings that choice into optimization itself. Evolve searches for useful
+> structure, and the system checks what the resulting transformation permits before
+> using it. The retained contract connects a source problem and query to an executable
+> representation and a way to recover or check the answer. Actual executions provide
+> counterexamples, witnesses and cost information for the next search for structure.
+> Discovery and execution thus participate in one adaptive computation.
+
+Follow with the theorem/system contribution at its actual scope, the concrete discovery
+example, and the evaluation question. The broad identity does not imply that every current
+provider implements every step of this loop.
+
+### System documentation / README identity
+
+> Ergodis is a system for discovering and exploiting structure in exact optimization.
+> Evolve is its discovery and adaptation component: it searches for useful structure and
+> helps select how a problem is represented and solved. The system admits transformations
+> under explicit conditions and retains the information needed to interpret their answers
+> in the original problem.
+
+For a **core-library README**, immediately add:
+
+> This repository provides the reusable compilation, solving and verification components.
+> Available workflows depend on the components and domain packages included in the release.
+
+That sentence explains packaging without redefining Evolve as peripheral. Concrete public
+commands must come from the checked release, not a private demo or a development report.
+The inspected local `public` snapshot is `3291659` / `v0.1.0-preview1`, based on private
+revision `23e1afe6`. Its tree lacks `crates/rules`, `docs/rule-contract.md`,
+`docs/finite-lowering.md` and `rust-toolchain.toml`; do not advertise newer main-branch
+capabilities as present in that snapshot. This was a local Git inspection, not a GitHub
+publication check. No export, push or public-document edit was performed.
+
+### Conceptual documentation example
+
+> A model describes the problem. A query specifies the answer required; an observable
+> specifies information that can be read from the model. The objective orders acceptable
+> solutions. A representation retains enough information for admitted questions and
+> contexts, and a compiled plan implements computations over that representation.
+>
+> Evolve can propose a cheaper representation or execution strategy. The proposed change
+> must establish the preservation or bound required by its role before it can affect an
+> exact answer. A finer query can invalidate an earlier representation even when the source
+> model is unchanged. Performance measurements help choose among admitted plans; they do
+> not establish mathematical equivalence.
+>
+> Evolve's broader search space includes which questions to ask and which observations
+> to obtain. Those choices require an operational objective and explicit allowed changes.
+> Rewriting a fixed question, choosing a different question and designing a different
+> source system are separate operations.
+
+The concept pages can offer recovery, contextual equivalence, recursive rules, discovery,
+certificates and saved-workflow routes. Each route should point back to this common
+vocabulary while giving its own example. Multiple explanations are useful; contradictory
+definitions or unsupported delivery claims are not.
+
+## Potential paper programme
+
+These are candidate contributions, not allocated tasks or promised papers. The first paper
+contains the integrated Ergodis/Evolve identity. Later papers need independently substantial
+results and should not merely repackage its architecture or reuse its experiments as new.
+
+| Candidate focus | Independent contribution to develop | Relation to first paper |
+|---|---|---|
+| First: discovery and compilation for exact optimization | Shared preservation/admission account plus a substantive integrated implementation and coupling evidence | Establishes the system and its central research question |
+| Contextual sufficiency and semantic sensitivity | Constructive sufficient states, query/update families, width/size bounds, and limits on reuse | Deepens one mathematical foundation; novelty and construction complexity require separate work |
+| Recursive optimization and proof-producing oracles | Admitted algebraic classes, convergence, certificate completeness/checking cost, and incremental proof transport | Develops the recursive/proof path already introduced in the first paper |
+| Learning useful exact structure from solves | Cost-aware discovery, semantic versus performance knowledge, cross-instance transfer and regret/miss evidence | Deepens Evolve's methods and evaluation; Evolve remains central in paper one |
+| Dynamic query and representation adaptation | Amortized compilation, update admission, representation changes and measured lifecycle cost | Develops the repeated-workload systems contribution |
+| Domain papers, where warranted | Recovery, leakage or a design/search family with its own theorem or externally significant result | Complete-ports already owns the recovery manuscript; other domain claims need their own novelty/evidence gates |
 
 ## Meta-optimization and no free lunch
 
@@ -170,31 +396,27 @@ Useful starting references from that discussion:
 - Equality saturation: https://arxiv.org/abs/2004.03082
 - Rational metareasoning: https://aima.eecs.berkeley.edu/~russell/research-bo.html
 
-## Remaining work and acceptance
+## Acceptance and handoff
 
-1. Complete a bounded provenance pass through the C985 onward framing/architecture reports,
-   including the two September 4–5 brainstorm sources routed by C1091. Those long historical
-   sources were not reread for this seed; C1091's synthesis was used. Recover other genuinely
-   distinct framings and reconcile corrections rather than accumulating slogans.
-2. Locate and inspect the current optimization manuscript's opening/results and compare them
-   with the original C985 specification. This seed inspected the C985 task card and current
-   complete-ports abstract/recovery section, not the optimization manuscript itself.
-3. Attach an exact source and evidence scope to each proposed public claim. Separate theorem,
-   implementation, tested family, historical proposal and research target. Preserve the
-   distinction between witness feasibility, optimality, exclusion and source equivalence.
-4. Rank candidate unified frames and recommend the most distinctive, broad and strong
-   defensible thesis for the first Ergodis paper, with a concrete opening example and
-   explicit evidence gaps. Sketch independently substantial follow-on paper candidates.
-   Prepare README and conceptual-documentation drafts that can retain multiple framings.
-5. Test the strongest integration story: does changing the admitted observation requirement
-   enable a checked representation change that improves subsequent solves after all costs?
-   Record this as an evidence requirement, not a request to run new benchmarks under this task.
-6. Review proposed public prose against the actual export: no internal IDs, private paths,
-   correspondence, unpublished domain knowledge or private performance results. Cite public
-   artifacts only after their publication state is checked. Do not copy this document into
-   a public tree or automatically export it.
+- **Source comparison delivered:** bounded original-brainstorm passages, C985 specification,
+  current recovery manuscript passages, semantic-contract reports and delivered Evolve
+  mechanisms were compared. The companion source register states every read boundary.
+- **Recommendation delivered:** a ranked comparison, proposed title/thesis, strongest
+  objection, first-paper structure and distinct possible follow-on contributions.
+- **Drafts delivered:** paper abstract/introduction openings, integrated system identity,
+  core-package scope wording and conceptual documentation. These are private review drafts.
+- **Evidence requirements delivered:** existing support and explicit gaps, including the
+  coupling ablation and the stronger operationally equivalent query-design experiment.
+- **Publication boundary checked locally:** the filtered snapshot is older than current
+  rule-contract work; no current-private capability was silently advertised as exported.
+- **Manuscript source gap recorded:** C985's outline and complete-ports sources were found;
+  a separate optimization manuscript was not located in the bounded routed search. Its
+  location was requested from Tavis. No missing manuscript is claimed as read.
 
-The task is complete when the source-grounded framing choices, audience-specific drafts and
-remaining claim/evidence gaps are reviewable here. Publishing or editing the downstream
-manuscript/README requires the relevant owner and validation workflow; this task does not
-silently expand a mathematical claim or choose a new paper scope.
+C1178 completes the framing deliverable. **Recommended next work: C985**, beginning with
+the proposed integrated thesis, precise contribution/evidence obligations and any supplied
+manuscript path. This is a paper-planning route, not permission to launch unrelated code
+searches, alter acceptance gates or publish private material. C985 should resolve the exact
+contribution before commissioning a claim-specific novelty audit and any new experiments.
+The remaining scientific questions belong to the paper's evidence work, not to an indefinite
+extension of this editorial task.
