@@ -5075,8 +5075,17 @@
       "last": 1178,
       "purpose": "Ergodis framing synthesis for optimization paper and public documentation, grounded in C985 onward and complete-ports recovery",
       "sequence": 564
+    },
+    {
+      "count": 1,
+      "first": 1179,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1179,
+      "purpose": "Datalog transitive-closure ballpark: Ergodis rules path vs Souffle and Nemo on matched inputs",
+      "sequence": 565
     }
   ],
-  "next_id": 1179,
+  "next_id": 1180,
   "schema": "codex-task-id-allocations-v1"
 }
