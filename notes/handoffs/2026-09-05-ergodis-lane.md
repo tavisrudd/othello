@@ -62,8 +62,12 @@ semi-naive DAG/cycle verification and safe retractions; native/Python/WASM compi
 contract and certified recursive min-plus program through native/WASM ABI
 (`../2026-09-12-c1163-rule-contract.md`). C1164 complete: live Lean oracle, proved
 checker and kernel-checked least-fixpoint witness (`../2026-09-12-c1164-lean-oracle.md`).
-Next: C1161 (recursive runtime) → join engine
-(unallocated) → benchmark suite (unallocated) → C1162; C1158 any time. Literature cards:
+C1161 complete: checked recursive sessions and real campaign fork-depth readout, sparse
+incremental propagation, independent Python/native/WASM agreement and retained perf evidence
+(`../2026-09-12-c1161-recursive-runtime.md`). Next allocated work: C1162 (leaf-lowering
+FGH square); C1158 any time. Join engine and broader benchmarks remain unallocated
+behind a concrete workload. Existing WASM test-target Clippy warning: `src/bundle.rs:101`
+items after test module; production-library Clippy and unit tests pass. Literature cards:
 `../2026-09-12-c1150-category-theory-for-ergodis.md`,
 `../2026-09-12-c1151-category-theory-capability-pass.md`,
 `../2026-09-12-relationalai-datalog-reading.md`. Closed spikes: `../2026-09-12-c1152-certificate-spike.md`,
