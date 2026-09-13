@@ -5039,8 +5039,17 @@
       "last": 1169,
       "purpose": "Study reusable Datalog frontends while retaining Ergodis-owned backend and rule handling",
       "sequence": 560
+    },
+    {
+      "count": 1,
+      "first": 1170,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1170,
+      "purpose": "Rel-rich owned frontend contract and parser/diagnostic performance prototype; no foreign backend",
+      "sequence": 561
     }
   ],
-  "next_id": 1170,
+  "next_id": 1171,
   "schema": "codex-task-id-allocations-v1"
 }
