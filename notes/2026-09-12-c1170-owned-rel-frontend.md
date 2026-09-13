@@ -74,3 +74,40 @@ The user clarified that the two-hour continuation is for any of today's
 queued Ergodis work, not frontend-only. After this checkpoint the active
 work switches to C1154's offline FeatureDag interval/acyclicity slice; the
 original 07:24:50 UTC stop target remains unchanged.
+
+
+## Native/WASM and review checkpoint — 2026-09-13
+
+Private commit `a644dad` contains this checkpoint. The finite portability gate now executes the exact frontend source as native
+and WASM test libraries: 142 cases produce 325,099 identical canonical bytes,
+including syntax records, failure fields and rendered diagnostics. Both scanner
+variants also agree. The corpus includes 512 definitions, every byte prefix of
+a Unicode module, deterministic malformed bytes, and 1,024 nested parentheses
+which explicitly reach DepthCapacity. Exact replay and source/toolchain hashes:
+`ergodis-private/analysis/rel-frontend/portability-v1.json` and its adjacent
+Python/Node runners. This is finite platform parity, not an independent grammar
+oracle, production browser ABI, or speed measurement.
+
+The three C1171 lexer review defects are repaired: `a^b` uses exponentiation,
+unsupported radix literals reject explicitly, and malformed exponents have
+nonempty numeric spans. Separators after exponents also reject. Caret-prefixed
+entity references remain explicitly unsupported instead of being mistaken for
+ordinary names. The coverage manifest names this gap; full entity syntax is
+still required by the product target. Twelve frontend integration tests and
+one native probe pass; strict library and targeted-test Clippy passes.
+
+The standalone probe inherits the owning library's explicit flat-API Clippy
+allowance; its source includes the module directly to exclude host-only crate
+dependencies. Its bounded returned allocation lasts until process exit and
+is not a production interface or a change to the zero-allocation parser claim.
+
+C1170 stays open. Next gate: retained interleaved parser measurements with
+setup/scan/materialization boundaries, followed by rich recovery and the
+remaining versioned syntax/admission gaps. No dependency or backend adoption.
+
+Operational note: a repeated handoff read exceeded the display budget after
+context recovery; subsequent reads were narrowed to the relevant section.
+The saved portability receipt was inspected instead of blindly rerunning the
+previous truncated tool result. The probe's initial Clippy invocation exposed
+its missing inherited flat-API allowance; that invocation was corrected before
+revalidation. No failed gate is reported as passing.

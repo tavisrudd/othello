@@ -91,8 +91,8 @@ coverage contract and parser/diagnostic performance prototype
 rules handling; Tree-sitter and executable reference semantics are deferred.
 C1171 review complete: no mathematical defect in the day's work; evidence-path
 leak and task-id lint fixed (core `2e1bab2`); six generated-program properties
-(core `47a8c05`); three open C1170 lexer bugs (`a^b`, `0x1f`, zero-width `1e`
-span) routed to C1170; successors C1172 (Lean audit gate), C1173
+(core `47a8c05`); three C1170 lexer bugs (`a^b`, `0x1f`, zero-width `1e`
+span) repaired and regression-tested in C1170; successors C1172 (Lean audit gate), C1173
 (support-witness certificate), C1174 (generic carrier + Boolean), C1175
 (release hygiene), C1176 (contract semantics), C1177 (private kernels) queued
 (`../2026-09-12-c1171-rule-programme-review.md`).
@@ -105,8 +105,9 @@ C1159 complete: opt-in completion screen, no-false-rejection audit and about
 C1155 complete: exact wide costs, weighted normalization and independent
 quotient audits; existing coarsest compiler reused
 (`../2026-09-13-c1155-weighted-normalization.md`).
-Next: C1170 portability and parser/diagnostic performance gates. Rich recovery
-and complete frontend coverage remain open.
+C1170 finite native/WASM syntax and diagnostic parity now passes (142 cases).
+Next: C1170 parser/diagnostic performance gates. Rich recovery and complete
+frontend coverage remain open.
 The concrete workload/IR-obligation gate still governs joins and
 broader benchmarks, which
 remain unallocated. Other deferred speed/hygiene tasks are not implicitly resumed. Existing WASM test-target Clippy warning: `src/bundle.rs:101`
