@@ -55,10 +55,25 @@ relevant handoff/task context. Follow links selectively; do not preload all repo
 
 - Datalog library study is frontend-only (user direction 2026-09-12): parsing,
   syntax trees and source diagnostics may inform an adapter. Prefer an owned
-  parser when the supported grammar is straightforward, for performance and
-  control. Ergodis owns semantic admission/lowering, rules handling, join
-  planning, storage, scheduling and execution. Do not adopt an external rule
+  parser when the supported grammar is straightforward, for performance,
+  control and a simpler dependency surface. Parsing itself follows the full
+  performance discipline: explicit setup/workspace bounds, measured allocations,
+  compact scanning data and retained matched comparisons through admission.
+  Ergodis owns semantic admission/lowering, rules handling, join planning,
+  storage, scheduling and execution. Do not adopt an external rule
   evaluator or dataflow backend through a frontend adapter.
+- Datalog syntax must be at least as rich as Rel's documented language (user
+  direction 2026-09-12). A restricted positive-Datalog subset can be a staged
+  implementation milestone, not the product target. Track parsing coverage
+  separately from semantic admission and executable support; never claim a
+  construct is supported merely because it parses.
+- Datalog diagnostics must be rich, using Rust and `../../iidy-hs` from
+  `othello/rust` as quality references. Study an error-only diagnostic reparse
+  that builds richer syntax/context while successful parsing remains compact
+  and fast. Diagnostic replay must preserve rejection and never run a program.
+- Tree-sitter/editor grammar implementation and an executable semantics
+  reference (PLT Redex or similar) are deferred. They do not gate the owned
+  parser, diagnostic work or production lowering.
 - One Ergodis engine and logical contracts for native and WASM. WASM is a full
   execution target; missing bindings/portability are gaps, not product boundaries.
   Consolidate on one canonical WASM build. Private domain implementations remain

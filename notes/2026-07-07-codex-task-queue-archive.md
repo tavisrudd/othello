@@ -5695,3 +5695,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1167 `[ergodis]` [REPORTED 2026-09-12]** — source-bound incremental min-plus replay proofs, monotone fact updates, early fixedness and checked-solution conversion → `notes/2026-09-12-c1167-incremental-proof-checking.md`
 
 - **C1168 `[ergodis]` [REPORTED 2026-09-12]** — sharp distinct-rule-output convergence, safe-seed replay and tighter checked certificate conversion → `notes/2026-09-12-c1168-rule-output-bound.md`
+
+- **C1169 `[ergodis]` [REPORTED 2026-09-12]** — frontend source study; Rel-rich owned parsing, performance discipline and rich diagnostic reparse requirements → `notes/2026-09-12-c1169-datalog-frontends.md`

@@ -45,6 +45,8 @@ the verifier code in `2026-09-12-c1152-certificate-spike.md`). Discovery-track e
 | 2b (complete) | C1164 | Ergodis as a Lean oracle: tactic/IO call, reflective Lean checker for the min-plus certificate, proof terms of optimality and least fixpoint; the first artifact to show Macready, since a Lean-modelled IR consumes it directly and it needs no benchmark | core C ABI + Lean under `lean/` |
 | 2c (complete) | C1165 | universal scalar N-round convergence, sharpness for every positive N, and reflective certificate completeness; `2026-09-12-c1165-min-plus-convergence.md` | Lean authority here |
 | 2d (complete) | C1168 | sharp capped distinct-rule-output convergence, safe-seed replay and tighter existing-format certificates; `2026-09-12-c1168-rule-output-bound.md` | Lean authority here |
+| Frontend study (complete) | C1169 | Rel-rich syntax baseline, owned parsing under performance discipline, rich errors with optional diagnostic reparse; `2026-09-12-c1169-datalog-frontends.md` | private contributor requirements |
+| Frontend prototype (queued) | C1170 | versioned coverage contract and owned parser/diagnostic performance prototype; `2026-09-12-c1170-owned-rel-frontend.md` | mechanism core, harness private |
 | 3 (complete) | C1161 | recursive plan queries as least fixpoints with the N-step bound and semi-naive incremental recomputation | core runtime |
 | 3b (complete) | C1167 | source-bound incremental proof replay, early leastness, conversion and live chained oracle witnesses; `2026-09-12-c1167-incremental-proof-checking.md` | Lean authority + private measurements |
 | 4 | unallocated | join engine: worst-case-optimal joins (Generic Join / Free Join) as the rule-body operator | core |
@@ -58,8 +60,9 @@ Macready names a workload. Step 7 can run at any time; it is cheap and independe
 
 C1161 is complete (`2026-09-12-c1161-recursive-runtime.md`). C1162 is complete (`2026-09-12-c1162-leaf-lowering-square.md`). C1158 is complete (`2026-09-12-c1158-acting-subgroup.md`): the live paired census
 has no ambient-orbit reduction; the closed q18 interface family has effective
-action order 768. No group trait or augmentation is promoted. All allocated
-steps are complete; join/benchmark allocation awaits the concrete workload. C1163 completed the finite relational contract and portable provider
+action order 768. No group trait or augmentation is promoted. The completed
+backend/proof sequence is followed by C1170's owned frontend prototype;
+join/benchmark allocation awaits the concrete workload. C1163 completed the finite relational contract and portable provider
 (`2026-09-12-c1163-rule-contract.md`); C1164 adds a live Lean oracle, proved checker
 and kernel-checked least-fixpoint proof (`2026-09-12-c1164-lean-oracle.md`). C1161 now supplies recursive and incremental runtime with a real campaign readout. Scalar 0-stability counts all tuple coordinates,
 and retractions retain a separate sound policy. General automation integration
