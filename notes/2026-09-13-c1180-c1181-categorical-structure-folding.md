@@ -110,11 +110,70 @@ recommendation for C985/C1178 framing. “A universal layer is not justified” 
 finding. Architecture selection remains Tavis's decision. No dependency/backend adoption,
 public claims or disclosure of Macready correspondence is authorized by this investigation.
 
+## Equivalent-representation recognition — explicit C1180 workstream
+
+User direction: investigate recognition more generally, not only transformations constructed
+by Ergodis itself. Given independently presented models or plans, can Ergodis discover and
+check a correspondence that permits deduplication, transfer or reuse? This extends C1180;
+it does not allocate another generic engine or claim general equivalence is decidable.
+
+Separate representation isomorphism, behavioral/query-relative equivalence, equivalent
+realizations with different cost, and directed refinement/relaxation. Matching one answer,
+dimensions or a digest is not semantic equivalence. Specify the admitted finite domain,
+observable/action vocabulary, input promises and stop condition. Return checked equivalence,
+a checked distinguishing obstruction where available, or unknown/unsupported/budget-exhausted;
+a failed heuristic recognition attempt is not a proof of inequivalence.
+
+Inventory existing recognizers before proposing new ones. Compare canonicalization with
+pairwise witness search; exact normalization with fingerprints used only as candidate screens;
+and family-specific coordinate maps, graph/rule correspondences and behavioral quotients.
+Investigate what categorical structure makes each correspondence composable and which laws
+are actually checked. Include independently presented equivalent inputs, near-equivalent
+inputs that change a query or cost, and unsupported cases.
+
+For every intended reuse state the extra obligations: source constraints and feasible sets,
+objective values, queries/observables, transition/update behavior, witness coordinates,
+optimality/exclusion scope and evidence identity. Distinguish transporting a plan, learned
+artifact, answer or proof from transporting active execution state. Record the explicit map
+and inverse or directed lift required; do not reuse an old source-bound certificate merely
+because an isomorphism was found. Investigate reuse through a checked transport certificate
+versus re-admission/reproof. Representation equivalence need not preserve physical runtime.
+
+### AME frame recognition candidate, not an adopted domain
+
+C1139 (`ame-lu`, complete) supplies a concrete bounded candidate: common two-dimensional
+prime-field frames satisfying `A Q_j = Q'_j A` and `det(A)=1`. Its report
+`2026-09-10-c1139-ame-lu-fast-recognition.md` records verified determinants/propagated frames,
+deterministic decision and Las Vegas witness construction. The AME reduction requires its
+promises; prime-field recognition is not an extension-field or arbitrary-dimensional solver.
+The algorithm exists in AME-lane software, not as an integrated Ergodis module, and its report
+does not establish an Ergodis end-to-end speedup.
+
+Retain this in C1180's family inventory. **Integration gate:** first identify one real Ergodis
+workload with repeated applicable frame-equivalence checks and an actual reuse opportunity.
+Then specify all semantic transport obligations above and a matched comparison including
+recognition, verification, transport/re-admission and subsequent solve cost, against no reuse
+and the best existing recognition path. Include misses and break-even reuse counts. If no
+workload qualifies, retain the candidate with an explicit negative disposition; no core
+machinery or standalone AME module is required. Any AME implementation work retains its lane
+ownership; an Ergodis adapter requires a separately scoped decision under C1181's gate.
+
+Acceptance supplement for C1180: a recognition capability/status matrix, one fully worked
+checked correspondence plus a semantic-reuse counterexample, and a ranked workload shortlist
+with a reasoned AME inclusion or exclusion. The prior Terra status audit found C1111–C1113
+related generic admission/transfer work but no specific AME reuse or repeated-frame timing
+allocation. This workstream now owns investigating that gap, not a promised implementation.
+
 ## C1181 — gated cross-domain round-trip and resumed-Evolve pilot
 
 Start only after C1180's decision memo and Tavis's approval of the minimal architecture and
 domain pair. Reuse C1157 if its implementation satisfies the needed rewrite contract; do not
 make completion of unrelated proposal-scoring work a prerequisite.
+
+Include recognition of independently presented equivalent representations if C1180 finds
+a useful workload, with checked semantic transport and reuse accounting as specified above.
+The AME candidate is optional and remains behind its real-workload gate; do not force it into
+the domain pair just because a recognizer already exists.
 
 In a private bounded prototype, lift two materially different domain presentations into the
 selected representation(s), apply a shared structural mechanism, and lower into existing typed

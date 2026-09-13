@@ -195,7 +195,9 @@ the separate optimization manuscript's location remains unconfirmed. No public p
 
 ## Additional routed work
 
-- C1180 categorical lift–fold–lower investigation is queued; C1181 cross-domain pilot and
+- C1180 categorical lift–fold–lower and general equivalent-representation recognition are
+  queued, including checked semantic reuse and C1139 AME frames as a workload-gated candidate;
+  C1181 cross-domain pilot and
   resumed Evolve are gated on its memo and Tavis's architecture choice. Queue audit, contracts
   and gates: `../2026-09-13-c1180-c1181-categorical-structure-folding.md`. Reuse C1155's
   existing quotient/normalization results and C1162's lowering checker; coordinate C1157
