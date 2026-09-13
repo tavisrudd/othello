@@ -104,7 +104,7 @@ small-degree guarantee that does not hold, such as a rule whose smaller bucket i
 | `ergodis/crates/rules/src/demand.rs` | `433d055f053a51d84783721ec7359b8c019572e3f05192cd9f5a5c49f1402c3d` |
 | `ergodis/crates/rules/tests/demand.rs` | `cde4d5516beaac49bad5a20c7707d6f983d7a8b3a53011aab3dca02b842e1a9b` |
 | `ergodis-private/examples/closure_ballpark.rs` | `f098d3359417c880c4f07a6c7b6bfa41d49bafcbf2054ed3a277d2f739026eae` |
-| `ergodis-private/analysis/datalog-comparison/results-2026-09-13-c1183.jsonl` | see the private commit |
+| `ergodis-private/analysis/datalog-comparison/results-2026-09-13-c1183.jsonl` (10 501 bytes, private `64cefc9`) | `1293bf1fcc4d29cd4082bbb159f0ce4bd6d92274cfc575f16090b625fe663ba6` |
 | retained harness `~/.cache/ergodis/bin/nix2-7cc7175` | `8787a9fda440a006b4a39b636eec728b22a8f011784f8608ee0eed6e22195dba` |
 
 Replay: for each row, `taskset -c 3 <harness> --evaluator demand --program <closure|samegen>
