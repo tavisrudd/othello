@@ -1457,6 +1457,30 @@ campaign's sibling task had just rediscovered.
   reports dead against any commit, which is what the C1058 split and the C1036 consolidation were
   partly for. Fable was used for two adversarial reviews (the C1016 reduction argument, probe 28g).
 
+## Week 17 — Sep 5–12 · The cubic draft broadens and Ergodis reaches Lean-checked replay
+
+- **Sep 7 — the cubic sharpness draft moves beyond its two named examples.** C1117 added the
+  Grothendieck-group and exact-discriminant extensions to the one-stabilization paper. C1118 proved
+  the full-`I3` rank-four Cox-descent obstruction for its specified embedding, and C1119 supplied
+  the finite-index slice and coprime-index \(CH_0\)-triviality criterion with its exact scope.
+  These refinements feed *Two-Variable Rationalization and Sharp Stabilization of Cubic Threefolds*:
+  exact level two for the smooth members of its displayed three-parameter family, plus separation of
+  the first stabilizations of a positive-density arithmetic pencil family.
+
+- **Sep 10–11 — the AME and cubic manuscripts close their revision passes.** The AME--LU paper
+  absorbed its focused referee revisions and synchronized validated exports. The cubic manuscript's
+  exposition was reorganized around surface rationalization, the uniform cubic family and the
+  arithmetic consequences; its bounded literature audit qualified the novelty wording and recorded
+  unresolved access gaps instead of claiming exhaustive priority closure.
+
+- **Sep 12 — Ergodis gains a finite relational certificate boundary.** C1160 fixed the scalar
+  stability and semi-naive verification contract across native, Python-oracle and WASM gates. C1163
+  then defined typed finite weighted rules and source-bound least-fixpoint certificates, retaining a
+  four-node min-plus recursive example with result `[0,3,2,6]`. C1164's Lean oracle turns an
+  independently checked external certificate into a kernel-checked least-fixedness theorem for the
+  caller's formal program. C1161 began sparse semi-naive runtime work; its performance claim remains
+  explicitly unmade.
+
 ---
 
 *Snapshot; the live task frontier is the codex task queue, the per-lane handoffs, and

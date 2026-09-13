@@ -18,7 +18,7 @@ games, backed by:
   theory's quotient theorems into a general tool, has since been extracted into its own repository
   behind a tested publication guard, and is being prepared for release under a dual licence.
 
-### Current additions through 2026-09-06
+### Current additions through 2026-09-12
 
 The arcs programme now has a 37-page, warning-free and reproducible manuscript,
 *Secant defects with prescribed holes: arcs, caps, and matching designs*. Its
@@ -39,6 +39,22 @@ labelled recovery and adversarial costs with coefficient witnesses, checks
 freshness rather than assuming it, and agrees with the published probing order
 on all 54 budget-complete cases in a 75-gadget corpus.
 
+The second cubic-stabilization manuscript is now *Two-Variable
+Rationalization and Sharp Stabilization of Cubic Threefolds*. It proves exact
+stabilization level two for every smooth member of its displayed
+three-parameter cubic family and separates the first stabilizations of a
+positive-density arithmetic pencil family. Its finite-index extension and
+rank-four Cox-descent obstruction retain their stated descent hypotheses; the
+bounded literature audit records the remaining access gaps rather than making
+an exhaustive priority claim.
+
+Ergodis now has a typed finite weighted-rule contract with independently
+checked, source-bound least-fixpoint certificates. Its Lean oracle converts an
+external native certificate into a kernel-checked least-fixedness proof for the
+caller's formal program; the retained four-node min-plus Datalog example reaches
+`[0,3,2,6]` in four rounds. This establishes finite ground replay, not a proof
+of the Rust compiler or arbitrary external programs.
+
 The open research center of gravity is the **projective cap ("Nofil") program** and its **odd
 projective-plane kernel**, with the Lean layer certifying results as they land. But the cap machinery
 has spun off enough standalone finite-geometry and coding-theory mathematics — extension, rigidity,
@@ -57,8 +73,9 @@ a sixth numbered paper — it is a source-development body feeding future forwar
 passages paper. Downstream of Paper V sits the **cubic-threefold stabilization** programme on
 `A₅`-invariant cubic threefolds (§3), which now has two manuscripts of its own: *Irrationality of
 Cubic Threefolds after One Stabilization*, an unnumbered epilogue to the series rather than a sixth
-number, and *Sharpness of Irrationality after One Stabilization for Cubic Threefolds*, which determines the
-level exactly for two explicit smooth cubic threefolds. A short standalone correction note, *Standard Flips of
+number, and *Two-Variable Rationalization and Sharp Stabilization of Cubic Threefolds*, which proves exact
+level two for every smooth member of a displayed three-parameter cubic family and separates a
+positive-density arithmetic pencil family at the first stabilization. A short standalone correction note, *Standard Flips of
 Discrepancy One*, came out of the same work and is published with a DOI.
 [`papers/papers-index.md`](../papers/papers-index.md) is the registry — it maps every result to its
 paper and its proof location.
@@ -66,7 +83,8 @@ paper and its proof location.
 The second cubic-stabilization manuscript now uses quartic-del-Pezzo torsors
 and rational torus quotients rather than the retired all-stabilization route.
 It proves the exact transition from irrationality after \(\mathbf P^1\) to
-rationality after \(\mathbf P^2\) for the two displayed examples.
+rationality after \(\mathbf P^2\) throughout its displayed three-parameter
+smooth cubic family.
 
 ---
 
@@ -1456,11 +1474,12 @@ The remaining headline Clebsch-facing results and censuses are:
 
 **Two manuscripts, both complete drafts and neither submitted.** *Irrationality of Cubic Threefolds
 after One Stabilization* is the unnumbered epilogue to the numbered series — deliberately not a
-sixth number — and proves its headline unconditionally. *Sharpness of
-Irrationality after One Stabilization for Cubic Threefolds* proves that the first
-rational stabilization of two displayed smooth cubic threefolds occurs at
-level two. Priority closure is open for most of the research material around
-them.
+sixth number — and proves its headline unconditionally. *Two-Variable
+Rationalization and Sharp Stabilization of Cubic Threefolds* proves that every
+smooth member of its displayed three-parameter cubic family first becomes
+rational after the second stabilization, and separates the first
+stabilizations of a positive-density arithmetic pencil family. Priority closure
+is open for most of the research material around them.
 
 - **The carrier, and why the exotic sheet is forced.** Roulleau's pencil of `A₅`-invariant cubic
   threefolds. Its six `D₅` axes have Gram `6I − J` and Winger's five `A₄` quotient axes have Gram
@@ -1472,16 +1491,17 @@ them.
   on the exotic pair** — the same two-element torsor Paper V's golden orientation supplies. On the
   quartic side, unimodular standard-type `S₆` lattice rigidity forces the `A₅` root–weight lattice
   with stabilizer `Γ₀(6)`, so the quartic period closes up on `X₀(6)` with cusp widths `1,2,3,6`.
-- **Exact level two for two explicit cubics.** If a smooth quartic del Pezzo surface `S` over a
+- **Exact level two for a three-parameter cubic family.** If a smooth quartic del Pezzo surface `S` over a
   characteristic-zero field has a rational point and stably permutation geometric Picard lattice,
   then `S × A²` is rational. A descended unimodular tangent section for the projectively linear torus
-  action gives the rational Rosenlicht quotient. Applied to both Tschinkel–Zhang cubic families, it
-  proves `X_{j,r} × P²` rational for every member; combined with one-step irrationality, the two
-  displayed smooth cubic threefolds satisfy **`ℓ_Q(X) = ℓ_C(X_C) = 2`**. Equivalently,
-  `Y = X × P¹` is nonrational over `Q` and `C` but `Y × A¹` is rational over `Q`. Exact Cox-weight,
-  saturation, tangent, inverse-graph and Bézout replays support the human proof; no Lean coverage is
-  claimed. The synchronized ten-page release candidate remains behind fresh hostile-referee rounds,
-  with no push or replacement deposit.
+  action gives the rational Rosenlicht quotient. Applied to the displayed cubic family, it proves
+  `X × P²` rational for every smooth member; combined with one-step irrationality, this gives
+  **`ℓ_K(X) = 2`** over every extension `K` of the characteristic-zero coefficient field. The rational
+  pencil members in particular satisfy **`ℓ_Q(X) = ℓ_C(X_C) = 2`**. The positive squarefree parameters
+  prime to six give pairwise nonbirational irrational first stabilizations over `C`, while their second
+  stabilizations are rational over `Q`. Exact Cox-weight, saturation, tangent, inverse-graph and
+  Bézout replays support the human proof; no Lean coverage is claimed. The bounded literature audit
+  records its remaining access gaps.
 - **The elliptic modular resolvent is explicit.** A separate eleven-page companion identifies the
   signed nonstandard `A₅` cubic parameter with the sign/discriminant resolvent of the relative
   norm-axis elliptic two-division cover: `T = 81t²`, `r = 9t`, base `X₀(6)`, exact `A₃` monodromy,
@@ -2994,7 +3014,7 @@ Line-Code Obstructions for Complete \((k,n)\)-Arcs* under the alias
 | `conference_cut_spectra`            | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy               | `golden`           | 16    | 6   | 0   | 2    | 1   | 19     |
 | `continuation_graph_rigidity`       | Semilinear rigidity of four-point-frame continuation graphs                                          | `continuation`     | —     | 5   | 3   | 3    | 0   | 18     |
 | `cubic_gluing_resolvent`            | The Discriminant Resolvent of the \(A_5\)-Cubic Pencil                                               | `cubic-threefolds` | 11    | 1   | 1   | 3    | 3   | 22     |
-| `cubic_stabilization_irrationality` | Sharpness of Irrationality after One Stabilization for Cubic Threefolds                              | `cubic-threefolds` | 11    | 3   | 0   | 1    | 3   | 27     |
+| `cubic_stabilization_irrationality` | Two-Variable Rationalization and Sharp Stabilization of Cubic Threefolds                              | `cubic-threefolds` | 11    | 3   | 0   | 1    | 3   | 27     |
 | `cubic_stabilization_m1`            | Irrationality of Cubic Threefolds after One Stabilization                                            | `cubic-threefolds` | 21    | 2   | 2   | 6    | 5   | 40     |
 | `dihedral_schreier_node_kayles`     | Node Kayles on Conic Schreier Graphs: Dihedral and Polyhedral Templates                              | `dihedral`         | 19    | 15  | 4   | 4    | 5   | 90     |
 | `discrepancy_one_flips`             | Standard Flips of Discrepancy One: Extremal \(J\)-Normalization and the Meijer Aperture at \(\nu=1\) | `clebsch`          | 12    | 3   | 6   | 2    | 3   | 34     |
@@ -3047,8 +3067,8 @@ and theory note rather than an experimental proposal. **The stabilization epilog
 but not a numbered paper** — one unnumbered, independently readable companion downstream of Paper V,
 whose headline is proved and whose remaining relative, descent, boundary, and priority gates belong
 to the surrounding research programme rather than to it. The second
-stabilization manuscript, *Sharpness of Irrationality after One Stabilization
-for Cubic Threefolds*, is also unnumbered and replaces the withdrawn conditional
+stabilization manuscript, *Two-Variable Rationalization and Sharp Stabilization
+of Cubic Threefolds*, is also unnumbered and replaces the withdrawn conditional
 all-stabilization draft. The Paper-I computational companion stays
 unnumbered and becomes a forward-pointing evidence companion once the q13 paper is public. The
 37-page integrated manuscript *Deep-hole rigidity and factorization memory in the Clebsch hexagon

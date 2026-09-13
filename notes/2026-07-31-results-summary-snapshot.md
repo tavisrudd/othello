@@ -1,6 +1,6 @@
 # Portfolio results summary snapshot
 
-**Date:** 2026-09-06
+**Date:** 2026-09-12
 
 A self-contained summary of the major results of an ongoing programme in
 finite geometry, coding theory, and combinatorial game theory. It is written
@@ -34,6 +34,19 @@ with coefficient witnesses, verifies freshness assumptions, and benchmarks 54
 of 75 published linear gadgets with no disagreement; the remaining 21 cases
 are explicitly budget-limited.
 
+**Update, 2026-09-07–12.** *Two-Variable Rationalization and Sharp
+Stabilization of Cubic Threefolds* now gives exact stabilization level two for
+every smooth member of its displayed three-parameter cubic family, and
+separates the first stabilizations of a positive-density arithmetic pencil
+family. Its finite-index and rank-four Cox-descent refinements are stated with
+their descent hypotheses and limitations. Ergodis now has a typed finite
+weighted-rule contract with source-bound least-fixpoint certificates. A Lean
+oracle turns an independently checked external certificate into a kernel-checked
+least-fixedness proof for the caller's supplied formal program; the retained
+four-node min-plus example reaches distances \([0,3,2,6]\) after four rounds.
+This certifies finite ground replay, not the Rust compiler or arbitrary external
+programs.
+
 **How to read the length.** Sections are not sized in proportion to the
 mathematics they contain. Each one carries its scope boundaries, its priority
 concessions, its refuted predecessors and its explicitly unclaimed
@@ -64,8 +77,10 @@ The results are grouped as follows.
 6. The cubic-threefold stabilization programme — the exotic cubic realization
    of the golden carrier. For every smooth complex cubic threefold \(X\), the
    product \(X\times\mathbf P^1\) is irrational; every smooth \(A_5\)-invariant
-   cubic threefold in Roulleau's pencil is universally \(CH_0\)-trivial; and two
-   explicit smooth cubic threefolds have exact stabilization level two. The
+   cubic threefold in Roulleau's pencil is universally \(CH_0\)-trivial; and
+   every smooth member of a displayed three-parameter cubic family has exact
+   stabilization level two. The latter paper also separates the first
+   stabilizations of a positive-density arithmetic pencil family. The
    one-stabilization epilogue and the exact-level-two paper are separate
    manuscripts. An older all-\(m\) route remains only as a conditional research
    programme.
