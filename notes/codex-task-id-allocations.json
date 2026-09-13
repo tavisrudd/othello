@@ -5021,8 +5021,17 @@
       "last": 1167,
       "purpose": "Prove source-bound incremental min-plus replay and leastness after monotone fact improvements",
       "sequence": 558
+    },
+    {
+      "count": 1,
+      "first": 1168,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1168,
+      "purpose": "Prove a rule-output-sensitive convergence bound capped by the existing scalar N bound",
+      "sequence": 559
     }
   ],
-  "next_id": 1168,
+  "next_id": 1169,
   "schema": "codex-task-id-allocations-v1"
 }
