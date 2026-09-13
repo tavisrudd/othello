@@ -6,6 +6,30 @@
 
 ## Read scope
 
+September 13 supplied Astra/ChatGPT review: read the user-pasted review as editorial input,
+not as primary technical evidence. Adopted thesis/organization, separate validity and
+usefulness scopes, cost-accounting and proposed evaluation/product improvements. No external
+paper was fetched or independently read for this update. Its excess-budget identity,
+price/availability reuse and failed-projection example require original internal provenance.
+Its ideal baseline-service slowdown calculation is not adopted as an Ergodis guarantee.
+
+New priority literature leads from that review, **not independently read in this update**:
+
+- SPIRAL: https://www.spiral.net/doc/papers/IEEE_2005.pdf; FFTW planning/reuse documentation
+  remains to be located and read.
+- Learning-augmented robustness: https://proceedings.mlr.press/v80/lykouris18a.html
+- NFL precision: https://arxiv.org/html/cs/0303032,
+  https://christian-igel.github.io/paper/NFLTLaPoM.pdf,
+  https://arxiv.org/html/2007.10928
+- Learned exact search: https://arxiv.org/html/1906.01629v3
+- Conjure: https://www.ijcai.org/proceedings/2023/0765.pdf
+- FunSearch: https://www.nature.com/articles/s41586-023-06924-6; the relevant AlphaEvolve
+  primary source remains to be selected.
+- Metareasoning: https://www.sciencedirect.com/science/article/abs/pii/000437029190015C
+
+These URLs are supplied references, not fetched bytes or verified bibliographic records.
+Use the shared cache before fetching papers and record actual read depth in C985's audit.
+
 This is a bounded framing/provenance review, not a novelty audit. **Zero external research
 papers were newly read at full text.** No claim that a predecessor does not exist is made.
 Existing task reports supply implementation and mathematical evidence at their stated

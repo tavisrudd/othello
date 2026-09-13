@@ -32,13 +32,17 @@ Working title:
 > **Ergodis: From Evolving Structure to Specialized Exact Computation**
 
 Alternative retained: **Ergodis: Discovering and Compiling Structure for Exact Optimization**.
+Compact technical alternative/subtitle: **Adaptive Specialization for Exact Computation**.
 
 Working thesis:
 
-> Ergodis evolves the structure used to solve a problem, then lets that structure remain
-> adaptive or become a specialized executable computation. Discovery, retained plans and
-> static kernels are points on one spectrum, connected by the required queries, preservation
-> contracts and evidence. Specialization is an option whose value depends on the workload.
+> Ergodis discovers useful computational structure, checks what each resulting transformation
+> preserves, and learns when acquiring, applying or reusing that structure is worth the cost.
+
+The spectrum describes operating and deployment modes; **admission and cost explain what
+makes them one system**. Discovery, retained plans and optional static kernels are connected
+by required queries, permitted uses and evidence. This is the integrated thesis to demonstrate,
+not a claim that every current family already learns its complete acquisition/reuse policy.
 
 The unifying object is an **admitted change to a computation**: what question it serves,
 what it preserves, what must be checked, how the answer is recovered, and where the change
@@ -69,6 +73,47 @@ interface. A good answer must show a shared admission mechanism doing substantiv
 across different transformations, plus a measured benefit from coupling discovery to
 execution and from retaining or materializing its results. A catalogue of examples and a
 generic loop diagram will not answer the objection.
+
+## Validity, usefulness and acquisition: three claims to connect
+
+Principal research question: **when does discovering and retaining query-sufficient structure
+reduce the total cost of exact computation, without making exactness depend on a prediction
+of usefulness being right?** Correctness depends on established mathematical applicability;
+performance depends on workload relevance. A valid transformation can lose time. A successful
+training history cannot authorize a transformation outside its checked semantic scope.
+
+Distinguish supplied structure (laws, types, transformation libraries and constraints),
+discovered facts (checked symmetries, bounds or sufficient states), and learned expectations
+(which applicable change may pay on a workload/hardware combination). Comparable discovery
+arms receive the same initial information; a supplied rule library is legitimate infrastructure
+but must not be counted as autonomously discovered structure.
+
+The paper needs three distinct claims and evidence for their interaction:
+
+1. Correctness: role-specific preservation, admission, witness recovery and coverage.
+   A feasible-witness parameterization does not establish optimum-containing coverage.
+2. Performance learning: selecting useful computations under a declared workload, with
+   held-out changes and explicit misses rather than an assumption that adaptation helps.
+3. Acquisition economics: when discovering, checking, compiling, transporting, retaining
+   or reopening structure pays relative to the best currently available computation.
+
+For policy pi and workload W, account for discovery + admission + compilation plus per-query
+execution, verification, readout and update costs. Include unsuccessful proposals, restarts,
+transport/invalidation and applicable agent-inference costs. Memory and latency may be hard
+constraints or separate objectives. With setup C and per-query costs d > s, the elementary
+reuse crossover is N > C/(d-s), before updates and invalidation. One-shot hard problems can
+also justify acquisition; repeated workloads are not the only legitimate case.
+
+**Performance robustness is a research target, not a delivered guarantee.** Ask how much
+discovery can hurt when its performance predictions fail. Investigate bounded expenditure,
+baseline progress and fallback; report measured downside even without a theorem. A resource
+reservation alone does not bound wall-clock slowdown without resumability, contention,
+memory and checking assumptions. Do not import guarantees from learning-augmented algorithms
+without establishing the corresponding model and proof.
+
+The categorical work C1180/C1181 studies lawful transformations, recognition and composition;
+Evolve studies which realizations are worth acquiring and using. Neither semantic minimality
+nor categorical equivalence establishes minimum machine cost.
 
 ## One tool across the discovery-to-specialization spectrum
 
@@ -479,6 +524,22 @@ part of the example, and its literature assertions are not re-certified here.
    to automated modelling, abstraction refinement, synthesis, adaptive execution and
    metareasoning. Discuss broader query/design search as an extension of the core system.
 
+**Principal coupling experiment.** Compare (a) a strong direct or manually specialized static
+computation, (b) the same candidate transformations and initial knowledge under a fixed
+selection/discovery schedule, and (c) feedback-coupled Ergodis/Evolve. Add supplied-structure
+and retained-only arms to separate structure's value from acquisition and warm reuse.
+Prefer two interacting transformations where the first changes the applicability or value
+of the second. Report crossover curves, memory, slowdowns, failed admissions and query/update
+behavior. Hold out meaningful instance, size and query-mix changes, not merely random seeds.
+
+**Unverified example lead from the supplied review.** An excess-budget identity
+`e_S = e_L + e_R + gamma_S`, `gamma_S >= 0`, was suggested as a way to prune before profile
+construction and reuse structure under price/availability changes. Locate the original
+reports, definitions, hypotheses and evidence before using any of these claims. This review
+alone establishes none of them. Separate a manually derived transformation from Evolve
+discovering it, recognizing its preconditions, selecting it or measuring it. Likewise trace
+the mentioned failed projection experiment before treating it as a retained negative control.
+
 **Recommended second miniature.** In the admitted binary privacy fixture, observing a mask
 and observing nothing currently disclose the same secret information. Appending the masked
 secret separates them. The five-state leakage-only summary fails transition admission;
@@ -522,7 +583,11 @@ scope must be stated together when a draft is promoted.
 ### Paper abstract opening
 
 > Exact optimization depends on how a problem is represented and on which properties of
-> its solutions a query requires. Ergodis organizes discovery and exact execution along
+> its solutions a query requires. Ergodis discovers useful computational structure, checks
+> what each transformation preserves, and uses execution feedback to learn when acquiring
+> or reusing it is worth the cost. Mathematical applicability and predicted usefulness are
+> separate: a poor performance prediction must not acquire authority over exactness.
+> Ergodis organizes discovery and exact execution along
 > a spectrum: useful structure can remain subject to adaptation, be retained for repeated
 > queries, or be materialized as a specialized kernel. Evolve searches for that structure;
 > preservation contracts specify its admissible questions, contexts and answer-reconstruction
@@ -557,12 +622,37 @@ provider implements every step of this loop.
 
 ### System documentation / README identity
 
-> Ergodis brings adaptive discovery and specialized exact computation into one system.
-> Evolve searches for useful problem structure. That structure can guide an ongoing solve,
-> be retained for repeated queries, or be materialized into a specialized kernel where
-> supported. The system tracks the conditions under which each specialization preserves
-> the required answer. Interactive campaigns support inspecting and steering discovery;
-> specialized execution and explicit control boundaries make performance part of the design.
+> **Solve exactly. Discover useful structure. Reuse it where it applies.**
+>
+> Ergodis combines exact solving with adaptive discovery of useful problem structure.
+> Evolve searches for representations, reductions and execution plans; admission checks
+> determine how each candidate may be used. In supported workflows, useful discoveries
+> can be retained for later queries or specialized into a fixed computation.
+
+Immediately name the released tasks/workflows and result statuses; do not lead with NFL,
+categorical folding or reification. Explain both where specialization fits and where it may
+not pay: cheap one-shot solves, weak structure, rapid invalidation, or a better existing
+domain solver. An interrupted run may return an incumbent, a bound or incomplete status,
+not an established optimum. “Exact” is not a claim that every run finishes.
+
+Retained artifacts need two separately visible scopes:
+
+| Semantic scope | Performance scope |
+|---|---|
+| Models, queries, updates and permitted uses | Workloads and hardware measured or predicted |
+| What invalidates the mathematical claim | What makes the speed estimate stale |
+| Evidence and independent checking route | Measurements, uncertainty and acquisition cost |
+
+Distinguish a mathematical fact, an admitted reduction, a reusable plan and an answer with
+evidence. A hardware change can leave validity intact while invalidating speed expectations;
+a stronger query can invalidate a summary on unchanged hardware. Explain why reuse is refused
+and what information is missing. “No beneficial specialization found within budget” is an
+ordinary outcome with fallback, not evidence of inequivalence or infeasibility.
+
+Where implemented, expose discovery budgets, stopping, retention, reopening, structured
+applicability failures and certificate references through shared agent/human semantics.
+Agent steering cannot silently change correctness obligations or the operational goal.
+Document resumability and active-state conversion only where actually supported.
 
 For a **core-library README**, immediately add:
 
@@ -627,8 +717,13 @@ updates and expected reuse. A smaller quotient can cost more overall. Direct sol
 legitimate selection. Checked knowledge can be retained across runs only where its
 applicability contract permits; performance priors require evidence of workload relevance.
 
-No-free-lunch results motivate explicit problem-distribution and structural assumptions.
-They neither establish a speedup nor make a meta-optimizer exempt from those assumptions.
+Use no-free-lunch results to discipline explicit problem-distribution and structural
+assumptions, not as the principal motivation or an obstacle Ergodis overcomes. They neither
+establish a speedup nor make a meta-optimizer exempt from those assumptions. The supplied
+review flags two precision checks for C985's primary-source audit: finite black-box
+objective-sequence performance is not machine runtime, and nonuniformity alone is not a
+sufficient argument for an advantage. Do not assert an adaptive portfolio must beat a fixed
+algorithm. Keep NFL to one focused introduction/discussion paragraph in the eventual paper.
 The conversation's literature survey identified substantial precedents: algorithm
 configuration, adaptive query processing, automated constraint modelling, equality
 saturation, CEGAR, rational metareasoning and self-improving algorithms. Treat that survey
@@ -643,6 +738,23 @@ Useful starting references from that discussion:
 - Automated model refinement: https://conjure.readthedocs.io/en/latest/
 - Equality saturation: https://arxiv.org/abs/2004.03082
 - Rational metareasoning: https://aima.eecs.berkeley.edu/~russell/research-bo.html
+
+### Priority comparison work added by the supplied review
+
+**SPIRAL/FFTW are central comparison targets**, not peripheral compiler citations: investigate
+their mathematical decomposition search, measured planning, retained plans, code generation
+and acquisition/reuse tradeoffs against Ergodis's proposed mechanism. The supplied review's
+characterizations are leads pending primary-source verification, not completed comparative
+findings. Also prioritize learning-augmented algorithms for performance robustness and
+FunSearch/AlphaEvolve for evaluator-guided program discovery. Preserve Conjure/equality
+saturation, adaptive query processing, algorithm selection, self-improving algorithms and
+rational metareasoning as substantive neighbors.
+
+C985 owns the claim-specific comparison and coupling/robustness evidence plan; C1180 may
+reuse the results for representation choices but does not replace that audit. Compare what
+the integration enables, not mere component presence. Do not claim predecessors lack
+verification, query sensitivity or reuse without checking their actual scope. The accompanying
+source register marks the newly supplied references as not independently read in this update.
 
 ## Acceptance and handoff
 
