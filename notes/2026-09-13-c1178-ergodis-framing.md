@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-13
-**Status**: Framing synthesis delivered; first-paper recommendation and draft prose below.
+**Status**: COMPLETE as a framing deliverable; first-paper recommendation and draft prose below.
 **Visibility**: PRIVATE contributor/editorial context. This document is not an export source.
 
 ## Purpose and scope
@@ -420,3 +420,25 @@ searches, alter acceptance gates or publish private material. C985 should resolv
 contribution before commissioning a claim-specific novelty audit and any new experiments.
 The remaining scientific questions belong to the paper's evidence work, not to an indefinite
 extension of this editorial task.
+
+## Mystery ledger — explicit ej + tt closeout
+
+The main editorial acceptance gate passed: the recommendation, ranked alternatives,
+source depths, drafts and evidence gaps are reviewable. The closeout asked what the same
+mechanism explains across families and what an adversarial comparison would remove.
+
+| Question | Closeout disposition | Remaining gate / owner |
+|---|---|---|
+| Why can a smaller representation fail to make solving cheaper? | Conceptually settled: construction, admission, readout, updates and reuse determine total cost; C1062 and C1130 provide concrete warnings. This corrects the early compulsory-minimization framing. | C985 must measure the actual selector against strong direct and static alternatives. No universally best selection policy is established. |
+| What makes several mechanisms one contribution? | Sharpened: their interaction must change admitted computation and improve a common workload. Added a coupling ablation, not merely more domain demonstrations. | C985: precise common result/contract and measured coupling evidence; cross-domain integration is not established by a shared interface alone. |
+| What does “learn from solves” retain? | Settled at the framing level: distinguish reusable checked semantic facts from revisable performance priors and ordinary answer records. | C985/Evolve evidence: show nontrivial reuse on declared held-out queries/instances and account for acquisition/checking costs. |
+| Can query selection preserve the real task while changing observables? | Meaning clarified: evaluate the outer operational decision under declared permitted changes; distinguish it from rewriting a fixed question. | C985: one concrete operationally equivalent comparison. Broad autonomous question/design selection remains a target. |
+| Is the proposed combination a new research contribution? | Not settled by this framing pass; established precedents are recorded without weakening them. | C985: identify the exact contribution, perform the proportionate primary-source novelty audit, then write any priority claim in its owning ledger. |
+
+No additional mathematical mystery was manufactured and no new proof or benchmark is claimed.
+The lane discovery companion was reviewed at handoff; all observations here answer C1178's
+planned framing questions, so no incidental discovery entry was added.
+
+Validation: scoped whitespace/diff checks, exact source-location checks for the consulted
+reports, an exact local public-tree check, and a prose review for Evolve's core status,
+claim strength and private/public boundaries. No solver, Lean build or benchmark was run.

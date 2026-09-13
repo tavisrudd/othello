@@ -481,3 +481,13 @@ Closed C1080–C1129 runtime, verification, repository and UI dispositions remai
 their dated task reports and in the earlier entries of this archive. Detailed C1130 deliveries and
 measurements remain in its dated review reports and private interface-review records. The live map
 retains only active frontiers, current boundaries and one-line routes to those authorities.
+
+## 2026-09-13 — C1178 integrated Ergodis framing
+
+Recommended first-paper frame: discovering and compiling structure for exact optimization,
+with Evolve core throughout. Ranked alternatives, twelve framing sources, paper/README/concept
+drafts and possible independently substantial follow-ons are in
+`../2026-09-13-c1178-ergodis-framing.md`; read depths and the bounded manuscript-location
+search are in its sources companion. Novelty and coupling experiments remain explicit C985
+evidence work. The local public snapshot predates the newer rule-contract features; no
+public documentation, export, manuscript or foreign-lane file was changed.
