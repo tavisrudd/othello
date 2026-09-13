@@ -3,6 +3,13 @@
 **Date:** 2026-09-12. **Lane:** `ergodis`. **Disposition:** capability study. No code written; nothing
 under `~/src/ergodis*` edited.
 
+**Implementation correction (C1155, 2026-09-13):** `compile_observational`
+already constructed certified coarsest quotients in baseline `927c618`. The
+claimed missing construction capability was a source-reading gap. Additional
+readout admission and recompilation for replacement observations are different
+operations. See `2026-09-13-c1155-weighted-normalization.md`; the earlier study
+text below is retained as the historical assessment.
+
 ## Opening summary
 
 Twenty-six named sources: eleven papers read at partial depth with the sections recorded, ten at
