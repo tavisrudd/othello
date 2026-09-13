@@ -11,6 +11,14 @@ The three C1170 lexer defects below are repaired in private `a644dad`, with
 richer exponent diagnostics in `6290979`. Regression tests and finite native/
 WASM parity pass; entity-reference syntax remains an explicit coverage gap.
 Current scope and receipts: `2026-09-12-c1170-owned-rel-frontend.md`.
+Re-verified 2026-09-13 at private `9cdc124` / core `2e1bab2`: `a^b` parses as
+exponentiation, radix literals (`0x1f`, `0b101`, `0o77`) are rejected with an
+explicit `UnsupportedSyntax` like digit separators, and malformed exponents
+(`1e`, `1e+`) report a span of caret width ≥ 2; `tests/rel_frontend.rs` covers
+each (13 passed). `scripts/public-lint.sh evidence` is clean. No BUG-severity
+item remains open; the R17 NITs (parser `unreachable!` on a private
+continuation tag, one-byte secondary spans) and the RISK rows stay with their
+allocated owners.
 The historical reviewer reports below retain their original findings.
 
 ## Scope
