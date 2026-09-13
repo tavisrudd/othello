@@ -5012,8 +5012,17 @@
       "last": 1166,
       "purpose": "Kernel-check the existing finite privacy lowering certificate and its packed observation semantics in Lean",
       "sequence": 557
+    },
+    {
+      "count": 1,
+      "first": 1167,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1167,
+      "purpose": "Prove source-bound incremental min-plus replay and leastness after monotone fact improvements",
+      "sequence": 558
     }
   ],
-  "next_id": 1167,
+  "next_id": 1168,
   "schema": "codex-task-id-allocations-v1"
 }
