@@ -1,0 +1,26 @@
+{
+  "schema": "finite-min-plus-rules.v1",
+  "semiring": "bounded-min-plus-u32",
+  "stability": 0,
+  "domain": 4,
+  "relations": [
+    {"name": "edge", "arity": 2, "input": true},
+    {"name": "dist", "arity": 1, "input": false}
+  ],
+  "facts": [
+    {"relation": "edge", "tuple": [0, 1], "cost": 1},
+    {"relation": "edge", "tuple": [0, 2], "cost": 0},
+    {"relation": "edge", "tuple": [1, 3], "cost": 3},
+    {"relation": "edge", "tuple": [2, 1], "cost": 1},
+    {"relation": "edge", "tuple": [3, 2], "cost": 0},
+    {"relation": "dist", "tuple": [0], "cost": 0}
+  ],
+  "rules": [{
+    "head": {"relation": "dist", "terms": [{"variable": "y"}]},
+    "body": [
+      {"relation": "dist", "terms": [{"variable": "x"}]},
+      {"relation": "edge", "terms": [{"variable": "x"}, {"variable": "y"}]}
+    ]
+  }],
+  "symmetries": []
+}
