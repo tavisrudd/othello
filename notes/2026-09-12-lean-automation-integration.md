@@ -33,6 +33,13 @@ transports it to finite event sequences. The span instance is symbolic and
 general; the private finite privacy instance is checked separately by Rust and
 an independent Python oracle. Its JSON certificate is not yet imported into
 Lean. Likewise, these results do not formally verify the Rust implementation.
+The Lean companion proves bounded reflection for checked concrete iterations;
+the universal scalar N-round convergence argument is not yet a Lean theorem.
+
+The current oracle also has a workflow limit: its synchronous local subprocess
+has no timeout or isolation, and Lean enforces the output-size limit after
+capture. A future interactive automation adapter needs an explicit resource
+policy before claiming the roadmap's fast-failure behavior.
 
 `bv_decide` could become useful for a packed representation, a mask operation,
 or a bounded arithmetic encoding. No such proof obligation is needed for the
