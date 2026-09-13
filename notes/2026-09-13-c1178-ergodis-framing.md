@@ -190,7 +190,7 @@ and possible deeper papers, not proposals to remove Evolve from Ergodis.
 | Rank | Frame | Strength and breadth | Main risk / disposition |
 |---|---|---|---|
 | 1 | Evolve structure, optionally reify it: one discovery-to-specialization spectrum | Unifies adaptive discovery, exact answers, retained representations and static kernels. Evolve remains core across development and deployment. | Requires a same-family demonstration across operating points and an honest distinction between plan selection and kernel generation; leading first-paper candidate. |
-| 2 | Discover the distinctions sufficient for future questions | Sharp conceptual connection to recovery labels, observables, contextual refinement and privacy traces. Excellent opening mechanism. | A coarsest quotient alone does not explain useful non-quotient reductions or their acquisition cost; use within rank 1. |
+| 2 | Evolve query-sufficient structure across algebraic, combinatorial and recursive representations | Connects recovery labels and observables to integer resource envelopes, graph/rule execution and checked representation bridges. Gives rank 1 a concrete account of what structure is discovered and retained. | Breadth of supported types is not novelty; demonstrate connected bridges and acquisition cost, not a universal translation system. Includes the earlier “discover the distinctions sufficient for future questions” frame. |
 | 3 | Compile dynamic decision problems and retain reusable knowledge | Makes repeated queries, updates, certificates and cross-run reuse central. Natural systems emphasis. | Universal dynamic-policy and source-edit support exceed delivered families; possible systems-focused follow-on. |
 | 4 | Discover and admit theorem-guided search improvements | Closely fits predicate synthesis, symmetry/bound admission and learned-only reruns. Concrete and evaluable. | Can understate query and representation choices; a strong empirical strand of the first paper and possible follow-on. |
 | 5 | Exact compositional optimization over finite interfaces | Most direct connection to the existing recovery theory and original C985 theorem spine. | Too narrow as the whole system identity; retain as a mathematical foundation and one family demonstration. |
@@ -199,6 +199,59 @@ and possible deeper papers, not proposals to remove Evolve from Ergodis.
 An unrestricted “optimizer of all questions, designs and algorithms” is not a competing
 first-paper frame: it lacks a bounded evaluation contract. The broader design space belongs
 in the system explanation, with implemented subsets and open work identified precisely.
+
+## Representation combination — a supporting unified frame
+
+Candidate thesis, subordinate to the discovery-to-specialization spectrum rather than a
+replacement for it:
+
+> Ergodis evolves query-sufficient computational structure across algebraic, combinatorial
+> and recursive representations, checks the conditions under which it preserves answers,
+> and exploits it through specialized exact execution.
+
+This is an integrated framing hypothesis, not a claim that autonomous cross-representation
+optimization is complete. Evolve remains core; agent-steered campaigns can guide which
+structures and questions to explore, and actual solves determine whether an admitted
+structure pays. Retention or static kernel reification remains optional.
+
+“Boolean, integer, graphs, Datalog” mixes expression types, structures and source languages.
+The useful account separates their roles and shows the bridges:
+
+| Layer | Current internal capability | Contribution to the combination |
+|---|---|---|
+| Boolean/integer expressions | Typed scalar predicates, scores and feature expressions | Express candidate structure and ordering; expressions alone confer no pruning or proof authority. |
+| Finite-field/linear structure | Spans, labelled composition, quotients and represented transfers | Preserve algebraic information for composition and witness recovery, not only scalar costs. |
+| Integer resources | Load vectors, capacity surfaces and count/resource envelopes | Admitted shapes use specialized exact dynamic programs; this is not unrestricted integer-programming support. |
+| Graphs and recursive rules | Finite weighted rule programs with Boolean and bounded min-plus carriers | Cover recursive consequences and least solutions as well as acyclic composition. Datalog parsing, admission and execution remain separate capabilities. |
+| Query-dependent summaries | Admitted observables/quotients and checked finite transition lowerings | Make sufficiency relative to the question, permitted transitions/compositions and required evidence. |
+
+Three connections carry the argument. First, Boolean rule production already uses the
+min-plus kernel through the exact lift `true → 0`, `false → infinity`, while independent
+verification retains Boolean semantics. The incremental recursive runtime currently admits
+min-plus only. Second, a summary sufficient for minimum cost or leakage dimension can be
+insufficient for class-specific costs or a target-functional query; rejecting the stronger
+query is part of correctness. Third, discovered structure must earn its cost in actual
+execution: fewer states need not offset discovery, checking, memory, readout or restart cost.
+
+Evidence anchors: core `docs/language-semantics.md`, `docs/rule-contract.md`,
+`docs/allocation-specializations.md`, `docs/recursive-queries.md` and
+`docs/finite-lowering.md`; C1092's implemented query-specialization examples; the existing
+C1130 representation-admission reports indexed above. These are internal capability
+references, not claims about the filtered public snapshot.
+
+Positive comparison examples already show why a type checklist is weak positioning:
+Z3 has arithmetic and Datalog/Horn facilities, MiniZinc has Boolean/integer modeling and
+graph constraints, and egglog combines equality saturation with Datalog. The source
+register records the limited documentation read depth; this is not a priority audit.
+The proposed distinction is the connected, preservation-aware, solve-cost-driven system,
+not an assertion that competitors lack these ideas.
+
+**Paper evidence gate:** demonstrate the bridges, not just inventory the endpoints.
+For each selected bridge, identify the source and target representation, preserved query,
+admission/checking obligation, witness/readout behavior, Evolve's actual role and measured
+end-to-end cost. Separate implemented family-specific bridges from proposed generalization.
+Do not imply arbitrary automatic translation, complete Rel execution, universal Evolve
+integration or general static-kernel generation.
 
 ## Editorial direction — September 13 clarification
 

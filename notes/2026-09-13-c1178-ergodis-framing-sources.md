@@ -18,6 +18,31 @@ corrections. The two brainstorm documents were not read end to end. Their propos
 checked against C1091 and later task reports before becoming part of the recommendation.
 The selection is sufficient for an editorial synthesis, not exhaustive historical coverage.
 
+## Representation-combination supplement
+
+September 13 follow-up discussion added the representation-combination option. Internal
+read scope: core `docs/language-semantics.md` typing/operation/role passages;
+`docs/rule-contract.md` Boolean lift and independent-checker passage;
+`docs/allocation-specializations.md`, `docs/recursive-queries.md` and
+`docs/finite-lowering.md` opening contracts; C1092 implemented-example section;
+the current lane handoff and architecture map. These were targeted contract reads, not a
+new implementation audit or execution of tests. The current handoff supersedes the
+architecture map's stale queued labels for C1176/C1177.
+
+Positive external comparisons were consulted in the preceding discussion through official
+web documentation/search excerpts, not full papers or implementation audits:
+
+- Z3 arithmetic and Datalog/Horn facilities: https://microsoft.github.io/z3guide/docs/theories/Arithmetic/
+  and https://microsoft.github.io/z3guide/docs/fixedpoints/syntax/ — documentation excerpts.
+- MiniZinc modeling types and graph constraints: https://docs.minizinc.org/en/stable/spec.html
+  and https://docs.minizinc.dev/en/latest/lib-globals-graph.html — documentation excerpts.
+- egglog equality saturation plus Datalog: https://github.com/egraphs-good/egglog and
+  https://egraphs-good.github.io/egglog-tutorial/01-basics.html — README/tutorial excerpts.
+
+These establish overlapping positive capabilities only. No absence, priority, comparative
+performance or complete feature-parity claim follows. No private material was sent in
+external searches, and no public-facing document was changed.
+
 ## Internal source register
 
 Paths are relative to the Othello repository unless marked core/private. The selected
