@@ -18,6 +18,31 @@ corrections. The two brainstorm documents were not read end to end. Their propos
 checked against C1091 and later task reports before becoming part of the recommendation.
 The selection is sufficient for an editorial synthesis, not exhaustive historical coverage.
 
+## Categorical realization / folding supplement
+
+September 13 follow-up recovered the September 12 discussion through these internal sources:
+
+- `2026-09-12-c1150-category-theory-for-ergodis.md`: named-source verdict and synthesis,
+  especially semantic versus algorithmic layers. This supplement relies on that report's
+  attribution and read-depth record; the external paper was not newly read.
+- `2026-09-12-c1151-category-theory-capability-pass.md`: report, organizing principle,
+  recommendation changes, merged ranking and allocated-slice table. Its explicit warning
+  that the original mappings were documentation-based remains applicable.
+- `2026-09-12-c1150-part-b-compilers-solvers-normalization.md`: Little–He–Kayas source entry
+  and shortcut-fusion/tupling summary, not the underlying paper or the full dossier.
+- `ergodis-discovery-track.md`: September 12 categorical leads and Macready correspondence
+  entry only; correspondence is private and not evidence of implemented capabilities.
+- `2026-09-12-relationalai-datalog-reading.md`: motivation, compilation-target requirements
+  and adjacent comparison passage. This supplement does not adopt its absence claims.
+- `2026-09-12-alvaro-datalog-reading.md`: questions for Macready about rewrite conditions
+  and commuting squares; no claim that the questions have been answered.
+- `2026-09-12-ergodis-rule-contract-programme.md`: motivation and compiler/oracle interface
+  questions. Historical implementation ordering is not a current status source.
+
+Read depth here is selected internal passages, not a fresh primary-literature audit, proof
+check or implementation test. The realization-search framing and proposed two-transformation
+experiment are editorial synthesis. No external source was newly fetched for this supplement.
+
 ## Representation-combination supplement
 
 September 13 follow-up discussion added the representation-combination option. Internal

@@ -253,6 +253,60 @@ end-to-end cost. Separate implemented family-specific bridges from proposed gene
 Do not imply arbitrary automatic translation, complete Rel execution, universal Evolve
 integration or general static-kernel generation.
 
+## Computational realizations and structure folding
+
+Technical explanation beneath the leading discovery-to-specialization frame:
+
+> Evolve searches for cheaper computational realizations of a question—not merely better
+> answers within a fixed realization.
+
+An alternative explanatory phrase is **discovering how much structure a computation actually
+needs—and how best to realize that structure**. Neither replaces the broad leading title.
+Category theory is a candidate organizing language for the transformations and their laws,
+not by itself a novelty claim or the proposed first-paper headline.
+
+The C1150 synthesis of Abbott–Zardini separates a semantic layer from an algorithmic layer:
+different realizations can have the same meaning and different costs. The Ergodis framing
+adds a search role for Evolve, a preservation obligation for admission, and operational cost
+feedback from actual solves. This connection is our editorial synthesis; it does not imply
+that the cited categorical framework supplies Evolve's search policy or that Ergodis has
+implemented a universal categorical IR.
+
+“Structure folding” must distinguish the transformations:
+
+| Mechanism | What changes | Preservation question |
+|---|---|---|
+| Behavioral quotient | Merge states indistinguishable under admitted observations and future behavior | Which queries and transitions remain well defined? |
+| Algebraic fusion | Eliminate intermediate structures or traversals | Does the fused computation preserve the required value and readout? |
+| Equivalent-plan rewriting | Replace one computational realization with another | Under which identities and side conditions are the plans equivalent? |
+| Symmetry reduction | Avoid redundant equivalent candidates | Are witnesses recoverable and the required search coverage preserved? |
+
+These can share a preservation-and-cost framework without becoming one operation. A smallest
+behavioral quotient is not necessarily the cheapest executable realization. The recovery
+connection supplies an important constraint: labels dispensable for today's scalar answer
+may still be essential for later composition, stronger observables or witness recovery.
+Conversely, preserving every source distinction can prevent useful specialization.
+
+The September 12 studies identify quotient construction, semiring shortcut fusion and
+equivalent-plan search as relevant directions. They are not evidence that Evolve currently
+composes all these transformations autonomously. Their initial mappings rested on documents;
+later implementation reports own delivered capability and supersede their historical rankings.
+
+**Candidate discriminating experiment:** follow one problem through two distinct admissible
+transformations, for example quotienting and fusion. Compare their alternatives and any valid
+composition; show Evolve selecting using total measured cost, including discovery, checking,
+compilation and reuse. Identify exactly what is retained, whether a static kernel is reified,
+and what remains adaptive. This is a proposed paper-evidence gate, not an allocated experiment
+or a reported result.
+
+**Private collaboration context:** the Macready correspondence motivates a possible interface
+to an external categorical compiler: Ergodis as a checked computational oracle for bounded
+questions, candidate realizations and certificates. This complements the internal Evolve loop;
+it neither makes Ergodis dependent on that stack nor reduces its identity to a backend. The
+correspondence is not implementation evidence, an agreed integration, or material for public
+attribution without separate approval. Keep the conceptual framing independent of private
+correspondence when preparing public prose.
+
 ## Editorial direction — September 13 clarification
 
 Repository documentation may present multiple complementary framings for different readers
