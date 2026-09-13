@@ -25,14 +25,15 @@ rules path and Soufflé. The purpose is an order-of-magnitude reading, not a ben
 
 ## Commands
 
-Harness (new file, the only source addition):
-`/home/tavis/src/ergodis/crates/rules/examples/closure_ballpark.rs`
+Harness: private `ergodis-private/examples/closure_ballpark.rs` (private `c02eae8`; it was
+drafted under the core rules crate's examples and moved to the private repository unchanged,
+with `ergodis-rules` added as a private dev-dependency). Core is untouched.
 
 ```
-cd /home/tavis/src/ergodis
-nix shell nixpkgs#cargo nixpkgs#rustc -c cargo build --release -p ergodis-rules \
+cd /home/tavis/src/ergodis-private
+nix shell nixpkgs#cargo nixpkgs#rustc -c cargo build --release -p ergodis-private \
   --example closure_ballpark
-/home/tavis/.cache/ergodis/target/ergodis/release/examples/closure_ballpark \
+/home/tavis/.cache/ergodis/target/ergodis-private/release/examples/closure_ballpark \
   <N> <sparse|dense> 51 <outdir>
 ```
 
