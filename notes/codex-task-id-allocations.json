@@ -5102,8 +5102,17 @@
       "last": 1182,
       "purpose": "Demand-driven semi-naive Datalog evaluator with C1173 support witnesses; Souffle comparison at scale",
       "sequence": 567
+    },
+    {
+      "count": 1,
+      "first": 1183,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1183,
+      "purpose": "Ranked-relation Datalog certificate (tuple plus round rank) with searching checker; representation cost measurement of derivation and ranked certificates",
+      "sequence": 568
     }
   ],
-  "next_id": 1183,
+  "next_id": 1184,
   "schema": "codex-task-id-allocations-v1"
 }

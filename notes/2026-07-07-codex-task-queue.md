@@ -217,6 +217,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 
 
+- **C1183 `[ergodis]` [IN PROGRESS]** — Ranked-relation Datalog certificate (derived tuples plus round rank, checker searches each tuple's lower-rank justification through join indexes) replacing the explicit derivation trace; representation-cost measurement of both certificate forms (JSON, fixed binary, varint/delta, packed) on the C1182 sizes → `notes/2026-09-13-c1183-ranked-certificate.md`
 - **C1170 `[ergodis]` [IN PROGRESS]** — Rel-rich owned frontend contract and parser/diagnostic performance prototype; Ergodis backend/rules handling → `notes/2026-09-12-c1170-owned-rel-frontend.md`
 - **C1156 `[ergodis]` [QUEUED]** — Evolve slice (C1151 rows 10, 13, Aksu cost rule): learned proposal scorer (linear or tree model) and sliding-window UCB operator selection, Markov-category discipline on proposal sampling, one-sided screen cost rule; gate = counted drop in wasted proposals at matched budget, no evidence claim touched → `notes/2026-09-12-c1151-category-theory-capability-pass.md`.
 - **C1157 `[ergodis]` [QUEUED — C1152/C1154 PREDECESSORS CLOSED]** — equality-saturation spike (C1151 row 9): egg-style e-graph over plan terms with cost-driven extraction and preservation analysis; matched plan cost versus current simplifier and invalid-merge rejection gates; coordinate generalization with C1180 without duplicating its lift/lower scope → `notes/2026-09-12-c1151-category-theory-capability-pass.md`.
