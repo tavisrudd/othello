@@ -5093,8 +5093,17 @@
       "last": 1181,
       "purpose": "Categorical lift-fold-lower investigation and gated cross-domain Evolve continuation pilot",
       "sequence": 566
+    },
+    {
+      "count": 1,
+      "first": 1182,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1182,
+      "purpose": "Demand-driven semi-naive Datalog evaluator with C1173 support witnesses; Souffle comparison at scale",
+      "sequence": 567
     }
   ],
-  "next_id": 1182,
+  "next_id": 1183,
   "schema": "codex-task-id-allocations-v1"
 }

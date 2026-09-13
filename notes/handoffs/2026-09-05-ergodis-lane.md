@@ -46,6 +46,14 @@ the remaining syntax gaps by manifest family and first semantic admission checks
 lowering, rules, joins and execution; no external evaluator or backend is adopted. Tree-sitter
 and executable reference semantics remain deferred.
 
+### C1182 — demand-driven Datalog evaluation (queued)
+
+C1179 (`../2026-09-13-c1179-datalog-closure-ballpark.md`, closed) found the grounded rules path
+capped at N≈24 by the grounding work budget while Soufflé runs the same inputs to N=1024 dense.
+C1182 (`../2026-09-13-c1182-demand-driven-datalog.md`) builds the semi-naive evaluator with
+sparse per-tuple support witnesses in core `crates/rules` and runs the matched comparison;
+the C1179 harness lives in private `examples/closure_ballpark.rs`.
+
 ### Rule-contract programme — closed
 
 Programme and sequencing: `../2026-09-12-ergodis-rule-contract-programme.md`; audit:
