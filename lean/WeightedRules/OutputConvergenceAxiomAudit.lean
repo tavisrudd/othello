@@ -22,7 +22,7 @@ witnesses insert only numeric literals returned by the external producer.
 /-- info: 'WeightedRules.chainDistanceImproved_values' depends on axioms: [propext, Quot.sound] -/
 #guard_msgs in
 #print axioms WeightedRules.chainDistanceImproved_values
-/-- info: 'WeightedRules.boundedMinPlus_step_improvement' depends on axioms: [propext, Quot.sound] -/
+/-- info: 'WeightedRules.boundedMinPlus_step_improvement' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
 #print axioms WeightedRules.boundedMinPlus_step_improvement
 /-- info: 'WeightedRules.boundedMinPlus_iterate_succ_cost' depends on axioms: [propext, Quot.sound] -/

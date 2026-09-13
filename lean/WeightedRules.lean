@@ -4,6 +4,7 @@ import WeightedRules.IncrementalAxiomAudit
 import WeightedRules.LoweringSquareAxiomAudit
 import WeightedRules.OracleAxiomAudit
 import WeightedRules.OutputConvergenceAxiomAudit
+import WeightedRules.OrderedConvergenceAxiomAudit
 import WeightedRules.FiniteLoweringChecks
 import WeightedRules.RoundConvention.Retained
 import WeightedRules.RoundConvention.DomainThree
@@ -21,8 +22,9 @@ import WeightedRules.SupportConvention.DomainSix
 # Finite weighted rules: library root
 
 Importing this module elaborates every terminal of the library: the polynomial
-rule contract and its bounded min-plus instance, scalar-round and rule-output
-convergence with their sharpness witnesses, reflective certificate checking,
+rule contract and its bounded min-plus and Boolean instances, scalar-round and
+rule-output convergence over ordered inflationary algebras with their sharpness
+witnesses, reflective certificate checking,
 incremental replay, source lowering squares, finite event lowering, readout
 minimality, and the external witness examples. Each imported audit module
 asserts the exact logical axioms of its terminals through `#guard_msgs`, so a

@@ -103,7 +103,12 @@ core `801e732`). C1173 complete: support-witness certificates check least
 fixedness in one pass without replay, 3–5× faster than replay on identical
 producer output; oracle resource policy; raw scalar entry point and cyclic
 raw programs (`../2026-09-13-c1173-support-certificate.md`; core `eead07b`).
-Remaining C1171 successors: C1174–C1177.
+C1174 complete: convergence proved once over ordered inflationary algebras
+(`WeightedRules.OrderedConvergence`), Boolean carrier admitted in the rule
+contract with its own certificate formats, transitive-closure and
+same-generation fixtures, generic Boolean replay properties, Lean Boolean
+instance and exact min-plus lift (`../2026-09-13-c1174-generic-carrier.md`).
+Remaining C1171 successors: C1175–C1177.
 C1154 complete: offline intervals, exact finite audits and directed identity
 acyclicity; selected-root error-domain guard is explicit
 (`../2026-09-12-c1154-feature-intervals.md`).

@@ -166,8 +166,24 @@ python3 WeightedRules/generate_round_convention.py
 
 ## Verification boundary
 
-`WeightedRules.Convergence` proves that every bounded min-plus program on `n`
-scalar coordinates is fixed after `n` synchronous rounds from infinity.
+`WeightedRules.OrderedConvergence` proves the convergence bounds once for
+every *ordered inflationary* algebra: an idempotent semiring on a linear order
+whose alternative is the minimum and whose product lies above each factor
+(`WeightedRules.OrderedInflationary`). `OrderedInflationary.iterate_fixed`
+bounds every program by its scalar count and
+`OrderedInflationary.rule_output_fixed` by `min n (m + 1)` over `m` distinct
+rule outputs; neither needs a finite carrier or a comparison minus. Bounded
+min-plus is the instance `boundedMinPlus_orderedInflationary` under the
+numerical cost order; `WeightedRules.BooleanRules` gives the Boolean
+reachability instance `booleanRules_orderedInflationary` under the order
+`true < false`, proves through `boolLift_iterate` that the lift
+`true ↦ 0`, `false ↦ infinity` commutes with iteration, so a min-plus kernel
+evaluates Boolean programs exactly, and checks a three-vertex transitive
+closure by kernel reduction. Build
+`WeightedRules.OrderedConvergenceAxiomAudit` for these terminals.
+
+`WeightedRules.Convergence` restates, for bounded min-plus, that every program
+on `n` scalar coordinates is fixed after `n` synchronous rounds from infinity.
 `boundedMinPlus_iterate_fixed` includes empty programs, cycles, repeated product
 factors and saturation. `boundedMinPlus_iterate_least` establishes leastness.
 The module `WeightedRules.ConvergenceSharpness` defines
