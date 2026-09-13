@@ -85,7 +85,7 @@ Lean automation integration and remaining proof boundaries:
 `../2026-09-12-lean-automation-integration.md`.
 C1169 complete: frontend source study, Rel-rich syntax target, owned-parser
 performance and rich diagnostic requirements
-(`../2026-09-12-c1169-datalog-frontends.md`). C1170 queued: owned frontend
+(`../2026-09-12-c1169-datalog-frontends.md`). C1170 active: owned frontend
 coverage contract and parser/diagnostic performance prototype
 (`../2026-09-12-c1170-owned-rel-frontend.md`). Ergodis retains all backend and
 rules handling; Tree-sitter and executable reference semantics are deferred.

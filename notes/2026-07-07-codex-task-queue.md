@@ -217,7 +217,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 
 
-- **C1170 `[ergodis]` [QUEUED]** — Rel-rich owned frontend contract and parser/diagnostic performance prototype; Ergodis backend/rules handling → `notes/2026-09-12-c1170-owned-rel-frontend.md`
+- **C1170 `[ergodis]` [IN PROGRESS]** — Rel-rich owned frontend contract and parser/diagnostic performance prototype; Ergodis backend/rules handling → `notes/2026-09-12-c1170-owned-rel-frontend.md`
 - **C1159 `[ergodis]` [QUEUED]** — one-probe one-sided screen (C1152 successor): in the C1143 sparse provider, one cheap complete screen (β = 1, no false rejections) before the completion binary search, where 57% of weight-two candidates pass the current rule and 6.6% of those complete; independently checked; gate = candidates entering completion and search wall on the reduced development model at radius five and on hold-outs 2–4, A/B against the retained baseline, screen cost below c_x·(1−p)·(1−α_s); optional structured decline reason on the budget error → `notes/2026-09-12-c1152-certificate-spike.md` § Recommended next allocation
 - **C1154 `[ergodis]` [QUEUED]** — FeatureDag offline slice (C1151 rows 1, 5): interval abstraction pass and weak-term-acyclicity check on the identity list; gate = zero false negatives on the 1,984-row lowering corpus with precision reported, acyclicity passes or names the identity → same card
 - **C1155 `[ergodis]` [QUEUED]** — quotient slice (C1151 rows 6, 7): settle the `u32::MAX` sentinel, weight pushing + minimization on summary trees, coalgebraic partition refinement computing the coarsest quotient with exact keys for one ValidatedQuotient family; gate = computed quotient independently verified and compared with supplied → same card

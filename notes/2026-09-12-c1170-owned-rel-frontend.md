@@ -2,7 +2,8 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-12
-**Status**: QUEUED.
+**Status**: IN PROGRESS. Two-hour continuation began 2026-09-13 05:24:50 UTC;
+target stop 07:24:50 UTC.
 
 Establish a versioned syntax/admission coverage contract with at least the
 expressive richness of Rel, then implement a bounded owned lexer/parser and
