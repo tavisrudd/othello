@@ -5689,3 +5689,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1158 `[ergodis]` [COMPLETE 2026-09-12]** — acting-set scope corrected and measured: q18 interface subgroup36,864/kernel48/effective768; actual q29/q174 paired-census actions trivial, with ambient collisions excluded; independent Rust/Python certificates → `notes/2026-09-12-c1158-acting-subgroup.md`.
 
 - **C1165 `[ergodis]` [REPORTED 2026-09-12]** — universal N-round convergence of the existing bounded min-plus rule contract, leastness and certificate existence; guarded Lean proof and axiom audit → `notes/2026-09-12-c1165-min-plus-convergence.md`
+
+- **C1166 `[ergodis]` [REPORTED 2026-09-12]** — kernel-check the retained finite privacy lowering certificate against packed observation semantics; generic table reflection and private formal instance → `notes/2026-09-12-c1166-privacy-lowering-reflection.md`

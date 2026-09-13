@@ -72,8 +72,9 @@ interface family, no ambient-orbit reduction for the live paired census
 private `3d52f12`). C1165 complete: universal scalar N-round convergence,
 sharpness and reflective certificate completeness
 (`../2026-09-12-c1165-min-plus-convergence.md`, proof `e6ddc6e57`).
-C1166 active: checked finite privacy tables and their packed observation semantics
-(`../2026-09-12-c1166-privacy-lowering-reflection.md`).
+C1166 complete: private finite privacy tables, physical-world semantics and
+fifteen-state minimality are kernel-checked
+(`../2026-09-12-c1166-privacy-lowering-reflection.md`; private `5446efb`).
 Lean automation integration and remaining proof boundaries:
 `../2026-09-12-lean-automation-integration.md`.
 Next: concrete workload/IR-obligation gate; join engine and broader benchmarks

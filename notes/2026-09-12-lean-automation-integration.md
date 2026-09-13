@@ -30,14 +30,16 @@ every item ships in Lean 4.35. This work does not change the pinned toolchain.
 
 The C1162 square is `G(F(x,e)) = H(G(x),e)`. Once supplied, the trace theorem
 transports it to finite event sequences. The span instance is symbolic and
-general; the private finite privacy instance is checked separately by Rust and
-an independent Python oracle. Its JSON certificate is not yet imported into
-Lean. Likewise, these results do not formally verify the Rust implementation.
+general. C1166 now imports the private finite privacy certificate into a private
+Lean instance, checks both event squares and their physical-world semantics,
+and proves the fifteen-state readout bound minimal. Rust and the independent
+Python oracle remain separate checks. These results do not formally verify Rust.
 The universal scalar N-round convergence theorem is now proved in
 `lean/WeightedRules/Convergence.lean`,
 `WeightedRules.boundedMinPlus_iterate_fixed` (C1165), with sharpness for every
-positive scalar count and reflective certificate completeness. The finite
-privacy JSON import remains a separate proof boundary.
+positive scalar count and reflective certificate completeness. Private finite
+semantics and exact trust coverage are recorded in
+`2026-09-12-c1166-privacy-lowering-reflection.md`.
 
 The current oracle also has a workflow limit: its synchronous local subprocess
 has no timeout or isolation, and Lean enforces the output-size limit after
