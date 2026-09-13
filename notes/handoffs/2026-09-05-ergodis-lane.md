@@ -9,7 +9,7 @@ correction trails live in dated reports and the append-only
 **Date**: 2026-09-13
 **Mode**: intent-based.
 **Status**: ACTIVE. Immediate engineering frontier is C1170 (owned Rel-rich frontend); the
-rule-contract programme C1172–C1177 is closed. C1143, C1130, C1016,
+rule-contract programme C1172–C1177 and the Datalog evaluation pair C1179/C1182 are closed. C1143, C1130, C1016,
 C1017, C1061 and C985 remain in progress. C1062 and C1070 await Tavis's close call.
 
 **Discovery companion**: [ergodis discovery track](../ergodis-discovery-track.md).
@@ -46,13 +46,16 @@ the remaining syntax gaps by manifest family and first semantic admission checks
 lowering, rules, joins and execution; no external evaluator or backend is adopted. Tree-sitter
 and executable reference semantics remain deferred.
 
-### C1182 — demand-driven Datalog evaluation (queued)
+### Datalog evaluation — C1179 and C1182 closed
 
-C1179 (`../2026-09-13-c1179-datalog-closure-ballpark.md`, closed) found the grounded rules path
-capped at N≈24 by the grounding work budget while Soufflé runs the same inputs to N=1024 dense.
-C1182 (`../2026-09-13-c1182-demand-driven-datalog.md`) builds the semi-naive evaluator with
-sparse per-tuple support witnesses in core `crates/rules` and runs the matched comparison;
-the C1179 harness lives in private `examples/closure_ballpark.rs`.
+C1179 (`../2026-09-13-c1179-datalog-closure-ballpark.md`) found the grounded rules path capped
+at N≈24 by the grounding budget. C1182 (`../2026-09-13-c1182-demand-driven-datalog.md`) added
+the demand-driven semi-naive evaluator (`Demand`, core `crates/rules/src/demand.rs`), admission
+without grounding and the derivation-certificate checker (core `crates/verify`), and a matched
+single-core comparison with Soufflé 2.5 through the private harness and
+`analysis/datalog-comparison/`. Open follow-ups need allocation: a compact certificate encoding
+and bitmap-backed checker (the JSON certificate is 5–25× the output relation), bodies with more
+than two atoms, and a bit-parallel closure kernel for dense inputs.
 
 ### Rule-contract programme — closed
 
