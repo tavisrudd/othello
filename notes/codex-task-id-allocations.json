@@ -4994,8 +4994,17 @@
       "last": 1164,
       "purpose": "Ergodis as a Lean oracle: tactic/IO call over FFI or subprocess, certificate checked by a reflective Lean min-plus checker yielding proof terms of optimality and least fixpoint",
       "sequence": 555
+    },
+    {
+      "count": 1,
+      "first": 1165,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1165,
+      "purpose": "Formalize the scalar N-round convergence theorem for existing bounded min-plus rule programs",
+      "sequence": 556
     }
   ],
-  "next_id": 1165,
+  "next_id": 1166,
   "schema": "codex-task-id-allocations-v1"
 }
