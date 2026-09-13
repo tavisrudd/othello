@@ -78,6 +78,8 @@ fifteen-state minimality are kernel-checked
 C1167 complete: typed incremental proof replay, live chained distance witnesses
 and bounded paired checking measurements
 (`../2026-09-12-c1167-incremental-proof-checking.md`; oracle `7798d342d`, private `57a4eb9`).
+C1168 active: the capped distinct-rule-output convergence bound
+(`../2026-09-12-c1168-rule-output-bound.md`).
 Lean automation integration and remaining proof boundaries:
 `../2026-09-12-lean-automation-integration.md`.
 Next: concrete workload/IR-obligation gate; join engine and broader benchmarks
