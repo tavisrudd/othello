@@ -55,9 +55,10 @@ without grounding and the derivation-certificate checker (core `crates/verify`),
 single-core comparison with Soufflé 2.5 through the private harness and
 `analysis/datalog-comparison/`. C1183 (`../2026-09-13-c1183-ranked-certificate.md`) added the
 ranked-relation certificate (relation plus one byte per tuple, searching checker, core
-`crates/verify/src/ranked.rs`) and measured representation cost. Open follow-ups need
-allocation: a direct-addressed (bitmap) checker for both certificate forms, bodies with more
-than two atoms, and a bit-parallel closure kernel for dense inputs.
+`crates/verify/src/ranked.rs`) and measured representation cost. Queued successors: C1184
+direct-addressed checker for both certificate forms, C1185 certificate size/cost exploration
+with generation profiling (exact queue rows). Still unallocated: bodies with more than two
+atoms, and a bit-parallel closure kernel for dense inputs.
 
 ### Rule-contract programme — closed
 

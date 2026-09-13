@@ -5111,8 +5111,17 @@
       "last": 1183,
       "purpose": "Ranked-relation Datalog certificate (tuple plus round rank) with searching checker; representation cost measurement of derivation and ranked certificates",
       "sequence": 568
+    },
+    {
+      "count": 2,
+      "first": 1184,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1185,
+      "purpose": "C1183 successors: direct-addressed checker for both Datalog certificate forms; certificate size/cost reduction exploration with generation profiling",
+      "sequence": 569
     }
   ],
-  "next_id": 1184,
+  "next_id": 1186,
   "schema": "codex-task-id-allocations-v1"
 }
