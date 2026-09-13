@@ -184,6 +184,11 @@ the separate optimization manuscript's location remains unconfirmed. No public p
 
 ## Additional routed work
 
+- C1180 categorical lift–fold–lower investigation is queued; C1181 cross-domain pilot and
+  resumed Evolve are gated on its memo and Tavis's architecture choice. Queue audit, contracts
+  and gates: `../2026-09-13-c1180-c1181-categorical-structure-folding.md`. Reuse C1155's
+  existing quotient/normalization results and C1162's lowering checker; coordinate C1157
+  plan rewriting and C1156 proposal policy without treating either as the complete loop.
 - C1111/C1112 reconstruction-driven representation discovery remains a bounded private spike;
   C1113 is gated on native end-to-end benefit. Reports:
   `../2026-09-07-c1111-reconstruction-contract-corpus.md`,

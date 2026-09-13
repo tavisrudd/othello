@@ -296,10 +296,19 @@ later implementation reports own delivered capability and supersede their histor
 transformations, for example quotienting and fusion. Compare their alternatives and any valid
 composition; show Evolve selecting using total measured cost, including discovery, checking,
 compilation and reuse. Identify exactly what is retained, whether a static kernel is reified,
-and what remains adaptive. This is a proposed paper-evidence gate, not an allocated experiment
-or a reported result.
+and what remains adaptive. Investigation and a gated pilot are now allocated as C1180/C1181
+in `2026-09-13-c1180-c1181-categorical-structure-folding.md`; this is not a reported result.
+The queue review also incorporates C1155's correction: certified coarsest observational
+quotient construction already exists; the missing investigation concerns generalization and
+the complete lift/fold/lower/continue loop, not building another quotient engine.
 
-**Private collaboration context:** the Macready correspondence motivates a possible interface
+**Private collaboration context:** Tavis clarified that the categorical lens is partially
+inspired by Macready's September 12 email describing a foundation spanning symmetries,
+generalized tensors, predicate logic and quantum tensor networks, broader than neural
+circuits. The framing question is whether a principled family of semantic structures and
+translations can support this breadth, not merely whether tensor-logic syntax can be parsed.
+This is private correspondence supplied by Tavis, not an independently inspected system.
+The Macready correspondence also motivates a possible interface
 to an external categorical compiler: Ergodis as a checked computational oracle for bounded
 questions, candidate realizations and certificates. This complements the internal Evolve loop;
 it neither makes Ergodis dependent on that stack nor reduces its identity to a backend. The
