@@ -99,6 +99,46 @@ The expected bytes, including the trailing newline, are retained in
 `fixtures/distance.certificate.json`. `OracleExample` checks the live response
 against `distanceProgram`; it does not use that retained response as an oracle.
 
+## Audit gate and library root
+
+`WeightedRules.lean` imports every audit module and the round-convention
+family, so the single target `WeightedRules` builds the whole library. It is
+deliberately not a default Lake target: the library is kept separate from the
+rest of this Lean tree, and its oracle examples need the external producer
+library at build time. Each `#print axioms` in
+the audit modules is wrapped in `#guard_msgs` with its expected message, so the
+audit is a build-failing assertion: a terminal that acquires `sorryAx`, a
+native-evaluation axiom or any other new dependency fails the build. When a
+proof legitimately changes its axiom set, update the expected message next to
+its print command.
+
+## Round convention against the producer
+
+The producer counts rule sweeps, including the final sweep that changes
+nothing; the formal iterate counts from the all-infinity valuation, with the
+inputs loaded at iterate one. `WeightedRules.TableProgram` imports a producer's
+grounding from natural-number tables, and `WeightedRules.RoundConvention.*`
+check by kernel reduction, on forty seeded sources of domain three to six,
+that the producer's from-zero round count and its incremental sweep count are
+exactly the least fixed indices of the corresponding synchronous iterates,
+that the incremental count lies within the rule-output bound, and that three
+single mutations of each certificate are rejected. `RoundConvention.Retained`
+compares the producer's grounding of the two hand-written sources with
+`distanceProgram` and `chainDistanceProgram` coordinate by coordinate.
+
+The fixtures under `fixtures/round-convention/` are written by the producer's
+`lean_boundary_fixtures` example; `generate_round_convention.py` renders the
+Lean modules, which read every table through `nat_table_from_json`. To
+regenerate, from the core repository and then the Lean package root:
+
+```sh
+cargo run --release -p ergodis-rules --example lean_boundary_fixtures -- \
+  <lean-root>/WeightedRules/fixtures/round-convention \
+  <lean-root>/WeightedRules/fixtures/distance.json \
+  <lean-root>/WeightedRules/fixtures/chain-distance.json
+python3 WeightedRules/generate_round_convention.py
+```
+
 ## Verification boundary
 
 `WeightedRules.Convergence` proves that every bounded min-plus program on `n`

@@ -218,7 +218,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 
 - **C1170 `[ergodis]` [IN PROGRESS]** — Rel-rich owned frontend contract and parser/diagnostic performance prototype; Ergodis backend/rules handling → `notes/2026-09-12-c1170-owned-rel-frontend.md`
-- **C1172 `[ergodis]` [QUEUED]** — Lean audit gate: `#guard_msgs` on all axiom prints, `WeightedRules` root module and default target, audit `chainDistanceBaseline`, state the Lean/Rust round convention, boundary properties P1/P2/P5/P6 → `notes/2026-09-12-c1171-rule-programme-review.md` R1–R4
 - **C1173 `[ergodis]` [QUEUED]** — Support-witness (derivation-rank) certificate so Lean checking is O(rules) not O(n·rules); oracle resource policy; chained-improvement harness; raw scalar-program entry point and P3 → `notes/2026-09-12-c1171-rule-programme-review.md` E1/E7/R5
 - **C1174 `[ergodis]` [QUEUED]** — Abstract the C1165/C1168 convergence layer over an ordered inflationary algebra, then admit the Boolean carrier in `rule_contract` for the TC/SG benchmark rows, with generic-carrier replay properties → `notes/2026-09-12-c1171-rule-programme-review.md` E2/E3
 - **C1175 `[ergodis]` [QUEUED]** — Release-hygiene follow-ups: walk `crates/`, `src/`, `tests/` into `SHA256SUMS`, exported-manifest evidence rows, evidence lint inside `cargo test`, pre-push local-remote guard, binary content scan, tag-check anchoring, scratch path → `notes/2026-09-12-c1171-rule-programme-review.md` R6–R9

@@ -96,6 +96,10 @@ span) repaired and regression-tested in C1170; successors C1172 (Lean audit gate
 (support-witness certificate), C1174 (generic carrier + Boolean), C1175
 (release hygiene), C1176 (contract semantics), C1177 (private kernels) queued
 (`../2026-09-12-c1171-rule-programme-review.md`).
+C1172 complete: guarded axiom audit, `WeightedRules` root/default target,
+audited chain witnesses, round convention stated and pinned by forty
+kernel-checked producer cases (`../2026-09-13-c1172-lean-audit-gate.md`;
+core `801e732`). Remaining C1171 successors: C1173–C1177.
 C1154 complete: offline intervals, exact finite audits and directed identity
 acyclicity; selected-root error-domain guard is explicit
 (`../2026-09-12-c1154-feature-intervals.md`).

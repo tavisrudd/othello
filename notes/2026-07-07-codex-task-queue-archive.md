@@ -5704,3 +5704,4 @@ depth because this archive is in the same `notes/` directory.
 - **C1159 `[ergodis]` [REPORTED 2026-09-12]** — One-probe completion screen passes no-false-rejection gate and corrected retained A/B; about 11% less search time on frozen development model, opt-in → `2026-09-12-c1159-completion-screen.md`
 
 - **C1155 `[ergodis]` [REPORTED 2026-09-13]** — Exact weighted normalization and layered lumping pass finite gates; existing coarsest quotient compiler reused and independently audited → `2026-09-13-c1155-weighted-normalization.md`
+- **C1172 `[ergodis]` [REPORTED 2026-09-13]** — Lean audit gate: every axiom print guarded, `WeightedRules` root and default target, chain witnesses audited, round convention stated in the core contract and pinned by forty kernel-checked producer cases (P1/P2/P5/P6) → `2026-09-13-c1172-lean-audit-gate.md`
