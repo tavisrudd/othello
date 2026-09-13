@@ -320,8 +320,12 @@ capacities.
 Bundled application examples cover recursive XOR repair, LRC batching, repair
 DAGs, QC-LDPC search, vector repair, and GPU MDS checkpoint recovery. Matched
 bounded controls include Graphillion, HiGHS, OR-Tools max-flow, CryptoMiniSat,
-and CP-SAT. The recorded gains range from `8x` to `344,300x`; the largest
-comparison isolates the theorem-driven compositional reduction. These are
+and CP-SAT. Under the corrected paired protocol, eight coding and storage
+workloads run cold and warm against a constraint-programming control give a
+geometric-mean speedup of `104.16x` cold and `81.48x` warm over the twelve
+profiles where both sides completed; four further profiles are lower bounds
+only because the control exceeded its time limit. Two earlier headline ratios
+were retracted when the protocol was corrected and are not quoted. These are
 declared-instance results, not a universal solver ranking, and none is used as
 evidence for a mathematical theorem.
 
