@@ -2,742 +2,181 @@
 
 **Lane**: `ergodis`
 
-**Purpose:** routing only. Closed dispositions, measurements, proof summaries, and correction
-trails belong in the dated task reports and in the archive companion,
+**Purpose:** current routing only. Closed dispositions, measurements, proof summaries and
+correction trails live in dated reports and the append-only
 [`2026-09-05-ergodis-lane-archive.md`](2026-09-05-ergodis-lane-archive.md).
 
-**Date**: 2026-09-05
+**Date**: 2026-09-13
 **Mode**: intent-based.
-**Status**: ACTIVE. Split out of `complete-ports` on 2026-09-05. C1016 (order-2092 Hadamard
-reduction), C1061 (compiled dynamic decision engines / TigerBlossom decoder), and C1062 (structural causal
-models as a context language) are in progress; C1062 is ready to close on Tavis's call. C1017 (core
-performance-contract remediation) and C985 (optimization-facing paper) are in progress. The
-benchmark, evolve-capability, tooling, and visualization tasks (C1031-C1033, C1040-C1048, C1052)
-are queued or in progress per their own rows.
+**Status**: ACTIVE. Immediate engineering frontiers are C1170 (owned Rel-rich frontend), C1176
+(rule-contract semantics) and C1177 (private rule kernels/performance). C1143, C1130, C1016,
+C1017, C1061 and C985 remain in progress. C1062 and C1070 await Tavis's close call.
 
 **Discovery companion**: [ergodis discovery track](../ergodis-discovery-track.md).
 
-**Architecture context**: for architecture, shared API/schema, execution, model/query
-or portability work, read `notes/ergodis-architecture-context.md` after this handoff.
-It is private, not-to-ship contributor guidance and routes to prior ADRs, current
-abstractions and terminology. Narrow UI/admin work does not require the full history.
+**Architecture context**: for architecture, shared API/schema, execution, model/query or
+portability work, read `notes/ergodis-architecture-context.md` after this handoff. It is private,
+not-to-ship contributor guidance. Narrow UI/admin work does not require the full context.
 
-
-## Identity and locations
+## Identity and boundaries
 
 - **Ergodis software**: private `main` of `~/src/ergodis`, with sibling checkouts
-  `~/src/ergodis-private`, `~/src/ergodis-evidence`, `~/src/ergodis-contrib`, each with its own
-  `AGENTS.md`. It left this monorepo at tag `ergodis-split-base` (`aa49d68c3`) under C1058. Public
-  export is gated on the release checklist; the filtered tree still has 67 lint findings.
-- **Motivating manuscript**: the [`complete-ports`](2026-07-17-complete-ports-paper.md) lane owns
-  the *Exact Compositional Transfer of Bounded Linear Recovery* manuscript that originally motivated
-  this engine; that lane keeps its own manuscript route.
+  `~/src/ergodis-private`, `~/src/ergodis-evidence` and `~/src/ergodis-contrib`, each governed by
+  its own `AGENTS.md`. The software left this monorepo at tag `ergodis-split-base` (`aa49d68c3`).
+- C1175 validates the regenerated 472-row filtered export manifest and a lint-clean filtered
+  tree. Nothing has been published to GitHub. Evidence-publication, paper-deposit,
+  copyright/contact, product-scope and public-CI decisions remain with Tavis.
+- The [`complete-ports`](2026-07-17-complete-ports-paper.md) lane owns the motivating *Exact
+  Compositional Transfer of Bounded Linear Recovery* manuscript. This lane owns the private
+  engine, its performance contract, benchmarks, capabilities, tooling and C985 paper.
 
-## Goal
+## Immediate frontiers
 
-Ergodis is the private compiled exact-optimization / contextual-quotient engine (`~/src/ergodis` and
-its sibling checkouts) plus its benchmark, capability, tooling, and paper work. This lane owns the
-engine, its performance contract, its benchmark and evidence programme, its exploratory probes, and
-the C985 optimization-facing paper.
+### C1170 — owned Rel-rich frontend (in progress)
 
-## Active frontiers
+Current contract and measurements: `../2026-09-12-c1170-owned-rel-frontend.md`; source study:
+`../2026-09-12-c1169-datalog-frontends.md`. Private `a644dad` establishes finite native/WASM
+parity on 142 cases / 325,403 canonical bytes, including the reviewed lexer repairs. This is a
+finite parity gate, not a grammar oracle or complete syntax/admission claim.
 
-### C1149 — public-release readiness review (evidence remediated, rest unallocated)
+**Next:** retain interleaved parser-performance measurements, then close recovery and remaining
+syntax/admission gaps. Ergodis retains lowering, rules, joins and execution; no external evaluator
+or backend is adopted. Tree-sitter and executable reference semantics remain deferred.
 
-Gap assessment and six-phase remediation plan for releasing the core as an AGPL library/CLI
-with docs and demos on GitHub: `../2026-09-11-c1149-ergodis-public-release-review.md`.
-Phase 0 decisions (evidence publication, paper deposit, copyright/contact, product scope, public
-CI) are Tavis's; phases 1–5 are unallocated successor tasks. Evidence hygiene is done, the
-evidence repository follows the same main/staging/public workflow, and the crate has its first
-filtered snapshot: public `3291659`, tag `v0.1.0-preview1`, staging rebuilt and its downstream
-build-and-test validation passing. Nothing is pushed to GitHub. Open decisions and remaining gaps
-are in the report's 2026-09-12 sections.
+### Rule-contract programme — C1176/C1177 queued
 
-### Rule-contract programme (active; C1150/C1151 literature closed)
+Programme and sequencing: `../2026-09-12-ergodis-rule-contract-programme.md`; audit:
+`../2026-09-12-c1171-rule-programme-review.md`.
 
-Goal, motivation (Macready), sequence, placement rule and deferred items:
-`../2026-09-12-ergodis-rule-contract-programme.md`. C1160 complete: scalar stability,
-semi-naive DAG/cycle verification and safe retractions; native/Python/WASM compilation gates pass
-(`../2026-09-12-c1160-verifier-stability.md`, core `6284ca7`). C1163 complete: Lean relational
-contract and certified recursive min-plus program through native/WASM ABI
-(`../2026-09-12-c1163-rule-contract.md`). C1164 complete: live Lean oracle, proved
-checker and kernel-checked least-fixpoint witness (`../2026-09-12-c1164-lean-oracle.md`).
-C1161 complete: checked recursive sessions and real campaign fork-depth readout, sparse
-incremental propagation, independent Python/native/WASM agreement and retained perf evidence
-(`../2026-09-12-c1161-recursive-runtime.md`). C1162 complete: checked finite lowering squares,
-exhaustive privacy family and minimal readout quotient, symbolic Lean span/trace laws
-(`../2026-09-12-c1162-leaf-lowering-square.md`). C1158 complete: q18 effective action 768 on the closed
-interface family, no ambient-orbit reduction for the live paired census
-(`../2026-09-12-c1158-acting-subgroup.md`; isolated branch `task/c1158-acting-subgroup`,
-private `3d52f12`). C1165 complete: universal scalar N-round convergence,
-sharpness and reflective certificate completeness
-(`../2026-09-12-c1165-min-plus-convergence.md`, proof `e6ddc6e57`).
-C1166 complete: private finite privacy tables, physical-world semantics and
-fifteen-state minimality are kernel-checked
-(`../2026-09-12-c1166-privacy-lowering-reflection.md`; private `5446efb`).
-C1167 complete: typed incremental proof replay, live chained distance witnesses
-and bounded paired checking measurements
-(`../2026-09-12-c1167-incremental-proof-checking.md`; oracle `7798d342d`, private `57a4eb9`).
-C1168 complete: sharp capped distinct-rule-output convergence, safe-seed replay
-and value-preserving checked-certificate conversion
-(`../2026-09-12-c1168-rule-output-bound.md`; proof `0fcf576af`).
-Lean automation integration and remaining proof boundaries:
-`../2026-09-12-lean-automation-integration.md`.
-C1169 complete: frontend source study, Rel-rich syntax target, owned-parser
-performance and rich diagnostic requirements
-(`../2026-09-12-c1169-datalog-frontends.md`). C1170 open at validated prototype checkpoint: owned frontend
-coverage contract and parser/diagnostic performance prototype
-(`../2026-09-12-c1170-owned-rel-frontend.md`). Ergodis retains all backend and
-rules handling; Tree-sitter and executable reference semantics are deferred.
-C1171 review complete: no mathematical defect in the day's work; evidence-path
-leak and task-id lint fixed (core `2e1bab2`); six generated-program properties
-(core `47a8c05`); three C1170 lexer bugs (`a^b`, `0x1f`, zero-width `1e`
-span) repaired and regression-tested in C1170; successors C1172 (Lean audit gate), C1173
-(support-witness certificate), C1174 (generic carrier + Boolean), C1175
-(release hygiene), C1176 (contract semantics), C1177 (private kernels) allocated
-(`../2026-09-12-c1171-rule-programme-review.md`).
-C1172 complete: guarded axiom audit, `WeightedRules` root/default target,
-audited chain witnesses, round convention stated and pinned by forty
-kernel-checked producer cases (`../2026-09-13-c1172-lean-audit-gate.md`;
-core `801e732`). C1173 complete: support-witness certificates check least
-fixedness in one pass without replay, 3–5× faster than replay on identical
-producer output; oracle resource policy; raw scalar entry point and cyclic
-raw programs (`../2026-09-13-c1173-support-certificate.md`; core `eead07b`).
-C1174 complete: convergence proved once over ordered inflationary algebras
-(`WeightedRules.OrderedConvergence`), Boolean carrier admitted in the rule
-contract with its own certificate formats, transitive-closure and
-same-generation fixtures, generic Boolean replay properties, Lean Boolean
-instance and exact min-plus lift (`../2026-09-13-c1174-generic-carrier.md`).
-C1175 complete: manifest walks all source/fixture/script/evidence trees, the
-export regenerates it for the filtered tree and `cargo test` verifies it
-everywhere; evidence lint in `cargo test`; `main` refused to every remote,
-anchored tag check, binary content scan; `rust-toolchain.toml` pins 1.95.0
-with a drift test; WASM ABI gate rerun passes
-(`../2026-09-13-c1175-release-hygiene.md`; core `b63c6dc`).
-Remaining C1171 successors: C1176–C1177.
-C1154 complete: offline intervals, exact finite audits and directed identity
-acyclicity; selected-root error-domain guard is explicit
-(`../2026-09-12-c1154-feature-intervals.md`).
-C1159 complete: opt-in completion screen, no-false-rejection audit and about
-11% less search time on the frozen development model; null control preserved
-(`../2026-09-12-c1159-completion-screen.md`).
-C1155 complete: exact wide costs, weighted normalization and independent
-quotient audits; existing coarsest compiler reused
-(`../2026-09-13-c1155-weighted-normalization.md`).
-C1170 finite native/WASM syntax and diagnostic parity now passes (142 cases);
-13 frontend tests include a 16,105-input stress gate and zero-allocation checks.
-Next: C1170 parser/diagnostic performance gates. Rich recovery and complete
-frontend coverage remain open.
-The concrete workload/IR-obligation gate still governs joins and
-broader benchmarks, which
-remain unallocated. Other deferred speed/hygiene tasks are not implicitly resumed. Existing WASM test-target Clippy warning: `src/bundle.rs:101`
-items after test module; production-library Clippy and unit tests pass. Literature cards:
-`../2026-09-12-c1150-category-theory-for-ergodis.md`,
-`../2026-09-12-c1151-category-theory-capability-pass.md`,
-`../2026-09-12-relationalai-datalog-reading.md`. Closed spikes: `../2026-09-12-c1152-certificate-spike.md`,
-`../2026-09-12-c1153-group-quotient-spike.md` (branches `spike/c1152-certificate`,
-`spike/c1153-group-quotient` under `~/.cache/ergodis/worktrees/`). Other deferred speed/hygiene rows: C1156–C1157. Foreign issue: branch `c1016-full-2092-campaign` fails `cargo fmt --check`
-and has four clippy errors.
+- C1172: guarded Lean axiom audit and `WeightedRules` root target, with the documented
+  separate/default-target caveat (`../2026-09-13-c1172-lean-audit-gate.md`, core `801e732`).
+- C1173: one-pass support-witness least-fixedness certificates versus replay, including raw scalar
+  and cyclic-program coverage (`../2026-09-13-c1173-support-certificate.md`, core `eead07b`).
+- C1174: generic ordered-inflationary convergence with min-plus and Boolean instantiations
+  (`../2026-09-13-c1174-generic-carrier.md`, core `c351eb9`).
+- C1175: filtered-export manifest/lint, evidence lint, remote/tag/binary checks and pinned Rust
+  toolchain (`../2026-09-13-c1175-release-hygiene.md`, core `b63c6dc`).
 
-### C1148 — certificate interoperability (queued)
+**C1176 next:** resolve rounds meaning, verification symmetry/stability/annihilation, source
+identity, dense negative control, the `min(n, M+1)` bound and remaining generated properties.
+**C1177 next:** private kernels, sparse frames, large-detector behavior and parallelism. Neither
+queued task is complete. Earlier C1154–C1168 increments and exact boundaries are indexed by the
+programme report; do not reproduce their history here.
 
-All certificate families, not only C1143: common cold inspect/verify/export
-interface, explicit reproof when external evidence must be regenerated, and
-claim/source-preserving adapters to justified industry formats/checkers.
-Private decision: `ergodis-private/docs/adr/0003-certificate-interoperability.md`.
-Inventory and implementation are queued; no universal VIPR compatibility is
-claimed. C1143 remains active on benchmark/provider improvements; exact/VIPR control evidence is linked below.
+### C1149 — public-release readiness
 
-### C1143–C1147 — external benchmark programme
+Gap assessment and six-phase plan: `../2026-09-11-c1149-ergodis-public-release-review.md`.
+Evidence remediation and the first filtered preview snapshot are complete; nothing has been pushed.
+Tavis owns phase-0 publication/product decisions; phases 1–5 remain unallocated.
 
-User-selected next order: C1143 BB circuit distance (active), C1144 held-out
-QLDPC distance, C1145 hypergraph decoding, C1146 multidimensional allocation,
-C1147 temporal scheduling. Common protocol, historical corrections and sources:
-`../2026-09-11-ergodis-external-benchmark-programme.md`.
-C1143 has private native sparse/indexed search and source-inferred, independently
-checked unit-cost coordinate retractions. Full development model: 17,244→2,232
-faults; computational distance six agrees across two search implementations, with
-an independently replayed lifted witness. Standalone exhaustive replay capsule
-now verifies radius-five exclusion, reduction and lifted weight-six witness;
-independent zero-allocation Rust replay takes ~68 ms at three workers (~234 ms
-including cold capsule/reduction checks). Python oracle agrees. This is replay,
-not a succinct/formally verified proof. Private
-`analysis/external-benchmarks/2026-09-11-exclusion-certification.md`. Native three-worker radius-five exclusion is ~76 ms after ~52 ms
-inference; CP-SAT remains unresolved at 30 s even on the same reduced model (initial
-encoding, not tuned SOTA). Existing dense provider is unchanged.
-Frozen shallow hold-out probe: cases 2–4 admit checked reductions; 5–7 retain the
-predeclared 200k-fault proposal-limit decline. No post-outcome tuning or full-distance
-claim. Next: matched proof-mode comparison and declared deeper hold-out evaluation,
-cost-aware provider/Evolve integration and matched published comparisons. Gurobi
-13.0.2 runner is validated but all three development formulations are rejected by
-the local restricted license; no Gurobi timing exists. An unrestricted license is
-needed to run it. Private `analysis/external-benchmarks/2026-09-11-gurobi-circuit-comparison.md`.
-SCIP 10.0.2: all nine development controls (full/filtered/projected × XOR/linear/both)
-remain unresolved at 30 s with measured three-worker concurrency. Private
-`analysis/external-benchmarks/2026-09-11-scip-circuit-comparison.md` records results
-and the proof-output comparison. Exact-SCIP/VIPR controls and generated independent
-proof checks are recorded in private `analysis/external-benchmarks/2026-09-11-scip-exact-proof-comparison.md`.
-The native/WASM sparse provider and independent-checking demo are live on
-`http://127.0.0.1:8770/circuit-distance`; scope, repeated timings and lifecycle tests:
-private `analysis/external-benchmarks/2026-09-11-portable-circuit-demo.md`.
-Additional SCIP cardinality and HiGHS default/parallel controls:
-private `analysis/external-benchmarks/2026-09-11-mip-objective-controls.md`.
-No completed comparator exclusion or Gurobi timing is claimed. Bounded native/WASM
-continuations now preserve exact candidate counts with zero allocations; the demo
-uses the shared worker-owned typed telemetry loop and has no 50-million-check cap.
-Native A/B and browser lifecycle evidence:
-private `analysis/external-benchmarks/2026-09-11-fault-continuation.md`.
-Large-domain frame selection can now scan the selected fault supports instead
-of all syndrome words, preserving exact ordering and zero allocations. The
-4,032-detector coordinate-spacing control improves ~4–5%; native/WASM and browser
-checks pass. Private `analysis/external-benchmarks/2026-09-12-sparse-frame-selection.md`.
-The quoted 60M→12M native slowdown still needs its exact workload reproduced;
-portable admission remains capped at 4,096 detectors.
-Next provider gate: deterministic subtree parallelism and deeper declared hold-outs;
-the sparse browser adapter remains serial per arm. Broader external-proof compatibility
-remains C1148. Checked reductions alone are not an exclusion proof.
-Report:
-private `analysis/external-benchmarks/2026-09-11-coordinate-retraction.md`;
-policy/evidence under the same directory. Initial gate:
-`../2026-09-11-c1143-bb-circuit-input-gate.md`.
-Use **TigerBlossom** for the decoder; legacy paths retain their historical names.
+### C1143 — BB circuit-distance external benchmark (in progress)
 
-### C1130 — full native/JS/WASM capability and workflow parity (in progress)
+Programme/protocol: `../2026-09-11-ergodis-external-benchmark-programme.md`; initial gate:
+`../2026-09-11-c1143-bb-circuit-input-gate.md`; private current evidence:
+`analysis/external-benchmarks/2026-09-11-coordinate-retraction.md` and adjacent reports.
+Sparse/indexed native search, checked coordinate retractions and an independently replayed
+weight-six witness are retained. This is exhaustive replay, not a succinct or formally verified
+proof. No Gurobi timing exists under the restricted local licence, and no completed comparator
+exclusion is claimed.
 
-Parallel allocation surfaces and private scheduling integration are reviewed and
-committed (core `0922ff2`, private `8c6cff9`). Default-feature build guard,
-witness-oracle checks and mixed serial/parallel edge cases pass; retained evidence:
-private `analysis/interface-review/2026-09-10-allocation-parallel.md`.
+**Next:** matched proof-mode comparison, declared deeper hold-outs, deterministic subtree
+parallelism, cost-aware provider/Evolve integration and matched published comparisons. C1144–C1147
+remain later external workloads. C1148 certificate interoperability is queued; it does not imply
+universal VIPR compatibility.
 
-Parameterization frontier: shared sparse embeddings, multi-factor array discovery,
-checked modular rejection and 8×8/16×16 browser witnesses are validated. Frozen
-holdouts show narrow coverage; order-140 structure remains supplied. Current map:
-`../2026-09-11-c1130-parameterization-checkpoint.md`.
+### C1130 — native/JS/WASM capability and workflow parity (in progress)
 
-Current authority: `../2026-09-09-c1130-js-wasm-parity-review.md`; task requirements:
-`../2026-09-08-c1130-wasm-feature-completeness.md`. Private capability matrix and
-performance experiments: `ergodis-private/analysis/interface-review/`.
+Current authority: `../2026-09-09-c1130-js-wasm-parity-review.md`; requirements:
+`../2026-09-08-c1130-wasm-feature-completeness.md`; parameterization checkpoint:
+`../2026-09-11-c1130-parameterization-checkpoint.md`. Detailed implementation and browser evidence
+remain in dated reports and private `analysis/interface-review/`.
 
-JS/WASM conformance entry point: `make -C analysis/js-wasm-tests all` in
-`ergodis-private`. Fast/browser/extended tiers, 62 checks, JSON/Markdown/JUnit
-reports. Stop/history responsiveness: `../2026-09-10-c1130-stop-responsiveness.md`. Solve clock and adaptive log axis: `../2026-09-10-c1130-solve-clock-axis.md`. Generated core/module contracts, independent oracles, shrinking and
-regressions: `../2026-09-09-c1130-property-testing.md`; private design and current
-validation: `analysis/property-tests/`. Generated module-client schedules and
-mutation controls: `analysis/property-tests/2026-09-10-module-schedule-validation.md`.
-Offline bundle/repository workers share compiled engine code with isolated heaps;
-loading consumes the existing action deadline. Source fingerprints reject
-mixed-revision validation. Review and retained loading diagnostics:
-`analysis/interface-review/2026-09-10-offline-worker-loading.md`.
-Implementation and validation disposition: `../2026-09-10-c1130-offline-worker-loading.md`.
-Repair race terminal status now flushes before successful worker cleanup cancels
-pending paints; completed and work-limited controls pass browser DOM checks.
-Private report: `analysis/interface-review/2026-09-10-terminal-race-paint.md` (`521374b`).
-XOR has a canonical WASM Specialized Solver reference; capacity-table references
-are now test-only when ordinary execution selects the same algorithm. General native source-derived
-independent minima / bounded two-resource surfaces replace the JS prototype for
-execution. Native/JS/WASM oracle, allocation, counter and browser gates are recorded
-in `analysis/interface-review/2026-09-10-wasm-specialized-solvers.md`; design:
-`analysis/interface-review/adr-capacity-surface-specialization.md`.
-Specialized progress now uses scalar kernel checkpoints and bounded publication
-(core `e21bffa`); fit/XOR races use compact native/WASM checkpoints (`4d11fe9`),
-a worker-owned loop and early telemetry ring (core `8fa619e`). Reports:
-`analysis/interface-review/2026-09-10-specialized-progress-and-worker-overhead.md`
-and `2026-09-10-worker-owned-fit-checkpoints.md`. Source-derived witness-prefix
-reuse and objective-first proposals: `2026-09-10-specialized-transfer-review.md`.
-Shared-memory solver/Evolve threads with a separate telemetry observer are a
-specified target, not implemented: `adr-shared-memory-execution-and-telemetry.md`.
-Private allocation now has shared native/WASM upfront selection and checked active
-representation admission (`844cb0a`, `35a433e`): explicit per-query restart, independently
-recheckable applicability receipts, generated source/permutation checks, and preserved
-original witness coordinates. Design/status: `analysis/interface-review/2026-09-10-adaptive-representation-plan.md`.
-Measured cold-overhead correction: `dfa284b`; retained single/two-worker counters
-and misses: `2026-09-10-adaptive-representation-performance.md`. Decision:
-`adr-checked-execution-representation-changes.md` (`c124a98`).
-Independent minimum-cost recognition for XOR is now shared by both normal race
-arms; cheap shape/coordinate screens precede allocation, then the existing kernel
-uses the core flat-source constructor (`d7e938e`; private `d33579b`). Native/WASM certificates replay
-against original choices. Private report: `analysis/interface-review/2026-09-10-independent-fit-recognition.md`.
-Checked domain reuse, conditional family substitution, count/resource envelopes and bounded batch readout are live on 8770 in both ordinary allocation arms (core `1127126`, private `5774a94`; WASM `b68b3f256463…`). Source/domain checks preserve original witness IDs. Count/resource selection uses conservative source-derived update and workspace estimates; the existing budget kernel is the fallback. Kernel loops allocate nothing; cold JSON readout still allocates. Groups of eight reduce 625 ordinary readout calls to 79, with cancellation and reordered-probe coverage.
-Private current report: `analysis/interface-review/2026-09-10-count-axis-and-readout.md`; decision: `adr-count-resource-envelope-and-batched-readout.md`. Conditional substitution: `adr-domain-family-substitution.md`. Larger profile inputs: `2026-09-10-harder-profile-workloads.md`.
-Packed shared-memory CSS is live on localhost:8770/evolve, using 75% of logical cores across equal search pools plus discovery. Native strided frontier scheduling and reusable scratch are accepted (core `c59bf67`, private `7e86039`): paired 4/12-worker wall gains ~24%/~20% with unchanged 373,706,766-candidate root work. Ordinary hot instruction streams match the retained control; native wall-time preservation remains limited by busy-host noise. Browser speedup from striding is not established; user reported 6.7–7.09 s before that update. Reports: private `2026-09-10-css-thread-scaling-followup.md/json`, `2026-09-10-css-wasm-thread-spike.md` and `2026-09-10-css-simd-screen.md/json`. SIMD and immutable caching remain enabled.
-Hadamard full orders through 120 are live on 8770, including 104/108/112/116/120. Evolve automatically selects a supplied general additive pair-join compiler; the shared Williamson model, exact duplicate-feature preprocessing and matrix reconstruction are supplied knowledge. No solution seed or moment bridge is used in the live join. All five new-order browser matrices and certificates pass; Evolve smoke times 0.41/1.96/11.31/7.43/5.51 s, ordinary unfinished at 12 s (four threads per arm; not a statistical benchmark). Even block lengths are supported with unchanged 32-byte source-record stride and no hot allocation. Result UI says “Found by search · verified”, states the supplied model and links published Williamson enumeration separately from first-witness timings. Reports: private analysis/interface-review/2026-09-11-hadamard-larger-orders.md/json; decision adr-general-additive-equality-compilation.md. Index budget 1280 MiB; order124 currently exceeds it. Native bounded-memory pair-join experiment now verifies full 124/128/132/136 matrices in 4.55/3.15/6.88/1.13 s with four physical cores; 140 times out at 90 s (published Williamson block-order35 nonexistence, not proved by this run). Peak RSS 39–106 MiB. Arbitrary-vector oracle, serial/parallel zero-allocation, independent compact matrix replay and retained A/B pass. The user requested local measurements first; 8770 remains unchanged. Report/decision: private analysis/interface-review/2026-09-11-partitioned-join-native.md/json and adr-partitioned-additive-join.md. Next: integrate the generic partitioned strategy into WASM/Evolve with explicit cold compile-next boundaries, then add a sequential solve-time-versus-order chart rather than larger races. Broader source model needed for a positive140 result.
-Next: calibrated admission cost, sparse envelopes/active-state conversion, and external certificate serialization/replay. Do not preserve a
-default/Evolve capability gap to manufacture a race ranking. One preload-overlap
-manifest fetch failed in the regression harness; warmed-cache 18-race replay passed.
-Cause remains unconfirmed; no production loading fix is claimed. Shared-memory telemetry
-and broader plan contracts remain open. WASM all-target Clippy's existing
-`bundle.rs` items-after-test-module finding remains; library Clippy/tests pass.
-Asset loading now uses revisioned immutable URLs, speculative post-paint JS/WASM
-cache fills and HTML-hidden empty results (`b65f0b3`). Warm source-switch races
-pass offline / 400 ms latency with zero server requests. Report:
-`analysis/interface-review/2026-09-10-demo-asset-caching.md`.
-Stalled specialized imports now abort their readiness gate; the Fetch-paused
-module regression passes. Other intermittent Chromium worker import cancellation
-remains open. Safari/iOS, Firefox,
-performance A/B and screenshot regression coverage remain open. The suite does
-not rebuild or replace canonical artifacts and does not replace native perf gates.
+Delivered slices include shared native/WASM provider boundaries, checked active representation
+admission, source-bound domain reuse, conditional family substitution, count/resource envelopes
+and bounded batch readout (core `1127126`, private `5774a94`). This does not establish universal
+representation switching, state conversion or cross-worker plan sharing. The generic partitioned
+Hadamard join remains a native experiment pending WASM/Evolve integration; shared-memory telemetry,
+broader plan contracts, Safari/Firefox coverage and complete workflow parity remain open.
 
-Delivered family modules include LRC, QEC, scheduling, CSS, Hadamard and repair.
-Demos support independent discovery, checked live admission, learned-only reruns
-with discovery off, and certificate verification. Race timing starts in ready
-workers; problem setup reports compilation separately. CSS ordinary repeats reuse
-plans but reset search/discovery state; learned-only reuse is explicit.
+**Next:** integrate the partitioned strategy with explicit cold compile-next boundaries; add a
+sequential solve-time-versus-order view; continue calibrated admission, sparse envelopes/active
+state conversion and certificate serialization/replay. Preserve one canonical engine, typed native
+kernels and matched performance/conformance gates. Do not infer backend adoption.
 
-P0 delivered: bounded JS request lifecycle and immutable operation identity;
-paired native/JS manifest/readout/descriptor validation (core `7a9bef6`); fixed and
-bounded-variable provider-owned execution catalogs for all five module families
-(private `205c3e6`). Loaded native/browser transcripts pass: LRC24, QEC20,
-scheduling11, CSS9, Hadamard13; one canonical WASM engine. No solver hot loop changed.
+### C1016 — order-2092 Hadamard reduction and search
 
-P1 delivered slice: generic RunSpec/RunRecord capture factory (core `b69abec`),
-byte-identical native/browser bundles, and application save/reopen/explicit replay
-(private `9a76124`/`f8bad94`, including QEC/scheduling). Imported answers
-remain inert unverified records. Actual browser bundles agree with native typed
-replays; this is execution equivalence, not independent proof verification.
+Resume from the authoritative
+[task card](../2026-08-30-c1016-ergodis-hadamard-quotient-synthesis.md) and its
+[archive](../2026-08-30-c1016-ergodis-hadamard-quotient-synthesis-archive.md). Current structure map:
+`../2026-09-11-c1016-inferred-repair-structure.md`; evidence gate:
+`../2026-09-11-c1016-kick-retention.md`. Orders 668/716/2092 remain unsolved and the separate
+strict-margin 14,800 recovery gate remains open.
 
-Cold rational residual-charge discovery now runs through the same native/WASM CSS
-provider, with 120 identical loaded-source transcripts and independent certificate
-checks. Completed CSS races include an explicit below-the-fold explorer. These
-bounds are checked but not automatically admitted to the solver; report:
-`ergodis-private/analysis/interface-review/2026-09-09-residual-charge-discovery.md`.
-Compiled-residual screening found no held-out gain from the learned charge or
-parity-projection banks; do not add them to the inner loop. The retained disabled
-two-worker timing discrepancy did not reproduce. Evidence and next utility gate:
-`ergodis-private/analysis/interface-review/2026-09-09-compiled-residual-utility.md`.
-Opt-in available-neighborhood packing now has a shared native/WASM provider
-operation (core `8b4b944`, private `156ee36`); browser CSS races apply it equally
-to both arms, with source tables
-compiled once per Plan before race timing. The cached-cover utility guard remains
-a private prototype. See `2026-09-09-css-residual-evaluation.md` in the private
-interface-review directory for retained evidence and validation limits. Paired
-campaign updates/checkpoints and application certificate checkers remain open.
-P2 retained labelled composition now supports all 54 prime fields plus GF(4), rectangular labels,
-a distinct target table and repeated witness readouts through one native/WASM
-adapter (private `9aefed8`). 8,172 ABI calls and independent cost/witness checks pass;
-report: `2026-09-09-retained-composition-portability.md`. General-field towers, compact witnesses
-and CLI/schema convergence remain open. P3 inventory, P4 portable
-performance experiments, P5 continuation/storage and P6 complete conformance.
-The first SIMD composition screen found no convincing compilation-time gain;
-served/native defaults are unchanged (`2026-09-09-composition-simd-screen.md`).
-All-field scalar and earlier optional SIMD conformance pass. Source-affine-span
-admission now handles otherwise rejected low-rank sources through a bounded cold
-fallback; 12,373 native/WASM calls and 63 overlapping CLI queries pass. Previously
-accepted sources skip span computation; native preparation diagnostic is unchanged
-within measurement noise. Current report: `2026-09-09-composition-span-admission.md`.
-Represented GF(4)/binary towers retain source preparation, compilation and
-source-coefficient witness readout through the same provider (`5521692`). Native
-`compose` now accepts all prime fields and distinct target tables through a shared
-cold dispatch catalogue (core `d016451`, private `58c433b`). 1,980 sequential/parallel
-CLI comparisons, 19 tower comparisons and 12,979 native/browser calls pass.
-Package schema `composition-source.v2` requires explicit client migration.
-Native/WASM one-shot composition now shares core `composition_io` (core `0bb290d`).
-WASM `composeJson` accepts the native schema; legacy `solveCompositionJson` adapts
-into it with all supported fields. Browser output geometry is preflighted before
-compilation. Current report: `2026-09-09-composition-codec-convergence.md`; tower
-details: `2026-09-09-retained-tower-portability.md`. Next: shared retained
-source/query normalization while preserving prepare-once/query-many behavior.
-General-field tower sources and compact witness readouts remain separate gaps.
-Private current evidence/design: `analysis/interface-review/application-records.md`,
-`provider-readout-contracts.md`, `capability-matrix.json`, and
-`adr-css-residual-reductions.md`. Generic fixed-coordinate discovery and offline
-residual-bound spikes are private `3408bb1`; the newer packing evaluator is a
-built-in checked bound, not an Evolve-synthesized theorem. Small
-50/128-qubit examples now live in Applications at `/code-distance`.
+**Next:** coverage-aware region proposals, cost-aware exact local representations and richer
+invariant-preserving repair schedules. Before resuming, read `ergodis-contrib/PERFORMANCE.md` and
+the shared performance playbook. Proved/exact reductions grant negative coverage; heuristic
+predicates do not.
 
-JS race lifecycle review fixed stale selection mounting, cancellation during
-preparation/final discovery, sibling worker cleanup and bounded discovery readiness
-(private `a55cca3`). Repair/Hadamard saved traces now reopen read-only with stale-import isolation
-(private `2fb0dad`); ModuleSession initialization/reset guards are `e6f33ed`.
-Result rows now share `race-ui.mjs` across capacity, repair, CSS and Hadamard.
-Selection clears old panels, immediately releases controls and fences late result
-publication; capacity races now share the two-arm timer panel. Node and Chromium
-selection/repair/Hadamard checks pass. Private report:
-`analysis/interface-review/2026-09-10-race-ui-consolidation.md` (`15725f8`).
-Shared `createRacePanels` now owns pending/results visibility for all selections
-and imports; empty cards stay hidden (`f7b69e8`). CSS preserves its first 32
-boundary samples before steady-state throttling. Shared chart layout avoids
-log-label collisions and clipped finish labels; candidate curves interpolate
-measurements while root changes remain steps. All 14 races / 41 charts visually
-reviewed, plus five QDistSAT sources at phone width. Long runs were inspected
-while active, not benchmarked to completion. Report and replay:
-`analysis/interface-review/2026-09-10-race-chart-visual-review.md` (`624f0ff`).
-The full page-controller consolidation remains open.
-Example-specific batch units remain intentional. Typed provider rejection and
-host-failure fanout, with explicit existing family policies and browser fault
-injection, are covered in private `analysis/interface-review/2026-09-10-race-failure-contracts.md`.
-Review and remaining consolidation boundary:
-`ergodis-private/analysis/interface-review/2026-09-09-js-race-review.md`.
+### C1017 — whole-core performance-contract remediation
 
-Native CLI/control/runtime fragmentation must converge in these same phases.
-Preserve typed native kernels and all contributor performance gates. Full parity,
-production module ABI and complete native/browser workflow integration remain open.
-No forked subset WASM engine, embedded answers or weakened verification. All design
-notes remain private. Prior chronological map is in the companion archive.
+Current report: `../2026-08-30-c1017-ergodis-core-performance-contract-remediation.md`.
+Allocation-counted hot loops, iterative traversal, Tiger layouts, worker ownership and retained
+single/parallel counter gates remain the contract. The filtered export is lint-clean; the inherited
+deferred-verification artifact still lacks an unverified marker.
 
-### C1111–C1113 — reconstruction-driven representation discovery
+### C1061 — compiled dynamic decision engines / TigerBlossom
 
-C1111/C1112 have a bounded spike on private branch `spike/continuation-reconstruction`
-at `~/.cache/ergodis/worktrees/continuation/ergodis-private`, with a sibling core worktree
-pinned at `67d929b`. Main-checkout code is untouched. All run/log/temp data use ZFS-backed
-`~/.cache/ergodis/continuation-spike/`; Cargo uses its shared configured target.
-The existing proposer learns and repairs a trace selector; partition certificates pass on
-q=13,17,19, with triangle joint-legality failure and frame/Clebsch marking ambiguity controls.
-This is a bounded representation/admission pilot, not autonomous field-coordinate discovery.
-The frozen selector now also passes q=16,23,25,27. A q=16-trained incidence-query
-dispatch gives 1.108x warm-query improvement on a held-out q=27 Python mix; the modeled
-first-batch ratio is only 1.008. C1113 remains gated on native end-to-end benefit.
-Benchmark review selects scheduler W2/W3/L2 for checked grouping/grading discovery;
-Ceph's existing reliability/scheduling readouts are the second reuse target.
-Next: bounded scheduler discovery against the current compiler, then matched native
-measurements preserving exact admission and the performance contract. Transfer remains gated.
-Latest private commit `20237c9`; report:
-`notes/2026-09-07-c1112-extension-fields-and-incidence-dispatch.md`.
-Reports: `notes/2026-09-07-c1111-reconstruction-contract-corpus.md` and
-`notes/2026-09-07-c1112-autonomous-representation-discovery.md`.
-Acceptance criteria: `notes/2026-09-07-continuation-ergodis-reconstruction-plan.md`.
+Current exploration log: `../2026-09-03-c1061-exploration-log.md`; certificate-authority migration:
+`../2026-09-07-c1098-certificate-authority-migration.md`. Legacy generic/specialized root-only
+checkers are replay paths, not independent evidence authority. Surface-family results predating the
+2026-09-04 constructor correction are invalid.
 
-### C1016 — order-2092 Hadamard reduction and search (private, `~/src/ergodis-private`)
-
-The frontier, the closed dispositions, the routing to every dated sub-report, and the open-move
-order all live in the task card,
-[C1016 order-2092 reduction and search](../2026-08-30-c1016-ergodis-hadamard-quotient-synthesis.md),
-with its append-only companion
-[archive](../2026-08-30-c1016-ergodis-hadamard-quotient-synthesis-archive.md). Read the card on
-resume; it is the current-state map for this task.
-
-**Next**: coverage-aware region proposals, cost-aware selection of exact local
-representations and richer invariant-preserving repair schedules. The private quadratic compiler now derives
-additive groups from supports; models remain supplied. Checked convex-hull
-projections help the measured 2092 workload, while span projections and capped
-four-flip region sampling are recorded negatives. Current map:
-`notes/2026-09-11-c1016-inferred-repair-structure.md`. Orders 668/716/2092 remain
-unsolved; the separate strict-margin 14,800 recovery gate remains open. Reading
-plan: `notes/2026-09-11-c1016-structure-literature-plan.md`.
-Private shrinking coverage landed at `b966a7d` (769 passed, 1 ignored); automatic
-kick/tabu-policy properties remain open. See
-`notes/2026-09-11-c1016-state-machine-properties.md`. All related retention
-repairs are validated at `96e04d5`; bounded carrier arithmetic lowers measured
-cycles 35.5–35.9%, with limitations recorded in
-`notes/2026-09-11-c1016-related-kicks-and-carrier-ranges.md`. The matched no-kick
-quality comparison remains full 14/48 improved; sampled 0/48. Concurrent
-public-core edits remain foreign.
-Complete six-cycle and cross-block four-cycle-pair neighbourhoods are closed
-locally at banked 14,800. Combined strict descent on twelve frozen controls
-bottoms out at 23,152. Faster threshold, record and sampled-tabu policies all
-lose to unchanged full-neighbourhood tabu at matched CPU budgets. The forty-case
-shell replication does not validate the prior five-leader ranking. No negative
-coverage follows from these misses. Active native authority:
-`~/src/ergodis-worktrees/c1016-full-2092/ergodis-private`, checkpoint `15bc0d3`;
-[current evidence and remaining gate](../2026-09-11-c1016-kick-retention.md).
-Provenance rules stand: proved structural and exact computational reductions grant negative
-coverage, observed/evolved and heuristic predicates never do. Every resume first reads
-`../ergodis-contrib/PERFORMANCE.md` and the shared playbook.
-
-### C1017 — whole-core Ergodis performance-contract remediation (`~/src/ergodis`)
-
-Allocation-counted hot loops, iterative traversal, complete Tiger layouts, contention-free worker
-ownership, one-/parallel-mode counter A/B gates, and the public/private source partition. The
-kernel-registry gate passes after the split repointed its evidence paths, and the filtered export
-tree lints clean. One inherited item from C1062: the deferred-verification artifact carries no
-unverified marker. Report:
-[C1017 core remediation](../2026-08-30-c1017-ergodis-core-performance-contract-remediation.md).
-
-### C1061 — compiled dynamic decision engines and the TigerBlossom decoder
-
-**Certificate authority caveat:** C1097 demonstrates a sibling-forgery acceptance in the legacy
-generic root-only checker and audits the same gap in the specialized checker. These paths must
-not supply independent evidence authority. C1098 removed the old API names and gated first-party
-benchmark consumers behind explicit legacy replay; see the reports below.
-
-Probes through C1068 are closed. The default arm is `LEVEL_ROUTED`; on stim-generated weighted
-circuit-level detector error models TigerBlossom is ahead of PyMatching in 27 of 33 operating cells in
-instructions and 30 in cycles, with zero weight and zero prediction disagreements on all 33. Log:
-[`2026-09-03-c1061-exploration-log.md`](../2026-09-03-c1061-exploration-log.md), one companion
-report per probe.
-
-C1069 closed the predecoder half of that read: the predecoder has no per-shot certificate, its
-audited-sound margin commits nothing, and the claims that had outrun it — the pipeline's equality
-test, the clean-ball skip on the surface tiers, the sparse/dense order, the audit's scope — are
-corrected with a test each. Report:
-[C1069 predecoder certificate read](../2026-09-05-c1069-predecoder-certificate-read.md).
-
-**Open successors**: a third code family to test the mean-degree crossover rule; the queue-struct
-borrow split, the only remaining lever on the touch loop; compile-time splitting of the
-non-observable stabilizer component; and the latency tail beyond the ninety-ninth percentile.
-
-**Waiting on Tavis**: routing the unspecialized graph path; the C1066 queue-discipline tradeoff
-(compiling clearing/scanning from the graph's largest edge weight returns about half of what C1065
-cost the published phenomenological grid and costs the weighted grid at most 0.4 per cent); and the
-harness's PyMatching working-set asymmetry, which runs in TigerBlossom's favour in cycles.
-
-Surface-family numbers taken before 2026-09-04 are invalid — `RotatedSurfaceCode::new` had a
-distance-one defect — and repetition numbers are untouched. Census and traffic runs need
-`--features tiger-traffic`.
+**Open:** third-family crossover test, queue-struct borrow split, non-observable stabilizer
+compile-time split and latency tail beyond p99. Tavis owns the unspecialized graph routing,
+C1066 queue-discipline tradeoff and PyMatching working-set-asymmetry calls.
 
 ### C1062 — structural causal models as a context language
 
-Probes 0–8 are done and every one of them now has its independent adversarial review (probes 1a, 1,
-2, 3, 4, 6, 7 and 8 dated 2026-09-05, probe 5 on 2026-09-04). The closeout recommends dropping the
-gated end-to-end demonstration, probe 9, so the task is ready to close on Tavis's call. The two
-items worth an allocated successor are the compositional counterfactual crossover — probe 7's
-reduction under probe 4's query — and whether the certificate can be emitted without compiling the
-carrier at all. Brief `2026-09-04-c1062-ergodis-causal-brief.md`, routing log
-`2026-09-04-c1062-exploration-log.md`, verdict `2026-09-05-c1062-closeout-synthesis.md`.
+Probes 0–8 and adversarial reviews are complete; closeout recommends dropping probe 9. Awaiting
+Tavis's close call. Authority: `../2026-09-05-c1062-closeout-synthesis.md`; brief:
+`../2026-09-04-c1062-ergodis-causal-brief.md`. Possible successors require allocation:
+compositional counterfactual crossover and certificate emission without carrier compilation.
 
-### C1070 — exact compositional leakage analysis for hierarchical linear encodings
+### C1070 — compositional leakage analysis
 
-All twelve probes done and reviewed (1, 5, 3, 2, 0, 6, 8, 9, 7, 10, 4); ready to close on Tavis's
-call. Probe 10 refuted the uniform-cost chain conjecture (it is Wei's chain condition) and corrected
-probe 2's measurement; probe 4 refuted labelled duality; probe 7 built the design front, each with a dated report, generator, certificate, and independent
-cross-check. Verdicts, the product claim, the ship order, open successors, and the consolidated
-mystery ledger are in the
-[closeout synthesis](../2026-09-06-c1070-closeout-synthesis.md); the brief is
-`../2026-09-06-c1070-ergodis-compositional-leakage-brief.md`. Product framing: prior art informs,
-never gates. **Waiting on Tavis**: close C1070; the schema migration, a certified incremental mode, and any
-paper carve-out are separate calls. Foreign
-issue seen in passing: the `fabric_routing` retained-tree-versus-Dijkstra test fails at `de53b6c` in
-`ergodis-private`, a module owned by another lane; an Opus fix is in review.
+All probes are complete and reviewed; awaiting Tavis's close call. Authority:
+`../2026-09-06-c1070-closeout-synthesis.md`; brief:
+`../2026-09-06-c1070-ergodis-compositional-leakage-brief.md`. Schema migration, certified
+incremental mode and a paper carve-out are separate future decisions.
 
-### C1072-C1074 — finite-geometry absorption targets from the relconic discovery track
+### C985 — exact algebraic optimization paper
 
-Queued, not started. Three leads logged on 2026-09-06 in
-[`2026-07-16-relconic-discovery-track.md`](../2026-07-16-relconic-discovery-track.md), routed here as
-Ergodis instance families rather than relconic manuscript work; no manuscript edit in any of them.
-C1072 compiles the equality case of the `PG(3,q)` secant-local coverage bound as a symmetric exact
-cover over closed block partitions of `E(K_k)`. C1073 compiles minimum ordinary completion of a
-conic-complete arc as independent domination on a union of chord-involution matchings. C1074 turns
-the Farr–Lisoněk free-pair cap constructions into a test-cap corpus for the concentration condition
-in the `n ≥ 4` programme. Each row carries its own provenance pointer; read the discovery-track
-entry before starting.
+In progress as the optimization-facing sequel; it does not block complete-ports. Current gate is
+the algebraically deduplicated weight-six discovery sweep with direct-sum rejection, seeking a
+Pareto survivor with `k d^2 / n > 19.2`. Reports:
+`../2026-08-30-c985-completion-compression-and-wide-search.md` and
+`../2026-08-30-c985-ergodis-private-adapters-and-parallel-roots.md`.
 
-### Evolve convergence — next implementation slice
+## Additional routed work
 
-C1079's convergence plan is complete: `notes/2026-09-06-c1079-ergodis-evolve-review.md`.
-C1080's portable admission pilot and current-core browser recovery are complete:
-`notes/2026-09-07-c1080-admission-pilot.md` (core `5247f6d`, `95d16b9`).
+- C1111/C1112 reconstruction-driven representation discovery remains a bounded private spike;
+  C1113 is gated on native end-to-end benefit. Reports:
+  `../2026-09-07-c1111-reconstruction-contract-corpus.md`,
+  `../2026-09-07-c1112-autonomous-representation-discovery.md` and
+  `../2026-09-07-continuation-ergodis-reconstruction-plan.md`.
+- C1072–C1074 are queued finite-geometry instance-family leads. Read their exact queue rows and the
+  linked `../2026-07-16-relconic-discovery-track.md` entries only when selected.
+- C1031–C1033, C1040–C1048, C1052, C1156–C1157 and remaining tooling/capability work retain their
+  exact queue/task-report status; none is implicitly resumed by this map.
+- Closed C1080–C1129 portable runtime, verification, repository and UI work is indexed by its dated
+  task reports and summarized in the companion archive. Do not treat those delivered slices as
+  universal host, mathematical-authority or execution-support claims.
 
-C1081's language inventory, finite reduction semantics and native/WASM conformance slice are
-complete: `notes/2026-09-07-c1081-language-semantics.md` (core `55c5d8c`).
+## Workspace rules
 
-C1082's scalar operation semantics and FeatureDag lowering conformance are complete:
-`notes/2026-09-07-c1082-scalar-semantics.md` (core `ac6b3ad`). The public compiler now validates
-field-schema bounds before u16 lowering; native evaluator/layouts are unchanged.
+`ergodis-private` is a library-only Cargo workspace with task crates under `tasks/`; no `src/bin`.
+Builds use `~/.cache/ergodis/target/`, retained A/B binaries use `retain-bin.sh`, and task close uses
+`cache-gc.sh`. Follow each sibling repository's `AGENTS.md` and the contributor performance guides.
+Preserve the public/private source partition and never publish private paths, reports or capabilities.
 
-C1083's bounded portable campaign transition model and checkpoint replay are complete:
-`notes/2026-09-07-c1083-campaign-transitions.md` (core `6269cd1`). Latest outcome, current evidence
-and prior run coverage remain separate; Cancel/Resume preserves completed evidence and budgets.
-
-C1084's portable control/session architecture and staged migration plan are complete:
-`notes/2026-09-07-c1084-portable-control-architecture.md`. Shared native/browser service; attachable
-frontends; durable history independent of processes; explicit view/verify/replay/resume/fork
-workflows, host/repository/compilation-unit boundaries; native64 performance gates unchanged. This is a design, not a claim of implemented hosts or platform support.
-
-C1085's portable scalar/text/codec extraction is complete: core `57af8b4`, report
-`notes/2026-09-07-c1085-portable-scalar-language.md`. Native compatibility retained; default scalar
-and bounded byte-reader tests pass; native/WASM layout assertions remain exact. Public terminology
-authority: core `docs/glossary.md`. C1084 includes run metadata/notes, forkable history and the
-separate orchestration bounded context above the mathematical engine.
-
-**C1086 complete**: independent finite verification crate and cold solver-admission bridge,
-core `08221f2`; `notes/2026-09-07-c1086-independent-verification.md`. Native, standalone verifier,
-Python and browser/WASM gates pass; no verifier dependency on solver or host machinery. Old checker
-receipts intentionally require fresh verification rather than exact replay under the new checker.
-
-**C1087 complete**: portable `ergodis-runtime` owns Campaign and bounded synchronous session control,
-core `75c1021`; `notes/2026-09-07-c1087-portable-campaign-runtime.md`. Existing campaign semantics
-preserved; explicit retry/revision/generation rules and JS-safe counters; native/Python and actual
-WASM campaign corpus gates pass. Legacy native daemon/Python clients remain separate APIs.
-
-**C1088 complete**: interactive browser Worker/client campaign demo, core `ea1f563`;
-`notes/2026-09-07-c1088-browser-campaign-control.md`. Create/propose/check/execute/cancel/resume,
-status and opaque checkpoint file exchange pass real Chromium UI/Worker/WASM tests; provenance,
-verification and coverage remain separate. WASM binary unchanged; no in-flight cancellation claim.
-
-**C1091 complete**: verbatim September 4–5 brainstorm archives and core semantic-contract synthesis:
-`notes/2026-09-07-c1091-core-semantic-contracts.md`. Historical performance/novelty/product claims
-remain unverified source material. Quotients, representative catalogs, event semantics and policy
-contracts are distinct; autonomous Evolve is broader than quotient minimization.
-
-**C1092 complete**: query/design specialization motivation and six private executable semantic
-contract tests across privacy, causal and QEC; private `4841e23`, report
-`notes/2026-09-07-c1092-query-specialization-corpus.md`. Scoped tests, clippy and formatting pass.
-Recovered C1061 incremental/witness/certificate/top-k history. Existing LRC events distinguish
-parametric changes from rebase. Generic DeltaRun batching has numeric/same-leaf preconditions that
-must be enforced before external promotion; see the report's explicit saturation counterexample.
-
-**C1093 complete**: cold `RepairModel`/`RepairPlan`/borrowed `BudgetQuery` adapter around existing
-parametric LRC; one compilation serves count/threshold/witness readouts with checked top-ups.
-11 scoped contract tests, clippy and formatting pass. OpenProblem/generic-certificate audit and
-source-vs-commitment clarification: `notes/2026-09-07-c1093-dynamic-query-admission.md`.
-No hot kernels changed; the DeltaRun saturation limitation is now executable regression evidence.
-
-**C1094 complete**: core `CompositionShape` and private fallible retained-tree construction,
-core `b74a369`, private `4add0bc`; `notes/2026-09-07-c1094-core-composition-admission.md`.
-Full core fmt/clippy/tests, private constructor tests, Python parity and WASM release check pass.
-The boundary validates geometry/inline storage only; algebra, query and evidence admission remain
-separate. Original hot loops/layouts and native construction paths unchanged.
-
-**C1095 complete**: additional observable admission on validated finite quotients, core `8fe20fa`;
-`notes/2026-09-07-c1095-observable-admission.md`. Multiple readouts reuse a compilation; finer
-readouts return a concrete distinguishing pair. Full native gates, Python parity and WASM release
-check pass. This is state-readout admission on supplied contexts, not domain/policy evidence.
-
-**C1096 complete**: private event-to-leaf admission, private `b6307ed`;
-`notes/2026-09-07-c1096-leaf-update-admission.md`. Opaque checked transitions reject forged after/
-summary claims and changed source/schema before mutation; unrelated-leaf updates remain valid.
-13 scoped tests, formatting and clippy pass. Same-kernel summary evaluation is not independent proof.
-
-**C1097 complete**: independent fixed min-plus/SHA256Digest summary-transition checker,
-core `46f7d1c`, private `9c1a620`; `notes/2026-09-07-c1097-independent-summary-transitions.md`.
-Retains authenticated snapshot summaries/digests: O(N) memory, O(log N) updates. The executed
-sibling-forgery regression is accepted by the legacy generic checker and rejected by the new one.
-Legacy generic/specialized authority claims are corrected; C1098 confines their algorithms to
-explicit historical replay and migrates the supported consumer.
-Native full gates, private interoperability/mutation tests, Python and WASM compilation pass.
-
-**C1098 complete**: private `83ebffa`; `notes/2026-09-07-c1098-certificate-authority-migration.md`.
-Removed old verifier API names; legacy algorithms are explicitly named replay and benchmark
-consumers require opt-in with false authority. New `matrix-verified-chain` uses the independent
-checker with summary-transition-only authority. 50 scoped tests and CLI smoke pass; library and
-CLI integration clippy pass. Whole-tool clippy remains blocked by an unrelated unchanged lint in
-`tasks/tools/src/leakage_dual_tower.rs:116`; no suppression or foreign fix applied.
-
-**C1100 complete**: core `174999c`, private `cc56b87`;
-`notes/2026-09-07-c1100-domain-bound-transitions.md`. Domain-bound LRC events use the independent
-checker’s admitted-leaf API; rejection preserves domain and verifier state. Core owns wire parsing.
-Full native, 16 private tests, Python and WASM gates pass. Summary aliases are intentional: this
-checks consistency with the supplied source interpretation, not unique source/event identity or
-independent domain optimality. Existing solver loops and hot layouts unchanged.
-
-**C1101 complete**: core `e4e7424`, private `dd3f19d`;
-`notes/2026-09-07-c1101-portable-run-records.md`. Portable RunId uses host-supplied UUIDv7, distinct
-from content hashes. Immutable spec/record codecs bind sources/events and explicit fork parents;
-new forks get fresh IDs. Six runtime and eight private tests, full native gates, Python and WASM
-compilation pass. This is structural/content/link admission, not repository publication or
-mathematical authority. No clock/RNG/filesystem or solver hot-path change.
-
-**C1103 complete**: core `c8da541`, private `fd0f03f`;
-`notes/2026-09-07-c1103-offline-run-bundles.md`. Bounded portable bundles expose manifests, records,
-borrowed payloads and explicit missing dependencies. Included content/parent checks and duplicate
-history rejection pass seven bundle tests; the private LRC fixture resolves actual snapshot/delta
-bytes before explicit verification. Full native, eight private tests, Python and WASM compilation
-pass. Opening data implies no solver execution, publisher authentication or mathematical authority.
-
-**C1105 complete**: core `d5e5504`; `notes/2026-09-07-c1105-offline-browser-inspection.md`.
-Offline browser/client inspection exposes manifest, identities, lineage, declared modes and
-missing dependencies through the portable WASM parser. Bounded single-use Workers; no campaign
-or implicit verification. Real Chromium complete/partial/corrupt/oversize cases, full native,
-Python and release WASM gates pass.
-
-**C1106 complete**: core `feab0c6`; `notes/2026-09-07-c1106-offline-verification-forks.md`.
-Explicit min-plus snapshot checking with summary-only coverage and fresh-UUIDv7 child downloads;
-chosen-spec forks preserve original parent records and carry no child evidence. Unknown/missing
-evidence remains inspectable. Four portable workflow tests, full native, Python, release WASM and
-actual Chromium verification/fork gates pass. No source interpretation or execution authority.
-
-**C1107 complete**: core `75b646b`; `notes/2026-09-07-c1107-repository-contract.md`.
-Portable repository transactions, head CAS, writer fences, attempts, conservative reservations,
-versioned sidecars and coherent analytical snapshots informed by C1033. Bounded volatile reference,
-ten conformance tests, full native, Python and release WASM gates pass. No persistent adapter or
-actual execution recovery is implemented.
-
-**C1114 complete**: core `96a81b5`; browser IndexedDB persistence, portable bounded replay,
-save/reopen/verify/fork UI and actual Chromium crash/restart gates pass.
-Report: `notes/2026-09-07-c1114-browser-repository.md`.
-
-**C1115 complete**: core `248b678`, docs `8848e3f`; separate native Unix filesystem host
-shares the same portable replay semantics. Cross-process ownership and five publication-step
-SIGKILL gates pass on ZFS; full native/Python/release WASM gates pass.
-Report: `notes/2026-09-07-c1115-native-repository.md`.
-
-**C1121 complete**: core `b219db3`; example-first saved-run demo, first-save setup,
-clear evidence/save actions and expandable technical details. Desktop/mobile and browser
-process-restart gates pass. Report: `notes/2026-09-07-c1121-demo-usability.md`.
-
-**C1122 complete**: core `67d929b`; first-visit introduction explains the optimizer via
-an interactive lamp problem and actual WASM optimum, followed by guided safe/unsafe
-shortcut checking and a rendered counterexample. Former controls remain advanced tools.
-Full native/Python and browser semantic/UI/recovery gates pass. Report:
-`notes/2026-09-07-c1122-first-visit-demo.md`.
-
-**C1123 complete**: private `c835284`, `2820c67`; coherent native repository projection
-into DuckDB/Jupyter heads, update/fork lineage, attempts and exact u64 accounting.
-Scoped native/CLI/SQL gates pass; inherited whole-tool Clippy lint remains.
-Report: `notes/2026-09-07-c1123-repository-analysis.md`.
-
-**C1033 saved-run notebook slice complete**: private `81af202`; exact accounting,
-update/fork ancestry, run selection and bounded SVG rendering pass executed notebook
-and Chromium output checks. Report: `notes/2026-09-07-c1033-saved-run-notebook.md`.
-
-**C1124 complete**: real-workload campaign console recovered against current native
-Ergodis; private `10a465b`, `9d75d53`, `de4f4fd`. Reader, VM differential and static/live
-browser gates pass on an order-2092 corpus (19,997 candidates, 178 behavior classes).
-Report: `notes/2026-09-07-c1124-real-campaign-console.md`.
-
-**Demo direction (user instruction)**: operator console like the supplied older campaign
-artifact, with real problems; no infographic or toy-example default. Private entry:
-`make -C analysis/campaign-console demo`. Review preview: `http://127.0.0.1:8767/`;
-process location/ownership is recorded in the report. C1124 covers the candidate-lineage
-console formerly listed as C1033's next step; saved run ancestry is a separate view.
-
-**C1125 complete**: private `bd0acc4`; workspace uses current portable bundle,
-IndexedDB repository and WASM campaign clients. Actual browser workflow gates pass.
-Campaign reduction/cascade precedes lineage; counters/provenance stay visible below
-the fold, with a short header. User rejects collapse-to-simplify clicks.
-Report: `notes/2026-09-07-c1125-portable-console.md`.
-WASM accepts user GF(2) CampaignSpec/checkpoints; native corpus evolution and opaque
-RunBundle-to-execution conversion remain unsupported. Allocate their bridge only
-as an explicit implementation slice; never imply a bundle is executable by opening it.
-
-**C1126 complete**: working Campaigns/Library navigation, real native campaign and
-browser-session listing, inspector beside candidate analysis, compact historical
-compilation with stage selection. Desktop/narrow browser workflow gates pass.
-Report: `notes/2026-09-07-c1126-campaign-information-architecture.md`.
-Preview remains `http://127.0.0.1:8767/`; this is the concrete IA review surface.
-
-**C1129 complete**: private `daf812d`; loaded domain workspace with explicit
-snapshot/runnable contexts and staged Create session → Run → Review actions.
-Real Worker/WASM executes a bounded QEC projection; CampaignSpec/checkpoint loading
-and portable bundle inspection pass browser gates. Scheduling/recovery remain
-snapshot-only. Secondary step/file controls sit below the visualization.
-Review: `http://127.0.0.1:8769/#qec`; report:
-`notes/2026-09-08-c1129-runnable-domain-lab.md`.
-Next UI slice (unallocated): integrate loaded domain/session interaction into the
-main campaign workspace; broader QEC/recovery adapters require their own contracts.
-
-**Next gate**: select and allocate a second real application demonstration (recovery/helper
-costs or QEC decoding) to show another engine capability. Browser analytical export
-and larger-store pagination also require their own slices.
-Browser/native bounded persistence pilots are complete; automatic execution recovery, larger
-stores and additional platform/retention guarantees need separately allocated slices and gates.
-Closed scope and gates: `notes/2026-09-07-ergodis-offline-workflow-successors.md`.
-Keep domain verification explicit; preserve native64 performance and solver/control separation.
-Other algebras/backends and compact sibling proofs need their own admission/performance gates.
-C1032 and module schemas remain open; these slices do not close or duplicate their broader scope.
-
-### C985 — Ergodis exact algebraic optimization paper
-
-In progress as the optimization-facing sequel to the `complete-ports` lane's manuscript; it does not
-block that lane's C325 or C953. The 37-page manuscript and README run on the corrected
-eight-workload benchmark protocol. The exact-distance programme has closed `[[784,24,24]]`,
-`[[1496,194,20]]`, and `[[1496,198,16]]`, and the current gate is an algebraically deduplicated
-weight-six discovery sweep with direct-sum rejection, seeking a Pareto survivor with
-`k d^2 / n > 19.2`. Latest reports:
-[completion compression and wide search](../2026-08-30-c985-completion-compression-and-wide-search.md),
-[private adapters and parallel roots](../2026-08-30-c985-ergodis-private-adapters-and-parallel-roots.md).
-
-## Ergodis workspace rules
-
-`ergodis-private` is a library-only Cargo workspace root with three task crates (`tasks/tools`,
-`tasks/gem-hunt`, `tasks/hadamard-2092`); no `src/bin` anywhere. Builds go to
-`~/.cache/ergodis/target/`, A/B baselines are retained executables via `retain-bin.sh`, and
-`cache-gc.sh` runs at task close. Historical C1016 `g41` cache inputs remain absent;
-`~/.cache/ergodis/c1016/six-cycle-ab/` now holds the current native census profiles.
-Cold end-to-end `g41` replays still require their old inputs regenerated first.
-
-## Lane ownership
-
-This lane was split out of `complete-ports` on 2026-09-05 and owns C985, C1016, C1017,
-C1031-C1033, C1040-C1048, C1052, C1061, C1062, C1070, C1072-C1074, C1079, C1080, C1081, C1082, C1083, C1084, C1085. Future Ergodis engine, benchmark, tooling,
-capability, and Ergodis-paper tasks use `[ergodis]`. C1086's independent verifier is complete. The bounded-recovery manuscript work (C325,
-C953, C955, C964) stays on `[complete-ports]`.
+The bounded-recovery manuscript tasks C325, C953, C955 and C964 remain owned by `complete-ports`.

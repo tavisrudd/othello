@@ -473,3 +473,11 @@ review fixes, native/WASM parity and bounded stress/diagnostic refinements.
 Current frontier is parser/diagnostic performance and remaining syntax/recovery
 coverage. Full dispositions and commit references:
 `../2026-09-13-ergodis-two-hour-continuation.md`.
+
+## 2026-09-13 — live-handoff compaction
+
+The live handoff was reduced from a chronological implementation narrative to a current state map.
+Closed C1080–C1129 runtime, verification, repository and UI dispositions remain authoritative in
+their dated task reports and in the earlier entries of this archive. Detailed C1130 deliveries and
+measurements remain in its dated review reports and private interface-review records. The live map
+retains only active frontiers, current boundaries and one-line routes to those authorities.

@@ -21,12 +21,15 @@ must fit u32 before committing the exact witness. Cold source recognition is not
 a discovered theorem generation. General traversal remains an explicit labelled
 ablation, not a deliberately weaker default. Report:
 `analysis/interface-review/2026-09-10-independent-fit-recognition.md`.
-Source-bound whole-query-domain table reuse is implemented in the private native/WASM
-provider (`8bcd7a8`), using the unchanged core AllocationSurface. Both ordinary arms
-build once over checked maxima; per-query reconstruction remains an explicit ablation.
-Report: `analysis/interface-review/2026-09-10-allocation-domain-reuse.md`. Remaining:
-bounded batch readout to reduce JSON/worker/UI overhead, first-fit materialization,
-and a universal representation-switch contract. The design document
+Source-bound whole-query-domain reuse, conditional family substitution, count/resource
+envelopes and bounded batch readout are implemented in the private native/WASM provider
+(core `1127126`, private `5774a94`). Both ordinary allocation arms build over checked
+maxima, preserve original witness IDs and use bounded groups for readout. This is checked
+reuse and admission, not universal representation switching, old-state conversion or
+cross-worker sharing. First-fit materialization and a universal representation-switch
+contract remain open. Reports:
+`analysis/interface-review/2026-09-10-allocation-domain-reuse.md` and
+`analysis/interface-review/2026-09-10-count-axis-and-readout.md`. The design document
 inventories broader transfers and preservation, timing and performance gates.
 
 Conformance runner: private `analysis/js-wasm-tests/README.md`; use its
@@ -44,7 +47,7 @@ Certificate interoperability direction (C1148, queued): private
 inspection/verification/export with family-specific claim preservation; explicit
 reproof is separate from format conversion. VIPR, VeriPB and SAT proof ecosystems
 are candidate targets, not current universal compatibility.
-**Lane**: `ergodis`. Reviewed: 2026-09-09.
+**Lane**: `ergodis`. Reviewed: 2026-09-13.
 
 This is the short architecture map, not a second glossary or a transcript. Read
 it after the lane handoff for architecture, shared API/schema, execution, model/
@@ -163,6 +166,7 @@ and `adr-composition-codecs.md` in that directory.
 | ValidatedQuotient / admitted observables | C1095 core readout reuse with concrete distinguishing-pair rejection; finite declared context, not arbitrary implicit models or policies. |
 | Domain/leaf/summary verification | C1096–C1100 separate source-event admission and independent summary transition checking. C1097 found a legacy sibling-forgery gap; C1098 confines old generic/specialized checkers to explicit legacy replay. Older ADR certificate claims are superseded by these reports. |
 | Portable records/bundles/repositories | C1101/C1103/C1107/C1114/C1115: identity, publication and bounded browser/native persistence. Stored metadata and bundle parsing do not imply executable activation or proof authority. |
+| Owned Rel frontend and rule contract | C1169/C1170 own Rel-rich parsing and diagnostics; Ergodis retains lowering, rules, joins and execution. C1172 adds a guarded Lean audit/root target (separate/default-target caveat); C1173 adds one-pass support certificates versus replay; C1174 proves ordered-inflationary convergence once with min-plus and Boolean instances. Finite parser parity is not a grammar oracle, and none of this adopts an external backend. C1176 semantics and C1177 private-kernel/performance work remain queued. |
 
 Native execution is broader than CampaignSession: typed CLI/library composition
 (primes and GF(4)), represented transfer/towers, application resource/span kernels,
@@ -186,6 +190,8 @@ All monorepo report paths below are relative to `notes/`.
 | What is actually missing from current native/WASM integration? | `2026-09-08-c1130-native-host-review.md` and `2026-09-08-c1130-wasm-feature-completeness.md`. The task card indexes Sunday/Monday implementation reports and canonical-build history. |
 | How do learned rules compile and rerun? | Private `docs/adr/0002-checked-rule-compilation-and-warm-start.md`: finite capacity envelopes, composed CSS root orbits, source-bound learned-only reruns, and proof-scope/cost limits. |
 | Which terminology needs clarification? | Shipping core `docs/glossary.md` for compatibility names; private `2026-09-08-ergodis-private-terminology-review.md` for missing distinctions. Keep this review private unless the user separately requests public documentation. |
+| Where is the owned Rel frontend contract? | `2026-09-12-c1169-datalog-frontends.md` and `2026-09-12-c1170-owned-rel-frontend.md`. Read performance, recovery, syntax coverage and admission as separate gates; finite native/WASM parity is not complete language support. |
+| Where is the rule-contract proof/evidence boundary? | `2026-09-13-c1172-lean-audit-gate.md`, `2026-09-13-c1173-support-certificate.md` and `2026-09-13-c1174-generic-carrier.md`; programme order and remaining C1176/C1177 debt are in `2026-09-12-ergodis-rule-contract-programme.md` and the live handoff. |
 
 ## Maintenance rule
 
