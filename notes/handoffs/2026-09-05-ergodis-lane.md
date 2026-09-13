@@ -8,8 +8,8 @@ correction trails live in dated reports and the append-only
 
 **Date**: 2026-09-13
 **Mode**: intent-based.
-**Status**: ACTIVE. Immediate engineering frontiers are C1170 (owned Rel-rich frontend), C1176
-(rule-contract semantics) and C1177 (private rule kernels/performance). C1143, C1130, C1016,
+**Status**: ACTIVE. Immediate engineering frontiers are C1170 (owned Rel-rich frontend) and
+C1177 (private rule kernels/performance). C1143, C1130, C1016,
 C1017, C1061 and C985 remain in progress. C1062 and C1070 await Tavis's close call.
 
 **Discovery companion**: [ergodis discovery track](../ergodis-discovery-track.md).
@@ -43,7 +43,7 @@ finite parity gate, not a grammar oracle or complete syntax/admission claim.
 syntax/admission gaps. Ergodis retains lowering, rules, joins and execution; no external evaluator
 or backend is adopted. Tree-sitter and executable reference semantics remain deferred.
 
-### Rule-contract programme — C1176/C1177 queued
+### Rule-contract programme — C1177 queued
 
 Programme and sequencing: `../2026-09-12-ergodis-rule-contract-programme.md`; audit:
 `../2026-09-12-c1171-rule-programme-review.md`.
@@ -56,12 +56,19 @@ Programme and sequencing: `../2026-09-12-ergodis-rule-contract-programme.md`; au
   (`../2026-09-13-c1174-generic-carrier.md`, core `c351eb9`).
 - C1175: filtered-export manifest/lint, evidence lint, remote/tag/binary checks and pinned Rust
   toolchain (`../2026-09-13-c1175-release-hygiene.md`, core `b63c6dc`).
+- C1176: `certificate.rounds` settled as a claimed bound admitted up to `min(N, M+1)`,
+  symmetry invariance checked in verification, algebra laws gated, incremental grounding
+  rebind, dense negative control where the frontier loses, fifteen review properties
+  (`../2026-09-13-c1176-contract-semantics.md`, `../2026-09-13-c1176-core-properties.md`,
+  core `2074025`). Open decisions for Tavis are in the report: identity/ownership
+  redesign for per-update cost, evaluator policy, and the `Invariance` ABI code.
 
-**C1176 next:** resolve rounds meaning, verification symmetry/stability/annihilation, source
-identity, dense negative control, the `min(n, M+1)` bound and remaining generated properties.
-**C1177 next:** private kernels, sparse frames, large-detector behavior and parallelism. Neither
-queued task is complete. Earlier C1154–C1168 increments and exact boundaries are indexed by the
+**C1177 next:** private kernels, sparse frames, large-detector behavior and parallelism. It is
+not started. Earlier C1154–C1168 increments and exact boundaries are indexed by the
 programme report; do not reproduce their history here.
+Foreign issues seen during C1176: the shared Cargo target directory produced a stale-rlib
+build failure under concurrent checkouts, and the worktree `~/.cache/ergodis/worktrees/c1176-props`
+holds regenerated tracked `__pycache__` files that were left in place.
 
 ### C1149 — public-release readiness
 

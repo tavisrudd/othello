@@ -102,3 +102,18 @@ not the tuning knob it looks like below a few thousand steps.
 **Evidence level**: two five-round interleaved A/B configurations at matched CPU budget, plus one
 twelve-worker probe; the attribution to the sampler is by elimination, not by a profile. No C-ID
 allocated.
+
+## 2026-09-13 — Checked symmetries can quotient the certificate replay (C1176 incidental)
+
+**Provenance**: fell out of C1176 decision D3, `notes/2026-09-13-c1176-contract-semantics.md`,
+core `421aa78`. **Was I looking for this?**: no — the task was to spend the declarations as a
+consistency check on the claim, not to accelerate anything.
+**Observation**: once `verify` checks `values[i] == values[pi[i]]` for every declared
+automorphism, the from-zero replay only has to establish the least solution on one coordinate
+per orbit; the rest follows by invariance. The checker could replay the quotient system (orbits
+as coordinates, products pushed forward) and extend, dividing replay cost by the mean orbit size.
+**Why it may matter**: this is the first use of the symmetry payload beyond identity binding, and
+it is the certificate-size lever C1148 will want; the Lean `WeightedRules.Contract` invariance
+statement already covers the extension step.
+**Evidence level**: argument only; no quotient replay exists and no measurement was taken. No
+C-ID allocated.
