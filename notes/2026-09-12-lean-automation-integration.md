@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-12
-**Status**: programme closeout; no new implementation task allocated.
+**Status**: C1165–C1168 complete; external IR/workload gate remains.
 
 The useful fit is a specialized certificate producer inside a Lean proof workflow.
 C1164 supplies the concrete bridge; C1162 now demonstrates symbolic automation
@@ -54,6 +54,12 @@ checking measurements are recorded in `2026-09-12-c1167-incremental-proof-checki
 The producer still solves its supplied source independently; no runtime update
 policy or source-interpretation authority changes.
 
+C1168 proves a tighter uniform bound, `min N (M + 1)`, with M the number of
+distinct rule outputs. It also applies to replay from a safe seed and supports
+an optional conversion of existing checked solutions. Immutable input scalars
+need not inflate M. This strengthens the backend's mathematical contract using
+ordinary Lean proofs; it requires no automation-engine API change.
+
 `bv_decide` could become useful for a packed representation, a mask operation,
 or a bounded arithmetic encoding. No such proof obligation is needed for the
 current symbolic square. Encoding min-plus arithmetic as machine words would
@@ -75,15 +81,19 @@ commands. No new command was run or validation gate weakened in this session.
 
 ## Durable evidence and session disposition
 
-Reports: `2026-09-12-c1161-recursive-runtime.md`,
-`2026-09-12-c1162-leaf-lowering-square.md`,
-`2026-09-12-c1158-acting-subgroup.md`, and the prior
-`2026-09-12-c1164-lean-oracle.md`.
+The first continuation closed C1161, C1162 and C1158. C1158's experiment remains
+on its isolated branch; its q18 action does not justify promotion into the live
+paired census. The latter admits no ambient-orbit reduction in the measured domain.
 
-All three tasks in the timed continuation are closed and committed. C1158's
-experiment remains on its isolated branch; its q18 action does not justify
-promotion into the live paired census. The latter admits no ambient-orbit
-reduction in the measured domain.
+The second continuation completes the proof sequence: universal
+convergence (C1165), the private finite privacy instance and minimality (C1166),
+checked incremental witnesses (C1167), and the output-sensitive bound (C1168).
+Reports are the corresponding dated `2026-09-12-c1165-min-plus-convergence.md`,
+`2026-09-12-c1166-privacy-lowering-reflection.md`,
+`2026-09-12-c1167-incremental-proof-checking.md`, and
+`2026-09-12-c1168-rule-output-bound.md`.
+The C1167 proof-checking measurements remain pinned to monorepo `7798d342d`;
+later proof changes do not carry a newly measured speed claim.
 
 Closeout process note: a redundant full handoff display exceeded the 10,000-token
 command-output cap after compaction. The truncated display was not used as new

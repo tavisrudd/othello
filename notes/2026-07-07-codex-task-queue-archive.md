@@ -5693,3 +5693,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1166 `[ergodis]` [REPORTED 2026-09-12]** — kernel-check the retained finite privacy lowering certificate against packed observation semantics; generic table reflection and private formal instance → `notes/2026-09-12-c1166-privacy-lowering-reflection.md`
 
 - **C1167 `[ergodis]` [REPORTED 2026-09-12]** — source-bound incremental min-plus replay proofs, monotone fact updates, early fixedness and checked-solution conversion → `notes/2026-09-12-c1167-incremental-proof-checking.md`
+
+- **C1168 `[ergodis]` [REPORTED 2026-09-12]** — sharp distinct-rule-output convergence, safe-seed replay and tighter checked certificate conversion → `notes/2026-09-12-c1168-rule-output-bound.md`

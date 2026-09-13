@@ -216,7 +216,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 
 
-- **C1168 `[ergodis]` [IN PROGRESS]** — rule-output-sensitive bounded min-plus convergence, tighter checked certificates and affected Lean gates → `notes/2026-09-12-c1168-rule-output-bound.md`
 
 - **C1159 `[ergodis]` [QUEUED]** — one-probe one-sided screen (C1152 successor): in the C1143 sparse provider, one cheap complete screen (β = 1, no false rejections) before the completion binary search, where 57% of weight-two candidates pass the current rule and 6.6% of those complete; independently checked; gate = candidates entering completion and search wall on the reduced development model at radius five and on hold-outs 2–4, A/B against the retained baseline, screen cost below c_x·(1−p)·(1−α_s); optional structured decline reason on the budget error → `notes/2026-09-12-c1152-certificate-spike.md` § Recommended next allocation
 - **C1154 `[ergodis]` [QUEUED]** — FeatureDag offline slice (C1151 rows 1, 5): interval abstraction pass and weak-term-acyclicity check on the identity list; gate = zero false negatives on the 1,984-row lowering corpus with precision reported, acyclicity passes or names the identity → same card
