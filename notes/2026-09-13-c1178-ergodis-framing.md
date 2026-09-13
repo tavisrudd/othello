@@ -48,7 +48,7 @@ make their relationship legible without pretending they are the same mathematica
 
 The September 13 user additions make **performance engineering** and **interactive Evolve
 campaigns** explicit parts of this account. The system must turn discovered structure into
-efficient machine execution and support people exploring, inspecting and steering that
+efficient machine execution and support agents and people exploring, inspecting and steering that
 discovery over time. Both belong in the first paper's integrated explanation and evaluation.
 
 This frame contains the earlier recovery, contextual-state, invariant-synthesis and
@@ -109,7 +109,8 @@ framing or pretending it already exists. C985 owns that demonstration decision.
 ## Performance engineering and interactive campaigns
 
 The spectrum has two independent dimensions: **how much computation is specialized** and
-**how much the user steers the investigation**. An interactive campaign can compare already
+**how the investigation is steered**. The expected primary steering actor is an agent;
+human steering and mixed agent/human interaction are also part of the framing. An interactive campaign can compare already
 specialized kernels; an unattended campaign can continue adapting. A campaign is a durable
 investigation involving questions, candidates, runs, evidence and choices, with particular
 persistence/control capabilities determined by the implementation. It is not merely a
@@ -144,22 +145,27 @@ evidence, without exporting the process documents or private operational details
 
 ### Campaigns as a way to use the system
 
-An operator can formulate a question, inspect proposed structures and their evidence,
+A steering agent or human can formulate a question, inspect proposed structures and their evidence,
 compare runs, redirect exploration, retain useful discoveries and decide whether a
 specialization merits further use. Depending on the supported workflow, stop/resume,
 forks, source changes and learned-only reruns make this an ongoing investigation. The
-UI must distinguish an observed result, a checked claim and an unresolved search; steering
-does not grant a candidate mathematical authority.
+campaign interface must distinguish an observed result, a checked claim and an unresolved
+search; steering does not grant a candidate mathematical authority. An agent-facing control
+surface and a human-facing UI should expose the same operation semantics and evidence
+boundaries. This is an interface requirement, not a claim that every current workflow has
+complete agent-facing support. The steering agent chooses goals, probes and campaign actions;
+Evolve remains the core system that discovers and adapts computational structure. They are
+distinct roles even when an agent automates the whole investigation.
 
 Existing evidence includes the real-workload campaign console and candidate inspector
 (C1124/C1126), learned-only execution and explicit verification (C1130), and repairs to
 stop responsiveness when hidden history rendering consumed main-thread time. These support
 specific interactive workflows, not a universal campaign host or an established improvement
-in human productivity. C1084's broader session/repository direction remains a separate
+in agent or human productivity. C1084's broader session/repository direction remains a separate
 source of design requirements.
 
 For the first paper, show a **campaign-to-kernel narrative** on one admitted family:
-the operator poses a goal, Evolve explores structure, results and counterexamples guide
+the steering agent or human poses a goal, Evolve explores structure, results and counterexamples guide
 the next step, retained knowledge supports another solve, and specialization is selected
 when worthwhile. Include an unattended version where supported. The narrative connects
 interactive use to the same contracts and kernels rather than introducing a separate demo
@@ -168,8 +174,10 @@ engine. Static reification remains optional and its implementation gap must be e
 Evaluation should ask whether control, telemetry and discovery interfere with useful solve
 work. Compare the same computation with supported headless/interactive and telemetry
 configurations, state the responsiveness and cancellation boundaries, and retain intervention
-sequences for repeatable comparisons. Claims about operator effectiveness require separate
-evidence; a responsive screen alone does not establish them. A systems-focused follow-on
+sequences for repeatable comparisons. For agents, measure action/observation latency,
+tool-call and inference cost, and useful campaign outcomes alongside solve cost. Claims
+about steering effectiveness require separate evidence; UI responsiveness alone does not
+establish them. A systems-focused follow-on
 may study these questions more deeply, but the first paper should already explain and
 demonstrate both engineering discipline and interactive campaigns.
 
@@ -333,7 +341,7 @@ part of the example, and its literature assertions are not re-certified here.
    Keep semantic facts and performance priors distinct. Explain what happens after a failed
    check or a poor performance prediction, including direct solving and explicit restart.
    Show the same mechanisms in an interactive campaign and explain how the performance
-   architecture preserves efficient execution while users inspect and steer discovery.
+   architecture preserves efficient execution while agents or humans inspect and steer discovery.
 4. **Concrete instantiations.** Recovery anchors composition and witness reconstruction;
    privacy supplies an independently checked distinguishing-context example; allocation
    and another genuinely noncoding family must expose the same substantive mechanisms.
@@ -345,7 +353,7 @@ part of the example, and its literature assertions are not re-certified here.
    miss/rejection controls; comparable arms receive the same initial information. Include
    compilation, checker and restart costs, held-out instances, work counts and negative cases.
    Account for telemetry/control overhead and the interactive responsiveness boundary;
-   distinguish semantic gains from machine-level engineering and operator intervention.
+   distinguish semantic gains from machine-level engineering and agent/human intervention.
 6. **Limits and related work.** Explain which inputs supply structure, what is discovered,
    what is proved and when no gain is expected. Locate the specific contribution relative
    to automated modelling, abstraction refinement, synthesis, adaptive execution and
@@ -399,7 +407,7 @@ scope must be stated together when a draft is promoted.
 > queries, or be materialized as a specialized kernel. Evolve searches for that structure;
 > preservation contracts specify its admissible questions, contexts and answer-reconstruction
 > obligations. Witnesses, counterexamples and execution measurements guide further discovery
-> and the choice of how much computation to specialize. Interactive campaigns let users
+> and the choice of how much computation to specialize. Interactive campaigns let agents and people
 > inspect and steer this process, while the execution architecture separates discovery and
 > control from specialized solve kernels whose costs can be measured independently.
 
