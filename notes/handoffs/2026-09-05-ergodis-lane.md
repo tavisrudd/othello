@@ -75,6 +75,8 @@ sharpness and reflective certificate completeness
 C1166 complete: private finite privacy tables, physical-world semantics and
 fifteen-state minimality are kernel-checked
 (`../2026-09-12-c1166-privacy-lowering-reflection.md`; private `5446efb`).
+C1167 active: checked incremental proof replay under monotone fact improvements
+(`../2026-09-12-c1167-incremental-proof-checking.md`).
 Lean automation integration and remaining proof boundaries:
 `../2026-09-12-lean-automation-integration.md`.
 Next: concrete workload/IR-obligation gate; join engine and broader benchmarks
