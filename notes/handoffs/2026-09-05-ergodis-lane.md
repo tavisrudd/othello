@@ -99,8 +99,11 @@ span) routed to C1170; successors C1172 (Lean audit gate), C1173
 C1154 complete: offline intervals, exact finite audits and directed identity
 acyclicity; selected-root error-domain guard is explicit
 (`../2026-09-12-c1154-feature-intervals.md`).
-Next: C1159 one-sided completion screen, resumed under the lane-wide two-hour
-authorization. C1170 retains performance/parity/recovery gates.
+C1159 complete: opt-in completion screen, no-false-rejection audit and about
+11% less search time on the frozen development model; null control preserved
+(`../2026-09-12-c1159-completion-screen.md`).
+Next: C1155 sentinel/quotient slice under the lane-wide two-hour authorization.
+C1170 retains performance/parity/recovery gates.
 The concrete workload/IR-obligation gate still governs joins and
 broader benchmarks, which
 remain unallocated. Other deferred speed/hygiene tasks are not implicitly resumed. Existing WASM test-target Clippy warning: `src/bundle.rs:101`
@@ -109,8 +112,8 @@ items after test module; production-library Clippy and unit tests pass. Literatu
 `../2026-09-12-c1151-category-theory-capability-pass.md`,
 `../2026-09-12-relationalai-datalog-reading.md`. Closed spikes: `../2026-09-12-c1152-certificate-spike.md`,
 `../2026-09-12-c1153-group-quotient-spike.md` (branches `spike/c1152-certificate`,
-`spike/c1153-group-quotient` under `~/.cache/ergodis/worktrees/`). C1159 is active. Other deferred speed/hygiene rows:
-C1155–C1157. Foreign issue: branch `c1016-full-2092-campaign` fails `cargo fmt --check`
+`spike/c1153-group-quotient` under `~/.cache/ergodis/worktrees/`). C1155 is active. Other deferred speed/hygiene rows:
+C1156–C1157. Foreign issue: branch `c1016-full-2092-campaign` fails `cargo fmt --check`
 and has four clippy errors.
 
 ### C1148 — certificate interoperability (queued)

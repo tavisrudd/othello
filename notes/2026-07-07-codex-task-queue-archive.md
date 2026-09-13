@@ -5700,3 +5700,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1171 `[ergodis]` [REPORTED 2026-09-12]** — review pass over the 2026-09-12 rule-contract, release and frontend work: no mathematical defect; evidence-path leak and lint fixed; six generated-program properties landed; successors C1172–C1177 → `notes/2026-09-12-c1171-rule-programme-review.md`
 
 - **C1154 `[ergodis]` [REPORTED 2026-09-12]** — Offline FeatureDag interval pass and directed identity acyclicity audit complete; finite corpus/boundary/box gates pass, selected-root error guard explicit → `2026-09-12-c1154-feature-intervals.md`
+
+- **C1159 `[ergodis]` [REPORTED 2026-09-12]** — One-probe completion screen passes no-false-rejection gate and corrected retained A/B; about 11% less search time on frozen development model, opt-in → `2026-09-12-c1159-completion-screen.md`
