@@ -20,21 +20,25 @@ No manuscript, public README, export or publication is changed by this task.
 
 ## Recommendation
 
-Lead the first paper with **discovering and compiling structure for exact optimization**.
-Use **query-preserving adaptive compilation** as the technical organizing idea. Evolve is
-the system's discovery and adaptation component throughout the paper, from the opening
-example to the evaluation. Its interaction with exact computation is the subject.
+Lead with **a spectrum from evolving structure to specialized exact computation**.
+The September 13 user refinement makes optional reification central: Evolve searches for
+the structure suited to the required queries and workload; Ergodis can continue adapting,
+retain and reuse the structure, or materialize it as a static specialized kernel when that
+is useful. Query-preservation contracts support this account. Evolve is core to the system
+even when a resulting deployment no longer runs discovery.
 
 Working title:
 
-> **Ergodis: Discovering and Compiling Structure for Exact Optimization**
+> **Ergodis: From Evolving Structure to Specialized Exact Computation**
+
+Alternative retained: **Ergodis: Discovering and Compiling Structure for Exact Optimization**.
 
 Working thesis:
 
-> Ergodis searches both for solutions and for structure that makes solving cheaper.
-> Evolve proposes and selects that structure; query-specific preservation contracts
-> determine how it may change representations, execution and reuse. Solves return
-> answers and evidence that can guide subsequent discovery.
+> Ergodis evolves the structure used to solve a problem, then lets that structure remain
+> adaptive or become a specialized executable computation. Discovery, retained plans and
+> static kernels are points on one spectrum, connected by the required queries, preservation
+> contracts and evidence. Specialization is an option whose value depends on the workload.
 
 The unifying object is an **admitted change to a computation**: what question it serves,
 what it preserves, what must be checked, how the answer is recovered, and where the change
@@ -58,7 +62,44 @@ claim-specific audit under C985. The framing task can close while that paper evi
 constraint reformulation, abstraction refinement and compiler optimization behind a common
 interface. A good answer must show a shared admission mechanism doing substantive work
 across different transformations, plus a measured benefit from coupling discovery to
-execution. A catalogue of examples and a generic loop diagram will not answer the objection.
+execution and from retaining or materializing its results. A catalogue of examples and a
+generic loop diagram will not answer the objection.
+
+## One tool across the discovery-to-specialization spectrum
+
+This is the user's revised leading frame, not a claim that every transition is implemented.
+
+| Operating point | What is retained or fixed | Role of Evolve |
+|---|---|---|
+| Direct execution | Source and query; little additional compilation | Can decide further discovery is not worth its cost |
+| Adaptive discovery and execution | Candidates, checked structure and current execution state | Continues searching and selecting useful changes using solve feedback |
+| Retained specialization | An admitted representation/plan and reusable knowledge | Can pause; subsequent queries reuse the result, with fresh execution state as needed |
+| Static specialized kernel | Selected structure and run-constant choices materialized into executable operations | May have run offline; discovery need not be present in the deployed hot path |
+| Reopened discovery | Existing artifacts plus changed requirements or measured workload | Reassesses applicability and searches for another useful specialization |
+
+These are choices, not mandatory sequential stages. A workload can remain adaptive, stop
+at a retained plan, or use a static kernel from the outset. Reopening discovery requires
+retained source/contracts and appropriate tooling; it is not automatic reverse compilation.
+
+“Static” concerns what is specialized, not whether the kernel still performs search.
+A specialized exact kernel can process varying inputs and queries inside its admitted
+family. It is not a stored answer or a fixture-specific solution. Likewise, selecting an
+existing specialized kernel, preparing a data-dependent plan, and generating a new static
+kernel are different capabilities. Current selection and learned-only rerun evidence must
+not be presented as general kernel-generation evidence.
+
+“Optimal structure” is the search objective. It needs an admitted design space, query family,
+workload and cost model, including discovery, verification, compilation, memory, update
+cost and expected reuse. Report “best found” unless structural optimality is established
+over that space. Exact answers from a specialized solver do not establish that its chosen
+structure is globally optimal. Multiple cost objectives can yield several useful choices.
+
+The concrete first-paper demonstration should follow the **same problem family and
+contract** through adaptive discovery, retained reuse and optional static specialization,
+showing where each pays. Count one-time construction and checking costs and the crossover
+in repeated use. If general reification is not yet delivered, identify a bounded existing
+path or the exact implementation/evidence gap rather than dropping it from the system's
+framing or pretending it already exists. C985 owns that demonstration decision.
 
 ## Ranked first-paper frames
 
@@ -68,7 +109,7 @@ and possible deeper papers, not proposals to remove Evolve from Ergodis.
 
 | Rank | Frame | Strength and breadth | Main risk / disposition |
 |---|---|---|---|
-| 1 | Discover and compile structure under query-preservation contracts | Unifies discovery, exact answers, representations, witness lifting, updates and reuse. Makes the operational role of Evolve unavoidable. | Requires evidence that the common contracts and feedback actually connect implementations; recommend as first-paper thesis. |
+| 1 | Evolve structure, optionally reify it: one discovery-to-specialization spectrum | Unifies adaptive discovery, exact answers, retained representations and static kernels. Evolve remains core across development and deployment. | Requires a same-family demonstration across operating points and an honest distinction between plan selection and kernel generation; leading first-paper candidate. |
 | 2 | Discover the distinctions sufficient for future questions | Sharp conceptual connection to recovery labels, observables, contextual refinement and privacy traces. Excellent opening mechanism. | A coarsest quotient alone does not explain useful non-quotient reductions or their acquisition cost; use within rank 1. |
 | 3 | Compile dynamic decision problems and retain reusable knowledge | Makes repeated queries, updates, certificates and cross-run reuse central. Natural systems emphasis. | Universal dynamic-policy and source-edit support exceed delivered families; possible systems-focused follow-on. |
 | 4 | Discover and admit theorem-guided search improvements | Closely fits predicate synthesis, symmetry/bound admission and learned-only reruns. Concrete and evaluable. | Can understate query and representation choices; a strong empirical strand of the first paper and possible follow-on. |
@@ -277,12 +318,12 @@ scope must be stated together when a draft is promoted.
 ### Paper abstract opening
 
 > Exact optimization depends on how a problem is represented and on which properties of
-> its solutions a query requires. Ergodis integrates the discovery of useful structure with
-> compilation and exact execution. Its Evolve system proposes candidate structure and
-> execution changes; preservation contracts specify their admissible questions, contexts
-> and answer-reconstruction obligations. This organization connects contextual state
-> reduction, compositional optimization, checked bounds and reusable computations.
-> Witnesses, counterexamples and execution measurements guide subsequent discovery.
+> its solutions a query requires. Ergodis organizes discovery and exact execution along
+> a spectrum: useful structure can remain subject to adaptation, be retained for repeated
+> queries, or be materialized as a specialized kernel. Evolve searches for that structure;
+> preservation contracts specify its admissible questions, contexts and answer-reconstruction
+> obligations. Witnesses, counterexamples and execution measurements guide further discovery
+> and the choice of how much computation to specialize.
 
 This is an opening, not a fabricated finished results abstract. The final abstract must
 add the precise principal result, admitted families and measured outcome once C985's
@@ -310,11 +351,11 @@ provider implements every step of this loop.
 
 ### System documentation / README identity
 
-> Ergodis is a system for discovering and exploiting structure in exact optimization.
-> Evolve is its discovery and adaptation component: it searches for useful structure and
-> helps select how a problem is represented and solved. The system admits transformations
-> under explicit conditions and retains the information needed to interpret their answers
-> in the original problem.
+> Ergodis brings adaptive discovery and specialized exact computation into one system.
+> Evolve searches for useful problem structure. That structure can guide an ongoing solve,
+> be retained for repeated queries, or be materialized into a specialized kernel where
+> supported. The system tracks the conditions under which each specialization preserves
+> the required answer.
 
 For a **core-library README**, immediately add:
 
