@@ -79,11 +79,11 @@ original 07:24:50 UTC stop target remains unchanged.
 ## Native/WASM and review checkpoint — 2026-09-13
 
 Private commit `a644dad` contains this checkpoint. The finite portability gate now executes the exact frontend source as native
-and WASM test libraries: 142 cases produce 325,099 identical canonical bytes,
+and WASM test libraries: 142 cases produce 325,403 identical canonical bytes,
 including syntax records, failure fields and rendered diagnostics. Both scanner
 variants also agree. The corpus includes 512 definitions, every byte prefix of
 a Unicode module, deterministic malformed bytes, and 1,024 nested parentheses
-which explicitly reach DepthCapacity. Exact replay and source/toolchain hashes:
+which explicitly reach DepthCapacity. Exact replay and source hashes and toolchain versions:
 `ergodis-private/analysis/rel-frontend/portability-v1.json` and its adjacent
 Python/Node runners. This is finite platform parity, not an independent grammar
 oracle, production browser ABI, or speed measurement.
@@ -93,7 +93,7 @@ unsupported radix literals reject explicitly, and malformed exponents have
 nonempty numeric spans. Separators after exponents also reject. Caret-prefixed
 entity references remain explicitly unsupported instead of being mistaken for
 ordinary names. The coverage manifest names this gap; full entity syntax is
-still required by the product target. Twelve frontend integration tests and
+still required by the product target. Thirteen frontend integration tests and
 one native probe pass; strict library and targeted-test Clippy passes.
 
 The standalone probe inherits the owning library's explicit flat-API Clippy
@@ -111,3 +111,40 @@ The saved portability receipt was inspected instead of blindly rerunning the
 previous truncated tool result. The probe's initial Clippy invocation exposed
 its missing inherited flat-API allowance; that invocation was corrected before
 revalidation. No failed gate is reported as passing.
+
+
+### Diagnostic and stress refinement
+
+Private `6290979` adds stable malformed-exponent ID `REL0104`, a specific
+missing-digit explanation and repair examples. The compact failure layout
+remains 16 bytes. All 16,105 expression suffixes of lengths zero through four
+over the declared eleven-byte alphabet pass bounded token/failure span checks,
+scanner equality, diagnostic rendering and workspace reuse. This is a finite
+stress gate, not exhaustive language correctness. The final 142-case native/
+WASM canonical output is 325,403 bytes. No performance conclusion follows.
+
+### Mystery ledger / bounded extra-value pass
+
+The review exposed an accidental acceptance boundary: a caret-prefixed name
+consumed an infix operator. This is settled for the prototype by making caret
+an operator and explicitly deferring entity references in the manifest.
+The missing exponent span also exposed a cheap diagnostic improvement: retain
+a specific compact error category and build explanatory text only on failure.
+Both changes have regression and platform-parity evidence.
+
+No unexplained discrepancy remains in these finite gates. Remaining evidence
+gaps are owned by C1170: full reference syntax/Unicode conformance, semantic
+admission, rich bounded recovery, and retained performance measurements. The
+same-source parity oracle cannot establish correctness against Rel; it only
+checks platform and scan-variant agreement.
+
+
+Private `9cdc124` contains the final allocation and record-census refinement.
+The final allocation gate additionally exercises identifier exponentiation,
+malformed exponents, radix rejection and the scalar control: still zero
+allocations over 100 prepared cycles. The independent canonical-record decoder
+checks complete consumption and rejects four corrupt controls. Its census finds
+180,240 occupied token/node bytes for the 12,068-byte, 512-definition source
+(4,097 tokens, 3,584 nodes). This approximately 14.9× logical representation
+ratio is not a traffic/RSS measurement. It sharpens the next cost model:
+measure materialization, retained capacity and setup alongside ASCII dispatch.

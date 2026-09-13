@@ -105,7 +105,8 @@ C1159 complete: opt-in completion screen, no-false-rejection audit and about
 C1155 complete: exact wide costs, weighted normalization and independent
 quotient audits; existing coarsest compiler reused
 (`../2026-09-13-c1155-weighted-normalization.md`).
-C1170 finite native/WASM syntax and diagnostic parity now passes (142 cases).
+C1170 finite native/WASM syntax and diagnostic parity now passes (142 cases);
+13 frontend tests include a 16,105-input stress gate and zero-allocation checks.
 Next: C1170 parser/diagnostic performance gates. Rich recovery and complete
 frontend coverage remain open.
 The concrete workload/IR-obligation gate still governs joins and

@@ -464,3 +464,12 @@ region selection have recorded negatives. No 668/716/2092 solution and no
 strict-margin 14,800 gate passed. Dated authority:
 `2026-09-11-c1016-inferred-repair-structure.md`; exact evidence and scope in the
 private `evidence/structure-repair/REPORT.md`. No public-core or WASM change.
+
+
+## 2026-09-13 — lane-wide two-hour continuation
+
+C1154, C1159 and C1155 closed; C1170 remains active after owned parsing,
+review fixes, native/WASM parity and bounded stress/diagnostic refinements.
+Current frontier is parser/diagnostic performance and remaining syntax/recovery
+coverage. Full dispositions and commit references:
+`../2026-09-13-ergodis-two-hour-continuation.md`.

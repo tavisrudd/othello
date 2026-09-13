@@ -5,6 +5,14 @@
 **Status**: COMPLETE. Cheap remediations applied and committed; the rest is
 allocated to C1172–C1177 or routed to the active C1170 owner.
 
+## Follow-up disposition — 2026-09-13
+
+The three C1170 lexer defects below are repaired in private `a644dad`, with
+richer exponent diagnostics in `6290979`. Regression tests and finite native/
+WASM parity pass; entity-reference syntax remains an explicit coverage gap.
+Current scope and receipts: `2026-09-12-c1170-owned-rel-frontend.md`.
+The historical reviewer reports below retain their original findings.
+
 ## Scope
 
 Everything committed on 2026-09-12 in the Ergodis core (`~/src/ergodis`,
