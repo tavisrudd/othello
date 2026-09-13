@@ -5030,8 +5030,17 @@
       "last": 1168,
       "purpose": "Prove a rule-output-sensitive convergence bound capped by the existing scalar N bound",
       "sequence": 559
+    },
+    {
+      "count": 1,
+      "first": 1169,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1169,
+      "purpose": "Study reusable Datalog frontends while retaining Ergodis-owned backend and rule handling",
+      "sequence": 560
     }
   ],
-  "next_id": 1169,
+  "next_id": 1170,
   "schema": "codex-task-id-allocations-v1"
 }
