@@ -94,7 +94,7 @@ leak and task-id lint fixed (core `2e1bab2`); six generated-program properties
 (core `47a8c05`); three C1170 lexer bugs (`a^b`, `0x1f`, zero-width `1e`
 span) repaired and regression-tested in C1170; successors C1172 (Lean audit gate), C1173
 (support-witness certificate), C1174 (generic carrier + Boolean), C1175
-(release hygiene), C1176 (contract semantics), C1177 (private kernels) queued
+(release hygiene), C1176 (contract semantics), C1177 (private kernels) allocated
 (`../2026-09-12-c1171-rule-programme-review.md`).
 C1172 complete: guarded axiom audit, `WeightedRules` root/default target,
 audited chain witnesses, round convention stated and pinned by forty
@@ -108,7 +108,13 @@ C1174 complete: convergence proved once over ordered inflationary algebras
 contract with its own certificate formats, transitive-closure and
 same-generation fixtures, generic Boolean replay properties, Lean Boolean
 instance and exact min-plus lift (`../2026-09-13-c1174-generic-carrier.md`).
-Remaining C1171 successors: C1175–C1177.
+C1175 complete: manifest walks all source/fixture/script/evidence trees, the
+export regenerates it for the filtered tree and `cargo test` verifies it
+everywhere; evidence lint in `cargo test`; `main` refused to every remote,
+anchored tag check, binary content scan; `rust-toolchain.toml` pins 1.95.0
+with a drift test; WASM ABI gate rerun passes
+(`../2026-09-13-c1175-release-hygiene.md`; core `b63c6dc`).
+Remaining C1171 successors: C1176–C1177.
 C1154 complete: offline intervals, exact finite audits and directed identity
 acyclicity; selected-root error-domain guard is explicit
 (`../2026-09-12-c1154-feature-intervals.md`).
