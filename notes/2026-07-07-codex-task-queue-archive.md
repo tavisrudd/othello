@@ -5691,3 +5691,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1165 `[ergodis]` [REPORTED 2026-09-12]** — universal N-round convergence of the existing bounded min-plus rule contract, leastness and certificate existence; guarded Lean proof and axiom audit → `notes/2026-09-12-c1165-min-plus-convergence.md`
 
 - **C1166 `[ergodis]` [REPORTED 2026-09-12]** — kernel-check the retained finite privacy lowering certificate against packed observation semantics; generic table reflection and private formal instance → `notes/2026-09-12-c1166-privacy-lowering-reflection.md`
+
+- **C1167 `[ergodis]` [REPORTED 2026-09-12]** — source-bound incremental min-plus replay proofs, monotone fact updates, early fixedness and checked-solution conversion → `notes/2026-09-12-c1167-incremental-proof-checking.md`

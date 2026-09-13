@@ -46,6 +46,14 @@ has no timeout or isolation, and Lean enforces the output-size limit after
 capture. A future interactive automation adapter needs an explicit resource
 policy before claiming the roadmap's fast-failure behavior.
 
+C1167 adds a checked incremental proof route: `ergodis_improvement` reuses an
+old checked solution when rules are identical and facts improve, then checks
+bounded synchronous replay and fixedness. The result converts to the existing
+`CheckedSolution` by proof. Actual chained distance witnesses and paired proof
+checking measurements are recorded in `2026-09-12-c1167-incremental-proof-checking.md`.
+The producer still solves its supplied source independently; no runtime update
+policy or source-interpretation authority changes.
+
 `bv_decide` could become useful for a packed representation, a mask operation,
 or a bounded arithmetic encoding. No such proof obligation is needed for the
 current symbolic square. Encoding min-plus arithmetic as machine words would

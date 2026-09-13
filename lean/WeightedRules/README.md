@@ -21,6 +21,37 @@ declaration contains only a cost list, round count and kernel-checkable proof;
 importing its compiled module does not call the producer again. The external
 certificate is never interpreted as Lean source.
 
+## Incremental proofs
+
+`ergodis_improvement old to Q from "source.json" replay k` checks returned
+values by `k` synchronous steps from an existing checked solution. It admits
+only identical rule lists and pointwise improvements of base facts. Fixedness
+then proves the new least solution, even when `k` is smaller than the from-zero
+round count. A retraction requires the ordinary from-zero proof route.
+
+```lean
+import WeightedRules.IncrementalExample
+open WeightedRules
+
+set_option maxRecDepth 16384 in
+def improved : CheckedImprovement oracleDistance improvedDistanceProgram :=
+  ergodis_improvement oracleDistance to improvedDistanceProgram
+    from "WeightedRules/fixtures/distance-improved.json" replay 3
+
+def reusable : CheckedSolution improvedDistanceProgram := improved.toCheckedSolution
+```
+
+The converted certificate uses the scalar-count from-zero bound; `improved.rounds`
+records incremental proof work. The replay count follows the formal synchronous
+step definition and is not an unchecked runtime counter. The provider still
+returns an ordinary witness for its source. The incremental route changes how
+Lean proves that witness correct.
+
+`WeightedRules.IncrementalAxiomAudit` checks the generic proofs, real chained
+distance witnesses and incremental rejection controls. `CheckedImprovement`
+requires a typed old `CheckedSolution`; calling the raw local replay predicate
+on an unauthenticated seed does not establish leastness.
+
 ## Execution
 
 Build the `ergodis-rules` native shared library using the core repository's
