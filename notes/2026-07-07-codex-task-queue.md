@@ -218,7 +218,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 
 - **C1170 `[ergodis]` [IN PROGRESS]** — Rel-rich owned frontend contract and parser/diagnostic performance prototype; Ergodis backend/rules handling → `notes/2026-09-12-c1170-owned-rel-frontend.md`
-- **C1177 `[ergodis]` [QUEUED]** — Private kernel follow-ups: sparse-frame dispatch assertion and native 10⁵–10⁶-detector bench, `parallel_workers` at construction, count-axis parallelism, Domain-level parallel equality, privacy/frame/parallel property tests → `notes/2026-09-12-c1171-rule-programme-review.md` R15–R16/E5–E6
 - **C1156 `[ergodis]` [QUEUED]** — Evolve slice (C1151 rows 10, 13, Aksu cost rule): learned proposal scorer (linear or tree model) and sliding-window UCB operator selection, Markov-category discipline on proposal sampling, one-sided screen cost rule; gate = counted drop in wasted proposals at matched budget, no evidence claim touched → same card
 - **C1157 `[ergodis]` [QUEUED — AFTER C1152, C1154]** — equality-saturation spike (C1151 row 9): egg-style e-graph over plan terms with cost-driven extraction and an e-class analysis carrying a preservation contract; gate = matched plan cost vs current simplifier on the lowering corpus, contract violations detected under merging → same card
 - **C1143 `[ergodis]` [IN PROGRESS]** — BB syndrome-extraction circuit distance; shared no-answer-baking, independent verification, matched cold/warm and native performance gates → `notes/2026-09-11-ergodis-external-benchmark-programme.md` (C1143).

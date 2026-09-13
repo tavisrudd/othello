@@ -8,8 +8,8 @@ correction trails live in dated reports and the append-only
 
 **Date**: 2026-09-13
 **Mode**: intent-based.
-**Status**: ACTIVE. Immediate engineering frontiers are C1170 (owned Rel-rich frontend) and
-C1177 (private rule kernels/performance). C1143, C1130, C1016,
+**Status**: ACTIVE. Immediate engineering frontier is C1170 (owned Rel-rich frontend); the
+rule-contract programme C1172–C1177 is closed. C1143, C1130, C1016,
 C1017, C1061 and C985 remain in progress. C1062 and C1070 await Tavis's close call.
 
 **Discovery companion**: [ergodis discovery track](../ergodis-discovery-track.md).
@@ -43,7 +43,7 @@ finite parity gate, not a grammar oracle or complete syntax/admission claim.
 syntax/admission gaps. Ergodis retains lowering, rules, joins and execution; no external evaluator
 or backend is adopted. Tree-sitter and executable reference semantics remain deferred.
 
-### Rule-contract programme — C1177 queued
+### Rule-contract programme — closed
 
 Programme and sequencing: `../2026-09-12-ergodis-rule-contract-programme.md`; audit:
 `../2026-09-12-c1171-rule-programme-review.md`.
@@ -63,12 +63,21 @@ Programme and sequencing: `../2026-09-12-ergodis-rule-contract-programme.md`; au
   core `2074025`). Open decisions for Tavis are in the report: identity/ownership
   redesign for per-update cost, evaluator policy, and the `Invariance` ABI code.
 
-**C1177 next:** private kernels, sparse frames, large-detector behavior and parallelism. It is
-not started. Earlier C1154–C1168 increments and exact boundaries are indexed by the
-programme report; do not reproduce their history here.
-Foreign issues seen during C1176: the shared Cargo target directory produced a stale-rlib
-build failure under concurrent checkouts, and the worktree `~/.cache/ergodis/worktrees/c1176-props`
-holds regenerated tracked `__pycache__` files that were left in place.
+- C1177: sparse-frame dispatch asserted and property-tested, native 10^5–10^6-detector
+  measurement (sparse frame 6–41× faster; external 60M→12M still unattributed), construction-time
+  `parallel_workers`, single `Table` enum without `unreachable!`, count-axis parallelism measured
+  and left serial, Domain parallel=serial and privacy property tests
+  (`../2026-09-13-c1177-private-kernels.md`, private `051f734`).
+
+Earlier C1154–C1168 increments and exact boundaries are indexed by the programme report; do not
+reproduce their history here. Open programme follow-ups need allocation: the C1176 decisions for
+Tavis (identity/ownership redesign, evaluator policy, `Invariance` ABI code) and, only if count-axis
+parallelism is ever wanted, a merge-free core tile kernel (discovery track, 2026-09-13).
+Foreign issues: private `cargo clippy --all-targets` fails in the `williamson_parallel_profile`
+target (dead code in unmodified files) and `cargo fmt --check` reports diffs in
+`src/hadamard_execution.rs` and `src/partitioned_additive_join.rs`; the shared Cargo target
+directory produced a stale-rlib build failure under concurrent checkouts during C1176; the
+worktree `~/.cache/ergodis/worktrees/c1176-props` holds regenerated tracked `__pycache__` files.
 
 ### C1149 — public-release readiness
 

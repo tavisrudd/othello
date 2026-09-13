@@ -117,3 +117,18 @@ it is the certificate-size lever C1148 will want; the Lean `WeightedRules.Contra
 statement already covers the extension step.
 **Evidence level**: argument only; no quotient replay exists and no measurement was taken. No
 C-ID allocated.
+
+## 2026-09-13 — count-axis parallelism loses to its own merge copy (C1177)
+
+**Provenance**: C1177 count-axis measurement, `notes/2026-09-13-c1177-private-kernels.md`, private
+`051f734`. **Was I looking for this?**: no — the task was to decide whether to enable count-axis
+parallelism, not to explain the core parallel kernel's cost structure.
+**Observation**: on every multi-tile count/resource table (9,207–69,673 cells) four workers lose to
+serial by 5–19 per cent, and the loss grows with tile count. A count layer's transition work is bounded
+by surviving jobs, so the owner's per-layer merge copy of every `u64` cell dominates. The budget layout
+wins because its `u16` tiles are three times smaller and its work per layer is a full second axis.
+**Why it may matter**: if count-axis parallelism is ever wanted, the lever is not a cell threshold but a
+merge-free kernel where workers write disjoint tiles straight into the next layer (double-buffered
+layers), removing the serial copy; that is a core `allocation_surface` change, not a private gate.
+**Evidence level**: measured loss (paired, six shapes, seven rounds); the merge-free remedy is
+argument only. No C-ID allocated.
