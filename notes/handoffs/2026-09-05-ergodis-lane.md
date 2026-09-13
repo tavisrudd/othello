@@ -70,6 +70,8 @@ exhaustive privacy family and minimal readout quotient, symbolic Lean span/trace
 interface family, no ambient-orbit reduction for the live paired census
 (`../2026-09-12-c1158-acting-subgroup.md`; isolated branch `task/c1158-acting-subgroup`,
 private `3d52f12`). All currently allocated active rule-contract steps are complete.
+Lean automation integration and remaining proof boundaries:
+`../2026-09-12-lean-automation-integration.md`.
 Next: concrete workload/IR-obligation gate; join engine and broader benchmarks
 remain unallocated. Deferred speed/hygiene tasks are not implicitly resumed. Existing WASM test-target Clippy warning: `src/bundle.rs:101`
 items after test module; production-library Clippy and unit tests pass. Literature cards:
