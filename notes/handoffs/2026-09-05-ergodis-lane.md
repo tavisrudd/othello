@@ -173,8 +173,8 @@ Pareto survivor with `k d^2 / n > 19.2`. Reports:
 `../2026-08-30-c985-completion-compression-and-wide-search.md` and
 `../2026-08-30-c985-ergodis-private-adapters-and-parallel-roots.md`.
 
-C1178 framing complete: `../2026-09-13-c1178-ergodis-framing.md` recommends discovering and
-compiling structure for exact optimization, with Evolve core; ranked alternatives, drafts,
+C1178 framing complete: `../2026-09-13-c1178-ergodis-framing.md` leads with a spectrum from
+Evolve discovery to optional static specialized kernels; ranked alternatives, drafts,
 source register and paper-evidence gaps are retained there. On paper resume, C985 should
 resolve the precise integrated contribution and coupling evidence before a novelty claim;
 the separate optimization manuscript's location remains unconfirmed. No public prose changed.
