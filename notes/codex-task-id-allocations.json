@@ -5066,8 +5066,17 @@
       "last": 1177,
       "purpose": "C1171 review successors: Lean audit gate, support-witness certificate, generic carrier, release-hygiene follow-ups, rule-contract semantics follow-ups, private kernel follow-ups",
       "sequence": 563
+    },
+    {
+      "count": 1,
+      "first": 1178,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1178,
+      "purpose": "Ergodis framing synthesis for optimization paper and public documentation, grounded in C985 onward and complete-ports recovery",
+      "sequence": 564
     }
   ],
-  "next_id": 1178,
+  "next_id": 1179,
   "schema": "codex-task-id-allocations-v1"
 }
