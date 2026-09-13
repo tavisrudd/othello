@@ -18,6 +18,37 @@ and is a read-only source here. Public documentation is a downstream destination
 wording requires a separate check against the actual exported capabilities and evidence.
 No manuscript, public README, export or publication is changed by this initial document.
 
+## Editorial direction — September 13 clarification
+
+Repository documentation may present multiple complementary framings for different readers
+and uses. There may also be enough material for several academic papers with distinct foci.
+Neither the documentation nor the potential paper programme needs one exclusive framing.
+
+The first Ergodis paper should lead with the most distinctive, broadest defensible and
+strongest unified frame. Selecting that frame is C1178's primary editorial task. The initial
+C985 outline is evidence and a starting point, not a predetermined limit on the first paper's
+conceptual scope. Do not automatically assign Evolve to a later paper or subordinate it to
+the quotient story before comparing the alternatives.
+
+Evaluate candidate first-paper frames by:
+
+- **Distinctiveness:** the precise contribution relative to the strongest relevant prior
+  work, established by the appropriate literature audit before claiming novelty.
+- **Breadth:** one mechanism explains materially different admitted problems; merely naming
+  many applications or wrapping different solvers does not establish this.
+- **Strength:** a substantial theorem, algorithm or system result with appropriate evidence.
+- **Unity:** the mathematical contracts, implemented mechanism and experiments answer the
+  same central question. A catalogue of features is not a unified contribution.
+- **Supportability:** separate what can be claimed now from the exact additional evidence
+  needed for a stronger framing. Do not prefer a weaker story solely because it is ready,
+  or present the stronger story as established before its evidence exists.
+
+Return a ranked comparison and a recommended first-paper thesis, including its strongest
+objection and missing evidence. Also sketch distinct potential follow-on papers, stating
+their independent contributions and overlap. These are planning candidates, not new task
+allocations, manuscript splits or commitments to publication. Keep the documentation's
+multiple entry points connected to the same definitions and evidence boundaries.
+
 ## Working account
 
 Ergodis compiles mathematical structure into exact computation. Its central question is
@@ -84,12 +115,14 @@ its own correspondence and preservation argument.
 
 ## Different openings for different readers
 
-**Optimization paper.** Start with a concrete failure of an insufficient state and the
-mathematical state that repairs it. Present the contextual composition/resource theorem
-at its proved scope, then algorithms, witnesses and evidence across admitted applications.
-Evaluate Evolve as a supporting mechanism or a separate contribution only to the extent
-that its own acceptance evidence warrants. C985's original gate requires material reduction
-from the shared kernel on two noncoding models; a shared wrapper is insufficient.
+**First optimization paper.** Select the strongest unified thesis using the criteria above.
+One candidate opening is a concrete failure of an insufficient state and the mathematical
+state that repairs it; another makes checked discovery and query-directed specialization
+central. Compare them before deciding how quotient compilation, Evolve and recursive
+contracts contribute to the argument. C985's original gate requires material reduction
+from the shared kernel on two noncoding models; a shared wrapper is insufficient. A broader
+thesis must identify its additional evidence obligations rather than quietly weakening
+this existing gate.
 
 **README.** Start with problems a reader can solve, required structure, the returned answer,
 and one runnable example. Candidate wording for later validation: “Ergodis compiles
@@ -144,8 +177,10 @@ Useful starting references from that discussion:
 3. Attach an exact source and evidence scope to each proposed public claim. Separate theorem,
    implementation, tested family, historical proposal and research target. Preserve the
    distinction between witness feasibility, optimality, exclusion and source equivalence.
-4. Choose a primary paper framing and supporting framings, with a concrete opening example;
-   prepare separate paper, README and conceptual-documentation drafts.
+4. Rank candidate unified frames and recommend the most distinctive, broad and strong
+   defensible thesis for the first Ergodis paper, with a concrete opening example and
+   explicit evidence gaps. Sketch independently substantial follow-on paper candidates.
+   Prepare README and conceptual-documentation drafts that can retain multiple framings.
 5. Test the strongest integration story: does changing the admitted observation requirement
    enable a checked representation change that improves subsequent solves after all costs?
    Record this as an evidence requirement, not a request to run new benchmarks under this task.
