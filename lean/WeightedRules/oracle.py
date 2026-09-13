@@ -22,7 +22,7 @@ class Api(c.Structure):
                 ("create", CREATE), ("invoke", INVOKE), ("destroy", DESTROY)]
 
 
-def certificate(source: Path, library_path: str) -> bytes:
+def certificate(source: Path, library_path: str, support: bool = False) -> bytes:
     with source.open("rb") as stream:
         payload = stream.read(LIMIT + 1)
     if len(payload) > LIMIT:
@@ -54,6 +54,11 @@ def certificate(source: Path, library_path: str) -> bytes:
         workspace = struct.unpack("<Q", call(2, plan, capacity=8))[0]
         encoded = call(3, workspace, struct.pack("<I", 1))
         call(3, workspace, struct.pack("<I", 2) + encoded)
+        if support:
+            # The support readout serializes the completed valuation with its
+            # derivation ranks and witnesses; the provider checks it in one pass.
+            encoded = call(3, workspace, struct.pack("<I", 3))
+            call(3, workspace, struct.pack("<I", 4) + encoded)
         call(4, workspace)
         call(4, plan)
         return encoded
@@ -62,12 +67,13 @@ def certificate(source: Path, library_path: str) -> bytes:
 
 
 def main():
-    if len(sys.argv) != 2:
-        raise ValueError("expected one source JSON filename")
+    if len(sys.argv) not in (2, 3) or (len(sys.argv) == 3 and sys.argv[2] != "support"):
+        raise ValueError("expected one source JSON filename, optionally followed by 'support'")
     library = os.environ.get("ERGODIS_RULE_LIBRARY")
     if not library:
         raise ValueError("set ERGODIS_RULE_LIBRARY to the compiled native provider")
-    sys.stdout.buffer.write(certificate(Path(sys.argv[1]), library) + b"\n")
+    payload = certificate(Path(sys.argv[1]), library, support=len(sys.argv) == 3)
+    sys.stdout.buffer.write(payload + b"\n")
 
 
 if __name__ == "__main__":

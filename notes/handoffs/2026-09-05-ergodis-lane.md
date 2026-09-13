@@ -99,7 +99,11 @@ span) repaired and regression-tested in C1170; successors C1172 (Lean audit gate
 C1172 complete: guarded axiom audit, `WeightedRules` root/default target,
 audited chain witnesses, round convention stated and pinned by forty
 kernel-checked producer cases (`../2026-09-13-c1172-lean-audit-gate.md`;
-core `801e732`). Remaining C1171 successors: C1173–C1177.
+core `801e732`). C1173 complete: support-witness certificates check least
+fixedness in one pass without replay, 3–5× faster than replay on identical
+producer output; oracle resource policy; raw scalar entry point and cyclic
+raw programs (`../2026-09-13-c1173-support-certificate.md`; core `eead07b`).
+Remaining C1171 successors: C1174–C1177.
 C1154 complete: offline intervals, exact finite audits and directed identity
 acyclicity; selected-root error-domain guard is explicit
 (`../2026-09-12-c1154-feature-intervals.md`).

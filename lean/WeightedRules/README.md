@@ -112,6 +112,29 @@ native-evaluation axiom or any other new dependency fails the build. When a
 proof legitimately changes its axiom set, update the expected message next to
 its print command.
 
+## Support certificates: checking without replay
+
+`ergodis_support_solution P from "source.json"` asks the producer for a
+support certificate: the values with a derivation rank and a rule witness per
+coordinate (witness zero is the base fact, witness `k + 1` is product `k`).
+`WeightedRules.Support` proves that a valuation is the least fixed point
+exactly when it is locally fixed and every coordinate is justified with both
+factors of strictly smaller rank, and `checkSupportCertificate` decides that
+in one pass over the coordinates and one over the rules. The resulting
+`SupportedSolution P` has the same `.least` theorem, denotes the same
+scalar-count iterate, and converts to a `CheckedSolution` by proof. Checking
+cost no longer grows with the producer's round count, and a warm witness costs
+the same to check as a cold one. `WeightedRules.SupportConvention.*` check the
+producer's support certificates on the round-convention fixture family and on
+raw scalar programs with cycles; on identical producer output the domain-six
+support module elaborates about five times faster than its replay counterpart.
+
+The producer runs under a resource policy: output is read only up to the byte
+limit, a producer still running at the deadline in
+`ERGODIS_RULE_ORACLE_TIMEOUT_MS` (default sixty seconds) is killed, and an
+explicit `via` executable must be a relative path without parent segments.
+The policy bounds resources only; soundness rests on the kernel check alone.
+
 ## Round convention against the producer
 
 The producer counts rule sweeps, including the final sweep that changes
@@ -122,7 +145,9 @@ check by kernel reduction, on forty seeded sources of domain three to six,
 that the producer's from-zero round count and its incremental sweep count are
 exactly the least fixed indices of the corresponding synchronous iterates,
 that the incremental count lies within the rule-output bound, and that three
-single mutations of each certificate are rejected. `RoundConvention.Retained`
+single mutations of each certificate are rejected; `SupportConvention.Raw`
+adds ten raw scalar programs with cyclic and nonlinear rules, admitted
+through the producer's raw entry point. `RoundConvention.Retained`
 compares the producer's grounding of the two hand-written sources with
 `distanceProgram` and `chainDistanceProgram` coordinate by coordinate.
 

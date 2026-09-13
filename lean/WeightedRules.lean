@@ -10,6 +10,12 @@ import WeightedRules.RoundConvention.DomainThree
 import WeightedRules.RoundConvention.DomainFour
 import WeightedRules.RoundConvention.DomainFive
 import WeightedRules.RoundConvention.DomainSix
+import WeightedRules.SupportAxiomAudit
+import WeightedRules.SupportConvention.Raw
+import WeightedRules.SupportConvention.DomainThree
+import WeightedRules.SupportConvention.DomainFour
+import WeightedRules.SupportConvention.DomainFive
+import WeightedRules.SupportConvention.DomainSix
 
 /-!
 # Finite weighted rules: library root
@@ -24,5 +30,7 @@ build of this module fails if any terminal acquires `sorryAx`, a native
 evaluation axiom, or any other unexpected dependency. The round-convention
 modules check, by kernel reduction on producer-emitted tables, that the
 external producer's grounding, from-zero round counts and incremental sweep
-counts coincide with the synchronous iterate defined here.
+counts coincide with the synchronous iterate defined here. The support
+modules check the producer's support certificates, whose acceptance proves
+least fixedness in one pass without replaying the iterate.
 -/
