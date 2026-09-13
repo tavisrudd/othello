@@ -2,7 +2,7 @@
 
 **Lane**: `ergodis`
 **Date**: 2026-09-13
-**Status**: QUEUED; initial source-grounded framing document started.
+**Status**: IN PROGRESS; source comparison and first-paper recommendation.
 **Visibility**: PRIVATE contributor/editorial context. This document is not an export source.
 
 ## Purpose and scope
