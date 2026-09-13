@@ -27,8 +27,12 @@ Neither the documentation nor the potential paper programme needs one exclusive 
 The first Ergodis paper should lead with the most distinctive, broadest defensible and
 strongest unified frame. Selecting that frame is C1178's primary editorial task. The initial
 C985 outline is evidence and a starting point, not a predetermined limit on the first paper's
-conceptual scope. Do not automatically assign Evolve to a later paper or subordinate it to
-the quotient story before comparing the alternatives.
+conceptual scope. **Evolve is a core part of Ergodis.** This is binding user direction,
+not a candidate framing to rank against treating it as an optional extension. The first
+paper must explain the integrated system: discovery, query/observable and representation
+choices, checked admission, exact execution, and feedback from actual solves. Compare ways
+to express that unity, not whether Evolve belongs in it. Follow-on papers may develop
+particular mechanisms in depth without relegating Evolve itself to a later paper.
 
 Evaluate candidate first-paper frames by:
 
@@ -61,8 +65,8 @@ that an outer code needs. Retaining labelled costs allows exact composition; ret
 support alternatives enables additional operational questions, and coefficient lifts turn
 a selected repair into something executable. The right state depends on the question.
 
-Evolve extends the design space to discovering useful structure and choosing how to exploit
-it. It can search for predicates, bounds, representations and execution strategies; the
+Evolve is Ergodis's core discovery and adaptation system for finding useful structure and
+choosing how to exploit it. It can search for predicates, bounds, representations and execution strategies; the
 broader semantic direction includes questions, observation protocols and source designs
 under explicit evaluation contracts. Discovery, mathematical admission and measured utility
 are separate obligations. Actual solves can supply witnesses, counterexamples and performance
@@ -117,9 +121,10 @@ its own correspondence and preservation argument.
 
 **First optimization paper.** Select the strongest unified thesis using the criteria above.
 One candidate opening is a concrete failure of an insufficient state and the mathematical
-state that repairs it; another makes checked discovery and query-directed specialization
-central. Compare them before deciding how quotient compilation, Evolve and recursive
-contracts contribute to the argument. C985's original gate requires material reduction
+state that repairs it; another opens with checked discovery and query-directed specialization.
+Both must explain Evolve as core to the integrated Ergodis system. Compare which opening
+best exposes the connection between discovery, preservation contracts and exact computation.
+C985's original gate requires material reduction
 from the shared kernel on two noncoding models; a shared wrapper is insufficient. A broader
 thesis must identify its additional evidence obligations rather than quietly weakening
 this existing gate.
