@@ -5702,3 +5702,5 @@ depth because this archive is in the same `notes/` directory.
 - **C1154 `[ergodis]` [REPORTED 2026-09-12]** — Offline FeatureDag interval pass and directed identity acyclicity audit complete; finite corpus/boundary/box gates pass, selected-root error guard explicit → `2026-09-12-c1154-feature-intervals.md`
 
 - **C1159 `[ergodis]` [REPORTED 2026-09-12]** — One-probe completion screen passes no-false-rejection gate and corrected retained A/B; about 11% less search time on frozen development model, opt-in → `2026-09-12-c1159-completion-screen.md`
+
+- **C1155 `[ergodis]` [REPORTED 2026-09-13]** — Exact weighted normalization and layered lumping pass finite gates; existing coarsest quotient compiler reused and independently audited → `2026-09-13-c1155-weighted-normalization.md`

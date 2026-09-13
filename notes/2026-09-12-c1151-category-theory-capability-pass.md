@@ -5,6 +5,14 @@
 **Status**: COMPLETE (reported 2026-09-12); implementation slices unallocated
 **Predecessor**: `2026-09-12-c1150-category-theory-for-ergodis.md`
 
+**Implementation correction (C1155, 2026-09-13):** the core already contained
+`compile_observational`, an exact certified minimum-quotient compiler, in baseline
+`927c618`. The claimed missing construction capability was a source-reading gap.
+Additional-readout admission and recompilation for replacement observations are
+different operations. See `2026-09-13-c1155-weighted-normalization.md` for the
+independent audit and the weighted/sentinel implementation. Earlier study text
+below is retained as the historical assessment.
+
 ## Why a second pass
 
 C1150 was run with a literature-audit posture and an over-narrowed brief ("no gradient and
