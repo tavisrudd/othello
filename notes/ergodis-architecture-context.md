@@ -53,6 +53,12 @@ relevant handoff/task context. Follow links selectively; do not preload all repo
 
 ## Binding user direction
 
+- Datalog library study is frontend-only (user direction 2026-09-12): parsing,
+  syntax trees and source diagnostics may inform an adapter. Prefer an owned
+  parser when the supported grammar is straightforward, for performance and
+  control. Ergodis owns semantic admission/lowering, rules handling, join
+  planning, storage, scheduling and execution. Do not adopt an external rule
+  evaluator or dataflow backend through a frontend adapter.
 - One Ergodis engine and logical contracts for native and WASM. WASM is a full
   execution target; missing bindings/portability are gaps, not product boundaries.
   Consolidate on one canonical WASM build. Private domain implementations remain

@@ -83,6 +83,9 @@ and value-preserving checked-certificate conversion
 (`../2026-09-12-c1168-rule-output-bound.md`; proof `0fcf576af`).
 Lean automation integration and remaining proof boundaries:
 `../2026-09-12-lean-automation-integration.md`.
+C1169 active: source-level study of Datalog frontends
+(`../2026-09-12-c1169-datalog-frontends.md`). Prefer an owned parser for a
+straightforward grammar; Ergodis retains all backend and rules handling.
 Next: concrete workload/IR-obligation gate; join engine and broader benchmarks
 remain unallocated. Deferred speed/hygiene tasks are not implicitly resumed. Existing WASM test-target Clippy warning: `src/bundle.rs:101`
 items after test module; production-library Clippy and unit tests pass. Literature cards:
