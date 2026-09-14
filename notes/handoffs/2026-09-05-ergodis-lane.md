@@ -67,13 +67,23 @@ the first-byte compound index with slice `starts_with` was an instructive negati
 in the loop). Lane protocol change: A/B with
 `instructions,cycles,branches,branch-misses,page-faults,minor-faults` (non-multiplexing, A/A null
 two parts per million); cache events in a separate run. The parser is now the majority of the
-ASCII parse stage (48 %); the token store (23 instructions per 16-byte record as five stores) is
-the largest identified scanner component.
+ASCII parse stage (48 %).
+Token store and first semantic admission: `../2026-09-14-c1170-token-store-and-admission.md`
+(private `35f4484` … `32a18c6`): the token-store bookkeeping cursor is kept at exactly five
+instructions per token (ASCII parse 0.9709); wide stores lose by codegen probe and are recorded
+as rejected. Scanner performance work is closed for now. Admission (name binding, arity;
+`REL04xx`; free names admitted as external base relations, escaped binders rejected) is a
+separate zero-allocation stage with its own cost budget: 40.68 instructions per source byte on
+ASCII, two thirds of parsing, unattributed below the symbol. Parity corpus now records admission
+outcomes (159 cases, canonical `5a350e1f…`). **Decision for Tavis:** two toolchains are in play
+(ambient `cargo` rustc 1.93.1, used by `retain-bin.sh`; `nix shell nixpkgs#rustc` 1.95.0, used by
+the earlier reports); pin one for the lane before the next A/B.
 
-**Next:** retain a control at `598426f`, then the token-store single-16-byte-write A/B
-(establish pool alignment first); then the remaining
+**Next:** decompose the admission stage by class (synthetic sources: definitions, references,
+binders, name bytes) before touching its code; then module-scoped visibility, module parameters
+and member tables in admission; then the remaining
 syntax gaps by manifest family (caret entity references, interpolation, Unicode boundary
-conformance) and first semantic admission checks. Ergodis retains lowering, rules, joins and
+conformance). Ergodis retains lowering, rules, joins and
 execution; no external evaluator or backend is adopted. Tree-sitter and executable reference
 semantics remain deferred.
 
