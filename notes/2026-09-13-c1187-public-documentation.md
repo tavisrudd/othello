@@ -101,3 +101,24 @@ No algorithm, Rust source or mathematical certificate was changed by C1187.
 No incidental discovery warrants a discovery-track entry. All task-owned core
 paths are committed and clean. Public snapshot refresh remains with the
 release-readiness work and requires its own authorization and gates.
+
+## Follow-up — concise public losses summary
+
+At Tavis's request, added a 101-word “Where it loses” section near the start of
+`BENCHMARKS.md`. It retains the public-interest negative controls rather than
+removing them during curation: L2's 193 s scheduling solve versus CP-SAT's
+14.1 ms, both with optimum 10; and L3's configured width refusal versus a
+CP-SAT feasible answer in 53.6 ms. The paragraph distinguishes refusal from
+infeasibility, gives the paired-round measurement scope and links to the exact
+evidence rows and the detailed comparison. No measurements were changed or
+new benchmarks run. Each rounded number and status was checked directly against
+`evidence/negative-control-tier.json`; publication lint and link checks passed.
+
+Follow-up committed as core `bbcb225`. The full native gate passed with
+`CARGO_INCREMENTAL=0 CARGO_PROFILE_DEV_DEBUG=1 nix run .#check`, after the shared
+cache again produced duplicate verifier-crate type identities under the default
+debug fingerprint. Log:
+`/tmp/claude-run-quiet/20260913-203003-CARGO_INCREMENTAL0-CARGO_PROFILE_DEV_DEBUG1-nix-run-.check/`.
+No shared artifacts were cleared. As above, the concurrent publication-tool edits
+were left untouched and excluded from the committed manifest; all 614 entries
+were verified against the exact task-only commit content. No export or push.
