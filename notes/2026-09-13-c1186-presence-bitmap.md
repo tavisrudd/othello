@@ -168,9 +168,9 @@ relation, which the pass does not currently choose. Unmeasured, and not attempte
 | `ergodis-private/examples/closure_ballpark.rs` | `99f2020908e189eaa0ef7ddfd26a41eea2d7b6bc92312d0110dcbc527e9b9a30` |
 | `ergodis-private/analysis/datalog-comparison/ab-2026-09-13-c1186.tsv` (108 698 bytes, the A/B above) | `5c9bdc68e8eb67841accf08ff38a410b5f004ecaaf2d201bdb7c306004d57c80` |
 | `ergodis-private/analysis/datalog-comparison/results-2026-09-13-c1186.jsonl` (11 162 bytes, single-run full table with certificate sizes and the peak-RSS fields) | `170a8be9a98f70c50716036f64bea9056bb245b76204147eb212c8d7010b0c69` |
-| retained harness `~/.cache/ergodis/bin/c1186c-2e34534` (candidate, both core commits) | `81f897cd89c47d5e59d900198512d9d02e80ed3717bf1a38c41ffc80ed275f2e` |
-| retained harness `~/.cache/ergodis/bin/c1186b-30c8263` (bitmap only, control for the insert-path A/B) | `6269873bfb1f1afb1a848e020af2672be712258c3a92f827ffb1ec5b78a3c12f` |
-| retained harness `~/.cache/ergodis/bin/c1184b-9f177c1` (C1184 control) | `1a61534ed7a83b8e32022fe4b05a2c247365e8465eba765693fd7356ed4a42a0` |
+| candidate harness: `closure_ballpark` from private `2e34534` over core `7476962` | built from those commits; the binary itself is not cited |
+| insert-path control: `closure_ballpark` from private `30c8263` over core `564ad08` (bitmap only) | built from those commits; the binary itself is not cited |
+| C1184 control: `closure_ballpark` from private `9f177c1` over core `e6abc24` | built from those commits; the binary itself is not cited |
 
 Commits: core `ergodis` `564ad08` (the presence bitmap) and `7476962` (the insert decision);
 private `ergodis-private` `2e34534` (checker-only peak RSS in the harness) and `dafe625` (the
@@ -188,7 +188,7 @@ nix shell nixpkgs#cargo nixpkgs#rustc -c ../ergodis-contrib/scripts/retain-bin.s
 Replay one row:
 
 ```
-taskset -c 3 ~/.cache/ergodis/bin/c1186c-2e34534 --evaluator demand \
+taskset -c 3 <harness built above> --evaluator demand \
   --program <closure|samegen> <N> <sparse|dense> 5 <dir>
 ```
 
@@ -231,7 +231,8 @@ sorted fallback, which has no bitmap, so the two representations cross-check eac
   per-round statistic brought the control to within 6% on every row. Settled procedurally: on this
   host, report the paired per-round ratio, never the ratio of medians, and print the evaluation
   control beside every result.
-- **`cache-gc.sh` still not run**, for the C1184 reason: it deletes cache entries no core
-  `evidence/*.json` names, which is every retained harness this report and C1184's cite.
+- **Retained harness binaries are not evidence.** The bundle originally listed the `~/.cache`
+  binaries with hashes; corrected at close to cite only the core and private commits each was
+  built from, and `cache-gc.sh --apply` was then run. Replay rebuilds from those commits.
 
 No discovery-track entry: nothing incidental beyond the task's own question.

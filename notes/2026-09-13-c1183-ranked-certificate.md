@@ -46,7 +46,7 @@ plus the measurement commit.
 
 ## Measurement
 
-Retained harness `~/.cache/ergodis/bin/nix2-7cc7175` (pinned `rustc 1.95.0`), one pinned core,
+Harness `closure_ballpark` built from private `7cc7175` over core `69ffd81` (pinned `rustc 1.95.0`), one pinned core,
 five warm evaluations per case, single run; sizes in MB are exact encoder outputs. "trace" is the
 C1182 derivation certificate, "ranked" the new one. Check times are the independent checkers on
 the same box; both are hash-map based and unoptimized.
@@ -105,9 +105,10 @@ small-degree guarantee that does not hold, such as a rule whose smaller bucket i
 | `ergodis/crates/rules/tests/demand.rs` | `cde4d5516beaac49bad5a20c7707d6f983d7a8b3a53011aab3dca02b842e1a9b` |
 | `ergodis-private/examples/closure_ballpark.rs` | `f098d3359417c880c4f07a6c7b6bfa41d49bafcbf2054ed3a277d2f739026eae` |
 | `ergodis-private/analysis/datalog-comparison/results-2026-09-13-c1183.jsonl` (10 501 bytes, private `64cefc9`) | `1293bf1fcc4d29cd4082bbb159f0ce4bd6d92274cfc575f16090b625fe663ba6` |
-| retained harness `~/.cache/ergodis/bin/nix2-7cc7175` | `8787a9fda440a006b4a39b636eec728b22a8f011784f8608ee0eed6e22195dba` |
 
-Replay: for each row, `taskset -c 3 <harness> --evaluator demand --program <closure|samegen>
+Replay: build the harness from private `7cc7175` with core `69ffd81` checked out beside it
+(`retain-bin.sh . closure_ballpark --example --profile release`; a retained local binary is a
+convenience, not evidence), then for each row `taskset -c 3 <harness> --evaluator demand --program <closure|samegen>
 <N> <sparse|dense> 5 <dir>`; the JSON line carries `representation.*`, `verify_ns` and
 `ranked_verify_ns`. Inputs are the C1182 deterministic generators. Independent replay of each
 certificate is its checker; both checkers' relations were compared with each other and with the

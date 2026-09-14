@@ -201,8 +201,8 @@ fully bound probe must return a row. Unmeasured.
 | `ergodis-private/examples/closure_ballpark.rs` (unchanged from C1183) | `f098d3359417c880c4f07a6c7b6bfa41d49bafcbf2054ed3a277d2f739026eae` |
 | `ergodis-private/analysis/datalog-comparison/ab-2026-09-13-c1184.tsv` (63 241 bytes, the A/B above) | `ffb2ea2473db96b86ddafaefcf0d27cc978089f4287589f8d6924dc5eca37faf` |
 | `ergodis-private/analysis/datalog-comparison/results-2026-09-13-c1184.jsonl` (10 494 bytes, single-run full table with certificate sizes) | `b343cd5d00eeb55ec17d01463c72c6a3f8a76159332797f158f45c43ef7d2bfe` |
-| retained harness `~/.cache/ergodis/bin/c1184b-9f177c1` (candidate) | `1a61534ed7a83b8e32022fe4b05a2c247365e8465eba765693fd7356ed4a42a0` |
-| retained harness `~/.cache/ergodis/bin/nix2-7cc7175` (C1183 control) | `8787a9fda440a006b4a39b636eec728b22a8f011784f8608ee0eed6e22195dba` |
+| candidate harness: `closure_ballpark` from private `9f177c1` over core `e6abc24` | built from those commits; the binary itself is not cited |
+| control harness: `closure_ballpark` from private `7cc7175` over core `69ffd81` (the C1183 build) | built from those commits; the binary itself is not cited |
 
 Commits: core `ergodis` `db96bcc` (the direct-addressed checkers), `e6abc24` (the head-tuple
 cut) and `c8e627e` (the review fix above; full gate re-run green at that commit); private `ergodis-private` `9f177c1` (first full table) and `30c8263` (the A/B and the
@@ -220,7 +220,7 @@ nix shell nixpkgs#cargo nixpkgs#rustc -c ../ergodis-contrib/scripts/retain-bin.s
 Replay one row of the table, exactly as C1183 specifies it:
 
 ```
-taskset -c 3 ~/.cache/ergodis/bin/c1184b-9f177c1 --evaluator demand \
+taskset -c 3 <harness built above> --evaluator demand \
   --program <closure|samegen> <N> <sparse|dense> 5 <dir>
 ```
 
