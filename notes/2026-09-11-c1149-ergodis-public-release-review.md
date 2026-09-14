@@ -2120,3 +2120,73 @@ The export ran while another session held uncommitted direct-addressed-checker w
 worked around a second time; the dry run and the fix verification were done in a disposable clone
 while that session finished, and the real export ran after its commits landed.
 
+## A guard for generated debris, 2026-09-13
+
+Untracking the twelve bytecode files removes the instance; this closes the class. The publication
+lint gained a fifth rule, `generated`, which refuses a path that is a tool cache, compiled bytecode,
+or build output, and the pre-commit hook now applies it on every branch.
+
+The rule is path-only and no allowlist entry exempts it, which is the point: a generated file has no
+business in a published tree whatever its bytes happen to say, and relying on the content scan is
+what let compiled bytecode through for weeks. It matches any path segment named `__pycache__`,
+`.pytest_cache`, `.mypy_cache`, `.ruff_cache`, `.ipynb_checkpoints`, `.tox`, `.nox`, `.venv`,
+`venv`, `.direnv`, `node_modules`, `target`, `.cargo-target` or `__MACOSX`; the suffixes `.pyc`,
+`.pyo`, `.pyd`, `.class`, `.o`, `.obj`, `.a`, `.rlib`, `.rmeta`, `.so`, `.so.*`, `.dylib`, `.dll`,
+`.exe`, `.orig`, `.rej`, `.swp`, `.swo` and `~`; and `.DS_Store` and `Thumbs.db`.
+
+`--generated-only` runs that rule alone and skips every content scan, which is what makes the hook
+usable on a private branch: `hooks/pre-commit` was previously inert unless `public` was checked out,
+because task identifiers and process documents are legitimate on `main`, and `public` is never
+checked out — the branch is written by `commit-tree`. So the hook had never once run. It now
+materializes the staged paths as empty files off `public` and runs the generated rule on them, which
+costs nothing and shares one pattern list with the lint, and keeps the full lint for a commit made
+on `public`. Refusing at commit time is the layer that matters: the export refusal only fires once
+the debris is already tracked, which is where this started.
+
+`.gitignore` grew the same families, so the ordinary path is that these files are never staged and
+the hook never has to speak.
+
+Nine new fixture cases in `tests/publication-guards.sh` cover bytecode, a cache directory, build
+output, a patch leftover, refusal despite the allowlist, `--generated-only` ignoring task
+identifiers and process documents while still catching a generated path, and the hook itself
+refusing staged bytecode on a private branch while allowing ordinary private work. Guards pass 91
+of 91, `shellcheck -S warning` is clean on the three edited files, and `cargo test --test
+evidence_manifest` passes. The hook's first live use was the evidence refresh below, which it let
+through.
+
+Of the published surface this touches only `.gitignore`, so the snapshot standing in staging is not
+stale in any way a reader would see; the next snapshot picks the file up.
+
+## Evidence repository exported and staged, 2026-09-13 (evidence `d0e0d3a`, public `6ae1e88`, tag `v0.1.0-preview2`)
+
+The evidence repository is no longer unexported, so the pair is now complete: a crate snapshot and
+the evidence snapshot its documentation cites, at the same tag.
+
+Refreshed first, by the documented one-way copy from core `a8e52fd`: six new files (the recursive
+runtime transcript, the rule-frontier A/B record with its raw samples and write-up, and the
+negative control with its write-up), none removed, 125 files under `evidence/` and
+`proptest-regressions/`, and `sha256sum -c SHA256SUMS` verifying every line in the copy. That
+landed as an ordinary forward commit on the evidence repository's private `main`, `d0e0d3a`.
+
+Exported with `--new-public-history`, correctly and for the only time: `6ae1e88` is a root commit,
+`git merge-base --is-ancestor main public` fails in both directions, so the pre-scrub refresh
+history is unreachable from what a push would publish. `configure-remotes.sh` then built
+`~/src/ergodis-evidence-public` — one branch named `public`, the tag, pushurl parked at
+`no-push://ergodis-evidence-public`, and the `pre-receive` guard installed — and
+`publish-to-staging.sh` moved the snapshot and tag into it. The clone came from the local `public`
+branch because the GitHub repository does not exist, which is the documented first-export order.
+
+`.publish/validate-release.sh` passes there: public lint on the tracked tree, `sha256sum -c
+SHA256SUMS`, every published data file covered by the manifest, and no process document tracked
+under any name.
+
+### The one inconsistency left in the pair
+
+The crate snapshot's evidence links still point at the non-resolving placeholder base URL, because
+`ERGODIS_EVIDENCE_BASE_URL` was left at its default when `v0.1.0-preview2` was cut, before the
+evidence snapshot existed. Making them resolve means re-exporting the crate with the base URL set
+to the evidence repository's published tree at the matching tag, which means a new tag on both
+repositories — a matched `v0.1.0-preview3` pair — since a tag already exported must not be moved.
+Nothing is pushed, so this costs two local snapshots and nothing else, but it is a tag decision and
+waits for an instruction.
+
