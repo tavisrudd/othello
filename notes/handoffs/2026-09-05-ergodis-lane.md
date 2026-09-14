@@ -111,9 +111,14 @@ anything earlier; the crate's earlier snapshots and preview tags were deleted on
 the first shipped tracked bytecode with local paths, and `EXPORTS.md` records the discard. That class
 is now refused on the path alone by the publication lint's `generated` rule and by `hooks/pre-commit`
 on every branch (core `14768a6`). Nothing has been pushed; both staging pushurls remain parked.
-Open for Tavis: phase-0 publication/product decisions; phases 1–5 remain unallocated. The next
-snapshot should spell out the four brace/glob evidence references that now read as non-resolving
-URLs (listed in the report).
+First phase-1 packaging pass is done (core `a7d033a`, `f8b4114`): every cited evidence file is named
+in full rather than by brace or wildcard shorthand, and the twelve families no document named are
+now documented in `BENCHMARKS.md` — the gross `[[144,12,12]]` searches with their Gurobi controls,
+the rule-frontier A/B with the negative control where the frontier loses, the L2 dominance A/B, the
+rank-envelope probe, the six-application no-regression record, and one structured CNF instance with
+its selection manifest. Nothing was dropped. Those additions are not yet in a snapshot: publishing
+them needs a matched `v0.1.0-preview4` pair. Open for Tavis: phase-0 publication/product decisions;
+remaining phase-1 through phase-5 work is unallocated.
 
 ### C1143 — BB circuit-distance external benchmark (in progress)
 
