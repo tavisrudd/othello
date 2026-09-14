@@ -2374,3 +2374,53 @@ forms that could not resolve. `.publish/validate-release.sh` passes in both stag
 the crate's in full, including `cargo build --release` and `cargo test --all-features` with
 doctests — and the crate's build tree was deleted afterwards. Nothing has been pushed.
 
+## The Gurobi licence blocker is stale, 2026-09-13
+
+The standing release blocker — "the Gurobi family's evidence cannot be regenerated without an
+unrestricted licence" — does not hold on this machine today. Both committed Gurobi families were
+re-run here under the ordinary pip restricted licence and reproduced.
+
+The restricted licence caps a model at 2,000 variables and 2,000 constraints; a 3,000-variable probe
+is refused with "Model too large for size-limited license", which is presumably where the original
+reading came from. But these models are nowhere near that cap: the gross symmetry-broken model is
+420 variables and 86 constraints, and the BB288 one is 792 and 158. The installed solver is Gurobi
+13.0.2, the same version the committed evidence records, under a restricted licence valid to
+2027-11-29.
+
+| run | committed evidence | re-run here |
+|-----|--------------------|-------------|
+| gross `[[144,12,12]]`, symmetry broken, binary-slack parity, 1 thread | minimum 12, all optimal, 2 solves, 26,930 nodes, 3.81 s | minimum 12, all optimal, 2 solves, **26,930 nodes**, 4.37 s |
+| BB288, symmetry broken, binary-slack parity, 8 threads, 60 s per orbit | orbit objectives 20 and 18, both hitting the limit, minimum 18, 606,984 nodes | orbit objectives 20 and 18, both hitting the limit, minimum 18, 524,043 nodes |
+
+The gross node count matches to the node, which is the strong form of agreement for a deterministic
+single-threaded branch and bound. The BB288 node count differs as it must: eight threads against a
+wall-clock limit is nondeterministic, and both runs reach the same objectives and the same
+unresolved status.
+
+Replayed with `python/run_bb_gurobi.py` unmodified, under
+`uv run --with numpy --with bposd --with gurobipy`, against `evidence/native-input.json` with
+`--code gross144` and `evidence/bb288-native-input.json` with `--code bb288`.
+
+### What the real blocker is
+
+`python/run_bb_gurobi.py` still imports `JsonlSink`, `model_global`, `sha256_file` and `solve` from
+`run_c997_gurobi`, the private module. The public generic module `python/run_gurobi.py` exports all
+four under the same names, so the fix is one import line — and the reason it was not taken is that
+the script's SHA-256 is pinned in `runner_sha256` inside the committed evidence, which
+`check_bb_gurobi.py` enforces, so editing the script invalidates the evidence. That was
+unresolvable while the evidence could not be regenerated. It is resolvable now: change the import,
+re-run, pin the new digest. For this test the import was satisfied by a throwaway shim on
+`PYTHONPATH` rather than by editing the pinned script.
+
+The same argument extends to the gross family, whose seven files were produced by the private runner
+under its own schema. `python/run_bb_gurobi.py --code gross144` reproduces the symmetry-broken run
+exactly, so that family can be re-emitted from the public runner under the public schema, which
+would make every Gurobi row in `BENCHMARKS.md` replayable by a reader with a free licence.
+
+### The decision this needs
+
+Regenerating changes shipped evidence: file names and schema strings move from the private
+`ergodis-gross-gurobi-v1`/`v2` to the public `ergodis-bb-gurobi-v1`, the manifest changes, and
+`BENCHMARKS.md` citations follow. That is a shape change to published files, so it waits for an
+instruction rather than being taken as part of a cleanup.
+
