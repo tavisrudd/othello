@@ -58,11 +58,11 @@ ranked-relation certificate (relation plus one byte per tuple, searching checker
 `crates/verify/src/ranked.rs`) and measured representation cost. C1184
 (`../2026-09-13-c1184-direct-checker.md`) rebuilt both checkers and the shared closed-world pass
 on direct-addressed stores (core `crates/verify/src/datalog_store.rs`): trace checking is now at
-the order of evaluation on closure, ranked checking 3–9× evaluation. Queued successor: C1185
-certificate size/cost exploration with generation profiling (exact queue row). Still unallocated:
-a presence bitmap beside the membership array (the named next checker lever), a checker-only
-peak-RSS measurement, bodies with more than two atoms, and a bit-parallel closure kernel for
-dense inputs.
+the order of evaluation on closure, ranked checking 3–9× evaluation. Queued successors (exact
+queue rows): C1186 presence bitmap beside the membership array with a checker-only peak-RSS
+sample (the named next checker lever, first), C1185 certificate size/cost exploration with
+generation profiling. Still unallocated: bodies with more than two atoms, and a bit-parallel
+closure kernel for dense inputs.
 
 ### Rule-contract programme — closed
 

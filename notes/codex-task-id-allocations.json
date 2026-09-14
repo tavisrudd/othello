@@ -5120,8 +5120,17 @@
       "last": 1185,
       "purpose": "C1183 successors: direct-addressed checker for both Datalog certificate forms; certificate size/cost reduction exploration with generation profiling",
       "sequence": 569
+    },
+    {
+      "count": 1,
+      "first": 1186,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1186,
+      "purpose": "presence bitmap beside the checker membership array",
+      "sequence": 570
     }
   ],
-  "next_id": 1186,
+  "next_id": 1187,
   "schema": "codex-task-id-allocations-v1"
 }
