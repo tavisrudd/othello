@@ -690,6 +690,66 @@ certificates and saved-workflow routes. Each route should point back to this com
 vocabulary while giving its own example. Multiple explanations are useful; contradictory
 definitions or unsupported delivery claims are not.
 
+## Commercial and operational frames recovered from earlier discussions
+
+Sources: the August 29 commercialization memo, the September 4 commercial/Evolve
+brainstorm, and selected framing passages in ASG session
+`57c6cadf-4855-4020-b568-eb5e8c2df663`, user-requested messages 19–195. These are historical
+proposals, not current market evidence or independent capability audits. The September 4
+archive explicitly disclaims endorsement; C1091's later semantic corrections and current
+implementation reports govern technical claims.
+
+**Engine identity, deployment mode and product are different choices.** The adaptive
+specialization thesis describes Ergodis. A retained event-driven decision engine is one
+deployment mode. A diagnostic tool, domain audit service or embedded operational application
+is a product built with it. Do not narrow the engine to its first commercial application or
+claim that a demonstration establishes demand for the general platform.
+
+| Supporting frame | What it contributes | Gate / qualification |
+|---|---|---|
+| Retained decision runtime | Compile useful structure, then maintain decisions under admitted events instead of reconstructing everything | Show event/update sufficiency, construction and invalidation cost, latency and total benefit against strong incremental/memoized controls |
+| Diagnostic or audit product | Answers, explanations and evidence can be useful without deploying an autonomous operational controller | Establish the actual supported explanation/coverage contract and validate a user's decision need; not a claim of complete shortage explanations |
+| Proved decomposition with adaptive execution | Laws determine admissible decomposition and merge; Evolve selects scheduling, allocation or realizations within those constraints | Check coverage, overlap, dependencies, merge and bound obligations separately; measure load balance, overhead and makespan |
+| Exact computational oracle for discovery | Reusable queries, witnesses, counterexamples and scoped evidence support agent campaigns or research systems | Show evaluator/reuse benefit and preserve evidence authority; no acquisition-market claim follows |
+
+The commercial outcome may be avoided recovery work, resource expenditure, downtime or
+decision delay rather than optimizer throughput alone. Treat those as application-level
+objectives to model and measure, not consequences of a kernel speedup. Distinguish reduced
+solver latency, improved decision quality and reduced physical operating cost.
+
+**Theorem-guided parallelism is a candidate mechanism, not a novelty label.** The ASG
+discussion suggests learned scheduling over proved shards, associative execution of a
+composition algebra, and learned proposal/evaluation within a checked search. The integration
+question is whether the same preservation information can guide both mathematical reduction
+and efficient machine work. An orbit reduction or connected-support argument does not by
+itself prove independent, disjoint, exhaustive parallel shards. Specify the actual family
+theorem and implementation, including shared dependencies and multiplicities.
+
+SSM/Mamba is an optional historical learner/scan candidate, not the premise. An associative
+interface algebra must be shown to fit a practical representation and kernel before claiming
+scan acceleration; quotient cardinality alone is not a neural hidden-state lower bound.
+Compare simple policies and learners before adopting a sequence model. Learned confidence
+alone cannot justify omitted checks or exclusions: saved verification work needs a sound
+screen, admitted bound or compositional evidence covering the skipped obligation.
+
+The old “runtime should contain no optimizer” proposal is now one optional static endpoint,
+not a system requirement. Retained plans may still search, and adaptive campaigns remain
+first-class. Existence of a finite quotient does not establish compactness, cheap compilation,
+cheap updates or advantage over memoization. Existing causal/decoder negative results belong
+beside the positive runtime examples at their actual recorded scope.
+
+Commercial evidence language must distinguish a replayable feasible/upper witness, an
+auditable exhaustive-computation bundle and a succinct independently checkable exclusion
+certificate. Neither a small log nor source-bound hashes make exhaustive misses cheaply
+checkable. Historical TAM, buyer lists, acquisition scenarios, patent/FTO verdicts, release
+instructions and claims that competitors lack a feature are not adopted here. Any future
+commercial decision needs fresh evidence and appropriate approval; no interviews, disclosure
+or publication are authorized by this framing update.
+
+Editorial disposition: retain these as product/operational explanations under the leading
+admission-and-cost thesis. They sharpen the question “what does useful structure buy?” without
+replacing the unified paper with a market pitch or the static-decision-engine subset.
+
 ## Potential paper programme
 
 These are candidate contributions, not allocated tasks or promised papers. The first paper

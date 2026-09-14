@@ -6,6 +6,28 @@
 
 ## Read scope
 
+September 13 historical commercial/operational supplement:
+
+- `2026-08-29-ergodis-commercialization-analysis-memo.md`: opening/status, section headings,
+  portfolio-common-object passage, evidence-product distinctions and market-validation
+  caveats. No current technical, legal or financial verdict inferred from the historical memo.
+- `2026-09-04-ergodis-commercial-evolve-brainstorm.md`: archive disclaimer; selected compiler/
+  repeated-decision, diagnostic, proposed model/Evolve/runtime, operational-control and
+  contextual-reconstruction passages. Not read end to end; historical claims remain subject
+  to C1091 and current reports, not endorsed by this supplement.
+- ASG `57c6cadf-4855-4020-b568-eb5e8c2df663:19-195`: bounded JSON filtering of user prompts
+  and selected assistant commercial/portfolio/parallelism responses, notably messages
+  146, 152, 154, 158, 160 and 170–176. Most inspected responses were capped excerpts;
+  message 154's continuation was separately selected by exact ordinal. This is a transcript
+  framing review, not revalidation of its literature, benchmarks or legal conclusions.
+
+Command-shaping correction: a single-message `asg +show ...:154 --json` invocation returned
+more messages than expected; per-message substring limits without an ordinal filter produced
+an oversized output. That truncated output was not used as evidence. The replacement filtered
+the requested range by `.ordinal == 154` before extracting its bounded continuation. Future
+ASG JSON reads must enforce the ordinal range in the consumer, not rely on display selection.
+No external source was fetched and no private transcript material was sent to web search.
+
 September 13 supplied Astra/ChatGPT review: read the user-pasted review as editorial input,
 not as primary technical evidence. Adopted thesis/organization, separate validity and
 usefulness scopes, cost-accounting and proposed evaluation/product improvements. No external
