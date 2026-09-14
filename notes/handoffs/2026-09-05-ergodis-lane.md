@@ -75,9 +75,11 @@ as rejected. Scanner performance work is closed for now. Admission (name binding
 `REL04xx`; free names admitted as external base relations, escaped binders rejected) is a
 separate zero-allocation stage with its own cost budget: 40.68 instructions per source byte on
 ASCII, two thirds of parsing, unattributed below the symbol. Parity corpus now records admission
-outcomes (159 cases, canonical `5a350e1f…`). **Decision for Tavis:** two toolchains are in play
-(ambient `cargo` rustc 1.93.1, used by `retain-bin.sh`; `nix shell nixpkgs#rustc` 1.95.0, used by
-the earlier reports); pin one for the lane before the next A/B.
+outcomes (159 cases, canonical `5a350e1f…`). Toolchain is now pinned through the core flake:
+`retain-bin.sh` re-execs under `nix develop ~/src/ergodis` (rustc 1.95.0) when not in a nix
+shell, and gates for a report run under the same shell. The 1.93.1 control `ergodis-tools-cfe4893`
+and candidates `35f4484`/`49493a3` are toolchain-stale; `ergodis-tools-32a18c6` (1.95.0) is the
+control for the next A/B.
 
 **Next:** decompose the admission stage by class (synthetic sources: definitions, references,
 binders, name bytes) before touching its code; then module-scoped visibility, module parameters
