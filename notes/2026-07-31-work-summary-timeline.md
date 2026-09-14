@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-31-work-summary.md`](2026-07-31-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-09-06**, with quiet stretches Jun 28–30, Jul 27, and Aug 16–17.
+Activity spans **2026-06-14 → 2026-09-13**, with quiet stretches Jun 28–30, Jul 27, and Aug 16–17.
 This is the *chronological* view; the scope report is the *state* view.
 
 ## Content split between the two documents — binding rule
@@ -1480,6 +1480,61 @@ campaign's sibling task had just rediscovered.
   independently checked external certificate into a kernel-checked least-fixedness theorem for the
   caller's formal program. C1161 began sparse semi-naive runtime work; its performance claim remains
   explicitly unmade.
+
+## Week 18 — Sep 13 · Ergodis reaches demand-driven recursion, and its release boundary closes
+
+- **Proof and carrier closure.** C1173 completed the support-witness certificate: leastness is
+  checked from local fixedness plus a well-founded support, without replaying all rounds. The native
+  selectors and Lean oracle agree, and the resource-boundary controls cover oversized, unsafe-path
+  and hanging producers. C1174 generalized convergence to ordered inflationary carriers and added
+  Boolean existence as an exact lift of the min-plus kernel; the Boolean carrier, support checker and
+  certificate formats run through the producer's native path.
+
+- **Contract and kernel follow-ups.** C1176 settled the meaning of the round bound, checked declared
+  symmetry invariance, stated the algebra laws used by semi-naive verification, streamed incremental
+  source identities, and added the remaining property-test families. Its dense-frontier control lost
+  to a full scan, leaving evaluator selection as an open policy rather than a claimed speedup. C1177
+  made sparse-frame selection constructive and proved its serial/parallel parity; sparse large-
+  detector measurements won by 6.1x--41.2x, while every count-axis parallel shape lost and remains
+  serial under the measured policy.
+
+- **From the grounding wall to a real recursive comparison.** C1179 first measured the old rules
+  path's `N≈24` grounding ceiling. C1182 replaced full product materialization with a
+  demand-driven semi-naive evaluator for positive two-atom Boolean rules, retaining independent
+  derivation certificates. It agreed with the grounded evaluator on the fixtures, the C1179 family
+  and 3,000 generated programs, and with both Soufflé modes on 52 deterministic cases. The matched
+  whole-process comparison reached 0.11x compiled Soufflé at sparse closure (`N=4096`) and 0.20x at
+  dense closure (`N=1024`), but used 427 versus 282 MB and 84 versus 31 MB respectively; the claim
+  is limited to the admitted rule class and workload family.
+
+- **Certificate shape became an explicit engineering result.** C1183 added the ranked-relation
+  certificate, reducing the structural payload to the relation plus one byte per tuple in the
+  packed baseline, and identified hash maps as the checker's dominant cost. C1184 replaced them
+  with direct-addressed relation stores, cutting trace-check time by 1.6x--6.2x and ranked-check
+  time by 2.8x--6.5x in the matched A/B. C1185 measured generation cost and candidate encodings:
+  rank-run round blocks cost 0.250--1.064 bytes per derived tuple versus 5 bytes for the packed
+  baseline, while generation itself is a memory-bandwidth-scale cold pass. The binary format is a
+  justified successor, not yet a core wire-format change. C1186 added a one-bit membership index,
+  improving large sparse trace checks by 1.3x--1.7x and ranked checks by 1.15x--1.3x; the remaining
+  checker cost is bucket enumeration and unification.
+
+- **Release hygiene and public framing.** C1175 reran the native and WASM certificate gates (129
+  min-plus programs plus a Boolean closure), changed the source manifest from 209 to 602 rows and
+  verified a 472-row filtered export, with 82 publication-guard fixtures passing. C1149's preview
+  work removed the stale Gurobi-licence blocker from the release assessment and carried the matched
+  benchmark documentation forward. C1187 then rewrote the public documentation around supplied
+  functionality, separated Python API from reference tooling, and added public loss disclosures;
+  no export or push occurred. C1178 fixed the first-paper recommendation as the spectrum from
+  evolving structure to specialized exact computation, with Evolve binding and static
+  specialization optional at deployment time. C1170 also landed deterministic frontend cohorts,
+  bounded declaration recovery and an ASCII scanner A/B; the scanner is no longer the dominant
+  ASCII parse cost, while semantic admission and expression-level recovery remain open.
+
+- **Queue boundary.** C1180 remains a capability-first categorical investigation and C1181 remains
+  gated on its decision and the architecture choice. The recursive backend's measured wins and
+  certificate results are now closed records; demand-path ABI selectors, the binary certificate
+  format, n-ary rules, incremental demand updates and evaluator-selection policy remain separate
+  successors.
 
 ---
 

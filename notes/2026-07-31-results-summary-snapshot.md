@@ -1,6 +1,6 @@
 # Portfolio results summary snapshot
 
-**Date:** 2026-09-12
+**Date:** 2026-09-13
 
 A self-contained summary of the major results of an ongoing programme in
 finite geometry, coding theory, and combinatorial game theory. It is written
@@ -46,6 +46,29 @@ least-fixedness proof for the caller's supplied formal program; the retained
 four-node min-plus example reaches distances \([0,3,2,6]\) after four rounds.
 This certifies finite ground replay, not the Rust compiler or arbitrary external
 programs.
+
+**Update, 2026-09-13.** Ergodis's recursive rules path now has a demand-driven,
+semi-naive evaluator for its admitted positive two-atom Boolean programs, so it
+no longer materializes the full product space before evaluation. It agrees exactly
+with the grounded evaluator on the retained fixtures and 3,000 generated programs,
+and with both compiled and interpreted Soufflé on 52 deterministic closure and
+same-generation cases. In the whole-process comparison it reaches 0.11 times the
+compiled Soufflé wall time on sparse closure at `N=4096`, and 0.20 times on dense
+closure at `N=1024`; the corresponding Ergodis peaks are 427 MB versus 282 MB and
+84 MB versus 31 MB, so the result is a bounded workload comparison rather than a
+general Datalog-engine claim.
+
+The certificate boundary now includes round-independent support witnesses and
+ranked relation certificates, a carrier-generic convergence theorem, and an exact
+Boolean-to-min-plus lift. A direct-addressed checker plus a membership bitmap
+reduces checking time by 1.3--1.7x for the large sparse trace cases and 1.15--1.3x
+for ranked certificates; dense relations see no material gain. Certificate-format
+measurements identify rank-run round blocks as the useful next binary encoding:
+0.250--1.064 bytes per derived tuple against 5 bytes for the packed baseline and
+11.50 bytes for the current JSON at the largest measured row. The encoding is not
+yet part of the core wire format. Native and WASM conformance, manifest generation,
+and the public documentation/export guards are green; no public release has been
+made.
 
 **How to read the length.** Sections are not sized in proportion to the
 mathematics they contain. Each one carries its scope boundaries, its priority
@@ -2848,6 +2871,25 @@ to the public destination — is tested and passes. It is licensed under the GNU
 Affero General Public License, with commercial licensing on request; the
 observational compiler, and therefore every benchmark claim above, is in the
 freely available part. **Nothing has been published, pushed, or released.**
+
+**Recursive rules and checked certificates.** The recursive backend now has a
+demand-driven semi-naive path for positive two-atom Boolean rules. Its append-only
+relation stores, membership bitmaps and deferred indexes avoid storing every
+grounded product; each derived tuple retains enough provenance for an independent
+derivation check, while the ranked form stores only the tuple and its derivation
+round. The supported boundary is deliberately finite: no negation, aggregation,
+stratification, n-ary bodies or arbitrary source language is implied. The 52-case
+Soufflé comparison and the generated-program agreement above are exact tuple-set
+checks, with the reported process costs including input and output work.
+
+The support-witness theorem makes leastness a local fixed-point plus well-founded
+support obligation, so checking need not replay all rounds. The convergence proof
+is now stated for ordered inflationary carriers, with min-plus as one instance and
+Boolean existence (via an exact lift) as another. A direct-addressed checker and a
+one-bit presence index move sparse closed-world checking closer to evaluation;
+the remaining cost is index-bucket enumeration and unification. The measured
+round-block encoding is a private format experiment, not a claim about the current
+wire protocol.
 
 ### The compiler as a dynamic decision engine, and a quantum decoder
 

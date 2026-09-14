@@ -18,7 +18,7 @@ games, backed by:
   theory's quotient theorems into a general tool, has since been extracted into its own repository
   behind a tested publication guard, and is being prepared for release under a dual licence.
 
-### Current additions through 2026-09-12
+### Current additions through 2026-09-13
 
 The arcs programme now has a 37-page, warning-free and reproducible manuscript,
 *Secant defects with prescribed holes: arcs, caps, and matching designs*. Its
@@ -54,6 +54,24 @@ external native certificate into a kernel-checked least-fixedness proof for the
 caller's formal program; the retained four-node min-plus Datalog example reaches
 `[0,3,2,6]` in four rounds. This establishes finite ground replay, not a proof
 of the Rust compiler or arbitrary external programs.
+
+The recursive rules path has now crossed its first scale boundary. A demand-driven
+semi-naive evaluator for positive two-atom Boolean rules avoids materializing the
+full grounded product space, agrees with the grounded evaluator on its fixtures and
+3,000 generated programs, and agrees with both compiled and interpreted Soufflé on
+52 deterministic closure and same-generation cases. Its whole-process wall time is
+0.11 of compiled Soufflé on sparse closure at `N=4096` and 0.20 on dense closure
+at `N=1024`, with higher Ergodis peak memory (427 versus 282 MB and 84 versus
+31 MB). The claim is limited to this admitted rule class and workload family.
+
+The proof and checking boundary widened at the same time: support-witness and
+ranked-relation certificates make leastness checkable without replaying every round;
+ordered-inflationary convergence is carrier-generic; and Boolean existence is an
+exact lift of the min-plus kernel. Direct-addressed checker indexes plus a presence
+bitmap improve large sparse checking, while measurements identify rank-run round
+blocks as the next useful binary certificate encoding. That encoding is not yet in
+the core wire protocol. Native/WASM conformance, tree-derived manifests, and the
+public documentation/export guards are green; no public release has occurred.
 
 The open research center of gravity is the **projective cap ("Nofil") program** and its **odd
 projective-plane kernel**, with the Lean layer certifying results as they land. But the cap machinery
@@ -2717,6 +2735,16 @@ result is not the speed: on rosters with several independent shortages the solve
 and deleting the tasks it names leaves the roster still infeasible, every time, while the decomposed
 certificates restore feasibility every time. A core answers "is there a conflict"; a planner needs
 "what are all the shortages, and who is short".
+
+The extracted core also now carries a finite recursive-rule backend. Its demand
+evaluator uses append-only relation stores, membership bitmaps and deferred indexes;
+the checker has an independent derivation path and a ranked relation path, with the
+support proof making the round count irrelevant to leastness. The backend admits a
+bounded positive Boolean rule language only: negation, aggregation, stratification,
+n-ary bodies and arbitrary source programs remain outside scope. The measured
+certificate experiment found rank-run round blocks at 0.250--1.064 bytes per
+derived tuple, versus 5 bytes for the packed baseline; implementing that format is
+a successor, not a current wire-format claim.
 
 **Sum-free solvers:** Rust (`sumfree.rs` cyclic Grundy; `capset2/5.rs` u128/256-bit AGL-canonical),
 Go (`sumfree.go` full-`Aut(G)` negamax; `sumfree_par.go` sharded-parallel + pairing verifier;
