@@ -9,7 +9,7 @@ correction trails live in dated reports and the append-only
 **Date**: 2026-09-13
 **Mode**: intent-based.
 **Status**: ACTIVE. Immediate engineering frontier is C1170 (owned Rel-rich frontend); the
-rule-contract programme C1172–C1177 and the Datalog evaluation tasks C1179/C1182/C1183 are closed. C1143, C1130, C1016,
+rule-contract programme C1172–C1177 and the Datalog evaluation tasks C1179/C1182–C1184 are closed. C1143, C1130, C1016,
 C1017, C1061 and C985 remain in progress. C1062 and C1070 await Tavis's close call.
 
 **Discovery companion**: [ergodis discovery track](../ergodis-discovery-track.md).
@@ -55,10 +55,14 @@ without grounding and the derivation-certificate checker (core `crates/verify`),
 single-core comparison with Soufflé 2.5 through the private harness and
 `analysis/datalog-comparison/`. C1183 (`../2026-09-13-c1183-ranked-certificate.md`) added the
 ranked-relation certificate (relation plus one byte per tuple, searching checker, core
-`crates/verify/src/ranked.rs`) and measured representation cost. Queued successors: C1184
-direct-addressed checker for both certificate forms, C1185 certificate size/cost exploration
-with generation profiling (exact queue rows). Still unallocated: bodies with more than two
-atoms, and a bit-parallel closure kernel for dense inputs.
+`crates/verify/src/ranked.rs`) and measured representation cost. C1184
+(`../2026-09-13-c1184-direct-checker.md`) rebuilt both checkers and the shared closed-world pass
+on direct-addressed stores (core `crates/verify/src/datalog_store.rs`): trace checking is now at
+the order of evaluation on closure, ranked checking 3–9× evaluation. Queued successor: C1185
+certificate size/cost exploration with generation profiling (exact queue row). Still unallocated:
+a presence bitmap beside the membership array (the named next checker lever), a checker-only
+peak-RSS measurement, bodies with more than two atoms, and a bit-parallel closure kernel for
+dense inputs.
 
 ### Rule-contract programme — closed
 
