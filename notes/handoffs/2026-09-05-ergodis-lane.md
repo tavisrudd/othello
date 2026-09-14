@@ -103,11 +103,16 @@ regenerated tracked `__pycache__` files.
 ### C1149 — public-release readiness
 
 Gap assessment and six-phase plan: `../2026-09-11-c1149-ergodis-public-release-review.md`.
-Evidence remediation is complete. Staging holds the second preview snapshot, `v0.1.0-preview2`
-(core `59b2741`, public `b4c1db7`), validated standalone; nothing has been pushed. The first
-preview shipped twelve tracked bytecode files carrying local paths — now untracked — so whether to
-re-root the public history at this snapshot is an open decision for Tavis, recorded in the report.
-Tavis owns phase-0 publication/product decisions; phases 1–5 remain unallocated.
+Evidence remediation is complete. Both repositories now hold a validated snapshot at
+`v0.1.0-preview2`: the crate (core `59b2741`, public `b4c1db7`) and the evidence repository
+(evidence `d0e0d3a`, public root `6ae1e88`, staging clone `~/src/ergodis-evidence-public` created).
+Nothing has been pushed. Tracked bytecode carrying local paths, which the first preview shipped, is
+untracked and now refused on the path alone by the publication lint's `generated` rule and by
+`hooks/pre-commit` on every branch (core `14768a6`). Two open decisions for Tavis, both local and
+recorded in the report: a matched `v0.1.0-preview3` pair so the crate's evidence links resolve to
+the evidence tag instead of the placeholder base URL, and whether to re-root the crate's public
+history so the first preview's bytecode is unreachable. Tavis owns phase-0 publication/product
+decisions; phases 1–5 remain unallocated.
 
 ### C1143 — BB circuit-distance external benchmark (in progress)
 
