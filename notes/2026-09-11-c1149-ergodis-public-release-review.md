@@ -2235,6 +2235,37 @@ public lint, benchmark replay-target resolution, `cargo build --release` and `ca
 `public` plus the preview tags in both repositories, no branch named `main`, and both pushurls remain
 parked, so nothing has been pushed to GitHub.
 
+## The crate's public history re-rooted, 2026-09-13 (core `86b07c7`/`f4c3bab`, public `5dd74c0`, tag `v0.1.0-preview3`)
+
+Tavis's instruction: re-root so the first preview's bytecode is unreachable. Done, and the published
+branch is now a single root commit whose tree is byte-identical to the snapshot it replaced.
+
+A tag keeps a commit reachable, so the leak could not be removed by deleting the branch alone. What
+was deleted: `refs/heads/public` (was `27e2150`) and the tags `v0.1.0-preview1` (`3291659`),
+`v0.1.0-preview2` (`b4c1db7`) and `v0.1.0-preview3` (`27e2150`), plus the whole `~/src/ergodis-public`
+staging clone. Confirmed first, as in the 2026-09-12 discard: the private repository has no GitHub
+remote, and the staging clone had no remote-tracking ref and no reflog entry for `origin`, so nothing
+had ever left this machine. `EXPORTS.md` keeps the three discarded rows and a note saying what
+happened to them and why; it is the private record of what was cut, and losing that would be worse
+than the stale hashes.
+
+The new snapshot is `5dd74c0` from private `86b07c7`, exported with `--new-public-history`: one
+commit, no parent, 548 files, no bytecode path anywhere, and `git diff 27e2150 public` empty, so the
+re-root changed history and nothing else. The tag name `v0.1.0-preview3` was reused deliberately,
+because the evidence repository's `v0.1.0-preview3` is the tree this crate's documentation links to;
+reusing it keeps the pair matched, and it is safe precisely because nothing was published. Its
+release notes were rewritten for a reader who now sees a single commit rather than a third increment.
+
+Staging was rebuilt by `configure-remotes.sh` from the new branch: one branch named `public`, the tag,
+no `main`, no remote-tracking refs, a 2.0 MB object store, `pre-receive` installed, pushurl parked at
+`no-push://ergodis-public`. `.publish/validate-release.sh` passes there in full again (public lint,
+replay targets, `cargo build --release`, `cargo test --all-features` with doctests, 2m45s); the build
+tree was deleted. The 91 publication guards still pass.
+
+What this does not do: the discarded objects remain in the private repository's object store until
+they are garbage collected, which is invisible to anything published and matters only if someone
+pushes with `--mirror`. The published history is clean from its root, which was the point.
+
 ### License and copyright, checked on Tavis's question
 
 `LICENSE` is the verbatim AGPL-3.0 text and is correct unmodified: its own notice belongs to the

@@ -104,15 +104,16 @@ regenerated tracked `__pycache__` files.
 
 Gap assessment and six-phase plan: `../2026-09-11-c1149-ergodis-public-release-review.md`.
 Evidence remediation is complete. Both repositories hold a matched, validated snapshot at
-`v0.1.0-preview3`: the crate (core `14768a6`, public `27e2150`) and the evidence repository
+`v0.1.0-preview3`: the crate (core `86b07c7`, public root `5dd74c0`) and the evidence repository
 (evidence `581cc79`, public `036f593`), with the crate's benchmark prose linking into the evidence
-snapshot at that tag instead of the old placeholder base URL. Nothing has been pushed; both staging
-pushurls remain parked. Tracked bytecode carrying local paths, which the first preview shipped, is
-untracked and now refused on the path alone by the publication lint's `generated` rule and by
-`hooks/pre-commit` on every branch (core `14768a6`). Open for Tavis: whether to re-root the crate's
-public history so the first preview's bytecode is unreachable, and phase-0 publication/product
-decisions; phases 1–5 remain unallocated. Next snapshot should spell out the four brace/glob
-evidence references that now read as non-resolving URLs (listed in the report).
+snapshot at that tag. Each published branch is a single root commit, so neither history carries
+anything earlier; the crate's earlier snapshots and preview tags were deleted on 2026-09-13 because
+the first shipped tracked bytecode with local paths, and `EXPORTS.md` records the discard. That class
+is now refused on the path alone by the publication lint's `generated` rule and by `hooks/pre-commit`
+on every branch (core `14768a6`). Nothing has been pushed; both staging pushurls remain parked.
+Open for Tavis: phase-0 publication/product decisions; phases 1–5 remain unallocated. The next
+snapshot should spell out the four brace/glob evidence references that now read as non-resolving
+URLs (listed in the report).
 
 ### C1143 — BB circuit-distance external benchmark (in progress)
 
