@@ -159,3 +159,18 @@ are `madvise`-only on this host, so the pools do not get them.
 product-shaped design choice; `madvise(MADV_HUGEPAGE)` on the pools is a cheap A/B that could halve
 cold start. Neither is visible to the lane's instruction-count metric, which counts user events only.
 **Evidence level**: one measured stage on one host; remedies unmeasured. No C-ID allocated.
+
+## 2026-09-14 — the admission `scopes` pool is dead: reserved, touched, cleared, never written (C1170)
+
+**Provenance**: C1170 traversal-cursor task, `notes/2026-09-14-c1170-traversal-cursor.md`, private
+`5578357` … `11fc4d0`. **Was I looking for this?**: no — found while moving the traversal stack out
+of the workspace.
+**Observation**: `Workspace::scopes` is reserved to `Limits::depth`, filled by `touch`, counted in
+`retained_bytes` and cleared three times per admission, and no code pushes to it; the scope mark
+lives in `Visit::mark`. Removing it is one `try_reserve_exact` fewer in `prepare`, 2 KiB of
+reservation under the bench limits and three clears; it changes `retained_bytes`, which the
+allocation regression compares before and after rather than to a constant.
+**Why it may matter**: small, but it is a pool-shape change with its own `prepare` A/B, so it is
+not folded into a kernel candidate's measurement.
+**Evidence level**: read from the source; unmeasured. No C-ID allocated; listed as the first
+remaining step in the task report.

@@ -97,14 +97,21 @@ gate on the `BUILTINS` walk (0.8676), one node-pool scan with definition ids in 
 (0.9350); composed ASCII admission **0.7727** against `ergodis-tools-185015e`, non-interacting,
 parity hash unchanged, no gate failed. `prepare` is 12.7 % dearer for the new pool. Lesson: the
 fitted model finds candidates, the disassembly prices them, and a signature change can move
-inlining. The control for the next A/B is `ergodis-tools-49bbb9a` (rustc 1.95.0).
+inlining. Retained as `ergodis-tools-49bbb9a` (rustc 1.95.0).
 
-**Next:** the traversal stack cursor in `admit::run` (fitted 24.7 % of the new stage; check the
-39.95 per visit against the disassembly first; the visits stack cannot be hoisted across
-`reference`) and hoisting the surviving pool scan's reloads (1.8 %), each an A/B against
-`ergodis-tools-49bbb9a`; update the census to the new kernel before any re-decomposition. Then
-module-scoped visibility, module parameters and member tables in admission; then the remaining
-syntax gaps by manifest family (caret entity references, interpolation, Unicode boundary
+Traversal cursor and scan hoist: `../2026-09-14-c1170-traversal-cursor.md` (private `5578357` …
+`11fc4d0`): the visits and node pools leave the workspace for the scan and body checks and the
+traversal carries its stack length by value (0.9614), the declaring scan iterates the local slice
+(0.9619); composed ASCII admission **0.9247** against `ergodis-tools-49bbb9a`, non-interacting,
+parity hash unchanged, no gate failed, `prepare` unchanged. Both Fermis were priced from the
+compiled loop and landed inside that reading. The stage stands at 0.7145 of `185015e`. The
+control for the next A/B is `ergodis-tools-db47ee1` (rustc 1.95.0).
+
+**Next:** remove the dead `scopes` pool (one commit, its own `prepare` A/B); update the census to
+the current kernel and re-run the decomposition at `db47ee1` before pricing anything further; then
+`declare` (annotate first) and the pop's field loads, each an A/B against `ergodis-tools-db47ee1`.
+Then module-scoped visibility, module parameters and member tables in admission; then the
+remaining syntax gaps by manifest family (caret entity references, interpolation, Unicode boundary
 conformance). Ergodis retains lowering, rules, joins and
 execution; no external evaluator or backend is adopted. Tree-sitter and executable reference
 semantics remain deferred.
