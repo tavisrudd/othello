@@ -1,7 +1,7 @@
 # C1187 — Public documentation cleanup
 
 **Lane:** `ergodis`
-**Status:** in progress.
+**Status:** complete. Core commit `5f537e6` (28 files); no export or push.
 
 ## Scope and acceptance
 
@@ -48,7 +48,9 @@ has been identified.
 - Split Python use from reference tooling; changed the flake development tools
   to Python 3.14.7 and added `nix run .#python`, which builds the RPC binary and
   configures its location and the Python package for scripts or an interactive
-  session. The lock and Rust pin are unchanged.
+  session. The lock and Rust pin are unchanged. Added `uv` to the development
+  environment and replaced remaining ad hoc Nix shell commands in the public
+  benchmark and reference guides with pinned flake development commands.
 
 ## Validation record
 
@@ -66,3 +68,36 @@ required target directory. Final validation results and commit follow below.
 Command hygiene: an initial combined instruction read exceeded the outer tool
 output budget. It was replaced by separate bounded reads; no task action relied
 on a truncated instruction.
+
+## Final validation and ownership
+
+Passed `nix flake check`, `CARGO_INCREMENTAL=0 nix run .#check` (fixture and
+manifest agreement, fmt, all-target/all-feature Clippy and all-feature tests),
+`CARGO_INCREMENTAL=0 nix run .#wasm-test` (including eight exact Python parity
+cases), and the Python first-query smoke through the new entry point. The full
+two-query Python README example also passed. ARM64 Linux shell output evaluated;
+execution was on x86-64 Linux. No benchmark rerun or numerical claim was needed.
+
+Final gate log:
+`/tmp/claude-run-quiet/20260913-200920-nix-develop-c-python3-generate_evidence.py-write-nix-flake-check-CARGO_INCREMENTA/`.
+The full Python README example log is
+`/tmp/claude-run-quiet/20260913-200647-CARGO_INCREMENTAL0-nix-run-.python-c-from-ergodis-import-Client-Polynomial-Charac/`.
+Final documentation audit covered 37 Markdown/HTML/SVG files and 128 local
+links, with no missing targets. Public-document lint and staged pre-commit lint
+passed; `git diff --check` passed.
+
+The second native run passed compilation/Clippy but stopped at the manifest
+test because another writer changed `scripts/public-lint.sh` and
+`tests/publication-guards.sh`. The final gate passed against the refreshed
+working-tree manifest. Before committing, restored only those two manifest
+entries to their committed content identities, leaving both foreign edits
+untouched. Verified the exact task-only commit manifest against all 614 Git
+blobs before committing, then independently verified every entry against HEAD
+after commit. Consequently the task commit is self-consistent; the dirty
+publication-tool work needs its own hash refresh when its owner commits it.
+The other writer's concurrent benchmark-curation commit was preserved too.
+
+No algorithm, Rust source or mathematical certificate was changed by C1187.
+No incidental discovery warrants a discovery-track entry. All task-owned core
+paths are committed and clean. Public snapshot refresh remains with the
+release-readiness work and requires its own authorization and gates.

@@ -211,7 +211,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 - **C955 `[complete-ports]` [QUEUED AFTER C953; COEFFICIENT-PRESENTATION SPECTRUM]** — for a fixed nested code pair and target dimension, characterize the attainable minimum distances of represented coefficient presentations and optimize the additive confinement term without changing the relative-weight hierarchy → `notes/2026-08-24-c955-coefficient-presentation-spectrum.md`.
 ### `ergodis`
 
-- **C1187 `[ergodis]` [IN PROGRESS]** — Public documentation audience, release-scope and style cleanup; move public contributor guidance to docs/dev, reconcile current capabilities and Python setup, preserve semantic limits → `notes/2026-09-13-c1187-public-documentation.md`.
 - **C1148 `[ergodis]` [QUEUED]** — inventory all certificate families and implement claim-preserving inspection, independent verification and external format adapters (VIPR, VeriPB, SAT proof formats and other justified standards); distinguish conversion from explicit reproof; preserve native/WASM semantics and hot-path performance → private `ergodis-private/docs/adr/0003-certificate-interoperability.md`.
 - **C1149 `[ergodis]` [IN PROGRESS]** — public-release readiness review of Ergodis as an AGPL library/CLI on GitHub with docs and demos: gap assessment and remediation plan → `notes/2026-09-11-c1149-ergodis-public-release-review.md`
 
