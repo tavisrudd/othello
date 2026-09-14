@@ -105,6 +105,10 @@ regenerated tracked `__pycache__` files.
 
 ### C1149 — public-release readiness
 
+C1187 is implementing the public-audience documentation cleanup, with public
+contributor guidance in `docs/dev/`; contract and status:
+`../2026-09-13-c1187-public-documentation.md`. No export or push is authorized.
+
 Gap assessment and six-phase plan: `../2026-09-11-c1149-ergodis-public-release-review.md`.
 Evidence remediation is complete. Both repositories hold a matched, validated snapshot at
 `v0.1.0-preview3`: the crate (core `86b07c7`, public root `5dd74c0`) and the evidence repository
