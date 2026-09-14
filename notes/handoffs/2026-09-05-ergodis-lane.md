@@ -46,9 +46,18 @@ measured wash against a clean-checkout control (the profiler share was call-entr
 as the explicit form. The native/WASM parity gate carries 151 cases; it is a finite parity
 gate, not a grammar oracle or complete syntax/admission claim. Instruction counts are the
 decision metric on this shared box; cycle ratios are reported only with intervals.
+Cold start and scanner attribution: `../2026-09-14-c1170-prepare-touch-scan-attribution.md`
+(private `c526b3f` … `9f1e57e`): the `prepare-touch` and scan-only stages exist; a fresh
+workspace costs 1,536 minor faults / 1.13 ms under bench limits (kernel time, invisible to the
+user-only instruction metric); `lexer::scan` is attributed by two agreeing methods and
+punctuation dispatch, not identifiers, is about half the scanner. Two measurement caveats now
+bind: the six-event `perf stat` set multiplexes and must not be used for small operations, and
+the shared toolchain moved to rustc 1.95.0, so every retained control predating 2026-09-14 is
+toolchain-mismatched.
 
-**Next:** a cold-start `prepare-touch` stage; attribute `lexer::scan` (now 52 % of the ASCII
-parse stage) below the symbol before spending another candidate on it; then the remaining
+**Next:** retain a toolchain-matched control, then the punctuation fast path in the
+byte-dispatch scanner (Fermi 10–18 % of the ASCII parse stage) folding in the two redundant
+fall-through re-tests; then the remaining
 syntax gaps by manifest family (caret entity references, interpolation, Unicode boundary
 conformance) and first semantic admission checks. Ergodis retains lowering, rules, joins and
 execution; no external evaluator or backend is adopted. Tree-sitter and executable reference

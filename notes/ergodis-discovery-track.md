@@ -145,3 +145,17 @@ caller at `evaluate_into`.
 **Why it may matter**: arity monomorphization or a bounded fixed-width element loop would remove
 the call from the hot loop — a lever on evaluation itself, larger than any remaining checker lever.
 **Evidence level**: one profile, one row; unmeasured remedy. No C-ID allocated.
+
+## 2026-09-14 — cold-start workspace faults are kernel time invisible to the instruction metric; huge pages and source-sized reservation untested (C1170)
+
+**Provenance**: C1170 `prepare-touch` stage, `notes/2026-09-14-c1170-prepare-touch-scan-attribution.md`,
+private `c526b3f` … `9f1e57e`. **Was I looking for this?**: partly — the stage was the deliverable;
+the size of the reservation relative to use, and the huge-page lever, were not.
+**Observation**: a fresh workspace under `Limits::default` reserves 21 MB and would fault 5,123
+pages at about 734 ns each (≈3.8 ms) before scanning a byte, while a 43 KB source fills 157 pages.
+Per-fault cost is roughly half zeroing and half kernel entry/page-table work; transparent huge pages
+are `madvise`-only on this host, so the pools do not get them.
+**Why it may matter**: sizing reservations from the source length (or lazy touching) is a
+product-shaped design choice; `madvise(MADV_HUGEPAGE)` on the pools is a cheap A/B that could halve
+cold start. Neither is visible to the lane's instruction-count metric, which counts user events only.
+**Evidence level**: one measured stage on one host; remedies unmeasured. No C-ID allocated.
