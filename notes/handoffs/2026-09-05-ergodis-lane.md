@@ -18,12 +18,11 @@ C1017, C1061 and C985 remain in progress. C1062 and C1070 await Tavis's close ca
 portability work, read `notes/ergodis-architecture-context.md` after this handoff. It is private,
 not-to-ship contributor guidance. Narrow UI/admin work does not require the full context.
 
-**Performance context (required)**: before any hot-path edit, benchmark, A/B or profiling
-task in this lane, read `~/src/ergodis-dev/PERFORMANCE.md` and
-`~/src/ergodis-dev/performance-playbook.md` in full, and restate the binding items in every
-sub-agent prompt: Fermi before implementing, interleaved A/B on the committed harness,
-run-constant toggles resolved outside the loop (const generics), Tiger-style hot-struct
-discipline, document negatives and revert by commit, tmpfs hygiene.
+**Performance context (required)**: `~/src/ergodis-dev/PERFORMANCE.md` is the always-on rules
+layer for any Ergodis Rust edit. Before a hot-path edit, benchmark, A/B, profiling or
+measurement-stage task, also read `~/src/ergodis-dev/performance-playbook.md` in full (contract
+detail plus the A/B, event-set, profiling, cold-start and reporting method on this host), and
+restate its binding items in every sub-agent prompt.
 
 ## Identity and boundaries
 
