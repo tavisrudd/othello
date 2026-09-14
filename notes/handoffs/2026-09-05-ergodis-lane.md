@@ -91,11 +91,19 @@ driver-only commit moved the parse stage 1.7 % through ThinLTO, so stage differe
 carry the measurement. The control for the next A/B is `ergodis-tools-185015e` (rustc 1.95.0; the
 commits after it touch only scripts, receipts and README).
 
-**Next:** implement the three non-interacting priced candidates from the decomposition report,
-each as its own A/B against `ergodis-tools-185015e`, re-measuring after each lands: hash each
-name once (5.6 %), first-byte/length gate on the `BUILTINS` walk (9.1 %), drop the second node-pool
-scan (5.6 %); then the traversal stack cursor (2.4–4.8 %). Then module-scoped visibility, module
-parameters and member tables in admission; then the remaining
+Admission optimizations: `../2026-09-14-c1170-admission-optimizations.md` (private `7817627` …
+`6d27015`): hash each name once (0.9525, `insert` became inlinable), compile-time first-byte/length
+gate on the `BUILTINS` walk (0.8676), one node-pool scan with definition ids in a bounded pool
+(0.9350); composed ASCII admission **0.7727** against `ergodis-tools-185015e`, non-interacting,
+parity hash unchanged, no gate failed. `prepare` is 12.7 % dearer for the new pool. Lesson: the
+fitted model finds candidates, the disassembly prices them, and a signature change can move
+inlining. The control for the next A/B is `ergodis-tools-49bbb9a` (rustc 1.95.0).
+
+**Next:** the traversal stack cursor in `admit::run` (fitted 24.7 % of the new stage; check the
+39.95 per visit against the disassembly first; the visits stack cannot be hoisted across
+`reference`) and hoisting the surviving pool scan's reloads (1.8 %), each an A/B against
+`ergodis-tools-49bbb9a`; update the census to the new kernel before any re-decomposition. Then
+module-scoped visibility, module parameters and member tables in admission; then the remaining
 syntax gaps by manifest family (caret entity references, interpolation, Unicode boundary
 conformance). Ergodis retains lowering, rules, joins and
 execution; no external evaluator or backend is adopted. Tree-sitter and executable reference
