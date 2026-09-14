@@ -9,7 +9,7 @@ correction trails live in dated reports and the append-only
 **Date**: 2026-09-13
 **Mode**: intent-based.
 **Status**: ACTIVE. Immediate engineering frontier is C1170 (owned Rel-rich frontend); the
-rule-contract programme C1172–C1177 and the Datalog evaluation tasks C1179/C1182–C1184 are closed. C1143, C1130, C1016,
+rule-contract programme C1172–C1177 and the Datalog evaluation tasks C1179/C1182–C1184 and C1186 are closed. C1143, C1130, C1016,
 C1017, C1061 and C985 remain in progress. C1062 and C1070 await Tavis's close call.
 
 **Discovery companion**: [ergodis discovery track](../ergodis-discovery-track.md).
@@ -58,11 +58,14 @@ ranked-relation certificate (relation plus one byte per tuple, searching checker
 `crates/verify/src/ranked.rs`) and measured representation cost. C1184
 (`../2026-09-13-c1184-direct-checker.md`) rebuilt both checkers and the shared closed-world pass
 on direct-addressed stores (core `crates/verify/src/datalog_store.rs`): trace checking is now at
-the order of evaluation on closure, ranked checking 3–9× evaluation. Queued successors (exact
-queue rows): C1186 presence bitmap beside the membership array with a checker-only peak-RSS
-sample (the named next checker lever, first), C1185 certificate size/cost exploration with
-generation profiling. Still unallocated: bodies with more than two atoms, and a bit-parallel
-closure kernel for dense inputs.
+the order of evaluation on closure, ranked checking 3–9× evaluation. C1186
+(`../2026-09-13-c1186-presence-bitmap.md`) added the presence bitmap: large sparse rows 1.2–1.7×
+faster again (worst row, sparse same generation, now 4.3× evaluation for the trace checker and
+7.7× for the ranked one), checker-only peak RSS measured. The checker profile is now bucket
+enumeration and unification, not membership. Queued successor: C1185 certificate size/cost
+exploration with generation profiling (exact queue row). Still unallocated: a key-indexed rank
+structure so the ranked checker's fully bound probes can also avoid the row array, bodies with
+more than two atoms, and a bit-parallel closure kernel for dense inputs.
 
 ### Rule-contract programme — closed
 
