@@ -5129,8 +5129,17 @@
       "last": 1186,
       "purpose": "presence bitmap beside the checker membership array",
       "sequence": 570
+    },
+    {
+      "count": 1,
+      "first": 1187,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1187,
+      "purpose": "Public documentation audience and release-scope cleanup; contributor guidance in docs/dev",
+      "sequence": 571
     }
   ],
-  "next_id": 1187,
+  "next_id": 1188,
   "schema": "codex-task-id-allocations-v1"
 }
