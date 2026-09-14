@@ -99,7 +99,10 @@ regenerated tracked `__pycache__` files.
 ### C1149 — public-release readiness
 
 Gap assessment and six-phase plan: `../2026-09-11-c1149-ergodis-public-release-review.md`.
-Evidence remediation and the first filtered preview snapshot are complete; nothing has been pushed.
+Evidence remediation is complete. Staging holds the second preview snapshot, `v0.1.0-preview2`
+(core `59b2741`, public `b4c1db7`), validated standalone; nothing has been pushed. The first
+preview shipped twelve tracked bytecode files carrying local paths — now untracked — so whether to
+re-root the public history at this snapshot is an open decision for Tavis, recorded in the report.
 Tavis owns phase-0 publication/product decisions; phases 1–5 remain unallocated.
 
 ### C1143 — BB circuit-distance external benchmark (in progress)

@@ -2044,3 +2044,79 @@ script's pinned digest forbids changing its import line, so it is named for its 
 its contents until the family is next regenerated; and the private module still holds its own copy
 of those twelve definitions, which should become an import from the public tier when that repo is
 next touched, since private may depend on public.
+
+## Second preview snapshot, 2026-09-13 (core `59b2741`/`a8e52fd`, public `b4c1db7`, tag `v0.1.0-preview2`)
+
+Staging now reflects the current private tree. `scripts/export-public.sh main <notes>
+v0.1.0-preview2` ran from core `59b2741`; the snapshot is `b4c1db7`, parented on the first preview
+`3291659`, so the public branch is two linear release-sized snapshots and the diff between the tags
+is the filtered diff of the private range. 548 files, up from 491; 98 files changed, 14,013
+insertions and 194 deletions. `EXPORTS.md` on `main` carries the new row and never leaves `main`.
+
+The snapshot's reader-facing content, stated in the release notes used as the commit message: the
+rule layer (finite min-plus and Boolean rule programs, sparse-frontier evaluation, fact updates by
+rebinding an existing grounding, the round count admitted only up to the convergence bound the
+program size allows, gated algebra laws); support-witness and derivation certificates with the
+ranked-relation and direct-addressed checker forms; demand-driven Datalog evaluation with
+admission; certificate validation through both the native C ABI and the WebAssembly bindings
+against the Python oracle; documentation for the rule contract, recursive queries, finite lowering
+and summary transitions with benchmark replay rows; and the pinned toolchain plus the
+source-walking checksum manifest. Version stays 0.1.0 and the tag is a second preview, on the same
+argument as the first: the packaging is not release-grade by this report, and the release version
+should not be spent on a review snapshot.
+
+### Two export blockers the dry run found, both now fixed on main
+
+A read-only dry run in a throwaway clone under `~/.cache/ergodis/scratch` — which is the habit this
+report recommended after the first export — refused twice before the real export ran.
+
+1. Twelve `python/recovery_algorithms/__pycache__/*.pyc` files were **tracked in git** and each
+   carries this machine's absolute paths, which the binary-content scan added by the release-hygiene
+   work reports as `private-path` findings. They were tracked since the commit that first cleared
+   the export lint, so **the first preview snapshot `3291659` shipped all twelve**: that scan did
+   not exist yet. Nothing has ever been pushed to GitHub, so the exposure is local to this machine,
+   but the bytecode embeds the monorepo path that the export's own rewrite exists to erase, and
+   `3291659` is the parent of `b4c1db7`, so it stays reachable from what a push would publish.
+   Untracking them needed both halves: `git rm --cached` alone is undone by a pathspec commit, which
+   commits the working tree for that path and re-adds the files still sitting on disk. Fixed by
+   removing them from disk as well and adding `__pycache__/` and `*.pyc` to `.gitignore`.
+2. Two comments in `crates/rules/tests/demand.rs` named an internal task identifier, which the lint
+   refuses in shipped text. Rewritten to describe the generator and the comparison instead.
+
+Core `59b2741` carries both fixes with the regenerated manifest. Gates: `cargo fmt --check` clean,
+`cargo test --test evidence_manifest --test toolchain_pin` pass, `cargo test -p ergodis-rules
+--test demand` passes (9 tests), and the 82 publication guards pass.
+
+### Staging and validation
+
+`ERGODIS_PUBLISH=1 scripts/publish-to-staging.sh v0.1.0-preview2` fast-forwarded
+`~/src/ergodis-public` from `3291659` to `b4c1db7` and added the tag; the staging checkout still
+holds exactly one branch, `public`, and its pushurl is still parked at `no-push://ergodis-public`.
+`.publish/validate-release.sh` passes there in full — public lint on the tracked tree, every
+benchmark replay target resolving to a file that exists, `cargo build --release`, and `cargo test
+--all-features` including doctests — in 2m45s from a checkout with no private sibling, no evidence
+directory and no `.cargo/config.toml`. The 3.4 GB build tree it produced was deleted afterwards, as
+was the dry-run clone.
+
+Nothing was pushed to GitHub, and nothing can be: the private repository has no GitHub remote, the
+staging pushurl does not resolve, and `git push` is denied in this checkout's settings. The
+evidence repository is still unexported, so the documentation's evidence links still resolve to the
+non-resolving placeholder base URL rather than a published tag.
+
+### Open history question for Tavis
+
+Because the first preview shipped the twelve bytecode files, the published history is only clean
+from `b4c1db7` forward. Two choices: leave it, since nothing was pushed and the paths are inside
+compiled bytecode; or delete `refs/heads/public` and the `v0.1.0-preview1` tag, re-root with
+`--new-public-history` at this snapshot, and rebuild the staging clone with
+`scripts/configure-remotes.sh`, which is exactly the move made on 2026-09-12 and costs nothing but
+the loss of a local, never-pushed snapshot. This is a deliberate history discard, so it waits for
+an explicit instruction.
+
+### Concurrency note
+
+The export ran while another session held uncommitted direct-addressed-checker work in
+`crates/verify`. `export-public.sh`'s dirty-worktree refusal is correct and was not weakened or
+worked around a second time; the dry run and the fix verification were done in a disposable clone
+while that session finished, and the real export ran after its commits landed.
+
