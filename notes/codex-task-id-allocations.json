@@ -5138,8 +5138,17 @@
       "last": 1187,
       "purpose": "Public documentation audience and release-scope cleanup; contributor guidance in docs/dev",
       "sequence": 571
+    },
+    {
+      "count": 1,
+      "first": 1188,
+      "kind": "reservation",
+      "lane": "ergodis",
+      "last": 1188,
+      "purpose": "remove runtime-length tuple memmove from the demand derivation loop",
+      "sequence": 572
     }
   ],
-  "next_id": 1188,
+  "next_id": 1189,
   "schema": "codex-task-id-allocations-v1"
 }

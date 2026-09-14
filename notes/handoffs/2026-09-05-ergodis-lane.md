@@ -97,10 +97,9 @@ faster again (worst row, sparse same generation, now 4.3× evaluation for the tr
 enumeration and unification, not membership. C1185
 (`../2026-09-13-c1185-certificate-size-exploration.md`) profiled generation and measured eight
 candidate encodings: ranks as runs are a free strict win on the existing format; a binary
-round-block form reaches 0.25–1.06 bytes per derived tuple; no core format changed. Unallocated
-successors, in the order C1185 rates them: remove the runtime-length tuple `memmove` from the
-demand derivation loop (discovery track, 2026-09-13; about a fifth of dense-closure evaluation);
-implement rank runs and the round-block certificate in core with its checker; a key-indexed rank
+round-block form reaches 0.25–1.06 bytes per derived tuple; no core format changed. C1188 (queued) removes the runtime-length tuple `memmove` from the demand derivation loop
+(discovery track, 2026-09-13; about a fifth of dense-closure evaluation). Unallocated
+successors, in the order C1185 rates them: implement rank runs and the round-block certificate in core with its checker; a key-indexed rank
 structure for the ranked checker's fully bound probes; bodies with more than two atoms; a
 bit-parallel closure kernel for dense inputs.
 
