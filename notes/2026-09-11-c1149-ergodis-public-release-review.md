@@ -2180,7 +2180,9 @@ branch because the GitHub repository does not exist, which is the documented fir
 SHA256SUMS`, every published data file covered by the manifest, and no process document tracked
 under any name.
 
-### The one inconsistency left in the pair
+### The one inconsistency left in the pair — closed the same day by the preview3 pair
+
+
 
 The crate snapshot's evidence links still point at the non-resolving placeholder base URL, because
 `ERGODIS_EVIDENCE_BASE_URL` was left at its default when `v0.1.0-preview2` was cut, before the
@@ -2189,4 +2191,58 @@ to the evidence repository's published tree at the matching tag, which means a n
 repositories — a matched `v0.1.0-preview3` pair — since a tag already exported must not be moved.
 Nothing is pushed, so this costs two local snapshots and nothing else, but it is a tag decision and
 waits for an instruction.
+
+## Matched preview3 pair with resolving evidence links, 2026-09-13
+
+Tavis's instruction: cut the pair. Both repositories now carry `v0.1.0-preview3`, and the crate's
+evidence references are real URLs into the evidence snapshot at that tag.
+
+| Repository | private revision | public commit | parent |
+|------------|------------------|---------------|--------|
+| crate      | `14768a6`        | `27e2150`     | `b4c1db7` |
+| evidence   | `581cc79`        | `036f593`     | `6ae1e88` |
+
+Order matters and was followed: the evidence snapshot was exported and tagged first, so the tag the
+crate's links name already existed when the crate was exported. The evidence tree is byte-identical
+to `v0.1.0-preview2` — the refresh had already brought it level with core `a8e52fd`, and nothing
+under `evidence/` changed since — so its second snapshot exists to carry the matching tag, which is
+what lets the crate link to a fixed tree.
+
+The base URL used was
+`https://github.com/tavisrudd/ergodis-evidence/blob/v0.1.0-preview3/evidence`. The trailing
+`evidence` segment is required: the rewrite replaces the literal `evidence/` prefix, and the
+published evidence repository keeps that directory, so a base without it would produce URLs one
+directory too high. The blob view rather than `raw` was chosen so a reader lands on a rendered page.
+
+Verification beyond the export's own lint: no occurrence of the old placeholder host survives in the
+snapshot's Markdown, and each of the 31 distinct evidence URLs in it was checked against the
+evidence snapshot's tree. Twenty-seven name a file that exists. The other four are brace or glob
+shorthand in prose — `bb756-hx-gz-w{20,22}.jsonl`, `sce-r2elite01-x-w{14,18}.jsonl`,
+`sce-r2elite01-z-w{14,18}.jsonl` and `application-long-{cold,warm}*` — whose expansions all exist
+(both weights of each pair, and four `application-long-*` files). They were shorthand before the
+rewrite; what changed is that they are now shorthand inside a URL, so they read as links and do not
+resolve as links. Writing them out is a one-line-each documentation fix for whichever snapshot comes
+next; it is not worth a fourth tag on its own.
+
+Also new in the crate snapshot, relative to preview2: the checker fix that makes probing an unbuilt
+join index a bug rather than an empty answer, and the ignore-list hygiene. The release notes say so
+in reader-facing terms.
+
+Both staging checkouts validated after the move. The evidence checkout passes lint, `sha256sum -c
+SHA256SUMS`, full manifest coverage and the no-process-document check. The crate checkout passes
+public lint, benchmark replay-target resolution, `cargo build --release` and `cargo test
+--all-features` with doctests, in 2m42s; its 3.4 GB build tree was deleted afterwards. Staging holds
+`public` plus the preview tags in both repositories, no branch named `main`, and both pushurls remain
+parked, so nothing has been pushed to GitHub.
+
+### License and copyright, checked on Tavis's question
+
+`LICENSE` is the verbatim AGPL-3.0 text and is correct unmodified: its own notice belongs to the
+Free Software Foundation, and the `<year>  <name of author>` placeholders are inside the license's
+instructional "How to Apply These Terms" appendix, not fields for the licensor to fill in. The
+project's own notice is where the AGPL expects it, in `README.md` under License — `Copyright (C)
+2026 Tavis Rudd <tavis@damnsimple.com>`, the AGPL-3.0-only statement, and a commercial-licensing
+contact — and it is present in the published tree. `Cargo.toml` agrees on author, license and
+repository URL. Two optional gaps, neither a defect: no per-file copyright headers, and no AGPL
+section 13 network-use notice, which nothing in the tree needs since it runs no network service.
 
