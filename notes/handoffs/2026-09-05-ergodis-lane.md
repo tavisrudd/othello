@@ -36,13 +36,16 @@ not-to-ship contributor guidance. Narrow UI/admin work does not require the full
 
 Contract: `../2026-09-12-c1170-owned-rel-frontend.md`; source study:
 `../2026-09-12-c1169-datalog-frontends.md`; measurements, cost model and bounded recovery:
-`../2026-09-13-c1170-frontend-measurements.md` (private `99281a2` … `f820daf`).
+`../2026-09-13-c1170-frontend-measurements.md` (private `99281a2` … `f820daf`); Pratt-loop A/B
+(16-byte frame, operand/infix fast path: ASCII parse instructions 0.788 of control, scanner now
+56 % of the stage): `../2026-09-13-c1170-pratt-loop-ab.md` (private `2efeccb` … `b5416b0`).
 The native/WASM parity gate now carries recovery records (146 cases); it is a finite parity
 gate, not a grammar oracle or complete syntax/admission claim. Instruction counts are the
 decision metric on this shared box; cycle ratios are reported only with intervals.
 
-**Next:** the parser half of the ASCII cost (Pratt continuation loop), a cold-start stage, then
-the remaining syntax gaps by manifest family and first semantic admission checks. Ergodis retains
+**Next:** the keyword lookup (linear match over the reserved words, now the largest single
+scanner cost) together with the lexical reserved-word gap, a cold-start `prepare-touch` stage,
+then the remaining syntax gaps by manifest family and first semantic admission checks. Ergodis retains
 lowering, rules, joins and execution; no external evaluator or backend is adopted. Tree-sitter
 and executable reference semantics remain deferred.
 
