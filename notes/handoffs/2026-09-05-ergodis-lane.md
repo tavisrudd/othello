@@ -6,7 +6,7 @@
 correction trails live in dated reports and the append-only
 [`2026-09-05-ergodis-lane-archive.md`](2026-09-05-ergodis-lane-archive.md).
 
-**Date**: 2026-09-13
+**Date**: 2026-09-14
 **Mode**: intent-based.
 **Status**: ACTIVE. Immediate engineering frontier is C1170 (owned Rel-rich frontend); the
 rule-contract programme C1172–C1177 and the Datalog evaluation tasks C1179/C1182–C1186 are closed. C1143, C1130, C1016,
@@ -39,15 +39,20 @@ Contract: `../2026-09-12-c1170-owned-rel-frontend.md`; source study:
 `../2026-09-13-c1170-frontend-measurements.md` (private `99281a2` … `f820daf`); Pratt-loop A/B
 (16-byte frame, operand/infix fast path: ASCII parse instructions 0.788 of control, scanner now
 56 % of the stage): `../2026-09-13-c1170-pratt-loop-ab.md` (private `2efeccb` … `b5416b0`).
-The native/WASM parity gate now carries recovery records (146 cases); it is a finite parity
+Keyword lookup and reserved-word gap: `../2026-09-14-c1170-keyword-lookup.md` (private
+`2840757` … `fcd7d1a`): reserved words are now exactly the reference keyword table plus `_`,
+with `doc`/`value`/`type`/`declare` contextual at item start; the packed keyword compare is a
+measured wash against a clean-checkout control (the profiler share was call-entry skid), kept
+as the explicit form. The native/WASM parity gate carries 151 cases; it is a finite parity
 gate, not a grammar oracle or complete syntax/admission claim. Instruction counts are the
 decision metric on this shared box; cycle ratios are reported only with intervals.
 
-**Next:** the keyword lookup (linear match over the reserved words, now the largest single
-scanner cost) together with the lexical reserved-word gap, a cold-start `prepare-touch` stage,
-then the remaining syntax gaps by manifest family and first semantic admission checks. Ergodis retains
-lowering, rules, joins and execution; no external evaluator or backend is adopted. Tree-sitter
-and executable reference semantics remain deferred.
+**Next:** a cold-start `prepare-touch` stage; attribute `lexer::scan` (now 52 % of the ASCII
+parse stage) below the symbol before spending another candidate on it; then the remaining
+syntax gaps by manifest family (caret entity references, interpolation, Unicode boundary
+conformance) and first semantic admission checks. Ergodis retains lowering, rules, joins and
+execution; no external evaluator or backend is adopted. Tree-sitter and executable reference
+semantics remain deferred.
 
 ### Datalog evaluation — C1179, C1182 and C1183 closed
 
