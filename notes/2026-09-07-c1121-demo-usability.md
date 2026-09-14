@@ -33,8 +33,9 @@ The browser test compares served bytes with `wasm/tests/fixtures/bundles.json`.
 Real Chromium passes the existing inspection/verification/fork controls and repository
 interleaving/crash-restart suite, plus one-click example loading, readable names,
 collapsed advanced controls, first-save initialization, checked-state reset on reopen,
-and the 390-pixel mobile layout. Desktop/mobile screenshots were visually inspected:
-`~/.cache/ergodis/browser-control-review/saved-run-demo.png` and `saved-run-mobile.png`.
+and the 390-pixel mobile layout. Desktop and mobile screenshots were visually inspected
+during the session but are not retained as tracked evidence; the committed evidence is
+the browser test at core `b219db3` and the observations recorded here.
 The file-loading controls now enter a loading state before fetching the example so old
 results cannot masquerade as the newly opened file. The integration driver starts the
 repository phase in a fresh document after UI fault injection/mobile emulation; storage

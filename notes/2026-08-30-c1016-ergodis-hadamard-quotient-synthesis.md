@@ -253,7 +253,7 @@ anywhere. Every crate builds into the one shared out-of-tree target directory
 per-A/B target directory and never keep one as a baseline. A baseline is a
 retained executable produced by `scripts/retain-bin.sh` and recorded in
 `~/.cache/ergodis/bin/MANIFEST.tsv`. Run `scripts/cache-gc.sh` at task close.
-Current native experiment caches exist under `~/.cache/ergodis/c1016/`. The
+Current native experiment caches are untracked scratch, not retained evidence. The
 historical `g41` inputs remain absent, so its cold end-to-end replay needs those
 specific inputs regenerated first.
 

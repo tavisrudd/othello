@@ -67,15 +67,15 @@ All gates passed under Luna's sole sequential build ownership:
   Chromium composition/reduction/runtime-campaign conformance. The service envelope change was
   followed by fresh runtime tests, workspace formatting/clippy and the final WASM package/browser gate.
 
-Final gate logs:
+Final gates, run at core commit `75c1021` in `~/src/ergodis`:
 
-- Runtime tests: `/tmp/claude-run-quiet/20260907-095900-nix-shell-nixpkgscargo-nixpkgsrustc-command-cargo-test-p-ergodis-runtime-all-feat`.
-- Browser: `/tmp/claude-run-quiet/20260907-095934-nix-shell-nixpkgsnodejs-nixpkgschromium-command-node-browser-smoke.mjs`.
+- Runtime tests: `nix shell nixpkgs#cargo nixpkgs#rustc --command cargo test -p ergodis-runtime --all-features`.
+- Browser: `nix shell nixpkgs#nodejs nixpkgs#chromium --command node browser-smoke.mjs`.
 
 Parent checked owned documentation links, Python syntax, unchanged native/WASM release profiles
 and unchanged MSRV. Lockfiles add only the local runtime package/dependency; no third-party version
-churn. Cache audit passed in dry-run mode, with nothing deleted:
-`/tmp/claude-run-quiet/20260907-100019-cache-gc.sh`.
+churn. Cache audit passed in dry-run mode, with nothing deleted (`cache-gc.sh`, at the same core
+commit `75c1021`).
 
 Build-maintenance observations: full workspace tests took 1m15s in the shared warm target. Before
 adding the runtime binding, the packaged WASM was 216,787 bytes; afterward it is 427,689 bytes

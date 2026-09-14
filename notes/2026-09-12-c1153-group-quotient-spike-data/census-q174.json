@@ -1,0 +1,1092 @@
+{
+  "engine": "order6-orbit-census",
+  "files": [
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 12,
+              "distinct_orbits": 12,
+              "distinct_raw_states": 12,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1937120,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 12
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "evidence/phase-two-q174-corpus.jsonl",
+      "records": 12
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 12,
+              "distinct_orbits": 12,
+              "distinct_raw_states": 12,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1989672,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 12
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "evidence/phase-two-corpus.jsonl",
+      "records": 12
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 12,
+              "distinct_orbits": 12,
+              "distinct_raw_states": 12,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1918692,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 12
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "evidence/carrier-column-corpus.jsonl",
+      "records": 12
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 24,
+              "distinct_orbits": 12,
+              "distinct_raw_states": 12,
+              "group_order": "157690754629632",
+              "largest_class": 4,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 2067891,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 24
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "evidence/carrier-fibre-corpus.jsonl",
+      "records": 24
+    },
+    {
+      "census": [
+        {
+          "levels": [],
+          "scope": "objective"
+        }
+      ],
+      "path": "evidence/margin-fibre-corpus.jsonl",
+      "records": 0
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 2356778,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/0-0.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 2201178,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/0-10.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 2082608,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/0-16.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 2085132,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/0-23.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 2046250,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/0-24.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 2062650,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/0-2.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 2080744,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/0-32.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 2057551,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/0-37.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 2172354,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/0-8.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 2188655,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/0-9.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 2204063,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/1-0.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 2306465,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/1-10.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 2111631,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/1-16.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1632540,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/1-23.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1712689,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/1-24.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1667605,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/1-2.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1693694,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/1-32.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1701899,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/1-37.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1687492,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/1-8.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1725703,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/1-9.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1752052,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/2-0.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1788490,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/2-10.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1795573,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/2-16.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1851818,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/2-23.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1924133,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/2-24.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1948528,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/2-2.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1970999,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/2-32.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 2031843,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/2-37.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 2041231,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/2-8.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 2012717,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/2-9.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1993571,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/3-0.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1972392,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/3-10.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1956954,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/3-16.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1916949,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/3-23.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1879650,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/3-24.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1806544,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/3-2.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1755248,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/3-32.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1742585,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/3-37.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1690037,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/3-8.best.jsonl",
+      "records": 1
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 1,
+              "distinct_orbits": 1,
+              "distinct_raw_states": 1,
+              "group_order": "157690754629632",
+              "largest_class": 1,
+              "largest_orbit": "157690754629632",
+              "level": 174,
+              "nanoseconds_per_candidate": 1641105,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "157690754629632",
+              "states_with_trivial_stabiliser": 1
+            }
+          ],
+          "scope": "objective"
+        }
+      ],
+      "path": "/home/tavis/.cache/ergodis/c1016/shell-replication/3-9.best.jsonl",
+      "records": 1
+    }
+  ],
+  "pooled": [
+    {
+      "levels": [
+        {
+          "candidates": 100,
+          "distinct_orbits": 76,
+          "distinct_raw_states": 76,
+          "group_order": "157690754629632",
+          "largest_class": 5,
+          "largest_orbit": "157690754629632",
+          "level": 174,
+          "nanoseconds_per_candidate": 1628655,
+          "orbit_merges_beyond_equality": 0,
+          "smallest_orbit": "157690754629632",
+          "states_with_trivial_stabiliser": 100
+        }
+      ],
+      "scope": "objective"
+    }
+  ],
+  "provenance": "ExactComputational: lexicographic minimum over the gated orbit group, witnessed per state; a census of the named files only"
+}

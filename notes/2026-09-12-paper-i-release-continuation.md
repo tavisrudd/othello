@@ -32,8 +32,9 @@ blocker was stale. All 96 project modules in the import closure of
 `RelativeConicArcs.Gates.ClebschRigidityTrust` are byte-identical to the
 previous paper pin `b871c10b4a91200a0913644d39b9f0ce44f655ca`.
 
-The fresh guarded run is
-`/home/tavis/.cache/othello-lean-build/run-20260912-204719-eee6128e`.
+The fresh guarded build covers the import closure of
+`RelativeConicArcs.Gates.ClebschRigidityTrust` at finitegeom `f7b9743`; its run
+directory was session-local and not retained.
 Its clean-current source identity and aggregate gate pass; the trace-current
 replay supplies 161 axiom reports. It completed in about forty seconds without
 rebuilding the Q11 certificate. A missing old receipt did not imply a cold build.
@@ -151,11 +152,9 @@ entry produced after September 2 elsewhere in finitegeom was recovered.
 
 ## Final acceptance and replay
 
-The authority run took 7m38s; the clean mirror run took 8m42s. Their bounded
-run records are under:
-
-- `~/.cache/othello-lean-build/paper-i-release-seal-20260912/`
-- `~/.cache/othello-lean-build/paper-i-mirror-clean-20260912/`
+The authority run took 7m38s at source seal `fadc258ca`; the clean mirror run
+took 8m42s at mirror commit `302f1cb`. Both bounded run records were
+session-local and not retained.
 
 From either paper root, the immutable replay command is:
 
@@ -164,10 +163,13 @@ nix run .#verify -- \
   --certificate-root /home/tavis/src/lean/finitegeom-clebsch-q11-certificates \
   --finitegeom-root /home/tavis/src/lean/finitegeom \
   --bridge-root /home/tavis/src/lean/finitegeom-clebsch-rigidity-bridge \
-  --certificate-pack /home/tavis/.cache/othello-lean-build/packs/q11-0d964975ceef7ff0.lake-pack.tar.gz \
-  --guarded-finitegeom-run /home/tavis/.cache/othello-lean-build/run-20260912-210207-525e11fd \
   --lean-build-queue /home/tavis/src/othello/lean/scripts/lean-build-queue.py
 ```
+
+The verifier's optional `--certificate-pack` and `--guarded-finitegeom-run`
+inputs name a locally built certificate pack and a guarded run directory. Both
+were session-local and not retained, so a replay rebuilds them from the pinned
+certificate `0d964975` and the finitegeom `f7b9743` sources.
 
 The final `ej` + `tt` pass checked that the release's output-hash refresh does
 not change its canonical identity, that the mirror carries the exact tested

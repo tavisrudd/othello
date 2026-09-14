@@ -44,8 +44,10 @@ learned plan and raw measurements are under `adversarial-fixtures/`. The updated
 SHA256SUMS binds 43 source/fixture files. This slice adds about 31 KB.
 
 Workspace formatting, scoped Clippy, all three Rust tests, fresh and frozen
-calibration replay, and the Python exact-agreement gates pass. Full run log:
-`~/.cache/ergodis/continuation-spike/logs/20260907-171612-run_adversarial.sh`.
+calibration replay, and the Python exact-agreement gates pass. The full run log
+was not retained as tracked evidence; the gates are reproduced by
+`experiments/continuation/run_adversarial.sh` at commit `3847f33` in the
+`ergodis-private` repository, with the outcome summarized here.
 The entire slice uses disk-backed run/log/temp directories and the existing
 shared Cargo target. No Lean, core-kernel, publication or export work.
 

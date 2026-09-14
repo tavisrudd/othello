@@ -163,15 +163,15 @@ adapter ownership/semantic tests, two existing QEC semantic tests and original
 Tiger allocation test pass. Final scoped gates include actual Chromium after the
 Worker generation guard. Whole operator-tools Clippy retains the unrelated existing
 needless_range_loop in tasks/tools/src/leakage_dual_tower.rs:116; no waiver or
-foreign fix applied. Final scoped log:
-/tmp/claude-run-quiet/20260908-140735-nix-shell-nixpkgscargo-nixpkgsrustc-nixpkgsrustfmt-nixpkgsclippy-nixpkgsnodejs-ni/.
+foreign fix applied. Final scoped gate (`cargo fmt --all --check`, scoped
+Clippy, scoped tests, Chromium) passed at private commit `2e90fa4`.
 
 Private analysis/module-loading/README.md specifies replay order. Its evidence/
 manifest.json seals input/transcript bytes, all 600 raw samples, summaries, leaf
-reports and artifact hashes. Bulk executables/perf data stay in the named
-~/.cache/ergodis/module-loading/ and ~/.cache/ergodis/bin/ locations. Exact allocation
-diagnostic payload hashes are recorded, but those binaries were overwritten by
-later builds and not separately retained. Do not package shared-target outputs
+reports and artifact hashes. Bulk executables/perf data were workspace-local scratch,
+not retained evidence. Exact allocation diagnostic payload hashes are recorded in
+manifest.json, but the binaries themselves were overwritten by later builds and not
+separately retained. Do not package shared-target outputs
 after diagnostic builds without rebuilding/auditing default-feature distribution.
 
 The original native baseline is ergodis-tools-6ab0681, SHA-256

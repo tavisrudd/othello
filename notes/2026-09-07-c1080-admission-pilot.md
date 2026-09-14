@@ -61,12 +61,11 @@ Native validation using the Nix Rust toolchain and at most 12 Rayon threads pass
 - Default core check, all-target/all-feature clippy, and full all-feature tests.
 - `python/generate_fixtures.py --check`, covering the existing bounded independent fixture corpus.
 
-Key saved logs from the run-quiet runner:
-`/tmp/claude-run-quiet/20260907-073535-RAYON_NUM_THREADS12-nix-shell-nixpkgscargo-nixpkgsrustc-command-cargo-test-all-fe`,
-`/tmp/claude-run-quiet/20260907-073548-RAYON_NUM_THREADS12-nix-shell-nixpkgscargo-nixpkgsrustc-nixpkgsclippy-command-car`,
-`/tmp/claude-run-quiet/20260907-073552-RAYON_NUM_THREADS12-nix-shell-nixpkgscargo-nixpkgsrustc-command-cargo-test-all-fe`,
-and `/tmp/claude-run-quiet/20260907-073640-nix-shell-nixpkgspython3-command-python3-generate_fixtures.py-check`.
-The committed source/tests and replay commands below are the durable evidence, not these local logs.
+Gates run at core commit `95d16b9` in `~/src/ergodis`:
+`nix shell nixpkgs#cargo nixpkgs#rustc --command env RAYON_NUM_THREADS=12 cargo test --all-features`,
+`nix shell nixpkgs#cargo nixpkgs#rustc nixpkgs#clippy --command env RAYON_NUM_THREADS=12 cargo clippy --all-targets --all-features -- -D warnings`,
+and `nix shell nixpkgs#python3 --command python3 python/generate_fixtures.py --check`.
+The committed source/tests and replay commands below are the durable evidence, not local run output.
 
 ```sh
 nix shell nixpkgs#cargo nixpkgs#rustc --command cargo fmt --all -- --check

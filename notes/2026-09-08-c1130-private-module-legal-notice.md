@@ -113,9 +113,11 @@ Scoped provider contract tests and all-target/all-feature Clippy pass. No native
 performance acceptance claim is added for this cold-metadata change.
 
 Evidence: private analysis/module-loading/legal-evidence/; source scripts and
-README include replay. Cache: ~/.cache/ergodis/module-loading/legal-notice/.
-Original spike evidence and payload identities were preserved. Final verification:
-/tmp/claude-run-quiet/20260908-144237-nix-shell-nixpkgsnodejs-nixpkgschromium-command-env-legal-notice-bash-verify-lega/.
+README include replay. The local build/verification working directory was not
+retained as tracked evidence; the committed evidence directory and scripts are the
+record. Original spike evidence and payload identities were preserved. Final
+verification: `nix shell nixpkgs#nodejs nixpkgs#chromium --command bash
+analysis/module-loading/verify-legal-notice.sh`, at private commit `5da6805`.
 The first ctypes audit supplied a null empty-input pointer, which the existing ABI
 rejects; correcting the audit to supply a non-null zero-length borrowed input made
 it pass. No ABI relaxation or provider change was needed for that harness fix.

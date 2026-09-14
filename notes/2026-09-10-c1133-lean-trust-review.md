@@ -164,8 +164,9 @@ boundary. No grades or speculative reception claims are included.
 
 Pinned toolchain: `leanprover/lean4:v4.32.0-rc1`.
 Mathlib: `571b8a8e54219b4d393f75f4b8653fac08197fcc`.
-The guarded library build reports trace-current and aggregate passed:
-`/home/tavis/.cache/othello-lean-build/run-20260911-052712-3b24aaf7`.
+The guarded library build of `papers/cubic-stabilization-m1/lean` at commit
+`c0f7eee42` reports trace-current and aggregate passed; its run directory was
+session-local and not retained.
 The source import census reaches 244 project modules from the library roots;
 the remaining module is the separately run public axiom audit. Its project
 import closure has 238 modules. Seven library modules outside that audit
@@ -178,9 +179,8 @@ Fresh axiom audit command from the monorepo:
 lean/scripts/guarded-lean --root /home/tavis/src/othello/papers/cubic-stabilization-m1/lean TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Verification/AxiomAudit.lean
 ```
 
-It elaborated successfully (rather than merely replaying a saved audit).
-Its log is
-`/home/tavis/.cache/othello-lean-build/guarded-lean/20260910-222842-cd-lean-exec-taskset-c-20-23-env-LEAN_NUM_THREADS1-choom-n-1000-nix-develop-comma/stdout.log`.
+It elaborated successfully at commit `c0f7eee42` (rather than merely replaying a
+saved audit); its stdout transcript was session-local and not retained.
 The package's `check_formal_artifact.py --axiom-log` passes against that
 transcript, including source bans, exact expected dependencies, claim and
 terminal signature digests, registries and dependency graph.
@@ -220,10 +220,9 @@ prose audit or blanket referee-readiness verdict is claimed.
 
 ## Final release closeout
 
-Authority bundle `c0f7eee42`; full `make check` passes after all finite and
-README changes (`/tmp/claude-run-quiet/20260910-223659-make-C-cubic-stabilization-m1-check`).
-Standalone paper commit `76a54e5` passes its full gate
-(`/tmp/claude-run-quiet/20260910-223851-make-C-cubic-stabilization-m1-check`).
+Authority bundle `c0f7eee42`; full `make -C papers/cubic-stabilization-m1 check`
+passes at that commit after all finite and README changes.
+Standalone paper commit `76a54e5` passes the same full gate.
 Exporter verification passes: 351 tracked files, content SHA-256
 `ed6ee2728f97f34423b0d5bc521d9bb95d2115ef0e6062b8809862652503898b`.
 The 32-page authority and standalone PDFs are byte-identical, SHA-256

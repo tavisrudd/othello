@@ -105,8 +105,10 @@ sharpness metadata gate correctly required its generated witness-table
 anchor to remain adjacent; the explanatory reconstruction was moved after
 the table and the unchanged gate then passed.
 
-- m=1 gate: `/tmp/claude-run-quiet/20260907-165137-make-C-cubic-stabilization-m1-check/`.
-- Sharpness gate: `/tmp/claude-run-quiet/20260907-165022-make-C-cubic-stabilization-irrationality-check/`.
+- m=1 gate: `make -C papers/cubic-stabilization-m1 check`, at authority repair
+  commit `bdbb2b751`.
+- Sharpness gate: `make -C papers/cubic-stabilization-irrationality check`, at
+  the same authority repair commit.
 - m=1 repaired PDF: 18 pages; SHA-256
   `b4580e09aec3e91d6492217353ac6cf1d03af0177ac35caa09320c1f2721a57e`.
 - Sharpness repaired PDF: 17 pages; SHA-256

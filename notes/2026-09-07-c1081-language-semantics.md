@@ -66,9 +66,9 @@ composition smoke. Packaging required an explicit `wasm-ld` linker from Nix `lld
 command includes it. Generated `wasm/www/pkg` remains ignored. Cache GC passed in dry-run mode,
 without deleting shared artifacts.
 
-Representative local run logs:
-- Native suite: `/tmp/claude-run-quiet/20260907-075519-RAYON_NUM_THREADS12-nix-shell-nixpkgscargo-nixpkgsrustc-command-cargo-test-all-fe`.
-- Final browser corpus/rejections: `/tmp/claude-run-quiet/20260907-080010-nix-shell-nixpkgsnodejs-nixpkgschromium-command-node-browser-smoke.mjs`.
+Representative gates, run at core commit `55c5d8c` in `~/src/ergodis`:
+- Native suite: `nix shell nixpkgs#cargo nixpkgs#rustc --command env RAYON_NUM_THREADS=12 cargo test --all-features`.
+- Final browser corpus/rejections: `nix shell nixpkgs#nodejs nixpkgs#chromium --command node browser-smoke.mjs`.
 
 The committed reference, corpus, tests and replay commands are the durable evidence; local logs
 are supporting diagnostics only.

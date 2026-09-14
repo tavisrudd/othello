@@ -43,7 +43,8 @@ Independent enumeration checks 14,636 excluded cases. Receipt replay rechecks
 hashes, model scope, inequalities and 78 disjoint exclusions, not wall-clock time
 or provider optimality. Full browser suite passes, including actual live run,
 zero-benefit/all-infeasible controls, stop, saved default and existing application
-workflows. Final browser log: `/tmp/claude-run-quiet/20260908-205138-nix-shell-nixpkgsnodejs-nixpkgschromium-command-node-run-smoke.mjs-url-127.0.0.18/stdout.log`.
+workflows. The final browser gate is the `run-smoke.mjs` command above, run at
+private commit `2046e91`; its stdout was not retained as tracked evidence.
 Core fmt/clippy/all-feature tests including Python parity, separate WASM binding
 native tests/clippy, and canonical wasm-pack release build pass.
 
@@ -63,7 +64,10 @@ changes. This adapter does not confer transport authentication on HTTP.
 Native hash cross-checks cover empty/block-boundary/1MiB data and sliced views;
 unsupported algorithms are rejected. Full browser application suite passes with
 subtle/randomUUID explicitly absent from the page, plus a missing-API Worker
-known-answer hash test. Log: `/tmp/claude-run-quiet/20260908-211206-nix-shell-nixpkgsnodejs-nixpkgschromium-command-node-run-smoke.mjs-url-127.0.0.18/stdout.log`.
+known-answer hash test. That suite is again the `nix shell nixpkgs#nodejs
+nixpkgs#chromium --command node analysis/campaign-console/mockups/run-smoke.mjs`
+gate, run for the adapter change recorded in commit `1232a66f9`; its stdout was
+not retained as tracked evidence.
 Direct LAN browser validation was blocked before page load with
 ERR_BLOCKED_BY_CLIENT in the automation environment; actual Safari retry remains
 user validation. Both live servers were restarted with the compatibility adapter.

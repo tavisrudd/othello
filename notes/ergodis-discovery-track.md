@@ -87,9 +87,9 @@ shared object. **Evidence level**: correspondence only; no source read. No C-ID 
 ## 2026-09-12 — The order-2092 restart budget is sampler-bound, not search-bound (C1153 incidental)
 
 **Provenance**: measured during the C1153 orbit-dedup A/B,
-`notes/2026-09-12-c1153-group-quotient-spike.md`; runs under `~/.cache/ergodis/c1153/ab-4000` and
-`ab-200`. **Was I looking for this?**: no — the A/B was for orbit dedup cost, and this fell out of
-running it at two epoch lengths.
+`notes/2026-09-12-c1153-group-quotient-spike.md` (campaign-default and short-epoch rounds,
+`ergodis-private` commits `a9376d3`/`088bb27`). **Was I looking for this?**: no — the A/B was for
+orbit dedup cost, and this fell out of running it at two epoch lengths.
 **Observation**: cutting `order6 margin-tabu --epoch-steps` from 4,000 to 200 cut total tabu steps
 by 95% and left the restart count essentially unchanged, about 78 restarts per twenty seconds on
 four workers in both configurations. Each epoch therefore costs roughly 0.3 CPU-seconds almost

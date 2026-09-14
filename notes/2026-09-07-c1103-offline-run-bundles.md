@@ -75,9 +75,9 @@ nix shell nixpkgs#cargo nixpkgs#rustc --command cargo test -p ergodis-private --
 nix shell nixpkgs#rustfmt --command rustfmt --check --edition 2021 tests/run_record_identity.rs
 ```
 
-Capture prefixes under `/tmp/claude-run-quiet/`: final core `20260907-132719`,
-Python `20260907-132800`, private `20260907-132844`, WASM `20260907-132928`.
-Cache GC ran as a dry run at `20260907-132928`; nothing deleted. No export/push.
+Every gate above ran against core commit `c8da541` and private fixture commit
+`fd0f03f`, with a dry-run cache GC that deleted nothing; the per-run
+`run-quiet` capture directories were session-local and not retained. No export/push.
 The unrelated whole-tool lint from earlier work remains outside this slice.
 
 ## Performance and next step

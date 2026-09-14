@@ -113,8 +113,9 @@ specified source versions. `git diff --check` covers the edited paper surface.
 
 The frozen baseline PDF has SHA-256
 `3f7915129e8fbffc48b7799dc959d4d490ea2bff7d28ee906b9ae4fd1bedcbc7`
-at authority revision `82f252fcd`. Before/after rendering copies are retained
-in the disk-backed cache `~/.cache/complete-ports-revision/`.
+at authority revision `82f252fcd`. The before/after rendering copies were not
+retained as tracked evidence; the baseline rebuilds from that revision and the
+revised PDF from the `make update-pdf` gate at commit `2f4f82de5`.
 Direct visual inspection covered revised pages 1–3, 26, 30, 37, and 39–41:
 opening, algorithm and decision discussion, formal boundary, measurement table,
 figure, and conclusion. Every page has extracted text; this is not a claim of

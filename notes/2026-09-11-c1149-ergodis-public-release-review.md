@@ -33,8 +33,8 @@ Sections below are sub-agent reports, included verbatim.
 
 ### Documentation
 
-Scope: the filtered public tree at
-`/tmp/claude-1000/-home-tavis-src-othello-rust/315af775-8ba9-4191-9fe8-4f4079bcd2be/scratchpad/filtered`,
+Scope: the filtered public tree produced by `scripts/export-public.sh` from
+`~/src/ergodis` main `c59bf67`,
 read as a stranger would. Gate: `~/src/ergodis/docs-private/RELEASE-CHECKLIST.md`.
 All paths below are relative to the filtered tree unless stated otherwise.
 
@@ -408,8 +408,8 @@ a stranger evaluating the library actually experiences.
 ### Library and CLI surface
 
 Scope: the `ergodis` library API and CLI as a downstream user meets them, reviewed in the
-filtered public tree (FILTERED =
-`/tmp/claude-1000/-home-tavis-src-othello-rust/315af775-8ba9-4191-9fe8-4f4079bcd2be/scratchpad/filtered`).
+filtered public tree (FILTERED = the tree produced by `scripts/export-public.sh`
+from `~/src/ergodis` main `c59bf67`).
 All cargo invocations used `CARGO_TARGET_DIR=$HOME/.cache/ergodis/target/c1149-api` (or
 `.../c1149-missing`) with the PATH toolchain, cargo 1.93.1. No writes to `~/src/ergodis`.
 
@@ -717,8 +717,8 @@ re-exports in `src/lib.rs:35-36, 95-96, 179-182` are correctly `cfg`-guarded.
 ### Demos
 
 Scope: browser/WASM demos, runnable examples, hosted-demo readiness. Reviewed the filtered
-public tree (FILTERED =
-`/tmp/claude-1000/-home-tavis-src-othello-rust/315af775-8ba9-4191-9fe8-4f4079bcd2be/scratchpad/filtered`),
+public tree (FILTERED = the tree produced by `scripts/export-public.sh` from
+`~/src/ergodis` main `c59bf67`),
 with the private sibling `~/src/ergodis-private` read only for the private-demo inventory.
 
 **Headline: the public demo is in far better shape than its discoverability suggests.** The
@@ -757,8 +757,9 @@ All from FILTERED, `CARGO_TARGET_DIR` under `~/.cache/ergodis/target/`:
 3. `cargo test --manifest-path wasm/Cargo.toml` — exit 0. `python3 wasm/scripts/check-python-parity.py`
    — exit 0, `8 exact cost/witness/work cases`.
 4. Served `wasm/www` on a local static server and screenshotted `index.html` in headless Chromium:
-   the page renders correctly (dark theme, lamp board, controller panels, working CTA). Screenshot at
-   `.../scratchpad/shots/index.png`.
+   the page renders correctly (dark theme, lamp board, controller panels, working CTA). The screenshot
+   was a session scratch file that was not retained; the page is `wasm/www/index.html` at `~/src/ergodis`
+   main `c59bf67`.
 5. `cargo run --release --example library_composition` from a cold target dir — exit 0 in **53 s**,
    prints `cost=1 local_labels=[...]`.
 
@@ -1871,7 +1872,7 @@ and the tag; it is the only link between the two histories and never leaves `mai
 
 ### A lint fix the export needed first
 
-A read-only dry run — the filtered tree built from `HEAD` in the scratchpad, both rewrites
+A read-only dry run — the filtered tree built from `HEAD` by `scripts/export-public.sh`, both rewrites
 applied, linted against the release-notes file — refused with two `private-path` findings:
 `scripts/check-verifier-dependencies.py` and `scripts/check-runtime-dependencies.py` each name the
 private-tier crate inside a **forbidden**-dependency set, so each check fails if such a package is

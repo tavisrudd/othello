@@ -33,13 +33,14 @@ uses the existing horizontal-pairing theorem and does not impose nonresonance.
 
 ## Validation
 
-Guarded full library build passes: run
-`/home/tavis/.cache/othello-lean-build/run-20260911-060039-42b5c759`.
+The guarded full library build of `papers/cubic-stabilization-m1/lean` passes at
+commit `4b6ce3ed3`; its run directory was session-local and not retained.
 Fresh guarded AxiomAudit elaboration and exact expected/observed comparison
 pass for all 373 terminals. Only `propext`, `Classical.choice`, and `Quot.sound`
 occur; the 371 existing terminal dependency lists are unchanged.
-Audit stdout is
-`/home/tavis/.cache/othello-lean-build/guarded-lean/20260910-230132-cd-lean-exec-taskset-c-20-23-env-LEAN_NUM_THREADS1-choom-n-1000-nix-develop-comma/stdout.log`.
+The audit was elaborated from the committed
+`Verification/AxiomAudit.lean` at that commit; its stdout transcript was
+session-local and not retained.
 The source snapshot covers 246 Lean files and checks all 17 matrix input rows.
 Primary manuscript coverage remains 20 absent, 8 fragments, 8 conditional
 out of 36 claims. All-manuscript coverage remains 79 claims with no promotion.
@@ -98,8 +99,9 @@ No incidental discovery was promoted or added during this bounded alignment.
 
 Authority `4b6ce3ed3` is exported as standalone `0a56ba0`. The standalone
 full guarded library build, fresh 373-terminal axiom audit and `make check`
-pass. Guarded build run: `run-20260911-060343-3ddad941`; axiom stdout:
-`/home/tavis/.cache/othello-lean-build/guarded-lean/20260910-231002-cd-lean-exec-taskset-c-20-23-env-LEAN_NUM_THREADS1-choom-n-1000-nix-develop-comma/stdout.log`.
+pass against the standalone's committed Lean sources and its
+`Verification/AxiomAudit.lean`; the guarded build run directory and the axiom
+stdout transcript were session-local and not retained.
 Exporter verification: 352 files, content SHA-256
 `2ba0657193e4cd100c396af4ad6b184bc21caee2ab8a1c87b93faa7c0217f526`.
 The exported 32-page PDF matches its authority byte for byte. Subsequent

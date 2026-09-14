@@ -90,15 +90,16 @@ reason now stated in the contract document.
 | `lean/WeightedRules/fixtures/round-convention/distance-grounding.json` | `aa279dc7415243b1d1c33475db425dab2bdef12283e3b8e3e3d11bed020e83cb` |
 | `lean/WeightedRules/fixtures/round-convention/chain-distance-grounding.json` | `14ddac83070d07cf704ee03029306e0166d2553b5ba6195cb1738d9c87f532ad` |
 
-Replay, from the core repository then the Lean package root then `rust/`:
+Replay, from the core repository at `801e732` then the Lean package root then `rust/`:
 
 ```sh
 cargo run --release -p ergodis-rules --example lean_boundary_fixtures -- \
   ../othello/lean/WeightedRules/fixtures/round-convention \
   ../othello/lean/WeightedRules/fixtures/distance.json \
   ../othello/lean/WeightedRules/fixtures/chain-distance.json
+cargo build --release -p ergodis-rules
 python3 WeightedRules/generate_round_convention.py
-ERGODIS_RULE_LIBRARY=$HOME/.cache/ergodis/target/ergodis/release/libergodis_rules.so \
+ERGODIS_RULE_LIBRARY=$CARGO_TARGET_DIR/ergodis/release/libergodis_rules.so \
   ../lean/scripts/lean-build-queue.py build WeightedRules --cores 20-23
 ```
 

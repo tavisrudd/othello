@@ -74,8 +74,8 @@ parameters. No additional result or hypothesis is needed.
 
 - Authority source commit: `bff56acaa`.
 - Standalone commit: `1726b22`, including PROVENANCE.md and export-manifest.json.
-- Standalone `make check` passed; log directory under `/tmp/claude-run-quiet/`:
-  `20260911-024027-make-C-cubic-stabilization-irrationality-check`.
+- Standalone `make -C papers/cubic-stabilization-irrationality check` passed at
+  standalone commit `1726b22`.
 - Export audit: zero findings; verify: 36 tracked files match.
 - Export content SHA-256:
   `f58a3b42ea9f3b78f199ccf36617970b8c00d16db512654d617d68f64ce86c36`.

@@ -71,13 +71,13 @@ nix shell nixpkgs#cargo nixpkgs#rustc nixpkgs#clippy --command cargo clippy -p e
   --test semantic_contract_privacy --test semantic_contract_causal --test semantic_contract_qec -- -D warnings
 ```
 
-Test log: `/tmp/claude-run-quiet/20260907-111233-nix-shell-nixpkgscargo-nixpkgsrustc-command-cargo-test-p-ergodis-private-test-sem`.
+The `cargo test -p ergodis-private` command above passed at private commit `c66e4a6` in `~/src/ergodis-private`.
 Scoped rustfmt and whitespace checks pass. No production kernel changed, so no performance claim
 or hot-path A/B is made. The private crate still requires its existing native dependency closure;
 this adapter has a wasm32-compatible input range but no new WASM binding/build is claimed.
 
 Scoped clippy passed; Luna found no material issue in the cold admission adapter and LRC tests.
-Private implementation commit: `c66e4a6`. Clippy log:
-`/tmp/claude-run-quiet/20260907-111345-nix-shell-nixpkgscargo-nixpkgsrustc-nixpkgsclippy-command-cargo-clippy-p-ergodis-`.
+Private implementation commit: `c66e4a6`. The scoped `cargo clippy -p ergodis-private` command above
+ran at that commit.
 Cache GC was dry-run only. No incidental discovery-track item: the admission/evidence findings were
 part of the requested audit. Remaining limitations are the explicit promotion gates above.

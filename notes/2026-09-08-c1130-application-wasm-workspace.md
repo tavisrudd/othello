@@ -143,8 +143,9 @@ fallback and LRC resource shape. Provider/native allocation and performance gate
 remain those of the module spike: no solver code or binaries were rebuilt here.
 There is no new native performance claim.
 
-Final application log and output are sealed in application-validation.json;
-retained screenshots live under ~/.cache/ergodis/application-workspace/.
+Final application log and output are sealed in application-validation.json. The
+screenshots were inspected locally but not retained as tracked evidence; the
+committed record is application-validation.json plus the summary here.
 One expanded harness run observed a missing result during its import sequence;
 per-action rejection diagnostics and explicit context assertions were added.
 Three subsequent full replays and the later expanded final gates passed. The

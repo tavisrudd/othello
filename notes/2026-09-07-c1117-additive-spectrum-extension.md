@@ -102,16 +102,15 @@ and description have been updated. No validation gate was relaxed.
 
 ## Validation and release
 
-The final authority `make check` passed (2026-09-07, run-quiet directory
-`/tmp/claude-run-quiet/20260907-154911-make-C-cubic-stabilization-m1-check/`).
+The final authority `make -C papers/cubic-stabilization-m1 check` passed
+(2026-09-07, at authority commit `08ee6cea8`).
 The 17-page PDF has SHA-256
 `6a13dfc44514a2e5ced925f8efb200a0509490e77b79ebafc1679efb6a0ef54e`.
 Pages 14--16 were visually inspected after the final gate; no display or
 pagination repair was needed. Scoped whitespace checks passed. This is an
 authority checkpoint, committed as `08ee6cea8`. The guarded export audit
-reported no findings. The standalone gate also passed (run-quiet directory
-`/tmp/claude-run-quiet/20260907-155453-make-C-cubic-stabilization-m1-check/`)
-with the same PDF hash. Export verification passed after staging the new
+reported no findings. The standalone `make -C papers/cubic-stabilization-m1 check`
+also passed, at standalone forward commit `bcce442`, with the same PDF hash. Export verification passed after staging the new
 section; the initial tracked-tree check correctly reported that unstaged
 new file as missing. Standalone forward commit: `bcce442`. Nothing was pushed.
 

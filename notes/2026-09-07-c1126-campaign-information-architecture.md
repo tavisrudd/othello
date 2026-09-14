@@ -41,10 +41,12 @@ status. The test now includes that diagnostic. The failure did not recur in the
 next two full workspace runs; its cause was not established, and it is not claimed
 as a repaired persistence defect. Existing repository code was unchanged.
 
-Logs: `/tmp/claude-run-quiet/20260907-171702-node-workspace-smoke.mjs-url-127.0.0.18767-shot-architecture.png`
-and `20260907-171716-node-smoke.mjs-url-127.0.0.18767`.
-Screenshots inspected: `~/.cache/ergodis/c1125-console/architecture.png` and
-`architecture-catalog.png`. Preview remains http://127.0.0.1:8767/ on the previously
+Gates: `node workspace-smoke.mjs --url http://127.0.0.1:8767 --shot architecture.png`
+and `node smoke.mjs --url http://127.0.0.1:8767`, run at commit `6bb927b`; their
+`run-quiet` capture directories were session-local and not retained.
+The architecture and catalog screenshots were inspected during the session but are
+not retained as tracked evidence; the committed evidence is the browser smoke test
+and the observations recorded above. Preview remains http://127.0.0.1:8767/ on the previously
 owned server; no server restart or process intervention was needed.
 
 ## Remaining boundaries and next review

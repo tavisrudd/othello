@@ -69,8 +69,9 @@ nix shell nixpkgs#cargo nixpkgs#rustc nixpkgs#clippy --command cargo clippy -p e
 nix shell nixpkgs#cargo nixpkgs#rustc nixpkgs#clippy nixpkgs#rustfmt --command bash -c 'rustfmt --edition 2021 --check src/lrc_update_admission.rs tests/leaf_update_admission.rs && cargo clippy -p ergodis-private --test leaf_update_admission -- -D warnings && cargo test -p ergodis-private --test leaf_update_admission --test semantic_contract_updates --test semantic_contract_lrc --test composition_construction'
 ```
 
-Captured logs under `/tmp/claude-run-quiet/`: library lint `20260907-114505`, final
-integration gate `20260907-114719`, cache dry run `20260907-114734`. No cache entries removed.
+The library lint and final integration gate above, plus a dry-run cache audit, all passed at private
+commit `b6307ed` in `~/src/ergodis-private`; the per-run capture directories were session-local and
+not retained. No cache entries removed.
 The first test draft had lint issues and an incorrect expected error for a forged after-state;
 these were corrected before acceptance, with invalid-source availability tested separately.
 Core/WASM sources and kernels are unchanged; no new WASM support claim or benchmark measurement.

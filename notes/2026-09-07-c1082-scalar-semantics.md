@@ -69,8 +69,8 @@ core check, formatting, all-target/all-feature clippy and the full all-feature t
 All three Python fixture checks passed (existing solver corpus, 12 admission cases, 41 scalar
 cases). Cache GC passed in dry-run mode; no shared artifacts were deleted.
 
-Full-suite local log:
-`/tmp/claude-run-quiet/20260907-081420-RAYON_NUM_THREADS12-nix-shell-nixpkgscargo-nixpkgsrustc-command-cargo-test-all-fe`.
+Full suite: `nix shell nixpkgs#cargo nixpkgs#rustc --command env RAYON_NUM_THREADS=12 cargo test --all-features`,
+at core commit `ac6b3ad` in `~/src/ergodis`.
 Committed source/reference/tests and the replay commands are the durable evidence. All commands run from `~/src/ergodis` through the
 run-quiet wrapper, with shared out-of-tree build artifacts and no parallel build contention.
 

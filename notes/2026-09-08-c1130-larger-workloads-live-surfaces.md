@@ -62,9 +62,9 @@ options, uniqueness, capacity bounds and returned aggregate loads.
 The surface gate observed multiple intermediate DOM progress values before full
 completion, 81 completed cells, asymmetric objective weights with an eligible
 winner, and a separate stopped run retaining between 1 and 80 completed cells.
-Saved log:
-`/tmp/claude-run-quiet/20260908-182059-nix-shell-nixpkgsnodejs-nixpkgschromium-command-node-run-smoke.mjs-url-127.0.0.18/stdout.log`.
-Screenshots are under `~/.cache/ergodis/application-workspace/larger-*.png`.
+That gate is the `run-smoke.mjs` command above, run at private commits `017f2f1`
+and `7403a6e`; its stdout was not retained as tracked evidence.
+The screenshots were likewise not retained as tracked evidence.
 The compute-72 and completed surface screenshots were visually inspected.
 After that gate, a display-only change added axis titles directly beside the
 axes using SVG textContent; diff hygiene passed, no new semantic test was needed.

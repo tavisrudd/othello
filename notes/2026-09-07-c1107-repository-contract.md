@@ -102,8 +102,11 @@ nix shell nixpkgs#cargo nixpkgs#rustc nixpkgs#clippy nixpkgs#rustfmt --command b
 nix shell nixpkgs#python3 --command python3 wasm/scripts/check-python-parity.py
 ```
 
-Final run-quiet capture: `/tmp/claude-run-quiet/20260907-141819-nix-shell-nixpkgscargo-nixpkgsrustc-nixpkgsclippy-nixpkgsrustfmt-command-bash-c-c`.
-Targeted runs: prefixes `20260907-141119` and `20260907-141431`; Python `20260907-141727`.
+The final acceptance run was the combined `nix shell nixpkgs#cargo nixpkgs#rustc
+nixpkgs#clippy nixpkgs#rustfmt --command bash -c '...'` gate above, preceded by
+two targeted `cargo` runs and the Python parity check, all against core commit
+`75b646b`; the per-run `run-quiet` capture directories were session-local and
+not retained.
 No browser execution gate was rerun: this slice changes no browser API, client or
 package; the new runtime module passes release WASM compilation. No export/push.
 Cache audit passed in dry-run mode at `20260907-142136`; nothing deleted.

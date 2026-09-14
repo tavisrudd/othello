@@ -85,7 +85,7 @@ the canonical serialization at whatever size (13 MB for the dense N = 1024 closu
 | Negative controls: schema/identity/fact-count binding, list coverage, rule out of range, every premise reference moved, every premise pointing at itself (rank), every tuple value flipped, a duplicate derivation, an absent-fact premise, a dropped derivation | each rejected (`derivation_certificate_rejects_every_mutation_class`) |
 | Zero allocations in the derivation loop | 100 repeated evaluations of `same_generation.json` under the counting allocator: 0 (`tests/allocation.rs`) |
 | `cargo fmt --check`, `cargo clippy --all-targets --all-features -- -D warnings` (verify, rules), `cargo test --all-features` (verify, rules), `SHA256SUMS` regenerated | clean, 18 test binaries pass |
-| Private harness clippy clean; retained executable `~/.cache/ergodis/bin/nix-77aa137` built with the pinned `rustc 1.95.0` | recorded in `MANIFEST.tsv` |
+| Private harness clippy clean; retained executable built via `ergodis-contrib/scripts/retain-bin.sh . closure_ballpark --example --profile release --label nix` from `ergodis-private` at `77aa137` (dirty tree), `rustc 1.95.0` | SHA-256 below |
 
 ## Comparison
 
@@ -252,7 +252,7 @@ No discovery-track entry: nothing incidental was found outside what the task was
 | `ergodis-private/analysis/datalog-comparison/results-2026-09-13-run2.md` | `8c002f3021c323e2cba60f8c663b9b40ccdf0188e0b6631671a49988a49d2e21` |
 | `ergodis-private/analysis/datalog-comparison/tc.dl` | `22ba6233859d3a335151ddc3489137b21a68fc737dd46f5b2c07ade29bb83693` |
 | `ergodis-private/analysis/datalog-comparison/sg.dl` | `a990fbb36287e706e08a407ba2c9b5ec9b089134dcd7114904c92a4d238b60e2` |
-| retained harness `~/.cache/ergodis/bin/nix-77aa137` | `7e6d8c7e25748fe467d16b085558fb355c068cff1e323d8eea1b5d13f9b1e9db` |
+| retained harness, `ergodis-private` at `77aa137` (dirty tree) | `7e6d8c7e25748fe467d16b085558fb355c068cff1e323d8eea1b5d13f9b1e9db` |
 
 Replay:
 
@@ -261,7 +261,7 @@ cd ~/src/ergodis-private
 nix shell nixpkgs#cargo nixpkgs#rustc -c ../ergodis-contrib/scripts/retain-bin.sh . closure_ballpark --example --profile release --label nix
 cd analysis/datalog-comparison
 nix shell nixpkgs#souffle nixpkgs#gcc nixpkgs#gnumake nixpkgs#time -c python3 compare.py \
-  --bin ~/.cache/ergodis/bin/nix-<sha> --work ~/.cache/ergodis/datalog-comparison/run2 \
+  --bin "$RETAINED_BIN" --work "$(mktemp -d)" \
   --out results-<date>.json --rounds 7 --cpu 3
 ```
 

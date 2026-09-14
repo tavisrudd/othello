@@ -1,0 +1,170 @@
+{
+  "engine": "order6-orbit-census",
+  "files": [
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 39,
+              "distinct_orbits": 39,
+              "distinct_raw_states": 39,
+              "group_order": "60837482496",
+              "largest_class": 1,
+              "largest_orbit": "60837482496",
+              "level": 29,
+              "nanoseconds_per_candidate": 271030,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "60837482496",
+              "states_with_trivial_stabiliser": 39
+            }
+          ],
+          "scope": "objective"
+        },
+        {
+          "levels": [
+            {
+              "candidates": 39,
+              "distinct_orbits": 39,
+              "distinct_raw_states": 39,
+              "group_order": "7604685312",
+              "largest_class": 1,
+              "largest_orbit": "7604685312",
+              "level": 29,
+              "nanoseconds_per_candidate": 139596,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "7604685312",
+              "states_with_trivial_stabiliser": 39
+            }
+          ],
+          "scope": "seed-scope"
+        }
+      ],
+      "path": "evidence/q29-shell-corpus-wide.json",
+      "records": 39
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 624,
+              "distinct_orbits": 409,
+              "distinct_raw_states": 409,
+              "group_order": "60837482496",
+              "largest_class": 2,
+              "largest_orbit": "60837482496",
+              "level": 29,
+              "nanoseconds_per_candidate": 145057,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "30418741248",
+              "states_with_trivial_stabiliser": 621
+            }
+          ],
+          "scope": "objective"
+        },
+        {
+          "levels": [
+            {
+              "candidates": 624,
+              "distinct_orbits": 409,
+              "distinct_raw_states": 409,
+              "group_order": "7604685312",
+              "largest_class": 2,
+              "largest_orbit": "7604685312",
+              "level": 29,
+              "nanoseconds_per_candidate": 151507,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "3802342656",
+              "states_with_trivial_stabiliser": 621
+            }
+          ],
+          "scope": "seed-scope"
+        }
+      ],
+      "path": "evidence/q29-shell-mine.jsonl",
+      "records": 624
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 12,
+              "distinct_orbits": 12,
+              "distinct_raw_states": 12,
+              "group_order": "60837482496",
+              "largest_class": 1,
+              "largest_orbit": "60837482496",
+              "level": 29,
+              "nanoseconds_per_candidate": 150075,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "60837482496",
+              "states_with_trivial_stabiliser": 12
+            }
+          ],
+          "scope": "objective"
+        },
+        {
+          "levels": [
+            {
+              "candidates": 12,
+              "distinct_orbits": 12,
+              "distinct_raw_states": 12,
+              "group_order": "7604685312",
+              "largest_class": 1,
+              "largest_orbit": "7604685312",
+              "level": 29,
+              "nanoseconds_per_candidate": 149894,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "7604685312",
+              "states_with_trivial_stabiliser": 12
+            }
+          ],
+          "scope": "seed-scope"
+        }
+      ],
+      "path": "evidence/q29-margin-tabu-shell-hits.json",
+      "records": 12
+    }
+  ],
+  "pooled": [
+    {
+      "levels": [
+        {
+          "candidates": 675,
+          "distinct_orbits": 421,
+          "distinct_raw_states": 421,
+          "group_order": "60837482496",
+          "largest_class": 3,
+          "largest_orbit": "60837482496",
+          "level": 29,
+          "nanoseconds_per_candidate": 144798,
+          "orbit_merges_beyond_equality": 0,
+          "smallest_orbit": "30418741248",
+          "states_with_trivial_stabiliser": 672
+        }
+      ],
+      "scope": "objective"
+    },
+    {
+      "levels": [
+        {
+          "candidates": 675,
+          "distinct_orbits": 421,
+          "distinct_raw_states": 421,
+          "group_order": "7604685312",
+          "largest_class": 3,
+          "largest_orbit": "7604685312",
+          "level": 29,
+          "nanoseconds_per_candidate": 135218,
+          "orbit_merges_beyond_equality": 0,
+          "smallest_orbit": "3802342656",
+          "states_with_trivial_stabiliser": 672
+        }
+      ],
+      "scope": "seed-scope"
+    }
+  ],
+  "provenance": "ExactComputational: lexicographic minimum over the gated orbit group, witnessed per state; a census of the named files only"
+}

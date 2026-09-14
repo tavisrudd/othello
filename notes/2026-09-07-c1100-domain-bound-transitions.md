@@ -94,9 +94,10 @@ nix shell nixpkgs#cargo nixpkgs#rustc --command cargo test -p ergodis-private --
 nix shell nixpkgs#rustfmt --command rustfmt --check --edition 2021 --config skip_children=true src/lib.rs src/lrc_update_admission.rs src/lrc_transition_verification.rs tests/domain_bound_transitions.rs
 ```
 
-Captured through `run-quiet`: core gate prefix `20260907-123034`, private gate
-`20260907-123229`, Python `20260907-123230`, WASM `20260907-123347`, under
-`/tmp/claude-run-quiet/`. Full-tool lint was not rerun: C1098's unrelated
+The gates above ran in that order — core, private, Python, WASM — against
+`~/src/ergodis` commit `174999c` and `~/src/ergodis-private` commit `cc56b87`;
+the per-run `run-quiet` capture directories were session-local and not
+retained. Full-tool lint was not rerun: C1098's unrelated
 `leakage_dual_tower.rs:116` finding remains outside this slice. No public export
 or push. Cache cleanup is a dry run only.
 

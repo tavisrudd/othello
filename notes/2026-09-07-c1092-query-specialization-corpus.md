@@ -112,8 +112,7 @@ nix shell nixpkgs#rustfmt --command rustfmt --edition 2021 --check \
   tests/semantic_contract_privacy.rs tests/semantic_contract_causal.rs tests/semantic_contract_qec.rs
 ```
 
-All passed. Test log: `/tmp/claude-run-quiet/20260907-110405-nix-shell-nixpkgscargo-nixpkgsrustc-command-cargo-test-p-ergodis-private-test-sem`;
-clippy log: `/tmp/claude-run-quiet/20260907-110518-nix-shell-nixpkgscargo-nixpkgsrustc-nixpkgsclippy-command-cargo-clippy-p-ergodis-`.
+All three commands above passed at private commit `4841e23` in `~/src/ergodis-private`.
 An initial run-quiet invocation failed argument parsing before launching cargo; corrected to its
 single-command-string interface. Luna reviewed the three examples for material semantic gaps;
 no additional material issue found. No benchmark or full private regression suite was rerun:

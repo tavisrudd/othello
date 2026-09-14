@@ -993,7 +993,8 @@ Report file: `notes/2026-07-08-codex-intrusion-census.md`.
 **Review (Fable, 2026-07-08): SOUND — the joint-snapshot necessity law is dead beyond q=11.**
 All reported numbers reproduce from the raw states jsonl (violations 468 @ q13 / 3455 @ q17,
 every table, the first counterexample verbatim). The review added the gate the amendment
-removed: re-running the census script at q=11 against `/tmp/codex-feat11-c15.out` reproduces
+removed: re-running the census script at q=11 against the committed `notes/data/codex-feat11-c15.out`
+(SHA-256 `2d1efcb70821ca64…`) reproduces
 Fable's session-11 ground truth exactly (0 necessity violations; slice zoneG=0 ⟺ P), so the
 new defect/zone feature code is cross-validated and the q=13 counterexample stands. Findings
 beyond the report + program consequences: projcap handoff session-block item 16. The

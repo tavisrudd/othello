@@ -98,9 +98,10 @@ nix shell nixpkgs#cargo nixpkgs#rustc --command cargo test -p ergodis-private --
 nix shell nixpkgs#rustfmt --command rustfmt --check --edition 2021 tests/run_record_identity.rs
 ```
 
-Capture prefixes under `/tmp/claude-run-quiet/`: final native `20260907-125243`,
-Python `20260907-125047`, private `20260907-125142`, WASM `20260907-125405`,
-cache dry run `20260907-125406`. No speed claim; full-tool
+Every gate above ran against `~/src/ergodis` commit `e4e7424` and
+`~/src/ergodis-private` commit `dd3f19d`, plus a dry-run cache audit that
+deleted nothing; the per-run `run-quiet` capture directories were session-local
+and not retained. No speed claim; full-tool
 clippy is not part of this slice and its previously recorded unrelated finding
 is untouched. No export/push. Cache cleanup remains dry-run only.
 

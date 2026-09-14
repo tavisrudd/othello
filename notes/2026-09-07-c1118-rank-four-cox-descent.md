@@ -78,8 +78,8 @@ The first attempt to import the original generator encountered its top-level
 CLI parser; the new generator was changed to read only its literal matrices
 with Python's AST reader. No original file was modified. Both arithmetic
 implementations then passed. The final authority `make check` passed after
-the rank-five consequence (run-quiet directory
-`/tmp/claude-run-quiet/20260907-160414-make-C-cubic-stabilization-irrationality-check/`).
+the rank-five consequence (`make -C papers/cubic-stabilization-irrationality check`
+at authority commit `d2f86f539`).
 The PDF has 14 pages, 145165 bytes, and SHA-256
 `976799bdd49ce9195fe96e63cf8893e1d41e5f4122d63f29a8bb3631cb405fe0`.
 Pages 11--13, including the new proposition and verification text, were
@@ -89,8 +89,8 @@ refused because its existing lint-removal rewrite matched the old Makefile
 prerequisite line. That existing rewrite was updated to preserve the newly
 added generated-TeX prerequisite on both sides; no check or export exclusion
 was weakened. Export source `1c052f11e` passed plan and audit with zero
-findings. The standalone `make check` passed in
-`/tmp/claude-run-quiet/20260907-160616-make-C-cubic-stabilization-irrationality-check/`
+findings. The standalone `make -C papers/cubic-stabilization-irrationality check`
+passed at export source `1c052f11e` (standalone forward commit `0ef5ae7`)
 and produced the identical PDF hash above. Export verification passed;
 standalone forward commit `0ef5ae7`. Nothing was pushed or emailed.
 

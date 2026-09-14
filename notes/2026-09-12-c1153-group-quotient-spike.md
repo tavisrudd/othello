@@ -15,7 +15,9 @@ Workspaces:
 - This spike: `~/.cache/ergodis/worktrees/c1153/ergodis-private` on branch
   `spike/c1153-group-quotient` (from `d3a17c7`), core worktree
   `~/.cache/ergodis/worktrees/c1153/ergodis` detached at `b7cb98a`.
-- Run data: `~/.cache/ergodis/c1153/`. Build target: the shared
+- Run data went to an untracked scratch directory and is not tracked evidence; the census and
+  collision-probe outputs retained as tracked evidence are committed under
+  `notes/2026-09-12-c1153-group-quotient-spike-data/`. Build target: the shared
   `~/.cache/ergodis/target/ergodis-private` from the workspace `.cargo/config.toml`.
 
 ## Step 1 — group verification in code
@@ -206,22 +208,36 @@ canonical form itself is `|U(Z/N)| * 4 * 4` least-rotation scans of length `N`.
 ### Replay
 
     cd ~/.cache/ergodis/worktrees/c1153/ergodis-private
-    cargo build --release -p hadamard-2092
-    ~/.cache/ergodis/target/ergodis-private/release/hadamard order6 orbit-census \
+    cargo build --release -p hadamard-2092     # ergodis-private at 088bb27
+    HADAMARD="$CARGO_TARGET_DIR/release/hadamard"
+    RUN_DIR="$(mktemp -d)"
+    "$HADAMARD" order6 orbit-census \
       --input evidence/q29-shell-corpus-wide.json evidence/q29-shell-mine.jsonl \
               evidence/q29-margin-tabu-shell-hits.json \
-      --scope both --output ~/.cache/ergodis/c1153/census-q29.json
-    ~/.cache/ergodis/target/ergodis-private/release/hadamard order6 orbit-census --level 174 \
+      --scope both --output "$RUN_DIR/census-q29.json"
+    "$HADAMARD" order6 orbit-census --level 174 \
       --scope objective \
       --input evidence/phase-two-q174-corpus.jsonl evidence/phase-two-corpus.jsonl \
               evidence/carrier-column-corpus.jsonl evidence/carrier-fibre-corpus.jsonl \
-              evidence/margin-fibre-corpus.jsonl ~/.cache/ergodis/c1016/shell-replication/*.best.jsonl \
-      --output ~/.cache/ergodis/c1153/census-q174.json
-    ~/.cache/ergodis/target/ergodis-private/release/hadamard order6 orbit-census --level 522 \
+              evidence/margin-fibre-corpus.jsonl "$SHELL_REPLICATION"/*.best.jsonl \
+      --output "$RUN_DIR/census-q174.json"
+    "$HADAMARD" order6 orbit-census --level 522 \
       --scope both \
       --input evidence/carrier-fibre-corpus.jsonl evidence/margin-fibre-corpus.jsonl \
               evidence/margin-pair-control-states.jsonl evidence/carrier-column-corpus.jsonl \
-      --output ~/.cache/ergodis/c1153/census-carrier.json
+      --output "$RUN_DIR/census-carrier.json"
+
+`$SHELL_REPLICATION` is the C1016 campaign's own shell-replication `.best.jsonl` output, produced
+by the `c1016-full-2092-campaign` arm and not by this spike; it is untracked campaign run data and
+was not retained as tracked evidence. The three census outputs of this run are committed next to
+this report, with SHA-256:
+
+- `notes/2026-09-12-c1153-group-quotient-spike-data/census-q29.json` —
+  `1f5b6a0804b8b298753ba122e3adc10d8778bce690330aeaadf40d3a969b321f`
+- `notes/2026-09-12-c1153-group-quotient-spike-data/census-q174.json` —
+  `d14d25d9a39e7c9cfae4b0a046695006929711c4c1b7e656b6619a73cfce839d`
+- `notes/2026-09-12-c1153-group-quotient-spike-data/census-carrier.json` —
+  `0e19c403722280eea3a268532587ec56a2eed5c3aa1d7ef134d24698f12bd818`
 
 ## Step 3 — the smallest measurable prototype
 
@@ -260,16 +276,19 @@ None of these is in a file this spike wrote, and none was fixed here. Raised for
 inside each round so both share the box's thermal state, with the same seed, worker count,
 wall-clock budget and epoch length per round.
 
-- **Control**: retained executable `~/.cache/ergodis/bin/c1153-control-a9376d3`, SHA-256
-  `3b703441ac3874fe0f7f2e49b9da6362027648aa92f37a6aa2bcdf3469eea2e0`, built from `a9376d3`, which
-  contains no dedup code at all.
-- **Candidate**: retained executable `~/.cache/ergodis/bin/c1153-dedup-088bb27`, SHA-256
-  `ed4bc065d91494197d8a6ce08338952effde4bff3e0c4662ae63a56de2a67a2e`, built from `088bb27`, run
-  with `--orbit-dedup --orbit-capacity 65536 --orbit-scope seed-scope`.
+- **Control**: `ergodis-private` at `a9376d3`, which contains no dedup code at all; SHA-256 of the
+  executable actually run was
+  `3b703441ac3874fe0f7f2e49b9da6362027648aa92f37a6aa2bcdf3469eea2e0`, as measured, not a cited
+  artifact.
+- **Candidate**: `ergodis-private` at `088bb27`, run with `--orbit-dedup --orbit-capacity 65536
+  --orbit-scope seed-scope`; SHA-256 of the executable actually run was
+  `ed4bc065d91494197d8a6ce08338952effde4bff3e0c4662ae63a56de2a67a2e`, as measured, not a cited
+  artifact.
 
-Both retained by `ergodis-contrib/scripts/retain-bin.sh` and recorded in
-`~/.cache/ergodis/bin/MANIFEST.tsv`. Every run is under `choom -n 1000` with at most twelve
-workers. This change touches no solve hot loop and no hot struct — `Q29MarginTabu::step`, its
+Both arms were built from a clean tree at those `ergodis-private` commits by
+`ergodis-contrib/scripts/retain-bin.sh "$PWD/tasks/hadamard-2092" hadamard --profile release`,
+which is the reproducible build recipe for either one. Every run is under `choom -n 1000` with at
+most twelve workers. This change touches no solve hot loop and no hot struct — `Q29MarginTabu::step`, its
 `RowState` layout, its Gram maintenance and its kick are byte-identical between the two arms — so
 the performance contract's hardware-counter requirement for hot-loop changes does not attach; the
 end-to-end matched-budget comparison below is reported instead.
@@ -327,17 +346,24 @@ owner and is logged to the lane's discovery track.
 ### Replay
 
     cd ~/.cache/ergodis/worktrees/c1153/ergodis-private     # branch spike/c1153-group-quotient
-    bash /home/tavis/src/ergodis-contrib/scripts/retain-bin.sh \
-      "$PWD/tasks/hadamard-2092" hadamard --profile release --label c1153-dedup
-    bash scripts/c1153-orbit-dedup-ab.sh \
-      ~/.cache/ergodis/bin/c1153-control-a9376d3 ~/.cache/ergodis/bin/c1153-dedup-088bb27 \
-      5 20 4 4000 ~/.cache/ergodis/c1153/ab-4000
-    bash scripts/c1153-orbit-dedup-ab.sh \
-      ~/.cache/ergodis/bin/c1153-control-a9376d3 ~/.cache/ergodis/bin/c1153-dedup-088bb27 \
-      5 20 4 200 ~/.cache/ergodis/c1153/ab-200
-    choom -n 1000 -- ~/.cache/ergodis/bin/c1153-dedup-088bb27 order6 margin-tabu \
+    git checkout a9376d3 && cargo build --release -p hadamard-2092     # control arm
+    CONTROL_BIN="$(mktemp)" && cp "$CARGO_TARGET_DIR/release/hadamard" "$CONTROL_BIN"
+    git checkout 088bb27 && cargo build --release -p hadamard-2092     # candidate arm
+    CANDIDATE_BIN="$(mktemp)" && cp "$CARGO_TARGET_DIR/release/hadamard" "$CANDIDATE_BIN"
+    RUN_DIR="$(mktemp -d)"
+    bash scripts/c1153-orbit-dedup-ab.sh "$CONTROL_BIN" "$CANDIDATE_BIN" \
+      5 20 4 4000 "$RUN_DIR/ab-4000"
+    bash scripts/c1153-orbit-dedup-ab.sh "$CONTROL_BIN" "$CANDIDATE_BIN" \
+      5 20 4 200 "$RUN_DIR/ab-200"
+    choom -n 1000 -- "$CANDIDATE_BIN" order6 margin-tabu \
       --workers 12 --seconds 90 --epoch-steps 200 --orbit-dedup --orbit-capacity 65536 \
-      --seed 987654321 > ~/.cache/ergodis/c1153/collision-probe.json
+      --seed 987654321 > "$RUN_DIR/collision-probe.json"
+
+The two A/B round directories are untracked scratch output and were not retained as tracked
+evidence; the per-round tables above are the committed record, generated by the tracked
+`scripts/c1153-orbit-dedup-ab.sh` on the spike branch. The collision probe's output is committed
+at `notes/2026-09-12-c1153-group-quotient-spike-data/collision-probe.json`, SHA-256
+`74472fea503c3f6c53ab00fe7eb6ccabbd671e3e778ee2ebf853af9955782785`.
 
 Acceptance gate, run on the final tree at `b0b0648`: `cargo test --release --workspace
 --all-targets -- --test-threads=1`, **793 passed, 0 failed**.

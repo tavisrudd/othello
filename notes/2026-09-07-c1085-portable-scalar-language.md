@@ -93,14 +93,14 @@ all-feature helper definitions/bodies remain unchanged.
 - Public doc links and no-internal-task-ID checks passed. Scoped diff checks passed. Cache GC
   ran in dry-run mode only; no shared artifacts were removed.
 
-Supporting logs (committed source/tests are the durable authority):
+Gates run at core commit `57af8b4` in `~/src/ergodis` (committed source/tests are the durable authority):
 
-- Final format: `/tmp/claude-run-quiet/20260907-091435-nix-shell-nixpkgscargo-nixpkgsrustc-command-cargo-fmt-all-check`.
-- Full native suite: `/tmp/claude-run-quiet/20260907-090554-RAYON_NUM_THREADS12-nix-shell-nixpkgscargo-nixpkgsrustc-command-cargo-test-all-fe`.
-- Default clippy: `/tmp/claude-run-quiet/20260907-091214-nix-shell-nixpkgscargo-nixpkgsrustc-nixpkgsclippy-command-cargo-clippy-lib-no-def`.
-- Default scalar unit/integration suites: `20260907-091252-nix-shell-nixpkgscargo-nixpkgsrustc-command-cargo-test-no-default-features-lib-sc` and `20260907-091256-nix-shell-nixpkgscargo-nixpkgsrustc-command-cargo-test-no-default-features-test-p` under `/tmp/claude-run-quiet/`.
-- Browser: `/tmp/claude-run-quiet/20260907-091345-nix-shell-nixpkgsnodejs-nixpkgschromium-command-node-browser-smoke.mjs`.
-- Cache audit: `/tmp/claude-run-quiet/20260907-091309-cache-gc.sh`.
+- Final format: `nix shell nixpkgs#cargo nixpkgs#rustc --command cargo fmt --all -- --check`.
+- Full native suite: `nix shell nixpkgs#cargo nixpkgs#rustc --command env RAYON_NUM_THREADS=12 cargo test --all-features`.
+- Default clippy: `nix shell nixpkgs#cargo nixpkgs#rustc nixpkgs#clippy --command cargo clippy --lib --no-default-features -- -D warnings`.
+- Default scalar unit/integration suites: `nix shell nixpkgs#cargo nixpkgs#rustc --command cargo test --no-default-features --lib scalar::` and `nix shell nixpkgs#cargo nixpkgs#rustc --command cargo test --no-default-features --test plan_semantics --test feature_lowering_semantics --test scalar_feature_batch_stream`.
+- Browser: `nix shell nixpkgs#nodejs nixpkgs#chromium --command node browser-smoke.mjs`.
+- Cache audit: `cache-gc.sh`, dry-run mode only.
 
 Replay from the core root through run-quiet, using the shared target directory:
 

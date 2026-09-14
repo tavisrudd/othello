@@ -47,11 +47,12 @@ lean/scripts/lean-build-queue.py build \
   --lean-root /home/tavis/src/othello/papers/cubic-stabilization-m1/lean --cores 20-23
 ```
 
-Successful runs:
-`/home/tavis/.cache/othello-lean-build/run-20260910-012400-38eb5539` (leaf,
-1,808,448 kB peak) and
-`/home/tavis/.cache/othello-lean-build/run-20260910-012451-40e06d0d` (interface/audit,
-at most 2,080,924 kB peak). Both terminals report exactly
+Both targets built clean at commit `bd3aba3e0`, under
+`papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/`:
+the leaf `Quantum/SuperRankOneVanishing.lean` (1,808,448 kB peak) and the
+`PaperInterface/Main.lean` + `Verification/AxiomAudit.lean` pair (at most
+2,080,924 kB peak). The run directories were session-local and not retained.
+Both terminals report exactly
 `propext`, `Classical.choice`, `Quot.sound`.
 The captured-log correspondence gate passes with **189 sources, 324 terminals,
 67 claims, 88 machinery entries, 22 imports and 5 evidence bundles**.

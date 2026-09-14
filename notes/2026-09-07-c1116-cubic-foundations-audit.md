@@ -155,10 +155,9 @@ make -C /home/tavis/src/math-papers/cubic-stabilization-m1 check
 make -C /home/tavis/src/math-papers/cubic-stabilization-irrationality check
 ```
 
-Distinct downstream logs are under
-`/tmp/claude-run-quiet/20260907-151551-make-C-cubic-stabilization-m1-check/`
-and
-`/tmp/claude-run-quiet/20260907-151551-make-C-cubic-stabilization-irrationality-check/`.
+The two downstream gates were run separately, at local forward mirror commits
+`6ab5c45` (m1) and `fa1fea8` (sharpness); the per-run capture directories were
+session-local and not retained.
 The m1 gate did not rebuild Lean or independently recompute every imported
 quantum invariant; its exact scope is the source-only gate described above.
 

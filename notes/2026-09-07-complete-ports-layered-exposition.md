@@ -99,8 +99,9 @@ Lean terminals; fresh deterministic comparison passes. Final PDF SHA-256:
 `b1e1de15e8e7a3874c0cf11a372423a7992f33af0a6ec2ca751750dd61ac7363`.
 Rendered inspection covered the opening and reading routes, quotient callback,
 confinement callback, relocated all-rank consequence, related-work groups, and
-price/reliability callbacks (pages 1–4, 6, 12, 15, 22, 28–29). Before/after
-PDFs are frozen in `~/.cache/complete-ports-layered/`.
+price/reliability callbacks (pages 1–4, 6, 12, 15, 22, 28–29). The before/after
+PDFs were not retained as tracked evidence; the after PDF rebuilds from authority
+commit `0ae040e02` and is pinned by the SHA-256 above.
 
 Synchronization: authority `0ae040e02`, mirror forward commit `65d096b`.
 Mirror deterministic gate and exporter verification pass. All 43 distributed

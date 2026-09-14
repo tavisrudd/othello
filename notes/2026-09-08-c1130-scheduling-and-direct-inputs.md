@@ -98,8 +98,8 @@ these cached baselines must exist. Exact native/browser replay commands, source 
 payload hashes, native reference output, and screenshot hashes are in the evidence.
 
 Active application previews: `http://127.0.0.1:8769/` and `http://127.0.0.1:8770/`,
-serving `~/.cache/ergodis/application-workspace/index.html` and extensions from
+serving a regenerated build output of the committed packager, not a retained input, and extensions from
 `~/.cache/ergodis/module-loading/scheduling-accepted/recipients`.
-Owned server PIDs are 3595787 and 3595788; their PID/log files remain under
-`~/.cache/ergodis/input-query-mockups` and `~/.cache/ergodis/application-workspace`.
-Temporary preview process removed. Main campaign port 8767 is unchanged.
+Owned server PIDs are 3595787 and 3595788; their PID/log files are local server
+state, not retained evidence. Temporary preview process removed. Main campaign
+port 8767 is unchanged.

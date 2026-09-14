@@ -203,8 +203,9 @@ certificate, and nothing proves the matching "fewer than m fail" lower bound.
 This one is unambiguously prior art; do not claim it.
 
 ### Burchardt & Raissi, "Stochastic local operations with classical communication of absolutely maximally entangled states", PRA 102, 022413 (2020), arXiv:2003.13639
-**[T]** (own `pdftotext` of the fetched PDF, saved at
-`<scratchpad>/burchardt-raissi-2003.13639.txt`). Verbatim, Sec. II:
+**[T]** (own `pdftotext` of the fetched PDF; shared lit-search cache key
+`arXiv:2003.13639`, SHA-256
+`7b38bd6a5bd8fb8299863e5ca3c7f64dfadd51a12f1b865edbbcbc3d4847a9e3`). Verbatim, Sec. II:
 
 > "The state rho is called a critical state if its all reduced density matrices rho_i are
 > proportional to the identity. In particular, the class of critical states contains stabilizer

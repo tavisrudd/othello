@@ -32,8 +32,8 @@ with `ergodis-rules` added as a private dev-dependency). Core is untouched.
 ```
 cd /home/tavis/src/ergodis-private
 nix shell nixpkgs#cargo nixpkgs#rustc -c cargo build --release -p ergodis-private \
-  --example closure_ballpark
-/home/tavis/.cache/ergodis/target/ergodis-private/release/examples/closure_ballpark \
+  --example closure_ballpark     # ergodis-private at c02eae8
+"$CARGO_TARGET_DIR/release/examples/closure_ballpark" \
   <N> <sparse|dense> 51 <outdir>
 ```
 

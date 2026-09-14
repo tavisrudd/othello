@@ -29,8 +29,8 @@ Matching the stronger conclusion is not complete geometric formalization.
 
 ## Validation
 
-The guarded Introduction build passed:
-`/home/tavis/.cache/othello-lean-build/run-20260908-002311-71dd915c`.
+The guarded build of `PaperInterface/Introduction.lean` passed at commit
+`abf5b668a`; its run directory was session-local and not retained.
 The target compiled in 27.79 seconds with peak 2,037,280 kB after the
 runner restored Mathlib cache. Its aggregate trace check passed.
 The full axiom audit and source/PDF/export checks are recorded below after
@@ -64,8 +64,8 @@ geometric input boundary is recorded in the preceding audit.
 
 ## Kernel audit result
 
-The full reviewer audit built successfully through the guard at
-`/home/tavis/.cache/othello-lean-build/run-20260908-002510-5b39f70f`
+The full reviewer audit, `Verification/AxiomAudit.lean`, built successfully
+through the guard at commit `abf5b668a`
 (11.70 seconds; peak 2,067,320 kB), with its aggregate trace check passed.
 The captured output reports 319 terminals. The new terminal's exact axiom
 list is `propext, Classical.choice, Quot.sound`; all 318 existing lists
@@ -79,12 +79,10 @@ Only `cor:threefold-marker` required a reviewed terminal-digest refresh.
 No manuscript hypotheses or printed conclusions changed.
 
 Captured audit output SHA-256: `3a5ae22f32ea1b41ec1cae6bc803541a8888e05c07fc4d0e43114715e6001fea`.
-Its exact path is `/home/tavis/.cache/othello-lean-build/run-20260908-002510-5b39f70f/logs/TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Verification.AxiomAudit.quiet/20260908-002511-2ab13640/20260907-172518-taskset-c-20-23-choom-n-1000-time-v-nix-develop-command-bash-lc-export-LEAN_NUM_T/stdout.log`.
+That transcript was session-local and not retained.
 
-The authority paper gate passed at
-`/tmp/claude-run-quiet/20260907-172655-make-C-cubic-stabilization-m1-check/`.
-The exported paper gate passed at
-`/tmp/claude-run-quiet/20260907-172800-make-C-cubic-stabilization-m1-check/`.
+`make -C papers/cubic-stabilization-m1 check` passed for the authority at commit
+`abf5b668a`, and the same gate passed for the exported paper.
 The 18-page PDF remains byte-identical to the preceding draft, SHA-256
 `b4580e09aec3e91d6492217353ac6cf1d03af0177ac35caa09320c1f2721a57e`.
 Guarded export plan/audit/sync and manifest verification pass from authority
@@ -100,8 +98,8 @@ it does not yet supply the primary public terminal, regular-frame bridge,
 closed-point determinant input, or geometric spectral-cluster construction.
 
 The standalone forward commit is `3d200fc`. Its separate guarded full Lean
-replay passed at
-`/home/tavis/.cache/othello-lean-build/run-20260908-002759-521ee1b7`.
+replay of that commit's committed Lean sources passed; the run directory was
+session-local and not retained.
 The dependency rebuild took 11:27.88, with peak 8,086,204 kB; the aggregate
 trace check passed. The exported checker's captured-axiom-log mode passes
 for all 319 terminals against the same expected records. Thus both roots
@@ -109,4 +107,4 @@ have a successful full kernel audit, as well as passing paper gates and
 matching PDFs. Nothing was pushed or deposited.
 
 Standalone captured audit SHA-256: `5d7ff313c17c9b88fb6d964f0305173771697d52a55ac36fd4ecf2e9757db7cc`.
-Exact log path: `/home/tavis/.cache/othello-lean-build/run-20260908-002759-521ee1b7/logs/TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Verification.AxiomAudit.quiet/20260908-002759-57b3a78d/20260907-172817-taskset-c-20-23-choom-n-1000-time-v-nix-develop-command-bash-lc-export-LEAN_NUM_T/stdout.log`.
+That transcript was likewise session-local and not retained.

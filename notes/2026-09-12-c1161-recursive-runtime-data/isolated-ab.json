@@ -1,0 +1,97 @@
+{
+  "binaries": {
+    "after": {
+      "path": "/home/tavis/.cache/ergodis/bin/rule-replay-isolated-b4d6e9f",
+      "sha256": "f9691554e82b4dce09d2a9fed6a786acd789ff3bb27a7345b1b638b98d5d475e"
+    },
+    "before": {
+      "path": "/home/tavis/.cache/ergodis/bin/rule-replay-naive-b4d6e9f",
+      "sha256": "1a12abd00003527ade69fe5fb518853e8dc92f272bb76795b49c12a4ba842d70"
+    }
+  },
+  "cpus": "20-23",
+  "domain": 32,
+  "events": [
+    "cycles:u",
+    "instructions:u",
+    "branches:u",
+    "branch-misses:u",
+    "cache-references:u",
+    "cache-misses:u"
+  ],
+  "generator_sha256": "623e16450748902483571d00c4117c88a98f8bfb35efff9d05517bed0edc3855",
+  "repeats": 20000,
+  "rounds": 5,
+  "samples_sha256": "7a4419834b91d6bc33c34010bf01712a7038722d2996a66e5128a5172def04f8",
+  "schema": "rule-replay-profile.v1",
+  "summaries": [
+    {
+      "cycle_ratio": 0.06563450508470851,
+      "density": "sparse",
+      "instruction_ratio": 0.08618910707286036,
+      "paired_log_t": 380.74507948980744,
+      "pairs": 5,
+      "peak_kib": {
+        "after": 2316,
+        "before": 2200
+      },
+      "product_checks": {
+        "after": 21100000,
+        "before": 675840000
+      },
+      "wall_speedup": 15.350162135691354,
+      "workers": 1
+    },
+    {
+      "cycle_ratio": 0.06407922091852301,
+      "density": "sparse",
+      "instruction_ratio": 0.0856775812387187,
+      "paired_log_t": 85.69733867242962,
+      "pairs": 5,
+      "peak_kib": {
+        "after": 2468,
+        "before": 2428
+      },
+      "product_checks": {
+        "after": 21100000,
+        "before": 675840000
+      },
+      "wall_speedup": 14.618787311911912,
+      "workers": 4
+    },
+    {
+      "cycle_ratio": 0.1923380137753613,
+      "density": "dense",
+      "instruction_ratio": 0.23719297968246386,
+      "paired_log_t": 459.54851406350775,
+      "pairs": 5,
+      "peak_kib": {
+        "after": 2468,
+        "before": 2412
+      },
+      "product_checks": {
+        "after": 59520000,
+        "before": 675840000
+      },
+      "wall_speedup": 5.215032348163238,
+      "workers": 1
+    },
+    {
+      "cycle_ratio": 0.19066052315365112,
+      "density": "dense",
+      "instruction_ratio": 0.2369433445717253,
+      "paired_log_t": 90.935261603236,
+      "pairs": 5,
+      "peak_kib": {
+        "after": 2480,
+        "before": 2664
+      },
+      "product_checks": {
+        "after": 59520000,
+        "before": 675840000
+      },
+      "wall_speedup": 4.255103913878404,
+      "workers": 4
+    }
+  ]
+}

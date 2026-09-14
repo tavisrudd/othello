@@ -61,20 +61,22 @@ All gates pass under Luna's sole sequential validation ownership:
   advanced declarations/response are collapsible, and import remains keyboard focusable. The final
   browser gate repeats the actual workflow after these CSS/HTML/JS refinements.
 
-Final browser log:
-`/tmp/claude-run-quiet/20260907-101822-nix-shell-nixpkgsnodejs-nixpkgschromium-command-node-browser-smoke.mjs`.
-Workspace test log:
-`/tmp/claude-run-quiet/20260907-101450-RAYON_NUM_THREADS12-nix-shell-nixpkgscargo-nixpkgsrustc-command-cargo-test-worksp`.
+Final browser gate:
+`nix shell nixpkgs#nodejs nixpkgs#chromium --command node browser-smoke.mjs`.
+Workspace test gate:
+`RAYON_NUM_THREADS=12 nix shell nixpkgs#cargo nixpkgs#rustc --command cargo test --workspace`.
+Both ran at core commit `ea1f563`; their `run-quiet` capture directories were
+session-local and not retained.
 
 A later smoke retry exposed the inherited composition probe reading documentElement before the
 initial HTML existed. The poll now tolerates that initial empty document, retaining its timeout
 and existing navigation-context retry. This was a test-harness startup defect, not a missing UI
 selector or WASM binding.
 
-The final screenshot is a review aid at
-`~/.cache/ergodis/browser-control-review/campaign-demo.png`; reproducible source and browser tests
-are committed. Documentation link checks and scoped whitespace checks pass. Cache audit passed
-in dry-run mode with no deletion: `/tmp/claude-run-quiet/20260907-101913-cache-gc.sh`.
+The final screenshot was a session-local review aid and is not retained as tracked evidence; the
+committed evidence is the reproducible source, the committed browser tests and the observations
+recorded above. Documentation link checks and scoped whitespace checks pass. A `cache-gc.sh` audit
+passed in dry-run mode with no deletion.
 No Rust, lockfile, profile, kernel or layout edits, and no performance improvement claimed.
 
 Baseline and final packaged WASM SHA-256 are identical:

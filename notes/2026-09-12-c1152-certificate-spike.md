@@ -425,7 +425,8 @@ the dual loop twice per workspace and observes no allocation.
 ### Measurement, reduced development model, radius five
 
 Retained executable `c1152-dual-v2-0e3a0cc`, SHA-256 `16502b07…8f227e`, rustc 1.93.1, release.
-Input `~/.cache/ergodis/c1143/native-projected.json`, SHA-256 `3a680e4a…fb0fd6e8`. Eleven
+Input committed at `notes/2026-09-12-c1152-certificate-spike-data/native-projected.json`, SHA-256
+`3a680e4a4caeea6121de1a8ea2d7359fffec8461df0e860c9ba647cafb0fd6e8`. Eleven
 interleaved rounds with alternating order, `choom -n 1000`, `taskset -c 0,1,2`, three workers.
 Control and candidate are the same executable and the same input; only the monomorphized kernel
 differs, which is a stronger control than two binaries.

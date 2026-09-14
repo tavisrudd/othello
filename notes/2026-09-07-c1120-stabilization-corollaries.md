@@ -100,9 +100,7 @@ make -C papers/cubic-stabilization-m1 check
 make -C papers/cubic-stabilization-irrationality check
 ```
 
-Logs: `/tmp/claude-run-quiet/20260907-152508-make-C-cubic-stabilization-m1-check/`
-and `/tmp/claude-run-quiet/20260907-152508-make-C-cubic-stabilization-irrationality-check/`.
-These include the m1 source-only annotation/fragment check and the
+Both were run at authority commit `36fcb6ad7`. They include the m1 source-only annotation/fragment check and the
 sharpness retained certificate derivation, separate checker, metadata and
 LaTeX checks. Both warning gates and `git diff --check` passed.
 The changed m1 statement on page 2 and the sharpness new consequences and
@@ -120,9 +118,8 @@ authority hashes above. Mirror commits: m1 `165f241`, sharpness `31e34b1`.
 Exporter content hashes:
 `4dc8985804868c97bbe6165a6313f2d8a404b517f0d4aa98c6fec5bebd27f7b0`
 and `835584dbe1b4c386a2575c71248fdbb9fb0aa8dd2a9055a58ca99206a69f7e58`.
-Distinct mirror logs are under
-`/tmp/claude-run-quiet/20260907-152925-make-C-cubic-stabilization-m1-check/`
-and `/tmp/claude-run-quiet/20260907-152925-make-C-cubic-stabilization-irrationality-check/`.
+Each mirror gate was run separately — `make check` in the m1 mirror at commit
+`165f241` and in the sharpness mirror at commit `31e34b1`.
 
 The author's additional six-axis-pencil feedback arrived during mirror
 validation. Its bounded assessment is in

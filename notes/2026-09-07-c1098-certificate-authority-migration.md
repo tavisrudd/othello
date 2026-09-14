@@ -77,7 +77,7 @@ nix shell nixpkgs#cargo nixpkgs#rustc nixpkgs#clippy --command cargo clippy -p e
 nix shell nixpkgs#cargo nixpkgs#rustc --command cargo run -p ergodis-tools -- generic-certificate-bench --mode matrix-verified-chain --events 2
 ```
 
-Supplementary `/tmp/claude-run-quiet/` logs: library suite `20260907-121018`,
-whole-tool lint limitation `20260907-121322`, CLI unit/smoke `20260907-121608`,
-CLI integration/lint `20260907-121832`. Cache GC ran dry; nothing was removed.
+The library suite, whole-tool lint (with its recorded limitation), CLI unit/smoke and CLI
+integration/lint gates above all passed at private commit `83ebffa` in `~/src/ergodis-private`; the
+per-run capture directories were session-local and not retained. Cache GC ran dry; nothing was removed.
 Tracked tests and source are the replay authority; no timing result is claimed.

@@ -62,18 +62,19 @@ physical observations remain lower bounds. Tables retain their types when empty.
   core parity/build rerun. This checks the notebook-callable API, not Jupyter UI.
 - Cache GC dry run passes; nothing removed. All implementation paths are committed.
 
-Exact commands are in private `analysis/repository-projection.md`. Final fixture
-output: `/home/tavis/.cache/ergodis/c1123-projection-final`; regeneration uses a
+Exact commands are in private `analysis/repository-projection.md`. The final
+fixture output went to a session-local cache directory and is not retained as
+tracked evidence; regeneration uses a
 fresh directory (native creation deliberately refuses an existing repository).
 The committed Rust test is the fixture generator; Python assertion script invokes
 the real CLI and independently checks SQL values against explicit expected values.
 The cache is disposable and is not sole evidence or a paper-facing artifact.
 
-Final run-quiet captures under `/tmp/claude-run-quiet/`:
-`20260907-154110-nix-shell-nixpkgs...` (fmt/test/build),
-`20260907-154139-uv-run-with-duckdb1.5.5...` (SQL/CLI),
-`20260907-153826-nix-shell-nixpkgs...` (initial gates/inherited Clippy failure),
-and `20260907-154133-cache-gc.sh` (dry run).
+The accepted gates were the `nix shell nixpkgs#...` fmt/test/build run, the
+`uv run --with duckdb==1.5.5` SQL/CLI run, an earlier `nix shell nixpkgs#...`
+gate run that surfaced the inherited Clippy failure, and a `cache-gc.sh` dry
+run, all against private commits `c835284` and `2820c67`; the per-run
+`run-quiet` capture directories were session-local and not retained.
 
 ## Closeout and retained boundary
 

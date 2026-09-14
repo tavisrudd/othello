@@ -127,8 +127,8 @@ novelty verdict is made for the slice extension.
 ## Validation
 
 The final authority `make check` passed after moving the extension behind
-the main proofs (run-quiet directory
-`/tmp/claude-run-quiet/20260907-161922-make-C-cubic-stabilization-irrationality-check/`).
+the main proofs (`make -C papers/cubic-stabilization-irrationality check`, at
+authority checkpoint `018a23c08`).
 The PDF has 16 pages, 157499 bytes, and SHA-256
 `29b668b0b568272a87625147fe0e88751af386a7eee118c40d1bee98ed68cd87`.
 Pages 11--13 were visually inspected, including the full finite-index
@@ -138,9 +138,8 @@ confirm the precise parametrization and characteristic hypotheses.
 The main quotient/Cox/cubic route remains Sections 2--4; the extension is
 Section 6. The abstract and headline statements were not expanded by C1119.
 Authority checkpoint `018a23c08` passed the export plan and audit with zero
-findings. Standalone `make check` passed in
-`/tmp/claude-run-quiet/20260907-162236-make-C-cubic-stabilization-irrationality-check/`
-with the same PDF hash. Export verification passed; standalone forward
+findings. Standalone `make -C papers/cubic-stabilization-irrationality check`
+passed at standalone forward commit `099428f`, with the same PDF hash. Export verification passed; standalone forward
 commit `099428f`. Nothing was pushed or emailed. The author has required a
 fresh full-paper cold-read sub-referee protocol after the exposition and
 terminology revisions; the local proof audit and build gates here do not

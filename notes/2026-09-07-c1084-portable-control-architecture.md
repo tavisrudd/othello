@@ -774,8 +774,8 @@ feature-independent; stage 1 fixes that distinction.
 Validation for this planning-only task: direct source inspection at `6269cd1`, two independent
 reviews, browser platform documentation checked on 2026-09-07, local Markdown link checks and a
 scoped diff/ownership check. No code tests rerun because no source/build configuration changed.
-Cache audit completed in dry-run mode (`/tmp/claude-run-quiet/20260907-084623-cache-gc.sh`);
-no artifacts were deleted.
+Cache audit completed in dry-run mode by running `cache-gc.sh` at `6269cd1`; no artifacts were
+deleted, and the `run-quiet` capture directory was session-local and not retained.
 No incidental research discoveries were found; the findings above are task deliverables.
 A final Terra review checked the crate DAG and session split; its scheduler-ownership ambiguity
 was resolved explicitly. A follow-up source audit distinguished the two Python clients. The

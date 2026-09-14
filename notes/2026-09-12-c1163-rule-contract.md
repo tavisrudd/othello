@@ -109,15 +109,20 @@ Contract, BoundedMinPlus, Relations, AxiomAudit:
 ../lean/scripts/lean-build-queue.py build WeightedRules.AxiomAudit --cores 20-23
 ```
 
-Saved gate runs (logs are supplemental; committed sources/scripts/certificate are authority):
+Gate runs (committed sources/scripts/certificate are authority):
 
-- Full native: `/tmp/claude-run-quiet/20260912-150102-nix-shell-nixpkgscargo-nixpkgsrustc-nixpkgsrustfmt-nixpkgsclippy-nixpkgspython3-c/`.
-- Native/WASM builds and execution: `/tmp/claude-run-quiet/20260912-144625-nix-shell-nixpkgscargo-nixpkgsrustc-nixpkgslld-nixpkgspython3-nixpkgsnodejs-c-sh-/`.
-- Final stronger ABI replay: `/tmp/claude-run-quiet/20260912-145004-nix-shell-nixpkgspython3-nixpkgsnodejs-c-sh-c-python3-native_abi.py-libergodis_ru/`.
-- Lean queue runs under `~/.cache/othello-lean-build/`: `run-20260912-213013-31cb0ca2`
-  (Contract), `run-20260912-214746-6d2ec912` (BoundedMinPlus),
-  `run-20260912-220021-403be1a0` (Relations), `run-20260912-220136-c01756f8` (AxiomAudit).
-- Final axiom output: `~/.cache/othello-lean-build/guarded-lean/20260912-150101-cd-lean-exec-taskset-c-20-23-env-LEAN_NUM_THREADS1-choom-n-1000-nix-develop-comma/stdout.log`.
+- Full native: the `cargo fmt` / `clippy` / `test` command above, at core `996ea90`.
+- Native/WASM builds and execution: the committed replay commands in core
+  `docs/rule-contract.md`, at core `adacd0f`.
+- Final stronger ABI replay: `python3 native_abi.py` against the compiled
+  `libergodis_rules` library, at core `adacd0f`.
+- Lean queue builds of `lean/WeightedRules/Contract.lean`,
+  `BoundedMinPlus.lean`, `Relations.lean` and `AxiomAudit.lean`, at the per-module
+  commits listed above.
+- Final axiom output: elaborated from `lean/WeightedRules/AxiomAudit.lean` at
+  `eff2a2c70`.
+
+The run-quiet logs and Lean queue run directories were session-local and not retained.
 
 SHA-256 of committed core files under `crates/rules/tests/`:
 

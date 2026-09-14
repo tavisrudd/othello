@@ -69,11 +69,12 @@ lean/scripts/lean-build-queue.py build \
   --lean-root /home/tavis/src/othello/papers/cubic-stabilization-m1/lean --cores 20-23
 ```
 
-Successful runs:
-`/home/tavis/.cache/othello-lean-build/run-20260910-013112-6d96d926` (leaf,
-1,857,628 kB peak) and
-`/home/tavis/.cache/othello-lean-build/run-20260910-013228-f91e2bc7` (interface/audit,
-at most 2,079,308 kB peak). The public terminal uses exactly
+Both targets built clean at commit `fecd98f66`, under
+`papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/`:
+the leaf `Quantum/CyclicRankThreeCentralizer.lean` (1,857,628 kB peak) and the
+`PaperInterface/Main.lean` + `Verification/AxiomAudit.lean` pair (at most
+2,079,308 kB peak). The run directories were session-local and not retained.
+The public terminal uses exactly
 `propext`, `Classical.choice`, `Quot.sound`.
 Captured-log correspondence passes: **190 sources, 325 terminals, 67 claims,
 89 machinery entries, 22 imports, 5 evidence bundles**. Existing coverage

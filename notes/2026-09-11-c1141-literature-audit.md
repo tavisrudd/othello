@@ -178,10 +178,9 @@ with the prior source and are unchanged. The AI disclosure is byte-identical.
 The paper remains 24 pages; rendered pages 2–3 were inspected. No Lean work,
 annotation change, grading record, push or deposit was performed.
 
-`make check` passed in the authority (run-quiet log directory
-`20260911-012406-make-C-cubic-stabilization-irrationality-check`) and in the
-standalone repository (`20260911-012627-make-C-cubic-stabilization-irrationality-check`).
-Both logs are under `/tmp/claude-run-quiet/`; the command's acceptance includes
+`make -C papers/cubic-stabilization-irrationality check` passed in the authority
+at exported authority source commit `6e7f77682`, and again in the standalone
+repository at paper commit `2a4e1cb`. The command's acceptance includes
 the exact symbolic certificates, metadata and warning-free manuscript gate.
 Environment deprecation notices were not manuscript warnings.
 

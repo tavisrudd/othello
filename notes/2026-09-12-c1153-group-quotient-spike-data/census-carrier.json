@@ -1,0 +1,212 @@
+{
+  "engine": "order6-orbit-census",
+  "files": [
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 24,
+              "distinct_orbits": 24,
+              "distinct_raw_states": 24,
+              "group_order": "38318853375000576",
+              "largest_class": 1,
+              "largest_orbit": "38318853375000576",
+              "level": 522,
+              "nanoseconds_per_candidate": 13067075,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "38318853375000576",
+              "states_with_trivial_stabiliser": 24
+            }
+          ],
+          "scope": "objective"
+        },
+        {
+          "levels": [
+            {
+              "candidates": 24,
+              "distinct_orbits": 24,
+              "distinct_raw_states": 24,
+              "group_order": "4789856671875072",
+              "largest_class": 1,
+              "largest_orbit": "4789856671875072",
+              "level": 522,
+              "nanoseconds_per_candidate": 11691182,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "4789856671875072",
+              "states_with_trivial_stabiliser": 24
+            }
+          ],
+          "scope": "seed-scope"
+        }
+      ],
+      "path": "evidence/carrier-fibre-corpus.jsonl",
+      "records": 24
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 24,
+              "distinct_orbits": 24,
+              "distinct_raw_states": 24,
+              "group_order": "38318853375000576",
+              "largest_class": 1,
+              "largest_orbit": "38318853375000576",
+              "level": 522,
+              "nanoseconds_per_candidate": 12681445,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "38318853375000576",
+              "states_with_trivial_stabiliser": 24
+            }
+          ],
+          "scope": "objective"
+        },
+        {
+          "levels": [
+            {
+              "candidates": 24,
+              "distinct_orbits": 24,
+              "distinct_raw_states": 24,
+              "group_order": "4789856671875072",
+              "largest_class": 1,
+              "largest_orbit": "4789856671875072",
+              "level": 522,
+              "nanoseconds_per_candidate": 11612469,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "4789856671875072",
+              "states_with_trivial_stabiliser": 24
+            }
+          ],
+          "scope": "seed-scope"
+        }
+      ],
+      "path": "evidence/margin-fibre-corpus.jsonl",
+      "records": 24
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 12,
+              "distinct_orbits": 12,
+              "distinct_raw_states": 12,
+              "group_order": "38318853375000576",
+              "largest_class": 1,
+              "largest_orbit": "38318853375000576",
+              "level": 522,
+              "nanoseconds_per_candidate": 12878400,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "38318853375000576",
+              "states_with_trivial_stabiliser": 12
+            }
+          ],
+          "scope": "objective"
+        },
+        {
+          "levels": [
+            {
+              "candidates": 12,
+              "distinct_orbits": 12,
+              "distinct_raw_states": 12,
+              "group_order": "4789856671875072",
+              "largest_class": 1,
+              "largest_orbit": "4789856671875072",
+              "level": 522,
+              "nanoseconds_per_candidate": 11761422,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "4789856671875072",
+              "states_with_trivial_stabiliser": 12
+            }
+          ],
+          "scope": "seed-scope"
+        }
+      ],
+      "path": "evidence/margin-pair-control-states.jsonl",
+      "records": 12
+    },
+    {
+      "census": [
+        {
+          "levels": [
+            {
+              "candidates": 12,
+              "distinct_orbits": 12,
+              "distinct_raw_states": 12,
+              "group_order": "38318853375000576",
+              "largest_class": 1,
+              "largest_orbit": "38318853375000576",
+              "level": 522,
+              "nanoseconds_per_candidate": 12592589,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "38318853375000576",
+              "states_with_trivial_stabiliser": 12
+            }
+          ],
+          "scope": "objective"
+        },
+        {
+          "levels": [
+            {
+              "candidates": 12,
+              "distinct_orbits": 12,
+              "distinct_raw_states": 12,
+              "group_order": "4789856671875072",
+              "largest_class": 1,
+              "largest_orbit": "4789856671875072",
+              "level": 522,
+              "nanoseconds_per_candidate": 11682971,
+              "orbit_merges_beyond_equality": 0,
+              "smallest_orbit": "4789856671875072",
+              "states_with_trivial_stabiliser": 12
+            }
+          ],
+          "scope": "seed-scope"
+        }
+      ],
+      "path": "evidence/carrier-column-corpus.jsonl",
+      "records": 12
+    }
+  ],
+  "pooled": [
+    {
+      "levels": [
+        {
+          "candidates": 72,
+          "distinct_orbits": 72,
+          "distinct_raw_states": 72,
+          "group_order": "38318853375000576",
+          "largest_class": 1,
+          "largest_orbit": "38318853375000576",
+          "level": 522,
+          "nanoseconds_per_candidate": 19754066,
+          "orbit_merges_beyond_equality": 0,
+          "smallest_orbit": "38318853375000576",
+          "states_with_trivial_stabiliser": 72
+        }
+      ],
+      "scope": "objective"
+    },
+    {
+      "levels": [
+        {
+          "candidates": 72,
+          "distinct_orbits": 72,
+          "distinct_raw_states": 72,
+          "group_order": "4789856671875072",
+          "largest_class": 1,
+          "largest_orbit": "4789856671875072",
+          "level": 522,
+          "nanoseconds_per_candidate": 16685236,
+          "orbit_merges_beyond_equality": 0,
+          "smallest_orbit": "4789856671875072",
+          "states_with_trivial_stabiliser": 72
+        }
+      ],
+      "scope": "seed-scope"
+    }
+  ],
+  "provenance": "ExactComputational: lexicographic minimum over the gated orbit group, witnessed per state; a census of the named files only"
+}

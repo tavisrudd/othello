@@ -60,10 +60,12 @@ JS syntax, diff whitespace, MIME and non-allowlisted path rejection checks pass.
 The WASM Make target uses the existing core README build command; its invocation
 was inspected with make -n, not rerun for unchanged core code.
 
-Browser screenshots inspected at
-`~/.cache/ergodis/c1125-console/workspace.png`; generated snapshot at `index.html`.
-Logs: `/tmp/claude-run-quiet/20260907-163838-node-workspace-smoke.mjs-url-127.0.0.18768`
-and `20260907-163830-node-smoke.mjs-url-127.0.0.18768`.
+Browser screenshots were inspected during the session but are not retained as
+tracked evidence; generated snapshot at `index.html`. The gates were
+`node workspace-smoke.mjs --url http://127.0.0.1:8768` and
+`node smoke.mjs --url http://127.0.0.1:8768`, run against `ergodis-private`
+commit `bd0acc4`, with session-local `run-quiet` capture directories that were
+not retained.
 A first integration gate caught reading fields outside the session response
 envelope; corrected to `response.response` and the full browser gate passed.
 

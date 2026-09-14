@@ -52,9 +52,9 @@ These were requested investigations, so no incidental discovery-track entry is w
 
 ## Final release and closeout
 
-Authority manuscript commit: `63d3e194c`. The final semantic-label rebuild passed warning-free at 45 pages (`/tmp/claude-run-quiet/20260910-221114-make-C-ame_lu-check/`). Exporter plan and audit found zero coupling issues. Only the registered public paths were synchronized; private task reports and ledgers are excluded.
+Authority manuscript commit: `63d3e194c`. The final semantic-label rebuild passed warning-free at 45 pages (`make -C papers/ame_lu check` at that authority commit). Exporter plan and audit found zero coupling issues. Only the registered public paths were synchronized; private task reports and ledgers are excluded.
 
-Standalone commit: `9d9306fc1f7283c958d0a76955db27a7ab67c4d0`. Its own warning-free rebuild passed (`/tmp/claude-run-quiet/20260910-221212-make-C-ame-lu-check/`), and its PDF, README and release manifest are byte-identical to the authority. The canonical public release hash is `2d1ce5138ae8bad0bea90beb2be3ce741044f6db27a49d8cdb03c3ed65086f56`; the exporter content hash is `00309d42e22592e5e96ea848832789fbb9dc276dfc8960acc729dadab62ae5e0`. The paper-only checkout correctly reports that it cannot inspect the formal companion. No new formal work or push occurred.
+Standalone commit: `9d9306fc1f7283c958d0a76955db27a7ab67c4d0`. Its own warning-free rebuild passed (`make check` in the standalone repository at that commit), and its PDF, README and release manifest are byte-identical to the authority. The canonical public release hash is `2d1ce5138ae8bad0bea90beb2be3ce741044f6db27a49d8cdb03c3ed65086f56`; the exporter content hash is `00309d42e22592e5e96ea848832789fbb9dc276dfc8960acc729dadab62ae5e0`. The paper-only checkout correctly reports that it cannot inspect the formal companion. No new formal work or push occurred.
 
 Downloads:
 

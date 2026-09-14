@@ -73,8 +73,8 @@ coverage/trust review after export.
 
 ## Validation
 
-Authority full `make check` passes. Run log:
-`/tmp/claude-run-quiet/20260910-222407-make-C-cubic-stabilization-m1-check`.
+Authority full `make check` passes: `make -C papers/cubic-stabilization-m1 check`
+at authority commit `03279a7e8`.
 Full theorem/lemma/proposition/corollary environment comparisons pass; abstract
 unchanged and below 200 words. Changed pages 1, 5, 8, 29, 32 visually checked.
 PDF: 32 pages, 251259 bytes, SHA-256

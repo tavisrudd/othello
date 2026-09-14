@@ -103,11 +103,9 @@ duration, not a performance comparison.
 not a browser binding or executed browser graph certificate. Cache GC dry-run
 completed successfully without deleting anything.
 
-Local diagnostic logs: `/tmp/claude-run-quiet/20260912-140856-nix-shell-nixpkgscargo-nixpkgsrustc-nixpkgsrustfmt-nixpkgsclippy-nixpkgspython3-c/`
-for the full native gate, and
-`/tmp/claude-run-quiet/20260912-141144-nix-shell-nixpkgscargo-nixpkgsrustc-c-cargo-check-p-ergodis-verify-target-wasm32-/`
-for WASM. Durable replay authority is the committed test/oracle source and the
-commands above, not these ephemeral logs.
+Both the scoped native gate and the WASM `cargo check` above passed at commit
+`6284ca7`. Durable replay authority is the committed test/oracle source and the
+commands above, not any ephemeral local log.
 No solver hot loop, worker communication or hot solver layout changed; no timing
 or speedup claim is made. The new graph API is cold, serial verification.
 

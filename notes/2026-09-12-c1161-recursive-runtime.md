@@ -41,12 +41,16 @@ and eight-workspace cache-line separation. Retained naive baseline:
 `1a12abd00003527ade69fe5fb518853e8dc92f272bb76795b49c12a4ba842d70`.
 Padded candidate: `rule-replay-isolated-b4d6e9f`, SHA256
 `f9691554e82b4dce09d2a9fed6a786acd789ff3bb27a7345b1b638b98d5d475e`.
-Both are under `~/.cache/ergodis/bin/`; candidate manifest records the dirty
-source before the coherent kernel commit. Baseline driver commit is `b4d6e9f`.
+The baseline was built from a clean tree in `ergodis` at `b4d6e9f`, the baseline
+driver commit; the padded candidate was built from a dirty tree at that same
+commit, before the coherent kernel commit, so it is not exactly reproducible.
 
 Five interleaved pairs in each of sparse/dense × one/four independent workers
-pass with exact values and work counts. `~/.cache/ergodis/rule-runtime/isolated-ab.json`
-and `.samples.jsonl` retain counters/RSS and raw measurements; the committed
+pass with exact values and work counts. Counters/RSS and raw measurements are committed at
+`notes/2026-09-12-c1161-recursive-runtime-data/isolated-ab.json`, SHA-256
+`285f3b6db13602bb835c385e99f7ddc8bb43364103a72668e785180af6ca049a`, and
+`notes/2026-09-12-c1161-recursive-runtime-data/isolated-ab.samples.jsonl`, SHA-256
+`7a4419834b91d6bc33c34010bf01712a7038722d2996a66e5128a5172def04f8`; the committed
 generator is `python/benchmark_rule_replay.py`. Warm wall speedups are 15.35×/14.62×
 (sparse, 1/4 workers) and 5.22×/4.26× (dense). No end-to-end or single-query parallel
 speedup claim. The dense variant becomes a sparse frontier after its first broad

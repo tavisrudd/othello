@@ -49,10 +49,12 @@ lean/scripts/lean-build-queue.py build \
   --lean-root /home/tavis/src/othello/papers/cubic-stabilization-m1/lean --cores 20-23
 ```
 
-Successful runs: `/home/tavis/.cache/othello-lean-build/run-20260910-010657-64d9d9ad`
-(leaf, 2,079,392 kB peak) and
-`/home/tavis/.cache/othello-lean-build/run-20260910-011328-26c4e1f2`
-(interface/audit, at most 2,079,196 kB peak). The aggregate trace gate passed.
+Both targets built clean at commit `b23168509`: the leaf
+`Quantum/ParameterizedRankTwoResidue.lean` (2,079,392 kB peak) and the
+`PaperInterface/Main.lean` + `Verification/AxiomAudit.lean` pair (at most
+2,079,196 kB peak), under
+`papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/`.
+The aggregate trace gate passed; the run directories were session-local and not retained.
 Both public declarations use exactly `propext`, `Classical.choice`, `Quot.sound`.
 The source checker with the captured axiom log passes: **188 sources, 322
 terminals, 67 manuscript claims, 86 machinery declarations, 22 imported-source

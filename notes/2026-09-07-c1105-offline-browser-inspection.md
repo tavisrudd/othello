@@ -61,9 +61,9 @@ nix shell nixpkgs#nodejs --command node --test wasm/scripts/session-client.test.
 nix shell nixpkgs#nodejs nixpkgs#chromium --command node wasm/scripts/browser-smoke.mjs
 ```
 
-Run-quiet capture prefixes under `/tmp/claude-run-quiet/`: adapter `20260907-134501`,
-full native/WASM `20260907-134546`, Python `20260907-134619`, JS/client `20260907-134659`,
-Chromium `20260907-134809`. An initial compile caught that `ContentId` has no
+Every gate above — targeted adapter, full native/WASM, Python parity, JS client
+and Chromium smoke — ran against core commit `d5e5504`; the per-run `run-quiet`
+capture directories were session-local and not retained. An initial compile caught that `ContentId` has no
 Display implementation; explicit bounded hex rendering fixed it before acceptance.
 
 Fixture SHA-256: `38bbef9e739d99a4c695fa3da8f64fecd700d5d6ccf22bf3be465147634c789c`.

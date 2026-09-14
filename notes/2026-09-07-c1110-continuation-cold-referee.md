@@ -81,7 +81,7 @@ Exit status 0. Source/evidence/hash checks and mutation controls passed. Indepen
 | 11 | 24 | 1 |
 | 13 | 24 | 1 |
 
-Recognition and certificate mutation, relabelling, edge deletion, and degree-preserving switch controls passed at q=13,17,19. Saved runner log: `/tmp/claude-run-quiet/20260907-145402-nix-develop-command-make-check/stdout.log`. The durable evidence is the existing public source/certificate package; this log is only the record of this referee's replay. I did not regenerate with Sage, rerun benchmarks, build the PDF, run Lean, or inspect visual PDF layout. The parent owns separate export/publication checks. In particular, this report does not independently re-establish the claimed historical Sage 10.7/10.9 replays.
+Recognition and certificate mutation, relabelling, edge deletion, and degree-preserving switch controls passed at q=13,17,19. They were run with `nix develop --command make check` against the reviewed export at commit `da8db37068c8cb7797fc9ff4134c1ebf64316099`. The durable evidence is the existing public source/certificate package; that run is only the record of this referee's replay. I did not regenerate with Sage, rerun benchmarks, build the PDF, run Lean, or inspect visual PDF layout. The parent owns separate export/publication checks. In particular, this report does not independently re-establish the claimed historical Sage 10.7/10.9 replays.
 
 The finite-field reference code supports the primes and orders 8,9; the manuscript correctly distinguishes that implementation limit from the mathematical theorem over any supplied finite field. Returning no implemented result for other extension fields is not a negative mathematical recognition result.
 

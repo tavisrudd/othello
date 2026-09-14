@@ -4,9 +4,9 @@ User authorization: spike C1111–C1113 in a worktree, without using tmpfs for
 bulk artifacts. Code is on private branch `spike/continuation-reconstruction`
 at `/home/tavis/.cache/ergodis/worktrees/continuation/ergodis-private`, based
 on `de4f4fd`; the sibling core is a detached worktree at `67d929b`.
-The filesystem reports ZFS. Run/log/temp files live under
-`/home/tavis/.cache/ergodis/continuation-spike`; Cargo uses the existing shared
-`/home/tavis/.cache/ergodis/target/ergodis-private` directory.
+The filesystem reports ZFS. Run/log/temp files went to a disk-backed directory
+outside the repository and were not retained as tracked evidence; Cargo uses the
+existing shared out-of-tree `target/ergodis-private` directory.
 
 The six fixtures are frames at q=5,13,17,19, a triangle at q=7, and the Clebsch
 six-arc at q=11. Candidate adjacency is separate from oracle geometry. Exact
@@ -37,6 +37,8 @@ from the finite corpus.
 
 Private spike commits: `529e9f2`, `dff995d`. The end-to-end run command passes
 workspace formatting, scoped Clippy, both integration tests, independent Python
-replay and handwritten-control verification. Final run log directory:
-`~/.cache/ergodis/continuation-spike/logs/20260907-164845-run.sh`.
+replay and handwritten-control verification. The run log was not retained as
+tracked evidence; the gate is reproduced by the entry point
+`experiments/continuation/run.sh` at private spike commit `dff995d` in the
+`ergodis-private` repository, with the outcome summarized here.
 All retained source and fixture bytes are bound by the committed SHA256SUMS.

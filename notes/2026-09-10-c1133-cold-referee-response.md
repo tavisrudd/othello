@@ -155,7 +155,8 @@ The four candidate matrices are unchanged from the previous committed bundle.
 
 Authority `make check` passes, including finite and reconstruction replay,
 source-only formal correspondence, checksums and warning rejection.
-Final run: `/tmp/claude-run-quiet/20260910-220358-make-C-cubic-stabilization-m1-check`.
+Final run: `make -C papers/cubic-stabilization-m1 check` at authority commit
+`705ab66b7`.
 All 32 PDF pages were visually inspected. The cubic proof now finishes on
 page 14; the matrix-table lead stays with its table. Title and abstract are
 unchanged (abstract remains below 200 words). Exact full-body comparisons
@@ -166,7 +167,7 @@ PDF: 32 pages, 251037 bytes; SHA-256
 `4b7c631e4715d200960ce5327ac66eb6ee280ba6c2d2eae5d469634af49ebcfc`.
 Authority commit: `705ab66b7`. Export audit reports zero findings.
 Standalone forward commit: `69722ad`; its full `make check` passes
-(`/tmp/claude-run-quiet/20260910-220526-make-C-cubic-stabilization-m1-check`).
+(`make -C papers/cubic-stabilization-m1 check` at that standalone commit).
 The rebuilt standalone PDF is byte-identical to the authority PDF.
 Exporter verification passes with 351 tracked files and content SHA-256
 `cfbb93e034c30e1764c005456eaadac6e41913f331266170f5a985f839cbbbbd`.

@@ -63,8 +63,9 @@ No Rust source or WASM binary change. Browser replay is the existing README comm
 `nix shell nixpkgs#nodejs nixpkgs#chromium --command node wasm/scripts/browser-smoke.mjs`.
 
 Desktop introduction, rejected-shortcut and mobile-shortcut screenshots were generated
-under `~/.cache/ergodis/browser-control-review/first-visit-*.png`; desktop introduction
+into a session-local directory and are not retained as tracked evidence; desktop introduction
 and shortcut renders were visually inspected, and the mobile width assertion passes.
+The committed evidence is the browser smoke test at core `67d929b`.
 The real-browser counterexample assertion, not a screenshot, checks semantic rendering.
 
 ## Limits and closeout

@@ -410,9 +410,9 @@ Replay:
 uv run --with numpy --with sympy python check1.py     # writes tensor7.txt, tensor11.txt
 uv run --with numpy --with sympy python check2.py
 uv run --with numpy --with sympy python check3.py
-cd rank11 && cargo build --release && cd ..
-/home/tavis/.cache/ergodis/c1090-target/release/rank11 tensor7.txt  --low 3   # cross-check
-/home/tavis/.cache/ergodis/c1090-target/release/rank11 tensor11.txt --low 6 > rank11-out.txt
+cd rank11 && cargo build --release && cd ..   # at commit `56476e3a3`; produces $CARGO_TARGET_DIR/release/rank11
+$CARGO_TARGET_DIR/release/rank11 tensor7.txt  --low 3   # cross-check
+$CARGO_TARGET_DIR/release/rank11 tensor11.txt --low 6 > rank11-out.txt
 uv run --with numpy --with sympy python check4.py
 uv run --with numpy --with sympy python check5.py
 uv run --with numpy --with sympy python check6.py

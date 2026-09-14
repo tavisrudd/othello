@@ -34,9 +34,9 @@ total). The six relevant browser checks (including learned reruns) are the accep
 The existing server reads these JS modules from source with revalidation, so a
 page refresh loads the change without a WASM rebuild or server restart.
 
-Validation: all six selected checks passed in
-`~/.cache/ergodis/js-wasm-tests/20260910T141533.169216Z/report.json`.
-Stop round-trip measurement was 4 ms for the unresponsive worker test and 10 ms
+Validation: all six selected checks passed at ergodis-private commit `658a464`
+(`analysis/js-wasm-tests/suite.py`); the report JSON was not retained. Stop
+round-trip measurement was 4 ms for the unresponsive worker test and 10 ms
 for the active 4x-throttled test. Both also require controls to be released within
 the same input-handler call, before promise settlement. Those measurements include
 CDP communication and are not an iPhone hardware benchmark. Cache GC was dry-run

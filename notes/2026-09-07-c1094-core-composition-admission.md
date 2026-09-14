@@ -46,8 +46,8 @@ planned acceptance list.
 
 Core commit `b74a369`. Passed `cargo fmt --check`, `cargo clippy --all-targets --all-features -- -D warnings`
 and `cargo test --all-features`, including five new shape tests and existing runtime/verifier suites.
-Core log: `/tmp/claude-run-quiet/20260907-111939-nix-shell-nixpkgscargo-nixpkgsrustc-nixpkgsclippy-nixpkgsrustfmt-command-bash-c-c`.
-Python parity log: `/tmp/claude-run-quiet/20260907-112053-nix-shell-nixpkgspython3-command-python3-check-python-parity.py`.
+Those three ran as one combined gate under `nix shell nixpkgs#cargo nixpkgs#rustc nixpkgs#clippy nixpkgs#rustfmt --command bash -c ...`, at that commit in `~/src/ergodis`.
+Python parity: `nix shell nixpkgs#python3 --command python3 check-python-parity.py`, at the same commit.
 
 Private integration adds two tests: parity with the original matrix tree through five updates, and
 rejection of zero/overflow/node-budget/byte-budget inputs before any adapter method is invoked.
@@ -55,11 +55,11 @@ The latter uses an adapter that panics if called, so rejection order is executab
 merely asserted by the error type. No new universal capability-discovery mechanism is claimed;
 existing optional traits continue to control which operations an adapter supplies.
 
-Private commit `4add0bc`. Its scoped clippy and both construction tests passed; log:
-`/tmp/claude-run-quiet/20260907-112149-nix-shell-nixpkgscargo-nixpkgsrustc-nixpkgsclippy-command-bash-c-cargo-clippy-p-e`.
+Private commit `4add0bc` in `~/src/ergodis-private`. Its scoped clippy and both construction tests
+passed at that commit; the per-run capture directory was session-local and not retained.
 This closes the structural constructor gate only. The next extraction should address semantic
 adapter admission and distinguish summary-transition receipts from independently checked leaf
 transitions, using the existing private capability implementations rather than another tree.
 No incidental discovery-track entry: all findings were sought within this admission task.
 
-WASM release check passed for `ergodis`, runtime and browser binding (`cargo check --manifest-path wasm/Cargo.toml --target wasm32-unknown-unknown --release`). Log: `/tmp/claude-run-quiet/20260907-112254-nix-shell-nixpkgscargo-nixpkgsrustc-command-cargo-check-manifest-path-Cargo.toml-`. No browser bundle or serialization format changed. Cache GC was dry-run only.
+WASM release check passed for `ergodis`, runtime and browser binding (`cargo check --manifest-path wasm/Cargo.toml --target wasm32-unknown-unknown --release`) at commit `b74a369`. No browser bundle or serialization format changed. Cache GC was dry-run only.

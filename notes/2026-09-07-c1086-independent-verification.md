@@ -69,11 +69,11 @@ Luna completed the sole sequential build window; all gates passed:
 - Excluded WASM release check, wasm-pack web release, and Chromium Worker/WASM composition,
   reduction corpus and three rejection checks. This does not add a browser verification API.
 
-Browser log: `/tmp/claude-run-quiet/20260907-093630-nix-shell-nixpkgsnodejs-nixpkgschromium-command-node-browser-smoke.mjs`.
+Browser gate: `nix shell nixpkgs#nodejs nixpkgs#chromium --command node browser-smoke.mjs`, at core commit `08221f2` in `~/src/ergodis`.
 Parent confirmed root and WASM profiles unchanged, MSRV 1.87 unchanged, and no dependency version
 or checksum changes: only the local verifier package was added. Cargo updated the root lockfile
-format from 3 to 4. Cache audit passed in dry-run mode; nothing deleted:
-`/tmp/claude-run-quiet/20260907-093857-cache-gc.sh`.
+format from 3 to 4. Cache audit passed in dry-run mode; nothing deleted (`cache-gc.sh`, at the same
+core commit `08221f2`).
 
 ## Closeout and next boundary
 

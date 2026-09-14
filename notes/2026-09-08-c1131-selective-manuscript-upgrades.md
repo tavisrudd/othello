@@ -136,9 +136,9 @@ exported files had been staged and correctly reported those tracked paths as
 missing; staging the exporter-owned files resolved it, with no content change.
 No push or external message was sent.
 
-Accepted gate logs: authority Paper 1 20260908-135927; authority Paper 2
-20260908-140244; standalone Paper 1 20260908-140438; standalone Paper 2
-20260908-140516, all beneath /tmp/claude-run-quiet with distinct make-C names.
+Accepted gates: `make -C papers/cubic-stabilization-m1 check` passed at authority commit
+`736c88eba` and again at standalone commit `b3da4cc`; `make -C papers/cubic-stabilization-irrationality check`
+passed at authority commit `ad952b6f4` and again at standalone commit `d72ad45`.
 
 Next highest-value review is C978’s focused independent examination of the
 regular-lattice comparison and resonant application, alongside the retained

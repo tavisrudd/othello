@@ -316,8 +316,8 @@ All paths relative to this directory. Rust target directory is
 Replay:
 
 ```
-cd search && cargo build --release && cd ..
-B=~/.cache/ergodis/c1099-target/release/c1099
+cd search && cargo build --release && cd ..   # at commit `be9f69d44`
+B=$CARGO_TARGET_DIR/release/c1099
 $B dist3 > out/dist3.txt
 for p in 5 7 11 13 17; do $B trades $p > out/trades$p.txt 2>&1; done
 choom -n 1000 -- $B trades 19 > out/trades19.txt 2>&1          # 34.5 M classes

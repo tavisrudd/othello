@@ -34,8 +34,9 @@ proof annotation; source checks accept the correspondence.
 Authority make check/pdf passed, including deterministic PDF builds and all
 existing source, mutation, finite replay and recognition controls. Draft is
 12 pages (331605 bytes), up from 11; all pages were visually inspected.
-Frozen before/after PDFs are in ~/.cache/continuation-review/layering/;
-the before version is also recoverable from authority commit f0964aeba.
+The frozen before/after PDFs were not retained as tracked evidence; the before
+version is recoverable from authority commit f0964aeba and the after version from
+the authority PDF build at commit 11e00a242.
 Visual closeout identified two minor final polish items: replace the moved
 proof's stale word “below”, and keep the census statement opening with its table.
 These will be applied after the cold reader finishes the frozen snapshot.

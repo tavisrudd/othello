@@ -87,9 +87,9 @@ nix shell nixpkgs#nodejs --command node --test wasm/scripts/session-client.test.
 nix shell nixpkgs#nodejs nixpkgs#chromium --command node wasm/scripts/browser-smoke.mjs
 ```
 
-Run-quiet capture prefixes under `/tmp/claude-run-quiet/`: targeted/native adapter
-`20260907-135832`, full native/WASM `20260907-140001`, Python `20260907-140041`,
-JS/client `20260907-140107`, Chromium `20260907-140123`.
+Every gate above — targeted/native adapter, full native/WASM, Python parity,
+JS client and Chromium smoke — ran against core commit `feab0c6`; the per-run
+`run-quiet` capture directories were session-local and not retained.
 Fixture SHA-256: `ebb56ee7267b87a24ce44bacb112882be58fb6f11281d3b41374b9339092591c`.
 Built WASM SHA-256: `64402e15be7bfb3379fbced5e07a8bd7277d56464a62292a746fe5ae3d502c46`.
 Packaged WASM remains ignored generated output. No export/push or performance claim.

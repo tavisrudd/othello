@@ -88,7 +88,8 @@ nix shell nixpkgs#cargo nixpkgs#rustc --command cargo check --manifest-path wasm
 nix shell nixpkgs#cargo nixpkgs#rustc nixpkgs#clippy --command bash -c 'cargo clippy -p ergodis-private --test independent_summary_transition --test summary_transition_forgery -- -D warnings && cargo test -p ergodis-private --test independent_summary_transition --test summary_transition_forgery'
 ```
 
-Supplementary logs under `/tmp/claude-run-quiet/`: core final `20260907-120102`,
-private lint/interop `20260907-115835`, private final replay `20260907-120319`,
-Python `20260907-120003`, WASM `20260907-120403`, cache dry-run `20260907-120239`.
+The core final gate, private lint/interop, private final replay, Python parity and WASM release
+check above, plus a dry-run cache audit, all passed at core commit `46f7d1c` in `~/src/ergodis` and
+private commit `9c1a620` in `~/src/ergodis-private`; the per-run capture directories were
+session-local and not retained.
 The tracked tests generate their own complete fixtures and are the replay authority.

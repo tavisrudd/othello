@@ -58,10 +58,11 @@ console is a named historical reference, not this run's performance evidence.
 ## Validation and compatibility fixes
 
 `make -C analysis/campaign-console check RUN=<fresh persistent directory> PORT=<free port>`
-builds the current native binaries and runs all gates. Final accepted run:
-`/home/tavis/.cache/ergodis/c1124-final`. Logs, launch responses, generated seeds,
-full engine evidence and executable hashes live there and are regenerable from
-committed source/input. The current dynamic preview uses port 8767 because
+builds the current native binaries and runs all gates. The final accepted run wrote its
+logs, launch responses, generated seeds, full engine evidence and executable hashes into
+a session-local run directory that is not retained as tracked evidence; they are
+regenerable from committed source and input via that `make` target at private commits
+`10a465b`, `9d75d53` and `de4f4fd`. The current dynamic preview uses port 8767 because
 8765 was already occupied; the other service was left untouched.
 
 Passed:

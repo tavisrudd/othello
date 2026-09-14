@@ -116,9 +116,11 @@ findings; both final verify commands pass. No push or external message was sent.
 - cubic-stabilization-m1: b156ec6; PDF 908548d5e1421c6e313a4e71d817020715b54912b24e1ed8b7f95eb0c69e201f (188889 bytes).
 - cubic-stabilization-irrationality: f46624d; PDF 88d6288cb2b69a6a4a1eadece407dc06f25c11263fcdcdcc333b812dc92cf043 (175989 bytes).
 
-Accepted gate logs: authority Paper 1 20260908-143122, authority Paper 2
-20260908-143123; local Paper 1 and Paper 2 20260908-143440 (distinct
-make-C command names), beneath /tmp/claude-run-quiet.
+Accepted gates: `make -C papers/cubic-stabilization-m1 check` and
+`make -C papers/cubic-stabilization-irrationality check`, run in the authority
+repository at commit ba2636c80 and again in each standalone repository at its
+forward commit above. The per-run capture directories were session-local and
+not retained.
 
 This closes the requested paired cold-read and repair cycle, not the broader
 author-retained C978/C956 tasks. C958 remains the next constructive task for

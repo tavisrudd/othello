@@ -16,14 +16,14 @@ are retained. The upper extent still advances in fixed decades. Every decade has
 a tick (including 100 ms), with small intervening ticks; labels near the initial
 floor can be omitted to avoid collision, but ticks are not omitted.
 
-Validation: eight scoped JS/browser checks passed in
-`~/.cache/ergodis/js-wasm-tests/20260910T143018.372283Z/report.md`.
+Validation: eight scoped JS/browser checks (`analysis/js-wasm-tests/suite.py`)
+passed at ergodis-private commit `32239f4`; the report was not retained.
 The solve-origin browser regression delays two readiness acknowledgements by
 500 ms and checks zero initial samples, immediate control dispatch after release,
 unchanged distance results, left-frame alignment and adaptive floors. It also
 checks decade/minor ticks and the 100 ms label. Hadamard's zero-origin smoke and
-certificate verification passed in `~/.cache/ergodis/js-wasm-tests/solve-origin-hadamard-zero/`.
-The adaptive chart was visually inspected in Chromium at
-`~/.cache/ergodis/js-wasm-tests/solve-origin-adaptive-visual/chart.png`.
+certificate verification passed at the same commit; the report was not retained.
+The adaptive chart was visually inspected in Chromium; the screenshot was not
+retained as tracked evidence.
 These are presentation/clock changes, with no solver or native kernel changes.
 The user's physical iPhone has not been tested.

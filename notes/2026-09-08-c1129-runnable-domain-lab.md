@@ -40,7 +40,9 @@ matrix/rack layout with uniform per-rack costs. No core or solver hot-path chang
 
 ## Validation and replay
 
-From `/home/tavis/src/ergodis-private`:
+From `/home/tavis/src/ergodis-private` (the served page is a regenerated build
+output of the first command, not a retained input; the tracked generator is
+`analysis/campaign-console/mockups/build.py`):
 
 ```sh
 python3 -B analysis/campaign-console/mockups/build.py --output "$HOME/.cache/ergodis/input-query-mockups/index.html"
@@ -56,8 +58,8 @@ replays checkpoints, accepts domain/bundle loads and rejects malformed imports
 without replacing the accepted context. The six-view gate checks shared selection,
 weighted corpus comparison, QEC round slices, all FT10 operations and snapshot-only
 recovery helpers. `git diff --check` passed. Screenshots visually inspected.
-Latest logs: `/tmp/claude-run-quiet/20260908-114007-node-run-smoke.mjs-url-127.0.0.18769-shot-runnable.png`
-and `/tmp/claude-run-quiet/20260908-114010-node-smoke.mjs-url-127.0.0.18769-shot-input-query-mockups`.
+Both gates are the `run-smoke.mjs` and `smoke.mjs` commands above, run at private
+commit `daf812d`; their console logs were not retained as tracked evidence.
 
 Preview: http://127.0.0.1:8769/#qec. Owned localhost server PID 3000766;
 PID/log files under `~/.cache/ergodis/input-query-mockups/`. Server reads regenerated

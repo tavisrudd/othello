@@ -91,8 +91,10 @@ local matrix model and cubic calculation, and the sharpness quotient
 overview and certificate walkthrough. No clipping or notation-rendering
 defect was found on these pages.
 
-- m=1 gate: `/tmp/claude-run-quiet/20260907-163455-make-C-cubic-stabilization-m1-check/`.
-- Sharpness gate: `/tmp/claude-run-quiet/20260907-164002-make-C-cubic-stabilization-irrationality-check/`.
+- m=1 gate: `make -C papers/cubic-stabilization-m1 check`, at authority draft
+  commit `d590dbec0`.
+- Sharpness gate: `make -C papers/cubic-stabilization-irrationality check`, at
+  the same authority draft commit.
 - m=1 PDF SHA-256: `a4d957b8acd89b49bf73e46ddd4b625b2356123f81e900a4ce74763ab6e4b395`.
 - Sharpness PDF SHA-256: `c097d691430810c1c0bafc7b31e1754fc429f3f6c3e8fbd8dca87e6c393532b7`.
 

@@ -52,8 +52,10 @@ Final notebook run-quiet capture: `20260907-154951-uv-run-with-duckdb1.5.5...`.
 A successful local IPython run emits its default TCP transport warning; no
 server was exposed or long-lived notebook service launched by this check.
 
-Headless Chromium rendered the generated HTML at 1280 by 1400. Inspected the
-final screenshot at `/home/tavis/.cache/ergodis/c1033-saved-runs/notebook-final.png`;
+Headless Chromium rendered the generated HTML at 1280 by 1400. The final screenshot
+was inspected during the session and is not retained as tracked evidence; the committed
+evidence is the notebook checker and the regeneration recipe in private
+`analysis/repository-projection.md` at private commit `81af202`, plus this record that
 all primary counter columns fit and the graph is visible. Capture:
 `20260907-155012-chromium-headless...`. This is actual notebook execution plus
 browser inspection of its rendered output, not a JupyterLab interaction test.

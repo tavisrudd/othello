@@ -68,9 +68,10 @@ Full application/browser gate passes on 8769, including all earlier QEC/recovery
 scheduling/surface workflows, real Evolve source display, test-only trace import,
 linked reduction selection, absent baseline behavior, and mobile width. First
 browser run exposed the nested final-summary format; reader/test corrected before
-the passing rerun. Final log:
-`/tmp/claude-run-quiet/20260908-195939-nix-shell-nixpkgsnodejs-nixpkgschromium-command-node-run-smoke.mjs-url-127.0.0.18/stdout.log`.
-Screenshot `~/.cache/ergodis/application-workspace/evolve-evolve.png` was inspected.
+the passing rerun. The final gate is the `run-smoke.mjs` command in the replay
+block below, run at the commit that introduced this report, `e50decf75`; its
+stdout was not retained as tracked
+evidence. The Evolve screenshot was inspected locally and likewise not retained.
 
 Replay:
 ```sh

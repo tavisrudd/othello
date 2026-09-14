@@ -71,9 +71,11 @@ passed: 187 source files, 320 terminals, 67 claims, 84 machinery declarations,
 remain 14 absent / 26 fragment / 26 conditional / 1 complete. This new terminal
 is registered as machinery; no manuscript statement has been promoted.
 
-The successful queue directories are
-`/home/tavis/.cache/othello-lean-build/run-20260910-004904-504a5f05` (leaf) and
-`/home/tavis/.cache/othello-lean-build/run-20260910-005035-c6b286e2` (interface/audit).
+Both targets built clean at commit `a190dabb7`, under
+`papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/`:
+the leaf `Quantum/RankTwoLatticeTransport.lean` and the
+`PaperInterface/Main.lean` + `Verification/AxiomAudit.lean` pair; their queue
+directories were session-local and not retained.
 The leaf build used 1,834,800 kB peak RSS; the audit used 2,074,800 kB.
 The source, exact terminal registry, and expected axiom list are the enduring
 verification evidence; local logs record execution, not mathematical premises.

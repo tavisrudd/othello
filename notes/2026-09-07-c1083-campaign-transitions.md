@@ -83,9 +83,9 @@ Chromium smoke passed. The browser regression includes the original composition 
 12 reduction cases and three rejection cases. Generated browser packages remain ignored.
 Cache GC completed in dry-run mode; no shared artifacts were deleted.
 
-Representative local logs:
-- Full native suite: `/tmp/claude-run-quiet/20260907-082846-RAYON_NUM_THREADS12-nix-shell-nixpkgscargo-nixpkgsrustc-command-cargo-test-all-fe`.
-- Browser regression: `/tmp/claude-run-quiet/20260907-083105-nix-shell-nixpkgsnodejs-nixpkgschromium-command-node-browser-smoke.mjs`.
+Representative gates, run at core commit `6269cd1` in `~/src/ergodis`:
+- Full native suite: `nix shell nixpkgs#cargo nixpkgs#rustc --command env RAYON_NUM_THREADS=12 cargo test --all-features`.
+- Browser regression: `nix shell nixpkgs#nodejs nixpkgs#chromium --command node browser-smoke.mjs`.
 
 Committed source/reference/tests and replay commands are the durable evidence; local logs are
 supporting diagnostics.

@@ -82,7 +82,7 @@ Private reproducibility bundle:
 analysis/module-loading/capacity-design-evidence/ (manifest hashes, raw counters,
 variant summaries, leaf profiles and accepted package identity). Replay scripts:
 package-capacity-design.py, capacity-design-counters.py, capacity-design-profile.py.
-Accepted package: ~/.cache/ergodis/module-loading/capacity-design-isolated/.
+Accepted package identity: `analysis/module-loading/capacity-design-evidence/accepted-package.json`.
 Stripped notice/path-marker checks pass; Tavis Rudd notices remain embedded.
 Rejected variants stay as evidence; the temporary preview serving the first
 variant was terminated. Ports 8769 and 8770 serve the accepted package and same

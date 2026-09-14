@@ -69,6 +69,6 @@ nix shell nixpkgs#python3 --command python3 wasm/scripts/check-python-parity.py
 nix shell nixpkgs#cargo nixpkgs#rustc --command cargo check --manifest-path wasm/Cargo.toml --target wasm32-unknown-unknown --release
 ```
 
-Captured logs under `/tmp/claude-run-quiet/`: native gate prefix `20260907-113316`,
-Python `20260907-113259`, WASM `20260907-113502`, cache dry run `20260907-113432`.
+The three replay commands above, plus a dry-run cache audit, all passed at core commit `8fe20fa`
+in `~/src/ergodis`; the per-run capture directories were session-local and not retained.
 The tracked integration tests are the replay authority; temporary logs are supplementary.
