@@ -2374,6 +2374,34 @@ forms that could not resolve. `.publish/validate-release.sh` passes in both stag
 the crate's in full, including `cargo build --release` and `cargo test --all-features` with
 doctests — and the crate's build tree was deleted afterwards. Nothing has been pushed.
 
+## The rule-replay section was removed on Tavis's call, 2026-09-13 (core `d407310`)
+
+Part of the documentation pass above was reversed the same day, by a concurrent session on Tavis's
+instruction, and the reasoning is worth keeping: the compiled-rule-replay A/B cited private commit
+hashes and retained cache binaries, and `BENCHMARKS.md` is to carry a curated few benchmarks of
+public interest rather than a record of internal benchmarking discipline. The section is gone, as
+are `evidence/2026-09-12-rule-frontier{.md,-ab.json,-ab.samples.jsonl}`,
+`evidence/2026-09-13-rule-frontier-negative-control{.md,.json}` and
+`python/benchmark_rule_frontier_control.py`, with the citation in `docs/rule-contract.md` trimmed.
+A wider curation of the file is pending Tavis's choice of sections, so no new snapshot should be cut
+until that lands.
+
+Two consequences follow that the deletion does not handle by itself:
+
+1. **The evidence repository still tracks the five deleted files.** The documented refresh is a
+   `git archive | tar -x`, which adds and overwrites but never deletes, so `~/src/ergodis-evidence`
+   holds 124 files against the crate's 119 and will keep publishing them unless they are removed
+   there with an explicit `git rm` before the next refresh and export. That is the case
+   `docs-private/evidence-export.md` warns about, now live.
+2. **`evidence/2026-09-12-recursive-runtime-transcript.json` is uncited again.** It survived the
+   deletion but its only citation was inside the removed section, so it is back in the state the
+   phase-1 pass was closing. Either `docs/recursive-queries.md` gains a line for it or it goes; it
+   belongs in the curation decision rather than being re-cited unilaterally.
+
+The staged `v0.1.0-preview4` crate snapshot predates all of this and still contains the section, and
+its release notes still describe the frontier A/B, so the pair needs re-cutting once the curation
+settles. Nothing was pushed, so the exposure is a local snapshot only.
+
 ## The Gurobi licence blocker is stale, 2026-09-13
 
 The standing release blocker — "the Gurobi family's evidence cannot be regenerated without an

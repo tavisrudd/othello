@@ -119,11 +119,18 @@ in full rather than by brace or wildcard shorthand, and the twelve families no d
 now documented in `BENCHMARKS.md` — the gross `[[144,12,12]]` searches with their Gurobi controls,
 the rule-frontier A/B with the negative control where the frontier loses, the L2 dominance A/B, the
 rank-envelope probe, the six-application no-regression record, and one structured CNF instance with
-its selection manifest. Nothing was dropped. Staging now holds the matched `v0.1.0-preview4` pair
-carrying that work — crate (core `564ad08`, public `b464490`) and evidence (evidence `6d3fce7`,
-public `d90fe31`), both validated — and all 83 distinct evidence URLs in the crate snapshot resolve
-in the evidence snapshot at the matching tag. Open for Tavis: phase-0 publication/product decisions;
-remaining phase-1 through phase-5 work is unallocated.
+its selection manifest. Nothing was dropped. Staging holds the matched `v0.1.0-preview4` pair from
+that work — crate (core `564ad08`, public `b464490`) and evidence (evidence `6d3fce7`, public
+`d90fe31`), both validated, all 83 evidence URLs resolving. That pair is now stale: on Tavis's call
+core `d407310` removed the compiled-rule-replay section and its five evidence files, and a wider
+curation of `BENCHMARKS.md` to a few benchmarks of public interest is pending Tavis's choice of
+sections. **Do not cut a snapshot until that lands.** Two items it must carry: the evidence
+repository still tracks the five deleted files, because the refresh never deletes, so they need an
+explicit `git rm` there first; and `2026-09-12-recursive-runtime-transcript.json` is uncited again.
+Also open: the Gurobi licence blocker is stale — both families reproduce locally, so the
+private-tier import can be fixed and that evidence regenerated (report has the numbers and the
+shape decision it needs). Open for Tavis: phase-0 publication/product decisions; remaining phase-1
+through phase-5 work is unallocated.
 
 ### C1143 — BB circuit-distance external benchmark (in progress)
 
