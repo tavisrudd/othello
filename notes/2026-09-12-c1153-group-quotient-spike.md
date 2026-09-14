@@ -286,7 +286,7 @@ wall-clock budget and epoch length per round.
   artifact.
 
 Both arms were built from a clean tree at those `ergodis-private` commits by
-`ergodis-contrib/scripts/retain-bin.sh "$PWD/tasks/hadamard-2092" hadamard --profile release`,
+`ergodis-dev/scripts/retain-bin.sh "$PWD/tasks/hadamard-2092" hadamard --profile release`,
 which is the reproducible build recipe for either one. Every run is under `choom -n 1000` with at
 most twelve workers. This change touches no solve hot loop and no hot struct — `Q29MarginTabu::step`, its
 `RowState` layout, its Gram maintenance and its kick are byte-identical between the two arms — so

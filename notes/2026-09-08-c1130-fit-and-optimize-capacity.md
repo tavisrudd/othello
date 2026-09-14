@@ -125,7 +125,7 @@ serialization allocations; its whole call is not claimed allocation-free.
 
 Private replay scripts: analysis/module-loading/package-scheduling.py and
 capacity-fit-counters.py. The latter accepts --candidate and --forward-only;
-retaining the test host uses ../ergodis-contrib/scripts/retain-bin.sh
+retaining the test host uses ../ergodis-dev/scripts/retain-bin.sh
 packages/scheduling-provider contracts --test --label capacity-fit-boundary.
 Build providers with build-distribution.sh scheduling in the Nix Cargo/rustc/lld
 environment. Package into a fresh output directory; the script requires the

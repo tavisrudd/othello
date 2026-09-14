@@ -1,7 +1,7 @@
 # C1068: the sparse matcher's search on the six weighted PyMatching losses
 
 **Lane**: `complete-ports` · **Date**: 2026-09-05 · **Code**: `~/src/ergodis-private`
-**Contract**: `~/src/ergodis-contrib/PERFORMANCE.md` and the shared playbook it names
+**Contract**: `~/src/ergodis-dev/PERFORMANCE.md` and the shared playbook it names
 **Predecessors**: `2026-09-05-c1065-sparse-matcher-weighted-fixed-cost.md`,
 `2026-09-05-c1066-sparse-matcher-queue-discipline.md`,
 `2026-09-05-c1067-tiger-matcher-performance-contract-audit.md`

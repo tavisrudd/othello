@@ -135,7 +135,7 @@ control. Additionally:
 - **Routing changes no answer.** Every level already agrees on the checksum; the routed arm must
   agree with level 4 shot by shot on weight and observable parity, not merely in aggregate.
 - **No run-constant branch.** Show the dispatch is outside the per-shot work, per
-  `../ergodis-contrib/PERFORMANCE.md`.
+  `../ergodis-dev/PERFORMANCE.md`.
 - **State the rule's provenance.** If the threshold is fitted on measured data rather than derived,
   say so and give the data it was fitted on; a rule fitted per benchmark cell is not admissible as
   a default.

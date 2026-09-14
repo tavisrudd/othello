@@ -6,8 +6,8 @@
 **Brief**: `notes/2026-09-03-c1061-ergodis-compiled-dynamic-solver-brief.md`
 
 Contract documents read in full before the probe-7 work this line of probes continues:
-`/home/tavis/src/ergodis/CLAUDE.md`, `/home/tavis/src/ergodis-contrib/PERFORMANCE.md`,
-`/home/tavis/src/ergodis-contrib/performance-playbook.md`,
+`/home/tavis/src/ergodis/CLAUDE.md`, `/home/tavis/src/ergodis-dev/PERFORMANCE.md`,
+`/home/tavis/src/ergodis-dev/performance-playbook.md`,
 `/home/tavis/src/ergodis-private/CLAUDE.md`.
 
 ## Headline

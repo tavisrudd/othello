@@ -213,7 +213,7 @@ Build the harness:
 
 ```
 cd ~/src/ergodis-private
-nix shell nixpkgs#cargo nixpkgs#rustc -c ../ergodis-contrib/scripts/retain-bin.sh \
+nix shell nixpkgs#cargo nixpkgs#rustc -c ../ergodis-dev/scripts/retain-bin.sh \
   . closure_ballpark --example --profile release --label c1184b
 ```
 

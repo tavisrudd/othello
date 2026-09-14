@@ -6,8 +6,8 @@
 `notes/2026-09-03-c1061-probe29-local-commit-predecoder.md`.
 
 Contract documents read in full before this line of probes:
-`/home/tavis/src/ergodis/CLAUDE.md`, `/home/tavis/src/ergodis-contrib/PERFORMANCE.md`,
-`/home/tavis/src/ergodis-contrib/performance-playbook.md`,
+`/home/tavis/src/ergodis/CLAUDE.md`, `/home/tavis/src/ergodis-dev/PERFORMANCE.md`,
+`/home/tavis/src/ergodis-dev/performance-playbook.md`,
 `/home/tavis/src/ergodis-private/CLAUDE.md`.
 
 ## Headline

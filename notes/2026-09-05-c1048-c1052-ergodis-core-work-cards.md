@@ -4,7 +4,7 @@
 
 These two task specifications were written into the live queue and have no other home. They are
 moved here so the queue rows can go back to being one-line routing entries. Both tasks are open,
-both are core work under `ergodis-contrib/PERFORMANCE.md`, and the code now lives in `~/src/ergodis`.
+both are core work under `ergodis-dev/PERFORMANCE.md`, and the code now lives in `~/src/ergodis`.
 
 ## C1048 — subset-sum width frontier
 

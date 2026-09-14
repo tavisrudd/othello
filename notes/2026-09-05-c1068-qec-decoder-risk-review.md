@@ -322,7 +322,7 @@ all at the operating points.
 ## 10. CHECKED-CLEAN — performance-contract conformance of C1065, C1066 and C1067
 
 Verified independently of C1067's conclusions, against
-`~/src/ergodis-contrib/PERFORMANCE.md` and `performance-playbook.md`:
+`~/src/ergodis-dev/PERFORMANCE.md` and `performance-playbook.md`:
 
 - **Zero allocation in the decode loop.** Every `vec!`, `Vec::`, `push`, `Box::new` and `collect`
   in `tiger_blossom_sparse.rs` at HEAD sits inside `SparseMatcher::new` (lines 474-592). No

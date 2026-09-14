@@ -149,8 +149,8 @@ Existing architectural requirements and performance gates below remain binding.
 
 ## Mandatory performance rules and native regression gate
 
-Read the complete sibling `ergodis/AGENTS.md`, `ergodis-contrib/PERFORMANCE.md`
-and `ergodis-contrib/performance-playbook.md` before implementation/design resumes.
+Read the complete sibling `ergodis/AGENTS.md`, `ergodis-dev/PERFORMANCE.md`
+and `ergodis-dev/performance-playbook.md` before implementation/design resumes.
 All three were read in full when this task was queued. These rules are acceptance
 requirements, not an optimization follow-up:
 

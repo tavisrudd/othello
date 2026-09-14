@@ -7,8 +7,8 @@
 **Predecessors**: probes 1, 2, 5 read in full; 3 and 4 skimmed.
 
 Contract documents read in full before any work: `/home/tavis/src/ergodis/CLAUDE.md`,
-`/home/tavis/src/ergodis-contrib/PERFORMANCE.md`,
-`/home/tavis/src/ergodis-contrib/performance-playbook.md`,
+`/home/tavis/src/ergodis-dev/PERFORMANCE.md`,
+`/home/tavis/src/ergodis-dev/performance-playbook.md`,
 `/home/tavis/src/ergodis-private/CLAUDE.md`, and the quantum-codes lane handoff
 `notes/handoffs/2026-08-25-quantum-codes.md`.
 

@@ -13,7 +13,7 @@ superseded statement here, then append the correction there.
 
 ## Resume gate
 
-Read `~/src/ergodis-contrib/PERFORMANCE.md` and
+Read `~/src/ergodis-dev/PERFORMANCE.md` and
 `notes/queens-othello-perf-playbook.md` completely before any compute. The
 binding rules: CHOOM on every heavy process, at most twelve workers without
 explicit authorization, hardware counters rather than busy-host wall time, zero

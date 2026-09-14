@@ -63,7 +63,7 @@ Everything except the workflow is in `.publicignore`, so the guard tooling never
 ### Lint rules
 
 `task-id` (`\bC[0-9]{2,4}\b`, allowlisted tokens exempt, currently `C99`/`C11`/`C17`),
-`private-path` (`othello`, `ergodis-private`, `ergodis-contrib`, `notes/`, `/home/`),
+`private-path` (`othello`, `ergodis-private`, `ergodis-dev`, `notes/`, `/home/`),
 `process-doc`, `oversize` (1 MiB, `PUBLIC_LINT_MAX_BYTES`). Every hit is printed as
 `path:line: rule: text` and any hit is fatal. With `--message FILE` the task-id and private-path
 rules also run on the commit message.

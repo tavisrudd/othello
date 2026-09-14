@@ -7,8 +7,8 @@
 sparse blossom. This probe pursues the reframing rather than fighting that negative.
 
 Contract documents read in full before this line of probes:
-`/home/tavis/src/ergodis/CLAUDE.md`, `/home/tavis/src/ergodis-contrib/PERFORMANCE.md`,
-`/home/tavis/src/ergodis-contrib/performance-playbook.md`,
+`/home/tavis/src/ergodis/CLAUDE.md`, `/home/tavis/src/ergodis-dev/PERFORMANCE.md`,
+`/home/tavis/src/ergodis-dev/performance-playbook.md`,
 `/home/tavis/src/ergodis-private/CLAUDE.md`.
 
 Status: in progress; sections are filled as each measurement lands.

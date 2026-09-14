@@ -95,7 +95,7 @@ release. Additionally:
   the DEM hashes in the report; a hand-rolled approximation of circuit-level noise is not admissible
   as the model this comparison stands on.
 - **No run-constant branch.** Any new per-graph constant is compiled into `KernelSpec`, per
-  `../ergodis-contrib/PERFORMANCE.md`.
+  `../ergodis-dev/PERFORMANCE.md`.
 
 ## What would make this a negative result, and that is fine
 

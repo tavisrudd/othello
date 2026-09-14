@@ -1118,7 +1118,7 @@ kernel's …": `src/arithmetic/two_adic.rs:303,359,389,434,468,481`,
 `src/arithmetic/subgroup.rs:258,340,355`, `src/hall.rs`. Plus `src/automata.rs:31`
 "A total deterministic presentation imported from `@NFA-explicit`", an internal reference a reader
 cannot resolve. `public-lint.sh` does not catch these (its marker list is `othello`,
-`ergodis-private`, `ergodis-contrib`, `notes/`, `/home/`). Rewrite each to say what the test
+`ergodis-private`, `ergodis-dev`, `notes/`, `/home/`). Rewrite each to say what the test
 checks, not where it came from; optionally add `private kernel` to the private-path marker list.
 
 **S2. `crates/modules/Cargo.toml` has no `license` field** (lines 2-7: name, version `0.0.0`,
@@ -1296,7 +1296,7 @@ Repo-level, not a file in `evidence/`:
 
 | Path                                | Class | Reason                                                                                              | Action                          |
 |-------------------------------------|-------|-----------------------------------------------------------------------------------------------------|---------------------------------|
-| `ergodis-evidence/AGENTS.md` (+ `CLAUDE.md` symlink) | D | `public-lint.sh` flags it `process-doc`. It names `ergodis-private`, `ergodis-contrib`, the private `main`, the staging clone, and the guard-script paths — the exact map `.publicignore` exists to withhold | delete before the repo goes public |
+| `ergodis-evidence/AGENTS.md` (+ `CLAUDE.md` symlink) | D | `public-lint.sh` flags it `process-doc`. It names `ergodis-private`, `ergodis-dev`, the private `main`, the staging clone, and the guard-script paths — the exact map `.publicignore` exists to withhold | delete before the repo goes public |
 | `ergodis-evidence/README.md`        | A     | Intended public front page; mentions only the core repo and `BENCHMARKS.md`                          | ship                            |
 | `ergodis-evidence/SHA256SUMS`       | A     | 128 lines, covers every copied file; regenerate after any scrub                                      | regenerate, ship                |
 

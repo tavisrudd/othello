@@ -21,7 +21,7 @@ not-to-ship contributor guidance. Narrow UI/admin work does not require the full
 ## Identity and boundaries
 
 - **Ergodis software**: private `main` of `~/src/ergodis`, with sibling checkouts
-  `~/src/ergodis-private`, `~/src/ergodis-evidence` and `~/src/ergodis-contrib`, each governed by
+  `~/src/ergodis-private`, `~/src/ergodis-evidence` and `~/src/ergodis-dev`, each governed by
   its own `AGENTS.md`. The software left this monorepo at tag `ergodis-split-base` (`aa49d68c3`).
 - C1175 validates the regenerated 472-row filtered export manifest and a lint-clean filtered
   tree. Nothing has been published to GitHub. Evidence-publication, paper-deposit,
@@ -185,7 +185,7 @@ Resume from the authoritative
 strict-margin 14,800 recovery gate remains open.
 
 **Next:** coverage-aware region proposals, cost-aware exact local representations and richer
-invariant-preserving repair schedules. Before resuming, read `ergodis-contrib/PERFORMANCE.md` and
+invariant-preserving repair schedules. Before resuming, read `ergodis-dev/PERFORMANCE.md` and
 the shared performance playbook. Proved/exact reductions grant negative coverage; heuristic
 predicates do not.
 

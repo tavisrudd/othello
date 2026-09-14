@@ -18,7 +18,7 @@ Monorepo commit `aa49d68c3` (C1049/C1054/C1060 landed; core gates `cargo fmt --c
 | `~/src/ergodis`          | private `main` = C1059 tip `fa2b2a7` + sync commit + replayed history        | `681d7c4`       |
 | `~/src/ergodis-private`  | full subdirectory history of `ergodis-private/` (281 commits) + rewire      | `c51a22a`       |
 | `~/src/ergodis-evidence` | fresh; `evidence/`, `proptest-regressions/`, `SHA256SUMS` from core `37601a1` | `09b6168`       |
-| `~/src/ergodis-contrib`  | fresh; `PERFORMANCE.md`, playbook extract, retain-bin/cache-gc/lib tooling   | `c6ee2a4`       |
+| `~/src/ergodis-dev`  | fresh; `PERFORMANCE.md`, playbook extract, retain-bin/cache-gc/lib tooling   | `c6ee2a4`       |
 
 Each has `AGENTS.md`, a `CLAUDE.md -> AGENTS.md` symlink, a README, unsigned commits, and no
 remote (`ergodis` keeps only `staging`, a local path).
@@ -52,7 +52,7 @@ remote (`ergodis` keeps only `staging`, a local path).
    points the six Cargo manifests, the notebook path helper (`ERGODIS_CORE_ROOT` override), the
    `test_alloc` include, the kernel registry (`ergodis/src/...`), and the documents at the sibling
    checkouts. `cargo build --workspace --all-targets --all-features` passes against `../ergodis`.
-6. **Companions.** `ergodis-evidence` and `ergodis-contrib` are fresh repositories from the
+6. **Companions.** `ergodis-evidence` and `ergodis-dev` are fresh repositories from the
    current tree; `cache-gc.sh` now locates siblings from its own path with `ERGODIS_ROOT` and
    `ERGODIS_NOTES_DIR` overrides.
 
@@ -66,7 +66,7 @@ remote (`ergodis` keeps only `staging`, a local path).
   `.publicignore` already drops both directories from every public export, so the public
   boundary is unchanged.
 - The two companion repositories were kept separate as proposed: `ergodis-evidence` may be
-  published per file; `ergodis-contrib` never is.
+  published per file; `ergodis-dev` never is.
 - `SHA256SUMS` stays in the core (it hashes core files as well as evidence); the evidence copy
   carries the same file for `sha256sum -c --ignore-missing`.
 
@@ -107,11 +107,11 @@ repaired and committed afterwards:
   (`ergodis` `fbd3ba0`; `--check` now passes).
 - `ergodis-evidence` carried the core's shared manifest, whose `README.md` line named the core
   README. It now has its own complete manifest over the copied files (`8260e94`).
-- `scripts/lib.sh` in `ergodis-contrib` lacked a shell directive for shellcheck (`20bcd37`).
+- `scripts/lib.sh` in `ergodis-dev` lacked a shell directive for shellcheck (`20bcd37`).
 
 Final tips: `ergodis` `fbd3ba0` (core gates green after the three merges), `ergodis-private`
 `c51a22a` (workspace build and all tests green against the sibling core), `ergodis-evidence`
-`8260e94`, `ergodis-contrib` `20bcd37`. The paper release verifier passes after the monorepo
+`8260e94`, `ergodis-dev` `20bcd37`. The paper release verifier passes after the monorepo
 edits (37 pages, warning-free, 28 claims, 4 Lean terminals; PDF refreshed).
 
 ## Open items and successors
@@ -127,5 +127,5 @@ edits (37 pages, warning-free, 28 claims, 4 Lean terminals; PDF refreshed).
   public export remain Tavis's actions (C1059 gaps 1, 2, 4).
 - Evidence refresh into `ergodis-evidence` is manual (procedure in its `AGENTS.md`); a script
   and a tag-matching rule can follow once the first release is cut.
-- `notes/queens-othello-perf-playbook.md` now has a copy in `ergodis-contrib`; edits to the
+- `notes/queens-othello-perf-playbook.md` now has a copy in `ergodis-dev`; edits to the
   shared playbook that matter to Ergodis must be forwarded there.

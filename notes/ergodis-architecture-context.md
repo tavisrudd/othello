@@ -86,7 +86,7 @@ relevant handoff/task context. Follow links selectively; do not preload all repo
   boundary: canonical engine plus native/WASM/IR packages, not a mandatory private
   monolithic assembly. Multiple extension payloads are not multiple core engines.
 - Preserve native performance and specialized layouts/kernels. Read the complete
-  sibling `ergodis-contrib/PERFORMANCE.md` and `performance-playbook.md` before
+  sibling `ergodis-dev/PERFORMANCE.md` and `performance-playbook.md` before
   Rust design/implementation/profiling, as required by core/private AGENTS.md.
   Zero-allocation iterative hot loops, cold dispatch, worker isolation and retained
   single/parallel A/B counter gates remain mandatory. No native slowdown accepted

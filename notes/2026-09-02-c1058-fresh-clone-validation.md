@@ -131,7 +131,7 @@ drop the top-level `README.md` line from the shared manifest.
 ../ergodis/proptest-regressions` — exit 0, no output. Both directories are byte-identical to the
 core clone's copies, as intended.
 
-## 4. `ergodis-contrib`
+## 4. `ergodis-dev`
 
 `bash scripts/test-cache-gc.sh` — exit 0 (its header confirms it builds a throwaway cache root under
 `mktemp -d` and never touches the real cache):
@@ -156,9 +156,9 @@ line silences the finding and lets shellcheck analyze it properly.
 
 Each clone has exactly one remote, `origin`, pointing at its local source path
 (`/home/tavis/src/ergodis`, `/home/tavis/src/ergodis-private`, `/home/tavis/src/ergodis-evidence`,
-`/home/tavis/src/ergodis-contrib`) for both fetch and push. `git log --format=%G? -3` returned `N`
+`/home/tavis/src/ergodis-dev`) for both fetch and push. `git log --format=%G? -3` returned `N`
 for every listed commit in every repository — all unsigned, as expected. `ergodis-evidence` and
-`ergodis-contrib` have a single commit each, so `-3` printed one `N`. Every clone contains
+`ergodis-dev` have a single commit each, so `-3` printed one `N`. Every clone contains
 `CLAUDE.md -> AGENTS.md` as a symlink, and each symlink resolves.
 
 ## 6. Residual monorepo path strings
@@ -172,7 +172,7 @@ rather than stale leaks:
 - `ergodis/tests/publication-guards.sh` lines 166, 188, 215 — fixture text that deliberately plants
   the monorepo paths into a synthetic private repository so the guard can be observed removing them.
 
-`ergodis-private`, `ergodis-evidence`, and `ergodis-contrib` contain neither string anywhere outside
+`ergodis-private`, `ergodis-evidence`, and `ergodis-dev` contain neither string anywhere outside
 the excluded paths.
 
 ## Pass/fail summary
@@ -191,7 +191,7 @@ the excluded paths.
 | 2 | `ergodis-private`  | no Cargo path outside the validate directory            | pass    |
 | 3 | `ergodis-evidence` | `sha256sum -c --ignore-missing SHA256SUMS` (40 OK, 1 FAILED) | FAIL |
 | 3 | `ergodis-evidence` | `diff -rq evidence`, `diff -rq proptest-regressions`    | pass   |
-| 4 | `ergodis-contrib`  | `scripts/test-cache-gc.sh`                              | pass   |
-| 4 | `ergodis-contrib`  | `shellcheck -S warning -x scripts/*.sh`                 | FAIL   |
+| 4 | `ergodis-dev`  | `scripts/test-cache-gc.sh`                              | pass   |
+| 4 | `ergodis-dev`  | `shellcheck -S warning -x scripts/*.sh`                 | FAIL   |
 | 5 | all four           | single `origin` remote, unsigned commits, `CLAUDE.md` symlink | pass |
 | 6 | all four           | no stale `src/othello` / `complete-repair-ports/ergodis` references | pass |

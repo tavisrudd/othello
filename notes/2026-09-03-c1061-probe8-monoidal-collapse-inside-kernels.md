@@ -411,7 +411,7 @@ cargo clippy --all-targets --all-features -- -D warnings      # clean
 cargo test --all-features                                     # 747 passed, 0 failed
 nix shell nixpkgs#python3 --command python3 python/test_algorithms.py   # 79 tests, OK
 cargo test --test contextual_allocations gf27                 # zero-allocation regression
-../ergodis-contrib/scripts/cache-gc.sh                        # dry run only, nothing applied
+../ergodis-dev/scripts/cache-gc.sh                        # dry run only, nothing applied
 ```
 
 The Python oracle differential is the defect module's existing one: `python/test_algorithms.py`'s

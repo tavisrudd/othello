@@ -1054,9 +1054,9 @@ layout selection ([C1049](../2026-09-02-c1049-scheduler-dominance-pruning.md),
 
 C1058 is closed: the Ergodis core no longer lives in this monorepo. It is the private `main` of
 `~/src/ergodis` (sibling checkouts `~/src/ergodis-private`, `~/src/ergodis-evidence`,
-`~/src/ergodis-contrib`, each with its own `AGENTS.md`); the monorepo tag `ergodis-split-base`
+`~/src/ergodis-dev`, each with its own `AGENTS.md`); the monorepo tag `ergodis-split-base`
 (`aa49d68c3`) marks the last commit that carried the trees. All future Ergodis work, including
-C1017, happens in those repositories under their `AGENTS.md` and `../ergodis-contrib/PERFORMANCE.md`;
+C1017, happens in those repositories under their `AGENTS.md` and `../ergodis-dev/PERFORMANCE.md`;
 this handoff keeps only the paper-facing pointer. The C1055–C1057 promotions are merged there.
 The public export is gated on the release checklist (the filtered tree still has 67 lint findings)
 and the standalone paper repository needs an explicit `git rm -r ergodis` commit before its next

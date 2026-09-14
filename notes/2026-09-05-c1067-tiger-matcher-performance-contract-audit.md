@@ -1,7 +1,7 @@
 # C1067: the Tiger matcher against the Ergodis performance contract
 
 **Lane**: `complete-ports` · **Date**: 2026-09-05 · **Code**: `~/src/ergodis-private`
-**Contract**: `~/src/ergodis-contrib/PERFORMANCE.md` and the shared playbook it names
+**Contract**: `~/src/ergodis-dev/PERFORMANCE.md` and the shared playbook it names
 **Scope**: `src/tiger_blossom.rs`, `src/tiger_blossom_graph.rs`, `src/tiger_blossom_sparse.rs`
 **Status**: complete — the contract holds except for the shipped traffic counters, now gated
 

@@ -31,7 +31,7 @@ paper and the research notes need.
 | `~/src/ergodis`            | Core crate: `src/`, `tests/`, `examples/`, `benches/`, `scripts/` (sanitized), `docs/`, README, OPTIMIZATION, BENCHMARKS, LICENSE, `.cargo/config.toml`. | Public, AGPL + commercial |
 | `~/src/ergodis-evidence`   | `evidence/`, `proptest-regressions/`, raw benchmark samples, checker scripts that need the monorepo layout, `SHA256SUMS`. Referenced from BENCHMARKS by relative URL. | Public or private per file; default private until reviewed |
 | `~/src/ergodis-private`    | The `ergodis-private` workspace as is (tier-1 library, three task crates, `performance/`, `docs/CAMPAIGNS.md`, private evidence), with `ergodis = { git = ... }` or a path to a sibling checkout. | Private |
-| `~/src/ergodis-contrib`    | `AGENTS.md`, `PERFORMANCE.md`, the perf playbook extract, kernel registry, retain-bin and cache-gc tooling. Contributor-only documents that must not ship in the crate. | Private |
+| `~/src/ergodis-dev`    | `AGENTS.md`, `PERFORMANCE.md`, the perf playbook extract, kernel registry, retain-bin and cache-gc tooling. Contributor-only documents that must not ship in the crate. | Private |
 
 Everything under `ergodis-private` that the trade-secret list (chat, 2026-09-02) names stays in
 `ergodis-private`: theorem archive and banked reductions, evolve admission and grammars, campaign
@@ -50,7 +50,7 @@ infrastructure, task crates, the absorption list.
    they are harmless provenance. A final review diff between the filtered tree and the monorepo
    tree, minus the excluded set, must be empty.
 3. **Companion repositories.** `~/src/ergodis-private` is created by the same subdirectory filter
-   over `ergodis-private/` with full history; `~/src/ergodis-evidence` and `~/src/ergodis-contrib`
+   over `ergodis-private/` with full history; `~/src/ergodis-evidence` and `~/src/ergodis-dev`
    are created as fresh repositories from the current tree (their history is in the monorepo and
    does not need replaying).
 4. **Rewire.** `ergodis-private` Cargo manifests point at `../ergodis` (sibling checkout) with a
@@ -77,11 +77,11 @@ infrastructure, task crates, the absorption list.
   (C1054 hall_core, C1055 margin lift, C1056 arithmetic kernels, C1057 proof scaffolding) land in
   the new core repository, not the monorepo copy, once the split base is tagged; and each new
   repository gets its own `AGENTS.md` plus a `CLAUDE.md` symlink to it, a README, and the routed
-  documents it owns (PERFORMANCE.md and the perf playbook extract in `ergodis-contrib`; the
+  documents it owns (PERFORMANCE.md and the perf playbook extract in `ergodis-dev`; the
   kernel registry and campaign docs in `ergodis-private`).
 - **Monorepo after the move.** Cites the external repositories at tagged commits; no vendored
   copy. Companion names as proposed unless the executing review finds `ergodis-evidence` and
-  `ergodis-contrib` better merged.
+  `ergodis-dev` better merged.
 
 ## Public/private branching model
 
@@ -167,11 +167,11 @@ report names use dates and topics, not IDs) so the lint stays quiet; where an ex
 cites an ID, the sanitizer rewrites it to the dated report title before export.
 
 **Companion repositories** follow the same pattern only if they are ever published;
-`ergodis-private` and `ergodis-contrib` have a single `main` and only a private remote.
+`ergodis-private` and `ergodis-dev` have a single `main` and only a private remote.
 
 ## Decisions originally raised
 
-1. Names and visibility of the companions (`ergodis-evidence`, `ergodis-private`, `ergodis-contrib`
+1. Names and visibility of the companions (`ergodis-evidence`, `ergodis-private`, `ergodis-dev`
    as proposed, or fewer).
 2. Whether commit subjects carrying `C<id>` task IDs are acceptable in the public history or should
    be rewritten to plain subjects during the replay.

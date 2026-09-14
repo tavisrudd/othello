@@ -534,7 +534,7 @@ committed on 2026-09-12 are git-visible, but the files that produce them are out
 
 #### 3. Performance contract
 
-Assessed against `/home/tavis/src/ergodis-contrib/PERFORMANCE.md`, whose two binding sections here
+Assessed against `/home/tavis/src/ergodis-dev/PERFORMANCE.md`, whose two binding sections here
 are "Non-negotiable solve invariant" (the solve hot loop is completely allocation-free, including
 container growth, cloning owned data, error construction and serialization; every new solve kernel
 needs an allocation-count regression that re-enters the real loop after setup and observes zero
@@ -2144,7 +2144,7 @@ labelled omission. Operator precedence is exercised but, per B.2, the `^` row is
 exactly where it breaks. The contract's real outstanding misses are `^` as a binary operator,
 non-decimal integer literals, and digit separators.
 
-##### B.6 Performance contract — `/home/tavis/src/ergodis-contrib/PERFORMANCE.md`
+##### B.6 Performance contract — `/home/tavis/src/ergodis-dev/PERFORMANCE.md`
 
 The relevant rule is PERFORMANCE.md:29-31: every new hot-path kernel needs an
 **allocation-count test**, and "only once"/"amortized" do not qualify.

@@ -5,8 +5,8 @@
 **Task**: C1061 probe 29, continuing `notes/2026-09-03-c1061-probe27-locality-and-surface-code-predecoder.md`.
 
 Contract documents read in full before this probe:
-`/home/tavis/src/ergodis/CLAUDE.md`, `/home/tavis/src/ergodis-contrib/PERFORMANCE.md`,
-`/home/tavis/src/ergodis-contrib/performance-playbook.md`,
+`/home/tavis/src/ergodis/CLAUDE.md`, `/home/tavis/src/ergodis-dev/PERFORMANCE.md`,
+`/home/tavis/src/ergodis-dev/performance-playbook.md`,
 `/home/tavis/src/ergodis-private/CLAUDE.md`.
 
 ## Headline

@@ -1,7 +1,7 @@
 # C1069: the same certificate read, for the predecoder path
 
 **Lane**: `complete-ports` · **Date**: 2026-09-05 · **Code**: `~/src/ergodis-private`
-**Contract**: `~/src/ergodis-contrib/PERFORMANCE.md` and the shared playbook it names
+**Contract**: `~/src/ergodis-dev/PERFORMANCE.md` and the shared playbook it names
 **Continues**: item 2 of `2026-09-05-c1068-touch-loop-and-certificate-closure.md`'s next list, and
 the fourth entry of what `2026-09-05-c1068-qec-decoder-risk-review.md` could not check: "the
 predecoder's certificate deserves the same read and has not had one here"

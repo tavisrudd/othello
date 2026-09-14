@@ -85,7 +85,7 @@ the canonical serialization at whatever size (13 MB for the dense N = 1024 closu
 | Negative controls: schema/identity/fact-count binding, list coverage, rule out of range, every premise reference moved, every premise pointing at itself (rank), every tuple value flipped, a duplicate derivation, an absent-fact premise, a dropped derivation | each rejected (`derivation_certificate_rejects_every_mutation_class`) |
 | Zero allocations in the derivation loop | 100 repeated evaluations of `same_generation.json` under the counting allocator: 0 (`tests/allocation.rs`) |
 | `cargo fmt --check`, `cargo clippy --all-targets --all-features -- -D warnings` (verify, rules), `cargo test --all-features` (verify, rules), `SHA256SUMS` regenerated | clean, 18 test binaries pass |
-| Private harness clippy clean; retained executable built via `ergodis-contrib/scripts/retain-bin.sh . closure_ballpark --example --profile release --label nix` from `ergodis-private` at `77aa137` (dirty tree), `rustc 1.95.0` | SHA-256 below |
+| Private harness clippy clean; retained executable built via `ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release --label nix` from `ergodis-private` at `77aa137` (dirty tree), `rustc 1.95.0` | SHA-256 below |
 
 ## Comparison
 
@@ -258,7 +258,7 @@ Replay:
 
 ```
 cd ~/src/ergodis-private
-nix shell nixpkgs#cargo nixpkgs#rustc -c ../ergodis-contrib/scripts/retain-bin.sh . closure_ballpark --example --profile release --label nix
+nix shell nixpkgs#cargo nixpkgs#rustc -c ../ergodis-dev/scripts/retain-bin.sh . closure_ballpark --example --profile release --label nix
 cd analysis/datalog-comparison
 nix shell nixpkgs#souffle nixpkgs#gcc nixpkgs#gnumake nixpkgs#time -c python3 compare.py \
   --bin "$RETAINED_BIN" --work "$(mktemp -d)" \
