@@ -80,10 +80,22 @@ outcomes (159 cases, canonical `5a350e1f…`). Toolchain is now pinned through t
 shell, and gates for a report run under the same shell. The 1.93.1 control `ergodis-tools-cfe4893`
 and candidates `35f4484`/`49493a3` are toolchain-stale; `ergodis-tools-32a18c6` (1.95.0) is the
 control for the next A/B.
+Admission decomposition: `../2026-09-14-c1170-admission-decomposition.md` (private `52d48eb` …
+`45df44c`, no kernel change): twenty per-unit costs from thirty synthetic sources, census replayed
+over the dumped node pool, prediction closes on the ASCII cohort at −0.32 % out of sample (other
+cohorts −0.09 % / +0.81 %). Cost carriers: traversal bookkeeping 19 %, fixed per-reference 14 %,
+first-sight `BUILTINS` walk plus insert 14 %, two node-kind pool scans 12 %, name hashing 12 % (1,545
+names hashed twice); the index clear is 0.1 %. Two recorded limits: the model interpolates
+cohort-like mixtures and does not extrapolate to pure shapes (singular design matrix), and a
+driver-only commit moved the parse stage 1.7 % through ThinLTO, so stage differences, not stages,
+carry the measurement. The control for the next A/B is `ergodis-tools-185015e` (rustc 1.95.0; the
+commits after it touch only scripts, receipts and README).
 
-**Next:** decompose the admission stage by class (synthetic sources: definitions, references,
-binders, name bytes) before touching its code; then module-scoped visibility, module parameters
-and member tables in admission; then the remaining
+**Next:** implement the three non-interacting priced candidates from the decomposition report,
+each as its own A/B against `ergodis-tools-185015e`, re-measuring after each lands: hash each
+name once (5.6 %), first-byte/length gate on the `BUILTINS` walk (9.1 %), drop the second node-pool
+scan (5.6 %); then the traversal stack cursor (2.4–4.8 %). Then module-scoped visibility, module
+parameters and member tables in admission; then the remaining
 syntax gaps by manifest family (caret entity references, interpolation, Unicode boundary
 conformance). Ergodis retains lowering, rules, joins and
 execution; no external evaluator or backend is adopted. Tree-sitter and executable reference
