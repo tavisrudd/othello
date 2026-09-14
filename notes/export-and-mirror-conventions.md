@@ -63,6 +63,24 @@ never merged back.
 
 ## Paper export to `~/src/math-papers/`
 
+### Commit messages in a published repository are published prose
+
+Every commit message in a repository that will be public — the paper
+repositories under `~/src/math-papers/`, exported Lean packages, and the
+snapshot branch of any exported software repository — is read by strangers and
+is part of what is published. Write those messages for that audience: what the
+revision contains and what changed for a reader, in the register of release
+notes or a revision summary.
+
+Nothing internal belongs in them: no task identifier, no monorepo path or
+private revision hash, no handoff, lane, report title or session vocabulary, no
+"as requested", "per the review", "phase 2", or account of who asked for what.
+Private repositories keep their ordinary commit messages, task identifiers
+included; the rule binds only messages that ship.
+
+A stripped message must stay accurate. Remove the internal provenance, keep the
+substance and any limit a reader needs.
+
 ### Keep publication administration out of paper trees
 
 The authoritative paper root and every public paper export contain only the
