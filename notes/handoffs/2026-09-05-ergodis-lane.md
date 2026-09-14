@@ -18,6 +18,13 @@ C1017, C1061 and C985 remain in progress. C1062 and C1070 await Tavis's close ca
 portability work, read `notes/ergodis-architecture-context.md` after this handoff. It is private,
 not-to-ship contributor guidance. Narrow UI/admin work does not require the full context.
 
+**Performance context (required)**: before any hot-path edit, benchmark, A/B or profiling
+task in this lane, read `~/src/ergodis-dev/PERFORMANCE.md` and
+`~/src/ergodis-dev/performance-playbook.md` in full, and restate the binding items in every
+sub-agent prompt: Fermi before implementing, interleaved A/B on the committed harness,
+run-constant toggles resolved outside the loop (const generics), Tiger-style hot-struct
+discipline, document negatives and revert by commit, tmpfs hygiene.
+
 ## Identity and boundaries
 
 - **Ergodis software**: private `main` of `~/src/ergodis`, with sibling checkouts
