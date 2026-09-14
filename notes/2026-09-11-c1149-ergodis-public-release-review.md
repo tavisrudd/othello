@@ -2352,10 +2352,25 @@ standard). Gates: manifest regenerated, `cargo test --test evidence_manifest` pa
 publication guards pass, and a dry-run export in a throwaway clone lints clean, so the new prose
 carries no task identifier or private path.
 
-### Not done
+### Snapshotted the same day as the matched preview4 pair
 
-The documentation additions are not in a snapshot: staging still holds `v0.1.0-preview3`, cut before
-this work. Publishing them means a matched `v0.1.0-preview4` pair, since an exported tag must not
-move and the evidence repository should carry the tag its crate links to, even though its bytes are
-unchanged.
+The documentation additions are in staging.
+
+| repository | private revision | public commit | parent |
+|------------|------------------|---------------|--------|
+| crate      | `564ad08`        | `b464490`     | `5dd74c0` |
+| evidence   | `6d3fce7`        | `d90fe31`     | `036f593` |
+
+Both tagged `v0.1.0-preview4`, evidence first so the tag the crate links to already existed. The
+evidence tree is unchanged from preview3; the tag exists to keep the pair matched. The crate
+snapshot was cut from main at `564ad08`, so besides the documentation it carries one code change
+from the concurrent checker work — a presence bitmap beside the row array in the certificate
+store — which the release notes state.
+
+Link verification is now exhaustive rather than partial: all 83 distinct evidence URLs in the
+snapshot's Markdown resolve to a file in the evidence snapshot at the matching tag, with no
+remaining brace or wildcard form. Before this pass it was 27 of 31 literal, with four shorthand
+forms that could not resolve. `.publish/validate-release.sh` passes in both staging checkouts —
+the crate's in full, including `cargo build --release` and `cargo test --all-features` with
+doctests — and the crate's build tree was deleted afterwards. Nothing has been pushed.
 

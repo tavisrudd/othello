@@ -116,8 +116,10 @@ in full rather than by brace or wildcard shorthand, and the twelve families no d
 now documented in `BENCHMARKS.md` — the gross `[[144,12,12]]` searches with their Gurobi controls,
 the rule-frontier A/B with the negative control where the frontier loses, the L2 dominance A/B, the
 rank-envelope probe, the six-application no-regression record, and one structured CNF instance with
-its selection manifest. Nothing was dropped. Those additions are not yet in a snapshot: publishing
-them needs a matched `v0.1.0-preview4` pair. Open for Tavis: phase-0 publication/product decisions;
+its selection manifest. Nothing was dropped. Staging now holds the matched `v0.1.0-preview4` pair
+carrying that work — crate (core `564ad08`, public `b464490`) and evidence (evidence `6d3fce7`,
+public `d90fe31`), both validated — and all 83 distinct evidence URLs in the crate snapshot resolve
+in the evidence snapshot at the matching tag. Open for Tavis: phase-0 publication/product decisions;
 remaining phase-1 through phase-5 work is unallocated.
 
 ### C1143 — BB circuit-distance external benchmark (in progress)
