@@ -61,10 +61,18 @@ punctuation dispatch, not identifiers, is about half the scanner. Two measuremen
 bind: the six-event `perf stat` set multiplexes and must not be used for small operations, and
 the shared toolchain moved to rustc 1.95.0, so every retained control predating 2026-09-14 is
 toolchain-mismatched.
+Punctuation fast path: `../2026-09-14-c1170-punctuation-fast-path.md` (private `6ed6ff9` …
+`cfe4893`, kept shape `598426f`): against a rustc 1.95.0 control at `9f1e57e`, ASCII parse stage
+0.8010 (19.9 % removed), faster on every cohort in the byte variant, scalar variant exactly 1.0000;
+the first-byte compound index with slice `starts_with` was an instructive negative (libc `memcmp`
+in the loop). Lane protocol change: A/B with
+`instructions,cycles,branches,branch-misses,page-faults,minor-faults` (non-multiplexing, A/A null
+two parts per million); cache events in a separate run. The parser is now the majority of the
+ASCII parse stage (48 %); the token store (23 instructions per 16-byte record as five stores) is
+the largest identified scanner component.
 
-**Next:** retain a toolchain-matched control, then the punctuation fast path in the
-byte-dispatch scanner (Fermi 10–18 % of the ASCII parse stage) folding in the two redundant
-fall-through re-tests; then the remaining
+**Next:** retain a control at `598426f`, then the token-store single-16-byte-write A/B
+(establish pool alignment first); then the remaining
 syntax gaps by manifest family (caret entity references, interpolation, Unicode boundary
 conformance) and first semantic admission checks. Ergodis retains lowering, rules, joins and
 execution; no external evaluator or backend is adopted. Tree-sitter and executable reference
