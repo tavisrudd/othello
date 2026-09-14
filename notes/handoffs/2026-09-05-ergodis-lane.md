@@ -9,7 +9,7 @@ correction trails live in dated reports and the append-only
 **Date**: 2026-09-13
 **Mode**: intent-based.
 **Status**: ACTIVE. Immediate engineering frontier is C1170 (owned Rel-rich frontend); the
-rule-contract programme C1172–C1177 and the Datalog evaluation tasks C1179/C1182–C1184 and C1186 are closed. C1143, C1130, C1016,
+rule-contract programme C1172–C1177 and the Datalog evaluation tasks C1179/C1182–C1186 are closed. C1143, C1130, C1016,
 C1017, C1061 and C985 remain in progress. C1062 and C1070 await Tavis's close call.
 
 **Discovery companion**: [ergodis discovery track](../ergodis-discovery-track.md).
@@ -62,10 +62,15 @@ the order of evaluation on closure, ranked checking 3–9× evaluation. C1186
 (`../2026-09-13-c1186-presence-bitmap.md`) added the presence bitmap: large sparse rows 1.2–1.7×
 faster again (worst row, sparse same generation, now 4.3× evaluation for the trace checker and
 7.7× for the ranked one), checker-only peak RSS measured. The checker profile is now bucket
-enumeration and unification, not membership. Queued successor: C1185 certificate size/cost
-exploration with generation profiling (exact queue row). Still unallocated: a key-indexed rank
-structure so the ranked checker's fully bound probes can also avoid the row array, bodies with
-more than two atoms, and a bit-parallel closure kernel for dense inputs.
+enumeration and unification, not membership. C1185
+(`../2026-09-13-c1185-certificate-size-exploration.md`) profiled generation and measured eight
+candidate encodings: ranks as runs are a free strict win on the existing format; a binary
+round-block form reaches 0.25–1.06 bytes per derived tuple; no core format changed. Unallocated
+successors, in the order C1185 rates them: remove the runtime-length tuple `memmove` from the
+demand derivation loop (discovery track, 2026-09-13; about a fifth of dense-closure evaluation);
+implement rank runs and the round-block certificate in core with its checker; a key-indexed rank
+structure for the ranked checker's fully bound probes; bodies with more than two atoms; a
+bit-parallel closure kernel for dense inputs.
 
 ### Rule-contract programme — closed
 

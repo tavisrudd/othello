@@ -132,3 +132,16 @@ merge-free kernel where workers write disjoint tiles straight into the next laye
 layers), removing the serial copy; that is a core `allocation_surface` change, not a private gate.
 **Evidence level**: measured loss (paired, six shapes, seven rounds); the merge-free remedy is
 argument only. No C-ID allocated.
+
+## 2026-09-13 — runtime-length tuple copy is a `memmove` call inside the demand derivation loop (C1185)
+
+**Provenance**: C1185 certificate generation profile, `notes/2026-09-13-c1185-certificate-size-exploration.md`,
+private `a3c64f6`. **Was I looking for this?**: no — the task profiled certificate generation; this
+is the evaluator's own cost.
+**Observation**: `Demand::read`/`Demand::emit` copy a tuple with `copy_from_slice` over a runtime
+arity, which lowers to a `memmove` call per tuple. On closure dense 1024 that call is about a fifth
+of the process while certificate generation is under one per cent; a DWARF-unwound profile puts the
+caller at `evaluate_into`.
+**Why it may matter**: arity monomorphization or a bounded fixed-width element loop would remove
+the call from the hot loop — a lever on evaluation itself, larger than any remaining checker lever.
+**Evidence level**: one profile, one row; unmeasured remedy. No C-ID allocated.
