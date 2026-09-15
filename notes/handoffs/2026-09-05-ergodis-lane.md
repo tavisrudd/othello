@@ -149,15 +149,32 @@ pools. Three-term cost model closes on both cohorts; the shadow-flagging walk in
 symbol) is half the cost and is the first candidate if micro-optimization resumes. The control for
 any later frontend A/B is `ergodis-tools-9bfe19d` (rustc 1.95.0).
 
+Syntax gaps by manifest family: `../2026-09-14-c1170-syntax-gaps.md` (private `80f3305` …
+`b51f627`, manifest citation `6f0e9ec`): caret entity references (power operator after an operand,
+entity reference elsewhere; a global name whose spelling includes the caret, never a binder),
+string interpolation (`%name`, `%(expr)`, nested, scanned as parts through one continuation frame;
+`REL0105`/`REL0106`), and reference identifier/whitespace/operator-block boundaries (Alphabetic
+starts, ASCII-digit continuations, `U+FEFF` space, `U+2200`–`U+22FF` operators). Parity corpus 193
+cases, canonical `c5d83625…`; zero-allocation gate holds. Cost, measured and unrepaired: composed
+ASCII parse **1.0651** and scan-only 1.0956 against `ergodis-tools-9bfe19d`, none of it the features
+executing (the cohorts contain none of the new syntax); it is loop shape, `lexer::scan` left the
+inliner at the interpolation commit. Two arm merges were measured losses and reverted; the
+byte-order-mark move is kept. Recorded divergences: `Other_Alphabetic` marks start identifiers (no
+category table without a crate in the bare-`rustc` parity harness); `doc "100% sure"` rejects. The
+control for the next frontend A/B is `ergodis-tools-e8b4c7c` (rustc 1.95.0). The formal semantics of
+Rel's logical core is Aref et al., arXiv:2504.10323, Addendum A (lit cache `arxiv:2504.10323`).
+
 **Next (Tavis, 2026-09-14): end-to-end features, not micro-optimization.** The remaining priced
 candidates (the `Apply`-site spills, the hash loop's bounds check, `same()`'s bounds checks, the
 pop's field loads, pricing `is_builtin`, the `insert` shadow walk) are listed in the inline and
-module-scope reports for a later resumption and are not queued. Feature order: the remaining
-syntax gaps by manifest family (caret entity references, interpolation, Unicode boundary
-conformance); then lowering of admitted programs into Ergodis rules end to end. Ergodis retains lowering, rules, joins and
-execution; no external evaluator or backend is adopted. Tree-sitter and a PLT Redex model remain
-deferred; C1189 (queued, gated on the start of lowering) is a test-only naive reference evaluator
-for the lowered fragment, the differential oracle for lowering.
+module-scope reports for a later resumption and are not queued. The syntax-gap report adds one
+larger untaken lever: a feature-presence prepass that monomorphizes the scanner on the lexical
+features a source actually contains, so sources without interpolation pay no per-token guard. Not
+built, not queued. Feature order now: lowering of admitted programs into Ergodis rules end to end
+(unallocated). Ergodis retains lowering, rules, joins and execution; no external evaluator or
+backend is adopted. Tree-sitter and a PLT Redex model remain deferred; C1189 (queued, gated on the
+start of lowering) is a test-only naive reference evaluator for the lowered fragment, the
+differential oracle for lowering.
 
 ### Datalog evaluation — C1179, C1182 and C1183 closed
 
