@@ -58,7 +58,8 @@ All of it is test-only and outside the performance contract, as the task card re
 | `tests/rel_reference/generate.rs` | the seeded generators: in-fragment, near-miss, name-resolution templates |
 | `tests/rel_reference_eval.rs`     | the differential harness and every committed table                       |
 
-**The evaluator** consumes the frontend's parsed and admitted node pool (`Workspace::nodes`) and the
+**The evaluator** knows the Figure 3 and Figure 4 contract, range restriction and fragment
+membership, and nothing else — no backend bound and no lowering strategy. It consumes the frontend's parsed and admitted node pool (`Workspace::nodes`) and the
 source bytes, and nothing else. It never reads the relational IR, the rule-contract `Program`, the
 readout map or `rel_lowering`. Everything the two sides share — the scanner, the parser, semantic
 admission — is shared deliberately and is named as a limit below. No visibility change to production
@@ -97,6 +98,13 @@ pool with the same external facts, and asserts that the verdicts agree, that an 
 readout relations, arities and tuple sets are identical, that both checkers accept and agree with the
 evaluator's rows tuple-wise, and that both sides identify the same set of free names.
 
+It has three outcomes, not two. Beside agreement and a shared semantic rejection there is a
+**backend divergence**: the lowering refuses, on `REL0503` or `REL0505`, a program the evaluator
+admits and whose closure it computes. That is recorded with the exact code, budget name and reported
+number, and the seeded corpora assert the population of the class by diagnostic. A budget refusal of
+a program the evaluator also rejects is an assertion failure, since it would mean the two sides
+disagree about the reason.
+
 **External facts.** A free name is an external input relation with no facts of its own. The harness
 supplies its facts to both sides: to the evaluator directly, and to the lowered program by appending
 `rule_contract::Fact` rows before `Demand::new`. A lowered program's tuples are dictionary ids, so an
@@ -116,6 +124,9 @@ what catches a source whose free name is not in fact free.
 | `97b7b0f` | the surface-construct table, the checker's replay compared tuple-wise, the construct census           |
 | `bccb4e8` | the ranked checker on every corpus program, the workspace-purity gate, the last two rejection classes |
 | `e000d09` | the variable-map fixture's provenance corrected: found by reimplementing the pass, not by the corpus  |
+| `8e746ec` | every backend bound taken out of the evaluator; the harness's backend-divergence class                |
+| `3eee87c` | binarization keeps one column when a join carries nothing forward, with its closure-shape fixture     |
+| `fe036f9` | the two A/B receipts for the three repairs against the `b7c26e5` control                              |
 
 ## The evaluator's stated contract
 
@@ -162,22 +173,34 @@ declaration, body construction, per-rule variable numbering, range restriction, 
 binarization's budget, the closing budgets, then what backend v1 refuses — so that a source carrying
 two defects agrees on *which* one is reported, not merely that it is rejected.
 
-**Where the two sides are not independent, and why.** One function, `binarization_budget`, mirrors
-the lowering's strategy rather than reading the contract. Backend v1 admits at most two body atoms,
-so the lowering rewrites a longer positive body into a chain through auxiliary relations, each
-carrying the variables still live in the remaining chain, and refuses an auxiliary that is wider than
-four columns or empty. Those bounds are properties of binarization, not of the denotation, and cannot
-be derived from Figures 3 and 4; the mirror — join-order heuristic included — exists only so that the
-two sides agree on every verdict. It never touches the closure of an accepted program. It is also
-where the third defect below shows up.
+**What the evaluator does not know: any declared bound of a backend.** There is no largest arity, no
+largest number of variables in a rule, no bound on relations, rules, domain size or disjunctive
+expansion, and no binarization, because none of those is a property of the Figure 3 and Figure 4
+denotations. The evaluator admits a five-column relation, a rule of nine variables and a body that
+expands to a hundred disjuncts, and computes their closures.
 
-**Recorded limits of the evaluator.** It compares rejection *classes*, not budget names: both sides
-say "budget" without agreeing on which of the sixteen budgets. It does not mirror the pool-capacity
-budgets, the index-key bound or the tuple-universe bound, because the corpora keep domains at four
-values or fewer and those bounds are unreachable there. It has no auxiliary relations, so its readout
-is every relation it declares, which is exactly what the lowering's `Readout::visible` exposes —
-inputs and fact sets included, which is a stronger comparison than the task card's "exclude the
-externals" and is like-for-like because the harness supplies the same external facts to both sides.
+An earlier version of this module did mirror one of them. `binarization_budget` reproduced the
+lowering's join-order heuristic so that the two sides agreed on the auxiliary-arity bound, which
+bought total verdict agreement at a price that is not worth paying: an oracle that reproduces a
+strategy cannot disagree with it, so that function made this side blind to exactly the class of
+defect it had just found, and it would have tracked any later change to `order_positives` in
+silence. It is gone. Nothing in the evaluator mirrors a lowering strategy now.
+
+**How the asymmetry is recorded instead.** The harness has a third outcome beside agreement and
+rejection. When the lowering refuses, on `REL0503` or `REL0505`, a program the evaluator admits, that
+is a **backend divergence** carrying the exact code, budget name and reported number, and it is
+recorded, never counted as agreement. The seeded corpora assert the exact population of the class by
+diagnostic, so a repair, a widened bound or a changed diagnostic fails the test instead of being
+absorbed into it. The converse — a budget refusal of a program the evaluator also rejects — is an
+assertion failure, because it would mean the two sides disagree about the reason.
+
+**Recorded limits of the evaluator.** A relation of arity zero is a truth value rather than a set of
+tuples, so it is outside the evaluator's data model and is a fragment-membership rejection rather
+than a bound; that is the one place where a width decides a verdict here. The evaluator has no
+auxiliary relations, so its readout is every relation it declares, which is exactly what the
+lowering's `Readout::visible` exposes — inputs and fact sets included, which is a stronger comparison
+than the task card's "exclude the externals" and is like-for-like because the harness supplies the
+same external facts to both sides.
 
 ## The Figure 3 and Figure 4 equation table
 
@@ -283,18 +306,19 @@ kinds. It is now a recorded row rather than an accident.
 
 **Corpora.** Every source is decided by both sides, and every disagreement is an assertion failure.
 
-| Corpus                                     | Programs | Verdicts                                                                 |
-|--------------------------------------------|----------|--------------------------------------------------------------------------|
-| the eight committed milestone (a) fixtures | 8        | all accepted, and each closure also equals the committed Python oracle's |
-| the milestone (a) audit's further programs | 6        | five accepted, one rejected for range restriction                        |
-| the recorded rejection surface             | 20       | all rejected, each with the recorded class                               |
-| the Figure 3 and Figure 4 equations        | 35       | 14 evaluated, 17 outside fragment, 2 admission, 2 not parsed             |
-| the surface constructs outside Figure 2    | 26       | as the table above                                                       |
-| value kinds and formula forms              | 12       | all accepted                                                             |
-| the seeded in-fragment generator           | 1,200    | 973 accepted, 227 rejected on a budget, 0 unadmitted                     |
-| the seeded near-miss generator             | 400      | all rejected: 248 outside fragment, 109 range restriction, 43 budget     |
-| the name-resolution templates              | 120      | all accepted                                                             |
-| closure-shape regressions                  | 5        | as described below                                                       |
+| Corpus                                     | Programs | Verdicts                                                                     |
+|--------------------------------------------|----------|------------------------------------------------------------------------------|
+| the eight committed milestone (a) fixtures | 8        | all accepted, and each closure also equals the committed Python oracle's     |
+| the milestone (a) audit's further programs | 6        | five accepted, one rejected for range restriction                            |
+| the recorded rejection surface             | 17       | all rejected, each with the recorded semantic class                          |
+| the recorded backend divergences           | 4        | all refused by a bound the evaluator does not have, each diagnostic asserted |
+| the Figure 3 and Figure 4 equations        | 35       | 14 evaluated, 17 outside fragment, 2 admission, 2 not parsed                 |
+| the surface constructs outside Figure 2    | 26       | as the table above                                                           |
+| value kinds and formula forms              | 12       | all accepted                                                                 |
+| the seeded in-fragment generator           | 1,200    | 1,189 accepted, 11 backend divergences, 0 semantic rejections, 0 unadmitted  |
+| the seeded near-miss generator             | 400      | 357 rejected (248 outside fragment, 109 range restriction), 43 divergences   |
+| the name-resolution templates              | 120      | all accepted                                                                 |
+| closure-shape regressions                  | 6        | as described below                                                           |
 
 **Seed and shape mix.** The corpus is a function of the seed `0x000c_1189_0915` alone, through
 SplitMix64, so it reproduces across platforms. The in-fragment corpus's program shapes are 291 plain,
@@ -309,7 +333,22 @@ disagreements, 43 five-column fact sets and 40 relation-names-in-term-position; 
 exactly one rejection class on both sides, which is why the class totals decompose exactly. The
 name-resolution corpus's six templates appear 27, 22, 21, 19, 17 and 14 times.
 
-**Three disagreements, all found, all diagnosed.**
+**The backend-divergence population, by diagnostic.** Every entry is a program whose closure the
+reference evaluator computes and which the lowering refuses on a declared bound.
+
+| Corpus                | Code      | Budget                       | `found` | Programs | What the class is                             |
+|-----------------------|-----------|------------------------------|--------:|---------:|-----------------------------------------------|
+| in-fragment generator | `REL0503` | relation arity               |       0 |       11 | a join of two fully ground atoms              |
+| near-miss generator   | `REL0503` | relation arity               |       5 |       43 | a five-column relation                        |
+| hand-written          | `REL0503` | relation arity               |       5 |        1 | a five-column fact set, read out              |
+| hand-written          | `REL0503` | variables in one rule        |       9 |        1 | nine distinct variables in one rule           |
+| hand-written          | `REL0505` | disjuncts of one definition  |     128 |        1 | seven nested two-way disjunctions             |
+| hand-written          | `REL0503` | relation arity               |       0 |        1 | a join of two fully ground atoms              |
+
+The in-fragment generator's arity-zero class held 227 programs before the empty-live-set repair
+below; those 216 now lower, and each one's closure agrees with the reference evaluator's.
+
+**Three disagreements, all found, all diagnosed, and all three now repaired.**
 
 ### 1. A qualified spine's base resolved the top level before the module chain — repaired
 
@@ -403,11 +442,11 @@ pool whose restoration was a pass's own responsibility, and it is the one that l
 generated corpora through one workspace and checks a nine-binder canary's canonical fingerprint after
 each, so a future leak is caught wherever it is introduced.
 
-### 3. Binarization builds an empty auxiliary, and the program is refused — reported, not repaired
+### 3. Binarization built an empty auxiliary, and the program was refused — repaired
 
 A body of three or more positive atoms whose first two joined atoms share no variable with the rest
-of the rule makes binarization compute an empty live set, so it declares an auxiliary relation of
-arity zero; the contract has no nullary relation, so the closing pass refuses the whole program with
+of the rule makes binarization compute an empty live set, so it declared an auxiliary relation of
+arity zero; the contract has no nullary relation, so the closing pass refused the whole program with
 a `REL0503` naming the budget "relation arity" with `found` 0 and `limit` 4, and a span pointing at
 the head's own spelling. The source is inside the stated fragment, is range-restricted, and has a
 perfectly ordinary closure, which the reference evaluator computes.
@@ -433,30 +472,39 @@ the most already-bound variables, then the one with *fewer* variables, then sour
 yet bound, the narrowest atoms go first, and joining two atoms whose variables nothing later needs
 leaves a live set that the suffix mask empties.
 
-**This is a real defect and not a property of the fragment**, and it is not rare: 227 of the 1,200
-generated programs, a fifth of the corpus, are refused for exactly this reason. But repairing it is a
-decision I should not take alone, so the disposition is *reported with the repair specified*:
+**This is a real defect and not a property of the fragment**, and it was not rare: 227 of the 1,200
+generated programs, a fifth of the corpus, were refused for exactly this reason.
 
-- The narrow, exact repair is to widen an empty live set to one variable of the join —
-  `aux(y) :- g(y), g(z)` instead of `aux() :- g(y), g(z)`, with the extra column projected away by
-  the next link. It is exact, because the auxiliary is non-empty precisely when the two atoms are
-  jointly satisfiable and the next link does not join on the kept column; it changes nothing for any
-  rule that currently lowers, so no currently-passing parity case moves; and it is purely additive
-  coverage.
-- It does not cover the sub-case where *both* joined atoms are fully ground (`dom(1) and dom(2) and
-  e(x, x)`), where there is no variable to keep. That conjunct is a nullary truth value the contract
-  cannot represent, and the right code for it is `REL0504` rather than a budget — which is a
-  diagnostic decision, not a mechanical one.
-- The broader repair — changing `order_positives` so that the tiebreak cannot create an empty
-  intermediate — is a join-order policy change. It would move every binarized rule's recorded order
-  and therefore the canonical fingerprint and the parity hash, and it sits inside the measured
-  lowering stage. That is an architecture choice with downstream shape, so it needs your call and a
-  measured A/B.
+**Repaired in `3eee87c`** with the narrow widening, which you approved: when the live set would be
+empty and the join has any variable at all, the auxiliary keeps one of them —
+`aux(y) :- g(y), g(z)` instead of `aux() :- g(y), g(z)`.
 
-Meanwhile the reference evaluator mirrors the rejection, in the one function already labelled as
-mirroring the lowering's strategy, so the differential stays total rather than carrying an
-exception list; and `the_recorded_rejection_surface_agrees` carries the minimal repro, so the day the
-repair lands that row changes and says so.
+*Why that is exact rather than a widening of the accepted language.* The kept column is chosen from
+the join's own variables and is, by construction, absent from `suffix[position + 1]` — the mask of
+everything the remaining chain and the head still need — so it occurs in no later atom and not in the
+head. The next link therefore joins the auxiliary on no shared column, which is a cross product in
+the kept variable, and the final projection drops it. The auxiliary is non-empty exactly when its two
+atoms are jointly satisfiable, which is what the nullary version expressed. So the derived head
+tuples are unchanged; the repair can add intermediate tuples and cannot change the fixed point. The
+join order is untouched, so no rule that already lowered changes shape at all.
+
+*What it measured.* The seeded corpus's accepted count goes 973 → 1,189, and every one of the 216
+newly lowered programs agrees with the reference evaluator closure for closure — that is the
+comparison the repair had to earn, and it is the differential's own test rather than a separate
+check. The divergence class goes 227 → 11. The canonical parity hash is unchanged at 213 cases,
+`04b5ebdd72…02bb23b0`, 433,805 canonical bytes, confirming that no parity case had the shape.
+
+*The sub-case that remains, deliberately.* When *both* joined atoms are fully ground (`g(1) and g(2)
+and e(x, x)`) the join has no variable to keep, and the auxiliary really is nullary. Those are the 11
+programs left in the class, and their code is unchanged: they stay `REL0503` with budget "relation
+arity" and `found` 0, recorded as the `a fully ground binarization auxiliary` row of
+`BACKEND_DIVERGENCES` with that exact diagnostic asserted. Whether a fully ground conjunct should
+instead be `REL0504` is a diagnostic decision, not a mechanical one, and it is not taken here.
+
+*The broader repair, still not taken.* Changing `order_positives` so that its tiebreak cannot create
+an empty intermediate is a join-order policy change: it would move every binarized rule's recorded
+order and therefore the canonical fingerprint and the parity hash. That remains an architecture
+choice with downstream shape and is not in this task.
 
 ### Two further findings that are not disagreements
 
@@ -466,8 +514,8 @@ construction and not by a Rel source". A source can: the lowering represents neg
 range-restricts it and stratifies it, and only backend v1 rejects it, so a negative self-loop reaches
 the stratifier first. `def e = {1; 2}` with `def p(x) = e(x) and not p(x)` is `REL0502` with the
 negated literal as the primary span, and both sides say so; it is now a committed row of the
-rejection table. `REL0502` therefore has a source-level fixture today, before milestone (b), and the
-claim in the milestone (a) report should be corrected when that report is next touched.
+rejection table. `REL0502` therefore has a source-level fixture today, before milestone (b), and gap
+4 of `notes/2026-09-15-c1190-milestone-a.md` now carries a dated correction pointing at that row.
 
 **The `?` sigil row of the equation table has a defence the milestone (a) report did not make.** The
 2026-09-15 audit noted that the `[[{E1}[?{E2}]]]` row is exercised by a plain application with no `?`
@@ -503,15 +551,29 @@ nix develop ~/src/ergodis --command cargo test -p ergodis-private \
 # One source end to end, for a minimal repro.
 nix develop ~/src/ergodis --command cargo run --release -p ergodis-tools -- \
     rel-lower --source-file <path.rel>
+
+# The A/B for the lowering stage: retain the candidate, then two interleaved runs.
+../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools
+E=instructions,cycles,branches,branch-misses,page-faults,minor-faults
+CONTROL=~/.cache/ergodis/bin/ergodis-tools-b7c26e5
+CANDIDATE=~/.cache/ergodis/bin/ergodis-tools-3eee87c
+nix develop ~/src/ergodis --command python3 analysis/rel-frontend/bench.py \
+    --binary "$CANDIDATE" --control "$CONTROL" --rounds 5 --cpu 5 \
+    --stages scan,parse,admit,lower --events $E \
+    --out analysis/rel-frontend/performance-v1-empty-live-set-3eee87c.json
+nix develop ~/src/ergodis --command python3 analysis/rel-frontend/bench.py \
+    --binary "$CANDIDATE" --control "$CONTROL" --rounds 5 --cpu 5 --cohorts datalog \
+    --stages scan,parse,admit,lower --events $E \
+    --out analysis/rel-frontend/performance-v1-empty-live-set-datalog-3eee87c.json
 ```
 
 Results, verbatim:
 
 ```text
-rel_lowering:              28 passed; 0 failed
+rel_lowering:              29 passed; 0 failed
 rel_frontend:              28 passed; 0 failed
 rel_frontend_portability:   1 passed; 0 failed
-rel_reference_eval:        14 passed; 0 failed
+rel_reference_eval:        15 passed; 0 failed
 cargo clippy -p ergodis-private --lib --tests -- -D warnings:  exit 0
 cargo clippy -p ergodis-tools --bins -- -D warnings:           exit 0
 cargo fmt -p ergodis-private -p ergodis-tools -- --check:      exit 0
@@ -519,27 +581,124 @@ rel_closure_oracle.py:     8 fixtures agree with the committed expectations
 portability.py:            213 cases, 433805 canonical bytes, native/WASM exact equality
 ```
 
-The whole `rel_reference_eval` binary takes 1.4 seconds in a debug `cargo test`.
+The whole `rel_reference_eval` binary takes about 2 seconds in a debug `cargo test`.
 
 **Parity hash, before and after.** `04b5ebdd72fb08184f3143e3ca8393d207b9a6109c549e9806e1bfae02bb23b0`
-at 213 cases both before and after the two production repairs. Only the receipt's source and library
-hashes moved. No parity case has either repaired shape, which is the same situation the
+at 213 cases and 433,805 canonical bytes, unchanged before the repairs, after the two resolution and
+state repairs, and after the empty-live-set repair. Only the receipt's source and library hashes
+moved. No parity case has any of the three repaired shapes, which is the same situation the
 `resolve_name` repair reported.
 
-**Allocation gate.** `the_lowering_stage_does_not_allocate` passes unchanged. Neither repair
-allocates: the widened restore array is a stack array of nine `u16`, and `number`'s `next` became a
-`&mut` to a stack local.
+**Allocation gate.** `the_lowering_stage_does_not_allocate` passes unchanged. None of the three
+repairs allocates: the widened restore array is a stack array of nine `u16`, `number`'s `next` became
+a `&mut` to a stack local, and the empty-live-set widening is a test, a `trailing_zeros` and a shift
+on a value already in a register.
 
-**No performance A/B was run, and here is why.** Both repaired functions are in the measured lowering
-stage, so this needs stating rather than assuming. The variable-numbering repair changes no executed
-instruction on any accepted program: the restore loop's bound is the same variable count it was, and
-the array is a stack array. The qualified-spine repair changes only the order in which a search loop
-probes owners, and the C1190 kernel-candidates profile records `build::qualified` as "hot in
-principle, never executed on any bench cohort", because the bench corpus writes its qualified forms
-as symbol-keyed tuples rather than module member spines; the analogous `resolve_name` repair, which
-*is* on a path the cohorts execute, measured as a wash at 1.00000 on `parse` and `admit` everywhere
-and 0.9992 to 1.0001 on the lowering stage. If you want the receipt anyway, the control is
-`ergodis-tools-b7c26e5` and the recipe is the milestone (a) replay block; say so and I will run it.
+## The A/B for the lowering stage
+
+**Arms.** Both are `ergodis-tools`, `release`, no features, built through
+`../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools`, which re-executes itself inside
+`nix develop` of the core checkout so the toolchain is the `rust-toolchain.toml` pin. rustc 1.95.0
+(59807616e 2026-04-14) on both, read from the manifest rows.
+
+| Arm       | Repository        | Revision  | Dirty | Retained name           | Measured sha256                                                    |
+|-----------|-------------------|-----------|-------|-------------------------|--------------------------------------------------------------------|
+| control   | `ergodis-private` | `b7c26e5` | no    | `ergodis-tools-b7c26e5` | `a8bae90c64ad43ece35f079a6ed2fd3074eb2e673ca19de9145759c266a5e336` |
+| candidate | `ergodis-private` | `3eee87c` | no    | `ergodis-tools-3eee87c` | `56c7030b9be2d02d3c1ffbd8068c3b6546ff2854e112dc7181e99a263b12abc3` |
+
+Both hashes are *measured*, not cited as the thing to run. Both trees were clean, so neither arm
+carries a foreign uncommitted diff — unlike milestone (a)'s arms, which did. The control is the
+revision the kernel-candidates report nominated for the next frontend A/B. The candidate carries all
+three of this task's production repairs, not only the empty-live-set widening, so the ratios below
+price the three together; that is what the control's revision makes them.
+
+**Method.** Five rounds, interleaved, byte/scalar order alternating by round, pinned to CPU 5, with
+the six-event non-multiplexing set `instructions,cycles,branches,branch-misses,page-faults,
+minor-faults`. A separate `perf stat` of that set on the `datalog` lowering stage printed all six
+counters with no multiplexing percentage, which is the 100-per-cent-enabled confirmation the playbook
+asks for. Per-iteration figures are the two-point difference between `N` and `2N` iterations, so
+process startup is out of every number. Load average during the rounds was 5.48 falling to 3.63;
+instruction ratios decide and cycle ratios are reported only with their intervals, which is the rule
+for a shared box.
+
+**Cohort freeze.** The harness checks token and node counts, the representation fingerprint and the
+failure per operation on both arms, and reported no difference and no skipped operation. I added the
+check that matters more for this repair: the `datalog` cohort's *lowered program* is byte-identical
+across arms — lowering fingerprint `aa9451450b65b83e` on both, with 14 relations, 96 rules, 8
+auxiliaries and 8 binarized rules on both. Its eight binarized rules all have non-empty live sets, so
+the repair does not reach them, and the A/B therefore measures code layout rather than a semantics
+change.
+
+**A/A nulls,** instructions, per cohort: 0.9999996, 1.0000002, 1.0000025, 0.9999998, 1.0000005. All
+within three parts per million of unity, so the protocol carries its own noise floor and the
+candidate is readable.
+
+**Per-stage ratios, candidate over control, instructions.** Every `scan`, `parse` and `admit`
+operation on every cohort and both variants is 1.000000 to within three parts per million, which is
+the null. The `lower` stage is the same except on one cohort:
+
+| Cohort            | `lower`, byte                | `lower`, scalar              |
+|-------------------|------------------------------|------------------------------|
+| `ascii`           | 1.000001 [1.000000,1.000003] | 1.000000 [0.999999,1.000001] |
+| `unicode`         | 1.000000 [1.000000,1.000001] | 1.000000 [1.000000,1.000001] |
+| `comment-string`  | 0.998665 [0.998663,0.998667] | 0.998838 [0.998837,0.998839] |
+| `malformed-early` | 1.000006 [0.999991,1.000022] | 1.000001 [0.999999,1.000003] |
+| `malformed-late`  | 1.000001 [0.999999,1.000002] | 1.000000 [0.999999,1.000001] |
+| `datalog`         | 0.999532 [0.999530,0.999533] | 0.999573 [0.999572,0.999574] |
+
+**Composed `lower` − `admit`, which is the lowering stage on its own.**
+
+| Cohort            | Variant | Candidate |   Control |        Ratio |
+|-------------------|---------|----------:|----------:|-------------:|
+| `ascii`           | byte    |     6,230 |     6,227 |      1.00052 |
+| `ascii`           | scalar  |     6,228 |     6,228 |      1.00007 |
+| `unicode`         | byte    |     6,243 |     6,241 |      1.00028 |
+| `unicode`         | scalar  |     6,250 |     6,240 |      1.00159 |
+| `comment-string`  | byte    | 1,826,808 | 1,831,739 |      0.99731 |
+| `comment-string`  | scalar  | 1,826,804 | 1,831,730 |      0.99731 |
+| `malformed-early` | byte    |         4 |        −5 | not readable |
+| `malformed-early` | scalar  |         3 |        −2 | not readable |
+| `malformed-late`  | byte    |        −1 |        −2 | not readable |
+| `malformed-late`  | scalar  |         0 |         0 | not readable |
+| `datalog`         | byte    | 1,311,010 | 1,313,662 |      0.99798 |
+| `datalog`         | scalar  | 1,311,006 | 1,313,660 |      0.99798 |
+
+The `datalog` cohort is a second invocation, because it is not in the harness's default cohort set,
+exactly as milestone (a) ran it. Its A/A instruction null is 0.9999966, and its `scan`, `parse` and
+`admit` stages are 1.000000 to within two parts per million.
+
+**Reading.** A wash on every stage the repairs do not touch, and a small win on both cohorts that
+lower a real program. No loss anywhere.
+
+- The `ascii` and `unicode` cohorts reject inside `declare` at their second definition and never
+  reach binarization, so their composed differences of one to ten instructions on a stage of about
+  6,230 are layout drift, not the repair. They are at or just above unity and the absolute size — ten
+  instructions at the worst, on `unicode` scalar — is what a two-point difference of two ~6,200-count
+  measurements resolves.
+- The two `malformed` cohorts fail at parse or admission, so their lowering stage does no work at all:
+  the composed figure is a handful of instructions and the control's is *negative*, which is the
+  subtraction's noise rather than a quantity. Those rows are reported as not readable rather than as
+  ratios, which is the playbook's rule for a stage whose cost is below what the method resolves.
+- The two cohorts that do real lowering work both come out **ahead**, by about the same small margin:
+  `comment-string` composes to 0.99731 on both variants, a saving of about 4,930 instructions out of
+  1.83 million, and `datalog` to 0.99798 on both, about 2,652 out of 1.31 million. Both have
+  intervals of a few parts per million, so both are real rather than drift.
+- Neither win is the empty-live-set repair. `comment-string` declares all 896 relations and rejects
+  before any body is built, so it never enters `chain()`; `datalog` does binarize, but its lowered
+  program is byte-identical across arms, so the repair's branch is reached and never taken there. The
+  cause is code layout. The workspace builds with thin LTO and one codegen unit, and two of the three
+  repairs change call shapes in the same module — `number` lost its `u16` return in favour of a
+  `&mut` parameter, and `qualified`'s owner probe became a closure over a captured span. The playbook
+  records exactly this effect twice before, in both directions and at this order of magnitude. I am
+  reporting it as an unattributed layout win rather than claiming a mechanism I have not measured to
+  the instruction.
+- No cohort, stage or variant shows a loss above the noise floor. The largest adverse figure anywhere
+  is `unicode` scalar's composed 1.00159, which is ten instructions on a stage that does not reach
+  the changed code.
+
+**Receipts.** `analysis/rel-frontend/performance-v1-empty-live-set-3eee87c.json` for the five default
+cohorts and `analysis/rel-frontend/performance-v1-empty-live-set-datalog-3eee87c.json` for the
+`datalog` cohort, both committed.
 
 ## Claims and how to check them
 
@@ -570,13 +729,16 @@ and 0.9992 to 1.0001 on the lowering stage. If you want the receipt anyway, the 
 
 ## Mystery ledger
 
-1. **Why does a fifth of the generated corpus hit the empty-auxiliary bound?** *Settled by the
-   `ej`/`tt` pass.* It is not a corner case reached by an unlucky generator: the join-order
-   heuristic's "fewer variables first" tiebreak actively creates the empty intermediate whenever a
-   body has three or more atoms and two of them are narrow and unrelated to the rest, which is a
-   common shape. The evidence gap that remains is not about the cause but about the repair, which is
-   yours to pick: the narrow widening, or the policy change that moves the parity hash. Owner: a
-   successor task in this lane.
+1. **Why did a fifth of the generated corpus hit the empty-auxiliary bound?** *Settled, and now
+   repaired.* It was not a corner case reached by an unlucky generator: the join-order heuristic's
+   "fewer variables first" tiebreak actively creates the empty intermediate whenever a body has three
+   or more atoms and two of them are narrow and unrelated to the rest, which is a common shape. The
+   narrow widening removed 216 of the 227, closure-for-closure against the reference evaluator, with
+   the parity hash unchanged. What is left open is narrower and stated: whether a fully ground
+   conjunct — the 11 that remain — should be `REL0504` rather than a budget, and whether
+   `order_positives` should be changed so the tiebreak cannot create an empty intermediate at all.
+   The first is a diagnostic decision; the second moves the canonical fingerprint and the parity
+   hash. Owner: you, then a successor task.
 2. **Why did the variable-map leak never show up in milestone (a) or its audit?** *Settled, and the
    answer applies to this harness too.* Every existing test and the audit driver use a fresh
    workspace per source, so nothing ever lowered a valid source after a failed one on the same
@@ -593,16 +755,26 @@ and 0.9992 to 1.0001 on the lowering stage. If you want the receipt anyway, the 
 4. **Which parts of the fragment does the corpus still under-test?** *Open, with the exact gaps
    named.* Relations of arity four, domains larger than four values, module nesting deeper than two,
    more than one module at one level, several `def` clauses of one fact set, and the "not
-   stratifiable" and "disjunction bound" classes, which have one fixture each and no generated
-   coverage. None of these is hard to add; none was needed to find the three disagreements. Owner:
-   whoever extends the corpus, most naturally the milestone (b) task, which will want generated
-   negation anyway.
-5. **Why do both sides agree on the rejection *class* but not on the budget *name*?** *By design, and
-   recorded.* The lowering names one of sixteen budgets; the reference evaluator mirrors only the
-   five that the fragment's own bounds imply and reports the rest as one class. Comparing budget
-   names would be a stronger test and would have caught the empty-auxiliary case as a *mismatch*
-   rather than as a mirrored agreement. Open as a cheap upgrade, not taken here because the mirror
-   already makes the verdicts total.
+   stratifiable" and disjunction-bound classes, which have one case each and no generated coverage.
+   None of these is hard to add; none was needed to find the three disagreements. Owner: whoever
+   extends the corpus, most naturally the milestone (b) task, which will want generated negation
+   anyway.
+6. **Why are exactly 11 programs left in the arity-zero divergence class?** *Settled by
+   construction, and worth stating because the number is small enough to look arbitrary.* After the
+   repair an auxiliary can only be nullary when the join it summarizes has no variable at all, which
+   means both joined atoms are fully ground. The generator writes a ground atom whenever it fills a
+   column with a constant rather than a variable, so the shape needs two such atoms chosen first by
+   the width tiebreak in one body of three or more — rare but not vanishing. The class is asserted at
+   11 rather than described, so if the generator's mix moves, the test says so.
+5. **How should the two sides treat a backend bound at all?** *Settled, and it was the one thing the
+   first version of this task got wrong.* Mirroring the lowering's binarization so that both sides
+   agreed on the auxiliary-arity bound made the verdicts total at the cost of the oracle's
+   independence: the mirror could not disagree about the strategy it reproduced, so the empty
+   auxiliary showed up as agreement rather than as a mismatch, and any later change to
+   `order_positives` would have been tracked in silence. The evaluator now knows no bound at all, and
+   the harness records a budget refusal as a divergence with its exact code, budget name and number,
+   with the population asserted per corpus. The general lesson: an oracle may be *incomplete* about a
+   backend, but it must never be *complicit* with it.
 
 No other feature of the result is surprising or unexplained.
 
@@ -613,10 +785,12 @@ ranked certificate and its checker run on every corpus program instead of on the
 The one-off variable-map fixture was generalized into a workspace-purity gate after auditing every
 pool for the same class of leak. The generated corpus now counts which constructs it
 actually writes and gates each against a floor, so a probability that drifts to zero cannot silently
-empty part of the corpus. The two rejection classes the table was missing — nine variables in one
-rule and the disjunction-expansion bound — are now differential rows. The domain-enumeration
-evaluator was added as a second, more literal reading of Figures 3 and 4 and checked against the join
-evaluator.
+empty part of the corpus. The two classes the tables were missing — nine variables in one rule and
+the disjunction-expansion bound — are now recorded rows, as backend divergences with their exact
+diagnostics. The domain-enumeration evaluator was added as a second, more literal reading of
+Figures 3 and 4 and checked against the join evaluator. The `datalog` cohort's lowered program is now
+compared across A/B arms by its own lowering fingerprint, not only by the parse fingerprint the bench
+harness checks, which is the freeze check a lowering repair actually needs.
 
 **Doors this opens.**
 
@@ -626,9 +800,11 @@ evaluator.
    evaluation to the naive side, and turns on generated negation — and then the stratified fixed
    point has a differential oracle from its first commit rather than after the fact. That is the
    highest-value use of this work and it is why the evaluator was structured this way.
-2. **The empty-auxiliary finding prices the join-order work.** A fifth of a random in-fragment corpus
-   refused is a much stronger argument for revisiting `order_positives` than "the heuristic is
-   simple", and it comes with a measurable acceptance-rate target.
+2. **The empty-auxiliary finding priced the join-order work, and then paid for most of it.** A fifth
+   of a random in-fragment corpus refused was a much stronger argument for revisiting the chain than
+   "the heuristic is simple", and it came with a measurable acceptance-rate target: 973 → 1,189 of
+   1,200, with the last 11 a single named shape. The same corpus now prices the remaining
+   `order_positives` question the same way.
 3. **The surface-construct table is the coverage manifest's missing companion.** The manifest records
    `parsed`, `admitted`, `lowered`, `executed` and `certified` per construct family; the table
    records *how* each construct outside Figure 2 is desugared, dropped or refused, which is the part
@@ -636,10 +812,11 @@ evaluator.
 
 **Candidates to queue** (no IDs allocated):
 
-- Repair the empty binarization auxiliary: the narrow widening plus a decision on the fully-ground
-  sub-case's code. Needs your call on which repair, and an A/B if the policy route is taken.
-- Correct milestone (a)'s remaining gap 4: `REL0502` is reachable from a source and now has a
-  fixture.
+- Decide whether a fully ground conjunct should be `REL0504` rather than a budget, which would empty
+  the last divergence class or rename it.
+- Change `order_positives` so its tiebreak cannot create an empty intermediate at all. This is the
+  broader form of the repair that landed; it moves the canonical fingerprint and the parity hash, so
+  it is an architecture decision with a measured A/B attached.
 - Extend the differential to milestone (b) as its acceptance gate, with generated negation and
   stratified evaluation on both sides.
 - Compare budget *names* rather than the single budget class, which is the stronger version of the
@@ -650,9 +827,11 @@ evaluator.
 
 ## Vibe check
 
-Good, and the differential earned its keep on the first run. Three disagreements, three diagnoses,
-two repaired with fixtures and a parity hash that did not move, and the third one is a coverage gap
-worth a fifth of a random corpus whose repair is specified and waiting on one decision from you. The
-one soft spot is that the corpus is broad but shallow in a few named places, and the evaluator
-mirrors the lowering's binarization strategy in one function so that the verdicts stay total — both
-recorded rather than hidden.
+Good, and better after the vetting than before it. Three disagreements, three diagnoses, all three
+now repaired with fixtures and a parity hash that never moved; the largest of them was refusing a
+fifth of a random in-fragment corpus and now refuses eleven programs of one named shape. Taking the
+mirrored binarization bound out of the oracle was the right call and cost nothing: the divergence
+class it was hiding is now a counted, asserted population instead of a silent agreement. The A/B is
+a wash where the repairs cannot reach and a small win on both cohorts that lower a real program. The
+one soft spot left is that the corpus is broad but shallow in a few named places, which milestone
+(b) will want to fix anyway.
