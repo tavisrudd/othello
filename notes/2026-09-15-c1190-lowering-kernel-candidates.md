@@ -418,11 +418,95 @@ The comment-string difference fell by 7,198,568 instructions, which over the sam
 
 ## Instructive negatives
 
-*(filled in)*
+1. **The relation index loses on a cohort with few relations, and it was kept anyway.** `datalog`
+   pays 47,557 more instructions per lowering, 3.66 per cent of its stage difference and 0.84 per
+   cent of the whole `lower` stage, because the index hashes a spelling the scan would have matched
+   on its first comparison. The decision to keep is not that the loss is small: it is that the loss
+   is bounded by the call count while the win it buys is quadratic in the relation count, so the
+   arms cross at a pool size of a few relations and never cross back. The bounded loss is design
+   evidence and is recorded rather than tuned away.
+2. **A cheap fix for that loss is visible and was not taken, because it is a separate change.** The
+   hash loop costs eight instructions per byte, two of which are the source bounds check that
+   `hash_span` pays on every iteration because it indexes `source[i]`. Taking the subslice once
+   before the loop moves that check outside it and should take the per-byte cost to five or six,
+   which would roughly halve the `datalog` loss. It also applies to `same()` and to admission's own
+   `hash_of`, so it is a frontend-wide change with its own A/B, not a rider on this one.
+3. **A profile-share cost model drove a Fermi that was wrong by a factor of thirty-two on the
+   residual.** Predicting 285,000 and measuring 9,059,804 is not a small miss, and the reason it did
+   not derail the task is that it was written down before the code, so the disagreement was
+   immediately legible as a model failure rather than as a measurement anomaly. Widening the profile
+   found the second scan within one disassembly.
+4. **"No cohort declares a module" was asserted and is false.** ascii and unicode declare 64 modules
+   each, which the admission record in every receipt says plainly. The Fermi checked two cohorts,
+   found none, and generalized to six. It did not change a decision — candidate 2 wins either way —
+   but it made the predicted residual wrong by the 2,600 instructions of 64 genuine `module_name`
+   calls.
+5. **A run was lost to the shared box.** The first candidate-1 A/B calibrated all 56 operations and
+   then died at the first measured round because `perf` disappeared from `~/.nix-profile/bin`
+   mid-run. Nothing partial was used; the run was repeated from the start.
 
 ## Mystery ledger
 
-*(filled in)*
+1. **Settled, and it reverses the milestone's attribution.** The milestone report priced the
+   comment-string lowering as "about 400,000 spelling comparisons at roughly 46 instructions each"
+   in `find_relation`. There were two scans over those same 400,960 pairs, not one: `find_relation`
+   at 23.99 instructions per pair and `passes::mangle`'s collision check at 17.95, measured as the
+   two candidates' savings. 46.58 was their sum. Neither figure was wrong; the attribution to a
+   single site was. The lesson is the playbook's own: a per-unit cost inferred by dividing a stage
+   by a count identifies a candidate and does not price it, because another site may be visiting the
+   same units.
+2. **Settled: there was a libc call on a hot loop's common path and no profile had shown it.** The
+   milestone's kernel profile listed `__memcmp_evex_movbe` at 0.03 per cent, below the rendering
+   limit, and concluded from the source that no slice comparison existed in the lowering loops. One
+   did: `rir.mangled[a..b] == rir.mangled[c..d]` in `mangle`, which the compiler lowered to `bcmp`,
+   visible in the disassembly of `lower::run` at `0x7efe12`. The source-level check missed it
+   because it looked for `copy_from_slice`, `extend_from_slice`, `clone` and `to_vec` and not for
+   slice equality. *Settled by*: the disassembly; the call is gone in `ec5d1d6`.
+3. **Settled by counting the compiled body: interning does not cost about 330 instructions.**
+   The milestone left open why `build::intern` appeared to cost ~330 instructions per constant,
+   noting that figure was a profile share divided by a counted unit and that the shape had misled
+   this lane before. The disassembly of `intern` in `ec5d1d6` is 256 instructions in total. Along the
+   integer path — the one the `datalog` cohort takes — entry through the fully unrolled eight-step
+   hash is 49 instructions, the probe setup is 27, one probe step is 16, and the push tail that
+   writes the 32-byte `Value` and updates the length is about 25, so a call that misses and pushes
+   is **roughly 115 instructions** and one that hits on the first probe is about 95. The text path
+   is dearer: the spelling hash is 8 instructions per byte, a probe step is 39, and the spelling
+   comparison inside it is 13 per byte, so a 50-byte string literal costs on the order of 500.
+   The compiled body therefore prices the integer case at about a third of 330, which is the
+   signature of sample skid landing on the call, exactly as the milestone suspected. *Still open*:
+   the cohort-level claim. Pricing what interning contributes to a measured stage needs the
+   synthetic single-class sources at two lengths that the playbook prescribes, and this task did not
+   run them; it ran the disassembly count that the playbook names as the check on the guess. *Owner*:
+   whoever next touches the value dictionary. One concrete lead is in the listing above: the `Value`
+   push compiles to nine separate stores, including two four-byte zeroes for the record's
+   `reserved: [0; 7]` padding, rather than two sixteen-byte stores.
+4. **Settled: the index is a loss where the relation pool is tiny, and the cause is the hash.**
+   Predicted a 22,000-instruction saving on `datalog`, measured a 47,557-instruction loss. The
+   compiled hash loop is eight instructions per spelling byte — six for the FNV step and two for the
+   source bounds check — so about 780 resolutions of a short spelling pay roughly 60 instructions
+   that the linear scan, which answered on its first comparison, did not. *Not open*: the mechanism
+   is read from the disassembly and the arithmetic closes. What is open is whether to act on it; see
+   the next section.
+5. **Open: admission's own quadratic on repeated `def` clauses, unchanged and now the largest single
+   number in the composed stage.** The milestone found that `admit::insert` puts every clause of one
+   relation on one home slot, so the `datalog` cohort's 512 clauses of `edge` walk a 512-entry probe
+   chain, and admission costs 199.95 instructions per source byte there against 29.27 on ascii. That
+   is admission's, it cancels in every stage difference in this report, and nothing here touched it.
+   Now that the lowering's two quadratics are gone it is the only one left in the frontend.
+   *Evidence gap*: none about the mechanism, which a fourfold-per-doubling scaling run already
+   confirmed; the remedy — a second probe, chained buckets, or an owner-mixed key like the one
+   candidate 1 uses — is unmeasured. *Owner*: a successor in this lane.
+6. **Open: `qualified` still resolves a module by scanning `rir.modules` linearly.**
+   `build::qualified` finds a module with `rir.modules.iter().find(…)` for each step of a qualified
+   name, and `resolve_name` walks the module chain. No measured cohort exercises it at scale —
+   ascii and unicode declare 64 modules but reject before the body phase — so there is no
+   measurement here saying it costs anything. It is the same shape as the two scans this task
+   removed, and it is named so that a cohort which does exercise it is not a surprise.
+   *Evidence gap*: a cohort with many modules and many qualified references, which does not exist.
+7. **No mystery remains about exactness.** Every arm agreed with its control on tokens, nodes, the
+   failure record, the admission outcome and the lowering fingerprint, on six cohorts and both
+   scanner variants, and the parity corpus is byte-identical at 213 cases and the same canonical
+   SHA-256 through all three candidates.
 
 ## Replay commands
 
