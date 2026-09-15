@@ -52,11 +52,11 @@ with a fixture or reported with its minimal repro, its root cause and a named ow
 
 All of it is test-only and outside the performance contract, as the task card requires.
 
-| File | What it is |
-|---|---|
-| `tests/rel_reference/mod.rs` | the naive, set-based reference evaluator and its stated contract |
+| File                              | What it is                                                               |
+|-----------------------------------|--------------------------------------------------------------------------|
+| `tests/rel_reference/mod.rs`      | the naive, set-based reference evaluator and its stated contract         |
 | `tests/rel_reference/generate.rs` | the seeded generators: in-fragment, near-miss, name-resolution templates |
-| `tests/rel_reference_eval.rs` | the differential harness and every committed table |
+| `tests/rel_reference_eval.rs`     | the differential harness and every committed table                       |
 
 **The evaluator** consumes the frontend's parsed and admitted node pool (`Workspace::nodes`) and the
 source bytes, and nothing else. It never reads the relational IR, the rule-contract `Program`, the
@@ -108,14 +108,14 @@ what catches a source whose free name is not in fact free.
 
 ### Commits
 
-| Commit | What |
-|---|---|
-| `19f9d71` | the two lowering defects the differential found, with closure-shape fixtures and the parity receipt |
-| `d3731ae` | the reference evaluator, the seeded generators and the differential harness |
-| `20f1009` | the formal-semantics paper pinned in the frontend coverage manifest |
-| `97b7b0f` | the surface-construct table, the checker's replay compared tuple-wise, the construct census |
+| Commit    | What                                                                                                  |
+|-----------|-------------------------------------------------------------------------------------------------------|
+| `19f9d71` | the two lowering defects the differential found, with closure-shape fixtures and the parity receipt   |
+| `d3731ae` | the reference evaluator, the seeded generators and the differential harness                           |
+| `20f1009` | the formal-semantics paper pinned in the frontend coverage manifest                                   |
+| `97b7b0f` | the surface-construct table, the checker's replay compared tuple-wise, the construct census           |
 | `bccb4e8` | the ranked checker on every corpus program, the workspace-purity gate, the last two rejection classes |
-| `e000d09` | the variable-map fixture's provenance corrected: found by reimplementing the pass, not by the corpus |
+| `e000d09` | the variable-map fixture's provenance corrected: found by reimplementing the pass, not by the corpus  |
 
 ## The evaluator's stated contract
 
@@ -189,43 +189,43 @@ two tables are two columns over one input. Each row also records which test exer
 or why nothing can. The test asserts the reference evaluator's recorded outcome *and* that the
 lowering reaches the same verdict on the same source, so a change of coverage on either side fails.
 
-| Equation (Addendum A) | Reference evaluator | Exercised by |
-|---|---|---|
-| `[[c]] = {<c>}` | evaluated | the constant-argument fixture |
-| `[[x]] = mu(x)` | evaluated | every fixture |
-| `[[x...]] = mu(x...)` | outside fragment | the table: a tuple variable is outside the fragment |
-| `[[_]] = {<v> \| v in Values}` | evaluated | the anonymous-projection fixture |
-| `[[_...]] = Tuples1` | outside fragment | the table |
-| `[[{E1;E2}]] = union` | evaluated | the generated corpus's `;` disjunctions |
-| `[[(E1,E2)]] = product` | evaluated | the generated corpus's `,` conjunctions |
-| `[[E where F]]` | not parsed | nothing: the parser has no `where` |
-| `[[[{x}]:E]]` higher-order abstraction | admission rejects | nothing: admission rejects it |
-| `[[[c]:E]]` constant-headed abstraction | admission rejects | nothing: admission rejects it |
-| `[[[x]:E]]` value abstraction | outside fragment | the table |
-| `[[[x in r]:E]]` restricted abstraction | evaluated | the domain-restricted fixture, the generated corpus |
-| `[[[x...]:E]]` | outside fragment | the table |
-| `[[(Bindings):F]] = [[[Bindings]:F]]` | evaluated | the generated corpus's `exists` |
-| `[[{E}[_]]]` column projection | outside fragment | the table |
-| `[[{E}[_...]]]` | outside fragment | the table |
-| `[[{E}[x...]]]` | outside fragment | the table |
-| `[[{E1}[?{E2}]]]` first-order application | evaluated | every fixture, on the unannotated spelling |
-| `[[{E1}[&{E2}]]]` higher-order application | not parsed | nothing: the scanner has no `&` |
-| `[[reduce[&{E1},&{E2}]]]` aggregation | outside fragment | the table, through the surface-aggregation surrogate |
-| `[[{()}]] = {<>}` true | evaluated | the true-formula regression |
-| `[[{}]] = empty` false | outside fragment | the near-miss corpus's false-body shape |
-| `[[{E}(Arg,…,Arg)]]` atom | evaluated | every fixture |
-| `[[{E}()]]` nullary application | outside fragment | the rejection table |
-| `[[F1 or F2]] = union` | evaluated | the disjunctive fixture, the generated corpus |
-| `[[F1 and F2]] = intersection` | evaluated | every multi-atom fixture |
-| `[[not F]] = complement` | outside fragment | the rejection table |
-| `[[(F)]] = [[F]]` | evaluated | the generated corpus's parenthesized disjuncts |
-| `[[exists((x) \| F)]]` | evaluated | the generated corpus |
-| `[[exists((x in r) \| F)]]` | outside fragment | the near-miss corpus's restricted-exists shape |
-| `[[exists((x...) \| F)]]` | outside fragment | the table |
-| `[[forall((x) \| F)]]` | outside fragment | the rejection table |
-| `[[forall((x in r) \| F)]]` | outside fragment | the table |
-| `[[forall((x...) \| F)]]` | outside fragment | the table |
-| `[[reduce(&{E1},&{E2},E3)]]` aggregation formula | outside fragment | the table, through the surrogate |
+| Equation (Addendum A)                            | Reference evaluator | Exercised by                                         |
+|--------------------------------------------------|---------------------|------------------------------------------------------|
+| `[[c]] = {<c>}`                                  | evaluated           | the constant-argument fixture                        |
+| `[[x]] = mu(x)`                                  | evaluated           | every fixture                                        |
+| `[[x...]] = mu(x...)`                            | outside fragment    | the table: a tuple variable is outside the fragment  |
+| `[[_]] = {<v> \| v in Values}`                   | evaluated           | the anonymous-projection fixture                     |
+| `[[_...]] = Tuples1`                             | outside fragment    | the table                                            |
+| `[[{E1;E2}]] = union`                            | evaluated           | the generated corpus's `;` disjunctions              |
+| `[[(E1,E2)]] = product`                          | evaluated           | the generated corpus's `,` conjunctions              |
+| `[[E where F]]`                                  | not parsed          | nothing: the parser has no `where`                   |
+| `[[[{x}]:E]]` higher-order abstraction           | admission rejects   | nothing: admission rejects it                        |
+| `[[[c]:E]]` constant-headed abstraction          | admission rejects   | nothing: admission rejects it                        |
+| `[[[x]:E]]` value abstraction                    | outside fragment    | the table                                            |
+| `[[[x in r]:E]]` restricted abstraction          | evaluated           | the domain-restricted fixture, the generated corpus  |
+| `[[[x...]:E]]`                                   | outside fragment    | the table                                            |
+| `[[(Bindings):F]] = [[[Bindings]:F]]`            | evaluated           | the generated corpus's `exists`                      |
+| `[[{E}[_]]]` column projection                   | outside fragment    | the table                                            |
+| `[[{E}[_...]]]`                                  | outside fragment    | the table                                            |
+| `[[{E}[x...]]]`                                  | outside fragment    | the table                                            |
+| `[[{E1}[?{E2}]]]` first-order application        | evaluated           | every fixture, on the unannotated spelling           |
+| `[[{E1}[&{E2}]]]` higher-order application       | not parsed          | nothing: the scanner has no `&`                      |
+| `[[reduce[&{E1},&{E2}]]]` aggregation            | outside fragment    | the table, through the surface-aggregation surrogate |
+| `[[{()}]] = {<>}` true                           | evaluated           | the true-formula regression                          |
+| `[[{}]] = empty` false                           | outside fragment    | the near-miss corpus's false-body shape              |
+| `[[{E}(Arg,…,Arg)]]` atom                        | evaluated           | every fixture                                        |
+| `[[{E}()]]` nullary application                  | outside fragment    | the rejection table                                  |
+| `[[F1 or F2]] = union`                           | evaluated           | the disjunctive fixture, the generated corpus        |
+| `[[F1 and F2]] = intersection`                   | evaluated           | every multi-atom fixture                             |
+| `[[not F]] = complement`                         | outside fragment    | the rejection table                                  |
+| `[[(F)]] = [[F]]`                                | evaluated           | the generated corpus's parenthesized disjuncts       |
+| `[[exists((x) \| F)]]`                           | evaluated           | the generated corpus                                 |
+| `[[exists((x in r) \| F)]]`                      | outside fragment    | the near-miss corpus's restricted-exists shape       |
+| `[[exists((x...) \| F)]]`                        | outside fragment    | the table                                            |
+| `[[forall((x) \| F)]]`                           | outside fragment    | the rejection table                                  |
+| `[[forall((x in r) \| F)]]`                      | outside fragment    | the table                                            |
+| `[[forall((x...) \| F)]]`                        | outside fragment    | the table                                            |
+| `[[reduce(&{E1},&{E2},E3)]]` aggregation formula | outside fragment    | the table, through the surrogate                     |
 
 Fourteen equations are evaluated; seventeen are rejected as outside the fragment; two are rejected by
 admission and two are not parsed. That is the same distribution as the lowering's column with the one
@@ -243,34 +243,34 @@ parses a great deal more. Every addition's disposition is a committed table row 
 `tests/rel_reference_eval.rs`, decided by both sides, so this table is a test and a change of
 treatment fails it.
 
-| Surface construct | Outcome | How it is treated |
-|---|---|---|
-| `module M … end` | evaluated | flattened: a member becomes one relation whose name parts are the module chain's spellings and its own |
-| `module M[k] … end` | evaluated | desugared: each module parameter becomes a leading column of every relation the module owns, bound in every body it owns |
-| `M:x`, `M[a]:x`, `M:N:x` spines | evaluated | resolved to the member relation; the base resolves innermost owner first, and `[a]` supplies the leading columns explicitly |
-| `M:x` from outside a parameterized module | `REL0501` | nothing supplies the leading columns, so the head carries an unbound variable |
-| `x in D` parameter | evaluated | desugared: binds `x` and conjoins the positive literal `D(x)` with every rule of the definition |
-| `@annotation` on an item | evaluated | dropped: the parser gives it its own node, which is neither a definition nor a module, so no pass reads it |
-| doc string on an item | evaluated | dropped: the parser consumes it and emits no node |
-| `value type …` | `REL0301` | rejected at the contextual spelling, before admission |
-| `declare …` | `REL0301` | rejected at the contextual spelling |
-| `entity`, `bound`, `ic`, `with`, `from` items | `REL0301` | rejected at the keyword |
-| `^Entity` reference as a constant | evaluated | interned as a value of entity kind, keyed by its spelling including the caret |
-| `def ^Person(x)` entity constructor | evaluated | an ordinary relation whose declaring spelling is the entity reference; the caret is dropped by name mangling |
-| string, raw string, character and symbol literals | evaluated | interned as values of text kind, keyed by exact source spelling, so two spellings of one string are two values |
-| string interpolation | `REL0504` | an interpolation node is not a constant, and the fragment has no expression evaluation |
-| `if … then … else … end` | `REL0504` | rejected at the conditional |
-| arithmetic operators | `REL0504` | no arithmetic literal exists in the relational IR |
-| `implies`, `iff`, `xor`, override operators | `REL0504` | rejected at the operator |
-| `def f[T](x)` specialization header | `REL0504` | rejected at the declared name: a bracketed header is second order |
-| surface aggregation `sum[v: …]` | `REL0504` | the IR represents an aggregate literal, but no source form builds one and backend v1 refuses it |
-| tuple variables and spreads `x...`, `_...` | `REL0504` | the fragment's tuples have a fixed declared width |
-| `not` | `REL0504` | represented in the IR, range-restricted and stratified; backend v1 rejects it, so the gap is a recorded coverage row |
-| comparison | `REL0504` | same treatment as negation |
-| `forall` | `REL0504` | rejected at the construct |
-| `exists(x in D: F)` | `REL0504` | a restriction inside a quantified formula needs its literal conjoined with that formula's body, which only a definition parameter gets |
-| the `?` and `&` argument sigils | `REL0101` | the scanner has no token for either; a parser gap, not a lowering one |
-| `where` | not parsed | one of the two Figure 3 equations that never reaches the lowering |
+| Surface construct                                 | Outcome    | How it is treated                                                                                                                      |
+|---------------------------------------------------|------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| `module M … end`                                  | evaluated  | flattened: a member becomes one relation whose name parts are the module chain's spellings and its own                                 |
+| `module M[k] … end`                               | evaluated  | desugared: each module parameter becomes a leading column of every relation the module owns, bound in every body it owns               |
+| `M:x`, `M[a]:x`, `M:N:x` spines                   | evaluated  | resolved to the member relation; the base resolves innermost owner first, and `[a]` supplies the leading columns explicitly            |
+| `M:x` from outside a parameterized module         | `REL0501`  | nothing supplies the leading columns, so the head carries an unbound variable                                                          |
+| `x in D` parameter                                | evaluated  | desugared: binds `x` and conjoins the positive literal `D(x)` with every rule of the definition                                        |
+| `@annotation` on an item                          | evaluated  | dropped: the parser gives it its own node, which is neither a definition nor a module, so no pass reads it                             |
+| doc string on an item                             | evaluated  | dropped: the parser consumes it and emits no node                                                                                      |
+| `value type …`                                    | `REL0301`  | rejected at the contextual spelling, before admission                                                                                  |
+| `declare …`                                       | `REL0301`  | rejected at the contextual spelling                                                                                                    |
+| `entity`, `bound`, `ic`, `with`, `from` items     | `REL0301`  | rejected at the keyword                                                                                                                |
+| `^Entity` reference as a constant                 | evaluated  | interned as a value of entity kind, keyed by its spelling including the caret                                                          |
+| `def ^Person(x)` entity constructor               | evaluated  | an ordinary relation whose declaring spelling is the entity reference; the caret is dropped by name mangling                           |
+| string, raw string, character and symbol literals | evaluated  | interned as values of text kind, keyed by exact source spelling, so two spellings of one string are two values                         |
+| string interpolation                              | `REL0504`  | an interpolation node is not a constant, and the fragment has no expression evaluation                                                 |
+| `if … then … else … end`                          | `REL0504`  | rejected at the conditional                                                                                                            |
+| arithmetic operators                              | `REL0504`  | no arithmetic literal exists in the relational IR                                                                                      |
+| `implies`, `iff`, `xor`, override operators       | `REL0504`  | rejected at the operator                                                                                                               |
+| `def f[T](x)` specialization header               | `REL0504`  | rejected at the declared name: a bracketed header is second order                                                                      |
+| surface aggregation `sum[v: …]`                   | `REL0504`  | the IR represents an aggregate literal, but no source form builds one and backend v1 refuses it                                        |
+| tuple variables and spreads `x...`, `_...`        | `REL0504`  | the fragment's tuples have a fixed declared width                                                                                      |
+| `not`                                             | `REL0504`  | represented in the IR, range-restricted and stratified; backend v1 rejects it, so the gap is a recorded coverage row                   |
+| comparison                                        | `REL0504`  | same treatment as negation                                                                                                             |
+| `forall`                                          | `REL0504`  | rejected at the construct                                                                                                              |
+| `exists(x in D: F)`                               | `REL0504`  | a restriction inside a quantified formula needs its literal conjoined with that formula's body, which only a definition parameter gets |
+| the `?` and `&` argument sigils                   | `REL0101`  | the scanner has no token for either; a parser gap, not a lowering one                                                                  |
+| `where`                                           | not parsed | one of the two Figure 3 equations that never reaches the lowering                                                                      |
 
 The two entries worth naming are the first two "dropped" rows. An annotation and a doc string are
 *silently discarded*: the parser represents an annotation as its own node and emits nothing at all
@@ -283,18 +283,18 @@ kinds. It is now a recorded row rather than an accident.
 
 **Corpora.** Every source is decided by both sides, and every disagreement is an assertion failure.
 
-| Corpus | Programs | Verdicts |
-|---|---|---|
-| the eight committed milestone (a) fixtures | 8 | all accepted, and each closure also equals the committed Python oracle's |
-| the milestone (a) audit's further programs | 6 | five accepted, one rejected for range restriction |
-| the recorded rejection surface | 20 | all rejected, each with the recorded class |
-| the Figure 3 and Figure 4 equations | 35 | 14 evaluated, 17 outside fragment, 2 admission, 2 not parsed |
-| the surface constructs outside Figure 2 | 26 | as the table above |
-| value kinds and formula forms | 12 | all accepted |
-| the seeded in-fragment generator | 1,200 | 973 accepted, 227 rejected on a budget, 0 unadmitted |
-| the seeded near-miss generator | 400 | all rejected: 248 outside fragment, 109 range restriction, 43 budget |
-| the name-resolution templates | 120 | all accepted |
-| closure-shape regressions | 5 | as described below |
+| Corpus                                     | Programs | Verdicts                                                                 |
+|--------------------------------------------|----------|--------------------------------------------------------------------------|
+| the eight committed milestone (a) fixtures | 8        | all accepted, and each closure also equals the committed Python oracle's |
+| the milestone (a) audit's further programs | 6        | five accepted, one rejected for range restriction                        |
+| the recorded rejection surface             | 20       | all rejected, each with the recorded class                               |
+| the Figure 3 and Figure 4 equations        | 35       | 14 evaluated, 17 outside fragment, 2 admission, 2 not parsed             |
+| the surface constructs outside Figure 2    | 26       | as the table above                                                       |
+| value kinds and formula forms              | 12       | all accepted                                                             |
+| the seeded in-fragment generator           | 1,200    | 973 accepted, 227 rejected on a budget, 0 unadmitted                     |
+| the seeded near-miss generator             | 400      | all rejected: 248 outside fragment, 109 range restriction, 43 budget     |
+| the name-resolution templates              | 120      | all accepted                                                             |
+| closure-shape regressions                  | 5        | as described below                                                       |
 
 **Seed and shape mix.** The corpus is a function of the seed `0x000c_1189_0915` alone, through
 SplitMix64, so it reproduces across platforms. The in-fragment corpus's program shapes are 291 plain,
