@@ -41,7 +41,7 @@ admission difference and the stage ratio agree throughout.
 
 The three ratios, measured one at a time against a control retained at the revision the tree then
 carried, are 0.9525 (hash each name once), 0.8676 (the `BUILTINS` gate) and 0.9350 (one node-pool
-scan). Their product is 0.77264 against the 0.77267 measured end to end: the changes do not
+scan). Their product is 0.77267 against the 0.77267 measured end to end: the changes do not
 interact. The decomposition report projected 20.2 per cent for these three; the measured composed
 saving is **22.7 per cent**.
 
@@ -477,8 +477,10 @@ Admission alone, with the interval from the round-to-round standard deviations o
 | unicode | 1,533,927 | 1,972,180 | 0.7778 | [0.777780, 0.777786] |
 | comment-string | 394,105 | 560,758 | 0.7028 | [0.702781, 0.702834] |
 
-**The three candidates' savings multiply exactly**: 0.9525 × 0.8676 × 0.9350 = 0.77264 against the
-0.77267 measured end to end. That is the check that each A/B isolated its own change and that
+**The three candidates' savings multiply exactly**: 0.9525 × 0.8676 × 0.9350 = 0.772674 against the
+0.772673 measured end to end, one part per million apart. Carried to six figures the per-candidate
+ratios are 0.952507, 0.867613 and 0.934981 and their product is 0.772675, three parts per million
+from the measurement. That is the check that each A/B isolated its own change and that
 nothing in one candidate re-priced another. The decomposition report projected 20.2 per cent for
 these three; the measured composed saving is **22.7 per cent of the admission stage**, and 9.3 per
 cent of the composed parse-plus-admit stage on ASCII.
@@ -640,9 +642,9 @@ the same foreign tree, so it cancels in every ratio.
    check what the *signature* change does to inlining, not only what the body change does to
    instructions.
 4. **Settled: the three changes do not interact.** Measured sequentially against freshly retained
-   controls, the ASCII admission ratios are 0.9525, 0.8676 and 0.9350; their product is 0.77264 and
-   the end-to-end measurement against the original control is 0.77267, three parts in a hundred
-   thousand apart. They touch `insert`'s signature, `reference`'s new-name path and `admit`'s second
+   controls, the ASCII admission ratios are 0.952507, 0.867613 and 0.934981; their product is
+   0.772675 and the end-to-end measurement against the original control is 0.772673, **three parts
+   per million** apart. They touch `insert`'s signature, `reference`'s new-name path and `admit`'s second
    scan, and nothing re-priced anything else.
 5. **Not a mystery, recorded so it is not read as one.** The scalar variant's *stage* ratios are
    closer to unity than the byte variant's (0.9294 against 0.9068 composed) while its *admission*
@@ -719,4 +721,14 @@ Each retained executable has a `MANIFEST.tsv` row and a `.sha256` sidecar. The t
 the two retained executables and the profile data the decomposition phase left, and the earlier
 C1170 phases' binaries and `perf.data` files; `../ergodis-dev/scripts/cache-gc.sh` has not been run,
 since deletion is the user's call.
+
+## Audit corrections (2026-09-15)
+
+An independent verification pass re-derived every ratio here from the committed receipts and
+re-measured the sha256 of all four retained binaries, which match. One correction was applied in
+three places: the stated product of the three per-candidate ratios was 0.77264, which is a
+miscomputation of 0.9525 × 0.8676 × 0.9350 = 0.772674. The agreement with the measured 0.772673 is
+therefore one to three parts per million, not three parts in a hundred thousand, so the
+non-interaction conclusion is better supported than the report claimed. Details are in
+`2026-09-15-c1170-admission-chain-audit.md`.
 

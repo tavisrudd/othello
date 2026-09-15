@@ -321,8 +321,12 @@ is what happened.
 What the band hid is that the outcome is not one number repeated at two sites. The `Atom`-arm copy
 removed 40.3 per reference, at the top of the Fermi's range and slightly above its own compiled
 path count; the `Apply`-arm copy removed 8.8, about thirty below its path count. Had the ASCII
-cohort's reference mix been the comment-string cohort's even split, the stage ratio would have
-been about 0.980 instead of 0.912 and the change would have read as barely worth keeping. The
+cohort's reference mix been the comment-string cohort's even split, the same per-site savings would
+have removed 86,434 instructions instead of 109,600, and the admission stage would have read
+**0.931 instead of 0.912** — a 6.9 per cent saving rather than 8.8, still above the five-per-cent
+line this lane uses for believing a candidate. (The same counterfactual on the full `admit` stage
+including parse is 0.977, which is a different basis from the 0.912 quoted here and is not the
+comparison to make.) The
 sizing method that survives is still the path count times the census, but the census term has to be
 per call site once a body is inlined at more than one, because register pressure is a property of
 the site and not of the body.
@@ -455,3 +459,13 @@ The two full disassembly dumps are 232 MB of apparent size between them and are 
 items this task added beyond the profile; they are pure intermediates. The directory reports 103 MB
 on disk, so the filesystem is compressing them. `../ergodis-dev/scripts/cache-gc.sh` has not been
 run, since deletion is the user's call.
+
+## Audit corrections (2026-09-15)
+
+An independent verification pass re-derived every ratio in this report from the committed receipts
+and re-ran this A/B against the retained binaries; the measurement reproduces to three parts per
+million. One correction was applied above: the even-split counterfactual in "Where the Fermi was
+right, and where the shape surprised" previously read "about 0.980 instead of 0.912 ... barely worth
+keeping", which compared a full-`admit`-stage ratio with an admission-alone ratio. The
+admission-alone counterfactual is 0.931, a 6.9 per cent saving, which is not marginal. Details and
+the full audit are in `2026-09-15-c1170-admission-chain-audit.md`.

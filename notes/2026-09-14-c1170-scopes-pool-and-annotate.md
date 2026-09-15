@@ -90,8 +90,9 @@ parts per million of unity. Parse is 1.000000 on every cohort and both variants.
 | malformed-late/admit/byte | — | — | 1.000000 |
 
 Admission alone (`admit` − `parse`): ASCII 1,245,430.6 against 1,246,010.8, **0.999534**, 580
-instructions removed for 577 clears; unicode 577 removed; comment-string 505 removed for 385
-clears (the driver's parse stage for that cohort has its own few-instruction drift, inside its
+instructions removed for 577 clears; unicode 578 removed; comment-string 517 removed for 385
+clears on the byte variant, 507 on the scalar (the driver's parse stage for that cohort has its own
+few-instruction drift, inside its
 null). Retained bytes 6,539,264 against 6,541,312. Peak RSS 5,540 to 5,552 KiB in both arms for
 the parse and admit stages.
 
@@ -395,3 +396,14 @@ For the user's cache decision. Nothing was deleted, nothing large went to `/tmp`
 
 The retained executable has a `MANIFEST.tsv` row and a `.sha256` sidecar.
 `../ergodis-dev/scripts/cache-gc.sh` has not been run, since deletion is the user's call.
+
+## Audit corrections (2026-09-15)
+
+An independent verification pass re-derived this A/B from the committed receipt — `prepare`
+0.904952, `prepare-touch` 0.968028 and admission 0.999534 on ASCII all reproduce — and checked the
+two candidates this report prices but does not build, directly against the retained binaries. Both
+prices hold: the hash loop compiles to eight instructions per byte with the bounds check as the
+first two, and the `same()` byte loop to thirteen per byte with four removable. One correction was
+applied: the admission-alone figures for unicode and comment-string mixed the byte and scalar
+variants and now quote the byte variant throughout. Details are in
+`2026-09-15-c1170-admission-chain-audit.md`.

@@ -293,7 +293,7 @@ Admission alone:
 |---|---:|---:|---:|---|---:|
 | ascii | 1,246,010 | 1,347,414 | **0.9247** | [0.924731, 0.924752] | 101,404 |
 | unicode | 1,431,947 | 1,533,927 | 0.9335 | [0.933503, 0.933531] | 101,980 |
-| comment-string | 371,998 | 394,112 | 0.9439 | [0.943748, 0.944035] | 22,113 |
+| comment-string | 372,015 | 394,112 | 0.9439 | [0.943748, 0.944035] | 22,113 |
 
 **The two candidates' savings multiply exactly**: 0.9614 × 0.9619 = 0.92477 against the 0.92474
 measured end to end, so each A/B isolated its own change. Against the control this task started
@@ -491,3 +491,12 @@ For the user's cache decision. Nothing was deleted, nothing large went to `/tmp`
 Each retained executable has a `MANIFEST.tsv` row and a `.sha256` sidecar. The three `dis-*.txt`
 files are the first thing to delete; `../ergodis-dev/scripts/cache-gc.sh` has not been run, since
 deletion is the user's call.
+
+## Audit corrections (2026-09-15)
+
+An independent verification pass re-derived every ratio here from the committed receipts; all three
+A/Bs reproduce, including the composed 0.924742 and the cumulative 0.714522 of `185015e`. One
+correction was applied: the composed table's comment-string candidate figure was the scalar
+variant's 371,998 beside the byte variant's ratio and saving, and is now the byte variant's 372,015,
+so the row quotes one variant throughout. Details are in
+`2026-09-15-c1170-admission-chain-audit.md`.

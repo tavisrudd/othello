@@ -401,9 +401,12 @@ commit here was made with an explicit whole-file pathspec. No binary was built b
 
 ## Ranked candidates, priced against the new ASCII stage of 1,246,011 instructions
 
-The model ranks; the compiled loop prices, as the last two reports did. The checker's caution
-binds: a predicted saving under about five per cent of the stage is inside the model's
-out-of-sample error and needs its own A/B to be believed.
+The model ranks; the compiled loop prices, as the last two reports did. The checker's caution binds:
+a predicted saving under about five per cent of the stage needs its own A/B to be believed. That
+floor is not set by the cohort residual, which is only +0.91 / +0.81 / +1.98 per cent — it is set by
+the per-unit splits the design does not identify, whose withheld-family residuals run to +43.69 per
+cent on `header` and +30.77 on `qualified`. The stage total is pinned to about one per cent; the
+share of it any single unit carries is not, and a candidate's price is a single unit's coefficient.
 
 1. **The traversal's remaining per-visit cost, 31.98 × 8,320 = 266,000, 21.2 per cent.** The
    pop's six field loads of a 32-byte node when most arms use two or three (traversal-cursor
@@ -442,3 +445,13 @@ For the user's cache decision. Nothing was deleted, nothing large went to `/tmp`
 
 No retained executable and no profile was added. `../ergodis-dev/scripts/cache-gc.sh` has not
 been run, since deletion is the user's call.
+
+## Audit corrections (2026-09-15)
+
+An independent verification pass re-ran this fit from the committed class receipt under the pinned
+toolchain. Every numeric field reproduces bit-for-bit: all twenty-one coefficients, every synthetic
+residual, every leave-one-family-out figure, the condition number and all three cohort predictions.
+One correction was applied above: the five-per-cent pricing floor in "Ranked candidates" was
+attributed to the model's out-of-sample error, which is 0.81 to 1.98 per cent, when what actually
+sets it is the unidentified per-unit splits. The floor itself stands. Details are in
+`2026-09-15-c1170-admission-chain-audit.md`.

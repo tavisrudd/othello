@@ -619,9 +619,30 @@ the composed cost solves into three coefficients that hold on both independent c
 | **predicted total**                                      |                 |              | **110,897** |     **52,001** |
 | **measured**                                             |                 |              | **110,883** |     **51,778** |
 
-Agreement is 0.01 per cent on ASCII and 0.4 per cent on comment-string, on two cohorts whose body,
-reference and symbol counts are 576/3,520/1,545 and 512/768/896. The model is over-determined and
-holds, which is what the earlier two-term fits could not claim.
+The two cohorts' body, reference and symbol counts are 576/3,520/1,545 and 512/768/896.
+
+**What that agreement does and does not establish.** The per-body coefficient is carried over from
+the two-cohort solve of the `7b38c65` step, and with it fixed the per-reference and per-symbol
+coefficients are solved from the two cohort equations of the composed `4b02031` A/B — two equations
+for two unknowns, so that solve is exact by construction. The composed figures at `9bfe19d` then
+follow by subtracting the measured per-symbol saving, and the residuals in the table above are
+dominated by rounding the coefficients to three figures rather than by an independent test. Unicode
+adds nothing here, because its body, reference and symbol counts are identical to ASCII's, the same
+reason the earlier two-cohort solve could not use it. The decomposition is therefore exactly
+determined with one constraint to spare, not over-determined in the stronger sense.
+
+The two things the design does establish, which are what the conclusion rests on, are:
+
+1. the three A/B steps sum to the composed measurement to within two instructions in 110,883
+   (92,311 + 46,419 − 27,845 = 110,885), a consistency check across four separately retained
+   binaries; and
+2. the per-symbol saving from inlining `insert` is 18.02, 18.05 and 18.23 instructions on three
+   cohorts whose reference-to-symbol ratios run from 0.86 to 2.28, which identifies that term per
+   symbol to 1.2 per cent without fitting.
+
+That is enough to carry the conclusion below — the shadow-flagging walk costs about 35 instructions
+per symbol and is roughly half the feature's cost — and it is the claim to make rather than a
+quarter-per-cent closure on two cohorts.
 
 Peak RSS, candidate against control, with the two earlier candidates for comparison:
 
@@ -1337,3 +1358,23 @@ The four full disassembly dumps are the only large items beyond the three profil
 intermediates. The directory now holds 951 MB of apparent size and reports 162 MB on disk, so the
 filesystem is compressing them. `../ergodis-dev/scripts/cache-gc.sh` has not been run, since
 deletion is the user's call.
+
+## Audit corrections (2026-09-15)
+
+An independent verification pass re-derived the five A/Bs in this report from the committed receipts
+and re-ran the composed `93bb343`-to-`9bfe19d` A/B against the retained binaries; every ratio
+reproduces to three parts per million, and the semantics adopted here were checked against the
+published Rel formal semantics (Aref et al., arXiv:2504.10323), which turns out to contain no module
+construct at all, so it can settle only the binding-precedence direction — which `admit::lookup`'s
+innermost-first binder scan and `admit::enter_scope`'s outermost-first parameter binding match.
+
+Two corrections were applied. The "three-term cost model, closed" section no longer calls the model
+over-determined; it now states what the design actually establishes, which is the step-sum
+consistency and the cohort-independence of the per-symbol saving. Separately, two of the adopted
+rules had no discriminating fixture: rule 6 ("Not merged") had no test at all, and the
+parameter-shadowing fixture admitted under either shadowing direction. Both are now covered by
+fixtures in `tests/rel_frontend.rs` (private `fb69af8`) — two same-level `module M` items whose
+second module's member is unreachable through the first, and a module parameter shadowing a
+top-level definition of different arity so that the wrong resolution is an arity mismatch. The
+parity corpus and its canonical hash `c5d83625…` are unchanged by that commit, which touches unit
+tests only. Details are in `2026-09-15-c1170-admission-chain-audit.md`.

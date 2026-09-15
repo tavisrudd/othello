@@ -6,7 +6,7 @@
 correction trails live in dated reports and the append-only
 [`2026-09-05-ergodis-lane-archive.md`](2026-09-05-ergodis-lane-archive.md).
 
-**Date**: 2026-09-14
+**Date**: 2026-09-15
 **Mode**: intent-based.
 **Status**: ACTIVE. Immediate engineering frontier is C1170 (owned Rel-rich frontend); the
 rule-contract programme C1172–C1177 and the Datalog evaluation tasks C1179/C1182–C1186 are closed. C1143, C1130, C1016,
@@ -115,7 +115,9 @@ inert literal visits. Cohorts predict at +0.91 / +0.81 / +1.98 per cent out of s
 synthetic row inside 1.1 per cent. ASCII ranking: traversal 21.2 per cent (31.98 per visit),
 reference fixed part 20.0 (71.49), hashing 11.5 (7.89 per byte), `declare` 8.9 (194); first sight
 is 64 instructions, 4.6 per cent. The model ranks; a saving under about five per cent of the stage
-is inside its out-of-sample error and needs its own A/B.
+needs its own A/B, a floor set by the unidentified per-unit splits (withheld-family residuals of
++43.69 on `header` and +30.77 on `qualified`) and not by the cohort residual, which is about one
+per cent.
 
 Scopes pool and annotate: `../2026-09-14-c1170-scopes-pool-and-annotate.md` (private `3bd5e38`,
 `0dc1814`): the dead `scopes` pool is gone (`prepare` 0.9050, `prepare-touch` 0.9680 with faults
@@ -133,7 +135,7 @@ Inline `reference`: `../2026-09-14-c1170-inline-reference.md` (private `93bb343`
 `ergodis-tools-3bd5e38` (109,600 removed, 31 per reference, inside the Fermi band at its shallow
 end); parity hash unchanged, no gate failed, peak RSS down 12 KiB. The two inlined copies pay
 unequally (about 40 per reference at the `Atom` site, 9 at the `Apply` site, which spills), and
-`is_builtin` became an out-of-line call on the first-sight path. The stage stands at 0.6515 of
+`is_builtin` became an out-of-line call on the first-sight path. The stage stands at 0.6513 of
 `185015e`.
 
 Module scopes: `../2026-09-14-c1170-module-scopes.md` (private `7b38c65`, `4b02031`, `9bfe19d`,
@@ -145,8 +147,12 @@ Semantics are the stage's stated contract (report section "Semantics adopted"), 
 Parity corpus 166 cases, canonical `f3d83752…`. Composed ASCII admission cost **1.0976** against
 `ergodis-tools-93bb343` after two shape repairs (the lean probe loop with insert-time shadow
 flagging, then `insert` force-inlined); `prepare` 1.21 and retained bytes +67,588 for the two new
-pools. Three-term cost model closes on both cohorts; the shadow-flagging walk in `insert` (35 per
-symbol) is half the cost and is the first candidate if micro-optimization resumes. The control for
+pools. The shadow-flagging walk in `insert` (35 per symbol) is half the cost and is the first
+candidate if micro-optimization resumes. **That cost prices the guards, not the paths they guard**:
+`admit::shadowed`, `admit::qualified` and `admit::member` execute on no bench cohort at all, since
+no cohort declares a spelling at two owner levels or writes a member spine, so the level-aware
+resolution path is covered only by the parity cases and the unit tests. A corpus variant with
+shadowed spellings and member spines is the outstanding evidence gap. The control for
 any later frontend A/B is `ergodis-tools-9bfe19d` (rustc 1.95.0).
 
 Syntax gaps by manifest family: `../2026-09-14-c1170-syntax-gaps.md` (private `80f3305` …
@@ -156,13 +162,24 @@ string interpolation (`%name`, `%(expr)`, nested, scanned as parts through one c
 `REL0105`/`REL0106`), and reference identifier/whitespace/operator-block boundaries (Alphabetic
 starts, ASCII-digit continuations, `U+FEFF` space, `U+2200`–`U+22FF` operators). Parity corpus 193
 cases, canonical `c5d83625…`; zero-allocation gate holds. Cost, measured and unrepaired: composed
-ASCII parse **1.0651** and scan-only 1.0956 against `ergodis-tools-9bfe19d`, none of it the features
-executing (the cohorts contain none of the new syntax); it is loop shape, `lexer::scan` left the
-inliner at the interpolation commit. Two arm merges were measured losses and reverted; the
-byte-order-mark move is kept. Recorded divergences: `Other_Alphabetic` marks start identifiers (no
+ASCII parse **1.0651** and scan-only 1.0956 against `ergodis-tools-9bfe19d`. The caret and
+interpolation share, +148,906 of the +163,302, is not the features executing — no cohort holds an
+entity reference or an interpolation — but loop shape, `lexer::scan` having left the inliner at the
+interpolation commit; the Unicode family's +14,274 mixes shape with executed work, and the executed
+part is what the kept byte-order-mark repair removed. Two arm merges were measured losses and
+reverted; the byte-order-mark move is kept. Recorded divergences: `Other_Alphabetic` marks start identifiers (no
 category table without a crate in the bare-`rustc` parity harness); `doc "100% sure"` rejects. The
 control for the next frontend A/B is `ergodis-tools-e8b4c7c` (rustc 1.95.0). The formal semantics of
 Rel's logical core is Aref et al., arXiv:2504.10323, Addendum A (lit cache `arxiv:2504.10323`).
+Independent audits (2026-09-15, Opus, read-only replay): `../2026-09-15-c1170-syntax-gaps-audit.md`
+and `../2026-09-15-c1170-admission-chain-audit.md`. Every retained-binary hash, receipt ratio and
+interval across the seven reports from `185015e` to `e8b4c7c` re-derives; two A/Bs re-run reproduce
+within three parts per million; the census fit reproduces bit for bit. The defects were prose and
+fixtures only and are repaired in the reports, this map and private `837c441`/`fb69af8`; the
+published formal semantics has no module construct, so the module-scope rules remain this stage's
+contract. Note for the lowering work: at the admission stage the two shadowing directions between a
+body parameter and a module parameter are observationally identical, so that fixture cannot exist
+until lowering distinguishes them.
 
 **Next (Tavis, 2026-09-14): end-to-end features, not micro-optimization.** The remaining priced
 candidates (the `Apply`-site spills, the hash loop's bounds check, `same()`'s bounds checks, the
