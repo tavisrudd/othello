@@ -147,11 +147,104 @@ comment-string, near 0.03 on ascii and unicode, and near 0.96 on datalog, with `
 
 ## Candidate design and shapes considered but not built
 
-*(filled in with the implementation)*
+### Candidate 1 as built
+
+`Rir::probe_relation` is one open-addressed probe over a new `relation_index` pool of `u32` slots
+holding relation id + 1, sized `index_slots(Limits::relations)` — twice the relation bound rounded
+up to a power of two, so a probe always meets an empty slot — reserved by `Rir::new`, and emptied
+in place at the start of each lowering by the same `clear_index` helper the value dictionary's index
+now shares. The key hash is FNV-1a over the spelling bytes from a seed that mixes the owning
+module's node id by one multiply (`0x811c_9dc5 ^ module.wrapping_mul(0x9e37_79b9)`), rather than the
+four byte-wise steps the value dictionary spends on an integer payload, because every spelling byte
+that follows mixes the seed further. The high half of the hash is a 16-bit filter carried in the
+`Relation` record's previously reserved half-word, so a colliding slot is rejected without entering
+the spelling byte loop; the record's stride assertion is unchanged at 32 bytes and the filter is not
+part of the canonical form, so no fingerprint moves.
+
+A miss returns the filter and the empty slot it stopped at, and `declare_relation` takes that pair
+and writes the slot. That is the C1170 lesson about `admit::insert`'s signature applied here: a
+spelling is hashed once per resolution and the insert does not walk the probe chain a second time.
+Nothing between a probe and its declaration writes the index, which is what makes the carried slot
+still the right one; the two declaring call sites (`declare` and `resolve_name`) are the only places
+that pass one.
+
+**Exactness.** The pool holds at most one relation per `(owner, spelling)`, because `declare` probes
+before declaring and several `def` clauses of one relation share the relation the probe found, and
+`resolve_name` declares a free name at the top level only after failing to find one there. The index
+therefore answers exactly what the scan's first-match-in-pool-order answered, rather than merely
+agreeing on the measured cohorts. Auxiliary relations, which binarization pushes directly, are not
+entered in the index and carry a zero filter: binarization runs after the build pass, which owns
+every name resolution, so nothing probes the index again, and an auxiliary has no name parts and a
+rule's span rather than a spelling's, so a probe that did reach one could only have matched by
+accident.
+
+**Shapes considered and not built.** A per-module chained bucket list keyed on the owner alone would
+have kept the spelling comparison in the loop and merely shortened it, which is the wrong axis: the
+comment-string cohort has one owner. Sorting the relation pool by spelling and binary-searching it
+would have made the pool order — which the canonical form and the backend both read — depend on the
+spellings, so the fingerprint would have moved for a reason that has nothing to do with the lowered
+program. Re-using admission's symbol index directly was rejected because the lowering's key is
+`(owner, spelling)` over its own relation ids and admission's is a spelling over symbol ids with
+shadow flags; sharing the table would have coupled two stages' capacity bounds and two different
+notions of owner.
+
+**The index's clear is the one cost paid by a cohort that gains nothing.** It is 2,048 `u32` beside
+the value index's existing 8,192, in the same in-place loop, outside every traversal. Clearing only
+the slots the previous lowering wrote would need either the slot stored in each `Relation` record or
+a re-hash of every previous spelling; both cost more than the bulk clear at these bounds, and the
+bulk clear is the shape admission already uses.
+
+### Candidate 2 as built
+
+`Workspace` gains a `module_nodes` pool of node ids, reserved to `Limits::symbols` and cleared by
+`admit` beside `definitions`. Admission's single declaring scan of the node pool already branches on
+`NodeKind::Module`; it now pushes the node id in that arm, exactly as the `NodeKind::Definition` arm
+has always pushed into `definitions`, and under the same overflow argument: `declare` has already
+taken a symbol slot for the node and fails with `SymbolCapacity` when there is none, and the pool is
+reserved to that same bound, so the push cannot overflow and no new failure path exists.
+`build::declare_modules` then walks that list instead of sweeping the node pool. Ascending node id
+is source order and is the order the sweep visited them in, so the first failure is still the first
+in source order and `module_name`'s rejection of a qualified module header fires on the same node.
+
+**Shapes considered and not built.** The task plan suggested a push at `Module` node creation in the
+parser, which writes the node and would run once per module in a place that is already hot. It was
+read and rejected on capacity, not on cost: the parser has no symbol bound to hang the pool on, so
+the list would have to be reserved at `Limits::nodes` — 2 MiB rather than 64 KiB — to guarantee that
+the node push fails before the list does, or it would introduce a capacity failure the parser does
+not have today. In the loop the two are equal, one push per module node, and on all six measured
+cohorts that push executes zero times because none of them declares a module. Recording the list
+inside the lowering itself, on a first pass that then feeds later ones, was not considered further
+because it is the sweep this candidate removes.
 
 ## Method
 
-*(filled in with the measurements)*
+Seven interleaved rounds through the committed harness `analysis/rel-frontend/bench.py`, all five
+frozen cohorts plus `datalog`, both scanner variants, `--stages scan,parse,admit,lower`, pinned to
+CPU 5, two-point differencing between N and N/2 iterations, and the non-multiplexing event set
+`instructions,cycles,branches,branch-misses,page-faults,minor-faults` — two fixed counters, two
+general-purpose and two software, which is what runs at 100 per cent enabled on this PMU. Rounds
+alternate candidate and control order and byte and scalar order, and each cohort carries a
+byte-over-byte A/A null pair built from the `parse` stage, so every run carries its own noise floor.
+Host: AMD Ryzen AI 9 HX 370, kernel 7.2.4, rustc 1.95.0 (59807616e 2026-04-14) on both arms.
+
+Both arms run with a clean working tree, so no foreign uncommitted file enters either build; that is
+a change from the milestone, whose two arms shared fifteen foreign files.
+
+The driver's fingerprint gate is armed on every measured operation: the harness refuses to report
+when candidate and control disagree on tokens, nodes, the failure record, the admission outcome or
+the lowering fingerprint, and neither candidate here declared a representation change, so an
+agreeing run is itself the exactness evidence for every cohort and both variants.
+
+Stage costs are read as differences — `lower` minus `admit`, `admit` minus `parse` — because the
+workspace builds with ThinLTO and one codegen unit, so a change anywhere in the module summary can
+move untouched stages by a per cent or more; a difference of two stages that share the shifted code
+does not move with it.
+
+**An interruption to record.** The first attempt at the candidate-1 A/B calibrated all 56 operations
+and then died at the first measured round with `FileNotFoundError: 'perf'`. `perf` resolves through
+`~/.nix-profile/bin` and was present before and after, so the profile was swapped under the run by
+another session on this shared box. No partial receipt was written and the run was repeated from
+the start; nothing from the interrupted attempt is used.
 
 ## Results
 
