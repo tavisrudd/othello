@@ -445,7 +445,7 @@ decision I should not take alone, so the disposition is *reported with the repai
   coverage.
 - It does not cover the sub-case where *both* joined atoms are fully ground (`dom(1) and dom(2) and
   e(x, x)`), where there is no variable to keep. That conjunct is a nullary truth value the contract
-  cannot represent, and the honest code for it is `REL0504` rather than a budget — which is a
+  cannot represent, and the right code for it is `REL0504` rather than a budget — which is a
   diagnostic decision, not a mechanical one.
 - The broader repair — changing `order_positives` so that the tiebreak cannot create an empty
   intermediate — is a join-order policy change. It would move every binarized rule's recorded order
