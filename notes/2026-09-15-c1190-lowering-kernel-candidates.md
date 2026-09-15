@@ -1,9 +1,14 @@
-# C1190 lowering kernel candidates — the relation-resolution index and the module index
+# C1190 lowering kernel candidates — the relation index, the module index, and the mangled-name index
 
 **Lane**: `ergodis`
 **Date**: 2026-09-15
-**Status**: IN PROGRESS. Written incrementally from the start of the task, so a crash leaves a
-partial record rather than none.
+**Status**: COMPLETE. Three kernel candidates built, priced before the code, measured against
+retained controls and all three kept. The comment-string cohort's lowering stage difference falls
+from 18,677,419 to 1,833,276 instructions — a ratio of 0.0982 — and its scaling goes from fourfold
+to twofold per doubling of the definition count, which is the quadratic becoming linear. The ascii
+and unicode stage differences fall to 0.0786 and 0.0781. The `datalog` cohort is a net 1.07 per cent
+loss, reported as such. Written incrementally from the start of the task, so a crash would have left
+a partial record rather than none.
 
 **Repository**: `~/src/ergodis-private` (private, no remote), consuming `~/src/ergodis` read-only.
 Rules: `~/src/ergodis-dev/PERFORMANCE.md` and `~/src/ergodis-dev/performance-playbook.md`.
@@ -12,7 +17,9 @@ Rules: `~/src/ergodis-dev/PERFORMANCE.md` and `~/src/ergodis-dev/performance-pla
 the quadratic relation scan and the node-pool sweep every lowering pays — and prices, builds and
 measures each as a kernel candidate against a retained control.
 
-**Commits**: recorded per candidate in the disposition section below.
+**Commits**: private `ergodis-private` `d8d9308`, `b689c85`, `6e06a24`, `154b827`, `ec5d1d6`,
+`38b025f`, `a93ae96`, from `4b8cfd7`. Three source commits, one per candidate, and four receipt
+commits. Full table in the disposition section below.
 
 ## The control, retained before the first source change
 
@@ -144,6 +151,11 @@ a ThinLTO layout effect and is read as one.
 If both land, the composed `lower` minus `admit` against `4b8cfd7` should be near 0.015 on
 comment-string, near 0.03 on ascii and unicode, and near 0.96 on datalog, with `scan`, `parse` and
 `admit` at unity everywhere.
+
+*(Everything above this line was written before any code. The measurements are in the Results
+section; the comment-string prediction was wrong by a factor of thirty-two and that is what found
+candidate 3, the ascii and unicode predictions were right in direction and low in the residual, and
+the datalog prediction had the wrong sign.)*
 
 ## Candidate design and shapes considered but not built
 
@@ -448,11 +460,162 @@ reserved address space charged once per workspace, not per source.
 
 ## Scaling: the quadratic becomes linear
 
-*(filled in)*
+Four runs at 64, 128, 256 and 512 definitions, three rounds each, candidate and control interleaved,
+`--stages parse,admit,lower`. Receipts `analysis/rel-frontend/performance-v1-lower-scaling-<N>-ec5d1d6.json`.
+The figure is the `lower` minus `admit` instruction difference, byte scanner.
+
+Comment-string, which is where both quadratics lived:
+
+| Definitions | Before (`4b8cfd7`) | Ratio to previous | After (`ec5d1d6`) | Ratio to previous |
+|------------:|-------------------:|------------------:|------------------:|------------------:|
+|          64 |            468,517 |                 — |           225,002 |                 — |
+|         128 |          1,397,970 |              2.98 |           451,058 |              2.00 |
+|         256 |          4,749,336 |              3.40 |           910,412 |              2.02 |
+|         512 |         18,677,417 |              3.93 |         1,833,278 |              2.01 |
+
+The before column rises towards fourfold per doubling, which is what a quadratic converges to once
+the linear term stops mattering. The after column is 2.00, 2.02, 2.01 — linear, to within a per
+cent, across three doublings. That is the claim this task set out to establish and it does not rest
+on one cohort size.
+
+ASCII, where the node-pool sweep lived:
+
+| Definitions | Before (`4b8cfd7`) | Ratio to previous | After (`ec5d1d6`) | Ratio to previous |
+|------------:|-------------------:|------------------:|------------------:|------------------:|
+|          64 |             11,455 |                 — |             2,705 |                 — |
+|         128 |             21,137 |              1.85 |             3,194 |              1.18 |
+|         256 |             40,488 |              1.92 |             4,213 |              1.32 |
+|         512 |             79,208 |              1.96 |             6,224 |              1.48 |
+
+The before column is linear in the node count, as the milestone's audit found. The after column is
+sublinear because what remains is no longer proportional to the source: `Rir::clear`'s two index
+clears are proportional to `Limits` and not to the input, and they are most of the 2,705 at 64
+definitions. The part that still grows is the modules the cohort declares.
+
+## Kernel-scoped profile after, and where the saving went
+
+`perf record -e instructions:u -F 4000`, pinned to CPU 7, on the `lower` stage of `ec5d1d6`, which
+runs the scanner, the parser, admission and the lowering, so the lowering's symbols are read as a
+group. Profile data under `~/.cache/ergodis/perf-c1190/`.
+
+**Comment-string, 512 definitions, 4,000 iterations** (`lower-comment-string-ec5d1d6.data`), every
+symbol at or above a tenth of a per cent:
+
+| Symbol                              | Share  |
+|-------------------------------------|-------:|
+| `lexer::scan`                       | 25.88% |
+| `lower::run`                        | 24.37% |
+| `parser::Parser::expression`        |  9.93% |
+| `admit::run`                        |  5.29% |
+| `lower::build::intern`              |  4.36% |
+| `lower::build::declare_relation`    |  3.49% |
+| `lower::build::probe_relation`      |  3.46% |
+| `admit::declare`                    |  2.97% |
+| `lower::build::term`                |  2.90% |
+| `lower::build::distribute`          |  2.84% |
+| `lower::build::constant`            |  2.13% |
+| `admit::admit`                      |  1.92% |
+| `lower::build::copy_literal`        |  1.70% |
+| `lower::build::formula`             |  1.37% |
+| `parser::Parser::item`              |  1.05% |
+| `admit::bind_list`                  |  1.02% |
+| `core::str::converts::from_utf8`    |  0.99% |
+| `lexer::keyword`                    |  0.96% |
+| `lower::build::atom`                |  0.82% |
+| `lower::build::resolve_name`        |  0.62% |
+| `parser::Parser::node`              |  0.47% |
+| `lower::build::leading_columns`     |  0.41% |
+| `lower::build::record_column_types` |  0.32% |
+| `lower::build::check_arity`         |  0.26% |
+| `parser::parse`                     |  0.26% |
+
+The fourteen lowering symbols sum to 49.05 per cent; the stage difference puts the lowering at
+1,833,276 of the composed `lower` stage's 3,693,372, or 49.64 per cent. The two methods agree to
+six tenths of a point, which is what makes this profile an attribution rather than a picture.
+
+**Out-of-line calls seen inside the lowering traversals**, listed as the contract requires:
+`build::intern`, `build::declare_relation`, `build::probe_relation`, `build::term`,
+`build::distribute`, `build::constant`, `build::copy_literal`, `build::formula`, `build::atom`,
+`build::resolve_name`, `build::leading_columns`, `build::record_column_types`,
+`build::check_arity`, `passes::clone_literal` and `Rir::fingerprint`. Every one is this stage's own
+code and none is libc.
+
+**The libc question, answered at threshold zero rather than at a rendering limit.** Rendered with
+`--percent-limit 0`, the comment-string profile's only libc symbols are
+`__memset_avx512_unaligned_erms` at 0.06 per cent — the three index clears and the stratifier's
+resizes, all bulk operations proportional to a `Limits` bound and outside every traversal — and
+`__memmove_avx512_unaligned_erms`, `_int_malloc`, `_int_free_create_chunk` and `cfree` at 0.00 per
+cent, which are the driver's own startup and JSON output. **No `memcmp` and no `bcmp` appears at
+any threshold**, which is a change from the control: the `bcmp` this task removed was in
+`lower::run` at `0x7efe12` and is gone from the disassembly of `ec5d1d6`. The disassembly of
+`probe_relation` confirms the same for the new code: its only calls are five
+`panic_bounds_check` targets, all at the function's tail and off the common path.
+
+**Datalog, 512 definitions, 2,000 iterations** (`lower-datalog-ec5d1d6.data`), top of the profile:
+`admit::declare` 51.53 per cent, `parser::Parser::expression` 9.93, `lexer::scan` 8.40,
+`lower::run` 7.47, `admit::run` 3.77, `lower::build::constant` 3.41, `lower::build::intern` 3.07,
+`lower::build::probe_relation` 2.72, `Rir::fingerprint` 1.84. The eleven lowering symbols sum to
+22.01 per cent against the stage difference's 23.19, agreeing to 1.2 points. `admit::declare` at
+half the profile is admission's repeated-spelling quadratic, unchanged by this task and now the
+largest single cost in the composed stage; it is mystery-ledger item 5.
+
+**Where the saving went, on comment-string.** Before, `find_relation` and the inlined `mangle`
+collision scan were the stage. After, the largest lowering symbol is `lower::run` itself — the
+build loop with `mangle`, `close` and the per-relation passes inlined into it — and the two
+replacements are visible and small: `probe_relation` at 3.46 per cent and `declare_relation`, which
+now carries the index write, at 3.49. Interning a 50-byte string literal 896 times is 4.36 per cent
+and is the largest single call the lowering still makes on this cohort.
 
 ## Disposition
 
-*(filled in per candidate)*
+All three candidates are **kept**, each by the forward commit that introduced it. Nothing was
+reverted.
+
+| Candidate                          | Commit    | Retained arm            | Verdict | Why                                                                                                             |
+|------------------------------------|-----------|-------------------------|---------|-----------------------------------------------------------------------------------------------------------------|
+| 1 — relation-resolution index      | `d8d9308` | `ergodis-tools-d8d9308` | keep    | comment-string `lower`−`admit` 0.4851; bounded 3.66 per cent loss on `datalog`, which the design predicted in kind |
+| 2 — module index in admission      | `6e06a24` | `ergodis-tools-6e06a24` | keep    | ascii and unicode `lower`−`admit` to 0.078; 8 instructions per module node added to admission                   |
+| 3 — mangled-name index             | `ec5d1d6` | `ergodis-tools-ec5d1d6` | keep    | comment-string `lower`−`admit` 0.2030 and one libc `bcmp` removed from a hot loop's common path                 |
+
+Receipts, all committed under `analysis/rel-frontend/` in `ergodis-private`:
+`performance-v1-relindex-d8d9308.json`, `performance-v1-moduleindex-6e06a24.json`,
+`performance-v1-nameindex-ec5d1d6.json`, `performance-v1-lower-composed-ec5d1d6.json`, and
+`performance-v1-lower-scaling-{64,128,256,512}-ec5d1d6.json`. Receipt commits `b689c85`, `154b827`,
+`38b025f` and `a93ae96`.
+
+Arms, each retained by `../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools` at its own
+revision with the working tree clean, `release`, no features, rustc 1.95.0 (59807616e 2026-04-14):
+
+| Arm         | Revision  | Dirty | Measured sha256                                                    |
+|-------------|-----------|-------|--------------------------------------------------------------------|
+| control     | `4b8cfd7` | no    | `da7566ce09da1a7eb390ed56136ffb02306b6ad9698f7e075d75d78dc11b8fed` |
+| candidate 1 | `d8d9308` | no    | `930691c5f6599b4bfad8e2bc2cb4161f45a98f488986a838da2fc4bf1197271f` |
+| candidate 2 | `6e06a24` | no    | `37027ef76beec7c1de423f32e0f8178cdea89162aa69d2d744c768a931b9400f` |
+| candidate 3 | `ec5d1d6` | no    | `9ac5cd1fb1142e22680429e1ec27045baea81c71e1b4aa76c296998b07d6058f` |
+
+Every hash is recorded as measured, not cited; the thing to run is the retain recipe at the named
+revision. No foreign uncommitted file was present in `ergodis-private` at any point during this
+task, so every arm is reproducible from its commit alone — which is a change from the milestone,
+whose two arms shared fifteen foreign files.
+
+## Remaining next steps, in the order their evidence supports
+
+1. **Admission's repeated-spelling quadratic.** `admit::declare` is 51.53 per cent of the composed
+   `lower` stage on `datalog` and the mechanism is already confirmed by a fourfold-per-doubling
+   scaling run. It is now the largest single cost in the frontend and the only quadratic left in it.
+   The key that candidate 1 uses — the owner mixed into the spelling hash — is one candidate remedy
+   and is unmeasured.
+2. **Take the source bounds check out of the spelling hash and comparison loops.** `hash_span`,
+   `same` and admission's `hash_of` index `source[i]` inside their loops, which costs two of the
+   eight instructions per byte the disassembly shows. Taking the subslice once moves the check
+   outside. It would roughly halve candidate 1's `datalog` loss and touches admission as well, so it
+   is a frontend-wide change with its own A/B.
+3. **The `Value` push writes nine stores for a 32-byte record**, including two four-byte zeroes for
+   its `reserved: [0; 7]` padding. Interning is the largest single call the lowering still makes on
+   comment-string.
+4. **`build::qualified` still scans `rir.modules` linearly** for each step of a qualified name. No
+   cohort exercises it at scale, so there is no measurement saying it costs anything; it is the same
+   shape as the two scans this task removed.
 
 ## Instructive negatives
 
@@ -554,7 +717,7 @@ so gate and measurement describe one build.
 
 ```sh
 # The arms. Each is the retain recipe at its own revision, with the tree clean.
-../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools     # at 4b8cfd7, d8d9308, 8ea0325
+../ergodis-dev/scripts/retain-bin.sh tasks/tools ergodis-tools     # at 4b8cfd7, d8d9308, 6e06a24, ec5d1d6
 
 # Gates.
 nix develop ~/src/ergodis --command cargo test -p ergodis-private \
@@ -575,37 +738,92 @@ nix develop ~/src/ergodis --command python3 analysis/rel-frontend/bench.py \
     --rounds 7 --cpu 5 --cohorts $COHORTS --stages scan,parse,admit,lower --events $E \
     --out analysis/rel-frontend/performance-v1-relindex-d8d9308.json
 nix develop ~/src/ergodis --command python3 analysis/rel-frontend/bench.py \
-    --binary $C/ergodis-tools-8ea0325 --control $C/ergodis-tools-d8d9308 \
+    --binary $C/ergodis-tools-6e06a24 --control $C/ergodis-tools-d8d9308 \
     --rounds 7 --cpu 5 --cohorts $COHORTS --stages scan,parse,admit,lower --events $E \
-    --out analysis/rel-frontend/performance-v1-moduleindex-8ea0325.json
+    --out analysis/rel-frontend/performance-v1-moduleindex-6e06a24.json
 nix develop ~/src/ergodis --command python3 analysis/rel-frontend/bench.py \
-    --binary $C/ergodis-tools-8ea0325 --control $C/ergodis-tools-4b8cfd7 \
+    --binary $C/ergodis-tools-ec5d1d6 --control $C/ergodis-tools-6e06a24 \
     --rounds 7 --cpu 5 --cohorts $COHORTS --stages scan,parse,admit,lower --events $E \
-    --out analysis/rel-frontend/performance-v1-lower-composed-8ea0325.json
+    --out analysis/rel-frontend/performance-v1-nameindex-ec5d1d6.json
+nix develop ~/src/ergodis --command python3 analysis/rel-frontend/bench.py \
+    --binary $C/ergodis-tools-ec5d1d6 --control $C/ergodis-tools-4b8cfd7 \
+    --rounds 7 --cpu 5 --cohorts $COHORTS --stages scan,parse,admit,lower --events $E \
+    --out analysis/rel-frontend/performance-v1-lower-composed-ec5d1d6.json
 
 # The scaling probes: the quadratic against the linear, at four definition counts.
 for N in 64 128 256 512; do
   nix develop ~/src/ergodis --command python3 analysis/rel-frontend/bench.py \
-      --binary $C/ergodis-tools-8ea0325 --control $C/ergodis-tools-4b8cfd7 \
+      --binary $C/ergodis-tools-ec5d1d6 --control $C/ergodis-tools-4b8cfd7 \
       --rounds 3 --cpu 5 --definitions $N --cohorts comment-string,ascii \
       --stages parse,admit,lower --events $E \
-      --out analysis/rel-frontend/performance-v1-lower-scaling-$N-8ea0325.json
+      --out analysis/rel-frontend/performance-v1-lower-scaling-$N-ec5d1d6.json
 done
 
 # The kernel-scoped profiles.
 mkdir -p ~/.cache/ergodis/perf-c1190
 perf record -q -e instructions:u -F 4000 \
-    -o ~/.cache/ergodis/perf-c1190/lower-comment-string-8ea0325.data -- \
-    taskset -c 7 $C/ergodis-tools-8ea0325 rel-frontend-bench --cohort comment-string \
+    -o ~/.cache/ergodis/perf-c1190/lower-comment-string-ec5d1d6.data -- \
+    taskset -c 7 $C/ergodis-tools-ec5d1d6 rel-frontend-bench --cohort comment-string \
+    --stage lower --variant byte --definitions 512 --repeat 4000
+perf record -q -e instructions:u -F 4000 \
+    -o ~/.cache/ergodis/perf-c1190/lower-datalog-ec5d1d6.data -- \
+    taskset -c 7 $C/ergodis-tools-ec5d1d6 rel-frontend-bench --cohort datalog \
     --stage lower --variant byte --definitions 512 --repeat 2000
-perf report -i ~/.cache/ergodis/perf-c1190/lower-comment-string-8ea0325.data --stdio -g none \
+perf report -i ~/.cache/ergodis/perf-c1190/lower-comment-string-ec5d1d6.data --stdio -g none \
     --percent-limit 0.05
 ```
 
+The three A/Bs above are, in order, candidate 1 against the control, candidate 2 against candidate
+1, and the composed tip against the control; the candidate-3 line between them measures the
+mangled-name index against candidate 2.
+
 ## Gates
 
-*(filled in)*
+Every gate was run after each kept commit and again at the tip, `ec5d1d6`, from
+`~/src/ergodis-private` under `nix develop ~/src/ergodis` (rustc 1.95.0). The table is the run at
+the tip.
+
+| Gate                                                                                                   | Outcome                                                                                                  |
+|----------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `cargo test -p ergodis-private --test rel_lowering --test rel_frontend --test rel_frontend_portability` | 25, 28 and 1 passed, 0 failed (`rel_lowering` gained the mangled-name collision fixture)                   |
+| `cargo clippy -p ergodis-private --lib --tests -- -D warnings`                                          | no diagnostics                                                                                            |
+| `cargo clippy -p ergodis-tools --bins -- -D warnings`                                                   | no diagnostics                                                                                            |
+| `cargo fmt -p ergodis-private -p ergodis-tools -- --check`                                              | clean                                                                                                     |
+| Independent oracle                                                                                      | 8 fixtures agree with the committed expectations                                                          |
+| Native/WASM parity replay                                                                               | 213 cases, 433,805 canonical bytes, byte-equal, SHA-256 `04b5ebdd72fb08184f3143e3ca8393d207b9a6109c549e9806e1bfae02bb23b0` |
+| Allocation regression                                                                                   | `the_lowering_stage_does_not_allocate` observes zero, retained bytes unchanged                            |
+| Driver fingerprint gate                                                                                 | equal tokens, nodes, failure, admission outcome and lowering fingerprint on every cohort and both variants, in all four A/Bs |
+| Stride assertions                                                                                       | `Relation` still 32 bytes, 4-byte aligned; the hash filter reuses its reserved half-word                  |
+
+The parity hash is the one the milestone recorded and it did not move through any of the three
+candidates, which is the intended result: an index is not part of the canonical IR.
+
+**On the allocation gate.** All three new pools are reserved by `Rir::new` or `Workspace::new`. The
+relation index and the mangled-name index are sized on first use inside that reserved capacity, and
+the test's warm-up already drives a full lowering over four sources before counting, so both are
+sized before the counted loop begins. `module_nodes` is pushed rather than written and needs no
+sizing pass. The gate still covers four of the stage's exit paths and not `REL0505`, exactly as the
+milestone recorded; this task did not change that.
 
 ## What this task left under `~/.cache/ergodis/`
 
-*(filled in)*
+Retained executables, each with its `.sha256` sidecar and a `MANIFEST.tsv` row:
+`bin/ergodis-tools-4b8cfd7` (the control), `bin/ergodis-tools-d8d9308`, `bin/ergodis-tools-6e06a24`
+and `bin/ergodis-tools-ec5d1d6`. `ergodis-tools-ec5d1d6` is the control the next A/B in this lane
+should use, and the earlier three are what make this report's three separate A/Bs re-runnable.
+
+Profile data: `perf-c1190/lower-comment-string-ec5d1d6.data` and `perf-c1190/lower-datalog-ec5d1d6.data`,
+the two kernel-scoped profiles the attribution above is read from. `perf-c1190/lower-datalog-41553c9.data`
+is the milestone's and is named by its report, not by this one.
+
+All of these are named by this report, so `scripts/cache-gc.sh` will show them as referenced. No
+deletion was performed; that is the user's call.
+
+## Vibe check
+
+Good, and better than the plan asked for. The two planned candidates both landed, and the first
+one's measurement disagreeing with its Fermi by a factor of thirty-two is what found a third
+quadratic and a libc call sitting on a hot loop's common path that no profile had shown. The
+comment-string lowering is a tenth of what it was and scales linearly across three doublings. The
+one blemish is a one per cent net loss on the `datalog` cohort, whose cause is understood to the
+instruction and whose remedy is a named, separately measurable next step.
