@@ -404,9 +404,47 @@ The comment-string difference fell by 7,198,568 instructions, which over the sam
 46.58, and the remainder is the per-relation work neither scan was doing. The `datalog` saving of
 4,343 instructions is the same mechanism at 14 relations: 91 pairs, most of them reaching the call.
 
-## Composed
+## Composed: `ec5d1d6` against the `4b8cfd7` control
 
-*(filled in)*
+Receipt: `analysis/rel-frontend/performance-v1-lower-composed-ec5d1d6.json`. Seven interleaved
+rounds, same protocol, A/A nulls at 1.000001 and below.
+
+| Cohort          | `lower`−`admit` before | `lower`−`admit` after |  Ratio | Per source byte before | Per source byte after |
+|-----------------|-----------------------:|----------------------:|-------:|-----------------------:|----------------------:|
+| ascii           |                 79,209 |                 6,228 | 0.0786 |                   1.84 |                 0.145 |
+| unicode         |                 79,978 |                 6,244 | 0.0781 |                   1.29 |                 0.101 |
+| comment-string  |             18,677,419 |             1,833,276 | 0.0982 |                 284.66 |                 27.94 |
+| malformed-early |                     13 |                    −1 |    n/a |                   0.00 |                  0.00 |
+| malformed-late  |                     −1 |                    −1 |    n/a |                   0.00 |                  0.00 |
+| datalog         |              1,299,541 |             1,313,490 | 1.0107 |                  81.56 |                 82.43 |
+
+Whole-stage `lower`, candidate over control, instructions:
+
+| Cohort          |    Byte |  Scalar |
+|-----------------|--------:|--------:|
+| ascii           | 0.98205 | 0.98657 |
+| unicode         | 0.99299 | 0.99351 |
+| comment-string  | 0.17984 | 0.20114 |
+| malformed-early | 1.00000 | 1.00000 |
+| malformed-late  | 1.00000 | 1.00000 |
+| datalog         | 1.00257 | 1.00235 |
+
+Earlier stages, candidate over control: `scan` and `parse` are 1.00000 on every cohort and both
+variants (extremes 0.99998 and 1.00001, at the level of the nulls). `admit` is 1.00026 / 1.00010 /
+1.00027 / 1.00001 / 1.00000 / 1.00014 on the six cohorts, byte variant, which is candidate 2's
+module push on the two cohorts that declare modules and a ThinLTO layout shift on the ones that do
+not; as `admit`−`parse` differences the same figures are 1.0008 / 1.0007 / 1.0013 / 1.0002.
+
+**The `datalog` net is a loss of 1.07 per cent on the stage difference and the arithmetic closes
+exactly.** Candidate 1 cost 47,557 instructions, candidate 2 saved 29,262 and candidate 3 saved
+4,343, for a predicted net of +13,952 against the measured +13,949. That cohort has 14 relations, no
+modules and 512 clauses of one spelling, so it is the shape every one of these three candidates is
+worst on, and it is the shape the milestone built to price a lowering that completes. It is reported
+as the loss it is.
+
+**`prepare` is 1.06026× the control** (interval [1.06018, 1.06033]); retained bytes go from
+10,324,492 to 10,373,644 — the relation index, the mangled-name index and `module_nodes`. That is
+reserved address space charged once per workspace, not per source.
 
 ## Scaling: the quadratic becomes linear
 
